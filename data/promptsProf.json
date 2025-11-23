@@ -1,0 +1,169 @@
+[
+  {
+    "id": 1,
+    "classe": "6e",
+    "matiere": "maths",
+    "matiereLabel": "Maths",
+    "niveau": "decouverte",
+    "titre": "Comprendre ce qu’est une fraction",
+    "texte": "Explique-moi ce qu’est une fraction comme si j’étais en 6e, avec des exemples très simples (parts de gâteau, partages de bonbons) et un petit résumé à la fin."
+  },
+  {
+    "id": 2,
+    "classe": "6e",
+    "matiere": "maths",
+    "matiereLabel": "Maths",
+    "niveau": "progresse",
+    "titre": "Addition de fractions au même dénominateur",
+    "texte": "Apprends-moi à additionner des fractions qui ont le même dénominateur, avec 3 exemples corrigés étape par étape et une petite erreur fréquente à repérer."
+  },
+  {
+    "id": 3,
+    "classe": "6e",
+    "matiere": "maths",
+    "matiereLabel": "Maths",
+    "niveau": "challenge",
+    "titre": "Défis sur les fractions",
+    "texte": "Propose-moi 2 petits problèmes de niveau 6e avec des fractions et laisse-moi chercher avant de m’expliquer la solution étape par étape."
+  },
+
+  {
+    "id": 4,
+    "classe": "5e",
+    "matiere": "maths",
+    "matiereLabel": "Maths",
+    "niveau": "decouverte",
+    "titre": "Nombres relatifs sur une droite graduée",
+    "texte": "Explique-moi ce que sont les nombres relatifs (positifs et négatifs) et montre-moi comment les placer sur une droite graduée, avec un dessin écrit et des exemples."
+  },
+  {
+    "id": 5,
+    "classe": "5e",
+    "matiere": "maths",
+    "matiereLabel": "Maths",
+    "niveau": "progresse",
+    "titre": "Reconnaître une situation de proportionnalité",
+    "texte": "Aide-moi à reconnaître si une situation est proportionnelle, avec un tableau de proportionnalité, un exemple correct et un exemple où ce n’est pas proportionnel."
+  },
+  {
+    "id": 6,
+    "classe": "5e",
+    "matiere": "maths",
+    "matiereLabel": "Maths",
+    "niveau": "challenge",
+    "titre": "Pourcentages en chaîne",
+    "texte": "Propose-moi 3 exercices avec des pourcentages (réductions, augmentations, soldes) de niveau 5e, et corrige-les étape par étape seulement après que j’aie essayé."
+  },
+
+  {
+    "id": 7,
+    "classe": "4e",
+    "matiere": "maths",
+    "matiereLabel": "Maths",
+    "niveau": "decouverte",
+    "titre": "Équations simples du premier degré",
+    "texte": "Explique-moi comment résoudre une équation simple du type ax + b = c, avec 3 exemples détaillés et une méthode claire, comme en cours de 4e."
+  },
+  {
+    "id": 8,
+    "classe": "4e",
+    "matiere": "maths",
+    "matiereLabel": "Maths",
+    "niveau": "progresse",
+    "titre": "Problèmes avec des équations",
+    "texte": "Donne-moi 2 problèmes de 4e qui se résolvent avec une équation (exemples concrets du quotidien) et guide-moi pour traduire le texte en équation."
+  },
+  {
+    "id": 9,
+    "classe": "4e",
+    "matiere": "maths",
+    "matiereLabel": "Maths",
+    "niveau": "challenge",
+    "titre": "Systèmes simples de deux équations",
+    "texte": "Propose-moi 2 systèmes de deux équations très simples à résoudre, montre-moi la méthode de substitution ou d’addition, et vérifie les solutions avec moi."
+  },
+
+  {
+    "id": 10,
+    "classe": "3e",
+    "matiere": "maths",
+    "matiereLabel": "Maths",
+    "niveau": "decouverte",
+    "titre": "Théorème de Pythagore (rappel complet)",
+    "texte": "Explique-moi le théorème de Pythagore comme si je le découvrais pour la première fois en 3e, avec un schéma écrit, la formule et un exemple d’application."
+  },
+  {
+    "id": 11,
+    "classe": "3e",
+    "matiere": "maths",
+    "matiereLabel": "Maths",
+    "niveau": "progresse",
+    "titre": "Utiliser Thalès dans un problème",
+    "texte": "Montre-moi comment utiliser le théorème de Thalès dans un problème de 3e, avec un schéma, les rapports à écrire et un calcul complet."
+  },
+  {
+    "id": 12,
+    "classe": "3e",
+    "matiere": "maths",
+    "matiereLabel": "Maths",
+    "niveau": "challenge",
+    "titre": "Défi Pythagore ou Thalès",
+    "texte": "Propose-moi un problème de 3e où il faut choisir entre le théorème de Pythagore ou de Thalès, puis aide-moi à analyser la figure et à choisir la bonne méthode."
+  },
+
+  {
+    "id": 13,
+    "classe": "6e",
+    "matiere": "français",
+    "matiereLabel": "Français",
+    "niveau": "decouverte",
+    "titre": "Repérer le verbe dans une phrase",
+    "texte": "Explique-moi comment repérer le verbe dans une phrase de niveau 6e, avec 3 phrases exemples et la méthode pour trouver le verbe."
+  },
+  {
+    "id": 14,
+    "classe": "5e",
+    "matiere": "français",
+    "matiereLabel": "Français",
+    "niveau": "progresse",
+    "titre": "Écrire un paragraphe simple",
+    "texte": "Aide-moi à écrire un paragraphe simple de 5 à 6 lignes sur un sujet donné, avec une introduction, des idées organisées et une conclusion."
+  },
+  {
+    "id": 15,
+    "classe": "4e",
+    "matiere": "histoire-géo",
+    "matiereLabel": "Histoire-Géo",
+    "niveau": "decouverte",
+    "titre": "Causes d’un événement historique",
+    "texte": "Explique-moi les causes principales d’un événement historique étudié en 4e, avec le vocabulaire important à connaître."
+  },
+  {
+    "id": 16,
+    "classe": "3e",
+    "matiere": "physique-chimie",
+    "matiereLabel": "Physique-Chimie",
+    "niveau": "progresse",
+    "titre": "Comprendre la loi d’Ohm",
+    "texte": "Explique-moi la loi d’Ohm (U = R × I) avec un schéma simple de circuit, un exemple chiffré et un exercice à faire avec correction."
+  },
+  {
+    "id": 17,
+    "classe": "5e",
+    "matiere": "anglais",
+    "matiereLabel": "Anglais",
+    "niveau": "decouverte",
+    "titre": "Se présenter en anglais",
+    "texte": "Aide-moi à rédiger une petite présentation de moi-même en anglais (nom, âge, goûts), avec un modèle et une version que je peux adapter."
+  },
+  {
+    "id": 18,
+    "classe": "3e",
+    "matiere": "svt",
+    "matiereLabel": "SVT",
+    "niveau": "challenge",
+    "titre": "Réviser une notion de SVT en profondeur",
+    "texte": "Propose-moi une fiche de révision structurée sur un thème de SVT de 3e (à choisir toi-même), avec définitions, schémas écrits et questions pour m’auto-tester."
+  }
+]
+
