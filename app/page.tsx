@@ -30,7 +30,7 @@ export default function HomePage() {
           <div className="space-y-1">
             <p className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/80 shadow text-xs font-semibold text-[#0047B6]">
               <span>🇷🇪</span>
-              <span>Pensé pour les collégiens de La Réunion</span>
+              <span>Pensé pour les éleves de La Réunion</span>
             </p>
             <h1 className="text-3xl sm:text-4xl font-extrabold text-white drop-shadow">
               EleveAI
@@ -151,7 +151,7 @@ export default function HomePage() {
             Pas de correction automatique de photos de devoirs.
           </p>
           <p className="text-gray-400">
-            Version en développement – usage pédagogique uniquement.Frédéric Lacoste - île de la Réunion
+            Version en développement – usage pédagogique uniquement.Frédéric Lacoste - île de la Réunion - frederic.lacoste
           </p>
         </footer>
       </div>

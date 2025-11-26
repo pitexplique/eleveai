@@ -61,6 +61,16 @@ export default function Header() {
           >
             🧑‍🏫 Espace prof
           </Link>
+                    <Link
+            href="/sponsors"
+            className={`px-3 py-1.5 rounded-full font-semibold transition ${
+              isActive("/sponsors")
+                ? "bg-slate-900 text-white shadow"
+                : "bg-slate-100 text-slate-800 border border-slate-300 hover:bg-slate-200"
+            }`}
+          >
+            🤝 Sponsors
+          </Link>
         </nav>
       </div>
     </header>
