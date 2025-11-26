@@ -147,11 +147,11 @@ export default function HomePage() {
         {/* Bas de page */}
         <footer className="pb-6 text-[11px] sm:text-xs text-gray-500 flex flex-col sm:flex-row gap-2 sm:gap-4 items-start sm:items-center justify-between">
           <p>
-            🇷🇪 EleveAI – Outil d’aide en maths pour les collégiens de La Réunion.  
+            🇷🇪 EleveAI – Outil d’aide en maths pour les enseignants et élèves.  
             Pas de correction automatique de photos de devoirs.
           </p>
           <p className="text-gray-400">
-            Version en développement – usage pédagogique uniquement.
+            Version en développement – usage pédagogique uniquement.Frédéric Lacoste - île de la Réunion
           </p>
         </footer>
       </div>
