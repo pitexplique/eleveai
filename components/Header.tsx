@@ -51,6 +51,16 @@ export default function Header() {
           >
             🌍 Concours
           </Link>
+          <Link
+            href="/profs"
+            className={`px-3 py-1.5 rounded-full font-semibold transition ${
+              isActive("/profs")
+                ? "bg-emerald-600 text-white shadow"
+                : "bg-emerald-50 text-emerald-800 border border-emerald-300 hover:bg-emerald-100"
+            }`}
+          >
+            🧑‍🏫 Espace prof
+          </Link>
         </nav>
       </div>
     </header>
