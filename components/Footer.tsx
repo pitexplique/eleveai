@@ -5,8 +5,10 @@ export default function Footer() {
         <p>
           Contributeurs : Frédéric Lacoste – élèves de 6eC (Entre-Deux)
         </p>
+      </div>
+      <div className="max-w-5xl mx-auto px-4 py-3 text-[11px] sm:text-xs text-gray-600 flex flex-col sm:flex-row gap-1 sm:gap-6 justify-between">
         <p>
-          Sponsor : FL (50&nbsp;€)
+          Sponsors:  En attente
         </p>
       </div>
     </footer>

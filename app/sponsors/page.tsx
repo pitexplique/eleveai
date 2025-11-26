@@ -11,12 +11,12 @@ export default function SponsorsPage() {
             <span>Soutenir EleveAI</span>
           </p>
           <h1 className="text-3xl sm:text-4xl font-extrabold text-[#0047B6]">
-            Sponsors & Soutiens
+            Sponsors & aide financière
           </h1>
           <p className="text-sm sm:text-base text-gray-700 max-w-2xl">
             EleveAI est un projet pédagogique indépendant, pensé pour les élèves,
-            les parents et les professeurs. Votre soutien permet de garder l’outil
-            accessible, responsable et centré sur la compréhension.
+            les parents et les professeurs. Votre soutien, même modeste, permet
+            de garder l’outil accessible, responsable et gratuit pour les élèves.
           </p>
         </header>
 
@@ -32,9 +32,9 @@ export default function SponsorsPage() {
             </p>
             <p className="text-sm sm:text-base text-gray-700">
               En mathématiques, un tout petit nombre peut déclencher de grands
-              changements. Nous croyons qu’une petite aide, un outil bien conçu,
-              une explication claire peuvent transformer la relation d’un élève
-              à l’école… puis à son avenir.
+              changements. Nous croyons qu’une petite aide, une explication claire,
+              un outil bien conçu peuvent transformer la relation d’un élève à l’école…
+              puis à son avenir.
             </p>
             <p className="text-sm sm:text-base font-medium text-gray-800">
               Nous croyons que chacun peut changer son monde.
@@ -45,6 +45,28 @@ export default function SponsorsPage() {
               en respectant les programmes et le cadre de l’École.
             </p>
           </div>
+        </section>
+
+        {/* Bloc : à quoi sert l'aide financière */}
+        <section className="bg-white/95 border border-sky-200 rounded-2xl shadow-sm p-6 sm:p-8 space-y-4">
+          <h2 className="text-xl sm:text-2xl font-bold text-[#0047B6]">
+            💶 À quoi sert l’aide financière ?
+          </h2>
+          <p className="text-sm sm:text-base text-gray-700">
+            L’aide financière reçue pour EleveAI est utilisée uniquement pour
+            soutenir le projet pédagogique :
+          </p>
+          <ul className="text-sm sm:text-base text-gray-700 space-y-1">
+            <li>• payer l’hébergement du site et les outils techniques (Vercel, etc.) ;</li>
+            <li>• financer les appels à l’IA (API) pour répondre aux élèves ;</li>
+            <li>• consacrer du temps à la création de contenus pédagogiques de qualité ;</li>
+            <li>• développer de nouvelles fonctionnalités (espace profs, adaptation DYS, etc.) ;</li>
+            <li>• garder EleveAI gratuit pour les élèves, en particulier à La Réunion.</li>
+          </ul>
+          <p className="text-xs text-gray-500">
+            Chaque euro est un investissement direct dans l’accompagnement des
+            élèves et la qualité des ressources proposées.
+          </p>
         </section>
 
         {/* Bloc premiers soutiens */}
@@ -62,33 +84,34 @@ export default function SponsorsPage() {
             <li>• Sponsor actuel : FL (50&nbsp;€)</li>
           </ul>
           <p className="text-xs text-gray-500">
-            Chaque contribution, même modeste, participe à l’hébergement, aux
-            coûts d’API d’IA et au temps de création de contenus pédagogiques.
+            Ces premiers soutiens ont permis de lancer EleveAI et de couvrir les
+            premiers frais techniques.
           </p>
         </section>
 
-        {/* Bloc appel à soutien simple (sans paiement pour l’instant) */}
+        {/* Bloc : qui peut aider ? */}
         <section className="bg-white/95 border border-slate-200 rounded-2xl shadow-sm p-6 sm:p-8 space-y-4">
           <h2 className="text-xl sm:text-2xl font-bold text-[#0047B6]">
-            🤲 Comment nous soutenir (bientôt)
+            🤲 Qui peut nous aider ?
           </h2>
           <p className="text-sm sm:text-base text-gray-700">
-            Nous mettrons bientôt en place des formules simples pour les parents,
-            les professeurs, les établissements et les entreprises qui souhaitent
-            soutenir EleveAI&nbsp;: participation symbolique, sponsoring local,
-            ou financement de fonctionnalités dédiées.
-          </p>
-          <p className="text-sm sm:text-base text-gray-700">
-            En attendant, vous pouvez déjà :
+            Plusieurs types de soutiens seront possibles dans les prochaines
+            versions du site :
           </p>
           <ul className="text-sm sm:text-base text-gray-700 space-y-1">
-            <li>• utiliser EleveAI avec vos élèves ;</li>
-            <li>• en parler à vos collègues et à votre établissement ;</li>
-            <li>• nous faire des retours pour améliorer l’outil.</li>
+            <li>• parents qui souhaitent soutenir un projet éducatif local ;</li>
+            <li>• professeurs qui utilisent EleveAI avec leurs classes ;</li>
+            <li>• établissements scolaires (collèges, lycées) ;</li>
+            <li>• entreprises et partenaires locaux sensibles à l’égalité des chances ;</li>
+            <li>• toute personne convaincue qu’un élève accompagné peut changer son monde.</li>
           </ul>
+          <p className="text-sm sm:text-base text-gray-700">
+            Nous mettrons bientôt en place des formules simples de sponsoring
+            et des contreparties claires (remerciements, logo, soutien d’une classe, etc.).
+          </p>
           <p className="text-xs text-gray-500">
-            Une page avec les modalités de sponsoring et les contreparties sera
-            ajoutée dans une prochaine version.
+            En attendant, vous pouvez déjà en parler autour de vous, tester l’outil
+            avec vos élèves ou nous faire des retours pour l’améliorer.
           </p>
           <div className="pt-2">
             <Link
