@@ -60,7 +60,7 @@ export default function SponsorsPage() {
 
           <ul className="text-sm sm:text-base text-gray-700 space-y-2">
             <li>• Favoriser l’égalité des chances à La Réunion</li>
-            <li>• Offrir une aide gratuite aux élèves (6e → 4e)</li>
+            <li>• Offrir une aide gratuite aux élèves (6e → 3e)</li>
             <li>• Soutenir l’inclusion (DYS, besoins particuliers)</li>
             <li>• Promouvoir une IA éthique et responsable</li>
             <li>• Développer un projet éducatif 100 % réunionnais</li>
@@ -76,7 +76,7 @@ export default function SponsorsPage() {
         {/* SECTION 3 : Transparence financière */}
         <section className="bg-white/95 border border-sky-200 rounded-2xl shadow-sm p-6 sm:p-8 space-y-5">
           <h2 className="text-xl sm:text-2xl font-bold text-[#0047B6]">
-            💶 Transparence : 80 % pédagogique – 20 % rémunération
+            💶 Transparence : 50 % pédagogique – 50 % rémunération
           </h2>
 
           <p className="text-sm sm:text-base text-gray-700">
@@ -96,11 +96,11 @@ export default function SponsorsPage() {
         {/* SECTION 4 : Coût pour un collège réunionnais */}
         <section className="bg-white/95 border border-indigo-200 rounded-2xl shadow-sm p-6 sm:p-8 space-y-5">
           <h2 className="text-xl sm:text-2xl font-bold text-indigo-700">
-            🏫 Exemple : Collège de l’Entre-Deux
+            🏫 Exemple : Collège 
           </h2>
 
           <p className="text-sm sm:text-base text-gray-700">
-            Pour 350 élèves de 6e–5e–4e :
+            Pour 350 élèves de 6e–5e–4e-3e :
           </p>
 
           <ul className="text-sm sm:text-base text-gray-700 space-y-1">
@@ -114,9 +114,6 @@ export default function SponsorsPage() {
             🔹 Soit 5 € par élève et par an
           </p>
 
-          <p className="text-sm sm:text-base text-gray-700">
-            Une commune, un Département ou un sponsor local peut facilement couvrir ce coût.
-          </p>
         </section>
 
         {/* SECTION 5 : Emploi réunionnais */}
