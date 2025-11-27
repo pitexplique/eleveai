@@ -226,49 +226,7 @@ export default function ProfsPage() {
             <h2 className="text-lg font-bold text-[#0047B6] flex items-center gap-2">
               1️⃣ Paramètres pédagogiques
             </h2>
-
-            {/* Titre + auteur */}
-            <div className="grid sm:grid-cols-[2fr,1fr] gap-3">
-              <div className="space-y-1">
-                <label className="text-xs font-semibold text-gray-600">
-                  Titre du prompt
-                </label>
-                <input
-                  type="text"
-                  value={form.titre}
-                  onChange={(e) => handleChange("titre", e.target.value)}
-                  placeholder="Ex : Expliquer la proportionnalité en 5e"
-                  className="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-sky-300"
-                />
-              </div>
-              <div className="space-y-1">
-                <label className="text-xs font-semibold text-gray-600">
-                  Auteur (facultatif)
-                </label>
-                <input
-                  type="text"
-                  value={form.auteur}
-                  onChange={(e) => handleChange("auteur", e.target.value)}
-                  placeholder="Nom, initiales…"
-                  className="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-sky-300"
-                />
-              </div>
-            </div>
-
-            {/* Objectif pédagogique */}
-            <div className="space-y-1">
-              <label className="text-xs font-semibold text-gray-600">
-                Objectif pédagogique
-              </label>
-              <textarea
-                value={form.objectifPedagogique}
-                onChange={(e) => handleChange("objectifPedagogique", e.target.value)}
-                placeholder="Ex : l’élève doit savoir reconnaître une situation de proportionnalité et utiliser un coefficient."
-                className="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-sky-300 min-h-[70px]"
-              />
-            </div>
-
-            {/* Classe / matière / niveau */}
+                        {/* Classe / matière / niveau */}
             <div className="grid sm:grid-cols-3 gap-3">
               <div className="space-y-1">
                 <label className="text-xs font-semibold text-gray-600">
@@ -338,6 +296,49 @@ export default function ProfsPage() {
                 ))}
               </select>
             </div>
+
+            {/* Titre + auteur */}
+            <div className="grid sm:grid-cols-[2fr,1fr] gap-3">
+              <div className="space-y-1">
+                <label className="text-xs font-semibold text-gray-600">
+                  Titre du prompt
+                </label>
+                <input
+                  type="text"
+                  value={form.titre}
+                  onChange={(e) => handleChange("titre", e.target.value)}
+                  placeholder="Ex : Expliquer la proportionnalité en 5e"
+                  className="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-sky-300"
+                />
+              </div>
+              <div className="space-y-1">
+                <label className="text-xs font-semibold text-gray-600">
+                  Auteur (facultatif)
+                </label>
+                <input
+                  type="text"
+                  value={form.auteur}
+                  onChange={(e) => handleChange("auteur", e.target.value)}
+                  placeholder="Nom, initiales…"
+                  className="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-sky-300"
+                />
+              </div>
+            </div>
+
+            {/* Objectif pédagogique */}
+            <div className="space-y-1">
+              <label className="text-xs font-semibold text-gray-600">
+                Objectif pédagogique
+              </label>
+              <textarea
+                value={form.objectifPedagogique}
+                onChange={(e) => handleChange("objectifPedagogique", e.target.value)}
+                placeholder="Ex : l’élève doit savoir reconnaître une situation de proportionnalité et utiliser un coefficient."
+                className="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-sky-300 min-h-[70px]"
+              />
+            </div>
+
+
 
             {/* Tags */}
             <div className="space-y-1">
