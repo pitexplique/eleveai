@@ -1,68 +1,144 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { useState } from "react";
 
 export default function Header() {
-  const path = usePathname();
-
-  const isActive = (url: string) => path === url;
+  const [open, setOpen] = useState(false);
 
   return (
-    <header className="w-full bg-white/90 backdrop-blur border-b border-slate-200 sticky top-0 z-50">
-      <div className="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
-        
-        {/* Logo + nom */}
-        <Link href="/" className="text-[#0047B6] font-extrabold text-lg sm:text-xl">
+    <header className="border-b bg-white">
+      <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4">
+        {/* Logo EleveAI en bleu, comme avant */}
+        <Link
+          href="/"
+          className="text-2xl font-extrabold tracking-tight"
+          style={{ color: "#0050FF" }}
+        >
           EleveAI
         </Link>
 
-        {/* Menu */}
-        <nav className="flex gap-2 text-xs sm:text-sm">
+        {/* Menu desktop */}
+        <div className="hidden items-center gap-3 md:flex">
           <Link
             href="/chat"
-            className={`px-3 py-1.5 rounded-full font-semibold transition ${
-              isActive("/chat")
-                ? "bg-[#0047B6] text-white shadow"
-                : "bg-sky-50 text-[#0047B6] border border-sky-200 hover:bg-sky-100"
-            }`}
+            className="rounded-full border px-3 py-1 text-sm text-purple-700 bg-purple-50 hover:bg-purple-100"
           >
             💬 Chat
           </Link>
 
           <Link
-            href="/prompts"
-            className={`px-3 py-1.5 rounded-full font-semibold transition ${
-              isActive("/prompts")
-                ? "bg-amber-400 text-black shadow"
-                : "bg-amber-100 text-amber-800 border border-amber-300 hover:bg-amber-200"
-            }`}
+            href="/profs"
+            className="rounded-full border px-3 py-1 text-sm font-semibold"
+            style={{ backgroundColor: "#FFCC00", color: "#000" }}
           >
-            📘 Espace prof
+            👨‍🏫 Espace prof
+          </Link>
+
+          <Link
+            href="/eleve"
+            className="rounded-full border px-3 py-1 text-sm"
+            style={{ backgroundColor: "#E5FFE5", color: "#008800" }}
+          >
+            🎒 Élèves
+          </Link>
+
+          <Link
+            href="/parents"
+            className="rounded-full border px-3 py-1 text-sm"
+            style={{ backgroundColor: "#E6F2FF", color: "#0066CC" }}
+          >
+            👨‍👩‍👧 Parents
+          </Link>
+
+          <Link
+            href="/blog"
+            className="rounded-full border px-3 py-1 text-sm"
+            style={{ backgroundColor: "#FFE6F3", color: "#CC0088" }}
+          >
+            📝 Blog
           </Link>
 
           <Link
             href="/concours-ia"
-            className={`px-3 py-1.5 rounded-full font-semibold transition ${
-              isActive("/concours-ia")
-                ? "bg-[#0047B6] text-white shadow"
-                : "bg-sky-50 text-[#0047B6] border border-sky-200 hover:bg-sky-100"
-            }`}
+            className="rounded-full border px-3 py-1 text-sm"
+            style={{ backgroundColor: "#EAFBFF", color: "#0088CC" }}
           >
             🌍 Concours
           </Link>
-          <Link
-            href="/profs"
-            className={`px-3 py-1.5 rounded-full font-semibold transition ${
-              isActive("/profs")
-                ? "bg-emerald-600 text-white shadow"
-                : "bg-emerald-50 text-emerald-800 border border-emerald-300 hover:bg-emerald-100"
-            }`}
+        </div>
+
+        {/* Bouton menu mobile */}
+        <button
+          type="button"
+          onClick={() => setOpen((o) => !o)}
+          className="inline-flex items-center justify-center rounded-md p-2 text-gray-700 hover:bg-gray-100 md:hidden"
+          aria-label="Ouvrir le menu"
+        >
+          <svg
+            className="h-6 w-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
           >
-            🧑‍🏫 Espace prof
-          </Link>
-        </nav>
-      </div>
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d={
+                open
+                  ? "M6 18L18 6M6 6l12 12" // croix
+                  : "M4 6h16M4 12h16M4 18h16" // burger
+              }
+            />
+          </svg>
+        </button>
+      </nav>
+
+      {/* Menu mobile déroulant */}
+      {open && (
+        <div className="space-y-2 border-t bg-white px-4 py-4 md:hidden">
+          <NavLinkMobile href="/chat" onClick={() => setOpen(false)}>
+            💬 Chat
+          </NavLinkMobile>
+          <NavLinkMobile href="/profs" onClick={() => setOpen(false)}>
+            👨‍🏫 Espace prof
+          </NavLinkMobile>
+          <NavLinkMobile href="/eleve" onClick={() => setOpen(false)}>
+            🎒 Élèves
+          </NavLinkMobile>
+          <NavLinkMobile href="/parents" onClick={() => setOpen(false)}>
+            👨‍👩‍👧 Parents
+          </NavLinkMobile>
+          <NavLinkMobile href="/blog" onClick={() => setOpen(false)}>
+            📝 Blog
+          </NavLinkMobile>
+          <NavLinkMobile href="/concours-ia" onClick={() => setOpen(false)}>
+            🌍 Concours
+          </NavLinkMobile>
+        </div>
+      )}
     </header>
+  );
+}
+
+/** Petit composant pour avoir les mêmes pastilles en mobile */
+function NavLinkMobile({
+  href,
+  children,
+  onClick,
+}: {
+  href: string;
+  children: React.ReactNode;
+  onClick?: () => void;
+}) {
+  return (
+    <Link
+      href={href}
+      onClick={onClick}
+      className="block rounded-full border px-4 py-2 text-sm text-center bg-gray-50 hover:bg-gray-100"
+    >
+      {children}
+    </Link>
   );
 }

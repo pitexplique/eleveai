@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useMemo, useState } from "react";
@@ -15,6 +16,7 @@ type PromptProf = {
   contenu: string;
   tags: string[];
   adaptationDYS: boolean;
+  neuro: boolean;
   auteur: string;
   date: string;
 };
@@ -64,7 +66,8 @@ export default function ProfsPage() {
     type: "",
     contenu: "",
     tags: [],
-    adaptationDYS: false,
+    adaptationDYS: true,
+    neuro: true,
     auteur: "",
     date: today,
   });
@@ -139,7 +142,7 @@ export default function ProfsPage() {
     return s;
   }, [form]);
 
-  // "Moulinette" interne : on enrichit le prompt prof avec tout le contexte pédagogique
+  // "Moulinette" interne : enrichissement pédagogique (Eduscol + BO + neurosciences)
   function genererPromptFinal() {
     if (!form.contenu.trim()) {
       alert("Merci de remplir au moins le contenu du prompt.");
@@ -152,23 +155,40 @@ export default function ProfsPage() {
         : "";
 
     const blocDYS = form.adaptationDYS
-      ? `Adapte ta réponse à un élève présentant des troubles DYS :\n` +
-        `- phrases courtes et claires,\n` +
-        `- pas de doubles négations,\n` +
-        `- vocabulaire simple expliqué,\n` +
-        `- mise en page aérée avec des listes.\n\n`
+      ? `Adapte ta réponse pour un élève présentant des troubles DYS :\n` +
+        `- phrases courtes et simples,\n` +
+        `- mise en page aérée avec listes,\n` +
+        `- éviter les doubles négations,\n` +
+        `- expliquer le vocabulaire difficile,\n` +
+        `- rappeler le sens des symboles mathématiques.\n\n`
       : "";
 
     const blocAuteur = form.auteur
       ? `Ce prompt est préparé par le professeur : ${form.auteur}.\n`
       : "";
 
+    const blocEduscol =
+      `Ta réponse doit respecter les programmes officiels du système scolaire français :\n` +
+      `- conformité à l’esprit des programmes publiés sur Eduscol,\n` +
+      `- cohérence avec le Bulletin Officiel (BO),\n` +
+      `- vocabulaire disciplinaire attendu en classe.\n\n`;
+
+    const blocNeuro =
+      `Tu t’appuies sur des principes issus des neurosciences de l’apprentissage :\n` +
+      `- activer les connaissances préalables de l’élève,\n` +
+      `- introduire une seule difficulté nouvelle à la fois,\n` +
+      `- découper la notion en petites étapes claires,\n` +
+      `- alterner explications et petites questions de vérification,\n` +
+      `- utiliser des exemples concrets avant la formalisation,\n` +
+      `- terminer par un court récapitulatif des idées clés,\n` +
+      `- inviter l’élève à reformuler avec ses propres mots.\n\n`;
+
     const prompt =
       `Tu es une IA pédagogique destinée à des élèves de ${form.classe || "collège/lycée"} ` +
-      `en ${form.matiere || "discipline scolaire"}, dans le système scolaire français.\n` +
-      `Ta réponse doit respecter l’esprit des programmes officiels (Eduscol) et rester conforme au Bulletin officiel.\n` +
-      `Tu t’appuies sur les bonnes pratiques issues des neurosciences de l’apprentissage : progression étape par étape, rappels, exemples concrets, reformulations possibles.\n\n` +
-      `Objectif pédagogique indiqué par le professeur : ${form.objectifPedagogique || "(non précisé, propose-en un compatible avec le programme)"}\n` +
+      `en ${form.matiere || "discipline scolaire"}, dans le système scolaire français.\n\n` +
+      blocEduscol +
+      blocNeuro +
+      `Objectif pédagogique indiqué par le professeur : ${form.objectifPedagogique || "(non précisé : propose une version compatible avec le programme officiel)"}\n` +
       `Niveau de difficulté souhaité : ${form.niveau}.\n` +
       `Type de tâche : ${form.type || "non précisé (choisis une structure adaptée au niveau de l’élève)"}.\n` +
       blocTags +
@@ -180,9 +200,10 @@ export default function ProfsPage() {
       `1. Si la demande du professeur est floue ou incomplète, commence par proposer une version plus précise du prompt, en gardant son intention pédagogique.\n` +
       `2. Ensuite, produis la réponse pour l’élève en respectant :\n` +
       `   - le niveau indiqué,\n` +
-      `   - le programme officiel,\n` +
+      `   - les programmes officiels (Eduscol, BO),\n` +
+      `   - les principes des neurosciences de l’apprentissage,\n` +
       `   - la clarté pédagogique (étapes, exemples, vérification de compréhension).\n` +
-      `3. Ne résous pas un devoir maison spécifique sauf si le professeur demande clairement une correction commentée.\n`;
+      `3. Ne résous pas un devoir maison spécifique à la place de l’élève, sauf si le professeur demande explicitement une correction commentée.\n`;
 
     setPromptFinal(prompt);
     setCopied(false);
@@ -196,7 +217,9 @@ export default function ProfsPage() {
       setTimeout(() => setCopied(false), 2000);
     } catch (e) {
       console.error(e);
-      alert("Impossible de copier automatiquement. Sélectionne le texte et copie-le à la main.");
+      alert(
+        "Impossible de copier automatiquement. Sélectionne le texte et copie-le à la main.",
+      );
     }
   }
 
@@ -218,6 +241,18 @@ export default function ProfsPage() {
             dans ton IA préférée (ChatGPT, Gemini, Claude, Mistral…) ou dans le chat
             EleveAI.
           </p>
+          {/* Badge Eduscol + neurosciences */}
+          <p className="inline-flex items-center gap-2 mt-2 px-3 py-1 rounded-full bg-emerald-50 text-[11px] font-semibold text-emerald-700 border border-emerald-100">
+            <span>🧠</span>
+            <span>Cette page applique Eduscol + neurosciences de l’apprentissage</span>
+            <input
+              type="checkbox"
+              checked={form.neuro}
+              onChange={(e) => handleChange("neuro", e.target.checked)}
+              className="rounded border-gray-400"
+            />
+            <span>Activer les principes des neurosciences</span>
+          </p>
         </header>
 
         <div className="grid gap-6 lg:grid-cols-2">
@@ -226,7 +261,8 @@ export default function ProfsPage() {
             <h2 className="text-lg font-bold text-[#0047B6] flex items-center gap-2">
               1️⃣ Paramètres pédagogiques
             </h2>
-                        {/* Classe / matière / niveau */}
+
+            {/* Classe / matière / niveau */}
             <div className="grid sm:grid-cols-3 gap-3">
               <div className="space-y-1">
                 <label className="text-xs font-semibold text-gray-600">
@@ -337,8 +373,6 @@ export default function ProfsPage() {
                 className="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-sky-300 min-h-[70px]"
               />
             </div>
-
-
 
             {/* Tags */}
             <div className="space-y-1">
@@ -458,7 +492,11 @@ export default function ProfsPage() {
                 </p>
                 <div className="flex flex-wrap gap-2 text-xs sm:text-sm">
                   <Link
-                    href={promptFinal ? `/chat?prompt=${encodeURIComponent(promptFinal)}` : "/chat"}
+                    href={
+                      promptFinal
+                        ? `/chat?prompt=${encodeURIComponent(promptFinal)}`
+                        : "/chat"
+                    }
                     className="px-3 py-2 rounded-lg bg-emerald-600 text-white font-semibold hover:bg-emerald-700"
                   >
                     🚀 Utiliser avec EleveAI
