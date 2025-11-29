@@ -469,7 +469,7 @@ export default function OffrePiloteClient() {
                 mail qui vous a transmis ce lien ou écrire à :
               </p>
               <p className="text-sm font-semibold text-emerald-300">
-                Frederic.acoste [at] ac-reunion.fr
+                Frederic.Lacoste [at] ac-reunion.fr
               </p>
             </div>
           </section>
