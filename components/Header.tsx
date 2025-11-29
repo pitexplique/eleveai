@@ -7,138 +7,152 @@ export default function Header() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="border-b bg-white">
-      <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4">
-        {/* Logo EleveAI en bleu, comme avant */}
-        <Link
-          href="/"
-          className="text-2xl font-extrabold tracking-tight"
-          style={{ color: "#0050FF" }}
-        >
-          EleveAI
-        </Link>
-
-        {/* Menu desktop */}
-        <div className="hidden items-center gap-3 md:flex">
-          <Link
-            href="/chat"
-            className="rounded-full border px-3 py-1 text-sm text-purple-700 bg-purple-50 hover:bg-purple-100"
-          >
-            💬 Chat
-          </Link>
-
-          <Link
-            href="/profs"
-            className="rounded-full border px-3 py-1 text-sm font-semibold"
-            style={{ backgroundColor: "#FFCC00", color: "#000" }}
-          >
-            👨‍🏫 Espace prof
-          </Link>
-
-          <Link
-            href="/eleve"
-            className="rounded-full border px-3 py-1 text-sm"
-            style={{ backgroundColor: "#E5FFE5", color: "#008800" }}
-          >
-            🎒 Élèves
-          </Link>
-
-          <Link
-            href="/parents"
-            className="rounded-full border px-3 py-1 text-sm"
-            style={{ backgroundColor: "#E6F2FF", color: "#0066CC" }}
-          >
-            👨‍👩‍👧 Parents
-          </Link>
-
-          <Link
-            href="/blog"
-            className="rounded-full border px-3 py-1 text-sm"
-            style={{ backgroundColor: "#FFE6F3", color: "#CC0088" }}
-          >
-            📝 Blog
-          </Link>
-
-          <Link
-            href="/concours-ia"
-            className="rounded-full border px-3 py-1 text-sm"
-            style={{ backgroundColor: "#EAFBFF", color: "#0088CC" }}
-          >
-            🌍 Concours
+    <header className="sticky top-0 z-40 border-b border-slate-800 bg-slate-950/90 backdrop-blur">
+      <nav className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:py-4">
+        
+        {/* LOGO */}
+        <div className="flex items-center gap-2">
+          <Link href="/" className="flex items-center gap-2">
+            <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-emerald-500 text-slate-900 font-bold">
+              EA
+            </div>
+            <div className="flex flex-col leading-tight">
+              <span className="text-sm sm:text-base font-semibold text-slate-50">
+                EleveAI
+              </span>
+              <span className="text-[10px] sm:text-xs text-slate-400">
+                Eduscol · neurosciences · IA pédagogique
+              </span>
+            </div>
           </Link>
         </div>
 
-        {/* Bouton menu mobile */}
+        {/* MENU DESKTOP */}
+        <div className="hidden items-center gap-6 md:flex">
+          <Link href="/espace-prof" className="text-sm text-slate-200 hover:text-emerald-300">
+            Profs
+          </Link>
+
+          <Link href="/espace-eleve" className="text-sm text-slate-200 hover:text-sky-300">
+            Élèves
+          </Link>
+
+          <Link href="/parents" className="text-sm text-slate-200 hover:text-indigo-300">
+            Parents
+          </Link>
+
+          {/* 🔵 Nouveau lien Administration */}
+          <Link
+            href="/espace-administration"
+            className="text-sm text-slate-200 hover:text-fuchsia-300"
+          >
+            Administration
+          </Link>
+
+          <Link
+            href="/offre-pilote"
+            className="text-sm text-slate-200 hover:text-amber-300"
+          >
+            Collège pilote
+          </Link>
+
+          {/* BOUTON CONNEXION */}
+          <Link
+            href="/connexion"
+            className="inline-flex items-center rounded-lg bg-emerald-500 px-3 py-1.5 text-sm font-semibold text-slate-900 hover:bg-emerald-400"
+          >
+            Se connecter
+          </Link>
+        </div>
+
+        {/* MENU MOBILE - BOUTON */}
         <button
           type="button"
-          onClick={() => setOpen((o) => !o)}
-          className="inline-flex items-center justify-center rounded-md p-2 text-gray-700 hover:bg-gray-100 md:hidden"
-          aria-label="Ouvrir le menu"
+          onClick={() => setOpen(!open)}
+          className="inline-flex items-center justify-center rounded-md border border-slate-700 p-1.5 text-slate-100 md:hidden"
         >
-          <svg
-            className="h-6 w-6"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d={
-                open
-                  ? "M6 18L18 6M6 6l12 12" // croix
-                  : "M4 6h16M4 12h16M4 18h16" // burger
-              }
+          <span className="sr-only">Ouvrir le menu</span>
+
+          {/* Icône burger animée */}
+          <div className="space-y-1">
+            <span
+              className={`block h-0.5 w-5 bg-slate-100 transition-transform ${
+                open ? "translate-y-1.5 rotate-45" : ""
+              }`}
             />
-          </svg>
+            <span
+              className={`block h-0.5 w-5 bg-slate-100 transition-opacity ${
+                open ? "opacity-0" : "opacity-100"
+              }`}
+            />
+            <span
+              className={`block h-0.5 w-5 bg-slate-100 transition-transform ${
+                open ? "-translate-y-1.5 -rotate-45" : ""
+              }`}
+            />
+          </div>
         </button>
       </nav>
 
-      {/* Menu mobile déroulant */}
+      {/* MENU MOBILE DÉROULANT */}
       {open && (
-        <div className="space-y-2 border-t bg-white px-4 py-4 md:hidden">
-          <NavLinkMobile href="/chat" onClick={() => setOpen(false)}>
-            💬 Chat
-          </NavLinkMobile>
-          <NavLinkMobile href="/profs" onClick={() => setOpen(false)}>
-            👨‍🏫 Espace prof
-          </NavLinkMobile>
-          <NavLinkMobile href="/eleve" onClick={() => setOpen(false)}>
-            🎒 Élèves
-          </NavLinkMobile>
-          <NavLinkMobile href="/parents" onClick={() => setOpen(false)}>
-            👨‍👩‍👧 Parents
-          </NavLinkMobile>
-          <NavLinkMobile href="/blog" onClick={() => setOpen(false)}>
-            📝 Blog
-          </NavLinkMobile>
-          <NavLinkMobile href="/concours-ia" onClick={() => setOpen(false)}>
-            🌍 Concours
-          </NavLinkMobile>
+        <div className="border-t border-slate-800 bg-slate-950 md:hidden">
+          <div className="mx-auto max-w-6xl px-4 py-3 space-y-2">
+
+            <Link
+              href="/espace-prof"
+              onClick={() => setOpen(false)}
+              className="block rounded-md px-2 py-2 text-sm text-slate-100 hover:bg-slate-900"
+            >
+              Profs – créer des cours & prompts
+            </Link>
+
+            <Link
+              href="/espace-eleve"
+              onClick={() => setOpen(false)}
+              className="block rounded-md px-2 py-2 text-sm text-slate-100 hover:bg-slate-900"
+            >
+              Élèves – aide aux devoirs & révisions
+            </Link>
+
+            <Link
+              href="/parents"
+              onClick={() => setOpen(false)}
+              className="block rounded-md px-2 py-2 text-sm text-slate-100 hover:bg-slate-900"
+            >
+              Parents – accompagner son enfant
+            </Link>
+
+            {/* 🔵 Nouveau lien Administration dans le menu mobile */}
+            <Link
+              href="/espace-administration"
+              onClick={() => setOpen(false)}
+              className="block rounded-md px-2 py-2 text-sm text-slate-100 hover:bg-slate-900"
+            >
+              Administration – direction & secrétariat
+            </Link>
+
+            <Link
+              href="/offre-pilote"
+              onClick={() => setOpen(false)}
+              className="block rounded-md px-2 py-2 text-sm text-slate-100 hover:bg-slate-900"
+            >
+              Devenir collège pilote
+            </Link>
+
+            {/* CTA mobile */}
+            <div className="pt-2">
+              <Link
+                href="/connexion"
+                onClick={() => setOpen(false)}
+                className="block w-full rounded-lg bg-emerald-500 px-3 py-2 text-center text-sm font-semibold text-slate-900 hover:bg-emerald-400"
+              >
+                Se connecter
+              </Link>
+            </div>
+          </div>
         </div>
       )}
     </header>
-  );
-}
-
-/** Petit composant pour avoir les mêmes pastilles en mobile */
-function NavLinkMobile({
-  href,
-  children,
-  onClick,
-}: {
-  href: string;
-  children: React.ReactNode;
-  onClick?: () => void;
-}) {
-  return (
-    <Link
-      href={href}
-      onClick={onClick}
-      className="block rounded-full border px-4 py-2 text-sm text-center bg-gray-50 hover:bg-gray-100"
-    >
-      {children}
-    </Link>
   );
 }
