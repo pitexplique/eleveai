@@ -2,11 +2,49 @@
 
 import { useState } from "react";
 
+type ModeTarif = "fixe" | "mixte";
+
 export default function OffrePiloteClient() {
   const [password, setPassword] = useState("");
   const [accesOK, setAccesOK] = useState(false);
   const [erreur, setErreur] = useState("");
   const [loading, setLoading] = useState(false);
+
+  // Simulation de coût
+  const [nbEleves, setNbEleves] = useState(350);
+  const [nbProfs, setNbProfs] = useState(30);
+  const [modeTarif, setModeTarif] = useState<ModeTarif>("fixe");
+  const [plafondMensuel, setPlafondMensuel] = useState(150); // plafond IA choisi par le chef d’établissement
+
+  // Paramètres (à ajuster librement plus tard)
+  const COUT_PAR_ELEVE_AN = 5; // 5 € / élève / an en mode fixe
+  const BASE_MENSUEL_MIXTE = 99; // abonnement établissement / mois
+  const VARIABLE_PAR_ELEVE_MOIS = 0.25; // part variable par élève / mois
+
+  let coutMensuelEstime = 0;
+  let coutAnnuelEstime = 0;
+  let coutParEleve = 0;
+  let coutParProf = 0;
+
+  if (modeTarif === "fixe") {
+    coutAnnuelEstime = nbEleves * COUT_PAR_ELEVE_AN;
+    coutMensuelEstime = coutAnnuelEstime / 12;
+  } else {
+    const variableMensuel = nbEleves * VARIABLE_PAR_ELEVE_MOIS;
+    coutMensuelEstime = BASE_MENSUEL_MIXTE + variableMensuel;
+    coutAnnuelEstime = coutMensuelEstime * 12;
+  }
+
+  if (nbEleves > 0) {
+    coutParEleve = coutAnnuelEstime / nbEleves;
+  }
+  if (nbProfs > 0) {
+    coutParProf = coutAnnuelEstime / nbProfs;
+  }
+
+  // Application du plafond (comme sur la Platform OpenAI : max monthly spend)
+  const coutMensuelFacture = Math.min(coutMensuelEstime, plafondMensuel);
+  const coutAnnuelFacture = coutMensuelFacture * 12;
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -37,7 +75,9 @@ export default function OffrePiloteClient() {
       }
     } catch (err) {
       console.error(err);
-      setErreur("Impossible de vérifier le mot de passe (problème réseau ?).");
+      setErreur(
+        "Impossible de vérifier le mot de passe (problème réseau ?).",
+      );
       setAccesOK(false);
     } finally {
       setLoading(false);
@@ -57,9 +97,10 @@ export default function OffrePiloteClient() {
             Espace confidentiel – Chefs d’établissement
           </h1>
           <p className="text-sm sm:text-base text-slate-200/80 max-w-2xl">
-            Cette page présente l&apos;offre EleveAI pour les établissements pilotes.
-            Elle est réservée aux équipes de direction et ne doit pas être diffusée
-            publiquement. Merci de ne pas partager le contenu sans accord préalable.
+            Cette page présente l&apos;offre EleveAI pour les établissements
+            pilotes. Elle est réservée aux équipes de direction et ne doit pas
+            être diffusée publiquement. Merci de ne pas partager le contenu sans
+            accord préalable.
           </p>
         </header>
 
@@ -70,8 +111,8 @@ export default function OffrePiloteClient() {
               Saisir le mot de passe
             </h2>
             <p className="text-sm text-slate-300">
-              Le lien vers cette page et le mot de passe vous ont été transmis par
-              email. Si ce n&apos;est pas le cas, vous pouvez contacter{" "}
+              Le lien vers cette page et le mot de passe vous ont été transmis
+              par email. Si ce n&apos;est pas le cas, vous pouvez contacter{" "}
               <span className="font-semibold text-emerald-300">
                 Frédéric – EleveAI
               </span>{" "}
@@ -97,13 +138,13 @@ export default function OffrePiloteClient() {
                 disabled={loading}
                 className="mt-2 inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-emerald-500 text-slate-950 text-sm font-semibold hover:bg-emerald-400 transition disabled:opacity-60"
               >
-                {loading ? "Vérification..." : "✅ Valider l&apos;accès"}
+                {loading ? "Vérification..." : "✅ Valider l'accès"}
               </button>
             </form>
 
             <p className="text-[11px] text-slate-400 pt-2">
-              Pour des raisons de confidentialité, merci de ne pas transmettre ce mot
-              de passe à des personnes extérieures à votre établissement.
+              Pour des raisons de confidentialité, merci de ne pas transmettre
+              ce mot de passe à des personnes extérieures à votre établissement.
             </p>
           </section>
         )}
@@ -123,8 +164,8 @@ export default function OffrePiloteClient() {
             <p className="text-sm text-slate-200/90">
               Ce document présente la proposition EleveAI pour un accompagnement
               structuré de votre établissement autour de l&apos;intelligence
-              artificielle : pédagogie, prévention de la triche, formation des équipes
-              et mise en place d&apos;espaces IA sécurisés.
+              artificielle : pédagogie, prévention de la triche, formation des
+              équipes et mise en place d&apos;espaces IA sécurisés.
             </p>
 
             {/* 1. Projet d'établissement */}
@@ -146,7 +187,8 @@ export default function OffrePiloteClient() {
                   Identifier les niveaux, disciplines et équipes prioritaires.
                 </li>
                 <li>
-                  Donner un cadre rassurant aux enseignants, aux élèves et aux parents.
+                  Donner un cadre rassurant aux enseignants, aux élèves et aux
+                  parents.
                 </li>
               </ul>
             </div>
@@ -158,13 +200,18 @@ export default function OffrePiloteClient() {
               </h3>
               <p className="text-sm text-slate-200/80">
                 Co-construction d&apos;une{" "}
-                <span className="font-semibold">charte simple et opérationnelle</span>{" "}
+                <span className="font-semibold">
+                  charte simple et opérationnelle
+                </span>{" "}
                 sur l&apos;usage de l&apos;IA :
               </p>
               <ul className="list-disc pl-5 text-sm text-slate-200/80 space-y-1">
-                <li>Définir ce qui est autorisé ou interdit (DM, exposés, oraux…).</li>
                 <li>
-                  Sécuriser les évaluations écrites (brevet, bac blanc, contrôles).
+                  Définir ce qui est autorisé ou interdit (DM, exposés, oraux…).
+                </li>
+                <li>
+                  Sécuriser les évaluations écrites (brevet, bac blanc,
+                  contrôles).
                 </li>
                 <li>
                   Aider les équipes à reconnaître une copie générée par IA et à
@@ -183,15 +230,19 @@ export default function OffrePiloteClient() {
               </p>
               <ul className="list-disc pl-5 text-sm text-slate-200/80 space-y-1">
                 <li>Enseignants (toutes disciplines et niveaux).</li>
-                <li>Équipe de direction, vie scolaire, professeurs documentalistes.</li>
+                <li>
+                  Équipe de direction, vie scolaire, professeurs documentalistes.
+                </li>
                 <li>
                   Référents numériques / coordinateurs de projets pédagogiques.
                 </li>
               </ul>
               <p className="text-sm text-slate-200/80">
                 Objectif : rendre l&apos;IA{" "}
-                <span className="font-semibold">utile, maîtrisée et éthique</span> dans
-                le quotidien de l&apos;établissement.
+                <span className="font-semibold">
+                  utile, maîtrisée et éthique
+                </span>{" "}
+                dans le quotidien de l&apos;établissement.
               </p>
             </div>
 
@@ -205,9 +256,12 @@ export default function OffrePiloteClient() {
               </p>
               <ul className="list-disc pl-5 text-sm text-slate-200/80 space-y-1">
                 <li>Un espace IA élèves (révisions, remédiation, projets).</li>
-                <li>Un espace IA enseignants (préparation, mutualisation).</li>
                 <li>
-                  Une bibliothèque de prompts adaptée à vos niveaux et vos disciplines.
+                  Un espace IA enseignants (préparation, mutualisation).
+                </li>
+                <li>
+                  Une bibliothèque de prompts adaptée à vos niveaux et vos
+                  disciplines.
                 </li>
               </ul>
             </div>
@@ -230,15 +284,192 @@ export default function OffrePiloteClient() {
               </ul>
             </div>
 
+            {/* 6. Simulation de coût avec plafond mensuel */}
+            <div className="space-y-3 rounded-2xl border border-emerald-500/40 bg-slate-950/40 p-4 sm:p-5">
+              <h3 className="text-lg font-semibold text-emerald-200">
+                6. Simulation indicative pour votre établissement
+              </h3>
+              <p className="text-xs sm:text-sm text-slate-300">
+                Cette simulation est{" "}
+                <span className="font-semibold">indicative</span> et non
+                contractuelle. Elle permet de visualiser un ordre de grandeur à
+                partir d&apos;un coût par élève ou d&apos;un abonnement
+                établissement + part variable. Vous pouvez également définir un{" "}
+                <span className="font-semibold">
+                  plafond mensuel de facturation IA
+                </span>{" "}
+                pour sécuriser votre budget, comme sur la plateforme OpenAI.
+              </p>
+
+              {/* Formulaire de paramètres */}
+              <div className="grid gap-4 sm:grid-cols-4 text-sm">
+                <div className="space-y-1">
+                  <label className="block text-xs font-medium text-slate-200">
+                    Nombre d&apos;élèves
+                  </label>
+                  <input
+                    type="number"
+                    min={50}
+                    className="w-full rounded-lg border border-slate-600 bg-slate-950/70 px-3 py-1.5 text-sm text-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-400/80"
+                    value={nbEleves}
+                    onChange={(e) =>
+                      setNbEleves(Number(e.target.value) || 0)
+                    }
+                  />
+                </div>
+
+                <div className="space-y-1">
+                  <label className="block text-xs font-medium text-slate-200">
+                    Nombre de professeurs
+                  </label>
+                  <input
+                    type="number"
+                    min={5}
+                    className="w-full rounded-lg border border-slate-600 bg-slate-950/70 px-3 py-1.5 text-sm text-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-400/80"
+                    value={nbProfs}
+                    onChange={(e) =>
+                      setNbProfs(Number(e.target.value) || 0)
+                    }
+                  />
+                </div>
+
+                <div className="space-y-1">
+                  <span className="block text-xs font-medium text-slate-200">
+                    Mode de tarification
+                  </span>
+                  <div className="flex flex-col gap-1">
+                    <label className="inline-flex items-center gap-2 text-xs text-slate-200">
+                      <input
+                        type="radio"
+                        name="modeTarif"
+                        value="fixe"
+                        checked={modeTarif === "fixe"}
+                        onChange={() => setModeTarif("fixe")}
+                      />
+                      <span>Forfait fixe par élève (ex. 5 € / an)</span>
+                    </label>
+                    <label className="inline-flex items-center gap-2 text-xs text-slate-200">
+                      <input
+                        type="radio"
+                        name="modeTarif"
+                        value="mixte"
+                        checked={modeTarif === "mixte"}
+                        onChange={() => setModeTarif("mixte")}
+                      />
+                      <span>
+                        Abonnement établissement + part variable (avance API)
+                      </span>
+                    </label>
+                  </div>
+                </div>
+
+                <div className="space-y-1">
+                  <label className="block text-xs font-medium text-slate-200">
+                    Plafond IA mensuel (€)
+                  </label>
+                  <input
+                    type="number"
+                    min={50}
+                    className="w-full rounded-lg border border-slate-600 bg-slate-950/70 px-3 py-1.5 text-sm text-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-400/80"
+                    value={plafondMensuel}
+                    onChange={(e) =>
+                      setPlafondMensuel(Number(e.target.value) || 0)
+                    }
+                  />
+                  <p className="text-[11px] text-slate-400">
+                    Montant maximal que vous acceptez d&apos;investir par mois
+                    en IA. La facturation ne dépassera jamais ce plafond.
+                  </p>
+                </div>
+              </div>
+
+              {/* Résultats de la simulation */}
+              <div className="mt-3 grid gap-3 sm:grid-cols-2 text-sm">
+                <div className="space-y-1">
+                  <p className="text-xs font-semibold text-emerald-200 uppercase">
+                    Consommation IA estimée (équivalent coût)
+                  </p>
+                  <p className="text-sm text-slate-100">
+                    💶 Estimation :{" "}
+                    <span className="font-semibold text-emerald-300">
+                      {coutMensuelEstime.toFixed(0)} € / mois
+                    </span>{" "}
+                    (
+                    <span className="font-semibold text-emerald-300">
+                      {coutAnnuelEstime.toFixed(0)} € / an
+                    </span>
+                    )
+                  </p>
+                  <p className="text-xs text-slate-400">
+                    Cette estimation correspond à un usage pédagogique régulier
+                    des enseignants et des élèves.
+                  </p>
+                </div>
+
+                <div className="space-y-1">
+                  <p className="text-xs font-semibold text-emerald-200 uppercase">
+                    Plafond & facturation réelle
+                  </p>
+                  <p className="text-sm text-slate-100">
+                    🔐 Plafond IA choisi :{" "}
+                    <span className="font-semibold text-emerald-300">
+                      {plafondMensuel.toFixed(0)} € / mois
+                    </span>
+                    <br />
+                    📌 Facturation simulée :{" "}
+                    <span className="font-semibold text-emerald-300">
+                      {coutMensuelFacture.toFixed(0)} € / mois
+                    </span>{" "}
+                    (
+                    <span className="font-semibold text-emerald-300">
+                      {coutAnnuelFacture.toFixed(0)} € / an
+                    </span>
+                    )
+                  </p>
+                  <p className="text-[11px] text-slate-400">
+                    Si la consommation estimée dépasse le plafond, vous restez
+                    facturé au maximum au montant du plafond. EleveAI ajuste les
+                    usages pour rester dans l&apos;enveloppe décidée.
+                  </p>
+                </div>
+              </div>
+
+              {/* Par élève / par prof */}
+              <div className="mt-2 grid gap-3 sm:grid-cols-2 text-sm">
+                <div className="space-y-1">
+                  <p className="text-xs font-semibold text-emerald-200 uppercase">
+                    Répartition par élève / professeur (estimation)
+                  </p>
+                  <p className="text-sm text-slate-100">
+                    👨‍🎓 ≈{" "}
+                    <span className="font-semibold text-emerald-300">
+                      {Number.isFinite(coutParEleve)
+                        ? coutParEleve.toFixed(2)
+                        : "–"}{" "}
+                      € / élève / an
+                    </span>
+                    <br />
+                    👨‍🏫 ≈{" "}
+                    <span className="font-semibold text-emerald-300">
+                      {Number.isFinite(coutParProf)
+                        ? coutParProf.toFixed(2)
+                        : "–"}{" "}
+                      € / prof / an
+                    </span>
+                  </p>
+                </div>
+              </div>
+            </div>
+
             {/* CTA contact */}
             <div className="pt-4 border-t border-slate-700 mt-4">
               <p className="text-sm text-slate-200/90 mb-2">
-                Pour recevoir un devis détaillé ou échanger sur l&apos;adaptation de ce
-                dispositif à votre établissement, vous pouvez répondre au mail qui vous
-                a transmis ce lien ou écrire à :
+                Pour recevoir un devis détaillé ou échanger sur l&apos;adaptation
+                de ce dispositif à votre établissement, vous pouvez répondre au
+                mail qui vous a transmis ce lien ou écrire à :
               </p>
               <p className="text-sm font-semibold text-emerald-300">
-                Frederic.Lacoste [at] ac-reunion.fr
+                Frederic.acoste [at] ac-reunion.fr
               </p>
             </div>
           </section>
