@@ -84,8 +84,8 @@ export default function SponsorsPage() {
           </p>
 
           <ul className="text-sm sm:text-base text-gray-700 space-y-1">
-            <li>• <strong>80 %</strong> des fonds sont dédiés aux élèves : IA, hébergement, sécurité, contenus pédagogiques.</li>
-            <li>• <strong>20 %</strong> servent à rémunérer le développement technique et pédagogique.</li>
+            <li>• <strong>50 %</strong> des fonds sont dédiés aux élèves : IA, hébergement, sécurité, contenus pédagogiques.</li>
+            <li>• <strong>50 %</strong> servent à rémunérer le développement technique et pédagogique.</li>
           </ul>
 
           <p className="text-xs text-gray-500">
