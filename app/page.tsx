@@ -1,190 +1,258 @@
-// app/page.tsx
+"use client";
+
 import Link from "next/link";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-gradient-to-b from-sky-50 via-white to-slate-50">
-      <div className="mx-auto max-w-6xl px-4 py-10 space-y-16">
-        {/* HERO */}
-        <section className="grid gap-8 md:grid-cols-2 md:items-center">
-          {/* Colonne texte */}
-          <div className="space-y-5">
-            <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight text-slate-900">
-              L’IA qui aide les élèves à apprendre
-              <span className="block md:inline text-blue-700">
-                {" "}
-                pas à tricher.
+    <main className="min-h-screen bg-slate-950 text-slate-50">
+      {/* HERO */}
+      <section className="border-b border-slate-800">
+        <div className="mx-auto max-w-6xl px-4 py-16 lg:py-24 grid gap-10 lg:grid-cols-2 items-center">
+          <div>
+            <p className="inline-flex items-center rounded-full border border-emerald-500/50 bg-emerald-500/10 px-3 py-1 text-xs font-medium uppercase tracking-wide text-emerald-300 mb-4">
+              IA pédagogique · Eduscol + neurosciences · profs · élèves · parents
+            </p>
+
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight">
+              EleveAI, l’IA pédagogique
+              <span className="block text-emerald-400">
+                conçue pour la classe et la maison.
               </span>
             </h1>
 
-            <p className="text-sm md:text-base text-slate-700 leading-relaxed">
-              EleveAI accompagne les professeurs, les élèves et les parents avec
-              des outils simples pour mieux expliquer, s’entraîner et réviser,
-              dans le respect des programmes officiels du collège et du lycée.
+            <p className="mt-4 text-slate-300 text-base sm:text-lg max-w-xl">
+              Une plateforme d’IA pensée pour les professeurs, les élèves et les parents :
+              prompts guidés, exercices, cours, évaluations et accompagnement
+              des apprentissages, en respectant les programmes officiels et les
+              principes des neurosciences.
             </p>
 
-            {/* Boutons principaux */}
-            <div className="flex flex-col sm:flex-row flex-wrap gap-3">
+            <div className="mt-8 flex flex-wrap gap-3">
               <Link
-                href="/profs"
-                className="inline-flex items-center justify-center rounded-full border border-amber-300 bg-[#FFCC00] px-4 py-2 text-sm font-semibold text-black shadow-sm hover:brightness-95 transition"
+                href="/espace-prof"
+                className="inline-flex items-center justify-center rounded-lg bg-emerald-500 px-5 py-2.5 text-sm font-semibold text-slate-950 shadow-lg shadow-emerald-500/30 hover:bg-emerald-400 transition"
               >
-                👨‍🏫 Je suis prof
+                Espace prof
               </Link>
+
               <Link
-                href="/eleve"
-                className="inline-flex items-center justify-center rounded-full border border-emerald-300 bg-[#E5FFE5] px-4 py-2 text-sm font-semibold text-[#008800] shadow-sm hover:brightness-95 transition"
+                href="/espace-eleve"
+                className="inline-flex items-center justify-center rounded-lg border border-slate-700 bg-slate-900 px-5 py-2.5 text-sm font-semibold text-slate-50 hover:bg-slate-800 transition"
               >
-                🎒 Je suis élève
+                Espace élève
               </Link>
+
+              {/* 🔵 MODIFIÉ : lien correct vers /parents */}
               <Link
                 href="/parents"
-                className="inline-flex items-center justify-center rounded-full border border-sky-200 bg-[#E6F2FF] px-4 py-2 text-sm font-semibold text-[#0066CC] shadow-sm hover:brightness-95 transition"
+                className="inline-flex items-center justify-center rounded-lg border border-indigo-400/60 bg-indigo-500/10 px-5 py-2.5 text-xs sm:text-sm font-semibold text-indigo-200 hover:bg-indigo-500/15 transition"
               >
-                👨‍👩‍👧 Je suis parent
+                Espace parents
+              </Link>
+
+              <Link
+                href="/offre-pilote"
+                className="inline-flex items-center justify-center rounded-lg border border-amber-500/60 bg-amber-500/10 px-5 py-2.5 text-xs sm:text-sm font-semibold text-amber-300 hover:bg-amber-500/15 transition"
+              >
+                Devenir collège pilote
               </Link>
             </div>
 
-            <p className="text-[11px] md:text-xs text-slate-500 max-w-lg">
-              Projet créé par un professeur de mathématiques à La Réunion, avec
-              l’ambition de construire une IA éducative utile, accessible à
-              tous et respectueuse du travail des enseignants.
+            <p className="mt-4 text-xs text-slate-400">
+              Projet développé à La Réunion · Objectif : une solution simple et
+              accessible pour tous les collèges et lycées de France, en lien avec
+              les familles.
             </p>
           </div>
 
-          {/* Colonne carte explicative */}
-          <div className="rounded-2xl border border-slate-200 bg-gradient-to-br from-blue-50 to-green-50 p-5 sm:p-6 space-y-4 shadow-sm">
-            <h2 className="text-lg font-semibold text-slate-900">
-              Concrètement, EleveAI fait quoi ?
+          {/* Bloc “pour qui” */}
+          <div className="rounded-2xl border border-slate-800 bg-slate-900/40 p-6 sm:p-8 space-y-6">
+            <h2 className="text-xl font-semibold text-slate-100">
+              Une IA qui comprend les besoins de la classe… et de la maison
             </h2>
-            <ul className="space-y-2 text-sm text-slate-800">
-              <li>• Aide les profs à préparer des cours, exercices et prompts.</li>
-              <li>
-                • Guide les élèves dans leurs révisions sans fournir les devoirs
-                tout faits.
-              </li>
-              <li>
-                • Donne aux parents des repères pour accompagner leurs enfants.
-              </li>
-              <li>
-                • Propose des contenus clairs, structurés et adaptés au niveau
-                de chacun.
-              </li>
-            </ul>
 
-            <Link
-              href="/blog"
-              className="inline-flex items-center justify-center rounded-full border border-pink-200 bg-[#FFE6F3] px-4 py-2 text-sm font-semibold text-[#CC0088] shadow-sm hover:brightness-95 transition"
-            >
-              📝 Découvrir les articles du blog
-            </Link>
+            <div className="grid gap-4 sm:grid-cols-2">
+              <div className="rounded-xl bg-slate-900/80 border border-slate-800 p-4">
+                <p className="text-xs font-semibold text-emerald-300 uppercase tracking-wide">
+                  Pour les professeurs
+                </p>
+                <ul className="mt-2 space-y-1.5 text-sm text-slate-200">
+                  <li>• Génération de cours, activités et évaluations</li>
+                  <li>• Prompts guidés alignés Eduscol</li>
+                  <li>• Adaptations DYS et différenciation</li>
+                  <li>• Idées de séquences et projets</li>
+                </ul>
+              </div>
+
+              <div className="rounded-xl bg-slate-900/80 border border-slate-800 p-4">
+                <p className="text-xs font-semibold text-sky-300 uppercase tracking-wide">
+                  Pour les élèves
+                </p>
+                <ul className="mt-2 space-y-1.5 text-sm text-slate-200">
+                  <li>• Explications pas-à-pas</li>
+                  <li>• Exercices guidés et corrigés détaillés</li>
+                  <li>• Révisions ciblées et fiches synthèse</li>
+                  <li>• Aide à l’oral et aux examens</li>
+                </ul>
+              </div>
+            </div>
+
+            {/* 🔵 Ajout bloc Parents */}
+            <div className="rounded-xl bg-slate-900/80 border border-indigo-500/40 p-4">
+              <p className="text-xs font-semibold text-indigo-200 uppercase tracking-wide">
+                Pour les parents
+              </p>
+              <ul className="mt-2 space-y-1.5 text-sm text-slate-200">
+                <li>• Comprendre ce que l’enfant doit apprendre (Eduscol)</li>
+                <li>• Aider sans faire les devoirs à sa place</li>
+                <li>• Conseils pour organiser le travail à la maison</li>
+                <li>• Réassurance : cadre IA sécurisé et pédagogique</li>
+              </ul>
+            </div>
+
+            <p className="text-xs text-slate-400">
+              Chaque outil suit les principes des neurosciences : progressivité,
+              répétition espacée, alternance activités / exemples, test actif.
+            </p>
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* NOTRE PHILOSOPHIE */}
-        <section className="space-y-6">
-          <h2 className="text-2xl font-bold text-slate-900">
-            Notre philosophie
+      {/* SECTION VALEURS */}
+      <section className="border-b border-slate-800 bg-slate-950">
+        <div className="mx-auto max-w-6xl px-4 py-12 sm:py-16 space-y-8">
+          <h2 className="text-2xl sm:text-3xl font-semibold text-slate-50">
+            Ce qui rend EleveAI différent
           </h2>
 
-          <div className="grid gap-5 md:grid-cols-2">
-            <div className="rounded-2xl border border-slate-200 bg-white p-5 space-y-2 shadow-sm">
-              <h3 className="text-sm font-semibold text-slate-900">
-                1. L’humain d’abord
+          <div className="grid gap-6 md:grid-cols-3">
+            <div className="rounded-2xl border border-slate-800 bg-slate-900/60 p-5">
+              <h3 className="text-sm font-semibold text-emerald-300 uppercase tracking-wide">
+                Aligné sur Eduscol
               </h3>
-              <p className="text-sm text-slate-700 leading-relaxed">
-                EleveAI ne remplace pas le professeur. L’IA aide à gagner du temps
-                et à mieux expliquer, mais le cœur de la pédagogie reste
-                l’enseignant et la relation avec les élèves.
+              <p className="mt-2 text-sm text-slate-200">
+                Les prompts, explications et activités suivent les programmes
+                officiels pour chaque niveau du collège et du lycée.
               </p>
             </div>
 
-            <div className="rounded-2xl border border-slate-200 bg-white p-5 space-y-2 shadow-sm">
-              <h3 className="text-sm font-semibold text-slate-900">
-                2. Pas de triche
+            <div className="rounded-2xl border border-slate-800 bg-slate-900/60 p-5">
+              <h3 className="text-sm font-semibold text-sky-300 uppercase tracking-wide">
+                Basé sur les neurosciences
               </h3>
-              <p className="text-sm text-slate-700 leading-relaxed">
-                Les outils sont pensés pour que l’élève réfléchisse, réponde,
-                se trompe et progresse. EleveAI pose des questions, propose des
-                pistes, corrige et explique au lieu de faire les devoirs à sa place.
+              <p className="mt-2 text-sm text-slate-200">
+                Notion par notion, exemples gradués, reformulation, rappel actif,
+                changement de modalité : une pédagogie scientifiquement étayée.
               </p>
             </div>
 
-            <div className="rounded-2xl border border-slate-200 bg-white p-5 space-y-2 shadow-sm">
-              <h3 className="text-sm font-semibold text-slate-900">
-                3. Respect des programmes
+            <div className="rounded-2xl border border-slate-800 bg-slate-900/60 p-5">
+              <h3 className="text-sm font-semibold text-amber-300 uppercase tracking-wide">
+                Né dans une vraie classe
               </h3>
-              <p className="text-sm text-slate-700 leading-relaxed">
-                Les contenus s’appuient sur les programmes officiels (Eduscol)
-                et sur l’expérience de terrain d’enseignants. Objectif : rester
-                aligné avec ce qui est réellement attendu en classe et au bac.
-              </p>
-            </div>
-
-            <div className="rounded-2xl border border-slate-200 bg-white p-5 space-y-2 shadow-sm">
-              <h3 className="text-sm font-semibold text-slate-900">
-                4. Accessible et concret
-              </h3>
-              <p className="text-sm text-slate-700 leading-relaxed">
-                EleveAI vise à être simple à utiliser, même pour ceux qui ne se
-                sentent pas “très à l’aise avec le numérique”. Des exemples
-                concrets, des explications courtes, des chemins guidés.
+              <p className="mt-2 text-sm text-slate-200">
+                Conçu à La Réunion par un professeur, testé avec des élèves,
+                pensé pour les besoins réels de la classe et des familles.
               </p>
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* POUR QUI ? */}
-        <section className="space-y-6">
-          <h2 className="text-2xl font-bold text-slate-900">Pour qui ?</h2>
-
-          <div className="grid gap-5 md:grid-cols-3">
-            <div className="rounded-2xl border border-slate-200 bg-white p-5 space-y-2 shadow-sm">
-              <h3 className="text-sm font-semibold text-slate-900">Professeurs</h3>
-              <p className="text-sm text-slate-700 leading-relaxed">
-                Aide à la rédaction de prompts, préparation de séances, exercices,
-                évaluations et supports adaptés à chaque classe.
-              </p>
-              <Link
-                href="/profs"
-                className="text-xs font-semibold text-blue-700 hover:underline"
-              >
-                Accéder à l’espace prof →
-              </Link>
-            </div>
-
-            <div className="rounded-2xl border border-slate-200 bg-white p-5 space-y-2 shadow-sm">
-              <h3 className="text-sm font-semibold text-slate-900">Élèves</h3>
-              <p className="text-sm text-slate-700 leading-relaxed">
-                Révisions guidées, préparation de contrôles, défis progressifs :
-                un copilote pour apprendre à mieux travailler, pas un raccourci.
-              </p>
-              <Link
-                href="/eleve"
-                className="text-xs font-semibold text-green-700 hover:underline"
-              >
-                Accéder à l’espace élève →
-              </Link>
-            </div>
-
-            <div className="rounded-2xl border border-slate-200 bg-white p-5 space-y-2 shadow-sm">
-              <h3 className="text-sm font-semibold text-slate-900">
-                Parents & établissements
-              </h3>
-              <p className="text-sm text-slate-700 leading-relaxed">
-                Comprendre ce que fait l’IA, comment l’utiliser en confiance, et
-                comment l’intégrer dans un projet d’établissement.
-              </p>
-              <Link
-                href="/parents"
-                className="text-xs font-semibold text-blue-700 hover:underline"
-              >
-                Accéder à l’espace parents →
-              </Link>
-            </div>
+      {/* SECTION PROF / ELEVE / PARENTS détail */}
+      <section className="border-b border-slate-800 bg-slate-950">
+        <div className="mx-auto max-w-6xl px-4 py-12 sm:py-16 grid gap-10 lg:grid-cols-3">
+          {/* PROF */}
+          <div className="space-y-4">
+            <h2 className="text-lg sm:text-xl font-semibold text-slate-50">
+              Pour les professeurs : un copilote pédagogique
+            </h2>
+            <ul className="space-y-2 text-sm text-slate-200">
+              <li>• Création d'activités, cours et évaluations</li>
+              <li>• Prompts guidés par discipline</li>
+              <li>• Différenciation et variantes automatiques</li>
+              <li>• Analyse des erreurs fréquentes</li>
+            </ul>
+            <Link
+              href="/espace-prof"
+              className="inline-flex mt-4 items-center justify-center rounded-lg bg-emerald-500 px-4 py-2 text-sm font-semibold text-slate-950 hover:bg-emerald-400 transition"
+            >
+              Découvrir l’espace prof
+            </Link>
           </div>
-        </section>
-      </div>
+
+          {/* ELEVE */}
+          <div className="space-y-4">
+            <h2 className="text-lg sm:text-xl font-semibold text-slate-50">
+              Pour les élèves : comprendre et progresser
+            </h2>
+            <ul className="space-y-2 text-sm text-slate-200">
+              <li>• Explications adaptées au niveau réel</li>
+              <li>• Exercices guidés avec indices</li>
+              <li>• Fiches de révision personnalisées</li>
+              <li>• Préparation aux oraux</li>
+            </ul>
+            <Link
+              href="/espace-eleve"
+              className="inline-flex mt-4 items-center justify-center rounded-lg border border-slate-700 bg-slate-900 px-4 py-2 text-sm font-semibold text-slate-50 hover:bg-slate-800 transition"
+            >
+              Découvrir l’espace élève
+            </Link>
+          </div>
+
+          {/* PARENTS */}
+          <div className="space-y-4">
+            <h2 className="text-lg sm:text-xl font-semibold text-slate-50">
+              Pour les parents : aider sans stress
+            </h2>
+            <ul className="space-y-2 text-sm text-slate-200">
+              <li>• Comprendre le programme de votre enfant</li>
+              <li>• Conseils pour l’aider sans faire à sa place</li>
+              <li>• Questions utiles à poser pour l’aider à réfléchir</li>
+              <li>• Organisation simple des devoirs et révisions</li>
+            </ul>
+
+            {/* 🔵 Lien correct /parents */}
+            <Link
+              href="/parents"
+              className="inline-flex mt-4 items-center justify-center rounded-lg border border-indigo-400 bg-slate-900 px-4 py-2 text-sm font-semibold text-indigo-200 hover:bg-slate-800 transition"
+            >
+              Découvrir l’espace parents
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* SECTION FONDATEUR – humble */}
+      <section className="bg-slate-950">
+        <div className="mx-auto max-w-4xl px-4 py-12 sm:py-16">
+          <div className="rounded-2xl border border-slate-800 bg-slate-900/60 p-6 sm:p-8">
+            <p className="text-xs font-semibold uppercase tracking-wide text-slate-400 mb-2">
+              À propos
+            </p>
+            <h2 className="text-xl sm:text-2xl font-semibold text-slate-50">
+              Un outil créé par un enseignant de terrain
+            </h2>
+
+            <p className="mt-3 text-sm text-slate-200">
+              “J’enseigne depuis de nombreuses années au lycée, à La Réunion.
+              J’ai créé EleveAI pour aider mes propres élèves à comprendre plus
+              facilement, et pour alléger la charge de travail des enseignants.”
+            </p>
+
+            <p className="mt-2 text-sm text-slate-200">
+              Aujourd’hui, je partage cet outil avec l’ensemble de la communauté
+              éducative. EleveAI aide les professeurs, les élèves et les parents
+              à avancer ensemble, dans un cadre simple, scientifique et
+              pédagogique.”
+            </p>
+
+            <p className="mt-3 text-sm font-medium text-emerald-300">
+              — Frédéric, professeur de mathématiques et créateur d’EleveAI
+            </p>
+          </div>
+        </div>
+      </section>
     </main>
   );
 }

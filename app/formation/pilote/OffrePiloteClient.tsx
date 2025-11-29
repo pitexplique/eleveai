@@ -75,9 +75,7 @@ export default function OffrePiloteClient() {
       }
     } catch (err) {
       console.error(err);
-      setErreur(
-        "Impossible de vérifier le mot de passe (problème réseau ?).",
-      );
+      setErreur("Impossible de vérifier le mot de passe (problème réseau ?).");
       setAccesOK(false);
     } finally {
       setLoading(false);
@@ -284,10 +282,47 @@ export default function OffrePiloteClient() {
               </ul>
             </div>
 
-            {/* 6. Simulation de coût avec plafond mensuel */}
+            {/* 6. Projet éducatif, social et solidaire */}
+            <div className="space-y-2">
+              <h3 className="text-lg font-semibold text-emerald-200">
+                6. Un projet éducatif, social et solidaire
+              </h3>
+              <p className="text-sm text-slate-200/80">
+                EleveAI n’est pas uniquement un outil pédagogique. C’est aussi un{" "}
+                <span className="font-semibold">
+                  projet réunionnais à impact social
+                </span>{" "}
+                qui vise à former et à intégrer des jeunes dans les métiers du
+                numérique et de l’intelligence artificielle éducative.
+              </p>
+              <ul className="list-disc pl-5 text-sm text-slate-200/80 space-y-1">
+                <li>
+                  Impliquer progressivement des jeunes dans la programmation, la
+                  création de contenus et le design pédagogique.
+                </li>
+                <li>
+                  Développer des compétences locales en IA éducative à La Réunion.
+                </li>
+                <li>
+                  Construire des partenariats avec les établissements qui le
+                  souhaitent (ateliers, projets, découverte des métiers).
+                </li>
+              </ul>
+              <p className="text-sm text-slate-200/80">
+                EleveAI se positionne ainsi comme une structure à vocation{" "}
+                <span className="font-semibold">
+                  économique, sociale et solidaire
+                </span>
+                : une partie des revenus est réinvestie dans la pédagogie, la
+                formation et l&apos;insertion professionnelle des jeunes sur le
+                territoire.
+              </p>
+            </div>
+
+            {/* 7. Simulation de coût avec plafond mensuel */}
             <div className="space-y-3 rounded-2xl border border-emerald-500/40 bg-slate-950/40 p-4 sm:p-5">
               <h3 className="text-lg font-semibold text-emerald-200">
-                6. Simulation indicative pour votre établissement
+                7. Simulation indicative pour votre établissement
               </h3>
               <p className="text-xs sm:text-sm text-slate-300">
                 Cette simulation est{" "}
@@ -478,3 +513,4 @@ export default function OffrePiloteClient() {
     </main>
   );
 }
+
