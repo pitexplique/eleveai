@@ -29,16 +29,20 @@ export default function Header() {
 
         {/* MENU DESKTOP */}
         <div className="hidden items-center gap-6 md:flex">
-          <Link href="/espace-prof" className="text-sm text-slate-200 hover:text-emerald-300">
+          <Link href="/profs" className="text-sm text-slate-200 hover:text-emerald-300">
             Profs
           </Link>
 
-          <Link href="/espace-eleve" className="text-sm text-slate-200 hover:text-sky-300">
+          <Link href="/eleve" className="text-sm text-slate-200 hover:text-sky-300">
             Élèves
           </Link>
 
           <Link href="/parents" className="text-sm text-slate-200 hover:text-indigo-300">
             Parents
+          </Link>
+
+          <Link href="/blog" className="text-sm text-slate-200 hover:text-indigo-300">
+            Blog
           </Link>
 
           {/* 🔵 Nouveau lien Administration */}
@@ -56,13 +60,6 @@ export default function Header() {
             Collège pilote
           </Link>
 
-          {/* BOUTON CONNEXION */}
-          <Link
-            href="/connexion"
-            className="inline-flex items-center rounded-lg bg-emerald-500 px-3 py-1.5 text-sm font-semibold text-slate-900 hover:bg-emerald-400"
-          >
-            Se connecter
-          </Link>
         </div>
 
         {/* MENU MOBILE - BOUTON */}
@@ -100,7 +97,7 @@ export default function Header() {
           <div className="mx-auto max-w-6xl px-4 py-3 space-y-2">
 
             <Link
-              href="/espace-prof"
+              href="/profs"
               onClick={() => setOpen(false)}
               className="block rounded-md px-2 py-2 text-sm text-slate-100 hover:bg-slate-900"
             >
@@ -108,7 +105,7 @@ export default function Header() {
             </Link>
 
             <Link
-              href="/espace-eleve"
+              href="/eleve"
               onClick={() => setOpen(false)}
               className="block rounded-md px-2 py-2 text-sm text-slate-100 hover:bg-slate-900"
             >
@@ -132,24 +129,7 @@ export default function Header() {
               Administration – direction & secrétariat
             </Link>
 
-            <Link
-              href="/offre-pilote"
-              onClick={() => setOpen(false)}
-              className="block rounded-md px-2 py-2 text-sm text-slate-100 hover:bg-slate-900"
-            >
-              Devenir collège pilote
-            </Link>
 
-            {/* CTA mobile */}
-            <div className="pt-2">
-              <Link
-                href="/connexion"
-                onClick={() => setOpen(false)}
-                className="block w-full rounded-lg bg-emerald-500 px-3 py-2 text-center text-sm font-semibold text-slate-900 hover:bg-emerald-400"
-              >
-                Se connecter
-              </Link>
-            </div>
           </div>
         </div>
       )}
