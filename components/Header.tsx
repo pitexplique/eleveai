@@ -59,6 +59,12 @@ export default function Header() {
           >
             Collège pilote
           </Link>
+           <Link
+            href="/sponsors"
+            className="text-sm text-slate-200 hover:text-amber-300"
+          >
+            Partenaires-sponsor
+          </Link>
 
         </div>
 

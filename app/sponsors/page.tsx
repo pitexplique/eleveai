@@ -159,7 +159,7 @@ export default function SponsorsPage() {
 
           <p className="text-sm sm:text-base text-gray-700">
             Avec un soutien institutionnel, EleveAI peut devenir un 
-            <strong>outil pilote pour l’académie de La Réunion</strong>.
+            <strong>outil pilote pour</strong>.
           </p>
         </section>
 
