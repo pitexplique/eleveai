@@ -2,14 +2,18 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { usePathname } from "next/navigation";
+
 
 export default function Header() {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
+  const isActive = (href: string) => pathname.startsWith(href);
+
 
   return (
     <header className="sticky top-0 z-40 border-b border-slate-800 bg-slate-950/90 backdrop-blur">
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:py-4">
-        
         {/* LOGO */}
         <div className="flex items-center gap-2">
           <Link href="/" className="flex items-center gap-2">
@@ -21,7 +25,7 @@ export default function Header() {
                 EleveAI
               </span>
               <span className="text-[10px] sm:text-xs text-slate-400">
-                IA pédagogique, Eduscol
+                IA pédagogique · Eduscol + neurosciences
               </span>
             </div>
           </Link>
@@ -29,42 +33,82 @@ export default function Header() {
 
         {/* MENU DESKTOP */}
         <div className="hidden items-center gap-6 md:flex">
-          <Link href="/espace-profs" className="text-sm text-slate-200 hover:text-emerald-300">
-            Profs
-          </Link>
+        <Link
+          href="/espace-profs"
+          className={
+            isActive("/espace-profs")
+              ? "border border-sky-400 rounded-md px-2 py-1 text-sky-300"
+              : "text-sm text-slate-200 hover:text-emerald-300"
+          }
+        >
+          Profs
+        </Link>
 
-          <Link href="/espace-eleves" className="text-sm text-slate-200 hover:text-sky-300">
-            Élèves
-          </Link>
+        <Link
+          href="/espace-eleves"
+          className={
+            isActive("/espace-eleves")
+              ? "border border-sky-400 rounded-md px-2 py-1 text-sky-300"
+              : "text-sm text-slate-200 hover:text-sky-300"
+          }
+        >
+          Élèves
+        </Link>
 
-          <Link href="/parents" className="text-sm text-slate-200 hover:text-indigo-300">
-            Parents
-          </Link>
+        <Link
+          href="/parents"
+          className={
+            isActive("/parents")
+              ? "border border-sky-400 rounded-md px-2 py-1 text-sky-300"
+              : "text-sm text-slate-200 hover:text-indigo-300"
+          }
+        >
+          Parents
+        </Link>
 
-          <Link href="/blog" className="text-sm text-slate-200 hover:text-indigo-300">
-            Blog
-          </Link>
+        <Link
+          href="/blog"
+          className={
+            isActive("/blog")
+              ? "border border-sky-400 rounded-md px-2 py-1 text-sky-300"
+              : "text-sm text-slate-200 hover:text-indigo-300"
+          }
+        >
+          Blog
+        </Link>
 
-          {/* 🔵 Nouveau lien Administration */}
-          <Link
-            href="/espace-administration"
-            className="text-sm text-slate-200 hover:text-fuchsia-300"
-          >
-            Administration
-          </Link>
+        <Link
+          href="/espace-administration"
+          className={
+            isActive("/espace-administration")
+              ? "border border-sky-400 rounded-md px-2 py-1 text-sky-300"
+              : "text-sm text-slate-200 hover:text-fuchsia-300"
+          }
+        >
+          Administration
+        </Link>
 
-          <Link
-            href="/offre-pilote"
-            className="text-sm text-slate-200 hover:text-amber-300"
-          >
-            Collège pilote
-          </Link>
-           <Link
-            href="/sponsors"
-            className="text-sm text-slate-200 hover:text-amber-300"
-          >
-            Partenaires-sponsor
-          </Link>
+        <Link
+          href="/offre-pilote"
+          className={
+            isActive("/offre-pilote")
+              ? "border border-sky-400 rounded-md px-2 py-1 text-sky-300"
+              : "text-sm text-slate-200 hover:text-amber-300"
+          }
+        >
+          Collège pilote
+        </Link>
+
+        <Link
+          href="/sponsors"
+          className={
+            isActive("/sponsors")
+              ? "border border-sky-400 rounded-md px-2 py-1 text-sky-300"
+              : "text-sm text-slate-200 hover:text-amber-300"
+          }
+        >
+          Partenaires-sponsor
+        </Link>
 
         </div>
 
@@ -101,7 +145,6 @@ export default function Header() {
       {open && (
         <div className="border-t border-slate-800 bg-slate-950 md:hidden">
           <div className="mx-auto max-w-6xl px-4 py-3 space-y-2">
-
             <Link
               href="/espace-profs"
               onClick={() => setOpen(false)}
@@ -126,7 +169,14 @@ export default function Header() {
               Parents – accompagner son enfant
             </Link>
 
-            {/* 🔵 Nouveau lien Administration dans le menu mobile */}
+            <Link
+              href="/blog"
+              onClick={() => setOpen(false)}
+              className="block rounded-md px-2 py-2 text-sm text-slate-100 hover:bg-slate-900"
+            >
+              Blog – idées & exemples IA
+            </Link>
+
             <Link
               href="/espace-administration"
               onClick={() => setOpen(false)}
@@ -135,7 +185,21 @@ export default function Header() {
               Administration – direction & secrétariat
             </Link>
 
+            <Link
+              href="/offre-pilote"
+              onClick={() => setOpen(false)}
+              className="block rounded-md px-2 py-2 text-sm text-slate-100 hover:bg-slate-900"
+            >
+              Collège pilote – devenir établissement test
+            </Link>
 
+            <Link
+              href="/sponsors"
+              onClick={() => setOpen(false)}
+              className="block rounded-md px-2 py-2 text-sm text-slate-100 hover:bg-slate-900"
+            >
+              Partenaires & sponsors
+            </Link>
           </div>
         </div>
       )}

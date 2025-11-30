@@ -89,16 +89,26 @@ export default function OffrePiloteClient() {
         <header className="space-y-3">
           <p className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-800/80 text-xs font-semibold text-emerald-300 border border-slate-700">
             <span>🔒</span>
-            <span>Accès réservé – Offre Établissement Pilote EleveAI</span>
+            <span>Accès réservé – Offre Pilote & Formation EleveAI</span>
           </p>
           <h1 className="text-3xl sm:text-4xl font-extrabold text-emerald-300">
             Espace confidentiel – Chefs d’établissement
           </h1>
           <p className="text-sm sm:text-base text-slate-200/80 max-w-2xl">
-            Cette page présente l&apos;offre EleveAI pour les établissements
-            pilotes. Elle est réservée aux équipes de direction et ne doit pas
-            être diffusée publiquement. Merci de ne pas partager le contenu sans
-            accord préalable.
+            Cet espace présente l&apos;offre EleveAI pour les{" "}
+            <span className="font-semibold">établissements pilotes</span> :
+            accompagnement, formations IA et mise en place de vos espaces
+            EleveAI (profs, élèves, vie scolaire). Il est réservé aux équipes
+            de direction et ne doit pas être diffusé publiquement.
+          </p>
+          <p className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900/80 text-[11px] font-medium text-sky-200 border border-slate-700">
+            <span>🧠</span>
+            <span>
+              Cette offre applique les programmes{" "}
+              <span className="font-semibold">Eduscol</span> et s&apos;appuie
+              sur les <span className="font-semibold">neurosciences</span> de
+              l&apos;apprentissage.
+            </span>
           </p>
         </header>
 
@@ -156,14 +166,18 @@ export default function OffrePiloteClient() {
             </p>
 
             <h2 className="text-2xl font-bold text-emerald-300">
-              Programme d&apos;accompagnement – Établissement Pilote EleveAI
+              Programme de formation & accompagnement – Établissement Pilote
+              EleveAI
             </h2>
 
             <p className="text-sm text-slate-200/90">
-              Ce document présente la proposition EleveAI pour un accompagnement
-              structuré de votre établissement autour de l&apos;intelligence
-              artificielle : pédagogie, prévention de la triche, formation des
-              équipes et mise en place d&apos;espaces IA sécurisés.
+              Ce document présente la proposition EleveAI pour un{" "}
+              <span className="font-semibold">
+                accompagnement structuré de votre établissement
+              </span>{" "}
+              autour de l&apos;intelligence artificielle : pédagogie, prévention
+              de la triche, formations des équipes et mise en place d&apos;espaces
+              IA sécurisés pour les enseignants, les élèves et la vie scolaire.
             </p>
 
             {/* 1. Projet d'établissement */}
@@ -255,11 +269,12 @@ export default function OffrePiloteClient() {
               <ul className="list-disc pl-5 text-sm text-slate-200/80 space-y-1">
                 <li>Un espace IA élèves (révisions, remédiation, projets).</li>
                 <li>
-                  Un espace IA enseignants (préparation, mutualisation).
+                  Un espace IA enseignants (préparation, mutualisation,
+                  prompts).
                 </li>
                 <li>
-                  Une bibliothèque de prompts adaptée à vos niveaux et vos
-                  disciplines.
+                  Une bibliothèque de prompts adaptée à vos niveaux, matières et
+                  profils d&apos;élèves (y compris adaptations DYS).
                 </li>
               </ul>
             </div>
@@ -282,10 +297,34 @@ export default function OffrePiloteClient() {
               </ul>
             </div>
 
-            {/* 6. Projet éducatif, social et solidaire */}
+            {/* 6. Format des formations */}
             <div className="space-y-2">
               <h3 className="text-lg font-semibold text-emerald-200">
-                6. Un projet éducatif, social et solidaire
+                6. Format des formations & modalités pratiques
+              </h3>
+              <p className="text-sm text-slate-200/80">
+                Les formats peuvent être adaptés à votre réalité d&apos;établissement :
+              </p>
+              <ul className="list-disc pl-5 text-sm text-slate-200/80 space-y-1">
+                <li>
+                  Demi-journées ou journées complètes en présentiel (sur place ou
+                  à distance selon le contexte).
+                </li>
+                <li>
+                  Sessions thématiques : découverte de l&apos;IA, prompts pour les
+                  profs, sécurité / plagiat, usages élèves.
+                </li>
+                <li>
+                  Ateliers pratiques par discipline (maths, français, langues,
+                  enseignement scientifique…).
+                </li>
+              </ul>
+            </div>
+
+            {/* 7. Projet éducatif, social et solidaire */}
+            <div className="space-y-2">
+              <h3 className="text-lg font-semibold text-emerald-200">
+                7. Un projet éducatif, social et solidaire
               </h3>
               <p className="text-sm text-slate-200/80">
                 EleveAI n’est pas uniquement un outil pédagogique. C’est aussi un{" "}
@@ -293,7 +332,7 @@ export default function OffrePiloteClient() {
                   projet réunionnais à impact social
                 </span>{" "}
                 qui vise à former et à intégrer des jeunes dans les métiers du
-                numérique et de l’intelligence artificielle éducative.
+                numérique et de l&apos;intelligence artificielle éducative.
               </p>
               <ul className="list-disc pl-5 text-sm text-slate-200/80 space-y-1">
                 <li>
@@ -312,17 +351,17 @@ export default function OffrePiloteClient() {
                 EleveAI se positionne ainsi comme une structure à vocation{" "}
                 <span className="font-semibold">
                   économique, sociale et solidaire
-                </span>
+                </span>{" "}
                 : une partie des revenus est réinvestie dans la pédagogie, la
                 formation et l&apos;insertion professionnelle des jeunes sur le
                 territoire.
               </p>
             </div>
 
-            {/* 7. Simulation de coût avec plafond mensuel */}
+            {/* 8. Simulation de coût avec plafond mensuel */}
             <div className="space-y-3 rounded-2xl border border-emerald-500/40 bg-slate-950/40 p-4 sm:p-5">
               <h3 className="text-lg font-semibold text-emerald-200">
-                7. Simulation indicative pour votre établissement
+                8. Simulation indicative pour votre établissement
               </h3>
               <p className="text-xs sm:text-sm text-slate-300">
                 Cette simulation est{" "}
@@ -499,9 +538,9 @@ export default function OffrePiloteClient() {
             {/* CTA contact */}
             <div className="pt-4 border-t border-slate-700 mt-4">
               <p className="text-sm text-slate-200/90 mb-2">
-                Pour recevoir un devis détaillé ou échanger sur l&apos;adaptation
-                de ce dispositif à votre établissement, vous pouvez répondre au
-                mail qui vous a transmis ce lien ou écrire à :
+                Pour recevoir un devis détaillé ou échanger sur
+                l&apos;adaptation de ce dispositif à votre établissement, vous
+                pouvez répondre au mail qui vous a transmis ce lien ou écrire à :
               </p>
               <p className="text-sm font-semibold text-emerald-300">
                 Frederic.Lacoste [at] ac-reunion.fr
@@ -513,4 +552,3 @@ export default function OffrePiloteClient() {
     </main>
   );
 }
-
