@@ -49,12 +49,12 @@ export default function Home() {
                 Espace parents
               </Link>
 
-              <Link
+              {/* <Link
                 href="/offre-pilote"
                 className="inline-flex items-center justify-center rounded-lg border border-amber-600 bg-amber-100 sm:bg-amber-500/10 px-5 py-2.5 text-xs sm:text-sm font-semibold text-amber-700 sm:text-amber-300 transition"
               >
                 Devenir collège pilote
-              </Link>
+              </Link>*/}
             </div>
 
           </div>
@@ -126,7 +126,7 @@ export default function Home() {
 
             <div className="rounded-2xl border border-slate-300 sm:border-slate-800 bg-white sm:bg-slate-900/60 p-5">
               <h3 className="text-sm font-semibold text-blue-700 sm:text-sky-300 uppercase tracking-wide">
-                Basé neurosciences
+                Option : neurosciences
               </h3>
               <p className="mt-2 text-sm text-slate-900 sm:text-slate-200">
                 Progressivité, exemples gradués, rappel actif, explications adaptées.
@@ -213,14 +213,15 @@ export default function Home() {
             <p className="text-xs font-semibold uppercase tracking-wide text-slate-600 sm:text-slate-400 mb-2">
               À propos
             </p>
-            <h2 className="text-xl sm:text-2xl font-semibold text-slate-900 sm:text-slate-50">
-              Un outil créé par un enseignant de terrain
-            </h2>
 
-            <p className="mt-3 text-sm text-slate-800 sm:text-slate-200">
+            {/*<h2 className="text-xl sm:text-2xl font-semibold text-slate-900 sm:text-slate-50">
+              Un outil créé par un enseignant de terrain
+            </h2> */}
+
+            {/*<p className="mt-3 text-sm text-slate-800 sm:text-slate-200">
               “J’enseigne depuis de nombreuses années. EleveAI est né d’un besoin :
               rendre l’apprentissage plus simple, plus clair et plus accessible.”
-            </p>
+            </p> */}
 
             <p className="mt-2 text-sm text-slate-800 sm:text-slate-200">
               L’objectif est d’offrir un accompagnement fiable et pédagogique
@@ -228,7 +229,7 @@ export default function Home() {
             </p>
 
             <p className="mt-3 text-sm font-medium text-emerald-700 sm:text-emerald-300">
-              — Frédéric, professeur et créateur d’EleveAI
+              — Frédéric, enseignant et créateur d’EleveAI
             </p>
           </div>
         </div>
