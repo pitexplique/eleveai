@@ -21,7 +21,7 @@ export default function Header() {
                 EleveAI
               </span>
               <span className="text-[10px] sm:text-xs text-slate-400">
-                Eduscol · neurosciences · IA pédagogique
+                IA pédagogique, Eduscol
               </span>
             </div>
           </Link>

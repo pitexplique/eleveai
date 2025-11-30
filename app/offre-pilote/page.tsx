@@ -21,7 +21,7 @@ export default function OffrePilotePage() {
             EleveAI propose une phase pilote pour les collèges et lycées
             souhaitant intégrer l’IA pédagogique dans un cadre
             <span className="font-semibold text-slate-100">
-              {" "}sécurisé, conforme Eduscol et appuyé sur les neurosciences,
+              {" "}sécurisé, conforme Eduscol ,
             </span>{" "}
             avec accompagnement des équipes.
           </p>
