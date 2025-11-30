@@ -29,11 +29,11 @@ export default function Header() {
 
         {/* MENU DESKTOP */}
         <div className="hidden items-center gap-6 md:flex">
-          <Link href="/profs" className="text-sm text-slate-200 hover:text-emerald-300">
+          <Link href="/espace-profs" className="text-sm text-slate-200 hover:text-emerald-300">
             Profs
           </Link>
 
-          <Link href="/eleve" className="text-sm text-slate-200 hover:text-sky-300">
+          <Link href="/espace-eleves" className="text-sm text-slate-200 hover:text-sky-300">
             Élèves
           </Link>
 
@@ -97,7 +97,7 @@ export default function Header() {
           <div className="mx-auto max-w-6xl px-4 py-3 space-y-2">
 
             <Link
-              href="/profs"
+              href="/espace-profs"
               onClick={() => setOpen(false)}
               className="block rounded-md px-2 py-2 text-sm text-slate-100 hover:bg-slate-900"
             >
@@ -105,7 +105,7 @@ export default function Header() {
             </Link>
 
             <Link
-              href="/eleve"
+              href="/espace-eleves"
               onClick={() => setOpen(false)}
               className="block rounded-md px-2 py-2 text-sm text-slate-100 hover:bg-slate-900"
             >
