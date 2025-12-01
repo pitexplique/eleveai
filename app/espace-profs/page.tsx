@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useMemo, useState } from "react";
@@ -133,6 +132,12 @@ export default function ProfsPage() {
       );
     }
 
+    if (!form.neuro) {
+      s.push(
+        "Tu peux activer les principes des neurosciences pour structurer davantage la réponse (rappels, étapes, questions de vérification, récapitulatif).",
+      );
+    }
+
     if (s.length === 0) {
       s.push(
         "Ton prompt est déjà bien structuré. Tu peux encore l’améliorer en donnant un exemple concret ou en précisant la durée de la tâche.",
@@ -173,15 +178,40 @@ export default function ProfsPage() {
       `- cohérence avec le Bulletin Officiel (BO),\n` +
       `- vocabulaire disciplinaire attendu en classe.\n\n`;
 
-    const blocNeuro =
-      `Tu t’appuies sur des principes issus des neurosciences de l’apprentissage :\n` +
-      `- activer les connaissances préalables de l’élève,\n` +
-      `- introduire une seule difficulté nouvelle à la fois,\n` +
-      `- découper la notion en petites étapes claires,\n` +
-      `- alterner explications et petites questions de vérification,\n` +
-      `- utiliser des exemples concrets avant la formalisation,\n` +
-      `- terminer par un court récapitulatif des idées clés,\n` +
-      `- inviter l’élève à reformuler avec ses propres mots.\n\n`;
+    const blocNeuro = form.neuro
+      ? `Tu t’appuies sur des principes issus des neurosciences de l’apprentissage :\n` +
+        `- activer les connaissances préalables de l’élève,\n` +
+        `- introduire une seule difficulté nouvelle à la fois,\n` +
+        `- découper la notion en petites étapes claires,\n` +
+        `- alterner explications et petites questions de vérification,\n` +
+        `- utiliser des exemples concrets avant la formalisation,\n` +
+        `- terminer par un court récapitulatif des idées clés,\n` +
+        `- inviter l’élève à reformuler avec ses propres mots.\n\n`
+      : "";
+
+    // Nouveau bloc : rappels, micro-questions, métacognition
+    const blocRappelsEtMeta =
+      `Ta réponse devra :\n` +
+      `- commencer par un rappel très court des prérequis ou de la notion déjà vue en classe,\n` +
+      `- présenter la nouvelle notion ou la tâche en plusieurs étapes numérotées,\n` +
+      `- insérer régulièrement de petites questions de vérification du type « Et toi, saurais-tu… ? » ou « Quel est le point important à retenir ici ? »,\n` +
+      `- se terminer par un court récapitulatif sous forme de liste à puces,\n` +
+      `- proposer une question métacognitive finale du type « Qu’as-tu trouvé le plus facile ? Le plus difficile ? » pour inviter l’élève à réfléchir sur son apprentissage.\n\n`;
+
+    // Nouveau bloc : critères de réussite pour l’enseignant
+    const blocCriteres =
+      `Ajoute à la fin une courte rubrique intitulée « Pour l’enseignant » qui liste 3 à 5 critères de réussite observables, par exemple :\n` +
+      `- ce que l’élève sait expliquer,\n` +
+      `- ce qu’il sait faire en autonomie,\n` +
+      `- les erreurs typiques à surveiller.\n\n`;
+
+    // Nouveau bloc : aide à la mise en page type Word
+    const blocMiseEnPage =
+      `Si ta réponse correspond à un devoir surveillé, une fiche d’activités ou une évaluation, propose une mise en page structurée facilement transférable dans un document Word :\n` +
+      `- titres clairs (contexte, questions, rappel de la méthode),\n` +
+      `- exercices numérotés,\n` +
+      `- indication des points éventuels ou du temps conseillé,\n` +
+      `- espaces prévus pour que l’élève puisse répondre.\n\n`;
 
     const prompt =
       `Tu es une IA pédagogique destinée à des élèves de ${form.classe || "collège/lycée"} ` +
@@ -196,13 +226,17 @@ export default function ProfsPage() {
       `Consigne initiale rédigée par le professeur (à optimiser) :\n` +
       `"""${form.contenu.trim()}"""\n\n` +
       blocDYS +
+      blocRappelsEtMeta +
+      blocCriteres +
+      blocMiseEnPage +
       `Ta mission :\n` +
-      `1. Si la demande du professeur est floue ou incomplète, commence par proposer une version plus précise du prompt, en gardant son intention pédagogique.\n` +
+      `1. Si la demande du professeur est floue ou incomplète, commence par proposer une version plus précise et mieux structurée du prompt, en gardant son intention pédagogique.\n` +
       `2. Ensuite, produis la réponse pour l’élève en respectant :\n` +
       `   - le niveau indiqué,\n` +
       `   - les programmes officiels (Eduscol, BO),\n` +
-      `   - les principes des neurosciences de l’apprentissage,\n` +
-      `   - la clarté pédagogique (étapes, exemples, vérification de compréhension).\n` +
+      `   - les principes des neurosciences de l’apprentissage (si activés),\n` +
+      `   - la clarté pédagogique (étapes, exemples, questions de vérification, récapitulatif),\n` +
+      `   - la prise en compte éventuelle des besoins DYS.\n` +
       `3. Ne résous pas un devoir maison spécifique à la place de l’élève, sauf si le professeur demande explicitement une correction commentée.\n`;
 
     setPromptFinal(prompt);
