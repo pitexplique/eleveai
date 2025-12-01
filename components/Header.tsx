@@ -7,11 +7,13 @@ import { useState } from "react";
 type NavItem = {
   href: string;
   label: string;
+  badge?: string;
 };
 
 const MAIN_LINKS: NavItem[] = [
   { href: "/", label: "Accueil" },
   { href: "/espace-eleves", label: "Espace élèves" },
+  { href: "/atelier-IA", label: "Ateliers IA", badge: "Nouveau" }, // 👈 BADGE
   { href: "/espace-profs", label: "Espace profs" },
   { href: "/espace-administration", label: "Administratif" },
   { href: "/parents", label: "Parents" },
@@ -37,6 +39,7 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-40 border-b border-slate-800 bg-slate-950/90 backdrop-blur">
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:py-4">
+        
         {/* LOGO */}
         <div className="flex items-center gap-2">
           <Link href="/" className="flex items-center gap-2">
@@ -63,13 +66,20 @@ export default function Header() {
                 key={link.href}
                 href={link.href}
                 className={[
-                  "px-3 py-1.5 text-sm rounded-xl border transition",
+                  "px-3 py-1.5 text-sm rounded-xl border transition flex items-center gap-2",
                   active
                     ? "border-sky-500 bg-sky-500/10 text-sky-100 shadow-[0_0_0_1px_rgba(56,189,248,0.4)]"
                     : "border-transparent text-slate-300 hover:border-slate-600 hover:bg-slate-900",
                 ].join(" ")}
               >
                 {link.label}
+
+                {/* BADGE NOUVEAU */}
+                {link.badge && (
+                  <span className="ml-1 inline-flex items-center rounded-full bg-emerald-600/20 text-emerald-300 text-[10px] font-semibold px-2 py-0.5 uppercase tracking-wide">
+                    {link.badge}
+                  </span>
+                )}
               </Link>
             );
           })}
@@ -130,13 +140,20 @@ export default function Header() {
                   href={link.href}
                   onClick={() => setOpen(false)}
                   className={[
-                    "w-full rounded-xl px-3 py-2 text-sm border",
+                    "w-full rounded-xl px-3 py-2 text-sm border flex items-center gap-2",
                     active
                       ? "border-sky-500 bg-sky-500/10 text-sky-100 shadow-[0_0_0_1px_rgba(56,189,248,0.4)]"
                       : "border-transparent text-slate-300 hover:border-slate-700 hover:bg-slate-900",
                   ].join(" ")}
                 >
                   {link.label}
+
+                  {/* BADGE MOBILE */}
+                  {link.badge && (
+                    <span className="ml-auto inline-flex items-center rounded-full bg-emerald-600/20 text-emerald-300 text-[10px] font-semibold px-2 py-0.5 uppercase tracking-wide">
+                      {link.badge}
+                    </span>
+                  )}
                 </Link>
               );
             })}
