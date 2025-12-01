@@ -13,11 +13,12 @@ type NavItem = {
 const MAIN_LINKS: NavItem[] = [
   { href: "/", label: "Accueil" },
   { href: "/espace-eleves", label: "Espace élèves" },
-  { href: "/atelier-IA", label: "Ateliers IA", badge: "Nouveau" }, // 👈 BADGE
   { href: "/espace-profs", label: "Espace profs" },
   { href: "/espace-administration", label: "Administratif" },
   { href: "/parents", label: "Parents" },
+  { href: "/atelier-IA", label: "Ateliers IA", badge: "Nouveau" },
 ];
+
 
 const SECONDARY_LINKS: NavItem[] = [
   { href: "/prompts", label: "Générateurs de prompts" },
