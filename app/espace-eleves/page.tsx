@@ -8,6 +8,11 @@ import Link from "next/link";
 ---------------------------------------- */
 
 type Classe =
+  | "Cp"
+  | "Ce1"
+  | "Ce2"
+  | "Cm1"
+  | "Cm2"
   | "6e"
   | "5e"
   | "4e"
@@ -20,11 +25,14 @@ type Classe =
 type Confiance = "en_difficulte" | "moyen" | "a_l_aise";
 
 type TypeAide =
+  | "manipluler pour comprendre"
   | "comprendre_le_cours"
   | "reviser_un_chapitre"
   | "preparer_un_controle"
   | "faire_des_exercices"
-  | "methode_de_travail";
+  | "methode_de_travail"
+  | "défis";
+  
 
 type DysType =
   | "dyslexie"
@@ -77,11 +85,13 @@ const MATIERES = [
 ];
 
 const TYPES_AIDE: { value: TypeAide; label: string }[] = [
+  { value: "manipluler pour comprendre", label: "Manipluler pour comprendre" },
   { value: "comprendre_le_cours", label: "Comprendre le cours" },
   { value: "reviser_un_chapitre", label: "Réviser un chapitre" },
   { value: "preparer_un_controle", label: "Préparer un contrôle" },
   { value: "faire_des_exercices", label: "Faire des exercices" },
   { value: "methode_de_travail", label: "Méthode de travail" },
+  { value: "défis", label: "défis" },
 ];
 
 /* ----------------------------------------
