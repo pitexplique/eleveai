@@ -313,32 +313,45 @@ export default function Home() {
       </section>
 
       {/* À PROPOS + SIGNATURE */}
-      <section className="border-t border-slate-800">
-        <div className="mx-auto max-w-4xl px-4 py-12 sm:py-16">
-          <div className="rounded-2xl border border-slate-800 bg-slate-900/60 p-6 sm:p-8">
-            <p className="text-xs font-semibold uppercase tracking-wide text-slate-400 mb-2">
-              À propos
-            </p>
+{/* SECTION : QUI JE SUIS */}
+<section className="border-t border-slate-800 bg-slate-900/40">
+  <div className="mx-auto max-w-4xl px-4 py-12 sm:py-16">
+    <h2 className="text-2xl sm:text-3xl font-semibold text-slate-50 mb-6">
+      Qui je suis
+    </h2>
 
-            <p className="mt-2 text-sm text-slate-200">
-              EleveAI est imaginé et développé par un enseignant de mathématiques
-              à La Réunion, pour aider les élèves, les familles et les équipes à
-              utiliser l’IA comme un outil d’apprentissage, de créativité et de
-              projets concrets, en lien avec le territoire, la nature et la
-              solidarité.
-            </p>
+    <div className="rounded-2xl border border-slate-800 bg-slate-950/40 p-6 sm:p-8 space-y-4">
+      <p className="text-sm text-slate-300 leading-relaxed">
+        Je m’appelle <strong>Frédéric</strong>. Je suis enseignant de mathématiques 
+        à La Réunion, passionné de pédagogie, de nature et de création.  
+        J’accompagne les élèves depuis plus de 30 ans, et j’expérimente depuis des années 
+        comment <strong>rendre l’école plus claire, plus humaine et plus efficace</strong>.
+      </p>
 
-            <p className="mt-3 text-sm font-medium text-emerald-300">
-              — Frédéric, enseignant et créateur d’EleveAI
-            </p>
+      <p className="text-sm text-slate-300 leading-relaxed">
+        EleveAI est né d’un constat simple : chaque élève, chaque parent, chaque professeur, 
+        chaque membre d’une communauté scolaire peut <strong>changer une petite partie de son monde</strong> 
+        grâce à un outil bien conçu, fiable, et cohérent avec Eduscol + les neurosciences.
+      </p>
 
-            <p className="mt-2 text-sm italic text-emerald-400 text-right flex items-center justify-end gap-2">
-              <span>ε peut engendrer l’infini</span>
-              <span className="text-emerald-300 text-lg">∞</span>
-            </p>
-          </div>
-        </div>
-      </section>
+      <p className="text-sm text-slate-300 leading-relaxed">
+        Je conçois, je prototype, j’enseigne, j’inspire.  
+        Et j’aide les jeunes — ceux de l’Entre-Deux, de La Réunion, et d’ailleurs —  
+        à utiliser l’IA non pour tricher… mais pour <strong>grandir</strong>.
+      </p>
+
+      <p className="text-sm font-medium text-emerald-300">
+        — Frédéric, créateur d’EleveAI
+      </p>
+
+      <p className="mt-2 text-sm italic text-emerald-400 text-right flex items-center justify-end gap-2">
+        <span>ε peut engendrer l’infini</span>
+        <span className="text-emerald-300 text-lg">∞</span>
+      </p>
+    </div>
+  </div>
+</section>
+
     </main>
   );
 }
