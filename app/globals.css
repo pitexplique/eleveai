@@ -51,3 +51,26 @@ body {
 }
 
 
+/* Fond Noël doux */
+.bg-noel {
+  background: radial-gradient(circle at top, #d8ecff 0%, #bfdcff 40%, #a1c4ff 70%, #88b4ff 100%);
+  background-attachment: fixed;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Effet neige légère */
+.bg-noel::before {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  background-image: url("https://assets.codepen.io/191814/snow1.png");
+  opacity: 0.25;
+  animation: snow 20s linear infinite;
+}
+
+@keyframes snow {
+  from { transform: translateY(-10%); }
+  to { transform: translateY(100%); }
+}

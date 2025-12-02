@@ -12,13 +12,15 @@ type NavItem = {
 
 const MAIN_LINKS: NavItem[] = [
   { href: "/", label: "Accueil" },
-  { href: "/espace-eleves", label: "Espace élèves" },
-  { href: "/espace-profs", label: "Espace profs" },
-  { href: "/espace-administration", label: "Administratif" },
-  { href: "/parents", label: "Parents" },
-  { href: "/atelier-IA", label: "Ateliers IA", badge: "Nouveau" },
+  { href: "/espace-eleves", label: "Espace élèves (IA)" },
+  { href: "/espace-profs", label: "Espace profs (IA)" },
+  { href: "/parents", label: "Espace parents (IA)" },
+  {
+    href: "/espace-administration",
+    label: "Assistant administratif (IA)",
+  },
+  { href: "/atelier-IA", label: "Ateliers IA", badge: "NOUVEAU" },
 ];
-
 
 const SECONDARY_LINKS: NavItem[] = [
   { href: "/prompts", label: "Générateurs de prompts" },
@@ -40,7 +42,6 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-40 border-b border-slate-800 bg-slate-950/90 backdrop-blur">
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:py-4">
-        
         {/* LOGO */}
         <div className="flex items-center gap-2">
           <Link href="/" className="flex items-center gap-2">
@@ -75,7 +76,6 @@ export default function Header() {
               >
                 {link.label}
 
-                {/* BADGE NOUVEAU */}
                 {link.badge && (
                   <span className="ml-1 inline-flex items-center rounded-full bg-emerald-600/20 text-emerald-300 text-[10px] font-semibold px-2 py-0.5 uppercase tracking-wide">
                     {link.badge}
@@ -148,8 +148,6 @@ export default function Header() {
                   ].join(" ")}
                 >
                   {link.label}
-
-                  {/* BADGE MOBILE */}
                   {link.badge && (
                     <span className="ml-auto inline-flex items-center rounded-full bg-emerald-600/20 text-emerald-300 text-[10px] font-semibold px-2 py-0.5 uppercase tracking-wide">
                       {link.badge}

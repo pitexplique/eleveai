@@ -1,112 +1,94 @@
 // app/atelier-IA/[slug]/page.tsx
 
 import { notFound } from "next/navigation";
-import ReactMarkdown from "react-markdown";
 import {
-  getAllAtelierIaPosts,
   getAtelierIaPostBySlug,
   type AtelierIaPost,
 } from "@/data/atelierIaPosts";
 
-type PageProps = {
-  params: Promise<{ slug: string }>;
-};
+export default function AtelierIaDetailPage({
+  params,
+}: {
+  params: { slug: string };
+}) {
+  const atelier = getAtelierIaPostBySlug(params.slug);
 
-export function generateStaticParams() {
-  return getAllAtelierIaPosts().map((atelier) => ({ slug: atelier.slug }));
-}
-
-export async function generateMetadata({ params }: PageProps) {
-  const { slug } = await params;
-  const atelier = getAtelierIaPostBySlug(slug);
-  if (!atelier) return {};
-
-  return {
-    title: `${atelier.title} | Ateliers IA`,
-    description: atelier.description,
-  };
-}
-
-export default async function AtelierIaPage({ params }: PageProps) {
-  const { slug } = await params;
-
-  const atelier = getAtelierIaPostBySlug(slug);
-  if (!atelier) notFound();
+  if (!atelier) return notFound();
 
   return (
-    <main className="max-w-4xl mx-auto px-4 py-10">
-      {/* Fil d’Ariane */}
-      <div className="text-sm text-slate-500 mb-4">
-        <a href="/atelier-IA" className="hover:underline">
-          Ateliers IA
-        </a>{" "}
-        / <span className="text-slate-700">{atelier.title}</span>
-      </div>
-
+    <main className="max-w-3xl mx-auto px-4 py-10 relative">
+      {/* Titre */}
       <h1 className="text-3xl font-bold mb-3">{atelier.title}</h1>
 
-      <p className="text-xs text-slate-500 mb-2">
+      {/* Métadonnées */}
+      <p className="text-sm text-slate-600 mb-6">
         Collège • Niveau {atelier.niveau}
         {atelier.lieu ? ` • ${atelier.lieu}` : ""}
+        {atelier.date ? ` • ${atelier.date}` : ""}
       </p>
 
-      <p className="text-sm text-slate-600 mb-6 italic">
-        Parcours conçu pour être à la fois{" "}
-        <strong>sécurisé, motivant et conforme aux programmes</strong>, avec
-        des séances actives, des temps de débat, et une progression en 3 temps :
-        découvrir, utiliser, questionner l’IA.
-      </p>
-
-      <div className="flex flex-wrap gap-2 mb-6">
-        {atelier.tags.map((tag) => (
-          <span
-            key={tag}
-            className="inline-flex items-center rounded-full border border-slate-200 bg-slate-50 px-2.5 py-0.5 text-xs text-slate-600"
-          >
-            #{tag}
-          </span>
-        ))}
+      {/* Bloc création */}
+      <div className="mb-6 rounded-xl border border-blue-200 bg-blue-50/70 p-4 text-blue-900 shadow-sm">
+        <h2 className="font-semibold mb-2 text-lg">🎄 Ce que les élèves vont créer</h2>
+        <ul className="list-disc list-inside space-y-1 text-sm">
+          <li>✈️ un avion en papier (avec étapes proposées par l’IA)</li>
+          <li>🧸 un dessin d’objet créé étape par étape</li>
+          <li>🎄 une affiche de Noël (slogan + mise en page + couleurs)</li>
+        </ul>
+        <p className="mt-2 text-sm">
+          Chaque élève choisit <strong>sa façon d’apprendre</strong> : lire,
+          observer, demander des explications supplémentaires, ou simplifier les
+          consignes. Le travail se fait en petits groupes avec une vraie
+          autonomie.
+        </p>
       </div>
 
-      {/* Intro de l’atelier */}
-      <article className="prose prose-slate max-w-none prose-h1:text-2xl prose-h2:text-xl prose-p:leading-relaxed mb-10">
-        <ReactMarkdown>{atelier.content}</ReactMarkdown>
-      </article>
+      {/* Introduction */}
+      <article
+        className="prose prose-blue max-w-none mb-8"
+        dangerouslySetInnerHTML={{ __html: atelier.content }}
+      />
 
-      {/* Les 3 séances */}
-      <section>
-        <h2 className="text-2xl font-bold mb-4">Les 3 séances</h2>
+      {/* Séances */}
+      <section className="space-y-8">
+        {atelier.seances.map((s) => (
+          <article
+            key={s.numero}
+            className="rounded-xl border border-slate-200 bg-white/90 p-5 shadow"
+          >
+            <h2 className="text-xl font-semibold mb-1">
+              {s.titre}
+            </h2>
+            <p className="text-xs text-slate-500 mb-4">
+              Durée : {s.duree}
+            </p>
 
-        <div className="space-y-6">
-          {atelier.seances.map((seance) => (
-            <article
-              key={seance.numero}
-              className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm"
-            >
-              <h3 className="text-xl font-semibold mb-1">
-                {seance.titre}
-              </h3>
-              <p className="text-xs text-slate-500 mb-3">
-                Séance {seance.numero} • Durée : {seance.duree}
-              </p>
+            <h3 className="text-sm font-semibold mb-2">Objectifs pédagogiques</h3>
+            <ul className="list-disc list-inside text-sm mb-4">
+              {s.objectifs.map((o, index) => (
+                <li key={index}>{o}</li>
+              ))}
+            </ul>
 
-              <h4 className="text-sm font-semibold text-slate-700 mb-1">
-                Objectifs pédagogiques
-              </h4>
-              <ul className="list-disc list-inside text-sm text-slate-700 mb-3">
-                {seance.objectifs.map((obj, i) => (
-                  <li key={i}>{obj}</li>
-                ))}
-              </ul>
-
-              <div className="prose prose-slate max-w-none prose-p:leading-relaxed">
-                <ReactMarkdown>{seance.contenu}</ReactMarkdown>
-              </div>
-            </article>
-          ))}
-        </div>
+            <div
+              className="prose prose-sm max-w-none"
+              dangerouslySetInnerHTML={{ __html: s.contenu }}
+            />
+          </article>
+        ))}
       </section>
+
+      {/* Bouton retour */}
+      <div className="mt-10">
+        <a
+          href="/atelier-IA"
+          className="text-blue-700 font-semibold hover:underline"
+        >
+          ← Retour aux ateliers
+        </a>
+      </div>
     </main>
   );
 }
+
 

@@ -3,7 +3,6 @@
 import { useState } from "react";
 
 export default function AdministrationPage() {
-  // État pour les boutons "copier"
   const [copied, setCopied] = useState<string | null>(null);
 
   const handleCopy = (id: string, text: string) => {
@@ -20,28 +19,96 @@ export default function AdministrationPage() {
         {/* ------------------------ */}
         <header className="space-y-3">
           <p className="inline-flex items-center rounded-full border border-emerald-500/40 bg-emerald-500/10 px-3 py-1 text-xs font-medium uppercase tracking-wide text-emerald-300">
-            Espace administratif · Collèges & Lycées
+            Assistant administratif (IA) · Collèges & Lycées
           </p>
           <h1 className="text-2xl sm:text-3xl font-bold text-slate-50">
-            Aider les secrétariats et les équipes de direction au quotidien
+            Aider le secrétariat, la vie scolaire et la direction au quotidien
           </h1>
           <p className="text-sm text-slate-300">
-            Cet espace propose des modèles de prompts pour rédiger rapidement
-            des messages clairs, bienveillants et adaptés aux familles, aux élèves
-            et aux partenaires de l&apos;établissement.
+            Cette page propose des modèles de prompts pour rédiger plus vite des messages
+            clairs, bienveillants et conformes au cadre scolaire, à destination des familles,
+            des élèves, des partenaires et de l’équipe interne.
           </p>
+
+          <div className="mt-4 rounded-2xl border border-slate-800 bg-slate-900/50 p-4">
+            <p className="text-xs font-semibold uppercase tracking-wide text-slate-400 mb-2">
+              Besoins concrets rencontrés par l’administration
+            </p>
+            <ul className="text-xs sm:text-sm text-slate-300 space-y-1.5">
+              <li>• Résumer des documents officiels de plusieurs pages pour les familles</li>
+              <li>• Fiches de poste et modèles de courriers</li>
+              <li>• Notes officielles (direction, CPE, secrétariat)</li>
+              <li>• Réunions, conseils de classe, comptes rendus et convocations</li>
+              <li>• Messages Pronote / ENT simples et lisibles</li>
+              <li>• Documents RH, sécurité, organisation</li>
+              <li>• Adaptations DYS & PAI administratives</li>
+              <li>• Signalements et suivi interne</li>
+              <li>• Communiqués aux parents après un événement sensible</li>
+            </ul>
+          </div>
         </header>
 
-        {/* ------------------------ */}
-        {/* SECTION 2 : GENERATEUR   */}
-        {/* ------------------------ */}
+        {/* ------------------------------------------------ */}
+        {/* SECTION 2 : RESUMER & ADAPTER LES DOCUMENTS LONGS */}
+        {/* ------------------------------------------------ */}
         <section className="space-y-5 rounded-2xl bg-slate-900/50 border border-slate-800 p-6">
           <h2 className="text-xl font-semibold text-slate-50">
-            2. Générateur de prompts pour textes administratifs DYS-friendly & IA-friendly
+            1. Résumer et adapter les documents pour les familles et les élèves
           </h2>
+          <p className="text-xs text-slate-300">
+            Pour transformer un texte administratif long (circulaire, note de 10 pages, compte rendu…)
+            en une version compréhensible pour les familles ou exploitable par les élèves avec une IA.
+          </p>
 
           <div className="space-y-4">
-            {/* PROMPT 1 */}
+            {/* PROMPT : Résumer un document long pour les familles */}
+            <div className="rounded-xl bg-slate-900 border border-slate-800 p-4 space-y-2">
+              <h3 className="text-sm font-semibold text-emerald-300">
+                ✅ Résumer un document long (jusqu’à 10 pages) pour les familles
+              </h3>
+              <p className="text-xs text-slate-300">
+                Pour transformer un document officiel très long en un message clair, court et actionnable
+                pour les parents.
+              </p>
+
+              <pre className="mt-2 whitespace-pre-wrap rounded-lg bg-slate-950/80 p-3 text-[11px] text-slate-200 border border-slate-800">
+{`Tu es un assistant spécialisé en communication scolaire.
+À partir du texte suivant (qui peut faire plusieurs pages), produis un message à destination des familles :
+
+- commence par un court résumé en 5 lignes maximum ;
+- liste ensuite en puces les informations essentielles (dates, lieux, démarches, personnes concernées) ;
+- indique clairement ce que les familles doivent faire (ou ne pas faire) ;
+- utilise des phrases courtes et un vocabulaire simple ;
+- ton bienveillant et professionnel.
+
+Texte à résumer puis adapter :
+"COLLER ICI LE TEXTE COMPLET DU DOCUMENT (NOTE / CIRCULAIRE / COURRIER OFFICIEL)"`}
+              </pre>
+
+              <button
+                onClick={() =>
+                  handleCopy(
+                    "promptResume",
+                    `Tu es un assistant spécialisé en communication scolaire.
+À partir du texte suivant (qui peut faire plusieurs pages), produis un message à destination des familles :
+
+- commence par un court résumé en 5 lignes maximum ;
+- liste ensuite en puces les informations essentielles (dates, lieux, démarches, personnes concernées) ;
+- indique clairement ce que les familles doivent faire (ou ne pas faire) ;
+- utilise des phrases courtes et un vocabulaire simple ;
+- ton bienveillant et professionnel.
+
+Texte à résumer puis adapter :
+"COLLER ICI LE TEXTE COMPLET DU DOCUMENT (NOTE / CIRCULAIRE / COURRIER OFFICIEL)"`
+                  )
+                }
+                className="mt-2 rounded-md bg-slate-800 px-3 py-1.5 text-xs text-slate-200 hover:bg-slate-700 transition"
+              >
+                {copied === "promptResume" ? "✔ Copié !" : "📋 Copier"}
+              </button>
+            </div>
+
+            {/* PROMPT 1 : version claire & DYS-friendly */}
             <div className="rounded-xl bg-slate-900 border border-slate-800 p-4 space-y-2">
               <h3 className="text-sm font-semibold text-emerald-300">
                 ✅ Message aux familles – version claire & DYS-friendly
@@ -86,14 +153,14 @@ Texte à simplifier :
               </button>
             </div>
 
-            {/* PROMPT 2 */}
+            {/* PROMPT 2 : IA-friendly pour les élèves */}
             <div className="rounded-xl bg-slate-900 border border-slate-800 p-4 space-y-2">
               <h3 className="text-sm font-semibold text-sky-300">
                 ✅ Version IA-friendly pour que les élèves puissent le faire expliquer par l’IA
               </h3>
 
               <p className="text-xs text-slate-300">
-                Pour produire un texte bien structuré et facile à résumer :
+                Pour produire un texte bien structuré et facile à résumer ou à questionner avec une IA :
               </p>
 
               <pre className="mt-2 whitespace-pre-wrap rounded-lg bg-slate-950/80 p-3 text-[11px] text-slate-200 border border-slate-800">
@@ -127,10 +194,10 @@ Texte à restructurer :
               </button>
             </div>
 
-            {/* PROMPT 3 */}
+            {/* PROMPT 3 : convocation officielle + version simplifiée */}
             <div className="rounded-xl bg-slate-900 border border-slate-800 p-4 space-y-2">
               <h3 className="text-sm font-semibold text-amber-300">
-                ✅ Convocation officielle + version simplifiée
+                ✅ Convocation officielle + version simplifiée pour les familles
               </h3>
 
               <p className="text-xs text-slate-300">
@@ -172,21 +239,21 @@ Informations à utiliser :
           </div>
         </section>
 
-        {/* -------------------------------------------- */}
-        {/* SECTION 3 : AUTRES MODELES POUR LE QUOTIDIEN */}
-        {/* -------------------------------------------- */}
+        {/* ------------------------------------------------ */}
+        {/* SECTION 3 : MESSAGES AUX FAMILLES (PRONOTE / ENT) */}
+        {/* ------------------------------------------------ */}
         <section className="space-y-5 rounded-2xl bg-slate-900/40 border border-slate-800 p-6">
           <h2 className="text-xl font-semibold text-slate-50">
-            3. Autres modèles utiles pour le secrétariat et la direction
+            2. Messages aux familles (Pronote / ENT / mails)
           </h2>
 
           <p className="text-xs text-slate-300">
-            Ces prompts peuvent être utilisés tels quels dans une IA (EleveAI, ChatGPT, etc.)
-            en complétant les informations entre guillemets.
+            Modèles pour les sorties, rappels de règlement, incidents, félicitations et
+            communication officielle sur l’IA.
           </p>
 
           <div className="space-y-4">
-            {/* PROMPT 4 : SORTIE SCOLAIRE */}
+            {/* PROMPT 4 : sortie scolaire */}
             <div className="rounded-xl bg-slate-900 border border-slate-800 p-4 space-y-2">
               <h3 className="text-sm font-semibold text-violet-300">
                 ✅ Information aux familles pour une sortie scolaire
@@ -238,7 +305,7 @@ Informations à utiliser :
               </button>
             </div>
 
-            {/* PROMPT 5 : RAPPEL REGLEMENT / COMPORTEMENT */}
+            {/* PROMPT 5 : rappel règlement / comportement */}
             <div className="rounded-xl bg-slate-900 border border-slate-800 p-4 space-y-2">
               <h3 className="text-sm font-semibold text-rose-300">
                 ✅ Message de rappel du règlement / comportement
@@ -290,7 +357,7 @@ Contexte :
               </button>
             </div>
 
-            {/* PROMPT 6 : FELICITATIONS / VALORISATION */}
+            {/* PROMPT 6 : félicitations / valorisation */}
             <div className="rounded-xl bg-slate-900 border border-slate-800 p-4 space-y-2">
               <h3 className="text-sm font-semibold text-emerald-200">
                 ✅ Message de félicitations / valorisation d’un élève ou d’une classe
@@ -341,18 +408,17 @@ Contexte :
                 {copied === "prompt6" ? "✔ Copié !" : "📋 Copier"}
               </button>
             </div>
-          </div>
-        </section>
-        {/* PROMPT 7 : INCIDENT / CRISE */}
-<div className="rounded-xl bg-slate-900 border border-slate-800 p-4 space-y-2">
-  <h3 className="text-sm font-semibold text-red-300">
-    🚨 Message aux familles après un incident / événement sensible
-  </h3>
-  <p className="text-xs text-slate-300">
-    Pour communiquer de manière responsable après un incident (bagarre, malaise, intrusion…).
-  </p>
 
-  <pre className="mt-2 whitespace-pre-wrap rounded-lg bg-slate-950/80 p-3 text-[11px] text-slate-200 border border-slate-800">
+            {/* PROMPT 7 : incident / crise */}
+            <div className="rounded-xl bg-slate-900 border border-slate-800 p-4 space-y-2">
+              <h3 className="text-sm font-semibold text-red-300">
+                🚨 Message aux familles après un incident / événement sensible
+              </h3>
+              <p className="text-xs text-slate-300">
+                Pour communiquer de manière responsable après un incident (bagarre, malaise, intrusion…).
+              </p>
+
+              <pre className="mt-2 whitespace-pre-wrap rounded-lg bg-slate-950/80 p-3 text-[11px] text-slate-200 border border-slate-800">
 {`Rédige un message destiné aux familles après un incident survenu au collège.
 Contraintes :
 - aucune information nominative ;
@@ -369,13 +435,13 @@ Contexte à utiliser :
 "ACTEURS IMPLIQUÉS (infirmerie, AED, police, etc.) : ..."
 "SUIVI PRÉVU : ..."
 "ATTENTE VIS-À-VIS DES FAMILLES : ..."`}
-  </pre>
+              </pre>
 
-  <button
-    onClick={() =>
-      handleCopy(
-        "prompt7",
-        `Rédige un message destiné aux familles après un incident survenu au collège.
+              <button
+                onClick={() =>
+                  handleCopy(
+                    "prompt7",
+                    `Rédige un message destiné aux familles après un incident survenu au collège.
 Contraintes :
 - aucune information nominative ;
 - rassurer sans minimiser ;
@@ -388,77 +454,27 @@ Contexte à utiliser :
 "TYPE D'INCIDENT : ..."
 "LIEU/HEURE : ..."
 "MESURES PRISES IMMÉDIATEMENT : ..."
-"ACTEURS IMPLIQUÉS : ..."
+"ACTEURS IMPLIQUÉS (infirmerie, AED, police, etc.) : ..."
 "SUIVI PRÉVU : ..."
 "ATTENTE VIS-À-VIS DES FAMILLES : ..."`
-      )
-    }
-    className="mt-2 rounded-md bg-slate-800 px-3 py-1.5 text-xs text-slate-200 hover:bg-slate-700 transition"
-  >
-    {copied === "prompt7" ? "✔ Copié !" : "📋 Copier"}
-  </button>
-</div>
+                  )
+                }
+                className="mt-2 rounded-md bg-slate-800 px-3 py-1.5 text-xs text-slate-200 hover:bg-slate-700 transition"
+              >
+                {copied === "prompt7" ? "✔ Copié !" : "📋 Copier"}
+              </button>
+            </div>
 
-{/* PROMPT 8 : COMPTE-RENDU CONSEIL DE CLASSE / CA */}
-<div className="rounded-xl bg-slate-900 border border-slate-800 p-4 space-y-2">
-  <h3 className="text-sm font-semibold text-indigo-300">
-    📝 Compte-rendu synthétique d’un conseil de classe / CA
-  </h3>
-  <p className="text-xs text-slate-300">
-    Pour produire un résumé clair, objectif et utilisable pour l’ENT.
-  </p>
+            {/* PROMPT 9 : communication IA */}
+            <div className="rounded-xl bg-slate-900 border border-slate-800 p-4 space-y-2">
+              <h3 className="text-sm font-semibold text-cyan-300">
+                🤖 Communication officielle : usage de l’IA au collège
+              </h3>
+              <p className="text-xs text-slate-300">
+                Pour informer les familles de manière claire sur l'utilisation de l’IA.
+              </p>
 
-  <pre className="mt-2 whitespace-pre-wrap rounded-lg bg-slate-950/80 p-3 text-[11px] text-slate-200 border border-slate-800">
-{`À partir des informations fournies, rédige un compte-rendu synthétique :
-- structure en 4 parties : faits marquants, réussites, points d’attention, décisions ;
-- ton objectif, neutre, sans jugement ;
-- pas de phrases longues ;
-- utilisable pour les familles ou l'équipe pédagogique ;
-- ajouter un encadré "à retenir en 5 points" à la fin.
-
-Informations :
-"CLASSE / GROUPE : ..."
-"POINTS POSITIFS : ..."
-"POINTS D’ATTENTION : ..."
-"DÉCISIONS / ACTIONS : ..."
-"CALENDRIER / SUIVI : ..."`}
-  </pre>
-
-  <button
-    onClick={() =>
-      handleCopy(
-        "prompt8",
-        `À partir des informations fournies, rédige un compte-rendu synthétique :
-- structure en 4 parties : faits marquants, réussites, points d’attention, décisions ;
-- ton objectif, neutre, sans jugement ;
-- pas de phrases longues ;
-- utilisable pour les familles ou l'équipe pédagogique ;
-- ajouter un encadré "à retenir en 5 points" à la fin.
-
-Informations :
-"CLASSE / GROUPE : ..."
-"POINTS POSITIFS : ..."
-"POINTS D’ATTENTION : ..."
-"DÉCISIONS / ACTIONS : ..."
-"CALENDRIER / SUIVI : ..."`
-      )
-    }
-    className="mt-2 rounded-md bg-slate-800 px-3 py-1.5 text-xs text-slate-200 hover:bg-slate-700 transition"
-  >
-    {copied === "prompt8" ? "✔ Copié !" : "📋 Copier"}
-  </button>
-</div>
-
-{/* PROMPT 9 : COMMUNICATION IA */}
-<div className="rounded-xl bg-slate-900 border border-slate-800 p-4 space-y-2">
-  <h3 className="text-sm font-semibold text-cyan-300">
-    🤖 Communication officielle : usage de l’IA au collège
-  </h3>
-  <p className="text-xs text-slate-300">
-    Pour informer les familles de manière claire sur l'utilisation de l’IA.
-  </p>
-
-  <pre className="mt-2 whitespace-pre-wrap rounded-lg bg-slate-950/80 p-3 text-[11px] text-slate-200 border border-slate-800">
+              <pre className="mt-2 whitespace-pre-wrap rounded-lg bg-slate-950/80 p-3 text-[11px] text-slate-200 border border-slate-800">
 {`Rédige une communication aux familles expliquant l’usage éducatif de l’IA dans l’établissement.
 Contraintes :
 - rappeler la position de l'Éducation nationale ;
@@ -474,13 +490,13 @@ Informations à utiliser :
 "CADRE OFFICIEL (Eduscol, circulaires) : ..."
 "RÈGLES APPLIQUÉES AUX ÉLÈVES : ..."
 "QUESTIONS DES FAMILLES À TRAITER : ..."`}
-  </pre>
+              </pre>
 
-  <button
-    onClick={() =>
-      handleCopy(
-        "prompt9",
-        `Rédige une communication aux familles expliquant l’usage éducatif de l’IA dans l’établissement.
+              <button
+                onClick={() =>
+                  handleCopy(
+                    "prompt9",
+                    `Rédige une communication aux familles expliquant l’usage éducatif de l’IA dans l’établissement.
 Contraintes :
 - rappeler la position de l'Éducation nationale ;
 - expliquer les bénéfices pédagogiques ;
@@ -491,21 +507,87 @@ Contraintes :
 
 Informations à utiliser :
 "OBJECTIF DU MESSAGE : ..."
-"OUTILS UTILISÉS : ..."
-"CADRE OFFICIEL : ..."
+"OUTILS UTILISÉS (EleveAI, outils internes, etc.) : ..."
+"CADRE OFFICIEL (Eduscol, circulaires) : ..."
 "RÈGLES APPLIQUÉES AUX ÉLÈVES : ..."
 "QUESTIONS DES FAMILLES À TRAITER : ..."`
-      )
-    }
-    className="mt-2 rounded-md bg-slate-800 px-3 py-1.5 text-xs text-slate-200 hover:bg-slate-700 transition"
-  >
-    {copied === "prompt9" ? "✔ Copié !" : "📋 Copier"}
-  </button>
-</div>
+                  )
+                }
+                className="mt-2 rounded-md bg-slate-800 px-3 py-1.5 text-xs text-slate-200 hover:bg-slate-700 transition"
+              >
+                {copied === "prompt9" ? "✔ Copié !" : "📋 Copier"}
+              </button>
+            </div>
+          </div>
+        </section>
 
+        {/* ------------------------------------------------ */}
+        {/* SECTION 4 : RÉUNIONS, CONSEILS & COMPTES RENDUS   */}
+        {/* ------------------------------------------------ */}
+        <section className="space-y-5 rounded-2xl bg-slate-900/40 border border-slate-800 p-6">
+          <h2 className="text-xl font-semibold text-slate-50">
+            3. Réunions, conseils de classe & comptes rendus
+          </h2>
+
+          <p className="text-xs text-slate-300">
+            Pour transformer vos notes en comptes rendus lisibles, objectifs et utilisables
+            pour l’équipe comme pour les familles.
+          </p>
+
+          {/* PROMPT 8 : compte rendu conseil / CA */}
+          <div className="rounded-xl bg-slate-900 border border-slate-800 p-4 space-y-2">
+            <h3 className="text-sm font-semibold text-indigo-300">
+              📝 Compte rendu synthétique d’un conseil de classe ou d’un conseil d’administration
+            </h3>
+            <p className="text-xs text-slate-300">
+              Pour produire un résumé clair, objectif et structuré à partir de vos notes.
+            </p>
+
+            <pre className="mt-2 whitespace-pre-wrap rounded-lg bg-slate-950/80 p-3 text-[11px] text-slate-200 border border-slate-800">
+{`À partir des informations fournies, rédige un compte-rendu synthétique :
+- structure en 4 parties : faits marquants, réussites, points d’attention, décisions ;
+- ton objectif, neutre, sans jugement ;
+- pas de phrases longues ;
+- utilisable pour les familles ou l'équipe pédagogique ;
+- ajouter un encadré "à retenir en 5 points" à la fin.
+
+Informations :
+"CLASSE / GROUPE : ..."
+"POINTS POSITIFS : ..."
+"POINTS D’ATTENTION : ..."
+"DÉCISIONS / ACTIONS : ..."
+"CALENDRIER / SUIVI : ..."`}
+            </pre>
+
+            <button
+              onClick={() =>
+                handleCopy(
+                  "prompt8",
+                  `À partir des informations fournies, rédige un compte-rendu synthétique :
+- structure en 4 parties : faits marquants, réussites, points d’attention, décisions ;
+- ton objectif, neutre, sans jugement ;
+- pas de phrases longues ;
+- utilisable pour les familles ou l'équipe pédagogique ;
+- ajouter un encadré "à retenir en 5 points" à la fin.
+
+Informations :
+"CLASSE / GROUPE : ..."
+"POINTS POSITIFS : ..."
+"POINTS D’ATTENTION : ..."
+"DÉCISIONS / ACTIONS : ..."
+"CALENDRIER / SUIVI : ..."`
+                )
+              }
+              className="mt-2 rounded-md bg-slate-800 px-3 py-1.5 text-xs text-slate-200 hover:bg-slate-700 transition"
+            >
+              {copied === "prompt8" ? "✔ Copié !" : "📋 Copier"}
+            </button>
+          </div>
+        </section>
       </div>
     </main>
   );
 }
+
 
 
