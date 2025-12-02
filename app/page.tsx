@@ -29,9 +29,9 @@ export default function Home() {
               <strong>parents</strong>, les <strong>profs</strong>, l’
               <strong>administration</strong>, les{" "}
               <strong>agents d’entretien</strong> et la{" "}
-              <strong>restauration scolaire</strong>.  
-              Chacun relève un mini-défi pour améliorer son quotidien à
-              l’école ou à la maison.
+              <strong>restauration scolaire</strong>. Chacun relève un
+              mini-défi pour améliorer son quotidien à l’école, à la maison ou
+              dans son quartier.
             </p>
 
             <div className="mt-8 flex flex-wrap gap-3">
@@ -51,7 +51,9 @@ export default function Home() {
 
             <p className="mt-4 text-xs sm:text-sm text-slate-400">
               Conçu dans le respect des programmes Eduscol et des principes des
-              neurosciences (rappel actif, progressivité, exemples concrets).
+              neurosciences (rappel actif, progressivité, exemples concrets), en
+              lien avec la nature, le territoire et l’économie sociale et
+              solidaire.
             </p>
           </div>
 
@@ -62,8 +64,8 @@ export default function Home() {
                 Une IA pour toute la communauté éducative
               </h2>
               <p className="text-sm text-slate-300">
-                EleveAI accompagne tous les métiers du collège et du lycée pour
-                <strong> gagner du temps</strong>,{" "}
+                EleveAI accompagne tous les métiers du collège et du lycée pour{" "}
+                <strong>gagner du temps</strong>,{" "}
                 <strong>mieux comprendre</strong> et{" "}
                 <strong>agir concrètement</strong>.
               </p>
@@ -133,7 +135,8 @@ export default function Home() {
                 Chaque élève, parent, professeur, membre de l’administration,
                 agent d’entretien ou personnel de cantine choisit{" "}
                 <strong>un mini-problème concret</strong> et demande à EleveAI
-                : <br />
+                :
+                <br />
                 <span className="italic text-emerald-300">
                   «&nbsp;Aide-moi à améliorer ceci en 7 jours.&nbsp;»
                 </span>
@@ -158,7 +161,8 @@ export default function Home() {
               <p className="text-sm text-slate-300">
                 Exemples&nbsp;: je stresse avant les contrôles, je perds mes
                 affaires, j’ai du mal à rédiger un mail, on gaspille à la
-                cantine, le ménage est mal réparti…
+                cantine, le ménage est mal réparti, on jette trop d’eau ou de
+                nourriture à la maison…
               </p>
             </div>
             <div className="rounded-2xl border border-slate-800 bg-slate-950/60 p-5">
@@ -171,7 +175,8 @@ export default function Home() {
               <p className="text-sm text-slate-300">
                 EleveAI propose un mini-plan d’actions simples, adaptées à
                 l’âge, au rôle (élève, parent, prof, agent…) et au contexte du
-                collège.
+                collège, en privilégiant des gestes concrets, solidaires et
+                respectueux de la nature.
               </p>
             </div>
             <div className="rounded-2xl border border-slate-800 bg-slate-950/60 p-5">
@@ -183,8 +188,9 @@ export default function Home() {
               </h3>
               <p className="text-sm text-slate-300">
                 Chaque participant réalise au moins{" "}
-                <strong>3 actions concrètes</strong> et partage une trace&nbsp;:
-                petite photo, texte, affiche, recette, organisation de classe…
+                <strong>3 actions concrètes</strong> et partage une trace :
+                petite photo, texte, affiche, recette anti-gaspi, organisation
+                de classe, coin nature, geste solidaire…
               </p>
             </div>
           </div>
@@ -196,8 +202,8 @@ export default function Home() {
                 Pour un élève
               </p>
               <p className="text-sm text-slate-200">
-                « Je révise les maths 10 minutes par jour et je prépare mon
-                cartable la veille. »
+                « Je révise les maths 10 minutes par jour, je prépare mon
+                cartable la veille et je range mon espace de travail. »
               </p>
             </div>
             <div className="rounded-2xl border border-slate-800 bg-slate-950/60 p-4 space-y-2">
@@ -206,7 +212,7 @@ export default function Home() {
               </p>
               <p className="text-sm text-slate-200">
                 « Je mets en place une routine calme devoirs + repas, avec des
-                conseils d’EleveAI. »
+                conseils d’EleveAI, et j’écoute mon enfant 5 minutes sans écran. »
               </p>
             </div>
             <div className="rounded-2xl border border-slate-800 bg-slate-950/60 p-4 space-y-2">
@@ -215,7 +221,8 @@ export default function Home() {
               </p>
               <p className="text-sm text-slate-200">
                 « Je teste une séance active construite avec EleveAI, en
-                respectant Eduscol + neurosciences. »
+                respectant Eduscol + neurosciences, sur un thème concret (nature,
+                économie sociale, solidarité). »
               </p>
             </div>
             <div className="rounded-2xl border border-slate-800 bg-slate-950/60 p-4 space-y-2">
@@ -224,7 +231,8 @@ export default function Home() {
               </p>
               <p className="text-sm text-slate-200">
                 « On crée une fiche simple de protocole, un planning clair ou
-                une affiche anti-gaspillage. »
+                une affiche anti-gaspillage (eau, énergie, nourriture) à partir
+                d’un prompt EleveAI. »
               </p>
             </div>
           </div>
@@ -235,8 +243,8 @@ export default function Home() {
               <span className="text-emerald-300 font-semibold">
                 «&nbsp;Je change mon monde avec EleveAI&nbsp;».
               </span>{" "}
-              Le défi peut être lancé par un collège, un lycée ou un simple
-              foyer.
+              Le défi peut être lancé par un collège, un lycée, une association
+              ou un foyer.
             </p>
             <div className="flex gap-3">
               <Link
@@ -303,9 +311,38 @@ export default function Home() {
           </Link>
         </div>
       </section>
+
+      {/* À PROPOS + SIGNATURE */}
+      <section className="border-t border-slate-800">
+        <div className="mx-auto max-w-4xl px-4 py-12 sm:py-16">
+          <div className="rounded-2xl border border-slate-800 bg-slate-900/60 p-6 sm:p-8">
+            <p className="text-xs font-semibold uppercase tracking-wide text-slate-400 mb-2">
+              À propos
+            </p>
+
+            <p className="mt-2 text-sm text-slate-200">
+              EleveAI est imaginé et développé par un enseignant de mathématiques
+              à La Réunion, pour aider les élèves, les familles et les équipes à
+              utiliser l’IA comme un outil d’apprentissage, de créativité et de
+              projets concrets, en lien avec le territoire, la nature et la
+              solidarité.
+            </p>
+
+            <p className="mt-3 text-sm font-medium text-emerald-300">
+              — Frédéric, enseignant et créateur d’EleveAI
+            </p>
+
+            <p className="mt-2 text-sm italic text-emerald-400 text-right flex items-center justify-end gap-2">
+              <span>ε peut engendrer l’infini</span>
+              <span className="text-emerald-300 text-lg">∞</span>
+            </p>
+          </div>
+        </div>
+      </section>
     </main>
   );
 }
+
 
 
 
