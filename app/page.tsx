@@ -27,6 +27,19 @@ export default function Home() {
               des neurosciences.
             </p>
 
+            {/* 💡 LIGNE DÉFI */}
+            <p className="mt-5 text-sm sm:text-base text-center sm:text-left">
+              <span className="inline-flex items-center rounded-full border border-emerald-500/60 bg-emerald-500/10 px-4 py-2">
+                <span className="mr-2 text-xs font-semibold uppercase tracking-wide text-emerald-300">
+                  Défi
+                </span>
+                <span className="text-slate-100">
+                  Comment changer ton monde… en prenant soin de ton île, de tes proches et de tes idées ?
+                </span>
+              </span>
+            </p>
+            {/* /FIN LIGNE DÉFI */}
+
             <div className="mt-8 flex flex-wrap gap-3">
               {/* Bouton principal : profs */}
               <Link
@@ -151,10 +164,11 @@ export default function Home() {
 
             <div className="rounded-2xl border border-slate-300 sm:border-slate-800 bg-white sm:bg-slate-900/60 p-5">
               <h3 className="text-sm font-semibold text-amber-700 sm:text-amber-300 uppercase tracking-wide">
-                Utilisable en classe et à la maison
+                Ancré dans la nature et le territoire
               </h3>
               <p className="mt-2 text-sm text-slate-900 sm:text-slate-200">
-                Pensé à partir des besoins réels des professeurs, des élèves, des familles et des équipes de direction.
+                Pensé à partir des besoins réels des professeurs, des élèves et des familles,
+                avec des projets liés à la nature, à La Réunion et à l’économie sociale et solidaire.
               </p>
             </div>
           </div>
@@ -192,7 +206,7 @@ export default function Home() {
               <li>• Explications adaptées et pas-à-pas</li>
               <li>• Exercices guidés et corrigés détaillés</li>
               <li>• Fiches de révision ciblées</li>
-              <li>• Préparation aux oraux et aux examens</li>
+              <li>• Projets concrets nature & solidarité (économie sociale et solidaire)</li>
             </ul>
             <Link
               href="/espace-eleves"
