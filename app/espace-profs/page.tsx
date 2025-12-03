@@ -47,11 +47,11 @@ const TYPES_PROMPT = [
   "Génération d’exercices",
   "Correction méthodologique",
   "Création d’activité",
-  "Automatisme",
   "Préparation de séquence",
+  "Préparation d’ane séance",
   "QCM / Évaluation",
   "Réécriture / simplification",
-  "Question flash"
+  "Questions flash"
 ];
 
 export default function ProfsPage() {
