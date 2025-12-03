@@ -8,11 +8,6 @@ import Link from "next/link";
 ---------------------------------------- */
 
 type Classe =
-  | "Cp"
-  | "Ce1"
-  | "Ce2"
-  | "Cm1"
-  | "Cm2"
   | "6e"
   | "5e"
   | "4e"
