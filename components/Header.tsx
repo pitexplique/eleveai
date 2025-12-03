@@ -28,6 +28,8 @@ const SECONDARY_LINKS: NavItem[] = [
   { href: "/blog", label: "Blog" },
   { href: "/faq", label: "FAQ" },
   { href: "/contact", label: "Contact" },
+  { href: "/qui-suis-je", label: "Qui suis-je ?" },
+  { href: "/partenaires", label: "Partenaires & sponsors" },
 ];
 
 function isActive(pathname: string, href: string) {
@@ -53,7 +55,7 @@ export default function Header() {
                 EleveAI
               </span>
               <span className="text-[10px] sm:text-xs text-slate-400">
-                IA pour élèves, profs & établissements
+                IA pédagogique pour élèves, enseignants & parents
               </span>
             </div>
           </Link>
