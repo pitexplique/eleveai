@@ -42,17 +42,74 @@ const MATIERES = [
   "Autre",
 ];
 
-const TYPES_PROMPT = [
+// 🔹 Types communs à toutes les matières
+const TYPES_COMMUNS = [
   "Explication d’une notion",
   "Génération d’exercices",
   "Correction méthodologique",
   "Création d’activité",
   "Préparation de séquence",
-  "Préparation d’ane séance",
+  "Préparation d’une séance",
   "QCM / Évaluation",
   "Réécriture / simplification",
   "Questions flash",
-  "Résolution de problème"
+  "Résolution de problème",
+];
+
+// 🔹 Types spécifiques par matière (en plus des communs)
+const TYPES_PAR_MATIERE: Record<string, string[]> = {
+  Mathématiques: [
+    "Génération d’exercices de calcul mental",
+    "Création de problèmes ouverts",
+    "Construction d’exercices de démonstration",
+  ],
+  Français: [
+    "Préparation de lecture analytique",
+    "Création d’atelier d’écriture",
+    "Préparation d’un commentaire composé guidé",
+  ],
+  "Physique-Chimie": [
+    "Conception d’activité expérimentale",
+    "Préparation d’exercices type bac",
+  ],
+  SVT: [
+    "Analyse de documents scientifiques",
+    "Construction de schémas-bilans à compléter",
+  ],
+  "Histoire-Géographie": [
+    "Étude de documents historiques",
+    "Analyse de carte ou croquis",
+  ],
+  SES: [
+    "Analyse de graphiques économiques",
+    "Préparation d’exemples chiffrés",
+  ],
+  Langues: [
+    "Création d’activité de compréhension orale",
+    "Génération de dialogues pour jeu de rôle",
+  ],
+  "Numérique/NSI": [
+    "Génération d’exercices de programmation",
+    "Création de défis algorithmiques",
+  ],
+  Autre: [
+    "Création d’activité interdisciplinaire",
+  ],
+};
+
+// 🔹 Types spéciaux examens
+const TYPES_SPECIAUX_BREVET = [
+  "Préparation d’un sujet type brevet",
+  "Génération d’exercices de révision pour le brevet",
+  "Création d’un QCM de révision brevet",
+  "Préparation d’un sujet blanc de brevet avec barème",
+];
+
+const TYPES_SPECIAUX_BAC = [
+  "Préparation d’un sujet type bac",
+  "Préparation d’un sujet blanc de bac avec barème",
+  "Génération d’exercices type bac avec correction",
+  "Préparation d’une synthèse de révision pour le bac",
 ];
 
 export default function ProfsPage() {
@@ -95,6 +152,29 @@ export default function ProfsPage() {
       .filter(Boolean);
     setForm((prev) => ({ ...prev, tags }));
   }
+
+  // 🔹 Types de prompt disponibles en fonction de la matière + bac/brevet
+  const typesDisponibles = useMemo(() => {
+    const communs = TYPES_COMMUNS;
+    const specifiquesMatiere = form.matiere
+      ? TYPES_PAR_MATIERE[form.matiere] || []
+      : [];
+
+    let speciauxExamens: string[] = [];
+
+    if (form.classe === "3e") {
+      speciauxExamens = TYPES_SPECIAUX_BREVET;
+    } else if (
+      form.classe === "Seconde" ||
+      form.classe === "Première" ||
+      form.classe === "Terminale"
+    ) {
+      speciauxExamens = TYPES_SPECIAUX_BAC;
+    }
+
+    // On fusionne tout et on enlève les doublons
+    return Array.from(new Set([...specifiquesMatiere, ...speciauxExamens, ...communs]));
+  }, [form.matiere, form.classe]);
 
   // Suggestions simples pour améliorer le prompt du prof
   const suggestions = useMemo(() => {
@@ -191,7 +271,6 @@ export default function ProfsPage() {
         `- inviter l’élève à reformuler avec ses propres mots.\n\n`
       : "";
 
-    // Nouveau bloc : rappels, micro-questions, métacognition
     const blocRappelsEtMeta =
       `Ta réponse devra :\n` +
       `- commencer par un rappel très court des prérequis ou de la notion déjà vue en classe,\n` +
@@ -200,14 +279,12 @@ export default function ProfsPage() {
       `- se terminer par un court récapitulatif sous forme de liste à puces,\n` +
       `- proposer une question métacognitive finale du type « Qu’as-tu trouvé le plus facile ? Le plus difficile ? » pour inviter l’élève à réfléchir sur son apprentissage.\n\n`;
 
-    // Nouveau bloc : critères de réussite pour l’enseignant
     const blocCriteres =
       `Ajoute à la fin une courte rubrique intitulée « Pour l’enseignant » qui liste 3 à 5 critères de réussite observables, par exemple :\n` +
       `- ce que l’élève sait expliquer,\n` +
       `- ce qu’il sait faire en autonomie,\n` +
       `- les erreurs typiques à surveiller.\n\n`;
 
-    // Nouveau bloc : aide à la mise en page type Word
     const blocMiseEnPage =
       `Si ta réponse correspond à un devoir surveillé, une fiche d’activités ou une évaluation, propose une mise en page structurée facilement transférable dans un document Word :\n` +
       `- titres clairs (contexte, questions, rappel de la méthode),\n` +
@@ -350,7 +427,7 @@ export default function ProfsPage() {
               </div>
             </div>
 
-            {/* Type de prompt */}
+            {/* Type de prompt (dépend matière + bac/brevet) */}
             <div className="space-y-1">
               <label className="text-xs font-semibold text-gray-600">
                 Type de prompt
@@ -361,12 +438,15 @@ export default function ProfsPage() {
                 className="w-full border rounded-lg px-3 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-sky-300"
               >
                 <option value="">Choisir…</option>
-                {TYPES_PROMPT.map((t) => (
+                {typesDisponibles.map((t) => (
                   <option key={t} value={t}>
                     {t}
                   </option>
                 ))}
               </select>
+              <p className="text-[11px] text-gray-500 mt-1">
+                Les types proposés s’adaptent à la matière choisie et, en 3e, à la préparation du brevet ; en Seconde, Première et Terminale, à la préparation du bac.
+              </p>
             </div>
 
             {/* Titre + auteur */}
@@ -578,3 +658,4 @@ export default function ProfsPage() {
     </main>
   );
 }
+
