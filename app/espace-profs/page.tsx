@@ -51,7 +51,8 @@ const TYPES_PROMPT = [
   "Préparation d’ane séance",
   "QCM / Évaluation",
   "Réécriture / simplification",
-  "Questions flash"
+  "Questions flash",
+  "Résolution de problème"
 ];
 
 export default function ProfsPage() {
