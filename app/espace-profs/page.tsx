@@ -39,6 +39,7 @@ const MATIERES = [
   "SES",
   "Langues",
   "Numérique/NSI",
+  "Philosophie",
   "Autre",
 ];
 
@@ -52,6 +53,8 @@ const TYPES_COMMUNS = [
   "Préparation d’une séance",
   "QCM / Évaluation",
   "Réécriture / simplification",
+  "Questions flash",
+  "Résolution de problème",
 ];
 
 // 🔹 Types spécifiques par matière (en plus des communs)
@@ -60,8 +63,6 @@ const TYPES_PAR_MATIERE: Record<string, string[]> = {
     "Génération d’exercices de calcul mental",
     "Création de problèmes ouverts",
     "Construction d’exercices de démonstration",
-    "Questions flash",
-    "Résolution de problème",
   ],
   Français: [
     "Préparation de lecture analytique",
@@ -91,6 +92,12 @@ const TYPES_PAR_MATIERE: Record<string, string[]> = {
   "Numérique/NSI": [
     "Génération d’exercices de programmation",
     "Création de défis algorithmiques",
+  ],
+  Philosophie: [
+    "Préparation d’un sujet de dissertation",
+    "Préparation d’une explication de texte philosophique",
+    "Construction d’une fiche notionnelle (auteur, concept, problème)",
+    "Génération de sujets de réflexion pour l’oral",
   ],
   Autre: [
     "Création d’activité interdisciplinaire",
@@ -459,7 +466,7 @@ export default function ProfsPage() {
                   type="text"
                   value={form.titre}
                   onChange={(e) => handleChange("titre", e.target.value)}
-                  placeholder="Ex : Expliquer la proportionnalité en 5e"
+                  placeholder="Ex : Comprendre la notion de justice en philosophie"
                   className="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-sky-300"
                 />
               </div>
@@ -485,7 +492,7 @@ export default function ProfsPage() {
               <textarea
                 value={form.objectifPedagogique}
                 onChange={(e) => handleChange("objectifPedagogique", e.target.value)}
-                placeholder="Ex : l’élève doit savoir reconnaître une situation de proportionnalité et utiliser un coefficient."
+                placeholder="Ex : amener l’élève à problématiser un sujet philosophique simple."
                 className="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-sky-300 min-h-[70px]"
               />
             </div>
@@ -499,7 +506,7 @@ export default function ProfsPage() {
                 type="text"
                 value={rawTags}
                 onChange={(e) => updateTags(e.target.value)}
-                placeholder="Ex : proportionnalité, tableau, exercices"
+                placeholder="Ex : justice, liberté, dissertation"
                 className="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-sky-300"
               />
               {form.tags.length > 0 && (
@@ -537,7 +544,7 @@ export default function ProfsPage() {
               <textarea
                 value={form.contenu}
                 onChange={(e) => handleChange("contenu", e.target.value)}
-                placeholder="Ex : Explique la proportionnalité à un élève de 5e avec un exemple concret, un tableau et deux exercices d’application."
+                placeholder="Ex : Propose une explication guidée de ce sujet de dissertation : « Faut-il toujours dire la vérité ? » avec étapes, exemples et questions pour l’élève."
                 className="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-sky-300 min-h-[120px]"
               />
             </div>
@@ -658,4 +665,5 @@ export default function ProfsPage() {
     </main>
   );
 }
+
 
