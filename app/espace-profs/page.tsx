@@ -52,8 +52,6 @@ const TYPES_COMMUNS = [
   "Préparation d’une séance",
   "QCM / Évaluation",
   "Réécriture / simplification",
-  "Questions flash",
-  "Résolution de problème",
 ];
 
 // 🔹 Types spécifiques par matière (en plus des communs)
@@ -62,6 +60,8 @@ const TYPES_PAR_MATIERE: Record<string, string[]> = {
     "Génération d’exercices de calcul mental",
     "Création de problèmes ouverts",
     "Construction d’exercices de démonstration",
+    "Questions flash",
+    "Résolution de problème",
   ],
   Français: [
     "Préparation de lecture analytique",
