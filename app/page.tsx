@@ -46,7 +46,7 @@ export default function Home() {
             </div>
 
             <p className="mt-4 text-xs sm:text-sm text-slate-400">
-              Conforme Eduscol · Adapté DYS · Aligné neurosciences · Conçu pour La Réunion
+              Conforme Eduscol · Adapté DYS · Aligné neurosciences · Conçu à la Réunion
             </p>
           </div>
 
