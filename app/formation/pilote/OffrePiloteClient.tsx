@@ -17,8 +17,8 @@ export default function OffrePiloteClient() {
   const [plafondMensuel, setPlafondMensuel] = useState(150); // plafond IA choisi par le chef d’établissement
 
   // Paramètres (à ajuster librement plus tard)
-  const COUT_PAR_ELEVE_AN = 5; // 5 € / élève / an en mode fixe
-  const BASE_MENSUEL_MIXTE = 99; // abonnement établissement / mois
+  const COUT_PAR_ELEVE_AN = 5; // 5 € / élève / an en mode fixe (ordre de grandeur)
+  const BASE_MENSUEL_MIXTE = 99; // abonnement établissement / mois (ordre de grandeur)
   const VARIABLE_PAR_ELEVE_MOIS = 0.25; // part variable par élève / mois
 
   let coutMensuelEstime = 0;
@@ -533,6 +533,80 @@ export default function OffrePiloteClient() {
                   </p>
                 </div>
               </div>
+            </div>
+
+            {/* 9. Proposition de licences & tarifs EleveAI */}
+            <div className="space-y-3 rounded-2xl border border-slate-700 bg-slate-950/50 p-4 sm:p-5">
+              <h3 className="text-lg font-semibold text-emerald-200">
+                9. Proposition de licences & tarifs EleveAI pour votre collège
+              </h3>
+              <p className="text-sm text-slate-200/80">
+                Au-delà de la simulation, EleveAI propose des{" "}
+                <span className="font-semibold">
+                  licences simples et lisibles
+                </span>{" "}
+                pour un établissement scolaire. Les montants ci-dessous sont
+                donnés à titre indicatif pour un collège classique et peuvent
+                être ajustés en fonction de la taille de l&apos;établissement ou
+                d&apos;un projet plus large.
+              </p>
+
+              <div className="grid gap-3 sm:grid-cols-3 text-sm">
+                <div className="space-y-1 rounded-xl border border-emerald-500/50 bg-emerald-500/5 p-3">
+                  <p className="text-[11px] font-semibold uppercase text-emerald-300">
+                    Licence Pilote
+                  </p>
+                  <p className="text-slate-50 font-semibold">
+                    1 490 € / an <span className="text-xs text-slate-300">(année 1)</span>
+                  </p>
+                  <p className="text-xs text-slate-300">
+                    Puis 1 950 € / an à partir de la 2ᵉ année.
+                  </p>
+                  <ul className="mt-2 space-y-1 text-xs text-slate-200">
+                    <li>• Tous les élèves et tous les personnels</li>
+                    <li>• Tableau de bord direction (élèves / profs / admin)</li>
+                    <li>• Accompagnement renforcé – établissement vitrine</li>
+                  </ul>
+                </div>
+
+                <div className="space-y-1 rounded-xl border border-slate-700 bg-slate-950/80 p-3">
+                  <p className="text-[11px] font-semibold uppercase text-slate-200">
+                    Licence Collège Standard
+                  </p>
+                  <p className="text-slate-50 font-semibold">1 950 € / an</p>
+                  <p className="text-xs text-slate-300">
+                    Adapté à un collège de taille moyenne.
+                  </p>
+                  <ul className="mt-2 space-y-1 text-xs text-slate-200">
+                    <li>• ~80 000 requêtes IA / mois</li>
+                    <li>• Accès élèves, enseignants, vie scolaire, admin</li>
+                    <li>• Suivi d&apos;usage et garde-fous Eduscol</li>
+                  </ul>
+                </div>
+
+                <div className="space-y-1 rounded-xl border border-violet-500/50 bg-violet-500/10 p-3">
+                  <p className="text-[11px] font-semibold uppercase text-violet-200">
+                    Licence Collège Premium
+                  </p>
+                  <p className="text-slate-50 font-semibold">2 490 € / an</p>
+                  <p className="text-xs text-slate-300">
+                    Pour un usage large au cœur du projet d&apos;établissement.
+                  </p>
+                  <ul className="mt-2 space-y-1 text-xs text-slate-200">
+                    <li>• Requêtes 150 000 requêtes IA (usage scolaire)</li>
+                    <li>• Formations IA pour les équipes (1–2 / an)</li>
+                    <li>• Accès élèves, enseignants, vie scolaire, admin</li>
+                  </ul>
+                </div>
+              </div>
+
+              <p className="text-xs text-slate-400">
+                Ces montants peuvent être discutés dans le cadre de votre
+                conseil d&apos;administration. La simulation ci-dessus vous aide
+                à visualiser un ordre de grandeur par élève et par professeur ;
+                les licences Pilote / Standard / Premium permettent ensuite de
+                fixer un budget annuel clair et maîtrisé.
+              </p>
             </div>
 
             {/* CTA contact */}
