@@ -123,13 +123,9 @@ export default function QuiSuisJePage() {
               <h2 className="text-lg font-semibold text-slate-50">
                 Un ancrage à La Réunion
               </h2>
-              <p className="text-sm text-slate-300">
-                Installé durablement sur l’île, j’ai choisi de travailler en collège pour
-                agir directement sur les difficultés scolaires, au plus près du terrain.
-              </p>
-              <p className="text-sm text-slate-300">
+               <p className="text-sm text-slate-300">
                 J’aime le <span className="font-medium">sport</span> et la{" "}
-                <span className="font-medium">nature</span>, et je veux que mes projets
+                <span className="font-medium">nature réunionnaise</span>, et je veux que mes projets
                 participent au développement des jeunes de l’île.
               </p>
             </div>
@@ -181,7 +177,7 @@ export default function QuiSuisJePage() {
               href="mailto:frederic.lacoste@ac-reunion.fr"
               className="inline-flex items-center rounded-xl border border-emerald-500/60 bg-emerald-500/10 px-3 py-2 text-sm font-medium text-emerald-200 hover:bg-emerald-500/20 transition"
             >
-              frederic.lacoste@ac-reunion.fr
+              Frederic.Lacoste@ac-reunion.fr
             </a>
           </div>
         </div>
