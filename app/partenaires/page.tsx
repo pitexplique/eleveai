@@ -68,7 +68,7 @@ export default function PartenairesPage() {
               Types de soutien possibles
             </h3>
             <ul className="space-y-2 text-sm text-slate-200">
-              <li>• Financement d’ateliers IA dans les collèges et lycées.</li>
+              <li>• Financement des API en pèriode de test.</li>
               <li>• Soutien matériel (équipement, licences, hébergement).</li>
               <li>• Partenariats techniques ou pédagogiques.</li>
               <li>• Mécénat de compétences.</li>
@@ -90,7 +90,7 @@ export default function PartenairesPage() {
             </p>
             <ul className="mt-2 space-y-2 text-sm text-slate-200">
               <li>• Collèges et lycées de l’académie de La Réunion.</li>
-              <li>• Groupes de réflexion IA en mathématiques.</li>
+              <li>• Groupes de réflexion IA</li>
               <li>• Services académiques souhaitant expérimenter des outils.</li>
             </ul>
           </div>
@@ -123,38 +123,11 @@ export default function PartenairesPage() {
             Les sponsors contribuent au financement d’actions très concrètes :
           </p>
           <ul className="space-y-2 text-sm text-slate-200">
-            <li>• Ateliers IA pour les classes (6e, 5e, 4e, 3e...).</li>
             <li>• Production de vidéos pédagogiques et ressources élèves.</li>
             <li>• Développement de fonctionnalités nouvelles d’EleveAI.</li>
             <li>• Formation et implication de jeunes de l’île dans le projet.</li>
           </ul>
 
-          <div className="grid gap-4 sm:grid-cols-3 pt-2">
-            <div className="rounded-xl border border-slate-700 bg-slate-900/80 p-3 space-y-1">
-              <h3 className="text-sm font-semibold text-slate-100">
-                Sponsor Bronze
-              </h3>
-              <p className="text-xs text-slate-300">
-                Soutien ciblé sur une action (atelier, ressource ou vidéo).
-              </p>
-            </div>
-            <div className="rounded-xl border border-slate-700 bg-slate-900/80 p-3 space-y-1">
-              <h3 className="text-sm font-semibold text-slate-100">
-                Sponsor Argent
-              </h3>
-              <p className="text-xs text-slate-300">
-                Contribution à un ensemble d’ateliers ou de ressources.
-              </p>
-            </div>
-            <div className="rounded-xl border border-slate-700 bg-slate-900/80 p-3 space-y-1">
-              <h3 className="text-sm font-semibold text-slate-100">
-                Sponsor Or
-              </h3>
-              <p className="text-xs text-slate-300">
-                Partenaire majeur du projet EleveAI à l’échelle de l’île.
-              </p>
-            </div>
-          </div>
         </div>
 
         {/* Contact partenariat */}
