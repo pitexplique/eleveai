@@ -72,7 +72,7 @@ export default function ContactPage() {
                 href="mailto:contact@eleveai.re"
                 className="font-semibold text-[#0047B6] underline underline-offset-2"
             >
-                contact@eleveai.re
+                Frederic.Lacoste@ac-reunion.fr
             </a>
             </p>
         </div>
