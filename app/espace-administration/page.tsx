@@ -11,161 +11,161 @@ import {
 ---------------------------------------- */
 
 type TypeEtab = "college" | "lycee" | "lycee_pro" | "autre";
-type PublicCible = "parents" | "profs" | "eleves" | "ca" | "toute_communaute";
-type TypeDoc =
-  | "charte"
-  | "note_parents"
-  | "projet_pilote"
-  | "protocole_triche"
-  | "plan_formation"
+
+type PublicCibleVieSco =
+  | "eleve"
+  | "famille"
+  | "equipe_vie_scolaire"
+  | "equipe_educative"
+  | "direction";
+
+type TypeDocVieSco =
+  | "courrier_famille"
+  | "message_eleve"
+  | "rapport_incident"
+  | "fiche_suivi"
+  | "compte_rendu_sanction"
+  | "note_regles"
+  | "protocole_vie_scolaire"
   | "autre";
 
-type AdminPromptState = {
+type VieScoPromptState = {
   nomEtab: string;
   typeEtab: TypeEtab;
   ville: string;
   contexte: string;
   nbEleves: string;
   nbProfs: string;
-  publicCible: PublicCible;
-  typeDoc: TypeDoc;
+  publicCible: PublicCibleVieSco;
+  typeDoc: TypeDocVieSco;
   titreDoc: string;
   objectif: string;
   contraintes: string;
   ton: string;
+  typeSituation: string; // ex : conflit, harcèlement, retards...
 };
 
-type AdminPresetKey =
-  | "charte_usage_ia"
-  | "mail_parents_pilote"
-  | "projet_pilote_CA"
-  | "protocole_triche"
-  | "plan_formation_profs"
-  | "note_eleves_salle_info"
-  | "bilan_projet_pilote"
-  | "fiche_projet_club_ia";
+type VieScoPresetKey =
+  | "conflit_message_eleve"
+  | "harcelement_mail_famille"
+  | "retards_rappel_regles"
+  | "sanction_compte_rendu"
+  | "suivi_reunion_equipe"
+  | "climat_note_generale"
+  | "protocole_retards_exclusions";
 
-type AdminPreset = {
+type VieScoPreset = {
   label: string;
   description: string;
-  valeurs: Partial<AdminPromptState>;
+  valeurs: Partial<VieScoPromptState>;
 };
 
 /* ----------------------------------------
-   PRESETS ADMINISTRATION
+   PRESETS VIE SCOLAIRE
 ---------------------------------------- */
 
-const ADMIN_PRESETS: Record<AdminPresetKey, AdminPreset> = {
-  charte_usage_ia: {
-    label: "📜 Charte d’usage de l’IA",
+const VIESCO_PRESETS: Record<VieScoPresetKey, VieScoPreset> = {
+  conflit_message_eleve: {
+    label: "🤝 Conflit entre élèves – Message à un élève",
     description:
-      "Rédiger une charte à intégrer au règlement intérieur ou au projet d’établissement.",
+      "Formuler un message apaisant à un élève après un conflit (rappel du cadre + proposition de médiation).",
     valeurs: {
-      typeDoc: "charte",
-      publicCible: "toute_communaute",
-      titreDoc:
-        "Charte d’usage de l’intelligence artificielle dans l’établissement",
+      typeDoc: "message_eleve",
+      publicCible: "eleve",
+      titreDoc: "Message de suivi après un conflit entre élèves",
       objectif:
-        "Poser un cadre clair et rassurant pour l’utilisation de l’IA par les élèves et les adultes, en lien avec le projet d’établissement.",
-      ton: "institutionnel, clair et accessible",
+        "Apaiser la situation, rappeler le cadre de respect, proposer une médiation et valoriser la possibilité de réparer.",
+      ton: "bienveillant, apaisant, respectueux",
+      typeSituation: "Conflit entre élèves (insultes, tensions, altercation).",
     },
   },
-  mail_parents_pilote: {
-    label: "📧 Mail aux parents – Phase pilote IA",
+  harcelement_mail_famille: {
+    label: "🛡️ Suspicion de harcèlement – Courriel aux familles",
     description:
-      "Informer les parents d’un test d’outils IA (comme EleveAI) en classe.",
+      "Informer une famille d’une situation préoccupante sans accuser, rassurer, proposer un rendez-vous.",
     valeurs: {
-      typeDoc: "note_parents",
-      publicCible: "parents",
-      titreDoc:
-        "Information aux familles – Mise en place d’un projet pilote autour de l’intelligence artificielle",
+      typeDoc: "courrier_famille",
+      publicCible: "famille",
+      titreDoc: "Information aux responsables légaux – Situation préoccupante",
       objectif:
-        "Expliquer le projet IA, rassurer sur les objectifs pédagogiques et les protections mises en place.",
-      ton: "rassurant, pédagogique, respectueux",
+        "Informer les responsables légaux d’éléments préoccupants pouvant relever du harcèlement scolaire et proposer un échange.",
+      ton: "prudent, professionnel, rassurant",
+      typeSituation:
+        "Suspicion de harcèlement (répétition de faits, isolement, propos blessants, cyberharcèlement).",
     },
   },
-  projet_pilote_CA: {
-    label: "🏫 Projet pilote IA pour le CA",
+  retards_rappel_regles: {
+    label: "⏰ Retards répétés – Rappel du cadre",
     description:
-      "Présenter un projet structuré au conseil d’administration ou conseil pédagogique.",
+      "Message pour rappeler les règles sur les retards et proposer un accompagnement si besoin.",
     valeurs: {
-      typeDoc: "projet_pilote",
-      publicCible: "ca",
-      titreDoc:
-        "Projet pilote : usages pédagogiques de l’intelligence artificielle dans l’établissement",
+      typeDoc: "message_eleve",
+      publicCible: "eleve",
+      titreDoc: "Rappel des règles sur les retards et accompagnement possible",
       objectif:
-        "Présenter les objectifs, les bénéfices attendus, les étapes et les modalités d’évaluation du projet IA.",
-      ton: "structuré, institutionnel, argumenté",
+        "Rappeler les conséquences des retards, proposer un échange pour comprendre les difficultés et éviter la stigmatisation.",
+      ton: "ferme mais bienveillant, centré sur les faits",
+      typeSituation: "Retards répétés en cours ou à l’arrivée au collège/lycée.",
     },
   },
-  protocole_triche: {
-    label: "🛡️ Protocole anti-triche avec l’IA",
+  sanction_compte_rendu: {
+    label: "📄 Sanction éducative – Compte rendu aux familles",
     description:
-      "Clarifier la position de l’établissement sur la triche liée à l’IA.",
+      "Expliquer une mesure éducative (par ex. retenue, travail d’intérêt scolaire) en mettant en avant son sens pédagogique.",
     valeurs: {
-      typeDoc: "protocole_triche",
-      publicCible: "toute_communaute",
-      titreDoc:
-        "Protocole de prévention et de gestion de la triche liée à l’usage de l’intelligence artificielle",
+      typeDoc: "compte_rendu_sanction",
+      publicCible: "famille",
+      titreDoc: "Compte rendu d’une mesure éducative",
       objectif:
-        "Définir ce qui est considéré comme triche, les usages autorisés, les sanctions et les actions de prévention.",
-      ton: "ferme mais éducatif",
+        "Présenter la sanction comme une mesure éducative, expliquer les faits et les objectifs de la mesure.",
+      ton: "neutre, clair, pédagogique",
+      typeSituation:
+        "Non-respect répété du règlement, comportement perturbateur, non-respect d’un adulte ou d’un camarade.",
     },
   },
-  plan_formation_profs: {
-    label: "🎓 Plan de formation des professeurs",
+  suivi_reunion_equipe: {
+    label: "📋 Fiche de suivi – Réunion d’équipe éducative",
     description:
-      "Organiser un plan de formation des enseignants à l’IA pédagogique.",
+      "Synthèse de suivi d’un élève fragile ou en difficulté pour partager avec l’équipe.",
     valeurs: {
-      typeDoc: "plan_formation",
-      publicCible: "profs",
-      titreDoc:
-        "Plan de formation des enseignants aux usages pédagogiques de l’intelligence artificielle",
+      typeDoc: "fiche_suivi",
+      publicCible: "equipe_educative",
+      titreDoc: "Synthèse de suivi d’un élève pour l’équipe éducative",
       objectif:
-        "Proposer un plan progressif de formation, de mutualisation et d’accompagnement des équipes pédagogiques.",
-      ton: "coopératif, motivant, réaliste",
+        "Présenter les faits observés, les mesures mises en place, les effets constatés et les pistes de travail.",
+      ton: "professionnel, factuel, collaboratif",
+      typeSituation:
+        "Élève en grande difficulté scolaire, comportementale ou sociale, accompagné par plusieurs adultes.",
     },
   },
-  note_eleves_salle_info: {
-    label: "💻 Note élèves – Usage IA en salle info",
+  climat_note_generale: {
+    label: "🌈 Climat scolaire – Note générale aux familles",
     description:
-      "Rappeler les règles d’usage de l’IA en salle informatique ou CDI.",
+      "Rappeler quelques règles de vie scolaire et la volonté de construire un climat serein.",
     valeurs: {
-      typeDoc: "note_parents",
-      publicCible: "eleves",
-      titreDoc:
-        "Note d’information aux élèves – Règles d’usage de l’IA en salle informatique et au CDI",
+      typeDoc: "note_regles",
+      publicCible: "famille",
+      titreDoc: "Note aux familles – Rappel du cadre de vie scolaire",
       objectif:
-        "Expliquer clairement ce qui est autorisé ou non quand les élèves utilisent l’IA sur les postes de l’établissement.",
-      ton: "clair, direct, respectueux",
+        "Rappeler des règles clés (respect, usage du téléphone, retards, absences) pour améliorer le climat scolaire.",
+      ton: "positif, clair, non culpabilisant",
+      typeSituation:
+        "Rappel général du règlement ou après une période tendue dans l’établissement.",
     },
   },
-  bilan_projet_pilote: {
-    label: "📊 Bilan d’un projet pilote IA",
+  protocole_retards_exclusions: {
+    label: "📘 Protocole interne – Retards, exclusions, conduites en vie scolaire",
     description:
-      "Faire un retour structuré après une année de projet pilote IA.",
+      "Proposer un protocole clair pour l’équipe sur la gestion des retards, exclusions ponctuelles et passages en vie scolaire.",
     valeurs: {
-      typeDoc: "projet_pilote",
-      publicCible: "ca",
-      titreDoc:
-        "Bilan d’un projet pilote autour des usages pédagogiques de l’intelligence artificielle",
+      typeDoc: "protocole_vie_scolaire",
+      publicCible: "equipe_vie_scolaire",
+      titreDoc: "Projet de protocole interne de vie scolaire",
       objectif:
-        "Présenter les résultats, les points positifs, les limites et les pistes d’évolution après une phase pilote.",
-      ton: "objectif, structuré, honnête",
-    },
-  },
-  fiche_projet_club_ia: {
-    label: "🤝 Fiche projet – Club IA",
-    description:
-      "Proposer un club ou atelier IA dans l’établissement (collège/lycée).",
-    valeurs: {
-      typeDoc: "projet_pilote",
-      publicCible: "profs",
-      titreDoc:
-        "Fiche projet : création d’un club ou atelier autour de l’intelligence artificielle",
-      objectif:
-        "Décrire un projet d’atelier ou club IA pour les élèves intéressés, avec objectifs, organisation et cadre éthique.",
-      ton: "motivant, pédagogique, structuré",
+        "Structurer les étapes de prise en charge (retards, exclusions ponctuelles, passages en vie scolaire, traçabilité, information aux familles).",
+      ton: "institutionnel, structuré, clair",
+      typeSituation:
+        "Construction ou révision d’un protocole de vie scolaire en interne.",
     },
   },
 };
@@ -174,33 +174,34 @@ const ADMIN_PRESETS: Record<AdminPresetKey, AdminPreset> = {
    ITEMS POUR LE CARROUSEL
 ---------------------------------------- */
 
-const ADMIN_PRESET_ITEMS: PresetCarouselItem[] = (
-  Object.entries(ADMIN_PRESETS) as [AdminPresetKey, AdminPreset][]
+const VIESCO_PRESET_ITEMS: PresetCarouselItem[] = (
+  Object.entries(VIESCO_PRESETS) as [VieScoPresetKey, VieScoPreset][]
 ).map(([key, preset]) => ({
   id: key,
   label: preset.label,
   description: preset.description,
-  badge: "Modèle direction",
+  badge: "Vie scolaire",
 }));
 
 /* ----------------------------------------
    PAGE
 ---------------------------------------- */
 
-export default function EspaceAdministrationPage() {
-  const [form, setForm] = useState<AdminPromptState>({
+export default function VieScolairePage() {
+  const [form, setForm] = useState<VieScoPromptState>({
     nomEtab: "",
     typeEtab: "college",
     ville: "",
     contexte: "",
     nbEleves: "",
     nbProfs: "",
-    publicCible: "toute_communaute",
-    typeDoc: "charte",
+    publicCible: "eleve",
+    typeDoc: "message_eleve",
     titreDoc: "",
     objectif: "",
     contraintes: "",
-    ton: "institutionnel, clair et accessible",
+    ton: "bienveillant, clair et professionnel",
+    typeSituation: "",
   });
 
   const [promptFinal, setPromptFinal] = useState("");
@@ -208,15 +209,15 @@ export default function EspaceAdministrationPage() {
 
   /* --------- helpers --------- */
 
-  function handleChange<K extends keyof AdminPromptState>(
+  function handleChange<K extends keyof VieScoPromptState>(
     field: K,
-    value: AdminPromptState[K],
+    value: VieScoPromptState[K],
   ) {
     setForm((prev) => ({ ...prev, [field]: value }));
   }
 
-  function appliquerPreset(key: AdminPresetKey) {
-    const preset = ADMIN_PRESETS[key];
+  function appliquerPreset(key: VieScoPresetKey) {
+    const preset = VIESCO_PRESETS[key];
     setForm((prev) => ({
       ...prev,
       ...preset.valeurs,
@@ -236,37 +237,41 @@ export default function EspaceAdministrationPage() {
     }
   }
 
-  function descriptionPublic(p: PublicCible) {
+  function descriptionPublic(p: PublicCibleVieSco) {
     switch (p) {
-      case "parents":
-        return "principalement aux parents et responsables légaux des élèves";
-      case "profs":
-        return "principalement à l’équipe pédagogique (enseignants, CPE, documentalistes)";
-      case "eleves":
-        return "principalement aux élèves de l’établissement";
-      case "ca":
-        return "au conseil d’administration et aux instances de pilotage de l’établissement";
-      case "toute_communaute":
+      case "eleve":
+        return "principalement à un élève ou à un petit groupe d’élèves";
+      case "famille":
+        return "principalement aux parents ou responsables légaux de l’élève";
+      case "equipe_vie_scolaire":
+        return "à l’équipe de vie scolaire (CPE, AED, assistants pédagogiques)";
+      case "equipe_educative":
+        return "à l’équipe éducative (enseignants, CPE, direction, psychologue, etc.)";
+      case "direction":
       default:
-        return "à l’ensemble de la communauté éducative (élèves, parents, personnels)";
+        return "à la direction ou aux instances internes de l’établissement";
     }
   }
 
-  function descriptionTypeDoc(t: TypeDoc) {
+  function descriptionTypeDoc(t: TypeDocVieSco) {
     switch (t) {
-      case "charte":
-        return "une charte formalisée, structurée en articles et principes clairs";
-      case "note_parents":
-        return "une note d’information / un courrier adressé aux parents ou aux élèves";
-      case "projet_pilote":
-        return "un document de présentation de projet avec objectifs, étapes et évaluation";
-      case "protocole_triche":
-        return "un protocole décrivant les règles, les exemples de triche et les réponses éducatives";
-      case "plan_formation":
-        return "un plan de formation progressif pour les enseignants";
+      case "courrier_famille":
+        return "un courrier ou courriel aux familles, clair et respectueux";
+      case "message_eleve":
+        return "un message à destination d’un élève, utilisable en entretien, sur l’ENT ou par écrit";
+      case "rapport_incident":
+        return "un rapport d’incident factuel, structuré et traçable";
+      case "fiche_suivi":
+        return "une fiche de suivi d’élève pour les réunions d’équipe éducative";
+      case "compte_rendu_sanction":
+        return "un compte rendu de sanction éducative à transmettre à la famille et/ou à l’équipe";
+      case "note_regles":
+        return "une note générale rappelant des règles de vie scolaire";
+      case "protocole_vie_scolaire":
+        return "un protocole interne décrivant les étapes de prise en charge en vie scolaire";
       case "autre":
       default:
-        return "un document institutionnel en lien avec l’usage de l’IA";
+        return "un document lié à la vie scolaire et au climat de l’établissement";
     }
   }
 
@@ -283,18 +288,25 @@ export default function EspaceAdministrationPage() {
     const typeDocDesc = descriptionTypeDoc(form.typeDoc);
     const titreDoc =
       form.titreDoc.trim() ||
-      "Document institutionnel sur les usages de l’intelligence artificielle";
+      "Document de vie scolaire en lien avec le climat scolaire et le respect du règlement";
 
     const nbEleves =
       form.nbEleves.trim() !== "" ? form.nbEleves.trim() : "non précisé";
     const nbProfs =
       form.nbProfs.trim() !== "" ? form.nbProfs.trim() : "non précisé";
 
+    const typeSituation =
+      form.typeSituation.trim() ||
+      "Situation de vie scolaire (conflit, retards, harcèlement présumé, climat de classe, etc.).";
+
     const objectif =
       form.objectif.trim() ||
-      "clarifier les objectifs, bénéfices et limites de l’utilisation de l’IA dans l’établissement.";
+      "apaiser la situation, rappeler le cadre de manière éducative et favoriser le dialogue entre les acteurs (élève, famille, équipe).";
+
     const contraintes = form.contraintes.trim();
-    const ton = form.ton.trim() || "institutionnel, clair et accessible";
+    const ton =
+      form.ton.trim() ||
+      "bienveillant, clair, professionnel, non stigmatisant";
 
     const contexteEtab =
       `Contexte de l’établissement :\n` +
@@ -305,37 +317,40 @@ export default function EspaceAdministrationPage() {
       `- Nombre approximatif d’enseignants : ${nbProfs}\n` +
       `- Contexte particulier : ${contexte}\n\n`;
 
-    const blocObjectif =
-      `Objectif du document à produire :\n` +
-      `- Ce document doit être ${typeDocDesc}.\n` +
-      `- Il est destiné ${publicDesc}.\n` +
-      `- Titre proposé : « ${titreDoc} ».\n` +
-      `- Objectif principal : ${objectif}\n\n`;
+    const blocSituation =
+      `Situation de vie scolaire à traiter :\n` +
+      `- Type de situation : ${typeSituation}\n` +
+      `- Type de document souhaité : ${typeDocDesc}.\n` +
+      `- Public cible : ${publicDesc}.\n` +
+      `- Titre envisagé : « ${titreDoc} ».\n` +
+      `- Objectif principal du document : ${objectif}\n\n`;
 
     const blocContraintesAdditionnelles =
       contraintes.length > 0
-        ? `Contraintes / points de vigilance indiqués par le chef d’établissement :\n${contraintes}\n\n`
+        ? `Contraintes / points de vigilance fournis par l’équipe de vie scolaire :\n${contraintes}\n\n`
         : "";
 
     const blocContraintesFixes =
       `Contraintes générales à respecter impérativement :\n` +
-      `- Le document doit respecter le cadre de l’Éducation nationale française (programmes, réglementations, RGPD).\n` +
+      `- Le document doit respecter le cadre de l’Éducation nationale et la réglementation en vigueur (dont la lutte contre le harcèlement scolaire, la laïcité, le RGPD).\n` +
       `- Le ton doit être ${ton}.\n` +
-      `- Le document ne doit pas promettre d’éléments qui sortent des missions de l’école ou des moyens réalistes de l’établissement.\n` +
-      `- Le document doit être compréhensible par des non-spécialistes (parents, élèves, membres du CA).\n` +
-      `- Le style doit pouvoir être facilement copié-collé dans un traitement de texte (Word, LibreOffice, etc.).\n\n`;
+      `- Le document doit rester factuel : décrire des faits observables, éviter les jugements sur les personnes.\n` +
+      `- Le document ne doit pas poser de diagnostic médical ou psychologique : ne pas utiliser de termes médicaux sans avis d’un professionnel de santé.\n` +
+      `- Le texte doit préserver la confidentialité et la dignité des élèves mentionnés.\n` +
+      `- Le style doit être compréhensible par les familles et réutilisable dans un ENT, un mail ou un traitement de texte.\n\n`;
 
     const blocMission =
-      `Ta mission en tant qu’IA assistante de direction :\n` +
-      `1. Proposer d’abord un plan structuré du document (titres, sous-titres, grandes parties).\n` +
-      `2. Puis rédiger le document complet en français, en suivant ce plan, avec des paragraphes clairs et des formulations professionnelles.\n` +
-      `3. À la fin, ajouter une rubrique « Points de vigilance pour le chef d’établissement » listant 4 à 6 points à vérifier avant diffusion (cadre légal, cohérence avec les règlements existants, clarté pour les familles, etc.).\n` +
-      `4. Tu peux suggérer, si pertinent, des annexes éventuelles (ex : exemples de scénarios d’usage, fiches pratiques, versions courtes à afficher dans l’ENT).\n`;
+      `Ta mission en tant qu’IA assistant un CPE ou un membre de la vie scolaire :\n` +
+      `1. Proposer d’abord un plan ou une structure du document (titres, sous-titres, parties) adapté au type de document.\n` +
+      `2. Puis rédiger le document complet en français, en respectant le ton demandé et le contexte fourni.\n` +
+      `3. Lorsque c’est un message à un élève ou aux familles, veiller à ce que le texte soit à la fois clair sur le cadre et respectueux des personnes.\n` +
+      `4. Lorsque c’est un protocole ou une fiche de suivi, veiller à ce que les étapes soient claires, opérationnelles et faciles à appliquer par l’équipe.\n` +
+      `5. Terminer par 3 à 5 « points de vigilance » à vérifier par l’équipe de vie scolaire avant diffusion (confidentialité, cohérence avec le règlement intérieur, mention éventuelle à retirer ou adapter, etc.).\n`;
 
     const prompt =
-      `Tu es une IA assistant un chef d’établissement (principal, proviseur, adjoint·e) dans le système scolaire français.\n\n` +
+      `Tu es une IA assistant un CPE ou un membre de la vie scolaire dans un établissement scolaire français.\n\n` +
       contexteEtab +
-      blocObjectif +
+      blocSituation +
       blocContraintesAdditionnelles +
       blocContraintesFixes +
       blocMission;
@@ -352,7 +367,7 @@ export default function EspaceAdministrationPage() {
       setTimeout(() => setCopied(false), 1500);
     } catch {
       alert(
-        "Impossible de copier automatiquement. Sélectionnez le texte et copiez-le à la main.",
+        "Impossible de copier automatiquement. Sélectionne le texte et copie-le manuellement.",
       );
     }
   }
@@ -368,26 +383,25 @@ export default function EspaceAdministrationPage() {
         <section className="rounded-3xl bg-white/90 p-6 lg:p-8 shadow-sm ring-1 ring-sky-100">
           <div className="flex flex-wrap items-start justify-between gap-4">
             <div className="space-y-4">
-              <p className="inline-flex items-center rounded-full bg-indigo-50 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-indigo-700 ring-1 ring-indigo-100">
-                Espace administration · Direction / pilotage
+              <p className="inline-flex items-center rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-emerald-700 ring-1 ring-emerald-100">
+                Espace vie scolaire · CPE / AED / équipes éducatives
               </p>
               <h1 className="text-3xl font-bold tracking-tight text-slate-900 lg:text-4xl">
-                Générateur de prompts pour la direction – EleveAI
+                Générateur de prompts vie scolaire – EleveAI
               </h1>
               <p className="max-w-2xl text-sm sm:text-base text-slate-700">
-                Cette page t’aide à formuler des messages clairs et
-                institutionnels pour rédiger une charte, informer les parents,
-                présenter un projet IA au conseil d’administration ou organiser
-                un plan de formation des enseignants.
+                Cette page t’aide à formuler des prompts pour rédiger des messages,
+                comptes rendus et protocoles de vie scolaire : conflits, retards,
+                harcèlement présumé, sanctions éducatives, climat scolaire, suivi d’élèves.
               </p>
             </div>
 
             <div className="max-w-xs rounded-2xl border border-slate-100 bg-slate-50 px-4 py-3 text-xs text-slate-900 shadow-inner">
               <p className="mb-1 font-semibold">Pour quoi faire ?</p>
               <ul className="space-y-1">
-                <li>• Charte d’usage de l’IA.</li>
-                <li>• Notes aux parents, au CA, aux équipes.</li>
-                <li>• Projets pilotes et plans de formation.</li>
+                <li>• Messages à un élève après un conflit.</li>
+                <li>• Courriels aux familles (retards, harcèlement présumé…).</li>
+                <li>• Fiches de suivi, comptes rendus, protocoles de vie scolaire.</li>
               </ul>
             </div>
           </div>
@@ -395,10 +409,10 @@ export default function EspaceAdministrationPage() {
 
         {/* 1️⃣ PRESETS – CARROUSEL */}
         <PresetCarousel
-          title="1️⃣ Choisir un modèle rapide (facultatif)"
-          subtitle="Tu peux gagner du temps en partant d’un exemple proche de ta situation. Tu pourras ensuite adapter tous les champs dans le formulaire."
-          items={ADMIN_PRESET_ITEMS}
-          onSelect={(id) => appliquerPreset(id as AdminPresetKey)}
+          title="1️⃣ Choisir un modèle de situation (facultatif)"
+          subtitle="Tu peux partir d’un exemple proche de ta réalité de terrain : conflit, harcèlement présumé, retards, sanction éducative, climat scolaire, etc."
+          items={VIESCO_PRESET_ITEMS}
+          onSelect={(id) => appliquerPreset(id as VieScoPresetKey)}
         />
 
         {/* 2️⃣ FORMULAIRE + PROMPT */}
@@ -406,7 +420,7 @@ export default function EspaceAdministrationPage() {
           {/* FORMULAIRE */}
           <div className="rounded-3xl bg-white p-6 lg:p-7 shadow-md ring-1 ring-slate-100 space-y-5">
             <h2 className="text-base font-semibold text-slate-900 mb-1">
-              2️⃣ Décrire ton établissement et le document à produire
+              2️⃣ Décrire le contexte de ton établissement et de la situation
             </h2>
 
             {/* ÉTABLISSEMENT */}
@@ -420,7 +434,7 @@ export default function EspaceAdministrationPage() {
                     type="text"
                     value={form.nomEtab}
                     onChange={(e) => handleChange("nomEtab", e.target.value)}
-                    className="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-900 shadow-inner focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-100"
+                    className="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-900 shadow-inner focus:border-emerald-400 focus:outline-none focus:ring-2 focus:ring-emerald-100"
                     placeholder="Ex : Collège Capitaine Dimitile"
                   />
                 </div>
@@ -432,7 +446,7 @@ export default function EspaceAdministrationPage() {
                     type="text"
                     value={form.ville}
                     onChange={(e) => handleChange("ville", e.target.value)}
-                    className="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-900 shadow-inner focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-100"
+                    className="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-900 shadow-inner focus:border-emerald-400 focus:outline-none focus:ring-2 focus:ring-emerald-100"
                     placeholder="Ex : Entre-Deux, Saint-Pierre…"
                   />
                 </div>
@@ -448,7 +462,7 @@ export default function EspaceAdministrationPage() {
                     onChange={(e) =>
                       handleChange("typeEtab", e.target.value as TypeEtab)
                     }
-                    className="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-xs sm:text-sm text-slate-900 shadow-inner focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-100"
+                    className="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-xs sm:text-sm text-slate-900 shadow-inner focus:border-emerald-400 focus:outline-none focus:ring-2 focus:ring-emerald-100"
                   >
                     <option value="college">Collège</option>
                     <option value="lycee">Lycée général / technologique</option>
@@ -465,8 +479,8 @@ export default function EspaceAdministrationPage() {
                     type="text"
                     value={form.nbEleves}
                     onChange={(e) => handleChange("nbEleves", e.target.value)}
-                    className="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-xs sm:text-sm text-slate-900 shadow-inner focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-100"
-                    placeholder="Ex : 450"
+                    className="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-xs sm:text-sm text-slate-900 shadow-inner focus:border-emerald-400 focus:outline-none focus:ring-2 focus:ring-emerald-100"
+                    placeholder="Ex : 438"
                   />
                 </div>
 
@@ -478,7 +492,7 @@ export default function EspaceAdministrationPage() {
                     type="text"
                     value={form.nbProfs}
                     onChange={(e) => handleChange("nbProfs", e.target.value)}
-                    className="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-xs sm:text-sm text-slate-900 shadow-inner focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-100"
+                    className="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-xs sm:text-sm text-slate-900 shadow-inner focus:border-emerald-400 focus:outline-none focus:ring-2 focus:ring-emerald-100"
                     placeholder="Ex : 35"
                   />
                 </div>
@@ -486,22 +500,37 @@ export default function EspaceAdministrationPage() {
 
               <div className="space-y-1.5">
                 <label className="text-xs font-medium text-slate-700">
-                  Contexte particulier (facultatif)
+                  Contexte particulier de l’établissement (facultatif)
                 </label>
                 <textarea
                   value={form.contexte}
                   onChange={(e) => handleChange("contexte", e.target.value)}
-                  className="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-xs sm:text-sm text-slate-900 shadow-inner min-h-[60px] focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-100"
-                  placeholder="Ex : Établissement rural / enclavé, REP / REP+, projet numérique en cours, forte proportion de boursiers, etc."
+                  className="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-xs sm:text-sm text-slate-900 shadow-inner min-h-[60px] focus:border-emerald-400 focus:outline-none focus:ring-2 focus:ring-emerald-100"
+                  placeholder="Ex : Établissement enclavé, REP / REP+, forte proportion de boursiers, projets autour du climat scolaire, etc."
                 />
               </div>
             </div>
 
-            {/* DOCUMENT */}
+            {/* SITUATION VIE SCOLAIRE */}
             <div className="space-y-3 pt-2 border-t border-slate-100">
               <h3 className="text-sm font-semibold text-slate-900">
-                Document à produire
+                Situation de vie scolaire
               </h3>
+
+              <div className="space-y-1.5">
+                <label className="text-xs font-medium text-slate-700">
+                  Type de situation
+                </label>
+                <input
+                  type="text"
+                  value={form.typeSituation}
+                  onChange={(e) =>
+                    handleChange("typeSituation", e.target.value)
+                  }
+                  className="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-xs sm:text-sm text-slate-900 shadow-inner focus:border-emerald-400 focus:outline-none focus:ring-2 focus:ring-emerald-100"
+                  placeholder="Ex : Conflit entre deux élèves de 4e à la sortie du collège, retards répétés d’un élève de 2de, suspicion de cyberharcèlement, etc."
+                />
+              </div>
 
               <div className="grid gap-3 sm:grid-cols-2">
                 <div className="space-y-1.5">
@@ -511,20 +540,26 @@ export default function EspaceAdministrationPage() {
                   <select
                     value={form.typeDoc}
                     onChange={(e) =>
-                      handleChange("typeDoc", e.target.value as TypeDoc)
+                      handleChange("typeDoc", e.target.value as TypeDocVieSco)
                     }
-                    className="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-xs sm:text-sm text-slate-900 shadow-inner focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-100"
+                    className="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-xs sm:text-sm text-slate-900 shadow-inner focus:border-emerald-400 focus:outline-none focus:ring-2 focus:ring-emerald-100"
                   >
-                    <option value="charte">Charte d’usage</option>
-                    <option value="note_parents">Note / courrier</option>
-                    <option value="projet_pilote">Présentation de projet pilote</option>
-                    <option value="protocole_triche">
-                      Protocole anti-triche / usages interdits
+                    <option value="message_eleve">Message à un élève</option>
+                    <option value="courrier_famille">
+                      Courrier / mail aux familles
                     </option>
-                    <option value="plan_formation">
-                      Plan de formation des professeurs
+                    <option value="rapport_incident">Rapport d’incident</option>
+                    <option value="fiche_suivi">Fiche de suivi d’élève</option>
+                    <option value="compte_rendu_sanction">
+                      Compte rendu de sanction éducative
                     </option>
-                    <option value="autre">Autre document</option>
+                    <option value="note_regles">
+                      Note générale sur les règles de vie scolaire
+                    </option>
+                    <option value="protocole_vie_scolaire">
+                      Protocole interne de vie scolaire
+                    </option>
+                    <option value="autre">Autre document de vie scolaire</option>
                   </select>
                 </div>
 
@@ -535,31 +570,38 @@ export default function EspaceAdministrationPage() {
                   <select
                     value={form.publicCible}
                     onChange={(e) =>
-                      handleChange("publicCible", e.target.value as PublicCible)
+                      handleChange(
+                        "publicCible",
+                        e.target.value as PublicCibleVieSco,
+                      )
                     }
-                    className="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-xs sm:text-sm text-slate-900 shadow-inner focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-100"
+                    className="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-xs sm:text-sm text-slate-900 shadow-inner focus:border-emerald-400 focus:outline-none focus:ring-2 focus:ring-emerald-100"
                   >
-                    <option value="toute_communaute">
-                      Toute la communauté éducative
+                    <option value="eleve">Élève / groupe d’élèves</option>
+                    <option value="famille">
+                      Familles / responsables légaux
                     </option>
-                    <option value="parents">Parents / responsables légaux</option>
-                    <option value="profs">Équipe pédagogique</option>
-                    <option value="eleves">Élèves</option>
-                    <option value="ca">Conseil d’administration / instances</option>
+                    <option value="equipe_vie_scolaire">
+                      Équipe de vie scolaire
+                    </option>
+                    <option value="equipe_educative">
+                      Équipe éducative élargie
+                    </option>
+                    <option value="direction">Direction / pilotage</option>
                   </select>
                 </div>
               </div>
 
               <div className="space-y-1.5">
                 <label className="text-xs font-medium text-slate-700">
-                  Titre souhaité du document (facultatif)
+                  Titre souhaité (facultatif)
                 </label>
                 <input
                   type="text"
                   value={form.titreDoc}
                   onChange={(e) => handleChange("titreDoc", e.target.value)}
-                  className="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-900 shadow-inner focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-100"
-                  placeholder='Ex : "Charte d’usage de l’intelligence artificielle au collège…"'
+                  className="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-900 shadow-inner focus:border-emerald-400 focus:outline-none focus:ring-2 focus:ring-emerald-100"
+                  placeholder='Ex : "Courriel aux familles – Rappel des règles sur les retards"'
                 />
               </div>
 
@@ -570,20 +612,20 @@ export default function EspaceAdministrationPage() {
                 <textarea
                   value={form.objectif}
                   onChange={(e) => handleChange("objectif", e.target.value)}
-                  className="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-xs sm:text-sm text-slate-900 shadow-inner min-h-[70px] focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-100"
-                  placeholder="Ex : Expliquer aux familles comment l’IA sera utilisée dans l’établissement, dans quel cadre, et ce qui restera interdit."
+                  className="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-xs sm:text-sm text-slate-900 shadow-inner min-h-[70px] focus:border-emerald-400 focus:outline-none focus:ring-2 focus:ring-emerald-100"
+                  placeholder="Ex : Expliquer aux familles la situation de manière factuelle, rappeler le cadre, proposer un rendez-vous, éviter toute stigmatisation."
                 />
               </div>
 
               <div className="space-y-1.5">
                 <label className="text-xs font-medium text-slate-700">
-                  Contraintes ou points à absolument intégrer (facultatif)
+                  Contraintes ou points à intégrer (facultatif)
                 </label>
                 <textarea
                   value={form.contraintes}
                   onChange={(e) => handleChange("contraintes", e.target.value)}
-                  className="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-xs sm:text-sm text-slate-900 shadow-inner min-h-[70px] focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-100"
-                  placeholder="Ex : Mention obligatoire du RGPD, nécessité de parler du règlement intérieur, cohérence avec un projet déjà voté, etc."
+                  className="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-xs sm:text-sm text-slate-900 shadow-inner min-h-[70px] focus:border-emerald-400 focus:outline-none focus:ring-2 focus:ring-emerald-100"
+                  placeholder="Ex : Ne pas citer tel élève, insister sur le fait qu’aucun élève n’est désigné comme harceleur à ce stade, rappeler la procédure interne EN si nécessaire, etc."
                 />
               </div>
 
@@ -595,21 +637,21 @@ export default function EspaceAdministrationPage() {
                   type="text"
                   value={form.ton}
                   onChange={(e) => handleChange("ton", e.target.value)}
-                  className="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-xs sm:text-sm text-slate-900 shadow-inner focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-100"
-                  placeholder="Ex : institutionnel et rassurant, clair et pédagogique, motivant, etc."
+                  className="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-xs sm:text-sm text-slate-900 shadow-inner focus:border-emerald-400 focus:outline-none focus:ring-2 focus:ring-emerald-100"
+                  placeholder="Ex : bienveillant et apaisant, ferme mais respectueux, factuel et professionnel…"
                 />
               </div>
 
               <div className="pt-3 flex flex-wrap items-center gap-3">
                 <button
                   onClick={genererPrompt}
-                  className="inline-flex items-center justify-center rounded-full bg-indigo-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-offset-2 focus:ring-offset-slate-50"
+                  className="inline-flex items-center justify-center rounded-full bg-emerald-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:ring-offset-2 focus:ring-offset-slate-50"
                 >
-                  ⚙️ Générer le prompt direction
+                  ⚙️ Générer le prompt vie scolaire
                 </button>
                 <p className="text-xs text-slate-500">
                   Tu pourras ensuite coller ce prompt dans EleveAI ou dans l’IA
-                  de ton choix pour générer le document.
+                  de ton choix pour rédiger le message ou le document.
                 </p>
               </div>
             </div>
@@ -619,7 +661,7 @@ export default function EspaceAdministrationPage() {
           <div className="rounded-3xl bg-white/95 p-5 lg:p-6 shadow-sm ring-1 ring-slate-100 space-y-3">
             <div className="flex items-center justify-between gap-2">
               <h2 className="text-sm font-semibold text-slate-900">
-                3️⃣ Prompt final pour la direction
+                3️⃣ Prompt final pour la vie scolaire
               </h2>
               <button
                 onClick={copierPrompt}
@@ -638,7 +680,7 @@ export default function EspaceAdministrationPage() {
               readOnly
               value={promptFinal}
               className="w-full min-h-[260px] rounded-2xl border border-slate-200 bg-slate-50 px-3 py-2 text-xs font-mono text-slate-900 shadow-inner"
-              placeholder="Renseigne le formulaire puis clique sur « Générer le prompt direction » : il apparaîtra ici, prêt à être collé dans une IA."
+              placeholder="Renseigne le formulaire puis clique sur « Générer le prompt vie scolaire » : il apparaîtra ici, prêt à être collé dans une IA."
             />
           </div>
         </section>
@@ -646,3 +688,4 @@ export default function EspaceAdministrationPage() {
     </main>
   );
 }
+

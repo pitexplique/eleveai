@@ -19,7 +19,10 @@ const MAIN_LINKS: NavItem[] = [
     href: "/espace-administration",
     label: "Assistant administratif (IA)",
   },
-  { href: "/atelier-IA", label: "Ateliers IA", badge: "NOUVEAU" },
+  {
+    href: "/espace-vie-scolaire",
+    label: "Vie scolaire (IA)",
+  },
 ];
 
 const SECONDARY_LINKS: NavItem[] = [
@@ -44,6 +47,7 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-40 border-b border-slate-800 bg-slate-950/90 backdrop-blur">
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:py-4">
+        
         {/* LOGO */}
         <div className="flex items-center gap-2">
           <Link href="/" className="flex items-center gap-2">
@@ -77,12 +81,6 @@ export default function Header() {
                 ].join(" ")}
               >
                 {link.label}
-
-                {link.badge && (
-                  <span className="ml-1 inline-flex items-center rounded-full bg-emerald-600/20 text-emerald-300 text-[10px] font-semibold px-2 py-0.5 uppercase tracking-wide">
-                    {link.badge}
-                  </span>
-                )}
               </Link>
             );
           })}
@@ -150,11 +148,6 @@ export default function Header() {
                   ].join(" ")}
                 >
                   {link.label}
-                  {link.badge && (
-                    <span className="ml-auto inline-flex items-center rounded-full bg-emerald-600/20 text-emerald-300 text-[10px] font-semibold px-2 py-0.5 uppercase tracking-wide">
-                      {link.badge}
-                    </span>
-                  )}
                 </Link>
               );
             })}
