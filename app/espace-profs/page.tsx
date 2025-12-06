@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import Link from "next/link";
+import { MarkdownMath } from "@/components/MarkdownMath";
 
 type Niveau = "basique" | "standard" | "expert";
 
@@ -99,9 +100,7 @@ const TYPES_PAR_MATIERE: Record<string, string[]> = {
     "Construction d’une fiche notionnelle (auteur, concept, problème)",
     "Génération de sujets de réflexion pour l’oral",
   ],
-  Autre: [
-    "Création d’activité interdisciplinaire",
-  ],
+  Autre: ["Création d’activité interdisciplinaire"],
 };
 
 // 🔹 Types spéciaux examens
@@ -118,6 +117,114 @@ const TYPES_SPECIAUX_BAC = [
   "Génération d’exercices type bac avec correction",
   "Préparation d’une synthèse de révision pour le bac",
 ];
+
+// 🔧 Fonction qui construit le prompt interne à partir du formulaire
+function construirePrompt(form: PromptProf, latexMode: boolean): string {
+  const blocTags =
+    form.tags.length > 0
+      ? `Mots-clés pédagogiques fournis par le professeur : ${form.tags.join(", ")}.\n`
+      : "";
+
+  const blocDYS = form.adaptationDYS
+    ? `Adapte ta réponse pour un élève présentant des troubles DYS :\n` +
+      `- phrases courtes et simples,\n` +
+      `- mise en page aérée avec listes,\n` +
+      `- éviter les doubles négations,\n` +
+      `- expliquer le vocabulaire difficile,\n` +
+      `- rappeler le sens des symboles mathématiques.\n\n`
+    : "";
+
+  const blocAuteur = form.auteur
+    ? `Ce prompt est préparé par le professeur : ${form.auteur}.\n`
+    : "";
+
+  const blocEduscol =
+    `Ta réponse doit respecter les programmes officiels du système scolaire français :\n` +
+    `- conformité à l’esprit des programmes publiés sur Eduscol,\n` +
+    `- cohérence avec le Bulletin Officiel (BO),\n` +
+    `- vocabulaire disciplinaire attendu en classe.\n\n`;
+
+  const blocNeuro = form.neuro
+    ? `Tu t’appuies sur des principes issus des neurosciences de l’apprentissage :\n` +
+      `- activer les connaissances préalables de l’élève,\n` +
+      `- introduire une seule difficulté nouvelle à la fois,\n` +
+      `- découper la notion en petites étapes claires,\n` +
+      `- alterner explications et petites questions de vérification,\n` +
+      `- utiliser des exemples concrets avant la formalisation,\n` +
+      `- terminer par un court récapitulatif des idées clés,\n` +
+      `- inviter l’élève à reformuler avec ses propres mots.\n\n`
+    : "";
+
+  const estMaths = form.matiere === "Mathématiques";
+
+  // 👉 Bloc notation : dépend de la matière & du mode LaTeX
+  let blocNotation = "";
+  if (estMaths && latexMode) {
+    blocNotation =
+      `Pour les écritures mathématiques, tu peux utiliser LaTeX (\\frac, \\sqrt, exposants, etc.), ` +
+      `de manière propre et compatible avec une réutilisation dans un document LaTeX ou un script Manim.\n\n`;
+  } else {
+    blocNotation =
+      `Pour les écritures mathématiques, n'utilise pas de LaTeX (pas de \\frac, \\sqrt, etc.). ` +
+      `Écris les fractions sous la forme a/b et les puissances sous la forme x^2 ou "x au carré".\n\n`;
+  }
+
+  const blocRappelsEtMeta =
+    `Ta réponse devra :\n` +
+    `- commencer par un rappel très court des prérequis ou de la notion déjà vue en classe,\n` +
+    `- présenter la nouvelle notion ou la tâche en plusieurs étapes numérotées,\n` +
+    `- insérer régulièrement de petites questions de vérification du type « Et toi, saurais-tu… ? » ou « Quel est le point important à retenir ici ? »,\n` +
+    `- se terminer par un court récapitulatif sous forme de liste à puces,\n` +
+    `- proposer une question métacognitive finale du type « Qu’as-tu trouvé le plus facile ? Le plus difficile ? » pour inviter l’élève à réfléchir sur son apprentissage.\n\n`;
+
+  const blocCriteres =
+    `Ajoute à la fin une courte rubrique intitulée « Pour l’enseignant » qui liste 3 à 5 critères de réussite observables, par exemple :\n` +
+    `- ce que l’élève sait expliquer,\n` +
+    `- ce qu’il sait faire en autonomie,\n` +
+    `- les erreurs typiques à surveiller.\n\n`;
+
+  const blocMiseEnPage =
+    `Si ta réponse correspond à un devoir surveillé, une fiche d’activités ou une évaluation, propose une mise en page structurée facilement transférable dans un document Word :\n` +
+    `- titres clairs (contexte, questions, rappel de la méthode),\n` +
+    `- exercices numérotés,\n` +
+    `- indication des points éventuels ou du temps conseillé,\n` +
+    `- espaces prévus pour que l’élève puisse répondre.\n\n`;
+
+  const prompt =
+    `Tu es une IA pédagogique destinée à des élèves de ${form.classe || "collège/lycée"} ` +
+    `en ${form.matiere || "discipline scolaire"}, dans le système scolaire français.\n\n` +
+    blocEduscol +
+    blocNeuro +
+    blocNotation +
+    `Objectif pédagogique indiqué par le professeur : ${
+      form.objectifPedagogique ||
+      "(non précisé : propose une version compatible avec le programme officiel)"
+    }\n` +
+    `Niveau de difficulté souhaité : ${form.niveau}.\n` +
+    `Type de tâche : ${
+      form.type ||
+      "non précisé (choisis une structure adaptée au niveau de l’élève)"
+    }.\n` +
+    blocTags +
+    blocAuteur +
+    `Consigne initiale rédigée par le professeur (à optimiser) :\n` +
+    `"""${form.contenu.trim()}"""\n\n` +
+    blocDYS +
+    blocRappelsEtMeta +
+    blocCriteres +
+    blocMiseEnPage +
+    `Ta mission :\n` +
+    `1. Si la demande du professeur est floue ou incomplète, commence par proposer une version plus précise et mieux structurée du prompt, en gardant son intention pédagogique.\n` +
+    `2. Ensuite, produis la réponse pour l’élève en respectant :\n` +
+    `   - le niveau indiqué,\n` +
+    `   - les programmes officiels (Eduscol, BO),\n` +
+    `   - les principes des neurosciences de l’apprentissage (si activés),\n` +
+    `   - la clarté pédagogique (étapes, exemples, questions de vérification, récapitulatif),\n` +
+    `   - la prise en compte éventuelle des besoins DYS.\n` +
+    `3. Ne résous pas un devoir maison spécifique à la place de l’élève, sauf si le professeur demande explicitement une correction commentée.\n`;
+
+  return prompt;
+}
 
 export default function ProfsPage() {
   const today = new Date().toISOString().slice(0, 10);
@@ -137,9 +244,16 @@ export default function ProfsPage() {
     date: today,
   });
 
+  const [latexMode, setLatexMode] = useState(false); // 👈 mode LaTeX pour les maths
+
   const [rawTags, setRawTags] = useState("");
-  const [promptFinal, setPromptFinal] = useState("");
-  const [copied, setCopied] = useState(false);
+  const [promptInterne, setPromptInterne] = useState("");
+  const [agentOutput, setAgentOutput] = useState("");
+  const [agentLoading, setAgentLoading] = useState(false);
+  const [agentError, setAgentError] = useState("");
+  const [copiedRessource, setCopiedRessource] = useState(false);
+  const [copiedPrompt, setCopiedPrompt] = useState(false);
+  const [showPromptInterne, setShowPromptInterne] = useState(false);
 
   function handleChange(
     field: keyof PromptProf,
@@ -149,6 +263,11 @@ export default function ProfsPage() {
       ...prev,
       [field]: value,
     }));
+
+    // si on change de matière et qu'on quitte les maths → on coupe le mode LaTeX
+    if (field === "matiere" && value !== "Mathématiques") {
+      setLatexMode(false);
+    }
   }
 
   function updateTags(value: string) {
@@ -160,7 +279,7 @@ export default function ProfsPage() {
     setForm((prev) => ({ ...prev, tags }));
   }
 
-  // 🔹 Types de prompt disponibles en fonction de la matière + bac/brevet
+  // 🔹 Types de ressource disponibles en fonction de la matière + bac/brevet
   const typesDisponibles = useMemo(() => {
     const communs = TYPES_COMMUNS;
     const specifiquesMatiere = form.matiere
@@ -179,8 +298,9 @@ export default function ProfsPage() {
       speciauxExamens = TYPES_SPECIAUX_BAC;
     }
 
-    // On fusionne tout et on enlève les doublons
-    return Array.from(new Set([...specifiquesMatiere, ...speciauxExamens, ...communs]));
+    return Array.from(
+      new Set([...specifiquesMatiere, ...speciauxExamens, ...communs]),
+    );
   }, [form.matiere, form.classe]);
 
   // Suggestions simples pour améliorer le prompt du prof
@@ -194,7 +314,9 @@ export default function ProfsPage() {
     }
 
     if (!form.classe) {
-      s.push("Sélectionne une classe/niveau : cela aide l’IA à ajuster le vocabulaire.");
+      s.push(
+        "Sélectionne une classe/niveau : cela aide l’IA à ajuster le vocabulaire.",
+      );
     }
 
     if (!form.matiere) {
@@ -205,7 +327,7 @@ export default function ProfsPage() {
 
     if (!form.type) {
       s.push(
-        "Choisis un type de prompt (explication, exercices, activité, etc.) pour guider la structure de la réponse.",
+        "Choisis un type de ressource (exercices, activité, évaluation…) pour guider la structure de la réponse.",
       );
     }
 
@@ -229,119 +351,135 @@ export default function ProfsPage() {
 
     if (s.length === 0) {
       s.push(
-        "Ton prompt est déjà bien structuré. Tu peux encore l’améliorer en donnant un exemple concret ou en précisant la durée de la tâche.",
+        "Ton paramétrage est déjà bien structuré. Tu peux encore l’améliorer en donnant un exemple concret ou en précisant la durée de la tâche.",
       );
     }
 
     return s;
   }, [form]);
 
-  // "Moulinette" interne : enrichissement pédagogique (Eduscol + BO + neurosciences)
-  function genererPromptFinal() {
+  // 🔵 Bouton principal : créer la ressource pédagogique
+  async function creerRessource() {
     if (!form.contenu.trim()) {
-      alert("Merci de remplir au moins le contenu du prompt.");
+      alert("Merci de remplir le texte du prompt (version professeur).");
       return;
     }
 
-    const blocTags =
-      form.tags.length > 0
-        ? `Mots-clés pédagogiques fournis par le professeur : ${form.tags.join(", ")}.\n`
-        : "";
+    const prompt = construirePrompt(form, latexMode);
+    setPromptInterne(prompt);
+    setAgentOutput("");
+    setAgentError("");
+    setCopiedRessource(false);
+    setCopiedPrompt(false);
 
-    const blocDYS = form.adaptationDYS
-      ? `Adapte ta réponse pour un élève présentant des troubles DYS :\n` +
-        `- phrases courtes et simples,\n` +
-        `- mise en page aérée avec listes,\n` +
-        `- éviter les doubles négations,\n` +
-        `- expliquer le vocabulaire difficile,\n` +
-        `- rappeler le sens des symboles mathématiques.\n\n`
-      : "";
+    setAgentLoading(true);
 
-    const blocAuteur = form.auteur
-      ? `Ce prompt est préparé par le professeur : ${form.auteur}.\n`
-      : "";
+    try {
+      const res = await fetch("/api/agent-prof", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ prompt, latexMode }),
+      });
 
-    const blocEduscol =
-      `Ta réponse doit respecter les programmes officiels du système scolaire français :\n` +
-      `- conformité à l’esprit des programmes publiés sur Eduscol,\n` +
-      `- cohérence avec le Bulletin Officiel (BO),\n` +
-      `- vocabulaire disciplinaire attendu en classe.\n\n`;
+      const data = await res.json().catch(() => ({}));
 
-    const blocNeuro = form.neuro
-      ? `Tu t’appuies sur des principes issus des neurosciences de l’apprentissage :\n` +
-        `- activer les connaissances préalables de l’élève,\n` +
-        `- introduire une seule difficulté nouvelle à la fois,\n` +
-        `- découper la notion en petites étapes claires,\n` +
-        `- alterner explications et petites questions de vérification,\n` +
-        `- utiliser des exemples concrets avant la formalisation,\n` +
-        `- terminer par un court récapitulatif des idées clés,\n` +
-        `- inviter l’élève à reformuler avec ses propres mots.\n\n`
-      : "";
+      if (!res.ok) {
+        throw new Error(data.error || "Erreur lors de l'appel à l'agent IA.");
+      }
 
-    const blocRappelsEtMeta =
-      `Ta réponse devra :\n` +
-      `- commencer par un rappel très court des prérequis ou de la notion déjà vue en classe,\n` +
-      `- présenter la nouvelle notion ou la tâche en plusieurs étapes numérotées,\n` +
-      `- insérer régulièrement de petites questions de vérification du type « Et toi, saurais-tu… ? » ou « Quel est le point important à retenir ici ? »,\n` +
-      `- se terminer par un court récapitulatif sous forme de liste à puces,\n` +
-      `- proposer une question métacognitive finale du type « Qu’as-tu trouvé le plus facile ? Le plus difficile ? » pour inviter l’élève à réfléchir sur son apprentissage.\n\n`;
-
-    const blocCriteres =
-      `Ajoute à la fin une courte rubrique intitulée « Pour l’enseignant » qui liste 3 à 5 critères de réussite observables, par exemple :\n` +
-      `- ce que l’élève sait expliquer,\n` +
-      `- ce qu’il sait faire en autonomie,\n` +
-      `- les erreurs typiques à surveiller.\n\n`;
-
-    const blocMiseEnPage =
-      `Si ta réponse correspond à un devoir surveillé, une fiche d’activités ou une évaluation, propose une mise en page structurée facilement transférable dans un document Word :\n` +
-      `- titres clairs (contexte, questions, rappel de la méthode),\n` +
-      `- exercices numérotés,\n` +
-      `- indication des points éventuels ou du temps conseillé,\n` +
-      `- espaces prévus pour que l’élève puisse répondre.\n\n`;
-
-    const prompt =
-      `Tu es une IA pédagogique destinée à des élèves de ${form.classe || "collège/lycée"} ` +
-      `en ${form.matiere || "discipline scolaire"}, dans le système scolaire français.\n\n` +
-      blocEduscol +
-      blocNeuro +
-      `Objectif pédagogique indiqué par le professeur : ${form.objectifPedagogique || "(non précisé : propose une version compatible avec le programme officiel)"}\n` +
-      `Niveau de difficulté souhaité : ${form.niveau}.\n` +
-      `Type de tâche : ${form.type || "non précisé (choisis une structure adaptée au niveau de l’élève)"}.\n` +
-      blocTags +
-      blocAuteur +
-      `Consigne initiale rédigée par le professeur (à optimiser) :\n` +
-      `"""${form.contenu.trim()}"""\n\n` +
-      blocDYS +
-      blocRappelsEtMeta +
-      blocCriteres +
-      blocMiseEnPage +
-      `Ta mission :\n` +
-      `1. Si la demande du professeur est floue ou incomplète, commence par proposer une version plus précise et mieux structurée du prompt, en gardant son intention pédagogique.\n` +
-      `2. Ensuite, produis la réponse pour l’élève en respectant :\n` +
-      `   - le niveau indiqué,\n` +
-      `   - les programmes officiels (Eduscol, BO),\n` +
-      `   - les principes des neurosciences de l’apprentissage (si activés),\n` +
-      `   - la clarté pédagogique (étapes, exemples, questions de vérification, récapitulatif),\n` +
-      `   - la prise en compte éventuelle des besoins DYS.\n` +
-      `3. Ne résous pas un devoir maison spécifique à la place de l’élève, sauf si le professeur demande explicitement une correction commentée.\n`;
-
-    setPromptFinal(prompt);
-    setCopied(false);
+      setAgentOutput(data.output || "");
+    } catch (err: any) {
+      console.error(err);
+      setAgentError(
+        err?.message ||
+          "Erreur inconnue lors de l'appel à EleveAI. Vérifie que le serveur tourne.",
+      );
+    } finally {
+      setAgentLoading(false);
+    }
   }
 
-  async function copierPrompt() {
-    if (!promptFinal) return;
+  async function copierRessource() {
+    if (!agentOutput) return;
     try {
-      await navigator.clipboard.writeText(promptFinal);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    } catch (e) {
-      console.error(e);
+      await navigator.clipboard.writeText(agentOutput);
+      setCopiedRessource(true);
+      setTimeout(() => setCopiedRessource(false), 2000);
+    } catch {
       alert(
-        "Impossible de copier automatiquement. Sélectionne le texte et copie-le à la main.",
+        "Impossible de copier automatiquement. Sélectionne le texte et copie-le à la main (Ctrl+C).",
       );
     }
   }
+
+  async function copierPromptInterne() {
+    if (!promptInterne) return;
+    try {
+      await navigator.clipboard.writeText(promptInterne);
+      setCopiedPrompt(true);
+      setTimeout(() => setCopiedPrompt(false), 2000);
+    } catch {
+      alert(
+        "Impossible de copier automatiquement. Sélectionne le texte et copie-le à la main (Ctrl+C).",
+      );
+    }
+  }
+
+  // 👉 Boutons d’exemples pour tests rapides
+  function remplirExemple6eMaths() {
+    const exemple: PromptProf = {
+      titre: "Exercices guidés sur les fractions – 6e",
+      classe: "6e",
+      matiere: "Mathématiques",
+      niveau: "standard",
+      type: "Génération d’exercices",
+      objectifPedagogique:
+        "Amener les élèves de 6e à comparer, simplifier et additionner des fractions simples en lien avec des situations concrètes.",
+      contenu:
+        "Je veux une fiche d’exercices sur les fractions pour une classe de 6e :\n" +
+        "- rappel très court de ce qu’est une fraction (partage, part d’un tout),\n" +
+        "- 3 exercices de simplification de fractions,\n" +
+        "- 3 exercices où il faut comparer des fractions avec des dessins (bandes, disques…),\n" +
+        "- 3 exercices d’addition de fractions avec le même dénominateur,\n" +
+        "- 1 petit problème en lien avec la vie quotidienne (partage de gâteau, recette de cuisine…).\n" +
+        "Je veux des consignes claires pour les élèves, et une mise en page exploitable directement en classe.",
+      tags: ["fractions", "6e", "numération"],
+      adaptationDYS: true,
+      neuro: true,
+      auteur: form.auteur || "",
+      date: form.date,
+    };
+
+    setForm(exemple);
+    setRawTags(exemple.tags.join(", "));
+    setLatexMode(false); // pour 6e, par défaut sans LaTeX
+  }
+
+  function reinitialiserFormulaire() {
+    setForm({
+      titre: "",
+      objectifPedagogique: "",
+      classe: "",
+      matiere: "",
+      niveau: "standard",
+      type: "",
+      contenu: "",
+      tags: [],
+      adaptationDYS: true,
+      neuro: true,
+      auteur: "",
+      date: today,
+    });
+    setRawTags("");
+    setLatexMode(false);
+    setPromptInterne("");
+    setAgentOutput("");
+    setAgentError("");
+    setCopiedRessource(false);
+    setCopiedPrompt(false);
+  }
+
+  const estMaths = form.matiere === "Mathématiques";
 
   return (
     <main className="min-h-screen bg-gradient-to-b from-sky-50 via-white to-slate-50 text-gray-900">
@@ -350,18 +488,15 @@ export default function ProfsPage() {
         <header className="space-y-2">
           <p className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-100 text-xs font-semibold text-[#0047B6]">
             <span>🧑‍🏫</span>
-            <span>Espace professeurs – Générer un prompt pédagogique</span>
+            <span>Espace professeurs – Générer une ressource pédagogique</span>
           </p>
           <h1 className="text-3xl sm:text-4xl font-extrabold text-[#0047B6]">
-            Générer un prompt pour les profs
+            Créer une séance, des exercices ou une évaluation avec EleveAI
           </h1>
           <p className="text-sm sm:text-base text-gray-700 max-w-2xl">
-            Remplis les informations ci-dessous : EleveAI construira pour toi un
-            prompt optimisé, conforme aux programmes, que tu pourras ensuite utiliser
-            dans ton IA préférée (ChatGPT, Gemini, Claude, Mistral…) ou dans le chat
-            EleveAI.
+            Remplis les informations ci-dessous : EleveAI générera pour toi une
+            ressource pédagogique prête à être copiée dans Word, Pronote ou ton ENT.
           </p>
-          {/* Badge Eduscol + neurosciences */}
           <p className="inline-flex items-center gap-2 mt-2 px-3 py-1 rounded-full bg-emerald-50 text-[11px] font-semibold text-emerald-700 border border-emerald-100">
             <span>🧠</span>
             <span>Cette page applique Eduscol + neurosciences de l’apprentissage</span>
@@ -381,6 +516,29 @@ export default function ProfsPage() {
             <h2 className="text-lg font-bold text-[#0047B6] flex items-center gap-2">
               1️⃣ Paramètres pédagogiques
             </h2>
+
+            {/* 🔸 Exemples de test rapides */}
+            <div className="mb-2 rounded-lg border border-dashed border-sky-200 bg-sky-50 px-3 py-2 text-[11px] space-y-2">
+              <p className="font-semibold text-sky-900">
+                Exemples rapides pour tester la page
+              </p>
+              <div className="flex flex-wrap gap-2">
+                <button
+                  type="button"
+                  onClick={remplirExemple6eMaths}
+                  className="px-3 py-1.5 rounded-lg bg-sky-600 text-white font-semibold hover:bg-sky-700"
+                >
+                  🧮 Exemple 6e – Maths (fractions)
+                </button>
+                <button
+                  type="button"
+                  onClick={reinitialiserFormulaire}
+                  className="px-3 py-1.5 rounded-lg bg-slate-200 text-slate-800 font-semibold hover:bg-slate-300"
+                >
+                  🔄 Réinitialiser le formulaire
+                </button>
+              </div>
+            </div>
 
             {/* Classe / matière / niveau */}
             <div className="grid sm:grid-cols-3 gap-3">
@@ -424,7 +582,9 @@ export default function ProfsPage() {
                 </label>
                 <select
                   value={form.niveau}
-                  onChange={(e) => handleChange("niveau", e.target.value as Niveau)}
+                  onChange={(e) =>
+                    handleChange("niveau", e.target.value as Niveau)
+                  }
                   className="w-full border rounded-lg px-3 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-sky-300"
                 >
                   <option value="basique">Basique (remédiation)</option>
@@ -434,10 +594,35 @@ export default function ProfsPage() {
               </div>
             </div>
 
-            {/* Type de prompt (dépend matière + bac/brevet) */}
-            <div className="space-y-1">
+            {/* Mode LaTeX pour les maths */}
+            {estMaths && (
+              <div className="mt-2 flex items-center justify-between gap-3 rounded-lg border border-sky-100 bg-sky-50 px-3 py-2">
+                <div className="text-[11px] text-sky-900">
+                  <p className="font-semibold">
+                    Mode avancé Mathématiques (LaTeX)
+                  </p>
+                  <p>
+                    Active cette option si tu veux une ressource avec formules en
+                    LaTeX (pour LaTeX ou Manim). Sinon, la sortie restera en écriture
+                    simple (2/5, x^2…).
+                  </p>
+                </div>
+                <label className="inline-flex items-center gap-2 text-[11px] text-sky-900">
+                  <input
+                    type="checkbox"
+                    checked={latexMode}
+                    onChange={(e) => setLatexMode(e.target.checked)}
+                    className="rounded border-gray-400"
+                  />
+                  <span>Autoriser LaTeX</span>
+                </label>
+              </div>
+            )}
+
+            {/* Type de ressource */}
+            <div className="space-y-1 pt-2">
               <label className="text-xs font-semibold text-gray-600">
-                Type de prompt
+                Type de ressource à générer
               </label>
               <select
                 value={form.type}
@@ -452,7 +637,9 @@ export default function ProfsPage() {
                 ))}
               </select>
               <p className="text-[11px] text-gray-500 mt-1">
-                Les types proposés s’adaptent à la matière choisie et, en 3e, à la préparation du brevet ; en Seconde, Première et Terminale, à la préparation du bac.
+                Les propositions s’adaptent à la matière choisie et, en 3e, à la
+                préparation du brevet ; en Seconde, Première et Terminale, à la
+                préparation du bac.
               </p>
             </div>
 
@@ -460,13 +647,13 @@ export default function ProfsPage() {
             <div className="grid sm:grid-cols-[2fr,1fr] gap-3">
               <div className="space-y-1">
                 <label className="text-xs font-semibold text-gray-600">
-                  Titre du prompt
+                  Titre de la ressource (pour toi)
                 </label>
                 <input
                   type="text"
                   value={form.titre}
                   onChange={(e) => handleChange("titre", e.target.value)}
-                  placeholder="Ex : Comprendre la notion de justice en philosophie"
+                  placeholder="Ex : Séance sur la notion de justice en philosophie"
                   className="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-sky-300"
                 />
               </div>
@@ -491,7 +678,9 @@ export default function ProfsPage() {
               </label>
               <textarea
                 value={form.objectifPedagogique}
-                onChange={(e) => handleChange("objectifPedagogique", e.target.value)}
+                onChange={(e) =>
+                  handleChange("objectifPedagogique", e.target.value)
+                }
                 placeholder="Ex : amener l’élève à problématiser un sujet philosophique simple."
                 className="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-sky-300 min-h-[70px]"
               />
@@ -500,7 +689,7 @@ export default function ProfsPage() {
             {/* Tags */}
             <div className="space-y-1">
               <label className="text-xs font-semibold text-gray-600">
-                Tags (séparés par des virgules)
+                Mots-clés (séparés par des virgules)
               </label>
               <input
                 type="text"
@@ -511,7 +700,7 @@ export default function ProfsPage() {
               />
               {form.tags.length > 0 && (
                 <p className="text-[11px] text-gray-500">
-                  Tags reconnus :{" "}
+                  Mots-clés pris en compte :{" "}
                   <span className="font-semibold">
                     {form.tags.join(", ")}
                   </span>
@@ -525,47 +714,55 @@ export default function ProfsPage() {
                 <input
                   type="checkbox"
                   checked={form.adaptationDYS}
-                  onChange={(e) => handleChange("adaptationDYS", e.target.checked)}
+                  onChange={(e) =>
+                    handleChange("adaptationDYS", e.target.checked)
+                  }
                   className="rounded border-gray-400"
                 />
-                <span>Adapter la réponse pour des élèves DYS</span>
+                <span>Adapter la ressource pour des élèves DYS</span>
               </label>
               <div className="text-[11px] text-gray-500">
-                Date :{" "}
-                <span className="font-mono">{form.date}</span>
+                Date : <span className="font-mono">{form.date}</span>
               </div>
             </div>
 
             {/* Contenu du prompt */}
             <div className="space-y-1 pt-2">
               <label className="text-xs font-semibold text-gray-600">
-                Texte du prompt (version professeur)
+                Texte de ta demande (version professeur)
               </label>
               <textarea
                 value={form.contenu}
                 onChange={(e) => handleChange("contenu", e.target.value)}
-                placeholder="Ex : Propose une explication guidée de ce sujet de dissertation : « Faut-il toujours dire la vérité ? » avec étapes, exemples et questions pour l’élève."
+                placeholder="Ex : Génère une fiche d’exercices guidés sur « Faut-il toujours dire la vérité ? » avec corrigé, pour une classe de Première."
                 className="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-sky-300 min-h-[120px]"
               />
             </div>
 
-            {/* Bouton générer */}
+            {/* Bouton principal */}
             <div className="pt-3 flex justify-end">
               <button
-                onClick={genererPromptFinal}
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#0047B6] text-white text-sm font-semibold shadow hover:bg-[#003894] transition"
+                onClick={creerRessource}
+                disabled={agentLoading}
+                className={`inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold shadow ${
+                  agentLoading
+                    ? "bg-sky-100 text-sky-500 cursor-not-allowed"
+                    : "bg-[#0047B6] text-white hover:bg-[#003894]"
+                }`}
               >
-                ⚙️ Générer le prompt optimisé
+                {agentLoading
+                  ? "⏳ EleveAI prépare ta ressource..."
+                  : "✨ Créer la ressource pédagogique avec EleveAI"}
               </button>
             </div>
           </section>
 
-          {/* Colonne droite : suggestions + prompt final */}
+          {/* Colonne droite : suggestions + résultat */}
           <section className="space-y-4">
             {/* Suggestions */}
             <div className="bg-white/95 border border-amber-200 rounded-2xl shadow-sm p-5 sm:p-6 space-y-3">
               <h2 className="text-lg font-bold text-amber-700 flex items-center gap-2">
-                2️⃣ Recommandations pour améliorer ton prompt
+                2️⃣ Conseils pour un meilleur résultat
               </h2>
               <ul className="space-y-2 text-sm text-gray-700">
                 {suggestions.map((s, idx) => (
@@ -576,53 +773,65 @@ export default function ProfsPage() {
                 ))}
               </ul>
               <p className="text-[11px] text-gray-500">
-                Ces recommandations sont là pour t’aider à rendre ton prompt plus
-                clair, plus ciblé et plus utile pour les élèves.
+                Plus ta demande est précise (niveau, type de tâche, exemples…),
+                plus la ressource générée sera directement exploitable en classe.
               </p>
             </div>
 
-            {/* Prompt final */}
-            <div className="bg-white/95 border border-slate-200 rounded-2xl shadow-sm p-5 sm:p-6 space-y-3">
+            {/* Ressource générée */}
+            <div className="bg-white/95 border border-slate-200 rounded-2xl shadow-sm p-5 sm:p-6 space-y-4">
               <div className="flex items-center justify-between gap-2">
                 <h2 className="text-lg font-bold text-[#0047B6]">
-                  3️⃣ Prompt final à utiliser dans ton IA
+                  3️⃣ Ressource générée par EleveAI
                 </h2>
                 <button
-                  onClick={copierPrompt}
-                  disabled={!promptFinal}
-                  className={`inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-semibold ${
-                    promptFinal
+                  type="button"
+                  onClick={copierRessource}
+                  disabled={!agentOutput}
+                  className={`inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-[11px] font-semibold ${
+                    agentOutput
                       ? "bg-slate-800 text-white hover:bg-slate-900"
                       : "bg-slate-200 text-slate-500 cursor-not-allowed"
                   }`}
                 >
-                  {copied ? "✅ Copié" : "📋 Copier"}
+                  {copiedRessource ? "✅ Texte copié" : "📋 Copier pour Word / ENT"}
                 </button>
               </div>
 
-              <textarea
-                readOnly
-                value={promptFinal}
-                placeholder="Génère d’abord un prompt optimisé à partir du formulaire ci-contre."
-                className="w-full border rounded-lg px-3 py-2 text-xs sm:text-[13px] font-mono bg-slate-50 min-h-[180px]"
-              />
+              {agentError && (
+                <p className="text-xs text-red-600">⚠️ {agentError}</p>
+              )}
 
-              {/* Liens vers les IA */}
-              <div className="space-y-2">
-                <p className="text-xs text-gray-700">
-                  Une fois le prompt copié, ouvre l’IA de ton choix et colle-le
-                  dans la zone de texte.
+              <p className="text-[11px] text-gray-500">
+                Tu peux copier cette ressource et la coller telle quelle dans Word,
+                Pronote, ton ENT ou une autre IA (ChatGPT, etc.).
+              </p>
+
+              <div className="eleveai-math border rounded p-3 min-h-[180px] bg-slate-50 text-sm whitespace-pre-wrap">
+                {agentLoading ? (
+                  "Réflexion en cours..."
+                ) : agentOutput ? (
+                  <MarkdownMath>{agentOutput}</MarkdownMath>
+                ) : (
+                  "La ressource générée par EleveAI apparaîtra ici après avoir cliqué sur « Créer la ressource pédagogique »."
+                )}
+              </div>
+
+              {/* 🔗 Boutons IA externes */}
+              <div className="space-y-2 pt-3">
+                <p className="text-[11px] text-gray-600">
+                  Tu peux aussi réutiliser le prompt interne dans l’IA de ton choix :
                 </p>
-                <div className="flex flex-wrap gap-2 text-xs sm:text-sm">
+                <div className="flex flex-wrap gap-2 text-[11px] sm:text-xs">
                   <Link
                     href={
-                      promptFinal
-                        ? `/chat?prompt=${encodeURIComponent(promptFinal)}`
-                        : "/chat"
+                      promptInterne
+                        ? `/tchat?prompt=${encodeURIComponent(promptInterne)}`
+                        : "/tchat"
                     }
                     className="px-3 py-2 rounded-lg bg-emerald-600 text-white font-semibold hover:bg-emerald-700"
                   >
-                    🚀 Utiliser avec EleveAI
+                    🚀 Utiliser avec le chat EleveAI
                   </Link>
                   <a
                     href="https://chatgpt.com"
@@ -659,11 +868,50 @@ export default function ProfsPage() {
                 </div>
               </div>
             </div>
+
+            {/* Prompt interne (optionnel, pour les curieux) */}
+            <div className="bg-white/80 border border-dashed border-slate-300 rounded-2xl shadow-sm p-4 space-y-3 text-xs">
+              <button
+                type="button"
+                onClick={() => setShowPromptInterne((v) => !v)}
+                className="text-[11px] font-semibold text-slate-600 underline underline-offset-2"
+              >
+                {showPromptInterne
+                  ? "Masquer le prompt interne (pour usage avancé / autres IA)"
+                  : "Afficher le prompt interne utilisé par EleveAI (optionnel, pour les curieux)"}
+              </button>
+
+              {showPromptInterne && (
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="font-semibold text-slate-700">
+                      Prompt interne actuellement utilisé
+                    </span>
+                    <button
+                      type="button"
+                      onClick={copierPromptInterne}
+                      disabled={!promptInterne}
+                      className={`inline-flex items-center gap-1 px-3 py-1 rounded-lg text-[11px] font-semibold ${
+                        promptInterne
+                          ? "bg-slate-800 text-white hover:bg-slate-900"
+                          : "bg-slate-200 text-slate-500 cursor-not-allowed"
+                      }`}
+                    >
+                      {copiedPrompt ? "✅ Copié" : "📋 Copier ce prompt"}
+                    </button>
+                  </div>
+                  <textarea
+                    readOnly
+                    value={promptInterne}
+                    className="w-full border rounded-lg px-3 py-2 text-[11px] font-mono bg-slate-50 min-h-[140px]"
+                    placeholder="Le prompt interne apparaîtra ici après la première création de ressource."
+                  />
+                </div>
+              )}
+            </div>
           </section>
         </div>
       </div>
     </main>
   );
 }
-
-

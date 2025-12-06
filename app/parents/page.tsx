@@ -2,28 +2,135 @@
 
 import { useState } from "react";
 
+/* ----------------------------------------
+   TYPES POUR LES ÉTATS
+---------------------------------------- */
+
+type Maitrise = "besoin" | "satisfaisant" | "expert";
+
+type ParentsPresetValues = {
+  niveau?: string;
+  matiere?: string;
+  objectif?: string;
+  maitrise?: Maitrise;
+  hasDys?: boolean;
+  dysTypes?: string[];
+  hyperactif?: boolean;
+};
+
+type PresetKey =
+  | "primaire_bases_maths"
+  | "college_controle_fractions"
+  | "lycee_methodes_travail"
+  | "dys_hyperactif_college";
+
+const PRESETS: Record<
+  PresetKey,
+  { label: string; description: string; valeurs: ParentsPresetValues }
+> = {
+  primaire_bases_maths: {
+    label: "🟢 Primaire – Reprendre les bases en maths",
+    description:
+      "Pour un enfant qui manque de confiance sur les opérations et les problèmes simples.",
+    valeurs: {
+      niveau: "CM2",
+      matiere: "maths",
+      objectif:
+        "Lui redonner confiance sur les bases en calcul (additions, soustractions, multiplications, problèmes simples) sans le décourager.",
+      maitrise: "besoin",
+      hasDys: false,
+      hyperactif: false,
+    },
+  },
+  college_controle_fractions: {
+    label: "🟣 Collège – Préparer un contrôle de fractions",
+    description:
+      "Pour un élève de 5e/4e qui stresse à l’idée d’un contrôle en maths.",
+    valeurs: {
+      niveau: "5e",
+      matiere: "maths",
+      objectif:
+        "L’aider à préparer un contrôle sur les fractions (simplifier, additionner, comparer) en le guidant pas à pas.",
+      maitrise: "besoin",
+      hasDys: false,
+      hyperactif: false,
+    },
+  },
+  lycee_methodes_travail: {
+    label: "📘 Lycée – Méthode de travail",
+    description:
+      "Pour un élève qui a besoin d’une méthode pour s’organiser et réviser plus efficacement.",
+    valeurs: {
+      niveau: "lycée",
+      matiere: "toutes les matières",
+      objectif:
+        "L’aider à trouver une méthode de travail simple pour s’organiser, réviser régulièrement et préparer ses évaluations sans être débordé.",
+      maitrise: "satisfaisant",
+      hasDys: false,
+      hyperactif: false,
+    },
+  },
+  dys_hyperactif_college: {
+    label: "🧩 Collège – Profil DYS + hyperactif",
+    description:
+      "Pour un élève avec profil DYS et/ou TDAH qui a besoin d’un accompagnement très guidé et rassurant.",
+    valeurs: {
+      niveau: "collège",
+      matiere: "toutes les matières",
+      objectif:
+        "L’aider à reprendre confiance, à comprendre les consignes et à travailler avec des activités courtes, guidées et adaptées à son profil DYS / hyperactif.",
+      maitrise: "besoin",
+      hasDys: true,
+      dysTypes: ["Dyslexie", "Dysorthographie"],
+      hyperactif: true,
+    },
+  },
+};
+
+/* ----------------------------------------
+   PAGE
+---------------------------------------- */
+
 export default function ParentsPage() {
   const [prenom, setPrenom] = useState("");
   const [niveau, setNiveau] = useState("collège");
   const [matiere, setMatiere] = useState("maths");
   const [objectif, setObjectif] = useState(
-    "Lui redonner confiance et l’aider à comprendre le cours sur : les fractions et la cuisine"
+    "Lui redonner confiance et l’aider à comprendre le cours sur : les fractions et la cuisine",
   );
 
-  // Nouvelle zone "Vous qui connaissez votre marmaille"
-  const [maitrise, setMaitrise] = useState<"besoin" | "satisfaisant" | "expert">(
-    "besoin"
-  );
+  // Zone "Vous qui connaissez votre enfant"
+  const [maitrise, setMaitrise] = useState<Maitrise>("besoin");
   const [hasDys, setHasDys] = useState(false);
   const [dysTypes, setDysTypes] = useState<string[]>([]);
   const [hyperactif, setHyperactif] = useState(false);
 
   const [generatedPrompt, setGeneratedPrompt] = useState("");
 
+  /* ----------------------------------------
+     FONCTIONS UTILITAIRES
+  ---------------------------------------- */
+
   const toggleDysType = (type: string) => {
     setDysTypes((prev) =>
-      prev.includes(type) ? prev.filter((t) => t !== type) : [...prev, type]
+      prev.includes(type) ? prev.filter((t) => t !== type) : [...prev, type],
     );
+  };
+
+  const appliquerPreset = (key: PresetKey) => {
+    const preset = PRESETS[key];
+    const v = preset.valeurs;
+
+    if (v.niveau !== undefined) setNiveau(v.niveau);
+    if (v.matiere !== undefined) setMatiere(v.matiere);
+    if (v.objectif !== undefined) setObjectif(v.objectif);
+    if (v.maitrise !== undefined) setMaitrise(v.maitrise);
+    if (v.hasDys !== undefined) {
+      setHasDys(v.hasDys);
+      if (!v.hasDys) setDysTypes([]);
+    }
+    if (v.dysTypes !== undefined) setDysTypes(v.dysTypes);
+    if (v.hyperactif !== undefined) setHyperactif(v.hyperactif);
   };
 
   const handleGenerate = () => {
@@ -31,17 +138,14 @@ export default function ParentsPage() {
 
     let maitrisePhrase = "";
     if (maitrise === "besoin") {
-      maitrisePhrase =
-        `${nomEleve} a plutôt besoin d’aide en ce moment dans cette matière : certaines bases ne sont pas complètement installées et la confiance est fragile.`;
+      maitrisePhrase = `${nomEleve} a plutôt besoin d’aide en ce moment dans cette matière : certaines bases ne sont pas complètement installées et la confiance est fragile.`;
     } else if (maitrise === "satisfaisant") {
-      maitrisePhrase =
-        `${nomEleve} a un niveau globalement satisfaisant : il/elle réussit beaucoup de choses mais a besoin d’être rassuré·e et de consolider certaines notions.`;
+      maitrisePhrase = `${nomEleve} a un niveau globalement satisfaisant : il/elle réussit beaucoup de choses mais a besoin d’être rassuré·e et de consolider certaines notions.`;
     } else {
-      maitrisePhrase =
-        `${nomEleve} est plutôt à l’aise / expert dans cette matière et a besoin d’être stimulé·e, d’aller un peu plus loin sans perdre le plaisir d’apprendre.`;
+      maitrisePhrase = `${nomEleve} est plutôt à l’aise / expert dans cette matière et a besoin d’être stimulé·e, d’aller un peu plus loin sans perdre le plaisir d’apprendre.`;
     }
 
-    const base = `Tu es une IA pédagogique bienveillante qui s’adresse à ${nomEleve}, élève de ${niveau}, en ${matiere}, dans le système scolaire français.
+    const base = `Tu es une IA pédagogique bienveillante qui s’adresse à ${nomEleve}, élève de niveau ${niveau}, en ${matiere}, dans le système scolaire français.
 
 ${maitrisePhrase}
 
@@ -86,7 +190,7 @@ Règles importantes :
 - Tu poses d’abord quelques questions simples pour vérifier ce que ${nomEleve} sait déjà.
 - Tu donnes ensuite une seule nouvelle difficulté à la fois.
 - Quand ${nomEleve} se trompe, tu expliques calmement l’erreur et proposes un exemple similaire.
-- Tu termines chaque échange par un petit récapitulatif et une question : 
+- Tu termines chaque échange par un petit récapitulatif et une question :
   "Peux-tu me réexpliquer avec tes mots ce que tu as retenu ?"
 - Tu refuses de donner directement la solution complète d’un devoir maison ou d’une évaluation à venir. À la place, tu guides pas à pas.`;
 
@@ -100,10 +204,14 @@ Règles importantes :
       alert("Prompt copié dans le presse-papiers ✅");
     } catch (e) {
       alert(
-        "Impossible de copier le texte automatiquement. Vous pouvez le sélectionner à la main."
+        "Impossible de copier le texte automatiquement. Vous pouvez le sélectionner à la main.",
       );
     }
   };
+
+  /* ----------------------------------------
+     RENDER
+  ---------------------------------------- */
 
   return (
     <main className="min-h-screen bg-gradient-to-b from-sky-50 via-white to-emerald-50">
@@ -140,74 +248,26 @@ Règles importantes :
           </div>
         </section>
 
-        {/* PHILOSOPHIE */}
-        <section className="mb-10 grid gap-6 lg:grid-cols-[1.1fr,0.9fr]">
-          <div className="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-slate-100">
-            <h2 className="text-lg font-semibold text-slate-900">
-              Notre philosophie pédagogique
-            </h2>
-            <p className="mt-2 text-sm text-slate-600">
-              Nous souhaitons que chaque enfant puisse{" "}
-              <span className="font-semibold">apprendre à son rythme</span>,
-              avec des explications claires et rassurantes.
-            </p>
-            <ul className="mt-4 space-y-2 text-sm text-slate-700">
-              <li>• Alignement avec Eduscol et le Bulletin Officiel.</li>
-              <li>
-                • Appui sur les neurosciences : répétition espacée, test actif,
-                reformulation, encouragements.
-              </li>
-              <li>
-                • L’IA pose des questions, guide et explique au lieu de
-                simplement donner les réponses.
-              </li>
-              <li>
-                • Objectif : compréhension durable, autonomie et{" "}
-                <span className="font-semibold">confiance en soi</span>.
-              </li>
-            </ul>
-          </div>
-
-          <div className="rounded-3xl bg-emerald-50/80 p-6 shadow-sm ring-1 ring-emerald-100">
-            <h3 className="text-sm font-semibold text-emerald-900">
-              Et pour vous, parents ?
-            </h3>
-            <p className="mt-2 text-sm text-emerald-900">
-              Cet espace est là pour vous aider à :
-            </p>
-            <ul className="mt-3 space-y-2 text-sm text-emerald-900">
-              <li>• Encadrer l’usage de l’IA à la maison.</li>
-              <li>• Poser un cadre clair : on apprend, on ne triche pas.</li>
-              <li>
-                • Adapter l’accompagnement si votre enfant a des besoins
-                spécifiques.
-              </li>
-            </ul>
-            <p className="mt-4 text-xs text-emerald-900/80">
-              Vous gardez toujours la main : le prompt est écrit par vous, pour
-              votre enfant.
-            </p>
-          </div>
-        </section>
-
-        {/* CARTE MARMAILLE + GENERATEUR */}
-        <section className="rounded-3xl bg-white p-6 shadow-md ring-1 ring-slate-100 lg:p-8">
-          {/* VOUS QUI CONNAISSEZ VOTRE MARMAILLE */}
-          <div className="mb-8 space-y-4 rounded-2xl bg-slate-50 px-4 py-4 shadow-inner border border-slate-100">
+        {/* 1️⃣ VOUS QUI CONNAISSEZ VOTRE ENFANT */}
+        <section className="mb-8 rounded-3xl bg-white p-6 shadow-md ring-1 ring-slate-100 lg:p-8">
+          <div className="mb-4 space-y-2">
             <h2 className="text-base font-semibold text-slate-900">
-              Vous qui connaissez votre marmaille 💛
+              Vous qui connaissez votre enfant 💛
             </h2>
             <p className="text-xs sm:text-sm text-slate-600">
-              Avant de créer le prompt, prenez une minute pour décrire{" "}
+              Commencez par décrire{" "}
               <span className="font-semibold">comment est votre enfant</span>{" "}
               dans ses apprentissages. Ces informations seront intégrées
-              discrètement dans le message à l’IA.
+              discrètement dans le message à l’IA pour un accompagnement plus
+              personnalisé.
             </p>
+          </div>
 
-            {/* Niveau de maitrise */}
+          <div className="space-y-5">
+            {/* Niveau de maîtrise */}
             <div className="space-y-1.5">
               <p className="text-xs font-medium text-slate-700">
-                Comment vous décririez son niveau dans cette matière ?
+                Comment décririez-vous son niveau dans cette matière ?
               </p>
               <div className="flex flex-wrap gap-2">
                 <button
@@ -278,7 +338,7 @@ Règles importantes :
                     ].map((type) => (
                       <label
                         key={type}
-                        className="inline-flex items-center gap-1.5 rounded-lg bg-white px-2 py-1.5 ring-1 ring-slate-200"
+                        className="inline-flex items-center gap-1.5 rounded-lg bg-slate-50 px-2 py-1.5 ring-1 ring-slate-200"
                       >
                         <input
                           type="checkbox"
@@ -310,17 +370,50 @@ Règles importantes :
                   </label>
                 </div>
                 <p className="text-[11px] text-slate-500">
-                  L’IA pourra alors proposer des activités plus courtes, rythmées
-                  et très guidées.
+                  L’IA pourra alors proposer des activités plus courtes,
+                  rythmées et très guidées.
                 </p>
               </div>
             </div>
           </div>
+        </section>
 
-          {/* GENERATEUR DE PROMPTS */}
+        {/* 2️⃣ PRESETS */}
+        <section className="mb-8 rounded-3xl bg-white/90 p-6 shadow-sm ring-1 ring-emerald-100 lg:p-7">
+          <h2 className="text-base font-semibold text-slate-900 mb-2">
+            Choisir un modèle rapide (facultatif)
+          </h2>
+          <p className="text-xs sm:text-sm text-slate-600 mb-4">
+            Vous pouvez gagner du temps en partant d’un exemple proche de votre
+            situation. Vous pourrez ensuite ajuster les champs juste en dessous.
+          </p>
+
+          <div className="grid gap-3 sm:grid-cols-4">
+            {(Object.entries(PRESETS) as [PresetKey, (typeof PRESETS)[PresetKey]][]).map(
+              ([key, preset]) => (
+                <button
+                  key={key}
+                  type="button"
+                  onClick={() => appliquerPreset(key)}
+                  className="h-full rounded-2xl border border-emerald-200 bg-emerald-50 px-3 py-3 text-left text-xs shadow-sm hover:bg-emerald-100"
+                >
+                  <div className="font-semibold text-emerald-900 mb-1">
+                    {preset.label}
+                  </div>
+                  <div className="text-[11px] text-emerald-900/90">
+                    {preset.description}
+                  </div>
+                </button>
+              ),
+            )}
+          </div>
+        </section>
+
+        {/* 3️⃣ FORMULAIRE PRINCIPAL + GÉNÉRATION */}
+        <section className="rounded-3xl bg-white p-6 shadow-md ring-1 ring-slate-100 lg:p-8">
           <header className="mb-6 space-y-2">
             <h2 className="text-lg font-semibold text-slate-900">
-              Créez votre prompt personnalisé en 4 petites étapes
+              Créez votre prompt personnalisé en quelques secondes
             </h2>
             <p className="text-sm text-slate-600">
               Remplissez les champs ci-dessous, cliquez sur{" "}
@@ -330,7 +423,6 @@ Règles importantes :
             </p>
           </header>
 
-          {/* FORMULAIRE PRINCIPAL */}
           <div className="space-y-5">
             <div className="grid gap-4 sm:grid-cols-2">
               <div className="space-y-1.5">
@@ -424,31 +516,32 @@ Règles importantes :
                 l’outil de votre choix.
               </p>
             </div>
-          </div>
 
-          {/* RESULTAT */}
-          <div className="mt-8 space-y-3">
-            <div className="flex items-center justify-between gap-2">
-              <h3 className="text-sm font-semibold text-slate-900">
-                Prompt généré
-              </h3>
-              <button
-                onClick={handleCopy}
-                disabled={!generatedPrompt}
-                className="inline-flex items-center justify-center rounded-full border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs font-medium text-slate-700 shadow-sm transition hover:bg-slate-100 disabled:opacity-50"
-              >
-                Copier le prompt
-              </button>
+            {/* RESULTAT */}
+            <div className="mt-6 space-y-3">
+              <div className="flex items-center justify-between gap-2">
+                <h3 className="text-sm font-semibold text-slate-900">
+                  Prompt généré
+                </h3>
+                <button
+                  onClick={handleCopy}
+                  disabled={!generatedPrompt}
+                  className="inline-flex items-center justify-center rounded-full border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs font-medium text-slate-700 shadow-sm transition hover:bg-slate-100 disabled:opacity-50"
+                >
+                  Copier le prompt
+                </button>
+              </div>
+              <textarea
+                readOnly
+                value={generatedPrompt}
+                className="w-full min-h-[220px] rounded-2xl border border-slate-200 bg-slate-50 px-3 py-2 text-xs font-mono text-slate-900 shadow-inner"
+                placeholder="Remplissez le formulaire ci-dessus puis cliquez sur « Générer le prompt »."
+              />
             </div>
-            <textarea
-              readOnly
-              value={generatedPrompt}
-              className="w-full min-h-[220px] rounded-2xl border border-slate-200 bg-slate-50 px-3 py-2 text-xs font-mono text-slate-900 shadow-inner"
-              placeholder="Remplissez le formulaire ci-dessus puis cliquez sur « Générer le prompt »."
-            />
           </div>
         </section>
       </div>
     </main>
   );
 }
+

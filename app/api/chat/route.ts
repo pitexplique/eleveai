@@ -1,87 +1,130 @@
+// app/api/chat/route.ts
 import { NextResponse } from "next/server";
-import { openai } from "@/lib/openai";
+import OpenAI from "openai";
+
+const client = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
+});
+
+// 🔧 Nettoyage strict des notations LaTeX → texte simple
+function nettoyerLatex(texte: string): string {
+  if (!texte) return "";
+
+  let t = texte;
+
+  // \frac{a}{b} ou \frac {a} {b} → a/b
+  t = t.replace(/\\frac\s*\{([^}]+)\}\s*\{([^}]+)\}/g, "$1/$2");
+
+  // \sqrt{x} → racine carrée de x
+  t = t.replace(/\\sqrt\s*\{([^}]+)\}/g, "racine carrée de $1");
+
+  // parenthèses LaTeX \left( \right) → normales
+  t = t.replace(/\\left\(/g, "(").replace(/\\right\)/g, ")");
+
+  // opérations et symboles fréquents
+  t = t.replace(/\\times/g, "×");
+  t = t.replace(/\\cdot/g, "·");
+  t = t.replace(/\\div/g, "÷");
+
+  // supprimer tous les blocs math $...$, $$...$$, \(...\), \[...\]
+  t = t.replace(/\$\$([^$]+)\$\$/g, "$1");
+  t = t.replace(/\$([^$]+)\$/g, "$1");
+  t = t.replace(/\\\(([^)]+)\\\)/g, "$1");
+  t = t.replace(/\\\[([\s\S]+?)\\\]/g, "$1");
+
+  // enlever quelques commandes courantes qui traînent
+  t = t.replace(/\\begin\{[^}]+\}/g, "");
+  t = t.replace(/\\end\{[^}]+\}/g, "");
+  t = t.replace(/\\[a-zA-Z]+/g, ""); // commande LaTeX isolée
+
+  // espaces inutiles
+  t = t.replace(/[ \t]+\n/g, "\n");
+  t = t.trim();
+
+  return t;
+}
 
 export async function POST(req: Request) {
   try {
-    console.log(">>> EleveAI API appelée");
-    console.log(">>> OPENAI_API_KEY présent ?", !!process.env.OPENAI_API_KEY);
-
     if (!process.env.OPENAI_API_KEY) {
-      console.error("OPENAI_API_KEY manquante");
       return NextResponse.json(
-        { error: "Clé API manquante côté serveur (OPENAI_API_KEY)." },
-        { status: 500 }
-      );
-    }
-
-    const { message } = await req.json();
-
-    if (!message || typeof message !== "string") {
-      return NextResponse.json(
-        { error: "Message invalide (il doit être une chaîne de caractères)." },
-        { status: 400 }
-      );
-    }
-
-    const completion = await openai.chat.completions.create({
-      model: "gpt-4o-mini", // ou "gpt-4o"
-      messages: [
-  {
-    role: "system",
-    content: `
-      Tu es **EleveAI**, une IA pédagogique conçue pour aider les élèves de **6e, 5e et 4e à La Réunion** à réussir en mathématiques.
-
-      🎨 **STYLE RÉUNION – IDENTITÉ VISUELLE :**
-      - Utilise les couleurs du drapeau de La Réunion 🇷🇪 :
-        - 🔵 Bleu : pour les définitions et explications
-        - 🟡 Jaune : pour les étapes ou méthodes
-        - 🔴 Rouge : pour les conclusions ou comparaisons finales
-      - Ces emojis doivent apparaître **au début de chaque titre**.
-      - Les titres sont au format Markdown : ## 🔵 Titre
-      - Le texte doit être clair, positif, encourageant.
-
-      🧮 **MATHÉMATIQUES – STYLE TABLEAU DU PROF :**
-      - Les petites formules dans une phrase utilisent : $...$
-      - Les formules importantes doivent être centrées, en display : $$ ... $$
-      - Pour colorer une formule :
-        - Jaune : \\class{math-yellow}{...}
-        - Rouge : \\class{math-red}{...}
-      - Toujours expliquer étape par étape.
-      - Ajouter un ou deux petits emojis pédagogiques : 🙂✨👍
-
-      📚 **PÉDAGOGIE :**
-      - Toujours structuré en sections courtes.
-      - Donner un exemple concret et simple.
-      - Utiliser des métaphores adaptées (parts de gâteau, segments, partage).
-      - Phrase courte, ton chaleureux et dynamique (style prof bienveillant).
-
-      Tu écris comme un professeur de mathématiques de La Réunion passionné, clair, structuré et motivant.
-      `
-  },
-
         {
-          role: "user",
-          content: message,
+          error:
+            "OPENAI_API_KEY manquant dans les variables d’environnement côté serveur.",
         },
+        { status: 500 },
+      );
+    }
+
+    const body = await req.json().catch(() => ({}));
+    const { message, latexMode } = body as {
+      message?: string;
+      latexMode?: boolean;
+    };
+
+    const question = (message || "").trim();
+
+    if (!question) {
+      return NextResponse.json(
+        { error: "Le champ 'message' est obligatoire." },
+        { status: 400 },
+      );
+    }
+
+    // 🧠 Deux modes : élève (sans LaTeX) / prof (avec LaTeX)
+    const systemPromptSansLatex = `
+Tu es le tchat "EleveAI – Maths".
+
+Public : surtout élèves de collège / lycée (système scolaire français), parfois leurs parents.
+Objectif : expliquer les mathématiques clairement, étape par étape.
+
+RÈGLE TRÈS IMPORTANTE : PAS DE LATEX.
+- N'utilise jamais de LaTeX.
+- N'écris pas \\frac{a}{b}, \\sqrt{x}, $$...$$, \\( ... \\), ni aucune commande LaTeX.
+- Écris les fractions comme 2/5, 3/10, 7/8.
+- Écris les puissances comme x^2, x^3, "x au carré", "x au cube".
+- Ta réponse doit être directement copiable dans Word, Pronote, un ENT ou sur papier.
+
+Adopte un ton bienveillant, pose parfois de petites questions de vérification, puis donne la réponse.
+`.trim();
+
+    const systemPromptLatexProf = `
+Tu es le tchat "EleveAI – Maths (mode avancé pour professeurs)".
+
+Public : professeurs de mathématiques ou de sciences (système scolaire français).
+Contexte : ils peuvent réutiliser ta réponse dans LaTeX, Manim ou des fiches de cours.
+
+- Tu peux utiliser LaTeX proprement (\\frac{}, \\sqrt{}, exposants, etc.).
+- Structure ta réponse en sections, listes, étapes numérotées.
+- Reste pédagogique et clair, mais tu peux aller plus vite sur les détails de base si la demande est avancée.
+
+Si l'utilisateur demande du code (LaTeX, Manim, etc.), place-le dans des blocs de code markdown.
+`.trim();
+
+    const systemPrompt = latexMode ? systemPromptLatexProf : systemPromptSansLatex;
+
+    // 🔥 Appel OpenAI optimisé (chat.completions, modèle mini)
+    const completion = await client.chat.completions.create({
+      model: "gpt-4.1-mini",
+      messages: [
+        { role: "system", content: systemPrompt },
+        { role: "user", content: question },
       ],
+      temperature: 0.3,
+      max_tokens: 800, // limite raisonnable pour réduire coût et latence
     });
 
+    const brut = completion.choices[0]?.message?.content || "";
 
-    const answer = completion.choices[0]?.message?.content ?? "";
+    // 🔍 Nettoyage seulement pour le mode "élève" (sans LaTeX)
+    const answer = latexMode ? brut : nettoyerLatex(brut);
 
     return NextResponse.json({ answer });
-  } catch (error: any) {
-    // On récupère un message d’erreur lisible
-    const msg =
-      error?.response?.data?.error?.message ||
-      error?.message ||
-      "Erreur interne du serveur EleveAI.";
-
-    console.error(">>> Erreur API EleveAI :", msg);
-    if (error?.response?.data) {
-      console.error("Détail OpenAI :", error.response.data);
-    }
-
-    return NextResponse.json({ error: msg }, { status: 500 });
+  } catch (err) {
+    console.error("Erreur /api/chat :", err);
+    return NextResponse.json(
+      { error: "Erreur lors de l'appel à EleveAI." },
+      { status: 500 },
+    );
   }
 }

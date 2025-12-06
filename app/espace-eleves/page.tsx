@@ -20,14 +20,13 @@ type Classe =
 type Confiance = "en_difficulte" | "moyen" | "a_l_aise";
 
 type TypeAide =
-  | "manipluler pour comprendre"
+  | "manipuler_pour_comprendre"
   | "comprendre_le_cours"
   | "reviser_un_chapitre"
   | "preparer_un_controle"
   | "faire_des_exercices"
   | "methode_de_travail"
-  | "défis";
-  
+  | "defis";
 
 type DysType =
   | "dyslexie"
@@ -80,13 +79,16 @@ const MATIERES = [
 ];
 
 const TYPES_AIDE: { value: TypeAide; label: string }[] = [
-  { value: "manipluler pour comprendre", label: "Manipluler pour comprendre" },
+  {
+    value: "manipuler_pour_comprendre",
+    label: "Manipuler pour comprendre",
+  },
   { value: "comprendre_le_cours", label: "Comprendre le cours" },
   { value: "reviser_un_chapitre", label: "Réviser un chapitre" },
   { value: "preparer_un_controle", label: "Préparer un contrôle" },
   { value: "faire_des_exercices", label: "Faire des exercices" },
   { value: "methode_de_travail", label: "Méthode de travail" },
-  { value: "défis", label: "défis" },
+  { value: "defis", label: "Défis" },
 ];
 
 /* ----------------------------------------
@@ -372,22 +374,23 @@ export default function ElevePage() {
             </h2>
 
             <div className="grid sm:grid-cols-2 gap-2">
-              {(Object.entries(PRESETS) as [PresetKey, (typeof PRESETS)[PresetKey]][]).map(
-                ([key, preset]) => (
-                  <button
-                    key={key}
-                    onClick={() => appliquerPreset(key)}
-                    className="rounded-xl border border-emerald-200 bg-emerald-50 px-3 py-2 text-left hover:bg-emerald-100 text-xs"
-                  >
-                    <div className="font-semibold text-emerald-800">
-                      {preset.label}
-                    </div>
-                    <div className="text-[11px] text-gray-700">
-                      {preset.description}
-                    </div>
-                  </button>
-                ),
-              )}
+              {(Object.entries(PRESETS) as [
+                PresetKey,
+                (typeof PRESETS)[PresetKey],
+              ][]).map(([key, preset]) => (
+                <button
+                  key={key}
+                  onClick={() => appliquerPreset(key)}
+                  className="rounded-xl border border-emerald-200 bg-emerald-50 px-3 py-2 text-left hover:bg-emerald-100 text-xs"
+                >
+                  <div className="font-semibold text-emerald-800">
+                    {preset.label}
+                  </div>
+                  <div className="text-[11px] text-gray-700">
+                    {preset.description}
+                  </div>
+                </button>
+              ))}
             </div>
 
             <hr className="my-4 border-emerald-200" />
@@ -669,8 +672,8 @@ export default function ElevePage() {
                 <Link
                   href={
                     promptFinal
-                      ? `/chat?prompt=${encodeURIComponent(promptFinal)}`
-                      : "/chat"
+                      ? `/tchat?prompt=${encodeURIComponent(promptFinal)}`
+                      : "/tchat"
                   }
                   className="px-3 py-2 rounded-lg bg-emerald-600 text-white font-semibold hover:bg-emerald-700"
                 >
@@ -679,6 +682,7 @@ export default function ElevePage() {
                 <a
                   href="https://chatgpt.com"
                   target="_blank"
+                  rel="noreferrer"
                   className="px-3 py-2 rounded-lg bg-slate-800 text-white font-semibold"
                 >
                   ChatGPT
@@ -686,6 +690,7 @@ export default function ElevePage() {
                 <a
                   href="https://gemini.google.com"
                   target="_blank"
+                  rel="noreferrer"
                   className="px-3 py-2 rounded-lg bg-[#0F9D58] text-white font-semibold"
                 >
                   Gemini
@@ -693,6 +698,7 @@ export default function ElevePage() {
                 <a
                   href="https://claude.ai"
                   target="_blank"
+                  rel="noreferrer"
                   className="px-3 py-2 rounded-lg bg-[#4B3FFF] text-white font-semibold"
                 >
                   Claude
@@ -700,6 +706,7 @@ export default function ElevePage() {
                 <a
                   href="https://chat.mistral.ai"
                   target="_blank"
+                  rel="noreferrer"
                   className="px-3 py-2 rounded-lg bg-[#FF7F11] text-white font-semibold"
                 >
                   Mistral
@@ -712,4 +719,3 @@ export default function ElevePage() {
     </main>
   );
 }
-
