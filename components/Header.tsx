@@ -27,6 +27,10 @@ const MAIN_LINKS: NavItem[] = [
     href: "/espace-personnels",
     label: "Personnels & services (IA)",
   },
+  {
+    href: "/espace-aesh",
+    label: "Espace AESH (IA)",
+  },
 ];
 
 const SECONDARY_LINKS: NavItem[] = [
@@ -62,7 +66,7 @@ export default function Header() {
                 EleveAI
               </span>
               <span className="text-[10px] sm:text-xs text-slate-400">
-                IA pédagogique pour élèves, équipes & familles
+                L’IA pédagogique au service de toute la communauté éducative
               </span>
             </div>
           </Link>
@@ -170,4 +174,3 @@ export default function Header() {
     </header>
   );
 }
-
