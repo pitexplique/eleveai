@@ -23,6 +23,10 @@ const MAIN_LINKS: NavItem[] = [
     href: "/espace-vie-scolaire",
     label: "Vie scolaire (IA)",
   },
+  {
+    href: "/espace-personnels",
+    label: "Personnels & services (IA)",
+  },
 ];
 
 const SECONDARY_LINKS: NavItem[] = [
@@ -47,7 +51,6 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-40 border-b border-slate-800 bg-slate-950/90 backdrop-blur">
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:py-4">
-        
         {/* LOGO */}
         <div className="flex items-center gap-2">
           <Link href="/" className="flex items-center gap-2">
@@ -59,7 +62,7 @@ export default function Header() {
                 EleveAI
               </span>
               <span className="text-[10px] sm:text-xs text-slate-400">
-                IA pédagogique pour élèves, enseignants & parents
+                IA pédagogique pour élèves, équipes & familles
               </span>
             </div>
           </Link>
@@ -81,6 +84,11 @@ export default function Header() {
                 ].join(" ")}
               >
                 {link.label}
+                {link.badge && (
+                  <span className="ml-1 inline-flex items-center rounded-full bg-emerald-600/20 text-emerald-300 text-[10px] font-semibold px-2 py-0.5 uppercase tracking-wide">
+                    {link.badge}
+                  </span>
+                )}
               </Link>
             );
           })}
@@ -148,6 +156,11 @@ export default function Header() {
                   ].join(" ")}
                 >
                   {link.label}
+                  {link.badge && (
+                    <span className="ml-auto inline-flex items-center rounded-full bg-emerald-600/20 text-emerald-300 text-[10px] font-semibold px-2 py-0.5 uppercase tracking-wide">
+                      {link.badge}
+                    </span>
+                  )}
                 </Link>
               );
             })}
@@ -157,3 +170,4 @@ export default function Header() {
     </header>
   );
 }
+
