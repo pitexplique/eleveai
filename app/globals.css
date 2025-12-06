@@ -74,3 +74,10 @@ body {
   from { transform: translateY(-10%); }
   to { transform: translateY(100%); }
 }
+
+.no-scrollbar {
+  scrollbar-width: none; /* Firefox */
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
+}
