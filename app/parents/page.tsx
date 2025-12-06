@@ -1,6 +1,10 @@
 "use client";
 
 import { useState } from "react";
+import {
+  PresetCarousel,
+  PresetCarouselItem,
+} from "@/components/PresetCarousel";
 
 /* ----------------------------------------
    TYPES POUR LES ÉTATS
@@ -20,9 +24,17 @@ type ParentsPresetValues = {
 
 type PresetKey =
   | "primaire_bases_maths"
+  | "primaire_lecture_francais"
   | "college_controle_fractions"
+  | "college_devoirs_maison_encadrement"
   | "lycee_methodes_travail"
+  | "lycee_preparation_bac_maths"
+  | "lycee_stress_examens"
   | "dys_hyperactif_college";
+
+/* ----------------------------------------
+   PRESETS (MODÈLES RAPIDES)
+---------------------------------------- */
 
 const PRESETS: Record<
   PresetKey,
@@ -42,6 +54,22 @@ const PRESETS: Record<
       hyperactif: false,
     },
   },
+
+  primaire_lecture_francais: {
+    label: "📖 Primaire – Lecture et français",
+    description:
+      "Pour un enfant qui lit lentement et a besoin d’un accompagnement rassurant en lecture / écriture.",
+    valeurs: {
+      niveau: "CM2",
+      matiere: "français",
+      objectif:
+        "L’aider à lire plus régulièrement, comprendre les textes simples et écrire des phrases correctes sans le mettre en échec.",
+      maitrise: "besoin",
+      hasDys: false,
+      hyperactif: false,
+    },
+  },
+
   college_controle_fractions: {
     label: "🟣 Collège – Préparer un contrôle de fractions",
     description:
@@ -56,6 +84,22 @@ const PRESETS: Record<
       hyperactif: false,
     },
   },
+
+  college_devoirs_maison_encadrement: {
+    label: "📝 Collège – Mieux gérer les devoirs",
+    description:
+      "Pour un élève qui se laisse vite déborder par les devoirs maison et ne sait pas par où commencer.",
+    valeurs: {
+      niveau: "collège",
+      matiere: "toutes les matières",
+      objectif:
+        "L’aider à organiser ses devoirs, découper les tâches en petites étapes et garder une attitude positive face au travail personnel.",
+      maitrise: "satisfaisant",
+      hasDys: false,
+      hyperactif: false,
+    },
+  },
+
   lycee_methodes_travail: {
     label: "📘 Lycée – Méthode de travail",
     description:
@@ -70,6 +114,37 @@ const PRESETS: Record<
       hyperactif: false,
     },
   },
+
+  lycee_preparation_bac_maths: {
+    label: "📊 Lycée – Préparation bac (maths)",
+    description:
+      "Pour un élève de Première / Terminale qui veut se préparer sereinement aux épreuves de maths.",
+    valeurs: {
+      niveau: "Tle",
+      matiere: "maths",
+      objectif:
+        "L’aider à revoir les chapitres importants pour le bac, identifier ses points faibles et s’entraîner avec des exercices progressifs.",
+      maitrise: "expert",
+      hasDys: false,
+      hyperactif: false,
+    },
+  },
+
+  lycee_stress_examens: {
+    label: "💬 Lycée – Stress et examens",
+    description:
+      "Pour un élève qui se bloque à cause du stress avant les contrôles et examens.",
+    valeurs: {
+      niveau: "lycée",
+      matiere: "toutes les matières",
+      objectif:
+        "L’aider à gérer son stress avant les contrôles et examens, avec des conseils concrets, des routines courtes et des encouragements.",
+      maitrise: "satisfaisant",
+      hasDys: false,
+      hyperactif: false,
+    },
+  },
+
   dys_hyperactif_college: {
     label: "🧩 Collège – Profil DYS + hyperactif",
     description:
@@ -88,7 +163,20 @@ const PRESETS: Record<
 };
 
 /* ----------------------------------------
-   PAGE
+   ITEMS POUR LE CARROUSEL
+---------------------------------------- */
+
+const PRESET_ITEMS: PresetCarouselItem[] = (
+  Object.entries(PRESETS) as [PresetKey, (typeof PRESETS)[PresetKey]][]
+).map(([key, preset]) => ({
+  id: key,
+  label: preset.label,
+  description: preset.description,
+  badge: "Modèle parent",
+}));
+
+/* ----------------------------------------
+   PAGE PARENTS
 ---------------------------------------- */
 
 export default function ParentsPage() {
@@ -138,11 +226,14 @@ export default function ParentsPage() {
 
     let maitrisePhrase = "";
     if (maitrise === "besoin") {
-      maitrisePhrase = `${nomEleve} a plutôt besoin d’aide en ce moment dans cette matière : certaines bases ne sont pas complètement installées et la confiance est fragile.`;
+      maitrisePhrase =
+        `${nomEleve} a plutôt besoin d’aide en ce moment dans cette matière : certaines bases ne sont pas complètement installées et la confiance est fragile.`;
     } else if (maitrise === "satisfaisant") {
-      maitrisePhrase = `${nomEleve} a un niveau globalement satisfaisant : il/elle réussit beaucoup de choses mais a besoin d’être rassuré·e et de consolider certaines notions.`;
+      maitrisePhrase =
+        `${nomEleve} a un niveau globalement satisfaisant : il/elle réussit beaucoup de choses mais a besoin d’être rassuré·e et de consolider certaines notions.`;
     } else {
-      maitrisePhrase = `${nomEleve} est plutôt à l’aise / expert dans cette matière et a besoin d’être stimulé·e, d’aller un peu plus loin sans perdre le plaisir d’apprendre.`;
+      maitrisePhrase =
+        `${nomEleve} est plutôt à l’aise / expert dans cette matière et a besoin d’être stimulé·e, d’aller un peu plus loin sans perdre le plaisir d’apprendre.`;
     }
 
     const base = `Tu es une IA pédagogique bienveillante qui s’adresse à ${nomEleve}, élève de niveau ${niveau}, en ${matiere}, dans le système scolaire français.
@@ -378,39 +469,16 @@ Règles importantes :
           </div>
         </section>
 
-        {/* 2️⃣ PRESETS */}
-        <section className="mb-8 rounded-3xl bg-white/90 p-6 shadow-sm ring-1 ring-emerald-100 lg:p-7">
-          <h2 className="text-base font-semibold text-slate-900 mb-2">
-            Choisir un modèle rapide (facultatif)
-          </h2>
-          <p className="text-xs sm:text-sm text-slate-600 mb-4">
-            Vous pouvez gagner du temps en partant d’un exemple proche de votre
-            situation. Vous pourrez ensuite ajuster les champs juste en dessous.
-          </p>
-
-          <div className="grid gap-3 sm:grid-cols-4">
-            {(Object.entries(PRESETS) as [PresetKey, (typeof PRESETS)[PresetKey]][]).map(
-              ([key, preset]) => (
-                <button
-                  key={key}
-                  type="button"
-                  onClick={() => appliquerPreset(key)}
-                  className="h-full rounded-2xl border border-emerald-200 bg-emerald-50 px-3 py-3 text-left text-xs shadow-sm hover:bg-emerald-100"
-                >
-                  <div className="font-semibold text-emerald-900 mb-1">
-                    {preset.label}
-                  </div>
-                  <div className="text-[11px] text-emerald-900/90">
-                    {preset.description}
-                  </div>
-                </button>
-              ),
-            )}
-          </div>
-        </section>
+        {/* 2️⃣ PRESETS – CARROUSEL TYPE NETFLIX */}
+        <PresetCarousel
+          title="Choisir un modèle rapide (facultatif)"
+          subtitle="Vous pouvez gagner du temps en partant d’un exemple proche de votre situation. Vous pourrez ensuite ajuster les champs juste en dessous."
+          items={PRESET_ITEMS}
+          onSelect={(id) => appliquerPreset(id as PresetKey)}
+        />
 
         {/* 3️⃣ FORMULAIRE PRINCIPAL + GÉNÉRATION */}
-        <section className="rounded-3xl bg-white p-6 shadow-md ring-1 ring-slate-100 lg:p-8">
+        <section className="mt-6 rounded-3xl bg-white p-6 shadow-md ring-1 ring-slate-100 lg:p-8">
           <header className="mb-6 space-y-2">
             <h2 className="text-lg font-semibold text-slate-900">
               Créez votre prompt personnalisé en quelques secondes
@@ -418,8 +486,8 @@ Règles importantes :
             <p className="text-sm text-slate-600">
               Remplissez les champs ci-dessous, cliquez sur{" "}
               <span className="font-semibold">« Générer le prompt »</span> puis
-              copiez-collez le texte dans EleveAI (ou un autre outil).  
-              L’IA utilisera alors vos consignes, dans un cadre sécurisé.
+              copiez-collez le texte dans EleveAI (ou un autre outil). L’IA
+              utilisera alors vos consignes, dans un cadre sécurisé.
             </p>
           </header>
 

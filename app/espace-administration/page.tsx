@@ -1,6 +1,10 @@
 "use client";
 
 import { useState } from "react";
+import {
+  PresetCarousel,
+  PresetCarouselItem,
+} from "@/components/PresetCarousel";
 
 /* ----------------------------------------
    TYPES
@@ -36,7 +40,10 @@ type AdminPresetKey =
   | "mail_parents_pilote"
   | "projet_pilote_CA"
   | "protocole_triche"
-  | "plan_formation_profs";
+  | "plan_formation_profs"
+  | "note_eleves_salle_info"
+  | "bilan_projet_pilote"
+  | "fiche_projet_club_ia";
 
 type AdminPreset = {
   label: string;
@@ -56,7 +63,8 @@ const ADMIN_PRESETS: Record<AdminPresetKey, AdminPreset> = {
     valeurs: {
       typeDoc: "charte",
       publicCible: "toute_communaute",
-      titreDoc: "Charte d’usage de l’intelligence artificielle dans l’établissement",
+      titreDoc:
+        "Charte d’usage de l’intelligence artificielle dans l’établissement",
       objectif:
         "Poser un cadre clair et rassurant pour l’utilisation de l’IA par les élèves et les adultes, en lien avec le projet d’établissement.",
       ton: "institutionnel, clair et accessible",
@@ -118,7 +126,62 @@ const ADMIN_PRESETS: Record<AdminPresetKey, AdminPreset> = {
       ton: "coopératif, motivant, réaliste",
     },
   },
+  note_eleves_salle_info: {
+    label: "💻 Note élèves – Usage IA en salle info",
+    description:
+      "Rappeler les règles d’usage de l’IA en salle informatique ou CDI.",
+    valeurs: {
+      typeDoc: "note_parents",
+      publicCible: "eleves",
+      titreDoc:
+        "Note d’information aux élèves – Règles d’usage de l’IA en salle informatique et au CDI",
+      objectif:
+        "Expliquer clairement ce qui est autorisé ou non quand les élèves utilisent l’IA sur les postes de l’établissement.",
+      ton: "clair, direct, respectueux",
+    },
+  },
+  bilan_projet_pilote: {
+    label: "📊 Bilan d’un projet pilote IA",
+    description:
+      "Faire un retour structuré après une année de projet pilote IA.",
+    valeurs: {
+      typeDoc: "projet_pilote",
+      publicCible: "ca",
+      titreDoc:
+        "Bilan d’un projet pilote autour des usages pédagogiques de l’intelligence artificielle",
+      objectif:
+        "Présenter les résultats, les points positifs, les limites et les pistes d’évolution après une phase pilote.",
+      ton: "objectif, structuré, honnête",
+    },
+  },
+  fiche_projet_club_ia: {
+    label: "🤝 Fiche projet – Club IA",
+    description:
+      "Proposer un club ou atelier IA dans l’établissement (collège/lycée).",
+    valeurs: {
+      typeDoc: "projet_pilote",
+      publicCible: "profs",
+      titreDoc:
+        "Fiche projet : création d’un club ou atelier autour de l’intelligence artificielle",
+      objectif:
+        "Décrire un projet d’atelier ou club IA pour les élèves intéressés, avec objectifs, organisation et cadre éthique.",
+      ton: "motivant, pédagogique, structuré",
+    },
+  },
 };
+
+/* ----------------------------------------
+   ITEMS POUR LE CARROUSEL
+---------------------------------------- */
+
+const ADMIN_PRESET_ITEMS: PresetCarouselItem[] = (
+  Object.entries(ADMIN_PRESETS) as [AdminPresetKey, AdminPreset][]
+).map(([key, preset]) => ({
+  id: key,
+  label: preset.label,
+  description: preset.description,
+  badge: "Modèle direction",
+}));
 
 /* ----------------------------------------
    PAGE
@@ -194,7 +257,7 @@ export default function EspaceAdministrationPage() {
       case "charte":
         return "une charte formalisée, structurée en articles et principes clairs";
       case "note_parents":
-        return "une note d’information / un courrier adressé aux parents";
+        return "une note d’information / un courrier adressé aux parents ou aux élèves";
       case "projet_pilote":
         return "un document de présentation de projet avec objectifs, étapes et évaluation";
       case "protocole_triche":
@@ -330,40 +393,13 @@ export default function EspaceAdministrationPage() {
           </div>
         </section>
 
-        {/* 1️⃣ PRESETS */}
-        <section className="rounded-3xl bg-white/95 p-6 lg:p-7 shadow-sm ring-1 ring-emerald-100 space-y-4">
-          <div className="space-y-1">
-            <h2 className="text-base font-semibold text-slate-900">
-              1️⃣ Choisir un modèle rapide (facultatif)
-            </h2>
-            <p className="text-xs sm:text-sm text-slate-600">
-              Tu peux gagner du temps en partant d’un exemple proche de ta
-              situation. Tu pourras ensuite adapter tous les champs dans le
-              formulaire.
-            </p>
-          </div>
-
-          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
-            {(Object.entries(ADMIN_PRESETS) as [
-              AdminPresetKey,
-              AdminPreset,
-            ][]).map(([key, preset]) => (
-              <button
-                key={key}
-                type="button"
-                onClick={() => appliquerPreset(key)}
-                className="h-full rounded-2xl border border-emerald-200 bg-emerald-50 px-3 py-3 text-left text-xs shadow-sm hover:bg-emerald-100"
-              >
-                <div className="font-semibold text-emerald-900 mb-1">
-                  {preset.label}
-                </div>
-                <div className="text-[11px] text-emerald-900/90">
-                  {preset.description}
-                </div>
-              </button>
-            ))}
-          </div>
-        </section>
+        {/* 1️⃣ PRESETS – CARROUSEL */}
+        <PresetCarousel
+          title="1️⃣ Choisir un modèle rapide (facultatif)"
+          subtitle="Tu peux gagner du temps en partant d’un exemple proche de ta situation. Tu pourras ensuite adapter tous les champs dans le formulaire."
+          items={ADMIN_PRESET_ITEMS}
+          onSelect={(id) => appliquerPreset(id as AdminPresetKey)}
+        />
 
         {/* 2️⃣ FORMULAIRE + PROMPT */}
         <section className="grid gap-6 lg:grid-cols-[1.1fr,0.9fr]">
@@ -480,12 +516,14 @@ export default function EspaceAdministrationPage() {
                     className="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-xs sm:text-sm text-slate-900 shadow-inner focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-100"
                   >
                     <option value="charte">Charte d’usage</option>
-                    <option value="note_parents">Note / courrier aux parents</option>
+                    <option value="note_parents">Note / courrier</option>
                     <option value="projet_pilote">Présentation de projet pilote</option>
                     <option value="protocole_triche">
                       Protocole anti-triche / usages interdits
                     </option>
-                    <option value="plan_formation">Plan de formation des professeurs</option>
+                    <option value="plan_formation">
+                      Plan de formation des professeurs
+                    </option>
                     <option value="autre">Autre document</option>
                   </select>
                 </div>
@@ -608,7 +646,3 @@ export default function EspaceAdministrationPage() {
     </main>
   );
 }
-
-
-
-

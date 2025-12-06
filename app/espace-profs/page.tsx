@@ -1,8 +1,22 @@
+// app/profs/page.tsx (ou app/espace-profs/page.tsx selon ton arbo)
+
 "use client";
 
 import { useMemo, useState } from "react";
 import Link from "next/link";
 import { MarkdownMath } from "@/components/MarkdownMath";
+import {
+  PresetCarousel,
+  PresetCarouselItem,
+} from "@/components/PresetCarousel";
+import {
+  PROFS_PRESETS,
+  ProfsPresetKey,
+} from "@/data/profsPresets";
+
+/* ----------------------------------------
+   TYPES
+---------------------------------------- */
 
 type Niveau = "basique" | "standard" | "expert";
 
@@ -118,8 +132,27 @@ const TYPES_SPECIAUX_BAC = [
   "Préparation d’une synthèse de révision pour le bac",
 ];
 
-// 🔧 Fonction qui construit le prompt interne à partir du formulaire
-function construirePrompt(form: PromptProf, latexMode: boolean): string {
+/* ----------------------------------------
+   CARROUSEL – ITEMS À PARTIR DES PRESETS
+---------------------------------------- */
+
+const PROFS_PRESET_ITEMS: PresetCarouselItem[] = (
+  Object.entries(PROFS_PRESETS) as [
+    ProfsPresetKey,
+    (typeof PROFS_PRESETS)[ProfsPresetKey],
+  ][]
+).map(([key, preset]) => ({
+  id: key,
+  label: preset.label,
+  description: preset.description,
+  badge: "Modèle prof",
+}));
+
+/* ----------------------------------------
+   FONCTION MOULINETTE
+---------------------------------------- */
+
+function construirePrompt(form: PromptProf): string {
   const blocTags =
     form.tags.length > 0
       ? `Mots-clés pédagogiques fournis par le professeur : ${form.tags.join(", ")}.\n`
@@ -155,19 +188,10 @@ function construirePrompt(form: PromptProf, latexMode: boolean): string {
       `- inviter l’élève à reformuler avec ses propres mots.\n\n`
     : "";
 
-  const estMaths = form.matiere === "Mathématiques";
-
-  // 👉 Bloc notation : dépend de la matière & du mode LaTeX
-  let blocNotation = "";
-  if (estMaths && latexMode) {
-    blocNotation =
-      `Pour les écritures mathématiques, tu peux utiliser LaTeX (\\frac, \\sqrt, exposants, etc.), ` +
-      `de manière propre et compatible avec une réutilisation dans un document LaTeX ou un script Manim.\n\n`;
-  } else {
-    blocNotation =
-      `Pour les écritures mathématiques, n'utilise pas de LaTeX (pas de \\frac, \\sqrt, etc.). ` +
-      `Écris les fractions sous la forme a/b et les puissances sous la forme x^2 ou "x au carré".\n\n`;
-  }
+  // Consigne stricte actuelle : pas de LaTeX (agent-prof côté API)
+  const blocSansLatex =
+    `Pour les écritures mathématiques, n'utilise pas de LaTeX (pas de \\frac, \\sqrt, etc.). ` +
+    `Écris les fractions sous la forme a/b et les puissances sous la forme x^2 ou "x au carré".\n\n`;
 
   const blocRappelsEtMeta =
     `Ta réponse devra :\n` +
@@ -195,7 +219,7 @@ function construirePrompt(form: PromptProf, latexMode: boolean): string {
     `en ${form.matiere || "discipline scolaire"}, dans le système scolaire français.\n\n` +
     blocEduscol +
     blocNeuro +
-    blocNotation +
+    blocSansLatex +
     `Objectif pédagogique indiqué par le professeur : ${
       form.objectifPedagogique ||
       "(non précisé : propose une version compatible avec le programme officiel)"
@@ -226,6 +250,10 @@ function construirePrompt(form: PromptProf, latexMode: boolean): string {
   return prompt;
 }
 
+/* ----------------------------------------
+   PAGE PROF
+---------------------------------------- */
+
 export default function ProfsPage() {
   const today = new Date().toISOString().slice(0, 10);
 
@@ -244,8 +272,6 @@ export default function ProfsPage() {
     date: today,
   });
 
-  const [latexMode, setLatexMode] = useState(false); // 👈 mode LaTeX pour les maths
-
   const [rawTags, setRawTags] = useState("");
   const [promptInterne, setPromptInterne] = useState("");
   const [agentOutput, setAgentOutput] = useState("");
@@ -263,11 +289,6 @@ export default function ProfsPage() {
       ...prev,
       [field]: value,
     }));
-
-    // si on change de matière et qu'on quitte les maths → on coupe le mode LaTeX
-    if (field === "matiere" && value !== "Mathématiques") {
-      setLatexMode(false);
-    }
   }
 
   function updateTags(value: string) {
@@ -277,6 +298,22 @@ export default function ProfsPage() {
       .map((t) => t.trim())
       .filter(Boolean);
     setForm((prev) => ({ ...prev, tags }));
+  }
+
+  // 🔁 Appliquer un preset (carrousel)
+  function appliquerPreset(key: ProfsPresetKey) {
+    const preset = PROFS_PRESETS[key];
+    const v = preset.valeurs;
+
+    setForm((prev) => ({
+      ...prev,
+      ...v,
+      tags: v.tags ?? prev.tags,
+    }));
+
+    if (v.tags) {
+      setRawTags(v.tags.join(", "));
+    }
   }
 
   // 🔹 Types de ressource disponibles en fonction de la matière + bac/brevet
@@ -365,7 +402,7 @@ export default function ProfsPage() {
       return;
     }
 
-    const prompt = construirePrompt(form, latexMode);
+    const prompt = construirePrompt(form);
     setPromptInterne(prompt);
     setAgentOutput("");
     setAgentError("");
@@ -378,7 +415,7 @@ export default function ProfsPage() {
       const res = await fetch("/api/agent-prof", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ prompt, latexMode }),
+        body: JSON.stringify({ prompt }),
       });
 
       const data = await res.json().catch(() => ({}));
@@ -425,66 +462,14 @@ export default function ProfsPage() {
     }
   }
 
-  // 👉 Boutons d’exemples pour tests rapides
-  function remplirExemple6eMaths() {
-    const exemple: PromptProf = {
-      titre: "Exercices guidés sur les fractions – 6e",
-      classe: "6e",
-      matiere: "Mathématiques",
-      niveau: "standard",
-      type: "Génération d’exercices",
-      objectifPedagogique:
-        "Amener les élèves de 6e à comparer, simplifier et additionner des fractions simples en lien avec des situations concrètes.",
-      contenu:
-        "Je veux une fiche d’exercices sur les fractions pour une classe de 6e :\n" +
-        "- rappel très court de ce qu’est une fraction (partage, part d’un tout),\n" +
-        "- 3 exercices de simplification de fractions,\n" +
-        "- 3 exercices où il faut comparer des fractions avec des dessins (bandes, disques…),\n" +
-        "- 3 exercices d’addition de fractions avec le même dénominateur,\n" +
-        "- 1 petit problème en lien avec la vie quotidienne (partage de gâteau, recette de cuisine…).\n" +
-        "Je veux des consignes claires pour les élèves, et une mise en page exploitable directement en classe.",
-      tags: ["fractions", "6e", "numération"],
-      adaptationDYS: true,
-      neuro: true,
-      auteur: form.auteur || "",
-      date: form.date,
-    };
-
-    setForm(exemple);
-    setRawTags(exemple.tags.join(", "));
-    setLatexMode(false); // pour 6e, par défaut sans LaTeX
-  }
-
-  function reinitialiserFormulaire() {
-    setForm({
-      titre: "",
-      objectifPedagogique: "",
-      classe: "",
-      matiere: "",
-      niveau: "standard",
-      type: "",
-      contenu: "",
-      tags: [],
-      adaptationDYS: true,
-      neuro: true,
-      auteur: "",
-      date: today,
-    });
-    setRawTags("");
-    setLatexMode(false);
-    setPromptInterne("");
-    setAgentOutput("");
-    setAgentError("");
-    setCopiedRessource(false);
-    setCopiedPrompt(false);
-  }
-
-  const estMaths = form.matiere === "Mathématiques";
+  /* ----------------------------------------
+     RENDER
+  ---------------------------------------- */
 
   return (
     <main className="min-h-screen bg-gradient-to-b from-sky-50 via-white to-slate-50 text-gray-900">
       <div className="max-w-6xl mx-auto px-4 py-10 space-y-8">
-        {/* Titre */}
+        {/* Titre / bandeau haut */}
         <header className="space-y-2">
           <p className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-100 text-xs font-semibold text-[#0047B6]">
             <span>🧑‍🏫</span>
@@ -510,35 +495,20 @@ export default function ProfsPage() {
           </p>
         </header>
 
+        {/* Carrousel Netflix de presets */}
+        <PresetCarousel
+          title="Choisir un modèle rapide (facultatif)"
+          subtitle="Clique sur un modèle proche de ta séance : le formulaire sera pré-rempli, tu pourras ensuite tout adapter."
+          items={PROFS_PRESET_ITEMS}
+          onSelect={(id) => appliquerPreset(id as ProfsPresetKey)}
+        />
+
         <div className="grid gap-6 lg:grid-cols-2">
           {/* Colonne gauche : formulaire */}
           <section className="bg-white/95 border border-slate-200 rounded-2xl shadow-sm p-5 sm:p-6 space-y-4">
             <h2 className="text-lg font-bold text-[#0047B6] flex items-center gap-2">
               1️⃣ Paramètres pédagogiques
             </h2>
-
-            {/* 🔸 Exemples de test rapides */}
-            <div className="mb-2 rounded-lg border border-dashed border-sky-200 bg-sky-50 px-3 py-2 text-[11px] space-y-2">
-              <p className="font-semibold text-sky-900">
-                Exemples rapides pour tester la page
-              </p>
-              <div className="flex flex-wrap gap-2">
-                <button
-                  type="button"
-                  onClick={remplirExemple6eMaths}
-                  className="px-3 py-1.5 rounded-lg bg-sky-600 text-white font-semibold hover:bg-sky-700"
-                >
-                  🧮 Exemple 6e – Maths (fractions)
-                </button>
-                <button
-                  type="button"
-                  onClick={reinitialiserFormulaire}
-                  className="px-3 py-1.5 rounded-lg bg-slate-200 text-slate-800 font-semibold hover:bg-slate-300"
-                >
-                  🔄 Réinitialiser le formulaire
-                </button>
-              </div>
-            </div>
 
             {/* Classe / matière / niveau */}
             <div className="grid sm:grid-cols-3 gap-3">
@@ -594,33 +564,8 @@ export default function ProfsPage() {
               </div>
             </div>
 
-            {/* Mode LaTeX pour les maths */}
-            {estMaths && (
-              <div className="mt-2 flex items-center justify-between gap-3 rounded-lg border border-sky-100 bg-sky-50 px-3 py-2">
-                <div className="text-[11px] text-sky-900">
-                  <p className="font-semibold">
-                    Mode avancé Mathématiques (LaTeX)
-                  </p>
-                  <p>
-                    Active cette option si tu veux une ressource avec formules en
-                    LaTeX (pour LaTeX ou Manim). Sinon, la sortie restera en écriture
-                    simple (2/5, x^2…).
-                  </p>
-                </div>
-                <label className="inline-flex items-center gap-2 text-[11px] text-sky-900">
-                  <input
-                    type="checkbox"
-                    checked={latexMode}
-                    onChange={(e) => setLatexMode(e.target.checked)}
-                    className="rounded border-gray-400"
-                  />
-                  <span>Autoriser LaTeX</span>
-                </label>
-              </div>
-            )}
-
             {/* Type de ressource */}
-            <div className="space-y-1 pt-2">
+            <div className="space-y-1">
               <label className="text-xs font-semibold text-gray-600">
                 Type de ressource à générer
               </label>
@@ -804,7 +749,7 @@ export default function ProfsPage() {
 
               <p className="text-[11px] text-gray-500">
                 Tu peux copier cette ressource et la coller telle quelle dans Word,
-                Pronote, ton ENT ou une autre IA (ChatGPT, etc.).
+                Pronote, ton ENT ou une autre IA (EleveAI tchat, etc.).
               </p>
 
               <div className="eleveai-math border rounded p-3 min-h-[180px] bg-slate-50 text-sm whitespace-pre-wrap">
@@ -817,7 +762,7 @@ export default function ProfsPage() {
                 )}
               </div>
 
-              {/* 🔗 Boutons IA externes */}
+              {/* Boutons IA externes */}
               <div className="space-y-2 pt-3">
                 <p className="text-[11px] text-gray-600">
                   Tu peux aussi réutiliser le prompt interne dans l’IA de ton choix :
@@ -831,7 +776,7 @@ export default function ProfsPage() {
                     }
                     className="px-3 py-2 rounded-lg bg-emerald-600 text-white font-semibold hover:bg-emerald-700"
                   >
-                    🚀 Utiliser avec le chat EleveAI
+                    🚀 Utiliser avec le tchat EleveAI
                   </Link>
                   <a
                     href="https://chatgpt.com"
@@ -869,7 +814,7 @@ export default function ProfsPage() {
               </div>
             </div>
 
-            {/* Prompt interne (optionnel, pour les curieux) */}
+            {/* Prompt interne (optionnel) */}
             <div className="bg-white/80 border border-dashed border-slate-300 rounded-2xl shadow-sm p-4 space-y-3 text-xs">
               <button
                 type="button"

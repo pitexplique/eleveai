@@ -2,6 +2,10 @@
 
 import { useMemo, useState } from "react";
 import Link from "next/link";
+import {
+  PresetCarousel,
+  PresetCarouselItem,
+} from "@/components/PresetCarousel";
 
 /* ----------------------------------------
    TYPES
@@ -99,7 +103,11 @@ type PresetKey =
   | "controle_fractions_5e"
   | "brevet_maths_3e"
   | "redaction_francais_3e"
-  | "methodo_seconde";
+  | "methodo_seconde"
+  | "decouverte_6e_maths"
+  | "remise_a_niveau_4e_francais"
+  | "terminale_spe_maths_fonctions"
+  | "troisieme_anglais_oral";
 
 const PRESETS: Record<
   PresetKey,
@@ -172,7 +180,93 @@ const PRESETS: Record<
         "Je veux une méthode simple pour travailler plus régulièrement.",
     },
   },
+
+  decouverte_6e_maths: {
+    label: "🔢 6e – Découvrir les maths au collège",
+    description:
+      "Pour un élève de 6e qui a besoin de prendre confiance en maths dès le début de l’année.",
+    valeurs: {
+      classe: "6e",
+      matiere: "Mathématiques",
+      chapitre: "Nombres entiers, additions, soustractions, multiplications",
+      typeAide: "manipuler_pour_comprendre",
+      confiance: "en_difficulte",
+      tempsDispo: "20 minutes",
+      objectifPerso:
+        "Je veux comprendre les bases des nombres et des calculs pour être plus à l’aise en classe.",
+      prefereQuestions: true,
+      prefereExemplesConcrets: true,
+    },
+  },
+
+  remise_a_niveau_4e_francais: {
+    label: "✏️ 4e – Remise à niveau en français",
+    description:
+      "Pour retravailler l’orthographe et la grammaire sans se décourager.",
+    valeurs: {
+      classe: "4e",
+      matiere: "Français",
+      chapitre: "Orthographe, accords, conjugaison de base",
+      typeAide: "faire_des_exercices",
+      confiance: "en_difficulte",
+      tempsDispo: "30 minutes",
+      objectifPerso:
+        "Je veux faire moins de fautes dans mes rédactions et mes contrôles.",
+      prefereQuestions: true,
+      prefereExemplesConcrets: true,
+    },
+  },
+
+  terminale_spe_maths_fonctions: {
+    label: "📈 Tle spé maths – Fonctions",
+    description:
+      "Révisions ciblées sur les fonctions pour préparer le bac spécialité maths.",
+    valeurs: {
+      classe: "Terminale",
+      matiere: "Mathématiques",
+      chapitre:
+        "Étude de fonctions, dérivation, variations, limites simples (niveau bac spé maths)",
+      typeAide: "reviser_un_chapitre",
+      confiance: "moyen",
+      tempsDispo: "45 minutes",
+      objectifPerso:
+        "Je veux revoir les méthodes sur les fonctions pour réussir les exercices de bac.",
+      prefereQuestions: true,
+      prefereExemplesConcrets: true,
+    },
+  },
+
+  troisieme_anglais_oral: {
+    label: "🎤 3e – Anglais (oral)",
+    description:
+      "Pour s’entraîner à parler en anglais à l’oral, sans jugements, avant le brevet.",
+    valeurs: {
+      classe: "3e",
+      matiere: "Langues",
+      chapitre: "Expression orale : se présenter, parler de sa journée, de ses goûts",
+      typeAide: "faire_des_exercices",
+      confiance: "moyen",
+      tempsDispo: "20 minutes",
+      objectifPerso:
+        "Je veux être plus à l’aise pour parler en anglais à l’oral en classe et pour le brevet.",
+      prefereQuestions: true,
+      prefereExemplesConcrets: true,
+    },
+  },
 };
+
+/* ----------------------------------------
+   ITEMS POUR LE CARROUSEL
+---------------------------------------- */
+
+const PRESET_ITEMS: PresetCarouselItem[] = (
+  Object.entries(PRESETS) as [PresetKey, (typeof PRESETS)[PresetKey]][]
+).map(([key, preset]) => ({
+  id: key,
+  label: preset.label,
+  description: preset.description,
+  badge: "Modèle élève",
+}));
 
 /* ----------------------------------------
    PAGE
@@ -360,41 +454,23 @@ export default function ElevePage() {
           </h1>
 
           <p className="text-sm text-gray-700 max-w-2xl">
-            Remplis ce formulaire ou choisis un modèle : EleveAI créera pour toi un
-            prompt clair pour réviser, comprendre un chapitre ou préparer un contrôle
-            sans tricher.
+            Remplis ce formulaire ou choisis un modèle : EleveAI créera pour toi
+            un prompt clair pour réviser, comprendre un chapitre ou préparer un
+            contrôle sans tricher.
           </p>
         </header>
 
+        {/* 1️⃣ PRESETS – CARROUSEL TYPE NETFLIX */}
+        <PresetCarousel
+          title="Choisir un modèle rapide (facultatif)"
+          subtitle="Tu peux gagner du temps en partant d’un exemple proche de ta situation. Tu pourras ensuite adapter tous les champs dans le formulaire."
+          items={PRESET_ITEMS}
+          onSelect={(id) => appliquerPreset(id as PresetKey)}
+        />
+
         <div className="grid gap-6 lg:grid-cols-2">
-          {/* -------------------------------- OPTIONS GAUCHE -------------------------------- */}
+          {/* -------------------------------- COLONNE GAUCHE : FORMULAIRE -------------------------------- */}
           <section className="bg-white/95 border border-slate-200 rounded-2xl shadow-sm p-5 sm:p-6 space-y-4">
-            <h2 className="text-lg font-bold text-[#0047B6]">
-              1️⃣ Choisis un modèle (facultatif)
-            </h2>
-
-            <div className="grid sm:grid-cols-2 gap-2">
-              {(Object.entries(PRESETS) as [
-                PresetKey,
-                (typeof PRESETS)[PresetKey],
-              ][]).map(([key, preset]) => (
-                <button
-                  key={key}
-                  onClick={() => appliquerPreset(key)}
-                  className="rounded-xl border border-emerald-200 bg-emerald-50 px-3 py-2 text-left hover:bg-emerald-100 text-xs"
-                >
-                  <div className="font-semibold text-emerald-800">
-                    {preset.label}
-                  </div>
-                  <div className="text-[11px] text-gray-700">
-                    {preset.description}
-                  </div>
-                </button>
-              ))}
-            </div>
-
-            <hr className="my-4 border-emerald-200" />
-
             <h2 className="text-md font-bold text-[#0047B6]">
               2️⃣ Ta situation
             </h2>
@@ -402,7 +478,9 @@ export default function ElevePage() {
             {/* Prénom / classe / matière */}
             <div className="grid sm:grid-cols-3 gap-3">
               <div className="space-y-1">
-                <label className="text-xs font-semibold">Prénom (facultatif)</label>
+                <label className="text-xs font-semibold">
+                  Prénom (facultatif)
+                </label>
                 <input
                   type="text"
                   value={form.prenom}
@@ -459,7 +537,9 @@ export default function ElevePage() {
 
             {/* Type d'aide */}
             <div className="space-y-1">
-              <label className="text-xs font-semibold">Ce que tu veux faire</label>
+              <label className="text-xs font-semibold">
+                Ce que tu veux faire
+              </label>
               <select
                 value={form.typeAide}
                 onChange={(e) =>
@@ -597,10 +677,7 @@ export default function ElevePage() {
                       type="text"
                       value={form.dysPrecisionAutre}
                       onChange={(e) =>
-                        handleChange(
-                          "dysPrecisionAutre",
-                          e.target.value,
-                        )
+                        handleChange("dysPrecisionAutre", e.target.value)
                       }
                       className="w-full border rounded-lg px-2 py-1 text-[11px]"
                       placeholder="Précision facultative..."
@@ -719,3 +796,4 @@ export default function ElevePage() {
     </main>
   );
 }
+
