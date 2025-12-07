@@ -17,51 +17,59 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title:
-    "EleveAI – Aide scolaire assistée par IA pour collégiens, lycéens, parents et enseignants",
+    "EleveAI – L’IA qui améliore vos questions et prompts pour élèves, parents, professeurs, direction et vie scolaire",
+
   description:
-    "EleveAI est une plateforme éducative qui aide les élèves de collège et lycée à comprendre leurs cours grâce à une IA pédagogique sécurisée, conforme Eduscol et inspirée des neurosciences. Un espace dédié accompagne les professeurs dans la rédaction de prompts efficaces, avec la possibilité d’organiser et retrouver leurs prompts. Les parents disposent d’un espace pour mieux accompagner leurs enfants.",
+    "EleveAI optimise, reformule et améliore vos questions et vos prompts pour gagner du temps, clarifier vos demandes et augmenter votre efficacité. Conçu pour les élèves, parents, professeurs, équipes de direction, vie scolaire et personnels éducatifs.",
+
   keywords: [
     "eleveai",
-    "aide scolaire",
+    "optimisation de prompts",
+    "amélioration des questions",
     "IA éducative",
     "IA pédagogique",
+    "gain de temps",
+    "efficacité scolaire",
+    "élèves",
+    "parents",
+    "professeurs",
+    "direction",
+    "vie scolaire",
+    "assistant IA",
+    "éducation",
     "collège",
     "lycée",
-    "réviser",
-    "expliquer",
-    "maths",
-    "français",
-    "sciences",
-    "La Réunion",
-    "prompts enseignants",
-    "outil pour professeurs",
-    "aide à la rédaction de prompts",
-    "espace parents",
-    "Eduscol",
-    "neurosciences apprentissage",
+    "La Réunion"
   ],
+
   metadataBase: new URL("https://eleveai.vercel.app"),
+
   openGraph: {
     title:
-      "EleveAI – Aide scolaire assistée par IA pour élèves, parents et enseignants",
+      "EleveAI – L’IA qui améliore vos questions et prompts pour élèves, parents, professeurs, direction et vie scolaire",
     description:
-      "Une IA pédagogique sécurisée pour aider les élèves à comprendre leurs cours, un espace enseignants pour rédiger et organiser leurs prompts, et un espace parents pour accompagner les apprentissages.",
+      "EleveAI améliore et optimise les prompts de toute la communauté éducative : élèves, parents, enseignants, direction et vie scolaire.",
     url: "https://eleveai.vercel.app",
     type: "website",
+    siteName: "EleveAI",
+    locale: "fr_FR",
     images: [
       {
-        url: "https://eleveai.vercel.app/preview.jpg",
+        url: "/preview.jpg",
         width: 1200,
         height: 630,
+        alt: "EleveAI – IA pédagogique pour toute la communauté éducative",
       },
     ],
   },
+
   twitter: {
     card: "summary_large_image",
-    title: "EleveAI – IA pédagogique pour élèves, parents et enseignants",
+    title:
+      "EleveAI – Optimisez vos questions et prompts grâce à l’IA",
     description:
-      "Explications claires pour les élèves, aide à la rédaction de prompts pour les enseignants, et repères pour les parents.",
-    images: ["https://eleveai.vercel.app/preview.jpg"],
+      "EleveAI optimise vos prompts et améliore votre efficacité. Pour élèves, parents, professeurs, direction et vie scolaire.",
+    images: ["/preview.jpg"],
   },
 };
 
@@ -82,4 +90,3 @@ export default function RootLayout({
     </html>
   );
 }
-
