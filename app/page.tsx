@@ -41,7 +41,8 @@ export default function Home() {
             </div>
 
             <p className="mt-5 text-sm sm:text-base text-slate-300 max-w-xl">
-              Vous écrivez votre question ou votre consigne avec vos mots. EleveAI la{" "}
+              Vous écrivez votre question ou votre consigne avec vos mots, comme vous le diriez
+              à un élève, à un collègue ou à votre enfant. EleveAI la{" "}
               <strong>clarifie</strong>, la <strong>structure</strong> et la{" "}
               <strong>réécrit</strong> pour obtenir de meilleures réponses, avec l’IA de votre choix.
             </p>
@@ -50,7 +51,7 @@ export default function Home() {
               Pensé pour les <strong>élèves</strong>, les <strong>parents</strong>, les{" "}
               <strong>professeurs</strong>, la <strong>direction</strong> et la{" "}
               <strong>vie scolaire</strong> : moins de temps perdu à chercher “le bon prompt”,
-              plus d’efficacité dans chaque demande.
+              plus d’efficacité dans chaque demande… et un peu plus de sérénité au quotidien.
             </p>
 
             <div className="mt-8 flex flex-wrap gap-3">
@@ -142,7 +143,8 @@ export default function Home() {
 
         <p className="text-sm text-slate-300 mb-4 max-w-2xl">
           Chaque espace vous aide à <strong>formuler de meilleures demandes</strong> :
-          questions de cours, consignes, prompts IA, messages officiels…
+          questions de cours, consignes, prompts IA, messages officiels…  
+          Vous pouvez même vous lancer un petit défi : une meilleure question par jour, pendant une semaine.
         </p>
 
         <div className="grid gap-4 md:grid-cols-4">
@@ -259,6 +261,11 @@ export default function Home() {
             </p>
 
             <p className="text-sm text-slate-300 leading-relaxed">
+              J’aime aussi lancer de petits <strong>défis</strong> : une meilleure question,
+              une consigne plus claire, un mail plus apaisé… un epsilon de progrès à la fois.
+            </p>
+
+            <p className="text-sm text-slate-300 leading-relaxed">
               Mon objectif : dégager du temps, diminuer la charge mentale et redonner
               de l’énergie à ce qui compte vraiment :{" "}
               <strong>la relation pédagogique et la réussite des élèves</strong>.
@@ -278,3 +285,4 @@ export default function Home() {
     </main>
   );
 }
+
