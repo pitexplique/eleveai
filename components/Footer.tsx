@@ -114,6 +114,14 @@ export default function Footer() {
               </li>
               <li>
                 <Link
+                  href="/tarifs"
+                  className="text-slate-300 hover:text-sky-300"
+                >
+                  Tarifs & abonnements
+                </Link>
+              </li>
+              <li>
+                <Link
                   href="/blog"
                   className="text-slate-300 hover:text-sky-300"
                 >
@@ -184,5 +192,6 @@ export default function Footer() {
     </footer>
   );
 }
+
 
 
