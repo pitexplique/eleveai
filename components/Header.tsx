@@ -34,6 +34,7 @@ const MAIN_LINKS: NavItem[] = [
 ];
 
 const SECONDARY_LINKS: NavItem[] = [
+  { href: "/tarifs", label: "Tarifs & abonnements", badge: "Nouveau" },
   { href: "/prompts", label: "Générateurs de prompts" },
   { href: "/concours-ia", label: "Concours IA" },
   { href: "/blog", label: "Blog" },
@@ -112,13 +113,18 @@ export default function Header() {
                         key={link.href}
                         href={link.href}
                         className={[
-                          "px-4 py-1.5 text-sm",
+                          "px-4 py-1.5 text-sm flex items-center gap-2",
                           active
                             ? "text-sky-300 bg-sky-500/10 border-l-2 border-sky-500"
                             : "text-slate-300 hover:bg-slate-900",
                         ].join(" ")}
                       >
                         {link.label}
+                        {link.badge && (
+                          <span className="ml-auto inline-flex items-center rounded-full bg-emerald-600/20 text-emerald-300 text-[10px] font-semibold px-2 py-0.5 uppercase tracking-wide">
+                            {link.badge}
+                          </span>
+                        )}
                       </Link>
                     );
                   })}
@@ -174,3 +180,5 @@ export default function Header() {
     </header>
   );
 }
+
+
