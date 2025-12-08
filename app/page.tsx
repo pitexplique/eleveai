@@ -5,271 +5,191 @@ import Link from "next/link";
 export default function Home() {
   return (
     <main className="min-h-screen bg-slate-950 text-slate-50">
-
-      {/* HERO */}
-      <section className="border-b border-slate-800">
-        <div className="mx-auto max-w-6xl px-4 py-16 lg:py-24 grid gap-10 lg:grid-cols-2 items-center">
-          {/* Colonne gauche : titre / pitch */}
-          <div>
-            <p className="inline-flex items-center rounded-full border border-emerald-500/50 bg-emerald-500/10 px-3 py-1 text-xs font-medium uppercase tracking-wide text-emerald-300 mb-4">
-              Optimisation de prompts · IA éducative · pour toute la communauté scolaire
-            </p>
-
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight text-slate-50">
-              <span className="block">EleveAI améliore</span>
-              <span className="block text-emerald-400 mt-1">
-                vos questions et vos prompts scolaires.
-              </span>
-            </h1>
-
-            <p className="mt-3 text-lg sm:text-xl font-semibold text-emerald-300">
-              Défis Prompt : change ton monde.
-            </p>
-
-            <div className="mt-6 flex flex-wrap items-center gap-2">
-              <span className="px-3 py-1 rounded-full text-xs font-medium border border-slate-700 bg-slate-900 text-slate-300">ChatGPT</span>
-              <span className="px-3 py-1 rounded-full text-xs font-medium border border-slate-700 bg-slate-900 text-slate-300">Gemini</span>
-              <span className="px-3 py-1 rounded-full text-xs font-medium border border-slate-700 bg-slate-900 text-slate-300">Claude</span>
-              <span className="px-3 py-1 rounded-full text-xs font-medium border border-slate-700 bg-slate-900 text-slate-300">Perplexity</span>
-              <span className="px-3 py-1 rounded-full text-xs font-medium border border-slate-700 bg-slate-900 text-slate-300">Mistral</span>
-            </div>
-
-            <p className="mt-5 text-sm sm:text-base text-slate-300 max-w-xl">
-              Vous écrivez votre question ou votre consigne avec vos mots, comme vous le diriez
-              à un élève, à un collègue ou à votre enfant. EleveAI la{" "}
-              <strong>clarifie</strong>, la <strong>structure</strong> et la{" "}
-              <strong>réécrit</strong> pour obtenir de meilleures réponses, avec l’IA de votre choix.
-            </p>
-
-            <p className="mt-3 text-sm text-slate-400 max-w-xl">
-              Pensé pour les <strong>élèves</strong>, les <strong>parents</strong>, les{" "}
-              <strong>professeurs</strong>, la <strong>direction</strong> et la{" "}
-              <strong>vie scolaire</strong> : moins de temps perdu à chercher “le bon prompt”,
-              plus d’efficacité dans chaque demande… et un peu plus de sérénité au quotidien.
-            </p>
-
-            <div className="mt-8 flex flex-wrap gap-3">
-              <Link
-                href="/tarifs"
-                className="inline-flex items-center justify-center rounded-full bg-emerald-500 px-5 py-2.5 text-sm font-semibold text-slate-950 shadow-lg shadow-emerald-500/30 hover:bg-emerald-400 transition"
-              >
-                Voir les tarifs & l’offre pilote
-              </Link>
-              <Link
-                href="#espaces"
-                className="inline-flex items-center justify-center rounded-full border border-slate-600 px-5 py-2.5 text-sm font-semibold text-slate-100 hover:border-emerald-400 hover:text-emerald-300 transition"
-              >
-                Choisir mon espace EleveAI
-              </Link>
-            </div>
-
-            <p className="mt-4 text-xs sm:text-sm text-slate-400">
-              Usage responsable de l’IA · Aide à la formulation, pas à la triche · Conçu à La Réunion
-            </p>
+      {/* HERO PRINCIPAL */}
+      <section className="border-b border-slate-800 bg-gradient-to-b from-slate-900/80 to-slate-950">
+        <div className="mx-auto max-w-6xl px-4 py-12 sm:py-16 space-y-10">
+          {/* Bandeau haut */}
+          <div className="flex flex-wrap items-center gap-3 text-xs text-emerald-200">
+            <span className="inline-flex items-center gap-2 rounded-full border border-emerald-400/40 bg-emerald-500/10 px-3 py-1 font-semibold">
+              ⚙️ Prompts pédagogiques prêts à l’emploi
+            </span>
+            <span className="text-slate-400">
+              EleveAI – IA au service des élèves, des profs, des parents et des établissements.
+            </span>
           </div>
 
-          {/* Colonne droite */}
-          <div className="lg:justify-self-end">
-            <div className="rounded-3xl border border-slate-800 bg-slate-900/50 p-6 shadow-xl shadow-black/40 space-y-4">
-              <h2 className="text-lg font-semibold text-slate-50">
-                EleveAI améliore ce que vous écrivez.
-              </h2>
-              <p className="text-sm text-slate-300">
-                Au lieu de passer du temps à inventer “le bon prompt”, vous décrivez simplement
-                votre besoin. EleveAI le transforme en une demande claire, structurée et efficace
-                pour l’IA (cours, devoirs, mails, projets…).
+          {/* Titre + texte principal */}
+          <div className="grid gap-8 lg:grid-cols-[3fr,2fr] items-start">
+            {/* Colonne gauche */}
+            <div className="space-y-6">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight">
+                L’IA pour l’éducation,
+                <span className="text-emerald-400"> sans triche</span> et avec
+                <span className="text-emerald-300"> bienveillance</span>.
+              </h1>
+
+              <p className="text-sm sm:text-base text-slate-300 max-w-xl">
+                EleveAI t’aide à formuler de bons prompts éducatifs : pour un élève qui révise,
+                un professeur qui prépare son cours, un parent qui accompagne, ou une équipe
+                de direction qui pilote un établissement.
               </p>
 
-              <div className="grid grid-cols-2 gap-3 text-xs sm:text-sm">
-                <div>
-                  <p className="font-semibold text-emerald-300">Élèves</p>
-                  <ul className="space-y-1 text-slate-300">
-                    <li>• Reformuler une question de cours</li>
-                    <li>• Préparer une demande d’explication</li>
-                    <li>• Structurer un devoir ou un oral</li>
-                  </ul>
+              {/* ✅ Rangée de boutons avec Défis Noël inclus */}
+              <div className="flex flex-wrap gap-3">
+                <Link
+                  href="/espace-eleves"
+                  className="inline-flex items-center justify-center gap-2 rounded-lg bg-emerald-500 px-4 py-2 text-sm font-semibold text-slate-950 hover:bg-emerald-400"
+                >
+                  🎒 Espace élèves (prompts)
+                </Link>
+                <Link
+                  href="/espace-profs"
+                  className="inline-flex items-center justify-center gap-2 rounded-lg border border-slate-600 bg-slate-900 px-4 py-2 text-sm font-semibold text-slate-50 hover:bg-slate-800"
+                >
+                  📚 Espace profs
+                </Link>
+                <Link
+                  href="/parents"
+                  className="inline-flex items-center justify-center gap-2 rounded-lg border border-slate-700/80 bg-slate-900 px-4 py-2 text-sm font-semibold text-slate-50 hover:bg-slate-800"
+                >
+                  🧩 Espace parents
+                </Link>
+                <Link
+                  href="/defis-ia-pere-noel"
+                  className="inline-flex items-center justify-center gap-2 rounded-lg border border-emerald-500/70 bg-emerald-900/40 px-4 py-2 text-sm font-semibold text-emerald-200 hover:bg-emerald-800/60"
+                >
+                  🎄 Défis IA Père Noël
+                </Link>
+              </div>
+
+              <p className="text-xs text-slate-500">
+                100% adapté au système scolaire français – prompts alignés sur l’esprit d’Eduscol et du BO.
+              </p>
+            </div>
+
+            {/* Colonne droite : bloc Défis Noël */}
+            <div className="space-y-4">
+              <div className="rounded-2xl border border-emerald-500/40 bg-gradient-to-b from-emerald-900/40 via-slate-950 to-slate-950 p-5 shadow-lg relative overflow-hidden">
+                {/* Effet décoratif */}
+                <div className="pointer-events-none absolute inset-0 opacity-40">
+                  <div className="absolute -top-4 right-10 h-32 w-32 rounded-full bg-emerald-500/20 blur-3xl" />
+                  <div className="absolute bottom-0 left-4 h-24 w-24 rounded-full bg-cyan-400/10 blur-2xl" />
                 </div>
-                <div>
-                  <p className="font-semibold text-emerald-300">Parents</p>
-                  <ul className="space-y-1 text-slate-300">
-                    <li>• Clarifier un message au professeur</li>
-                    <li>• Écrire une consigne à son enfant</li>
-                    <li>• Demander une explication adaptée</li>
-                  </ul>
-                </div>
-                <div>
-                  <p className="font-semibold text-emerald-300">Profs</p>
-                  <ul className="space-y-1 text-slate-300">
-                    <li>• Transformer une idée en prompt précis</li>
-                    <li>• Générer plusieurs variantes de consignes</li>
-                    <li>• Adapter un exercice à différents niveaux</li>
-                  </ul>
-                </div>
-                <div>
-                  <p className="font-semibold text-emerald-300">
-                    Direction & vie scolaire
+
+                <div className="relative space-y-3">
+                  <p className="inline-flex items-center gap-2 rounded-full bg-emerald-500/15 px-3 py-1 text-[11px] font-semibold text-emerald-200">
+                    🎄 Spécial Noël • Défi ponctuel
                   </p>
-                  <ul className="space-y-1 text-slate-300">
-                    <li>• Rédiger une note claire</li>
-                    <li>• Poser une demande à l’IA sans jargon</li>
-                    <li>• Gagner du temps sur les écrits quotidiens</li>
+
+                  <h2 className="text-lg font-bold text-emerald-100">
+                    Défis prompt : <span className="text-emerald-300">change ton monde</span>
+                  </h2>
+
+                  <p className="text-sm text-slate-200">
+                    Imagine un défi positif pour ta classe, ta famille ou ton établissement.
+                    EleveAI t’aide à écrire un prompt Père Noël pour en faire un vrai plan d’action.
+                  </p>
+
+                  <ul className="text-xs text-slate-300 space-y-1">
+                    <li>• Tu décris ce que tu veux changer.</li>
+                    <li>• La moulinette IA construit un prompt clair.</li>
+                    <li>• Tu peux l’envoyer à Frédéric ou à l’IA de ton choix.</li>
                   </ul>
+
+                  <div className="pt-2 flex flex-wrap gap-2 items-center">
+                    <Link
+                      href="/defis-ia-pere-noel"
+                      className="inline-flex items-center justify-center gap-2 rounded-lg bg-emerald-500 px-4 py-2 text-xs font-semibold text-slate-950 hover:bg-emerald-400"
+                    >
+                      ✨ Lancer mon défi IA Noël
+                    </Link>
+                    <span className="text-[11px] text-emerald-200/80">
+                      Question clé : <span className="italic">« Que viens-tu de changer ? »</span>
+                    </span>
+                  </div>
                 </div>
               </div>
 
-              <p className="text-xs text-slate-400">
-                EleveAI n’écrit pas à votre place : il vous aide à mieux demander,
-                pour mieux obtenir… et mieux transmettre.
-              </p>
+              {/* Petit bloc rassurant */}
+              <div className="rounded-xl border border-slate-800 bg-slate-950/60 px-4 py-3 text-[11px] text-slate-300">
+                Usage responsable de l’IA : ici, on cherche des idées bienveillantes, positives et
+                respectueuses de chacun. Pas de triche, pas de moqueries.
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* SECTION ESPACES */}
-      <section id="espaces" className="mx-auto max-w-6xl px-4 py-12 scroll-mt-20">
-        <h2 className="text-xl sm:text-2xl font-semibold mb-4">
-          Choisissez votre espace EleveAI
-        </h2>
-
-        <p className="text-sm text-slate-300 mb-4 max-w-2xl">
-          Chaque espace vous aide à <strong>formuler de meilleures demandes</strong> :
-          questions de cours, consignes, prompts IA, messages officiels…  
-          Vous pouvez même vous lancer un petit défi : une meilleure question par jour, pendant une semaine.
-        </p>
-
-        <div className="grid gap-4 md:grid-cols-4">
-          <Link
-            href="/espace-eleves"
-            className="group rounded-2xl border border-slate-800 bg-slate-900/60 p-4 hover:border-emerald-400 hover:-translate-y-0.5 transition"
-          >
-            <p className="text-sm font-semibold text-emerald-300">
-              Espace élèves
-            </p>
-            <p className="mt-1 text-xs text-slate-300">
-              Transformer ses questions en prompts clairs pour comprendre, réviser et préparer ses évaluations.
-            </p>
-          </Link>
-
-          <Link
-            href="/espace-profs"
-            className="group rounded-2xl border border-slate-800 bg-slate-900/60 p-4 hover:border-emerald-400 hover:-translate-y-0.5 transition"
-          >
-            <p className="text-sm font-semibold text-emerald-300">
-              Espace profs
-            </p>
-            <p className="mt-1 text-xs text-slate-300">
-              Décrire son besoin, laisser EleveAI le transformer en prompts puissants pour cours, activités et évaluations.
-            </p>
-          </Link>
-
-          <Link
-            href="/espace-administration"
-            className="group rounded-2xl border border-slate-800 bg-slate-900/60 p-4 hover:border-emerald-400 hover:-translate-y-0.5 transition"
-          >
-            <p className="text-sm font-semibold text-emerald-300">
-              Administration & vie scolaire
-            </p>
-            <p className="mt-1 text-xs text-slate-300">
-              Notes, mails, comptes rendus : EleveAI vous aide à formuler des demandes précises à l’IA pour gagner du temps.
-            </p>
-          </Link>
-
-          <Link
-            href="/parents"
-            className="group rounded-2xl border border-slate-800 bg-slate-900/60 p-4 hover:border-emerald-400 hover:-translate-y-0.5 transition"
-          >
-            <p className="text-sm font-semibold text-emerald-300">
-              Espace parents
-            </p>
-            <p className="mt-1 text-xs text-slate-300">
-              Écrire à un professeur, demander une explication, organiser le travail de son enfant avec des prompts clarifiés.
-            </p>
-          </Link>
-        </div>
-
-        <div className="mt-6">
-          <Link
-            href="/tarifs"
-            className="inline-flex items-center text-sm text-emerald-300 hover:text-emerald-200"
-          >
-            Voir les tarifs et l’offre établissement pilote →
-          </Link>
-        </div>
-      </section>
-
-      {/* OFFRE PILOTE */}
-      <section className="border-t border-slate-800 bg-slate-900/40">
-        <div className="mx-auto max-w-6xl px-4 py-10 sm:py-12">
-          <div className="rounded-2xl border border-emerald-600/60 bg-slate-950/60 p-6 sm:p-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-            <div>
-              <h2 className="text-xl sm:text-2xl font-semibold text-emerald-300 mb-2">
-                ⭐ Offre pilote pour collèges & lycées
-              </h2>
-              <p className="text-sm text-slate-300 max-w-xl">
-                Testez EleveAI gratuitement dans votre établissement pendant{" "}
-                <strong>8 semaines</strong> : optimisation de prompts pour élèves,
-                profs, parents, direction et vie scolaire. Sans engagement, sans carte bancaire.
-              </p>
-            </div>
-            <div className="flex flex-col gap-2 sm:items-end">
-              <Link
-                href="/tarifs"
-                className="inline-flex items-center justify-center rounded-full bg-emerald-500 px-5 py-2.5 text-sm font-semibold text-slate-950 hover:bg-emerald-400 transition"
-              >
-                Découvrir l’offre pilote
-              </Link>
-              <Link
-                href="/contact"
-                className="text-xs text-slate-300 hover:text-emerald-300"
-              >
-                Contacter EleveAI pour un test dans votre établissement →
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* QUI JE SUIS */}
-      <section className="border-t border-slate-800 bg-slate-900/40">
-        <div className="mx-auto max-w-4xl px-4 py-12 sm:py-16">
-          <h2 className="text-2xl sm:text-3xl font-semibold text-slate-50 mb-6">
-            Qui je suis
+      {/* SECTIONS CARTES PRINCIPALES */}
+      <section className="border-b border-slate-800 bg-slate-950">
+        <div className="mx-auto max-w-6xl px-4 py-10 space-y-6">
+          <h2 className="text-xl font-semibold text-slate-100">
+            Choisis ton espace pour générer des prompts utiles
           </h2>
 
-          <div className="rounded-2xl border border-slate-800 bg-slate-950/40 p-6 sm:p-8 space-y-4">
-            <p className="text-sm text-slate-300 leading-relaxed">
-              Je m’appelle <strong>Frédéric</strong>.  
-              Je suis enseignant de mathématiques à La Réunion, passionné par les prompts,
-              les neurosciences de l’apprentissage et l’usage responsable de l’IA à l’école.
-            </p>
+          <div className="grid gap-4 md:grid-cols-3">
+            {/* Carte élèves */}
+            <Link
+              href="/espace-eleves"
+              className="group rounded-2xl border border-slate-800 bg-slate-900/70 p-5 hover:border-emerald-400/60 hover:bg-slate-900 transition-colors"
+            >
+              <p className="text-sm font-semibold text-emerald-300 flex items-center gap-2">
+                🎒 Espace élèves
+                <span className="text-[10px] rounded-full bg-emerald-500/15 px-2 py-0.5 text-emerald-200 border border-emerald-500/40">
+                  Prompts guidés
+                </span>
+              </p>
+              <p className="mt-2 text-sm text-slate-200">
+                Formulaires simples pour créer un prompt d’aide : comprendre un cours, réviser un
+                contrôle, préparer le brevet ou le bac.
+              </p>
+              <p className="mt-3 text-[11px] text-slate-400 group-hover:text-emerald-200">
+                Cliquer pour créer un prompt élève →
+              </p>
+            </Link>
 
-            <p className="text-sm text-slate-300 leading-relaxed">
-              J’ai créé EleveAI pour aider la communauté éducative à{" "}
-              <strong>mieux formuler ses demandes</strong> à l’IA : élèves, parents,
-              professeurs, direction, vie scolaire. Quand la question est bien posée,
-              la réponse devient plus utile, plus claire et plus humaine.
-            </p>
+            {/* Carte profs */}
+            <Link
+              href="/espace-profs"
+              className="group rounded-2xl border border-slate-800 bg-slate-900/70 p-5 hover:border-emerald-400/60 hover:bg-slate-900 transition-colors"
+            >
+              <p className="text-sm font-semibold text-sky-300 flex items-center gap-2">
+                📚 Espace profs
+                <span className="text-[10px] rounded-full bg-sky-500/15 px-2 py-0.5 text-sky-100 border border-sky-500/40">
+                  Préparation de cours
+                </span>
+              </p>
+              <p className="mt-2 text-sm text-slate-200">
+                Prompts pour préparer une séquence, différencier, créer des évaluations, des exercices,
+                des fiches d’activités, en gardant la main sur la pédagogie.
+              </p>
+              <p className="mt-3 text-[11px] text-slate-400 group-hover:text-sky-200">
+                Cliquer pour créer un prompt prof →
+              </p>
+            </Link>
 
-            <p className="text-sm text-slate-300 leading-relaxed">
-              J’aime aussi lancer de petits <strong>défis</strong> : une meilleure question,
-              une consigne plus claire, un mail plus apaisé… un epsilon de progrès à la fois.
-            </p>
-
-            <p className="text-sm text-slate-300 leading-relaxed">
-              Mon objectif : diminuer la charge mentale et redonner
-              de l’énergie à ce qui compte vraiment :{" "}
-              <strong>la relation pédagogique et la réussite des élèves</strong>.
-            </p>
-
-            <p className="mt-3 text-sm font-medium text-emerald-300">
-              — Frédéric, créateur d’EleveAI
-            </p>
-
+            {/* Carte parents / vie scolaire */}
+            <Link
+              href="/parents"
+              className="group rounded-2xl border border-slate-800 bg-slate-900/70 p-5 hover:border-emerald-400/60 hover:bg-slate-900 transition-colors"
+            >
+              <p className="text-sm font-semibold text-rose-300 flex items-center gap-2">
+                🧩 Espace parents
+                <span className="text-[10px] rounded-full bg-rose-500/15 px-2 py-0.5 text-rose-100 border border-rose-500/40">
+                  Accompagner sans faire à la place
+                </span>
+              </p>
+              <p className="mt-2 text-sm text-slate-200">
+                Idées de prompts pour soutenir son enfant : organiser le travail, relire un devoir,
+                préparer un oral, comprendre un bulletin.
+              </p>
+              <p className="mt-3 text-[11px] text-slate-400 group-hover:text-rose-200">
+                Cliquer pour créer un prompt parent →
+              </p>
+            </Link>
           </div>
         </div>
       </section>
     </main>
   );
 }
-
