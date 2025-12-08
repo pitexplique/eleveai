@@ -234,7 +234,7 @@ export default function Home() {
                 Découvrir l’offre pilote
               </Link>
               <Link
-                href="/contact-etablissement"
+                href="/contact"
                 className="text-xs text-slate-300 hover:text-emerald-300"
               >
                 Contacter EleveAI pour un test dans votre établissement →
