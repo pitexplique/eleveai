@@ -5,33 +5,6 @@ import Link from "next/link";
 export default function Home() {
   return (
     <main className="min-h-screen bg-slate-950 text-slate-50">
-      {/* COUPE PREMIUM DÉFIS PÈRE NOËL */}
-      <section className="relative w-full overflow-hidden">
-        {/* Glow arrière */}
-        <div className="absolute inset-0 bg-gradient-to-r from-red-600/60 via-red-500/40 to-emerald-500/40 blur-2xl opacity-40" />
-
-        <div className="relative w-full bg-gradient-to-r from-red-700/80 via-red-600/80 to-emerald-600/80 border-y border-red-400/40 backdrop-blur-md py-4 shadow-[0_0_25px_rgba(255,0,0,0.35)]">
-          <p className="text-sm sm:text-base md:text-lg font-semibold text-white tracking-wide flex flex-wrap items-center justify-center gap-3 drop-shadow-lg px-4 text-center">
-            <span>❄️✨</span>
-            <span className="text-white/90">
-              Défis IA Père Noël :
-            </span>
-            <span className="text-emerald-200 font-bold">
-              Change ton monde avec un prompt
-            </span>
-            <Link
-              href="/defis-pere-noel"
-              className="inline-flex items-center rounded-full border border-white/70 bg-white/10 px-3 py-1 text-xs sm:text-sm font-semibold text-emerald-50 hover:bg-white/20 hover:border-white transition"
-            >
-              Découvrir les défis 🎅
-            </Link>
-            <span>✨🎄</span>
-          </p>
-        </div>
-
-        {/* Ligne brillante décorative */}
-        <div className="absolute bottom-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-white/60 to-transparent blur-sm" />
-      </section>
 
       {/* HERO */}
       <section className="border-b border-slate-800">
@@ -49,28 +22,16 @@ export default function Home() {
               </span>
             </h1>
 
-            {/* Slogan / défi */}
             <p className="mt-3 text-lg sm:text-xl font-semibold text-emerald-300">
               Défis Prompt : change ton monde.
             </p>
 
-            {/* Tags des IA compatibles */}
             <div className="mt-6 flex flex-wrap items-center gap-2">
-              <span className="px-3 py-1 rounded-full text-xs font-medium border border-slate-700 bg-slate-900 text-slate-300">
-                ChatGPT
-              </span>
-              <span className="px-3 py-1 rounded-full text-xs font-medium border border-slate-700 bg-slate-900 text-slate-300">
-                Gemini
-              </span>
-              <span className="px-3 py-1 rounded-full text-xs font-medium border border-slate-700 bg-slate-900 text-slate-300">
-                Claude
-              </span>
-              <span className="px-3 py-1 rounded-full text-xs font-medium border border-slate-700 bg-slate-900 text-slate-300">
-                Perplexity
-              </span>
-              <span className="px-3 py-1 rounded-full text-xs font-medium border border-slate-700 bg-slate-900 text-slate-300">
-                Mistral
-              </span>
+              <span className="px-3 py-1 rounded-full text-xs font-medium border border-slate-700 bg-slate-900 text-slate-300">ChatGPT</span>
+              <span className="px-3 py-1 rounded-full text-xs font-medium border border-slate-700 bg-slate-900 text-slate-300">Gemini</span>
+              <span className="px-3 py-1 rounded-full text-xs font-medium border border-slate-700 bg-slate-900 text-slate-300">Claude</span>
+              <span className="px-3 py-1 rounded-full text-xs font-medium border border-slate-700 bg-slate-900 text-slate-300">Perplexity</span>
+              <span className="px-3 py-1 rounded-full text-xs font-medium border border-slate-700 bg-slate-900 text-slate-300">Mistral</span>
             </div>
 
             <p className="mt-5 text-sm sm:text-base text-slate-300 max-w-xl">
@@ -107,7 +68,7 @@ export default function Home() {
             </p>
           </div>
 
-          {/* Colonne droite : carte "comment ça aide ?" */}
+          {/* Colonne droite */}
           <div className="lg:justify-self-end">
             <div className="rounded-3xl border border-slate-800 bg-slate-900/50 p-6 shadow-xl shadow-black/40 space-y-4">
               <h2 className="text-lg font-semibold text-slate-50">
@@ -165,11 +126,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* SECTION RAPIDE : LIENS ESPACES */}
-      <section
-        id="espaces"
-        className="mx-auto max-w-6xl px-4 py-12 scroll-mt-20"
-      >
+      {/* SECTION ESPACES */}
+      <section id="espaces" className="mx-auto max-w-6xl px-4 py-12 scroll-mt-20">
         <h2 className="text-xl sm:text-2xl font-semibold mb-4">
           Choisissez votre espace EleveAI
         </h2>
@@ -240,7 +198,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* SECTION OFFRE PILOTE */}
+      {/* OFFRE PILOTE */}
       <section className="border-t border-slate-800 bg-slate-900/40">
         <div className="mx-auto max-w-6xl px-4 py-10 sm:py-12">
           <div className="rounded-2xl border border-emerald-600/60 bg-slate-950/60 p-6 sm:p-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
@@ -272,7 +230,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* SECTION : QUI JE SUIS */}
+      {/* QUI JE SUIS */}
       <section className="border-t border-slate-800 bg-slate-900/40">
         <div className="mx-auto max-w-4xl px-4 py-12 sm:py-16">
           <h2 className="text-2xl sm:text-3xl font-semibold text-slate-50 mb-6">
@@ -299,7 +257,7 @@ export default function Home() {
             </p>
 
             <p className="text-sm text-slate-300 leading-relaxed">
-              Mon objectif : dégager du temps, diminuer la charge mentale et redonner
+              Mon objectif : diminuer la charge mentale et redonner
               de l’énergie à ce qui compte vraiment :{" "}
               <strong>la relation pédagogique et la réussite des élèves</strong>.
             </p>
@@ -308,13 +266,10 @@ export default function Home() {
               — Frédéric, créateur d’EleveAI
             </p>
 
-            <p className="mt-2 text-sm italic text-emerald-400 text-right flex items-center justify-end gap-2">
-              <span>Un ε bien choisi peut ouvrir vers l’infini…</span>
-              <span className="text-emerald-300 text-lg">∞</span>
-            </p>
           </div>
         </div>
       </section>
     </main>
   );
 }
+
