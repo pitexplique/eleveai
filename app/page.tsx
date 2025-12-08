@@ -21,6 +21,11 @@ export default function Home() {
               </span>
             </h1>
 
+            {/* Slogan / défi */}
+            <p className="mt-3 text-lg sm:text-xl font-semibold text-emerald-300">
+              Défis Prompt : change ton monde.
+            </p>
+
             {/* Tags des IA compatibles */}
             <div className="mt-6 flex flex-wrap items-center gap-2">
               <span className="px-3 py-1 rounded-full text-xs font-medium border border-slate-700 bg-slate-900 text-slate-300">
@@ -285,4 +290,3 @@ export default function Home() {
     </main>
   );
 }
-
