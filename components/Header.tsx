@@ -31,6 +31,10 @@ const MAIN_LINKS: NavItem[] = [
     href: "/espace-aesh",
     label: "Espace AESH (IA)",
   },
+    {
+    href: "/atelier-IA",
+    label: "Atelier-IA",
+  },
 ];
 
 const SECONDARY_LINKS: NavItem[] = [
