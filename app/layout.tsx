@@ -16,12 +16,11 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://eleveai.fr"),
   title:
-    "EleveAI – L’IA qui améliore vos questions et prompts pour élèves, parents, professeurs, direction et vie scolaire",
-
+    "EleveAI – L’IA qui transforme vos questions en prompts intelligents pour élèves, professeurs et parents",
   description:
-    "EleveAI optimise, reformule et améliore vos questions et vos prompts pour gagner du temps, clarifier vos demandes et augmenter votre efficacité. Conçu pour les élèves, parents, professeurs, équipes de direction, vie scolaire et personnels éducatifs.",
-
+    "EleveAI transforme vos questions en prompts intelligents. Élèves, parents, professeurs et équipes éducatives gagnent du temps, clarifient leurs demandes et obtiennent des réponses plus pertinentes.",
   keywords: [
     "eleveai",
     "optimisation de prompts",
@@ -39,36 +38,35 @@ export const metadata: Metadata = {
     "éducation",
     "collège",
     "lycée",
-    "La Réunion"
+    "La Réunion",
   ],
-
-  metadataBase: new URL("https://eleveai.vercel.app"),
-
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
     title:
-      "EleveAI – L’IA qui améliore vos questions et prompts pour élèves, parents, professeurs, direction et vie scolaire",
+      "EleveAI – L’IA qui transforme vos questions en prompts intelligents pour élèves, professeurs et parents",
     description:
-      "EleveAI améliore et optimise les prompts de toute la communauté éducative : élèves, parents, enseignants, direction et vie scolaire.",
-    url: "https://eleveai.vercel.app",
+      "EleveAI transforme vos questions en prompts intelligents. Élèves, parents, professeurs et équipes éducatives gagnent du temps, clarifient leurs demandes et obtiennent des réponses plus pertinentes.",
+    url: "/", // résolu avec metadataBase → https://eleveai.fr/
     type: "website",
     siteName: "EleveAI",
     locale: "fr_FR",
     images: [
       {
-        url: "/preview.jpg",
+        url: "/preview.jpg", // deviendra https://eleveai.fr/preview.jpg
         width: 1200,
         height: 630,
         alt: "EleveAI – IA pédagogique pour toute la communauté éducative",
       },
     ],
   },
-
   twitter: {
     card: "summary_large_image",
     title:
-      "EleveAI – Optimisez vos questions et prompts grâce à l’IA",
+      "EleveAI – L’IA qui transforme vos questions en prompts intelligents pour élèves, professeurs et parents",
     description:
-      "EleveAI optimise vos prompts et améliore votre efficacité. Pour élèves, parents, professeurs, direction et vie scolaire.",
+      "EleveAI transforme vos questions en prompts intelligents. Élèves, parents, professeurs et équipes éducatives gagnent du temps, clarifient leurs demandes et obtiennent des réponses plus pertinentes.",
     images: ["/preview.jpg"],
   },
 };
