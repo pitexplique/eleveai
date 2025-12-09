@@ -22,12 +22,13 @@ export default function Home() {
           <div className="grid gap-8 lg:grid-cols-[3fr,2fr] items-start">
             {/* Colonne gauche */}
             <div className="space-y-6">
-              <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight">
-                L’IA pour améliorer vos prompts sur l’IA,
-                <span className="text-emerald-400"> pour toute la communauté éducative</span>,
-                avec
-                <span className="text-emerald-300"> des défis quotidiens</span>.
-              </h1>
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight">
+          L’IA qui améliore vos prompts,
+          <span className="text-emerald-400"> pour toute la communauté éducative</span>,
+          et vous fait gagner
+          <span className="text-emerald-300"> du temps et en efficacité</span>.
+        </h1>
+
 
               <p className="text-sm sm:text-base text-slate-300 max-w-xl">
                 EleveAI t’aide à formuler de bons prompts éducatifs pour aller plus vite et mieux
