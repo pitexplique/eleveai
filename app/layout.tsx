@@ -2,8 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import "katex/dist/katex.min.css";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+import AppShell from "@/components/AppShell";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -48,13 +47,13 @@ export const metadata: Metadata = {
       "EleveAI – L’IA qui transforme vos questions en prompts intelligents pour élèves, professeurs et parents",
     description:
       "EleveAI transforme vos questions en prompts intelligents. Élèves, parents, professeurs et équipes éducatives gagnent du temps, clarifient leurs demandes et obtiennent des réponses plus pertinentes.",
-    url: "/", // résolu avec metadataBase → https://eleveai.fr/
+    url: "/",
     type: "website",
     siteName: "EleveAI",
     locale: "fr_FR",
     images: [
       {
-        url: "/preview.jpg", // deviendra https://eleveai.fr/preview.jpg
+        url: "/preview.jpg",
         width: 1200,
         height: 630,
         alt: "EleveAI – IA pédagogique pour toute la communauté éducative",
@@ -81,10 +80,10 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-slate-950`}
       >
-        <Header />
-        {children}
-        <Footer />
+        <AppShell>{children}</AppShell>
       </body>
     </html>
   );
 }
+
+

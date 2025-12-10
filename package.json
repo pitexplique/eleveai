@@ -10,6 +10,9 @@
   },
   "dependencies": {
     "-": "^0.0.1",
+    "@supabase/auth-helpers-nextjs": "^0.10.0",
+    "@supabase/ssr": "^0.8.0",
+    "@supabase/supabase-js": "^2.87.1",
     "katex": "^0.16.25",
     "next": "^16.0.7",
     "openai": "^6.9.1",

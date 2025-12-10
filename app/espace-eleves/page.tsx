@@ -2,10 +2,12 @@
 
 import { useMemo, useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import {
   PresetCarousel,
   PresetCarouselItem,
 } from "@/components/PresetCarousel";
+import { createClient } from "@/lib/supabase/client";
 
 /* ----------------------------------------
    TYPES
@@ -129,7 +131,6 @@ const PRESETS: Record<
       prefereExemplesConcrets: true,
     },
   },
-
   brevet_maths_3e: {
     label: "🧮 3e – Préparer le brevet de maths",
     description: "Révision globale : calcul, géométrie, fonctions, probas.",
@@ -147,7 +148,6 @@ const PRESETS: Record<
       prefereExemplesConcrets: true,
     },
   },
-
   redaction_francais_3e: {
     label: "📚 3e – Rédaction en français",
     description: "Améliorer les rédactions et organiser les idées.",
@@ -165,7 +165,6 @@ const PRESETS: Record<
       prefereExemplesConcrets: true,
     },
   },
-
   methodo_seconde: {
     label: "📘 Seconde – Méthode de travail",
     description: "Aider un élève entrant au lycée à s'organiser.",
@@ -180,7 +179,6 @@ const PRESETS: Record<
         "Je veux une méthode simple pour travailler plus régulièrement.",
     },
   },
-
   decouverte_6e_maths: {
     label: "🔢 6e – Découvrir les maths au collège",
     description:
@@ -198,7 +196,6 @@ const PRESETS: Record<
       prefereExemplesConcrets: true,
     },
   },
-
   remise_a_niveau_4e_francais: {
     label: "✏️ 4e – Remise à niveau en français",
     description:
@@ -216,7 +213,6 @@ const PRESETS: Record<
       prefereExemplesConcrets: true,
     },
   },
-
   terminale_spe_maths_fonctions: {
     label: "📈 Tle spé maths – Fonctions",
     description:
@@ -235,7 +231,6 @@ const PRESETS: Record<
       prefereExemplesConcrets: true,
     },
   },
-
   troisieme_anglais_oral: {
     label: "🎤 3e – Anglais (oral)",
     description:
@@ -243,7 +238,8 @@ const PRESETS: Record<
     valeurs: {
       classe: "3e",
       matiere: "Langues",
-      chapitre: "Expression orale : se présenter, parler de sa journée, de ses goûts",
+      chapitre:
+        "Expression orale : se présenter, parler de sa journée, de ses goûts",
       typeAide: "faire_des_exercices",
       confiance: "moyen",
       tempsDispo: "20 minutes",
@@ -273,6 +269,9 @@ const PRESET_ITEMS: PresetCarouselItem[] = (
 ---------------------------------------- */
 
 export default function ElevePage() {
+  const router = useRouter();
+  const supabase = createClient();
+
   const [form, setForm] = useState<PromptEleve>({
     prenom: "",
     classe: "",
@@ -292,6 +291,8 @@ export default function ElevePage() {
 
   const [promptFinal, setPromptFinal] = useState("");
   const [copied, setCopied] = useState(false);
+  const [saving, setSaving] = useState(false);
+  const [saveMessage, setSaveMessage] = useState<string | null>(null);
 
   function handleChange<K extends keyof PromptEleve>(
     field: K,
@@ -363,8 +364,6 @@ export default function ElevePage() {
       form.objectifPerso.trim() ||
       "mieux comprendre ce chapitre et réussir les exercices importants.";
 
-    /* ---------- Bloc DYS ---------- */
-
     const blocDYS = form.adaptationDYS
       ? (() => {
           const lignes: string[] = [];
@@ -403,8 +402,6 @@ export default function ElevePage() {
         })()
       : "";
 
-    /* ---------- Prompt final ---------- */
-
     const prompt =
       `Tu es un professeur bienveillant de ${form.matiere}.\n` +
       `Tu t’adresses à un élève de ${form.classe}.\n\n` +
@@ -427,6 +424,7 @@ export default function ElevePage() {
 
     setPromptFinal(prompt);
     setCopied(false);
+    setSaveMessage(null);
   }
 
   async function copierPrompt() {
@@ -435,6 +433,87 @@ export default function ElevePage() {
     setCopied(true);
     setTimeout(() => setCopied(false), 1500);
   }
+
+  /* ----------------------------------------
+     ENREGISTRER LE PRESET DANS SUPABASE
+  ---------------------------------------- */
+
+  async function enregistrerPreset() {
+    if (!promptFinal) {
+      alert(
+        "Génère d’abord ton prompt, puis tu pourras l’enregistrer comme preset.",
+      );
+      return;
+    }
+
+    setSaving(true);
+    setSaveMessage(null);
+
+    let user = null;
+
+    try {
+      const { data, error: userError } = await supabase.auth.getUser();
+
+      if (userError) {
+        console.error("Erreur getUser Supabase :", userError);
+      }
+
+      user = data?.user ?? null;
+    } catch (err: any) {
+      // Cas où Supabase lève AuthSessionMissingError : on considère juste qu'il n'y a pas d'utilisateur connecté
+      if (
+        err?.name === "AuthSessionMissingError" ||
+        err?.message?.includes("Auth session missing")
+      ) {
+        console.warn("Aucune session Supabase : utilisateur non connecté.");
+        user = null;
+      } else {
+        console.error("Erreur inattendue Supabase :", err);
+      }
+    }
+
+    if (!user) {
+      setSaving(false);
+      // Redirection vers la page de connexion, avec retour vers l’espace élèves
+      router.push("/auth/signin?redirect=/espace-eleves");
+      return;
+    }
+
+    // 2. Demander un titre à l'élève
+    const titreParDefaut =
+      form.chapitre.trim() ||
+      `${form.matiere || "Matière"} – ${form.typeAide || "Aide"}`;
+
+    const titre = window.prompt(
+      "Titre de ton preset (pour le retrouver facilement) :",
+      titreParDefaut,
+    );
+
+    if (!titre) {
+      setSaving(false);
+      return;
+    }
+
+    // 3. Enregistrer dans la table "presets_eleves"
+    const { error } = await supabase.from("presets_eleves").insert({
+      user_id: user.id,
+      titre: titre.trim(),
+      contexte: "espace-eleves",
+      contenu: promptFinal,
+      form_data: form,
+    });
+
+    if (error) {
+      console.error(error);
+      setSaveMessage("Erreur pendant l’enregistrement du preset.");
+    } else {
+      setSaveMessage("✅ Preset enregistré dans ton espace !");
+    }
+
+    setSaving(false);
+    setTimeout(() => setSaveMessage(null), 4000);
+  }
+
 
   /* ----------------------------------------
      RENDER
@@ -460,7 +539,7 @@ export default function ElevePage() {
           </p>
         </header>
 
-        {/* 1️⃣ PRESETS – CARROUSEL TYPE NETFLIX */}
+        {/* 1️⃣ PRESETS – CARROUSEL */}
         <PresetCarousel
           title="Choisir un modèle rapide (facultatif)"
           subtitle="Tu peux gagner du temps en partant d’un exemple proche de ta situation. Tu pourras ensuite adapter tous les champs dans le formulaire."
@@ -469,7 +548,7 @@ export default function ElevePage() {
         />
 
         <div className="grid gap-6 lg:grid-cols-2">
-          {/* -------------------------------- COLONNE GAUCHE : FORMULAIRE -------------------------------- */}
+          {/* COLONNE GAUCHE : FORMULAIRE */}
           <section className="bg-white/95 border border-slate-200 rounded-2xl shadow-sm p-5 sm:p-6 space-y-4">
             <h2 className="text-md font-bold text-[#0047B6]">
               2️⃣ Ta situation
@@ -698,9 +777,8 @@ export default function ElevePage() {
             </div>
           </section>
 
-          {/* -------------------------------- COLONNE DROITE -------------------------------- */}
+          {/* COLONNE DROITE */}
           <section className="space-y-4">
-            {/* Suggestions */}
             <div className="bg-white/95 border border-emerald-200 rounded-2xl shadow-sm p-5 space-y-3">
               <h2 className="text-lg font-bold text-emerald-700">
                 3️⃣ Conseils pour mieux remplir
@@ -715,24 +793,40 @@ export default function ElevePage() {
               </ul>
             </div>
 
-            {/* Prompt final */}
             <div className="bg-white/95 border border-slate-200 rounded-2xl shadow-sm p-5 space-y-3">
-              <div className="flex items-center justify-between">
+              <div className="flex flex-wrap items-center justify-between gap-2">
                 <h2 className="text-lg font-bold text-[#0047B6]">
                   4️⃣ Ton prompt final
                 </h2>
-                <button
-                  onClick={copierPrompt}
-                  disabled={!promptFinal}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-semibold ${
-                    promptFinal
-                      ? "bg-slate-800 text-white"
-                      : "bg-slate-200 text-slate-500"
-                  }`}
-                >
-                  {copied ? "✅ Copié" : "📋 Copier"}
-                </button>
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={copierPrompt}
+                    disabled={!promptFinal}
+                    className={`px-3 py-1.5 rounded-lg text-xs font-semibold ${
+                      promptFinal
+                        ? "bg-slate-800 text-white"
+                        : "bg-slate-200 text-slate-500"
+                    }`}
+                  >
+                    {copied ? "✅ Copié" : "📋 Copier"}
+                  </button>
+                  <button
+                    onClick={enregistrerPreset}
+                    disabled={!promptFinal || saving}
+                    className={`px-3 py-1.5 rounded-lg text-xs font-semibold ${
+                      promptFinal
+                        ? "bg-emerald-600 text-white hover:bg-emerald-700"
+                        : "bg-emerald-200 text-emerald-700"
+                    }`}
+                  >
+                    {saving ? "💾 Enregistrement..." : "⭐ Enregistrer ce preset"}
+                  </button>
+                </div>
               </div>
+
+              {saveMessage && (
+                <p className="text-xs text-emerald-700">{saveMessage}</p>
+              )}
 
               <textarea
                 readOnly
@@ -796,4 +890,3 @@ export default function ElevePage() {
     </main>
   );
 }
-
