@@ -180,31 +180,53 @@ export default function SignInPage() {
               </form>
 
               {/* ENCADRÉ RASSURANT */}
-          <div className="mt-6 rounded-lg border border-slate-200 bg-slate-50 px-3 py-3 text-[12px] text-slate-700 leading-relaxed">
-            <p className="font-semibold text-slate-900 mb-1">
-              La technologie derrière EleveAI
-            </p>
+<div className="mt-6 rounded-2xl border border-emerald-100 bg-gradient-to-br from-emerald-50 via-white to-slate-50 px-4 py-3 text-[12px] text-slate-700 shadow-sm">
+  <p className="flex items-center gap-2 font-semibold text-slate-900 mb-2">
+    <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-emerald-500/10 text-emerald-600 text-xs">
+      ⚙️
+    </span>
+    Sous le capot : comment fonctionne EleveAI ?
+  </p>
 
-            <ul className="list-disc pl-4 space-y-1.5">
-              <li>
-                🧠 <strong>Modèles de langage avancés (LLM)</strong> capables de comprendre
-                un contexte scolaire réel (élève, parent, professeur, vie scolaire).
-              </li>
-              <li>
-                🤖 <strong>Agents IA spécialisés</strong> qui restructurent chaque demande
-                pour produire un prompt clair, précis et efficace.
-              </li>
-              <li>
-                🎯 <strong>Méthode ACTIVE</strong> : Analyse → Clarification → Transformation
-                → Vérification → Enrichissement.  
-                Résultat : des prompts optimisés pour apprendre, expliquer ou organiser.
-              </li>
-              <li>
-                ✨ <strong>Personnalisation immédiate</strong> selon le niveau, le rôle
-                (élève, parent, prof, personnel), et les besoins particuliers (DYS, rythme).
-              </li>
-            </ul>
-          </div>
+  <div className="grid gap-2 sm:grid-cols-2 text-[11px]">
+    <div className="space-y-1">
+      <p className="font-semibold text-slate-800">🧠 Modèles de langage (LLM)</p>
+      <p className="text-slate-600">
+        EleveAI s’appuie sur des modèles de langage avancés capables de comprendre
+        le vocabulaire scolaire, les programmes et les situations de classe.
+      </p>
+    </div>
+
+    <div className="space-y-1">
+      <p className="font-semibold text-slate-800">🤖 Agents IA coopératifs</p>
+      <p className="text-slate-600">
+        Plusieurs “agents” IA travaillent ensemble : clarification de la demande,
+        mise en forme, vérification, puis enrichissement du prompt.
+      </p>
+    </div>
+
+    <div className="space-y-1">
+      <p className="font-semibold text-slate-800">🎯 Méthode ACTIVE</p>
+      <p className="text-slate-600">
+        Analyse → Clarification → Transformation → Vérification → Enrichissement :
+        une chaîne d’étapes qui transforme une question floue en prompt utile.
+      </p>
+    </div>
+
+    <div className="space-y-1">
+      <p className="font-semibold text-slate-800">✨ Adapté à chaque profil</p>
+      <p className="text-slate-600">
+        Les prompts sont personnalisés selon le rôle (élève, parent, prof, personnel)
+        et peuvent intégrer des besoins spécifiques (DYS, rythme, confiance).
+      </p>
+    </div>
+  </div>
+
+  <p className="mt-2 text-[11px] text-slate-500 italic">
+    Résultat : moins de temps à chercher comment formuler, plus de temps pour apprendre,
+    expliquer ou organiser.
+  </p>
+</div>
 
 
 
