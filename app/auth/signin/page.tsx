@@ -180,23 +180,33 @@ export default function SignInPage() {
               </form>
 
               {/* ENCADRÉ RASSURANT */}
-              <div className="mt-5 rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-[11px] text-slate-600">
-                <p className="font-semibold text-slate-800 mb-1">
-                  Ce que fait (et ne fait pas) EleveAI
-                </p>
-                <ul className="list-disc pl-4 space-y-1">
-                  <li>Ne remplace pas les professeurs, il les aide.</li>
-                  <li>Ne met pas de notes aux élèves.</li>
-                  <li>
-                    Ne contacte pas directement les familles sans passer par
-                    l’équipe éducative.
-                  </li>
-                  <li>
-                    Propose des aides adaptées au niveau, au rythme et au profil
-                    de chaque élève.
-                  </li>
-                </ul>
-              </div>
+          <div className="mt-6 rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-[11px] text-slate-600">
+            <p className="font-semibold text-slate-800 mb-1">
+              La technologie derrière EleveAI
+            </p>
+
+            <ul className="list-disc pl-4 space-y-1 leading-relaxed">
+              <li>
+                🧠 Basé sur des modèles de langage avancés (LLM) capables d’analyser et
+                restructurer une question pour obtenir une réponse plus pertinente.
+              </li>
+              <li>
+                🤖 Utilise un système d’<strong>agents IA</strong> qui coopèrent pour
+                proposer un prompt optimisé : clarification, objectifs, contraintes,
+                format attendu.
+              </li>
+              <li>
+                🎓 Méthode pédagogique <strong>ACTIVE</strong> :  
+                Analyse – Clarification – Transformation – Vérification – Enrichissement.  
+                Résultat : des prompts mieux structurés et plus efficaces.
+              </li>
+              <li>
+                🔍 Adaptation au profil (élève, parent, professeur, personnel éducatif)
+                pour générer des réponses réellement adaptées aux besoins.
+              </li>
+            </ul>
+          </div>
+
 
               {/* BADGES */}
               <div className="mt-5 flex flex-wrap gap-4 text-[11px] text-slate-500">
