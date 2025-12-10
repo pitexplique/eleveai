@@ -180,32 +180,32 @@ export default function SignInPage() {
               </form>
 
               {/* ENCADRÉ RASSURANT */}
-          <div className="mt-6 rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-[11px] text-slate-600">
-            <p className="font-semibold text-slate-800 mb-1">
+          <div className="mt-6 rounded-lg border border-slate-200 bg-slate-50 px-3 py-3 text-[12px] text-slate-700 leading-relaxed">
+            <p className="font-semibold text-slate-900 mb-1">
               La technologie derrière EleveAI
             </p>
 
-            <ul className="list-disc pl-4 space-y-1 leading-relaxed">
+            <ul className="list-disc pl-4 space-y-1.5">
               <li>
-                🧠 Basé sur des modèles de langage avancés (LLM) capables d’analyser et
-                restructurer une question pour obtenir une réponse plus pertinente.
+                🧠 <strong>Modèles de langage avancés (LLM)</strong> capables de comprendre
+                un contexte scolaire réel (élève, parent, professeur, vie scolaire).
               </li>
               <li>
-                🤖 Utilise un système d’<strong>agents IA</strong> qui coopèrent pour
-                proposer un prompt optimisé : clarification, objectifs, contraintes,
-                format attendu.
+                🤖 <strong>Agents IA spécialisés</strong> qui restructurent chaque demande
+                pour produire un prompt clair, précis et efficace.
               </li>
               <li>
-                🎓 Méthode pédagogique <strong>ACTIVE</strong> :  
-                Analyse – Clarification – Transformation – Vérification – Enrichissement.  
-                Résultat : des prompts mieux structurés et plus efficaces.
+                🎯 <strong>Méthode ACTIVE</strong> : Analyse → Clarification → Transformation
+                → Vérification → Enrichissement.  
+                Résultat : des prompts optimisés pour apprendre, expliquer ou organiser.
               </li>
               <li>
-                🔍 Adaptation au profil (élève, parent, professeur, personnel éducatif)
-                pour générer des réponses réellement adaptées aux besoins.
+                ✨ <strong>Personnalisation immédiate</strong> selon le niveau, le rôle
+                (élève, parent, prof, personnel), et les besoins particuliers (DYS, rythme).
               </li>
             </ul>
           </div>
+
 
 
               {/* BADGES */}
