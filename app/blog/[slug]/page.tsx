@@ -1,5 +1,8 @@
 import { notFound } from "next/navigation";
 import ReactMarkdown from "react-markdown";
+// en haut du fichier (si pas déjà fait)
+import Link from "next/link";
+
 import {
   getAllBlogPosts,
   getBlogPostBySlug,
@@ -68,9 +71,9 @@ export default async function BlogPostPage({ params }: PageProps) {
     <main className="max-w-3xl mx-auto px-4 py-10">
       {/* Fil d’Ariane */}
       <div className="text-sm text-slate-500 mb-4">
-        <a href="/blog" className="hover:underline">
+        <Link href="/blog" className="hover:underline">
           Blog
-        </a>{" "}
+        </Link>{" "}
         / <span className="text-slate-700">{post.title}</span>
       </div>
 

@@ -2,6 +2,9 @@
 
 import { notFound } from "next/navigation";
 import ReactMarkdown from "react-markdown";
+// en haut du fichier (si pas déjà fait)
+import Link from "next/link";
+
 import {
   getAllAtelierIaPosts,
   getAtelierIaPostBySlug,
@@ -153,12 +156,12 @@ export default async function AtelierIaDetailPage({ params }: PageProps) {
 
       {/* Retour */}
       <div className="mt-10">
-        <a
+        <Link 
           href="/atelier-IA"
           className="text-blue-700 text-sm font-semibold hover:underline"
         >
           ← Retour aux ateliers IA
-        </a>
+        </Link >
       </div>
     </main>
   );
