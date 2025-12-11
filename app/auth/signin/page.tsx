@@ -1,9 +1,9 @@
-
 "use client";
 
 import { FormEvent, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { createClient } from "@/lib/supabase/client"; // client Supabase custom
 
 export default function SignInPage() {
   const [email, setEmail] = useState("");
@@ -13,51 +13,70 @@ export default function SignInPage() {
   const [codeError, setCodeError] = useState<string | null>(null);
 
   const router = useRouter();
+  const supabase = createClient();
 
-  const handleEmailSubmit = (e: FormEvent) => {
+  const handleEmailSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    // TODO : logique d’authentification par email (magic link, code, etc.)
+    // TODO : auth email réelle
     setEmailSent(true);
   };
 
-  const handleCodeSubmit = (e: FormEvent) => {
+  const handleCodeSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setCodeError(null);
 
-    const etab = codeEtab.trim().toLowerCase();
+    const etab = codeEtab.trim().toUpperCase();
     const userCode = codeUtilisateur.trim().toUpperCase();
 
-    // 1) Vérifier le code établissement
-    if (etab !== "dimitile") {
-      setCodeError("Code établissement incorrect.");
+    if (!etab || !userCode) {
+      setCodeError("Merci de renseigner les deux codes.");
       return;
     }
 
-    // 2) Vérifier que le code utilisateur est entre 6C01 et 6C25
-    const regex = /^6C(\d{2})$/i;
-    const match = userCode.match(regex);
+    try {
+      const { data, error } = await supabase
+        .from("utilisateurs_codes")
+        .select("id, type_utilisateur")
+        .eq("code_etablissement", etab)
+        .eq("code_utilisateur", userCode)
+        .maybeSingle();
 
-    if (!match) {
-      setCodeError("Code utilisateur invalide (ex : 6C01, 6C02…).");
-      return;
+      if (error) {
+        console.error(error);
+        setCodeError("Erreur technique. Merci de réessayer.");
+        return;
+      }
+
+      if (!data) {
+        setCodeError("Code établissement ou code utilisateur incorrect.");
+        return;
+      }
+
+      switch (data.type_utilisateur) {
+        case "eleve":
+          router.push("/espace-eleves");
+          break;
+        case "prof":
+          router.push("/espace-profs");
+          break;
+        case "parent":
+          router.push("/parents");
+          break;
+        default:
+          router.push("/accueil");
+      }
+    } catch (err) {
+      console.error(err);
+      setCodeError("Erreur inattendue. Merci de réessayer.");
     }
-
-    const numero = Number(match[1]); // 1 à 25
-    if (numero < 1 || numero > 25) {
-      setCodeError("Ce code élève n’est pas encore activé (6C01 à 6C25).");
-      return;
-    }
-
-    // ✅ Tout est bon : on redirige vers l’espace élèves
-    router.push("/espace-eleves");
   };
 
   return (
     <main className="min-h-screen bg-slate-50 text-slate-900">
       <div className="flex min-h-screen flex-col md:flex-row">
         {/* COLONNE GAUCHE : FORMULAIRE */}
-        <div className="flex w-full justify-center px-4 pt-6 pb-10 md:w-1/2 md:px-8 lg:px-16 md:pt-8">
-          <div className="w-full max-w-md">
+        <div className="flex w-full justify-center px-4 pt-6 pb-6 md:w-1/2 md:px-8 lg:px-16 md:pt-8">
+          <div className="w-full max-w-md flex flex-col">
             {/* LOGO */}
             <div className="mb-4 flex items-center gap-2">
               <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-emerald-500 text-white font-bold">
@@ -71,28 +90,26 @@ export default function SignInPage() {
             {/* BANDEAU ÉTAPE 1 */}
             <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-emerald-100 px-3 py-1 text-[11px] font-medium text-emerald-800">
               <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
-              Étape 1 : choisir sa façon de se connecter (email, code établissement ou accès sans compte)
+              Étape 1 : choisir sa façon de se connecter
             </div>
 
             {/* CARTE */}
             <div className="rounded-2xl bg-white p-6 shadow-lg shadow-slate-200/80 border border-slate-200">
-              <h1 className="text-lg font-semibold text-slate-900">Accéder à mon espace</h1>
+              <h1 className="text-lg font-semibold text-slate-900">
+                Accéder à mon espace
+              </h1>
 
               <p className="mt-1 text-sm text-slate-600">
-                Connectez-vous avec votre email ou un code établissement pour accéder à EleveAI
-                en tant qu’élève, parent, professeur ou membre de l’équipe éducative.
+                Connectez-vous avec votre email ou un code établissement pour
+                accéder à EleveAI.
               </p>
-
-              {/* BADGE CRÉATIVITÉ */}
-              <div className="mt-3 inline-flex items-center gap-2 rounded-full bg-emerald-50 px-3 py-1 text-[11px] font-medium text-emerald-700">
-                <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
-                EleveAI : la créativité constructive au service de toute la communauté éducative
-              </div>
 
               {/* FORMULAIRE EMAIL */}
               <form onSubmit={handleEmailSubmit} className="mt-5 space-y-3">
                 <div className="space-y-1.5">
-                  <label className="text-sm font-medium text-slate-800">Adresse email</label>
+                  <label className="text-sm font-medium text-slate-800">
+                    Adresse email
+                  </label>
 
                   <input
                     type="email"
@@ -116,28 +133,27 @@ export default function SignInPage() {
                     Un lien de connexion vient d’être envoyé (simulation).
                   </p>
                 )}
+
+                <p className="text-xs text-slate-500">
+                  Pas encore de compte ?{" "}
+                  <Link
+                    href="/auth/signup"
+                    className="text-emerald-600 font-semibold"
+                  >
+                    Inscription
+                  </Link>
+                </p>
               </form>
 
               {/* TESTER SANS COMPTE */}
-              <div className="mt-3">
+              <div className="mt-4">
                 <Link
                   href="/accueil"
                   className="block w-full rounded-lg border border-emerald-500 bg-emerald-50 py-2.5 text-center text-sm font-semibold text-emerald-700 hover:bg-emerald-100 transition"
                 >
-                  🚀 Tester EleveAI sans compte
+                  ✨ Tester EleveAI sans compte
                 </Link>
-                <p className="mt-1 text-[11px] text-slate-500 text-center">
-                  Idéal pour découvrir les prompts sans créer de compte.
-                </p>
               </div>
-
-              {/* CRÉER UN COMPTE */}
-              <p className="mt-3 text-xs text-slate-500">
-                Pas encore de compte ?{" "}
-                <Link href="#" className="text-emerald-600 font-semibold">
-                  Créer un compte
-                </Link>
-              </p>
 
               {/* SÉPARATEUR */}
               <div className="my-5 flex items-center gap-3 text-xs text-slate-400">
@@ -155,13 +171,10 @@ export default function SignInPage() {
                   Connexion avec un code établissement
                 </p>
 
-                <p className="text-[11px] text-slate-500 leading-relaxed">
-                  Code établissement : <span className="font-semibold">DIMITILE</span>.  
-                  Codes élèves : <span className="font-semibold">6C01 à 6C25</span>.
-                </p>
-
                 <div>
-                  <label className="text-xs font-medium">Code établissement</label>
+                  <label className="text-xs font-medium">
+                    Code établissement
+                  </label>
                   <input
                     type="text"
                     value={codeEtab}
@@ -177,7 +190,7 @@ export default function SignInPage() {
                     type="text"
                     value={codeUtilisateur}
                     onChange={(e) => setCodeUtilisateur(e.target.value)}
-                    placeholder="Ex : 6C01, 6C02…"
+                    placeholder="Ex : 6C01"
                     className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm outline-none focus:border-emerald-500 focus:ring"
                   />
                 </div>
@@ -194,82 +207,123 @@ export default function SignInPage() {
                 </button>
               </form>
 
-              {/* … le reste de ta carte (bloc technique + badges) reste identique … */}
-              {/* (tu peux conserver exactement ce que tu avais en-dessous) */}
+              {/* NOTRE TECHNOLOGIE */}
+              <div className="mt-5 rounded-xl border border-slate-100 bg-slate-50 px-3 py-3 text-[11px] text-slate-600">
+                <p className="font-semibold text-slate-800 mb-1">
+                  Notre technologie
+                </p>
+                <ul className="list-disc list-inside space-y-0.5">
+                  <li>LLM de pointe, sécurisé pour l’éducation</li>
+                  <li>Agent IA pédagogique qui guide pas à pas</li>
+                  <li>Méthodes actives : questionnement, essais, feedback</li>
+                </ul>
+              </div>
+            </div>
+
+            {/* BADGES RGPD / HÉBERGEMENT */}
+            <div className="mt-4 flex flex-wrap items-center gap-4 text-[11px] text-slate-500">
+              <div className="inline-flex items-center gap-1.5">
+                <span>🇫🇷</span>
+                <span>Hébergé en France</span>
+              </div>
+              <div className="inline-flex items-center gap-1.5">
+                <span>🛡️</span>
+                <span>Conforme RGPD</span>
+              </div>
             </div>
           </div>
         </div>
 
+        {/* COLONNE DROITE : CONTENU EXPLICATIF */}
         <div className="relative hidden w-full overflow-hidden bg-slate-900 md:block md:w-1/2">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_#22c55e33,_transparent_60%),radial-gradient(circle_at_bottom,_#0f172a,_#020617)]" />
           <div className="absolute inset-0 bg-slate-900/60" />
 
           <div className="relative z-10 flex h-full flex-col justify-start pt-14 px-10 pb-20 text-slate-50">
-            <h2 className="max-w-xl text-3xl font-bold leading-tight">EleveAI améliore vos prompts</h2>
+            <h2 className="max-w-xl text-3xl font-bold leading-tight">
+              EleveAI améliore vos prompts
+            </h2>
 
             <div className="mt-4 mb-6 max-w-xl rounded-lg border border-red-500 bg-red-500/10 px-4 py-3 backdrop-blur">
               <p className="text-sm leading-relaxed text-red-300 font-medium">
-                💡 Un <span className="font-semibold text-red-200">prompt</span> = une requête adressée
-                à l’IA : question, consigne, situation.
+                💡 Un{" "}
+                <span className="font-semibold text-red-200">prompt</span> =
+                une consigne destinée à l’IA : question, tâche, activité.
               </p>
             </div>
 
             <p className="max-w-xl text-sm font-medium text-yellow-300">
-              EleveAI utilise la créativité constructive : apprendre, inventer, transformer.
+              Créativité constructive : apprendre, inventer, transformer.
             </p>
 
             <p className="mt-4 max-w-xl text-sm text-slate-200">
-              S’appuie sur les neurosciences : clarté cognitive, guidage, étapes simples,
-              répétitions espacées.
+              Neurosciences : clarté, progressivité, répétitions espacées.
             </p>
 
             <p className="mt-3 max-w-xl text-xs text-slate-400">
-              Peut s’aligner avec un projet d’établissement : climat scolaire, différenciation,
-              orientation, inclusion.
+              Compatible avec les projets d’établissement : climat scolaire,
+              différenciation, inclusion, orientation.
             </p>
 
-            {/* CATÉGORIES */}
             <div className="mt-8 space-y-6 text-sm">
               <div className="flex gap-3">
-                <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-emerald-500 text-white text-lg">🎓</div>
+                <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-emerald-500 text-white text-lg">
+                  🎓
+                </div>
                 <div>
-                  <h3 className="font-semibold text-slate-50">Pour les élèves</h3>
-                  <p className="text-slate-200/80">Explications guidées et adaptées.</p>
+                  <h3 className="font-semibold text-slate-50">Élèves</h3>
+                  <p className="text-slate-200/80">
+                    Explications guidées, adaptées au rythme.
+                  </p>
                 </div>
               </div>
 
               <div className="flex gap-3">
-                <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-sky-500 text-white text-lg">🧑‍🏫</div>
+                <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-sky-500 text-white text-lg">
+                  🧑‍🏫
+                </div>
                 <div>
-                  <h3 className="font-semibold text-slate-50">Pour les professeurs</h3>
-                  <p className="text-slate-200/80">Gain de temps, prompts variés, différenciation.</p>
+                  <h3 className="font-semibold text-slate-50">Professeurs</h3>
+                  <p className="text-slate-200/80">
+                    Gain de temps, différenciation immédiate.
+                  </p>
                 </div>
               </div>
 
               <div className="flex gap-3">
-                <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-pink-500 text-white text-lg">👨‍👩‍👧</div>
+                <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-pink-500 text-white text-lg">
+                  👨‍👩‍👧
+                </div>
                 <div>
-                  <h3 className="font-semibold text-slate-50">Pour les parents</h3>
-                  <p className="text-slate-200/80">Aide à encourager et reformuler.</p>
+                  <h3 className="font-semibold text-slate-50">Parents</h3>
+                  <p className="text-slate-200/80">
+                    Aide à accompagner les révisions.
+                  </p>
                 </div>
               </div>
 
               <div className="flex gap-3">
-                <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-indigo-500 text-white text-lg">🏫</div>
+                <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-indigo-500 text-white text-lg">
+                  🏫
+                </div>
                 <div>
-                  <h3 className="font-semibold text-slate-50">Pour l’administration</h3>
-                  <p className="text-slate-200/80">Courriers, projets, organisation.</p>
+                  <h3 className="font-semibold text-slate-50">
+                    Administration
+                  </h3>
+                  <p className="text-slate-200/80">
+                    Organisation, courriers, projets.
+                  </p>
                 </div>
               </div>
             </div>
 
-            {/* TÉMOIGNAGE */}
             <div className="mt-10 max-w-xl rounded-2xl bg-slate-900/70 p-4 shadow-lg backdrop-blur">
               <p className="text-slate-100 italic">
-                « Avec EleveAI, je peux enfin accompagner chaque élève selon son rythme et ses besoins. »
+                « Avec EleveAI, je peux enfin accompagner chaque élève selon son
+                rythme et ses besoins. »
               </p>
               <p className="mt-3 text-xs font-medium text-slate-300">
-                Frédéric Lacoste – Enseignant de mathématiques, Académie de La Réunion
+                Frédéric Lacoste – Mathématiques
               </p>
             </div>
           </div>
@@ -278,3 +332,6 @@ export default function SignInPage() {
     </main>
   );
 }
+
+
+

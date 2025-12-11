@@ -1,4 +1,4 @@
-// app/profs/page.tsx (ou app/espace-profs/page.tsx selon ton arbo)
+// app/espace-profs/page.tsx (ou app/profs/page.tsx)
 
 "use client";
 
@@ -20,6 +20,18 @@ import {
 
 type Niveau = "basique" | "standard" | "expert";
 
+type MethodePedagogique =
+  | ""
+  | "methode_active"
+  | "enseignement_explicite"
+  | "inductive"
+  | "deductive"
+  | "par_projet"
+  | "par_problemes"
+  | "cooperative"
+  | "ludique"
+  | "magistrale";
+
 type PromptProf = {
   titre: string;
   objectifPedagogique: string;
@@ -33,6 +45,7 @@ type PromptProf = {
   neuro: boolean;
   auteur: string;
   date: string;
+  methode?: MethodePedagogique;
 };
 
 const CLASSES = [
@@ -133,6 +146,71 @@ const TYPES_SPECIAUX_BAC = [
 ];
 
 /* ----------------------------------------
+   MÉTHODES PÉDAGOGIQUES – OPTIONS UI
+---------------------------------------- */
+
+const METHODE_OPTIONS: {
+  id: MethodePedagogique;
+  label: string;
+  description: string;
+}[] = [
+  {
+    id: "methode_active",
+    label: "Méthode active",
+    description:
+      "L’élève manipule, cherche, répond à des questions et construit la notion par étapes.",
+  },
+  {
+    id: "enseignement_explicite",
+    label: "Enseignement explicite (I do / We do / You do)",
+    description:
+      "Tu montres un exemple, vous faites ensemble, puis l’élève s’entraîne seul.",
+  },
+  {
+    id: "inductive",
+    label: "Méthode inductive",
+    description:
+      "On part d’exemples concrets pour faire émerger la règle ou la notion.",
+  },
+  {
+    id: "deductive",
+    label: "Méthode déductive",
+    description:
+      "On part de la règle, puis on propose des exercices d’application gradués.",
+  },
+  {
+    id: "par_projet",
+    label: "Pédagogie par projet",
+    description:
+      "Les élèves réalisent une production finale (exposé, vidéo, étude, etc.).",
+  },
+  {
+    id: "par_problemes",
+    label: "Apprentissage par problèmes",
+    description:
+      "On pose un problème authentique que les élèves doivent résoudre.",
+  },
+  {
+    id: "cooperative",
+    label: "Pédagogie coopérative",
+    description:
+      "Les élèves travaillent en groupes avec des rôles définis et une production commune.",
+  },
+  {
+    id: "ludique",
+    label: "Approche ludique / gamification",
+    description:
+      "Utilisation de jeux, défis, badges, escape games pour soutenir les apprentissages.",
+  },
+  {
+    id: "magistrale",
+    label: "Cours magistral guidé",
+    description:
+      "Cours structuré principalement par l’enseignant, avec quelques questions intermédiaires.",
+  },
+];
+
+/* ----------------------------------------
    CARROUSEL – ITEMS À PARTIR DES PRESETS
 ---------------------------------------- */
 
@@ -157,6 +235,78 @@ function construirePrompt(form: PromptProf): string {
     form.tags.length > 0
       ? `Mots-clés pédagogiques fournis par le professeur : ${form.tags.join(", ")}.\n`
       : "";
+
+  const blocMethode = (() => {
+    switch (form.methode) {
+      case "enseignement_explicite":
+        return (
+          "Méthode pédagogique souhaitée : enseignement explicite (I do / We do / You do).\n" +
+          "- Commencer par un exemple entièrement modélisé par l’enseignant (I do),\n" +
+          "- proposer ensuite une ou deux questions faites avec l’élève (We do),\n" +
+          "- terminer par des exercices où l’élève agit seul avec correction commentée (You do).\n\n"
+        );
+      case "inductive":
+        return (
+          "Méthode pédagogique souhaitée : méthode inductive.\n" +
+          "- Partir d’exemples concrets ou de documents,\n" +
+          "- faire formuler par l’élève des observations,\n" +
+          "- faire émerger la règle ou la notion à partir de ces observations,\n" +
+          "- terminer par une formulation claire de la règle et quelques applications.\n\n"
+        );
+      case "deductive":
+        return (
+          "Méthode pédagogique souhaitée : méthode déductive.\n" +
+          "- Donner d’abord la définition ou la règle générale,\n" +
+          "- illustrer par un ou deux exemples simples,\n" +
+          "- proposer une série d’exercices gradués d’application.\n\n"
+        );
+      case "par_projet":
+        return (
+          "Méthode pédagogique souhaitée : pédagogie par projet.\n" +
+          "- Proposer une production finale claire (exposé, affiche, vidéo, étude, etc.),\n" +
+          "- découper le projet en étapes avec délais,\n" +
+          "- préciser les critères de réussite,\n" +
+          "- prévoir des moments de régulation et de bilan.\n\n"
+        );
+      case "par_problemes":
+        return (
+          "Méthode pédagogique souhaitée : apprentissage par problèmes.\n" +
+          "- Partir d’un problème authentique ou d’une situation complexe,\n" +
+          "- laisser l’élève formuler des hypothèses et des stratégies,\n" +
+          "- apporter les outils au moment où le besoin apparaît,\n" +
+          "- conclure par une mise en forme claire de la solution et de la méthode.\n\n"
+        );
+      case "cooperative":
+        return (
+          "Méthode pédagogique souhaitée : pédagogie coopérative.\n" +
+          "- Organiser la classe en groupes avec des rôles (lecteur, rapporteur, gestionnaire du temps, etc.),\n" +
+          "- prévoir une production commune par groupe,\n" +
+          "- intégrer des moments d’explication entre pairs.\n\n"
+        );
+      case "ludique":
+        return (
+          "Méthode pédagogique souhaitée : approche ludique / gamification.\n" +
+          "- Transformer la tâche en défi ou en jeu (points, badges, niveaux),\n" +
+          "- proposer des missions courtes,\n" +
+          "- garder une trace des réussites et des progrès.\n\n"
+        );
+      case "magistrale":
+        return (
+          "Méthode pédagogique souhaitée : cours magistral guidé.\n" +
+          "- Structurer la séance en grandes parties numérotées,\n" +
+          "- insérer régulièrement de courtes questions de vérification,\n" +
+          "- prévoir un court temps d’entraînement en fin de séance.\n\n"
+        );
+      case "methode_active":
+      default:
+        return (
+          "Méthode pédagogique souhaitée : méthode active.\n" +
+          "- Faire agir l’élève à chaque étape (questions, manipulations, mini-tâches),\n" +
+          "- alterner explications très courtes et questions de vérification,\n" +
+          "- terminer par un récapitulatif et une question métacognitive.\n\n"
+        );
+    }
+  })();
 
   const blocDYS = form.adaptationDYS
     ? `Adapte ta réponse pour un élève présentant des troubles DYS :\n` +
@@ -220,6 +370,7 @@ function construirePrompt(form: PromptProf): string {
     blocEduscol +
     blocNeuro +
     blocSansLatex +
+    blocMethode +
     `Objectif pédagogique indiqué par le professeur : ${
       form.objectifPedagogique ||
       "(non précisé : propose une version compatible avec le programme officiel)"
@@ -242,6 +393,7 @@ function construirePrompt(form: PromptProf): string {
     `2. Ensuite, produis la réponse pour l’élève en respectant :\n` +
     `   - le niveau indiqué,\n` +
     `   - les programmes officiels (Eduscol, BO),\n` +
+    `   - la méthode pédagogique souhaitée (voir les consignes ci-dessus),\n` +
     `   - les principes des neurosciences de l’apprentissage (si activés),\n` +
     `   - la clarté pédagogique (étapes, exemples, questions de vérification, récapitulatif),\n` +
     `   - la prise en compte éventuelle des besoins DYS.\n` +
@@ -270,6 +422,7 @@ export default function ProfsPage() {
     neuro: true,
     auteur: "",
     date: today,
+    methode: "methode_active",
   });
 
   const [rawTags, setRawTags] = useState("");
@@ -283,11 +436,11 @@ export default function ProfsPage() {
 
   function handleChange(
     field: keyof PromptProf,
-    value: string | boolean | Niveau,
+    value: string | boolean | Niveau | MethodePedagogique,
   ) {
     setForm((prev) => ({
       ...prev,
-      [field]: value,
+      [field]: value as any,
     }));
   }
 
@@ -305,11 +458,20 @@ export default function ProfsPage() {
     const preset = PROFS_PRESETS[key];
     const v = preset.valeurs;
 
-    setForm((prev) => ({
-      ...prev,
-      ...v,
-      tags: v.tags ?? prev.tags,
-    }));
+    setForm((prev) => {
+      const base: PromptProf = {
+        ...prev,
+        ...v,
+        tags: v.tags ?? prev.tags,
+      };
+
+      // Exemple : si la classe est 3e, on ajoute un tag DNB
+      if (base.classe === "3e" && !base.tags.includes("DNB")) {
+        base.tags = [...base.tags, "DNB"];
+      }
+
+      return base;
+    });
 
     if (v.tags) {
       setRawTags(v.tags.join(", "));
@@ -383,6 +545,12 @@ export default function ProfsPage() {
     if (!form.neuro) {
       s.push(
         "Tu peux activer les principes des neurosciences pour structurer davantage la réponse (rappels, étapes, questions de vérification, récapitulatif).",
+      );
+    }
+
+    if (!form.methode || form.methode === "") {
+      s.push(
+        "Choisis une méthode pédagogique (active, explicite, inductive…) pour que la structure de la séance soit cohérente.",
       );
     }
 
@@ -588,6 +756,55 @@ export default function ProfsPage() {
               </p>
             </div>
 
+            {/* Méthode pédagogique */}
+            <div className="space-y-2">
+              <div className="flex items-center justify-between gap-2">
+                <label className="text-xs font-semibold text-gray-600">
+                  Méthode pédagogique souhaitée
+                </label>
+                <Link
+                  href="/blog/methodes-pedagogiques"
+                  className="text-[11px] text-[#0047B6] underline underline-offset-2 hover:text-[#003894]"
+                >
+                  En savoir plus sur les différentes méthodes (article de blog)
+                </Link>
+              </div>
+
+              <div className="grid gap-2 sm:grid-cols-2">
+                {METHODE_OPTIONS.map((m) => (
+                  <button
+                    key={m.id || "default"}
+                    type="button"
+                    onClick={() => handleChange("methode", m.id)}
+                    className={`text-left border rounded-xl px-3 py-2 text-xs sm:text-[13px] transition ${
+                      form.methode === m.id
+                        ? "border-[#0047B6] bg-sky-50 shadow-sm"
+                        : "border-slate-200 bg-white hover:border-sky-200"
+                    }`}
+                  >
+                    <div className="flex items-center gap-2 mb-1">
+                      <span
+                        className={`inline-block w-2 h-2 rounded-full ${
+                          form.methode === m.id ? "bg-[#0047B6]" : "bg-slate-300"
+                        }`}
+                      />
+                      <span className="font-semibold text-slate-800">
+                        {m.label}
+                      </span>
+                    </div>
+                    <p className="text-[11px] text-slate-600">
+                      {m.description}
+                    </p>
+                  </button>
+                ))}
+              </div>
+
+              <p className="text-[11px] text-gray-500">
+                Choisis la méthode correspondant le mieux à ta séance : EleveAI
+                adaptera la structure de la ressource (étapes, questions, exercices…).
+              </p>
+            </div>
+
             {/* Titre + auteur */}
             <div className="grid sm:grid-cols-[2fr,1fr] gap-3">
               <div className="space-y-1">
@@ -718,7 +935,7 @@ export default function ProfsPage() {
                 ))}
               </ul>
               <p className="text-[11px] text-gray-500">
-                Plus ta demande est précise (niveau, type de tâche, exemples…),
+                Plus ta demande est précise (niveau, type de tâche, méthode pédagogique, exemples…),
                 plus la ressource générée sera directement exploitable en classe.
               </p>
             </div>
