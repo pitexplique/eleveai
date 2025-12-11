@@ -150,7 +150,7 @@ export default function QuiSuisJePage() {
 
             <div className="rounded-2xl border border-slate-800 bg-slate-900/70 p-4 sm:p-5 space-y-3">
               <h2 className="text-lg font-semibold text-slate-50">
-                Un projet collectif, pas seulement personnel
+                Un projet collectif, pas seulement personnel 
               </h2>
               <p className="text-sm text-slate-300">
                 EleveAI évolue grâce aux retours :
@@ -165,7 +165,7 @@ export default function QuiSuisJePage() {
                 appui clair et adaptable pour toute la communauté éducative : des outils pour les 
                 professeurs, des aides à la compréhension pour les élèves, un accompagnement 
                 bienveillant pour les parents et des fonctions de suivi pour l’administration. 
-                Chacun peut l’utiliser à sa manière, selon ses besoins.
+                Chacun peut l’utiliser à sa manière,.
               </p>
 
             </div>
