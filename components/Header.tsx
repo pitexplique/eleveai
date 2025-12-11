@@ -11,7 +11,7 @@ type NavItem = {
 };
 
 const MAIN_LINKS: NavItem[] = [
-  { href: "/", label: "Accueil" },
+  { href: "/accueil", label: "Accueil" },
   { href: "/espace-eleves", label: "Espace élèves (IA)" },
   { href: "/espace-profs", label: "Espace profs (IA)" },
   { href: "/parents", label: "Espace parents (IA)" },
@@ -62,7 +62,7 @@ export default function Header() {
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:py-4">
         {/* LOGO */}
         <div className="flex items-center gap-2">
-          <Link href="/" className="flex items-center gap-2">
+          <Link href="/accueil" className="flex items-center gap-2">
             <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-emerald-500 text-slate-900 font-bold">
               EA
             </div>
