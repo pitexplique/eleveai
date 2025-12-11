@@ -138,7 +138,7 @@ export default function QuiSuisJePage() {
 
             <div className="rounded-2xl border border-slate-800 bg-slate-900/70 p-4 sm:p-5 space-y-3">
               <h2 className="text-lg font-semibold text-slate-50">
-                Un ancrage à La Réunion
+                Un ancrage à la Réunion
               </h2>
               <p className="text-sm text-slate-300">
                 J’aime le <span className="font-medium">sport</span> et la{" "}
