@@ -185,7 +185,7 @@ export default function Footer() {
         <div className="mt-8 flex flex-col gap-2 border-t border-slate-800 pt-4 text-xs text-slate-500 sm:flex-row sm:items-center sm:justify-between">
           <p>© {new Date().getFullYear()} EleveAI. Tous droits réservés.</p>
           <p className="text-[11px] text-slate-500">
-            Conçu à La  Réunion pour les collèges & lycées de France.
+            Conçu à La Réunion pour les collèges & lycées de France.
           </p>
         </div>
       </div>
