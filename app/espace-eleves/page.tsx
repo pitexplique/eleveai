@@ -9,6 +9,9 @@ import {
 } from "@/components/PresetCarousel";
 import { createClient } from "@/lib/supabase/client";
 
+export const dynamic = "force-dynamic";
+
+
 /* ----------------------------------------
    TYPES
 ---------------------------------------- */
