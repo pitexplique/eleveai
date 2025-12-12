@@ -23,10 +23,7 @@ export default function AccueilPage() {
             {/* Colonne gauche */}
             <div className="space-y-6">
               <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight">
-                L’IA améliore vos prompts,
-                <span className="text-emerald-400"> pour toute la communauté éducative</span>,
-                il vous fait gagner
-                <span className="text-emerald-300"> du temps et de l'efficacité</span>.
+                Gagnez du temps et de la précision !
               </h1>
 
               <p className="text-sm sm:text-base text-slate-300 max-w-xl">
