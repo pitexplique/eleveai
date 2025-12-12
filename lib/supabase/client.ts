@@ -7,6 +7,12 @@ export function createClient() {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const anonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
+  console.log("[ENV]", {
+  url: process.env.NEXT_PUBLIC_SUPABASE_URL,
+  key: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ? "present" : "missing",
+});
+
+
   if (!url || !anonKey) {
     // Client de secours CHAINABLE : évite eq is not a function
     const fakeQuery: any = {
