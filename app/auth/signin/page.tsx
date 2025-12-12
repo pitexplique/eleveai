@@ -319,8 +319,7 @@ export default function SignInPage() {
 
             <div className="mt-10 max-w-xl rounded-2xl bg-slate-900/70 p-4 shadow-lg backdrop-blur">
               <p className="text-slate-100 italic">
-                « Avec EleveAI, je peux enfin accompagner chaque élève selon son
-                rythme et ses besoins. »
+                « Je découvre de nouvelles façons d'enseigner »
               </p>
               <p className="mt-3 text-xs font-medium text-slate-300">
                 Frédéric Lacoste – Mathématiques
