@@ -741,7 +741,7 @@ export default function ProfsPage() {
             <span>Espace professeurs – Générer une ressource pédagogique</span>
           </p>
           <h1 className="text-3xl sm:text-4xl font-extrabold text-[#0047B6]">
-            Créer une séance, des exercices ou une évaluation avec EleveAI
+            Prenez votre temps pour générer votre prompt pour une meilleure efficacité
           </h1>
           <p className="text-sm sm:text-base text-gray-700 max-w-2xl">
             Remplis les informations ci-dessous : EleveAI générera pour toi une

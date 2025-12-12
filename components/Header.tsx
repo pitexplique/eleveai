@@ -2,60 +2,225 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import {
+  ChevronDown,
+  Menu,
+  LogIn,
+  UserPlus,
+  GraduationCap,
+  Users,
+  Briefcase,
+  Plus,
+  Home,
+  Sparkles,
+  Wand2,
+  Trophy,
+  ClipboardList,
+  ShieldCheck,
+  UsersRound,
+  BookOpenText,
+  Mail,
+  BadgeEuro,
+  HelpCircle,
+  UserRound,
+  Handshake,
+} from "lucide-react";
+
+/* -----------------------------
+   ROUTES AUTH (rappel)
+------------------------------ */
+const AUTH_ROUTES = {
+  signin: "/auth/signin",
+  signup: "/auth/signup",
+};
 
 type NavItem = {
   href: string;
   label: string;
   badge?: string;
+  icon?: React.ReactNode;
 };
 
-const MAIN_LINKS: NavItem[] = [
-  { href: "/accueil", label: "Accueil" },
-  { href: "/espace-eleves", label: "Espace élèves (IA)" },
-  { href: "/espace-profs", label: "Espace profs (IA)" },
-  { href: "/parents", label: "Espace parents (IA)" },
-  { href: "/espace-administration", label: "Assistant administratif (IA)" },
-  { href: "/espace-vie-scolaire", label: "Vie scolaire (IA)" },
-  { href: "/espace-personnels", label: "Personnels & services (IA)" },
-  { href: "/espace-aesh", label: "Espace AESH (IA)" },
-  { href: "/atelier-IA", label: "Atelier-IA" },
-];
+type GroupKey = "profs" | "eleves" | "admin" | "plus";
 
-const SECONDARY_LINKS: NavItem[] = [
-  { href: "/tarifs", label: "Tarifs & abonnements", badge: "Nouveau" },
-  { href: "/prompts", label: "Générateurs de prompts" },
-  { href: "/concours-ia", label: "Concours IA" },
-  { href: "/blog", label: "Blog" },
-  { href: "/faq", label: "FAQ" },
-  { href: "/contact", label: "Contact" },
-  { href: "/qui-suis-je", label: "Qui suis-je ?" },
-  { href: "/partenaires", label: "Partenaires & sponsors" },
-];
+type Group = {
+  key: GroupKey;
+  label: string;
+  icon: React.ReactNode;
+  items: NavItem[];
+};
 
 function isActive(pathname: string, href: string) {
   if (href === "/") return pathname === "/";
   return pathname === href || pathname.startsWith(href + "/");
 }
 
+function useOnClickOutside(
+  refs: React.RefObject<HTMLElement>[],
+  handler: () => void
+) {
+  useEffect(() => {
+    function listener(e: MouseEvent) {
+      const target = e.target as Node;
+      const clickedInside = refs.some((r) => r.current?.contains(target));
+      if (!clickedInside) handler();
+    }
+    document.addEventListener("mousedown", listener);
+    return () => document.removeEventListener("mousedown", listener);
+  }, [refs, handler]);
+}
+
+function IconWrap({ children }: { children: React.ReactNode }) {
+  return (
+    <span className="inline-flex h-7 w-7 items-center justify-center rounded-lg border border-slate-700 bg-slate-950/60 text-slate-200">
+      {children}
+    </span>
+  );
+}
+
 export default function Header() {
   const pathname = usePathname();
+
+  // Desktop dropdowns
+  const [open, setOpen] = useState<null | GroupKey>(null);
+
+  // Mobile
   const [menuOpen, setMenuOpen] = useState(false);
-  const [moreOpen, setMoreOpen] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState<null | GroupKey>(null);
+
+  // Refs for outside click
+  const refProfs = useRef<HTMLDivElement>(null);
+  const refEleves = useRef<HTMLDivElement>(null);
+  const refAdmin = useRef<HTMLDivElement>(null);
+  const refPlus = useRef<HTMLDivElement>(null);
+
+  useOnClickOutside([refProfs, refEleves, refAdmin, refPlus], () => setOpen(null));
+
+  // Close dropdowns with Escape (accessibilité clavier)
+  useEffect(() => {
+    function onKeyDown(e: KeyboardEvent) {
+      if (e.key === "Escape") {
+        setOpen(null);
+        setMenuOpen(false);
+        setMobileOpen(null);
+      }
+    }
+    document.addEventListener("keydown", onKeyDown);
+    return () => document.removeEventListener("keydown", onKeyDown);
+  }, []);
+
+  const GROUPS: Group[] = useMemo(
+    () => [
+      {
+        key: "profs",
+        label: "Profs",
+        icon: <Users className="h-4 w-4" />,
+        items: [
+          {
+            href: "/espace-profs",
+            label: "Générateurs de Prompts",
+            icon: <Users className="h-4 w-4" />,
+          },
+          {
+            href: "/atelier-IA",
+            label: "Atelier IA",
+            icon: <Sparkles className="h-4 w-4" />,
+          },
+          {
+            href: "/concours-ia",
+            label: "Concours IA",
+            icon: <Trophy className="h-4 w-4" />,
+          },
+        ],
+      },
+      {
+        key: "eleves",
+        label: "Élèves",
+        icon: <GraduationCap className="h-4 w-4" />,
+        items: [
+          {
+            href: "/espace-eleves",
+            label: "Espace élèves (IA)",
+            icon: <GraduationCap className="h-4 w-4" />,
+          },
+          {
+            href: "/parents",
+            label: "Parents : élèves DYS / besoins particuliers",
+            icon: <UsersRound className="h-4 w-4" />,
+          },
+          {
+            href: "/espace-aesh",
+            label: "Espace AESH (IA)",
+            icon: <ShieldCheck className="h-4 w-4" />,
+          },
+        ],
+      },
+      {
+        key: "admin",
+        label: "Administratif",
+        icon: <Briefcase className="h-4 w-4" />,
+        items: [
+          {
+            href: "/espace-administration",
+            label: "Assistant administratif (IA)",
+            icon: <ClipboardList className="h-4 w-4" />,
+          },
+          {
+            href: "/espace-vie-scolaire",
+            label: "Vie scolaire (IA)",
+            icon: <BookOpenText className="h-4 w-4" />,
+          },
+          {
+            href: "/espace-personnels",
+            label: "Personnels & services (IA)",
+            icon: <Briefcase className="h-4 w-4" />,
+          },
+        ],
+      },
+      {
+        key: "plus",
+        label: "Plus",
+        icon: <Plus className="h-4 w-4" />,
+        items: [
+          { href: "/accueil", label: "Accueil", icon: <Home className="h-4 w-4" /> },
+          {
+            href: "/tarifs",
+            label: "Tarifs & abonnements",
+            badge: "Nouveau",
+            icon: <BadgeEuro className="h-4 w-4" />,
+          },
+          { href: "/blog", label: "Blog", icon: <BookOpenText className="h-4 w-4" /> },
+          { href: "/faq", label: "FAQ", icon: <HelpCircle className="h-4 w-4" /> },
+          { href: "/contact", label: "Contact", icon: <Mail className="h-4 w-4" /> },
+          { href: "/qui-suis-je", label: "Qui suis-je ?", icon: <UserRound className="h-4 w-4" /> },
+          { href: "/partenaires", label: "Partenaires & sponsors", icon: <Handshake className="h-4 w-4" /> },
+        ],
+      },
+    ],
+    []
+  );
 
   function closeAll() {
+    setOpen(null);
     setMenuOpen(false);
-    setMoreOpen(false);
+    setMobileOpen(null);
+  }
+
+  function getRefForKey(key: GroupKey) {
+    if (key === "profs") return refProfs;
+    if (key === "eleves") return refEleves;
+    if (key === "admin") return refAdmin;
+    return refPlus;
   }
 
   return (
     <header className="sticky top-0 z-40 border-b border-slate-800 bg-slate-950/90 backdrop-blur">
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:py-4">
-        
         {/* LOGO */}
         <Link href="/accueil" onClick={closeAll} className="flex items-center gap-2">
-          <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-emerald-500 text-slate-900 font-bold">
-            EA
+          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-emerald-500 text-slate-900">
+            <Sparkles className="h-5 w-5" />
           </div>
           <div className="flex flex-col leading-tight">
             <span className="text-sm sm:text-base font-semibold text-slate-50">
@@ -67,76 +232,141 @@ export default function Header() {
           </div>
         </Link>
 
-        {/* MENU DESKTOP */}
-        <div className="hidden lg:flex items-center gap-3">
-          {MAIN_LINKS.map((link) => {
-            const active = isActive(pathname, link.href);
+        {/* DESKTOP MENU */}
+        <div className="hidden lg:flex items-center gap-2">
+          {GROUPS.filter((g) => g.key !== "plus").map((group) => {
+            const ref = getRefForKey(group.key);
+            const opened = open === group.key;
+            const anyActive = group.items.some((it) => isActive(pathname, it.href));
+
             return (
-              <Link
-                key={link.href}
-                href={link.href}
-                onClick={closeAll}
-                className={`px-3 py-1.5 text-sm rounded-xl border flex items-center gap-2 transition ${
-                  active
-                    ? "border-sky-500 bg-sky-500/10 text-sky-100 shadow-[0_0_0_1px_rgba(56,189,248,0.4)]"
-                    : "border-transparent text-slate-300 hover:border-slate-600 hover:bg-slate-900"
-                }`}
-              >
-                {link.label}
-                {link.badge && (
-                  <span className="ml-1 inline-flex items-center rounded-full bg-emerald-600/20 text-emerald-300 text-[10px] font-semibold px-2 py-0.5 uppercase">
-                    {link.badge}
-                  </span>
+              <div key={group.key} ref={ref} className="relative">
+                <button
+                  onClick={() => setOpen((v) => (v === group.key ? null : group.key))}
+                  className={`px-3 py-1.5 text-sm rounded-xl border flex items-center gap-2 transition ${
+                    opened || anyActive
+                      ? "border-sky-500 bg-sky-500/10 text-sky-100 shadow-[0_0_0_1px_rgba(56,189,248,0.4)]"
+                      : "border-slate-700 text-slate-200 hover:bg-slate-900 hover:border-slate-500"
+                  }`}
+                  aria-haspopup="menu"
+                  aria-expanded={opened}
+                >
+                  <span className="text-slate-200">{group.icon}</span>
+                  {group.label}
+                  <ChevronDown
+                    className={`h-4 w-4 transition-transform ${opened ? "rotate-180" : ""}`}
+                  />
+                </button>
+
+                {opened && (
+                  <div className="absolute right-0 mt-2 w-96 rounded-xl border border-slate-700 bg-slate-950/95 shadow-xl backdrop-blur">
+                    <div className="flex flex-col py-2">
+                      {group.items.map((link) => {
+                        const active = isActive(pathname, link.href);
+                        return (
+                          <Link
+                            key={link.href}
+                            href={link.href}
+                            onClick={closeAll}
+                            className={`px-4 py-2 text-sm flex items-center gap-3 ${
+                              active
+                                ? "text-sky-300 bg-sky-500/10 border-l-2 border-sky-500"
+                                : "text-slate-300 hover:bg-slate-900"
+                            }`}
+                          >
+                            <IconWrap>{link.icon}</IconWrap>
+                            <span className="flex-1">{link.label}</span>
+                            {link.badge && (
+                              <span className="inline-flex items-center rounded-full bg-emerald-600/20 text-emerald-300 text-[10px] font-semibold px-2 py-0.5 uppercase tracking-wide">
+                                {link.badge}
+                              </span>
+                            )}
+                          </Link>
+                        );
+                      })}
+                    </div>
+                  </div>
                 )}
-              </Link>
+              </div>
             );
           })}
 
-          {/* MENU PLUS */}
-          <div className="relative">
-            <button
-              onClick={() => setMoreOpen((v) => !v)}
-              className="px-3 py-1.5 text-sm rounded-xl border border-slate-700 text-slate-200 hover:bg-slate-900 hover:border-slate-500 flex items-center gap-1"
-            >
-              Plus
-              <span
-                className={`transition-transform text-xs ${
-                  moreOpen ? "rotate-180" : ""
-                }`}
-              >
-                ▾
-              </span>
-            </button>
+          {/* PLUS MENU */}
+          {(() => {
+            const group = GROUPS.find((g) => g.key === "plus")!;
+            const ref = getRefForKey(group.key);
+            const opened = open === group.key;
+            const anyActive = group.items.some((it) => isActive(pathname, it.href));
 
-            {moreOpen && (
-              <div className="absolute right-0 mt-2 w-64 rounded-xl border border-slate-700 bg-slate-950/95 shadow-xl backdrop-blur">
-                <div className="flex flex-col py-2">
-                  {SECONDARY_LINKS.map((link) => {
-                    const active = isActive(pathname, link.href);
-                    return (
-                      <Link
-                        key={link.href}
-                        href={link.href}
-                        onClick={closeAll}
-                        className={`px-4 py-1.5 text-sm flex items-center gap-2 ${
-                          active
-                            ? "text-sky-300 bg-sky-500/10 border-l-2 border-sky-500"
-                            : "text-slate-300 hover:bg-slate-900"
-                        }`}
-                      >
-                        {link.label}
-                        {link.badge && (
-                          <span className="ml-auto inline-flex items-center rounded-full bg-emerald-600/20 text-emerald-300 text-[10px] font-semibold px-2 py-0.5 uppercase tracking-wide">
-                            {link.badge}
-                          </span>
-                        )}
-                      </Link>
-                    );
-                  })}
-                </div>
+            return (
+              <div ref={ref} className="relative">
+                <button
+                  onClick={() => setOpen((v) => (v === group.key ? null : group.key))}
+                  className={`px-3 py-1.5 text-sm rounded-xl border flex items-center gap-2 transition ${
+                    opened || anyActive
+                      ? "border-sky-500 bg-sky-500/10 text-sky-100 shadow-[0_0_0_1px_rgba(56,189,248,0.4)]"
+                      : "border-slate-700 text-slate-200 hover:bg-slate-900 hover:border-slate-500"
+                  }`}
+                  aria-haspopup="menu"
+                  aria-expanded={opened}
+                >
+                  <span className="text-slate-200">{group.icon}</span>
+                  {group.label}
+                  <ChevronDown
+                    className={`h-4 w-4 transition-transform ${opened ? "rotate-180" : ""}`}
+                  />
+                </button>
+
+                {opened && (
+                  <div className="absolute right-0 mt-2 w-96 rounded-xl border border-slate-700 bg-slate-950/95 shadow-xl backdrop-blur">
+                    <div className="flex flex-col py-2">
+                      {group.items.map((link) => {
+                        const active = isActive(pathname, link.href);
+                        return (
+                          <Link
+                            key={link.href}
+                            href={link.href}
+                            onClick={closeAll}
+                            className={`px-4 py-2 text-sm flex items-center gap-3 ${
+                              active
+                                ? "text-sky-300 bg-sky-500/10 border-l-2 border-sky-500"
+                                : "text-slate-300 hover:bg-slate-900"
+                            }`}
+                          >
+                            <IconWrap>{link.icon}</IconWrap>
+                            <span className="flex-1">{link.label}</span>
+                            {link.badge && (
+                              <span className="inline-flex items-center rounded-full bg-emerald-600/20 text-emerald-300 text-[10px] font-semibold px-2 py-0.5 uppercase tracking-wide">
+                                {link.badge}
+                              </span>
+                            )}
+                          </Link>
+                        );
+                      })}
+                    </div>
+                  </div>
+                )}
               </div>
-            )}
-          </div>
+            );
+          })()}
+        </div>
+
+        {/* RIGHT CTA (DESKTOP) */}
+        <div className="hidden lg:flex items-center gap-2">
+          <Link
+            href={AUTH_ROUTES.signin}
+            className="inline-flex items-center gap-2 rounded-xl border border-slate-700 px-3 py-1.5 text-sm text-slate-200 hover:bg-slate-900 hover:border-slate-500"
+          >
+            <LogIn className="h-4 w-4" />
+            Connexion
+          </Link>
+          <Link
+            href={AUTH_ROUTES.signup}
+            className="inline-flex items-center gap-2 rounded-xl border border-emerald-500/40 bg-emerald-500/10 px-3 py-1.5 text-sm text-emerald-200 hover:bg-emerald-500/15 hover:border-emerald-400/60"
+          >
+            <UserPlus className="h-4 w-4" />
+            Inscription
+          </Link>
         </div>
 
         {/* BURGER MOBILE */}
@@ -144,41 +374,106 @@ export default function Header() {
           className="lg:hidden inline-flex items-center justify-center rounded-md border border-slate-700 p-2 text-slate-200"
           onClick={() => {
             setMenuOpen((o) => !o);
-            setMoreOpen(false);
+            setOpen(null);
+            setMobileOpen(null);
           }}
+          aria-label="Ouvrir le menu"
         >
-          <div className="space-y-1">
-            <span className="block h-0.5 w-5 bg-slate-200" />
-            <span className="block h-0.5 w-5 bg-slate-200" />
-            <span className="block h-0.5 w-5 bg-slate-200" />
-          </div>
+          <Menu className="h-5 w-5" />
         </button>
       </nav>
 
-      {/* MENU MOBILE */}
+      {/* MOBILE MENU */}
       {menuOpen && (
         <div className="border-t border-slate-800 bg-slate-950 lg:hidden">
-          <div className="mx-auto flex max-w-6xl flex-col gap-2 px-4 py-3">
-            {[...MAIN_LINKS, ...SECONDARY_LINKS].map((link) => {
-              const active = isActive(pathname, link.href);
+          <div className="mx-auto max-w-6xl px-4 py-3 space-y-2">
+            {/* Mobile CTA */}
+            <div className="grid grid-cols-2 gap-2">
+              <Link
+                href={AUTH_ROUTES.signin}
+                onClick={closeAll}
+                className="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-700 px-3 py-2 text-sm text-slate-200 hover:bg-slate-900 hover:border-slate-500"
+              >
+                <LogIn className="h-4 w-4" />
+                Connexion
+              </Link>
+              <Link
+                href={AUTH_ROUTES.signup}
+                onClick={closeAll}
+                className="inline-flex items-center justify-center gap-2 rounded-xl border border-emerald-500/40 bg-emerald-500/10 px-3 py-2 text-sm text-emerald-200 hover:bg-emerald-500/15 hover:border-emerald-400/60"
+              >
+                <UserPlus className="h-4 w-4" />
+                Inscription
+              </Link>
+            </div>
+
+            {/* Accueil quick link */}
+            <Link
+              href="/accueil"
+              onClick={closeAll}
+              className={`w-full rounded-xl px-3 py-2 text-sm border flex items-center gap-2 ${
+                isActive(pathname, "/accueil")
+                  ? "border-sky-500 bg-sky-500/10 text-sky-100 shadow-[0_0_0_1px_rgba(56,189,248,0.4)]"
+                  : "border-transparent text-slate-300 hover:border-slate-700 hover:bg-slate-900"
+              }`}
+            >
+              <Home className="h-4 w-4" />
+              Accueil
+            </Link>
+
+            {/* Sections accordéon */}
+            {GROUPS.map((group) => {
+              const opened = mobileOpen === group.key;
+              const anyActive = group.items.some((it) => isActive(pathname, it.href));
+
               return (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  onClick={closeAll}
-                  className={`w-full rounded-xl px-3 py-2 text-sm border flex items-center gap-2 ${
-                    active
-                      ? "border-sky-500 bg-sky-500/10 text-sky-100 shadow-[0_0_0_1px_rgba(56,189,248,0.4)]"
-                      : "border-transparent text-slate-300 hover:border-slate-700 hover:bg-slate-900"
-                  }`}
-                >
-                  {link.label}
-                  {link.badge && (
-                    <span className="ml-auto inline-flex items-center rounded-full bg-emerald-600/20 text-emerald-300 text-[10px] font-semibold px-2 py-0.5 uppercase">
-                      {link.badge}
+                <div key={group.key} className="rounded-xl border border-slate-800 overflow-hidden">
+                  <button
+                    onClick={() => setMobileOpen((v) => (v === group.key ? null : group.key))}
+                    className={`w-full px-3 py-2 text-sm flex items-center justify-between ${
+                      opened || anyActive
+                        ? "bg-sky-500/10 text-sky-100"
+                        : "bg-slate-950 text-slate-200 hover:bg-slate-900"
+                    }`}
+                    aria-expanded={opened}
+                  >
+                    <span className="flex items-center gap-2 font-medium">
+                      {group.icon}
+                      {group.label}
                     </span>
+                    <ChevronDown
+                      className={`h-4 w-4 transition-transform ${opened ? "rotate-180" : ""}`}
+                    />
+                  </button>
+
+                  {opened && (
+                    <div className="flex flex-col">
+                      {group.items.map((link) => {
+                        const active = isActive(pathname, link.href);
+                        return (
+                          <Link
+                            key={link.href}
+                            href={link.href}
+                            onClick={closeAll}
+                            className={`px-3 py-2 text-sm border-t border-slate-800 flex items-center gap-3 ${
+                              active
+                                ? "text-sky-300 bg-sky-500/10"
+                                : "text-slate-300 hover:bg-slate-900"
+                            }`}
+                          >
+                            <IconWrap>{link.icon}</IconWrap>
+                            <span className="flex-1">{link.label}</span>
+                            {link.badge && (
+                              <span className="inline-flex items-center rounded-full bg-emerald-600/20 text-emerald-300 text-[10px] font-semibold px-2 py-0.5 uppercase">
+                                {link.badge}
+                              </span>
+                            )}
+                          </Link>
+                        );
+                      })}
+                    </div>
                   )}
-                </Link>
+                </div>
               );
             })}
           </div>
@@ -187,6 +482,7 @@ export default function Header() {
     </header>
   );
 }
+
 
 
 
