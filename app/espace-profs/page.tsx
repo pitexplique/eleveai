@@ -1,6 +1,4 @@
 // app/espace-profs/page.tsx
-// app/espace-profs/page.tsx
-
 "use client";
 
 import { useMemo, useState } from "react";
@@ -10,10 +8,7 @@ import {
   PresetCarousel,
   PresetCarouselItem,
 } from "@/components/PresetCarousel";
-import {
-  PROFS_PRESETS,
-  ProfsPresetKey,
-} from "@/data/profsPresets";
+import { PROFS_PRESETS, ProfsPresetKey } from "@/data/profsPresets";
 
 /* ----------------------------------------
    TYPES
@@ -33,6 +28,8 @@ type MethodePedagogique =
   | "ludique"
   | "magistrale";
 
+type OutputStyle = "simple" | "word" | "word_expert";
+
 type PromptProf = {
   titre: string;
   objectifPedagogique: string;
@@ -47,7 +44,12 @@ type PromptProf = {
   auteur: string;
   date: string;
   methode?: MethodePedagogique;
+  outputStyle: OutputStyle;
 };
+
+/* ----------------------------------------
+   OPTIONS
+---------------------------------------- */
 
 const CLASSES = [
   "6e",
@@ -72,7 +74,6 @@ const MATIERES = [
   "Autre",
 ];
 
-// 🔹 Types communs à toutes les matières
 const TYPES_COMMUNS = [
   "Explication d’une notion",
   "Génération d’exercices",
@@ -86,7 +87,6 @@ const TYPES_COMMUNS = [
   "Résolution de problème",
 ];
 
-// 🔹 Types spécifiques par matière (en plus des communs)
 const TYPES_PAR_MATIERE: Record<string, string[]> = {
   Mathématiques: [
     "Génération d’exercices de calcul mental",
@@ -106,14 +106,8 @@ const TYPES_PAR_MATIERE: Record<string, string[]> = {
     "Analyse de documents scientifiques",
     "Construction de schémas-bilans à compléter",
   ],
-  "Histoire-Géographie": [
-    "Étude de documents historiques",
-    "Analyse de carte ou croquis",
-  ],
-  SES: [
-    "Analyse de graphiques économiques",
-    "Préparation d’exemples chiffrés",
-  ],
+  "Histoire-Géographie": ["Étude de documents historiques", "Analyse de carte ou croquis"],
+  SES: ["Analyse de graphiques économiques", "Préparation d’exemples chiffrés"],
   Langues: [
     "Création d’activité de compréhension orale",
     "Génération de dialogues pour jeu de rôle",
@@ -131,7 +125,6 @@ const TYPES_PAR_MATIERE: Record<string, string[]> = {
   Autre: ["Création d’activité interdisciplinaire"],
 };
 
-// 🔹 Types spéciaux examens
 const TYPES_SPECIAUX_BREVET = [
   "Préparation d’un sujet type brevet",
   "Génération d’exercices de révision pour le brevet",
@@ -145,10 +138,6 @@ const TYPES_SPECIAUX_BAC = [
   "Génération d’exercices type bac avec correction",
   "Préparation d’une synthèse de révision pour le bac",
 ];
-
-/* ----------------------------------------
-   MÉTHODES PÉDAGOGIQUES – OPTIONS UI
----------------------------------------- */
 
 const METHODE_OPTIONS: {
   id: MethodePedagogique;
@@ -164,55 +153,47 @@ const METHODE_OPTIONS: {
   {
     id: "enseignement_explicite",
     label: "Enseignement explicite (I do / We do / You do)",
-    description:
-      "Tu montres un exemple, vous faites ensemble, puis l’élève s’entraîne seul.",
+    description: "Tu montres un exemple, vous faites ensemble, puis l’élève s’entraîne seul.",
   },
   {
     id: "inductive",
     label: "Méthode inductive",
-    description:
-      "On part d’exemples concrets pour faire émerger la règle ou la notion.",
+    description: "On part d’exemples concrets pour faire émerger la règle ou la notion.",
   },
   {
     id: "deductive",
     label: "Méthode déductive",
-    description:
-      "On part de la règle, puis on propose des exercices d’application gradués.",
+    description: "On part de la règle, puis on propose des exercices d’application gradués.",
   },
   {
     id: "par_projet",
     label: "Pédagogie par projet",
-    description:
-      "Les élèves réalisent une production finale (exposé, vidéo, étude, etc.).",
+    description: "Production finale (exposé, affiche, vidéo, étude, etc.).",
   },
   {
     id: "par_problemes",
     label: "Apprentissage par problèmes",
-    description:
-      "On pose un problème authentique que les élèves doivent résoudre.",
+    description: "On pose un problème authentique que les élèves doivent résoudre.",
   },
   {
     id: "cooperative",
     label: "Pédagogie coopérative",
-    description:
-      "Les élèves travaillent en groupes avec des rôles définis et une production commune.",
+    description: "Groupes + rôles + production commune + explication entre pairs.",
   },
   {
     id: "ludique",
     label: "Approche ludique / gamification",
-    description:
-      "Utilisation de jeux, défis, badges, escape games pour soutenir les apprentissages.",
+    description: "Défis, points, badges, missions courtes, progression visible.",
   },
   {
     id: "magistrale",
     label: "Cours magistral guidé",
-    description:
-      "Cours structuré principalement par l’enseignant, avec quelques questions intermédiaires.",
+    description: "Cours structuré par l’enseignant avec questions de vérification.",
   },
 ];
 
 /* ----------------------------------------
-   CARROUSEL – ITEMS À PARTIR DES PRESETS
+   CARROUSEL PRESETS
 ---------------------------------------- */
 
 const PROFS_PRESET_ITEMS: PresetCarouselItem[] = (
@@ -228,7 +209,49 @@ const PROFS_PRESET_ITEMS: PresetCarouselItem[] = (
 }));
 
 /* ----------------------------------------
-   FONCTION MOULINETTE
+   BLOCS WORD / DESIGN EXPERT
+---------------------------------------- */
+
+function blocWordDesign(style: OutputStyle) {
+  if (style === "simple") return "";
+
+  if (style === "word") {
+    return (
+      "Format de sortie obligatoire : document Word (copier-coller sans perte).\n" +
+      "- Utilise des titres hiérarchisés clairs (Titre 1 / Titre 2 / Titre 3) sous forme de lignes distinctes.\n" +
+      "- Mise en page aérée : listes, lignes courtes, espaces de réponse.\n" +
+      "- Utilise des icônes emoji simples au début des sections (compatibles Word).\n" +
+      "- Termine par la ligne : « ✅ Prêt à coller dans Word ». \n\n"
+    );
+  }
+
+  return (
+    "Format de sortie obligatoire : document Word EXPERT, visuellement très lisible.\n" +
+    "Contraintes de mise en page (Word-ready) :\n" +
+    "- Réponse entièrement copiable-collable dans Word en conservant la structure.\n" +
+    "- Utilise des icônes emoji au début des titres et sous-parties.\n" +
+    "- Ajoute des bannières visuelles pour les grandes parties :\n" +
+    "==================================================\n" +
+    "🧠 TITRE DE LA PARTIE\n" +
+    "==================================================\n" +
+    "- Ajoute des encadrés (simulés en texte) avec ces formats :\n" +
+    "[🟦 ENCART – À RETENIR]\n" +
+    "Texte court…\n\n" +
+    "[🟨 ENCART – MÉTHODE]\n" +
+    "Étapes numérotées…\n\n" +
+    "[🟥 ENCART – ERREUR FRÉQUENTE]\n" +
+    "Erreur + correction…\n\n" +
+    "[🟩 ENCART – DÉFI / BONUS]\n" +
+    "Question défi…\n\n" +
+    "- Encarts minimum : 1 À RETENIR + 1 MÉTHODE + 1 ERREUR FRÉQUENTE + 1 DÉFI.\n" +
+    "- Ajoute des zones de réponse : « Réponse : ______________________ ».\n" +
+    "- Interdits : gros paragraphes, blocs compacts.\n" +
+    "- Termine par : « ✅ Prêt à coller dans Word ». \n\n"
+  );
+}
+
+/* ----------------------------------------
+   MOULINETTE PROMPT
 ---------------------------------------- */
 
 function construirePrompt(form: PromptProf): string {
@@ -244,22 +267,22 @@ function construirePrompt(form: PromptProf): string {
           "Méthode pédagogique souhaitée : enseignement explicite (I do / We do / You do).\n" +
           "- Commencer par un exemple entièrement modélisé par l’enseignant (I do),\n" +
           "- proposer ensuite une ou deux questions faites avec l’élève (We do),\n" +
-          "- terminer par des exercices où l’élève agit seul avec correction commentée (You do).\n\n"
+          "- terminer par des exercices où l’élève agit seul (You do).\n\n"
         );
       case "inductive":
         return (
           "Méthode pédagogique souhaitée : méthode inductive.\n" +
-          "- Partir d’exemples concrets ou de documents,\n" +
-          "- faire formuler par l’élève des observations,\n" +
-          "- faire émerger la règle ou la notion à partir de ces observations,\n" +
-          "- terminer par une formulation claire de la règle et quelques applications.\n\n"
+          "- Partir d’exemples concrets,\n" +
+          "- faire formuler des observations,\n" +
+          "- faire émerger la règle,\n" +
+          "- terminer par une formulation claire + applications.\n\n"
         );
       case "deductive":
         return (
           "Méthode pédagogique souhaitée : méthode déductive.\n" +
-          "- Donner d’abord la définition ou la règle générale,\n" +
-          "- illustrer par un ou deux exemples simples,\n" +
-          "- proposer une série d’exercices gradués d’application.\n\n"
+          "- Donner d’abord la règle,\n" +
+          "- illustrer par des exemples,\n" +
+          "- proposer des exercices gradués.\n\n"
         );
       case "par_projet":
         return (
@@ -272,50 +295,50 @@ function construirePrompt(form: PromptProf): string {
       case "par_problemes":
         return (
           "Méthode pédagogique souhaitée : apprentissage par problèmes.\n" +
-          "- Partir d’un problème authentique ou d’une situation complexe,\n" +
-          "- laisser l’élève formuler des hypothèses et des stratégies,\n" +
+          "- Partir d’un problème authentique,\n" +
+          "- laisser l’élève proposer des stratégies,\n" +
           "- apporter les outils au moment où le besoin apparaît,\n" +
-          "- conclure par une mise en forme claire de la solution et de la méthode.\n\n"
+          "- conclure par méthode + solution structurée.\n\n"
         );
       case "cooperative":
         return (
           "Méthode pédagogique souhaitée : pédagogie coopérative.\n" +
-          "- Organiser la classe en groupes avec des rôles (lecteur, rapporteur, gestionnaire du temps, etc.),\n" +
-          "- prévoir une production commune par groupe,\n          " +
+          "- Organiser des groupes avec des rôles (lecteur, rapporteur, gestionnaire du temps, etc.),\n" +
+          "- prévoir une production commune,\n" +
           "- intégrer des moments d’explication entre pairs.\n\n"
         );
       case "ludique":
         return (
           "Méthode pédagogique souhaitée : approche ludique / gamification.\n" +
-          "- Transformer la tâche en défi ou en jeu (points, badges, niveaux),\n" +
+          "- Transformer la tâche en défi/jeu,\n" +
           "- proposer des missions courtes,\n" +
-          "- garder une trace des réussites et des progrès.\n\n"
+          "- garder une trace des progrès.\n\n"
         );
       case "magistrale":
         return (
           "Méthode pédagogique souhaitée : cours magistral guidé.\n" +
-          "- Structurer la séance en grandes parties numérotées,\n" +
-          "- insérer régulièrement de courtes questions de vérification,\n" +
-          "- prévoir un court temps d’entraînement en fin de séance.\n\n"
+          "- Structurer en parties numérotées,\n" +
+          "- insérer des questions de vérification,\n" +
+          "- prévoir un entraînement final.\n\n"
         );
       case "methode_active":
       default:
         return (
           "Méthode pédagogique souhaitée : méthode active.\n" +
-          "- Faire agir l’élève à chaque étape (questions, manipulations, mini-tâches),\n" +
-          "- alterner explications très courtes et questions de vérification,\n" +
-          "- terminer par un récapitulatif et une question métacognitive.\n\n"
+          "- Faire agir l’élève à chaque étape,\n" +
+          "- alterner explications courtes et questions,\n" +
+          "- conclure par un récapitulatif + question métacognitive.\n\n"
         );
     }
   })();
 
   const blocDYS = form.adaptationDYS
-    ? `Adapte ta réponse pour un élève présentant des troubles DYS :\n` +
-      `- phrases courtes et simples,\n` +
-      `- mise en page aérée avec listes,\n` +
-      `- éviter les doubles négations,\n` +
-      `- expliquer le vocabulaire difficile,\n` +
-      `- rappeler le sens des symboles mathématiques si nécessaire.\n\n`
+    ? "Adapte ta réponse pour un élève présentant des troubles DYS :\n" +
+      "- phrases courtes et simples,\n" +
+      "- mise en page aérée,\n" +
+      "- éviter les doubles négations,\n" +
+      "- expliquer le vocabulaire difficile,\n" +
+      "- rappeler le sens des symboles si nécessaire.\n\n"
     : "";
 
   const blocAuteur = form.auteur
@@ -323,81 +346,77 @@ function construirePrompt(form: PromptProf): string {
     : "";
 
   const blocEduscol =
-    `Ta réponse doit respecter les programmes officiels du système scolaire français :\n` +
-    `- conformité à l’esprit des programmes publiés sur Eduscol,\n` +
-    `- cohérence avec le Bulletin Officiel (BO),\n` +
-    `- vocabulaire disciplinaire attendu en classe.\n\n`;
+    "Ta réponse doit respecter les programmes officiels du système scolaire français :\n" +
+    "- conformité à l’esprit des programmes publiés sur Eduscol,\n" +
+    "- cohérence avec le Bulletin Officiel (BO),\n" +
+    "- vocabulaire disciplinaire attendu en classe.\n\n";
 
   const blocNeuro = form.neuro
-    ? `Tu t’appuies sur des principes issus des neurosciences de l’apprentissage :\n` +
-      `- activer les connaissances préalables de l’élève,\n` +
-      `- introduire une seule difficulté nouvelle à la fois,\n` +
-      `- découper la notion en petites étapes claires,\n` +
-      `- alterner explications et petites questions de vérification,\n` +
-      `- utiliser des exemples concrets avant la formalisation,\n` +
-      `- terminer par un court récapitulatif des idées clés,\n` +
-      `- inviter l’élève à reformuler avec ses propres mots.\n\n`
+    ? "Tu t’appuies sur des principes issus des neurosciences de l’apprentissage :\n" +
+      "- activer les connaissances préalables,\n" +
+      "- introduire une seule difficulté nouvelle à la fois,\n" +
+      "- découper la notion en petites étapes,\n" +
+      "- alterner explications et questions de vérification,\n" +
+      "- partir d’exemples concrets avant la formalisation,\n" +
+      "- terminer par un récapitulatif,\n" +
+      "- inviter l’élève à reformuler.\n\n"
     : "";
 
-  // 🔹 Adapter le langage au niveau + au cycle
   const blocNiveauLangage = (() => {
     const niveau = form.niveau || "standard";
     const classe = form.classe;
-    const isCollege =
-      classe === "6e" || classe === "5e" || classe === "4e" || classe === "3e";
+    const isCollege = ["6e", "5e", "4e", "3e"].includes(classe);
 
     if (isCollege) {
       if (niveau === "basique") {
         return (
           "Adapte ton langage pour un élève de collège en difficulté :\n" +
-          "- phrases très courtes (une idée par phrase),\n" +
-          "- vocabulaire simple et du quotidien,\n" +
-          "- beaucoup d’exemples concrets proches de la vie des élèves,\n" +
-          "- reformule les idées importantes au moins deux fois.\n\n"
+          "- phrases très courtes,\n" +
+          "- vocabulaire simple,\n" +
+          "- exemples concrets,\n" +
+          "- reformulations fréquentes.\n\n"
         );
       }
       if (niveau === "expert") {
         return (
           "Adapte ton langage pour un élève de collège à l’aise :\n" +
           "- vocabulaire simple mais précis,\n" +
-          "- propose quelques défis ou questions bonus,\n" +
-          "- valorise la prise d’initiative et la recherche autonome.\n\n"
+          "- propose des défis/bonus,\n" +
+          "- valorise l’initiative.\n\n"
         );
       }
       return (
         "Adapte ton langage à un élève de collège :\n" +
         "- phrases courtes et claires,\n" +
-        "- explique les mots difficiles lorsqu’ils apparaissent,\n" +
-        "- alterne explications et petites questions de vérification.\n\n"
+        "- explique les mots difficiles,\n" +
+        "- questions de vérification régulières.\n\n"
       );
     }
 
-    // Lycée
     if (niveau === "basique") {
       return (
         "Adapte ton langage pour un élève de lycée en difficulté :\n" +
-        "- phrases courtes avec peu de subordonnées,\n" +
-        "- explicite les étapes de raisonnement,\n" +
-        "- fais ressortir les mots du vocabulaire disciplinaire à retenir.\n\n"
+        "- étapes très explicites,\n" +
+        "- vocabulaire disciplinaire guidé.\n\n"
       );
     }
+
     if (niveau === "expert") {
       return (
         "Adapte ton langage pour un élève de lycée à l’aise :\n" +
-        "- tu peux utiliser un vocabulaire disciplinaire précis,\n" +
-        "- propose des prolongements ou questions d’approfondissement,\n" +
-        "- souligne les exigences de méthode attendues au bac.\n\n"
+        "- vocabulaire disciplinaire précis,\n" +
+        "- approfondissements,\n" +
+        "- exigences de méthode attendues aux examens.\n\n"
       );
     }
+
     return (
       "Adapte ton langage à un élève de lycée :\n" +
-      "- équilibre entre rigueur disciplinaire et clarté,\n" +
-      "- explique les notions clés sans surcharger en détails techniques,\n" +
-      "- garde une progression logique et explicite.\n\n"
+      "- rigueur + clarté,\n" +
+      "- progression logique explicite.\n\n"
     );
   })();
 
-  // 🔹 LaTeX seulement si matière scientifique
   const matiereScientifique = [
     "Mathématiques",
     "Physique-Chimie",
@@ -406,57 +425,46 @@ function construirePrompt(form: PromptProf): string {
   ].includes(form.matiere);
 
   const blocSansLatex = matiereScientifique
-    ? `Pour les écritures mathématiques, n'utilise pas de LaTeX (pas de \\frac, \\sqrt, etc.). ` +
-      `Écris les fractions sous la forme a/b et les puissances sous la forme x^2 ou "x au carré".\n\n`
+    ? 'Pour les écritures mathématiques, n’utilise pas de LaTeX (pas de \\frac, \\sqrt, etc.). ' +
+      'Écris les fractions sous la forme a/b et les puissances sous la forme x^2 ou "x au carré".\n\n'
     : "";
 
-  // 🔹 Structure précise de séance (utile pour ton cas « préparation de séance »)
   const blocStructureSeance =
-    form.type === "Préparation d’une séance" ||
-    form.type === "Préparation de séquence"
-      ? `Lorsque tu construis une séance, présente-la avec une structure claire et chronométrée :\n` +
-        `- durée totale approximative (par exemple : 55 minutes),\n` +
-        `- phase 1 : accroche / mise en situation (5–10 min),\n` +
-        `- phase 2 : manipulation ou recherche guidée (15–20 min),\n` +
-        `- phase 3 : mise en commun / institutionnalisation (10–15 min),\n` +
-        `- phase 4 : entraînement ou jeu de consolidation (10–15 min),\n` +
-        `- phase 5 : bilan / trace écrite / retour métacognitif (5 min).\n` +
-        `Pour chaque phase, indique :\n` +
-        `- ce que fait l’enseignant,\n` +
-        `- ce que font les élèves,\n` +
-        `- le matériel nécessaire (manipulables, fiches, vidéoprojecteur, etc.).\n\n`
+    form.type === "Préparation d’une séance" || form.type === "Préparation de séquence"
+      ? "Lorsque tu construis une séance, présente-la avec une structure claire et chronométrée :\n" +
+        "- durée totale,\n" +
+        "- phase 1 : accroche,\n" +
+        "- phase 2 : recherche guidée,\n" +
+        "- phase 3 : mise en commun / institutionnalisation,\n" +
+        "- phase 4 : entraînement,\n" +
+        "- phase 5 : bilan / métacognition.\n" +
+        "Pour chaque phase : rôle prof, rôle élèves, matériel.\n\n"
       : "";
 
-  // 🔹 Différenciation pédagogique (base / soutien / défi)
   const blocDifferenciation =
-    `Prévois systématiquement une différenciation pédagogique quand c’est pertinent :\n` +
-    `- un niveau « base » pour les élèves en difficulté,\n` +
-    `- un niveau « standard » pour le groupe classe,\n` +
-    `- un niveau « défi » pour les élèves à l’aise.\n` +
-    `Indique clairement quels exercices ou activités correspondent à chaque niveau.\n\n`;
+    "Prévois systématiquement une différenciation pédagogique :\n" +
+    "- niveau « base » (élèves en difficulté),\n" +
+    "- niveau « standard » (classe),\n" +
+    "- niveau « défi » (élèves à l’aise).\n" +
+    "Indique clairement quels exercices correspondent à chaque niveau.\n\n";
 
   const blocRappelsEtMeta =
-    `Ta réponse devra :\n` +
-    `- commencer par un rappel très court des prérequis ou de la notion déjà vue en classe,\n` +
-    `- présenter la nouvelle notion ou la tâche en plusieurs étapes numérotées,\n` +
-    `- insérer régulièrement de petites questions de vérification du type « Et toi, saurais-tu… ? » ou « Quel est le point important à retenir ici ? »,\n` +
-    `- se terminer par un court récapitulatif sous forme de liste à puces,\n` +
-    `- proposer une question métacognitive finale du type « Qu’as-tu trouvé le plus facile ? Le plus difficile ? » pour inviter l’élève à réfléchir sur son apprentissage.\n\n`;
+    "Ta réponse devra :\n" +
+    "- commencer par un rappel très court des prérequis,\n" +
+    "- présenter en étapes numérotées,\n" +
+    "- insérer des questions de vérification (« Et toi, saurais-tu… ? »),\n" +
+    "- se terminer par un récapitulatif en puces,\n" +
+    "- finir par une question métacognitive.\n\n";
 
   const blocCriteres =
-    `Ajoute à la fin une courte rubrique intitulée « Pour l’enseignant » qui liste 3 à 5 critères de réussite observables, par exemple :\n` +
-    `- ce que l’élève sait expliquer,\n` +
-    `- ce qu’il sait faire en autonomie,\n` +
-    `- les erreurs typiques à surveiller.\n\n`;
+    "Ajoute à la fin une rubrique « Pour l’enseignant » (3 à 5 critères observables) + erreurs typiques.\n\n";
 
   const blocMiseEnPage =
-    `Si ta réponse correspond à un devoir surveillé, une fiche d’activités ou une évaluation, propose une mise en page structurée facilement transférable dans un document Word :\n` +
-    `- titres clairs (contexte, questions, rappel de la méthode),\n` +
-    `- exercices numérotés,\n` +
-    `- indication des points éventuels ou du temps conseillé,\n` +
-    `- espaces prévus pour que l’élève puisse répondre.\n\n`;
+    "Si c’est une fiche d’activités/évaluation : structure Word (titres, exercices numérotés, temps, points éventuels, espaces réponses).\n\n";
 
-  const prompt =
+  const blocWord = blocWordDesign(form.outputStyle);
+
+  return (
     `Tu es une IA pédagogique destinée à des élèves de ${form.classe || "collège/lycée"} ` +
     `en ${form.matiere || "discipline scolaire"}, dans le système scolaire français.\n\n` +
     blocEduscol +
@@ -464,21 +472,16 @@ function construirePrompt(form: PromptProf): string {
     blocNiveauLangage +
     blocSansLatex +
     blocMethode +
-    `Objectif pédagogique indiqué par le professeur : ` +
-    `${
+    blocWord +
+    `Objectif pédagogique indiqué par le professeur : ${
       form.objectifPedagogique ||
       "(non précisé : propose une version compatible avec le programme officiel)"
     }\n` +
     `Niveau de difficulté souhaité : ${form.niveau}.\n` +
-    `Type de tâche : ` +
-    `${
-      form.type ||
-      "non précisé (choisis une structure adaptée au niveau de l’élève)"
-    }.\n` +
+    `Type de tâche : ${form.type || "non précisé"}.\n` +
     blocTags +
     blocAuteur +
-    `Consigne initiale rédigée par le professeur (à optimiser) :\n` +
-    `"""${form.contenu.trim()}"""\n\n` +
+    `Consigne initiale rédigée par le professeur (à optimiser) :\n"""${form.contenu.trim()}"""\n\n` +
     blocDYS +
     blocStructureSeance +
     blocDifferenciation +
@@ -489,30 +492,19 @@ function construirePrompt(form: PromptProf): string {
     `1) "=== PARTIE 1 : PROMPT OPTIMISÉ POUR L’IA ==="\n` +
     `2) "=== PARTIE 2 : RESSOURCE PRÊTE POUR L’ÉLÈVE ==="\n\n` +
     `Ta mission :\n` +
-    `1. Dans la PARTIE 1, réécris le prompt du professeur de manière plus précise, structurée et complète, en gardant son intention pédagogique. Ne donne pas encore la ressource pour l’élève dans cette partie : produis uniquement le prompt optimisé (prêt à être copié-collé dans une autre IA).\n` +
-    `2. Dans la PARTIE 2, produis la ressource complète pour l’élève en respectant :\n` +
-    `   - le niveau indiqué,\n` +
-    `   - les programmes officiels (Eduscol, BO),\n` +
-    `   - la méthode pédagogique souhaitée,\n` +
-    `   - les principes des neurosciences de l’apprentissage (si activés),\n` +
-    `   - la clarté pédagogique (étapes, exemples, questions de vérification, récapitulatif),\n` +
-    `   - la prise en compte éventuelle des besoins DYS,\n` +
-    `   - la différenciation entre au moins deux niveaux d’exigence.\n` +
-    `3. Ne résous pas un devoir maison spécifique à la place de l’élève, sauf si le professeur demande explicitement une correction commentée.\n`;
-
-  return prompt;
+    `1) Dans la PARTIE 1 : réécris le prompt du professeur (copier-coller dans une autre IA).\n` +
+    `2) Dans la PARTIE 2 : produis la ressource complète pour l’élève (sans correction complète si non demandée).\n`
+  );
 }
 
-
-
 /* ----------------------------------------
-   PAGE PROF
+   PAGE
 ---------------------------------------- */
 
 export default function ProfsPage() {
   const today = new Date().toISOString().slice(0, 10);
 
-  const [form, setForm] = useState<PromptProf>({
+  const INITIAL_FORM: PromptProf = {
     titre: "",
     objectifPedagogique: "",
     classe: "",
@@ -526,7 +518,10 @@ export default function ProfsPage() {
     auteur: "",
     date: today,
     methode: "methode_active",
-  });
+    outputStyle: "word_expert",
+  };
+
+  const [form, setForm] = useState<PromptProf>(INITIAL_FORM);
 
   const [rawTags, setRawTags] = useState("");
   const [promptInterne, setPromptInterne] = useState("");
@@ -539,12 +534,9 @@ export default function ProfsPage() {
 
   function handleChange(
     field: keyof PromptProf,
-    value: string | boolean | Niveau | MethodePedagogique,
+    value: string | boolean | Niveau | MethodePedagogique | OutputStyle,
   ) {
-    setForm((prev) => ({
-      ...prev,
-      [field]: value as any,
-    }));
+    setForm((prev) => ({ ...prev, [field]: value as any }));
   }
 
   function updateTags(value: string) {
@@ -556,7 +548,6 @@ export default function ProfsPage() {
     setForm((prev) => ({ ...prev, tags }));
   }
 
-  // 🔁 Appliquer un preset (carrousel)
   function appliquerPreset(key: ProfsPresetKey) {
     const preset = PROFS_PRESETS[key];
     const v = preset.valeurs;
@@ -568,20 +559,27 @@ export default function ProfsPage() {
         tags: v.tags ?? prev.tags,
       };
 
-      // Exemple : si la classe est 3e, on ajoute un tag DNB
       if (base.classe === "3e" && !base.tags.includes("DNB")) {
         base.tags = [...base.tags, "DNB"];
       }
-
       return base;
     });
 
-    if (v.tags) {
-      setRawTags(v.tags.join(", "));
-    }
+    if (v.tags) setRawTags(v.tags.join(", "));
   }
 
-  // 🔹 Types de ressource disponibles en fonction de la matière + bac/brevet
+  function resetPage() {
+    setForm(INITIAL_FORM);
+    setRawTags("");
+    setPromptInterne("");
+    setAgentOutput("");
+    setAgentError("");
+    setCopiedRessource(false);
+    setCopiedPrompt(false);
+    setShowPromptInterne(false);
+    setAgentLoading(false);
+  }
+
   const typesDisponibles = useMemo(() => {
     const communs = TYPES_COMMUNS;
     const specifiquesMatiere = form.matiere
@@ -589,78 +587,44 @@ export default function ProfsPage() {
       : [];
 
     let speciauxExamens: string[] = [];
-
-    if (form.classe === "3e") {
-      speciauxExamens = TYPES_SPECIAUX_BREVET;
-    } else if (
-      form.classe === "Seconde" ||
-      form.classe === "Première" ||
-      form.classe === "Terminale"
-    ) {
+    if (form.classe === "3e") speciauxExamens = TYPES_SPECIAUX_BREVET;
+    else if (["Seconde", "Première", "Terminale"].includes(form.classe))
       speciauxExamens = TYPES_SPECIAUX_BAC;
-    }
 
     return Array.from(
       new Set([...specifiquesMatiere, ...speciauxExamens, ...communs]),
     );
   }, [form.matiere, form.classe]);
 
-  // Suggestions simples pour améliorer le prompt du prof
   const suggestions = useMemo(() => {
     const s: string[] = [];
-
     if (!form.objectifPedagogique.trim()) {
       s.push(
-        "Précise l’objectif pédagogique : ce que l’élève doit comprendre, savoir faire ou produire.",
+        "Précise l’objectif pédagogique : ce que l’élève doit comprendre / savoir faire / produire.",
       );
     }
-
     if (!form.classe) {
       s.push(
-        "Sélectionne une classe/niveau : cela aide l’IA à ajuster le vocabulaire.",
+        "Sélectionne une classe/niveau : ça améliore fortement la qualité du vocabulaire et des attendus.",
       );
     }
-
     if (!form.matiere) {
-      s.push(
-        "Indique la matière pour que l’IA reste dans le bon champ disciplinaire.",
-      );
+      s.push("Indique la matière : EleveAI restera dans le bon cadre disciplinaire.");
     }
-
     if (!form.type) {
-      s.push(
-        "Choisis un type de ressource (exercices, activité, évaluation…) pour guider la structure de la réponse.",
-      );
+      s.push("Choisis un type de ressource : ça fixe une structure (séance, fiche, évaluation, etc.).");
     }
-
     if (form.contenu.trim().length < 40) {
-      s.push(
-        "Ton texte de consigne est très court : ajoute quelques détails (contexte, exemple, formats attendus…).",
-      );
+      s.push("Ta consigne est courte : ajoute contexte, durée, contraintes, exemple attendu.");
     }
-
-    if (!form.adaptationDYS) {
-      s.push(
-        "Si tu as des élèves DYS, pense à cocher l’option adaptation DYS pour obtenir une réponse plus accessible.",
-      );
-    }
-
-    if (!form.neuro) {
-      s.push(
-        "Tu peux activer les principes des neurosciences pour structurer davantage la réponse (rappels, étapes, questions de vérification, récapitulatif).",
-      );
-    }
-
     if (s.length === 0) {
       s.push(
-        "Ton paramétrage est déjà bien structuré. Tu peux encore l’améliorer en donnant un exemple concret ou en précisant la durée de la tâche.",
+        "Tout est bon. Pour un rendu Word encore meilleur, précise : durée, matériel, contraintes, et un exemple de production attendue.",
       );
     }
-
     return s;
   }, [form]);
 
-  // 🔵 Bouton principal : créer la ressource pédagogique
   async function creerRessource() {
     if (!form.contenu.trim()) {
       alert("Merci de remplir le texte du prompt (version professeur).");
@@ -684,18 +648,11 @@ export default function ProfsPage() {
       });
 
       const data = await res.json().catch(() => ({}));
-
-      if (!res.ok) {
-        throw new Error(data.error || "Erreur lors de l'appel à l'agent IA.");
-      }
-
+      if (!res.ok) throw new Error(data.error || "Erreur lors de l'appel à l'agent IA.");
       setAgentOutput(data.output || "");
     } catch (err: any) {
       console.error(err);
-      setAgentError(
-        err?.message ||
-          "Erreur inconnue lors de l'appel à EleveAI. Vérifie que le serveur tourne.",
-      );
+      setAgentError(err?.message || "Erreur inconnue (vérifie le serveur / API).");
     } finally {
       setAgentLoading(false);
     }
@@ -708,9 +665,7 @@ export default function ProfsPage() {
       setCopiedRessource(true);
       setTimeout(() => setCopiedRessource(false), 2000);
     } catch {
-      alert(
-        "Impossible de copier automatiquement. Sélectionne le texte et copie-le à la main (Ctrl+C).",
-      );
+      alert("Impossible de copier automatiquement. Sélectionne le texte et copie-le (Ctrl+C).");
     }
   }
 
@@ -721,55 +676,51 @@ export default function ProfsPage() {
       setCopiedPrompt(true);
       setTimeout(() => setCopiedPrompt(false), 2000);
     } catch {
-      alert(
-        "Impossible de copier automatiquement. Sélectionne le texte et copie-le à la main (Ctrl+C).",
-      );
+      alert("Impossible de copier automatiquement. Sélectionne le texte et copie-le (Ctrl+C).");
     }
   }
-
-  /* ----------------------------------------
-     RENDER
-  ---------------------------------------- */
 
   return (
     <main className="min-h-screen bg-gradient-to-b from-sky-50 via-white to-slate-50 text-gray-900">
       <div className="max-w-6xl mx-auto px-4 py-10 space-y-8">
-        {/* Titre / bandeau haut */}
         <header className="space-y-2">
           <p className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-100 text-xs font-semibold text-[#0047B6]">
             <span>🧑‍🏫</span>
             <span>Espace professeurs – Générer une ressource pédagogique</span>
           </p>
+
           <h1 className="text-3xl sm:text-4xl font-extrabold text-[#0047B6]">
-            Prenez votre temps pour générer votre prompt pour une meilleure efficacité
+            Génère une ressource prête Word (et jolie)
           </h1>
+
           <p className="text-sm sm:text-base text-gray-700 max-w-2xl">
-            Remplis les informations ci-dessous : EleveAI générera pour toi une
-            ressource pédagogique prête à être copiée dans Word, Pronote ou ton ENT.
+            Remplis le formulaire : EleveAI te renvoie une ressource structurée, copiable
+            dans Word/ENT/Pronote. Tu peux choisir un rendu « Word Expert » avec icônes,
+            encadrés et bannières.
           </p>
+
           <p className="inline-flex items-center gap-2 mt-2 px-3 py-1 rounded-full bg-emerald-50 text-[11px] font-semibold text-emerald-700 border border-emerald-100">
             <span>🧠</span>
-            <span>Cette page applique Eduscol + neurosciences de l’apprentissage</span>
+            <span>Eduscol + neurosciences</span>
             <input
               type="checkbox"
               checked={form.neuro}
               onChange={(e) => handleChange("neuro", e.target.checked)}
               className="rounded border-gray-400"
             />
-            <span>Activer les principes des neurosciences</span>
+            <span>Activer</span>
           </p>
         </header>
 
-        {/* Carrousel Netflix de presets */}
         <PresetCarousel
           title="Choisir un modèle rapide (facultatif)"
-          subtitle="Clique sur un modèle proche de ta séance : le formulaire sera pré-rempli, tu pourras ensuite tout adapter."
+          subtitle="Clique sur un modèle : le formulaire se pré-remplit."
           items={PROFS_PRESET_ITEMS}
           onSelect={(id) => appliquerPreset(id as ProfsPresetKey)}
         />
 
         <div className="grid gap-6 lg:grid-cols-2">
-          {/* Colonne gauche : formulaire */}
+          {/* FORM */}
           <section className="bg-white/95 border border-slate-200 rounded-2xl shadow-sm p-5 sm:p-6 space-y-4">
             <h2 className="text-lg font-bold text-[#0047B6] flex items-center gap-2">
               1️⃣ Paramètres pédagogiques
@@ -778,9 +729,7 @@ export default function ProfsPage() {
             {/* Classe / matière / niveau */}
             <div className="grid sm:grid-cols-3 gap-3">
               <div className="space-y-1">
-                <label className="text-xs font-semibold text-gray-600">
-                  Classe / niveau
-                </label>
+                <label className="text-xs font-semibold text-gray-600">Classe / niveau</label>
                 <select
                   value={form.classe}
                   onChange={(e) => handleChange("classe", e.target.value)}
@@ -794,10 +743,9 @@ export default function ProfsPage() {
                   ))}
                 </select>
               </div>
+
               <div className="space-y-1">
-                <label className="text-xs font-semibold text-gray-600">
-                  Matière
-                </label>
+                <label className="text-xs font-semibold text-gray-600">Matière</label>
                 <select
                   value={form.matiere}
                   onChange={(e) => handleChange("matiere", e.target.value)}
@@ -811,15 +759,12 @@ export default function ProfsPage() {
                   ))}
                 </select>
               </div>
+
               <div className="space-y-1">
-                <label className="text-xs font-semibold text-gray-600">
-                  Niveau de difficulté
-                </label>
+                <label className="text-xs font-semibold text-gray-600">Niveau de difficulté</label>
                 <select
                   value={form.niveau}
-                  onChange={(e) =>
-                    handleChange("niveau", e.target.value as Niveau)
-                  }
+                  onChange={(e) => handleChange("niveau", e.target.value as Niveau)}
                   className="w-full border rounded-lg px-3 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-sky-300"
                 >
                   <option value="basique">Basique (remédiation)</option>
@@ -829,7 +774,57 @@ export default function ProfsPage() {
               </div>
             </div>
 
-            {/* Type de ressource */}
+            {/* Style Word */}
+            <div className="space-y-2">
+              <label className="text-xs font-semibold text-gray-600">Style de rendu (Word)</label>
+              <div className="grid sm:grid-cols-3 gap-2">
+                {[
+                  {
+                    id: "simple",
+                    title: "Simple",
+                    desc: "Texte propre, sans contraintes graphiques.",
+                    badge: "Rapide",
+                  },
+                  {
+                    id: "word",
+                    title: "Word propre",
+                    desc: "Titres + icônes + aération.",
+                    badge: "Recommandé",
+                  },
+                  {
+                    id: "word_expert",
+                    title: "Word Expert",
+                    desc: "Bannières + encadrés + zones réponse + design.",
+                    badge: "🔥 Best",
+                  },
+                ].map((o) => (
+                  <button
+                    key={o.id}
+                    type="button"
+                    onClick={() => handleChange("outputStyle", o.id as OutputStyle)}
+                    className={`text-left border rounded-xl px-3 py-2 text-xs transition ${
+                      form.outputStyle === o.id
+                        ? "border-[#0047B6] bg-sky-50 shadow-sm"
+                        : "border-slate-200 bg-white hover:border-sky-200"
+                    }`}
+                  >
+                    <div className="flex items-center justify-between gap-2">
+                      <span className="font-semibold text-slate-800">{o.title}</span>
+                      <span className="text-[10px] px-2 py-0.5 rounded-full bg-slate-100 text-slate-700">
+                        {o.badge}
+                      </span>
+                    </div>
+                    <p className="mt-1 text-[11px] text-slate-600">{o.desc}</p>
+                  </button>
+                ))}
+              </div>
+              <p className="text-[11px] text-gray-500">
+                Le mode <b>Word Expert</b> force EleveAI à produire un rendu “document” très lisible
+                (icônes, encadrés, bannières).
+              </p>
+            </div>
+
+            {/* Type */}
             <div className="space-y-1">
               <label className="text-xs font-semibold text-gray-600">
                 Type de ressource à générer
@@ -847,23 +842,19 @@ export default function ProfsPage() {
                 ))}
               </select>
               <p className="text-[11px] text-gray-500 mt-1">
-                Les propositions s’adaptent à la matière choisie et, en 3e, à la
-                préparation du brevet ; en Seconde, Première et Terminale, à la
-                préparation du bac.
+                S’adapte à la matière + brevet (3e) + bac (lycée).
               </p>
             </div>
 
-            {/* Méthode pédagogique */}
+            {/* Méthode */}
             <div className="space-y-2">
               <div className="flex items-center justify-between gap-2">
-                <label className="text-xs font-semibold text-gray-600">
-                  Méthode pédagogique souhaitée
-                </label>
+                <label className="text-xs font-semibold text-gray-600">Méthode pédagogique</label>
                 <Link
                   href="/blog"
                   className="text-[11px] text-[#0047B6] underline underline-offset-2 hover:text-[#003894]"
                 >
-                  En savoir plus sur les différentes méthodes (article de blog)
+                  En savoir plus
                 </Link>
               </div>
 
@@ -885,41 +876,28 @@ export default function ProfsPage() {
                           form.methode === m.id ? "bg-[#0047B6]" : "bg-slate-300"
                         }`}
                       />
-                      <span className="font-semibold text-slate-800">
-                        {m.label}
-                      </span>
+                      <span className="font-semibold text-slate-800">{m.label}</span>
                     </div>
-                    <p className="text-[11px] text-slate-600">
-                      {m.description}
-                    </p>
+                    <p className="text-[11px] text-slate-600">{m.description}</p>
                   </button>
                 ))}
               </div>
-
-              <p className="text-[11px] text-gray-500">
-                Choisis la méthode correspondant le mieux à ta séance : EleveAI
-                adaptera la structure de la ressource (étapes, questions, exercices…).
-              </p>
             </div>
 
             {/* Titre + auteur */}
             <div className="grid sm:grid-cols-[2fr,1fr] gap-3">
               <div className="space-y-1">
-                <label className="text-xs font-semibold text-gray-600">
-                  Titre de la ressource (pour toi)
-                </label>
+                <label className="text-xs font-semibold text-gray-600">Titre (pour toi)</label>
                 <input
                   type="text"
                   value={form.titre}
                   onChange={(e) => handleChange("titre", e.target.value)}
-                  placeholder="Ex : Séance sur la notion de justice en philosophie"
+                  placeholder="Ex : Problèmes ouverts sur les fractions (6e)"
                   className="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-sky-300"
                 />
               </div>
               <div className="space-y-1">
-                <label className="text-xs font-semibold text-gray-600">
-                  Auteur (facultatif)
-                </label>
+                <label className="text-xs font-semibold text-gray-600">Auteur (facultatif)</label>
                 <input
                   type="text"
                   value={form.auteur}
@@ -930,17 +908,13 @@ export default function ProfsPage() {
               </div>
             </div>
 
-            {/* Objectif pédagogique */}
+            {/* Objectif */}
             <div className="space-y-1">
-              <label className="text-xs font-semibold text-gray-600">
-                Objectif pédagogique
-              </label>
+              <label className="text-xs font-semibold text-gray-600">Objectif pédagogique</label>
               <textarea
                 value={form.objectifPedagogique}
-                onChange={(e) =>
-                  handleChange("objectifPedagogique", e.target.value)
-                }
-                placeholder="Ex : amener l’élève à problématiser un sujet philosophique simple."
+                onChange={(e) => handleChange("objectifPedagogique", e.target.value)}
+                placeholder="Ex : faire comprendre le sens des fractions et l’intérêt du travail coopératif."
                 className="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-sky-300 min-h-[70px]"
               />
             </div>
@@ -954,38 +928,34 @@ export default function ProfsPage() {
                 type="text"
                 value={rawTags}
                 onChange={(e) => updateTags(e.target.value)}
-                placeholder="Ex : justice, liberté, dissertation"
+                placeholder="Ex : #fraction, #collaboration, #DYS"
                 className="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-sky-300"
               />
               {form.tags.length > 0 && (
                 <p className="text-[11px] text-gray-500">
-                  Mots-clés pris en compte :{" "}
-                  <span className="font-semibold">
-                    {form.tags.join(", ")}
-                  </span>
+                  Pris en compte :{" "}
+                  <span className="font-semibold">{form.tags.join(", ")}</span>
                 </p>
               )}
             </div>
 
-            {/* Adaptation DYS + date */}
+            {/* DYS + date */}
             <div className="flex items-center justify-between gap-3">
               <label className="inline-flex items-center gap-2 text-xs text-gray-700">
                 <input
                   type="checkbox"
                   checked={form.adaptationDYS}
-                  onChange={(e) =>
-                    handleChange("adaptationDYS", e.target.checked)
-                  }
+                  onChange={(e) => handleChange("adaptationDYS", e.target.checked)}
                   className="rounded border-gray-400"
                 />
-                <span>Adapter la ressource pour des élèves DYS</span>
+                <span>Adapter pour des élèves DYS</span>
               </label>
               <div className="text-[11px] text-gray-500">
                 Date : <span className="font-mono">{form.date}</span>
               </div>
             </div>
 
-            {/* Contenu du prompt */}
+            {/* Contenu */}
             <div className="space-y-1 pt-2">
               <label className="text-xs font-semibold text-gray-600">
                 Texte de ta demande (version professeur)
@@ -993,13 +963,26 @@ export default function ProfsPage() {
               <textarea
                 value={form.contenu}
                 onChange={(e) => handleChange("contenu", e.target.value)}
-                placeholder="Ex : Génère une fiche d’exercices guidés sur « Faut-il toujours dire la vérité ? » avec corrigé, pour une classe de Première."
+                placeholder="Ex : Génère une activité clé en main sur les fractions en pédagogie par projet, avec différenciation et rendu Word Expert."
                 className="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-sky-300 min-h-[120px]"
               />
             </div>
 
-            {/* Bouton principal */}
-            <div className="pt-3 flex justify-end">
+            {/* CTA + RESET */}
+            <div className="pt-3 flex items-center justify-between gap-2">
+              <button
+                type="button"
+                onClick={resetPage}
+                disabled={agentLoading}
+                className={`inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold border ${
+                  agentLoading
+                    ? "bg-slate-100 text-slate-400 border-slate-200 cursor-not-allowed"
+                    : "bg-white text-slate-700 border-slate-300 hover:bg-slate-50"
+                }`}
+              >
+                🔄 Reset
+              </button>
+
               <button
                 onClick={creerRessource}
                 disabled={agentLoading}
@@ -1009,14 +992,12 @@ export default function ProfsPage() {
                     : "bg-[#0047B6] text-white hover:bg-[#003894]"
                 }`}
               >
-                {agentLoading
-                  ? "⏳ EleveAI prépare ta ressource..."
-                  : "✨ Créer la ressource pédagogique avec EleveAI"}
+                {agentLoading ? "⏳ Génération..." : "✨ Créer la ressource EleveAI"}
               </button>
             </div>
           </section>
 
-          {/* Colonne droite : suggestions + résultat */}
+          {/* RIGHT */}
           <section className="space-y-4">
             {/* Suggestions */}
             <div className="bg-white/95 border border-amber-200 rounded-2xl shadow-sm p-5 sm:p-6 space-y-3">
@@ -1031,40 +1012,40 @@ export default function ProfsPage() {
                   </li>
                 ))}
               </ul>
-              <p className="text-[11px] text-gray-500">
-                Plus ta demande est précise (niveau, type de tâche, méthode pédagogique, exemples…),
-                plus la ressource générée sera directement exploitable en classe.
-              </p>
             </div>
 
-            {/* Ressource générée */}
+            {/* Output */}
             <div className="bg-white/95 border border-slate-200 rounded-2xl shadow-sm p-5 sm:p-6 space-y-4">
               <div className="flex items-center justify-between gap-2">
                 <h2 className="text-lg font-bold text-[#0047B6]">
-                  3️⃣ Ressource générée par EleveAI
+                  3️⃣ Ressource générée (copiable Word)
                 </h2>
-                <button
-                  type="button"
-                  onClick={copierRessource}
-                  disabled={!agentOutput}
-                  className={`inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-[11px] font-semibold ${
-                    agentOutput
-                      ? "bg-slate-800 text-white hover:bg-slate-900"
-                      : "bg-slate-200 text-slate-500 cursor-not-allowed"
-                  }`}
-                >
-                  {copiedRessource ? "✅ Texte copié" : "📋 Copier pour Word / ENT"}
-                </button>
+
+                <div className="flex items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={resetPage}
+                    className="px-3 py-1.5 rounded-lg text-[11px] font-semibold bg-white border border-slate-300 hover:bg-slate-50"
+                  >
+                    🔄 Réinitialiser
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={copierRessource}
+                    disabled={!agentOutput}
+                    className={`inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-[11px] font-semibold ${
+                      agentOutput
+                        ? "bg-slate-800 text-white hover:bg-slate-900"
+                        : "bg-slate-200 text-slate-500 cursor-not-allowed"
+                    }`}
+                  >
+                    {copiedRessource ? "✅ Copié" : "📋 Copier pour Word / ENT"}
+                  </button>
+                </div>
               </div>
 
-              {agentError && (
-                <p className="text-xs text-red-600">⚠️ {agentError}</p>
-              )}
-
-              <p className="text-[11px] text-gray-500">
-                Tu peux copier cette ressource et la coller telle quelle dans Word,
-                Pronote, ton ENT ou une autre IA (EleveAI tchat, etc.).
-              </p>
+              {agentError && <p className="text-xs text-red-600">⚠️ {agentError}</p>}
 
               <div className="eleveai-math border rounded p-3 min-h-[180px] bg-slate-50 text-sm whitespace-pre-wrap">
                 {agentLoading ? (
@@ -1072,14 +1053,14 @@ export default function ProfsPage() {
                 ) : agentOutput ? (
                   <MarkdownMath>{agentOutput}</MarkdownMath>
                 ) : (
-                  "La ressource générée par EleveAI apparaîtra ici après avoir cliqué sur « Créer la ressource pédagogique »."
+                  "La ressource apparaîtra ici après génération."
                 )}
               </div>
 
-              {/* Boutons IA externes */}
+              {/* Links */}
               <div className="space-y-2 pt-3">
                 <p className="text-[11px] text-gray-600">
-                  Tu peux aussi réutiliser le prompt interne dans l’IA de ton choix :
+                  Réutiliser le prompt interne dans une autre IA :
                 </p>
                 <div className="flex flex-wrap gap-2 text-[11px] sm:text-xs">
                   <Link
@@ -1090,7 +1071,7 @@ export default function ProfsPage() {
                     }
                     className="px-3 py-2 rounded-lg bg-emerald-600 text-white font-semibold hover:bg-emerald-700"
                   >
-                    🚀 Utiliser avec le tchat EleveAI
+                    🚀 Tchat EleveAI
                   </Link>
                   <a
                     href="https://chatgpt.com"
@@ -1098,7 +1079,7 @@ export default function ProfsPage() {
                     rel="noreferrer"
                     className="px-3 py-2 rounded-lg bg-slate-800 text-white font-semibold hover:bg-slate-900"
                   >
-                    🟦 Ouvrir ChatGPT
+                    🟦 ChatGPT
                   </a>
                   <a
                     href="https://gemini.google.com"
@@ -1106,7 +1087,7 @@ export default function ProfsPage() {
                     rel="noreferrer"
                     className="px-3 py-2 rounded-lg bg-[#0F9D58] text-white font-semibold hover:bg-[#0c7b45]"
                   >
-                    🟩 Ouvrir Gemini
+                    🟩 Gemini
                   </a>
                   <a
                     href="https://claude.ai"
@@ -1114,7 +1095,7 @@ export default function ProfsPage() {
                     rel="noreferrer"
                     className="px-3 py-2 rounded-lg bg-[#4B3FFF] text-white font-semibold hover:bg-[#372dcc]"
                   >
-                    🟪 Ouvrir Claude
+                    🟪 Claude
                   </a>
                   <a
                     href="https://chat.mistral.ai"
@@ -1122,30 +1103,26 @@ export default function ProfsPage() {
                     rel="noreferrer"
                     className="px-3 py-2 rounded-lg bg-[#FF7F11] text-white font-semibold hover:bg-[#e46f0d]"
                   >
-                    🟧 Ouvrir Mistral
+                    🟧 Mistral
                   </a>
                 </div>
               </div>
             </div>
 
-            {/* Prompt interne (optionnel) */}
+            {/* Prompt interne */}
             <div className="bg-white/80 border border-dashed border-slate-300 rounded-2xl shadow-sm p-4 space-y-3 text-xs">
               <button
                 type="button"
                 onClick={() => setShowPromptInterne((v) => !v)}
                 className="text-[11px] font-semibold text-slate-600 underline underline-offset-2"
               >
-                {showPromptInterne
-                  ? "Masquer le prompt interne (pour usage avancé / autres IA)"
-                  : "Afficher le prompt interne utilisé par EleveAI (optionnel, pour les curieux)"}
+                {showPromptInterne ? "Masquer le prompt interne" : "Afficher le prompt interne (avancé)"}
               </button>
 
               {showPromptInterne && (
                 <div className="space-y-2">
                   <div className="flex items-center justify-between gap-2">
-                    <span className="font-semibold text-slate-700">
-                      Prompt interne actuellement utilisé
-                    </span>
+                    <span className="font-semibold text-slate-700">Prompt interne (EleveAI)</span>
                     <button
                       type="button"
                       onClick={copierPromptInterne}
@@ -1156,14 +1133,14 @@ export default function ProfsPage() {
                           : "bg-slate-200 text-slate-500 cursor-not-allowed"
                       }`}
                     >
-                      {copiedPrompt ? "✅ Copié" : "📋 Copier ce prompt"}
+                      {copiedPrompt ? "✅ Copié" : "📋 Copier"}
                     </button>
                   </div>
                   <textarea
                     readOnly
                     value={promptInterne}
-                    className="w-full border rounded-lg px-3 py-2 text-[11px] font-mono bg-slate-50 min-h-[140px]"
-                    placeholder="Le prompt interne apparaîtra ici après la première création de ressource."
+                    className="w-full border rounded-lg px-3 py-2 text-[11px] font-mono bg-slate-50 min-h-[160px]"
+                    placeholder="Le prompt interne apparaîtra après génération."
                   />
                 </div>
               )}
@@ -1174,3 +1151,4 @@ export default function ProfsPage() {
     </main>
   );
 }
+
