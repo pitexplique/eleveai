@@ -1,4 +1,5 @@
-// app/espace-profs/page.tsx (ou app/profs/page.tsx)
+// app/espace-profs/page.tsx
+// app/espace-profs/page.tsx
 
 "use client";
 
@@ -280,7 +281,7 @@ function construirePrompt(form: PromptProf): string {
         return (
           "Méthode pédagogique souhaitée : pédagogie coopérative.\n" +
           "- Organiser la classe en groupes avec des rôles (lecteur, rapporteur, gestionnaire du temps, etc.),\n" +
-          "- prévoir une production commune par groupe,\n" +
+          "- prévoir une production commune par groupe,\n          " +
           "- intégrer des moments d’explication entre pairs.\n\n"
         );
       case "ludique":
@@ -314,7 +315,7 @@ function construirePrompt(form: PromptProf): string {
       `- mise en page aérée avec listes,\n` +
       `- éviter les doubles négations,\n` +
       `- expliquer le vocabulaire difficile,\n` +
-      `- rappeler le sens des symboles mathématiques.\n\n`
+      `- rappeler le sens des symboles mathématiques si nécessaire.\n\n`
     : "";
 
   const blocAuteur = form.auteur
@@ -338,10 +339,101 @@ function construirePrompt(form: PromptProf): string {
       `- inviter l’élève à reformuler avec ses propres mots.\n\n`
     : "";
 
-  // Consigne stricte actuelle : pas de LaTeX (agent-prof côté API)
-  const blocSansLatex =
-    `Pour les écritures mathématiques, n'utilise pas de LaTeX (pas de \\frac, \\sqrt, etc.). ` +
-    `Écris les fractions sous la forme a/b et les puissances sous la forme x^2 ou "x au carré".\n\n`;
+  // 🔹 Adapter le langage au niveau + au cycle
+  const blocNiveauLangage = (() => {
+    const niveau = form.niveau || "standard";
+    const classe = form.classe;
+    const isCollege =
+      classe === "6e" || classe === "5e" || classe === "4e" || classe === "3e";
+
+    if (isCollege) {
+      if (niveau === "basique") {
+        return (
+          "Adapte ton langage pour un élève de collège en difficulté :\n" +
+          "- phrases très courtes (une idée par phrase),\n" +
+          "- vocabulaire simple et du quotidien,\n" +
+          "- beaucoup d’exemples concrets proches de la vie des élèves,\n" +
+          "- reformule les idées importantes au moins deux fois.\n\n"
+        );
+      }
+      if (niveau === "expert") {
+        return (
+          "Adapte ton langage pour un élève de collège à l’aise :\n" +
+          "- vocabulaire simple mais précis,\n" +
+          "- propose quelques défis ou questions bonus,\n" +
+          "- valorise la prise d’initiative et la recherche autonome.\n\n"
+        );
+      }
+      return (
+        "Adapte ton langage à un élève de collège :\n" +
+        "- phrases courtes et claires,\n" +
+        "- explique les mots difficiles lorsqu’ils apparaissent,\n" +
+        "- alterne explications et petites questions de vérification.\n\n"
+      );
+    }
+
+    // Lycée
+    if (niveau === "basique") {
+      return (
+        "Adapte ton langage pour un élève de lycée en difficulté :\n" +
+        "- phrases courtes avec peu de subordonnées,\n" +
+        "- explicite les étapes de raisonnement,\n" +
+        "- fais ressortir les mots du vocabulaire disciplinaire à retenir.\n\n"
+      );
+    }
+    if (niveau === "expert") {
+      return (
+        "Adapte ton langage pour un élève de lycée à l’aise :\n" +
+        "- tu peux utiliser un vocabulaire disciplinaire précis,\n" +
+        "- propose des prolongements ou questions d’approfondissement,\n" +
+        "- souligne les exigences de méthode attendues au bac.\n\n"
+      );
+    }
+    return (
+      "Adapte ton langage à un élève de lycée :\n" +
+      "- équilibre entre rigueur disciplinaire et clarté,\n" +
+      "- explique les notions clés sans surcharger en détails techniques,\n" +
+      "- garde une progression logique et explicite.\n\n"
+    );
+  })();
+
+  // 🔹 LaTeX seulement si matière scientifique
+  const matiereScientifique = [
+    "Mathématiques",
+    "Physique-Chimie",
+    "SVT",
+    "Numérique/NSI",
+  ].includes(form.matiere);
+
+  const blocSansLatex = matiereScientifique
+    ? `Pour les écritures mathématiques, n'utilise pas de LaTeX (pas de \\frac, \\sqrt, etc.). ` +
+      `Écris les fractions sous la forme a/b et les puissances sous la forme x^2 ou "x au carré".\n\n`
+    : "";
+
+  // 🔹 Structure précise de séance (utile pour ton cas « préparation de séance »)
+  const blocStructureSeance =
+    form.type === "Préparation d’une séance" ||
+    form.type === "Préparation de séquence"
+      ? `Lorsque tu construis une séance, présente-la avec une structure claire et chronométrée :\n` +
+        `- durée totale approximative (par exemple : 55 minutes),\n` +
+        `- phase 1 : accroche / mise en situation (5–10 min),\n` +
+        `- phase 2 : manipulation ou recherche guidée (15–20 min),\n` +
+        `- phase 3 : mise en commun / institutionnalisation (10–15 min),\n` +
+        `- phase 4 : entraînement ou jeu de consolidation (10–15 min),\n` +
+        `- phase 5 : bilan / trace écrite / retour métacognitif (5 min).\n` +
+        `Pour chaque phase, indique :\n` +
+        `- ce que fait l’enseignant,\n` +
+        `- ce que font les élèves,\n` +
+        `- le matériel nécessaire (manipulables, fiches, vidéoprojecteur, etc.).\n\n`
+      : "";
+
+  // 🔹 Différenciation pédagogique (base / soutien / défi)
+  const blocDifferenciation =
+    `Prévois systématiquement une différenciation pédagogique quand c’est pertinent :\n` +
+    `- un niveau « base » pour les élèves en difficulté,\n` +
+    `- un niveau « standard » pour le groupe classe,\n` +
+    `- un niveau « défi » pour les élèves à l’aise.\n` +
+    `Indique clairement quels exercices ou activités correspondent à chaque niveau.\n\n`;
 
   const blocRappelsEtMeta =
     `Ta réponse devra :\n` +
@@ -369,14 +461,17 @@ function construirePrompt(form: PromptProf): string {
     `en ${form.matiere || "discipline scolaire"}, dans le système scolaire français.\n\n` +
     blocEduscol +
     blocNeuro +
+    blocNiveauLangage +
     blocSansLatex +
     blocMethode +
-    `Objectif pédagogique indiqué par le professeur : ${
+    `Objectif pédagogique indiqué par le professeur : ` +
+    `${
       form.objectifPedagogique ||
       "(non précisé : propose une version compatible avec le programme officiel)"
     }\n` +
     `Niveau de difficulté souhaité : ${form.niveau}.\n` +
-    `Type de tâche : ${
+    `Type de tâche : ` +
+    `${
       form.type ||
       "non précisé (choisis une structure adaptée au niveau de l’élève)"
     }.\n` +
@@ -385,22 +480,30 @@ function construirePrompt(form: PromptProf): string {
     `Consigne initiale rédigée par le professeur (à optimiser) :\n` +
     `"""${form.contenu.trim()}"""\n\n` +
     blocDYS +
+    blocStructureSeance +
+    blocDifferenciation +
     blocRappelsEtMeta +
     blocCriteres +
     blocMiseEnPage +
+    `Structure ta réponse en DEUX GRANDES PARTIES clairement séparées :\n` +
+    `1) "=== PARTIE 1 : PROMPT OPTIMISÉ POUR L’IA ==="\n` +
+    `2) "=== PARTIE 2 : RESSOURCE PRÊTE POUR L’ÉLÈVE ==="\n\n` +
     `Ta mission :\n` +
-    `1. Si la demande du professeur est floue ou incomplète, commence par proposer une version plus précise et mieux structurée du prompt, en gardant son intention pédagogique.\n` +
-    `2. Ensuite, produis la réponse pour l’élève en respectant :\n` +
+    `1. Dans la PARTIE 1, réécris le prompt du professeur de manière plus précise, structurée et complète, en gardant son intention pédagogique. Ne donne pas encore la ressource pour l’élève dans cette partie : produis uniquement le prompt optimisé (prêt à être copié-collé dans une autre IA).\n` +
+    `2. Dans la PARTIE 2, produis la ressource complète pour l’élève en respectant :\n` +
     `   - le niveau indiqué,\n` +
     `   - les programmes officiels (Eduscol, BO),\n` +
-    `   - la méthode pédagogique souhaitée (voir les consignes ci-dessus),\n` +
+    `   - la méthode pédagogique souhaitée,\n` +
     `   - les principes des neurosciences de l’apprentissage (si activés),\n` +
     `   - la clarté pédagogique (étapes, exemples, questions de vérification, récapitulatif),\n` +
-    `   - la prise en compte éventuelle des besoins DYS.\n` +
+    `   - la prise en compte éventuelle des besoins DYS,\n` +
+    `   - la différenciation entre au moins deux niveaux d’exigence.\n` +
     `3. Ne résous pas un devoir maison spécifique à la place de l’élève, sauf si le professeur demande explicitement une correction commentée.\n`;
 
   return prompt;
 }
+
+
 
 /* ----------------------------------------
    PAGE PROF
@@ -545,12 +648,6 @@ export default function ProfsPage() {
     if (!form.neuro) {
       s.push(
         "Tu peux activer les principes des neurosciences pour structurer davantage la réponse (rappels, étapes, questions de vérification, récapitulatif).",
-      );
-    }
-
-    if (!form.methode || form.methode === "") {
-      s.push(
-        "Choisis une méthode pédagogique (active, explicite, inductive…) pour que la structure de la séance soit cohérente.",
       );
     }
 
@@ -763,7 +860,7 @@ export default function ProfsPage() {
                   Méthode pédagogique souhaitée
                 </label>
                 <Link
-                  href="/blog/methodes-pedagogiques"
+                  href="/blog"
                   className="text-[11px] text-[#0047B6] underline underline-offset-2 hover:text-[#003894]"
                 >
                   En savoir plus sur les différentes méthodes (article de blog)

@@ -587,6 +587,224 @@ Il est simplement :
 C’est un pas concret vers une **école plus inclusive** pour toutes les familles.
 `,
   },
+
+  // 🔹 NOUVEL ARTICLE 3 : Choisir une méthode pédagogique avec EleveAI
+  {
+    slug: "choisir-methode-pedagogique-avec-eleveai",
+    title: "Choisir une méthode pédagogique avec EleveAI",
+    description:
+      "Méthode active, explicite, par projet, inductive… Comment choisir la bonne approche dans EleveAI selon ta séance et tes élèves ?",
+    date: "2025-11-29",
+    tags: ["profs", "pédagogie", "méthodes", "classe", "EleveAI"],
+    audience: "profs",
+    niveau: "Collège / Lycée",
+    matiere: "Pédagogie générale",
+    resumeIA: [
+      "Public : enseignants du secondaire (collège / lycée).",
+      "Objectif : aider à choisir une méthode pédagogique (active, explicite, inductive, par projet…).",
+      "Lien avec EleveAI : la méthode choisie dans l’espace prof oriente la structure de la ressource générée.",
+      "Principe : présenter brièvement chaque méthode, ses forces et quand l’utiliser.",
+    ],
+    content: `
+# Choisir une méthode pédagogique avec EleveAI
+
+## Résumé pour les IA
+
+- Article destiné aux **enseignants du secondaire** (collège / lycée).  
+- Objectif : expliquer les principales méthodes pédagogiques proposées dans l’espace profs.  
+- L’IA doit être capable de résumer chaque méthode et de dire quand elle est pertinente.  
+- Lien direct avec l’interface EleveAI : le choix de la méthode par le professeur doit guider la structure de la ressource générée.  
+
+---
+
+Dans l’espace profs d’EleveAI, tu peux choisir une **méthode pédagogique** :
+
+- méthode active,  
+- enseignement explicite,  
+- méthode inductive ou déductive,  
+- pédagogie par projet,  
+- apprentissage par problèmes,  
+- pédagogie coopérative,  
+- approche ludique,  
+- cours magistral guidé.
+
+L’objectif n’est pas de “cocher la bonne case une fois pour toutes”, mais de choisir ce qui est **adapté à ta séance**, à ton groupe, à ta contrainte de temps.
+
+---
+
+## 1. Méthode active : faire agir l’élève à chaque étape
+
+L’élève ne se contente pas d’écouter : il manipule, cherche, répond à des questions, construit la notion en plusieurs étapes.
+
+**Idéal pour :**
+
+- les chapitres où le sens et la compréhension sont prioritaires,  
+- des classes qui ont besoin de bouger, de faire, de tester,  
+- des séances d’introduction ou de remobilisation.
+
+**Dans EleveAI :**  
+La ressource alternera explications courtes, mini-tâches, questions de vérification, recap et métacognition.
+
+---
+
+## 2. Enseignement explicite (I do / We do / You do)
+
+Modèle très structuré :
+
+- *I do* : tu montres la démarche sur un exemple.  
+- *We do* : vous faites ensemble, pas à pas.  
+- *You do* : les élèves s’entraînent seuls avec correction commentée.
+
+**Idéal pour :**
+
+- des notions techniques (démonstration type, méthode de calcul, raisonnement standard),  
+- des élèves fragiles ou anxieux qui ont besoin d’un cadre rassurant,  
+- la remédiation ou la préparation aux examens.
+
+**Dans EleveAI :**  
+La ressource sera clairement découpée en ces trois temps, avec des consignes très guidées.
+
+---
+
+## 3. Méthode inductive : partir du concret pour aller vers la règle
+
+On commence par un exemple, une expérience, un texte, un graphique.  
+Les élèves observent, comparent, formulent, puis on fait émerger la règle.
+
+**Idéal pour :**
+
+- introduire une nouvelle notion,  
+- donner du sens à une règle abstraite,  
+- travailler l’argumentation.
+
+**Dans EleveAI :**  
+La ressource proposera d’abord des cas concrets, puis une phase “Ce que l’on observe”, et enfin la mise en forme de la règle.
+
+---
+
+## 4. Méthode déductive : de la règle aux exercices
+
+On donne d’abord la définition, la propriété ou la méthode, puis des exercices d’application gradués.
+
+**Idéal pour :**
+
+- des chapitres où le temps est compté,  
+- la consolidation avant un examen,  
+- des notions très formelles (dérivation, règles d’accord, lois physiques).  
+
+**Dans EleveAI :**  
+La ressource suivra le schéma “rappel de cours → exemples → exercices gradués → récapitulatif”.
+
+---
+
+## 5. Pédagogie par projet : produire quelque chose qui a du sens
+
+Les élèves réalisent une production finale : exposé, affiche, vidéo, enquête, étude de données, création littéraire…
+
+**Idéal pour :**
+
+- les projets interdisciplinaires,  
+- le Parcours Avenir, l’EDD, les projets de fin d’année,  
+- travailler l’oral et la coopération.
+
+**Dans EleveAI :**  
+La ressource décrira les étapes du projet (lancement, recherche, production, restitution), les rôles, et proposera des critères de réussite.
+
+---
+
+## 6. Apprentissage par problèmes : partir d’une situation complexe
+
+On commence par un problème authentique ou une situation de départ qui pose question.  
+Les élèves cherchent, proposent des pistes, et les outils sont introduits au fil du besoin.
+
+**Idéal pour :**
+
+- donner du sens à un chapitre,  
+- engager les élèves sur un défi,  
+- travailler la démarche scientifique ou mathématique.
+
+**Dans EleveAI :**  
+La ressource commencera par une situation-problème, puis enchaînera sur des phases “hypothèses”, “outils”, “mise en commun”, “bilan”.
+
+---
+
+## 7. Pédagogie coopérative : apprendre en travaillant en groupe
+
+Les élèves travaillent en îlots, avec des rôles (lecteur, rapporteur, gestionnaire du temps…), et une production commune.
+
+**Idéal pour :**
+
+- développer l’entraide et les compétences sociales,  
+- favoriser l’oral et l’explication entre pairs,  
+- installer un climat de classe positif.
+
+**Dans EleveAI :**  
+La ressource proposera des rôles, une organisation de groupe, des tâches distribuées et une synthèse finale.
+
+---
+
+## 8. Approche ludique / gamification : apprendre par le jeu
+
+On introduit des éléments de jeu :
+
+- défis,  
+- scores,  
+- badges,  
+- niveaux à franchir,  
+- escape games.
+
+**Idéal pour :**
+
+- relancer la motivation,  
+- travailler les automatismes (calcul, vocabulaire, conjugaison…),  
+- clôturer une séquence par un moment fort.
+
+**Dans EleveAI :**  
+La ressource sera structurée en “missions”, “défis”, avec un vocabulaire ludique mais un contenu rigoureux.
+
+---
+
+## 9. Cours magistral guidé : transmettre vite, sans perdre les élèves
+
+Tu expliques principalement, mais :
+
+- tu annonces un plan clair,  
+- tu insères des micro-questions,  
+- tu prévois un petit entraînement à la fin.
+
+**Idéal pour :**
+
+- poser rapidement un cadre théorique,  
+- lancer un nouveau chapitre,  
+- revenir sur un point de cours avant une évaluation.
+
+**Dans EleveAI :**  
+La ressource ressemblera à un cours structuré, avec quelques questions de vérification et une courte activité finale.
+
+---
+
+## 10. Comment utiliser ces méthodes dans EleveAI ?
+
+Dans l’espace profs :
+
+1. Tu choisis ton **niveau**, ta **matière** et ton **type de ressource**.  
+2. Tu sélectionnes une **méthode pédagogique**.  
+3. EleveAI adapte la **structure de la réponse** à ce choix.
+
+Tu peux donc :
+
+- utiliser la méthode active pour une introduction,  
+- l’enseignement explicite pour une séance “technique”,  
+- la gamification pour une révision,  
+- la pédagogie par projet pour une séquence longue.
+
+L’idée n’est pas de choisir une méthode une fois pour toutes, mais de **t’offrir un menu pédagogique**, directement exploitable en quelques clics.
+
+---
+
+En combinant ton expertise de terrain et ces méthodes, EleveAI devient un véritable **assistant pédagogique**, au service de ta façon d’enseigner – pas l’inverse.
+`,
+  },
 ];
 
 export function getAllBlogPosts(): BlogPost[] {
