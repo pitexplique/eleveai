@@ -974,9 +974,9 @@ export default function ProfsPage() {
       <SignupNudge
         storageKey="eleveai_nudge_profs_v1"
         actionSignal={nudgeSignal}
-        minActionCount={1}
+        minActionCount={0}
         trigger="both"
-        delayMs={5 * 60 * 1000}
+        delayMs={5 * 60 * 10}
         minInteractions={3}
         variant="bottom"
       />
