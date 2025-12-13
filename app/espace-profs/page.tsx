@@ -1,14 +1,22 @@
 // app/espace-profs/page.tsx
 "use client";
 
-import { useMemo, useState } from "react";
 import Link from "next/link";
+import { useCallback, useMemo, useState } from "react";
 import { MarkdownMath } from "@/components/MarkdownMath";
 import {
   PresetCarousel,
   PresetCarouselItem,
 } from "@/components/PresetCarousel";
 import { PROFS_PRESETS, ProfsPresetKey } from "@/data/profsPresets";
+
+import {
+  Sparkles,
+  RotateCcw,
+  ClipboardCopy,
+  Eye,
+  EyeOff,
+} from "lucide-react";
 
 /* ----------------------------------------
    TYPES
@@ -51,15 +59,7 @@ type PromptProf = {
    OPTIONS
 ---------------------------------------- */
 
-const CLASSES = [
-  "6e",
-  "5e",
-  "4e",
-  "3e",
-  "Seconde",
-  "Première",
-  "Terminale",
-];
+const CLASSES = ["6e", "5e", "4e", "3e", "Seconde", "Première", "Terminale"];
 
 const MATIERES = [
   "Mathématiques",
@@ -209,6 +209,22 @@ const PROFS_PRESET_ITEMS: PresetCarouselItem[] = (
 }));
 
 /* ----------------------------------------
+   HELPERS
+---------------------------------------- */
+
+function uniqueKeepOrder(items: string[]) {
+  const seen = new Set<string>();
+  const out: string[] = [];
+  for (const it of items) {
+    if (!seen.has(it)) {
+      seen.add(it);
+      out.push(it);
+    }
+  }
+  return out;
+}
+
+/* ----------------------------------------
    BLOCS WORD / DESIGN EXPERT
 ---------------------------------------- */
 
@@ -341,9 +357,7 @@ function construirePrompt(form: PromptProf): string {
       "- rappeler le sens des symboles si nécessaire.\n\n"
     : "";
 
-  const blocAuteur = form.auteur
-    ? `Ce prompt est préparé par le professeur : ${form.auteur}.\n`
-    : "";
+  const blocAuteur = form.auteur ? `Ce prompt est préparé par le professeur : ${form.auteur}.\n` : "";
 
   const blocEduscol =
     "Ta réponse doit respecter les programmes officiels du système scolaire français :\n" +
@@ -417,16 +431,10 @@ function construirePrompt(form: PromptProf): string {
     );
   })();
 
-  const matiereScientifique = [
-    "Mathématiques",
-    "Physique-Chimie",
-    "SVT",
-    "Numérique/NSI",
-  ].includes(form.matiere);
+  const matiereScientifique = ["Mathématiques", "Physique-Chimie", "SVT", "Numérique/NSI"].includes(form.matiere);
 
   const blocSansLatex = matiereScientifique
-    ? 'Pour les écritures mathématiques, n’utilise pas de LaTeX (pas de \\frac, \\sqrt, etc.). ' +
-      'Écris les fractions sous la forme a/b et les puissances sous la forme x^2 ou "x au carré".\n\n'
+    ? 'Pour les écritures mathématiques, n’utilise pas de LaTeX (pas de \\frac, \\sqrt, etc.). Écris les fractions sous la forme a/b et les puissances sous la forme x^2 ou "x au carré".\n\n'
     : "";
 
   const blocStructureSeance =
@@ -465,8 +473,7 @@ function construirePrompt(form: PromptProf): string {
   const blocWord = blocWordDesign(form.outputStyle);
 
   return (
-    `Tu es une IA pédagogique destinée à des élèves de ${form.classe || "collège/lycée"} ` +
-    `en ${form.matiere || "discipline scolaire"}, dans le système scolaire français.\n\n` +
+    `Tu es une IA pédagogique destinée à des élèves de ${form.classe || "collège/lycée"} en ${form.matiere || "discipline scolaire"}, dans le système scolaire français.\n\n` +
     blocEduscol +
     blocNeuro +
     blocNiveauLangage +
@@ -474,8 +481,7 @@ function construirePrompt(form: PromptProf): string {
     blocMethode +
     blocWord +
     `Objectif pédagogique indiqué par le professeur : ${
-      form.objectifPedagogique ||
-      "(non précisé : propose une version compatible avec le programme officiel)"
+      form.objectifPedagogique || "(non précisé : propose une version compatible avec le programme officiel)"
     }\n` +
     `Niveau de difficulté souhaité : ${form.niveau}.\n` +
     `Type de tâche : ${form.type || "non précisé"}.\n` +
@@ -502,26 +508,28 @@ function construirePrompt(form: PromptProf): string {
 ---------------------------------------- */
 
 export default function ProfsPage() {
-  const today = new Date().toISOString().slice(0, 10);
+  const today = useMemo(() => new Date().toISOString().slice(0, 10), []);
 
-  const INITIAL_FORM: PromptProf = {
-    titre: "",
-    objectifPedagogique: "",
-    classe: "",
-    matiere: "",
-    niveau: "standard",
-    type: "",
-    contenu: "",
-    tags: [],
-    adaptationDYS: true,
-    neuro: true,
-    auteur: "",
-    date: today,
-    methode: "methode_active",
-    outputStyle: "word_expert",
-  };
+  const makeInitialForm = useCallback((): PromptProf => {
+    return {
+      titre: "",
+      objectifPedagogique: "",
+      classe: "",
+      matiere: "",
+      niveau: "standard",
+      type: "",
+      contenu: "",
+      tags: [],
+      adaptationDYS: true,
+      neuro: true,
+      auteur: "",
+      date: today,
+      methode: "methode_active",
+      outputStyle: "word_expert",
+    };
+  }, [today]);
 
-  const [form, setForm] = useState<PromptProf>(INITIAL_FORM);
+  const [form, setForm] = useState<PromptProf>(() => makeInitialForm());
 
   const [rawTags, setRawTags] = useState("");
   const [promptInterne, setPromptInterne] = useState("");
@@ -532,81 +540,86 @@ export default function ProfsPage() {
   const [copiedPrompt, setCopiedPrompt] = useState(false);
   const [showPromptInterne, setShowPromptInterne] = useState(false);
 
-  function handleChange(
-    field: keyof PromptProf,
-    value: string | boolean | Niveau | MethodePedagogique | OutputStyle,
-  ) {
-    setForm((prev) => ({ ...prev, [field]: value as any }));
-  }
+  const handleChange = useCallback(
+    (
+      field: keyof PromptProf,
+      value: string | boolean | Niveau | MethodePedagogique | OutputStyle,
+    ) => {
+      setForm((prev) => ({ ...prev, [field]: value as any }));
+    },
+    [],
+  );
 
-  function updateTags(value: string) {
-    setRawTags(value);
-    const tags = value
-      .split(",")
-      .map((t) => t.trim())
-      .filter(Boolean);
-    setForm((prev) => ({ ...prev, tags }));
-  }
-
-  function appliquerPreset(key: ProfsPresetKey) {
-    const preset = PROFS_PRESETS[key];
-    const v = preset.valeurs;
-
-    setForm((prev) => {
-      const base: PromptProf = {
-        ...prev,
-        ...v,
-        tags: v.tags ?? prev.tags,
-      };
-
-      if (base.classe === "3e" && !base.tags.includes("DNB")) {
-        base.tags = [...base.tags, "DNB"];
-      }
-      return base;
-    });
-
-    if (v.tags) setRawTags(v.tags.join(", "));
-  }
-
-  function resetPage() {
-    setForm(INITIAL_FORM);
-    setRawTags("");
+  const clearOutputs = useCallback(() => {
     setPromptInterne("");
     setAgentOutput("");
     setAgentError("");
     setCopiedRessource(false);
     setCopiedPrompt(false);
     setShowPromptInterne(false);
+  }, []);
+
+  const updateTags = useCallback((value: string) => {
+    setRawTags(value);
+    const tags = value
+      .split(",")
+      .map((t) => t.trim())
+      .filter(Boolean);
+    setForm((prev) => ({ ...prev, tags }));
+  }, []);
+
+  const appliquerPreset = useCallback(
+    (key: ProfsPresetKey) => {
+      const preset = PROFS_PRESETS[key];
+      const v = preset.valeurs;
+
+      setForm((prev) => {
+        const base: PromptProf = {
+          ...prev,
+          ...v,
+          tags: v.tags ?? prev.tags,
+        };
+
+        if (base.classe === "3e" && !base.tags.includes("DNB")) {
+          base.tags = [...base.tags, "DNB"];
+        }
+        return base;
+      });
+
+      if (v.tags) setRawTags(v.tags.join(", "));
+
+      // ✅ important : si on change le formulaire via preset, on nettoie l’ancien output
+      clearOutputs();
+    },
+    [clearOutputs],
+  );
+
+  const resetPage = useCallback(() => {
+    setForm(makeInitialForm());
+    setRawTags("");
+    clearOutputs();
     setAgentLoading(false);
-  }
+  }, [clearOutputs, makeInitialForm]);
 
   const typesDisponibles = useMemo(() => {
     const communs = TYPES_COMMUNS;
-    const specifiquesMatiere = form.matiere
-      ? TYPES_PAR_MATIERE[form.matiere] || []
-      : [];
+    const specifiquesMatiere = form.matiere ? TYPES_PAR_MATIERE[form.matiere] || [] : [];
 
     let speciauxExamens: string[] = [];
     if (form.classe === "3e") speciauxExamens = TYPES_SPECIAUX_BREVET;
-    else if (["Seconde", "Première", "Terminale"].includes(form.classe))
-      speciauxExamens = TYPES_SPECIAUX_BAC;
+    else if (["Seconde", "Première", "Terminale"].includes(form.classe)) speciauxExamens = TYPES_SPECIAUX_BAC;
 
-    return Array.from(
-      new Set([...specifiquesMatiere, ...speciauxExamens, ...communs]),
-    );
+    // ✅ déduplication SANS casser l’ordre
+    return uniqueKeepOrder([...specifiquesMatiere, ...speciauxExamens, ...communs]);
   }, [form.matiere, form.classe]);
 
   const suggestions = useMemo(() => {
     const s: string[] = [];
     if (!form.objectifPedagogique.trim()) {
-      s.push(
-        "Précise l’objectif pédagogique : ce que l’élève doit comprendre / savoir faire / produire.",
-      );
+      s.push("Précise l’objectif pédagogique : ce que l’élève doit comprendre / savoir faire / produire.");
     }
     if (!form.classe) {
-      s.push(
-        "Sélectionne une classe/niveau : ça améliore fortement la qualité du vocabulaire et des attendus.",
-      );
+      s.push("Sélectionne une classe/niveau : ça améliore fortement la qualité du vocabulaire et des attendus.");
     }
     if (!form.matiere) {
       s.push("Indique la matière : EleveAI restera dans le bon cadre disciplinaire.");
@@ -618,14 +631,12 @@ export default function ProfsPage() {
       s.push("Ta consigne est courte : ajoute contexte, durée, contraintes, exemple attendu.");
     }
     if (s.length === 0) {
-      s.push(
-        "Tout est bon. Pour un rendu Word encore meilleur, précise : durée, matériel, contraintes, et un exemple de production attendue.",
-      );
+      s.push("Tout est bon. Pour un rendu Word encore meilleur, précise : durée, matériel, contraintes, et un exemple de production attendue.");
     }
     return s;
   }, [form]);
 
-  async function creerRessource() {
+  const creerRessource = useCallback(async () => {
     if (!form.contenu.trim()) {
       alert("Merci de remplir le texte du prompt (version professeur).");
       return;
@@ -656,9 +667,9 @@ export default function ProfsPage() {
     } finally {
       setAgentLoading(false);
     }
-  }
+  }, [form]);
 
-  async function copierRessource() {
+  const copierRessource = useCallback(async () => {
     if (!agentOutput) return;
     try {
       await navigator.clipboard.writeText(agentOutput);
@@ -667,9 +678,9 @@ export default function ProfsPage() {
     } catch {
       alert("Impossible de copier automatiquement. Sélectionne le texte et copie-le (Ctrl+C).");
     }
-  }
+  }, [agentOutput]);
 
-  async function copierPromptInterne() {
+  const copierPromptInterne = useCallback(async () => {
     if (!promptInterne) return;
     try {
       await navigator.clipboard.writeText(promptInterne);
@@ -678,7 +689,11 @@ export default function ProfsPage() {
     } catch {
       alert("Impossible de copier automatiquement. Sélectionne le texte et copie-le (Ctrl+C).");
     }
-  }
+  }, [promptInterne]);
+
+  const tchatHref = useMemo(() => {
+    return promptInterne ? `/tchat?prompt=${encodeURIComponent(promptInterne)}` : "/tchat";
+  }, [promptInterne]);
 
   return (
     <main className="min-h-screen bg-gradient-to-b from-sky-50 via-white to-slate-50 text-gray-900">
@@ -699,17 +714,33 @@ export default function ProfsPage() {
             encadrés et bannières.
           </p>
 
-          <p className="inline-flex items-center gap-2 mt-2 px-3 py-1 rounded-full bg-emerald-50 text-[11px] font-semibold text-emerald-700 border border-emerald-100">
-            <span>🧠</span>
-            <span>Eduscol + neurosciences</span>
-            <input
-              type="checkbox"
-              checked={form.neuro}
-              onChange={(e) => handleChange("neuro", e.target.checked)}
-              className="rounded border-gray-400"
-            />
-            <span>Activer</span>
-          </p>
+          <div className="flex flex-wrap items-center gap-3 pt-2">
+            <label className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 text-[11px] font-semibold text-emerald-700 border border-emerald-100">
+              <span>🧠</span>
+              <span>Eduscol + neurosciences</span>
+              <input
+                type="checkbox"
+                checked={form.neuro}
+                onChange={(e) => handleChange("neuro", e.target.checked)}
+                className="rounded border-gray-400"
+              />
+              <span>Activer</span>
+            </label>
+
+            <button
+              type="button"
+              onClick={resetPage}
+              disabled={agentLoading}
+              className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-[11px] font-semibold border transition ${
+                agentLoading
+                  ? "bg-slate-100 text-slate-400 border-slate-200 cursor-not-allowed"
+                  : "bg-white text-slate-700 border-slate-300 hover:bg-slate-50"
+              }`}
+            >
+              <RotateCcw className="w-4 h-4" />
+              Reset complet
+            </button>
+          </div>
         </header>
 
         <PresetCarousel
@@ -826,9 +857,7 @@ export default function ProfsPage() {
 
             {/* Type */}
             <div className="space-y-1">
-              <label className="text-xs font-semibold text-gray-600">
-                Type de ressource à générer
-              </label>
+              <label className="text-xs font-semibold text-gray-600">Type de ressource à générer</label>
               <select
                 value={form.type}
                 onChange={(e) => handleChange("type", e.target.value)}
@@ -921,9 +950,7 @@ export default function ProfsPage() {
 
             {/* Tags */}
             <div className="space-y-1">
-              <label className="text-xs font-semibold text-gray-600">
-                Mots-clés (séparés par des virgules)
-              </label>
+              <label className="text-xs font-semibold text-gray-600">Mots-clés (séparés par des virgules)</label>
               <input
                 type="text"
                 value={rawTags}
@@ -933,8 +960,7 @@ export default function ProfsPage() {
               />
               {form.tags.length > 0 && (
                 <p className="text-[11px] text-gray-500">
-                  Pris en compte :{" "}
-                  <span className="font-semibold">{form.tags.join(", ")}</span>
+                  Pris en compte : <span className="font-semibold">{form.tags.join(", ")}</span>
                 </p>
               )}
             </div>
@@ -974,25 +1000,27 @@ export default function ProfsPage() {
                 type="button"
                 onClick={resetPage}
                 disabled={agentLoading}
-                className={`inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold border ${
+                className={`inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold border transition ${
                   agentLoading
                     ? "bg-slate-100 text-slate-400 border-slate-200 cursor-not-allowed"
                     : "bg-white text-slate-700 border-slate-300 hover:bg-slate-50"
                 }`}
               >
-                🔄 Reset
+                <RotateCcw className="w-4 h-4" />
+                Reset
               </button>
 
               <button
                 onClick={creerRessource}
                 disabled={agentLoading}
-                className={`inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold shadow ${
+                className={`inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold shadow transition ${
                   agentLoading
                     ? "bg-sky-100 text-sky-500 cursor-not-allowed"
                     : "bg-[#0047B6] text-white hover:bg-[#003894]"
                 }`}
               >
-                {agentLoading ? "⏳ Génération..." : "✨ Créer la ressource EleveAI"}
+                <Sparkles className="w-4 h-4" />
+                {agentLoading ? "Génération..." : "Créer la ressource EleveAI"}
               </button>
             </div>
           </section>
@@ -1027,20 +1055,21 @@ export default function ProfsPage() {
                     onClick={resetPage}
                     className="px-3 py-1.5 rounded-lg text-[11px] font-semibold bg-white border border-slate-300 hover:bg-slate-50"
                   >
-                    🔄 Réinitialiser
+                    Reset
                   </button>
 
                   <button
                     type="button"
                     onClick={copierRessource}
                     disabled={!agentOutput}
-                    className={`inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-[11px] font-semibold ${
+                    className={`inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-[11px] font-semibold transition ${
                       agentOutput
                         ? "bg-slate-800 text-white hover:bg-slate-900"
                         : "bg-slate-200 text-slate-500 cursor-not-allowed"
                     }`}
                   >
-                    {copiedRessource ? "✅ Copié" : "📋 Copier pour Word / ENT"}
+                    <ClipboardCopy className="w-4 h-4" />
+                    {copiedRessource ? "Copié" : "Copier"}
                   </button>
                 </div>
               </div>
@@ -1064,15 +1093,12 @@ export default function ProfsPage() {
                 </p>
                 <div className="flex flex-wrap gap-2 text-[11px] sm:text-xs">
                   <Link
-                    href={
-                      promptInterne
-                        ? `/tchat?prompt=${encodeURIComponent(promptInterne)}`
-                        : "/tchat"
-                    }
+                    href={tchatHref}
                     className="px-3 py-2 rounded-lg bg-emerald-600 text-white font-semibold hover:bg-emerald-700"
                   >
                     🚀 Tchat EleveAI
                   </Link>
+
                   <a
                     href="https://chatgpt.com"
                     target="_blank"
@@ -1114,8 +1140,9 @@ export default function ProfsPage() {
               <button
                 type="button"
                 onClick={() => setShowPromptInterne((v) => !v)}
-                className="text-[11px] font-semibold text-slate-600 underline underline-offset-2"
+                className="text-[11px] font-semibold text-slate-600 underline underline-offset-2 inline-flex items-center gap-2"
               >
+                {showPromptInterne ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                 {showPromptInterne ? "Masquer le prompt interne" : "Afficher le prompt interne (avancé)"}
               </button>
 
@@ -1127,13 +1154,14 @@ export default function ProfsPage() {
                       type="button"
                       onClick={copierPromptInterne}
                       disabled={!promptInterne}
-                      className={`inline-flex items-center gap-1 px-3 py-1 rounded-lg text-[11px] font-semibold ${
+                      className={`inline-flex items-center gap-1 px-3 py-1 rounded-lg text-[11px] font-semibold transition ${
                         promptInterne
                           ? "bg-slate-800 text-white hover:bg-slate-900"
                           : "bg-slate-200 text-slate-500 cursor-not-allowed"
                       }`}
                     >
-                      {copiedPrompt ? "✅ Copié" : "📋 Copier"}
+                      <ClipboardCopy className="w-4 h-4" />
+                      {copiedPrompt ? "Copié" : "Copier"}
                     </button>
                   </div>
                   <textarea
