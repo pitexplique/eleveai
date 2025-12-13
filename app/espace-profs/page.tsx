@@ -1219,15 +1219,12 @@ export default function ProfsPage() {
       {/* ✅ NUDGE (réutilisable) : déclenché par actions métier, jamais si connecté (géré dans le composant) */}
       <SignupNudge
         storageKey="eleveai_nudge_profs_v1"
-        actionSignal={nudgeSignal}
-        minActionCount={1}
-        trigger="both"
-        delayMs={5 * 60 * 10} /* A remettre 5 * 60 * 1000 pour 5 minutes */
+        delayMs={5 * 60 * 10}
         minInteractions={3}
         variant="bottom"
-        title="Sauvegarder et personnaliser ?"
-        message="Crée un compte pour retrouver tes ressources, gagner du temps et adapter finement aux besoins de tes élèves."
       />
+
+
 
     </main>
   );

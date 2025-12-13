@@ -4,77 +4,47 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { LogIn, UserPlus, X } from "lucide-react";
-import { createClient } from "@/lib/supabase/client";
-
-type TriggerMode = "action" | "delay" | "both";
 
 type SignupNudgeProps = {
-  /** (Optionnel) Incrémente ce nombre pour signaler une action "métier" (générer, copier, etc.) */
-  actionSignal?: number;
-
-  /** Clé localStorage (ne s’affiche qu’une fois par navigateur) */
+  /** clé localStorage pour n'afficher qu'une seule fois */
   storageKey?: string;
 
-  /** Mode de déclenchement */
-  trigger?: TriggerMode;
-
-  /** Délai avant affichage (ms) si trigger inclut "delay" */
+  /** délai avant proposition (ms). ex: 5 min = 300000 */
   delayMs?: number;
 
-  /** Nombre minimum d’interactions (clic/scroll/touches/actions) avant affichage */
+  /** nb d'interactions min avant d'afficher (évite onglet laissé ouvert) */
   minInteractions?: number;
 
-  /** Nb d'actions min (si trigger inclut "action") */
-  minActionCount?: number;
-
-  /** Désactiver totalement */
+  /** si true, n'affiche jamais */
   disabled?: boolean;
 
-  /** Routes auth */
+  /** routes auth */
   signupHref?: string;
   signinHref?: string;
 
-  /** Texte */
+  /** texte personnalisable */
   title?: string;
   message?: string;
 
-  /** Variante visuelle */
+  /** variante visuelle : "bottom" (bandeau) ou "toast" */
   variant?: "bottom" | "toast";
 };
 
 export default function SignupNudge({
-  actionSignal = 0,
   storageKey = "eleveai_nudge_v1",
-  trigger = "both",
   delayMs = 5 * 60 * 1000,
   minInteractions = 3,
-  minActionCount = 1,
   disabled = false,
   signupHref = "/auth/signup",
   signinHref = "/auth/signin",
-  title = "Vous utilisez EleveAI depuis quelques minutes.",
-  message = "Un compte permet de sauvegarder vos essais, personnaliser l’aide et gagner du temps.",
+  title = "Sauvegarder et personnaliser ?",
+  message = "Crée un compte pour retrouver tes ressources, gagner du temps et adapter finement aux besoins de tes élèves.",
   variant = "bottom",
 }: SignupNudgeProps) {
   const [show, setShow] = useState(false);
-
-  // Connexion
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean | null>(null);
-
-  // Engagement
   const [interactions, setInteractions] = useState(0);
-  const [actionCount, setActionCount] = useState(0);
 
   const canUseStorage = useMemo(() => typeof window !== "undefined", []);
-
-  const alreadySeen = useCallback(() => {
-    if (!canUseStorage) return false;
-    try {
-      return localStorage.getItem(storageKey) === "1";
-    } catch {
-      return false;
-    }
-  }, [canUseStorage, storageKey]);
 
   const dismiss = useCallback(() => {
     try {
@@ -83,53 +53,22 @@ export default function SignupNudge({
     setShow(false);
   }, [canUseStorage, storageKey]);
 
-  // ----------------------------------------
-  // 1) Supabase session : NE JAMAIS afficher si connecté
-  // ----------------------------------------
-  useEffect(() => {
-    if (disabled) return;
-
-    const supabase = createClient();
-    let unsub: { data?: { subscription?: { unsubscribe: () => void } } } | null = null;
-
-    const init = async () => {
-      try {
-        const { data } = await supabase.auth.getSession();
-        setIsLoggedIn(!!data.session);
-      } catch {
-        // En cas d'erreur, on suppose non connecté pour ne pas bloquer le produit
-        setIsLoggedIn(false);
-      }
-
-      unsub = supabase.auth.onAuthStateChange((_event, session) => {
-        const logged = !!session;
-        setIsLoggedIn(logged);
-        if (logged) setShow(false);
-      });
-    };
-
-    init();
-
-    return () => {
-      try {
-        unsub?.data?.subscription?.unsubscribe?.();
-      } catch {}
-    };
-  }, [disabled]);
-
-  // ----------------------------------------
-  // 2) Interactions "réelles" (clic/scroll/touches)
-  // ----------------------------------------
   useEffect(() => {
     if (disabled) return;
     if (!canUseStorage) return;
-    if (alreadySeen()) return;
 
-    const bump = () => setInteractions((n) => Math.min(n + 1, 100));
+    // Ne pas afficher si déjà vu
+    try {
+      if (localStorage.getItem(storageKey) === "1") return;
+    } catch {}
+
+    // Compteur d'interactions "réelles"
+    const bump = () => setInteractions((n) => Math.min(n + 1, 30));
 
     const onClick = () => bump();
     const onScroll = () => bump();
     const onKeyDown = (e: KeyboardEvent) => {
+      // On compte seulement les touches utiles
       if (e.key.length === 1 || e.key === "Enter" || e.key === "Backspace") bump();
     };
 
@@ -137,101 +76,54 @@ export default function SignupNudge({
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("keydown", onKeyDown);
 
+    // Timer principal
+    const t = window.setTimeout(() => {
+      setShow((prev) => (prev ? prev : interactions >= minInteractions));
+    }, delayMs);
+
     return () => {
+      window.clearTimeout(t);
       window.removeEventListener("click", onClick);
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("keydown", onKeyDown);
     };
-  }, [disabled, canUseStorage, alreadySeen]);
-
-  // ----------------------------------------
-  // 3) Actions "métier" (générer/coller/copie...)
-  // ----------------------------------------
-  useEffect(() => {
-    if (disabled) return;
-    if (actionSignal <= 0) return;
-
-    setActionCount((c) => c + 1);
-
-    // Compte aussi comme "interaction" (utile pour le mode delay)
-    setInteractions((n) => Math.min(n + 1, 100));
-  }, [actionSignal, disabled]);
-
-  // ----------------------------------------
-  // 4) Trigger DELAY (style IXL) : timer + interactions
-  // ----------------------------------------
-  useEffect(() => {
-    if (disabled) return;
-    if (!canUseStorage) return;
-    if (trigger === "action") return;
-
-    // On attend la session connue (évite flash)
-    if (isLoggedIn === null) return;
-
-    // Jamais si connecté / déjà vu
-    if (isLoggedIn) return;
-    if (alreadySeen()) return;
-
-    const t = window.setTimeout(() => {
-      // Re-check au moment du timer
-      if (isLoggedIn) return;
-      if (alreadySeen()) return;
-      if (interactions >= minInteractions) setShow(true);
-    }, delayMs);
-
-    return () => window.clearTimeout(t);
-  }, [
-    disabled,
-    canUseStorage,
-    trigger,
-    delayMs,
-    minInteractions,
-    interactions,
-    isLoggedIn,
-    alreadySeen,
-  ]);
-
-  // ----------------------------------------
-  // 5) Trigger ACTION (optionnel) : après N actions métier
-  // ----------------------------------------
-  useEffect(() => {
-    if (disabled) return;
-    if (!canUseStorage) return;
-    if (trigger === "delay") return;
-
-    if (isLoggedIn === null) return;
-    if (isLoggedIn) return;
-    if (alreadySeen()) return;
-
-    if (actionCount >= minActionCount) setShow(true);
-  }, [
-    disabled,
-    canUseStorage,
-    trigger,
-    actionCount,
-    minActionCount,
-    isLoggedIn,
-    alreadySeen,
-  ]);
+  }, [disabled, canUseStorage, storageKey, delayMs, interactions, minInteractions]);
 
   if (!show) return null;
 
   const containerClass =
     variant === "toast"
-      ? "fixed bottom-4 right-4 z-50 w-[min(420px,calc(100vw-2rem))]"
+      ? "fixed bottom-4 right-4 z-50 w-[min(460px,calc(100vw-2rem))]"
       : "fixed inset-x-0 bottom-0 z-50";
 
-  const innerWrapClass = variant === "toast" ? "" : "max-w-6xl mx-auto px-4 pb-4";
+  const innerWrapClass =
+    variant === "toast"
+      ? ""
+      : "max-w-6xl mx-auto px-4 pb-4";
 
   return (
     <div className={containerClass}>
       <div className={innerWrapClass}>
-        <div className="bg-white border border-slate-200 shadow-lg rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+        {/* ✅ Visible mais non agressif : sky-100 + border-sky-300 + shadow-md */}
+        <div className="bg-sky-100 border border-sky-300 shadow-md rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
           <div className="flex items-start gap-3">
-            <div className="mt-0.5 text-sky-600">💡</div>
+            <div className="mt-0.5 w-9 h-9 rounded-xl bg-white/80 border border-sky-200 flex items-center justify-center">
+              <span className="text-sky-700 text-base">💡</span>
+            </div>
+
             <div className="space-y-1">
-              <p className="text-sm font-semibold text-slate-900">{title}</p>
-              <p className="text-xs text-slate-600">{message}</p>
+              <div className="flex items-center gap-2">
+                <p className="text-sm font-semibold text-slate-900">{title}</p>
+                <span className="text-[10px] px-2 py-0.5 rounded-full bg-white/70 border border-slate-200 text-slate-600">
+                  optionnel
+                </span>
+              </div>
+
+              <p className="text-xs text-slate-700">{message}</p>
+
+              <p className="text-[11px] text-slate-600">
+                Vous pouvez continuer sans créer de compte.
+              </p>
             </div>
           </div>
 
@@ -239,7 +131,7 @@ export default function SignupNudge({
             <button
               type="button"
               onClick={dismiss}
-              className="inline-flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-semibold bg-white border border-slate-300 hover:bg-slate-50"
+              className="inline-flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-medium bg-white border border-slate-200 hover:bg-slate-50"
             >
               Continuer sans compte
             </button>
@@ -247,7 +139,7 @@ export default function SignupNudge({
             <Link
               href={signupHref}
               onClick={dismiss}
-              className="inline-flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-semibold bg-[#0047B6] text-white hover:bg-[#003894]"
+              className="inline-flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-semibold bg-[#0047B6] text-white hover:bg-[#003894] shadow-sm"
             >
               <UserPlus className="w-4 h-4" />
               Créer un compte
@@ -256,7 +148,7 @@ export default function SignupNudge({
             <Link
               href={signinHref}
               onClick={dismiss}
-              className="inline-flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-semibold bg-slate-900 text-white hover:bg-slate-950"
+              className="inline-flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-medium bg-slate-100 text-slate-800 hover:bg-slate-200"
             >
               <LogIn className="w-4 h-4" />
               Connexion
@@ -265,11 +157,11 @@ export default function SignupNudge({
             <button
               type="button"
               onClick={dismiss}
-              className="p-2 rounded-lg hover:bg-slate-100"
+              className="p-2 rounded-lg hover:bg-white/70"
               aria-label="Fermer"
               title="Fermer"
             >
-              <X className="w-4 h-4 text-slate-500" />
+              <X className="w-4 h-4 text-slate-700" />
             </button>
           </div>
         </div>
