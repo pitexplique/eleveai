@@ -10,6 +10,8 @@ import {
 } from "@/components/PresetCarousel";
 import { PROFS_PRESETS, ProfsPresetKey } from "@/data/profsPresets";
 
+import SignupNudge from "@/components/SignupNudge";
+
 import {
   Sparkles,
   RotateCcw,
@@ -106,7 +108,10 @@ const TYPES_PAR_MATIERE: Record<string, string[]> = {
     "Analyse de documents scientifiques",
     "Construction de schémas-bilans à compléter",
   ],
-  "Histoire-Géographie": ["Étude de documents historiques", "Analyse de carte ou croquis"],
+  "Histoire-Géographie": [
+    "Étude de documents historiques",
+    "Analyse de carte ou croquis",
+  ],
   SES: ["Analyse de graphiques économiques", "Préparation d’exemples chiffrés"],
   Langues: [
     "Création d’activité de compréhension orale",
@@ -153,7 +158,8 @@ const METHODE_OPTIONS: {
   {
     id: "enseignement_explicite",
     label: "Enseignement explicite (I do / We do / You do)",
-    description: "Tu montres un exemple, vous faites ensemble, puis l’élève s’entraîne seul.",
+    description:
+      "Tu montres un exemple, vous faites ensemble, puis l’élève s’entraîne seul.",
   },
   {
     id: "inductive",
@@ -357,7 +363,9 @@ function construirePrompt(form: PromptProf): string {
       "- rappeler le sens des symboles si nécessaire.\n\n"
     : "";
 
-  const blocAuteur = form.auteur ? `Ce prompt est préparé par le professeur : ${form.auteur}.\n` : "";
+  const blocAuteur = form.auteur
+    ? `Ce prompt est préparé par le professeur : ${form.auteur}.\n`
+    : "";
 
   const blocEduscol =
     "Ta réponse doit respecter les programmes officiels du système scolaire français :\n" +
@@ -431,7 +439,9 @@ function construirePrompt(form: PromptProf): string {
     );
   })();
 
-  const matiereScientifique = ["Mathématiques", "Physique-Chimie", "SVT", "Numérique/NSI"].includes(form.matiere);
+  const matiereScientifique = ["Mathématiques", "Physique-Chimie", "SVT", "Numérique/NSI"].includes(
+    form.matiere,
+  );
 
   const blocSansLatex = matiereScientifique
     ? 'Pour les écritures mathématiques, n’utilise pas de LaTeX (pas de \\frac, \\sqrt, etc.). Écris les fractions sous la forme a/b et les puissances sous la forme x^2 ou "x au carré".\n\n'
@@ -473,7 +483,9 @@ function construirePrompt(form: PromptProf): string {
   const blocWord = blocWordDesign(form.outputStyle);
 
   return (
-    `Tu es une IA pédagogique destinée à des élèves de ${form.classe || "collège/lycée"} en ${form.matiere || "discipline scolaire"}, dans le système scolaire français.\n\n` +
+    `Tu es une IA pédagogique destinée à des élèves de ${form.classe || "collège/lycée"} en ${
+      form.matiere || "discipline scolaire"
+    }, dans le système scolaire français.\n\n` +
     blocEduscol +
     blocNeuro +
     blocNiveauLangage +
@@ -481,7 +493,8 @@ function construirePrompt(form: PromptProf): string {
     blocMethode +
     blocWord +
     `Objectif pédagogique indiqué par le professeur : ${
-      form.objectifPedagogique || "(non précisé : propose une version compatible avec le programme officiel)"
+      form.objectifPedagogique ||
+      "(non précisé : propose une version compatible avec le programme officiel)"
     }\n` +
     `Niveau de difficulté souhaité : ${form.niveau}.\n` +
     `Type de tâche : ${form.type || "non précisé"}.\n` +
@@ -539,6 +552,10 @@ export default function ProfsPage() {
   const [copiedRessource, setCopiedRessource] = useState(false);
   const [copiedPrompt, setCopiedPrompt] = useState(false);
   const [showPromptInterne, setShowPromptInterne] = useState(false);
+
+  // ✅ signal vers SignupNudge (déclenché après "générer" OK ou "copier")
+  const [nudgeSignal, setNudgeSignal] = useState(0);
+  const triggerNudge = useCallback(() => setNudgeSignal((n) => n + 1), []);
 
   const handleChange = useCallback(
     (
@@ -607,7 +624,8 @@ export default function ProfsPage() {
 
     let speciauxExamens: string[] = [];
     if (form.classe === "3e") speciauxExamens = TYPES_SPECIAUX_BREVET;
-    else if (["Seconde", "Première", "Terminale"].includes(form.classe)) speciauxExamens = TYPES_SPECIAUX_BAC;
+    else if (["Seconde", "Première", "Terminale"].includes(form.classe))
+      speciauxExamens = TYPES_SPECIAUX_BAC;
 
     // ✅ déduplication SANS casser l’ordre
     return uniqueKeepOrder([...specifiquesMatiere, ...speciauxExamens, ...communs]);
@@ -660,14 +678,19 @@ export default function ProfsPage() {
 
       const data = await res.json().catch(() => ({}));
       if (!res.ok) throw new Error(data.error || "Erreur lors de l'appel à l'agent IA.");
-      setAgentOutput(data.output || "");
+
+      const out = data.output || "";
+      setAgentOutput(out);
+
+      // ✅ action métier : génération OK -> proposer création de compte (discret)
+      if (out) triggerNudge();
     } catch (err: any) {
       console.error(err);
       setAgentError(err?.message || "Erreur inconnue (vérifie le serveur / API).");
     } finally {
       setAgentLoading(false);
     }
-  }, [form]);
+  }, [form, triggerNudge]);
 
   const copierRessource = useCallback(async () => {
     if (!agentOutput) return;
@@ -675,10 +698,13 @@ export default function ProfsPage() {
       await navigator.clipboard.writeText(agentOutput);
       setCopiedRessource(true);
       setTimeout(() => setCopiedRessource(false), 2000);
+
+      // ✅ action métier : copie -> proposer création de compte (discret)
+      triggerNudge();
     } catch {
       alert("Impossible de copier automatiquement. Sélectionne le texte et copie-le (Ctrl+C).");
     }
-  }, [agentOutput]);
+  }, [agentOutput, triggerNudge]);
 
   const copierPromptInterne = useCallback(async () => {
     if (!promptInterne) return;
@@ -686,6 +712,9 @@ export default function ProfsPage() {
       await navigator.clipboard.writeText(promptInterne);
       setCopiedPrompt(true);
       setTimeout(() => setCopiedPrompt(false), 2000);
+
+      // (optionnel) tu peux aussi déclencher ici si tu veux
+      // triggerNudge();
     } catch {
       alert("Impossible de copier automatiquement. Sélectionne le texte et copie-le (Ctrl+C).");
     }
@@ -950,7 +979,9 @@ export default function ProfsPage() {
 
             {/* Tags */}
             <div className="space-y-1">
-              <label className="text-xs font-semibold text-gray-600">Mots-clés (séparés par des virgules)</label>
+              <label className="text-xs font-semibold text-gray-600">
+                Mots-clés (séparés par des virgules)
+              </label>
               <input
                 type="text"
                 value={rawTags}
@@ -1142,14 +1173,22 @@ export default function ProfsPage() {
                 onClick={() => setShowPromptInterne((v) => !v)}
                 className="text-[11px] font-semibold text-slate-600 underline underline-offset-2 inline-flex items-center gap-2"
               >
-                {showPromptInterne ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
-                {showPromptInterne ? "Masquer le prompt interne" : "Afficher le prompt interne (avancé)"}
+                {showPromptInterne ? (
+                  <EyeOff className="w-4 h-4" />
+                ) : (
+                  <Eye className="w-4 h-4" />
+                )}
+                {showPromptInterne
+                  ? "Masquer le prompt interne"
+                  : "Afficher le prompt interne (avancé)"}
               </button>
 
               {showPromptInterne && (
                 <div className="space-y-2">
                   <div className="flex items-center justify-between gap-2">
-                    <span className="font-semibold text-slate-700">Prompt interne (EleveAI)</span>
+                    <span className="font-semibold text-slate-700">
+                      Prompt interne (EleveAI)
+                    </span>
                     <button
                       type="button"
                       onClick={copierPromptInterne}
@@ -1176,7 +1215,20 @@ export default function ProfsPage() {
           </section>
         </div>
       </div>
+
+      {/* ✅ NUDGE (réutilisable) : déclenché par actions métier, jamais si connecté (géré dans le composant) */}
+      <SignupNudge
+        storageKey="eleveai_nudge_profs_v1"
+        actionSignal={nudgeSignal}
+        minActionCount={1}
+        trigger="both"
+        delayMs={5 * 60 * 10} /* A remettre 5 * 60 * 1000 pour 5 minutes */
+        minInteractions={3}
+        variant="bottom"
+        title="Sauvegarder et personnaliser ?"
+        message="Crée un compte pour retrouver tes ressources, gagner du temps et adapter finement aux besoins de tes élèves."
+      />
+
     </main>
   );
 }
-
