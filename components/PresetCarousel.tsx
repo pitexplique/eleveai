@@ -1,13 +1,20 @@
 "use client";
 
-import { useRef } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 export type PresetCarouselItem = {
   id: string;
   label: string;
   description: string;
-  badge?: string;
+  badge?: string; // ex: "Modèle prof" ou "Brevet" (unique)
   icon?: React.ReactNode;
+
+  /**
+   * ✅ Optionnel (recommandé pour V2)
+   * Ex: ["DYS","Brevet","Word Expert"]
+   * Si absent, on déduit depuis badge/label/description.
+   */
+  badges?: string[];
 };
 
 type PresetCarouselProps = {
@@ -15,78 +22,325 @@ type PresetCarouselProps = {
   subtitle?: string;
   items: PresetCarouselItem[];
   onSelect: (id: string) => void;
+
+  /** affichage des contrôles (recherche/filtres/tri) */
+  showControls?: boolean;
+
+  /** placeholder recherche */
+  searchPlaceholder?: string;
+
+  /** style des cartes */
+  tone?: "emerald" | "sky";
 };
+
+function normalize(s: string) {
+  return s
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/\p{Diacritic}/gu, "")
+    .trim();
+}
+
+function uniqKeepOrder(arr: string[]) {
+  const out: string[] = [];
+  const seen = new Set<string>();
+  for (const a of arr) {
+    const v = a.trim();
+    if (!v) continue;
+    if (!seen.has(v)) {
+      seen.add(v);
+      out.push(v);
+    }
+  }
+  return out;
+}
+
+function deriveBadges(item: PresetCarouselItem): string[] {
+  const raw = [
+    ...(item.badges ?? []),
+    item.badge ?? "",
+    item.label,
+    item.description,
+  ]
+    .filter(Boolean)
+    .join(" | ");
+
+  const s = normalize(raw);
+
+  const tags: string[] = [];
+  if (s.includes("dys")) tags.push("DYS");
+  if (s.includes("brevet") || s.includes("dnb")) tags.push("Brevet");
+  if (s.includes("bac") || s.includes("annale")) tags.push("Bac");
+  if (s.includes("word expert") || s.includes("expert")) tags.push("Word Expert");
+  if (s.includes("seance") || s.includes("séance")) tags.push("Séance");
+  if (s.includes("exercice")) tags.push("Exercices");
+
+  // badge explicite si fourni (ex: "Modèle prof")
+  if (item.badge && !tags.includes(item.badge)) tags.push(item.badge);
+
+  return uniqKeepOrder(tags);
+}
 
 export function PresetCarousel({
   title,
   subtitle,
   items,
   onSelect,
+  showControls = true,
+  searchPlaceholder = "Rechercher un modèle… (ex : brevet, fractions, philo)",
+  tone = "emerald",
 }: PresetCarouselProps) {
   const scrollRef = useRef<HTMLDivElement | null>(null);
+  const firstBtnRef = useRef<HTMLButtonElement | null>(null);
+
+  const [q, setQ] = useState("");
+  const [activeTag, setActiveTag] = useState<string>("Tous");
+  const [sortMode, setSortMode] = useState<"ordre" | "az">("ordre");
+
+  const [canLeft, setCanLeft] = useState(false);
+  const [canRight, setCanRight] = useState(false);
+
+  const toneClasses =
+    tone === "sky"
+      ? {
+          ring: "ring-1 ring-sky-100",
+          card: "border-sky-200 bg-sky-50 hover:bg-sky-100",
+          title: "text-sky-900",
+          desc: "text-sky-900/90",
+          badge: "text-sky-700 ring-sky-200",
+        }
+      : {
+          ring: "ring-1 ring-emerald-100",
+          card: "border-emerald-200 bg-emerald-50 hover:bg-emerald-100",
+          title: "text-emerald-900",
+          desc: "text-emerald-900/90",
+          badge: "text-emerald-700 ring-emerald-200",
+        };
+
+  const indexed = useMemo(() => {
+    return items.map((it, idx) => ({
+      ...it,
+      __idx: idx,
+      __norm: normalize(`${it.label} ${it.description} ${(it.badge ?? "")} ${(it.badges ?? []).join(" ")}`),
+      __tags: deriveBadges(it),
+    }));
+  }, [items]);
+
+  const allTags = useMemo(() => {
+    const bag: string[] = ["Tous"];
+    for (const it of indexed) bag.push(...it.__tags);
+    return uniqKeepOrder(bag);
+  }, [indexed]);
+
+  const filtered = useMemo(() => {
+    const nq = normalize(q);
+
+    let list = indexed.filter((it) => {
+      const okQ = !nq || it.__norm.includes(nq);
+      const okTag = activeTag === "Tous" || it.__tags.includes(activeTag);
+      return okQ && okTag;
+    });
+
+    if (sortMode === "az") {
+      list = [...list].sort((a, b) => a.label.localeCompare(b.label, "fr"));
+    } else {
+      list = [...list].sort((a, b) => a.__idx - b.__idx);
+    }
+
+    return list;
+  }, [indexed, q, activeTag, sortMode]);
 
   const scroll = (direction: "left" | "right") => {
-    if (!scrollRef.current) return;
-    const delta = direction === "left" ? -260 : 260;
-    scrollRef.current.scrollBy({ left: delta, behavior: "smooth" });
+    const el = scrollRef.current;
+    if (!el) return;
+    const delta = direction === "left" ? -320 : 320;
+    el.scrollBy({ left: delta, behavior: "smooth" });
+  };
+
+  const updateScrollState = () => {
+    const el = scrollRef.current;
+    if (!el) return;
+
+    // marge pour éviter le "presque égal"
+    const eps = 4;
+    setCanLeft(el.scrollLeft > eps);
+    setCanRight(el.scrollLeft + el.clientWidth < el.scrollWidth - eps);
+  };
+
+  useEffect(() => {
+    updateScrollState();
+    const el = scrollRef.current;
+    if (!el) return;
+
+    const onScroll = () => updateScrollState();
+    const onResize = () => updateScrollState();
+
+    el.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onResize);
+    return () => {
+      el.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onResize);
+    };
+  }, []);
+
+  // Si filtre/recherche change, on revient au début du carrousel
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    el.scrollTo({ left: 0, behavior: "smooth" });
+    // focus sur la première carte pour clavier/accessibilité
+    setTimeout(() => firstBtnRef.current?.focus(), 50);
+  }, [q, activeTag, sortMode]);
+
+  // Navigation clavier simple sur la liste (← →)
+  const onKeyDownList = (e: React.KeyboardEvent) => {
+    if (e.key !== "ArrowLeft" && e.key !== "ArrowRight") return;
+    e.preventDefault();
+    scroll(e.key === "ArrowLeft" ? "left" : "right");
   };
 
   return (
-    <section className="mb-6 rounded-3xl bg-white/90 p-4 sm:p-5 shadow-sm ring-1 ring-emerald-100">
-      {title && (
-        <h2 className="mb-1 text-base font-semibold text-slate-900">
-          {title}
-        </h2>
+    <section className={`mb-6 rounded-3xl bg-white/90 p-4 sm:p-5 shadow-sm ${toneClasses.ring}`}>
+      {(title || subtitle) && (
+        <div className="mb-3">
+          {title && <h2 className="mb-1 text-base font-semibold text-slate-900">{title}</h2>}
+          {subtitle && <p className="text-xs sm:text-sm text-slate-600">{subtitle}</p>}
+        </div>
       )}
-      {subtitle && (
-        <p className="mb-3 text-xs sm:text-sm text-slate-600">{subtitle}</p>
+
+      {showControls && (
+        <div className="mb-3 grid gap-2 sm:grid-cols-[1fr,auto] sm:items-center">
+          <div className="flex items-center gap-2">
+            <input
+              value={q}
+              onChange={(e) => setQ(e.target.value)}
+              placeholder={searchPlaceholder}
+              className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-sky-200"
+            />
+
+            <button
+              type="button"
+              onClick={() => {
+                setQ("");
+                setActiveTag("Tous");
+                setSortMode("ordre");
+              }}
+              className="shrink-0 rounded-xl border border-slate-200 bg-white px-3 py-2 text-xs font-semibold text-slate-700 hover:bg-slate-50"
+              title="Réinitialiser les filtres"
+            >
+              Reset
+            </button>
+          </div>
+
+          <div className="flex items-center justify-between sm:justify-end gap-2">
+            <div className="flex items-center gap-2">
+              <span className="text-[11px] font-semibold text-slate-600">Tri</span>
+              <select
+                value={sortMode}
+                onChange={(e) => setSortMode(e.target.value as any)}
+                className="rounded-xl border border-slate-200 bg-white px-2 py-2 text-xs"
+              >
+                <option value="ordre">Recommandé</option>
+                <option value="az">A → Z</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {showControls && allTags.length > 1 && (
+        <div className="mb-3 flex flex-wrap gap-2">
+          {allTags.map((t) => {
+            const active = t === activeTag;
+            return (
+              <button
+                key={t}
+                type="button"
+                onClick={() => setActiveTag(t)}
+                className={`rounded-full px-3 py-1 text-[11px] font-semibold border transition ${
+                  active
+                    ? "border-sky-400 bg-sky-100 text-sky-800"
+                    : "border-slate-200 bg-white text-slate-700 hover:bg-slate-50"
+                }`}
+              >
+                {t}
+              </button>
+            );
+          })}
+        </div>
       )}
 
       <div className="relative">
-        {/* Bouton gauche */}
+        {/* Left */}
         <button
           type="button"
           onClick={() => scroll("left")}
-          className="absolute left-0 top-1/2 z-10 hidden h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 text-slate-700 shadow-md ring-1 ring-slate-200 hover:bg-slate-100 md:flex"
+          disabled={!canLeft}
+          className={`absolute left-0 top-1/2 z-10 hidden h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full shadow-md ring-1 md:flex ${
+            canLeft
+              ? "bg-white/95 text-slate-700 ring-slate-200 hover:bg-slate-100"
+              : "bg-white/60 text-slate-300 ring-slate-100 cursor-not-allowed"
+          }`}
+          aria-label="Défiler vers la gauche"
         >
           ◀
         </button>
 
-        {/* Liste horizontale */}
+        {/* List */}
         <div
           ref={scrollRef}
-          className="flex gap-3 overflow-x-auto scroll-smooth py-1 pr-2 no-scrollbar"
+          onKeyDown={onKeyDownList}
+          tabIndex={0}
+          className="flex gap-3 overflow-x-auto scroll-smooth py-1 pr-2 no-scrollbar outline-none"
+          aria-label="Modèles rapides"
         >
-          {items.map((item) => (
-            <button
-              key={item.id}
-              type="button"
-              onClick={() => onSelect(item.id)}
-              className="min-w-[220px] max-w-[260px] flex-1 rounded-2xl border border-emerald-200 bg-emerald-50 px-3 py-3 text-left text-xs shadow-sm hover:bg-emerald-100"
-            >
-              <div className="mb-1 flex items-center gap-2">
-                {item.icon && <span>{item.icon}</span>}
-                <span className="font-semibold text-emerald-900">
-                  {item.label}
-                </span>
-              </div>
-              <p className="text-[11px] text-emerald-900/90">
-                {item.description}
-              </p>
-              {item.badge && (
-                <div className="mt-2 inline-flex rounded-full bg-white/80 px-2 py-0.5 text-[10px] font-semibold text-emerald-700 ring-1 ring-emerald-200">
-                  {item.badge}
+          {filtered.length === 0 ? (
+            <div className="w-full rounded-2xl border border-slate-200 bg-slate-50 p-4 text-sm text-slate-600">
+              Aucun modèle ne correspond. Essaie un autre mot-clé.
+            </div>
+          ) : (
+            filtered.map((item, i) => (
+              <button
+                key={item.id}
+                ref={i === 0 ? firstBtnRef : null}
+                type="button"
+                onClick={() => onSelect(item.id)}
+                className={`min-w-[240px] max-w-[320px] flex-1 rounded-2xl border px-3 py-3 text-left text-xs shadow-sm transition ${toneClasses.card}`}
+                title="Cliquer pour pré-remplir"
+              >
+                <div className="mb-1 flex items-center gap-2">
+                  {item.icon && <span className="shrink-0">{item.icon}</span>}
+                  <span className={`font-semibold ${toneClasses.title}`}>{item.label}</span>
                 </div>
-              )}
-            </button>
-          ))}
+
+                <p className={`text-[11px] ${toneClasses.desc}`}>{item.description}</p>
+
+                <div className="mt-2 flex flex-wrap gap-1.5">
+                  {item.__tags.slice(0, 3).map((b) => (
+                    <span
+                      key={b}
+                      className={`inline-flex rounded-full bg-white/80 px-2 py-0.5 text-[10px] font-semibold ring-1 ${toneClasses.badge}`}
+                    >
+                      {b}
+                    </span>
+                  ))}
+                </div>
+              </button>
+            ))
+          )}
         </div>
 
-        {/* Bouton droite */}
+        {/* Right */}
         <button
           type="button"
           onClick={() => scroll("right")}
-          className="absolute right-0 top-1/2 z-10 hidden h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 text-slate-700 shadow-md ring-1 ring-slate-200 hover:bg-slate-100 md:flex"
+          disabled={!canRight}
+          className={`absolute right-0 top-1/2 z-10 hidden h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full shadow-md ring-1 md:flex ${
+            canRight
+              ? "bg-white/95 text-slate-700 ring-slate-200 hover:bg-slate-100"
+              : "bg-white/60 text-slate-300 ring-slate-100 cursor-not-allowed"
+          }`}
+          aria-label="Défiler vers la droite"
         >
           ▶
         </button>

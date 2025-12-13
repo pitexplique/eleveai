@@ -14,7 +14,6 @@ import {
   Plus,
   Home,
   Sparkles,
-  Wand2,
   Trophy,
   ClipboardList,
   ShieldCheck,
@@ -25,6 +24,7 @@ import {
   HelpCircle,
   UserRound,
   Handshake,
+  Wand2,
 } from "lucide-react";
 
 /* -----------------------------
@@ -42,7 +42,7 @@ type NavItem = {
   icon?: React.ReactNode;
 };
 
-type GroupKey = "profs" | "eleves" | "admin" | "plus";
+type GroupKey = "eleves" | "admin" | "plus";
 
 type Group = {
   key: GroupKey;
@@ -58,7 +58,7 @@ function isActive(pathname: string, href: string) {
 
 function useOnClickOutside(
   refs: React.RefObject<HTMLElement>[],
-  handler: () => void
+  handler: () => void,
 ) {
   useEffect(() => {
     function listener(e: MouseEvent) {
@@ -90,12 +90,11 @@ export default function Header() {
   const [mobileOpen, setMobileOpen] = useState<null | GroupKey>(null);
 
   // Refs for outside click
-  const refProfs = useRef<HTMLDivElement>(null);
   const refEleves = useRef<HTMLDivElement>(null);
   const refAdmin = useRef<HTMLDivElement>(null);
   const refPlus = useRef<HTMLDivElement>(null);
 
-  useOnClickOutside([refProfs, refEleves, refAdmin, refPlus], () => setOpen(null));
+  useOnClickOutside([refEleves, refAdmin, refPlus], () => setOpen(null));
 
   // Close dropdowns with Escape (accessibilité clavier)
   useEffect(() => {
@@ -112,28 +111,6 @@ export default function Header() {
 
   const GROUPS: Group[] = useMemo(
     () => [
-      {
-        key: "profs",
-        label: "Profs",
-        icon: <Users className="h-4 w-4" />,
-        items: [
-          {
-            href: "/espace-profs",
-            label: "Générateurs de Prompts",
-            icon: <Users className="h-4 w-4" />,
-          },
-          {
-            href: "/atelier-IA",
-            label: "Atelier IA",
-            icon: <Sparkles className="h-4 w-4" />,
-          },
-          {
-            href: "/concours-ia",
-            label: "Concours IA",
-            icon: <Trophy className="h-4 w-4" />,
-          },
-        ],
-      },
       {
         key: "eleves",
         label: "Élèves",
@@ -184,6 +161,21 @@ export default function Header() {
         icon: <Plus className="h-4 w-4" />,
         items: [
           { href: "/accueil", label: "Accueil", icon: <Home className="h-4 w-4" /> },
+
+          // ✅ Atelier IA dans Plus
+          {
+            href: "/atelier-IA",
+            label: "Atelier IA",
+            badge: "Nouveau",
+            icon: <Wand2 className="h-4 w-4" />,
+          },
+
+          {
+            href: "/concours-ia",
+            label: "Concours IA",
+            icon: <Trophy className="h-4 w-4" />,
+          },
+
           {
             href: "/tarifs",
             label: "Tarifs & abonnements",
@@ -198,7 +190,16 @@ export default function Header() {
         ],
       },
     ],
-    []
+    [],
+  );
+
+  const PROF_LINK: NavItem = useMemo(
+    () => ({
+      href: "/espace-profs",
+      label: "Générateur prompts (Profs)",
+      icon: <Users className="h-4 w-4" />,
+    }),
+    [],
   );
 
   function closeAll() {
@@ -208,7 +209,6 @@ export default function Header() {
   }
 
   function getRefForKey(key: GroupKey) {
-    if (key === "profs") return refProfs;
     if (key === "eleves") return refEleves;
     if (key === "admin") return refAdmin;
     return refPlus;
@@ -223,17 +223,28 @@ export default function Header() {
             <Sparkles className="h-5 w-5" />
           </div>
           <div className="flex flex-col leading-tight">
-            <span className="text-sm sm:text-base font-semibold text-slate-50">
-              EleveAI
-            </span>
-            <span className="text-[10px] sm:text-xs text-slate-400">
-              L’IA pédagogique pour tous
-            </span>
+            <span className="text-sm sm:text-base font-semibold text-slate-50">EleveAI</span>
+            <span className="text-[10px] sm:text-xs text-slate-400">L’IA pédagogique pour tous</span>
           </div>
         </Link>
 
         {/* DESKTOP MENU */}
         <div className="hidden lg:flex items-center gap-2">
+          {/* ✅ Lien direct "Générateur prompts (Profs)" */}
+          <Link
+            href={PROF_LINK.href}
+            onClick={closeAll}
+            className={`px-3 py-1.5 text-sm rounded-xl border flex items-center gap-2 transition ${
+              isActive(pathname, PROF_LINK.href)
+                ? "border-sky-500 bg-sky-500/10 text-sky-100 shadow-[0_0_0_1px_rgba(56,189,248,0.4)]"
+                : "border-slate-700 text-slate-200 hover:bg-slate-900 hover:border-slate-500"
+            }`}
+          >
+            <span className="text-slate-200">{PROF_LINK.icon}</span>
+            {PROF_LINK.label}
+          </Link>
+
+          {/* Dropdowns : Élèves / Administratif */}
           {GROUPS.filter((g) => g.key !== "plus").map((group) => {
             const ref = getRefForKey(group.key);
             const opened = open === group.key;
@@ -253,9 +264,7 @@ export default function Header() {
                 >
                   <span className="text-slate-200">{group.icon}</span>
                   {group.label}
-                  <ChevronDown
-                    className={`h-4 w-4 transition-transform ${opened ? "rotate-180" : ""}`}
-                  />
+                  <ChevronDown className={`h-4 w-4 transition-transform ${opened ? "rotate-180" : ""}`} />
                 </button>
 
                 {opened && (
@@ -312,9 +321,7 @@ export default function Header() {
                 >
                   <span className="text-slate-200">{group.icon}</span>
                   {group.label}
-                  <ChevronDown
-                    className={`h-4 w-4 transition-transform ${opened ? "rotate-180" : ""}`}
-                  />
+                  <ChevronDown className={`h-4 w-4 transition-transform ${opened ? "rotate-180" : ""}`} />
                 </button>
 
                 {opened && (
@@ -421,6 +428,20 @@ export default function Header() {
               Accueil
             </Link>
 
+            {/* ✅ Lien direct prof (au même niveau que les autres) */}
+            <Link
+              href={PROF_LINK.href}
+              onClick={closeAll}
+              className={`w-full rounded-xl px-3 py-2 text-sm border flex items-center gap-2 ${
+                isActive(pathname, PROF_LINK.href)
+                  ? "border-sky-500 bg-sky-500/10 text-sky-100 shadow-[0_0_0_1px_rgba(56,189,248,0.4)]"
+                  : "border-transparent text-slate-300 hover:border-slate-700 hover:bg-slate-900"
+              }`}
+            >
+              <Users className="h-4 w-4" />
+              {PROF_LINK.label}
+            </Link>
+
             {/* Sections accordéon */}
             {GROUPS.map((group) => {
               const opened = mobileOpen === group.key;
@@ -431,9 +452,7 @@ export default function Header() {
                   <button
                     onClick={() => setMobileOpen((v) => (v === group.key ? null : group.key))}
                     className={`w-full px-3 py-2 text-sm flex items-center justify-between ${
-                      opened || anyActive
-                        ? "bg-sky-500/10 text-sky-100"
-                        : "bg-slate-950 text-slate-200 hover:bg-slate-900"
+                      opened || anyActive ? "bg-sky-500/10 text-sky-100" : "bg-slate-950 text-slate-200 hover:bg-slate-900"
                     }`}
                     aria-expanded={opened}
                   >
@@ -441,9 +460,7 @@ export default function Header() {
                       {group.icon}
                       {group.label}
                     </span>
-                    <ChevronDown
-                      className={`h-4 w-4 transition-transform ${opened ? "rotate-180" : ""}`}
-                    />
+                    <ChevronDown className={`h-4 w-4 transition-transform ${opened ? "rotate-180" : ""}`} />
                   </button>
 
                   {opened && (
@@ -456,9 +473,7 @@ export default function Header() {
                             href={link.href}
                             onClick={closeAll}
                             className={`px-3 py-2 text-sm border-t border-slate-800 flex items-center gap-3 ${
-                              active
-                                ? "text-sky-300 bg-sky-500/10"
-                                : "text-slate-300 hover:bg-slate-900"
+                              active ? "text-sky-300 bg-sky-500/10" : "text-slate-300 hover:bg-slate-900"
                             }`}
                           >
                             <IconWrap>{link.icon}</IconWrap>
@@ -482,7 +497,4 @@ export default function Header() {
     </header>
   );
 }
-
-
-
 

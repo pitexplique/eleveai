@@ -4,6 +4,8 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { LogIn, UserPlus, X } from "lucide-react";
 
+type TriggerMode = "timer" | "action" | "both";
+
 type SignupNudgeProps = {
   storageKey?: string;
   delayMs?: number;
@@ -15,13 +17,16 @@ type SignupNudgeProps = {
   message?: string;
   variant?: "bottom" | "toast";
 
-  /** Option test (facultatif) : force l’affichage en prod pour vérifier le rendu */
+  actionSignal?: number;
+  minActionCount?: number;
+  trigger?: TriggerMode;
+
   debugForceShow?: boolean;
 };
 
 export default function SignupNudge({
   storageKey = "eleveai_nudge_v1",
-  delayMs = 5 * 60 * 10,
+  delayMs = 5 * 60 * 1000,
   minInteractions = 3,
   disabled = false,
   signupHref = "/auth/signup",
@@ -29,23 +34,18 @@ export default function SignupNudge({
   title = "Sauvegarder et personnaliser ?",
   message = "Crée un compte pour retrouver tes ressources, gagner du temps et adapter finement aux besoins de tes élèves.",
   variant = "bottom",
+  actionSignal = 0,
+  minActionCount = 1,
+  trigger = "timer",
   debugForceShow = false,
 }: SignupNudgeProps) {
   const [show, setShow] = useState(false);
 
-  // ✅ interactions stockées en ref (pas de closure figée)
   const interactionsRef = useRef(0);
+  const openedRef = useRef(false);
 
   const canUseStorage = useMemo(() => typeof window !== "undefined", []);
 
-  const dismiss = useCallback(() => {
-    try {
-      if (canUseStorage) localStorage.setItem(storageKey, "1");
-    } catch {}
-    setShow(false);
-  }, [canUseStorage, storageKey]);
-
-  // 1) Ne rien faire si déjà vu
   const isAlreadySeen = useCallback(() => {
     if (!canUseStorage) return false;
     try {
@@ -55,7 +55,28 @@ export default function SignupNudge({
     }
   }, [canUseStorage, storageKey]);
 
-  // 2) Écoute des interactions (ne déclenche pas de re-render)
+  const markSeen = useCallback(() => {
+    try {
+      if (canUseStorage) localStorage.setItem(storageKey, "1");
+    } catch {}
+  }, [canUseStorage, storageKey]);
+
+  const dismiss = useCallback(() => {
+    markSeen();
+    setShow(false);
+  }, [markSeen]);
+
+  const openOnce = useCallback(() => {
+    if (openedRef.current) return;
+    if (disabled) return;
+    if (!canUseStorage) return;
+    if (isAlreadySeen()) return;
+
+    openedRef.current = true;
+    setShow(true);
+  }, [disabled, canUseStorage, isAlreadySeen]);
+
+  // 1) Interactions
   useEffect(() => {
     if (disabled) return;
     if (!canUseStorage) return;
@@ -82,28 +103,61 @@ export default function SignupNudge({
     };
   }, [disabled, canUseStorage, isAlreadySeen]);
 
-  // 3) Timer UNIQUE (ne se réinitialise pas)
+  // 2) Timer
   useEffect(() => {
     if (disabled) return;
     if (!canUseStorage) return;
     if (isAlreadySeen()) return;
 
     if (debugForceShow) {
-      setShow(true);
+      openOnce();
       return;
     }
 
+    if (trigger === "action") return;
+
     const t = window.setTimeout(() => {
-      // Re-check (au cas où la clé a été posée entre-temps)
       if (isAlreadySeen()) return;
+      if (openedRef.current) return;
 
       if (interactionsRef.current >= minInteractions) {
-        setShow(true);
+        openOnce();
       }
     }, delayMs);
 
     return () => window.clearTimeout(t);
-  }, [disabled, canUseStorage, delayMs, minInteractions, isAlreadySeen, debugForceShow]);
+  }, [
+    disabled,
+    canUseStorage,
+    delayMs,
+    minInteractions,
+    isAlreadySeen,
+    debugForceShow,
+    trigger,
+    openOnce,
+  ]);
+
+  // 3) Actions métier
+  useEffect(() => {
+    if (disabled) return;
+    if (!canUseStorage) return;
+    if (isAlreadySeen()) return;
+    if (debugForceShow) return;
+    if (trigger === "timer") return;
+
+    if ((trigger === "action" || trigger === "both") && actionSignal >= minActionCount) {
+      openOnce();
+    }
+  }, [
+    actionSignal,
+    minActionCount,
+    disabled,
+    canUseStorage,
+    isAlreadySeen,
+    debugForceShow,
+    trigger,
+    openOnce,
+  ]);
 
   if (!show) return null;
 
@@ -117,7 +171,6 @@ export default function SignupNudge({
   return (
     <div className={containerClass}>
       <div className={innerWrapClass}>
-        {/* ✅ Visible mais non agressif */}
         <div className="bg-sky-100 border border-sky-300 shadow-md rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
           <div className="flex items-start gap-3">
             <div className="mt-0.5 w-9 h-9 rounded-xl bg-white/80 border border-sky-200 flex items-center justify-center">
@@ -182,4 +235,3 @@ export default function SignupNudge({
     </div>
   );
 }
-
