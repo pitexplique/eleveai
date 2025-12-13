@@ -734,7 +734,7 @@ export default function ProfsPage() {
           </p>
 
           <h1 className="text-3xl sm:text-4xl font-extrabold text-[#0047B6]">
-            Génère une ressource prête Word (et jolie)
+            Génère une ressource prête Word 
           </h1>
 
           <p className="text-sm sm:text-base text-gray-700 max-w-2xl">
@@ -1217,12 +1217,13 @@ export default function ProfsPage() {
       </div>
 
       {/* ✅ NUDGE (réutilisable) : déclenché par actions métier, jamais si connecté (géré dans le composant) */}
-      <SignupNudge
-        storageKey="eleveai_nudge_profs_v1"
-        delayMs={5 * 60 * 10}
-        minInteractions={3}
-        variant="bottom"
-      />
+    <SignupNudge
+      storageKey="eleveai_nudge_profs_v1_test"
+      delayMs={10_000}
+      minInteractions={1}
+      variant="bottom"
+    />
+
 
 
 

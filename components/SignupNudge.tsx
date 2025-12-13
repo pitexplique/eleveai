@@ -1,38 +1,27 @@
-// /components/SignupNudge.tsx
 "use client";
 
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { LogIn, UserPlus, X } from "lucide-react";
 
 type SignupNudgeProps = {
-  /** clé localStorage pour n'afficher qu'une seule fois */
   storageKey?: string;
-
-  /** délai avant proposition (ms). ex: 5 min = 300000 */
   delayMs?: number;
-
-  /** nb d'interactions min avant d'afficher (évite onglet laissé ouvert) */
   minInteractions?: number;
-
-  /** si true, n'affiche jamais */
   disabled?: boolean;
-
-  /** routes auth */
   signupHref?: string;
   signinHref?: string;
-
-  /** texte personnalisable */
   title?: string;
   message?: string;
-
-  /** variante visuelle : "bottom" (bandeau) ou "toast" */
   variant?: "bottom" | "toast";
+
+  /** Option test (facultatif) : force l’affichage en prod pour vérifier le rendu */
+  debugForceShow?: boolean;
 };
 
 export default function SignupNudge({
   storageKey = "eleveai_nudge_v1",
-  delayMs = 5 * 60 * 1000,
+  delayMs = 5 * 60 * 10,
   minInteractions = 3,
   disabled = false,
   signupHref = "/auth/signup",
@@ -40,9 +29,12 @@ export default function SignupNudge({
   title = "Sauvegarder et personnaliser ?",
   message = "Crée un compte pour retrouver tes ressources, gagner du temps et adapter finement aux besoins de tes élèves.",
   variant = "bottom",
+  debugForceShow = false,
 }: SignupNudgeProps) {
   const [show, setShow] = useState(false);
-  const [interactions, setInteractions] = useState(0);
+
+  // ✅ interactions stockées en ref (pas de closure figée)
+  const interactionsRef = useRef(0);
 
   const canUseStorage = useMemo(() => typeof window !== "undefined", []);
 
@@ -53,22 +45,29 @@ export default function SignupNudge({
     setShow(false);
   }, [canUseStorage, storageKey]);
 
+  // 1) Ne rien faire si déjà vu
+  const isAlreadySeen = useCallback(() => {
+    if (!canUseStorage) return false;
+    try {
+      return localStorage.getItem(storageKey) === "1";
+    } catch {
+      return false;
+    }
+  }, [canUseStorage, storageKey]);
+
+  // 2) Écoute des interactions (ne déclenche pas de re-render)
   useEffect(() => {
     if (disabled) return;
     if (!canUseStorage) return;
+    if (isAlreadySeen()) return;
 
-    // Ne pas afficher si déjà vu
-    try {
-      if (localStorage.getItem(storageKey) === "1") return;
-    } catch {}
-
-    // Compteur d'interactions "réelles"
-    const bump = () => setInteractions((n) => Math.min(n + 1, 30));
+    const bump = () => {
+      interactionsRef.current = Math.min(interactionsRef.current + 1, 50);
+    };
 
     const onClick = () => bump();
     const onScroll = () => bump();
     const onKeyDown = (e: KeyboardEvent) => {
-      // On compte seulement les touches utiles
       if (e.key.length === 1 || e.key === "Enter" || e.key === "Backspace") bump();
     };
 
@@ -76,18 +75,35 @@ export default function SignupNudge({
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("keydown", onKeyDown);
 
-    // Timer principal
-    const t = window.setTimeout(() => {
-      setShow((prev) => (prev ? prev : interactions >= minInteractions));
-    }, delayMs);
-
     return () => {
-      window.clearTimeout(t);
       window.removeEventListener("click", onClick);
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("keydown", onKeyDown);
     };
-  }, [disabled, canUseStorage, storageKey, delayMs, interactions, minInteractions]);
+  }, [disabled, canUseStorage, isAlreadySeen]);
+
+  // 3) Timer UNIQUE (ne se réinitialise pas)
+  useEffect(() => {
+    if (disabled) return;
+    if (!canUseStorage) return;
+    if (isAlreadySeen()) return;
+
+    if (debugForceShow) {
+      setShow(true);
+      return;
+    }
+
+    const t = window.setTimeout(() => {
+      // Re-check (au cas où la clé a été posée entre-temps)
+      if (isAlreadySeen()) return;
+
+      if (interactionsRef.current >= minInteractions) {
+        setShow(true);
+      }
+    }, delayMs);
+
+    return () => window.clearTimeout(t);
+  }, [disabled, canUseStorage, delayMs, minInteractions, isAlreadySeen, debugForceShow]);
 
   if (!show) return null;
 
@@ -96,15 +112,12 @@ export default function SignupNudge({
       ? "fixed bottom-4 right-4 z-50 w-[min(460px,calc(100vw-2rem))]"
       : "fixed inset-x-0 bottom-0 z-50";
 
-  const innerWrapClass =
-    variant === "toast"
-      ? ""
-      : "max-w-6xl mx-auto px-4 pb-4";
+  const innerWrapClass = variant === "toast" ? "" : "max-w-6xl mx-auto px-4 pb-4";
 
   return (
     <div className={containerClass}>
       <div className={innerWrapClass}>
-        {/* ✅ Visible mais non agressif : sky-100 + border-sky-300 + shadow-md */}
+        {/* ✅ Visible mais non agressif */}
         <div className="bg-sky-100 border border-sky-300 shadow-md rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
           <div className="flex items-start gap-3">
             <div className="mt-0.5 w-9 h-9 rounded-xl bg-white/80 border border-sky-200 flex items-center justify-center">
@@ -169,3 +182,4 @@ export default function SignupNudge({
     </div>
   );
 }
+
