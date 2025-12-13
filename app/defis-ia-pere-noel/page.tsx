@@ -2,10 +2,6 @@
 
 import { useMemo, useState } from "react";
 import Link from "next/link";
-import {
-  PresetCarousel,
-  PresetCarouselItem,
-} from "@/components/PresetCarousel";
 
 /* ----------------------------------------
    TYPES
@@ -69,41 +65,139 @@ const DOMAINES: { value: DomaineDefi; label: string }[] = [
 ];
 
 /* ----------------------------------------
-   PRESETS
+   PRESETS (6e friendly)
 ---------------------------------------- */
 
 type PresetKeyDefi =
-  | "defi_classe_ecologie"
-  | "defi_famille_ecrans"
-  | "defi_etab_solidarite"
-  | "defi_perso_confiance";
+  | "mission_classe_bonne_ambiance"
+  | "mission_anti_moqueries"
+  | "mission_ecolo_gourde"
+  | "mission_proprete_classe"
+  | "mission_entraide_devoirs"
+  | "mission_compliments"
+  | "mission_famille_moins_ecrans"
+  | "mission_crea_affiche";
 
-const PRESETS_DEFI: Record<
-  PresetKeyDefi,
-  { label: string; description: string; valeurs: Partial<DefiForm> }
-> = {
-  defi_classe_ecologie: {
-    label: "🌱 Défi écologie dans ma classe",
-    description:
-      "Réduire les déchets et économiser l’énergie dans une classe ou un collège.",
+type DefiPreset = {
+  label: string; // court, punchy
+  description: string; // 1 phrase
+  emoji: string;
+  valeurs: Partial<DefiForm>;
+};
+
+const PRESETS_DEFI: Record<PresetKeyDefi, DefiPreset> = {
+  mission_classe_bonne_ambiance: {
+    emoji: "😊",
+    label: "Mission : meilleure ambiance",
+    description: "Rendre la classe plus gentille, plus calme, plus cool.",
     valeurs: {
       typeLieu: "classe",
-      domaine: "ecologie",
-      titreDefi: "Rendre ma classe plus écologique",
+      domaine: "bien_etre",
+      titreDefi: "Une classe plus cool et plus gentille",
       descriptionDefi:
-        "Je voudrais mettre en place des actions simples pour moins gaspiller (papier, électricité, plastique) dans ma classe.",
+        "Je veux améliorer l’ambiance dans la classe : moins de disputes, plus de respect, plus d’entraide.",
       pourquoiImportant:
-        "Je trouve qu’on jette trop de choses et j’aimerais qu’on prenne mieux soin de la planète.",
-      personnesImpliquees: "Mes camarades, mon/ma professeur principal(e).",
-      tempsDispo: "Toute l’année scolaire, avec de petites actions régulières.",
+        "Quand l’ambiance est bonne, on apprend mieux et on se sent mieux.",
+      personnesImpliquees: "Mes camarades + un adulte (prof principal, CPE).",
+      tempsDispo: "2 à 4 semaines (puis on continue si ça marche).",
       niveauEnergie: "normal",
     },
   },
 
-  defi_famille_ecrans: {
-    label: "📵 Défi en famille : moins d’écrans",
-    description:
-      "Organiser un défi en famille pour réduire les écrans et faire plus d’activités ensemble.",
+  mission_anti_moqueries: {
+    emoji: "🛡️",
+    label: "Mission : zéro moqueries",
+    description: "Stop aux petites moqueries. On protège tout le monde.",
+    valeurs: {
+      typeLieu: "classe",
+      domaine: "entraide",
+      titreDefi: "Zéro moqueries, 100% respect",
+      descriptionDefi:
+        "Je veux qu’on arrête les moqueries et qu’on ait des règles simples de respect (mots, gestes, réseaux).",
+      pourquoiImportant:
+        "Personne ne doit se sentir humilié ou exclu à l’école.",
+      personnesImpliquees: "Mes camarades + professeur + vie scolaire.",
+      tempsDispo: "1 mois (avec un bilan chaque semaine).",
+      niveauEnergie: "maxi",
+    },
+  },
+
+  mission_ecolo_gourde: {
+    emoji: "🌱",
+    label: "Mission : classe écolo",
+    description: "Moins de plastique, plus de bons réflexes.",
+    valeurs: {
+      typeLieu: "classe",
+      domaine: "ecologie",
+      titreDefi: "Ma classe écolo : objectif moins de déchets",
+      descriptionDefi:
+        "Je veux réduire les déchets : gourdes, tri simple, moins de papier gaspillé.",
+      pourquoiImportant:
+        "On peut aider la planète avec des petits gestes faciles.",
+      personnesImpliquees: "La classe + un adulte + éventuellement la cantine.",
+      tempsDispo: "3 semaines (objectif mesurable).",
+      niveauEnergie: "normal",
+    },
+  },
+
+  mission_proprete_classe: {
+    emoji: "🧹",
+    label: "Mission : classe propre",
+    description: "On garde la salle clean, simple et efficace.",
+    valeurs: {
+      typeLieu: "classe",
+      domaine: "bien_etre",
+      titreDefi: "Classe propre = classe agréable",
+      descriptionDefi:
+        "Je veux qu’on garde la classe propre : papiers à la poubelle, tables rangées, matériel respecté.",
+      pourquoiImportant:
+        "Une classe propre, c’est plus agréable et on perd moins de temps.",
+      personnesImpliquees: "La classe + un adulte pour valider les règles.",
+      tempsDispo: "2 semaines (test) puis on garde ce qui marche.",
+      niveauEnergie: "mini",
+    },
+  },
+
+  mission_entraide_devoirs: {
+    emoji: "🤝",
+    label: "Mission : entraide devoirs",
+    description: "On s’aide sans tricher. On progresse ensemble.",
+    valeurs: {
+      typeLieu: "classe",
+      domaine: "apprentissages",
+      titreDefi: "S’entraider pour les devoirs",
+      descriptionDefi:
+        "Je veux créer un petit système d’entraide : binômes, mini-temps questions, explications entre élèves.",
+      pourquoiImportant:
+        "Quand on explique à quelqu’un, on comprend mieux soi-même.",
+      personnesImpliquees: "Mes camarades + un prof pour organiser.",
+      tempsDispo: "2 à 3 semaines pour démarrer.",
+      niveauEnergie: "normal",
+    },
+  },
+
+  mission_compliments: {
+    emoji: "🌟",
+    label: "Mission : compliments",
+    description: "Une phrase gentille par jour. Ça change tout.",
+    valeurs: {
+      typeLieu: "classe",
+      domaine: "bien_etre",
+      titreDefi: "1 compliment par jour",
+      descriptionDefi:
+        "Je veux qu’on se dise plus de choses positives : compliments, merci, encouragements.",
+      pourquoiImportant:
+        "Ça donne confiance et ça rend la classe plus agréable.",
+      personnesImpliquees: "La classe (et un adulte si besoin).",
+      tempsDispo: "10 jours (puis bilan).",
+      niveauEnergie: "mini",
+    },
+  },
+
+  mission_famille_moins_ecrans: {
+    emoji: "📵",
+    label: "Mission : moins d’écrans",
+    description: "Plus d’activités ensemble, moins de téléphone.",
     valeurs: {
       typeLieu: "famille",
       domaine: "bien_etre",
@@ -111,62 +205,102 @@ const PRESETS_DEFI: Record<
       descriptionDefi:
         "Je veux proposer un défi à ma famille pour passer moins de temps sur les écrans et faire plus d’activités ensemble.",
       pourquoiImportant:
-        "On passe beaucoup de temps chacun de notre côté sur nos écrans, j’aimerais qu’on discute et qu’on joue plus ensemble.",
+        "On passe beaucoup de temps chacun de notre côté, j’aimerais qu’on se parle plus.",
       personnesImpliquees: "Mes parents, mes frères et sœurs.",
-      tempsDispo: "Pendant les vacances et quelques semaines après.",
+      tempsDispo: "Pendant 2 semaines.",
       niveauEnergie: "normal",
     },
   },
 
-  defi_etab_solidarite: {
-    label: "🎁 Défi solidarité dans l’établissement",
-    description:
-      "Imaginer une action solidaire (collecte, aide, projet) avec plusieurs classes.",
+  mission_crea_affiche: {
+    emoji: "🎨",
+    label: "Mission : affiche / projet",
+    description: "Créer une affiche ou un petit projet pour la classe.",
     valeurs: {
-      typeLieu: "etablissement",
-      domaine: "entraide",
-      titreDefi: "Organiser une action solidaire",
+      typeLieu: "classe",
+      domaine: "creativite",
+      titreDefi: "Créer une affiche utile pour la classe",
       descriptionDefi:
-        "Je voudrais organiser avec d’autres élèves une action solidaire (collecte, entraide, visite…) pour des personnes qui en ont besoin.",
+        "Je veux faire une affiche (ou mini-projet) qui aide la classe : règles de respect, éco-gestes, entraide, etc.",
       pourquoiImportant:
-        "Je veux que notre établissement soit connu pour sa solidarité et son engagement.",
-      personnesImpliquees:
-        "Le CVC ou CVL, quelques professeurs, la vie scolaire.",
-      tempsDispo: "Entre janvier et mars.",
-      niveauEnergie: "maxi",
-    },
-  },
-
-  defi_perso_confiance: {
-    label: "⭐ Défi personnel : confiance en moi",
-    description:
-      "Défi individuel pour gagner en confiance (oral, organisation, projet perso…).",
-    valeurs: {
-      typeLieu: "autre",
-      domaine: "apprentissages",
-      titreDefi: "Gagner confiance en moi cette année",
-      descriptionDefi:
-        "Je veux lancer un défi pour oser davantage participer à l’oral et présenter un petit projet personnel.",
-      pourquoiImportant:
-        "Je me sens souvent trop timide et j’aimerais prendre plus la parole et être fier de moi.",
-      personnesImpliquees: "Moi d’abord, puis 1 ou 2 adultes de confiance.",
-      tempsDispo: "3 à 4 mois.",
+        "Une affiche simple peut aider tout le monde à se rappeler les bonnes idées.",
+      personnesImpliquees: "2-3 camarades + un adulte pour valider.",
+      tempsDispo: "1 semaine.",
       niveauEnergie: "mini",
     },
   },
 };
 
-const PRESET_ITEMS: PresetCarouselItem[] = (
-  Object.entries(PRESETS_DEFI) as [
-    PresetKeyDefi,
-    (typeof PRESETS_DEFI)[PresetKeyDefi],
-  ][]
-).map(([key, preset]) => ({
-  id: key,
-  label: preset.label,
-  description: preset.description,
-  badge: "Idée de défi",
-}));
+const PRESET_ORDER: PresetKeyDefi[] = [
+  "mission_classe_bonne_ambiance",
+  "mission_anti_moqueries",
+  "mission_compliments",
+  "mission_entraide_devoirs",
+  "mission_proprete_classe",
+  "mission_ecolo_gourde",
+  "mission_crea_affiche",
+  "mission_famille_moins_ecrans",
+];
+
+/* ----------------------------------------
+   UI: Presets strip (sans recherche/tri)
+---------------------------------------- */
+
+function Presets6e({
+  onPick,
+}: {
+  onPick: (key: PresetKeyDefi) => void;
+}) {
+  return (
+    <section className="rounded-3xl bg-white/95 p-4 sm:p-5 shadow-sm ring-1 ring-emerald-100">
+      <div className="flex items-start justify-between gap-3">
+        <div>
+          <h2 className="text-base font-semibold text-slate-900">
+            1️⃣ Choisis une mission (facultatif)
+          </h2>
+          <p className="mt-1 text-xs sm:text-sm text-slate-600">
+            Clique sur une carte si tu veux une idée de départ. Sinon, remplis
+            directement le formulaire.
+          </p>
+        </div>
+      </div>
+
+      <div className="mt-4 flex gap-3 overflow-x-auto scroll-smooth pr-2 no-scrollbar">
+        {PRESET_ORDER.map((key) => {
+          const p = PRESETS_DEFI[key];
+          return (
+            <button
+              key={key}
+              type="button"
+              onClick={() => onPick(key)}
+              className="min-w-[240px] max-w-[280px] rounded-2xl border border-emerald-200 bg-emerald-50 px-4 py-4 text-left shadow-sm hover:bg-emerald-100"
+            >
+              <div className="flex items-center justify-between gap-2">
+                <div className="flex items-center gap-2">
+                  <span className="text-xl">{p.emoji}</span>
+                  <span className="font-bold text-emerald-900 text-sm">
+                    {p.label}
+                  </span>
+                </div>
+                <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-white/80 ring-1 ring-emerald-200 text-emerald-800">
+                  Idée
+                </span>
+              </div>
+
+              <p className="mt-2 text-[12px] text-emerald-900/90">
+                {p.description}
+              </p>
+
+              <div className="mt-3 text-[11px] text-emerald-900/80">
+                👉 Cliquer pour choisir
+              </div>
+            </button>
+          );
+        })}
+      </div>
+    </section>
+  );
+}
 
 /* ----------------------------------------
    PAGE
@@ -175,7 +309,7 @@ const PRESET_ITEMS: PresetCarouselItem[] = (
 export default function DefisPereNoelPage() {
   const [form, setForm] = useState<DefiForm>({
     prenom: "",
-    ageOuClasse: "",
+    ageOuClasse: "6e",
     typeLieu: "",
     lieuPrecis: "",
     domaine: "",
@@ -201,68 +335,57 @@ export default function DefisPereNoelPage() {
     setForm((prev) => ({
       ...prev,
       ...preset.valeurs,
+      ageOuClasse: prev.ageOuClasse || "6e",
     }));
+    // on efface le prompt final pour éviter confusion
+    setPromptFinal("");
+    setCopiedPrompt(false);
+    setCopiedDiscord(false);
   }
-
-  /* ----------------------------------------
-     SUGGESTIONS
-  ---------------------------------------- */
 
   const suggestions = useMemo(() => {
     const s: string[] = [];
 
     if (!form.titreDefi.trim())
-      s.push("Donne un titre à ton défi, même simple (ex : Classe plus verte).");
+      s.push("Donne un titre simple à ton défi (ex : Classe plus cool).");
     if (!form.descriptionDefi.trim())
-      s.push("Explique en quelques phrases ce que tu veux changer concrètement.");
+      s.push("Explique ce que tu veux changer concrètement (en 2-4 phrases).");
     if (!form.pourquoiImportant.trim())
-      s.push("Note pourquoi ce défi est important pour toi ou pour les autres.");
+      s.push("Dis pourquoi c’est important pour toi ou pour les autres.");
     if (!form.personnesImpliquees.trim())
-      s.push("Dis qui pourrait t’aider : camarades, adultes, famille…");
+      s.push("Dis qui peut t’aider (amis, prof, CPE, famille…).");
     if (!form.tempsDispo.trim())
-      s.push("Indique sur combien de temps tu imagines ce défi (semaines, mois…).");
+      s.push("Indique la durée (10 jours, 2 semaines, 1 mois…).");
 
     if (s.length === 0)
-      s.push(
-        "Ton formulaire est prêt ! Tu peux cliquer sur « Générer mon prompt » puis l’envoyer à Frédéric.",
-      );
+      s.push("C’est prêt ! Clique sur « Générer mon prompt » puis copie-colle.");
 
     return s;
   }, [form]);
 
-  /* ----------------------------------------
-     DESCRIPTION NIVEAU D'ÉNERGIE
-  ---------------------------------------- */
-
   function descriptionNiveauEnergie() {
     switch (form.niveauEnergie) {
       case "mini":
-        return "Je cherche un défi simple, avec de petites actions faciles à tenir.";
+        return "Défi simple, petites actions faciles.";
       case "normal":
-        return "Je suis prêt(e) à m’investir régulièrement si le plan est bien organisé.";
+        return "Je peux m’y mettre régulièrement si c’est bien organisé.";
       case "maxi":
-        return "Je veux un défi ambitieux avec plusieurs étapes et du travail d’équipe.";
+        return "Défi ambitieux, plusieurs étapes + équipe.";
     }
   }
 
-  /* ----------------------------------------
-     MOULINETTE : GENERER LE PROMPT
-  ---------------------------------------- */
-
   function genererPromptFinal() {
     if (!form.titreDefi.trim() || !form.descriptionDefi.trim()) {
-      alert(
-        "Merci de remplir au minimum le titre du défi et la description de ce que tu veux changer.",
-      );
+      alert("Merci de remplir au minimum le titre + la description.");
       return;
     }
 
-    const prenom = form.prenom.trim() || "un élève";
+    const prenom = form.prenom.trim() || "un élève de 6e";
     const titre = form.titreDefi.trim();
     const description = form.descriptionDefi.trim();
     const pourquoi =
-      form.pourquoiImportant.trim() ||
-      "Je veux créer un changement positif autour de moi.";
+      form.pourquoiImportant.trim() || "Je veux améliorer les choses autour de moi.";
+
     const lieuGlobal = form.typeLieu
       ? TYPES_LIEU.find((t) => t.value === form.typeLieu)?.label
       : "";
@@ -279,37 +402,31 @@ export default function DefisPereNoelPage() {
     const personnes =
       form.personnesImpliquees.trim() || "Je ne sais pas encore qui impliquer.";
     const temps =
-      form.tempsDispo.trim() ||
-      "Le calendrier peut être adapté pour que le défi reste réaliste.";
+      form.tempsDispo.trim() || "À définir pour que ce soit réaliste.";
     const contraintes = form.contraintes.trim();
 
     const prompt =
-      `Tu es une IA pédagogique et créative qui aide ${prenom} à imaginer un **défi positif** pour changer un petit morceau du monde.\n\n` +
-      `🎯 *Titre du défi* : ${titre}\n` +
-      `🌍 *Contexte / lieu* : ${contexteLieu}\n` +
-      `🏷️ *Domaine principal* : ${domaineTexte}\n\n` +
-      `📝 *Description de ce que je veux changer* :\n${description}\n\n` +
-      `💡 *Pourquoi ce défi est important pour moi / pour nous* :\n${pourquoi}\n\n` +
-      `👥 *Personnes qui pourraient être impliquées* :\n${personnes}\n\n` +
-      `⏱️ *Durée ou période imaginée* :\n${temps}\n\n` +
-      `⚡ *Niveau d’énergie que je peux y mettre* :\n${descriptionNiveauEnergie()}\n\n` +
-      (contraintes
-        ? `⚠️ *Contraintes à respecter* :\n${contraintes}\n\n`
-        : "") +
-      `🎄 Ta mission :\n` +
-      `1. Reformule mon défi en quelques phrases claires, comme si tu écrivais un petit briefing pour un projet.\n` +
-      `2. Propose-moi un plan d’action en étapes simples (avec des actions très concrètes) adapté à mon niveau d’énergie.\n` +
-      `3. Donne quelques idées pour impliquer les autres (classe, famille, adultes…).\n` +
-      `4. Termine par un petit message motivant, façon “Père Noël de l’IA” qui m’encourage à essayer pour de vrai.`;
+      `Tu es une IA pédagogique et créative. Tu aides ${prenom} à imaginer un **défi positif** (niveau 6e), très concret.\n\n` +
+      `🎯 Titre : ${titre}\n` +
+      `🌍 Lieu : ${contexteLieu}\n` +
+      `🏷️ Domaine : ${domaineTexte}\n\n` +
+      `📝 Ce que je veux changer :\n${description}\n\n` +
+      `💡 Pourquoi c’est important :\n${pourquoi}\n\n` +
+      `👥 Personnes à impliquer :\n${personnes}\n\n` +
+      `⏱️ Durée :\n${temps}\n\n` +
+      `⚡ Mon énergie :\n${descriptionNiveauEnergie()}\n\n` +
+      (contraintes ? `⚠️ Contraintes :\n${contraintes}\n\n` : "") +
+      `🎄 Ta mission (réponse courte, claire, motivante) :\n` +
+      `1) Reformule mon défi en 3 phrases simples.\n` +
+      `2) Propose un plan en 5 étapes (actions très concrètes).\n` +
+      `3) Donne 5 idées faciles pour embarquer la classe / un adulte.\n` +
+      `4) Ajoute 3 “indicateurs de réussite” (comment je sais que ça marche).\n` +
+      `5) Termine par un message “Père Noël de l’IA” (encourageant).`;
 
     setPromptFinal(prompt);
     setCopiedPrompt(false);
     setCopiedDiscord(false);
   }
-
-  /* ----------------------------------------
-     ACTIONS : COPIE + WHATSAPP
-  ---------------------------------------- */
 
   async function copierPrompt() {
     if (!promptFinal) return;
@@ -327,15 +444,11 @@ export default function DefisPereNoelPage() {
 
   const whatsappUrl = promptFinal
     ? `https://wa.me/33692742958?text=${encodeURIComponent(promptFinal)}`
-    : undefined; // adapte le numéro
+    : undefined;
 
   const tchatHref = promptFinal
     ? `/tchat?prompt=${encodeURIComponent(promptFinal)}`
     : "/tchat";
-
-  /* ----------------------------------------
-     RENDER
-  ---------------------------------------- */
 
   return (
     <main className="min-h-screen bg-gradient-to-b from-emerald-50 via-white to-slate-50 text-gray-900">
@@ -343,18 +456,16 @@ export default function DefisPereNoelPage() {
         {/* HEADER */}
         <header className="space-y-3">
           <p className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100 text-xs font-semibold text-emerald-800">
-            🎄 Défis IA Père Noël – Change ton monde
+            🎄 Défis IA Père Noël – spécial 6e
           </p>
 
           <h1 className="text-3xl sm:text-4xl font-extrabold text-[#0047B6]">
-            Écris ton défi IA Père Noël
+            Écris ton défi (et laisse l’IA t’aider)
           </h1>
 
           <p className="text-sm text-gray-700 max-w-2xl">
-            Tu vas préparer un *prompt* que tu pourras envoyer à Frédéric
-            (WhatsApp ou Discord). L’idée : imaginer un défi positif pour ta
-            classe, ta famille, ton établissement… et laisser l’IA t’aider à en
-            faire un vrai plan d’action.
+            Tu remplis le formulaire, puis tu génères un message (un prompt) à coller
+            dans EleveAI, ChatGPT, Gemini… L’IA te donne un plan d’action simple.
           </p>
 
           <div className="text-xs text-gray-600 flex flex-wrap items-center gap-4">
@@ -362,36 +473,25 @@ export default function DefisPereNoelPage() {
               href="/"
               className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full border border-slate-200 bg-white hover:bg-slate-50"
             >
-              ⬅️ Retour à l’accueil EleveAI
+              ⬅️ Retour
             </Link>
             <span>
-              Étapes : 1) Tu remplis le formulaire – 2) Tu génères ton prompt –
-              3) Tu l’envoies à Frédéric.
+              Étapes : 1) mission (optionnel) → 2) formulaire → 3) générer → 4) copier/coller.
             </span>
           </div>
         </header>
 
-        {/* PRESETS */}
-        <PresetCarousel
-          title="1️⃣ Choisis un modèle de défi (facultatif)"
-          subtitle="Tu peux partir d’une idée proche de ce que tu veux faire, puis adapter ensuite tous les champs."
-          items={PRESET_ITEMS}
-          onSelect={(id) => appliquerPreset(id as PresetKeyDefi)}
-        />
+        {/* ✅ PRESETS SANS RECHERCHE/TRI */}
+        <Presets6e onPick={appliquerPreset} />
 
         <div className="grid gap-6 lg:grid-cols-2">
-          {/* COLONNE GAUCHE : FORMULAIRE */}
+          {/* FORM */}
           <section className="bg-white/95 border border-slate-200 rounded-2xl shadow-sm p-5 sm:p-6 space-y-4">
-            <h2 className="text-md font-bold text-[#0047B6]">
-              2️⃣ Raconte ton défi
-            </h2>
+            <h2 className="text-md font-bold text-[#0047B6]">2️⃣ Raconte ton défi</h2>
 
-            {/* Infos de base */}
             <div className="grid sm:grid-cols-3 gap-3">
               <div className="space-y-1">
-                <label className="text-xs font-semibold">
-                  Prénom (facultatif)
-                </label>
+                <label className="text-xs font-semibold">Prénom (facultatif)</label>
                 <input
                   type="text"
                   value={form.prenom}
@@ -402,17 +502,13 @@ export default function DefisPereNoelPage() {
               </div>
 
               <div className="space-y-1">
-                <label className="text-xs font-semibold">
-                  Âge / classe (facultatif)
-                </label>
+                <label className="text-xs font-semibold">Âge / classe (facultatif)</label>
                 <input
                   type="text"
                   value={form.ageOuClasse}
-                  onChange={(e) =>
-                    handleChange("ageOuClasse", e.target.value)
-                  }
+                  onChange={(e) => handleChange("ageOuClasse", e.target.value)}
                   className="w-full border rounded-lg px-3 py-2 text-sm"
-                  placeholder="Ex : 5e, 14 ans"
+                  placeholder="Ex : 6e, 11 ans"
                 />
               </div>
 
@@ -420,9 +516,7 @@ export default function DefisPereNoelPage() {
                 <label className="text-xs font-semibold">Type de lieu</label>
                 <select
                   value={form.typeLieu}
-                  onChange={(e) =>
-                    handleChange("typeLieu", e.target.value as TypeLieu)
-                  }
+                  onChange={(e) => handleChange("typeLieu", e.target.value as TypeLieu)}
                   className="w-full border rounded-lg px-3 py-2 text-sm"
                 >
                   <option value="">Choisir…</option>
@@ -435,31 +529,23 @@ export default function DefisPereNoelPage() {
               </div>
             </div>
 
-            {/* Lieu précis */}
             <div className="space-y-1">
-              <label className="text-xs font-semibold">
-                Où se passe ton défi ? (facultatif)
-              </label>
+              <label className="text-xs font-semibold">Où exactement ? (facultatif)</label>
               <input
                 type="text"
                 value={form.lieuPrecis}
                 onChange={(e) => handleChange("lieuPrecis", e.target.value)}
                 className="w-full border rounded-lg px-3 py-2 text-sm"
-                placeholder="Ex : Collège X à La Réunion, à la maison, dans mon quartier…"
+                placeholder="Ex : mon collège, ma rue, ma maison…"
               />
             </div>
 
-            {/* Domaine + Titre */}
             <div className="grid sm:grid-cols-2 gap-3">
               <div className="space-y-1">
-                <label className="text-xs font-semibold">
-                  Domaine principal du défi
-                </label>
+                <label className="text-xs font-semibold">Domaine</label>
                 <select
                   value={form.domaine}
-                  onChange={(e) =>
-                    handleChange("domaine", e.target.value as DomaineDefi)
-                  }
+                  onChange={(e) => handleChange("domaine", e.target.value as DomaineDefi)}
                   className="w-full border rounded-lg px-3 py-2 text-sm"
                 >
                   <option value="">Choisir…</option>
@@ -472,121 +558,84 @@ export default function DefisPereNoelPage() {
               </div>
 
               <div className="space-y-1">
-                <label className="text-xs font-semibold">
-                  Titre de ton défi
-                </label>
+                <label className="text-xs font-semibold">Titre</label>
                 <input
                   type="text"
                   value={form.titreDefi}
                   onChange={(e) => handleChange("titreDefi", e.target.value)}
                   className="w-full border rounded-lg px-3 py-2 text-sm"
-                  placeholder="Ex : Une classe plus écologique"
+                  placeholder="Ex : Classe plus cool"
                 />
               </div>
             </div>
 
-            {/* Description */}
             <div className="space-y-1">
-              <label className="text-xs font-semibold">
-                Ce que tu veux changer concrètement
-              </label>
+              <label className="text-xs font-semibold">Ce que tu veux changer</label>
               <textarea
                 value={form.descriptionDefi}
-                onChange={(e) =>
-                  handleChange("descriptionDefi", e.target.value)
-                }
-                className="w-full border rounded-lg px-3 py-2 text-sm min-h-[80px]"
-                placeholder="Décris ton idée avec tes mots : ce qui te gêne aujourd’hui et ce que tu aimerais voir comme changement."
+                onChange={(e) => handleChange("descriptionDefi", e.target.value)}
+                className="w-full border rounded-lg px-3 py-2 text-sm min-h-[90px]"
+                placeholder="Décris ton idée en 2 à 4 phrases."
               />
             </div>
 
-            {/* Pourquoi c'est important */}
             <div className="space-y-1">
-              <label className="text-xs font-semibold">
-                Pourquoi ce défi est important pour toi / pour vous ?
-              </label>
+              <label className="text-xs font-semibold">Pourquoi c’est important ?</label>
               <textarea
                 value={form.pourquoiImportant}
-                onChange={(e) =>
-                  handleChange("pourquoiImportant", e.target.value)
-                }
+                onChange={(e) => handleChange("pourquoiImportant", e.target.value)}
                 className="w-full border rounded-lg px-3 py-2 text-sm min-h-[70px]"
-                placeholder="Ex : Pour que l’ambiance soit meilleure, pour aider des personnes, pour protéger la nature…"
+                placeholder="Ex : pour mieux apprendre, mieux vivre ensemble…"
               />
             </div>
 
-            {/* Personnes + temps */}
             <div className="grid sm:grid-cols-2 gap-3">
               <div className="space-y-1">
-                <label className="text-xs font-semibold">
-                  Qui pourrait t’aider ?
-                </label>
+                <label className="text-xs font-semibold">Qui peut t’aider ?</label>
                 <textarea
                   value={form.personnesImpliquees}
-                  onChange={(e) =>
-                    handleChange("personnesImpliquees", e.target.value)
-                  }
+                  onChange={(e) => handleChange("personnesImpliquees", e.target.value)}
                   className="w-full border rounded-lg px-3 py-2 text-sm min-h-[60px]"
-                  placeholder="Ex : mes camarades, un prof, la vie scolaire, ma famille…"
+                  placeholder="Ex : mes amis, un prof, CPE, famille…"
                 />
               </div>
 
               <div className="space-y-1">
-                <label className="text-xs font-semibold">
-                  Sur combien de temps ? (semaines, mois…)
-                </label>
+                <label className="text-xs font-semibold">Durée</label>
                 <textarea
                   value={form.tempsDispo}
-                  onChange={(e) =>
-                    handleChange("tempsDispo", e.target.value)
-                  }
+                  onChange={(e) => handleChange("tempsDispo", e.target.value)}
                   className="w-full border rounded-lg px-3 py-2 text-sm min-h-[60px]"
-                  placeholder="Ex : Un mois, tout le deuxième trimestre, pendant les vacances…"
+                  placeholder="Ex : 10 jours, 2 semaines, 1 mois…"
                 />
               </div>
             </div>
 
-            {/* Niveau d'énergie + contraintes */}
             <div className="grid sm:grid-cols-2 gap-3">
               <div className="space-y-1">
-                <label className="text-xs font-semibold">
-                  Ton niveau d’énergie pour ce défi
-                </label>
+                <label className="text-xs font-semibold">Niveau d’énergie</label>
                 <select
                   value={form.niveauEnergie}
-                  onChange={(e) =>
-                    handleChange("niveauEnergie", e.target.value as NiveauEnergie)
-                  }
+                  onChange={(e) => handleChange("niveauEnergie", e.target.value as NiveauEnergie)}
                   className="w-full border rounded-lg px-3 py-2 text-sm"
                 >
-                  <option value="mini">
-                    Mini : petites actions simples à mettre en place
-                  </option>
-                  <option value="normal">
-                    Normal : je peux m’investir régulièrement
-                  </option>
-                  <option value="maxi">
-                    Maxi : gros défi avec plusieurs étapes
-                  </option>
+                  <option value="mini">Mini : petites actions faciles</option>
+                  <option value="normal">Normal : je m’y mets régulièrement</option>
+                  <option value="maxi">Maxi : gros défi en équipe</option>
                 </select>
               </div>
 
               <div className="space-y-1">
-                <label className="text-xs font-semibold">
-                  Contraintes à respecter (facultatif)
-                </label>
+                <label className="text-xs font-semibold">Contraintes (facultatif)</label>
                 <textarea
                   value={form.contraintes}
-                  onChange={(e) =>
-                    handleChange("contraintes", e.target.value)
-                  }
+                  onChange={(e) => handleChange("contraintes", e.target.value)}
                   className="w-full border rounded-lg px-3 py-2 text-sm min-h-[60px]"
-                  placeholder="Ex : Pas d’argent à dépenser, pas trop de temps pour les adultes…"
+                  placeholder="Ex : pas d’argent, pas trop de temps…"
                 />
               </div>
             </div>
 
-            {/* Bouton générer */}
             <div className="pt-3 flex justify-end">
               <button
                 onClick={genererPromptFinal}
@@ -597,13 +646,10 @@ export default function DefisPereNoelPage() {
             </div>
           </section>
 
-          {/* COLONNE DROITE */}
+          {/* RIGHT */}
           <section className="space-y-4">
-            {/* Suggestions */}
             <div className="bg-white/95 border border-emerald-200 rounded-2xl shadow-sm p-5 space-y-3">
-              <h2 className="text-lg font-bold text-emerald-700">
-                3️⃣ Conseils pour mieux remplir
-              </h2>
+              <h2 className="text-lg font-bold text-emerald-700">3️⃣ Conseils</h2>
               <ul className="space-y-2 text-sm text-gray-700">
                 {suggestions.map((s, i) => (
                   <li key={i} className="flex gap-2">
@@ -614,25 +660,19 @@ export default function DefisPereNoelPage() {
               </ul>
             </div>
 
-            {/* Prompt final + actions */}
             <div className="bg-slate-900 text-slate-50 border border-slate-800 rounded-2xl shadow-md p-5 space-y-4">
               <div className="flex items-center justify-between gap-2">
                 <div>
-                  <h2 className="text-lg font-bold text-emerald-300">
-                    4️⃣ Ta liste de défis / ton prompt
-                  </h2>
+                  <h2 className="text-lg font-bold text-emerald-300">4️⃣ Ton prompt</h2>
                   <p className="text-[11px] text-slate-300">
-                    Tu pourras envoyer ce message à Frédéric sur WhatsApp ou le
-                    coller sur Discord.
+                    Copie-colle ce texte dans EleveAI / ChatGPT / Gemini…
                   </p>
                 </div>
                 <button
                   onClick={copierPrompt}
                   disabled={!promptFinal}
                   className={`px-3 py-1.5 rounded-lg text-xs font-semibold ${
-                    promptFinal
-                      ? "bg-slate-100 text-slate-900"
-                      : "bg-slate-700 text-slate-400"
+                    promptFinal ? "bg-slate-100 text-slate-900" : "bg-slate-700 text-slate-400"
                   }`}
                 >
                   {copiedPrompt ? "✅ Copié" : "📋 Copier"}
@@ -642,50 +682,19 @@ export default function DefisPereNoelPage() {
               <textarea
                 readOnly
                 value={promptFinal}
-                className="w-full border border-slate-700 rounded-lg px-3 py-2 text-xs font-mono bg-slate-950 min-h-[220px]"
-                placeholder="Ton prompt Père Noël apparaîtra ici après avoir cliqué sur « Générer mon prompt »."
+                className="w-full border border-slate-700 rounded-lg px-3 py-2 text-xs font-mono bg-slate-950 min-h-[230px]"
+                placeholder="Ton prompt apparaîtra ici après génération."
               />
 
-              {/* Boutons WhatsApp / Discord */}
-              <div className="flex flex-wrap gap-3 pt-1">
-                <a
-                  href={whatsappUrl || "#"}
-                  target={whatsappUrl ? "_blank" : undefined}
-                  rel={whatsappUrl ? "noreferrer" : undefined}
-                  aria-disabled={!promptFinal}
-                  className={`inline-flex items-center justify-center gap-2 px-4 py-2 rounded-full text-xs font-semibold ${
-                    promptFinal
-                      ? "bg-emerald-500 hover:bg-emerald-600 text-white"
-                      : "bg-slate-700 text-slate-400 cursor-not-allowed"
-                  }`}
-                >
-                  💬 Envoyer sur WhatsApp (Frédéric)
-                </a>
-
-                <button
-                  onClick={copierPourDiscord}
-                  disabled={!promptFinal}
-                  className={`inline-flex items-center justify-center gap-2 px-4 py-2 rounded-full text-xs font-semibold ${
-                    promptFinal
-                      ? "bg-slate-100 text-slate-900"
-                      : "bg-slate-700 text-slate-400"
-                  }`}
-                >
-                  {copiedDiscord ? "✅ Copié pour Discord" : "🧩 Copier pour Discord"}
-                </button>
-              </div>
-
-              {/* 🔗 Liens vers les IA */}
+ 
               <div className="pt-3 space-y-2">
-                <p className="text-[11px] text-slate-300">
-                  Tu peux aussi utiliser ce prompt dans l’IA de ton choix :
-                </p>
+                <p className="text-[11px] text-slate-300">Utiliser dans :</p>
                 <div className="flex flex-wrap gap-2 text-xs">
                   <Link
                     href={tchatHref}
                     className="px-3 py-2 rounded-lg bg-emerald-600 text-white font-semibold hover:bg-emerald-700"
                   >
-                    🚀 Utiliser EleveAI
+                    🚀 EleveAI
                   </Link>
                   <a
                     href="https://chatgpt.com"
@@ -703,28 +712,12 @@ export default function DefisPereNoelPage() {
                   >
                     Gemini
                   </a>
-                  <a
-                    href="https://claude.ai"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="px-3 py-2 rounded-lg bg-[#4B3FFF] text-white font-semibold"
-                  >
-                    Claude
-                  </a>
-                  <a
-                    href="https://chat.mistral.ai"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="px-3 py-2 rounded-lg bg-[#FF7F11] text-white font-semibold"
-                  >
-                    Mistral
-                  </a>
                 </div>
               </div>
 
               <p className="text-[11px] text-slate-400 pt-1">
-                Astuce : après la réponse de Frédéric ou de l’IA, tu pourras
-                renvoyer un nouveau message pour affiner ton plan d’action.
+                Astuce : après la réponse de l’IA, tu peux recopier le plan et demander “fais plus simple”
+                ou “donne-moi 3 étapes”.
               </p>
             </div>
           </section>
@@ -733,5 +726,3 @@ export default function DefisPereNoelPage() {
     </main>
   );
 }
-
-
