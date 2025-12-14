@@ -1,16 +1,24 @@
+// app/espace-eleves/page.tsx
 "use client";
 
 import { useMemo, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import {
-  PresetCarousel,
-  PresetCarouselItem,
-} from "@/components/PresetCarousel";
+import { PresetCarousel, PresetCarouselItem } from "@/components/PresetCarousel";
 import { createClient } from "@/lib/supabase/client";
+import {
+  Sparkles,
+  RotateCcw,
+  ClipboardCopy,
+  Check,
+  ChevronRight,
+  Timer,
+  Smile,
+  Frown,
+  Star,
+} from "lucide-react";
 
 export const dynamic = "force-dynamic";
-
 
 /* ----------------------------------------
    TYPES
@@ -51,7 +59,7 @@ type PromptEleve = {
   chapitre: string;
   typeAide: TypeAide | "";
   confiance: Confiance;
-  tempsDispo: string;
+  tempsDispo: string; // ex: "20 min"
   objectifPerso: string;
   exemplesDifficiles: string;
   prefereQuestions: boolean;
@@ -87,185 +95,271 @@ const MATIERES = [
   "Autre",
 ];
 
-const TYPES_AIDE: { value: TypeAide; label: string }[] = [
+const TYPE_AIDE_CARDS: {
+  value: TypeAide;
+  label: string;
+  desc: string;
+  emoji: string;
+}[] = [
   {
     value: "manipuler_pour_comprendre",
-    label: "Manipuler pour comprendre",
+    label: "Manipuler",
+    desc: "Exemples concrets + étapes",
+    emoji: "🧩",
   },
-  { value: "comprendre_le_cours", label: "Comprendre le cours" },
-  { value: "reviser_un_chapitre", label: "Réviser un chapitre" },
-  { value: "preparer_un_controle", label: "Préparer un contrôle" },
-  { value: "faire_des_exercices", label: "Faire des exercices" },
-  { value: "methode_de_travail", label: "Méthode de travail" },
-  { value: "defis", label: "Défis" },
+  {
+    value: "comprendre_le_cours",
+    label: "Comprendre",
+    desc: "Explication simple + mini test",
+    emoji: "💡",
+  },
+  {
+    value: "reviser_un_chapitre",
+    label: "Réviser",
+    desc: "Résumé + exercices",
+    emoji: "📌",
+  },
+  {
+    value: "preparer_un_controle",
+    label: "Contrôle",
+    desc: "Entraînement + méthodes",
+    emoji: "🎯",
+  },
+  {
+    value: "faire_des_exercices",
+    label: "Exercices",
+    desc: "Série progressive",
+    emoji: "✍️",
+  },
+  {
+    value: "methode_de_travail",
+    label: "Méthode",
+    desc: "Organisation + astuces",
+    emoji: "🗓️",
+  },
+  {
+    value: "defis",
+    label: "Défis",
+    desc: "Petits challenges",
+    emoji: "⚡",
+  },
+];
+
+const TIME_CHIPS = ["10 min", "20 min", "30 min", "45 min", "60 min"] as const;
+
+const CONFIANCE_CHIPS: {
+  value: Confiance;
+  label: string;
+  icon: React.ReactNode;
+  hint: string;
+}[] = [
+  {
+    value: "en_difficulte",
+    label: "J’ai du mal",
+    icon: <Frown className="w-4 h-4" />,
+    hint: "On va y aller pas à pas.",
+  },
+  {
+    value: "moyen",
+    label: "Ça va",
+    icon: <Smile className="w-4 h-4" />,
+    hint: "On corrige les erreurs.",
+  },
+  {
+    value: "a_l_aise",
+    label: "Je suis à l’aise",
+    icon: <Star className="w-4 h-4" />,
+    hint: "On vérifie et on approfondit.",
+  },
 ];
 
 /* ----------------------------------------
-   PRESETS
+   PRESETS (intégrés ici)
+   👉 si tu crées data/elevesPresets.ts, remplace juste ce bloc + PRESET_ITEMS
 ---------------------------------------- */
 
 type PresetKey =
-  | "controle_fractions_5e"
-  | "brevet_maths_3e"
-  | "redaction_francais_3e"
-  | "methodo_seconde"
-  | "decouverte_6e_maths"
-  | "remise_a_niveau_4e_francais"
-  | "terminale_spe_maths_fonctions"
-  | "troisieme_anglais_oral";
+  | "6e_maths_calculs_base"
+  | "6e_maths_fractions_debut"
+  | "5e_maths_fractions_controle"
+  | "4e_fr_orthographe"
+  | "3e_maths_brevet_revision"
+  | "3e_langues_oral"
+  | "seconde_methodo"
+  | "terminale_maths_fonctions";
 
 const PRESETS: Record<
   PresetKey,
-  { label: string; description: string; valeurs: Partial<PromptEleve> }
+  {
+    label: string;
+    description: string;
+    badges?: string[];
+    valeurs: Partial<PromptEleve>;
+  }
 > = {
-  controle_fractions_5e: {
-    label: "🟣 5e – Contrôle de maths (fractions)",
-    description: "Pour réviser un contrôle de fractions simple.",
+  "6e_maths_calculs_base": {
+    label: "🧩 6e – Calculs de base",
+    description: "Additions / soustractions / multiplications, pas à pas.",
+    badges: ["6e", "Maths", "Bases"],
+    valeurs: {
+      classe: "6e",
+      matiere: "Mathématiques",
+      chapitre: "Calculs de base (priorités simples, opérations)",
+      typeAide: "manipuler_pour_comprendre",
+      confiance: "en_difficulte",
+      tempsDispo: "20 min",
+      objectifPerso: "Je veux être plus rapide et faire moins d’erreurs.",
+      prefereQuestions: true,
+      prefereExemplesConcrets: true,
+    },
+  },
+  "6e_maths_fractions_debut": {
+    label: "🍕 6e – Fractions (démarrage)",
+    description: "Comprendre 1/2, 3/4… avec dessins et exemples.",
+    badges: ["6e", "Maths", "Fractions"],
+    valeurs: {
+      classe: "6e",
+      matiere: "Mathématiques",
+      chapitre: "Fractions : sens, représentation, comparaison simple",
+      typeAide: "comprendre_le_cours",
+      confiance: "moyen",
+      tempsDispo: "25 min",
+      objectifPerso: "Je veux comprendre les fractions avec des exemples faciles.",
+      prefereQuestions: true,
+      prefereExemplesConcrets: true,
+    },
+  },
+  "5e_maths_fractions_controle": {
+    label: "🟣 5e – Contrôle fractions",
+    description: "Réviser : addition/soustraction/simplification.",
+    badges: ["5e", "Maths", "Contrôle"],
     valeurs: {
       classe: "5e",
       matiere: "Mathématiques",
       chapitre: "Fractions : addition, soustraction, simplification",
       typeAide: "preparer_un_controle",
       confiance: "en_difficulte",
-      tempsDispo: "30 minutes",
-      objectifPerso:
-        "Je voudrais enfin comprendre comment additionner des fractions sans me tromper.",
+      tempsDispo: "30 min",
+      objectifPerso: "Je veux réussir mon contrôle sans paniquer.",
       prefereQuestions: true,
       prefereExemplesConcrets: true,
     },
   },
-  brevet_maths_3e: {
-    label: "🧮 3e – Préparer le brevet de maths",
-    description: "Révision globale : calcul, géométrie, fonctions, probas.",
+  "4e_fr_orthographe": {
+    label: "✍️ 4e – Orthographe",
+    description: "Accords + astuces + entraînement progressif.",
+    badges: ["4e", "Français", "Exercices"],
+    valeurs: {
+      classe: "4e",
+      matiere: "Français",
+      chapitre: "Orthographe : accords, conjugaison, homophones",
+      typeAide: "faire_des_exercices",
+      confiance: "en_difficulte",
+      tempsDispo: "20 min",
+      objectifPerso: "Je veux faire moins de fautes dans mes textes.",
+      prefereQuestions: true,
+      prefereExemplesConcrets: true,
+    },
+  },
+  "3e_maths_brevet_revision": {
+    label: "🎯 3e – Révisions brevet maths",
+    description: "Révision globale + mini test pour repérer tes points faibles.",
+    badges: ["3e", "Maths", "Brevet"],
     valeurs: {
       classe: "3e",
       matiere: "Mathématiques",
-      chapitre:
-        "Révision brevet : fonctions, calcul littéral, géométrie, probabilités",
-      typeAide: "preparer_un_controle",
+      chapitre: "Brevet : calcul, géométrie, fonctions, probabilités",
+      typeAide: "reviser_un_chapitre",
       confiance: "moyen",
-      tempsDispo: "45 minutes",
-      objectifPerso:
-        "Je veux vérifier si je suis prêt pour le brevet et trouver mes faiblesses.",
+      tempsDispo: "45 min",
+      objectifPerso: "Je veux savoir ce que je dois revoir en priorité.",
       prefereQuestions: true,
       prefereExemplesConcrets: true,
     },
   },
-  redaction_francais_3e: {
-    label: "📚 3e – Rédaction en français",
-    description: "Améliorer les rédactions et organiser les idées.",
+  "3e_langues_oral": {
+    label: "🎤 3e – Anglais oral",
+    description: "S’entraîner à parler, phrases simples + corrections.",
+    badges: ["3e", "Langues", "Oral"],
     valeurs: {
       classe: "3e",
-      matiere: "Français",
-      chapitre:
-        "Rédaction : structurer introduction, développement et conclusion",
+      matiere: "Langues",
+      chapitre: "Oral : se présenter, parler de ses goûts",
+      typeAide: "faire_des_exercices",
+      confiance: "moyen",
+      tempsDispo: "15 min",
+      objectifPerso: "Je veux oser parler en anglais.",
+      prefereQuestions: true,
+      prefereExemplesConcrets: true,
+    },
+  },
+  "seconde_methodo": {
+    label: "📘 Seconde – Méthode de travail",
+    description: "Organisation, révisions, apprendre efficacement.",
+    badges: ["Seconde", "Méthode"],
+    valeurs: {
+      classe: "Seconde",
+      matiere: "Autre",
+      chapitre: "Méthode : s’organiser, réviser, mémoriser",
       typeAide: "methode_de_travail",
-      confiance: "en_difficulte",
-      tempsDispo: "30 minutes",
-      objectifPerso:
-        "Je veux apprendre une méthode simple pour organiser une rédaction.",
+      confiance: "moyen",
+      tempsDispo: "20 min",
+      objectifPerso: "Je veux arrêter de tout faire au dernier moment.",
       prefereQuestions: false,
       prefereExemplesConcrets: true,
     },
   },
-  methodo_seconde: {
-    label: "📘 Seconde – Méthode de travail",
-    description: "Aider un élève entrant au lycée à s'organiser.",
-    valeurs: {
-      classe: "Seconde",
-      matiere: "Autre",
-      chapitre: "Méthode de travail : apprendre efficacement",
-      typeAide: "methode_de_travail",
-      confiance: "moyen",
-      tempsDispo: "40 minutes",
-      objectifPerso:
-        "Je veux une méthode simple pour travailler plus régulièrement.",
-    },
-  },
-  decouverte_6e_maths: {
-    label: "🔢 6e – Découvrir les maths au collège",
-    description:
-      "Pour un élève de 6e qui a besoin de prendre confiance en maths dès le début de l’année.",
-    valeurs: {
-      classe: "6e",
-      matiere: "Mathématiques",
-      chapitre: "Nombres entiers, additions, soustractions, multiplications",
-      typeAide: "manipuler_pour_comprendre",
-      confiance: "en_difficulte",
-      tempsDispo: "20 minutes",
-      objectifPerso:
-        "Je veux comprendre les bases des nombres et des calculs pour être plus à l’aise en classe.",
-      prefereQuestions: true,
-      prefereExemplesConcrets: true,
-    },
-  },
-  remise_a_niveau_4e_francais: {
-    label: "✏️ 4e – Remise à niveau en français",
-    description:
-      "Pour retravailler l’orthographe et la grammaire sans se décourager.",
-    valeurs: {
-      classe: "4e",
-      matiere: "Français",
-      chapitre: "Orthographe, accords, conjugaison de base",
-      typeAide: "faire_des_exercices",
-      confiance: "en_difficulte",
-      tempsDispo: "30 minutes",
-      objectifPerso:
-        "Je veux faire moins de fautes dans mes rédactions et mes contrôles.",
-      prefereQuestions: true,
-      prefereExemplesConcrets: true,
-    },
-  },
-  terminale_spe_maths_fonctions: {
-    label: "📈 Tle spé maths – Fonctions",
-    description:
-      "Révisions ciblées sur les fonctions pour préparer le bac spécialité maths.",
+  "terminale_maths_fonctions": {
+    label: "📈 Terminale – Fonctions",
+    description: "Méthodes bac : variations, dérivée, lecture graphique.",
+    badges: ["Terminale", "Maths", "Bac"],
     valeurs: {
       classe: "Terminale",
       matiere: "Mathématiques",
-      chapitre:
-        "Étude de fonctions, dérivation, variations, limites simples (niveau bac spé maths)",
+      chapitre: "Étude de fonctions : dérivation, variations, limites simples",
       typeAide: "reviser_un_chapitre",
       confiance: "moyen",
-      tempsDispo: "45 minutes",
-      objectifPerso:
-        "Je veux revoir les méthodes sur les fonctions pour réussir les exercices de bac.",
-      prefereQuestions: true,
-      prefereExemplesConcrets: true,
-    },
-  },
-  troisieme_anglais_oral: {
-    label: "🎤 3e – Anglais (oral)",
-    description:
-      "Pour s’entraîner à parler en anglais à l’oral, sans jugements, avant le brevet.",
-    valeurs: {
-      classe: "3e",
-      matiere: "Langues",
-      chapitre:
-        "Expression orale : se présenter, parler de sa journée, de ses goûts",
-      typeAide: "faire_des_exercices",
-      confiance: "moyen",
-      tempsDispo: "20 minutes",
-      objectifPerso:
-        "Je veux être plus à l’aise pour parler en anglais à l’oral en classe et pour le brevet.",
+      tempsDispo: "40 min",
+      objectifPerso: "Je veux réussir les exos type bac sur les fonctions.",
       prefereQuestions: true,
       prefereExemplesConcrets: true,
     },
   },
 };
 
-/* ----------------------------------------
-   ITEMS POUR LE CARROUSEL
----------------------------------------- */
-
 const PRESET_ITEMS: PresetCarouselItem[] = (
   Object.entries(PRESETS) as [PresetKey, (typeof PRESETS)[PresetKey]][]
-).map(([key, preset]) => ({
+).map(([key, p]) => ({
   id: key,
-  label: preset.label,
-  description: preset.description,
+  label: p.label,
+  description: p.description,
   badge: "Modèle élève",
+  badges: p.badges ?? [],
 }));
+
+/* ----------------------------------------
+   HELPERS
+---------------------------------------- */
+
+function typeAideLabel(t: TypeAide | "") {
+  const it = TYPE_AIDE_CARDS.find((x) => x.value === t);
+  return it ? `${it.emoji} ${it.label}` : "Aide libre";
+}
+
+function descriptionConfiance(c: Confiance) {
+  switch (c) {
+    case "en_difficulte":
+      return "Je me sens en difficulté : j’ai besoin d’explications simples, pas à pas.";
+    case "moyen":
+      return "Je comprends certaines choses mais je fais encore des erreurs.";
+    case "a_l_aise":
+      return "Je suis plutôt à l’aise : je veux vérifier et aller un peu plus loin.";
+  }
+}
+
+function isStep1Ok(form: PromptEleve) {
+  return !!(form.classe && form.matiere && form.typeAide && form.chapitre.trim());
+}
 
 /* ----------------------------------------
    PAGE
@@ -275,7 +369,7 @@ export default function ElevePage() {
   const router = useRouter();
   const supabase = createClient();
 
-  const [form, setForm] = useState<PromptEleve>({
+  const makeInitialForm = (): PromptEleve => ({
     prenom: "",
     classe: "",
     matiere: "",
@@ -292,85 +386,102 @@ export default function ElevePage() {
     dysPrecisionAutre: "",
   });
 
+  const [form, setForm] = useState<PromptEleve>(makeInitialForm());
+
+  // ✅ UI progressive (étapes)
+  const [showAdvanced, setShowAdvanced] = useState(false);
+
+  // sortie
   const [promptFinal, setPromptFinal] = useState("");
   const [copied, setCopied] = useState(false);
+
+  // saving
   const [saving, setSaving] = useState(false);
   const [saveMessage, setSaveMessage] = useState<string | null>(null);
 
-  function handleChange<K extends keyof PromptEleve>(
-    field: K,
-    value: PromptEleve[K],
-  ) {
+  function handleChange<K extends keyof PromptEleve>(field: K, value: PromptEleve[K]) {
     setForm((prev) => ({ ...prev, [field]: value }));
   }
 
   function appliquerPreset(key: PresetKey) {
     const preset = PRESETS[key];
-    setForm((prev) => ({
-      ...prev,
-      ...preset.valeurs,
-    }));
+    setForm((prev) => ({ ...prev, ...preset.valeurs }));
+    setShowAdvanced(true); // avec un preset, on affiche souvent l’étape 2
+    setPromptFinal("");
+    setCopied(false);
+    setSaveMessage(null);
+  }
+
+  function resetAll() {
+    setForm(makeInitialForm());
+    setShowAdvanced(false);
+    setPromptFinal("");
+    setCopied(false);
+    setSaveMessage(null);
   }
 
   /* ----------------------------------------
-     SUGGESTIONS
+     SUGGESTIONS (plus simples)
   ---------------------------------------- */
 
   const suggestions = useMemo(() => {
     const s: string[] = [];
 
-    if (!form.matiere) s.push("Choisis la matière pour que l’aide soit adaptée.");
-    if (!form.classe) s.push("Indique ta classe : 6e, 3e, Seconde…");
-    if (!form.chapitre.trim())
-      s.push("Précise le chapitre (fractions, Thalès, rédaction…).");
-    if (!form.typeAide)
-      s.push("Choisis ce que tu veux faire : comprendre, réviser, exercices…");
-    if (form.objectifPerso.trim().length < 10)
-      s.push("Décris ton objectif avec tes mots.");
-    if (!form.exemplesDifficiles.trim())
-      s.push("Ajoute un exemple de question qui te pose problème.");
+    if (!form.matiere) s.push("Choisis la matière.");
+    if (!form.classe) s.push("Indique ta classe.");
+    if (!form.typeAide) s.push("Choisis ce que tu veux faire.");
+    if (!form.chapitre.trim()) s.push("Écris le chapitre (fractions, Thalès…).");
 
-    if (s.length === 0)
-      s.push("Ton formulaire est parfait ! Tu peux générer le prompt.");
-
-    return s;
-  }, [form]);
-
-  /* ----------------------------------------
-     DESCRIPTION DU NIVEAU
-  ---------------------------------------- */
-
-  function descriptionConfiance() {
-    switch (form.confiance) {
-      case "en_difficulte":
-        return "Je me sens en difficulté et j’ai besoin d’explications simples.";
-      case "moyen":
-        return "Je comprends certaines choses mais je fais encore des erreurs.";
-      case "a_l_aise":
-        return "Je suis plutôt à l’aise et je veux vérifier ou aller plus loin.";
+    if (showAdvanced) {
+      if (form.objectifPerso.trim().length < 10) s.push("Ajoute ton objectif (1 phrase).");
+      if (!form.exemplesDifficiles.trim()) s.push("Ajoute un exemple qui te pose problème.");
     }
-  }
+
+    if (s.length === 0) s.push("Parfait ✅ Tu peux générer ton prompt.");
+    return s;
+  }, [form, showAdvanced]);
 
   /* ----------------------------------------
-     MOULINETTE : GENERER LE PROMPT
+     GENERER PROMPT (anti-triche + calibrage)
   ---------------------------------------- */
 
-  function genererPromptFinal() {
-    if (!form.classe || !form.matiere) {
-      alert("Indique au minimum ta classe et ta matière.");
+  function genererPromptFinal(mode: "rapide" | "complet" = "complet") {
+    // Step1 minimum
+    if (!form.classe || !form.matiere || !form.typeAide || !form.chapitre.trim()) {
+      alert("Remplis au minimum : classe, matière, chapitre, et ce que tu veux faire.");
       return;
     }
 
     const prenom = form.prenom.trim() || "un élève";
-    const chapitre = form.chapitre.trim() || "un chapitre du programme";
+    const chapitre = form.chapitre.trim();
+    const temps = form.tempsDispo?.trim() || "non précisé";
+
+    // si rapide, on tolère objectif/exemples vides
     const objectif =
-      form.objectifPerso.trim() ||
+      (mode === "complet" ? form.objectifPerso.trim() : "") ||
       "mieux comprendre ce chapitre et réussir les exercices importants.";
+
+    const exemples =
+      mode === "complet" ? form.exemplesDifficiles.trim() : "";
+
+    const blocPrefs =
+      `Mes préférences :\n` +
+      (form.prefereQuestions
+        ? "- Pose-moi d’abord 2 à 4 questions pour voir ce que je sais.\n"
+        : "- Tu peux expliquer directement, mais vérifie que je comprends.\n") +
+      (form.prefereExemplesConcrets
+        ? "- Utilise des exemples concrets avant la règle.\n"
+        : "- Tu peux aller à l’essentiel.\n");
+
+    const blocAntiTriche =
+      "\nIMPORTANT (anti-triche) :\n" +
+      "- Ne fais pas l’exercice à ma place.\n" +
+      "- Demande-moi d’essayer, puis corrige étape par étape.\n" +
+      "- À la fin, fais une mini vérification (2–3 questions).\n";
 
     const blocDYS = form.adaptationDYS
       ? (() => {
           const lignes: string[] = [];
-
           lignes.push("Je peux avoir des difficultés de type DYS. Merci d’adapter :");
           lignes.push("- phrases courtes et claires,");
           lignes.push("- explications pas à pas,");
@@ -378,28 +489,15 @@ export default function ElevePage() {
           lignes.push("- exemples simples avant la théorie.");
 
           if (form.dysTypes.includes("dyslexie"))
-            lignes.push(
-              "- Pour la dyslexie : éviter les blocs longs, mettre en évidence les mots importants.",
-            );
+            lignes.push("- Dyslexie : éviter les gros blocs, mettre en évidence les mots importants.");
           if (form.dysTypes.includes("dyspraxie"))
-            lignes.push(
-              "- Pour la dyspraxie : limiter les manipulations spatiales complexes, donner des étapes numérotées.",
-            );
+            lignes.push("- Dyspraxie : étapes numérotées, consignes très claires.");
           if (form.dysTypes.includes("dyscalculie"))
-            lignes.push(
-              "- Pour la dyscalculie : détailler les calculs étape par étape et privilégier les explications verbales.",
-            );
+            lignes.push("- Dyscalculie : détailler les calculs + verbaliser.");
           if (form.dysTypes.includes("dysorthographie"))
-            lignes.push(
-              "- Pour la dysorthographie : aider à structurer les phrases, ne pas se focaliser sur les fautes.",
-            );
-          if (
-            form.dysTypes.includes("autre") &&
-            form.dysPrecisionAutre?.trim()
-          )
-            lignes.push(
-              `- Autre difficulté indiquée : ${form.dysPrecisionAutre.trim()}.`,
-            );
+            lignes.push("- Dysorthographie : aider à structurer les phrases, pas de jugement sur les fautes.");
+          if (form.dysTypes.includes("autre") && form.dysPrecisionAutre?.trim())
+            lignes.push(`- Autre : ${form.dysPrecisionAutre.trim()}.`);
 
           return "\n" + lignes.join("\n") + "\n";
         })()
@@ -408,22 +506,16 @@ export default function ElevePage() {
     const prompt =
       `Tu es un professeur bienveillant de ${form.matiere}.\n` +
       `Tu t’adresses à un élève de ${form.classe}.\n\n` +
-      `Je suis ${prenom} et je veux travailler : ${chapitre}.\n` +
-      `Mon objectif : ${objectif}\n` +
-      `Mon niveau actuel : ${descriptionConfiance()}\n` +
-      `Temps disponible : ${form.tempsDispo || "non précisé"}\n\n` +
-      `Ce que je veux faire : ${form.typeAide || "Aide libre"}\n\n` +
-      `Mes préférences :\n` +
-      (form.prefereQuestions
-        ? "- Pose-moi d’abord des questions.\n"
-        : "- Tu peux expliquer directement.\n") +
-      (form.prefereExemplesConcrets
-        ? "- Utilise des exemples concrets.\n"
-        : "- Pas besoin d’exemples concrets.\n") +
+      `Je suis ${prenom}.\n` +
+      `Je veux travailler : ${chapitre}.\n` +
+      `Ce que je veux faire : ${typeAideLabel(form.typeAide)}.\n` +
+      `Mon niveau : ${descriptionConfiance(form.confiance)}\n` +
+      `Temps disponible : ${temps}\n\n` +
+      `Mon objectif : ${objectif}\n\n` +
+      blocPrefs +
+      (exemples ? `\nExemples qui me posent problème :\n${exemples}\n` : "") +
       blocDYS +
-      (form.exemplesDifficiles.trim()
-        ? `\nExemples qui me posent problème :\n${form.exemplesDifficiles.trim()}\n`
-        : "");
+      blocAntiTriche;
 
     setPromptFinal(prompt);
     setCopied(false);
@@ -432,20 +524,22 @@ export default function ElevePage() {
 
   async function copierPrompt() {
     if (!promptFinal) return;
-    await navigator.clipboard.writeText(promptFinal);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 1500);
+    try {
+      await navigator.clipboard.writeText(promptFinal);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1500);
+    } catch {
+      alert("Copie auto impossible. Sélectionne le texte puis Ctrl+C.");
+    }
   }
 
   /* ----------------------------------------
-     ENREGISTRER LE PRESET DANS SUPABASE
+     ENREGISTRER PRESET (Supabase)
   ---------------------------------------- */
 
   async function enregistrerPreset() {
     if (!promptFinal) {
-      alert(
-        "Génère d’abord ton prompt, puis tu pourras l’enregistrer comme preset.",
-      );
+      alert("Génère d’abord ton prompt, puis tu pourras l’enregistrer comme preset.");
       return;
     }
 
@@ -456,19 +550,10 @@ export default function ElevePage() {
 
     try {
       const { data, error: userError } = await supabase.auth.getUser();
-
-      if (userError) {
-        console.error("Erreur getUser Supabase :", userError);
-      }
-
+      if (userError) console.error("Erreur getUser Supabase :", userError);
       user = data?.user ?? null;
     } catch (err: any) {
-      // Cas où Supabase lève AuthSessionMissingError : on considère juste qu'il n'y a pas d'utilisateur connecté
-      if (
-        err?.name === "AuthSessionMissingError" ||
-        err?.message?.includes("Auth session missing")
-      ) {
-        console.warn("Aucune session Supabase : utilisateur non connecté.");
+      if (err?.name === "AuthSessionMissingError" || err?.message?.includes("Auth session missing")) {
         user = null;
       } else {
         console.error("Erreur inattendue Supabase :", err);
@@ -477,27 +562,21 @@ export default function ElevePage() {
 
     if (!user) {
       setSaving(false);
-      // Redirection vers la page de connexion, avec retour vers l’espace élèves
       router.push("/auth/signin?redirect=/espace-eleves");
       return;
     }
 
-    // 2. Demander un titre à l'élève
     const titreParDefaut =
       form.chapitre.trim() ||
-      `${form.matiere || "Matière"} – ${form.typeAide || "Aide"}`;
+      `${form.matiere || "Matière"} – ${form.typeAide ? typeAideLabel(form.typeAide) : "Aide"}`;
 
-    const titre = window.prompt(
-      "Titre de ton preset (pour le retrouver facilement) :",
-      titreParDefaut,
-    );
+    const titre = window.prompt("Titre de ton preset (pour le retrouver facilement) :", titreParDefaut);
 
     if (!titre) {
       setSaving(false);
       return;
     }
 
-    // 3. Enregistrer dans la table "presets_eleves"
     const { error } = await supabase.from("presets_eleves").insert({
       user_id: user.id,
       titre: titre.trim(),
@@ -517,7 +596,6 @@ export default function ElevePage() {
     setTimeout(() => setSaveMessage(null), 4000);
   }
 
-
   /* ----------------------------------------
      RENDER
   ---------------------------------------- */
@@ -532,37 +610,51 @@ export default function ElevePage() {
           </p>
 
           <h1 className="text-3xl sm:text-4xl font-extrabold text-[#0047B6]">
-            Crée ton propre prompt pour t’aider à apprendre
+            Ton coach IA pour apprendre (sans tricher)
           </h1>
 
           <p className="text-sm text-gray-700 max-w-2xl">
-            Remplis ce formulaire ou choisis un modèle : EleveAI créera pour toi
-            un prompt clair pour réviser, comprendre un chapitre ou préparer un
-            contrôle sans tricher.
+            Choisis un modèle ou remplis 4 infos rapides. Tu obtiens un prompt clair
+            pour comprendre, réviser ou préparer un contrôle. Ensuite, tu peux améliorer avec des options.
           </p>
         </header>
 
-        {/* 1️⃣ PRESETS – CARROUSEL */}
+        {/* PRESETS */}
         <PresetCarousel
           title="Choisir un modèle rapide (facultatif)"
-          subtitle="Tu peux gagner du temps en partant d’un exemple proche de ta situation. Tu pourras ensuite adapter tous les champs dans le formulaire."
+          subtitle="Clique sur un modèle : tu peux ensuite adapter tous les champs."
           items={PRESET_ITEMS}
           onSelect={(id) => appliquerPreset(id as PresetKey)}
+          tone="emerald"
+          searchPlaceholder="Rechercher un modèle… (fractions, brevet, oral, méthode)"
         />
 
         <div className="grid gap-6 lg:grid-cols-2">
-          {/* COLONNE GAUCHE : FORMULAIRE */}
+          {/* FORM */}
           <section className="bg-white/95 border border-slate-200 rounded-2xl shadow-sm p-5 sm:p-6 space-y-4">
-            <h2 className="text-md font-bold text-[#0047B6]">
-              2️⃣ Ta situation
-            </h2>
+            <div className="flex items-start justify-between gap-3">
+              <div>
+                <h2 className="text-md font-bold text-[#0047B6]">1️⃣ En 30 secondes</h2>
+                <p className="text-xs text-slate-600 mt-1">
+                  Remplis juste ça pour générer une aide rapide.
+                </p>
+              </div>
+
+              <button
+                type="button"
+                onClick={resetAll}
+                className="inline-flex items-center gap-2 px-3 py-2 rounded-xl border border-slate-200 bg-white text-xs font-semibold text-slate-700 hover:bg-slate-50"
+                title="Tout remettre à zéro"
+              >
+                <RotateCcw className="w-4 h-4" />
+                Reset
+              </button>
+            </div>
 
             {/* Prénom / classe / matière */}
             <div className="grid sm:grid-cols-3 gap-3">
               <div className="space-y-1">
-                <label className="text-xs font-semibold">
-                  Prénom (facultatif)
-                </label>
+                <label className="text-xs font-semibold">Prénom (facultatif)</label>
                 <input
                   type="text"
                   value={form.prenom}
@@ -576,14 +668,14 @@ export default function ElevePage() {
                 <label className="text-xs font-semibold">Classe</label>
                 <select
                   value={form.classe}
-                  onChange={(e) =>
-                    handleChange("classe", e.target.value as Classe)
-                  }
-                  className="w-full border rounded-lg px-3 py-2 text-sm"
+                  onChange={(e) => handleChange("classe", e.target.value as Classe)}
+                  className="w-full border rounded-lg px-3 py-2 text-sm bg-white"
                 >
                   <option value="">Choisir…</option>
                   {CLASSES.map((c) => (
-                    <option key={c}>{c}</option>
+                    <option key={c} value={c}>
+                      {c}
+                    </option>
                   ))}
                 </select>
               </div>
@@ -593,11 +685,13 @@ export default function ElevePage() {
                 <select
                   value={form.matiere}
                   onChange={(e) => handleChange("matiere", e.target.value)}
-                  className="w-full border rounded-lg px-3 py-2 text-sm"
+                  className="w-full border rounded-lg px-3 py-2 text-sm bg-white"
                 >
                   <option value="">Choisir…</option>
                   {MATIERES.map((m) => (
-                    <option key={m}>{m}</option>
+                    <option key={m} value={m}>
+                      {m}
+                    </option>
                   ))}
                 </select>
               </div>
@@ -605,9 +699,7 @@ export default function ElevePage() {
 
             {/* Chapitre */}
             <div className="space-y-1">
-              <label className="text-xs font-semibold">
-                Chapitre / thème à travailler
-              </label>
+              <label className="text-xs font-semibold">Chapitre / thème</label>
               <input
                 type="text"
                 value={form.chapitre}
@@ -617,212 +709,303 @@ export default function ElevePage() {
               />
             </div>
 
-            {/* Type d'aide */}
-            <div className="space-y-1">
-              <label className="text-xs font-semibold">
-                Ce que tu veux faire
-              </label>
-              <select
-                value={form.typeAide}
-                onChange={(e) =>
-                  handleChange("typeAide", e.target.value as TypeAide)
-                }
-                className="w-full border rounded-lg px-3 py-2 text-sm"
-              >
-                <option value="">Choisir…</option>
-                {TYPES_AIDE.map((t) => (
-                  <option key={t.value} value={t.value}>
-                    {t.label}
-                  </option>
-                ))}
-              </select>
+            {/* Type d’aide en cartes (plus engageant) */}
+            <div className="space-y-2">
+              <label className="text-xs font-semibold">Ce que tu veux faire</label>
+              <div className="grid sm:grid-cols-2 gap-2">
+                {TYPE_AIDE_CARDS.map((t) => {
+                  const active = form.typeAide === t.value;
+                  return (
+                    <button
+                      key={t.value}
+                      type="button"
+                      onClick={() => handleChange("typeAide", t.value)}
+                      className={`text-left rounded-xl border px-3 py-2 transition ${
+                        active
+                          ? "border-emerald-500 bg-emerald-50 shadow-sm"
+                          : "border-slate-200 bg-white hover:bg-slate-50"
+                      }`}
+                    >
+                      <div className="flex items-center justify-between gap-2">
+                        <span className="text-sm font-semibold text-slate-900">
+                          {t.emoji} {t.label}
+                        </span>
+                        {active && <Check className="w-4 h-4 text-emerald-600" />}
+                      </div>
+                      <p className="text-[11px] text-slate-600 mt-1">{t.desc}</p>
+                    </button>
+                  );
+                })}
+              </div>
             </div>
 
-            {/* Niveau et temps */}
+            {/* Temps chips + confiance chips */}
             <div className="grid sm:grid-cols-2 gap-3">
-              <div className="space-y-1">
-                <label className="text-xs font-semibold">
-                  Comment tu te sens ?
+              <div className="space-y-2">
+                <label className="text-xs font-semibold flex items-center gap-2">
+                  <Timer className="w-4 h-4" />
+                  Temps dispo (facultatif)
                 </label>
-                <select
-                  value={form.confiance}
-                  onChange={(e) =>
-                    handleChange("confiance", e.target.value as Confiance)
-                  }
-                  className="w-full border rounded-lg px-3 py-2 text-sm"
-                >
-                  <option value="en_difficulte">En difficulté</option>
-                  <option value="moyen">Ça va mais je me trompe</option>
-                  <option value="a_l_aise">À l’aise</option>
-                </select>
-              </div>
 
-              <div className="space-y-1">
-                <label className="text-xs font-semibold">
-                  Temps disponible (facultatif)
-                </label>
-                <input
-                  type="text"
-                  value={form.tempsDispo}
-                  onChange={(e) => handleChange("tempsDispo", e.target.value)}
-                  className="w-full border rounded-lg px-3 py-2 text-sm"
-                  placeholder="Ex : 20 min"
-                />
-              </div>
-            </div>
-
-            {/* Objectif */}
-            <div className="space-y-1">
-              <label className="text-xs font-semibold">
-                Ton objectif (avec tes mots)
-              </label>
-              <textarea
-                value={form.objectifPerso}
-                onChange={(e) => handleChange("objectifPerso", e.target.value)}
-                className="w-full border rounded-lg px-3 py-2 text-sm min-h-[70px]"
-                placeholder="Ex : Je veux comprendre comment poser une équation."
-              />
-            </div>
-
-            {/* Exemples difficiles */}
-            <div className="space-y-1">
-              <label className="text-xs font-semibold">
-                Exemples qui te posent problème
-              </label>
-              <textarea
-                value={form.exemplesDifficiles}
-                onChange={(e) =>
-                  handleChange("exemplesDifficiles", e.target.value)
-                }
-                className="w-full border rounded-lg px-3 py-2 text-sm min-h-[70px]"
-                placeholder="Ex : J’ai raté un exercice sur les fractions."
-              />
-            </div>
-
-            {/* DYS */}
-            <div className="space-y-2 pt-2">
-              <label className="inline-flex items-center gap-2 text-xs text-gray-700">
-                <input
-                  type="checkbox"
-                  checked={form.adaptationDYS}
-                  onChange={(e) =>
-                    handleChange("adaptationDYS", e.target.checked)
-                  }
-                  className="rounded border-gray-400"
-                />
-                <span>Aide adaptée (DYS)</span>
-              </label>
-
-              {form.adaptationDYS && (
-                <div className="ml-3 space-y-2 border-l pl-3 border-emerald-100">
-                  <p className="text-[11px] text-gray-600">
-                    Tu peux préciser (facultatif) :
-                  </p>
-
-                  <div className="flex flex-wrap gap-2 text-[11px]">
-                    {[
-                      { value: "dyslexie", label: "Dyslexie" },
-                      { value: "dyspraxie", label: "Dyspraxie" },
-                      { value: "dyscalculie", label: "Dyscalculie" },
-                      { value: "dysorthographie", label: "Dysorthographie" },
-                      { value: "autre", label: "Autre" },
-                    ].map((opt) => (
-                      <label
-                        key={opt.value}
-                        className="inline-flex items-center gap-1 px-2 py-1 rounded-full border border-emerald-200 bg-emerald-50"
+                <div className="flex flex-wrap gap-2">
+                  {TIME_CHIPS.map((t) => {
+                    const active = form.tempsDispo === t;
+                    return (
+                      <button
+                        key={t}
+                        type="button"
+                        onClick={() => handleChange("tempsDispo", t)}
+                        className={`rounded-full px-3 py-1 text-[11px] font-semibold border transition ${
+                          active
+                            ? "border-emerald-500 bg-emerald-100 text-emerald-800"
+                            : "border-slate-200 bg-white text-slate-700 hover:bg-slate-50"
+                        }`}
                       >
-                        <input
-                          type="checkbox"
-                          checked={form.dysTypes.includes(
-                            opt.value as DysType,
-                          )}
-                          onChange={(e) => {
-                            const checked = e.target.checked;
-                            handleChange(
-                              "dysTypes",
-                              checked
-                                ? [...form.dysTypes, opt.value as DysType]
-                                : form.dysTypes.filter(
-                                    (t) => t !== opt.value,
-                                  ),
-                            );
-                          }}
-                          className="h-3 w-3"
-                        />
-                        {opt.label}
-                      </label>
-                    ))}
-                  </div>
-
-                  {form.dysTypes.includes("autre") && (
-                    <input
-                      type="text"
-                      value={form.dysPrecisionAutre}
-                      onChange={(e) =>
-                        handleChange("dysPrecisionAutre", e.target.value)
-                      }
-                      className="w-full border rounded-lg px-2 py-1 text-[11px]"
-                      placeholder="Précision facultative..."
-                    />
-                  )}
+                        {t}
+                      </button>
+                    );
+                  })}
+                  <input
+                    type="text"
+                    value={form.tempsDispo}
+                    onChange={(e) => handleChange("tempsDispo", e.target.value)}
+                    className="min-w-[120px] flex-1 border rounded-lg px-3 py-2 text-sm"
+                    placeholder="Ou écris…"
+                  />
                 </div>
-              )}
+              </div>
+
+              <div className="space-y-2">
+                <label className="text-xs font-semibold">Comment tu te sens ?</label>
+                <div className="grid gap-2">
+                  {CONFIANCE_CHIPS.map((c) => {
+                    const active = form.confiance === c.value;
+                    return (
+                      <button
+                        key={c.value}
+                        type="button"
+                        onClick={() => handleChange("confiance", c.value)}
+                        className={`text-left rounded-xl border px-3 py-2 transition ${
+                          active
+                            ? "border-emerald-500 bg-emerald-50 shadow-sm"
+                            : "border-slate-200 bg-white hover:bg-slate-50"
+                        }`}
+                      >
+                        <div className="flex items-center justify-between gap-2">
+                          <span className="inline-flex items-center gap-2 text-sm font-semibold text-slate-900">
+                            {c.icon} {c.label}
+                          </span>
+                          {active && <Check className="w-4 h-4 text-emerald-600" />}
+                        </div>
+                        <p className="text-[11px] text-slate-600 mt-1">{c.hint}</p>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
             </div>
 
-            {/* Bouton générer */}
-            <div className="pt-3 flex justify-end">
+            {/* CTA rapide + toggle avancé */}
+            <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2">
               <button
-                onClick={genererPromptFinal}
-                className="px-4 py-2 rounded-lg bg-emerald-600 text-white text-sm font-semibold hover:bg-emerald-700"
+                type="button"
+                onClick={() => setShowAdvanced((v) => !v)}
+                className="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50"
               >
-                ⚙️ Générer mon prompt
+                {showAdvanced ? "Masquer les options" : "Options (objectif, exemple, DYS…)"}
+                <ChevronRight className={`w-4 h-4 transition ${showAdvanced ? "rotate-90" : ""}`} />
+              </button>
+
+              <button
+                type="button"
+                disabled={!isStep1Ok(form)}
+                onClick={() => genererPromptFinal(showAdvanced ? "complet" : "rapide")}
+                className={`inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2 text-sm font-semibold shadow transition ${
+                  isStep1Ok(form)
+                    ? "bg-emerald-600 text-white hover:bg-emerald-700"
+                    : "bg-emerald-100 text-emerald-500 cursor-not-allowed"
+                }`}
+              >
+                <Sparkles className="w-4 h-4" />
+                {showAdvanced ? "Générer mon prompt" : "Générer une aide rapide"}
               </button>
             </div>
+
+            {/* ADVANCED */}
+            {showAdvanced && (
+              <div className="mt-3 space-y-4 rounded-2xl border border-emerald-100 bg-emerald-50/40 p-4">
+                <h3 className="text-sm font-extrabold text-emerald-800">
+                  2️⃣ Options pour améliorer l’aide
+                </h3>
+
+                {/* Objectif */}
+                <div className="space-y-1">
+                  <label className="text-xs font-semibold">Ton objectif (avec tes mots)</label>
+                  <textarea
+                    value={form.objectifPerso}
+                    onChange={(e) => handleChange("objectifPerso", e.target.value)}
+                    className="w-full border rounded-lg px-3 py-2 text-sm min-h-[70px] bg-white"
+                    placeholder="Ex : Je veux comprendre comment poser une équation."
+                  />
+                </div>
+
+                {/* Exemples */}
+                <div className="space-y-1">
+                  <label className="text-xs font-semibold">Un exemple qui te pose problème</label>
+                  <textarea
+                    value={form.exemplesDifficiles}
+                    onChange={(e) => handleChange("exemplesDifficiles", e.target.value)}
+                    className="w-full border rounded-lg px-3 py-2 text-sm min-h-[70px] bg-white"
+                    placeholder="Ex : Je n’arrive pas à additionner 3/4 + 1/6."
+                  />
+                </div>
+
+                {/* Préférences */}
+                <div className="grid sm:grid-cols-2 gap-3">
+                  <label className="inline-flex items-center gap-2 text-xs text-slate-700">
+                    <input
+                      type="checkbox"
+                      checked={form.prefereQuestions}
+                      onChange={(e) => handleChange("prefereQuestions", e.target.checked)}
+                      className="rounded border-gray-400"
+                    />
+                    Pose-moi des questions d’abord
+                  </label>
+
+                  <label className="inline-flex items-center gap-2 text-xs text-slate-700">
+                    <input
+                      type="checkbox"
+                      checked={form.prefereExemplesConcrets}
+                      onChange={(e) => handleChange("prefereExemplesConcrets", e.target.checked)}
+                      className="rounded border-gray-400"
+                    />
+                    Je veux des exemples concrets
+                  </label>
+                </div>
+
+                {/* DYS */}
+                <div className="space-y-2 pt-1">
+                  <label className="inline-flex items-center gap-2 text-xs text-slate-700">
+                    <input
+                      type="checkbox"
+                      checked={form.adaptationDYS}
+                      onChange={(e) => handleChange("adaptationDYS", e.target.checked)}
+                      className="rounded border-gray-400"
+                    />
+                    Aide adaptée (DYS)
+                  </label>
+
+                  {form.adaptationDYS && (
+                    <div className="ml-3 space-y-2 border-l pl-3 border-emerald-200">
+                      <p className="text-[11px] text-slate-600">Tu peux préciser (facultatif) :</p>
+
+                      <div className="flex flex-wrap gap-2 text-[11px]">
+                        {[
+                          { value: "dyslexie", label: "Dyslexie" },
+                          { value: "dyspraxie", label: "Dyspraxie" },
+                          { value: "dyscalculie", label: "Dyscalculie" },
+                          { value: "dysorthographie", label: "Dysorthographie" },
+                          { value: "autre", label: "Autre" },
+                        ].map((opt) => (
+                          <label
+                            key={opt.value}
+                            className="inline-flex items-center gap-1 px-2 py-1 rounded-full border border-emerald-200 bg-white"
+                          >
+                            <input
+                              type="checkbox"
+                              checked={form.dysTypes.includes(opt.value as DysType)}
+                              onChange={(e) => {
+                                const checked = e.target.checked;
+                                handleChange(
+                                  "dysTypes",
+                                  checked
+                                    ? [...form.dysTypes, opt.value as DysType]
+                                    : form.dysTypes.filter((t) => t !== opt.value),
+                                );
+                              }}
+                              className="h-3 w-3"
+                            />
+                            {opt.label}
+                          </label>
+                        ))}
+                      </div>
+
+                      {form.dysTypes.includes("autre") && (
+                        <input
+                          type="text"
+                          value={form.dysPrecisionAutre}
+                          onChange={(e) => handleChange("dysPrecisionAutre", e.target.value)}
+                          className="w-full border rounded-lg px-2 py-2 text-sm bg-white"
+                          placeholder="Précision facultative…"
+                        />
+                      )}
+                    </div>
+                  )}
+                </div>
+
+                {/* Regénérer */}
+                <div className="pt-1 flex justify-end">
+                  <button
+                    type="button"
+                    onClick={() => genererPromptFinal("complet")}
+                    className="inline-flex items-center gap-2 rounded-xl bg-emerald-600 px-4 py-2 text-sm font-semibold text-white hover:bg-emerald-700"
+                  >
+                    <Sparkles className="w-4 h-4" />
+                    Générer (version complète)
+                  </button>
+                </div>
+              </div>
+            )}
           </section>
 
-          {/* COLONNE DROITE */}
+          {/* RIGHT */}
           <section className="space-y-4">
+            {/* Conseils */}
             <div className="bg-white/95 border border-emerald-200 rounded-2xl shadow-sm p-5 space-y-3">
               <h2 className="text-lg font-bold text-emerald-700">
-                3️⃣ Conseils pour mieux remplir
+                3️⃣ Conseils (rapides)
               </h2>
               <ul className="space-y-2 text-sm text-gray-700">
                 {suggestions.map((s, i) => (
                   <li key={i} className="flex gap-2">
-                    <span>➤</span>
+                    <span className="text-emerald-600">➤</span>
                     <span>{s}</span>
                   </li>
                 ))}
               </ul>
             </div>
 
+            {/* Prompt final */}
             <div className="bg-white/95 border border-slate-200 rounded-2xl shadow-sm p-5 space-y-3">
               <div className="flex flex-wrap items-center justify-between gap-2">
                 <h2 className="text-lg font-bold text-[#0047B6]">
-                  4️⃣ Ton prompt final
+                  4️⃣ Ton prompt
                 </h2>
+
                 <div className="flex items-center gap-2">
                   <button
                     onClick={copierPrompt}
                     disabled={!promptFinal}
-                    className={`px-3 py-1.5 rounded-lg text-xs font-semibold ${
+                    className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-semibold transition ${
                       promptFinal
-                        ? "bg-slate-800 text-white"
-                        : "bg-slate-200 text-slate-500"
+                        ? "bg-slate-800 text-white hover:bg-slate-900"
+                        : "bg-slate-200 text-slate-500 cursor-not-allowed"
                     }`}
                   >
-                    {copied ? "✅ Copié" : "📋 Copier"}
+                    <ClipboardCopy className="w-4 h-4" />
+                    {copied ? "Copié" : "Copier"}
                   </button>
+
                   <button
                     onClick={enregistrerPreset}
                     disabled={!promptFinal || saving}
-                    className={`px-3 py-1.5 rounded-lg text-xs font-semibold ${
+                    className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-semibold transition ${
                       promptFinal
                         ? "bg-emerald-600 text-white hover:bg-emerald-700"
-                        : "bg-emerald-200 text-emerald-700"
+                        : "bg-emerald-200 text-emerald-700 cursor-not-allowed"
                     }`}
                   >
-                    {saving ? "💾 Enregistrement..." : "⭐ Enregistrer ce preset"}
+                    {saving ? "💾 Enregistrement..." : "⭐ Enregistrer"}
                   </button>
                 </div>
               </div>
@@ -834,30 +1017,31 @@ export default function ElevePage() {
               <textarea
                 readOnly
                 value={promptFinal}
-                className="w-full border rounded-lg px-3 py-2 text-xs font-mono bg-slate-50 min-h-[200px]"
-                placeholder="Ton prompt apparaîtra ici."
+                className="w-full border rounded-lg px-3 py-2 text-xs font-mono bg-slate-50 min-h-[220px]"
+                placeholder="Ton prompt apparaîtra ici après génération."
               />
 
               <p className="text-xs text-gray-700">
-                Tu peux maintenant coller ce prompt dans l’IA de ton choix :
+                Tu peux coller ce prompt dans l’IA de ton choix :
               </p>
 
               <div className="flex flex-wrap gap-2 text-xs">
                 <Link
-                  href={
+                  href={promptFinal ? `/tchat?prompt=${encodeURIComponent(promptFinal)}` : "/tchat"}
+                  className={`px-3 py-2 rounded-lg font-semibold transition ${
                     promptFinal
-                      ? `/tchat?prompt=${encodeURIComponent(promptFinal)}`
-                      : "/tchat"
-                  }
-                  className="px-3 py-2 rounded-lg bg-emerald-600 text-white font-semibold hover:bg-emerald-700"
+                      ? "bg-emerald-600 text-white hover:bg-emerald-700"
+                      : "bg-emerald-200 text-emerald-700 cursor-not-allowed"
+                  }`}
                 >
                   🚀 Utiliser EleveAI
                 </Link>
+
                 <a
                   href="https://chatgpt.com"
                   target="_blank"
                   rel="noreferrer"
-                  className="px-3 py-2 rounded-lg bg-slate-800 text-white font-semibold"
+                  className="px-3 py-2 rounded-lg bg-slate-800 text-white font-semibold hover:bg-slate-900"
                 >
                   ChatGPT
                 </a>
@@ -865,7 +1049,7 @@ export default function ElevePage() {
                   href="https://gemini.google.com"
                   target="_blank"
                   rel="noreferrer"
-                  className="px-3 py-2 rounded-lg bg-[#0F9D58] text-white font-semibold"
+                  className="px-3 py-2 rounded-lg bg-[#0F9D58] text-white font-semibold hover:opacity-95"
                 >
                   Gemini
                 </a>
@@ -873,7 +1057,7 @@ export default function ElevePage() {
                   href="https://claude.ai"
                   target="_blank"
                   rel="noreferrer"
-                  className="px-3 py-2 rounded-lg bg-[#4B3FFF] text-white font-semibold"
+                  className="px-3 py-2 rounded-lg bg-[#4B3FFF] text-white font-semibold hover:opacity-95"
                 >
                   Claude
                 </a>
@@ -881,10 +1065,15 @@ export default function ElevePage() {
                   href="https://chat.mistral.ai"
                   target="_blank"
                   rel="noreferrer"
-                  className="px-3 py-2 rounded-lg bg-[#FF7F11] text-white font-semibold"
+                  className="px-3 py-2 rounded-lg bg-[#FF7F11] text-white font-semibold hover:opacity-95"
                 >
                   Mistral
                 </a>
+              </div>
+
+              <div className="mt-3 rounded-xl border border-emerald-200 bg-emerald-50 p-3 text-xs text-emerald-900">
+                ✅ Astuce : si l’IA te donne directement la réponse, dis :
+                <span className="font-semibold"> “Pose-moi des questions d’abord, puis corrige.”</span>
               </div>
             </div>
           </section>
@@ -893,6 +1082,3 @@ export default function ElevePage() {
     </main>
   );
 }
-
-
-
