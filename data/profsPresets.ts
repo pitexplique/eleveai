@@ -15,6 +15,21 @@ export type MethodeProf =
 
 export type OutputStyleProf = "simple" | "word" | "word_expert";
 
+// ✅ même Tonalité que la page
+export type TonaliteProf =
+  | "neutre"
+  | "bienveillante"
+  | "motivation"
+  | "institutionnelle"
+  | "ludique";
+
+// ✅ même Modalité d’évaluation que la page
+export type ModaliteEvaluationProf =
+  | "evaluation_sommative"
+  | "evaluation_formative"
+  | "evaluation_diagnostique"
+  | "evaluation_differenciee";
+
 export type ProfsPresetKey =
   | "6e_maths_fractions_remediation"
   | "3e_maths_brevet_global"
@@ -23,7 +38,14 @@ export type ProfsPresetKey =
   | "term_spe_maths_annale_bac"
   | "1re_francais_lecture_analytique"
   | "term_philo_dissertation"
-  | "2nde_physique_mouvements";
+  | "2nde_physique_mouvements"
+  // ✅ nouveaux presets devoirs 5e/6e
+  | "6e_maths_devoir_calcul_fractions"
+  | "6e_maths_devoir_geometrie_angles"
+  | "6e_maths_devoir_proportionnalite"
+  | "5e_maths_devoir_fractions_decimaux"
+  | "5e_maths_devoir_proportionnalite_pourcentages"
+  | "5e_maths_devoir_geometrie_triangles";
 
 export type ProfsPresetValues = {
   titre?: string;
@@ -37,15 +59,24 @@ export type ProfsPresetValues = {
   adaptationDYS?: boolean;
   neuro?: boolean;
 
-  // ✅ AJOUTS
+  // ✅ existants
   methode?: MethodeProf;
   outputStyle?: OutputStyleProf;
+
+  // ✅ AJOUTS (compatibles avec ta nouvelle page)
+  dureeMin?: number;
+  tonalite?: TonaliteProf;
+  modaliteEvaluation?: ModaliteEvaluationProf;
 };
 
 export const PROFS_PRESETS: Record<
   ProfsPresetKey,
   { label: string; description: string; valeurs: ProfsPresetValues }
 > = {
+  /* ------------------------------------------------------------
+     EXISTANTS
+  ------------------------------------------------------------ */
+
   "6e_maths_fractions_remediation": {
     label: "🟣 6e – Fractions (remédiation)",
     description: "Reprendre les bases des fractions avec manipulation + exemples concrets.",
@@ -65,6 +96,9 @@ export const PROFS_PRESETS: Record<
 
       methode: "methode_active",
       outputStyle: "word",
+
+      dureeMin: 45,
+      tonalite: "bienveillante",
     },
   },
 
@@ -87,6 +121,10 @@ export const PROFS_PRESETS: Record<
 
       methode: "deductive",
       outputStyle: "word_expert",
+
+      dureeMin: 120,
+      tonalite: "institutionnelle",
+      modaliteEvaluation: "evaluation_sommative",
     },
   },
 
@@ -109,6 +147,9 @@ export const PROFS_PRESETS: Record<
 
       methode: "enseignement_explicite",
       outputStyle: "word",
+
+      dureeMin: 55,
+      tonalite: "neutre",
     },
   },
 
@@ -131,6 +172,9 @@ export const PROFS_PRESETS: Record<
 
       methode: "enseignement_explicite",
       outputStyle: "word_expert",
+
+      dureeMin: 55,
+      tonalite: "neutre",
     },
   },
 
@@ -153,6 +197,10 @@ export const PROFS_PRESETS: Record<
 
       methode: "deductive",
       outputStyle: "word_expert",
+
+      dureeMin: 240,
+      tonalite: "institutionnelle",
+      modaliteEvaluation: "evaluation_sommative",
     },
   },
 
@@ -175,6 +223,9 @@ export const PROFS_PRESETS: Record<
 
       methode: "inductive",
       outputStyle: "word_expert",
+
+      dureeMin: 55,
+      tonalite: "bienveillante",
     },
   },
 
@@ -197,6 +248,9 @@ export const PROFS_PRESETS: Record<
 
       methode: "deductive",
       outputStyle: "word",
+
+      dureeMin: 60,
+      tonalite: "neutre",
     },
   },
 
@@ -219,7 +273,166 @@ export const PROFS_PRESETS: Record<
 
       methode: "par_problemes",
       outputStyle: "word",
+
+      dureeMin: 55,
+      tonalite: "neutre",
+    },
+  },
+
+  /* ------------------------------------------------------------
+     ✅ NOUVEAUX PRESETS DEVOIRS 6e / 5e
+     (Ils activent naturellement ton MODE ÉVALUATION car type contient “devoir”)
+  ------------------------------------------------------------ */
+
+  "6e_maths_devoir_calcul_fractions": {
+    label: "🧾 6e – Devoir (calcul + fractions)",
+    description: "Devoir 45 min : calcul mental, fractions simples, problèmes courts.",
+    valeurs: {
+      titre: "6e – Devoir : calcul + fractions",
+      classe: "6e",
+      matiere: "Mathématiques",
+      niveau: "standard",
+      type: "Préparation d’un devoir",
+      objectifPedagogique:
+        "Évaluer calculs simples, sens d’une fraction, comparaison, et résolution de petits problèmes.",
+      contenu:
+        "Je veux un devoir de 45 min en 6e sur calcul (priorités simples), fractions (représentation, comparaison, fraction d’une quantité) et 1-2 problèmes courts. Barème /20, consignes très claires, espaces de réponse, et une version différenciée (base/standard/défi).",
+      tags: ["6e", "devoir", "fractions", "calcul"],
+      adaptationDYS: true,
+      neuro: true,
+
+      outputStyle: "word_expert",
+      // méthode peu utile en devoir, mais on la laisse sans importance
+      methode: "deductive",
+
+      dureeMin: 45,
+      tonalite: "institutionnelle",
+      modaliteEvaluation: "evaluation_differenciee",
+    },
+  },
+
+  "6e_maths_devoir_geometrie_angles": {
+    label: "📐 6e – Devoir (géométrie + angles)",
+    description: "Devoir 45 min : segments, droites, angles, constructions au compas.",
+    valeurs: {
+      titre: "6e – Devoir : géométrie (angles et constructions)",
+      classe: "6e",
+      matiere: "Mathématiques",
+      niveau: "standard",
+      type: "Préparation d’un devoir",
+      objectifPedagogique:
+        "Évaluer la maîtrise des instruments (règle/équerre/compas), mesure et construction d’angles, vocabulaire géométrique.",
+      contenu:
+        "Prépare un devoir de 45 min en 6e : 3 exercices progressifs sur angles (mesurer/nommer/construire), tracés (droites parallèles/perpendiculaires), et une construction guidée. Barème /20 + critères de réussite + erreurs fréquentes. Version base/standard/défi.",
+      tags: ["6e", "devoir", "géométrie", "angles"],
+      adaptationDYS: true,
+      neuro: true,
+
+      outputStyle: "word_expert",
+
+      dureeMin: 45,
+      tonalite: "institutionnelle",
+      modaliteEvaluation: "evaluation_differenciee",
+    },
+  },
+
+  "6e_maths_devoir_proportionnalite": {
+    label: "🧾 6e – Devoir (proportionnalité)",
+    description: "Devoir 30-45 min : tableaux, prix, recettes, lecture de données.",
+    valeurs: {
+      titre: "6e – Devoir : proportionnalité",
+      classe: "6e",
+      matiere: "Mathématiques",
+      niveau: "standard",
+      type: "Préparation d’un devoir",
+      objectifPedagogique:
+        "Évaluer reconnaissance d’une situation de proportionnalité et utilisation d’un tableau.",
+      contenu:
+        "Je veux un devoir de 40 min en 6e sur la proportionnalité : compléter un tableau, problèmes de prix/quantités, recette (double/triple), avec 1 exercice piège (non proportionnel) + barème /20 + corrigé. Prévoir une aide DYS (énoncés courts).",
+      tags: ["6e", "devoir", "proportionnalité", "tableau"],
+      adaptationDYS: true,
+      neuro: true,
+
+      outputStyle: "word_expert",
+
+      dureeMin: 40,
+      tonalite: "institutionnelle",
+      modaliteEvaluation: "evaluation_sommative",
+    },
+  },
+
+  "5e_maths_devoir_fractions_decimaux": {
+    label: "🧾 5e – Devoir (fractions + décimaux)",
+    description: "Devoir 50-55 min : opérations simples, comparaison, problèmes.",
+    valeurs: {
+      titre: "5e – Devoir : fractions et décimaux",
+      classe: "5e",
+      matiere: "Mathématiques",
+      niveau: "standard",
+      type: "Préparation d’un devoir",
+      objectifPedagogique:
+        "Évaluer conversions, comparaison, calculs simples avec fractions/décimaux, et problèmes.",
+      contenu:
+        "Prépare un devoir de 55 min en 5e sur fractions et nombres décimaux : conversions, comparer/ordonner, calculs (avec simplifications raisonnables), 1 problème de partage. Barème /20 + critères + erreurs fréquentes + différenciation.",
+      tags: ["5e", "devoir", "fractions", "décimaux"],
+      adaptationDYS: true,
+      neuro: true,
+
+      outputStyle: "word_expert",
+
+      dureeMin: 55,
+      tonalite: "institutionnelle",
+      modaliteEvaluation: "evaluation_differenciee",
+    },
+  },
+
+  "5e_maths_devoir_proportionnalite_pourcentages": {
+    label: "🧾 5e – Devoir (proportionnalité + %)",
+    description: "Devoir 55 min : tableaux, échelles simples, pourcentages de base.",
+    valeurs: {
+      titre: "5e – Devoir : proportionnalité et pourcentages",
+      classe: "5e",
+      matiere: "Mathématiques",
+      niveau: "standard",
+      type: "Préparation d’un devoir",
+      objectifPedagogique:
+        "Évaluer proportionnalité (tableaux/coeff), calcul de pourcentages simples, situations concrètes.",
+      contenu:
+        "Je veux un devoir de 55 min en 5e : proportionnalité (tableaux + coefficient), pourcentages simples (réduction/augmentation), 1 problème contextualisé (courses, remise, sport). Barème /20, corrigé détaillé, et une partie défi.",
+      tags: ["5e", "devoir", "proportionnalité", "pourcentages"],
+      adaptationDYS: true,
+      neuro: true,
+
+      outputStyle: "word_expert",
+
+      dureeMin: 55,
+      tonalite: "institutionnelle",
+      modaliteEvaluation: "evaluation_sommative",
+    },
+  },
+
+  "5e_maths_devoir_geometrie_triangles": {
+    label: "📐 5e – Devoir (triangles + angles)",
+    description: "Devoir 55 min : propriétés, constructions, justification courte.",
+    valeurs: {
+      titre: "5e – Devoir : triangles et angles",
+      classe: "5e",
+      matiere: "Mathématiques",
+      niveau: "standard",
+      type: "Préparation d’un devoir",
+      objectifPedagogique:
+        "Évaluer propriétés des triangles, somme des angles, constructions et premières justifications.",
+      contenu:
+        "Prépare un devoir de 55 min en 5e : 1 exo constructions de triangles (données), 1 exo calcul d’angles (somme des angles), 1 exo propriété (isosceles/rectangle) avec justification courte. Barème /20 + critères + version base/standard/défi.",
+      tags: ["5e", "devoir", "géométrie", "triangles", "angles"],
+      adaptationDYS: true,
+      neuro: true,
+
+      outputStyle: "word_expert",
+
+      dureeMin: 55,
+      tonalite: "institutionnelle",
+      modaliteEvaluation: "evaluation_differenciee",
     },
   },
 };
-

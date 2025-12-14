@@ -16,6 +16,8 @@ import {
   EyeOff,
   ChevronDown,
   ChevronUp,
+  Clock3,
+  BadgeCheck,
 } from "lucide-react";
 
 /* ----------------------------------------
@@ -37,6 +39,19 @@ type MethodePedagogique =
 
 type OutputStyle = "simple" | "word" | "word_expert";
 
+type Tonalite =
+  | "neutre"
+  | "bienveillante"
+  | "motivation"
+  | "institutionnelle"
+  | "ludique";
+
+type ModaliteEvaluation =
+  | "evaluation_sommative"
+  | "evaluation_formative"
+  | "evaluation_diagnostique"
+  | "evaluation_differenciee";
+
 type PromptProf = {
   titre: string;
   objectifPedagogique: string;
@@ -52,6 +67,13 @@ type PromptProf = {
   date: string;
   methode: MethodePedagogique;
   outputStyle: OutputStyle;
+
+  // ✅ NOUVEAU : calibrage
+  dureeMin: number; // 0 = non renseigné
+  tonalite: Tonalite;
+
+  // ✅ NOUVEAU : si type = évaluation
+  modaliteEvaluation: ModaliteEvaluation;
 };
 
 /* ----------------------------------------
@@ -74,6 +96,8 @@ const MATIERES = [
 ];
 
 const TYPES_COMMUNS = [
+  "Préparation d'un contrôle",
+  "Préparation d’un devoir",
   "Explication d’une notion",
   "Génération d’exercices",
   "Correction méthodologique",
@@ -150,6 +174,41 @@ const METHODE_OPTIONS: {
   { id: "magistrale", label: "Cours magistral guidé", description: "Cours structuré + questions de vérification + entraînement final." },
 ];
 
+const EVAL_OPTIONS: {
+  id: ModaliteEvaluation;
+  label: string;
+  description: string;
+}[] = [
+  {
+    id: "evaluation_sommative",
+    label: "Évaluation sommative",
+    description: "Notation + barème + critères. Progressivité, lisibilité, attendus conformes.",
+  },
+  {
+    id: "evaluation_formative",
+    label: "Évaluation formative",
+    description: "Feedback + paliers + indices possibles. Sert à apprendre (et pas seulement noter).",
+  },
+  {
+    id: "evaluation_diagnostique",
+    label: "Évaluation diagnostique",
+    description: "Repérage ciblé des prérequis et difficultés. Courte, précise, exploitable.",
+  },
+  {
+    id: "evaluation_differenciee",
+    label: "Évaluation différenciée",
+    description: "2-3 parcours (base/standard/défi) ou choix d’exercices + barème adapté.",
+  },
+];
+
+const TONALITES: { id: Tonalite; label: string; hint: string }[] = [
+  { id: "neutre", label: "Neutre", hint: "Clair et direct." },
+  { id: "bienveillante", label: "Bienveillante", hint: "Encourageante, rassurante." },
+  { id: "motivation", label: "Motivante", hint: "Énergie, défis, valorisation." },
+  { id: "institutionnelle", label: "Institutionnelle", hint: "Style sujet officiel, formel." },
+  { id: "ludique", label: "Ludique", hint: "Ton plus léger (sans perdre la rigueur)." },
+];
+
 /* ----------------------------------------
    CARROUSEL PRESETS
 ---------------------------------------- */
@@ -182,9 +241,19 @@ function uniqueKeepOrder(items: string[]) {
 function getMethodeLabel(id: MethodePedagogique) {
   return METHODE_OPTIONS.find((m) => m.id === id)?.label ?? "Méthode active";
 }
-
 function getMethodeDesc(id: MethodePedagogique) {
   return METHODE_OPTIONS.find((m) => m.id === id)?.description ?? "";
+}
+
+function getEvalLabel(id: ModaliteEvaluation) {
+  return EVAL_OPTIONS.find((e) => e.id === id)?.label ?? "Évaluation sommative";
+}
+function getEvalDesc(id: ModaliteEvaluation) {
+  return EVAL_OPTIONS.find((e) => e.id === id)?.description ?? "";
+}
+
+function isEvaluationType(type: string) {
+  return /devoir|contrôle|évaluation|qcm|brevet|bac|sujet blanc/i.test(type || "");
 }
 
 /* ----------------------------------------
@@ -226,14 +295,53 @@ function blocWordDesign(style: OutputStyle) {
 }
 
 /* ----------------------------------------
-   CONSTRUCTION PROMPT (ELEVAI)
+   CONSTRUCTION PROMPT (ELEVEAI)
 ---------------------------------------- */
 
 function construirePrompt(form: PromptProf): string {
-  const blocTags =
-    form.tags.length > 0 ? `Mots-clés pédagogiques : ${form.tags.join(", ")}.\n` : "";
+  const blocTags = form.tags.length > 0 ? `Mots-clés pédagogiques : ${form.tags.join(", ")}.\n` : "";
+  const blocAuteur = form.auteur ? `Préparé par : ${form.auteur}.\n` : "";
+
+  const blocEduscol = "Respecter les programmes officiels français (Eduscol/BO), vocabulaire attendu.\n\n";
+
+  const blocNeuro = form.neuro
+    ? "Neurosciences : activer prérequis, petites étapes, alternance explications/questions, récapitulatif, reformulation.\n\n"
+    : "";
+
+  const matiereScientifique = ["Mathématiques", "Physique-Chimie", "SVT", "Numérique/NSI"].includes(form.matiere);
+  const blocSansLatex = matiereScientifique
+    ? 'Sans LaTeX (pas de \\frac, \\sqrt). Fractions a/b, puissances x^2 ou "x au carré".\n\n'
+    : "";
+
+  const blocDYS = form.adaptationDYS
+    ? "Adapter DYS : phrases courtes, aération, vocabulaire expliqué, éviter doubles négations.\n\n"
+    : "";
+
+  const blocCalibrage = (() => {
+    const dur = form.dureeMin && form.dureeMin > 0 ? `${form.dureeMin} min` : "non précisée";
+    const tone = form.tonalite || "neutre";
+    return (
+      "Calibrage demandé :\n" +
+      `- Durée : ${dur}.\n` +
+      `- Tonalité : ${tone}.\n\n`
+    );
+  })();
+
+  const estEval = isEvaluationType(form.type);
+
+  const blocEvaluation = estEval
+    ? "MODE ÉVALUATION (important) :\n" +
+      `- Modalité : ${getEvalLabel(form.modaliteEvaluation)}.\n` +
+      "- Exiger : barème/points, consignes claires, attendus, critères de réussite, aides autorisées (si besoin).\n" +
+      "- Construction : progressif + items différenciés (base/standard/défi) + erreurs typiques.\n" +
+      "- Sortie Word : en-tête (classe/durée), exercices numérotés, espaces réponses, total points.\n\n"
+    : "";
 
   const blocMethode = (() => {
+    if (estEval) {
+      // On ne force pas une “méthode d’apprentissage” pour un devoir.
+      return "";
+    }
     switch (form.methode) {
       case "enseignement_explicite":
         return (
@@ -260,38 +368,17 @@ function construirePrompt(form: PromptProf): string {
     }
   })();
 
-  const blocDYS = form.adaptationDYS
-    ? "Adapter DYS : phrases courtes, aération, vocabulaire expliqué, éviter doubles négations.\n\n"
-    : "";
-
-  const blocAuteur = form.auteur ? `Préparé par : ${form.auteur}.\n` : "";
-
-  const blocEduscol =
-    "Respecter les programmes officiels français (Eduscol/BO), vocabulaire attendu.\n\n";
-
-  const blocNeuro = form.neuro
-    ? "Neurosciences : activer prérequis, petites étapes, alternance explications/questions, récapitulatif, reformulation.\n\n"
-    : "";
-
-  const matiereScientifique = ["Mathématiques", "Physique-Chimie", "SVT", "Numérique/NSI"].includes(form.matiere);
-
-  const blocSansLatex = matiereScientifique
-    ? 'Sans LaTeX (pas de \\frac, \\sqrt). Fractions a/b, puissances x^2 ou "x au carré".\n\n'
-    : "";
-
   const blocStructureSeance =
     form.type === "Préparation d’une séance" || form.type === "Préparation de séquence"
       ? "Structure chronométrée : accroche / recherche guidée / mise en commun / entraînement / bilan (rôle prof/élèves + matériel).\n\n"
       : "";
 
-  const blocDifferenciation =
-    "Différenciation : niveau base / standard / défi (indiquer clairement).\n\n";
+  const blocDifferenciation = "Différenciation : niveau base / standard / défi (indiquer clairement).\n\n";
 
   const blocRappelsEtMeta =
     "Réponse : prérequis courts, étapes numérotées, questions de vérification, récapitulatif, question métacognitive.\n\n";
 
-  const blocCriteres =
-    "Fin : « Pour l’enseignant » (3-5 critères observables) + erreurs typiques.\n\n";
+  const blocCriteres = "Fin : « Pour l’enseignant » (3-5 critères observables) + erreurs typiques.\n\n";
 
   const blocMiseEnPage =
     "Si fiche/évaluation : structure Word (titres, exos numérotés, temps/points, espaces réponses).\n\n";
@@ -303,6 +390,8 @@ function construirePrompt(form: PromptProf): string {
     blocEduscol +
     blocNeuro +
     blocSansLatex +
+    blocCalibrage +
+    blocEvaluation +
     blocMethode +
     blocWord +
     `Objectif pédagogique : ${form.objectifPedagogique || "(non précisé)"}\n` +
@@ -317,9 +406,9 @@ function construirePrompt(form: PromptProf): string {
     blocRappelsEtMeta +
     blocCriteres +
     blocMiseEnPage +
-    `IMPORTANT : Structure ta réponse en 2 parties :\n` +
-    `1) "=== PARTIE 1 : PROMPT OPTIMISÉ POUR L’IA ==="\n` +
-    `2) "=== PARTIE 2 : RESSOURCE PRÊTE POUR L’ÉLÈVE ==="\n`
+    "IMPORTANT : Structure ta réponse en 2 parties :\n" +
+    '1) "=== PARTIE 1 : PROMPT OPTIMISÉ POUR L’IA ==="\n' +
+    '2) "=== PARTIE 2 : RESSOURCE PRÊTE POUR L’ÉLÈVE ==="\n'
   );
 }
 
@@ -346,38 +435,34 @@ export default function ProfsPage() {
       date: today,
       methode: "methode_active",
       outputStyle: "word_expert",
+
+      dureeMin: 45,
+      tonalite: "neutre",
+      modaliteEvaluation: "evaluation_sommative",
     };
   }, [today]);
 
   const [form, setForm] = useState<PromptProf>(() => makeInitialForm());
   const [rawTags, setRawTags] = useState("");
 
-  // ✅ prompt EleveAI (à copier)
   const [promptInterne, setPromptInterne] = useState("");
-
-  // ✅ sortie agent (ressource)
   const [agentOutput, setAgentOutput] = useState("");
   const [agentLoading, setAgentLoading] = useState(false);
   const [agentError, setAgentError] = useState("");
 
-  // copies
   const [copiedPrompt, setCopiedPrompt] = useState(false);
   const [copiedRessource, setCopiedRessource] = useState(false);
 
-  // UI
-  const [showPromptInterne, setShowPromptInterne] = useState(true); // on l’affiche plutôt par défaut désormais
+  const [showPromptInterne, setShowPromptInterne] = useState(true);
   const [showMethode, setShowMethode] = useState(false);
+  const [showEval, setShowEval] = useState(false);
 
-  // ✅ signal vers SignupNudge (après génération OK, ou copie)
   const [nudgeSignal, setNudgeSignal] = useState(0);
   const triggerNudge = useCallback(() => setNudgeSignal((n) => n + 1), []);
 
-  const handleChange = useCallback(
-    (field: keyof PromptProf, value: any) => {
-      setForm((prev) => ({ ...prev, [field]: value }));
-    },
-    []
-  );
+  const handleChange = useCallback((field: keyof PromptProf, value: any) => {
+    setForm((prev) => ({ ...prev, [field]: value }));
+  }, []);
 
   const clearOutputs = useCallback(() => {
     setPromptInterne("");
@@ -406,11 +491,13 @@ export default function ProfsPage() {
         const base: PromptProf = {
           ...prev,
           ...v,
-          // tags
           tags: v.tags ?? prev.tags,
-          // valeurs ajoutées
           methode: (v.methode ?? prev.methode) as MethodePedagogique,
           outputStyle: (v.outputStyle ?? prev.outputStyle) as OutputStyle,
+          // si preset ne touche pas durée/tonalité, on garde
+          dureeMin: (v as any).dureeMin ?? prev.dureeMin,
+          tonalite: ((v as any).tonalite ?? prev.tonalite) as Tonalite,
+          modaliteEvaluation: ((v as any).modaliteEvaluation ?? prev.modaliteEvaluation) as ModaliteEvaluation,
         } as PromptProf;
 
         if (base.classe === "3e" && !base.tags.includes("DNB")) {
@@ -422,6 +509,7 @@ export default function ProfsPage() {
       if (v.tags) setRawTags(v.tags.join(", "));
       clearOutputs();
       setShowMethode(false);
+      setShowEval(false);
     },
     [clearOutputs]
   );
@@ -432,6 +520,7 @@ export default function ProfsPage() {
     clearOutputs();
     setAgentLoading(false);
     setShowMethode(false);
+    setShowEval(false);
   }, [clearOutputs, makeInitialForm]);
 
   const typesDisponibles = useMemo(() => {
@@ -445,18 +534,28 @@ export default function ProfsPage() {
     return uniqueKeepOrder([...specifiquesMatiere, ...speciauxExamens, ...communs]);
   }, [form.matiere, form.classe]);
 
+  const estEval = useMemo(() => isEvaluationType(form.type), [form.type]);
+
   const suggestions = useMemo(() => {
     const s: string[] = [];
     if (!form.objectifPedagogique.trim()) s.push("Précise l’objectif : ce que l’élève doit savoir faire.");
     if (!form.classe) s.push("Choisis une classe : le vocabulaire et les attendus seront meilleurs.");
     if (!form.matiere) s.push("Indique la matière : EleveAI restera dans le bon cadre.");
     if (!form.type) s.push("Choisis un type : ça fixe la structure (séance, fiche, évaluation…).");
-    if (form.contenu.trim().length < 40) s.push("Consigne trop courte : ajoute durée, contraintes, exemple attendu.");
-    if (s.length === 0) s.push("Parfait. Tu peux ajouter : durée, matériel, contraintes, exemple de production.");
-    return s;
-  }, [form]);
+    if (form.contenu.trim().length < 40) s.push("Consigne trop courte : ajoute durée, contraintes, barème, exemple attendu.");
 
-  // ✅ Génère le prompt interne (local), puis appelle l'agent (optionnel)
+    if (!form.dureeMin || form.dureeMin <= 0) s.push("Ajoute une durée (ex : 20, 45, 55 min) : ça calibre le sujet.");
+    if (estEval) {
+      s.push("Mode évaluation : pense barème, consignes, critères de réussite + différenciation base/standard/défi.");
+      s.push("Choisis une modalité (sommative / formative / diagnostique / différenciée).");
+    } else {
+      s.push("Choisis une méthode pédagogique : ça structure la progression et les questions.");
+    }
+
+    if (s.length === 0) s.push("Parfait. Tu peux ajouter : matériel, contraintes, exemple de production attendue.");
+    return s;
+  }, [form, estEval]);
+
   const creerPromptEtRessource = useCallback(async () => {
     if (!form.contenu.trim()) {
       alert("Merci de remplir le texte de ta demande (version professeur).");
@@ -470,7 +569,6 @@ export default function ProfsPage() {
     setCopiedPrompt(false);
     setCopiedRessource(false);
 
-    // ⚠️ Ici on garde l'appel agent-prof (ressource)
     setAgentLoading(true);
     try {
       const res = await fetch("/api/agent-prof", {
@@ -485,7 +583,7 @@ export default function ProfsPage() {
       const out = data.output || "";
       setAgentOutput(out);
 
-      if (out) triggerNudge(); // génération OK => nudge
+      if (out) triggerNudge();
     } catch (err: any) {
       setAgentError(err?.message || "Erreur inconnue (vérifie le serveur / API).");
     } finally {
@@ -551,6 +649,13 @@ export default function ProfsPage() {
               />
               <span>Activer</span>
             </label>
+
+            {estEval && (
+              <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-50 text-[11px] font-semibold text-amber-800 border border-amber-200">
+                <BadgeCheck className="w-4 h-4" />
+                Mode évaluation activé (barème + critères)
+              </span>
+            )}
 
             <button
               type="button"
@@ -630,6 +735,43 @@ export default function ProfsPage() {
               </div>
             </div>
 
+            {/* Durée + tonalité */}
+            <div className="grid sm:grid-cols-2 gap-3">
+              <div className="space-y-1">
+                <label className="text-xs font-semibold text-gray-600 flex items-center gap-2">
+                  <Clock3 className="w-4 h-4" />
+                  Durée (minutes)
+                </label>
+                <input
+                  type="number"
+                  min={0}
+                  value={form.dureeMin}
+                  onChange={(e) => handleChange("dureeMin", Math.max(0, Number(e.target.value || 0)))}
+                  className="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-sky-300"
+                  placeholder="Ex : 45"
+                />
+                <p className="text-[11px] text-gray-500">0 = non renseigné.</p>
+              </div>
+
+              <div className="space-y-1">
+                <label className="text-xs font-semibold text-gray-600">Tonalité souhaitée</label>
+                <select
+                  value={form.tonalite}
+                  onChange={(e) => handleChange("tonalite", e.target.value as Tonalite)}
+                  className="w-full border rounded-lg px-3 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-sky-300"
+                >
+                  {TONALITES.map((t) => (
+                    <option key={t.id} value={t.id}>
+                      {t.label}
+                    </option>
+                  ))}
+                </select>
+                <p className="text-[11px] text-gray-500">
+                  {TONALITES.find((t) => t.id === form.tonalite)?.hint}
+                </p>
+              </div>
+            </div>
+
             {/* Style Word */}
             <div className="space-y-2">
               <label className="text-xs font-semibold text-gray-600">Style de rendu</label>
@@ -666,7 +808,13 @@ export default function ProfsPage() {
               <label className="text-xs font-semibold text-gray-600">Type de ressource</label>
               <select
                 value={form.type}
-                onChange={(e) => handleChange("type", e.target.value)}
+                onChange={(e) => {
+                  const nextType = e.target.value;
+                  handleChange("type", nextType);
+
+                  // si on bascule en évaluation, on ferme la grille méthode
+                  if (isEvaluationType(nextType)) setShowMethode(false);
+                }}
                 className="w-full border rounded-lg px-3 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-sky-300"
               >
                 <option value="">Choisir…</option>
@@ -679,62 +827,104 @@ export default function ProfsPage() {
               <p className="text-[11px] text-gray-500 mt-1">S’adapte à la matière + brevet (3e) + bac (lycée).</p>
             </div>
 
-            {/* Méthode (compact + ouvrir/réduire) */}
-            <div className="space-y-2">
-              <div className="flex items-center justify-between gap-2">
-                <label className="text-xs font-semibold text-gray-600">Méthode pédagogique</label>
-                <div className="flex items-center gap-2">
-                  <Link
-                    href="/blog"
-                    className="text-[11px] text-[#0047B6] underline underline-offset-2 hover:text-[#003894]"
-                  >
-                    En savoir plus
-                  </Link>
+            {/* ✅ MODE ÉVALUATION (si devoir/contrôle/évaluation/etc.) */}
+            {estEval ? (
+              <div className="space-y-2">
+                <div className="flex items-center justify-between gap-2">
+                  <label className="text-xs font-semibold text-gray-600">Modalité d’évaluation</label>
                   <button
                     type="button"
-                    onClick={() => setShowMethode((v) => !v)}
+                    onClick={() => setShowEval((v) => !v)}
                     className="text-[11px] font-semibold rounded-lg border border-slate-200 bg-white px-2 py-1 hover:bg-slate-50 inline-flex items-center gap-1"
                   >
-                    {showMethode ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
-                    {showMethode ? "Réduire" : "Modifier"}
+                    {showEval ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+                    {showEval ? "Réduire" : "Modifier"}
                   </button>
                 </div>
-              </div>
 
-              {/* Résumé */}
-              <div className="rounded-xl border border-slate-200 bg-slate-50 px-3 py-2">
-                <p className="text-xs font-semibold text-slate-800">
-                  {getMethodeLabel(form.methode)}
-                </p>
-                <p className="mt-1 text-[11px] text-slate-600">
-                  {getMethodeDesc(form.methode)}
-                </p>
-              </div>
-
-              {/* Grille */}
-              {showMethode && (
-                <div className="grid gap-2 sm:grid-cols-2">
-                  {METHODE_OPTIONS.map((m) => (
-                    <button
-                      key={m.id}
-                      type="button"
-                      onClick={() => {
-                        handleChange("methode", m.id);
-                        setShowMethode(false);
-                      }}
-                      className={`text-left border rounded-xl px-3 py-2 text-xs sm:text-[13px] transition ${
-                        form.methode === m.id
-                          ? "border-[#0047B6] bg-sky-50 shadow-sm"
-                          : "border-slate-200 bg-white hover:border-sky-200"
-                      }`}
-                    >
-                      <div className="font-semibold text-slate-800">{m.label}</div>
-                      <div className="text-[11px] text-slate-600">{m.description}</div>
-                    </button>
-                  ))}
+                <div className="rounded-xl border border-amber-200 bg-amber-50 px-3 py-2">
+                  <p className="text-xs font-semibold text-amber-900">{getEvalLabel(form.modaliteEvaluation)}</p>
+                  <p className="mt-1 text-[11px] text-amber-800/80">{getEvalDesc(form.modaliteEvaluation)}</p>
+                  <p className="mt-2 text-[11px] text-amber-900">
+                    ✅ Le prompt générera automatiquement : barème, critères, consignes, progressivité, différenciation.
+                  </p>
                 </div>
-              )}
-            </div>
+
+                {showEval && (
+                  <div className="grid gap-2 sm:grid-cols-2">
+                    {EVAL_OPTIONS.map((e) => (
+                      <button
+                        key={e.id}
+                        type="button"
+                        onClick={() => {
+                          handleChange("modaliteEvaluation", e.id);
+                          setShowEval(false);
+                        }}
+                        className={`text-left border rounded-xl px-3 py-2 text-xs sm:text-[13px] transition ${
+                          form.modaliteEvaluation === e.id
+                            ? "border-amber-400 bg-amber-50 shadow-sm"
+                            : "border-slate-200 bg-white hover:border-amber-200"
+                        }`}
+                      >
+                        <div className="font-semibold text-slate-800">{e.label}</div>
+                        <div className="text-[11px] text-slate-600">{e.description}</div>
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ) : (
+              /* Méthode (si pas évaluation) */
+              <div className="space-y-2">
+                <div className="flex items-center justify-between gap-2">
+                  <label className="text-xs font-semibold text-gray-600">Méthode pédagogique</label>
+                  <div className="flex items-center gap-2">
+                    <Link
+                      href="/blog"
+                      className="text-[11px] text-[#0047B6] underline underline-offset-2 hover:text-[#003894]"
+                    >
+                      En savoir plus
+                    </Link>
+                    <button
+                      type="button"
+                      onClick={() => setShowMethode((v) => !v)}
+                      className="text-[11px] font-semibold rounded-lg border border-slate-200 bg-white px-2 py-1 hover:bg-slate-50 inline-flex items-center gap-1"
+                    >
+                      {showMethode ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+                      {showMethode ? "Réduire" : "Modifier"}
+                    </button>
+                  </div>
+                </div>
+
+                <div className="rounded-xl border border-slate-200 bg-slate-50 px-3 py-2">
+                  <p className="text-xs font-semibold text-slate-800">{getMethodeLabel(form.methode)}</p>
+                  <p className="mt-1 text-[11px] text-slate-600">{getMethodeDesc(form.methode)}</p>
+                </div>
+
+                {showMethode && (
+                  <div className="grid gap-2 sm:grid-cols-2">
+                    {METHODE_OPTIONS.map((m) => (
+                      <button
+                        key={m.id}
+                        type="button"
+                        onClick={() => {
+                          handleChange("methode", m.id);
+                          setShowMethode(false);
+                        }}
+                        className={`text-left border rounded-xl px-3 py-2 text-xs sm:text-[13px] transition ${
+                          form.methode === m.id
+                            ? "border-[#0047B6] bg-sky-50 shadow-sm"
+                            : "border-slate-200 bg-white hover:border-sky-200"
+                        }`}
+                      >
+                        <div className="font-semibold text-slate-800">{m.label}</div>
+                        <div className="text-[11px] text-slate-600">{m.description}</div>
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+            )}
 
             {/* Titre + auteur */}
             <div className="grid sm:grid-cols-[2fr,1fr] gap-3">
@@ -744,7 +934,7 @@ export default function ProfsPage() {
                   type="text"
                   value={form.titre}
                   onChange={(e) => handleChange("titre", e.target.value)}
-                  placeholder="Ex : Problèmes ouverts sur les fractions (6e)"
+                  placeholder="Ex : Devoir fractions (6e) – barème + différenciation"
                   className="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-sky-300"
                 />
               </div>
@@ -767,7 +957,7 @@ export default function ProfsPage() {
               <textarea
                 value={form.objectifPedagogique}
                 onChange={(e) => handleChange("objectifPedagogique", e.target.value)}
-                placeholder="Ex : faire comprendre le sens des fractions…"
+                placeholder="Ex : évaluer la compréhension du sens d’une fraction + comparaison…"
                 className="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-sky-300 min-h-[70px]"
               />
             </div>
@@ -779,7 +969,7 @@ export default function ProfsPage() {
                 type="text"
                 value={rawTags}
                 onChange={(e) => updateTags(e.target.value)}
-                placeholder="Ex : #fraction, #DYS, #coopération"
+                placeholder="Ex : #fraction, #DYS, #différenciation"
                 className="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-sky-300"
               />
               {form.tags.length > 0 && (
@@ -811,7 +1001,11 @@ export default function ProfsPage() {
               <textarea
                 value={form.contenu}
                 onChange={(e) => handleChange("contenu", e.target.value)}
-                placeholder="Ex : Génère une activité clé en main…"
+                placeholder={
+                  estEval
+                    ? "Ex : Fais un devoir de 45 min sur les fractions : 3 exercices progressifs + barème sur 20 + différenciation base/standard/défi…"
+                    : "Ex : Génère une activité clé en main…"
+                }
                 className="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-sky-300 min-h-[120px]"
               />
             </div>
@@ -836,9 +1030,7 @@ export default function ProfsPage() {
                 onClick={creerPromptEtRessource}
                 disabled={agentLoading}
                 className={`inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold shadow transition ${
-                  agentLoading
-                    ? "bg-sky-100 text-sky-500 cursor-not-allowed"
-                    : "bg-[#0047B6] text-white hover:bg-[#003894]"
+                  agentLoading ? "bg-sky-100 text-sky-500 cursor-not-allowed" : "bg-[#0047B6] text-white hover:bg-[#003894]"
                 }`}
               >
                 <Sparkles className="w-4 h-4" />
@@ -867,9 +1059,7 @@ export default function ProfsPage() {
             {/* 3) PROMPT */}
             <div className="bg-white/95 border border-slate-200 rounded-2xl shadow-sm p-5 sm:p-6 space-y-4">
               <div className="flex items-center justify-between gap-2">
-                <h2 className="text-lg font-bold text-[#0047B6]">
-                  3️⃣ Prompt EleveAI (à copier-coller)
-                </h2>
+                <h2 className="text-lg font-bold text-[#0047B6]">3️⃣ Prompt EleveAI (à copier-coller)</h2>
 
                 <div className="flex items-center gap-2">
                   <button
@@ -877,9 +1067,7 @@ export default function ProfsPage() {
                     onClick={copierPrompt}
                     disabled={!promptInterne}
                     className={`inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-[11px] font-semibold transition ${
-                      promptInterne
-                        ? "bg-slate-800 text-white hover:bg-slate-900"
-                        : "bg-slate-200 text-slate-500 cursor-not-allowed"
+                      promptInterne ? "bg-slate-800 text-white hover:bg-slate-900" : "bg-slate-200 text-slate-500 cursor-not-allowed"
                     }`}
                   >
                     <ClipboardCopy className="w-4 h-4" />
@@ -907,31 +1095,42 @@ export default function ProfsPage() {
               )}
 
               <div className="space-y-2 pt-1">
-                <p className="text-[11px] text-gray-600">
-                  Coller dans :
-                </p>
+                <p className="text-[11px] text-gray-600">Coller dans :</p>
                 <div className="flex flex-wrap gap-2 text-[11px] sm:text-xs">
-                  <Link
-                    href={tchatHref}
-                    className="px-3 py-2 rounded-lg bg-emerald-600 text-white font-semibold hover:bg-emerald-700"
-                  >
+                  <Link href={tchatHref} className="px-3 py-2 rounded-lg bg-emerald-600 text-white font-semibold hover:bg-emerald-700">
                     🚀 Tchat EleveAI
                   </Link>
 
-                  <a href="https://chatgpt.com" target="_blank" rel="noreferrer"
-                    className="px-3 py-2 rounded-lg bg-slate-800 text-white font-semibold hover:bg-slate-900">
+                  <a
+                    href="https://chatgpt.com"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="px-3 py-2 rounded-lg bg-slate-800 text-white font-semibold hover:bg-slate-900"
+                  >
                     🟦 ChatGPT
                   </a>
-                  <a href="https://gemini.google.com" target="_blank" rel="noreferrer"
-                    className="px-3 py-2 rounded-lg bg-[#0F9D58] text-white font-semibold hover:bg-[#0c7b45]">
+                  <a
+                    href="https://gemini.google.com"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="px-3 py-2 rounded-lg bg-[#0F9D58] text-white font-semibold hover:bg-[#0c7b45]"
+                  >
                     🟩 Gemini
                   </a>
-                  <a href="https://claude.ai" target="_blank" rel="noreferrer"
-                    className="px-3 py-2 rounded-lg bg-[#4B3FFF] text-white font-semibold hover:bg-[#372dcc]">
+                  <a
+                    href="https://claude.ai"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="px-3 py-2 rounded-lg bg-[#4B3FFF] text-white font-semibold hover:bg-[#372dcc]"
+                  >
                     🟪 Claude
                   </a>
-                  <a href="https://chat.mistral.ai" target="_blank" rel="noreferrer"
-                    className="px-3 py-2 rounded-lg bg-[#FF7F11] text-white font-semibold hover:bg-[#e46f0d]">
+                  <a
+                    href="https://chat.mistral.ai"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="px-3 py-2 rounded-lg bg-[#FF7F11] text-white font-semibold hover:bg-[#e46f0d]"
+                  >
                     🟧 Mistral
                   </a>
                 </div>
@@ -941,18 +1140,14 @@ export default function ProfsPage() {
             {/* 4) RESSOURCE AGENT */}
             <div className="bg-white/95 border border-slate-200 rounded-2xl shadow-sm p-5 sm:p-6 space-y-4">
               <div className="flex items-center justify-between gap-2">
-                <h2 className="text-lg font-bold text-[#0047B6]">
-                  4️⃣ Ressource générée (agent IA)
-                </h2>
+                <h2 className="text-lg font-bold text-[#0047B6]">4️⃣ Ressource générée (agent IA)</h2>
 
                 <button
                   type="button"
                   onClick={copierRessource}
                   disabled={!agentOutput}
                   className={`inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-[11px] font-semibold transition ${
-                    agentOutput
-                      ? "bg-slate-800 text-white hover:bg-slate-900"
-                      : "bg-slate-200 text-slate-500 cursor-not-allowed"
+                    agentOutput ? "bg-slate-800 text-white hover:bg-slate-900" : "bg-slate-200 text-slate-500 cursor-not-allowed"
                   }`}
                 >
                   <ClipboardCopy className="w-4 h-4" />
@@ -970,9 +1165,9 @@ export default function ProfsPage() {
         </div>
       </div>
 
-      {/* ✅ NUDGE : discret, déclenché après actions (et timer possible) */}
+      {/* NUDGE */}
       <SignupNudge
-        storageKey="eleveai_nudge_profs_v1"
+        storageKey="eleveai_nudge_profs_v2"
         actionSignal={nudgeSignal}
         minActionCount={0}
         trigger="both"
