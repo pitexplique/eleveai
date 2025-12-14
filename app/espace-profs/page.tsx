@@ -52,6 +52,15 @@ type ModaliteEvaluation =
   | "evaluation_diagnostique"
   | "evaluation_differenciee";
 
+// ✅ NOUVEAU : Thèmes abordés (multi-choix) + libellé contextuel
+type ThemeAborde =
+  | "ecologie"
+  | "nature"
+  | "agriculture"
+  | "art"
+  | "musique"
+  | "architecture";
+
 type PromptProf = {
   titre: string;
   objectifPedagogique: string;
@@ -74,6 +83,10 @@ type PromptProf = {
 
   // ✅ si type = évaluation
   modaliteEvaluation: ModaliteEvaluation;
+
+  // ✅ Thèmes abordés
+  themes: ThemeAborde[];
+  themesLabel: string;
 };
 
 /* ----------------------------------------
@@ -213,6 +226,16 @@ const TONALITES: { id: Tonalite; label: string; hint: string }[] = [
   { id: "ludique", label: "Ludique", hint: "Ton plus léger (sans perdre la rigueur)." },
 ];
 
+// ✅ NOUVEAU : options thèmes
+const THEME_OPTIONS: { id: ThemeAborde; label: string }[] = [
+  { id: "ecologie", label: "Écologie" },
+  { id: "nature", label: "Nature" },
+  { id: "agriculture", label: "Agriculture" },
+  { id: "art", label: "Art" },
+  { id: "musique", label: "Musique" },
+  { id: "architecture", label: "Architecture" },
+];
+
 /* ----------------------------------------
    CARROUSEL PRESETS
 ---------------------------------------- */
@@ -305,6 +328,12 @@ function blocWordDesign(style: OutputStyle) {
 function construirePrompt(form: PromptProf): string {
   const blocTags = form.tags.length > 0 ? `Mots-clés pédagogiques : ${form.tags.join(", ")}.\n` : "";
   const blocAuteur = form.auteur ? `Préparé par : ${form.auteur}.\n` : "";
+
+  // ✅ NOUVEAU : bloc thèmes
+  const blocThemes =
+    (form.themes?.length ? `Thèmes à intégrer : ${form.themes.join(", ")}.\n` : "") +
+    (form.themesLabel?.trim() ? `Contexte / angle : ${form.themesLabel.trim()}.\n` : "");
+  const blocContexteThemes = blocThemes.trim().length ? `\n${blocThemes}\n` : "";
 
   const blocEduscol = "Respecter les programmes officiels français (Eduscol/BO), vocabulaire attendu.\n\n";
 
@@ -399,6 +428,7 @@ function construirePrompt(form: PromptProf): string {
     `Niveau : ${form.niveau}.\n` +
     `Type : ${form.type || "non précisé"}.\n` +
     blocTags +
+    blocContexteThemes +
     blocAuteur +
     `Consigne professeur (à optimiser) :\n"""${form.contenu.trim()}"""\n\n` +
     blocDYS +
@@ -440,6 +470,10 @@ export default function ProfsPage() {
       dureeMin: 45,
       tonalite: "neutre",
       modaliteEvaluation: "evaluation_sommative",
+
+      // ✅ nouveaux champs thèmes
+      themes: [],
+      themesLabel: "L'agriculture et l'écologie au service de La Réunion",
     };
   }, [today]);
 
@@ -483,6 +517,17 @@ export default function ProfsPage() {
     setForm((prev) => ({ ...prev, tags }));
   }, []);
 
+  // ✅ NOUVEAU : toggle thèmes
+  const toggleTheme = useCallback((id: ThemeAborde) => {
+    setForm((prev) => {
+      const has = prev.themes.includes(id);
+      return {
+        ...prev,
+        themes: has ? prev.themes.filter((t) => t !== id) : [...prev.themes, id],
+      };
+    });
+  }, []);
+
   // ✅ appliquer preset (SANS any)
   const appliquerPreset = useCallback(
     (key: ProfsPresetKey) => {
@@ -505,6 +550,10 @@ export default function ProfsPage() {
           dureeMin: v.dureeMin ?? prev.dureeMin,
           tonalite: (v.tonalite ?? prev.tonalite) as Tonalite,
           modaliteEvaluation: (v.modaliteEvaluation ?? prev.modaliteEvaluation) as ModaliteEvaluation,
+
+          // ✅ nouveaux champs thèmes (si présents côté preset, sinon on garde)
+          themes: (v as unknown as Partial<PromptProf>).themes ?? prev.themes,
+          themesLabel: (v as unknown as Partial<PromptProf>).themesLabel ?? prev.themesLabel,
         };
 
         if (base.classe === "3e" && !base.tags.includes("#DNB")) {
@@ -559,6 +608,10 @@ export default function ProfsPage() {
     } else {
       s.push("Choisis une méthode pédagogique : ça structure la progression et les questions.");
     }
+
+    // ✅ nouveau : thèmes
+    if ((form.themes?.length ?? 0) === 0) s.push("Ajoute 1-2 thèmes : ça donne des exemples concrets et un contexte motivant.");
+    if (!form.themesLabel.trim()) s.push("Tu peux préciser un angle (ex : La Réunion) pour contextualiser la ressource.");
 
     if (s.length === 0) s.push("Parfait. Tu peux ajouter : matériel, contraintes, exemple de production attendue.");
     return s;
@@ -985,6 +1038,47 @@ export default function ProfsPage() {
               )}
             </div>
 
+            {/* ✅ NOUVEAU : Thèmes abordés */}
+            <div className="space-y-2">
+              <label className="text-xs font-semibold text-gray-600">Thèmes abordés</label>
+
+              <div className="flex flex-wrap gap-2">
+                {THEME_OPTIONS.map((t) => {
+                  const active = form.themes.includes(t.id);
+                  return (
+                    <button
+                      key={t.id}
+                      type="button"
+                      onClick={() => toggleTheme(t.id)}
+                      className={`px-3 py-1.5 rounded-full text-[12px] font-semibold border transition ${
+                        active
+                          ? "bg-[#0047B6] text-white border-[#0047B6]"
+                          : "bg-white text-slate-700 border-slate-300 hover:bg-slate-50"
+                      }`}
+                    >
+                      {t.label}
+                    </button>
+                  );
+                })}
+              </div>
+
+              <div className="space-y-1 pt-1">
+                <label className="text-[11px] font-semibold text-gray-600">
+                  Libellé de contexte (facultatif)
+                </label>
+                <input
+                  type="text"
+                  value={form.themesLabel}
+                  onChange={(e) => handleChange("themesLabel", e.target.value)}
+                  placeholder="Ex : L'agriculture et l'écologie au service de La Réunion"
+                  className="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-sky-300"
+                />
+                <p className="text-[11px] text-gray-500">
+                  Sert à contextualiser (exemples, vocabulaire, situations locales).
+                </p>
+              </div>
+            </div>
+
             {/* DYS + date */}
             <div className="flex items-center justify-between gap-3">
               <label className="inline-flex items-center gap-2 text-xs text-gray-700">
@@ -1036,7 +1130,9 @@ export default function ProfsPage() {
                 onClick={creerPromptEtRessource}
                 disabled={agentLoading}
                 className={`inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold shadow transition ${
-                  agentLoading ? "bg-sky-100 text-sky-500 cursor-not-allowed" : "bg-[#0047B6] text-white hover:bg-[#003894]"
+                  agentLoading
+                    ? "bg-sky-100 text-sky-500 cursor-not-allowed"
+                    : "bg-[#0047B6] text-white hover:bg-[#003894]"
                 }`}
               >
                 <Sparkles className="w-4 h-4" />
@@ -1071,7 +1167,9 @@ export default function ProfsPage() {
                     onClick={copierPrompt}
                     disabled={!promptInterne}
                     className={`inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-[11px] font-semibold transition ${
-                      promptInterne ? "bg-slate-800 text-white hover:bg-slate-900" : "bg-slate-200 text-slate-500 cursor-not-allowed"
+                      promptInterne
+                        ? "bg-slate-800 text-white hover:bg-slate-900"
+                        : "bg-slate-200 text-slate-500 cursor-not-allowed"
                     }`}
                   >
                     <ClipboardCopy className="w-4 h-4" />
@@ -1101,20 +1199,43 @@ export default function ProfsPage() {
               <div className="space-y-2 pt-1">
                 <p className="text-[11px] text-gray-600">Coller dans :</p>
                 <div className="flex flex-wrap gap-2 text-[11px] sm:text-xs">
-                  <Link href={tchatHref} className="px-3 py-2 rounded-lg bg-emerald-600 text-white font-semibold hover:bg-emerald-700">
+                  <Link
+                    href={tchatHref}
+                    className="px-3 py-2 rounded-lg bg-emerald-600 text-white font-semibold hover:bg-emerald-700"
+                  >
                     🚀 Tchat EleveAI
                   </Link>
 
-                  <a href="https://chatgpt.com" target="_blank" rel="noreferrer" className="px-3 py-2 rounded-lg bg-slate-800 text-white font-semibold hover:bg-slate-900">
+                  <a
+                    href="https://chatgpt.com"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="px-3 py-2 rounded-lg bg-slate-800 text-white font-semibold hover:bg-slate-900"
+                  >
                     🟦 ChatGPT
                   </a>
-                  <a href="https://gemini.google.com" target="_blank" rel="noreferrer" className="px-3 py-2 rounded-lg bg-[#0F9D58] text-white font-semibold hover:bg-[#0c7b45]">
+                  <a
+                    href="https://gemini.google.com"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="px-3 py-2 rounded-lg bg-[#0F9D58] text-white font-semibold hover:bg-[#0c7b45]"
+                  >
                     🟩 Gemini
                   </a>
-                  <a href="https://claude.ai" target="_blank" rel="noreferrer" className="px-3 py-2 rounded-lg bg-[#4B3FFF] text-white font-semibold hover:bg-[#372dcc]">
+                  <a
+                    href="https://claude.ai"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="px-3 py-2 rounded-lg bg-[#4B3FFF] text-white font-semibold hover:bg-[#372dcc]"
+                  >
                     🟪 Claude
                   </a>
-                  <a href="https://chat.mistral.ai" target="_blank" rel="noreferrer" className="px-3 py-2 rounded-lg bg-[#FF7F11] text-white font-semibold hover:bg-[#e46f0d]">
+                  <a
+                    href="https://chat.mistral.ai"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="px-3 py-2 rounded-lg bg-[#FF7F11] text-white font-semibold hover:bg-[#e46f0d]"
+                  >
                     🟧 Mistral
                   </a>
                 </div>
@@ -1130,7 +1251,9 @@ export default function ProfsPage() {
                   onClick={copierRessource}
                   disabled={!agentOutput}
                   className={`inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-[11px] font-semibold transition ${
-                    agentOutput ? "bg-slate-800 text-white hover:bg-slate-900" : "bg-slate-200 text-slate-500 cursor-not-allowed"
+                    agentOutput
+                      ? "bg-slate-800 text-white hover:bg-slate-900"
+                      : "bg-slate-200 text-slate-500 cursor-not-allowed"
                   }`}
                 >
                   <ClipboardCopy className="w-4 h-4" />
@@ -1141,7 +1264,11 @@ export default function ProfsPage() {
               {agentError && <p className="text-xs text-red-600">⚠️ {agentError}</p>}
 
               <div className="eleveai-math border rounded p-3 min-h-[180px] bg-slate-50 text-sm whitespace-pre-wrap">
-                {agentLoading ? "Réflexion en cours..." : agentOutput ? <MarkdownMath>{agentOutput}</MarkdownMath> : "La ressource apparaîtra ici."}
+                {agentLoading
+                  ? "Réflexion en cours..."
+                  : agentOutput
+                  ? <MarkdownMath>{agentOutput}</MarkdownMath>
+                  : "La ressource apparaîtra ici."}
               </div>
             </div>
           </section>
