@@ -54,6 +54,7 @@ type ModaliteEvaluation =
 
 // ✅ NOUVEAU : Thèmes abordés (multi-choix) + libellé contextuel
 type ThemeAborde =
+  | "sport"
   | "ecologie"
   | "nature"
   | "agriculture"
