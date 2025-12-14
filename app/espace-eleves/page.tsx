@@ -1,7 +1,6 @@
-// app/espace-eleves/page.tsx
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useState, useCallback } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { PresetCarousel, PresetCarouselItem } from "@/components/PresetCarousel";
@@ -16,6 +15,7 @@ import {
   Smile,
   Frown,
   Star,
+  ShieldCheck, // ✅ ajouté
 } from "lucide-react";
 
 export const dynamic = "force-dynamic";
@@ -67,6 +67,9 @@ type PromptEleve = {
   adaptationDYS: boolean;
   dysTypes: DysType[];
   dysPrecisionAutre?: string;
+
+  // ✅ Anti-triche : toggle explicite
+  modeAntiTriche: boolean;
 };
 
 /* ----------------------------------------
@@ -101,48 +104,13 @@ const TYPE_AIDE_CARDS: {
   desc: string;
   emoji: string;
 }[] = [
-  {
-    value: "manipuler_pour_comprendre",
-    label: "Manipuler",
-    desc: "Exemples concrets + étapes",
-    emoji: "🧩",
-  },
-  {
-    value: "comprendre_le_cours",
-    label: "Comprendre",
-    desc: "Explication simple + mini test",
-    emoji: "💡",
-  },
-  {
-    value: "reviser_un_chapitre",
-    label: "Réviser",
-    desc: "Résumé + exercices",
-    emoji: "📌",
-  },
-  {
-    value: "preparer_un_controle",
-    label: "Contrôle",
-    desc: "Entraînement + méthodes",
-    emoji: "🎯",
-  },
-  {
-    value: "faire_des_exercices",
-    label: "Exercices",
-    desc: "Série progressive",
-    emoji: "✍️",
-  },
-  {
-    value: "methode_de_travail",
-    label: "Méthode",
-    desc: "Organisation + astuces",
-    emoji: "🗓️",
-  },
-  {
-    value: "defis",
-    label: "Défis",
-    desc: "Petits challenges",
-    emoji: "⚡",
-  },
+  { value: "manipuler_pour_comprendre", label: "Manipuler", desc: "Exemples concrets + étapes", emoji: "🧩" },
+  { value: "comprendre_le_cours", label: "Comprendre", desc: "Explication simple + mini test", emoji: "💡" },
+  { value: "reviser_un_chapitre", label: "Réviser", desc: "Résumé + exercices", emoji: "📌" },
+  { value: "preparer_un_controle", label: "Contrôle", desc: "Entraînement + méthodes", emoji: "🎯" },
+  { value: "faire_des_exercices", label: "Exercices", desc: "Série progressive", emoji: "✍️" },
+  { value: "methode_de_travail", label: "Méthode", desc: "Organisation + astuces", emoji: "🗓️" },
+  { value: "defis", label: "Défis", desc: "Petits challenges", emoji: "⚡" },
 ];
 
 const TIME_CHIPS = ["10 min", "20 min", "30 min", "45 min", "60 min"] as const;
@@ -153,29 +121,13 @@ const CONFIANCE_CHIPS: {
   icon: React.ReactNode;
   hint: string;
 }[] = [
-  {
-    value: "en_difficulte",
-    label: "J’ai du mal",
-    icon: <Frown className="w-4 h-4" />,
-    hint: "On va y aller pas à pas.",
-  },
-  {
-    value: "moyen",
-    label: "Ça va",
-    icon: <Smile className="w-4 h-4" />,
-    hint: "On corrige les erreurs.",
-  },
-  {
-    value: "a_l_aise",
-    label: "Je suis à l’aise",
-    icon: <Star className="w-4 h-4" />,
-    hint: "On vérifie et on approfondit.",
-  },
+  { value: "en_difficulte", label: "J’ai du mal", icon: <Frown className="w-4 h-4" />, hint: "On va y aller pas à pas." },
+  { value: "moyen", label: "Ça va", icon: <Smile className="w-4 h-4" />, hint: "On corrige les erreurs." },
+  { value: "a_l_aise", label: "Je suis à l’aise", icon: <Star className="w-4 h-4" />, hint: "On vérifie et on approfondit." },
 ];
 
 /* ----------------------------------------
    PRESETS (intégrés ici)
-   👉 si tu crées data/elevesPresets.ts, remplace juste ce bloc + PRESET_ITEMS
 ---------------------------------------- */
 
 type PresetKey =
@@ -211,6 +163,7 @@ const PRESETS: Record<
       objectifPerso: "Je veux être plus rapide et faire moins d’erreurs.",
       prefereQuestions: true,
       prefereExemplesConcrets: true,
+      modeAntiTriche: true,
     },
   },
   "6e_maths_fractions_debut": {
@@ -227,6 +180,7 @@ const PRESETS: Record<
       objectifPerso: "Je veux comprendre les fractions avec des exemples faciles.",
       prefereQuestions: true,
       prefereExemplesConcrets: true,
+      modeAntiTriche: true,
     },
   },
   "5e_maths_fractions_controle": {
@@ -243,6 +197,7 @@ const PRESETS: Record<
       objectifPerso: "Je veux réussir mon contrôle sans paniquer.",
       prefereQuestions: true,
       prefereExemplesConcrets: true,
+      modeAntiTriche: true,
     },
   },
   "4e_fr_orthographe": {
@@ -259,6 +214,7 @@ const PRESETS: Record<
       objectifPerso: "Je veux faire moins de fautes dans mes textes.",
       prefereQuestions: true,
       prefereExemplesConcrets: true,
+      modeAntiTriche: true,
     },
   },
   "3e_maths_brevet_revision": {
@@ -275,6 +231,7 @@ const PRESETS: Record<
       objectifPerso: "Je veux savoir ce que je dois revoir en priorité.",
       prefereQuestions: true,
       prefereExemplesConcrets: true,
+      modeAntiTriche: true,
     },
   },
   "3e_langues_oral": {
@@ -291,6 +248,7 @@ const PRESETS: Record<
       objectifPerso: "Je veux oser parler en anglais.",
       prefereQuestions: true,
       prefereExemplesConcrets: true,
+      modeAntiTriche: true,
     },
   },
   "seconde_methodo": {
@@ -307,6 +265,7 @@ const PRESETS: Record<
       objectifPerso: "Je veux arrêter de tout faire au dernier moment.",
       prefereQuestions: false,
       prefereExemplesConcrets: true,
+      modeAntiTriche: true,
     },
   },
   "terminale_maths_fonctions": {
@@ -323,6 +282,7 @@ const PRESETS: Record<
       objectifPerso: "Je veux réussir les exos type bac sur les fonctions.",
       prefereQuestions: true,
       prefereExemplesConcrets: true,
+      modeAntiTriche: true,
     },
   },
 };
@@ -369,6 +329,13 @@ export default function ElevePage() {
   const router = useRouter();
   const supabase = createClient();
 
+  // ✅ Toast
+  const [toast, setToast] = useState<string | null>(null);
+  const showToast = useCallback((msg: string) => {
+    setToast(msg);
+    window.setTimeout(() => setToast(null), 2000);
+  }, []);
+
   const makeInitialForm = (): PromptEleve => ({
     prenom: "",
     classe: "",
@@ -384,11 +351,12 @@ export default function ElevePage() {
     adaptationDYS: false,
     dysTypes: [],
     dysPrecisionAutre: "",
+    modeAntiTriche: true, // ✅ par défaut ON
   });
 
   const [form, setForm] = useState<PromptEleve>(makeInitialForm());
 
-  // ✅ UI progressive (étapes)
+  // UI progressive (étapes)
   const [showAdvanced, setShowAdvanced] = useState(false);
 
   // sortie
@@ -406,10 +374,11 @@ export default function ElevePage() {
   function appliquerPreset(key: PresetKey) {
     const preset = PRESETS[key];
     setForm((prev) => ({ ...prev, ...preset.valeurs }));
-    setShowAdvanced(true); // avec un preset, on affiche souvent l’étape 2
+    setShowAdvanced(true);
     setPromptFinal("");
     setCopied(false);
     setSaveMessage(null);
+    showToast("✅ Modèle appliqué !");
   }
 
   function resetAll() {
@@ -418,10 +387,11 @@ export default function ElevePage() {
     setPromptFinal("");
     setCopied(false);
     setSaveMessage(null);
+    showToast("🔄 Tout est réinitialisé");
   }
 
   /* ----------------------------------------
-     SUGGESTIONS (plus simples)
+     SUGGESTIONS
   ---------------------------------------- */
 
   const suggestions = useMemo(() => {
@@ -437,6 +407,10 @@ export default function ElevePage() {
       if (!form.exemplesDifficiles.trim()) s.push("Ajoute un exemple qui te pose problème.");
     }
 
+    if (!form.modeAntiTriche) {
+      s.push("Conseil : active le mode anti-triche pour apprendre avec des indices.");
+    }
+
     if (s.length === 0) s.push("Parfait ✅ Tu peux générer ton prompt.");
     return s;
   }, [form, showAdvanced]);
@@ -446,7 +420,6 @@ export default function ElevePage() {
   ---------------------------------------- */
 
   function genererPromptFinal(mode: "rapide" | "complet" = "complet") {
-    // Step1 minimum
     if (!form.classe || !form.matiere || !form.typeAide || !form.chapitre.trim()) {
       alert("Remplis au minimum : classe, matière, chapitre, et ce que tu veux faire.");
       return;
@@ -456,13 +429,11 @@ export default function ElevePage() {
     const chapitre = form.chapitre.trim();
     const temps = form.tempsDispo?.trim() || "non précisé";
 
-    // si rapide, on tolère objectif/exemples vides
     const objectif =
       (mode === "complet" ? form.objectifPerso.trim() : "") ||
       "mieux comprendre ce chapitre et réussir les exercices importants.";
 
-    const exemples =
-      mode === "complet" ? form.exemplesDifficiles.trim() : "";
+    const exemples = mode === "complet" ? form.exemplesDifficiles.trim() : "";
 
     const blocPrefs =
       `Mes préférences :\n` +
@@ -473,11 +444,14 @@ export default function ElevePage() {
         ? "- Utilise des exemples concrets avant la règle.\n"
         : "- Tu peux aller à l’essentiel.\n");
 
-    const blocAntiTriche =
-      "\nIMPORTANT (anti-triche) :\n" +
-      "- Ne fais pas l’exercice à ma place.\n" +
-      "- Demande-moi d’essayer, puis corrige étape par étape.\n" +
-      "- À la fin, fais une mini vérification (2–3 questions).\n";
+    // ✅ Anti-triche : injecté seulement si toggle ON
+    const blocAntiTriche = form.modeAntiTriche
+      ? "\nMODE ANTI-TRICHE (obligatoire) :\n" +
+        "- Ne donne pas la solution tout de suite.\n" +
+        "- Fais-moi chercher : questions → indices → correction étape par étape.\n" +
+        "- Demande-moi d’essayer à chaque étape.\n" +
+        "- À la fin, fais une mini vérification (2–3 questions).\n"
+      : "";
 
     const blocDYS = form.adaptationDYS
       ? (() => {
@@ -520,6 +494,7 @@ export default function ElevePage() {
     setPromptFinal(prompt);
     setCopied(false);
     setSaveMessage(null);
+    showToast(mode === "rapide" ? "⚡ Aide rapide générée !" : "✨ Prompt complet généré !");
   }
 
   async function copierPrompt() {
@@ -527,6 +502,7 @@ export default function ElevePage() {
     try {
       await navigator.clipboard.writeText(promptFinal);
       setCopied(true);
+      showToast("✅ Copié !");
       setTimeout(() => setCopied(false), 1500);
     } catch {
       alert("Copie auto impossible. Sélectionne le texte puis Ctrl+C.");
@@ -588,8 +564,10 @@ export default function ElevePage() {
     if (error) {
       console.error(error);
       setSaveMessage("Erreur pendant l’enregistrement du preset.");
+      showToast("⚠️ Erreur d’enregistrement");
     } else {
       setSaveMessage("✅ Preset enregistré dans ton espace !");
+      showToast("⭐ Preset enregistré !");
     }
 
     setSaving(false);
@@ -668,7 +646,10 @@ export default function ElevePage() {
                 <label className="text-xs font-semibold">Classe</label>
                 <select
                   value={form.classe}
-                  onChange={(e) => handleChange("classe", e.target.value as Classe)}
+                  onChange={(e) => {
+                    handleChange("classe", e.target.value as Classe);
+                    showToast("✅ Classe choisie");
+                  }}
                   className="w-full border rounded-lg px-3 py-2 text-sm bg-white"
                 >
                   <option value="">Choisir…</option>
@@ -684,7 +665,10 @@ export default function ElevePage() {
                 <label className="text-xs font-semibold">Matière</label>
                 <select
                   value={form.matiere}
-                  onChange={(e) => handleChange("matiere", e.target.value)}
+                  onChange={(e) => {
+                    handleChange("matiere", e.target.value);
+                    showToast("✅ Matière choisie");
+                  }}
                   className="w-full border rounded-lg px-3 py-2 text-sm bg-white"
                 >
                   <option value="">Choisir…</option>
@@ -709,7 +693,7 @@ export default function ElevePage() {
               />
             </div>
 
-            {/* Type d’aide en cartes (plus engageant) */}
+            {/* Type d’aide en cartes */}
             <div className="space-y-2">
               <label className="text-xs font-semibold">Ce que tu veux faire</label>
               <div className="grid sm:grid-cols-2 gap-2">
@@ -719,7 +703,10 @@ export default function ElevePage() {
                     <button
                       key={t.value}
                       type="button"
-                      onClick={() => handleChange("typeAide", t.value)}
+                      onClick={() => {
+                        handleChange("typeAide", t.value);
+                        showToast(`🎯 ${t.label} sélectionné`);
+                      }}
                       className={`text-left rounded-xl border px-3 py-2 transition ${
                         active
                           ? "border-emerald-500 bg-emerald-50 shadow-sm"
@@ -754,7 +741,10 @@ export default function ElevePage() {
                       <button
                         key={t}
                         type="button"
-                        onClick={() => handleChange("tempsDispo", t)}
+                        onClick={() => {
+                          handleChange("tempsDispo", t);
+                          showToast(`⏱️ ${t}`);
+                        }}
                         className={`rounded-full px-3 py-1 text-[11px] font-semibold border transition ${
                           active
                             ? "border-emerald-500 bg-emerald-100 text-emerald-800"
@@ -784,7 +774,10 @@ export default function ElevePage() {
                       <button
                         key={c.value}
                         type="button"
-                        onClick={() => handleChange("confiance", c.value)}
+                        onClick={() => {
+                          handleChange("confiance", c.value);
+                          showToast("✅ Niveau noté");
+                        }}
                         className={`text-left rounded-xl border px-3 py-2 transition ${
                           active
                             ? "border-emerald-500 bg-emerald-50 shadow-sm"
@@ -802,6 +795,35 @@ export default function ElevePage() {
                     );
                   })}
                 </div>
+              </div>
+            </div>
+
+            {/* ✅ Mode anti-triche (ajout sans rien enlever) */}
+            <div className="rounded-2xl border border-amber-200 bg-amber-50 p-4">
+              <div className="flex items-start justify-between gap-3">
+                <div>
+                  <p className="text-sm font-extrabold text-amber-900 inline-flex items-center gap-2">
+                    <ShieldCheck className="w-4 h-4" />
+                    Mode anti-triche
+                  </p>
+                  <p className="text-xs text-amber-800 mt-1">
+                    L’IA doit t’aider à <b>comprendre</b> : questions → indices → correction pas à pas.
+                    (Solution complète seulement si tu la demandes après avoir essayé.)
+                  </p>
+                </div>
+
+                <label className="inline-flex items-center gap-2 text-xs font-semibold text-amber-900">
+                  <input
+                    type="checkbox"
+                    checked={form.modeAntiTriche}
+                    onChange={(e) => {
+                      handleChange("modeAntiTriche", e.target.checked);
+                      showToast(e.target.checked ? "🛡️ Anti-triche activé" : "⚠️ Anti-triche désactivé");
+                    }}
+                    className="rounded border-gray-400"
+                  />
+                  Activer
+                </label>
               </div>
             </div>
 
@@ -831,14 +853,11 @@ export default function ElevePage() {
               </button>
             </div>
 
-            {/* ADVANCED */}
+            {/* ADVANCED (inchangé, conservé) */}
             {showAdvanced && (
               <div className="mt-3 space-y-4 rounded-2xl border border-emerald-100 bg-emerald-50/40 p-4">
-                <h3 className="text-sm font-extrabold text-emerald-800">
-                  2️⃣ Options pour améliorer l’aide
-                </h3>
+                <h3 className="text-sm font-extrabold text-emerald-800">2️⃣ Options pour améliorer l’aide</h3>
 
-                {/* Objectif */}
                 <div className="space-y-1">
                   <label className="text-xs font-semibold">Ton objectif (avec tes mots)</label>
                   <textarea
@@ -849,7 +868,6 @@ export default function ElevePage() {
                   />
                 </div>
 
-                {/* Exemples */}
                 <div className="space-y-1">
                   <label className="text-xs font-semibold">Un exemple qui te pose problème</label>
                   <textarea
@@ -860,7 +878,6 @@ export default function ElevePage() {
                   />
                 </div>
 
-                {/* Préférences */}
                 <div className="grid sm:grid-cols-2 gap-3">
                   <label className="inline-flex items-center gap-2 text-xs text-slate-700">
                     <input
@@ -883,7 +900,6 @@ export default function ElevePage() {
                   </label>
                 </div>
 
-                {/* DYS */}
                 <div className="space-y-2 pt-1">
                   <label className="inline-flex items-center gap-2 text-xs text-slate-700">
                     <input
@@ -943,7 +959,6 @@ export default function ElevePage() {
                   )}
                 </div>
 
-                {/* Regénérer */}
                 <div className="pt-1 flex justify-end">
                   <button
                     type="button"
@@ -960,27 +975,38 @@ export default function ElevePage() {
 
           {/* RIGHT */}
           <section className="space-y-4">
+
             {/* Conseils */}
             <div className="bg-white/95 border border-emerald-200 rounded-2xl shadow-sm p-5 space-y-3">
               <h2 className="text-lg font-bold text-emerald-700">
-                3️⃣ Conseils (rapides)
+                Conseils (rapides)
               </h2>
+
               <ul className="space-y-2 text-sm text-gray-700">
-                {suggestions.map((s, i) => (
-                  <li key={i} className="flex gap-2">
-                    <span className="text-emerald-600">➤</span>
-                    <span>{s}</span>
-                  </li>
-                ))}
+                <li className="flex gap-2">
+                  <span className="text-emerald-600">➤</span>
+                  <span>Choisis la matière.</span>
+                </li>
+                <li className="flex gap-2">
+                  <span className="text-emerald-600">➤</span>
+                  <span>Indique ta classe.</span>
+                </li>
+                <li className="flex gap-2">
+                  <span className="text-emerald-600">➤</span>
+                  <span>Choisis ce que tu veux faire.</span>
+                </li>
+                <li className="flex gap-2">
+                  <span className="text-emerald-600">➤</span>
+                  <span>Écris le chapitre (fractions, Thalès…).</span>
+                </li>
               </ul>
             </div>
+
 
             {/* Prompt final */}
             <div className="bg-white/95 border border-slate-200 rounded-2xl shadow-sm p-5 space-y-3">
               <div className="flex flex-wrap items-center justify-between gap-2">
-                <h2 className="text-lg font-bold text-[#0047B6]">
-                  4️⃣ Ton prompt
-                </h2>
+                <h2 className="text-lg font-bold text-[#0047B6]">4️⃣ Ton prompt</h2>
 
                 <div className="flex items-center gap-2">
                   <button
@@ -1010,9 +1036,7 @@ export default function ElevePage() {
                 </div>
               </div>
 
-              {saveMessage && (
-                <p className="text-xs text-emerald-700">{saveMessage}</p>
-              )}
+              {saveMessage && <p className="text-xs text-emerald-700">{saveMessage}</p>}
 
               <textarea
                 readOnly
@@ -1021,9 +1045,7 @@ export default function ElevePage() {
                 placeholder="Ton prompt apparaîtra ici après génération."
               />
 
-              <p className="text-xs text-gray-700">
-                Tu peux coller ce prompt dans l’IA de ton choix :
-              </p>
+              <p className="text-xs text-gray-700">Tu peux coller ce prompt dans l’IA de ton choix :</p>
 
               <div className="flex flex-wrap gap-2 text-xs">
                 <Link
@@ -1079,6 +1101,13 @@ export default function ElevePage() {
           </section>
         </div>
       </div>
+
+      {/* ✅ TOAST (ajout) */}
+      {toast && (
+        <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 rounded-xl bg-slate-900 text-white px-4 py-2 text-sm shadow-lg">
+          {toast}
+        </div>
+      )}
     </main>
   );
 }
