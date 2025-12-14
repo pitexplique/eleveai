@@ -68,11 +68,11 @@ type PromptProf = {
   methode: MethodePedagogique;
   outputStyle: OutputStyle;
 
-  // ✅ NOUVEAU : calibrage
+  // ✅ calibrage
   dureeMin: number; // 0 = non renseigné
   tonalite: Tonalite;
 
-  // ✅ NOUVEAU : si type = évaluation
+  // ✅ si type = évaluation
   modaliteEvaluation: ModaliteEvaluation;
 };
 
@@ -121,12 +121,24 @@ const TYPES_PAR_MATIERE: Record<string, string[]> = {
     "Création d’atelier d’écriture",
     "Préparation d’un commentaire composé guidé",
   ],
-  "Physique-Chimie": ["Conception d’activité expérimentale", "Préparation d’exercices type bac"],
-  SVT: ["Analyse de documents scientifiques", "Construction de schémas-bilans à compléter"],
+  "Physique-Chimie": [
+    "Conception d’activité expérimentale",
+    "Préparation d’exercices type bac",
+  ],
+  SVT: [
+    "Analyse de documents scientifiques",
+    "Construction de schémas-bilans à compléter",
+  ],
   "Histoire-Géographie": ["Étude de documents historiques", "Analyse de carte ou croquis"],
   SES: ["Analyse de graphiques économiques", "Préparation d’exemples chiffrés"],
-  Langues: ["Création d’activité de compréhension orale", "Génération de dialogues pour jeu de rôle"],
-  "Numérique/NSI": ["Génération d’exercices de programmation", "Création de défis algorithmiques"],
+  Langues: [
+    "Création d’activité de compréhension orale",
+    "Génération de dialogues pour jeu de rôle",
+  ],
+  "Numérique/NSI": [
+    "Génération d’exercices de programmation",
+    "Création de défis algorithmiques",
+  ],
   Philosophie: [
     "Préparation d’un sujet de dissertation",
     "Préparation d’une explication de texte philosophique",
@@ -150,11 +162,7 @@ const TYPES_SPECIAUX_BAC = [
   "Préparation d’une synthèse de révision pour le bac",
 ];
 
-const METHODE_OPTIONS: {
-  id: MethodePedagogique;
-  label: string;
-  description: string;
-}[] = [
+const METHODE_OPTIONS: { id: MethodePedagogique; label: string; description: string }[] = [
   {
     id: "methode_active",
     label: "Méthode active",
@@ -174,11 +182,7 @@ const METHODE_OPTIONS: {
   { id: "magistrale", label: "Cours magistral guidé", description: "Cours structuré + questions de vérification + entraînement final." },
 ];
 
-const EVAL_OPTIONS: {
-  id: ModaliteEvaluation;
-  label: string;
-  description: string;
-}[] = [
+const EVAL_OPTIONS: { id: ModaliteEvaluation; label: string; description: string }[] = [
   {
     id: "evaluation_sommative",
     label: "Évaluation sommative",
@@ -253,7 +257,7 @@ function getEvalDesc(id: ModaliteEvaluation) {
 }
 
 function isEvaluationType(type: string) {
-  return /devoir|contrôle|évaluation|qcm|brevet|bac|sujet blanc/i.test(type || "");
+  return /devoir|contrôle|evaluation|évaluation|qcm|brevet|bac|sujet blanc/i.test(type || "");
 }
 
 /* ----------------------------------------
@@ -338,10 +342,7 @@ function construirePrompt(form: PromptProf): string {
     : "";
 
   const blocMethode = (() => {
-    if (estEval) {
-      // On ne force pas une “méthode d’apprentissage” pour un devoir.
-      return "";
-    }
+    if (estEval) return ""; // pas de méthode d’apprentissage forcée sur un devoir/contrôle
     switch (form.methode) {
       case "enseignement_explicite":
         return (
@@ -460,7 +461,7 @@ export default function ProfsPage() {
   const [nudgeSignal, setNudgeSignal] = useState(0);
   const triggerNudge = useCallback(() => setNudgeSignal((n) => n + 1), []);
 
-  const handleChange = useCallback((field: keyof PromptProf, value: any) => {
+  const handleChange = useCallback(<K extends keyof PromptProf>(field: K, value: PromptProf[K]) => {
     setForm((prev) => ({ ...prev, [field]: value }));
   }, []);
 
@@ -482,26 +483,32 @@ export default function ProfsPage() {
     setForm((prev) => ({ ...prev, tags }));
   }, []);
 
+  // ✅ appliquer preset (SANS any)
   const appliquerPreset = useCallback(
     (key: ProfsPresetKey) => {
       const preset = PROFS_PRESETS[key];
       const v = preset.valeurs;
 
-      setForm((prev) => {
+      setForm((prev): PromptProf => {
         const base: PromptProf = {
           ...prev,
           ...v,
+
+          // listes
           tags: v.tags ?? prev.tags,
+
+          // choix
           methode: (v.methode ?? prev.methode) as MethodePedagogique,
           outputStyle: (v.outputStyle ?? prev.outputStyle) as OutputStyle,
-          // si preset ne touche pas durée/tonalité, on garde
-          dureeMin: (v as any).dureeMin ?? prev.dureeMin,
-          tonalite: ((v as any).tonalite ?? prev.tonalite) as Tonalite,
-          modaliteEvaluation: ((v as any).modaliteEvaluation ?? prev.modaliteEvaluation) as ModaliteEvaluation,
-        } as PromptProf;
 
-        if (base.classe === "3e" && !base.tags.includes("DNB")) {
-          base.tags = [...base.tags, "DNB"];
+          // ✅ typés (PAS de any)
+          dureeMin: v.dureeMin ?? prev.dureeMin,
+          tonalite: (v.tonalite ?? prev.tonalite) as Tonalite,
+          modaliteEvaluation: (v.modaliteEvaluation ?? prev.modaliteEvaluation) as ModaliteEvaluation,
+        };
+
+        if (base.classe === "3e" && !base.tags.includes("#DNB")) {
+          base.tags = [...base.tags, "#DNB"];
         }
         return base;
       });
@@ -545,6 +552,7 @@ export default function ProfsPage() {
     if (form.contenu.trim().length < 40) s.push("Consigne trop courte : ajoute durée, contraintes, barème, exemple attendu.");
 
     if (!form.dureeMin || form.dureeMin <= 0) s.push("Ajoute une durée (ex : 20, 45, 55 min) : ça calibre le sujet.");
+
     if (estEval) {
       s.push("Mode évaluation : pense barème, consignes, critères de réussite + différenciation base/standard/défi.");
       s.push("Choisis une modalité (sommative / formative / diagnostique / différenciée).");
@@ -584,8 +592,9 @@ export default function ProfsPage() {
       setAgentOutput(out);
 
       if (out) triggerNudge();
-    } catch (err: any) {
-      setAgentError(err?.message || "Erreur inconnue (vérifie le serveur / API).");
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : "Erreur inconnue (vérifie le serveur / API).";
+      setAgentError(msg);
     } finally {
       setAgentLoading(false);
     }
@@ -811,8 +820,6 @@ export default function ProfsPage() {
                 onChange={(e) => {
                   const nextType = e.target.value;
                   handleChange("type", nextType);
-
-                  // si on bascule en évaluation, on ferme la grille méthode
                   if (isEvaluationType(nextType)) setShowMethode(false);
                 }}
                 className="w-full border rounded-lg px-3 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-sky-300"
@@ -827,7 +834,7 @@ export default function ProfsPage() {
               <p className="text-[11px] text-gray-500 mt-1">S’adapte à la matière + brevet (3e) + bac (lycée).</p>
             </div>
 
-            {/* ✅ MODE ÉVALUATION (si devoir/contrôle/évaluation/etc.) */}
+            {/* MODE ÉVALUATION */}
             {estEval ? (
               <div className="space-y-2">
                 <div className="flex items-center justify-between gap-2">
@@ -874,7 +881,6 @@ export default function ProfsPage() {
                 )}
               </div>
             ) : (
-              /* Méthode (si pas évaluation) */
               <div className="space-y-2">
                 <div className="flex items-center justify-between gap-2">
                   <label className="text-xs font-semibold text-gray-600">Méthode pédagogique</label>
@@ -1041,7 +1047,6 @@ export default function ProfsPage() {
 
           {/* RIGHT */}
           <section className="space-y-4">
-            {/* Conseils */}
             <div className="bg-white/95 border border-amber-200 rounded-2xl shadow-sm p-5 sm:p-6 space-y-3">
               <h2 className="text-lg font-bold text-amber-700 flex items-center gap-2">
                 2️⃣ Conseils pour un meilleur résultat
@@ -1056,7 +1061,6 @@ export default function ProfsPage() {
               </ul>
             </div>
 
-            {/* 3) PROMPT */}
             <div className="bg-white/95 border border-slate-200 rounded-2xl shadow-sm p-5 sm:p-6 space-y-4">
               <div className="flex items-center justify-between gap-2">
                 <h2 className="text-lg font-bold text-[#0047B6]">3️⃣ Prompt EleveAI (à copier-coller)</h2>
@@ -1101,43 +1105,22 @@ export default function ProfsPage() {
                     🚀 Tchat EleveAI
                   </Link>
 
-                  <a
-                    href="https://chatgpt.com"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="px-3 py-2 rounded-lg bg-slate-800 text-white font-semibold hover:bg-slate-900"
-                  >
+                  <a href="https://chatgpt.com" target="_blank" rel="noreferrer" className="px-3 py-2 rounded-lg bg-slate-800 text-white font-semibold hover:bg-slate-900">
                     🟦 ChatGPT
                   </a>
-                  <a
-                    href="https://gemini.google.com"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="px-3 py-2 rounded-lg bg-[#0F9D58] text-white font-semibold hover:bg-[#0c7b45]"
-                  >
+                  <a href="https://gemini.google.com" target="_blank" rel="noreferrer" className="px-3 py-2 rounded-lg bg-[#0F9D58] text-white font-semibold hover:bg-[#0c7b45]">
                     🟩 Gemini
                   </a>
-                  <a
-                    href="https://claude.ai"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="px-3 py-2 rounded-lg bg-[#4B3FFF] text-white font-semibold hover:bg-[#372dcc]"
-                  >
+                  <a href="https://claude.ai" target="_blank" rel="noreferrer" className="px-3 py-2 rounded-lg bg-[#4B3FFF] text-white font-semibold hover:bg-[#372dcc]">
                     🟪 Claude
                   </a>
-                  <a
-                    href="https://chat.mistral.ai"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="px-3 py-2 rounded-lg bg-[#FF7F11] text-white font-semibold hover:bg-[#e46f0d]"
-                  >
+                  <a href="https://chat.mistral.ai" target="_blank" rel="noreferrer" className="px-3 py-2 rounded-lg bg-[#FF7F11] text-white font-semibold hover:bg-[#e46f0d]">
                     🟧 Mistral
                   </a>
                 </div>
               </div>
             </div>
 
-            {/* 4) RESSOURCE AGENT */}
             <div className="bg-white/95 border border-slate-200 rounded-2xl shadow-sm p-5 sm:p-6 space-y-4">
               <div className="flex items-center justify-between gap-2">
                 <h2 className="text-lg font-bold text-[#0047B6]">4️⃣ Ressource générée (agent IA)</h2>
@@ -1165,13 +1148,12 @@ export default function ProfsPage() {
         </div>
       </div>
 
-      {/* NUDGE */}
       <SignupNudge
         storageKey="eleveai_nudge_profs_v2"
         actionSignal={nudgeSignal}
         minActionCount={0}
         trigger="both"
-        delayMs={5 * 60 * 10}
+        delayMs={5 * 60 * 1000}
         minInteractions={3}
         variant="bottom"
       />

@@ -1,19 +1,13 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 
 export type PresetCarouselItem = {
   id: string;
   label: string;
   description: string;
-  badge?: string; // ex: "Modèle prof" ou "Brevet" (unique)
+  badge?: string;
   icon?: React.ReactNode;
-
-  /**
-   * ✅ Optionnel (recommandé pour V2)
-   * Ex: ["DYS","Brevet","Word Expert"]
-   * Si absent, on déduit depuis badge/label/description.
-   */
   badges?: string[];
 };
 
@@ -22,17 +16,26 @@ type PresetCarouselProps = {
   subtitle?: string;
   items: PresetCarouselItem[];
   onSelect: (id: string) => void;
-
-  /** affichage des contrôles (recherche/filtres/tri) */
   showControls?: boolean;
-
-  /** placeholder recherche */
   searchPlaceholder?: string;
-
-  /** style des cartes */
   tone?: "emerald" | "sky";
 };
 
+/* ----------------------------------------
+   PERF: debounce (évite filtre à chaque lettre)
+---------------------------------------- */
+function useDebouncedValue<T>(value: T, delay = 250) {
+  const [debounced, setDebounced] = useState(value);
+  useEffect(() => {
+    const id = setTimeout(() => setDebounced(value), delay);
+    return () => clearTimeout(id);
+  }, [value, delay]);
+  return debounced;
+}
+
+/* ----------------------------------------
+   HELPERS
+---------------------------------------- */
 function normalize(s: string) {
   return s
     .toLowerCase()
@@ -45,7 +48,7 @@ function uniqKeepOrder(arr: string[]) {
   const out: string[] = [];
   const seen = new Set<string>();
   for (const a of arr) {
-    const v = a.trim();
+    const v = (a || "").trim();
     if (!v) continue;
     if (!seen.has(v)) {
       seen.add(v);
@@ -75,7 +78,6 @@ function deriveBadges(item: PresetCarouselItem): string[] {
   if (s.includes("seance") || s.includes("séance")) tags.push("Séance");
   if (s.includes("exercice")) tags.push("Exercices");
 
-  // badge explicite si fourni (ex: "Modèle prof")
   if (item.badge && !tags.includes(item.badge)) tags.push(item.badge);
 
   return uniqKeepOrder(tags);
@@ -94,6 +96,8 @@ export function PresetCarousel({
   const firstBtnRef = useRef<HTMLButtonElement | null>(null);
 
   const [q, setQ] = useState("");
+  const debouncedQ = useDebouncedValue(q, 250);
+
   const [activeTag, setActiveTag] = useState<string>("Tous");
   const [sortMode, setSortMode] = useState<"ordre" | "az">("ordre");
 
@@ -117,11 +121,14 @@ export function PresetCarousel({
           badge: "text-emerald-700 ring-emerald-200",
         };
 
+  // ✅ indexation (pré-calcul) : norm + tags une seule fois
   const indexed = useMemo(() => {
     return items.map((it, idx) => ({
       ...it,
       __idx: idx,
-      __norm: normalize(`${it.label} ${it.description} ${(it.badge ?? "")} ${(it.badges ?? []).join(" ")}`),
+      __norm: normalize(
+        `${it.label} ${it.description} ${(it.badge ?? "")} ${(it.badges ?? []).join(" ")}`
+      ),
       __tags: deriveBadges(it),
     }));
   }, [items]);
@@ -132,8 +139,9 @@ export function PresetCarousel({
     return uniqKeepOrder(bag);
   }, [indexed]);
 
+  // ✅ filtre basé sur debouncedQ (pas q)
   const filtered = useMemo(() => {
-    const nq = normalize(q);
+    const nq = normalize(debouncedQ);
 
     let list = indexed.filter((it) => {
       const okQ = !nq || it.__norm.includes(nq);
@@ -148,7 +156,7 @@ export function PresetCarousel({
     }
 
     return list;
-  }, [indexed, q, activeTag, sortMode]);
+  }, [indexed, debouncedQ, activeTag, sortMode]);
 
   const scroll = (direction: "left" | "right") => {
     const el = scrollRef.current;
@@ -160,8 +168,6 @@ export function PresetCarousel({
   const updateScrollState = () => {
     const el = scrollRef.current;
     if (!el) return;
-
-    // marge pour éviter le "presque égal"
     const eps = 4;
     setCanLeft(el.scrollLeft > eps);
     setCanRight(el.scrollLeft + el.clientWidth < el.scrollWidth - eps);
@@ -183,16 +189,24 @@ export function PresetCarousel({
     };
   }, []);
 
-  // Si filtre/recherche change, on revient au début du carrousel
+  // ✅ IMPORTANT : on ne fait PLUS scroll+focus à chaque frappe
+  // - on scroll au début quand tag/tri changent
+  // - pour la recherche, on scroll seulement quand la valeur debounced change (et sans "smooth")
   useEffect(() => {
     const el = scrollRef.current;
     if (!el) return;
     el.scrollTo({ left: 0, behavior: "smooth" });
-    // focus sur la première carte pour clavier/accessibilité
+    // focus seulement quand on change tag/tri (UX clavier)
     setTimeout(() => firstBtnRef.current?.focus(), 50);
-  }, [q, activeTag, sortMode]);
+  }, [activeTag, sortMode]);
 
-  // Navigation clavier simple sur la liste (← →)
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    // recherche: scroll immédiat, pas de focus
+    el.scrollTo({ left: 0, behavior: "auto" });
+  }, [debouncedQ]);
+
   const onKeyDownList = (e: React.KeyboardEvent) => {
     if (e.key !== "ArrowLeft" && e.key !== "ArrowRight") return;
     e.preventDefault();
@@ -271,7 +285,6 @@ export function PresetCarousel({
       )}
 
       <div className="relative">
-        {/* Left */}
         <button
           type="button"
           onClick={() => scroll("left")}
@@ -286,7 +299,6 @@ export function PresetCarousel({
           ◀
         </button>
 
-        {/* List */}
         <div
           ref={scrollRef}
           onKeyDown={onKeyDownList}
@@ -330,7 +342,6 @@ export function PresetCarousel({
           )}
         </div>
 
-        {/* Right */}
         <button
           type="button"
           onClick={() => scroll("right")}
