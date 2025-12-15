@@ -1,4 +1,4 @@
-// data/profsPresets.ts
+/// data/profsPresets.ts
 
 export type NiveauProf = "basique" | "standard" | "expert";
 
@@ -27,6 +27,16 @@ export type ModaliteEvaluationProf =
   | "evaluation_formative"
   | "evaluation_diagnostique"
   | "evaluation_differenciee";
+
+// ✅ NOUVEAU : thèmes abordés (aligné avec /espace-profs + sport)
+export type ThemeAbordeProf =
+  | "ecologie"
+  | "nature"
+  | "agriculture"
+  | "art"
+  | "musique"
+  | "architecture"
+  | "sport";
 
 export type ProfsPresetKey =
   | "6e_maths_fractions_remediation"
@@ -67,6 +77,10 @@ export type ProfsPresetValues = {
   dureeMin?: number;
   tonalite?: TonaliteProf;
   modaliteEvaluation?: ModaliteEvaluationProf;
+
+  // ✅ NOUVEAU : thèmes abordés (multi-choix) + libellé contextuel
+  themes?: ThemeAbordeProf[];
+  themesLabel?: string;
 };
 
 // ✅ helper : pack devoir standardisé (barème / temps / critères / erreurs)
@@ -118,6 +132,8 @@ export const PROFS_PRESETS: Record<
       outputStyle: "word",
       dureeMin: 45,
       tonalite: "bienveillante",
+      // themes: ["agriculture"], // (optionnel) — on décidera après
+      // themesLabel: "",
     },
   },
 
@@ -423,6 +439,8 @@ export const PROFS_PRESETS: Record<
       dureeMin: 55,
       tonalite: "institutionnelle",
       modaliteEvaluation: "evaluation_sommative",
+      // ✅ exemple : on pourrait mettre sport ici plus tard si tu veux
+      // themes: ["sport"],
     },
   },
 

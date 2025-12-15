@@ -1,3 +1,4 @@
+// app/espace-eleves/page.tsx
 "use client";
 
 import { useMemo, useState, useCallback } from "react";
@@ -15,60 +16,28 @@ import {
   Smile,
   Frown,
   Star,
-  ShieldCheck, // ✅ ajouté
+  ShieldCheck,
 } from "lucide-react";
+
+import {
+  ELEVES_PRESETS,
+  ElevesPresetKey,
+  Classe,
+  Confiance,
+  TypeAide,
+  DysType,
+  PromptEleve as PromptEleveBase,
+  ProfilEleve,
+} from "@/data/elevesPresets";
 
 export const dynamic = "force-dynamic";
 
 /* ----------------------------------------
-   TYPES
+   TYPES (UI)
 ---------------------------------------- */
 
-type Classe =
-  | "6e"
-  | "5e"
-  | "4e"
-  | "3e"
-  | "Seconde"
-  | "Première"
-  | "Terminale"
-  | "";
-
-type Confiance = "en_difficulte" | "moyen" | "a_l_aise";
-
-type TypeAide =
-  | "manipuler_pour_comprendre"
-  | "comprendre_le_cours"
-  | "reviser_un_chapitre"
-  | "preparer_un_controle"
-  | "faire_des_exercices"
-  | "methode_de_travail"
-  | "defis";
-
-type DysType =
-  | "dyslexie"
-  | "dyspraxie"
-  | "dyscalculie"
-  | "dysorthographie"
-  | "autre";
-
-type PromptEleve = {
-  prenom: string;
-  classe: Classe;
-  matiere: string;
-  chapitre: string;
-  typeAide: TypeAide | "";
-  confiance: Confiance;
-  tempsDispo: string; // ex: "20 min"
-  objectifPerso: string;
-  exemplesDifficiles: string;
-  prefereQuestions: boolean;
-  prefereExemplesConcrets: boolean;
-  adaptationDYS: boolean;
-  dysTypes: DysType[];
-  dysPrecisionAutre?: string;
-
-  // ✅ Anti-triche : toggle explicite
+// ✅ On garde modeAntiTriche côté UI (même si tes presets ne l’ont pas)
+type PromptEleve = PromptEleveBase & {
   modeAntiTriche: boolean;
 };
 
@@ -76,15 +45,7 @@ type PromptEleve = {
    LISTES
 ---------------------------------------- */
 
-const CLASSES: Classe[] = [
-  "6e",
-  "5e",
-  "4e",
-  "3e",
-  "Seconde",
-  "Première",
-  "Terminale",
-];
+const CLASSES: Classe[] = ["6e", "5e", "4e", "3e", "Seconde", "Première", "Terminale"];
 
 const MATIERES = [
   "Mathématiques",
@@ -126,169 +87,25 @@ const CONFIANCE_CHIPS: {
   { value: "a_l_aise", label: "Je suis à l’aise", icon: <Star className="w-4 h-4" />, hint: "On vérifie et on approfondit." },
 ];
 
+// ✅ Profil (chips)
+const PROFIL_OPTIONS: { id: ProfilEleve; label: string; emoji: string }[] = [
+  { id: "sport", label: "Sport", emoji: "🏀" },
+  { id: "musique", label: "Musique", emoji: "🎵" },
+  { id: "nature", label: "Nature", emoji: "🌿" },
+  { id: "dessin", label: "Dessin", emoji: "🎨" },
+  { id: "jeux_videos", label: "Jeux vidéos", emoji: "🎮" },
+  { id: "amis", label: "Les amis", emoji: "🧑‍🤝‍🧑" },
+];
+
 /* ----------------------------------------
-   PRESETS (intégrés ici)
+   PRESETS (factorisés)
 ---------------------------------------- */
 
-type PresetKey =
-  | "6e_maths_calculs_base"
-  | "6e_maths_fractions_debut"
-  | "5e_maths_fractions_controle"
-  | "4e_fr_orthographe"
-  | "3e_maths_brevet_revision"
-  | "3e_langues_oral"
-  | "seconde_methodo"
-  | "terminale_maths_fonctions";
-
-const PRESETS: Record<
-  PresetKey,
-  {
-    label: string;
-    description: string;
-    badges?: string[];
-    valeurs: Partial<PromptEleve>;
-  }
-> = {
-  "6e_maths_calculs_base": {
-    label: "🧩 6e – Calculs de base",
-    description: "Additions / soustractions / multiplications, pas à pas.",
-    badges: ["6e", "Maths", "Bases"],
-    valeurs: {
-      classe: "6e",
-      matiere: "Mathématiques",
-      chapitre: "Calculs de base (priorités simples, opérations)",
-      typeAide: "manipuler_pour_comprendre",
-      confiance: "en_difficulte",
-      tempsDispo: "20 min",
-      objectifPerso: "Je veux être plus rapide et faire moins d’erreurs.",
-      prefereQuestions: true,
-      prefereExemplesConcrets: true,
-      modeAntiTriche: true,
-    },
-  },
-  "6e_maths_fractions_debut": {
-    label: "🍕 6e – Fractions (démarrage)",
-    description: "Comprendre 1/2, 3/4… avec dessins et exemples.",
-    badges: ["6e", "Maths", "Fractions"],
-    valeurs: {
-      classe: "6e",
-      matiere: "Mathématiques",
-      chapitre: "Fractions : sens, représentation, comparaison simple",
-      typeAide: "comprendre_le_cours",
-      confiance: "moyen",
-      tempsDispo: "25 min",
-      objectifPerso: "Je veux comprendre les fractions avec des exemples faciles.",
-      prefereQuestions: true,
-      prefereExemplesConcrets: true,
-      modeAntiTriche: true,
-    },
-  },
-  "5e_maths_fractions_controle": {
-    label: "🟣 5e – Contrôle fractions",
-    description: "Réviser : addition/soustraction/simplification.",
-    badges: ["5e", "Maths", "Contrôle"],
-    valeurs: {
-      classe: "5e",
-      matiere: "Mathématiques",
-      chapitre: "Fractions : addition, soustraction, simplification",
-      typeAide: "preparer_un_controle",
-      confiance: "en_difficulte",
-      tempsDispo: "30 min",
-      objectifPerso: "Je veux réussir mon contrôle sans paniquer.",
-      prefereQuestions: true,
-      prefereExemplesConcrets: true,
-      modeAntiTriche: true,
-    },
-  },
-  "4e_fr_orthographe": {
-    label: "✍️ 4e – Orthographe",
-    description: "Accords + astuces + entraînement progressif.",
-    badges: ["4e", "Français", "Exercices"],
-    valeurs: {
-      classe: "4e",
-      matiere: "Français",
-      chapitre: "Orthographe : accords, conjugaison, homophones",
-      typeAide: "faire_des_exercices",
-      confiance: "en_difficulte",
-      tempsDispo: "20 min",
-      objectifPerso: "Je veux faire moins de fautes dans mes textes.",
-      prefereQuestions: true,
-      prefereExemplesConcrets: true,
-      modeAntiTriche: true,
-    },
-  },
-  "3e_maths_brevet_revision": {
-    label: "🎯 3e – Révisions brevet maths",
-    description: "Révision globale + mini test pour repérer tes points faibles.",
-    badges: ["3e", "Maths", "Brevet"],
-    valeurs: {
-      classe: "3e",
-      matiere: "Mathématiques",
-      chapitre: "Brevet : calcul, géométrie, fonctions, probabilités",
-      typeAide: "reviser_un_chapitre",
-      confiance: "moyen",
-      tempsDispo: "45 min",
-      objectifPerso: "Je veux savoir ce que je dois revoir en priorité.",
-      prefereQuestions: true,
-      prefereExemplesConcrets: true,
-      modeAntiTriche: true,
-    },
-  },
-  "3e_langues_oral": {
-    label: "🎤 3e – Anglais oral",
-    description: "S’entraîner à parler, phrases simples + corrections.",
-    badges: ["3e", "Langues", "Oral"],
-    valeurs: {
-      classe: "3e",
-      matiere: "Langues",
-      chapitre: "Oral : se présenter, parler de ses goûts",
-      typeAide: "faire_des_exercices",
-      confiance: "moyen",
-      tempsDispo: "15 min",
-      objectifPerso: "Je veux oser parler en anglais.",
-      prefereQuestions: true,
-      prefereExemplesConcrets: true,
-      modeAntiTriche: true,
-    },
-  },
-  "seconde_methodo": {
-    label: "📘 Seconde – Méthode de travail",
-    description: "Organisation, révisions, apprendre efficacement.",
-    badges: ["Seconde", "Méthode"],
-    valeurs: {
-      classe: "Seconde",
-      matiere: "Autre",
-      chapitre: "Méthode : s’organiser, réviser, mémoriser",
-      typeAide: "methode_de_travail",
-      confiance: "moyen",
-      tempsDispo: "20 min",
-      objectifPerso: "Je veux arrêter de tout faire au dernier moment.",
-      prefereQuestions: false,
-      prefereExemplesConcrets: true,
-      modeAntiTriche: true,
-    },
-  },
-  "terminale_maths_fonctions": {
-    label: "📈 Terminale – Fonctions",
-    description: "Méthodes bac : variations, dérivée, lecture graphique.",
-    badges: ["Terminale", "Maths", "Bac"],
-    valeurs: {
-      classe: "Terminale",
-      matiere: "Mathématiques",
-      chapitre: "Étude de fonctions : dérivation, variations, limites simples",
-      typeAide: "reviser_un_chapitre",
-      confiance: "moyen",
-      tempsDispo: "40 min",
-      objectifPerso: "Je veux réussir les exos type bac sur les fonctions.",
-      prefereQuestions: true,
-      prefereExemplesConcrets: true,
-      modeAntiTriche: true,
-    },
-  },
-};
-
 const PRESET_ITEMS: PresetCarouselItem[] = (
-  Object.entries(PRESETS) as [PresetKey, (typeof PRESETS)[PresetKey]][]
+  Object.entries(ELEVES_PRESETS) as [
+    ElevesPresetKey,
+    (typeof ELEVES_PRESETS)[ElevesPresetKey]
+  ][]
 ).map(([key, p]) => ({
   id: key,
   label: p.label,
@@ -321,6 +138,23 @@ function isStep1Ok(form: PromptEleve) {
   return !!(form.classe && form.matiere && form.typeAide && form.chapitre.trim());
 }
 
+function labelProfil(p: ProfilEleve) {
+  switch (p) {
+    case "sport":
+      return "sport";
+    case "musique":
+      return "musique";
+    case "nature":
+      return "nature";
+    case "dessin":
+      return "dessin";
+    case "jeux_videos":
+      return "jeux vidéos";
+    case "amis":
+      return "les amis";
+  }
+}
+
 /* ----------------------------------------
    PAGE
 ---------------------------------------- */
@@ -351,6 +185,7 @@ export default function ElevePage() {
     adaptationDYS: false,
     dysTypes: [],
     dysPrecisionAutre: "",
+    profil: [],
     modeAntiTriche: true, // ✅ par défaut ON
   });
 
@@ -371,9 +206,32 @@ export default function ElevePage() {
     setForm((prev) => ({ ...prev, [field]: value }));
   }
 
-  function appliquerPreset(key: PresetKey) {
-    const preset = PRESETS[key];
-    setForm((prev) => ({ ...prev, ...preset.valeurs }));
+  function toggleProfil(id: ProfilEleve) {
+    setForm((prev) => {
+      const exists = prev.profil.includes(id);
+      const profil = exists ? prev.profil.filter((x) => x !== id) : [...prev.profil, id];
+      return { ...prev, profil };
+    });
+  }
+
+  function appliquerPreset(key: ElevesPresetKey) {
+    const preset = ELEVES_PRESETS[key];
+
+    setForm((prev) => {
+      const next: PromptEleve = {
+        ...prev,
+        ...preset.valeurs,
+
+        // ✅ garde modeAntiTriche si preset ne l'a pas
+        modeAntiTriche:
+          (preset.valeurs as Partial<PromptEleve>)?.modeAntiTriche ?? prev.modeAntiTriche ?? true,
+
+        // ✅ profil : si preset ne l’a pas, on garde l’ancien
+        profil: preset.valeurs.profil ?? prev.profil ?? [],
+      };
+      return next;
+    });
+
     setShowAdvanced(true);
     setPromptFinal("");
     setCopied(false);
@@ -405,6 +263,9 @@ export default function ElevePage() {
     if (showAdvanced) {
       if (form.objectifPerso.trim().length < 10) s.push("Ajoute ton objectif (1 phrase).");
       if (!form.exemplesDifficiles.trim()) s.push("Ajoute un exemple qui te pose problème.");
+      if (form.profil.length === 0) s.push("Optionnel : choisis ton profil (pour des exemples plus motivants).");
+    } else {
+      if (form.profil.length === 0) s.push("Optionnel : choisis ton profil (sport, musique, jeux…).");
     }
 
     if (!form.modeAntiTriche) {
@@ -416,7 +277,7 @@ export default function ElevePage() {
   }, [form, showAdvanced]);
 
   /* ----------------------------------------
-     GENERER PROMPT (anti-triche + calibrage)
+     GENERER PROMPT (anti-triche + profil)
   ---------------------------------------- */
 
   function genererPromptFinal(mode: "rapide" | "complet" = "complet") {
@@ -434,6 +295,12 @@ export default function ElevePage() {
       "mieux comprendre ce chapitre et réussir les exercices importants.";
 
     const exemples = mode === "complet" ? form.exemplesDifficiles.trim() : "";
+
+    const profilTxt =
+      form.profil && form.profil.length > 0
+        ? `Mon profil (centres d’intérêt) : ${form.profil.map(labelProfil).join(", ")}.\n` +
+          "➡️ Utilise ces centres d’intérêt pour choisir des exemples et des analogies (sans infantiliser).\n\n"
+        : "";
 
     const blocPrefs =
       `Mes préférences :\n` +
@@ -485,6 +352,7 @@ export default function ElevePage() {
       `Ce que je veux faire : ${typeAideLabel(form.typeAide)}.\n` +
       `Mon niveau : ${descriptionConfiance(form.confiance)}\n` +
       `Temps disponible : ${temps}\n\n` +
+      profilTxt +
       `Mon objectif : ${objectif}\n\n` +
       blocPrefs +
       (exemples ? `\nExemples qui me posent problème :\n${exemples}\n` : "") +
@@ -592,8 +460,8 @@ export default function ElevePage() {
           </h1>
 
           <p className="text-sm text-gray-700 max-w-2xl">
-            Choisis un modèle ou remplis 4 infos rapides. Tu obtiens un prompt clair
-            pour comprendre, réviser ou préparer un contrôle. Ensuite, tu peux améliorer avec des options.
+            Choisis un modèle ou remplis 4 infos rapides. Tu obtiens un prompt clair pour comprendre, réviser ou préparer un contrôle.
+            Ensuite, tu peux améliorer avec des options.
           </p>
         </header>
 
@@ -602,7 +470,7 @@ export default function ElevePage() {
           title="Choisir un modèle rapide (facultatif)"
           subtitle="Clique sur un modèle : tu peux ensuite adapter tous les champs."
           items={PRESET_ITEMS}
-          onSelect={(id) => appliquerPreset(id as PresetKey)}
+          onSelect={(id) => appliquerPreset(id as ElevesPresetKey)}
           tone="emerald"
           searchPlaceholder="Rechercher un modèle… (fractions, brevet, oral, méthode)"
         />
@@ -612,7 +480,7 @@ export default function ElevePage() {
           <section className="bg-white/95 border border-slate-200 rounded-2xl shadow-sm p-5 sm:p-6 space-y-4">
             <div className="flex items-start justify-between gap-3">
               <div>
-                <h2 className="text-md font-bold text-[#0047B6]">1️⃣ En 30 secondes</h2>
+                <h2 className="text-md font-bold text-[#0047B6]">1️⃣ En 30 secondes (essentiel)</h2>
                 <p className="text-xs text-slate-600 mt-1">
                   Remplis juste ça pour générer une aide rapide.
                 </p>
@@ -691,6 +559,43 @@ export default function ElevePage() {
                 className="w-full border rounded-lg px-3 py-2 text-sm"
                 placeholder="Ex : fractions, Thalès, rédaction…"
               />
+            </div>
+
+            {/* Ton profil */}
+            <div className="space-y-2">
+              <label className="text-xs font-semibold">Ton profil (facultatif)</label>
+              <p className="text-[11px] text-slate-600">
+                Choisis 1 à 3 trucs que tu aimes : l’IA utilisera ça pour des exemples plus motivants.
+              </p>
+
+              <div className="flex flex-wrap gap-2">
+                {PROFIL_OPTIONS.map((p) => {
+                  const active = form.profil.includes(p.id);
+                  return (
+                    <button
+                      key={p.id}
+                      type="button"
+                      onClick={() => {
+                        toggleProfil(p.id);
+                        showToast(active ? "➖ Retiré du profil" : `✅ Profil : ${p.label}`);
+                      }}
+                      className={`rounded-full px-3 py-1 text-[11px] font-semibold border transition ${
+                        active
+                          ? "border-emerald-500 bg-emerald-100 text-emerald-800"
+                          : "border-slate-200 bg-white text-slate-700 hover:bg-slate-50"
+                      }`}
+                    >
+                      {p.emoji} {p.label}
+                    </button>
+                  );
+                })}
+              </div>
+
+              {form.profil.length > 0 && (
+                <p className="text-[11px] text-gray-500">
+                  Sélection : <span className="font-semibold">{form.profil.map(labelProfil).join(", ")}</span>
+                </p>
+              )}
             </div>
 
             {/* Type d’aide en cartes */}
@@ -798,7 +703,7 @@ export default function ElevePage() {
               </div>
             </div>
 
-            {/* ✅ Mode anti-triche (ajout sans rien enlever) */}
+            {/* ✅ Mode anti-triche */}
             <div className="rounded-2xl border border-amber-200 bg-amber-50 p-4">
               <div className="flex items-start justify-between gap-3">
                 <div>
@@ -834,7 +739,7 @@ export default function ElevePage() {
                 onClick={() => setShowAdvanced((v) => !v)}
                 className="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50"
               >
-                {showAdvanced ? "Masquer les options" : "Options (objectif, exemple, DYS…)"}
+                {showAdvanced ? "Masquer les options" : "Options (pour une aide plus précise)"}
                 <ChevronRight className={`w-4 h-4 transition ${showAdvanced ? "rotate-90" : ""}`} />
               </button>
 
@@ -849,11 +754,11 @@ export default function ElevePage() {
                 }`}
               >
                 <Sparkles className="w-4 h-4" />
-                {showAdvanced ? "Générer mon prompt" : "Générer une aide rapide"}
+                {showAdvanced ? "Générer (complet)" : "Générer (rapide)"}
               </button>
             </div>
 
-            {/* ADVANCED (inchangé, conservé) */}
+            {/* ADVANCED */}
             {showAdvanced && (
               <div className="mt-3 space-y-4 rounded-2xl border border-emerald-100 bg-emerald-50/40 p-4">
                 <h3 className="text-sm font-extrabold text-emerald-800">2️⃣ Options pour améliorer l’aide</h3>
@@ -975,33 +880,19 @@ export default function ElevePage() {
 
           {/* RIGHT */}
           <section className="space-y-4">
-
             {/* Conseils */}
             <div className="bg-white/95 border border-emerald-200 rounded-2xl shadow-sm p-5 space-y-3">
-              <h2 className="text-lg font-bold text-emerald-700">
-                Conseils (rapides)
-              </h2>
+              <h2 className="text-lg font-bold text-emerald-700">Conseils (rapides)</h2>
 
               <ul className="space-y-2 text-sm text-gray-700">
-                <li className="flex gap-2">
-                  <span className="text-emerald-600">➤</span>
-                  <span>Choisis la matière.</span>
-                </li>
-                <li className="flex gap-2">
-                  <span className="text-emerald-600">➤</span>
-                  <span>Indique ta classe.</span>
-                </li>
-                <li className="flex gap-2">
-                  <span className="text-emerald-600">➤</span>
-                  <span>Choisis ce que tu veux faire.</span>
-                </li>
-                <li className="flex gap-2">
-                  <span className="text-emerald-600">➤</span>
-                  <span>Écris le chapitre (fractions, Thalès…).</span>
-                </li>
+                {suggestions.slice(0, 4).map((s, i) => (
+                  <li key={i} className="flex gap-2">
+                    <span className="text-emerald-600">➤</span>
+                    <span>{s}</span>
+                  </li>
+                ))}
               </ul>
             </div>
-
 
             {/* Prompt final */}
             <div className="bg-white/95 border border-slate-200 rounded-2xl shadow-sm p-5 space-y-3">
@@ -1102,7 +993,7 @@ export default function ElevePage() {
         </div>
       </div>
 
-      {/* ✅ TOAST (ajout) */}
+      {/* ✅ TOAST */}
       {toast && (
         <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 rounded-xl bg-slate-900 text-white px-4 py-2 text-sm shadow-lg">
           {toast}

@@ -22,6 +22,15 @@ export type DysType =
   | "dysorthographie"
   | "autre";
 
+// ✅ NEW : Ton profil (centres d’intérêt)
+export type ProfilEleve =
+  | "sport"
+  | "musique"
+  | "nature"
+  | "dessin"
+  | "jeux_videos"
+  | "amis";
+
 export type PromptEleve = {
   prenom: string;
   classe: Classe;
@@ -37,6 +46,9 @@ export type PromptEleve = {
   adaptationDYS: boolean;
   dysTypes: DysType[];
   dysPrecisionAutre?: string;
+
+  // ✅ NEW
+  profil: ProfilEleve[];
 };
 
 export type ElevesPresetKey =
@@ -67,6 +79,7 @@ export const ELEVES_PRESETS: Record<
       objectifPerso: "Je veux être plus rapide et faire moins d’erreurs.",
       prefereQuestions: true,
       prefereExemplesConcrets: true,
+      profil: ["jeux_videos", "sport"],
     },
   },
 
@@ -84,6 +97,7 @@ export const ELEVES_PRESETS: Record<
       objectifPerso: "Je veux comprendre les fractions avec des exemples faciles.",
       prefereQuestions: true,
       prefereExemplesConcrets: true,
+      profil: ["dessin", "amis"],
     },
   },
 
@@ -101,6 +115,7 @@ export const ELEVES_PRESETS: Record<
       objectifPerso: "Je veux réussir mon contrôle sans paniquer.",
       prefereQuestions: true,
       prefereExemplesConcrets: true,
+      profil: ["sport", "jeux_videos"],
     },
   },
 
@@ -118,6 +133,7 @@ export const ELEVES_PRESETS: Record<
       objectifPerso: "Je veux faire moins de fautes dans mes textes.",
       prefereQuestions: true,
       prefereExemplesConcrets: true,
+      profil: ["musique", "amis", "dessin"],
     },
   },
 
@@ -135,6 +151,7 @@ export const ELEVES_PRESETS: Record<
       objectifPerso: "Je veux savoir ce que je dois revoir en priorité.",
       prefereQuestions: true,
       prefereExemplesConcrets: true,
+      profil: ["sport", "jeux_videos"],
     },
   },
 
@@ -152,6 +169,7 @@ export const ELEVES_PRESETS: Record<
       objectifPerso: "Je veux oser parler en anglais.",
       prefereQuestions: true,
       prefereExemplesConcrets: true,
+      profil: ["musique", "amis", "sport"],
     },
   },
 
@@ -169,6 +187,7 @@ export const ELEVES_PRESETS: Record<
       objectifPerso: "Je veux arrêter de tout faire au dernier moment.",
       prefereQuestions: false,
       prefereExemplesConcrets: true,
+      profil: ["sport", "jeux_videos"],
     },
   },
 
@@ -186,6 +205,7 @@ export const ELEVES_PRESETS: Record<
       objectifPerso: "Je veux réussir les exercices type bac sur les fonctions.",
       prefereQuestions: true,
       prefereExemplesConcrets: true,
+      profil: ["sport", "nature"],
     },
   },
 };

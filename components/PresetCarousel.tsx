@@ -18,7 +18,7 @@ type PresetCarouselProps = {
   onSelect: (id: string) => void;
   showControls?: boolean;
   searchPlaceholder?: string;
-  tone?: "emerald" | "sky";
+  tone?: "emerald" | "sky" | "amber" | "slate";
 };
 
 /* ----------------------------------------
@@ -59,12 +59,7 @@ function uniqKeepOrder(arr: string[]) {
 }
 
 function deriveBadges(item: PresetCarouselItem): string[] {
-  const raw = [
-    ...(item.badges ?? []),
-    item.badge ?? "",
-    item.label,
-    item.description,
-  ]
+  const raw = [...(item.badges ?? []), item.badge ?? "", item.label, item.description]
     .filter(Boolean)
     .join(" | ");
 
@@ -112,6 +107,25 @@ export function PresetCarousel({
           title: "text-sky-900",
           desc: "text-sky-900/90",
           badge: "text-sky-700 ring-sky-200",
+          chipActive: "border-sky-400 bg-sky-100 text-sky-800",
+        }
+      : tone === "amber"
+      ? {
+          ring: "ring-1 ring-amber-100",
+          card: "border-amber-200 bg-amber-50 hover:bg-amber-100",
+          title: "text-amber-900",
+          desc: "text-amber-900/90",
+          badge: "text-amber-700 ring-amber-200",
+          chipActive: "border-amber-400 bg-amber-100 text-amber-900",
+        }
+      : tone === "slate"
+      ? {
+          ring: "ring-1 ring-slate-200",
+          card: "border-slate-200 bg-slate-50 hover:bg-slate-100",
+          title: "text-slate-900",
+          desc: "text-slate-900/90",
+          badge: "text-slate-700 ring-slate-200",
+          chipActive: "border-slate-400 bg-slate-100 text-slate-800",
         }
       : {
           ring: "ring-1 ring-emerald-100",
@@ -119,6 +133,7 @@ export function PresetCarousel({
           title: "text-emerald-900",
           desc: "text-emerald-900/90",
           badge: "text-emerald-700 ring-emerald-200",
+          chipActive: "border-emerald-400 bg-emerald-100 text-emerald-900",
         };
 
   // ✅ indexation (pré-calcul) : norm + tags une seule fois
@@ -126,9 +141,7 @@ export function PresetCarousel({
     return items.map((it, idx) => ({
       ...it,
       __idx: idx,
-      __norm: normalize(
-        `${it.label} ${it.description} ${(it.badge ?? "")} ${(it.badges ?? []).join(" ")}`
-      ),
+      __norm: normalize(`${it.label} ${it.description} ${(it.badge ?? "")} ${(it.badges ?? []).join(" ")}`),
       __tags: deriveBadges(it),
     }));
   }, [items]);
@@ -196,14 +209,12 @@ export function PresetCarousel({
     const el = scrollRef.current;
     if (!el) return;
     el.scrollTo({ left: 0, behavior: "smooth" });
-    // focus seulement quand on change tag/tri (UX clavier)
     setTimeout(() => firstBtnRef.current?.focus(), 50);
   }, [activeTag, sortMode]);
 
   useEffect(() => {
     const el = scrollRef.current;
     if (!el) return;
-    // recherche: scroll immédiat, pas de focus
     el.scrollTo({ left: 0, behavior: "auto" });
   }, [debouncedQ]);
 
@@ -251,7 +262,7 @@ export function PresetCarousel({
               <span className="text-[11px] font-semibold text-slate-600">Tri</span>
               <select
                 value={sortMode}
-                onChange={(e) => setSortMode(e.target.value as any)}
+                onChange={(e) => setSortMode(e.target.value as "ordre" | "az")}
                 className="rounded-xl border border-slate-200 bg-white px-2 py-2 text-xs"
               >
                 <option value="ordre">Recommandé</option>
@@ -272,9 +283,7 @@ export function PresetCarousel({
                 type="button"
                 onClick={() => setActiveTag(t)}
                 className={`rounded-full px-3 py-1 text-[11px] font-semibold border transition ${
-                  active
-                    ? "border-sky-400 bg-sky-100 text-sky-800"
-                    : "border-slate-200 bg-white text-slate-700 hover:bg-slate-50"
+                  active ? toneClasses.chipActive : "border-slate-200 bg-white text-slate-700 hover:bg-slate-50"
                 }`}
               >
                 {t}
@@ -328,7 +337,7 @@ export function PresetCarousel({
                 <p className={`text-[11px] ${toneClasses.desc}`}>{item.description}</p>
 
                 <div className="mt-2 flex flex-wrap gap-1.5">
-                  {item.__tags.slice(0, 3).map((b) => (
+                  {(item as any).__tags?.slice(0, 3).map((b: string) => (
                     <span
                       key={b}
                       className={`inline-flex rounded-full bg-white/80 px-2 py-0.5 text-[10px] font-semibold ring-1 ${toneClasses.badge}`}
