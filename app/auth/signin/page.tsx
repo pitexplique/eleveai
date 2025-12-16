@@ -8,6 +8,10 @@ import { createClient } from "@/lib/supabase/client"; // client Supabase custom
 export default function SignInPage() {
   const [email, setEmail] = useState("");
   const [emailSent, setEmailSent] = useState(false);
+    const [otpCode, setOtpCode] = useState("");
+  const [feedback, setFeedback] = useState<string | null>(null);
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
   const [codeEtab, setCodeEtab] = useState("");
   const [codeUtilisateur, setCodeUtilisateur] = useState("");
   const [codeError, setCodeError] = useState<string | null>(null);
@@ -18,7 +22,121 @@ export default function SignInPage() {
   const handleEmailSubmit = async (e: FormEvent) => {
     e.preventDefault();
     // TODO : auth email réelle
-    setEmailSent(true);
+setFeedback(null);
+    setErrorMsg(null);
+    setEmailSent(false);
+
+    const emailToUse = email.trim();
+
+    if (!emailToUse) {
+      setErrorMsg("Merci de renseigner votre email.");
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      const { data: existingUser, error: checkError } = await supabase
+        .from("eleveai_users_email")
+        .select("id")
+        .eq("email", emailToUse)
+        .maybeSingle();
+
+      if (checkError) {
+        console.error("Erreur de vérification utilisateur:", checkError);
+        setErrorMsg(
+          checkError.message ||
+            "Impossible de vérifier votre compte. Merci de réessayer."
+        );
+        return;
+      }
+
+      if (!existingUser) {
+        setErrorMsg(
+          "Aucun compte trouvé pour cet email. Créez un compte ou vérifiez l'adresse saisie."
+        );
+        return;
+      }
+
+      const { error: otpError } = await supabase.auth.signInWithOtp({
+        email: emailToUse,
+        options: {
+          shouldCreateUser: false,
+          emailRedirectTo:
+            typeof window !== "undefined"
+              ? `${window.location.origin}/auth/callback`
+              : undefined,
+        },
+      });
+
+      if (otpError) {
+        console.error("OTP sign-in error:", otpError);
+        setErrorMsg(
+          otpError.message ||
+            "Impossible d'envoyer le code de connexion. Merci de réessayer."
+        );
+        return;
+      }
+
+      setEmailSent(true);
+      setFeedback(
+        "Un code à 8 chiffres vient d'être envoyé sur votre email. Entrez-le ci-dessous pour vous connecter."
+      );
+    } catch (err: any) {
+      console.error("Unexpected sign-in error:", err);
+      setErrorMsg(
+        err?.message || "Erreur inattendue. Merci de réessayer plus tard."
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleOtpSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    setFeedback(null);
+    setErrorMsg(null);
+
+    if (!emailSent) {
+      setErrorMsg("Envoyez d'abord un code à votre email avant de valider.");
+      return;
+    }
+
+    if (otpCode.trim().length !== 8) {
+      setErrorMsg("Le code doit contenir 8 chiffres.");
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      const { data, error } = await supabase.auth.verifyOtp({
+        email: email.trim(),
+        token: otpCode.trim(),
+        type: "email",
+      });
+
+      if (error || !data?.session) {
+        console.error("OTP verify error:", error);
+        setErrorMsg(
+          error?.message || "Code invalide ou expiré. Demandez un nouveau code."
+        );
+        return;
+      }
+
+      setFeedback("Connexion réussie. Redirection en cours…");
+
+      setTimeout(() => {
+        router.push("/accueil");
+      }, 1200);
+    } catch (err: any) {
+      console.error("Unexpected OTP verification error:", err);
+      setErrorMsg(
+        err?.message || "Erreur inattendue. Merci de réessayer plus tard."
+      );
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleCodeSubmit = async (e: FormEvent) => {
@@ -123,15 +241,16 @@ export default function SignInPage() {
 
                 <button
                   type="submit"
-                  className="w-full rounded-lg bg-emerald-600 text-white py-2.5 text-sm font-semibold hover:bg-emerald-500 transition"
-                >
+                             disabled={loading}
+                  className="w-full rounded-lg bg-emerald-600 text-white py-2.5 text-sm font-semibold hover:bg-emerald-500 transition disabled:cursor-not-allowed disabled:opacity-60"    >
                   C’est parti !
                 </button>
 
-                {emailSent && (
-                  <p className="text-xs text-emerald-600">
-                    Un lien de connexion vient d’être envoyé (simulation).
-                  </p>
+               {errorMsg && (
+                  <p className="text-xs text-red-600">{errorMsg}</p>
+                )}
+                {feedback && (
+                  <p className="text-xs text-emerald-600">{feedback}</p>
                 )}
 
                 <p className="text-xs text-slate-500">
@@ -144,6 +263,40 @@ export default function SignInPage() {
                   </Link>
                 </p>
               </form>
+             {emailSent && (
+                <form
+                  onSubmit={handleOtpSubmit}
+                  className="mt-4 space-y-3 rounded-lg bg-emerald-50 p-3 border border-emerald-200"
+                >
+                  <p className="text-xs font-semibold text-emerald-800 uppercase">
+                    Entrer le code reçu par email
+                  </p>
+
+                  <input
+                    type="text"
+                    value={otpCode}
+                    onChange={(e) => setOtpCode(e.target.value)}
+                    placeholder="Code à 8 chiffres"
+                    className="w-full rounded-lg border border-emerald-300 px-3 py-2 text-sm outline-none focus:border-emerald-500 focus:ring"
+                  />
+
+                  <button
+                    type="submit"
+                    disabled={loading}
+                    className="w-full rounded-lg bg-emerald-600 text-white py-2 text-sm font-semibold hover:bg-emerald-500 transition disabled:cursor-not-allowed disabled:opacity-60"
+                  >
+                    Valider le code et se connecter
+                  </button>
+
+                  {errorMsg && (
+                    <p className="text-[11px] text-red-600">{errorMsg}</p>
+                  )}
+                  {feedback && (
+                    <p className="text-[11px] text-emerald-700">{feedback}</p>
+                  )}
+                </form>
+              )}
+
 
               {/* TESTER SANS COMPTE */}
               <div className="mt-4">
@@ -318,9 +471,9 @@ export default function SignInPage() {
             </div>
 
             <div className="mt-10 max-w-xl rounded-2xl bg-slate-900/70 p-4 shadow-lg backdrop-blur">
-              <p className="text-slate-100 italic">
-                « Je découvre de nouvelles façons d'enseigner »
-              </p>
+                <p className="text-slate-100 italic">
+                  « Je découvre de nouvelles façons d’enseigner »
+                </p>
               <p className="mt-3 text-xs font-medium text-slate-300">
                 Frédéric Lacoste – Mathématiques
               </p>
