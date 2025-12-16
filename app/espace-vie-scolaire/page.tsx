@@ -328,8 +328,7 @@ export default function EspaceVieScolairePage() {
             >
               <option value="message_eleve">Message élève</option>
               <option value="courrier_famille">Courrier famille</option>
-              <option value="rapport_incident">Rapport d'incident</option>
-              <option value="fiche_suivi">Fiche de suivi</option>
+              <option value="rapport_incident">Rapport d’incident</option>             <option value="fiche_suivi">Fiche de suivi</option>
               <option value="compte_rendu_sanction">Compte rendu sanction</option>
               <option value="note_regles">Note règles</option>
               <option value="protocole_vie_scolaire">Protocole vie scolaire</option>

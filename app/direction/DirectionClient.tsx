@@ -51,8 +51,7 @@ export default function DirectionClient() {
 
           <p className="text-sm text-slate-300 max-w-xl">
             Réservé aux chefs d’établissement.  
-            Vous trouverez ici l'offre pilote, les licences, les formations IA  
-            et le tableau de bord de consommation.
+            Vous trouverez ici l’offre pilote, les licences, les formations IA
           </p>
         </header>
 

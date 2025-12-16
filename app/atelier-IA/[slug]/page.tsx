@@ -65,13 +65,13 @@ export default async function AtelierIaDetailPage({ params }: PageProps) {
 
   return (
     <main className="max-w-3xl mx-auto px-4 py-10">
-      {/* Fil d’Ariane */}
-      <div className="text-sm text-slate-500 mb-4">
-        <a href="/atelier-IA" className="hover:underline">
-          Ateliers IA
-        </a>{" "}
-        / <span className="text-slate-700">{atelier.title}</span>
-      </div>
+       {/* Fil d’Ariane */}
+        <div className="text-sm text-slate-500 mb-4">
+          <Link href="/atelier-IA" className="hover:underline">
+            Ateliers IA
+          </Link>{" "}
+          / <span className="text-slate-700">{atelier.title}</span>
+        </div>
 
       {/* Titre */}
       <h1 className="text-3xl font-bold mb-3">{atelier.title}</h1>
