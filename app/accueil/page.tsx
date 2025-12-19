@@ -5,139 +5,195 @@ import Link from "next/link";
 export default function AccueilPage() {
   return (
     <main className="min-h-screen bg-slate-950 text-slate-50">
-      {/* HERO PRINCIPAL */}
+      {/* TOP BAR (porte email) */}
+      <section className="border-b border-slate-800 bg-slate-950/80">
+        <div className="mx-auto max-w-6xl px-4 py-2 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+          <p className="text-xs text-slate-300">
+            👋 Prof indépendant ?
+            <span className="text-slate-400"> Sauvegarde tes presets + historique avec un compte email (OTP).</span>
+          </p>
+          <div className="flex items-center gap-2">
+            <Link
+              href="/auth/signup"
+              className="inline-flex items-center justify-center rounded-lg bg-emerald-500 px-3 py-1.5 text-xs font-semibold text-slate-950 hover:bg-emerald-400"
+            >
+              Créer un compte (OTP)
+            </Link>
+            <Link
+              href="/auth/signin"
+              className="inline-flex items-center justify-center rounded-lg border border-slate-700 bg-slate-900 px-3 py-1.5 text-xs font-semibold text-slate-50 hover:bg-slate-800"
+            >
+              Se connecter
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* HERO PRINCIPAL (CADRE) */}
       <section className="border-b border-slate-800 bg-gradient-to-b from-slate-900/80 to-slate-950">
-        <div className="mx-auto max-w-6xl px-4 py-8 sm:py-10 space-y-6">
-          {/* Bandeau haut */}
-          <div className="flex flex-wrap items-center gap-3 text-xs text-emerald-200">
-            <span className="inline-flex items-center gap-2 rounded-full border border-emerald-400/40 bg-emerald-500/10 px-3 py-1 font-semibold">
-              ⚙️ Prompts pédagogiques prêts à l’emploi
+        <div className="mx-auto max-w-6xl px-4 py-10 sm:py-14 space-y-8">
+          {/* Badges */}
+          <div className="flex flex-wrap items-center gap-3 text-xs">
+            <span className="inline-flex items-center gap-2 rounded-full border border-emerald-400/40 bg-emerald-500/10 px-3 py-1 font-semibold text-emerald-200">
+              🧠 IA autorisée mais encadrée
             </span>
-            <span className="text-slate-400">
-              EleveAI – l’IA qui fait gagner du temps aux élèves, aux parents et
-              à toute l’équipe éducative.
+            <span className="inline-flex items-center gap-2 rounded-full border border-slate-700 bg-slate-900/60 px-3 py-1 font-semibold text-slate-200">
+              🏫 Pensé collège/lycée
             </span>
+            <span className="text-slate-400">EleveAI — l’outil + le cadre</span>
           </div>
 
-          {/* Titre + texte principal */}
+          {/* Grille */}
           <div className="grid gap-6 lg:grid-cols-[3fr,2fr] items-start">
             {/* Colonne gauche */}
             <div className="space-y-4">
-              <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight">
-                Gagnez du temps et de la précision !
-              </h1>
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight">
+              Gagnez du temps et de la précision
+            </h1>
 
-              <p className="text-sm sm:text-base text-slate-300 max-w-2xl leading-relaxed">
-                EleveAI t’aide à formuler de bons prompts éducatifs pour aller
-                plus vite et mieux cibler ce dont tu as besoin : un élève qui
-                révise, un parent qui accompagne, un professeur qui prépare son
-                cours, un principal ou une équipe de vie scolaire qui organise
-                le collège.
+<p className="mt-3 text-lg sm:text-xl font-semibold text-emerald-300">
+  Crée ton prompt maintenant.
+</p>
+<p className="text-sm text-slate-400">
+  L’IA propose, tu décides. La pédagogie reste humaine.
+</p>
+
+
+              <p className="text-base text-slate-300 max-w-2xl leading-relaxed">
+                EleveAI sert à <b>apprendre à bien utiliser l’IA</b> (Atelier-IA), et à{" "}
+                <b>créer des prompts utiles</b> pour les profs, élèves et parents — sans tricher.
+                <br />
+                <span className="text-slate-400">
+                  L’IA est autorisée, mais encadrée : traces, esprit critique, correction personnelle.
+                </span>
               </p>
 
-              {/* Rangée de boutons */}
+              {/* CTA row */}
               <div className="flex flex-wrap gap-2 pt-1">
                 <Link
-                  href="/espace-eleves"
+                  href="/atelier-IA"
                   className="inline-flex items-center justify-center gap-2 rounded-lg bg-emerald-500 px-4 py-2 text-sm font-semibold text-slate-950 hover:bg-emerald-400"
                 >
-                  🎒 Espace élèves (prompts)
+                  🧪 Découvrir l’Atelier-IA
                 </Link>
 
                 <Link
                   href="/espace-profs"
                   className="inline-flex items-center justify-center gap-2 rounded-lg border border-slate-600 bg-slate-900 px-4 py-2 text-sm font-semibold text-slate-50 hover:bg-slate-800"
                 >
-                  📚 Espace profs
+                  📚 Tester (Espace profs)
+                </Link>
+
+                <Link
+                  href="/espace-eleves"
+                  className="inline-flex items-center justify-center gap-2 rounded-lg border border-slate-700/80 bg-slate-900 px-4 py-2 text-sm font-semibold text-slate-50 hover:bg-slate-800"
+                >
+                  🎒 Tester (Espace élèves)
                 </Link>
 
                 <Link
                   href="/parents"
                   className="inline-flex items-center justify-center gap-2 rounded-lg border border-slate-700/80 bg-slate-900 px-4 py-2 text-sm font-semibold text-slate-50 hover:bg-slate-800"
                 >
-                  🧩 Espace parents
-                </Link>
-
-                <Link
-                  href="/defis-ia-pere-noel"
-                  className="inline-flex items-center justify-center gap-2 rounded-lg border border-emerald-500/50 bg-slate-900 px-4 py-2 text-sm font-semibold text-emerald-200 hover:bg-slate-800"
-                >
-                  🎄 Défis IA Père Noël
+                  🧩 Tester (Espace parents)
                 </Link>
               </div>
 
               <p className="text-xs text-slate-500">
-                100% adapté au système scolaire français – prompts alignés sur
-                l’esprit d’Eduscol et du BO, pensés pour faire gagner du temps
-                sans tricher.
+                ✅ Cadre compatible établissement : usage responsable, pas “fait à la place”, prompts guidés.
               </p>
             </div>
 
-            {/* Colonne droite : vide pour garder l'équilibre en lg */}
-            <div className="hidden lg:block" />
+            {/* Colonne droite : cartes rassurantes */}
+            <div className="space-y-3">
+              <div className="rounded-2xl border border-emerald-500/30 bg-emerald-500/10 px-4 py-3 shadow-lg shadow-emerald-900/30">
+                <p className="text-sm font-semibold text-emerald-100">🔒 Anti-triche intégré</p>
+                <p className="text-xs text-emerald-50/90 mt-1 leading-relaxed">
+                  On travaille avec des <b>traces</b> : prompt utilisé, réponse IA, corrections personnelles,
+                  et analyse critique.
+                </p>
+              </div>
+
+              <div className="rounded-2xl border border-slate-700 bg-slate-900/70 px-4 py-3">
+                <p className="text-sm font-semibold text-slate-100">⚡ Gain de temps réel</p>
+                <ul className="mt-2 space-y-2 text-xs text-slate-300">
+                  <li className="flex items-start gap-2">
+                    <span className="mt-0.5 text-emerald-300">•</span>
+                    Prompts calibrés programmes (BO/Eduscol).
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="mt-0.5 text-emerald-300">•</span>
+                    Formulaires simples, résultats propres, prêts à copier-coller.
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="mt-0.5 text-emerald-300">•</span>
+                    Atelier-IA : une activité “IA-friendly” structurée et rassurante.
+                  </li>
+                </ul>
+              </div>
+
+              <div className="rounded-2xl border border-slate-800 bg-slate-900/40 px-4 py-3">
+                <p className="text-sm font-semibold text-slate-100">🎯 Pour qui ?</p>
+                <p className="mt-1 text-xs text-slate-300 leading-relaxed">
+                  Chef d’établissement, profs, parents, élèves : chacun a son espace, mais{" "}
+                  <b>le même cadre</b>.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* BANDEAU SAISONNIER (Option A compact) */}
+      {/* INDICATEURS */}
+      <section className="border-b border-slate-800 bg-slate-950/60">
+        <div className="mx-auto max-w-6xl px-4 py-4 grid gap-3 sm:grid-cols-3">
+          {[
+            "🧪 Atelier-IA : IA autorisée mais encadrée",
+            "🧩 3 espaces (profs / élèves / parents)",
+            "✅ Prompts prêts en < 5 min",
+          ].map((item) => (
+            <div
+              key={item}
+              className="flex items-center gap-3 rounded-xl border border-slate-800 bg-slate-900/60 px-3 py-2"
+            >
+              <span className="text-emerald-300 text-lg">★</span>
+              <p className="text-sm font-semibold text-slate-100">{item}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* BANDEAU ATELIER-IA (LEVERS COLLEGE) */}
       <section className="border-b border-slate-800 bg-slate-950">
-        <div className="mx-auto max-w-6xl px-4 py-2.5">
+        <div className="mx-auto max-w-6xl px-4 py-3">
           <Link
-            href="/defis-ia-pere-noel"
-            className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 rounded-xl border border-emerald-500/30 bg-emerald-900/15 px-4 py-2.5 hover:bg-emerald-900/25 transition"
+            href="/atelier-ia"
+            className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 rounded-xl border border-emerald-500/30 bg-emerald-900/15 px-4 py-3 hover:bg-emerald-900/25 transition"
           >
             <div className="text-sm text-slate-200">
-              <span className="font-semibold text-emerald-200">
-                🎄 Défis IA Père Noël
-              </span>
+              <span className="font-semibold text-emerald-200">🧪 Atelier-IA</span>
               <span className="text-slate-400">
                 {" "}
-                — transforme une idée en plan d’action simple.
+                — un cadre clé en main pour intégrer l’IA dès la rentrée (traces, esprit critique, anti-triche).
               </span>
             </div>
-            <span className="text-xs font-semibold text-emerald-200">
-              Lancer mon défi →
-            </span>
+            <span className="text-xs font-semibold text-emerald-200">Voir le programme →</span>
           </Link>
         </div>
       </section>
 
-      {/* SECTIONS CARTES PRINCIPALES */}
+      {/* CARTES : ESPACES */}
       <section className="border-b border-slate-800 bg-slate-950">
         <div className="mx-auto max-w-6xl px-4 py-8 space-y-4">
           <h2 className="text-xl font-semibold text-slate-100">
-            Choisis ton espace et gagne du temps avec des prompts utiles
+            Tester l’outil (sans perdre le cadre)
           </h2>
-
           <p className="text-xs text-slate-400 max-w-2xl leading-snug">
-            Chaque espace est conçu pour éviter les pertes de temps : moins de
-            minutes à chercher quoi dire ou comment s’y prendre, plus de temps
-            pour les vrais échanges et les actions concrètes.
+            L’objectif : gagner du temps, garder la main, et faire apprendre (pas faire à la place).
           </p>
 
           <div className="grid gap-4 md:grid-cols-3">
-            {/* Carte élèves */}
-            <Link
-              href="/espace-eleves"
-              className="group rounded-2xl border border-slate-800 bg-slate-900/70 p-4 hover:border-emerald-400/60 hover:bg-slate-900 transition-colors"
-            >
-              <p className="text-sm font-semibold text-emerald-300 flex items-center gap-2">
-                🎒 Espace élèves
-                <span className="text-[10px] rounded-full bg-emerald-500/15 px-2 py-0.5 text-emerald-200 border border-emerald-500/40">
-                  Révisions rapides
-                </span>
-              </p>
-              <p className="mt-2 text-sm text-slate-200">
-                Formulaires simples pour créer un prompt d’aide : comprendre un
-                cours, préparer un contrôle, lancer un défi positif, organiser
-                tes révisions sans perdre de temps.
-              </p>
-              <p className="mt-3 text-[11px] text-slate-400 group-hover:text-emerald-200">
-                Cliquer pour créer un prompt élève →
-              </p>
-            </Link>
-
-            {/* Carte profs */}
+            {/* Profs */}
             <Link
               href="/espace-profs"
               className="group rounded-2xl border border-slate-800 bg-slate-900/70 p-4 hover:border-emerald-400/60 hover:bg-slate-900 transition-colors"
@@ -149,16 +205,33 @@ export default function AccueilPage() {
                 </span>
               </p>
               <p className="mt-2 text-sm text-slate-200">
-                Prompts pour préparer une séquence, différencier, créer des
-                évaluations ou des activités. L’IA propose, tu choisis et tu
-                ajustes : tu gardes la pédagogie, tu gagnes des heures.
+                Préparer une séance, différencier, créer une évaluation, produire une activité IA-friendly.
               </p>
               <p className="mt-3 text-[11px] text-slate-400 group-hover:text-sky-200">
-                Cliquer pour créer un prompt prof →
+                Tester → créer un prompt prof →
               </p>
             </Link>
 
-            {/* Carte parents */}
+            {/* Élèves */}
+            <Link
+              href="/espace-eleves"
+              className="group rounded-2xl border border-slate-800 bg-slate-900/70 p-4 hover:border-emerald-400/60 hover:bg-slate-900 transition-colors"
+            >
+              <p className="text-sm font-semibold text-emerald-300 flex items-center gap-2">
+                🎒 Espace élèves
+                <span className="text-[10px] rounded-full bg-emerald-500/15 px-2 py-0.5 text-emerald-200 border border-emerald-500/40">
+                  Révisions
+                </span>
+              </p>
+              <p className="mt-2 text-sm text-slate-200">
+                Comprendre un cours, réviser, s’entraîner, se corriger avec méthode (sans copier).
+              </p>
+              <p className="mt-3 text-[11px] text-slate-400 group-hover:text-emerald-200">
+                Tester → créer un prompt élève →
+              </p>
+            </Link>
+
+            {/* Parents */}
             <Link
               href="/parents"
               className="group rounded-2xl border border-slate-800 bg-slate-900/70 p-4 hover:border-emerald-400/60 hover:bg-slate-900 transition-colors"
@@ -166,38 +239,100 @@ export default function AccueilPage() {
               <p className="text-sm font-semibold text-rose-300 flex items-center gap-2">
                 🧩 Espace parents
                 <span className="text-[10px] rounded-full bg-rose-500/15 px-2 py-0.5 text-rose-100 border border-rose-500/40">
-                  Suivi simplifié
+                  Accompagner
                 </span>
               </p>
               <p className="mt-2 text-sm text-slate-200">
-                Idées de prompts pour soutenir son enfant sans faire à sa place :
-                organiser le travail, préparer un rendez-vous avec le professeur
-                principal, comprendre un bulletin en quelques minutes.
+                Aider sans faire à la place : organisation, motivation, compréhension, communication école-famille.
               </p>
               <p className="mt-3 text-[11px] text-slate-400 group-hover:text-rose-200">
-                Cliquer pour créer un prompt parent →
+                Tester → créer un prompt parent →
               </p>
             </Link>
           </div>
 
-          {/* Bloc autres personnels */}
+          {/* Bloc “établissement” */}
           <div className="mt-2 rounded-2xl border border-slate-800 bg-slate-900/60 p-4 text-[12px] text-slate-200">
             <p className="font-semibold text-slate-100 flex items-center gap-2">
-              🏫 Et aussi… personnels, agents d’entretien, vie scolaire, chef
-              d’établissement
+              🏫 Chef d’établissement / équipe éducative
             </p>
             <p className="mt-1">
-              EleveAI peut aussi aider à rédiger des messages aux familles,
-              préparer des affiches claires, organiser les consignes, ou imaginer
-              des défis pour améliorer le climat scolaire. Un espace dédié
-              « collège & équipe éducative » arrive pour vous faire gagner du
-              temps.
+              L’Atelier-IA peut devenir un <b>levier</b> pour le collège : cadre commun, pratiques alignées,
+              et accompagnement des élèves. (Les espaces admin/établissement arrivent plus tard.)
             </p>
+          </div>
+        </div>
+      </section>
+
+      {/* COMMENT ÇA MARCHE */}
+      <section className="bg-slate-950">
+        <div className="mx-auto max-w-6xl px-4 py-8 space-y-4">
+          <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+            <h3 className="text-lg sm:text-xl font-semibold text-slate-100">
+              En 3 étapes (cadre inclus)
+            </h3>
+            <Link
+              href="/contact"
+              className="inline-flex items-center gap-2 rounded-lg border border-emerald-500/50 px-3 py-1.5 text-xs font-semibold text-emerald-100 hover:bg-emerald-900/30"
+            >
+              ☎️ Demander une démo rapide
+            </Link>
+          </div>
+
+          <div className="grid gap-3 md:grid-cols-3">
+            {[
+              {
+                title: "Découvrir le cadre",
+                text: "Atelier-IA : règles, traces, esprit critique, anti-triche.",
+                icon: "🧪",
+              },
+              {
+                title: "Tester un espace",
+                text: "Profs / élèves / parents : formulaires guidés, prompts propres.",
+                icon: "🎯",
+              },
+              {
+                title: "Sauvegarder (option)",
+                text: "Compte email (OTP) pour presets + historique + dashboard.",
+                icon: "🔑",
+              },
+            ].map((step) => (
+              <div
+                key={step.title}
+                className="rounded-2xl border border-slate-800 bg-slate-900/60 p-4 space-y-2"
+              >
+                <p className="text-2xl" aria-hidden>
+                  {step.icon}
+                </p>
+                <p className="text-sm font-semibold text-slate-100">{step.title}</p>
+                <p className="text-xs text-slate-300 leading-relaxed">{step.text}</p>
+              </div>
+            ))}
+          </div>
+
+          {/* CTA final */}
+          <div className="pt-2 flex flex-wrap gap-2">
+            <Link
+              href="/atelier-ia"
+              className="inline-flex items-center justify-center rounded-lg bg-emerald-500 px-4 py-2 text-sm font-semibold text-slate-950 hover:bg-emerald-400"
+            >
+              🧪 Lire “Atelier-IA”
+            </Link>
+            <Link
+              href="/espace-profs"
+              className="inline-flex items-center justify-center rounded-lg border border-slate-700 bg-slate-900 px-4 py-2 text-sm font-semibold text-slate-50 hover:bg-slate-800"
+            >
+              📚 Tester l’espace profs
+            </Link>
+            <Link
+              href="/signup"
+              className="inline-flex items-center justify-center rounded-lg border border-emerald-500/40 bg-emerald-900/10 px-4 py-2 text-sm font-semibold text-emerald-100 hover:bg-emerald-900/20"
+            >
+              🔑 Créer un compte (OTP)
+            </Link>
           </div>
         </div>
       </section>
     </main>
   );
 }
-
-

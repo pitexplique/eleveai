@@ -9,7 +9,9 @@ type Plan = {
   highlight?: boolean;
   description: string;
   idealFor: string[];
+   checkoutUrl?: string;
 };
+const STRIPE_CHECKOUT_URL = process.env.NEXT_PUBLIC_STRIPE_CHECKOUT_URL;
 
 const PLANS: Plan[] = [
   {
@@ -31,6 +33,7 @@ const PLANS: Plan[] = [
     description:
       "Pour utiliser EleveAI de temps en temps, sans se prendre la tête.",
     idealFor: ["Élève motivé", "Parent curieux", "Auto-formation légère"],
+    checkoutUrl: STRIPE_CHECKOUT_URL,
   },
   {
     name: "Essentiel",
@@ -40,6 +43,7 @@ const PLANS: Plan[] = [
     description:
       "Le bon équilibre pour un usage régulier : cours, devoirs, mails, révisions.",
     idealFor: ["Professeur", "Parent très impliqué", "Étudiant en formation"],
+     checkoutUrl: STRIPE_CHECKOUT_URL,
   },
   {
     name: "Avancé",
@@ -52,6 +56,7 @@ const PLANS: Plan[] = [
       "Tuteur / coach scolaire",
       "AED / vie scolaire",
     ],
+    checkoutUrl: STRIPE_CHECKOUT_URL,
   },
   {
     name: "Pro",
@@ -64,6 +69,7 @@ const PLANS: Plan[] = [
       "Service vie scolaire / direction",
       "Petite structure de soutien scolaire",
     ],
+    checkoutUrl: STRIPE_CHECKOUT_URL,
   },
   {
     name: "Établissement",
@@ -77,6 +83,7 @@ const PLANS: Plan[] = [
       "Établissement en expérimentation IA",
       "Communauté éducative complète",
     ],
+    checkoutUrl: STRIPE_CHECKOUT_URL,
   },
 ];
 
@@ -100,19 +107,106 @@ export default function TarifsPage() {
             <h1 className="text-3xl sm:text-4xl font-bold text-slate-50">
               Tarifs EleveAI
             </h1>
-            <p className="text-sm sm:text-base text-slate-300 max-w-2xl">
-              Des tarifs simples, basés sur le{" "}
-              <strong>nombre de requêtes par mois</strong>.{" "}
-              Pas de cases “élève / parent / prof” obligatoires : chacun choisit la
-              formule qui correspond à son usage réel, selon la fréquence d’utilisation.
-            </p>
-            <p className="text-xs sm:text-sm text-emerald-300">
-              Défis Prompt : change ton monde, un meilleur prompt après l’autre.
-            </p>
-            <p className="text-xs sm:text-sm text-slate-400">
-              Une offre <strong>0 €</strong> est disponible pour tester EleveAI avec un
-              quota limité de requêtes, sans carte bancaire.
-            </p>
+           <div className="grid gap-4 lg:grid-cols-[2fr_1fr] lg:items-center">
+              <div className="space-y-3">
+                <p className="text-sm sm:text-base text-slate-300 max-w-2xl">
+                  Des tarifs simples, basés sur le{" "}
+                  <strong>nombre de requêtes par mois</strong>.{" "}
+                  Pas de cases “élève / parent / prof” obligatoires : chacun choisit la
+                  formule qui correspond à son usage réel, selon la fréquence
+                  d’utilisation.
+                </p>
+                <p className="text-xs sm:text-sm text-emerald-300">
+                  Défis Prompt : change ton monde, un meilleur prompt après l’autre.
+                </p>
+                <p className="text-xs sm:text-sm text-slate-400">
+                  Une offre <strong>0 €</strong> est disponible pour tester EleveAI
+                  avec un quota limité de requêtes, sans carte bancaire.
+                </p>
+            <div className="grid gap-4 lg:grid-cols-[2fr_1fr] lg:items-center">
+              <div className="space-y-3">
+                <p className="text-sm sm:text-base text-slate-300 max-w-2xl">
+                  Des tarifs simples, basés sur le{" "}
+                  <strong>nombre de requêtes par mois</strong>.{" "}
+                  Pas de cases “élève / parent / prof” obligatoires : chacun choisit la
+                  formule qui correspond à son usage réel, selon la fréquence
+                  d’utilisation.
+                </p>
+                <p className="text-xs sm:text-sm text-emerald-300">
+                  Défis Prompt : change ton monde, un meilleur prompt après l’autre.
+                </p>
+                <p className="text-xs sm:text-sm text-slate-400">
+                  Une offre <strong>0 €</strong> est disponible pour tester EleveAI
+                  avec un quota limité de requêtes, sans carte bancaire.
+                </p>
+                <div className="flex flex-wrap gap-3 text-xs sm:text-sm text-slate-200">
+                  <span className="inline-flex items-center gap-2 rounded-full border border-emerald-400/60 bg-emerald-500/10 px-3 py-1">
+                    <span>✅</span>
+                    <span>Support mail prioritaire dès Essentiel</span>
+                  </span>
+                  <span className="inline-flex items-center gap-2 rounded-full border border-slate-700 bg-slate-900/80 px-3 py-1">
+                    <span>🔒</span>
+                    <span>Comptes enfants et RGPD respectés</span>
+                  </span>
+                </div>
+              </div>
+
+              <div className="rounded-2xl border border-emerald-600/70 bg-emerald-500/10 p-4 space-y-2 shadow-lg shadow-emerald-500/10">
+                <p className="text-sm font-semibold text-emerald-200">
+                  Besoin d’un devis clair ?
+                </p>
+                <p className="text-xs text-slate-200">
+                  Envoyez vos besoins et on vous répond avec la bonne formule en moins
+                  de 24 h.
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  <Link
+                    href="/contact"
+                    className="inline-flex items-center justify-center rounded-full bg-emerald-500 px-4 py-2 text-xs font-semibold text-slate-950 shadow hover:bg-emerald-400"
+                  >
+                    Écrire à l’équipe
+                  </Link>
+                  <Link
+                    href="/ressources/supabase-paiement"
+                    className="inline-flex items-center justify-center rounded-full border border-emerald-400/80 bg-slate-900/80 px-4 py-2 text-[11px] font-semibold text-emerald-200 hover:border-emerald-300"
+                  >
+                    Voir le script Supabase
+                  </Link>
+                </div>
+                <p className="text-[11px] text-emerald-300">
+                  Paiement par carte ou mandat administratif possible.
+                </p>
+              </div>
+            </div>
+              </div>
+
+              <div className="rounded-2xl border border-emerald-600/70 bg-emerald-500/10 p-4 space-y-2 shadow-lg shadow-emerald-500/10">
+                <p className="text-sm font-semibold text-emerald-200">
+                  Besoin d’un devis clair ?
+                </p>
+                <p className="text-xs text-slate-200">
+                  Envoyez vos besoins et on vous répond avec la bonne formule en moins
+                  de 24 h.
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  <Link
+                    href="/contact"
+                    className="inline-flex items-center justify-center rounded-full bg-emerald-500 px-4 py-2 text-xs font-semibold text-slate-950 shadow hover:bg-emerald-400"
+                  >
+                    Écrire à l’équipe
+                  </Link>
+                  <Link
+                    href="/ressources/supabase-paiement"
+                    className="inline-flex items-center justify-center rounded-full border border-emerald-400/80 bg-slate-900/80 px-4 py-2 text-[11px] font-semibold text-emerald-200 hover:border-emerald-300"
+                  >
+                    Voir le script Supabase
+                  </Link>
+                </div>
+                <p className="text-[11px] text-emerald-300">
+                  Paiement par carte ou mandat administratif possible.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -162,20 +256,32 @@ export default function TarifsPage() {
                   ))}
                 </ul>
               </div>
-
-              {/* CTA (placeholder pour futur Stripe) */}
+ {/* CTA Stripe */}
               <div className="mt-4 flex flex-col gap-2">
-                <button
-                  type="button"
-                  className={[
-                    "inline-flex items-center justify-center rounded-full px-4 py-2 text-sm font-semibold transition",
-                    plan.highlight
-                      ? "bg-emerald-500 text-slate-950 hover:bg-emerald-400"
-                      : "bg-slate-800 text-slate-100 hover:bg-slate-700",
-                  ].join(" ")}
-                >
-                  Bientôt : choisir ce plan
-                </button>
+ {plan.checkoutUrl ? (
+                  <Link
+                    href={`${plan.checkoutUrl}?plan=${encodeURIComponent(plan.name.toLowerCase())}`}
+                    prefetch={false}
+                    className={[
+                      "inline-flex items-center justify-center rounded-full px-4 py-2 text-sm font-semibold transition",
+                      plan.highlight
+                        ? "bg-emerald-500 text-slate-950 hover:bg-emerald-400"
+                        : "bg-slate-800 text-slate-100 hover:bg-slate-700",
+                    ].join(" ")}
+                  >
+                    Choisir ce plan via Stripe
+                  </Link>
+                ) : (
+                  <span
+                    className={[
+                      "inline-flex items-center justify-center rounded-full px-4 py-2 text-sm font-semibold transition",
+                      "bg-slate-900 text-slate-500 border border-slate-800 cursor-not-allowed",
+                    ].join(" ")}
+                  >
+                    Paiement Stripe en cours d’activation
+                  </span>
+                )}
+
                 <p className="text-[11px] text-slate-500">
                   Paiement mensuel (sauf offre Découverte à 0 €). Alerte ou blocage
                   possible en cas de dépassement du quota de requêtes.
@@ -183,6 +289,64 @@ export default function TarifsPage() {
               </div>
             </div>
           ))}
+        </div>
+               {/* Garanties & bonus */}
+        <div className="mt-10 grid gap-4 sm:grid-cols-2">
+          <div className="rounded-2xl border border-slate-800 bg-slate-950/60 p-5 space-y-2">
+            <h3 className="text-base font-semibold text-slate-100">Clarté & sécurité</h3>
+            <p className="text-sm text-slate-300">
+              Chaque offre inclut l’accès aux mises à jour pédagogiques, la conformité
+              RGPD et des modèles sécurisés pour protéger les données élèves.
+            </p>
+            <p className="text-xs text-slate-500">
+              Les plafonds sont fermes : aucune facturation surprise même en cas de
+              sur-utilisation ponctuelle.
+            </p>
+          </div>
+          <div className="rounded-2xl border border-emerald-600/60 bg-emerald-500/10 p-5 space-y-2">
+            <h3 className="text-base font-semibold text-emerald-200">
+              Accompagnement humain
+            </h3>
+            <p className="text-sm text-slate-200">
+              Ateliers rapides pour lancer les usages, modèles de prompts prêts à
+              l’emploi et suivi personnalisé des équipes éducatives.
+            </p>
+            <Link
+              href="/ressources/supabase-paiement"
+              className="inline-flex items-center gap-2 text-xs font-semibold text-emerald-200 underline underline-offset-4 hover:text-emerald-100"
+            >
+              Voir comment suivre les paiements via Supabase →
+            </Link>
+          </div>
+        </div>
+        {/* Garanties & bonus */}
+        <div className="mt-10 grid gap-4 sm:grid-cols-2">
+          <div className="rounded-2xl border border-slate-800 bg-slate-950/60 p-5 space-y-2">
+            <h3 className="text-base font-semibold text-slate-100">Clarté & sécurité</h3>
+            <p className="text-sm text-slate-300">
+              Chaque offre inclut l’accès aux mises à jour pédagogiques, la conformité
+              RGPD et des modèles sécurisés pour protéger les données élèves.
+            </p>
+            <p className="text-xs text-slate-500">
+              Les plafonds sont fermes : aucune facturation surprise même en cas de
+              sur-utilisation ponctuelle.
+            </p>
+          </div>
+          <div className="rounded-2xl border border-emerald-600/60 bg-emerald-500/10 p-5 space-y-2">
+            <h3 className="text-base font-semibold text-emerald-200">
+              Accompagnement humain
+            </h3>
+            <p className="text-sm text-slate-200">
+              Ateliers rapides pour lancer les usages, modèles de prompts prêts à
+              l’emploi et suivi personnalisé des équipes éducatives.
+            </p>
+            <Link
+              href="/ressources/supabase-paiement"
+              className="inline-flex items-center gap-2 text-xs font-semibold text-emerald-200 underline underline-offset-4 hover:text-emerald-100"
+            >
+              Voir comment suivre les paiements via Supabase →
+            </Link>
+          </div>
         </div>
 
         {/* OFFRE PILOTE – COLLEGES & LYCÉES */}

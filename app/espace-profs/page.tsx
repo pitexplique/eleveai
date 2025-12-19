@@ -2,7 +2,8 @@
 "use client";
 
 import Link from "next/link";
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import { createClient } from "@/lib/supabase/client";
 import { MarkdownMath } from "@/components/MarkdownMath";
 import { PresetCarousel, PresetCarouselItem } from "@/components/PresetCarousel";
 import SignupNudge from "@/components/SignupNudge";
@@ -18,6 +19,10 @@ import {
   ChevronUp,
   Clock3,
   BadgeCheck,
+  Save,
+  FolderOpen,
+  History,
+  X,
 } from "lucide-react";
 
 /* ----------------------------------------
@@ -52,7 +57,6 @@ type ModaliteEvaluation =
   | "evaluation_diagnostique"
   | "evaluation_differenciee";
 
-// ✅ NOUVEAU : Thèmes abordés (multi-choix) + libellé contextuel
 type ThemeAborde =
   | "sport"
   | "ecologie"
@@ -78,14 +82,11 @@ type PromptProf = {
   methode: MethodePedagogique;
   outputStyle: OutputStyle;
 
-  // ✅ calibrage
-  dureeMin: number; // 0 = non renseigné
+  dureeMin: number;
   tonalite: Tonalite;
 
-  // ✅ si type = évaluation
   modaliteEvaluation: ModaliteEvaluation;
 
-  // ✅ Thèmes abordés
   themes: ThemeAborde[];
   themesLabel: string;
 };
@@ -227,7 +228,6 @@ const TONALITES: { id: Tonalite; label: string; hint: string }[] = [
   { id: "ludique", label: "Ludique", hint: "Ton plus léger (sans perdre la rigueur)." },
 ];
 
-// ✅ NOUVEAU : options thèmes
 const THEME_OPTIONS: { id: ThemeAborde; label: string }[] = [
   { id: "ecologie", label: "Écologie" },
   { id: "nature", label: "Nature" },
@@ -238,7 +238,7 @@ const THEME_OPTIONS: { id: ThemeAborde; label: string }[] = [
 ];
 
 /* ----------------------------------------
-   CARROUSEL PRESETS
+   CARROUSEL PRESETS "MODELES"
 ---------------------------------------- */
 
 const PROFS_PRESET_ITEMS: PresetCarouselItem[] = (
@@ -330,7 +330,6 @@ function construirePrompt(form: PromptProf): string {
   const blocTags = form.tags.length > 0 ? `Mots-clés pédagogiques : ${form.tags.join(", ")}.\n` : "";
   const blocAuteur = form.auteur ? `Préparé par : ${form.auteur}.\n` : "";
 
-  // ✅ NOUVEAU : bloc thèmes
   const blocThemes =
     (form.themes?.length ? `Thèmes à intégrer : ${form.themes.join(", ")}.\n` : "") +
     (form.themesLabel?.trim() ? `Contexte / angle : ${form.themesLabel.trim()}.\n` : "");
@@ -372,7 +371,7 @@ function construirePrompt(form: PromptProf): string {
     : "";
 
   const blocMethode = (() => {
-    if (estEval) return ""; // pas de méthode d’apprentissage forcée sur un devoir/contrôle
+    if (estEval) return "";
     switch (form.methode) {
       case "enseignement_explicite":
         return (
@@ -393,7 +392,6 @@ function construirePrompt(form: PromptProf): string {
         return "Méthode : ludique.\n- Défis, missions courtes, progression visible.\n\n";
       case "magistrale":
         return "Méthode : cours guidé.\n- Parties structurées + questions de vérification + entraînement.\n\n";
-      case "methode_active":
       default:
         return "Méthode : active.\n- Faire agir l’élève à chaque étape + bilan + question métacognitive.\n\n";
     }
@@ -405,12 +403,9 @@ function construirePrompt(form: PromptProf): string {
       : "";
 
   const blocDifferenciation = "Différenciation : niveau base / standard / défi (indiquer clairement).\n\n";
-
   const blocRappelsEtMeta =
     "Réponse : prérequis courts, étapes numérotées, questions de vérification, récapitulatif, question métacognitive.\n\n";
-
   const blocCriteres = "Fin : « Pour l’enseignant » (3-5 critères observables) + erreurs typiques.\n\n";
-
   const blocMiseEnPage =
     "Si fiche/évaluation : structure Word (titres, exos numérotés, temps/points, espaces réponses).\n\n";
 
@@ -445,10 +440,35 @@ function construirePrompt(form: PromptProf): string {
 }
 
 /* ----------------------------------------
+   DB TYPES
+---------------------------------------- */
+
+type DbPresetEmail = {
+  id: string;
+  auth_user_id: string;
+  title: string | null;
+  classe: string | null;
+  matiere: string | null;
+  payload: any;
+  created_at: string;
+};
+
+type DbRunEmail = {
+  id: string;
+  auth_user_id: string;
+  preset_id: string | null;
+  classe: string | null;
+  matiere: string | null;
+  created_at: string;
+};
+
+/* ----------------------------------------
    PAGE
 ---------------------------------------- */
 
 export default function ProfsPage() {
+  const supabase = useMemo(() => createClient(), []);
+
   const today = useMemo(() => new Date().toISOString().slice(0, 10), []);
 
   const makeInitialForm = useCallback((): PromptProf => {
@@ -472,7 +492,6 @@ export default function ProfsPage() {
       tonalite: "neutre",
       modaliteEvaluation: "evaluation_sommative",
 
-      // ✅ nouveaux champs thèmes
       themes: [],
       themesLabel: "L'agriculture et l'écologie au service de La Réunion",
     };
@@ -496,6 +515,34 @@ export default function ProfsPage() {
   const [nudgeSignal, setNudgeSignal] = useState(0);
   const triggerNudge = useCallback(() => setNudgeSignal((n) => n + 1), []);
 
+  // ✅ PRESETS DB (profs)
+  const [dbMsg, setDbMsg] = useState<string>("");
+  const [lastPresetId, setLastPresetId] = useState<string | null>(null);
+  const [isAuthed, setIsAuthed] = useState(false);
+
+  const [showMyPresets, setShowMyPresets] = useState(false);
+  const [myPresetsLoading, setMyPresetsLoading] = useState(false);
+  const [myPresets, setMyPresets] = useState<DbPresetEmail[]>([]);
+
+  const [showHistory, setShowHistory] = useState(false);
+  const [historyLoading, setHistoryLoading] = useState(false);
+  const [runs, setRuns] = useState<DbRunEmail[]>([]);
+
+  useEffect(() => {
+    let mounted = true;
+    supabase.auth.getUser().then(({ data }) => {
+      if (!mounted) return;
+      setIsAuthed(!!data?.user);
+    });
+    const { data: sub } = supabase.auth.onAuthStateChange((_event, session) => {
+      setIsAuthed(!!session?.user);
+    });
+    return () => {
+      mounted = false;
+      sub?.subscription?.unsubscribe?.();
+    };
+  }, [supabase]);
+
   const handleChange = useCallback(<K extends keyof PromptProf>(field: K, value: PromptProf[K]) => {
     setForm((prev) => ({ ...prev, [field]: value }));
   }, []);
@@ -518,7 +565,6 @@ export default function ProfsPage() {
     setForm((prev) => ({ ...prev, tags }));
   }, []);
 
-  // ✅ NOUVEAU : toggle thèmes
   const toggleTheme = useCallback((id: ThemeAborde) => {
     setForm((prev) => {
       const has = prev.themes.includes(id);
@@ -529,8 +575,7 @@ export default function ProfsPage() {
     });
   }, []);
 
-  // ✅ appliquer preset (SANS any)
-  const appliquerPreset = useCallback(
+  const appliquerPresetModele = useCallback(
     (key: ProfsPresetKey) => {
       const preset = PROFS_PRESETS[key];
       const v = preset.valeurs;
@@ -540,19 +585,14 @@ export default function ProfsPage() {
           ...prev,
           ...v,
 
-          // listes
           tags: v.tags ?? prev.tags,
-
-          // choix
           methode: (v.methode ?? prev.methode) as MethodePedagogique,
           outputStyle: (v.outputStyle ?? prev.outputStyle) as OutputStyle,
 
-          // ✅ typés (PAS de any)
           dureeMin: v.dureeMin ?? prev.dureeMin,
           tonalite: (v.tonalite ?? prev.tonalite) as Tonalite,
           modaliteEvaluation: (v.modaliteEvaluation ?? prev.modaliteEvaluation) as ModaliteEvaluation,
 
-          // ✅ nouveaux champs thèmes (si présents côté preset, sinon on garde)
           themes: (v as unknown as Partial<PromptProf>).themes ?? prev.themes,
           themesLabel: (v as unknown as Partial<PromptProf>).themesLabel ?? prev.themesLabel,
         };
@@ -578,6 +618,8 @@ export default function ProfsPage() {
     setAgentLoading(false);
     setShowMethode(false);
     setShowEval(false);
+    setDbMsg("");
+    setLastPresetId(null);
   }, [clearOutputs, makeInitialForm]);
 
   const typesDisponibles = useMemo(() => {
@@ -600,7 +642,6 @@ export default function ProfsPage() {
     if (!form.matiere) s.push("Indique la matière : EleveAI restera dans le bon cadre.");
     if (!form.type) s.push("Choisis un type : ça fixe la structure (séance, fiche, évaluation…).");
     if (form.contenu.trim().length < 40) s.push("Consigne trop courte : ajoute durée, contraintes, barème, exemple attendu.");
-
     if (!form.dureeMin || form.dureeMin <= 0) s.push("Ajoute une durée (ex : 20, 45, 55 min) : ça calibre le sujet.");
 
     if (estEval) {
@@ -610,13 +651,143 @@ export default function ProfsPage() {
       s.push("Choisis une méthode pédagogique : ça structure la progression et les questions.");
     }
 
-    // ✅ nouveau : thèmes
     if ((form.themes?.length ?? 0) === 0) s.push("Ajoute 1-2 thèmes : ça donne des exemples concrets et un contexte motivant.");
     if (!form.themesLabel.trim()) s.push("Tu peux préciser un angle (ex : La Réunion) pour contextualiser la ressource.");
 
     if (s.length === 0) s.push("Parfait. Tu peux ajouter : matériel, contraintes, exemple de production attendue.");
     return s;
   }, [form, estEval]);
+
+  /* ----------------------------------------
+     DB HELPERS
+  ---------------------------------------- */
+
+  const getAuthUserIdOrThrow = useCallback(async () => {
+    const { data, error } = await supabase.auth.getUser();
+    if (error || !data?.user) throw new Error("Tu dois être connecté pour utiliser les presets.");
+    return data.user.id;
+  }, [supabase]);
+
+  const loadMyPresets = useCallback(async () => {
+    setDbMsg("");
+    setMyPresetsLoading(true);
+    try {
+      const uid = await getAuthUserIdOrThrow();
+      const { data, error } = await supabase
+        .from("presets_email")
+        .select("id, auth_user_id, title, classe, matiere, payload, created_at")
+        .eq("auth_user_id", uid)
+        .order("created_at", { ascending: false })
+        .limit(80);
+
+      if (error) throw new Error(error.message);
+
+      const rows = (data ?? []) as DbPresetEmail[];
+      // Filtre scope = profs
+      const filtered = rows.filter((r) => r.payload?.meta?.scope === "profs");
+      setMyPresets(filtered);
+      setShowMyPresets(true);
+    } catch (e: any) {
+      setDbMsg(`⚠️ ${e.message || "Erreur chargement presets."}`);
+    } finally {
+      setMyPresetsLoading(false);
+    }
+  }, [getAuthUserIdOrThrow, supabase]);
+
+  const applySavedPreset = useCallback((p: DbPresetEmail) => {
+    const payload = p.payload || {};
+    const savedForm = payload.form;
+
+    if (savedForm) {
+      setForm(savedForm);
+      setRawTags((savedForm.tags ?? []).join(", "));
+    }
+
+    setPromptInterne(payload.promptInterne || "");
+    setAgentOutput(payload.agentOutput || "");
+    setAgentError("");
+    setLastPresetId(p.id);
+    setDbMsg("✅ Preset chargé.");
+    setShowMyPresets(false);
+  }, []);
+
+  const saveCurrentPreset = useCallback(async () => {
+    setDbMsg("");
+    try {
+      const uid = await getAuthUserIdOrThrow();
+
+      const title =
+        form.titre?.trim() ||
+        `${form.type || "Preset"} – ${form.classe || ""} ${form.matiere || ""}`.trim();
+
+      const payload = {
+        meta: { scope: "profs", version: 1 },
+        form,
+        promptInterne,
+        agentOutput,
+      };
+
+      const { data, error } = await supabase
+        .from("presets_email")
+        .insert({
+          auth_user_id: uid,
+          title,
+          classe: form.classe || "",
+          matiere: form.matiere || "",
+          payload,
+        })
+        .select("id")
+        .single();
+
+      if (error) throw new Error(error.message);
+      setLastPresetId(data.id as string);
+      setDbMsg("✅ Preset enregistré.");
+      triggerNudge();
+    } catch (e: any) {
+      setDbMsg(`⚠️ ${e.message || "Erreur sauvegarde preset."}`);
+    }
+  }, [agentOutput, form, getAuthUserIdOrThrow, promptInterne, supabase, triggerNudge]);
+
+  const loadRunsHistory = useCallback(async () => {
+    setDbMsg("");
+    setHistoryLoading(true);
+    try {
+      const uid = await getAuthUserIdOrThrow();
+      const { data, error } = await supabase
+        .from("preset_runs_email")
+        .select("id, auth_user_id, preset_id, classe, matiere, created_at")
+        .eq("auth_user_id", uid)
+        .order("created_at", { ascending: false })
+        .limit(50);
+
+      if (error) throw new Error(error.message);
+      setRuns((data ?? []) as DbRunEmail[]);
+      setShowHistory(true);
+    } catch (e: any) {
+      setDbMsg(`⚠️ ${e.message || "Erreur historique."}`);
+    } finally {
+      setHistoryLoading(false);
+    }
+  }, [getAuthUserIdOrThrow, supabase]);
+
+  const createRun = useCallback(async (presetId: string | null) => {
+    try {
+      const uid = await getAuthUserIdOrThrow();
+      const { error } = await supabase.from("preset_runs_email").insert({
+        auth_user_id: uid,
+        preset_id: presetId,
+        classe: form.classe || "",
+        matiere: form.matiere || "",
+      });
+      if (error) throw new Error(error.message);
+    } catch {
+      // on n'empêche pas l'UX si run fail
+    }
+  }, [form.classe, form.matiere, getAuthUserIdOrThrow, supabase]);
+
+  /* ----------------------------------------
+     ACTIONS IA
+  ---------------------------------------- */
 
   const creerPromptEtRessource = useCallback(async () => {
     if (!form.contenu.trim()) {
@@ -644,15 +815,18 @@ export default function ProfsPage() {
 
       const out = data.output || "";
       setAgentOutput(out);
-
       if (out) triggerNudge();
+
+      // ✅ trace un run (même si pas enregistré)
+      await createRun(lastPresetId);
+
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : "Erreur inconnue (vérifie le serveur / API).";
       setAgentError(msg);
     } finally {
       setAgentLoading(false);
     }
-  }, [form, triggerNudge]);
+  }, [createRun, form, lastPresetId, triggerNudge]);
 
   const copierPrompt = useCallback(async () => {
     if (!promptInterne) return;
@@ -681,6 +855,10 @@ export default function ProfsPage() {
   const tchatHref = useMemo(() => {
     return promptInterne ? `/tchat?prompt=${encodeURIComponent(promptInterne)}` : "/tchat";
   }, [promptInterne]);
+
+  /* ----------------------------------------
+     UI
+  ---------------------------------------- */
 
   return (
     <main className="min-h-screen bg-gradient-to-b from-sky-50 via-white to-slate-50 text-gray-900">
@@ -733,6 +911,66 @@ export default function ProfsPage() {
               <RotateCcw className="w-4 h-4" />
               Reset complet
             </button>
+
+            {/* ✅ PRESETS DB actions */}
+            <div className="flex items-center gap-2">
+              <button
+                type="button"
+                onClick={saveCurrentPreset}
+                disabled={!isAuthed || agentLoading}
+                className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-[11px] font-semibold border transition ${
+                  !isAuthed || agentLoading
+                    ? "bg-slate-100 text-slate-400 border-slate-200 cursor-not-allowed"
+                    : "bg-white text-slate-700 border-slate-300 hover:bg-slate-50"
+                }`}
+                title={!isAuthed ? "Connecte-toi pour enregistrer" : "Enregistrer ce preset"}
+              >
+                <Save className="w-4 h-4" />
+                Enregistrer
+              </button>
+
+              <button
+                type="button"
+                onClick={loadMyPresets}
+                disabled={!isAuthed || myPresetsLoading}
+                className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-[11px] font-semibold border transition ${
+                  !isAuthed || myPresetsLoading
+                    ? "bg-slate-100 text-slate-400 border-slate-200 cursor-not-allowed"
+                    : "bg-white text-slate-700 border-slate-300 hover:bg-slate-50"
+                }`}
+                title={!isAuthed ? "Connecte-toi pour voir tes presets" : "Afficher mes presets"}
+              >
+                <FolderOpen className="w-4 h-4" />
+                Mes presets
+              </button>
+
+              <button
+                type="button"
+                onClick={loadRunsHistory}
+                disabled={!isAuthed || historyLoading}
+                className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-[11px] font-semibold border transition ${
+                  !isAuthed || historyLoading
+                    ? "bg-slate-100 text-slate-400 border-slate-200 cursor-not-allowed"
+                    : "bg-white text-slate-700 border-slate-300 hover:bg-slate-50"
+                }`}
+                title={!isAuthed ? "Connecte-toi pour voir l'historique" : "Historique des générations"}
+              >
+                <History className="w-4 h-4" />
+                Historique
+              </button>
+            </div>
+
+            {dbMsg && (
+              <span className="text-[11px] font-semibold px-3 py-1 rounded-full bg-slate-800 text-white">
+                {dbMsg}
+              </span>
+            )}
+
+            {!isAuthed && (
+              <span className="text-[11px] text-slate-600">
+                (Connecte-toi pour sauvegarder tes presets)
+              </span>
+            )}
           </div>
         </header>
 
@@ -740,7 +978,7 @@ export default function ProfsPage() {
           title="Modèles rapides (facultatif)"
           subtitle="Clique sur un modèle : le formulaire se pré-remplit."
           items={PROFS_PRESET_ITEMS}
-          onSelect={(id) => appliquerPreset(id as ProfsPresetKey)}
+          onSelect={(id) => appliquerPresetModele(id as ProfsPresetKey)}
         />
 
         <div className="grid gap-6 lg:grid-cols-2">
@@ -888,7 +1126,7 @@ export default function ProfsPage() {
               <p className="text-[11px] text-gray-500 mt-1">S’adapte à la matière + brevet (3e) + bac (lycée).</p>
             </div>
 
-            {/* MODE ÉVALUATION */}
+            {/* MODE ÉVALUATION / MÉTHODE */}
             {estEval ? (
               <div className="space-y-2">
                 <div className="flex items-center justify-between gap-2">
@@ -1039,7 +1277,7 @@ export default function ProfsPage() {
               )}
             </div>
 
-            {/* ✅ NOUVEAU : Thèmes abordés */}
+            {/* Thèmes */}
             <div className="space-y-2">
               <label className="text-xs font-semibold text-gray-600">Thèmes abordés</label>
 
@@ -1275,6 +1513,147 @@ export default function ProfsPage() {
           </section>
         </div>
       </div>
+
+      {/* ✅ MODAL : Mes presets */}
+      {showMyPresets && (
+        <div className="fixed inset-0 z-50 bg-black/40 flex items-center justify-center p-4">
+          <div className="w-full max-w-3xl bg-white rounded-2xl shadow-xl border border-slate-200 overflow-hidden">
+            <div className="flex items-center justify-between p-4 border-b">
+              <div>
+                <h3 className="font-extrabold text-[#0047B6]">📚 Mes presets profs</h3>
+                <p className="text-xs text-slate-600">Clique sur “Charger” pour retrouver ton formulaire + prompt + ressource.</p>
+              </div>
+              <button
+                onClick={() => setShowMyPresets(false)}
+                className="p-2 rounded-lg hover:bg-slate-100"
+                aria-label="Fermer"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            <div className="p-4 space-y-3 max-h-[70vh] overflow-auto">
+              {myPresetsLoading ? (
+                <p className="text-sm text-slate-600">Chargement…</p>
+              ) : myPresets.length === 0 ? (
+                <p className="text-sm text-slate-600">
+                  Aucun preset enregistré (scope profs). Clique sur <b>Enregistrer</b> après une génération.
+                </p>
+              ) : (
+                <div className="space-y-2">
+                  {myPresets.map((p) => (
+                    <div key={p.id} className="border rounded-xl p-3 flex items-start justify-between gap-3">
+                      <div className="min-w-0">
+                        <div className="font-semibold text-slate-900 truncate">
+                          {p.title || "Sans titre"}
+                        </div>
+                        <div className="text-[11px] text-slate-600 mt-1">
+                          {p.classe || "—"} • {p.matiere || "—"} •{" "}
+                          <span className="font-mono">{new Date(p.created_at).toLocaleString()}</span>
+                        </div>
+                      </div>
+
+                      <button
+                        onClick={() => applySavedPreset(p)}
+                        className="shrink-0 inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-[#0047B6] text-white text-xs font-semibold hover:bg-[#003894]"
+                      >
+                        <FolderOpen className="w-4 h-4" />
+                        Charger
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            <div className="p-4 border-t flex items-center justify-between">
+              <button
+                onClick={() => setShowMyPresets(false)}
+                className="px-3 py-2 rounded-lg border border-slate-300 text-sm font-semibold hover:bg-slate-50"
+              >
+                Fermer
+              </button>
+              <button
+                onClick={loadMyPresets}
+                disabled={myPresetsLoading}
+                className={`px-3 py-2 rounded-lg text-sm font-semibold border ${
+                  myPresetsLoading ? "bg-slate-100 text-slate-400" : "bg-white hover:bg-slate-50"
+                }`}
+              >
+                Recharger
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ✅ MODAL : Historique */}
+      {showHistory && (
+        <div className="fixed inset-0 z-50 bg-black/40 flex items-center justify-center p-4">
+          <div className="w-full max-w-3xl bg-white rounded-2xl shadow-xl border border-slate-200 overflow-hidden">
+            <div className="flex items-center justify-between p-4 border-b">
+              <div>
+                <h3 className="font-extrabold text-[#0047B6]">🕒 Historique des générations</h3>
+                <p className="text-xs text-slate-600">Chaque clic “Créer prompt + ressource” ajoute une ligne ici.</p>
+              </div>
+              <button
+                onClick={() => setShowHistory(false)}
+                className="p-2 rounded-lg hover:bg-slate-100"
+                aria-label="Fermer"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            <div className="p-4 space-y-3 max-h-[70vh] overflow-auto">
+              {historyLoading ? (
+                <p className="text-sm text-slate-600">Chargement…</p>
+              ) : runs.length === 0 ? (
+                <p className="text-sm text-slate-600">Aucun run pour l’instant.</p>
+              ) : (
+                <div className="space-y-2">
+                  {runs.map((r) => (
+                    <div key={r.id} className="border rounded-xl p-3 flex items-start justify-between gap-3">
+                      <div>
+                        <div className="font-semibold text-slate-900">
+                          {r.classe || "—"} • {r.matiere || "—"}
+                        </div>
+                        <div className="text-[11px] text-slate-600 mt-1">
+                          {r.preset_id ? (
+                            <span>Preset lié : <span className="font-mono">{r.preset_id}</span></span>
+                          ) : (
+                            <span>Preset non lié (génération sans enregistrement)</span>
+                          )}
+                          {" • "}
+                          <span className="font-mono">{new Date(r.created_at).toLocaleString()}</span>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            <div className="p-4 border-t flex items-center justify-between">
+              <button
+                onClick={() => setShowHistory(false)}
+                className="px-3 py-2 rounded-lg border border-slate-300 text-sm font-semibold hover:bg-slate-50"
+              >
+                Fermer
+              </button>
+              <button
+                onClick={loadRunsHistory}
+                disabled={historyLoading}
+                className={`px-3 py-2 rounded-lg text-sm font-semibold border ${
+                  historyLoading ? "bg-slate-100 text-slate-400" : "bg-white hover:bg-slate-50"
+                }`}
+              >
+                Recharger
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       <SignupNudge
         storageKey="eleveai_nudge_profs_v2"

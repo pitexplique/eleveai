@@ -8,7 +8,7 @@ import { createClient } from "@/lib/supabase/client"; // client Supabase custom
 export default function SignInPage() {
   const [email, setEmail] = useState("");
   const [emailSent, setEmailSent] = useState(false);
-    const [otpCode, setOtpCode] = useState("");
+  const [otpCode, setOtpCode] = useState("");
   const [feedback, setFeedback] = useState<string | null>(null);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
