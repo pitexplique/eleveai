@@ -35,7 +35,7 @@ export default function PresetsPage() {
 
     let q = supabase
       .from("presets_email")
-      .select("id,title,classe,matiere,created_at")
+      .select("id,title,classe,matiere,niveau,created_at")
       .order("created_at", { ascending: false });
 
     if (classe.trim()) q = q.eq("classe", classe.trim());
