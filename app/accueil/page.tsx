@@ -10,14 +10,17 @@ export default function AccueilPage() {
         <div className="mx-auto max-w-6xl px-4 py-2 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
           <p className="text-xs text-slate-300">
             👋 Prof indépendant ?
-            <span className="text-slate-400"> Sauvegarde tes presets + historique avec un compte email (OTP).</span>
+            <span className="text-slate-400">
+              {" "}
+              Sauvegarde tes presets + historique avec un compte email.
+            </span>
           </p>
           <div className="flex items-center gap-2">
             <Link
               href="/auth/signup"
               className="inline-flex items-center justify-center rounded-lg bg-emerald-500 px-3 py-1.5 text-xs font-semibold text-slate-950 hover:bg-emerald-400"
             >
-              Créer un compte (OTP)
+              Créer un compte
             </Link>
             <Link
               href="/auth/signin"
@@ -47,24 +50,25 @@ export default function AccueilPage() {
           <div className="grid gap-6 lg:grid-cols-[3fr,2fr] items-start">
             {/* Colonne gauche */}
             <div className="space-y-4">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight">
-              Gagnez du temps et de la précision
-            </h1>
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight">
+                Gagnez du temps et de la précision
+              </h1>
 
-<p className="mt-3 text-lg sm:text-xl font-semibold text-emerald-300">
-  Crée ton prompt maintenant.
-</p>
-<p className="text-sm text-slate-400">
-  L’IA propose, tu décides. La pédagogie reste humaine.
-</p>
-
+              {/* Phrase “option B” intégrée (simple + impact) */}
+              <p className="mt-3 text-lg sm:text-xl font-semibold text-emerald-300">
+                Crée ton prompt maintenant.
+              </p>
+              <p className="text-sm text-slate-400">
+                L’IA propose, tu décides. La pédagogie reste humaine.
+              </p>
 
               <p className="text-base text-slate-300 max-w-2xl leading-relaxed">
-                EleveAI sert à <b>apprendre à bien utiliser l’IA</b> (Atelier-IA), et à{" "}
-                <b>créer des prompts utiles</b> pour les profs, élèves et parents — sans tricher.
+                EleveAI sert à <b>apprendre à bien utiliser l’IA</b> (Atelier-IA),
+                et à <b>créer des prompts utiles</b> pour les profs, élèves et parents —{" "}
+                <b>sans tricher</b>.
                 <br />
                 <span className="text-slate-400">
-                  L’IA est autorisée, mais encadrée : traces, esprit critique, correction personnelle.
+                  IA autorisée, mais encadrée : traces, esprit critique, correction personnelle.
                 </span>
               </p>
 
@@ -81,26 +85,26 @@ export default function AccueilPage() {
                   href="/espace-profs"
                   className="inline-flex items-center justify-center gap-2 rounded-lg border border-slate-600 bg-slate-900 px-4 py-2 text-sm font-semibold text-slate-50 hover:bg-slate-800"
                 >
-                  📚 Tester (Espace profs)
+                  📚 Ouvrir l’espace profs
                 </Link>
 
                 <Link
                   href="/espace-eleves"
                   className="inline-flex items-center justify-center gap-2 rounded-lg border border-slate-700/80 bg-slate-900 px-4 py-2 text-sm font-semibold text-slate-50 hover:bg-slate-800"
                 >
-                  🎒 Tester (Espace élèves)
+                  🎒 Ouvrir l’espace élèves
                 </Link>
 
                 <Link
                   href="/parents"
                   className="inline-flex items-center justify-center gap-2 rounded-lg border border-slate-700/80 bg-slate-900 px-4 py-2 text-sm font-semibold text-slate-50 hover:bg-slate-800"
                 >
-                  🧩 Tester (Espace parents)
+                  🧩 Ouvrir l’espace parents
                 </Link>
               </div>
 
               <p className="text-xs text-slate-500">
-                ✅ Cadre compatible établissement : usage responsable, pas “fait à la place”, prompts guidés.
+                ✅ Compatible établissement : usage responsable, pas “fait à la place”, prompts guidés.
               </p>
             </div>
 
@@ -110,7 +114,7 @@ export default function AccueilPage() {
                 <p className="text-sm font-semibold text-emerald-100">🔒 Anti-triche intégré</p>
                 <p className="text-xs text-emerald-50/90 mt-1 leading-relaxed">
                   On travaille avec des <b>traces</b> : prompt utilisé, réponse IA, corrections personnelles,
-                  et analyse critique.
+                  analyse critique.
                 </p>
               </div>
 
@@ -135,8 +139,8 @@ export default function AccueilPage() {
               <div className="rounded-2xl border border-slate-800 bg-slate-900/40 px-4 py-3">
                 <p className="text-sm font-semibold text-slate-100">🎯 Pour qui ?</p>
                 <p className="mt-1 text-xs text-slate-300 leading-relaxed">
-                  Chef d’établissement, profs, parents, élèves : chacun a son espace, mais{" "}
-                  <b>le même cadre</b>.
+                  Chef d’établissement, profs, parents, élèves : chacun a son espace,
+                  mais <b>le même cadre</b>.
                 </p>
               </div>
             </div>
@@ -163,7 +167,7 @@ export default function AccueilPage() {
         </div>
       </section>
 
-      {/* BANDEAU ATELIER-IA (LEVERS COLLEGE) */}
+      {/* BANDEAU ATELIER-IA (levier collège) */}
       <section className="border-b border-slate-800 bg-slate-950">
         <div className="mx-auto max-w-6xl px-4 py-3">
           <Link
@@ -189,7 +193,7 @@ export default function AccueilPage() {
             Tester l’outil (sans perdre le cadre)
           </h2>
           <p className="text-xs text-slate-400 max-w-2xl leading-snug">
-            L’objectif : gagner du temps, garder la main, et faire apprendre (pas faire à la place).
+            Objectif : gagner du temps, garder la main, et faire apprendre (pas faire à la place).
           </p>
 
           <div className="grid gap-4 md:grid-cols-3">
@@ -208,7 +212,7 @@ export default function AccueilPage() {
                 Préparer une séance, différencier, créer une évaluation, produire une activité IA-friendly.
               </p>
               <p className="mt-3 text-[11px] text-slate-400 group-hover:text-sky-200">
-                Tester → créer un prompt prof →
+                Ouvrir → créer un prompt prof →
               </p>
             </Link>
 
@@ -224,10 +228,10 @@ export default function AccueilPage() {
                 </span>
               </p>
               <p className="mt-2 text-sm text-slate-200">
-                Comprendre un cours, réviser, s’entraîner, se corriger avec méthode (sans copier).
+                Comprendre un cours, s’entraîner, se corriger avec méthode (sans copier).
               </p>
               <p className="mt-3 text-[11px] text-slate-400 group-hover:text-emerald-200">
-                Tester → créer un prompt élève →
+                Ouvrir → créer un prompt élève →
               </p>
             </Link>
 
@@ -243,10 +247,10 @@ export default function AccueilPage() {
                 </span>
               </p>
               <p className="mt-2 text-sm text-slate-200">
-                Aider sans faire à la place : organisation, motivation, compréhension, communication école-famille.
+                Aider sans faire à la place : organisation, motivation, communication école-famille.
               </p>
               <p className="mt-3 text-[11px] text-slate-400 group-hover:text-rose-200">
-                Tester → créer un prompt parent →
+                Ouvrir → créer un prompt parent →
               </p>
             </Link>
           </div>
@@ -257,8 +261,8 @@ export default function AccueilPage() {
               🏫 Chef d’établissement / équipe éducative
             </p>
             <p className="mt-1">
-              L’Atelier-IA peut devenir un <b>levier</b> pour le collège : cadre commun, pratiques alignées,
-              et accompagnement des élèves. (Les espaces admin/établissement arrivent plus tard.)
+              L’Atelier-IA peut devenir un <b>levier</b> : cadre commun, pratiques alignées,
+              élèves accompagnés. (Les espaces admin/établissement arrivent plus tard.)
             </p>
           </div>
         </div>
@@ -325,7 +329,7 @@ export default function AccueilPage() {
               📚 Tester l’espace profs
             </Link>
             <Link
-              href="/signup"
+              href="/auth/signup"
               className="inline-flex items-center justify-center rounded-lg border border-emerald-500/40 bg-emerald-900/10 px-4 py-2 text-sm font-semibold text-emerald-100 hover:bg-emerald-900/20"
             >
               🔑 Créer un compte (OTP)
@@ -336,3 +340,4 @@ export default function AccueilPage() {
     </main>
   );
 }
+
