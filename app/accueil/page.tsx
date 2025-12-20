@@ -6,7 +6,7 @@ export default function AccueilPage() {
   return (
     <main className="min-h-screen bg-slate-950 text-slate-50">
       {/* TOP BAR (porte email) */}
-      <section className="border-b border-slate-800 bg-slate-950/80">
+    {/*  <section className="border-b border-slate-800 bg-slate-950/80">
         <div className="mx-auto max-w-6xl px-4 py-2 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
           <p className="text-xs text-slate-300">
             👋 Prof indépendant ?
@@ -30,7 +30,7 @@ export default function AccueilPage() {
             </Link>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* HERO PRINCIPAL (CADRE) */}
       <section className="border-b border-slate-800 bg-gradient-to-b from-slate-900/80 to-slate-950">

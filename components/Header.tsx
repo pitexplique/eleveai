@@ -1,8 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useMemo, useRef, useState } from "react";
+import { createClient } from "@/lib/supabase/client";
 import {
   ChevronDown,
   Menu,
@@ -11,30 +12,26 @@ import {
   GraduationCap,
   Users,
   Briefcase,
-  Plus,
   Home,
   Sparkles,
-  Trophy,
+  Wand2,
   ClipboardList,
   UsersRound,
   BookOpenText,
   Mail,
-  BadgeEuro,
   HelpCircle,
   UserRound,
   Handshake,
-  Wand2,
-  Target,
-  BookOpen,
+  LayoutDashboard,
+  LogOut,
 } from "lucide-react";
 
 /* -----------------------------
    ROUTES AUTH (rappel)
-   ✅ signup est dans /auth/
 ------------------------------ */
 const AUTH_ROUTES = {
   signin: "/auth/signin",
-  signup: "/auth/signup",
+  signup: "/auth/signup", // ✅ rappel : signup est dans /auth/
 };
 
 type NavItem = {
@@ -44,13 +41,7 @@ type NavItem = {
   icon?: React.ReactNode;
 };
 
-type GroupKey =
-  | "atelier"
-  | "profs"
-  | "eleves"
-  | "parents"
-  | "administratif"
-  | "plus";
+type GroupKey = "atelier" | "profs" | "eleves" | "parents" | "admin" | "plus";
 
 type Group = {
   key: GroupKey;
@@ -89,6 +80,12 @@ function IconWrap({ children }: { children: React.ReactNode }) {
 
 export default function Header() {
   const pathname = usePathname();
+  const router = useRouter();
+  const supabase = useMemo(() => createClient(), []);
+
+  // ✅ Auth state
+  const [authLoading, setAuthLoading] = useState(true);
+  const [userEmail, setUserEmail] = useState<string | null>(null);
 
   // Desktop dropdowns
   const [open, setOpen] = useState<null | GroupKey>(null);
@@ -97,20 +94,20 @@ export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState<null | GroupKey>(null);
 
-  // Refs for outside click
+  // Refs
   const refAtelier = useRef<HTMLDivElement>(null);
   const refProfs = useRef<HTMLDivElement>(null);
   const refEleves = useRef<HTMLDivElement>(null);
   const refParents = useRef<HTMLDivElement>(null);
-  const refAdministratif = useRef<HTMLDivElement>(null);
+  const refAdmin = useRef<HTMLDivElement>(null);
   const refPlus = useRef<HTMLDivElement>(null);
 
   useOnClickOutside(
-    [refAtelier, refProfs, refEleves, refParents, refAdministratif, refPlus],
+    [refAtelier, refProfs, refEleves, refParents, refAdmin, refPlus],
     () => setOpen(null),
   );
 
-  // Close dropdowns with Escape (accessibilité clavier)
+  // Escape = ferme tout
   useEffect(() => {
     function onKeyDown(e: KeyboardEvent) {
       if (e.key === "Escape") {
@@ -123,145 +120,37 @@ export default function Header() {
     return () => document.removeEventListener("keydown", onKeyDown);
   }, []);
 
-  const GROUPS: Group[] = useMemo(
-    () => [
-      // ✅ Atelier-IA (porte d’entrée / cadre)
-      {
-        key: "atelier",
-        label: "Atelier-IA",
-        icon: <Wand2 className="h-4 w-4" />,
-        items: [
-          {
-            href: "/atelier-IA",
-            label: "Atelier-IA (Hub)",
-            badge: "Cadre",
-            icon: <Wand2 className="h-4 w-4" />,
-          },
-          {
-            href: "/atelier-IA/vision",
-            label: "Vision",
-            icon: <Target className="h-4 w-4" />,
-          },
-          {
-            href: "/atelier-IA/programme",
-            label: "Programme",
-            icon: <BookOpen className="h-4 w-4" />,
-          },
-        ],
-      },
+  // ✅ Auth listener : met à jour le header après login/logout
+  useEffect(() => {
+    let mounted = true;
 
-      // ✅ Profs
-      {
-        key: "profs",
-        label: "Espace profs",
-        icon: <Users className="h-4 w-4" />,
-        items: [
-          {
-            href: "/espace-profs",
-            label: "Générer des prompts (Profs)",
-            icon: <Users className="h-4 w-4" />,
-          },
-          {
-            href: "/blog/rediger-document-ia-friendly",
-            label: "Devoirs IA-friendly (plus tard)",
-            badge: "Bientôt",
-            icon: <ClipboardList className="h-4 w-4" />,
-          },
-          {
-            href: "/atelier-IA",
-            label: "Atelier-IA pour les élèves",
-            badge: "Levier",
-            icon: <Wand2 className="h-4 w-4" />,
-          },
-        ],
-      },
+    async function init() {
+      const { data } = await supabase.auth.getUser();
+      if (!mounted) return;
+      setUserEmail(data.user?.email ?? null);
+      setAuthLoading(false);
+    }
 
-      // ✅ Élèves
-      {
-        key: "eleves",
-        label: "Espace élèves",
-        icon: <GraduationCap className="h-4 w-4" />,
-        items: [
-          {
-            href: "/espace-eleves",
-            label: "Générer des prompts (Élèves)",
-            icon: <GraduationCap className="h-4 w-4" />,
-          },
-          {
-            href: "/eleves/changer-ton-monde",
-            label: "Changer ton monde",
-            badge: "Fun",
-            icon: <Trophy className="h-4 w-4" />,
-          },
-          {
-            href: "/eleves/parcours-creatifs",
-            label: "Autres parcours créatifs",
-            icon: <Sparkles className="h-4 w-4" />,
-          },
-        ],
-      },
+    init();
 
-      // ✅ Parents (accompagnement)
-      {
-        key: "parents",
-        label: "Parents",
-        icon: <UsersRound className="h-4 w-4" />,
-        items: [
-          {
-            href: "/parents",
-            label: "Accompagnement (Parents)",
-            icon: <UsersRound className="h-4 w-4" />,
-          },
-        ],
-      },
+    const { data: sub } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUserEmail(session?.user?.email ?? null);
+      setAuthLoading(false);
+    });
 
-      // ✅ Administratif (à ajouter comme tu demandes)
-      {
-        key: "administratif",
-        label: "Administratif",
-        icon: <Briefcase className="h-4 w-4" />,
-        items: [
-          {
-            href: "/espace-administration",
-            label: "Espace administratif",
-            icon: <ClipboardList className="h-4 w-4" />,
-          },
-          {
-            href: "/espace-vie-scolaire",
-            label: "Vie scolaire",
-            icon: <BookOpenText className="h-4 w-4" />,
-          },
-          {
-            href: "/espace-personnels",
-            label: "Personnels & services",
-            icon: <Briefcase className="h-4 w-4" />,
-          },
-        ],
-      },
+    return () => {
+      mounted = false;
+      sub.subscription.unsubscribe();
+    };
+  }, [supabase]);
 
-      // ✅ Plus
-      {
-        key: "plus",
-        label: "Plus",
-        icon: <Plus className="h-4 w-4" />,
-        items: [
-          { href: "/accueil", label: "Accueil", icon: <Home className="h-4 w-4" /> },
-          {
-            href: "/tarifs",
-            label: "Tarifs & abonnements",
-            badge: "Nouveau",
-            icon: <BadgeEuro className="h-4 w-4" />,
-          },
-          { href: "/blog", label: "Blog", icon: <BookOpenText className="h-4 w-4" /> },
-          { href: "/faq", label: "FAQ", icon: <HelpCircle className="h-4 w-4" /> },
-          { href: "/contact", label: "Contact", icon: <Mail className="h-4 w-4" /> },
-          { href: "/qui-suis-je", label: "Qui suis-je ?", icon: <UserRound className="h-4 w-4" /> },
-          { href: "/partenaires", label: "Partenaires & sponsors", icon: <Handshake className="h-4 w-4" /> },
-        ],
-      },
-    ],
-    [],
-  );
+  const isLoggedIn = !!userEmail;
+
+  async function logout() {
+    await supabase.auth.signOut();
+    setUserEmail(null);
+    router.replace("/accueil");
+  }
 
   function closeAll() {
     setOpen(null);
@@ -274,9 +163,89 @@ export default function Header() {
     if (key === "profs") return refProfs;
     if (key === "eleves") return refEleves;
     if (key === "parents") return refParents;
-    if (key === "administratif") return refAdministratif;
+    if (key === "admin") return refAdmin;
     return refPlus;
   }
+
+  // ✅ Navigation selon ton schéma + ajout Administratif
+  const GROUPS: Group[] = useMemo(
+    () => [
+      {
+        key: "atelier",
+        label: "Atelier-IA",
+        icon: <Wand2 className="h-4 w-4" />,
+        items: [
+          { href: "/atelier-IA", label: "HUB Atelier-IA", icon: <Wand2 className="h-4 w-4" /> },
+          { href: "/atelier-IA/vision", label: "Vision", icon: <Sparkles className="h-4 w-4" /> },
+          { href: "/atelier-IA/programme", label: "Programme", icon: <ClipboardList className="h-4 w-4" /> },
+        ],
+      },
+      {
+        key: "profs",
+        label: "Profs",
+        icon: <Users className="h-4 w-4" />,
+        items: [
+          { href: "/espace-profs", label: "Générer des prompts", icon: <Users className="h-4 w-4" /> },
+          {
+            href: "/blog/rediger-document-ia-friendly",
+            label: "Devoir IA-friendly (article)",
+            icon: <BookOpenText className="h-4 w-4" />,
+            badge: "Nouveau",
+          },
+          { href: "/atelier-IA", label: "Atelier-IA pour les élèves", icon: <Wand2 className="h-4 w-4" /> },
+        ],
+      },
+      {
+        key: "eleves",
+        label: "Élèves",
+        icon: <GraduationCap className="h-4 w-4" />,
+        items: [
+          { href: "/espace-eleves", label: "Générer des prompts", icon: <GraduationCap className="h-4 w-4" /> },
+
+          // ✅ si tu n'as pas encore ces routes, commente les 2 lignes ci-dessous
+          { href: "/changer-ton-monde", label: "Changer ton monde", icon: <Sparkles className="h-4 w-4" /> },
+          { href: "/parcours-creatifs", label: "Autres parcours créatifs", icon: <BookOpenText className="h-4 w-4" /> },
+        ],
+      },
+      {
+        key: "parents",
+        label: "Parents",
+        icon: <UsersRound className="h-4 w-4" />,
+        items: [{ href: "/parents", label: "Accompagnement", icon: <UsersRound className="h-4 w-4" /> }],
+      },
+      {
+        key: "admin",
+        label: "Administratif",
+        icon: <Briefcase className="h-4 w-4" />,
+        items: [
+          { href: "/espace-administration", label: "Assistant administratif (IA)", icon: <ClipboardList className="h-4 w-4" /> },
+          { href: "/espace-vie-scolaire", label: "Vie scolaire (IA)", icon: <BookOpenText className="h-4 w-4" /> },
+          { href: "/espace-personnels", label: "Personnels & services (IA)", icon: <Briefcase className="h-4 w-4" /> },
+        ],
+      },
+      {
+        key: "plus",
+        label: "Plus",
+        icon: <ChevronDown className="h-4 w-4" />,
+        items: [
+          { href: "/accueil", label: "Accueil", icon: <Home className="h-4 w-4" /> },
+          { href: "/blog", label: "Blog", icon: <BookOpenText className="h-4 w-4" /> },
+          { href: "/faq", label: "FAQ", icon: <HelpCircle className="h-4 w-4" /> },
+          { href: "/contact", label: "Contact", icon: <Mail className="h-4 w-4" /> },
+          { href: "/qui-suis-je", label: "Qui suis-je ?", icon: <UserRound className="h-4 w-4" /> },
+          { href: "/partenaires", label: "Partenaires & sponsors", icon: <Handshake className="h-4 w-4" /> },
+        ],
+      },
+    ],
+    [],
+  );
+
+  const desktopBtnClass = (active: boolean) =>
+    `px-3 py-1.5 text-sm rounded-xl border flex items-center gap-2 transition ${
+      active
+        ? "border-sky-500 bg-sky-500/10 text-sky-100 shadow-[0_0_0_1px_rgba(56,189,248,0.4)]"
+        : "border-slate-700 text-slate-200 hover:bg-slate-900 hover:border-slate-500"
+    }`;
 
   return (
     <header className="sticky top-0 z-40 border-b border-slate-800 bg-slate-950/90 backdrop-blur">
@@ -287,54 +256,30 @@ export default function Header() {
             <Sparkles className="h-5 w-5" />
           </div>
           <div className="flex flex-col leading-tight">
-            <span className="text-sm sm:text-base font-semibold text-slate-50">
-              EleveAI
-            </span>
-            <span className="text-[10px] sm:text-xs text-slate-400">
-              L’IA pédagogique pour tous
-            </span>
+            <span className="text-sm sm:text-base font-semibold text-slate-50">EleveAI</span>
+            <span className="text-[10px] sm:text-xs text-slate-400">L’IA pédagogique pour tous</span>
           </div>
         </Link>
 
         {/* DESKTOP MENU */}
         <div className="hidden lg:flex items-center gap-2">
-          {/* Lien direct Accueil */}
-          <Link
-            href="/accueil"
-            onClick={closeAll}
-            className={`px-3 py-1.5 text-sm rounded-xl border flex items-center gap-2 transition ${
-              isActive(pathname, "/accueil")
-                ? "border-sky-500 bg-sky-500/10 text-sky-100 shadow-[0_0_0_1px_rgba(56,189,248,0.4)]"
-                : "border-slate-700 text-slate-200 hover:bg-slate-900 hover:border-slate-500"
-            }`}
-          >
-            <Home className="h-4 w-4" />
-            Accueil
-          </Link>
-
-          {/* Menus déroulants */}
           {GROUPS.map((group) => {
             const ref = getRefForKey(group.key);
             const opened = open === group.key;
             const anyActive = group.items.some((it) => isActive(pathname, it.href));
+            const activeBtn = opened || anyActive;
 
             return (
               <div key={group.key} ref={ref} className="relative">
                 <button
                   onClick={() => setOpen((v) => (v === group.key ? null : group.key))}
-                  className={`px-3 py-1.5 text-sm rounded-xl border flex items-center gap-2 transition ${
-                    opened || anyActive
-                      ? "border-sky-500 bg-sky-500/10 text-sky-100 shadow-[0_0_0_1px_rgba(56,189,248,0.4)]"
-                      : "border-slate-700 text-slate-200 hover:bg-slate-900 hover:border-slate-500"
-                  }`}
+                  className={desktopBtnClass(activeBtn)}
                   aria-haspopup="menu"
                   aria-expanded={opened}
                 >
                   <span className="text-slate-200">{group.icon}</span>
                   {group.label}
-                  <ChevronDown
-                    className={`h-4 w-4 transition-transform ${opened ? "rotate-180" : ""}`}
-                  />
+                  <ChevronDown className={`h-4 w-4 transition-transform ${opened ? "rotate-180" : ""}`} />
                 </button>
 
                 {opened && (
@@ -373,20 +318,46 @@ export default function Header() {
 
         {/* RIGHT CTA (DESKTOP) */}
         <div className="hidden lg:flex items-center gap-2">
-          <Link
-            href={AUTH_ROUTES.signin}
-            className="inline-flex items-center gap-2 rounded-xl border border-slate-700 px-3 py-1.5 text-sm text-slate-200 hover:bg-slate-900 hover:border-slate-500"
-          >
-            <LogIn className="h-4 w-4" />
-            Connexion
-          </Link>
-          <Link
-            href={AUTH_ROUTES.signup}
-            className="inline-flex items-center gap-2 rounded-xl border border-emerald-500/40 bg-emerald-500/10 px-3 py-1.5 text-sm text-emerald-200 hover:bg-emerald-500/15 hover:border-emerald-400/60"
-          >
-            <UserPlus className="h-4 w-4" />
-            Inscription
-          </Link>
+          {/* ✅ éviter le flicker : pendant authLoading on n’affiche rien */}
+          {!authLoading && !isLoggedIn && (
+            <>
+              <Link
+                href={AUTH_ROUTES.signin}
+                className="inline-flex items-center gap-2 rounded-xl border border-slate-700 px-3 py-1.5 text-sm text-slate-200 hover:bg-slate-900 hover:border-slate-500"
+              >
+                <LogIn className="h-4 w-4" />
+                Connexion
+              </Link>
+              <Link
+                href={AUTH_ROUTES.signup}
+                className="inline-flex items-center gap-2 rounded-xl border border-emerald-500/40 bg-emerald-500/10 px-3 py-1.5 text-sm text-emerald-200 hover:bg-emerald-500/15 hover:border-emerald-400/60"
+              >
+                <UserPlus className="h-4 w-4" />
+                Inscription
+              </Link>
+            </>
+          )}
+
+          {!authLoading && isLoggedIn && (
+            <>
+              <Link
+                href="/dashboard"
+                className="inline-flex items-center gap-2 rounded-xl border border-emerald-500/40 bg-emerald-500/10 px-3 py-1.5 text-sm text-emerald-200 hover:bg-emerald-500/15 hover:border-emerald-400/60"
+              >
+                <LayoutDashboard className="h-4 w-4" />
+                Dashboard
+              </Link>
+
+              <button
+                onClick={logout}
+                className="inline-flex items-center gap-2 rounded-xl border border-slate-700 px-3 py-1.5 text-sm text-slate-200 hover:bg-slate-900 hover:border-slate-500"
+                title={userEmail ?? "Déconnexion"}
+              >
+                <LogOut className="h-4 w-4" />
+                Déconnexion
+              </button>
+            </>
+          )}
         </div>
 
         {/* BURGER MOBILE */}
@@ -407,41 +378,52 @@ export default function Header() {
       {menuOpen && (
         <div className="border-t border-slate-800 bg-slate-950 lg:hidden">
           <div className="mx-auto max-w-6xl px-4 py-3 space-y-2">
-            {/* Mobile CTA */}
-            <div className="grid grid-cols-2 gap-2">
-              <Link
-                href={AUTH_ROUTES.signin}
-                onClick={closeAll}
-                className="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-700 px-3 py-2 text-sm text-slate-200 hover:bg-slate-900 hover:border-slate-500"
-              >
-                <LogIn className="h-4 w-4" />
-                Connexion
-              </Link>
-              <Link
-                href={AUTH_ROUTES.signup}
-                onClick={closeAll}
-                className="inline-flex items-center justify-center gap-2 rounded-xl border border-emerald-500/40 bg-emerald-500/10 px-3 py-2 text-sm text-emerald-200 hover:bg-emerald-500/15 hover:border-emerald-400/60"
-              >
-                <UserPlus className="h-4 w-4" />
-                Inscription
-              </Link>
-            </div>
+            {/* Mobile auth */}
+            {!authLoading && !isLoggedIn && (
+              <div className="grid grid-cols-2 gap-2">
+                <Link
+                  href={AUTH_ROUTES.signin}
+                  onClick={closeAll}
+                  className="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-700 px-3 py-2 text-sm text-slate-200 hover:bg-slate-900 hover:border-slate-500"
+                >
+                  <LogIn className="h-4 w-4" />
+                  Connexion
+                </Link>
+                <Link
+                  href={AUTH_ROUTES.signup}
+                  onClick={closeAll}
+                  className="inline-flex items-center justify-center gap-2 rounded-xl border border-emerald-500/40 bg-emerald-500/10 px-3 py-2 text-sm text-emerald-200 hover:bg-emerald-500/15 hover:border-emerald-400/60"
+                >
+                  <UserPlus className="h-4 w-4" />
+                  Inscription
+                </Link>
+              </div>
+            )}
 
-            {/* Accueil quick link */}
-            <Link
-              href="/accueil"
-              onClick={closeAll}
-              className={`w-full rounded-xl px-3 py-2 text-sm border flex items-center gap-2 ${
-                isActive(pathname, "/accueil")
-                  ? "border-sky-500 bg-sky-500/10 text-sky-100 shadow-[0_0_0_1px_rgba(56,189,248,0.4)]"
-                  : "border-transparent text-slate-300 hover:border-slate-700 hover:bg-slate-900"
-              }`}
-            >
-              <Home className="h-4 w-4" />
-              Accueil
-            </Link>
+            {!authLoading && isLoggedIn && (
+              <div className="grid grid-cols-2 gap-2">
+                <Link
+                  href="/dashboard"
+                  onClick={closeAll}
+                  className="inline-flex items-center justify-center gap-2 rounded-xl border border-emerald-500/40 bg-emerald-500/10 px-3 py-2 text-sm text-emerald-200 hover:bg-emerald-500/15 hover:border-emerald-400/60"
+                >
+                  <LayoutDashboard className="h-4 w-4" />
+                  Dashboard
+                </Link>
+                <button
+                  onClick={async () => {
+                    await logout();
+                    closeAll();
+                  }}
+                  className="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-700 px-3 py-2 text-sm text-slate-200 hover:bg-slate-900 hover:border-slate-500"
+                >
+                  <LogOut className="h-4 w-4" />
+                  Déconnexion
+                </button>
+              </div>
+            )}
 
-            {/* Sections accordéon */}
+            {/* Groups accordéon */}
             {GROUPS.map((group) => {
               const opened = mobileOpen === group.key;
               const anyActive = group.items.some((it) => isActive(pathname, it.href));
@@ -474,9 +456,7 @@ export default function Header() {
                             href={link.href}
                             onClick={closeAll}
                             className={`px-3 py-2 text-sm border-t border-slate-800 flex items-center gap-3 ${
-                              active
-                                ? "text-sky-300 bg-sky-500/10"
-                                : "text-slate-300 hover:bg-slate-900"
+                              active ? "text-sky-300 bg-sky-500/10" : "text-slate-300 hover:bg-slate-900"
                             }`}
                           >
                             <IconWrap>{link.icon}</IconWrap>
@@ -500,4 +480,3 @@ export default function Header() {
     </header>
   );
 }
-
