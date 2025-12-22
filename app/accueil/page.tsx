@@ -51,12 +51,12 @@ export default function AccueilPage() {
             {/* Colonne gauche */}
             <div className="space-y-4">
               <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight">
-                Gagnez du temps et de la précision
+                Une porte vers l'IA
               </h1>
 
               {/* Phrase “option B” intégrée (simple + impact) */}
               <p className="mt-3 text-lg sm:text-xl font-semibold text-emerald-300">
-                Crée ton prompt maintenant.
+                Crée ton prompt expert maintenant.
               </p>
               <p className="text-sm text-slate-400">
                 L’IA propose, tu décides. La pédagogie reste humaine.

@@ -1712,4 +1712,3 @@ export default function ProfsPage() {
     </main>
   );
 }
-
