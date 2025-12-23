@@ -93,7 +93,7 @@ export default function AccueilPage() {
             <div className="space-y-3">
               <div className="rounded-2xl border border-slate-800 bg-slate-900/40 p-5">
                 <img
-                  src="public/logo-epsilon.png"
+                  src="logo-epsilon.png"
                   alt="ε → ∞ — Un détail pour tout changer"
                   className="mx-auto h-44 w-auto opacity-90"
                 />
