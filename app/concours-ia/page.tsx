@@ -139,7 +139,7 @@ export default function ConcoursIaChangerTonMondePage() {
 
           <div className="pt-2">
             <Link
-              href="/chat"
+              href="/espace-eleves"
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#0047B6] text-white text-xs sm:text-sm font-semibold shadow hover:bg-[#003894] transition"
             >
               ✨ Ouvrir le chat EleveAI pour commencer

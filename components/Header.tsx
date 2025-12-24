@@ -203,7 +203,7 @@ export default function Header() {
           { href: "/espace-eleves", label: "Générer des prompts", icon: <GraduationCap className="h-4 w-4" /> },
 
           // ✅ si tu n'as pas encore ces routes, commente les 2 lignes ci-dessous
-          { href: "/changer-ton-monde", label: "Changer ton monde", icon: <Sparkles className="h-4 w-4" /> },
+          { href: "/concours-ia", label: "Changer ton monde", icon: <Sparkles className="h-4 w-4" /> },
           { href: "/parcours-creatifs", label: "Autres parcours créatifs", icon: <BookOpenText className="h-4 w-4" /> },
         ],
       },
@@ -211,7 +211,7 @@ export default function Header() {
         key: "parents",
         label: "Parents",
         icon: <UsersRound className="h-4 w-4" />,
-        items: [{ href: "/parents", label: "Accompagnement", icon: <UsersRound className="h-4 w-4" /> }],
+        items: [{ href: "/espace-parents", label: "Accompagnement", icon: <UsersRound className="h-4 w-4" /> }],
       },
       {
         key: "admin",

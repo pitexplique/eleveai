@@ -1,10 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import {
   PresetCarousel,
   PresetCarouselItem,
 } from "@/components/PresetCarousel";
+import { CLASSES, MATIERES } from "@/lib/constants/scolaire";
 
 /* ----------------------------------------
    TYPES POUR LES ÉTATS
@@ -13,7 +14,7 @@ import {
 type Maitrise = "besoin" | "satisfaisant" | "expert";
 
 type ParentsPresetValues = {
-  niveau?: string;
+  classe?: string; // ✅ “classe” (au lieu de niveau)
   matiere?: string;
   objectif?: string;
   maitrise?: Maitrise;
@@ -45,7 +46,7 @@ const PRESETS: Record<
     description:
       "Pour un enfant qui manque de confiance sur les opérations et les problèmes simples.",
     valeurs: {
-      niveau: "CM2",
+      classe: "CM2",
       matiere: "maths",
       objectif:
         "Lui redonner confiance sur les bases en calcul (additions, soustractions, multiplications, problèmes simples) sans le décourager.",
@@ -60,7 +61,7 @@ const PRESETS: Record<
     description:
       "Pour un enfant qui lit lentement et a besoin d’un accompagnement rassurant en lecture / écriture.",
     valeurs: {
-      niveau: "CM2",
+      classe: "CM2",
       matiere: "français",
       objectif:
         "L’aider à lire plus régulièrement, comprendre les textes simples et écrire des phrases correctes sans le mettre en échec.",
@@ -75,7 +76,7 @@ const PRESETS: Record<
     description:
       "Pour un élève de 5e/4e qui stresse à l’idée d’un contrôle en maths.",
     valeurs: {
-      niveau: "5e",
+      classe: "5e",
       matiere: "maths",
       objectif:
         "L’aider à préparer un contrôle sur les fractions (simplifier, additionner, comparer) en le guidant pas à pas.",
@@ -90,7 +91,7 @@ const PRESETS: Record<
     description:
       "Pour un élève qui se laisse vite déborder par les devoirs maison et ne sait pas par où commencer.",
     valeurs: {
-      niveau: "collège",
+      classe: "collège",
       matiere: "toutes les matières",
       objectif:
         "L’aider à organiser ses devoirs, découper les tâches en petites étapes et garder une attitude positive face au travail personnel.",
@@ -105,7 +106,7 @@ const PRESETS: Record<
     description:
       "Pour un élève qui a besoin d’une méthode pour s’organiser et réviser plus efficacement.",
     valeurs: {
-      niveau: "lycée",
+      classe: "lycée",
       matiere: "toutes les matières",
       objectif:
         "L’aider à trouver une méthode de travail simple pour s’organiser, réviser régulièrement et préparer ses évaluations sans être débordé.",
@@ -120,7 +121,7 @@ const PRESETS: Record<
     description:
       "Pour un élève de Première / Terminale qui veut se préparer sereinement aux épreuves de maths.",
     valeurs: {
-      niveau: "Tle",
+      classe: "Tle",
       matiere: "maths",
       objectif:
         "L’aider à revoir les chapitres importants pour le bac, identifier ses points faibles et s’entraîner avec des exercices progressifs.",
@@ -135,7 +136,7 @@ const PRESETS: Record<
     description:
       "Pour un élève qui se bloque à cause du stress avant les contrôles et examens.",
     valeurs: {
-      niveau: "lycée",
+      classe: "lycée",
       matiere: "toutes les matières",
       objectif:
         "L’aider à gérer son stress avant les contrôles et examens, avec des conseils concrets, des routines courtes et des encouragements.",
@@ -150,7 +151,7 @@ const PRESETS: Record<
     description:
       "Pour un élève avec profil DYS et/ou TDAH qui a besoin d’un accompagnement très guidé et rassurant.",
     valeurs: {
-      niveau: "collège",
+      classe: "collège",
       matiere: "toutes les matières",
       objectif:
         "L’aider à reprendre confiance, à comprendre les consignes et à travailler avec des activités courtes, guidées et adaptées à son profil DYS / hyperactif.",
@@ -176,12 +177,158 @@ const PRESET_ITEMS: PresetCarouselItem[] = (
 }));
 
 /* ----------------------------------------
+   UI HELPERS
+---------------------------------------- */
+
+function FieldLabel({
+  title,
+  hint,
+  required,
+}: {
+  title: string;
+  hint?: string;
+  required?: boolean;
+}) {
+  return (
+    <div className="space-y-0.5">
+      <p className="text-xs font-semibold text-slate-700">
+        {title}
+        {required ? <span className="ml-1 text-rose-600">*</span> : null}
+      </p>
+      {hint ? (
+        <p className="text-[11px] text-slate-500 leading-tight">{hint}</p>
+      ) : null}
+    </div>
+  );
+}
+
+/* ----------------------------------------
+   TAGS (chips) comme espace-élèves
+---------------------------------------- */
+
+function Tag({
+  label,
+  onClick,
+  disabled,
+  variant = "default",
+}: {
+  label: string;
+  onClick: () => void;
+  disabled?: boolean;
+  variant?: "default" | "dark" | "green" | "purple" | "orange";
+}) {
+  const base =
+    "inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-xs font-semibold transition border";
+  const styles: Record<typeof variant, string> = {
+    default: "bg-white text-slate-700 border-slate-200 hover:bg-slate-50",
+    dark: "bg-slate-900 text-white border-slate-900 hover:bg-slate-800",
+    green: "bg-emerald-600 text-white border-emerald-600 hover:bg-emerald-700",
+    purple: "bg-indigo-600 text-white border-indigo-600 hover:bg-indigo-700",
+    orange: "bg-orange-500 text-white border-orange-500 hover:bg-orange-600",
+  };
+
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      disabled={disabled}
+      className={[
+        base,
+        styles[variant],
+        disabled ? "opacity-50 cursor-not-allowed hover:bg-inherit" : "",
+      ].join(" ")}
+    >
+      {label}
+    </button>
+  );
+}
+
+function CollerDansTags({
+  prompt,
+  onCopy,
+}: {
+  prompt: string;
+  onCopy: () => Promise<void>;
+}) {
+  const encoded = useMemo(() => encodeURIComponent(prompt || ""), [prompt]);
+  const disabled = !prompt;
+
+  async function openEleveAI() {
+    if (!prompt) return;
+    await onCopy();
+    window.open("/tchat", "_blank");
+  }
+
+  function openChatGPT() {
+    if (!prompt) return;
+    window.open(`https://chat.openai.com/?q=${encoded}`, "_blank");
+  }
+
+  function openMistral() {
+    if (!prompt) return;
+    window.open("https://chat.mistral.ai/", "_blank");
+  }
+
+  function openGemini() {
+    if (!prompt) return;
+    window.open(`https://gemini.google.com/app?q=${encoded}`, "_blank");
+  }
+
+  function openClaude() {
+    if (!prompt) return;
+    window.open("https://claude.ai/new", "_blank");
+  }
+
+  return (
+    <div className="space-y-2">
+      <p className="text-sm font-semibold text-slate-700">Coller dans :</p>
+      <div className="flex flex-wrap gap-2">
+        <Tag
+          label="🚀 Tchat EleveAI"
+          onClick={openEleveAI}
+          disabled={disabled}
+          variant="green"
+        />
+        <Tag
+          label="⬛ ChatGPT"
+          onClick={openChatGPT}
+          disabled={disabled}
+          variant="dark"
+        />
+        <Tag
+          label="🟩 Gemini"
+          onClick={openGemini}
+          disabled={disabled}
+          variant="green"
+        />
+        <Tag
+          label="🟪 Claude"
+          onClick={openClaude}
+          disabled={disabled}
+          variant="purple"
+        />
+        <Tag
+          label="🟧 Mistral"
+          onClick={openMistral}
+          disabled={disabled}
+          variant="orange"
+        />
+      </div>
+      <p className="text-[11px] text-slate-500">
+        Astuce : clique sur “🚀 Tchat EleveAI” → le prompt est copié et /tchat
+        s’ouvre dans un nouvel onglet.
+      </p>
+    </div>
+  );
+}
+
+/* ----------------------------------------
    PAGE PARENTS
 ---------------------------------------- */
 
 export default function ParentsPage() {
   const [prenom, setPrenom] = useState("");
-  const [niveau, setNiveau] = useState("collège");
+  const [classe, setClasse] = useState("collège");
   const [matiere, setMatiere] = useState("maths");
   const [objectif, setObjectif] = useState(
     "Lui redonner confiance et l’aider à comprendre le cours sur : les fractions et la cuisine",
@@ -194,10 +341,7 @@ export default function ParentsPage() {
   const [hyperactif, setHyperactif] = useState(false);
 
   const [generatedPrompt, setGeneratedPrompt] = useState("");
-
-  /* ----------------------------------------
-     FONCTIONS UTILITAIRES
-  ---------------------------------------- */
+  const [copied, setCopied] = useState(false);
 
   const toggleDysType = (type: string) => {
     setDysTypes((prev) =>
@@ -209,7 +353,7 @@ export default function ParentsPage() {
     const preset = PRESETS[key];
     const v = preset.valeurs;
 
-    if (v.niveau !== undefined) setNiveau(v.niveau);
+    if (v.classe !== undefined) setClasse(v.classe);
     if (v.matiere !== undefined) setMatiere(v.matiere);
     if (v.objectif !== undefined) setObjectif(v.objectif);
     if (v.maitrise !== undefined) setMaitrise(v.maitrise);
@@ -226,17 +370,14 @@ export default function ParentsPage() {
 
     let maitrisePhrase = "";
     if (maitrise === "besoin") {
-      maitrisePhrase =
-        `${nomEleve} a plutôt besoin d’aide en ce moment dans cette matière : certaines bases ne sont pas complètement installées et la confiance est fragile.`;
+      maitrisePhrase = `${nomEleve} a plutôt besoin d’aide en ce moment dans cette matière : certaines bases ne sont pas complètement installées et la confiance est fragile.`;
     } else if (maitrise === "satisfaisant") {
-      maitrisePhrase =
-        `${nomEleve} a un niveau globalement satisfaisant : il/elle réussit beaucoup de choses mais a besoin d’être rassuré·e et de consolider certaines notions.`;
+      maitrisePhrase = `${nomEleve} a un niveau globalement satisfaisant : il/elle réussit beaucoup de choses mais a besoin d’être rassuré·e et de consolider certaines notions.`;
     } else {
-      maitrisePhrase =
-        `${nomEleve} est plutôt à l’aise / expert dans cette matière et a besoin d’être stimulé·e, d’aller un peu plus loin sans perdre le plaisir d’apprendre.`;
+      maitrisePhrase = `${nomEleve} est plutôt à l’aise / expert dans cette matière et a besoin d’être stimulé·e, d’aller un peu plus loin sans perdre le plaisir d’apprendre.`;
     }
 
-    const base = `Tu es une IA pédagogique bienveillante qui s’adresse à ${nomEleve}, élève de niveau ${niveau}, en ${matiere}, dans le système scolaire français.
+    const base = `Tu es une IA pédagogique bienveillante qui s’adresse à ${nomEleve}, élève en classe de ${classe}, en ${matiere}, dans le système scolaire français.
 
 ${maitrisePhrase}
 
@@ -248,7 +389,6 @@ Ta mission :
 
 Objectif principal demandé par le parent : ${objectif}`;
 
-    // Bloc besoins spécifiques
     let besoinsBloc = "";
 
     if (hasDys || hyperactif) {
@@ -286,23 +426,19 @@ Règles importantes :
 - Tu refuses de donner directement la solution complète d’un devoir maison ou d’une évaluation à venir. À la place, tu guides pas à pas.`;
 
     setGeneratedPrompt(base + besoinsBloc + suite);
+    setCopied(false);
   };
 
   const handleCopy = async () => {
     if (!generatedPrompt) return;
     try {
       await navigator.clipboard.writeText(generatedPrompt);
-      alert("Prompt copié dans le presse-papiers ✅");
-    } catch (e) {
-      alert(
-        "Impossible de copier le texte automatiquement. Vous pouvez le sélectionner à la main.",
-      );
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1500);
+    } catch {
+      alert("Copie impossible automatiquement. Sélectionnez le texte à la main.");
     }
   };
-
-  /* ----------------------------------------
-     RENDER
-  ---------------------------------------- */
 
   return (
     <main className="min-h-screen bg-gradient-to-b from-sky-50 via-white to-emerald-50">
@@ -346,11 +482,8 @@ Règles importantes :
               Vous qui connaissez votre enfant 💛
             </h2>
             <p className="text-xs sm:text-sm text-slate-600">
-              Commencez par décrire{" "}
-              <span className="font-semibold">comment est votre enfant</span>{" "}
-              dans ses apprentissages. Ces informations seront intégrées
-              discrètement dans le message à l’IA pour un accompagnement plus
-              personnalisé.
+              Décrivez brièvement son profil : l’IA adaptera la façon d’expliquer
+              et le rythme.
             </p>
           </div>
 
@@ -412,8 +545,7 @@ Règles importantes :
                     htmlFor="hasDys"
                     className="text-xs sm:text-sm text-slate-700"
                   >
-                    Mon enfant a un <strong>profil DYS</strong> (diagnostiqué ou
-                    en cours).
+                    Profil <strong>DYS</strong>
                   </label>
                 </div>
 
@@ -457,22 +589,21 @@ Règles importantes :
                     htmlFor="hyperactif"
                     className="text-xs sm:text-sm text-slate-700"
                   >
-                    Profil <strong>hyperactif / TDAH</strong>.
+                    Profil <strong>hyperactif / TDAH</strong>
                   </label>
                 </div>
                 <p className="text-[11px] text-slate-500">
-                  L’IA pourra alors proposer des activités plus courtes,
-                  rythmées et très guidées.
+                  Activités plus courtes, rythmées, très guidées.
                 </p>
               </div>
             </div>
           </div>
         </section>
 
-        {/* 2️⃣ PRESETS – CARROUSEL TYPE NETFLIX */}
+        {/* 2️⃣ PRESETS – CARROUSEL */}
         <PresetCarousel
           title="Choisir un modèle rapide (facultatif)"
-          subtitle="Vous pouvez gagner du temps en partant d’un exemple proche de votre situation. Vous pourrez ensuite ajuster les champs juste en dessous."
+          subtitle="Partir d’un exemple proche de votre situation, puis ajuster."
           items={PRESET_ITEMS}
           onSelect={(id) => appliquerPreset(id as PresetKey)}
         />
@@ -481,129 +612,105 @@ Règles importantes :
         <section className="mt-6 rounded-3xl bg-white p-6 shadow-md ring-1 ring-slate-100 lg:p-8">
           <header className="mb-6 space-y-2">
             <h2 className="text-lg font-semibold text-slate-900">
-              Créez votre prompt personnalisé en quelques secondes
+              Créez votre prompt personnalisé
             </h2>
             <p className="text-sm text-slate-600">
-              Remplissez les champs ci-dessous, cliquez sur{" "}
-              <span className="font-semibold">« Générer le prompt »</span> puis
-              copiez-collez le texte dans EleveAI (ou un autre outil). L’IA
-              utilisera alors vos consignes, dans un cadre sécurisé.
+              Remplissez → générez → puis utilisez les tags “Coller dans …”.
             </p>
           </header>
 
           <div className="space-y-5">
             <div className="grid gap-4 sm:grid-cols-2">
-              <div className="space-y-1.5">
-                <label className="text-xs font-medium text-slate-700">
-                  Prénom de l’enfant (facultatif)
-                </label>
+              <div className="space-y-2">
+                <FieldLabel title="Prénom (facultatif)" hint="Ex : Léa, Yanis…" />
                 <input
                   type="text"
                   value={prenom}
                   onChange={(e) => setPrenom(e.target.value)}
-                  className="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-900 shadow-inner focus:border-emerald-400 focus:outline-none focus:ring-2 focus:ring-emerald-100"
+                  className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-900 shadow-inner focus:border-emerald-400 focus:outline-none focus:ring-2 focus:ring-emerald-100"
                   placeholder="Ex : Léa, Yanis…"
                 />
               </div>
 
-              <div className="space-y-1.5">
-                <label className="text-xs font-medium text-slate-700">
-                  Niveau scolaire
-                </label>
+              <div className="space-y-2">
+                <FieldLabel title="Classe" required />
                 <select
-                  value={niveau}
-                  onChange={(e) => setNiveau(e.target.value)}
-                  className="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-900 shadow-inner focus:border-emerald-400 focus:outline-none focus:ring-2 focus:ring-emerald-100"
+                  value={classe}
+                  onChange={(e) => setClasse(e.target.value)}
+                  className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-900 shadow-inner focus:border-emerald-400 focus:outline-none focus:ring-2 focus:ring-emerald-100"
                 >
-                  <option value="CM2">CM2</option>
-                  <option value="6e">6e</option>
-                  <option value="5e">5e</option>
-                  <option value="4e">4e</option>
-                  <option value="3e">3e</option>
-                  <option value="2de">2de</option>
-                  <option value="1re">1re</option>
-                  <option value="Tle">Terminale</option>
-                  <option value="collège">Collège (niveau mixte)</option>
-                  <option value="lycée">Lycée (niveau mixte)</option>
+                  {CLASSES.map((c) => (
+                    <option key={c.value} value={c.value}>
+                      {c.label}
+                    </option>
+                  ))}
                 </select>
               </div>
             </div>
 
             <div className="grid gap-4 sm:grid-cols-2">
-              <div className="space-y-1.5">
-                <label className="text-xs font-medium text-slate-700">
-                  Matière principale
-                </label>
+              <div className="space-y-2">
+                <FieldLabel title="Matière" required />
                 <select
                   value={matiere}
                   onChange={(e) => setMatiere(e.target.value)}
-                  className="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-900 shadow-inner focus:border-emerald-400 focus:outline-none focus:ring-2 focus:ring-emerald-100"
+                  className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-900 shadow-inner focus:border-emerald-400 focus:outline-none focus:ring-2 focus:ring-emerald-100"
                 >
-                  <option value="maths">Mathématiques</option>
-                  <option value="français">Français</option>
-                  <option value="histoire-géographie">
-                    Histoire-Géographie
-                  </option>
-                  <option value="SVT">SVT</option>
-                  <option value="physique-chimie">Physique-Chimie</option>
-                  <option value="langues">Langues vivantes</option>
-                  <option value="philosophie">Philosophie</option>
-                  <option value="toutes les matières">
-                    Toutes les matières
-                  </option>
+                  {MATIERES.map((m) => (
+                    <option key={m.value} value={m.value}>
+                      {m.label}
+                    </option>
+                  ))}
                 </select>
               </div>
 
-              <div className="space-y-1.5">
-                <label className="text-xs font-medium text-slate-700">
-                  Objectif souhaité pour votre enfant
-                </label>
+              <div className="space-y-2">
+                <FieldLabel
+                  title="Objectif"
+                  required
+                  hint="Écrivez simplement, comme à un enseignant."
+                />
                 <textarea
                   value={objectif}
                   onChange={(e) => setObjectif(e.target.value)}
-                  className="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-900 shadow-inner focus:border-emerald-400 focus:outline-none focus:ring-2 focus:ring-emerald-100"
+                  className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-900 shadow-inner focus:border-emerald-400 focus:outline-none focus:ring-2 focus:ring-emerald-100"
                   rows={3}
-                  placeholder="Ex : L’aider à réviser un contrôle, reprendre les bases, préparer le brevet, retrouver confiance…"
+                  placeholder="Ex : réviser un contrôle, reprendre les bases, retrouver confiance…"
                 />
-                <p className="text-xs text-slate-500">
-                  Écrivez simplement, comme si vous expliquiez la situation à un
-                  enseignant.
-                </p>
               </div>
             </div>
 
             <div className="flex flex-wrap items-center gap-3 pt-1">
               <button
                 onClick={handleGenerate}
-                className="inline-flex items-center justify-center rounded-full bg-emerald-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:ring-offset-2 focus:ring-offset-emerald-50"
+                className="inline-flex items-center justify-center rounded-full bg-emerald-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-emerald-700 active:scale-[0.99]"
               >
                 Générer le prompt
               </button>
-              <p className="text-xs text-slate-500">
-                Vous pourrez ensuite le copier-coller dans EleveAI ou dans
-                l’outil de votre choix.
-              </p>
+
+              <button
+                onClick={handleCopy}
+                disabled={!generatedPrompt}
+                className="inline-flex items-center justify-center rounded-full border border-slate-200 bg-slate-50 px-4 py-2 text-xs font-semibold text-slate-700 shadow-sm transition hover:bg-slate-100 disabled:opacity-50"
+              >
+                {copied ? "✅ Copié" : "📋 Copier"}
+              </button>
             </div>
 
             {/* RESULTAT */}
             <div className="mt-6 space-y-3">
-              <div className="flex items-center justify-between gap-2">
-                <h3 className="text-sm font-semibold text-slate-900">
-                  Prompt généré
-                </h3>
-                <button
-                  onClick={handleCopy}
-                  disabled={!generatedPrompt}
-                  className="inline-flex items-center justify-center rounded-full border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs font-medium text-slate-700 shadow-sm transition hover:bg-slate-100 disabled:opacity-50"
-                >
-                  Copier le prompt
-                </button>
-              </div>
+              <h3 className="text-sm font-semibold text-slate-900">
+                Prompt généré
+              </h3>
+
+              {/* ✅ Tags accès tchat / ChatGPT / Mistral */}
+              <CollerDansTags prompt={generatedPrompt} onCopy={handleCopy} />
+
               <textarea
                 readOnly
                 value={generatedPrompt}
-                className="w-full min-h-[220px] rounded-2xl border border-slate-200 bg-slate-50 px-3 py-2 text-xs font-mono text-slate-900 shadow-inner"
-                placeholder="Remplissez le formulaire ci-dessus puis cliquez sur « Générer le prompt »."
+                className="w-full min-h-[240px] rounded-2xl border border-slate-200 bg-slate-50 px-3 py-2 text-xs font-mono text-slate-900 shadow-inner"
+                placeholder="Remplissez le formulaire puis cliquez sur « Générer le prompt »."
               />
             </div>
           </div>
@@ -612,4 +719,3 @@ Règles importantes :
     </main>
   );
 }
-
