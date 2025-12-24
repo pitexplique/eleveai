@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 
 export default function AccueilPage() {
   return (
@@ -24,8 +25,8 @@ export default function AccueilPage() {
             {/* Colonne gauche */}
             <div className="space-y-5">
               <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight">
-                Une IA utile ne donne pas les réponses.
-                <span className="block text-emerald-300">Elle fait apprendre.</span>
+                Génération de prompts Expert
+                <span className="block text-emerald-300">Gagnez du temps et de la précision</span>
               </h1>
 
               {/* Manifeste / règle */}
@@ -55,15 +56,9 @@ export default function AccueilPage() {
               {/* CTA */}
               <div className="flex flex-wrap gap-2 pt-1">
                 <Link
-                  href="/atelier-IA"
-                  className="inline-flex items-center justify-center gap-2 rounded-lg bg-emerald-500 px-4 py-2 text-sm font-semibold text-slate-950 hover:bg-emerald-400"
-                >
-                  🧪 Apprendre le cadre (Atelier-IA)
-                </Link>
-
-                <Link
                   href="/espace-profs"
-                  className="inline-flex items-center justify-center gap-2 rounded-lg border border-slate-600 bg-slate-900 px-4 py-2 text-sm font-semibold text-slate-50 hover:bg-slate-800"
+                      className="inline-flex items-center justify-center gap-2 rounded-lg bg-emerald-500 px-4 py-2 text-sm font-semibold text-slate-950 hover:bg-emerald-400"
+                  
                 >
                   📚 Créer un prompt prof
                 </Link>
@@ -81,6 +76,13 @@ export default function AccueilPage() {
                 >
                   🧩 Créer un prompt parent
                 </Link>
+
+                <Link
+                  href="/atelier-IA"
+                  className="inline-flex items-center justify-center gap-2 rounded-lg bg-emerald-500 px-4 py-2 text-sm font-semibold text-slate-950 hover:bg-emerald-400"
+                >
+                  🧪 Apprendre le cadre (Atelier-IA)
+                </Link>                
               </div>
 
               <p className="text-xs text-slate-500">
@@ -91,21 +93,6 @@ export default function AccueilPage() {
 
             {/* Colonne droite : Logo + sens */}
             <div className="space-y-3">
-              <div className="rounded-2xl border border-slate-800 bg-slate-900/40 p-5">
-                <img
-                  src="logo-epsilon.png"
-                  alt="ε → ∞ — Un détail pour tout changer"
-                  className="mx-auto h-44 w-auto opacity-90"
-                />
-                <p className="mt-4 text-center text-sm text-slate-300 leading-relaxed">
-                  <span className="font-semibold text-slate-100">ε → ∞</span> — un
-                  détail peut tout changer.
-                  <br />
-                  <span className="text-slate-400">
-                    Une bonne question ouvre le champ des possibles.
-                  </span>
-                </p>
-              </div>
 
               <div className="rounded-2xl border border-emerald-500/30 bg-emerald-500/10 px-4 py-3 shadow-lg shadow-emerald-900/30">
                 <p className="text-sm font-semibold text-emerald-100">
@@ -153,12 +140,6 @@ export default function AccueilPage() {
       <section className="border-b border-slate-800 bg-slate-950/70">
         <div className="mx-auto max-w-6xl px-4 py-8">
           <div className="grid gap-6 md:grid-cols-[1fr,2fr] items-center rounded-2xl border border-slate-800 bg-slate-900/60 p-6">
-            <img
-              src="/logo-epsilon.png"
-              alt="ε → ∞ — Un détail pour tout changer"
-              className="mx-auto h-28 w-auto opacity-90"
-            />
-
             <div className="space-y-2">
               <p className="text-sm font-semibold text-emerald-200">
                 Notre philosophie : humble, utile, ouverte.
@@ -175,6 +156,13 @@ export default function AccueilPage() {
                 Un détail bien posé peut ouvrir un champ immense — sans perdre le cadre.
               </p>
             </div>
+              <Image
+              width = "300"
+              height = "300"
+              src="/logo-epsilon.png"
+              alt="ε → ∞ — Un détail pour tout changer"
+              className="mx-auto h-28 w-auto opacity-90"
+            />
           </div>
         </div>
       </section>
