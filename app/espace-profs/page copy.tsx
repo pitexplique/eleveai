@@ -9,9 +9,6 @@ import { PresetCarousel, PresetCarouselItem } from "@/components/PresetCarousel"
 import SignupNudge from "@/components/SignupNudge";
 import { PROFS_PRESETS, ProfsPresetKey } from "@/data/profsPresets";
 
-// ✅ constantes partagées
-import { CLASSES, MATIERES } from "@/lib/constants/scolaire";
-
 import {
   Sparkles,
   RotateCcw,
@@ -31,12 +28,7 @@ import {
 } from "lucide-react";
 
 import type { MethodePedagogique } from "@/lib/pedagogie/methodes";
-import {
-  getMethodeDesc,
-  getMethodeLabel,
-  getMethodePromptBlock,
-  METHODES,
-} from "@/lib/pedagogie/methodes";
+import { getMethodeDesc, getMethodeLabel, getMethodePromptBlock, METHODES } from "@/lib/pedagogie/methodes";
 
 import type { TypeCategory } from "@/lib/pedagogie/types";
 import {
@@ -105,6 +97,21 @@ type PromptProf = {
    OPTIONS (catalogues simples)
 ---------------------------------------- */
 
+const CLASSES = ["6e", "5e", "4e", "3e", "Seconde", "Première", "Terminale"];
+
+const MATIERES = [
+  "Mathématiques",
+  "Français",
+  "Physique-Chimie",
+  "SVT",
+  "Histoire-Géographie",
+  "SES",
+  "Langues",
+  "Numérique/NSI",
+  "Philosophie",
+  "Autre",
+];
+
 const TONALITES: { id: Tonalite; label: string; hint: string }[] = [
   { id: "neutre", label: "Neutre", hint: "Clair et direct." },
   { id: "bienveillante", label: "Bienveillante", hint: "Encourageante, rassurante." },
@@ -113,33 +120,28 @@ const TONALITES: { id: Tonalite; label: string; hint: string }[] = [
   { id: "ludique", label: "Ludique", hint: "Ton plus léger (sans perdre la rigueur)." },
 ];
 
-const EVAL_OPTIONS: { id: ModaliteEvaluation; label: string; description: string }[] =
-  [
-    {
-      id: "evaluation_sommative",
-      label: "Évaluation sommative",
-      description:
-        "Notation + barème + critères. Progressivité, lisibilité, attendus conformes.",
-    },
-    {
-      id: "evaluation_formative",
-      label: "Évaluation formative",
-      description:
-        "Feedback + paliers + indices possibles. Sert à apprendre (et pas seulement noter).",
-    },
-    {
-      id: "evaluation_diagnostique",
-      label: "Évaluation diagnostique",
-      description:
-        "Repérage ciblé des prérequis et difficultés. Courte, précise, exploitable.",
-    },
-    {
-      id: "evaluation_differenciee",
-      label: "Évaluation différenciée",
-      description:
-        "2-3 parcours (base/standard/défi) ou choix d’exercices + barème adapté.",
-    },
-  ];
+const EVAL_OPTIONS: { id: ModaliteEvaluation; label: string; description: string }[] = [
+  {
+    id: "evaluation_sommative",
+    label: "Évaluation sommative",
+    description: "Notation + barème + critères. Progressivité, lisibilité, attendus conformes.",
+  },
+  {
+    id: "evaluation_formative",
+    label: "Évaluation formative",
+    description: "Feedback + paliers + indices possibles. Sert à apprendre (et pas seulement noter).",
+  },
+  {
+    id: "evaluation_diagnostique",
+    label: "Évaluation diagnostique",
+    description: "Repérage ciblé des prérequis et difficultés. Courte, précise, exploitable.",
+  },
+  {
+    id: "evaluation_differenciee",
+    label: "Évaluation différenciée",
+    description: "2-3 parcours (base/standard/défi) ou choix d’exercices + barème adapté.",
+  },
+];
 
 const THEME_OPTIONS: { id: ThemeAborde; label: string }[] = [
   { id: "ecologie", label: "Écologie" },
@@ -155,10 +157,7 @@ const THEME_OPTIONS: { id: ThemeAborde; label: string }[] = [
 ---------------------------------------- */
 
 const PROFS_PRESET_ITEMS: PresetCarouselItem[] = (
-  Object.entries(PROFS_PRESETS) as [
-    ProfsPresetKey,
-    (typeof PROFS_PRESETS)[ProfsPresetKey],
-  ][]
+  Object.entries(PROFS_PRESETS) as [ProfsPresetKey, (typeof PROFS_PRESETS)[ProfsPresetKey]][]
 ).map(([key, preset]) => ({
   id: key,
   label: preset.label,
@@ -170,10 +169,20 @@ const PROFS_PRESET_ITEMS: PresetCarouselItem[] = (
    HELPERS
 ---------------------------------------- */
 
+function uniqueKeepOrder(items: string[]) {
+  const seen = new Set<string>();
+  const out: string[] = [];
+  for (const it of items) {
+    if (!seen.has(it)) {
+      seen.add(it);
+      out.push(it);
+    }
+  }
+  return out;
+}
+
 function getEvalLabel(id: ModaliteEvaluation) {
-  return (
-    EVAL_OPTIONS.find((e) => e.id === id)?.label ?? "Évaluation sommative"
-  );
+  return EVAL_OPTIONS.find((e) => e.id === id)?.label ?? "Évaluation sommative";
 }
 function getEvalDesc(id: ModaliteEvaluation) {
   return EVAL_OPTIONS.find((e) => e.id === id)?.description ?? "";
@@ -214,7 +223,7 @@ function blocWordDesign(style: OutputStyle) {
 }
 
 /* ----------------------------------------
-   PROMPT
+   PROMPT (consomme pedagogie/types.ts + methodes.ts)
 ---------------------------------------- */
 
 function construirePrompt(form: PromptProf): string {
@@ -223,18 +232,12 @@ function construirePrompt(form: PromptProf): string {
   const typeDesc = typeItem?.description ?? "";
 
   const blocTags =
-    form.tags.length > 0
-      ? `Mots-clés pédagogiques : ${form.tags.join(", ")}.\n`
-      : "";
+    form.tags.length > 0 ? `Mots-clés pédagogiques : ${form.tags.join(", ")}.\n` : "";
   const blocAuteur = form.auteur ? `Préparé par : ${form.auteur}.\n` : "";
 
   const blocThemes =
-    (form.themes?.length
-      ? `Thèmes à intégrer : ${form.themes.join(", ")}.\n`
-      : "") +
-    (form.themesLabel?.trim()
-      ? `Contexte / angle : ${form.themesLabel.trim()}.\n`
-      : "");
+    (form.themes?.length ? `Thèmes à intégrer : ${form.themes.join(", ")}.\n` : "") +
+    (form.themesLabel?.trim() ? `Contexte / angle : ${form.themesLabel.trim()}.\n` : "");
   const blocContexteThemes = blocThemes.trim().length ? `\n${blocThemes}\n` : "";
 
   const blocEduscol =
@@ -244,13 +247,9 @@ function construirePrompt(form: PromptProf): string {
     ? "Neurosciences : activer prérequis, petites étapes, alternance explications/questions, récapitulatif, reformulation.\n\n"
     : "";
 
-  const matiereScientifique = [
-    "Mathématiques",
-    "Physique-Chimie",
-    "SVT",
-    "Numérique/NSI",
-  ].includes(form.matiere);
-
+  const matiereScientifique = ["Mathématiques", "Physique-Chimie", "SVT", "Numérique/NSI"].includes(
+    form.matiere,
+  );
   const blocSansLatex = matiereScientifique
     ? 'Sans LaTeX (pas de \\frac, \\sqrt). Fractions a/b, puissances x^2 ou "x au carré".\n\n'
     : "";
@@ -259,8 +258,7 @@ function construirePrompt(form: PromptProf): string {
     ? "Adapter DYS : phrases courtes, aération, vocabulaire expliqué, éviter doubles négations.\n\n"
     : "";
 
-  const dur =
-    form.dureeMin && form.dureeMin > 0 ? `${form.dureeMin} min` : "non précisée";
+  const dur = form.dureeMin && form.dureeMin > 0 ? `${form.dureeMin} min` : "non précisée";
   const tone = form.tonalite || "neutre";
 
   const blocCalibrage =
@@ -276,7 +274,10 @@ function construirePrompt(form: PromptProf): string {
       "- Sortie Word : en-tête (classe/durée), exercices numérotés, espaces réponses, total points.\n\n"
     : "";
 
-  const blocMethode = estEval ? "" : getMethodePromptBlock(form.methode);
+  // ✅ méthode uniquement si pas évaluation
+  const blocMethode = estEval
+    ? ""
+    : getMethodePromptBlock(form.methode);
 
   const blocStructureSeance =
     typeItem?.category === "seance"
@@ -302,9 +303,7 @@ function construirePrompt(form: PromptProf): string {
     blocNeuro +
     blocSansLatex +
     blocCalibrage +
-    (typeDesc
-      ? `Type choisi : ${typeLabel} — ${typeDesc}\n\n`
-      : `Type choisi : ${typeLabel}\n\n`) +
+    (typeDesc ? `Type choisi : ${typeLabel} — ${typeDesc}\n\n` : `Type choisi : ${typeLabel}\n\n`) +
     blocEvaluation +
     blocMethode +
     blocWord +
@@ -366,7 +365,7 @@ export default function ProfsPage() {
       classe: "",
       matiere: "",
       niveau: "standard",
-      typeId: "seance_cle_en_main",
+      typeId: "seance_cle_en_main", // ✅ default : un vrai id du catalogue
       contenu: "",
       tags: [],
       adaptationDYS: true,
@@ -402,6 +401,7 @@ export default function ProfsPage() {
   const [nudgeSignal, setNudgeSignal] = useState(0);
   const triggerNudge = useCallback(() => setNudgeSignal((n) => n + 1), []);
 
+  // DB preset / historique
   const [dbMsg, setDbMsg] = useState<string>("");
   const [lastPresetId, setLastPresetId] = useState<string | null>(null);
   const [isAuthed, setIsAuthed] = useState(false);
@@ -414,6 +414,7 @@ export default function ProfsPage() {
   const [historyLoading, setHistoryLoading] = useState(false);
   const [runs, setRuns] = useState<DbRunEmail[]>([]);
 
+  // ✅ UX types
   const [typeCategory, setTypeCategory] = useState<TypeCategory>("seance");
   const [typeQuery, setTypeQuery] = useState("");
 
@@ -476,13 +477,13 @@ export default function ProfsPage() {
         const next: PromptProf = {
           ...prev,
           ...v,
+          // compat : si l’ancien preset a "type" (string), on ignore, on garde typeId
           typeId: v.typeId ?? prev.typeId,
           methode: (v.methode ?? prev.methode) as MethodePedagogique,
           outputStyle: (v.outputStyle ?? prev.outputStyle) as OutputStyle,
           dureeMin: v.dureeMin ?? prev.dureeMin,
           tonalite: (v.tonalite ?? prev.tonalite) as Tonalite,
-          modaliteEvaluation:
-            (v.modaliteEvaluation ?? prev.modaliteEvaluation) as ModaliteEvaluation,
+          modaliteEvaluation: (v.modaliteEvaluation ?? prev.modaliteEvaluation) as ModaliteEvaluation,
           themes: v.themes ?? prev.themes,
           themesLabel: v.themesLabel ?? prev.themesLabel,
           tags: v.tags ?? prev.tags,
@@ -511,8 +512,10 @@ export default function ProfsPage() {
     setTypeQuery("");
   }, [clearOutputs, makeInitialForm]);
 
+  // ✅ types filtrés depuis lib/pedagogie/types.ts
   const typesDisponibles = useMemo(() => {
     const all = getTypesForContext({ classe: form.classe, matiere: form.matiere });
+
     const byCat = all.filter((t) => t.category === typeCategory);
 
     const q = typeQuery.trim().toLowerCase();
@@ -529,40 +532,45 @@ export default function ProfsPage() {
   const selectedType = useMemo(() => getTypeById(form.typeId), [form.typeId]);
   const estEval = selectedType?.category === "evaluation";
 
-  const selectType = useCallback(
-    (typeId: string) => {
-      const t = getTypeById(typeId);
+  // ✅ auto-règles lorsqu’on choisit un type
+  const selectType = useCallback((typeId: string) => {
+    const t = getTypeById(typeId);
 
-      setForm((prev) => {
-        let next: PromptProf = { ...prev, typeId };
+    setForm((prev) => {
+      let next: PromptProf = { ...prev, typeId };
 
-        if (t?.defaultDureeMin !== undefined && t.defaultDureeMin !== null) {
-          if (!prev.dureeMin || prev.dureeMin <= 0) next.dureeMin = t.defaultDureeMin;
-        }
+      if (t?.defaultDureeMin !== undefined && t.defaultDureeMin !== null) {
+        // uniquement si l’utilisateur n’a pas mis une durée "significative"
+        if (!prev.dureeMin || prev.dureeMin <= 0) next.dureeMin = t.defaultDureeMin;
+      }
 
-        if (t?.auto?.forceOutputStyle) next.outputStyle = t.auto.forceOutputStyle;
+      if (t?.auto?.forceOutputStyle) next.outputStyle = t.auto.forceOutputStyle;
 
-        return next;
-      });
+      return next;
+    });
 
-      if (t?.auto?.openEvalPanel) setShowEval(true);
-      if (t?.auto?.hideMethodePanel) setShowMethode(false);
+    // actions UI
+    if (t?.auto?.openEvalPanel) setShowEval(true);
+    if (t?.auto?.hideMethodePanel) setShowMethode(false);
 
-      clearOutputs();
-    },
-    [clearOutputs],
-  );
+    clearOutputs();
+  }, [clearOutputs]);
 
+  // suggestions UX (simples)
   const suggestions = useMemo(() => {
     const s: string[] = [];
     if (!form.objectifPedagogique.trim())
       s.push("Précise l’objectif : ce que l’élève doit savoir faire.");
-    if (!form.classe) s.push("Choisis une classe : vocabulaire + attendus mieux calibrés.");
-    if (!form.matiere) s.push("Indique la matière : l’IA restera dans le bon cadre.");
-    if (!form.typeId) s.push("Choisis un type : ça fixe la structure (séance, fiche, évaluation…).");
+    if (!form.classe)
+      s.push("Choisis une classe : vocabulaire + attendus mieux calibrés.");
+    if (!form.matiere)
+      s.push("Indique la matière : l’IA restera dans le bon cadre.");
+    if (!form.typeId)
+      s.push("Choisis un type : ça fixe la structure (séance, fiche, évaluation…).");
     if (form.contenu.trim().length < 40)
       s.push("Consigne trop courte : ajoute durée, contraintes, barème, exemple attendu.");
-    if (!form.dureeMin || form.dureeMin <= 0) s.push("Ajoute une durée : ça calibre la production.");
+    if (!form.dureeMin || form.dureeMin <= 0)
+      s.push("Ajoute une durée : ça calibre la production.");
 
     if (estEval) {
       s.push("Mode évaluation : barème + critères + différenciation base/standard/défi.");
@@ -571,8 +579,10 @@ export default function ProfsPage() {
       s.push("Choisis une méthode pédagogique : ça structure la progression et les questions.");
     }
 
-    if ((form.themes?.length ?? 0) === 0) s.push("Ajoute 1-2 thèmes : exemples concrets + motivation.");
-    if (!form.themesLabel.trim()) s.push("Ajoute un angle (ex : La Réunion) pour contextualiser.");
+    if ((form.themes?.length ?? 0) === 0)
+      s.push("Ajoute 1-2 thèmes : exemples concrets + motivation.");
+    if (!form.themesLabel.trim())
+      s.push("Ajoute un angle (ex : La Réunion) pour contextualiser.");
 
     if (s.length === 0)
       s.push("Parfait. Tu peux ajouter : matériel, contraintes, exemple de production attendue.");
@@ -586,7 +596,8 @@ export default function ProfsPage() {
 
   const getAuthUserIdOrThrow = useCallback(async () => {
     const { data, error } = await supabase.auth.getUser();
-    if (error || !data?.user) throw new Error("Tu dois être connecté pour utiliser les presets.");
+    if (error || !data?.user)
+      throw new Error("Tu dois être connecté pour utiliser les presets.");
     return data.user.id;
   }, [supabase]);
 
@@ -698,23 +709,20 @@ export default function ProfsPage() {
     }
   }, [getAuthUserIdOrThrow, supabase]);
 
-  const createRun = useCallback(
-    async (presetId: string | null) => {
-      try {
-        const uid = await getAuthUserIdOrThrow();
-        const { error } = await supabase.from("preset_runs_email").insert({
-          auth_user_id: uid,
-          preset_id: presetId,
-          classe: form.classe || null,
-          matiere: form.matiere || null,
-        });
-        if (error) throw new Error(error.message);
-      } catch {
-        // pas bloquant UX
-      }
-    },
-    [form.classe, form.matiere, getAuthUserIdOrThrow, supabase],
-  );
+  const createRun = useCallback(async (presetId: string | null) => {
+    try {
+      const uid = await getAuthUserIdOrThrow();
+      const { error } = await supabase.from("preset_runs_email").insert({
+        auth_user_id: uid,
+        preset_id: presetId,
+        classe: form.classe || null,
+        matiere: form.matiere || null,
+      });
+      if (error) throw new Error(error.message);
+    } catch {
+      // pas bloquant UX
+    }
+  }, [form.classe, form.matiere, getAuthUserIdOrThrow, supabase]);
 
   /* ----------------------------------------
      ACTIONS IA
@@ -750,7 +758,8 @@ export default function ProfsPage() {
 
       await createRun(lastPresetId);
     } catch (err: unknown) {
-      const msg = err instanceof Error ? err.message : "Erreur inconnue (vérifie le serveur / API).";
+      const msg =
+        err instanceof Error ? err.message : "Erreur inconnue (vérifie le serveur / API).";
       setAgentError(msg);
     } finally {
       setAgentLoading(false);
@@ -928,9 +937,7 @@ export default function ProfsPage() {
                 >
                   <option value="">Choisir…</option>
                   {CLASSES.map((c) => (
-                    <option key={c.value} value={c.value}>
-                      {c.label}
-                    </option>
+                    <option key={c} value={c}>{c}</option>
                   ))}
                 </select>
               </div>
@@ -944,9 +951,7 @@ export default function ProfsPage() {
                 >
                   <option value="">Choisir…</option>
                   {MATIERES.map((m) => (
-                    <option key={m.value} value={m.value}>
-                      {m.label}
-                    </option>
+                    <option key={m} value={m}>{m}</option>
                   ))}
                 </select>
               </div>
@@ -976,9 +981,7 @@ export default function ProfsPage() {
                   type="number"
                   min={0}
                   value={form.dureeMin}
-                  onChange={(e) =>
-                    handleChange("dureeMin", Math.max(0, Number(e.target.value || 0)))
-                  }
+                  onChange={(e) => handleChange("dureeMin", Math.max(0, Number(e.target.value || 0)))}
                   className="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-sky-300"
                   placeholder="Ex : 45"
                 />
@@ -993,9 +996,7 @@ export default function ProfsPage() {
                   className="w-full border rounded-lg px-3 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-sky-300"
                 >
                   {TONALITES.map((t) => (
-                    <option key={t.id} value={t.id}>
-                      {t.label}
-                    </option>
+                    <option key={t.id} value={t.id}>{t.label}</option>
                   ))}
                 </select>
                 <p className="text-[11px] text-gray-500">
@@ -1035,13 +1036,14 @@ export default function ProfsPage() {
               </div>
             </div>
 
-            {/* ✅ TYPES UX */}
+            {/* ✅ TYPES UX (categories + search + cards) */}
             <div className="space-y-2">
               <label className="text-xs font-semibold text-gray-600 flex items-center gap-2">
                 <LayoutGrid className="w-4 h-4" />
                 Type de ressource (catalogue)
               </label>
 
+              {/* tabs catégories */}
               <div className="flex flex-wrap gap-2">
                 {TYPE_CATEGORIES.map((c) => {
                   const active = typeCategory === c.id;
@@ -1062,6 +1064,7 @@ export default function ProfsPage() {
                 })}
               </div>
 
+              {/* recherche */}
               <div className="relative">
                 <Search className="w-4 h-4 text-slate-500 absolute left-3 top-1/2 -translate-y-1/2" />
                 <input
@@ -1072,6 +1075,7 @@ export default function ProfsPage() {
                 />
               </div>
 
+              {/* cartes types */}
               <div className="grid gap-2 sm:grid-cols-2">
                 {typesDisponibles.map((t) => {
                   const active = form.typeId === t.id;
@@ -1126,6 +1130,7 @@ export default function ProfsPage() {
                 })}
               </div>
 
+              {/* résumé du type choisi */}
               <div className="rounded-xl border border-slate-200 bg-slate-50 px-3 py-2">
                 <p className="text-xs font-semibold text-slate-800">
                   Type sélectionné : {selectedType?.label ?? "—"}
@@ -1148,11 +1153,7 @@ export default function ProfsPage() {
                     onClick={() => setShowEval((v) => !v)}
                     className="text-[11px] font-semibold rounded-lg border border-slate-200 bg-white px-2 py-1 hover:bg-slate-50 inline-flex items-center gap-1"
                   >
-                    {showEval ? (
-                      <ChevronUp className="w-4 h-4" />
-                    ) : (
-                      <ChevronDown className="w-4 h-4" />
-                    )}
+                    {showEval ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
                     {showEval ? "Réduire" : "Modifier"}
                   </button>
                 </div>
@@ -1165,8 +1166,7 @@ export default function ProfsPage() {
                     {getEvalDesc(form.modaliteEvaluation)}
                   </p>
                   <p className="mt-2 text-[11px] text-amber-900">
-                    ✅ Le prompt générera : barème, critères, consignes, progressivité,
-                    différenciation.
+                    ✅ Le prompt générera : barème, critères, consignes, progressivité, différenciation.
                   </p>
                 </div>
 
@@ -1211,11 +1211,7 @@ export default function ProfsPage() {
                       onClick={() => setShowMethode((v) => !v)}
                       className="text-[11px] font-semibold rounded-lg border border-slate-200 bg-white px-2 py-1 hover:bg-slate-50 inline-flex items-center gap-1"
                     >
-                      {showMethode ? (
-                        <ChevronUp className="w-4 h-4" />
-                      ) : (
-                        <ChevronDown className="w-4 h-4" />
-                      )}
+                      {showMethode ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
                       {showMethode ? "Réduire" : "Modifier"}
                     </button>
                   </div>
@@ -1303,8 +1299,7 @@ export default function ProfsPage() {
               />
               {form.tags.length > 0 && (
                 <p className="text-[11px] text-gray-500">
-                  Pris en compte :{" "}
-                  <span className="font-semibold">{form.tags.join(", ")}</span>
+                  Pris en compte : <span className="font-semibold">{form.tags.join(", ")}</span>
                 </p>
               )}
             </div>
@@ -1432,9 +1427,7 @@ export default function ProfsPage() {
 
             <div className="bg-white/95 border border-slate-200 rounded-2xl shadow-sm p-5 sm:p-6 space-y-4">
               <div className="flex items-center justify-between gap-2">
-                <h2 className="text-lg font-bold text-[#0047B6]">
-                  3️⃣ Prompt EleveAI (à copier-coller)
-                </h2>
+                <h2 className="text-lg font-bold text-[#0047B6]">3️⃣ Prompt EleveAI (à copier-coller)</h2>
 
                 <div className="flex items-center gap-2">
                   <button
@@ -1456,11 +1449,7 @@ export default function ProfsPage() {
                     onClick={() => setShowPromptInterne((v) => !v)}
                     className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-[11px] font-semibold bg-white border border-slate-300 hover:bg-slate-50"
                   >
-                    {showPromptInterne ? (
-                      <EyeOff className="w-4 h-4" />
-                    ) : (
-                      <Eye className="w-4 h-4" />
-                    )}
+                    {showPromptInterne ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                     {showPromptInterne ? "Masquer" : "Afficher"}
                   </button>
                 </div>
@@ -1523,9 +1512,7 @@ export default function ProfsPage() {
 
             <div className="bg-white/95 border border-slate-200 rounded-2xl shadow-sm p-5 sm:p-6 space-y-4">
               <div className="flex items-center justify-between gap-2">
-                <h2 className="text-lg font-bold text-[#0047B6]">
-                  4️⃣ Ressource générée (agent IA)
-                </h2>
+                <h2 className="text-lg font-bold text-[#0047B6]">4️⃣ Ressource générée (agent IA)</h2>
 
                 <button
                   type="button"
@@ -1545,9 +1532,7 @@ export default function ProfsPage() {
               {agentError && <p className="text-xs text-red-600">⚠️ {agentError}</p>}
 
               <div className="eleveai-math border rounded p-3 min-h-[180px] bg-slate-50 text-sm whitespace-pre-wrap">
-                {agentLoading ? (
-                  "Réflexion en cours..."
-                ) : agentOutput ? (
+                {agentLoading ? "Réflexion en cours..." : agentOutput ? (
                   <MarkdownMath>{agentOutput}</MarkdownMath>
                 ) : (
                   "La ressource apparaîtra ici."
@@ -1666,7 +1651,10 @@ export default function ProfsPage() {
               ) : (
                 <div className="space-y-2">
                   {runs.map((r) => (
-                    <div key={r.id} className="border rounded-xl p-3 flex items-start justify-between gap-3">
+                    <div
+                      key={r.id}
+                      className="border rounded-xl p-3 flex items-start justify-between gap-3"
+                    >
                       <div>
                         <div className="font-semibold text-slate-900">
                           {r.classe || "—"} • {r.matiere || "—"}
@@ -1680,7 +1668,9 @@ export default function ProfsPage() {
                             <span>Preset non lié (génération sans enregistrement)</span>
                           )}
                           {" • "}
-                          <span className="font-mono">{new Date(r.created_at).toLocaleString()}</span>
+                          <span className="font-mono">
+                            {new Date(r.created_at).toLocaleString()}
+                          </span>
                         </div>
                       </div>
                     </div>

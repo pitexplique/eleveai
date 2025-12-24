@@ -156,13 +156,14 @@ export default function AccueilPage() {
                 Un détail bien posé peut ouvrir un champ immense — sans perdre le cadre.
               </p>
             </div>
-              <Image
-              width = "300"
-              height = "300"
-              src="/logo-epsilon.png"
-              alt="ε → ∞ — Un détail pour tout changer"
-              className="mx-auto h-28 w-auto opacity-90"
-            />
+          <Image
+            src="/logo-epsilon.png"
+            alt="ε → ∞ — Un détail pour tout changer"
+            width={250}
+            height={250}
+            className="mx-auto h-[250px] w-auto opacity-90"
+          />
+
           </div>
         </div>
       </section>

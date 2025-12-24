@@ -30,6 +30,9 @@ import {
   ProfilEleve,
 } from "@/data/elevesPresets";
 
+// ✅ constantes partagées (format { value, label })
+import { CLASSES, MATIERES } from "@/lib/constants/scolaire";
+
 export const dynamic = "force-dynamic";
 
 /* ----------------------------------------
@@ -44,20 +47,6 @@ type PromptEleve = PromptEleveBase & {
 /* ----------------------------------------
    LISTES
 ---------------------------------------- */
-
-const CLASSES: Classe[] = ["6e", "5e", "4e", "3e", "Seconde", "Première", "Terminale"];
-
-const MATIERES = [
-  "Mathématiques",
-  "Français",
-  "Physique-Chimie",
-  "SVT",
-  "Histoire-Géographie",
-  "SES",
-  "Langues",
-  "Numérique/NSI",
-  "Autre",
-];
 
 const TYPE_AIDE_CARDS: {
   value: TypeAide;
@@ -515,15 +504,16 @@ export default function ElevePage() {
                 <select
                   value={form.classe}
                   onChange={(e) => {
-                    handleChange("classe", e.target.value as Classe);
+                    // ⚠️ cast tolérant si Classe est un union strict
+                    handleChange("classe", e.target.value as any as Classe);
                     showToast("✅ Classe choisie");
                   }}
                   className="w-full border rounded-lg px-3 py-2 text-sm bg-white"
                 >
                   <option value="">Choisir…</option>
                   {CLASSES.map((c) => (
-                    <option key={c} value={c}>
-                      {c}
+                    <option key={c.value} value={c.value}>
+                      {c.label}
                     </option>
                   ))}
                 </select>
@@ -541,8 +531,8 @@ export default function ElevePage() {
                 >
                   <option value="">Choisir…</option>
                   {MATIERES.map((m) => (
-                    <option key={m} value={m}>
-                      {m}
+                    <option key={m.value} value={m.value}>
+                      {m.label}
                     </option>
                   ))}
                 </select>
