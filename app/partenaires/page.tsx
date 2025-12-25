@@ -1,14 +1,27 @@
 "use client";
 
 import Link from "next/link";
+import React, { useState } from "react";
 
-export default function PartenairesPage() {
+export default function PartenairesPage(): JSX.Element {
+  const EMAIL = "Frederic.Lacoste@ac-reunion.fr";
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(EMAIL);
+      setCopied(true);
+      window.setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.error("Erreur copie email :", err);
+    }
+  };
+
   return (
     <main className="min-h-screen bg-slate-950 text-slate-50">
       {/* HERO */}
       <section className="border-b border-slate-800 bg-gradient-to-b from-slate-900/60 to-slate-950">
         <div className="mx-auto max-w-4xl px-4 py-12 sm:py-16 space-y-8">
-          {/* Breadcrumb */}
           <div className="text-sm text-slate-400 flex items-center gap-2">
             <Link href="/" className="hover:text-emerald-300 transition">
               Accueil
@@ -22,14 +35,13 @@ export default function PartenairesPage() {
               EleveAI · Projet éducatif à La Réunion
             </p>
 
-            <h1 className="text-3xl sm:text-4xl font-bold tracking-tight text-slate-50">
+            <h1 className="text-3xl sm:text-4xl font-bold tracking-tight">
               Partenaires & sponsors
             </h1>
 
             <p className="max-w-2xl text-slate-300">
-              EleveAI est un projet indépendant, conçu à La Réunion, qui a besoin
-              d’alliés : établissements, institutions, associations, entreprises et
-              acteurs locaux engagés pour l’éducation et l’innovation.
+              EleveAI est un projet indépendant, conçu à La Réunion, qui défend une
+              IA éducative responsable, au service réel des élèves et des enseignants.
             </p>
           </header>
         </div>
@@ -37,114 +49,68 @@ export default function PartenairesPage() {
 
       {/* CONTENU */}
       <section className="mx-auto max-w-4xl px-4 py-10 sm:py-12 space-y-8">
-        {/* Pourquoi devenir partenaire */}
-        <div className="grid gap-6 sm:grid-cols-[1.5fr,1fr]">
-          <div className="rounded-2xl border border-slate-800 bg-slate-900/70 p-5 sm:p-6 space-y-4">
-            <h2 className="text-xl font-semibold text-slate-50">
-              Pourquoi devenir partenaire ?
-            </h2>
-            <p className="text-sm text-slate-300">
-              En soutenant EleveAI, vous contribuez directement à{" "}
-              <span className="font-medium">
-                améliorer la réussite des élèves de l’île de La Réunion
-              </span>{" "}
-              grâce à des outils pédagogiques innovants, mais aussi à{" "}
-              <span className="font-medium">
-                former et impliquer les jeunes dans l’IA et le numérique éducatif
-              </span>
-              .
-            </p>
-            <ul className="space-y-2 text-sm text-slate-200">
-              <li>• Accès à des outils pédagogiques IA responsables.</li>
-              <li>• Réduction des inégalités scolaires.</li>
-              <li>• Formation des élèves aux usages éclairés de l’IA.</li>
-              <li>• Accompagnement des enseignants et des équipes éducatives.</li>
-              <li>• Développement de compétences numériques locales.</li>
-            </ul>
-          </div>
-
-          <div className="rounded-2xl border border-emerald-500/40 bg-slate-900/70 p-5 sm:p-6 space-y-3">
-            <h3 className="text-lg font-semibold text-emerald-300">
-              Types de soutien possibles
-            </h3>
-            <ul className="space-y-2 text-sm text-slate-200">
-              <li>• Financement des API en pèriode de test.</li>
-              <li>• Soutien matériel (équipement, licences, hébergement).</li>
-              <li>• Partenariats techniques ou pédagogiques.</li>
-              <li>• Mécénat de compétences.</li>
-            </ul>
-          </div>
-        </div>
-
-        {/* Partenaires institutionnels / pros */}
-        <div className="grid gap-6 sm:grid-cols-2">
-          <div className="rounded-2xl border border-slate-800 bg-slate-900/70 p-5 sm:p-6 space-y-3">
-            <h2 className="text-lg font-semibold text-slate-50">
-              Partenaires institutionnels
-            </h2>
-            <p className="text-sm text-slate-300">
-              EleveAI a vocation à travailler en cohérence avec les{" "}
-              <span className="font-medium">établissements scolaires</span> et les{" "}
-              <span className="font-medium">structures académiques</span> qui
-              réfléchissent aux usages responsables de l’IA.
-            </p>
-            <ul className="mt-2 space-y-2 text-sm text-slate-200">
-              <li>• Collèges et lycées de l’académie de La Réunion.</li>
-              <li>• Groupes de réflexion IA</li>
-              <li>• Services académiques souhaitant expérimenter des outils.</li>
-            </ul>
-          </div>
-
-          <div className="rounded-2xl border border-slate-800 bg-slate-900/70 p-5 sm:p-6 space-y-3">
-            <h2 className="text-lg font-semibold text-slate-50">
-              Partenaires professionnels
-            </h2>
-            <p className="text-sm text-slate-300">
-              Les entreprises et associations locales peuvent contribuer à{" "}
-              <span className="font-medium">
-                structurer une filière réunionnaise de l’IA éducative
-              </span>{" "}
-              et à créer des opportunités pour les jeunes.
-            </p>
-            <ul className="mt-2 space-y-2 text-sm text-slate-200">
-              <li>• Entreprises du numérique et de la formation.</li>
-              <li>• Associations éducatives et citoyennes.</li>
-              <li>• Acteurs engagés dans la responsabilité sociale.</li>
-            </ul>
-          </div>
-        </div>
-
-        {/* Sponsors */}
-        <div className="rounded-2xl border border-slate-800 bg-slate-900/70 p-5 sm:p-6 space-y-4">
-          <h2 className="text-xl font-semibold text-slate-50">
-            Sponsors : soutenir des actions concrètes
+        {/* Philosophie */}
+        <div className="rounded-2xl border border-emerald-500/30 bg-slate-900/70 p-6 space-y-4">
+          <h2 className="text-xl font-semibold">
+            Notre philosophie : une IA qui fait réfléchir
           </h2>
+
           <p className="text-sm text-slate-300">
-            Les sponsors contribuent au financement d’actions très concrètes :
+            EleveAI part d’un principe simple :{" "}
+            <span className="font-medium text-slate-100">
+              l’IA est utile si elle aide à comprendre, pas si elle fait à la place
+            </span>
+            .
           </p>
+
           <ul className="space-y-2 text-sm text-slate-200">
-            <li>• Production de vidéos pédagogiques et ressources élèves.</li>
-            <li>• Développement de fonctionnalités nouvelles d’EleveAI.</li>
-            <li>• Formation et implication de jeunes de l’île dans le projet.</li>
+            <li>• poser des questions plutôt que donner des réponses toutes faites ;</li>
+            <li>• encourager l’erreur comme étape d’apprentissage ;</li>
+            <li>• préserver l’autonomie et la confiance des élèves.</li>
           </ul>
 
+          <p className="text-sm text-slate-300">
+            EleveAI s’inscrit dans une démarche d’{" "}
+            <span className="font-medium text-slate-100">
+              IA autorisée mais encadrée
+            </span>
+            , compatible avec le cadre scolaire et le rôle central de l’enseignant.
+          </p>
         </div>
 
-        {/* Contact partenariat */}
-        <div className="rounded-2xl border border-emerald-500/40 bg-slate-900/80 p-5 sm:p-6 space-y-3">
+        {/* Contact */}
+        <div className="rounded-2xl border border-emerald-500/40 bg-slate-900/80 p-6 space-y-4">
           <h2 className="text-lg font-semibold text-emerald-300">
             Devenir partenaire ou sponsor
           </h2>
+
           <p className="text-sm text-slate-300">
-            Vous souhaitez soutenir EleveAI, proposer une collaboration ou financer une
-            action pour les élèves de La Réunion ?
+            Vous souhaitez soutenir EleveAI, proposer une collaboration ou financer
+            une action pour les élèves de La Réunion ?
           </p>
-          <a
-            href="mailto:frederic.lacoste@ac-reunion.fr"
-            className="inline-flex items-center rounded-xl border border-emerald-500/60 bg-emerald-500/10 px-3 py-2 text-sm font-medium text-emerald-200 hover:bg-emerald-500/20 transition"
-          >
-            Contacter EleveAI · frederic.lacoste@ac-reunion.fr
-          </a>
+
+          <div className="flex flex-col sm:flex-row gap-3">
+            <button
+              type="button"
+              onClick={handleCopy}
+              className="inline-flex items-center justify-center rounded-xl border border-emerald-500/60 bg-emerald-500/10 px-4 py-2 text-sm font-medium text-emerald-200 hover:bg-emerald-500/20 transition"
+            >
+              {copied ? "✅ Copié !" : `📧 ${EMAIL}`}
+            </button>
+
+            <a
+              href="https://wa.me/262692742958"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center rounded-xl border border-green-500/60 bg-green-500/10 px-4 py-2 text-sm font-medium text-green-200 hover:bg-green-500/20 transition"
+            >
+              💬 Contacter via WhatsApp
+            </a>
+          </div>
+
+          <p className="text-xs text-slate-400">
+            Réponse humaine · Pas de bot · Échange confidentiel
+          </p>
         </div>
       </section>
     </main>

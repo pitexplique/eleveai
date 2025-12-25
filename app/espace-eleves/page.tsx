@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { PresetCarousel, PresetCarouselItem } from "@/components/PresetCarousel";
 import { createClient } from "@/lib/supabase/client";
+
 import {
   Sparkles,
   RotateCcw,
@@ -150,7 +151,8 @@ function labelProfil(p: ProfilEleve) {
 
 export default function ElevePage() {
   const router = useRouter();
-  const supabase = createClient();
+  const supabase = useMemo(() => createClient(), []);
+
 
   // ✅ Toast
   const [toast, setToast] = useState<string | null>(null);

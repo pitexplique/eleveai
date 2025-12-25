@@ -9,21 +9,31 @@ export type MethodePedagogique =
   | "par_problemes"
   | "cooperative"
   | "ludique"
-  | "magistrale";
+  | "magistrale"
+  | "mix"
+  | "aucune";
 
-export type MethodeOption = {
+export type MethodeOption = Readonly<{
   id: MethodePedagogique;
   label: string;
   description: string;
   // bloc “instructions” injecté dans le prompt (pour guider l’IA)
   promptBlock: string;
-};
+}>;
+
+/**
+ * ✅ Méthode par défaut (choisie explicitement, au lieu de dépendre de METHODES[0])
+ */
+export const DEFAULT_METHODE: MethodePedagogique = "methode_active";
 
 /**
  * ✅ Catalogue unique des méthodes pédagogiques EleveAI
  * (réutilisable profs / élèves / parents).
+ *
+ * - "mix" : séance réaliste (active → explicite → entraînement → bilan)
+ * - "aucune" : n’impose pas de méthode (utile quand le prof veut juste une ressource)
  */
-export const METHODES: MethodeOption[] = [
+export const METHODES: ReadonlyArray<MethodeOption> = [
   {
     id: "methode_active",
     label: "Méthode active",
@@ -35,6 +45,30 @@ export const METHODES: MethodeOption[] = [
       "- Tu alternes : (1) question, (2) indice si besoin, (3) correction expliquée, (4) mini-exercice immédiat.\n" +
       "- Tu ajoutes des pauses cognitives : « Stop 20 secondes : cherche ».\n" +
       "- Tu termines par : récapitulatif + 1 question métacognitive (« Qu’est-ce qui t’a aidé ? »).\n\n",
+  },
+  {
+    id: "mix",
+    label: "Mix (séance complète réaliste)",
+    description:
+      "Une séance “comme en vrai” : actif → explicite → entraînement → bilan (avec timing).",
+    promptBlock:
+      "MÉTHODE PÉDAGOGIQUE : MIX (séance complète)\n" +
+      "- Structure en 4 temps :\n" +
+      "  1) ACTIF (accroche + recherche guidée) : questions courtes + essais + feedback.\n" +
+      "  2) EXPLICITE (institutionnalisation) : règle/trace écrite claire + 1 exemple modèle.\n" +
+      "  3) ENTRAÎNEMENT : exercices base/standard/défi + correction.\n" +
+      "  4) BILAN : mini-récap + 2 questions flash + 1 question métacognitive.\n" +
+      "- Indique le temps conseillé pour chaque phase.\n\n",
+  },
+  {
+    id: "aucune",
+    label: "Aucune (ne pas imposer)",
+    description:
+      "Tu n’imposes pas de pédagogie : tu respectes surtout le type, les contraintes et la clarté.",
+    promptBlock:
+      "MÉTHODE PÉDAGOGIQUE : AUCUNE\n" +
+      "- Ne pas imposer de démarche pédagogique.\n" +
+      "- Respecter en priorité : type de ressource, contraintes, barème/critères si évaluation, lisibilité Word.\n\n",
   },
   {
     id: "enseignement_explicite",
@@ -54,7 +88,7 @@ export const METHODES: MethodeOption[] = [
     description:
       "On part d’exemples concrets pour faire émerger la règle, puis on généralise.",
     promptBlock:
-      "MÉTHODE PÉDAGOGIQUE : INDUCTIVE\n" +
+      "MÉTHODE PÉDAGOGOGIQUE : INDUCTIVE\n" +
       "- Tu proposes 2 à 4 exemples concrets.\n" +
       "- Tu demandes à l’élève d’observer et formuler une règle.\n" +
       "- Tu confirmes, tu corriges, puis tu formalises la règle.\n" +
@@ -128,13 +162,27 @@ export const METHODES: MethodeOption[] = [
     promptBlock:
       "MÉTHODE PÉDAGOGIQUE : MAGISTRALE GUIDÉE\n" +
       "- Tu fais un cours structuré en parties courtes.\n" +
-      "- Tu intercalas des questions de vérification.\n" +
-      "- Tu finis par exercices d’application + correction.\n\n",
+      "- Tu intercales des questions de vérification.\n" +
+      "- Tu finis par des exercices d’application + correction.\n\n",
   },
-];
+] as const;
+
+/**
+ * ✅ Map pour lookup O(1) + helpers robustes
+ */
+const METHODES_BY_ID: Readonly<Record<MethodePedagogique, MethodeOption>> =
+  METHODES.reduce((acc, m) => {
+    acc[m.id] = m;
+    return acc;
+  }, {} as Record<MethodePedagogique, MethodeOption>);
+
+/** Type guard utile quand tu lis depuis la DB ou un querystring */
+export function isMethodePedagogique(x: unknown): x is MethodePedagogique {
+  return typeof x === "string" && (x as MethodePedagogique) in METHODES_BY_ID;
+}
 
 export function getMethodeOption(id: MethodePedagogique): MethodeOption {
-  return METHODES.find((m) => m.id === id) ?? METHODES[0];
+  return METHODES_BY_ID[id] ?? METHODES_BY_ID[DEFAULT_METHODE];
 }
 
 export function getMethodeLabel(id: MethodePedagogique): string {
@@ -148,4 +196,3 @@ export function getMethodeDesc(id: MethodePedagogique): string {
 export function getMethodePromptBlock(id: MethodePedagogique): string {
   return getMethodeOption(id).promptBlock;
 }
-
