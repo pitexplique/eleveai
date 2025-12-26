@@ -1,12 +1,14 @@
 // app/auth/signup/page.tsx
 "use client";
 
-import { FormEvent, useMemo, useState } from "react";
+import { FormEvent, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 
 type Step = "form" | "code" | "success";
+
+const RESEND_COOLDOWN_SECONDS = 30;
 
 export default function SignUpPage() {
   const router = useRouter();
@@ -29,12 +31,36 @@ export default function SignUpPage() {
   // on fige l’email réellement utilisé
   const [sentEmail, setSentEmail] = useState<string | null>(null);
 
+  // cooldown anti-spam OTP
+  const [cooldown, setCooldown] = useState<number>(0);
+
   const normalizeEmail = (v: string) => v.trim().toLowerCase();
 
   const resetMessages = () => {
     setErrorMsg(null);
     setFeedback(null);
   };
+
+  const resetAll = () => {
+    setStep("form");
+    setNom("");
+    setEmail("");
+    setAccepteCGV(false);
+    setAccepteNewsletter(false);
+    setCode("");
+    setSentEmail(null);
+    setCooldown(0);
+    resetMessages();
+  };
+
+  // Décompte cooldown
+  useEffect(() => {
+    if (cooldown <= 0) return;
+    const t = setInterval(() => {
+      setCooldown((c) => (c <= 1 ? 0 : c - 1));
+    }, 1000);
+    return () => clearInterval(t);
+  }, [cooldown]);
 
   const logSupabaseError = (label: string, err: any) => {
     console.error(label, {
@@ -56,6 +82,7 @@ export default function SignUpPage() {
     const json = await res.json().catch(() => null);
 
     if (!res.ok || !json?.ok) {
+      // on remonte une erreur contrôlée
       throw new Error(json?.error || "check_email_failed");
     }
 
@@ -79,6 +106,12 @@ export default function SignUpPage() {
     }
     if (!accepteCGV) {
       setErrorMsg("Vous devez accepter les CGV pour créer un compte.");
+      return;
+    }
+
+    // cooldown
+    if (cooldown > 0) {
+      setErrorMsg(`Merci d’attendre ${cooldown}s avant de redemander un code.`);
       return;
     }
 
@@ -121,6 +154,7 @@ export default function SignUpPage() {
         "Un code vient d'être envoyé sur votre email. Copiez-le et entrez-le ci-dessous."
       );
       setStep("code");
+      setCooldown(RESEND_COOLDOWN_SECONDS);
     } catch (err: any) {
       console.error("Unexpected signup error:", err);
       setErrorMsg(
@@ -137,7 +171,10 @@ export default function SignUpPage() {
     e.preventDefault();
     resetMessages();
 
-    const emailToUse = sentEmail ? normalizeEmail(sentEmail) : normalizeEmail(email);
+    const emailToUse = sentEmail
+      ? normalizeEmail(sentEmail)
+      : normalizeEmail(email);
+
     const token = code.trim().replace(/[^\d]/g, "");
 
     if (!emailToUse) {
@@ -217,10 +254,18 @@ export default function SignUpPage() {
   const handleResendCode = async () => {
     resetMessages();
 
-    const emailToUse = sentEmail ? normalizeEmail(sentEmail) : normalizeEmail(email);
+    const emailToUse = sentEmail
+      ? normalizeEmail(sentEmail)
+      : normalizeEmail(email);
+
     if (!emailToUse) {
       setErrorMsg("Email manquant. Recommencez l’inscription.");
       setStep("form");
+      return;
+    }
+
+    if (cooldown > 0) {
+      setErrorMsg(`Merci d’attendre ${cooldown}s avant de renvoyer un code.`);
       return;
     }
 
@@ -229,19 +274,11 @@ export default function SignUpPage() {
       // ✅ au renvoi : user souvent déjà créé -> shouldCreateUser:false
       const { error } = await supabase.auth.signInWithOtp({
         email: emailToUse,
-        options: {
-          shouldCreateUser: false,
-        },
+        options: { shouldCreateUser: false },
       });
 
       if (error) {
-        console.error("[signup] resend signInWithOtp error:", {
-          message: error.message,
-          details: (error as any).details,
-          hint: (error as any).hint,
-          code: (error as any).code,
-        });
-
+        logSupabaseError("[signup] resend signInWithOtp error:", error);
         setErrorMsg(
           process.env.NODE_ENV === "development"
             ? `Erreur Supabase: ${error.message}`
@@ -251,6 +288,7 @@ export default function SignUpPage() {
       }
 
       setFeedback("Code renvoyé. Vérifiez votre boîte mail (et les spams).");
+      setCooldown(RESEND_COOLDOWN_SECONDS);
     } catch (err: any) {
       console.error("[signup] resend unexpected:", err);
       setErrorMsg(
@@ -338,7 +376,10 @@ export default function SignUpPage() {
                         />
                         <span>
                           J’accepte les{" "}
-                          <Link href="/cgv" className="text-emerald-600 underline">
+                          <Link
+                            href="/cgv"
+                            className="text-emerald-600 underline"
+                          >
                             conditions générales de vente
                           </Link>{" "}
                           d’EleveAI.
@@ -349,23 +390,35 @@ export default function SignUpPage() {
                         <input
                           type="checkbox"
                           checked={accepteNewsletter}
-                          onChange={(e) => setAccepteNewsletter(e.target.checked)}
+                          onChange={(e) =>
+                            setAccepteNewsletter(e.target.checked)
+                          }
                           disabled={loading}
                           className="mt-0.5 h-4 w-4 rounded border-slate-300 text-emerald-600 focus:ring-emerald-500"
                         />
-                        <span>J’accepte de recevoir des emails sur les nouveautés.</span>
+                        <span>
+                          J’accepte de recevoir des emails sur les nouveautés.
+                        </span>
                       </label>
                     </div>
 
-                    {errorMsg && <p className="text-xs text-red-600">{errorMsg}</p>}
-                    {feedback && <p className="text-xs text-emerald-600">{feedback}</p>}
+                    {errorMsg && (
+                      <p className="text-xs text-red-600">{errorMsg}</p>
+                    )}
+                    {feedback && (
+                      <p className="text-xs text-emerald-600">{feedback}</p>
+                    )}
 
                     <button
                       type="submit"
-                      disabled={loading}
+                      disabled={loading || cooldown > 0}
                       className="w-full rounded-lg bg-emerald-600 text-white py-2.5 text-sm font-semibold hover:bg-emerald-500 transition disabled:bg-slate-400 disabled:cursor-not-allowed"
                     >
-                      {loading ? "Envoi du code..." : "Recevoir mon code"}
+                      {loading
+                        ? "Envoi du code..."
+                        : cooldown > 0
+                          ? `Attendez ${cooldown}s…`
+                          : "Recevoir mon code"}
                     </button>
                   </form>
                 </>
@@ -394,14 +447,20 @@ export default function SignUpPage() {
                         maxLength={8}
                         required
                         value={code}
-                        onChange={(e) => setCode(e.target.value.replace(/[^\d]/g, ""))}
+                        onChange={(e) =>
+                          setCode(e.target.value.replace(/[^\d]/g, ""))
+                        }
                         placeholder="12345678"
                         className="w-full tracking-[0.4em] text-center rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-sm outline-none focus:border-emerald-500 focus:ring focus:ring-emerald-500/40"
                       />
                     </div>
 
-                    {errorMsg && <p className="text-xs text-red-600">{errorMsg}</p>}
-                    {feedback && <p className="text-xs text-emerald-600">{feedback}</p>}
+                    {errorMsg && (
+                      <p className="text-xs text-red-600">{errorMsg}</p>
+                    )}
+                    {feedback && (
+                      <p className="text-xs text-emerald-600">{feedback}</p>
+                    )}
 
                     <button
                       type="submit"
@@ -415,10 +474,12 @@ export default function SignUpPage() {
                       <button
                         type="button"
                         onClick={handleResendCode}
-                        disabled={loading}
+                        disabled={loading || cooldown > 0}
                         className="w-full rounded-lg border border-emerald-300 bg-white py-2 text-sm font-semibold text-emerald-700 hover:bg-emerald-50 transition disabled:opacity-60"
                       >
-                        Renvoyer un code
+                        {cooldown > 0
+                          ? `Renvoyer un code (${cooldown}s)`
+                          : "Renvoyer un code"}
                       </button>
 
                       <button
@@ -427,12 +488,22 @@ export default function SignUpPage() {
                           setStep("form");
                           setCode("");
                           setSentEmail(null);
+                          setCooldown(0);
                           resetMessages();
                         }}
                         disabled={loading}
                         className="w-full text-xs text-slate-500 underline"
                       >
                         Modifier mon email
+                      </button>
+
+                      <button
+                        type="button"
+                        onClick={resetAll}
+                        disabled={loading}
+                        className="w-full text-xs text-slate-500 underline"
+                      >
+                        Recommencer l’inscription
                       </button>
                     </div>
                   </form>
@@ -444,14 +515,21 @@ export default function SignUpPage() {
                   <h1 className="text-lg font-semibold text-slate-900">
                     Bienvenue sur EleveAI 🎉
                   </h1>
-                  <p className="text-sm text-slate-600">Votre compte est prêt. Redirection…</p>
-                  {feedback && <p className="text-xs text-emerald-600">{feedback}</p>}
+                  <p className="text-sm text-slate-600">
+                    Votre compte est prêt. Redirection…
+                  </p>
+                  {feedback && (
+                    <p className="text-xs text-emerald-600">{feedback}</p>
+                  )}
                 </div>
               )}
 
               <p className="mt-4 text-xs text-slate-500">
                 Vous avez déjà un compte ?{" "}
-                <Link href="/auth/signin" className="text-emerald-600 font-semibold">
+                <Link
+                  href="/auth/signin"
+                  className="text-emerald-600 font-semibold"
+                >
                   Se connecter
                 </Link>
               </p>

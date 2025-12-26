@@ -3,12 +3,13 @@
 
 import { FormEvent, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
+
+const RESEND_COOLDOWN_SECONDS = 30;
 
 export default function SignInPage() {
   const router = useRouter();
-  const searchParams = useSearchParams();
   const supabase = useMemo(() => createClient(), []);
 
   // ---------------------------
@@ -26,12 +27,28 @@ export default function SignInPage() {
   const [feedback, setFeedback] = useState<string | null>(null);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
-  // ✅ pré-remplissage depuis /auth/signup -> /auth/signin?email=...
+  // ---------------------------
+  // Cooldown anti-spam OTP
+  // ---------------------------
+  const [cooldown, setCooldown] = useState<number>(0);
+
+  // ✅ Pré-remplissage email depuis /auth/signup -> /auth/signin?email=...
+  // (sans useSearchParams => build Vercel OK)
   useEffect(() => {
-    const e = searchParams.get("email");
+    if (typeof window === "undefined") return;
+    const params = new URLSearchParams(window.location.search);
+    const e = params.get("email");
     if (e) setEmail(e);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  // ✅ Décompte cooldown
+  useEffect(() => {
+    if (cooldown <= 0) return;
+    const t = setInterval(() => {
+      setCooldown((c) => (c <= 1 ? 0 : c - 1));
+    }, 1000);
+    return () => clearInterval(t);
+  }, [cooldown]);
 
   const normalizeEmail = (v: string) => v.trim().toLowerCase();
 
@@ -42,6 +59,16 @@ export default function SignInPage() {
     setFeedback(null);
     setErrorMsg(null);
     setLoading(false);
+    setCooldown(0);
+  };
+
+  const logSupabaseError = (label: string, err: any) => {
+    console.error(label, {
+      message: err?.message,
+      details: err?.details,
+      hint: err?.hint,
+      code: err?.code,
+    });
   };
 
   // ---------------------------
@@ -58,23 +85,21 @@ export default function SignInPage() {
       return;
     }
 
+    // Si on est encore en cooldown, on ne renvoie pas
+    if (cooldown > 0) {
+      setErrorMsg(`Merci d’attendre ${cooldown}s avant de renvoyer un code.`);
+      return;
+    }
+
     setLoading(true);
     try {
-      // ✅ Pas de emailRedirectTo tant que /auth/callback n’existe pas
-      // ✅ shouldCreateUser: false = pas de création lors de la connexion
       const { error } = await supabase.auth.signInWithOtp({
         email: emailToUse,
         options: { shouldCreateUser: false },
       });
 
       if (error) {
-        console.error("signInWithOtp error:", {
-          message: error.message,
-          details: (error as any).details,
-          hint: (error as any).hint,
-          code: (error as any).code,
-        });
-
+        logSupabaseError("signInWithOtp error:", error);
         setErrorMsg(
           process.env.NODE_ENV === "development"
             ? `Erreur Supabase: ${error.message}`
@@ -86,6 +111,7 @@ export default function SignInPage() {
       setEmailSent(true);
       setSentEmail(emailToUse);
       setFeedback("Un code vient d’être envoyé. Entrez-le ci-dessous.");
+      setCooldown(RESEND_COOLDOWN_SECONDS);
     } catch (err: any) {
       console.error("Unexpected sign-in error:", err);
       setErrorMsg(err?.message || "Erreur inattendue. Merci de réessayer.");
@@ -104,6 +130,11 @@ export default function SignInPage() {
       return;
     }
 
+    if (cooldown > 0) {
+      setErrorMsg(`Merci d’attendre ${cooldown}s avant de renvoyer un code.`);
+      return;
+    }
+
     setLoading(true);
     try {
       const { error } = await supabase.auth.signInWithOtp({
@@ -112,13 +143,7 @@ export default function SignInPage() {
       });
 
       if (error) {
-        console.error("resend OTP error:", {
-          message: error.message,
-          details: (error as any).details,
-          hint: (error as any).hint,
-          code: (error as any).code,
-        });
-
+        logSupabaseError("resend OTP error:", error);
         setErrorMsg(
           process.env.NODE_ENV === "development"
             ? `Erreur Supabase: ${error.message}`
@@ -128,6 +153,7 @@ export default function SignInPage() {
       }
 
       setFeedback("Code renvoyé. Vérifiez votre boîte mail (et le spam).");
+      setCooldown(RESEND_COOLDOWN_SECONDS);
     } catch (err: any) {
       console.error("Unexpected resend error:", err);
       setErrorMsg(err?.message || "Erreur inattendue. Réessayez.");
@@ -164,13 +190,7 @@ export default function SignInPage() {
       });
 
       if (error || !data?.session) {
-        console.error("verifyOtp error:", {
-          message: error?.message,
-          details: (error as any)?.details,
-          hint: (error as any)?.hint,
-          code: (error as any)?.code,
-        });
-
+        logSupabaseError("verifyOtp error:", error);
         setErrorMsg(
           error?.message || "Code invalide ou expiré. Demandez un nouveau code."
         );
@@ -237,10 +257,14 @@ export default function SignInPage() {
 
                 <button
                   type="submit"
-                  disabled={loading || emailSent}
+                  disabled={loading || emailSent || cooldown > 0}
                   className="w-full rounded-lg bg-emerald-600 text-white py-2.5 text-sm font-semibold hover:bg-emerald-500 transition disabled:cursor-not-allowed disabled:opacity-60"
                 >
-                  {loading ? "Envoi..." : "Recevoir mon code"}
+                  {loading
+                    ? "Envoi..."
+                    : cooldown > 0
+                      ? `Attendez ${cooldown}s…`
+                      : "Recevoir mon code"}
                 </button>
 
                 {errorMsg && <p className="text-xs text-red-600">{errorMsg}</p>}
@@ -250,7 +274,10 @@ export default function SignInPage() {
 
                 <p className="text-xs text-slate-500">
                   Pas encore de compte ?{" "}
-                  <Link href="/auth/signup" className="text-emerald-600 font-semibold">
+                  <Link
+                    href="/auth/signup"
+                    className="text-emerald-600 font-semibold"
+                  >
                     Inscription
                   </Link>
                 </p>
@@ -277,7 +304,9 @@ export default function SignInPage() {
                     type="text"
                     inputMode="numeric"
                     value={otpCode}
-                    onChange={(e) => setOtpCode(e.target.value.replace(/[^\d]/g, ""))}
+                    onChange={(e) =>
+                      setOtpCode(e.target.value.replace(/[^\d]/g, ""))
+                    }
                     placeholder="Code (6 à 8 chiffres)"
                     className="w-full rounded-lg border border-emerald-300 px-3 py-2 text-sm outline-none focus:border-emerald-500 focus:ring"
                   />
@@ -294,10 +323,10 @@ export default function SignInPage() {
                     <button
                       type="button"
                       onClick={handleResend}
-                      disabled={loading}
+                      disabled={loading || cooldown > 0}
                       className="w-1/2 rounded-lg border border-emerald-300 bg-white py-2 text-sm font-semibold text-emerald-700 hover:bg-emerald-50 transition disabled:opacity-60"
                     >
-                      Renvoyer
+                      {cooldown > 0 ? `Renvoyer (${cooldown}s)` : "Renvoyer"}
                     </button>
 
                     <button
@@ -310,8 +339,12 @@ export default function SignInPage() {
                     </button>
                   </div>
 
-                  {errorMsg && <p className="text-[11px] text-red-600">{errorMsg}</p>}
-                  {feedback && <p className="text-[11px] text-emerald-700">{feedback}</p>}
+                  {errorMsg && (
+                    <p className="text-[11px] text-red-600">{errorMsg}</p>
+                  )}
+                  {feedback && (
+                    <p className="text-[11px] text-emerald-700">{feedback}</p>
+                  )}
                 </form>
               )}
 
