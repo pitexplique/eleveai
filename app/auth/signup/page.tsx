@@ -36,11 +36,6 @@ export default function SignUpPage() {
     setFeedback(null);
   };
 
-  const emailRedirectTo =
-    typeof window !== "undefined"
-      ? `${window.location.origin}/auth/callback`
-      : undefined;
-
   const logSupabaseError = (label: string, err: any) => {
     console.error(label, {
       message: err?.message,
@@ -48,6 +43,23 @@ export default function SignUpPage() {
       hint: err?.hint,
       code: err?.code,
     });
+  };
+
+  // ✅ check serveur : est-ce que l'email existe déjà dans la table applicative ?
+  const checkEmailExists = async (emailToUse: string): Promise<boolean> => {
+    const res = await fetch("/api/auth/check-email", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email: emailToUse }),
+    });
+
+    const json = await res.json().catch(() => null);
+
+    if (!res.ok || !json?.ok) {
+      throw new Error(json?.error || "check_email_failed");
+    }
+
+    return !!json.exists;
   };
 
   const handleFormSubmit = async (e: FormEvent) => {
@@ -73,36 +85,19 @@ export default function SignUpPage() {
     setLoading(true);
 
     try {
-      // Pré-check : l’email ne doit pas exister dans la table applicative
-      const { data: exist, error: existError } = await supabase
-        .from("eleveai_users_email")
-        .select("id")
-        .eq("email", emailToUse)
-        .maybeSingle();
-
-      if (existError) {
-        logSupabaseError("Erreur de vérification eleveai_users_email:", existError);
-        setErrorMsg(
-          process.env.NODE_ENV === "development"
-            ? `Erreur Supabase: ${existError.message}`
-            : "Impossible de vérifier l’email. Merci de réessayer."
-        );
+      // ✅ si email déjà inscrit -> redirection vers /signin
+      const exists = await checkEmailExists(emailToUse);
+      if (exists) {
+        router.push(`/auth/signin?email=${encodeURIComponent(emailToUse)}`);
         return;
       }
 
-      if (exist) {
-        setErrorMsg(
-          "Cet email est déjà enregistré. Veuillez vous connecter avec cet email."
-        );
-        return;
-      }
-
-      // Envoi OTP (création autorisée)
+      // ✅ Envoi OTP (création autorisée)
+      // ⚠️ pas de emailRedirectTo tant que /auth/callback n’existe pas
       const { error: otpError } = await supabase.auth.signInWithOtp({
         email: emailToUse,
         options: {
           shouldCreateUser: true,
-          emailRedirectTo,
           data: {
             nom: nomToUse,
             accepte_cgv: accepteCGV,
@@ -128,7 +123,11 @@ export default function SignUpPage() {
       setStep("code");
     } catch (err: any) {
       console.error("Unexpected signup error:", err);
-      setErrorMsg(err?.message || "Erreur inattendue. Merci de réessayer.");
+      setErrorMsg(
+        process.env.NODE_ENV === "development"
+          ? `Erreur: ${err?.message || "inconnue"}`
+          : "Erreur inattendue. Merci de réessayer."
+      );
     } finally {
       setLoading(false);
     }
@@ -139,8 +138,6 @@ export default function SignUpPage() {
     resetMessages();
 
     const emailToUse = sentEmail ? normalizeEmail(sentEmail) : normalizeEmail(email);
-
-    // ✅ on nettoie fort
     const token = code.trim().replace(/[^\d]/g, "");
 
     if (!emailToUse) {
@@ -177,7 +174,6 @@ export default function SignUpPage() {
 
       if (userError || !userData?.user) {
         logSupabaseError("Get user error:", userError);
-        // On n'empêche pas la redirection si la session est valide
       } else {
         const authUser = userData.user;
 
@@ -196,7 +192,7 @@ export default function SignUpPage() {
 
         if (upsertError) {
           logSupabaseError("Upsert eleveai_users_email error:", upsertError);
-          // On ne bloque pas l’utilisateur si l’upsert échoue
+          // non bloquant
         }
       }
 
@@ -204,71 +200,68 @@ export default function SignUpPage() {
       setStep("success");
 
       setTimeout(() => {
-        router.push("/accueil");
-      }, 1200);
+        router.push("/dashboard");
+      }, 900);
     } catch (err: any) {
       console.error("Unexpected verify error:", err);
-      setErrorMsg(err?.message || "Erreur inattendue. Merci de réessayer.");
+      setErrorMsg(
+        process.env.NODE_ENV === "development"
+          ? `Erreur: ${err?.message || "inconnue"}`
+          : "Erreur inattendue. Réessayez."
+      );
     } finally {
       setLoading(false);
     }
   };
 
-const handleResendCode = async () => {
-  resetMessages();
+  const handleResendCode = async () => {
+    resetMessages();
 
-  const emailToUse = sentEmail ? normalizeEmail(sentEmail) : normalizeEmail(email);
-  if (!emailToUse) {
-    setErrorMsg("Email manquant. Recommencez l’inscription.");
-    setStep("form");
-    return;
-  }
-
-  console.log("[signup] resend OTP ->", emailToUse); // ✅ debug
-
-  setLoading(true);
-  try {
-    // ✅ IMPORTANT : au renvoi, l’utilisateur est souvent déjà créé => false
-    const { data, error } = await supabase.auth.signInWithOtp({
-      email: emailToUse,
-      options: {
-        shouldCreateUser: false,
-        emailRedirectTo:
-          typeof window !== "undefined"
-            ? `${window.location.origin}/auth/callback`
-            : undefined,
-      },
-    });
-
-    if (error) {
-      console.error("[signup] resend signInWithOtp error:", {
-        message: error.message,
-        details: (error as any).details,
-        hint: (error as any).hint,
-        code: (error as any).code,
-      });
-
-      setErrorMsg(
-        process.env.NODE_ENV === "development"
-          ? `Erreur Supabase: ${error.message}`
-          : "Impossible de renvoyer le code. Réessayez dans un instant."
-      );
+    const emailToUse = sentEmail ? normalizeEmail(sentEmail) : normalizeEmail(email);
+    if (!emailToUse) {
+      setErrorMsg("Email manquant. Recommencez l’inscription.");
+      setStep("form");
       return;
     }
 
-    console.log("[signup] resend OK:", data);
-    setFeedback("Code renvoyé. Vérifiez votre boîte mail (et les spams).");
-  } catch (err: any) {
-    console.error("[signup] resend unexpected:", err);
-    setErrorMsg(err?.message || "Erreur inattendue. Réessayez.");
-  } finally {
-    setLoading(false);
-  }
-};
+    setLoading(true);
+    try {
+      // ✅ au renvoi : user souvent déjà créé -> shouldCreateUser:false
+      const { error } = await supabase.auth.signInWithOtp({
+        email: emailToUse,
+        options: {
+          shouldCreateUser: false,
+        },
+      });
 
+      if (error) {
+        console.error("[signup] resend signInWithOtp error:", {
+          message: error.message,
+          details: (error as any).details,
+          hint: (error as any).hint,
+          code: (error as any).code,
+        });
 
+        setErrorMsg(
+          process.env.NODE_ENV === "development"
+            ? `Erreur Supabase: ${error.message}`
+            : "Impossible de renvoyer le code. Réessayez dans un instant."
+        );
+        return;
+      }
 
-
+      setFeedback("Code renvoyé. Vérifiez votre boîte mail (et les spams).");
+    } catch (err: any) {
+      console.error("[signup] resend unexpected:", err);
+      setErrorMsg(
+        process.env.NODE_ENV === "development"
+          ? `Erreur: ${err?.message || "inconnue"}`
+          : "Erreur inattendue. Réessayez."
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <main className="min-h-screen bg-slate-50 text-slate-900">
@@ -451,9 +444,7 @@ const handleResendCode = async () => {
                   <h1 className="text-lg font-semibold text-slate-900">
                     Bienvenue sur EleveAI 🎉
                   </h1>
-                  <p className="text-sm text-slate-600">
-                    Votre compte est prêt. Redirection…
-                  </p>
+                  <p className="text-sm text-slate-600">Votre compte est prêt. Redirection…</p>
                   {feedback && <p className="text-xs text-emerald-600">{feedback}</p>}
                 </div>
               )}

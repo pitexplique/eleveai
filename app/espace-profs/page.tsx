@@ -1,4 +1,3 @@
-// app/espace-profs/page.tsx
 "use client";
 
 import Link from "next/link";
@@ -29,6 +28,7 @@ import {
   X,
   Search,
   LayoutGrid,
+  SlidersHorizontal,
 } from "lucide-react";
 
 import type { MethodePedagogique } from "@/lib/pedagogie/methodes";
@@ -39,13 +39,10 @@ import {
   METHODES,
 } from "@/lib/pedagogie/methodes";
 
-import type { TypeCategory } from "@/lib/pedagogie/types";
 import {
-  getCategoryMeta,
   getTypeById,
   getTypesForContext,
   tagToBadge,
-  TYPE_CATEGORIES,
 } from "@/lib/pedagogie/types";
 
 /* ----------------------------------------
@@ -61,6 +58,74 @@ function fmtDate(iso: string) {
   } catch {
     return iso;
   }
+}
+
+/* ----------------------------------------
+   CATEGORIES (NEW UX)
+   Ligne 1 : catégories principales
+   Ligne 2 : options
+---------------------------------------- */
+
+type MainCategory = "seance" | "exercices" | "evaluation" | "correction" | "methodes";
+
+const MAIN_CATEGORIES: {
+  id: MainCategory;
+  label: string;
+  emoji: string;
+  hint: string;
+}[] = [
+  {
+    id: "seance",
+    label: "Séance / Séquence",
+    emoji: "🗂️",
+    hint: "Structure du document (déroulé, timing, mise en commun…).",
+  },
+  {
+    id: "exercices",
+    label: "Exercices",
+    emoji: "✏️",
+    hint: "Entraînement (séries, niveaux, méthodes, corrigés séparés…).",
+  },
+  {
+    id: "evaluation",
+    label: "Évaluation",
+    emoji: "🧾",
+    hint: "Contrôle / évaluation (barème, critères, attendus, différenciation).",
+  },
+  {
+    id: "correction",
+    label: "Correction",
+    emoji: "✅",
+    hint: "Corrigé structuré, justification, points clés, erreurs typiques.",
+  },
+  {
+    id: "methodes",
+    label: "Méthodes",
+    emoji: "🧭",
+    hint: "Fiches méthode, stratégies, démarches, mémo, erreurs fréquentes.",
+  },
+];
+
+function normalizeMainCategory(raw: unknown): MainCategory {
+  const c = String(raw ?? "").toLowerCase();
+
+  if (c.includes("seance") || c.includes("séance") || c.includes("sequence") || c.includes("séquence"))
+    return "seance";
+  if (c.includes("exercice")) return "exercices";
+  if (c.includes("eval") || c.includes("éval") || c.includes("evaluation") || c.includes("évaluation"))
+    return "evaluation";
+  if (c.includes("correction") || c.includes("corrige") || c.includes("corrigé"))
+    return "correction";
+  // ancien "document(s)" → on le range dans "méthodes"
+  if (c.includes("document")) return "methodes";
+  if (c.includes("methode") || c.includes("méthode") || c.includes("methodes") || c.includes("méthodes"))
+    return "methodes";
+
+  return "seance";
+}
+
+function getMainCategoryMeta(cat: MainCategory) {
+  return MAIN_CATEGORIES.find((c) => c.id === cat) ?? MAIN_CATEGORIES[0];
 }
 
 /* ----------------------------------------
@@ -122,6 +187,12 @@ type PromptProf = {
 
   themes: ThemeAborde[];
   themesLabel: string;
+
+  // ✅ Ligne 2 : OPTIONS (modifient sans remplacer le type)
+  optDifferenciation: boolean;
+  optRituels: boolean; // 5–10 min
+  optIAFriendly: boolean; // ✅ compatible correction IA (structure parsable)
+  optAtelierIA: boolean; // ✅ intégrer usage de l'IA en classe
 };
 
 /* ----------------------------------------
@@ -136,33 +207,32 @@ const TONALITES: { id: Tonalite; label: string; hint: string }[] = [
   { id: "ludique", label: "Ludique", hint: "Ton plus léger (sans perdre la rigueur)." },
 ];
 
-const EVAL_OPTIONS: { id: ModaliteEvaluation; label: string; description: string }[] =
-  [
-    {
-      id: "evaluation_sommative",
-      label: "Évaluation sommative",
-      description:
-        "Notation + barème + critères. Progressivité, lisibilité, attendus conformes.",
-    },
-    {
-      id: "evaluation_formative",
-      label: "Évaluation formative",
-      description:
-        "Feedback + paliers + indices possibles. Sert à apprendre (et pas seulement noter).",
-    },
-    {
-      id: "evaluation_diagnostique",
-      label: "Évaluation diagnostique",
-      description:
-        "Repérage ciblé des prérequis et difficultés. Courte, précise, exploitable.",
-    },
-    {
-      id: "evaluation_differenciee",
-      label: "Évaluation différenciée",
-      description:
-        "2-3 parcours (base/standard/défi) ou choix d’exercices + barème adapté.",
-    },
-  ];
+const EVAL_OPTIONS: { id: ModaliteEvaluation; label: string; description: string }[] = [
+  {
+    id: "evaluation_sommative",
+    label: "Évaluation sommative",
+    description:
+      "Notation + barème + critères. Progressivité, lisibilité, attendus conformes.",
+  },
+  {
+    id: "evaluation_formative",
+    label: "Évaluation formative",
+    description:
+      "Feedback + paliers + indices possibles. Sert à apprendre (et pas seulement noter).",
+  },
+  {
+    id: "evaluation_diagnostique",
+    label: "Évaluation diagnostique",
+    description:
+      "Repérage ciblé des prérequis et difficultés. Courte, précise, exploitable.",
+  },
+  {
+    id: "evaluation_differenciee",
+    label: "Évaluation différenciée",
+    description:
+      "2-3 parcours (base/standard/défi) ou choix d’exercices + barème adapté.",
+  },
+];
 
 const THEME_OPTIONS: { id: ThemeAborde; label: string }[] = [
   { id: "sport", label: "Sport" },
@@ -256,7 +326,6 @@ function construirePrompt(form: PromptProf): string {
     form.tags.length > 0 ? `Mots-clés pédagogiques : ${form.tags.join(", ")}.\n` : "";
   const blocAuteur = form.auteur ? `Préparé par : ${form.auteur}.\n` : "";
 
-  // ✅ thèmes : injecter en labels humains
   const themesHumains = form.themes?.length
     ? form.themes.map((t) => THEME_LABEL_BY_ID[t] ?? t)
     : [];
@@ -277,7 +346,6 @@ function construirePrompt(form: PromptProf): string {
     form.matiere,
   );
 
-  // ✅ LaTeX ON/OFF : si sciences et latex=false => interdire LaTeX
   const blocSansLatex =
     matiereScientifique && !form.latex
       ? 'Sans LaTeX (pas de \\frac, \\sqrt). Fractions a/b, puissances x^2 ou "x au carré".\n\n'
@@ -289,33 +357,75 @@ function construirePrompt(form: PromptProf): string {
 
   const dur = form.dureeMin && form.dureeMin > 0 ? `${form.dureeMin} min` : "non précisée";
   const tone = form.tonalite || "neutre";
-
   const blocCalibrage = `Calibrage demandé :\n- Durée : ${dur}.\n- Tonalité : ${tone}.\n\n`;
 
-  const estEval = typeItem?.category === "evaluation";
+  // ✅ Options (ligne 2) — NOUVELLE SÉMANTIQUE
+  const blocOptions =
+    (form.optDifferenciation ? "Option : Différenciation (base / standard / défi) clairement indiquée.\n" : "") +
+    (form.optRituels ? "Option : Rituel d’entrée 5–10 min (activation, rappel, mini-défi, correction rapide).\n" : "") +
+    (form.optIAFriendly
+      ? "Option : Compatible correction IA — produire un document très structuré, régulier et facile à analyser automatiquement (questions/réponses repérables).\n"
+      : "") +
+    (form.optAtelierIA
+      ? "Option : Intégrer usage de l’IA en classe — inclure une mini-séquence guidée d’usage de l’IA (consignes, étapes, garde-fous, rendu attendu).\n"
+      : "");
+
+  const blocOptionsFinal = blocOptions.trim().length ? `Options activées :\n${blocOptions}\n` : "";
+
+  const estEval = normalizeMainCategory(typeItem?.category) === "evaluation";
 
   const blocEvaluation = estEval
     ? "MODE ÉVALUATION (important) :\n" +
       `- Modalité : ${getEvalLabel(form.modaliteEvaluation)}.\n` +
       "- Exiger : barème/points, consignes claires, attendus, critères de réussite, aides autorisées (si besoin).\n" +
-      "- Construction : progressif + items différenciés (base/standard/défi) + erreurs typiques.\n" +
+      (form.optDifferenciation
+        ? "- Différenciation : base/standard/défi (clairement séparé) + erreurs typiques.\n"
+        : "") +
       "- Sortie Word : en-tête (classe/durée), exercices numérotés, espaces réponses, total points.\n\n"
     : "";
 
-  // ✅ méthode : pas en évaluation
   const blocMethode = estEval ? "" : getMethodePromptBlock(form.methode);
 
   const blocStructureSeance =
-    typeItem?.category === "seance"
+    normalizeMainCategory(typeItem?.category) === "seance"
       ? "Structure chronométrée : accroche / recherche guidée / mise en commun / entraînement / bilan (rôle prof/élèves + matériel).\n\n"
       : "";
 
+  const blocRituels =
+    form.optRituels && normalizeMainCategory(typeItem?.category) === "seance"
+      ? "Rituel (5–10 min) : au tout début, une courte activité (question flash / rappel / mini-problème) + correction rapide.\n\n"
+      : "";
+
+  // ✅ IA-friendly = document “corrigeable IA”
+  const blocIAFriendly = form.optIAFriendly
+    ? "DOCUMENT COMPATIBLE CORRECTION IA :\n" +
+      "- Structure très claire et régulière (titres explicites, numérotation stable).\n" +
+      "- Une consigne = une question.\n" +
+      "- Pour chaque question : une zone « Réponse attendue : ... » ou « Attendus : ... ».\n" +
+      "- Si correction incluse : étapes numérotées + résultat final explicite.\n" +
+      "- Éviter tableaux complexes non textuels / mises en page décoratives.\n" +
+      "- Vocabulaire non ambigu (éviter « on voit que », « il suffit de », etc.).\n\n"
+    : "";
+
+  const blocAtelierIA = form.optAtelierIA
+    ? "INTÉGRER USAGE DE L’IA EN CLASSE (mini-parcours guidé) :\n" +
+      "- Étape 1 : rédiger un prompt (modèle fourni).\n" +
+      "- Étape 2 : lire la réponse et surligner 2 points à vérifier.\n" +
+      "- Étape 3 : corriger/améliorer (avec justification).\n" +
+      "- Étape 4 : produire un rendu final personnel (synthèse + trace courte).\n\n"
+    : "";
+
   const blocDifferenciation =
-    "Différenciation : niveau base / standard / défi (indiquer clairement).\n\n";
+    form.optDifferenciation && !estEval
+      ? "Différenciation : proposer base / standard / défi (indiquer clairement).\n\n"
+      : "";
+
   const blocRappelsEtMeta =
     "Réponse : prérequis courts, étapes numérotées, questions de vérification, récapitulatif, question métacognitive.\n\n";
+
   const blocCriteres =
     "Fin : « Pour l’enseignant » (3-5 critères observables) + erreurs typiques.\n\n";
+
   const blocMiseEnPage =
     "Si fiche/évaluation : structure Word (titres, exos numérotés, temps/points, espaces réponses).\n\n";
 
@@ -329,6 +439,7 @@ function construirePrompt(form: PromptProf): string {
     blocNeuro +
     blocSansLatex +
     blocCalibrage +
+    blocOptionsFinal +
     (typeDesc ? `Type choisi : ${typeLabel} — ${typeDesc}\n\n` : `Type choisi : ${typeLabel}\n\n`) +
     blocEvaluation +
     blocMethode +
@@ -341,6 +452,9 @@ function construirePrompt(form: PromptProf): string {
     `Consigne professeur (à optimiser) :\n"""${form.contenu.trim()}"""\n\n` +
     blocDYS +
     blocStructureSeance +
+    blocRituels +
+    blocIAFriendly +
+    blocAtelierIA +
     blocDifferenciation +
     blocRappelsEtMeta +
     blocCriteres +
@@ -431,6 +545,12 @@ export default function ProfsPage() {
       modaliteEvaluation: "evaluation_sommative",
       themes: [],
       themesLabel: "Agriculture & écologie : enjeux et solutions — contexte local : [territoire]",
+
+      // ✅ options ligne 2
+      optDifferenciation: true,
+      optRituels: false,
+      optIAFriendly: true,
+      optAtelierIA: false,
     };
   }, [today]);
 
@@ -467,7 +587,8 @@ export default function ProfsPage() {
   const [historyLoading, setHistoryLoading] = useState(false);
   const [runs, setRuns] = useState<DbRunEmail[]>([]);
 
-  const [typeCategory, setTypeCategory] = useState<TypeCategory>("seance");
+  // ✅ NEW UX : catégorie principale (ligne 1)
+  const [mainCategory, setMainCategory] = useState<MainCategory>("seance");
   const [typeQuery, setTypeQuery] = useState("");
 
   useEffect(() => {
@@ -494,7 +615,7 @@ export default function ProfsPage() {
     const fallback = all?.[0];
     if (fallback) {
       setForm((p) => ({ ...p, typeId: fallback.id }));
-      setTypeCategory(fallback.category);
+      setMainCategory(normalizeMainCategory(fallback.category));
     }
   }, [form.classe, form.matiere, form.typeId]);
 
@@ -562,12 +683,34 @@ export default function ProfsPage() {
               ? (v.modaliteEvaluation as ModaliteEvaluation)
               : prev.modaliteEvaluation,
           themes: Array.isArray(v.themes) ? (v.themes as ThemeAborde[]) : prev.themes,
-          themesLabel: typeof v.themesLabel === "string" ? v.themesLabel : prev.themesLabel,
+          themesLabel:
+            typeof v.themesLabel === "string" ? v.themesLabel : prev.themesLabel,
           tags: Array.isArray(v.tags) ? (v.tags as string[]) : prev.tags,
           latex: typeof v.latex === "boolean" ? v.latex : prev.latex,
+
+          // options (ligne 2)
+          optDifferenciation:
+            typeof (v as any).optDifferenciation === "boolean"
+              ? (v as any).optDifferenciation
+              : prev.optDifferenciation,
+          optRituels:
+            typeof (v as any).optRituels === "boolean"
+              ? (v as any).optRituels
+              : prev.optRituels,
+          optIAFriendly:
+            typeof (v as any).optIAFriendly === "boolean"
+              ? (v as any).optIAFriendly
+              : prev.optIAFriendly,
+          optAtelierIA:
+            typeof (v as any).optAtelierIA === "boolean"
+              ? (v as any).optAtelierIA
+              : prev.optAtelierIA,
         };
         return next;
       });
+
+      const t = getTypeById(typeof v.typeId === "string" ? v.typeId : form.typeId);
+      if (t?.category) setMainCategory(normalizeMainCategory(t.category));
 
       if (Array.isArray(v.tags)) setRawTags((v.tags as string[]).join(", "));
       clearOutputs();
@@ -575,7 +718,7 @@ export default function ProfsPage() {
       setShowEval(false);
       setDbMsg("");
     },
-    [clearOutputs],
+    [clearOutputs, form.typeId],
   );
 
   const resetPage = useCallback(() => {
@@ -587,13 +730,13 @@ export default function ProfsPage() {
     setShowEval(false);
     setDbMsg("");
     setLastPresetId(null);
-    setTypeCategory("seance");
+    setMainCategory("seance");
     setTypeQuery("");
   }, [clearOutputs, makeInitialForm]);
 
   const typesDisponibles = useMemo(() => {
     const all = getTypesForContext({ classe: form.classe, matiere: form.matiere });
-    const byCat = all.filter((t) => t.category === typeCategory);
+    const byCat = all.filter((t) => normalizeMainCategory(t.category) === mainCategory);
 
     const q = typeQuery.trim().toLowerCase();
     return q
@@ -602,10 +745,13 @@ export default function ProfsPage() {
           return hay.includes(q);
         })
       : byCat;
-  }, [form.classe, form.matiere, typeCategory, typeQuery]);
+  }, [form.classe, form.matiere, mainCategory, typeQuery]);
 
   const selectedType = useMemo(() => getTypeById(form.typeId), [form.typeId]);
-  const estEval = selectedType?.category === "evaluation";
+  const estEval = useMemo(
+    () => normalizeMainCategory(selectedType?.category) === "evaluation",
+    [selectedType?.category],
+  );
 
   const selectType = useCallback(
     (typeId: string) => {
@@ -622,12 +768,10 @@ export default function ProfsPage() {
         return next;
       });
 
-      // UX auto
       if (t?.auto?.openEvalPanel) setShowEval(true);
       if (t?.auto?.hideMethodePanel) setShowMethode(false);
 
-      // ✅ sync catégorie si besoin
-      if (t?.category) setTypeCategory(t.category);
+      if (t?.category) setMainCategory(normalizeMainCategory(t.category));
 
       clearOutputs();
     },
@@ -662,14 +806,26 @@ export default function ProfsPage() {
       s.push("Objectif : ce que l’élève doit savoir faire (verbe d’action).");
     if (!form.classe) s.push("Classe : vocabulaire + attendus mieux calibrés.");
     if (!form.matiere) s.push("Matière : garde l’IA dans le bon cadre.");
-    if (!form.typeId) s.push("Type : fixe la structure (séance, fiche, évaluation…).");
+    if (!form.typeId) s.push("Type : fixe la structure (séance, exercices, évaluation…).");
     if (form.contenu.trim().length > 0 && form.contenu.trim().length < 40)
       s.push("Consigne : ajoute contraintes, barème/critères, exemple attendu.");
     if (!form.dureeMin || form.dureeMin <= 0) s.push("Durée : calibre la production.");
 
+    // ✅ options (ligne 2) — NOUVELLE SÉMANTIQUE
+    if (!form.optDifferenciation)
+      s.push("Option : active Différenciation si tu veux base/standard/défi.");
+    if (normalizeMainCategory(selectedType?.category) === "seance" && !form.optRituels)
+      s.push("Option : active Rituels pour un démarrage 5–10 min (efficace et simple).");
+    if (!form.optIAFriendly)
+      s.push("Option : active Compatible correction IA si tu veux un document Word structuré (questions/réponses repérables) pour correction automatisable.");
+    // ✅ cohérence douce (pas obligatoire)
+    if (form.optAtelierIA && !form.optIAFriendly)
+      s.push("Atelier-IA : active aussi Compatible correction IA si tu veux une structure plus simple à relire/corriger automatiquement.");
+
     if (estEval) {
-      s.push("Évaluation : barème + critères + différenciation base/standard/défi.");
-      s.push("Précise aides autorisées (calculatrice, documents, IA, etc.).");
+      s.push("Évaluation : barème + critères + aides autorisées (calculatrice, docs, IA…).");
+      if (!form.optDifferenciation)
+        s.push("Évaluation : si tu veux différencier, active l’option Différenciation.");
     } else {
       s.push("Méthode : tu peux la modifier si tu veux, mais c’est déjà OK.");
     }
@@ -683,7 +839,7 @@ export default function ProfsPage() {
       s.push("Parfait. Tu peux ajouter : matériel, contraintes, exemple de production attendue.");
 
     return s;
-  }, [estEval, form]);
+  }, [estEval, form, selectedType?.category]);
 
   /* ----------------------------------------
      DB HELPERS
@@ -738,6 +894,9 @@ export default function ProfsPage() {
     setAgentError("");
     setFormError("");
 
+    const t = getTypeById(data.form.typeId);
+    if (t?.category) setMainCategory(normalizeMainCategory(t.category));
+
     setLastPresetId(p.id);
     setDbMsg("✅ Preset chargé.");
     setShowMyPresets(false);
@@ -751,12 +910,10 @@ export default function ProfsPage() {
 
       const title =
         form.titre?.trim() ||
-        `${getTypeById(form.typeId)?.label || "Preset"} – ${form.classe || ""} ${
-          form.matiere || ""
-        }`.trim();
+        `${getTypeById(form.typeId)?.label || "Preset"} – ${form.classe || ""} ${form.matiere || ""}`.trim();
 
       const dataJson: PresetEmailDataProfs = {
-        meta: { scope: "profs", version: 3 },
+        meta: { scope: "profs", version: 4 },
         form,
         promptInterne,
         agentOutput,
@@ -903,13 +1060,15 @@ export default function ProfsPage() {
      UI
   ---------------------------------------- */
 
+  const mainCatMeta = useMemo(() => getMainCategoryMeta(mainCategory), [mainCategory]);
+
   return (
     <main className="min-h-screen bg-gradient-to-b from-sky-50 via-white to-slate-50 text-gray-900">
       <div className="max-w-6xl mx-auto px-4 py-8 sm:py-10 space-y-8">
         <header className="space-y-2">
           <p className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-100 text-xs font-semibold text-[#0047B6]">
             <span>🧑‍🏫</span>
-            <span>Espace professeurs – Types intelligents + méthodes</span>
+            <span>Espace professeurs – 1 type + options (Word-friendly)</span>
           </p>
 
           <h1 className="text-3xl sm:text-4xl font-extrabold text-[#0047B6]">
@@ -917,11 +1076,11 @@ export default function ProfsPage() {
           </h1>
 
           <p className="text-sm sm:text-base text-gray-700 max-w-2xl">
-            Tu choisis un <b>type</b> (catalogue), une <b>méthode</b>, puis tu écris ta consigne.
-            EleveAI génère un prompt propre + une ressource via l’agent.
+            Tu choisis un <b>type</b> (catégorie principale), puis tu ajoutes des{" "}
+            <b>options</b> (différenciation, rituel, compatible correction IA, Atelier-IA),
+            et tu écris ta consigne. EleveAI génère un prompt propre + une ressource via l’agent.
           </p>
 
-          {/* ✅ Mobile-friendly : on force le wrap + gaps propres */}
           <div className="flex flex-wrap items-center gap-2 sm:gap-3 pt-2">
             <ToggleChip
               label="Neurosciences"
@@ -971,7 +1130,6 @@ export default function ProfsPage() {
               Reset complet
             </button>
 
-            {/* ✅ PRESETS DB actions */}
             <div className="flex flex-wrap items-center gap-2">
               <button
                 type="button"
@@ -1168,26 +1326,27 @@ export default function ProfsPage() {
               </div>
             </div>
 
-            {/* ✅ TYPES UX */}
+            {/* ✅ TYPES UX (NEW) */}
             <div className="space-y-2">
               <label className="text-xs font-semibold text-gray-600 flex items-center gap-2">
                 <LayoutGrid className="w-4 h-4" />
-                Type de ressource (catalogue)
+                Catégorie principale (ligne 1)
               </label>
 
               <div className="flex flex-wrap gap-2">
-                {TYPE_CATEGORIES.map((c) => {
-                  const active = typeCategory === c.id;
+                {MAIN_CATEGORIES.map((c) => {
+                  const active = mainCategory === c.id;
                   return (
                     <button
                       key={c.id}
                       type="button"
-                      onClick={() => setTypeCategory(c.id)}
+                      onClick={() => setMainCategory(c.id)}
                       className={`px-3 py-1.5 rounded-full text-[12px] font-semibold border transition ${
                         active
                           ? "bg-[#0047B6] text-white border-[#0047B6]"
                           : "bg-white text-slate-700 border-slate-300 hover:bg-slate-50"
                       }`}
+                      title={c.hint}
                     >
                       {c.emoji} {c.label}
                     </button>
@@ -1195,6 +1354,69 @@ export default function ProfsPage() {
                 })}
               </div>
 
+              {/* ✅ OPTIONS (ligne 2) */}
+              <div className="pt-1">
+                <label className="text-xs font-semibold text-gray-600 flex items-center gap-2">
+                  <SlidersHorizontal className="w-4 h-4" />
+                  Options (ligne 2)
+                </label>
+
+                <div className="flex flex-wrap gap-2 mt-2">
+                  <ToggleChip
+                    label="Différenciation"
+                    checked={form.optDifferenciation}
+                    onChange={(v) => handleChange("optDifferenciation", v)}
+                    hint="Base / Standard / Défi clairement séparés."
+                    tone="emerald"
+                    icon={<span>🎚️</span>}
+                  />
+                  <ToggleChip
+                    label="Rituels (5–10 min)"
+                    checked={form.optRituels}
+                    onChange={(v) => handleChange("optRituels", v)}
+                    hint="Mini-rituel d'entrée : question flash + correction rapide."
+                    tone="sky"
+                    icon={<span>⏱️</span>}
+                  />
+                  <ToggleChip
+                    label="Compatible correction IA"
+                    checked={form.optIAFriendly}
+                    onChange={(v) => handleChange("optIAFriendly", v)}
+                    hint="Document très structuré (questions/réponses repérables) pour correction automatisable."
+                    tone="sky"
+                    icon={<span>🤖</span>}
+                  />
+                  <ToggleChip
+                    label="Intégrer usage de l’IA en classe"
+                    checked={form.optAtelierIA}
+                    onChange={(v) => handleChange("optAtelierIA", v)}
+                    hint="Mini-parcours guidé d’usage de l’IA dans la ressource."
+                    tone="violet"
+                    icon={<span>🧪</span>}
+                  />
+                </div>
+
+                <div className="mt-2 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2">
+                  <p className="text-[11px] text-slate-700">
+                    <span className="font-semibold">
+                      {mainCatMeta.emoji} {mainCatMeta.label}
+                    </span>{" "}
+                    + options :{" "}
+                    <span className="font-semibold">
+                      {[
+                        form.optDifferenciation ? "Différenciation" : null,
+                        form.optRituels ? "Rituels" : null,
+                        form.optIAFriendly ? "Compatible correction IA" : null,
+                        form.optAtelierIA ? "Usage IA en classe" : null,
+                      ]
+                        .filter(Boolean)
+                        .join(" • ") || "aucune"}
+                    </span>
+                  </p>
+                </div>
+              </div>
+
+              {/* Recherche de type */}
               <div className="relative">
                 <Search className="w-4 h-4 text-slate-500 absolute left-3 top-1/2 -translate-y-1/2" />
                 <input
@@ -1205,10 +1427,11 @@ export default function ProfsPage() {
                 />
               </div>
 
+              {/* Liste des types */}
               <div className="grid gap-2 sm:grid-cols-2">
                 {typesDisponibles.map((t) => {
                   const active = form.typeId === t.id;
-                  const meta = getCategoryMeta(t.category);
+                  const meta = getMainCategoryMeta(normalizeMainCategory(t.category));
                   return (
                     <button
                       key={t.id}
@@ -1288,7 +1511,8 @@ export default function ProfsPage() {
                     {getEvalDesc(form.modaliteEvaluation)}
                   </p>
                   <p className="mt-2 text-[11px] text-amber-900">
-                    ✅ Le prompt générera : barème, critères, consignes, progressivité, différenciation.
+                    ✅ Le prompt générera : barème, critères, consignes, progressivité
+                    {form.optDifferenciation ? " + différenciation" : ""}.
                   </p>
                 </div>
 
@@ -1477,7 +1701,7 @@ export default function ProfsPage() {
                 onChange={(e) => handleChange("contenu", e.target.value)}
                 placeholder={
                   estEval
-                    ? "Ex : Fais une évaluation de 45 min… exos progressifs + barème sur 20 + différenciation…"
+                    ? "Ex : Fais une évaluation de 45 min… exos progressifs + barème sur 20…"
                     : "Ex : Génère une séance clé en main…"
                 }
                 className="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-sky-300 min-h-[120px]"
@@ -1809,7 +2033,7 @@ export default function ProfsPage() {
       )}
 
       <SignupNudge
-        storageKey="eleveai_nudge_profs_v3"
+        storageKey="eleveai_nudge_profs_v4"
         actionSignal={nudgeSignal}
         minActionCount={0}
         trigger="both"

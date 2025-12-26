@@ -1,15 +1,14 @@
 // app/auth/signin/page.tsx
 "use client";
 
-import { FormEvent, useMemo, useState } from "react";
+import { FormEvent, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
-
-type CodeUserType = "eleve" | "prof" | "parent" | "admin" | string;
 
 export default function SignInPage() {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const supabase = useMemo(() => createClient(), []);
 
   // ---------------------------
@@ -21,25 +20,20 @@ export default function SignInPage() {
   const [emailSent, setEmailSent] = useState(false);
 
   // ---------------------------
-  // Codes établissement
-  // ---------------------------
-  const [codeEtab, setCodeEtab] = useState("");
-  const [codeUtilisateur, setCodeUtilisateur] = useState("");
-
-  // ---------------------------
   // UI feedback
   // ---------------------------
   const [loading, setLoading] = useState(false);
   const [feedback, setFeedback] = useState<string | null>(null);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
-  const [codeError, setCodeError] = useState<string | null>(null);
+
+  // ✅ pré-remplissage depuis /auth/signup -> /auth/signin?email=...
+  useEffect(() => {
+    const e = searchParams.get("email");
+    if (e) setEmail(e);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const normalizeEmail = (v: string) => v.trim().toLowerCase();
-
-  const emailRedirectTo =
-    typeof window !== "undefined"
-      ? `${window.location.origin}/auth/callback`
-      : undefined;
 
   const resetEmailFlow = () => {
     setEmailSent(false);
@@ -51,13 +45,12 @@ export default function SignInPage() {
   };
 
   // ---------------------------
-  // 1) Envoi du code OTP par email
+  // 1) Envoi du code OTP
   // ---------------------------
   const handleEmailSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setFeedback(null);
     setErrorMsg(null);
-    setCodeError(null);
 
     const emailToUse = normalizeEmail(email);
     if (!emailToUse) {
@@ -66,65 +59,33 @@ export default function SignInPage() {
     }
 
     setLoading(true);
-
     try {
-      // V1: on vérifie que l’utilisateur existe dans la table applicative
-      const { data: existingUser, error: checkError } = await supabase
-        .from("eleveai_users_email")
-        .select("id")
-        .eq("email", emailToUse)
-        .maybeSingle();
-
-      if (checkError) {
-        console.error("Erreur vérification eleveai_users_email:", {
-          message: checkError.message,
-          details: (checkError as any).details,
-          hint: (checkError as any).hint,
-          code: (checkError as any).code,
-        });
-        setErrorMsg(
-          process.env.NODE_ENV === "development"
-            ? `Erreur Supabase: ${checkError.message}`
-            : "Impossible de vérifier votre compte. Merci de réessayer."
-        );
-        return;
-      }
-
-      if (!existingUser) {
-        setErrorMsg(
-          "Aucun compte trouvé pour cet email. Créez un compte (Inscription) ou vérifiez l’adresse saisie."
-        );
-        return;
-      }
-
-      const { error: otpError } = await supabase.auth.signInWithOtp({
+      // ✅ Pas de emailRedirectTo tant que /auth/callback n’existe pas
+      // ✅ shouldCreateUser: false = pas de création lors de la connexion
+      const { error } = await supabase.auth.signInWithOtp({
         email: emailToUse,
-        options: {
-          shouldCreateUser: false,
-          emailRedirectTo,
-        },
+        options: { shouldCreateUser: false },
       });
 
-      if (otpError) {
+      if (error) {
         console.error("signInWithOtp error:", {
-          message: otpError.message,
-          details: (otpError as any).details,
-          hint: (otpError as any).hint,
-          code: (otpError as any).code,
+          message: error.message,
+          details: (error as any).details,
+          hint: (error as any).hint,
+          code: (error as any).code,
         });
+
         setErrorMsg(
           process.env.NODE_ENV === "development"
-            ? `Erreur Supabase: ${otpError.message}`
-            : "Impossible d'envoyer le code de connexion. Merci de réessayer."
+            ? `Erreur Supabase: ${error.message}`
+            : "Impossible d'envoyer le code. Vérifiez l’email ou créez un compte."
         );
         return;
       }
 
       setEmailSent(true);
       setSentEmail(emailToUse);
-      setFeedback(
-        "Un code vient d’être envoyé. Entrez-le ci-dessous pour vous connecter."
-      );
+      setFeedback("Un code vient d’être envoyé. Entrez-le ci-dessous.");
     } catch (err: any) {
       console.error("Unexpected sign-in error:", err);
       setErrorMsg(err?.message || "Erreur inattendue. Merci de réessayer.");
@@ -147,10 +108,7 @@ export default function SignInPage() {
     try {
       const { error } = await supabase.auth.signInWithOtp({
         email: sentEmail,
-        options: {
-          shouldCreateUser: false,
-          emailRedirectTo,
-        },
+        options: { shouldCreateUser: false },
       });
 
       if (error) {
@@ -160,6 +118,7 @@ export default function SignInPage() {
           hint: (error as any).hint,
           code: (error as any).code,
         });
+
         setErrorMsg(
           process.env.NODE_ENV === "development"
             ? `Erreur Supabase: ${error.message}`
@@ -197,7 +156,6 @@ export default function SignInPage() {
     }
 
     setLoading(true);
-
     try {
       const { data, error } = await supabase.auth.verifyOtp({
         email: sentEmail,
@@ -212,6 +170,7 @@ export default function SignInPage() {
           hint: (error as any)?.hint,
           code: (error as any)?.code,
         });
+
         setErrorMsg(
           error?.message || "Code invalide ou expiré. Demandez un nouveau code."
         );
@@ -219,78 +178,10 @@ export default function SignInPage() {
       }
 
       setFeedback("Connexion réussie. Redirection…");
-      router.push("/accueil");
+      router.push("/dashboard");
     } catch (err: any) {
       console.error("Unexpected OTP verify error:", err);
       setErrorMsg(err?.message || "Erreur inattendue. Réessayez.");
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  // ---------------------------
-  // 3) Connexion via code établissement
-  // ---------------------------
-  const handleCodeSubmit = async (e: FormEvent) => {
-    e.preventDefault();
-    setCodeError(null);
-    setErrorMsg(null);
-    setFeedback(null);
-
-    const etab = codeEtab.trim().toUpperCase();
-    const userCode = codeUtilisateur.trim().toUpperCase();
-
-    if (!etab || !userCode) {
-      setCodeError("Merci de renseigner les deux codes.");
-      return;
-    }
-
-    setLoading(true);
-    try {
-      const { data, error } = await supabase
-        .from("utilisateurs_codes")
-        .select("id, type_utilisateur, actif")
-        .eq("code_etablissement", etab)
-        .eq("code_utilisateur", userCode)
-        .maybeSingle();
-
-      if (error) {
-        console.error("utilisateurs_codes error:", {
-          message: error.message,
-          details: (error as any).details,
-          hint: (error as any).hint,
-          code: (error as any).code,
-        });
-        setCodeError(
-          process.env.NODE_ENV === "development"
-            ? `Erreur Supabase: ${error.message}`
-            : "Erreur technique. Merci de réessayer."
-        );
-        return;
-      }
-
-      // data null => mauvais codes, ou bien RLS/filtrage
-      if (!data) {
-        setCodeError("Code établissement ou code utilisateur incorrect.");
-        return;
-      }
-
-      // sécurité logique côté app (même si RLS filtre déjà)
-      if (data.actif === false) {
-        setCodeError("Ce code est désactivé. Contactez l’établissement.");
-        return;
-      }
-
-      const t = (data.type_utilisateur || "") as CodeUserType;
-
-      if (t === "eleve") router.push("/espace-eleves");
-      else if (t === "prof") router.push("/espace-profs");
-      else if (t === "parent") router.push("/parents");
-      else if (t === "admin") router.push("/admin");
-      else router.push("/accueil");
-    } catch (err: any) {
-      console.error("Unexpected code login error:", err);
-      setCodeError(err?.message || "Erreur inattendue. Merci de réessayer.");
     } finally {
       setLoading(false);
     }
@@ -323,7 +214,7 @@ export default function SignInPage() {
               </h1>
 
               <p className="mt-1 text-sm text-slate-600">
-                Connectez-vous avec votre email (code) ou un code établissement.
+                Connectez-vous par email (code) – sans mot de passe.
               </p>
 
               {/* EMAIL */}
@@ -349,7 +240,7 @@ export default function SignInPage() {
                   disabled={loading || emailSent}
                   className="w-full rounded-lg bg-emerald-600 text-white py-2.5 text-sm font-semibold hover:bg-emerald-500 transition disabled:cursor-not-allowed disabled:opacity-60"
                 >
-                  {loading ? "Envoi..." : "C’est parti !"}
+                  {loading ? "Envoi..." : "Recevoir mon code"}
                 </button>
 
                 {errorMsg && <p className="text-xs text-red-600">{errorMsg}</p>}
@@ -359,10 +250,7 @@ export default function SignInPage() {
 
                 <p className="text-xs text-slate-500">
                   Pas encore de compte ?{" "}
-                  <Link
-                    href="/auth/signup"
-                    className="text-emerald-600 font-semibold"
-                  >
+                  <Link href="/auth/signup" className="text-emerald-600 font-semibold">
                     Inscription
                   </Link>
                 </p>
@@ -389,9 +277,7 @@ export default function SignInPage() {
                     type="text"
                     inputMode="numeric"
                     value={otpCode}
-                    onChange={(e) =>
-                      setOtpCode(e.target.value.replace(/[^\d]/g, ""))
-                    }
+                    onChange={(e) => setOtpCode(e.target.value.replace(/[^\d]/g, ""))}
                     placeholder="Code (6 à 8 chiffres)"
                     className="w-full rounded-lg border border-emerald-300 px-3 py-2 text-sm outline-none focus:border-emerald-500 focus:ring"
                   />
@@ -424,12 +310,8 @@ export default function SignInPage() {
                     </button>
                   </div>
 
-                  {errorMsg && (
-                    <p className="text-[11px] text-red-600">{errorMsg}</p>
-                  )}
-                  {feedback && (
-                    <p className="text-[11px] text-emerald-700">{feedback}</p>
-                  )}
+                  {errorMsg && <p className="text-[11px] text-red-600">{errorMsg}</p>}
+                  {feedback && <p className="text-[11px] text-emerald-700">{feedback}</p>}
                 </form>
               )}
 
@@ -441,73 +323,6 @@ export default function SignInPage() {
                 >
                   ✨ Tester EleveAI sans compte
                 </Link>
-              </div>
-
-              {/* SEPARATEUR */}
-              <div className="my-5 flex items-center gap-3 text-xs text-slate-400">
-                <div className="h-px flex-1 bg-slate-200" />
-                OU
-                <div className="h-px flex-1 bg-slate-200" />
-              </div>
-
-              {/* CODES ETABLISSEMENT */}
-              <form
-                onSubmit={handleCodeSubmit}
-                className="space-y-3 rounded-xl bg-slate-50 p-3 border border-slate-200"
-              >
-                <p className="text-xs font-semibold text-slate-700 uppercase">
-                  Connexion avec un code établissement
-                </p>
-
-                <div>
-                  <label className="text-xs font-medium">
-                    Code établissement
-                  </label>
-                  <input
-                    type="text"
-                    value={codeEtab}
-                    onChange={(e) => setCodeEtab(e.target.value)}
-                    placeholder="Ex : DIMITILE"
-                    disabled={loading}
-                    className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm outline-none focus:border-emerald-500 focus:ring disabled:opacity-60"
-                  />
-                </div>
-
-                <div>
-                  <label className="text-xs font-medium">Code utilisateur</label>
-                  <input
-                    type="text"
-                    value={codeUtilisateur}
-                    onChange={(e) => setCodeUtilisateur(e.target.value)}
-                    placeholder="Ex : 6C01"
-                    disabled={loading}
-                    className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm outline-none focus:border-emerald-500 focus:ring disabled:opacity-60"
-                  />
-                </div>
-
-                {codeError && (
-                  <p className="text-[11px] text-red-600">{codeError}</p>
-                )}
-
-                <button
-                  type="submit"
-                  disabled={loading}
-                  className="w-full rounded-lg border border-slate-300 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-100 transition disabled:opacity-60"
-                >
-                  {loading ? "Connexion..." : "Se connecter avec le code"}
-                </button>
-              </form>
-
-              {/* NOTRE TECHNOLOGIE */}
-              <div className="mt-5 rounded-xl border border-slate-100 bg-slate-50 px-3 py-3 text-[11px] text-slate-600">
-                <div className="font-semibold text-slate-800 mb-1">
-                  Notre technologie
-                </div>
-                <ul className="list-disc list-inside space-y-0.5">
-                  <li>LLM de pointe, sécurisé pour l’éducation</li>
-                  <li>Agent IA pédagogique qui guide pas à pas</li>
-                  <li>Méthodes actives : questionnement, essais, feedback</li>
-                </ul>
               </div>
             </div>
 
@@ -532,37 +347,22 @@ export default function SignInPage() {
 
           <div className="relative z-10 flex h-full flex-col justify-start pt-14 px-10 pb-20 text-slate-50">
             <h2 className="max-w-xl text-3xl font-bold leading-tight">
-              EleveAI améliore vos prompts
+              Connexion sans mot de passe
             </h2>
 
-            <div className="mt-4 mb-6 max-w-xl rounded-lg border border-red-500 bg-red-500/10 px-4 py-3 backdrop-blur">
-              <p className="text-sm leading-relaxed text-red-300 font-medium">
-                💡 Un <span className="font-semibold text-red-200">prompt</span>{" "}
-                = une consigne destinée à l’IA : question, tâche, activité.
+            <div className="mt-4 mb-6 max-w-xl rounded-lg border border-emerald-500 bg-emerald-500/10 px-4 py-3 backdrop-blur">
+              <p className="text-sm leading-relaxed text-emerald-200 font-medium">
+                Un code envoyé par email. Simple, rapide, sécurisé.
               </p>
             </div>
 
             <p className="max-w-xl text-sm font-medium text-yellow-300">
-              Créativité constructive : apprendre, inventer, transformer.
+              EleveAI guide vos usages de façon pédagogique.
             </p>
 
             <p className="mt-4 max-w-xl text-sm text-slate-200">
-              Neurosciences : clarté, progressivité, répétitions espacées.
+              Pensé pour élèves, professeurs, parents.
             </p>
-
-            <p className="mt-3 max-w-xl text-xs text-slate-400">
-              Compatible avec les projets d’établissement : climat scolaire,
-              différenciation, inclusion, orientation.
-            </p>
-
-            <div className="mt-10 max-w-xl rounded-2xl bg-slate-900/70 p-4 shadow-lg backdrop-blur">
-              <p className="text-slate-100 italic">
-                « Je découvre de nouvelles façons d’enseigner »
-              </p>
-              <p className="mt-3 text-xs font-medium text-slate-300">
-                Frédéric Lacoste – Mathématiques
-              </p>
-            </div>
           </div>
         </div>
       </div>
