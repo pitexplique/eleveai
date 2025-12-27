@@ -1,3 +1,4 @@
+// app/layout.tsx
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
@@ -75,15 +76,76 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const siteUrl = "https://eleveai.fr";
+
+  // ✅ JSON-LD : identité EleveAI (Organization)
+  const orgJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "EleveAI",
+    url: siteUrl,
+    logo: `${siteUrl}/preview.jpg`, // adapte si tu as un vrai logo, ex: /logo.png
+    contactPoint: [
+      {
+        "@type": "ContactPoint",
+        contactType: "support",
+        email: "frederic.lacoste@ac-reunion.fr",
+        availableLanguage: ["fr"],
+      },
+    ],
+    founder: {
+      "@type": "Person",
+      name: "Frédéric Lacoste",
+      jobTitle: "Fondateur",
+      url: `${siteUrl}/manifeste`,
+    },
+  };
+
+  // ✅ JSON-LD : personne (fondateur)
+  const personJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: "Frédéric Lacoste",
+    jobTitle: "Enseignant de mathématiques · Fondateur d’EleveAI",
+    url: `${siteUrl}/manifeste`,
+    email: "frederic.lacoste@ac-reunion.fr",
+    worksFor: {
+      "@type": "Organization",
+      name: "EleveAI",
+      url: siteUrl,
+    },
+  };
+
+  // ✅ JSON-LD : site (optionnel mais utile)
+  const websiteJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "EleveAI",
+    url: siteUrl,
+    inLanguage: "fr-FR",
+  };
+
   return (
     <html lang="fr">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-slate-950`}
       >
         <AppShell>{children}</AppShell>
+
+        {/* ✅ Injection JSON-LD (server OK) */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
+        />
       </body>
     </html>
   );
 }
-
-
