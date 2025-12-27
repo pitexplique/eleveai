@@ -16,7 +16,7 @@ type Profil = {
   updated_at: string | null;
 };
 
-const TYPES = ["prof", "eleve", "parent", "autre"] as const;
+const TYPES = ["prof", "eleve", "parent", "admin"] as const;
 
 export default function ComptePage() {
   const supabase = useMemo(() => createClient(), []);

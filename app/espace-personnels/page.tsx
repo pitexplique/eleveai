@@ -6,6 +6,8 @@ import {
   PresetCarouselItem,
 } from "@/components/PresetCarousel";
 
+export { metadata } from "./metadata";
+
 /* ----------------------------------------
    TYPES
 ---------------------------------------- */
@@ -374,34 +376,38 @@ export default function EspacePersonnelsPage() {
     <main className="min-h-screen bg-gradient-to-b from-emerald-50 via-white to-slate-50 text-slate-900">
       <div className="mx-auto max-w-6xl px-4 py-10 lg:py-14 space-y-8">
         {/* HERO */}
+        {/* HEADER (aligné avec les autres espaces) */}
         <section className="rounded-3xl bg-white/90 p-6 lg:p-8 shadow-sm ring-1 ring-emerald-100">
           <div className="flex flex-wrap items-start justify-between gap-6">
             <div className="space-y-4">
-              <p className="inline-flex items-center rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-emerald-700 ring-1 ring-emerald-100">
-                Espace personnels & services · entretien · cantine · espaces verts
+              <p className="inline-flex items-center gap-2 rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-800 ring-1 ring-emerald-100">
+                <span>🧰</span>
+                <span>Espace personnels · Documents utiles et respectueux</span>
               </p>
-              <h1 className="text-3xl font-bold tracking-tight text-slate-900 lg:text-4xl">
-                Générateur de prompts pour les personnels techniques et de service
+
+              <h1 className="text-3xl font-extrabold tracking-tight text-[#0047B6] lg:text-4xl">
+                Générateur de prompts pour les personnels & services
               </h1>
+
               <p className="max-w-2xl text-sm sm:text-base text-slate-700">
-                Un assistant pour t’aider à préparer des consignes, notes internes,
-                fiches sécurité, protocoles ou messages de remerciement à destination
-                des personnes qui font vivre l’établissement au quotidien :
-                nettoyage, cantine, espaces verts, maintenance.
+                Choisis un modèle (ou décris la situation en 2 minutes). EleveAI génère un prompt
+                clair pour rédiger une <b>note</b>, un <b>protocole</b>, une <b>fiche sécurité</b>,
+                une <b>affiche</b> ou un <b>message de remerciement</b>.
               </p>
             </div>
 
             <div className="max-w-xs rounded-2xl border border-emerald-100 bg-emerald-50 px-4 py-3 text-xs text-emerald-950 shadow-inner space-y-1.5">
-              <p className="font-semibold">Idées d’usage</p>
+              <p className="font-semibold">Idées rapides</p>
               <ul className="space-y-1">
-                <li>• Planifier un grand ménage.</li>
-                <li>• Préparer une fiche sécurité pour l’élagage.</li>
-                <li>• Créer une affiche pour la cantine.</li>
-                <li>• Rédiger un message de remerciement aux équipes.</li>
+                <li>• Consignes nettoyage / grand ménage.</li>
+                <li>• Fiche sécurité (produits, machines, EPI).</li>
+                <li>• Affiche cantine (respect / propreté).</li>
+                <li>• Message de remerciement aux équipes.</li>
               </ul>
             </div>
           </div>
         </section>
+
 
         {/* PRESETS – CARROUSEL */}
         <PresetCarousel

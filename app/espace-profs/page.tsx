@@ -45,6 +45,8 @@ import {
   tagToBadge,
 } from "@/lib/pedagogie/types";
 
+export { metadata } from "./metadata";
+
 /* ----------------------------------------
    HELPERS (UI)
 ---------------------------------------- */
@@ -1065,21 +1067,23 @@ export default function ProfsPage() {
   return (
     <main className="min-h-screen bg-gradient-to-b from-sky-50 via-white to-slate-50 text-gray-900">
       <div className="max-w-6xl mx-auto px-4 py-8 sm:py-10 space-y-8">
-        <header className="space-y-2">
-          <p className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-100 text-xs font-semibold text-[#0047B6]">
-            <span>🧑‍🏫</span>
-            <span>Espace professeurs – 1 type + options (Word-friendly)</span>
-          </p>
+          <header className="space-y-2">
+            <p className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-100 text-xs font-semibold text-[#0047B6]">
+              <span>🧑‍🏫</span>
+              <span>Espace professeurs · Génération de prompts pédagogiques</span>
+            </p>
 
-          <h1 className="text-3xl sm:text-4xl font-extrabold text-[#0047B6]">
-            Générateur de prompts profs (Word-friendly)
-          </h1>
+            <h1 className="text-3xl sm:text-4xl font-extrabold text-[#0047B6]">
+              Générateur de prompts pédagogiques (Word-friendly)
+            </h1>
 
-          <p className="text-sm sm:text-base text-gray-700 max-w-2xl">
-            Tu choisis un <b>type</b> (catégorie principale), puis tu ajoutes des{" "}
-            <b>options</b> (différenciation, rituel, compatible correction IA, Atelier-IA),
-            et tu écris ta consigne. EleveAI génère un prompt propre + une ressource via l’agent.
-          </p>
+            <p className="text-sm sm:text-base text-gray-700 max-w-2xl">
+              Choisis un <b>type</b> de ressource (séance, exercices, évaluation…), ajoute des{" "}
+              <b>options</b> (différenciation, rituels, correction IA, Atelier-IA), puis écris ta consigne.
+              EleveAI génère un <b>prompt clair</b> et une <b>ressource prête à l’emploi</b>.
+            </p>
+
+
 
           <div className="flex flex-wrap items-center gap-2 sm:gap-3 pt-2">
             <ToggleChip

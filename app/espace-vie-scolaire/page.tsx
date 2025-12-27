@@ -6,6 +6,9 @@ import {
   PresetCarouselItem,
 } from "@/components/PresetCarousel";
 
+export { metadata } from "./metadata";
+
+
 /* ----------------------------------------
    TYPES
 ---------------------------------------- */
@@ -389,14 +392,25 @@ export default function EspaceVieScolairePage() {
   return (
     <main className="min-h-screen bg-gradient-to-b from-sky-50 via-white to-slate-50 text-slate-900">
       <div className="mx-auto max-w-6xl px-4 py-10 lg:py-14 space-y-8">
-        {/* HERO */}
-        <section className="rounded-3xl bg-white p-6 lg:p-8 shadow-sm ring-1 ring-emerald-100">
-          <h1 className="text-3xl font-bold mb-2">Espace Vie Scolaire – EleveAI</h1>
-          <p className="text-slate-700 max-w-2xl">
-            Générateur de prompts pour la vie scolaire : conflits, retards, harcèlement,
-            suivi, sanctions éducatives, protocoles AED/CPE, communication familles.
-          </p>
+        {/* HEADER */}
+        <section className="rounded-3xl bg-white p-6 lg:p-8 shadow-sm ring-1 ring-sky-100">
+          <div className="space-y-4">
+            <p className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-100 text-xs font-semibold text-[#0047B6]">
+              🧭 Espace vie scolaire · Communication & suivi éducatif
+            </p>
+
+            <h1 className="text-3xl sm:text-4xl font-extrabold text-[#0047B6]">
+              Générateur de prompts pour la vie scolaire
+            </h1>
+
+            <p className="text-sm sm:text-base text-slate-700 max-w-2xl">
+              Décris une situation (retards, conflit, sanction, suivi, harcèlement).
+              EleveAI t’aide à rédiger un <b>message</b>, un <b>courrier</b>, un
+              <b> compte rendu</b> ou un <b>protocole</b>, avec un ton adapté et professionnel.
+            </p>
+          </div>
         </section>
+
 
         {/* PRESETS */}
         <PresetCarousel

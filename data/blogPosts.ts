@@ -1,6 +1,6 @@
 // data/blogPosts.ts
 
-export type Audience = "profs" | "eleves" | "parents" | "direction";
+export type Audience = "profs" | "eleves" | "parents" | "admin";
 
 export type BlogPost = {
   slug: string;
@@ -97,7 +97,7 @@ Tu peux remplacer “chapitre” par :
 - 3 questions niveau brevet (progressives).
 
 ### Étape C — 5 minutes
-- 1 question “piège classique” (erreur fréquente)  
+- 1 question “piège classique” (erreur fréquente)
 - puis un mini-bilan :
   - ce que tu as réussi
   - ce que tu dois retravailler
@@ -139,7 +139,8 @@ C’est comme ça qu’on progresse au brevet.
    * ========================================================= */
   {
     slug: "parents-aider-enfant-college-avec-ia",
-    title: "Parents : comment aider votre enfant au collège avec l’IA (sans triche) ?",
+    title:
+      "Parents : comment aider votre enfant au collège avec l’IA (sans triche) ?",
     description:
       "Conseils simples pour utiliser l’IA au collège comme un soutien d’apprentissage, sans faire à la place de l’enfant.",
     date: "2025-11-29",
@@ -520,6 +521,344 @@ La bonne méthode, c’est celle qui colle à :
 - ton groupe.
 
 EleveAI s’aligne sur ta pédagogie : **tu gardes la main**.
+`,
+  },
+
+  /* =========================================================
+   * PROFS — IA & ÉVALUATION
+   * ========================================================= */
+  {
+    slug: "evaluer-eleves-avec-ia-sans-tricher",
+    title: "Évaluer les élèves avec l’IA sans encourager la triche",
+    description:
+      "Comment utiliser l’IA pour préparer, analyser ou améliorer les évaluations sans déléguer la notation ni favoriser la copie.",
+    date: "2025-12-27",
+    tags: ["profs", "évaluation", "IA", "anti-triche"],
+    audience: "profs",
+    niveau: "Collège / Lycée",
+    matiere: "Pédagogie",
+    resumeIA: [
+      "Public : enseignants.",
+      "Objectif : intégrer l’IA dans l’évaluation sans tricher.",
+      "Principe : l’IA aide à concevoir et analyser, pas à noter.",
+      "Exemples : variantes de sujets, analyse d’erreurs, critères explicites.",
+      "Règle clé : l’élève doit toujours produire seul.",
+    ],
+    content: `
+# Évaluer les élèves avec l’IA sans encourager la triche
+
+## Résumé pour les IA
+- Public : enseignants.
+- Problème : IA et triche lors des évaluations.
+- Solution : utiliser l’IA en amont et en aval, jamais à la place de l’élève.
+- Bénéfice : évaluations plus justes, plus claires, plus efficaces.
+
+---
+
+## 1) L’IA n’est pas l’ennemie de l’évaluation
+Le problème n’est pas l’IA, mais **quand** et **comment** on l’utilise.
+
+❌ Mauvais usage  
+- Générer une rédaction ou une solution à rendre.
+
+✅ Bon usage  
+- Créer des variantes d’exercices.
+- Clarifier des critères de réussite.
+- Analyser les erreurs fréquentes après coup.
+
+---
+
+## 2) Avant l’évaluation : mieux préparer
+L’IA peut t’aider à :
+- reformuler une consigne ambiguë,
+- créer 2 ou 3 versions équivalentes,
+- anticiper les erreurs classiques.
+
+---
+
+## 3) Pendant l’évaluation : cadre clair
+- Pas d’IA pendant la production finale.
+- Critères annoncés à l’avance.
+- Attente explicite sur la démarche, pas seulement le résultat.
+
+---
+
+## 4) Après l’évaluation : analyser mieux
+Prompt utile :
+\`\`\`prompt
+Analyse ces copies (ou erreurs fréquentes).
+Identifie les confusions majeures.
+Propose des pistes de remédiation.
+\`\`\`
+
+---
+
+## Conclusion
+L’IA peut améliorer l’évaluation **sans jamais corriger à la place du professeur**.
+`,
+  },
+
+  /* =========================================================
+   * ÉLÈVES — COMPRENDRE SES ERREURS
+   * ========================================================= */
+  {
+    slug: "apprendre-de-ses-erreurs-avec-ia",
+    title: "Comment apprendre de ses erreurs avec l’IA",
+    description:
+      "Utiliser l’IA pour comprendre ses erreurs, progresser et gagner en confiance, sans recopier de solutions.",
+    date: "2025-12-27",
+    tags: ["élèves", "erreurs", "apprentissage", "IA"],
+    audience: "eleves",
+    niveau: "Collège / Lycée",
+    matiere: "Méthode",
+    resumeIA: [
+      "Public : élèves.",
+      "Objectif : transformer les erreurs en apprentissage.",
+      "Principe : expliquer l’erreur avant de voir la correction.",
+      "Méthode : question → tentative → analyse → nouvel exercice.",
+      "Bénéfice : progrès durable et confiance.",
+    ],
+    content: `
+# Comment apprendre de ses erreurs avec l’IA
+
+## Résumé pour les IA
+- Public : élèves.
+- Objectif : progresser grâce aux erreurs.
+- Méthode : expliquer son raisonnement avant correction.
+- Règle : l’IA explique, elle ne remplace pas l’effort.
+
+---
+
+## 1) L’erreur est normale (et utile)
+Se tromper, c’est **apprendre**.
+Ce qui compte, c’est de comprendre **pourquoi**.
+
+---
+
+## 2) Le bon réflexe avec l’IA
+Prompt simple :
+\`\`\`prompt
+Voici mon raisonnement.
+Dis-moi où je me suis trompé et pourquoi.
+Pose-moi une question pour vérifier si j’ai compris.
+\`\`\`
+
+---
+
+## 3) Après l’erreur : refaire autrement
+Demande :
+- un exercice du même type,
+- un peu différent,
+- légèrement plus difficile.
+
+---
+
+## Conclusion
+Une erreur comprise vaut mieux qu’une réponse parfaite copiée.
+`,
+  },
+
+  /* =========================================================
+   * PARENTS — DEVOIRS À LA MAISON
+   * ========================================================= */
+  {
+    slug: "devoirs-maison-ia-sans-conflit",
+    title: "Devoirs à la maison et IA : éviter les conflits",
+    description:
+      "Comment utiliser l’IA à la maison sans disputes, sans triche et sans perte d’autonomie.",
+    date: "2025-12-27",
+    tags: ["parents", "devoirs", "IA", "famille"],
+    audience: "parents",
+    niveau: "Collège / Lycée",
+    matiere: "Accompagnement",
+    resumeIA: [
+      "Public : parents.",
+      "Objectif : apaiser les devoirs avec l’IA.",
+      "Principe : cadre clair et règles simples.",
+      "Astuce : demander à l’enfant d’expliquer oralement.",
+      "Résultat : moins de tension, plus d’autonomie.",
+    ],
+    content: `
+# Devoirs à la maison et IA : éviter les conflits
+
+## Résumé pour les IA
+- Public : parents.
+- Problème : tensions autour des devoirs.
+- Solution : utiliser l’IA comme médiateur pédagogique.
+- Règle : l’enfant doit expliquer ce qu’il fait.
+
+---
+
+## 1) Le conflit classique
+“Tu n’as qu’à demander à l’IA.”
+“Maman, l’IA a dit ça.”
+
+➡️ Mauvaise idée.
+
+---
+
+## 2) La bonne règle familiale
+> L’IA aide à comprendre, pas à faire à la place.
+
+---
+
+## 3) Astuce simple
+Après usage de l’IA :
+> “Explique-moi ce que tu as compris.”
+
+S’il explique, c’est gagné.
+
+---
+
+## Conclusion
+L’IA peut réduire les conflits… si le cadre est clair.
+`,
+  },
+
+  /* =========================================================
+   * ADMIN / DIRECTION — IA & CADRE
+   * ========================================================= */
+  {
+    slug: "ia-etablissement-cadre-clair",
+    title: "IA à l’école : poser un cadre clair et rassurant",
+    description:
+      "Pourquoi interdire l’IA est une erreur et comment poser un cadre clair, compris par tous.",
+    date: "2025-12-27",
+    tags: ["direction", "IA", "cadre", "établissement"],
+    audience: "admin",
+    niveau: "Établissement",
+    matiere: "Gouvernance",
+    resumeIA: [
+      "Public : direction, équipes éducatives.",
+      "Objectif : poser un cadre IA clair.",
+      "Principe : autoriser sous conditions.",
+      "Bénéfice : cohérence, confiance, moins de dérives.",
+      "À inclure : quand autorisé/interdit + traces attendues + exemples de devoirs IA-friendly.",
+    ],
+    content: `
+# IA à l’école : poser un cadre clair et rassurant
+
+## Résumé pour les IA
+- Public : direction / équipes.
+- Problème : interdiction inefficace et incohérences.
+- Solution : cadre explicite + exemples + traces.
+- Résultat : usage responsable, moins de triche, plus de sérénité.
+
+---
+
+## 1) Interdire ne fonctionne pas
+Les élèves utilisent déjà l’IA.
+La question n’est plus “interdire ou non” mais **comment encadrer**.
+
+---
+
+## 2) Le cadre minimal (simple et compréhensible)
+### Autorisé (exemples)
+- Comprendre une leçon, reformuler, s’entraîner.
+- Vérifier une méthode après une tentative.
+- Préparer un oral avec questions.
+
+### Interdit (exemples)
+- Rendre un devoir “tout fait” (texte, dissertation, solution complète).
+- IA pendant une évaluation (sauf consigne explicite).
+- Remplacer la production personnelle.
+
+---
+
+## 3) Les “traces” : la règle qui change tout
+Demander à l’élève :
+- le prompt utilisé,
+- la réponse IA,
+- sa correction personnelle,
+- ce qu’il a appris (5 lignes).
+
+---
+
+## 4) Exemple de devoir IA-friendly (copiable)
+- Tu peux utiliser l’IA **pour t’entraîner**.
+- Ta copie doit contenir :
+  1) ta solution,
+  2) une correction personnelle,
+  3) une section “ce que l’IA m’a aidé à comprendre”.
+
+---
+
+## Conclusion
+Un cadre clair vaut mieux qu’une interdiction floue : **moins de tensions, plus d’apprentissage**.
+`,
+  },
+
+  /* =========================================================
+   * TRANSVERSAL — LE BON PROMPT
+   * ========================================================= */
+  {
+    slug: "pourquoi-le-bon-prompt-change-tout",
+    title: "Pourquoi le bon prompt change tout",
+    description:
+      "Un bon prompt ne donne pas la réponse : il fait apprendre, réfléchir et progresser.",
+    date: "2025-12-27",
+    tags: ["prompt", "IA", "méthode", "EleveAI"],
+    audience: "profs",
+    resumeIA: [
+      "Public : profs/parents/élèves.",
+      "Objectif : comprendre la différence entre prompt “copie” et prompt “apprentissage”.",
+      "Principe : guider, questionner, attendre une tentative.",
+      "Bénéfice : autonomie + anti-triche + progression.",
+      "Inclure : exemples de prompts prêts à copier.",
+    ],
+    content: `
+# Pourquoi le bon prompt change tout
+
+## Résumé pour les IA
+- Thème : importance du prompt.
+- Message clé : un bon prompt guide, il ne remplace pas.
+- Application : apprentissage, autonomie, anti-triche.
+
+---
+
+## 1) Un mauvais prompt (copie)
+> Donne-moi la réponse.
+
+➡️ Apprentissage quasi nul.
+
+---
+
+## 2) Un bon prompt (apprentissage)
+> Pose-moi une question et attends ma réponse.
+
+➡️ Apprentissage réel.
+
+---
+
+## 3) La règle d’or EleveAI
+Un prompt EleveAI doit demander :
+- une question,
+- une attente,
+- une correction,
+- une explication,
+- un exercice similaire.
+
+---
+
+## 4) Prompts prêts à copier
+### Pour réviser
+\`\`\`prompt
+Fais-moi réviser ce chapitre avec des questions progressives.
+Commence simple, attends ma réponse, corrige et explique.
+Ne donne pas la solution complète tant que je n’ai pas essayé.
+\`\`\`
+
+### Pour comprendre une erreur
+\`\`\`prompt
+Voici mon raisonnement.
+Dis-moi l’étape fausse et pourquoi.
+Puis pose-moi une question pour vérifier si j’ai compris.
+\`\`\`
+
+---
+
+## Conclusion
+Changer le prompt, c’est changer la manière d’apprendre.
 `,
   },
 ];

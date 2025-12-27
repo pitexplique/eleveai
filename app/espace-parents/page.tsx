@@ -611,13 +611,21 @@ Règles importantes :
         {/* 3️⃣ FORMULAIRE PRINCIPAL + GÉNÉRATION */}
         <section className="mt-6 rounded-3xl bg-white p-6 shadow-md ring-1 ring-slate-100 lg:p-8">
           <header className="mb-6 space-y-2">
-            <h2 className="text-lg font-semibold text-slate-900">
-              Créez votre prompt personnalisé
-            </h2>
-            <p className="text-sm text-slate-600">
-              Remplissez → générez → puis utilisez les tags “Coller dans …”.
+            <p className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-100 text-xs font-semibold text-indigo-800">
+              👨‍👩‍👧‍👦 Espace parents · Accompagnement scolaire encadré
+            </p>
+
+            <h1 className="text-3xl sm:text-4xl font-extrabold text-[#0047B6]">
+              Aider votre enfant à apprendre avec l’IA (sans tricher)
+            </h1>
+
+            <p className="text-sm sm:text-base text-slate-700 max-w-2xl">
+              Indiquez la situation de votre enfant (niveau, difficulté, objectif).
+              EleveAI génère un <b>prompt clair et encadré</b> pour l’aider à comprendre,
+              réviser ou s’entraîner, dans le respect du cadre scolaire.
             </p>
           </header>
+
 
           <div className="space-y-5">
             <div className="grid gap-4 sm:grid-cols-2">

@@ -1,13 +1,56 @@
-import { MetadataRoute } from "next";
+// app/robots.ts
+import type { MetadataRoute } from "next";
 
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: [
       {
         userAgent: "*",
-        allow: "/",
+
+        // ✅ Autoriser tout le contenu éditorial et pédagogique
+        allow: [
+          "/",
+          "/blog",
+          "/blog/",
+          "/qui-suis-je",
+          "/faq",
+          "/contact",
+
+          // Offres / infos
+          "/offre-pilote",
+          "/tarifs",
+          "/formation",
+
+          // Ressources & prompts
+          "/ressources",
+          "/prompts",
+          "/le-bon-prompt",
+
+          // ❤️ CŒUR DU PROJET : espaces de génération de prompts
+          "/espace-administration",
+          "/espace-personnels",
+          "/espace-vie-scolaire",
+          "/espace-eleves",
+          "/espace-profs",
+          "/espace-parents",
+
+          // Communauté / vitrine
+          "/partenaires",
+          "/sponsors",
+          "/concours-ia",
+        ],
+
+        // ❌ Bloquer uniquement les routes techniques
+        disallow: [
+          "/auth",
+          "/dashboard",
+          "/tchat",
+          "/api",
+        ],
       },
     ],
+
+    // ✅ Sitemap officiel
     sitemap: "https://eleveai.fr/sitemap.xml",
   };
 }

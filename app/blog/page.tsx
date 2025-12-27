@@ -7,7 +7,7 @@ const AUDIENCE_LABELS: Record<Audience, string> = {
   profs: "Professeurs",
   eleves: "Élèves",
   parents: "Parents",
-  direction: "Direction",
+  admin: "Administratif",
 };
 
 function formatMeta(post: BlogPost) {
@@ -39,11 +39,12 @@ export default function BlogPage() {
       <p className="text-slate-700 mb-2">
         Articles pour <strong>profs, élèves, parents et directions</strong> :
         IA à l’école, neurosciences, méthodes de travail, exemples de prompts
-        conformes à Eduscol.
+        cadrés (anti-triche).
       </p>
       <p className="text-sm text-blue-700 font-semibold mb-8">
-        Cette page applique Eduscol + neurosciences (structure claire, résumés
-        dédiés, prompts reproductibles).
+        Chaque article est structuré pour être lisible par les humains et
+        facilement exploitable par l’IA (résumé dédié, sections courtes,
+        prompts reproductibles).
       </p>
 
       <div className="grid gap-6 md:grid-cols-2">
@@ -53,17 +54,11 @@ export default function BlogPage() {
             className="rounded-xl border border-slate-200 bg-white shadow-sm hover:shadow-md transition-shadow"
           >
             <div className="p-5">
-              <h2 className="text-lg font-semibold mb-2">
-                {post.title}
-              </h2>
+              <h2 className="text-lg font-semibold mb-2">{post.title}</h2>
 
-              <p className="text-xs text-slate-500 mb-3">
-                {formatMeta(post)}
-              </p>
+              <p className="text-xs text-slate-500 mb-3">{formatMeta(post)}</p>
 
-              <p className="text-sm text-slate-700 mb-4">
-                {post.description}
-              </p>
+              <p className="text-sm text-slate-700 mb-4">{post.description}</p>
 
               <div className="flex flex-wrap gap-2 mb-4">
                 {post.tags.map((tag) => (
@@ -89,4 +84,3 @@ export default function BlogPage() {
     </main>
   );
 }
-

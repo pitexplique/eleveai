@@ -35,6 +35,8 @@ import {
 import { CLASSES, MATIERES } from "@/lib/constants/scolaire";
 
 export const dynamic = "force-dynamic";
+export { metadata } from "./metadata";
+
 
 /* ----------------------------------------
    TYPES (UI)
@@ -443,18 +445,20 @@ export default function ElevePage() {
         {/* HEADER */}
         <header className="space-y-2">
           <p className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100 text-xs font-semibold text-emerald-800">
-            🎒 Espace élève – Crée ton prompt d’aide
+            🎒 Espace élèves · Aide personnalisée pour apprendre
           </p>
 
           <h1 className="text-3xl sm:text-4xl font-extrabold text-[#0047B6]">
-            Ton coach IA pour apprendre (sans tricher)
+            Ton coach IA pour comprendre et progresser (sans tricher)
           </h1>
 
-          <p className="text-sm text-gray-700 max-w-2xl">
-            Choisis un modèle ou remplis 4 infos rapides. Tu obtiens un prompt clair pour comprendre, réviser ou préparer un contrôle.
-            Ensuite, tu peux améliorer avec des options.
+          <p className="text-sm sm:text-base text-gray-700 max-w-2xl">
+            Choisis un <b>objectif</b> (comprendre, réviser, t’entraîner), indique quelques informations,
+            puis EleveAI te guide avec des <b>questions, des explications et des exercices adaptés</b>.
+            Le but : apprendre vraiment, pas copier.
           </p>
         </header>
+
 
         {/* PRESETS */}
         <PresetCarousel
