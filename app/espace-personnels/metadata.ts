@@ -1,28 +1,29 @@
+// app/espace-personnels/metadata.ts
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Espace personnels | EleveAI",
+  title: "Espace personnels — Documents & services | EleveAI",
   description:
-    "Génère des prompts clairs pour rédiger des consignes, notes internes, fiches sécurité, protocoles, affiches ou messages de remerciement à destination des personnels d’un établissement.",
+    "Générateur de prompts pour les personnels et services : notes, protocoles, fiches sécurité, affiches, remerciements. Clair, respectueux, adapté terrain.",
   alternates: {
     canonical: "https://eleveai.fr/espace-personnels",
   },
-  robots: {
-    index: true,
-    follow: true,
-  },
+  robots: { index: true, follow: true },
   openGraph: {
     type: "website",
     url: "https://eleveai.fr/espace-personnels",
-    siteName: "EleveAI",
-    title: "Espace personnels | EleveAI",
+    title: "Espace personnels — Documents & services | EleveAI",
     description:
-      "Prompts prêts à coller pour consignes, protocoles, fiches sécurité, notes internes et affiches.",
+      "Prompts prêts à copier pour documents clairs (note, protocole, fiche sécurité, affiche, remerciements).",
+    siteName: "EleveAI",
+    locale: "fr_FR",
   },
   twitter: {
-    card: "summary",
-    title: "Espace personnels | EleveAI",
+    card: "summary_large_image",
+    title: "Espace personnels — EleveAI",
     description:
-      "Prompts prêts à coller pour consignes, protocoles, fiches sécurité, notes internes et affiches.",
+      "Documents clairs et respectueux pour les personnels : notes, protocoles, sécurité, affiches.",
   },
 };
+
+

@@ -1,28 +1,28 @@
+// app/espace-vie-scolaire/metadata.ts
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Espace vie scolaire | EleveAI",
+  title: "Vie scolaire — Messages & documents | EleveAI",
   description:
-    "Générateur de prompts pour la vie scolaire : messages aux élèves, courriers aux familles, comptes rendus, sanctions éducatives, fiches de suivi et protocoles.",
+    "Générateur de prompts pour la vie scolaire : messages aux familles, rappels de règles, convocations, comptes-rendus, bilans d’incident. Clair, factuel, respectueux.",
   alternates: {
     canonical: "https://eleveai.fr/espace-vie-scolaire",
   },
-  robots: {
-    index: true,
-    follow: true,
-  },
+  robots: { index: true, follow: true },
   openGraph: {
     type: "website",
     url: "https://eleveai.fr/espace-vie-scolaire",
-    siteName: "EleveAI",
-    title: "Espace vie scolaire | EleveAI",
+    title: "Vie scolaire — Messages & documents | EleveAI",
     description:
-      "Des prompts clairs et professionnels pour gérer les situations de vie scolaire avec justesse et cadre.",
+      "Prompts prêts à copier pour la vie scolaire : rappel de règles, convocation, message aux familles, compte-rendu, suivi d’incident.",
+    siteName: "EleveAI",
+    locale: "fr_FR",
   },
   twitter: {
-    card: "summary",
-    title: "Espace vie scolaire | EleveAI",
+    card: "summary_large_image",
+    title: "Vie scolaire — EleveAI",
     description:
-      "Outils IA pour la communication, le suivi et les documents de vie scolaire.",
+      "Documents clairs et factuels pour la vie scolaire : familles, règles, incidents, suivi.",
   },
 };
+

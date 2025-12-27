@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import {
   ChevronDown,
@@ -31,7 +31,7 @@ import {
 ------------------------------ */
 const AUTH_ROUTES = {
   signin: "/auth/signin",
-  signup: "/auth/signup", // ✅ rappel : signup est dans /auth/
+  signup: "/auth/signup", // ✅ signup est dans /auth/
 };
 
 type NavItem = {
@@ -58,16 +58,25 @@ function isActive(pathname: string, href: string) {
 function useOnClickOutside(
   refs: React.RefObject<HTMLElement>[],
   handler: () => void,
+  enabled = true,
 ) {
   useEffect(() => {
-    function listener(e: MouseEvent) {
+    if (!enabled) return;
+
+    function listener(e: MouseEvent | TouchEvent) {
       const target = e.target as Node;
       const clickedInside = refs.some((r) => r.current?.contains(target));
       if (!clickedInside) handler();
     }
+
     document.addEventListener("mousedown", listener);
-    return () => document.removeEventListener("mousedown", listener);
-  }, [refs, handler]);
+    document.addEventListener("touchstart", listener, { passive: true });
+
+    return () => {
+      document.removeEventListener("mousedown", listener);
+      document.removeEventListener("touchstart", listener);
+    };
+  }, [refs, handler, enabled]);
 }
 
 function IconWrap({ children }: { children: React.ReactNode }) {
@@ -94,7 +103,7 @@ export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState<null | GroupKey>(null);
 
-  // Refs
+  // Refs (desktop dropdown containers)
   const refAtelier = useRef<HTMLDivElement>(null);
   const refProfs = useRef<HTMLDivElement>(null);
   const refEleves = useRef<HTMLDivElement>(null);
@@ -102,23 +111,37 @@ export default function Header() {
   const refAdmin = useRef<HTMLDivElement>(null);
   const refPlus = useRef<HTMLDivElement>(null);
 
-  useOnClickOutside(
-    [refAtelier, refProfs, refEleves, refParents, refAdmin, refPlus],
-    () => setOpen(null),
+  // Ref (global header, pour fermer le menu mobile si clic dehors)
+  const headerRef = useRef<HTMLElement>(null);
+
+  const closeAll = useCallback(() => {
+    setOpen(null);
+    setMenuOpen(false);
+    setMobileOpen(null);
+  }, []);
+
+  const refsDesktop = useMemo(
+    () => [refAtelier, refProfs, refEleves, refParents, refAdmin, refPlus],
+    [],
   );
+
+  useOnClickOutside(refsDesktop, () => setOpen(null), open !== null);
+  useOnClickOutside([headerRef], closeAll, menuOpen); // mobile
 
   // Escape = ferme tout
   useEffect(() => {
     function onKeyDown(e: KeyboardEvent) {
-      if (e.key === "Escape") {
-        setOpen(null);
-        setMenuOpen(false);
-        setMobileOpen(null);
-      }
+      if (e.key === "Escape") closeAll();
     }
     document.addEventListener("keydown", onKeyDown);
     return () => document.removeEventListener("keydown", onKeyDown);
-  }, []);
+  }, [closeAll]);
+
+  // ✅ Ferme les menus quand on change de route
+  useEffect(() => {
+    closeAll();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pathname]);
 
   // ✅ Auth listener : met à jour le header après login/logout
   useEffect(() => {
@@ -146,17 +169,11 @@ export default function Header() {
 
   const isLoggedIn = !!userEmail;
 
-  async function logout() {
+  const logout = useCallback(async () => {
     await supabase.auth.signOut();
     setUserEmail(null);
     router.replace("/accueil");
-  }
-
-  function closeAll() {
-    setOpen(null);
-    setMenuOpen(false);
-    setMobileOpen(null);
-  }
+  }, [router, supabase]);
 
   function getRefForKey(key: GroupKey) {
     if (key === "atelier") return refAtelier;
@@ -167,7 +184,7 @@ export default function Header() {
     return refPlus;
   }
 
-  // ✅ Navigation selon ton schéma + ajout Administratif
+  // ✅ Navigation (ton schéma)
   const GROUPS: Group[] = useMemo(
     () => [
       {
@@ -201,8 +218,6 @@ export default function Header() {
         icon: <GraduationCap className="h-4 w-4" />,
         items: [
           { href: "/espace-eleves", label: "Générer des prompts", icon: <GraduationCap className="h-4 w-4" /> },
-
-          // ✅ si tu n'as pas encore ces routes, commente les 2 lignes ci-dessous
           { href: "/concours-ia", label: "Changer ton monde", icon: <Sparkles className="h-4 w-4" /> },
           { href: "/parcours-creatifs", label: "Autres parcours créatifs", icon: <BookOpenText className="h-4 w-4" /> },
         ],
@@ -232,7 +247,8 @@ export default function Header() {
           { href: "/blog", label: "Blog", icon: <BookOpenText className="h-4 w-4" /> },
           { href: "/faq", label: "FAQ", icon: <HelpCircle className="h-4 w-4" /> },
           { href: "/contact", label: "Contact", icon: <Mail className="h-4 w-4" /> },
-          { href: "/qui-suis-je", label: "Qui suis-je ?", icon: <UserRound className="h-4 w-4" /> },
+          // adapte selon ton choix : /manifeste ou /qui-suis-je
+          { href: "/qui-suis-je", label: "Qui sommes-nous ?", icon: <UserRound className="h-4 w-4" /> },
           { href: "/partenaires", label: "Partenaires & sponsors", icon: <Handshake className="h-4 w-4" /> },
         ],
       },
@@ -248,7 +264,10 @@ export default function Header() {
     }`;
 
   return (
-    <header className="sticky top-0 z-40 border-b border-slate-800 bg-slate-950/90 backdrop-blur">
+    <header
+      ref={headerRef}
+      className="sticky top-0 z-40 border-b border-slate-800 bg-slate-950/90 backdrop-blur"
+    >
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:py-4">
         {/* LOGO */}
         <Link href="/accueil" onClick={closeAll} className="flex items-center gap-2">
@@ -272,6 +291,7 @@ export default function Header() {
             return (
               <div key={group.key} ref={ref} className="relative">
                 <button
+                  type="button"
                   onClick={() => setOpen((v) => (v === group.key ? null : group.key))}
                   className={desktopBtnClass(activeBtn)}
                   aria-haspopup="menu"
@@ -318,7 +338,6 @@ export default function Header() {
 
         {/* RIGHT CTA (DESKTOP) */}
         <div className="hidden lg:flex items-center gap-2">
-          {/* ✅ éviter le flicker : pendant authLoading on n’affiche rien */}
           {!authLoading && !isLoggedIn && (
             <>
               <Link
@@ -349,6 +368,7 @@ export default function Header() {
               </Link>
 
               <button
+                type="button"
                 onClick={logout}
                 className="inline-flex items-center gap-2 rounded-xl border border-slate-700 px-3 py-1.5 text-sm text-slate-200 hover:bg-slate-900 hover:border-slate-500"
                 title={userEmail ?? "Déconnexion"}
@@ -362,6 +382,7 @@ export default function Header() {
 
         {/* BURGER MOBILE */}
         <button
+          type="button"
           className="lg:hidden inline-flex items-center justify-center rounded-md border border-slate-700 p-2 text-slate-200"
           onClick={() => {
             setMenuOpen((o) => !o);
@@ -411,6 +432,7 @@ export default function Header() {
                   Dashboard
                 </Link>
                 <button
+                  type="button"
                   onClick={async () => {
                     await logout();
                     closeAll();
@@ -431,11 +453,10 @@ export default function Header() {
               return (
                 <div key={group.key} className="rounded-xl border border-slate-800 overflow-hidden">
                   <button
+                    type="button"
                     onClick={() => setMobileOpen((v) => (v === group.key ? null : group.key))}
                     className={`w-full px-3 py-2 text-sm flex items-center justify-between ${
-                      opened || anyActive
-                        ? "bg-sky-500/10 text-sky-100"
-                        : "bg-slate-950 text-slate-200 hover:bg-slate-900"
+                      opened || anyActive ? "bg-sky-500/10 text-sky-100" : "bg-slate-950 text-slate-200 hover:bg-slate-900"
                     }`}
                     aria-expanded={opened}
                   >
