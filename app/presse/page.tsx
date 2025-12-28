@@ -26,7 +26,7 @@ export default function PressePage() {
 
           <div className="mt-6 flex flex-col sm:flex-row gap-3">
             <Link
-              href="/articles"
+              href="/blog"
               className="inline-flex items-center justify-center rounded-xl border border-slate-700 bg-slate-950 px-5 py-3 text-sm font-semibold text-slate-200 hover:bg-slate-900"
             >
               📚 Lire les articles
@@ -131,7 +131,7 @@ export default function PressePage() {
                     onClick={() => alert("Ajoute un fichier plus tard (logo).")}
                     className="mt-3 w-full rounded-lg border border-slate-700 px-3 py-2 text-sm font-semibold text-slate-200 hover:bg-slate-900"
                   >
-                    Télécharger (placeholder)
+                    Télécharger 
                   </button>
                 </div>
 
@@ -241,7 +241,7 @@ export default function PressePage() {
             <Link href="/contact" className="hover:text-slate-200">
               Contact
             </Link>
-            <Link href="/articles" className="hover:text-slate-200">
+            <Link href="/blog" className="hover:text-slate-200">
               Articles
             </Link>
           </div>
