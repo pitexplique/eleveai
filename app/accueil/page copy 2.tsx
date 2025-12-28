@@ -1,7 +1,50 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
+
+type UneArticle = {
+  emoji: string;
+  title: string;
+  deck: string; // chapeau
+  note: string; // phrase implicite sur le prompt (discrète)
+  href: string;
+  tag?: string;
+};
+
+const UNE_ARTICLES: UneArticle[] = [
+  {
+    emoji: "💧",
+    title: "Pourquoi peut-on manquer d’eau sur une île où il pleut ?",
+    deck: "Pluie abondante, relief abrupt, ruissellement rapide : l’eau existe, mais n’est pas toujours disponible.",
+    note: "Ce type de question nécessite un prompt explicatif structuré.",
+    href: "/atelier-IA#defi-reunion",
+    tag: "Eau",
+  },
+  {
+    emoji: "💧",
+    title: "Quand la pluie tombe… mais ne reste pas",
+    deck: "Stockage, réseaux, usages : ce n’est pas la météo qui décide, mais l’organisation.",
+    note: "Ici, un prompt d’analyse de contraintes fait la différence.",
+    href: "/atelier-IA#defi-reunion",
+    tag: "Eau",
+  },
+  {
+    emoji: "🗺️",
+    title: "Une île : un système où tout est lié",
+    deck: "Routes, eau, énergie, déchets, prix : sur une île, résoudre un problème isolément ne fonctionne pas.",
+    note: "Un prompt systémique permet de relier les causes et les effets.",
+    href: "/atelier-IA#defi-reunion",
+    tag: "Insularité",
+  },
+  {
+    emoji: "🗺️",
+    title: "Peut-on résoudre un problème sans voir l’ensemble ?",
+    deck: "Penser local impose de penser global, sans simplifier à l’excès.",
+    note: "Ce type de réflexion repose sur un prompt de modélisation.",
+    href: "/atelier-IA#defi-reunion",
+    tag: "Insularité",
+  },
+];
 
 export default function AccueilPage() {
   return (
@@ -20,21 +63,118 @@ export default function AccueilPage() {
             <span className="text-slate-400">EleveAI — l’outil + le cadre</span>
           </div>
 
-          {/* Grille HERO */}
+          {/* UNE (style journal, sans images) */}
+          <div className="rounded-2xl border border-slate-800 bg-slate-900/40 overflow-hidden">
+            <div className="p-5 sm:p-6 border-b border-slate-800 bg-slate-900/30">
+              <p className="text-xs font-semibold text-slate-400">🗞️ À la Une — Atelier-IA</p>
+              <h1 className="mt-1 text-2xl sm:text-3xl md:text-4xl font-extrabold leading-tight">
+                Aujourd’hui : La Réunion en 20 minutes{" "}
+                <span className="text-emerald-300">(et un bon prompt).</span>
+              </h1>
+              <p className="mt-2 text-sm sm:text-base text-slate-300 max-w-3xl leading-relaxed">
+                Embouteillages, eau, risques, territoire : le réel est complexe. EleveAI transforme ces
+                situations en <b>prompts pédagogiques clairs, guidés et réutilisables</b>, pour faire
+                réfléchir <b>sans tricher</b>.
+              </p>
+
+              {/* Micro-vente implicite */}
+              <p className="mt-2 text-xs text-slate-400">
+                Derrière chaque défi Atelier-IA : objectifs, étapes, contraintes et <b>traces</b>.
+              </p>
+
+              {/* CTA Une */}
+              <div className="mt-4 flex flex-wrap gap-2">
+                <Link
+                  href="/atelier-IA#defi-reunion"
+                  className="inline-flex items-center justify-center gap-2 rounded-lg bg-emerald-500 px-4 py-2 text-sm font-semibold text-slate-950 hover:bg-emerald-400"
+                >
+                  🌋 Faire le défi Réunion
+                </Link>
+                <Link
+                  href="/atelier-IA"
+                  className="inline-flex items-center justify-center gap-2 rounded-lg border border-slate-700/80 bg-slate-900 px-4 py-2 text-sm font-semibold text-slate-50 hover:bg-slate-800"
+                >
+                  🧪 Lire le cadre (Atelier-IA)
+                </Link>
+                <Link
+                  href="/espace-profs"
+                  className="inline-flex items-center justify-center gap-2 rounded-lg border-emerald-500/40 border bg-emerald-900/10 px-4 py-2 text-sm font-semibold text-emerald-100 hover:bg-emerald-900/20"
+                >
+                  📚 Générer un prompt prof
+                </Link>
+              </div>
+            </div>
+
+            {/* Articles de Une (emojis uniquement) */}
+            <div className="p-5 sm:p-6 space-y-4">
+              <div className="flex items-end justify-between gap-3">
+                <h2 className="text-lg sm:text-xl font-semibold text-slate-100">À lire aujourd’hui</h2>
+                <span className="text-xs text-slate-400">Édition Réunion</span>
+              </div>
+
+              <div className="grid gap-3 md:grid-cols-2">
+                {UNE_ARTICLES.map((a) => (
+                  <Link
+                    key={a.title}
+                    href={a.href}
+                    className="group rounded-2xl border border-slate-800 bg-slate-950/35 p-4 hover:bg-slate-950/55 hover:border-emerald-500/30 transition"
+                  >
+                    <div className="flex items-start gap-3">
+                      <div className="text-2xl leading-none" aria-hidden>
+                        {a.emoji}
+                      </div>
+                      <div className="min-w-0">
+                        <div className="flex flex-wrap items-center gap-2">
+                          <p className="text-sm font-semibold text-slate-100">{a.title}</p>
+                          {a.tag ? (
+                            <span className="text-[10px] rounded-full border border-slate-700 bg-slate-950/60 px-2 py-0.5 text-slate-300">
+                              {a.tag}
+                            </span>
+                          ) : null}
+                        </div>
+
+                        <p className="mt-1 text-xs text-slate-300 leading-relaxed">{a.deck}</p>
+
+                        <p className="mt-2 text-[11px] text-slate-400 group-hover:text-emerald-200">
+                          👉 {a.note}
+                        </p>
+
+                        <p className="mt-3 text-[11px] text-slate-500 group-hover:text-slate-300">
+                          Ouvrir → voir le défi → générer le prompt
+                        </p>
+                      </div>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+
+              {/* Note éditoriale */}
+              <div className="rounded-2xl border border-slate-800 bg-slate-900/30 p-4">
+                <p className="text-xs text-slate-300 leading-relaxed">
+                  🧠 <span className="font-semibold text-slate-100">Note éditoriale :</span> ces sujets
+                  présentent des situations réelles.{" "}
+                  <span className="text-emerald-200 font-semibold">
+                    EleveAI permet de générer les prompts pédagogiques
+                  </span>{" "}
+                  pour les traiter au bon niveau, avec un cadre clair.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Grille HERO (produit + cadre) */}
           <div className="grid gap-8 lg:grid-cols-[3fr,2fr] items-start">
             {/* Colonne gauche */}
             <div className="space-y-5">
-              <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold leading-tight">
                 Génération de prompts Expert
                 <span className="block text-emerald-300">Gagnez du temps et de la précision</span>
-              </h1>
+              </h2>
 
               {/* Manifeste / règle */}
               <div className="rounded-2xl border border-slate-800 bg-slate-900/60 p-4">
                 <p className="text-sm sm:text-base text-slate-200 leading-relaxed">
-                  <span className="text-emerald-300 font-semibold">
-                    La règle EleveAI :
-                  </span>{" "}
+                  <span className="text-emerald-300 font-semibold">La règle EleveAI :</span>{" "}
                   l’IA propose, l’élève (ou le prof){" "}
                   <span className="font-semibold">répond, justifie, corrige</span>.
                 </p>
@@ -49,7 +189,7 @@ export default function AccueilPage() {
                 <b>sans tricher</b>.
                 <br />
                 <span className="text-slate-400">
-                  Usage encadré : consignes, étapes, justification, et amélioration progressive.
+                  Usage encadré : consignes, étapes, justification, amélioration progressive.
                 </span>
               </p>
 
@@ -57,8 +197,7 @@ export default function AccueilPage() {
               <div className="flex flex-wrap gap-2 pt-1">
                 <Link
                   href="/espace-profs"
-                      className="inline-flex items-center justify-center gap-2 rounded-lg bg-emerald-500 px-4 py-2 text-sm font-semibold text-slate-950 hover:bg-emerald-400"
-                  
+                  className="inline-flex items-center justify-center gap-2 rounded-lg bg-emerald-500 px-4 py-2 text-sm font-semibold text-slate-950 hover:bg-emerald-400"
                 >
                   📚 Créer un prompt prof
                 </Link>
@@ -82,7 +221,7 @@ export default function AccueilPage() {
                   className="inline-flex items-center justify-center gap-2 rounded-lg bg-emerald-500 px-4 py-2 text-sm font-semibold text-slate-950 hover:bg-emerald-400"
                 >
                   🧪 Apprendre le cadre (Atelier-IA)
-                </Link>                
+                </Link>
               </div>
 
               <p className="text-xs text-slate-500">
@@ -91,13 +230,10 @@ export default function AccueilPage() {
               </p>
             </div>
 
-            {/* Colonne droite : Logo + sens */}
+            {/* Colonne droite : bénéfices + rituel */}
             <div className="space-y-3">
-
               <div className="rounded-2xl border border-emerald-500/30 bg-emerald-500/10 px-4 py-3 shadow-lg shadow-emerald-900/30">
-                <p className="text-sm font-semibold text-emerald-100">
-                  🔒 Anti-triche (pédagogique)
-                </p>
+                <p className="text-sm font-semibold text-emerald-100">🔒 Anti-triche (pédagogique)</p>
                 <p className="text-xs text-emerald-50/90 mt-1 leading-relaxed">
                   On exige des <b>traces</b> : prompt, réponse IA,{" "}
                   <b>corrections personnelles</b>, analyse critique.
@@ -131,39 +267,48 @@ export default function AccueilPage() {
                   <b>le même cadre</b> (apprendre, justifier, corriger).
                 </p>
               </div>
+
+              <div className="rounded-2xl border border-slate-800 bg-slate-900/60 px-4 py-3">
+                <p className="text-sm font-semibold text-slate-100">🧠 Prompt-rituel (Atelier-IA)</p>
+                <p className="mt-2 text-xs text-slate-300 leading-relaxed">
+                  1) Pose-moi 3 questions avant de répondre
+                  <br />
+                  2) Donne 2 hypothèses + ce qu’il faut vérifier
+                  <br />
+                  3) Explique simplement (collège puis lycée)
+                  <br />
+                  4) Termine par :{" "}
+                  <span className="text-emerald-200 font-semibold">“Ce que je dois écrire moi-même”</span>
+                </p>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* PHILOSOPHIE (version B) */}
+      {/* PHILOSOPHIE (sans image) */}
       <section className="border-b border-slate-800 bg-slate-950/70">
         <div className="mx-auto max-w-6xl px-4 py-8">
-          <div className="grid gap-6 md:grid-cols-[1fr,2fr] items-center rounded-2xl border border-slate-800 bg-slate-900/60 p-6">
+          <div className="rounded-2xl border border-slate-800 bg-slate-900/60 p-6">
             <div className="space-y-2">
               <p className="text-sm font-semibold text-emerald-200">
                 Notre philosophie : humble, utile, ouverte.
               </p>
               <p className="text-sm text-slate-200 leading-relaxed">
-                EleveAI est une <b>borne d’entrée</b> : un point de départ pour
-                dialoguer avec des IA <b>comme partenaires</b>, pas comme oracles.
+                EleveAI est une <b>borne d’entrée</b> : un point de départ pour dialoguer avec des IA{" "}
+                <b>comme partenaires</b>, pas comme oracles.
               </p>
               <p className="text-sm text-slate-200 leading-relaxed">
-                On reste volontairement <b>humble</b> : l’IA peut se tromper, l’humain
-                garde la main, et l’apprentissage reste central.
+                On reste volontairement <b>humble</b> : l’IA peut se tromper, l’humain garde la main,
+                et l’apprentissage reste central.
               </p>
               <p className="text-xs text-slate-400">
                 Un détail bien posé peut ouvrir un champ immense — sans perdre le cadre.
               </p>
+              <p className="pt-2 text-xs text-slate-400">
+                <span className="text-emerald-200 font-semibold">ε → ∞</span> — Un détail pour tout changer.
+              </p>
             </div>
-          <Image
-            src="/logo-epsilon.png"
-            alt="ε → ∞ — Un détail pour tout changer"
-            width={250}
-            height={250}
-            className="mx-auto h-[250px] w-auto opacity-90"
-          />
-
           </div>
         </div>
       </section>
@@ -201,9 +346,7 @@ export default function AccueilPage() {
                 — règles, traces, esprit critique, anti-triche : un cadre clé en main.
               </span>
             </div>
-            <span className="text-xs font-semibold text-emerald-200">
-              Voir le programme →
-            </span>
+            <span className="text-xs font-semibold text-emerald-200">Voir le programme →</span>
           </Link>
         </div>
       </section>
@@ -211,9 +354,9 @@ export default function AccueilPage() {
       {/* CARTES : ESPACES */}
       <section className="border-b border-slate-800 bg-slate-950">
         <div className="mx-auto max-w-6xl px-4 py-8 space-y-4">
-          <h2 className="text-xl font-semibold text-slate-100">
+          <h3 className="text-xl font-semibold text-slate-100">
             Tester l’outil (sans perdre le cadre)
-          </h2>
+          </h3>
           <p className="text-xs text-slate-400 max-w-2xl leading-snug">
             Objectif : gagner du temps, garder la main, et faire apprendre (pas faire à la place).
           </p>
@@ -283,8 +426,8 @@ export default function AccueilPage() {
               🏫 Chef d’établissement / équipe éducative
             </p>
             <p className="mt-1">
-              L’Atelier-IA peut devenir un <b>levier</b> : cadre commun, pratiques alignées,
-              élèves accompagnés. (Les espaces admin/établissement arrivent plus tard.)
+              L’Atelier-IA peut devenir un <b>levier</b> : cadre commun, pratiques alignées, élèves
+              accompagnés. (Les espaces admin/établissement arrivent plus tard.)
             </p>
           </div>
         </div>
@@ -294,9 +437,9 @@ export default function AccueilPage() {
       <section className="bg-slate-950">
         <div className="mx-auto max-w-6xl px-4 py-8 space-y-4">
           <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-            <h3 className="text-lg sm:text-xl font-semibold text-slate-100">
+            <h4 className="text-lg sm:text-xl font-semibold text-slate-100">
               En 3 étapes (cadre inclus)
-            </h3>
+            </h4>
             <Link
               href="/contact"
               className="inline-flex items-center gap-2 rounded-lg border border-emerald-500/50 px-3 py-1.5 text-xs font-semibold text-emerald-100 hover:bg-emerald-900/30"
@@ -354,7 +497,7 @@ export default function AccueilPage() {
               href="/auth/signup"
               className="inline-flex items-center justify-center rounded-lg border border-emerald-500/40 bg-emerald-900/10 px-4 py-2 text-sm font-semibold text-emerald-100 hover:bg-emerald-900/20"
             >
-              🔑 Créer un compte (OTP)
+              🔑 Créer un compte 
             </Link>
           </div>
         </div>

@@ -9,12 +9,18 @@ import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
 import rehypeRaw from "rehype-raw";
 
+import type { Metadata } from "next";
+
 import {
   getAllBlogPosts,
   getBlogPostBySlug,
   type BlogPost,
   type Audience,
 } from "@/data/blogPosts";
+
+const SITE_URL = "https://eleveai.fr";
+const DEFAULT_OG_IMAGE = `${SITE_URL}/preview.jpg`;
+const LOGO_URL = `${SITE_URL}/logo.png`; // ✅ mets ton vrai logo public si tu en as un (sinon tu peux retirer le bloc logo)
 
 const AUDIENCE_LABELS: Record<Audience, string> = {
   profs: "Professeurs",
@@ -86,32 +92,29 @@ function formatBlogMarkdown(md: string) {
   out = out.replace(/\n([ \t]*-{3,}[ \t]*)\n/g, "\n\n$1\n");
 
   // 2) Encadrer "Résumé pour les IA" + tout ce qui suit jusqu'au prochain H2 (## ...) ou la fin
-  //    Ça permet de garder tes contenus inchangés dans blogPosts.ts.
   out = out.replace(
     /(^##\s+Résumé pour les IA\s*\n)([\s\S]*?)(?=^\s*##\s+|\s*$)/gim,
-    (_m, h2, body) => {
-      const safeBody = body.trimEnd();
+    (_m, _h2, body) => {
+      const safeBody = String(body ?? "").trimEnd();
       return (
         `<div class="my-8 rounded-xl border border-red-200 bg-red-50 p-4">\n` +
         `<h2 class="mb-3 text-red-800 font-semibold">Résumé pour les IA</h2>\n\n` +
         `${safeBody}\n` +
         `</div>\n\n`
       );
-    }
+    },
   );
 
   // 3) Titres niveau 2 numérotés → tout le titre en rouge (hors "Résumé…" déjà encadré)
-  //    Exemple: "## 2) Mon titre"
   out = out.replace(
     /^##\s+(\d+\)\s+.*)$/gm,
-    `## <span class="text-red-700 font-semibold">$1</span>`
+    `## <span class="text-red-700 font-semibold">$1</span>`,
   );
 
   // 4) Sous-titres numérotés (3.1, 3.2) → gris (plus doux)
-  //    Exemple: "### 3.1 Mon sous-titre"
   out = out.replace(
     /^###\s+(\d+\.\d+\s+.*)$/gm,
-    `### <span class="text-slate-700 font-medium">$1</span>`
+    `### <span class="text-slate-700 font-medium">$1</span>`,
   );
 
   return out;
@@ -122,14 +125,42 @@ export function generateStaticParams() {
   return getAllBlogPosts().map((post) => ({ slug: post.slug }));
 }
 
-// ✅ Metadata SEO
-export async function generateMetadata({ params }: PageProps) {
+// ✅ Metadata SEO (plus propre + canonique absolu + OG/Twitter article)
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const post = getBlogPostBySlug(slug);
   if (!post) return {};
+
+  const url = `${SITE_URL}/blog/${post.slug}`;
+  const title = `${post.title} | Blog EleveAI`;
+  const description = post.description ?? "";
+
   return {
-    title: `${post.title} | Blog EleveAI`,
-    description: post.description,
+    title,
+    description,
+    alternates: { canonical: url },
+    openGraph: {
+      type: "article",
+      url,
+      title,
+      description,
+      siteName: "EleveAI",
+      locale: "fr_FR",
+      images: [
+        {
+          url: DEFAULT_OG_IMAGE,
+          width: 1200,
+          height: 630,
+          alt: post.title,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [DEFAULT_OG_IMAGE],
+    },
   };
 }
 
@@ -143,34 +174,70 @@ export default async function BlogPostPage({ params }: PageProps) {
   const content = formatBlogMarkdown(post.content);
   const toc = extractToc(post.content);
 
-  // ✅ JSON-LD Article (machine-readable)
-  const jsonLd = {
+  const url = `${SITE_URL}/blog/${post.slug}`;
+
+  // ✅ JSON-LD Article + BreadcrumbList (plus “citable” et robuste)
+  const jsonLdArticle = {
     "@context": "https://schema.org",
-    "@type": "Article",
+    "@type": "BlogPosting",
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": url,
+    },
     headline: post.title,
-    description: post.description,
+    description: post.description ?? "",
     datePublished: post.date,
     dateModified: post.date,
+    inLanguage: "fr-FR",
+    isAccessibleForFree: true,
+    keywords: post.tags?.length ? post.tags.join(", ") : undefined,
+    image: [DEFAULT_OG_IMAGE],
     author: {
-      "@type": "Organization",
-      name: "EleveAI",
+      "@type": "Person",
+      name: "Frédéric Lacoste",
+      url: `${SITE_URL}/qui-suis-je`,
     },
     publisher: {
       "@type": "Organization",
       name: "EleveAI",
-    },
-    keywords: post.tags?.join(", "),
-    mainEntityOfPage: {
-      "@type": "WebPage",
-      // Si tu as une URL canonique connue, remplace par ton domaine :
-      // "@id": `https://www.eleveai.fr/blog/${post.slug}`,
-      "@id": `/blog/${post.slug}`,
+      url: SITE_URL,
+      logo: {
+        "@type": "ImageObject",
+        url: LOGO_URL,
+      },
     },
   };
 
+  const jsonLdBreadcrumbs = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Accueil",
+        item: `${SITE_URL}/`,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Blog",
+        item: `${SITE_URL}/blog`,
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: post.title,
+        item: url,
+      },
+    ],
+  };
+
+  const jsonLd = [jsonLdArticle, jsonLdBreadcrumbs];
+
   return (
     <main className="max-w-3xl mx-auto px-4 py-10">
-      {/* JSON-LD */}
+      {/* ✅ JSON-LD */}
       <script
         type="application/ld+json"
         // eslint-disable-next-line react/no-danger
@@ -197,7 +264,7 @@ export default async function BlogPostPage({ params }: PageProps) {
       </p>
 
       <div className="flex flex-wrap gap-2 mb-8">
-        {post.tags.map((tag) => (
+        {post.tags?.map((tag) => (
           <span
             key={tag}
             className="inline-flex items-center rounded-full border border-slate-200 bg-slate-50 px-2.5 py-0.5 text-xs text-slate-600"
@@ -214,7 +281,10 @@ export default async function BlogPostPage({ params }: PageProps) {
           <ul className="space-y-1 text-sm">
             {toc.map((item) => (
               <li key={item.id}>
-                <a href={`#${item.id}`} className="text-slate-600 hover:underline">
+                <a
+                  href={`#${item.id}`}
+                  className="text-slate-600 hover:underline"
+                >
                   {item.title}
                 </a>
               </li>
@@ -251,7 +321,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                 ? children.map((c) => String(c)).join("")
                 : String(children);
 
-              // enlève l'HTML éventuellement présent dans le titre (ex: <span ...>2) ...</span>)
+              // enlève l'HTML éventuellement présent dans le titre
               const text = raw.replace(/<[^>]*>/g, "").trim();
               const id = slugifyHeading(text);
 
@@ -265,11 +335,15 @@ export default async function BlogPostPage({ params }: PageProps) {
             // ✅ Tables premium mobile : scroll + sticky header + zebra rows
             table: ({ children }) => (
               <div className="my-6 overflow-x-auto rounded-xl border border-slate-200">
-                <table className="min-w-full border-collapse text-sm">{children}</table>
+                <table className="min-w-full border-collapse text-sm">
+                  {children}
+                </table>
               </div>
             ),
             thead: ({ children }) => (
-              <thead className="sticky top-0 bg-slate-100 z-10">{children}</thead>
+              <thead className="sticky top-0 bg-slate-100 z-10">
+                {children}
+              </thead>
             ),
             tr: ({ children }) => <tr className="even:bg-slate-50">{children}</tr>,
             th: ({ children }) => (
@@ -278,7 +352,9 @@ export default async function BlogPostPage({ params }: PageProps) {
               </th>
             ),
             td: ({ children }) => (
-              <td className="border-b border-slate-200 px-3 py-2 align-top">{children}</td>
+              <td className="border-b border-slate-200 px-3 py-2 align-top">
+                {children}
+              </td>
             ),
           }}
         >
@@ -288,7 +364,5 @@ export default async function BlogPostPage({ params }: PageProps) {
     </main>
   );
 }
-
-
 
 

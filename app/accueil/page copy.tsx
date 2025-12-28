@@ -1,40 +1,14 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 
 export default function AccueilPage() {
   return (
     <main className="min-h-screen bg-slate-950 text-slate-50">
-      {/* TOP BAR (porte email) */}
-    {/*  <section className="border-b border-slate-800 bg-slate-950/80">
-        <div className="mx-auto max-w-6xl px-4 py-2 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-          <p className="text-xs text-slate-300">
-            👋 Prof indépendant ?
-            <span className="text-slate-400">
-              {" "}
-              Sauvegarde tes presets + historique avec un compte email.
-            </span>
-          </p>
-          <div className="flex items-center gap-2">
-            <Link
-              href="/auth/signup"
-              className="inline-flex items-center justify-center rounded-lg bg-emerald-500 px-3 py-1.5 text-xs font-semibold text-slate-950 hover:bg-emerald-400"
-            >
-              Créer un compte
-            </Link>
-            <Link
-              href="/auth/signin"
-              className="inline-flex items-center justify-center rounded-lg border border-slate-700 bg-slate-900 px-3 py-1.5 text-xs font-semibold text-slate-50 hover:bg-slate-800"
-            >
-              Se connecter
-            </Link>
-          </div>
-        </div>
-      </section> */}
-
-      {/* HERO PRINCIPAL (CADRE) */}
+      {/* HERO PRINCIPAL */}
       <section className="border-b border-slate-800 bg-gradient-to-b from-slate-900/80 to-slate-950">
-        <div className="mx-auto max-w-6xl px-4 py-10 sm:py-14 space-y-8">
+        <div className="mx-auto max-w-6xl px-4 py-10 sm:py-14 space-y-10">
           {/* Badges */}
           <div className="flex flex-wrap items-center gap-3 text-xs">
             <span className="inline-flex items-center gap-2 rounded-full border border-emerald-400/40 bg-emerald-500/10 px-3 py-1 font-semibold text-emerald-200">
@@ -46,92 +20,106 @@ export default function AccueilPage() {
             <span className="text-slate-400">EleveAI — l’outil + le cadre</span>
           </div>
 
-          {/* Grille */}
-          <div className="grid gap-6 lg:grid-cols-[3fr,2fr] items-start">
+          {/* Grille HERO */}
+          <div className="grid gap-8 lg:grid-cols-[3fr,2fr] items-start">
             {/* Colonne gauche */}
-            <div className="space-y-4">
+            <div className="space-y-5">
               <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight">
-                Une porte vers l'IA
+                Génération de prompts Expert
+                <span className="block text-emerald-300">Gagnez du temps et de la précision</span>
               </h1>
 
-              {/* Phrase “option B” intégrée (simple + impact) */}
-              <p className="mt-3 text-lg sm:text-xl font-semibold text-emerald-300">
-                Crée ton prompt expert maintenant.
-              </p>
-              <p className="text-sm text-slate-400">
-                L’IA propose, tu décides. La pédagogie reste humaine.
-              </p>
+              {/* Manifeste / règle */}
+              <div className="rounded-2xl border border-slate-800 bg-slate-900/60 p-4">
+                <p className="text-sm sm:text-base text-slate-200 leading-relaxed">
+                  <span className="text-emerald-300 font-semibold">
+                    La règle EleveAI :
+                  </span>{" "}
+                  l’IA propose, l’élève (ou le prof){" "}
+                  <span className="font-semibold">répond, justifie, corrige</span>.
+                </p>
+                <p className="mt-2 text-xs text-slate-400">
+                  Traces + esprit critique + correction personnelle → pas “fait à la place”.
+                </p>
+              </div>
 
               <p className="text-base text-slate-300 max-w-2xl leading-relaxed">
-                EleveAI sert à <b>apprendre à bien utiliser l’IA</b> (Atelier-IA),
-                et à <b>créer des prompts utiles</b> pour les profs, élèves et parents —{" "}
+                EleveAI sert à <b>apprendre à bien utiliser l’IA</b> (Atelier-IA) et à{" "}
+                <b>créer des prompts utiles</b> pour les profs, élèves et parents —{" "}
                 <b>sans tricher</b>.
                 <br />
                 <span className="text-slate-400">
-                  IA autorisée, mais encadrée : traces, esprit critique, correction personnelle.
+                  Usage encadré : consignes, étapes, justification, et amélioration progressive.
                 </span>
               </p>
 
-              {/* CTA row */}
+              {/* CTA */}
               <div className="flex flex-wrap gap-2 pt-1">
                 <Link
-                  href="/atelier-IA"
-                  className="inline-flex items-center justify-center gap-2 rounded-lg bg-emerald-500 px-4 py-2 text-sm font-semibold text-slate-950 hover:bg-emerald-400"
-                >
-                  🧪 Découvrir l’Atelier-IA
-                </Link>
-
-                <Link
                   href="/espace-profs"
-                  className="inline-flex items-center justify-center gap-2 rounded-lg border border-slate-600 bg-slate-900 px-4 py-2 text-sm font-semibold text-slate-50 hover:bg-slate-800"
+                      className="inline-flex items-center justify-center gap-2 rounded-lg bg-emerald-500 px-4 py-2 text-sm font-semibold text-slate-950 hover:bg-emerald-400"
+                  
                 >
-                  📚 Ouvrir l’espace profs
+                  📚 Créer un prompt prof
                 </Link>
 
                 <Link
                   href="/espace-eleves"
                   className="inline-flex items-center justify-center gap-2 rounded-lg border border-slate-700/80 bg-slate-900 px-4 py-2 text-sm font-semibold text-slate-50 hover:bg-slate-800"
                 >
-                  🎒 Ouvrir l’espace élèves
+                  🎒 Créer un prompt élève
                 </Link>
 
                 <Link
                   href="/parents"
                   className="inline-flex items-center justify-center gap-2 rounded-lg border border-slate-700/80 bg-slate-900 px-4 py-2 text-sm font-semibold text-slate-50 hover:bg-slate-800"
                 >
-                  🧩 Ouvrir l’espace parents
+                  🧩 Créer un prompt parent
                 </Link>
+
+                <Link
+                  href="/atelier-IA"
+                  className="inline-flex items-center justify-center gap-2 rounded-lg bg-emerald-500 px-4 py-2 text-sm font-semibold text-slate-950 hover:bg-emerald-400"
+                >
+                  🧪 Apprendre le cadre (Atelier-IA)
+                </Link>                
               </div>
 
               <p className="text-xs text-slate-500">
-                ✅ Compatible établissement : usage responsable, pas “fait à la place”, prompts guidés.
+                ✅ Compatible établissement : l’IA n’évalue pas à ta place — elle structure,
+                questionne, et fait progresser.
               </p>
             </div>
 
-            {/* Colonne droite : cartes rassurantes */}
+            {/* Colonne droite : Logo + sens */}
             <div className="space-y-3">
+
               <div className="rounded-2xl border border-emerald-500/30 bg-emerald-500/10 px-4 py-3 shadow-lg shadow-emerald-900/30">
-                <p className="text-sm font-semibold text-emerald-100">🔒 Anti-triche intégré</p>
+                <p className="text-sm font-semibold text-emerald-100">
+                  🔒 Anti-triche (pédagogique)
+                </p>
                 <p className="text-xs text-emerald-50/90 mt-1 leading-relaxed">
-                  On travaille avec des <b>traces</b> : prompt utilisé, réponse IA, corrections personnelles,
-                  analyse critique.
+                  On exige des <b>traces</b> : prompt, réponse IA,{" "}
+                  <b>corrections personnelles</b>, analyse critique.
                 </p>
               </div>
 
               <div className="rounded-2xl border border-slate-700 bg-slate-900/70 px-4 py-3">
-                <p className="text-sm font-semibold text-slate-100">⚡ Gain de temps réel</p>
+                <p className="text-sm font-semibold text-slate-100">
+                  ⚡ Gain de temps… sans perdre la main
+                </p>
                 <ul className="mt-2 space-y-2 text-xs text-slate-300">
                   <li className="flex items-start gap-2">
                     <span className="mt-0.5 text-emerald-300">•</span>
-                    Prompts calibrés programmes (BO/Eduscol).
+                    Prompts guidés (étapes, contraintes, niveau, objectifs).
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="mt-0.5 text-emerald-300">•</span>
-                    Formulaires simples, résultats propres, prêts à copier-coller.
+                    Résultats propres, prêts à copier-coller (mais perfectibles).
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="mt-0.5 text-emerald-300">•</span>
-                    Atelier-IA : une activité “IA-friendly” structurée et rassurante.
+                    Atelier-IA : activité “IA-friendly” structurée et rassurante.
                   </li>
                 </ul>
               </div>
@@ -139,11 +127,43 @@ export default function AccueilPage() {
               <div className="rounded-2xl border border-slate-800 bg-slate-900/40 px-4 py-3">
                 <p className="text-sm font-semibold text-slate-100">🎯 Pour qui ?</p>
                 <p className="mt-1 text-xs text-slate-300 leading-relaxed">
-                  Chef d’établissement, profs, parents, élèves : chacun a son espace,
-                  mais <b>le même cadre</b>.
+                  Profs, élèves, parents : chacun a son espace, mais{" "}
+                  <b>le même cadre</b> (apprendre, justifier, corriger).
                 </p>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* PHILOSOPHIE (version B) */}
+      <section className="border-b border-slate-800 bg-slate-950/70">
+        <div className="mx-auto max-w-6xl px-4 py-8">
+          <div className="grid gap-6 md:grid-cols-[1fr,2fr] items-center rounded-2xl border border-slate-800 bg-slate-900/60 p-6">
+            <div className="space-y-2">
+              <p className="text-sm font-semibold text-emerald-200">
+                Notre philosophie : humble, utile, ouverte.
+              </p>
+              <p className="text-sm text-slate-200 leading-relaxed">
+                EleveAI est une <b>borne d’entrée</b> : un point de départ pour
+                dialoguer avec des IA <b>comme partenaires</b>, pas comme oracles.
+              </p>
+              <p className="text-sm text-slate-200 leading-relaxed">
+                On reste volontairement <b>humble</b> : l’IA peut se tromper, l’humain
+                garde la main, et l’apprentissage reste central.
+              </p>
+              <p className="text-xs text-slate-400">
+                Un détail bien posé peut ouvrir un champ immense — sans perdre le cadre.
+              </p>
+            </div>
+          <Image
+            src="/logo-epsilon.png"
+            alt="ε → ∞ — Un détail pour tout changer"
+            width={250}
+            height={250}
+            className="mx-auto h-[250px] w-auto opacity-90"
+          />
+
           </div>
         </div>
       </section>
@@ -152,7 +172,7 @@ export default function AccueilPage() {
       <section className="border-b border-slate-800 bg-slate-950/60">
         <div className="mx-auto max-w-6xl px-4 py-4 grid gap-3 sm:grid-cols-3">
           {[
-            "🧪 Atelier-IA : IA autorisée mais encadrée",
+            "🧪 Atelier-IA : apprendre le cadre",
             "🧩 3 espaces (profs / élèves / parents)",
             "✅ Prompts prêts en < 5 min",
           ].map((item) => (
@@ -167,7 +187,7 @@ export default function AccueilPage() {
         </div>
       </section>
 
-      {/* BANDEAU ATELIER-IA (levier collège) */}
+      {/* BANDEAU ATELIER-IA */}
       <section className="border-b border-slate-800 bg-slate-950">
         <div className="mx-auto max-w-6xl px-4 py-3">
           <Link
@@ -178,10 +198,12 @@ export default function AccueilPage() {
               <span className="font-semibold text-emerald-200">🧪 Atelier-IA</span>
               <span className="text-slate-400">
                 {" "}
-                — un cadre clé en main pour intégrer l’IA dès la rentrée (traces, esprit critique, anti-triche).
+                — règles, traces, esprit critique, anti-triche : un cadre clé en main.
               </span>
             </div>
-            <span className="text-xs font-semibold text-emerald-200">Voir le programme →</span>
+            <span className="text-xs font-semibold text-emerald-200">
+              Voir le programme →
+            </span>
           </Link>
         </div>
       </section>
@@ -340,4 +362,3 @@ export default function AccueilPage() {
     </main>
   );
 }
-

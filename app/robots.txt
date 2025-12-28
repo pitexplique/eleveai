@@ -6,41 +6,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: [
       {
         userAgent: "*",
-
-        // ✅ Autoriser tout le contenu éditorial et pédagogique
-        allow: [
-          "/",
-          "/blog",
-          "/blog/",
-          "/qui-suis-je",
-          "/faq",
-          "/contact",
-
-          // Offres / infos
-          "/offre-pilote",
-          "/tarifs",
-          "/formation",
-
-          // Ressources & prompts
-          "/ressources",
-          "/prompts",
-          "/le-bon-prompt",
-
-          // ❤️ CŒUR DU PROJET : espaces de génération de prompts
-          "/espace-administration",
-          "/espace-personnels",
-          "/espace-vie-scolaire",
-          "/espace-eleves",
-          "/espace-profs",
-          "/espace-parents",
-
-          // Communauté / vitrine
-          "/partenaires",
-          "/sponsors",
-          "/concours-ia",
-        ],
-
-        // ❌ Bloquer uniquement les routes techniques
+        allow: "/",
         disallow: [
           "/auth",
           "/dashboard",
@@ -49,8 +15,6 @@ export default function robots(): MetadataRoute.Robots {
         ],
       },
     ],
-
-    // ✅ Sitemap officiel
     sitemap: "https://eleveai.fr/sitemap.xml",
   };
 }

@@ -380,7 +380,7 @@ export default function SignInPage() {
 
           <div className="relative z-10 flex h-full flex-col justify-start pt-14 px-10 pb-20 text-slate-50">
             <h2 className="max-w-xl text-3xl font-bold leading-tight">
-              Connexion sans mot de passe
+              Connexion 
             </h2>
 
             <div className="mt-4 mb-6 max-w-xl rounded-lg border border-emerald-500 bg-emerald-500/10 px-4 py-3 backdrop-blur">
