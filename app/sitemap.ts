@@ -44,8 +44,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
     // Institution / confiance
     { url: u("/qui-sommes-nous"), lastModified: staticLastMod, changeFrequency: "monthly", priority: 0.55 },
+    { url: u("/presse"), lastModified: staticLastMod, changeFrequency: "monthly", priority: 0.55 },
     { url: u("/faq"), lastModified: staticLastMod, changeFrequency: "weekly", priority: 0.6 },
     { url: u("/contact"), lastModified: staticLastMod, changeFrequency: "monthly", priority: 0.5 },
+
 
     // Divers
     { url: u("/partenaires"), lastModified: staticLastMod, changeFrequency: "monthly", priority: 0.45 },
