@@ -248,7 +248,7 @@ export default function Header() {
           { href: "/faq", label: "FAQ", icon: <HelpCircle className="h-4 w-4" /> },
           { href: "/contact", label: "Contact", icon: <Mail className="h-4 w-4" /> },
           // adapte selon ton choix : /manifeste ou /qui-suis-je
-          { href: "/qui-suis-je", label: "Qui sommes-nous ?", icon: <UserRound className="h-4 w-4" /> },
+          { href: "/qui-sommes-nous", label: "Qui sommes-nous ?", icon: <UserRound className="h-4 w-4" /> },
           { href: "/partenaires", label: "Partenaires & sponsors", icon: <Handshake className="h-4 w-4" /> },
         ],
       },

@@ -27,6 +27,6 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Manifeste EleveAI — Une IA pour apprendre, pas pour tricher",
     description:
-      "EleveAI : une IA qui fait apprendre (questions → essais → correction), dans un cadre anti-triche.",
+      "EleveAI : une IA qui fait apprendre (questions → essais → correction), dans un cadre anti-triche pour les élèves.",
   },
 };
