@@ -47,6 +47,16 @@ export default function Footer() {
               Aide les élèves, profs et équipes éducatives à créer des contenus
               clairs, DYS-friendly et conformes à Eduscol grâce à l’IA.
             </p>
+
+            {/* ✅ Presse (ajout léger, sans changer le reste) */}
+            <div className="pt-1">
+              <Link
+                href="/presse"
+                className="inline-flex items-center gap-2 rounded-xl border border-slate-800 bg-slate-900/40 px-3 py-2 text-xs font-semibold text-slate-200 hover:bg-slate-900"
+              >
+                📰 Presse & kit média →
+              </Link>
+            </div>
           </div>
 
           {/* Produit */}
@@ -144,6 +154,15 @@ export default function Footer() {
                   Contact
                 </Link>
               </li>
+              {/* ✅ Presse dans Ressources (visibilité, SEO, cohérent) */}
+              <li>
+                <Link
+                  href="/presse"
+                  className="text-slate-300 hover:text-sky-300"
+                >
+                  Presse & kit média
+                </Link>
+              </li>
             </ul>
           </div>
 
@@ -170,11 +189,17 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/cgu" className="text-slate-300 hover:text-sky-300">
+                  CGU
+                </Link>
+              </li>
+              {/* ✅ Optionnel mais utile : si tu crées une page charte */}
+              <li>
                 <Link
-                  href="/cgu"
+                  href="/charte"
                   className="text-slate-300 hover:text-sky-300"
                 >
-                  CGU
+                  Charte anti-triche
                 </Link>
               </li>
             </ul>
@@ -184,14 +209,16 @@ export default function Footer() {
         {/* Bas de page */}
         <div className="mt-8 flex flex-col gap-2 border-t border-slate-800 pt-4 text-xs text-slate-500 sm:flex-row sm:items-center sm:justify-between">
           <p>© {new Date().getFullYear()} EleveAI. Tous droits réservés.</p>
-          <p className="text-[11px] text-slate-500">
-            Conçu à La Réunion pour les collèges & lycées de France.
-          </p>
+          <div className="flex flex-wrap gap-x-3 gap-y-1 text-[11px] text-slate-500">
+            <span>Conçu à La Réunion pour les collèges & lycées de France.</span>
+            <span className="hidden sm:inline">•</span>
+            <Link href="/presse" className="hover:text-slate-200">
+              Presse
+            </Link>
+          </div>
         </div>
       </div>
     </footer>
   );
 }
-
-
 
