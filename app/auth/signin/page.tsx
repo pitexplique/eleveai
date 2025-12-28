@@ -32,6 +32,17 @@ export default function SignInPage() {
   // ---------------------------
   const [cooldown, setCooldown] = useState<number>(0);
 
+  // ---------------------------
+  // ✅ Connexion établissement (ajout)
+  // ---------------------------
+  const [codeEtablissement, setCodeEtablissement] = useState("");
+  const [codeUtilisateur, setCodeUtilisateur] = useState("");
+  const [loadingEtab, setLoadingEtab] = useState(false);
+  const [feedbackEtab, setFeedbackEtab] = useState<string | null>(null);
+  const [errorEtab, setErrorEtab] = useState<string | null>(null);
+
+  const normalizeCode = (v: string) => v.trim().toUpperCase();
+
   // ✅ Pré-remplissage email depuis /auth/signup -> /auth/signin?email=...
   // (sans useSearchParams => build Vercel OK)
   useEffect(() => {
@@ -207,6 +218,61 @@ export default function SignInPage() {
     }
   };
 
+  // ---------------------------
+  // ✅ Connexion établissement (avec vérification Supabase)
+  // ---------------------------
+  const handleEtablissementSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    setFeedbackEtab(null);
+    setErrorEtab(null);
+
+    const ce = normalizeCode(codeEtablissement);
+    const cu = normalizeCode(codeUtilisateur);
+
+    if (!ce || !cu) {
+      setErrorEtab("Merci de renseigner le code établissement et le code utilisateur.");
+      return;
+    }
+
+    setLoadingEtab(true);
+    try {
+      const { data, error } = await supabase
+        .from("utilisateurs_codes")
+        .select("id, code_etablissement, code_utilisateur, type_utilisateur, nom, actif")
+        .eq("code_etablissement", ce)
+        .eq("code_utilisateur", cu)
+        .eq("actif", true)
+        .maybeSingle();
+
+      if (error) {
+        logSupabaseError("utilisateurs_codes check error:", error);
+        setErrorEtab(
+          process.env.NODE_ENV === "development"
+            ? `Erreur Supabase: ${error.message}`
+            : "Impossible de vérifier ces codes. Réessayez."
+        );
+        return;
+      }
+
+      if (!data) {
+        setErrorEtab("Codes invalides ou compte inactif. Vérifiez vos informations.");
+        return;
+      }
+
+      setFeedbackEtab("Connexion établissement validée. Redirection…");
+
+      // V1 : on passe les codes en querystring (en attendant la “vraie session” élève)
+      router.push(
+        `/espace-eleves?code_etablissement=${encodeURIComponent(ce)}&code_utilisateur=${encodeURIComponent(cu)}`
+      );
+    } catch (err: any) {
+      console.error("Unexpected etablissement login error:", err);
+      setErrorEtab(err?.message || "Erreur inattendue. Réessayez.");
+    } finally {
+      setLoadingEtab(false);
+    }
+  };
+
   return (
     <main className="min-h-screen bg-slate-50 text-slate-900">
       <div className="flex min-h-screen flex-col md:flex-row">
@@ -348,6 +414,57 @@ export default function SignInPage() {
                 </form>
               )}
 
+              {/* ✅ AJOUT : CONNEXION ÉTABLISSEMENT (sous la partie email) */}
+              <div className="mt-5 border-t border-slate-200 pt-5">
+                <h2 className="text-sm font-semibold text-slate-900">
+                  Connexion établissement
+                </h2>
+                <p className="mt-1 text-xs text-slate-600">
+                  Saisissez le code établissement et votre code utilisateur.
+                </p>
+
+                <form onSubmit={handleEtablissementSubmit} className="mt-3 space-y-3">
+                  <div className="space-y-1.5">
+                    <label className="text-sm font-medium text-slate-800">
+                      Code établissement
+                    </label>
+                    <input
+                      type="text"
+                      value={codeEtablissement}
+                      onChange={(e) => setCodeEtablissement(e.target.value)}
+                      placeholder="Ex: DIMITILE"
+                      disabled={loadingEtab}
+                      className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-sm outline-none focus:border-emerald-500 focus:ring focus:ring-emerald-500/50 disabled:cursor-not-allowed disabled:bg-slate-100"
+                    />
+                  </div>
+
+                  <div className="space-y-1.5">
+                    <label className="text-sm font-medium text-slate-800">
+                      Code utilisateur
+                    </label>
+                    <input
+                      type="text"
+                      value={codeUtilisateur}
+                      onChange={(e) => setCodeUtilisateur(e.target.value)}
+                      placeholder="Ex: 6C16"
+                      disabled={loadingEtab}
+                      className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-sm outline-none focus:border-emerald-500 focus:ring focus:ring-emerald-500/50 disabled:cursor-not-allowed disabled:bg-slate-100"
+                    />
+                  </div>
+
+                  <button
+                    type="submit"
+                    disabled={loadingEtab}
+                    className="w-full rounded-lg bg-slate-900 text-white py-2.5 text-sm font-semibold hover:bg-slate-800 transition disabled:cursor-not-allowed disabled:opacity-60"
+                  >
+                    {loadingEtab ? "Vérification..." : "Se connecter (établissement)"}
+                  </button>
+
+                  {errorEtab && <p className="text-xs text-red-600">{errorEtab}</p>}
+                  {feedbackEtab && <p className="text-xs text-emerald-600">{feedbackEtab}</p>}
+                </form>
+              </div>
+
               {/* TESTER SANS COMPTE */}
               <div className="mt-4">
                 <Link
@@ -380,7 +497,7 @@ export default function SignInPage() {
 
           <div className="relative z-10 flex h-full flex-col justify-start pt-14 px-10 pb-20 text-slate-50">
             <h2 className="max-w-xl text-3xl font-bold leading-tight">
-              Connexion 
+              Connexion
             </h2>
 
             <div className="mt-4 mb-6 max-w-xl rounded-lg border border-emerald-500 bg-emerald-500/10 px-4 py-3 backdrop-blur">

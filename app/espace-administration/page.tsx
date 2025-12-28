@@ -1,3 +1,5 @@
+// app/espace-administration/page.tsx
+
 "use client";
 
 import { useState } from "react";

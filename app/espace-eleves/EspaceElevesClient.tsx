@@ -1,4 +1,4 @@
-// app/espace-eleves/page.tsx
+// app/espace-eleves/EspaceElevesClient.tsx
 "use client";
 
 import { useMemo, useState, useCallback } from "react";

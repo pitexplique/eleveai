@@ -1,3 +1,4 @@
+// app/espace-eleves/VieScolaireClient.tsx
 "use client";
 
 import { useMemo, useState } from "react";
