@@ -50,6 +50,8 @@ type PromptEleve = PromptEleveBase & {
   modeAntiTriche: boolean;
 };
 
+type FeedbackChoice = "" | "ok" | "bof" | "pas_ok";
+
 /* ----------------------------------------
    LISTES
 ---------------------------------------- */
@@ -97,10 +99,7 @@ const PROFIL_OPTIONS: { id: ProfilEleve; label: string; emoji: string }[] = [
 ---------------------------------------- */
 
 const PRESET_ITEMS: PresetCarouselItem[] = (
-  Object.entries(ELEVES_PRESETS) as [
-    ElevesPresetKey,
-    (typeof ELEVES_PRESETS)[ElevesPresetKey]
-  ][]
+  Object.entries(ELEVES_PRESETS) as [ElevesPresetKey, (typeof ELEVES_PRESETS)[ElevesPresetKey]][]
 ).map(([key, p]) => ({
   id: key,
   label: p.label,
@@ -151,6 +150,124 @@ function labelProfil(p: ProfilEleve) {
 }
 
 /* ----------------------------------------
+   UI : Boutons "Coller dans" (couleurs)
+---------------------------------------- */
+
+function PasteTargets({
+  text,
+  showToast,
+}: {
+  text: string;
+  showToast: (msg: string) => void;
+}) {
+  const disabled = !text;
+  const tchatHref = text ? `/tchat?prompt=${encodeURIComponent(text)}` : "/tchat";
+
+  const copySilently = async () => {
+    if (!text) return;
+    try {
+      await navigator.clipboard.writeText(text);
+      showToast("✅ Prompt copié ! Colle-le dans l’IA.");
+    } catch {
+      showToast("⚠️ Copie auto impossible (sélectionne puis Ctrl+C).");
+    }
+  };
+
+  return (
+    <div className="space-y-2 pt-1">
+      <p className="text-[11px] text-gray-600">Coller dans :</p>
+      <div className="flex flex-wrap gap-2 text-[11px] sm:text-xs">
+        <Link
+          href={tchatHref}
+          onClick={(e) => {
+            if (disabled) e.preventDefault();
+          }}
+          className={`px-3 py-2 rounded-lg font-semibold transition ${
+            disabled
+              ? "bg-slate-200 text-slate-500 cursor-not-allowed"
+              : "bg-emerald-600 text-white hover:bg-emerald-700"
+          }`}
+        >
+          🚀 Tchat EleveAI
+        </Link>
+
+        <a
+          href="https://chatgpt.com"
+          target="_blank"
+          rel="noreferrer"
+          onClick={(e) => {
+            if (disabled) {
+              e.preventDefault();
+              return;
+            }
+            copySilently();
+          }}
+          className={`px-3 py-2 rounded-lg font-semibold transition ${
+            disabled ? "bg-slate-200 text-slate-500 cursor-not-allowed" : "bg-slate-800 text-white hover:bg-slate-900"
+          }`}
+        >
+          🟦 ChatGPT
+        </a>
+
+        <a
+          href="https://gemini.google.com"
+          target="_blank"
+          rel="noreferrer"
+          onClick={(e) => {
+            if (disabled) {
+              e.preventDefault();
+              return;
+            }
+            copySilently();
+          }}
+          className={`px-3 py-2 rounded-lg font-semibold transition ${
+            disabled ? "bg-slate-200 text-slate-500 cursor-not-allowed" : "bg-[#0F9D58] text-white hover:bg-[#0c7b45]"
+          }`}
+        >
+          🟩 Gemini
+        </a>
+
+        <a
+          href="https://claude.ai"
+          target="_blank"
+          rel="noreferrer"
+          onClick={(e) => {
+            if (disabled) {
+              e.preventDefault();
+              return;
+            }
+            copySilently();
+          }}
+          className={`px-3 py-2 rounded-lg font-semibold transition ${
+            disabled ? "bg-slate-200 text-slate-500 cursor-not-allowed" : "bg-[#4B3FFF] text-white hover:bg-[#372dcc]"
+          }`}
+        >
+          🟪 Claude
+        </a>
+
+        <a
+          href="https://chat.mistral.ai"
+          target="_blank"
+          rel="noreferrer"
+          onClick={(e) => {
+            if (disabled) {
+              e.preventDefault();
+              return;
+            }
+            copySilently();
+          }}
+          className={`px-3 py-2 rounded-lg font-semibold transition ${
+            disabled ? "bg-slate-200 text-slate-500 cursor-not-allowed" : "bg-[#FF7F11] text-white hover:bg-[#e46f0d]"
+          }`}
+        >
+          🟧 Mistral
+        </a>
+      </div>
+    </div>
+  );
+}
+
+/* ----------------------------------------
    PAGE
 ---------------------------------------- */
 
@@ -159,11 +276,16 @@ export default function ElevePage() {
   const supabase = useMemo(() => createClient(), []);
 
   // Refs (scroll UX)
-  const promptRef = useRef<HTMLDivElement | null>(null);
+  const prompt2Ref = useRef<HTMLDivElement | null>(null);
+  const prompt1Ref = useRef<HTMLDivElement | null>(null);
   const topRef = useRef<HTMLDivElement | null>(null);
 
-  const scrollToPrompt = useCallback(() => {
-    promptRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+  const scrollToPrompt1 = useCallback(() => {
+    prompt1Ref.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }, []);
+
+  const scrollToPrompt2 = useCallback(() => {
+    prompt2Ref.current?.scrollIntoView({ behavior: "smooth", block: "start" });
   }, []);
 
   const scrollToTop = useCallback(() => {
@@ -212,7 +334,7 @@ export default function ElevePage() {
   const [saveMessage, setSaveMessage] = useState<string | null>(null);
 
   // feedback élève (UI)
-  const [feedbackChoice, setFeedbackChoice] = useState<"" | "ok" | "bof" | "pas_ok">("");
+  const [feedbackChoice, setFeedbackChoice] = useState<FeedbackChoice>("");
   const [feedbackText, setFeedbackText] = useState("");
 
   function handleChange<K extends keyof PromptEleve>(field: K, value: PromptEleve[K]) {
@@ -236,8 +358,7 @@ export default function ElevePage() {
         ...preset.valeurs,
 
         // ✅ garde modeAntiTriche si preset ne l'a pas
-        modeAntiTriche:
-          (preset.valeurs as Partial<PromptEleve>)?.modeAntiTriche ?? prev.modeAntiTriche ?? true,
+        modeAntiTriche: (preset.valeurs as Partial<PromptEleve>)?.modeAntiTriche ?? prev.modeAntiTriche ?? true,
 
         // ✅ profil : si preset ne l’a pas, on garde l’ancien
         profil: preset.valeurs.profil ?? prev.profil ?? [],
@@ -254,6 +375,7 @@ export default function ElevePage() {
     setFeedbackChoice("");
     setFeedbackText("");
     showToast("✅ Modèle appliqué !");
+    scrollToTop();
   }
 
   function resetAll() {
@@ -299,12 +421,7 @@ export default function ElevePage() {
      GENERER PROMPT 1 (anti-triche + profil)
   ---------------------------------------- */
 
-  function genererPromptFinal(mode: "rapide" | "complet" = "complet") {
-    if (!form.classe || !form.matiere || !form.typeAide || !form.chapitre.trim()) {
-      alert("Remplis au minimum : classe, matière, chapitre, et ce que tu veux faire.");
-      return;
-    }
-
+  function buildPromptBloc(mode: "rapide" | "complet") {
     const prenom = form.prenom.trim() || "un élève";
     const chapitre = form.chapitre.trim();
     const temps = form.tempsDispo?.trim() || "non précisé";
@@ -326,11 +443,8 @@ export default function ElevePage() {
       (form.prefereQuestions
         ? "- Pose-moi d’abord 2 à 4 questions pour voir ce que je sais.\n"
         : "- Tu peux expliquer directement, mais vérifie que je comprends.\n") +
-      (form.prefereExemplesConcrets
-        ? "- Utilise des exemples concrets avant la règle.\n"
-        : "- Tu peux aller à l’essentiel.\n");
+      (form.prefereExemplesConcrets ? "- Utilise des exemples concrets avant la règle.\n" : "- Tu peux aller à l’essentiel.\n");
 
-    // ✅ Anti-triche : injecté seulement si toggle ON
     const blocAntiTriche = form.modeAntiTriche
       ? "\nMODE ANTI-TRICHE :\n" +
         "- Ne donne pas la solution tout de suite.\n" +
@@ -350,10 +464,8 @@ export default function ElevePage() {
 
           if (form.dysTypes.includes("dyslexie"))
             lignes.push("- Dyslexie : éviter les gros blocs, mettre en évidence les mots importants.");
-          if (form.dysTypes.includes("dyspraxie"))
-            lignes.push("- Dyspraxie : étapes numérotées, consignes très claires.");
-          if (form.dysTypes.includes("dyscalculie"))
-            lignes.push("- Dyscalculie : détailler les calculs + verbaliser.");
+          if (form.dysTypes.includes("dyspraxie")) lignes.push("- Dyspraxie : étapes numérotées, consignes très claires.");
+          if (form.dysTypes.includes("dyscalculie")) lignes.push("- Dyscalculie : détailler les calculs + verbaliser.");
           if (form.dysTypes.includes("dysorthographie"))
             lignes.push("- Dysorthographie : aider à structurer les phrases, pas de jugement sur les fautes.");
           if (form.dysTypes.includes("autre") && form.dysPrecisionAutre?.trim())
@@ -378,6 +490,17 @@ export default function ElevePage() {
       blocDYS +
       blocAntiTriche;
 
+    return prompt;
+  }
+
+  function genererPromptFinal(mode: "rapide" | "complet") {
+    if (!form.classe || !form.matiere || !form.typeAide || !form.chapitre.trim()) {
+      alert("Remplis au minimum : classe, matière, chapitre, et ce que tu veux faire.");
+      return;
+    }
+
+    const prompt = buildPromptBloc(mode);
+
     setPromptFinal(prompt);
     setPromptRelance("");
     setCopied(false);
@@ -385,8 +508,9 @@ export default function ElevePage() {
     setSaveMessage(null);
     setFeedbackChoice("");
     setFeedbackText("");
+
     showToast(mode === "rapide" ? "⚡ Prompt rapide généré !" : "✨ Prompt complet généré !");
-    setTimeout(() => scrollToPrompt(), 50);
+    setTimeout(() => scrollToPrompt1(), 60);
   }
 
   async function copierPrompt() {
@@ -405,31 +529,17 @@ export default function ElevePage() {
      PROMPT 2 : RELANCE ADAPTEE (avis élève)
   ---------------------------------------- */
 
-  function buildRelancePrompt() {
-    if (!promptFinal) {
-      alert("Génère d’abord ton prompt (étape 2).");
-      return;
-    }
-    if (!feedbackChoice) {
-      alert("Choisis d’abord ton avis (étape 3).");
-      return;
-    }
-
+  function buildRelanceBloc() {
     const feedbackFree = feedbackText.trim();
 
-    const intentByChoice: Record<typeof feedbackChoice, string> = {
-      "": "",
-      ok:
-        "Objectif : consolider. Donne 2–3 exercices progressifs (avec corrigé détaillé) + une mini-question de vérification à la fin.",
-      bof:
-        "Objectif : clarifier. Reprends plus simple, avec un exemple concret d’abord, puis la règle. Pose 2–4 questions courtes pour vérifier ce que je sais avant de corriger.",
+    const intentByChoice: Record<Exclude<FeedbackChoice, "">, string> = {
+      ok: "Objectif : consolider. Donne 2–3 exercices progressifs (avec corrigé détaillé) + une mini-question de vérification à la fin.",
+      bof: "Objectif : clarifier. Reprends plus simple, avec un exemple concret d’abord, puis la règle. Pose 2–4 questions courtes pour vérifier ce que je sais avant de corriger.",
       pas_ok:
         "Objectif : vérifier/rectifier. Refais le raisonnement étape par étape, contrôle avec un exemple, et signale explicitement si tu n’es pas certain. Propose une méthode alternative si possible.",
     };
 
-    const addUserNote = feedbackFree
-      ? `\n\nNote de l’élève (à prendre en compte) :\n"${feedbackFree}"\n`
-      : "";
+    const addUserNote = feedbackFree ? `\n\nNote de l’élève (à prendre en compte) :\n"${feedbackFree}"\n` : "";
 
     const antiHallucination =
       "\n\nRègles importantes :\n" +
@@ -444,14 +554,29 @@ export default function ElevePage() {
       promptFinal +
       "\n-----\n\n" +
       "Maintenant, réponds en suivant cette relance :\n" +
-      intentByChoice[feedbackChoice] +
+      intentByChoice[feedbackChoice as Exclude<FeedbackChoice, "">] +
       addUserNote +
       antiHallucination;
 
+    return relance;
+  }
+
+  function buildRelancePrompt() {
+    if (!promptFinal) {
+      alert("Génère d’abord ton prompt (étape 2).");
+      return;
+    }
+    if (!feedbackChoice) {
+      alert("Choisis d’abord ton avis (étape 3).");
+      return;
+    }
+
+    const relance = buildRelanceBloc();
     setPromptRelance(relance);
     setCopiedRelance(false);
+
     showToast("🔁 Relance générée !");
-    setTimeout(() => scrollToPrompt(), 50);
+    setTimeout(() => scrollToPrompt2(), 80); // ✅ micro-UX : scroll direct prompt 2
   }
 
   async function copierRelance() {
@@ -551,8 +676,8 @@ export default function ElevePage() {
           </h1>
 
           <p className="text-sm sm:text-base text-gray-700 max-w-2xl">
-            1) Tu règles tes <b>paramètres</b> → 2) Tu <b>génères un prompt</b> → 3) Après la réponse, tu donnes
-            ton <b>avis</b> et tu peux faire une <b>relance</b> pour progresser.
+            1) Tu règles tes <b>paramètres</b> → 2) Tu <b>génères un prompt</b> → 3) Après la réponse, tu donnes ton{" "}
+            <b>avis</b> et tu peux faire une <b>relance</b> pour progresser.
           </p>
 
           <div className="flex flex-wrap gap-2 pt-1 text-xs">
@@ -570,9 +695,7 @@ export default function ElevePage() {
                 <Wand2 className="w-4 h-4 text-emerald-700" />
                 Modèles rapides (facultatif)
               </p>
-              <p className="text-xs text-slate-600">
-                Choisis un modèle si tu veux aller plus vite. Tu peux tout modifier ensuite.
-              </p>
+              <p className="text-xs text-slate-600">Choisis un modèle si tu veux aller plus vite. Tu peux tout modifier ensuite.</p>
             </div>
             <ChevronRight className="w-5 h-5 text-slate-500 transition group-open:rotate-90 mt-0.5" />
           </summary>
@@ -595,9 +718,7 @@ export default function ElevePage() {
             <div className="flex items-start justify-between gap-3">
               <div>
                 <h2 className="text-base font-extrabold text-[#0047B6]">1️⃣ Paramètres</h2>
-                <p className="text-xs text-slate-600 mt-1">
-                  Remplis l’essentiel. Ensuite tu pourras générer ton prompt.
-                </p>
+                <p className="text-xs text-slate-600 mt-1">Remplis l’essentiel. Ensuite tu pourras générer ton prompt.</p>
               </div>
 
               <button
@@ -678,9 +799,7 @@ export default function ElevePage() {
             {/* Profil */}
             <div className="space-y-2">
               <label className="text-xs font-semibold">Ton profil (facultatif)</label>
-              <p className="text-[11px] text-slate-600">
-                Choisis 1 à 3 centres d’intérêt : l’IA peut s’en servir pour des exemples motivants.
-              </p>
+              <p className="text-[11px] text-slate-600">Choisis 1 à 3 centres d’intérêt : l’IA peut s’en servir pour des exemples motivants.</p>
 
               <div className="flex flex-wrap gap-2">
                 {PROFIL_OPTIONS.map((p) => {
@@ -763,9 +882,7 @@ export default function ElevePage() {
                           showToast(`⏱️ ${t}`);
                         }}
                         className={`rounded-full px-3 py-1 text-[11px] font-semibold border transition ${
-                          active
-                            ? "border-emerald-500 bg-emerald-100 text-emerald-800"
-                            : "border-slate-200 bg-white text-slate-700 hover:bg-slate-50"
+                          active ? "border-emerald-500 bg-emerald-100 text-emerald-800" : "border-slate-200 bg-white text-slate-700 hover:bg-slate-50"
                         }`}
                       >
                         {t}
@@ -821,9 +938,7 @@ export default function ElevePage() {
                     <ShieldCheck className="w-4 h-4" />
                     Mode anti-triche
                   </p>
-                  <p className="text-xs text-amber-800 mt-1">
-                    L’IA doit t’aider à <b>comprendre</b> : questions → indices → correction pas à pas.
-                  </p>
+                  <p className="text-xs text-amber-800 mt-1">L’IA doit t’aider à <b>comprendre</b> : questions → indices → correction pas à pas.</p>
                 </div>
 
                 <label className="inline-flex items-center gap-2 text-xs font-semibold text-amber-900">
@@ -931,9 +1046,7 @@ export default function ElevePage() {
                                 const checked = e.target.checked;
                                 handleChange(
                                   "dysTypes",
-                                  checked
-                                    ? [...form.dysTypes, opt.value as DysType]
-                                    : form.dysTypes.filter((t) => t !== opt.value),
+                                  checked ? [...form.dysTypes, opt.value as DysType] : form.dysTypes.filter((t) => t !== opt.value)
                                 );
                               }}
                               className="h-3 w-3"
@@ -965,9 +1078,7 @@ export default function ElevePage() {
                 disabled={!canGenerate}
                 onClick={() => genererPromptFinal("rapide")}
                 className={`inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2 text-sm font-semibold shadow transition ${
-                  canGenerate
-                    ? "bg-emerald-600 text-white hover:bg-emerald-700"
-                    : "bg-emerald-100 text-emerald-500 cursor-not-allowed"
+                  canGenerate ? "bg-emerald-600 text-white hover:bg-emerald-700" : "bg-emerald-100 text-emerald-500 cursor-not-allowed"
                 }`}
               >
                 <Sparkles className="w-4 h-4" />
@@ -979,9 +1090,7 @@ export default function ElevePage() {
                 disabled={!canGenerate}
                 onClick={() => genererPromptFinal("complet")}
                 className={`inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2 text-sm font-semibold border transition ${
-                  canGenerate
-                    ? "border-emerald-300 bg-white text-emerald-800 hover:bg-emerald-50"
-                    : "border-slate-200 bg-white text-slate-400 cursor-not-allowed"
+                  canGenerate ? "border-emerald-300 bg-white text-emerald-800 hover:bg-emerald-50" : "border-slate-200 bg-white text-slate-400 cursor-not-allowed"
                 }`}
               >
                 <Sparkles className="w-4 h-4" />
@@ -1006,7 +1115,7 @@ export default function ElevePage() {
           {/* COLONNE DROITE : ETAPE 2 + 3 + Prompt 2 */}
           <section className="space-y-4">
             {/* ETAPE 2 : PROMPT 1 */}
-            <div ref={promptRef} className="bg-white/95 border border-slate-200 rounded-2xl shadow-sm p-5 space-y-3">
+            <div ref={prompt1Ref} className="bg-white/95 border border-slate-200 rounded-2xl shadow-sm p-5 space-y-3">
               <div className="flex flex-wrap items-center justify-between gap-2">
                 <div className="space-y-0.5">
                   <h2 className="text-base font-extrabold text-[#0047B6]">2️⃣ Ton prompt (Prompt 1)</h2>
@@ -1018,9 +1127,7 @@ export default function ElevePage() {
                     onClick={copierPrompt}
                     disabled={!promptFinal}
                     className={`inline-flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-semibold transition ${
-                      promptFinal
-                        ? "bg-slate-900 text-white hover:bg-slate-950"
-                        : "bg-slate-200 text-slate-500 cursor-not-allowed"
+                      promptFinal ? "bg-slate-900 text-white hover:bg-slate-950" : "bg-slate-200 text-slate-500 cursor-not-allowed"
                     }`}
                   >
                     <ClipboardCopy className="w-4 h-4" />
@@ -1031,9 +1138,7 @@ export default function ElevePage() {
                     onClick={enregistrerPreset}
                     disabled={!promptFinal || saving}
                     className={`inline-flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-semibold transition ${
-                      promptFinal
-                        ? "bg-emerald-600 text-white hover:bg-emerald-700"
-                        : "bg-emerald-200 text-emerald-700 cursor-not-allowed"
+                      promptFinal ? "bg-emerald-600 text-white hover:bg-emerald-700" : "bg-emerald-200 text-emerald-700 cursor-not-allowed"
                     }`}
                   >
                     <Bookmark className="w-4 h-4" />
@@ -1051,26 +1156,16 @@ export default function ElevePage() {
                 placeholder="Ton prompt apparaîtra ici après génération."
               />
 
-              <div className="flex flex-col sm:flex-row gap-2">
-                <Link
-                  href={promptFinal ? `/tchat?prompt=${encodeURIComponent(promptFinal)}` : "/tchat"}
-                  className={`inline-flex items-center justify-center gap-2 px-3 py-2 rounded-xl font-semibold transition ${
-                    promptFinal
-                      ? "bg-emerald-600 text-white hover:bg-emerald-700"
-                      : "bg-emerald-200 text-emerald-700 cursor-not-allowed"
-                  }`}
-                >
-                  🚀 Utiliser EleveAI
-                </Link>
+              {/* ✅ Boutons colorés */}
+              <PasteTargets text={promptFinal} showToast={showToast} />
 
+              <div className="flex flex-col sm:flex-row gap-2 pt-1">
                 <button
                   type="button"
                   onClick={() => showToast("✅ Astuce : demande des questions d’abord.")}
                   disabled={!promptFinal}
                   className={`inline-flex items-center justify-center gap-2 px-3 py-2 rounded-xl font-semibold border transition ${
-                    promptFinal
-                      ? "border-slate-200 bg-white text-slate-800 hover:bg-slate-50"
-                      : "border-slate-200 bg-white text-slate-400 cursor-not-allowed"
+                    promptFinal ? "border-slate-200 bg-white text-slate-800 hover:bg-slate-50" : "border-slate-200 bg-white text-slate-400 cursor-not-allowed"
                   }`}
                 >
                   <MessageCircle className="w-4 h-4" />
@@ -1087,9 +1182,7 @@ export default function ElevePage() {
             {/* ETAPE 3 : AVIS + RELANCE */}
             <div className="bg-white/95 border border-slate-200 rounded-2xl shadow-sm p-5 space-y-3">
               <h2 className="text-base font-extrabold text-[#0047B6]">3️⃣ Après la réponse : qu’en penses-tu ?</h2>
-              <p className="text-xs text-slate-600">
-                10 secondes : ça t’aide à mieux apprendre. Puis tu peux générer une relance (Prompt 2).
-              </p>
+              <p className="text-xs text-slate-600">10 secondes : ça t’aide à mieux apprendre. Puis tu peux générer une relance (Prompt 2).</p>
 
               <div className="grid sm:grid-cols-3 gap-2">
                 <button
@@ -1099,9 +1192,7 @@ export default function ElevePage() {
                     showToast("✅ OK !");
                   }}
                   className={`rounded-xl border px-3 py-2 text-sm font-semibold transition ${
-                    feedbackChoice === "ok"
-                      ? "border-emerald-500 bg-emerald-50"
-                      : "border-slate-200 bg-white hover:bg-slate-50"
+                    feedbackChoice === "ok" ? "border-emerald-500 bg-emerald-50" : "border-slate-200 bg-white hover:bg-slate-50"
                   }`}
                 >
                   ✅ Je comprends
@@ -1114,9 +1205,7 @@ export default function ElevePage() {
                     showToast("🤔 On clarifie.");
                   }}
                   className={`rounded-xl border px-3 py-2 text-sm font-semibold transition ${
-                    feedbackChoice === "bof"
-                      ? "border-amber-400 bg-amber-50"
-                      : "border-slate-200 bg-white hover:bg-slate-50"
+                    feedbackChoice === "bof" ? "border-amber-400 bg-amber-50" : "border-slate-200 bg-white hover:bg-slate-50"
                   }`}
                 >
                   🤔 Pas sûr
@@ -1129,9 +1218,7 @@ export default function ElevePage() {
                     showToast("🧪 On vérifie.");
                   }}
                   className={`rounded-xl border px-3 py-2 text-sm font-semibold transition ${
-                    feedbackChoice === "pas_ok"
-                      ? "border-rose-400 bg-rose-50"
-                      : "border-slate-200 bg-white hover:bg-slate-50"
+                    feedbackChoice === "pas_ok" ? "border-rose-400 bg-rose-50" : "border-slate-200 bg-white hover:bg-slate-50"
                   }`}
                 >
                   ❌ Ça semble faux
@@ -1153,9 +1240,7 @@ export default function ElevePage() {
                 onClick={buildRelancePrompt}
                 disabled={!promptFinal || !feedbackChoice}
                 className={`w-full inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2 text-sm font-semibold transition ${
-                  promptFinal && feedbackChoice
-                    ? "bg-emerald-600 text-white hover:bg-emerald-700"
-                    : "bg-emerald-100 text-emerald-500 cursor-not-allowed"
+                  promptFinal && feedbackChoice ? "bg-emerald-600 text-white hover:bg-emerald-700" : "bg-emerald-100 text-emerald-500 cursor-not-allowed"
                 }`}
               >
                 🔁 Générer une relance adaptée (Prompt 2)
@@ -1163,13 +1248,11 @@ export default function ElevePage() {
             </div>
 
             {/* PROMPT 2 : RELANCE */}
-            <div className="bg-white/95 border border-slate-200 rounded-2xl shadow-sm p-5 space-y-3">
+            <div ref={prompt2Ref} className="bg-white/95 border border-slate-200 rounded-2xl shadow-sm p-5 space-y-3">
               <div className="flex flex-wrap items-center justify-between gap-2">
                 <div className="space-y-0.5">
                   <h3 className="text-base font-extrabold text-[#0047B6]">🔁 Prompt 2 (relance)</h3>
-                  <p className="text-xs text-slate-600">
-                    À utiliser pour consolider, clarifier, ou vérifier.
-                  </p>
+                  <p className="text-xs text-slate-600">À utiliser pour consolider, clarifier, ou vérifier.</p>
                 </div>
 
                 <div className="flex items-center gap-2">
@@ -1177,9 +1260,7 @@ export default function ElevePage() {
                     onClick={copierRelance}
                     disabled={!promptRelance}
                     className={`inline-flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-semibold transition ${
-                      promptRelance
-                        ? "bg-slate-900 text-white hover:bg-slate-950"
-                        : "bg-slate-200 text-slate-500 cursor-not-allowed"
+                      promptRelance ? "bg-slate-900 text-white hover:bg-slate-950" : "bg-slate-200 text-slate-500 cursor-not-allowed"
                     }`}
                   >
                     <ClipboardCopy className="w-4 h-4" />
@@ -1189,9 +1270,7 @@ export default function ElevePage() {
                   <Link
                     href={promptRelance ? `/tchat?prompt=${encodeURIComponent(promptRelance)}` : "/tchat"}
                     className={`inline-flex items-center justify-center gap-2 px-3 py-2 rounded-xl text-xs font-semibold transition ${
-                      promptRelance
-                        ? "bg-emerald-600 text-white hover:bg-emerald-700"
-                        : "bg-emerald-200 text-emerald-700 cursor-not-allowed"
+                      promptRelance ? "bg-emerald-600 text-white hover:bg-emerald-700" : "bg-emerald-200 text-emerald-700 cursor-not-allowed"
                     }`}
                   >
                     🚀 Utiliser la relance
@@ -1205,6 +1284,9 @@ export default function ElevePage() {
                 className="w-full border rounded-lg px-3 py-2 text-xs font-mono bg-slate-50 min-h-[180px]"
                 placeholder="Ton Prompt 2 apparaîtra ici après ton avis (étape 3)."
               />
+
+              {/* ✅ Boutons colorés */}
+              <PasteTargets text={promptRelance} showToast={showToast} />
 
               {promptRelance && (
                 <div className="rounded-xl border border-emerald-200 bg-emerald-50 p-3 text-xs text-emerald-900">
@@ -1242,9 +1324,7 @@ export default function ElevePage() {
             onClick={() => (showAdvanced ? genererPromptFinal("complet") : genererPromptFinal("rapide"))}
             disabled={!canGenerate}
             className={`flex-1 inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2 text-sm font-semibold shadow transition ${
-              canGenerate
-                ? "bg-emerald-600 text-white hover:bg-emerald-700"
-                : "bg-emerald-100 text-emerald-500 cursor-not-allowed"
+              canGenerate ? "bg-emerald-600 text-white hover:bg-emerald-700" : "bg-emerald-100 text-emerald-500 cursor-not-allowed"
             }`}
           >
             <Sparkles className="w-4 h-4" />
@@ -1253,12 +1333,10 @@ export default function ElevePage() {
 
           <button
             type="button"
-            onClick={scrollToPrompt}
+            onClick={scrollToPrompt1}
             disabled={!promptFinal}
             className={`inline-flex items-center justify-center gap-2 rounded-xl px-3 py-2 text-sm font-semibold border transition ${
-              promptFinal
-                ? "border-slate-200 bg-white text-slate-900 hover:bg-slate-50"
-                : "border-slate-200 bg-white text-slate-400 cursor-not-allowed"
+              promptFinal ? "border-slate-200 bg-white text-slate-900 hover:bg-slate-50" : "border-slate-200 bg-white text-slate-400 cursor-not-allowed"
             }`}
             title="Aller au prompt"
           >
