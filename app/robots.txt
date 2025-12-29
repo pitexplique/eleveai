@@ -7,14 +7,21 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "*",
         allow: "/",
+
+        // 🔒 Routes non indexables (privées / techniques)
         disallow: [
-          "/auth",
-          "/dashboard",
-          "/tchat",
-          "/api",
+          "/auth/",
+          "/dashboard/",
+          "/tchat/",
+          "/api/",
         ],
       },
     ],
+
+    // 🗺️ Sitemap déclaré explicitement
     sitemap: "https://eleveai.fr/sitemap.xml",
+
+    // 🌍 Host canonique (important pour Bing)
+    host: "https://eleveai.fr",
   };
 }
