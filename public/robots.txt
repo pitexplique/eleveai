@@ -7,4 +7,3 @@ Disallow: /tchat/
 Disallow: /api/
 
 Sitemap: https://eleveai.fr/sitemap.xml
-Host: eleveai.fr
