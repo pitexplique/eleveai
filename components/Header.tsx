@@ -236,7 +236,6 @@ export default function Header() {
         items: [
           { href: "/espace-eleves", label: "S’entraîner avec l’IA", icon: <GraduationCap className="h-4 w-4" /> },
           { href: "/concours-ia", label: "Changer ton monde", icon: <Sparkles className="h-4 w-4" /> },
-          { href: "/parcours-creatifs", label: "Parcours créatifs", icon: <BookOpenText className="h-4 w-4" /> },
         ],
       },
       {
