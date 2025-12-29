@@ -16,7 +16,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // =========================
   const staticRoutes: MetadataRoute.Sitemap = [
     // Home + page pilier
-    { url: u("/"), lastModified: LASTMOD_HOME, changeFrequency: "weekly", priority: 1.0 },
+    { url: u("/accueil"), lastModified: LASTMOD_HOME, changeFrequency: "weekly", priority: 1.0 },
     { url: u("/atelier-ia"), lastModified: LASTMOD_CORE, changeFrequency: "weekly", priority: 0.95 },
 
     // Blog hub

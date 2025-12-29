@@ -24,14 +24,15 @@ import {
   Handshake,
   LayoutDashboard,
   LogOut,
+  Euro,
 } from "lucide-react";
 
 /* -----------------------------
-   ROUTES AUTH (rappel)
+   ROUTES AUTH
 ------------------------------ */
 const AUTH_ROUTES = {
   signin: "/auth/signin",
-  signup: "/auth/signup", // ✅ signup est dans /auth/
+  signup: "/auth/signup",
 };
 
 type NavItem = {
@@ -41,7 +42,7 @@ type NavItem = {
   icon?: React.ReactNode;
 };
 
-type GroupKey = "atelier" | "profs" | "eleves" | "parents" | "admin" | "plus";
+type GroupKey = "atelier" | "profs" | "eleves" | "parents" | "etablissements" | "plus";
 
 type Group = {
   key: GroupKey;
@@ -108,7 +109,7 @@ export default function Header() {
   const refProfs = useRef<HTMLDivElement>(null);
   const refEleves = useRef<HTMLDivElement>(null);
   const refParents = useRef<HTMLDivElement>(null);
-  const refAdmin = useRef<HTMLDivElement>(null);
+  const refEtab = useRef<HTMLDivElement>(null);
   const refPlus = useRef<HTMLDivElement>(null);
 
   // Ref (global header, pour fermer le menu mobile si clic dehors)
@@ -121,12 +122,12 @@ export default function Header() {
   }, []);
 
   const refsDesktop = useMemo(
-    () => [refAtelier, refProfs, refEleves, refParents, refAdmin, refPlus],
+    () => [refAtelier, refProfs, refEleves, refParents, refEtab, refPlus],
     [],
   );
 
   useOnClickOutside(refsDesktop, () => setOpen(null), open !== null);
-  useOnClickOutside([headerRef], closeAll, menuOpen); // mobile
+  useOnClickOutside([headerRef], closeAll, menuOpen);
 
   // Escape = ferme tout
   useEffect(() => {
@@ -143,7 +144,7 @@ export default function Header() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]);
 
-  // ✅ Auth listener : met à jour le header après login/logout
+  // ✅ Auth listener
   useEffect(() => {
     let mounted = true;
 
@@ -180,11 +181,11 @@ export default function Header() {
     if (key === "profs") return refProfs;
     if (key === "eleves") return refEleves;
     if (key === "parents") return refParents;
-    if (key === "admin") return refAdmin;
+    if (key === "etablissements") return refEtab;
     return refPlus;
   }
 
-  // ✅ Navigation (ton schéma)
+  // ✅ NAV (SEO-CLAIRES)
   const GROUPS: Group[] = useMemo(
     () => [
       {
@@ -192,9 +193,17 @@ export default function Header() {
         label: "Atelier-IA",
         icon: <Wand2 className="h-4 w-4" />,
         items: [
-          { href: "/atelier-IA", label: "HUB Atelier-IA", icon: <Wand2 className="h-4 w-4" /> },
-          { href: "/atelier-IA/vision", label: "Vision", icon: <Sparkles className="h-4 w-4" /> },
-          { href: "/atelier-IA/programme", label: "Programme", icon: <ClipboardList className="h-4 w-4" /> },
+          { href: "/atelier-IA", label: "Présentation", icon: <Wand2 className="h-4 w-4" /> },
+          {
+            href: "/atelier-IA/vision",
+            label: "Vision pédagogique",
+            icon: <Sparkles className="h-4 w-4" />,
+          },
+          {
+            href: "/atelier-IA/programme",
+            label: "Programme",
+            icon: <ClipboardList className="h-4 w-4" />,
+          },
         ],
       },
       {
@@ -202,14 +211,22 @@ export default function Header() {
         label: "Profs",
         icon: <Users className="h-4 w-4" />,
         items: [
-          { href: "/espace-profs", label: "Générer des prompts", icon: <Users className="h-4 w-4" /> },
+          {
+            href: "/espace-profs",
+            label: "Générer des consignes IA (prompts)",
+            icon: <Users className="h-4 w-4" />,
+          },
           {
             href: "/blog/rediger-document-ia-friendly",
             label: "Devoir IA-friendly (article)",
             icon: <BookOpenText className="h-4 w-4" />,
             badge: "Nouveau",
           },
-          { href: "/atelier-IA", label: "Atelier-IA pour les élèves", icon: <Wand2 className="h-4 w-4" /> },
+          {
+            href: "/atelier-IA",
+            label: "Atelier-IA en classe",
+            icon: <Wand2 className="h-4 w-4" />,
+          },
         ],
       },
       {
@@ -217,25 +234,27 @@ export default function Header() {
         label: "Élèves",
         icon: <GraduationCap className="h-4 w-4" />,
         items: [
-          { href: "/espace-eleves", label: "Générer des prompts", icon: <GraduationCap className="h-4 w-4" /> },
+          { href: "/espace-eleves", label: "S’entraîner avec l’IA", icon: <GraduationCap className="h-4 w-4" /> },
           { href: "/concours-ia", label: "Changer ton monde", icon: <Sparkles className="h-4 w-4" /> },
-          { href: "/parcours-creatifs", label: "Autres parcours créatifs", icon: <BookOpenText className="h-4 w-4" /> },
+          { href: "/parcours-creatifs", label: "Parcours créatifs", icon: <BookOpenText className="h-4 w-4" /> },
         ],
       },
       {
         key: "parents",
         label: "Parents",
         icon: <UsersRound className="h-4 w-4" />,
-        items: [{ href: "/espace-parents", label: "Accompagnement", icon: <UsersRound className="h-4 w-4" /> }],
+        items: [
+          { href: "/espace-parents", label: "Comprendre & accompagner", icon: <UsersRound className="h-4 w-4" /> },
+        ],
       },
       {
-        key: "admin",
-        label: "Administratif",
+        key: "etablissements",
+        label: "Établissements",
         icon: <Briefcase className="h-4 w-4" />,
         items: [
-          { href: "/espace-administration", label: "Assistant administratif (IA)", icon: <ClipboardList className="h-4 w-4" /> },
-          { href: "/espace-vie-scolaire", label: "Vie scolaire (IA)", icon: <BookOpenText className="h-4 w-4" /> },
-          { href: "/espace-personnels", label: "Personnels & services (IA)", icon: <Briefcase className="h-4 w-4" /> },
+          { href: "/offre-pilote", label: "Offre pilote (8 semaines)", icon: <Sparkles className="h-4 w-4" /> },
+          { href: "/tarifs#offre-etablissement", label: "Offre établissement", icon: <Euro className="h-4 w-4" /> },
+          { href: "/contact", label: "Demander un devis", icon: <Mail className="h-4 w-4" /> },
         ],
       },
       {
@@ -244,12 +263,12 @@ export default function Header() {
         icon: <ChevronDown className="h-4 w-4" />,
         items: [
           { href: "/accueil", label: "Accueil", icon: <Home className="h-4 w-4" /> },
+          { href: "/tarifs", label: "Tarifs", icon: <Euro className="h-4 w-4" /> },
           { href: "/blog", label: "Blog", icon: <BookOpenText className="h-4 w-4" /> },
           { href: "/faq", label: "FAQ", icon: <HelpCircle className="h-4 w-4" /> },
           { href: "/contact", label: "Contact", icon: <Mail className="h-4 w-4" /> },
-          // adapte selon ton choix : /manifeste ou /qui-suis-je
           { href: "/qui-sommes-nous", label: "Qui sommes-nous ?", icon: <UserRound className="h-4 w-4" /> },
-          { href: "/partenaires", label: "Partenaires & sponsors", icon: <Handshake className="h-4 w-4" /> },
+          { href: "/partenaires", label: "Partenaires", icon: <Handshake className="h-4 w-4" /> },
         ],
       },
     ],
@@ -259,8 +278,15 @@ export default function Header() {
   const desktopBtnClass = (active: boolean) =>
     `px-3 py-1.5 text-sm rounded-xl border flex items-center gap-2 transition ${
       active
-        ? "border-sky-500 bg-sky-500/10 text-sky-100 shadow-[0_0_0_1px_rgba(56,189,248,0.4)]"
+        ? "border-emerald-500/70 bg-emerald-500/10 text-emerald-100 shadow-[0_0_0_1px_rgba(16,185,129,0.35)]"
         : "border-slate-700 text-slate-200 hover:bg-slate-900 hover:border-slate-500"
+    }`;
+
+  const menuItemClass = (active: boolean) =>
+    `px-4 py-2 text-sm flex items-center gap-3 ${
+      active
+        ? "text-emerald-200 bg-emerald-500/10 border-l-2 border-emerald-500"
+        : "text-slate-300 hover:bg-slate-900"
     }`;
 
   return (
@@ -276,7 +302,9 @@ export default function Header() {
           </div>
           <div className="flex flex-col leading-tight">
             <span className="text-sm sm:text-base font-semibold text-slate-50">EleveAI</span>
-            <span className="text-[10px] sm:text-xs text-slate-400">L’IA pédagogique pour tous</span>
+            <span className="text-[10px] sm:text-xs text-slate-400">
+              IA pédagogique encadrée (Profs · Élèves · Parents)
+            </span>
           </div>
         </Link>
 
@@ -299,7 +327,9 @@ export default function Header() {
                 >
                   <span className="text-slate-200">{group.icon}</span>
                   {group.label}
-                  <ChevronDown className={`h-4 w-4 transition-transform ${opened ? "rotate-180" : ""}`} />
+                  <ChevronDown
+                    className={`h-4 w-4 transition-transform ${opened ? "rotate-180" : ""}`}
+                  />
                 </button>
 
                 {opened && (
@@ -312,11 +342,7 @@ export default function Header() {
                             key={link.href}
                             href={link.href}
                             onClick={closeAll}
-                            className={`px-4 py-2 text-sm flex items-center gap-3 ${
-                              active
-                                ? "text-sky-300 bg-sky-500/10 border-l-2 border-sky-500"
-                                : "text-slate-300 hover:bg-slate-900"
-                            }`}
+                            className={menuItemClass(active)}
                           >
                             <IconWrap>{link.icon}</IconWrap>
                             <span className="flex-1">{link.label}</span>
@@ -334,6 +360,18 @@ export default function Header() {
               </div>
             );
           })}
+
+          {/* TARIFS visible */}
+          <Link
+            href="/tarifs"
+            className={`px-3 py-1.5 text-sm rounded-xl border transition ${
+              isActive(pathname, "/tarifs")
+                ? "border-emerald-500/70 bg-emerald-500/10 text-emerald-100"
+                : "border-slate-700 text-slate-200 hover:bg-slate-900 hover:border-slate-500"
+            }`}
+          >
+            Tarifs
+          </Link>
         </div>
 
         {/* RIGHT CTA (DESKTOP) */}
@@ -456,7 +494,9 @@ export default function Header() {
                     type="button"
                     onClick={() => setMobileOpen((v) => (v === group.key ? null : group.key))}
                     className={`w-full px-3 py-2 text-sm flex items-center justify-between ${
-                      opened || anyActive ? "bg-sky-500/10 text-sky-100" : "bg-slate-950 text-slate-200 hover:bg-slate-900"
+                      opened || anyActive
+                        ? "bg-emerald-500/10 text-emerald-100"
+                        : "bg-slate-950 text-slate-200 hover:bg-slate-900"
                     }`}
                     aria-expanded={opened}
                   >
@@ -464,7 +504,9 @@ export default function Header() {
                       {group.icon}
                       {group.label}
                     </span>
-                    <ChevronDown className={`h-4 w-4 transition-transform ${opened ? "rotate-180" : ""}`} />
+                    <ChevronDown
+                      className={`h-4 w-4 transition-transform ${opened ? "rotate-180" : ""}`}
+                    />
                   </button>
 
                   {opened && (
@@ -477,7 +519,7 @@ export default function Header() {
                             href={link.href}
                             onClick={closeAll}
                             className={`px-3 py-2 text-sm border-t border-slate-800 flex items-center gap-3 ${
-                              active ? "text-sky-300 bg-sky-500/10" : "text-slate-300 hover:bg-slate-900"
+                              active ? "text-emerald-200 bg-emerald-500/10" : "text-slate-300 hover:bg-slate-900"
                             }`}
                           >
                             <IconWrap>{link.icon}</IconWrap>
@@ -495,6 +537,23 @@ export default function Header() {
                 </div>
               );
             })}
+
+            {/* Tarifs (mobile visible) */}
+            <Link
+              href="/tarifs"
+              onClick={closeAll}
+              className={`px-3 py-2 text-sm rounded-xl border flex items-center justify-between ${
+                isActive(pathname, "/tarifs")
+                  ? "border-emerald-500/70 bg-emerald-500/10 text-emerald-100"
+                  : "border-slate-800 bg-slate-950 text-slate-200 hover:bg-slate-900"
+              }`}
+            >
+              <span className="flex items-center gap-2">
+                <Euro className="h-4 w-4" />
+                Tarifs
+              </span>
+              <span className="text-xs text-slate-400">→</span>
+            </Link>
           </div>
         </div>
       )}
