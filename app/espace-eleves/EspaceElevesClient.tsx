@@ -1,7 +1,7 @@
 // app/espace-eleves/EspaceElevesClient.tsx
 "use client";
 
-import { useMemo, useState, useCallback } from "react";
+import React, { useMemo, useState, useCallback, useRef } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { PresetCarousel, PresetCarouselItem } from "@/components/PresetCarousel";
@@ -18,6 +18,10 @@ import {
   Frown,
   Star,
   ShieldCheck,
+  MessageCircle,
+  Wand2,
+  ArrowDown,
+  Bookmark,
 } from "lucide-react";
 
 import {
@@ -36,7 +40,6 @@ import { CLASSES, MATIERES } from "@/lib/constants/scolaire";
 
 export const dynamic = "force-dynamic";
 export { metadata } from "./metadata";
-
 
 /* ----------------------------------------
    TYPES (UI)
@@ -155,12 +158,23 @@ export default function ElevePage() {
   const router = useRouter();
   const supabase = useMemo(() => createClient(), []);
 
+  // Refs (scroll UX)
+  const promptRef = useRef<HTMLDivElement | null>(null);
+  const topRef = useRef<HTMLDivElement | null>(null);
+
+  const scrollToPrompt = useCallback(() => {
+    promptRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }, []);
+
+  const scrollToTop = useCallback(() => {
+    topRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }, []);
 
   // ✅ Toast
   const [toast, setToast] = useState<string | null>(null);
   const showToast = useCallback((msg: string) => {
     setToast(msg);
-    window.setTimeout(() => setToast(null), 2000);
+    window.setTimeout(() => setToast(null), 1800);
   }, []);
 
   const makeInitialForm = (): PromptEleve => ({
@@ -184,16 +198,22 @@ export default function ElevePage() {
 
   const [form, setForm] = useState<PromptEleve>(makeInitialForm());
 
-  // UI progressive (étapes)
+  // UI progressive (options)
   const [showAdvanced, setShowAdvanced] = useState(false);
 
-  // sortie
+  // sortie : Prompt 1 + Prompt 2 (relance)
   const [promptFinal, setPromptFinal] = useState("");
+  const [promptRelance, setPromptRelance] = useState("");
   const [copied, setCopied] = useState(false);
+  const [copiedRelance, setCopiedRelance] = useState(false);
 
   // saving
   const [saving, setSaving] = useState(false);
   const [saveMessage, setSaveMessage] = useState<string | null>(null);
+
+  // feedback élève (UI)
+  const [feedbackChoice, setFeedbackChoice] = useState<"" | "ok" | "bof" | "pas_ok">("");
+  const [feedbackText, setFeedbackText] = useState("");
 
   function handleChange<K extends keyof PromptEleve>(field: K, value: PromptEleve[K]) {
     setForm((prev) => ({ ...prev, [field]: value }));
@@ -227,8 +247,12 @@ export default function ElevePage() {
 
     setShowAdvanced(true);
     setPromptFinal("");
+    setPromptRelance("");
     setCopied(false);
+    setCopiedRelance(false);
     setSaveMessage(null);
+    setFeedbackChoice("");
+    setFeedbackText("");
     showToast("✅ Modèle appliqué !");
   }
 
@@ -236,13 +260,18 @@ export default function ElevePage() {
     setForm(makeInitialForm());
     setShowAdvanced(false);
     setPromptFinal("");
+    setPromptRelance("");
     setCopied(false);
+    setCopiedRelance(false);
     setSaveMessage(null);
+    setFeedbackChoice("");
+    setFeedbackText("");
     showToast("🔄 Tout est réinitialisé");
+    scrollToTop();
   }
 
   /* ----------------------------------------
-     SUGGESTIONS
+     SUGGESTIONS (mini, non intrusif)
   ---------------------------------------- */
 
   const suggestions = useMemo(() => {
@@ -256,9 +285,6 @@ export default function ElevePage() {
     if (showAdvanced) {
       if (form.objectifPerso.trim().length < 10) s.push("Ajoute ton objectif (1 phrase).");
       if (!form.exemplesDifficiles.trim()) s.push("Ajoute un exemple qui te pose problème.");
-      if (form.profil.length === 0) s.push("Optionnel : choisis ton profil (pour des exemples plus motivants).");
-    } else {
-      if (form.profil.length === 0) s.push("Optionnel : choisis ton profil (sport, musique, jeux…).");
     }
 
     if (!form.modeAntiTriche) {
@@ -270,7 +296,7 @@ export default function ElevePage() {
   }, [form, showAdvanced]);
 
   /* ----------------------------------------
-     GENERER PROMPT (anti-triche + profil)
+     GENERER PROMPT 1 (anti-triche + profil)
   ---------------------------------------- */
 
   function genererPromptFinal(mode: "rapide" | "complet" = "complet") {
@@ -306,7 +332,7 @@ export default function ElevePage() {
 
     // ✅ Anti-triche : injecté seulement si toggle ON
     const blocAntiTriche = form.modeAntiTriche
-      ? "\nMODE ANTI-TRICHE (obligatoire) :\n" +
+      ? "\nMODE ANTI-TRICHE :\n" +
         "- Ne donne pas la solution tout de suite.\n" +
         "- Fais-moi chercher : questions → indices → correction étape par étape.\n" +
         "- Demande-moi d’essayer à chaque étape.\n" +
@@ -353,9 +379,14 @@ export default function ElevePage() {
       blocAntiTriche;
 
     setPromptFinal(prompt);
+    setPromptRelance("");
     setCopied(false);
+    setCopiedRelance(false);
     setSaveMessage(null);
-    showToast(mode === "rapide" ? "⚡ Aide rapide générée !" : "✨ Prompt complet généré !");
+    setFeedbackChoice("");
+    setFeedbackText("");
+    showToast(mode === "rapide" ? "⚡ Prompt rapide généré !" : "✨ Prompt complet généré !");
+    setTimeout(() => scrollToPrompt(), 50);
   }
 
   async function copierPrompt() {
@@ -364,7 +395,72 @@ export default function ElevePage() {
       await navigator.clipboard.writeText(promptFinal);
       setCopied(true);
       showToast("✅ Copié !");
-      setTimeout(() => setCopied(false), 1500);
+      setTimeout(() => setCopied(false), 1200);
+    } catch {
+      alert("Copie auto impossible. Sélectionne le texte puis Ctrl+C.");
+    }
+  }
+
+  /* ----------------------------------------
+     PROMPT 2 : RELANCE ADAPTEE (avis élève)
+  ---------------------------------------- */
+
+  function buildRelancePrompt() {
+    if (!promptFinal) {
+      alert("Génère d’abord ton prompt (étape 2).");
+      return;
+    }
+    if (!feedbackChoice) {
+      alert("Choisis d’abord ton avis (étape 3).");
+      return;
+    }
+
+    const feedbackFree = feedbackText.trim();
+
+    const intentByChoice: Record<typeof feedbackChoice, string> = {
+      "": "",
+      ok:
+        "Objectif : consolider. Donne 2–3 exercices progressifs (avec corrigé détaillé) + une mini-question de vérification à la fin.",
+      bof:
+        "Objectif : clarifier. Reprends plus simple, avec un exemple concret d’abord, puis la règle. Pose 2–4 questions courtes pour vérifier ce que je sais avant de corriger.",
+      pas_ok:
+        "Objectif : vérifier/rectifier. Refais le raisonnement étape par étape, contrôle avec un exemple, et signale explicitement si tu n’es pas certain. Propose une méthode alternative si possible.",
+    };
+
+    const addUserNote = feedbackFree
+      ? `\n\nNote de l’élève (à prendre en compte) :\n"${feedbackFree}"\n`
+      : "";
+
+    const antiHallucination =
+      "\n\nRègles importantes :\n" +
+      "- Si une étape est incertaine, dis-le.\n" +
+      "- Vérifie sur un exemple.\n" +
+      "- Termine par : “Est-ce que tu peux refaire un essai seul ?”.\n";
+
+    const relance =
+      "Tu vas continuer le travail avec un élève.\n" +
+      "Voici le contexte (Prompt 1) :\n" +
+      "-----\n" +
+      promptFinal +
+      "\n-----\n\n" +
+      "Maintenant, réponds en suivant cette relance :\n" +
+      intentByChoice[feedbackChoice] +
+      addUserNote +
+      antiHallucination;
+
+    setPromptRelance(relance);
+    setCopiedRelance(false);
+    showToast("🔁 Relance générée !");
+    setTimeout(() => scrollToPrompt(), 50);
+  }
+
+  async function copierRelance() {
+    if (!promptRelance) return;
+    try {
+      await navigator.clipboard.writeText(promptRelance);
+      setCopiedRelance(true);
+      showToast("✅ Relance copiée !");
+      setTimeout(() => setCopiedRelance(false), 1200);
     } catch {
       alert("Copie auto impossible. Sélectionne le texte puis Ctrl+C.");
     }
@@ -432,52 +528,75 @@ export default function ElevePage() {
     }
 
     setSaving(false);
-    setTimeout(() => setSaveMessage(null), 4000);
+    setTimeout(() => setSaveMessage(null), 3500);
   }
 
   /* ----------------------------------------
      RENDER
   ---------------------------------------- */
 
+  const canGenerate = isStep1Ok(form);
+
   return (
     <main className="min-h-screen bg-gradient-to-b from-emerald-50 via-white to-slate-50 text-gray-900">
-      <div className="max-w-6xl mx-auto px-4 py-10 space-y-8">
+      <div ref={topRef} className="max-w-6xl mx-auto px-4 py-8 sm:py-10 space-y-6 sm:space-y-8">
         {/* HEADER */}
         <header className="space-y-2">
           <p className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100 text-xs font-semibold text-emerald-800">
-            🎒 Espace élèves · Aide personnalisée pour apprendre
+            🎒 Espace élèves · Atelier IA pour apprendre
           </p>
 
-          <h1 className="text-3xl sm:text-4xl font-extrabold text-[#0047B6]">
-            Ton coach IA pour comprendre et progresser (sans tricher)
+          <h1 className="text-3xl sm:text-4xl font-extrabold text-[#0047B6] leading-tight">
+            Ton coach IA pour comprendre et progresser
           </h1>
 
           <p className="text-sm sm:text-base text-gray-700 max-w-2xl">
-            Choisis un <b>objectif</b> (comprendre, réviser, t’entraîner), indique quelques informations,
-            puis EleveAI te guide avec des <b>questions, des explications et des exercices adaptés</b>.
-            Le but : apprendre vraiment, pas copier.
+            1) Tu règles tes <b>paramètres</b> → 2) Tu <b>génères un prompt</b> → 3) Après la réponse, tu donnes
+            ton <b>avis</b> et tu peux faire une <b>relance</b> pour progresser.
           </p>
+
+          <div className="flex flex-wrap gap-2 pt-1 text-xs">
+            <span className="px-2.5 py-1 rounded-full bg-white border border-slate-200">1️⃣ Paramètres</span>
+            <span className="px-2.5 py-1 rounded-full bg-white border border-slate-200">2️⃣ Prompt</span>
+            <span className="px-2.5 py-1 rounded-full bg-white border border-slate-200">3️⃣ Avis + relance</span>
+          </div>
         </header>
 
+        {/* MODELES RAPIDES (collapsible) */}
+        <details className="group rounded-2xl border border-slate-200 bg-white/95 shadow-sm">
+          <summary className="cursor-pointer list-none p-4 sm:p-5 flex items-start justify-between gap-3">
+            <div className="space-y-1">
+              <p className="text-sm font-extrabold text-slate-900 inline-flex items-center gap-2">
+                <Wand2 className="w-4 h-4 text-emerald-700" />
+                Modèles rapides (facultatif)
+              </p>
+              <p className="text-xs text-slate-600">
+                Choisis un modèle si tu veux aller plus vite. Tu peux tout modifier ensuite.
+              </p>
+            </div>
+            <ChevronRight className="w-5 h-5 text-slate-500 transition group-open:rotate-90 mt-0.5" />
+          </summary>
 
-        {/* PRESETS */}
-        <PresetCarousel
-          title="Choisir un modèle rapide (facultatif)"
-          subtitle="Clique sur un modèle : tu peux ensuite adapter tous les champs."
-          items={PRESET_ITEMS}
-          onSelect={(id) => appliquerPreset(id as ElevesPresetKey)}
-          tone="emerald"
-          searchPlaceholder="Rechercher un modèle… (fractions, brevet, oral, méthode)"
-        />
+          <div className="px-4 pb-4 sm:px-5 sm:pb-5">
+            <PresetCarousel
+              title="Choisir un modèle"
+              subtitle="Clique sur un modèle : tu peux ensuite adapter tous les champs."
+              items={PRESET_ITEMS}
+              onSelect={(id) => appliquerPreset(id as ElevesPresetKey)}
+              tone="emerald"
+              searchPlaceholder="Rechercher… (fractions, brevet, méthode, oral)"
+            />
+          </div>
+        </details>
 
         <div className="grid gap-6 lg:grid-cols-2">
-          {/* FORM */}
+          {/* ETAPE 1 : PARAMETRES */}
           <section className="bg-white/95 border border-slate-200 rounded-2xl shadow-sm p-5 sm:p-6 space-y-4">
             <div className="flex items-start justify-between gap-3">
               <div>
-                <h2 className="text-md font-bold text-[#0047B6]">1️⃣ En 30 secondes (essentiel)</h2>
+                <h2 className="text-base font-extrabold text-[#0047B6]">1️⃣ Paramètres</h2>
                 <p className="text-xs text-slate-600 mt-1">
-                  Remplis juste ça pour générer une aide rapide.
+                  Remplis l’essentiel. Ensuite tu pourras générer ton prompt.
                 </p>
               </div>
 
@@ -510,7 +629,6 @@ export default function ElevePage() {
                 <select
                   value={form.classe}
                   onChange={(e) => {
-                    // ⚠️ cast tolérant si Classe est un union strict
                     handleChange("classe", e.target.value as any as Classe);
                     showToast("✅ Classe choisie");
                   }}
@@ -557,11 +675,11 @@ export default function ElevePage() {
               />
             </div>
 
-            {/* Ton profil */}
+            {/* Profil */}
             <div className="space-y-2">
               <label className="text-xs font-semibold">Ton profil (facultatif)</label>
               <p className="text-[11px] text-slate-600">
-                Choisis 1 à 3 trucs que tu aimes : l’IA utilisera ça pour des exemples plus motivants.
+                Choisis 1 à 3 centres d’intérêt : l’IA peut s’en servir pour des exemples motivants.
               </p>
 
               <div className="flex flex-wrap gap-2">
@@ -594,7 +712,7 @@ export default function ElevePage() {
               )}
             </div>
 
-            {/* Type d’aide en cartes */}
+            {/* Type d’aide */}
             <div className="space-y-2">
               <label className="text-xs font-semibold">Ce que tu veux faire</label>
               <div className="grid sm:grid-cols-2 gap-2">
@@ -609,9 +727,7 @@ export default function ElevePage() {
                         showToast(`🎯 ${t.label} sélectionné`);
                       }}
                       className={`text-left rounded-xl border px-3 py-2 transition ${
-                        active
-                          ? "border-emerald-500 bg-emerald-50 shadow-sm"
-                          : "border-slate-200 bg-white hover:bg-slate-50"
+                        active ? "border-emerald-500 bg-emerald-50 shadow-sm" : "border-slate-200 bg-white hover:bg-slate-50"
                       }`}
                     >
                       <div className="flex items-center justify-between gap-2">
@@ -627,7 +743,7 @@ export default function ElevePage() {
               </div>
             </div>
 
-            {/* Temps chips + confiance chips */}
+            {/* Temps + Confiance */}
             <div className="grid sm:grid-cols-2 gap-3">
               <div className="space-y-2">
                 <label className="text-xs font-semibold flex items-center gap-2">
@@ -680,9 +796,7 @@ export default function ElevePage() {
                           showToast("✅ Niveau noté");
                         }}
                         className={`text-left rounded-xl border px-3 py-2 transition ${
-                          active
-                            ? "border-emerald-500 bg-emerald-50 shadow-sm"
-                            : "border-slate-200 bg-white hover:bg-slate-50"
+                          active ? "border-emerald-500 bg-emerald-50 shadow-sm" : "border-slate-200 bg-white hover:bg-slate-50"
                         }`}
                       >
                         <div className="flex items-center justify-between gap-2">
@@ -699,7 +813,7 @@ export default function ElevePage() {
               </div>
             </div>
 
-            {/* ✅ Mode anti-triche */}
+            {/* Anti-triche */}
             <div className="rounded-2xl border border-amber-200 bg-amber-50 p-4">
               <div className="flex items-start justify-between gap-3">
                 <div>
@@ -709,7 +823,6 @@ export default function ElevePage() {
                   </p>
                   <p className="text-xs text-amber-800 mt-1">
                     L’IA doit t’aider à <b>comprendre</b> : questions → indices → correction pas à pas.
-                    (Solution complète seulement si tu la demandes après avoir essayé.)
                   </p>
                 </div>
 
@@ -728,36 +841,19 @@ export default function ElevePage() {
               </div>
             </div>
 
-            {/* CTA rapide + toggle avancé */}
-            <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2">
-              <button
-                type="button"
-                onClick={() => setShowAdvanced((v) => !v)}
-                className="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50"
-              >
-                {showAdvanced ? "Masquer les options" : "Options (pour une aide plus précise)"}
-                <ChevronRight className={`w-4 h-4 transition ${showAdvanced ? "rotate-90" : ""}`} />
-              </button>
+            {/* Options avancées */}
+            <button
+              type="button"
+              onClick={() => setShowAdvanced((v) => !v)}
+              className="w-full inline-flex items-center justify-between gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50"
+            >
+              <span>{showAdvanced ? "Masquer les options avancées" : "Options avancées (facultatif)"}</span>
+              <ChevronRight className={`w-4 h-4 transition ${showAdvanced ? "rotate-90" : ""}`} />
+            </button>
 
-              <button
-                type="button"
-                disabled={!isStep1Ok(form)}
-                onClick={() => genererPromptFinal(showAdvanced ? "complet" : "rapide")}
-                className={`inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2 text-sm font-semibold shadow transition ${
-                  isStep1Ok(form)
-                    ? "bg-emerald-600 text-white hover:bg-emerald-700"
-                    : "bg-emerald-100 text-emerald-500 cursor-not-allowed"
-                }`}
-              >
-                <Sparkles className="w-4 h-4" />
-                {showAdvanced ? "Générer (complet)" : "Générer (rapide)"}
-              </button>
-            </div>
-
-            {/* ADVANCED */}
             {showAdvanced && (
-              <div className="mt-3 space-y-4 rounded-2xl border border-emerald-100 bg-emerald-50/40 p-4">
-                <h3 className="text-sm font-extrabold text-emerald-800">2️⃣ Options pour améliorer l’aide</h3>
+              <div className="space-y-4 rounded-2xl border border-emerald-100 bg-emerald-50/40 p-4">
+                <p className="text-sm font-extrabold text-emerald-800">🧠 Pour une aide plus précise</p>
 
                 <div className="space-y-1">
                   <label className="text-xs font-semibold">Ton objectif (avec tes mots)</label>
@@ -859,29 +955,45 @@ export default function ElevePage() {
                     </div>
                   )}
                 </div>
-
-                <div className="pt-1 flex justify-end">
-                  <button
-                    type="button"
-                    onClick={() => genererPromptFinal("complet")}
-                    className="inline-flex items-center gap-2 rounded-xl bg-emerald-600 px-4 py-2 text-sm font-semibold text-white hover:bg-emerald-700"
-                  >
-                    <Sparkles className="w-4 h-4" />
-                    Générer (version complète)
-                  </button>
-                </div>
               </div>
             )}
-          </section>
 
-          {/* RIGHT */}
-          <section className="space-y-4">
-            {/* Conseils */}
-            <div className="bg-white/95 border border-emerald-200 rounded-2xl shadow-sm p-5 space-y-3">
-              <h2 className="text-lg font-bold text-emerald-700">Conseils (rapides)</h2>
+            {/* CTA génération */}
+            <div className="pt-2 flex flex-col sm:flex-row gap-2">
+              <button
+                type="button"
+                disabled={!canGenerate}
+                onClick={() => genererPromptFinal("rapide")}
+                className={`inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2 text-sm font-semibold shadow transition ${
+                  canGenerate
+                    ? "bg-emerald-600 text-white hover:bg-emerald-700"
+                    : "bg-emerald-100 text-emerald-500 cursor-not-allowed"
+                }`}
+              >
+                <Sparkles className="w-4 h-4" />
+                Générer (rapide)
+              </button>
 
-              <ul className="space-y-2 text-sm text-gray-700">
-                {suggestions.slice(0, 4).map((s, i) => (
+              <button
+                type="button"
+                disabled={!canGenerate}
+                onClick={() => genererPromptFinal("complet")}
+                className={`inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2 text-sm font-semibold border transition ${
+                  canGenerate
+                    ? "border-emerald-300 bg-white text-emerald-800 hover:bg-emerald-50"
+                    : "border-slate-200 bg-white text-slate-400 cursor-not-allowed"
+                }`}
+              >
+                <Sparkles className="w-4 h-4" />
+                Générer (complet)
+              </button>
+            </div>
+
+            {/* Conseils discrets */}
+            <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
+              <p className="text-xs font-extrabold text-slate-800">Conseils rapides</p>
+              <ul className="mt-2 space-y-1 text-xs text-slate-700">
+                {suggestions.slice(0, 3).map((s, i) => (
                   <li key={i} className="flex gap-2">
                     <span className="text-emerald-600">➤</span>
                     <span>{s}</span>
@@ -889,19 +1001,25 @@ export default function ElevePage() {
                 ))}
               </ul>
             </div>
+          </section>
 
-            {/* Prompt final */}
-            <div className="bg-white/95 border border-slate-200 rounded-2xl shadow-sm p-5 space-y-3">
+          {/* COLONNE DROITE : ETAPE 2 + 3 + Prompt 2 */}
+          <section className="space-y-4">
+            {/* ETAPE 2 : PROMPT 1 */}
+            <div ref={promptRef} className="bg-white/95 border border-slate-200 rounded-2xl shadow-sm p-5 space-y-3">
               <div className="flex flex-wrap items-center justify-between gap-2">
-                <h2 className="text-lg font-bold text-[#0047B6]">4️⃣ Ton prompt</h2>
+                <div className="space-y-0.5">
+                  <h2 className="text-base font-extrabold text-[#0047B6]">2️⃣ Ton prompt (Prompt 1)</h2>
+                  <p className="text-xs text-slate-600">Copie-le ou utilise EleveAI directement.</p>
+                </div>
 
                 <div className="flex items-center gap-2">
                   <button
                     onClick={copierPrompt}
                     disabled={!promptFinal}
-                    className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-semibold transition ${
+                    className={`inline-flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-semibold transition ${
                       promptFinal
-                        ? "bg-slate-800 text-white hover:bg-slate-900"
+                        ? "bg-slate-900 text-white hover:bg-slate-950"
                         : "bg-slate-200 text-slate-500 cursor-not-allowed"
                     }`}
                   >
@@ -912,13 +1030,14 @@ export default function ElevePage() {
                   <button
                     onClick={enregistrerPreset}
                     disabled={!promptFinal || saving}
-                    className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-semibold transition ${
+                    className={`inline-flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-semibold transition ${
                       promptFinal
                         ? "bg-emerald-600 text-white hover:bg-emerald-700"
                         : "bg-emerald-200 text-emerald-700 cursor-not-allowed"
                     }`}
                   >
-                    {saving ? "💾 Enregistrement..." : "⭐ Enregistrer"}
+                    <Bookmark className="w-4 h-4" />
+                    {saving ? "Enregistrement…" : "Enregistrer"}
                   </button>
                 </div>
               </div>
@@ -932,12 +1051,10 @@ export default function ElevePage() {
                 placeholder="Ton prompt apparaîtra ici après génération."
               />
 
-              <p className="text-xs text-gray-700">Tu peux coller ce prompt dans l’IA de ton choix :</p>
-
-              <div className="flex flex-wrap gap-2 text-xs">
+              <div className="flex flex-col sm:flex-row gap-2">
                 <Link
                   href={promptFinal ? `/tchat?prompt=${encodeURIComponent(promptFinal)}` : "/tchat"}
-                  className={`px-3 py-2 rounded-lg font-semibold transition ${
+                  className={`inline-flex items-center justify-center gap-2 px-3 py-2 rounded-xl font-semibold transition ${
                     promptFinal
                       ? "bg-emerald-600 text-white hover:bg-emerald-700"
                       : "bg-emerald-200 text-emerald-700 cursor-not-allowed"
@@ -946,52 +1063,213 @@ export default function ElevePage() {
                   🚀 Utiliser EleveAI
                 </Link>
 
-                <a
-                  href="https://chatgpt.com"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="px-3 py-2 rounded-lg bg-slate-800 text-white font-semibold hover:bg-slate-900"
+                <button
+                  type="button"
+                  onClick={() => showToast("✅ Astuce : demande des questions d’abord.")}
+                  disabled={!promptFinal}
+                  className={`inline-flex items-center justify-center gap-2 px-3 py-2 rounded-xl font-semibold border transition ${
+                    promptFinal
+                      ? "border-slate-200 bg-white text-slate-800 hover:bg-slate-50"
+                      : "border-slate-200 bg-white text-slate-400 cursor-not-allowed"
+                  }`}
                 >
-                  ChatGPT
-                </a>
-                <a
-                  href="https://gemini.google.com"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="px-3 py-2 rounded-lg bg-[#0F9D58] text-white font-semibold hover:opacity-95"
-                >
-                  Gemini
-                </a>
-                <a
-                  href="https://claude.ai"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="px-3 py-2 rounded-lg bg-[#4B3FFF] text-white font-semibold hover:opacity-95"
-                >
-                  Claude
-                </a>
-                <a
-                  href="https://chat.mistral.ai"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="px-3 py-2 rounded-lg bg-[#FF7F11] text-white font-semibold hover:opacity-95"
-                >
-                  Mistral
-                </a>
+                  <MessageCircle className="w-4 h-4" />
+                  Astuce
+                </button>
               </div>
 
-              <div className="mt-3 rounded-xl border border-emerald-200 bg-emerald-50 p-3 text-xs text-emerald-900">
-                ✅ Astuce : si l’IA te donne directement la réponse, dis :
+              <div className="rounded-xl border border-emerald-200 bg-emerald-50 p-3 text-xs text-emerald-900">
+                ✅ Astuce : si l’IA donne directement la solution, dis :
                 <span className="font-semibold"> “Pose-moi des questions d’abord, puis corrige.”</span>
               </div>
             </div>
+
+            {/* ETAPE 3 : AVIS + RELANCE */}
+            <div className="bg-white/95 border border-slate-200 rounded-2xl shadow-sm p-5 space-y-3">
+              <h2 className="text-base font-extrabold text-[#0047B6]">3️⃣ Après la réponse : qu’en penses-tu ?</h2>
+              <p className="text-xs text-slate-600">
+                10 secondes : ça t’aide à mieux apprendre. Puis tu peux générer une relance (Prompt 2).
+              </p>
+
+              <div className="grid sm:grid-cols-3 gap-2">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setFeedbackChoice("ok");
+                    showToast("✅ OK !");
+                  }}
+                  className={`rounded-xl border px-3 py-2 text-sm font-semibold transition ${
+                    feedbackChoice === "ok"
+                      ? "border-emerald-500 bg-emerald-50"
+                      : "border-slate-200 bg-white hover:bg-slate-50"
+                  }`}
+                >
+                  ✅ Je comprends
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => {
+                    setFeedbackChoice("bof");
+                    showToast("🤔 On clarifie.");
+                  }}
+                  className={`rounded-xl border px-3 py-2 text-sm font-semibold transition ${
+                    feedbackChoice === "bof"
+                      ? "border-amber-400 bg-amber-50"
+                      : "border-slate-200 bg-white hover:bg-slate-50"
+                  }`}
+                >
+                  🤔 Pas sûr
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => {
+                    setFeedbackChoice("pas_ok");
+                    showToast("🧪 On vérifie.");
+                  }}
+                  className={`rounded-xl border px-3 py-2 text-sm font-semibold transition ${
+                    feedbackChoice === "pas_ok"
+                      ? "border-rose-400 bg-rose-50"
+                      : "border-slate-200 bg-white hover:bg-slate-50"
+                  }`}
+                >
+                  ❌ Ça semble faux
+                </button>
+              </div>
+
+              <div className="space-y-1">
+                <label className="text-xs font-semibold">Optionnel : une phrase</label>
+                <textarea
+                  value={feedbackText}
+                  onChange={(e) => setFeedbackText(e.target.value)}
+                  className="w-full border rounded-lg px-3 py-2 text-sm min-h-[70px] bg-white"
+                  placeholder="Ex : Je bloque sur la 2e étape / je ne comprends pas pourquoi on fait ça."
+                />
+              </div>
+
+              <button
+                type="button"
+                onClick={buildRelancePrompt}
+                disabled={!promptFinal || !feedbackChoice}
+                className={`w-full inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2 text-sm font-semibold transition ${
+                  promptFinal && feedbackChoice
+                    ? "bg-emerald-600 text-white hover:bg-emerald-700"
+                    : "bg-emerald-100 text-emerald-500 cursor-not-allowed"
+                }`}
+              >
+                🔁 Générer une relance adaptée (Prompt 2)
+              </button>
+            </div>
+
+            {/* PROMPT 2 : RELANCE */}
+            <div className="bg-white/95 border border-slate-200 rounded-2xl shadow-sm p-5 space-y-3">
+              <div className="flex flex-wrap items-center justify-between gap-2">
+                <div className="space-y-0.5">
+                  <h3 className="text-base font-extrabold text-[#0047B6]">🔁 Prompt 2 (relance)</h3>
+                  <p className="text-xs text-slate-600">
+                    À utiliser pour consolider, clarifier, ou vérifier.
+                  </p>
+                </div>
+
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={copierRelance}
+                    disabled={!promptRelance}
+                    className={`inline-flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-semibold transition ${
+                      promptRelance
+                        ? "bg-slate-900 text-white hover:bg-slate-950"
+                        : "bg-slate-200 text-slate-500 cursor-not-allowed"
+                    }`}
+                  >
+                    <ClipboardCopy className="w-4 h-4" />
+                    {copiedRelance ? "Copié" : "Copier"}
+                  </button>
+
+                  <Link
+                    href={promptRelance ? `/tchat?prompt=${encodeURIComponent(promptRelance)}` : "/tchat"}
+                    className={`inline-flex items-center justify-center gap-2 px-3 py-2 rounded-xl text-xs font-semibold transition ${
+                      promptRelance
+                        ? "bg-emerald-600 text-white hover:bg-emerald-700"
+                        : "bg-emerald-200 text-emerald-700 cursor-not-allowed"
+                    }`}
+                  >
+                    🚀 Utiliser la relance
+                  </Link>
+                </div>
+              </div>
+
+              <textarea
+                readOnly
+                value={promptRelance}
+                className="w-full border rounded-lg px-3 py-2 text-xs font-mono bg-slate-50 min-h-[180px]"
+                placeholder="Ton Prompt 2 apparaîtra ici après ton avis (étape 3)."
+              />
+
+              {promptRelance && (
+                <div className="rounded-xl border border-emerald-200 bg-emerald-50 p-3 text-xs text-emerald-900">
+                  ✅ Astuce : fais au moins 1 relance. C’est souvent là que tu comprends “vraiment”.
+                </div>
+              )}
+            </div>
+
+            {/* FUTUR : MES PRESETS */}
+            <div className="bg-white/95 border border-slate-200 rounded-2xl shadow-sm p-5 space-y-2">
+              <h2 className="text-base font-extrabold text-slate-900">⭐ Mes presets</h2>
+              <p className="text-xs text-slate-600">
+                Bientôt : tu retrouveras ici tes prompts enregistrés (et tu pourras les relancer en 1 clic).
+              </p>
+              <button
+                type="button"
+                disabled
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2 text-sm font-semibold bg-slate-200 text-slate-500 cursor-not-allowed"
+              >
+                Voir mes presets (bientôt)
+              </button>
+            </div>
           </section>
+        </div>
+
+        {/* espace pour éviter que la barre sticky cache le bas */}
+        <div className="h-16 sm:hidden" />
+      </div>
+
+      {/* ✅ BARRE STICKY MOBILE */}
+      <div className="sm:hidden fixed bottom-0 inset-x-0 z-40 border-t border-slate-200 bg-white/95 backdrop-blur">
+        <div className="max-w-6xl mx-auto px-4 py-3 flex items-center gap-2">
+          <button
+            type="button"
+            onClick={() => (showAdvanced ? genererPromptFinal("complet") : genererPromptFinal("rapide"))}
+            disabled={!canGenerate}
+            className={`flex-1 inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2 text-sm font-semibold shadow transition ${
+              canGenerate
+                ? "bg-emerald-600 text-white hover:bg-emerald-700"
+                : "bg-emerald-100 text-emerald-500 cursor-not-allowed"
+            }`}
+          >
+            <Sparkles className="w-4 h-4" />
+            Générer
+          </button>
+
+          <button
+            type="button"
+            onClick={scrollToPrompt}
+            disabled={!promptFinal}
+            className={`inline-flex items-center justify-center gap-2 rounded-xl px-3 py-2 text-sm font-semibold border transition ${
+              promptFinal
+                ? "border-slate-200 bg-white text-slate-900 hover:bg-slate-50"
+                : "border-slate-200 bg-white text-slate-400 cursor-not-allowed"
+            }`}
+            title="Aller au prompt"
+          >
+            <ArrowDown className="w-4 h-4" />
+          </button>
         </div>
       </div>
 
       {/* ✅ TOAST */}
       {toast && (
-        <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 rounded-xl bg-slate-900 text-white px-4 py-2 text-sm shadow-lg">
+        <div className="fixed bottom-24 sm:bottom-6 left-1/2 -translate-x-1/2 z-50 rounded-xl bg-slate-900 text-white px-4 py-2 text-sm shadow-lg">
           {toast}
         </div>
       )}
