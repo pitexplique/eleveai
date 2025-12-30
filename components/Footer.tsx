@@ -161,6 +161,11 @@ export default function Footer() {
                   Presse & kit média
                 </Link>
               </li>
+              <li>
+                <Link href="/contact" className="text-slate-300 hover:text-sky-300">
+                 Contact
+                </Link>
+              </li>              
             </ul>
           </div>
         </div>
