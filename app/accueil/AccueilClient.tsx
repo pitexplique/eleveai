@@ -177,13 +177,14 @@ export default function AccueilPage() {
               </p>
             </div>
 
-            <Image
-              src="/logo-epsilon.png"
-              alt="ε → ∞ — Un détail pour tout changer"
-              width={250}
-              height={250}
-              className="mx-auto h-[250px] w-auto opacity-90"
-            />
+          <Image
+            src="/logo-epsilon.png"
+            alt="ε → ∞ — Un détail pédagogique pour apprendre avec l’IA"
+            width={250}
+            height={250}
+            className="mx-auto h-[250px] w-auto opacity-90"
+          />
+
           </div>
         </div>
       </section>
