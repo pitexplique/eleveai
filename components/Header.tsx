@@ -213,19 +213,19 @@ export default function Header() {
         icon: <Wand2 className="h-4 w-4" />,
         items: [
           {
-            href: "/atelier-IA",
+            href: "/atelier-ia",
             label: "Présentation",
             desc: "Cadre, objectifs et bénéfices",
             icon: <Wand2 className="h-4 w-4" />,
           },
           {
-            href: "/atelier-IA/vision",
+            href: "/atelier-ia/vision",
             label: "Vision pédagogique",
             desc: "IA autorisée mais encadrée (anti-triche)",
             icon: <Sparkles className="h-4 w-4" />,
           },
           {
-            href: "/atelier-IA/programme",
+            href: "/atelier-ia/programme",
             label: "Programme",
             desc: "Séances, progressivité, livrables",
             icon: <ClipboardList className="h-4 w-4" />,
@@ -630,7 +630,7 @@ export default function Header() {
               <Link href="/espace-parents">Espace parents</Link>
             </li>
             <li>
-              <Link href="/atelier-IA">Atelier-IA</Link>
+              <Link href="/atelier-ia">Atelier-ia</Link>
             </li>
             <li>
               <Link href="/tarifs">Tarifs</Link>
