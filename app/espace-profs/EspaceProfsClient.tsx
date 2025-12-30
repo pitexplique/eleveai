@@ -31,21 +31,14 @@ import {
   LayoutGrid,
   SlidersHorizontal,
   ArrowDown,
+  MessageCircle,
+  Bookmark,
 } from "lucide-react";
 
 import type { MethodePedagogique } from "@/lib/pedagogie/methodes";
-import {
-  getMethodeDesc,
-  getMethodeLabel,
-  getMethodePromptBlock,
-  METHODES,
-} from "@/lib/pedagogie/methodes";
+import { getMethodeDesc, getMethodeLabel, getMethodePromptBlock, METHODES } from "@/lib/pedagogie/methodes";
 
-import {
-  getTypeById,
-  getTypesForContext,
-  tagToBadge,
-} from "@/lib/pedagogie/types";
+import { getTypeById, getTypesForContext, tagToBadge } from "@/lib/pedagogie/types";
 
 export { metadata } from "./metadata";
 
@@ -55,10 +48,7 @@ export { metadata } from "./metadata";
 
 function fmtDate(iso: string) {
   try {
-    return new Date(iso).toLocaleString("fr-FR", {
-      dateStyle: "short",
-      timeStyle: "short",
-    });
+    return new Date(iso).toLocaleString("fr-FR", { dateStyle: "short", timeStyle: "short" });
   } catch {
     return iso;
   }
@@ -70,12 +60,7 @@ function fmtDate(iso: string) {
 
 type MainCategory = "seance" | "exercices" | "evaluation" | "correction" | "methodes";
 
-const MAIN_CATEGORIES: {
-  id: MainCategory;
-  label: string;
-  emoji: string;
-  hint: string;
-}[] = [
+const MAIN_CATEGORIES: { id: MainCategory; label: string; emoji: string; hint: string }[] = [
   { id: "seance", label: "Séance / Séquence", emoji: "🗂️", hint: "Déroulé, timing, mise en commun…" },
   { id: "exercices", label: "Exercices", emoji: "✏️", hint: "Séries, niveaux, méthodes, corrigés…" },
   { id: "evaluation", label: "Évaluation", emoji: "🧾", hint: "Contrôle, barème, critères, différenciation…" },
@@ -86,16 +71,12 @@ const MAIN_CATEGORIES: {
 function normalizeMainCategory(raw: unknown): MainCategory {
   const c = String(raw ?? "").toLowerCase();
 
-  if (c.includes("seance") || c.includes("séance") || c.includes("sequence") || c.includes("séquence"))
-    return "seance";
+  if (c.includes("seance") || c.includes("séance") || c.includes("sequence") || c.includes("séquence")) return "seance";
   if (c.includes("exercice")) return "exercices";
-  if (c.includes("eval") || c.includes("éval") || c.includes("evaluation") || c.includes("évaluation"))
-    return "evaluation";
-  if (c.includes("correction") || c.includes("corrige") || c.includes("corrigé"))
-    return "correction";
+  if (c.includes("eval") || c.includes("éval") || c.includes("evaluation") || c.includes("évaluation")) return "evaluation";
+  if (c.includes("correction") || c.includes("corrige") || c.includes("corrigé")) return "correction";
   if (c.includes("document")) return "methodes";
-  if (c.includes("methode") || c.includes("méthode") || c.includes("methodes") || c.includes("méthodes"))
-    return "methodes";
+  if (c.includes("methode") || c.includes("méthode") || c.includes("methodes") || c.includes("méthodes")) return "methodes";
 
   return "seance";
 }
@@ -111,27 +92,11 @@ function getMainCategoryMeta(cat: MainCategory) {
 type Niveau = "basique" | "standard" | "expert";
 type OutputStyle = "simple" | "word" | "word_expert";
 
-type Tonalite =
-  | "neutre"
-  | "bienveillante"
-  | "motivation"
-  | "institutionnelle"
-  | "ludique";
+type Tonalite = "neutre" | "bienveillante" | "motivation" | "institutionnelle" | "ludique";
 
-type ModaliteEvaluation =
-  | "evaluation_sommative"
-  | "evaluation_formative"
-  | "evaluation_diagnostique"
-  | "evaluation_differenciee";
+type ModaliteEvaluation = "evaluation_sommative" | "evaluation_formative" | "evaluation_diagnostique" | "evaluation_differenciee";
 
-type ThemeAborde =
-  | "sport"
-  | "ecologie"
-  | "nature"
-  | "agriculture"
-  | "art"
-  | "musique"
-  | "architecture";
+type ThemeAborde = "sport" | "ecologie" | "nature" | "agriculture" | "art" | "musique" | "architecture";
 
 type PromptProf = {
   titre: string;
@@ -216,29 +181,23 @@ const THEME_OPTIONS: { id: ThemeAborde; label: string }[] = [
   { id: "architecture", label: "Architecture" },
 ];
 
-const THEME_LABEL_BY_ID: Record<ThemeAborde, string> = THEME_OPTIONS.reduce(
-  (acc, t) => {
-    acc[t.id] = t.label;
-    return acc;
-  },
-  {} as Record<ThemeAborde, string>,
-);
+const THEME_LABEL_BY_ID: Record<ThemeAborde, string> = THEME_OPTIONS.reduce((acc, t) => {
+  acc[t.id] = t.label;
+  return acc;
+}, {} as Record<ThemeAborde, string>);
 
 /* ----------------------------------------
    PRESETS
 ---------------------------------------- */
 
-const PROFS_PRESET_ITEMS: PresetCarouselItem[] = (
-  Object.entries(PROFS_PRESETS) as [
-    ProfsPresetKey,
-    (typeof PROFS_PRESETS)[ProfsPresetKey],
-  ][]
-).map(([key, preset]) => ({
-  id: key,
-  label: preset.label,
-  description: preset.description,
-  badge: "Modèle prof",
-}));
+const PROFS_PRESET_ITEMS: PresetCarouselItem[] = (Object.entries(PROFS_PRESETS) as [ProfsPresetKey, (typeof PROFS_PRESETS)[ProfsPresetKey]][]).map(
+  ([key, preset]) => ({
+    id: key,
+    label: preset.label,
+    description: preset.description,
+    badge: "Modèle prof",
+  }),
+);
 
 /* ----------------------------------------
    HELPERS
@@ -294,29 +253,23 @@ function construirePrompt(form: PromptProf): string {
   const typeLabel = typeItem?.label ?? "Ressource pédagogique";
   const typeDesc = typeItem?.description ?? "";
 
-  const blocTags =
-    form.tags.length > 0 ? `Mots-clés pédagogiques : ${form.tags.join(", ")}.\n` : "";
+  const blocTags = form.tags.length > 0 ? `Mots-clés pédagogiques : ${form.tags.join(", ")}.\n` : "";
   const blocAuteur = form.auteur ? `Préparé par : ${form.auteur}.\n` : "";
 
-  const themesHumains = form.themes?.length
-    ? form.themes.map((t) => THEME_LABEL_BY_ID[t] ?? t)
-    : [];
+  const themesHumains = form.themes?.length ? form.themes.map((t) => THEME_LABEL_BY_ID[t] ?? t) : [];
 
   const blocThemes =
     (themesHumains.length ? `Thèmes à intégrer : ${themesHumains.join(", ")}.\n` : "") +
     (form.themesLabel?.trim() ? `Contexte / angle : ${form.themesLabel.trim()}.\n` : "");
   const blocContexteThemes = blocThemes.trim().length ? `\n${blocThemes}\n` : "";
 
-  const blocEduscol =
-    "Respecter les programmes officiels français (Eduscol/BO), vocabulaire attendu.\n\n";
+  const blocEduscol = "Respecter les programmes officiels français (Eduscol/BO), vocabulaire attendu.\n\n";
 
   const blocNeuro = form.neuro
     ? "Neurosciences : activer prérequis, petites étapes, alternance explications/questions, récapitulatif, reformulation.\n\n"
     : "";
 
-  const matiereScientifique = ["Mathématiques", "Physique-Chimie", "SVT", "Numérique/NSI"].includes(
-    form.matiere,
-  );
+  const matiereScientifique = ["Mathématiques", "Physique-Chimie", "SVT", "Numérique/NSI"].includes(form.matiere);
 
   const blocSansLatex =
     matiereScientifique && !form.latex
@@ -380,26 +333,19 @@ function construirePrompt(form: PromptProf): string {
       "- Étape 4 : produire un rendu final personnel.\n\n"
     : "";
 
-  const blocDifferenciation =
-    form.optDifferenciation && !estEval
-      ? "Différenciation : proposer base / standard / défi (indiquer clairement).\n\n"
-      : "";
+  const blocDifferenciation = form.optDifferenciation && !estEval ? "Différenciation : proposer base / standard / défi (indiquer clairement).\n\n" : "";
 
   const blocRappelsEtMeta =
     "Réponse : prérequis courts, étapes numérotées, questions de vérification, récapitulatif, question métacognitive.\n\n";
 
-  const blocCriteres =
-    "Fin : « Pour l’enseignant » (3-5 critères observables) + erreurs typiques.\n\n";
+  const blocCriteres = "Fin : « Pour l’enseignant » (3-5 critères observables) + erreurs typiques.\n\n";
 
-  const blocMiseEnPage =
-    "Si fiche/évaluation : structure Word (titres, exos numérotés, temps/points, espaces réponses).\n\n";
+  const blocMiseEnPage = "Si fiche/évaluation : structure Word (titres, exos numérotés, temps/points, espaces réponses).\n\n";
 
   const blocWord = blocWordDesign(form.outputStyle);
 
   return (
-    `Tu es une IA pédagogique pour des élèves de ${form.classe || "collège/lycée"} en ${
-      form.matiere || "discipline"
-    }.\n\n` +
+    `Tu es une IA pédagogique pour des élèves de ${form.classe || "collège/lycée"} en ${form.matiere || "discipline"}.\n\n` +
     blocEduscol +
     blocNeuro +
     blocSansLatex +
@@ -427,6 +373,124 @@ function construirePrompt(form: PromptProf): string {
     "IMPORTANT : Structure ta réponse en 2 parties :\n" +
     '1) "=== PARTIE 1 : PROMPT OPTIMISÉ POUR L’IA ==="\n' +
     '2) "=== PARTIE 2 : RESSOURCE PRÊTE POUR L’ÉLÈVE ==="\n'
+  );
+}
+
+/* ----------------------------------------
+   UI : Boutons "Coller dans" (couleurs)
+---------------------------------------- */
+
+function PasteTargets({
+  text,
+  showToast,
+}: {
+  text: string;
+  showToast: (msg: string) => void;
+}) {
+  const disabled = !text;
+  const tchatHref = text ? `/tchat?prompt=${encodeURIComponent(text)}` : "/tchat";
+
+  const copySilently = async () => {
+    if (!text) return;
+    try {
+      await navigator.clipboard.writeText(text);
+      showToast("✅ Copié ! Colle-le dans l’IA.");
+    } catch {
+      showToast("⚠️ Copie auto impossible (sélectionne puis Ctrl+C).");
+    }
+  };
+
+  return (
+    <div className="space-y-2 pt-1">
+      <p className="text-[11px] text-gray-600">Coller dans :</p>
+      <div className="flex flex-wrap gap-2 text-[11px] sm:text-xs">
+        <Link
+          href={tchatHref}
+          onClick={(e) => {
+            if (disabled) e.preventDefault();
+          }}
+          className={`px-3 py-2 rounded-lg font-semibold transition ${
+            disabled
+              ? "bg-slate-200 text-slate-500 cursor-not-allowed"
+              : "bg-emerald-600 text-white hover:bg-emerald-700"
+          }`}
+        >
+          🚀 Tchat EleveAI
+        </Link>
+
+        <a
+          href="https://chatgpt.com"
+          target="_blank"
+          rel="noreferrer"
+          onClick={(e) => {
+            if (disabled) {
+              e.preventDefault();
+              return;
+            }
+            copySilently();
+          }}
+          className={`px-3 py-2 rounded-lg font-semibold transition ${
+            disabled ? "bg-slate-200 text-slate-500 cursor-not-allowed" : "bg-slate-800 text-white hover:bg-slate-900"
+          }`}
+        >
+          🟦 ChatGPT
+        </a>
+
+        <a
+          href="https://gemini.google.com"
+          target="_blank"
+          rel="noreferrer"
+          onClick={(e) => {
+            if (disabled) {
+              e.preventDefault();
+              return;
+            }
+            copySilently();
+          }}
+          className={`px-3 py-2 rounded-lg font-semibold transition ${
+            disabled ? "bg-slate-200 text-slate-500 cursor-not-allowed" : "bg-[#0F9D58] text-white hover:bg-[#0c7b45]"
+          }`}
+        >
+          🟩 Gemini
+        </a>
+
+        <a
+          href="https://claude.ai"
+          target="_blank"
+          rel="noreferrer"
+          onClick={(e) => {
+            if (disabled) {
+              e.preventDefault();
+              return;
+            }
+            copySilently();
+          }}
+          className={`px-3 py-2 rounded-lg font-semibold transition ${
+            disabled ? "bg-slate-200 text-slate-500 cursor-not-allowed" : "bg-[#4B3FFF] text-white hover:bg-[#372dcc]"
+          }`}
+        >
+          🟪 Claude
+        </a>
+
+        <a
+          href="https://chat.mistral.ai"
+          target="_blank"
+          rel="noreferrer"
+          onClick={(e) => {
+            if (disabled) {
+              e.preventDefault();
+              return;
+            }
+            copySilently();
+          }}
+          className={`px-3 py-2 rounded-lg font-semibold transition ${
+            disabled ? "bg-slate-200 text-slate-500 cursor-not-allowed" : "bg-[#FF7F11] text-white hover:bg-[#e46f0d]"
+          }`}
+        >
+          🟧 Mistral
+        </a>
+      </div>
+    </div>
   );
 }
 
@@ -481,6 +545,12 @@ type DbRunEmail = {
 };
 
 /* ----------------------------------------
+   RELANCE (Prompt 2) — UI profs
+---------------------------------------- */
+
+type FeedbackChoice = "" | "ok" | "bof" | "pas_ok";
+
+/* ----------------------------------------
    PAGE
 ---------------------------------------- */
 
@@ -491,6 +561,7 @@ export default function ProfsPage() {
   // ✅ Refs (scroll UX)
   const promptRef = useRef<HTMLDivElement | null>(null);
   const ressourceRef = useRef<HTMLDivElement | null>(null);
+  const relanceRef = useRef<HTMLDivElement | null>(null);
   const topRef = useRef<HTMLDivElement | null>(null);
 
   const scrollToPrompt = useCallback(() => {
@@ -498,6 +569,9 @@ export default function ProfsPage() {
   }, []);
   const scrollToRessource = useCallback(() => {
     ressourceRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }, []);
+  const scrollToRelance = useCallback(() => {
+    relanceRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
   }, []);
   const scrollToTop = useCallback(() => {
     topRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -576,6 +650,12 @@ export default function ProfsPage() {
   const [mainCategory, setMainCategory] = useState<MainCategory>("seance");
   const [typeQuery, setTypeQuery] = useState("");
 
+  // ✅ Relance (Prompt 2) — avis prof
+  const [feedbackChoice, setFeedbackChoice] = useState<FeedbackChoice>("");
+  const [feedbackText, setFeedbackText] = useState("");
+  const [promptRelance, setPromptRelance] = useState("");
+  const [copiedRelance, setCopiedRelance] = useState(false);
+
   useEffect(() => {
     let mounted = true;
     supabase.auth.getUser().then(({ data }) => {
@@ -604,12 +684,9 @@ export default function ProfsPage() {
     }
   }, [form.classe, form.matiere, form.typeId]);
 
-  const handleChange = useCallback(
-    <K extends keyof PromptProf>(field: K, value: PromptProf[K]) => {
-      setForm((prev) => ({ ...prev, [field]: value }));
-    },
-    [],
-  );
+  const handleChange = useCallback(<K extends keyof PromptProf>(field: K, value: PromptProf[K]) => {
+    setForm((prev) => ({ ...prev, [field]: value }));
+  }, []);
 
   const clearOutputs = useCallback(() => {
     setPromptInterne("");
@@ -619,6 +696,12 @@ export default function ProfsPage() {
     setCopiedPrompt(false);
     setCopiedRessource(false);
     setShowPromptInterne(true);
+
+    // relance
+    setFeedbackChoice("");
+    setFeedbackText("");
+    setPromptRelance("");
+    setCopiedRelance(false);
   }, []);
 
   const updateTags = useCallback((value: string) => {
@@ -633,10 +716,7 @@ export default function ProfsPage() {
   const toggleTheme = useCallback((id: ThemeAborde) => {
     setForm((prev) => {
       const has = prev.themes.includes(id);
-      return {
-        ...prev,
-        themes: has ? prev.themes.filter((t) => t !== id) : [...prev.themes, id],
-      };
+      return { ...prev, themes: has ? prev.themes.filter((t) => t !== id) : [...prev.themes, id] };
     });
   }, []);
 
@@ -650,44 +730,20 @@ export default function ProfsPage() {
           ...prev,
           ...v,
           typeId: typeof v.typeId === "string" ? v.typeId : prev.typeId,
-          methode:
-            typeof v.methode === "string"
-              ? (v.methode as MethodePedagogique)
-              : prev.methode,
-          outputStyle:
-            typeof v.outputStyle === "string"
-              ? (v.outputStyle as OutputStyle)
-              : prev.outputStyle,
+          methode: typeof v.methode === "string" ? (v.methode as MethodePedagogique) : prev.methode,
+          outputStyle: typeof v.outputStyle === "string" ? (v.outputStyle as OutputStyle) : prev.outputStyle,
           dureeMin: typeof v.dureeMin === "number" ? v.dureeMin : prev.dureeMin,
-          tonalite:
-            typeof v.tonalite === "string"
-              ? (v.tonalite as Tonalite)
-              : prev.tonalite,
-          modaliteEvaluation:
-            typeof v.modaliteEvaluation === "string"
-              ? (v.modaliteEvaluation as ModaliteEvaluation)
-              : prev.modaliteEvaluation,
+          tonalite: typeof v.tonalite === "string" ? (v.tonalite as Tonalite) : prev.tonalite,
+          modaliteEvaluation: typeof v.modaliteEvaluation === "string" ? (v.modaliteEvaluation as ModaliteEvaluation) : prev.modaliteEvaluation,
           themes: Array.isArray(v.themes) ? (v.themes as ThemeAborde[]) : prev.themes,
           themesLabel: typeof v.themesLabel === "string" ? v.themesLabel : prev.themesLabel,
           tags: Array.isArray(v.tags) ? (v.tags as string[]) : prev.tags,
           latex: typeof v.latex === "boolean" ? v.latex : prev.latex,
 
-          optDifferenciation:
-            typeof (v as any).optDifferenciation === "boolean"
-              ? (v as any).optDifferenciation
-              : prev.optDifferenciation,
-          optRituels:
-            typeof (v as any).optRituels === "boolean"
-              ? (v as any).optRituels
-              : prev.optRituels,
-          optIAFriendly:
-            typeof (v as any).optIAFriendly === "boolean"
-              ? (v as any).optIAFriendly
-              : prev.optIAFriendly,
-          optAtelierIA:
-            typeof (v as any).optAtelierIA === "boolean"
-              ? (v as any).optAtelierIA
-              : prev.optAtelierIA,
+          optDifferenciation: typeof (v as any).optDifferenciation === "boolean" ? (v as any).optDifferenciation : prev.optDifferenciation,
+          optRituels: typeof (v as any).optRituels === "boolean" ? (v as any).optRituels : prev.optRituels,
+          optIAFriendly: typeof (v as any).optIAFriendly === "boolean" ? (v as any).optIAFriendly : prev.optIAFriendly,
+          optAtelierIA: typeof (v as any).optAtelierIA === "boolean" ? (v as any).optAtelierIA : prev.optAtelierIA,
         };
         return next;
       });
@@ -735,10 +791,7 @@ export default function ProfsPage() {
   }, [form.classe, form.matiere, mainCategory, typeQuery]);
 
   const selectedType = useMemo(() => getTypeById(form.typeId), [form.typeId]);
-  const estEval = useMemo(
-    () => normalizeMainCategory(selectedType?.category) === "evaluation",
-    [selectedType?.category],
-  );
+  const estEval = useMemo(() => normalizeMainCategory(selectedType?.category) === "evaluation", [selectedType?.category]);
 
   const selectType = useCallback(
     (typeId: string) => {
@@ -777,8 +830,7 @@ export default function ProfsPage() {
     if (!form.typeId) issues.push("Choisis un type.");
     if (!form.objectifPedagogique.trim()) issues.push("Précise l’objectif pédagogique.");
     if (!form.contenu.trim()) issues.push("Écris la consigne (version prof).");
-    if (form.contenu.trim() && form.contenu.trim().length < 40)
-      issues.push("Consigne trop courte (≈ 40 caractères minimum).");
+    if (form.contenu.trim() && form.contenu.trim().length < 40) issues.push("Consigne trop courte (≈ 40 caractères minimum).");
     if (!form.dureeMin || form.dureeMin <= 0) issues.push("Renseigne une durée (> 0).");
 
     if (estEval && !form.modaliteEvaluation) issues.push("Choisis une modalité d’évaluation.");
@@ -789,39 +841,29 @@ export default function ProfsPage() {
   const suggestions = useMemo(() => {
     const s: string[] = [];
 
-    if (!form.objectifPedagogique.trim())
-      s.push("Objectif : ce que l’élève doit savoir faire (verbe d’action).");
+    if (!form.objectifPedagogique.trim()) s.push("Objectif : ce que l’élève doit savoir faire (verbe d’action).");
     if (!form.classe) s.push("Classe : vocabulaire + attendus mieux calibrés.");
     if (!form.matiere) s.push("Matière : garde l’IA dans le bon cadre.");
     if (!form.typeId) s.push("Type : fixe la structure (séance, exercices, évaluation…).");
-    if (form.contenu.trim().length > 0 && form.contenu.trim().length < 40)
-      s.push("Consigne : ajoute contraintes, barème/critères, exemple attendu.");
+    if (form.contenu.trim().length > 0 && form.contenu.trim().length < 40) s.push("Consigne : ajoute contraintes, barème/critères, exemple attendu.");
     if (!form.dureeMin || form.dureeMin <= 0) s.push("Durée : calibre la production.");
 
-    if (!form.optDifferenciation)
-      s.push("Option : active Différenciation si tu veux base/standard/défi.");
-    if (normalizeMainCategory(selectedType?.category) === "seance" && !form.optRituels)
-      s.push("Option : active Rituels pour un démarrage 5–10 min (simple et efficace).");
-    if (!form.optIAFriendly)
-      s.push("Option : active Compatible correction IA si tu veux un document Word structuré.");
-    if (form.optAtelierIA && !form.optIAFriendly)
-      s.push("Atelier-IA : active aussi Compatible correction IA pour une structure plus simple à relire.");
+    if (!form.optDifferenciation) s.push("Option : active Différenciation si tu veux base/standard/défi.");
+    if (normalizeMainCategory(selectedType?.category) === "seance" && !form.optRituels) s.push("Option : active Rituels pour un démarrage 5–10 min (simple et efficace).");
+    if (!form.optIAFriendly) s.push("Option : active Compatible correction IA si tu veux un document Word structuré.");
+    if (form.optAtelierIA && !form.optIAFriendly) s.push("Atelier-IA : active aussi Compatible correction IA pour une structure plus simple à relire.");
 
     if (estEval) {
       s.push("Évaluation : barème + critères + aides autorisées (calculatrice, docs, IA…).");
-      if (!form.optDifferenciation)
-        s.push("Évaluation : si tu veux différencier, active l’option Différenciation.");
+      if (!form.optDifferenciation) s.push("Évaluation : si tu veux différencier, active l’option Différenciation.");
     } else {
       s.push("Méthode : tu peux la modifier si tu veux, mais c’est déjà OK.");
     }
 
-    if ((form.themes?.length ?? 0) === 0)
-      s.push("Ajoute 1-2 thèmes : exemples concrets + motivation.");
-    if (!form.themesLabel.trim())
-      s.push("Ajoute un angle (ex : contexte local : [territoire]) pour contextualiser.");
+    if ((form.themes?.length ?? 0) === 0) s.push("Ajoute 1-2 thèmes : exemples concrets + motivation.");
+    if (!form.themesLabel.trim()) s.push("Ajoute un angle (ex : contexte local : [territoire]) pour contextualiser.");
 
-    if (s.length === 0)
-      s.push("Parfait. Tu peux ajouter : matériel, contraintes, exemple de production attendue.");
+    if (s.length === 0) s.push("Parfait. Tu peux ajouter : matériel, contraintes, exemple de production attendue.");
 
     return s;
   }, [estEval, form, selectedType?.category]);
@@ -863,32 +905,41 @@ export default function ProfsPage() {
     }
   }, [getAuthUserIdOrThrow, supabase]);
 
-  const applySavedPreset = useCallback((p: DbPresetEmail) => {
-    if (!isPresetEmailDataProfs(p.data)) {
-      setDbMsg("⚠️ Preset incompatible (format ancien).");
-      return;
-    }
+  const applySavedPreset = useCallback(
+    (p: DbPresetEmail) => {
+      if (!isPresetEmailDataProfs(p.data)) {
+        setDbMsg("⚠️ Preset incompatible (format ancien).");
+        return;
+      }
 
-    const data = p.data;
+      const data = p.data;
 
-    setForm(data.form);
-    setRawTags((data.form.tags ?? []).join(", "));
+      setForm(data.form);
+      setRawTags((data.form.tags ?? []).join(", "));
 
-    setPromptInterne(data.promptInterne || p.prompt || "");
-    setAgentOutput(data.agentOutput || "");
-    setAgentError("");
-    setFormError("");
+      setPromptInterne(data.promptInterne || p.prompt || "");
+      setAgentOutput(data.agentOutput || "");
+      setAgentError("");
+      setFormError("");
 
-    const t = getTypeById(data.form.typeId);
-    if (t?.category) setMainCategory(normalizeMainCategory(t.category));
+      const t = getTypeById(data.form.typeId);
+      if (t?.category) setMainCategory(normalizeMainCategory(t.category));
 
-    setLastPresetId(p.id);
-    setDbMsg("✅ Preset chargé.");
-    setShowMyPresets(false);
+      // relance
+      setFeedbackChoice("");
+      setFeedbackText("");
+      setPromptRelance("");
+      setCopiedRelance(false);
 
-    showToast("📚 Preset chargé");
-    setTimeout(() => scrollToPrompt(), 50);
-  }, [scrollToPrompt, showToast]);
+      setLastPresetId(p.id);
+      setDbMsg("✅ Preset chargé.");
+      setShowMyPresets(false);
+
+      showToast("📚 Preset chargé");
+      setTimeout(() => scrollToPrompt(), 50);
+    },
+    [scrollToPrompt, showToast],
+  );
 
   const saveCurrentPreset = useCallback(async () => {
     setDbMsg("");
@@ -994,6 +1045,12 @@ export default function ProfsPage() {
     setCopiedPrompt(false);
     setCopiedRessource(false);
 
+    // reset relance
+    setFeedbackChoice("");
+    setFeedbackText("");
+    setPromptRelance("");
+    setCopiedRelance(false);
+
     setAgentLoading(true);
     try {
       const res = await fetch("/api/agent-prof", {
@@ -1015,8 +1072,7 @@ export default function ProfsPage() {
       setTimeout(() => scrollToPrompt(), 50);
       setTimeout(() => scrollToRessource(), 350);
     } catch (err: unknown) {
-      const msg =
-        err instanceof Error ? err.message : "Erreur inconnue (vérifie le serveur / API).";
+      const msg = err instanceof Error ? err.message : "Erreur inconnue (vérifie le serveur / API).";
       setAgentError(msg);
       showToast("⚠️ Erreur génération");
     } finally {
@@ -1029,7 +1085,7 @@ export default function ProfsPage() {
     try {
       await navigator.clipboard.writeText(promptInterne);
       setCopiedPrompt(true);
-      setTimeout(() => setCopiedPrompt(false), 2000);
+      setTimeout(() => setCopiedPrompt(false), 1200);
       triggerNudge();
       showToast("✅ Prompt copié");
     } catch {
@@ -1043,7 +1099,7 @@ export default function ProfsPage() {
     try {
       await navigator.clipboard.writeText(agentOutput);
       setCopiedRessource(true);
-      setTimeout(() => setCopiedRessource(false), 2000);
+      setTimeout(() => setCopiedRessource(false), 1200);
       triggerNudge();
       showToast("✅ Ressource copiée");
     } catch {
@@ -1052,9 +1108,85 @@ export default function ProfsPage() {
     }
   }, [agentOutput, triggerNudge, showToast]);
 
-  const tchatHref = useMemo(() => {
-    return promptInterne ? `/tchat?prompt=${encodeURIComponent(promptInterne)}` : "/tchat";
-  }, [promptInterne]);
+  // ✅ Relance (Prompt 2)
+  const buildRelanceBloc = useCallback(() => {
+    const feedbackFree = feedbackText.trim();
+
+    const intentByChoice: Record<Exclude<FeedbackChoice, "">, string> = {
+      ok:
+        "Objectif : consolider et finaliser.\n" +
+        "- Propose une version V2 plus propre (meilleure structure Word, consignes plus claires).\n" +
+        "- Ajoute 5 points de vérification (erreurs fréquentes / pièges) + corrections.\n" +
+        "- Termine par une checklist de conformité (programme, barème/critères si éval, différenciation si activée).",
+      bof:
+        "Objectif : clarifier / simplifier.\n" +
+        "- Reprends en version plus simple et plus explicite.\n" +
+        "- Réduis la densité, ajoute des micro-étapes et des exemples concrets.\n" +
+        "- Si des consignes sont ambiguës, propose 2 variantes (A/B) et demande laquelle choisir.",
+      pas_ok:
+        "Objectif : vérifier / rectifier.\n" +
+        "- Liste précisément ce qui semble incohérent ou risqué.\n" +
+        "- Corrige en explicitant tes hypothèses.\n" +
+        "- Si tu n’es pas sûr d’un point, dis-le et propose une alternative robuste.\n" +
+        "- Termine par une version corrigée V2.",
+    };
+
+    const addUserNote = feedbackFree ? `\n\nNote du prof (à prendre en compte) :\n"${feedbackFree}"\n` : "";
+
+    const antiHallucination =
+      "\n\nRègles importantes :\n" +
+      "- Si une information est incertaine, dis-le.\n" +
+      "- Vérifie la cohérence interne (durée, niveau, barème, consignes).\n" +
+      "- Termine par : « Souhaites-tu que je l’adapte à un établissement / un public spécifique ? »\n";
+
+    const relance =
+      "Tu vas améliorer une production pédagogique.\n" +
+      "Voici le contexte :\n\n" +
+      "=== PROMPT 1 (généré) ===\n" +
+      "-----\n" +
+      promptInterne +
+      "\n-----\n\n" +
+      "=== SORTIE (ressource générée) ===\n" +
+      "-----\n" +
+      (agentOutput || "(aucune ressource — produire une V2 à partir du prompt)") +
+      "\n-----\n\n" +
+      "Maintenant, fais la relance suivante :\n" +
+      intentByChoice[feedbackChoice as Exclude<FeedbackChoice, "">] +
+      addUserNote +
+      antiHallucination;
+
+    return relance;
+  }, [agentOutput, feedbackChoice, feedbackText, promptInterne]);
+
+  const buildRelancePrompt = useCallback(() => {
+    if (!promptInterne) {
+      showToast("⚠️ Génère d’abord le prompt (étape 3).");
+      return;
+    }
+    if (!feedbackChoice) {
+      showToast("⚠️ Choisis d’abord ton avis.");
+      return;
+    }
+    const rel = buildRelanceBloc();
+    setPromptRelance(rel);
+    setCopiedRelance(false);
+    showToast("🔁 Relance générée !");
+    setTimeout(() => scrollToRelance(), 80);
+  }, [buildRelanceBloc, feedbackChoice, promptInterne, scrollToRelance, showToast]);
+
+  const copierRelance = useCallback(async () => {
+    if (!promptRelance) return;
+    try {
+      await navigator.clipboard.writeText(promptRelance);
+      setCopiedRelance(true);
+      showToast("✅ Relance copiée");
+      setTimeout(() => setCopiedRelance(false), 1200);
+    } catch {
+      showToast("⚠️ Copie auto impossible (sélectionne puis Ctrl+C).");
+    }
+  }, [promptRelance, showToast]);
+
+  const tchatHref = useMemo(() => (promptInterne ? `/tchat?prompt=${encodeURIComponent(promptInterne)}` : "/tchat"), [promptInterne]);
 
   const mainCatMeta = useMemo(() => getMainCategoryMeta(mainCategory), [mainCategory]);
 
@@ -1067,13 +1199,11 @@ export default function ProfsPage() {
             <span>Espace professeurs · Prompts pédagogiques</span>
           </p>
 
-          <h1 className="text-3xl sm:text-4xl font-extrabold text-[#0047B6]">
-            Générateur de prompts pédagogiques (Word-friendly)
-          </h1>
+          <h1 className="text-3xl sm:text-4xl font-extrabold text-[#0047B6]">Générateur de prompts pédagogiques (Word-friendly)</h1>
 
           <p className="text-sm sm:text-base text-gray-700 max-w-2xl">
-            Choisis un <b>type</b> (séance, exercices, évaluation…), ajoute des <b>options</b>, puis écris ta consigne.
-            EleveAI génère un <b>prompt clair</b> et une <b>ressource prête à l’emploi</b>.
+            Choisis un <b>type</b> (séance, exercices, évaluation…), ajoute des <b>options</b>, puis écris ta consigne. EleveAI génère un{" "}
+            <b>prompt clair</b> et une <b>ressource prête à l’emploi</b>.
           </p>
 
           <div className="flex flex-wrap items-center gap-2 sm:gap-3 pt-2">
@@ -1116,9 +1246,7 @@ export default function ProfsPage() {
               onClick={resetPage}
               disabled={agentLoading}
               className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-[11px] font-semibold border transition ${
-                agentLoading
-                  ? "bg-slate-100 text-slate-400 border-slate-200 cursor-not-allowed"
-                  : "bg-white text-slate-700 border-slate-300 hover:bg-slate-50"
+                agentLoading ? "bg-slate-100 text-slate-400 border-slate-200 cursor-not-allowed" : "bg-white text-slate-700 border-slate-300 hover:bg-slate-50"
               }`}
             >
               <RotateCcw className="w-4 h-4" />
@@ -1131,9 +1259,7 @@ export default function ProfsPage() {
                 onClick={saveCurrentPreset}
                 disabled={!isAuthed || agentLoading}
                 className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-[11px] font-semibold border transition ${
-                  !isAuthed || agentLoading
-                    ? "bg-slate-100 text-slate-400 border-slate-200 cursor-not-allowed"
-                    : "bg-white text-slate-700 border-slate-300 hover:bg-slate-50"
+                  !isAuthed || agentLoading ? "bg-slate-100 text-slate-400 border-slate-200 cursor-not-allowed" : "bg-white text-slate-700 border-slate-300 hover:bg-slate-50"
                 }`}
                 title={!isAuthed ? "Connecte-toi pour enregistrer" : "Enregistrer ce preset"}
               >
@@ -1146,9 +1272,7 @@ export default function ProfsPage() {
                 onClick={loadMyPresets}
                 disabled={!isAuthed || myPresetsLoading}
                 className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-[11px] font-semibold border transition ${
-                  !isAuthed || myPresetsLoading
-                    ? "bg-slate-100 text-slate-400 border-slate-200 cursor-not-allowed"
-                    : "bg-white text-slate-700 border-slate-300 hover:bg-slate-50"
+                  !isAuthed || myPresetsLoading ? "bg-slate-100 text-slate-400 border-slate-200 cursor-not-allowed" : "bg-white text-slate-700 border-slate-300 hover:bg-slate-50"
                 }`}
                 title={!isAuthed ? "Connecte-toi pour voir tes presets" : "Afficher mes presets"}
               >
@@ -1161,9 +1285,7 @@ export default function ProfsPage() {
                 onClick={loadRunsHistory}
                 disabled={!isAuthed || historyLoading}
                 className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-[11px] font-semibold border transition ${
-                  !isAuthed || historyLoading
-                    ? "bg-slate-100 text-slate-400 border-slate-200 cursor-not-allowed"
-                    : "bg-white text-slate-700 border-slate-300 hover:bg-slate-50"
+                  !isAuthed || historyLoading ? "bg-slate-100 text-slate-400 border-slate-200 cursor-not-allowed" : "bg-white text-slate-700 border-slate-300 hover:bg-slate-50"
                 }`}
                 title={!isAuthed ? "Connecte-toi pour voir l'historique" : "Historique des générations"}
               >
@@ -1172,15 +1294,9 @@ export default function ProfsPage() {
               </button>
             </div>
 
-            {dbMsg && (
-              <span className="text-[11px] font-semibold px-3 py-1 rounded-full bg-slate-800 text-white">
-                {dbMsg}
-              </span>
-            )}
+            {dbMsg && <span className="text-[11px] font-semibold px-3 py-1 rounded-full bg-slate-800 text-white">{dbMsg}</span>}
 
-            {!isAuthed && (
-              <span className="text-[11px] text-slate-600">(Connecte-toi pour sauvegarder)</span>
-            )}
+            {!isAuthed && <span className="text-[11px] text-slate-600">(Connecte-toi pour sauvegarder)</span>}
           </div>
         </header>
 
@@ -1194,9 +1310,7 @@ export default function ProfsPage() {
         <div className="grid gap-6 lg:grid-cols-2">
           {/* FORM */}
           <section className="bg-white/95 border border-slate-200 rounded-2xl shadow-sm p-5 sm:p-6 space-y-4">
-            <h2 className="text-lg font-bold text-[#0047B6] flex items-center gap-2">
-              1️⃣ Paramètres pédagogiques
-            </h2>
+            <h2 className="text-lg font-bold text-[#0047B6] flex items-center gap-2">1️⃣ Paramètres pédagogiques</h2>
 
             {/* Classe / matière / niveau */}
             <div className="grid sm:grid-cols-3 gap-3">
@@ -1263,9 +1377,7 @@ export default function ProfsPage() {
                   type="number"
                   min={0}
                   value={form.dureeMin}
-                  onChange={(e) =>
-                    handleChange("dureeMin", Math.max(0, Number(e.target.value || 0)))
-                  }
+                  onChange={(e) => handleChange("dureeMin", Math.max(0, Number(e.target.value || 0)))}
                   className="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-sky-300"
                   placeholder="Ex : 45"
                 />
@@ -1285,9 +1397,7 @@ export default function ProfsPage() {
                     </option>
                   ))}
                 </select>
-                <p className="text-[11px] text-gray-500">
-                  {TONALITES.find((t) => t.id === form.tonalite)?.hint}
-                </p>
+                <p className="text-[11px] text-gray-500">{TONALITES.find((t) => t.id === form.tonalite)?.hint}</p>
               </div>
             </div>
 
@@ -1305,16 +1415,12 @@ export default function ProfsPage() {
                     type="button"
                     onClick={() => handleChange("outputStyle", o.id as OutputStyle)}
                     className={`text-left border rounded-xl px-3 py-2 text-xs transition ${
-                      form.outputStyle === o.id
-                        ? "border-[#0047B6] bg-sky-50 shadow-sm"
-                        : "border-slate-200 bg-white hover:border-sky-200"
+                      form.outputStyle === o.id ? "border-[#0047B6] bg-sky-50 shadow-sm" : "border-slate-200 bg-white hover:border-sky-200"
                     }`}
                   >
                     <div className="flex items-center justify-between gap-2">
                       <span className="font-semibold text-slate-800">{o.title}</span>
-                      <span className="text-[10px] px-2 py-0.5 rounded-full bg-slate-100 text-slate-700">
-                        {o.badge}
-                      </span>
+                      <span className="text-[10px] px-2 py-0.5 rounded-full bg-slate-100 text-slate-700">{o.badge}</span>
                     </div>
                     <p className="mt-1 text-[11px] text-slate-600">{o.desc}</p>
                   </button>
@@ -1338,9 +1444,7 @@ export default function ProfsPage() {
                       type="button"
                       onClick={() => setMainCategory(c.id)}
                       className={`px-3 py-1.5 rounded-full text-[12px] font-semibold border transition ${
-                        active
-                          ? "bg-[#0047B6] text-white border-[#0047B6]"
-                          : "bg-white text-slate-700 border-slate-300 hover:bg-slate-50"
+                        active ? "bg-[#0047B6] text-white border-[#0047B6]" : "bg-white text-slate-700 border-slate-300 hover:bg-slate-50"
                       }`}
                       title={c.hint}
                     >
@@ -1434,9 +1538,7 @@ export default function ProfsPage() {
                       type="button"
                       onClick={() => selectType(t.id)}
                       className={`text-left border rounded-xl px-3 py-3 text-xs sm:text-[13px] transition ${
-                        active
-                          ? "border-[#0047B6] bg-sky-50 shadow-sm"
-                          : "border-slate-200 bg-white hover:border-sky-200"
+                        active ? "border-[#0047B6] bg-sky-50 shadow-sm" : "border-slate-200 bg-white hover:border-sky-200"
                       }`}
                     >
                       <div className="min-w-0">
@@ -1454,15 +1556,12 @@ export default function ProfsPage() {
                               b.tone === "sky"
                                 ? "bg-sky-100 text-sky-800"
                                 : b.tone === "amber"
-                                  ? "bg-amber-100 text-amber-900"
-                                  : b.tone === "emerald"
-                                    ? "bg-emerald-100 text-emerald-900"
-                                    : "bg-slate-100 text-slate-800";
+                                ? "bg-amber-100 text-amber-900"
+                                : b.tone === "emerald"
+                                ? "bg-emerald-100 text-emerald-900"
+                                : "bg-slate-100 text-slate-800";
                             return (
-                              <span
-                                key={tag}
-                                className={`text-[10px] px-2 py-0.5 rounded-full font-semibold ${cls}`}
-                              >
+                              <span key={tag} className={`text-[10px] px-2 py-0.5 rounded-full font-semibold ${cls}`}>
                                 {b.label}
                               </span>
                             );
@@ -1475,12 +1574,8 @@ export default function ProfsPage() {
               </div>
 
               <div className="rounded-xl border border-slate-200 bg-slate-50 px-3 py-2">
-                <p className="text-xs font-semibold text-slate-800">
-                  Type sélectionné : {selectedType?.label ?? "—"}
-                </p>
-                <p className="mt-1 text-[11px] text-slate-600">
-                  {selectedType?.description ?? "Choisis un type dans le catalogue."}
-                </p>
+                <p className="text-xs font-semibold text-slate-800">Type sélectionné : {selectedType?.label ?? "—"}</p>
+                <p className="mt-1 text-[11px] text-slate-600">{selectedType?.description ?? "Choisis un type dans le catalogue."}</p>
               </div>
             </div>
 
@@ -1503,8 +1598,7 @@ export default function ProfsPage() {
                   <p className="text-xs font-semibold text-amber-900">{getEvalLabel(form.modaliteEvaluation)}</p>
                   <p className="mt-1 text-[11px] text-amber-800/80">{getEvalDesc(form.modaliteEvaluation)}</p>
                   <p className="mt-2 text-[11px] text-amber-900">
-                    ✅ Le prompt générera : barème, critères, consignes, progressivité
-                    {form.optDifferenciation ? " + différenciation" : ""}.
+                    ✅ Le prompt générera : barème, critères, consignes, progressivité{form.optDifferenciation ? " + différenciation" : ""}.
                   </p>
                 </div>
 
@@ -1520,9 +1614,7 @@ export default function ProfsPage() {
                           showToast("✅ Modalité choisie");
                         }}
                         className={`text-left border rounded-xl px-3 py-2 text-xs sm:text-[13px] transition ${
-                          form.modaliteEvaluation === e.id
-                            ? "border-amber-400 bg-amber-50 shadow-sm"
-                            : "border-slate-200 bg-white hover:border-amber-200"
+                          form.modaliteEvaluation === e.id ? "border-amber-400 bg-amber-50 shadow-sm" : "border-slate-200 bg-white hover:border-amber-200"
                         }`}
                       >
                         <div className="font-semibold text-slate-800">{e.label}</div>
@@ -1537,10 +1629,7 @@ export default function ProfsPage() {
                 <div className="flex items-center justify-between gap-2">
                   <label className="text-xs font-semibold text-gray-600">Méthode pédagogique</label>
                   <div className="flex items-center gap-2">
-                    <Link
-                      href="/blog"
-                      className="text-[11px] text-[#0047B6] underline underline-offset-2 hover:text-[#003894]"
-                    >
+                    <Link href="/blog" className="text-[11px] text-[#0047B6] underline underline-offset-2 hover:text-[#003894]">
                       En savoir plus
                     </Link>
                     <button
@@ -1561,9 +1650,7 @@ export default function ProfsPage() {
                       {form.methode === "methode_active" ? " (par défaut)" : ""}
                     </p>
                     {form.methode === "methode_active" && (
-                      <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-semibold">
-                        OK
-                      </span>
+                      <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-semibold">OK</span>
                     )}
                   </div>
                   <p className="mt-1 text-[11px] text-slate-600">{getMethodeDesc(form.methode)}</p>
@@ -1581,9 +1668,7 @@ export default function ProfsPage() {
                           showToast("✅ Méthode choisie");
                         }}
                         className={`text-left border rounded-xl px-3 py-2 text-xs sm:text-[13px] transition ${
-                          form.methode === m.id
-                            ? "border-[#0047B6] bg-sky-50 shadow-sm"
-                            : "border-slate-200 bg-white hover:border-sky-200"
+                          form.methode === m.id ? "border-[#0047B6] bg-sky-50 shadow-sm" : "border-slate-200 bg-white hover:border-sky-200"
                         }`}
                       >
                         <div className="font-semibold text-slate-800">{m.label}</div>
@@ -1664,9 +1749,7 @@ export default function ProfsPage() {
                         showToast(active ? "➖ Thème retiré" : `✅ Thème : ${t.label}`);
                       }}
                       className={`px-3 py-1.5 rounded-full text-[12px] font-semibold border transition ${
-                        active
-                          ? "bg-[#0047B6] text-white border-[#0047B6]"
-                          : "bg-white text-slate-700 border-slate-300 hover:bg-slate-50"
+                        active ? "bg-[#0047B6] text-white border-[#0047B6]" : "bg-white text-slate-700 border-slate-300 hover:bg-slate-50"
                       }`}
                     >
                       {t.label}
@@ -1684,9 +1767,7 @@ export default function ProfsPage() {
                   placeholder="Ex : Agriculture & écologie — contexte local : [territoire]"
                   className="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-sky-300"
                 />
-                <p className="text-[11px] text-gray-500">
-                  Sert à contextualiser (exemples, vocabulaire, situations locales).
-                </p>
+                <p className="text-[11px] text-gray-500">Sert à contextualiser (exemples, vocabulaire, situations locales).</p>
               </div>
             </div>
 
@@ -1696,11 +1777,7 @@ export default function ProfsPage() {
               <textarea
                 value={form.contenu}
                 onChange={(e) => handleChange("contenu", e.target.value)}
-                placeholder={
-                  estEval
-                    ? "Ex : Fais une évaluation de 45 min… exos progressifs + barème sur 20…"
-                    : "Ex : Génère une séance clé en main…"
-                }
+                placeholder={estEval ? "Ex : Fais une évaluation de 45 min… exos progressifs + barème sur 20…" : "Ex : Génère une séance clé en main…"}
                 className="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-sky-300 min-h-[120px]"
               />
             </div>
@@ -1725,9 +1802,7 @@ export default function ProfsPage() {
                 onClick={resetPage}
                 disabled={agentLoading}
                 className={`inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold border transition ${
-                  agentLoading
-                    ? "bg-slate-100 text-slate-400 border-slate-200 cursor-not-allowed"
-                    : "bg-white text-slate-700 border-slate-300 hover:bg-slate-50"
+                  agentLoading ? "bg-slate-100 text-slate-400 border-slate-200 cursor-not-allowed" : "bg-white text-slate-700 border-slate-300 hover:bg-slate-50"
                 }`}
               >
                 <RotateCcw className="w-4 h-4" />
@@ -1738,9 +1813,7 @@ export default function ProfsPage() {
                 onClick={creerPromptEtRessource}
                 disabled={agentLoading || !validation.ok}
                 className={`inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold shadow transition ${
-                  agentLoading || !validation.ok
-                    ? "bg-sky-100 text-sky-500 cursor-not-allowed"
-                    : "bg-[#0047B6] text-white hover:bg-[#003894]"
+                  agentLoading || !validation.ok ? "bg-sky-100 text-sky-500 cursor-not-allowed" : "bg-[#0047B6] text-white hover:bg-[#003894]"
                 }`}
                 title={!validation.ok ? validation.issues[0] : "Générer prompt + ressource"}
               >
@@ -1753,9 +1826,7 @@ export default function ProfsPage() {
           {/* RIGHT */}
           <section className="space-y-4">
             <div className="bg-white/95 border border-amber-200 rounded-2xl shadow-sm p-5 sm:p-6 space-y-3">
-              <h2 className="text-lg font-bold text-amber-700 flex items-center gap-2">
-                2️⃣ Conseils pour un meilleur résultat
-              </h2>
+              <h2 className="text-lg font-bold text-amber-700 flex items-center gap-2">2️⃣ Conseils pour un meilleur résultat</h2>
               <ul className="space-y-2 text-sm text-gray-700">
                 {suggestions.map((s, idx) => (
                   <li key={idx} className="flex items-start gap-2">
@@ -1766,11 +1837,8 @@ export default function ProfsPage() {
               </ul>
             </div>
 
-            {/* ✅ 3️⃣ PROMPT (avec liens multi IA) */}
-            <div
-              ref={promptRef}
-              className="bg-white/95 border border-slate-200 rounded-2xl shadow-sm p-5 sm:p-6 space-y-4"
-            >
+            {/* ✅ 3️⃣ PROMPT */}
+            <div ref={promptRef} className="bg-white/95 border border-slate-200 rounded-2xl shadow-sm p-5 sm:p-6 space-y-4">
               <div className="flex items-center justify-between gap-2">
                 <h2 className="text-lg font-bold text-[#0047B6]">3️⃣ Prompt (à copier-coller)</h2>
 
@@ -1780,9 +1848,7 @@ export default function ProfsPage() {
                     onClick={copierPrompt}
                     disabled={!promptInterne}
                     className={`inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-[11px] font-semibold transition ${
-                      promptInterne
-                        ? "bg-slate-800 text-white hover:bg-slate-900"
-                        : "bg-slate-200 text-slate-500 cursor-not-allowed"
+                      promptInterne ? "bg-slate-800 text-white hover:bg-slate-900" : "bg-slate-200 text-slate-500 cursor-not-allowed"
                     }`}
                   >
                     <ClipboardCopy className="w-4 h-4" />
@@ -1797,6 +1863,19 @@ export default function ProfsPage() {
                     {showPromptInterne ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                     {showPromptInterne ? "Masquer" : "Afficher"}
                   </button>
+
+                  <button
+                    type="button"
+                    onClick={saveCurrentPreset}
+                    disabled={!isAuthed || !promptInterne}
+                    className={`inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-[11px] font-semibold transition ${
+                      !isAuthed || !promptInterne ? "bg-slate-200 text-slate-500 cursor-not-allowed" : "bg-emerald-600 text-white hover:bg-emerald-700"
+                    }`}
+                    title={!isAuthed ? "Connecte-toi pour enregistrer" : "Enregistrer (form + prompt + sortie)"}
+                  >
+                    <Bookmark className="w-4 h-4" />
+                    Enregistrer
+                  </button>
                 </div>
               </div>
 
@@ -1809,75 +1888,24 @@ export default function ProfsPage() {
                 />
               )}
 
-              {/* ✅ liens colorés */}
-              <div className="space-y-2 pt-1">
-                <p className="text-[11px] text-gray-600">Coller dans :</p>
-                <div className="flex flex-wrap gap-2 text-[11px] sm:text-xs">
-                  <Link
-                    href={tchatHref}
-                    className={`px-3 py-2 rounded-lg font-semibold transition ${
-                      promptInterne
-                        ? "bg-emerald-600 text-white hover:bg-emerald-700"
-                        : "bg-emerald-200 text-emerald-700 cursor-not-allowed"
-                    }`}
-                    aria-disabled={!promptInterne}
-                  >
-                    🚀 Tchat EleveAI
-                  </Link>
+              {/* ✅ liens colorés + copie auto */}
+              <PasteTargets text={promptInterne} showToast={showToast} />
 
-                  <a
-                    href="https://chatgpt.com"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="px-3 py-2 rounded-lg bg-slate-800 text-white font-semibold hover:bg-slate-900"
-                  >
-                    🟦 ChatGPT
-                  </a>
-                  <a
-                    href="https://gemini.google.com"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="px-3 py-2 rounded-lg bg-[#0F9D58] text-white font-semibold hover:bg-[#0c7b45]"
-                  >
-                    🟩 Gemini
-                  </a>
-                  <a
-                    href="https://claude.ai"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="px-3 py-2 rounded-lg bg-[#4B3FFF] text-white font-semibold hover:bg-[#372dcc]"
-                  >
-                    🟪 Claude
-                  </a>
-                  <a
-                    href="https://chat.mistral.ai"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="px-3 py-2 rounded-lg bg-[#FF7F11] text-white font-semibold hover:bg-[#e46f0d]"
-                  >
-                    🟧 Mistral
-                  </a>
-                </div>
-
-                {!!promptInterne && (
-                  <button
-                    type="button"
-                    onClick={scrollToRessource}
-                    className="mt-1 inline-flex items-center gap-2 text-[11px] font-semibold text-slate-700 hover:text-slate-900"
-                    title="Aller à la ressource"
-                  >
-                    <ArrowDown className="w-4 h-4" />
-                    Aller à la ressource
-                  </button>
-                )}
-              </div>
+              {!!promptInterne && (
+                <button
+                  type="button"
+                  onClick={scrollToRessource}
+                  className="mt-1 inline-flex items-center gap-2 text-[11px] font-semibold text-slate-700 hover:text-slate-900"
+                  title="Aller à la ressource"
+                >
+                  <ArrowDown className="w-4 h-4" />
+                  Aller à la ressource
+                </button>
+              )}
             </div>
 
-            {/* ✅ 4️⃣ RESSOURCE (sans “agent IA”) */}
-            <div
-              ref={ressourceRef}
-              className="bg-white/95 border border-slate-200 rounded-2xl shadow-sm p-5 sm:p-6 space-y-4"
-            >
+            {/* ✅ 4️⃣ RESSOURCE */}
+            <div ref={ressourceRef} className="bg-white/95 border border-slate-200 rounded-2xl shadow-sm p-5 sm:p-6 space-y-4">
               <div className="flex items-center justify-between gap-2">
                 <h2 className="text-lg font-bold text-[#0047B6]">4️⃣ Ressource générée</h2>
 
@@ -1886,9 +1914,7 @@ export default function ProfsPage() {
                   onClick={copierRessource}
                   disabled={!agentOutput}
                   className={`inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-[11px] font-semibold transition ${
-                    agentOutput
-                      ? "bg-slate-800 text-white hover:bg-slate-900"
-                      : "bg-slate-200 text-slate-500 cursor-not-allowed"
+                    agentOutput ? "bg-slate-800 text-white hover:bg-slate-900" : "bg-slate-200 text-slate-500 cursor-not-allowed"
                   }`}
                 >
                   <ClipboardCopy className="w-4 h-4" />
@@ -1899,11 +1925,134 @@ export default function ProfsPage() {
               {agentError && <p className="text-xs text-red-600">⚠️ {agentError}</p>}
 
               <div className="eleveai-math border rounded p-3 min-h-[180px] bg-slate-50 text-sm whitespace-pre-wrap">
-                {agentLoading
-                  ? "Réflexion en cours..."
-                  : agentOutput
-                    ? <MarkdownMath>{agentOutput}</MarkdownMath>
-                    : "La ressource apparaîtra ici."}
+                {agentLoading ? "Réflexion en cours..." : agentOutput ? <MarkdownMath>{agentOutput}</MarkdownMath> : "La ressource apparaîtra ici."}
+              </div>
+
+              {/* ✅ Mini CTA relance */}
+              <button
+                type="button"
+                onClick={() => {
+                  if (!promptInterne) {
+                    showToast("⚠️ Génère d’abord le prompt.");
+                    return;
+                  }
+                  showToast("💡 Donne un avis (étape 5) pour produire un Prompt 2.");
+                  setTimeout(() => scrollToRelance(), 120);
+                }}
+                disabled={!promptInterne}
+                className={`inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2 text-sm font-semibold border transition ${
+                  promptInterne ? "border-slate-200 bg-white text-slate-800 hover:bg-slate-50" : "border-slate-200 bg-white text-slate-400 cursor-not-allowed"
+                }`}
+              >
+                <MessageCircle className="w-4 h-4" />
+                Améliorer / vérifier (Prompt 2)
+              </button>
+            </div>
+
+            {/* ✅ 5️⃣ AVIS + RELANCE */}
+            <div ref={relanceRef} className="bg-white/95 border border-slate-200 rounded-2xl shadow-sm p-5 sm:p-6 space-y-4">
+              <div className="space-y-1">
+                <h2 className="text-lg font-bold text-[#0047B6]">5️⃣ Avis + relance (Prompt 2)</h2>
+                <p className="text-xs text-slate-600">
+                  10 secondes : tu qualifies la qualité de la sortie, puis EleveAI fabrique une relance adaptée (V2, simplification, vérification).
+                </p>
+              </div>
+
+              <div className="grid sm:grid-cols-3 gap-2">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setFeedbackChoice("ok");
+                    showToast("✅ OK");
+                  }}
+                  className={`rounded-xl border px-3 py-2 text-sm font-semibold transition ${
+                    feedbackChoice === "ok" ? "border-emerald-500 bg-emerald-50" : "border-slate-200 bg-white hover:bg-slate-50"
+                  }`}
+                  disabled={!promptInterne}
+                >
+                  ✅ C’est bon
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => {
+                    setFeedbackChoice("bof");
+                    showToast("🤔 À clarifier");
+                  }}
+                  className={`rounded-xl border px-3 py-2 text-sm font-semibold transition ${
+                    feedbackChoice === "bof" ? "border-amber-400 bg-amber-50" : "border-slate-200 bg-white hover:bg-slate-50"
+                  }`}
+                  disabled={!promptInterne}
+                >
+                  🤔 Moyen
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => {
+                    setFeedbackChoice("pas_ok");
+                    showToast("🧪 À vérifier");
+                  }}
+                  className={`rounded-xl border px-3 py-2 text-sm font-semibold transition ${
+                    feedbackChoice === "pas_ok" ? "border-rose-400 bg-rose-50" : "border-slate-200 bg-white hover:bg-slate-50"
+                  }`}
+                  disabled={!promptInterne}
+                >
+                  ❌ Risqué
+                </button>
+              </div>
+
+              <div className="space-y-1">
+                <label className="text-xs font-semibold">Optionnel : une précision</label>
+                <textarea
+                  value={feedbackText}
+                  onChange={(e) => setFeedbackText(e.target.value)}
+                  className="w-full border rounded-lg px-3 py-2 text-sm min-h-[70px] bg-white"
+                  placeholder="Ex : je veux un barème plus clair / je veux 3 versions (base, standard, défi) / ça dépasse 45 min…"
+                  disabled={!promptInterne}
+                />
+              </div>
+
+              <button
+                type="button"
+                onClick={buildRelancePrompt}
+                disabled={!promptInterne || !feedbackChoice}
+                className={`w-full inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2 text-sm font-semibold transition ${
+                  promptInterne && feedbackChoice ? "bg-emerald-600 text-white hover:bg-emerald-700" : "bg-emerald-100 text-emerald-500 cursor-not-allowed"
+                }`}
+              >
+                🔁 Générer une relance adaptée (Prompt 2)
+              </button>
+
+              {/* Prompt 2 */}
+              <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4 space-y-3">
+                <div className="flex items-center justify-between gap-2">
+                  <div>
+                    <p className="text-sm font-extrabold text-slate-900">🔁 Prompt 2 (relance)</p>
+                    <p className="text-[11px] text-slate-600">À coller dans une IA pour améliorer / simplifier / vérifier la production.</p>
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={copierRelance}
+                    disabled={!promptRelance}
+                    className={`inline-flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-semibold transition ${
+                      promptRelance ? "bg-slate-900 text-white hover:bg-slate-950" : "bg-slate-200 text-slate-500 cursor-not-allowed"
+                    }`}
+                  >
+                    <ClipboardCopy className="w-4 h-4" />
+                    {copiedRelance ? "Copié" : "Copier"}
+                  </button>
+                </div>
+
+                <textarea
+                  readOnly
+                  value={promptRelance}
+                  className="w-full border rounded-lg px-3 py-2 text-xs font-mono bg-white min-h-[180px]"
+                  placeholder="Ton Prompt 2 apparaîtra ici après ton avis."
+                />
+
+                <PasteTargets text={promptRelance} showToast={showToast} />
               </div>
             </div>
           </section>
@@ -1917,15 +2066,9 @@ export default function ProfsPage() {
             <div className="flex items-center justify-between p-4 border-b">
               <div>
                 <h3 className="font-extrabold text-[#0047B6]">📚 Mes presets profs</h3>
-                <p className="text-xs text-slate-600">
-                  Clique sur “Charger” pour retrouver ton formulaire + prompt + ressource.
-                </p>
+                <p className="text-xs text-slate-600">Clique sur “Charger” pour retrouver ton formulaire + prompt + ressource.</p>
               </div>
-              <button
-                onClick={() => setShowMyPresets(false)}
-                className="p-2 rounded-lg hover:bg-slate-100"
-                aria-label="Fermer"
-              >
+              <button onClick={() => setShowMyPresets(false)} className="p-2 rounded-lg hover:bg-slate-100" aria-label="Fermer">
                 <X className="w-5 h-5" />
               </button>
             </div>
@@ -1944,8 +2087,7 @@ export default function ProfsPage() {
                       <div className="min-w-0">
                         <div className="font-semibold text-slate-900 truncate">{p.title || "Sans titre"}</div>
                         <div className="text-[11px] text-slate-600 mt-1">
-                          {p.classe || "—"} • {p.matiere || "—"} •{" "}
-                          <span className="font-mono">{fmtDate(p.created_at)}</span>
+                          {p.classe || "—"} • {p.matiere || "—"} • <span className="font-mono">{fmtDate(p.created_at)}</span>
                         </div>
                       </div>
 
@@ -1963,18 +2105,13 @@ export default function ProfsPage() {
             </div>
 
             <div className="p-4 border-t flex items-center justify-between">
-              <button
-                onClick={() => setShowMyPresets(false)}
-                className="px-3 py-2 rounded-lg border border-slate-300 text-sm font-semibold hover:bg-slate-50"
-              >
+              <button onClick={() => setShowMyPresets(false)} className="px-3 py-2 rounded-lg border border-slate-300 text-sm font-semibold hover:bg-slate-50">
                 Fermer
               </button>
               <button
                 onClick={loadMyPresets}
                 disabled={myPresetsLoading}
-                className={`px-3 py-2 rounded-lg text-sm font-semibold border ${
-                  myPresetsLoading ? "bg-slate-100 text-slate-400" : "bg-white hover:bg-slate-50"
-                }`}
+                className={`px-3 py-2 rounded-lg text-sm font-semibold border ${myPresetsLoading ? "bg-slate-100 text-slate-400" : "bg-white hover:bg-slate-50"}`}
               >
                 Recharger
               </button>
@@ -1992,11 +2129,7 @@ export default function ProfsPage() {
                 <h3 className="font-extrabold text-[#0047B6]">🕒 Historique des générations</h3>
                 <p className="text-xs text-slate-600">Chaque clic “Créer” ajoute une ligne ici.</p>
               </div>
-              <button
-                onClick={() => setShowHistory(false)}
-                className="p-2 rounded-lg hover:bg-slate-100"
-                aria-label="Fermer"
-              >
+              <button onClick={() => setShowHistory(false)} className="p-2 rounded-lg hover:bg-slate-100" aria-label="Fermer">
                 <X className="w-5 h-5" />
               </button>
             </div>
@@ -2033,18 +2166,13 @@ export default function ProfsPage() {
             </div>
 
             <div className="p-4 border-t flex items-center justify-between">
-              <button
-                onClick={() => setShowHistory(false)}
-                className="px-3 py-2 rounded-lg border border-slate-300 text-sm font-semibold hover:bg-slate-50"
-              >
+              <button onClick={() => setShowHistory(false)} className="px-3 py-2 rounded-lg border border-slate-300 text-sm font-semibold hover:bg-slate-50">
                 Fermer
               </button>
               <button
                 onClick={loadRunsHistory}
                 disabled={historyLoading}
-                className={`px-3 py-2 rounded-lg text-sm font-semibold border ${
-                  historyLoading ? "bg-slate-100 text-slate-400" : "bg-white hover:bg-slate-50"
-                }`}
+                className={`px-3 py-2 rounded-lg text-sm font-semibold border ${historyLoading ? "bg-slate-100 text-slate-400" : "bg-white hover:bg-slate-50"}`}
               >
                 Recharger
               </button>
