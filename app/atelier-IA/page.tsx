@@ -34,7 +34,7 @@ export default function AtelierIAPage() {
 
           <div className="flex flex-wrap gap-3 pt-2">
             <Link
-              href="/atelier-IA/vision"
+              href="/atelier-ia/vision"
               className="rounded-lg bg-emerald-500 px-5 py-2.5 text-sm font-semibold text-slate-950 hover:bg-emerald-400"
             >
               👀 Découvrir l’Atelier-IA
@@ -127,7 +127,7 @@ export default function AtelierIAPage() {
           </p>
 
           <Link
-            href="/atelier-IA/vision"
+            href="/atelier-ia/vision"
             className="inline-flex items-center gap-2 rounded-lg border border-emerald-500/40 bg-emerald-500/10 px-5 py-2.5 text-sm font-semibold text-emerald-200 hover:bg-emerald-500/20"
           >
             Découvrir la vision pédagogique →

@@ -101,7 +101,7 @@ export default function AtelierIAProgrammePage() {
       <section className="border-b border-slate-800 bg-gradient-to-b from-slate-900/80 to-slate-950">
         <div className="mx-auto max-w-6xl px-4 py-12 space-y-5">
           <div className="flex items-center justify-between gap-3 flex-wrap">
-            <Link href="/atelier-IA" className="text-xs text-emerald-300 hover:underline">
+            <Link href="/atelier-ia" className="text-xs text-emerald-300 hover:underline">
               ← Retour à l’Atelier-IA
             </Link>
 
@@ -127,7 +127,7 @@ export default function AtelierIAProgrammePage() {
 
           <div className="flex flex-wrap gap-2 pt-2">
             <Link
-              href="/atelier-IA/vision"
+              href="/atelier-ia/vision"
               className="rounded-lg border border-slate-700 bg-slate-900 px-4 py-2 text-sm font-semibold hover:bg-slate-800"
             >
               👀 Vision pédagogique
@@ -195,7 +195,7 @@ export default function AtelierIAProgrammePage() {
           {/* CTA */}
           <div className="text-center pt-2">
             <Link
-              href="/atelier-IA"
+              href="/atelier-ia"
               className="inline-flex items-center gap-2 rounded-lg border border-emerald-500/40 bg-emerald-500/10 px-5 py-2.5 text-sm font-semibold text-emerald-200 hover:bg-emerald-500/20"
             >
               Revenir au HUB Atelier-IA →

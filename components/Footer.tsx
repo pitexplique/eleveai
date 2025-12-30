@@ -80,7 +80,7 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/atelier-IA" className="text-slate-300 hover:text-sky-300">
+                <Link href="/atelier-ia" className="text-slate-300 hover:text-sky-300">
                   Atelier-IA (cadre & méthode)
                 </Link>
               </li>

@@ -10,7 +10,7 @@ export default function AtelierIAVisionPage() {
         <div className="mx-auto max-w-4xl px-4 py-12 space-y-6">
 
           <Link
-            href="/atelier-IA"
+            href="/atelier-ia"
             className="text-xs text-emerald-300 hover:underline"
           >
             ← Retour à l’Atelier-IA
