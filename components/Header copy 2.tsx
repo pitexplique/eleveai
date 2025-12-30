@@ -1,4 +1,3 @@
-// components/Header.tsx
 "use client";
 
 import Link from "next/link";
@@ -12,25 +11,25 @@ import {
   UserPlus,
   GraduationCap,
   Users,
-  UsersRound,
-  Wand2,
+  Briefcase,
+  Home,
   Sparkles,
+  Wand2,
   ClipboardList,
+  UsersRound,
   BookOpenText,
   Mail,
+  HelpCircle,
+  UserRound,
+  Handshake,
   LayoutDashboard,
   LogOut,
   Euro,
-  Home,
 } from "lucide-react";
 
-/**
- * OBJECTIF SEO (Sitelinks Google)
- * - Navigation stable + libellés "propres" (Espace élèves / professeurs / parents...)
- * - Liens internes HTML (pas de boutons JS) vers routes clés
- * - Routage clair: /accueil, /espace-eleves, /espace-profs, /espace-parents, /atelier-IA, /tarifs, /contact, /blog
- */
-
+/* -----------------------------
+   ROUTES AUTH
+------------------------------ */
 const AUTH_ROUTES = {
   signin: "/auth/signin",
   signup: "/auth/signup",
@@ -39,12 +38,11 @@ const AUTH_ROUTES = {
 type NavItem = {
   href: string;
   label: string;
-  desc?: string;
-  icon?: React.ReactNode;
   badge?: string;
+  icon?: React.ReactNode;
 };
 
-type GroupKey = "atelier" | "espaces";
+type GroupKey = "atelier" | "profs" | "eleves" | "parents" | "etablissements" | "plus";
 
 type Group = {
   key: GroupKey;
@@ -84,14 +82,10 @@ function useOnClickOutside(
 
 function IconWrap({ children }: { children: React.ReactNode }) {
   return (
-    <span className="inline-flex h-8 w-8 items-center justify-center rounded-xl border border-slate-700 bg-slate-950/60 text-slate-200">
+    <span className="inline-flex h-7 w-7 items-center justify-center rounded-lg border border-slate-700 bg-slate-950/60 text-slate-200">
       {children}
     </span>
   );
-}
-
-function srOnly(text: string) {
-  return <span className="sr-only">{text}</span>;
 }
 
 export default function Header() {
@@ -112,7 +106,11 @@ export default function Header() {
 
   // Refs (desktop dropdown containers)
   const refAtelier = useRef<HTMLDivElement>(null);
-  const refEspaces = useRef<HTMLDivElement>(null);
+  const refProfs = useRef<HTMLDivElement>(null);
+  const refEleves = useRef<HTMLDivElement>(null);
+  const refParents = useRef<HTMLDivElement>(null);
+  const refEtab = useRef<HTMLDivElement>(null);
+  const refPlus = useRef<HTMLDivElement>(null);
 
   // Ref (global header, pour fermer le menu mobile si clic dehors)
   const headerRef = useRef<HTMLElement>(null);
@@ -123,7 +121,11 @@ export default function Header() {
     setMobileOpen(null);
   }, []);
 
-  const refsDesktop = useMemo(() => [refAtelier, refEspaces], []);
+  const refsDesktop = useMemo(
+    () => [refAtelier, refProfs, refEleves, refParents, refEtab, refPlus],
+    [],
+  );
+
   useOnClickOutside(refsDesktop, () => setOpen(null), open !== null);
   useOnClickOutside([headerRef], closeAll, menuOpen);
 
@@ -176,62 +178,100 @@ export default function Header() {
 
   function getRefForKey(key: GroupKey) {
     if (key === "atelier") return refAtelier;
-    return refEspaces;
+    if (key === "profs") return refProfs;
+    if (key === "eleves") return refEleves;
+    if (key === "parents") return refParents;
+    if (key === "etablissements") return refEtab;
+    return refPlus;
   }
 
-  // ✅ NAV "SEO-CLAIRES"
+  // ✅ NAV (SEO-CLAIRES)
   const GROUPS: Group[] = useMemo(
     () => [
-      {
-        key: "espaces",
-        label: "Espaces",
-        icon: <Users className="h-4 w-4" />,
-        items: [
-          {
-            href: "/espace-eleves",
-            label: "Espace élèves",
-            desc: "S’entraîner avec une IA encadrée",
-            icon: <GraduationCap className="h-4 w-4" />,
-          },
-          {
-            href: "/espace-profs",
-            label: "Espace professeurs",
-            desc: "Générer des consignes IA (prompts) + ressources",
-            icon: <Users className="h-4 w-4" />,
-          },
-          {
-            href: "/espace-parents",
-            label: "Espace parents",
-            desc: "Comprendre & accompagner",
-            icon: <UsersRound className="h-4 w-4" />,
-          },
-        ],
-      },
       {
         key: "atelier",
         label: "Atelier-IA",
         icon: <Wand2 className="h-4 w-4" />,
         items: [
-          {
-            href: "/atelier-IA",
-            label: "Présentation",
-            desc: "Cadre, objectifs et bénéfices",
-            icon: <Wand2 className="h-4 w-4" />,
-          },
+          { href: "/atelier-IA", label: "Présentation", icon: <Wand2 className="h-4 w-4" /> },
           {
             href: "/atelier-IA/vision",
             label: "Vision pédagogique",
-            desc: "IA autorisée mais encadrée (anti-triche)",
             icon: <Sparkles className="h-4 w-4" />,
           },
           {
             href: "/atelier-IA/programme",
             label: "Programme",
-            desc: "Séances, progressivité, livrables",
             icon: <ClipboardList className="h-4 w-4" />,
           },
         ],
       },
+      {
+        key: "profs",
+        label: "Profs",
+        icon: <Users className="h-4 w-4" />,
+        items: [
+          {
+            href: "/espace-profs",
+            label: "Générer des consignes IA (prompts)",
+            icon: <Users className="h-4 w-4" />,
+          },
+          {
+            href: "/blog/rediger-document-ia-friendly",
+            label: "Devoir IA-friendly (article)",
+            icon: <BookOpenText className="h-4 w-4" />,
+            badge: "Nouveau",
+          },
+          {
+            href: "/atelier-IA",
+            label: "Atelier-IA en classe",
+            icon: <Wand2 className="h-4 w-4" />,
+          },
+        ],
+      },
+      {
+        key: "eleves",
+        label: "Élèves",
+        icon: <GraduationCap className="h-4 w-4" />,
+        items: [
+          { href: "/espace-eleves", label: "S’entraîner avec l’IA", icon: <GraduationCap className="h-4 w-4" /> },
+          { href: "/concours-ia", label: "Changer ton monde", icon: <Sparkles className="h-4 w-4" /> },
+        ],
+      },
+      {
+        key: "parents",
+        label: "Parents",
+        icon: <UsersRound className="h-4 w-4" />,
+        items: [
+          { href: "/espace-parents", label: "Comprendre & accompagner", icon: <UsersRound className="h-4 w-4" /> },
+        ],
+      },
+      /*
+      {
+        key: "etablissements",
+        label: "Établissements",
+        icon: <Briefcase className="h-4 w-4" />,
+        items: [
+          { href: "/offre-pilote", label: "Offre pilote (8 semaines)", icon: <Sparkles className="h-4 w-4" /> },
+          { href: "/tarifs#offre-etablissement", label: "Offre établissement", icon: <Euro className="h-4 w-4" /> },
+          { href: "/contact", label: "Demander un devis", icon: <Mail className="h-4 w-4" /> },
+        ],
+      },*/
+      /*
+      {
+        key: "plus",
+        label: "Plus",
+        icon: <ChevronDown className="h-4 w-4" />,
+        items: [
+          { href: "/accueil", label: "Accueil", icon: <Home className="h-4 w-4" /> },
+          { href: "/tarifs", label: "Tarifs", icon: <Euro className="h-4 w-4" /> },
+          { href: "/blog", label: "Blog", icon: <BookOpenText className="h-4 w-4" /> },
+          { href: "/faq", label: "FAQ", icon: <HelpCircle className="h-4 w-4" /> },
+          { href: "/contact", label: "Contact", icon: <Mail className="h-4 w-4" /> },
+          { href: "/qui-sommes-nous", label: "Qui sommes-nous ?", icon: <UserRound className="h-4 w-4" /> },
+          { href: "/partenaires", label: "Partenaires", icon: <Handshake className="h-4 w-4" /> },
+        ],
+      },*/
     ],
     [],
   );
@@ -244,17 +284,10 @@ export default function Header() {
     }`;
 
   const menuItemClass = (active: boolean) =>
-    `px-4 py-2 text-sm flex items-start gap-3 ${
+    `px-4 py-2 text-sm flex items-center gap-3 ${
       active
         ? "text-emerald-200 bg-emerald-500/10 border-l-2 border-emerald-500"
         : "text-slate-300 hover:bg-slate-900"
-    }`;
-
-  const topLinkClass = (active: boolean) =>
-    `px-3 py-1.5 text-sm rounded-xl border transition ${
-      active
-        ? "border-emerald-500/70 bg-emerald-500/10 text-emerald-100"
-        : "border-slate-700 text-slate-200 hover:bg-slate-900 hover:border-slate-500"
     }`;
 
   return (
@@ -263,11 +296,10 @@ export default function Header() {
       className="sticky top-0 z-40 border-b border-slate-800 bg-slate-950/90 backdrop-blur"
     >
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:py-4">
-        {/* LOGO (lien HTML vers /accueil pour SEO) */}
+        {/* LOGO */}
         <Link href="/accueil" onClick={closeAll} className="flex items-center gap-2">
           <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-emerald-500 text-slate-900">
             <Sparkles className="h-5 w-5" />
-            {srOnly("EleveAI")}
           </div>
           <div className="flex flex-col leading-tight">
             <span className="text-sm sm:text-base font-semibold text-slate-50">EleveAI</span>
@@ -279,14 +311,6 @@ export default function Header() {
 
         {/* DESKTOP MENU */}
         <div className="hidden lg:flex items-center gap-2">
-          {/* Accueil visible (Google aime les liens de 1er niveau) */}
-          <Link href="/accueil" className={topLinkClass(isActive(pathname, "/accueil"))}>
-            <span className="inline-flex items-center gap-2">
-              <Home className="h-4 w-4" />
-              Accueil
-            </span>
-          </Link>
-
           {GROUPS.map((group) => {
             const ref = getRefForKey(group.key);
             const opened = open === group.key;
@@ -310,7 +334,7 @@ export default function Header() {
                 </button>
 
                 {opened && (
-                  <div className="absolute right-0 mt-2 w-[26rem] rounded-xl border border-slate-700 bg-slate-950/95 shadow-xl backdrop-blur">
+                  <div className="absolute right-0 mt-2 w-96 rounded-xl border border-slate-700 bg-slate-950/95 shadow-xl backdrop-blur">
                     <div className="flex flex-col py-2">
                       {group.items.map((link) => {
                         const active = isActive(pathname, link.href);
@@ -322,14 +346,7 @@ export default function Header() {
                             className={menuItemClass(active)}
                           >
                             <IconWrap>{link.icon}</IconWrap>
-                            <span className="flex-1 min-w-0">
-                              <span className="block font-semibold">{link.label}</span>
-                              {link.desc ? (
-                                <span className="block text-[11px] text-slate-400 mt-0.5">
-                                  {link.desc}
-                                </span>
-                              ) : null}
-                            </span>
+                            <span className="flex-1">{link.label}</span>
                             {link.badge && (
                               <span className="inline-flex items-center rounded-full bg-emerald-600/20 text-emerald-300 text-[10px] font-semibold px-2 py-0.5 uppercase tracking-wide">
                                 {link.badge}
@@ -344,27 +361,38 @@ export default function Header() {
               </div>
             );
           })}
-
-          {/* Liens 1er niveau (sitelinks friendly) */}
-          <Link href="/blog" className={topLinkClass(isActive(pathname, "/blog"))}>
-            <span className="inline-flex items-center gap-2">
-              <BookOpenText className="h-4 w-4" />
-              Articles
-            </span>
+          {/* ARTCILES visible */}
+          <Link
+            href="/blog"
+            className={`px-3 py-1.5 text-sm rounded-xl border transition ${
+              isActive(pathname, "/tarifs")
+                ? "border-emerald-500/70 bg-emerald-500/10 text-emerald-100"
+                : "border-slate-700 text-slate-200 hover:bg-slate-900 hover:border-slate-500"
+            }`}
+          >
+            Articles
           </Link>
-
-          <Link href="/tarifs" className={topLinkClass(isActive(pathname, "/tarifs"))}>
-            <span className="inline-flex items-center gap-2">
-              <Euro className="h-4 w-4" />
-              Tarifs
-            </span>
+          {/* TARIFS visible */}
+          <Link
+            href="/tarifs"
+            className={`px-3 py-1.5 text-sm rounded-xl border transition ${
+              isActive(pathname, "/tarifs")
+                ? "border-emerald-500/70 bg-emerald-500/10 text-emerald-100"
+                : "border-slate-700 text-slate-200 hover:bg-slate-900 hover:border-slate-500"
+            }`}
+          >
+            Tarifs
           </Link>
-
-          <Link href="/contact" className={topLinkClass(isActive(pathname, "/contact"))}>
-            <span className="inline-flex items-center gap-2">
-              <Mail className="h-4 w-4" />
-              Contact
-            </span>
+         {/* Contact */}
+          <Link
+            href="/contact"
+            className={`px-3 py-1.5 text-sm rounded-xl border transition ${
+              isActive(pathname, "/contact")
+                ? "border-emerald-500/70 bg-emerald-500/10 text-emerald-100"
+                : "border-slate-700 text-slate-200 hover:bg-slate-900 hover:border-slate-500"
+            }`}
+          >
+            Contact
           </Link>
         </div>
 
@@ -431,23 +459,6 @@ export default function Header() {
       {menuOpen && (
         <div className="border-t border-slate-800 bg-slate-950 lg:hidden">
           <div className="mx-auto max-w-6xl px-4 py-3 space-y-2">
-            {/* Accueil mobile visible */}
-            <Link
-              href="/accueil"
-              onClick={closeAll}
-              className={`px-3 py-2 text-sm rounded-xl border flex items-center justify-between ${
-                isActive(pathname, "/accueil")
-                  ? "border-emerald-500/70 bg-emerald-500/10 text-emerald-100"
-                  : "border-slate-800 bg-slate-950 text-slate-200 hover:bg-slate-900"
-              }`}
-            >
-              <span className="flex items-center gap-2">
-                <Home className="h-4 w-4" />
-                Accueil
-              </span>
-              <span className="text-xs text-slate-400">→</span>
-            </Link>
-
             {/* Mobile auth */}
             {!authLoading && !isLoggedIn && (
               <div className="grid grid-cols-2 gap-2">
@@ -529,21 +540,12 @@ export default function Header() {
                             key={link.href}
                             href={link.href}
                             onClick={closeAll}
-                            className={`px-3 py-2 text-sm border-t border-slate-800 flex items-start gap-3 ${
-                              active
-                                ? "text-emerald-200 bg-emerald-500/10"
-                                : "text-slate-300 hover:bg-slate-900"
+                            className={`px-3 py-2 text-sm border-t border-slate-800 flex items-center gap-3 ${
+                              active ? "text-emerald-200 bg-emerald-500/10" : "text-slate-300 hover:bg-slate-900"
                             }`}
                           >
                             <IconWrap>{link.icon}</IconWrap>
-                            <span className="flex-1 min-w-0">
-                              <span className="block font-semibold">{link.label}</span>
-                              {link.desc ? (
-                                <span className="block text-[11px] text-slate-400 mt-0.5">
-                                  {link.desc}
-                                </span>
-                              ) : null}
-                            </span>
+                            <span className="flex-1">{link.label}</span>
                             {link.badge && (
                               <span className="inline-flex items-center rounded-full bg-emerald-600/20 text-emerald-300 text-[10px] font-semibold px-2 py-0.5 uppercase">
                                 {link.badge}
@@ -558,23 +560,7 @@ export default function Header() {
               );
             })}
 
-            {/* Liens 1er niveau mobile (sitelinks friendly) */}
-            <Link
-              href="/blog"
-              onClick={closeAll}
-              className={`px-3 py-2 text-sm rounded-xl border flex items-center justify-between ${
-                isActive(pathname, "/blog")
-                  ? "border-emerald-500/70 bg-emerald-500/10 text-emerald-100"
-                  : "border-slate-800 bg-slate-950 text-slate-200 hover:bg-slate-900"
-              }`}
-            >
-              <span className="flex items-center gap-2">
-                <BookOpenText className="h-4 w-4" />
-                Articles
-              </span>
-              <span className="text-xs text-slate-400">→</span>
-            </Link>
-
+            {/* Tarifs (mobile visible) */}
             <Link
               href="/tarifs"
               onClick={closeAll}
@@ -590,60 +576,9 @@ export default function Header() {
               </span>
               <span className="text-xs text-slate-400">→</span>
             </Link>
-
-            <Link
-              href="/contact"
-              onClick={closeAll}
-              className={`px-3 py-2 text-sm rounded-xl border flex items-center justify-between ${
-                isActive(pathname, "/contact")
-                  ? "border-emerald-500/70 bg-emerald-500/10 text-emerald-100"
-                  : "border-slate-800 bg-slate-950 text-slate-200 hover:bg-slate-900"
-              }`}
-            >
-              <span className="flex items-center gap-2">
-                <Mail className="h-4 w-4" />
-                Contact
-              </span>
-              <span className="text-xs text-slate-400">→</span>
-            </Link>
           </div>
         </div>
       )}
-
-      {/* ✅ MINI "Accès rapide" caché visuellement mais utile aux crawlers
-          - Google lit ces liens HTML et comprend mieux la structure
-          - Ne gêne pas l'UX
-      */}
-      <div className="sr-only" aria-hidden="false">
-        <nav aria-label="Accès rapide">
-          <ul>
-            <li>
-              <Link href="/accueil">Accueil</Link>
-            </li>
-            <li>
-              <Link href="/espace-eleves">Espace élèves</Link>
-            </li>
-            <li>
-              <Link href="/espace-profs">Espace professeurs</Link>
-            </li>
-            <li>
-              <Link href="/espace-parents">Espace parents</Link>
-            </li>
-            <li>
-              <Link href="/atelier-IA">Atelier-IA</Link>
-            </li>
-            <li>
-              <Link href="/tarifs">Tarifs</Link>
-            </li>
-            <li>
-              <Link href="/contact">Contact</Link>
-            </li>
-            <li>
-              <Link href="/blog">Articles</Link>
-            </li>
-          </ul>
-        </nav>
-      </div>
     </header>
   );
 }
