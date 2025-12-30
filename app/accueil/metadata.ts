@@ -6,7 +6,7 @@ const SITE_URL = "https://eleveai.fr";
 export const metadata: Metadata = {
   title: "EleveAI — IA pédagogique encadrée (Profs · Élèves · Parents)",
   description:
-    "EleveAI aide à créer des consignes IA (prompts) claires et guidées pour apprendre sans tricher : profs, élèves et parents. Atelier-IA, traces, esprit critique, collège/lycée.",
+    "EleveAI aide à créer des consignes IA (prompts) claires et guidées pour apprendre sans tricher : profs, élèves et parents. atelier-IA, traces, esprit critique, collège/lycée.",
   alternates: {
     canonical: "/accueil",
   },
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "EleveAI — IA pédagogique encadrée",
     description:
-      "Consignes IA claires, Atelier-IA, anti-triche pédagogique. Profs, élèves, parents.",
+      "Consignes IA claires, atelier-IA, anti-triche pédagogique. Profs, élèves, parents.",
     images: ["/preview.jpg"],
   },
 };

@@ -85,10 +85,10 @@ export default function AccueilPage() {
                 </Link>
 
                 <Link
-                  href="/atelier-ia"
+                  href="/atelier-IA"
                   className="inline-flex items-center justify-center gap-2 rounded-lg border border-emerald-500/40 bg-emerald-900/10 px-4 py-2 text-sm font-semibold text-emerald-100 hover:bg-emerald-900/20"
                 >
-                  🧪 Découvrir l’Atelier-IA
+                  🧪 Découvrir l’atelier-IA
                 </Link>
               </div>
 
@@ -141,7 +141,7 @@ export default function AccueilPage() {
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="mt-0.5 text-emerald-300">•</span>
-                    Atelier-IA : activité “IA-friendly” structurée et rassurante.
+                    atelier-IA : activité “IA-friendly” structurée et rassurante.
                   </li>
                 </ul>
               </div>
@@ -193,7 +193,7 @@ export default function AccueilPage() {
       <section className="border-b border-slate-800 bg-slate-950/60">
         <div className="mx-auto max-w-6xl px-4 py-4 grid gap-3 sm:grid-cols-3">
           {[
-            "🧪 Atelier-IA : apprendre le cadre",
+            "🧪 atelier-IA : apprendre le cadre",
             "🧩 3 espaces (profs / élèves / parents)",
             "✅ Une consigne IA claire en < 5 min",
           ].map((item) => (
@@ -208,15 +208,15 @@ export default function AccueilPage() {
         </div>
       </section>
 
-      {/* BANDEAU ATELIER-IA */}
+      {/* BANDEAU atelier-IA */}
       <section className="border-b border-slate-800 bg-slate-950">
         <div className="mx-auto max-w-6xl px-4 py-3">
           <Link
-            href="/atelier-ia"
+            href="/atelier-IA"
             className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 rounded-xl border border-emerald-500/30 bg-emerald-900/15 px-4 py-3 hover:bg-emerald-900/25 transition"
           >
             <div className="text-sm text-slate-200">
-              <span className="font-semibold text-emerald-200">🧪 Atelier-IA</span>
+              <span className="font-semibold text-emerald-200">🧪 atelier-IA</span>
               <span className="text-slate-400">
                 {" "}
                 — règles, traces, esprit critique, anti-triche : un cadre clé en main.
@@ -300,7 +300,7 @@ export default function AccueilPage() {
               🏫 Établissement
             </p>
             <p className="mt-1">
-              L’Atelier-IA peut devenir un <b>levier</b> : cadre commun, pratiques alignées,
+              L’atelier-IA peut devenir un <b>levier</b> : cadre commun, pratiques alignées,
               élèves accompagnés.
               {" "}
               <Link href="/offre-pilote" className="text-emerald-200 underline underline-offset-4 hover:text-emerald-100">
@@ -330,7 +330,7 @@ export default function AccueilPage() {
             {[
               {
                 title: "Découvrir le cadre",
-                text: "Atelier-IA : règles, traces, esprit critique, anti-triche.",
+                text: "atelier-IA : règles, traces, esprit critique, anti-triche.",
                 icon: "🧪",
               },
               {
@@ -359,10 +359,10 @@ export default function AccueilPage() {
 
           <div className="pt-2 flex flex-wrap gap-2">
             <Link
-              href="/atelier-ia"
+              href="/atelier-IA"
               className="inline-flex items-center justify-center rounded-lg bg-emerald-500 px-4 py-2 text-sm font-semibold text-slate-950 hover:bg-emerald-400"
             >
-              🧪 Lire “Atelier-IA”
+              🧪 Lire “atelier-IA”
             </Link>
             <Link
               href="/espace-profs"

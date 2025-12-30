@@ -10,14 +10,14 @@ export default function AtelierIAVisionPage() {
         <div className="mx-auto max-w-4xl px-4 py-12 space-y-6">
 
           <Link
-            href="/atelier-ia"
+            href="/atelier-IA"
             className="text-xs text-emerald-300 hover:underline"
           >
-            ← Retour à l’Atelier-IA
+            ← Retour à l’atelier-IA
           </Link>
 
           <h1 className="text-2xl sm:text-3xl font-extrabold">
-            Pourquoi un Atelier-IA au collège ?
+            Pourquoi un atelier-IA au collège ?
           </h1>
 
           <p className="text-lg font-semibold text-emerald-300">
@@ -29,13 +29,13 @@ export default function AtelierIAVisionPage() {
           <p className="text-slate-300 leading-relaxed">
             Les élèves utilisent déjà l’IA.
             <br />
-            L’Atelier-IA ne cherche pas à interdire, mais à
+            L’atelier-IA ne cherche pas à interdire, mais à
             <b> apprendre à bien l’utiliser</b>.
           </p>
 
           <div className="space-y-4 text-sm text-slate-300">
             <p>
-              Dans l’Atelier-IA, l’élève :
+              Dans l’atelier-IA, l’élève :
             </p>
             <ul className="list-disc list-inside space-y-1">
               <li>apprend à formuler une question claire</li>

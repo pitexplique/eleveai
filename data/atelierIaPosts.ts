@@ -26,7 +26,7 @@ export type AtelierIaPost = {
 
 export const atelierIaPosts: AtelierIaPost[] = [
   {
-    slug: "atelier-ia-entre-deux-6e",
+    slug: "atelier-IA-entre-deux-6e",
     title:
       "Ateliers IA au collège : 3 séances créatives pour les 6e à l’Entre-Deux",
     description:

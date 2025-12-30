@@ -30,7 +30,7 @@ export const metadata: Metadata = {
 
   // ✅ Description orientée “cadre + usage”
   description:
-    "EleveAI aide à créer des consignes IA (prompts) claires et guidées pour apprendre sans tricher : profs, élèves et parents. Atelier-IA, traces, esprit critique, collège/lycée.",
+    "EleveAI aide à créer des consignes IA (prompts) claires et guidées pour apprendre sans tricher : profs, élèves et parents. atelier-IA, traces, esprit critique, collège/lycée.",
 
   // (Keywords pas critique mais ok)
   keywords: [
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     "IA pédagogique",
     "IA encadrée",
     "anti-triche",
-    "Atelier-IA",
+    "atelier-IA",
     "consigne IA",
     "prompt éducatif",
     "professeurs",
@@ -56,7 +56,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "EleveAI — IA pédagogique encadrée (Profs · Élèves · Parents)",
     description:
-      "Créer des consignes IA claires et guidées, apprendre sans tricher : Atelier-IA, traces, esprit critique. Pensé collège/lycée.",
+      "Créer des consignes IA claires et guidées, apprendre sans tricher : atelier-IA, traces, esprit critique. Pensé collège/lycée.",
     url: CANONICAL,
     type: "website",
     siteName: "EleveAI",
@@ -75,7 +75,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "EleveAI — IA pédagogique encadrée (Profs · Élèves · Parents)",
     description:
-      "Créer des consignes IA claires et guidées, apprendre sans tricher : Atelier-IA, traces, esprit critique. Pensé collège/lycée.",
+      "Créer des consignes IA claires et guidées, apprendre sans tricher : atelier-IA, traces, esprit critique. Pensé collège/lycée.",
     images: ["/preview.jpg"],
   },
 
@@ -130,7 +130,7 @@ export default function RootLayout({
     operatingSystem: "Web",
     inLanguage: "fr-FR",
     description:
-      "IA pédagogique encadrée pour profs, élèves et parents : création de consignes IA (prompts), Atelier-IA, traces, esprit critique, cadre anti-triche.",
+      "IA pédagogique encadrée pour profs, élèves et parents : création de consignes IA (prompts), atelier-IA, traces, esprit critique, cadre anti-triche.",
     offers: [
       {
         "@type": "Offer",

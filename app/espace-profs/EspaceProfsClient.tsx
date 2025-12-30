@@ -915,7 +915,7 @@ export default function ProfsPage() {
     if (!form.optDifferenciation) s.push("Option : active Différenciation si tu veux base/standard/défi.");
     if (normalizeMainCategory(selectedType?.category) === "seance" && !form.optRituels) s.push("Option : active Rituels pour un démarrage 5–10 min (simple et efficace).");
     if (!form.optIAFriendly) s.push("Option : active Compatible correction IA si tu veux un document Word structuré.");
-    if (form.optAtelierIA && !form.optIAFriendly) s.push("Atelier-IA : active aussi Compatible correction IA pour une structure plus simple à relire.");
+    if (form.optAtelierIA && !form.optIAFriendly) s.push("atelier-IA : active aussi Compatible correction IA pour une structure plus simple à relire.");
 
     if (estEval) {
       s.push("Évaluation : barème + critères + aides autorisées (calculatrice, docs, IA…).");

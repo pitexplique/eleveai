@@ -11,11 +11,11 @@ export default function AtelierIAPage() {
         <div className="mx-auto max-w-6xl px-4 py-12 space-y-6">
 
           <span className="inline-flex items-center gap-2 rounded-full border border-emerald-400/40 bg-emerald-500/10 px-4 py-1 text-xs font-semibold text-emerald-200">
-            🧪 Atelier-IA — cadre pédagogique
+            🧪 atelier-IA — cadre pédagogique
           </span>
 
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight">
-            Atelier-IA
+            atelier-IA
           </h1>
 
           <p className="text-lg font-semibold text-emerald-300">
@@ -25,7 +25,7 @@ export default function AtelierIAPage() {
           </p>
 
           <p className="max-w-3xl text-slate-300 leading-relaxed">
-            L’Atelier-IA est un espace pédagogique encadré où les élèves
+            L’atelier-IA est un espace pédagogique encadré où les élèves
             apprennent à utiliser l’intelligence artificielle de façon
             responsable : comprendre, questionner, vérifier, corriger.
             <br />
@@ -34,10 +34,10 @@ export default function AtelierIAPage() {
 
           <div className="flex flex-wrap gap-3 pt-2">
             <Link
-              href="/atelier-ia/vision"
+              href="/atelier-IA/vision"
               className="rounded-lg bg-emerald-500 px-5 py-2.5 text-sm font-semibold text-slate-950 hover:bg-emerald-400"
             >
-              👀 Découvrir l’Atelier-IA
+              👀 Découvrir l’atelier-IA
             </Link>
 
             <Link
@@ -89,7 +89,7 @@ export default function AtelierIAPage() {
       <section className="border-b border-slate-800 bg-slate-950">
         <div className="mx-auto max-w-6xl px-4 py-8 space-y-4">
           <h2 className="text-xl font-semibold text-slate-100">
-            Pour qui est l’Atelier-IA ?
+            Pour qui est l’atelier-IA ?
           </h2>
 
           <div className="grid gap-4 md:grid-cols-3 text-sm">
@@ -121,13 +121,13 @@ export default function AtelierIAPage() {
       <section className="bg-slate-950">
         <div className="mx-auto max-w-6xl px-4 py-10 text-center space-y-4">
           <p className="text-slate-300">
-            L’Atelier-IA n’est pas un outil magique.
+            L’atelier-IA n’est pas un outil magique.
             <br />
             C’est un <b>espace d’apprentissage</b>.
           </p>
 
           <Link
-            href="/atelier-ia/vision"
+            href="/atelier-IA/vision"
             className="inline-flex items-center gap-2 rounded-lg border border-emerald-500/40 bg-emerald-500/10 px-5 py-2.5 text-sm font-semibold text-emerald-200 hover:bg-emerald-500/20"
           >
             Découvrir la vision pédagogique →

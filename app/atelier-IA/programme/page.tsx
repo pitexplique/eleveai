@@ -101,8 +101,8 @@ export default function AtelierIAProgrammePage() {
       <section className="border-b border-slate-800 bg-gradient-to-b from-slate-900/80 to-slate-950">
         <div className="mx-auto max-w-6xl px-4 py-12 space-y-5">
           <div className="flex items-center justify-between gap-3 flex-wrap">
-            <Link href="/atelier-ia" className="text-xs text-emerald-300 hover:underline">
-              ← Retour à l’Atelier-IA
+            <Link href="/atelier-IA" className="text-xs text-emerald-300 hover:underline">
+              ← Retour à l’atelier-IA
             </Link>
 
             <span className="inline-flex items-center gap-2 rounded-full border border-slate-700 bg-slate-900/60 px-3 py-1 text-xs font-semibold text-slate-200">
@@ -111,7 +111,7 @@ export default function AtelierIAProgrammePage() {
           </div>
 
           <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold">
-            Programme Atelier-IA
+            Programme atelier-IA
           </h1>
 
           <p className="text-lg font-semibold text-emerald-300">
@@ -127,7 +127,7 @@ export default function AtelierIAProgrammePage() {
 
           <div className="flex flex-wrap gap-2 pt-2">
             <Link
-              href="/atelier-ia/vision"
+              href="/atelier-IA/vision"
               className="rounded-lg border border-slate-700 bg-slate-900 px-4 py-2 text-sm font-semibold hover:bg-slate-800"
             >
               👀 Vision pédagogique
@@ -195,10 +195,10 @@ export default function AtelierIAProgrammePage() {
           {/* CTA */}
           <div className="text-center pt-2">
             <Link
-              href="/atelier-ia"
+              href="/atelier-IA"
               className="inline-flex items-center gap-2 rounded-lg border border-emerald-500/40 bg-emerald-500/10 px-5 py-2.5 text-sm font-semibold text-emerald-200 hover:bg-emerald-500/20"
             >
-              Revenir au HUB Atelier-IA →
+              Revenir au HUB atelier-IA →
             </Link>
           </div>
         </div>
