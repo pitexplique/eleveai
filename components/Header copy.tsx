@@ -246,7 +246,6 @@ export default function Header() {
           { href: "/espace-parents", label: "Comprendre & accompagner", icon: <UsersRound className="h-4 w-4" /> },
         ],
       },
-      /*
       {
         key: "etablissements",
         label: "Établissements",
@@ -256,8 +255,7 @@ export default function Header() {
           { href: "/tarifs#offre-etablissement", label: "Offre établissement", icon: <Euro className="h-4 w-4" /> },
           { href: "/contact", label: "Demander un devis", icon: <Mail className="h-4 w-4" /> },
         ],
-      },*/
-      /*
+      },
       {
         key: "plus",
         label: "Plus",
@@ -271,7 +269,7 @@ export default function Header() {
           { href: "/qui-sommes-nous", label: "Qui sommes-nous ?", icon: <UserRound className="h-4 w-4" /> },
           { href: "/partenaires", label: "Partenaires", icon: <Handshake className="h-4 w-4" /> },
         ],
-      },*/
+      },
     ],
     [],
   );
@@ -361,17 +359,7 @@ export default function Header() {
               </div>
             );
           })}
-          {/* ARTCILES visible */}
-          <Link
-            href="/blog"
-            className={`px-3 py-1.5 text-sm rounded-xl border transition ${
-              isActive(pathname, "/tarifs")
-                ? "border-emerald-500/70 bg-emerald-500/10 text-emerald-100"
-                : "border-slate-700 text-slate-200 hover:bg-slate-900 hover:border-slate-500"
-            }`}
-          >
-            Articles
-          </Link>
+
           {/* TARIFS visible */}
           <Link
             href="/tarifs"
@@ -382,17 +370,6 @@ export default function Header() {
             }`}
           >
             Tarifs
-          </Link>
-         {/* Contact */}
-          <Link
-            href="/contact"
-            className={`px-3 py-1.5 text-sm rounded-xl border transition ${
-              isActive(pathname, "/contact")
-                ? "border-emerald-500/70 bg-emerald-500/10 text-emerald-100"
-                : "border-slate-700 text-slate-200 hover:bg-slate-900 hover:border-slate-500"
-            }`}
-          >
-            Contact
           </Link>
         </div>
 
