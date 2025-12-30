@@ -46,18 +46,17 @@ export default function AccueilPage() {
               </p>
 
               {/* Manifeste / règle */}
-              <div className="rounded-2xl border border-slate-800 bg-slate-900/60 p-4">
-                <p className="text-sm sm:text-base text-slate-200 leading-relaxed">
-                  <span className="text-emerald-300 font-semibold">
-                    La règle EleveAI :
-                  </span>{" "}
-                  l’IA propose, l’élève (ou le prof){" "}
-                  <span className="font-semibold">répond, justifie, corrige</span>.
-                </p>
-                <p className="mt-2 text-xs text-slate-400">
-                  Traces + esprit critique + correction personnelle → pas “fait à la place”.
-                </p>
-              </div>
+              {/* Manifeste (phrase signature) */}
+              <p className="text-base sm:text-lg text-slate-200 max-w-2xl leading-relaxed">
+                <span className="text-emerald-300 font-semibold">Notre principe :</span>{" "}
+                Une réponse IA n’est jamais une fin : elle doit être{" "}
+                <span className="font-semibold">jugée</span> et{" "}
+                <span className="font-semibold">améliorée</span>.
+              </p>
+              <p className="text-xs text-slate-400 max-w-2xl">
+                Dans les espaces Profs / Élèves / Parents, tu valides toujours par un avis critique : ✅ ⚠️ ❌ ✍️
+              </p>
+
 
               {/* ✅ CTA hiérarchisés */}
               <div className="flex flex-wrap gap-2 pt-1">

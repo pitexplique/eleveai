@@ -5,32 +5,53 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Parents — EleveAI",
   description:
-    "Comprendre l’IA à l’école et accompagner son enfant avec un cadre clair : progrès, méthode, confiance.",
+    "EleveAI rassure : l’IA est encadrée. Réponse IA + avis critique + amélioration : on apprend, on ne triche pas.",
 };
 
 export default function ParentsPage() {
   return (
     <main className="min-h-screen bg-slate-950 text-slate-50">
       <section className="mx-auto max-w-5xl px-4 py-12">
-        <h1 className="text-3xl font-bold">Parents</h1>
-        <p className="mt-3 text-slate-300">
-          EleveAI est conçu pour rassurer : l’IA est autorisée, mais encadrée.
-          Objectif : une progression réelle grâce à la méthode, la justification et la correction.
+        <p className="text-xs uppercase tracking-wide text-slate-400">Pour les parents</p>
+
+        <h1 className="mt-2 text-3xl font-bold">Parents : une IA encadrée, rassurante et pédagogique</h1>
+
+        <p className="mt-4 text-slate-300">
+          EleveAI est conçu pour éviter le “tout fait”. Dans l’espace Parents aussi, on ne se contente pas
+          d’une réponse IA : on doit donner un avis critique et proposer une amélioration.
         </p>
 
-        <div className="mt-6 grid gap-4 sm:grid-cols-2">
+        <div className="mt-8 grid gap-4 md:grid-cols-3">
           <div className="rounded-2xl border border-slate-800 bg-slate-900/30 p-5">
-            <h2 className="text-lg font-semibold">Un cadre lisible</h2>
+            <h2 className="text-lg font-semibold">1) Vous expliquez la situation</h2>
             <p className="mt-2 text-sm text-slate-300">
-              Des règles simples pour éviter le “tout fait” : traces, reformulation, analyse.
+              Devoir, niveau, difficultés, objectifs : comprendre sans faire à la place.
             </p>
           </div>
+
           <div className="rounded-2xl border border-slate-800 bg-slate-900/30 p-5">
-            <h2 className="text-lg font-semibold">Accompagner sans faire à la place</h2>
+            <h2 className="text-lg font-semibold">2) L’IA propose une aide</h2>
             <p className="mt-2 text-sm text-slate-300">
-              L’outil aide l’élève à comprendre, s’exercer et se corriger — sans remplacer l’effort.
+              Méthode, questions guidées, conseils de révision, plan d’accompagnement.
             </p>
           </div>
+
+          <div className="rounded-2xl border border-slate-800 bg-slate-900/30 p-5">
+            <h2 className="text-lg font-semibold">3) Vous donnez votre avis</h2>
+            <p className="mt-2 text-sm text-slate-300">
+              Vous jugez : ce qui est adapté / trop complexe / à reformuler + vos ajustements.
+            </p>
+          </div>
+        </div>
+
+        <div className="mt-8 rounded-2xl border border-slate-800 bg-slate-900/20 p-5">
+          <h3 className="text-base font-semibold">La règle EleveAI (partout)</h3>
+          <p className="mt-2 text-sm text-slate-300">
+            Après une réponse IA, l’utilisateur écrit un avis :
+            <span className="block mt-2">
+              ✅ ce qui est correct • ⚠️ ce qui est discutable • ❌ ce qui est faux • ✍️ ce que je garde / change
+            </span>
+          </p>
         </div>
 
         <div className="mt-8 flex flex-wrap gap-3">
@@ -38,7 +59,7 @@ export default function ParentsPage() {
             href="/espace-parents"
             className="inline-flex items-center rounded-xl border border-emerald-500/40 bg-emerald-500/10 px-4 py-2 text-sm text-emerald-200 hover:bg-emerald-500/15"
           >
-            Accéder au générateur Parents
+            Accéder à l’espace Parents (générateur)
           </Link>
           <Link
             href="/faq"
