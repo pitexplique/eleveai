@@ -25,10 +25,10 @@ import {
 } from "lucide-react";
 
 /**
- * OBJECTIF SEO (Sitelinks Google)
- * - Navigation stable + libellés "propres" (Espace élèves / professeurs / parents...)
- * - Liens internes HTML (pas de boutons JS) vers routes clés
- * - Routage clair: /accueil, /espace-eleves, /espace-profs, /espace-parents, /atelier-IA, /tarifs, /contact, /blog
+ * Header EleveAI (SEO + produit)
+ * - Pages SEO : /profs /eleves /parents
+ * - Outils : /espace-profs /espace-eleves /espace-parents (générateurs)
+ * - Header affiche clairement : Profs / Élèves / Parents / Générateurs / Atelier-IA
  */
 
 const AUTH_ROUTES = {
@@ -44,7 +44,7 @@ type NavItem = {
   badge?: string;
 };
 
-type GroupKey = "atelier" | "espaces";
+type GroupKey = "generateurs" | "atelier";
 
 type Group = {
   key: GroupKey;
@@ -112,9 +112,9 @@ export default function Header() {
 
   // Refs (desktop dropdown containers)
   const refAtelier = useRef<HTMLDivElement>(null);
-  const refEspaces = useRef<HTMLDivElement>(null);
+  const refGenerateurs = useRef<HTMLDivElement>(null);
 
-  // Ref (global header, pour fermer le menu mobile si clic dehors)
+  // Ref (global header)
   const headerRef = useRef<HTMLElement>(null);
 
   const closeAll = useCallback(() => {
@@ -123,7 +123,7 @@ export default function Header() {
     setMobileOpen(null);
   }, []);
 
-  const refsDesktop = useMemo(() => [refAtelier, refEspaces], []);
+  const refsDesktop = useMemo(() => [refAtelier, refGenerateurs], []);
   useOnClickOutside(refsDesktop, () => setOpen(null), open !== null);
   useOnClickOutside([headerRef], closeAll, menuOpen);
 
@@ -174,49 +174,46 @@ export default function Header() {
     router.replace("/accueil");
   }, [router, supabase]);
 
-  function getRefForKey(key: GroupKey) {
-    if (key === "atelier") return refAtelier;
-    return refEspaces;
-  }
-
-  // ✅ NAV "SEO-CLAIRES"
   const GROUPS: Group[] = useMemo(
     () => [
       {
-        key: "espaces",
-        label: "Espaces",
-        icon: <Users className="h-4 w-4" />,
+        key: "generateurs",
+        label: "Générateurs",
+        icon: <Wand2 className="h-4 w-4" />,
         items: [
           {
-            href: "/espace-eleves",
-            label: "Espace élèves",
-            desc: "S’entraîner avec une IA encadrée",
-            icon: <GraduationCap className="h-4 w-4" />,
+            href: "/espace-profs",
+            label: "Générateur Profs",
+            desc: "Créer des consignes IA (prompts) encadrées",
+            icon: <Users className="h-4 w-4" />,
+            badge: "10 gratuits",
           },
           {
-            href: "/espace-profs",
-            label: "Espace professeurs",
-            desc: "Générer des consignes IA (prompts) + ressources",
-            icon: <Users className="h-4 w-4" />,
+            href: "/espace-eleves",
+            label: "Générateur Élèves",
+            desc: "S’entraîner, justifier, corriger (anti-triche)",
+            icon: <GraduationCap className="h-4 w-4" />,
+            badge: "10 gratuits",
           },
           {
             href: "/espace-parents",
-            label: "Espace parents",
-            desc: "Comprendre & accompagner",
+            label: "Générateur Parents",
+            desc: "Comprendre et accompagner",
             icon: <UsersRound className="h-4 w-4" />,
+            badge: "10 gratuits",
           },
         ],
       },
       {
         key: "atelier",
-        label: "atelier-IA",
-        icon: <Wand2 className="h-4 w-4" />,
+        label: "Atelier-IA",
+        icon: <Sparkles className="h-4 w-4" />,
         items: [
           {
             href: "/atelier-IA",
             label: "Présentation",
             desc: "Cadre, objectifs et bénéfices",
-            icon: <Wand2 className="h-4 w-4" />,
+            icon: <Sparkles className="h-4 w-4" />,
           },
           {
             href: "/atelier-IA/vision",
@@ -235,6 +232,10 @@ export default function Header() {
     ],
     [],
   );
+
+  function getRefForKey(key: GroupKey) {
+    return key === "generateurs" ? refGenerateurs : refAtelier;
+  }
 
   const desktopBtnClass = (active: boolean) =>
     `px-3 py-1.5 text-sm rounded-xl border flex items-center gap-2 transition ${
@@ -263,7 +264,7 @@ export default function Header() {
       className="sticky top-0 z-40 border-b border-slate-800 bg-slate-950/90 backdrop-blur"
     >
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:py-4">
-        {/* LOGO (lien HTML vers /accueil pour SEO) */}
+        {/* LOGO */}
         <Link href="/accueil" onClick={closeAll} className="flex items-center gap-2">
           <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-emerald-500 text-slate-900">
             <Sparkles className="h-5 w-5" />
@@ -279,7 +280,6 @@ export default function Header() {
 
         {/* DESKTOP MENU */}
         <div className="hidden lg:flex items-center gap-2">
-          {/* Accueil visible (Google aime les liens de 1er niveau) */}
           <Link href="/accueil" className={topLinkClass(isActive(pathname, "/accueil"))}>
             <span className="inline-flex items-center gap-2">
               <Home className="h-4 w-4" />
@@ -287,6 +287,29 @@ export default function Header() {
             </span>
           </Link>
 
+          {/* Pages SEO claires */}
+          <Link href="/profs" className={topLinkClass(isActive(pathname, "/profs"))}>
+            <span className="inline-flex items-center gap-2">
+              <Users className="h-4 w-4" />
+              Profs
+            </span>
+          </Link>
+
+          <Link href="/eleves" className={topLinkClass(isActive(pathname, "/eleves"))}>
+            <span className="inline-flex items-center gap-2">
+              <GraduationCap className="h-4 w-4" />
+              Élèves
+            </span>
+          </Link>
+
+          <Link href="/parents" className={topLinkClass(isActive(pathname, "/parents"))}>
+            <span className="inline-flex items-center gap-2">
+              <UsersRound className="h-4 w-4" />
+              Parents
+            </span>
+          </Link>
+
+          {/* Dropdowns: Générateurs + Atelier-IA */}
           {GROUPS.map((group) => {
             const ref = getRefForKey(group.key);
             const opened = open === group.key;
@@ -345,7 +368,6 @@ export default function Header() {
             );
           })}
 
-          {/* Liens 1er niveau (sitelinks friendly) */}
           <Link href="/blog" className={topLinkClass(isActive(pathname, "/blog"))}>
             <span className="inline-flex items-center gap-2">
               <BookOpenText className="h-4 w-4" />
@@ -431,7 +453,6 @@ export default function Header() {
       {menuOpen && (
         <div className="border-t border-slate-800 bg-slate-950 lg:hidden">
           <div className="mx-auto max-w-6xl px-4 py-3 space-y-2">
-            {/* Accueil mobile visible */}
             <Link
               href="/accueil"
               onClick={closeAll}
@@ -448,7 +469,35 @@ export default function Header() {
               <span className="text-xs text-slate-400">→</span>
             </Link>
 
-            {/* Mobile auth */}
+            {/* Pages SEO */}
+            <div className="grid grid-cols-3 gap-2">
+              <Link
+                href="/profs"
+                onClick={closeAll}
+                className="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-800 px-3 py-2 text-sm text-slate-200 hover:bg-slate-900"
+              >
+                <Users className="h-4 w-4" />
+                Profs
+              </Link>
+              <Link
+                href="/eleves"
+                onClick={closeAll}
+                className="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-800 px-3 py-2 text-sm text-slate-200 hover:bg-slate-900"
+              >
+                <GraduationCap className="h-4 w-4" />
+                Élèves
+              </Link>
+              <Link
+                href="/parents"
+                onClick={closeAll}
+                className="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-800 px-3 py-2 text-sm text-slate-200 hover:bg-slate-900"
+              >
+                <UsersRound className="h-4 w-4" />
+                Parents
+              </Link>
+            </div>
+
+            {/* Auth mobile */}
             {!authLoading && !isLoggedIn && (
               <div className="grid grid-cols-2 gap-2">
                 <Link
@@ -494,7 +543,7 @@ export default function Header() {
               </div>
             )}
 
-            {/* Groups accordéon */}
+            {/* Accordéons: Générateurs + Atelier-IA */}
             {GROUPS.map((group) => {
               const opened = mobileOpen === group.key;
               const anyActive = group.items.some((it) => isActive(pathname, it.href));
@@ -545,7 +594,7 @@ export default function Header() {
                               ) : null}
                             </span>
                             {link.badge && (
-                              <span className="inline-flex items-center rounded-full bg-emerald-600/20 text-emerald-300 text-[10px] font-semibold px-2 py-0.5 uppercase">
+                              <span className="inline-flex items-center rounded-full bg-emerald-600/20 text-emerald-300 text-[10px] font-semibold px-2 py-0.5 uppercase tracking-wide">
                                 {link.badge}
                               </span>
                             )}
@@ -558,7 +607,7 @@ export default function Header() {
               );
             })}
 
-            {/* Liens 1er niveau mobile (sitelinks friendly) */}
+            {/* Liens 1er niveau mobile */}
             <Link
               href="/blog"
               onClick={closeAll}
@@ -610,10 +659,7 @@ export default function Header() {
         </div>
       )}
 
-      {/* ✅ MINI "Accès rapide" caché visuellement mais utile aux crawlers
-          - Google lit ces liens HTML et comprend mieux la structure
-          - Ne gêne pas l'UX
-      */}
+      {/* ✅ MINI "Accès rapide" caché (crawler-friendly) */}
       <div className="sr-only" aria-hidden="false">
         <nav aria-label="Accès rapide">
           <ul>
@@ -621,16 +667,25 @@ export default function Header() {
               <Link href="/accueil">Accueil</Link>
             </li>
             <li>
-              <Link href="/espace-eleves">Espace élèves</Link>
+              <Link href="/profs">Profs</Link>
             </li>
             <li>
-              <Link href="/espace-profs">Espace professeurs</Link>
+              <Link href="/eleves">Élèves</Link>
             </li>
             <li>
-              <Link href="/espace-parents">Espace parents</Link>
+              <Link href="/parents">Parents</Link>
             </li>
             <li>
-              <Link href="/atelier-IA">atelier-IA</Link>
+              <Link href="/atelier-IA">Atelier-IA</Link>
+            </li>
+            <li>
+              <Link href="/espace-profs">Générateur Profs</Link>
+            </li>
+            <li>
+              <Link href="/espace-eleves">Générateur Élèves</Link>
+            </li>
+            <li>
+              <Link href="/espace-parents">Générateur Parents</Link>
             </li>
             <li>
               <Link href="/tarifs">Tarifs</Link>

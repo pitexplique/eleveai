@@ -7,7 +7,7 @@ const u = (path: string) => `${BASE_URL}${path}`;
 
 // ✅ Mets à jour ces dates quand tu modifies réellement la vitrine
 const LASTMOD_HOME = new Date("2025-12-28");
-const LASTMOD_CORE = new Date("2025-12-28");
+const LASTMOD_CORE = new Date("2025-12-30"); // <- tu as ajouté /profs /eleves /parents + header
 const LASTMOD_LEGAL = new Date("2025-12-28");
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -18,6 +18,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // Home + page pilier
     { url: u("/accueil"), lastModified: LASTMOD_HOME, changeFrequency: "weekly", priority: 1.0 },
     { url: u("/atelier-IA"), lastModified: LASTMOD_CORE, changeFrequency: "weekly", priority: 0.95 },
+
+    // ✅ Pages SEO (publics)
+    { url: u("/profs"), lastModified: LASTMOD_CORE, changeFrequency: "weekly", priority: 0.92 },
+    { url: u("/eleves"), lastModified: LASTMOD_CORE, changeFrequency: "weekly", priority: 0.92 },
+    { url: u("/parents"), lastModified: LASTMOD_CORE, changeFrequency: "weekly", priority: 0.9 },
 
     // Blog hub
     { url: u("/blog"), lastModified: LASTMOD_CORE, changeFrequency: "weekly", priority: 0.85 },
@@ -33,10 +38,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: u("/offre-pilote"), lastModified: LASTMOD_CORE, changeFrequency: "weekly", priority: 0.85 },
     { url: u("/formation"), lastModified: LASTMOD_CORE, changeFrequency: "monthly", priority: 0.65 },
 
-    // Espaces publics (pages vitrines, pas les dashboards privés)
-    { url: u("/espace-profs"), lastModified: LASTMOD_CORE, changeFrequency: "weekly", priority: 0.8 },
-    { url: u("/espace-eleves"), lastModified: LASTMOD_CORE, changeFrequency: "weekly", priority: 0.8 },
-    { url: u("/espace-parents"), lastModified: LASTMOD_CORE, changeFrequency: "weekly", priority: 0.75 },
+    // ✅ Générateurs (outils) : on les garde, mais priorité plus basse que /profs /eleves /parents
+    { url: u("/espace-profs"), lastModified: LASTMOD_CORE, changeFrequency: "weekly", priority: 0.65 },
+    { url: u("/espace-eleves"), lastModified: LASTMOD_CORE, changeFrequency: "weekly", priority: 0.65 },
+    { url: u("/espace-parents"), lastModified: LASTMOD_CORE, changeFrequency: "weekly", priority: 0.6 },
 
     // Établissement / équipes
     { url: u("/espace-administration"), lastModified: LASTMOD_CORE, changeFrequency: "monthly", priority: 0.55 },
@@ -71,7 +76,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const posts = getAllBlogPosts();
 
   const blogRoutes: MetadataRoute.Sitemap = posts.map((post) => {
-    // post.date doit être ISO (YYYY-MM-DD) idéalement
     const lastMod = post.date ? new Date(post.date) : LASTMOD_CORE;
 
     return {
@@ -87,5 +91,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // =========================
   return [...staticRoutes, ...blogRoutes];
 }
+
 
 
