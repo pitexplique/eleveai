@@ -666,11 +666,12 @@ Règles importantes :
                   onChange={(e) => setMatiere(e.target.value)}
                   className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-900 shadow-inner focus:border-emerald-400 focus:outline-none focus:ring-2 focus:ring-emerald-100"
                 >
-                  {MATIERES.map((m) => (
-                    <option key={m.value} value={m.value}>
-                      {m.label}
-                    </option>
-                  ))}
+                {MATIERES.map((m) => (
+                  <option key={`${m.label}-${m.value}`} value={m.value} disabled={!!m.disabled}>
+                    {m.label}
+                  </option>
+                ))}
+
                 </select>
               </div>
 

@@ -11,7 +11,8 @@ import { PROFS_PRESETS, ProfsPresetKey } from "@/data/profsPresets";
 import ToggleChip from "@/components/ToggleChip";
 
 // ✅ constantes partagées
-import { CLASSES, MATIERES } from "@/lib/constants/scolaire";
+import { CLASSES, MATIERES, TACHES_PROF } from "@/lib/constants/scolaire";
+
 
 import {
   Sparkles,
@@ -103,6 +104,8 @@ type PromptProf = {
   objectifPedagogique: string;
   classe: string;
   matiere: string;
+  tacheProf: string; // ✅ nouvelle sélection "tâche prof" (optionnelle)
+
   niveau: Niveau;
 
   // ✅ important : id stable (DB-friendly)
@@ -244,6 +247,52 @@ function blocWordDesign(style: OutputStyle) {
   );
 }
 
+function mapTacheToMainCategory(tache: string): MainCategory {
+  // ÉVALUATION
+  if (
+    [
+      "devoir_dm",
+      "evaluation",
+      "evaluation_formative",
+      "evaluation_diagnostique",
+      "evaluation_differenciee",
+      "grille_evaluation",
+      "quiz_qcm",
+      "rubrique_competences",
+    ].includes(tache)
+  )
+    return "evaluation";
+
+  // CORRECTION & SUIVI
+  if (["corrige_detaille", "consignes_travail"].includes(tache)) return "correction";
+
+  // MÉTHODES / DOCUMENTS / RÉVISION
+  if (
+    [
+      "explication",
+      "fiche_methode",
+      "presentation_support",
+      "affichage_classe",
+      "carte_mentale",
+      "fiche_revision",
+      "memo_eleve",
+      "synthese_cours",
+      "carnet_bord",
+      "journal_apprentissage",
+    ].includes(tache)
+  )
+    return "methodes";
+
+  // sinon : séance / activités / projets
+  return "seance";
+}
+
+function labelFromTache(value: string) {
+  const found = TACHES_PROF.find((t) => t.value === value);
+  return found?.label ?? "";
+}
+
+
 /* ----------------------------------------
    PROMPT
 ---------------------------------------- */
@@ -269,7 +318,21 @@ function construirePrompt(form: PromptProf): string {
     ? "Neurosciences : activer prérequis, petites étapes, alternance explications/questions, récapitulatif, reformulation.\n\n"
     : "";
 
-  const matiereScientifique = ["Mathématiques", "Physique-Chimie", "SVT", "Numérique/NSI"].includes(form.matiere);
+const matiereScientifique = [
+  "maths",
+  "maths-spe-1re",
+  "maths-spe-tle",
+  "maths-complementaires",
+  "maths-expertes",
+  "physique-chimie",
+  "svt",
+  "enseignement-scientifique",
+  "snt",
+  "nsi",
+  "informatique",
+  "sciences-ingenieur",
+].includes(form.matiere);
+
 
   const blocSansLatex =
     matiereScientifique && !form.latex
@@ -590,6 +653,7 @@ export default function ProfsPage() {
       objectifPedagogique: "",
       classe: "",
       matiere: "",
+      tacheProf: "", // ✅ NEW
       niveau: "standard",
       typeId: "seance_cle_en_main",
       contenu: "",
@@ -1344,11 +1408,12 @@ export default function ProfsPage() {
                   className="w-full border rounded-lg px-3 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-sky-300"
                 >
                   <option value="">Choisir…</option>
-                  {MATIERES.map((m) => (
-                    <option key={m.value} value={m.value}>
-                      {m.label}
-                    </option>
-                  ))}
+                    {MATIERES.map((m) => (
+                      <option key={`${m.label}-${m.value}`} value={m.value} disabled={!!m.disabled}>
+                        {m.label}
+                      </option>
+                    ))}
+
                 </select>
               </div>
 
@@ -1365,6 +1430,50 @@ export default function ProfsPage() {
                 </select>
               </div>
             </div>
+{/* ✅ NEW : Tâche prof (optionnel) */}
+<div className="space-y-1">
+  <label className="text-xs font-semibold text-gray-600">
+    Tâche (optionnel) <span className="text-gray-400 font-normal">— style EduPrompt</span>
+  </label>
+
+  <select
+    value={form.tacheProf}
+    onChange={(e) => {
+      const v = e.target.value;
+
+      // 1) on stocke la tâche
+      handleChange("tacheProf", v);
+      showToast(v ? "✅ Tâche choisie" : "↩️ Tâche retirée");
+
+      // 2) on guide sans casser ta philosophie "2 minutes"
+      if (v) {
+        const cat = mapTacheToMainCategory(v);
+        setMainCategory(cat);
+
+        // 3) on alimente la recherche de type automatiquement
+        // (ça évite d'imposer un type : le prof garde la main)
+        const lab = labelFromTache(v);
+        setTypeQuery(lab.replace("—", " ").trim());
+      } else {
+        setTypeQuery("");
+      }
+    }}
+    className="w-full border rounded-lg px-3 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-sky-300"
+  >
+    <option value="">Choisir…</option>
+
+    {TACHES_PROF.map((t) => (
+      <option key={`${t.label}-${t.value}`} value={t.value} disabled={!!t.disabled}>
+        {t.label}
+      </option>
+    ))}
+  </select>
+
+  <p className="text-[11px] text-gray-500">
+    Choisir une tâche pré-sélectionne une catégorie + remplit la recherche pour trouver rapidement le bon “type”.
+  </p>
+</div>
+
 
             {/* Durée + tonalité */}
             <div className="grid sm:grid-cols-2 gap-3">

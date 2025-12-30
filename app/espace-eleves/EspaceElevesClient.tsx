@@ -776,7 +776,7 @@ export default function ElevePage() {
                 >
                   <option value="">Choisir…</option>
                   {MATIERES.map((m) => (
-                    <option key={m.value} value={m.value}>
+                    <option key={`${m.label}-${m.value}`} value={m.value} disabled={!!m.disabled}>
                       {m.label}
                     </option>
                   ))}

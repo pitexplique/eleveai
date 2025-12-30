@@ -17,7 +17,7 @@ const geistMono = Geist_Mono({
 
 // ✅ Ajuste si ta page principale publique est /accueil
 const SITE_URL = "https://eleveai.fr";
-const CANONICAL = "/"; // ou "/accueil" si tu veux que Google considère /accueil comme page principale
+const CANONICAL = "/accueil"; // ou "/accueil" si tu veux que Google considère /accueil comme page principale
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
