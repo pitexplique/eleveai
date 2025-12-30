@@ -22,13 +22,14 @@ import {
   LogOut,
   Euro,
   Home,
+  FlaskConical,
 } from "lucide-react";
 
 /**
  * Header EleveAI (SEO + produit)
  * - Pages SEO : /profs /eleves /parents
- * - Outils : /espace-profs /espace-eleves /espace-parents (générateurs)
- * - Header affiche clairement : Profs / Élèves / Parents / Générateurs / Atelier-IA
+ * - Outils : /espace-profs /espace-eleves /espace-parents /espace-atelier-ia (générateurs)
+ * - Atelier-IA : vitrine /atelier-IA + sous-pages
  */
 
 const AUTH_ROUTES = {
@@ -44,8 +45,7 @@ type NavItem = {
   badge?: string;
 };
 
-type GroupKey = "generateurs" | "atelier";
-
+type GroupKey = "atelier" | "generateurs"; // ✅ ordre logique
 type Group = {
   key: GroupKey;
   label: string;
@@ -174,36 +174,9 @@ export default function Header() {
     router.replace("/accueil");
   }, [router, supabase]);
 
+  // ✅ Atelier-IA AVANT Générateurs + ✅ Générateur Atelier-IA ajouté dans "Générateurs"
   const GROUPS: Group[] = useMemo(
     () => [
-      {
-        key: "generateurs",
-        label: "Générateurs",
-        icon: <Wand2 className="h-4 w-4" />,
-        items: [
-          {
-            href: "/espace-profs",
-            label: "Générateur Profs",
-            desc: "Créer des consignes IA (prompts) encadrées",
-            icon: <Users className="h-4 w-4" />,
-            badge: "10 gratuits",
-          },
-          {
-            href: "/espace-eleves",
-            label: "Générateur Élèves",
-            desc: "S’entraîner, justifier, corriger (anti-triche)",
-            icon: <GraduationCap className="h-4 w-4" />,
-            badge: "10 gratuits",
-          },
-          {
-            href: "/espace-parents",
-            label: "Générateur Parents",
-            desc: "Comprendre et accompagner",
-            icon: <UsersRound className="h-4 w-4" />,
-            badge: "10 gratuits",
-          },
-        ],
-      },
       {
         key: "atelier",
         label: "Atelier-IA",
@@ -226,6 +199,42 @@ export default function Header() {
             label: "Programme",
             desc: "Séances, progressivité, livrables",
             icon: <ClipboardList className="h-4 w-4" />,
+          },
+        ],
+      },
+      {
+        key: "generateurs",
+        label: "Générateurs",
+        icon: <Wand2 className="h-4 w-4" />,
+        items: [
+          // ✅ NEW : Atelier-IA DANS Générateurs
+          {
+            href: "/espace-atelier-IA",
+            label: "Générateur Atelier-IA",
+            desc: "Créer des projets guidés (environnement, action locale, créativité…)",
+            icon: <FlaskConical className="h-4 w-4" />,
+            badge: "Nouveau",
+          },
+          {
+            href: "/espace-profs",
+            label: "Générateur Profs",
+            desc: "Créer des consignes IA (prompts) encadrées",
+            icon: <Users className="h-4 w-4" />,
+            badge: "10 gratuits",
+          },
+          {
+            href: "/espace-eleves",
+            label: "Générateur Élèves",
+            desc: "S’entraîner, justifier, corriger (anti-triche)",
+            icon: <GraduationCap className="h-4 w-4" />,
+            badge: "10 gratuits",
+          },
+          {
+            href: "/espace-parents",
+            label: "Générateur Parents",
+            desc: "Comprendre et accompagner",
+            icon: <UsersRound className="h-4 w-4" />,
+            badge: "10 gratuits",
           },
         ],
       },
@@ -309,7 +318,7 @@ export default function Header() {
             </span>
           </Link>
 
-          {/* Dropdowns: Générateurs + Atelier-IA */}
+          {/* Dropdowns: Atelier-IA + Générateurs (ordre déjà bon via GROUPS) */}
           {GROUPS.map((group) => {
             const ref = getRefForKey(group.key);
             const opened = open === group.key;
@@ -543,7 +552,7 @@ export default function Header() {
               </div>
             )}
 
-            {/* Accordéons: Générateurs + Atelier-IA */}
+            {/* Accordéons: Atelier-IA + Générateurs (ordre déjà bon via GROUPS) */}
             {GROUPS.map((group) => {
               const opened = mobileOpen === group.key;
               const anyActive = group.items.some((it) => isActive(pathname, it.href));
@@ -677,6 +686,9 @@ export default function Header() {
             </li>
             <li>
               <Link href="/atelier-IA">Atelier-IA</Link>
+            </li>
+            <li>
+              <Link href="/espace-atelier-IA">Générateur Atelier-IA</Link>
             </li>
             <li>
               <Link href="/espace-profs">Générateur Profs</Link>
