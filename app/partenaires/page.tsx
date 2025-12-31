@@ -4,7 +4,7 @@ import Link from "next/link";
 import React, { useState } from "react";
 
 export default function PartenairesPage(): JSX.Element {
-  const EMAIL = "Frederic.Lacoste@ac-reunion.fr";
+  const EMAIL = "contact@eleveai.fr";
   const [copied, setCopied] = useState(false);
 
   const handleCopy = async () => {

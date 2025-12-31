@@ -617,7 +617,7 @@ export default function OffrePiloteClient() {
                 pouvez répondre au mail qui vous a transmis ce lien ou écrire à :
               </p>
               <p className="text-sm font-semibold text-emerald-300">
-                Frederic.Lacoste [at] ac-reunion.fr
+                Fcontact [at] eleveai.fr
               </p>
             </div>
           </section>

@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 
-const EMAIL = "Frederic.Lacoste@ac-reunion.fr";
+const EMAIL = "contact@eleveai.fr";
 const WHATSAPP_DISPLAY = "+262 06 92 74 29 58";
 const WHATSAPP_WA_ME = "https://wa.me/262692742958";
 const WHATSAPP_COPY = "+262692742958";

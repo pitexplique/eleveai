@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 
-const EMAIL = "frederic.lacoste@ac-reunion.fr";
+const EMAIL = "contact@eleveai.fr";
 
 export default function ManifesteClient() {
   const [copied, setCopied] = useState(false);

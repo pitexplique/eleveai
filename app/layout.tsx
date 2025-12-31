@@ -100,7 +100,7 @@ export default function RootLayout({
       {
         "@type": "ContactPoint",
         contactType: "support",
-        email: "frederic.lacoste@ac-reunion.fr",
+        email: "contact@eleveai.fr",
         availableLanguage: ["fr"],
       },
     ],
