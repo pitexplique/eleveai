@@ -1,12 +1,13 @@
-// app/espace-eleves/EspaceParentsClient.tsx
-
+// app/espace-parents/EspaceParentsClient.tsx
 "use client";
 
-import { useMemo, useState } from "react";
+import Link from "next/link";
+import { useMemo, useState, useCallback, useEffect } from "react";
 import {
   PresetCarousel,
   PresetCarouselItem,
 } from "@/components/PresetCarousel";
+import { createClient } from "@/lib/supabase/client";
 import { CLASSES, MATIERES } from "@/lib/constants/scolaire";
 
 /* ----------------------------------------
@@ -16,7 +17,7 @@ import { CLASSES, MATIERES } from "@/lib/constants/scolaire";
 type Maitrise = "besoin" | "satisfaisant" | "expert";
 
 type ParentsPresetValues = {
-  classe?: string; // ✅ “classe” (au lieu de niveau)
+  classe?: string;
   matiere?: string;
   objectif?: string;
   maitrise?: Maitrise;
@@ -204,10 +205,6 @@ function FieldLabel({
   );
 }
 
-/* ----------------------------------------
-   TAGS (chips) comme espace-élèves
----------------------------------------- */
-
 function Tag({
   label,
   onClick,
@@ -328,7 +325,37 @@ function CollerDansTags({
    PAGE PARENTS
 ---------------------------------------- */
 
-export default function ParentsPage() {
+export default function EspaceParentsClient() {
+  const supabase = useMemo(() => createClient(), []);
+
+  // ✅ Auth state (pour afficher le bloc connexion)
+  const [authLoading, setAuthLoading] = useState(true);
+  const [userEmail, setUserEmail] = useState<string | null>(null);
+  const isLoggedIn = !!userEmail;
+
+  useEffect(() => {
+    let mounted = true;
+
+    async function init() {
+      const { data } = await supabase.auth.getUser();
+      if (!mounted) return;
+      setUserEmail(data.user?.email ?? null);
+      setAuthLoading(false);
+    }
+
+    init();
+
+    const { data: sub } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUserEmail(session?.user?.email ?? null);
+      setAuthLoading(false);
+    });
+
+    return () => {
+      mounted = false;
+      sub.subscription.unsubscribe();
+    };
+  }, [supabase]);
+
   const [prenom, setPrenom] = useState("");
   const [classe, setClasse] = useState("collège");
   const [matiere, setMatiere] = useState("maths");
@@ -367,7 +394,7 @@ export default function ParentsPage() {
     if (v.hyperactif !== undefined) setHyperactif(v.hyperactif);
   };
 
-  const handleGenerate = () => {
+  const handleGenerate = useCallback(() => {
     const nomEleve = prenom.trim() || "mon enfant";
 
     let maitrisePhrase = "";
@@ -429,9 +456,9 @@ Règles importantes :
 
     setGeneratedPrompt(base + besoinsBloc + suite);
     setCopied(false);
-  };
+  }, [prenom, classe, matiere, objectif, maitrise, hasDys, dysTypes, hyperactif]);
 
-  const handleCopy = async () => {
+  const handleCopy = useCallback(async () => {
     if (!generatedPrompt) return;
     try {
       await navigator.clipboard.writeText(generatedPrompt);
@@ -440,7 +467,7 @@ Règles importantes :
     } catch {
       alert("Copie impossible automatiquement. Sélectionnez le texte à la main.");
     }
-  };
+  }, [generatedPrompt]);
 
   return (
     <main className="min-h-screen bg-gradient-to-b from-sky-50 via-white to-emerald-50">
@@ -617,17 +644,46 @@ Règles importantes :
               👨‍👩‍👧‍👦 Espace parents · Accompagnement scolaire encadré
             </p>
 
-            <h1 className="text-3xl sm:text-4xl font-extrabold text-[#0047B6]">
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0047B6]">
               Aider votre enfant à apprendre avec l’IA (sans tricher)
-            </h1>
+            </h2>
 
             <p className="text-sm sm:text-base text-slate-700 max-w-2xl">
-              Indiquez la situation de votre enfant (niveau, difficulté, objectif).
-              EleveAI génère un <b>prompt clair et encadré</b> pour l’aider à comprendre,
-              réviser ou s’entraîner, dans le respect du cadre scolaire.
+              Indiquez la situation de votre enfant (niveau, difficulté,
+              objectif). EleveAI génère un <b>prompt clair et encadré</b> pour
+              l’aider à comprendre, réviser ou s’entraîner, dans le respect du
+              cadre scolaire.
             </p>
-          </header>
 
+            {/* ✅ Remplace SignupNudge (pb de props) par un bloc inline robuste */}
+            {!authLoading && !isLoggedIn && (
+              <div className="pt-3">
+                <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
+                  <p className="text-sm font-semibold text-slate-900">
+                    Sauvegarder vos presets parents
+                  </p>
+                  <p className="mt-1 text-xs text-slate-600">
+                    Connectez-vous pour sauvegarder vos réglages, les retrouver plus tard et accéder à votre historique.
+                  </p>
+
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    <Link
+                      href="/auth/signin"
+                      className="inline-flex items-center gap-2 rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm font-semibold text-slate-800 hover:bg-slate-100"
+                    >
+                      Connexion
+                    </Link>
+                    <Link
+                      href="/auth/signup"
+                      className="inline-flex items-center gap-2 rounded-xl border border-emerald-500/40 bg-emerald-500/10 px-3 py-2 text-sm font-semibold text-emerald-800 hover:bg-emerald-500/15"
+                    >
+                      Inscription
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            )}
+          </header>
 
           <div className="space-y-5">
             <div className="grid gap-4 sm:grid-cols-2">
@@ -666,12 +722,15 @@ Règles importantes :
                   onChange={(e) => setMatiere(e.target.value)}
                   className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-900 shadow-inner focus:border-emerald-400 focus:outline-none focus:ring-2 focus:ring-emerald-100"
                 >
-                {MATIERES.map((m) => (
-                  <option key={`${m.label}-${m.value}`} value={m.value} disabled={!!m.disabled}>
-                    {m.label}
-                  </option>
-                ))}
-
+                  {MATIERES.map((m) => (
+                    <option
+                      key={`${m.label}-${m.value}`}
+                      value={m.value}
+                      disabled={!!m.disabled}
+                    >
+                      {m.label}
+                    </option>
+                  ))}
                 </select>
               </div>
 
@@ -693,6 +752,7 @@ Règles importantes :
 
             <div className="flex flex-wrap items-center gap-3 pt-1">
               <button
+                type="button"
                 onClick={handleGenerate}
                 className="inline-flex items-center justify-center rounded-full bg-emerald-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-emerald-700 active:scale-[0.99]"
               >
@@ -700,6 +760,7 @@ Règles importantes :
               </button>
 
               <button
+                type="button"
                 onClick={handleCopy}
                 disabled={!generatedPrompt}
                 className="inline-flex items-center justify-center rounded-full border border-slate-200 bg-slate-50 px-4 py-2 text-xs font-semibold text-slate-700 shadow-sm transition hover:bg-slate-100 disabled:opacity-50"
@@ -714,7 +775,6 @@ Règles importantes :
                 Prompt généré
               </h3>
 
-              {/* ✅ Tags accès tchat / ChatGPT / Mistral */}
               <CollerDansTags prompt={generatedPrompt} onCopy={handleCopy} />
 
               <textarea

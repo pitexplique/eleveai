@@ -1433,7 +1433,7 @@ export default function ProfsPage() {
 {/* ✅ NEW : Tâche prof (optionnel) */}
 <div className="space-y-1">
   <label className="text-xs font-semibold text-gray-600">
-    Tâche (optionnel) <span className="text-gray-400 font-normal">— style EduPrompt</span>
+    Choisir une Tâche précise (optionnel) 
   </label>
 
   <select
