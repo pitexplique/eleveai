@@ -37,6 +37,11 @@ const AUTH_ROUTES = {
   signup: "/auth/signup",
 };
 
+// ✅ Discord (lien d'invitation) — mets la vraie URL dans .env.local (recommandé)
+// NEXT_PUBLIC_DISCORD_INVITE_URL="https://discord.gg/XXXXX"
+const DISCORD_INVITE_URL =
+  process.env.NEXT_PUBLIC_DISCORD_INVITE_URL || "https://discord.gg/Z6HyN6SV";
+
 type NavItem = {
   href: string;
   label: string;
@@ -318,6 +323,21 @@ export default function Header() {
             </span>
           </Link>
 
+          {/* ✅ Communauté (Discord) */}
+          <a
+            href={DISCORD_INVITE_URL}
+            target="_blank"
+            rel="noreferrer"
+            onClick={closeAll}
+            className={topLinkClass(false)}
+            title="Rejoindre la communauté EleveAI sur Discord"
+          >
+            <span className="inline-flex items-center gap-2">
+              <UsersRound className="h-4 w-4" />
+              Communauté
+            </span>
+          </a>
+
           {/* Dropdowns: Atelier-IA + Générateurs (ordre déjà bon via GROUPS) */}
           {GROUPS.map((group) => {
             const ref = getRefForKey(group.key);
@@ -505,6 +525,22 @@ export default function Header() {
                 Parents
               </Link>
             </div>
+
+            {/* ✅ Communauté (Discord) — mobile */}
+            <a
+              href={DISCORD_INVITE_URL}
+              target="_blank"
+              rel="noreferrer"
+              onClick={closeAll}
+              className="px-3 py-2 text-sm rounded-xl border flex items-center justify-between border-slate-800 bg-slate-950 text-slate-200 hover:bg-slate-900"
+              title="Rejoindre la communauté EleveAI sur Discord"
+            >
+              <span className="flex items-center gap-2">
+                <UsersRound className="h-4 w-4" />
+                Communauté (Discord)
+              </span>
+              <span className="text-xs text-slate-400">↗</span>
+            </a>
 
             {/* Auth mobile */}
             {!authLoading && !isLoggedIn && (
@@ -707,6 +743,10 @@ export default function Header() {
             </li>
             <li>
               <Link href="/blog">Articles</Link>
+            </li>
+            {/* ✅ Communauté (Discord) — SEO/accessibilité */}
+            <li>
+              <a href={DISCORD_INVITE_URL}>Communauté EleveAI (Discord)</a>
             </li>
           </ul>
         </nav>

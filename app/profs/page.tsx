@@ -2,10 +2,11 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 
+
 export const metadata: Metadata = {
-  title: "Profs — EleveAI",
+  title: "Profs (enseignants) — EleveAI",
   description:
-    "EleveAI aide les professeurs à utiliser l’IA de façon responsable : consigne, réponse IA, puis avis critique et amélioration.",
+    "EleveAI aide les professeurs et enseignants à concevoir des consignes, activités et supports pédagogiques avec l’IA, tout en gardant la maîtrise pédagogique grâce à un avis critique.",
 };
 
 export default function ProfsPage() {
@@ -14,11 +15,14 @@ export default function ProfsPage() {
       <section className="mx-auto max-w-5xl px-4 py-12">
         <p className="text-xs uppercase tracking-wide text-slate-400">Pour les enseignants</p>
 
-        <h1 className="mt-2 text-3xl font-bold">Profs : une IA utile, mais jamais “à la place”</h1>
+        <h1 className="mt-2 text-3xl font-bold">Une IA utile, mais jamais “à la place”</h1>
 
         <p className="mt-4 text-slate-300">
-          EleveAI repose sur une règle simple : <span className="text-slate-100 font-semibold">on ne valide jamais une réponse IA sans avis critique</span>.
-          Dans l’espace Profs aussi, vous testez, jugez et améliorez la proposition.
+          EleveAI repose sur une règle simple :{" "}
+          <span className="text-slate-100 font-semibold">
+            on ne valide jamais une réponse IA sans avis critique
+          </span>
+          . Dans l’espace Profs aussi, vous testez, jugez et améliorez la proposition.
         </p>
 
         <div className="mt-8 grid gap-4 md:grid-cols-3">
@@ -47,7 +51,8 @@ export default function ProfsPage() {
         <div className="mt-8 rounded-2xl border border-slate-800 bg-slate-900/20 p-5">
           <h3 className="text-base font-semibold">Le cœur EleveAI (dans tous les espaces)</h3>
           <p className="mt-2 text-sm text-slate-300">
-            À chaque utilisation, l’utilisateur doit écrire un <span className="text-slate-100 font-semibold">avis critique</span> :
+            À chaque utilisation, l’utilisateur doit écrire un{" "}
+            <span className="text-slate-100 font-semibold">avis critique</span> :
             <span className="block mt-2">
               ✅ ce qui est correct • ⚠️ ce qui est discutable • ❌ ce qui est faux • ✍️ ma version améliorée
             </span>
@@ -60,7 +65,10 @@ export default function ProfsPage() {
             className="inline-flex items-center rounded-xl border border-emerald-500/40 bg-emerald-500/10 px-4 py-2 text-sm text-emerald-200 hover:bg-emerald-500/15"
           >
             Accéder à l’espace Profs (générateur)
+            {/* si vrai, tu peux ajouter : */}
+            {/* <span className="ml-2 text-[11px] rounded-full bg-emerald-600/20 px-2 py-0.5">5 gratuits</span> */}
           </Link>
+
           <Link
             href="/atelier-IA"
             className="inline-flex items-center rounded-xl border border-slate-700 px-4 py-2 text-sm text-slate-200 hover:bg-slate-900"
@@ -72,4 +80,3 @@ export default function ProfsPage() {
     </main>
   );
 }
-

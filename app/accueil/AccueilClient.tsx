@@ -15,7 +15,7 @@ export default function AccueilPage() {
               🧠 IA autorisée mais encadrée
             </span>
             <span className="inline-flex items-center gap-2 rounded-full border border-slate-700 bg-slate-900/60 px-3 py-1 font-semibold text-slate-200">
-              🏫 Pensé collège/lycée
+              🏫 Pensé école - collège - lycée
             </span>
             <span className="text-slate-400">
               EleveAI — IA pédagogique + cadre anti-triche
