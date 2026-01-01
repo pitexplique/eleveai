@@ -112,7 +112,7 @@ export default function ContactClient() {
               rel="noreferrer"
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#0047B6] text-white text-sm font-semibold hover:bg-[#003894] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0047B6]"
             >
-              📅 Réserver un échange (30 min)
+              📅 Réserver un échange avec delphine ou fréderic(30 min)
             </a>
 
             <Link
