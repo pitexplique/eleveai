@@ -1,4 +1,6 @@
+// components/Footer.tsx
 import Link from "next/link";
+
 
 export default function Footer() {
   return (
@@ -47,22 +49,26 @@ export default function Footer() {
               responsable : consignes, étapes, justification, correction — sans “fait à la place”.
             </p>
 
-            {/* Presse */}
-            <div className="pt-1">
+            {/* Presse + Communauté */}
+            <div className="pt-1 flex flex-wrap gap-2">
               <Link
                 href="/presse"
                 className="inline-flex items-center gap-2 rounded-xl border border-slate-800 bg-slate-900/40 px-3 py-2 text-xs font-semibold text-slate-200 hover:bg-slate-900"
               >
                 📰 Presse & kit média →
               </Link>
+              <Link
+                href="/communauté"
+                className="inline-flex items-center gap-2 rounded-xl border border-slate-800 bg-slate-900/40 px-3 py-2 text-xs font-semibold text-slate-200 hover:bg-slate-900"
+              >
+                💬 Communauté →
+              </Link>
             </div>
           </div>
 
           {/* Espaces */}
           <div>
-            <h3 className="text-sm font-semibold text-slate-100 mb-3">
-              Espaces
-            </h3>
+            <h3 className="text-sm font-semibold text-slate-100 mb-3">Espaces</h3>
             <ul className="space-y-1.5 text-sm">
               <li>
                 <Link href="/espace-profs" className="text-slate-300 hover:text-sky-300">
@@ -81,7 +87,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link href="/atelier-IA" className="text-slate-300 hover:text-sky-300">
-                  atelier-IA (cadre & méthode)
+                  Atelier-IA (cadre & méthode)
                 </Link>
               </li>
               <li>
@@ -94,9 +100,7 @@ export default function Footer() {
 
           {/* Établissements */}
           <div>
-            <h3 className="text-sm font-semibold text-slate-100 mb-3">
-              Établissements
-            </h3>
+            <h3 className="text-sm font-semibold text-slate-100 mb-3">Établissements</h3>
             <ul className="space-y-1.5 text-sm">
               <li>
                 <Link href="/offre-pilote" className="text-slate-300 hover:text-sky-300">
@@ -104,7 +108,10 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/tarifs#offre-etablissement" className="text-slate-300 hover:text-sky-300">
+                <Link
+                  href="/tarifs#offre-etablissement"
+                  className="text-slate-300 hover:text-sky-300"
+                >
                   Offre établissement
                 </Link>
               </li>
@@ -122,9 +129,7 @@ export default function Footer() {
 
           {/* À propos / légal */}
           <div>
-            <h3 className="text-sm font-semibold text-slate-100 mb-3">
-              À propos & légal
-            </h3>
+            <h3 className="text-sm font-semibold text-slate-100 mb-3">À propos & légal</h3>
             <ul className="space-y-1.5 text-sm">
               <li>
                 <Link href="/tarifs" className="text-slate-300 hover:text-sky-300">
@@ -132,7 +137,10 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/pourquoi-nos-tarifs-sont-justes" className="text-slate-300 hover:text-sky-300">
+                <Link
+                  href="/pourquoi-nos-tarifs-sont-justes"
+                  className="text-slate-300 hover:text-sky-300"
+                >
                   Pourquoi nos tarifs sont justes
                 </Link>
               </li>
@@ -142,7 +150,10 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/politique-confidentialite" className="text-slate-300 hover:text-sky-300">
+                <Link
+                  href="/politique-confidentialite"
+                  className="text-slate-300 hover:text-sky-300"
+                >
                   Politique de confidentialité
                 </Link>
               </li>
@@ -163,9 +174,9 @@ export default function Footer() {
               </li>
               <li>
                 <Link href="/contact" className="text-slate-300 hover:text-sky-300">
-                 Contact
+                  Contact
                 </Link>
-              </li>              
+              </li>
             </ul>
           </div>
         </div>
@@ -183,11 +194,13 @@ export default function Footer() {
             <Link href="/presse" className="hover:text-slate-200">
               Presse
             </Link>
+            <span className="hidden sm:inline">•</span>
+             <Link href="/communauté" className="hover:text-slate-200">
+              Communauté
+            </Link>
           </div>
         </div>
       </div>
     </footer>
   );
 }
-
-

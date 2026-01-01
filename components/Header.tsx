@@ -324,19 +324,13 @@ export default function Header() {
           </Link>
 
           {/* ✅ Communauté (Discord) */}
-          <a
-            href={DISCORD_INVITE_URL}
-            target="_blank"
-            rel="noreferrer"
-            onClick={closeAll}
-            className={topLinkClass(false)}
-            title="Rejoindre la communauté EleveAI sur Discord"
-          >
+          <Link href="/communaute" className={topLinkClass(isActive(pathname, "/parents"))}>
             <span className="inline-flex items-center gap-2">
               <UsersRound className="h-4 w-4" />
               Communauté
             </span>
-          </a>
+          </Link>
+
 
           {/* Dropdowns: Atelier-IA + Générateurs (ordre déjà bon via GROUPS) */}
           {GROUPS.map((group) => {
@@ -527,20 +521,14 @@ export default function Header() {
             </div>
 
             {/* ✅ Communauté (Discord) — mobile */}
-            <a
-              href={DISCORD_INVITE_URL}
-              target="_blank"
-              rel="noreferrer"
-              onClick={closeAll}
-              className="px-3 py-2 text-sm rounded-xl border flex items-center justify-between border-slate-800 bg-slate-950 text-slate-200 hover:bg-slate-900"
-              title="Rejoindre la communauté EleveAI sur Discord"
-            >
-              <span className="flex items-center gap-2">
+              <Link
+                href="/communaute"
+                onClick={closeAll}
+                className="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-800 px-3 py-2 text-sm text-slate-200 hover:bg-slate-900"
+              >
                 <UsersRound className="h-4 w-4" />
-                Communauté (Discord)
-              </span>
-              <span className="text-xs text-slate-400">↗</span>
-            </a>
+                Communauté
+              </Link>
 
             {/* Auth mobile */}
             {!authLoading && !isLoggedIn && (
