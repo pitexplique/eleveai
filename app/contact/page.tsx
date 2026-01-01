@@ -1,12 +1,13 @@
 // app/contact/page.tsx
-
+import type { Metadata } from "next";
 import ContactClient from "./ContactClient";
-export { metadata } from "./metadata";
+import { metadata as pageMetadata } from "./metadata";
 
-
+export const metadata: Metadata = pageMetadata;
 
 export default function ContactPage() {
   return <ContactClient />;
 }
+
 
 

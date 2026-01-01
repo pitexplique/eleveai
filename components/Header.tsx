@@ -3,7 +3,7 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import {
   ChevronDown,
@@ -21,7 +21,6 @@ import {
   LayoutDashboard,
   LogOut,
   Euro,
-  Home,
   FlaskConical,
 } from "lucide-react";
 
@@ -179,7 +178,7 @@ export default function Header() {
     router.replace("/accueil");
   }, [router, supabase]);
 
-  // ✅ Atelier-IA AVANT Générateurs + ✅ Générateur Atelier-IA ajouté dans "Générateurs"
+  // ✅ Atelier-IA AVANT Prompts + ✅ Générateur Atelier-IA ajouté dans "Prompts"
   const GROUPS: Group[] = useMemo(
     () => [
       {
@@ -209,10 +208,9 @@ export default function Header() {
       },
       {
         key: "generateurs",
-        label: "Générateurs",
+        label: "Prompts", // ✅ renommé (sans refactor)
         icon: <Wand2 className="h-4 w-4" />,
         items: [
-          // ✅ NEW : Atelier-IA DANS Générateurs
           {
             href: "/espace-atelier-IA",
             label: "Générateur Atelier-IA",
@@ -294,13 +292,6 @@ export default function Header() {
 
         {/* DESKTOP MENU */}
         <div className="hidden lg:flex items-center gap-2">
-          <Link href="/accueil" className={topLinkClass(isActive(pathname, "/accueil"))}>
-            <span className="inline-flex items-center gap-2">
-              <Home className="h-4 w-4" />
-              Accueil
-            </span>
-          </Link>
-
           {/* Pages SEO claires */}
           <Link href="/profs" className={topLinkClass(isActive(pathname, "/profs"))}>
             <span className="inline-flex items-center gap-2">
@@ -323,16 +314,15 @@ export default function Header() {
             </span>
           </Link>
 
-          {/* ✅ Communauté (Discord) */}
-          <Link href="/communaute" className={topLinkClass(isActive(pathname, "/parents"))}>
+          {/* ✅ Communauté (page interne) */}
+          <Link href="/communaute" className={topLinkClass(isActive(pathname, "/communaute"))}>
             <span className="inline-flex items-center gap-2">
               <UsersRound className="h-4 w-4" />
               Communauté
             </span>
           </Link>
 
-
-          {/* Dropdowns: Atelier-IA + Générateurs (ordre déjà bon via GROUPS) */}
+          {/* Dropdowns: Atelier-IA + Prompts */}
           {GROUPS.map((group) => {
             const ref = getRefForKey(group.key);
             const opened = open === group.key;
@@ -476,22 +466,6 @@ export default function Header() {
       {menuOpen && (
         <div className="border-t border-slate-800 bg-slate-950 lg:hidden">
           <div className="mx-auto max-w-6xl px-4 py-3 space-y-2">
-            <Link
-              href="/accueil"
-              onClick={closeAll}
-              className={`px-3 py-2 text-sm rounded-xl border flex items-center justify-between ${
-                isActive(pathname, "/accueil")
-                  ? "border-emerald-500/70 bg-emerald-500/10 text-emerald-100"
-                  : "border-slate-800 bg-slate-950 text-slate-200 hover:bg-slate-900"
-              }`}
-            >
-              <span className="flex items-center gap-2">
-                <Home className="h-4 w-4" />
-                Accueil
-              </span>
-              <span className="text-xs text-slate-400">→</span>
-            </Link>
-
             {/* Pages SEO */}
             <div className="grid grid-cols-3 gap-2">
               <Link
@@ -520,15 +494,15 @@ export default function Header() {
               </Link>
             </div>
 
-            {/* ✅ Communauté (Discord) — mobile */}
-              <Link
-                href="/communaute"
-                onClick={closeAll}
-                className="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-800 px-3 py-2 text-sm text-slate-200 hover:bg-slate-900"
-              >
-                <UsersRound className="h-4 w-4" />
-                Communauté
-              </Link>
+            {/* ✅ Communauté (page interne) — mobile */}
+            <Link
+              href="/communaute"
+              onClick={closeAll}
+              className="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-800 px-3 py-2 text-sm text-slate-200 hover:bg-slate-900"
+            >
+              <UsersRound className="h-4 w-4" />
+              Communauté
+            </Link>
 
             {/* Auth mobile */}
             {!authLoading && !isLoggedIn && (
@@ -576,7 +550,7 @@ export default function Header() {
               </div>
             )}
 
-            {/* Accordéons: Atelier-IA + Générateurs (ordre déjà bon via GROUPS) */}
+            {/* Accordéons: Atelier-IA + Prompts */}
             {GROUPS.map((group) => {
               const opened = mobileOpen === group.key;
               const anyActive = group.items.some((it) => isActive(pathname, it.href));
@@ -697,9 +671,6 @@ export default function Header() {
         <nav aria-label="Accès rapide">
           <ul>
             <li>
-              <Link href="/accueil">Accueil</Link>
-            </li>
-            <li>
               <Link href="/profs">Profs</Link>
             </li>
             <li>
@@ -707,6 +678,9 @@ export default function Header() {
             </li>
             <li>
               <Link href="/parents">Parents</Link>
+            </li>
+            <li>
+              <Link href="/communaute">Communauté</Link>
             </li>
             <li>
               <Link href="/atelier-IA">Atelier-IA</Link>
