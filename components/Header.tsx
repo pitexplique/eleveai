@@ -275,7 +275,8 @@ export default function Header() {
       ref={headerRef}
       className="sticky top-0 z-40 border-b border-slate-800 bg-slate-950/90 backdrop-blur"
     >
-      <nav className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:py-4">
+    <nav className="mx-auto flex max-w-7xl items-center justify-between px-2 sm:px-4 lg:px-6 py-3 sm:py-4">
+
         {/* LOGO */}
         <Link href="/accueil" onClick={closeAll} className="flex items-center gap-2">
           <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-emerald-500 text-slate-900">

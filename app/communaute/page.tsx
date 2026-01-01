@@ -132,7 +132,7 @@ export default function CommunautePage() {
               title="Rejoindre la communauté EleveAI sur Discord"
             >
               <MessageSquareText className="h-4 w-4" />
-              Rejoindre sur Discord
+              Rejoindre sur Discord sans discorde
               <ExternalLink className="h-4 w-4 opacity-80" />
             </a>
 

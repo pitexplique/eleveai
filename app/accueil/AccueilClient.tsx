@@ -8,7 +8,8 @@ export default function AccueilPage() {
     <main className="min-h-screen bg-slate-950 text-slate-50">
       {/* HERO PRINCIPAL */}
       <section className="border-b border-slate-800 bg-gradient-to-b from-slate-900/80 to-slate-950">
-        <div className="mx-auto max-w-6xl px-4 py-10 sm:py-14 space-y-10">
+        <div className="mx-auto max-w-7xl px-2 sm:px-4 lg:px-6 py-10 sm:py-14 space-y-10 lg:-translate-x-4">
+
           {/* Badges */}
           <div className="flex flex-wrap items-center gap-3 text-xs">
             <span className="inline-flex items-center gap-2 rounded-full border border-emerald-400/40 bg-emerald-500/10 px-3 py-1 font-semibold text-emerald-200">
