@@ -28,7 +28,7 @@ export default function AccueilPage() {
               <div className="space-y-3">
                 <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight">
                   L’IA pour apprendre.
-                  <span className="block text-emerald-300">Pas pour tricher.</span>
+                  <span className="block text-emerald-300">Pas pour tricher, pour créer !</span>
                 </h1>
                 <p className="text-base sm:text-lg text-slate-200 max-w-2xl leading-relaxed">
                   Ici, l’IA <span className="font-semibold">aide</span>. L’humain{" "}
