@@ -5,9 +5,7 @@ export const metadata: Metadata = {
   title: "Contact — EleveAI",
   description:
     "Contactez EleveAI (parents, enseignants, établissements, partenaires) : questions, retours, signalements, expérimentation ou collaboration.",
-  alternates: {
-    canonical: "/contact",
-  },
+  alternates: { canonical: "/contact" },
   openGraph: {
     title: "Contact — EleveAI",
     description:
@@ -16,9 +14,5 @@ export const metadata: Metadata = {
     siteName: "EleveAI",
     type: "website",
   },
-  robots: {
-    index: true,
-    follow: true,
-  },
+  robots: { index: true, follow: true },
 };
-
