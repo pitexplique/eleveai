@@ -4,8 +4,6 @@ import { Resend } from "resend";
 
 export const runtime = "nodejs";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 function clean(v: unknown, max = 5000) {
   return String(v ?? "").trim().slice(0, max);
 }
@@ -18,6 +16,16 @@ function isEmailLoose(v: string) {
 
 export async function POST(req: Request) {
   try {
+    // ✅ Instancier Resend ici (pas au niveau global)
+    const apiKey = process.env.RESEND_API_KEY;
+    if (!apiKey) {
+      return NextResponse.json(
+        { error: "RESEND_API_KEY manquante côté serveur." },
+        { status: 500 }
+      );
+    }
+    const resend = new Resend(apiKey);
+
     const body = await req.json().catch(() => ({}));
 
     // Honeypot anti-spam
@@ -28,53 +36,45 @@ export async function POST(req: Request) {
     const name = clean(body.name, 120);
     const org = clean(body.org, 200);
     const email = clean(body.email, 200);
-    const message = clean(body.message, 8000);
+    const message = clean(body.message, 5000);
 
     if (!message || message.length < 10) {
-      return NextResponse.json({ error: "Message trop court." }, { status: 400 });
+      return NextResponse.json(
+        { error: "Message trop court (min 10 caractères)." },
+        { status: 400 }
+      );
     }
     if (!isEmailLoose(email)) {
       return NextResponse.json({ error: "Email invalide." }, { status: 400 });
     }
 
     const to = process.env.CONTACT_TO || "contact@eleveai.fr";
-    const from = process.env.CONTACT_FROM || "no-reply@eleveai.fr";
-    const siteUrl = process.env.SITE_URL || "https://eleveai.fr";
+    const from = process.env.CONTACT_FROM || "onboarding@resend.dev";
 
-    const subject = `[EleveAI] Contact — ${role || "Inconnu"}${name ? ` — ${name}` : ""}`;
+    const subject = `[EleveAI] Contact — ${role || "Message"}${name ? ` — ${name}` : ""}`;
 
-    const text = [
-      `Rôle : ${role || "-"}`,
-      name ? `Nom : ${name}` : undefined,
-      org ? `Organisation : ${org}` : undefined,
-      email ? `Email : ${email}` : undefined,
-      "",
-      "Message :",
-      message,
-      "",
-      `Source : ${siteUrl}/contact`,
-    ]
-      .filter(Boolean)
-      .join("\n");
+    const text =
+      `Nouveau message via /contact\n\n` +
+      `Rôle : ${role || "-"}\n` +
+      `Nom : ${name || "-"}\n` +
+      `Organisation : ${org || "-"}\n` +
+      `Email : ${email || "-"}\n\n` +
+      `Message :\n${message}\n`;
 
-    const result = await resend.emails.send({
+    await resend.emails.send({
       from: `EleveAI <${from}>`,
-      to: [to],
+      to,
       subject,
       text,
-      replyTo: email || undefined,
+      ...(email ? { replyTo: email } : {}),
     });
 
-    if ((result as any)?.error) {
-      return NextResponse.json(
-        { error: (result as any).error?.message || "Erreur Resend." },
-        { status: 500 }
-      );
-    }
-
     return NextResponse.json({ ok: true });
-  } catch (e) {
-    console.error(e);
-    return NextResponse.json({ error: "Erreur serveur." }, { status: 500 });
+  } catch (e: any) {
+    console.error("Contact API error:", e);
+    return NextResponse.json(
+      { error: e?.message || "Erreur serveur." },
+      { status: 500 }
+    );
   }
 }
