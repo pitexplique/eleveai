@@ -6,7 +6,7 @@ import { useMemo, useState } from "react";
 
 const EMAIL_RECEIVER = "contact@eleveai.fr";
 
-// WhatsApp
+// WhatsApp (Réunion) — attention : numéro personnel, éviter le “trop visible”
 const WHATSAPP_DISPLAY = "+262 06 92 74 29 58";
 const WHATSAPP_COPY = "+262692742958";
 const WHATSAPP_WA_ME = `https://wa.me/${WHATSAPP_COPY.replace("+", "")}`;
@@ -32,6 +32,7 @@ export default function ContactClient() {
   const [org, setOrg] = useState("");
   const [email, setEmail] = useState(""); // reply-to optionnel
   const [message, setMessage] = useState("");
+  const [hp, setHp] = useState(""); // honeypot anti-spam
 
   // Envoi
   const [sending, setSending] = useState(false);
@@ -79,6 +80,12 @@ export default function ContactClient() {
     setSentOk(null);
     setSentErr(null);
 
+    // honeypot rempli => bot
+    if (hp.trim()) {
+      setSentErr("Envoi bloqué (anti-spam).");
+      return;
+    }
+
     if (!message.trim() || message.trim().length < 10) {
       setSentErr("Écris un message un peu plus détaillé (au moins 10 caractères).");
       return;
@@ -99,7 +106,7 @@ export default function ContactClient() {
           org,
           email,
           message,
-          hp: "", // honeypot anti-spam
+          hp, // honeypot anti-spam
         }),
       });
 
@@ -112,6 +119,7 @@ export default function ContactClient() {
       setOrg("");
       setEmail("");
       setMessage("");
+      setHp("");
     } catch (e: any) {
       setSentErr(e?.message || "Erreur lors de l’envoi.");
     } finally {
@@ -120,49 +128,115 @@ export default function ContactClient() {
   }
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-slate-50 via-white to-sky-50 text-gray-900">
-      <div className="max-w-3xl mx-auto px-4 py-10 space-y-8">
-        <header className="space-y-3">
-          <p className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-100 text-xs font-semibold text-[#0047B6]">
-            <span>📩</span>
-            <span>Contact EleveAI</span>
-          </p>
-
-          <h1 className="text-3xl sm:text-4xl font-extrabold text-[#0047B6]">
-            Nous contacter
-          </h1>
-
-          <p className="text-sm sm:text-base text-gray-700 max-w-xl">
-            Parents, enseignants, établissements, partenaires : cette page sert à poser une
-            question, signaler un problème, proposer une amélioration ou discuter d’une
-            collaboration.
-          </p>
-
-          <div className="flex flex-wrap gap-3 pt-2">
-            <Link
-              href={COMMUNITY_URL}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-100 text-slate-900 text-sm font-semibold hover:bg-slate-200"
-            >
-              💬 Aller sur la communauté
-            </Link>
+    <main className="min-h-screen bg-slate-950 text-slate-50">
+      {/* HERO */}
+      <section className="border-b border-slate-800 bg-gradient-to-b from-slate-900/60 to-slate-950">
+        <div className="mx-auto max-w-6xl px-4 py-10 sm:py-12 space-y-6">
+          <div className="flex flex-wrap items-center gap-2 text-xs">
+            <span className="inline-flex items-center gap-2 rounded-full border border-emerald-500/35 bg-emerald-500/10 px-3 py-1 font-semibold text-emerald-200">
+              📩 Contact EleveAI
+            </span>
+            <span className="inline-flex items-center gap-2 rounded-full border border-slate-800 bg-slate-900/60 px-3 py-1 font-semibold text-slate-200">
+              🧠 IA encadrée
+            </span>
+            <span className="inline-flex items-center gap-2 rounded-full border border-slate-800 bg-slate-900/60 px-3 py-1 font-semibold text-slate-200">
+              🌿 Sobriété numérique
+            </span>
           </div>
 
-          <p className="text-xs text-gray-500">
-            EleveAI accompagne la réflexion et le travail pédagogique. L’IA n’est jamais utilisée
-            “à la place” de l’élève ou de l’enseignant.
-          </p>
-        </header>
+          <div className="grid gap-8 lg:grid-cols-[3fr,2fr] items-start">
+            <div className="space-y-3">
+              <h1 className="text-3xl sm:text-4xl font-extrabold leading-tight">
+                Nous contacter
+                <span className="block text-emerald-300">Une question ? Un bug ? Une idée ?</span>
+              </h1>
 
-        <section className="bg-white/95 border border-sky-200 rounded-2xl shadow-sm p-6 sm:p-8 space-y-5">
-          <h2 className="text-lg sm:text-xl font-bold text-[#0047B6]">Envoyer un message</h2>
+              <p className="text-sm sm:text-base text-slate-300 max-w-2xl leading-relaxed">
+                Parents, enseignants, établissements, partenaires : cette page sert à poser une question,
+                signaler un problème, proposer une amélioration ou discuter d’une collaboration.
+              </p>
+
+              <p className="text-xs text-slate-400 max-w-2xl leading-relaxed">
+                Rappel : EleveAI accompagne la réflexion et le travail pédagogique. L’IA n’est jamais utilisée
+                “à la place” de l’élève ou de l’enseignant.
+              </p>
+
+              <div className="flex flex-wrap gap-2 pt-2">
+                <Link
+                  href={COMMUNITY_URL}
+                  className="inline-flex items-center gap-2 rounded-lg border border-slate-800 bg-slate-900 px-4 py-2 text-sm font-semibold hover:bg-slate-800"
+                >
+                  💬 Aller sur la communauté
+                </Link>
+                <Link
+                  href="/accueil"
+                  className="inline-flex items-center gap-2 rounded-lg border border-slate-800 bg-slate-900 px-4 py-2 text-sm font-semibold hover:bg-slate-800"
+                >
+                  ← Retour à l’accueil
+                </Link>
+              </div>
+            </div>
+
+            {/* 7 secondes : rassurer */}
+            <div className="space-y-3">
+              <div className="rounded-2xl border border-slate-800 bg-slate-900/60 p-4">
+                <p className="text-sm font-semibold text-slate-100">En 7 secondes…</p>
+                <div className="mt-3 space-y-2 text-xs text-slate-300">
+                  <div className="rounded-xl border border-slate-800 bg-slate-950/40 px-3 py-2">
+                    <span className="text-sky-300 font-semibold">👩‍🏫 Prof</span>{" "}
+                    <span className="text-slate-400">→</span>{" "}
+                    <span className="text-slate-200">“On me répond clairement.”</span>
+                  </div>
+                  <div className="rounded-xl border border-slate-800 bg-slate-950/40 px-3 py-2">
+                    <span className="text-rose-300 font-semibold">👨‍👩‍👧 Parent</span>{" "}
+                    <span className="text-slate-400">→</span>{" "}
+                    <span className="text-slate-200">“C’est sérieux et encadré.”</span>
+                  </div>
+                  <div className="rounded-xl border border-slate-800 bg-slate-950/40 px-3 py-2">
+                    <span className="text-emerald-300 font-semibold">🎒 Élève</span>{" "}
+                    <span className="text-slate-400">→</span>{" "}
+                    <span className="text-slate-200">“Ici, pas de triche : on apprend.”</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="rounded-2xl border border-emerald-500/25 bg-emerald-900/10 p-4">
+                <p className="text-sm font-semibold text-emerald-100">🔒 Règle simple</p>
+                <p className="mt-1 text-xs text-emerald-50/90 leading-relaxed">
+                  Pour toute demande liée aux élèves : pas d’échanges directs en privé.
+                  On passe par le cadre (enseignant / parent / établissement).
+                </p>
+              </div>
+
+              <div className="rounded-2xl border border-slate-800 bg-slate-900/40 p-4">
+                <p className="text-sm font-semibold text-slate-100">🌿 Sobriété numérique</p>
+                <p className="mt-1 text-xs text-slate-300 leading-relaxed">
+                  Si tu nous écris : donne le contexte et l’objectif. Un message précis → moins d’allers-retours.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CONTENU */}
+      <div className="mx-auto max-w-6xl px-4 py-10 space-y-8">
+        {/* FORM */}
+        <section className="rounded-2xl border border-slate-800 bg-slate-900/60 p-6 sm:p-8 space-y-5">
+          <div className="flex flex-col gap-1">
+            <h2 className="text-lg sm:text-xl font-bold text-slate-100">Envoyer un message</h2>
+            <p className="text-xs text-slate-400">
+              Astuce : “Contexte → objectif → ce que tu as déjà essayé → ce que tu attends”.
+            </p>
+          </div>
 
           <div className="grid sm:grid-cols-2 gap-4">
             <div className="space-y-2">
-              <label className="text-sm font-semibold text-slate-800">Vous êtes :</label>
+              <label className="text-sm font-semibold text-slate-200">Vous êtes :</label>
               <select
                 value={role}
                 onChange={(e) => setRole(e.target.value as Role)}
-                className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm"
+                className="w-full rounded-xl border border-slate-700 bg-slate-950/40 px-3 py-2 text-sm text-slate-100"
               >
                 <option>Parent</option>
                 <option>Élève</option>
@@ -174,48 +248,51 @@ export default function ContactClient() {
             </div>
 
             <div className="space-y-2">
-              <label className="text-sm font-semibold text-slate-800">Nom (optionnel)</label>
+              <label className="text-sm font-semibold text-slate-200">Nom (optionnel)</label>
               <input
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm"
+                className="w-full rounded-xl border border-slate-700 bg-slate-950/40 px-3 py-2 text-sm text-slate-100 placeholder:text-slate-500"
                 placeholder="Votre nom"
                 autoComplete="name"
               />
             </div>
 
             <div className="space-y-2 sm:col-span-2">
-              <label className="text-sm font-semibold text-slate-800">
+              <label className="text-sm font-semibold text-slate-200">
                 Établissement / organisation (optionnel)
               </label>
               <input
                 value={org}
                 onChange={(e) => setOrg(e.target.value)}
-                className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm"
+                className="w-full rounded-xl border border-slate-700 bg-slate-950/40 px-3 py-2 text-sm text-slate-100 placeholder:text-slate-500"
                 placeholder="Nom de l’établissement / organisation"
               />
             </div>
 
             <div className="space-y-2 sm:col-span-2">
-              <label className="text-sm font-semibold text-slate-800">
+              <label className="text-sm font-semibold text-slate-200">
                 Votre email (optionnel, pour vous répondre)
               </label>
               <input
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm"
+                className="w-full rounded-xl border border-slate-700 bg-slate-950/40 px-3 py-2 text-sm text-slate-100 placeholder:text-slate-500"
                 placeholder="vous@exemple.com"
                 autoComplete="email"
               />
+              <p className="text-[11px] text-slate-500">
+                Si tu laisses vide, on répondra via la communauté si c’est pertinent.
+              </p>
             </div>
 
             <div className="space-y-2 sm:col-span-2">
-              <label className="text-sm font-semibold text-slate-800">Message</label>
+              <label className="text-sm font-semibold text-slate-200">Message</label>
               <textarea
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
                 rows={6}
-                className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm"
+                className="w-full rounded-xl border border-slate-700 bg-slate-950/40 px-3 py-2 text-sm text-slate-100 placeholder:text-slate-500"
                 placeholder="Décrivez votre contexte et votre demande…"
               />
             </div>
@@ -223,7 +300,7 @@ export default function ContactClient() {
             {/* honeypot caché */}
             <div className="hidden">
               <label>Ne pas remplir</label>
-              <input value="" readOnly />
+              <input value={hp} onChange={(e) => setHp(e.target.value)} />
             </div>
           </div>
 
@@ -233,10 +310,10 @@ export default function ContactClient() {
               onClick={submit}
               disabled={sending}
               className={[
-                "inline-flex items-center justify-center rounded-full px-4 py-2 text-sm font-semibold transition",
+                "inline-flex items-center justify-center rounded-lg px-4 py-2 text-sm font-semibold transition",
                 sending
-                  ? "bg-slate-300 text-slate-700"
-                  : "bg-[#0047B6] text-white hover:bg-[#003894]",
+                  ? "bg-slate-700 text-slate-300"
+                  : "bg-emerald-500 text-slate-950 hover:bg-emerald-400",
               ].join(" ")}
             >
               {sending ? "Envoi…" : "📨 Envoyer"}
@@ -246,79 +323,101 @@ export default function ContactClient() {
               href={whatsappPrefilled}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center justify-center rounded-full px-4 py-2 text-sm font-semibold bg-emerald-600 text-white hover:bg-emerald-700"
+              className="inline-flex items-center justify-center rounded-lg px-4 py-2 text-sm font-semibold border border-emerald-500/40 bg-emerald-900/10 text-emerald-100 hover:bg-emerald-900/20"
             >
               💬 Ouvrir WhatsApp
             </a>
 
-            {sentOk && <span className="text-sm font-semibold text-emerald-700">{sentOk}</span>}
-            {sentErr && <span className="text-sm font-semibold text-red-600">{sentErr}</span>}
+            {sentOk && (
+              <span className="text-sm font-semibold text-emerald-300">{sentOk}</span>
+            )}
+            {sentErr && (
+              <span className="text-sm font-semibold text-red-300">{sentErr}</span>
+            )}
           </div>
 
-          <p className="text-xs text-gray-500">
-            Merci de ne pas envoyer d’informations personnelles sensibles.
-            WhatsApp : pas de communication directe avec les élèves.
+          <p className="text-xs text-slate-500">
+            Merci de ne pas envoyer d’informations personnelles sensibles.{" "}
+            <span className="text-slate-400">
+              WhatsApp : réservé aux parents, enseignants, partenaires (pas de communication directe avec les élèves).
+            </span>
           </p>
         </section>
 
-        <section className="bg-white/95 border border-slate-200 rounded-2xl shadow-sm p-6 sm:p-8 space-y-5">
-          <h2 className="text-lg sm:text-xl font-bold text-[#0047B6]">Coordonnées</h2>
+        {/* COORDONNÉES */}
+        <section className="rounded-2xl border border-slate-800 bg-slate-900/60 p-6 sm:p-8 space-y-5">
+          <h2 className="text-lg sm:text-xl font-bold text-slate-100">Coordonnées</h2>
 
           <div className="space-y-2">
-            <p className="text-sm text-gray-700">📩 E-mail :</p>
+            <p className="text-sm text-slate-300">📩 E-mail</p>
             <div className="flex flex-wrap items-center gap-2">
-              <span className="font-semibold text-[#0047B6]">{EMAIL_RECEIVER}</span>
+              <span className="font-semibold text-emerald-200">{EMAIL_RECEIVER}</span>
               <button
                 type="button"
                 onClick={() => copy(EMAIL_RECEIVER, "email")}
                 className={[
-                  "inline-flex items-center justify-center rounded-full px-3 py-1.5 text-xs font-semibold transition",
+                  "inline-flex items-center justify-center rounded-lg px-3 py-1.5 text-xs font-semibold transition",
                   copiedEmail
                     ? "bg-emerald-600 text-white"
-                    : "bg-slate-100 text-slate-800 hover:bg-slate-200",
+                    : "bg-slate-950/50 border border-slate-800 text-slate-200 hover:bg-slate-800",
                 ].join(" ")}
               >
                 {copiedEmail ? "✅ Copié" : "📋 Copier"}
               </button>
             </div>
+            <p className="text-[11px] text-slate-500">
+              Préféré pour les demandes “établissement” (pilote, partenariat, démo).
+            </p>
           </div>
 
-          <div className="space-y-2 pt-3 border-t border-slate-100">
-            <p className="text-sm text-gray-700">📱 WhatsApp (Réunion) :</p>
+          <div className="space-y-2 pt-4 border-t border-slate-800">
+            <p className="text-sm text-slate-300">📱 WhatsApp (Réunion)</p>
+
+            {/* On évite de sur-exposer le numéro en clair :
+                - lien “wa.me” OK
+                - affichage texte minimal */}
             <div className="flex flex-wrap items-center gap-2">
               <a
                 href={WHATSAPP_WA_ME}
-                className="font-semibold text-[#0047B6] underline underline-offset-2"
+                className="font-semibold text-slate-100 underline underline-offset-2"
                 target="_blank"
                 rel="noreferrer"
               >
-                {WHATSAPP_DISPLAY}
+                Ouvrir une conversation WhatsApp
               </a>
+
               <button
                 type="button"
                 onClick={() => copy(WHATSAPP_COPY, "whatsapp")}
                 className={[
-                  "inline-flex items-center justify-center rounded-full px-3 py-1.5 text-xs font-semibold transition",
+                  "inline-flex items-center justify-center rounded-lg px-3 py-1.5 text-xs font-semibold transition",
                   copiedWhatsapp
                     ? "bg-emerald-600 text-white"
-                    : "bg-slate-100 text-slate-800 hover:bg-slate-200",
+                    : "bg-slate-950/50 border border-slate-800 text-slate-200 hover:bg-slate-800",
                 ].join(" ")}
               >
-                {copiedWhatsapp ? "✅ Copié" : "📋 Copier"}
+                {copiedWhatsapp ? "✅ Copié" : "📋 Copier le numéro"}
               </button>
             </div>
 
-            <p className="text-xs text-gray-500 pt-2">
-              Disponible pour les messages écrits (parents, professeurs, partenaires). Pas de communication
-              directe avec les élèves.
+            <p className="text-xs text-slate-500 pt-2">
+              Messages écrits (parents, professeurs, partenaires).{" "}
+              <span className="text-slate-400">Pas de communication directe avec les élèves.</span>
             </p>
+
+            <div className="mt-3 rounded-xl border border-slate-800 bg-slate-950/30 px-4 py-3">
+              <p className="text-xs text-slate-300 leading-relaxed">
+                💡 Si tu es élève : passe par ton professeur / ton parent / la communauté.
+                EleveAI est un cadre, pas un canal privé.
+              </p>
+            </div>
           </div>
         </section>
 
         <div className="pt-2">
           <Link
             href="/accueil"
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-900 text-white text-sm font-semibold hover:bg-slate-800"
+            className="inline-flex items-center gap-2 rounded-lg border border-slate-800 bg-slate-900 px-4 py-2 text-sm font-semibold hover:bg-slate-800"
           >
             ← Retour à l’accueil EleveAI
           </Link>
