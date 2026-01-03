@@ -6,7 +6,7 @@ import Link from "next/link";
 type Plan = {
   name: string;
   price: string;
-  usesMonth: string; // "utilisations / mois"
+  usesMonth: string;
   highlight?: boolean;
   description: string;
   includes?: string[];
@@ -14,29 +14,29 @@ type Plan = {
   checkoutUrl?: string;
   ctaLabel?: string;
   footnote?: string;
-  retention?: string; // ex: "Historique : 1 mois"
+  retention?: string;
+  kind?: "free" | "sub" | "sponsor";
 };
 
 const STRIPE_CHECKOUT_URL = process.env.NEXT_PUBLIC_STRIPE_CHECKOUT_URL;
 
 /**
- * Politique validée (version PRO + vocabulaire clair) :
- * - “Utilisation” = une demande envoyée à l’IA (un prompt + une réponse).
- * - Gratuit : 5 utilisations / mois, historique conservé 1 mois.
- * - Starter (5€) : 100 utilisations / mois, usage libre + historique complet.
- * - Essentiel (9€) : 300 utilisations / mois, usage régulier.
- * - Annuel (79€/an) : 300 utilisations / mois (équivalent Essentiel) + remise.
- * - Avancé (20€) : 1 000 utilisations / mois.
- * - Pro (50€) : 4 000 utilisations / mois.
- * - Établissement : 95–149€/mois, plafond global (plafonné à 149€).
+ * Modèle 3 offres :
+ * - Gratuit : découverte (quota faible)
+ * - Abonnement : 5,95€/mois (offre principale)
+ * - Sponsor : soutien type crowdfunding (même accès que l'abonnement, + reconnaissance)
+ *
+ * NOTE : Pour Stripe, on passe un query param `plan=...` vers ton checkout.
+ * Tu peux ensuite router vers un Price Stripe différent selon le plan.
  */
 const PLANS: Plan[] = [
   {
+    kind: "free",
     name: "Gratuit — Découverte",
     price: "0 €",
     usesMonth: "5 utilisations / mois",
     description:
-      "Cette formule sert uniquement à découvrir EleveAI et sa méthode pédagogique. Suffisant pour tester, pas pour un usage régulier.",
+      "Pour découvrir EleveAI et sa méthode. Suffisant pour tester, pas pour un usage régulier.",
     includes: [
       "✅ Accès aux presets essentiels (élèves + profs)",
       "🛡️ Cadre anti-triche (prompts guidés, usage responsable)",
@@ -44,130 +44,54 @@ const PLANS: Plan[] = [
       "🚫 Quota découverte (pas d’usage intensif)",
     ],
     retention: "Historique : 1 mois",
-    idealFor: [
-      "Élève / parent : comprendre la méthode",
-      "Prof : tester avant abonnement",
-      "Curieux : vérifier l’UX",
-    ],
+    idealFor: ["Curieux", "Élèves / parents : tester", "Profs : essayer l’UX"],
     ctaLabel: "Créer un compte gratuit",
   },
   {
-    name: "Starter",
-    price: "5 € / mois",
-    usesMonth: "100 utilisations / mois",
-    description:
-      "Pour utiliser EleveAI de temps en temps, en toute liberté, avec l’enregistrement de toutes tes utilisations.",
-    includes: [
-      "⭐ Usage libre (dans la limite du quota)",
-      "🧾 Historique complet (toutes tes utilisations sont conservées)",
-      "📌 Presets officiels + favoris",
-      "🛡️ Cadre anti-triche conservé",
-    ],
-    retention: "Historique : complet",
-    idealFor: ["Élève motivé", "Parent curieux", "Auto-formation légère"],
-    checkoutUrl: STRIPE_CHECKOUT_URL,
-    ctaLabel: "Choisir Starter via Stripe",
-  },
-  {
-    name: "Essentiel",
-    price: "9 € / mois",
-    usesMonth: "300 utilisations / mois",
+    kind: "sub",
+    name: "Abonnement EleveAI",
+    price: "5,95 € / mois",
+    usesMonth: "Accès complet (utilisations raisonnables)",
     highlight: true,
     description:
-      "Le bon équilibre pour un usage régulier : entraînement, révisions, devoirs IA-friendly, et traces claires.",
+      "L’offre simple : un seul tarif pour utiliser EleveAI régulièrement, avec historique complet et cadre éducatif.",
     includes: [
-      "✅ Usage régulier (quota confortable)",
-      "🧾 Historique complet + traces",
-      "🧩 Presets officiels + presets personnels",
-      "📬 Support mail prioritaire",
-      "🛡️ Cadre anti-triche conservé",
+      "✅ Accès aux espaces (élèves / profs / parents)",
+      "🧩 Presets officiels + favoris",
+      "🛡️ Cadre anti-triche + traces",
+      "🧾 Historique complet",
+      "📬 Support par email",
     ],
     retention: "Historique : complet",
-    idealFor: ["Professeur", "Parent très impliqué", "Élève autonome / régulier"],
+    idealFor: ["Élèves réguliers", "Parents", "Professeurs", "Soutien scolaire"],
     checkoutUrl: STRIPE_CHECKOUT_URL,
-    ctaLabel: "Choisir Essentiel via Stripe",
-    footnote:
-      "Recommandé si tu utilises EleveAI chaque semaine avec un vrai suivi.",
+    ctaLabel: "S’abonner via Stripe",
+    footnote: "Résiliable à tout moment. Paiement sécurisé via Stripe.",
   },
   {
-    name: "Annuel",
-    price: "79 € / an",
-    usesMonth: "300 utilisations / mois",
+    kind: "sponsor",
+    name: "Sponsor — Encourager le projet",
+    price: "À partir de 9,95 € / mois",
+    usesMonth: "Soutien crowdfunding (au choix)",
     description:
-      "Pour les utilisateurs réguliers : même esprit que l’Essentiel, avec une remise et plus de simplicité.",
+      "Pour celles et ceux qui veulent soutenir EleveAI et accélérer le développement (contenus, sécurité, maintenance).",
     includes: [
-      "✅ 300 utilisations / mois (comme Essentiel)",
-      "💸 Remise vs mensuel",
-      "🧾 Historique complet + traces",
-      "📬 Support prioritaire",
+      "❤️ Soutien direct au projet (crowdfunding)",
+      "🏷️ Badge “Sponsor” sur ton profil (optionnel)",
+      "📬 Accès aux nouveautés en avant-première (newsletter)",
+      "🙏 Ton prénom dans la page “Merci” (optionnel)",
     ],
     retention: "Historique : complet",
-    idealFor: ["Profs", "Parents", "Tuteurs", "Utilisateurs réguliers"],
+    idealFor: ["Parents / profs qui encouragent", "Anciens élèves", "Soutiens du projet"],
+    // ✅ Idée simple : utiliser le même checkout Stripe, et choisir un price “sponsor”
     checkoutUrl: STRIPE_CHECKOUT_URL,
-    ctaLabel: "Choisir Annuel via Stripe",
-  },
-  {
-    name: "Avancé",
-    price: "20 € / mois",
-    usesMonth: "1 000 utilisations / mois",
-    description:
-      "Pour celles et ceux qui utilisent l’IA tous les jours, tout en gardant un cadre éducatif anti-triche.",
-    includes: [
-      "🚀 1 000 utilisations / mois",
-      "🧾 Historique complet + organisation",
-      "📬 Support prioritaire",
-    ],
-    retention: "Historique : complet",
-    idealFor: ["Prof très utilisateur", "Tuteur / coach scolaire", "AED / vie scolaire"],
-    checkoutUrl: STRIPE_CHECKOUT_URL,
-    ctaLabel: "Choisir Avancé via Stripe",
-  },
-  {
-    name: "Pro",
-    price: "50 € / mois",
-    usesMonth: "4 000 utilisations / mois",
-    description:
-      "Pour une petite équipe ou structure qui souhaite centraliser son usage (et garder des traces propres).",
-    includes: [
-      "🏷️ 4 000 utilisations / mois",
-      "👥 Usage équipe / groupe (selon configuration)",
-      "📊 Suivi global (selon périmètre)",
-      "📬 Support prioritaire",
-    ],
-    retention: "Historique : complet",
-    idealFor: [
-      "Petite structure de soutien scolaire",
-      "Association / tiers-lieu éducatif",
-      "Équipe pédagogique réduite",
-    ],
-    checkoutUrl: STRIPE_CHECKOUT_URL,
-    ctaLabel: "Choisir Pro via Stripe",
-  },
-  {
-    name: "Établissement",
-    price: "95–149 € / mois",
-    usesMonth: "Plafond global d’établissement",
-    description:
-      "Pour un collège ou un lycée : profs, vie scolaire, direction et classes pilotes élèves. Tarif ajusté au volume, plafonné à 149 €.",
-    includes: [
-      "🏫 Accès pour la communauté éducative",
-      "📈 Plafonds globaux adaptés",
-      "🚀 Accompagnement au lancement",
-      "📊 Suivi d’usage (selon périmètre)",
-    ],
-    idealFor: [
-      "Collège pilote",
-      "Lycée",
-      "Établissement en expérimentation IA",
-      "Communauté éducative complète",
-    ],
-    checkoutUrl: STRIPE_CHECKOUT_URL,
-    ctaLabel: "Demander une offre établissement",
+    ctaLabel: "Devenir Sponsor via Stripe",
+    footnote: "Le sponsoring n’est pas nécessaire pour utiliser EleveAI : c’est un soutien volontaire.",
   },
 ];
 
 function planQueryValue(name: string) {
-  return name.toLowerCase().replace(/\s+/g, "_").replace(/[’']/g, "");
+  return name.toLowerCase().replace(/\s+/g, "_").replace(/[’']/g, "").replace(/[—–-]/g, "_");
 }
 
 export default function TarifsPage() {
@@ -190,24 +114,18 @@ export default function TarifsPage() {
 
           {/* Titre & pitch */}
           <div className="space-y-4">
-            <h1 className="text-3xl sm:text-4xl font-bold text-slate-50">
-              Tarifs EleveAI
-            </h1>
+            <h1 className="text-3xl sm:text-4xl font-bold text-slate-50">Tarifs EleveAI</h1>
 
             <div className="grid gap-4 lg:grid-cols-[2fr_1fr] lg:items-start">
               <div className="space-y-3">
                 <p className="text-sm sm:text-base text-slate-300 max-w-2xl">
-                  Des tarifs simples : tu choisis selon ton{" "}
-                  <strong>nombre d’utilisations mensuelles</strong>.{" "}
+                  Trois options simples :{" "}
+                  <strong>Découvrir gratuitement</strong>,{" "}
+                  <strong>s’abonner à 5,95 € / mois</strong>, ou{" "}
+                  <strong>devenir Sponsor</strong> pour encourager le projet.{" "}
                   <span className="text-slate-400">
-                    (Une utilisation = une demande envoyée à l’IA : un prompt + une réponse.)
+                    (Une utilisation = un prompt + une réponse.)
                   </span>
-                </p>
-
-                <p className="text-xs sm:text-sm text-slate-400">
-                  ✅ Une offre <strong>Gratuite</strong> existe :{" "}
-                  <strong>5 utilisations / mois</strong> (historique conservé 1 mois).
-                  C’est une formule de <strong>découverte</strong>, pas un usage régulier.
                 </p>
 
                 <div className="flex flex-wrap gap-3 text-xs sm:text-sm text-slate-200">
@@ -221,7 +139,7 @@ export default function TarifsPage() {
                   </span>
                   <span className="inline-flex items-center gap-2 rounded-full border border-slate-700 bg-slate-900/80 px-3 py-1">
                     <span>💳</span>
-                    <span>Paiement Stripe (pas de surprise)</span>
+                    <span>Paiement Stripe</span>
                   </span>
                 </div>
 
@@ -235,14 +153,11 @@ export default function TarifsPage() {
                 </div>
               </div>
 
-              {/* Bloc “devis” */}
+              {/* Bloc contact */}
               <div className="rounded-2xl border border-emerald-600/70 bg-emerald-500/10 p-4 space-y-2 shadow-lg shadow-emerald-500/10">
-                <p className="text-sm font-semibold text-emerald-200">
-                  Besoin d’un devis clair ?
-                </p>
+                <p className="text-sm font-semibold text-emerald-200">Besoin d’un avis ?</p>
                 <p className="text-xs text-slate-200">
-                  Écris-nous ton besoin (profil, volume estimé, établissement). Réponse
-                  rapide avec la formule adaptée.
+                  Usage, établissement, contraintes : écris-nous et on te répond rapidement.
                 </p>
                 <div className="flex flex-wrap gap-2">
                   <Link
@@ -251,15 +166,9 @@ export default function TarifsPage() {
                   >
                     Écrire à l’équipe
                   </Link>
-                  <Link
-                    href="#offre-etablissement"
-                    className="inline-flex items-center justify-center rounded-full border border-emerald-400/80 bg-slate-900/80 px-4 py-2 text-[11px] font-semibold text-emerald-200 hover:border-emerald-300"
-                  >
-                    Voir l’offre établissement
-                  </Link>
                 </div>
                 <p className="text-[11px] text-emerald-300">
-                  Paiement par carte (Stripe). Mandat administratif possible sur demande.
+                  Résiliation à tout moment. Paiement sécurisé via Stripe.
                 </p>
               </div>
             </div>
@@ -271,7 +180,7 @@ export default function TarifsPage() {
               href="#plans"
               className="inline-flex items-center rounded-full border border-slate-800 bg-slate-900/60 px-3 py-1 text-xs text-slate-200 hover:border-slate-700"
             >
-              Voir les formules
+              Voir les offres
             </a>
             <a
               href="#faq"
@@ -287,40 +196,64 @@ export default function TarifsPage() {
       <section id="plans" className="mx-auto max-w-5xl px-4 py-10 sm:py-12">
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {PLANS.map((plan) => {
+            const isFree = plan.kind === "free";
             const canCheckout = Boolean(plan.checkoutUrl && stripeOk);
 
             const ctaText =
               plan.ctaLabel ??
-              (plan.name.startsWith("Gratuit")
-                ? "Créer un compte gratuit"
-                : "Choisir ce plan via Stripe");
+              (isFree ? "Créer un compte gratuit" : "Choisir via Stripe");
 
-            const href =
-              plan.name.startsWith("Gratuit")
-                ? "/auth/signup"
-                : `${plan.checkoutUrl}?plan=${encodeURIComponent(planQueryValue(plan.name))}`;
+            const href = isFree
+              ? "/auth/signup"
+              : `${plan.checkoutUrl}?plan=${encodeURIComponent(planQueryValue(plan.name))}`;
+
+            // Styles : sponsor un peu différent
+            const cardBorder =
+              plan.kind === "sponsor"
+                ? "border-sky-600/60"
+                : plan.highlight
+                ? "border-emerald-500/70"
+                : "border-slate-800";
+
+            const cardShadow =
+              plan.highlight
+                ? "shadow-lg shadow-emerald-500/20"
+                : plan.kind === "sponsor"
+                ? "shadow-lg shadow-sky-500/10"
+                : "";
 
             return (
               <div
                 key={plan.name}
                 className={[
                   "relative rounded-2xl border bg-slate-900/60 p-5 sm:p-6 flex flex-col gap-4",
-                  plan.highlight
-                    ? "border-emerald-500/70 shadow-lg shadow-emerald-500/20"
-                    : "border-slate-800",
+                  cardBorder,
+                  cardShadow,
                 ].join(" ")}
               >
-                {/* Badge recommandé */}
+                {/* Badges */}
                 {plan.highlight && (
                   <div className="absolute -top-3 right-4 rounded-full bg-emerald-500 px-3 py-1 text-[10px] font-semibold uppercase tracking-wide text-slate-950 shadow">
-                    Le + populaire
+                    Recommandé
+                  </div>
+                )}
+                {plan.kind === "sponsor" && !plan.highlight && (
+                  <div className="absolute -top-3 right-4 rounded-full bg-sky-500 px-3 py-1 text-[10px] font-semibold uppercase tracking-wide text-slate-950 shadow">
+                    Soutien
                   </div>
                 )}
 
                 {/* En-tête */}
                 <div className="space-y-1">
                   <h2 className="text-lg font-semibold text-slate-50">{plan.name}</h2>
-                  <p className="text-2xl font-bold text-emerald-300">{plan.price}</p>
+                  <p
+                    className={[
+                      "text-2xl font-bold",
+                      plan.kind === "sponsor" ? "text-sky-300" : "text-emerald-300",
+                    ].join(" ")}
+                  >
+                    {plan.price}
+                  </p>
                   <p className="text-xs text-slate-400">{plan.usesMonth}</p>
                   {plan.retention && (
                     <p className="text-[11px] text-slate-500">{plan.retention}</p>
@@ -353,12 +286,21 @@ export default function TarifsPage() {
                 </div>
 
                 {plan.footnote && (
-                  <p className="text-[11px] text-emerald-200/90">{plan.footnote}</p>
+                  <p
+                    className={[
+                      "text-[11px]",
+                      plan.kind === "sponsor"
+                        ? "text-sky-200/90"
+                        : "text-emerald-200/90",
+                    ].join(" ")}
+                  >
+                    {plan.footnote}
+                  </p>
                 )}
 
                 {/* CTA */}
                 <div className="mt-4 flex flex-col gap-2">
-                  {plan.name.startsWith("Gratuit") ? (
+                  {isFree ? (
                     <Link
                       href={href}
                       className="inline-flex items-center justify-center rounded-full bg-slate-50 px-4 py-2 text-sm font-semibold text-slate-950 hover:bg-white transition"
@@ -373,6 +315,8 @@ export default function TarifsPage() {
                         "inline-flex items-center justify-center rounded-full px-4 py-2 text-sm font-semibold transition",
                         plan.highlight
                           ? "bg-emerald-500 text-slate-950 hover:bg-emerald-400"
+                          : plan.kind === "sponsor"
+                          ? "bg-sky-500 text-slate-950 hover:bg-sky-400"
                           : "bg-slate-800 text-slate-100 hover:bg-slate-700",
                       ].join(" ")}
                     >
@@ -385,9 +329,7 @@ export default function TarifsPage() {
                   )}
 
                   <p className="text-[11px] text-slate-500">
-                    Pas de surfacturation surprise : alerte avant la limite, puis blocage
-                    ou proposition de passer à l’offre supérieure (selon les règles de ton
-                    compte).
+                    Pas de surfacturation surprise : tu gardes le contrôle. L’objectif est une IA utile et rassurante.
                   </p>
                 </div>
               </div>
@@ -406,8 +348,8 @@ export default function TarifsPage() {
                 Pourquoi nos tarifs sont justes
               </h3>
               <p className="text-sm text-slate-200 max-w-2xl">
-                Pas de pub, pas de revente de données. Des plafonds clairs (pas de facture
-                surprise) et un cadre pédagogique anti-triche conçu pour l’école.
+                Pas de pub, pas de revente de données. Un cadre éducatif anti-triche conçu pour l’école,
+                et une expérience claire, sans surprise.
               </p>
             </div>
 
@@ -433,8 +375,7 @@ export default function TarifsPage() {
           <div className="rounded-2xl border border-slate-800 bg-slate-950/60 p-5 space-y-2">
             <h3 className="text-base font-semibold text-slate-100">Clarté & sécurité</h3>
             <p className="text-sm text-slate-300">
-              Conformité RGPD, bonnes pratiques pour les données élèves, et cadre pédagogique
-              “anti-triche”.
+              Conformité RGPD, bonnes pratiques pour les données élèves, et cadre pédagogique “anti-triche”.
             </p>
             <p className="text-xs text-slate-500">
               Objectif : une IA utile et rassurante, sans surprise de facturation.
@@ -442,83 +383,17 @@ export default function TarifsPage() {
           </div>
 
           <div className="rounded-2xl border border-emerald-600/60 bg-emerald-500/10 p-5 space-y-2">
-            <h3 className="text-base font-semibold text-emerald-200">
-              Accompagnement humain
-            </h3>
+            <h3 className="text-base font-semibold text-emerald-200">Accompagnement humain</h3>
             <p className="text-sm text-slate-200">
-              Presets prêts à l’emploi, conseils d’usage, et aide au lancement pour une équipe.
+              Presets prêts à l’emploi, conseils d’usage, et aide si tu veux cadrer un usage “équipe / établissement”.
             </p>
             <Link
               href="/contact"
               className="inline-flex items-center gap-2 text-xs font-semibold text-emerald-200 underline underline-offset-4 hover:text-emerald-100"
             >
-              Me faire recommander une formule →
+              Nous écrire →
             </Link>
           </div>
-        </div>
-
-        {/* OFFRE PILOTE */}
-        <div className="mt-10 rounded-2xl border border-emerald-600/60 bg-slate-950/70 px-4 py-6 sm:px-8 sm:py-8">
-          <div className="flex flex-col items-center text-center gap-4">
-            <h2 className="text-lg sm:text-xl font-semibold text-emerald-300 flex items-center gap-2">
-              <span className="text-xl">⭐</span>
-              <span>Offre Pilote – Collèges & Lycées</span>
-            </h2>
-
-            <p className="text-sm text-slate-200 max-w-2xl">
-              Testez EleveAI dans votre établissement pendant <strong>8 semaines</strong>.
-              Aucun engagement : un échange + un code établissement.
-            </p>
-
-            <ul className="text-sm text-slate-200 space-y-1 text-left max-w-xl">
-              <li>✓ Accès cadré pour la communauté éducative</li>
-              <li>✓ Plafonds d’utilisations élargis</li>
-              <li>✓ Accompagnement au lancement</li>
-              <li>✓ Tableau de bord de suivi (selon périmètre)</li>
-              <li>✓ Rapport final d’usage (si souhaité)</li>
-            </ul>
-
-            <Link
-              href="/offre-pilote"
-              className="mt-4 inline-flex items-center justify-center rounded-full bg-emerald-500 px-6 py-2.5 text-sm font-semibold text-slate-950 hover:bg-emerald-400 transition"
-            >
-              Devenir établissement pilote
-            </Link>
-          </div>
-        </div>
-
-        {/* Offre établissement (ancre) */}
-        <div
-          id="offre-etablissement"
-          className="mt-10 rounded-2xl border border-emerald-700/60 bg-emerald-500/5 p-5 sm:p-6 space-y-3"
-        >
-          <h2 className="text-base sm:text-lg font-semibold text-emerald-200">
-            Offre Établissement : comment fonctionne le tarif 95–149 € ?
-          </h2>
-          <p className="text-sm text-slate-200">
-            Pensée pour un <strong>collège ou un lycée</strong> : professeurs, vie scolaire,
-            direction, et classes pilotes élèves.
-          </p>
-          <ul className="text-sm text-slate-200 space-y-1">
-            <li>• Prix plancher : <strong>95 € / mois</strong>.</li>
-            <li>
-              • Le tarif s’ajuste selon le <strong>nombre de professeurs</strong> et le{" "}
-              <strong>volume global</strong>.
-            </li>
-            <li>
-              • Il est <strong>toujours plafonné</strong> à <strong>149 € / mois</strong>.
-            </li>
-          </ul>
-          <p className="text-xs text-emerald-200">
-            Petit établissement peu utilisateur : proche de 95 €. Gros établissement très
-            utilisateur : proche du plafond — sans jamais le dépasser.
-          </p>
-          <Link
-            href="/contact"
-            className="inline-flex items-center text-xs sm:text-sm text-emerald-300 hover:text-emerald-200 mt-1"
-          >
-            Discuter d’une offre établissement →
-          </Link>
         </div>
 
         {/* FAQ */}
@@ -532,37 +407,25 @@ export default function TarifsPage() {
 
           <div className="space-y-3 text-sm text-slate-300">
             <div className="rounded-xl border border-slate-800 bg-slate-900/40 p-4">
-              <p className="font-semibold text-slate-100">
-                Est-ce que je peux changer de formule ?
-              </p>
-              <p className="mt-1">
-                Oui. Tu peux monter ou descendre d’offre selon ton usage. L’objectif est
-                de rester sur une formule adaptée, sans payer “trop”.
-              </p>
+              <p className="font-semibold text-slate-100">Je peux résilier quand je veux ?</p>
+              <p className="mt-1">Oui, à tout moment.</p>
             </div>
 
             <div className="rounded-xl border border-slate-800 bg-slate-900/40 p-4">
-              <p className="font-semibold text-slate-100">
-                Que se passe-t-il si je dépasse mon quota ?
-              </p>
-              <p className="mt-1">
-                Alerte avant la limite, puis blocage ou proposition de bascule vers l’offre
-                supérieure (selon tes paramètres). Pas de surfacturation surprise.
-              </p>
+              <p className="font-semibold text-slate-100">C’est quoi une “utilisation” ?</p>
+              <p className="mt-1">Un prompt + une réponse IA.</p>
             </div>
 
             <div className="rounded-xl border border-slate-800 bg-slate-900/40 p-4">
-              <p className="font-semibold text-slate-100">
-                Pourquoi une offre Gratuite limitée ?
-              </p>
+              <p className="font-semibold text-slate-100">Le sponsor change quoi ?</p>
               <p className="mt-1">
-                Parce que l’IA a un coût réel. Le gratuit sert à découvrir la méthode ; les
-                offres payantes financent un usage régulier (modèles IA, sécurité, maintenance).
+                Rien d’obligatoire : c’est un soutien volontaire pour encourager le projet.
+                L’accès “utile” est déjà dans l’abonnement standard.
               </p>
             </div>
 
             <div className="mt-4 text-xs text-slate-400">
-              Tu veux comprendre le “pourquoi” derrière les quotas et le modèle ?{" "}
+              Tu veux comprendre le “pourquoi” ?{" "}
               <Link
                 href="/pourquoi-nos-tarifs-sont-justes"
                 className="text-emerald-200 underline underline-offset-4 hover:text-emerald-100"
@@ -573,21 +436,8 @@ export default function TarifsPage() {
             </div>
           </div>
         </div>
-
-        {/* Note technique (si Stripe manque) */}
-        {/*{!stripeOk && (
-          <div className="mt-8 rounded-2xl border border-amber-500/40 bg-amber-500/10 p-4 text-sm text-amber-100">
-            ⚠️ Stripe Checkout non configuré : ajoute{" "}
-            <code className="px-2 py-0.5 rounded bg-slate-900/60 border border-slate-700 text-amber-200">
-              NEXT_PUBLIC_STRIPE_CHECKOUT_URL
-            </code>{" "}
-            dans Vercel / env.
-          </div>
-        )}*/}
       </section>
     </main>
   );
 }
-
-
 
