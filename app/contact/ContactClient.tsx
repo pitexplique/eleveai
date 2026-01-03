@@ -2,7 +2,7 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
 
 const EMAIL_RECEIVER = "contact@eleveai.fr";
 
@@ -22,22 +22,45 @@ type Role =
   | "Partenaire"
   | "Autre";
 
+type Topic =
+  | "Question"
+  | "Bug"
+  | "Idée d’amélioration"
+  | "Demande démo"
+  | "Partenariat"
+  | "Autre";
+
+type Priority = "Normal" | "Important" | "Urgent";
+
 export default function ContactClient() {
   const [copiedEmail, setCopiedEmail] = useState(false);
   const [copiedWhatsapp, setCopiedWhatsapp] = useState(false);
 
   // Formulaire
   const [role, setRole] = useState<Role>("Parent");
+  const [topic, setTopic] = useState<Topic>("Question");
+  const [priority, setPriority] = useState<Priority>("Normal");
+
   const [name, setName] = useState("");
   const [org, setOrg] = useState("");
   const [email, setEmail] = useState(""); // reply-to optionnel
   const [message, setMessage] = useState("");
   const [hp, setHp] = useState(""); // honeypot anti-spam
+  const [source, setSource] = useState<string>("contact"); // page source (auto)
 
   // Envoi
   const [sending, setSending] = useState(false);
   const [sentOk, setSentOk] = useState<string | null>(null);
   const [sentErr, setSentErr] = useState<string | null>(null);
+
+  useEffect(() => {
+    // garde une trace de la page d’origine (utile en admin)
+    try {
+      setSource(window.location.pathname || "contact");
+    } catch {
+      setSource("contact");
+    }
+  }, []);
 
   async function copy(text: string, kind: "email" | "whatsapp") {
     try {
@@ -68,13 +91,15 @@ export default function ContactClient() {
     const txt =
       `Bonjour, je vous contacte via EleveAI.\n` +
       `Rôle : ${role}\n` +
+      `Sujet : ${topic}\n` +
+      `Priorité : ${priority}\n` +
       (name ? `Nom : ${name}\n` : "") +
       (org ? `Établissement/Organisation : ${org}\n` : "") +
       (email ? `Email : ${email}\n` : "") +
       `\nMessage : ${message || "(décris ici ta demande)"}`;
 
     return `${WHATSAPP_WA_ME}?text=${encodeURIComponent(txt)}`;
-  }, [role, name, org, email, message]);
+  }, [role, topic, priority, name, org, email, message]);
 
   async function submit() {
     setSentOk(null);
@@ -102,10 +127,13 @@ export default function ContactClient() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           role,
+          topic,
+          priority,
           name,
           org,
           email,
           message,
+          source,
           hp, // honeypot anti-spam
         }),
       });
@@ -115,11 +143,14 @@ export default function ContactClient() {
 
       setSentOk("Message envoyé ✅ Merci !");
       setRole("Parent");
+      setTopic("Question");
+      setPriority("Normal");
       setName("");
       setOrg("");
       setEmail("");
       setMessage("");
       setHp("");
+      // source on garde
     } catch (e: any) {
       setSentErr(e?.message || "Erreur lors de l’envoi.");
     } finally {
@@ -248,6 +279,38 @@ export default function ContactClient() {
             </div>
 
             <div className="space-y-2">
+              <label className="text-sm font-semibold text-slate-200">Sujet :</label>
+              <select
+                value={topic}
+                onChange={(e) => setTopic(e.target.value as Topic)}
+                className="w-full rounded-xl border border-slate-700 bg-slate-950/40 px-3 py-2 text-sm text-slate-100"
+              >
+                <option>Question</option>
+                <option>Bug</option>
+                <option>Idée d’amélioration</option>
+                <option>Demande démo</option>
+                <option>Partenariat</option>
+                <option>Autre</option>
+              </select>
+            </div>
+
+            <div className="space-y-2">
+              <label className="text-sm font-semibold text-slate-200">Priorité :</label>
+              <select
+                value={priority}
+                onChange={(e) => setPriority(e.target.value as Priority)}
+                className="w-full rounded-xl border border-slate-700 bg-slate-950/40 px-3 py-2 text-sm text-slate-100"
+              >
+                <option>Normal</option>
+                <option>Important</option>
+                <option>Urgent</option>
+              </select>
+              <p className="text-[11px] text-slate-500">
+                “Urgent” = bug bloquant / établissement / démo imminente.
+              </p>
+            </div>
+
+            <div className="space-y-2">
               <label className="text-sm font-semibold text-slate-200">Nom (optionnel)</label>
               <input
                 value={name}
@@ -311,9 +374,7 @@ export default function ContactClient() {
               disabled={sending}
               className={[
                 "inline-flex items-center justify-center rounded-lg px-4 py-2 text-sm font-semibold transition",
-                sending
-                  ? "bg-slate-700 text-slate-300"
-                  : "bg-emerald-500 text-slate-950 hover:bg-emerald-400",
+                sending ? "bg-slate-700 text-slate-300" : "bg-emerald-500 text-slate-950 hover:bg-emerald-400",
               ].join(" ")}
             >
               {sending ? "Envoi…" : "📨 Envoyer"}
@@ -328,12 +389,8 @@ export default function ContactClient() {
               💬 Ouvrir WhatsApp
             </a>
 
-            {sentOk && (
-              <span className="text-sm font-semibold text-emerald-300">{sentOk}</span>
-            )}
-            {sentErr && (
-              <span className="text-sm font-semibold text-red-300">{sentErr}</span>
-            )}
+            {sentOk && <span className="text-sm font-semibold text-emerald-300">{sentOk}</span>}
+            {sentErr && <span className="text-sm font-semibold text-red-300">{sentErr}</span>}
           </div>
 
           <p className="text-xs text-slate-500">
@@ -357,9 +414,7 @@ export default function ContactClient() {
                 onClick={() => copy(EMAIL_RECEIVER, "email")}
                 className={[
                   "inline-flex items-center justify-center rounded-lg px-3 py-1.5 text-xs font-semibold transition",
-                  copiedEmail
-                    ? "bg-emerald-600 text-white"
-                    : "bg-slate-950/50 border border-slate-800 text-slate-200 hover:bg-slate-800",
+                  copiedEmail ? "bg-emerald-600 text-white" : "bg-slate-950/50 border border-slate-800 text-slate-200 hover:bg-slate-800",
                 ].join(" ")}
               >
                 {copiedEmail ? "✅ Copié" : "📋 Copier"}
@@ -373,9 +428,6 @@ export default function ContactClient() {
           <div className="space-y-2 pt-4 border-t border-slate-800">
             <p className="text-sm text-slate-300">📱 WhatsApp (Réunion)</p>
 
-            {/* On évite de sur-exposer le numéro en clair :
-                - lien “wa.me” OK
-                - affichage texte minimal */}
             <div className="flex flex-wrap items-center gap-2">
               <a
                 href={WHATSAPP_WA_ME}
@@ -391,9 +443,7 @@ export default function ContactClient() {
                 onClick={() => copy(WHATSAPP_COPY, "whatsapp")}
                 className={[
                   "inline-flex items-center justify-center rounded-lg px-3 py-1.5 text-xs font-semibold transition",
-                  copiedWhatsapp
-                    ? "bg-emerald-600 text-white"
-                    : "bg-slate-950/50 border border-slate-800 text-slate-200 hover:bg-slate-800",
+                  copiedWhatsapp ? "bg-emerald-600 text-white" : "bg-slate-950/50 border border-slate-800 text-slate-200 hover:bg-slate-800",
                 ].join(" ")}
               >
                 {copiedWhatsapp ? "✅ Copié" : "📋 Copier le numéro"}
@@ -411,6 +461,10 @@ export default function ContactClient() {
                 EleveAI est un cadre, pas un canal privé.
               </p>
             </div>
+
+            <p className="text-[11px] text-slate-600 pt-2">
+              WhatsApp affiché : {WHATSAPP_DISPLAY}
+            </p>
           </div>
         </section>
 

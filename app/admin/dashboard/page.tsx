@@ -1,6 +1,7 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { AdminLogoutButton } from "@/components/AdminLogoutButton";
+import AdminContactMessagesClient from "./AdminContactMessagesClient";
 
 export default async function AdminDashboardPage() {
   const cookieStore = await cookies();
@@ -25,23 +26,10 @@ export default async function AdminDashboardPage() {
           <AdminLogoutButton />
         </header>
 
-        {/* 🧭 Zone métier (placeholder) */}
-        <section className="rounded-2xl border border-slate-800 bg-slate-900/40 p-5">
-          <h2 className="text-lg font-semibold">Vue générale</h2>
-          <div className="text-sm text-slate-300">
-            <p>Du texte d’intro…</p>
-            <ul className="mt-2 list-disc pl-5">
-              <li>indicateurs d’usage (élèves / profs / parents)</li>
-              <li>accès aux tables Supabase</li>
-              <li>logs, historique, IP uniques</li>
-              <li>gestion presets & abonnements</li>
-            </ul>
-          </div>
-        </section>
+        {/* 📩 Messages contact (Supabase) */}
+        <AdminContactMessagesClient />
       </div>
     </main>
   );
 }
-
-
 
