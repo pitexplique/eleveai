@@ -82,16 +82,24 @@ const PLANS: Plan[] = [
       "🙏 Ton prénom dans la page “Merci” (optionnel)",
     ],
     retention: "Historique : complet",
-    idealFor: ["Parents / profs qui encouragent", "Anciens élèves", "Soutiens du projet"],
-    // ✅ Idée simple : utiliser le même checkout Stripe, et choisir un price “sponsor”
+    idealFor: [
+      "Parents / profs qui encouragent",
+      "Anciens élèves",
+      "Soutiens du projet",
+    ],
     checkoutUrl: STRIPE_CHECKOUT_URL,
     ctaLabel: "Devenir Sponsor via Stripe",
-    footnote: "Le sponsoring n’est pas nécessaire pour utiliser EleveAI : c’est un soutien volontaire.",
+    footnote:
+      "Le sponsoring n’est pas nécessaire pour utiliser EleveAI : c’est un soutien volontaire.",
   },
 ];
 
 function planQueryValue(name: string) {
-  return name.toLowerCase().replace(/\s+/g, "_").replace(/[’']/g, "").replace(/[—–-]/g, "_");
+  return name
+    .toLowerCase()
+    .replace(/\s+/g, "_")
+    .replace(/[’']/g, "")
+    .replace(/[—–-]/g, "_");
 }
 
 export default function TarifsPage() {
@@ -114,7 +122,9 @@ export default function TarifsPage() {
 
           {/* Titre & pitch */}
           <div className="space-y-4">
-            <h1 className="text-3xl sm:text-4xl font-bold text-slate-50">Tarifs EleveAI</h1>
+            <h1 className="text-3xl sm:text-4xl font-bold text-slate-50">
+              Tarifs EleveAI
+            </h1>
 
             <div className="grid gap-4 lg:grid-cols-[2fr_1fr] lg:items-start">
               <div className="space-y-3">
@@ -155,7 +165,9 @@ export default function TarifsPage() {
 
               {/* Bloc contact */}
               <div className="rounded-2xl border border-emerald-600/70 bg-emerald-500/10 p-4 space-y-2 shadow-lg shadow-emerald-500/10">
-                <p className="text-sm font-semibold text-emerald-200">Besoin d’un avis ?</p>
+                <p className="text-sm font-semibold text-emerald-200">
+                  Besoin d’un avis ?
+                </p>
                 <p className="text-xs text-slate-200">
                   Usage, établissement, contraintes : écris-nous et on te répond rapidement.
                 </p>
@@ -174,6 +186,54 @@ export default function TarifsPage() {
             </div>
           </div>
 
+          {/* ✅ Nouveau : Orientation par profil (conversion + SEO) */}
+          <div className="grid gap-3 sm:grid-cols-3">
+            <Link
+              href="/faq-professeurs"
+              className="rounded-2xl border border-slate-800 bg-slate-900/60 p-4 hover:bg-slate-900 transition"
+            >
+              <p className="text-xs font-semibold uppercase tracking-wide text-slate-400">
+                Professeurs
+              </p>
+              <p className="mt-1 text-sm font-semibold text-slate-50">
+                Je veux cadrer l’usage en classe
+              </p>
+              <p className="mt-1 text-xs text-slate-300">
+                Voir la FAQ professeurs (cadre, usages, préparation, anti-triche).
+              </p>
+            </Link>
+
+            <Link
+              href="/faq-parents"
+              className="rounded-2xl border border-slate-800 bg-slate-900/60 p-4 hover:bg-slate-900 transition"
+            >
+              <p className="text-xs font-semibold uppercase tracking-wide text-slate-400">
+                Parents
+              </p>
+              <p className="mt-1 text-sm font-semibold text-slate-50">
+                Je veux aider sans faire à la place
+              </p>
+              <p className="mt-1 text-xs text-slate-300">
+                Voir la FAQ parents (méthode, suivi, autonomie, rassurance).
+              </p>
+            </Link>
+
+            <Link
+              href="/faq-administration"
+              className="rounded-2xl border border-slate-800 bg-slate-900/60 p-4 hover:bg-slate-900 transition"
+            >
+              <p className="text-xs font-semibold uppercase tracking-wide text-slate-400">
+                Établissements
+              </p>
+              <p className="mt-1 text-sm font-semibold text-slate-50">
+                Je veux une approche encadrée
+              </p>
+              <p className="mt-1 text-xs text-slate-300">
+                Voir la FAQ établissements (pilote, charte, gouvernance).
+              </p>
+            </Link>
+          </div>
+
           {/* Mini navigation */}
           <div className="flex flex-wrap gap-2 pt-2">
             <a
@@ -188,6 +248,12 @@ export default function TarifsPage() {
             >
               Questions fréquentes
             </a>
+            <Link
+              href="/offre-pilote"
+              className="inline-flex items-center rounded-full border border-sky-700/60 bg-sky-900/20 px-3 py-1 text-xs text-sky-100 hover:bg-sky-900/35"
+            >
+              Offre pilote (établissements)
+            </Link>
           </div>
         </div>
       </section>
@@ -200,14 +266,12 @@ export default function TarifsPage() {
             const canCheckout = Boolean(plan.checkoutUrl && stripeOk);
 
             const ctaText =
-              plan.ctaLabel ??
-              (isFree ? "Créer un compte gratuit" : "Choisir via Stripe");
+              plan.ctaLabel ?? (isFree ? "Créer un compte gratuit" : "Choisir via Stripe");
 
             const href = isFree
               ? "/auth/signup"
               : `${plan.checkoutUrl}?plan=${encodeURIComponent(planQueryValue(plan.name))}`;
 
-            // Styles : sponsor un peu différent
             const cardBorder =
               plan.kind === "sponsor"
                 ? "border-sky-600/60"
@@ -289,9 +353,7 @@ export default function TarifsPage() {
                   <p
                     className={[
                       "text-[11px]",
-                      plan.kind === "sponsor"
-                        ? "text-sky-200/90"
-                        : "text-emerald-200/90",
+                      plan.kind === "sponsor" ? "text-sky-200/90" : "text-emerald-200/90",
                     ].join(" ")}
                   >
                     {plan.footnote}
@@ -424,6 +486,31 @@ export default function TarifsPage() {
               </p>
             </div>
 
+            {/* ✅ Nouveau : liens FAQ par profil */}
+            <div className="rounded-xl border border-slate-800 bg-slate-900/40 p-4">
+              <p className="font-semibold text-slate-100">Je veux la FAQ adaptée à mon profil</p>
+              <div className="mt-2 flex flex-wrap gap-2 text-xs">
+                <Link
+                  href="/faq-professeurs"
+                  className="inline-flex items-center rounded-full border border-slate-700 bg-slate-950/40 px-3 py-1 text-slate-200 hover:bg-slate-900"
+                >
+                  FAQ professeurs →
+                </Link>
+                <Link
+                  href="/faq-parents"
+                  className="inline-flex items-center rounded-full border border-slate-700 bg-slate-950/40 px-3 py-1 text-slate-200 hover:bg-slate-900"
+                >
+                  FAQ parents →
+                </Link>
+                <Link
+                  href="/faq-administration"
+                  className="inline-flex items-center rounded-full border border-slate-700 bg-slate-950/40 px-3 py-1 text-slate-200 hover:bg-slate-900"
+                >
+                  FAQ établissements →
+                </Link>
+              </div>
+            </div>
+
             <div className="mt-4 text-xs text-slate-400">
               Tu veux comprendre le “pourquoi” ?{" "}
               <Link
@@ -440,4 +527,3 @@ export default function TarifsPage() {
     </main>
   );
 }
-

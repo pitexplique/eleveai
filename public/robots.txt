@@ -5,5 +5,14 @@ Disallow: /auth/
 Disallow: /dashboard/
 Disallow: /tchat/
 Disallow: /api/
+Disallow: /admin/
+
+Disallow: /espace-profs/
+Disallow: /espace-eleves/
+Disallow: /espace-parents/
+Disallow: /espace-atelier-ia/
+Disallow: /espace-administration/
+Disallow: /espace-vie-scolaire/
+Disallow: /espace-personnels/
 
 Sitemap: https://eleveai.fr/sitemap.xml
