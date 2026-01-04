@@ -210,27 +210,6 @@ export default function ContactClient() {
 
             {/* 7 secondes : rassurer */}
             <div className="space-y-3">
-              <div className="rounded-2xl border border-slate-800 bg-slate-900/60 p-4">
-                <p className="text-sm font-semibold text-slate-100">En 7 secondes…</p>
-                <div className="mt-3 space-y-2 text-xs text-slate-300">
-                  <div className="rounded-xl border border-slate-800 bg-slate-950/40 px-3 py-2">
-                    <span className="text-sky-300 font-semibold">👩‍🏫 Prof</span>{" "}
-                    <span className="text-slate-400">→</span>{" "}
-                    <span className="text-slate-200">“On me répond clairement.”</span>
-                  </div>
-                  <div className="rounded-xl border border-slate-800 bg-slate-950/40 px-3 py-2">
-                    <span className="text-rose-300 font-semibold">👨‍👩‍👧 Parent</span>{" "}
-                    <span className="text-slate-400">→</span>{" "}
-                    <span className="text-slate-200">“C’est sérieux et encadré.”</span>
-                  </div>
-                  <div className="rounded-xl border border-slate-800 bg-slate-950/40 px-3 py-2">
-                    <span className="text-emerald-300 font-semibold">🎒 Élève</span>{" "}
-                    <span className="text-slate-400">→</span>{" "}
-                    <span className="text-slate-200">“Ici, pas de triche : on apprend.”</span>
-                  </div>
-                </div>
-              </div>
-
               <div className="rounded-2xl border border-emerald-500/25 bg-emerald-900/10 p-4">
                 <p className="text-sm font-semibold text-emerald-100">🔒 Règle simple</p>
                 <p className="mt-1 text-xs text-emerald-50/90 leading-relaxed">

@@ -1,3 +1,4 @@
+// app/admin/AdminClient.tsx
 "use client";
 
 import { useState } from "react";
@@ -9,6 +10,8 @@ export default function AdminClient() {
   const [error, setError] = useState("");
 
   const handleSubmit = async () => {
+    setError("");
+
     const res = await fetch("/api/admin-auth", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -17,6 +20,7 @@ export default function AdminClient() {
 
     if (res.ok) {
       router.push("/admin/dashboard");
+      router.refresh(); // ✅ important : force Next à relire les cookies côté serveur
     } else {
       setError("Mot de passe incorrect");
     }
@@ -44,9 +48,7 @@ export default function AdminClient() {
           Entrer
         </button>
 
-        <p className="text-xs text-slate-400 text-center">
-          Accès réservé – EleveAI
-        </p>
+        <p className="text-xs text-slate-400 text-center">Accès réservé – EleveAI</p>
       </div>
     </main>
   );

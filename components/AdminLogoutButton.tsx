@@ -1,15 +1,24 @@
+// components/AdminLogoutButton.tsx
 "use client";
 
+import { useRouter } from "next/navigation";
+
 export function AdminLogoutButton() {
+  const router = useRouter();
+
+  const logout = async () => {
+    await fetch("/api/admin-logout", { method: "POST" });
+    router.push("/admin");
+    router.refresh();
+  };
+
   return (
     <button
-      onClick={async () => {
-        await fetch("/api/admin-logout", { method: "POST" });
-        window.location.href = "/admin";
-      }}
-      className="rounded-xl border border-slate-700 px-4 py-2 text-sm font-semibold text-slate-300 hover:bg-slate-900"
+      onClick={logout}
+      className="rounded-lg border border-slate-700 bg-slate-950/40 px-3 py-2 text-sm font-semibold text-slate-100 hover:bg-slate-800"
     >
       Déconnexion
     </button>
   );
 }
+

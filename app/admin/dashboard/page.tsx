@@ -1,3 +1,6 @@
+// app/admin/dashboard/page.tsx
+export const dynamic = "force-dynamic";
+
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { AdminLogoutButton } from "@/components/AdminLogoutButton";
@@ -21,15 +24,13 @@ export default async function AdminDashboardPage() {
               Accès direction – supervision EleveAI
             </p>
           </div>
-
-          {/* 🔓 Bouton logout */}
           <AdminLogoutButton />
         </header>
 
-        {/* 📩 Messages contact (Supabase) */}
         <AdminContactMessagesClient />
       </div>
     </main>
   );
 }
+
 
