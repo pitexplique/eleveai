@@ -1,7 +1,6 @@
 // components/Footer.tsx
 import Link from "next/link";
 
-
 export default function Footer() {
   return (
     <footer className="mt-12 border-t border-slate-800 bg-slate-950">
@@ -37,7 +36,9 @@ export default function Footer() {
                 EA
               </div>
               <div className="flex flex-col leading-tight">
-                <span className="text-sm font-semibold text-slate-50">EleveAI</span>
+                <span className="text-sm font-semibold text-slate-50">
+                  EleveAI
+                </span>
                 <span className="text-xs text-slate-400">
                   IA pédagogique encadrée (Profs · Élèves · Parents)
                 </span>
@@ -45,11 +46,11 @@ export default function Footer() {
             </div>
 
             <p className="text-xs text-slate-400 leading-relaxed">
-              EleveAI aide les professeurs, élèves et parents à utiliser l’IA de façon
-              responsable : consignes, étapes, justification, correction — sans “fait à la place”.
+              EleveAI aide les professeurs, élèves et parents à utiliser l’IA de
+              façon responsable : consignes, étapes, justification, correction —
+              sans “fait à la place”.
             </p>
 
-            {/* Presse + Communauté */}
             <div className="pt-1 flex flex-wrap gap-2">
               <Link
                 href="/presse"
@@ -68,31 +69,48 @@ export default function Footer() {
 
           {/* Espaces */}
           <div>
-            <h3 className="text-sm font-semibold text-slate-100 mb-3">Espaces</h3>
+            <h3 className="text-sm font-semibold text-slate-100 mb-3">
+              Espaces
+            </h3>
             <ul className="space-y-1.5 text-sm">
               <li>
-                <Link href="/espace-profs" className="text-slate-300 hover:text-sky-300">
-                  Espace Profs (prompts pédagogiques)
+                <Link
+                  href="/espace-profs"
+                  className="text-slate-300 hover:text-sky-300"
+                >
+                  Espace Profs
                 </Link>
               </li>
               <li>
-                <Link href="/espace-eleves" className="text-slate-300 hover:text-sky-300">
-                  Espace Élèves (s’entraîner)
+                <Link
+                  href="/espace-eleves"
+                  className="text-slate-300 hover:text-sky-300"
+                >
+                  Espace Élèves
                 </Link>
               </li>
               <li>
-                <Link href="/espace-parents" className="text-slate-300 hover:text-sky-300">
-                  Espace Parents (accompagner)
+                <Link
+                  href="/espace-parents"
+                  className="text-slate-300 hover:text-sky-300"
+                >
+                  Espace Parents
                 </Link>
               </li>
               <li>
-                <Link href="/atelier-IA" className="text-slate-300 hover:text-sky-300">
-                  Atelier-IA (cadre & méthode)
+                <Link
+                  href="/atelier-IA"
+                  className="text-slate-300 hover:text-sky-300"
+                >
+                  Atelier-IA
                 </Link>
               </li>
               <li>
-                <Link href="/concours-ia" className="text-slate-300 hover:text-sky-300">
-                  Concours IA (projets)
+                <Link
+                  href="/concours-ia"
+                  className="text-slate-300 hover:text-sky-300"
+                >
+                  Concours IA
                 </Link>
               </li>
             </ul>
@@ -100,11 +118,16 @@ export default function Footer() {
 
           {/* Établissements */}
           <div>
-            <h3 className="text-sm font-semibold text-slate-100 mb-3">Établissements</h3>
+            <h3 className="text-sm font-semibold text-slate-100 mb-3">
+              Établissements
+            </h3>
             <ul className="space-y-1.5 text-sm">
               <li>
-                <Link href="/offre-pilote" className="text-slate-300 hover:text-sky-300">
-                  Offre pilote (8 semaines)
+                <Link
+                  href="/offre-pilote"
+                  className="text-slate-300 hover:text-sky-300"
+                >
+                  Offre pilote
                 </Link>
               </li>
               <li>
@@ -116,21 +139,38 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="text-slate-300 hover:text-sky-300">
+                <Link
+                  href="/contact"
+                  className="text-slate-300 hover:text-sky-300"
+                >
                   Devis & contact
                 </Link>
               </li>
             </ul>
-
-            <div className="mt-3 text-xs text-slate-500">
-              (Les espaces “administratif / vie scolaire / services” sont accessibles après connexion.)
-            </div>
           </div>
 
           {/* À propos / légal */}
           <div>
-            <h3 className="text-sm font-semibold text-slate-100 mb-3">À propos & légal</h3>
+            <h3 className="text-sm font-semibold text-slate-100 mb-3">
+              À propos & légal
+            </h3>
             <ul className="space-y-1.5 text-sm">
+              <li>
+                <Link
+                  href="/qui-sommes-nous"
+                  className="text-slate-300 hover:text-sky-300"
+                >
+                  Qui sommes-nous
+                </Link>
+              </li>
+
+              {/* ✅ FAQ (page d’orientation vers Profs/Parents/Établissements) */}
+              <li>
+                <Link href="/faq" className="text-slate-300 hover:text-sky-300">
+                  FAQ
+                </Link>
+              </li>
+
               <li>
                 <Link href="/tarifs" className="text-slate-300 hover:text-sky-300">
                   Tarifs
@@ -145,7 +185,10 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/mentions-legales" className="text-slate-300 hover:text-sky-300">
+                <Link
+                  href="/mentions-legales"
+                  className="text-slate-300 hover:text-sky-300"
+                >
                   Mentions légales
                 </Link>
               </li>
@@ -163,17 +206,26 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/charte" className="text-slate-300 hover:text-sky-300">
+                <Link
+                  href="/charte"
+                  className="text-slate-300 hover:text-sky-300"
+                >
                   Charte anti-triche
                 </Link>
               </li>
               <li>
-                <Link href="/presse" className="text-slate-300 hover:text-sky-300">
+                <Link
+                  href="/presse"
+                  className="text-slate-300 hover:text-sky-300"
+                >
                   Presse & kit média
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="text-slate-300 hover:text-sky-300">
+                <Link
+                  href="/contact"
+                  className="text-slate-300 hover:text-sky-300"
+                >
                   Contact
                 </Link>
               </li>
@@ -184,18 +236,26 @@ export default function Footer() {
         {/* Bas de page */}
         <div className="mt-8 flex flex-col gap-2 border-t border-slate-800 pt-4 text-xs text-slate-500 sm:flex-row sm:items-center sm:justify-between">
           <p>© {new Date().getFullYear()} EleveAI. Tous droits réservés.</p>
+
           <div className="flex flex-wrap gap-x-3 gap-y-1 text-[11px] text-slate-500">
             <span>Conçu à La Réunion pour les collèges & lycées de France.</span>
             <span className="hidden sm:inline">•</span>
-            <Link href="/pourquoi-nos-tarifs-sont-justes" className="hover:text-slate-200">
+            <Link
+              href="/pourquoi-nos-tarifs-sont-justes"
+              className="hover:text-slate-200"
+            >
               Transparence tarifs
+            </Link>
+            <span className="hidden sm:inline">•</span>
+            <Link href="/faq" className="hover:text-slate-200">
+              FAQ
             </Link>
             <span className="hidden sm:inline">•</span>
             <Link href="/presse" className="hover:text-slate-200">
               Presse
             </Link>
             <span className="hidden sm:inline">•</span>
-             <Link href="/communauté" className="hover:text-slate-200">
+            <Link href="/communauté" className="hover:text-slate-200">
               Communauté
             </Link>
           </div>

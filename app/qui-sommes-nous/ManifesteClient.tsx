@@ -189,6 +189,67 @@ export default function ManifesteClient() {
             </div>
           </div>
         </div>
+{/* FAQ SEO */}
+<div className="rounded-2xl border border-slate-800 bg-slate-900/60 p-5 sm:p-6 space-y-4">
+  <h2 className="text-xl font-semibold text-slate-50">
+    Questions fréquentes sur EleveAI
+  </h2>
+
+  <p className="text-sm text-slate-300">
+  Besoin de réponses plus détaillées ?{" "}
+  <Link href="/faq" className="text-emerald-300 font-semibold hover:text-emerald-200">
+    Voir toutes les FAQ
+  </Link>
+</p>
+
+
+  <div className="space-y-3 text-sm text-slate-200">
+    <div className="rounded-xl border border-slate-800 bg-slate-950/40 p-4">
+      <p className="font-semibold text-slate-50">
+        EleveAI remplace-t-elle les enseignants ?
+      </p>
+      <p className="text-slate-300">
+        Non. EleveAI est conçue comme un outil d’accompagnement. Le professeur
+        reste la référence pédagogique, l’IA aide à questionner, structurer et
+        comprendre, jamais à se substituer à l’enseignement.
+      </p>
+    </div>
+
+    <div className="rounded-xl border border-slate-800 bg-slate-950/40 p-4">
+      <p className="font-semibold text-slate-50">
+        EleveAI permet-elle de tricher ?
+      </p>
+      <p className="text-slate-300">
+        Non. EleveAI est pensée “anti-triche par design” : pas de production
+        prête à rendre, pas de réponses clés sans raisonnement. L’élève doit
+        essayer, réfléchir et corriger.
+      </p>
+    </div>
+
+    <div className="rounded-xl border border-slate-800 bg-slate-950/40 p-4">
+      <p className="font-semibold text-slate-50">
+        À qui s’adresse EleveAI ?
+      </p>
+      <p className="text-slate-300">
+        EleveAI s’adresse aux élèves, aux enseignants et aux familles qui
+        souhaitent utiliser l’IA de manière responsable, encadrée et compatible
+        avec les exigences scolaires.
+      </p>
+    </div>
+
+    <div className="rounded-xl border border-slate-800 bg-slate-950/40 p-4">
+      <p className="font-semibold text-slate-50">
+        EleveAI est-elle adaptée au cadre scolaire français ?
+      </p>
+      <p className="text-slate-300">
+        Oui. EleveAI est conçue par un enseignant en activité, en lien avec le
+        terrain, les programmes et les contraintes réelles de l’école française.
+      </p>
+    </div>
+  </div>
+</div>
+
+
       </section>
     </main>
   );
