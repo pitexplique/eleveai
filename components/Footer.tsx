@@ -164,6 +164,18 @@ export default function Footer() {
                 </Link>
               </li>
 
+              <li>
+                <Link
+                  href="/pourquoi-eleveai"
+                  className="text-slate-300 hover:text-sky-300"
+                >
+                  Pourquoi EleveAI
+                </Link>
+              </li>
+
+
+
+
               {/* ✅ FAQ (page d’orientation vers Profs/Parents/Établissements) */}
               <li>
                 <Link href="/faq" className="text-slate-300 hover:text-sky-300">
