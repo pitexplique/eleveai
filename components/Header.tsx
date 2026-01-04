@@ -22,12 +22,15 @@ import {
   LogOut,
   Euro,
   FlaskConical,
+  HelpCircle,
+  ShieldCheck,
 } from "lucide-react";
 
 /**
  * Header EleveAI (SEO + produit)
  * - Pages SEO : /profs /eleves /parents
- * - Outils : /espace-profs /espace-eleves /espace-parents /espace-atelier-ia (générateurs)
+ * - Pages confiance : /faq /charte /qui-sommes-nous
+ * - Outils : /espace-profs /espace-eleves /espace-parents /espace-atelier-ia
  * - Atelier-IA : vitrine /atelier-IA + sous-pages
  */
 
@@ -36,8 +39,7 @@ const AUTH_ROUTES = {
   signup: "/auth/signup",
 };
 
-// ✅ Discord (lien d'invitation) — mets la vraie URL dans .env.local (recommandé)
-// NEXT_PUBLIC_DISCORD_INVITE_URL="https://discord.gg/XXXXX"
+// ✅ Discord (lien d'invitation) — mets la vraie URL dans .env.local
 const DISCORD_INVITE_URL =
   process.env.NEXT_PUBLIC_DISCORD_INVITE_URL || "https://discord.gg/Z6HyN6SV";
 
@@ -49,7 +51,7 @@ type NavItem = {
   badge?: string;
 };
 
-type GroupKey = "atelier" | "generateurs"; // ✅ ordre logique
+type GroupKey = "atelier" | "generateurs";
 type Group = {
   key: GroupKey;
   label: string;
@@ -103,22 +105,17 @@ export default function Header() {
   const router = useRouter();
   const supabase = useMemo(() => createClient(), []);
 
-  // ✅ Auth state
   const [authLoading, setAuthLoading] = useState(true);
   const [userEmail, setUserEmail] = useState<string | null>(null);
 
-  // Desktop dropdowns
   const [open, setOpen] = useState<null | GroupKey>(null);
 
-  // Mobile
   const [menuOpen, setMenuOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState<null | GroupKey>(null);
 
-  // Refs (desktop dropdown containers)
   const refAtelier = useRef<HTMLDivElement>(null);
   const refGenerateurs = useRef<HTMLDivElement>(null);
 
-  // Ref (global header)
   const headerRef = useRef<HTMLElement>(null);
 
   const closeAll = useCallback(() => {
@@ -131,7 +128,6 @@ export default function Header() {
   useOnClickOutside(refsDesktop, () => setOpen(null), open !== null);
   useOnClickOutside([headerRef], closeAll, menuOpen);
 
-  // Escape = ferme tout
   useEffect(() => {
     function onKeyDown(e: KeyboardEvent) {
       if (e.key === "Escape") closeAll();
@@ -140,13 +136,11 @@ export default function Header() {
     return () => document.removeEventListener("keydown", onKeyDown);
   }, [closeAll]);
 
-  // ✅ Ferme les menus quand on change de route
   useEffect(() => {
     closeAll();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]);
 
-  // ✅ Auth listener
   useEffect(() => {
     let mounted = true;
 
@@ -178,7 +172,7 @@ export default function Header() {
     router.replace("/accueil");
   }, [router, supabase]);
 
-  // ✅ Atelier-IA AVANT Prompts + ✅ Générateur Atelier-IA ajouté dans "Prompts"
+  // ✅ IMPORTANT : route en minuscules = /espace-atelier-ia
   const GROUPS: Group[] = useMemo(
     () => [
       {
@@ -208,11 +202,11 @@ export default function Header() {
       },
       {
         key: "generateurs",
-        label: "Prompts", // ✅ renommé (sans refactor)
+        label: "Prompts",
         icon: <Wand2 className="h-4 w-4" />,
         items: [
           {
-            href: "/espace-atelier-IA",
+            href: "/espace-atelier-ia",
             label: "Générateur Atelier-IA",
             desc: "Créer des projets guidés (environnement, action locale, créativité…)",
             icon: <FlaskConical className="h-4 w-4" />,
@@ -275,8 +269,7 @@ export default function Header() {
       ref={headerRef}
       className="sticky top-0 z-40 border-b border-slate-800 bg-slate-950/90 backdrop-blur"
     >
-    <nav className="mx-auto flex max-w-7xl items-center justify-between px-2 sm:px-4 lg:px-6 py-3 sm:py-4">
-
+      <nav className="mx-auto flex max-w-7xl items-center justify-between px-2 sm:px-4 lg:px-6 py-3 sm:py-4">
         {/* LOGO */}
         <Link href="/accueil" onClick={closeAll} className="flex items-center gap-2">
           <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-emerald-500 text-slate-900">
@@ -293,7 +286,7 @@ export default function Header() {
 
         {/* DESKTOP MENU */}
         <div className="hidden lg:flex items-center gap-2">
-          {/* Pages SEO claires */}
+          {/* Pages SEO cibles */}
           <Link href="/profs" className={topLinkClass(isActive(pathname, "/profs"))}>
             <span className="inline-flex items-center gap-2">
               <Users className="h-4 w-4" />
@@ -315,7 +308,22 @@ export default function Header() {
             </span>
           </Link>
 
-          {/* ✅ Communauté (page interne) */}
+          {/* ✅ Confiance : FAQ + Charte */}
+          <Link href="/faq" className={topLinkClass(isActive(pathname, "/faq"))}>
+            <span className="inline-flex items-center gap-2">
+              <HelpCircle className="h-4 w-4" />
+              FAQ
+            </span>
+          </Link>
+
+          <Link href="/charte" className={topLinkClass(isActive(pathname, "/charte"))}>
+            <span className="inline-flex items-center gap-2">
+              <ShieldCheck className="h-4 w-4" />
+              Charte
+            </span>
+          </Link>
+
+          {/* ✅ Communauté */}
           <Link href="/communaute" className={topLinkClass(isActive(pathname, "/communaute"))}>
             <span className="inline-flex items-center gap-2">
               <UsersRound className="h-4 w-4" />
@@ -495,7 +503,28 @@ export default function Header() {
               </Link>
             </div>
 
-            {/* ✅ Communauté (page interne) — mobile */}
+            {/* ✅ Confiance (mobile) */}
+            <div className="grid grid-cols-2 gap-2">
+              <Link
+                href="/faq"
+                onClick={closeAll}
+                className="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-800 px-3 py-2 text-sm text-slate-200 hover:bg-slate-900"
+              >
+                <HelpCircle className="h-4 w-4" />
+                FAQ
+              </Link>
+
+              <Link
+                href="/charte"
+                onClick={closeAll}
+                className="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-800 px-3 py-2 text-sm text-slate-200 hover:bg-slate-900"
+              >
+                <ShieldCheck className="h-4 w-4" />
+                Charte
+              </Link>
+            </div>
+
+            {/* ✅ Communauté (mobile) */}
             <Link
               href="/communaute"
               onClick={closeAll}
@@ -616,101 +645,57 @@ export default function Header() {
             })}
 
             {/* Liens 1er niveau mobile */}
-            <Link
-              href="/blog"
-              onClick={closeAll}
-              className={`px-3 py-2 text-sm rounded-xl border flex items-center justify-between ${
-                isActive(pathname, "/blog")
-                  ? "border-emerald-500/70 bg-emerald-500/10 text-emerald-100"
-                  : "border-slate-800 bg-slate-950 text-slate-200 hover:bg-slate-900"
-              }`}
-            >
-              <span className="flex items-center gap-2">
+            <div className="grid grid-cols-3 gap-2 pt-1">
+              <Link
+                href="/blog"
+                onClick={closeAll}
+                className="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-800 px-3 py-2 text-sm text-slate-200 hover:bg-slate-900"
+              >
                 <BookOpenText className="h-4 w-4" />
                 Articles
-              </span>
-              <span className="text-xs text-slate-400">→</span>
-            </Link>
+              </Link>
 
-            <Link
-              href="/tarifs"
-              onClick={closeAll}
-              className={`px-3 py-2 text-sm rounded-xl border flex items-center justify-between ${
-                isActive(pathname, "/tarifs")
-                  ? "border-emerald-500/70 bg-emerald-500/10 text-emerald-100"
-                  : "border-slate-800 bg-slate-950 text-slate-200 hover:bg-slate-900"
-              }`}
-            >
-              <span className="flex items-center gap-2">
+              <Link
+                href="/tarifs"
+                onClick={closeAll}
+                className="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-800 px-3 py-2 text-sm text-slate-200 hover:bg-slate-900"
+              >
                 <Euro className="h-4 w-4" />
                 Tarifs
-              </span>
-              <span className="text-xs text-slate-400">→</span>
-            </Link>
+              </Link>
 
-            <Link
-              href="/contact"
-              onClick={closeAll}
-              className={`px-3 py-2 text-sm rounded-xl border flex items-center justify-between ${
-                isActive(pathname, "/contact")
-                  ? "border-emerald-500/70 bg-emerald-500/10 text-emerald-100"
-                  : "border-slate-800 bg-slate-950 text-slate-200 hover:bg-slate-900"
-              }`}
-            >
-              <span className="flex items-center gap-2">
+              <Link
+                href="/contact"
+                onClick={closeAll}
+                className="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-800 px-3 py-2 text-sm text-slate-200 hover:bg-slate-900"
+              >
                 <Mail className="h-4 w-4" />
                 Contact
-              </span>
-              <span className="text-xs text-slate-400">→</span>
-            </Link>
+              </Link>
+            </div>
           </div>
         </div>
       )}
 
-      {/* ✅ MINI "Accès rapide" caché (crawler-friendly) */}
+      {/* ✅ MINI "Accès rapide" (crawler-friendly) */}
       <div className="sr-only" aria-hidden="false">
         <nav aria-label="Accès rapide">
           <ul>
-            <li>
-              <Link href="/profs">Profs</Link>
-            </li>
-            <li>
-              <Link href="/eleves">Élèves</Link>
-            </li>
-            <li>
-              <Link href="/parents">Parents</Link>
-            </li>
-            <li>
-              <Link href="/communaute">Communauté</Link>
-            </li>
-            <li>
-              <Link href="/atelier-IA">Atelier-IA</Link>
-            </li>
-            <li>
-              <Link href="/espace-atelier-IA">Générateur Atelier-IA</Link>
-            </li>
-            <li>
-              <Link href="/espace-profs">Générateur Profs</Link>
-            </li>
-            <li>
-              <Link href="/espace-eleves">Générateur Élèves</Link>
-            </li>
-            <li>
-              <Link href="/espace-parents">Générateur Parents</Link>
-            </li>
-            <li>
-              <Link href="/tarifs">Tarifs</Link>
-            </li>
-            <li>
-              <Link href="/contact">Contact</Link>
-            </li>
-            <li>
-              <Link href="/blog">Articles</Link>
-            </li>
-            {/* ✅ Communauté (Discord) — SEO/accessibilité */}
-            <li>
-              <a href={DISCORD_INVITE_URL}>Communauté EleveAI (Discord)</a>
-            </li>
+            <li><Link href="/profs">Profs</Link></li>
+            <li><Link href="/eleves">Élèves</Link></li>
+            <li><Link href="/parents">Parents</Link></li>
+            <li><Link href="/faq">FAQ</Link></li>
+            <li><Link href="/charte">Charte</Link></li>
+            <li><Link href="/communaute">Communauté</Link></li>
+            <li><Link href="/atelier-IA">Atelier-IA</Link></li>
+            <li><Link href="/espace-atelier-ia">Générateur Atelier-IA</Link></li>
+            <li><Link href="/espace-profs">Générateur Profs</Link></li>
+            <li><Link href="/espace-eleves">Générateur Élèves</Link></li>
+            <li><Link href="/espace-parents">Générateur Parents</Link></li>
+            <li><Link href="/tarifs">Tarifs</Link></li>
+            <li><Link href="/contact">Contact</Link></li>
+            <li><Link href="/blog">Articles</Link></li>
+            <li><a href={DISCORD_INVITE_URL}>Communauté EleveAI (Discord)</a></li>
           </ul>
         </nav>
       </div>

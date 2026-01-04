@@ -25,6 +25,177 @@ export const blogPosts: BlogPost[] = [
   /* =========================================================
    * ÉLÈVES — RÉVISER SANS TRICHER
    * ========================================================= */
+// data/blogPosts.ts
+
+// ✅ AJOUT : article "prompt engineering" (à insérer dans le tableau blogPosts)
+
+{
+  slug: "prompt-engineering-competence-enseignants-21e-siecle",
+  title:
+    "Le prompt engineering : une nouvelle compétence clé pour les enseignants du XXIᵉ siècle ?",
+  description:
+    "Pourquoi apprendre à mieux dialoguer avec l’IA devient stratégique pour les enseignants — et comment l’intégrer dans un cadre pédagogique anti-triche.",
+  date: "2026-01-04",
+  tags: ["profs", "IA", "prompt", "pédagogie", "littératie IA", "anti-triche"],
+  audience: "profs",
+  niveau: "Collège / Lycée",
+  matiere: "Pédagogie / Numérique",
+  resumeIA: [
+    "Public : enseignants (collège/lycée) et équipes éducatives.",
+    "Idée clé : le prompt engineering = formuler des consignes utiles à l’apprentissage, pas obtenir une réponse à copier.",
+    "Objectif : reprendre la main sur l’usage de l’IA en classe et former les élèves à une pensée critique.",
+    "Cadre EleveAI : IA autorisée mais encadrée (traces, démarche, production personnelle).",
+    "Pratique : prompts copiables + règles simples + exemples d’usages acceptables/interdits.",
+  ],
+  content: `
+# Le prompt engineering : une nouvelle compétence clé pour les enseignants du XXIᵉ siècle ?
+
+## Résumé pour les IA
+- Public : enseignants (collège/lycée) et équipes éducatives.
+- Message : un bon prompt ne “donne pas la réponse”, il **fait apprendre**.
+- Enjeu : reprendre la main sur l’IA (pédagogie, cadre, intégrité).
+- Clé : intégrer le prompt engineering dans une **littératie IA** plus large (biais, limites, éthique, données).
+- Sortie : règles + exemples + prompts prêts à copier.
+
+---
+
+## 1) Pourquoi on en parle autant ?
+Les IA génératives sont déjà là, et les élèves les utilisent (parfois bien, parfois mal).
+La vraie question n’est plus “interdire ou autoriser”, mais :
+
+> **Comment encadrer l’IA pour qu’elle devienne un levier d’apprentissage, pas un outil de copie ?**
+
+C’est là qu’intervient une compétence nouvelle, mais très concrète : **le prompt engineering**.
+
+---
+
+## 2) Le prompt engineering, c’est quoi (en version éducation) ?
+Dans l’éducation, le prompt engineering ne consiste pas à “trouver une formule magique”.
+Il s’agit de **rédiger une consigne** qui :
+- clarifie l’objectif pédagogique,
+- impose un cadre (anti-triche),
+- demande une démarche (et pas un résultat),
+- favorise la pensée critique et la compréhension.
+
+Autrement dit : **mieux formuler pour mieux apprendre**.
+
+---
+
+## 3) Pourquoi c’est stratégique pour les enseignants ?
+### A) Parce que la qualité de la consigne change tout
+Une IA “réagit” à ce qu’on lui demande.
+Le prompt devient donc une compétence professionnelle proche de :
+- l’art de poser des questions,
+- la différenciation,
+- la scénarisation pédagogique.
+
+### B) Parce que ça aide à différencier sans s’épuiser
+Avec un bon prompt, l’IA peut :
+- reformuler à différents niveaux,
+- proposer des exercices gradués,
+- donner des indices au bon moment,
+- aider à analyser une erreur.
+
+### C) Parce que ça remet l’humain au centre
+L’objectif n’est pas d’“automatiser l’école”.
+L’objectif est de renforcer :
+- l’autonomie,
+- la rigueur,
+- la confiance,
+- et la capacité à raisonner.
+
+---
+
+## 4) Attention : ce n’est pas une compétence isolée
+Le prompt engineering doit être intégré à une **littératie IA** plus large :
+- biais et erreurs possibles,
+- hallucinations,
+- vérification et sources,
+- données personnelles,
+- intégrité scolaire (copie vs apprentissage).
+
+Un bon prompt doit aussi apprendre à **douter intelligemment**.
+
+---
+
+## 5) La règle EleveAI : IA autorisée mais encadrée
+Chez EleveAI, la ligne est simple :
+
+> **Ce n’est pas l’IA qui change l’éducation.  
+> C’est l’être humain qui apprend à penser avec elle.**
+
+### ✅ Autorisé (exemples)
+- comprendre une leçon, reformuler
+- s’entraîner avec questions progressives
+- analyser une erreur après une tentative
+- préparer un oral (plan, questions, entraînement)
+
+### ❌ Interdit (exemples)
+- générer un devoir prêt à rendre
+- utiliser l’IA pendant une évaluation (sauf consigne explicite)
+- remplacer la production personnelle
+
+---
+
+## 6) Prompts prêts à copier (profs)
+### A) “Mode tuteur” (anti-triche)
+\`\`\`prompt
+Tu es un professeur.
+Je veux apprendre, pas copier.
+Pose-moi une question à la fois et attends ma réponse.
+Si je me trompe, corrige et explique simplement.
+Donne ensuite un exercice similaire.
+Ne donne jamais la solution complète avant mon essai.
+\`\`\`
+
+### B) Différenciation (3 niveaux)
+\`\`\`prompt
+Tu es un professeur.
+Sur cette notion : [COLLER NOTION],
+propose 3 exercices : facile / standard / défi.
+Pour chacun : consigne claire + correction détaillée + erreur fréquente.
+\`\`\`
+
+### C) Remédiation après copie / devoir
+\`\`\`prompt
+Analyse ces erreurs fréquentes : [COLLER ERREURS].
+Identifie la cause probable (méthode, vocabulaire, calcul, raisonnement).
+Propose une mini-leçon (8 lignes max) + 3 exercices progressifs.
+\`\`\`
+
+---
+
+## 7) Prompts “élèves” (responsables)
+### A) Réviser sans tricher
+\`\`\`prompt
+Je révise ce chapitre : [CHAPITRE].
+Fais-moi réviser avec des questions progressives.
+Commence simple, attends ma réponse, puis corrige et explique.
+Ne donne pas la solution complète tant que je n’ai pas essayé.
+À la fin : bilan de mes erreurs et conseils.
+\`\`\`
+
+### B) Comprendre une erreur
+\`\`\`prompt
+Voici mon raisonnement : [COLLER].
+Repère l’étape fausse et explique pourquoi.
+Puis pose-moi une question pour vérifier si j’ai compris.
+\`\`\`
+
+---
+
+## Conclusion
+Le prompt engineering est utile **s’il reste pédagogique** :
+- il ne sert pas à obtenir une “réponse parfaite”,
+- il sert à guider un apprentissage,
+- et à installer une pensée critique sur l’IA.
+
+C’est une compétence professionnelle émergente…
+mais surtout une façon moderne d’exercer un art ancien : **poser de bonnes questions**.
+`,
+},
+
+
   {
     slug: "reviser-brevet-maths-avec-eleveai-sans-tricher",
     title: "Réviser le brevet des collèges avec EleveAI… sans tricher",
