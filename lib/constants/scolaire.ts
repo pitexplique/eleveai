@@ -1,3 +1,5 @@
+// lib/constants/scolaire.ts
+
 /* ----------------------------------------
    CONSTANTES SCOLAIRES PARTAGÉES
 ---------------------------------------- */

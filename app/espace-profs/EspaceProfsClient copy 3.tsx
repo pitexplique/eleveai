@@ -9,9 +9,6 @@ import { PresetCarousel, PresetCarouselItem } from "@/components/PresetCarousel"
 import SignupNudge from "@/components/SignupNudge";
 import { PROFS_PRESETS, ProfsPresetKey } from "@/data/profsPresets";
 import ToggleChip from "@/components/ToggleChip";
-import { resolveTypeFromTacheProf } from "@/lib/pedagogie/runtime";
-import type { TacheProfValue } from "@/lib/constants/scolaire";
-
 
 // ✅ constantes partagées
 import { CLASSES, MATIERES, TACHES_PROF } from "@/lib/constants/scolaire";
@@ -1489,38 +1486,23 @@ export default function ProfsPage() {
                 <select
                   value={form.tacheProf}
                   onChange={(e) => {
-                    const v = e.target.value as TacheProfValue;
+                    const v = e.target.value;
 
-                    // 1) stocker la tâche
+                    // 1) on stocke la tâche
                     handleChange("tacheProf", v);
                     showToast(v ? "✅ Tâche choisie" : "↩️ Tâche retirée");
 
-                    // tâche retirée => on nettoie juste la recherche
-                    if (!v) {
+                    if (v) {
+                      // 2) catégorie guidée
+                      const cat = mapTacheToMainCategory(v);
+                      setMainCategory(cat);
+
+                      // 3) recherche guidée
+                      const lab = labelFromTache(v);
+                      setTypeQuery(lab.replace("—", " ").trim());
+                    } else {
                       setTypeQuery("");
-                      return;
                     }
-
-                    // 2) runtime (métier centralisé)
-                    const r = resolveTypeFromTacheProf(v);
-
-                    // 3) appliquer le typeId
-                    handleChange("typeId", r.typeId);
-
-                    // 3bis) mettre à jour la catégorie tout de suite (évite le “lag” visuel)
-                    const t = getTypeById(r.typeId);
-                    if (t?.category) setMainCategory(normalizeMainCategory(t.category));
-
-                    // 4) auto-comportements
-                    if (r.auto?.forceOutputStyle) {
-                      handleChange("outputStyle", r.auto.forceOutputStyle as any);
-                    }
-
-                    if (r.auto?.openEvalPanel) setShowEval(true);
-                    if (r.auto?.hideMethodePanel) setShowMethode(false);
-
-                    // 5) UX : recherche guidée (optionnel mais pratique)
-                    if (r.label) setTypeQuery(r.label.replace("—", " ").trim());
                   }}
                   className="w-full border rounded-lg px-3 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-sky-300"
                 >
@@ -1533,19 +1515,14 @@ export default function ProfsPage() {
                   ))}
                 </select>
 
-                <p className="text-[11px] text-gray-500">
-                  En mode précis, la tâche guide la catégorie + la recherche de type.
-                </p>
+                <p className="text-[11px] text-gray-500">En mode précis, la tâche guide la catégorie + la recherche de type.</p>
 
                 {!!form.tacheProf && (
                   <div className="mt-2 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2">
                     <p className="text-xs font-semibold text-slate-800">
-                      🎯 Catégorie déduite : {getMainCategoryMeta(mainCategory).emoji}{" "}
-                      {getMainCategoryMeta(mainCategory).label}
+                      🎯 Catégorie déduite : {getMainCategoryMeta(mainCategory).emoji} {getMainCategoryMeta(mainCategory).label}
                     </p>
-                    <p className="mt-1 text-[11px] text-slate-600">
-                      Tu peux ensuite choisir le “type” précis dans la liste.
-                    </p>
+                    <p className="mt-1 text-[11px] text-slate-600">Tu peux ensuite choisir le “type” précis dans la liste.</p>
                   </div>
                 )}
               </div>
