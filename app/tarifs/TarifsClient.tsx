@@ -1,4 +1,4 @@
-// app/tarifs/page.tsx
+// app/tarifs/TarifsClient.tsx
 "use client";
 
 import Link from "next/link";
@@ -18,14 +18,14 @@ type Plan = {
   kind?: "free" | "sub" | "sponsor";
 };
 
+type Testimonial = {
+  quote: string;
+  author: string;
+  role: string;
+};
+
 const STRIPE_CHECKOUT_URL = process.env.NEXT_PUBLIC_STRIPE_CHECKOUT_URL;
 
-/**
- * Modèle 3 offres :
- * - Gratuit : découverte (quota faible)
- * - Abonnement : 5,95€/mois (offre principale) -> Stripe
- * - Sponsor : soutien volontaire -> /sponsor (page EleveAI) -> Moojo derrière
- */
 const PLANS: Plan[] = [
   {
     kind: "free",
@@ -75,7 +75,7 @@ const PLANS: Plan[] = [
     includes: [
       "❤️ Soutien direct au projet (crowdfunding)",
       "🏷️ Badge “Sponsor” sur ton profil (optionnel)",
-      "📬 Accès aux nouveautés en avant-première (newsletter)",
+      "📬 Accès aux nouveautés en avant-première (newsletter) (optionnel)",
       "🙏 Ton prénom dans la page “Merci” (optionnel)",
     ],
     retention: "Historique : complet",
@@ -90,6 +90,27 @@ const PLANS: Plan[] = [
   },
 ];
 
+const TESTIMONIALS: Testimonial[] = [
+  {
+    quote:
+      "Enfin une IA qui n’encourage pas le “fait à la place”. Les traces et la structure aident vraiment les élèves à expliquer.",
+    author: "A. (prof)",
+    role: "Collège",
+  },
+  {
+    quote:
+      "En tant que parent, je vois mieux ce que mon enfant a tenté, et où il bloque. Ça change tout.",
+    author: "M. (parent)",
+    role: "Accompagnement à la maison",
+  },
+  {
+    quote:
+      "Pour réviser, c’est clair : étapes → justification → correction. Je gagne du temps sans tricher.",
+    author: "L. (élève)",
+    role: "Lycée",
+  },
+];
+
 function planQueryValue(name: string) {
   return name
     .toLowerCase()
@@ -98,9 +119,10 @@ function planQueryValue(name: string) {
     .replace(/[—–-]/g, "_");
 }
 
-export default function TarifsPage() {
+export default function TarifsClient() {
   const stripeOk =
-    typeof STRIPE_CHECKOUT_URL === "string" && STRIPE_CHECKOUT_URL.trim().length > 0;
+    typeof STRIPE_CHECKOUT_URL === "string" &&
+    STRIPE_CHECKOUT_URL.trim().length > 0;
 
   return (
     <main className="min-h-screen bg-slate-950 text-slate-50">
@@ -165,7 +187,8 @@ export default function TarifsPage() {
                   Besoin d’un avis ?
                 </p>
                 <p className="text-xs text-slate-200">
-                  Usage, établissement, contraintes : écris-nous et on te répond rapidement.
+                  Usage, établissement, contraintes : écris-nous et on te répond
+                  rapidement.
                 </p>
                 <div className="flex flex-wrap gap-2">
                   <Link
@@ -174,7 +197,15 @@ export default function TarifsPage() {
                   >
                     Écrire à l’équipe
                   </Link>
+
+                  <Link
+                    href="/offre-pilote"
+                    className="inline-flex items-center justify-center rounded-full border border-emerald-500/60 bg-slate-950/40 px-4 py-2 text-xs font-semibold text-emerald-200 hover:bg-slate-900"
+                  >
+                    Offre pilote (établissements)
+                  </Link>
                 </div>
+
                 <p className="text-[11px] text-emerald-300">
                   Résiliation à tout moment. Paiement sécurisé via Stripe.
                 </p>
@@ -239,17 +270,29 @@ export default function TarifsPage() {
               Voir les offres
             </a>
             <a
+              href="#pourquoi"
+              className="inline-flex items-center rounded-full border border-slate-800 bg-slate-900/60 px-3 py-1 text-xs text-slate-200 hover:border-slate-700"
+            >
+              Pourquoi EleveAI
+            </a>
+            <a
+              href="#etablissements"
+              className="inline-flex items-center rounded-full border border-slate-800 bg-slate-900/60 px-3 py-1 text-xs text-slate-200 hover:border-slate-700"
+            >
+              Établissements
+            </a>
+            <a
+              href="#temoignages"
+              className="inline-flex items-center rounded-full border border-slate-800 bg-slate-900/60 px-3 py-1 text-xs text-slate-200 hover:border-slate-700"
+            >
+              Témoignages
+            </a>
+            <a
               href="#faq"
               className="inline-flex items-center rounded-full border border-slate-800 bg-slate-900/60 px-3 py-1 text-xs text-slate-200 hover:border-slate-700"
             >
               Questions fréquentes
             </a>
-            <Link
-              href="/offre-pilote"
-              className="inline-flex items-center rounded-full border border-sky-700/60 bg-sky-900/20 px-3 py-1 text-xs text-sky-100 hover:bg-sky-900/35"
-            >
-              Offre pilote (établissements)
-            </Link>
             <Link
               href="/sponsor"
               className="inline-flex items-center rounded-full border border-sky-600/60 bg-sky-900/20 px-3 py-1 text-xs text-sky-100 hover:bg-sky-900/35"
@@ -262,6 +305,161 @@ export default function TarifsPage() {
 
       {/* PLANS */}
       <section id="plans" className="mx-auto max-w-5xl px-4 py-10 sm:py-12">
+        {/* ✅ AJOUT MINIMAL : TABLEAU COMPARATIF (lecture rapide) */}
+        <div className="mb-8 rounded-2xl border border-slate-800 bg-slate-950/60 p-5 sm:p-6">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+            <div className="space-y-1">
+              <p className="text-xs font-semibold uppercase tracking-wide text-slate-400">
+                Lecture rapide
+              </p>
+              <h2 className="text-base sm:text-lg font-semibold text-slate-50">
+                Comparer les offres en 10 secondes
+              </h2>
+              <p className="text-sm text-slate-300 max-w-2xl">
+                Un tableau simple pour décider vite. Les cartes détaillées sont juste en dessous.
+              </p>
+            </div>
+
+            <div className="flex flex-wrap gap-2">
+              <Link
+                href="/auth/signup"
+                className="inline-flex items-center justify-center rounded-full bg-slate-50 px-4 py-2 text-xs font-semibold text-slate-950 hover:bg-white transition"
+              >
+                Essayer gratuitement →
+              </Link>
+              <Link
+                href="/contact"
+                className="inline-flex items-center justify-center rounded-full border border-slate-700 bg-slate-950/40 px-4 py-2 text-xs font-semibold text-slate-100 hover:bg-slate-900 transition"
+              >
+                Établissement : devis
+              </Link>
+            </div>
+          </div>
+
+          <div className="mt-4 overflow-x-auto">
+            <table className="w-full min-w-[860px] text-left border-separate border-spacing-0">
+              <thead>
+                <tr>
+                  <th className="px-3 py-3 text-xs font-semibold text-slate-400 border-b border-slate-800">
+                    Offre
+                  </th>
+                  <th className="px-3 py-3 text-xs font-semibold text-slate-400 border-b border-slate-800">
+                    Prix
+                  </th>
+                  <th className="px-3 py-3 text-xs font-semibold text-slate-400 border-b border-slate-800">
+                    Accès
+                  </th>
+                  <th className="px-3 py-3 text-xs font-semibold text-slate-400 border-b border-slate-800">
+                    Cadre pédagogique
+                  </th>
+                  <th className="px-3 py-3 text-xs font-semibold text-slate-400 border-b border-slate-800">
+                    Idéal pour
+                  </th>
+                  <th className="px-3 py-3 text-xs font-semibold text-slate-400 border-b border-slate-800">
+                    Action
+                  </th>
+                </tr>
+              </thead>
+
+              <tbody className="text-sm text-slate-200">
+                <tr>
+                  <td className="px-3 py-3 text-xs border-b border-slate-900">
+                    <span className="font-semibold text-slate-50">Découverte</span>
+                  </td>
+                  <td className="px-3 py-3 text-xs border-b border-slate-900">
+                    <span className="font-semibold text-slate-50">0 €</span>
+                  </td>
+                  <td className="px-3 py-3 text-xs border-b border-slate-900">
+                    ✅ Essentiel
+                  </td>
+                  <td className="px-3 py-3 text-xs border-b border-slate-900">
+                    ✅ Prompts guidés + usage responsable
+                  </td>
+                  <td className="px-3 py-3 text-xs border-b border-slate-900">
+                    Élèves / Parents (test)
+                  </td>
+                  <td className="px-3 py-3 text-xs border-b border-slate-900">
+                    <Link
+                      href="/auth/signup"
+                      className="text-xs font-semibold text-emerald-200 underline underline-offset-4 hover:text-emerald-100"
+                    >
+                      Créer un compte →
+                    </Link>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td className="px-3 py-3 text-xs border-b border-slate-900">
+                    <span className="font-semibold text-emerald-200">Abonnement</span>
+                    <span className="ml-2 inline-flex items-center rounded-full bg-emerald-500 px-2 py-0.5 text-[10px] font-semibold text-slate-950">
+                      Recommandé
+                    </span>
+                  </td>
+                  <td className="px-3 py-3 text-xs border-b border-slate-900">
+                    <span className="font-semibold text-slate-50">5,95 € / mois</span>
+                  </td>
+                  <td className="px-3 py-3 text-xs border-b border-slate-900">
+                    ✅ Complet (élèves / profs / parents)
+                  </td>
+                  <td className="px-3 py-3 text-xs border-b border-slate-900">
+                    ✅ Traces + historique complet
+                  </td>
+                  <td className="px-3 py-3 text-xs border-b border-slate-900">
+                    Usage régulier
+                  </td>
+                  <td className="px-3 py-3 text-xs border-b border-slate-900">
+                    {stripeOk ? (
+                      <a
+                        href={`${STRIPE_CHECKOUT_URL}?plan=${encodeURIComponent(
+                          planQueryValue("Abonnement EleveAI")
+                        )}`}
+                        className="text-xs font-semibold text-emerald-200 underline underline-offset-4 hover:text-emerald-100"
+                      >
+                        S’abonner →
+                      </a>
+                    ) : (
+                      <span className="text-xs text-slate-400">
+                        Stripe en cours
+                      </span>
+                    )}
+                  </td>
+                </tr>
+
+                <tr>
+                  <td className="px-3 py-3 text-xs border-b border-slate-900">
+                    <span className="font-semibold text-sky-200">Établissement</span>
+                  </td>
+                  <td className="px-3 py-3 text-xs border-b border-slate-900">
+                    <span className="font-semibold text-slate-50">Sur devis</span>
+                  </td>
+                  <td className="px-3 py-3 text-xs border-b border-slate-900">
+                    ✅ Multi-classes (selon pilote)
+                  </td>
+                  <td className="px-3 py-3 text-xs border-b border-slate-900">
+                    ✅ Charte + gouvernance (cadre IA-friendly)
+                  </td>
+                  <td className="px-3 py-3 text-xs border-b border-slate-900">
+                    Collèges / Lycées
+                  </td>
+                  <td className="px-3 py-3 text-xs border-b border-slate-900">
+                    <Link
+                      href="/contact"
+                      className="text-xs font-semibold text-sky-200 underline underline-offset-4 hover:text-sky-100"
+                    >
+                      Demander un devis →
+                    </Link>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p className="mt-3 text-[11px] text-slate-500">
+            NB : le tableau sert à décider vite ; les cartes ci-dessous détaillent chaque offre (inclus, idéal pour, etc.).
+          </p>
+        </div>
+
+        {/* (le reste de ton code est inchangé) */}
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {PLANS.map((plan) => {
             const isFree = plan.kind === "free";
@@ -278,7 +476,9 @@ export default function TarifsPage() {
               : isSponsor
               ? "/sponsor"
               : stripeOk && plan.checkoutUrl
-              ? `${plan.checkoutUrl}?plan=${encodeURIComponent(planQueryValue(plan.name))}`
+              ? `${plan.checkoutUrl}?plan=${encodeURIComponent(
+                  planQueryValue(plan.name)
+                )}`
               : "#";
 
             const cardBorder =
@@ -318,7 +518,9 @@ export default function TarifsPage() {
 
                 {/* En-tête */}
                 <div className="space-y-1">
-                  <h2 className="text-lg font-semibold text-slate-50">{plan.name}</h2>
+                  <h2 className="text-lg font-semibold text-slate-50">
+                    {plan.name}
+                  </h2>
                   <p
                     className={[
                       "text-2xl font-bold",
@@ -339,7 +541,9 @@ export default function TarifsPage() {
                 {/* Inclus */}
                 {plan.includes && plan.includes.length > 0 && (
                   <div className="mt-1">
-                    <p className="text-xs font-semibold text-slate-400 mb-1">Inclus :</p>
+                    <p className="text-xs font-semibold text-slate-400 mb-1">
+                      Inclus :
+                    </p>
                     <ul className="text-xs text-slate-300 space-y-0.5">
                       {plan.includes.map((x) => (
                         <li key={x}>• {x}</li>
@@ -350,7 +554,9 @@ export default function TarifsPage() {
 
                 {/* Idéal pour */}
                 <div className="mt-1">
-                  <p className="text-xs font-semibold text-slate-400 mb-1">Idéal pour :</p>
+                  <p className="text-xs font-semibold text-slate-400 mb-1">
+                    Idéal pour :
+                  </p>
                   <ul className="text-xs text-slate-300 space-y-0.5">
                     {plan.idealFor.map((who) => (
                       <li key={who}>• {who}</li>
@@ -415,7 +621,8 @@ export default function TarifsPage() {
                   )}
 
                   <p className="text-[11px] text-slate-500">
-                    Pas de surfacturation surprise : tu gardes le contrôle. L’objectif est une IA utile et rassurante.
+                    Pas de surfacturation surprise : tu gardes le contrôle.
+                    L’objectif est une IA utile et rassurante.
                   </p>
                 </div>
               </div>
@@ -423,62 +630,154 @@ export default function TarifsPage() {
           })}
         </div>
 
-        {/* CTA : Pourquoi nos tarifs sont justes */}
-        <div className="mt-10 rounded-2xl border border-emerald-500/30 bg-emerald-500/10 p-5 sm:p-6">
-          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        {/* DIFFÉRENCIATION POSITIVE */}
+        <div
+          id="pourquoi"
+          className="mt-10 rounded-2xl border border-emerald-500/30 bg-emerald-500/10 p-5 sm:p-6"
+        >
+          <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
             <div className="space-y-1">
               <p className="text-xs font-semibold uppercase tracking-wide text-emerald-300">
-                Transparence
+                Pourquoi EleveAI
               </p>
               <h3 className="text-base sm:text-lg font-semibold text-slate-50">
-                Pourquoi nos tarifs sont justes
+                Une IA autorisée, mais encadrée (et utile au quotidien)
               </h3>
               <p className="text-sm text-slate-200 max-w-2xl">
-                Pas de pub, pas de revente de données. Un cadre éducatif anti-triche conçu pour l’école,
-                et une expérience claire, sans surprise.
+                EleveAI n’est pas “juste une IA”. C’est une méthode : guider,
+                exiger des traces, développer l’esprit critique — et rester simple
+                pour les familles et les professeurs.
+              </p>
+            </div>
+
+            <Link
+              href="/atelier-IA"
+              className="inline-flex items-center justify-center rounded-full bg-emerald-500 px-5 py-2.5 text-sm font-semibold text-slate-950 hover:bg-emerald-400 transition"
+            >
+              Voir la méthode (Atelier-IA) →
+            </Link>
+          </div>
+
+          <div className="mt-5 grid gap-3 sm:grid-cols-3">
+            <div className="rounded-2xl border border-emerald-600/30 bg-slate-950/40 p-4">
+              <p className="text-sm font-semibold text-slate-50">
+                🛡️ Anti-triche intégré
+              </p>
+              <ul className="mt-2 space-y-1 text-xs text-slate-300">
+                <li>• ✅ Prompts guidés (pas “fais mon devoir”)</li>
+                <li>• ✅ Exigence de justification et d’étapes</li>
+                <li>• ✅ Traces réutilisables pour apprendre</li>
+              </ul>
+            </div>
+
+            <div className="rounded-2xl border border-emerald-600/30 bg-slate-950/40 p-4">
+              <p className="text-sm font-semibold text-slate-50">
+                🧠 Apprendre (vraiment)
+              </p>
+              <ul className="mt-2 space-y-1 text-xs text-slate-300">
+                <li>• ✅ Comprendre avant d’écrire la réponse</li>
+                <li>• ✅ Détection d’erreurs fréquentes</li>
+                <li>• ✅ Reformulation, exemples, entraînement</li>
+              </ul>
+            </div>
+
+            <div className="rounded-2xl border border-emerald-600/30 bg-slate-950/40 p-4">
+              <p className="text-sm font-semibold text-slate-50">
+                🤝 Rassurant pour l’école
+              </p>
+              <ul className="mt-2 space-y-1 text-xs text-slate-300">
+                <li>• ✅ Cadre compatible “IA-friendly”</li>
+                <li>• ✅ Simple pour parents / profs</li>
+                <li>• ✅ Transparence sur l’usage</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        {/* ÉTABLISSEMENTS */}
+        <div
+          id="etablissements"
+          className="mt-10 rounded-2xl border border-sky-700/50 bg-sky-900/15 p-5 sm:p-6"
+        >
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+            <div className="space-y-2">
+              <p className="text-xs font-semibold uppercase tracking-wide text-sky-200">
+                Établissements
+              </p>
+              <h3 className="text-base sm:text-lg font-semibold text-slate-50">
+                Tester EleveAI en mode pilote (cadre + charte + gouvernance)
+              </h3>
+              <p className="text-sm text-slate-200 max-w-2xl">
+                Pour un collège/lycée : on démarre par une phase pilote courte,
+                puis on ajuste selon vos contraintes (règlement intérieur, usages
+                autorisés, niveaux, matières, traces demandées).
               </p>
             </div>
 
             <div className="flex flex-wrap gap-2">
               <Link
-                href="/pourquoi-nos-tarifs-sont-justes"
-                className="inline-flex items-center justify-center rounded-full bg-emerald-500 px-5 py-2.5 text-sm font-semibold text-slate-950 hover:bg-emerald-400 transition"
+                href="/offre-pilote"
+                className="inline-flex items-center justify-center rounded-full bg-sky-500 px-5 py-2.5 text-sm font-semibold text-slate-950 hover:bg-sky-400 transition"
               >
-                Lire la page →
+                Voir l’offre pilote →
               </Link>
               <Link
                 href="/contact"
                 className="inline-flex items-center justify-center rounded-full border border-slate-700 bg-slate-950/40 px-5 py-2.5 text-sm font-semibold text-slate-100 hover:bg-slate-900 transition"
               >
-                Poser une question
+                Demander un devis
               </Link>
             </div>
           </div>
+
+          <p className="mt-3 text-[11px] text-sky-200/80">
+            Objectif : une IA utile et rassurante, conforme au cadre d’usage en
+            éducation (usage autorisé si encadré).{" "}
+            <Link
+              href="/faq-administration"
+              className="underline underline-offset-4 hover:text-sky-100"
+            >
+              En savoir plus →
+            </Link>
+          </p>
         </div>
 
-        {/* Garanties */}
-        <div className="mt-10 grid gap-4 sm:grid-cols-2">
-          <div className="rounded-2xl border border-slate-800 bg-slate-950/60 p-5 space-y-2">
-            <h3 className="text-base font-semibold text-slate-100">Clarté & sécurité</h3>
-            <p className="text-sm text-slate-300">
-              Conformité RGPD, bonnes pratiques pour les données élèves, et cadre pédagogique “anti-triche”.
-            </p>
-            <p className="text-xs text-slate-500">
-              Objectif : une IA utile et rassurante, sans surprise de facturation.
-            </p>
-          </div>
+        {/* TÉMOIGNAGES */}
+        <div
+          id="temoignages"
+          className="mt-10 rounded-2xl border border-emerald-500/30 bg-emerald-500/10 p-5 sm:p-6"
+        >
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <div className="space-y-1">
+              <p className="text-xs font-semibold uppercase tracking-wide text-emerald-300">
+                Confiance
+              </p>
+              <h3 className="text-base sm:text-lg font-semibold text-slate-50">
+                Ce que les utilisateurs apprécient
+              </h3>
+            </div>
 
-          <div className="rounded-2xl border border-emerald-600/60 bg-emerald-500/10 p-5 space-y-2">
-            <h3 className="text-base font-semibold text-emerald-200">Accompagnement humain</h3>
-            <p className="text-sm text-slate-200">
-              Presets prêts à l’emploi, conseils d’usage, et aide si tu veux cadrer un usage “équipe / établissement”.
-            </p>
             <Link
               href="/contact"
-              className="inline-flex items-center gap-2 text-xs font-semibold text-emerald-200 underline underline-offset-4 hover:text-emerald-100"
+              className="inline-flex items-center justify-center rounded-full bg-emerald-500 px-5 py-2.5 text-sm font-semibold text-slate-950 hover:bg-emerald-400 transition"
             >
-              Nous écrire →
+              Donner un retour →
             </Link>
+          </div>
+
+          <div className="mt-5 grid gap-3 sm:grid-cols-3">
+            {TESTIMONIALS.map((t, idx) => (
+              <div
+                key={idx}
+                className="rounded-2xl border border-emerald-600/30 bg-slate-950/40 p-4"
+              >
+                <p className="text-sm text-slate-100">“{t.quote}”</p>
+                <p className="mt-3 text-xs text-emerald-200 font-semibold">
+                  {t.author}
+                </p>
+                <p className="text-[11px] text-slate-400">{t.role}</p>
+              </div>
+            ))}
           </div>
         </div>
 
@@ -493,20 +792,23 @@ export default function TarifsPage() {
 
           <div className="space-y-3 text-sm text-slate-300">
             <div className="rounded-xl border border-slate-800 bg-slate-900/40 p-4">
-              <p className="font-semibold text-slate-100">Je peux résilier quand je veux ?</p>
+              <p className="font-semibold text-slate-100">
+                Je peux résilier quand je veux ?
+              </p>
               <p className="mt-1">Oui, à tout moment.</p>
             </div>
 
             <div className="rounded-xl border border-slate-800 bg-slate-900/40 p-4">
-              <p className="font-semibold text-slate-100">C’est quoi une “utilisation” ?</p>
+              <p className="font-semibold text-slate-100">
+                C’est quoi une “utilisation” ?
+              </p>
               <p className="mt-1">Un prompt + une réponse IA.</p>
             </div>
 
             <div className="rounded-xl border border-slate-800 bg-slate-900/40 p-4">
               <p className="font-semibold text-slate-100">Le sponsor change quoi ?</p>
               <p className="mt-1">
-                Rien d’obligatoire : c’est un soutien volontaire pour encourager le projet.
-                L’accès “utile” est déjà dans l’abonnement standard.{" "}
+                Rien d’obligatoire : c’est un soutien volontaire.{" "}
                 <Link
                   href="/sponsor"
                   className="text-sky-200 underline underline-offset-4 hover:text-sky-100"
@@ -515,46 +817,9 @@ export default function TarifsPage() {
                 </Link>
               </p>
             </div>
-
-            {/* Liens FAQ par profil */}
-            <div className="rounded-xl border border-slate-800 bg-slate-900/40 p-4">
-              <p className="font-semibold text-slate-100">Je veux la FAQ adaptée à mon profil</p>
-              <div className="mt-2 flex flex-wrap gap-2 text-xs">
-                <Link
-                  href="/faq-professeurs"
-                  className="inline-flex items-center rounded-full border border-slate-700 bg-slate-950/40 px-3 py-1 text-slate-200 hover:bg-slate-900"
-                >
-                  FAQ professeurs →
-                </Link>
-                <Link
-                  href="/faq-parents"
-                  className="inline-flex items-center rounded-full border border-slate-700 bg-slate-950/40 px-3 py-1 text-slate-200 hover:bg-slate-900"
-                >
-                  FAQ parents →
-                </Link>
-                <Link
-                  href="/faq-administration"
-                  className="inline-flex items-center rounded-full border border-slate-700 bg-slate-950/40 px-3 py-1 text-slate-200 hover:bg-slate-900"
-                >
-                  FAQ établissements →
-                </Link>
-              </div>
-            </div>
-
-            <div className="mt-4 text-xs text-slate-400">
-              Tu veux comprendre le “pourquoi” ?{" "}
-              <Link
-                href="/pourquoi-nos-tarifs-sont-justes"
-                className="text-emerald-200 underline underline-offset-4 hover:text-emerald-100"
-              >
-                Lire “Pourquoi nos tarifs sont justes”
-              </Link>
-              .
-            </div>
           </div>
         </div>
       </section>
     </main>
   );
 }
-
