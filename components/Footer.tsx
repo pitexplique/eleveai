@@ -140,6 +140,17 @@ export default function Footer() {
               </li>
               <li>
                 <Link
+                  href="/sponsor"
+                  className="text-slate-300 hover:text-sky-300"
+                >
+                  Soutenir EleveAI (Sponsor)
+                </Link>
+              </li>
+
+
+
+              <li>
+                <Link
                   href="/contact"
                   className="text-slate-300 hover:text-sky-300"
                 >

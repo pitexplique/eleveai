@@ -2,7 +2,7 @@
 "use client";
 
 import Link from "next/link";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useState, useRef } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { MarkdownMath } from "@/components/MarkdownMath";
 import { PresetCarousel, PresetCarouselItem } from "@/components/PresetCarousel";
@@ -12,6 +12,7 @@ import ToggleChip from "@/components/ToggleChip";
 
 // ✅ constantes partagées
 import { CLASSES, MATIERES, TACHES_PROF } from "@/lib/constants/scolaire";
+
 
 import {
   Sparkles,
@@ -91,6 +92,7 @@ function getMainCategoryMeta(cat: MainCategory) {
 
 type Niveau = "basique" | "standard" | "expert";
 type OutputStyle = "simple" | "word" | "word_expert";
+
 type Tonalite = "neutre" | "bienveillante" | "motivation" | "institutionnelle" | "ludique";
 
 type ModaliteEvaluation = "evaluation_sommative" | "evaluation_formative" | "evaluation_diagnostique" | "evaluation_differenciee";
@@ -102,11 +104,11 @@ type PromptProf = {
   objectifPedagogique: string;
   classe: string;
   matiere: string;
-
-  // ✅ Mode précis : tâche guidée
-  tacheProf: string;
+  tacheProf: string; // ✅ nouvelle sélection "tâche prof" (optionnelle)
 
   niveau: Niveau;
+
+  // ✅ important : id stable (DB-friendly)
   typeId: string;
 
   contenu: string;
@@ -114,6 +116,7 @@ type PromptProf = {
   adaptationDYS: boolean;
   neuro: boolean;
 
+  // ✅ LaTeX ON/OFF
   latex: boolean;
 
   auteur: string;
@@ -129,16 +132,12 @@ type PromptProf = {
   themes: ThemeAborde[];
   themesLabel: string;
 
+  // ✅ options ligne 2
   optDifferenciation: boolean;
   optRituels: boolean;
   optIAFriendly: boolean;
   optAtelierIA: boolean;
 };
-
-/* ----------------------------------------
-   OPTION A : MODE RAPIDE / MODE PRÉCIS
----------------------------------------- */
-type InputMode = "rapide" | "precis";
 
 /* ----------------------------------------
    OPTIONS
@@ -249,6 +248,7 @@ function blocWordDesign(style: OutputStyle) {
 }
 
 function mapTacheToMainCategory(tache: string): MainCategory {
+  // ÉVALUATION
   if (
     [
       "devoir_dm",
@@ -263,8 +263,10 @@ function mapTacheToMainCategory(tache: string): MainCategory {
   )
     return "evaluation";
 
+  // CORRECTION & SUIVI
   if (["corrige_detaille", "consignes_travail"].includes(tache)) return "correction";
 
+  // MÉTHODES / DOCUMENTS / RÉVISION
   if (
     [
       "explication",
@@ -281,6 +283,7 @@ function mapTacheToMainCategory(tache: string): MainCategory {
   )
     return "methodes";
 
+  // sinon : séance / activités / projets
   return "seance";
 }
 
@@ -288,6 +291,7 @@ function labelFromTache(value: string) {
   const found = TACHES_PROF.find((t) => t.value === value);
   return found?.label ?? "";
 }
+
 
 /* ----------------------------------------
    PROMPT
@@ -302,6 +306,7 @@ function construirePrompt(form: PromptProf): string {
   const blocAuteur = form.auteur ? `Préparé par : ${form.auteur}.\n` : "";
 
   const themesHumains = form.themes?.length ? form.themes.map((t) => THEME_LABEL_BY_ID[t] ?? t) : [];
+
   const blocThemes =
     (themesHumains.length ? `Thèmes à intégrer : ${themesHumains.join(", ")}.\n` : "") +
     (form.themesLabel?.trim() ? `Contexte / angle : ${form.themesLabel.trim()}.\n` : "");
@@ -313,20 +318,21 @@ function construirePrompt(form: PromptProf): string {
     ? "Neurosciences : activer prérequis, petites étapes, alternance explications/questions, récapitulatif, reformulation.\n\n"
     : "";
 
-  const matiereScientifique = [
-    "maths",
-    "maths-spe-1re",
-    "maths-spe-tle",
-    "maths-complementaires",
-    "maths-expertes",
-    "physique-chimie",
-    "svt",
-    "enseignement-scientifique",
-    "snt",
-    "nsi",
-    "informatique",
-    "sciences-ingenieur",
-  ].includes(form.matiere);
+const matiereScientifique = [
+  "maths",
+  "maths-spe-1re",
+  "maths-spe-tle",
+  "maths-complementaires",
+  "maths-expertes",
+  "physique-chimie",
+  "svt",
+  "enseignement-scientifique",
+  "snt",
+  "nsi",
+  "informatique",
+  "sciences-ingenieur",
+].includes(form.matiere);
+
 
   const blocSansLatex =
     matiereScientifique && !form.latex
@@ -437,7 +443,13 @@ function construirePrompt(form: PromptProf): string {
    UI : Boutons "Coller dans" (couleurs)
 ---------------------------------------- */
 
-function PasteTargets({ text, showToast }: { text: string; showToast: (msg: string) => void }) {
+function PasteTargets({
+  text,
+  showToast,
+}: {
+  text: string;
+  showToast: (msg: string) => void;
+}) {
   const disabled = !text;
   const tchatHref = text ? `/tchat?prompt=${encodeURIComponent(text)}` : "/tchat";
 
@@ -461,7 +473,9 @@ function PasteTargets({ text, showToast }: { text: string; showToast: (msg: stri
             if (disabled) e.preventDefault();
           }}
           className={`px-3 py-2 rounded-lg font-semibold transition ${
-            disabled ? "bg-slate-200 text-slate-500 cursor-not-allowed" : "bg-emerald-600 text-white hover:bg-emerald-700"
+            disabled
+              ? "bg-slate-200 text-slate-500 cursor-not-allowed"
+              : "bg-emerald-600 text-white hover:bg-emerald-700"
           }`}
         >
           🚀 Tchat EleveAI
@@ -594,7 +608,7 @@ type DbRunEmail = {
 };
 
 /* ----------------------------------------
-   RELANCE (Prompt 2)
+   RELANCE (Prompt 2) — UI profs
 ---------------------------------------- */
 
 type FeedbackChoice = "" | "ok" | "bof" | "pas_ok";
@@ -626,7 +640,7 @@ export default function ProfsPage() {
     topRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
   }, []);
 
-  // ✅ Toast
+  // ✅ Toast (comme espace élèves)
   const [toast, setToast] = useState<string | null>(null);
   const showToast = useCallback((msg: string) => {
     setToast(msg);
@@ -639,7 +653,7 @@ export default function ProfsPage() {
       objectifPedagogique: "",
       classe: "",
       matiere: "",
-      tacheProf: "",
+      tacheProf: "", // ✅ NEW
       niveau: "standard",
       typeId: "seance_cle_en_main",
       contenu: "",
@@ -666,17 +680,16 @@ export default function ProfsPage() {
   const [form, setForm] = useState<PromptProf>(() => makeInitialForm());
   const [rawTags, setRawTags] = useState("");
 
-  // ✅ Option A : mode
-  const [mode, setMode] = useState<InputMode>("rapide");
-
   const [promptInterne, setPromptInterne] = useState("");
   const [agentOutput, setAgentOutput] = useState("");
   const [agentLoading, setAgentLoading] = useState(false);
   const [agentError, setAgentError] = useState("");
+
   const [formError, setFormError] = useState<string>("");
 
   const [copiedPrompt, setCopiedPrompt] = useState(false);
   const [copiedRessource, setCopiedRessource] = useState(false);
+
   const [showPromptInterne, setShowPromptInterne] = useState(true);
 
   const [showMethode, setShowMethode] = useState(false);
@@ -697,17 +710,16 @@ export default function ProfsPage() {
   const [historyLoading, setHistoryLoading] = useState(false);
   const [runs, setRuns] = useState<DbRunEmail[]>([]);
 
-  // ✅ NEW UX : catégorie principale + recherche type
+  // ✅ NEW UX : catégorie principale
   const [mainCategory, setMainCategory] = useState<MainCategory>("seance");
   const [typeQuery, setTypeQuery] = useState("");
 
-  // ✅ Relance (Prompt 2)
+  // ✅ Relance (Prompt 2) — avis prof
   const [feedbackChoice, setFeedbackChoice] = useState<FeedbackChoice>("");
   const [feedbackText, setFeedbackText] = useState("");
   const [promptRelance, setPromptRelance] = useState("");
   const [copiedRelance, setCopiedRelance] = useState(false);
 
-  // ✅ Auth state
   useEffect(() => {
     let mounted = true;
     supabase.auth.getUser().then(({ data }) => {
@@ -736,12 +748,6 @@ export default function ProfsPage() {
     }
   }, [form.classe, form.matiere, form.typeId]);
 
-  // ✅ synchro catégorie depuis type (robuste)
-  useEffect(() => {
-    const t = getTypeById(form.typeId);
-    if (t?.category) setMainCategory(normalizeMainCategory(t.category));
-  }, [form.typeId]);
-
   const handleChange = useCallback(<K extends keyof PromptProf>(field: K, value: PromptProf[K]) => {
     setForm((prev) => ({ ...prev, [field]: value }));
   }, []);
@@ -755,6 +761,7 @@ export default function ProfsPage() {
     setCopiedRessource(false);
     setShowPromptInterne(true);
 
+    // relance
     setFeedbackChoice("");
     setFeedbackText("");
     setPromptRelance("");
@@ -776,20 +783,6 @@ export default function ProfsPage() {
       return { ...prev, themes: has ? prev.themes.filter((t) => t !== id) : [...prev.themes, id] };
     });
   }, []);
-
-  // ✅ Option A : switch mode
-  const switchToRapide = useCallback(() => {
-    setMode("rapide");
-    // règle d’or : en mode rapide, pas de tâche
-    setForm((p) => ({ ...p, tacheProf: "" }));
-    setTypeQuery("");
-    showToast("⚡ Mode rapide");
-  }, [showToast]);
-
-  const switchToPrecis = useCallback(() => {
-    setMode("precis");
-    showToast("🎯 Mode précis : choisis une tâche");
-  }, [showToast]);
 
   const appliquerPresetModele = useCallback(
     (key: ProfsPresetKey) => {
@@ -844,7 +837,6 @@ export default function ProfsPage() {
     setLastPresetId(null);
     setMainCategory("seance");
     setTypeQuery("");
-    setMode("rapide");
     showToast("🔄 Reset complet");
     setTimeout(() => scrollToTop(), 50);
   }, [clearOutputs, makeInitialForm, scrollToTop, showToast]);
@@ -907,11 +899,8 @@ export default function ProfsPage() {
 
     if (estEval && !form.modaliteEvaluation) issues.push("Choisis une modalité d’évaluation.");
 
-    // En mode précis, on veut une tâche
-    if (mode === "precis" && !form.tacheProf) issues.push("Mode précis : choisis une tâche.");
-
     return { ok: issues.length === 0, issues };
-  }, [estEval, form, mode]);
+  }, [estEval, form]);
 
   const suggestions = useMemo(() => {
     const s: string[] = [];
@@ -923,11 +912,10 @@ export default function ProfsPage() {
     if (form.contenu.trim().length > 0 && form.contenu.trim().length < 40) s.push("Consigne : ajoute contraintes, barème/critères, exemple attendu.");
     if (!form.dureeMin || form.dureeMin <= 0) s.push("Durée : calibre la production.");
 
-    if (mode === "precis" && !form.tacheProf) s.push("Mode précis : choisis une tâche pour guider automatiquement la catégorie.");
-
     if (!form.optDifferenciation) s.push("Option : active Différenciation si tu veux base/standard/défi.");
     if (normalizeMainCategory(selectedType?.category) === "seance" && !form.optRituels) s.push("Option : active Rituels pour un démarrage 5–10 min (simple et efficace).");
     if (!form.optIAFriendly) s.push("Option : active Compatible correction IA si tu veux un document Word structuré.");
+    if (form.optAtelierIA && !form.optIAFriendly) s.push("atelier-IA : active aussi Compatible correction IA pour une structure plus simple à relire.");
 
     if (estEval) {
       s.push("Évaluation : barème + critères + aides autorisées (calculatrice, docs, IA…).");
@@ -942,7 +930,7 @@ export default function ProfsPage() {
     if (s.length === 0) s.push("Parfait. Tu peux ajouter : matériel, contraintes, exemple de production attendue.");
 
     return s;
-  }, [estEval, form, mode, selectedType?.category]);
+  }, [estEval, form, selectedType?.category]);
 
   /* ----------------------------------------
      DB HELPERS
@@ -1001,9 +989,7 @@ export default function ProfsPage() {
       const t = getTypeById(data.form.typeId);
       if (t?.category) setMainCategory(normalizeMainCategory(t.category));
 
-      // mode : si la tâche existe, on passe en mode précis
-      setMode(data.form.tacheProf ? "precis" : "rapide");
-
+      // relance
       setFeedbackChoice("");
       setFeedbackText("");
       setPromptRelance("");
@@ -1123,6 +1109,7 @@ export default function ProfsPage() {
     setCopiedPrompt(false);
     setCopiedRessource(false);
 
+    // reset relance
     setFeedbackChoice("");
     setFeedbackText("");
     setPromptRelance("");
@@ -1262,6 +1249,8 @@ export default function ProfsPage() {
       showToast("⚠️ Copie auto impossible (sélectionne puis Ctrl+C).");
     }
   }, [promptRelance, showToast]);
+
+  const tchatHref = useMemo(() => (promptInterne ? `/tchat?prompt=${encodeURIComponent(promptInterne)}` : "/tchat"), [promptInterne]);
 
   const mainCatMeta = useMemo(() => getMainCategoryMeta(mainCategory), [mainCategory]);
 
@@ -1419,11 +1408,12 @@ export default function ProfsPage() {
                   className="w-full border rounded-lg px-3 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-sky-300"
                 >
                   <option value="">Choisir…</option>
-                  {MATIERES.map((m) => (
-                    <option key={`${m.label}-${m.value}`} value={m.value} disabled={!!m.disabled}>
-                      {m.label}
-                    </option>
-                  ))}
+                    {MATIERES.map((m) => (
+                      <option key={`${m.label}-${m.value}`} value={m.value} disabled={!!m.disabled}>
+                        {m.label}
+                      </option>
+                    ))}
+
                 </select>
               </div>
 
@@ -1440,93 +1430,50 @@ export default function ProfsPage() {
                 </select>
               </div>
             </div>
+{/* ✅ NEW : Tâche prof (optionnel) */}
+<div className="space-y-1">
+  <label className="text-xs font-semibold text-gray-600">
+    Choisir une Tâche précise (optionnel) 
+  </label>
 
-            {/* ✅ OPTION A : MODE */}
-            <div className="space-y-2">
-              <label className="text-xs font-semibold text-gray-600">Mode</label>
-              <div className="grid grid-cols-2 gap-2">
-                <button
-                  type="button"
-                  onClick={switchToRapide}
-                  className={`rounded-xl border px-3 py-2 text-sm font-semibold transition ${
-                    mode === "rapide" ? "border-[#0047B6] bg-sky-50" : "border-slate-200 bg-white hover:bg-slate-50"
-                  }`}
-                >
-                  ⚡ Mode rapide
-                  <div className="text-[11px] font-normal text-slate-600 mt-1">Catégorie + options → tu vas vite</div>
-                </button>
+  <select
+    value={form.tacheProf}
+    onChange={(e) => {
+      const v = e.target.value;
 
-                <button
-                  type="button"
-                  onClick={switchToPrecis}
-                  className={`rounded-xl border px-3 py-2 text-sm font-semibold transition ${
-                    mode === "precis" ? "border-[#0047B6] bg-sky-50" : "border-slate-200 bg-white hover:bg-slate-50"
-                  }`}
-                >
-                  🎯 Mode précis
-                  <div className="text-[11px] font-normal text-slate-600 mt-1">Choisir une tâche → guidé</div>
-                </button>
-              </div>
+      // 1) on stocke la tâche
+      handleChange("tacheProf", v);
+      showToast(v ? "✅ Tâche choisie" : "↩️ Tâche retirée");
 
-              <div className="rounded-xl border border-slate-200 bg-slate-50 px-3 py-2">
-                <p className="text-[11px] text-slate-700">
-                  <span className="font-semibold">{mode === "rapide" ? "⚡ Rapide" : "🎯 Précis"}</span>{" "}
-                  {mode === "rapide"
-                    ? "— tu choisis la catégorie, puis un type."
-                    : "— tu choisis une tâche, la catégorie se déduit automatiquement."}
-                </p>
-              </div>
-            </div>
+      // 2) on guide sans casser ta philosophie "2 minutes"
+      if (v) {
+        const cat = mapTacheToMainCategory(v);
+        setMainCategory(cat);
 
-            {/* ✅ MODE PRÉCIS : TÂCHE */}
-            {mode === "precis" && (
-              <div className="space-y-1">
-                <label className="text-xs font-semibold text-gray-600">Tâche précise</label>
+        // 3) on alimente la recherche de type automatiquement
+        // (ça évite d'imposer un type : le prof garde la main)
+        const lab = labelFromTache(v);
+        setTypeQuery(lab.replace("—", " ").trim());
+      } else {
+        setTypeQuery("");
+      }
+    }}
+    className="w-full border rounded-lg px-3 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-sky-300"
+  >
+    <option value="">Choisir…</option>
 
-                <select
-                  value={form.tacheProf}
-                  onChange={(e) => {
-                    const v = e.target.value;
+    {TACHES_PROF.map((t) => (
+      <option key={`${t.label}-${t.value}`} value={t.value} disabled={!!t.disabled}>
+        {t.label}
+      </option>
+    ))}
+  </select>
 
-                    // 1) on stocke la tâche
-                    handleChange("tacheProf", v);
-                    showToast(v ? "✅ Tâche choisie" : "↩️ Tâche retirée");
+  <p className="text-[11px] text-gray-500">
+    Choisir une tâche pré-sélectionne une catégorie + remplit la recherche pour trouver rapidement le bon “type”.
+  </p>
+</div>
 
-                    if (v) {
-                      // 2) catégorie guidée
-                      const cat = mapTacheToMainCategory(v);
-                      setMainCategory(cat);
-
-                      // 3) recherche guidée
-                      const lab = labelFromTache(v);
-                      setTypeQuery(lab.replace("—", " ").trim());
-                    } else {
-                      setTypeQuery("");
-                    }
-                  }}
-                  className="w-full border rounded-lg px-3 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-sky-300"
-                >
-                  <option value="">Choisir…</option>
-
-                  {TACHES_PROF.map((t) => (
-                    <option key={`${t.label}-${t.value}`} value={t.value} disabled={!!t.disabled}>
-                      {t.label}
-                    </option>
-                  ))}
-                </select>
-
-                <p className="text-[11px] text-gray-500">En mode précis, la tâche guide la catégorie + la recherche de type.</p>
-
-                {!!form.tacheProf && (
-                  <div className="mt-2 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2">
-                    <p className="text-xs font-semibold text-slate-800">
-                      🎯 Catégorie déduite : {getMainCategoryMeta(mainCategory).emoji} {getMainCategoryMeta(mainCategory).label}
-                    </p>
-                    <p className="mt-1 text-[11px] text-slate-600">Tu peux ensuite choisir le “type” précis dans la liste.</p>
-                  </div>
-                )}
-              </div>
-            )}
 
             {/* Durée + tonalité */}
             <div className="grid sm:grid-cols-2 gap-3">
@@ -1590,103 +1537,95 @@ export default function ProfsPage() {
               </div>
             </div>
 
-            {/* ✅ MODE RAPIDE : CATÉGORIE */}
-            {mode === "rapide" && (
-              <div className="space-y-2">
-                <label className="text-xs font-semibold text-gray-600 flex items-center gap-2">
-                  <LayoutGrid className="w-4 h-4" />
-                  Catégorie principale (ligne 1)
-                </label>
-
-                <div className="flex flex-wrap gap-2">
-                  {MAIN_CATEGORIES.map((c) => {
-                    const active = mainCategory === c.id;
-                    return (
-                      <button
-                        key={c.id}
-                        type="button"
-                        onClick={() => {
-                          setMainCategory(c.id);
-                          showToast("✅ Catégorie choisie");
-                        }}
-                        className={`px-3 py-1.5 rounded-full text-[12px] font-semibold border transition ${
-                          active ? "bg-[#0047B6] text-white border-[#0047B6]" : "bg-white text-slate-700 border-slate-300 hover:bg-slate-50"
-                        }`}
-                        title={c.hint}
-                      >
-                        {c.emoji} {c.label}
-                      </button>
-                    );
-                  })}
-                </div>
-              </div>
-            )}
-
-            {/* Options ligne 2 */}
-            <div className="pt-1 space-y-2">
+            {/* Types UX */}
+            <div className="space-y-2">
               <label className="text-xs font-semibold text-gray-600 flex items-center gap-2">
-                <SlidersHorizontal className="w-4 h-4" />
-                Options (ligne 2)
+                <LayoutGrid className="w-4 h-4" />
+                Catégorie principale (ligne 1)
               </label>
 
-              <div className="flex flex-wrap gap-2 mt-1">
-                <ToggleChip
-                  label="Différenciation"
-                  checked={form.optDifferenciation}
-                  onChange={(v) => handleChange("optDifferenciation", v)}
-                  hint="Base / Standard / Défi clairement séparés."
-                  tone="emerald"
-                  icon={<span>🎚️</span>}
-                />
-                <ToggleChip
-                  label="Rituels (5–10 min)"
-                  checked={form.optRituels}
-                  onChange={(v) => handleChange("optRituels", v)}
-                  hint="Mini-rituel d'entrée : question flash + correction rapide."
-                  tone="sky"
-                  icon={<span>⏱️</span>}
-                />
-                <ToggleChip
-                  label="Compatible correction IA"
-                  checked={form.optIAFriendly}
-                  onChange={(v) => handleChange("optIAFriendly", v)}
-                  hint="Document structuré (questions/réponses repérables)."
-                  tone="sky"
-                  icon={<span>🤖</span>}
-                />
-                <ToggleChip
-                  label="Intégrer usage IA en classe"
-                  checked={form.optAtelierIA}
-                  onChange={(v) => handleChange("optAtelierIA", v)}
-                  hint="Mini-parcours guidé d’usage de l’IA dans la ressource."
-                  tone="violet"
-                  icon={<span>🧪</span>}
-                />
+              <div className="flex flex-wrap gap-2">
+                {MAIN_CATEGORIES.map((c) => {
+                  const active = mainCategory === c.id;
+                  return (
+                    <button
+                      key={c.id}
+                      type="button"
+                      onClick={() => setMainCategory(c.id)}
+                      className={`px-3 py-1.5 rounded-full text-[12px] font-semibold border transition ${
+                        active ? "bg-[#0047B6] text-white border-[#0047B6]" : "bg-white text-slate-700 border-slate-300 hover:bg-slate-50"
+                      }`}
+                      title={c.hint}
+                    >
+                      {c.emoji} {c.label}
+                    </button>
+                  );
+                })}
               </div>
 
-              <div className="rounded-xl border border-slate-200 bg-slate-50 px-3 py-2">
-                <p className="text-[11px] text-slate-700">
-                  <span className="font-semibold">
-                    {mainCatMeta.emoji} {mainCatMeta.label}
-                  </span>{" "}
-                  + options :{" "}
-                  <span className="font-semibold">
-                    {[
-                      form.optDifferenciation ? "Différenciation" : null,
-                      form.optRituels ? "Rituels" : null,
-                      form.optIAFriendly ? "Correction IA" : null,
-                      form.optAtelierIA ? "Usage IA" : null,
-                    ]
-                      .filter(Boolean)
-                      .join(" • ") || "aucune"}
-                  </span>
-                </p>
-              </div>
-            </div>
+              {/* Options ligne 2 */}
+              <div className="pt-1">
+                <label className="text-xs font-semibold text-gray-600 flex items-center gap-2">
+                  <SlidersHorizontal className="w-4 h-4" />
+                  Options (ligne 2)
+                </label>
 
-            {/* Recherche de type */}
-            <div className="space-y-2">
-              <label className="text-xs font-semibold text-gray-600">Type (structure finale)</label>
+                <div className="flex flex-wrap gap-2 mt-2">
+                  <ToggleChip
+                    label="Différenciation"
+                    checked={form.optDifferenciation}
+                    onChange={(v) => handleChange("optDifferenciation", v)}
+                    hint="Base / Standard / Défi clairement séparés."
+                    tone="emerald"
+                    icon={<span>🎚️</span>}
+                  />
+                  <ToggleChip
+                    label="Rituels (5–10 min)"
+                    checked={form.optRituels}
+                    onChange={(v) => handleChange("optRituels", v)}
+                    hint="Mini-rituel d'entrée : question flash + correction rapide."
+                    tone="sky"
+                    icon={<span>⏱️</span>}
+                  />
+                  <ToggleChip
+                    label="Compatible correction IA"
+                    checked={form.optIAFriendly}
+                    onChange={(v) => handleChange("optIAFriendly", v)}
+                    hint="Document structuré (questions/réponses repérables)."
+                    tone="sky"
+                    icon={<span>🤖</span>}
+                  />
+                  <ToggleChip
+                    label="Intégrer usage IA en classe"
+                    checked={form.optAtelierIA}
+                    onChange={(v) => handleChange("optAtelierIA", v)}
+                    hint="Mini-parcours guidé d’usage de l’IA dans la ressource."
+                    tone="violet"
+                    icon={<span>🧪</span>}
+                  />
+                </div>
+
+                <div className="mt-2 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2">
+                  <p className="text-[11px] text-slate-700">
+                    <span className="font-semibold">
+                      {mainCatMeta.emoji} {mainCatMeta.label}
+                    </span>{" "}
+                    + options :{" "}
+                    <span className="font-semibold">
+                      {[
+                        form.optDifferenciation ? "Différenciation" : null,
+                        form.optRituels ? "Rituels" : null,
+                        form.optIAFriendly ? "Correction IA" : null,
+                        form.optAtelierIA ? "Usage IA" : null,
+                      ]
+                        .filter(Boolean)
+                        .join(" • ") || "aucune"}
+                    </span>
+                  </p>
+                </div>
+              </div>
+
+              {/* Recherche de type */}
               <div className="relative">
                 <Search className="w-4 h-4 text-slate-500 absolute left-3 top-1/2 -translate-y-1/2" />
                 <input
@@ -2007,7 +1946,7 @@ export default function ProfsPage() {
               </ul>
             </div>
 
-            {/* 3️⃣ PROMPT */}
+            {/* ✅ 3️⃣ PROMPT */}
             <div ref={promptRef} className="bg-white/95 border border-slate-200 rounded-2xl shadow-sm p-5 sm:p-6 space-y-4">
               <div className="flex items-center justify-between gap-2">
                 <h2 className="text-lg font-bold text-[#0047B6]">3️⃣ Prompt (à copier-coller)</h2>
@@ -2058,6 +1997,7 @@ export default function ProfsPage() {
                 />
               )}
 
+              {/* ✅ liens colorés + copie auto */}
               <PasteTargets text={promptInterne} showToast={showToast} />
 
               {!!promptInterne && (
@@ -2073,7 +2013,7 @@ export default function ProfsPage() {
               )}
             </div>
 
-            {/* 4️⃣ RESSOURCE */}
+            {/* ✅ 4️⃣ RESSOURCE */}
             <div ref={ressourceRef} className="bg-white/95 border border-slate-200 rounded-2xl shadow-sm p-5 sm:p-6 space-y-4">
               <div className="flex items-center justify-between gap-2">
                 <h2 className="text-lg font-bold text-[#0047B6]">4️⃣ Ressource générée</h2>
@@ -2097,6 +2037,7 @@ export default function ProfsPage() {
                 {agentLoading ? "Réflexion en cours..." : agentOutput ? <MarkdownMath>{agentOutput}</MarkdownMath> : "La ressource apparaîtra ici."}
               </div>
 
+              {/* ✅ Mini CTA relance */}
               <button
                 type="button"
                 onClick={() => {
@@ -2117,7 +2058,7 @@ export default function ProfsPage() {
               </button>
             </div>
 
-            {/* 5️⃣ AVIS + RELANCE */}
+            {/* ✅ 5️⃣ AVIS + RELANCE */}
             <div ref={relanceRef} className="bg-white/95 border border-slate-200 rounded-2xl shadow-sm p-5 sm:p-6 space-y-4">
               <div className="space-y-1">
                 <h2 className="text-lg font-bold text-[#0047B6]">5️⃣ Avis + relance (Prompt 2)</h2>
@@ -2192,6 +2133,7 @@ export default function ProfsPage() {
                 🔁 Générer une relance adaptée (Prompt 2)
               </button>
 
+              {/* Prompt 2 */}
               <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4 space-y-3">
                 <div className="flex items-center justify-between gap-2">
                   <div>
@@ -2348,10 +2290,22 @@ export default function ProfsPage() {
         </div>
       )}
 
-      <SignupNudge storageKey="eleveai_nudge_profs_v4" actionSignal={nudgeSignal} minActionCount={0} trigger="both" delayMs={5 * 60 * 1000} minInteractions={3} variant="bottom" />
+      <SignupNudge
+        storageKey="eleveai_nudge_profs_v4"
+        actionSignal={nudgeSignal}
+        minActionCount={0}
+        trigger="both"
+        delayMs={5 * 60 * 1000}
+        minInteractions={3}
+        variant="bottom"
+      />
 
       {/* ✅ TOAST */}
-      {toast && <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 rounded-xl bg-slate-900 text-white px-4 py-2 text-sm shadow-lg">{toast}</div>}
+      {toast && (
+        <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 rounded-xl bg-slate-900 text-white px-4 py-2 text-sm shadow-lg">
+          {toast}
+        </div>
+      )}
     </main>
   );
 }

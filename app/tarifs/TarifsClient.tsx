@@ -23,11 +23,8 @@ const STRIPE_CHECKOUT_URL = process.env.NEXT_PUBLIC_STRIPE_CHECKOUT_URL;
 /**
  * Modèle 3 offres :
  * - Gratuit : découverte (quota faible)
- * - Abonnement : 5,95€/mois (offre principale)
- * - Sponsor : soutien type crowdfunding (même accès que l'abonnement, + reconnaissance)
- *
- * NOTE : Pour Stripe, on passe un query param `plan=...` vers ton checkout.
- * Tu peux ensuite router vers un Price Stripe différent selon le plan.
+ * - Abonnement : 5,95€/mois (offre principale) -> Stripe
+ * - Sponsor : soutien volontaire -> /sponsor (page EleveAI) -> Moojo derrière
  */
 const PLANS: Plan[] = [
   {
@@ -71,8 +68,8 @@ const PLANS: Plan[] = [
   {
     kind: "sponsor",
     name: "Sponsor — Encourager le projet",
-    price: "À partir de 9,95 € / mois",
-    usesMonth: "Soutien crowdfunding (au choix)",
+    price: "Soutien libre",
+    usesMonth: "Crowdfunding (au choix)",
     description:
       "Pour celles et ceux qui veulent soutenir EleveAI et accélérer le développement (contenus, sécurité, maintenance).",
     includes: [
@@ -87,8 +84,7 @@ const PLANS: Plan[] = [
       "Anciens élèves",
       "Soutiens du projet",
     ],
-    checkoutUrl: STRIPE_CHECKOUT_URL,
-    ctaLabel: "Devenir Sponsor via Stripe",
+    ctaLabel: "Soutenir EleveAI →",
     footnote:
       "Le sponsoring n’est pas nécessaire pour utiliser EleveAI : c’est un soutien volontaire.",
   },
@@ -132,7 +128,7 @@ export default function TarifsPage() {
                   Trois options simples :{" "}
                   <strong>Découvrir gratuitement</strong>,{" "}
                   <strong>s’abonner à 5,95 € / mois</strong>, ou{" "}
-                  <strong>devenir Sponsor</strong> pour encourager le projet.{" "}
+                  <strong>soutenir le projet</strong>.{" "}
                   <span className="text-slate-400">
                     (Une utilisation = un prompt + une réponse.)
                   </span>
@@ -186,7 +182,7 @@ export default function TarifsPage() {
             </div>
           </div>
 
-          {/* ✅ Nouveau : Orientation par profil (conversion + SEO) */}
+          {/* Orientation par profil */}
           <div className="grid gap-3 sm:grid-cols-3">
             <Link
               href="/faq-professeurs"
@@ -254,6 +250,12 @@ export default function TarifsPage() {
             >
               Offre pilote (établissements)
             </Link>
+            <Link
+              href="/sponsor"
+              className="inline-flex items-center rounded-full border border-sky-600/60 bg-sky-900/20 px-3 py-1 text-xs text-sky-100 hover:bg-sky-900/35"
+            >
+              Soutenir EleveAI
+            </Link>
           </div>
         </div>
       </section>
@@ -263,17 +265,24 @@ export default function TarifsPage() {
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {PLANS.map((plan) => {
             const isFree = plan.kind === "free";
-            const canCheckout = Boolean(plan.checkoutUrl && stripeOk);
+            const isSponsor = plan.kind === "sponsor";
+            const isSub = plan.kind === "sub";
+
+            const canCheckout = isFree || isSponsor || (isSub && stripeOk);
 
             const ctaText =
-              plan.ctaLabel ?? (isFree ? "Créer un compte gratuit" : "Choisir via Stripe");
+              plan.ctaLabel ?? (isFree ? "Créer un compte gratuit" : "Choisir");
 
             const href = isFree
               ? "/auth/signup"
-              : `${plan.checkoutUrl}?plan=${encodeURIComponent(planQueryValue(plan.name))}`;
+              : isSponsor
+              ? "/sponsor"
+              : stripeOk && plan.checkoutUrl
+              ? `${plan.checkoutUrl}?plan=${encodeURIComponent(planQueryValue(plan.name))}`
+              : "#";
 
             const cardBorder =
-              plan.kind === "sponsor"
+              isSponsor
                 ? "border-sky-600/60"
                 : plan.highlight
                 ? "border-emerald-500/70"
@@ -282,7 +291,7 @@ export default function TarifsPage() {
             const cardShadow =
               plan.highlight
                 ? "shadow-lg shadow-emerald-500/20"
-                : plan.kind === "sponsor"
+                : isSponsor
                 ? "shadow-lg shadow-sky-500/10"
                 : "";
 
@@ -301,7 +310,7 @@ export default function TarifsPage() {
                     Recommandé
                   </div>
                 )}
-                {plan.kind === "sponsor" && !plan.highlight && (
+                {isSponsor && !plan.highlight && (
                   <div className="absolute -top-3 right-4 rounded-full bg-sky-500 px-3 py-1 text-[10px] font-semibold uppercase tracking-wide text-slate-950 shadow">
                     Soutien
                   </div>
@@ -313,7 +322,7 @@ export default function TarifsPage() {
                   <p
                     className={[
                       "text-2xl font-bold",
-                      plan.kind === "sponsor" ? "text-sky-300" : "text-emerald-300",
+                      isSponsor ? "text-sky-300" : "text-emerald-300",
                     ].join(" ")}
                   >
                     {plan.price}
@@ -353,7 +362,7 @@ export default function TarifsPage() {
                   <p
                     className={[
                       "text-[11px]",
-                      plan.kind === "sponsor" ? "text-sky-200/90" : "text-emerald-200/90",
+                      isSponsor ? "text-sky-200/90" : "text-emerald-200/90",
                     ].join(" ")}
                   >
                     {plan.footnote}
@@ -370,24 +379,39 @@ export default function TarifsPage() {
                       {ctaText}
                     </Link>
                   ) : canCheckout ? (
-                    <Link
-                      href={href}
-                      prefetch={false}
-                      className={[
-                        "inline-flex items-center justify-center rounded-full px-4 py-2 text-sm font-semibold transition",
-                        plan.highlight
-                          ? "bg-emerald-500 text-slate-950 hover:bg-emerald-400"
-                          : plan.kind === "sponsor"
-                          ? "bg-sky-500 text-slate-950 hover:bg-sky-400"
-                          : "bg-slate-800 text-slate-100 hover:bg-slate-700",
-                      ].join(" ")}
-                    >
-                      {ctaText}
-                    </Link>
+                    isSub && !stripeOk ? (
+                      <span className="inline-flex items-center justify-center rounded-full px-4 py-2 text-sm font-semibold bg-slate-900 text-slate-500 border border-slate-800 cursor-not-allowed">
+                        Paiement Stripe en cours d’activation
+                      </span>
+                    ) : (
+                      <Link
+                        href={href}
+                        prefetch={false}
+                        className={[
+                          "inline-flex items-center justify-center rounded-full px-4 py-2 text-sm font-semibold transition",
+                          plan.highlight
+                            ? "bg-emerald-500 text-slate-950 hover:bg-emerald-400"
+                            : isSponsor
+                            ? "bg-sky-500 text-slate-950 hover:bg-sky-400"
+                            : "bg-slate-800 text-slate-100 hover:bg-slate-700",
+                        ].join(" ")}
+                      >
+                        {ctaText}
+                      </Link>
+                    )
                   ) : (
                     <span className="inline-flex items-center justify-center rounded-full px-4 py-2 text-sm font-semibold bg-slate-900 text-slate-500 border border-slate-800 cursor-not-allowed">
-                      Paiement Stripe en cours d’activation
+                      Indisponible
                     </span>
+                  )}
+
+                  {isSponsor && (
+                    <Link
+                      href="/sponsor"
+                      className="inline-flex items-center justify-center text-xs text-sky-200 underline underline-offset-4 hover:text-sky-100"
+                    >
+                      Voir la page Sponsor (transparence) →
+                    </Link>
                   )}
 
                   <p className="text-[11px] text-slate-500">
@@ -482,11 +506,17 @@ export default function TarifsPage() {
               <p className="font-semibold text-slate-100">Le sponsor change quoi ?</p>
               <p className="mt-1">
                 Rien d’obligatoire : c’est un soutien volontaire pour encourager le projet.
-                L’accès “utile” est déjà dans l’abonnement standard.
+                L’accès “utile” est déjà dans l’abonnement standard.{" "}
+                <Link
+                  href="/sponsor"
+                  className="text-sky-200 underline underline-offset-4 hover:text-sky-100"
+                >
+                  En savoir plus →
+                </Link>
               </p>
             </div>
 
-            {/* ✅ Nouveau : liens FAQ par profil */}
+            {/* Liens FAQ par profil */}
             <div className="rounded-xl border border-slate-800 bg-slate-900/40 p-4">
               <p className="font-semibold text-slate-100">Je veux la FAQ adaptée à mon profil</p>
               <div className="mt-2 flex flex-wrap gap-2 text-xs">
@@ -527,3 +557,4 @@ export default function TarifsPage() {
     </main>
   );
 }
+

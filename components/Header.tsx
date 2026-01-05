@@ -687,8 +687,8 @@ export default function Header() {
             <li><Link href="/faq">FAQ</Link></li>
             <li><Link href="/charte">Charte</Link></li>
             <li><Link href="/communaute">Communauté</Link></li>
-            <li><Link href="/atelier-IA">Atelier-IA</Link></li>
-            <li><Link href="/espace-atelier-ia">Générateur Atelier-IA</Link></li>
+            <li><Link href="/espace-atelier-IA">Atelier-IA</Link></li>
+            <li><Link href="/espace-atelier-IA">Générateur Atelier-IA</Link></li>
             <li><Link href="/espace-profs">Générateur Profs</Link></li>
             <li><Link href="/espace-eleves">Générateur Élèves</Link></li>
             <li><Link href="/espace-parents">Générateur Parents</Link></li>
