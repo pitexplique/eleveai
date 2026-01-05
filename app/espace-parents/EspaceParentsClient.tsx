@@ -278,16 +278,15 @@ function CollerDansTags({
     window.open("https://claude.ai/new", "_blank");
   }
 
+    function openPerplexity() {
+    if (!prompt) return;
+    window.open("https://www.perplexity.ia", "_blank");
+  }
+
   return (
     <div className="space-y-2">
       <p className="text-sm font-semibold text-slate-700">Coller dans :</p>
       <div className="flex flex-wrap gap-2">
-        <Tag
-          label="🚀 Tchat EleveAI"
-          onClick={openEleveAI}
-          disabled={disabled}
-          variant="green"
-        />
         <Tag
           label="⬛ ChatGPT"
           onClick={openChatGPT}
@@ -295,23 +294,18 @@ function CollerDansTags({
           variant="dark"
         />
         <Tag
-          label="🟩 Gemini"
-          onClick={openGemini}
+          label="🟩 Perplexity"
+          onClick={openPerplexity}
           disabled={disabled}
           variant="green"
         />
         <Tag
-          label="🟪 Claude"
-          onClick={openClaude}
+          label="🚀 Tchat EleveAI"
+          onClick={openEleveAI}
           disabled={disabled}
-          variant="purple"
-        />
-        <Tag
-          label="🟧 Mistral"
-          onClick={openMistral}
-          disabled={disabled}
-          variant="orange"
-        />
+          variant="green"
+        />        
+
       </div>
       <p className="text-[11px] text-slate-500">
         Astuce : clique sur “🚀 Tchat EleveAI” → le prompt est copié et /tchat

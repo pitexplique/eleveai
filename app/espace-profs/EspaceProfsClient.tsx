@@ -458,19 +458,7 @@ function PasteTargets({ text, showToast }: { text: string; showToast: (msg: stri
     <div className="space-y-2 pt-1">
       <p className="text-[11px] text-gray-600">Coller dans :</p>
       <div className="flex flex-wrap gap-2 text-[11px] sm:text-xs">
-        <Link
-          href={tchatHref}
-          onClick={(e) => {
-            if (disabled) e.preventDefault();
-          }}
-          className={`px-3 py-2 rounded-lg font-semibold transition ${
-            disabled ? "bg-slate-200 text-slate-500 cursor-not-allowed" : "bg-emerald-600 text-white hover:bg-emerald-700"
-          }`}
-        >
-          🚀 Tchat EleveAI
-        </Link>
-
-        <a
+         <a
           href="https://chatgpt.com"
           target="_blank"
           rel="noreferrer"
@@ -489,7 +477,7 @@ function PasteTargets({ text, showToast }: { text: string; showToast: (msg: stri
         </a>
 
         <a
-          href="https://gemini.google.com"
+          href="https://www.perplexity.ai/"
           target="_blank"
           rel="noreferrer"
           onClick={(e) => {
@@ -503,44 +491,20 @@ function PasteTargets({ text, showToast }: { text: string; showToast: (msg: stri
             disabled ? "bg-slate-200 text-slate-500 cursor-not-allowed" : "bg-[#0F9D58] text-white hover:bg-[#0c7b45]"
           }`}
         >
-          🟩 Gemini
+          🟩 Perplexity
         </a>
-
-        <a
-          href="https://claude.ai"
-          target="_blank"
-          rel="noreferrer"
+       <Link
+          href={tchatHref}
           onClick={(e) => {
-            if (disabled) {
-              e.preventDefault();
-              return;
-            }
-            copySilently();
+            if (disabled) e.preventDefault();
           }}
           className={`px-3 py-2 rounded-lg font-semibold transition ${
-            disabled ? "bg-slate-200 text-slate-500 cursor-not-allowed" : "bg-[#4B3FFF] text-white hover:bg-[#372dcc]"
+            disabled ? "bg-slate-200 text-slate-500 cursor-not-allowed" : "bg-emerald-600 text-white hover:bg-emerald-700"
           }`}
         >
-          🟪 Claude
-        </a>
+          🚀 Tchat EleveAI
+        </Link>
 
-        <a
-          href="https://chat.mistral.ai"
-          target="_blank"
-          rel="noreferrer"
-          onClick={(e) => {
-            if (disabled) {
-              e.preventDefault();
-              return;
-            }
-            copySilently();
-          }}
-          className={`px-3 py-2 rounded-lg font-semibold transition ${
-            disabled ? "bg-slate-200 text-slate-500 cursor-not-allowed" : "bg-[#FF7F11] text-white hover:bg-[#e46f0d]"
-          }`}
-        >
-          🟧 Mistral
-        </a>
       </div>
     </div>
   );
