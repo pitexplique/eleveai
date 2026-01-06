@@ -27,13 +27,14 @@ import {
 import {
   ELEVES_PRESETS,
   ElevesPresetKey,
-  Classe,
   Confiance,
   TypeAide,
   DysType,
   PromptEleve as PromptEleveBase,
   ProfilEleve,
 } from "@/data/elevesPresets";
+
+import type { ClasseValue, MatiereValue } from "@/lib/constants/scolaire";
 
 // ✅ constantes partagées (format { value, label })
 import { CLASSES, MATIERES } from "@/lib/constants/scolaire";
@@ -153,13 +154,7 @@ function labelProfil(p: ProfilEleve) {
    UI : Boutons "Coller dans" (couleurs)
 ---------------------------------------- */
 
-function PasteTargets({
-  text,
-  showToast,
-}: {
-  text: string;
-  showToast: (msg: string) => void;
-}) {
+function PasteTargets({ text, showToast }: { text: string; showToast: (msg: string) => void }) {
   const disabled = !text;
   const tchatHref = text ? `/tchat?prompt=${encodeURIComponent(text)}` : "/tchat";
 
@@ -177,7 +172,6 @@ function PasteTargets({
     <div className="space-y-2 pt-1">
       <p className="text-[11px] text-gray-600">Coller dans :</p>
       <div className="flex flex-wrap gap-2 text-[11px] sm:text-xs">
-
         <a
           href="https://chatgpt.com"
           target="_blank"
@@ -197,7 +191,7 @@ function PasteTargets({
         </a>
 
         <a
-          href="https://www.perplexity.ai/"
+          href="https://www.perplexity.ia/"
           target="_blank"
           rel="noreferrer"
           onClick={(e) => {
@@ -214,21 +208,17 @@ function PasteTargets({
           🟩 Perplexity.ia
         </a>
 
-                <Link
+        <Link
           href={tchatHref}
           onClick={(e) => {
             if (disabled) e.preventDefault();
           }}
           className={`px-3 py-2 rounded-lg font-semibold transition ${
-            disabled
-              ? "bg-slate-200 text-slate-500 cursor-not-allowed"
-              : "bg-emerald-600 text-white hover:bg-emerald-700"
+            disabled ? "bg-slate-200 text-slate-500 cursor-not-allowed" : "bg-emerald-600 text-white hover:bg-emerald-700"
           }`}
         >
           🚀 Tchat EleveAI
         </Link>
-
-   
       </div>
     </div>
   );
@@ -268,8 +258,8 @@ export default function ElevePage() {
 
   const makeInitialForm = (): PromptEleve => ({
     prenom: "",
-    classe: "",
-    matiere: "",
+    classe: "" as any,
+    matiere: "" as any,
     chapitre: "",
     typeAide: "",
     confiance: "moyen",
@@ -394,8 +384,7 @@ export default function ElevePage() {
     const temps = form.tempsDispo?.trim() || "non précisé";
 
     const objectif =
-      (mode === "complet" ? form.objectifPerso.trim() : "") ||
-      "mieux comprendre ce chapitre et réussir les exercices importants.";
+      (mode === "complet" ? form.objectifPerso.trim() : "") || "mieux comprendre ce chapitre et réussir les exercices importants.";
 
     const exemples = mode === "complet" ? form.exemplesDifficiles.trim() : "";
 
@@ -543,7 +532,7 @@ export default function ElevePage() {
     setCopiedRelance(false);
 
     showToast("🔁 Relance générée !");
-    setTimeout(() => scrollToPrompt2(), 80); // ✅ micro-UX : scroll direct prompt 2
+    setTimeout(() => scrollToPrompt2(), 80);
   }
 
   async function copierRelance() {
@@ -591,10 +580,7 @@ export default function ElevePage() {
       return;
     }
 
-    const titreParDefaut =
-      form.chapitre.trim() ||
-      `${form.matiere || "Matière"} – ${form.typeAide ? typeAideLabel(form.typeAide) : "Aide"}`;
-
+    const titreParDefaut = form.chapitre.trim() || `${form.matiere || "Matière"} – ${form.typeAide ? typeAideLabel(form.typeAide) : "Aide"}`;
     const titre = window.prompt("Titre de ton preset (pour le retrouver facilement) :", titreParDefaut);
 
     if (!titre) {
@@ -654,7 +640,7 @@ export default function ElevePage() {
           </div>
         </header>
 
-        {/* MODELES RAPIDES (collapsible) */}
+        {/* MODELES RAPIDES (collapsible) — ✅ FERMÉ PAR DÉFAUT */}
         <details className="group rounded-2xl border border-slate-200 bg-white/95 shadow-sm">
           <summary className="cursor-pointer list-none p-4 sm:p-5 flex items-start justify-between gap-3">
             <div className="space-y-1">
@@ -662,7 +648,9 @@ export default function ElevePage() {
                 <Wand2 className="w-4 h-4 text-emerald-700" />
                 Modèles rapides (facultatif)
               </p>
-              <p className="text-xs text-slate-600">Choisis un modèle si tu veux aller plus vite. Tu peux tout modifier ensuite.</p>
+              <p className="text-xs text-slate-600">
+                Choisis un modèle si tu veux aller plus vite. Tu peux tout modifier ensuite.
+              </p>
             </div>
             <ChevronRight className="w-5 h-5 text-slate-500 transition group-open:rotate-90 mt-0.5" />
           </summary>
@@ -678,7 +666,6 @@ export default function ElevePage() {
             />
           </div>
         </details>
-
         <div className="grid gap-6 lg:grid-cols-2">
           {/* ETAPE 1 : PARAMETRES */}
           <section className="bg-white/95 border border-slate-200 rounded-2xl shadow-sm p-5 sm:p-6 space-y-4">
@@ -717,7 +704,8 @@ export default function ElevePage() {
                 <select
                   value={form.classe}
                   onChange={(e) => {
-                    handleChange("classe", e.target.value as any as Classe);
+                    handleChange("classe", e.target.value as ClasseValue);
+
                     showToast("✅ Classe choisie");
                   }}
                   className="w-full border rounded-lg px-3 py-2 text-sm bg-white"
@@ -736,7 +724,8 @@ export default function ElevePage() {
                 <select
                   value={form.matiere}
                   onChange={(e) => {
-                    handleChange("matiere", e.target.value);
+                    handleChange("matiere", e.target.value as MatiereValue);
+
                     showToast("✅ Matière choisie");
                   }}
                   className="w-full border rounded-lg px-3 py-2 text-sm bg-white"

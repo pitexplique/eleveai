@@ -1,8 +1,6 @@
 // data/elevesPresets.ts
 
-export type Classe =
-  | "6e" | "5e" | "4e" | "3e"
-  | "Seconde" | "Première" | "Terminale" | "";
+import type { ClasseValue, MatiereValue } from "@/lib/constants/scolaire";
 
 export type Confiance = "en_difficulte" | "moyen" | "a_l_aise";
 
@@ -22,7 +20,7 @@ export type DysType =
   | "dysorthographie"
   | "autre";
 
-// ✅ NEW : Ton profil (centres d’intérêt)
+// ✅ Ton profil (centres d’intérêt)
 export type ProfilEleve =
   | "sport"
   | "musique"
@@ -33,8 +31,8 @@ export type ProfilEleve =
 
 export type PromptEleve = {
   prenom: string;
-  classe: Classe;
-  matiere: string;
+  classe: ClasseValue | "";
+  matiere: MatiereValue | "";
   chapitre: string;
   typeAide: TypeAide | "";
   confiance: Confiance;
@@ -58,8 +56,8 @@ export type ElevesPresetKey =
   | "4e_fr_orthographe"
   | "3e_maths_brevet_revision"
   | "3e_langues_oral"
-  | "seconde_methodo"
-  | "terminale_maths_fonctions";
+  | "2de_methodo"
+  | "tle_maths_fonctions";
 
 export const ELEVES_PRESETS: Record<
   ElevesPresetKey,
@@ -71,7 +69,7 @@ export const ELEVES_PRESETS: Record<
     badges: ["6e", "Maths", "Bases"],
     valeurs: {
       classe: "6e",
-      matiere: "Mathématiques",
+      matiere: "maths",
       chapitre: "Calculs de base (priorités simples, opérations)",
       typeAide: "manipuler_pour_comprendre",
       confiance: "en_difficulte",
@@ -85,11 +83,11 @@ export const ELEVES_PRESETS: Record<
 
   "6e_maths_fractions_debut": {
     label: "🍕 6e – Fractions (démarrage)",
-    description: "Comprendre ce que veut dire 1/2, 3/4… avec dessins.",
+    description: "Comprendre 1/2, 3/4… avec dessins et exemples.",
     badges: ["6e", "Maths", "Fractions"],
     valeurs: {
       classe: "6e",
-      matiere: "Mathématiques",
+      matiere: "maths",
       chapitre: "Fractions : sens, représentation, comparaison simple",
       typeAide: "comprendre_le_cours",
       confiance: "moyen",
@@ -107,7 +105,7 @@ export const ELEVES_PRESETS: Record<
     badges: ["5e", "Maths", "Contrôle"],
     valeurs: {
       classe: "5e",
-      matiere: "Mathématiques",
+      matiere: "maths",
       chapitre: "Fractions : addition, soustraction, simplification",
       typeAide: "preparer_un_controle",
       confiance: "en_difficulte",
@@ -125,7 +123,7 @@ export const ELEVES_PRESETS: Record<
     badges: ["4e", "Français", "Exercices"],
     valeurs: {
       classe: "4e",
-      matiere: "Français",
+      matiere: "francais",
       chapitre: "Orthographe : accords, conjugaison, homophones",
       typeAide: "faire_des_exercices",
       confiance: "en_difficulte",
@@ -143,7 +141,7 @@ export const ELEVES_PRESETS: Record<
     badges: ["3e", "Maths", "Brevet"],
     valeurs: {
       classe: "3e",
-      matiere: "Mathématiques",
+      matiere: "maths",
       chapitre: "Brevet : calcul, géométrie, fonctions, probabilités",
       typeAide: "reviser_un_chapitre",
       confiance: "moyen",
@@ -157,11 +155,11 @@ export const ELEVES_PRESETS: Record<
 
   "3e_langues_oral": {
     label: "🎤 3e – Anglais oral",
-    description: "S’entraîner à parler, phrases simples + corrections.",
+    description: "S’entraîner à parler : phrases simples + corrections.",
     badges: ["3e", "Langues", "Oral"],
     valeurs: {
       classe: "3e",
-      matiere: "Langues",
+      matiere: "anglais",
       chapitre: "Oral : se présenter, parler de ses goûts",
       typeAide: "faire_des_exercices",
       confiance: "moyen",
@@ -173,13 +171,13 @@ export const ELEVES_PRESETS: Record<
     },
   },
 
-  "seconde_methodo": {
+  "2de_methodo": {
     label: "📘 Seconde – Méthode de travail",
     description: "Organisation, révisions, apprendre efficacement.",
     badges: ["Seconde", "Méthode"],
     valeurs: {
-      classe: "Seconde",
-      matiere: "Autre",
+      classe: "2de",
+      matiere: "methodologie",
       chapitre: "Méthode : s’organiser, réviser, mémoriser",
       typeAide: "methode_de_travail",
       confiance: "moyen",
@@ -191,13 +189,13 @@ export const ELEVES_PRESETS: Record<
     },
   },
 
-  "terminale_maths_fonctions": {
+  "tle_maths_fonctions": {
     label: "📈 Terminale – Fonctions",
     description: "Méthodes bac : variations, dérivée, lecture graphique.",
     badges: ["Terminale", "Maths", "Bac"],
     valeurs: {
-      classe: "Terminale",
-      matiere: "Mathématiques",
+      classe: "Tle",
+      matiere: "maths",
       chapitre: "Étude de fonctions : dérivation, variations, limites simples",
       typeAide: "reviser_un_chapitre",
       confiance: "moyen",
