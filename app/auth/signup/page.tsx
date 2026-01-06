@@ -549,6 +549,7 @@ export default function SignUpPage() {
         </div>
 
         {/* COLONNE DROITE */}
+        {/* COLONNE DROITE */}
         <div className="relative hidden w-full overflow-hidden bg-slate-900 md:block md:w-1/2">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_#22c55e33,_transparent_60%),radial-gradient(circle_at_bottom,_#0f172a,_#020617)]" />
           <div className="absolute inset-0 bg-slate-900/60" />
@@ -571,8 +572,53 @@ export default function SignUpPage() {
             <p className="mt-4 max-w-xl text-sm text-slate-200">
               Pensé pour les élèves, les professeurs, les parents.
             </p>
+
+            {/* TÉMOIGNAGE */}
+            <div className="mt-8 max-w-xl rounded-2xl border border-slate-700/70 bg-slate-950/30 p-6 backdrop-blur">
+              <div className="inline-flex items-center gap-2 rounded-full bg-slate-800/60 px-3 py-1 text-[11px] font-semibold text-slate-200">
+                <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
+                Parole de professeur
+              </div>
+
+              <p className="mt-4 text-sm leading-relaxed text-slate-100">
+                En tant que professeur de mathématiques, la construction d’EleveAI m’a
+                aidé à mieux comprendre les élèves DYS et à réaliser qu’il existe{" "}
+                <span className="font-semibold text-white">
+                  une multitude de façons de préparer et de transmettre un même cours
+                </span>
+                .
+              </p>
+
+              <p className="mt-3 text-sm leading-relaxed text-slate-100">
+                Le générateur de prompts m’aide à explorer ces approches : reformulations,
+                niveaux variés, exemples concrets, points d’entrée multiples. En combinant
+                ces possibilités, on obtient des cours{" "}
+                <span className="font-semibold text-white">
+                  plus accessibles, plus différenciés et plus adaptés aux élèves
+                </span>
+                , sans renoncer aux exigences du programme.
+              </p>
+
+              <p className="mt-3 text-sm leading-relaxed text-slate-100">
+                EleveAI est un outil en évolution, que je souhaite continuer à améliorer{" "}
+                <span className="font-semibold text-white">
+                  avec et pour les enseignants, élèves et parents
+                </span>
+                , dans un cadre éthique, clair et respectueux du métier.
+              </p>
+
+              <div className="mt-5 border-t border-slate-700/60 pt-4">
+                <p className="text-sm font-semibold text-white">
+                  Frédéric Lacoste
+                </p>
+                <p className="text-xs text-slate-300">
+                  Collège du Capitaine Dimitile — Entre-Deux — Île de La Réunion
+                </p>
+              </div>
+            </div>
           </div>
         </div>
+
       </div>
     </main>
   );
