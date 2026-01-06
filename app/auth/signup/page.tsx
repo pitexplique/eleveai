@@ -549,75 +549,65 @@ export default function SignUpPage() {
         </div>
 
         {/* COLONNE DROITE */}
-        {/* COLONNE DROITE */}
         <div className="relative hidden w-full overflow-hidden bg-slate-900 md:block md:w-1/2">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_#22c55e33,_transparent_60%),radial-gradient(circle_at_bottom,_#0f172a,_#020617)]" />
           <div className="absolute inset-0 bg-slate-900/60" />
 
           <div className="relative z-10 flex h-full flex-col justify-start pt-14 px-10 pb-20 text-slate-50">
             <h2 className="max-w-xl text-3xl font-bold leading-tight">
-              Un compte EleveAI
+              Revenir apprendre avec l’IA
             </h2>
 
-            <div className="mt-4 mb-6 max-w-xl rounded-lg border border-emerald-500 bg-emerald-500/10 px-4 py-3 backdrop-blur">
-              <p className="text-sm leading-relaxed text-emerald-200 font-medium">
-                Retrouver vos presets, votre historique et vos usages.
+            {/* 1 — PROF (4 lignes max) */}
+            <div className="mt-6 max-w-xl rounded-xl border border-slate-700/70 bg-slate-950/30 p-5 backdrop-blur">
+              <div className="text-xs font-semibold uppercase tracking-wide text-slate-300">
+                Regard d’enseignant
+              </div>
+
+              <p className="mt-3 text-sm leading-relaxed text-slate-100">
+                En tant que professeur de mathématiques, concevoir EleveAI m’a permis de
+                mieux comprendre les élèves DYS et de varier mes approches de cours.
+                Le générateur de prompts m’aide à tester une multitude de  façons d'enseigner.
+              </p>
+
+              <p className="mt-3 text-xs text-slate-300">
+                Frédéric Lacoste — Collège du Capitaine Dimitile (Entre-Deux, La Réunion)
               </p>
             </div>
 
-            <p className="max-w-xl text-sm font-medium text-yellow-300">
-              LLM + agent IA + méthodes actives pour l’apprentissage.
-            </p>
-
-            <p className="mt-4 max-w-xl text-sm text-slate-200">
-              Pensé pour les élèves, les professeurs, les parents.
-            </p>
-
-            {/* TÉMOIGNAGE */}
-            <div className="mt-8 max-w-xl rounded-2xl border border-slate-700/70 bg-slate-950/30 p-6 backdrop-blur">
-              <div className="inline-flex items-center gap-2 rounded-full bg-slate-800/60 px-3 py-1 text-[11px] font-semibold text-slate-200">
-                <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
-                Parole de professeur
+            {/* 2 — PARENTS */}
+            <div className="mt-5 max-w-xl rounded-xl border border-slate-700/50 bg-slate-950/20 p-5">
+              <div className="text-xs font-semibold uppercase tracking-wide text-slate-300">
+                Côté parents
               </div>
 
-              <p className="mt-4 text-sm leading-relaxed text-slate-100">
-                En tant que professeur de mathématiques, la construction d’EleveAI m’a
-                aidé à mieux comprendre les élèves DYS et à réaliser qu’il existe{" "}
-                <span className="font-semibold text-white">
-                  une multitude de façons de préparer et de transmettre un même cours
-                </span>
-                .
+              <p className="mt-3 text-sm leading-relaxed text-slate-200">
+                EleveAI vise à rassurer les familles : un usage de l’IA encadré, clair,
+                et compatible avec le cadre scolaire. L’objectif est d’aider à apprendre,
+                pas à “faire à la place”.
               </p>
+            </div>
 
-              <p className="mt-3 text-sm leading-relaxed text-slate-100">
-                Le générateur de prompts m’aide à explorer ces approches : reformulations,
-                niveaux variés, exemples concrets, points d’entrée multiples. En combinant
-                ces possibilités, on obtient des cours{" "}
-                <span className="font-semibold text-white">
-                  plus accessibles, plus différenciés et plus adaptés aux élèves
-                </span>
-                , sans renoncer aux exigences du programme.
-              </p>
-
-              <p className="mt-3 text-sm leading-relaxed text-slate-100">
-                EleveAI est un outil en évolution, que je souhaite continuer à améliorer{" "}
-                <span className="font-semibold text-white">
-                  avec et pour les enseignants, élèves et parents
-                </span>
-                , dans un cadre éthique, clair et respectueux du métier.
-              </p>
-
-              <div className="mt-5 border-t border-slate-700/60 pt-4">
-                <p className="text-sm font-semibold text-white">
-                  Frédéric Lacoste
-                </p>
-                <p className="text-xs text-slate-300">
-                  Collège du Capitaine Dimitile — Entre-Deux — Île de La Réunion
-                </p>
+            {/* 3 — ÉLÈVES */}
+            <div className="mt-5 max-w-xl rounded-xl border border-slate-700/50 bg-slate-950/20 p-5">
+              <div className="text-xs font-semibold uppercase tracking-wide text-slate-300">
+                Côté élèves
               </div>
+
+              <p className="mt-3 text-sm leading-relaxed text-slate-200">
+                L’espace élèves est conçu pour réviser, apprendre, poser des questions
+                et progresser à son rythme, dans un environnement clair et encadré.
+              </p>
+
+              <p className="mt-2 text-sm leading-relaxed text-slate-200">
+                L’Atelier-IA est un espace guidé pour explorer, réfléchir et chercher des
+                pistes de solutions pour le futur, en utilisant l’IA comme outil
+                d’accompagnement et de réflexion.
+              </p>
             </div>
           </div>
         </div>
+
 
       </div>
     </main>

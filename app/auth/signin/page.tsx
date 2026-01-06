@@ -509,16 +509,8 @@ export default function SignInPage() {
 
       <p className="mt-3 text-sm leading-relaxed text-slate-100">
         En tant que professeur de mathématiques, concevoir EleveAI m’a permis de
-        mieux comprendre les élèves DYS et de prendre conscience qu’il existe
-        de nombreuses façons d’enseigner un même cours.
-      </p>
-
-      <p className="mt-2 text-sm leading-relaxed text-slate-100">
-        EleveAI est un outil que je développe{" "}
-        <span className="font-semibold text-white">
-          avec et pour les enseignants, élèves et parents
-        </span>
-        , dans un cadre éthique et respectueux du métier.
+        mieux comprendre les élèves DYS et de varier mes approches de cours.
+        Le générateur de prompts m’aide à construire des contenus plus accessibles.
       </p>
 
       <p className="mt-3 text-xs text-slate-300">
@@ -533,32 +525,32 @@ export default function SignInPage() {
       </div>
 
       <p className="mt-3 text-sm leading-relaxed text-slate-200">
-        EleveAI est pensé pour rassurer les familles : un usage de l’intelligence
-        artificielle encadré, transparent et compatible avec le cadre scolaire.
+        EleveAI vise à rassurer les familles : un usage de l’IA encadré, clair,
+        et compatible avec le cadre scolaire. L’objectif est d’aider à apprendre,
+        pas à “faire à la place”.
       </p>
     </div>
 
     {/* 3 — ÉLÈVES */}
-{/* 3 — ÉLÈVES */}
-<div className="mt-5 max-w-xl rounded-xl border border-slate-700/50 bg-slate-950/20 p-5">
-  <div className="text-xs font-semibold uppercase tracking-wide text-slate-300">
-    Côté élèves
-  </div>
+    <div className="mt-5 max-w-xl rounded-xl border border-slate-700/50 bg-slate-950/20 p-5">
+      <div className="text-xs font-semibold uppercase tracking-wide text-slate-300">
+        Côté élèves
+      </div>
 
-  <p className="mt-3 text-sm leading-relaxed text-slate-200">
-    L’espace élèves est conçu pour réviser, apprendre, poser des questions
-    et progresser à son rythme, dans un environnement clair et encadré.
-  </p>
+      <p className="mt-3 text-sm leading-relaxed text-slate-200">
+        L’espace élèves est conçu pour réviser, apprendre, poser des questions
+        et progresser à son rythme, dans un environnement clair et encadré.
+      </p>
 
-  <p className="mt-2 text-sm leading-relaxed text-slate-200">
-    L’Atelier-IA invite à explorer, réfléchir et chercher des solutions pour
-    le futur, en utilisant l’intelligence artificielle comme un outil
-    d’accompagnement et de réflexion.
-  </p>
-</div>
-
+      <p className="mt-2 text-sm leading-relaxed text-slate-200">
+        L’Atelier-IA est un espace guidé pour explorer, réfléchir et chercher des
+        pistes de solutions pour le futur, en utilisant l’IA comme outil
+        d’accompagnement et de réflexion.
+      </p>
+    </div>
   </div>
 </div>
+
 
       </div>
     </main>
