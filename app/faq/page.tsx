@@ -30,7 +30,7 @@ export default function FAQIndexPage() {
 
         <div className="grid gap-4 sm:grid-cols-3">
           <Link
-            href="/faq-professeurs"
+            href="/faq/faq-professeurs"
             className="rounded-2xl border border-slate-800 bg-slate-900/60 p-5 hover:bg-slate-900/80 transition"
           >
             <p className="font-semibold text-emerald-300">Professeurs</p>
@@ -40,7 +40,7 @@ export default function FAQIndexPage() {
           </Link>
 
           <Link
-            href="/faq-parents"
+            href="/faq/faq-parents"
             className="rounded-2xl border border-slate-800 bg-slate-900/60 p-5 hover:bg-slate-900/80 transition"
           >
             <p className="font-semibold text-emerald-300">Parents</p>
@@ -50,7 +50,7 @@ export default function FAQIndexPage() {
           </Link>
 
           <Link
-            href="/faq-administration"
+            href="/faq/faq-administration"
             className="rounded-2xl border border-slate-800 bg-slate-900/60 p-5 hover:bg-slate-900/80 transition"
           >
             <p className="font-semibold text-emerald-300">Établissements</p>
@@ -62,7 +62,7 @@ export default function FAQIndexPage() {
 
         <div className="pt-6 border-t border-slate-800 text-sm text-slate-400">
           Vous cherchez le cadre global ?{" "}
-          <Link href="/atelier-IA/charte" className="text-emerald-300 font-semibold hover:text-emerald-200">
+          <Link href="charte" className="text-emerald-300 font-semibold hover:text-emerald-200">
             Lire la charte
           </Link>{" "}
           ·{" "}

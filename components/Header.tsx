@@ -316,21 +316,6 @@ export default function Header() {
             </span>
           </Link>
 
-          <Link href="/charte" className={topLinkClass(isActive(pathname, "/charte"))}>
-            <span className="inline-flex items-center gap-2">
-              <ShieldCheck className="h-4 w-4" />
-              Charte
-            </span>
-          </Link>
-
-          {/* ✅ Communauté */}
-          <Link href="/communaute" className={topLinkClass(isActive(pathname, "/communaute"))}>
-            <span className="inline-flex items-center gap-2">
-              <UsersRound className="h-4 w-4" />
-              Communauté
-            </span>
-          </Link>
-
           {/* Dropdowns: Atelier-IA + Prompts */}
           {GROUPS.map((group) => {
             const ref = getRefForKey(group.key);
