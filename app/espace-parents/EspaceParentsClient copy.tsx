@@ -3,28 +3,181 @@
 
 import Link from "next/link";
 import { useMemo, useState, useCallback, useEffect } from "react";
-import { PresetCarousel } from "@/components/PresetCarousel";
+import {
+  PresetCarousel,
+  PresetCarouselItem,
+} from "@/components/PresetCarousel";
 import { createClient } from "@/lib/supabase/client";
-import {
-  CLASSES,
-  MATIERES,
-  type ClasseValue,
-  type MatiereValue,
-} from "@/lib/constants/scolaire";
-import {
-  METHODES,
-  DEFAULT_METHODE,
-  type MethodePedagogique,
-  getMethodePromptBlock,
-} from "@/lib/pedagogie/methodes";
+import { CLASSES, MATIERES } from "@/lib/constants/scolaire";
 
-import {
-  PARENTS_PRESETS,
-  PARENTS_PRESET_ITEMS,
-  type Maitrise,
-  type ParentsPresetKey,
-  isParentsPresetKey,
-} from "@/data/parentsPresets";
+/* ----------------------------------------
+   TYPES POUR LES ÉTATS
+---------------------------------------- */
+
+type Maitrise = "besoin" | "satisfaisant" | "expert";
+
+type ParentsPresetValues = {
+  classe?: string;
+  matiere?: string;
+  objectif?: string;
+  maitrise?: Maitrise;
+  hasDys?: boolean;
+  dysTypes?: string[];
+  hyperactif?: boolean;
+};
+
+type PresetKey =
+  | "primaire_bases_maths"
+  | "primaire_lecture_francais"
+  | "college_controle_fractions"
+  | "college_devoirs_maison_encadrement"
+  | "lycee_methodes_travail"
+  | "lycee_preparation_bac_maths"
+  | "lycee_stress_examens"
+  | "dys_hyperactif_college";
+
+/* ----------------------------------------
+   PRESETS (MODÈLES RAPIDES)
+---------------------------------------- */
+
+const PRESETS: Record<
+  PresetKey,
+  { label: string; description: string; valeurs: ParentsPresetValues }
+> = {
+  primaire_bases_maths: {
+    label: "🟢 Primaire – Reprendre les bases en maths",
+    description:
+      "Pour un enfant qui manque de confiance sur les opérations et les problèmes simples.",
+    valeurs: {
+      classe: "CM2",
+      matiere: "maths",
+      objectif:
+        "Lui redonner confiance sur les bases en calcul (additions, soustractions, multiplications, problèmes simples) sans le décourager.",
+      maitrise: "besoin",
+      hasDys: false,
+      hyperactif: false,
+    },
+  },
+
+  primaire_lecture_francais: {
+    label: "📖 Primaire – Lecture et français",
+    description:
+      "Pour un enfant qui lit lentement et a besoin d’un accompagnement rassurant en lecture / écriture.",
+    valeurs: {
+      classe: "CM2",
+      matiere: "français",
+      objectif:
+        "L’aider à lire plus régulièrement, comprendre les textes simples et écrire des phrases correctes sans le mettre en échec.",
+      maitrise: "besoin",
+      hasDys: false,
+      hyperactif: false,
+    },
+  },
+
+  college_controle_fractions: {
+    label: "🟣 Collège – Préparer un contrôle de fractions",
+    description:
+      "Pour un élève de 5e/4e qui stresse à l’idée d’un contrôle en maths.",
+    valeurs: {
+      classe: "5e",
+      matiere: "maths",
+      objectif:
+        "L’aider à préparer un contrôle sur les fractions (simplifier, additionner, comparer) en le guidant pas à pas.",
+      maitrise: "besoin",
+      hasDys: false,
+      hyperactif: false,
+    },
+  },
+
+  college_devoirs_maison_encadrement: {
+    label: "📝 Collège – Mieux gérer les devoirs",
+    description:
+      "Pour un élève qui se laisse vite déborder par les devoirs maison et ne sait pas par où commencer.",
+    valeurs: {
+      classe: "collège",
+      matiere: "toutes les matières",
+      objectif:
+        "L’aider à organiser ses devoirs, découper les tâches en petites étapes et garder une attitude positive face au travail personnel.",
+      maitrise: "satisfaisant",
+      hasDys: false,
+      hyperactif: false,
+    },
+  },
+
+  lycee_methodes_travail: {
+    label: "📘 Lycée – Méthode de travail",
+    description:
+      "Pour un élève qui a besoin d’une méthode pour s’organiser et réviser plus efficacement.",
+    valeurs: {
+      classe: "lycée",
+      matiere: "toutes les matières",
+      objectif:
+        "L’aider à trouver une méthode de travail simple pour s’organiser, réviser régulièrement et préparer ses évaluations sans être débordé.",
+      maitrise: "satisfaisant",
+      hasDys: false,
+      hyperactif: false,
+    },
+  },
+
+  lycee_preparation_bac_maths: {
+    label: "📊 Lycée – Préparation bac (maths)",
+    description:
+      "Pour un élève de Première / Terminale qui veut se préparer sereinement aux épreuves de maths.",
+    valeurs: {
+      classe: "Tle",
+      matiere: "maths",
+      objectif:
+        "L’aider à revoir les chapitres importants pour le bac, identifier ses points faibles et s’entraîner avec des exercices progressifs.",
+      maitrise: "expert",
+      hasDys: false,
+      hyperactif: false,
+    },
+  },
+
+  lycee_stress_examens: {
+    label: "💬 Lycée – Stress et examens",
+    description:
+      "Pour un élève qui se bloque à cause du stress avant les contrôles et examens.",
+    valeurs: {
+      classe: "lycée",
+      matiere: "toutes les matières",
+      objectif:
+        "L’aider à gérer son stress avant les contrôles et examens, avec des conseils concrets, des routines courtes et des encouragements.",
+      maitrise: "satisfaisant",
+      hasDys: false,
+      hyperactif: false,
+    },
+  },
+
+  dys_hyperactif_college: {
+    label: "🧩 Collège – Profil DYS + hyperactif",
+    description:
+      "Pour un élève avec profil DYS et/ou TDAH qui a besoin d’un accompagnement très guidé et rassurant.",
+    valeurs: {
+      classe: "collège",
+      matiere: "toutes les matières",
+      objectif:
+        "L’aider à reprendre confiance, à comprendre les consignes et à travailler avec des activités courtes, guidées et adaptées à son profil DYS / hyperactif.",
+      maitrise: "besoin",
+      hasDys: true,
+      dysTypes: ["Dyslexie", "Dysorthographie"],
+      hyperactif: true,
+    },
+  },
+};
+
+/* ----------------------------------------
+   ITEMS POUR LE CARROUSEL
+---------------------------------------- */
+
+const PRESET_ITEMS: PresetCarouselItem[] = (
+  Object.entries(PRESETS) as [PresetKey, (typeof PRESETS)[PresetKey]][]
+).map(([key, preset]) => ({
+  id: key,
+  label: preset.label,
+  description: preset.description,
+  badge: "Modèle parent",
+}));
 
 /* ----------------------------------------
    UI HELPERS
@@ -125,9 +278,9 @@ function CollerDansTags({
     window.open("https://claude.ai/new", "_blank");
   }
 
-  function openPerplexity() {
+    function openPerplexity() {
     if (!prompt) return;
-    window.open("https://www.perplexity.ai/", "_blank");
+    window.open("https://www.perplexity.ia", "_blank");
   }
 
   return (
@@ -151,7 +304,8 @@ function CollerDansTags({
           onClick={openEleveAI}
           disabled={disabled}
           variant="green"
-        />
+        />        
+
       </div>
       <p className="text-[11px] text-slate-500">
         Astuce : clique sur “🚀 Tchat EleveAI” → le prompt est copié et /tchat
@@ -197,19 +351,13 @@ export default function EspaceParentsClient() {
   }, [supabase]);
 
   const [prenom, setPrenom] = useState("");
-
-  // ✅ alignés sur tes constantes
-  const [classe, setClasse] = useState<ClasseValue>("college");
-  const [matiere, setMatiere] = useState<MatiereValue>("maths");
-
+  const [classe, setClasse] = useState("collège");
+  const [matiere, setMatiere] = useState("maths");
   const [objectif, setObjectif] = useState(
     "Lui redonner confiance et l’aider à comprendre le cours sur : les fractions et la cuisine",
   );
 
-  // ✅ Méthode pédagogique
-  const [methode, setMethode] = useState<MethodePedagogique>(DEFAULT_METHODE);
-
-  // Profil enfant
+  // Zone "Vous qui connaissez votre enfant"
   const [maitrise, setMaitrise] = useState<Maitrise>("besoin");
   const [hasDys, setHasDys] = useState(false);
   const [dysTypes, setDysTypes] = useState<string[]>([]);
@@ -224,16 +372,14 @@ export default function EspaceParentsClient() {
     );
   };
 
-  const appliquerPreset = (key: ParentsPresetKey) => {
-    const preset = PARENTS_PRESETS[key];
+  const appliquerPreset = (key: PresetKey) => {
+    const preset = PRESETS[key];
     const v = preset.valeurs;
 
     if (v.classe !== undefined) setClasse(v.classe);
     if (v.matiere !== undefined) setMatiere(v.matiere);
     if (v.objectif !== undefined) setObjectif(v.objectif);
     if (v.maitrise !== undefined) setMaitrise(v.maitrise);
-    if (v.methode !== undefined) setMethode(v.methode);
-
     if (v.hasDys !== undefined) {
       setHasDys(v.hasDys);
       if (!v.hasDys) setDysTypes([]);
@@ -247,23 +393,21 @@ export default function EspaceParentsClient() {
 
     let maitrisePhrase = "";
     if (maitrise === "besoin") {
-      maitrisePhrase = `${nomEleve} a plutôt besoin d’aide en ce moment : certaines bases ne sont pas complètement installées et la confiance est fragile.`;
+      maitrisePhrase = `${nomEleve} a plutôt besoin d’aide en ce moment dans cette matière : certaines bases ne sont pas complètement installées et la confiance est fragile.`;
     } else if (maitrise === "satisfaisant") {
       maitrisePhrase = `${nomEleve} a un niveau globalement satisfaisant : il/elle réussit beaucoup de choses mais a besoin d’être rassuré·e et de consolider certaines notions.`;
     } else {
-      maitrisePhrase = `${nomEleve} est plutôt à l’aise / expert et a besoin d’être stimulé·e, d’aller un peu plus loin sans perdre le plaisir d’apprendre.`;
+      maitrisePhrase = `${nomEleve} est plutôt à l’aise / expert dans cette matière et a besoin d’être stimulé·e, d’aller un peu plus loin sans perdre le plaisir d’apprendre.`;
     }
-
-    const methodeBlock = getMethodePromptBlock(methode);
 
     const base = `Tu es une IA pédagogique bienveillante qui s’adresse à ${nomEleve}, élève en classe de ${classe}, en ${matiere}, dans le système scolaire français.
 
 ${maitrisePhrase}
 
-${methodeBlock}Ta mission :
+Ta mission :
 - aider ${nomEleve} à COMPRENDRE et à S’ENTRAÎNER,
 - sans jamais faire les exercices à sa place,
-- en respectant les programmes officiels,
+- en respectant les programmes officiels (Eduscol / BO),
 - en expliquant avec des mots simples et des exemples concrets.
 
 Objectif principal demandé par le parent : ${objectif}`;
@@ -289,7 +433,9 @@ Prise en compte des besoins spécifiques :
 - Tu évites les gros blocs de texte.
 - Tu relis les consignes en les reformulant avec des mots simples.
 - Tu fais souvent des petites pauses ("On récapitule en une phrase ?").
-${listeDys ? `- ${listeDys}` : ""}${hyperactifTexte ? `\n- ${hyperactifTexte}` : ""}`;
+${listeDys ? `- ${listeDys}` : ""}${
+        hyperactifTexte ? `\n- ${hyperactifTexte}` : ""
+      }`;
     }
 
     const suite = `
@@ -304,17 +450,7 @@ Règles importantes :
 
     setGeneratedPrompt(base + besoinsBloc + suite);
     setCopied(false);
-  }, [
-    prenom,
-    classe,
-    matiere,
-    objectif,
-    maitrise,
-    hasDys,
-    dysTypes,
-    hyperactif,
-    methode,
-  ]);
+  }, [prenom, classe, matiere, objectif, maitrise, hasDys, dysTypes, hyperactif]);
 
   const handleCopy = useCallback(async () => {
     if (!generatedPrompt) return;
@@ -491,17 +627,12 @@ Règles importantes :
         <PresetCarousel
           title="Choisir un modèle rapide (facultatif)"
           subtitle="Partir d’un exemple proche de votre situation, puis ajuster."
-          items={PARENTS_PRESET_ITEMS}
-          onSelect={(id) => {
-            // ✅ robuste si jamais on clique un id non prévu
-            if (isParentsPresetKey(id)) appliquerPreset(id);
-          }}
+          items={PRESET_ITEMS}
+          onSelect={(id) => appliquerPreset(id as PresetKey)}
         />
 
         {/* 3️⃣ FORMULAIRE PRINCIPAL + GÉNÉRATION */}
         <section className="mt-6 rounded-3xl bg-white p-6 shadow-md ring-1 ring-slate-100 lg:p-8">
-          {/* ... tout le reste IDENTIQUE à ton code (inchangé) ... */}
-
           <header className="mb-6 space-y-2">
             <p className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-100 text-xs font-semibold text-indigo-800">
               👨‍👩‍👧‍👦 Espace parents · Accompagnement scolaire encadré
@@ -518,6 +649,7 @@ Règles importantes :
               cadre scolaire.
             </p>
 
+            {/* ✅ Remplace SignupNudge (pb de props) par un bloc inline robuste */}
             {!authLoading && !isLoggedIn && (
               <div className="pt-3">
                 <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
@@ -525,8 +657,7 @@ Règles importantes :
                     Sauvegarder vos presets parents
                   </p>
                   <p className="mt-1 text-xs text-slate-600">
-                    Connectez-vous pour sauvegarder vos réglages, les retrouver
-                    plus tard et accéder à votre historique.
+                    Connectez-vous pour sauvegarder vos réglages, les retrouver plus tard et accéder à votre historique.
                   </p>
 
                   <div className="mt-3 flex flex-wrap gap-2">
@@ -565,7 +696,7 @@ Règles importantes :
                 <FieldLabel title="Classe" required />
                 <select
                   value={classe}
-                  onChange={(e) => setClasse(e.target.value as ClasseValue)}
+                  onChange={(e) => setClasse(e.target.value)}
                   className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-900 shadow-inner focus:border-emerald-400 focus:outline-none focus:ring-2 focus:ring-emerald-100"
                 >
                   {CLASSES.map((c) => (
@@ -582,7 +713,7 @@ Règles importantes :
                 <FieldLabel title="Matière" required />
                 <select
                   value={matiere}
-                  onChange={(e) => setMatiere(e.target.value as MatiereValue)}
+                  onChange={(e) => setMatiere(e.target.value)}
                   className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-900 shadow-inner focus:border-emerald-400 focus:outline-none focus:ring-2 focus:ring-emerald-100"
                 >
                   {MATIERES.map((m) => (
@@ -598,28 +729,6 @@ Règles importantes :
               </div>
 
               <div className="space-y-2">
-                <FieldLabel
-                  title="Méthode (facultatif)"
-                  hint="Le style d’accompagnement (rythme, guidage…)."
-                />
-                <select
-                  value={methode}
-                  onChange={(e) =>
-                    setMethode(e.target.value as MethodePedagogique)
-                  }
-                  className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-900 shadow-inner focus:border-emerald-400 focus:outline-none focus:ring-2 focus:ring-emerald-100"
-                >
-                  {METHODES.map((m) => (
-                    <option key={m.id} value={m.id}>
-                      {m.label}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            </div>
-
-            <div className="grid gap-4 sm:grid-cols-2">
-              <div className="space-y-2 sm:col-span-2">
                 <FieldLabel
                   title="Objectif"
                   required
@@ -654,6 +763,7 @@ Règles importantes :
               </button>
             </div>
 
+            {/* RESULTAT */}
             <div className="mt-6 space-y-3">
               <h3 className="text-sm font-semibold text-slate-900">
                 Prompt généré

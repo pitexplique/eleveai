@@ -1,193 +1,191 @@
-// data/profsPresets.ts
+// data/parentsPresets.ts
 
-export type NiveauProf = "basique" | "standard" | "expert";
+import type { PresetCarouselItem } from "@/components/PresetCarousel";
+import type { ClasseValue, MatiereValue } from "@/lib/constants/scolaire";
+import type { MethodePedagogique } from "@/lib/pedagogie/methodes";
 
-export type ProfsPresetKey =
-  | "6e_maths_fractions_remediation"
-  | "3e_maths_brevet_global"
-  | "2nde_maths_fonctions"
-  | "1re_spe_maths_second_degre"
-  | "term_spe_maths_annale_bac"
-  | "1re_francais_lecture_analytique"
-  | "term_philo_dissertation"
-  | "2nde_physique_mouvements";
+/* ----------------------------------------
+   TYPES (exportés)
+---------------------------------------- */
 
-export type ProfsPresetValues = {
-  titre?: string;
-  objectifPedagogique?: string;
-  classe?: string;
-  matiere?: string;
-  niveau?: NiveauProf;
-  type?: string;
-  contenu?: string;
-  tags?: string[];
-  adaptationDYS?: boolean;
-  neuro?: boolean;
+export type Maitrise = "besoin" | "satisfaisant" | "expert";
+
+export type ParentsPresetValues = {
+  classe?: ClasseValue;
+  matiere?: MatiereValue;
+  objectif?: string;
+  maitrise?: Maitrise;
+  hasDys?: boolean;
+  dysTypes?: string[];
+  hyperactif?: boolean;
+  methode?: MethodePedagogique;
 };
 
-export const PROFS_PRESETS: Record<
-  ProfsPresetKey,
-  { label: string; description: string; valeurs: ProfsPresetValues }
+export type ParentsPresetKey =
+  | "primaire_bases_maths"
+  | "primaire_lecture_francais"
+  | "college_controle_fractions"
+  | "college_devoirs_maison_encadrement"
+  | "lycee_methodes_travail"
+  | "lycee_preparation_bac_maths"
+  | "lycee_stress_examens"
+  | "dys_hyperactif_college";
+
+/* ----------------------------------------
+   PRESETS (valeurs alignées sur scolaire.ts)
+---------------------------------------- */
+
+export const PARENTS_PRESETS: Record<
+  ParentsPresetKey,
+  { label: string; description: string; valeurs: ParentsPresetValues }
 > = {
-  "6e_maths_fractions_remediation": {
-    label: "🟣 6e – Fractions (remédiation)",
+  primaire_bases_maths: {
+    label: "🟢 Primaire – Reprendre les bases en maths",
     description:
-      "Reprendre les bases des fractions avec beaucoup de manipulation et d’exemples concrets.",
+      "Pour un enfant qui manque de confiance sur les opérations et les problèmes simples.",
     valeurs: {
-      titre: "6e – Revoir les fractions en douceur",
-      classe: "6e",
-      matiere: "Mathématiques",
-      niveau: "basique",
-      type: "Génération d’exercices",
-      objectifPedagogique:
-        "Amener les élèves à comprendre le sens des fractions simples et à les comparer, avec des situations concrètes (partages, recettes…).",
-      contenu:
-        "Je voudrais une fiche d’exercices guidés sur les fractions en 6e (représentation, comparaison, simplification) avec beaucoup d’exemples concrets.",
-      tags: ["fractions", "remédiation", "6e"],
-      adaptationDYS: true,
-      neuro: true,
+      classe: "CM2",
+      matiere: "maths",
+      objectif:
+        "Lui redonner confiance sur les bases en calcul (additions, soustractions, multiplications, problèmes simples) sans le décourager.",
+      maitrise: "besoin",
+      hasDys: false,
+      hyperactif: false,
+      methode: "methode_active",
     },
   },
 
-  "3e_maths_brevet_global": {
-    label: "📘 3e – Révision globale brevet (maths)",
+  primaire_lecture_francais: {
+    label: "📖 Primaire – Lecture et français",
     description:
-      "Chapitre de révision type brevet : calcul, fonctions, statistiques, probabilités.",
+      "Pour un enfant qui lit lentement et a besoin d’un accompagnement rassurant en lecture / écriture.",
     valeurs: {
-      titre: "3e – Révision globale brevet maths",
-      classe: "3e",
-      matiere: "Mathématiques",
-      niveau: "standard",
-      type: "Préparation d’un sujet type brevet",
-      objectifPedagogique:
-        "Permettre à la classe de réviser l’ensemble des compétences clés du brevet en maths sur un chapitre de synthèse.",
-      contenu:
-        "Je souhaite un sujet type brevet en maths pour une classe de 3e : calcul numérique, fonctions, statistiques et probabilités, avec corrigé détaillé.",
-      tags: ["brevet", "3e", "révision globale"],
-      adaptationDYS: true,
-      neuro: true,
+      classe: "CM2",
+      matiere: "francais",
+      objectif:
+        "L’aider à lire plus régulièrement, comprendre les textes simples et écrire des phrases correctes sans le mettre en échec.",
+      maitrise: "besoin",
+      hasDys: false,
+      hyperactif: false,
+      methode: "methode_active",
     },
   },
 
-  "2nde_maths_fonctions": {
-    label: "📈 Seconde – Fonctions (cours + exercices)",
+  college_controle_fractions: {
+    label: "🟣 Collège – Préparer un contrôle de fractions",
     description:
-      "Séance de réactivation sur la notion de fonctions en Seconde avec exercices progressifs.",
+      "Pour un élève de 5e/4e qui stresse à l’idée d’un contrôle en maths.",
     valeurs: {
-      titre: "Seconde – Introduction aux fonctions",
-      classe: "Seconde",
-      matiere: "Mathématiques",
-      niveau: "standard",
-      type: "Préparation d’une séance",
-      objectifPedagogique:
-        "Rappeler la notion de fonction, de représentation graphique et de lecture de graphique en Seconde.",
-      contenu:
-        "Préparer une séance de découverte/réactivation sur les fonctions en Seconde, avec rappel de la notion, lecture graphique, tableaux de valeurs et 4 à 6 exercices progressifs.",
-      tags: ["fonctions", "seconde", "reprise de notions"],
-      adaptationDYS: true,
-      neuro: true,
+      classe: "5e",
+      matiere: "maths",
+      objectif:
+        "L’aider à préparer un contrôle sur les fractions (simplifier, additionner, comparer) en le guidant pas à pas.",
+      maitrise: "besoin",
+      hasDys: false,
+      hyperactif: false,
+      methode: "enseignement_explicite",
     },
   },
 
-  "1re_spe_maths_second_degre": {
-    label: "🧮 1re spé maths – Second degré",
+  college_devoirs_maison_encadrement: {
+    label: "📝 Collège – Mieux gérer les devoirs",
     description:
-      "Séance complète sur les fonctions du second degré : formes, variations, racines.",
+      "Pour un élève qui se laisse vite déborder par les devoirs maison et ne sait pas par où commencer.",
     valeurs: {
-      titre: "1re spé – Fonctions du second degré",
-      classe: "Première",
-      matiere: "Mathématiques",
-      niveau: "standard",
-      type: "Préparation d’une séance",
-      objectifPedagogique:
-        "Amener les élèves à passer de la forme développée à la forme canonique/factorisée et à interpréter les paramètres d’une fonction du second degré.",
-      contenu:
-        "Je veux une séance complète sur les fonctions du second degré (formes, sommet, racines, variations) pour une 1re spécialité maths, avec une partie cours et une partie exercices.",
-      tags: ["second degré", "première spé", "bac"],
-      adaptationDYS: true,
-      neuro: true,
+      classe: "college",
+      matiere: "toutes",
+      objectif:
+        "L’aider à organiser ses devoirs, découper les tâches en petites étapes et garder une attitude positive face au travail personnel.",
+      maitrise: "satisfaisant",
+      hasDys: false,
+      hyperactif: false,
+      methode: "mix",
     },
   },
 
-  "term_spe_maths_annale_bac": {
-    label: "🎓 Terminale spé – Annale de bac",
+  lycee_methodes_travail: {
+    label: "📘 Lycée – Méthode de travail",
     description:
-      "Sujet d’annale type bac en plusieurs parties, avec corrigé rédigé et commenté.",
+      "Pour un élève qui a besoin d’une méthode pour s’organiser et réviser plus efficacement.",
     valeurs: {
-      titre: "Terminale spé – Sujet type bac complet",
-      classe: "Terminale",
-      matiere: "Mathématiques",
-      niveau: "expert",
-      type: "Préparation d’un sujet type bac",
-      objectifPedagogique:
-        "Préparer les élèves à l’épreuve écrite de spécialité maths avec un sujet complet type bac.",
-      contenu:
-        "Génère un sujet type bac complet de spécialité maths Terminale (3 ou 4 exercices variés), avec corrigé détaillé et commentaires méthodologiques.",
-      tags: ["bac", "annale", "terminales spé"],
-      adaptationDYS: false,
-      neuro: true,
+      classe: "lycee",
+      matiere: "toutes",
+      objectif:
+        "L’aider à trouver une méthode de travail simple pour s’organiser, réviser régulièrement et préparer ses évaluations sans être débordé.",
+      maitrise: "satisfaisant",
+      hasDys: false,
+      hyperactif: false,
+      methode: "mix",
     },
   },
 
-  "1re_francais_lecture_analytique": {
-    label: "📚 1re – Lecture analytique (français)",
+  lycee_preparation_bac_maths: {
+    label: "📊 Lycée – Préparation bac (maths)",
     description:
-      "Préparer une lecture analytique guidée pour l’oral de français.",
+      "Pour un élève de Première / Terminale qui veut se préparer sereinement aux épreuves de maths.",
     valeurs: {
-      titre: "Première – Lecture analytique pour l’oral",
-      classe: "Première",
-      matiere: "Français",
-      niveau: "standard",
-      type: "Préparation de lecture analytique",
-      objectifPedagogique:
-        "Aider les élèves à structurer une lecture analytique pour l’oral de français (introduction, axes, conclusion).",
-      contenu:
-        "Je souhaite une lecture analytique guidée d’un extrait littéraire (au choix, niveau 1re), avec questions de compréhension, axes d’analyse et préparation à l’oral.",
-      tags: ["lecture analytique", "oral", "première"],
-      adaptationDYS: true,
-      neuro: true,
+      classe: "Tle",
+      matiere: "maths",
+      objectif:
+        "L’aider à revoir les chapitres importants pour le bac, identifier ses points faibles et s’entraîner avec des exercices progressifs.",
+      maitrise: "expert",
+      hasDys: false,
+      hyperactif: false,
+      methode: "enseignement_explicite",
     },
   },
 
-  "term_philo_dissertation": {
-    label: "💭 Terminale – Dissertation de philosophie",
+  lycee_stress_examens: {
+    label: "💬 Lycée – Stress et examens",
     description:
-      "Aider les élèves à construire un plan de dissertation à partir d’un sujet simple.",
+      "Pour un élève qui se bloque à cause du stress avant les contrôles et examens.",
     valeurs: {
-      titre: "Terminale – Méthode de dissertation de philosophie",
-      classe: "Terminale",
-      matiere: "Philosophie",
-      niveau: "standard",
-      type: "Préparation d’un sujet de dissertation",
-      objectifPedagogique:
-        "Aider les élèves à problématiser un sujet, construire un plan en 3 parties et annoncer une conclusion.",
-      contenu:
-        "Préparer une fiche méthode + un exemple guidé de dissertation de philosophie sur un sujet classique (liberté, justice, bonheur…).",
-      tags: ["philosophie", "dissertation", "méthode"],
-      adaptationDYS: true,
-      neuro: true,
+      classe: "lycee",
+      matiere: "toutes",
+      objectif:
+        "L’aider à gérer son stress avant les contrôles et examens, avec des conseils concrets, des routines courtes et des encouragements.",
+      maitrise: "satisfaisant",
+      hasDys: false,
+      hyperactif: false,
+      methode: "methode_active",
     },
   },
 
-  "2nde_physique_mouvements": {
-    label: "🔬 Seconde – Physique (mouvements)",
+  dys_hyperactif_college: {
+    label: "🧩 Collège – Profil DYS + hyperactif",
     description:
-      "Activité expérimentale + exercices sur les mouvements rectilignes.",
+      "Pour un élève avec profil DYS et/ou TDAH qui a besoin d’un accompagnement très guidé et rassurant.",
     valeurs: {
-      titre: "Seconde – Mouvements en physique",
-      classe: "Seconde",
-      matiere: "Physique-Chimie",
-      niveau: "standard",
-      type: "Conception d’activité expérimentale",
-      objectifPedagogique:
-        "Faire découvrir les notions de vitesse moyenne, graphique distance-temps et mouvement rectiligne en Seconde.",
-      contenu:
-        "Je veux une activité expérimentale simple sur les mouvements en Seconde (graphique distance-temps, vitesse moyenne) suivie de quelques exercices d’application.",
-      tags: ["physique", "mouvements", "seconde"],
-      adaptationDYS: true,
-      neuro: true,
+      classe: "college",
+      matiere: "toutes",
+      objectif:
+        "L’aider à reprendre confiance, à comprendre les consignes et à travailler avec des activités courtes, guidées et adaptées à son profil DYS / hyperactif.",
+      maitrise: "besoin",
+      hasDys: true,
+      dysTypes: ["Dyslexie", "Dysorthographie"],
+      hyperactif: true,
+      methode: "methode_active",
     },
   },
 };
 
+/* ----------------------------------------
+   ITEMS CARROUSEL (exportés, typés)
+---------------------------------------- */
 
+export const PARENTS_PRESET_ITEMS: PresetCarouselItem[] = Object.entries(
+  PARENTS_PRESETS,
+).map(([key, preset]) => ({
+  id: key, // ✅ string OK pour PresetCarouselItem
+  label: preset.label,
+  description: preset.description,
+  badge: "Modèle parent",
+}));
+
+/* ----------------------------------------
+   (optionnel) helper si tu veux garder le type côté page
+---------------------------------------- */
+
+export function isParentsPresetKey(id: string): id is ParentsPresetKey {
+  return id in PARENTS_PRESETS;
+}
