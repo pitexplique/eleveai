@@ -206,7 +206,7 @@ export default function Header() {
         icon: <Wand2 className="h-4 w-4" />,
         items: [
           {
-            href: "/espace-atelier-ia",
+            href: "/espace-atelier-IA",
             label: "Générateur Atelier-IA",
             desc: "Créer des projets guidés (environnement, action locale, créativité…)",
             icon: <FlaskConical className="h-4 w-4" />,
