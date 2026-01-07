@@ -92,11 +92,8 @@ function getMainCategoryMeta(cat: MainCategory) {
    TYPES UI
 ---------------------------------------- */
 
-type Niveau = "basique" | "remediation" | "ulis" | "standard" | "expert";
-
+type Niveau = "basique" | "standard" | "expert";
 type OutputStyle = "simple" | "word" | "word_expert" | "slides";
-type PromptMode = "basic" | "standard" | "expert";
-
 type Tonalite = "neutre" | "bienveillante" | "motivation" | "institutionnelle" | "ludique";
 
 type ModaliteEvaluation = "evaluation_sommative" | "evaluation_formative" | "evaluation_diagnostique" | "evaluation_differenciee";
@@ -218,14 +215,6 @@ function getEvalLabel(id: ModaliteEvaluation) {
 }
 function getEvalDesc(id: ModaliteEvaluation) {
   return EVAL_OPTIONS.find((e) => e.id === id)?.description ?? "";
-  function getDifficulteElevesLabel(n: Niveau) {
-  if (n === "ulis") return "ULIS";
-  if (n === "remediation") return "Remédiation";
-  if (n === "basique") return "Basique (très guidé)";
-  if (n === "standard") return "Standard";
-  return "Expert / approfondissement";
-}
-
 }
 
 function blocWordDesign(style: OutputStyle) {
@@ -382,140 +371,123 @@ function labelFromTache(value: string) {
   const found = TACHES_PROF.find((t) => t.value === value);
   return found?.label ?? "";
 }
-function getDifficulteElevesLabel(n: Niveau): string {
-  switch (n) {
-    case "ulis":
-      return "ULIS";
-    case "remediation":
-      return "Remédiation";
-    case "basique":
-      return "Basique (très guidé)";
-    case "standard":
-      return "Standard";
-    case "expert":
-      return "Expert / approfondissement";
-    default:
-      return "Standard";
-  }
-}
 
 /* ----------------------------------------
    PROMPT
 ---------------------------------------- */
 
-function construirePrompt(form: PromptProf, promptMode: PromptMode): string {
-  // ✅ EXPERT = ton prompt actuel inchangé
-  const construirePromptExpert = (form: PromptProf): string => {
-    const typeItem = getTypeById(form.typeId);
-    const typeLabel = typeItem?.label ?? "Ressource pédagogique";
-    const typeDesc = typeItem?.description ?? "";
+function construirePrompt(form: PromptProf): string {
+  const typeItem = getTypeById(form.typeId);
+  const typeLabel = typeItem?.label ?? "Ressource pédagogique";
+  const typeDesc = typeItem?.description ?? "";
 
-    const blocTags = form.tags.length > 0 ? `Mots-clés pédagogiques : ${form.tags.join(", ")}.\n` : "";
-    const blocAuteur = form.auteur ? `Préparé par : ${form.auteur}.\n` : "";
+  const blocTags = form.tags.length > 0 ? `Mots-clés pédagogiques : ${form.tags.join(", ")}.\n` : "";
+  const blocAuteur = form.auteur ? `Préparé par : ${form.auteur}.\n` : "";
 
-    const themesHumains = form.themes?.length ? form.themes.map((t) => THEME_LABEL_BY_ID[t] ?? t) : [];
-    const blocThemes =
-      (themesHumains.length ? `Thèmes à intégrer : ${themesHumains.join(", ")}.\n` : "") +
-      (form.themesLabel?.trim() ? `Contexte / angle : ${form.themesLabel.trim()}.\n` : "");
-    const blocContexteThemes = blocThemes.trim().length ? `\n${blocThemes}\n` : "";
+  const themesHumains = form.themes?.length ? form.themes.map((t) => THEME_LABEL_BY_ID[t] ?? t) : [];
+  const blocThemes =
+    (themesHumains.length ? `Thèmes à intégrer : ${themesHumains.join(", ")}.\n` : "") +
+    (form.themesLabel?.trim() ? `Contexte / angle : ${form.themesLabel.trim()}.\n` : "");
+  const blocContexteThemes = blocThemes.trim().length ? `\n${blocThemes}\n` : "";
 
-    const blocEduscol = "Respecter les programmes officiels français (Eduscol/BO), vocabulaire attendu.\n\n";
+  const blocEduscol = "Respecter les programmes officiels français (Eduscol/BO), vocabulaire attendu.\n\n";
 
-    const blocNeuro = form.neuro
-      ? "Neurosciences : activer prérequis, petites étapes, alternance explications/questions, récapitulatif, reformulation.\n\n"
+  const blocNeuro = form.neuro
+    ? "Neurosciences : activer prérequis, petites étapes, alternance explications/questions, récapitulatif, reformulation.\n\n"
+    : "";
+
+  const matiereScientifique = [
+    "maths",
+    "maths-spe-1re",
+    "maths-spe-tle",
+    "maths-complementaires",
+    "maths-expertes",
+    "physique-chimie",
+    "svt",
+    "enseignement-scientifique",
+    "snt",
+    "nsi",
+    "informatique",
+    "sciences-ingenieur",
+  ].includes(form.matiere);
+
+  const blocSansLatex =
+    matiereScientifique && !form.latex
+      ? 'Sans LaTeX (pas de \\frac, \\sqrt). Fractions a/b, puissances x^2 ou "x au carré".\n\n'
       : "";
 
-    const matiereScientifique = [
-      "maths",
-      "maths-spe-1re",
-      "maths-spe-tle",
-      "maths-complementaires",
-      "maths-expertes",
-      "physique-chimie",
-      "svt",
-      "enseignement-scientifique",
-      "snt",
-      "nsi",
-      "informatique",
-      "sciences-ingenieur",
-    ].includes(form.matiere);
+  const blocDYS = form.adaptationDYS
+    ? "Adapter DYS : phrases courtes, aération, vocabulaire expliqué, éviter doubles négations.\n\n"
+    : "";
 
-    const blocSansLatex =
-      matiereScientifique && !form.latex
-        ? 'Sans LaTeX (pas de \\frac, \\sqrt). Fractions a/b, puissances x^2 ou "x au carré".\n\n'
-        : "";
+  const dur = form.dureeMin && form.dureeMin > 0 ? `${form.dureeMin} min` : "non précisée";
+  const tone = form.tonalite || "neutre";
+  const blocCalibrage = `Calibrage demandé :\n- Durée : ${dur}.\n- Tonalité : ${tone}.\n\n`;
 
-    const blocDYS = form.adaptationDYS
-      ? "Adapter DYS : phrases courtes, aération, vocabulaire expliqué, éviter doubles négations.\n\n"
+  const blocOptions =
+    (form.optDifferenciation ? "Option : Différenciation (base / standard / défi) clairement indiquée.\n" : "") +
+    (form.optRituels ? "Option : Rituel d’entrée 5–10 min (activation, rappel, mini-défi, correction rapide).\n" : "") +
+    (form.optIAFriendly
+      ? "Option : Compatible correction IA — produire un document très structuré, régulier et facile à analyser automatiquement.\n"
+      : "") +
+    (form.optAtelierIA
+      ? "Option : Intégrer usage de l’IA en classe — inclure une mini-séquence guidée d’usage de l’IA (consignes, étapes, garde-fous, rendu attendu).\n"
+      : "");
+  const blocOptionsFinal = blocOptions.trim().length ? `Options activées :\n${blocOptions}\n` : "";
+
+  const estEval = normalizeMainCategory(typeItem?.category) === "evaluation";
+
+  const blocEvaluation = estEval
+    ? "MODE ÉVALUATION (important) :\n" +
+      `- Modalité : ${getEvalLabel(form.modaliteEvaluation)}.\n` +
+      "- Exiger : barème/points, consignes claires, attendus, critères de réussite.\n" +
+      (form.optDifferenciation ? "- Différenciation : base/standard/défi + erreurs typiques.\n" : "") +
+      "- Sortie Word : en-tête (classe/durée), exos numérotés, espaces réponses, total points.\n\n"
+    : "";
+
+  const blocMethode = estEval ? "" : getMethodePromptBlock(form.methode);
+
+  const blocStructureSeance =
+    normalizeMainCategory(typeItem?.category) === "seance"
+      ? "Structure chronométrée : accroche / recherche guidée / mise en commun / entraînement / bilan (rôle prof/élèves + matériel).\n\n"
       : "";
 
-    const dur = form.dureeMin && form.dureeMin > 0 ? `${form.dureeMin} min` : "non précisée";
-    const tone = form.tonalite || "neutre";
-    const blocCalibrage = `Calibrage demandé :\n- Durée : ${dur}.\n- Tonalité : ${tone}.\n\n`;
-
-    const blocOptions =
-      (form.optDifferenciation ? "Option : Différenciation (base / standard / défi) clairement indiquée.\n" : "") +
-      (form.optRituels ? "Option : Rituel d’entrée 5–10 min (activation, rappel, mini-défi, correction rapide).\n" : "") +
-      (form.optIAFriendly
-        ? "Option : Compatible correction IA — produire un document très structuré, régulier et facile à analyser automatiquement.\n"
-        : "") +
-      (form.optAtelierIA
-        ? "Option : Intégrer usage de l’IA en classe — inclure une mini-séquence guidée d’usage de l’IA (consignes, étapes, garde-fous, rendu attendu).\n"
-        : "");
-    const blocOptionsFinal = blocOptions.trim().length ? `Options activées :\n${blocOptions}\n` : "";
-
-    const estEval = normalizeMainCategory(typeItem?.category) === "evaluation";
-
-    const blocEvaluation = estEval
-      ? "MODE ÉVALUATION (important) :\n" +
-        `- Modalité : ${getEvalLabel(form.modaliteEvaluation)}.\n` +
-        "- Exiger : barème/points, consignes claires, attendus, critères de réussite.\n" +
-        (form.optDifferenciation ? "- Différenciation : base/standard/défi + erreurs typiques.\n" : "") +
-        "- Sortie Word : en-tête (classe/durée), exos numérotés, espaces réponses, total points.\n\n"
+  const blocRituels =
+    form.optRituels && normalizeMainCategory(typeItem?.category) === "seance"
+      ? "Rituel (5–10 min) : au tout début, une courte activité (question flash / rappel / mini-problème) + correction rapide.\n\n"
       : "";
 
-    const blocMethode = estEval ? "" : getMethodePromptBlock(form.methode);
+  const blocIAFriendly = form.optIAFriendly
+    ? "DOCUMENT COMPATIBLE CORRECTION IA :\n" +
+      "- Structure très claire et régulière.\n" +
+      "- Une consigne = une question.\n" +
+      "- Pour chaque question : « Attendus : ... » ou « Réponse attendue : ... ».\n" +
+      "- Si correction incluse : étapes numérotées + résultat final explicite.\n\n"
+    : "";
 
-    const blocStructureSeance =
-      normalizeMainCategory(typeItem?.category) === "seance"
-        ? "Structure chronométrée : accroche / recherche guidée / mise en commun / entraînement / bilan (rôle prof/élèves + matériel).\n\n"
-        : "";
+  const blocAtelierIA = form.optAtelierIA
+    ? "INTÉGRER USAGE DE L’IA EN CLASSE (mini-parcours guidé) :\n" +
+      "- Étape 1 : rédiger un prompt (modèle fourni).\n" +
+      "- Étape 2 : lire la réponse et surligner 2 points à vérifier.\n" +
+      "- Étape 3 : corriger/améliorer (avec justification).\n" +
+      "- Étape 4 : produire un rendu final personnel.\n\n"
+    : "";
 
-    const blocRituels =
-      form.optRituels && normalizeMainCategory(typeItem?.category) === "seance"
-        ? "Rituel (5–10 min) : au tout début, une courte activité (question flash / rappel / mini-problème) + correction rapide.\n\n"
-        : "";
+  const blocDifferenciation = form.optDifferenciation && !estEval ? "Différenciation : proposer base / standard / défi (indiquer clairement).\n\n" : "";
 
-    const blocIAFriendly = form.optIAFriendly
-      ? "DOCUMENT COMPATIBLE CORRECTION IA :\n" +
-        "- Structure très claire et régulière.\n" +
-        "- Une consigne = une question.\n" +
-        "- Pour chaque question : « Attendus : ... » ou « Réponse attendue : ... ».\n" +
-        "- Si correction incluse : étapes numérotées + résultat final explicite.\n\n"
-      : "";
+  const blocRappelsEtMeta =
+    "Réponse : prérequis courts, étapes numérotées, questions de vérification, récapitulatif, question métacognitive.\n\n";
 
-    const blocAtelierIA = form.optAtelierIA
-      ? "INTÉGRER USAGE DE L’IA EN CLASSE (mini-parcours guidé) :\n" +
-        "- Étape 1 : rédiger un prompt (modèle fourni).\n" +
-        "- Étape 2 : lire la réponse et surligner 2 points à vérifier.\n" +
-        "- Étape 3 : corriger/améliorer (avec justification).\n" +
-        "- Étape 4 : produire un rendu final personnel.\n\n"
-      : "";
+  const blocCriteres = "Fin : « Pour l’enseignant » (3-5 critères observables) + erreurs typiques.\n\n";
 
-    const blocDifferenciation = form.optDifferenciation && !estEval ? "Différenciation : proposer base / standard / défi (indiquer clairement).\n\n" : "";
+  const blocMiseEnPage =
+  "Si fiche, séance ou évaluation :\n" +
+  "- Mise en page claire et aérée.\n" +
+  "- Titres hiérarchisés (Titre / Sous-titre).\n" +
+  "- Listes à puces ou numérotées.\n" +
+  "- Espaces prévus pour les réponses des élèves.\n" +
+  "- Pas de blocs de texte trop longs.\n\n";
 
-    const blocRappelsEtMeta =
-      "Réponse : prérequis courts, étapes numérotées, questions de vérification, récapitulatif, question métacognitive.\n\n";
-
-    const blocCriteres = "Fin : « Pour l’enseignant » (3-5 critères observables) + erreurs typiques.\n\n";
-
-    const blocMiseEnPage =
-      "Si fiche, séance ou évaluation :\n" +
-      "- Mise en page claire et aérée.\n" +
-      "- Titres hiérarchisés (Titre / Sous-titre).\n" +
-      "- Listes à puces ou numérotées.\n" +
-      "- Espaces prévus pour les réponses des élèves.\n" +
-      "- Pas de blocs de texte trop longs.\n\n";
 
     const blocFinalStructure =
       form.outputStyle === "slides"
@@ -529,93 +501,39 @@ function construirePrompt(form: PromptProf, promptMode: PromptMode): string {
           '1) "=== PARTIE 1 : PROMPT OPTIMISÉ POUR L’IA ==="\n' +
           '2) "=== PARTIE 2 : RESSOURCE PRÊTE POUR L’ÉLÈVE ==="\n';
 
-    const blocWord = blocWordDesign(form.outputStyle);
 
-    return (
-      `Tu es une IA pédagogique pour des élèves de ${form.classe || "collège/lycée"} en ${form.matiere || "discipline"}.\n\n` +
-      blocEduscol +
-      blocNeuro +
-      blocSansLatex +
-      blocCalibrage +
-      blocOptionsFinal +
-      (typeDesc ? `Type choisi : ${typeLabel} — ${typeDesc}\n\n` : `Type choisi : ${typeLabel}\n\n`) +
-      blocEvaluation +
-      blocMethode +
-      blocWord +
-      `Objectif pédagogique : ${form.objectifPedagogique || "(non précisé)"}\n` +
-      `Difficulté élèves : ${getDifficulteElevesLabel(form.niveau)}.\n` +
-
-      blocTags +
-      blocContexteThemes +
-      blocAuteur +
-      `Consigne professeur (à optimiser) :\n"""${form.contenu.trim()}"""\n\n` +
-      blocDYS +
-      blocStructureSeance +
-      blocRituels +
-      blocIAFriendly +
-      blocAtelierIA +
-      blocDifferenciation +
-      blocRappelsEtMeta +
-      blocCriteres +
-      (form.outputStyle === "slides" ? "" : blocMiseEnPage) +
-      blocFinalStructure
-    );
-  };
-
-  if (promptMode === "expert") {
-    return construirePromptExpert(form); // ✅ inchangé
-  }
-
-  // ✅ STANDARD / BASIC : versions simplifiées
-  const typeItem = getTypeById(form.typeId);
-  const typeLabel = typeItem?.label ?? "Ressource pédagogique";
-  const typeDesc = typeItem?.description ?? "";
-
-  const blocEduscol = "Respecter les programmes officiels français (Eduscol/BO).\n";
-  const blocNeuro = form.neuro ? "Neurosciences : petites étapes, questions, récap.\n" : "";
-  const blocDYS = form.adaptationDYS ? "Adapter DYS : phrases courtes, aéré, vocabulaire expliqué.\n" : "";
-
-  const dur = form.dureeMin && form.dureeMin > 0 ? `${form.dureeMin} min` : "non précisée";
-  const tone = form.tonalite || "neutre";
-
-  const blocCalibrage = `Calibrage : durée ${dur} • tonalité ${tone}.\n`;
-
-  const blocOptionsStandard =
-    (form.optDifferenciation ? "Différenciation : base/standard/défi.\n" : "") +
-    (form.optRituels ? "Rituel court au début.\n" : "") +
-    (form.optIAFriendly ? "Sortie structurée : questions + attendus repérables.\n" : "") +
-    (form.optAtelierIA ? "Inclure une mini-étape d’usage IA guidé (si pertinent).\n" : "");
-
-  const blocOptionsBasic =
-    (form.optDifferenciation ? "Différenciation : base/standard/défi.\n" : "") +
-    (form.optIAFriendly ? "Sortie structurée (questions + attendus).\n" : "");
-
-  const blocFormat =
-    form.outputStyle === "slides"
-      ? "Format : SLIDE PAR SLIDE (Titre / Objectif / Questions-Consignes / Visuel suggéré). Aucune partie hors slides.\n"
-      : "Format : document clair (titres, listes, espaces réponses si besoin).\n";
-
-  const blocInterditsBasic =
-    "Interdits : pas de correction modèle, pas de réponse rédigée à la place des élèves.\n";
-
-  const optionsBloc = promptMode === "standard" ? blocOptionsStandard : blocOptionsBasic;
+  const blocWord = blocWordDesign(form.outputStyle);
 
   return (
-    `Tu es une IA pédagogique pour des élèves de ${form.classe || "collège/lycée"} en ${form.matiere || "discipline"}.\n` +
+    `Tu es une IA pédagogique pour des élèves de ${form.classe || "collège/lycée"} en ${form.matiere || "discipline"}.\n\n` +
     blocEduscol +
     blocNeuro +
-    blocDYS +
+    blocSansLatex +
     blocCalibrage +
-    (optionsBloc ? `Options :\n${optionsBloc}` : "") +
-    (typeDesc ? `Type : ${typeLabel} — ${typeDesc}\n` : `Type : ${typeLabel}\n`) +
-    blocFormat +
-    `Objectif : ${form.objectifPedagogique || "(non précisé)"}\n` +
-    `Difficulté élèves : ${form.niveau}.\n` +
-    `Consigne prof : """${form.contenu.trim()}"""\n` +
-    blocInterditsBasic
+    blocOptionsFinal +
+    (typeDesc ? `Type choisi : ${typeLabel} — ${typeDesc}\n\n` : `Type choisi : ${typeLabel}\n\n`) +
+    blocEvaluation +
+    blocMethode +
+    blocWord +
+    `Objectif pédagogique : ${form.objectifPedagogique || "(non précisé)"}\n` +
+    `Niveau : ${form.niveau}.\n` +
+    blocTags +
+    blocContexteThemes +
+    blocAuteur +
+    `Consigne professeur (à optimiser) :\n"""${form.contenu.trim()}"""\n\n` +
+    blocDYS +
+    blocStructureSeance +
+    blocRituels +
+    blocIAFriendly +
+    blocAtelierIA +
+    blocDifferenciation +
+    blocRappelsEtMeta +
+    blocCriteres +
+      (form.outputStyle === "slides" ? "" : blocMiseEnPage) +
+      blocFinalStructure
+
   );
 }
-
 /* ----------------------------------------
    UI : Boutons "Coller dans" (couleurs)
 ---------------------------------------- */
@@ -802,7 +720,7 @@ export default function ProfsPage() {
       tonalite: "neutre",
       modaliteEvaluation: "evaluation_sommative",
       themes: [],
-      themesLabel: "Exemples : thème local, type de texte, projet de classe, lien avec l’actualité, besoins spécifiques des élèves…",
+      themesLabel: "Agriculture & écologie : enjeux et solutions — contexte local : [territoire]",
       optDifferenciation: true,
       optRituels: false,
       optIAFriendly: true,
@@ -812,9 +730,6 @@ export default function ProfsPage() {
 
   const [form, setForm] = useState<PromptProf>(() => makeInitialForm());
   const [rawTags, setRawTags] = useState("");
-  // ✅ NEW : mode de génération du prompt (indépendant de la difficulté élèves)
-   const [promptMode, setPromptMode] = useState<PromptMode>("standard");
-
 
   // ✅ Option A : mode
   const [mode, setMode] = useState<InputMode>("rapide");
@@ -846,8 +761,6 @@ export default function ProfsPage() {
   const [showHistory, setShowHistory] = useState(false);
   const [historyLoading, setHistoryLoading] = useState(false);
   const [runs, setRuns] = useState<DbRunEmail[]>([]);
-
-  
 
   // ✅ NEW UX : catégorie principale + recherche type
   const [mainCategory, setMainCategory] = useState<MainCategory>("seance");
@@ -1269,8 +1182,7 @@ export default function ProfsPage() {
       return;
     }
 
-     const prompt = construirePrompt(form, promptMode);
-
+    const prompt = construirePrompt(form);
     setPromptInterne(prompt);
     setAgentOutput("");
     setCopiedPrompt(false);
@@ -1308,7 +1220,7 @@ export default function ProfsPage() {
     } finally {
       setAgentLoading(false);
     }
-  }, [createRun, form, promptMode, lastPresetId, triggerNudge, validation, scrollToPrompt, scrollToRessource, showToast]);
+  }, [createRun, form, lastPresetId, triggerNudge, validation, scrollToPrompt, scrollToRessource, showToast]);
 
   const copierPrompt = useCallback(async () => {
     if (!promptInterne) return;
@@ -1581,20 +1493,16 @@ export default function ProfsPage() {
               </div>
 
               <div className="space-y-1">
-                <label className="text-xs font-semibold text-gray-600">Difficulté élèves</label>
-
-              <select
-                value={form.niveau}
-                onChange={(e) => handleChange("niveau", e.target.value as Niveau)}
-                className="w-full border rounded-lg px-3 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-sky-300"
-              >
-                <option value="ulis">ULIS (adaptations fortes)</option>
-                <option value="remediation">Remédiation (bases à consolider)</option>
-                <option value="basique">Basique (très guidé)</option>
-                <option value="standard">Standard</option>
-                <option value="expert">Expert / approfondissement</option>
-              </select>
-
+                <label className="text-xs font-semibold text-gray-600">Niveau de difficulté</label>
+                <select
+                  value={form.niveau}
+                  onChange={(e) => handleChange("niveau", e.target.value as Niveau)}
+                  className="w-full border rounded-lg px-3 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-sky-300"
+                >
+                  <option value="basique">Basique (remédiation)</option>
+                  <option value="standard">Standard</option>
+                  <option value="expert">Expert / approfondissement</option>
+                </select>
               </div>
             </div>
 
@@ -2108,15 +2016,12 @@ export default function ProfsPage() {
               </div>
 
               <div className="space-y-1 pt-1">
-              <label className="text-xs font-medium text-slate-500">
-                Recommandations pédagogiques (facultatif)
-              </label>
-
+                <label className="text-[11px] font-semibold text-gray-600">Libellé de contexte (facultatif)</label>
                 <input
                   type="text"
                   value={form.themesLabel}
                   onChange={(e) => handleChange("themesLabel", e.target.value)}
-                  placeholder="Exemples : thème local, type de texte, projet de classe, lien avec l’actualité, besoins spécifiques des élèves…"
+                  placeholder="Ex : Agriculture & écologie — contexte local : [territoire]"
                   className="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-sky-300"
                 />
                 <p className="text-[11px] text-gray-500">Sert à contextualiser (exemples, vocabulaire, situations locales).</p>
@@ -2146,63 +2051,6 @@ export default function ProfsPage() {
                 )}
               </div>
             )}
-
-            {/* ✅ NEW : Mode de génération du prompt */}
-    <div className="pt-2 space-y-2">
-      <label className="text-xs font-semibold text-gray-600">Mode de génération du prompt</label>
-
-      <div className="grid grid-cols-3 gap-2">
-        <button
-          type="button"
-          onClick={() => {
-            setPromptMode("basic");
-            showToast("✍️ Prompt : BASIC");
-          }}
-          className={`rounded-xl border px-3 py-2 text-sm font-semibold transition ${
-            promptMode === "basic" ? "border-[#0047B6] bg-sky-50" : "border-slate-200 bg-white hover:bg-slate-50"
-          }`}
-        >
-          BASIC
-          <div className="text-[11px] font-normal text-slate-600 mt-1">Très court</div>
-        </button>
-
-        <button
-          type="button"
-          onClick={() => {
-            setPromptMode("standard");
-            showToast("✅ Prompt : STANDARD");
-          }}
-          className={`rounded-xl border px-3 py-2 text-sm font-semibold transition ${
-            promptMode === "standard" ? "border-[#0047B6] bg-sky-50" : "border-slate-200 bg-white hover:bg-slate-50"
-          }`}
-        >
-          STANDARD ⭐
-          <div className="text-[11px] font-normal text-slate-600 mt-1">Équilibré</div>
-        </button>
-
-        <button
-          type="button"
-          onClick={() => {
-            setPromptMode("expert");
-            showToast("🧠 Prompt : EXPERT");
-          }}
-          className={`rounded-xl border px-3 py-2 text-sm font-semibold transition ${
-            promptMode === "expert" ? "border-[#0047B6] bg-sky-50" : "border-slate-200 bg-white hover:bg-slate-50"
-          }`}
-        >
-          EXPERT
-          <div className="text-[11px] font-normal text-slate-600 mt-1">Complet</div>
-        </button>
-      </div>
-
-  <div className="rounded-xl border border-slate-200 bg-slate-50 px-3 py-2">
-    <p className="text-[11px] text-slate-700">
-      <span className="font-semibold">Difficulté élèves</span> = exigence pour l’élève •{" "}
-      <span className="font-semibold">Mode de génération</span> = quantité de contraintes dans le prompt
-    </p>
-  </div>
-</div>
-
 
             {/* CTA */}
             <div className="pt-3 flex items-center justify-between gap-2">
