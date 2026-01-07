@@ -3,7 +3,6 @@
 
 import Link from "next/link";
 import { useCallback, useMemo, useRef, useState } from "react";
-import { MarkdownMath } from "@/components/MarkdownMath";
 import ToggleChip from "@/components/ToggleChip";
 
 import {
@@ -14,6 +13,7 @@ import {
   EyeOff,
   ArrowDown,
   MessageCircle,
+  Check,
 } from "lucide-react";
 
 type NiveauPublic = "college" | "lycee" | "tous";
@@ -101,17 +101,17 @@ type AtelierForm = {
   niveauPublic: NiveauPublic;
   duree: Duree;
   themes: ThemeAgir[];
-  themeLocal: string; // ex: "La Réunion / Saint-Joseph / collège ..."
+  themeLocal: string;
   production: TypeProduction;
   objectif: string;
   contraintes: string;
 
   // options
-  traces: boolean; // prompt/réponse/amélioration
-  antiTriche: boolean; // interdit le “fait à la place”
-  dataChiffres: boolean; // demander données / ordres de grandeur
-  terrain: boolean; // observation locale
-  espritCritique: boolean; // vérifier, sources, incertitudes
+  traces: boolean;
+  antiTriche: boolean;
+  dataChiffres: boolean;
+  terrain: boolean;
+  espritCritique: boolean;
 
   outputStyle: OutputStyle;
 };
@@ -174,6 +174,10 @@ function construirePromptAtelier(form: AtelierForm) {
   );
 }
 
+/* ----------------------------------------
+   UI : Boutons "Coller dans"
+   ✅ ChatGPT + Perplexity + Tchat EleveAI uniquement
+---------------------------------------- */
 function PasteTargets({ text, showToast }: { text: string; showToast: (msg: string) => void }) {
   const disabled = !text;
   const tchatHref = text ? `/tchat?prompt=${encodeURIComponent(text)}` : "/tchat";
@@ -223,7 +227,7 @@ function PasteTargets({ text, showToast }: { text: string; showToast: (msg: stri
         </a>
 
         <a
-          href="https://gemini.google.com"
+          href="https://www.perplexity.ai/"
           target="_blank"
           rel="noreferrer"
           onClick={(e) => {
@@ -237,43 +241,7 @@ function PasteTargets({ text, showToast }: { text: string; showToast: (msg: stri
             disabled ? "bg-slate-200 text-slate-500 cursor-not-allowed" : "bg-[#0F9D58] text-white hover:bg-[#0c7b45]"
           }`}
         >
-          🟩 Gemini
-        </a>
-
-        <a
-          href="https://claude.ai"
-          target="_blank"
-          rel="noreferrer"
-          onClick={(e) => {
-            if (disabled) {
-              e.preventDefault();
-              return;
-            }
-            copySilently();
-          }}
-          className={`px-3 py-2 rounded-lg font-semibold transition ${
-            disabled ? "bg-slate-200 text-slate-500 cursor-not-allowed" : "bg-[#4B3FFF] text-white hover:bg-[#372dcc]"
-          }`}
-        >
-          🟪 Claude
-        </a>
-
-        <a
-          href="https://chat.mistral.ai"
-          target="_blank"
-          rel="noreferrer"
-          onClick={(e) => {
-            if (disabled) {
-              e.preventDefault();
-              return;
-            }
-            copySilently();
-          }}
-          className={`px-3 py-2 rounded-lg font-semibold transition ${
-            disabled ? "bg-slate-200 text-slate-500 cursor-not-allowed" : "bg-[#FF7F11] text-white hover:bg-[#e46f0d]"
-          }`}
-        >
-          🟧 Mistral
+          🟩 Perplexity
         </a>
       </div>
     </div>
@@ -283,12 +251,10 @@ function PasteTargets({ text, showToast }: { text: string; showToast: (msg: stri
 export default function AtelierIAClient() {
   const topRef = useRef<HTMLDivElement | null>(null);
   const promptRef = useRef<HTMLDivElement | null>(null);
-  const ressourceRef = useRef<HTMLDivElement | null>(null);
   const relanceRef = useRef<HTMLDivElement | null>(null);
 
   const scrollToTop = useCallback(() => topRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }), []);
   const scrollToPrompt = useCallback(() => promptRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }), []);
-  const scrollToRessource = useCallback(() => ressourceRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }), []);
   const scrollToRelance = useCallback(() => relanceRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }), []);
 
   const [toast, setToast] = useState<string | null>(null);
@@ -318,13 +284,13 @@ export default function AtelierIAClient() {
 
   const [form, setForm] = useState<AtelierForm>(() => makeInitialForm());
 
+  // ✅ Sorties locales 
   const [promptInterne, setPromptInterne] = useState("");
-  const [agentOutput, setAgentOutput] = useState("");
-  const [agentLoading, setAgentLoading] = useState(false);
-  const [agentError, setAgentError] = useState("");
   const [copiedPrompt, setCopiedPrompt] = useState(false);
-  const [copiedRessource, setCopiedRessource] = useState(false);
   const [showPromptInterne, setShowPromptInterne] = useState(true);
+
+  // ✅ Option : coller la réponse IA reçue (pour relance)
+  const [reponseIA, setReponseIA] = useState("");
 
   // relance
   const [feedbackChoice, setFeedbackChoice] = useState<FeedbackChoice>("");
@@ -338,11 +304,9 @@ export default function AtelierIAClient() {
 
   const clearOutputs = useCallback(() => {
     setPromptInterne("");
-    setAgentOutput("");
-    setAgentError("");
     setCopiedPrompt(false);
-    setCopiedRessource(false);
     setShowPromptInterne(true);
+    setReponseIA("");
     setFeedbackChoice("");
     setFeedbackText("");
     setPromptRelance("");
@@ -373,45 +337,25 @@ export default function AtelierIAClient() {
     return { ok: issues.length === 0, issues };
   }, [form]);
 
-  const creerPromptEtRessource = useCallback(async () => {
-    setAgentError("");
+  // ✅ Génération locale du prompt (sans API)
+  const genererPrompt = useCallback(() => {
     if (!validation.ok) {
       showToast(`⚠️ ${validation.issues[0]}`);
       return;
     }
-
     const prompt = construirePromptAtelier(form);
     setPromptInterne(prompt);
-    setAgentOutput("");
-    setCopiedPrompt(false);
-    setCopiedRessource(false);
+
+    // reset relance
+    setReponseIA("");
     setFeedbackChoice("");
     setFeedbackText("");
     setPromptRelance("");
     setCopiedRelance(false);
 
-    setAgentLoading(true);
-    try {
-      const res = await fetch("/api/agent-atelier-ia", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ prompt }),
-      });
-
-      const data = await res.json().catch(() => ({}));
-      if (!res.ok) throw new Error(data.error || "Erreur lors de l'appel à l'agent IA.");
-
-      setAgentOutput(data.output || "");
-      showToast("✨ Généré !");
-      setTimeout(() => scrollToPrompt(), 50);
-      setTimeout(() => scrollToRessource(), 350);
-    } catch (e: any) {
-      setAgentError(e?.message || "Erreur inconnue.");
-      showToast("⚠️ Erreur génération");
-    } finally {
-      setAgentLoading(false);
-    }
-  }, [form, scrollToPrompt, scrollToRessource, showToast, validation.ok, validation.issues]);
+    showToast("✨ Prompt généré !");
+    setTimeout(() => scrollToPrompt(), 80);
+  }, [form, scrollToPrompt, showToast, validation.ok, validation.issues]);
 
   const copierPrompt = useCallback(async () => {
     if (!promptInterne) return;
@@ -424,18 +368,6 @@ export default function AtelierIAClient() {
       showToast("⚠️ Copie impossible (Ctrl+C).");
     }
   }, [promptInterne, showToast]);
-
-  const copierRessource = useCallback(async () => {
-    if (!agentOutput) return;
-    try {
-      await navigator.clipboard.writeText(agentOutput);
-      setCopiedRessource(true);
-      setTimeout(() => setCopiedRessource(false), 1200);
-      showToast("✅ Ressource copiée");
-    } catch {
-      showToast("⚠️ Copie impossible (Ctrl+C).");
-    }
-  }, [agentOutput, showToast]);
 
   const buildRelanceBloc = useCallback(() => {
     const free = feedbackText.trim();
@@ -451,22 +383,25 @@ export default function AtelierIAClient() {
 
     const addUserNote = free ? `\n\nNote utilisateur : "${free}"\n` : "";
 
+    const blocReponseIA = reponseIA.trim()
+      ? "\n\n=== RÉPONSE IA REÇUE ===\n-----\n" + reponseIA.trim() + "\n-----\n"
+      : "\n\n(Optionnel) Si tu as une réponse IA, colle-la ici avant de générer la relance, pour que l’amélioration soit plus précise.\n";
+
     return (
       "Tu vas améliorer une activité ‘Agir sur le monde’.\n\n" +
-      "=== PROMPT 1 ===\n-----\n" +
+      "=== PROMPT 1 (original) ===\n-----\n" +
       promptInterne +
-      "\n-----\n\n" +
-      "=== SORTIE (activité) ===\n-----\n" +
-      (agentOutput || "(aucune sortie — produire une V2 à partir du prompt)") +
-      "\n-----\n\n" +
+      "\n-----\n" +
+      blocReponseIA +
+      "\n" +
       intentByChoice[feedbackChoice as Exclude<FeedbackChoice, "">] +
       addUserNote +
       "\n\nRègles : indique les incertitudes, propose des vérifications, et termine par une checklist."
     );
-  }, [agentOutput, feedbackChoice, feedbackText, promptInterne]);
+  }, [feedbackChoice, feedbackText, promptInterne, reponseIA]);
 
   const buildRelancePrompt = useCallback(() => {
-    if (!promptInterne) return showToast("⚠️ Génère d’abord.");
+    if (!promptInterne) return showToast("⚠️ Génère d’abord le prompt.");
     if (!feedbackChoice) return showToast("⚠️ Choisis ton avis.");
     setPromptRelance(buildRelanceBloc());
     setCopiedRelance(false);
@@ -495,18 +430,15 @@ export default function AtelierIAClient() {
             <span>Atelier-IA · Agir sur le monde</span>
           </p>
 
-          <h1 className="text-3xl sm:text-4xl font-extrabold text-emerald-800">
-            Moulinette “Agir sur le monde” (prompts encadrés)
-          </h1>
+          <h1 className="text-3xl sm:text-4xl font-extrabold text-emerald-800">Générateur de prompt </h1>
 
           <p className="text-sm sm:text-base text-gray-700 max-w-2xl">
-            Tu choisis un <b>thème</b> + un <b>type de production</b> (plan d’action, débat, enquête…).
-            EleveAI génère un <b>prompt</b> et une <b>activité prête</b>, avec traces et esprit critique.
+            Tu choisis un <b>thème</b> + un <b>type de production</b>. EleveAI génère un <b>prompt encadré</b> à coller dans ChatGPT / Perplexity / Tchat EleveAI.
           </p>
 
           <div className="rounded-2xl border border-emerald-200 bg-emerald-50 px-4 py-3">
             <p className="text-sm text-emerald-900">
-              <span className="font-extrabold">Règle EleveAI :</span> Une réponse IA n’est jamais une fin : elle doit être{" "}
+              <span className="font-extrabold">Règle EleveAI :</span> une réponse IA n’est jamais une fin : elle doit être{" "}
               <span className="font-semibold">jugée et améliorée</span>.
             </p>
             <p className="text-[11px] text-emerald-900/80 mt-1">
@@ -559,10 +491,7 @@ export default function AtelierIAClient() {
             <button
               type="button"
               onClick={resetPage}
-              disabled={agentLoading}
-              className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-[11px] font-semibold border transition ${
-                agentLoading ? "bg-slate-100 text-slate-400 border-slate-200 cursor-not-allowed" : "bg-white text-slate-700 border-slate-300 hover:bg-slate-50"
-              }`}
+              className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[11px] font-semibold border transition bg-white text-slate-700 border-slate-300 hover:bg-slate-50"
             >
               <RotateCcw className="w-4 h-4" />
               Reset
@@ -634,7 +563,7 @@ export default function AtelierIAClient() {
                       }`}
                       title={t.hint}
                     >
-                      {t.emoji} {t.label}
+                      {t.emoji} {t.label} {active && <Check className="inline ml-1 w-3 h-3" />}
                     </button>
                   );
                 })}
@@ -684,7 +613,6 @@ export default function AtelierIAClient() {
                 value={form.objectif}
                 onChange={(e) => handleChange("objectif", e.target.value)}
                 className="w-full border rounded-lg px-3 py-2 text-sm min-h-[70px] focus:outline-none focus:ring-2 focus:ring-emerald-200"
-                placeholder="Ex : comprendre le problème + proposer 3 solutions réalistes + justifier."
               />
             </div>
 
@@ -694,7 +622,6 @@ export default function AtelierIAClient() {
                 value={form.contraintes}
                 onChange={(e) => handleChange("contraintes", e.target.value)}
                 className="w-full border rounded-lg px-3 py-2 text-sm min-h-[110px] focus:outline-none focus:ring-2 focus:ring-emerald-200"
-                placeholder="Ex : travail en groupe, restitution orale, pas de copier-coller, preuves, sources…"
               />
             </div>
 
@@ -708,24 +635,21 @@ export default function AtelierIAClient() {
               <button
                 type="button"
                 onClick={resetPage}
-                disabled={agentLoading}
-                className={`inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold border transition ${
-                  agentLoading ? "bg-slate-100 text-slate-400 border-slate-200 cursor-not-allowed" : "bg-white text-slate-700 border-slate-300 hover:bg-slate-50"
-                }`}
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold border transition bg-white text-slate-700 border-slate-300 hover:bg-slate-50"
               >
                 <RotateCcw className="w-4 h-4" />
                 Reset
               </button>
 
               <button
-                onClick={creerPromptEtRessource}
-                disabled={agentLoading || !validation.ok}
+                onClick={genererPrompt}
+                disabled={!validation.ok}
                 className={`inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold shadow transition ${
-                  agentLoading || !validation.ok ? "bg-emerald-100 text-emerald-500 cursor-not-allowed" : "bg-emerald-700 text-white hover:bg-emerald-800"
+                  !validation.ok ? "bg-emerald-100 text-emerald-500 cursor-not-allowed" : "bg-emerald-700 text-white hover:bg-emerald-800"
                 }`}
               >
                 <Sparkles className="w-4 h-4" />
-                {agentLoading ? "Génération..." : "Créer prompt + activité"}
+                Générer le prompt
               </button>
             </div>
           </section>
@@ -762,7 +686,12 @@ export default function AtelierIAClient() {
               </div>
 
               {showPromptInterne && (
-                <textarea readOnly value={promptInterne} className="w-full border rounded-lg px-3 py-2 text-[11px] font-mono bg-slate-50 min-h-[220px]" />
+                <textarea
+                  readOnly
+                  value={promptInterne}
+                  className="w-full border rounded-lg px-3 py-2 text-[11px] font-mono bg-slate-50 min-h-[260px]"
+                  placeholder="Le prompt apparaîtra ici."
+                />
               )}
 
               <PasteTargets text={promptInterne} showToast={showToast} />
@@ -770,59 +699,36 @@ export default function AtelierIAClient() {
               {!!promptInterne && (
                 <button
                   type="button"
-                  onClick={scrollToRessource}
+                  onClick={() => {
+                    showToast("💡 Colle le prompt dans une IA, puis colle la réponse IA ci-dessous.");
+                    setTimeout(() => scrollToRelance(), 150);
+                  }}
                   className="mt-1 inline-flex items-center gap-2 text-[11px] font-semibold text-slate-700 hover:text-slate-900"
                 >
                   <ArrowDown className="w-4 h-4" />
-                  Aller à l’activité
+                  Aller à “Améliorer / vérifier”
                 </button>
               )}
             </div>
 
-            {/* RESSOURCE */}
-            <div ref={ressourceRef} className="bg-white/95 border border-slate-200 rounded-2xl shadow-sm p-5 sm:p-6 space-y-4">
-              <div className="flex items-center justify-between gap-2">
-                <h2 className="text-lg font-bold text-emerald-800">3️⃣ Activité générée</h2>
-
-                <button
-                  type="button"
-                  onClick={copierRessource}
-                  disabled={!agentOutput}
-                  className={`inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-[11px] font-semibold transition ${
-                    agentOutput ? "bg-slate-800 text-white hover:bg-slate-900" : "bg-slate-200 text-slate-500 cursor-not-allowed"
-                  }`}
-                >
-                  <ClipboardCopy className="w-4 h-4" />
-                  {copiedRessource ? "Copié" : "Copier"}
-                </button>
-              </div>
-
-              {agentError && <p className="text-xs text-red-600">⚠️ {agentError}</p>}
-
-              <div className="eleveai-math border rounded p-3 min-h-[180px] bg-slate-50 text-sm whitespace-pre-wrap">
-                {agentLoading ? "Réflexion en cours..." : agentOutput ? <MarkdownMath>{agentOutput}</MarkdownMath> : "L’activité apparaîtra ici."}
-              </div>
-
-              <button
-                type="button"
-                onClick={() => {
-                  if (!promptInterne) return showToast("⚠️ Génère d’abord le prompt.");
-                  showToast("💡 Donne un avis pour générer le Prompt 2.");
-                  setTimeout(() => scrollToRelance(), 120);
-                }}
-                disabled={!promptInterne}
-                className={`inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2 text-sm font-semibold border transition ${
-                  promptInterne ? "border-slate-200 bg-white text-slate-800 hover:bg-slate-50" : "border-slate-200 bg-white text-slate-400 cursor-not-allowed"
-                }`}
-              >
-                <MessageCircle className="w-4 h-4" />
-                Améliorer / vérifier (Prompt 2)
-              </button>
-            </div>
-
             {/* RELANCE */}
             <div ref={relanceRef} className="bg-white/95 border border-slate-200 rounded-2xl shadow-sm p-5 sm:p-6 space-y-4">
-              <h2 className="text-lg font-bold text-emerald-800">4️⃣ Avis + relance (Prompt 2)</h2>
+              <h2 className="text-lg font-bold text-emerald-800">3️⃣ Améliorer / vérifier (Prompt 2)</h2>
+
+              <div className="rounded-xl border border-slate-200 bg-slate-50 p-3 text-xs text-slate-700">
+                ✅ Étape conseillée : colle ici la <b>réponse IA</b> que tu as obtenue (optionnel), puis génère une relance plus intelligente.
+              </div>
+
+              <div className="space-y-1">
+                <label className="text-xs font-semibold">Réponse IA reçue (optionnel)</label>
+                <textarea
+                  value={reponseIA}
+                  onChange={(e) => setReponseIA(e.target.value)}
+                  disabled={!promptInterne}
+                  className="w-full border rounded-lg px-3 py-2 text-sm min-h-[120px] bg-white"
+                  placeholder="Colle ici la réponse IA (facultatif mais recommandé)."
+                />
+              </div>
 
               <div className="grid sm:grid-cols-3 gap-2">
                 <button
@@ -866,7 +772,7 @@ export default function AtelierIAClient() {
                   onChange={(e) => setFeedbackText(e.target.value)}
                   disabled={!promptInterne}
                   className="w-full border rounded-lg px-3 py-2 text-sm min-h-[70px] bg-white"
-                  placeholder="Ex : je veux plus local / plus simple / un débat mieux cadré / plus de données…"
+                  placeholder="Ex : plus local / plus simple / plus de données / mieux cadrer le débat…"
                 />
               </div>
 
@@ -878,7 +784,8 @@ export default function AtelierIAClient() {
                   promptInterne && feedbackChoice ? "bg-emerald-700 text-white hover:bg-emerald-800" : "bg-emerald-100 text-emerald-500 cursor-not-allowed"
                 }`}
               >
-                🔁 Générer une relance adaptée
+                <MessageCircle className="w-4 h-4" />
+                Générer la relance (Prompt 2)
               </button>
 
               <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4 space-y-3">
@@ -901,7 +808,12 @@ export default function AtelierIAClient() {
                   </button>
                 </div>
 
-                <textarea readOnly value={promptRelance} className="w-full border rounded-lg px-3 py-2 text-xs font-mono bg-white min-h-[180px]" />
+                <textarea
+                  readOnly
+                  value={promptRelance}
+                  className="w-full border rounded-lg px-3 py-2 text-xs font-mono bg-white min-h-[180px]"
+                  placeholder="Le Prompt 2 apparaîtra ici."
+                />
 
                 <PasteTargets text={promptRelance} showToast={showToast} />
               </div>
