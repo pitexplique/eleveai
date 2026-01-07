@@ -4,6 +4,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import "katex/dist/katex.min.css";
 import AppShell from "@/components/AppShell";
+import { Analytics } from "@vercel/analytics/react";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -17,22 +18,19 @@ const geistMono = Geist_Mono({
 
 // ✅ Ajuste si ta page principale publique est /accueil
 const SITE_URL = "https://eleveai.fr";
-const CANONICAL = "/accueil"; // ou "/accueil" si tu veux que Google considère /accueil comme page principale
+const CANONICAL = "/accueil";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
 
-  // ✅ Title plus court, plus clair, plus “produit”
   title: {
     default: "EleveAI — IA pédagogique encadrée (Profs · Élèves · Parents)",
     template: "%s — EleveAI",
   },
 
-  // ✅ Description orientée “cadre + usage”
   description:
     "EleveAI aide à créer des consignes IA (prompts) claires et guidées pour apprendre sans tricher : profs, élèves et parents. atelier-IA, traces, esprit critique, collège/lycée.",
 
-  // (Keywords pas critique mais ok)
   keywords: [
     "EleveAI",
     "IA pédagogique",
@@ -78,24 +76,20 @@ export const metadata: Metadata = {
       "Créer des consignes IA claires et guidées, apprendre sans tricher : atelier-IA, traces, esprit critique. Pensé collège/lycée.",
     images: ["/preview.jpg"],
   },
-
-  // Bonus utile : empêche l’indexation d’un “cache” si tu en as
-  // robots: { index: true, follow: true },
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   // ✅ JSON-LD : Organization
   const orgJsonLd = {
     "@context": "https://schema.org",
     "@type": "Organization",
     name: "EleveAI",
     url: SITE_URL,
-    logo: `${SITE_URL}/preview.jpg`, // idéalement un vrai logo carré : /logo.png
-    sameAs: [],
+    logo: `${SITE_URL}/preview.jpg`,
     contactPoint: [
       {
         "@type": "ContactPoint",
@@ -106,7 +100,7 @@ export default function RootLayout({
     ],
   };
 
-  // ✅ JSON-LD : WebSite + SearchAction (aide Google à comprendre le site)
+  // ✅ JSON-LD : WebSite
   const websiteJsonLd = {
     "@context": "https://schema.org",
     "@type": "WebSite",
@@ -120,7 +114,7 @@ export default function RootLayout({
     },
   };
 
-  // ✅ JSON-LD : WebApplication (important pour un rendu “outil”)
+  // ✅ JSON-LD : WebApplication
   const appJsonLd = {
     "@context": "https://schema.org",
     "@type": "WebApplication",
@@ -159,13 +153,12 @@ export default function RootLayout({
     ],
   };
 
-  // ✅ (Optionnel) Person — si tu veux vraiment le garder
+  // ✅ JSON-LD : Person (optionnel)
   const personJsonLd = {
     "@context": "https://schema.org",
     "@type": "Person",
     name: "Frédéric Lacoste",
     jobTitle: "Fondateur d’EleveAI",
-    url: `${SITE_URL}/qui-sommes-nous`,
     worksFor: {
       "@type": "Organization",
       name: "EleveAI",
@@ -197,6 +190,9 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
         />
+
+        {/* ✅ Vercel Analytics */}
+        <Analytics />
       </body>
     </html>
   );
