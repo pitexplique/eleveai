@@ -4,6 +4,7 @@
 import Link from "next/link";
 import { useCallback, useMemo, useRef, useState } from "react";
 import ToggleChip from "@/components/ToggleChip";
+import { useEffect } from "react";
 
 import {
   Sparkles,
@@ -15,6 +16,9 @@ import {
   MessageCircle,
   Check,
 } from "lucide-react";
+
+import { PRODUCTION_TEMPLATES } from "@/data/atelierProductionTemplates";
+import type { TypeProduction } from "@/data/atelierProductionTemplates"; // ✅ import du type
 
 type NiveauPublic = "college" | "lycee" | "tous";
 type Duree = 15 | 30 | 45 | 60 | 90;
@@ -33,17 +37,7 @@ type ThemeAgir =
   | "info_esprit_critique"
   | "territoire_patrimoine";
 
-type TypeProduction =
-  | "diagnostic"
-  | "plan_action"
-  | "debat"
-  | "enquete"
-  | "affiche"
-  | "article"
-  | "pitch"
-  | "lettre_officielle"
-  | "projet_classe"
-  | "atelier_terrain";
+// ✅ supprimé : type TypeProduction local (on l'importe)
 
 type OutputStyle = "simple" | "word" | "word_expert";
 type FeedbackChoice = "" | "ok" | "bof" | "pas_ok";
@@ -106,7 +100,6 @@ type AtelierForm = {
   objectif: string;
   contraintes: string;
 
-  // options
   traces: boolean;
   antiTriche: boolean;
   dataChiffres: boolean;
@@ -252,10 +245,16 @@ export default function AtelierIAClient() {
   const topRef = useRef<HTMLDivElement | null>(null);
   const promptRef = useRef<HTMLDivElement | null>(null);
   const relanceRef = useRef<HTMLDivElement | null>(null);
+  const contraintesRef = useRef<HTMLTextAreaElement | null>(null);
+  const objectifRef = useRef<HTMLTextAreaElement | null>(null);
+
 
   const scrollToTop = useCallback(() => topRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }), []);
   const scrollToPrompt = useCallback(() => promptRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }), []);
-  const scrollToRelance = useCallback(() => relanceRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }), []);
+  const scrollToRelance = useCallback(
+    () => relanceRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }),
+    []
+  );
 
   const [toast, setToast] = useState<string | null>(null);
   const showToast = useCallback((msg: string) => {
@@ -284,7 +283,19 @@ export default function AtelierIAClient() {
 
   const [form, setForm] = useState<AtelierForm>(() => makeInitialForm());
 
-  // ✅ Sorties locales 
+  const autoResize = (el: HTMLTextAreaElement | null) => {
+    if (!el) return;
+    el.style.height = "auto";
+    el.style.height = el.scrollHeight + "px";
+  };
+
+    useEffect(() => {
+      autoResize(objectifRef.current);
+      autoResize(contraintesRef.current);
+    }, [form.objectif, form.contraintes]);
+
+
+  // ✅ Sorties locales (0 appel API)
   const [promptInterne, setPromptInterne] = useState("");
   const [copiedPrompt, setCopiedPrompt] = useState(false);
   const [showPromptInterne, setShowPromptInterne] = useState(true);
@@ -300,6 +311,17 @@ export default function AtelierIAClient() {
 
   const handleChange = useCallback(<K extends keyof AtelierForm>(field: K, value: AtelierForm[K]) => {
     setForm((prev) => ({ ...prev, [field]: value }));
+  }, []);
+
+  const applyProductionTemplate = useCallback((prod: TypeProduction) => {
+    const tpl = PRODUCTION_TEMPLATES[prod]; // ✅ plus de "as any"
+    if (!tpl) return;
+
+    setForm((prev) => ({
+      ...prev,
+      objectif: tpl.objectif,
+      contraintes: tpl.contraintes,
+    }));
   }, []);
 
   const clearOutputs = useCallback(() => {
@@ -430,16 +452,17 @@ export default function AtelierIAClient() {
             <span>Atelier-IA · Agir sur le monde</span>
           </p>
 
-          <h1 className="text-3xl sm:text-4xl font-extrabold text-emerald-800">Générateur de prompt </h1>
+          <h1 className="text-3xl sm:text-4xl font-extrabold text-emerald-800">Générateur de prompt (0 appel API)</h1>
 
           <p className="text-sm sm:text-base text-gray-700 max-w-2xl">
-            Tu choisis un <b>thème</b> + un <b>type de production</b>. EleveAI génère un <b>prompt encadré</b> à coller dans ChatGPT / Perplexity / Tchat EleveAI.
+            Tu choisis un <b>thème</b> + un <b>type de production</b>. EleveAI génère un <b>prompt encadré</b> à coller
+            dans ChatGPT / Perplexity / Tchat EleveAI.
           </p>
 
           <div className="rounded-2xl border border-emerald-200 bg-emerald-50 px-4 py-3">
             <p className="text-sm text-emerald-900">
-              <span className="font-extrabold">Règle EleveAI :</span> une réponse IA n’est jamais une fin : elle doit être{" "}
-              <span className="font-semibold">jugée et améliorée</span>.
+              <span className="font-extrabold">Règle EleveAI :</span> une réponse IA n’est jamais une fin : elle doit
+              être <span className="font-semibold">jugée et améliorée</span>.
             </p>
             <p className="text-[11px] text-emerald-900/80 mt-1">
               Traces + vérification + amélioration personnelle → pas “fait à la place”.
@@ -559,7 +582,9 @@ export default function AtelierIAClient() {
                       type="button"
                       onClick={() => toggleTheme(t.id)}
                       className={`px-3 py-1.5 rounded-full text-[12px] font-semibold border transition ${
-                        active ? "bg-emerald-700 text-white border-emerald-700" : "bg-white text-slate-700 border-slate-300 hover:bg-slate-50"
+                        active
+                          ? "bg-emerald-700 text-white border-emerald-700"
+                          : "bg-white text-slate-700 border-slate-300 hover:bg-slate-50"
                       }`}
                       title={t.hint}
                     >
@@ -590,7 +615,10 @@ export default function AtelierIAClient() {
                     <button
                       key={p.id}
                       type="button"
-                      onClick={() => handleChange("production", p.id)}
+                      onClick={() => {
+                        handleChange("production", p.id);
+                        applyProductionTemplate(p.id);
+                      }}
                       className={`text-left border rounded-xl px-3 py-3 text-xs sm:text-[13px] transition ${
                         active ? "border-emerald-700 bg-emerald-50 shadow-sm" : "border-slate-200 bg-white hover:border-emerald-200"
                       }`}
@@ -610,20 +638,35 @@ export default function AtelierIAClient() {
             <div className="space-y-1">
               <label className="text-xs font-semibold text-gray-600">Objectif</label>
               <textarea
+                ref={objectifRef}
                 value={form.objectif}
-                onChange={(e) => handleChange("objectif", e.target.value)}
-                className="w-full border rounded-lg px-3 py-2 text-sm min-h-[70px] focus:outline-none focus:ring-2 focus:ring-emerald-200"
+                onChange={(e) => {
+                  handleChange("objectif", e.target.value);
+                  autoResize(e.currentTarget);
+                }}
+                onFocus={(e) => autoResize(e.currentTarget)}
+                className="w-full border rounded-lg px-3 py-2 text-sm resize-none overflow-hidden focus:outline-none focus:ring-2 focus:ring-emerald-200"
               />
+
             </div>
 
             <div className="space-y-1">
-              <label className="text-xs font-semibold text-gray-600">Contraintes / consigne initiale</label>
+              <label className="text-xs font-semibold text-gray-600">
+                Contraintes / consigne initiale
+              </label>
+
               <textarea
+                ref={contraintesRef}
                 value={form.contraintes}
-                onChange={(e) => handleChange("contraintes", e.target.value)}
-                className="w-full border rounded-lg px-3 py-2 text-sm min-h-[110px] focus:outline-none focus:ring-2 focus:ring-emerald-200"
+                onChange={(e) => {
+                  handleChange("contraintes", e.target.value);
+                  autoResize(e.currentTarget);
+                }}
+                onFocus={(e) => autoResize(e.currentTarget)}
+                className="w-full border rounded-lg px-3 py-2 text-sm resize-none overflow-hidden focus:outline-none focus:ring-2 focus:ring-emerald-200"
               />
             </div>
+
 
             {!validation.ok && (
               <div className="rounded-xl border border-rose-200 bg-rose-50 px-3 py-2">
@@ -716,7 +759,7 @@ export default function AtelierIAClient() {
               <h2 className="text-lg font-bold text-emerald-800">3️⃣ Améliorer / vérifier (Prompt 2)</h2>
 
               <div className="rounded-xl border border-slate-200 bg-slate-50 p-3 text-xs text-slate-700">
-                ✅ Étape conseillée : colle ici la <b>réponse IA</b> que tu as obtenue (optionnel), puis génère une relance plus intelligente.
+                ✅ Colle ici la <b>réponse IA</b> (optionnel), puis génère une relance plus intelligente.
               </div>
 
               <div className="space-y-1">
@@ -726,7 +769,6 @@ export default function AtelierIAClient() {
                   onChange={(e) => setReponseIA(e.target.value)}
                   disabled={!promptInterne}
                   className="w-full border rounded-lg px-3 py-2 text-sm min-h-[120px] bg-white"
-                  placeholder="Colle ici la réponse IA (facultatif mais recommandé)."
                 />
               </div>
 
@@ -772,7 +814,6 @@ export default function AtelierIAClient() {
                   onChange={(e) => setFeedbackText(e.target.value)}
                   disabled={!promptInterne}
                   className="w-full border rounded-lg px-3 py-2 text-sm min-h-[70px] bg-white"
-                  placeholder="Ex : plus local / plus simple / plus de données / mieux cadrer le débat…"
                 />
               </div>
 
@@ -792,7 +833,7 @@ export default function AtelierIAClient() {
                 <div className="flex items-center justify-between gap-2">
                   <div>
                     <p className="text-sm font-extrabold text-slate-900">🔁 Prompt 2</p>
-                    <p className="text-[11px] text-slate-600">À coller dans une IA pour améliorer / simplifier / vérifier.</p>
+                    <p className="text-[11px] text-slate-600">À coller dans une IA pour améliorer / sécuriser.</p>
                   </div>
 
                   <button
