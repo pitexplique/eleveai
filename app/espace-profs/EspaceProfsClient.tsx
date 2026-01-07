@@ -93,7 +93,7 @@ function getMainCategoryMeta(cat: MainCategory) {
 ---------------------------------------- */
 
 type Niveau = "basique" | "standard" | "expert";
-type OutputStyle = "simple" | "word" | "word_expert";
+type OutputStyle = "simple" | "word" | "word_expert" | "slides";
 type Tonalite = "neutre" | "bienveillante" | "motivation" | "institutionnelle" | "ludique";
 
 type ModaliteEvaluation = "evaluation_sommative" | "evaluation_formative" | "evaluation_diagnostique" | "evaluation_differenciee";
@@ -220,6 +220,84 @@ function getEvalDesc(id: ModaliteEvaluation) {
 function blocWordDesign(style: OutputStyle) {
   if (style === "simple") return "";
 
+    if (style === "slides") {
+        return (
+          "Tu es une IA pédagogique experte, conçue pour aider les enseignants\n" +
+          "à CONCEVOIR des activités scolaires sous forme de DIAPORAMA (slides).\n\n" +
+          "⚠️ CADRE ÉLEVEAI — OBLIGATOIRE\n" +
+          "1) Tu ne fais jamais “à la place” des élèves.\n" +
+          "2) Tu ne produis PAS de contenu clé en main à projeter tel quel.\n" +
+          "3) L’enseignant reste le concepteur final : tu proposes une structure.\n" +
+          "4) Le travail des élèves doit rester ouvert, réfléchi et justifié.\n" +
+          "5) Respect strict des programmes scolaires français.\n\n" +
+          "---\n\n" +
+          "FORMAT DE SORTIE OBLIGATOIRE\n" +
+          "- Présentation structurée SLIDE PAR SLIDE\n" +
+          "- Copiable directement dans PowerPoint / Google Slides\n" +
+          "- Chaque slide contient :\n" +
+          "  - un TITRE\n" +
+          "  - un OBJECTIF pédagogique\n" +
+          "  - des QUESTIONS ou CONSIGNES ouvertes\n" +
+          "  - éventuellement une suggestion de visuel (schéma, photo, carte…)\n\n" +
+          "---\n\n" +
+          "STRUCTURE OBLIGATOIRE DES SLIDES\n\n" +
+          "=== SLIDE 1 — TITRE & ACCROCHE ===\n" +
+          "- Titre de l’activité\n" +
+          "- Question déclencheuse OU situation problème\n" +
+          "- Pourquoi ce sujet concerne les élèves\n\n" +
+          "=== SLIDE 2 — CONTEXTE / ENJEU ===\n" +
+          "- Mise en situation\n" +
+          "- Enjeu citoyen / scientifique / social\n" +
+          "- Lien avec le programme\n\n" +
+          "=== SLIDE 3 — OBJECTIFS PÉDAGOGIQUES ===\n" +
+          "- Savoirs visés\n" +
+          "- Compétences travaillées\n" +
+          "- Attitudes / esprit critique\n\n" +
+          "=== SLIDE 4 — CONSIGNES DE TRAVAIL ===\n" +
+          "- Ce que les élèves doivent faire\n" +
+          "- Modalité (groupe, individuel…)\n" +
+          "- Contraintes importantes\n" +
+          "⚠️ Sans donner la solution\n\n" +
+          "=== SLIDE 5 — ÉTAPE 1 ===\n" +
+          "- Questions ouvertes\n" +
+          "- Pistes de réflexion possibles\n" +
+          "- Ce que l’élève doit JUSTIFIER\n\n" +
+          "=== SLIDE 6 — ÉTAPE 2 ===\n" +
+          "- Approfondissement\n" +
+          "- Comparaison / analyse / choix\n" +
+          "- Aide possible sans réponse directe\n\n" +
+          "=== SLIDE 7 — PRODUCTION ATTENDUE ===\n" +
+          "- Type de production\n" +
+          "- Format attendu\n" +
+          "- Critères de réussite compréhensibles\n\n" +
+          "=== SLIDE 8 — VÉRIFICATION & ESPRIT CRITIQUE ===\n" +
+          "- Questions de recul\n" +
+          "- Ce qui peut être discuté\n" +
+          "- Ce qui doit être vérifié ou sourcé\n\n" +
+          "=== SLIDE 9 — POUR L’ENSEIGNANT (NON PROJETÉ) ===\n" +
+          "- Points de vigilance\n" +
+          "- Erreurs fréquentes\n" +
+          "- Différenciation (élèves fragiles / à l’aise)\n\n" +
+          "---\n\n" +
+          "INTERDICTIONS ABSOLUES\n" +
+          "- Pas de correction\n" +
+          "- Pas de réponse modèle\n" +
+          "- Pas de texte prêt à être récité par l’élève\n\n" +
+          "---\n\n" +
+          "STYLE ATTENDU\n" +
+          "- Clair\n" +
+          "- Structuré\n" +
+          "- Ton professionnel enseignant\n" +
+          "- Aucun jargon inutile\n" +
+          "- Phrases courtes\n" +
+          "- Listes lisibles\n\n" +
+          "---\n\n" +
+          "TERMINE OBLIGATOIREMENT PAR :\n" +
+          "“⚠️ Cette structure de diaporama est une base de travail à adapter par l’enseignant.”\n\n"
+        );
+      }
+  
+
   if (style === "word") {
     return (
       "Format de sortie obligatoire : document Word (copier-coller sans perte).\n" +
@@ -230,6 +308,7 @@ function blocWordDesign(style: OutputStyle) {
     );
   }
 
+  // word_expert
   return (
     "Format de sortie obligatoire : document Word EXPERT, très lisible.\n" +
     "Contraintes Word-ready :\n" +
@@ -250,6 +329,7 @@ function blocWordDesign(style: OutputStyle) {
     "- Termine par : « ✅ Prêt à coller dans Word ». \n\n"
   );
 }
+
 
 function mapTacheToMainCategory(tache: string): MainCategory {
   if (
@@ -400,7 +480,27 @@ function construirePrompt(form: PromptProf): string {
 
   const blocCriteres = "Fin : « Pour l’enseignant » (3-5 critères observables) + erreurs typiques.\n\n";
 
-  const blocMiseEnPage = "Si fiche/évaluation : structure Word (titres, exos numérotés, temps/points, espaces réponses).\n\n";
+  const blocMiseEnPage =
+  "Si fiche, séance ou évaluation :\n" +
+  "- Mise en page claire et aérée.\n" +
+  "- Titres hiérarchisés (Titre / Sous-titre).\n" +
+  "- Listes à puces ou numérotées.\n" +
+  "- Espaces prévus pour les réponses des élèves.\n" +
+  "- Pas de blocs de texte trop longs.\n\n";
+
+
+    const blocFinalStructure =
+      form.outputStyle === "slides"
+        ? "IMPORTANT :\n" +
+          "- Structure ta réponse STRICTEMENT SLIDE PAR SLIDE.\n" +
+          "- Chaque slide doit être clairement identifié :\n" +
+          "=== SLIDE 1 — ... ===\n" +
+          "=== SLIDE 2 — ... ===\n" +
+          "- Aucune partie hors slides.\n\n"
+        : "IMPORTANT : Structure ta réponse en 2 parties :\n" +
+          '1) "=== PARTIE 1 : PROMPT OPTIMISÉ POUR L’IA ==="\n' +
+          '2) "=== PARTIE 2 : RESSOURCE PRÊTE POUR L’ÉLÈVE ==="\n';
+
 
   const blocWord = blocWordDesign(form.outputStyle);
 
@@ -429,13 +529,11 @@ function construirePrompt(form: PromptProf): string {
     blocDifferenciation +
     blocRappelsEtMeta +
     blocCriteres +
-    blocMiseEnPage +
-    "IMPORTANT : Structure ta réponse en 2 parties :\n" +
-    '1) "=== PARTIE 1 : PROMPT OPTIMISÉ POUR L’IA ==="\n' +
-    '2) "=== PARTIE 2 : RESSOURCE PRÊTE POUR L’ÉLÈVE ==="\n'
+      (form.outputStyle === "slides" ? "" : blocMiseEnPage) +
+      blocFinalStructure
+
   );
 }
-
 /* ----------------------------------------
    UI : Boutons "Coller dans" (couleurs)
 ---------------------------------------- */
@@ -1553,11 +1651,13 @@ export default function ProfsPage() {
             {/* Style Word */}
             <div className="space-y-2">
               <label className="text-xs font-semibold text-gray-600">Style de rendu</label>
-              <div className="grid sm:grid-cols-3 gap-2">
+              <div className="grid sm:grid-cols-4 gap-2">
                 {[
                   { id: "simple", title: "Simple", desc: "Texte propre, sans design.", badge: "Rapide" },
                   { id: "word", title: "Word", desc: "Titres + icônes + aération.", badge: "Recommandé" },
                   { id: "word_expert", title: "Word Expert", desc: "Bannières + encadrés + zones réponses.", badge: "🔥 Best" },
+                  { id: "slides", title: "Slides", desc: "Diaporama slide par slide.", badge: "Classe" },
+
                 ].map((o) => (
                   <button
                     key={o.id}
