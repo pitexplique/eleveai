@@ -562,7 +562,7 @@ export default function SignUpPage() {
     <p className="mt-4 max-w-xl text-sm leading-relaxed text-slate-200">
       EleveAI est conçu pour aider à comprendre, s’entraîner et progresser.
       <span className="font-semibold"> L’IA accompagne</span> : elle ne remplace pas
-      le travail de l’élève.
+      le travail de l'enseignant, de l'elève ou du parents
     </p>
 
     {/* 1 — ENSEIGNANTS */}
