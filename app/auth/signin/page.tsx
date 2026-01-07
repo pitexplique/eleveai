@@ -492,64 +492,75 @@ export default function SignInPage() {
 
         {/* COLONNE DROITE */}
 {/* COLONNE DROITE */}
+{/* COLONNE DROITE */}
 <div className="relative hidden w-full overflow-hidden bg-slate-900 md:block md:w-1/2">
   <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_#22c55e33,_transparent_60%),radial-gradient(circle_at_bottom,_#0f172a,_#020617)]" />
   <div className="absolute inset-0 bg-slate-900/60" />
 
   <div className="relative z-10 flex h-full flex-col justify-start pt-14 px-10 pb-20 text-slate-50">
     <h2 className="max-w-xl text-3xl font-bold leading-tight">
-      Revenir apprendre avec l’IA
+      Apprendre avec l’IA, en confiance
     </h2>
 
-    {/* 1 — PROF (4 lignes max) */}
-    <div className="mt-6 max-w-xl rounded-xl border border-slate-700/70 bg-slate-950/30 p-5 backdrop-blur">
+    <p className="mt-4 max-w-xl text-sm leading-relaxed text-slate-200">
+      EleveAI est conçu comme un outil pédagogique encadré.
+      L’IA aide à comprendre, à s’entraîner et à progresser —
+      <span className="font-semibold"> jamais à faire à la place.</span>
+    </p>
+
+    {/* 1 — ENSEIGNANTS */}
+    <div className="mt-8 max-w-xl rounded-xl border border-slate-700/70 bg-slate-950/30 p-5 backdrop-blur">
       <div className="text-xs font-semibold uppercase tracking-wide text-slate-300">
         Regard d’enseignant
       </div>
 
       <p className="mt-3 text-sm leading-relaxed text-slate-100">
-        En tant que professeur de mathématiques, concevoir EleveAI m’a permis de
-        mieux comprendre les élèves DYS et de varier mes approches de cours.
-        Le générateur de prompts m’aide à construire des contenus plus accessibles.
+        EleveAI est né d’une pratique de terrain.
+        Il aide à formuler de meilleures consignes,
+        différencier les activités (base / standard / défi)
+        et accompagner des élèves aux profils variés,
+        notamment DYS, sans alourdir la préparation.
       </p>
 
       <p className="mt-3 text-xs text-slate-300">
-        Frédéric Lacoste — Collège du Capitaine Dimitile (Entre-Deux, La Réunion)
+        Frédéric Lacoste — Professeur de mathématiques, La Réunion
       </p>
     </div>
 
     {/* 2 — PARENTS */}
-    <div className="mt-5 max-w-xl rounded-xl border border-slate-700/50 bg-slate-950/20 p-5">
+    <div className="mt-6 max-w-xl rounded-xl border border-slate-700/50 bg-slate-950/20 p-5">
       <div className="text-xs font-semibold uppercase tracking-wide text-slate-300">
         Côté parents
       </div>
 
       <p className="mt-3 text-sm leading-relaxed text-slate-200">
-        EleveAI vise à rassurer les familles : un usage de l’IA encadré, clair,
-        et compatible avec le cadre scolaire. L’objectif est d’aider à apprendre,
-        pas à “faire à la place”.
+        EleveAI pose un cadre clair et rassurant :
+        l’IA est autorisée pour apprendre, s’entraîner et comprendre,
+        mais l’élève doit toujours produire une réponse personnelle.
       </p>
     </div>
 
     {/* 3 — ÉLÈVES */}
-    <div className="mt-5 max-w-xl rounded-xl border border-slate-700/50 bg-slate-950/20 p-5">
+    <div className="mt-6 max-w-xl rounded-xl border border-slate-700/50 bg-slate-950/20 p-5">
       <div className="text-xs font-semibold uppercase tracking-wide text-slate-300">
         Côté élèves
       </div>
 
       <p className="mt-3 text-sm leading-relaxed text-slate-200">
-        L’espace élèves est conçu pour réviser, apprendre, poser des questions
-        et progresser à son rythme, dans un environnement clair et encadré.
+        L’espace élèves permet de réviser, poser des questions
+        et progresser à son rythme, avec des aides graduées
+        et des explications adaptées à chacun.
       </p>
 
       <p className="mt-2 text-sm leading-relaxed text-slate-200">
-        L’Atelier-IA est un espace guidé pour explorer, réfléchir et chercher des
-        pistes de solutions pour le futur, en utilisant l’IA comme outil
-        d’accompagnement et de réflexion.
+        L’Atelier-IA est un espace guidé pour explorer,
+        réfléchir et chercher des pistes de solutions,
+        en utilisant l’IA comme un outil d’accompagnement.
       </p>
     </div>
   </div>
 </div>
+
 
 
       </div>
