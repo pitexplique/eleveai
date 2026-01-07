@@ -213,20 +213,31 @@ const PROFS_PRESET_ITEMS: PresetCarouselItem[] = (Object.entries(PROFS_PRESETS) 
    HELPERS
 ---------------------------------------- */
 
-function getEvalLabel(id: ModaliteEvaluation) {
-  return EVAL_OPTIONS.find((e) => e.id === id)?.label ?? "Évaluation sommative";
-}
-function getEvalDesc(id: ModaliteEvaluation) {
-  return EVAL_OPTIONS.find((e) => e.id === id)?.description ?? "";
-  function getDifficulteElevesLabel(n: Niveau) {
-  if (n === "ulis") return "ULIS";
-  if (n === "remediation") return "Remédiation";
-  if (n === "basique") return "Basique (très guidé)";
-  if (n === "standard") return "Standard";
-  return "Expert / approfondissement";
-}
+    function getEvalLabel(id: ModaliteEvaluation) {
+      return EVAL_OPTIONS.find((e) => e.id === id)?.label ?? "Évaluation sommative";
+    }
 
-}
+    function getEvalDesc(id: ModaliteEvaluation) {
+      return EVAL_OPTIONS.find((e) => e.id === id)?.description ?? "";
+    }
+
+    function getDifficulteElevesLabel(n: Niveau): string {
+      switch (n) {
+        case "ulis":
+          return "ULIS";
+        case "remediation":
+          return "Remédiation";
+        case "basique":
+          return "Basique (très guidé)";
+        case "standard":
+          return "Standard";
+        case "expert":
+          return "Expert / approfondissement";
+        default:
+          return "Standard";
+      }
+    }
+
 
 function blocWordDesign(style: OutputStyle) {
   if (style === "simple") return "";
@@ -381,22 +392,6 @@ function mapTacheToMainCategory(tache: string): MainCategory {
 function labelFromTache(value: string) {
   const found = TACHES_PROF.find((t) => t.value === value);
   return found?.label ?? "";
-}
-function getDifficulteElevesLabel(n: Niveau): string {
-  switch (n) {
-    case "ulis":
-      return "ULIS";
-    case "remediation":
-      return "Remédiation";
-    case "basique":
-      return "Basique (très guidé)";
-    case "standard":
-      return "Standard";
-    case "expert":
-      return "Expert / approfondissement";
-    default:
-      return "Standard";
-  }
 }
 
 /* ----------------------------------------
@@ -610,7 +605,7 @@ function construirePrompt(form: PromptProf, promptMode: PromptMode): string {
     (typeDesc ? `Type : ${typeLabel} — ${typeDesc}\n` : `Type : ${typeLabel}\n`) +
     blocFormat +
     `Objectif : ${form.objectifPedagogique || "(non précisé)"}\n` +
-    `Difficulté élèves : ${form.niveau}.\n` +
+    `Difficulté élèves : ${getDifficulteElevesLabel(form.niveau)}.\n` +
     `Consigne prof : """${form.contenu.trim()}"""\n` +
     blocInterditsBasic
   );
