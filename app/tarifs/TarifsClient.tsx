@@ -2,6 +2,8 @@
 "use client";
 
 import Link from "next/link";
+import { QUOTAS } from "@/lib/constants/quotas";
+
 
 type Plan = {
   name: string;
@@ -27,44 +29,48 @@ type Testimonial = {
 const STRIPE_CHECKOUT_URL = process.env.NEXT_PUBLIC_STRIPE_CHECKOUT_URL;
 
 const PLANS: Plan[] = [
-  {
-    kind: "free",
-    name: "Gratuit — Découverte",
-    price: "0 €",
-    usesMonth: "5 utilisations / mois",
-    description:
-      "Pour découvrir EleveAI et sa méthode. Suffisant pour tester, pas pour un usage régulier.",
-    includes: [
-      "✅ Accès aux presets essentiels (élèves + profs)",
-      "🛡️ Cadre anti-triche (prompts guidés, usage responsable)",
-      "🧾 Historique conservé 1 mois",
-      "🚫 Quota découverte (pas d’usage intensif)",
-    ],
-    retention: "Historique : 1 mois",
-    idealFor: ["Curieux", "Élèves / parents : tester", "Profs : essayer l’UX"],
-    ctaLabel: "Créer un compte gratuit",
-  },
-  {
-    kind: "sub",
-    name: "Abonnement EleveAI",
-    price: "5,95 € / mois",
-    usesMonth: "Accès complet (utilisations raisonnables)",
-    highlight: true,
-    description:
-      "L’offre simple : un seul tarif pour utiliser EleveAI régulièrement, avec historique complet et cadre éducatif.",
-    includes: [
-      "✅ Accès aux espaces (élèves / profs / parents)",
-      "🧩 Presets officiels + favoris",
-      "🛡️ Cadre anti-triche + traces",
-      "🧾 Historique complet",
-      "📬 Support par email",
-    ],
-    retention: "Historique : complet",
-    idealFor: ["Élèves réguliers", "Parents", "Professeurs", "Soutien scolaire"],
-    checkoutUrl: STRIPE_CHECKOUT_URL,
-    ctaLabel: "S’abonner via Stripe",
-    footnote: "Résiliable à tout moment. Paiement sécurisé via Stripe.",
-  },
+    {
+      kind: "free",
+      name: "Gratuit — Découverte",
+      price: "0 €",
+      usesMonth: `${QUOTAS.EMAIL_FREE_DAILY} utilisations / jour`,
+      description:
+        "Pour découvrir EleveAI et sa méthode. Suffisant pour tester, pas pour un usage régulier.",
+      includes: [
+        "✅ Accès aux presets essentiels (élèves + profs)",
+        "🛡️ Cadre anti-triche (prompts guidés, usage responsable)",
+        `🕒 Quota : ${QUOTAS.EMAIL_FREE_DAILY} essais / jour`,
+        "🚫 Pas d’historique : les presets ne sont pas enregistrés",
+      ],
+      retention: "Historique : non (version gratuite)",
+      idealFor: ["Curieux", "Élèves / parents : tester", "Profs : essayer l’UX"],
+      ctaLabel: "Créer un compte gratuit",
+    },
+
+{
+  kind: "sub",
+  name: "Abonnement EleveAI",
+  price: "5,95 € / mois",
+  usesMonth: "Accès complet (utilisations quotidiennes raisonnables)",
+  highlight: true,
+  description:
+    "L’offre simple : un seul tarif pour utiliser EleveAI régulièrement, avec historique complet et un cadre éducatif clair.",
+  includes: [
+    "✅ Accès à tous les espaces (élèves / profs / parents)",
+    "🧩 Presets officiels + favoris",
+    "🛡️ Cadre anti-triche avec traces et justification",
+    "🧾 Historique complet (tous vos presets)",
+    "⚖️ Utilisations quotidiennes raisonnables (usage scolaire normal)",
+    "📬 Support par email",
+  ],
+  retention: "Historique : complet (sans limite de durée)",
+  idealFor: ["Élèves réguliers", "Parents", "Professeurs", "Soutien scolaire"],
+  checkoutUrl: STRIPE_CHECKOUT_URL,
+  ctaLabel: "S’abonner via Stripe",
+  footnote:
+    "Résiliable à tout moment. Paiement sécurisé via Stripe. Un plafond technique existe pour éviter les abus, sans bloquer un usage pédagogique classique.",
+},
+
   {
     kind: "sponsor",
     name: "Sponsor — Encourager le projet",
@@ -366,18 +372,23 @@ export default function TarifsClient() {
                   <td className="px-3 py-3 text-xs border-b border-slate-900">
                     <span className="font-semibold text-slate-50">Découverte</span>
                   </td>
+
                   <td className="px-3 py-3 text-xs border-b border-slate-900">
                     <span className="font-semibold text-slate-50">0 €</span>
                   </td>
+
                   <td className="px-3 py-3 text-xs border-b border-slate-900">
-                    ✅ Essentiel
+                    ✅ Essentiel · {QUOTAS.EMAIL_FREE_DAILY} essais / jour
                   </td>
+
                   <td className="px-3 py-3 text-xs border-b border-slate-900">
-                    ✅ Prompts guidés + usage responsable
+                    ✅ Prompts guidés · 🚫 Pas d’historique
                   </td>
+
                   <td className="px-3 py-3 text-xs border-b border-slate-900">
-                    Élèves / Parents (test)
+                    Découvrir et tester
                   </td>
+
                   <td className="px-3 py-3 text-xs border-b border-slate-900">
                     <Link
                       href="/auth/signup"
@@ -387,6 +398,7 @@ export default function TarifsClient() {
                     </Link>
                   </td>
                 </tr>
+
 
                 <tr>
                   <td className="px-3 py-3 text-xs border-b border-slate-900">

@@ -28,7 +28,7 @@ export default function FAQIndexPage() {
           Choisissez la FAQ correspondant à votre situation.
         </p>
 
-        <div className="grid gap-4 sm:grid-cols-3">
+        <div className="grid gap-4 sm:grid-cols-4">
           <Link
             href="/faq/faq-professeurs"
             className="rounded-2xl border border-slate-800 bg-slate-900/60 p-5 hover:bg-slate-900/80 transition"
@@ -58,6 +58,17 @@ export default function FAQIndexPage() {
               Cadre, gouvernance, protection des données, pilote.
             </p>
           </Link>
+          <Link
+            href="/faq/faq-tarifs"
+            className="rounded-2xl border border-slate-800 bg-slate-900/60 p-5 hover:bg-slate-900/80 transition"
+          >
+            <p className="font-semibold text-emerald-300">Tarifs</p>
+            <p className="mt-2 text-sm text-slate-300">
+              Essais gratuits, abonnement, historique, Stripe, résiliation.
+            </p>
+          </Link>
+
+
         </div>
 
         <div className="pt-6 border-t border-slate-800 text-sm text-slate-400">
