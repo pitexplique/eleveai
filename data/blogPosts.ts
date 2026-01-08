@@ -128,8 +128,8 @@ Un bon prompt doit aussi apprendre à **douter intelligemment**.
 ## 5) La règle EleveAI : IA autorisée mais encadrée
 Chez EleveAI, la ligne est simple :
 
-> **Ce n’est pas l’IA qui change l’éducation.  
-> C’est l’être humain qui apprend à penser avec elle.**
+> **Ce n’est pas l’IA qui change l’éducation.**  
+> **C’est l’être humain qui apprend à penser avec elle.**
 
 ### ✅ Autorisé (exemples)
 - comprendre une leçon, reformuler
@@ -145,49 +145,41 @@ Chez EleveAI, la ligne est simple :
 ---
 
 ## 6) Prompts prêts à copier (profs)
+
 ### A) “Mode tuteur” (anti-triche)
-\`\`\`prompt
-Tu es un professeur.
-Je veux apprendre, pas copier.
-Pose-moi une question à la fois et attends ma réponse.
-Si je me trompe, corrige et explique simplement.
-Donne ensuite un exercice similaire.
-Ne donne jamais la solution complète avant mon essai.
-\`\`\`
+> Tu es un professeur.  
+> Je veux apprendre, pas copier.  
+> Pose-moi une question à la fois et attends ma réponse.  
+> Si je me trompe, corrige et explique simplement.  
+> Donne ensuite un exercice similaire.  
+> Ne donne jamais la solution complète avant mon essai.
 
 ### B) Différenciation (3 niveaux)
-\`\`\`prompt
-Tu es un professeur.
-Sur cette notion : [COLLER NOTION],
-propose 3 exercices : facile / standard / défi.
-Pour chacun : consigne claire + correction détaillée + erreur fréquente.
-\`\`\`
+> Tu es un professeur.  
+> Sur cette notion : [COLLER NOTION],  
+> propose 3 exercices : facile / standard / défi.  
+> Pour chacun : consigne claire + correction détaillée + erreur fréquente.
 
 ### C) Remédiation après copie / devoir
-\`\`\`prompt
-Analyse ces erreurs fréquentes : [COLLER ERREURS].
-Identifie la cause probable (méthode, vocabulaire, calcul, raisonnement).
-Propose une mini-leçon (8 lignes max) + 3 exercices progressifs.
-\`\`\`
+> Analyse ces erreurs fréquentes : [COLLER ERREURS].  
+> Identifie la cause probable (méthode, vocabulaire, calcul, raisonnement).  
+> Propose une mini-leçon (8 lignes max) + 3 exercices progressifs.
 
 ---
 
 ## 7) Prompts “élèves” (responsables)
+
 ### A) Réviser sans tricher
-\`\`\`prompt
-Je révise ce chapitre : [CHAPITRE].
-Fais-moi réviser avec des questions progressives.
-Commence simple, attends ma réponse, puis corrige et explique.
-Ne donne pas la solution complète tant que je n’ai pas essayé.
-À la fin : bilan de mes erreurs et conseils.
-\`\`\`
+> Je révise ce chapitre : [CHAPITRE].  
+> Fais-moi réviser avec des questions progressives.  
+> Commence simple, attends ma réponse, puis corrige et explique.  
+> Ne donne pas la solution complète tant que je n’ai pas essayé.  
+> À la fin : bilan de mes erreurs et conseils.
 
 ### B) Comprendre une erreur
-\`\`\`prompt
-Voici mon raisonnement : [COLLER].
-Repère l’étape fausse et explique pourquoi.
-Puis pose-moi une question pour vérifier si j’ai compris.
-\`\`\`
+> Voici mon raisonnement : [COLLER].  
+> Repère l’étape fausse et explique pourquoi.  
+> Puis pose-moi une question pour vérifier si j’ai compris.
 
 ---
 
@@ -249,15 +241,13 @@ EleveAI est utile parce qu’il peut jouer le rôle d’un **prof particulier** 
 ---
 
 ## 2) Le prompt “anti-triche” (à copier)
-\`\`\`prompt
-Tu es un professeur de mathématiques.
-Je suis en 3e et je prépare le brevet.
-Fais-moi réviser un chapitre avec des questions progressives.
-Commence par une question simple et attends ma réponse.
-Corrige et explique clairement.
-Ne donne jamais la solution complète tant que je n’ai pas essayé.
-À la fin, fais un bilan de mes erreurs et de ce que je dois revoir.
-\`\`\`
+> Tu es un professeur de mathématiques.  
+> Je suis en 3e et je prépare le brevet.  
+> Fais-moi réviser un chapitre avec des questions progressives.  
+> Commence par une question simple et attends ma réponse.  
+> Corrige et explique clairement.  
+> Ne donne jamais la solution complète tant que je n’ai pas essayé.  
+> À la fin, fais un bilan de mes erreurs et de ce que je dois revoir.
 
 Tu peux remplacer “chapitre” par :
 - proportionnalité
@@ -297,7 +287,7 @@ Astuce :
 ---
 
 ## 5) Message pour les parents (si tu veux leur montrer)
-EleveAI peut aider votre enfant à :
+EleveAI peut aider ton enfant à :
 - s’entraîner,
 - comprendre ses erreurs,
 - réviser régulièrement,
@@ -368,15 +358,13 @@ Le but n’est pas de “finir le devoir”, mais de **comprendre**.
 ---
 
 ## 3) Prompt parent (à copier-coller)
-\`\`\`prompt
-Tu es un professeur bienveillant.
-Mon enfant est au collège.
-Aide-le à comprendre en posant des questions.
-Attends sa réponse.
-Corrige et explique clairement.
-Ne donne pas la solution complète tant qu’il n’a pas essayé.
-À la fin, fais un mini-bilan des points à revoir.
-\`\`\`
+> Tu es un professeur bienveillant.  
+> Mon enfant est au collège.  
+> Aide-le à comprendre en posant des questions.  
+> Attends sa réponse.  
+> Corrige et explique clairement.  
+> Ne donne pas la solution complète tant qu’il n’a pas essayé.  
+> À la fin, fais un mini-bilan des points à revoir.
 
 ---
 
@@ -490,9 +478,9 @@ Ajoute en haut :
 ---
 
 ## 5) Formats recommandés
-- \`.docx\`  
+- .docx  
 - PDF texte sélectionnable (pas un scan)  
-- \`.md\` (super lisible pour EleveAI)
+- .md (super lisible pour EleveAI)
 
 ---
 
@@ -765,11 +753,9 @@ L’IA peut t’aider à :
 
 ## 4) Après l’évaluation : analyser mieux
 Prompt utile :
-\`\`\`prompt
-Analyse ces copies (ou erreurs fréquentes).
-Identifie les confusions majeures.
-Propose des pistes de remédiation.
-\`\`\`
+> Analyse ces copies (ou erreurs fréquentes).  
+> Identifie les confusions majeures.  
+> Propose des pistes de remédiation.
 
 ---
 
@@ -817,11 +803,9 @@ Ce qui compte, c’est de comprendre **pourquoi**.
 
 ## 2) Le bon réflexe avec l’IA
 Prompt simple :
-\`\`\`prompt
-Voici mon raisonnement.
-Dis-moi où je me suis trompé et pourquoi.
-Pose-moi une question pour vérifier si j’ai compris.
-\`\`\`
+> Voici mon raisonnement.  
+> Dis-moi où je me suis trompé et pourquoi.  
+> Pose-moi une question pour vérifier si j’ai compris.
 
 ---
 
@@ -1021,19 +1005,16 @@ Un prompt EleveAI doit demander :
 ---
 
 ## 4) Prompts prêts à copier
+
 ### Pour réviser
-\`\`\`prompt
-Fais-moi réviser ce chapitre avec des questions progressives.
-Commence simple, attends ma réponse, corrige et explique.
-Ne donne pas la solution complète tant que je n’ai pas essayé.
-\`\`\`
+> Fais-moi réviser ce chapitre avec des questions progressives.  
+> Commence simple, attends ma réponse, corrige et explique.  
+> Ne donne pas la solution complète tant que je n’ai pas essayé.
 
 ### Pour comprendre une erreur
-\`\`\`prompt
-Voici mon raisonnement.
-Dis-moi l’étape fausse et pourquoi.
-Puis pose-moi une question pour vérifier si j’ai compris.
-\`\`\`
+> Voici mon raisonnement.  
+> Dis-moi l’étape fausse et pourquoi.  
+> Puis pose-moi une question pour vérifier si j’ai compris.
 
 ---
 
@@ -1050,3 +1031,4 @@ export function getAllBlogPosts(): BlogPost[] {
 export function getBlogPostBySlug(slug: string): BlogPost | undefined {
   return blogPosts.find((post) => post.slug === slug);
 }
+
