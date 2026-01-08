@@ -236,7 +236,8 @@ export default async function BlogPostPage({ params }: PageProps) {
   const jsonLd = [jsonLdArticle, jsonLdBreadcrumbs];
 
   return (
-    <main className="max-w-3xl mx-auto px-4 py-10">
+    <main className="min-h-screen max-w-3xl mx-auto px-4 py-10 bg-white text-slate-900 dark:bg-slate-950 dark:text-slate-100">
+
       {/* ✅ JSON-LD */}
       <script
         type="application/ld+json"
