@@ -8,15 +8,15 @@ export default function FAQTarifs() {
   const faq = [
     {
       q: "Quelle différence entre version gratuite et abonnement ?",
-      a: `La version gratuite sert à découvrir EleveAI : ${QUOTAS.FREE_DAILY} essais par jour (compte connecté) et pas d’historique. L’abonnement débloque l’historique complet (tous vos presets) et un accès régulier pour un usage scolaire normal.`,
+      a: `La version gratuite sert à découvrir EleveAI : ${QUOTAS.EMAIL_FREE_DAILY} essais par jour (compte connecté) et pas d’historique. L’abonnement débloque l’historique complet (tous vos presets) et un accès régulier pour un usage scolaire normal.`,
     },
     {
       q: "C’est quoi un “essai” / une “utilisation” ?",
       a: "Une utilisation correspond à un prompt (ta demande) + une réponse IA. C’est l’unité simple pour compter l’usage.",
     },
     {
-      q: `En gratuit, j’ai bien ${QUOTAS.FREE_DAILY} essais par jour ?`,
-      a: `Oui, pour un compte connecté en version gratuite : ${QUOTAS.FREE_DAILY} essais par jour. L’objectif est de pouvoir tester la méthode (comprendre → s’entraîner → vérifier) sans usage intensif.`,
+      q: `En gratuit, j’ai bien ${QUOTAS.EMAIL_FREE_DAILY} essais par jour ?`,
+      a: `Oui, pour un compte connecté en version gratuite : ${QUOTAS.EMAIL_FREE_DAILY} essais par jour. L’objectif est de pouvoir tester la méthode (comprendre → s’entraîner → vérifier) sans usage intensif.`,
     },
     {
       q: "En gratuit, mes presets sont-ils enregistrés ?",
