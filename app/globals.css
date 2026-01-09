@@ -1,15 +1,17 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* ✅ EleveAI : sombre par défaut */
+  --background: #020617; /* slate-950 */
+  --foreground: #f8fafc; /* slate-50 */
 }
 
-
+/* ✅ Option : si tu veux ignorer totalement le thème système,
+   supprime ce bloc. Sinon tu peux le laisser identique. */
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #020617;
+    --foreground: #f8fafc;
   }
 }
 

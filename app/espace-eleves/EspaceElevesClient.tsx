@@ -617,7 +617,7 @@ export default function ElevePage() {
 
   return (
     <main className="min-h-screen bg-gradient-to-b from-emerald-50 via-white to-slate-50 text-gray-900">
-      <div ref={topRef} className="max-w-6xl mx-auto px-4 py-8 sm:py-10 space-y-6 sm:space-y-8">
+       <div ref={topRef} className="w-full max-w-[1400px] mx-auto px-3 sm:px-5 lg:px-6 py-6 lg:py-10">
         {/* HEADER */}
         <header className="space-y-2">
           <p className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100 text-xs font-semibold text-emerald-800">

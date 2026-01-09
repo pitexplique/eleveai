@@ -2,9 +2,11 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo, useState, useCallback, useEffect } from "react";
+import { useMemo, useState, useCallback, useEffect, useRef } from "react";
 import { PresetCarousel } from "@/components/PresetCarousel";
 import { createClient } from "@/lib/supabase/client";
+
+
 import {
   CLASSES,
   MATIERES,
@@ -172,6 +174,8 @@ export default function EspaceParentsClient() {
   const [authLoading, setAuthLoading] = useState(true);
   const [userEmail, setUserEmail] = useState<string | null>(null);
   const isLoggedIn = !!userEmail;
+  const topRef = useRef<HTMLDivElement | null>(null);
+
 
   useEffect(() => {
     let mounted = true;
@@ -327,9 +331,16 @@ Règles importantes :
     }
   }, [generatedPrompt]);
 
+  
   return (
     <main className="min-h-screen bg-gradient-to-b from-sky-50 via-white to-emerald-50">
-      <div className="mx-auto max-w-5xl px-4 py-10 lg:py-14">
+    <div
+      ref={topRef}
+      className="w-full max-w-[1400px] mx-auto px-3 sm:px-5 lg:px-6 pt-0 pb-6 lg:pb-10"
+    >
+
+      
+
         {/* HERO */}
         <section className="mb-10 rounded-3xl bg-white/80 p-6 shadow-sm ring-1 ring-sky-100 lg:p-8">
           <div className="flex flex-wrap items-start justify-between gap-4">

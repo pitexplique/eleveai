@@ -266,9 +266,11 @@ export default function Header() {
 
   return (
     <header
+      id="app-header"
       ref={headerRef}
       className="sticky top-0 z-40 border-b border-slate-800 bg-slate-950/90 backdrop-blur"
     >
+
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-2 sm:px-4 lg:px-6 py-3 sm:py-4">
         {/* LOGO */}
         <Link href="/accueil" onClick={closeAll} className="flex items-center gap-2">
