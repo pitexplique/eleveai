@@ -2,7 +2,6 @@
 "use client";
 
 import { ReactNode, useEffect, useMemo, useRef, useState } from "react";
-import { useSearchParams } from "next/navigation";
 
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -10,15 +9,51 @@ import Sidebar from "@/components/Sidebar";
 
 import { pickAccessMock } from "@/lib/access/access.mock";
 
+type MockKey = "anon" | "email_free" | "email_paid" | "college";
+
+const STORAGE_KEY = "eleveai:mock-access";
+const DEFAULT_MOCK: MockKey = "anon";
+
+function normalizeMockKey(v: string | null): MockKey | null {
+  if (!v) return null;
+  const s = v.toLowerCase().trim();
+  if (s === "anon" || s === "email_free" || s === "email_paid" || s === "college") {
+    return s;
+  }
+  return null;
+}
+
 export default function AppShell({ children }: { children: ReactNode }) {
-  const searchParams = useSearchParams();
   const [mobileOpen, setMobileOpen] = useState(false);
 
-  // ✅ Mode démo via URL : ?mock=anon|email_free|email_paid|college
-  const access = useMemo(() => {
-    const key = searchParams.get("mock");
-    return pickAccessMock(key);
-  }, [searchParams]);
+  // ✅ Mock mode persistant (sans useSearchParams)
+  const [mockKey, setMockKey] = useState<MockKey>(DEFAULT_MOCK);
+
+  // ✅ Au montage : lit ?mock=... puis localStorage
+  useEffect(() => {
+    try {
+      const url = new URL(window.location.href);
+      const urlMock = normalizeMockKey(url.searchParams.get("mock"));
+
+      if (urlMock) {
+        localStorage.setItem(STORAGE_KEY, urlMock);
+        setMockKey(urlMock);
+        return;
+      }
+
+      const stored = normalizeMockKey(localStorage.getItem(STORAGE_KEY));
+      if (stored) {
+        setMockKey(stored);
+        return;
+      }
+
+      setMockKey(DEFAULT_MOCK);
+    } catch {
+      setMockKey(DEFAULT_MOCK);
+    }
+  }, []);
+
+  const access = useMemo(() => pickAccessMock(mockKey), [mockKey]);
 
   // ✅ iOS/Android : empêche le scroll du body quand le drawer est ouvert
   useEffect(() => {
@@ -55,7 +90,7 @@ export default function AppShell({ children }: { children: ReactNode }) {
     const dx = t.clientX - startX;
     const dy = t.clientY - startY;
 
-    // ✅ Si c'est surtout un scroll vertical, on ignore (comportement type ChatGPT)
+    // ✅ Si c'est surtout un scroll vertical, on ignore
     if (Math.abs(dy) > Math.abs(dx)) return;
 
     // ✅ Swipe vers la gauche pour fermer
@@ -110,7 +145,6 @@ export default function AppShell({ children }: { children: ReactNode }) {
           className="fixed inset-0 z-[60] lg:hidden"
           // ✅ iOS : autorise le scroll vertical, laisse le pan horizontal à notre logique
           style={{ touchAction: "pan-y" }}
-          // ✅ Swipe “global” (overlay + drawer)
           onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
@@ -167,10 +201,3 @@ export default function AppShell({ children }: { children: ReactNode }) {
     </>
   );
 }
-
-
-
-
-
-
-
