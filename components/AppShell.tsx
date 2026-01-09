@@ -1,8 +1,8 @@
 // components/AppShell.tsx
 "use client";
 
-import { ReactNode, useEffect, useMemo, useRef, useState } from "react";
-import { useSearchParams } from "next/navigation";
+import { ReactNode, useEffect, useMemo, useState } from "react";
+import { usePathname } from "next/navigation";
 
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -11,14 +11,22 @@ import Sidebar from "@/components/Sidebar";
 import { pickAccessMock } from "@/lib/access/access.mock";
 
 export default function AppShell({ children }: { children: ReactNode }) {
-  const searchParams = useSearchParams();
+  const pathname = usePathname(); // ✅ OK (pas de suspense requis)
   const [mobileOpen, setMobileOpen] = useState(false);
 
   // ✅ Mode démo via URL : ?mock=anon|email_free|email_paid|college
+  // On évite useSearchParams() => on lit window.location.search
+  const [mockKey, setMockKey] = useState<string | null>(null);
+
+  useEffect(() => {
+    // sécurité SSR: window existe uniquement côté client
+    const sp = new URLSearchParams(window.location.search);
+    setMockKey(sp.get("mock"));
+  }, [pathname]); // ✅ recalcul à chaque navigation
+
   const access = useMemo(() => {
-    const key = searchParams.get("mock");
-    return pickAccessMock(key);
-  }, [searchParams]);
+    return pickAccessMock(mockKey);
+  }, [mockKey]);
 
   // ✅ Empêche le scroll du body quand le drawer mobile est ouvert
   useEffect(() => {
@@ -30,8 +38,9 @@ export default function AppShell({ children }: { children: ReactNode }) {
     };
   }, [mobileOpen]);
 
-  // ✅ CALCUL EXACT DE LA HAUTEUR DU HEADER (anti-tremblement définitif)
+  // ✅ CALCUL EXACT DE LA HAUTEUR DU HEADER (anti-tremblement)
   useEffect(() => {
+    // ⚠️ Assure-toi que <header> dans Header.tsx a bien id="app-header"
     const header = document.getElementById("app-header");
     if (!header) return;
 
@@ -69,7 +78,6 @@ export default function AppShell({ children }: { children: ReactNode }) {
           <main className="min-w-0 w-full">{children}</main>
         </div>
       </div>
-
 
       {/* ===== BOUTON FLOTTANT MOBILE ===== */}
       <button

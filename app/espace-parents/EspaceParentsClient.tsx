@@ -6,7 +6,6 @@ import { useMemo, useState, useCallback, useEffect, useRef } from "react";
 import { PresetCarousel } from "@/components/PresetCarousel";
 import { createClient } from "@/lib/supabase/client";
 
-
 import {
   CLASSES,
   MATIERES,
@@ -174,8 +173,15 @@ export default function EspaceParentsClient() {
   const [authLoading, setAuthLoading] = useState(true);
   const [userEmail, setUserEmail] = useState<string | null>(null);
   const isLoggedIn = !!userEmail;
+
+  // ✅ ref haut de page
   const topRef = useRef<HTMLDivElement | null>(null);
 
+  // ✅ Garantit "retour en haut" au montage de la page (comme tes autres pages)
+  useEffect(() => {
+    // si AppShell a un conteneur scroll, ça ne gêne pas : au pire ça ne fera rien de mauvais
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  }, []);
 
   useEffect(() => {
     let mounted = true;
@@ -308,6 +314,11 @@ Règles importantes :
 
     setGeneratedPrompt(base + besoinsBloc + suite);
     setCopied(false);
+
+    // ✅ Optionnel mais utile : remonte visuellement en haut après génération
+    requestAnimationFrame(() => {
+      topRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
   }, [
     prenom,
     classe,
@@ -331,16 +342,12 @@ Règles importantes :
     }
   }, [generatedPrompt]);
 
-  
   return (
     <main className="min-h-screen bg-gradient-to-b from-sky-50 via-white to-emerald-50">
-    <div
-      ref={topRef}
-      className="w-full max-w-[1400px] mx-auto px-3 sm:px-5 lg:px-6 pt-0 pb-6 lg:pb-10"
-    >
-
-      
-
+      <div
+        ref={topRef}
+        className="w-full max-w-[1400px] mx-auto px-3 sm:px-5 lg:px-6 pt-0 pb-6 lg:pb-10"
+      >
         {/* HERO */}
         <section className="mb-10 rounded-3xl bg-white/80 p-6 shadow-sm ring-1 ring-sky-100 lg:p-8">
           <div className="flex flex-wrap items-start justify-between gap-4">
@@ -504,15 +511,12 @@ Règles importantes :
           subtitle="Partir d’un exemple proche de votre situation, puis ajuster."
           items={PARENTS_PRESET_ITEMS}
           onSelect={(id) => {
-            // ✅ robuste si jamais on clique un id non prévu
             if (isParentsPresetKey(id)) appliquerPreset(id);
           }}
         />
 
         {/* 3️⃣ FORMULAIRE PRINCIPAL + GÉNÉRATION */}
         <section className="mt-6 rounded-3xl bg-white p-6 shadow-md ring-1 ring-slate-100 lg:p-8">
-          {/* ... tout le reste IDENTIQUE à ton code (inchangé) ... */}
-
           <header className="mb-6 space-y-2">
             <p className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-100 text-xs font-semibold text-indigo-800">
               👨‍👩‍👧‍👦 Espace parents · Accompagnement scolaire encadré
@@ -685,3 +689,4 @@ Règles importantes :
     </main>
   );
 }
+
