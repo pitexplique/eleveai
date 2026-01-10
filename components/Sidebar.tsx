@@ -7,14 +7,14 @@ import {
   ChevronLeft,
   ChevronRight,
   LayoutDashboard,
-  Sparkles,
   Users,
   GraduationCap,
   UsersRound,
   FlaskConical,
-  User,
   LogIn,
   UserPlus,
+  User,
+  LogOut,
 } from "lucide-react";
 
 type SidebarProps = {
@@ -29,11 +29,24 @@ type Item = {
   href: string;
   label: string;
   icon: React.ReactNode;
-  badge?: string;
 };
 
 function isActive(pathname: string, href: string) {
   return pathname === href || pathname.startsWith(href + "/");
+}
+
+function isLoggedFromAccess(access: any) {
+  // ✅ robuste (mock / supabase / futur)
+  return Boolean(
+    access?.isLoggedIn ||
+      access?.userEmail ||
+      access?.user?.email ||
+      access?.email ||
+      access?.role === "user" ||
+      access?.role === "admin" ||
+      access?.kind === "email_free" ||
+      access?.kind === "email_paid",
+  );
 }
 
 export default function Sidebar({
@@ -44,6 +57,7 @@ export default function Sidebar({
   onNavigate,
 }: SidebarProps) {
   const pathname = usePathname();
+  const isLoggedIn = isLoggedFromAccess(access);
 
   /* ===============================
      NAVIGATION APP UNIQUEMENT
@@ -60,38 +74,44 @@ export default function Sidebar({
         href: "/espace-atelier-IA",
         label: "Atelier-IA",
         icon: <FlaskConical className="h-4 w-4" />,
-        badge: "Nouveau",
       },
       {
         href: "/espace-profs",
         label: "Profs",
         icon: <Users className="h-4 w-4" />,
-        badge: "V4.2",
       },
       {
         href: "/espace-eleves",
         label: "Élèves",
         icon: <GraduationCap className="h-4 w-4" />,
-        badge: "V 2.0",
       },
       {
         href: "/espace-parents",
         label: "Parents",
         icon: <UsersRound className="h-4 w-4" />,
-        badge: "V 3.1",
       },
     ],
     [],
   );
 
   /* ===============================
-     STYLES STRUCTURELS
+     FIXED DESKTOP (hauteur parfaite)
   =============================== */
 
-  const wrapperClass =
-    variant === "mobile"
-      ? "h-full w-full"
-      : "h-[calc(100vh-var(--app-header-h))] sticky top-[var(--app-header-h)]";
+  const desktopFixedClass =
+    "lg:fixed lg:top-[var(--app-header-h)] lg:bottom-4 lg:z-40 " +
+    // ✅ aligne avec tes paddings AppShell: px-3 sm:px-5 lg:px-6
+    "lg:left-3 lg:sm:left-5 lg:lg:left-6";
+
+const wrapperClass =
+  variant === "mobile"
+    ? "h-full w-full"
+    : [
+        "sticky top-[var(--app-header-h)]",
+        // ✅ hauteur exacte : du bas du header jusqu’en bas de l’écran
+        "h-[calc(100vh-var(--app-header-h)-1rem)]", // 1rem = marge basse (équivalent bottom-4)
+      ].join(" ");
+
 
   const widthClass =
     variant === "mobile"
@@ -105,7 +125,7 @@ export default function Sidebar({
       className={[
         wrapperClass,
         widthClass,
-        "flex flex-col",
+        "flex flex-col min-h-0",
         "rounded-2xl border border-slate-800",
         "bg-slate-950/90 backdrop-blur",
         "shadow-xl shadow-black/20",
@@ -146,11 +166,13 @@ export default function Sidebar({
       {/* ===============================
          NAVIGATION PRINCIPALE
       =============================== */}
-      <nav className="flex-1 px-2 py-3 space-y-1">
+      <nav className="flex-1 min-h-0 px-2 py-3 space-y-1 overflow-auto">
         {itemsApp.map((item) => (
           <SideItem
             key={item.href}
-            {...item}
+            href={item.href}
+            label={item.label}
+            icon={item.icon}
             open={open}
             active={isActive(pathname, item.href)}
             onClick={onNavigate}
@@ -159,48 +181,59 @@ export default function Sidebar({
       </nav>
 
       {/* ===============================
-         FOOTER — COMPTE
+         FOOTER — AUTH (collé en bas)
       =============================== */}
-{/* FOOTER — COMPTE (collé en bas) */}
-<div className="mt-auto border-t border-slate-800 p-2 space-y-1">
-  <SideItem
-    href="/compte"
-    label="Compte"
-    icon={<User className="h-4 w-4" />}
-    open={open}
-    active={isActive(pathname, "/compte")}
-    onClick={onNavigate}
-  />
+      <div className="mt-auto border-t border-slate-800 p-2 space-y-1">
+        {!isLoggedIn ? (
+          <>
+            <SideItem
+              href="/auth/signin"
+              label="Connexion"
+              icon={<LogIn className="h-4 w-4" />}
+              open={open}
+              active={isActive(pathname, "/auth/signin")}
+              onClick={onNavigate}
+            />
+            <SideItem
+              href="/auth/signup"
+              label="Inscription"
+              icon={<UserPlus className="h-4 w-4" />}
+              open={open}
+              active={isActive(pathname, "/auth/signup")}
+              onClick={onNavigate}
+            />
+          </>
+        ) : (
+          <>
+            <SideItem
+              href="/dashboard"
+              label="Compte"
+              icon={<User className="h-4 w-4" />}
+              open={open}
+              active={isActive(pathname, "/dashboard")}
+              onClick={onNavigate}
+            />
+            <SideItem
+              href="/auth/signout"
+              label="Déconnexion"
+              icon={<LogOut className="h-4 w-4" />}
+              open={open}
+              active={false}
+              onClick={onNavigate}
+            />
+          </>
+        )}
 
-  <SideItem
-    href="/auth/signin"
-    label="Connexion"
-    icon={<LogIn className="h-4 w-4" />}
-    open={open}
-    active={isActive(pathname, "/auth/signin")}
-    onClick={onNavigate}
-  />
-
-  <SideItem
-    href="/auth/signup"
-    label="Inscription"
-    icon={<UserPlus className="h-4 w-4" />}
-    open={open}
-    active={isActive(pathname, "/auth/signup")}
-    onClick={onNavigate}
-  />
-
-  <p
-    className={[
-      "mt-2 text-[11px] text-slate-500 leading-snug",
-      "transition-all duration-200",
-      open ? "opacity-100" : "opacity-0 h-0 overflow-hidden",
-    ].join(" ")}
-  >
-    Astuce : réduis la barre pour gagner de la place, comme sur ChatGPT.
-  </p>
-</div>
-
+        <p
+          className={[
+            "mt-2 text-[11px] text-slate-500 leading-snug",
+            "transition-all duration-200",
+            open ? "opacity-100" : "opacity-0 h-0 overflow-hidden",
+          ].join(" ")}
+        >
+          Astuce : réduis la barre pour gagner de la place, comme sur ChatGPT.
+        </p>
+      </div>
     </aside>
   );
 }
@@ -213,7 +246,6 @@ function SideItem({
   href,
   label,
   icon,
-  badge,
   open,
   active,
   onClick,
@@ -221,7 +253,6 @@ function SideItem({
   href: string;
   label: string;
   icon: React.ReactNode;
-  badge?: string;
   open: boolean;
   active: boolean;
   onClick?: () => void;
@@ -258,22 +289,10 @@ function SideItem({
       >
         {label}
       </span>
-
-      {badge && (
-        <span
-          className={[
-            "ml-auto rounded-full px-2 py-0.5 text-[10px] font-semibold uppercase",
-            "bg-emerald-600/20 text-emerald-300 border border-emerald-500/20",
-            "transition-all duration-200",
-            open ? "opacity-100" : "opacity-0 w-0 overflow-hidden",
-          ].join(" ")}
-        >
-          {badge}
-        </span>
-      )}
     </Link>
   );
 }
+
 
 
 
