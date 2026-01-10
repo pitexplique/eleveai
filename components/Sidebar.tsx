@@ -1,3 +1,4 @@
+//app/components/Sidebar.tsx
 "use client";
 
 import Link from "next/link";
@@ -97,21 +98,10 @@ export default function Sidebar({
   /* ===============================
      FIXED DESKTOP (hauteur parfaite)
   =============================== */
-
-  const desktopFixedClass =
-    "lg:fixed lg:top-[var(--app-header-h)] lg:bottom-4 lg:z-40 " +
-    // ✅ aligne avec tes paddings AppShell: px-3 sm:px-5 lg:px-6
-    "lg:left-3 lg:sm:left-5 lg:lg:left-6";
-
 const wrapperClass =
   variant === "mobile"
     ? "h-full w-full"
-    : [
-        "sticky top-[var(--app-header-h)]",
-        // ✅ hauteur exacte : du bas du header jusqu’en bas de l’écran
-        "h-[calc(100vh-var(--app-header-h)-1rem)]", // 1rem = marge basse (équivalent bottom-4)
-      ].join(" ");
-
+    : "sticky top-[var(--app-header-h)] h-[calc(100vh-var(--app-header-h))]";
 
   const widthClass =
     variant === "mobile"
@@ -125,7 +115,7 @@ const wrapperClass =
       className={[
         wrapperClass,
         widthClass,
-        "flex flex-col min-h-0",
+        "self-start flex flex-col min-h-0",
         "rounded-2xl border border-slate-800",
         "bg-slate-950/90 backdrop-blur",
         "shadow-xl shadow-black/20",
@@ -292,8 +282,3 @@ function SideItem({
     </Link>
   );
 }
-
-
-
-
-
