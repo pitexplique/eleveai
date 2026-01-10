@@ -4,16 +4,12 @@ import { QUOTAS } from "@/lib/constants/quotas";
 export type AuthType = "anon" | "email" | "college";
 
 /**
- * Plan = ce qui détermine les droits.
- * - email_free : utilisateur email, pas abonné
- * - email_paid : utilisateur email, abonné
- * - college    : utilisateur via codes établissement/élève
+ * Plan = droits fonctionnels (quotas, bibliothèque, etc.)
  */
 export type Plan = "anon" | "email_free" | "email_paid" | "college";
 
 /**
- * Mode UI = 3 états demandés pour la sidebar.
- * (Le cas "college" est rangé dans "connected" côté UI, mais le plan reste "college".)
+ * Mode UI = affichage global (sidebar, badges…)
  */
 export type UIMode = "anon" | "connected" | "subscribed";
 
@@ -30,12 +26,16 @@ export type Access = {
   /** Nombre de jours de conservation (null = illimité / non applicable) */
   libraryRetentionDays: number | null;
 
-  /** Messages courts utiles UI (sidebar, tooltips) */
+  /** Messages courts utiles UI */
   hints: {
     underGenerateFree?: string;
     underGeneratePaid?: string;
   };
 };
+
+/* =========================
+   QUOTAS / DROITS
+========================= */
 
 export function getDailyLimit(plan: Plan): number {
   switch (plan) {
@@ -46,7 +46,7 @@ export function getDailyLimit(plan: Plan): number {
     case "college":
       return QUOTAS.COLLEGE_DAILY;
     case "email_paid":
-      return QUOTAS.PAID_DAILY; // plafond technique
+      return QUOTAS.PAID_DAILY;
     default:
       return QUOTAS.ANON_DAILY;
   }
@@ -55,24 +55,20 @@ export function getDailyLimit(plan: Plan): number {
 export function getLibraryRetentionDays(plan: Plan): number | null {
   switch (plan) {
     case "college":
-      return QUOTAS.COLLEGE_LIBRARY_DAYS; // 30 jours
+      return QUOTAS.COLLEGE_LIBRARY_DAYS;
     case "email_paid":
-      return null; // illimité (historique complet)
+      return null; // illimité
     case "anon":
     case "email_free":
     default:
-      return 0; // pas de bibliothèque
+      return 0;
   }
 }
 
 export function isLibraryEnabled(plan: Plan): boolean {
-  // Décision v1 : Bibliothèque réservée aux abonnés + collège (30 jours)
   return plan === "email_paid" || plan === "college";
 }
 
-/**
- * Plan -> 3 modes sidebar
- */
 export function toUIMode(plan: Plan): UIMode {
   if (plan === "email_paid") return "subscribed";
   if (plan === "email_free" || plan === "college") return "connected";
@@ -80,9 +76,12 @@ export function toUIMode(plan: Plan): UIMode {
 }
 
 /**
- * Fabrique l'objet Access complet, réutilisable partout (sidebar + espaces).
+ * Fabrique un Access réel (hors mock)
  */
-export function getAccess(params: { authType: AuthType; isPaid?: boolean }): Access {
+export function getAccess(params: {
+  authType: AuthType;
+  isPaid?: boolean;
+}): Access {
   const { authType, isPaid } = params;
 
   const plan: Plan =
@@ -94,22 +93,19 @@ export function getAccess(params: { authType: AuthType; isPaid?: boolean }): Acc
       ? "email_paid"
       : "email_free";
 
-  const dailyLimit = getDailyLimit(plan);
-  const libraryRetentionDays = getLibraryRetentionDays(plan);
-  const libraryEnabled = isLibraryEnabled(plan);
-
   return {
     authType,
     plan,
     uiMode: toUIMode(plan),
-    dailyLimit,
-    libraryEnabled,
-    libraryRetentionDays,
+    dailyLimit: getDailyLimit(plan),
+    libraryEnabled: isLibraryEnabled(plan),
+    libraryRetentionDays: getLibraryRetentionDays(plan),
     hints: {
       underGenerateFree: "🕒 Il te reste X requêtes aujourd’hui",
-      underGeneratePaid: libraryEnabled
-        ? "📚 Cette requête sera ajoutée à ta bibliothèque"
-        : undefined,
+      underGeneratePaid:
+        isLibraryEnabled(plan)
+          ? "📚 Cette requête sera ajoutée à ta bibliothèque"
+          : undefined,
     },
   };
 }

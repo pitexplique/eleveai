@@ -17,7 +17,6 @@ const APP_ROUTES = [
   "/espace-atelier-IA",
   "/espace-atelier-ia",
   "/dashboard",
-  "/test"
 ];
 
 function isAppRoute(pathname: string) {
