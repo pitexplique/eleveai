@@ -12,6 +12,7 @@ import {
   GraduationCap,
   UsersRound,
   FlaskConical,
+  MessageCircle,
   LogIn,
   UserPlus,
   User,
@@ -91,11 +92,17 @@ export default function Sidebar({
         label: "Générateur de prompt Ecoles",
         icon: <UsersRound className="h-3 w-3" />,
       },
-            {
+      {
         href: "/espace-atelier-IA",
         label: "Atelier-IA",
         icon: <FlaskConical className="h-4 w-4" />,
       },
+      {
+        href: "/tchat",
+        label: "Tchat EleveAI",
+        icon: <MessageCircle className="h-4 w-4" />,
+      },
+
     ],
     [],
   );
