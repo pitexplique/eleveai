@@ -21,6 +21,9 @@ import {
   Shield,
   HardHat,
   Accessibility,
+  MessageCircle,
+  HeartHandshake
+
 } from "lucide-react";
 
 type SidebarProps = {
@@ -70,66 +73,69 @@ export default function Sidebar({
      NAVIGATION APP UNIQUEMENT
   =============================== */
 
-  const itemsApp: Item[] = useMemo(
-    () => [
+const itemsApp: Item[] = useMemo(
+  () => [
 
-      {
-        href: "/espace-profs",
-        label: "Prompt Profs",
-        description: "Séances, exercices, évaluations (Word) prêts à l’emploi.",
-        icon: <Users className="h-4 w-4" />,
-      },
-      {
-        href: "/espace-eleves",
-        label: "Prompt Élèves",
-        description: "Aide encadrée : comprendre, s’entraîner, progresser (anti-triche).",
-        icon: <GraduationCap className="h-4 w-4" />,
-      },
-      {
-        href: "/espace-parents",
-        label: "Prompt Parents",
-        description: "Accompagner sans faire à la place : méthode + routines.",
-        icon: <UsersRound className="h-4 w-4" />,
-      },
-      {
-        href: "/espace-colleges/",
-        label: "Prompt École",
-        description: "Prompts institutionnels pour collège/école (cadre & cohérence).",
-        icon: <School className="h-4 w-4" />,
-      },
-      {
-        href: "/espace-colleges/espace-administration",
-        label: "Prompt Administration",
-        description: "Direction/gestion : notes, réunions, communication, procédures.",
-        icon: <Building2 className="h-4 w-4" />,
-      },
-      {
-        href: "/espace-colleges/espace-vie-scolaire",
-        label: "Prompt Vie scolaire",
-        description: "CPE/Vie scolaire : sanctions éducatives, suivi, incidents.",
-        icon: <Shield className="h-4 w-4" />,
-      },
-      {
-        href: "/espace-colleges/espace-personnels",
-        label: "Prompt personnel d'entretien",
-        description: "Agents : demandes, fiches tâches, sécurité, organisation.",
-        icon: <HardHat className="h-4 w-4" />,
-      },
-      {
-        href: "/espace-colleges/espace-aesh",
-        label: "Prompt AESH",
-        description: "Aides, adaptations, inclusions, observations, suivi élève.",
-        icon: <Accessibility className="h-4 w-4" />,
-      },
-      {
-        href: "/espace-atelier-IA",
-        label: "Atelier-IA",
-        description: "Parcours guidés : apprendre à penser avec l’IA (local & durable).",
-        icon: <FlaskConical className="h-4 w-4" />,
-      },
-    ],
-    [],
-  );
+    {
+      href: "/espace-profs",
+      label: "Prompt Profs",
+      description: "Créer. Structurer. Transmettre.",
+      icon: <Users className="h-4 w-4" />,
+    },
+    {
+      href: "/espace-eleves",
+      label: "Prompt Élèves",
+      description: "Comprendre. S’entraîner. Progresser.",
+      icon: <GraduationCap className="h-4 w-4" />,
+    },
+    {
+      href: "/espace-parents",
+      label: "Prompt Parents",
+      description: "Guider. Encourager. Soutenir.",
+      icon: <UsersRound className="h-4 w-4" />,
+    },
+    {
+      href: "/espace-colleges/",
+      label: "Prompt École",
+      description: "Un cadre. Une vision. Une équipe.",
+      icon: <School className="h-4 w-4" />,
+    },
+    {
+      href: "/espace-colleges/espace-administration",
+      label: "Prompt Administration",
+      description: "Organiser. Communiquer. Décider.",
+      icon: <Building2 className="h-4 w-4" />,
+    },
+    {
+      href: "/espace-colleges/espace-vie-scolaire",
+      label: "Prompt Vie scolaire",
+      description: "Observer. Réguler. Accompagner.",
+      icon: <HeartHandshake className="h-4 w-4" />,
+    },
+
+    {
+      href: "/espace-colleges/espace-personnels",
+      label: "Prompt Personnel d’entretien",
+      description: "Préparer. Sécuriser. Agir.",
+      icon: <HardHat className="h-4 w-4" />,
+    },
+    {
+      href: "/espace-colleges/espace-aesh",
+      label: "Prompt AESH",
+      description: "Inclure. Adapter. Faire réussir.",
+      icon: <Accessibility className="h-4 w-4" />,
+    },
+    {
+      href: "/espace-atelier-IA",
+      label: "Atelier-IA",
+      description: "Apprendre à penser avec l’IA.",
+      icon: <FlaskConical className="h-4 w-4" />,
+    },
+  ],
+  [],
+);
+
+
 
   /* ===============================
      FIXED DESKTOP (hauteur parfaite)
