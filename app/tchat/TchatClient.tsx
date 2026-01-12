@@ -119,9 +119,10 @@ export default function TchatClient() {
     return "Copié (LaTeX)";
   }, [copied]);
 
-  return (
-    <main className="min-h-screen bg-gray-50 text-gray-900">
-      <div className="w-full max-w-[1400px] mx-auto px-3 sm:px-5 lg:px-6 pb-10">
+    return (
+    <main className="h-screen bg-gray-50 text-gray-900 flex flex-col">
+        <div className="w-full max-w-[1400px] mx-auto px-3 sm:px-5 lg:px-6 pb-6 flex-1 flex flex-col">
+
         <div className="bg-white p-4 sm:p-6 rounded-xl shadow space-y-4 mt-6">
           <h1 className="text-2xl font-bold text-blue-600">Tchat EleveAI</h1>
 

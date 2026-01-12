@@ -1,4 +1,4 @@
-//app/components/Sidebar.tsx
+// app/components/Sidebar.tsx
 "use client";
 
 import Link from "next/link";
@@ -12,11 +12,15 @@ import {
   GraduationCap,
   UsersRound,
   FlaskConical,
-  MessageCircle,
   LogIn,
   UserPlus,
   User,
   LogOut,
+  School,
+  Building2,
+  Shield,
+  HardHat,
+  Accessibility,
 } from "lucide-react";
 
 type SidebarProps = {
@@ -30,6 +34,7 @@ type SidebarProps = {
 type Item = {
   href: string;
   label: string;
+  description?: string; // ✅ une ligne sous le libellé
   icon: React.ReactNode;
 };
 
@@ -67,42 +72,61 @@ export default function Sidebar({
 
   const itemsApp: Item[] = useMemo(
     () => [
-      {
-        href: "/dashboard",
-        label: "Dashboard",
-        icon: <LayoutDashboard className="h-3 w-3" />,
-      },
+
       {
         href: "/espace-profs",
-        label: "Générateur de prompt Profs",
-        icon: <Users className="h-3 w-3" />,
+        label: "Prompt Profs",
+        description: "Séances, exercices, évaluations (Word) prêts à l’emploi.",
+        icon: <Users className="h-4 w-4" />,
       },
       {
         href: "/espace-eleves",
-        label: "Générateur de prompt Élèves",
-        icon: <GraduationCap className="h-3 w-3" />,
+        label: "Prompt Élèves",
+        description: "Aide encadrée : comprendre, s’entraîner, progresser (anti-triche).",
+        icon: <GraduationCap className="h-4 w-4" />,
       },
       {
         href: "/espace-parents",
-        label: "Générateur de prompt Parents",
-        icon: <UsersRound className="h-3 w-3" />,
+        label: "Prompt Parents",
+        description: "Accompagner sans faire à la place : méthode + routines.",
+        icon: <UsersRound className="h-4 w-4" />,
       },
-            {
-        href: "/espace-colleges",
-        label: "Générateur de prompt Ecoles",
-        icon: <UsersRound className="h-3 w-3" />,
+      {
+        href: "/espace-colleges/",
+        label: "Prompt École",
+        description: "Prompts institutionnels pour collège/école (cadre & cohérence).",
+        icon: <School className="h-4 w-4" />,
+      },
+      {
+        href: "/espace-colleges/espace-administration",
+        label: "Prompt Administration",
+        description: "Direction/gestion : notes, réunions, communication, procédures.",
+        icon: <Building2 className="h-4 w-4" />,
+      },
+      {
+        href: "/espace-colleges/espace-vie-scolaire",
+        label: "Prompt Vie scolaire",
+        description: "CPE/Vie scolaire : sanctions éducatives, suivi, incidents.",
+        icon: <Shield className="h-4 w-4" />,
+      },
+      {
+        href: "/espace-colleges/espace-personnels",
+        label: "Prompt personnel d'entretien",
+        description: "Agents : demandes, fiches tâches, sécurité, organisation.",
+        icon: <HardHat className="h-4 w-4" />,
+      },
+      {
+        href: "/espace-colleges/espace-aesh",
+        label: "Prompt AESH",
+        description: "Aides, adaptations, inclusions, observations, suivi élève.",
+        icon: <Accessibility className="h-4 w-4" />,
       },
       {
         href: "/espace-atelier-IA",
         label: "Atelier-IA",
+        description: "Parcours guidés : apprendre à penser avec l’IA (local & durable).",
         icon: <FlaskConical className="h-4 w-4" />,
       },
-      {
-        href: "/tchat",
-        label: "Tchat EleveAI",
-        icon: <MessageCircle className="h-4 w-4" />,
-      },
-
     ],
     [],
   );
@@ -110,17 +134,13 @@ export default function Sidebar({
   /* ===============================
      FIXED DESKTOP (hauteur parfaite)
   =============================== */
-const wrapperClass =
-  variant === "mobile"
-    ? "h-full w-full"
-    : "sticky top-[var(--app-header-h)] h-[calc(100vh-var(--app-header-h))]";
+  const wrapperClass =
+    variant === "mobile"
+      ? "h-full w-full"
+      : "sticky top-[var(--app-header-h)] h-[calc(100vh-var(--app-header-h))]";
 
   const widthClass =
-    variant === "mobile"
-      ? "w-full"
-      : open
-      ? "w-[280px]"
-      : "w-[72px]";
+    variant === "mobile" ? "w-full" : open ? "w-[280px]" : "w-[72px]";
 
   return (
     <aside
@@ -174,6 +194,7 @@ const wrapperClass =
             key={item.href}
             href={item.href}
             label={item.label}
+            description={item.description}
             icon={item.icon}
             open={open}
             active={isActive(pathname, item.href)}
@@ -191,6 +212,7 @@ const wrapperClass =
             <SideItem
               href="/auth/signin"
               label="Connexion"
+              description="Se connecter à EleveAI."
               icon={<LogIn className="h-4 w-4" />}
               open={open}
               active={isActive(pathname, "/auth/signin")}
@@ -199,6 +221,7 @@ const wrapperClass =
             <SideItem
               href="/auth/signup"
               label="Inscription"
+              description="Créer un compte en 1 minute."
               icon={<UserPlus className="h-4 w-4" />}
               open={open}
               active={isActive(pathname, "/auth/signup")}
@@ -210,6 +233,7 @@ const wrapperClass =
             <SideItem
               href="/dashboard"
               label="Compte"
+              description="Gérer ton compte et tes accès."
               icon={<User className="h-4 w-4" />}
               open={open}
               active={isActive(pathname, "/dashboard")}
@@ -218,6 +242,7 @@ const wrapperClass =
             <SideItem
               href="/auth/signout"
               label="Déconnexion"
+              description="Se déconnecter en sécurité."
               icon={<LogOut className="h-4 w-4" />}
               open={open}
               active={false}
@@ -247,6 +272,7 @@ const wrapperClass =
 function SideItem({
   href,
   label,
+  description,
   icon,
   open,
   active,
@@ -254,6 +280,7 @@ function SideItem({
 }: {
   href: string;
   label: string;
+  description?: string;
   icon: React.ReactNode;
   open: boolean;
   active: boolean;
@@ -265,7 +292,7 @@ function SideItem({
       onClick={onClick}
       title={!open ? label : undefined}
       className={[
-        "group flex items-center gap-3 rounded-xl px-3 py-2",
+        "group flex items-start gap-3 rounded-xl px-3 py-2",
         "transition-all duration-150",
         active
           ? "bg-emerald-500/15 text-emerald-200 ring-1 ring-emerald-500/20"
@@ -284,12 +311,18 @@ function SideItem({
 
       <span
         className={[
-          "flex-1 truncate text-sm font-medium",
+          "flex-1 min-w-0",
           "transition-all duration-200",
           open ? "opacity-100" : "opacity-0 w-0 overflow-hidden",
         ].join(" ")}
       >
-        {label}
+        <span className="block truncate text-sm font-medium">{label}</span>
+
+        {description ? (
+          <span className="mt-0.5 block text-[11px] leading-snug text-slate-500 group-hover:text-slate-300">
+            {description}
+          </span>
+        ) : null}
       </span>
     </Link>
   );
