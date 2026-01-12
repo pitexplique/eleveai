@@ -24,11 +24,6 @@ import { usePathname, useRouter } from "next/navigation";
 
 // ⚠️ Note Next.js : "metadata" dans un composant client n'est pas pris en compte
 // comme un vrai metadata App Router. Mais /test est un outil interne : on laisse.
-export const metadata = {
-  title: "Test Mocks — EleveAI",
-  robots: { index: false, follow: false },
-};
-
 import type { MockKey, FeatureFlag, AccessMock } from "@/lib/access/access.mock";
 import {
   pickAccessMock,
