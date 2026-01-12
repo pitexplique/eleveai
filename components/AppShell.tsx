@@ -11,11 +11,7 @@ import Sidebar from "@/components/Sidebar";
 import { pickAccessMock } from "@/lib/access/access.mock";
 
 const APP_ROUTES = [
-  "/espace-eleves",
-  "/espace-parents",
-  "/espace-atelier-IA",
-  "/espace-atelier-ia",
-  "/test"
+  "/accueil",
 ];
 
 function isAppRoute(pathname: string) {
