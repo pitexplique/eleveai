@@ -76,61 +76,61 @@ export default function Sidebar({
 const itemsApp: Item[] = useMemo(
   () => [
 
-    {
-      href: "/espace-profs",
-      label: "Prompt Profs",
-      description: "Créer. Structurer. Transmettre.",
-      icon: <Users className="h-4 w-4" />,
-    },
-    {
-      href: "/espace-eleves",
-      label: "Prompt Élèves",
-      description: "Comprendre. S’entraîner. Progresser.",
-      icon: <GraduationCap className="h-4 w-4" />,
-    },
-    {
-      href: "/espace-parents",
-      label: "Prompt Parents",
-      description: "Guider. Encourager. Soutenir.",
-      icon: <UsersRound className="h-4 w-4" />,
-    },
-    {
-      href: "/espace-colleges/",
-      label: "Prompt École",
-      description: "Un cadre. Une vision. Une équipe.",
-      icon: <School className="h-4 w-4" />,
-    },
-    {
-      href: "/espace-colleges/espace-administration",
-      label: "Prompt Administration",
-      description: "Organiser. Communiquer. Décider.",
-      icon: <Building2 className="h-4 w-4" />,
-    },
-    {
-      href: "/espace-colleges/espace-vie-scolaire",
-      label: "Prompt Vie scolaire",
-      description: "Observer. Réguler. Accompagner.",
-      icon: <HeartHandshake className="h-4 w-4" />,
-    },
+{
+  href: "/espace-profs",
+  label: "Prompt Profs",
+  description: "Créer des séances qui donnent envie d’enseigner.",
+  icon: <Users className="h-4 w-4" />,
+},
+{
+  href: "/espace-eleves",
+  label: "Prompt Élèves",
+  description: "Reprendre confiance. Gagner en énergie. Progresser.",
+  icon: <GraduationCap className="h-4 w-4" />,
+},
+{
+  href: "/espace-parents",
+  label: "Prompt Parents",
+  description: "Aider sans faire à la place. Rassurer. Encourager.",
+  icon: <UsersRound className="h-4 w-4" />,
+},
+{
+  href: "/espace-colleges/",
+  label: "Prompt École",
+  description: "Un cadre clair pour une équipe sereine.",
+  icon: <School className="h-4 w-4" />,
+},
+{
+  href: "/espace-colleges/espace-administration",
+  label: "Prompt Administration",
+  description: "Gagner du temps. Décider sereinement.",
+  icon: <Building2 className="h-4 w-4" />,
+},
+{
+  href: "/espace-colleges/espace-vie-scolaire",
+  label: "Prompt Vie scolaire",
+  description: "Écouter. Apaiser. Accompagner les élèves.",
+  icon: <HeartHandshake className="h-4 w-4" />,
+},
+{
+  href: "/espace-colleges/espace-personnels",
+  label: "Personnel d’entretien",
+  description: "Travailler efficacement, en sécurité et reconnu.",
+  icon: <HardHat className="h-4 w-4" />,
+},
+{
+  href: "/espace-colleges/espace-aesh",
+  label: "Prompt AESH",
+  description: "Inclure vraiment. Adapter. Faire réussir.",
+  icon: <Accessibility className="h-4 w-4" />,
+},
+{
+  href: "/espace-atelier-IA",
+  label: "Atelier-IA",
+  description: "Explorer, réfléchir, progresser avec l’IA.",
+  icon: <FlaskConical className="h-4 w-4" />,
+}
 
-    {
-      href: "/espace-colleges/espace-personnels",
-      label: "Prompt Personnel d’entretien",
-      description: "Préparer. Sécuriser. Agir.",
-      icon: <HardHat className="h-4 w-4" />,
-    },
-    {
-      href: "/espace-colleges/espace-aesh",
-      label: "Prompt AESH",
-      description: "Inclure. Adapter. Faire réussir.",
-      icon: <Accessibility className="h-4 w-4" />,
-    },
-    {
-      href: "/espace-atelier-IA",
-      label: "Atelier-IA",
-      description: "Apprendre à penser avec l’IA.",
-      icon: <FlaskConical className="h-4 w-4" />,
-    },
   ],
   [],
 );
