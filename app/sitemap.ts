@@ -11,11 +11,17 @@ const LASTMOD_CORE = new Date("2026-01-04");
 const LASTMOD_LEGAL = new Date("2026-01-04");
 
 export default function sitemap(): MetadataRoute.Sitemap {
+  /**
+   * ⚠️ IMPORTANT
+   * - Les routes "app" (dashboard, espaces, collèges, direction, etc.)
+   *   sont volontairement EXCLUES du sitemap.
+   * - Ce sitemap est 100% vitrine / SEO / confiance.
+   */
+
   // =========================
   // 1) Routes vitrines / marque
   // =========================
   const staticRoutes: MetadataRoute.Sitemap = [
-    // ✅ Page principale publique
     {
       url: u("/accueil"),
       lastModified: LASTMOD_HOME,
@@ -23,7 +29,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1.0,
     },
 
-    // ✅ Pages SEO (publics cibles)
+    // =========================
+    // 2) Pages SEO (publics)
+    // =========================
     {
       url: u("/profs"),
       lastModified: LASTMOD_CORE,
@@ -44,7 +52,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
 
     // =========================
-    // 2) Atelier-IA (vitrine)
+    // 3) Atelier-IA (vitrine)
     // =========================
     {
       url: u("/atelier-IA"),
@@ -64,8 +72,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.75,
     },
-
-    // ⚠️ Charte contextuelle Atelier-IA (secondaire)
     {
       url: u("/atelier-IA/charte"),
       lastModified: LASTMOD_CORE,
@@ -74,7 +80,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
 
     // =========================
-    // 3) Pages marque & confiance
+    // 4) Marque & confiance
     // =========================
     {
       url: u("/pourquoi-eleveai"),
@@ -82,15 +88,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.85,
     },
-
     {
       url: u("/qui-sommes-nous"),
       lastModified: LASTMOD_CORE,
       changeFrequency: "monthly",
       priority: 0.75,
     },
-
-    // ✅ Charte officielle (TRÈS importante)
     {
       url: u("/charte"),
       lastModified: LASTMOD_LEGAL,
@@ -99,7 +102,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
 
     // =========================
-    // 4) FAQ (orientation & rassurance)
+    // 5) FAQ
     // =========================
     {
       url: u("/faq"),
@@ -127,7 +130,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
 
     // =========================
-    // 5) Business / conversion
+    // 6) Business / conversion
     // =========================
     {
       url: u("/tarifs"),
@@ -155,7 +158,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
 
     // =========================
-    // 6) Contenu & communauté
+    // 7) Contenu & communauté
     // =========================
     {
       url: u("/blog"),
@@ -183,7 +186,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
 
     // =========================
-    // 7) Légal
+    // 8) Légal
     // =========================
     {
       url: u("/mentions-legales"),
@@ -206,9 +209,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ];
 
   // =========================
-  // 8) Blog posts dynamiques
+  // 9) Articles de blog
   // =========================
-  const posts = getAllBlogPosts();
+  const posts = getAllBlogPosts() ?? [];
 
   const blogRoutes: MetadataRoute.Sitemap = posts.map((post) => ({
     url: u(`/blog/${post.slug}`),

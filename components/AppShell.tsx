@@ -12,11 +12,9 @@ import { pickAccessMock } from "@/lib/access/access.mock";
 
 const APP_ROUTES = [
   "/espace-eleves",
-  "/espace-profs",
   "/espace-parents",
   "/espace-atelier-IA",
   "/espace-atelier-ia",
-  "/dashboard",
   "/test"
 ];
 

@@ -1,9 +1,33 @@
 // app/test/TestClient.tsx
 "use client";
 
+/**
+ * ============================================================
+ *  PAGE INTERNE /test — OUTIL DEVELOPPEUR (invisible utilisateur)
+ * ============================================================
+ *
+ * Objectif :
+ * - Simuler tous les états (anon, email_free, email_paid, collège rôles...)
+ * - Vérifier la "politique d'affichage" (features, quotas, bibliothèque...)
+ * - Contractualiser la SIDEBAR du générateur de prompts
+ *   via une section "Contrat UI — Sidebar Générateur".
+ *
+ * Important :
+ * - Cette page est uniquement pour NOUS (dev).
+ * - Elle ne pilote pas les droits réels : c’est un outil de contrôle visuel.
+ * - La sidebar réelle n'apparaît pas ici : on affiche un "aperçu/contrat".
+ */
+
 import Link from "next/link";
 import { useMemo, useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
+
+// ⚠️ Note Next.js : "metadata" dans un composant client n'est pas pris en compte
+// comme un vrai metadata App Router. Mais /test est un outil interne : on laisse.
+export const metadata = {
+  title: "Test Mocks — EleveAI",
+  robots: { index: false, follow: false },
+};
 
 import type { MockKey, FeatureFlag, AccessMock } from "@/lib/access/access.mock";
 import {
@@ -12,6 +36,10 @@ import {
   canSeeDirection,
 } from "@/lib/access/access.mock";
 
+/* =========================================================
+   0) LISTE DES ETATS (MOCKS)
+========================================================= */
+
 const MOCKS: { key: MockKey; label: string; desc: string }[] = [
   { key: "anon", label: "Anon", desc: "Invité (non connecté)" },
   { key: "email_free", label: "Email Free", desc: "Compte email gratuit" },
@@ -19,12 +47,20 @@ const MOCKS: { key: MockKey; label: string; desc: string }[] = [
 
   // Collège
   { key: "college_eleve", label: "Élève", desc: "Élève collège (DIMITILE / eleve-demo)" },
+
+  // ✅ NOUVEAU : prof collège (accès générateurs pédagogiques)
+  { key: "college_prof", label: "Prof", desc: "Prof collège (DIMITILE / prof)" },
+
   { key: "college_admin", label: "Boss", desc: "Direction (DIMITILE / theboss)" },
   { key: "college_vie", label: "Vie", desc: "Vie scolaire (DIMITILE / vie)" },
   { key: "college_aesh", label: "AESH", desc: "AESH (DIMITILE / aesh)" },
   { key: "college_personnels", label: "Perso", desc: "Personnels (DIMITILE / perso)" },
   { key: "college_administration", label: "Admin", desc: "Administration (DIMITILE / admin)" },
 ];
+
+/* =========================================================
+   1) ROUTES (juste pour navigation rapide en test)
+========================================================= */
 
 type RouteItem = {
   href: string;
@@ -85,6 +121,10 @@ const ROUTES_COLLEGE: RouteItem[] = [
   },
 ];
 
+/* =========================================================
+   2) HELPERS BASIQUES
+========================================================= */
+
 function getMockFromWindow(): string | null {
   if (typeof window === "undefined") return null;
   return new URLSearchParams(window.location.search).get("mock");
@@ -138,6 +178,113 @@ function renderLibraryBadge(access: {
   );
 }
 
+/* =========================================================
+   3) CONTRAT UI — SIDEBAR GENERATEUR (NOTRE POLITIQUE)
+========================================================= */
+
+/**
+ * Ici on formalise les règles pour la sidebar "générateur de prompts".
+ *
+ * Rappel architecture validée :
+ * - Header global : navigation principale (univers)
+ * - Sidebar : UNIQUEMENT sur les pages générateur (Atelier / Élèves / Profs / Parents)
+ * - Dashboard / Direction : PAS DE SIDEBAR, mais header global oui.
+ *
+ * Cette section crée un "aperçu" qui dépend uniquement de access (plan/auth/features).
+ * /test est donc notre document vivant + garde-fou.
+ */
+
+function isLoggedInFromPlan(plan?: string | null) {
+  return plan != null && plan !== "anon";
+}
+
+/**
+ * Règle CTA (footer de la sidebar générateur)
+ * - invité : Connexion / Inscription
+ * - email : Mon compte -> /dashboard + Déconnexion
+ * - collège direction : Mon compte -> /direction + Déconnexion
+ * - collège non-direction (élève, prof, vie, aesh, etc.) : Mon établissement -> /espace-colleges + Déconnexion
+ */
+function getAccountCta(access: AccessMock) {
+  const logged = isLoggedInFromPlan(access?.plan);
+
+  if (!logged) {
+    return {
+      primary: { label: "Connexion", href: "/auth/signin" },
+      secondary: { label: "Inscription", href: "/auth/signup" },
+    };
+  }
+
+  // Collège direction -> /direction
+  const isDirection =
+    access.authType === "college" &&
+    access.collegeRole === "direction" &&
+    canSeeDirection(access);
+
+  if (isDirection) {
+    return {
+      primary: { label: "Mon compte", href: "/direction" },
+      secondary: { label: "Déconnexion", href: "/auth/signout" },
+    };
+  }
+
+  // Collège non-direction -> hub établissement
+  if (access.authType === "college") {
+    return {
+      primary: { label: "Mon établissement", href: "/espace-colleges" },
+      secondary: { label: "Déconnexion", href: "/auth/signout" },
+    };
+  }
+
+  // Email -> /dashboard
+  return {
+    primary: { label: "Mon compte", href: "/dashboard" },
+    secondary: { label: "Déconnexion", href: "/auth/signout" },
+  };
+}
+
+/**
+ * Décrit ce que la sidebar générateur DOIT afficher selon l'état (access).
+ * NB : ici on ne rend pas la vraie sidebar : on rend le CONTRAT (liste de sections).
+ */
+function getSidebarGeneratorSpec(access: AccessMock) {
+  const logged = isLoggedInFromPlan(access?.plan);
+
+  // reste aujourd’hui
+  const remaining = Math.max(
+    0,
+    (access?.dailyLimit ?? 0) - Math.max(0, access?.usedToday ?? 0),
+  );
+
+  const quotaLine = `${access.usedToday} / ${access.dailyLimit} — reste ${remaining}`;
+
+  const libraryLine = access.libraryEnabled
+    ? `ON (${access.libraryRetentionDays === null ? "illimitée" : `${access.libraryRetentionDays} jours`})`
+    : "OFF";
+
+  // Ici on considère que l'historique est une fonctionnalité "connectée"
+  // (anon = OFF, le reste = ON). Si un jour tu veux l'affiner par features,
+  // on ajoutera un flag "canSeeHistory".
+  const historyLine = logged ? "ON" : "OFF";
+
+  const sections = [
+    { label: "Quota du jour", value: quotaLine },
+    { label: "Bibliothèque", value: libraryLine },
+    { label: "Historique", value: historyLine },
+    { label: "Conseils rapides", value: "ON" },
+  ];
+
+  // note fixe : rappel “où la sidebar existe réellement”
+  const note =
+    "Rappel : la sidebar est un outil de génération, affichée seulement sur les pages générateur (Atelier / Élèves / Profs / Parents).";
+
+  return { sections, note };
+}
+
+/* =========================================================
+   4) COMPONENT PRINCIPAL
+========================================================= */
+
 export default function TestClient() {
   const router = useRouter();
   const pathname = usePathname();
@@ -148,6 +295,7 @@ export default function TestClient() {
     setMockKey(getMockFromWindow());
   }, []);
 
+  // access = la “vérité” mock (plan, quota, bibliothèque, features...)
   const access = useMemo(() => pickAccessMock(mockKey), [mockKey]);
 
   function setMock(key: MockKey) {
@@ -199,18 +347,26 @@ export default function TestClient() {
 
   const directionAllowed = canSeeDirection(access);
 
+  // Contrat sidebar (générateur) pour l’état courant
+  const sidebarSpec = getSidebarGeneratorSpec(access);
+  const cta = getAccountCta(access);
+
   return (
     <main className="min-h-screen bg-slate-950 text-slate-50">
       <div className="mx-auto max-w-5xl px-4 py-10 space-y-6">
         <header className="space-y-2">
           <h1 className="text-2xl font-bold">Page de test — Mocks EleveAI</h1>
           <p className="text-sm text-slate-300">
-            Test 100% piloté par{" "}
-            <code className="text-slate-200">features</code> (fondation).
+            Outil interne : test piloté par{" "}
+            <code className="text-slate-200">features</code> /{" "}
+            <code className="text-slate-200">plan</code> /{" "}
+            <code className="text-slate-200">quotas</code>.
           </p>
         </header>
 
-        {/* Sélection mock */}
+        {/* ==================================================
+           Sélection mock
+        ================================================== */}
         <section className={card}>
           <div className="flex flex-wrap items-center gap-2">
             {MOCKS.map((m) => (
@@ -235,7 +391,9 @@ export default function TestClient() {
             </button>
           </div>
 
-          {/* Infos */}
+          {/* ==================================================
+             Infos access (vérité mock)
+          ================================================== */}
           <div className="mt-4 grid gap-2 sm:grid-cols-2">
             <div className="rounded-xl border border-slate-800 bg-slate-950/60 p-3">
               <div className="text-xs text-slate-400">mockKey</div>
@@ -262,7 +420,7 @@ export default function TestClient() {
               </div>
             </div>
 
-            {/* ✅ Quota + badge bibliothèque (avec teaser pour anon et email_free) */}
+            {/* Quota + bibliothèque (déjà existant, utile) */}
             <div className="rounded-xl border border-slate-800 bg-slate-950/60 p-3 sm:col-span-2">
               <div className="text-xs text-slate-400">quota / bibliothèque</div>
 
@@ -308,6 +466,7 @@ export default function TestClient() {
               </div>
             </div>
 
+            {/* Collège infos */}
             {access?.collegeName ? (
               <div className="rounded-xl border border-slate-800 bg-slate-950/60 p-3 sm:col-span-2">
                 <div className="text-xs text-slate-400">collège</div>
@@ -319,6 +478,7 @@ export default function TestClient() {
               </div>
             ) : null}
 
+            {/* Direction */}
             <div className="rounded-xl border border-slate-800 bg-slate-950/60 p-3 sm:col-span-2">
               <div className="flex items-center justify-between gap-3">
                 <div>
@@ -360,7 +520,109 @@ export default function TestClient() {
           </div>
         </section>
 
-        {/* Liens routes */}
+        {/* ==================================================
+           CONTRAT UI — Sidebar Générateur
+        ================================================== */}
+        <section className={card}>
+          <div className="flex items-start justify-between gap-4">
+            <div>
+              <h2 className="text-base font-semibold">
+                Contrat UI — Sidebar Générateur
+              </h2>
+              <p className="text-xs text-slate-400 mt-1">
+                Ce bloc décrit ce que la sidebar DOIT contenir sur les pages
+                générateur, selon l’état (plan/auth/features). Outil interne.
+              </p>
+            </div>
+
+            <span className="inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold border bg-slate-900/40 text-slate-200 border-slate-800">
+              {access.plan}
+            </span>
+          </div>
+
+          <div className="mt-4 grid gap-4 lg:grid-cols-2">
+            {/* Sections de la sidebar (générateur) */}
+            <div className="rounded-2xl border border-slate-800 bg-slate-950/40 p-4">
+              <div className="text-xs text-slate-400 mb-3">
+                Sections (dans la sidebar du générateur)
+              </div>
+
+              <div className="space-y-2">
+                {sidebarSpec.sections.map((s) => (
+                  <div
+                    key={s.label}
+                    className="flex items-center justify-between gap-3 rounded-xl border border-slate-800 bg-slate-950/50 px-3 py-2"
+                  >
+                    <span className="text-sm text-slate-200">{s.label}</span>
+                    <span className="text-xs text-slate-400">{s.value}</span>
+                  </div>
+                ))}
+              </div>
+
+              <p className="mt-3 text-[11px] text-slate-500">
+                {sidebarSpec.note}
+              </p>
+
+              <div className="mt-3 flex flex-wrap items-center gap-2">
+                {renderLibraryBadge(access)}
+                <span className="text-[11px] text-slate-500">
+                  hint:{" "}
+                  {access.hints?.underGeneratePaid ??
+                    access.hints?.underGenerateFree ??
+                    "—"}
+                </span>
+              </div>
+            </div>
+
+            {/* Footer auth de la sidebar générateur */}
+            <div className="rounded-2xl border border-slate-800 bg-slate-950/40 p-4">
+              <div className="text-xs text-slate-400 mb-3">
+                Footer (auth) — liens attendus
+              </div>
+
+              <div className="grid gap-2">
+                <Link
+                  href={
+                    access?.mockKey
+                      ? `${cta.primary.href}?mock=${access.mockKey}`
+                      : cta.primary.href
+                  }
+                  className="rounded-xl border border-slate-800 bg-slate-950/50 px-3 py-2 text-sm text-slate-100 hover:bg-slate-900/60 transition"
+                >
+                  {cta.primary.label}
+                  <span className="ml-2 text-xs text-slate-400">
+                    {cta.primary.href}
+                  </span>
+                </Link>
+
+                <Link
+                  href={
+                    access?.mockKey
+                      ? `${cta.secondary.href}?mock=${access.mockKey}`
+                      : cta.secondary.href
+                  }
+                  className="rounded-xl border border-slate-800 bg-slate-950/50 px-3 py-2 text-sm text-slate-100 hover:bg-slate-900/60 transition"
+                >
+                  {cta.secondary.label}
+                  <span className="ml-2 text-xs text-slate-400">
+                    {cta.secondary.href}
+                  </span>
+                </Link>
+              </div>
+
+              <div className="mt-4 rounded-xl border border-slate-800 bg-slate-950/50 p-3">
+                <div className="text-xs text-slate-400">Règle d’architecture</div>
+                <div className="text-sm text-slate-200 mt-1">
+                  Dashboard / Direction : pas de sidebar. Header global : visible partout (retour facile vers générateurs).
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ==================================================
+           Liens routes (app)
+        ================================================== */}
         <section className={card}>
           <h2 className="text-base font-semibold">Routes “app”</h2>
           <p className="text-xs text-slate-400 mb-3">
@@ -370,7 +632,9 @@ export default function TestClient() {
 
           <div className="grid gap-2 sm:grid-cols-2">
             {visibleBaseRoutes.map((r) => {
-              const href = access?.mockKey ? `${r.href}?mock=${access.mockKey}` : r.href;
+              const href = access?.mockKey
+                ? `${r.href}?mock=${access.mockKey}`
+                : r.href;
 
               return (
                 <Link
@@ -386,7 +650,9 @@ export default function TestClient() {
           </div>
         </section>
 
-        {/* Liens collège */}
+        {/* ==================================================
+           Liens routes (collège)
+        ================================================== */}
         {visibleCollegeRoutes.length > 0 ? (
           <section className={card}>
             <h2 className="text-base font-semibold">Routes “collège”</h2>
@@ -396,7 +662,9 @@ export default function TestClient() {
 
             <div className="grid gap-2 sm:grid-cols-2">
               {visibleCollegeRoutes.map((r) => {
-                const href = access?.mockKey ? `${r.href}?mock=${access.mockKey}` : r.href;
+                const href = access?.mockKey
+                  ? `${r.href}?mock=${access.mockKey}`
+                  : r.href;
 
                 return (
                   <Link

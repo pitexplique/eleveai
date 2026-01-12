@@ -1,3 +1,170 @@
+# Contrat UI — Sidebar Générateur (EleveAI)
+
+> **Document interne (dev / produit)**  
+> Objectif : figer une **politique d’affichage** claire et durable pour éviter les doublons Header/Sidebar et garder une UX cohérente quand on ajoute des rôles (email, collège, direction, prof collège, etc.).  
+> Date : 2026-01-11  
+> Statut : **Contrat vivant** (à maintenir si on change l’architecture)
+
+---
+
+## 1) Périmètre
+
+### ✅ La Sidebar “Générateur” s’affiche uniquement sur :
+- `/espace-atelier-IA`
+- `/espace-profs`
+- `/espace-eleves`
+- `/espace-parents`
+(+ leurs sous-pages éventuelles)
+
+👉 Ces pages sont les **générateurs de prompts**.
+
+### ⛔ La Sidebar “Générateur” ne s’affiche jamais sur :
+- `/dashboard/*` (email)
+- `/direction` (chef d’établissement)
+- pages d’auth (`/auth/*`)
+- pages publiques (`/accueil`, blog, etc.)
+
+✅ En revanche, le **Header global reste visible partout**, y compris dans le dashboard et la direction, pour revenir facilement aux générateurs.
+
+---
+
+## 2) Règles UX globales (Header vs Sidebar)
+
+### Header global
+- Sert à naviguer entre les univers : Atelier-IA / Profs / Élèves / Parents (+ éventuellement Collèges).
+- Évite les liens “en double” : si une route est déjà dans le Header, on n’a pas besoin de la remettre en gros dans la Sidebar.
+
+### Sidebar Générateur
+- Sert d’outil **fonctionnel** lié à la génération :
+  - Quota du jour
+  - Bibliothèque (si dispo)
+  - Historique (si dispo)
+  - Conseils rapides
+  - Footer Auth (Compte/Connexion/Déconnexion selon état)
+
+---
+
+## 3) États supportés (fondation)
+
+Les états sont ceux de `/test` via `AccessMock` :
+
+### Plans (droits)
+- `anon` : 1 req/j, bibliothèque OFF
+- `email_free` : 3 req/j, bibliothèque OFF
+- `email_paid` : 30 req/j (plafond technique), bibliothèque ON illimitée
+- `college` : 5 req/j, bibliothèque ON 30 jours
+
+### AuthType
+- `anon`
+- `email`
+- `college`
+
+### Rôles collège
+- `eleve`
+- `prof` ✅ (nouveau)
+- `direction`
+- `vie_scolaire`
+- `aesh`
+- `personnels`
+- `administration`
+
+---
+
+## 4) Contrat de contenu — Sidebar Générateur
+
+### 4.1 Sections à afficher
+Dans la sidebar (sur générateurs uniquement), on affiche toujours :
+
+1. **Quota du jour**
+   - `usedToday / dailyLimit — reste X`
+
+2. **Bibliothèque**
+   - OFF si `plan = anon | email_free`
+   - ON si `plan = email_paid | college`
+   - Mention :
+     - `illimitée` si `email_paid`
+     - `30 jours` si `college`
+
+3. **Historique**
+   - OFF si `anon`
+   - ON si connecté (`email_*` ou `college`)
+   - (Si besoin de finesse plus tard → ajouter un FeatureFlag dédié)
+
+4. **Conseils rapides**
+   - Toujours ON (élément pédagogique)
+
+---
+
+## 5) Contrat de navigation — Footer Auth de la Sidebar
+
+Le footer (en bas de sidebar générateur) ne doit jamais casser l’architecture (pas de dashboard en double, etc.).
+
+### 5.1 Cas : invité (anon)
+- Bouton 1 : **Connexion** → `/auth/signin`
+- Bouton 2 : **Inscription** → `/auth/signup`
+
+### 5.2 Cas : connecté EMAIL (email_free / email_paid)
+- Bouton 1 : **Mon compte** → `/dashboard`
+- Bouton 2 : **Déconnexion** → `/auth/signout`
+
+✅ Le dashboard gère ses propres pages (`/dashboard/presets`, `/dashboard/historique`, etc.)  
+⛔ Le dashboard n’a pas de sidebar (la sidebar est réservée aux générateurs)
+
+### 5.3 Cas : connecté COLLÈGE — direction (principal)
+- Bouton 1 : **Mon compte** → `/direction`
+- Bouton 2 : **Déconnexion** → `/auth/signout`
+
+### 5.4 Cas : connecté COLLÈGE — non direction (élève, prof, vie, aesh, etc.)
+- Bouton 1 : **Mon établissement** → `/espace-colleges`
+- Bouton 2 : **Déconnexion** → `/auth/signout`
+
+✅ Important : le **prof collège** est dans ce cas.  
+Il utilise tous les générateurs pédagogiques via Header + quotas collège.
+
+---
+
+## 6) Feature flags (affichage routes)
+
+L’affichage des routes (hub collège, espaces collège, direction, etc.) est **piloté par features**.
+
+- `canSeeDashboard`
+- `canSeeCollegeHub`
+- `canSeeDirection`
+- `canSeeCollegeAdministration`
+- `canSeeCollegeVieScolaire`
+- `canSeeCollegeAesh`
+- `canSeeCollegePersonnels`
+
+> Remarque : pour le prof collège, on n’a pas créé de feature spécifique.  
+> Il est “college standard” : accès générateurs + accès hub collège.
+
+---
+
+## 7) Outil interne : page /test (notre garde-fou)
+
+### Rôle de `/test`
+- Page interne non exposée utilisateur
+- Permet de vérifier visuellement :
+  - l’état Access (plan/auth/role)
+  - les features
+  - les routes visibles
+  - le contrat sidebar (sections + footer auth)
+
+### Règle
+Si on modifie l’architecture UI, on met à jour :
+- `lib/access/access.mock.ts`
+- `app/test/TestClient.tsx`
+- et ce fichier `Contrat_UI_Sidebar_Generateur.md`
+
+---
+
+# Annexe A — Code (référence)
+
+## A1) `lib/access/access.mock.ts` (version avec `college_prof`)
+
+> Coller ici le code complet que nous avons validé.
+
+```ts
 // lib/access/access.mock.ts
 import type { Access, AuthType, Plan } from "@/lib/access/access";
 import {
@@ -11,40 +178,27 @@ import {
    1) TYPES (fondation)
 ========================================================= */
 
-/**
- * MockKey = toutes les situations que l’on veut simuler.
- * ✅ Ajout : "college_prof"
- */
 export type MockKey =
   | "anon"
   | "email_free"
   | "email_paid"
   | "college_eleve"
-  | "college_prof" // ✅ NOUVEAU : prof collège (codecollege/codeutilisateur)
-  | "college_admin" // boss (theboss)
+  | "college_prof"
+  | "college_admin"
   | "college_vie"
   | "college_aesh"
   | "college_personnels"
   | "college_administration";
 
-/**
- * Rôles collège.
- * ✅ Ajout : "prof"
- */
 export type CollegeRole =
   | "eleve"
-  | "prof" // ✅ NOUVEAU : enseignant collège
-  | "direction" // boss
+  | "prof"
+  | "direction"
   | "vie_scolaire"
   | "aesh"
   | "personnels"
   | "administration";
 
-/**
- * Feature flags = capacités UI (routes/menus).
- * Pour l’instant, pas besoin d’un flag dédié "canSeeCollegeProf" :
- * un prof collège utilise les générateurs via header global + quotas college.
- */
 export type FeatureFlag =
   | "canSeeDashboard"
   | "canSeeCollegeHub"
@@ -52,26 +206,21 @@ export type FeatureFlag =
   | "canSeeCollegeVieScolaire"
   | "canSeeCollegeAesh"
   | "canSeeCollegePersonnels"
-  | "canSeeDirection"; // /direction
+  | "canSeeDirection";
 
 export type AccessMock = Access & {
-  /* --- Identification mock --- */
   mockKey: MockKey;
   userLabel: string;
 
-  /* --- UI: connecté ? (fondamental pour sidebar) --- */
   isLoggedIn: boolean;
 
-  /* --- Quota UI --- */
   usedToday: number;
 
-  /* --- Identité collège --- */
-  collegeCode?: string; // ex: DIMITILE
+  collegeCode?: string;
   collegeName?: string;
-  userCode?: string; // ex: theboss / vie / aesh / prof...
+  userCode?: string;
   collegeRole?: CollegeRole;
 
-  /* --- Capacités (routes/menus) --- */
   features: FeatureFlag[];
 };
 
@@ -129,7 +278,7 @@ function buildMock(params: {
   const libraryRetentionDays = getLibraryRetentionDays(plan);
   const libraryEnabled = isLibraryEnabled(plan);
 
-  const isLoggedIn = plan !== "anon"; // ✅ règle unique (simple et robuste)
+  const isLoggedIn = plan !== "anon";
 
   return {
     mockKey,
@@ -163,7 +312,7 @@ function buildMock(params: {
 }
 
 /* =========================================================
-   4) MOCKS “CANON” (toutes les situations)
+   4) MOCKS “CANON”
 ========================================================= */
 
 const COLLEGE = {
@@ -171,7 +320,6 @@ const COLLEGE = {
   collegeName: "Collège Capitaine Dimitile",
 } as const;
 
-// Base : tous les profils collège voient le hub + dashboard global
 const COLLEGE_BASE_FEATURES: FeatureFlag[] = [
   "canSeeDashboard",
   "canSeeCollegeHub",
@@ -205,7 +353,6 @@ export const ACCESS_MOCKS: Record<MockKey, AccessMock> = {
     features: ["canSeeDashboard"],
   }),
 
-  // ---- Collège : élève
   college_eleve: buildMock({
     mockKey: "college_eleve",
     authType: "college",
@@ -218,10 +365,6 @@ export const ACCESS_MOCKS: Record<MockKey, AccessMock> = {
     features: [...COLLEGE_BASE_FEATURES],
   }),
 
-  // ✅ NOUVEAU — Collège : prof
-  // But : prof collège utilise les générateurs pédagogiques (profs/élèves/parents),
-  //       avec quotas collège + bibliothèque collège.
-  // UI : bouton footer = "Mon établissement" -> /espace-colleges
   college_prof: buildMock({
     mockKey: "college_prof",
     authType: "college",
@@ -234,7 +377,6 @@ export const ACCESS_MOCKS: Record<MockKey, AccessMock> = {
     features: [...COLLEGE_BASE_FEATURES],
   }),
 
-  // ---- Collège : boss (direction)
   college_admin: buildMock({
     mockKey: "college_admin",
     authType: "college",
@@ -303,13 +445,10 @@ export const ACCESS_MOCKS: Record<MockKey, AccessMock> = {
   }),
 };
 
-/* =========================================================
-   5) SELECTEUR
-========================================================= */
-
 export function pickAccessMock(input?: string | null): AccessMock {
   const key = (input ?? "").trim() as MockKey;
   if (key && key in ACCESS_MOCKS) return ACCESS_MOCKS[key];
   return ACCESS_MOCKS.email_free;
 }
+
 

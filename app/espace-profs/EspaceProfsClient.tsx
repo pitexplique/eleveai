@@ -150,6 +150,7 @@ type InputMode = "rapide" | "precis";
    OPTIONS
 ---------------------------------------- */
 
+
 const TONALITES: { id: Tonalite; label: string; hint: string }[] = [
   { id: "neutre", label: "Neutre", hint: "Clair et direct." },
   { id: "bienveillante", label: "Bienveillante", hint: "Encourageante, rassurante." },
@@ -748,6 +749,8 @@ type FeedbackChoice = "" | "ok" | "bof" | "pas_ok";
 export default function ProfsPage() {
   const supabase = useMemo(() => createClient(), []);
   const today = useMemo(() => new Date().toISOString().slice(0, 10), []);
+  // ✅ UI state
+  const [showPresets, setShowPresets] = useState(true);
 
   // ✅ Refs (scroll UX)
   const promptRef = useRef<HTMLDivElement | null>(null);
@@ -1423,113 +1426,151 @@ export default function ProfsPage() {
             <span>Espace professeurs · Prompts pédagogiques</span>
           </p>
 
-          <h1 className="text-3xl sm:text-4xl font-extrabold text-[#0047B6]">Générateur de prompts pédagogiques (Word-friendly)</h1>
+          <h1 className="text-3xl sm:text-4xl font-extrabold text-[#0047B6]">Générateur de prompts pédagogiques Basic Standard Expert</h1>
 
           <p className="text-sm sm:text-base text-gray-700 max-w-2xl">
             Choisis un <b>type</b> (séance, exercices, évaluation…), ajoute des <b>options</b>, puis écris ta consigne. EleveAI génère un{" "}
             <b>prompt clair</b> et une <b>ressource prête à l’emploi</b>.
           </p>
 
-          <div className="flex flex-wrap items-center gap-2 sm:gap-3 pt-2">
-            <ToggleChip
-              label="Neurosciences"
-              checked={form.neuro}
-              onChange={(v) => handleChange("neuro", v)}
-              hint="Pré-requis, micro-étapes, questions, récap, métacognition."
-              tone="emerald"
-              icon={<span>🧠</span>}
-            />
+        <div className="flex flex-wrap items-center gap-3 pt-3">
 
-            <ToggleChip
-              label="Adapter DYS"
-              checked={form.adaptationDYS}
-              onChange={(v) => handleChange("adaptationDYS", v)}
-              hint="Phrases courtes, aéré, vocabulaire expliqué."
-              tone="violet"
-              icon={<span>👁️</span>}
-            />
+        {/* RESET — action à part */}
+        <button
+          type="button"
+          onClick={resetPage}
+          disabled={agentLoading}
+          className={`inline-flex items-center gap-2 px-4 py-2 text-sm rounded-full font-semibold border transition ${
+            agentLoading
+              ? "bg-slate-100 text-slate-400 border-slate-200 cursor-not-allowed"
+              : "bg-red-50 text-red-700 border-red-200 hover:bg-red-100"
+          }`}
+        >
+          <RotateCcw className="w-5 h-5" />
+          Reset
+        </button>
 
-            <ToggleChip
-              label="LaTeX"
-              checked={form.latex}
-              onChange={(v) => handleChange("latex", v)}
-              hint="Formules LaTeX autorisées (sinon a/b, x^2…)."
-              tone="sky"
-              icon={<span>∑</span>}
-            />
+        {/* BARRE D’ACTIONS PRINCIPALES */}
+        <div className="flex flex-wrap items-center gap-3 px-4 py-3 rounded-xl bg-slate-50 border border-slate-200">
 
-            {estEval && (
-              <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-50 text-[11px] font-semibold text-amber-800 border border-amber-200">
-                <BadgeCheck className="w-4 h-4" />
-                Mode évaluation (barème + critères)
-              </span>
-            )}
+          {/* ENREGISTRER */}
+          <button
+            type="button"
+            onClick={saveCurrentPreset}
+            disabled={!isAuthed || agentLoading}
+            className={`inline-flex items-center gap-2 px-4 py-2 text-sm rounded-full font-semibold border transition ${
+              !isAuthed || agentLoading
+                ? "bg-slate-100 text-slate-400 border-slate-200 cursor-not-allowed"
+                : "bg-blue-600 text-white border-blue-600 hover:bg-blue-700"
+            }`}
+            title={!isAuthed ? "Connecte-toi pour enregistrer" : "Enregistrer ce preset"}
+          >
+            <Save className="w-5 h-5" />
+            Enregistrer
+          </button>
 
-            <button
-              type="button"
-              onClick={resetPage}
-              disabled={agentLoading}
-              className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-[11px] font-semibold border transition ${
-                agentLoading ? "bg-slate-100 text-slate-400 border-slate-200 cursor-not-allowed" : "bg-white text-slate-700 border-slate-300 hover:bg-slate-50"
-              }`}
-            >
-              <RotateCcw className="w-4 h-4" />
-              Reset complet
-            </button>
+          {/* MES PRESETS */}
+          <button
+            type="button"
+            onClick={loadMyPresets}
+            disabled={!isAuthed || myPresetsLoading}
+            className={`inline-flex items-center gap-2 px-4 py-2 text-sm rounded-full font-semibold border transition ${
+              !isAuthed || myPresetsLoading
+                ? "bg-slate-100 text-slate-400 border-slate-200 cursor-not-allowed"
+                : "bg-white text-slate-700 border-slate-300 hover:bg-slate-50"
+            }`}
+            title={!isAuthed ? "Connecte-toi pour voir tes presets" : "Afficher mes presets"}
+          >
+            <FolderOpen className="w-5 h-5" />
+            Mes presets
+          </button>
 
-            <div className="flex flex-wrap items-center gap-2">
-              <button
-                type="button"
-                onClick={saveCurrentPreset}
-                disabled={!isAuthed || agentLoading}
-                className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-[11px] font-semibold border transition ${
-                  !isAuthed || agentLoading ? "bg-slate-100 text-slate-400 border-slate-200 cursor-not-allowed" : "bg-white text-slate-700 border-slate-300 hover:bg-slate-50"
-                }`}
-                title={!isAuthed ? "Connecte-toi pour enregistrer" : "Enregistrer ce preset"}
-              >
-                <Save className="w-4 h-4" />
-                Enregistrer
-              </button>
+          {/* HISTORIQUE */}
+          <button
+            type="button"
+            onClick={loadRunsHistory}
+            disabled={!isAuthed || historyLoading}
+            className={`inline-flex items-center gap-2 px-4 py-2 text-sm rounded-full font-semibold border transition ${
+              !isAuthed || historyLoading
+                ? "bg-slate-100 text-slate-400 border-slate-200 cursor-not-allowed"
+                : "bg-white text-slate-700 border-slate-300 hover:bg-slate-50"
+            }`}
+            title={!isAuthed ? "Connecte-toi pour voir l'historique" : "Historique des générations"}
+          >
+            <History className="w-5 h-5" />
+            Historique
+          </button>
+        </div>
 
-              <button
-                type="button"
-                onClick={loadMyPresets}
-                disabled={!isAuthed || myPresetsLoading}
-                className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-[11px] font-semibold border transition ${
-                  !isAuthed || myPresetsLoading ? "bg-slate-100 text-slate-400 border-slate-200 cursor-not-allowed" : "bg-white text-slate-700 border-slate-300 hover:bg-slate-50"
-                }`}
-                title={!isAuthed ? "Connecte-toi pour voir tes presets" : "Afficher mes presets"}
-              >
-                <FolderOpen className="w-4 h-4" />
-                Mes presets
-              </button>
+        {/* MESSAGE DB */}
+        {dbMsg && (
+          <span className="px-4 py-2 text-sm font-semibold rounded-full bg-slate-800 text-white">
+            {dbMsg}
+          </span>
+        )}
 
-              <button
-                type="button"
-                onClick={loadRunsHistory}
-                disabled={!isAuthed || historyLoading}
-                className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-[11px] font-semibold border transition ${
-                  !isAuthed || historyLoading ? "bg-slate-100 text-slate-400 border-slate-200 cursor-not-allowed" : "bg-white text-slate-700 border-slate-300 hover:bg-slate-50"
-                }`}
-                title={!isAuthed ? "Connecte-toi pour voir l'historique" : "Historique des générations"}
-              >
-                <History className="w-4 h-4" />
-                Historique
-              </button>
-            </div>
+        {/* INFO NON CONNECTÉ */}
+        {!isAuthed && (
+          <span className="text-xs text-slate-600">
+            (Connecte-toi pour sauvegarder)
+          </span>
+        )}
+      </div>
 
-            {dbMsg && <span className="text-[11px] font-semibold px-3 py-1 rounded-full bg-slate-800 text-white">{dbMsg}</span>}
-
-            {!isAuthed && <span className="text-[11px] text-slate-600">(Connecte-toi pour sauvegarder)</span>}
-          </div>
         </header>
 
-        <PresetCarousel
-          title="Modèles rapides (facultatif)"
-          subtitle="Clique sur un modèle : le formulaire se pré-remplit."
-          items={PROFS_PRESET_ITEMS}
-          onSelect={(id) => appliquerPresetModele(id as ProfsPresetKey)}
-        />
+      {/* ===============================
+          CARROUSEL MODÈLES RAPIDES (FACULTATIF)
+      =============================== */}
+      <div className="mt-6 rounded-2xl border border-slate-200 bg-slate-50/60">
+        {/* HEADER */}
+        <button
+          type="button"
+          onClick={() => setShowPresets((v) => !v)}
+          className="
+            w-full flex items-center justify-between gap-3
+            px-4 py-3
+            text-left
+            hover:bg-slate-100/70
+            transition
+          "
+        >
+          <div className="flex items-center gap-3">
+            <span className="text-sm font-semibold text-slate-800">
+              Modèles rapides (facultatif)
+            </span>
+            <span className="text-xs text-slate-500">
+              Démarrer plus vite
+            </span>
+          </div>
+
+          <span
+            className={`text-slate-500 transition-transform duration-200 ${
+              showPresets ? "rotate-180" : ""
+            }`}
+          >
+            ▼
+          </span>
+        </button>
+
+        {/* CONTENU */}
+        <div
+          className={`
+            overflow-hidden transition-[max-height,opacity] duration-300 ease-out
+            ${showPresets ? "max-h-[600px] opacity-100" : "max-h-0 opacity-0"}
+          `}
+        >
+          <div className="px-4 pb-4 pt-2">
+            <PresetCarousel
+              title="Modèles prêts à l’emploi"
+              subtitle="Clique sur un modèle : le formulaire se pré-remplit automatiquement."
+              items={PROFS_PRESET_ITEMS}
+              onSelect={(id) => appliquerPresetModele(id as ProfsPresetKey)}
+            />
+          </div>
+        </div>
+      </div>
+
 
         <div className="grid gap-6 lg:grid-cols-2">
           {/* FORM */}
@@ -1805,6 +1846,39 @@ export default function ProfsPage() {
               </label>
 
               <div className="flex flex-wrap gap-2 mt-1">
+                <ToggleChip
+                  label="Neurosciences"
+                  checked={form.neuro}
+                  onChange={(v) => handleChange("neuro", v)}
+                  hint="Pré-requis, micro-étapes, questions, récap, métacognition."
+                  tone="emerald"
+                  icon={<span>🧠</span>}
+                />
+
+                <ToggleChip
+                  label="Adapter DYS"
+                  checked={form.adaptationDYS}
+                  onChange={(v) => handleChange("adaptationDYS", v)}
+                  hint="Phrases courtes, aéré, vocabulaire expliqué."
+                  tone="violet"
+                  icon={<span>👁️</span>}
+                />
+
+                <ToggleChip
+                  label="LaTeX"
+                  checked={form.latex}
+                  onChange={(v) => handleChange("latex", v)}
+                  hint="Formules LaTeX autorisées (sinon a/b, x^2…)."
+                  tone="sky"
+                  icon={<span>∑</span>}
+                />
+
+                {estEval && (
+                  <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-50 text-[11px] font-semibold text-amber-800 border border-amber-200">
+                    <BadgeCheck className="w-4 h-4" />
+                    Mode évaluation (barème + critères)
+                  </span>
+                )}                
                 <ToggleChip
                   label="Différenciation"
                   checked={form.optDifferenciation}
