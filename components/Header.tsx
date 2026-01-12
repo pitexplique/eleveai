@@ -318,7 +318,7 @@ export default function Header() {
             </span>
           </Link>
 
-          {/* Dropdowns: Atelier-IA + Prompts */}
+          {/* Dropdowns: Atelier-IA + Prompts */}{/*}
           {GROUPS.map((group) => {
             const ref = getRefForKey(group.key);
             const opened = open === group.key;
@@ -375,7 +375,8 @@ export default function Header() {
                 )}
               </div>
             );
-          })}
+          })} 
+            */}
 
           <Link href="/blog" className={topLinkClass(isActive(pathname, "/blog"))}>
             <span className="inline-flex items-center gap-2">
