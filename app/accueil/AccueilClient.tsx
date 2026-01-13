@@ -20,7 +20,7 @@ export default function AccueilPage() {
               🏫 École · Collège · Lycée
             </span>
             <span className="inline-flex items-center gap-2 rounded-full border border-slate-700 bg-slate-900/60 px-3 py-1 font-semibold text-slate-200">
-              🌿 Sobriété numérique
+              🌿 Les outils doivent s’adapter aux humains, pas l’inverse.
             </span>
             <span className="text-slate-400">EleveAI — l’IA au service de l’apprentissage</span>
           </div>

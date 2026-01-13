@@ -5,15 +5,18 @@ const SITE_URL = "https://eleveai.fr";
 
 export const metadata: Metadata = {
   title: "EleveAI — IA pédagogique encadrée (Profs · Élèves · Parents)",
+
   description:
-    "EleveAI aide à créer des consignes IA (prompts) claires et guidées pour apprendre sans tricher : profs, élèves et parents. atelier-IA, traces, esprit critique, collège/lycée.",
+    "EleveAI aide à créer des consignes IA claires et guidées pour apprendre sans tricher : profs, élèves et parents. Atelier-IA, traces pédagogiques, esprit critique. Collège et lycée.",
+
   alternates: {
-    canonical: "/accueil",
+    canonical: `${SITE_URL}/accueil`,
   },
+
   openGraph: {
     title: "EleveAI — IA pédagogique encadrée",
     description:
-      "Créer des consignes IA claires et guidées pour apprendre sans tricher. Pensé collège/lycée.",
+      "Créer des consignes IA claires et guidées pour apprendre sans tricher. Pensé pour le collège et le lycée.",
     url: `${SITE_URL}/accueil`,
     type: "website",
     siteName: "EleveAI",
@@ -27,12 +30,14 @@ export const metadata: Metadata = {
       },
     ],
   },
+
   twitter: {
     card: "summary_large_image",
     title: "EleveAI — IA pédagogique encadrée",
     description:
-      "Consignes IA claires, atelier-IA, anti-triche pédagogique. Profs, élèves, parents.",
+      "Consignes IA claires, Atelier-IA, anti-triche pédagogique. Profs, élèves, parents.",
     images: ["/preview.jpg"],
   },
 };
+
 
