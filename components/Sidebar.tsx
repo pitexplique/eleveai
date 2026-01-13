@@ -22,7 +22,8 @@ import {
   HardHat,
   Accessibility,
   MessageCircle,
-  HeartHandshake
+  HeartHandshake,
+  MessageSquareText
 
 } from "lucide-react";
 
@@ -100,6 +101,18 @@ const itemsApp: Item[] = useMemo(
   description: "Un cadre clair pour une équipe sereine.",
   icon: <School className="h-4 w-4" />,
 },
+{
+  href: "/espace-atelier-IA",
+  label: "Prompt Atelier-IA",
+  description: "Explorer, réfléchir, progresser avec l’IA.",
+  icon: <FlaskConical className="h-4 w-4" />,
+},
+{
+  href: "/tchat",
+  label: "Prompt EleveAI",
+  description: "Tchat minimal",
+  icon: <MessageSquareText className="h-4 w-4" />,
+},
 /*
 {
   href: "/espace-colleges/espace-administration",
@@ -124,13 +137,7 @@ const itemsApp: Item[] = useMemo(
   label: "Prompt AESH",
   description: "Inclure vraiment. Adapter. Faire réussir.",
   icon: <Accessibility className="h-4 w-4" />,
-},
-{
-  href: "/espace-atelier-IA",
-  label: "Atelier-IA",
-  description: "Explorer, réfléchir, progresser avec l’IA.",
-  icon: <FlaskConical className="h-4 w-4" />,
-}*/
+}, */
 
   ],
   [],

@@ -44,7 +44,7 @@ export default function ComptePage() {
       }
 
       const { data, error } = await supabase
-        .from("eleveai_users_email")
+        .from("users_email")
         .select(
           "id, auth_user_id, email, nom, type_utilisateur, accepte_cgv, accepte_newsletter, created_at, updated_at"
         )
@@ -80,7 +80,7 @@ export default function ComptePage() {
     setErrorMsg(null);
 
     const { error } = await supabase
-      .from("eleveai_users_email")
+      .from("users_email")
       .update({ type_utilisateur: type, updated_at: new Date().toISOString() })
       .eq("id", profil.id);
 

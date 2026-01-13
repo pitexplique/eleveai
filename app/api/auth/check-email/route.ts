@@ -24,7 +24,7 @@ export async function POST(req: Request) {
     const admin = createClient(url, serviceKey, { auth: { persistSession: false } });
 
     const { data, error } = await admin
-      .from("eleveai_users_email")
+      .from("users_email")
       .select("id")
       .eq("email", email)
       .maybeSingle();

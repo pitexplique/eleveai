@@ -215,7 +215,7 @@ export default function SignUpPage() {
         const authUser = userData.user;
 
         const { error: upsertError } = await supabase
-          .from("eleveai_users_email")
+          .from("users_email")
           .upsert(
             {
               auth_user_id: authUser.id,
@@ -228,7 +228,7 @@ export default function SignUpPage() {
           );
 
         if (upsertError) {
-          logSupabaseError("Upsert eleveai_users_email error:", upsertError);
+          logSupabaseError("Upsert users_email error:", upsertError);
           // non bloquant
         }
       }

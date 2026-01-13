@@ -14,7 +14,7 @@ export async function POST(req: Request) {
   }
 
   const { data, error } = await supabaseAdmin
-    .from("utilisateurs_codes")
+    .from("acces_etablissement")
     .select("id, type_utilisateur, nom")
     .eq("code_etablissement", codeEtablissement.trim())
     .eq("code_utilisateur", codeUtilisateur.trim())

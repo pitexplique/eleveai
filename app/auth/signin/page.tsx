@@ -237,7 +237,7 @@ export default function SignInPage() {
     setLoadingEtab(true);
     try {
       const { data, error } = await supabase
-        .from("utilisateurs_codes")
+        .from("acces_etablissement")
         .select("id, code_etablissement, code_utilisateur, type_utilisateur, nom, actif")
         .eq("code_etablissement", ce)
         .eq("code_utilisateur", cu)
@@ -245,7 +245,7 @@ export default function SignInPage() {
         .maybeSingle();
 
       if (error) {
-        logSupabaseError("utilisateurs_codes check error:", error);
+        logSupabaseError("acces_etablissement check error:", error);
         setErrorEtab(
           process.env.NODE_ENV === "development"
             ? `Erreur Supabase: ${error.message}`
