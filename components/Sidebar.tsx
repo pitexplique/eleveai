@@ -100,6 +100,7 @@ const itemsApp: Item[] = useMemo(
   description: "Un cadre clair pour une équipe sereine.",
   icon: <School className="h-4 w-4" />,
 },
+/*
 {
   href: "/espace-colleges/espace-administration",
   label: "Prompt Administration",
@@ -129,7 +130,7 @@ const itemsApp: Item[] = useMemo(
   label: "Atelier-IA",
   description: "Explorer, réfléchir, progresser avec l’IA.",
   icon: <FlaskConical className="h-4 w-4" />,
-}
+}*/
 
   ],
   [],
