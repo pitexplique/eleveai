@@ -1,4 +1,6 @@
-/// data/profsPresets.ts
+// data/profsPresets.ts
+
+import type { ClasseValue, MatiereValue } from "@/lib/constants/scolaire";
 
 export type NiveauProf = "basique" | "standard" | "expert";
 
@@ -62,8 +64,10 @@ export type ProfsPresetKey =
 export type ProfsPresetValues = {
   titre?: string;
   objectifPedagogique?: string;
-  classe?: string;
-  matiere?: string;
+  // ✅ IMPORTANT : on force les "values" (comme côté élèves)
+  classe?: ClasseValue | "";
+  matiere?: MatiereValue | "";
+
   niveau?: NiveauProf;
   type?: string;
   contenu?: string;
@@ -71,7 +75,7 @@ export type ProfsPresetValues = {
   adaptationDYS?: boolean;
   neuro?: boolean;
 
-  methode?: MethodeProf; // ✅ on le met surtout pour séances; pour devoirs, on l’omet
+  methode?: MethodeProf; // ✅ surtout pour séances; pour devoirs, on l’omet
   outputStyle?: OutputStyleProf;
 
   dureeMin?: number;
@@ -118,7 +122,7 @@ export const PROFS_PRESETS: Record<
     valeurs: {
       titre: "6e – Revoir les fractions en douceur",
       classe: "6e",
-      matiere: "Mathématiques",
+      matiere: "maths",
       niveau: "basique",
       type: "Génération d’exercices",
       objectifPedagogique:
@@ -132,8 +136,6 @@ export const PROFS_PRESETS: Record<
       outputStyle: "word",
       dureeMin: 45,
       tonalite: "bienveillante",
-      // themes: ["agriculture"], // (optionnel) — on décidera après
-      // themesLabel: "",
     },
   },
 
@@ -143,7 +145,7 @@ export const PROFS_PRESETS: Record<
     valeurs: {
       titre: "3e – Révision globale brevet maths",
       classe: "3e",
-      matiere: "Mathématiques",
+      matiere: "maths",
       niveau: "standard",
       type: "Préparation d’un sujet type brevet",
       objectifPedagogique:
@@ -165,8 +167,8 @@ export const PROFS_PRESETS: Record<
     description: "Séance de découverte/réactivation + exercices progressifs.",
     valeurs: {
       titre: "Seconde – Introduction aux fonctions",
-      classe: "Seconde",
-      matiere: "Mathématiques",
+      classe: "2de",
+      matiere: "maths",
       niveau: "standard",
       type: "Préparation d’une séance",
       objectifPedagogique:
@@ -188,8 +190,8 @@ export const PROFS_PRESETS: Record<
     description: "Formes, sommet, racines, variations, méthode.",
     valeurs: {
       titre: "1re spé – Fonctions du second degré",
-      classe: "Première",
-      matiere: "Mathématiques",
+      classe: "1re",
+      matiere: "maths",
       niveau: "standard",
       type: "Préparation d’une séance",
       objectifPedagogique:
@@ -211,8 +213,8 @@ export const PROFS_PRESETS: Record<
     description: "Sujet bac complet + corrigé rédigé + méthode.",
     valeurs: {
       titre: "Terminale spé – Sujet type bac complet",
-      classe: "Terminale",
-      matiere: "Mathématiques",
+      classe: "Tle",
+      matiere: "maths",
       niveau: "expert",
       type: "Préparation d’un sujet type bac",
       objectifPedagogique:
@@ -234,8 +236,8 @@ export const PROFS_PRESETS: Record<
     description: "Lecture analytique guidée pour l’oral.",
     valeurs: {
       titre: "Première – Lecture analytique pour l’oral",
-      classe: "Première",
-      matiere: "Français",
+      classe: "1re",
+      matiere: "francais",
       niveau: "standard",
       type: "Préparation de lecture analytique",
       objectifPedagogique:
@@ -257,8 +259,8 @@ export const PROFS_PRESETS: Record<
     description: "Méthode + plan + exemple guidé.",
     valeurs: {
       titre: "Terminale – Dissertation de philosophie",
-      classe: "Terminale",
-      matiere: "Philosophie",
+      classe: "Tle",
+      matiere: "philosophie",
       niveau: "standard",
       type: "Préparation d’un sujet de dissertation",
       objectifPedagogique:
@@ -280,8 +282,8 @@ export const PROFS_PRESETS: Record<
     description: "Activité + exercices sur mouvements rectilignes.",
     valeurs: {
       titre: "Seconde – Mouvements en physique",
-      classe: "Seconde",
-      matiere: "Physique-Chimie",
+      classe: "2de",
+      matiere: "physique_chimie",
       niveau: "standard",
       type: "Conception d’activité expérimentale",
       objectifPedagogique:
@@ -304,11 +306,12 @@ export const PROFS_PRESETS: Record<
 
   "6e_maths_devoir_calcul_fractions": {
     label: "🧾 6e – Devoir 45 min (calcul + fractions)",
-    description: "Calcul simple + fractions : représentation, comparaison, fraction d’une quantité.",
+    description:
+      "Calcul simple + fractions : représentation, comparaison, fraction d’une quantité.",
     valeurs: {
       titre: "6e – Devoir : calcul + fractions",
       classe: "6e",
-      matiere: "Mathématiques",
+      matiere: "maths",
       niveau: "standard",
       type: "Préparation d’un devoir",
       objectifPedagogique:
@@ -332,11 +335,12 @@ export const PROFS_PRESETS: Record<
 
   "6e_maths_devoir_geometrie_angles": {
     label: "📐 6e – Devoir 45 min (angles + constructions)",
-    description: "Mesurer/nommer/construire des angles + parallèles/perpendiculaires.",
+    description:
+      "Mesurer/nommer/construire des angles + parallèles/perpendiculaires.",
     valeurs: {
       titre: "6e – Devoir : géométrie (angles et constructions)",
       classe: "6e",
-      matiere: "Mathématiques",
+      matiere: "maths",
       niveau: "standard",
       type: "Préparation d’un devoir",
       objectifPedagogique:
@@ -364,7 +368,7 @@ export const PROFS_PRESETS: Record<
     valeurs: {
       titre: "6e – Devoir : proportionnalité",
       classe: "6e",
-      matiere: "Mathématiques",
+      matiere: "maths",
       niveau: "standard",
       type: "Préparation d’un devoir",
       objectifPedagogique:
@@ -376,7 +380,15 @@ export const PROFS_PRESETS: Record<
           materiel: "règle ; pas de calculatrice",
           structure: "2 exos proportionnels + 1 exo piège + 1 problème",
         }),
-      tags: ["#6e", "#maths", "#devoir", "#evaluation", "#proportionnalite", "#tableaux", "#DYS"],
+      tags: [
+        "#6e",
+        "#maths",
+        "#devoir",
+        "#evaluation",
+        "#proportionnalite",
+        "#tableaux",
+        "#DYS",
+      ],
       adaptationDYS: true,
       neuro: true,
       outputStyle: "word_expert",
@@ -392,7 +404,7 @@ export const PROFS_PRESETS: Record<
     valeurs: {
       titre: "5e – Devoir : fractions et décimaux",
       classe: "5e",
-      matiere: "Mathématiques",
+      matiere: "maths",
       niveau: "standard",
       type: "Préparation d’un devoir",
       objectifPedagogique:
@@ -404,7 +416,15 @@ export const PROFS_PRESETS: Record<
           materiel: "règle ; calculatrice selon ton choix (à préciser dans le sujet)",
           structure: "3 exos + 1 problème + bonus",
         }),
-      tags: ["#5e", "#maths", "#devoir", "#evaluation", "#fractions", "#decimaux", "#DYS"],
+      tags: [
+        "#5e",
+        "#maths",
+        "#devoir",
+        "#evaluation",
+        "#fractions",
+        "#decimaux",
+        "#DYS",
+      ],
       adaptationDYS: true,
       neuro: true,
       outputStyle: "word_expert",
@@ -416,11 +436,12 @@ export const PROFS_PRESETS: Record<
 
   "5e_maths_devoir_proportionnalite_pourcentages": {
     label: "🧾 5e – Devoir 55 min (proportionnalité + %)",
-    description: "Tableaux, coefficient, pourcentages simples, problème contextualisé.",
+    description:
+      "Tableaux, coefficient, pourcentages simples, problème contextualisé.",
     valeurs: {
       titre: "5e – Devoir : proportionnalité et pourcentages",
       classe: "5e",
-      matiere: "Mathématiques",
+      matiere: "maths",
       niveau: "standard",
       type: "Préparation d’un devoir",
       objectifPedagogique:
@@ -432,25 +453,32 @@ export const PROFS_PRESETS: Record<
           materiel: "règle ; calculatrice autorisée (à préciser)",
           structure: "3 exos + 1 problème + défi",
         }),
-      tags: ["#5e", "#maths", "#devoir", "#evaluation", "#proportionnalite", "#pourcentages", "#DYS"],
+      tags: [
+        "#5e",
+        "#maths",
+        "#devoir",
+        "#evaluation",
+        "#proportionnalite",
+        "#pourcentages",
+        "#DYS",
+      ],
       adaptationDYS: true,
       neuro: true,
       outputStyle: "word_expert",
       dureeMin: 55,
       tonalite: "institutionnelle",
       modaliteEvaluation: "evaluation_sommative",
-      // ✅ exemple : on pourrait mettre sport ici plus tard si tu veux
-      // themes: ["sport"],
     },
   },
 
   "5e_maths_devoir_geometrie_triangles": {
     label: "📐 5e – Devoir 55 min (triangles + angles)",
-    description: "Constructions, somme des angles, propriétés, justification courte.",
+    description:
+      "Constructions, somme des angles, propriétés, justification courte.",
     valeurs: {
       titre: "5e – Devoir : triangles et angles",
       classe: "5e",
-      matiere: "Mathématiques",
+      matiere: "maths",
       niveau: "standard",
       type: "Préparation d’un devoir",
       objectifPedagogique:
@@ -462,7 +490,16 @@ export const PROFS_PRESETS: Record<
           materiel: "règle, équerre, rapporteur, compas",
           structure: "3 exos + bonus",
         }),
-      tags: ["#5e", "#maths", "#devoir", "#evaluation", "#geometrie", "#triangles", "#angles", "#DYS"],
+      tags: [
+        "#5e",
+        "#maths",
+        "#devoir",
+        "#evaluation",
+        "#geometrie",
+        "#triangles",
+        "#angles",
+        "#DYS",
+      ],
       adaptationDYS: true,
       neuro: true,
       outputStyle: "word_expert",
@@ -482,7 +519,7 @@ export const PROFS_PRESETS: Record<
     valeurs: {
       titre: "6e – Devoir : opérations et problèmes",
       classe: "6e",
-      matiere: "Mathématiques",
+      matiere: "maths",
       niveau: "standard",
       type: "Préparation d’un devoir",
       objectifPedagogique:
@@ -494,7 +531,15 @@ export const PROFS_PRESETS: Record<
           materiel: "règle ; pas de calculatrice",
           structure: "2 exos calcul + 2 problèmes + bonus",
         }),
-      tags: ["#6e", "#maths", "#devoir", "#evaluation", "#operations", "#problemes", "#DYS"],
+      tags: [
+        "#6e",
+        "#maths",
+        "#devoir",
+        "#evaluation",
+        "#operations",
+        "#problemes",
+        "#DYS",
+      ],
       adaptationDYS: true,
       neuro: true,
       outputStyle: "word_expert",
@@ -506,11 +551,12 @@ export const PROFS_PRESETS: Record<
 
   "4e_maths_devoir_calcul_litteral": {
     label: "🧾 4e – Devoir 55 min (calcul littéral)",
-    description: "Distributivité, réduction, factorisation simple, erreurs fréquentes.",
+    description:
+      "Distributivité, réduction, factorisation simple, erreurs fréquentes.",
     valeurs: {
       titre: "4e – Devoir : calcul littéral",
       classe: "4e",
-      matiere: "Mathématiques",
+      matiere: "maths",
       niveau: "standard",
       type: "Préparation d’un devoir",
       objectifPedagogique:
@@ -522,7 +568,15 @@ export const PROFS_PRESETS: Record<
           materiel: "règle ; pas de calculatrice nécessaire",
           structure: "3 exos techniques + 1 exercice contextualisé",
         }),
-      tags: ["#4e", "#maths", "#devoir", "#evaluation", "#calcul_litteral", "#distributivite", "#DYS"],
+      tags: [
+        "#4e",
+        "#maths",
+        "#devoir",
+        "#evaluation",
+        "#calcul_litteral",
+        "#distributivite",
+        "#DYS",
+      ],
       adaptationDYS: true,
       neuro: true,
       outputStyle: "word_expert",
@@ -538,7 +592,7 @@ export const PROFS_PRESETS: Record<
     valeurs: {
       titre: "4e – Devoir : équations (1er degré)",
       classe: "4e",
-      matiere: "Mathématiques",
+      matiere: "maths",
       niveau: "standard",
       type: "Préparation d’un devoir",
       objectifPedagogique:
@@ -550,7 +604,15 @@ export const PROFS_PRESETS: Record<
           materiel: "règle ; pas de calculatrice nécessaire",
           structure: "3 exos équations + 1-2 problèmes",
         }),
-      tags: ["#4e", "#maths", "#devoir", "#evaluation", "#equations", "#problemes", "#DYS"],
+      tags: [
+        "#4e",
+        "#maths",
+        "#devoir",
+        "#evaluation",
+        "#equations",
+        "#problemes",
+        "#DYS",
+      ],
       adaptationDYS: true,
       neuro: true,
       outputStyle: "word_expert",
@@ -560,3 +622,4 @@ export const PROFS_PRESETS: Record<
     },
   },
 };
+

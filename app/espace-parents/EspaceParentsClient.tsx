@@ -343,11 +343,8 @@ Règles importantes :
   }, [generatedPrompt]);
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-sky-50 via-white to-emerald-50">
-      <div
-        ref={topRef}
-        className="w-full max-w-[1400px] mx-auto px-3 sm:px-5 lg:px-6 pt-0 pb-6 lg:pb-10"
-      >
+    <main ref={topRef} className="min-h-screen bg-gradient-to-b from-sky-50 via-white to-emerald-50">
+      <div className="w-full max-w-[1400px] mx-auto px-3 sm:px-5 lg:px-6 pt-0 pb-6 lg:pb-10" >
         {/* HERO */}
         <section className="mb-10 rounded-3xl bg-white/80 p-6 shadow-sm ring-1 ring-sky-100 lg:p-8">
           <div className="flex flex-wrap items-start justify-between gap-4">
