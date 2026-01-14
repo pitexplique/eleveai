@@ -736,25 +736,6 @@ type DbRunEmail = {
   created_at: string;
 };
 
-type DbPresetEleveai = {
-  id: string;
-  created_at: string;
-  updated_at: string;
-  audience: string; // 'profs' attendu
-  classe: string;
-  matiere: string;
-  niveau: string; // 'basique'|'standard'|...
-  title: string;
-  description: string;
-  tags: string[];
-  is_featured: boolean;
-  featured_rank: number | null;
-  payload: any; // jsonb (on mappe côté UI)
-  is_archived: boolean;
-};
-
-
-
 /* ----------------------------------------
    RELANCE (Prompt 2)
 ---------------------------------------- */
@@ -870,86 +851,11 @@ export default function ProfsPage() {
   const [mainCategory, setMainCategory] = useState<MainCategory>("seance");
   const [typeQuery, setTypeQuery] = useState("");
 
-    // ✅ Presets publics (table presets_eleveai)
-  const [publicPresets, setPublicPresets] = useState<DbPresetEleveai[]>([]);
-  const [publicPresetsLoading, setPublicPresetsLoading] = useState(false);
-  const [publicPresetsError, setPublicPresetsError] = useState("");
-const loadPublicPresets = useCallback(async () => {
-  setPublicPresetsError("");
-
-  // ✅ on charge dès que classe + matière existent
-  if (!form.classe || !form.matiere) {
-    setPublicPresets([]);
-    return;
-  }
-
-  setPublicPresetsLoading(true);
-
-  try {
-    // ✅ niveaux possibles selon ton UI (2 niveaux)
-    // - si niveau choisi : on filtre + fallback basique<->standard
-    // - si pas choisi : on prend les deux
-    const niveauxToTry =
-      form.niveau === "basique"
-        ? (["basique", "standard"] as const)
-        : form.niveau === "standard"
-        ? (["standard", "basique"] as const) // fallback inverse (optionnel mais pratique)
-        : (["basique", "standard"] as const); // pas choisi
-
-    const query = supabase
-      .from("presets_eleveai")
-      .select(
-        "id, created_at, updated_at, audience, classe, matiere, niveau, title, description, tags, is_featured, featured_rank, payload, is_archived"
-      )
-      .eq("audience", "profs")
-      .eq("classe", form.classe)
-      .eq("matiere", form.matiere)
-      .eq("is_archived", false)
-      .order("is_featured", { ascending: false })
-      .order("featured_rank", { ascending: true, nullsFirst: false })
-      .limit(15);
-
-    // ✅ si niveau sélectionné OU non, on filtre sur la liste niveauxToTry
-    // (comme tu n'as que 2 niveaux, c'est simple)
-    const { data, error } = await query.in("niveau", niveauxToTry as unknown as string[]);
-
-    console.log("[presets_eleveai] filtres =", {
-      audience: "profs",
-      classe: form.classe,
-      matiere: form.matiere,
-      niveauUI: form.niveau,
-      niveauxToTry,
-    });
-    console.log("[presets_eleveai] data =", data);
-    console.log("[presets_eleveai] error =", error);
-
-    if (error) throw new Error(error.message);
-
-    setPublicPresets((data ?? []) as DbPresetEleveai[]);
-  } catch (e: any) {
-    console.error("[presets_eleveai] catch =", e);
-    setPublicPresets([]);
-    setPublicPresetsError(e?.message || "Erreur chargement presets.");
-  } finally {
-    setPublicPresetsLoading(false);
-  }
-}, [form.classe, form.matiere, form.niveau, supabase]);
-
-
-
-
   // ✅ Relance (Prompt 2)
   const [feedbackChoice, setFeedbackChoice] = useState<FeedbackChoice>("");
   const [feedbackText, setFeedbackText] = useState("");
   const [promptRelance, setPromptRelance] = useState("");
   const [copiedRelance, setCopiedRelance] = useState(false);
-
-
-  // ✅ Rerech preset
-    useEffect(() => {
-      loadPublicPresets();
-    }, [loadPublicPresets]);
-
 
   // ✅ Auth state
   useEffect(() => {
@@ -1076,62 +982,6 @@ const loadPublicPresets = useCallback(async () => {
     },
     [clearOutputs, form.typeId, scrollToTop, showToast],
   );
-
-  const appliquerPresetPublic = useCallback(
-  (p: DbPresetEleveai) => {
-    const v = (p.payload ?? {}) as Partial<PromptProf> & Record<string, unknown>;
-
-    setForm((prev): PromptProf => {
-      const next: PromptProf = {
-        ...prev,
-
-        // ✅ on force la cohérence des filtres
-        classe: p.classe || prev.classe,
-        matiere: p.matiere || prev.matiere,
-        niveau: (p.niveau as Niveau) || prev.niveau,
-
-        // ✅ vitrine
-        titre: p.title || prev.titre,
-        // si tu veux : tu peux aussi pousser description dans objectif (option)
-        // objectifPedagogique: p.description || prev.objectifPedagogique,
-
-        // ✅ payload (optionnel) : ne remplace que ce qui existe
-        ...v,
-
-        // garde-fous typés
-        typeId: typeof v.typeId === "string" ? v.typeId : prev.typeId,
-        methode: typeof v.methode === "string" ? (v.methode as MethodePedagogique) : prev.methode,
-        outputStyle: typeof v.outputStyle === "string" ? (v.outputStyle as OutputStyle) : prev.outputStyle,
-        dureeMin: typeof v.dureeMin === "number" ? v.dureeMin : prev.dureeMin,
-        tonalite: typeof v.tonalite === "string" ? (v.tonalite as Tonalite) : prev.tonalite,
-        modaliteEvaluation:
-          typeof v.modaliteEvaluation === "string" ? (v.modaliteEvaluation as ModaliteEvaluation) : prev.modaliteEvaluation,
-        themes: Array.isArray(v.themes) ? (v.themes as ThemeAborde[]) : prev.themes,
-        themesLabel: typeof v.themesLabel === "string" ? v.themesLabel : prev.themesLabel,
-        tags: Array.isArray(p.tags) ? p.tags : Array.isArray(v.tags) ? (v.tags as string[]) : prev.tags,
-        latex: typeof v.latex === "boolean" ? v.latex : prev.latex,
-      };
-
-      return next;
-    });
-
-    // tags UI
-    setRawTags((p.tags ?? []).join(", "));
-
-    // sync catégorie selon typeId si présent
-    const t = getTypeById(typeof (p.payload ?? {})?.typeId === "string" ? (p.payload as any).typeId : form.typeId);
-    if (t?.category) setMainCategory(normalizeMainCategory(t.category));
-
-    clearOutputs();
-    setShowMethode(false);
-    setShowEval(false);
-    setDbMsg("");
-    showToast("✅ Preset appliqué !");
-    setTimeout(() => scrollToTop(), 50);
-  },
-  [clearOutputs, form.typeId, scrollToTop, showToast],
-);
-
 
   const resetPage = useCallback(() => {
     setForm(makeInitialForm());
@@ -1669,82 +1519,6 @@ const loadPublicPresets = useCallback(async () => {
 
         </header>
 
-      {/* ligne 1 : classe matiere niveau */}
-{/* Classe / matière / niveau */}
-<div className="w-full rounded-2xl border border-gray-200 bg-white/90 shadow-sm p-4 sm:p-5">
-  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-5">
-    {/* Classe */}
-    <div className="flex flex-col gap-1.5">
-      <label className="text-[11px] sm:text-xs font-semibold text-gray-600 tracking-wide uppercase">
-        Classe / niveau
-      </label>
-      <select
-        value={form.classe}
-        onChange={(e) => {
-          handleChange("classe", e.target.value);
-          showToast("✅ Classe choisie");
-        }}
-        className="w-full h-11 sm:h-12 border border-gray-200 rounded-xl px-3 sm:px-4
-                   text-sm sm:text-[15px] bg-white shadow-sm transition
-                   focus:outline-none focus:ring-4 focus:ring-sky-200 focus:border-sky-400"
-      >
-        <option value="">Choisir…</option>
-        {CLASSES.map((c) => (
-          <option key={c.value} value={c.value}>
-            {c.label}
-          </option>
-        ))}
-      </select>
-    </div>
-
-    {/* Matière */}
-    <div className="flex flex-col gap-1.5">
-      <label className="text-[11px] sm:text-xs font-semibold text-gray-600 tracking-wide uppercase">
-        Matière
-      </label>
-      <select
-        value={form.matiere}
-        onChange={(e) => {
-          handleChange("matiere", e.target.value);
-          showToast("✅ Matière choisie");
-        }}
-        className="w-full h-11 sm:h-12 border border-gray-200 rounded-xl px-3 sm:px-4
-                   text-sm sm:text-[15px] bg-white shadow-sm transition
-                   focus:outline-none focus:ring-4 focus:ring-sky-200 focus:border-sky-400"
-      >
-        <option value="">Choisir…</option>
-        {MATIERES.map((m) => (
-          <option key={`${m.label}-${m.value}`} value={m.value} disabled={!!m.disabled}>
-            {m.label}
-          </option>
-        ))}
-      </select>
-    </div>
-
-    {/* Niveau */}
-    <div className="flex flex-col gap-1.5">
-      <label className="text-[11px] sm:text-xs font-semibold text-gray-600 tracking-wide uppercase">
-        Difficulté élèves
-      </label>
-      <select
-        value={form.niveau}
-        onChange={(e) => handleChange("niveau", e.target.value as Niveau)}
-        className="w-full h-11 sm:h-12 border border-gray-200 rounded-xl px-3 sm:px-4
-                   text-sm sm:text-[15px] bg-white shadow-sm transition
-                   focus:outline-none focus:ring-4 focus:ring-sky-200 focus:border-sky-400"
-      >
-        <option value="ulis">ULIS (adaptations fortes)</option>
-        <option value="remediation">Remédiation (bases à consolider)</option>
-        <option value="basique">Basique (très guidé)</option>
-        <option value="standard">Standard</option>
-        <option value="expert">Expert / approfondissement</option>
-      </select>
-    </div>
-  </div>
-</div>
-
-
-
       {/* ===============================
           CARROUSEL MODÈLES RAPIDES (FACULTATIF)
       =============================== */}
@@ -1786,86 +1560,14 @@ const loadPublicPresets = useCallback(async () => {
             ${showPresets ? "max-h-[600px] opacity-100" : "max-h-0 opacity-0"}
           `}
         >
-{/* CONTENU */}
-<div
-  className={`
-    overflow-hidden transition-[max-height,opacity] duration-300 ease-out
-    ${showPresets ? "max-h-[900px] opacity-100" : "max-h-0 opacity-0"}
-  `}
->
-  <div className="px-4 pb-4 pt-2">
-    {/* ✅ Presets Supabase (presets_eleveai) */}
-    {!form.classe || !form.matiere || !form.niveau ? (
-      <div className="rounded-xl border border-slate-200 bg-white p-4">
-        <p className="text-sm font-semibold text-slate-800">Choisis d’abord :</p>
-        <p className="text-[12px] text-slate-600">Classe • Matière • Difficulté élèves</p>
-      </div>
-    ) : publicPresetsLoading ? (
-      <div className="rounded-xl border border-slate-200 bg-white p-4">
-        <p className="text-sm text-slate-700">Chargement des presets…</p>
-      </div>
-    ) : publicPresetsError ? (
-      <div className="rounded-xl border border-rose-200 bg-rose-50 p-4">
-        <p className="text-sm font-semibold text-rose-800">⚠️ {publicPresetsError}</p>
-      </div>
-    ) : publicPresets.length === 0 ? (
-      <div className="rounded-xl border border-slate-200 bg-white p-4">
-        <p className="text-sm text-slate-700">Aucun preset trouvé pour ces filtres.</p>
-        <p className="mt-1 text-[12px] text-slate-500">
-          (Vérifie que audience/classe/matiere/niveau correspondent exactement aux valeurs stockées.)
-        </p>
-      </div>
-    ) : (
-      <div className="grid sm:grid-cols-2 gap-3">
-        {publicPresets.map((p) => (
-          <button
-            key={p.id}
-            type="button"
-            onClick={() => appliquerPresetPublic(p)}
-            className="text-left border rounded-xl px-3 py-3 bg-white hover:border-sky-200 transition"
-          >
-            <div className="flex items-start justify-between gap-2">
-              <div className="font-semibold text-slate-900">{p.title}</div>
-              {p.is_featured && (
-                <span className="text-[10px] px-2 py-0.5 rounded-full bg-amber-100 text-amber-900 font-semibold">
-                  ⭐ Favori
-                </span>
-              )}
-            </div>
-
-            {p.description ? (
-              <div className="text-[11px] text-slate-600 mt-1">{p.description}</div>
-            ) : null}
-
-            {p.tags?.length ? (
-              <div className="flex flex-wrap gap-1.5 mt-2">
-                {p.tags.slice(0, 6).map((tag) => (
-                  <span
-                    key={tag}
-                    className="text-[10px] px-2 py-0.5 rounded-full bg-slate-100 text-slate-800 font-semibold"
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            ) : null}
-          </button>
-        ))}
-      </div>
-    )}
-  </div>
-
-  {/* Optionnel : tes anciens modèles internes en dessous */}
-  <div className="px-4 pb-4">
-    <PresetCarousel
-      title="Modèles prêts à l’emploi (internes)"
-      subtitle="Ceux codés en dur (PROFS_PRESETS)."
-      items={PROFS_PRESET_ITEMS}
-      onSelect={(id) => appliquerPresetModele(id as ProfsPresetKey)}
-    />
-  </div>
-</div>
-
+          <div className="px-4 pb-4 pt-2">
+            <PresetCarousel
+              title="Modèles prêts à l’emploi"
+              subtitle="Clique sur un modèle : le formulaire se pré-remplit automatiquement."
+              items={PROFS_PRESET_ITEMS}
+              onSelect={(id) => appliquerPresetModele(id as ProfsPresetKey)}
+            />
+          </div>
         </div>
       </div>
 
@@ -1875,6 +1577,63 @@ const loadPublicPresets = useCallback(async () => {
           <section className="bg-white/95 border border-slate-200 rounded-2xl shadow-sm p-5 sm:p-6 space-y-4">
             <h2 className="text-lg font-bold text-[#0047B6] flex items-center gap-2">1️⃣ Paramètres pédagogiques</h2>
 
+            {/* Classe / matière / niveau */}
+            <div className="grid sm:grid-cols-3 gap-3">
+              <div className="space-y-1">
+                <label className="text-xs font-semibold text-gray-600">Classe / niveau</label>
+                <select
+                  value={form.classe}
+                  onChange={(e) => {
+                    handleChange("classe", e.target.value);
+                    showToast("✅ Classe choisie");
+                  }}
+                  className="w-full border rounded-lg px-3 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-sky-300"
+                >
+                  <option value="">Choisir…</option>
+                  {CLASSES.map((c) => (
+                    <option key={c.value} value={c.value}>
+                      {c.label}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div className="space-y-1">
+                <label className="text-xs font-semibold text-gray-600">Matière</label>
+                <select
+                  value={form.matiere}
+                  onChange={(e) => {
+                    handleChange("matiere", e.target.value);
+                    showToast("✅ Matière choisie");
+                  }}
+                  className="w-full border rounded-lg px-3 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-sky-300"
+                >
+                  <option value="">Choisir…</option>
+                  {MATIERES.map((m) => (
+                    <option key={`${m.label}-${m.value}`} value={m.value} disabled={!!m.disabled}>
+                      {m.label}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div className="space-y-1">
+                <label className="text-xs font-semibold text-gray-600">Difficulté élèves</label>
+
+              <select
+                value={form.niveau}
+                onChange={(e) => handleChange("niveau", e.target.value as Niveau)}
+                className="w-full border rounded-lg px-3 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-sky-300"
+              >
+                <option value="ulis">ULIS (adaptations fortes)</option>
+                <option value="remediation">Remédiation (bases à consolider)</option>
+                <option value="basique">Basique (très guidé)</option>
+                <option value="standard">Standard</option>
+                <option value="expert">Expert / approfondissement</option>
+              </select>
+
+              </div>
+            </div>
 
             {/* ✅ OPTION A : MODE */}
             <div className="space-y-2">
