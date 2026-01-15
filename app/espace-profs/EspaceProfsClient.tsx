@@ -213,6 +213,26 @@ const PROFS_PRESET_ITEMS: PresetCarouselItem[] = (Object.entries(PROFS_PRESETS) 
 /* ----------------------------------------
    HELPERS
 ---------------------------------------- */
+/* ----------------------------------------
+   HELPERS
+---------------------------------------- */
+
+    function niveauxToTryFromUi(n: Niveau): string[] {
+      switch (n) {
+        case "ulis":
+          return ["ulis", "remediation", "basique", "standard"];
+        case "remediation":
+          return ["remediation", "basique", "ulis", "standard"];
+        case "basique":
+          return ["basique", "remediation", "standard"];
+        case "standard":
+          return ["standard", "basique", "expert"];
+        case "expert":
+          return ["expert", "standard", "basique"];
+        default:
+          return ["standard", "basique"];
+      }
+    }
 
     function getEvalLabel(id: ModaliteEvaluation) {
       return EVAL_OPTIONS.find((e) => e.id === id)?.label ?? "Évaluation sommative";
@@ -768,8 +788,39 @@ type FeedbackChoice = "" | "ok" | "bof" | "pas_ok";
 export default function ProfsPage() {
   const supabase = useMemo(() => createClient(), []);
   const today = useMemo(() => new Date().toISOString().slice(0, 10), []);
+
   // ✅ UI state
   const [showPresets, setShowPresets] = useState(true);
+
+  // ✅ Presets publics (table presets_eleveai)
+  const [publicPresets, setPublicPresets] = useState<DbPresetEleveai[]>([]);
+  const [publicPresetsLoading, setPublicPresetsLoading] = useState(false);
+  const [publicPresetsError, setPublicPresetsError] = useState("");
+
+  // 🔍 Recherche presets
+  const [presetQuery, setPresetQuery] = useState("");
+
+
+
+  const filteredPublicPresets = useMemo(() => {
+    const q = presetQuery.trim().toLowerCase();
+    if (!q) return publicPresets;
+
+    return publicPresets.filter((p) => {
+      const haystack = [
+        p.title ?? "",
+        p.description ?? "",
+        ...(p.tags ?? []),
+      ]
+        .join(" ")
+        .toLowerCase();
+
+      return haystack.includes(q);
+    });
+  }, [publicPresets, presetQuery]);
+
+
+
 
   // ✅ Refs (scroll UX)
   const promptRef = useRef<HTMLDivElement | null>(null);
@@ -870,70 +921,79 @@ export default function ProfsPage() {
   const [mainCategory, setMainCategory] = useState<MainCategory>("seance");
   const [typeQuery, setTypeQuery] = useState("");
 
-    // ✅ Presets publics (table presets_eleveai)
-  const [publicPresets, setPublicPresets] = useState<DbPresetEleveai[]>([]);
-  const [publicPresetsLoading, setPublicPresetsLoading] = useState(false);
-  const [publicPresetsError, setPublicPresetsError] = useState("");
-const loadPublicPresets = useCallback(async () => {
-  setPublicPresetsError("");
-
-  // ✅ on charge dès que classe + matière existent
-  if (!form.classe || !form.matiere) {
-    setPublicPresets([]);
-    return;
+  // ✅ helper (à mettre hors du composant, dans HELPERS)
+  function niveauxToTryFromUi(n: Niveau): string[] {
+    switch (n) {
+      case "ulis":
+        return ["ulis"];
+      case "remediation":
+        return ["remediation", "basique", "ulis", "standard"];
+      case "basique":
+        return ["basique", "remediation", "standard"];
+      case "standard":
+        return ["standard", "basique", "expert"];
+      case "expert":
+        return ["expert", "standard", "basique"];
+      default:
+        return ["standard", "basique"];
+    }
   }
 
-  setPublicPresetsLoading(true);
+  // ✅ loadPublicPresets (avec la nouvelle logique niveauxToTry)
+  const loadPublicPresets = useCallback(async () => {
+    setPublicPresetsError("");
 
-  try {
-    // ✅ niveaux possibles selon ton UI (2 niveaux)
-    // - si niveau choisi : on filtre + fallback basique<->standard
-    // - si pas choisi : on prend les deux
-    const niveauxToTry =
-      form.niveau === "basique"
-        ? (["basique", "standard"] as const)
-        : form.niveau === "standard"
-        ? (["standard", "basique"] as const) // fallback inverse (optionnel mais pratique)
-        : (["basique", "standard"] as const); // pas choisi
+    // ✅ on charge dès que classe + matière existent
+    if (!form.classe || !form.matiere) {
+      setPublicPresets([]);
+      return;
+    }
 
-    const query = supabase
-      .from("presets_eleveai")
-      .select(
-        "id, created_at, updated_at, audience, classe, matiere, niveau, title, description, tags, is_featured, featured_rank, payload, is_archived"
-      )
-      .eq("audience", "profs")
-      .eq("classe", form.classe)
-      .eq("matiere", form.matiere)
-      .eq("is_archived", false)
-      .order("is_featured", { ascending: false })
-      .order("featured_rank", { ascending: true, nullsFirst: false })
-      .limit(15);
+    setPublicPresetsLoading(true);
 
-    // ✅ si niveau sélectionné OU non, on filtre sur la liste niveauxToTry
-    // (comme tu n'as que 2 niveaux, c'est simple)
-    const { data, error } = await query.in("niveau", niveauxToTry as unknown as string[]);
+    try {
+      // ✅ niveaux possibles selon ton UI (5 niveaux) + fallback intelligent
+      const niveauxToTry = niveauxToTryFromUi(form.niveau);
 
-    console.log("[presets_eleveai] filtres =", {
-      audience: "profs",
-      classe: form.classe,
-      matiere: form.matiere,
-      niveauUI: form.niveau,
-      niveauxToTry,
-    });
-    console.log("[presets_eleveai] data =", data);
-    console.log("[presets_eleveai] error =", error);
+      const query = supabase
+        .from("presets_eleveai")
+        .select(
+          "id, created_at, updated_at, audience, classe, matiere, niveau, title, description, tags, is_featured, featured_rank, payload, is_archived"
+        )
+        .eq("audience", "profs")
+        .eq("classe", form.classe)
+        .eq("matiere", form.matiere)
+        .eq("is_archived", false)
+        .order("is_featured", { ascending: false })
+        .order("featured_rank", { ascending: true, nullsFirst: false })
+        .limit(15);
 
-    if (error) throw new Error(error.message);
+      // ✅ on filtre sur la liste niveauxToTry (multi-niveaux)
+      const { data, error } = await query.in("niveau", niveauxToTry);
 
-    setPublicPresets((data ?? []) as DbPresetEleveai[]);
-  } catch (e: any) {
-    console.error("[presets_eleveai] catch =", e);
-    setPublicPresets([]);
-    setPublicPresetsError(e?.message || "Erreur chargement presets.");
-  } finally {
-    setPublicPresetsLoading(false);
-  }
-}, [form.classe, form.matiere, form.niveau, supabase]);
+      console.log("[presets_eleveai] filtres =", {
+        audience: "profs",
+        classe: form.classe,
+        matiere: form.matiere,
+        niveauUI: form.niveau,
+        niveauxToTry,
+      });
+      console.log("[presets_eleveai] data =", data);
+      console.log("[presets_eleveai] error =", error);
+
+      if (error) throw new Error(error.message);
+
+      setPublicPresets((data ?? []) as DbPresetEleveai[]);
+    } catch (e: any) {
+      console.error("[presets_eleveai] catch =", e);
+      setPublicPresets([]);
+      setPublicPresetsError(e?.message || "Erreur chargement presets.");
+    } finally {
+      setPublicPresetsLoading(false);
+    }
+  }, [form.classe, form.matiere, form.niveau, supabase]);
+
+
 
 
 
@@ -1779,96 +1839,130 @@ const loadPublicPresets = useCallback(async () => {
           </span>
         </button>
 
-        {/* CONTENU */}
-        <div
-          className={`
-            overflow-hidden transition-[max-height,opacity] duration-300 ease-out
-            ${showPresets ? "max-h-[600px] opacity-100" : "max-h-0 opacity-0"}
-          `}
-        >
-{/* CONTENU */}
-<div
-  className={`
-    overflow-hidden transition-[max-height,opacity] duration-300 ease-out
-    ${showPresets ? "max-h-[900px] opacity-100" : "max-h-0 opacity-0"}
-  `}
->
-  <div className="px-4 pb-4 pt-2">
-    {/* ✅ Presets Supabase (presets_eleveai) */}
-    {!form.classe || !form.matiere || !form.niveau ? (
-      <div className="rounded-xl border border-slate-200 bg-white p-4">
-        <p className="text-sm font-semibold text-slate-800">Choisis d’abord :</p>
-        <p className="text-[12px] text-slate-600">Classe • Matière • Difficulté élèves</p>
-      </div>
-    ) : publicPresetsLoading ? (
-      <div className="rounded-xl border border-slate-200 bg-white p-4">
-        <p className="text-sm text-slate-700">Chargement des presets…</p>
-      </div>
-    ) : publicPresetsError ? (
-      <div className="rounded-xl border border-rose-200 bg-rose-50 p-4">
-        <p className="text-sm font-semibold text-rose-800">⚠️ {publicPresetsError}</p>
-      </div>
-    ) : publicPresets.length === 0 ? (
-      <div className="rounded-xl border border-slate-200 bg-white p-4">
-        <p className="text-sm text-slate-700">Aucun preset trouvé pour ces filtres.</p>
-        <p className="mt-1 text-[12px] text-slate-500">
-          (Vérifie que audience/classe/matiere/niveau correspondent exactement aux valeurs stockées.)
-        </p>
-      </div>
-    ) : (
-      <div className="grid sm:grid-cols-2 gap-3">
-        {publicPresets.map((p) => (
-          <button
-            key={p.id}
-            type="button"
-            onClick={() => appliquerPresetPublic(p)}
-            className="text-left border rounded-xl px-3 py-3 bg-white hover:border-sky-200 transition"
-          >
-            <div className="flex items-start justify-between gap-2">
-              <div className="font-semibold text-slate-900">{p.title}</div>
-              {p.is_featured && (
-                <span className="text-[10px] px-2 py-0.5 rounded-full bg-amber-100 text-amber-900 font-semibold">
-                  ⭐ Favori
-                </span>
+      {/* CONTENU */}
+      <div
+        className={`
+          overflow-hidden transition-[max-height,opacity] duration-300 ease-out
+          ${showPresets ? "max-h-[900px] opacity-100" : "max-h-0 opacity-0"}
+        `}
+      >
+      <div className="px-4 pb-4 pt-2">
+        {/* ✅ Presets Supabase (presets_eleveai) */}
+        {!form.classe || !form.matiere ? (
+          <div className="rounded-xl border border-slate-200 bg-white p-4">
+            <p className="text-sm font-semibold text-slate-800">Choisis d’abord :</p>
+            <p className="text-[12px] text-slate-600">Classe • Matière</p>
+          </div>
+        ) : (
+          <>
+            {/* 🔍 Recherche presets (affichée dès que classe+matière sont choisis) */}
+            <div className="mb-3">
+              <label className="text-[11px] font-semibold text-slate-600">Rechercher un preset</label>
+              <div className="relative mt-1">
+                <Search className="w-4 h-4 text-slate-500 absolute left-3 top-1/2 -translate-y-1/2" />
+                <input
+                  value={presetQuery}
+                  onChange={(e) => setPresetQuery(e.target.value)}
+                  placeholder="Titre, tags, description…"
+                  className="w-full border rounded-lg pl-9 pr-3 py-2 text-sm bg-white
+                            focus:outline-none focus:ring-2 focus:ring-sky-300"
+                />
+              </div>
+
+              {!!presetQuery.trim() && (
+                <div className="mt-2 flex items-center justify-between">
+                  <p className="text-[11px] text-slate-600">
+                    Résultats : <span className="font-semibold">{filteredPublicPresets.length}</span>
+                  </p>
+                  <button
+                    type="button"
+                    onClick={() => setPresetQuery("")}
+                    className="text-[11px] font-semibold text-slate-700 underline underline-offset-2 hover:text-slate-900"
+                  >
+                    Effacer
+                  </button>
+                </div>
               )}
             </div>
 
-            {p.description ? (
-              <div className="text-[11px] text-slate-600 mt-1">{p.description}</div>
-            ) : null}
-
-            {p.tags?.length ? (
-              <div className="flex flex-wrap gap-1.5 mt-2">
-                {p.tags.slice(0, 6).map((tag) => (
-                  <span
-                    key={tag}
-                    className="text-[10px] px-2 py-0.5 rounded-full bg-slate-100 text-slate-800 font-semibold"
+            {publicPresetsLoading ? (
+              <div className="rounded-xl border border-slate-200 bg-white p-4">
+                <p className="text-sm text-slate-700">Chargement des presets…</p>
+              </div>
+            ) : publicPresetsError ? (
+              <div className="rounded-xl border border-rose-200 bg-rose-50 p-4">
+                <p className="text-sm font-semibold text-rose-800">⚠️ {publicPresetsError}</p>
+              </div>
+            ) : filteredPublicPresets.length === 0 ? (
+              <div className="rounded-xl border border-slate-200 bg-white p-4">
+                <p className="text-sm text-slate-700">Aucun preset trouvé pour ces filtres.</p>
+                <p className="mt-1 text-[12px] text-slate-500">
+                  (Vérifie audience/classe/matiere/niveau côté DB.)
+                </p>
+              </div>
+            ) : (
+              <div className="grid sm:grid-cols-2 gap-3">
+                {filteredPublicPresets.map((p) => (
+                  <button
+                    key={p.id}
+                    type="button"
+                    onClick={() => appliquerPresetPublic(p)}
+                    className="text-left border rounded-xl px-3 py-3 bg-white hover:border-sky-200 transition"
                   >
-                    {tag}
-                  </span>
+                    <div className="flex items-start justify-between gap-2">
+                      <div className="font-semibold text-slate-900">{p.title}</div>
+                      {p.is_featured && (
+                        <span className="text-[10px] px-2 py-0.5 rounded-full bg-amber-100 text-amber-900 font-semibold">
+                          ⭐ Favori
+                        </span>
+                      )}
+                    </div>
+
+                    {p.description ? (
+                      <div className="text-[11px] text-slate-600 mt-1">{p.description}</div>
+                    ) : null}
+
+                    {p.tags?.length ? (
+                      <div className="flex flex-wrap gap-1.5 mt-2">
+                        {p.tags.slice(0, 6).map((tag) => (
+                          <span
+                            key={tag}
+                            className="text-[10px] px-2 py-0.5 rounded-full bg-slate-100 text-slate-800 font-semibold"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    ) : null}
+                  </button>
                 ))}
               </div>
-            ) : null}
-          </button>
-        ))}
-      </div>
-    )}
-  </div>
-
-  {/* Optionnel : tes anciens modèles internes en dessous */}
-  <div className="px-4 pb-4">
-    <PresetCarousel
-      title="Modèles prêts à l’emploi (internes)"
-      subtitle="Ceux codés en dur (PROFS_PRESETS)."
-      items={PROFS_PRESET_ITEMS}
-      onSelect={(id) => appliquerPresetModele(id as ProfsPresetKey)}
-    />
-  </div>
-</div>
-
-        </div>
+            )}
+          </>
+        )}
       </div>
 
+
+            {/* Optionnel : tes anciens modèles internes en dessous */}
+         {/*   <div className="px-4 pb-4">
+              <PresetCarousel
+                title="Modèles prêts à l’emploi (internes)"
+                subtitle="Ceux codés en dur (PROFS_PRESETS)."
+                items={PROFS_PRESET_ITEMS}
+                onSelect={(id) => appliquerPresetModele(id as ProfsPresetKey)}
+              />
+            </div> */}
+          </div>
+
+
+      </div>
+      {/* ===============================
+          FIN CARROUSEL MODÈLES RAPIDES (FACULTATIF)
+      =============================== */}
+
+      {/* ===============================
+          debut Paramètres pédagogiques
+      =============================== */}
 
         <div className="grid gap-6 lg:grid-cols-2">
           {/* FORM */}
