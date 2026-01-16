@@ -105,7 +105,7 @@ Si l'utilisateur demande du code (LaTeX, Manim, etc.), place-le dans des blocs d
 
     // 🔥 Appel OpenAI optimisé (chat.completions, modèle mini)
     const completion = await client.chat.completions.create({
-      model: "gpt-4.1-mini",
+      model: "gpt-5.1-mini",
       messages: [
         { role: "system", content: systemPrompt },
         { role: "user", content: question },

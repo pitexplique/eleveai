@@ -23,7 +23,8 @@ import {
   Accessibility,
   MessageCircle,
   HeartHandshake,
-  MessageSquareText
+  MessageSquareText,
+  Library 
 
 } from "lucide-react";
 
@@ -108,9 +109,16 @@ const itemsApp: Item[] = useMemo(
   icon: <FlaskConical className="h-4 w-4" />,
 },
 {
+  href: "/presets",
+  label: "Presets officiels",
+  description: "Bibliothèque pédagogique",
+  icon: <Library className="h-4 w-4" />,
+},
+
+{
   href: "/tchat",
   label: "Prompt EleveAI",
-  description: "Tchat minimal",
+  description: "gpt-5.1-mini",
   icon: <MessageSquareText className="h-4 w-4" />,
 },
 /*

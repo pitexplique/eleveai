@@ -4,7 +4,6 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { CLASSES, MATIERES } from "@/lib/constants/scolaire";
 
-// Debug : inclut les niveaux possibles
 type Niveau = "basique" | "standard" | "remediation" | "expert" | "ulis";
 
 type DbPresetEleveai = {
@@ -27,13 +26,17 @@ export default function PresetsClient() {
   const [classe, setClasse] = useState<string>("");
   const [matiere, setMatiere] = useState<string>("");
   const [niveau, setNiveau] = useState<Niveau | "">("");
-
-  // ✅ recherche déplacée au-dessus du tableau
   const [search, setSearch] = useState<string>("");
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string>("");
   const [rows, setRows] = useState<DbPresetEleveai[]>([]);
+
+  // ✅ compteur “marketing” (filtré)
+  const [availableCount, setAvailableCount] = useState<number | null>(null);
+
+  // ✅ compteur total base (non filtré)
+  const [totalDbCount, setTotalDbCount] = useState<number | null>(null);
 
   const load = useCallback(async () => {
     setError("");
@@ -53,15 +56,10 @@ export default function PresetsClient() {
       if (niveau) q = q.eq("niveau", niveau);
 
       const s = search.trim();
-
-      // ✅ Filtrage réel côté DB pendant la saisie
       if (s) {
         if (s.startsWith("#")) {
-          // Exemple: "#chapitre_limites_tle"
           q = q.contains("tags", [s]);
         } else {
-          // Recherche texte : title/classe/matiere
-          // (on garde simple et fiable)
           q = q.or(
             `title.ilike.%${s}%,matiere.ilike.%${s}%,classe.ilike.%${s}%`
           );
@@ -85,18 +83,64 @@ export default function PresetsClient() {
     }
   }, [supabase, classe, matiere, niveau, search]);
 
-  // ✅ Auto-load en tapant / changeant les filtres (debounce)
+  // ✅ Count marketing (filtré, sans search)
+  const loadCount = useCallback(async () => {
+    try {
+      let q = supabase
+        .from("presets_eleveai")
+        .select("id", { count: "exact", head: true })
+        .eq("audience", "profs")
+        .eq("is_archived", false);
+
+      if (classe) q = q.eq("classe", classe);
+      if (matiere) q = q.eq("matiere", matiere);
+      if (niveau) q = q.eq("niveau", niveau);
+
+      const { count, error } = await q;
+      if (error) throw error;
+
+      setAvailableCount(count ?? 0);
+    } catch (e) {
+      console.warn("[presets] count error", e);
+      setAvailableCount(null);
+    }
+  }, [supabase, classe, matiere, niveau]);
+
+  // ✅ Count total DB (non filtré, ne dépend de rien)
+  const loadTotalDbCount = useCallback(async () => {
+    try {
+      const { count, error } = await supabase
+        .from("presets_eleveai")
+        .select("id", { count: "exact", head: true });
+
+      if (error) throw error;
+
+      setTotalDbCount(count ?? 0);
+    } catch (e) {
+      console.warn("[presets] totalDbCount error", e);
+      setTotalDbCount(null);
+    }
+  }, [supabase]);
+
+  // ✅ Charger le total DB une seule fois au montage
+  useEffect(() => {
+    loadTotalDbCount();
+  }, [loadTotalDbCount]);
+
+  // ✅ Auto-load (debounce) : résultats + compteur marketing
   useEffect(() => {
     const t = setTimeout(() => {
       load();
+      loadCount();
     }, 300);
+
     return () => clearTimeout(t);
-  }, [load]);
+  }, [load, loadCount]);
 
   return (
     <main className="min-h-screen bg-slate-50 text-slate-900">
       <div className="mx-auto max-w-5xl px-4 py-8 space-y-6">
-        {/* Header sans champ recherche */}
+        {/* Header */}
         <header className="space-y-2">
           <h1 className="text-2xl font-extrabold text-[#0047B6]">
             EleveAI — Presets officiels
@@ -111,7 +155,9 @@ export default function PresetsClient() {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             {/* Classe */}
             <div className="space-y-1">
-              <label className="text-xs font-semibold text-slate-600">Classe</label>
+              <label className="text-xs font-semibold text-slate-600">
+                Classe
+              </label>
               <select
                 value={classe}
                 onChange={(e) => setClasse(e.target.value)}
@@ -128,7 +174,9 @@ export default function PresetsClient() {
 
             {/* Matière */}
             <div className="space-y-1">
-              <label className="text-xs font-semibold text-slate-600">Matière</label>
+              <label className="text-xs font-semibold text-slate-600">
+                Matière
+              </label>
               <select
                 value={matiere}
                 onChange={(e) => setMatiere(e.target.value)}
@@ -136,7 +184,11 @@ export default function PresetsClient() {
               >
                 <option value="">Choisir…</option>
                 {MATIERES.map((m) => (
-                  <option key={`${m.value}-${m.label}`} value={m.value} disabled={!!m.disabled}>
+                  <option
+                    key={`${m.value}-${m.label}`}
+                    value={m.value}
+                    disabled={!!m.disabled}
+                  >
                     {m.label}
                   </option>
                 ))}
@@ -145,7 +197,9 @@ export default function PresetsClient() {
 
             {/* Niveau */}
             <div className="space-y-1">
-              <label className="text-xs font-semibold text-slate-600">Niveau (optionnel)</label>
+              <label className="text-xs font-semibold text-slate-600">
+                Niveau (optionnel)
+              </label>
               <select
                 value={niveau}
                 onChange={(e) => setNiveau(e.target.value as any)}
@@ -168,8 +222,56 @@ export default function PresetsClient() {
           )}
         </section>
 
-        {/* Résultats + Recherche au-dessus du tableau */}
+        {/* Résultats */}
         <section className="rounded-2xl border border-slate-200 bg-white p-4">
+          {/* ✅ Bloc marketing + total DB à droite */}
+          <div className="mb-4 rounded-2xl border border-slate-200 bg-slate-50 p-4">
+            <div className="flex items-start justify-between gap-4">
+              {/* Gauche : marketing (filtré) */}
+              <div>
+                <div className="text-xs font-semibold text-slate-600 uppercase tracking-wide">
+                  Marketing
+                </div>
+
+                <div className="mt-1 text-3xl font-extrabold text-slate-900">
+                  {availableCount === null
+                    ? "—"
+                    : availableCount.toLocaleString("fr-FR")}
+                </div>
+                <div className="text-sm text-slate-700">
+                  presets EleveAI officiels disponibles
+                </div>
+
+                <div className="mt-2 text-xs text-slate-600">
+                  Classe : <b>{classe || "Toutes"}</b> · Matière :{" "}
+                  <b>{matiere || "Toutes"}</b> · Niveau :{" "}
+                  <b>{niveau || "Tous"}</b>
+                </div>
+              </div>
+
+              {/* Droite : total DB */}
+              <div className="text-right">
+                <div className="text-xs font-semibold text-slate-600 uppercase tracking-wide">
+                  Base de données
+                </div>
+
+                <div className="mt-1 text-3xl font-extrabold text-slate-900">
+                  {totalDbCount === null
+                    ? "—"
+                    : totalDbCount.toLocaleString("fr-FR")}
+                </div>
+                <div className="text-sm text-slate-700">
+                  lignes totales dans presets_eleveai
+                </div>
+
+                <div className="mt-2 text-xs text-slate-500">
+                  (toutes audiences, archivés inclus)
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Titre + recherche */}
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-3">
             <div className="flex items-center gap-3">
               <h2 className="font-extrabold text-slate-900">Résultats</h2>
@@ -178,7 +280,6 @@ export default function PresetsClient() {
               </span>
             </div>
 
-            {/* ✅ Champ recherche ici */}
             <div className="w-full sm:w-96">
               <input
                 type="text"
@@ -189,11 +290,13 @@ export default function PresetsClient() {
                            focus:outline-none focus:ring-2 focus:ring-[#0047B6]/30"
               />
               <p className="mt-1 text-xs text-slate-500">
-                Astuce : tape <span className="font-mono">#chapitre_...</span> pour filtrer par tag exact.
+                Astuce : tape <span className="font-mono">#chapitre_...</span>{" "}
+                pour filtrer par tag exact.
               </p>
             </div>
           </div>
 
+          {/* Tableau */}
           {rows.length === 0 ? (
             <p className="text-sm text-slate-600">
               {loading ? "Chargement…" : "Aucune ligne."}
@@ -228,11 +331,18 @@ export default function PresetsClient() {
           )}
         </section>
 
+        {/* Aide */}
         <section className="rounded-2xl border border-slate-200 bg-white p-4 space-y-2">
           <h3 className="font-extrabold">À vérifier si 0 résultat</h3>
           <ul className="text-sm text-slate-700 list-disc pl-5 space-y-1">
-            <li>RLS : sans policy SELECT, Supabase peut renvoyer data=[] sans erreur.</li>
-            <li>Valeurs exactes : classe/matière doivent correspondre aux valeurs DB.</li>
+            <li>
+              RLS : sans policy SELECT, Supabase peut renvoyer data=[] sans
+              erreur.
+            </li>
+            <li>
+              Valeurs exactes : classe/matière doivent correspondre aux valeurs
+              DB.
+            </li>
             <li>On filtre toujours audience="profs" et is_archived=false.</li>
           </ul>
         </section>
@@ -240,4 +350,3 @@ export default function PresetsClient() {
     </main>
   );
 }
-
