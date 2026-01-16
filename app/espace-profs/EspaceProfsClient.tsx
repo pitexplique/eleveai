@@ -1823,7 +1823,7 @@ export default function ProfsPage() {
         >
           <div className="flex items-center gap-3">
             <span className="text-sm font-semibold text-slate-800">
-              Modèles rapides (facultatif)
+              Modèles Eleveai officiel generés
             </span>
             <span className="text-xs text-slate-500">
               Démarrer plus vite
