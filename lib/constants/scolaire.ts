@@ -20,9 +20,9 @@ export const CLASSES = [
   { value: "3e", label: "3e" },
 
   // 🎓 Lycée
-  { value: "2de", label: "Seconde" },
-  { value: "1re", label: "Première" },
-  { value: "Tle", label: "Terminale" },
+  { value: "Seconde", label: "Seconde" },
+  { value: "Première", label: "Première" },
+  { value: "Terminale", label: "Terminale" },
 
   // 🎓 Post-bac
   { value: "BTS1", label: "BTS 1re année" },

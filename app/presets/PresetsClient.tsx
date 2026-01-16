@@ -1,27 +1,23 @@
 "use client";
 
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { CLASSES, MATIERES } from "@/lib/constants/scolaire";
 
-// ⚠️ recopie exactement tes 2 niveaux
-type Niveau = "basique" | "standard";
+// Debug : inclut les niveaux possibles
+type Niveau = "basique" | "standard" | "remediation" | "expert" | "ulis";
 
-// ✅ même type que dans espace profs (version simple)
 type DbPresetEleveai = {
   id: string;
-  created_at: string;
-  updated_at: string;
-  audience: string; // "profs"
+  created_at?: string;
+  audience: string;
   classe: string;
   matiere: string;
-  niveau: string; // "basique" | "standard"
+  niveau: string;
   title: string;
-  description: string;
-  tags: string[];
+  tags?: string[];
   is_featured: boolean;
   featured_rank: number | null;
-  payload: any;
   is_archived: boolean;
 };
 
@@ -30,55 +26,87 @@ export default function PresetsClient() {
 
   const [classe, setClasse] = useState<string>("");
   const [matiere, setMatiere] = useState<string>("");
-  const [niveau, setNiveau] = useState<Niveau | "">(""); // ✅ ici on autorise "non choisi"
+  const [niveau, setNiveau] = useState<Niveau | "">("");
+
+  // ✅ recherche déplacée au-dessus du tableau
+  const [search, setSearch] = useState<string>("");
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string>("");
   const [rows, setRows] = useState<DbPresetEleveai[]>([]);
 
-const load = useCallback(async () => {
-  setError("");
-  setRows([]);
-  setLoading(true);
+  const load = useCallback(async () => {
+    setError("");
+    setLoading(true);
 
-  try {
-    // 🔍 DEBUG AUTH
-    const { data: authData, error: authErr } = await supabase.auth.getUser();
-    console.log("[presets] auth user =", authData?.user ?? null, "authErr =", authErr ?? null);
+    try {
+      let q = supabase
+        .from("presets_eleveai")
+        .select(
+          "id, audience, classe, matiere, niveau, title, tags, is_featured, featured_rank, is_archived, created_at"
+        )
+        .eq("audience", "profs")
+        .eq("is_archived", false);
 
-    // ✅ REQUÊTE LA PLUS SIMPLE POSSIBLE
-    const { data, error } = await supabase
-      .from("presets_eleveai")
-      .select(
-        "id, audience, classe, matiere, niveau, title, is_archived"
-      )
-      .limit(10);
+      if (classe) q = q.eq("classe", classe);
+      if (matiere) q = q.eq("matiere", matiere);
+      if (niveau) q = q.eq("niveau", niveau);
 
-    console.log("[presets] RAW DATA =", data);
-    console.log("[presets] ERROR =", error);
+      const s = search.trim();
 
-    if (error) throw new Error(error.message);
+      // ✅ Filtrage réel côté DB pendant la saisie
+      if (s) {
+        if (s.startsWith("#")) {
+          // Exemple: "#chapitre_limites_tle"
+          q = q.contains("tags", [s]);
+        } else {
+          // Recherche texte : title/classe/matiere
+          // (on garde simple et fiable)
+          q = q.or(
+            `title.ilike.%${s}%,matiere.ilike.%${s}%,classe.ilike.%${s}%`
+          );
+        }
+      }
 
-    setRows((data ?? []) as DbPresetEleveai[]);
-  } catch (e: any) {
-    console.error("[presets] catch =", e);
-    setError(e?.message || "Erreur chargement.");
-  } finally {
-    setLoading(false);
-  }
-}, [supabase]);
+      const { data, error } = await q
+        .order("is_featured", { ascending: false })
+        .order("featured_rank", { ascending: true, nullsFirst: false })
+        .order("created_at", { ascending: false })
+        .limit(50);
 
+      if (error) throw new Error(error.message);
+
+      setRows((data ?? []) as DbPresetEleveai[]);
+    } catch (e: any) {
+      setError(e?.message || "Erreur chargement.");
+      setRows([]);
+    } finally {
+      setLoading(false);
+    }
+  }, [supabase, classe, matiere, niveau, search]);
+
+  // ✅ Auto-load en tapant / changeant les filtres (debounce)
+  useEffect(() => {
+    const t = setTimeout(() => {
+      load();
+    }, 300);
+    return () => clearTimeout(t);
+  }, [load]);
 
   return (
     <main className="min-h-screen bg-slate-50 text-slate-900">
       <div className="mx-auto max-w-5xl px-4 py-8 space-y-6">
+        {/* Header sans champ recherche */}
         <header className="space-y-2">
-          <h1 className="text-2xl font-extrabold text-[#0047B6]">/presets — Debug presets_eleveai</h1>
+          <h1 className="text-2xl font-extrabold text-[#0047B6]">
+            EleveAI — Presets officiels
+          </h1>
           <p className="text-sm text-slate-700">
             Page de test : filtres + affichage brut des lignes.
           </p>
         </header>
 
+        {/* Filtres */}
         <section className="rounded-2xl border border-slate-200 bg-white p-4 space-y-4">
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             {/* Classe */}
@@ -126,24 +154,10 @@ const load = useCallback(async () => {
                 <option value="">(Tous)</option>
                 <option value="basique">Basique</option>
                 <option value="standard">Standard</option>
+                <option value="remediation">Remédiation</option>
+                <option value="expert">Expert</option>
+                <option value="ulis">ULIS</option>
               </select>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-3">
-            <button
-              type="button"
-              onClick={load}
-              disabled={loading}
-              className={`px-4 py-2 rounded-xl font-semibold text-sm ${
-                loading ? "bg-slate-200 text-slate-500" : "bg-[#0047B6] text-white hover:bg-[#003894]"
-              }`}
-            >
-              {loading ? "Chargement..." : "Charger"}
-            </button>
-
-            <div className="text-xs text-slate-600">
-              Filtre DB : audience="profs" + classe + matière {niveau ? `+ niveau=${niveau}` : "+ (tous niveaux)"}
             </div>
           </div>
 
@@ -154,14 +168,36 @@ const load = useCallback(async () => {
           )}
         </section>
 
+        {/* Résultats + Recherche au-dessus du tableau */}
         <section className="rounded-2xl border border-slate-200 bg-white p-4">
-          <div className="flex items-center justify-between mb-3">
-            <h2 className="font-extrabold text-slate-900">Résultats</h2>
-            <span className="text-xs font-semibold text-slate-600">{rows.length} ligne(s)</span>
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-3">
+            <div className="flex items-center gap-3">
+              <h2 className="font-extrabold text-slate-900">Résultats</h2>
+              <span className="text-xs font-semibold text-slate-600">
+                {loading ? "Chargement…" : `${rows.length} ligne(s)`}
+              </span>
+            </div>
+
+            {/* ✅ Champ recherche ici */}
+            <div className="w-full sm:w-96">
+              <input
+                type="text"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                placeholder='Rechercher (titre, classe, matière…) ou "#tag"'
+                className="w-full h-11 rounded-xl border border-slate-200 px-3 text-sm bg-white
+                           focus:outline-none focus:ring-2 focus:ring-[#0047B6]/30"
+              />
+              <p className="mt-1 text-xs text-slate-500">
+                Astuce : tape <span className="font-mono">#chapitre_...</span> pour filtrer par tag exact.
+              </p>
+            </div>
           </div>
 
           {rows.length === 0 ? (
-            <p className="text-sm text-slate-600">Aucune ligne.</p>
+            <p className="text-sm text-slate-600">
+              {loading ? "Chargement…" : "Aucune ligne."}
+            </p>
           ) : (
             <div className="overflow-auto border rounded-xl">
               <table className="min-w-full text-sm">
@@ -172,7 +208,7 @@ const load = useCallback(async () => {
                     <th className="p-2">matiere</th>
                     <th className="p-2">niveau</th>
                     <th className="p-2">featured</th>
-                    <th className="p-2">archived</th>
+                    <th className="p-2">rank</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -183,7 +219,7 @@ const load = useCallback(async () => {
                       <td className="p-2">{r.matiere}</td>
                       <td className="p-2">{r.niveau}</td>
                       <td className="p-2">{String(r.is_featured)}</td>
-                      <td className="p-2">{String(r.is_archived)}</td>
+                      <td className="p-2">{r.featured_rank ?? ""}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -195,12 +231,13 @@ const load = useCallback(async () => {
         <section className="rounded-2xl border border-slate-200 bg-white p-4 space-y-2">
           <h3 className="font-extrabold">À vérifier si 0 résultat</h3>
           <ul className="text-sm text-slate-700 list-disc pl-5 space-y-1">
-            <li>RLS : si la table a RLS sans policy SELECT, Supabase renvoie souvent data=[] sans erreur.</li>
-            <li>Valeurs exactes : classe doit être exactement “6e” (pas “6ème”).</li>
-            <li>Audience doit être “profs”.</li>
+            <li>RLS : sans policy SELECT, Supabase peut renvoyer data=[] sans erreur.</li>
+            <li>Valeurs exactes : classe/matière doivent correspondre aux valeurs DB.</li>
+            <li>On filtre toujours audience="profs" et is_archived=false.</li>
           </ul>
         </section>
       </div>
     </main>
   );
 }
+
