@@ -230,7 +230,7 @@ export default function PresetsClient() {
               {/* Gauche : marketing (filtré) */}
               <div>
                 <div className="text-xs font-semibold text-slate-600 uppercase tracking-wide">
-                  Marketing
+                  Bibliothèque
                 </div>
 
                 <div className="mt-1 text-3xl font-extrabold text-slate-900">
@@ -333,17 +333,14 @@ export default function PresetsClient() {
 
         {/* Aide */}
         <section className="rounded-2xl border border-slate-200 bg-white p-4 space-y-2">
-          <h3 className="font-extrabold">À vérifier si 0 résultat</h3>
+          <h3 className="font-extrabold">Réalisation</h3>
           <ul className="text-sm text-slate-700 list-disc pl-5 space-y-1">
             <li>
-              RLS : sans policy SELECT, Supabase peut renvoyer data=[] sans
-              erreur.
+              Eleveai.
             </li>
             <li>
-              Valeurs exactes : classe/matière doivent correspondre aux valeurs
-              DB.
+              Conforme Bo.
             </li>
-            <li>On filtre toujours audience="profs" et is_archived=false.</li>
           </ul>
         </section>
       </div>

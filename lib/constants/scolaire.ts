@@ -39,7 +39,7 @@ export const MATIERES: readonly OptionSelect[] = [
   // 📘 Fondamentaux
   { value: "", label: "📘 Fondamentaux", disabled: true },
   { value: "maths", label: "Mathématiques" },
-  { value: "francais", label: "Français" },
+  { value: "Français", label: "Français" },
   { value: "histoire-geo", label: "Histoire-Géographie" },
   { value: "physique-chimie", label: "Physique-Chimie" },
   { value: "svt", label: "SVT" },

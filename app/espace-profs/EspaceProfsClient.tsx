@@ -1805,160 +1805,256 @@ export default function ProfsPage() {
 
 
 
-      {/* ===============================
-          CARROUSEL MODÈLES RAPIDES (FACULTATIF)
-      =============================== */}
-      <div className="mt-6 rounded-2xl border border-slate-200 bg-slate-50/60">
-        {/* HEADER */}
-        <button
-          type="button"
-          onClick={() => setShowPresets((v) => !v)}
-          className="
-            w-full flex items-center justify-between gap-3
-            px-4 py-3
-            text-left
-            hover:bg-slate-100/70
-            transition
-          "
-        >
-          <div className="flex items-center gap-3">
-            <span className="text-sm font-semibold text-slate-800">
-              Modèles Eleveai officiel generés
-            </span>
-            <span className="text-xs text-slate-500">
-              Démarrer plus vite
-            </span>
-          </div>
+{/* ===============================
+    CARROUSEL MODÈLES RAPIDES (FACULTATIF)
+=============================== */}
+<div className="mt-6 rounded-2xl border border-slate-200 bg-slate-50/60">
+  {/* HEADER */}
+  <button
+    type="button"
+    onClick={() => setShowPresets((v) => !v)}
+    className="
+      w-full flex items-center justify-between gap-3
+      px-4 py-3
+      text-left
+      hover:bg-slate-100/70
+      transition
+    "
+  >
+    <div className="flex items-center gap-3">
+      <span className="text-sm font-semibold text-slate-800">
+        Modèles EleveAI officiels générés
+      </span>
+      <span className="text-xs text-slate-500">Démarrer plus vite</span>
+    </div>
 
-          <span
-            className={`text-slate-500 transition-transform duration-200 ${
-              showPresets ? "rotate-180" : ""
-            }`}
-          >
-            ▼
-          </span>
-        </button>
+    <span
+      className={`text-slate-500 transition-transform duration-200 ${
+        showPresets ? "rotate-180" : ""
+      }`}
+    >
+      ▼
+    </span>
+  </button>
 
-      {/* CONTENU */}
-      <div
-        className={`
-          overflow-hidden transition-[max-height,opacity] duration-300 ease-out
-          ${showPresets ? "max-h-[900px] opacity-100" : "max-h-0 opacity-0"}
-        `}
-      >
-      <div className="px-4 pb-4 pt-2">
-        {/* ✅ Presets Supabase (presets_eleveai) */}
-        {!form.classe || !form.matiere ? (
-          <div className="rounded-xl border border-slate-200 bg-white p-4">
-            <p className="text-sm font-semibold text-slate-800">Choisis d’abord :</p>
-            <p className="text-[12px] text-slate-600">Classe • Matière</p>
-          </div>
-        ) : (
-          <>
-            {/* 🔍 Recherche presets (affichée dès que classe+matière sont choisis) */}
-            <div className="mb-3">
-              <label className="text-[11px] font-semibold text-slate-600">Rechercher un preset</label>
-              <div className="relative mt-1">
-                <Search className="w-4 h-4 text-slate-500 absolute left-3 top-1/2 -translate-y-1/2" />
-                <input
-                  value={presetQuery}
-                  onChange={(e) => setPresetQuery(e.target.value)}
-                  placeholder="Titre, tags, description…"
-                  className="w-full border rounded-lg pl-9 pr-3 py-2 text-sm bg-white
-                            focus:outline-none focus:ring-2 focus:ring-sky-300"
-                />
-              </div>
-
-              {!!presetQuery.trim() && (
-                <div className="mt-2 flex items-center justify-between">
-                  <p className="text-[11px] text-slate-600">
-                    Résultats : <span className="font-semibold">{filteredPublicPresets.length}</span>
-                  </p>
-                  <button
-                    type="button"
-                    onClick={() => setPresetQuery("")}
-                    className="text-[11px] font-semibold text-slate-700 underline underline-offset-2 hover:text-slate-900"
-                  >
-                    Effacer
-                  </button>
-                </div>
-              )}
+  {/* CONTENU */}
+  <div
+    className={`
+      overflow-hidden transition-[max-height,opacity] duration-300 ease-out
+      ${showPresets ? "max-h-[900px] opacity-100" : "max-h-0 opacity-0"}
+    `}
+  >
+    <div className="px-4 pb-4 pt-2">
+      {/* ✅ Presets Supabase (presets_eleveai) */}
+      {!form.classe || !form.matiere ? (
+        <div className="rounded-xl border border-slate-200 bg-white p-4">
+          <p className="text-sm font-semibold text-slate-800">Choisis d’abord :</p>
+          <p className="text-[12px] text-slate-600">Classe • Matière</p>
+        </div>
+      ) : (
+        <>
+          {/* 🔍 Recherche presets */}
+          <div className="mb-3">
+            <label className="text-[11px] font-semibold text-slate-600">
+              Rechercher un preset
+            </label>
+            <div className="relative mt-1">
+              <Search className="w-4 h-4 text-slate-500 absolute left-3 top-1/2 -translate-y-1/2" />
+              <input
+                value={presetQuery}
+                onChange={(e) => setPresetQuery(e.target.value)}
+                placeholder="Titre, tags, description…"
+                className="w-full border rounded-lg pl-9 pr-3 py-2 text-sm bg-white
+                          focus:outline-none focus:ring-2 focus:ring-sky-300"
+              />
             </div>
 
-            {publicPresetsLoading ? (
-              <div className="rounded-xl border border-slate-200 bg-white p-4">
-                <p className="text-sm text-slate-700">Chargement des presets…</p>
-              </div>
-            ) : publicPresetsError ? (
-              <div className="rounded-xl border border-rose-200 bg-rose-50 p-4">
-                <p className="text-sm font-semibold text-rose-800">⚠️ {publicPresetsError}</p>
-              </div>
-            ) : filteredPublicPresets.length === 0 ? (
-              <div className="rounded-xl border border-slate-200 bg-white p-4">
-                <p className="text-sm text-slate-700">Aucun preset trouvé pour ces filtres.</p>
-                <p className="mt-1 text-[12px] text-slate-500">
-                  (Vérifie audience/classe/matiere/niveau côté DB.)
+            {!!presetQuery.trim() && (
+              <div className="mt-2 flex items-center justify-between">
+                <p className="text-[11px] text-slate-600">
+                  Résultats :{" "}
+                  <span className="font-semibold">{filteredPublicPresets.length}</span>
                 </p>
-              </div>
-            ) : (
-              <div className="grid sm:grid-cols-2 gap-3">
-                {filteredPublicPresets.map((p) => (
-                  <button
-                    key={p.id}
-                    type="button"
-                    onClick={() => appliquerPresetPublic(p)}
-                    className="text-left border rounded-xl px-3 py-3 bg-white hover:border-sky-200 transition"
-                  >
-                    <div className="flex items-start justify-between gap-2">
-                      <div className="font-semibold text-slate-900">{p.title}</div>
-                      {p.is_featured && (
-                        <span className="text-[10px] px-2 py-0.5 rounded-full bg-amber-100 text-amber-900 font-semibold">
-                          ⭐ Favori
-                        </span>
-                      )}
-                    </div>
-
-                    {p.description ? (
-                      <div className="text-[11px] text-slate-600 mt-1">{p.description}</div>
-                    ) : null}
-
-                    {p.tags?.length ? (
-                      <div className="flex flex-wrap gap-1.5 mt-2">
-                        {p.tags.slice(0, 6).map((tag) => (
-                          <span
-                            key={tag}
-                            className="text-[10px] px-2 py-0.5 rounded-full bg-slate-100 text-slate-800 font-semibold"
-                          >
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-                    ) : null}
-                  </button>
-                ))}
+                <button
+                  type="button"
+                  onClick={() => setPresetQuery("")}
+                  className="text-[11px] font-semibold text-slate-700 underline underline-offset-2 hover:text-slate-900"
+                >
+                  Effacer
+                </button>
               </div>
             )}
-          </>
-        )}
-      </div>
-
-
-            {/* Optionnel : tes anciens modèles internes en dessous */}
-         {/*   <div className="px-4 pb-4">
-              <PresetCarousel
-                title="Modèles prêts à l’emploi (internes)"
-                subtitle="Ceux codés en dur (PROFS_PRESETS)."
-                items={PROFS_PRESET_ITEMS}
-                onSelect={(id) => appliquerPresetModele(id as ProfsPresetKey)}
-              />
-            </div> */}
           </div>
 
+          {publicPresetsLoading ? (
+            <div className="rounded-xl border border-slate-200 bg-white p-4">
+              <p className="text-sm text-slate-700">Chargement des presets…</p>
+            </div>
+          ) : publicPresetsError ? (
+            <div className="rounded-xl border border-rose-200 bg-rose-50 p-4">
+              <p className="text-sm font-semibold text-rose-800">⚠️ {publicPresetsError}</p>
+            </div>
+          ) : filteredPublicPresets.length === 0 ? (
+            <div className="rounded-xl border border-slate-200 bg-white p-4">
+              <p className="text-sm text-slate-700">Aucun preset trouvé pour ces filtres.</p>
+              <p className="mt-1 text-[12px] text-slate-500">
+                (Vérifie audience/classe/matière/niveau côté DB.)
+              </p>
+            </div>
+          ) : (
+            <>
+              {/* ✅ Tri : Favoris d'abord (puis titre) */}
+              {/*
+                Si tu veux conserver l'ordre DB au lieu de A→Z,
+                remplace localeCompare par 0 (ou un champ ranking si tu en as un).
+              */}
+              {(() => {
+                const sorted = [...filteredPublicPresets].sort((a, b) => {
+                  const fa = Number(!!a.is_featured);
+                  const fb = Number(!!b.is_featured);
+                  if (fb !== fa) return fb - fa;
+                  return (a.title ?? "").localeCompare(b.title ?? "", "fr");
+                });
 
-      </div>
-      {/* ===============================
-          FIN CARROUSEL MODÈLES RAPIDES (FACULTATIF)
-      =============================== */}
+                // Adaptation vers PresetCarouselItem (ton composant)
+                const carouselItems = sorted.map((p) => ({
+                  id: p.id,
+                  label: p.title,
+                  description: p.description ?? "",
+                  badge: p.is_featured ? "⭐ Favori" : undefined,
+                  badges: (p.tags ?? []).slice(0, 8),
+                }));
+
+                return (
+                  <>
+                    {/* ==============
+                        MOBILE : CARROUSEL
+                    ============== */}
+                    <div className="sm:hidden">
+                      <PresetCarousel
+                        title=""
+                        subtitle=""
+                        tone="sky"
+                        showControls={false} // tu as déjà une recherche au-dessus
+                        items={carouselItems}
+                        onSelect={(id) => {
+                          const p = sorted.find((x) => x.id === id);
+                          if (p) appliquerPresetPublic(p);
+                        }}
+                      />
+                    </div>
+
+                    {/* ==============
+                        DESKTOP : TABLEAU + SCROLL (≈10 lignes visibles)
+                    ============== */}
+                    <div className="hidden sm:block">
+                      <div className="rounded-xl border border-slate-200 bg-white overflow-hidden">
+                        {/* Head */}
+                        <div className="grid grid-cols-[1.2fr_1.8fr_1fr_110px] gap-0 px-3 py-2 bg-slate-50 border-b border-slate-200">
+                          <div className="text-[11px] font-semibold text-slate-600">Titre</div>
+                          <div className="text-[11px] font-semibold text-slate-600">Description</div>
+                          <div className="text-[11px] font-semibold text-slate-600">Tags</div>
+                          <div className="text-[11px] font-semibold text-slate-600 text-right">
+                            Action
+                          </div>
+                        </div>
+
+                        {/* Body : hauteur ~ 10 lignes */}
+                        <div className="max-h-[520px] overflow-y-auto">
+                          {sorted.map((p) => (
+                            <div
+                              key={p.id}
+                              className="grid grid-cols-[1.2fr_1.8fr_1fr_110px] gap-0 px-3 py-2 border-b last:border-b-0 hover:bg-slate-50"
+                            >
+                              {/* Titre */}
+                              <div className="min-w-0 pr-3">
+                                <div className="flex items-center gap-2">
+                                  <div className="text-[13px] font-semibold text-slate-900 line-clamp-1">
+                                    {p.title}
+                                  </div>
+                                  {p.is_featured && (
+                                    <span className="shrink-0 text-[10px] px-2 py-0.5 rounded-full bg-amber-100 text-amber-900 font-semibold">
+                                      ⭐
+                                    </span>
+                                  )}
+                                </div>
+                              </div>
+
+                              {/* Description */}
+                              <div className="min-w-0 pr-3">
+                                <div className="text-[11px] text-slate-600 line-clamp-2 leading-snug">
+                                  {p.description ?? "—"}
+                                </div>
+                              </div>
+
+                              {/* Tags */}
+                              <div className="min-w-0 pr-3">
+                                {p.tags?.length ? (
+                                  <div className="flex flex-wrap gap-1.5">
+                                    {p.tags.slice(0, 5).map((tag: string) => (
+                                      <span
+                                        key={tag}
+                                        className="text-[10px] px-2 py-0.5 rounded-full bg-slate-100 text-slate-800 font-semibold"
+                                      >
+                                        {tag}
+                                      </span>
+                                    ))}
+                                    {p.tags.length > 5 ? (
+                                      <span className="text-[10px] text-slate-500">
+                                        +{p.tags.length - 5}
+                                      </span>
+                                    ) : null}
+                                  </div>
+                                ) : (
+                                  <span className="text-[11px] text-slate-400">—</span>
+                                )}
+                              </div>
+
+                              {/* Action */}
+                              <div className="flex items-center justify-end">
+                                <button
+                                  type="button"
+                                  onClick={() => appliquerPresetPublic(p)}
+                                  className="text-[11px] font-semibold px-3 py-1.5 rounded-lg bg-sky-600 text-white hover:bg-sky-700 transition"
+                                >
+                                  Appliquer
+                                </button>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+
+                      <p className="mt-2 text-[11px] text-slate-500">
+                        Affichage compact : tags limités à 5 (+N). Scroll limité à ~10 lignes.
+                      </p>
+                    </div>
+                  </>
+                );
+              })()}
+            </>
+          )}
+        </>
+      )}
+    </div>
+
+    {/* Optionnel : tes anciens modèles internes */}
+    {/*
+    <div className="px-4 pb-4">
+      <PresetCarousel
+        title="Modèles prêts à l’emploi (internes)"
+        subtitle="Ceux codés en dur (PROFS_PRESETS)."
+        items={PROFS_PRESET_ITEMS}
+        onSelect={(id) => appliquerPresetModele(id as ProfsPresetKey)}
+      />
+    </div>
+    */}
+  </div>
+</div>
+{/* ===============================
+    FIN CARROUSEL MODÈLES RAPIDES (FACULTATIF)
+=============================== */}
+
 
       {/* ===============================
           debut Paramètres pédagogiques
