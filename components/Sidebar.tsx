@@ -118,7 +118,7 @@ const itemsApp: Item[] = useMemo(
 {
   href: "/tchat",
   label: "Prompt EleveAI",
-  description: "gpt-5.1-mini",
+  description: "gpt-4.1-mini",
   icon: <MessageSquareText className="h-4 w-4" />,
 },
 /*
