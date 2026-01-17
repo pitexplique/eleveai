@@ -124,7 +124,7 @@ export const PARENTS_PRESETS: Record<
     description:
       "Pour un élève de Première / Terminale qui veut se préparer sereinement aux épreuves de maths.",
     valeurs: {
-      classe: "Tle",
+      classe: "Terminale",
       matiere: "maths",
       objectif:
         "L’aider à revoir les chapitres importants pour le bac, identifier ses points faibles et s’entraîner avec des exercices progressifs.",

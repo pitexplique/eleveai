@@ -167,7 +167,7 @@ export const PROFS_PRESETS: Record<
     description: "Séance de découverte/réactivation + exercices progressifs.",
     valeurs: {
       titre: "Seconde – Introduction aux fonctions",
-      classe: "2de",
+      classe: "Seconde",
       matiere: "maths",
       niveau: "standard",
       type: "Préparation d’une séance",
@@ -190,7 +190,7 @@ export const PROFS_PRESETS: Record<
     description: "Formes, sommet, racines, variations, méthode.",
     valeurs: {
       titre: "1re spé – Fonctions du second degré",
-      classe: "1re",
+      classe: "Première",
       matiere: "maths",
       niveau: "standard",
       type: "Préparation d’une séance",
@@ -213,7 +213,7 @@ export const PROFS_PRESETS: Record<
     description: "Sujet bac complet + corrigé rédigé + méthode.",
     valeurs: {
       titre: "Terminale spé – Sujet type bac complet",
-      classe: "Tle",
+      classe: "Terminale",
       matiere: "maths",
       niveau: "expert",
       type: "Préparation d’un sujet type bac",
@@ -236,7 +236,7 @@ export const PROFS_PRESETS: Record<
     description: "Lecture analytique guidée pour l’oral.",
     valeurs: {
       titre: "Première – Lecture analytique pour l’oral",
-      classe: "1re",
+      classe: "Première",
       matiere: "francais",
       niveau: "standard",
       type: "Préparation de lecture analytique",
@@ -259,7 +259,7 @@ export const PROFS_PRESETS: Record<
     description: "Méthode + plan + exemple guidé.",
     valeurs: {
       titre: "Terminale – Dissertation de philosophie",
-      classe: "Tle",
+      classe: "Terminale",
       matiere: "philosophie",
       niveau: "standard",
       type: "Préparation d’un sujet de dissertation",
@@ -282,7 +282,7 @@ export const PROFS_PRESETS: Record<
     description: "Activité + exercices sur mouvements rectilignes.",
     valeurs: {
       titre: "Seconde – Mouvements en physique",
-      classe: "2de",
+      classe: "Seconde",
       matiere: "physique_chimie",
       niveau: "standard",
       type: "Conception d’activité expérimentale",

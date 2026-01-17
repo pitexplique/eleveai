@@ -176,7 +176,7 @@ export const ELEVES_PRESETS: Record<
     description: "Organisation, révisions, apprendre efficacement.",
     badges: ["Seconde", "Méthode"],
     valeurs: {
-      classe: "2de",
+      classe: "Seconde",
       matiere: "methodologie",
       chapitre: "Méthode : s’organiser, réviser, mémoriser",
       typeAide: "methode_de_travail",
@@ -194,7 +194,7 @@ export const ELEVES_PRESETS: Record<
     description: "Méthodes bac : variations, dérivée, lecture graphique.",
     badges: ["Terminale", "Maths", "Bac"],
     valeurs: {
-      classe: "Tle",
+      classe: "Terminale",
       matiere: "maths",
       chapitre: "Étude de fonctions : dérivation, variations, limites simples",
       typeAide: "reviser_un_chapitre",
