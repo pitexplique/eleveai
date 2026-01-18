@@ -30,6 +30,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: u("/profs"), lastModified: LASTMOD_CORE, changeFrequency: "weekly", priority: 0.92 },
     { url: u("/eleves"), lastModified: LASTMOD_CORE, changeFrequency: "weekly", priority: 0.92 },
     { url: u("/parents"), lastModified: LASTMOD_CORE, changeFrequency: "weekly", priority: 0.9 },
+    { url: u("/presets"), lastModified: LASTMOD_CORE, changeFrequency: "weekly", priority: 0.9 },
 
     { url: u("/atelier-IA"), lastModified: LASTMOD_CORE, changeFrequency: "weekly", priority: 0.95 },
     { url: u("/atelier-IA/vision"), lastModified: LASTMOD_CORE, changeFrequency: "monthly", priority: 0.75 },
