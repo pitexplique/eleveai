@@ -12,18 +12,25 @@ export default function AccueilPage() {
       <section className="border-b border-slate-800 bg-gradient-to-b from-slate-900/70 to-slate-950">
         <div className="mx-auto max-w-7xl px-3 sm:px-5 lg:px-6 py-10 sm:py-14">
           {/* Badges sobres */}
-          <div className="flex flex-wrap items-center gap-2 text-xs">
-            <span className="inline-flex items-center gap-2 rounded-full border border-emerald-400/40 bg-emerald-500/10 px-3 py-1 font-semibold text-emerald-200">
-              🧠 IA autorisée mais encadrée
-            </span>
-            <span className="inline-flex items-center gap-2 rounded-full border border-slate-700 bg-slate-900/60 px-3 py-1 font-semibold text-slate-200">
-              🏫 École · Collège · Lycée
-            </span>
-            <span className="inline-flex items-center gap-2 rounded-full border border-slate-700 bg-slate-900/60 px-3 py-1 font-semibold text-slate-200">
-              🌿 Les outils doivent s’adapter aux humains, pas l’inverse.
-            </span>
-            <span className="text-slate-400">EleveAI — l’IA au service de l’apprentissage</span>
+          {/* Bloc éditorial principal */}
+          <div className="space-y-3 text-slate-100">
+            <h1 className="text-3xl font-bold tracking-tight">
+              EleveAI — IA pédagogique encadrée
+            </h1>
+
+            <h2 className="text-lg font-semibold text-emerald-300">
+              La plateforme de référence pour créer des prompts pédagogiques avec l’IA
+            </h2>
+
+            <h3 className="text-sm font-medium text-slate-300">
+              Bibliothèque officielle pour professeurs, élèves, parents et acteurs de la communauté éducative
+            </h3>
+
+            <p className="text-xs text-slate-400 pt-1">
+              🧠 IA autorisée mais encadrée · 🏫 École · Collège · Lycée · 🌿 Les outils doivent s’adapter aux humains, pas l’inverse.
+            </p>
           </div>
+
 
           <div className="mt-7 grid gap-10 lg:grid-cols-[3fr,2fr] items-start">
             {/* Gauche : message ultra clair (silence, confiance) */}
