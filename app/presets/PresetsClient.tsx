@@ -332,17 +332,43 @@ export default function PresetsClient() {
         </section>
 
         {/* Aide */}
-        <section className="rounded-2xl border border-slate-200 bg-white p-4 space-y-2">
-          <h3 className="font-extrabold">Réalisation</h3>
-          <ul className="text-sm text-slate-700 list-disc pl-5 space-y-1">
-            <li>
-              Eleveai.
-            </li>
-            <li>
-              Conforme Bo.
-            </li>
-          </ul>
+        {/* Aide / Ce que font (et ne font pas) les presets */}
+        <section className="rounded-2xl border border-slate-200 bg-white p-4 space-y-3">
+          <h3 className="font-extrabold text-slate-900">
+            À propos des presets EleveAI
+          </h3>
+
+          {/* CE QUE ÇA FAIT */}
+          <div>
+            <h4 className="flex items-center gap-2 font-semibold text-emerald-700">
+              <span>✔</span>
+              Ce que font les presets
+            </h4>
+            <ul className="mt-1 text-sm text-slate-700 list-disc pl-5 space-y-1">
+              <li>Structurent une activité conforme aux programmes officiels (BO).</li>
+              <li>Guident l’élève étape par étape (raisonnement, méthode, vérification).</li>
+              <li>Aident le professeur à gagner du temps sans perdre la maîtrise pédagogique.</li>
+              <li>Encouragent l’explicitation, la justification et la trace écrite.</li>
+              <li>Intègrent des méthodes visuelles (ex. Singapour / CPA) quand c’est pertinent.</li>
+            </ul>
+          </div>
+
+          {/* CE QUE ÇA NE FAIT PAS */}
+          <div>
+            <h4 className="flex items-center gap-2 font-semibold text-rose-700">
+              <span>✖</span>
+              Ce que les presets ne font pas
+            </h4>
+            <ul className="mt-1 text-sm text-slate-700 list-disc pl-5 space-y-1">
+              <li>Ne font pas les exercices à la place de l’élève.</li>
+              <li>Ne donnent pas de corrigé clé en main sans réflexion.</li>
+              <li>Ne remplacent ni le professeur, ni sa méthode.</li>
+              <li>Ne sont pas des « générateurs automatiques » de réponses.</li>
+              <li>Ne court-circuitent pas l’apprentissage ou l’évaluation.</li>
+            </ul>
+          </div>
         </section>
+
       </div>
     </main>
   );
