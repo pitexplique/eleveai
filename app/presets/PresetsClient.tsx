@@ -333,7 +333,8 @@ export default function PresetsClient() {
 
         {/* Aide */}
         {/* Aide / Ce que font (et ne font pas) les presets */}
-        <section className="rounded-2xl border border-slate-200 bg-white p-4 space-y-3">
+        {/* Aide / Cadre EleveAI */}
+        <section className="rounded-2xl border border-slate-200 bg-white p-4 space-y-4">
           <h3 className="font-extrabold text-slate-900">
             À propos des presets EleveAI
           </h3>
@@ -341,33 +342,51 @@ export default function PresetsClient() {
           {/* CE QUE ÇA FAIT */}
           <div>
             <h4 className="flex items-center gap-2 font-semibold text-emerald-700">
-              <span>✔</span>
+              <span aria-hidden>✔</span>
               Ce que font les presets
             </h4>
             <ul className="mt-1 text-sm text-slate-700 list-disc pl-5 space-y-1">
               <li>Structurent une activité conforme aux programmes officiels (BO).</li>
-              <li>Guident l’élève étape par étape (raisonnement, méthode, vérification).</li>
-              <li>Aident le professeur à gagner du temps sans perdre la maîtrise pédagogique.</li>
-              <li>Encouragent l’explicitation, la justification et la trace écrite.</li>
-              <li>Intègrent des méthodes visuelles (ex. Singapour / CPA) quand c’est pertinent.</li>
+              <li>Guident l’élève pas à pas dans le raisonnement et la méthode.</li>
+              <li>Font gagner du temps au professeur sans perte de maîtrise pédagogique.</li>
+              <li>Encouragent la justification, l’explicitation et la trace écrite.</li>
+              <li>Intègrent des méthodes visuelles (ex. Singapour / CPA) lorsque pertinent.</li>
             </ul>
           </div>
 
           {/* CE QUE ÇA NE FAIT PAS */}
           <div>
             <h4 className="flex items-center gap-2 font-semibold text-rose-700">
-              <span>✖</span>
+              <span aria-hidden>✖</span>
               Ce que les presets ne font pas
             </h4>
             <ul className="mt-1 text-sm text-slate-700 list-disc pl-5 space-y-1">
               <li>Ne font pas les exercices à la place de l’élève.</li>
-              <li>Ne donnent pas de corrigé clé en main sans réflexion.</li>
-              <li>Ne remplacent ni le professeur, ni sa méthode.</li>
-              <li>Ne sont pas des « générateurs automatiques » de réponses.</li>
+              <li>Ne fournissent pas de corrigé clé en main sans réflexion.</li>
+              <li>Ne remplacent ni le professeur, ni sa pédagogie.</li>
+              <li>Ne sont pas des générateurs automatiques de réponses.</li>
               <li>Ne court-circuitent pas l’apprentissage ou l’évaluation.</li>
             </ul>
           </div>
+
+          {/* INFO-BULLE IA ENCADRÉE */}
+          <div className="flex items-start gap-2 rounded-xl bg-slate-50 p-3 text-sm text-slate-700">
+            <span className="mt-0.5 text-slate-500" aria-hidden>ℹ️</span>
+            <p>
+              <strong>IA encadrée :</strong> les presets EleveAI proposent un cadre clair,
+              des consignes guidées et des attentes explicites.
+              L’intelligence artificielle accompagne la réflexion,
+              sans jamais se substituer au travail de l’élève.
+            </p>
+          </div>
+
+          {/* PHRASE SIGNATURE */}
+          <p className="pt-2 text-xs italic text-slate-600 border-t border-slate-100">
+            EleveAI — Une IA pédagogique encadrée, au service des apprentissages,
+            du professeur et de l’autonomie de l’élève.
+          </p>
         </section>
+
 
       </div>
     </main>
