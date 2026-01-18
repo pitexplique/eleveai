@@ -13,23 +13,25 @@ export default function AccueilPage() {
         <div className="mx-auto max-w-7xl px-3 sm:px-5 lg:px-6 py-10 sm:py-14">
           {/* Badges sobres */}
           {/* Bloc éditorial principal */}
+          {/* HERO — version figée 6–12 mois */}
           <div className="space-y-3 text-slate-100">
             <h1 className="text-3xl font-bold tracking-tight">
               EleveAI — IA pédagogique encadrée
             </h1>
 
             <h2 className="text-lg font-semibold text-emerald-300">
-              La plateforme de référence pour créer des prompts pédagogiques avec l’IA
+              La plateforme de référence pour créer des prompts pédagogiques avec l’IA, sans “fait à la place”
             </h2>
 
             <h3 className="text-sm font-medium text-slate-300">
-              Bibliothèque officielle pour professeurs, élèves, parents et acteurs de la communauté éducative
+              Une bibliothèque officielle de consignes prêtes à l’emploi pour professeurs, élèves, parents et communauté éducative
             </h3>
 
             <p className="text-xs text-slate-400 pt-1">
-              🧠 IA autorisée mais encadrée · 🏫 École · Collège · Lycée · 🌿 Les outils doivent s’adapter aux humains, pas l’inverse.
+              🧠 IA autorisée mais encadrée · 🏫 École · Collège · Lycée · 🔎 Recherche par classe et matière · 📚 Bibliothèque de presets en expansion continue
             </p>
           </div>
+
 
 
           <div className="mt-7 grid gap-10 lg:grid-cols-[3fr,2fr] items-start">
