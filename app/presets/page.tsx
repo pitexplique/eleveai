@@ -20,7 +20,7 @@ export default function PresetsPage() {
 
           <p className="text-sm text-slate-600">
             Les presets EleveAI encadrent l’usage de l’intelligence artificielle :
-            ils guident la réflexion de l’élève sans jamais faire à sa place.
+            ils guident la réflexion dsans jamais faire à sa place.
           </p>
 
           <ul className="text-sm text-slate-700 list-disc pl-5">

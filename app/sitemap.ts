@@ -2,7 +2,8 @@
 import type { MetadataRoute } from "next";
 import { getAllBlogPosts } from "@/data/blogPosts";
 
-const BASE_URL = "https://eleveai.fr";
+// ✅ Choisis UNE version canonique (ici: www)
+const BASE_URL = "https://www.eleveai.fr";
 const u = (path: string) => `${BASE_URL}${path}`;
 
 const LASTMOD_HOME = new Date("2026-01-04");
@@ -11,21 +12,11 @@ const LASTMOD_LEGAL = new Date("2026-01-04");
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes: MetadataRoute.Sitemap = [
-    // ✅ racine du site
-    {
-      url: u("/accueil"),
-      lastModified: LASTMOD_HOME,
-      changeFrequency: "weekly",
-      priority: 1.0,
-    },
+    // ✅ vraie racine
+    { url: u("/"), lastModified: LASTMOD_HOME, changeFrequency: "weekly", priority: 1.0 },
 
-    // ✅ page accueil (si tu la gardes indexable)
-    {
-      url: u("/accueil"),
-      lastModified: LASTMOD_HOME,
-      changeFrequency: "weekly",
-      priority: 0.95,
-    },
+    // ✅ accueil
+    { url: u("/accueil"), lastModified: LASTMOD_HOME, changeFrequency: "weekly", priority: 0.95 },
 
     { url: u("/profs"), lastModified: LASTMOD_CORE, changeFrequency: "weekly", priority: 0.92 },
     { url: u("/eleves"), lastModified: LASTMOD_CORE, changeFrequency: "weekly", priority: 0.92 },
@@ -72,4 +63,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   return [...staticRoutes, ...blogRoutes];
 }
+
 
