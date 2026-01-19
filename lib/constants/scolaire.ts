@@ -38,10 +38,10 @@ export const CLASSES = [
 export const MATIERES: readonly OptionSelect[] = [
   // 📘 Fondamentaux
   { value: "", label: "📘 Fondamentaux", disabled: true },
-  { value: "maths", label: "Mathématiques" },
+  { value: "Mathématiques", label: "Mathématiques" },
   { value: "Français", label: "Français" },
-  { value: "histoire-geo", label: "Histoire-Géographie" },
-  { value: "physique-chimie", label: "Physique-Chimie" },
+  { value: "Histoire-Géographie", label: "Histoire-Géographie" },
+  { value: "Physique-Chimie", label: "Physique-Chimie" },
   { value: "svt", label: "SVT" },
 
   // ➕ Mathématiques – lycée

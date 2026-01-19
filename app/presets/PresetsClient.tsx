@@ -343,8 +343,6 @@ export default function PresetsClient() {
                     <th className="p-2">classe</th>
                     <th className="p-2">matiere</th>
                     <th className="p-2">niveau</th>
-                    <th className="p-2">featured</th>
-                    <th className="p-2">rank</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -354,8 +352,6 @@ export default function PresetsClient() {
                       <td className="p-2">{r.classe}</td>
                       <td className="p-2">{r.matiere}</td>
                       <td className="p-2">{r.niveau}</td>
-                      <td className="p-2">{String(r.is_featured)}</td>
-                      <td className="p-2">{r.featured_rank ?? ""}</td>
                     </tr>
                   ))}
                 </tbody>
