@@ -1,5 +1,4 @@
 // app/presets/PresetsClient.tsx
-// app/presets/PresetsClient.tsx
 "use client";
 
 import { useCallback, useEffect, useMemo, useState } from "react";
@@ -58,6 +57,16 @@ export default function PresetsClient() {
   // ✅ compteur total base (non filtré, toutes audiences, archivés inclus)
   const [totalDbCount, setTotalDbCount] = useState<number | null>(null);
 
+  // ✅ pagination style Supabase
+  const [page, setPage] = useState(1);
+  const [pageSize, setPageSize] = useState(100); // comme Supabase
+  const [filteredCount, setFilteredCount] = useState<number | null>(null);
+
+  const totalPages = useMemo(() => {
+    if (!filteredCount) return 1;
+    return Math.max(1, Math.ceil(filteredCount / pageSize));
+  }, [filteredCount, pageSize]);
+
   const load = useCallback(async () => {
     setError("");
     setLoading(true);
@@ -66,7 +75,8 @@ export default function PresetsClient() {
       let q = supabase
         .from("presets_eleveai")
         .select(
-          "id, audience, classe, matiere, niveau, title, tags, is_featured, featured_rank, is_archived, created_at"
+          "id, audience, classe, matiere, niveau, title, tags, is_featured, featured_rank, is_archived, created_at",
+          { count: "exact" } // ✅ pour "records"
         )
         .eq("audience", "profs")
         .eq("is_archived", false);
@@ -85,34 +95,35 @@ export default function PresetsClient() {
           const tag = raw;
           q = q.contains("tags", [tag]);
         } else {
-          // 👉 recommandé: recherche sur title + (optionnel) tags via contains exact si tu veux
-          // Ici on reste simple et safe.
           const s = escapeForOr(raw);
-
-          // Option A (recommandée, robuste) : uniquement sur title
           q = q.ilike("title", `%${s}%`);
-
-          // Option B (si tu veux absolument OR sur plusieurs champs, plus fragile) :
-          // q = q.or(`title.ilike.%${s}%`);
         }
       }
 
-      const { data, error } = await q
+      // tri
+      q = q
         .order("is_featured", { ascending: false })
         .order("featured_rank", { ascending: true, nullsFirst: false })
-        .order("created_at", { ascending: false })
-        .limit(50);
+        .order("created_at", { ascending: false });
+
+      // pagination
+      const from = (page - 1) * pageSize;
+      const to = from + pageSize - 1;
+
+      const { data, error, count } = await q.range(from, to);
 
       if (error) throw new Error(error.message);
 
       setRows((data ?? []) as DbPresetEleveai[]);
+      setFilteredCount(count ?? 0);
     } catch (e: any) {
       setError(e?.message || "Erreur chargement.");
       setRows([]);
+      setFilteredCount(null);
     } finally {
       setLoading(false);
     }
-  }, [supabase, classe, matiere, niveau, search]);
+  }, [supabase, classe, matiere, niveau, search, page, pageSize]);
 
   // ✅ Count marketing (filtré, sans search)
   const loadCount = useCallback(async () => {
@@ -157,6 +168,16 @@ export default function PresetsClient() {
   useEffect(() => {
     loadTotalDbCount();
   }, [loadTotalDbCount]);
+
+  // ✅ Quand filtres/search/pageSize changent -> retour page 1
+  useEffect(() => {
+    setPage(1);
+  }, [classe, matiere, niveau, search, pageSize]);
+
+  // ✅ Rabat si page > totalPages
+  useEffect(() => {
+    if (page > totalPages) setPage(totalPages);
+  }, [page, totalPages]);
 
   // ✅ Auto-load (debounce) : résultats + compteur marketing
   useEffect(() => {
@@ -329,15 +350,77 @@ export default function PresetsClient() {
             </div>
           </div>
 
+          {/* ✅ Pagination style Supabase (ne touche que le tableau) */}
+          <div className="mb-3 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+            <div className="flex items-center gap-2 text-xs text-slate-600">
+              <span className="inline-flex items-center gap-2">
+                <span>Page</span>
+                <input
+                  type="number"
+                  min={1}
+                  max={totalPages}
+                  value={page}
+                  onChange={(e) => {
+                    const v = Number(e.target.value || 1);
+                    setPage(Math.min(Math.max(1, v), totalPages));
+                  }}
+                  className="h-9 w-20 rounded-lg border border-slate-200 px-2 bg-white"
+                />
+                <span>of</span>
+                <span className="font-semibold">{totalPages}</span>
+              </span>
+
+              <span className="mx-2 text-slate-300">|</span>
+
+              <span className="inline-flex items-center gap-2">
+                <select
+                  value={pageSize}
+                  onChange={(e) => setPageSize(Number(e.target.value))}
+                  className="h-9 rounded-lg border border-slate-200 px-2 bg-white"
+                >
+                  <option value={25}>25 rows</option>
+                  <option value={50}>50 rows</option>
+                  <option value={100}>100 rows</option>
+                  <option value={200}>200 rows</option>
+                </select>
+
+                <span className="mx-2 text-slate-300">|</span>
+
+                <span>
+                  {filteredCount === null
+                    ? "— records"
+                    : `${filteredCount.toLocaleString("fr-FR")} records`}
+                </span>
+              </span>
+            </div>
+
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => setPage((p) => Math.max(1, p - 1))}
+                disabled={page <= 1 || loading}
+                className="h-9 px-3 rounded-lg border border-slate-200 bg-white text-sm disabled:opacity-50"
+              >
+                ←
+              </button>
+              <button
+                onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+                disabled={page >= totalPages || loading}
+                className="h-9 px-3 rounded-lg border border-slate-200 bg-white text-sm disabled:opacity-50"
+              >
+                →
+              </button>
+            </div>
+          </div>
+
           {/* Tableau */}
           {rows.length === 0 ? (
             <p className="text-sm text-slate-600">
               {loading ? "Chargement…" : "Aucune ligne."}
             </p>
           ) : (
-            <div className="overflow-auto border rounded-xl">
+            <div className="overflow-auto border rounded-xl max-h-[70vh]">
               <table className="min-w-full text-sm">
-                <thead className="bg-slate-50">
+                <thead className="bg-slate-50 sticky top-0 z-10">
                   <tr className="text-left">
                     <th className="p-2">title</th>
                     <th className="p-2">classe</th>
