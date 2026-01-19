@@ -1,30 +1,50 @@
+// app/presets/PresetsClient.tsx
+// app/presets/PresetsClient.tsx
 "use client";
 
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
-import { CLASSES, MATIERES } from "@/lib/constants/scolaire";
+import {
+  CLASSES,
+  MATIERES,
+  ClasseValue,
+  MatiereValue,
+} from "@/lib/constants/scolaire";
 
-type Niveau = "basique" | "standard" | "remediation" | "expert" | "ulis";
+type Niveau = "ulis" | "remediation" | "basique" | "standard" | "expert";
+type Audience = "profs" | "eleves" | "parents" | "admin" | "viescolaire";
 
 type DbPresetEleveai = {
   id: string;
   created_at?: string;
-  audience: string;
+  audience: Audience;
   classe: string;
   matiere: string;
-  niveau: string;
+  niveau: Niveau;
   title: string;
-  tags?: string[];
+  tags: string[];
   is_featured: boolean;
   featured_rank: number | null;
   is_archived: boolean;
 };
 
+function escapeForOr(v: string) {
+  // PostgREST .or(...) n'aime pas les virgules et certains caractères.
+  // On nettoie "soft" : on évite les caractères qui cassent la grammaire.
+  return v
+    .replaceAll(",", " ")
+    .replaceAll("(", " ")
+    .replaceAll(")", " ")
+    .replaceAll('"', " ")
+    .trim();
+}
+
 export default function PresetsClient() {
   const supabase = useMemo(() => createClient(), []);
 
-  const [classe, setClasse] = useState<string>("");
-  const [matiere, setMatiere] = useState<string>("");
+  // ✅ (optionnel) : types plus stricts, sans impact CSS/HTML
+  const [classe, setClasse] = useState<ClasseValue | "">("");
+  const [matiere, setMatiere] = useState<MatiereValue | "">("");
   const [niveau, setNiveau] = useState<Niveau | "">("");
   const [search, setSearch] = useState<string>("");
 
@@ -32,10 +52,10 @@ export default function PresetsClient() {
   const [error, setError] = useState<string>("");
   const [rows, setRows] = useState<DbPresetEleveai[]>([]);
 
-  // ✅ compteur “marketing” (filtré)
+  // ✅ compteur “marketing” (filtré, sans search)
   const [availableCount, setAvailableCount] = useState<number | null>(null);
 
-  // ✅ compteur total base (non filtré)
+  // ✅ compteur total base (non filtré, toutes audiences, archivés inclus)
   const [totalDbCount, setTotalDbCount] = useState<number | null>(null);
 
   const load = useCallback(async () => {
@@ -51,18 +71,29 @@ export default function PresetsClient() {
         .eq("audience", "profs")
         .eq("is_archived", false);
 
+      // filtres
       if (classe) q = q.eq("classe", classe);
       if (matiere) q = q.eq("matiere", matiere);
       if (niveau) q = q.eq("niveau", niveau);
 
-      const s = search.trim();
-      if (s) {
-        if (s.startsWith("#")) {
-          q = q.contains("tags", [s]);
+      // search
+      const raw = search.trim();
+      if (raw) {
+        if (raw.startsWith("#")) {
+          // si tes tags sont stockés AVEC '#', garde raw
+          // sinon: const tag = raw.slice(1)
+          const tag = raw;
+          q = q.contains("tags", [tag]);
         } else {
-          q = q.or(
-            `title.ilike.%${s}%,matiere.ilike.%${s}%,classe.ilike.%${s}%`
-          );
+          // 👉 recommandé: recherche sur title + (optionnel) tags via contains exact si tu veux
+          // Ici on reste simple et safe.
+          const s = escapeForOr(raw);
+
+          // Option A (recommandée, robuste) : uniquement sur title
+          q = q.ilike("title", `%${s}%`);
+
+          // Option B (si tu veux absolument OR sur plusieurs champs, plus fragile) :
+          // q = q.or(`title.ilike.%${s}%`);
         }
       }
 
@@ -160,7 +191,7 @@ export default function PresetsClient() {
               </label>
               <select
                 value={classe}
-                onChange={(e) => setClasse(e.target.value)}
+                onChange={(e) => setClasse(e.target.value as ClasseValue | "")}
                 className="w-full h-11 border border-slate-200 rounded-xl px-3 bg-white"
               >
                 <option value="">Choisir…</option>
@@ -179,7 +210,9 @@ export default function PresetsClient() {
               </label>
               <select
                 value={matiere}
-                onChange={(e) => setMatiere(e.target.value)}
+                onChange={(e) =>
+                  setMatiere(e.target.value as MatiereValue | "")
+                }
                 className="w-full h-11 border border-slate-200 rounded-xl px-3 bg-white"
               >
                 <option value="">Choisir…</option>
@@ -202,7 +235,7 @@ export default function PresetsClient() {
               </label>
               <select
                 value={niveau}
-                onChange={(e) => setNiveau(e.target.value as any)}
+                onChange={(e) => setNiveau(e.target.value as Niveau | "")}
                 className="w-full h-11 border border-slate-200 rounded-xl px-3 bg-white"
               >
                 <option value="">(Tous)</option>
@@ -224,7 +257,7 @@ export default function PresetsClient() {
 
         {/* Résultats */}
         <section className="rounded-2xl border border-slate-200 bg-white p-4">
-          {/* ✅ Bloc marketing + total DB à droite */}
+          {/* Bloc marketing + total DB */}
           <div className="mb-4 rounded-2xl border border-slate-200 bg-slate-50 p-4">
             <div className="flex items-start justify-between gap-4">
               {/* Gauche : marketing (filtré) */}
@@ -285,7 +318,7 @@ export default function PresetsClient() {
                 type="text"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                placeholder='Rechercher (titre, classe, matière…) ou "#tag"'
+                placeholder='Rechercher (titre…) ou "#tag"'
                 className="w-full h-11 rounded-xl border border-slate-200 px-3 text-sm bg-white
                            focus:outline-none focus:ring-2 focus:ring-[#0047B6]/30"
               />
@@ -331,30 +364,38 @@ export default function PresetsClient() {
           )}
         </section>
 
-        {/* Aide */}
-        {/* Aide / Ce que font (et ne font pas) les presets */}
         {/* Aide / Cadre EleveAI */}
         <section className="rounded-2xl border border-slate-200 bg-white p-4 space-y-4">
           <h3 className="font-extrabold text-slate-900">
             À propos des presets EleveAI
           </h3>
 
-          {/* CE QUE ÇA FAIT */}
           <div>
             <h4 className="flex items-center gap-2 font-semibold text-emerald-700">
               <span aria-hidden>✔</span>
               Ce que font les presets
             </h4>
             <ul className="mt-1 text-sm text-slate-700 list-disc pl-5 space-y-1">
-              <li>Structurent une activité conforme aux programmes officiels (BO).</li>
-              <li>Guident l’élève pas à pas dans le raisonnement et la méthode.</li>
-              <li>Font gagner du temps au professeur sans perte de maîtrise pédagogique.</li>
-              <li>Encouragent la justification, l’explicitation et la trace écrite.</li>
-              <li>Intègrent des méthodes visuelles (ex. Singapour / CPA) lorsque pertinent.</li>
+              <li>
+                Structurent une activité conforme aux programmes officiels (BO).
+              </li>
+              <li>
+                Guident l’élève pas à pas dans le raisonnement et la méthode.
+              </li>
+              <li>
+                Font gagner du temps au professeur sans perte de maîtrise
+                pédagogique.
+              </li>
+              <li>
+                Encouragent la justification, l’explicitation et la trace écrite.
+              </li>
+              <li>
+                Intègrent des méthodes visuelles (ex. Singapour / CPA) lorsque
+                pertinent.
+              </li>
             </ul>
           </div>
 
-          {/* CE QUE ÇA NE FAIT PAS */}
           <div>
             <h4 className="flex items-center gap-2 font-semibold text-rose-700">
               <span aria-hidden>✖</span>
@@ -369,26 +410,25 @@ export default function PresetsClient() {
             </ul>
           </div>
 
-          {/* INFO-BULLE IA ENCADRÉE */}
           <div className="flex items-start gap-2 rounded-xl bg-slate-50 p-3 text-sm text-slate-700">
-            <span className="mt-0.5 text-slate-500" aria-hidden>ℹ️</span>
+            <span className="mt-0.5 text-slate-500" aria-hidden>
+              ℹ️
+            </span>
             <p>
-              <strong>IA encadrée :</strong> les presets EleveAI proposent un cadre clair,
-              des consignes guidées et des attentes explicites.
-              L’intelligence artificielle accompagne la réflexion,
-              sans jamais se substituer au travail de l’élève.
+              <strong>IA encadrée :</strong> les presets EleveAI proposent un
+              cadre clair, des consignes guidées et des attentes explicites.
+              L’intelligence artificielle accompagne la réflexion, sans jamais
+              se substituer au travail de l’élève.
             </p>
           </div>
 
-          {/* PHRASE SIGNATURE */}
           <p className="pt-2 text-xs italic text-slate-600 border-t border-slate-100">
             EleveAI — Une IA pédagogique encadrée, au service des apprentissages,
             du professeur et de l’autonomie de l’élève.
           </p>
         </section>
-
-
       </div>
     </main>
   );
 }
+
