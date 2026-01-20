@@ -37,7 +37,8 @@ export const CLASSES = [
 
 export const MATIERES: readonly OptionSelect[] = [
     // 📘 Change ton  monde
- // { value: "Change ton monde", label: "Change ton  monde", disabled: true }, //
+   { value: "", label: "Atelier-IA", disabled: true }, //
+    { value: "Atelier-IA", label: "Atelier-IA" },
   // 📘 Fondamentaux
   { value: "", label: "📘 Fondamentaux", disabled: true },
   { value: "Mathématiques", label: "Mathématiques" },
