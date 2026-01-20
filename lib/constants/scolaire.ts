@@ -36,6 +36,8 @@ export const CLASSES = [
 ] as const;
 
 export const MATIERES: readonly OptionSelect[] = [
+    // 📘 Change ton  monde
+ // { value: "Change ton monde", label: "Change ton  monde", disabled: true }, //
   // 📘 Fondamentaux
   { value: "", label: "📘 Fondamentaux", disabled: true },
   { value: "Mathématiques", label: "Mathématiques" },
@@ -49,11 +51,11 @@ export const MATIERES: readonly OptionSelect[] = [
   { value: "maths-spe-1re", label: "Mathématiques – Spécialité (Première)" },
   { value: "maths-spe-tle", label: "Mathématiques – Spécialité (Terminale)" },
   { value: "maths-complementaires", label: "Mathématiques complémentaires" },
-  { value: "maths-expertes", label: "Mathématiques expertes" },
+  { value: "maths-expertes", label: "Mathématiques expertes Terminale" },
 
   // 🔬 Enseignement scientifique
   { value: "", label: "🔬 Enseignement scientifique", disabled: true },
-  { value: "enseignement-scientifique", label: "Enseignement scientifique" },
+  { value: "Enseignement scientifique", label: "Enseignement scientifique" },
 
   // 🌍 Langues vivantes
   { value: "", label: "🌍 Langues vivantes", disabled: true },
