@@ -5,6 +5,7 @@ import "./globals.css";
 import "katex/dist/katex.min.css";
 import AppShell from "@/components/AppShell";
 import { Analytics } from "@vercel/analytics/react";
+import DevBanner from "@/components/DevBanner";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -171,11 +172,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-slate-950`}
       >
-                {/* 🔔 Bandeau information */}
-        <div className="w-full bg-amber-100 text-amber-900 text-sm px-4 py-2 text-center border-b border-amber-200">
-          🚧 <strong>Site en cours de développement</strong> — Dernière mise à jour :{" "}
-          <span className="font-semibold">Prompt Atelier-IA</span>
-        </div>
+         <DevBanner />
         <AppShell>{children}</AppShell>
 
         {/* ✅ JSON-LD */}
