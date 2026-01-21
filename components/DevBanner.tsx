@@ -10,7 +10,7 @@ type DevBannerProps = {
 };
 
 export default function DevBanner({
-  message = "🚧 Site en cours de développement — Dernière mise à jour : Prompt Atelier-IA - 21-01-2026 ",
+  message = "🚧 Site en cours de développement — Dernière mise à jour : Prompt Atelier-IA - 21-01-2026 - Version final : Fin février 2026",
   storageKey = "eleveai_dev_banner_closed_v1",
   className = "",
 }: DevBannerProps) {
