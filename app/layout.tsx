@@ -171,6 +171,11 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-slate-950`}
       >
+                {/* 🔔 Bandeau information */}
+        <div className="w-full bg-amber-100 text-amber-900 text-sm px-4 py-2 text-center border-b border-amber-200">
+          🚧 <strong>Site en cours de développement</strong> — Dernière mise à jour :{" "}
+          <span className="font-semibold">Prompt Atelier-IA</span>
+        </div>
         <AppShell>{children}</AppShell>
 
         {/* ✅ JSON-LD */}
