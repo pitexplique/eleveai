@@ -12,154 +12,78 @@ export type TypeProduction =
   | "projet_classe"
   | "atelier_terrain";
 
-export type ProductionTemplate = {
-  objectif: string;
-  contraintes: string;
-};
-
-const OBJECTIF_BASE =
-  "Comprendre le problème, proposer des solutions réalistes, et justifier des choix.";
-
-const CONTRAINTES_BASE =
-  "Travail en groupe (3–4). Rendu final personnel + justification.\n" +
-  "Traces : prompt utilisé + réponse IA brute + améliorations personnelles (ce qui a été corrigé et pourquoi).\n" +
-  "Pas de copier-coller brut : reformuler, vérifier, citer ou expliquer les sources.\n" +
-  "Ton clair, concret, et adapté au public.";
-
-export const PRODUCTION_TEMPLATES: Record<TypeProduction, ProductionTemplate> = {
+export const PRODUCTION_TEMPLATES: Record<
+  TypeProduction,
+  { objectif: string; contraintes: string }
+> = {
   diagnostic: {
     objectif:
-      OBJECTIF_BASE +
-      " Identifier causes, acteurs, enjeux, et conséquences (court terme / long terme).",
+      "Établir un constat clair, identifier les causes et les enjeux, puis proposer des pistes réalistes.",
     contraintes:
-      CONTRAINTES_BASE +
-      "\n\nDiagnostic attendu :\n" +
-      "- 5 faits observables (ou à vérifier)\n" +
-      "- 3 causes probables (avec incertitudes)\n" +
-      "- 3 impacts (sociaux / environnement / économie)\n" +
-      "- 5 questions à vérifier sur le terrain ou via sources",
+      "Travail en groupe (3–4). Ton clair et concret. Séparer : faits / hypothèses / opinions. Conclure par 3 priorités.",
   },
 
   plan_action: {
     objectif:
-      OBJECTIF_BASE +
-      " Construire un plan d’action priorisé (3–5 mesures) avec faisabilité, impacts et calendrier.",
+      "Proposer un plan d’action concret, réaliste, priorisé et justifié (qui fait quoi, quand, avec quel impact).",
     contraintes:
-      CONTRAINTES_BASE +
-      "\n\nPlan d’action attendu :\n" +
-      "- 3 à 5 mesures\n" +
-      "- pour chacune : bénéfices / risques / coût (même ordre de grandeur) / qui fait quoi\n" +
-      "- un mini calendrier (1 semaine / 1 mois / 3 mois)\n" +
-      "- 1 indicateur de suivi par mesure",
+      "Travail en groupe (3–4). 6 mesures maximum. Pour chaque mesure : effort/coût, impact attendu, faisabilité, responsable, délai. Terminer par une checklist.",
   },
 
   debat: {
     objectif:
-      OBJECTIF_BASE +
-      " Construire 2 positions argumentées (pour/contre) et proposer un arbitrage final.",
+      "Construire un débat argumenté : points pour/contre, puis un arbitrage final justifié.",
     contraintes:
-      CONTRAINTES_BASE +
-      "\n\nDébat attendu :\n" +
-      "- Position A + 3 arguments + 1 exemple\n" +
-      "- Position B + 3 arguments + 1 exemple\n" +
-      "- 3 critères d’arbitrage (efficacité, coût, justice, sécurité…)\n" +
-      "- Conclusion : décision + pourquoi",
+      "2 équipes. Chaque équipe : 3 arguments + 1 exemple local. Un arbitre synthétise et propose un compromis ou une décision motivée.",
   },
 
   enquete: {
     objectif:
-      OBJECTIF_BASE +
-      " Mener une enquête : questions, collecte, synthèse, et limites (biais, échantillon).",
+      "Préparer une enquête : questions, collecte de données, puis synthèse claire des résultats.",
     contraintes:
-      CONTRAINTES_BASE +
-      "\n\nEnquête attendue :\n" +
-      "- 8 à 12 questions (simples, non biaisées)\n" +
-      "- protocole (qui ? combien ? où ? quand ?)\n" +
-      "- tableau de résultats (même fictif au départ, mais indiqué comme exemple)\n" +
-      "- analyse : tendances + limites + biais possibles",
+      "10 questions maximum. Préciser : public visé, méthode de collecte, biais possibles. Restitution : tableau de résultats + 1 graphique + conclusion en 5–8 lignes.",
   },
 
   affiche: {
     objectif:
-      OBJECTIF_BASE +
-      " Créer une affiche/campagne : message central, preuves, slogans, et appel à l’action.",
+      "Créer une affiche / campagne de sensibilisation : message fort, preuves, et appel à l’action.",
     contraintes:
-      CONTRAINTES_BASE +
-      "\n\nAffiche attendue :\n" +
-      "- Message central (1 phrase)\n" +
-      "- 2–3 preuves/arguments (avec sources ou “à vérifier”)\n" +
-      "- 3 slogans courts\n" +
-      "- Appel à l’action concret (ce qu’on demande de faire)\n" +
-      "- Proposition visuelle (couleurs, icônes, placement)",
+      "Slogan + 3 preuves + 1 chiffre (si possible) + 1 geste concret. Proposer 2 versions A/B. Format A4 lisible, phrases courtes.",
   },
 
   article: {
     objectif:
-      OBJECTIF_BASE +
-      " Rédiger un article structuré (angle, plan, sources, conclusion).",
+      "Rédiger un article structuré : angle clair, faits vérifiés, sources, conclusion.",
     contraintes:
-      CONTRAINTES_BASE +
-      "\n\nArticle attendu :\n" +
-      "- Titre + accroche\n" +
-      "- Plan en 3 parties\n" +
-      "- 2 sources minimum (ou types de sources)\n" +
-      "- Une section “ce qui est sûr / ce qui est incertain”\n" +
-      "- Conclusion + piste d’action",
+      "Titre + chapeau + 3 parties + conclusion. Distinguer faits / opinions. 350 à 500 mots. Ajouter 2–3 sources (liens ou types de sources).",
   },
 
   pitch: {
     objectif:
-      OBJECTIF_BASE +
-      " Écrire un pitch d’1 minute : problème → solution → impact → appel.",
+      "Préparer un pitch de 1 minute : problème → solution → bénéfices → appel à l’action.",
     contraintes:
-      CONTRAINTES_BASE +
-      "\n\nPitch attendu :\n" +
-      "- 60 secondes max\n" +
-      "- phrases courtes\n" +
-      "- 1 chiffre clé (ou estimation signalée)\n" +
-      "- 1 solution principale + 1 bénéfice\n" +
-      "- Appel à l’action final (clair)",
+      "Structure en 4 temps (4 phrases ou 4 blocs). Ajouter 1 chiffre et 1 exemple local. Terminer par une demande claire (ce qu’on veut).",
   },
 
   lettre_officielle: {
     objectif:
-      OBJECTIF_BASE +
-      " Rédiger une lettre institutionnelle (demande claire + arguments + forme).",
+      "Écrire une lettre institutionnelle (mairie / établissement) claire, polie et persuasive.",
     contraintes:
-      CONTRAINTES_BASE +
-      "\n\nLettre attendue :\n" +
-      "- Objet\n" +
-      "- Formule d’appel\n" +
-      "- 2–3 arguments factuels\n" +
-      "- Demande précise (ce que tu veux obtenir)\n" +
-      "- Formule de politesse",
+      "Objet + contexte + demande + justification + proposition concrète + formule de politesse. Ton respectueux, précis, sans émotion excessive.",
   },
 
   projet_classe: {
     objectif:
-      OBJECTIF_BASE +
-      " Concevoir un mini-projet : étapes, rôles, livrables, calendrier, évaluation.",
+      "Proposer un mini-projet de classe : étapes, rôles, livrables et calendrier réaliste.",
     contraintes:
-      CONTRAINTES_BASE +
-      "\n\nMini-projet attendu :\n" +
-      "- étapes numérotées\n" +
-      "- rôles (chef de projet, rédacteur, enquêteur…)\n" +
-      "- livrables (affiche, doc, oral…)\n" +
-      "- calendrier simple\n" +
-      "- critères de réussite (3 à 5)",
+      "4 étapes maximum. Rôles conseillés : coordination, terrain, données, rédaction. Livrables : affiche + oral + synthèse écrite. Ajouter critères de réussite.",
   },
 
   atelier_terrain: {
     objectif:
-      OBJECTIF_BASE +
-      " Proposer un atelier terrain : observation/mesures, restitution, et sécurité.",
+      "Préparer un atelier terrain : observation/mesures, puis restitution exploitable en classe.",
     contraintes:
-      CONTRAINTES_BASE +
-      "\n\nAtelier terrain attendu :\n" +
-      "- quoi observer/mesurer\n" +
-      "- matériel simple\n" +
-      "- tableau de collecte\n" +
-      "- consignes sécurité\n" +
-      "- restitution (photo, mini-rapport, oral)",
+      "Indiquer : quoi observer, comment mesurer, matériel, sécurité, durée, puis restitution (photos/notes + tableau + conclusion + proposition d’action).",
   },
 };
+

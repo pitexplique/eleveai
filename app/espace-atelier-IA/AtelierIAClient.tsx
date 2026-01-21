@@ -2,9 +2,9 @@
 "use client";
 
 import Link from "next/link";
-import { useCallback, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { createClient } from "@/lib/supabase/client";
 import ToggleChip from "@/components/ToggleChip";
-import { useEffect } from "react";
 
 import {
   Sparkles,
@@ -15,14 +15,13 @@ import {
   ArrowDown,
   MessageCircle,
   Check,
+  ExternalLink,
+  Search,
 } from "lucide-react";
 
-import { PRODUCTION_TEMPLATES } from "@/data/atelierProductionTemplates";
-import type { TypeProduction } from "@/data/atelierProductionTemplates"; // ✅ import du type
-
-type NiveauPublic = "college" | "lycee" | "tous";
-type Duree = 15 | 30 | 45 | 60 | 90;
-
+/* -------------------------------------------------------
+   Types
+------------------------------------------------------- */
 type ThemeAgir =
   | "eau"
   | "dechets"
@@ -37,10 +36,46 @@ type ThemeAgir =
   | "info_esprit_critique"
   | "territoire_patrimoine";
 
-// ✅ supprimé : type TypeProduction local (on l'importe)
-
-type OutputStyle = "simple" | "word" | "word_expert";
 type FeedbackChoice = "" | "ok" | "bof" | "pas_ok";
+
+type Audience = "profs" | "eleves" | "parents" | "admin" | "viescolaire";
+type Niveau = "ulis" | "remediation" | "basique" | "standard" | "expert";
+
+type DbPresetEleveai = {
+  id: string;
+  audience: Audience;
+  classe: string;
+  matiere: string;
+  niveau: Niveau;
+  title: string;
+  description: string;
+  tags: string[];
+  payload: any; // jsonb
+};
+
+type AtelierForm = {
+  // ✅ Objectif = titre du preset (auto)
+  objectif: string;
+
+  // ✅ Contenu = prompt base venant de Supabase (auto)
+  contenu: string;
+
+  // ✅ Thèmes "Agir sur le monde" : servent à améliorer le prompt final
+  themes: ThemeAgir[];
+  themeLocal: string;
+
+  traces: boolean;
+  antiTriche: boolean;
+  dataChiffres: boolean;
+  terrain: boolean;
+  espritCritique: boolean;
+};
+
+/* -------------------------------------------------------
+   Constantes
+------------------------------------------------------- */
+const MATIERE_ATELIER = "Atelier-IA";
+const CLASSES_ATELIER = ["6e", "5e", "4e", "3e", "Seconde", "Première", "Terminale"] as const;
 
 const THEMES: { id: ThemeAgir; label: string; hint: string; emoji: string }[] = [
   { id: "eau", label: "Eau", hint: "économies, pollution, accès, usages", emoji: "💧" },
@@ -57,132 +92,135 @@ const THEMES: { id: ThemeAgir; label: string; hint: string; emoji: string }[] = 
   { id: "territoire_patrimoine", label: "Territoire & patrimoine", hint: "commune, mémoire, culture", emoji: "🏝️" },
 ];
 
-const PRODUCTIONS: { id: TypeProduction; label: string; hint: string; emoji: string }[] = [
-  { id: "diagnostic", label: "Diagnostic", hint: "constat + causes + enjeux", emoji: "🔎" },
-  { id: "plan_action", label: "Plan d’action", hint: "mesures concrètes + priorités", emoji: "🛠️" },
-  { id: "debat", label: "Débat argumenté", hint: "pour/contre + arbitrage", emoji: "🎤" },
-  { id: "enquete", label: "Enquête", hint: "questions + collecte + synthèse", emoji: "📋" },
-  { id: "affiche", label: "Affiche / campagne", hint: "message + slogans + preuves", emoji: "🪧" },
-  { id: "article", label: "Article", hint: "structure + sources + angles", emoji: "📰" },
-  { id: "pitch", label: "Pitch 1 min", hint: "impact + solution + appel", emoji: "⚡" },
-  { id: "lettre_officielle", label: "Lettre (mairie / établissement)", hint: "ton institutionnel", emoji: "✉️" },
-  { id: "projet_classe", label: "Mini-projet", hint: "étapes + rôles + livrables", emoji: "🧩" },
-  { id: "atelier_terrain", label: "Atelier terrain", hint: "observation + mesures + retour", emoji: "🌿" },
-];
+/* -------------------------------------------------------
+   Helpers
+------------------------------------------------------- */
+function parseSearchParams() {
+  if (typeof window === "undefined") return { presetId: null as string | null };
+  const sp = new URLSearchParams(window.location.search);
+  return { presetId: sp.get("preset") };
+}
 
-function blocWordDesign(style: OutputStyle) {
-  if (style === "simple") return "";
-  if (style === "word") {
-    return (
-      "Format de sortie obligatoire : document Word (copier-coller sans perte).\n" +
-      "- Titres hiérarchisés clairs.\n" +
-      "- Mise en page aérée : listes, lignes courtes, zones de réponse.\n" +
-      "- Emoji simples au début des sections.\n" +
-      "- Termine par : « ✅ Prêt à coller dans Word ».\n\n"
-    );
-  }
+function safeString(v: any) {
+  if (typeof v === "string") return v;
+  return "";
+}
+
+/**
+ * 🔑 On récupère "le prompt de Supabase".
+ * On tente plusieurs clés de payload (au cas où), sans jamais utiliser presets_eleveai.data (inexistant).
+ */
+function extractPromptFromPayload(payload: any): string {
+  if (!payload || typeof payload !== "object") return "";
   return (
-    "Format de sortie obligatoire : document Word EXPERT, très lisible.\n" +
-    "- Bannières et encadrés simulés : À RETENIR / MÉTHODE / ERREUR / DÉFI.\n" +
-    "- Ajoute des zones : « Réponse : __________________ ».\n" +
-    "- Interdits : gros paragraphes.\n" +
-    "- Termine par : « ✅ Prêt à coller dans Word ».\n\n"
+    safeString(payload.prompt) ||
+    safeString(payload.prompt_base) ||
+    safeString(payload.prompt_ia) ||
+    safeString(payload.promptInterne) ||
+    safeString(payload.prompt_template) ||
+    ""
   );
 }
 
-type AtelierForm = {
-  titre: string;
-  niveauPublic: NiveauPublic;
-  duree: Duree;
-  themes: ThemeAgir[];
-  themeLocal: string;
-  production: TypeProduction;
-  objectif: string;
-  contraintes: string;
-
-  traces: boolean;
-  antiTriche: boolean;
-  dataChiffres: boolean;
-  terrain: boolean;
-  espritCritique: boolean;
-
-  outputStyle: OutputStyle;
-};
-
-function construirePromptAtelier(form: AtelierForm) {
+/* -------------------------------------------------------
+   Construction prompt final
+   - Base = form.contenu (vient de Supabase)
+   - Ajouts = thèmes + options
+------------------------------------------------------- */
+function construirePromptFinal(form: AtelierForm) {
   const themesHumains = form.themes.map((t) => THEMES.find((x) => x.id === t)?.label ?? t);
-  const prodLabel = PRODUCTIONS.find((p) => p.id === form.production)?.label ?? form.production;
+
+  const base = (form.contenu || "").trim();
 
   const blocCadre =
-    "Cadre EleveAI (obligatoire) :\n" +
+    "=== AJOUT EleveAI (amélioration du prompt) ===\n" +
+    "Cadre EleveAI :\n" +
     "1) Une réponse IA n’est jamais une fin : elle doit être jugée et améliorée.\n" +
     "2) L’IA peut se tromper : signaler les incertitudes.\n" +
-    "3) Le rendu final doit être personnel et expliqué.\n\n";
+    "3) Le rendu final doit être personnel et expliqué.\n";
+
+  const blocThemes =
+    (themesHumains.length ? `\nThèmes (Agir sur le monde) : ${themesHumains.join(", ")}\n` : "\n") +
+    (form.themeLocal?.trim() ? `Contexte local : ${form.themeLocal.trim()}\n` : "");
 
   const blocTraces = form.traces
-    ? "TRACES OBLIGATOIRES :\n- Prompt utilisé\n- Réponse IA brute\n- Améliorations personnelles (ce qui a été corrigé et pourquoi)\n\n"
+    ? "\nTRACES OBLIGATOIRES :\n- Prompt utilisé\n- Réponse IA brute\n- Améliorations personnelles (ce qui a été corrigé et pourquoi)\n"
     : "";
 
   const blocAntiTriche = form.antiTriche
-    ? "ANTI-TRICHE PÉDAGOGIQUE :\n- Ne fais pas “à la place”.\n- Pose des questions, propose une structure, donne des pistes.\n- Exige des choix justifiés.\n\n"
+    ? "\nANTI-TRICHE :\n- Ne fais pas à la place.\n- Pose des questions + propose une structure.\n- Exige des choix justifiés.\n"
     : "";
 
   const blocCritique = form.espritCritique
-    ? "ESPRIT CRITIQUE :\n- Donne 5 points à vérifier.\n- Propose 3 sources ou types de sources à consulter.\n- Sépare faits / hypothèses / opinions.\n\n"
+    ? "\nESPRIT CRITIQUE :\n- Donne 5 points à vérifier.\n- Propose 3 sources ou types de sources.\n- Sépare faits / hypothèses / opinions.\n"
     : "";
 
   const blocData = form.dataChiffres
-    ? "DONNÉES / CHIFFRES :\n- Propose des ordres de grandeur.\n- Si tu inventes un chiffre, dis que c’est une estimation.\n- Propose comment mesurer/collecter des données.\n\n"
+    ? "\nDONNÉES / CHIFFRES :\n- Propose des ordres de grandeur.\n- Si tu estimes, dis que c’est une estimation.\n- Propose comment mesurer/collecter.\n"
     : "";
 
   const blocTerrain = form.terrain
-    ? "TERRAIN / LOCAL :\n- Propose une mini-sortie/observation/diagnostic local.\n- Indique quoi observer, comment noter, comment restituer.\n\n"
+    ? "\nTERRAIN / LOCAL :\n- Propose une mini-observation/diagnostic local.\n- Indique quoi observer, comment noter, comment restituer.\n"
     : "";
 
-  const blocWord = blocWordDesign(form.outputStyle);
+  const blocObjectif = form.objectif?.trim()
+    ? `\nOBJECTIF (titre du preset) : ${form.objectif.trim()}\n`
+    : "\n";
+
+  // Si le prompt Supabase est vide, on laisse un message clair
+  if (!base) {
+    return (
+      "⚠️ Aucun prompt trouvé dans payload (ex: payload.prompt).\n" +
+      "Ajoute un champ payload.prompt dans tes presets, ou colle le prompt dans le champ 'Contenu'.\n\n" +
+      blocCadre +
+      blocObjectif +
+      blocThemes +
+      blocTraces +
+      blocAntiTriche +
+      blocCritique +
+      blocData +
+      blocTerrain
+    );
+  }
 
   return (
-    "Tu es une IA pédagogique encadrée (EleveAI). Tu aides des élèves à réfléchir et agir sur un thème de société.\n\n" +
+    "=== PROMPT (base Supabase) ===\n" +
+    base +
+    "\n\n" +
     blocCadre +
+    blocObjectif +
+    blocThemes +
     blocTraces +
     blocAntiTriche +
     blocCritique +
     blocData +
-    blocTerrain +
-    blocWord +
-    `Public : ${form.niveauPublic}.\n` +
-    `Durée cible : ${form.duree} minutes.\n` +
-    `Thèmes : ${themesHumains.join(", ")}.\n` +
-    (form.themeLocal?.trim() ? `Contexte local : ${form.themeLocal.trim()}.\n` : "") +
-    `Type de production : ${prodLabel}.\n\n` +
-    `Objectif : ${form.objectif || "(non précisé)"}\n` +
-    (form.contraintes?.trim() ? `Contraintes : ${form.contraintes.trim()}\n` : "") +
-    "\nTa mission :\n" +
-    "1) Proposer une structure claire (étapes numérotées).\n" +
-    "2) Donner un rendu prêt à utiliser en classe (consignes + production attendue).\n" +
-    "3) Ajouter une section « Vérification & amélioration » (checklist + améliorations).\n\n" +
-    "IMPORTANT : Structure ta réponse en 2 parties :\n" +
-    '1) "=== PARTIE 1 : PROMPT OPTIMISÉ POUR L’IA ==="\n' +
-    '2) "=== PARTIE 2 : ACTIVITÉ PRÊTE POUR LA CLASSE ==="\n'
+    blocTerrain
   );
 }
 
-/* ----------------------------------------
+/* -------------------------------------------------------
    UI : Boutons "Coller dans"
-   ✅ ChatGPT + Perplexity + Tchat EleveAI uniquement
----------------------------------------- */
+------------------------------------------------------- */
 function PasteTargets({ text, showToast }: { text: string; showToast: (msg: string) => void }) {
   const disabled = !text;
   const tchatHref = text ? `/tchat?prompt=${encodeURIComponent(text)}` : "/tchat";
 
   const copySilently = async () => {
-    if (!text) return;
+    if (!text) return false;
     try {
       await navigator.clipboard.writeText(text);
-      showToast("✅ Copié ! Colle-le dans l’IA.");
+      return true;
     } catch {
-      showToast("⚠️ Copie auto impossible (sélectionne puis Ctrl+C).");
+      return false;
     }
+  };
+
+  const openAndCopy = async (url: string, label: string) => {
+    if (disabled) return;
+    const ok = await copySilently();
+    if (ok) showToast(`✅ Copié ! Ouverture ${label}…`);
+    else showToast("⚠️ Copie auto impossible (sélectionne puis Ctrl+C).");
+    window.open(url, "_blank", "noopener,noreferrer");
   };
 
   return (
@@ -195,59 +233,48 @@ function PasteTargets({ text, showToast }: { text: string; showToast: (msg: stri
             if (disabled) e.preventDefault();
           }}
           className={`px-3 py-2 rounded-lg font-semibold transition ${
-            disabled ? "bg-slate-200 text-slate-500 cursor-not-allowed" : "bg-emerald-600 text-white hover:bg-emerald-700"
+            disabled
+              ? "bg-slate-200 text-slate-500 cursor-not-allowed"
+              : "bg-emerald-600 text-white hover:bg-emerald-700"
           }`}
         >
           🚀 Tchat EleveAI
         </Link>
 
-        <a
-          href="https://chatgpt.com"
-          target="_blank"
-          rel="noreferrer"
-          onClick={(e) => {
-            if (disabled) {
-              e.preventDefault();
-              return;
-            }
-            copySilently();
-          }}
+        <button
+          type="button"
+          onClick={() => openAndCopy("https://chatgpt.com", "ChatGPT")}
+          disabled={disabled}
           className={`px-3 py-2 rounded-lg font-semibold transition ${
             disabled ? "bg-slate-200 text-slate-500 cursor-not-allowed" : "bg-slate-800 text-white hover:bg-slate-900"
           }`}
         >
           🟦 ChatGPT
-        </a>
+        </button>
 
-        <a
-          href="https://www.perplexity.ai/"
-          target="_blank"
-          rel="noreferrer"
-          onClick={(e) => {
-            if (disabled) {
-              e.preventDefault();
-              return;
-            }
-            copySilently();
-          }}
+        <button
+          type="button"
+          onClick={() => openAndCopy("https://www.perplexity.ai/", "Perplexity")}
+          disabled={disabled}
           className={`px-3 py-2 rounded-lg font-semibold transition ${
             disabled ? "bg-slate-200 text-slate-500 cursor-not-allowed" : "bg-[#0F9D58] text-white hover:bg-[#0c7b45]"
           }`}
         >
           🟩 Perplexity
-        </a>
+        </button>
       </div>
     </div>
   );
 }
 
+/* -------------------------------------------------------
+   Main
+------------------------------------------------------- */
 export default function AtelierIAClient() {
   const topRef = useRef<HTMLDivElement | null>(null);
   const promptRef = useRef<HTMLDivElement | null>(null);
   const relanceRef = useRef<HTMLDivElement | null>(null);
-  const contraintesRef = useRef<HTMLTextAreaElement | null>(null);
-  const objectifRef = useRef<HTMLTextAreaElement | null>(null);
-
+  const contenuRef = useRef<HTMLTextAreaElement | null>(null);
 
   const scrollToTop = useCallback(() => topRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }), []);
   const scrollToPrompt = useCallback(() => promptRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }), []);
@@ -264,20 +291,15 @@ export default function AtelierIAClient() {
 
   const makeInitialForm = useCallback((): AtelierForm => {
     return {
-      titre: "",
-      niveauPublic: "tous",
-      duree: 45,
+      objectif: "", // sera mis = titre preset
+      contenu: "", // sera mis = prompt Supabase (payload.prompt)
       themes: ["eau"],
       themeLocal: "La Réunion — contexte local : [commune / collège / quartier]",
-      production: "plan_action",
-      objectif: "Comprendre le problème, proposer des solutions réalistes, et justifier des choix.",
-      contraintes: "Travail en groupe (3-4). Rendu final personnel + justification. Ton clair et concret.",
       traces: true,
       antiTriche: true,
       dataChiffres: true,
       terrain: true,
       espritCritique: true,
-      outputStyle: "word_expert",
     };
   }, []);
 
@@ -289,13 +311,11 @@ export default function AtelierIAClient() {
     el.style.height = el.scrollHeight + "px";
   };
 
-    useEffect(() => {
-      autoResize(objectifRef.current);
-      autoResize(contraintesRef.current);
-    }, [form.objectif, form.contraintes]);
+  useEffect(() => {
+    autoResize(contenuRef.current);
+  }, [form.contenu]);
 
-
-  // ✅ Sorties locales (0 appel API)
+  // ✅ Sorties locales
   const [promptInterne, setPromptInterne] = useState("");
   const [copiedPrompt, setCopiedPrompt] = useState(false);
   const [showPromptInterne, setShowPromptInterne] = useState(true);
@@ -309,19 +329,27 @@ export default function AtelierIAClient() {
   const [promptRelance, setPromptRelance] = useState("");
   const [copiedRelance, setCopiedRelance] = useState(false);
 
+  // Presets (tableau en haut) + recherche
+  const [presetLoaded, setPresetLoaded] = useState<DbPresetEleveai | null>(null);
+  const [presets, setPresets] = useState<DbPresetEleveai[]>([]);
+  const [presetsLoading, setPresetsLoading] = useState(false);
+
+  const [presetClasse, setPresetClasse] = useState<(typeof CLASSES_ATELIER)[number]>("6e");
+  const [presetAudience, setPresetAudience] = useState<Audience>("profs");
+  const [searchText, setSearchText] = useState("");
+
+  const filteredPresets = useMemo(() => {
+    const q = searchText.trim().toLowerCase();
+    if (!q) return presets;
+    return presets.filter((p) => {
+      const inTitle = (p.title ?? "").toLowerCase().includes(q);
+      const inTags = Array.isArray(p.tags) && p.tags.some((t) => (t ?? "").toLowerCase().includes(q));
+      return inTitle || inTags;
+    });
+  }, [presets, searchText]);
+
   const handleChange = useCallback(<K extends keyof AtelierForm>(field: K, value: AtelierForm[K]) => {
     setForm((prev) => ({ ...prev, [field]: value }));
-  }, []);
-
-  const applyProductionTemplate = useCallback((prod: TypeProduction) => {
-    const tpl = PRODUCTION_TEMPLATES[prod]; // ✅ plus de "as any"
-    if (!tpl) return;
-
-    setForm((prev) => ({
-      ...prev,
-      objectif: tpl.objectif,
-      contraintes: tpl.contraintes,
-    }));
   }, []);
 
   const clearOutputs = useCallback(() => {
@@ -337,6 +365,7 @@ export default function AtelierIAClient() {
 
   const resetPage = useCallback(() => {
     setForm(makeInitialForm());
+    setPresetLoaded(null);
     clearOutputs();
     showToast("🔄 Reset complet");
     setTimeout(() => scrollToTop(), 50);
@@ -353,19 +382,18 @@ export default function AtelierIAClient() {
   const validation = useMemo(() => {
     const issues: string[] = [];
     if (!form.themes.length) issues.push("Choisis au moins 1 thème.");
-    if (!form.production) issues.push("Choisis un type de production.");
-    if (!form.objectif.trim()) issues.push("Précise l’objectif.");
-    if (!form.contraintes.trim()) issues.push("Ajoute quelques contraintes (rendu attendu, groupe…).");
+    if (!form.contenu.trim()) issues.push("Contenu vide : il faut un prompt dans payload.prompt (ou coller manuellement).");
+    // objectif vient du preset ; on ne bloque pas si vide, mais c’est mieux
     return { ok: issues.length === 0, issues };
   }, [form]);
 
-  // ✅ Génération locale du prompt (sans API)
+  // ✅ Génération locale du prompt final (base Supabase + amélioration par thèmes/options)
   const genererPrompt = useCallback(() => {
     if (!validation.ok) {
       showToast(`⚠️ ${validation.issues[0]}`);
       return;
     }
-    const prompt = construirePromptAtelier(form);
+    const prompt = construirePromptFinal(form);
     setPromptInterne(prompt);
 
     // reset relance
@@ -391,6 +419,29 @@ export default function AtelierIAClient() {
     }
   }, [promptInterne, showToast]);
 
+  // boutons ouvrir + copier
+  const openChatGPT = useCallback(async () => {
+    if (!promptInterne) return;
+    try {
+      await navigator.clipboard.writeText(promptInterne);
+      showToast("✅ Copié ! Ouverture ChatGPT…");
+    } catch {
+      showToast("⚠️ Copie auto impossible (sélectionne puis Ctrl+C).");
+    }
+    window.open("https://chatgpt.com", "_blank", "noopener,noreferrer");
+  }, [promptInterne, showToast]);
+
+  const openPerplexity = useCallback(async () => {
+    if (!promptInterne) return;
+    try {
+      await navigator.clipboard.writeText(promptInterne);
+      showToast("✅ Copié ! Ouverture Perplexity…");
+    } catch {
+      showToast("⚠️ Copie auto impossible (sélectionne puis Ctrl+C).");
+    }
+    window.open("https://www.perplexity.ai/", "_blank", "noopener,noreferrer");
+  }, [promptInterne, showToast]);
+
   const buildRelanceBloc = useCallback(() => {
     const free = feedbackText.trim();
 
@@ -407,11 +458,11 @@ export default function AtelierIAClient() {
 
     const blocReponseIA = reponseIA.trim()
       ? "\n\n=== RÉPONSE IA REÇUE ===\n-----\n" + reponseIA.trim() + "\n-----\n"
-      : "\n\n(Optionnel) Si tu as une réponse IA, colle-la ici avant de générer la relance, pour que l’amélioration soit plus précise.\n";
+      : "\n\n(Optionnel) Si tu as une réponse IA, colle-la ici avant de générer la relance.\n";
 
     return (
       "Tu vas améliorer une activité ‘Agir sur le monde’.\n\n" +
-      "=== PROMPT 1 (original) ===\n-----\n" +
+      "=== PROMPT UTILISÉ ===\n-----\n" +
       promptInterne +
       "\n-----\n" +
       blocReponseIA +
@@ -443,20 +494,249 @@ export default function AtelierIAClient() {
     }
   }, [promptRelance, showToast]);
 
+  // -------------------------------------------------------
+  // Presets : fetch + load preset
+  // -------------------------------------------------------
+  const fetchPresets = useCallback(async () => {
+    setPresetsLoading(true);
+    try {
+      const supabase = createClient();
+      const { data, error } = await supabase
+        .from("presets_eleveai")
+        .select("id,audience,classe,matiere,niveau,title,description,tags,payload")
+        .eq("matiere", MATIERE_ATELIER)
+        .eq("niveau", "standard")
+        .eq("is_archived", false)
+        .eq("classe", presetClasse)
+        .eq("audience", presetAudience)
+        .order("title", { ascending: true })
+        .limit(250);
+
+      if (error) {
+        showToast("⚠️ Impossible de charger les presets");
+        setPresets([]);
+        return;
+      }
+      setPresets((data as DbPresetEleveai[]) ?? []);
+    } finally {
+      setPresetsLoading(false);
+    }
+  }, [presetAudience, presetClasse, showToast]);
+
+  const loadPresetById = useCallback(
+    async (presetId: string) => {
+      try {
+        const supabase = createClient();
+        const { data, error } = await supabase
+          .from("presets_eleveai")
+          .select("id,audience,classe,matiere,niveau,title,description,tags,payload")
+          .eq("id", presetId)
+          .single();
+
+        if (error || !data) {
+          showToast("⚠️ Preset introuvable");
+          return;
+        }
+
+        const p = data as DbPresetEleveai;
+        setPresetLoaded(p);
+
+        const promptSupabase = extractPromptFromPayload(p.payload);
+
+        setForm((prev) => ({
+          ...prev,
+          // ✅ mets le titre du preset dans objectif
+          objectif: p.title ?? "",
+          // ✅ contenu = prompt de Supabase (payload.prompt)
+          contenu: promptSupabase || prev.contenu || "",
+        }));
+
+        clearOutputs();
+        showToast(promptSupabase ? "✅ Preset chargé (prompt OK)" : "⚠️ Preset chargé (prompt manquant dans payload)");
+        setTimeout(() => scrollToTop(), 50);
+      } catch {
+        showToast("⚠️ Erreur chargement preset");
+      }
+    },
+    [clearOutputs, scrollToTop, showToast]
+  );
+
+  // au premier rendu : si ?preset=... on le charge
+  useEffect(() => {
+    const { presetId } = parseSearchParams();
+    if (presetId) loadPresetById(presetId);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // quand audience/classe changent : refresh presets
+  useEffect(() => {
+    fetchPresets();
+  }, [fetchPresets]);
+
+  const openPresetInUrl = useCallback((id: string) => {
+    const url = new URL(window.location.href);
+    url.searchParams.set("preset", id);
+    window.history.pushState({}, "", url.toString());
+  }, []);
+
+  const onPickPreset = useCallback(
+    (p: DbPresetEleveai) => {
+      openPresetInUrl(p.id);
+      loadPresetById(p.id);
+    },
+    [loadPresetById, openPresetInUrl]
+  );
+
   return (
     <main className="min-h-screen bg-gradient-to-b from-emerald-50 via-white to-slate-50 text-gray-900">
       <div ref={topRef} className="w-full max-w-[1400px] mx-auto px-3 sm:px-5 lg:px-6 py-6 lg:py-10">
+        {/* -------------------------------------------------------
+            PRESETS TABLE (en haut) + recherche
+           ------------------------------------------------------- */}
+        <section className="mb-6 rounded-2xl border border-slate-200 bg-white/95 shadow-sm p-5 sm:p-6">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+            <div className="space-y-1">
+              <p className="text-xs font-semibold text-slate-600">Presets (Supabase)</p>
+              <h2 className="text-lg font-extrabold text-emerald-800">Atelier-IA · Presets</h2>
+              <p className="text-xs text-slate-600">
+                Filtrés par <b>classe</b> + <b>audience</b> (matière = Atelier-IA, niveau = standard).
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 w-full sm:w-auto">
+              <div className="space-y-1">
+                <label className="text-xs font-semibold text-slate-600">Classe</label>
+                <select
+                  value={presetClasse}
+                  onChange={(e) => setPresetClasse(e.target.value as any)}
+                  className="w-full border rounded-lg px-3 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-emerald-200"
+                >
+                  {CLASSES_ATELIER.map((c) => (
+                    <option key={c} value={c}>
+                      {c}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div className="space-y-1">
+                <label className="text-xs font-semibold text-slate-600">Audience</label>
+                <select
+                  value={presetAudience}
+                  onChange={(e) => setPresetAudience(e.target.value as Audience)}
+                  className="w-full border rounded-lg px-3 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-emerald-200"
+                >
+                  <option value="profs">profs</option>
+                  <option value="eleves">eleves</option>
+                  <option value="parents">parents</option>
+                </select>
+              </div>
+
+              <div className="space-y-1">
+                <label className="text-xs font-semibold text-slate-600">Recherche</label>
+                <div className="relative">
+                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                  <input
+                    value={searchText}
+                    onChange={(e) => setSearchText(e.target.value)}
+                    placeholder="Titre ou tags…"
+                    className="w-full border rounded-lg pl-9 pr-3 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-emerald-200"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-4 overflow-x-auto rounded-xl border border-slate-200">
+            <table className="min-w-full text-sm">
+              <thead className="bg-slate-50">
+                <tr className="text-left">
+                  <th className="px-4 py-3 font-bold text-slate-700">Titre</th>
+                  <th className="px-4 py-3 font-bold text-slate-700">Tags</th>
+                  <th className="px-4 py-3 font-bold text-slate-700 w-[130px]">Action</th>
+                </tr>
+              </thead>
+              <tbody className="bg-white">
+                {presetsLoading && (
+                  <tr>
+                    <td colSpan={3} className="px-4 py-4 text-slate-600">
+                      Chargement…
+                    </td>
+                  </tr>
+                )}
+
+                {!presetsLoading && filteredPresets.length === 0 && (
+                  <tr>
+                    <td colSpan={3} className="px-4 py-4 text-slate-600">
+                      Aucun preset.
+                    </td>
+                  </tr>
+                )}
+
+                {!presetsLoading &&
+                  filteredPresets.map((p) => (
+                    <tr key={p.id} className="border-t border-slate-100">
+                      <td className="px-4 py-3">
+                        <div className="font-semibold text-slate-900">{p.title}</div>
+                        <div className="text-xs text-slate-500">
+                          {p.description?.slice(0, 110)}
+                          {p.description?.length > 110 ? "…" : ""}
+                        </div>
+                      </td>
+                      <td className="px-4 py-3">
+                        <div className="flex flex-wrap gap-1">
+                          {(p.tags ?? []).slice(0, 8).map((t, i) => (
+                            <span
+                              key={i}
+                              className="text-[11px] px-2 py-0.5 rounded-full bg-slate-100 text-slate-700 border border-slate-200"
+                            >
+                              {t}
+                            </span>
+                          ))}
+                        </div>
+                      </td>
+                      <td className="px-4 py-3">
+                        <button
+                          type="button"
+                          onClick={() => onPickPreset(p)}
+                          className="inline-flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-semibold bg-emerald-700 text-white hover:bg-emerald-800"
+                        >
+                          <ExternalLink className="w-4 h-4" />
+                          Ouvrir
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+              </tbody>
+            </table>
+          </div>
+
+          {presetLoaded && (
+            <div className="mt-4 rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3">
+              <p className="text-sm text-emerald-900">
+                <span className="font-extrabold">Preset actif :</span> {presetLoaded.title}
+              </p>
+              <p className="text-[11px] text-emerald-900/80 mt-1">
+                Audience: {presetLoaded.audience} · Classe: {presetLoaded.classe} · Matière: {presetLoaded.matiere}
+              </p>
+            </div>
+          )}
+        </section>
+
+        {/* -------------------------------------------------------
+            HEADER
+           ------------------------------------------------------- */}
         <header className="space-y-2">
           <p className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100 text-xs font-semibold text-emerald-900">
             <span>🧪</span>
             <span>Atelier-IA · Agir sur le monde</span>
           </p>
 
-          <h1 className="text-3xl sm:text-4xl font-extrabold text-emerald-800">Générateur de prompt (0 appel API)</h1>
+          <h1 className="text-3xl sm:text-4xl font-extrabold text-emerald-800">Générateur de prompt (base Supabase)</h1>
 
           <p className="text-sm sm:text-base text-gray-700 max-w-2xl">
-            Tu choisis un <b>thème</b> + un <b>type de production</b>. EleveAI génère un <b>prompt encadré</b> à coller
-            dans ChatGPT / Perplexity / Tchat EleveAI.
+            Le <b>prompt de base</b> vient de Supabase (payload.prompt). Les <b>thèmes</b> et options servent à
+            <b> améliorer</b> le prompt final.
           </p>
 
           <div className="rounded-2xl border border-emerald-200 bg-emerald-50 px-4 py-3">
@@ -464,9 +744,7 @@ export default function AtelierIAClient() {
               <span className="font-extrabold">Règle EleveAI :</span> une réponse IA n’est jamais une fin : elle doit
               être <span className="font-semibold">jugée et améliorée</span>.
             </p>
-            <p className="text-[11px] text-emerald-900/80 mt-1">
-              Traces + vérification + amélioration personnelle → pas “fait à la place”.
-            </p>
+            <p className="text-[11px] text-emerald-900/80 mt-1">Traces + vérification + amélioration personnelle → pas “fait à la place”.</p>
           </div>
 
           <div className="flex flex-wrap items-center gap-2 pt-2">
@@ -522,53 +800,10 @@ export default function AtelierIAClient() {
           </div>
         </header>
 
-        <div className="grid gap-6 lg:grid-cols-2">
+        <div className="grid gap-6 lg:grid-cols-2 mt-6">
           {/* FORM */}
           <section className="bg-white/95 border border-slate-200 rounded-2xl shadow-sm p-5 sm:p-6 space-y-4">
-            <h2 className="text-lg font-bold text-emerald-800 flex items-center gap-2">1️⃣ Choix de l’activité</h2>
-
-            <div className="grid sm:grid-cols-3 gap-3">
-              <div className="space-y-1">
-                <label className="text-xs font-semibold text-gray-600">Public</label>
-                <select
-                  value={form.niveauPublic}
-                  onChange={(e) => handleChange("niveauPublic", e.target.value as NiveauPublic)}
-                  className="w-full border rounded-lg px-3 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-emerald-200"
-                >
-                  <option value="tous">Collège + Lycée</option>
-                  <option value="college">Collège</option>
-                  <option value="lycee">Lycée</option>
-                </select>
-              </div>
-
-              <div className="space-y-1">
-                <label className="text-xs font-semibold text-gray-600">Durée</label>
-                <select
-                  value={form.duree}
-                  onChange={(e) => handleChange("duree", Number(e.target.value) as Duree)}
-                  className="w-full border rounded-lg px-3 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-emerald-200"
-                >
-                  {[15, 30, 45, 60, 90].map((d) => (
-                    <option key={d} value={d}>
-                      {d} min
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              <div className="space-y-1">
-                <label className="text-xs font-semibold text-gray-600">Style</label>
-                <select
-                  value={form.outputStyle}
-                  onChange={(e) => handleChange("outputStyle", e.target.value as OutputStyle)}
-                  className="w-full border rounded-lg px-3 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-emerald-200"
-                >
-                  <option value="simple">Simple</option>
-                  <option value="word">Word</option>
-                  <option value="word_expert">Word Expert</option>
-                </select>
-              </div>
-            </div>
+            <h2 className="text-lg font-bold text-emerald-800 flex items-center gap-2">1️⃣ Améliorations (thèmes)</h2>
 
             {/* THEMES */}
             <div className="space-y-2">
@@ -582,9 +817,7 @@ export default function AtelierIAClient() {
                       type="button"
                       onClick={() => toggleTheme(t.id)}
                       className={`px-3 py-1.5 rounded-full text-[12px] font-semibold border transition ${
-                        active
-                          ? "bg-emerald-700 text-white border-emerald-700"
-                          : "bg-white text-slate-700 border-slate-300 hover:bg-slate-50"
+                        active ? "bg-emerald-700 text-white border-emerald-700" : "bg-white text-slate-700 border-slate-300 hover:bg-slate-50"
                       }`}
                       title={t.hint}
                     >
@@ -605,68 +838,36 @@ export default function AtelierIAClient() {
               </div>
             </div>
 
-            {/* PRODUCTION */}
-            <div className="space-y-2">
-              <label className="text-xs font-semibold text-gray-600">Type de production</label>
-              <div className="grid gap-2 sm:grid-cols-2">
-                {PRODUCTIONS.map((p) => {
-                  const active = form.production === p.id;
-                  return (
-                    <button
-                      key={p.id}
-                      type="button"
-                      onClick={() => {
-                        handleChange("production", p.id);
-                        applyProductionTemplate(p.id);
-                      }}
-                      className={`text-left border rounded-xl px-3 py-3 text-xs sm:text-[13px] transition ${
-                        active ? "border-emerald-700 bg-emerald-50 shadow-sm" : "border-slate-200 bg-white hover:border-emerald-200"
-                      }`}
-                      title={p.hint}
-                    >
-                      <div className="font-semibold text-slate-800">
-                        {p.emoji} {p.label}
-                      </div>
-                      <div className="text-[11px] text-slate-600 mt-1">{p.hint}</div>
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
-
-            {/* OBJECTIF / CONTRAINTES */}
+            {/* OBJECTIF = titre preset */}
             <div className="space-y-1">
-              <label className="text-xs font-semibold text-gray-600">Objectif</label>
-              <textarea
-                ref={objectifRef}
+              <label className="text-xs font-semibold text-gray-600">Objectif (titre du preset)</label>
+              <input
                 value={form.objectif}
-                onChange={(e) => {
-                  handleChange("objectif", e.target.value);
-                  autoResize(e.currentTarget);
-                }}
-                onFocus={(e) => autoResize(e.currentTarget)}
-                className="w-full border rounded-lg px-3 py-2 text-sm resize-none overflow-hidden focus:outline-none focus:ring-2 focus:ring-emerald-200"
+                readOnly
+                className="w-full border rounded-lg px-3 py-2 text-sm bg-slate-50 text-slate-800"
+                placeholder="Sélectionne un preset (le titre se mettra ici)."
               />
-
             </div>
 
+            {/* CONTENU = prompt supabase */}
             <div className="space-y-1">
-              <label className="text-xs font-semibold text-gray-600">
-                Contraintes / consigne initiale
-              </label>
-
+              <label className="text-xs font-semibold text-gray-600">Contenu (prompt base Supabase)</label>
               <textarea
-                ref={contraintesRef}
-                value={form.contraintes}
+                ref={contenuRef}
+                value={form.contenu}
                 onChange={(e) => {
-                  handleChange("contraintes", e.target.value);
+                  // ✅ tu peux laisser éditable si besoin (au cas où payload.prompt manque)
+                  handleChange("contenu", e.target.value);
                   autoResize(e.currentTarget);
                 }}
                 onFocus={(e) => autoResize(e.currentTarget)}
-                className="w-full border rounded-lg px-3 py-2 text-sm resize-none overflow-hidden focus:outline-none focus:ring-2 focus:ring-emerald-200"
+                className="w-full border rounded-lg px-3 py-2 text-[12px] font-mono bg-white resize-none overflow-hidden focus:outline-none focus:ring-2 focus:ring-emerald-200 min-h-[220px]"
+                placeholder="Doit venir de payload.prompt (Supabase). Si vide, ajoute payload.prompt dans tes presets."
               />
+              <p className="text-[11px] text-slate-500">
+                Attendu : <b>payload.prompt</b> (ou prompt_base / prompt_ia / promptInterne).
+              </p>
             </div>
-
 
             {!validation.ok && (
               <div className="rounded-xl border border-rose-200 bg-rose-50 px-3 py-2">
@@ -692,7 +893,7 @@ export default function AtelierIAClient() {
                 }`}
               >
                 <Sparkles className="w-4 h-4" />
-                Générer le prompt
+                Générer le prompt final
               </button>
             </div>
           </section>
@@ -701,10 +902,10 @@ export default function AtelierIAClient() {
           <section className="space-y-4">
             {/* PROMPT */}
             <div ref={promptRef} className="bg-white/95 border border-slate-200 rounded-2xl shadow-sm p-5 sm:p-6 space-y-4">
-              <div className="flex items-center justify-between gap-2">
-                <h2 className="text-lg font-bold text-emerald-800">2️⃣ Prompt (à copier-coller)</h2>
+              <div className="flex items-center justify-between gap-2 flex-wrap">
+                <h2 className="text-lg font-bold text-emerald-800">2️⃣ Prompt final (base + améliorations)</h2>
 
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 flex-wrap">
                   <button
                     type="button"
                     onClick={copierPrompt}
@@ -715,6 +916,32 @@ export default function AtelierIAClient() {
                   >
                     <ClipboardCopy className="w-4 h-4" />
                     {copiedPrompt ? "Copié" : "Copier"}
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={openChatGPT}
+                    disabled={!promptInterne}
+                    className={`inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-[11px] font-semibold transition ${
+                      promptInterne ? "bg-slate-900 text-white hover:bg-black" : "bg-slate-200 text-slate-500 cursor-not-allowed"
+                    }`}
+                    title="Copie le prompt puis ouvre ChatGPT"
+                  >
+                    <ExternalLink className="w-4 h-4" />
+                    ChatGPT
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={openPerplexity}
+                    disabled={!promptInterne}
+                    className={`inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-[11px] font-semibold transition ${
+                      promptInterne ? "bg-emerald-700 text-white hover:bg-emerald-800" : "bg-slate-200 text-slate-500 cursor-not-allowed"
+                    }`}
+                    title="Copie le prompt puis ouvre Perplexity"
+                  >
+                    <ExternalLink className="w-4 h-4" />
+                    Perplexity
                   </button>
 
                   <button
@@ -733,7 +960,7 @@ export default function AtelierIAClient() {
                   readOnly
                   value={promptInterne}
                   className="w-full border rounded-lg px-3 py-2 text-[11px] font-mono bg-slate-50 min-h-[260px]"
-                  placeholder="Le prompt apparaîtra ici."
+                  placeholder="Le prompt final apparaîtra ici."
                 />
               )}
 
