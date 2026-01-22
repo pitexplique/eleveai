@@ -356,6 +356,17 @@ export default function AtelierIAClient() {
   const [audience, setAudience] = useState<Audience>("profs");
   const [q, setQ] = useState("");
 
+  // ✅ PATCH : handlers qui vident la recherche
+  const onSelectClasse = useCallback((c: Classe) => {
+    setClasse(c);
+    setQ("");
+  }, []);
+
+  const onSelectAudience = useCallback((a: Audience) => {
+    setAudience(a);
+    setQ("");
+  }, []);
+
   // Liste presets
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -590,7 +601,11 @@ export default function AtelierIAClient() {
                   <label className="text-xs font-semibold text-gray-600">Classe</label>
                   <div className="flex flex-wrap gap-2">
                     {CLASSES.map((c) => (
-                      <FilterChip key={c} active={classe === c} onClick={() => setClasse(c)}>
+                      <FilterChip
+                        key={c}
+                        active={classe === c}
+                        onClick={() => onSelectClasse(c)} // ✅ patch
+                      >
                         {c}
                       </FilterChip>
                     ))}
@@ -602,19 +617,19 @@ export default function AtelierIAClient() {
                   <div className="flex flex-wrap gap-2">
                     <FilterChip
                       active={audience === "profs"}
-                      onClick={() => setAudience("profs")}
+                      onClick={() => onSelectAudience("profs")} // ✅ patch
                     >
                       Profs
                     </FilterChip>
                     <FilterChip
                       active={audience === "eleves"}
-                      onClick={() => setAudience("eleves")}
+                      onClick={() => onSelectAudience("eleves")} // ✅ patch
                     >
                       Élèves
                     </FilterChip>
                     <FilterChip
                       active={audience === "parents"}
-                      onClick={() => setAudience("parents")}
+                      onClick={() => onSelectAudience("parents")} // ✅ patch
                     >
                       Parents
                     </FilterChip>
@@ -910,3 +925,5 @@ export default function AtelierIAClient() {
     </main>
   );
 }
+
+
