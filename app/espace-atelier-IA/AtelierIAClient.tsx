@@ -2,7 +2,7 @@
 "use client";
 
 import Link from "next/link";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import ToggleChip from "@/components/ToggleChip";
 
@@ -154,8 +154,10 @@ function reconstructPromptBase(preset: DbPreset): string {
 
   lines.push("IA autorisée (encadrée) :");
   if (typeof nbPromptsMax === "number") lines.push(`- Nombre de prompts max : ${nbPromptsMax}`);
-  if (ia?.reformulation_obligatoire != null) lines.push(`- Reformulation obligatoire : ${ia.reformulation_obligatoire ? "oui" : "non"}`);
-  if (ia?.copier_coller_interdit != null) lines.push(`- Copier-coller interdit : ${ia.copier_coller_interdit ? "oui" : "non"}`);
+  if (ia?.reformulation_obligatoire != null)
+    lines.push(`- Reformulation obligatoire : ${ia.reformulation_obligatoire ? "oui" : "non"}`);
+  if (ia?.copier_coller_interdit != null)
+    lines.push(`- Copier-coller interdit : ${ia.copier_coller_interdit ? "oui" : "non"}`);
   if (tracesOblig.length) {
     lines.push("- Traces obligatoires :");
     for (const t of tracesOblig) lines.push(`  • ${t}`);
@@ -199,7 +201,8 @@ function buildPromptFinal(opts: {
   enrich.push(`Objectif (modifié) : ${objectif || preset.title}`);
   enrich.push("");
 
-  if (themesLabels.length) enrich.push(`Thèmes “Agir sur le monde” (enrichissement) : ${themesLabels.join(", ")}.`);
+  if (themesLabels.length)
+    enrich.push(`Thèmes “Agir sur le monde” (enrichissement) : ${themesLabels.join(", ")}.`);
   if (themeLocal?.trim()) enrich.push(`Contexte local : ${themeLocal.trim()}`);
   enrich.push("");
 
@@ -212,6 +215,33 @@ function buildPromptFinal(opts: {
   enrich.push(contenuBase.trim() || "(contenu vide)");
 
   return enrich.join("\n");
+}
+
+/* ----------------------------------------
+   UI : Chip générique (pour filtres)
+---------------------------------------- */
+function FilterChip({
+  active,
+  onClick,
+  children,
+}: {
+  active: boolean;
+  onClick: () => void;
+  children: React.ReactNode;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className={`px-3 py-1.5 rounded-full text-[12px] font-semibold border transition ${
+        active
+          ? "bg-emerald-700 text-white border-emerald-700"
+          : "bg-white text-slate-700 border-slate-300 hover:bg-slate-50"
+      }`}
+    >
+      {children}
+    </button>
+  );
 }
 
 /* ----------------------------------------
@@ -334,7 +364,9 @@ export default function AtelierIAClient() {
 
   // Enrichissements / édition
   const [themesAgir, setThemesAgir] = useState<ThemeAgir[]>(["eau"]);
-  const [themeLocal, setThemeLocal] = useState("La Réunion — contexte local : [commune / collège / quartier]");
+  const [themeLocal, setThemeLocal] = useState(
+    "La Réunion — contexte local : [commune / collège / quartier]"
+  );
 
   const [titreEdit, setTitreEdit] = useState("");
   const [objectifEdit, setObjectifEdit] = useState("");
@@ -477,7 +509,16 @@ export default function AtelierIAClient() {
     setCopied(false);
     showToast("✨ Prompt final prêt !");
     setTimeout(() => scrollToPrompt(), 80);
-  }, [contenuBase, objectifEdit, scrollToPrompt, selectedPreset, showToast, themeLocal, themesAgir, titreEdit]);
+  }, [
+    contenuBase,
+    objectifEdit,
+    scrollToPrompt,
+    selectedPreset,
+    showToast,
+    themeLocal,
+    themesAgir,
+    titreEdit,
+  ]);
 
   const copierPromptFinal = useCallback(async () => {
     if (!promptFinal) return;
@@ -493,26 +534,35 @@ export default function AtelierIAClient() {
 
   return (
     <main className="min-h-screen bg-gradient-to-b from-emerald-50 via-white to-slate-50 text-gray-900">
-      <div ref={topRef} className="w-full max-w-[1400px] mx-auto px-3 sm:px-5 lg:px-6 py-6 lg:py-10">
+      <div
+        ref={topRef}
+        className="w-full max-w-[1400px] mx-auto px-3 sm:px-5 lg:px-6 py-6 lg:py-10"
+      >
         <header className="space-y-2">
           <p className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100 text-xs font-semibold text-emerald-900">
             <span>🧪</span>
             <span>Atelier-IA · Presets Supabase (source unique)</span>
           </p>
 
-          <h1 className="text-3xl sm:text-4xl font-extrabold text-emerald-800">Atelier-IA — Prompt depuis un preset</h1>
+          <h1 className="text-3xl sm:text-4xl font-extrabold text-emerald-800">
+            Atelier-IA — Prompt depuis un preset
+          </h1>
 
           <p className="text-sm sm:text-base text-gray-700 max-w-3xl">
-            Tu <b>choisis un preset</b> (Supabase), puis tu fais un <b>petit enrichissement</b> : titre, objectif, thèmes “Agir sur le monde”.
-            Ensuite EleveAI produit un <b>prompt final</b> prêt à coller.
+            Tu <b>choisis un preset</b> (Supabase), puis tu fais un <b>petit enrichissement</b>{" "}
+            : titre, objectif, thèmes “Agir sur le monde”. Ensuite EleveAI produit un{" "}
+            <b>prompt final</b> prêt à coller.
           </p>
 
           <div className="rounded-2xl border border-emerald-200 bg-emerald-50 px-4 py-3">
             <p className="text-sm text-emerald-900">
-              <span className="font-extrabold">Règle EleveAI :</span> l’IA aide, mais le rendu final doit être{" "}
+              <span className="font-extrabold">Règle EleveAI :</span> l’IA aide, mais le rendu
+              final doit être{" "}
               <span className="font-semibold">personnel, justifié, et tracé</span>.
             </p>
-            <p className="text-[11px] text-emerald-900/80 mt-1">Copier-coller interdit → reformulation + traces.</p>
+            <p className="text-[11px] text-emerald-900/80 mt-1">
+              Copier-coller interdit → reformulation + traces.
+            </p>
           </div>
 
           <div className="flex flex-wrap items-center gap-2 pt-2">
@@ -529,41 +579,54 @@ export default function AtelierIAClient() {
 
         {/* =========================
             TABLEAU PRESETS + FILTRES
-            (tu m’as dit : on ne change rien — donc simple et propre)
+            (tableau + recherche inchangés)
            ========================= */}
         <section className="mt-6 bg-white/95 border border-slate-200 rounded-2xl shadow-sm p-5 sm:p-6 space-y-4">
           <div className="flex flex-col lg:flex-row lg:items-end gap-3 justify-between">
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 w-full">
-              <div className="space-y-1">
-                <label className="text-xs font-semibold text-gray-600">Classe</label>
-                <select
-                  value={classe}
-                  onChange={(e) => setClasse(e.target.value as Classe)}
-                  className="w-full border rounded-lg px-3 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-emerald-200"
-                >
-                  {CLASSES.map((c) => (
-                    <option key={c} value={c}>
-                      {c}
-                    </option>
-                  ))}
-                </select>
+              {/* ✅ CHIPS (2 lignes) : Classe puis Audience */}
+              <div className="sm:col-span-2 space-y-3">
+                <div className="space-y-1">
+                  <label className="text-xs font-semibold text-gray-600">Classe</label>
+                  <div className="flex flex-wrap gap-2">
+                    {CLASSES.map((c) => (
+                      <FilterChip key={c} active={classe === c} onClick={() => setClasse(c)}>
+                        {c}
+                      </FilterChip>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="space-y-1">
+                  <label className="text-xs font-semibold text-gray-600">Audience</label>
+                  <div className="flex flex-wrap gap-2">
+                    <FilterChip
+                      active={audience === "profs"}
+                      onClick={() => setAudience("profs")}
+                    >
+                      Profs
+                    </FilterChip>
+                    <FilterChip
+                      active={audience === "eleves"}
+                      onClick={() => setAudience("eleves")}
+                    >
+                      Élèves
+                    </FilterChip>
+                    <FilterChip
+                      active={audience === "parents"}
+                      onClick={() => setAudience("parents")}
+                    >
+                      Parents
+                    </FilterChip>
+                  </div>
+                </div>
               </div>
 
+              {/* ✅ Recherche : identique */}
               <div className="space-y-1">
-                <label className="text-xs font-semibold text-gray-600">Audience</label>
-                <select
-                  value={audience}
-                  onChange={(e) => setAudience(e.target.value as Audience)}
-                  className="w-full border rounded-lg px-3 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-emerald-200"
-                >
-                  <option value="profs">Profs</option>
-                  <option value="eleves">Élèves</option>
-                  <option value="parents">Parents</option>
-                </select>
-              </div>
-
-              <div className="space-y-1">
-                <label className="text-xs font-semibold text-gray-600">Recherche (titre ou tags)</label>
+                <label className="text-xs font-semibold text-gray-600">
+                  Recherche (titre ou tags)
+                </label>
                 <input
                   value={q}
                   onChange={(e) => setQ(e.target.value)}
@@ -574,7 +637,8 @@ export default function AtelierIAClient() {
             </div>
 
             <div className="text-xs text-slate-600">
-              <span className="font-semibold">matière</span> = Atelier-IA · <span className="font-semibold">niveau</span> = standard
+              <span className="font-semibold">matière</span> = Atelier-IA ·{" "}
+              <span className="font-semibold">niveau</span> = standard
             </div>
           </div>
 
@@ -683,7 +747,9 @@ export default function AtelierIAClient() {
 
                 {/* THEMES */}
                 <div className="space-y-2">
-                  <label className="text-xs font-semibold text-gray-600">Thèmes (Agir sur le monde) — enrichissement</label>
+                  <label className="text-xs font-semibold text-gray-600">
+                    Thèmes (Agir sur le monde) — enrichissement
+                  </label>
                   <div className="flex flex-wrap gap-2">
                     {THEMES.map((t) => {
                       const active = themesAgir.includes(t.id);
@@ -706,7 +772,9 @@ export default function AtelierIAClient() {
                   </div>
 
                   <div className="space-y-1 pt-1">
-                    <label className="text-[11px] font-semibold text-gray-600">Contexte local (optionnel)</label>
+                    <label className="text-[11px] font-semibold text-gray-600">
+                      Contexte local (optionnel)
+                    </label>
                     <input
                       value={themeLocal}
                       onChange={(e) => setThemeLocal(e.target.value)}
@@ -718,7 +786,9 @@ export default function AtelierIAClient() {
 
                 {/* CONTENU BASE */}
                 <div className="space-y-1">
-                  <label className="text-xs font-semibold text-gray-600">Contenu (base du preset) — éditable</label>
+                  <label className="text-xs font-semibold text-gray-600">
+                    Contenu (base du preset) — éditable
+                  </label>
                   <textarea
                     value={contenuBase}
                     onChange={(e) => setContenuBase(e.target.value)}
@@ -760,7 +830,9 @@ export default function AtelierIAClient() {
               className="bg-white/95 border border-slate-200 rounded-2xl shadow-sm p-5 sm:p-6 space-y-4"
             >
               <div className="flex items-center justify-between gap-2">
-                <h2 className="text-lg font-bold text-emerald-800">2️⃣ Prompt final (à copier-coller)</h2>
+                <h2 className="text-lg font-bold text-emerald-800">
+                  2️⃣ Prompt final (à copier-coller)
+                </h2>
 
                 <div className="flex items-center gap-2">
                   <button
@@ -789,12 +861,12 @@ export default function AtelierIAClient() {
               </div>
 
               {showPrompt && (
-              <textarea
-                readOnly
-                value={promptFinal}
-                className="w-full border rounded-lg px-3 py-2 text-[11px] font-mono bg-slate-50 min-h-[320px]"
-                placeholder="Clique « Générer le prompt final »."
-              />
+                <textarea
+                  readOnly
+                  value={promptFinal}
+                  className="w-full border rounded-lg px-3 py-2 text-[11px] font-mono bg-slate-50 min-h-[320px]"
+                  placeholder="Clique « Générer le prompt final »."
+                />
               )}
 
               <PasteTargets text={promptFinal} showToast={showToast} />
@@ -819,7 +891,10 @@ export default function AtelierIAClient() {
               <h3 className="font-bold text-slate-900">ℹ️ Rappel (aligné EleveAI)</h3>
               <ul className="mt-2 text-sm text-slate-700 list-disc pl-5 space-y-1">
                 <li>Le preset Supabase est la base “officielle”.</li>
-                <li>Tu modifies seulement : <b>titre</b>, <b>objectif</b>, <b>thèmes</b>, et éventuellement une petite retouche du contenu.</li>
+                <li>
+                  Tu modifies seulement : <b>titre</b>, <b>objectif</b>, <b>thèmes</b>, et éventuellement une petite
+                  retouche du contenu.
+                </li>
                 <li>Le prompt final reste <b>anti-triche</b> : traces + reformulation + vérification.</li>
               </ul>
             </div>
