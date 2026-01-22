@@ -556,7 +556,7 @@ export default function AtelierIAClient() {
           </p>
 
           <h1 className="text-3xl sm:text-4xl font-extrabold text-emerald-800">
-            Atelier-IA — Prompt depuis un preset
+            Atelier-IA — Apprends à utiliser l'IA - Change ton monde
           </h1>
 
           <p className="text-sm sm:text-base text-gray-700 max-w-3xl">
