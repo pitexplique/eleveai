@@ -60,12 +60,12 @@ export const MATIERES: readonly OptionSelect[] = [
 
   // 🌍 Langues vivantes
   { value: "", label: "🌍 Langues vivantes", disabled: true },
-  { value: "anglais", label: "Anglais" },
-  { value: "espagnol", label: "Espagnol" },
-  { value: "allemand", label: "Allemand" },
-  { value: "italien", label: "Italien" },
-  { value: "portugais", label: "Portugais" },
-  { value: "creole", label: "Créole" },
+  { value: "Anglais", label: "Anglais" },
+  { value: "Espagnol", label: "Espagnol" },
+  { value: "Allemand", label: "Allemand" },
+  { value: "Italien", label: "Italien" },
+  { value: "Portugais", label: "Portugais" },
+  { value: "Creole", label: "Créole" },
   { value: "autre-langue", label: "Autre langue vivante" },
 
   // 🧠 Sciences humaines & sociales

@@ -1137,49 +1137,75 @@ export default function ProfsPage() {
     [clearOutputs, form.typeId, scrollToTop, showToast],
   );
 
-  const appliquerPresetPublic = useCallback(
+function safeJsonParse<T>(v: unknown): T | null {
+  if (!v) return null;
+  if (typeof v === "object") return v as T;
+  if (typeof v === "string") {
+    try {
+      return JSON.parse(v) as T;
+    } catch {
+      return null;
+    }
+  }
+  return null;
+}
+
+type PayloadPreset = {
+  meta?: any;
+  form?: Partial<PromptProf> & Record<string, unknown>;
+  // au cas où certains presets seraient “plats”
+  [k: string]: any;
+};
+
+const appliquerPresetPublic = useCallback(
   (p: DbPresetEleveai) => {
-    const v = (p.payload ?? {}) as Partial<PromptProf> & Record<string, unknown>;
+    // 1) payload -> objet
+    const payloadObj = safeJsonParse<PayloadPreset>(p.payload);
+
+    // 2) on supporte 2 formats :
+    //    A) payload = { form: {...} }
+    //    B) payload = { ...champs du form... }
+    const vForm = (payloadObj?.form ?? payloadObj ?? {}) as Partial<PromptProf> & Record<string, unknown>;
 
     setForm((prev): PromptProf => {
       const next: PromptProf = {
         ...prev,
 
-        // ✅ on force la cohérence des filtres
-        classe: p.classe || prev.classe,
-        matiere: p.matiere || prev.matiere,
-        niveau: (p.niveau as Niveau) || prev.niveau,
+        // cohérence filtres (DB)
+        classe: (p.classe as any) || prev.classe,
+        matiere: (p.matiere as any) || prev.matiere,
+        niveau: (p.niveau as any) || prev.niveau,
 
-        // ✅ vitrine
-        titre: p.title || prev.titre,
-        // si tu veux : tu peux aussi pousser description dans objectif (option)
-        // objectifPedagogique: p.description || prev.objectifPedagogique,
+        // vitrine
+        titre: (p.title as any) || prev.titre,
 
-        // ✅ payload (optionnel) : ne remplace que ce qui existe
-        ...v,
+        // ✅ IMPORTANT : on applique le form venant du payload
+        ...vForm,
 
-        // garde-fous typés
-        typeId: typeof v.typeId === "string" ? v.typeId : prev.typeId,
-        methode: typeof v.methode === "string" ? (v.methode as MethodePedagogique) : prev.methode,
-        outputStyle: typeof v.outputStyle === "string" ? (v.outputStyle as OutputStyle) : prev.outputStyle,
-        dureeMin: typeof v.dureeMin === "number" ? v.dureeMin : prev.dureeMin,
-        tonalite: typeof v.tonalite === "string" ? (v.tonalite as Tonalite) : prev.tonalite,
+        // garde-fous typés (si tu veux)
+        typeId: typeof vForm.typeId === "string" ? (vForm.typeId as any) : prev.typeId,
+        methode: typeof vForm.methode === "string" ? (vForm.methode as any) : prev.methode,
+        outputStyle: typeof vForm.outputStyle === "string" ? (vForm.outputStyle as any) : prev.outputStyle,
+        dureeMin: typeof vForm.dureeMin === "number" ? (vForm.dureeMin as any) : prev.dureeMin,
+        tonalite: typeof vForm.tonalite === "string" ? (vForm.tonalite as any) : prev.tonalite,
         modaliteEvaluation:
-          typeof v.modaliteEvaluation === "string" ? (v.modaliteEvaluation as ModaliteEvaluation) : prev.modaliteEvaluation,
-        themes: Array.isArray(v.themes) ? (v.themes as ThemeAborde[]) : prev.themes,
-        themesLabel: typeof v.themesLabel === "string" ? v.themesLabel : prev.themesLabel,
-        tags: Array.isArray(p.tags) ? p.tags : Array.isArray(v.tags) ? (v.tags as string[]) : prev.tags,
-        latex: typeof v.latex === "boolean" ? v.latex : prev.latex,
+          typeof vForm.modaliteEvaluation === "string" ? (vForm.modaliteEvaluation as any) : prev.modaliteEvaluation,
+        themes: Array.isArray(vForm.themes) ? (vForm.themes as any) : prev.themes,
+        themesLabel: typeof vForm.themesLabel === "string" ? (vForm.themesLabel as any) : prev.themesLabel,
+        tags: Array.isArray(p.tags) ? p.tags : Array.isArray(vForm.tags) ? (vForm.tags as any) : prev.tags,
+        latex: typeof vForm.latex === "boolean" ? (vForm.latex as any) : prev.latex,
       };
 
       return next;
     });
 
-    // tags UI
     setRawTags((p.tags ?? []).join(", "));
 
     // sync catégorie selon typeId si présent
-    const t = getTypeById(typeof (p.payload ?? {})?.typeId === "string" ? (p.payload as any).typeId : form.typeId);
+    const typeIdCandidate =
+      typeof vForm.typeId === "string" ? (vForm.typeId as string) : typeof (payloadObj as any)?.meta?.typeId === "string" ? (payloadObj as any).meta.typeId : form.typeId;
+
+    const t = getTypeById(typeIdCandidate);
     if (t?.category) setMainCategory(normalizeMainCategory(t.category));
 
     clearOutputs();
@@ -1191,6 +1217,7 @@ export default function ProfsPage() {
   },
   [clearOutputs, form.typeId, scrollToTop, showToast],
 );
+
 
 
   const resetPage = useCallback(() => {

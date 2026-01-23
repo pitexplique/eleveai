@@ -150,6 +150,7 @@ type InputMode = "rapide" | "precis";
    OPTIONS
 ---------------------------------------- */
 
+
 const TONALITES: { id: Tonalite; label: string; hint: string }[] = [
   { id: "neutre", label: "Neutre", hint: "Clair et direct." },
   { id: "bienveillante", label: "Bienveillante", hint: "Encourageante, rassurante." },
@@ -212,6 +213,26 @@ const PROFS_PRESET_ITEMS: PresetCarouselItem[] = (Object.entries(PROFS_PRESETS) 
 /* ----------------------------------------
    HELPERS
 ---------------------------------------- */
+/* ----------------------------------------
+   HELPERS
+---------------------------------------- */
+
+    function niveauxToTryFromUi(n: Niveau): string[] {
+      switch (n) {
+        case "ulis":
+          return ["ulis", "remediation", "basique", "standard"];
+        case "remediation":
+          return ["remediation", "basique", "ulis", "standard"];
+        case "basique":
+          return ["basique", "remediation", "standard"];
+        case "standard":
+          return ["standard", "basique", "expert"];
+        case "expert":
+          return ["expert", "standard", "basique"];
+        default:
+          return ["standard", "basique"];
+      }
+    }
 
     function getEvalLabel(id: ModaliteEvaluation) {
       return EVAL_OPTIONS.find((e) => e.id === id)?.label ?? "Évaluation sommative";
@@ -735,6 +756,25 @@ type DbRunEmail = {
   created_at: string;
 };
 
+type DbPresetEleveai = {
+  id: string;
+  created_at: string;
+  updated_at: string;
+  audience: string; // 'profs' attendu
+  classe: string;
+  matiere: string;
+  niveau: string; // 'basique'|'standard'|...
+  title: string;
+  description: string;
+  tags: string[];
+  is_featured: boolean;
+  featured_rank: number | null;
+  payload: any; // jsonb (on mappe côté UI)
+  is_archived: boolean;
+};
+
+
+
 /* ----------------------------------------
    RELANCE (Prompt 2)
 ---------------------------------------- */
@@ -748,6 +788,39 @@ type FeedbackChoice = "" | "ok" | "bof" | "pas_ok";
 export default function ProfsPage() {
   const supabase = useMemo(() => createClient(), []);
   const today = useMemo(() => new Date().toISOString().slice(0, 10), []);
+
+  // ✅ UI state
+  const [showPresets, setShowPresets] = useState(true);
+
+  // ✅ Presets publics (table presets_eleveai)
+  const [publicPresets, setPublicPresets] = useState<DbPresetEleveai[]>([]);
+  const [publicPresetsLoading, setPublicPresetsLoading] = useState(false);
+  const [publicPresetsError, setPublicPresetsError] = useState("");
+
+  // 🔍 Recherche presets
+  const [presetQuery, setPresetQuery] = useState("");
+
+
+
+  const filteredPublicPresets = useMemo(() => {
+    const q = presetQuery.trim().toLowerCase();
+    if (!q) return publicPresets;
+
+    return publicPresets.filter((p) => {
+      const haystack = [
+        p.title ?? "",
+        p.description ?? "",
+        ...(p.tags ?? []),
+      ]
+        .join(" ")
+        .toLowerCase();
+
+      return haystack.includes(q);
+    });
+  }, [publicPresets, presetQuery]);
+
+
+
 
   // ✅ Refs (scroll UX)
   const promptRef = useRef<HTMLDivElement | null>(null);
@@ -848,11 +921,95 @@ export default function ProfsPage() {
   const [mainCategory, setMainCategory] = useState<MainCategory>("seance");
   const [typeQuery, setTypeQuery] = useState("");
 
+  // ✅ helper (à mettre hors du composant, dans HELPERS)
+  function niveauxToTryFromUi(n: Niveau): string[] {
+    switch (n) {
+      case "ulis":
+        return ["ulis"];
+      case "remediation":
+        return ["remediation", "basique", "ulis", "standard"];
+      case "basique":
+        return ["basique", "remediation", "standard"];
+      case "standard":
+        return ["standard", "basique", "expert"];
+      case "expert":
+        return ["expert", "standard", "basique"];
+      default:
+        return ["standard", "basique"];
+    }
+  }
+
+  // ✅ loadPublicPresets (avec la nouvelle logique niveauxToTry)
+  const loadPublicPresets = useCallback(async () => {
+    setPublicPresetsError("");
+
+    // ✅ on charge dès que classe + matière existent
+    if (!form.classe || !form.matiere) {
+      setPublicPresets([]);
+      return;
+    }
+
+    setPublicPresetsLoading(true);
+
+    try {
+      // ✅ niveaux possibles selon ton UI (5 niveaux) + fallback intelligent
+      const niveauxToTry = niveauxToTryFromUi(form.niveau);
+
+      const query = supabase
+        .from("presets_eleveai")
+        .select(
+          "id, created_at, updated_at, audience, classe, matiere, niveau, title, description, tags, is_featured, featured_rank, payload, is_archived"
+        )
+        .eq("audience", "profs")
+        .eq("classe", form.classe)
+        .eq("matiere", form.matiere)
+        .eq("is_archived", false)
+        .order("is_featured", { ascending: false })
+        .order("featured_rank", { ascending: true, nullsFirst: false })
+        .limit(15);
+
+      // ✅ on filtre sur la liste niveauxToTry (multi-niveaux)
+      const { data, error } = await query.in("niveau", niveauxToTry);
+
+      console.log("[presets_eleveai] filtres =", {
+        audience: "profs",
+        classe: form.classe,
+        matiere: form.matiere,
+        niveauUI: form.niveau,
+        niveauxToTry,
+      });
+      console.log("[presets_eleveai] data =", data);
+      console.log("[presets_eleveai] error =", error);
+
+      if (error) throw new Error(error.message);
+
+      setPublicPresets((data ?? []) as DbPresetEleveai[]);
+    } catch (e: any) {
+      console.error("[presets_eleveai] catch =", e);
+      setPublicPresets([]);
+      setPublicPresetsError(e?.message || "Erreur chargement presets.");
+    } finally {
+      setPublicPresetsLoading(false);
+    }
+  }, [form.classe, form.matiere, form.niveau, supabase]);
+
+
+
+
+
+
   // ✅ Relance (Prompt 2)
   const [feedbackChoice, setFeedbackChoice] = useState<FeedbackChoice>("");
   const [feedbackText, setFeedbackText] = useState("");
   const [promptRelance, setPromptRelance] = useState("");
   const [copiedRelance, setCopiedRelance] = useState(false);
+
+
+  // ✅ Rerech preset
+    useEffect(() => {
+      loadPublicPresets();
+    }, [loadPublicPresets]);
+
 
   // ✅ Auth state
   useEffect(() => {
@@ -979,6 +1136,62 @@ export default function ProfsPage() {
     },
     [clearOutputs, form.typeId, scrollToTop, showToast],
   );
+
+  const appliquerPresetPublic = useCallback(
+  (p: DbPresetEleveai) => {
+    const v = (p.payload ?? {}) as Partial<PromptProf> & Record<string, unknown>;
+
+    setForm((prev): PromptProf => {
+      const next: PromptProf = {
+        ...prev,
+
+        // ✅ on force la cohérence des filtres
+        classe: p.classe || prev.classe,
+        matiere: p.matiere || prev.matiere,
+        niveau: (p.niveau as Niveau) || prev.niveau,
+
+        // ✅ vitrine
+        titre: p.title || prev.titre,
+        // si tu veux : tu peux aussi pousser description dans objectif (option)
+        // objectifPedagogique: p.description || prev.objectifPedagogique,
+
+        // ✅ payload (optionnel) : ne remplace que ce qui existe
+        ...v,
+
+        // garde-fous typés
+        typeId: typeof v.typeId === "string" ? v.typeId : prev.typeId,
+        methode: typeof v.methode === "string" ? (v.methode as MethodePedagogique) : prev.methode,
+        outputStyle: typeof v.outputStyle === "string" ? (v.outputStyle as OutputStyle) : prev.outputStyle,
+        dureeMin: typeof v.dureeMin === "number" ? v.dureeMin : prev.dureeMin,
+        tonalite: typeof v.tonalite === "string" ? (v.tonalite as Tonalite) : prev.tonalite,
+        modaliteEvaluation:
+          typeof v.modaliteEvaluation === "string" ? (v.modaliteEvaluation as ModaliteEvaluation) : prev.modaliteEvaluation,
+        themes: Array.isArray(v.themes) ? (v.themes as ThemeAborde[]) : prev.themes,
+        themesLabel: typeof v.themesLabel === "string" ? v.themesLabel : prev.themesLabel,
+        tags: Array.isArray(p.tags) ? p.tags : Array.isArray(v.tags) ? (v.tags as string[]) : prev.tags,
+        latex: typeof v.latex === "boolean" ? v.latex : prev.latex,
+      };
+
+      return next;
+    });
+
+    // tags UI
+    setRawTags((p.tags ?? []).join(", "));
+
+    // sync catégorie selon typeId si présent
+    const t = getTypeById(typeof (p.payload ?? {})?.typeId === "string" ? (p.payload as any).typeId : form.typeId);
+    if (t?.category) setMainCategory(normalizeMainCategory(t.category));
+
+    clearOutputs();
+    setShowMethode(false);
+    setShowEval(false);
+    setDbMsg("");
+    showToast("✅ Preset appliqué !");
+    setTimeout(() => scrollToTop(), 50);
+  },
+  [clearOutputs, form.typeId, scrollToTop, showToast],
+);
+
 
   const resetPage = useCallback(() => {
     setForm(makeInitialForm());
@@ -1423,176 +1636,435 @@ export default function ProfsPage() {
             <span>Espace professeurs · Prompts pédagogiques</span>
           </p>
 
-          <h1 className="text-3xl sm:text-4xl font-extrabold text-[#0047B6]">Générateur de prompts pédagogiques (Word-friendly)</h1>
+          <h1 className="text-3xl sm:text-4xl font-extrabold text-[#0047B6]">Générateur de prompts pédagogiques Basic Standard Expert</h1>
 
           <p className="text-sm sm:text-base text-gray-700 max-w-2xl">
             Choisis un <b>type</b> (séance, exercices, évaluation…), ajoute des <b>options</b>, puis écris ta consigne. EleveAI génère un{" "}
             <b>prompt clair</b> et une <b>ressource prête à l’emploi</b>.
           </p>
 
-          <div className="flex flex-wrap items-center gap-2 sm:gap-3 pt-2">
-            <ToggleChip
-              label="Neurosciences"
-              checked={form.neuro}
-              onChange={(v) => handleChange("neuro", v)}
-              hint="Pré-requis, micro-étapes, questions, récap, métacognition."
-              tone="emerald"
-              icon={<span>🧠</span>}
-            />
+        <div className="flex flex-wrap items-center gap-3 pt-3">
 
-            <ToggleChip
-              label="Adapter DYS"
-              checked={form.adaptationDYS}
-              onChange={(v) => handleChange("adaptationDYS", v)}
-              hint="Phrases courtes, aéré, vocabulaire expliqué."
-              tone="violet"
-              icon={<span>👁️</span>}
-            />
+        {/* RESET — action à part */}
+        <button
+          type="button"
+          onClick={resetPage}
+          disabled={agentLoading}
+          className={`inline-flex items-center gap-2 px-4 py-2 text-sm rounded-full font-semibold border transition ${
+            agentLoading
+              ? "bg-slate-100 text-slate-400 border-slate-200 cursor-not-allowed"
+              : "bg-red-50 text-red-700 border-red-200 hover:bg-red-100"
+          }`}
+        >
+          <RotateCcw className="w-5 h-5" />
+          Reset
+        </button>
 
-            <ToggleChip
-              label="LaTeX"
-              checked={form.latex}
-              onChange={(v) => handleChange("latex", v)}
-              hint="Formules LaTeX autorisées (sinon a/b, x^2…)."
-              tone="sky"
-              icon={<span>∑</span>}
-            />
+        {/* BARRE D’ACTIONS PRINCIPALES */}
+        <div className="flex flex-wrap items-center gap-3 px-4 py-3 rounded-xl bg-slate-50 border border-slate-200">
 
-            {estEval && (
-              <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-50 text-[11px] font-semibold text-amber-800 border border-amber-200">
-                <BadgeCheck className="w-4 h-4" />
-                Mode évaluation (barème + critères)
-              </span>
-            )}
+          {/* ENREGISTRER */}
+          <button
+            type="button"
+            onClick={saveCurrentPreset}
+            disabled={!isAuthed || agentLoading}
+            className={`inline-flex items-center gap-2 px-4 py-2 text-sm rounded-full font-semibold border transition ${
+              !isAuthed || agentLoading
+                ? "bg-slate-100 text-slate-400 border-slate-200 cursor-not-allowed"
+                : "bg-blue-600 text-white border-blue-600 hover:bg-blue-700"
+            }`}
+            title={!isAuthed ? "Connecte-toi pour enregistrer" : "Enregistrer ce preset"}
+          >
+            <Save className="w-5 h-5" />
+            Enregistrer
+          </button>
 
-            <button
-              type="button"
-              onClick={resetPage}
-              disabled={agentLoading}
-              className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-[11px] font-semibold border transition ${
-                agentLoading ? "bg-slate-100 text-slate-400 border-slate-200 cursor-not-allowed" : "bg-white text-slate-700 border-slate-300 hover:bg-slate-50"
-              }`}
-            >
-              <RotateCcw className="w-4 h-4" />
-              Reset complet
-            </button>
+          {/* MES PRESETS */}
+          <button
+            type="button"
+            onClick={loadMyPresets}
+            disabled={!isAuthed || myPresetsLoading}
+            className={`inline-flex items-center gap-2 px-4 py-2 text-sm rounded-full font-semibold border transition ${
+              !isAuthed || myPresetsLoading
+                ? "bg-slate-100 text-slate-400 border-slate-200 cursor-not-allowed"
+                : "bg-white text-slate-700 border-slate-300 hover:bg-slate-50"
+            }`}
+            title={!isAuthed ? "Connecte-toi pour voir tes presets" : "Afficher mes presets"}
+          >
+            <FolderOpen className="w-5 h-5" />
+            Mes presets
+          </button>
 
-            <div className="flex flex-wrap items-center gap-2">
-              <button
-                type="button"
-                onClick={saveCurrentPreset}
-                disabled={!isAuthed || agentLoading}
-                className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-[11px] font-semibold border transition ${
-                  !isAuthed || agentLoading ? "bg-slate-100 text-slate-400 border-slate-200 cursor-not-allowed" : "bg-white text-slate-700 border-slate-300 hover:bg-slate-50"
-                }`}
-                title={!isAuthed ? "Connecte-toi pour enregistrer" : "Enregistrer ce preset"}
-              >
-                <Save className="w-4 h-4" />
-                Enregistrer
-              </button>
+          {/* HISTORIQUE */}
+          <button
+            type="button"
+            onClick={loadRunsHistory}
+            disabled={!isAuthed || historyLoading}
+            className={`inline-flex items-center gap-2 px-4 py-2 text-sm rounded-full font-semibold border transition ${
+              !isAuthed || historyLoading
+                ? "bg-slate-100 text-slate-400 border-slate-200 cursor-not-allowed"
+                : "bg-white text-slate-700 border-slate-300 hover:bg-slate-50"
+            }`}
+            title={!isAuthed ? "Connecte-toi pour voir l'historique" : "Historique des générations"}
+          >
+            <History className="w-5 h-5" />
+            Historique
+          </button>
+        </div>
 
-              <button
-                type="button"
-                onClick={loadMyPresets}
-                disabled={!isAuthed || myPresetsLoading}
-                className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-[11px] font-semibold border transition ${
-                  !isAuthed || myPresetsLoading ? "bg-slate-100 text-slate-400 border-slate-200 cursor-not-allowed" : "bg-white text-slate-700 border-slate-300 hover:bg-slate-50"
-                }`}
-                title={!isAuthed ? "Connecte-toi pour voir tes presets" : "Afficher mes presets"}
-              >
-                <FolderOpen className="w-4 h-4" />
-                Mes presets
-              </button>
+        {/* MESSAGE DB */}
+        {dbMsg && (
+          <span className="px-4 py-2 text-sm font-semibold rounded-full bg-slate-800 text-white">
+            {dbMsg}
+          </span>
+        )}
 
-              <button
-                type="button"
-                onClick={loadRunsHistory}
-                disabled={!isAuthed || historyLoading}
-                className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-[11px] font-semibold border transition ${
-                  !isAuthed || historyLoading ? "bg-slate-100 text-slate-400 border-slate-200 cursor-not-allowed" : "bg-white text-slate-700 border-slate-300 hover:bg-slate-50"
-                }`}
-                title={!isAuthed ? "Connecte-toi pour voir l'historique" : "Historique des générations"}
-              >
-                <History className="w-4 h-4" />
-                Historique
-              </button>
-            </div>
+        {/* INFO NON CONNECTÉ */}
+        {!isAuthed && (
+          <span className="text-xs text-slate-600">
+            (Connecte-toi pour sauvegarder)
+          </span>
+        )}
+      </div>
 
-            {dbMsg && <span className="text-[11px] font-semibold px-3 py-1 rounded-full bg-slate-800 text-white">{dbMsg}</span>}
-
-            {!isAuthed && <span className="text-[11px] text-slate-600">(Connecte-toi pour sauvegarder)</span>}
-          </div>
         </header>
 
-        <PresetCarousel
-          title="Modèles rapides (facultatif)"
-          subtitle="Clique sur un modèle : le formulaire se pré-remplit."
-          items={PROFS_PRESET_ITEMS}
-          onSelect={(id) => appliquerPresetModele(id as ProfsPresetKey)}
-        />
+      {/* ligne 1 : classe matiere niveau */}
+{/* Classe / matière / niveau */}
+<div className="w-full rounded-2xl border border-gray-200 bg-white/90 shadow-sm p-4 sm:p-5">
+  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-5">
+    {/* Classe */}
+    <div className="flex flex-col gap-1.5">
+      <label className="text-[11px] sm:text-xs font-semibold text-gray-600 tracking-wide uppercase">
+        Classe / niveau
+      </label>
+      <select
+        value={form.classe}
+        onChange={(e) => {
+          handleChange("classe", e.target.value);
+          showToast("✅ Classe choisie");
+        }}
+        className="w-full h-11 sm:h-12 border border-gray-200 rounded-xl px-3 sm:px-4
+                   text-sm sm:text-[15px] bg-white shadow-sm transition
+                   focus:outline-none focus:ring-4 focus:ring-sky-200 focus:border-sky-400"
+      >
+        <option value="">Choisir…</option>
+        {CLASSES.map((c) => (
+          <option key={c.value} value={c.value}>
+            {c.label}
+          </option>
+        ))}
+      </select>
+    </div>
+
+    {/* Matière */}
+    <div className="flex flex-col gap-1.5">
+      <label className="text-[11px] sm:text-xs font-semibold text-gray-600 tracking-wide uppercase">
+        Matière
+      </label>
+      <select
+        value={form.matiere}
+        onChange={(e) => {
+          handleChange("matiere", e.target.value);
+          showToast("✅ Matière choisie");
+        }}
+        className="w-full h-11 sm:h-12 border border-gray-200 rounded-xl px-3 sm:px-4
+                   text-sm sm:text-[15px] bg-white shadow-sm transition
+                   focus:outline-none focus:ring-4 focus:ring-sky-200 focus:border-sky-400"
+      >
+        <option value="">Choisir…</option>
+        {MATIERES.map((m) => (
+          <option key={`${m.label}-${m.value}`} value={m.value} disabled={!!m.disabled}>
+            {m.label}
+          </option>
+        ))}
+      </select>
+    </div>
+
+    {/* Niveau */}
+    <div className="flex flex-col gap-1.5">
+      <label className="text-[11px] sm:text-xs font-semibold text-gray-600 tracking-wide uppercase">
+        Difficulté élèves
+      </label>
+      <select
+        value={form.niveau}
+        onChange={(e) => handleChange("niveau", e.target.value as Niveau)}
+        className="w-full h-11 sm:h-12 border border-gray-200 rounded-xl px-3 sm:px-4
+                   text-sm sm:text-[15px] bg-white shadow-sm transition
+                   focus:outline-none focus:ring-4 focus:ring-sky-200 focus:border-sky-400"
+      >
+        <option value="ulis">ULIS (adaptations fortes)</option>
+        <option value="remediation">Remédiation (bases à consolider)</option>
+        <option value="basique">Basique (très guidé)</option>
+        <option value="standard">Standard</option>
+        <option value="expert">Expert / approfondissement</option>
+      </select>
+    </div>
+  </div>
+</div>
+
+
+
+{/* ===============================
+    CARROUSEL MODÈLES RAPIDES (FACULTATIF)
+=============================== */}
+<div className="mt-6 rounded-2xl border border-slate-200 bg-slate-50/60">
+  {/* HEADER */}
+  <button
+    type="button"
+    onClick={() => setShowPresets((v) => !v)}
+    className="
+      w-full flex items-center justify-between gap-3
+      px-4 py-3
+      text-left
+      hover:bg-slate-100/70
+      transition
+    "
+  >
+    <div className="flex items-center gap-3">
+      <span className="text-sm font-semibold text-slate-800">
+        Modèles EleveAI officiels générés
+      </span>
+      <span className="text-xs text-slate-500">Démarrer plus vite</span>
+    </div>
+
+    <span
+      className={`text-slate-500 transition-transform duration-200 ${
+        showPresets ? "rotate-180" : ""
+      }`}
+    >
+      ▼
+    </span>
+  </button>
+
+  {/* CONTENU */}
+  <div
+    className={`
+      overflow-hidden transition-[max-height,opacity] duration-300 ease-out
+      ${showPresets ? "max-h-[900px] opacity-100" : "max-h-0 opacity-0"}
+    `}
+  >
+    <div className="px-4 pb-4 pt-2">
+      {/* ✅ Presets Supabase (presets_eleveai) */}
+      {!form.classe || !form.matiere ? (
+        <div className="rounded-xl border border-slate-200 bg-white p-4">
+          <p className="text-sm font-semibold text-slate-800">Choisis d’abord :</p>
+          <p className="text-[12px] text-slate-600">Classe • Matière</p>
+        </div>
+      ) : (
+        <>
+          {/* 🔍 Recherche presets */}
+          <div className="mb-3">
+            <label className="text-[11px] font-semibold text-slate-600">
+              Rechercher un preset
+            </label>
+            <div className="relative mt-1">
+              <Search className="w-4 h-4 text-slate-500 absolute left-3 top-1/2 -translate-y-1/2" />
+              <input
+                value={presetQuery}
+                onChange={(e) => setPresetQuery(e.target.value)}
+                placeholder="Titre, tags, description…"
+                className="w-full border rounded-lg pl-9 pr-3 py-2 text-sm bg-white
+                          focus:outline-none focus:ring-2 focus:ring-sky-300"
+              />
+            </div>
+
+            {!!presetQuery.trim() && (
+              <div className="mt-2 flex items-center justify-between">
+                <p className="text-[11px] text-slate-600">
+                  Résultats :{" "}
+                  <span className="font-semibold">{filteredPublicPresets.length}</span>
+                </p>
+                <button
+                  type="button"
+                  onClick={() => setPresetQuery("")}
+                  className="text-[11px] font-semibold text-slate-700 underline underline-offset-2 hover:text-slate-900"
+                >
+                  Effacer
+                </button>
+              </div>
+            )}
+          </div>
+
+          {publicPresetsLoading ? (
+            <div className="rounded-xl border border-slate-200 bg-white p-4">
+              <p className="text-sm text-slate-700">Chargement des presets…</p>
+            </div>
+          ) : publicPresetsError ? (
+            <div className="rounded-xl border border-rose-200 bg-rose-50 p-4">
+              <p className="text-sm font-semibold text-rose-800">⚠️ {publicPresetsError}</p>
+            </div>
+          ) : filteredPublicPresets.length === 0 ? (
+            <div className="rounded-xl border border-slate-200 bg-white p-4">
+              <p className="text-sm text-slate-700">Aucun preset trouvé pour ces filtres.</p>
+              <p className="mt-1 text-[12px] text-slate-500">
+                (Vérifie audience/classe/matière/niveau côté DB.)
+              </p>
+            </div>
+          ) : (
+            <>
+              {/* ✅ Tri : Favoris d'abord (puis titre) */}
+              {/*
+                Si tu veux conserver l'ordre DB au lieu de A→Z,
+                remplace localeCompare par 0 (ou un champ ranking si tu en as un).
+              */}
+              {(() => {
+                const sorted = [...filteredPublicPresets].sort((a, b) => {
+                  const fa = Number(!!a.is_featured);
+                  const fb = Number(!!b.is_featured);
+                  if (fb !== fa) return fb - fa;
+                  return (a.title ?? "").localeCompare(b.title ?? "", "fr");
+                });
+
+                // Adaptation vers PresetCarouselItem (ton composant)
+                const carouselItems = sorted.map((p) => ({
+                  id: p.id,
+                  label: p.title,
+                  description: p.description ?? "",
+                  badge: p.is_featured ? "⭐ Favori" : undefined,
+                  badges: (p.tags ?? []).slice(0, 8),
+                }));
+
+                return (
+                  <>
+                    {/* ==============
+                        MOBILE : CARROUSEL
+                    ============== */}
+                    <div className="sm:hidden">
+                      <PresetCarousel
+                        title=""
+                        subtitle=""
+                        tone="sky"
+                        showControls={false} // tu as déjà une recherche au-dessus
+                        items={carouselItems}
+                        onSelect={(id) => {
+                          const p = sorted.find((x) => x.id === id);
+                          if (p) appliquerPresetPublic(p);
+                        }}
+                      />
+                    </div>
+
+                    {/* ==============
+                        DESKTOP : TABLEAU + SCROLL (≈10 lignes visibles)
+                    ============== */}
+                    <div className="hidden sm:block">
+                      <div className="rounded-xl border border-slate-200 bg-white overflow-hidden">
+                        {/* Head */}
+                        <div className="grid grid-cols-[1.2fr_1.8fr_1fr_110px] gap-0 px-3 py-2 bg-slate-50 border-b border-slate-200">
+                          <div className="text-[11px] font-semibold text-slate-600">Titre</div>
+                          <div className="text-[11px] font-semibold text-slate-600">Description</div>
+                          <div className="text-[11px] font-semibold text-slate-600">Tags</div>
+                          <div className="text-[11px] font-semibold text-slate-600 text-right">
+                            Action
+                          </div>
+                        </div>
+
+                        {/* Body : hauteur ~ 10 lignes */}
+                        <div className="max-h-[520px] overflow-y-auto">
+                          {sorted.map((p) => (
+                            <div
+                              key={p.id}
+                              className="grid grid-cols-[1.2fr_1.8fr_1fr_110px] gap-0 px-3 py-2 border-b last:border-b-0 hover:bg-slate-50"
+                            >
+                              {/* Titre */}
+                              <div className="min-w-0 pr-3">
+                                <div className="flex items-center gap-2">
+                                  <div className="text-[13px] font-semibold text-slate-900 line-clamp-1">
+                                    {p.title}
+                                  </div>
+                                  {p.is_featured && (
+                                    <span className="shrink-0 text-[10px] px-2 py-0.5 rounded-full bg-amber-100 text-amber-900 font-semibold">
+                                      ⭐
+                                    </span>
+                                  )}
+                                </div>
+                              </div>
+
+                              {/* Description */}
+                              <div className="min-w-0 pr-3">
+                                <div className="text-[11px] text-slate-600 line-clamp-2 leading-snug">
+                                  {p.description ?? "—"}
+                                </div>
+                              </div>
+
+                              {/* Tags */}
+                              <div className="min-w-0 pr-3">
+                                {p.tags?.length ? (
+                                  <div className="flex flex-wrap gap-1.5">
+                                    {p.tags.slice(0, 5).map((tag: string) => (
+                                      <span
+                                        key={tag}
+                                        className="text-[10px] px-2 py-0.5 rounded-full bg-slate-100 text-slate-800 font-semibold"
+                                      >
+                                        {tag}
+                                      </span>
+                                    ))}
+                                    {p.tags.length > 5 ? (
+                                      <span className="text-[10px] text-slate-500">
+                                        +{p.tags.length - 5}
+                                      </span>
+                                    ) : null}
+                                  </div>
+                                ) : (
+                                  <span className="text-[11px] text-slate-400">—</span>
+                                )}
+                              </div>
+
+                              {/* Action */}
+                              <div className="flex items-center justify-end">
+                                <button
+                                  type="button"
+                                  onClick={() => appliquerPresetPublic(p)}
+                                  className="text-[11px] font-semibold px-3 py-1.5 rounded-lg bg-sky-600 text-white hover:bg-sky-700 transition"
+                                >
+                                  Appliquer
+                                </button>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+
+                      <p className="mt-2 text-[11px] text-slate-500">
+                        Affichage compact : tags limités à 5 (+N). Scroll limité à ~10 lignes.
+                      </p>
+                    </div>
+                  </>
+                );
+              })()}
+            </>
+          )}
+        </>
+      )}
+    </div>
+
+    {/* Optionnel : tes anciens modèles internes */}
+    {/*
+    <div className="px-4 pb-4">
+      <PresetCarousel
+        title="Modèles prêts à l’emploi (internes)"
+        subtitle="Ceux codés en dur (PROFS_PRESETS)."
+        items={PROFS_PRESET_ITEMS}
+        onSelect={(id) => appliquerPresetModele(id as ProfsPresetKey)}
+      />
+    </div>
+    */}
+  </div>
+</div>
+{/* ===============================
+    FIN CARROUSEL MODÈLES RAPIDES (FACULTATIF)
+=============================== */}
+
+
+      {/* ===============================
+          debut Paramètres pédagogiques
+      =============================== */}
 
         <div className="grid gap-6 lg:grid-cols-2">
           {/* FORM */}
           <section className="bg-white/95 border border-slate-200 rounded-2xl shadow-sm p-5 sm:p-6 space-y-4">
             <h2 className="text-lg font-bold text-[#0047B6] flex items-center gap-2">1️⃣ Paramètres pédagogiques</h2>
 
-            {/* Classe / matière / niveau */}
-            <div className="grid sm:grid-cols-3 gap-3">
-              <div className="space-y-1">
-                <label className="text-xs font-semibold text-gray-600">Classe / niveau</label>
-                <select
-                  value={form.classe}
-                  onChange={(e) => {
-                    handleChange("classe", e.target.value);
-                    showToast("✅ Classe choisie");
-                  }}
-                  className="w-full border rounded-lg px-3 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-sky-300"
-                >
-                  <option value="">Choisir…</option>
-                  {CLASSES.map((c) => (
-                    <option key={c.value} value={c.value}>
-                      {c.label}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              <div className="space-y-1">
-                <label className="text-xs font-semibold text-gray-600">Matière</label>
-                <select
-                  value={form.matiere}
-                  onChange={(e) => {
-                    handleChange("matiere", e.target.value);
-                    showToast("✅ Matière choisie");
-                  }}
-                  className="w-full border rounded-lg px-3 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-sky-300"
-                >
-                  <option value="">Choisir…</option>
-                  {MATIERES.map((m) => (
-                    <option key={`${m.label}-${m.value}`} value={m.value} disabled={!!m.disabled}>
-                      {m.label}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              <div className="space-y-1">
-                <label className="text-xs font-semibold text-gray-600">Difficulté élèves</label>
-
-              <select
-                value={form.niveau}
-                onChange={(e) => handleChange("niveau", e.target.value as Niveau)}
-                className="w-full border rounded-lg px-3 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-sky-300"
-              >
-                <option value="ulis">ULIS (adaptations fortes)</option>
-                <option value="remediation">Remédiation (bases à consolider)</option>
-                <option value="basique">Basique (très guidé)</option>
-                <option value="standard">Standard</option>
-                <option value="expert">Expert / approfondissement</option>
-              </select>
-
-              </div>
-            </div>
 
             {/* ✅ OPTION A : MODE */}
             <div className="space-y-2">
@@ -1805,6 +2277,39 @@ export default function ProfsPage() {
               </label>
 
               <div className="flex flex-wrap gap-2 mt-1">
+                <ToggleChip
+                  label="Neurosciences"
+                  checked={form.neuro}
+                  onChange={(v) => handleChange("neuro", v)}
+                  hint="Pré-requis, micro-étapes, questions, récap, métacognition."
+                  tone="emerald"
+                  icon={<span>🧠</span>}
+                />
+
+                <ToggleChip
+                  label="Adapter DYS"
+                  checked={form.adaptationDYS}
+                  onChange={(v) => handleChange("adaptationDYS", v)}
+                  hint="Phrases courtes, aéré, vocabulaire expliqué."
+                  tone="violet"
+                  icon={<span>👁️</span>}
+                />
+
+                <ToggleChip
+                  label="LaTeX"
+                  checked={form.latex}
+                  onChange={(v) => handleChange("latex", v)}
+                  hint="Formules LaTeX autorisées (sinon a/b, x^2…)."
+                  tone="sky"
+                  icon={<span>∑</span>}
+                />
+
+                {estEval && (
+                  <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-50 text-[11px] font-semibold text-amber-800 border border-amber-200">
+                    <BadgeCheck className="w-4 h-4" />
+                    Mode évaluation (barème + critères)
+                  </span>
+                )}                
                 <ToggleChip
                   label="Différenciation"
                   checked={form.optDifferenciation}
