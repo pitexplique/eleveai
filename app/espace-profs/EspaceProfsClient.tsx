@@ -91,10 +91,14 @@ function getMainCategoryMeta(cat: MainCategory) {
 /* ----------------------------------------
    TYPES UI
 ---------------------------------------- */
+/* ----Niveau du éléve-----------------------------------*/
 
 type Niveau = "basique" | "remediation" | "ulis" | "standard" | "expert";
 
 type OutputStyle = "simple" | "word" | "word_expert" | "slides";
+
+/* ----Niveau du prompt-----------------------------------*/
+
 type PromptMode = "basic" | "standard" | "expert";
 
 type Tonalite = "neutre" | "bienveillante" | "motivation" | "institutionnelle" | "ludique";
