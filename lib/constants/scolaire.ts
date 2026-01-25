@@ -45,7 +45,7 @@ export const MATIERES: readonly OptionSelect[] = [
   { value: "Français", label: "Français" },
   { value: "Histoire-Géographie", label: "Histoire-Géographie" },
   { value: "Physique-Chimie", label: "Physique-Chimie" },
-  { value: "svt", label: "SVT" },
+  { value: "SVT", label: "SVT" },
 
   // ➕ Mathématiques – lycée
   { value: "", label: "➕ Mathématiques – Lycée", disabled: true },
@@ -68,12 +68,12 @@ export const MATIERES: readonly OptionSelect[] = [
 
   // 🧠 Sciences humaines & sociales
   { value: "", label: "🧠 Sciences humaines & sociales", disabled: true },
-  { value: "philosophie", label: "Philosophie" },
-  { value: "ses", label: "SES" },
-  { value: "hggsp", label: "HGGSP" },
-  { value: "geopolitique", label: "Géopolitique" },
-  { value: "droit", label: "Droit" },
-  { value: "management", label: "Management" },
+  { value: "Philosophie", label: "Philosophie" },
+  { value: "SES", label: "SES" },
+  { value: "HGGSP", label: "HGGSP" },
+  { value: "Géopolitique", label: "Géopolitique" },
+  { value: "Droit", label: "Droit" },
+  { value: "Management", label: "Management" },
 
   // 🔬 Sciences & technologie
   { value: "", label: "🔬 Sciences & technologie", disabled: true },
