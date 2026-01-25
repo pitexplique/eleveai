@@ -64,8 +64,6 @@ export const MATIERES: readonly OptionSelect[] = [
   { value: "Espagnol", label: "Espagnol" },
   { value: "Allemand", label: "Allemand" },
   { value: "Italien", label: "Italien" },
-  { value: "Portugais", label: "Portugais" },
-  { value: "Creole", label: "Créole" },
   { value: "autre-langue", label: "Autre langue vivante" },
 
   // 🧠 Sciences humaines & sociales
@@ -79,9 +77,9 @@ export const MATIERES: readonly OptionSelect[] = [
 
   // 🔬 Sciences & technologie
   { value: "", label: "🔬 Sciences & technologie", disabled: true },
-  { value: "technologie", label: "Technologie" },
-  { value: "snt", label: "SNT" },
-  { value: "nsi", label: "NSI" },
+  { value: "Technologie", label: "Technologie" },
+  { value: "SNT", label: "SNT" },
+  { value: "NSI", label: "NSI" },
   { value: "sciences-ingenieur", label: "Sciences de l’ingénieur" },
 
   // 🎨 Arts

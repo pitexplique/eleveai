@@ -10,10 +10,9 @@ type DevBannerProps = {
 };
 
 export default function DevBanner({
-  message = "🚧 Site en cours de développement — Dernière MAJ: Prompt Profs - LV1 Anglais LV2 Espagnol Allemand Italien -24-01-2026",
+  message = "🚧 Site en cours de développement — Dernière MAJ: Prompt Profs - LV1 Anglais LV2 Espagnol Allemand Italien College Seconde-24-01-2026",
   storageKey = "eleveai_dev_banner_closed_v1",
-  className = "",
-}: DevBannerProps) {
+  className = "",}: DevBannerProps) {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
