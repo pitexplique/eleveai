@@ -13,9 +13,6 @@ export default function AccueilPage() {
         <div className="mx-auto max-w-7xl px-3 sm:px-5 lg:px-6 py-10 sm:py-14">
           {/* Marque + promesse */}
           <div className="space-y-3 text-slate-100">
-            <p className="text-[11px] uppercase tracking-wider text-slate-400">
-              Le Journal IA — EleveAI
-            </p>
 
             <h1 className="text-3xl font-bold tracking-tight">
               EleveAI — IA pédagogique encadrée
