@@ -1,7 +1,6 @@
 // lib/pedagogie/methodes.ts
 
-
-  export type MethodePedagogique =
+export type MethodePedagogique =
   | "methode_active"
   | "enseignement_explicite"
   | "inductive"
@@ -12,7 +11,6 @@
   | "ludique"
   | "magistrale"
   | "mix"
-  | "singapour"
   | "aucune";
 
 export type MethodeOption = Readonly<{
@@ -167,22 +165,6 @@ export const METHODES: ReadonlyArray<MethodeOption> = [
       "- Tu intercales des questions de vérification.\n" +
       "- Tu finis par des exercices d’application + correction.\n\n",
   },
-  {
-  id: "singapour",
-  label: "Méthode Singapour (CPA + schéma / modèle en barres)",
-  description:
-    "Concret → imagé → abstrait (CPA) + modélisation (schéma / bar model) + progression vers la maîtrise.",
-  promptBlock:
-    "MÉTHODE PÉDAGOGIQUE : MÉTHODE SINGAPOUR (CPA + MODÉLISATION)\n" +
-    "- CPA (obligatoire) :\n" +
-    "  1) CONCRET : proposer une mise en situation manipulable (objets, segments, morceaux, unités).\n" +
-    "  2) IMAGÉ : faire dessiner un schéma clair (ou modèle en barres) représentant les quantités/relations.\n" +
-    "  3) ABSTRAIT : écrire les égalités/rapports/formules et résoudre.\n" +
-    "- Modélisation : avant tout calcul, exiger un schéma (bar model ou schéma géométrique légendé).\n" +
-    "- Maîtrise : proposer ensuite 2 variations du même type de problème (données changées) pour stabiliser la méthode.\n" +
-    "- Exigence de justification : conditions → modélisation → calculs → conclusion.\n\n",
-},
-
 ] as const;
 
 /**
