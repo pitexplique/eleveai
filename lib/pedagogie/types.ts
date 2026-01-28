@@ -17,7 +17,7 @@ export type TypeTag =
   | "neuro"
   | "dnb"
   | "bac"
-  | "duree_45"
+  | "duree_55"
   | "duree_10";
 
 export type TypeItem = {
@@ -50,10 +50,10 @@ export const TYPES: TypeItem[] = [
   // ---------------- SEANCE / SEQUENCE
   {
     id: "seance_cle_en_main",
-    label: "Séance clé en main (45–55 min)",
+    label: "Séance clé en main 55 minutes",
     description: "Déroulé + consignes + différenciation + bilan.",
     category: "seance",
-    tags: ["word", "duree_45", "neuro"],
+    tags: ["word", "duree_55", "neuro"],
     defaultDureeMin: 55,
     auto: { forceOutputStyle: "word_expert" },
   },
@@ -234,7 +234,7 @@ export function tagToBadge(tag: TypeTag): { label: string; tone: "slate" | "ambe
       return { label: "DNB", tone: "slate" };
     case "bac":
       return { label: "BAC", tone: "slate" };
-    case "duree_45":
+    case "duree_55":
       return { label: "≈45–55", tone: "slate" };
     case "duree_10":
       return { label: "≈5–10", tone: "slate" };

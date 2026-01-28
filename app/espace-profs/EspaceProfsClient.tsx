@@ -343,34 +343,66 @@ function blocWordDesign(style: OutputStyle) {
 
   if (style === "word") {
     return (
-      "Format de sortie obligatoire : document Word (copier-coller sans perte).\n" +
-      "- Titres hiérarchisés clairs (Titre 1 / Titre 2 / Titre 3) sur des lignes distinctes.\n" +
-      "- Mise en page aérée : listes, lignes courtes, espaces de réponse.\n" +
-      "- Utilise des icônes emoji simples au début des sections (compatibles Word).\n" +
-      "- Termine par : « ✅ Prêt à coller dans Word ». \n\n"
+        "Format de sortie obligatoire : document Word, très lisible (copier-coller sans perte).\n" +
+    "Contraintes Word-ready :\n" +
+    "- Réponse copiable-collable en conservant strictement la structure.\n" +
+    "- Titres hiérarchisés clairs (Titre / Sous-titre) sur des lignes distinctes.\n" +
+    "- Mise en page aérée : listes, lignes courtes, espaces de réponse visibles.\n" +
+    "- Icônes emoji simples au début des sections (compatibles Word).\n" +
+    "- Interdits : paragraphes longs ou compacts.\n" +
+    "- Ajoute des zones : « Réponse : ______________________ ».\n" +
+    "- Termine obligatoirement par : « ✅ Prêt à coller dans Word ».\n\n" +
+
+    "=== AUTO-CONTRÔLE OBLIGATOIRE (ASSERT IA – MINIMAL) ===\n" +
+    "Avant d’afficher la réponse finale, vérifie que :\n" +
+    "- la structure est claire et aérée,\n" +
+    "- les titres sont visibles et hiérarchisés,\n" +
+    "- des espaces de réponse sont présents,\n" +
+    "- la dernière ligne est exactement : « ✅ Prêt à coller dans Word ».\n" +
+    "Si ce n’est pas le cas, corrige immédiatement puis affiche la version corrigée.\n\n"
     );
   }
 
   // word_expert
-  return (
-    "Format de sortie obligatoire : document Word EXPERT, très lisible.\n" +
-    "Contraintes Word-ready :\n" +
-    "- Réponse copiable-collable en conservant la structure.\n" +
-    "- Icônes emoji au début des titres/sous-parties.\n" +
-    "- Bannières pour grandes parties :\n" +
-    "==================================================\n" +
-    "🧠 TITRE DE LA PARTIE\n" +
-    "==================================================\n" +
-    "- Encadrés simulés :\n" +
-    "[🟦 ENCART – À RETENIR]\nTexte…\n\n" +
-    "[🟨 ENCART – MÉTHODE]\nÉtapes…\n\n" +
-    "[🟥 ENCART – ERREUR FRÉQUENTE]\nErreur + correction…\n\n" +
-    "[🟩 ENCART – DÉFI / BONUS]\nQuestion défi…\n\n" +
-    "- Encarts min : 1 À RETENIR + 1 MÉTHODE + 1 ERREUR + 1 DÉFI.\n" +
-    "- Ajoute des zones : « Réponse : ______________________ ».\n" +
-    "- Interdits : gros paragraphes compacts.\n" +
-    "- Termine par : « ✅ Prêt à coller dans Word ». \n\n"
-  );
+// word_expert
+return (
+  "Format de sortie obligatoire : document Word EXPERT, très lisible.\n" +
+  "Contraintes Word-ready renforcées :\n" +
+  "- Réponse copiable-collable en conservant strictement la structure.\n" +
+  "- Icônes emoji au début des titres et sous-parties.\n" +
+  "- Bannières obligatoires pour les grandes parties :\n" +
+  "==================================================\n" +
+  "🧠 TITRE DE LA PARTIE\n" +
+  "==================================================\n" +
+  "- Encadrés simulés obligatoires :\n" +
+  "[🟦 ENCART – À RETENIR]\nTexte…\n\n" +
+  "[🟨 ENCART – MÉTHODE]\nÉtapes numérotées…\n\n" +
+  "[🟥 ENCART – ERREUR FRÉQUENTE]\nErreur + correction…\n\n" +
+  "[🟩 ENCART – DÉFI / BONUS]\nQuestion argumentée…\n\n" +
+  "- Encarts minimum requis : 1 À RETENIR + 1 MÉTHODE + 1 ERREUR + 1 DÉFI.\n" +
+  "- Ajoute des zones : « Réponse : ______________________ » après chaque question.\n" +
+  "- Interdits : paragraphes compacts ou justification implicite.\n" +
+  "- Termine obligatoirement par : « ✅ Prêt à coller dans Word ».\n\n" +
+
+  "=== AUTO-CONTRÔLE OBLIGATOIRE (ASSERT IA – WORD EXPERT) ===\n" +
+  "Avant d’afficher la réponse finale, effectue un auto-contrôle strict.\n" +
+  "Si UNE SEULE condition manque, corrige immédiatement la sortie (sans l’annoncer),\n" +
+  "puis affiche uniquement la version corrigée.\n\n" +
+
+  "CHECKLIST (toutes obligatoires) :\n" +
+  "1) Au moins 2 grandes parties avec bannière conforme.\n" +
+  "2) Chaque grande partie commence par un titre avec emoji.\n" +
+  "3) Les 4 encarts existent au moins une fois chacun :\n" +
+  "   🟦 À RETENIR / 🟨 MÉTHODE / 🟥 ERREUR FRÉQUENTE / 🟩 DÉFI ou BONUS.\n" +
+  "4) Après CHAQUE question figure exactement :\n" +
+  "   « Réponse : ______________________ »\n" +
+  "5) Aucun paragraphe ne dépasse 4 lignes consécutives.\n" +
+  "6) Une consigne correspond à UNE seule question.\n" +
+  "7) Chaque question contient soit « Attendus : … », soit « Réponse attendue : … ».\n" +
+  "8) La dernière ligne du document est STRICTEMENT :\n" +
+  "   « ✅ Prêt à coller dans Word ».\n\n"
+);
+
 }
 
 
@@ -470,7 +502,16 @@ function construirePrompt(form: PromptProf, promptMode: PromptMode): string {
     const blocCalibrage = `Calibrage demandé :\n- Durée : ${dur}.\n- Tonalité : ${tone}.\n\n`;
 
     const blocOptions =
-      (form.optDifferenciation ? "Option : Différenciation (base / standard / défi) clairement indiquée.\n" : "") +
+    (form.optDifferenciation
+      ? "OBLIGATION — Différenciation activée :\n" +
+        "Chaque problème DOIT comporter explicitement une différenciation :\n" +
+        "    - Base\n" +
+        "    - Standard\n" +
+        "    - Défi\n"
+      : ""
+    )
+
+      +
       (form.optRituels ? "Option : Rituel d’entrée 5–10 min (activation, rappel, mini-défi, correction rapide).\n" : "") +
       (form.optIAFriendly
         ? "Option : Compatible correction IA — produire un document très structuré, régulier et facile à analyser automatiquement.\n"
@@ -541,14 +582,16 @@ function construirePrompt(form: PromptProf, promptMode: PromptMode): string {
           "=== SLIDE 1 — ... ===\n" +
           "=== SLIDE 2 — ... ===\n" +
           "- Aucune partie hors slides.\n\n"
-        : "IMPORTANT : Structure ta réponse en 2 parties :\n" +
-          '1) "=== PARTIE 1 : PROMPT OPTIMISÉ POUR L’IA ==="\n' +
-          '2) "=== PARTIE 2 : RESSOURCE PRÊTE POUR L’ÉLÈVE ==="\n';
+        : "IMPORTANT :\n" +
+          "- La sortie finale affichée doit être UNIQUEMENT le document demandé.\n" +
+          "- Aucun prompt, aucune analyse, aucune section méta ne doit apparaître.\n\n";
+
+
 
     const blocWord = blocWordDesign(form.outputStyle);
 
     return (
-      `Tu es une IA pédagogique pour des élèves de ${form.classe || "collège/lycée"} en ${form.matiere || "discipline"}.\n\n` +
+      `Tu es une IA pédagogique experte pour des élèves de ${form.classe || "collège/lycée"} en ${form.matiere || "discipline"}.\n\n` +
       blocEduscol +
       blocNeuro +
       blocSansLatex +
@@ -866,7 +909,7 @@ export default function ProfsPage() {
       date: today,
       methode: "methode_active",
       outputStyle: "word_expert",
-      dureeMin: 45,
+      dureeMin: 55,
       tonalite: "neutre",
       modaliteEvaluation: "evaluation_sommative",
       themes: [],
@@ -2186,7 +2229,7 @@ export default function ProfsPage() {
                   value={form.dureeMin}
                   onChange={(e) => handleChange("dureeMin", Math.max(0, Number(e.target.value || 0)))}
                   className="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-sky-300"
-                  placeholder="Ex : 45"
+                  placeholder="Ex : 55"
                 />
                 <p className="text-[11px] text-gray-500">Recommandé : 30 à 60 minutes.</p>
               </div>
@@ -2630,7 +2673,7 @@ export default function ProfsPage() {
               <textarea
                 value={form.contenu}
                 onChange={(e) => handleChange("contenu", e.target.value)}
-                placeholder={estEval ? "Ex : Fais une évaluation de 45 min… exos progressifs + barème sur 20…" : "Ex : Génère une séance clé en main…"}
+                placeholder={estEval ? "Ex : Fais une évaluation de 55 min… exos progressifs + barème sur 20…" : "Ex : Génère une séance clé en main…"}
                 className="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-sky-300 min-h-[120px]"
               />
             </div>
@@ -2916,7 +2959,7 @@ export default function ProfsPage() {
                   value={feedbackText}
                   onChange={(e) => setFeedbackText(e.target.value)}
                   className="w-full border rounded-lg px-3 py-2 text-sm min-h-[70px] bg-white"
-                  placeholder="Ex : je veux un barème plus clair / je veux 3 versions (base, standard, défi) / ça dépasse 45 min…"
+                  placeholder="Ex : je veux un barème plus clair / je veux 3 versions (base, standard, défi) / ça dépasse 55 min…"
                   disabled={!promptInterne}
                 />
               </div>
