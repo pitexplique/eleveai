@@ -2216,69 +2216,6 @@ export default function ProfsPage() {
               </div>
             )}
 
-            {/* Durée + tonalité */}
-            <div className="grid sm:grid-cols-2 gap-3">
-              <div className="space-y-1">
-                <label className="text-xs font-semibold text-gray-600 flex items-center gap-2">
-                  <Clock3 className="w-4 h-4" />
-                  Durée (minutes)
-                </label>
-                <input
-                  type="number"
-                  min={0}
-                  value={form.dureeMin}
-                  onChange={(e) => handleChange("dureeMin", Math.max(0, Number(e.target.value || 0)))}
-                  className="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-sky-300"
-                  placeholder="Ex : 55"
-                />
-                <p className="text-[11px] text-gray-500">Recommandé : 30 à 60 minutes.</p>
-              </div>
-
-              <div className="space-y-1">
-                <label className="text-xs font-semibold text-gray-600">Tonalité souhaitée</label>
-                <select
-                  value={form.tonalite}
-                  onChange={(e) => handleChange("tonalite", e.target.value as Tonalite)}
-                  className="w-full border rounded-lg px-3 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-sky-300"
-                >
-                  {TONALITES.map((t) => (
-                    <option key={t.id} value={t.id}>
-                      {t.label}
-                    </option>
-                  ))}
-                </select>
-                <p className="text-[11px] text-gray-500">{TONALITES.find((t) => t.id === form.tonalite)?.hint}</p>
-              </div>
-            </div>
-
-            {/* Style Word */}
-            <div className="space-y-2">
-              <label className="text-xs font-semibold text-gray-600">Style de rendu</label>
-              <div className="grid sm:grid-cols-4 gap-2">
-                {[
-                  { id: "simple", title: "Simple", desc: "Texte propre, sans design.", badge: "Rapide" },
-                  { id: "word", title: "Word", desc: "Titres + icônes + aération.", badge: "Recommandé" },
-                  { id: "word_expert", title: "Word Expert", desc: "Bannières + encadrés + zones réponses.", badge: "🔥 Best" },
-                  { id: "slides", title: "Slides", desc: "Diaporama slide par slide.", badge: "Classe" },
-
-                ].map((o) => (
-                  <button
-                    key={o.id}
-                    type="button"
-                    onClick={() => handleChange("outputStyle", o.id as OutputStyle)}
-                    className={`text-left border rounded-xl px-3 py-2 text-xs transition ${
-                      form.outputStyle === o.id ? "border-[#0047B6] bg-sky-50 shadow-sm" : "border-slate-200 bg-white hover:border-sky-200"
-                    }`}
-                  >
-                    <div className="flex items-center justify-between gap-2">
-                      <span className="font-semibold text-slate-800">{o.title}</span>
-                      <span className="text-[10px] px-2 py-0.5 rounded-full bg-slate-100 text-slate-700">{o.badge}</span>
-                    </div>
-                    <p className="mt-1 text-[11px] text-slate-600">{o.desc}</p>
-                  </button>
-                ))}
-              </div>
-            </div>
 
             {/* ✅ MODE RAPIDE : CATÉGORIE */}
             {mode === "rapide" && (
@@ -2573,31 +2510,6 @@ export default function ProfsPage() {
               </div>
             )}
 
-            {/* Titre + auteur */}
-            <div className="grid sm:grid-cols-[2fr,1fr] gap-3">
-              <div className="space-y-1">
-                <label className="text-xs font-semibold text-gray-600">Titre (pour toi)</label>
-                <input
-                  type="text"
-                  value={form.titre}
-                  onChange={(e) => handleChange("titre", e.target.value)}
-                  placeholder="Ex : Éval fractions – barème + différenciation"
-                  className="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-sky-300"
-                />
-              </div>
-
-              <div className="space-y-1">
-                <label className="text-xs font-semibold text-gray-600">Auteur (facultatif)</label>
-                <input
-                  type="text"
-                  value={form.auteur}
-                  onChange={(e) => handleChange("auteur", e.target.value)}
-                  placeholder="Nom, initiales…"
-                  className="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-sky-300"
-                />
-              </div>
-            </div>
-
             {/* Objectif */}
             <div className="space-y-1">
               <label className="text-xs font-semibold text-gray-600">Objectif pédagogique</label>
@@ -2608,6 +2520,30 @@ export default function ProfsPage() {
                 className="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-sky-300 min-h-[70px]"
               />
             </div>
+
+                        {/* Contenu */}
+            <div className="space-y-1 pt-2">
+              <label className="text-xs font-semibold text-gray-600">Texte de ta demande (version prof)</label>
+              <textarea
+                value={form.contenu}
+                onChange={(e) => handleChange("contenu", e.target.value)}
+                placeholder={estEval ? "Ex : Fais une évaluation de 55 min… exos progressifs + barème sur 20…" : "Ex : Génère une séance clé en main…"}
+                className="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-sky-300 min-h-[120px]"
+              />
+            </div>
+
+            {formError && (
+              <div className="rounded-xl border border-rose-200 bg-rose-50 px-3 py-2">
+                <p className="text-xs font-semibold text-rose-800">⚠️ {formError}</p>
+                {!validation.ok && (
+                  <ul className="mt-2 text-[11px] text-rose-800/90 list-disc pl-4 space-y-1">
+                    {validation.issues.slice(0, 6).map((it) => (
+                      <li key={it}>{it}</li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            )}
 
             {/* Tags */}
             <div className="space-y-1">
@@ -2667,29 +2603,93 @@ export default function ProfsPage() {
               </div>
             </div>
 
-            {/* Contenu */}
-            <div className="space-y-1 pt-2">
-              <label className="text-xs font-semibold text-gray-600">Texte de ta demande (version prof)</label>
-              <textarea
-                value={form.contenu}
-                onChange={(e) => handleChange("contenu", e.target.value)}
-                placeholder={estEval ? "Ex : Fais une évaluation de 55 min… exos progressifs + barème sur 20…" : "Ex : Génère une séance clé en main…"}
-                className="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-sky-300 min-h-[120px]"
-              />
+            {/* Titre + auteur */}
+            <div className="grid sm:grid-cols-[2fr,1fr] gap-3">
+              <div className="space-y-1">
+                <label className="text-xs font-semibold text-gray-600">Titre (pour toi)</label>
+                <input
+                  type="text"
+                  value={form.titre}
+                  onChange={(e) => handleChange("titre", e.target.value)}
+                  placeholder="Ex : Éval fractions – barème + différenciation"
+                  className="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-sky-300"
+                />
+              </div>
+
+              <div className="space-y-1">
+                <label className="text-xs font-semibold text-gray-600">Auteur (facultatif)</label>
+                <input
+                  type="text"
+                  value={form.auteur}
+                  onChange={(e) => handleChange("auteur", e.target.value)}
+                  placeholder="Nom, initiales…"
+                  className="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-sky-300"
+                />
+              </div>
+            </div>
+             {/* Durée + tonalité */}
+            <div className="grid sm:grid-cols-2 gap-3">
+              <div className="space-y-1">
+                <label className="text-xs font-semibold text-gray-600 flex items-center gap-2">
+                  <Clock3 className="w-4 h-4" />
+                  Durée (minutes)
+                </label>
+                <input
+                  type="number"
+                  min={0}
+                  value={form.dureeMin}
+                  onChange={(e) => handleChange("dureeMin", Math.max(0, Number(e.target.value || 0)))}
+                  className="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-sky-300"
+                  placeholder="Ex : 55"
+                />
+                <p className="text-[11px] text-gray-500">Recommandé : 30 à 60 minutes.</p>
+              </div>
+
+              <div className="space-y-1">
+                <label className="text-xs font-semibold text-gray-600">Tonalité souhaitée</label>
+                <select
+                  value={form.tonalite}
+                  onChange={(e) => handleChange("tonalite", e.target.value as Tonalite)}
+                  className="w-full border rounded-lg px-3 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-sky-300"
+                >
+                  {TONALITES.map((t) => (
+                    <option key={t.id} value={t.id}>
+                      {t.label}
+                    </option>
+                  ))}
+                </select>
+                <p className="text-[11px] text-gray-500">{TONALITES.find((t) => t.id === form.tonalite)?.hint}</p>
+              </div>
             </div>
 
-            {formError && (
-              <div className="rounded-xl border border-rose-200 bg-rose-50 px-3 py-2">
-                <p className="text-xs font-semibold text-rose-800">⚠️ {formError}</p>
-                {!validation.ok && (
-                  <ul className="mt-2 text-[11px] text-rose-800/90 list-disc pl-4 space-y-1">
-                    {validation.issues.slice(0, 6).map((it) => (
-                      <li key={it}>{it}</li>
-                    ))}
-                  </ul>
-                )}
+            {/* Style Word */}
+            <div className="space-y-2">
+              <label className="text-xs font-semibold text-gray-600">Style de rendu</label>
+              <div className="grid sm:grid-cols-4 gap-2">
+                {[
+                  { id: "simple", title: "Simple", desc: "Texte propre, sans design.", badge: "Rapide" },
+                  { id: "word", title: "Word", desc: "Titres + icônes + aération.", badge: "Recommandé" },
+                  { id: "word_expert", title: "Word Expert", desc: "Bannières + encadrés + zones réponses.", badge: "🔥 Best" },
+                  { id: "slides", title: "Slides", desc: "Diaporama slide par slide.", badge: "Classe" },
+
+                ].map((o) => (
+                  <button
+                    key={o.id}
+                    type="button"
+                    onClick={() => handleChange("outputStyle", o.id as OutputStyle)}
+                    className={`text-left border rounded-xl px-3 py-2 text-xs transition ${
+                      form.outputStyle === o.id ? "border-[#0047B6] bg-sky-50 shadow-sm" : "border-slate-200 bg-white hover:border-sky-200"
+                    }`}
+                  >
+                    <div className="flex items-center justify-between gap-2">
+                      <span className="font-semibold text-slate-800">{o.title}</span>
+                      <span className="text-[10px] px-2 py-0.5 rounded-full bg-slate-100 text-slate-700">{o.badge}</span>
+                    </div>
+                    <p className="mt-1 text-[11px] text-slate-600">{o.desc}</p>
+                  </button>
+                ))}
               </div>
-            )}
+            </div>
 
             {/* ✅ NEW : Mode de génération du prompt */}
     <div className="pt-2 space-y-2">
@@ -2739,12 +2739,6 @@ export default function ProfsPage() {
         </button>
       </div>
 
-  <div className="rounded-xl border border-slate-200 bg-slate-50 px-3 py-2">
-    <p className="text-[11px] text-slate-700">
-      <span className="font-semibold">Difficulté élèves</span> = exigence pour l’élève •{" "}
-      <span className="font-semibold">Mode de génération</span> = quantité de contraintes dans le prompt
-    </p>
-  </div>
 </div>
 
 
