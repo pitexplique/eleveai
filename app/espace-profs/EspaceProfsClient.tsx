@@ -11,6 +11,8 @@ import { PROFS_PRESETS, ProfsPresetKey } from "@/data/profsPresets";
 import ToggleChip from "@/components/ToggleChip";
 import { resolveTypeFromTacheProf } from "@/lib/pedagogie/runtime";
 import type { TacheProfValue } from "@/lib/constants/scolaire";
+import { buildPromptIntro } from "@/lib/pedagogie/promptIntro";
+
 
 
 // ✅ constantes partagées
@@ -466,8 +468,20 @@ function construirePrompt(form: PromptProf, promptMode: PromptMode): string {
       (themesHumains.length ? `Thèmes à intégrer : ${themesHumains.join(", ")}.\n` : "") +
       (form.themesLabel?.trim() ? `Contexte / angle : ${form.themesLabel.trim()}.\n` : "");
     const blocContexteThemes = blocThemes.trim().length ? `\n${blocThemes}\n` : "";
+   
+    const blocEduscol =
+  "Références institutionnelles : programmes officiels français (Eduscol / BO en vigueur).\n" +
+  "Respecter le niveau de classe, les compétences du socle commun et le vocabulaire attendu.\n\n";
 
-    const blocEduscol = "Respecter les programmes officiels français (Eduscol/BO), vocabulaire attendu.\n\n";
+    const blocEthiqueEtPertinence =
+  "Contraintes éthiques obligatoires :\n" +
+  "- Aucune référence discriminante, stigmatisante ou genrée.\n" +
+  "- Aucune donnée personnelle réelle ou identifiable.\n" +
+  "- Respect strict des principes de neutralité, d’égalité et de laïcité.\n" +
+  "- Supports accessibles à tous les élèves.\n\n";
+
+const blocEthiqueCourt =
+  "Sécurité : neutralité • égalité • laïcité • accessibilité • aucune donnée personnelle • aucun exemple discriminant.\n\n";
 
     const blocNeuro = form.neuro
       ? "Neurosciences : activer prérequis, petites étapes, alternance explications/questions, récapitulatif, reformulation.\n\n"
@@ -589,10 +603,21 @@ function construirePrompt(form: PromptProf, promptMode: PromptMode): string {
 
 
     const blocWord = blocWordDesign(form.outputStyle);
+    const mainCategory = normalizeMainCategory(typeItem?.category ?? typeLabel);
+    const meta = getMainCategoryMeta(mainCategory);
+
 
     return (
-      `Tu es une IA pédagogique experte pour des élèves de ${form.classe || "collège/lycée"} en ${form.matiere || "discipline"}.\n\n` +
+    buildPromptIntro({
+        classe: form.classe,
+        matiere: form.matiere,
+        mainCategory,
+        meta,
+        includeMetaLine: true,
+      }) +
+
       blocEduscol +
+      blocEthiqueEtPertinence +   // ✅ ICI
       blocNeuro +
       blocSansLatex +
       blocCalibrage +
@@ -631,6 +656,7 @@ function construirePrompt(form: PromptProf, promptMode: PromptMode): string {
   const typeDesc = typeItem?.description ?? "";
 
   const blocEduscol = "Respecter les programmes officiels français (Eduscol/BO).\n";
+
   const blocNeuro = form.neuro ? "Neurosciences : petites étapes, questions, récap.\n" : "";
   const blocDYS = form.adaptationDYS ? "Adapter DYS : phrases courtes, aéré, vocabulaire expliqué.\n" : "";
 
@@ -658,10 +684,13 @@ function construirePrompt(form: PromptProf, promptMode: PromptMode): string {
     "Interdits : pas de correction modèle, pas de réponse rédigée à la place des élèves.\n";
 
   const optionsBloc = promptMode === "standard" ? blocOptionsStandard : blocOptionsBasic;
+  const blocEthiqueCourt =
+  "Sécurité : neutralité • égalité • laïcité • accessibilité • aucune donnée personnelle • aucun exemple discriminant.\n\n";
 
   return (
     `Tu es une IA pédagogique pour des élèves de ${form.classe || "collège/lycée"} en ${form.matiere || "discipline"}.\n` +
     blocEduscol +
+    blocEthiqueCourt +
     blocNeuro +
     blocDYS +
     blocCalibrage +
