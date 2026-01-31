@@ -1,6 +1,6 @@
 // lib/pedagogie/promptIntro.ts
 
-export type MainCategoryId = "seance" | "exercices" | "evaluation" | "correction" | "methodes";
+export type MainCategoryId = "seance" | "sequence" |"exercices" | "evaluation" | "correction" | "methodes";
 
 export type MainCategoryMeta = {
   id: MainCategoryId;
@@ -114,14 +114,25 @@ export function buildPromptIntro(opts: PromptIntroOptions): string {
       : "";
 
   switch (opts.mainCategory) {
-    case "seance":
-      return (
-        metaLine +
-        `Cadre pédagogique :\n` +
-        `Tu interviens comme enseignant expert en ${matiere}.\n` +
-        `Ta mission est de concevoir une séance ou une séquence structurée destinée à des élèves de ${classe},\n` +
-        `avec un déroulé clair, des étapes courtes, des temps de mise en commun et un bilan final.\n\n`
-      );
+      case "seance":
+        return (
+          metaLine +
+          `Cadre pédagogique :\n` +
+          `Tu interviens comme enseignant expert en ${matiere} ${etablissementLabel}.\n` +
+          `Ta mission est de concevoir une séance structurée destinée à des élèves de ${classe},\n` +
+          `avec un déroulé clair, des étapes courtes, des temps de mise en commun et un bilan final.\n\n`
+        );
+
+      case "sequence":
+        return (
+          metaLine +
+          `Cadre pédagogique :\n` +
+          `Tu interviens comme enseignant expert en ${matiere} ${etablissementLabel}.\n` +
+          `Ta mission est de concevoir une séquence structurée destinée à des élèves de ${classe},\n` +
+          `sur plusieurs séances, avec une progression explicite, des objectifs par séance, des traces écrites,\n` +
+          `et un bilan/évaluation finale (ou critères de réussite).\n\n`
+        );
+
 
     case "exercices":
       return (

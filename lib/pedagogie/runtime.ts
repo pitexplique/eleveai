@@ -10,12 +10,13 @@ export type OutputStyleProf = "simple" | "word" | "word_expert";
 /* =========================================================
    MAIN CATEGORY (mêmes ids que dans EspaceprofsClient)
 ========================================================= */
-export type MainCategory = "seance" | "exercices" | "evaluation" | "correction" | "methodes";
+export type MainCategory = "seance" | "sequence" |"exercices" | "evaluation" | "correction" | "methodes";
 
 export function normalizeMainCategory(raw: unknown): MainCategory {
   const c = String(raw ?? "").toLowerCase();
 
-  if (c.includes("seance") || c.includes("séance") || c.includes("sequence") || c.includes("séquence")) return "seance";
+  if (c.includes("sequence")) return "sequence";
+  if (c.includes("seance")) return "seance";
   if (c.includes("exercice")) return "exercices";
   if (c.includes("eval") || c.includes("éval") || c.includes("evaluation") || c.includes("évaluation")) return "evaluation";
   if (c.includes("correction") || c.includes("corrige") || c.includes("corrigé")) return "correction";

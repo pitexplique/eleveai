@@ -2,6 +2,7 @@
 
 export type TypeCategory =
   | "seance"
+  | "sequence"
   | "exercices"
   | "evaluation"
   | "correction"
@@ -36,7 +37,8 @@ export type TypeItem = {
 };
 
 export const TYPE_CATEGORIES: { id: TypeCategory; label: string; emoji: string }[] = [
-  { id: "seance", label: "Séance / Séquence", emoji: "🧑‍🏫" },
+  { id: "seance", label: "Séance ", emoji: "🧑‍🏫" },
+   { id: "sequence", label: "Séquence", emoji: "🧑‍🏫" },
   { id: "exercices", label: "Exercices", emoji: "🧩" },
   { id: "evaluation", label: "Évaluation", emoji: "📝" },
   { id: "correction", label: "Correction", emoji: "✅" },
@@ -57,15 +59,16 @@ export const TYPES: TypeItem[] = [
     defaultDureeMin: 55,
     auto: { forceOutputStyle: "word_expert" },
   },
-  {
-    id: "sequence_2_semaines",
-    label: "Séquence (2 semaines) + progression",
-    description: "Objectifs, séances, évaluations, différenciation, traces écrites.",
-    category: "seance",
-    tags: ["word", "neuro"],
-    defaultDureeMin: 0,
-    auto: { forceOutputStyle: "word_expert" },
-  },
+    {
+      id: "sequence_2_semaines",
+      label: "Séquence (2 semaines) + progression",
+      description: "Objectifs, séances, évaluations, différenciation, traces écrites.",
+      category: "sequence", // ✅ distinct
+      tags: ["word", "neuro"],
+      defaultDureeMin: 0,
+      auto: { forceOutputStyle: "word_expert" },
+    },
+
 
   // ---------------- EXERCICES
   {

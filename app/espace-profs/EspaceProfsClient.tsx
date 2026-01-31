@@ -63,28 +63,45 @@ function fmtDate(iso: string) {
    CATEGORIES (NEW UX)
 ---------------------------------------- */
 
-type MainCategory = "seance" | "exercices" | "evaluation" | "correction" | "methodes";
+type MainCategory = "seance" | "sequence" |"exercices" | "evaluation" | "correction" | "methodes";
 
 const MAIN_CATEGORIES: { id: MainCategory; label: string; emoji: string; hint: string }[] = [
-  { id: "seance", label: "Séance / Séquence", emoji: "🗂️", hint: "Déroulé, timing, mise en commun…" },
+  { id: "seance",   label: "Séance",   emoji: "🧩", hint: "Déroulé 55 min, timing, mise en commun…" },
+  { id: "sequence", label: "Séquence", emoji: "🗂️", hint: "Progression sur plusieurs séances, objectifs, traces…" },
   { id: "exercices", label: "Exercices", emoji: "✏️", hint: "Séries, niveaux, méthodes, corrigés…" },
   { id: "evaluation", label: "Évaluation", emoji: "🧾", hint: "Contrôle, barème, critères, différenciation…" },
   { id: "correction", label: "Correction", emoji: "✅", hint: "Corrigé structuré, justifications, erreurs…" },
   { id: "methodes", label: "Méthodes", emoji: "🧭", hint: "Fiches méthode, démarches, mémo, erreurs…" },
 ];
 
+
 function normalizeMainCategory(raw: unknown): MainCategory {
   const c = String(raw ?? "").toLowerCase();
 
-  if (c.includes("seance") || c.includes("séance") || c.includes("sequence") || c.includes("séquence")) return "seance";
+  // ✅ Séquence doit être détectée AVANT séance (sinon "seance" capte tout)
+  if (c.includes("sequence") || c.includes("séquence")) return "sequence";
+  if (c.includes("seance") || c.includes("séance")) return "seance";
+
   if (c.includes("exercice")) return "exercices";
-  if (c.includes("eval") || c.includes("éval") || c.includes("evaluation") || c.includes("évaluation")) return "evaluation";
-  if (c.includes("correction") || c.includes("corrige") || c.includes("corrigé")) return "correction";
+
+  if (
+    c.includes("eval") ||
+    c.includes("éval") ||
+    c.includes("evaluation") ||
+    c.includes("évaluation")
+  )
+    return "evaluation";
+
+  if (c.includes("correction") || c.includes("corrige") || c.includes("corrigé"))
+    return "correction";
+
   if (c.includes("document")) return "methodes";
-  if (c.includes("methode") || c.includes("méthode") || c.includes("methodes") || c.includes("méthodes")) return "methodes";
+  if (c.includes("methode") || c.includes("méthode") || c.includes("methodes") || c.includes("méthodes"))
+    return "methodes";
 
   return "seance";
 }
+
 
 function getMainCategoryMeta(cat: MainCategory) {
   return MAIN_CATEGORIES.find((c) => c.id === cat) ?? MAIN_CATEGORIES[0];
@@ -408,301 +425,285 @@ return (
 }
 
 
-function mapTacheToMainCategory(tache: string): MainCategory {
-  if (
-    [
-      "devoir_dm",
-      "evaluation",
-      "evaluation_formative",
-      "evaluation_diagnostique",
-      "evaluation_differenciee",
-      "grille_evaluation",
-      "quiz_qcm",
-      "rubrique_competences",
-    ].includes(tache)
-  )
-    return "evaluation";
 
-  if (["corrige_detaille", "consignes_travail"].includes(tache)) return "correction";
-
-  if (
-    [
-      "explication",
-      "fiche_methode",
-      "presentation_support",
-      "affichage_classe",
-      "carte_mentale",
-      "fiche_revision",
-      "memo_eleve",
-      "synthese_cours",
-      "carnet_bord",
-      "journal_apprentissage",
-    ].includes(tache)
-  )
-    return "methodes";
-
-  return "seance";
-}
-
-function labelFromTache(value: string) {
-  const found = TACHES_PROF.find((t) => t.value === value);
-  return found?.label ?? "";
-}
+/* ----------------------------------------
+   PROMPT
+---------------------------------------- */
 
 /* ----------------------------------------
    PROMPT
 ---------------------------------------- */
 
 function construirePrompt(form: PromptProf, promptMode: PromptMode): string {
-  // ✅ EXPERT = ton prompt actuel inchangé
-  const construirePromptExpert = (form: PromptProf): string => {
-    const typeItem = getTypeById(form.typeId);
-    const typeLabel = typeItem?.label ?? "Ressource pédagogique";
-    const typeDesc = typeItem?.description ?? "";
+  const typeItem = getTypeById(form.typeId);
+  const typeLabel = typeItem?.label ?? "Ressource pédagogique";
+  const typeDesc = typeItem?.description ?? "";
 
-    const blocTags = form.tags.length > 0 ? `Mots-clés pédagogiques : ${form.tags.join(", ")}.\n` : "";
-    const blocAuteur = form.auteur ? `Préparé par : ${form.auteur}.\n` : "";
+  const mainCategory = normalizeMainCategory(typeItem?.category ?? typeLabel);
+  const meta = getMainCategoryMeta(mainCategory);
+  const estEval = mainCategory === "evaluation";
+  const estSeance = mainCategory === "seance";
 
-    const themesHumains = form.themes?.length ? form.themes.map((t) => THEME_LABEL_BY_ID[t] ?? t) : [];
-    const blocThemes =
-      (themesHumains.length ? `Thèmes à intégrer : ${themesHumains.join(", ")}.\n` : "") +
-      (form.themesLabel?.trim() ? `Contexte / angle : ${form.themesLabel.trim()}.\n` : "");
-    const blocContexteThemes = blocThemes.trim().length ? `\n${blocThemes}\n` : "";
-   
-    const blocEduscol =
-  "Références institutionnelles : programmes officiels français (Eduscol / BO en vigueur).\n" +
-  "Respecter le niveau de classe, les compétences du socle commun et le vocabulaire attendu.\n\n";
+  // ⚠️ éviter la collision sémantique “STANDARD” (mode) vs “Standard” (différenciation)
+  // => on garde Base / Attendu / Défi dans le texte
+  const labelDiffAttendu = "Attendu";
 
-    const blocEthiqueEtPertinence =
-  "Contraintes éthiques obligatoires :\n" +
-  "- Aucune référence discriminante, stigmatisante ou genrée.\n" +
-  "- Aucune donnée personnelle réelle ou identifiable.\n" +
-  "- Respect strict des principes de neutralité, d’égalité et de laïcité.\n" +
-  "- Supports accessibles à tous les élèves.\n\n";
+  const themesHumains = form.themes?.length ? form.themes.map((t) => THEME_LABEL_BY_ID[t] ?? t) : [];
+  const blocThemes =
+    (themesHumains.length ? `Thèmes à intégrer : ${themesHumains.join(", ")}.\n` : "") +
+    (form.themesLabel?.trim() ? `Contexte / angle : ${form.themesLabel.trim()}.\n` : "");
+  const blocContexteThemes = blocThemes.trim().length ? `\n${blocThemes}\n` : "";
 
-const blocEthiqueCourt =
-  "Sécurité : neutralité • égalité • laïcité • accessibilité • aucune donnée personnelle • aucun exemple discriminant.\n\n";
+  const blocTags = form.tags?.length ? `Mots-clés pédagogiques : ${form.tags.join(", ")}.\n` : "";
+  const blocAuteur = form.auteur ? `Préparé par : ${form.auteur}.\n` : "";
 
-    const blocNeuro = form.neuro
-      ? "Neurosciences : activer prérequis, petites étapes, alternance explications/questions, récapitulatif, reformulation.\n\n"
+  const dur = form.dureeMin && form.dureeMin > 0 ? `${form.dureeMin} min` : "non précisée";
+  const tone = form.tonalite || "neutre";
+
+  const matiereScientifique = [
+    "maths",
+    "maths-spe-1re",
+    "maths-spe-tle",
+    "maths-complementaires",
+    "maths-expertes",
+    "physique-chimie",
+    "svt",
+    "enseignement-scientifique",
+    "snt",
+    "nsi",
+    "informatique",
+    "sciences-ingenieur",
+  ].includes(form.matiere);
+
+  /* -----------------------------
+     Blocs communs (utilitaires)
+  ----------------------------- */
+
+  const blocEthiqueCourt =
+    "Sécurité : neutralité • égalité • laïcité • accessibilité • aucune donnée personnelle • aucun exemple discriminant.\n\n";
+
+  const blocEduscolLong =
+    "Références institutionnelles : programmes officiels français (Eduscol / BO en vigueur).\n" +
+    "Respecter le niveau de classe, les compétences du socle commun et le vocabulaire attendu.\n\n";
+
+  const blocEduscolCourt = "Respecter les programmes officiels français (Eduscol/BO).\n";
+
+  const blocEthiqueLong =
+    "Contraintes éthiques obligatoires :\n" +
+    "- Aucune référence discriminante, stigmatisante ou genrée.\n" +
+    "- Aucune donnée personnelle réelle ou identifiable.\n" +
+    "- Respect strict des principes de neutralité, d’égalité et de laïcité.\n" +
+    "- Supports accessibles à tous les élèves.\n\n";
+
+  const blocNeuroLong = form.neuro
+    ? "Neurosciences : activer prérequis, petites étapes, alternance explications/questions, récapitulatif, reformulation.\n\n"
+    : "";
+
+  const blocNeuroCourt = form.neuro ? "Neurosciences : petites étapes, questions, récap.\n" : "";
+
+  const blocSansLatex =
+    matiereScientifique && !form.latex
+      ? 'Sans LaTeX (pas de \\frac, \\sqrt). Fractions a/b, puissances x^2 ou "x au carré".\n\n'
       : "";
 
-    const matiereScientifique = [
-      "maths",
-      "maths-spe-1re",
-      "maths-spe-tle",
-      "maths-complementaires",
-      "maths-expertes",
-      "physique-chimie",
-      "svt",
-      "enseignement-scientifique",
-      "snt",
-      "nsi",
-      "informatique",
-      "sciences-ingenieur",
-    ].includes(form.matiere);
+  const blocDYSLong = form.adaptationDYS
+    ? "Adapter DYS : phrases courtes, aération, vocabulaire expliqué, éviter doubles négations.\n\n"
+    : "";
 
-    const blocSansLatex =
-      matiereScientifique && !form.latex
-        ? 'Sans LaTeX (pas de \\frac, \\sqrt). Fractions a/b, puissances x^2 ou "x au carré".\n\n'
-        : "";
+  const blocDYSCourt = form.adaptationDYS ? "Adapter DYS : phrases courtes, aéré, vocabulaire expliqué.\n" : "";
 
-    const blocDYS = form.adaptationDYS
-      ? "Adapter DYS : phrases courtes, aération, vocabulaire expliqué, éviter doubles négations.\n\n"
+  const blocCalibrageLong = `Calibrage demandé :\n- Durée : ${dur}.\n- Tonalité : ${tone}.\n\n`;
+  const blocCalibrageCourt = `Calibrage : durée ${dur} • tonalité ${tone}.\n`;
+
+  const blocEvaluationLong = estEval
+    ? "MODE ÉVALUATION (important) :\n" +
+      `- Modalité : ${getEvalLabel(form.modaliteEvaluation)}.\n` +
+      "- Exiger : barème/points, consignes claires, attendus, critères de réussite.\n" +
+      (form.optDifferenciation ? `- Différenciation : base/${labelDiffAttendu.toLowerCase()}/défi + erreurs typiques.\n` : "") +
+      "- Sortie Word : en-tête (classe/durée), exos numérotés, espaces réponses, total points.\n\n"
+    : "";
+
+  const blocMethodeLong = estEval ? "" : getMethodePromptBlock(form.methode);
+
+  const blocStructureSeanceLong = estSeance
+    ? "Structure chronométrée : accroche / recherche guidée / mise en commun / entraînement / bilan (rôle prof/élèves + matériel).\n\n"
+    : "";
+
+  const blocRituelsLong =
+    form.optRituels && estSeance
+      ? "Rituel (5–10 min) : au tout début, une courte activité (question flash / rappel / mini-problème) + correction rapide.\n\n"
       : "";
 
-    const dur = form.dureeMin && form.dureeMin > 0 ? `${form.dureeMin} min` : "non précisée";
-    const tone = form.tonalite || "neutre";
-    const blocCalibrage = `Calibrage demandé :\n- Durée : ${dur}.\n- Tonalité : ${tone}.\n\n`;
+  const blocIAFriendlyLong = form.optIAFriendly
+    ? "DOCUMENT COMPATIBLE CORRECTION IA :\n" +
+      "- Structure très claire et régulière.\n" +
+      "- Une consigne = une question.\n" +
+      "- Pour chaque question : « Attendus : ... » ou « Réponse attendue : ... ».\n" +
+      "- Si correction incluse : étapes numérotées + résultat final explicite.\n\n"
+    : "";
 
-    const blocOptions =
-    (form.optDifferenciation
+  const blocAtelierIALong = form.optAtelierIA
+    ? "INTÉGRER USAGE DE L’IA EN CLASSE (mini-parcours guidé) :\n" +
+      "- Étape 1 : rédiger un prompt (modèle fourni).\n" +
+      "- Étape 2 : lire la réponse et surligner 2 points à vérifier.\n" +
+      "- Étape 3 : corriger/améliorer (avec justification).\n" +
+      "- Étape 4 : produire un rendu final personnel.\n\n"
+    : "";
+
+  const blocDifferenciationLong =
+    form.optDifferenciation && !estEval
+      ? `Différenciation : proposer Base / ${labelDiffAttendu} / Défi (indiquer clairement).\n\n`
+      : "";
+
+  const blocRappelsEtMetaLong =
+    "Réponse : prérequis courts, étapes numérotées, questions de vérification, récapitulatif, question métacognitive.\n\n";
+
+  const blocCriteresLong = "Fin : « Pour l’enseignant » (3-5 critères observables) + erreurs typiques.\n\n";
+
+  const blocMiseEnPageLong =
+    "Si fiche, séance ou évaluation :\n" +
+    "- Mise en page claire et aérée.\n" +
+    "- Titres hiérarchisés (Titre / Sous-titre).\n" +
+    "- Listes à puces ou numérotées.\n" +
+    "- Espaces prévus pour les réponses des élèves.\n" +
+    "- Pas de blocs de texte trop longs.\n\n";
+
+  const blocFinalStructureLong =
+    form.outputStyle === "slides"
+      ? "IMPORTANT :\n" +
+        "- Structure ta réponse STRICTEMENT SLIDE PAR SLIDE.\n" +
+        "- Chaque slide doit être clairement identifié :\n" +
+        "=== SLIDE 1 — ... ===\n" +
+        "=== SLIDE 2 — ... ===\n" +
+        "- 1 idée par slide, 20–40 mots max.\n" +
+        "- Aucune partie hors slides.\n\n"
+      : "IMPORTANT :\n" +
+        "- La sortie finale affichée doit être UNIQUEMENT le document demandé.\n" +
+        "- Aucun prompt, aucune analyse, aucune section méta ne doit apparaître.\n\n";
+
+  const blocFormatCourt =
+    form.outputStyle === "slides"
+      ? "Format : SLIDE PAR SLIDE (Titre / Objectif / Questions-Consignes / Visuel suggéré). Aucune partie hors slides.\n"
+      : "Format : document clair (titres, listes, espaces réponses si besoin).\n";
+
+  const blocWord = blocWordDesign(form.outputStyle);
+
+  const blocOptionsExpert = (() => {
+    const t1 = form.optDifferenciation
       ? "OBLIGATION — Différenciation activée :\n" +
         "Chaque problème DOIT comporter explicitement une différenciation :\n" +
         "    - Base\n" +
-        "    - Standard\n" +
+        `    - ${labelDiffAttendu}\n` +
         "    - Défi\n"
-      : ""
-    )
-
-      +
-      (form.optRituels ? "Option : Rituel d’entrée 5–10 min (activation, rappel, mini-défi, correction rapide).\n" : "") +
-      (form.optIAFriendly
-        ? "Option : Compatible correction IA — produire un document très structuré, régulier et facile à analyser automatiquement.\n"
-        : "") +
-      (form.optAtelierIA
-        ? "Option : Intégrer usage de l’IA en classe — inclure une mini-séquence guidée d’usage de l’IA (consignes, étapes, garde-fous, rendu attendu).\n"
-        : "");
-    const blocOptionsFinal = blocOptions.trim().length ? `Options activées :\n${blocOptions}\n` : "";
-
-    const estEval = normalizeMainCategory(typeItem?.category) === "evaluation";
-
-    const blocEvaluation = estEval
-      ? "MODE ÉVALUATION (important) :\n" +
-        `- Modalité : ${getEvalLabel(form.modaliteEvaluation)}.\n` +
-        "- Exiger : barème/points, consignes claires, attendus, critères de réussite.\n" +
-        (form.optDifferenciation ? "- Différenciation : base/standard/défi + erreurs typiques.\n" : "") +
-        "- Sortie Word : en-tête (classe/durée), exos numérotés, espaces réponses, total points.\n\n"
       : "";
 
-    const blocMethode = estEval ? "" : getMethodePromptBlock(form.methode);
-
-    const blocStructureSeance =
-      normalizeMainCategory(typeItem?.category) === "seance"
-        ? "Structure chronométrée : accroche / recherche guidée / mise en commun / entraînement / bilan (rôle prof/élèves + matériel).\n\n"
-        : "";
-
-    const blocRituels =
-      form.optRituels && normalizeMainCategory(typeItem?.category) === "seance"
-        ? "Rituel (5–10 min) : au tout début, une courte activité (question flash / rappel / mini-problème) + correction rapide.\n\n"
-        : "";
-
-    const blocIAFriendly = form.optIAFriendly
-      ? "DOCUMENT COMPATIBLE CORRECTION IA :\n" +
-        "- Structure très claire et régulière.\n" +
-        "- Une consigne = une question.\n" +
-        "- Pour chaque question : « Attendus : ... » ou « Réponse attendue : ... ».\n" +
-        "- Si correction incluse : étapes numérotées + résultat final explicite.\n\n"
+    const t2 = form.optRituels ? "Option : Rituel d’entrée 5–10 min (activation, rappel, mini-défi, correction rapide).\n" : "";
+    const t3 = form.optIAFriendly
+      ? "Option : Compatible correction IA — produire un document très structuré, régulier et facile à analyser automatiquement.\n"
+      : "";
+    const t4 = form.optAtelierIA
+      ? "Option : Intégrer usage de l’IA en classe — inclure une mini-séquence guidée d’usage de l’IA (consignes, étapes, garde-fous, rendu attendu).\n"
       : "";
 
-    const blocAtelierIA = form.optAtelierIA
-      ? "INTÉGRER USAGE DE L’IA EN CLASSE (mini-parcours guidé) :\n" +
-        "- Étape 1 : rédiger un prompt (modèle fourni).\n" +
-        "- Étape 2 : lire la réponse et surligner 2 points à vérifier.\n" +
-        "- Étape 3 : corriger/améliorer (avec justification).\n" +
-        "- Étape 4 : produire un rendu final personnel.\n\n"
-      : "";
+    const bloc = `${t1}${t2}${t3}${t4}`;
+    return bloc.trim().length ? `Options activées :\n${bloc}\n` : "";
+  })();
 
-    const blocDifferenciation = form.optDifferenciation && !estEval ? "Différenciation : proposer base / standard / défi (indiquer clairement).\n\n" : "";
+  const blocOptionsStandard = (() => {
+    const lines = [
+      form.optDifferenciation ? `Différenciation : base/${labelDiffAttendu.toLowerCase()}/défi.\n` : "",
+      form.optRituels ? "Rituel court au début.\n" : "",
+      form.optIAFriendly ? "Sortie structurée : questions + attendus repérables.\n" : "",
+      form.optAtelierIA ? "Inclure une mini-étape d’usage IA guidé (si pertinent).\n" : "",
+    ].join("");
+    return lines.trim().length ? `Options :\n${lines}` : "";
+  })();
 
-    const blocRappelsEtMeta =
-      "Réponse : prérequis courts, étapes numérotées, questions de vérification, récapitulatif, question métacognitive.\n\n";
+  const blocOptionsBasic = (() => {
+    const lines = [
+      form.optDifferenciation ? `Différenciation : base/${labelDiffAttendu.toLowerCase()}/défi.\n` : "",
+      form.optIAFriendly ? "Sortie structurée (questions + attendus).\n" : "",
+    ].join("");
+    return lines.trim().length ? `Options :\n${lines}` : "";
+  })();
 
-    const blocCriteres = "Fin : « Pour l’enseignant » (3-5 critères observables) + erreurs typiques.\n\n";
+  // ⚠️ Basic : ne pas interdire “correction” de manière globale (ça dépend du type)
+  const blocNoteBasic =
+    estEval
+      ? "Évaluation : ne pas afficher les réponses dans la version élève. Si correction demandée, produire une version correction séparée.\n"
+      : "Si correction incluse : donner des étapes courtes + résultat final explicite.\n";
 
-    const blocMiseEnPage =
-      "Si fiche, séance ou évaluation :\n" +
-      "- Mise en page claire et aérée.\n" +
-      "- Titres hiérarchisés (Titre / Sous-titre).\n" +
-      "- Listes à puces ou numérotées.\n" +
-      "- Espaces prévus pour les réponses des élèves.\n" +
-      "- Pas de blocs de texte trop longs.\n\n";
-
-    const blocFinalStructure =
-      form.outputStyle === "slides"
-        ? "IMPORTANT :\n" +
-          "- Structure ta réponse STRICTEMENT SLIDE PAR SLIDE.\n" +
-          "- Chaque slide doit être clairement identifié :\n" +
-          "=== SLIDE 1 — ... ===\n" +
-          "=== SLIDE 2 — ... ===\n" +
-          "- Aucune partie hors slides.\n\n"
-        : "IMPORTANT :\n" +
-          "- La sortie finale affichée doit être UNIQUEMENT le document demandé.\n" +
-          "- Aucun prompt, aucune analyse, aucune section méta ne doit apparaître.\n\n";
-
-
-
-    const blocWord = blocWordDesign(form.outputStyle);
-    const mainCategory = normalizeMainCategory(typeItem?.category ?? typeLabel);
-    const meta = getMainCategoryMeta(mainCategory);
-
-
+  /* -----------------------------
+     EXPERT (inchangé mais nettoyé)
+  ----------------------------- */
+  const construirePromptExpert = (): string => {
     return (
-    buildPromptIntro({
+      buildPromptIntro({
         classe: form.classe,
         matiere: form.matiere,
         mainCategory,
         meta,
         includeMetaLine: true,
       }) +
-
-      blocEduscol +
-      blocEthiqueEtPertinence +   // ✅ ICI
-      blocNeuro +
+      blocEthiqueCourt + // ✅ résumé en 1 ligne
+      blocEduscolLong +
+      blocEthiqueLong +
+      blocNeuroLong +
       blocSansLatex +
-      blocCalibrage +
-      blocOptionsFinal +
+      blocCalibrageLong +
+      blocOptionsExpert +
       (typeDesc ? `Type choisi : ${typeLabel} — ${typeDesc}\n\n` : `Type choisi : ${typeLabel}\n\n`) +
-      blocEvaluation +
-      blocMethode +
+      blocEvaluationLong +
+      blocMethodeLong +
       blocWord +
       `Objectif pédagogique : ${form.objectifPedagogique || "(non précisé)"}\n` +
-      `Difficulté élèves : ${getDifficulteElevesLabel(form.niveau)}.\n` +
-
+      `Profil élèves : ${getDifficulteElevesLabel(form.niveau)}.\n` +
       blocTags +
       blocContexteThemes +
       blocAuteur +
       `Consigne professeur (à optimiser) :\n"""${form.contenu.trim()}"""\n\n` +
-      blocDYS +
-      blocStructureSeance +
-      blocRituels +
-      blocIAFriendly +
-      blocAtelierIA +
-      blocDifferenciation +
-      blocRappelsEtMeta +
-      blocCriteres +
-      (form.outputStyle === "slides" ? "" : blocMiseEnPage) +
-      blocFinalStructure
+      blocDYSLong +
+      blocStructureSeanceLong +
+      blocRituelsLong +
+      blocIAFriendlyLong +
+      blocAtelierIALong +
+      blocDifferenciationLong +
+      blocRappelsEtMetaLong +
+      blocCriteresLong +
+      (form.outputStyle === "slides" ? "" : blocMiseEnPageLong) +
+      blocFinalStructureLong
     );
   };
 
   if (promptMode === "expert") {
-    return construirePromptExpert(form); // ✅ inchangé
+    return construirePromptExpert();
   }
 
-  // ✅ STANDARD / BASIC : versions simplifiées
-  const typeItem = getTypeById(form.typeId);
-  const typeLabel = typeItem?.label ?? "Ressource pédagogique";
-  const typeDesc = typeItem?.description ?? "";
-
-  const blocEduscol = "Respecter les programmes officiels français (Eduscol/BO).\n";
-
-  const blocNeuro = form.neuro ? "Neurosciences : petites étapes, questions, récap.\n" : "";
-  const blocDYS = form.adaptationDYS ? "Adapter DYS : phrases courtes, aéré, vocabulaire expliqué.\n" : "";
-
-  const dur = form.dureeMin && form.dureeMin > 0 ? `${form.dureeMin} min` : "non précisée";
-  const tone = form.tonalite || "neutre";
-
-  const blocCalibrage = `Calibrage : durée ${dur} • tonalité ${tone}.\n`;
-
-  const blocOptionsStandard =
-    (form.optDifferenciation ? "Différenciation : base/standard/défi.\n" : "") +
-    (form.optRituels ? "Rituel court au début.\n" : "") +
-    (form.optIAFriendly ? "Sortie structurée : questions + attendus repérables.\n" : "") +
-    (form.optAtelierIA ? "Inclure une mini-étape d’usage IA guidé (si pertinent).\n" : "");
-
-  const blocOptionsBasic =
-    (form.optDifferenciation ? "Différenciation : base/standard/défi.\n" : "") +
-    (form.optIAFriendly ? "Sortie structurée (questions + attendus).\n" : "");
-
-  const blocFormat =
-    form.outputStyle === "slides"
-      ? "Format : SLIDE PAR SLIDE (Titre / Objectif / Questions-Consignes / Visuel suggéré). Aucune partie hors slides.\n"
-      : "Format : document clair (titres, listes, espaces réponses si besoin).\n";
-
-  const blocInterditsBasic =
-    "Interdits : pas de correction modèle, pas de réponse rédigée à la place des élèves.\n";
-
+  /* -----------------------------
+     STANDARD / BASIC (simplifiés)
+  ----------------------------- */
   const optionsBloc = promptMode === "standard" ? blocOptionsStandard : blocOptionsBasic;
-  const blocEthiqueCourt =
-  "Sécurité : neutralité • égalité • laïcité • accessibilité • aucune donnée personnelle • aucun exemple discriminant.\n\n";
 
   return (
     `Tu es une IA pédagogique pour des élèves de ${form.classe || "collège/lycée"} en ${form.matiere || "discipline"}.\n` +
-    blocEduscol +
+    blocEduscolCourt +
     blocEthiqueCourt +
-    blocNeuro +
-    blocDYS +
-    blocCalibrage +
-    (optionsBloc ? `Options :\n${optionsBloc}` : "") +
+    blocNeuroCourt +
+    blocDYSCourt +
+    (matiereScientifique && !form.latex
+      ? 'Sans LaTeX. Fractions a/b, puissances x^2 ou "x au carré".\n'
+      : "") +
+    blocCalibrageCourt +
+    (optionsBloc ? `${optionsBloc}\n` : "") +
     (typeDesc ? `Type : ${typeLabel} — ${typeDesc}\n` : `Type : ${typeLabel}\n`) +
-    blocFormat +
+    blocFormatCourt +
     `Objectif : ${form.objectifPedagogique || "(non précisé)"}\n` +
-    `Difficulté élèves : ${getDifficulteElevesLabel(form.niveau)}.\n` +
+    `Profil élèves : ${getDifficulteElevesLabel(form.niveau)}.\n` +
     `Consigne prof : """${form.contenu.trim()}"""\n` +
-    blocInterditsBasic
+    blocNoteBasic
   );
 }
+
 
 /* ----------------------------------------
    UI : Boutons "Coller dans" (couleurs)

@@ -11,6 +11,8 @@ import { PROFS_PRESETS, ProfsPresetKey } from "@/data/profsPresets";
 import ToggleChip from "@/components/ToggleChip";
 import { resolveTypeFromTacheProf } from "@/lib/pedagogie/runtime";
 import type { TacheProfValue } from "@/lib/constants/scolaire";
+import { buildPromptIntro } from "@/lib/pedagogie/promptIntro";
+
 
 
 // ✅ constantes partagées
@@ -343,34 +345,66 @@ function blocWordDesign(style: OutputStyle) {
 
   if (style === "word") {
     return (
-      "Format de sortie obligatoire : document Word (copier-coller sans perte).\n" +
-      "- Titres hiérarchisés clairs (Titre 1 / Titre 2 / Titre 3) sur des lignes distinctes.\n" +
-      "- Mise en page aérée : listes, lignes courtes, espaces de réponse.\n" +
-      "- Utilise des icônes emoji simples au début des sections (compatibles Word).\n" +
-      "- Termine par : « ✅ Prêt à coller dans Word ». \n\n"
+        "Format de sortie obligatoire : document Word, très lisible (copier-coller sans perte).\n" +
+    "Contraintes Word-ready :\n" +
+    "- Réponse copiable-collable en conservant strictement la structure.\n" +
+    "- Titres hiérarchisés clairs (Titre / Sous-titre) sur des lignes distinctes.\n" +
+    "- Mise en page aérée : listes, lignes courtes, espaces de réponse visibles.\n" +
+    "- Icônes emoji simples au début des sections (compatibles Word).\n" +
+    "- Interdits : paragraphes longs ou compacts.\n" +
+    "- Ajoute des zones : « Réponse : ______________________ ».\n" +
+    "- Termine obligatoirement par : « ✅ Prêt à coller dans Word ».\n\n" +
+
+    "=== AUTO-CONTRÔLE OBLIGATOIRE (ASSERT IA – MINIMAL) ===\n" +
+    "Avant d’afficher la réponse finale, vérifie que :\n" +
+    "- la structure est claire et aérée,\n" +
+    "- les titres sont visibles et hiérarchisés,\n" +
+    "- des espaces de réponse sont présents,\n" +
+    "- la dernière ligne est exactement : « ✅ Prêt à coller dans Word ».\n" +
+    "Si ce n’est pas le cas, corrige immédiatement puis affiche la version corrigée.\n\n"
     );
   }
 
   // word_expert
-  return (
-    "Format de sortie obligatoire : document Word EXPERT, très lisible.\n" +
-    "Contraintes Word-ready :\n" +
-    "- Réponse copiable-collable en conservant la structure.\n" +
-    "- Icônes emoji au début des titres/sous-parties.\n" +
-    "- Bannières pour grandes parties :\n" +
-    "==================================================\n" +
-    "🧠 TITRE DE LA PARTIE\n" +
-    "==================================================\n" +
-    "- Encadrés simulés :\n" +
-    "[🟦 ENCART – À RETENIR]\nTexte…\n\n" +
-    "[🟨 ENCART – MÉTHODE]\nÉtapes…\n\n" +
-    "[🟥 ENCART – ERREUR FRÉQUENTE]\nErreur + correction…\n\n" +
-    "[🟩 ENCART – DÉFI / BONUS]\nQuestion défi…\n\n" +
-    "- Encarts min : 1 À RETENIR + 1 MÉTHODE + 1 ERREUR + 1 DÉFI.\n" +
-    "- Ajoute des zones : « Réponse : ______________________ ».\n" +
-    "- Interdits : gros paragraphes compacts.\n" +
-    "- Termine par : « ✅ Prêt à coller dans Word ». \n\n"
-  );
+// word_expert
+return (
+  "Format de sortie obligatoire : document Word EXPERT, très lisible.\n" +
+  "Contraintes Word-ready renforcées :\n" +
+  "- Réponse copiable-collable en conservant strictement la structure.\n" +
+  "- Icônes emoji au début des titres et sous-parties.\n" +
+  "- Bannières obligatoires pour les grandes parties :\n" +
+  "==================================================\n" +
+  "🧠 TITRE DE LA PARTIE\n" +
+  "==================================================\n" +
+  "- Encadrés simulés obligatoires :\n" +
+  "[🟦 ENCART – À RETENIR]\nTexte…\n\n" +
+  "[🟨 ENCART – MÉTHODE]\nÉtapes numérotées…\n\n" +
+  "[🟥 ENCART – ERREUR FRÉQUENTE]\nErreur + correction…\n\n" +
+  "[🟩 ENCART – DÉFI / BONUS]\nQuestion argumentée…\n\n" +
+  "- Encarts minimum requis : 1 À RETENIR + 1 MÉTHODE + 1 ERREUR + 1 DÉFI.\n" +
+  "- Ajoute des zones : « Réponse : ______________________ » après chaque question.\n" +
+  "- Interdits : paragraphes compacts ou justification implicite.\n" +
+  "- Termine obligatoirement par : « ✅ Prêt à coller dans Word ».\n\n" +
+
+  "=== AUTO-CONTRÔLE OBLIGATOIRE (ASSERT IA – WORD EXPERT) ===\n" +
+  "Avant d’afficher la réponse finale, effectue un auto-contrôle strict.\n" +
+  "Si UNE SEULE condition manque, corrige immédiatement la sortie (sans l’annoncer),\n" +
+  "puis affiche uniquement la version corrigée.\n\n" +
+
+  "CHECKLIST (toutes obligatoires) :\n" +
+  "1) Au moins 2 grandes parties avec bannière conforme.\n" +
+  "2) Chaque grande partie commence par un titre avec emoji.\n" +
+  "3) Les 4 encarts existent au moins une fois chacun :\n" +
+  "   🟦 À RETENIR / 🟨 MÉTHODE / 🟥 ERREUR FRÉQUENTE / 🟩 DÉFI ou BONUS.\n" +
+  "4) Après CHAQUE question figure exactement :\n" +
+  "   « Réponse : ______________________ »\n" +
+  "5) Aucun paragraphe ne dépasse 4 lignes consécutives.\n" +
+  "6) Une consigne correspond à UNE seule question.\n" +
+  "7) Chaque question contient soit « Attendus : … », soit « Réponse attendue : … ».\n" +
+  "8) La dernière ligne du document est STRICTEMENT :\n" +
+  "   « ✅ Prêt à coller dans Word ».\n\n"
+);
+
 }
 
 
@@ -434,8 +468,20 @@ function construirePrompt(form: PromptProf, promptMode: PromptMode): string {
       (themesHumains.length ? `Thèmes à intégrer : ${themesHumains.join(", ")}.\n` : "") +
       (form.themesLabel?.trim() ? `Contexte / angle : ${form.themesLabel.trim()}.\n` : "");
     const blocContexteThemes = blocThemes.trim().length ? `\n${blocThemes}\n` : "";
+   
+    const blocEduscol =
+  "Références institutionnelles : programmes officiels français (Eduscol / BO en vigueur).\n" +
+  "Respecter le niveau de classe, les compétences du socle commun et le vocabulaire attendu.\n\n";
 
-    const blocEduscol = "Respecter les programmes officiels français (Eduscol/BO), vocabulaire attendu.\n\n";
+    const blocEthiqueEtPertinence =
+  "Contraintes éthiques obligatoires :\n" +
+  "- Aucune référence discriminante, stigmatisante ou genrée.\n" +
+  "- Aucune donnée personnelle réelle ou identifiable.\n" +
+  "- Respect strict des principes de neutralité, d’égalité et de laïcité.\n" +
+  "- Supports accessibles à tous les élèves.\n\n";
+
+const blocEthiqueCourt =
+  "Sécurité : neutralité • égalité • laïcité • accessibilité • aucune donnée personnelle • aucun exemple discriminant.\n\n";
 
     const blocNeuro = form.neuro
       ? "Neurosciences : activer prérequis, petites étapes, alternance explications/questions, récapitulatif, reformulation.\n\n"
@@ -470,7 +516,16 @@ function construirePrompt(form: PromptProf, promptMode: PromptMode): string {
     const blocCalibrage = `Calibrage demandé :\n- Durée : ${dur}.\n- Tonalité : ${tone}.\n\n`;
 
     const blocOptions =
-      (form.optDifferenciation ? "Option : Différenciation (base / standard / défi) clairement indiquée.\n" : "") +
+    (form.optDifferenciation
+      ? "OBLIGATION — Différenciation activée :\n" +
+        "Chaque problème DOIT comporter explicitement une différenciation :\n" +
+        "    - Base\n" +
+        "    - Standard\n" +
+        "    - Défi\n"
+      : ""
+    )
+
+      +
       (form.optRituels ? "Option : Rituel d’entrée 5–10 min (activation, rappel, mini-défi, correction rapide).\n" : "") +
       (form.optIAFriendly
         ? "Option : Compatible correction IA — produire un document très structuré, régulier et facile à analyser automatiquement.\n"
@@ -541,15 +596,28 @@ function construirePrompt(form: PromptProf, promptMode: PromptMode): string {
           "=== SLIDE 1 — ... ===\n" +
           "=== SLIDE 2 — ... ===\n" +
           "- Aucune partie hors slides.\n\n"
-        : "IMPORTANT : Structure ta réponse en 2 parties :\n" +
-          '1) "=== PARTIE 1 : PROMPT OPTIMISÉ POUR L’IA ==="\n' +
-          '2) "=== PARTIE 2 : RESSOURCE PRÊTE POUR L’ÉLÈVE ==="\n';
+        : "IMPORTANT :\n" +
+          "- La sortie finale affichée doit être UNIQUEMENT le document demandé.\n" +
+          "- Aucun prompt, aucune analyse, aucune section méta ne doit apparaître.\n\n";
+
+
 
     const blocWord = blocWordDesign(form.outputStyle);
+    const mainCategory = normalizeMainCategory(typeItem?.category ?? typeLabel);
+    const meta = getMainCategoryMeta(mainCategory);
+
 
     return (
-      `Tu es une IA pédagogique pour des élèves de ${form.classe || "collège/lycée"} en ${form.matiere || "discipline"}.\n\n` +
+    buildPromptIntro({
+        classe: form.classe,
+        matiere: form.matiere,
+        mainCategory,
+        meta,
+        includeMetaLine: true,
+      }) +
+
       blocEduscol +
+      blocEthiqueEtPertinence +   // ✅ ICI
       blocNeuro +
       blocSansLatex +
       blocCalibrage +
@@ -588,6 +656,7 @@ function construirePrompt(form: PromptProf, promptMode: PromptMode): string {
   const typeDesc = typeItem?.description ?? "";
 
   const blocEduscol = "Respecter les programmes officiels français (Eduscol/BO).\n";
+
   const blocNeuro = form.neuro ? "Neurosciences : petites étapes, questions, récap.\n" : "";
   const blocDYS = form.adaptationDYS ? "Adapter DYS : phrases courtes, aéré, vocabulaire expliqué.\n" : "";
 
@@ -615,10 +684,13 @@ function construirePrompt(form: PromptProf, promptMode: PromptMode): string {
     "Interdits : pas de correction modèle, pas de réponse rédigée à la place des élèves.\n";
 
   const optionsBloc = promptMode === "standard" ? blocOptionsStandard : blocOptionsBasic;
+  const blocEthiqueCourt =
+  "Sécurité : neutralité • égalité • laïcité • accessibilité • aucune donnée personnelle • aucun exemple discriminant.\n\n";
 
   return (
     `Tu es une IA pédagogique pour des élèves de ${form.classe || "collège/lycée"} en ${form.matiere || "discipline"}.\n` +
     blocEduscol +
+    blocEthiqueCourt +
     blocNeuro +
     blocDYS +
     blocCalibrage +
@@ -866,7 +938,7 @@ export default function ProfsPage() {
       date: today,
       methode: "methode_active",
       outputStyle: "word_expert",
-      dureeMin: 45,
+      dureeMin: 55,
       tonalite: "neutre",
       modaliteEvaluation: "evaluation_sommative",
       themes: [],
@@ -966,7 +1038,7 @@ export default function ProfsPage() {
         .eq("is_archived", false)
         .order("is_featured", { ascending: false })
         .order("featured_rank", { ascending: true, nullsFirst: false })
-        .limit(15);
+        .limit(200);
 
       // ✅ on filtre sur la liste niveauxToTry (multi-niveaux)
       const { data, error } = await query.in("niveau", niveauxToTry);
@@ -2173,69 +2245,6 @@ export default function ProfsPage() {
               </div>
             )}
 
-            {/* Durée + tonalité */}
-            <div className="grid sm:grid-cols-2 gap-3">
-              <div className="space-y-1">
-                <label className="text-xs font-semibold text-gray-600 flex items-center gap-2">
-                  <Clock3 className="w-4 h-4" />
-                  Durée (minutes)
-                </label>
-                <input
-                  type="number"
-                  min={0}
-                  value={form.dureeMin}
-                  onChange={(e) => handleChange("dureeMin", Math.max(0, Number(e.target.value || 0)))}
-                  className="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-sky-300"
-                  placeholder="Ex : 45"
-                />
-                <p className="text-[11px] text-gray-500">Recommandé : 30 à 60 minutes.</p>
-              </div>
-
-              <div className="space-y-1">
-                <label className="text-xs font-semibold text-gray-600">Tonalité souhaitée</label>
-                <select
-                  value={form.tonalite}
-                  onChange={(e) => handleChange("tonalite", e.target.value as Tonalite)}
-                  className="w-full border rounded-lg px-3 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-sky-300"
-                >
-                  {TONALITES.map((t) => (
-                    <option key={t.id} value={t.id}>
-                      {t.label}
-                    </option>
-                  ))}
-                </select>
-                <p className="text-[11px] text-gray-500">{TONALITES.find((t) => t.id === form.tonalite)?.hint}</p>
-              </div>
-            </div>
-
-            {/* Style Word */}
-            <div className="space-y-2">
-              <label className="text-xs font-semibold text-gray-600">Style de rendu</label>
-              <div className="grid sm:grid-cols-4 gap-2">
-                {[
-                  { id: "simple", title: "Simple", desc: "Texte propre, sans design.", badge: "Rapide" },
-                  { id: "word", title: "Word", desc: "Titres + icônes + aération.", badge: "Recommandé" },
-                  { id: "word_expert", title: "Word Expert", desc: "Bannières + encadrés + zones réponses.", badge: "🔥 Best" },
-                  { id: "slides", title: "Slides", desc: "Diaporama slide par slide.", badge: "Classe" },
-
-                ].map((o) => (
-                  <button
-                    key={o.id}
-                    type="button"
-                    onClick={() => handleChange("outputStyle", o.id as OutputStyle)}
-                    className={`text-left border rounded-xl px-3 py-2 text-xs transition ${
-                      form.outputStyle === o.id ? "border-[#0047B6] bg-sky-50 shadow-sm" : "border-slate-200 bg-white hover:border-sky-200"
-                    }`}
-                  >
-                    <div className="flex items-center justify-between gap-2">
-                      <span className="font-semibold text-slate-800">{o.title}</span>
-                      <span className="text-[10px] px-2 py-0.5 rounded-full bg-slate-100 text-slate-700">{o.badge}</span>
-                    </div>
-                    <p className="mt-1 text-[11px] text-slate-600">{o.desc}</p>
-                  </button>
-                ))}
-              </div>
-            </div>
 
             {/* ✅ MODE RAPIDE : CATÉGORIE */}
             {mode === "rapide" && (
@@ -2530,31 +2539,6 @@ export default function ProfsPage() {
               </div>
             )}
 
-            {/* Titre + auteur */}
-            <div className="grid sm:grid-cols-[2fr,1fr] gap-3">
-              <div className="space-y-1">
-                <label className="text-xs font-semibold text-gray-600">Titre (pour toi)</label>
-                <input
-                  type="text"
-                  value={form.titre}
-                  onChange={(e) => handleChange("titre", e.target.value)}
-                  placeholder="Ex : Éval fractions – barème + différenciation"
-                  className="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-sky-300"
-                />
-              </div>
-
-              <div className="space-y-1">
-                <label className="text-xs font-semibold text-gray-600">Auteur (facultatif)</label>
-                <input
-                  type="text"
-                  value={form.auteur}
-                  onChange={(e) => handleChange("auteur", e.target.value)}
-                  placeholder="Nom, initiales…"
-                  className="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-sky-300"
-                />
-              </div>
-            </div>
-
             {/* Objectif */}
             <div className="space-y-1">
               <label className="text-xs font-semibold text-gray-600">Objectif pédagogique</label>
@@ -2565,6 +2549,30 @@ export default function ProfsPage() {
                 className="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-sky-300 min-h-[70px]"
               />
             </div>
+
+                        {/* Contenu */}
+            <div className="space-y-1 pt-2">
+              <label className="text-xs font-semibold text-gray-600">Texte de ta demande (version prof)</label>
+              <textarea
+                value={form.contenu}
+                onChange={(e) => handleChange("contenu", e.target.value)}
+                placeholder={estEval ? "Ex : Fais une évaluation de 55 min… exos progressifs + barème sur 20…" : "Ex : Génère une séance clé en main…"}
+                className="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-sky-300 min-h-[120px]"
+              />
+            </div>
+
+            {formError && (
+              <div className="rounded-xl border border-rose-200 bg-rose-50 px-3 py-2">
+                <p className="text-xs font-semibold text-rose-800">⚠️ {formError}</p>
+                {!validation.ok && (
+                  <ul className="mt-2 text-[11px] text-rose-800/90 list-disc pl-4 space-y-1">
+                    {validation.issues.slice(0, 6).map((it) => (
+                      <li key={it}>{it}</li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            )}
 
             {/* Tags */}
             <div className="space-y-1">
@@ -2624,29 +2632,93 @@ export default function ProfsPage() {
               </div>
             </div>
 
-            {/* Contenu */}
-            <div className="space-y-1 pt-2">
-              <label className="text-xs font-semibold text-gray-600">Texte de ta demande (version prof)</label>
-              <textarea
-                value={form.contenu}
-                onChange={(e) => handleChange("contenu", e.target.value)}
-                placeholder={estEval ? "Ex : Fais une évaluation de 45 min… exos progressifs + barème sur 20…" : "Ex : Génère une séance clé en main…"}
-                className="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-sky-300 min-h-[120px]"
-              />
+            {/* Titre + auteur */}
+            <div className="grid sm:grid-cols-[2fr,1fr] gap-3">
+              <div className="space-y-1">
+                <label className="text-xs font-semibold text-gray-600">Titre (pour toi)</label>
+                <input
+                  type="text"
+                  value={form.titre}
+                  onChange={(e) => handleChange("titre", e.target.value)}
+                  placeholder="Ex : Éval fractions – barème + différenciation"
+                  className="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-sky-300"
+                />
+              </div>
+
+              <div className="space-y-1">
+                <label className="text-xs font-semibold text-gray-600">Auteur (facultatif)</label>
+                <input
+                  type="text"
+                  value={form.auteur}
+                  onChange={(e) => handleChange("auteur", e.target.value)}
+                  placeholder="Nom, initiales…"
+                  className="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-sky-300"
+                />
+              </div>
+            </div>
+             {/* Durée + tonalité */}
+            <div className="grid sm:grid-cols-2 gap-3">
+              <div className="space-y-1">
+                <label className="text-xs font-semibold text-gray-600 flex items-center gap-2">
+                  <Clock3 className="w-4 h-4" />
+                  Durée (minutes)
+                </label>
+                <input
+                  type="number"
+                  min={0}
+                  value={form.dureeMin}
+                  onChange={(e) => handleChange("dureeMin", Math.max(0, Number(e.target.value || 0)))}
+                  className="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-sky-300"
+                  placeholder="Ex : 55"
+                />
+                <p className="text-[11px] text-gray-500">Recommandé : 30 à 60 minutes.</p>
+              </div>
+
+              <div className="space-y-1">
+                <label className="text-xs font-semibold text-gray-600">Tonalité souhaitée</label>
+                <select
+                  value={form.tonalite}
+                  onChange={(e) => handleChange("tonalite", e.target.value as Tonalite)}
+                  className="w-full border rounded-lg px-3 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-sky-300"
+                >
+                  {TONALITES.map((t) => (
+                    <option key={t.id} value={t.id}>
+                      {t.label}
+                    </option>
+                  ))}
+                </select>
+                <p className="text-[11px] text-gray-500">{TONALITES.find((t) => t.id === form.tonalite)?.hint}</p>
+              </div>
             </div>
 
-            {formError && (
-              <div className="rounded-xl border border-rose-200 bg-rose-50 px-3 py-2">
-                <p className="text-xs font-semibold text-rose-800">⚠️ {formError}</p>
-                {!validation.ok && (
-                  <ul className="mt-2 text-[11px] text-rose-800/90 list-disc pl-4 space-y-1">
-                    {validation.issues.slice(0, 6).map((it) => (
-                      <li key={it}>{it}</li>
-                    ))}
-                  </ul>
-                )}
+            {/* Style Word */}
+            <div className="space-y-2">
+              <label className="text-xs font-semibold text-gray-600">Style de rendu</label>
+              <div className="grid sm:grid-cols-4 gap-2">
+                {[
+                  { id: "simple", title: "Simple", desc: "Texte propre, sans design.", badge: "Rapide" },
+                  { id: "word", title: "Word", desc: "Titres + icônes + aération.", badge: "Recommandé" },
+                  { id: "word_expert", title: "Word Expert", desc: "Bannières + encadrés + zones réponses.", badge: "🔥 Best" },
+                  { id: "slides", title: "Slides", desc: "Diaporama slide par slide.", badge: "Classe" },
+
+                ].map((o) => (
+                  <button
+                    key={o.id}
+                    type="button"
+                    onClick={() => handleChange("outputStyle", o.id as OutputStyle)}
+                    className={`text-left border rounded-xl px-3 py-2 text-xs transition ${
+                      form.outputStyle === o.id ? "border-[#0047B6] bg-sky-50 shadow-sm" : "border-slate-200 bg-white hover:border-sky-200"
+                    }`}
+                  >
+                    <div className="flex items-center justify-between gap-2">
+                      <span className="font-semibold text-slate-800">{o.title}</span>
+                      <span className="text-[10px] px-2 py-0.5 rounded-full bg-slate-100 text-slate-700">{o.badge}</span>
+                    </div>
+                    <p className="mt-1 text-[11px] text-slate-600">{o.desc}</p>
+                  </button>
+                ))}
               </div>
-            )}
+            </div>
 
             {/* ✅ NEW : Mode de génération du prompt */}
     <div className="pt-2 space-y-2">
@@ -2696,12 +2768,6 @@ export default function ProfsPage() {
         </button>
       </div>
 
-  <div className="rounded-xl border border-slate-200 bg-slate-50 px-3 py-2">
-    <p className="text-[11px] text-slate-700">
-      <span className="font-semibold">Difficulté élèves</span> = exigence pour l’élève •{" "}
-      <span className="font-semibold">Mode de génération</span> = quantité de contraintes dans le prompt
-    </p>
-  </div>
 </div>
 
 
@@ -2916,7 +2982,7 @@ export default function ProfsPage() {
                   value={feedbackText}
                   onChange={(e) => setFeedbackText(e.target.value)}
                   className="w-full border rounded-lg px-3 py-2 text-sm min-h-[70px] bg-white"
-                  placeholder="Ex : je veux un barème plus clair / je veux 3 versions (base, standard, défi) / ça dépasse 45 min…"
+                  placeholder="Ex : je veux un barème plus clair / je veux 3 versions (base, standard, défi) / ça dépasse 55 min…"
                   disabled={!promptInterne}
                 />
               </div>
