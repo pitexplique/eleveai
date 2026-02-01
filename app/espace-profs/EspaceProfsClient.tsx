@@ -425,11 +425,6 @@ return (
 }
 
 
-
-/* ----------------------------------------
-   PROMPT
----------------------------------------- */
-
 /* ----------------------------------------
    PROMPT
 ---------------------------------------- */
@@ -1673,34 +1668,6 @@ const buildRelanceBloc = useCallback(() => {
 }, [feedbackChoice, feedbackText, promptInterne]);
 
 
-  const buildRelancePrompt = useCallback(() => {
-    if (!promptInterne) {
-      showToast("⚠️ Génère d’abord le prompt (étape 3).");
-      return;
-    }
-    if (!feedbackChoice) {
-      showToast("⚠️ Choisis d’abord ton avis.");
-      return;
-    }
-    const rel = buildRelanceBloc();
-    setPromptRelance(rel);
-    setCopiedRelance(false);
-    showToast("🔁 Relance générée !");
-    setTimeout(() => scrollToRelance(), 80);
-  }, [buildRelanceBloc, feedbackChoice, promptInterne, scrollToRelance, showToast]);
-
-  const copierRelance = useCallback(async () => {
-    if (!promptRelance) return;
-    try {
-      await navigator.clipboard.writeText(promptRelance);
-      setCopiedRelance(true);
-      showToast("✅ Relance copiée");
-      setTimeout(() => setCopiedRelance(false), 1200);
-    } catch {
-      showToast("⚠️ Copie auto impossible (sélectionne puis Ctrl+C).");
-    }
-  }, [promptRelance, showToast]);
-
   const mainCatMeta = useMemo(() => getMainCategoryMeta(mainCategory), [mainCategory]);
 
   return (
@@ -2396,6 +2363,7 @@ const buildRelanceBloc = useCallback(() => {
                 {typesDisponibles.map((t) => {
                   const active = form.typeId === t.id;
                   const meta = getMainCategoryMeta(normalizeMainCategory(t.category));
+                  {/*console.log("Render type :", t); */}
                   return (
                     <button
                       key={t.id}
@@ -2405,6 +2373,7 @@ const buildRelanceBloc = useCallback(() => {
                         active ? "border-[#0047B6] bg-sky-50 shadow-sm" : "border-slate-200 bg-white hover:border-sky-200"
                       }`}
                     >
+
                       <div className="min-w-0">
                         <div className="font-semibold text-slate-800">
                           {meta.emoji} {t.label}
@@ -2973,113 +2942,6 @@ const buildRelanceBloc = useCallback(() => {
     </>
   )}
 </div>
-
-
-            {/* 5️⃣ AVIS + RELANCE */}
-            <div ref={relanceRef} className="bg-white/95 border border-slate-200 rounded-2xl shadow-sm p-5 sm:p-6 space-y-4">
-              <div className="space-y-1">
-                <h2 className="text-lg font-bold text-[#0047B6]">5️⃣ Avis + relance (Prompt 2)</h2>
-                <p className="text-xs text-slate-600">
-                  10 secondes : tu qualifies la qualité de la sortie, puis EleveAI fabrique une relance adaptée (V2, simplification, vérification).
-                </p>
-              </div>
-
-              <div className="grid sm:grid-cols-3 gap-2">
-                <button
-                  type="button"
-                  onClick={() => {
-                    setFeedbackChoice("ok");
-                    showToast("✅ OK");
-                  }}
-                  className={`rounded-xl border px-3 py-2 text-sm font-semibold transition ${
-                    feedbackChoice === "ok" ? "border-emerald-500 bg-emerald-50" : "border-slate-200 bg-white hover:bg-slate-50"
-                  }`}
-                  disabled={!promptInterne}
-                >
-                  ✅ C’est bon
-                </button>
-
-                <button
-                  type="button"
-                  onClick={() => {
-                    setFeedbackChoice("bof");
-                    showToast("🤔 À clarifier");
-                  }}
-                  className={`rounded-xl border px-3 py-2 text-sm font-semibold transition ${
-                    feedbackChoice === "bof" ? "border-amber-400 bg-amber-50" : "border-slate-200 bg-white hover:bg-slate-50"
-                  }`}
-                  disabled={!promptInterne}
-                >
-                  🤔 Moyen
-                </button>
-
-                <button
-                  type="button"
-                  onClick={() => {
-                    setFeedbackChoice("pas_ok");
-                    showToast("🧪 À vérifier");
-                  }}
-                  className={`rounded-xl border px-3 py-2 text-sm font-semibold transition ${
-                    feedbackChoice === "pas_ok" ? "border-rose-400 bg-rose-50" : "border-slate-200 bg-white hover:bg-slate-50"
-                  }`}
-                  disabled={!promptInterne}
-                >
-                  ❌ Risqué
-                </button>
-              </div>
-
-              <div className="space-y-1">
-                <label className="text-xs font-semibold">Optionnel : une précision</label>
-                <textarea
-                  value={feedbackText}
-                  onChange={(e) => setFeedbackText(e.target.value)}
-                  className="w-full border rounded-lg px-3 py-2 text-sm min-h-[70px] bg-white"
-                  placeholder="Ex : je veux un barème plus clair / je veux 3 versions (base, standard, défi) / ça dépasse 55 min…"
-                  disabled={!promptInterne}
-                />
-              </div>
-
-              <button
-                type="button"
-                onClick={buildRelancePrompt}
-                disabled={!promptInterne || !feedbackChoice}
-                className={`w-full inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2 text-sm font-semibold transition ${
-                  promptInterne && feedbackChoice ? "bg-emerald-600 text-white hover:bg-emerald-700" : "bg-emerald-100 text-emerald-500 cursor-not-allowed"
-                }`}
-              >
-                🔁 Générer une relance adaptée (Prompt 2)
-              </button>
-
-              <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4 space-y-3">
-                <div className="flex items-center justify-between gap-2">
-                  <div>
-                    <p className="text-sm font-extrabold text-slate-900">🔁 Prompt 2 (relance)</p>
-                    <p className="text-[11px] text-slate-600">À coller dans une IA pour améliorer / simplifier / vérifier la production.</p>
-                  </div>
-
-                  <button
-                    type="button"
-                    onClick={copierRelance}
-                    disabled={!promptRelance}
-                    className={`inline-flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-semibold transition ${
-                      promptRelance ? "bg-slate-900 text-white hover:bg-slate-950" : "bg-slate-200 text-slate-500 cursor-not-allowed"
-                    }`}
-                  >
-                    <ClipboardCopy className="w-4 h-4" />
-                    {copiedRelance ? "Copié" : "Copier"}
-                  </button>
-                </div>
-
-                <textarea
-                  readOnly
-                  value={promptRelance}
-                  className="w-full border rounded-lg px-3 py-2 text-xs font-mono bg-white min-h-[180px]"
-                  placeholder="Ton Prompt 2 apparaîtra ici après ton avis."
-                />
-
-                <PasteTargets text={promptRelance} showToast={showToast} />
-              </div>
-            </div>
           </section>
         </div>
       </div>
