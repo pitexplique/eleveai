@@ -966,9 +966,6 @@ export default function ProfsPage() {
   const [agentError, setAgentError] = useState("");
   const [formError, setFormError] = useState<string>("");
 
-  // 👇 Deplie la ressources 4
-  const [openRessource, setOpenRessource] = useState(false); // Point 4 replié par défaut
-
   const [copiedPrompt, setCopiedPrompt] = useState(false);
   const [copiedRessource, setCopiedRessource] = useState(false);
   const [showPromptInterne, setShowPromptInterne] = useState(true);
@@ -1622,56 +1619,55 @@ export default function ProfsPage() {
     }
   }, [agentOutput, triggerNudge, showToast]);
 
-// ✅ Relance (Prompt 2) — améliore le PROMPT, pas la ressource
-const buildRelanceBloc = useCallback(() => {
-  const feedbackFree = feedbackText.trim();
+  // ✅ Relance (Prompt 2)
+  const buildRelanceBloc = useCallback(() => {
+    const feedbackFree = feedbackText.trim();
 
-  const intentByChoice: Record<Exclude<FeedbackChoice, "">, string> = {
-    ok:
-      "Objectif : consolider et finaliser.\n" +
-      "- Propose une version V2 plus propre (meilleure structure Word, consignes plus claires).\n" +
-      "- Ajoute 5 points de vérification (erreurs fréquentes / pièges) + corrections.\n" +
-      "- Termine par une checklist de conformité (programme, barème/critères si éval, différenciation si activée).",
-    bof:
-      "Objectif : clarifier / simplifier.\n" +
-      "- Reprends en version plus simple et plus explicite.\n" +
-      "- Réduis la densité, ajoute des micro-étapes et des exemples concrets.\n" +
-      "- Si des consignes sont ambiguës, propose 2 variantes (A/B) et demande laquelle choisir.",
-    pas_ok:
-      "Objectif : vérifier / rectifier.\n" +
-      "- Liste précisément ce qui semble incohérent ou risqué.\n" +
-      "- Corrige en explicitant tes hypothèses.\n" +
-      "- Si tu n’es pas sûr d’un point, dis-le et propose une alternative robuste.\n" +
-      "- Termine par une version corrigée V2.",
-  };
+    const intentByChoice: Record<Exclude<FeedbackChoice, "">, string> = {
+      ok:
+        "Objectif : consolider et finaliser.\n" +
+        "- Propose une version V2 plus propre (meilleure structure Word, consignes plus claires).\n" +
+        "- Ajoute 5 points de vérification (erreurs fréquentes / pièges) + corrections.\n" +
+        "- Termine par une checklist de conformité (programme, barème/critères si éval, différenciation si activée).",
+      bof:
+        "Objectif : clarifier / simplifier.\n" +
+        "- Reprends en version plus simple et plus explicite.\n" +
+        "- Réduis la densité, ajoute des micro-étapes et des exemples concrets.\n" +
+        "- Si des consignes sont ambiguës, propose 2 variantes (A/B) et demande laquelle choisir.",
+      pas_ok:
+        "Objectif : vérifier / rectifier.\n" +
+        "- Liste précisément ce qui semble incohérent ou risqué.\n" +
+        "- Corrige en explicitant tes hypothèses.\n" +
+        "- Si tu n’es pas sûr d’un point, dis-le et propose une alternative robuste.\n" +
+        "- Termine par une version corrigée V2.",
+    };
 
-  const addUserNote = feedbackFree
-    ? `\n\nNote du prof (à prendre en compte) :\n"${feedbackFree}"\n`
-    : "";
+    const addUserNote = feedbackFree ? `\n\nNote du prof (à prendre en compte) :\n"${feedbackFree}"\n` : "";
 
-  const antiHallucination =
-    "\n\nRègles importantes :\n" +
-    "- Tu travailles UNIQUEMENT à partir du PROMPT 1 ci-dessous.\n" +
-    "- N’utilise PAS de “sortie / ressource générée” précédente.\n" +
-    "- Si une information est incertaine, dis-le et propose une hypothèse explicite.\n" +
-    "- Vérifie la cohérence interne (durée, niveau, barème, consignes).\n" +
-    "- Ta réponse finale doit contenir UNIQUEMENT le PROMPT V2 (prêt à coller dans ChatGPT), sans commentaire.\n";
+    const antiHallucination =
+      "\n\nRègles importantes :\n" +
+      "- Si une information est incertaine, dis-le.\n" +
+      "- Vérifie la cohérence interne (durée, niveau, barème, consignes).\n" +
+      "- Termine par : « Souhaites-tu que je l’adapte à un établissement / un public spécifique ? »\n";
 
-  const relance =
-    "Tu es un assistant de Prompt Engineering pédagogique.\n" +
-    "Tu vas améliorer un PROMPT (pas une ressource).\n\n" +
-    "=== PROMPT 1 (base à améliorer) ===\n" +
-    "-----\n" +
-    promptInterne +
-    "\n-----\n\n" +
-    "Consigne de relance :\n" +
-    intentByChoice[feedbackChoice as Exclude<FeedbackChoice, "">] +
-    addUserNote +
-    antiHallucination;
+    const relance =
+      "Tu vas améliorer une production pédagogique.\n" +
+      "Voici le contexte :\n\n" +
+      "=== PROMPT 1 (généré) ===\n" +
+      "-----\n" +
+      promptInterne +
+      "\n-----\n\n" +
+      "=== SORTIE (ressource générée) ===\n" +
+      "-----\n" +
+      (agentOutput || "(aucune ressource — produire une V2 à partir du prompt)") +
+      "\n-----\n\n" +
+      "Maintenant, fais la relance suivante :\n" +
+      intentByChoice[feedbackChoice as Exclude<FeedbackChoice, "">] +
+      addUserNote +
+      antiHallucination;
 
-  return relance;
-}, [feedbackChoice, feedbackText, promptInterne]);
-
+    return relance;
+  }, [agentOutput, feedbackChoice, feedbackText, promptInterne]);
 
   const buildRelancePrompt = useCallback(() => {
     if (!promptInterne) {
@@ -2885,95 +2881,48 @@ const buildRelanceBloc = useCallback(() => {
             </div>
 
             {/* 4️⃣ RESSOURCE */}
-{/* 4️⃣ RESSOURCE (repliable) */}
-<div
-  ref={ressourceRef}
-  className="bg-white/95 border border-slate-200 rounded-2xl shadow-sm p-5 sm:p-6 space-y-3"
->
-  {/* Header + toggle */}
-  <div className="flex items-start justify-between gap-3">
-    <div className="min-w-0">
-      <button
-        type="button"
-        onClick={() => setOpenRessource((v) => !v)}
-        className="flex items-center gap-2 text-left"
-      >
-        <h2 className="text-lg font-bold text-[#0047B6]">4️⃣ Ressource générée</h2>
-        <span
-          className={`inline-flex items-center rounded-full px-2 py-0.5 text-[11px] font-semibold ${
-            openRessource ? "bg-slate-900 text-white" : "bg-slate-100 text-slate-700"
-          }`}
-        >
-          {openRessource ? "Masquer" : "Afficher"}
-        </span>
-      </button>
+            <div ref={ressourceRef} className="bg-white/95 border border-slate-200 rounded-2xl shadow-sm p-5 sm:p-6 space-y-4">
+              <div className="flex items-center justify-between gap-2">
+                <h2 className="text-lg font-bold text-[#0047B6]">4️⃣ Ressource générée</h2>
 
-      {/* mini aperçu quand fermé */}
-      {!openRessource && (
-        <p className="mt-1 text-xs text-slate-600 truncate">
-          {agentLoading
-            ? "Réflexion en cours…"
-            : agentOutput
-              ? agentOutput.replace(/\s+/g, " ").slice(0, 120) + (agentOutput.length > 120 ? "…" : "")
-              : "La ressource apparaîtra ici."}
-        </p>
-      )}
-    </div>
+                <button
+                  type="button"
+                  onClick={copierRessource}
+                  disabled={!agentOutput}
+                  className={`inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-[11px] font-semibold transition ${
+                    agentOutput ? "bg-slate-800 text-white hover:bg-slate-900" : "bg-slate-200 text-slate-500 cursor-not-allowed"
+                  }`}
+                >
+                  <ClipboardCopy className="w-4 h-4" />
+                  {copiedRessource ? "Copié" : "Copier"}
+                </button>
+              </div>
 
-    {/* actions */}
-    <div className="flex items-center gap-2 shrink-0">
-      <button
-        type="button"
-        onClick={copierRessource}
-        disabled={!agentOutput}
-        className={`inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-[11px] font-semibold transition ${
-          agentOutput ? "bg-slate-800 text-white hover:bg-slate-900" : "bg-slate-200 text-slate-500 cursor-not-allowed"
-        }`}
-        title={!agentOutput ? "Rien à copier" : "Copier la ressource"}
-      >
-        <ClipboardCopy className="w-4 h-4" />
-        {copiedRessource ? "Copié" : "Copier"}
-      </button>
-    </div>
-  </div>
+              {agentError && <p className="text-xs text-red-600">⚠️ {agentError}</p>}
 
-  {/* contenu replié/déplié */}
-  {openRessource && (
-    <>
-      {agentError && <p className="text-xs text-red-600">⚠️ {agentError}</p>}
+              <div className="eleveai-math border rounded p-3 min-h-[180px] bg-slate-50 text-sm whitespace-pre-wrap">
+                {agentLoading ? "Réflexion en cours..." : agentOutput ? <MarkdownMath>{agentOutput}</MarkdownMath> : "La ressource apparaîtra ici."}
+              </div>
 
-      <div className="eleveai-math border rounded bg-slate-50 text-sm max-h-[240px] overflow-y-auto">
-        <div className="p-3 whitespace-pre-wrap">
-          {agentLoading
-            ? "Réflexion en cours..."
-            : agentOutput
-              ? <MarkdownMath>{agentOutput}</MarkdownMath>
-              : "La ressource apparaîtra ici."}
-        </div>
-      </div>
-
-      <button
-        type="button"
-        onClick={() => {
-          if (!promptInterne) {
-            showToast("⚠️ Génère d’abord le prompt.");
-            return;
-          }
-          showToast("💡 Donne un avis (étape 5) pour produire un Prompt 2.");
-          setTimeout(() => scrollToRelance(), 120);
-        }}
-        disabled={!promptInterne}
-        className={`inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2 text-sm font-semibold border transition ${
-          promptInterne ? "border-slate-200 bg-white text-slate-800 hover:bg-slate-50" : "border-slate-200 bg-white text-slate-400 cursor-not-allowed"
-        }`}
-      >
-        <MessageCircle className="w-4 h-4" />
-        Le Prompt 2 modifie la consigne (le prompt), pas la ressource affichée ci-dessus.
-      </button>
-    </>
-  )}
-</div>
-
+              <button
+                type="button"
+                onClick={() => {
+                  if (!promptInterne) {
+                    showToast("⚠️ Génère d’abord le prompt.");
+                    return;
+                  }
+                  showToast("💡 Donne un avis (étape 5) pour produire un Prompt 2.");
+                  setTimeout(() => scrollToRelance(), 120);
+                }}
+                disabled={!promptInterne}
+                className={`inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2 text-sm font-semibold border transition ${
+                  promptInterne ? "border-slate-200 bg-white text-slate-800 hover:bg-slate-50" : "border-slate-200 bg-white text-slate-400 cursor-not-allowed"
+                }`}
+              >
+                <MessageCircle className="w-4 h-4" />
+                Améliorer / vérifier (Prompt 2)
+              </button>
+            </div>
 
             {/* 5️⃣ AVIS + RELANCE */}
             <div ref={relanceRef} className="bg-white/95 border border-slate-200 rounded-2xl shadow-sm p-5 sm:p-6 space-y-4">
