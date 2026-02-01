@@ -109,15 +109,21 @@ export const TYPES: TypeItem[] = [
     defaultDureeMin: 15,
     auto: { openEvalPanel: true, hideMethodePanel: true, forceOutputStyle: "word" },
   },
-  {
-    id: "eval_diagnostique_10min",
-    label: "Diagnostic (10 min) – prérequis",
-    description: "Court, ciblé, exploitable : repérer les lacunes immédiatement.",
-    category: "evaluation",
-    tags: ["duree_10", "word"],
-    defaultDureeMin: 10,
-    auto: { openEvalPanel: true, hideMethodePanel: true, forceOutputStyle: "word" },
+{
+  id: "eval_diagnostique_10min",
+  label: "Diagnostic Bloom (10 min) – prérequis & niveau cognitif",
+  description:
+    "Évaluation diagnostique courte, structurée selon la taxonomie de Bloom. Activités progressives permettant d’identifier les niveaux cognitifs dominants (se souvenir, comprendre, appliquer) et de repérer rapidement les lacunes essentielles.",
+  category: "evaluation",
+  tags: ["duree_10", "word", "neuro"],
+  defaultDureeMin: 10,
+  auto: {
+    openEvalPanel: true,
+    hideMethodePanel: true,
+    forceOutputStyle: "word",
   },
+},
+
 
   // ---------------- CORRECTION
   {
