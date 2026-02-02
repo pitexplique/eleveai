@@ -26,7 +26,7 @@ export type MethodeOption = Readonly<{
 /**
  * ✅ Méthode par défaut (choisie explicitement, au lieu de dépendre de METHODES[0])
  */
-export const DEFAULT_METHODE: MethodePedagogique = "methode_active";
+export const DEFAULT_METHODE: MethodePedagogique = "aucune";
 
 /**
  * ✅ Catalogue unique des méthodes pédagogiques EleveAI
@@ -36,6 +36,16 @@ export const DEFAULT_METHODE: MethodePedagogique = "methode_active";
  * - "aucune" : n’impose pas de méthode (utile quand le prof veut juste une ressource)
  */
 export const METHODES: ReadonlyArray<MethodeOption> = [
+  {
+    id: "aucune",
+    label: "Aucune (ne pas imposer)",
+    description:
+      "Tu n’imposes pas de pédagogie : tu respectes surtout le type, les contraintes et la clarté.",
+    promptBlock:
+      "MÉTHODE PÉDAGOGIQUE : AUCUNE\n" +
+      "- Ne pas imposer de démarche pédagogique.\n" +
+      "- Respecter en priorité : type de ressource, contraintes, barème/critères si évaluation, lisibilité Word.\n\n",
+  },
   {
     id: "methode_active",
     label: "Méthode active",
@@ -61,16 +71,6 @@ export const METHODES: ReadonlyArray<MethodeOption> = [
       "  3) ENTRAÎNEMENT : exercices base/standard/défi + correction.\n" +
       "  4) BILAN : mini-récap + 2 questions flash + 1 question métacognitive.\n" +
       "- Indique le temps conseillé pour chaque phase.\n\n",
-  },
-  {
-    id: "aucune",
-    label: "Aucune (ne pas imposer)",
-    description:
-      "Tu n’imposes pas de pédagogie : tu respectes surtout le type, les contraintes et la clarté.",
-    promptBlock:
-      "MÉTHODE PÉDAGOGIQUE : AUCUNE\n" +
-      "- Ne pas imposer de démarche pédagogique.\n" +
-      "- Respecter en priorité : type de ressource, contraintes, barème/critères si évaluation, lisibilité Word.\n\n",
   },
   {
     id: "enseignement_explicite",

@@ -369,7 +369,7 @@ function blocWordDesign(style: OutputStyle) {
     "- Mise en page aérée : listes, lignes courtes, espaces de réponse visibles.\n" +
     "- Icônes emoji simples au début des sections (compatibles Word).\n" +
     "- Interdits : paragraphes longs ou compacts.\n" +
-    "- Ajoute des zones : « Réponse : ______________________ ».\n" +
+    "- Ajoute des zones : « Réponse : ________________________________________________________________ ».\n" +
     "- Termine obligatoirement par : « ✅ Prêt à coller dans Word ».\n\n" +
 
     "=== AUTO-CONTRÔLE OBLIGATOIRE (ASSERT IA – MINIMAL) ===\n" +
@@ -399,7 +399,8 @@ return (
   "[🟥 ENCART – ERREUR FRÉQUENTE]\nErreur + correction…\n\n" +
   "[🟩 ENCART – DÉFI / BONUS]\nQuestion argumentée…\n\n" +
   "- Encarts minimum requis : 1 À RETENIR + 1 MÉTHODE + 1 ERREUR + 1 DÉFI.\n" +
-  "- Ajoute des zones : « Réponse : ______________________ » après chaque question.\n" +
+  "- Ajoute des zones : « Réponse : ___________________________________________________________ » sur deux lignes après chaque question.\n" +
+  "- ou un tableau si necessaire" +
   "- Interdits : paragraphes compacts ou justification implicite.\n" +
   "- Termine obligatoirement par : « ✅ Prêt à coller dans Word ».\n\n" +
 
