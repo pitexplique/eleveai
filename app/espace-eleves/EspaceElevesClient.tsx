@@ -378,76 +378,105 @@ export default function ElevePage() {
      GENERER PROMPT 1 (anti-triche + profil)
   ---------------------------------------- */
 
-  function buildPromptBloc(mode: "rapide" | "complet") {
-    const prenom = form.prenom.trim() || "un élève";
-    const chapitre = form.chapitre.trim();
-    const temps = form.tempsDispo?.trim() || "non précisé";
+function buildPromptBloc(mode: "rapide" | "complet") {
+  const prenom = form.prenom.trim() || "un élève";
+  const chapitre = form.chapitre.trim();
+  const temps = form.tempsDispo?.trim() || "non précisé";
 
-    const objectif =
-      (mode === "complet" ? form.objectifPerso.trim() : "") || "mieux comprendre ce chapitre et réussir les exercices importants.";
+  const objectif =
+    (mode === "complet" ? form.objectifPerso.trim() : "") ||
+    "mieux comprendre ce chapitre et réussir les exercices importants.";
 
-    const exemples = mode === "complet" ? form.exemplesDifficiles.trim() : "";
+  const exemples = mode === "complet" ? form.exemplesDifficiles.trim() : "";
 
-    const profilTxt =
-      form.profil && form.profil.length > 0
-        ? `Mon profil (centres d’intérêt) : ${form.profil.map(labelProfil).join(", ")}.\n` +
-          "➡️ Utilise ces centres d’intérêt pour choisir des exemples et des analogies (sans infantiliser).\n\n"
-        : "";
+  // ✅ 10/10 : Cadre institutionnel (discret)
+  const blocCadreInstitutionnel =
+    "CADRE INSTITUTIONNEL :\n" +
+    "– Conformité aux programmes officiels français (BO / Éduscol).\n" +
+    "– Neutralité, laïcité, égalité filles-garçons.\n" +
+    "– Aucun exemple stéréotypé ou discriminant.\n" +
+    "– Langage clair, accessible, non infantilisant.\n\n";
 
-    const blocPrefs =
-      `Mes préférences :\n` +
-      (form.prefereQuestions
-        ? "- Pose-moi d’abord 2 à 4 questions pour voir ce que je sais.\n"
-        : "- Tu peux expliquer directement, mais vérifie que je comprends.\n") +
-      (form.prefereExemplesConcrets ? "- Utilise des exemples concrets avant la règle.\n" : "- Tu peux aller à l’essentiel.\n");
+  // ✅ 10/10 : Fin de séance (métacognition)
+  const blocFinSeance =
+    "\nÀ la fin de la séance :\n" +
+    "- Fais-moi écrire en 3 lignes maximum ce que j’ai compris.\n" +
+    "- Fais-moi identifier 1 point maîtrisé et 1 point à revoir.\n";
 
-    const blocAntiTriche = form.modeAntiTriche
-      ? "\nMODE ANTI-TRICHE :\n" +
-        "- Ne donne pas la solution tout de suite.\n" +
-        "- Fais-moi chercher : questions → indices → correction étape par étape.\n" +
-        "- Demande-moi d’essayer à chaque étape.\n" +
-        "- À la fin, fais une mini vérification (2–3 questions).\n"
+  // ✅ 10/10 : Mini-vérification (anti-triche)
+  const blocMiniVerificationPlus =
+    "\nMini-vérification finale :\n" +
+    "- 2 à 3 questions courtes, sans correction immédiate.\n" +
+    "- Demande-moi d’abord de m’auto-évaluer (✔️ / ❓ / ❌).\n";
+
+  const profilTxt =
+    form.profil && form.profil.length > 0
+      ? `Mon profil (centres d’intérêt) : ${form.profil.map(labelProfil).join(", ")}.\n` +
+        "➡️ Utilise ces centres d’intérêt pour choisir des exemples et des analogies (sans infantiliser).\n\n"
       : "";
 
-    const blocDYS = form.adaptationDYS
-      ? (() => {
-          const lignes: string[] = [];
-          lignes.push("Je peux avoir des difficultés de type DYS. Merci d’adapter :");
-          lignes.push("- phrases courtes et claires,");
-          lignes.push("- explications pas à pas,");
-          lignes.push("- vocabulaire expliqué,");
-          lignes.push("- exemples simples avant la théorie.");
+  const blocPrefs =
+    `Mes préférences :\n` +
+    (form.prefereQuestions
+      ? "- Pose-moi d’abord 2 à 4 questions pour voir ce que je sais.\n"
+      : "- Tu peux expliquer directement, mais vérifie que je comprends.\n") +
+    (form.prefereExemplesConcrets
+      ? "- Utilise des exemples concrets avant la règle.\n"
+      : "- Tu peux aller à l’essentiel.\n");
 
-          if (form.dysTypes.includes("dyslexie"))
-            lignes.push("- Dyslexie : éviter les gros blocs, mettre en évidence les mots importants.");
-          if (form.dysTypes.includes("dyspraxie")) lignes.push("- Dyspraxie : étapes numérotées, consignes très claires.");
-          if (form.dysTypes.includes("dyscalculie")) lignes.push("- Dyscalculie : détailler les calculs + verbaliser.");
-          if (form.dysTypes.includes("dysorthographie"))
-            lignes.push("- Dysorthographie : aider à structurer les phrases, pas de jugement sur les fautes.");
-          if (form.dysTypes.includes("autre") && form.dysPrecisionAutre?.trim())
-            lignes.push(`- Autre : ${form.dysPrecisionAutre.trim()}.`);
+  const blocAntiTriche = form.modeAntiTriche
+    ? "\nMODE ANTI-TRICHE :\n" +
+      "- Ne donne pas la solution tout de suite.\n" +
+      "- Fais-moi chercher : questions → indices → correction étape par étape.\n" +
+      "- Demande-moi d’essayer à chaque étape.\n"
+    : "";
 
-          return "\n" + lignes.join("\n") + "\n";
-        })()
-      : "";
+  const blocDYS = form.adaptationDYS
+    ? (() => {
+        const lignes: string[] = [];
+        lignes.push("Je peux avoir des difficultés de type DYS. Merci d’adapter :");
+        lignes.push("- phrases courtes et claires,");
+        lignes.push("- explications pas à pas,");
+        lignes.push("- vocabulaire expliqué,");
+        lignes.push("- exemples simples avant la théorie.");
 
-    const prompt =
-      `Tu es un professeur bienveillant de ${form.matiere}.\n` +
-      `Tu t’adresses à un élève de ${form.classe}.\n\n` +
-      `Je suis ${prenom}.\n` +
-      `Je veux travailler : ${chapitre}.\n` +
-      `Ce que je veux faire : ${typeAideLabel(form.typeAide)}.\n` +
-      `Mon niveau : ${descriptionConfiance(form.confiance)}\n` +
-      `Temps disponible : ${temps}\n\n` +
-      profilTxt +
-      `Mon objectif : ${objectif}\n\n` +
-      blocPrefs +
-      (exemples ? `\nExemples qui me posent problème :\n${exemples}\n` : "") +
-      blocDYS +
-      blocAntiTriche;
+        if (form.dysTypes.includes("dyslexie"))
+          lignes.push("- Dyslexie : éviter les gros blocs, mettre en évidence les mots importants.");
+        if (form.dysTypes.includes("dyspraxie"))
+          lignes.push("- Dyspraxie : étapes numérotées, consignes très claires.");
+        if (form.dysTypes.includes("dyscalculie"))
+          lignes.push("- Dyscalculie : détailler les calculs + verbaliser.");
+        if (form.dysTypes.includes("dysorthographie"))
+          lignes.push("- Dysorthographie : aider à structurer les phrases, pas de jugement sur les fautes.");
+        if (form.dysTypes.includes("autre") && form.dysPrecisionAutre?.trim())
+          lignes.push(`- Autre : ${form.dysPrecisionAutre.trim()}.`);
 
-    return prompt;
-  }
+        return "\n" + lignes.join("\n") + "\n";
+      })()
+    : "";
+
+  const prompt =
+    `Tu es un professeur bienveillant de ${form.matiere}.\n` +
+    `Tu t’adresses à un élève de ${form.classe}.\n\n` +
+    // ✅ injection cadre ici
+    blocCadreInstitutionnel +
+    `Je suis ${prenom}.\n` +
+    `Je veux travailler : ${chapitre}.\n` +
+    `Ce que je veux faire : ${typeAideLabel(form.typeAide)}.\n` +
+    `Mon niveau : ${descriptionConfiance(form.confiance)}\n` +
+    `Temps disponible : ${temps}\n\n` +
+    profilTxt +
+    `Mon objectif : ${objectif}\n\n` +
+    blocPrefs +
+    (exemples ? `\nExemples qui me posent problème :\n${exemples}\n` : "") +
+    blocDYS +
+    blocAntiTriche +
+    // ✅ si anti-triche : mini-vérif + fin de séance
+    (form.modeAntiTriche ? blocMiniVerificationPlus + blocFinSeance : "");
+
+  return prompt;
+}
+
 
   function genererPromptFinal(mode: "rapide" | "complet") {
     if (!form.classe || !form.matiere || !form.typeAide || !form.chapitre.trim()) {

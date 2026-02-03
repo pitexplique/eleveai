@@ -158,6 +158,7 @@ type PromptProf = {
   optRituels: boolean;
   optIAFriendly: boolean;
   optAtelierIA: boolean;
+  optBloom: boolean;
 };
 
 /* ----------------------------------------
@@ -545,6 +546,14 @@ function construirePrompt(form: PromptProf, promptMode: PromptMode): string {
       "- Étape 3 : corriger/améliorer (avec justification).\n" +
       "- Étape 4 : produire un rendu final personnel.\n\n"
     : "";
+  const blocBloom = form.optBloom
+      ? `
+    🧠 OPTION — TAXONOMIE DE BLOOM (progression cognitive)
+    - Organiser les tâches selon une montée en complexité implicite :
+      mémoriser → comprendre → appliquer → analyser → évaluer → créer.
+    - Ne pas afficher les niveaux Bloom aux élèves : c’est une logique interne d’organisation.
+    `
+      : "";
 
   const blocDifferenciationLong =
     form.optDifferenciation && !estEval
@@ -592,22 +601,36 @@ function construirePrompt(form: PromptProf, promptMode: PromptMode): string {
         `    - ${labelDiffAttendu}\n` +
         "    - Défi\n"
       : "";
-
-    const t2 = form.optRituels ? "Option : Rituel d’entrée 5–10 min (activation, rappel, mini-défi, correction rapide).\n" : "";
-    const t3 = form.optIAFriendly
+    const t2 = form.optBloom
+      ? "OPTION — Taxonomie de Bloom activée :\n" +
+        "Organiser les questions selon une progression cognitive implicite :\n" +
+        "    - Mémoriser\n" +
+        "    - Comprendre\n" +
+        "    - Appliquer\n" +
+        "    - Analyser\n" +
+        "    - Évaluer\n" +
+        "    - Créer\n" +
+        "Cette progression n’est pas explicitée aux élèves.\n"
+  : "";
+    const t3 = form.optRituels ? "Option : Rituel d’entrée 5–10 min (activation, rappel, mini-défi, correction rapide).\n" : "";
+    const t4 = form.optIAFriendly
       ? "Option : Compatible correction IA — produire un document très structuré, régulier et facile à analyser automatiquement.\n"
       : "";
-    const t4 = form.optAtelierIA
+    const t5 = form.optAtelierIA
       ? "Option : Intégrer usage de l’IA en classe — inclure une mini-séquence guidée d’usage de l’IA (consignes, étapes, garde-fous, rendu attendu).\n"
       : "";
 
-    const bloc = `${t1}${t2}${t3}${t4}`;
+
+    const bloc = `${t1}${t2}${t3}${t4}${t5}`;
     return bloc.trim().length ? `Options activées :\n${bloc}\n` : "";
   })();
 
   const blocOptionsStandard = (() => {
     const lines = [
       form.optDifferenciation ? `Différenciation : base/${labelDiffAttendu.toLowerCase()}/défi.\n` : "",
+      form.optBloom
+      ? "Progression cognitive implicite (taxonomie de Bloom).\n"
+      : "",
       form.optRituels ? "Rituel court au début.\n" : "",
       form.optIAFriendly ? "Sortie structurée : questions + attendus repérables.\n" : "",
       form.optAtelierIA ? "Inclure une mini-étape d’usage IA guidé (si pertinent).\n" : "",
@@ -663,6 +686,7 @@ function construirePrompt(form: PromptProf, promptMode: PromptMode): string {
       blocRituelsLong +
       blocIAFriendlyLong +
       blocAtelierIALong +
+      blocBloom +
       blocDifferenciationLong +
       blocRappelsEtMetaLong +
       blocCriteresLong +
@@ -941,6 +965,7 @@ export default function ProfsPage() {
       themes: [],
       themesLabel: "Exemples : thème local, type de texte, projet de classe, lien avec l’actualité, besoins spécifiques des élèves…",
       optDifferenciation: true,
+      optBloom: true,
       optRituels: false,
       optIAFriendly: true,
       optAtelierIA: false,
@@ -2286,12 +2311,6 @@ const buildRelanceBloc = useCallback(() => {
                   icon={<span>∑</span>}
                 />
 
-                {estEval && (
-                  <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-50 text-[11px] font-semibold text-amber-800 border border-amber-200">
-                    <BadgeCheck className="w-4 h-4" />
-                    Mode évaluation (barème + critères)
-                  </span>
-                )}                
                 <ToggleChip
                   label="Différenciation"
                   checked={form.optDifferenciation}
@@ -2324,6 +2343,21 @@ const buildRelanceBloc = useCallback(() => {
                   tone="violet"
                   icon={<span>🧪</span>}
                 />
+                <ToggleChip
+                  label="Bloom"
+                  checked={form.optBloom}
+                  onChange={(v) => handleChange("optBloom", v)}
+                  hint="Organise les questions du plus simple au plus complexe (mémoriser → créer), sans l’afficher aux élèves."
+                  tone="sky"
+                  icon={<span>🪜</span>}
+                />
+                                {estEval && (
+                  <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-50 text-[11px] font-semibold text-amber-800 border border-amber-200">
+                    <BadgeCheck className="w-4 h-4" />
+                    Mode évaluation (barème + critères)
+                  </span>
+                )}   
+
               </div>
 
               <div className="rounded-xl border border-slate-200 bg-slate-50 px-3 py-2">
@@ -2335,6 +2369,8 @@ const buildRelanceBloc = useCallback(() => {
                   <span className="font-semibold">
                     {[
                       form.optDifferenciation ? "Différenciation" : null,
+                      form.neuro ? "Neurosciences" : null,
+                      form.optBloom ? "Bloom" : null,
                       form.optRituels ? "Rituels" : null,
                       form.optIAFriendly ? "Correction IA" : null,
                       form.optAtelierIA ? "Usage IA" : null,
