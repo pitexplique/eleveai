@@ -76,7 +76,7 @@ export default function AccueilPage() {
     <main className="min-h-screen bg-white text-slate-900">
       {/* HERO */}
       <section className="relative overflow-hidden border-b border-slate-200">
-        {/* Fond clair avec halos très doux */}
+        {/* Fond clair avec halo discret */}
         <div className="absolute inset-0">
           <div className="absolute inset-0 bg-[radial-gradient(1200px_600px_at_50%_40%,rgba(59,130,246,0.12),transparent_60%)]" />
           <div className="absolute inset-0 bg-gradient-to-b from-white via-white to-slate-50" />
@@ -89,11 +89,14 @@ export default function AccueilPage() {
             </h1>
 
             <h2 className="mt-4 text-lg sm:text-xl font-semibold text-blue-600">
-                IA pédagogique encadrée — programmes officiels (BO / Éduscol)
+              IA pédagogique encadrée — prompts prêts à l’emploi (BO / Éduscol)
             </h2>
 
             <p className="mt-5 text-sm sm:text-base text-slate-700 leading-relaxed">
-              Choisis ton profil. On te guide. Tu gardes la main.
+              <span className="font-semibold text-slate-900">
+                Arrête de réécrire 10 fois la même consigne.
+              </span>{" "}
+              Génère un prompt clair, conforme, utilisable immédiatement en classe.
             </p>
 
             {/* Chips */}
@@ -113,6 +116,11 @@ export default function AccueilPage() {
               </Link>
             </div>
 
+            <p className="mt-4 text-xs text-slate-600">
+              Prompts calibrés pour produire des sorties exploitables :
+              consigne → étapes → critères → différenciation → traces.
+            </p>
+
             <p className="mt-6 text-xs text-slate-500">
               ✅ Traces pédagogiques · ✅ Cadre établissement · ✅ L’IA propose, l’humain justifie
             </p>
@@ -124,9 +132,9 @@ export default function AccueilPage() {
       <section className="mx-auto max-w-6xl px-4 py-12 space-y-6">
         <div className="grid gap-4 md:grid-cols-3">
           {[
-            ["1) Choisir un profil", "Profs / Élèves / Parents"],
-            ["2) Générer un prompt", "Clair, structuré, exploitable"],
-            ["3) Garder des traces", "Justification, corrections, recul"],
+            ["1) Choisir un profil", "Un cadre adapté à ton rôle"],
+            ["2) Générer un prompt", "Structuré, fiable, directement exploitable"],
+            ["3) Gagner du temps", "Moins d’essais, plus d’efficacité"],
           ].map(([t, d]) => (
             <div
               key={t}
@@ -144,49 +152,52 @@ export default function AccueilPage() {
           <div id="profs" className="scroll-mt-24">
             <Card
               title="PROFESSEURS"
-              punchline="Tu gardes la main. L’IA t’aide à structurer."
-              line1="Génère des consignes claires, alignées, différenciées."
-              line2="Moins de flou → moins d’allers-retours → plus de progrès élèves."
+              punchline="Des prompts solides, pas des essais hasardeux."
+              line1="Consignes cadrées, alignées BO, prêtes à être utilisées en classe."
+              line2="Moins de temps perdu à reformuler. Plus de temps pour enseigner."
               ctaHref="/espace-profs"
-              ctaLabel="Aller au générateur (Profs)"
+              ctaLabel="Accéder au générateur (Profs)"
             />
           </div>
 
           <div id="eleves" className="scroll-mt-24">
             <Card
               title="ÉLÈVES"
-              punchline="Tu as le droit d’utiliser l’IA. Tu dois penser."
-              line1="Comprendre, repérer une erreur, améliorer."
-              line2="On valorise ce que tu fais après la réponse."
+              punchline="L’IA t’aide. Elle ne fait pas à ta place."
+              line1="Comprendre, corriger, améliorer : c’est ça qui est évalué."
+              line2="Un cadre clair pour apprendre sans tricher."
               ctaHref="/espace-eleves"
-              ctaLabel="Aller au générateur (Élèves)"
+              ctaLabel="Accéder au générateur (Élèves)"
             />
           </div>
 
           <div id="parents" className="scroll-mt-24">
             <Card
               title="PARENTS"
-              punchline="Aider, sans faire à la place."
-              line1="Un cadre simple pour accompagner sans pression."
-              line2="On suit une trace de travail, pas juste une réponse."
+              punchline="Un cadre clair pour aider sans remplacer."
+              line1="Vous voyez le travail réel : consigne, réponse, amélioration."
+              line2="L’effort et le raisonnement passent avant la réponse."
               ctaHref="/espace-parents"
-              ctaLabel="Aller au générateur (Parents)"
+              ctaLabel="Accéder au générateur (Parents)"
             />
           </div>
         </div>
 
         {/* Footer crédibilité */}
         <div className="mt-10 rounded-2xl border border-slate-200 bg-slate-50 p-6">
-          <p className="text-sm font-semibold text-slate-900">Cadre IA encadrée</p>
+          <p className="text-sm font-semibold text-slate-900">
+            Une exigence simple
+          </p>
           <p className="mt-2 text-sm text-slate-700 leading-relaxed">
-            EleveAI n’est pas un générateur magique : l’IA propose, l’humain analyse,
-            corrige, justifie. La valeur, c’est la méthode.
+            Si un prompt ne te fait pas gagner du temps dès la première utilisation,
+            il ne sert à rien. EleveAI est conçu pour éviter ça.
           </p>
         </div>
       </section>
     </main>
   );
 }
+
 
 
 
