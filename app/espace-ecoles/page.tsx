@@ -13,7 +13,7 @@ export default function EspaceCollegesPage() {
       <div className="mx-auto max-w-5xl px-4 py-10 space-y-8">
         {/* Titre */}
         <header className="space-y-2">
-          <h1 className="text-2xl font-bold">Espace Ecoles</h1>
+          <h1 className="text-2xl font-bold">Espace Écoles</h1>
           <p className="text-slate-300 text-sm">
             Accès aux espaces dédiés aux personnels et à la vie de l’établissement.
           </p>
