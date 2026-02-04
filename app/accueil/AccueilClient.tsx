@@ -163,7 +163,7 @@ export default function AccueilPage() {
           <div id="eleves" className="scroll-mt-24">
             <Card
               title="ÉLÈVES"
-              punchline="L’IA t’aide. Elle ne fait pas à ta place."
+              punchline="Ton coach IA pour comprendre et progresser"
               line1="Comprendre, corriger, améliorer : c’est ça qui est évalué."
               line2="Un cadre clair pour apprendre sans tricher."
               ctaHref="/espace-eleves"
@@ -174,9 +174,9 @@ export default function AccueilPage() {
           <div id="parents" className="scroll-mt-24">
             <Card
               title="PARENTS"
-              punchline="Un cadre clair pour aider sans remplacer."
-              line1="Vous voyez le travail réel : consigne, réponse, amélioration."
-              line2="L’effort et le raisonnement passent avant la réponse."
+              punchline="Aider votre enfant à apprendre avec l’IA - DYS "
+              line1="Indiquez la situation de votre enfant (niveau, difficulté, objectif). "
+              line2="EleveAI génère un prompt clair et encadré pour l’aider à comprendre, réviser ou s’entraîner, dans le respect du cadre scolaire."
               ctaHref="/espace-parents"
               ctaLabel="Accéder au générateur (Parents)"
             />
