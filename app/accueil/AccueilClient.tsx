@@ -107,14 +107,24 @@ export default function AccueilPage() {
             </div>
 
             {/* CTA */}
-            <div className="mt-8">
+            <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center sm:gap-4">
               <Link
                 href="/auth/signup"
-                className="inline-flex items-center justify-center rounded-lg bg-blue-600 px-6 py-3 text-sm font-semibold text-white hover:bg-blue-500 transition"
+                className="inline-flex w-full items-center justify-center rounded-lg bg-blue-600 px-6 py-3 text-sm font-semibold text-white
+                          hover:bg-blue-500 transition sm:w-auto"
               >
                 S’inscrire gratuitement →
               </Link>
+
+              <Link
+                href="/auth/signin"
+                className="inline-flex w-full items-center justify-center rounded-lg border border-blue-600 bg-white px-6 py-3 text-sm font-semibold text-blue-600
+                          hover:bg-blue-50 transition sm:w-auto"
+              >
+                Se connecter →
+              </Link>
             </div>
+
 
             <p className="mt-4 text-xs text-slate-600">
               Prompts calibrés pour produire des sorties exploitables :
