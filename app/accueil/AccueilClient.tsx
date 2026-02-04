@@ -104,6 +104,8 @@ export default function AccueilPage() {
               <Chip label="👩‍🏫 Profs" onClick={() => scrollTo("profs")} />
               <Chip label="🎒 Élèves" onClick={() => scrollTo("eleves")} />
               <Chip label="👨‍👩‍👧 Parents" onClick={() => scrollTo("parents")} />
+              <Chip label="🏫 École" onClick={() => scrollTo("ecole")} />
+
             </div>
 
             {/* CTA */}
@@ -158,7 +160,7 @@ export default function AccueilPage() {
 
         <div className="h-px w-full bg-slate-200" />
 
-        <div className="grid gap-6 lg:grid-cols-3">
+        <div className="grid gap-6 lg:grid-cols-4">
           <div id="profs" className="scroll-mt-24">
             <Card
               title="PROFESSEURS"
@@ -191,6 +193,17 @@ export default function AccueilPage() {
               ctaLabel="Accéder au générateur (Parents)"
             />
           </div>
+          <div id="ecole" className="scroll-mt-24">
+            <Card
+              title="ÉCOLE / ÉTABLISSEMENT"
+              punchline="Un cadre commun pour les usages de l’IA."
+              line1="Des espaces dédiés à l’administration, à la vie scolaire, aux AESH et aux personnels."
+              line2="Ressources, repères et pratiques alignées pour un usage cohérent et rassurant de l’IA."
+              ctaHref="/espace-ecoles"
+              ctaLabel="Accéder à l’espace Écoles"
+            />
+          </div>
+
         </div>
 
         {/* Footer crédibilité */}

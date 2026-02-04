@@ -13,7 +13,7 @@ export default function EspaceCollegesPage() {
       <div className="mx-auto max-w-5xl px-4 py-10 space-y-8">
         {/* Titre */}
         <header className="space-y-2">
-          <h1 className="text-2xl font-bold">Espace Collèges</h1>
+          <h1 className="text-2xl font-bold">Espace Ecoles</h1>
           <p className="text-slate-300 text-sm">
             Accès aux espaces dédiés aux personnels et à la vie de l’établissement.
           </p>
@@ -21,28 +21,28 @@ export default function EspaceCollegesPage() {
 
         {/* Cartes de navigation */}
         <section className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          <Link href="/espace-colleges/espace-administration" className={card}>
+          <Link href="/espace-ecoles/espace-administration" className={card}>
             <h2 className="font-semibold text-lg">Administration</h2>
             <p className="text-sm text-slate-400 mt-1">
               Direction, pilotage, documents institutionnels.
             </p>
           </Link>
 
-          <Link href="/espace-colleges/espace-vie-scolaire" className={card}>
+          <Link href="/espace-ecoles/espace-vie-scolaire" className={card}>
             <h2 className="font-semibold text-lg">Vie scolaire</h2>
             <p className="text-sm text-slate-400 mt-1">
               Suivi des élèves, climat scolaire, organisation quotidienne.
             </p>
           </Link>
 
-          <Link href="/espace-colleges/espace-aesh" className={card}>
+          <Link href="/espace-ecoles/espace-aesh" className={card}>
             <h2 className="font-semibold text-lg">AESH</h2>
             <p className="text-sm text-slate-400 mt-1">
               Accompagnement des élèves à besoins éducatifs particuliers.
             </p>
           </Link>
 
-          <Link href="/espace-colleges/espace-personnels" className={card}>
+          <Link href="/espace-ecoles/espace-personnels" className={card}>
             <h2 className="font-semibold text-lg">Personnels</h2>
             <p className="text-sm text-slate-400 mt-1">
               Ressources et outils pour les personnels de l’établissement.

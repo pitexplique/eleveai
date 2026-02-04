@@ -97,7 +97,7 @@ const itemsApp: Item[] = useMemo(
   icon: <UsersRound className="h-4 w-4" />,
 },
 {
-  href: "/espace-colleges/",
+  href: "/espace-ecoles/",
   label: "Prompt École",
   description: "Un cadre clair pour une équipe sereine.",
   icon: <School className="h-4 w-4" />,
@@ -115,12 +115,7 @@ const itemsApp: Item[] = useMemo(
   icon: <Library className="h-4 w-4" />,
 },
 
-{
-  href: "/tchat",
-  label: "Prompt EleveAI",
-  description: "gpt-4.1-mini",
-  icon: <MessageSquareText className="h-4 w-4" />,
-},
+
 /*
 {
   href: "/espace-colleges/espace-administration",
