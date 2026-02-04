@@ -160,7 +160,7 @@ export default function AccueilPage() {
 
         <div className="h-px w-full bg-slate-200" />
 
-        <div className="grid gap-6 lg:grid-cols-4">
+        <div className="grid gap-6 lg:grid-cols-2">
           <div id="profs" className="scroll-mt-24">
             <Card
               title="PROFESSEURS"
