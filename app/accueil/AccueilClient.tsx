@@ -184,7 +184,7 @@ export default function AccueilPage() {
           <div id="parents" className="scroll-mt-24">
             <Card
               title="PARENTS"
-              punchline="Aider votre enfant à apprendre avec l’IA"
+              punchline="Vous qui connaissez votre enfant 💛"
               line1="Indiquez la situation de votre enfant (niveau, difficulté, objectif)."
               line2="EleveAI génère un prompt clair et encadré pour l’aider à comprendre, réviser ou s’entraîner, dans le respect du cadre scolaire."
               ctaHref="/espace-parents"
