@@ -183,16 +183,17 @@ export default function AccueilPage() {
             />
           </div>
 
-          <div id="parents" className="scroll-mt-24">
-            <Card
-              title="PARENTS"
-              punchline="Vous qui connaissez votre enfant 💛"
-              line1="Indiquez la situation de votre enfant (niveau, difficulté, objectif)."
-              line2="EleveAI génère un prompt clair et encadré pour l’aider à comprendre, réviser ou s’entraîner, dans le respect du cadre scolaire."
-              ctaHref="/espace-parents"
-              ctaLabel="Accéder au générateur (Parents)"
-            />
-          </div>
+<div id="parents" className="scroll-mt-24">
+  <Card
+    title="PARENTS"
+    punchline="Le suivi de votre enfant💛"
+    line1="Expliquez la situation de votre enfant (niveau, difficultés, objectifs)."
+    line2="Besoins spécifiques, rythme personnel, attention, confiance, mémorisation."
+    ctaHref="/espace-parents"
+    ctaLabel="Accéder à l’espace Parents"
+  />
+</div>
+
           <div id="ecole" className="scroll-mt-24">
             <Card
               title="ÉCOLE / ÉTABLISSEMENT"
