@@ -125,14 +125,14 @@ export default function AccueilPage() {
               </Link>
             </div>
 
-
             <p className="mt-4 text-xs text-slate-600">
-              Prompts calibrés pour produire des sorties exploitables :
-              consigne → étapes → critères → différenciation → traces.
+              Prompts calibrés pour produire des sorties exploitables : consigne →
+              étapes → critères → différenciation → traces.
             </p>
 
             <p className="mt-6 text-xs text-slate-500">
-              ✅ Traces pédagogiques · ✅ Cadre établissement · ✅ L’IA propose, l’humain justifie
+              ✅ Traces pédagogiques · ✅ Cadre établissement · ✅ L’IA propose,
+              l’humain justifie
             </p>
           </div>
         </div>
@@ -173,7 +173,7 @@ export default function AccueilPage() {
           <div id="eleves" className="scroll-mt-24">
             <Card
               title="ÉLÈVES"
-              punchline="Ton coach IA pour comprendre et progresser"
+              punchline="Ton coach IA pour comprendre et progresser."
               line1="Comprendre, corriger, améliorer : c’est ça qui est évalué."
               line2="Un cadre clair pour apprendre sans tricher."
               ctaHref="/espace-eleves"
@@ -184,8 +184,8 @@ export default function AccueilPage() {
           <div id="parents" className="scroll-mt-24">
             <Card
               title="PARENTS"
-              punchline="Aider votre enfant à apprendre l'IA "
-              line1="Indiquez la situation de votre enfant (niveau, difficulté, objectif). "
+              punchline="Aider votre enfant à apprendre avec l’IA"
+              line1="Indiquez la situation de votre enfant (niveau, difficulté, objectif)."
               line2="EleveAI génère un prompt clair et encadré pour l’aider à comprendre, réviser ou s’entraîner, dans le respect du cadre scolaire."
               ctaHref="/espace-parents"
               ctaLabel="Accéder au générateur (Parents)"
@@ -195,9 +195,7 @@ export default function AccueilPage() {
 
         {/* Footer crédibilité */}
         <div className="mt-10 rounded-2xl border border-slate-200 bg-slate-50 p-6">
-          <p className="text-sm font-semibold text-slate-900">
-            Une exigence simple
-          </p>
+          <p className="text-sm font-semibold text-slate-900">Une exigence simple</p>
           <p className="mt-2 text-sm text-slate-700 leading-relaxed">
             Si un prompt ne te fait pas gagner du temps dès la première utilisation,
             il ne sert à rien. EleveAI est conçu pour éviter ça.

@@ -209,7 +209,7 @@ export default function SignInPage() {
       }
 
       setFeedback("Connexion réussie. Redirection…");
-      router.push("/dashboard");
+      router.push("/accueil");
     } catch (err: any) {
       console.error("Unexpected OTP verify error:", err);
       setErrorMsg(err?.message || "Erreur inattendue. Réessayez.");
