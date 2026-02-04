@@ -161,22 +161,22 @@ export default function AccueilPage() {
         <div className="h-px w-full bg-slate-200" />
 
         <div className="grid gap-6 lg:grid-cols-2">
-          <div id="profs" className="scroll-mt-24">
-            <Card
-              title="PROFESSEURS"
-              punchline="Des prompts solides, pas des essais hasardeux."
-              line1="Consignes cadrées, alignées BO, prêtes à être utilisées en classe."
-              line2="Moins de temps perdu à reformuler. Plus de temps pour enseigner."
-              ctaHref="/espace-profs"
-              ctaLabel="Accéder au générateur (Profs)"
-            />
-          </div>
+<div id="profs" className="scroll-mt-24">
+  <Card
+    title="PROFESSEURS"
+    punchline="Des prompts pédagogiques solides"
+    line1="Mettez en forme vos cours ou testez des séances inédites."
+    line2="Gagnez du temps tout en gardant la maîtrise pédagogique."
+    ctaHref="/espace-profs"
+    ctaLabel="Accéder à l’espace Professeurs"
+  />
+</div>
 
           <div id="eleves" className="scroll-mt-24">
             <Card
               title="ÉLÈVES"
-              punchline="Ton coach IA pour comprendre et progresser."
-              line1="Comprendre, corriger, améliorer : c’est ça qui est évalué."
+              punchline="Ton coach IA "
+              line1="Comprendre, corriger, améliorer "
               line2="Un cadre clair pour apprendre sans tricher."
               ctaHref="/espace-eleves"
               ctaLabel="Accéder au générateur (Élèves)"
@@ -197,7 +197,7 @@ export default function AccueilPage() {
           <div id="ecole" className="scroll-mt-24">
             <Card
               title="ÉCOLE / ÉTABLISSEMENT"
-              punchline="Un cadre commun pour les usages de l’IA."
+              punchline="Un cadre commun ."
               line1="Des espaces dédiés à l’administration, à la vie scolaire, aux AESH et aux personnels."
               line2="Ressources, repères et pratiques alignées pour un usage cohérent et rassurant de l’IA."
               ctaHref="/espace-ecoles"
