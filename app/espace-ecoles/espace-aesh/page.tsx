@@ -21,6 +21,7 @@ type PublicCibleAesh =
 
 type TypeDocAesh =
   | "message_eleve"
+  | "rapport_incident"
   | "carnet_liaison"
   | "mail_enseignant"
   | "fiche_observation"
@@ -47,11 +48,13 @@ type AeshPromptState = {
 
 type AeshPresetKey =
   | "adaptation_consigne"
+  | "rapport_incident_direction"
   | "message_valorisation"
   | "carnet_liaison_famille"
   | "retour_enseignant"
   | "fiche_observation_classe"
   | "synthese_adaptations_reunion";
+
 
 type AeshPreset = {
   label: string;
@@ -79,6 +82,22 @@ const AESH_PRESETS: Record<AeshPresetKey, AeshPreset> = {
         "L’élève a du mal à comprendre ou à se repérer dans les consignes données en classe.",
     },
   },
+  rapport_incident_direction: {
+  label: "🚨 Rapport d’incident pour la direction",
+  description:
+    "Rédiger un rapport factuel destiné à la direction suite à l’exclusion ou au renvoi d’un élève.",
+  valeurs: {
+    typeDoc: "rapport_incident",
+    publicCible: "direction",
+    titreDoc: "Rapport d’incident – Élève accompagné",
+    objectif:
+      "Décrire de manière factuelle et professionnelle les faits ayant conduit au renvoi de l’élève, sans jugement ni interprétation.",
+    ton: "factuel, neutre, professionnel",
+    typeSituation:
+      "Un élève accompagné par une AESH a été renvoyé de cours ou de l’établissement et un rapport écrit est demandé par la direction.",
+  },
+},
+
   message_valorisation: {
     label: "🌟 Message de valorisation à l’élève",
     description:
