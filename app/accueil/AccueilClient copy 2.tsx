@@ -85,21 +85,18 @@ export default function AccueilPage() {
         <div className="relative mx-auto max-w-6xl px-4 py-16 sm:py-20">
           <div className="mx-auto max-w-4xl text-center">
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-slate-900">
-              Des documents prêts à distribuer
+              Générateur de Prompts Pédagogiques
             </h1>
 
             <h2 className="mt-4 text-lg sm:text-xl font-semibold text-blue-600">
-              Cours • évaluations • fiches élèves — conformes BO / Éduscol, en 2
-              minutes
+              IA pédagogique encadrée — prompts prêts à l’emploi (BO / Éduscol)
             </h2>
 
             <p className="mt-5 text-sm sm:text-base text-slate-700 leading-relaxed">
               <span className="font-semibold text-slate-900">
-                Tu donnes une situation de classe.
+                Arrête de réécrire 10 fois la même consigne.
               </span>{" "}
-              EleveAI produit un document structuré : consignes claires, barème,
-              critères, différenciation (Base / Attendu / Défi) et traces
-              pédagogiques.
+              Génère un prompt clair, conforme, utilisable immédiatement en classe.
             </p>
 
             {/* Chips */}
@@ -108,6 +105,7 @@ export default function AccueilPage() {
               <Chip label="🎒 Élèves" onClick={() => scrollTo("eleves")} />
               <Chip label="👨‍👩‍👧 Parents" onClick={() => scrollTo("parents")} />
               <Chip label="🏫 École" onClick={() => scrollTo("ecole")} />
+
             </div>
 
             {/* CTA */}
@@ -130,8 +128,8 @@ export default function AccueilPage() {
             </div>
 
             <p className="mt-4 text-xs text-slate-600">
-              ✅ Sorties prêtes à coller dans Word : énoncés, espaces réponses,
-              barèmes, critères, différenciation.
+              Prompts calibrés pour produire des sorties exploitables : consigne →
+              étapes → critères → différenciation → traces.
             </p>
 
             <p className="mt-6 text-xs text-slate-500">
@@ -146,15 +144,9 @@ export default function AccueilPage() {
       <section className="mx-auto max-w-6xl px-4 py-12 space-y-6">
         <div className="grid gap-4 md:grid-cols-3">
           {[
-            ["1) Choisir un document", "Évaluation, fiche élève, séance, grille…"],
-            [
-              "2) Décrire le contexte",
-              "Niveau, objectifs, contraintes, différenciation…",
-            ],
-            [
-              "3) Télécharger / copier",
-              "Word-ready, stable, exploitable immédiatement",
-            ],
+            ["1) Choisir un profil", "Un cadre adapté à ton rôle"],
+            ["2) Générer un prompt", "Structuré, fiable, directement exploitable"],
+            ["3) Gagner du temps", "Moins d’essais, plus d’efficacité"],
           ].map(([t, d]) => (
             <div
               key={t}
@@ -166,90 +158,60 @@ export default function AccueilPage() {
           ))}
         </div>
 
-        {/* Résultat concret */}
-        <div className="rounded-2xl border border-slate-200 bg-white p-6">
-          <p className="text-sm font-semibold text-slate-900">Ce que tu obtiens</p>
-          <p className="mt-2 text-sm text-slate-700 leading-relaxed">
-            Un document complet, prêt à imprimer ou à déposer sur l’ENT.
-          </p>
-
-          <div className="mt-4 grid gap-4 md:grid-cols-2">
-            <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
-              <p className="text-xs font-semibold text-slate-700">Avant</p>
-              <p className="mt-2 text-sm text-slate-700">
-                “Fais une évaluation de proportionnalité 6e.”
-              </p>
-              <p className="mt-2 text-xs text-slate-500">
-                Résultat souvent variable : barème absent, mise en page irrégulière.
-              </p>
-            </div>
-
-            <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
-              <p className="text-xs font-semibold text-slate-700">Après (EleveAI)</p>
-              <p className="mt-2 text-sm text-slate-700">
-                Évaluation /20 — durée, consignes univoques, critères, différenciation
-                Base/Attendu/Défi, encarts méthode + erreurs fréquentes, zones réponses.
-              </p>
-              <p className="mt-2 text-xs text-slate-500">
-                Sortie stable, réutilisable, compatible correction IA.
-              </p>
-            </div>
-          </div>
-        </div>
-
         <div className="h-px w-full bg-slate-200" />
 
         <div className="grid gap-6 lg:grid-cols-2">
-          <div id="profs" className="scroll-mt-24">
-            <Card
-              title="PROFESSEURS"
-              punchline="Prépare tes cours et évaluations plus vite"
-              line1="Produis des documents prêts à distribuer : cours, exercices, contrôles, projets."
-              line2="Toujours structuré : consignes → étapes → critères → différenciation → traces."
-              ctaHref="/espace-profs"
-              ctaLabel="Produire un document (Profs)"
-            />
-          </div>
+<div id="profs" className="scroll-mt-24">
+  <Card
+    title="PROFESSEURS"
+    punchline="Des prompts pédagogiques solides"
+    line1="Mettez en forme vos cours ou testez des séances inédites."
+    line2="Gagnez du temps tout en gardant la maîtrise pédagogique."
+    ctaHref="/espace-profs"
+    ctaLabel="Accéder à l’espace Professeurs"
+  />
+</div>
 
           <div id="eleves" className="scroll-mt-24">
             <Card
               title="ÉLÈVES"
-              punchline="Comprendre sans copier-coller"
-              line1="Aide pas à pas : méthode, erreurs fréquentes, entraînement, correction guidée."
-              line2="Un cadre anti-triche : l’IA explique, l’élève reformule et justifie."
+              punchline="Ton coach IA "
+              line1="Comprendre, corriger, améliorer "
+              line2="Un cadre clair pour apprendre sans tricher."
               ctaHref="/espace-eleves"
-              ctaLabel="S’entraîner (Élèves)"
+              ctaLabel="Accéder au générateur (Élèves)"
             />
           </div>
 
-          <div id="parents" className="scroll-mt-24">
-            <Card
-              title="PARENTS"
-              punchline="Suivre votre enfant, simplement 💛"
-              line1="Décrivez la situation (niveau, difficultés, objectifs) et obtenez un plan clair."
-              line2="Conseils concrets : organisation, confiance, mémorisation, attention."
-              ctaHref="/espace-parents"
-              ctaLabel="Accéder à l’espace Parents"
-            />
-          </div>
+<div id="parents" className="scroll-mt-24">
+  <Card
+    title="PARENTS"
+    punchline="Le suivi de votre enfant💛"
+    line1="Expliquez la situation de votre enfant (niveau, difficultés, objectifs)."
+    line2="Besoins spécifiques, rythme personnel, attention, confiance, mémorisation."
+    ctaHref="/espace-parents"
+    ctaLabel="Accéder à l’espace Parents"
+  />
+</div>
 
           <div id="ecole" className="scroll-mt-24">
             <Card
               title="ÉCOLE / ÉTABLISSEMENT"
-              punchline="Un usage cohérent et rassurant de l’IA"
-              line1="Des modèles prêts : rapports, communications, grilles, procédures et accompagnement."
-              line2="Pour direction, vie scolaire, AESH et équipes : mêmes repères, mêmes exigences."
+              punchline="Un cadre commun ."
+              line1="Des espaces dédiés à l’administration, à la vie scolaire, aux AESH et aux personnels."
+              line2="Ressources, repères et pratiques alignées pour un usage cohérent et rassurant de l’IA."
               ctaHref="/espace-ecoles"
               ctaLabel="Accéder à l’espace Écoles"
             />
           </div>
+
         </div>
 
         {/* Footer crédibilité */}
         <div className="mt-10 rounded-2xl border border-slate-200 bg-slate-50 p-6">
           <p className="text-sm font-semibold text-slate-900">Une exigence simple</p>
           <p className="mt-2 text-sm text-slate-700 leading-relaxed">
-            Si un document ne te fait pas gagner du temps dès la première utilisation,
+            Si un prompt ne te fait pas gagner du temps dès la première utilisation,
             il ne sert à rien. EleveAI est conçu pour éviter ça.
           </p>
         </div>
@@ -257,3 +219,7 @@ export default function AccueilPage() {
     </main>
   );
 }
+
+
+
+
