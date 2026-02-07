@@ -391,9 +391,9 @@ return (
   "- Réponse copiable-collable en conservant strictement la structure.\n" +
   "- Icônes emoji au début des titres et sous-parties.\n" +
   "- Bannières obligatoires pour les grandes parties :\n" +
-  "==================================================\n" +
+  "=============================================\n" +
   "🧠 TITRE DE LA PARTIE\n" +
-  "==================================================\n" +
+  "=============================================\n" +
   "- Encadrés simulés obligatoires :\n" +
   "[🟦 ENCART – À RETENIR]\nTexte…\n\n" +
   "[🟨 ENCART – MÉTHODE]\nÉtapes numérotées…\n\n" +
