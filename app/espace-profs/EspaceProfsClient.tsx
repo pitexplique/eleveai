@@ -237,22 +237,6 @@ const PROFS_PRESET_ITEMS: PresetCarouselItem[] = (Object.entries(PROFS_PRESETS) 
    HELPERS
 ---------------------------------------- */
 
-    function niveauxToTryFromUi(n: Niveau): string[] {
-      switch (n) {
-        case "ulis":
-          return ["ulis", "remediation", "basique", "standard"];
-        case "remediation":
-          return ["remediation", "basique", "ulis", "standard"];
-        case "basique":
-          return ["basique", "remediation", "standard"];
-        case "standard":
-          return ["standard", "basique", "expert"];
-        case "expert":
-          return ["expert", "standard", "basique"];
-        default:
-          return ["standard", "basique"];
-      }
-    }
 
     function getEvalLabel(id: ModaliteEvaluation) {
       return EVAL_OPTIONS.find((e) => e.id === id)?.label ?? "Évaluation sommative";
@@ -1358,8 +1342,13 @@ export default function ProfsPage() {
     if (!form.matiere) issues.push("Choisis une matière.");
     if (!form.typeId) issues.push("Choisis un type.");
     if (!form.objectifPedagogique.trim()) issues.push("Précise l’objectif pédagogique.");
-    if (!form.contenu.trim()) issues.push("Écris la consigne (version prof).");
-    if (form.contenu.trim() && form.contenu.trim().length < 40) issues.push("Consigne trop courte (≈ 40 caractères minimum).");
+    if (!form.contenu.trim())
+      issues.push(
+        "Décris la classe réelle et le contexte de la séance.\n" +
+        "- Classe : répartition des élèves\n" +
+        "- Contexte : matin / après-midi, classe calme ou agitée, fin de journée…"
+      );
+
     if (!form.dureeMin || form.dureeMin <= 0) issues.push("Renseigne une durée (> 0).");
 
     if (estEval && !form.modaliteEvaluation) issues.push("Choisis une modalité d’évaluation.");
@@ -2563,11 +2552,13 @@ const buildRelanceBloc = useCallback(() => {
 
                         {/* Contenu */}
             <div className="space-y-1 pt-2">
-              <label className="text-xs font-semibold text-gray-600">Texte de ta demande (version prof)</label>
+              <label className="text-xs font-semibold text-gray-600">Texte de ta demande (ambiance de classe , contraintes, désir)</label>
               <textarea
                 value={form.contenu}
                 onChange={(e) => handleChange("contenu", e.target.value)}
-                placeholder={estEval ? "Ex : Fais une évaluation de 55 min… exos progressifs + barème sur 20…" : "Ex : Génère une séance clé en main…"}
+                placeholder={
+                     "Ex : Classe : 22 élèves (3 en difficulté, 15 attendus, 4 très à l’aise) | Contexte : cours l’après-midi | Évaluation : 55 min, barème sur 20"
+                }
                 className="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-sky-300 min-h-[120px]"
               />
             </div>
