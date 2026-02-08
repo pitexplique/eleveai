@@ -111,8 +111,6 @@ function getMainCategoryMeta(cat: MainCategory) {
    TYPES UI
 ---------------------------------------- */
 
-type Niveau = "basique" | "remediation" | "ulis" | "standard" | "expert";
-
 type OutputStyle = "simple" | "word" | "word_expert" | "slides";
 type PromptMode = "basic" | "standard" | "expert";
 
@@ -131,7 +129,6 @@ type PromptProf = {
   // ✅ Mode précis : tâche guidée
   tacheProf: string;
 
-  niveau: Niveau;
   typeId: string;
 
   contenu: string;
@@ -246,23 +243,6 @@ const PROFS_PRESET_ITEMS: PresetCarouselItem[] = (Object.entries(PROFS_PRESETS) 
       return EVAL_OPTIONS.find((e) => e.id === id)?.description ?? "";
     }
 
-    function getDifficulteElevesLabel(n: Niveau): string {
-      switch (n) {
-        case "ulis":
-          return "ULIS";
-        case "remediation":
-          return "Remédiation";
-        case "basique":
-          return "Basique (très guidé)";
-        case "standard":
-          return "Standard";
-        case "expert":
-          return "Expert / approfondissement";
-        default:
-          return "Standard";
-      }
-    }
-
 
 function blocWordDesign(style: OutputStyle) {
   if (style === "simple") return "";
@@ -354,7 +334,8 @@ function blocWordDesign(style: OutputStyle) {
     "- Mise en page aérée : listes, lignes courtes, espaces de réponse visibles.\n" +
     "- Icônes emoji simples au début des sections (compatibles Word).\n" +
     "- Interdits : paragraphes longs ou compacts.\n" +
-    "- Ajoute des zones : « Réponse : ________________________________________________________________ ».\n" +
+  "- Ajoute des zones : « Réponse : ___________________________________________________________ » sur deux lignes après chaque question.\n" +
+  "- ou un tableau si nécessaire \n" +
     "- Termine obligatoirement par : « ✅ Prêt à coller dans Word ».\n\n" +
 
     "=== AUTO-CONTRÔLE OBLIGATOIRE (ASSERT IA – MINIMAL) ===\n" +
@@ -385,7 +366,7 @@ return (
   "[🟩 ENCART – DÉFI / BONUS]\nQuestion argumentée…\n\n" +
   "- Encarts minimum requis : 1 À RETENIR + 1 MÉTHODE + 1 ERREUR + 1 DÉFI.\n" +
   "- Ajoute des zones : « Réponse : ___________________________________________________________ » sur deux lignes après chaque question.\n" +
-  "- ou un tableau si necessaire" +
+  "- ou un tableau si nécessaire \n" +
   "- Interdits : paragraphes compacts ou justification implicite.\n" +
   "- Termine obligatoirement par : « ✅ Prêt à coller dans Word ».\n\n" +
 
@@ -465,7 +446,7 @@ function construirePrompt(form: PromptProf, promptMode: PromptMode): string {
 
   const blocEduscolLong =
     "Références institutionnelles : programmes officiels français (Eduscol / BO en vigueur).\n" +
-    "Respecter le niveau de classe, les compétences du socle commun et le vocabulaire attendu.\n\n";
+    "Respecter la classe, les compétences du socle commun et le vocabulaire attendu.\n\n";
 
   const blocEduscolCourt = "Respecter les programmes officiels français (Eduscol/BO).\n";
 
@@ -659,8 +640,7 @@ function construirePrompt(form: PromptProf, promptMode: PromptMode): string {
       blocEvaluationLong +
       blocMethodeLong +
       blocWord +
-      `Objectif pédagogique : ${form.objectifPedagogique || "(non précisé)"}\n` +
-      `Profil élèves : ${getDifficulteElevesLabel(form.niveau)}.\n` +
+      `Objectif pédagogique : ${form.objectifPedagogique || "(non précisé)"}\n`  +
       blocTags +
       blocContexteThemes +
       blocAuteur +
@@ -702,7 +682,6 @@ function construirePrompt(form: PromptProf, promptMode: PromptMode): string {
     (typeDesc ? `Type : ${typeLabel} — ${typeDesc}\n` : `Type : ${typeLabel}\n`) +
     blocFormatCourt +
     `Objectif : ${form.objectifPedagogique || "(non précisé)"}\n` +
-    `Profil élèves : ${getDifficulteElevesLabel(form.niveau)}.\n` +
     `Consigne prof : """${form.contenu.trim()}"""\n` +
     blocNoteBasic
   );
@@ -818,7 +797,6 @@ type DbPresetEmail = {
   title: string | null;
   classe: string | null;
   matiere: string | null;
-  niveau: string | null;
   prompt: string | null;
   data: unknown;
   created_at: string;
@@ -840,7 +818,6 @@ type DbPresetEleveai = {
   audience: string; // 'profs' attendu
   classe: string;
   matiere: string;
-  niveau: string; // 'basique'|'standard'|...
   title: string;
   description: string;
   tags: string[];
@@ -851,12 +828,6 @@ type DbPresetEleveai = {
 };
 
 
-
-/* ----------------------------------------
-   RELANCE (Prompt 2)
----------------------------------------- */
-
-type FeedbackChoice = "" | "ok" | "bof" | "pas_ok";
 
 /* ----------------------------------------
    PAGE
@@ -902,7 +873,7 @@ export default function ProfsPage() {
   // ✅ Refs (scroll UX)
   const promptRef = useRef<HTMLDivElement | null>(null);
   const ressourceRef = useRef<HTMLDivElement | null>(null);
-  const relanceRef = useRef<HTMLDivElement | null>(null);
+
   const topRef = useRef<HTMLDivElement | null>(null);
 
   const scrollToPrompt = useCallback(() => {
@@ -911,9 +882,7 @@ export default function ProfsPage() {
   const scrollToRessource = useCallback(() => {
     ressourceRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
   }, []);
-  const scrollToRelance = useCallback(() => {
-    relanceRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
-  }, []);
+
   const scrollToTop = useCallback(() => {
     topRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
   }, []);
@@ -932,7 +901,6 @@ export default function ProfsPage() {
       classe: "",
       matiere: "",
       tacheProf: "",
-      niveau: "standard",
       typeId: "seance_cle_en_main",
       contenu: "",
       tags: [],
@@ -1002,88 +970,45 @@ export default function ProfsPage() {
   const [mainCategory, setMainCategory] = useState<MainCategory>("seance");
   const [typeQuery, setTypeQuery] = useState("");
 
-  // ✅ helper (à mettre hors du composant, dans HELPERS)
-  function niveauxToTryFromUi(n: Niveau): string[] {
-    switch (n) {
-      case "ulis":
-        return ["ulis"];
-      case "remediation":
-        return ["remediation", "basique", "ulis", "standard"];
-      case "basique":
-        return ["basique", "remediation", "standard"];
-      case "standard":
-        return ["standard", "basique", "expert"];
-      case "expert":
-        return ["expert", "standard", "basique"];
-      default:
-        return ["standard", "basique"];
-    }
-  }
 
   // ✅ loadPublicPresets (avec la nouvelle logique niveauxToTry)
-  const loadPublicPresets = useCallback(async () => {
-    setPublicPresetsError("");
+ const loadPublicPresets = useCallback(async () => {
+  setPublicPresetsError("");
 
-    // ✅ on charge dès que classe + matière existent
-    if (!form.classe || !form.matiere) {
-      setPublicPresets([]);
-      return;
-    }
+  // ✅ on charge dès que classe + matière existent
+  if (!form.classe || !form.matiere) {
+    setPublicPresets([]);
+    return;
+  }
 
-    setPublicPresetsLoading(true);
+  setPublicPresetsLoading(true);
 
-    try {
-      // ✅ niveaux possibles selon ton UI (5 niveaux) + fallback intelligent
-      const niveauxToTry = niveauxToTryFromUi(form.niveau);
+  try {
+    const { data, error } = await supabase
+      .from("presets_eleveai")
+      .select(
+        "id, created_at, updated_at, audience, classe, matiere, title, description, tags, is_featured, featured_rank, payload, is_archived"
+      )
+      .eq("audience", "profs")
+      .eq("classe", form.classe)
+      .eq("matiere", form.matiere)
+      .eq("is_archived", false)
+      .order("is_featured", { ascending: false })
+      .order("featured_rank", { ascending: true, nullsFirst: false })
+      .limit(200);
 
-      const query = supabase
-        .from("presets_eleveai")
-        .select(
-          "id, created_at, updated_at, audience, classe, matiere, niveau, title, description, tags, is_featured, featured_rank, payload, is_archived"
-        )
-        .eq("audience", "profs")
-        .eq("classe", form.classe)
-        .eq("matiere", form.matiere)
-        .eq("is_archived", false)
-        .order("is_featured", { ascending: false })
-        .order("featured_rank", { ascending: true, nullsFirst: false })
-        .limit(200);
+    if (error) throw new Error(error.message);
 
-      // ✅ on filtre sur la liste niveauxToTry (multi-niveaux)
-      const { data, error } = await query.in("niveau", niveauxToTry);
+    setPublicPresets((data ?? []) as DbPresetEleveai[]);
+  } catch (e: any) {
+    console.error("[presets_eleveai] catch =", e);
+    setPublicPresets([]);
+    setPublicPresetsError(e?.message || "Erreur chargement presets.");
+  } finally {
+    setPublicPresetsLoading(false);
+  }
+}, [form.classe, form.matiere, supabase]);
 
-      console.log("[presets_eleveai] filtres =", {
-        audience: "profs",
-        classe: form.classe,
-        matiere: form.matiere,
-        niveauUI: form.niveau,
-        niveauxToTry,
-      });
-      console.log("[presets_eleveai] data =", data);
-      console.log("[presets_eleveai] error =", error);
-
-      if (error) throw new Error(error.message);
-
-      setPublicPresets((data ?? []) as DbPresetEleveai[]);
-    } catch (e: any) {
-      console.error("[presets_eleveai] catch =", e);
-      setPublicPresets([]);
-      setPublicPresetsError(e?.message || "Erreur chargement presets.");
-    } finally {
-      setPublicPresetsLoading(false);
-    }
-  }, [form.classe, form.matiere, form.niveau, supabase]);
-
-
-
-
-
-
-  // ✅ Relance (Prompt 2)
-  const [feedbackChoice, setFeedbackChoice] = useState<FeedbackChoice>("");
-  const [feedbackText, setFeedbackText] = useState("");
-  const [promptRelance, setPromptRelance] = useState("");
-  const [copiedRelance, setCopiedRelance] = useState(false);
 
 
   // ✅ Rerech preset
@@ -1140,10 +1065,6 @@ export default function ProfsPage() {
     setCopiedRessource(false);
     setShowPromptInterne(true);
 
-    setFeedbackChoice("");
-    setFeedbackText("");
-    setPromptRelance("");
-    setCopiedRelance(false);
   }, []);
 
   const updateTags = useCallback((value: string) => {
@@ -1228,8 +1149,6 @@ export default function ProfsPage() {
 
         // ✅ on force la cohérence des filtres
         classe: p.classe || prev.classe,
-        matiere: p.matiere || prev.matiere,
-        niveau: (p.niveau as Niveau) || prev.niveau,
 
         // ✅ vitrine
         titre: p.title || prev.titre,
@@ -1408,7 +1327,7 @@ export default function ProfsPage() {
       const uid = await getAuthUserIdOrThrow();
       const { data, error } = await supabase
         .from("presets_email")
-        .select("id, auth_user_id, title, classe, matiere, niveau, prompt, data, created_at")
+        .select("id, auth_user_id, title, classe, matiere, prompt, data, created_at")
         .eq("auth_user_id", uid)
         .order("created_at", { ascending: false })
         .limit(80);
@@ -1450,11 +1369,6 @@ export default function ProfsPage() {
       // mode : si la tâche existe, on passe en mode précis
       setMode(data.form.tacheProf ? "precis" : "rapide");
 
-      setFeedbackChoice("");
-      setFeedbackText("");
-      setPromptRelance("");
-      setCopiedRelance(false);
-
       setLastPresetId(p.id);
       setDbMsg("✅ Preset chargé.");
       setShowMyPresets(false);
@@ -1489,7 +1403,6 @@ export default function ProfsPage() {
           title,
           classe: form.classe || null,
           matiere: form.matiere || null,
-          niveau: form.niveau || null,
           prompt: promptInterne || null,
           data: dataJson,
         })
@@ -1570,10 +1483,6 @@ export default function ProfsPage() {
     setCopiedPrompt(false);
     setCopiedRessource(false);
 
-    setFeedbackChoice("");
-    setFeedbackText("");
-    setPromptRelance("");
-    setCopiedRelance(false);
 
     setAgentLoading(true);
     try {
@@ -1631,56 +1540,6 @@ export default function ProfsPage() {
       showToast("⚠️ Copie impossible");
     }
   }, [agentOutput, triggerNudge, showToast]);
-
-// ✅ Relance (Prompt 2) — améliore le PROMPT, pas la ressource
-const buildRelanceBloc = useCallback(() => {
-  const feedbackFree = feedbackText.trim();
-
-  const intentByChoice: Record<Exclude<FeedbackChoice, "">, string> = {
-    ok:
-      "Objectif : consolider et finaliser.\n" +
-      "- Propose une version V2 plus propre (meilleure structure Word, consignes plus claires).\n" +
-      "- Ajoute 5 points de vérification (erreurs fréquentes / pièges) + corrections.\n" +
-      "- Termine par une checklist de conformité (programme, barème/critères si éval, différenciation si activée).",
-    bof:
-      "Objectif : clarifier / simplifier.\n" +
-      "- Reprends en version plus simple et plus explicite.\n" +
-      "- Réduis la densité, ajoute des micro-étapes et des exemples concrets.\n" +
-      "- Si des consignes sont ambiguës, propose 2 variantes (A/B) et demande laquelle choisir.",
-    pas_ok:
-      "Objectif : vérifier / rectifier.\n" +
-      "- Liste précisément ce qui semble incohérent ou risqué.\n" +
-      "- Corrige en explicitant tes hypothèses.\n" +
-      "- Si tu n’es pas sûr d’un point, dis-le et propose une alternative robuste.\n" +
-      "- Termine par une version corrigée V2.",
-  };
-
-  const addUserNote = feedbackFree
-    ? `\n\nNote du prof (à prendre en compte) :\n"${feedbackFree}"\n`
-    : "";
-
-  const antiHallucination =
-    "\n\nRègles importantes :\n" +
-    "- Tu travailles UNIQUEMENT à partir du PROMPT 1 ci-dessous.\n" +
-    "- N’utilise PAS de “sortie / ressource générée” précédente.\n" +
-    "- Si une information est incertaine, dis-le et propose une hypothèse explicite.\n" +
-    "- Vérifie la cohérence interne (durée, niveau, barème, consignes).\n" +
-    "- Ta réponse finale doit contenir UNIQUEMENT le PROMPT V2 (prêt à coller dans ChatGPT), sans commentaire.\n";
-
-  const relance =
-    "Tu es un assistant de Prompt Engineering pédagogique.\n" +
-    "Tu vas améliorer un PROMPT (pas une ressource).\n\n" +
-    "=== PROMPT 1 (base à améliorer) ===\n" +
-    "-----\n" +
-    promptInterne +
-    "\n-----\n\n" +
-    "Consigne de relance :\n" +
-    intentByChoice[feedbackChoice as Exclude<FeedbackChoice, "">] +
-    addUserNote +
-    antiHallucination;
-
-  return relance;
-}, [feedbackChoice, feedbackText, promptInterne]);
 
 
   const mainCatMeta = useMemo(() => getMainCategoryMeta(mainCategory), [mainCategory]);
@@ -1788,7 +1647,7 @@ const buildRelanceBloc = useCallback(() => {
 
         </header>
 
-      {/* ligne 1 : classe matiere niveau */}
+
 {/* Classe / matière / niveau */}
 <div className="w-full rounded-2xl border border-gray-200 bg-white/90 shadow-sm p-4 sm:p-5">
   <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-5">
@@ -1840,25 +1699,6 @@ const buildRelanceBloc = useCallback(() => {
       </select>
     </div>
 
-    {/* Niveau */}
-    <div className="flex flex-col gap-1.5">
-      <label className="text-[11px] sm:text-xs font-semibold text-gray-600 tracking-wide uppercase">
-        Difficulté élèves
-      </label>
-      <select
-        value={form.niveau}
-        onChange={(e) => handleChange("niveau", e.target.value as Niveau)}
-        className="w-full h-11 sm:h-12 border border-gray-200 rounded-xl px-3 sm:px-4
-                   text-sm sm:text-[15px] bg-white shadow-sm transition
-                   focus:outline-none focus:ring-4 focus:ring-sky-200 focus:border-sky-400"
-      >
-        <option value="ulis">ULIS (adaptations fortes)</option>
-        <option value="remediation">Remédiation (bases à consolider)</option>
-        <option value="basique">Basique (très guidé)</option>
-        <option value="standard">Standard</option>
-        <option value="expert">Expert / approfondissement</option>
-      </select>
-    </div>
   </div>
 </div>
 
@@ -1957,7 +1797,7 @@ const buildRelanceBloc = useCallback(() => {
             <div className="rounded-xl border border-slate-200 bg-white p-4">
               <p className="text-sm text-slate-700">Aucun preset trouvé pour ces filtres.</p>
               <p className="mt-1 text-[12px] text-slate-500">
-                (Vérifie audience/classe/matière/niveau côté DB.)
+                (Vérifie audience/classe/matière/côté DB.)
               </p>
             </div>
           ) : (
@@ -2949,24 +2789,6 @@ const buildRelanceBloc = useCallback(() => {
         </div>
       </div>
 
-      <button
-        type="button"
-        onClick={() => {
-          if (!promptInterne) {
-            showToast("⚠️ Génère d’abord le prompt.");
-            return;
-          }
-          showToast("💡 Donne un avis (étape 5) pour produire un Prompt 2.");
-          setTimeout(() => scrollToRelance(), 120);
-        }}
-        disabled={!promptInterne}
-        className={`inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2 text-sm font-semibold border transition ${
-          promptInterne ? "border-slate-200 bg-white text-slate-800 hover:bg-slate-50" : "border-slate-200 bg-white text-slate-400 cursor-not-allowed"
-        }`}
-      >
-        <MessageCircle className="w-4 h-4" />
-        Le Prompt 2 modifie la consigne (le prompt), pas la ressource affichée ci-dessus.
-      </button>
     </>
   )}
 </div>

@@ -1,3 +1,5 @@
+// esapce-profs/page.tsx
+
 export { metadata } from "./metadata";
 import EspaceProfsClient from "./EspaceProfsClient";
 
