@@ -85,7 +85,7 @@ export default function AccueilPage() {
         <div className="relative mx-auto max-w-6xl px-4 py-16 sm:py-20">
           <div className="mx-auto max-w-4xl text-center">
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-slate-900">
-              Générateur de Prompts  Pédagogiques - IA
+              Générateur de Prompts Pédagogiques - IA
             </h1>
 
             <h2 className="mt-4 text-lg sm:text-xl font-semibold text-blue-600">
