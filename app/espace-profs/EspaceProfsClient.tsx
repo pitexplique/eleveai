@@ -356,9 +356,9 @@ return (
   "- Réponse copiable-collable en conservant strictement la structure.\n" +
   "- Icônes emoji au début des titres et sous-parties.\n" +
   "- Bannières obligatoires pour les grandes parties :\n" +
-  "=============================================\n" +
+  "==================================\n" +
   "🧠 TITRE DE LA PARTIE\n" +
-  "=============================================\n" +
+  "==================================\n" +
   "- Encadrés simulés obligatoires :\n" +
   "[🟦 ENCART – À RETENIR]\nTexte…\n\n" +
   "[🟨 ENCART – MÉTHODE]\nÉtapes numérotées…\n\n" +
@@ -366,7 +366,8 @@ return (
   "[🟩 ENCART – DÉFI / BONUS]\nQuestion argumentée…\n\n" +
   "- Encarts minimum requis : 1 À RETENIR + 1 MÉTHODE + 1 ERREUR + 1 DÉFI.\n" +
   "- Ajoute des zones : « Réponse : ___________________________________________________________ » sur deux lignes après chaque question.\n" +
-  "- ou un tableau si nécessaire \n" +
+  "- ou un tableau avec bordure si nécessaire \n" +
+  "- ou un repère orthonormé' si tu demandes un  graphique \n" +
   "- Interdits : paragraphes compacts ou justification implicite.\n" +
   "- Termine obligatoirement par : « ✅ Prêt à coller dans Word ».\n\n" +
 
@@ -469,7 +470,7 @@ function construirePrompt(form: PromptProf, promptMode: PromptMode): string {
       : "";
 
   const blocDYSLong = form.adaptationDYS
-    ? "Adapter DYS : phrases courtes, aération, vocabulaire expliqué, éviter doubles négations.\n\n"
+    ? "Adapter DYS : polices adaptées, phrases courtes, aération, vocabulaire expliqué, éviter doubles négations.\n\n"
     : "";
 
   const blocDYSCourt = form.adaptationDYS ? "Adapter DYS : phrases courtes, aéré, vocabulaire expliqué.\n" : "";
