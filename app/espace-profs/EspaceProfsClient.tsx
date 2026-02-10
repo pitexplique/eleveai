@@ -1290,7 +1290,7 @@ export default function ProfsPage() {
     if (!form.classe) s.push("Classe : vocabulaire + attendus mieux calibrés.");
     if (!form.matiere) s.push("Matière : garde l’IA dans le bon cadre.");
     if (!form.typeId) s.push("Type : fixe la structure (séance, exercices, évaluation…).");
-    if (form.contenu.trim().length > 0 && form.contenu.trim().length < 40) s.push("Consigne : ajoute contraintes, barème/critères, exemple attendu.");
+    if (form.contenu.trim().length > 0 && form.contenu.trim().length < 20) s.push("Consigne : ajoute contraintes, barème/critères, exemple attendu, graphique");
     if (!form.dureeMin || form.dureeMin <= 0) s.push("Durée : calibre la production.");
 
     if (mode === "precis" && !form.tacheProf) s.push("Mode précis : choisis une tâche pour guider automatiquement la catégorie.");
@@ -2397,16 +2397,25 @@ export default function ProfsPage() {
 
                         {/* Contenu */}
             <div className="space-y-1 pt-2">
-              <label className="text-xs font-semibold text-gray-600">Texte de ta demande (ambiance de classe , contraintes, désir)</label>
+              <label className="text-xs font-semibold text-gray-600">
+                Contexte pédagogique (classe, contraintes, intentions)
+              </label>
               <textarea
                 value={form.contenu}
                 onChange={(e) => handleChange("contenu", e.target.value)}
                 placeholder={
-                     "Ex : Classe : 22 élèves (3 en difficulté, 15 attendus, 4 très à l’aise) | Contexte : cours l’après-midi | Évaluation : 55 min, barème sur 20"
+                  "Classe hétérogène (≈ 25 élèves) avec des élèves en difficulté et à haut potentiel.\n" +
+                  "Contexte de classe : moment de la journée, climat (calme / agité).\n" +
+                  "Supports visuels possibles : tableaux, graphiques, schémas, cartes, repères.\n" +
+                  "Ces supports doivent servir l’objectif pédagogique de la discipline.\n" +
+                  "Compatibles avec une impression Word, sans outil numérique."
                 }
-                className="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-sky-300 min-h-[120px]"
+                className="w-full border rounded-lg px-3 py-2 text-sm leading-relaxed
+                focus:outline-none focus:ring-2 focus:ring-sky-300 min-h-[120px]"
               />
+
             </div>
+
 
             {formError && (
               <div className="rounded-xl border border-rose-200 bg-rose-50 px-3 py-2">
