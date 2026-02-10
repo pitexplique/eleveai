@@ -10,7 +10,7 @@ type DevBannerProps = {
 };
 
 export default function DevBanner({
-  message = "🚧 Site en cours de développement — Dernière MAJ: prise en compte de la laicité et de l'égalité garcons - filles ",
+  message = "🚧 Dernier prompt notés : 19:20 par chatgpt, perplexity , ... ",
   storageKey = "eleveai_dev_banner_closed_v1",
   className = "",}: DevBannerProps) {
   const [open, setOpen] = useState(false);
