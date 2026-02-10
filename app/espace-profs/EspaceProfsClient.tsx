@@ -1264,10 +1264,13 @@ export default function ProfsPage() {
     if (!form.objectifPedagogique.trim()) issues.push("Précise l’objectif pédagogique.");
     if (!form.contenu.trim())
       issues.push(
-        "Décris la classe réelle et le contexte de la séance.\n" +
-        "- Classe : répartition des élèves\n" +
-        "- Contexte : matin / après-midi, classe calme ou agitée, fin de journée…"
+        "Classe hétérogène (≈ 25 élèves) avec 2 élèves en grande difficulté et 3 à haut potentiel.\n" +
+        "Contexte de classe à prendre en compte (matin / après-midi, classe calme ou agitée).\n" +
+        "Intégrer des graphiques simples et lisibles (tableaux, histogrammes, diagrammes circulaires ou repères).\n" +
+        "Les graphiques doivent permettre des calculs (moyenne, étendue, fréquence).\n" +
+        "Compatibles avec une impression Word, sans outil numérique (noir et blanc possible)."
       );
+
 
     if (!form.dureeMin || form.dureeMin <= 0) issues.push("Renseigne une durée (> 0).");
 
