@@ -10,7 +10,7 @@ type DevBannerProps = {
 };
 
 export default function DevBanner({
-  message = "🚧 Dernier prompt notés : 19:20 par chatgpt, perplexity , ... ",
+  message = "🚧 Derniers prompts espace prof notés : 19:20 par chatgpt, perplexity , ... A bientôt pour le 20/20 ",
   storageKey = "eleveai_dev_banner_closed_v1",
   className = "",}: DevBannerProps) {
   const [open, setOpen] = useState(false);
