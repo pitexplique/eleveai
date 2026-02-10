@@ -1267,9 +1267,10 @@ export default function ProfsPage() {
         "Classe hétérogène (≈ 25 élèves) avec des élèves en difficulté et à haut potentiel.\n" +
         "Contexte de classe à prendre en compte (moment de la journée, climat de classe).\n" +
         "Intégrer si nécessaire des supports visuels clairs et lisibles (tableaux, graphiques, schémas, cartes, repères).\n" +
-        "Les supports doivent permettre une exploitation pédagogique adaptée à la discipline.\n" +
+        "Ces supports doivent servir l’objectif pédagogique de la discipline.\n" +
         "Compatibles avec une impression Word, sans outil numérique (noir et blanc possible)."
       );
+
 
 
     if (!form.dureeMin || form.dureeMin <= 0) issues.push("Renseigne une durée (> 0).");
