@@ -1264,10 +1264,10 @@ export default function ProfsPage() {
     if (!form.objectifPedagogique.trim()) issues.push("Précise l’objectif pédagogique.");
     if (!form.contenu.trim())
       issues.push(
-        "Classe hétérogène (≈ 25 élèves) avec 2 élèves en grande difficulté et 3 à haut potentiel.\n" +
-        "Contexte de classe à prendre en compte (matin / après-midi, classe calme ou agitée).\n" +
-        "Intégrer des graphiques simples et lisibles (tableaux, histogrammes, diagrammes circulaires ou repères).\n" +
-        "Les graphiques doivent permettre des calculs (moyenne, étendue, fréquence).\n" +
+        "Classe hétérogène (≈ 25 élèves) avec des élèves en difficulté et à haut potentiel.\n" +
+        "Contexte de classe à prendre en compte (moment de la journée, climat de classe).\n" +
+        "Intégrer si nécessaire des supports visuels clairs et lisibles (tableaux, graphiques, schémas, cartes, repères).\n" +
+        "Les supports doivent permettre une exploitation pédagogique adaptée à la discipline.\n" +
         "Compatibles avec une impression Word, sans outil numérique (noir et blanc possible)."
       );
 
