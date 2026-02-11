@@ -95,7 +95,7 @@ export default function AccueilPage() {
 
             <p className="mt-5 text-sm sm:text-base text-slate-700 leading-relaxed">
               <span className="font-semibold text-slate-900">
-                Arrête de réécrire 10 fois la même consigne.
+                Apprendre à penser avec l'IA
               </span>{" "}
               Génère un prompt clair, conforme, utilisable immédiatement en classe.
             </p>
