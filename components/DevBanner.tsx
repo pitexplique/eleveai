@@ -10,8 +10,8 @@ type DevBannerProps = {
 };
 
 export default function DevBanner({
-  message = "🚧 Derniers prompts pédagogique espace prof notés : 19,5/20 par chatgpt, perplexity",
-  storageKey = "eleveai_dev_banner_closed_v1",
+  message = "Structuration avancée de prompts pédagogiques — Robustesse évaluée : 19,5 / 20",
+  storageKey = "eleveai_dev_banner_closed_v2",
   className = "",
 }: DevBannerProps) {
   const [open, setOpen] = useState(false);
@@ -39,16 +39,19 @@ export default function DevBanner({
     <div
       className={[
         "w-full border-b px-4 py-2",
-        "bg-amber-100 text-amber-950 border-amber-200",
+        "bg-slate-900 text-slate-100 border-slate-800",
         className,
       ].join(" ")}
       role="status"
       aria-live="polite"
     >
       <div className="mx-auto max-w-[1400px] space-y-2">
+
         {/* Ligne principale */}
         <div className="flex items-center justify-between gap-3">
-          <p className="text-sm leading-snug">{message}</p>
+          <p className="text-sm leading-snug font-medium tracking-wide">
+            {message}
+          </p>
 
           <div className="flex items-center gap-1">
             {/* Bouton image */}
@@ -56,12 +59,12 @@ export default function DevBanner({
               type="button"
               onClick={() => setShowImage((v) => !v)}
               className="inline-flex h-8 items-center gap-1 rounded-full px-2 text-xs font-semibold
-                         hover:bg-amber-200/70 active:bg-amber-200"
+                         hover:bg-slate-800 active:bg-slate-700 transition"
               aria-label="Afficher la notation"
-              title="Voir la notation"
+              title="Voir le détail"
             >
               <ImageIcon className="h-4 w-4" />
-              Notation
+              Détail
             </button>
 
             {/* Bouton fermer */}
@@ -69,7 +72,7 @@ export default function DevBanner({
               type="button"
               onClick={close}
               className="inline-flex h-8 w-8 items-center justify-center rounded-full
-                         hover:bg-amber-200/70 active:bg-amber-200"
+                         hover:bg-slate-800 active:bg-slate-700 transition"
               aria-label="Fermer le bandeau"
               title="Fermer"
             >
@@ -83,11 +86,12 @@ export default function DevBanner({
           <div className="pt-2">
             <img
               src="/notationgpt.png"
-              alt="Notation GPT"
-              className="max-h-[240px] rounded-md border border-amber-300 shadow-sm"
+              alt="Détail de la notation IA"
+              className="max-h-[240px] rounded-md border border-slate-700 shadow-sm"
             />
           </div>
         )}
+
       </div>
     </div>
   );
