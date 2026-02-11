@@ -97,7 +97,7 @@ export default function AccueilPage() {
               <span className="font-semibold text-slate-900">
                 Apprendre à penser avec l'IA
               </span>{" "}
-              Génère un prompt clair, conforme, utilisable immédiatement.
+              Génère un prompt clair, conforme, utilisable immédiatement en classe.
             </p>
 
             {/* Chips */}
@@ -107,6 +107,25 @@ export default function AccueilPage() {
               <Chip label="👨‍👩‍👧 Parents" onClick={() => scrollTo("parents")} />
               <Chip label="🏫 École" onClick={() => scrollTo("ecole")} />
 
+            </div>
+
+            {/* CTA */}
+            <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center sm:gap-4">
+              <Link
+                href="/auth/signup"
+                className="inline-flex w-full items-center justify-center rounded-lg bg-blue-600 px-6 py-3 text-sm font-semibold text-white
+                          hover:bg-blue-500 transition sm:w-auto"
+              >
+                S’inscrire gratuitement →
+              </Link>
+
+              <Link
+                href="/auth/signin"
+                className="inline-flex w-full items-center justify-center rounded-lg border border-blue-600 bg-white px-6 py-3 text-sm font-semibold text-blue-600
+                          hover:bg-blue-50 transition sm:w-auto"
+              >
+                Se connecter →
+              </Link>
             </div>
 
             <p className="mt-4 text-xs text-slate-600">
@@ -152,7 +171,7 @@ export default function AccueilPage() {
       <p className="text-sm text-slate-600 max-w-md leading-relaxed">
         Indicateur basé sur la clarté pédagogique, la structuration,
         la conformité aux programmes officiels, la différenciation
-        et l’exploitabilité concrète.
+        et l’exploitabilité concrète en classe.
       </p>
 
       {/* Explication approfondie */}
