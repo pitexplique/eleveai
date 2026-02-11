@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useCallback } from "react";
+import Image from "next/image";
 
 const HEADER_OFFSET = 80;
 
@@ -209,11 +210,37 @@ export default function AccueilPage() {
 
         {/* Footer crédibilité */}
         <div className="mt-10 rounded-2xl border border-slate-200 bg-slate-50 p-6">
-          <p className="text-sm font-semibold text-slate-900">Une exigence simple</p>
-          <p className="mt-2 text-sm text-slate-700 leading-relaxed">
-            Si un prompt ne te fait pas gagner du temps dès la première utilisation,
-            il ne sert à rien. EleveAI est conçu pour éviter ça.
-          </p>
+
+          {/* Notation IA */}
+          <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+            <div className="flex flex-col md:flex-row gap-6 items-start">
+              <Image
+                src="/notationgpt.png"
+                alt="Notation IA des prompts enseignants"
+                width={420}
+                height={240}
+                className="rounded-xl border border-slate-200"
+                priority
+              />
+
+              <div className="space-y-3">
+                <div className="inline-flex items-center gap-2 rounded-full bg-slate-900 px-3 py-1 text-xs font-semibold text-white">
+                  Notation IA actuelle
+                </div>
+
+                <p className="text-lg font-semibold">
+                  Prompts enseignants :
+                  <span className="ml-2 text-emerald-600">Note IA : 19,5 / 20 (évaluation multi-critères, chatgpt, perplexity)</span>
+                </p>
+
+                <p className="text-sm text-slate-600 max-w-md">
+                  Score basé sur la clarté pédagogique, la structure,
+                  la conformité aux programmes officiels, la différenciation
+                  et l’exploitabilité en classe.
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
     </main>
