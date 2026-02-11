@@ -143,21 +143,36 @@ export default function AccueilPage() {
 
       {/* SECTIONS */}
       <section className="mx-auto max-w-6xl px-4 py-12 space-y-6">
-        <div className="grid gap-4 md:grid-cols-3">
-          {[
-            ["1) Choisir un profil", "Un cadre adapté à ton rôle"],
-            ["2) Générer un prompt", "Structuré, fiable, directement exploitable"],
-            ["3) Gagner du temps", "Moins d’essais, plus d’efficacité"],
-          ].map(([t, d]) => (
-            <div
-              key={t}
-              className="rounded-2xl border border-slate-200 bg-slate-50 p-4 text-sm"
-            >
-              <p className="font-semibold text-slate-900">{t}</p>
-              <p className="mt-1 text-slate-600">{d}</p>
+          {/* Notation IA */}
+          <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+            <div className="flex flex-col md:flex-row gap-6 items-start">
+              <Image
+                src="/notationgpt.png"
+                alt="Notation IA des prompts enseignants"
+                width={420}
+                height={240}
+                className="rounded-xl border border-slate-200"
+                priority
+              />
+
+              <div className="space-y-3">
+                <div className="inline-flex items-center gap-2 rounded-full bg-slate-900 px-3 py-1 text-xs font-semibold text-white">
+                  Notation IA actuelle
+                </div>
+
+                <p className="text-lg font-semibold">
+                  Prompts enseignants :
+                  <span className="ml-2 text-emerald-600">Note IA : 19,5 / 20 (évaluation multi-critères, chatgpt, perplexity)</span>
+                </p>
+
+                <p className="text-sm text-slate-600 max-w-md">
+                  Score basé sur la clarté pédagogique, la structure,
+                  la conformité aux programmes officiels, la différenciation
+                  et l’exploitabilité en classe.
+                </p>
+              </div>
             </div>
-          ))}
-        </div>
+          </div>
 
         <div className="h-px w-full bg-slate-200" />
 
@@ -211,36 +226,7 @@ export default function AccueilPage() {
         {/* Footer crédibilité */}
         <div className="mt-10 rounded-2xl border border-slate-200 bg-slate-50 p-6">
 
-          {/* Notation IA */}
-          <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <div className="flex flex-col md:flex-row gap-6 items-start">
-              <Image
-                src="/notationgpt.png"
-                alt="Notation IA des prompts enseignants"
-                width={420}
-                height={240}
-                className="rounded-xl border border-slate-200"
-                priority
-              />
 
-              <div className="space-y-3">
-                <div className="inline-flex items-center gap-2 rounded-full bg-slate-900 px-3 py-1 text-xs font-semibold text-white">
-                  Notation IA actuelle
-                </div>
-
-                <p className="text-lg font-semibold">
-                  Prompts enseignants :
-                  <span className="ml-2 text-emerald-600">Note IA : 19,5 / 20 (évaluation multi-critères, chatgpt, perplexity)</span>
-                </p>
-
-                <p className="text-sm text-slate-600 max-w-md">
-                  Score basé sur la clarté pédagogique, la structure,
-                  la conformité aux programmes officiels, la différenciation
-                  et l’exploitabilité en classe.
-                </p>
-              </div>
-            </div>
-          </div>
         </div>
       </section>
     </main>
