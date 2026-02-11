@@ -143,36 +143,101 @@ export default function AccueilPage() {
 
       {/* SECTIONS */}
       <section className="mx-auto max-w-6xl px-4 py-12 space-y-6">
-          {/* Notation IA */}
-          <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <div className="flex flex-col md:flex-row gap-6 items-start">
-              <Image
-                src="/notationgpt.png"
-                alt="Notation IA des prompts enseignants"
-                width={420}
-                height={240}
-                className="rounded-xl border border-slate-200"
-                priority
-              />
+{/* Notation IA */}
+<div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+  <div className="flex flex-col md:flex-row gap-6 items-start">
+    <Image
+      src="/notationgpt.png"
+      alt="Notation IA des prompts enseignants"
+      width={420}
+      height={240}
+      className="rounded-xl border border-slate-200"
+      priority
+    />
 
-              <div className="space-y-3">
-                <div className="inline-flex items-center gap-2 rounded-full bg-slate-900 px-3 py-1 text-xs font-semibold text-white">
-                  Notation IA actuelle
-                </div>
+    <div className="space-y-5">
 
-                <p className="text-lg font-semibold">
-                  Prompts enseignants :
-                  <span className="ml-2 text-emerald-600">Note IA : 19,5 / 20 (évaluation multi-critères, chatgpt, perplexity)</span>
-                </p>
+      <div className="inline-flex items-center gap-2 rounded-full bg-slate-900 px-3 py-1 text-xs font-semibold text-white">
+        Indicateur de structuration IA
+      </div>
 
-                <p className="text-sm text-slate-600 max-w-md">
-                  Score basé sur la clarté pédagogique, la structure,
-                  la conformité aux programmes officiels, la différenciation
-                  et l’exploitabilité en classe.
-                </p>
-              </div>
-            </div>
-          </div>
+      <p className="text-lg font-semibold">
+        Prompts enseignants :
+        <span className="ml-2 text-emerald-600">
+          19,5 / 20 (évaluation multi-critères : ChatGPT, Perplexity)
+        </span>
+      </p>
+
+      <p className="text-sm text-slate-600 max-w-md leading-relaxed">
+        Indicateur basé sur la clarté pédagogique, la structuration,
+        la conformité aux programmes officiels, la différenciation
+        et l’exploitabilité concrète en classe.
+      </p>
+
+      {/* Explication approfondie */}
+      <div className="rounded-xl border border-slate-200 bg-slate-50 p-4 text-sm text-slate-700 leading-relaxed">
+        <p className="font-semibold text-slate-900 mb-2">
+          Que signifie réellement 19,5 / 20 ?
+        </p>
+
+        <p>
+          Cet indicateur ne mesure pas une performance.
+          Il correspond à une <span className="font-semibold">modélisation de robustesse et de reproductibilité pédagogique</span>.
+        </p>
+
+        <p className="mt-2">
+          Un prompt structuré à ce niveau permet d’obtenir une production stable et exploitable :
+          objectif explicite, consignes univoques, progression claire,
+          critères d’évaluation, différenciation et traces pédagogiques.
+        </p>
+
+        <p className="mt-2 text-xs text-slate-500">
+          L’IA structure la demande. L’enseignant conserve la décision pédagogique.
+        </p>
+      </div>
+
+      {/* Formation */}
+      <div className="pt-2 space-y-2">
+        <p className="text-sm font-semibold text-slate-900">
+          🎓 Formation & Webinaires
+        </p>
+
+        <p className="text-sm text-slate-600 leading-relaxed">
+          EleveAI propose des ateliers pour comprendre la logique d’un prompt reproductible
+          et structurer vos propres contenus pédagogiques avec l’IA
+          (45 min – 2h – demi-journée).
+        </p>
+
+        <div className="mt-2 flex flex-col sm:flex-row gap-2">
+          <a
+            href="mailto:contact@eleveai.fr"
+            className="inline-flex items-center justify-center rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-500 transition"
+          >
+            Contact email →
+          </a>
+
+          <a
+            href="https://wa.me/33692742958"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center rounded-lg border border-emerald-600 px-4 py-2 text-sm font-semibold text-emerald-700 hover:bg-emerald-50 transition"
+          >
+            WhatsApp : +262 6 92 74 29 58 →
+          </a>
+        </div>
+      </div>
+
+      {/* Signature */}
+      <p className="text-xs text-slate-500 italic leading-relaxed">
+        Approche inspirée d’une culture de modélisation issue de l’ingénierie statistique industrielle.  
+        — Frédéric Lacoste, enseignant en mathématiques & statisticien.
+      </p>
+
+    </div>
+  </div>
+</div>
+
+
 
         <div className="h-px w-full bg-slate-200" />
 
