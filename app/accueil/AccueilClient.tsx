@@ -237,7 +237,7 @@ export default function AccueilPage() {
           <div id="eleves" className="scroll-mt-24">
             <Card
               title="ÉLÈVES"
-              punchline="Ton coach IA "
+              punchline="Ton coach IA GRATUIT"
               line1="Comprendre, corriger, améliorer "
               line2="Un cadre clair pour apprendre sans tricher."
               ctaHref="/espace-eleves"
