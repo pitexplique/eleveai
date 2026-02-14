@@ -6,6 +6,25 @@ import Image from "next/image";
 
 const HEADER_OFFSET = 80;
 
+// 👇 AJOUTE ICI
+function YouTubeEmbed({ videoId }: { videoId: string }) {
+  return (
+    <div className="w-full">
+      <div className="relative w-full overflow-hidden rounded-xl border border-slate-200 bg-black aspect-video">
+        <iframe
+          className="absolute inset-0 h-full w-full"
+          src={`https://www.youtube-nocookie.com/embed/${videoId}?rel=0&modestbranding=1`}
+          title="Vidéo EleveAI – Robustesse et convergence"
+          loading="lazy"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowFullScreen
+        />
+      </div>
+    </div>
+  );
+}
+
+
 export default function AccueilPage() {
   const scrollTo = useCallback((id: string) => {
     const el = document.getElementById(id);
@@ -127,6 +146,7 @@ export default function AccueilPage() {
 {/* Notation IA */}
 <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
   <div className="flex flex-col md:flex-row gap-6 items-start">
+    <div>
     <Image
       src="/notationgpt.png"
       alt="Notation IA des prompts enseignants"
@@ -135,6 +155,9 @@ export default function AccueilPage() {
       className="rounded-xl border border-slate-200"
       priority
     />
+    <YouTubeEmbed videoId="wT3137i__H8?si=dGc6-_zJoyEjChDv" />
+    </div>
+
 
     <div className="space-y-5">
 
