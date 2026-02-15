@@ -10,7 +10,7 @@ type DevBannerProps = {
 };
 
 export default function DevBanner({
-  message = "Structuration avancée de prompts pédagogiques — Robustesse évaluée : 19,5 / 20",
+message = "Structuration avancée de prompts pédagogiques — Optimisation dynamique par Valeria (score en temps réel)",
   storageKey = "eleveai_dev_banner_closed_v2",
   className = "",
 }: DevBannerProps) {
