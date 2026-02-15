@@ -336,18 +336,21 @@ export default function OptimiseurClient() {
   return (
     <main className="min-h-screen bg-gradient-to-b from-sky-50 via-white to-slate-50 text-slate-900">
       <div className="mx-auto w-full max-w-5xl px-4 py-8 space-y-6">
-        <header className="space-y-2">
-          <p className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-100 text-xs font-semibold text-sky-900">
-            ✨ Valeria · Optimiseur de prompt (V1)
-          </p>
-          <h1 className="text-3xl font-extrabold text-[#0047B6]">
-            Scoring → Optimisation → Convergence
-          </h1>
-          <p className="text-sm text-slate-700 max-w-2xl">
-            Colle un prompt, Valeria l’évalue (/20) via une grille interne (v{RUBRIC_VERSION}),
-            puis l’améliore en boucle jusqu’à la cible (ou stop).
-          </p>
-        </header>
+<header className="space-y-2">
+  <p className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-100 text-xs font-semibold text-sky-900">
+    ✨ Valeria — Moteur intelligent d’optimisation itérative de prompts pédagogiques
+  </p>
+
+  <h1 className="text-3xl font-extrabold text-[#0047B6]">
+    Analyse rigoureuse → Optimisation itérative → Convergence mesurée
+  </h1>
+
+  <p className="text-sm text-slate-700 max-w-2xl">
+    Colle un prompt. Valeria l’évalue (/20) selon une grille scientifique (v{RUBRIC_VERSION}),
+    identifie les axes d’amélioration, puis ajuste itérativement jusqu’à convergence ou arrêt manuel.
+  </p>
+</header>
+
 
         {/* PARAMS */}
         <section className="bg-white border border-slate-200 rounded-2xl shadow-sm p-4 sm:p-5 space-y-4">
@@ -639,15 +642,25 @@ export default function OptimiseurClient() {
                 .slice(0, 10)
                 .map((h) => (
                   <div key={h.iter} className="rounded-xl border border-slate-200 bg-slate-50 p-3">
-                    <div className="flex items-center justify-between gap-2">
+                  <div className="flex items-center justify-between gap-2">
+                    <div>
                       <p className="text-xs font-semibold text-slate-800">
                         #{h.iter} — {h.note || "Itération"}
                       </p>
                       <p className="text-xs text-slate-700">
-                        Score :{" "}
-                        <b>{typeof h.score === "number" ? `${h.score.toFixed(1)}/20` : "—"}</b>
+                        Score : <b>{typeof h.score === "number" ? `${h.score.toFixed(1)}/20` : "—"}</b>
                       </p>
                     </div>
+
+                    <button
+                      type="button"
+                      onClick={() => copy(h.prompt)}
+                      className="px-2 py-1 text-[11px] font-semibold border rounded-md bg-white border-slate-300 hover:bg-slate-100"
+                    >
+                      📋 Copier
+                    </button>
+                  </div>
+
                     <p className="mt-2 text-[11px] text-slate-600 line-clamp-3 font-mono">
                       {h.prompt.replace(/\s+/g, " ").slice(0, 260)}
                       {h.prompt.length > 260 ? "…" : ""}
