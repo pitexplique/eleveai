@@ -85,6 +85,12 @@ const itemsApp: Item[] = useMemo(
   icon: <Users className="h-4 w-4" />,
 },
 {
+  href: "/optimiseur",
+  label: "Valeria",
+  description: "Optimiseurs Intelligent de Prompts",
+  icon: <Library className="h-4 w-4" />,
+},
+{
   href: "/espace-eleves",
   label: "Prompt Élèves",
   description: "Reprendre confiance. Gagner en énergie. Progresser.",
@@ -108,6 +114,7 @@ const itemsApp: Item[] = useMemo(
   description: "Explorer, réfléchir, progresser avec l’IA.",
   icon: <FlaskConical className="h-4 w-4" />,
 },
+/*
 {
   href: "/presets",
   label: "Presets officiels",
