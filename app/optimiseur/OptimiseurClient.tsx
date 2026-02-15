@@ -1,5 +1,4 @@
-// app/optimiseur/OtimiseurClient.tsx
-
+// app/optimiseur/OptimiseurClient.tsx
 "use client";
 
 import { useMemo, useRef, useState } from "react";
@@ -36,8 +35,14 @@ function clamp(n: number, a: number, b: number) {
   return Math.max(a, Math.min(b, n));
 }
 
+function formatTemp(t: number) {
+  // on évite les flottants chelous
+  return Math.round(t * 100) / 100;
+}
+
 export default function OptimiseurClient() {
   const [prompt, setPrompt] = useState("");
+
   const [targetScore, setTargetScore] = useState(DEFAULT_TARGET_SCORE);
   const [maxIters, setMaxIters] = useState(DEFAULT_MAX_ITERS);
 
@@ -54,73 +59,86 @@ export default function OptimiseurClient() {
   const [history, setHistory] = useState<Iteration[]>([]);
   const abortRef = useRef<AbortController | null>(null);
 
-  const scores = useMemo(
-    () => history.map((h) => (typeof h.score === "number" ? h.score : null)).filter((x): x is number => x !== null),
-    [history],
-  );
+  // 🔧 tes ajouts : choix modèle + temperature (pour IMPROVE)
+  const [model, setModel] = useState<"gpt-4o-mini" | "gpt-4o">("gpt-4o-mini");
+  const [temperatureImprove, setTemperatureImprove] = useState<number>(0);
+
+  const scores = useMemo(() => {
+    return history
+      .map((h) => (typeof h.score === "number" ? h.score : null))
+      .filter((x): x is number => x !== null);
+  }, [history]);
 
   const best = useMemo(() => {
     if (!scores.length) return null;
     return Math.max(...scores);
   }, [scores]);
 
-const scoreOnce = async (p: string, signal?: AbortSignal) => {
-  const res = await fetch("/api/optimiseur/score", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    signal,
-    body: JSON.stringify({ prompt: p }),
-  });
+  // --- API helpers (debug robuste: lecture text puis parse JSON) ---
 
-  // On lit en texte d'abord (debug robuste)
-  const text = await res.text();
-  let data: any = null;
+  const scoreOnce = async (p: string, signal?: AbortSignal) => {
+    const res = await fetch("/api/optimiseur/score", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      signal,
+      body: JSON.stringify({
+        prompt: p, 
+        // on force scoring stable (temp=0)
+        model,
+        temperature: 0,
+      }),
+    });
 
-  try {
-    data = JSON.parse(text);
-  } catch {
-    console.log("⚠️ Réponse non JSON brute (score):", text);
-  }
+    const text = await res.text();
+    let data: any = null;
 
-  if (!res.ok) {
-    console.log("❌ RAW SCORE:", text);
-    throw new Error(data?.error || "Erreur scoring.");
-  }
+    try {
+      data = JSON.parse(text);
+    } catch {
+      console.log("⚠️ Réponse non JSON brute (score):", text);
+    }
 
-  return data as ScoreReport;
-};
+    if (!res.ok) {
+      console.log("❌ RAW SCORE:", text);
+      throw new Error(data?.error || "Erreur scoring.");
+    }
 
+    return data as ScoreReport;
+  };
 
-const improveOnce = async (
-  p: string,
-  report: ScoreReport,
-  signal?: AbortSignal
-) => {
-  const res = await fetch("/api/optimiseur/improve", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    signal,
-    body: JSON.stringify({ prompt: p, scoreReport: report }),
-  });
+  const improveOnce = async (p: string, report: ScoreReport, signal?: AbortSignal) => {
+    const res = await fetch("/api/optimiseur/improve", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      signal,
+      body: JSON.stringify({
+        prompt: p,
+        scoreReport: report,
+        model,
+        temperature: formatTemp(temperatureImprove),
+      }),
+    });
 
-  // On lit en texte d'abord (plus robuste en debug)
-  const text = await res.text();
-  let data: any = null;
+    const text = await res.text();
+    let data: any = null;
 
-  try {
-    data = JSON.parse(text);
-  } catch {
-    console.log("⚠️ Réponse non JSON brute:", text);
-  }
+    try {
+      data = JSON.parse(text);
+    } catch {
+      console.log("⚠️ Réponse non JSON brute (improve):", text);
+    }
 
-  if (!res.ok) {
-    console.log("❌ RAW IMPROVE:", text);
-    throw new Error(data?.error || "Erreur improve.");
-  }
+    if (!res.ok) {
+      console.log("❌ RAW IMPROVE:", text);
+      // très utile si ton API renvoie { raw: "..."} en cas de JSON invalide
+      if (data?.raw) console.log("📦 RAW FIELD (improve):", data.raw);
+      throw new Error(data?.error || "Erreur improve.");
+    }
 
-  return data as { improvedPrompt: string; changes: string[] };
-};
+    return data as { improvedPrompt: string; changes: string[] };
+  };
 
+  // --- Controls ---
 
   const stop = () => {
     setStopped(true);
@@ -137,14 +155,23 @@ const improveOnce = async (
     setCurrentReport(null);
   };
 
+  // --- Actions ---
+
   const runScoreOnly = async () => {
+    const p = prompt.trim();
+    if (!p) {
+      setError("Colle un prompt avant de scorer.");
+      return;
+    }
+
     setError("");
     setStopped(false);
     setLoading(true);
+
     abortRef.current = new AbortController();
 
     try {
-      const report = await scoreOnce(prompt.trim(), abortRef.current.signal);
+      const report = await scoreOnce(p, abortRef.current.signal);
       setCurrentReport(report);
       setCurrentScore(report.score);
 
@@ -153,13 +180,15 @@ const improveOnce = async (
         {
           iter: h.length + 1,
           score: report.score,
-          prompt: prompt.trim(),
+          prompt: p,
           report,
           note: "Scoring",
         },
       ]);
     } catch (e: any) {
-      if (String(e?.name) !== "AbortError") setError(e?.message || "Erreur scoring.");
+      if (String(e?.name) !== "AbortError") {
+        setError(e?.message || "Erreur scoring.");
+      }
     } finally {
       setLoading(false);
     }
@@ -187,7 +216,7 @@ const improveOnce = async (
       for (let i = 1; i <= maxIters; i++) {
         if (ctrl.signal.aborted) break;
 
-        // 1) SCORE
+        // 1) SCORE (toujours temp=0)
         const report = await scoreOnce(p, ctrl.signal);
         setCurrentReport(report);
         setCurrentScore(report.score);
@@ -209,9 +238,7 @@ const improveOnce = async (
         }
 
         // stop condition
-        if (report.score >= targetScore) {
-          break;
-        }
+        if (report.score >= targetScore) break;
 
         // 2) IMPROVE (si toggle ON)
         if (!optimisationOn) break;
@@ -219,13 +246,16 @@ const improveOnce = async (
 
         const improved = await improveOnce(p, report, ctrl.signal);
 
-        // petit garde-fou
         const next = String(improved.improvedPrompt || "").trim();
         if (!next || next.length < 20) {
-          // si l'IA renvoie un truc vide, on stop et on garde best
           setHistory((h) => [
             ...h,
-            { iter: h.length + 1, prompt: bestPrompt, score: bestScore, note: "Improve invalide → stop" },
+            {
+              iter: h.length + 1,
+              prompt: bestPrompt,
+              score: bestScore,
+              note: "Improve invalide → stop",
+            },
           ]);
           break;
         }
@@ -233,10 +263,12 @@ const improveOnce = async (
         p = next;
       }
 
-      // Fin : on remet le meilleur prompt dans le champ
+      // Fin : remet le meilleur prompt dans le champ
       setPrompt(bestPrompt);
     } catch (e: any) {
-      if (String(e?.name) !== "AbortError") setError(e?.message || "Erreur optimisation.");
+      if (String(e?.name) !== "AbortError") {
+        setError(e?.message || "Erreur optimisation.");
+      }
     } finally {
       setLoading(false);
     }
@@ -250,7 +282,8 @@ const improveOnce = async (
     }
   };
 
-  // Courbe simple (SVG)
+  // --- Courbe simple (SVG) ---
+
   const curveSvg = useMemo(() => {
     if (!showCurve || scores.length < 2) return null;
 
@@ -307,7 +340,9 @@ const improveOnce = async (
           <p className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-100 text-xs font-semibold text-sky-900">
             ✨ Valeria · Optimiseur de prompt (V1)
           </p>
-          <h1 className="text-3xl font-extrabold text-[#0047B6]">Scoring → Optimisation → Convergence</h1>
+          <h1 className="text-3xl font-extrabold text-[#0047B6]">
+            Scoring → Optimisation → Convergence
+          </h1>
           <p className="text-sm text-slate-700 max-w-2xl">
             Colle un prompt, Valeria l’évalue (/20) via une grille interne (v{RUBRIC_VERSION}),
             puis l’améliore en boucle jusqu’à la cible (ou stop).
@@ -323,7 +358,9 @@ const improveOnce = async (
                 type="number"
                 step="0.5"
                 value={targetScore}
-                onChange={(e) => setTargetScore(clamp(Number(e.target.value || DEFAULT_TARGET_SCORE), 0, 20))}
+                onChange={(e) =>
+                  setTargetScore(clamp(Number(e.target.value || DEFAULT_TARGET_SCORE), 0, 20))
+                }
                 className="w-full border rounded-lg px-3 py-2 text-sm"
               />
               <p className="text-[11px] text-slate-500">Recommandé : 19.5</p>
@@ -350,7 +387,9 @@ const improveOnce = async (
                   type="button"
                   onClick={() => setOptimisationOn((v) => !v)}
                   className={`px-3 py-2 rounded-lg text-xs font-semibold border ${
-                    optimisationOn ? "bg-emerald-50 border-emerald-200 text-emerald-900" : "bg-slate-50 border-slate-200 text-slate-700"
+                    optimisationOn
+                      ? "bg-emerald-50 border-emerald-200 text-emerald-900"
+                      : "bg-slate-50 border-slate-200 text-slate-700"
                   }`}
                 >
                   {optimisationOn ? "✅ Optimisation ON" : "⛔ Optimisation OFF"}
@@ -360,7 +399,9 @@ const improveOnce = async (
                   type="button"
                   onClick={() => setShowCurve((v) => !v)}
                   className={`px-3 py-2 rounded-lg text-xs font-semibold border ${
-                    showCurve ? "bg-sky-50 border-sky-200 text-sky-900" : "bg-slate-50 border-slate-200 text-slate-700"
+                    showCurve
+                      ? "bg-sky-50 border-sky-200 text-sky-900"
+                      : "bg-slate-50 border-slate-200 text-slate-700"
                   }`}
                 >
                   {showCurve ? "📈 Courbe ON" : "📉 Courbe OFF"}
@@ -376,8 +417,59 @@ const improveOnce = async (
               </div>
 
               <p className="text-[11px] text-slate-500">
-                Scoring à température 0. Stop possible à tout moment.
+                Scoring à température 0 (stable). Improve réglable (tests). Stop possible à tout moment.
               </p>
+            </div>
+          </div>
+
+          {/* NEW: Model + Temperature controls */}
+          <div className="grid gap-3 sm:grid-cols-3 pt-2 border-t border-slate-100">
+            <div className="space-y-1">
+              <label className="text-xs font-semibold text-slate-600">Modèle</label>
+              <div className="flex gap-2">
+                <button
+                  type="button"
+                  onClick={() => setModel("gpt-4o-mini")}
+                  className={`px-3 py-2 rounded-lg text-xs font-semibold border ${
+                    model === "gpt-4o-mini"
+                      ? "bg-slate-900 text-white border-slate-900"
+                      : "bg-white text-slate-800 border-slate-300 hover:bg-slate-50"
+                  }`}
+                >
+                  gpt-4o-mini
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setModel("gpt-4o")}
+                  className={`px-3 py-2 rounded-lg text-xs font-semibold border ${
+                    model === "gpt-4o"
+                      ? "bg-slate-900 text-white border-slate-900"
+                      : "bg-white text-slate-800 border-slate-300 hover:bg-slate-50"
+                  }`}
+                >
+                  gpt-4o
+                </button>
+              </div>
+              <p className="text-[11px] text-slate-500">S’applique à Score + Improve.</p>
+            </div>
+
+            <div className="space-y-1 sm:col-span-2">
+              <label className="text-xs font-semibold text-slate-600">
+                Température (Improve) : <span className="font-bold">{formatTemp(temperatureImprove)}</span>
+              </label>
+              <input
+                type="range"
+                min={0}
+                max={0.8}
+                step={0.05}
+                value={temperatureImprove}
+                onChange={(e) => setTemperatureImprove(Number(e.target.value))}
+                className="w-full"
+              />
+              <div className="flex justify-between text-[11px] text-slate-500">
+                <span>0 (déterministe)</span>
+                <span>0.8 (plus créatif)</span>
+              </div>
             </div>
           </div>
         </section>
@@ -391,7 +483,9 @@ const improveOnce = async (
               onClick={() => copy(prompt)}
               disabled={!prompt.trim()}
               className={`px-3 py-2 rounded-lg text-xs font-semibold border ${
-                prompt.trim() ? "bg-slate-900 text-white border-slate-900" : "bg-slate-100 text-slate-400 border-slate-200"
+                prompt.trim()
+                  ? "bg-slate-900 text-white border-slate-900"
+                  : "bg-slate-100 text-slate-400 border-slate-200"
               }`}
             >
               📋 Copier
@@ -411,7 +505,9 @@ const improveOnce = async (
               onClick={runScoreOnly}
               disabled={loading || !prompt.trim()}
               className={`px-4 py-2 rounded-lg text-sm font-semibold ${
-                loading || !prompt.trim() ? "bg-slate-100 text-slate-400" : "bg-white border border-slate-300 hover:bg-slate-50"
+                loading || !prompt.trim()
+                  ? "bg-slate-100 text-slate-400"
+                  : "bg-white border border-slate-300 hover:bg-slate-50"
               }`}
             >
               🧪 Scorer
@@ -422,7 +518,9 @@ const improveOnce = async (
               onClick={runOptimisation}
               disabled={loading || !prompt.trim()}
               className={`px-4 py-2 rounded-lg text-sm font-semibold ${
-                loading || !prompt.trim() ? "bg-sky-100 text-sky-500" : "bg-[#0047B6] text-white hover:bg-[#003894]"
+                loading || !prompt.trim()
+                  ? "bg-sky-100 text-sky-500"
+                  : "bg-[#0047B6] text-white hover:bg-[#003894]"
               }`}
             >
               ✨ Lancer Valeria
@@ -433,7 +531,9 @@ const improveOnce = async (
               onClick={stop}
               disabled={!loading}
               className={`px-4 py-2 rounded-lg text-sm font-semibold ${
-                !loading ? "bg-slate-100 text-slate-400" : "bg-amber-100 text-amber-900 hover:bg-amber-200"
+                !loading
+                  ? "bg-slate-100 text-slate-400"
+                  : "bg-amber-100 text-amber-900 hover:bg-amber-200"
               }`}
             >
               ⏹ Stop
@@ -480,6 +580,9 @@ const improveOnce = async (
                 <span className="text-base font-semibold text-slate-600"> /20</span>
               </p>
               <p className="text-[11px] text-slate-500">Cible : {targetScore.toFixed(1)}</p>
+              <p className="text-[11px] text-slate-500">
+                Modèle : <b>{model}</b> • Improve temp : <b>{formatTemp(temperatureImprove)}</b>
+              </p>
             </div>
 
             <div className="rounded-xl border border-slate-200 bg-slate-50 p-3">
@@ -501,7 +604,9 @@ const improveOnce = async (
               <p className="text-xs text-slate-600">Conseils clés</p>
               {currentReport?.fixes?.length ? (
                 <ul className="mt-2 text-[12px] text-slate-800 list-disc pl-4 space-y-1">
-                  {currentReport.fixes.slice(0, 4).map((x, i) => <li key={i}>{x}</li>)}
+                  {currentReport.fixes.slice(0, 4).map((x, i) => (
+                    <li key={i}>{x}</li>
+                  ))}
                 </ul>
               ) : (
                 <p className="mt-2 text-[12px] text-slate-500">—</p>
@@ -513,9 +618,7 @@ const improveOnce = async (
             <div className="rounded-xl border border-slate-200 bg-white p-3">
               <p className="text-xs font-semibold text-slate-700 mb-2">📈 Courbe de convergence</p>
               <div className="text-slate-900">{curveSvg}</div>
-              <p className="mt-2 text-[11px] text-slate-500">
-                Ligne pointillée = score cible.
-              </p>
+              <p className="mt-2 text-[11px] text-slate-500">Ligne pointillée = score cible.</p>
             </div>
           )}
         </section>
@@ -525,24 +628,32 @@ const improveOnce = async (
           <h2 className="text-lg font-bold text-[#0047B6]">3) Historique</h2>
 
           {history.length === 0 ? (
-            <p className="text-sm text-slate-600">Aucun run. Clique sur “Scorer” ou “Lancer Valeria”.</p>
+            <p className="text-sm text-slate-600">
+              Aucun run. Clique sur “Scorer” ou “Lancer Valeria”.
+            </p>
           ) : (
             <div className="space-y-2">
-              {history.slice().reverse().slice(0, 10).map((h) => (
-                <div key={h.iter} className="rounded-xl border border-slate-200 bg-slate-50 p-3">
-                  <div className="flex items-center justify-between gap-2">
-                    <p className="text-xs font-semibold text-slate-800">
-                      #{h.iter} — {h.note || "Itération"}
-                    </p>
-                    <p className="text-xs text-slate-700">
-                      Score : <b>{typeof h.score === "number" ? `${h.score.toFixed(1)}/20` : "—"}</b>
+              {history
+                .slice()
+                .reverse()
+                .slice(0, 10)
+                .map((h) => (
+                  <div key={h.iter} className="rounded-xl border border-slate-200 bg-slate-50 p-3">
+                    <div className="flex items-center justify-between gap-2">
+                      <p className="text-xs font-semibold text-slate-800">
+                        #{h.iter} — {h.note || "Itération"}
+                      </p>
+                      <p className="text-xs text-slate-700">
+                        Score :{" "}
+                        <b>{typeof h.score === "number" ? `${h.score.toFixed(1)}/20` : "—"}</b>
+                      </p>
+                    </div>
+                    <p className="mt-2 text-[11px] text-slate-600 line-clamp-3 font-mono">
+                      {h.prompt.replace(/\s+/g, " ").slice(0, 260)}
+                      {h.prompt.length > 260 ? "…" : ""}
                     </p>
                   </div>
-                  <p className="mt-2 text-[11px] text-slate-600 line-clamp-3 font-mono">
-                    {h.prompt.replace(/\s+/g, " ").slice(0, 260)}{h.prompt.length > 260 ? "…" : ""}
-                  </p>
-                </div>
-              ))}
+                ))}
               <p className="text-[11px] text-slate-500">Affichage : 10 derniers événements.</p>
             </div>
           )}
@@ -551,3 +662,4 @@ const improveOnce = async (
     </main>
   );
 }
+

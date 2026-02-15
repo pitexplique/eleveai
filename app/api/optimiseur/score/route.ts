@@ -1,7 +1,11 @@
 // app/api/optimiseur/score/route.ts
 import { NextResponse } from "next/server";
 import { openai } from "@/lib/openai";
-import { PROMPT_RUBRIC_V1, RUBRIC_VERSION, DEFAULT_MODEL_SCORE } from "@/lib/promptRubric";
+import {
+  PROMPT_RUBRIC_V1,
+  RUBRIC_VERSION,
+  DEFAULT_MODEL_SCORE,
+} from "@/lib/promptRubric";
 
 type ScoreResponse = {
   rubricVersion: number;
@@ -21,39 +25,64 @@ type ScoreResponse = {
 function safeJsonParse<T>(s: string): T | null {
   try {
     return JSON.parse(s) as T;
-  } catch {}
-
-  // fallback: enlève ```json ... ```
-  const cleaned = s
-    .replace(/^```(?:json)?\s*/i, "")
-    .replace(/\s*```$/i, "")
-    .trim();
-
-  try {
-    return JSON.parse(cleaned) as T;
-  } catch {}
-
-  // fallback 2: extrait le premier {...}
-  const m = cleaned.match(/\{[\s\S]*\}/);
-  if (m) {
-    try {
-      return JSON.parse(m[0]) as T;
-    } catch {}
+  } catch {
+    return null;
   }
-  return null;
 }
 
+function isFiniteNumber(n: any) {
+  return typeof n === "number" && Number.isFinite(n);
+}
+
+function clamp(n: number, a: number, b: number) {
+  return Math.max(a, Math.min(b, n));
+}
+
+function validateScoreResponse(x: any): x is ScoreResponse {
+  if (!x || typeof x !== "object") return false;
+  if (!isFiniteNumber(x.score)) return false;
+  if (!x.breakdown || typeof x.breakdown !== "object") return false;
+
+  const b = x.breakdown;
+  const okBreakdown =
+    isFiniteNumber(b.clarity) &&
+    isFiniteNumber(b.context) &&
+    isFiniteNumber(b.compliance) &&
+    isFiniteNumber(b.structure) &&
+    isFiniteNumber(b.robustness);
+
+  if (!okBreakdown) return false;
+
+  if (!Array.isArray(x.strengths) || !Array.isArray(x.fixes) || !Array.isArray(x.risks)) {
+    return false;
+  }
+
+  return true;
+}
+
+// ✅ Sécurise le choix du modèle (anti “n’importe quoi depuis le client”)
+function pickModel(m: unknown) {
+  return m === "gpt-4o" || m === "gpt-4o-mini" ? m : null;
+}
 
 export async function POST(req: Request) {
   try {
     const body = await req.json().catch(() => ({}));
+
     const prompt = String(body?.prompt || "").trim();
+
+    // ✅ NEW: modèle pilotable depuis le client (allowlist)
+    const model = pickModel(body?.model) ?? DEFAULT_MODEL_SCORE;
+
+    // ✅ V1 stable: scoring toujours à 0
+    const temperature = 0;
 
     if (!prompt) {
       return NextResponse.json({ error: "Prompt manquant." }, { status: 400 });
     }
 
     const system = `Tu renvoies UNIQUEMENT du JSON valide, sans texte autour.`;
+
     const user = `
 ${PROMPT_RUBRIC_V1}
 
@@ -84,27 +113,47 @@ Contraintes :
 `;
 
     const completion = await openai.chat.completions.create({
-      model: DEFAULT_MODEL_SCORE,
-      temperature: 0,
-      response_format: { type: "json_object" },
+      model,
+      temperature,
+      response_format: { type: "json_object" }, // ✅ force JSON
       messages: [
         { role: "system", content: system },
         { role: "user", content: user },
       ],
     });
 
-
     const content = completion.choices?.[0]?.message?.content?.trim() || "";
     const parsed = safeJsonParse<ScoreResponse>(content);
 
-    if (!parsed || typeof parsed.score !== "number") {
+    if (!validateScoreResponse(parsed)) {
       return NextResponse.json(
-        { error: "Réponse scoring invalide (JSON).", raw: content },
+        {
+          error: "Réponse scoring invalide (JSON).",
+          raw: content,
+          used: { model, temperature },
+        },
         { status: 500 },
       );
     }
 
-    return NextResponse.json(parsed);
+    // ✅ garde-fous (clamp + tailles max)
+    const fixed: ScoreResponse = {
+      ...parsed,
+      rubricVersion: RUBRIC_VERSION,
+      score: clamp(parsed.score, 0, 20),
+      breakdown: {
+        clarity: clamp(parsed.breakdown.clarity, 0, 4),
+        context: clamp(parsed.breakdown.context, 0, 4),
+        compliance: clamp(parsed.breakdown.compliance, 0, 4),
+        structure: clamp(parsed.breakdown.structure, 0, 4),
+        robustness: clamp(parsed.breakdown.robustness, 0, 4),
+      },
+      strengths: parsed.strengths.slice(0, 12),
+      fixes: parsed.fixes.slice(0, 12),
+      risks: parsed.risks.slice(0, 12),
+    };
+
+    return NextResponse.json(fixed);
   } catch (e: any) {
     return NextResponse.json(
       { error: e?.message || "Erreur serveur scoring." },
@@ -112,3 +161,4 @@ Contraintes :
     );
   }
 }
+

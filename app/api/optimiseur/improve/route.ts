@@ -16,11 +16,32 @@ function safeJsonParse<T>(s: string): T | null {
   }
 }
 
+function clamp(n: number, a: number, b: number) {
+  return Math.max(a, Math.min(b, n));
+}
+
+// ✅ Sécurise le choix du modèle (anti “n’importe quoi depuis le client”)
+function pickModel(m: unknown) {
+  return m === "gpt-4o" || m === "gpt-4o-mini" ? m : null;
+}
+
+// ✅ Température raisonnable pour improve (0 → 1)
+function pickTemperature(t: unknown, def = 0) {
+  const n = Number(t);
+  if (!Number.isFinite(n)) return def;
+  return clamp(n, 0, 1);
+}
+
 export async function POST(req: Request) {
   try {
     const body = await req.json().catch(() => ({}));
+
     const prompt = String(body?.prompt || "").trim();
     const scoreReport = body?.scoreReport ?? null;
+
+    // ✅ NEW: paramètres pilotés par la page (avec allowlist + clamp)
+    const model = pickModel(body?.model) ?? DEFAULT_MODEL_IMPROVE;
+    const temperature = pickTemperature(body?.temperature, 0);
 
     if (!prompt) {
       return NextResponse.json({ error: "Prompt manquant." }, { status: 400 });
@@ -55,22 +76,25 @@ FORMAT JSON OBLIGATOIRE :
 `;
 
     const completion = await openai.chat.completions.create({
-      model: DEFAULT_MODEL_IMPROVE,
-      temperature: 0,
-      response_format: { type: "json_object" },
+      model,
+      temperature, // ✅ pilotable (0, 0.1, 0.2…)
+      response_format: { type: "json_object" }, // ✅ réduit fortement les réponses non-JSON
       messages: [
         { role: "system", content: system },
         { role: "user", content: user },
       ],
     });
 
-
     const content = completion.choices?.[0]?.message?.content?.trim() || "";
     const parsed = safeJsonParse<ImproveResponse>(content);
 
     if (!parsed?.improvedPrompt) {
       return NextResponse.json(
-        { error: "Réponse improve invalide (JSON).", raw: content },
+        {
+          error: "Réponse improve invalide (JSON).",
+          raw: content,
+          used: { model, temperature },
+        },
         { status: 500 },
       );
     }
@@ -83,3 +107,5 @@ FORMAT JSON OBLIGATOIRE :
     );
   }
 }
+
+
