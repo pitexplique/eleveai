@@ -1,7 +1,7 @@
 // app/api/optimiseur/improve/route.ts
 import { NextResponse } from "next/server";
 import { openai } from "@/lib/openai";
-import { PROMPT_RUBRIC_V1, DEFAULT_MODEL_IMPROVE } from "@/lib/promptRubric";
+import { PROMPT_RUBRIC_V2, DEFAULT_MODEL_IMPROVE } from "@/lib/promptRubric";
 
 type ImproveResponse = {
   improvedPrompt: string;
@@ -52,7 +52,7 @@ export async function POST(req: Request) {
     const user = `
 Tu es un “éditeur de prompt” (optimisation). Tu dois AMÉLIORER le prompt fourni pour maximiser la qualité selon cette grille :
 
-${PROMPT_RUBRIC_V1}
+${PROMPT_RUBRIC_V2}
 
 Règles :
 - Ne change pas le fond pédagogique demandé : clarifie, structure, sécurise.

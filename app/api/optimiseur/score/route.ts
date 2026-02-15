@@ -2,7 +2,7 @@
 import { NextResponse } from "next/server";
 import { openai } from "@/lib/openai";
 import {
-  PROMPT_RUBRIC_V1,
+  PROMPT_RUBRIC_V2,
   RUBRIC_VERSION,
   DEFAULT_MODEL_SCORE,
 } from "@/lib/promptRubric";
@@ -84,7 +84,7 @@ export async function POST(req: Request) {
     const system = `Tu renvoies UNIQUEMENT du JSON valide, sans texte autour.`;
 
     const user = `
-${PROMPT_RUBRIC_V1}
+${PROMPT_RUBRIC_V2}
 
 Évalue ce prompt (délimité) :
 
