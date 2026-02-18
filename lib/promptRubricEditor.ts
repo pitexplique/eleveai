@@ -1,15 +1,18 @@
 // lib/promptRubricEditor.ts
 
-import { PROMPT_RUBRIC_V2, RUBRIC_VERSION } from "@/lib/promptRubric";
+import {
+  RUBRIC_VERSION,
+  getPromptRubricEditor,
+  PromptType,
+} from "@/lib/promptRubric";
 
 /**
- * ✅ Rubrique "EDITOR" (optimisation)
- * Objectif : être cohérent avec l’endpoint /improve.
- * On enlève l’instruction contradictoire "Ne JAMAIS fournir de prompt amélioré".
+ * Wrapper simple pour exposer une fonction stable côté API.
+ * On renvoie une rubrique typée selon le type détecté.
  */
-export const PROMPT_RUBRIC_EDITOR_V2 = PROMPT_RUBRIC_V2.replace(
-  /- Ne JAMAIS fournir de “prompt amélioré”\.\s*/g,
-  ""
-).trim();
+
+export function PROMPT_RUBRIC_EDITOR_V2(type: PromptType) {
+  return getPromptRubricEditor(type);
+}
 
 export { RUBRIC_VERSION };
