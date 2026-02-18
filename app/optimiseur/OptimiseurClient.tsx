@@ -328,17 +328,20 @@ export default function OptimiseurClient() {
       <div className="mx-auto w-full max-w-5xl px-4 py-8 space-y-6">
         <header className="space-y-2">
           <p className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-100 text-xs font-semibold text-sky-900">
-            ✨ Valeria — Moteur intelligent d’optimisation itérative de prompts pédagogiques
+            ✨ Valeria — Optimiseur de prompts (notation + améliorations)
           </p>
 
+
           <h1 className="text-3xl font-extrabold text-[#0047B6]">
-            Analyse rigoureuse → Optimisation itérative → Convergence mesurée
+            Ton prompt devient plus clair, plus solide, plus conforme
           </h1>
 
           <p className="text-sm text-slate-700 max-w-2xl">
-            Colle un prompt. Valeria l’évalue (/20) selon une grille scientifique (v{RUBRIC_VERSION}),
-            identifie les axes d’amélioration, puis ajuste itérativement jusqu’à convergence ou arrêt manuel.
+            Valeria évalue ton prompt sur 20 (grille v{RUBRIC_VERSION}), repère les points faibles,
+            puis l’améliore étape par étape jusqu’au score cible (ou arrêt manuel).
+            Résultat : un prompt fiable et directement exploitable en classe.
           </p>
+
         </header>
 
         {/* PARAMS */}
