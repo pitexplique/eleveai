@@ -238,7 +238,7 @@ export default function AccueilPage() {
                   Exemple : clarification d’une demande + génération d’une ressource plus stable.
                 </p>
                 <div className="mt-3">
-                  <YouTubeEmbed videoId="wT3137i__H8" />
+                  <YouTubeEmbed videoId="ykRrez0CVN0" />
                 </div>
               </div>
 
@@ -246,7 +246,7 @@ export default function AccueilPage() {
                 <p className="text-xs uppercase tracking-wider text-slate-500">Pour qui ?</p>
                 <ul className="mt-3 space-y-2 text-sm text-slate-700">
                   <li>👩‍🏫 Enseignants : séance, évaluation, différenciation, corrigés</li>
-                  <li>🎒 Élèves : cadre clair (apprendre sans tricher)</li>
+                  <li>🎒 Élèves : cadre clair (apprendre sans tricher) - Gratuit</li>
                   <li>👨‍👩‍👧 Parents : accompagnement non stigmatisant</li>
                   <li>🏫 Établissements : cadre commun et rassurant</li>
                 </ul>
