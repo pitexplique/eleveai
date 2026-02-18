@@ -7,7 +7,6 @@ import React, { useMemo } from "react";
 import {
   ChevronLeft,
   ChevronRight,
-  LayoutDashboard,
   Users,
   GraduationCap,
   UsersRound,
@@ -18,14 +17,9 @@ import {
   LogOut,
   School,
   Building2,
-  Shield,
-  HardHat,
-  Accessibility,
-  MessageCircle,
-  HeartHandshake,
-  MessageSquareText,
-  Library 
-
+  Mail,
+  Library,
+  BadgeCheck,
 } from "lucide-react";
 
 type SidebarProps = {
@@ -39,7 +33,7 @@ type SidebarProps = {
 type Item = {
   href: string;
   label: string;
-  description?: string; // ✅ une ligne sous le libellé
+  description?: string;
   icon: React.ReactNode;
 };
 
@@ -48,7 +42,6 @@ function isActive(pathname: string, href: string) {
 }
 
 function isLoggedFromAccess(access: any) {
-  // ✅ robuste (mock / supabase / futur)
   return Boolean(
     access?.isLoggedIn ||
       access?.userEmail ||
@@ -71,93 +64,81 @@ export default function Sidebar({
   const pathname = usePathname();
   const isLoggedIn = isLoggedFromAccess(access);
 
-  /* ===============================
-     NAVIGATION APP UNIQUEMENT
-  =============================== */
+  /**
+   * NAV : alignée “Éducation + Entreprise”
+   * - Valeria en 1er (méthode / score / optimisation)
+   * - espaces : Profs / Élèves / Parents / École / Entreprise / Atelier-IA
+   * - liens utiles : Contact
+   */
+  const itemsApp: Item[] = useMemo(
+    () => [
+      {
+        href: "/optimiseur",
+        label: "Valeria (score /20)",
+        description: "Clarifier • sécuriser • optimiser (éducation & entreprise).",
+        icon: <BadgeCheck className="h-4 w-4" />,
+      },
 
-const itemsApp: Item[] = useMemo(
-  () => [
+      // --- ÉDUCATION ---
+      {
+        href: "/espace-profs",
+        label: "Espace Profs",
+        description: "Séances • évaluations • différenciation • corrigés.",
+        icon: <Users className="h-4 w-4" />,
+      },
+      {
+        href: "/espace-eleves",
+        label: "Espace Élèves",
+        description: "Apprendre sans tricher : méthode, traces, progression.",
+        icon: <GraduationCap className="h-4 w-4" />,
+      },
+      {
+        href: "/espace-parents",
+        label: "Espace Parents",
+        description: "Aider sans faire à la place : rassurer, cadrer, guider.",
+        icon: <UsersRound className="h-4 w-4" />,
+      },
+      {
+        href: "/espace-ecoles",
+        label: "Espace École",
+        description: "Cadre commun : cohérence, exigences, repères.",
+        icon: <School className="h-4 w-4" />,
+      },
 
-{
-  href: "/espace-profs",
-  label: "Prompt Profs",
-  description: "Créer des séances qui donnent envie d’enseigner.",
-  icon: <Users className="h-4 w-4" />,
-},
-{
-  href: "/optimiseur",
-  label: "Valeria",
-  description: "Optimiseurs Intelligent de Prompts",
-  icon: <Library className="h-4 w-4" />,
-},
-{
-  href: "/espace-eleves",
-  label: "Prompt Élèves",
-  description: "Reprendre confiance. Gagner en énergie. Progresser.",
-  icon: <GraduationCap className="h-4 w-4" />,
-},
-{
-  href: "/espace-parents",
-  label: "Prompt Parents",
-  description: "Aider sans faire à la place. Rassurer. Encourager.",
-  icon: <UsersRound className="h-4 w-4" />,
-},
-{
-  href: "/espace-ecoles/",
-  label: "Prompt École",
-  description: "Un cadre clair pour une équipe sereine.",
-  icon: <School className="h-4 w-4" />,
-},
-{
-  href: "/espace-atelier-IA",
-  label: "Prompt Atelier-IA",
-  description: "Explorer, réfléchir, progresser avec l’IA.",
-  icon: <FlaskConical className="h-4 w-4" />,
-},
-/*
-{
-  href: "/presets",
-  label: "Presets officiels",
-  description: "Bibliothèque pédagogique",
-  icon: <Library className="h-4 w-4" />,
-},
+      // --- ENTREPRISES ---
+      {
+        href: "/valeria-consulting",
+        label: "Espace Entreprises",
+        description: "Formation • procédures • qualité • checklists mesurables.",
+        icon: <Building2 className="h-4 w-4" />,
+      },
 
+      // --- ATELIER ---
+      {
+        href: "/espace-atelier-IA",
+        label: "Atelier-IA",
+        description: "Explorer, réfléchir, progresser (cadre encadré).",
+        icon: <FlaskConical className="h-4 w-4" />,
+      },
 
-/*
-{
-  href: "/espace-colleges/espace-administration",
-  label: "Prompt Administration",
-  description: "Gagner du temps. Décider sereinement.",
-  icon: <Building2 className="h-4 w-4" />,
-},
-{
-  href: "/espace-colleges/espace-vie-scolaire",
-  label: "Prompt Vie scolaire",
-  description: "Écouter. Apaiser. Accompagner les élèves.",
-  icon: <HeartHandshake className="h-4 w-4" />,
-},
-{
-  href: "/espace-colleges/espace-personnels",
-  label: "Personnel d’entretien",
-  description: "Travailler efficacement, en sécurité et reconnu.",
-  icon: <HardHat className="h-4 w-4" />,
-},
-{
-  href: "/espace-colleges/espace-aesh",
-  label: "Prompt AESH",
-  description: "Inclure vraiment. Adapter. Faire réussir.",
-  icon: <Accessibility className="h-4 w-4" />,
-}, */
+      // --- RESSOURCES / CONTACT ---
+      // (garde “presets” pour plus tard si tu veux)
+      // {
+      //   href: "/presets",
+      //   label: "Bibliothèque",
+      //   description: "Presets & modèles (bientôt).",
+      //   icon: <Library className="h-4 w-4" />,
+      // },
+      {
+        href: "/contact",
+        label: "Contact",
+        description: "EleveAI & Valeria Consulting.",
+        icon: <Mail className="h-4 w-4" />,
+      },
+    ],
+    [],
+  );
 
-  ],
-  [],
-);
-
-
-
-  /* ===============================
-     FIXED DESKTOP (hauteur parfaite)
-  =============================== */
   const wrapperClass =
     variant === "mobile"
       ? "h-full w-full"
@@ -179,9 +160,7 @@ const itemsApp: Item[] = useMemo(
         "overflow-hidden",
       ].join(" ")}
     >
-      {/* ===============================
-         HEADER SIDEBAR
-      =============================== */}
+      {/* HEADER */}
       <div className="flex items-center justify-between px-3 py-2 border-b border-slate-800">
         <span
           className={[
@@ -209,9 +188,7 @@ const itemsApp: Item[] = useMemo(
         )}
       </div>
 
-      {/* ===============================
-         NAVIGATION PRINCIPALE
-      =============================== */}
+      {/* NAV */}
       <nav className="flex-1 min-h-0 px-2 py-3 space-y-1 overflow-auto">
         {itemsApp.map((item) => (
           <SideItem
@@ -227,9 +204,7 @@ const itemsApp: Item[] = useMemo(
         ))}
       </nav>
 
-      {/* ===============================
-         FOOTER — AUTH (collé en bas)
-      =============================== */}
+      {/* FOOTER AUTH */}
       <div className="mt-auto border-t border-slate-800 p-2 space-y-1">
         {!isLoggedIn ? (
           <>
@@ -289,10 +264,7 @@ const itemsApp: Item[] = useMemo(
   );
 }
 
-/* =====================================================
-   ITEM
-===================================================== */
-
+/* ITEM */
 function SideItem({
   href,
   label,
@@ -351,3 +323,4 @@ function SideItem({
     </Link>
   );
 }
+
