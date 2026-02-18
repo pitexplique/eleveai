@@ -122,25 +122,37 @@ export default function AccueilPage() {
 
         <div className="relative mx-auto max-w-6xl px-4 py-16 sm:py-20">
           <div className="mx-auto max-w-4xl text-center">
-            <p className="inline-flex items-center gap-2 rounded-full bg-slate-900 px-3 py-1 text-xs font-semibold text-white">
-              IA pédagogique encadrée • BO / Éduscol • anti-triche & traces
+            {/* ✅ Public + Privé */}
+            <p className="inline-flex flex-wrap items-center justify-center gap-2 rounded-full bg-slate-900 px-3 py-1 text-xs font-semibold text-white">
+              IA encadrée • Éducation & Formation • Secteur public & privé • conformité & critères mesurables
             </p>
 
             <h1 className="mt-5 text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-slate-900">
-              Clarifiez votre séance avec Valeria.
+              Clarifiez. Structurez. Optimisez.
               <br className="hidden sm:block" />
-              Générez une ressource exploitable.
+              Valeria transforme une idée en ressource exploitable.
             </h1>
 
             <h2 className="mt-4 text-lg sm:text-xl font-semibold text-blue-600">
-              EleveAI aide les enseignants à structurer leurs objectifs avant de générer (toutes matières).
+              EleveAI aide à formuler des objectifs testables, puis à générer des ressources robustes
+              — école, formation, entreprise.
             </h2>
 
             <p className="mt-5 text-sm sm:text-base text-slate-700 leading-relaxed">
-              Vous partez d’une idée (cours, séance, évaluation). Valeria vous aide à préciser objectifs,
-              trace attendue et critères de réussite. Ensuite, EleveAI génère une ressource claire, cohérente
-              et prête à utiliser.
+              Vous partez d’une demande (séance, évaluation, séquence, formation interne, procédure).
+              Valeria clarifie le type, les objectifs, la trace attendue et les critères de réussite.
+              Ensuite, EleveAI génère une ressource claire, cohérente et prête à utiliser.
             </p>
+
+            {/* ✅ Signature premium */}
+            <div className="mt-6 flex flex-col items-center gap-1">
+              <p className="text-sm font-extrabold text-slate-900">
+                Frédéric Lacoste — Consultant IA
+              </p>
+              <p className="text-sm text-slate-700">
+                Optimisation mesurable des pratiques pédagogiques par itération contrôlée
+              </p>
+            </div>
 
             {/* CTA inscription + valeria */}
             <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
@@ -155,7 +167,7 @@ export default function AccueilPage() {
                 href="/optimiseur"
                 className="inline-flex w-full sm:w-auto items-center justify-center rounded-xl border border-slate-300 bg-white px-6 py-3 text-sm font-extrabold text-slate-900 hover:bg-slate-50 transition"
               >
-                Clarifier ma séance (Valeria) →
+                Clarifier / Optimiser (Valeria) →
               </Link>
 
               <button
@@ -167,17 +179,54 @@ export default function AccueilPage() {
               </button>
             </div>
 
+            {/* ✅ Flow “test” ultra clair */}
+            <div className="mt-6 mx-auto max-w-2xl rounded-2xl border border-slate-200 bg-white p-4 text-left shadow-sm">
+              <p className="text-xs font-extrabold text-slate-900 uppercase tracking-wider">
+                Test rapide (2 étapes)
+              </p>
+              <div className="mt-2 grid gap-2 sm:grid-cols-2 text-sm text-slate-700">
+                <div className="rounded-xl bg-slate-50 p-3 border border-slate-200">
+                  <p className="font-extrabold text-slate-900">1) Générer</p>
+                  <p>Créer une ressource (éducation/formation) dans Espace Profs.</p>
+                  <Link
+                    href="/espace-profs"
+                    className="mt-2 inline-block text-blue-600 font-semibold"
+                  >
+                    Ouvrir Espace Profs →
+                  </Link>
+                </div>
+                <div className="rounded-xl bg-slate-50 p-3 border border-slate-200">
+                  <p className="font-extrabold text-slate-900">2) Optimiser</p>
+                  <p>Coller dans Valéria pour clarifier le type et viser 20/20.</p>
+                  <Link
+                    href="/optimiseur"
+                    className="mt-2 inline-block text-blue-600 font-semibold"
+                  >
+                    Ouvrir Valéria →
+                  </Link>
+                </div>
+              </div>
+              <button
+                type="button"
+                onClick={() => scrollTo("demo")}
+                className="mt-3 inline-flex items-center justify-center rounded-xl bg-slate-900 px-4 py-2 text-sm font-extrabold text-white hover:bg-slate-800 transition"
+              >
+                Voir la démo vidéo →
+              </button>
+            </div>
+
             {/* Chips */}
             <div className="mt-8 flex flex-wrap justify-center gap-2">
               <Chip label="👩‍🏫 Profs" onClick={() => scrollTo("profs")} />
               <Chip label="🎒 Élèves" onClick={() => scrollTo("eleves")} />
               <Chip label="👨‍👩‍👧 Parents" onClick={() => scrollTo("parents")} />
               <Chip label="🏫 École" onClick={() => scrollTo("ecole")} />
+              <Chip label="🏭 Entreprises" onClick={() => scrollTo("entreprises")} />
             </div>
 
             <p className="mt-4 text-xs text-slate-600">
-              Objectifs → trace attendue → critères de réussite → différenciation :
-              l’IA structure, l’enseignant décide.
+              Objectifs → trace attendue → critères mesurables → contraintes :
+              l’IA structure, vous décidez.
             </p>
           </div>
         </div>
@@ -190,7 +239,7 @@ export default function AccueilPage() {
           <div className="flex flex-col lg:flex-row gap-8 items-start">
             <div className="w-full lg:w-[52%] space-y-3">
               <div className="inline-flex items-center gap-2 rounded-full bg-emerald-50 px-3 py-1 text-xs font-extrabold text-emerald-700">
-                Valeria — indicateur de clarté pédagogique
+                Valeria — indicateur de clarté & robustesse
               </div>
 
               <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 leading-tight">
@@ -199,14 +248,16 @@ export default function AccueilPage() {
 
               <p className="text-sm text-slate-700 leading-relaxed">
                 La note n’est pas une performance. C’est un indicateur : plus votre demande est claire,
-                structurée et testable, plus la ressource générée sera stable et exploitable.
+                structurée et testable, plus la ressource générée sera stable et exploitable
+                (éducation comme formation/entreprise).
               </p>
 
               <ul className="mt-3 space-y-2 text-sm text-slate-700">
+                <li>✅ Type clair (séance / évaluation / séquence / formation / procédure)</li>
                 <li>✅ Objectifs explicites (capacités visées)</li>
                 <li>✅ Trace attendue (ce que vous récupérez)</li>
-                <li>✅ Critères observables (comment valider)</li>
-                <li>✅ Contraintes (durée, DYS, différenciation, supports)</li>
+                <li>✅ Critères mesurables (comment valider)</li>
+                <li>✅ Contraintes (durée, public, DYS, supports)</li>
                 <li>✅ Conformité (neutralité, BO/Éduscol si pertinent)</li>
               </ul>
 
@@ -215,23 +266,23 @@ export default function AccueilPage() {
                   href="/optimiseur"
                   className="inline-flex items-center justify-center rounded-xl bg-slate-900 px-5 py-3 text-sm font-extrabold text-white hover:bg-slate-800 transition"
                 >
-                  Clarifier ma séance avec Valeria →
+                  Clarifier avec Valeria →
                 </Link>
 
                 <Link
                   href="/espace-profs"
                   className="inline-flex items-center justify-center rounded-xl border border-slate-300 bg-white px-5 py-3 text-sm font-extrabold text-slate-900 hover:bg-slate-50 transition"
                 >
-                  Générer une ressource (Profs) →
+                  Générer une ressource →
                 </Link>
               </div>
 
               <p className="mt-2 text-xs text-slate-500">
-                Inscription d’abord. Les fonctionnalités premium/paiement arrivent ensuite, une fois la base de données opérationnelle.
+                Inscription d’abord. Premium/paiement ensuite, quand la base et les fonctions seront stabilisées.
               </p>
             </div>
 
-            <div className="w-full lg:w-[48%] space-y-4">
+            <div id="demo" className="w-full lg:w-[48%] space-y-4 scroll-mt-24">
               <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
                 <p className="text-sm font-extrabold text-slate-900">Démo (rapide)</p>
                 <p className="mt-1 text-sm text-slate-700">
@@ -246,9 +297,10 @@ export default function AccueilPage() {
                 <p className="text-xs uppercase tracking-wider text-slate-500">Pour qui ?</p>
                 <ul className="mt-3 space-y-2 text-sm text-slate-700">
                   <li>👩‍🏫 Enseignants : séance, évaluation, différenciation, corrigés</li>
-                  <li>🎒 Élèves : cadre clair (apprendre sans tricher) - Gratuit</li>
+                  <li>🎒 Élèves : cadre clair (apprendre sans tricher) — Gratuit</li>
                   <li>👨‍👩‍👧 Parents : accompagnement non stigmatisant</li>
                   <li>🏫 Établissements : cadre commun et rassurant</li>
+                  <li>🏭 Entreprises : supports de formation, procédures, critères qualité</li>
                 </ul>
               </div>
             </div>
@@ -259,39 +311,23 @@ export default function AccueilPage() {
         <div id="methode" className="scroll-mt-24">
           <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
             <div className="inline-flex items-center gap-2 rounded-full bg-blue-50 px-3 py-1 text-xs font-extrabold text-blue-700">
-              Méthode universelle (toutes matières)
+              Méthode universelle (éducation & formation)
             </div>
 
             <h3 className="mt-3 text-2xl sm:text-3xl font-extrabold text-slate-900 leading-tight">
-              4 questions simples pour rendre une séance “vraiment claire”
+              4 questions simples pour rendre une demande “vraiment claire”
             </h3>
 
             <p className="mt-3 text-sm text-slate-700 leading-relaxed max-w-3xl">
-              La plupart des demandes restent vagues. En clarifiant capacités, trace, critères et contraintes,
+              En clarifiant type, objectifs, trace, critères et contraintes,
               vous obtenez une ressource plus stable, plus cohérente et plus exploitable.
             </p>
 
             <div className="mt-6 grid gap-3 lg:grid-cols-2">
-              <Step
-                n="1"
-                title="Capacités visées"
-                desc="À la fin, l’élève est capable de… (2–4 objectifs concrets)."
-              />
-              <Step
-                n="2"
-                title="Trace attendue"
-                desc="Ce que vous récupérez : exercice, texte, tableau, schéma, oral, etc."
-              />
-              <Step
-                n="3"
-                title="Critères de réussite"
-                desc="Je valide si… (observable / mesurable)."
-              />
-              <Step
-                n="4"
-                title="Contraintes"
-                desc="Durée, hétérogénéité, DYS, supports, groupe/individuel, numérique ou non."
-              />
+              <Step n="1" title="Type" desc="Séance, évaluation, séquence, formation, procédure…" />
+              <Step n="2" title="Objectifs + trace" desc="À la fin, on obtient quoi ? (production attendue)." />
+              <Step n="3" title="Critères mesurables" desc="Je valide si… (observable / mesurable)." />
+              <Step n="4" title="Contraintes" desc="Durée, public, hétérogénéité, DYS, supports, outils." />
             </div>
 
             <div className="mt-6 flex flex-col sm:flex-row gap-2">
@@ -299,19 +335,19 @@ export default function AccueilPage() {
                 href="/optimiseur"
                 className="inline-flex items-center justify-center rounded-xl bg-blue-600 px-5 py-3 text-sm font-extrabold text-white hover:bg-blue-500 transition"
               >
-                Clarifier Optimiser avec Valeria →
+                Clarifier / Optimiser avec Valeria →
               </Link>
 
               <Link
                 href="/espace-profs"
                 className="inline-flex items-center justify-center rounded-xl border border-slate-300 bg-white px-5 py-3 text-sm font-extrabold text-slate-900 hover:bg-slate-50 transition"
               >
-                Ou Générer votre prompt(Espace Profs) →
+                Générer une ressource (Espace Profs) →
               </Link>
             </div>
 
             <p className="mt-3 text-xs text-slate-500">
-              L’IA structure la demande. L’enseignant conserve la décision pédagogique.
+              L’IA structure la demande. Vous conservez la décision (pédagogique ou opérationnelle).
             </p>
           </div>
         </div>
@@ -324,8 +360,8 @@ export default function AccueilPage() {
             <Card
               title="PROFESSEURS"
               punchline="Des ressources plus claires, plus vite"
-              line1="Clarifiez vos objectifs, vos critères et votre trace attendue."
-              line2="Puis générez cours, séances, évaluations, différenciation et corrigés."
+              line1="Clarifiez objectifs, critères et trace attendue."
+              line2="Générez cours, séances, évaluations, différenciation et corrigés."
               ctaHref="/espace-profs"
               ctaLabel="Accéder à l’espace Professeurs"
             />
@@ -363,13 +399,66 @@ export default function AccueilPage() {
               ctaLabel="Accéder à l’espace Écoles"
             />
           </div>
+
+          {/* ✅ NOUVEAU : Entreprises */}
+          <div id="entreprises" className="scroll-mt-24 lg:col-span-2">
+            <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+              <p className="text-xs uppercase tracking-wider text-slate-500">
+                ENTREPRISES & ORGANISMES
+              </p>
+
+              <h3 className="mt-3 text-2xl sm:text-3xl font-extrabold leading-tight text-slate-900">
+                Formation, procédures, qualité : des critères mesurables
+              </h3>
+
+              <div className="mt-4 grid gap-3 sm:grid-cols-3 text-sm text-slate-700">
+                <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
+                  <p className="font-extrabold text-slate-900">🎯 Objectifs</p>
+                  <p className="mt-1">Transformer des intentions en objectifs testables.</p>
+                </div>
+                <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
+                  <p className="font-extrabold text-slate-900">📌 Critères</p>
+                  <p className="mt-1">Définir des critères mesurables (validation, audit, qualité).</p>
+                </div>
+                <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
+                  <p className="font-extrabold text-slate-900">⚙️ Itérations</p>
+                  <p className="mt-1">Amélioration continue : score indicateur + ajustements.</p>
+                </div>
+              </div>
+
+              <p className="mt-4 text-sm text-slate-700 leading-relaxed">
+                EleveAI peut servir aux responsables formation, qualité, RH : supports structurés,
+                procédures claires, évaluations internes et checklists.
+              </p>
+
+              <div className="mt-6 flex flex-col sm:flex-row gap-2">
+                <Link
+                  href="/contact"
+                  className="inline-flex items-center justify-center rounded-xl bg-blue-600 px-5 py-3 text-sm font-extrabold text-white hover:bg-blue-500 transition"
+                >
+                  Demander un diagnostic →
+                </Link>
+                <Link
+                  href="/optimiseur"
+                  className="inline-flex items-center justify-center rounded-xl border border-slate-300 bg-white px-5 py-3 text-sm font-extrabold text-slate-900 hover:bg-slate-50 transition"
+                >
+                  Tester Valeria (qualité/formation) →
+                </Link>
+              </div>
+
+              <p className="mt-2 text-xs text-slate-500">
+                Positionnement : rigueur, conformité, critères mesurables. L’IA est un outil, la méthode est la valeur.
+              </p>
+            </div>
+          </div>
         </div>
 
         {/* Footer */}
         <div className="mt-10 rounded-2xl border border-slate-200 bg-slate-50 p-6">
           <p className="text-sm font-extrabold text-slate-900">Objectif</p>
           <p className="mt-2 text-sm text-slate-700">
-            Clarifier → mesurer (score indicateur) → ajuster → générer une ressource exploitable.
+            Clarifier → mesurer (score indicateur) → ajuster → optimiser.
+            Éducation, formation, entreprise : même méthode, même exigence.
           </p>
           <p className="mt-2 text-xs text-slate-500">
             Inscription d’abord. Paiement ensuite, lorsque la base de données et les fonctions premium seront opérationnelles.
@@ -379,6 +468,8 @@ export default function AccueilPage() {
     </main>
   );
 }
+
+
 
 
 

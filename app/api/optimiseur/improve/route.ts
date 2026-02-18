@@ -10,58 +10,102 @@ type ImproveResponse = {
   changes: string[];
 };
 
-function safeJsonParse<T>(s: string): T | null {
-  try {
-    return JSON.parse(s) as T;
-  } catch {
-    return null;
-  }
-}
-
 function clamp(n: number, a: number, b: number) {
   return Math.max(a, Math.min(b, n));
 }
 
-// ✅ Sécurise le choix du modèle (anti “n’importe quoi depuis le client”)
 function pickModel(m: unknown) {
-  return m === "gpt-4o" || m === "gpt-4o-mini" ? m : null;
+  return m === "gpt-4o" || m === "gpt-4o-mini"
+    ? m
+    : DEFAULT_MODEL_IMPROVE;
 }
 
-// ✅ Température raisonnable pour improve (0 → 1)
 function pickTemperature(t: unknown, def = 0) {
   const n = Number(t);
   if (!Number.isFinite(n)) return def;
   return clamp(n, 0, 1);
 }
 
-// ✅ (optionnel mais très efficace) : si l’IA renvoie un JSON cassé,
-// on lui demande de “réparer” en 1 retry.
-async function repairJsonOnce(raw: string, model: string) {
-  const system = `Tu renvoies UNIQUEMENT du JSON valide, sans texte autour.`;
-  const user = `
-Répare ce JSON pour qu'il soit valide et respecte EXACTEMENT ce schéma :
-
-{
-  "improvedPrompt": "string non vide",
-  "changes": ["..."]
+function stripCodeFences(s: string) {
+  return s
+    .replace(/^\uFEFF/, "")
+    .replace(/```json\s*/gi, "")
+    .replace(/```\s*/g, "")
+    .trim();
 }
 
-JSON À RÉPARER :
-${raw}
-`;
+function extractFirstJsonObject(s: string) {
+  const cleaned = stripCodeFences(s);
+  const first = cleaned.indexOf("{");
+  const last = cleaned.lastIndexOf("}");
+  if (first === -1 || last === -1 || last <= first) return null;
+  return cleaned.slice(first, last + 1).trim();
+}
 
-  const completion = await openai.chat.completions.create({
-    model,
-    temperature: 0,
-    max_tokens: 600,
-    response_format: { type: "json_object" },
-    messages: [
-      { role: "system", content: system },
-      { role: "user", content: user },
-    ],
-  });
+function safeJsonParse<T>(raw: string): T | null {
+  if (!raw) return null;
 
-  return completion.choices?.[0]?.message?.content?.trim() || "";
+  try {
+    return JSON.parse(raw) as T;
+  } catch {}
+
+  const cleaned = stripCodeFences(raw);
+  try {
+    return JSON.parse(cleaned) as T;
+  } catch {}
+
+  const extracted = extractFirstJsonObject(raw);
+  if (!extracted) return null;
+  try {
+    return JSON.parse(extracted) as T;
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * 🔎 Extraction universelle d’ancre
+ * - fonctionne FR / EN
+ * - pas de mots codés en dur
+ */
+function extractAnchor(prompt: string) {
+  const text = prompt.toLowerCase();
+
+  // Détection niveau générique
+  const levelMatch =
+    text.match(/\b(6e|5e|4e|3e|seconde|première|terminale|grade\s*\d+)\b/);
+
+  const level = levelMatch ? levelMatch[0] : "unspecified level";
+
+  // Extraction mots significatifs
+  const words = text
+    .replace(/[^\p{L}\p{N}\s#]/gu, " ")
+    .split(/\s+/)
+    .filter(w => w.length > 5)
+    .slice(0, 30);
+
+  const keywords = Array.from(new Set(words)).slice(0, 8);
+
+  return { level, keywords };
+}
+
+/**
+ * Vérifie que l’amélioration reste dans le même univers lexical
+ */
+function seemsOffTopic(improved: string, anchor: { level: string; keywords: string[] }) {
+  const t = improved.toLowerCase();
+
+  const hasLevel =
+    anchor.level === "unspecified level"
+      ? true
+      : t.includes(anchor.level);
+
+  const hasKeyword =
+    anchor.keywords.length === 0
+      ? true
+      : anchor.keywords.some(k => t.includes(k));
+
+  return !(hasLevel && hasKeyword);
 }
 
 export async function POST(req: Request) {
@@ -71,48 +115,49 @@ export async function POST(req: Request) {
     const prompt = String(body?.prompt || "").trim();
     const scoreReport = body?.scoreReport ?? null;
 
-    const model = pickModel(body?.model) ?? DEFAULT_MODEL_IMPROVE;
+    const model = pickModel(body?.model);
     const temperature = pickTemperature(body?.temperature, 0);
 
     if (!prompt) {
       return NextResponse.json({ error: "Prompt manquant." }, { status: 400 });
     }
 
-    const system = `Tu renvoies UNIQUEMENT du JSON valide, sans texte autour.`;
+    const anchor = extractAnchor(prompt);
 
-    // ✅ IMPORTANT : on utilise la rubrique EDITOR (sans contradiction)
-    const user = `
-Tu es un “éditeur de prompt” (optimisation). Tu dois AMÉLIORER le prompt fourni
-pour maximiser la qualité selon cette grille :
+    const system = `
+Tu es un éditeur de prompt pédagogique (optimisation).
+Tu renvoies UNIQUEMENT du JSON valide.
 
 ${PROMPT_RUBRIC_EDITOR_V2}
 
-Règles :
-- Ne change pas le fond pédagogique demandé : clarifie, structure, sécurise.
-- Renforce la conformité (neutralité, pas de données perso, pas de discrimination).
-- Améliore la testabilité (critères, étapes, format).
-- Conserve le style FR enseignant, simple, copiable.
-- Ne produis pas la ressource finale : uniquement le prompt amélioré.
-- IMPORTANT : Ajoute un bloc "AUTO-CONTRÔLE (CHECKLIST)" avec 6–10 puces
-  vérifiables (durée, structure, BO, socle, DYS, barème, etc.) pour viser 20/20.
+RÈGLE ANTI-DÉRIVE ABSOLUE :
+- Ne change pas le niveau.
+- Ne change pas le sujet principal.
+- Reste dans le même univers lexical que le prompt initial.
 
+ANCRE DÉTECTÉE :
+Niveau : ${anchor.level}
+Mots-clés principaux : ${anchor.keywords.join(", ")}
+
+JSON OBLIGATOIRE :
+{
+  "improvedPrompt": "...",
+  "changes": ["..."]
+}
+`.trim();
+
+    const user = `
 PROMPT ACTUEL :
 """${prompt}"""
 
-RAPPORT DE SCORE (si présent, à exploiter) :
-${scoreReport ? JSON.stringify(scoreReport, null, 2) : "null"}
-
-FORMAT JSON OBLIGATOIRE :
-{
-  "improvedPrompt": "....",
-  "changes": ["...","..."]
-}
-`;
+SCORE REPORT :
+${scoreReport ? JSON.stringify(scoreReport, null, 2).slice(0, 10000) : "null"}
+`.trim();
 
     const completion = await openai.chat.completions.create({
       model,
       temperature,
-      max_tokens: 1200,
+      max_tokens: 1500,
       response_format: { type: "json_object" },
       messages: [
         { role: "system", content: system },
@@ -120,46 +165,34 @@ FORMAT JSON OBLIGATOIRE :
       ],
     });
 
-    let content = completion.choices?.[0]?.message?.content?.trim() || "";
-    let parsed = safeJsonParse<ImproveResponse>(content);
+    const raw = completion.choices?.[0]?.message?.content?.trim() || "";
+    const parsed = safeJsonParse<ImproveResponse>(raw);
 
-    // ✅ Retry “repair JSON” si besoin
     if (!parsed?.improvedPrompt) {
-      const repairedRaw = await repairJsonOnce(content, model);
-      const repairedParsed = safeJsonParse<ImproveResponse>(repairedRaw);
-
-      if (!repairedParsed?.improvedPrompt) {
-        return NextResponse.json(
-          {
-            error: "Réponse improve invalide (JSON).",
-            raw: content,
-            repairedRaw,
-            used: { model, temperature },
-          },
-          { status: 500 },
-        );
-      }
-
-      parsed = repairedParsed;
-      content = repairedRaw;
+      return NextResponse.json(
+        { error: "Réponse improve invalide (JSON).", raw },
+        { status: 500 },
+      );
     }
 
-    // ✅ garde-fous basiques
-    const improvedPrompt = String(parsed.improvedPrompt || "").trim();
-    const changes = Array.isArray(parsed.changes) ? parsed.changes.slice(0, 12) : [];
+    const improvedPrompt = parsed.improvedPrompt.trim();
 
-    if (!improvedPrompt || improvedPrompt.length < 20) {
+    // 🔒 Vérification anti-dérive
+    if (seemsOffTopic(improvedPrompt, anchor)) {
       return NextResponse.json(
         {
-          error: "Improve vide / trop court.",
-          raw: content,
-          used: { model, temperature },
+          error: "Improve hors-sujet détecté.",
+          anchor,
         },
         { status: 500 },
       );
     }
 
-    return NextResponse.json({ improvedPrompt, changes });
+    return NextResponse.json({
+      improvedPrompt,
+      changes: parsed.changes?.slice(0, 12) ?? [],
+    });
+
   } catch (e: any) {
     return NextResponse.json(
       { error: e?.message || "Erreur serveur improve." },
@@ -167,6 +200,8 @@ FORMAT JSON OBLIGATOIRE :
     );
   }
 }
+
+
 
 
 

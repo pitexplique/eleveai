@@ -1,10 +1,13 @@
 // app/api/optimiseur/score/route.ts
+
 import { NextResponse } from "next/server";
 import { openai } from "@/lib/openai";
 import {
-  PROMPT_RUBRIC_V2,
   RUBRIC_VERSION,
   DEFAULT_MODEL_SCORE,
+  normalizePromptType,
+  getPromptRubricScore,
+  type PromptType,
 } from "@/lib/promptRubric";
 
 type ScoreResponse = {
@@ -71,72 +74,79 @@ function pickModel(m: unknown) {
 
 /**
  * ✅ Heuristiques DÉTERMINISTES (fiabilité)
- * Objectif : empêcher un prompt "propre" d'être sur-noté s'il manque les
- * éléments MESURABLES exigés par ta rubrique (barème, seuil, BO précis, etc.)
+ * Objectif : empêcher un prompt "propre" d'être sur-noté s'il manque
+ * les éléments MESURABLES (barème, checklist, ref BO/Eduscol, etc.)
+ *
+ * + Version typée : les caps changent légèrement selon le type.
  */
-function computeDeterministicCaps(prompt: string) {
+function computeDeterministicCaps(prompt: string, type: PromptType) {
   const p = prompt.toLowerCase();
 
-  // --- Détection "barème /20" ou points ---
+  // --- Détection barème / points ---
   const hasBareme =
     /bar[eè]me/.test(p) ||
     /\/\s*20/.test(p) ||
     /\b\d+\s*points?\b/.test(p);
 
-  // --- Détection "seuil" ou critères de validation mesurables ---
+  // --- Détection “seuil” / validation mesurable ---
   const hasSeuil =
     /seuil/.test(p) ||
     /%/.test(p) ||
     /à partir de/.test(p) ||
     /niveau de maîtrise/.test(p);
 
-  // --- Détection "auto-contrôle/checklist" ---
+  // --- Checklist / auto-contrôle ---
   const hasChecklist =
     /auto-contr[oô]le/.test(p) ||
     /checklist/.test(p) ||
-    /\[\s*\]/.test(prompt) || // case à cocher
+    /\[\s*\]/.test(prompt) ||
     /-\s*\[.\]\s*/.test(prompt);
 
-  // --- Détection référence institutionnelle précise ---
-  // (on veut plus qu'un "BO/Eduscol" vague)
-  const hasBOorEduscol = /bo\b/.test(p) || /eduscol/.test(p);
+  // --- BO/Eduscol + référence précise ---
+  const hasBOorEduscol = /\bbo\b/.test(p) || /eduscol/.test(p);
   const hasPreciseRef =
     /bo\s*(sp[eé]cial|n[°o])/.test(p) ||
-    /\b26\s+novembre\s+2015\b/.test(p) ||
     /\bcycle\s*4\b/.test(p) ||
-    /\bcycle\s*3\b/.test(p);
+    /\bcycle\s*3\b/.test(p) ||
+    /\b26\s+novembre\s+2015\b/.test(p);
 
-  // --- Détection structure exploitable "Word-ready" ---
+  // --- Durée / supports / différenciation ---
+  const hasDuration = /\b\d+\s*(min|minutes?|h|heure|heures)\b/.test(p);
+  const hasSupports =
+    /supports?\s*:/.test(p) ||
+    /manuel|tableau|graphiques?|fiches?|calculatrice|ordinateur|tableur/.test(p);
+  const hasDifferenciation = /diff[eé]renciation|dys|ulis|aesh|base\/attendu\/d[ée]fi/.test(p);
+
+  // --- Structure exploitable (sections) ---
   const hasStructuredSections =
-    /introduction/.test(p) &&
-    /conclusion/.test(p) &&
-    (/\bminutes?\b/.test(p) || /\b\d+\s*min\b/.test(p));
+    /(introduction|objectifs|consignes|bar[eè]me|exercice|déroulé|bilan|conclusion)/.test(p);
 
-  // Caps par critère (valeurs max autorisées)
+  // Caps init
   let capRobustness = 4;
   let capCompliance = 4;
   let capStructure = 4;
   let capContext = 4;
 
-  // Robustesse: sans barème OU sans seuil → pas de 4/4
-  if (!hasBareme && !hasSeuil) capRobustness = 2.5;
-  else if (!hasBareme || !hasSeuil) capRobustness = 3.0;
+  // === Robustesse (typée) ===
+  // Évaluation : sans barème OU sans critères mesurables → cap plus bas
+  if (type === "evaluation") {
+    if (!hasBareme && !hasSeuil) capRobustness = 2.5;
+    else if (!hasBareme || !hasSeuil) capRobustness = 3.0;
+    if (!hasChecklist) capRobustness = Math.min(capRobustness, 3.0);
+  } else {
+    // Séance / séquence / fiche / projet : on exige surtout checklist + critères
+    if (!hasChecklist) capRobustness = 3.0;
+    if (!hasSeuil && type !== "fiche") capRobustness = Math.min(capRobustness, 3.5);
+  }
 
-  // Checklist: sans checklist, robustesse max 3
-  if (!hasChecklist) capRobustness = Math.min(capRobustness, 3.0);
-
-  // Compliance: BO/Eduscol vague → pas de 4/4
+  // === Compliance ===
   if (!hasBOorEduscol) capCompliance = 3.0;
   if (hasBOorEduscol && !hasPreciseRef) capCompliance = 3.5;
 
-  // Structure: si pas de sections utilisables, pas de 4
+  // === Structure ===
   if (!hasStructuredSections) capStructure = 3.5;
 
-  // Contexte: si pas de durée + supports + différenciation explicite → cap
-  const hasDuration = /\b\d+\s*(min|minutes?|h|heure|heures)\b/.test(p);
-  const hasSupports = /supports?\s*:/.test(p) || /tableau|graphiques?|fiches?/.test(p);
-  const hasDifferenciation = /diff[eé]renciation|dys|ulis|aesh/.test(p);
-
+  // === Contexte ===
   if (!(hasDuration && hasSupports && hasDifferenciation)) capContext = 3.5;
 
   return { capRobustness, capCompliance, capStructure, capContext };
@@ -147,6 +157,9 @@ export async function POST(req: Request) {
     const body = await req.json().catch(() => ({}));
     const prompt = String(body?.prompt || "").trim();
 
+    // ✅ Type fourni par l’UI (recommandé)
+    const type = normalizePromptType(body?.meta?.type);
+
     const model = pickModel(body?.model) ?? DEFAULT_MODEL_SCORE;
     const temperature = 0;
 
@@ -154,10 +167,13 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Prompt manquant." }, { status: 400 });
     }
 
+    // ✅ Rubrique typée (score)
+    const rubric = getPromptRubricScore(type);
+
     const system = `Tu renvoies UNIQUEMENT du JSON valide, sans texte autour.`;
 
     const user = `
-${PROMPT_RUBRIC_V2}
+${rubric}
 
 Évalue ce prompt (délimité) :
 
@@ -182,8 +198,8 @@ FORMAT JSON OBLIGATOIRE :
 Contraintes :
 - score sur 20 au pas de 0.5
 - breakdown: chaque champ sur 4 au pas de 0.5
-- strengths/fixes/risks: phrases courtes.
-`;
+- strengths/fixes/risks: phrases courtes
+`.trim();
 
     const completion = await openai.chat.completions.create({
       model,
@@ -203,7 +219,7 @@ Contraintes :
         {
           error: "Réponse scoring invalide (JSON).",
           raw: content,
-          used: { model, temperature },
+          used: { model, temperature, type },
         },
         { status: 500 },
       );
@@ -218,8 +234,8 @@ Contraintes :
       robustness: roundToHalf(clamp(parsed.breakdown.robustness, 0, 4)),
     };
 
-    // 2) caps déterministes (fiabilité)
-    const caps = computeDeterministicCaps(prompt);
+    // 2) caps déterministes (fiabilité) — typés
+    const caps = computeDeterministicCaps(prompt, type);
     const b1 = {
       clarity: b0.clarity,
       context: Math.min(b0.context, caps.capContext),
@@ -237,7 +253,7 @@ Contraintes :
       robustness: roundToHalf(b1.robustness),
     };
 
-    // 4) score = somme EXACTE (fiabilité)
+    // 4) score = somme EXACTE
     const score = roundToHalf(
       breakdown.clarity +
         breakdown.context +
@@ -250,12 +266,16 @@ Contraintes :
       rubricVersion: RUBRIC_VERSION,
       score: clamp(score, 0, 20),
       breakdown,
-      strengths: parsed.strengths.slice(0, 12),
-      fixes: parsed.fixes.slice(0, 12),
-      risks: parsed.risks.slice(0, 12),
+      strengths: parsed.strengths.slice(0, 12).map(String),
+      fixes: parsed.fixes.slice(0, 12).map(String),
+      risks: parsed.risks.slice(0, 12).map(String),
     };
 
-    return NextResponse.json(fixed);
+    return NextResponse.json({
+      ...fixed,
+      // ✅ Optionnel : utile pour debug UI
+      used: { model, temperature, type },
+    });
   } catch (e: any) {
     return NextResponse.json(
       { error: e?.message || "Erreur serveur scoring." },
@@ -263,4 +283,3 @@ Contraintes :
     );
   }
 }
-
