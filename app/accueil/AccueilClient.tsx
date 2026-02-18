@@ -299,14 +299,14 @@ export default function AccueilPage() {
                 href="/optimiseur"
                 className="inline-flex items-center justify-center rounded-xl bg-blue-600 px-5 py-3 text-sm font-extrabold text-white hover:bg-blue-500 transition"
               >
-                Étape 1 : Clarifier (Valeria) →
+                Clarifier Optimiser avec Valeria →
               </Link>
 
               <Link
                 href="/espace-profs"
                 className="inline-flex items-center justify-center rounded-xl border border-slate-300 bg-white px-5 py-3 text-sm font-extrabold text-slate-900 hover:bg-slate-50 transition"
               >
-                Étape 2 : Générer (Espace Profs) →
+                Ou Générer votre prompt(Espace Profs) →
               </Link>
             </div>
 
