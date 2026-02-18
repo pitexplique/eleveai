@@ -4,38 +4,38 @@ import type { Metadata } from "next";
 const SITE_URL = "https://eleveai.fr";
 
 export const metadata: Metadata = {
-  title: "EleveAI — IA pédagogique encadrée (Profs · Élèves · Parents)",
+  title: "EleveAI • Valeria — IA encadrée (Éducation & Entreprise)",
 
   description:
-    "EleveAI aide à créer des consignes IA claires et guidées pour apprendre sans tricher : profs, élèves et parents. Atelier-IA, traces pédagogiques, esprit critique. Collège et lycée.",
+    "EleveAI génère des ressources pédagogiques robustes. Valeria (score /20) clarifie et optimise vos prompts avec des critères mesurables : éducation, formation, entreprise (procédures, qualité, checklists).",
 
   alternates: {
     canonical: `${SITE_URL}/accueil`,
   },
 
   openGraph: {
-    title: "EleveAI — IA pédagogique encadrée",
+    title: "EleveAI • Valeria — IA encadrée (Éducation & Entreprise)",
     description:
-      "Créer des consignes IA claires et guidées pour apprendre sans tricher. Pensé pour le collège et le lycée.",
+      "Clarifier → mesurer → améliorer. Valeria (score /20) renforce la robustesse des prompts. EleveAI génère des ressources pour l’école. Valeria Consulting accompagne aussi les entreprises (formation, procédures, qualité).",
     url: `${SITE_URL}/accueil`,
     type: "website",
     siteName: "EleveAI",
     locale: "fr_FR",
     images: [
       {
-        url: "/preview.jpg",
+        url: "/preview.jpg", // garde ton image ou remplace par /preview-valeria.jpg
         width: 1200,
         height: 630,
-        alt: "EleveAI — IA pédagogique encadrée",
+        alt: "EleveAI • Valeria — IA encadrée pour l’éducation et l’entreprise",
       },
     ],
   },
 
   twitter: {
     card: "summary_large_image",
-    title: "EleveAI — IA pédagogique encadrée",
+    title: "EleveAI • Valeria — IA encadrée (Éducation & Entreprise)",
     description:
-      "Consignes IA claires, Atelier-IA, anti-triche pédagogique. Profs, élèves, parents.",
+      "Valeria (score /20) clarifie et sécurise vos prompts. EleveAI génère des ressources pédagogiques. Entreprises : formation, procédures, qualité (critères mesurables).",
     images: ["/preview.jpg"],
   },
 };
