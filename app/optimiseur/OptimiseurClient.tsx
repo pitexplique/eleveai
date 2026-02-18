@@ -1,4 +1,10 @@
 // app/optimiseur/OptimiseurClient.tsx
+// ✅ (Optionnel) : si tu veux que Valeria vise 20 par défaut,
+// change juste DEFAULT_TARGET_SCORE côté lib, ou force ici.
+// Je te donne une version complète identique à la tienne,
+// avec UNE SEULE modif : targetScore initialisé à 20 au lieu de DEFAULT_TARGET_SCORE.
+// (Si tu préfères garder 19.5 par défaut, ne touche pas ce fichier.)
+
 "use client";
 
 import { useMemo, useRef, useState } from "react";
@@ -36,14 +42,15 @@ function clamp(n: number, a: number, b: number) {
 }
 
 function formatTemp(t: number) {
-  // on évite les flottants chelous
   return Math.round(t * 100) / 100;
 }
 
 export default function OptimiseurClient() {
   const [prompt, setPrompt] = useState("");
 
-  const [targetScore, setTargetScore] = useState(DEFAULT_TARGET_SCORE);
+  // ✅ MODIF : vise 20 par défaut (sinon remets DEFAULT_TARGET_SCORE)
+  const [targetScore, setTargetScore] = useState<number>(20);
+
   const [maxIters, setMaxIters] = useState(DEFAULT_MAX_ITERS);
 
   const [optimisationOn, setOptimisationOn] = useState(true);
@@ -59,7 +66,6 @@ export default function OptimiseurClient() {
   const [history, setHistory] = useState<Iteration[]>([]);
   const abortRef = useRef<AbortController | null>(null);
 
-  // 🔧 tes ajouts : choix modèle + temperature (pour IMPROVE)
   const [model, setModel] = useState<"gpt-4o-mini" | "gpt-4o">("gpt-4o-mini");
   const [temperatureImprove, setTemperatureImprove] = useState<number>(0);
 
@@ -74,16 +80,13 @@ export default function OptimiseurClient() {
     return Math.max(...scores);
   }, [scores]);
 
-  // --- API helpers (debug robuste: lecture text puis parse JSON) ---
-
   const scoreOnce = async (p: string, signal?: AbortSignal) => {
     const res = await fetch("/api/optimiseur/score", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       signal,
       body: JSON.stringify({
-        prompt: p, 
-        // on force scoring stable (temp=0)
+        prompt: p,
         model,
         temperature: 0,
       }),
@@ -130,15 +133,13 @@ export default function OptimiseurClient() {
 
     if (!res.ok) {
       console.log("❌ RAW IMPROVE:", text);
-      // très utile si ton API renvoie { raw: "..."} en cas de JSON invalide
       if (data?.raw) console.log("📦 RAW FIELD (improve):", data.raw);
+      if (data?.repairedRaw) console.log("🛠 REPAIRED RAW:", data.repairedRaw);
       throw new Error(data?.error || "Erreur improve.");
     }
 
     return data as { improvedPrompt: string; changes: string[] };
   };
-
-  // --- Controls ---
 
   const stop = () => {
     setStopped(true);
@@ -154,8 +155,6 @@ export default function OptimiseurClient() {
     setCurrentScore(null);
     setCurrentReport(null);
   };
-
-  // --- Actions ---
 
   const runScoreOnly = async () => {
     const p = prompt.trim();
@@ -216,7 +215,6 @@ export default function OptimiseurClient() {
       for (let i = 1; i <= maxIters; i++) {
         if (ctrl.signal.aborted) break;
 
-        // 1) SCORE (toujours temp=0)
         const report = await scoreOnce(p, ctrl.signal);
         setCurrentReport(report);
         setCurrentScore(report.score);
@@ -237,10 +235,8 @@ export default function OptimiseurClient() {
           bestPrompt = p;
         }
 
-        // stop condition
         if (report.score >= targetScore) break;
 
-        // 2) IMPROVE (si toggle ON)
         if (!optimisationOn) break;
         if (ctrl.signal.aborted) break;
 
@@ -263,7 +259,6 @@ export default function OptimiseurClient() {
         p = next;
       }
 
-      // Fin : remet le meilleur prompt dans le champ
       setPrompt(bestPrompt);
     } catch (e: any) {
       if (String(e?.name) !== "AbortError") {
@@ -277,12 +272,8 @@ export default function OptimiseurClient() {
   const copy = async (txt: string) => {
     try {
       await navigator.clipboard.writeText(txt);
-    } catch {
-      // ignore
-    }
+    } catch {}
   };
-
-  // --- Courbe simple (SVG) ---
 
   const curveSvg = useMemo(() => {
     if (!showCurve || scores.length < 2) return null;
@@ -309,7 +300,6 @@ export default function OptimiseurClient() {
         <line x1={pad} y1={h - pad} x2={w - pad} y2={h - pad} stroke="currentColor" opacity="0.15" />
         <line x1={pad} y1={pad} x2={pad} y2={h - pad} stroke="currentColor" opacity="0.15" />
 
-        {/* cible */}
         <line
           x1={pad}
           x2={w - pad}
@@ -336,21 +326,20 @@ export default function OptimiseurClient() {
   return (
     <main className="min-h-screen bg-gradient-to-b from-sky-50 via-white to-slate-50 text-slate-900">
       <div className="mx-auto w-full max-w-5xl px-4 py-8 space-y-6">
-<header className="space-y-2">
-  <p className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-100 text-xs font-semibold text-sky-900">
-    ✨ Valeria — Moteur intelligent d’optimisation itérative de prompts pédagogiques
-  </p>
+        <header className="space-y-2">
+          <p className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-100 text-xs font-semibold text-sky-900">
+            ✨ Valeria — Moteur intelligent d’optimisation itérative de prompts pédagogiques
+          </p>
 
-  <h1 className="text-3xl font-extrabold text-[#0047B6]">
-    Analyse rigoureuse → Optimisation itérative → Convergence mesurée
-  </h1>
+          <h1 className="text-3xl font-extrabold text-[#0047B6]">
+            Analyse rigoureuse → Optimisation itérative → Convergence mesurée
+          </h1>
 
-  <p className="text-sm text-slate-700 max-w-2xl">
-    Colle un prompt. Valeria l’évalue (/20) selon une grille scientifique (v{RUBRIC_VERSION}),
-    identifie les axes d’amélioration, puis ajuste itérativement jusqu’à convergence ou arrêt manuel.
-  </p>
-</header>
-
+          <p className="text-sm text-slate-700 max-w-2xl">
+            Colle un prompt. Valeria l’évalue (/20) selon une grille scientifique (v{RUBRIC_VERSION}),
+            identifie les axes d’amélioration, puis ajuste itérativement jusqu’à convergence ou arrêt manuel.
+          </p>
+        </header>
 
         {/* PARAMS */}
         <section className="bg-white border border-slate-200 rounded-2xl shadow-sm p-4 sm:p-5 space-y-4">
@@ -366,7 +355,7 @@ export default function OptimiseurClient() {
                 }
                 className="w-full border rounded-lg px-3 py-2 text-sm"
               />
-              <p className="text-[11px] text-slate-500">Recommandé : 19.5</p>
+              <p className="text-[11px] text-slate-500">Recommandé : 19.5 (mais 20 possible)</p>
             </div>
 
             <div className="space-y-1">
@@ -642,24 +631,24 @@ export default function OptimiseurClient() {
                 .slice(0, 10)
                 .map((h) => (
                   <div key={h.iter} className="rounded-xl border border-slate-200 bg-slate-50 p-3">
-                  <div className="flex items-center justify-between gap-2">
-                    <div>
-                      <p className="text-xs font-semibold text-slate-800">
-                        #{h.iter} — {h.note || "Itération"}
-                      </p>
-                      <p className="text-xs text-slate-700">
-                        Score : <b>{typeof h.score === "number" ? `${h.score.toFixed(1)}/20` : "—"}</b>
-                      </p>
-                    </div>
+                    <div className="flex items-center justify-between gap-2">
+                      <div>
+                        <p className="text-xs font-semibold text-slate-800">
+                          #{h.iter} — {h.note || "Itération"}
+                        </p>
+                        <p className="text-xs text-slate-700">
+                          Score : <b>{typeof h.score === "number" ? `${h.score.toFixed(1)}/20` : "—"}</b>
+                        </p>
+                      </div>
 
-                    <button
-                      type="button"
-                      onClick={() => copy(h.prompt)}
-                      className="px-2 py-1 text-[11px] font-semibold border rounded-md bg-white border-slate-300 hover:bg-slate-100"
-                    >
-                      📋 Copier
-                    </button>
-                  </div>
+                      <button
+                        type="button"
+                        onClick={() => copy(h.prompt)}
+                        className="px-2 py-1 text-[11px] font-semibold border rounded-md bg-white border-slate-300 hover:bg-slate-100"
+                      >
+                        📋 Copier
+                      </button>
+                    </div>
 
                     <p className="mt-2 text-[11px] text-slate-600 line-clamp-3 font-mono">
                       {h.prompt.replace(/\s+/g, " ").slice(0, 260)}
@@ -675,4 +664,5 @@ export default function OptimiseurClient() {
     </main>
   );
 }
+
 

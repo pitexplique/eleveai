@@ -1,7 +1,9 @@
 // app/api/optimiseur/improve/route.ts
+
 import { NextResponse } from "next/server";
 import { openai } from "@/lib/openai";
-import { PROMPT_RUBRIC_V2, DEFAULT_MODEL_IMPROVE } from "@/lib/promptRubric";
+import { DEFAULT_MODEL_IMPROVE } from "@/lib/promptRubric";
+import { PROMPT_RUBRIC_EDITOR_V2 } from "@/lib/promptRubricEditor";
 
 type ImproveResponse = {
   improvedPrompt: string;
@@ -32,6 +34,36 @@ function pickTemperature(t: unknown, def = 0) {
   return clamp(n, 0, 1);
 }
 
+// ✅ (optionnel mais très efficace) : si l’IA renvoie un JSON cassé,
+// on lui demande de “réparer” en 1 retry.
+async function repairJsonOnce(raw: string, model: string) {
+  const system = `Tu renvoies UNIQUEMENT du JSON valide, sans texte autour.`;
+  const user = `
+Répare ce JSON pour qu'il soit valide et respecte EXACTEMENT ce schéma :
+
+{
+  "improvedPrompt": "string non vide",
+  "changes": ["..."]
+}
+
+JSON À RÉPARER :
+${raw}
+`;
+
+  const completion = await openai.chat.completions.create({
+    model,
+    temperature: 0,
+    max_tokens: 600,
+    response_format: { type: "json_object" },
+    messages: [
+      { role: "system", content: system },
+      { role: "user", content: user },
+    ],
+  });
+
+  return completion.choices?.[0]?.message?.content?.trim() || "";
+}
+
 export async function POST(req: Request) {
   try {
     const body = await req.json().catch(() => ({}));
@@ -39,7 +71,6 @@ export async function POST(req: Request) {
     const prompt = String(body?.prompt || "").trim();
     const scoreReport = body?.scoreReport ?? null;
 
-    // ✅ NEW: paramètres pilotés par la page (avec allowlist + clamp)
     const model = pickModel(body?.model) ?? DEFAULT_MODEL_IMPROVE;
     const temperature = pickTemperature(body?.temperature, 0);
 
@@ -49,10 +80,12 @@ export async function POST(req: Request) {
 
     const system = `Tu renvoies UNIQUEMENT du JSON valide, sans texte autour.`;
 
+    // ✅ IMPORTANT : on utilise la rubrique EDITOR (sans contradiction)
     const user = `
-Tu es un “éditeur de prompt” (optimisation). Tu dois AMÉLIORER le prompt fourni pour maximiser la qualité selon cette grille :
+Tu es un “éditeur de prompt” (optimisation). Tu dois AMÉLIORER le prompt fourni
+pour maximiser la qualité selon cette grille :
 
-${PROMPT_RUBRIC_V2}
+${PROMPT_RUBRIC_EDITOR_V2}
 
 Règles :
 - Ne change pas le fond pédagogique demandé : clarifie, structure, sécurise.
@@ -60,7 +93,8 @@ Règles :
 - Améliore la testabilité (critères, étapes, format).
 - Conserve le style FR enseignant, simple, copiable.
 - Ne produis pas la ressource finale : uniquement le prompt amélioré.
-- Pas d’auto-commentaires hors JSON.
+- IMPORTANT : Ajoute un bloc "AUTO-CONTRÔLE (CHECKLIST)" avec 6–10 puces
+  vérifiables (durée, structure, BO, socle, DYS, barème, etc.) pour viser 20/20.
 
 PROMPT ACTUEL :
 """${prompt}"""
@@ -77,21 +111,47 @@ FORMAT JSON OBLIGATOIRE :
 
     const completion = await openai.chat.completions.create({
       model,
-      temperature, // ✅ pilotable (0, 0.1, 0.2…)
-      response_format: { type: "json_object" }, // ✅ réduit fortement les réponses non-JSON
+      temperature,
+      max_tokens: 1200,
+      response_format: { type: "json_object" },
       messages: [
         { role: "system", content: system },
         { role: "user", content: user },
       ],
     });
 
-    const content = completion.choices?.[0]?.message?.content?.trim() || "";
-    const parsed = safeJsonParse<ImproveResponse>(content);
+    let content = completion.choices?.[0]?.message?.content?.trim() || "";
+    let parsed = safeJsonParse<ImproveResponse>(content);
 
+    // ✅ Retry “repair JSON” si besoin
     if (!parsed?.improvedPrompt) {
+      const repairedRaw = await repairJsonOnce(content, model);
+      const repairedParsed = safeJsonParse<ImproveResponse>(repairedRaw);
+
+      if (!repairedParsed?.improvedPrompt) {
+        return NextResponse.json(
+          {
+            error: "Réponse improve invalide (JSON).",
+            raw: content,
+            repairedRaw,
+            used: { model, temperature },
+          },
+          { status: 500 },
+        );
+      }
+
+      parsed = repairedParsed;
+      content = repairedRaw;
+    }
+
+    // ✅ garde-fous basiques
+    const improvedPrompt = String(parsed.improvedPrompt || "").trim();
+    const changes = Array.isArray(parsed.changes) ? parsed.changes.slice(0, 12) : [];
+
+    if (!improvedPrompt || improvedPrompt.length < 20) {
       return NextResponse.json(
         {
-          error: "Réponse improve invalide (JSON).",
+          error: "Improve vide / trop court.",
           raw: content,
           used: { model, temperature },
         },
@@ -99,7 +159,7 @@ FORMAT JSON OBLIGATOIRE :
       );
     }
 
-    return NextResponse.json(parsed);
+    return NextResponse.json({ improvedPrompt, changes });
   } catch (e: any) {
     return NextResponse.json(
       { error: e?.message || "Erreur serveur improve." },
@@ -107,5 +167,6 @@ FORMAT JSON OBLIGATOIRE :
     );
   }
 }
+
 
 

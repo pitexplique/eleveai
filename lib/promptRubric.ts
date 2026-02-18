@@ -2,6 +2,11 @@
 
 export const RUBRIC_VERSION = 2.1;
 
+/**
+ * ✅ Rubrique "SCORING" (évaluateur strict)
+ * IMPORTANT : elle interdit de fournir un prompt amélioré.
+ * Elle est faite UNIQUEMENT pour /score.
+ */
 export const PROMPT_RUBRIC_V2 = `
 Tu es un évaluateur STRICT de prompts pédagogiques (cadre scolaire FR).
 Tu produis un score SUR 20 basé UNIQUEMENT sur la grille ci-dessous.
@@ -72,7 +77,8 @@ RÈGLES DE SORTIE
 - Ne JAMAIS fournir de “prompt amélioré”.
 `;
 
-
+// ✅ Tu peux garder 19.5 en défaut (marketing)
+// mais pour “viser 20”, l’UI permet déjà de mettre 20.
 export const DEFAULT_TARGET_SCORE = 19.5;
 export const DEFAULT_MAX_ITERS = 6;
 
