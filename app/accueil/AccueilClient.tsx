@@ -239,7 +239,7 @@ export default function AccueilClient() {
           </div>
 
           <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-            <p className="text-xs uppercase tracking-wider text-slate-500">Ce que tu vends vraiment</p>
+            <p className="text-xs uppercase tracking-wider text-slate-500">Ce que vous obtenez : norme Iso 9001-9004</p>
             <h3 className="mt-2 text-2xl font-extrabold text-slate-900">
               Pas “de l’IA”. Une méthode.
             </h3>
