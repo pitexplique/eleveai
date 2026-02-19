@@ -42,6 +42,7 @@ export default function AccueilPage() {
     line2,
     ctaHref,
     ctaLabel,
+    badge,
   }: {
     title: string;
     punchline: string;
@@ -49,9 +50,18 @@ export default function AccueilPage() {
     line2: string;
     ctaHref: string;
     ctaLabel: string;
+    badge?: string;
   }) => (
     <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-      <p className="text-xs uppercase tracking-wider text-slate-500">{title}</p>
+      <div className="flex items-center justify-between gap-3">
+        <p className="text-xs uppercase tracking-wider text-slate-500">{title}</p>
+
+        {badge ? (
+          <span className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-xs font-semibold text-slate-700">
+            {badge}
+          </span>
+        ) : null}
+      </div>
 
       <h3 className="mt-3 text-2xl sm:text-3xl font-extrabold leading-tight text-slate-900">
         {punchline}
@@ -86,18 +96,19 @@ export default function AccueilPage() {
         <div className="relative mx-auto max-w-6xl px-4 py-16 sm:py-20">
           <div className="mx-auto max-w-4xl text-center">
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-slate-900">
-              Générateur de Prompts Pédagogiques
+              EleveAI — Prompts pédagogiques prêts à l’emploi
             </h1>
 
             <h2 className="mt-4 text-lg sm:text-xl font-semibold text-blue-600">
-              IA pédagogique encadrée — prompts prêts à l’emploi (BO / Éduscol)
+              IA encadrée • BO / Éduscol • traces • différenciation
             </h2>
 
             <p className="mt-5 text-sm sm:text-base text-slate-700 leading-relaxed">
               <span className="font-semibold text-slate-900">
-                Apprendre à penser avec l'IA
+                Vous gardez la main.
               </span>{" "}
-              Génère un prompt clair, conforme, utilisable immédiatement en classe.
+              L’IA structure, vous décidez : consigne claire, étapes, critères,
+              adaptations, et traces pour travailler proprement en classe.
             </p>
 
             {/* Chips */}
@@ -105,8 +116,8 @@ export default function AccueilPage() {
               <Chip label="👩‍🏫 Profs" onClick={() => scrollTo("profs")} />
               <Chip label="🎒 Élèves" onClick={() => scrollTo("eleves")} />
               <Chip label="👨‍👩‍👧 Parents" onClick={() => scrollTo("parents")} />
-              <Chip label="🏫 École" onClick={() => scrollTo("ecole")} />
-
+              <Chip label="🏫 Établissement" onClick={() => scrollTo("etablissement")} />
+              <Chip label="⭐ Valeria" onClick={() => scrollTo("valeria")} />
             </div>
 
             {/* CTA */}
@@ -126,16 +137,22 @@ export default function AccueilPage() {
               >
                 Se connecter →
               </Link>
+
+              <Link
+                href="/optimiseur"
+                className="inline-flex w-full items-center justify-center rounded-lg border border-slate-300 bg-white px-6 py-3 text-sm font-semibold text-slate-800
+                          hover:bg-slate-100 transition sm:w-auto"
+              >
+                Valeria (score /20) →
+              </Link>
             </div>
 
             <p className="mt-4 text-xs text-slate-600">
-              Prompts calibrés pour produire des sorties exploitables : consigne →
-              étapes → critères → différenciation → traces.
+              Sorties calibrées : consigne → étapes → critères → différenciation → traces.
             </p>
 
             <p className="mt-6 text-xs text-slate-500">
-              ✅ Traces pédagogiques · ✅ Cadre établissement · ✅ L’IA propose,
-              l’humain justifie
+              ✅ Cadre anti-triche (traces) · ✅ Cadre établissement · ✅ L’IA propose, l’humain justifie
             </p>
           </div>
         </div>
@@ -143,155 +160,172 @@ export default function AccueilPage() {
 
       {/* SECTIONS */}
       <section className="mx-auto max-w-6xl px-4 py-12 space-y-6">
-{/* Notation IA */}
-<div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-  <div className="flex flex-col md:flex-row gap-6 items-start">
-    <Image
-      src="/notationgpt.png"
-      alt="Notation IA des prompts enseignants"
-      width={420}
-      height={240}
-      className="rounded-xl border border-slate-200"
-      priority
-    />
+        {/* Valeria / Notation IA */}
+        <div id="valeria" className="scroll-mt-24 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <div className="flex flex-col md:flex-row gap-6 items-start">
+            <Image
+              src="/notationgpt.png"
+              alt="Indicateur de structuration des prompts"
+              width={420}
+              height={240}
+              className="rounded-xl border border-slate-200"
+              priority
+            />
 
-    <div className="space-y-5">
+            <div className="space-y-5">
+              <div className="inline-flex items-center gap-2 rounded-full bg-slate-900 px-3 py-1 text-xs font-semibold text-white">
+                Valeria — Optimisation mesurable de prompts
+              </div>
 
-      <div className="inline-flex items-center gap-2 rounded-full bg-slate-900 px-3 py-1 text-xs font-semibold text-white">
-        Indicateur de structuration IA
-      </div>
+              <p className="text-lg font-semibold">
+                Indicateur actuel :
+                <span className="ml-2 text-emerald-600">
+                  19,5 / 20
+                </span>
+                <span className="ml-2 text-xs text-slate-500">
+                  (évaluation multi-critères)
+                </span>
+              </p>
 
-      <p className="text-lg font-semibold">
-        Prompts enseignants :
-        <span className="ml-2 text-emerald-600">
-          19,5 / 20 (évaluation multi-critères : ChatGPT, Perplexity)
-        </span>
-      </p>
+              <p className="text-sm text-slate-600 max-w-md leading-relaxed">
+                Valeria améliore un prompt par itérations contrôlées : clarté,
+                structure, conformité, différenciation, et robustesse
+                (résultats stables et exploitables).
+              </p>
 
-      <p className="text-sm text-slate-600 max-w-md leading-relaxed">
-        Indicateur basé sur la clarté pédagogique, la structuration,
-        la conformité aux programmes officiels, la différenciation
-        et l’exploitabilité concrète en classe.
-      </p>
+              <div className="rounded-xl border border-slate-200 bg-slate-50 p-4 text-sm text-slate-700 leading-relaxed">
+                <p className="font-semibold text-slate-900 mb-2">
+                  Que signifie réellement “19,5 / 20” ?
+                </p>
+                <p>
+                  Ce n’est pas une “performance” : c’est un <span className="font-semibold">indice de reproductibilité pédagogique</span>.
+                  À ce niveau, un prompt donne des sorties plus constantes :
+                  objectif explicite, consignes univoques, progression, critères,
+                  différenciation, et traces.
+                </p>
+                <p className="mt-2 text-xs text-slate-500">
+                  L’IA structure la demande. L’enseignant conserve la décision pédagogique.
+                </p>
+              </div>
 
-      {/* Explication approfondie */}
-      <div className="rounded-xl border border-slate-200 bg-slate-50 p-4 text-sm text-slate-700 leading-relaxed">
-        <p className="font-semibold text-slate-900 mb-2">
-          Que signifie réellement 19,5 / 20 ?
-        </p>
+              <div className="flex flex-col sm:flex-row gap-2">
+                <Link
+                  href="/optimiseur"
+                  className="inline-flex items-center justify-center rounded-lg bg-slate-900 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-800 transition"
+                >
+                  Ouvrir Valeria (score /20) →
+                </Link>
 
-        <p>
-          Cet indicateur ne mesure pas une performance.
-          Il correspond à une <span className="font-semibold">modélisation de robustesse et de reproductibilité pédagogique</span>.
-        </p>
+                <Link
+                  href="/valeria-consulting"
+                  className="inline-flex items-center justify-center rounded-lg border border-slate-300 px-4 py-2 text-sm font-semibold text-slate-800 hover:bg-slate-100 transition"
+                >
+                  Formation & Consulting →
+                </Link>
+              </div>
 
-        <p className="mt-2">
-          Un prompt structuré à ce niveau permet d’obtenir une production stable et exploitable :
-          objectif explicite, consignes univoques, progression claire,
-          critères d’évaluation, différenciation et traces pédagogiques.
-        </p>
+              {/* Formation */}
+              <div className="pt-2 space-y-2">
+                <p className="text-sm font-semibold text-slate-900">
+                  🎓 Ateliers & Webinaires (45 min → demi-journée)
+                </p>
 
-        <p className="mt-2 text-xs text-slate-500">
-          L’IA structure la demande. L’enseignant conserve la décision pédagogique.
-        </p>
-      </div>
+                <p className="text-sm text-slate-600 leading-relaxed">
+                  Comprendre la logique d’un prompt robuste, reproductible, et conforme :
+                  modèle, grille d’amélioration, exemples concrets, et méthode transférable.
+                </p>
 
-      {/* Formation */}
-      <div className="pt-2 space-y-2">
-        <p className="text-sm font-semibold text-slate-900">
-          🎓 Formation & Webinaires
-        </p>
+                <div className="mt-2 flex flex-col sm:flex-row gap-2">
+                  <a
+                    href="mailto:contact@eleveai.fr"
+                    className="inline-flex items-center justify-center rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-500 transition"
+                  >
+                    Contact email →
+                  </a>
 
-        <p className="text-sm text-slate-600 leading-relaxed">
-          EleveAI propose des ateliers pour comprendre la logique d’un prompt reproductible
-          et structurer vos propres contenus pédagogiques avec l’IA
-          (45 min – 2h – demi-journée).
-        </p>
+                  <a
+                    href="https://wa.me/33692742958"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center rounded-lg border border-emerald-600 px-4 py-2 text-sm font-semibold text-emerald-700 hover:bg-emerald-50 transition"
+                  >
+                    WhatsApp : +262 6 92 74 29 58 →
+                  </a>
+                </div>
+              </div>
 
-        <div className="mt-2 flex flex-col sm:flex-row gap-2">
-          <a
-            href="mailto:contact@eleveai.fr"
-            className="inline-flex items-center justify-center rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-500 transition"
-          >
-            Contact email →
-          </a>
-
-          <a
-            href="https://wa.me/33692742958"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center justify-center rounded-lg border border-emerald-600 px-4 py-2 text-sm font-semibold text-emerald-700 hover:bg-emerald-50 transition"
-          >
-            WhatsApp : +262 6 92 74 29 58 →
-          </a>
+              <p className="text-xs text-slate-500 italic leading-relaxed">
+                Approche inspirée d’une culture de modélisation issue de l’ingénierie statistique industrielle.{" "}
+                — Frédéric Lacoste, enseignant en mathématiques & statisticien.
+              </p>
+            </div>
+          </div>
         </div>
-      </div>
-
-      {/* Signature */}
-      <p className="text-xs text-slate-500 italic leading-relaxed">
-        Approche inspirée d’une culture de modélisation issue de l’ingénierie statistique industrielle.  
-        — Frédéric Lacoste, enseignant en mathématiques & statisticien.
-      </p>
-
-    </div>
-  </div>
-</div>
-
-
 
         <div className="h-px w-full bg-slate-200" />
 
         <div className="grid gap-6 lg:grid-cols-2">
-<div id="profs" className="scroll-mt-24">
-  <Card
-    title="PROFESSEURS"
-    punchline="Des prompts pédagogiques solides"
-    line1="Mettez en forme vos cours ou testez des séances inédites."
-    line2="Gagnez du temps tout en gardant la maîtrise pédagogique."
-    ctaHref="/espace-profs"
-    ctaLabel="Accéder à l’espace Professeurs"
-  />
-</div>
+          <div id="profs" className="scroll-mt-24">
+            <Card
+              title="PROFESSEURS"
+              punchline="Des prompts pédagogiques solides"
+              line1="Construisez des séances, évaluations, corrigés et différenciations — vite, propre, et conforme."
+              line2="Gain de temps, sans perte de maîtrise : vous adaptez, l’IA structure."
+              ctaHref="/espace-profs"
+              ctaLabel="Accéder à l’espace Professeurs"
+              badge="BO / Éduscol"
+            />
+          </div>
 
           <div id="eleves" className="scroll-mt-24">
             <Card
               title="ÉLÈVES"
-              punchline="Ton coach IA "
-              line1="Comprendre, corriger, améliorer "
-              line2="Un cadre clair pour apprendre sans tricher."
+              punchline="Un coach IA… sans tricher"
+              line1="Comprendre, corriger, améliorer : pas de magie, une méthode."
+              line2="Traces obligatoires + explication personnelle = progression réelle."
               ctaHref="/espace-eleves"
-              ctaLabel="Accéder au générateur (Élèves)"
+              ctaLabel="Accéder à l’espace Élèves"
+              badge="Traces & méthode"
             />
           </div>
 
-<div id="parents" className="scroll-mt-24">
-  <Card
-    title="PARENTS"
-    punchline="Le suivi de votre enfant💛"
-    line1="Expliquez la situation de votre enfant (niveau, difficultés, objectifs)."
-    line2="Besoins spécifiques, rythme personnel, attention, confiance, mémorisation."
-    ctaHref="/espace-parents"
-    ctaLabel="Accéder à l’espace Parents"
-  />
-</div>
-
-          <div id="ecole" className="scroll-mt-24">
+          <div id="parents" className="scroll-mt-24">
             <Card
-              title="ÉCOLE / ÉTABLISSEMENT"
-              punchline="Un cadre commun ."
-              line1="Des espaces dédiés à l’administration, à la vie scolaire, aux AESH et aux personnels."
-              line2="Ressources, repères et pratiques alignées pour un usage cohérent et rassurant de l’IA."
-              ctaHref="/espace-ecoles"
-              ctaLabel="Accéder à l’espace Écoles"
+              title="PARENTS"
+              punchline="Comprendre et accompagner"
+              line1="Expliquez la situation de votre enfant (niveau, difficultés, objectifs)."
+              line2="Aides concrètes : organisation, confiance, mémorisation, besoins spécifiques."
+              ctaHref="/espace-parents"
+              ctaLabel="Accéder à l’espace Parents"
+              badge="Clair & rassurant"
             />
           </div>
 
+          <div id="etablissement" className="scroll-mt-24">
+            <Card
+              title="ÉTABLISSEMENT"
+              punchline="Un cadre commun, rassurant"
+              line1="Accès par codes, rôles (élève/prof/vie scolaire/administration), et usage cohérent."
+              line2="Un socle partagé : ressources, repères, bonnes pratiques, et suivi des usages."
+              ctaHref="/espace-ecoles"
+              ctaLabel="Accéder à l’espace Établissement"
+              badge="Codes & rôles"
+            />
+          </div>
         </div>
 
         {/* Footer crédibilité */}
         <div className="mt-10 rounded-2xl border border-slate-200 bg-slate-50 p-6">
-
-
+          <p className="text-sm font-semibold text-slate-900">
+            EleveAI : une IA utile, encadrée, et compatible avec la réalité des classes.
+          </p>
+          <p className="mt-2 text-sm text-slate-600 leading-relaxed">
+            Architecture pensée pour séparer clairement les usages email et établissement,
+            avec historiques, traces et règles serveur (pilotage par API). 
+          </p>
+          <p className="mt-2 text-xs text-slate-500">
+            ✅ Séparation EMAIL / ÉTABLISSEMENT • ✅ Traces • ✅ Conformité • ✅ Progression
+          </p>
         </div>
       </section>
     </main>

@@ -3,60 +3,29 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState, useCallback } from "react";
 import { createClient } from "@/lib/supabase/client";
 import {
-  ChevronDown,
-  Menu,
+  Sparkles,
+  Users,
+  GraduationCap,
+  UsersRound,
+  School,
+  BadgeCheck,
+  Euro,
+  Mail,
   LogIn,
   UserPlus,
-  GraduationCap,
-  Users,
-  UsersRound,
-  Wand2,
-  Sparkles,
-  ClipboardList,
-  BookOpenText,
-  Mail,
   LayoutDashboard,
   LogOut,
-  Euro,
-  FlaskConical,
-  HelpCircle,
-  ShieldCheck,
+  Menu,
+  ChevronDown,
+  Building2,
 } from "lucide-react";
-
-/**
- * Header EleveAI (SEO + produit)
- * - Pages SEO : /profs /eleves /parents
- * - Pages confiance : /faq /charte /qui-sommes-nous
- * - Outils : /espace-profs /espace-eleves /espace-parents /espace-atelier-ia
- * - Atelier-IA : vitrine /atelier-IA + sous-pages
- */
 
 const AUTH_ROUTES = {
   signin: "/auth/signin",
   signup: "/auth/signup",
-};
-
-// ✅ Discord (lien d'invitation) — mets la vraie URL dans .env.local
-const DISCORD_INVITE_URL =
-  process.env.NEXT_PUBLIC_DISCORD_INVITE_URL || "https://discord.gg/Z6HyN6SV";
-
-type NavItem = {
-  href: string;
-  label: string;
-  desc?: string;
-  icon?: React.ReactNode;
-  badge?: string;
-};
-
-type GroupKey = "atelier" | "generateurs";
-type Group = {
-  key: GroupKey;
-  label: string;
-  icon: React.ReactNode;
-  items: NavItem[];
 };
 
 function isActive(pathname: string, href: string) {
@@ -64,18 +33,17 @@ function isActive(pathname: string, href: string) {
   return pathname === href || pathname.startsWith(href + "/");
 }
 
-function useOnClickOutside(
-  refs: React.RefObject<HTMLElement>[],
+function useOnClickOutside<T extends HTMLElement>(
+  ref: React.RefObject<T>,
   handler: () => void,
-  enabled = true,
+  enabled: boolean,
 ) {
   useEffect(() => {
     if (!enabled) return;
 
     function listener(e: MouseEvent | TouchEvent) {
       const target = e.target as Node;
-      const clickedInside = refs.some((r) => r.current?.contains(target));
-      if (!clickedInside) handler();
+      if (!ref.current?.contains(target)) handler();
     }
 
     document.addEventListener("mousedown", listener);
@@ -85,19 +53,7 @@ function useOnClickOutside(
       document.removeEventListener("mousedown", listener);
       document.removeEventListener("touchstart", listener);
     };
-  }, [refs, handler, enabled]);
-}
-
-function IconWrap({ children }: { children: React.ReactNode }) {
-  return (
-    <span className="inline-flex h-8 w-8 items-center justify-center rounded-xl border border-slate-700 bg-slate-950/60 text-slate-200">
-      {children}
-    </span>
-  );
-}
-
-function srOnly(text: string) {
-  return <span className="sr-only">{text}</span>;
+  }, [ref, handler, enabled]);
 }
 
 export default function Header() {
@@ -108,37 +64,18 @@ export default function Header() {
   const [authLoading, setAuthLoading] = useState(true);
   const [userEmail, setUserEmail] = useState<string | null>(null);
 
-  const [open, setOpen] = useState<null | GroupKey>(null);
+  const [mobileOpen, setMobileOpen] = useState(false);
 
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [mobileOpen, setMobileOpen] = useState<null | GroupKey>(null);
+  // ✅ Valeria dropdown (desktop)
+  const [valeriaOpen, setValeriaOpen] = useState(false);
+  const valeriaRef = useRef<HTMLDivElement>(null);
 
-  const refAtelier = useRef<HTMLDivElement>(null);
-  const refGenerateurs = useRef<HTMLDivElement>(null);
-
-  const headerRef = useRef<HTMLElement>(null);
-
-  const closeAll = useCallback(() => {
-    setOpen(null);
-    setMenuOpen(false);
-    setMobileOpen(null);
-  }, []);
-
-  const refsDesktop = useMemo(() => [refAtelier, refGenerateurs], []);
-  useOnClickOutside(refsDesktop, () => setOpen(null), open !== null);
-  useOnClickOutside([headerRef], closeAll, menuOpen);
+  const closeValeria = useCallback(() => setValeriaOpen(false), []);
+  useOnClickOutside(valeriaRef, closeValeria, valeriaOpen);
 
   useEffect(() => {
-    function onKeyDown(e: KeyboardEvent) {
-      if (e.key === "Escape") closeAll();
-    }
-    document.addEventListener("keydown", onKeyDown);
-    return () => document.removeEventListener("keydown", onKeyDown);
-  }, [closeAll]);
-
-  useEffect(() => {
-    closeAll();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    setMobileOpen(false);
+    setValeriaOpen(false);
   }, [pathname]);
 
   useEffect(() => {
@@ -168,231 +105,158 @@ export default function Header() {
 
   const logout = useCallback(async () => {
     await supabase.auth.signOut();
-    setUserEmail(null);
     router.replace("/accueil");
   }, [router, supabase]);
 
-  // ✅ IMPORTANT : route en minuscules = /espace-atelier-ia
-  const GROUPS: Group[] = useMemo(
-    () => [
-      {
-        key: "atelier",
-        label: "Atelier-IA",
-        icon: <Sparkles className="h-4 w-4" />,
-        items: [
-          {
-            href: "/atelier-IA",
-            label: "Présentation",
-            desc: "Cadre, objectifs et bénéfices",
-            icon: <Sparkles className="h-4 w-4" />,
-          },
-          {
-            href: "/atelier-IA/vision",
-            label: "Vision pédagogique",
-            desc: "IA autorisée mais encadrée (anti-triche)",
-            icon: <Sparkles className="h-4 w-4" />,
-          },
-          {
-            href: "/atelier-IA/programme",
-            label: "Programme",
-            desc: "Séances, progressivité, livrables",
-            icon: <ClipboardList className="h-4 w-4" />,
-          },
-        ],
-      },
-      {
-        key: "generateurs",
-        label: "Prompts",
-        icon: <Wand2 className="h-4 w-4" />,
-        items: [
-          {
-            href: "/espace-atelier-IA",
-            label: "Générateur Atelier-IA",
-            desc: "Créer des projets guidés (environnement, action locale, créativité…)",
-            icon: <FlaskConical className="h-4 w-4" />,
-            badge: "Nouveau",
-          },
-          {
-            href: "/espace-profs",
-            label: "Générateur Profs",
-            desc: "Créer des consignes IA (prompts) encadrées",
-            icon: <Users className="h-4 w-4" />,
-            badge: "5 gratuits",
-          },
-          {
-            href: "/espace-eleves",
-            label: "Générateur Élèves",
-            desc: "S’entraîner, justifier, corriger (anti-triche)",
-            icon: <GraduationCap className="h-4 w-4" />,
-            badge: "5 gratuits",
-          },
-          {
-            href: "/espace-parents",
-            label: "Générateur Parents",
-            desc: "Comprendre et accompagner",
-            icon: <UsersRound className="h-4 w-4" />,
-            badge: "5 gratuits",
-          },
-        ],
-      },
-    ],
-    [],
-  );
-
-  function getRefForKey(key: GroupKey) {
-    return key === "generateurs" ? refGenerateurs : refAtelier;
-  }
-
-  const desktopBtnClass = (active: boolean) =>
-    `px-3 py-1.5 text-sm rounded-xl border flex items-center gap-2 transition ${
+  // ✅ Apple-like link (subtle)
+  const topLink = (active: boolean) =>
+    `px-2.5 py-1.5 text-sm rounded-lg transition ${
       active
-        ? "border-emerald-500/70 bg-emerald-500/10 text-emerald-100 shadow-[0_0_0_1px_rgba(16,185,129,0.35)]"
-        : "border-slate-700 text-slate-200 hover:bg-slate-900 hover:border-slate-500"
+        ? "text-white"
+        : "text-slate-300 hover:text-white"
     }`;
 
-  const menuItemClass = (active: boolean) =>
-    `px-4 py-2 text-sm flex items-start gap-3 ${
+  // ✅ Premium pill button (Valeria)
+  const pill = (active: boolean) =>
+    `inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-sm font-semibold transition border ${
       active
-        ? "text-emerald-200 bg-emerald-500/10 border-l-2 border-emerald-500"
-        : "text-slate-300 hover:bg-slate-900"
+        ? "border-emerald-400/60 bg-emerald-500/15 text-emerald-100"
+        : "border-slate-700 bg-slate-950/40 text-slate-100 hover:border-slate-500 hover:bg-slate-900/40"
     }`;
 
-  const topLinkClass = (active: boolean) =>
-    `px-3 py-1.5 text-sm rounded-xl border transition ${
-      active
-        ? "border-emerald-500/70 bg-emerald-500/10 text-emerald-100"
-        : "border-slate-700 text-slate-200 hover:bg-slate-900 hover:border-slate-500"
-    }`;
+  const ghostBtn =
+    "inline-flex items-center gap-2 rounded-full border border-slate-700 px-3 py-1.5 text-sm text-slate-200 hover:bg-slate-900 hover:border-slate-500 transition";
+
+  const primaryBtn =
+    "inline-flex items-center gap-2 rounded-full border border-emerald-500/40 bg-emerald-500/10 px-3 py-1.5 text-sm font-semibold text-emerald-200 hover:bg-emerald-500/15 hover:border-emerald-400/60 transition";
 
   return (
-    <header
-      id="app-header"
-      ref={headerRef}
-      className="sticky top-0 z-40 border-b border-slate-800 bg-slate-950/90 backdrop-blur"
-    >
-
-      <nav className="mx-auto flex max-w-7xl items-center justify-between px-2 sm:px-4 lg:px-6 py-3 sm:py-4">
+    <header className="sticky top-0 z-40 border-b border-slate-800 bg-slate-950/80 backdrop-blur">
+      <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4">
         {/* LOGO */}
-        <Link href="/accueil" onClick={closeAll} className="flex items-center gap-2">
-          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-emerald-500 text-slate-900">
+        <Link href="/accueil" className="flex items-center gap-2">
+          <div className="flex h-9 w-9 items-center justify-center rounded-2xl bg-emerald-500 text-slate-900">
             <Sparkles className="h-5 w-5" />
-            {srOnly("EleveAI")}
           </div>
-          <div className="flex flex-col leading-tight">
-            <span className="text-sm sm:text-base font-semibold text-slate-50">EleveAI</span>
-            <span className="text-[10px] sm:text-xs text-slate-400">
-              IA pédagogique encadrée (Profs · Élèves · Parents)
-            </span>
+          <div className="hidden sm:flex flex-col leading-tight">
+            <span className="text-base font-semibold text-slate-50">EleveAI</span>
+            <span className="text-xs text-slate-400">IA encadrée • usages réels</span>
           </div>
         </Link>
 
-        {/* DESKTOP MENU */}
+        {/* DESKTOP */}
         <div className="hidden lg:flex items-center gap-2">
-          {/* Pages SEO cibles */}
-          <Link href="/profs" className={topLinkClass(isActive(pathname, "/profs"))}>
+          <Link href="/profs" className={topLink(isActive(pathname, "/profs"))}>
             <span className="inline-flex items-center gap-2">
               <Users className="h-4 w-4" />
               Profs
             </span>
           </Link>
 
-          <Link href="/eleves" className={topLinkClass(isActive(pathname, "/eleves"))}>
+          <Link href="/eleves" className={topLink(isActive(pathname, "/eleves"))}>
             <span className="inline-flex items-center gap-2">
               <GraduationCap className="h-4 w-4" />
               Élèves
             </span>
           </Link>
 
-          <Link href="/parents" className={topLinkClass(isActive(pathname, "/parents"))}>
+          <Link href="/parents" className={topLink(isActive(pathname, "/parents"))}>
             <span className="inline-flex items-center gap-2">
               <UsersRound className="h-4 w-4" />
               Parents
             </span>
           </Link>
 
-          {/* ✅ Confiance : FAQ + Charte */}
-          <Link href="/faq" className={topLinkClass(isActive(pathname, "/faq"))}>
+          <Link href="/espace-ecoles" className={topLink(isActive(pathname, "/espace-ecoles"))}>
             <span className="inline-flex items-center gap-2">
-              <HelpCircle className="h-4 w-4" />
-              FAQ
+              <School className="h-4 w-4" />
+              Établissement
             </span>
           </Link>
 
-          {/* Dropdowns: Atelier-IA + Prompts */}{/*}
-          {GROUPS.map((group) => {
-            const ref = getRefForKey(group.key);
-            const opened = open === group.key;
-            const anyActive = group.items.some((it) => isActive(pathname, it.href));
-            const activeBtn = opened || anyActive;
+          <span className="mx-2 h-5 w-px bg-slate-800" />
 
-            return (
-              <div key={group.key} ref={ref} className="relative">
-                <button
-                  type="button"
-                  onClick={() => setOpen((v) => (v === group.key ? null : group.key))}
-                  className={desktopBtnClass(activeBtn)}
-                  aria-haspopup="menu"
-                  aria-expanded={opened}
-                >
-                  <span className="text-slate-200">{group.icon}</span>
-                  {group.label}
-                  <ChevronDown
-                    className={`h-4 w-4 transition-transform ${opened ? "rotate-180" : ""}`}
-                  />
-                </button>
+          {/* ⭐ VALERIA — SYSTEM (CTA principal) */}
+          <div ref={valeriaRef} className="relative">
+            <button
+              type="button"
+              onClick={() => setValeriaOpen((v) => !v)}
+              className={pill(isActive(pathname, "/optimiseur") || isActive(pathname, "/valeria-consulting"))}
+              aria-expanded={valeriaOpen}
+              aria-haspopup="menu"
+              title="Valeria — Optimisation mesurable"
+            >
+              <BadgeCheck className="h-4 w-4 text-emerald-300" />
+              Valeria
+              <span className="rounded-full bg-slate-900 px-2 py-0.5 text-[10px] font-bold text-slate-200 border border-slate-700">
+                /20
+              </span>
+              <ChevronDown className={`h-4 w-4 transition-transform ${valeriaOpen ? "rotate-180" : ""}`} />
+            </button>
 
-                {opened && (
-                  <div className="absolute right-0 mt-2 w-[26rem] rounded-xl border border-slate-700 bg-slate-950/95 shadow-xl backdrop-blur">
-                    <div className="flex flex-col py-2">
-                      {group.items.map((link) => {
-                        const active = isActive(pathname, link.href);
-                        return (
-                          <Link
-                            key={link.href}
-                            href={link.href}
-                            onClick={closeAll}
-                            className={menuItemClass(active)}
-                          >
-                            <IconWrap>{link.icon}</IconWrap>
-                            <span className="flex-1 min-w-0">
-                              <span className="block font-semibold">{link.label}</span>
-                              {link.desc ? (
-                                <span className="block text-[11px] text-slate-400 mt-0.5">
-                                  {link.desc}
-                                </span>
-                              ) : null}
-                            </span>
-                            {link.badge && (
-                              <span className="inline-flex items-center rounded-full bg-emerald-600/20 text-emerald-300 text-[10px] font-semibold px-2 py-0.5 uppercase tracking-wide">
-                                {link.badge}
-                              </span>
-                            )}
-                          </Link>
-                        );
-                      })}
-                    </div>
-                  </div>
-                )}
+            {valeriaOpen && (
+              <div className="absolute right-0 mt-2 w-[22rem] rounded-2xl border border-slate-800 bg-slate-950/95 shadow-2xl backdrop-blur">
+                <div className="p-2">
+                  <Link
+                    href="/optimiseur"
+                    onClick={() => setValeriaOpen(false)}
+                    className={`flex items-start gap-3 rounded-xl px-3 py-2 text-sm transition ${
+                      isActive(pathname, "/optimiseur")
+                        ? "bg-emerald-500/10 text-emerald-100"
+                        : "text-slate-200 hover:bg-slate-900"
+                    }`}
+                  >
+                    <span className="mt-0.5 inline-flex h-8 w-8 items-center justify-center rounded-xl border border-slate-700 bg-slate-950/60">
+                      <BadgeCheck className="h-4 w-4" />
+                    </span>
+                    <span className="flex-1">
+                      <span className="block font-semibold">Optimiseur (score /20)</span>
+                      <span className="block text-[11px] text-slate-400 mt-0.5">
+                        Itérations contrôlées • robustesse • reproductibilité
+                      </span>
+                    </span>
+                    <span className="rounded-full bg-emerald-600/15 text-emerald-200 text-[10px] font-bold px-2 py-0.5 border border-emerald-500/20">
+                      System
+                    </span>
+                  </Link>
+
+                  <Link
+                    href="/valeria-consulting"
+                    onClick={() => setValeriaOpen(false)}
+                    className={`mt-1 flex items-start gap-3 rounded-xl px-3 py-2 text-sm transition ${
+                      isActive(pathname, "/valeria-consulting")
+                        ? "bg-emerald-500/10 text-emerald-100"
+                        : "text-slate-200 hover:bg-slate-900"
+                    }`}
+                  >
+                    <span className="mt-0.5 inline-flex h-8 w-8 items-center justify-center rounded-xl border border-slate-700 bg-slate-950/60">
+                      <Building2 className="h-4 w-4" />
+                    </span>
+                    <span className="flex-1">
+                      <span className="block font-semibold">Formation & Consulting</span>
+                      <span className="block text-[11px] text-slate-400 mt-0.5">
+                        Entreprises • centres de formation • accompagnement
+                      </span>
+                    </span>
+                    <span className="rounded-full bg-slate-900 text-slate-200 text-[10px] font-bold px-2 py-0.5 border border-slate-700">
+                      Pro
+                    </span>
+                  </Link>
+                </div>
               </div>
-            );
-          })} 
-            */}
+            )}
+          </div>
 
-          <Link href="/blog" className={topLinkClass(isActive(pathname, "/blog"))}>
-            <span className="inline-flex items-center gap-2">
-              <BookOpenText className="h-4 w-4" />
-              Articles
-            </span>
-          </Link>
+          <span className="mx-2 h-5 w-px bg-slate-800" />
 
-          <Link href="/tarifs" className={topLinkClass(isActive(pathname, "/tarifs"))}>
+          <Link href="/tarifs" className={topLink(isActive(pathname, "/tarifs"))}>
             <span className="inline-flex items-center gap-2">
               <Euro className="h-4 w-4" />
               Tarifs
             </span>
           </Link>
 
-          <Link href="/contact" className={topLinkClass(isActive(pathname, "/contact"))}>
+          <Link href="/contact" className={topLink(isActive(pathname, "/contact"))}>
             <span className="inline-flex items-center gap-2">
               <Mail className="h-4 w-4" />
               Contact
@@ -400,21 +264,15 @@ export default function Header() {
           </Link>
         </div>
 
-        {/* RIGHT CTA (DESKTOP) */}
+        {/* RIGHT CTA */}
         <div className="hidden lg:flex items-center gap-2">
           {!authLoading && !isLoggedIn && (
             <>
-              <Link
-                href={AUTH_ROUTES.signin}
-                className="inline-flex items-center gap-2 rounded-xl border border-slate-700 px-3 py-1.5 text-sm text-slate-200 hover:bg-slate-900 hover:border-slate-500"
-              >
+              <Link href={AUTH_ROUTES.signin} className={ghostBtn}>
                 <LogIn className="h-4 w-4" />
                 Connexion
               </Link>
-              <Link
-                href={AUTH_ROUTES.signup}
-                className="inline-flex items-center gap-2 rounded-xl border border-emerald-500/40 bg-emerald-500/10 px-3 py-1.5 text-sm text-emerald-200 hover:bg-emerald-500/15 hover:border-emerald-400/60"
-              >
+              <Link href={AUTH_ROUTES.signup} className={primaryBtn}>
                 <UserPlus className="h-4 w-4" />
                 Inscription
               </Link>
@@ -423,20 +281,11 @@ export default function Header() {
 
           {!authLoading && isLoggedIn && (
             <>
-              <Link
-                href="/dashboard"
-                className="inline-flex items-center gap-2 rounded-xl border border-emerald-500/40 bg-emerald-500/10 px-3 py-1.5 text-sm text-emerald-200 hover:bg-emerald-500/15 hover:border-emerald-400/60"
-              >
+              <Link href="/dashboard" className={primaryBtn}>
                 <LayoutDashboard className="h-4 w-4" />
                 Dashboard
               </Link>
-
-              <button
-                type="button"
-                onClick={logout}
-                className="inline-flex items-center gap-2 rounded-xl border border-slate-700 px-3 py-1.5 text-sm text-slate-200 hover:bg-slate-900 hover:border-slate-500"
-                title={userEmail ?? "Déconnexion"}
-              >
+              <button onClick={logout} className={ghostBtn} title={userEmail ?? "Déconnexion"}>
                 <LogOut className="h-4 w-4" />
                 Déconnexion
               </button>
@@ -444,15 +293,10 @@ export default function Header() {
           )}
         </div>
 
-        {/* BURGER MOBILE */}
+        {/* MOBILE BUTTON */}
         <button
-          type="button"
-          className="lg:hidden inline-flex items-center justify-center rounded-md border border-slate-700 p-2 text-slate-200"
-          onClick={() => {
-            setMenuOpen((o) => !o);
-            setOpen(null);
-            setMobileOpen(null);
-          }}
+          className="lg:hidden inline-flex items-center justify-center rounded-full border border-slate-700 p-2 text-slate-200 hover:bg-slate-900 transition"
+          onClick={() => setMobileOpen((v) => !v)}
           aria-label="Ouvrir le menu"
         >
           <Menu className="h-5 w-5" />
@@ -460,233 +304,129 @@ export default function Header() {
       </nav>
 
       {/* MOBILE MENU */}
-      {menuOpen && (
-        <div className="border-t border-slate-800 bg-slate-950 lg:hidden">
-          <div className="mx-auto max-w-6xl px-4 py-3 space-y-2">
-            {/* Pages SEO */}
-            <div className="grid grid-cols-3 gap-2">
+      {mobileOpen && (
+        <div className="lg:hidden border-t border-slate-800 bg-slate-950/95 backdrop-blur">
+          <div className="mx-auto max-w-7xl px-4 py-4 space-y-2">
+            {/* EleveAI */}
+            <div className="grid grid-cols-2 gap-2">
               <Link
                 href="/profs"
-                onClick={closeAll}
-                className="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-800 px-3 py-2 text-sm text-slate-200 hover:bg-slate-900"
+                onClick={() => setMobileOpen(false)}
+                className="rounded-xl border border-slate-800 px-3 py-2 text-sm text-slate-200 hover:bg-slate-900"
               >
-                <Users className="h-4 w-4" />
                 Profs
               </Link>
               <Link
                 href="/eleves"
-                onClick={closeAll}
-                className="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-800 px-3 py-2 text-sm text-slate-200 hover:bg-slate-900"
+                onClick={() => setMobileOpen(false)}
+                className="rounded-xl border border-slate-800 px-3 py-2 text-sm text-slate-200 hover:bg-slate-900"
               >
-                <GraduationCap className="h-4 w-4" />
                 Élèves
               </Link>
               <Link
                 href="/parents"
-                onClick={closeAll}
-                className="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-800 px-3 py-2 text-sm text-slate-200 hover:bg-slate-900"
+                onClick={() => setMobileOpen(false)}
+                className="rounded-xl border border-slate-800 px-3 py-2 text-sm text-slate-200 hover:bg-slate-900"
               >
-                <UsersRound className="h-4 w-4" />
                 Parents
               </Link>
+              <Link
+                href="/espace-ecoles"
+                onClick={() => setMobileOpen(false)}
+                className="rounded-xl border border-slate-800 px-3 py-2 text-sm text-slate-200 hover:bg-slate-900"
+              >
+                Établissement
+              </Link>
             </div>
 
-            {/* ✅ Confiance (mobile) */}
+            {/* Valeria (business highlight) */}
+            <div className="rounded-2xl border border-emerald-500/20 bg-emerald-500/5 p-3">
+              <p className="text-xs font-semibold text-emerald-200">Valeria</p>
+              <div className="mt-2 grid grid-cols-2 gap-2">
+                <Link
+                  href="/optimiseur"
+                  onClick={() => setMobileOpen(false)}
+                  className="rounded-xl border border-slate-800 px-3 py-2 text-sm text-slate-100 hover:bg-slate-900"
+                >
+                  Optimiseur (/20)
+                </Link>
+                <Link
+                  href="/valeria-consulting"
+                  onClick={() => setMobileOpen(false)}
+                  className="rounded-xl border border-slate-800 px-3 py-2 text-sm text-slate-100 hover:bg-slate-900"
+                >
+                  Consulting
+                </Link>
+              </div>
+              <p className="mt-2 text-[11px] text-slate-400">
+                Système d’optimisation mesurable • entreprises & formation
+              </p>
+            </div>
+
+            {/* Tarifs / Contact */}
             <div className="grid grid-cols-2 gap-2">
               <Link
-                href="/faq"
-                onClick={closeAll}
-                className="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-800 px-3 py-2 text-sm text-slate-200 hover:bg-slate-900"
+                href="/tarifs"
+                onClick={() => setMobileOpen(false)}
+                className="rounded-xl border border-slate-800 px-3 py-2 text-sm text-slate-200 hover:bg-slate-900"
               >
-                <HelpCircle className="h-4 w-4" />
-                FAQ
+                Tarifs
               </Link>
-
               <Link
-                href="/charte"
-                onClick={closeAll}
-                className="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-800 px-3 py-2 text-sm text-slate-200 hover:bg-slate-900"
+                href="/contact"
+                onClick={() => setMobileOpen(false)}
+                className="rounded-xl border border-slate-800 px-3 py-2 text-sm text-slate-200 hover:bg-slate-900"
               >
-                <ShieldCheck className="h-4 w-4" />
-                Charte
+                Contact
               </Link>
             </div>
 
-            {/* ✅ Communauté (mobile) */}
-            <Link
-              href="/communaute"
-              onClick={closeAll}
-              className="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-800 px-3 py-2 text-sm text-slate-200 hover:bg-slate-900"
-            >
-              <UsersRound className="h-4 w-4" />
-              Communauté
-            </Link>
-
-            {/* Auth mobile */}
+            {/* Auth */}
             {!authLoading && !isLoggedIn && (
-              <div className="grid grid-cols-2 gap-2">
+              <div className="grid grid-cols-2 gap-2 pt-1">
                 <Link
                   href={AUTH_ROUTES.signin}
-                  onClick={closeAll}
-                  className="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-700 px-3 py-2 text-sm text-slate-200 hover:bg-slate-900 hover:border-slate-500"
+                  onClick={() => setMobileOpen(false)}
+                  className="rounded-xl border border-slate-800 px-3 py-2 text-sm text-slate-200 hover:bg-slate-900"
                 >
-                  <LogIn className="h-4 w-4" />
                   Connexion
                 </Link>
                 <Link
                   href={AUTH_ROUTES.signup}
-                  onClick={closeAll}
-                  className="inline-flex items-center justify-center gap-2 rounded-xl border border-emerald-500/40 bg-emerald-500/10 px-3 py-2 text-sm text-emerald-200 hover:bg-emerald-500/15 hover:border-emerald-400/60"
+                  onClick={() => setMobileOpen(false)}
+                  className="rounded-xl border border-emerald-500/30 bg-emerald-500/10 px-3 py-2 text-sm font-semibold text-emerald-200 hover:bg-emerald-500/15"
                 >
-                  <UserPlus className="h-4 w-4" />
                   Inscription
                 </Link>
               </div>
             )}
 
             {!authLoading && isLoggedIn && (
-              <div className="grid grid-cols-2 gap-2">
+              <div className="grid grid-cols-2 gap-2 pt-1">
                 <Link
                   href="/dashboard"
-                  onClick={closeAll}
-                  className="inline-flex items-center justify-center gap-2 rounded-xl border border-emerald-500/40 bg-emerald-500/10 px-3 py-2 text-sm text-emerald-200 hover:bg-emerald-500/15 hover:border-emerald-400/60"
+                  onClick={() => setMobileOpen(false)}
+                  className="rounded-xl border border-emerald-500/30 bg-emerald-500/10 px-3 py-2 text-sm font-semibold text-emerald-200 hover:bg-emerald-500/15"
                 >
-                  <LayoutDashboard className="h-4 w-4" />
                   Dashboard
                 </Link>
                 <button
                   type="button"
                   onClick={async () => {
                     await logout();
-                    closeAll();
+                    setMobileOpen(false);
                   }}
-                  className="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-700 px-3 py-2 text-sm text-slate-200 hover:bg-slate-900 hover:border-slate-500"
+                  className="rounded-xl border border-slate-800 px-3 py-2 text-sm text-slate-200 hover:bg-slate-900 text-left"
                 >
-                  <LogOut className="h-4 w-4" />
                   Déconnexion
                 </button>
               </div>
             )}
-
-            {/* Accordéons: Atelier-IA + Prompts */}
-            {GROUPS.map((group) => {
-              const opened = mobileOpen === group.key;
-              const anyActive = group.items.some((it) => isActive(pathname, it.href));
-
-              return (
-                <div key={group.key} className="rounded-xl border border-slate-800 overflow-hidden">
-                  <button
-                    type="button"
-                    onClick={() => setMobileOpen((v) => (v === group.key ? null : group.key))}
-                    className={`w-full px-3 py-2 text-sm flex items-center justify-between ${
-                      opened || anyActive
-                        ? "bg-emerald-500/10 text-emerald-100"
-                        : "bg-slate-950 text-slate-200 hover:bg-slate-900"
-                    }`}
-                    aria-expanded={opened}
-                  >
-                    <span className="flex items-center gap-2 font-medium">
-                      {group.icon}
-                      {group.label}
-                    </span>
-                    <ChevronDown
-                      className={`h-4 w-4 transition-transform ${opened ? "rotate-180" : ""}`}
-                    />
-                  </button>
-
-                  {opened && (
-                    <div className="flex flex-col">
-                      {group.items.map((link) => {
-                        const active = isActive(pathname, link.href);
-                        return (
-                          <Link
-                            key={link.href}
-                            href={link.href}
-                            onClick={closeAll}
-                            className={`px-3 py-2 text-sm border-t border-slate-800 flex items-start gap-3 ${
-                              active
-                                ? "text-emerald-200 bg-emerald-500/10"
-                                : "text-slate-300 hover:bg-slate-900"
-                            }`}
-                          >
-                            <IconWrap>{link.icon}</IconWrap>
-                            <span className="flex-1 min-w-0">
-                              <span className="block font-semibold">{link.label}</span>
-                              {link.desc ? (
-                                <span className="block text-[11px] text-slate-400 mt-0.5">
-                                  {link.desc}
-                                </span>
-                              ) : null}
-                            </span>
-                            {link.badge && (
-                              <span className="inline-flex items-center rounded-full bg-emerald-600/20 text-emerald-300 text-[10px] font-semibold px-2 py-0.5 uppercase tracking-wide">
-                                {link.badge}
-                              </span>
-                            )}
-                          </Link>
-                        );
-                      })}
-                    </div>
-                  )}
-                </div>
-              );
-            })}
-
-            {/* Liens 1er niveau mobile */}
-            <div className="grid grid-cols-3 gap-2 pt-1">
-              <Link
-                href="/blog"
-                onClick={closeAll}
-                className="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-800 px-3 py-2 text-sm text-slate-200 hover:bg-slate-900"
-              >
-                <BookOpenText className="h-4 w-4" />
-                Articles
-              </Link>
-
-              <Link
-                href="/tarifs"
-                onClick={closeAll}
-                className="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-800 px-3 py-2 text-sm text-slate-200 hover:bg-slate-900"
-              >
-                <Euro className="h-4 w-4" />
-                Tarifs
-              </Link>
-
-              <Link
-                href="/contact"
-                onClick={closeAll}
-                className="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-800 px-3 py-2 text-sm text-slate-200 hover:bg-slate-900"
-              >
-                <Mail className="h-4 w-4" />
-                Contact
-              </Link>
-            </div>
           </div>
         </div>
       )}
-
-      {/* ✅ MINI "Accès rapide" (crawler-friendly) */}
-      <div className="sr-only" aria-hidden="false">
-        <nav aria-label="Accès rapide">
-          <ul>
-            <li><Link href="/profs">Profs</Link></li>
-            <li><Link href="/eleves">Élèves</Link></li>
-            <li><Link href="/parents">Parents</Link></li>
-            <li><Link href="/faq">FAQ</Link></li>
-            <li><Link href="/charte">Charte</Link></li>
-            <li><Link href="/communaute">Communauté</Link></li>
-            <li><Link href="/espace-atelier-IA">Atelier-IA</Link></li>
-            <li><Link href="/espace-atelier-IA">Générateur Atelier-IA</Link></li>
-            <li><Link href="/espace-profs">Générateur Profs</Link></li>
-            <li><Link href="/espace-eleves">Générateur Élèves</Link></li>
-            <li><Link href="/espace-parents">Générateur Parents</Link></li>
-            <li><Link href="/tarifs">Tarifs</Link></li>
-            <li><Link href="/contact">Contact</Link></li>
-            <li><Link href="/blog">Articles</Link></li>
-            <li><a href={DISCORD_INVITE_URL}>Communauté EleveAI (Discord)</a></li>
-          </ul>
-        </nav>
-      </div>
     </header>
   );
 }
+
+
