@@ -75,65 +75,29 @@ export default function Sidebar({
       {
         href: "/optimiseur",
         label: "Valeria (score /20)",
-        description: "Clarifier • sécuriser • optimiser (éducation & entreprise).",
+        description: "Optimiser un prompt (éducation & entreprise).",
         icon: <BadgeCheck className="h-4 w-4" />,
       },
 
-      // --- ÉDUCATION ---
       {
         href: "/espace-profs",
         label: "Espace Profs",
         description: "Séances • évaluations • différenciation • corrigés.",
         icon: <Users className="h-4 w-4" />,
       },
+
       {
         href: "/espace-eleves",
         label: "Espace Élèves",
         description: "Apprendre sans tricher : méthode, traces, progression.",
         icon: <GraduationCap className="h-4 w-4" />,
       },
-      {
-        href: "/espace-parents",
-        label: "Espace Parents",
-        description: "Aider sans faire à la place : rassurer, cadrer, guider.",
-        icon: <UsersRound className="h-4 w-4" />,
-      },
-      {
-        href: "/espace-ecoles",
-        label: "Espace École",
-        description: "Cadre commun : cohérence, exigences, repères.",
-        icon: <School className="h-4 w-4" />,
-      },
 
-      // --- ENTREPRISES ---
       {
         href: "/valeria-consulting",
         label: "Espace Entreprises",
-        description: "Formation • procédures • qualité • checklists mesurables.",
+        description: "Qualité • procédures • formations • prompts robustes.",
         icon: <Building2 className="h-4 w-4" />,
-      },
-
-      // --- ATELIER ---
-      {
-        href: "/espace-atelier-IA",
-        label: "Atelier-IA",
-        description: "Explorer, réfléchir, progresser (cadre encadré).",
-        icon: <FlaskConical className="h-4 w-4" />,
-      },
-
-      // --- RESSOURCES / CONTACT ---
-      // (garde “presets” pour plus tard si tu veux)
-      // {
-      //   href: "/presets",
-      //   label: "Bibliothèque",
-      //   description: "Presets & modèles (bientôt).",
-      //   icon: <Library className="h-4 w-4" />,
-      // },
-      {
-        href: "/contact",
-        label: "Contact",
-        description: "EleveAI & Valeria Consulting.",
-        icon: <Mail className="h-4 w-4" />,
       },
     ],
     [],
