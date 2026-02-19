@@ -1,38 +1,29 @@
-// app/AccueilClient.tsx
 "use client";
 
 import Link from "next/link";
 import { useCallback } from "react";
+import Image from "next/image";
 
 const HEADER_OFFSET = 80;
 
-function YouTubeEmbed({ videoId }: { videoId: string }) {
-  return (
-    <div className="w-full">
-      <div className="relative w-full overflow-hidden rounded-2xl border border-slate-200 bg-black aspect-video shadow-sm">
-        <iframe
-          className="absolute inset-0 h-full w-full"
-          src={`https://www.youtube-nocookie.com/embed/${videoId}?rel=0&modestbranding=1`}
-          title="Démo Valeria / EleveAI"
-          loading="lazy"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowFullScreen
-        />
-      </div>
-    </div>
-  );
-}
-
-export default function AccueilClient() {
+export default function AccueilPage() {
   const scrollTo = useCallback((id: string) => {
     const el = document.getElementById(id);
     if (!el) return;
+
     const elementPosition = el.getBoundingClientRect().top + window.scrollY;
     const offsetPosition = elementPosition - HEADER_OFFSET;
+
     window.scrollTo({ top: offsetPosition, behavior: "smooth" });
   }, []);
 
-  const Chip = ({ label, onClick }: { label: string; onClick: () => void }) => (
+  const Chip = ({
+    label,
+    onClick,
+  }: {
+    label: string;
+    onClick: () => void;
+  }) => (
     <button
       type="button"
       onClick={onClick}
@@ -44,71 +35,40 @@ export default function AccueilClient() {
     </button>
   );
 
-  const Pill = ({ children }: { children: React.ReactNode }) => (
-    <span className="inline-flex items-center rounded-full bg-slate-900 px-3 py-1 text-xs font-semibold text-white">
-      {children}
-    </span>
-  );
-
-  const BigCard = ({
+  const Card = ({
     title,
-    subtitle,
-    bullets,
-    primaryHref,
-    primaryLabel,
-    secondaryHref,
-    secondaryLabel,
+    punchline,
+    line1,
+    line2,
+    ctaHref,
+    ctaLabel,
   }: {
     title: string;
-    subtitle: string;
-    bullets: string[];
-    primaryHref: string;
-    primaryLabel: string;
-    secondaryHref: string;
-    secondaryLabel: string;
+    punchline: string;
+    line1: string;
+    line2: string;
+    ctaHref: string;
+    ctaLabel: string;
   }) => (
-    <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
+    <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
       <p className="text-xs uppercase tracking-wider text-slate-500">{title}</p>
-      <h3 className="mt-2 text-2xl sm:text-3xl font-extrabold text-slate-900 leading-tight">
-        {subtitle}
+
+      <h3 className="mt-3 text-2xl sm:text-3xl font-extrabold leading-tight text-slate-900">
+        {punchline}
       </h3>
 
-      <ul className="mt-4 space-y-2 text-sm text-slate-700">
-        {bullets.map((b, i) => (
-          <li key={i} className="flex gap-2">
-            <span className="mt-0.5">✅</span>
-            <span>{b}</span>
-          </li>
-        ))}
-      </ul>
-
-      <div className="mt-6 flex flex-col sm:flex-row gap-2">
-        <Link
-          href={primaryHref}
-          className="inline-flex items-center justify-center rounded-xl bg-blue-600 px-5 py-3 text-sm font-extrabold text-white hover:bg-blue-500 transition"
-        >
-          {primaryLabel} →
-        </Link>
-        <Link
-          href={secondaryHref}
-          className="inline-flex items-center justify-center rounded-xl border border-slate-300 bg-white px-5 py-3 text-sm font-extrabold text-slate-900 hover:bg-slate-50 transition"
-        >
-          {secondaryLabel} →
-        </Link>
+      <div className="mt-4 space-y-2 text-sm text-slate-700 leading-relaxed">
+        <p>{line1}</p>
+        <p className="text-slate-600">{line2}</p>
       </div>
-    </div>
-  );
 
-  const Step = ({ n, title, desc }: { n: string; title: string; desc: string }) => (
-    <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-      <div className="flex items-start gap-3">
-        <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-slate-900 text-white font-extrabold">
-          {n}
-        </div>
-        <div>
-          <p className="text-sm font-extrabold text-slate-900">{title}</p>
-          <p className="mt-1 text-sm text-slate-700 leading-relaxed">{desc}</p>
-        </div>
+      <div className="mt-6">
+        <Link
+          href={ctaHref}
+          className="inline-flex items-center justify-center rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-500 transition"
+        >
+          {ctaLabel} →
+        </Link>
       </div>
     </div>
   );
@@ -117,204 +77,223 @@ export default function AccueilClient() {
     <main className="min-h-screen bg-white text-slate-900">
       {/* HERO */}
       <section className="relative overflow-hidden border-b border-slate-200">
+        {/* Fond clair avec halo discret */}
         <div className="absolute inset-0">
           <div className="absolute inset-0 bg-[radial-gradient(1200px_600px_at_50%_40%,rgba(59,130,246,0.12),transparent_60%)]" />
           <div className="absolute inset-0 bg-gradient-to-b from-white via-white to-slate-50" />
         </div>
 
-        <div className="relative mx-auto max-w-6xl px-4 py-14 sm:py-18">
-          <div className="mx-auto max-w-5xl text-center">
-            <div className="flex flex-wrap justify-center gap-2">
-              <Pill>Valeria • score /20 en temps réel</Pill>
-              <Pill>IA encadrée • conformité • critères mesurables</Pill>
-              <Pill>Éducation & Entreprise</Pill>
-            </div>
-
-            <h1 className="mt-6 text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-slate-900">
-              Une méthode simple :
-              <br className="hidden sm:block" />
-              clarifier → mesurer → améliorer.
+        <div className="relative mx-auto max-w-6xl px-4 py-16 sm:py-20">
+          <div className="mx-auto max-w-4xl text-center">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-slate-900">
+              Générateur de Prompts Pédagogiques
             </h1>
 
-            <p className="mt-5 text-sm sm:text-base text-slate-700 leading-relaxed max-w-3xl mx-auto">
-              <span className="font-semibold text-slate-900">EleveAI</span> aide les profs à générer des
-              ressources pédagogiques robustes. <span className="font-semibold text-slate-900">Valeria</span>{" "}
-              sert aussi aux entreprises (formation, procédures, qualité) en imposant des critères testables.
+            <h2 className="mt-4 text-lg sm:text-xl font-semibold text-blue-600">
+              IA pédagogique encadrée — prompts prêts à l’emploi (BO / Éduscol)
+            </h2>
+
+            <p className="mt-5 text-sm sm:text-base text-slate-700 leading-relaxed">
+              <span className="font-semibold text-slate-900">
+                Apprendre à penser avec l'IA
+              </span>{" "}
+              Génère un prompt clair, conforme, utilisable immédiatement en classe.
             </p>
 
-            <div className="mt-6 flex flex-col items-center gap-1">
-              <p className="text-sm font-extrabold text-slate-900">
-                Frédéric Lacoste — Valeria Consulting
-              </p>
-              <p className="text-sm text-slate-700">
-                Optimisation mesurable par itération contrôlée • La Réunion
-              </p>
-              <p className="text-xs text-slate-500">Contact : eleveai974@gmail.com</p>
-            </div>
-
-            <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
-              <Link
-                href="/optimiseur"
-                className="inline-flex w-full sm:w-auto items-center justify-center rounded-xl bg-slate-900 px-6 py-3 text-sm font-extrabold text-white hover:bg-slate-800 transition"
-              >
-                Ouvrir Valeria (optimiseur) →
-              </Link>
-
-              <Link
-                href="/espace-profs"
-                className="inline-flex w-full sm:w-auto items-center justify-center rounded-xl border border-slate-300 bg-white px-6 py-3 text-sm font-extrabold text-slate-900 hover:bg-slate-50 transition"
-              >
-                EleveAI (ressources profs) →
-              </Link>
-
-              <button
-                type="button"
-                onClick={() => scrollTo("offres")}
-                className="inline-flex w-full sm:w-auto items-center justify-center rounded-xl border border-slate-300 bg-white px-6 py-3 text-sm font-extrabold text-slate-900 hover:bg-slate-50 transition"
-              >
-                Voir les 2 offres
-              </button>
-            </div>
-
+            {/* Chips */}
             <div className="mt-8 flex flex-wrap justify-center gap-2">
-              <Chip label="🎓 Éducation" onClick={() => scrollTo("education")} />
-              <Chip label="🏭 Entreprise" onClick={() => scrollTo("entreprise")} />
-              <Chip label="🎬 Démo" onClick={() => scrollTo("demo")} />
-              <Chip label="🧠 Méthode" onClick={() => scrollTo("methode")} />
-              <Chip label="✉️ Contact" onClick={() => scrollTo("contact")} />
+              <Chip label="👩‍🏫 Profs" onClick={() => scrollTo("profs")} />
+              <Chip label="🎒 Élèves" onClick={() => scrollTo("eleves")} />
+              <Chip label="👨‍👩‍👧 Parents" onClick={() => scrollTo("parents")} />
+              <Chip label="🏫 École" onClick={() => scrollTo("ecole")} />
+
             </div>
+
+            {/* CTA */}
+            <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center sm:gap-4">
+              <Link
+                href="/auth/signup"
+                className="inline-flex w-full items-center justify-center rounded-lg bg-blue-600 px-6 py-3 text-sm font-semibold text-white
+                          hover:bg-blue-500 transition sm:w-auto"
+              >
+                S’inscrire gratuitement →
+              </Link>
+
+              <Link
+                href="/auth/signin"
+                className="inline-flex w-full items-center justify-center rounded-lg border border-blue-600 bg-white px-6 py-3 text-sm font-semibold text-blue-600
+                          hover:bg-blue-50 transition sm:w-auto"
+              >
+                Se connecter →
+              </Link>
+            </div>
+
+            <p className="mt-4 text-xs text-slate-600">
+              Prompts calibrés pour produire des sorties exploitables : consigne →
+              étapes → critères → différenciation → traces.
+            </p>
+
+            <p className="mt-6 text-xs text-slate-500">
+              ✅ Traces pédagogiques · ✅ Cadre établissement · ✅ L’IA propose,
+              l’humain justifie
+            </p>
           </div>
         </div>
       </section>
 
-      {/* OFFRES */}
-      <section id="offres" className="mx-auto max-w-6xl px-4 py-12 space-y-10 scroll-mt-24">
+      {/* SECTIONS */}
+      <section className="mx-auto max-w-6xl px-4 py-12 space-y-6">
+{/* Notation IA */}
+<div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+  <div className="flex flex-col md:flex-row gap-6 items-start">
+    <Image
+      src="/notationgpt.png"
+      alt="Notation IA des prompts enseignants"
+      width={420}
+      height={240}
+      className="rounded-xl border border-slate-200"
+      priority
+    />
+
+    <div className="space-y-5">
+
+      <div className="inline-flex items-center gap-2 rounded-full bg-slate-900 px-3 py-1 text-xs font-semibold text-white">
+        Indicateur de structuration IA
+      </div>
+
+      <p className="text-lg font-semibold">
+        Prompts enseignants :
+        <span className="ml-2 text-emerald-600">
+          19,5 / 20 (évaluation multi-critères : ChatGPT, Perplexity)
+        </span>
+      </p>
+
+      <p className="text-sm text-slate-600 max-w-md leading-relaxed">
+        Indicateur basé sur la clarté pédagogique, la structuration,
+        la conformité aux programmes officiels, la différenciation
+        et l’exploitabilité concrète en classe.
+      </p>
+
+      {/* Explication approfondie */}
+      <div className="rounded-xl border border-slate-200 bg-slate-50 p-4 text-sm text-slate-700 leading-relaxed">
+        <p className="font-semibold text-slate-900 mb-2">
+          Que signifie réellement 19,5 / 20 ?
+        </p>
+
+        <p>
+          Cet indicateur ne mesure pas une performance.
+          Il correspond à une <span className="font-semibold">modélisation de robustesse et de reproductibilité pédagogique</span>.
+        </p>
+
+        <p className="mt-2">
+          Un prompt structuré à ce niveau permet d’obtenir une production stable et exploitable :
+          objectif explicite, consignes univoques, progression claire,
+          critères d’évaluation, différenciation et traces pédagogiques.
+        </p>
+
+        <p className="mt-2 text-xs text-slate-500">
+          L’IA structure la demande. L’enseignant conserve la décision pédagogique.
+        </p>
+      </div>
+
+      {/* Formation */}
+      <div className="pt-2 space-y-2">
+        <p className="text-sm font-semibold text-slate-900">
+          🎓 Formation & Webinaires
+        </p>
+
+        <p className="text-sm text-slate-600 leading-relaxed">
+          EleveAI propose des ateliers pour comprendre la logique d’un prompt reproductible
+          et structurer vos propres contenus pédagogiques avec l’IA
+          (45 min – 2h – demi-journée).
+        </p>
+
+        <div className="mt-2 flex flex-col sm:flex-row gap-2">
+          <a
+            href="mailto:contact@eleveai.fr"
+            className="inline-flex items-center justify-center rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-500 transition"
+          >
+            Contact email →
+          </a>
+
+          <a
+            href="https://wa.me/33692742958"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center rounded-lg border border-emerald-600 px-4 py-2 text-sm font-semibold text-emerald-700 hover:bg-emerald-50 transition"
+          >
+            WhatsApp : +262 6 92 74 29 58 →
+          </a>
+        </div>
+      </div>
+
+      {/* Signature */}
+      <p className="text-xs text-slate-500 italic leading-relaxed">
+        Approche inspirée d’une culture de modélisation issue de l’ingénierie statistique industrielle.  
+        — Frédéric Lacoste, enseignant en mathématiques & statisticien.
+      </p>
+
+    </div>
+  </div>
+</div>
+
+
+
+        <div className="h-px w-full bg-slate-200" />
+
         <div className="grid gap-6 lg:grid-cols-2">
-          <div id="education" className="scroll-mt-24">
-            <BigCard
-              title="ÉDUCATION — EleveAI"
-              subtitle="Ressources prêtes à utiliser pour les profs (sans perdre la main)"
-              bullets={[
-                "Séances, évaluations, différenciation, corrigés.",
-                "Cadre clair : neutralité, accessibilité, anti-triche & traces.",
-                "Valeria sert de garde-fou : objectifs, structure, critères mesurables.",
-              ]}
-              primaryHref="/espace-profs"
-              primaryLabel="Accéder à EleveAI (Profs)"
-              secondaryHref="/optimiseur"
-              secondaryLabel="Optimiser avec Valeria"
+<div id="profs" className="scroll-mt-24">
+  <Card
+    title="PROFESSEURS"
+    punchline="Des prompts pédagogiques solides"
+    line1="Mettez en forme vos cours ou testez des séances inédites."
+    line2="Gagnez du temps tout en gardant la maîtrise pédagogique."
+    ctaHref="/espace-profs"
+    ctaLabel="Accéder à l’espace Professeurs"
+  />
+</div>
+
+          <div id="eleves" className="scroll-mt-24">
+            <Card
+              title="ÉLÈVES"
+              punchline="Ton coach IA "
+              line1="Comprendre, corriger, améliorer "
+              line2="Un cadre clair pour apprendre sans tricher."
+              ctaHref="/espace-eleves"
+              ctaLabel="Accéder au générateur (Élèves)"
             />
           </div>
 
-          <div id="entreprise" className="scroll-mt-24">
-            <BigCard
-              title="ENTREPRISE — Valeria Consulting"
-              subtitle="Formation, procédures, qualité : des livrables auditables"
-              bullets={[
-                "Transformer des intentions en objectifs testables (KPI / critères).",
-                "Générer checklists, supports de formation, procédures, évaluations internes.",
-                "Méthode compatible amélioration continue : mesurer → corriger → stabiliser.",
-              ]}
-              primaryHref="/contact"
-              primaryLabel="Demander un diagnostic"
-              secondaryHref="/optimiseur"
-              secondaryLabel="Tester Valeria (qualité)"
+<div id="parents" className="scroll-mt-24">
+  <Card
+    title="PARENTS"
+    punchline="Le suivi de votre enfant💛"
+    line1="Expliquez la situation de votre enfant (niveau, difficultés, objectifs)."
+    line2="Besoins spécifiques, rythme personnel, attention, confiance, mémorisation."
+    ctaHref="/espace-parents"
+    ctaLabel="Accéder à l’espace Parents"
+  />
+</div>
+
+          <div id="ecole" className="scroll-mt-24">
+            <Card
+              title="ÉCOLE / ÉTABLISSEMENT"
+              punchline="Un cadre commun ."
+              line1="Des espaces dédiés à l’administration, à la vie scolaire, aux AESH et aux personnels."
+              line2="Ressources, repères et pratiques alignées pour un usage cohérent et rassurant de l’IA."
+              ctaHref="/espace-ecoles"
+              ctaLabel="Accéder à l’espace Écoles"
             />
           </div>
+
         </div>
 
-        {/* DEMO + POUR QUI */}
-        <div className="grid gap-6 lg:grid-cols-2">
-          <div id="demo" className="scroll-mt-24 rounded-3xl border border-slate-200 bg-slate-50 p-6">
-            <p className="text-xs uppercase tracking-wider text-slate-500">Démo</p>
-            <h3 className="mt-2 text-2xl font-extrabold text-slate-900">
-              Valeria : score /20 → amélioration guidée
-            </h3>
-            <p className="mt-2 text-sm text-slate-700">
-              Exemple : clarifier une demande, ajouter des critères mesurables, stabiliser la génération.
-            </p>
-            <div className="mt-4">
-              <YouTubeEmbed videoId="ykRrez0CVN0" />
-            </div>
-          </div>
+        {/* Footer crédibilité */}
+        <div className="mt-10 rounded-2xl border border-slate-200 bg-slate-50 p-6">
 
-          <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-            <p className="text-xs uppercase tracking-wider text-slate-500">Ce que vous obtenez : norme Iso 9001-9004</p>
-            <h3 className="mt-2 text-2xl font-extrabold text-slate-900">
-              Pas “de l’IA”. Une méthode.
-            </h3>
-            <ul className="mt-4 space-y-2 text-sm text-slate-700">
-              <li>✅ Un type clair : séance / évaluation / formation / procédure</li>
-              <li>✅ Une trace attendue : ce qu’on obtient à la fin</li>
-              <li>✅ Des critères mesurables : validation, barème, contrôle qualité</li>
-              <li>✅ Une checklist : anti-flou, anti-dérive, anti-hallucination</li>
-            </ul>
-            <div className="mt-6 flex flex-col sm:flex-row gap-2">
-              <Link
-                href="/optimiseur"
-                className="inline-flex items-center justify-center rounded-xl bg-blue-600 px-5 py-3 text-sm font-extrabold text-white hover:bg-blue-500 transition"
-              >
-                Lancer Valeria →
-              </Link>
-              <Link
-                href="/contact"
-                className="inline-flex items-center justify-center rounded-xl border border-slate-300 bg-white px-5 py-3 text-sm font-extrabold text-slate-900 hover:bg-slate-50 transition"
-              >
-                Contact / mission →
-              </Link>
-            </div>
-          </div>
-        </div>
 
-        {/* METHODE */}
-        <div id="methode" className="scroll-mt-24 rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-          <p className="text-xs uppercase tracking-wider text-slate-500">Méthode</p>
-          <h3 className="mt-2 text-2xl sm:text-3xl font-extrabold text-slate-900">
-            4 étapes (public + privé)
-          </h3>
-          <p className="mt-2 text-sm text-slate-700 max-w-3xl">
-            Même logique pour une classe de 4e ou une usine de fromage : une demande claire + des critères testables
-            = une ressource stable et utilisable.
-          </p>
-
-          <div className="mt-6 grid gap-3 lg:grid-cols-2">
-            <Step n="1" title="Type" desc="Séance / évaluation / formation / procédure (un seul type)." />
-            <Step n="2" title="Objectifs + trace" desc="Ce que l’on veut et ce que l’on obtient (livrable)." />
-            <Step n="3" title="Critères mesurables" desc="Je valide si… (barème, seuil, checklist, KPI…)." />
-            <Step n="4" title="Contraintes" desc="Durée, public, hétérogénéité, supports, outils, conformité." />
-          </div>
-        </div>
-
-        {/* CONTACT */}
-        <div id="contact" className="scroll-mt-24 rounded-3xl border border-slate-200 bg-slate-50 p-6">
-          <h3 className="text-2xl font-extrabold text-slate-900">Contact</h3>
-          <p className="mt-2 text-sm text-slate-700">
-            Pour une mission entreprise (formation/qualité/procédures) ou un partenariat établissement :
-          </p>
-          <div className="mt-4 flex flex-col sm:flex-row gap-2">
-            <a
-              href="mailto:eleveai974@gmail.com"
-              className="inline-flex items-center justify-center rounded-xl bg-slate-900 px-5 py-3 text-sm font-extrabold text-white hover:bg-slate-800 transition"
-            >
-              Écrire à eleveai974@gmail.com →
-            </a>
-            <Link
-              href="/contact"
-              className="inline-flex items-center justify-center rounded-xl border border-slate-300 bg-white px-5 py-3 text-sm font-extrabold text-slate-900 hover:bg-slate-50 transition"
-            >
-              Ouvrir la page contact →
-            </Link>
-          </div>
-          <p className="mt-3 text-xs text-slate-500">
-            Positionnement : rigueur, conformité, critères mesurables. L’IA est l’outil — la méthode fait la valeur.
-          </p>
         </div>
       </section>
     </main>
   );
 }
-
-
-
-
-

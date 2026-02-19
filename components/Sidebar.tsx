@@ -93,12 +93,7 @@ export default function Sidebar({
         icon: <GraduationCap className="h-4 w-4" />,
       },
 
-      {
-        href: "/valeria-consulting",
-        label: "Espace Entreprises",
-        description: "Qualité • procédures • formations • prompts robustes.",
-        icon: <Building2 className="h-4 w-4" />,
-      },
+
     ],
     [],
   );
