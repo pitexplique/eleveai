@@ -70,33 +70,46 @@ export default function Sidebar({
    * - espaces : Profs / Élèves / Parents / École / Entreprise / Atelier-IA
    * - liens utiles : Contact
    */
-  const itemsApp: Item[] = useMemo(
-    () => [
-      {
-        href: "/optimiseur",
-        label: "Valeria (score /20)",
-        description: "Optimiser un prompt (éducation & entreprise).",
-        icon: <BadgeCheck className="h-4 w-4" />,
-      },
+const itemsApp: Item[] = useMemo(
+  () => [
+    {
+      href: "/optimiseur",
+      label: "Valeria – Optimiseur IA (/20)",
+      description: "Optimisation mesurable de prompts (éducation & entreprise).",
+      icon: <BadgeCheck className="h-4 w-4 text-yellow-400" />,
+    },
 
-      {
-        href: "/espace-profs",
-        label: "Espace Profs",
-        description: "Séances • évaluations • différenciation • corrigés.",
-        icon: <Users className="h-4 w-4" />,
-      },
+    {
+      href: "/espace-profs",
+      label: "Espace Professeurs",
+      description: "Séances • évaluations • différenciation • conformité BO.",
+      icon: <Users className="h-4 w-4 text-blue-400" />,
+    },
 
-      {
-        href: "/espace-eleves",
-        label: "Espace Élèves",
-        description: "Apprendre sans tricher : méthode, traces, progression.",
-        icon: <GraduationCap className="h-4 w-4" />,
-      },
+    {
+      href: "/espace-eleves",
+      label: "Espace Élèves",
+      description: "Méthode encadrée • traces IA • progression réelle.",
+      icon: <GraduationCap className="h-4 w-4 text-green-400" />,
+    },
 
+    {
+      href: "/espace-ecoles",
+      label: "Espace Établissement",
+      description: "Pilotage par codes • gestion rôles • suivi des usages.",
+      icon: <School className="h-4 w-4 text-purple-400" />,
+    },
 
-    ],
-    [],
-  );
+    {
+      href: "/valeria-consulting",
+      label: "Valeria Formation & Consulting",
+      description: "Implantation IA • systèmes décisionnels • normes ISO.",
+      icon: <Building2 className="h-4 w-4 text-orange-400" />,
+    },
+  ],
+  []
+);
+
 
   const wrapperClass =
     variant === "mobile"
