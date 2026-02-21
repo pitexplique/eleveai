@@ -203,7 +203,7 @@ export async function POST(req: Request) {
     const temperature = pickTemperature(body?.temperature, 0);
 
     // ✅ type (important pour éviter “séance ↔ évaluation”)
-     const type = normalizePromptType(body?.type ?? body?.meta?.type);
+    const type = normalizePromptType(body?.type);
 
     if (!prompt) {
       return NextResponse.json({ error: "Prompt manquant." }, { status: 400 });
