@@ -1,9 +1,6 @@
 // app/optimiseur/OptimiseurClient.tsx
-// ✅ (Optionnel) : si tu veux que Valeria vise 20 par défaut,
-// change juste DEFAULT_TARGET_SCORE côté lib, ou force ici.
-// Je te donne une version complète identique à la tienne,
-// avec UNE SEULE modif : targetScore initialisé à 20 au lieu de DEFAULT_TARGET_SCORE.
-// (Si tu préfères garder 19.5 par défaut, ne touche pas ce fichier.)
+// ✅ Valeria V2-ready : ajout du "type de ressource" (PromptType) envoyé à /score et /improve
+// ✅ targetScore par défaut = 20 (comme ta version)
 
 "use client";
 
@@ -12,6 +9,7 @@ import {
   DEFAULT_MAX_ITERS,
   DEFAULT_TARGET_SCORE,
   RUBRIC_VERSION,
+  type PromptType,
 } from "@/lib/promptRubric";
 
 type ScoreReport = {
@@ -35,6 +33,7 @@ type Iteration = {
   prompt: string;
   report?: ScoreReport;
   note?: string;
+  type?: PromptType;
 };
 
 function clamp(n: number, a: number, b: number) {
@@ -69,6 +68,9 @@ export default function OptimiseurClient() {
   const [model, setModel] = useState<"gpt-4o-mini" | "gpt-4o">("gpt-4o-mini");
   const [temperatureImprove, setTemperatureImprove] = useState<number>(0);
 
+  // ✅ NEW : type de ressource (important pour Valeria 2.0)
+  const [promptType, setPromptType] = useState<PromptType>("seance");
+
   const scores = useMemo(() => {
     return history
       .map((h) => (typeof h.score === "number" ? h.score : null))
@@ -89,6 +91,8 @@ export default function OptimiseurClient() {
         prompt: p,
         model,
         temperature: 0,
+        // ✅ IMPORTANT : ton API score lit body.meta.type
+        meta: { type: promptType },
       }),
     });
 
@@ -119,6 +123,8 @@ export default function OptimiseurClient() {
         scoreReport: report,
         model,
         temperature: formatTemp(temperatureImprove),
+        // ✅ IMPORTANT : ton API improve lit body.type
+        type: promptType,
       }),
     });
 
@@ -182,6 +188,7 @@ export default function OptimiseurClient() {
           prompt: p,
           report,
           note: "Scoring",
+          type: promptType,
         },
       ]);
     } catch (e: any) {
@@ -227,6 +234,7 @@ export default function OptimiseurClient() {
             prompt: p,
             report,
             note: `Itération ${i} — score`,
+            type: promptType,
           },
         ]);
 
@@ -251,6 +259,7 @@ export default function OptimiseurClient() {
               prompt: bestPrompt,
               score: bestScore,
               note: "Improve invalide → stop",
+              type: promptType,
             },
           ]);
           break;
@@ -331,7 +340,6 @@ export default function OptimiseurClient() {
             ✨ Valeria — Optimiseur de prompts (notation + améliorations)
           </p>
 
-
           <h1 className="text-3xl font-extrabold text-[#0047B6]">
             Ton prompt devient plus clair, plus solide, plus conforme
           </h1>
@@ -341,12 +349,31 @@ export default function OptimiseurClient() {
             puis l’améliore étape par étape jusqu’au score cible (ou arrêt manuel).
             Résultat : un prompt fiable et directement exploitable en classe.
           </p>
-
         </header>
 
         {/* PARAMS */}
         <section className="bg-white border border-slate-200 rounded-2xl shadow-sm p-4 sm:p-5 space-y-4">
-          <div className="grid gap-3 sm:grid-cols-3">
+          <div className="grid gap-3 sm:grid-cols-4">
+            {/* ✅ NEW: Type */}
+            <div className="space-y-1">
+              <label className="text-xs font-semibold text-slate-600">Type de ressource</label>
+              <select
+                value={promptType}
+                onChange={(e) => setPromptType(e.target.value as PromptType)}
+                className="w-full border rounded-lg px-3 py-2 text-sm bg-white"
+              >
+                <option value="seance">Séance</option>
+                <option value="evaluation">Évaluation</option>
+                <option value="sequence">Séquence</option>
+                <option value="fiche">Fiche / méthode</option>
+                <option value="projet">Projet</option>
+                <option value="autre">Autre</option>
+              </select>
+              <p className="text-[11px] text-slate-500">
+                Rend le scoring plus juste et évite les dérives.
+              </p>
+            </div>
+
             <div className="space-y-1">
               <label className="text-xs font-semibold text-slate-600">Score cible (sur 20)</label>
               <input
@@ -417,7 +444,7 @@ export default function OptimiseurClient() {
             </div>
           </div>
 
-          {/* NEW: Model + Temperature controls */}
+          {/* Model + Temperature controls */}
           <div className="grid gap-3 sm:grid-cols-3 pt-2 border-t border-slate-100">
             <div className="space-y-1">
               <label className="text-xs font-semibold text-slate-600">Modèle</label>
@@ -576,7 +603,8 @@ export default function OptimiseurClient() {
               </p>
               <p className="text-[11px] text-slate-500">Cible : {targetScore.toFixed(1)}</p>
               <p className="text-[11px] text-slate-500">
-                Modèle : <b>{model}</b> • Improve temp : <b>{formatTemp(temperatureImprove)}</b>
+                Type : <b>{promptType}</b> • Modèle : <b>{model}</b> • Improve temp :{" "}
+                <b>{formatTemp(temperatureImprove)}</b>
               </p>
             </div>
 
@@ -641,6 +669,8 @@ export default function OptimiseurClient() {
                         </p>
                         <p className="text-xs text-slate-700">
                           Score : <b>{typeof h.score === "number" ? `${h.score.toFixed(1)}/20` : "—"}</b>
+                          {"  "}
+                          <span className="text-slate-500">• Type : {h.type || "—"}</span>
                         </p>
                       </div>
 
