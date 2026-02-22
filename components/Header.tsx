@@ -2,9 +2,8 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
-import React, { useEffect, useMemo, useRef, useState, useCallback } from "react";
-import { createClient } from "@/lib/supabase/client";
+import { usePathname } from "next/navigation";
+import React, { useEffect, useRef, useState, useCallback } from "react";
 import {
   Sparkles,
   Users,
@@ -12,21 +11,11 @@ import {
   UsersRound,
   School,
   BadgeCheck,
-  Euro,
   Mail,
-  LogIn,
-  UserPlus,
-  LayoutDashboard,
-  LogOut,
   Menu,
   ChevronDown,
   Building2,
 } from "lucide-react";
-
-const AUTH_ROUTES = {
-  signin: "/auth/signin",
-  signup: "/auth/signup",
-};
 
 function isActive(pathname: string, href: string) {
   if (href === "/") return pathname === "/";
@@ -58,11 +47,6 @@ function useOnClickOutside<T extends HTMLElement>(
 
 export default function Header() {
   const pathname = usePathname();
-  const router = useRouter();
-  const supabase = useMemo(() => createClient(), []);
-
-  const [authLoading, setAuthLoading] = useState(true);
-  const [userEmail, setUserEmail] = useState<string | null>(null);
 
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -78,42 +62,10 @@ export default function Header() {
     setValeriaOpen(false);
   }, [pathname]);
 
-  useEffect(() => {
-    let mounted = true;
-
-    async function init() {
-      const { data } = await supabase.auth.getUser();
-      if (!mounted) return;
-      setUserEmail(data.user?.email ?? null);
-      setAuthLoading(false);
-    }
-
-    init();
-
-    const { data: sub } = supabase.auth.onAuthStateChange((_event, session) => {
-      setUserEmail(session?.user?.email ?? null);
-      setAuthLoading(false);
-    });
-
-    return () => {
-      mounted = false;
-      sub.subscription.unsubscribe();
-    };
-  }, [supabase]);
-
-  const isLoggedIn = !!userEmail;
-
-  const logout = useCallback(async () => {
-    await supabase.auth.signOut();
-    router.replace("/accueil");
-  }, [router, supabase]);
-
   // ✅ Apple-like link (subtle)
   const topLink = (active: boolean) =>
     `px-2.5 py-1.5 text-sm rounded-lg transition ${
-      active
-        ? "text-white"
-        : "text-slate-300 hover:text-white"
+      active ? "text-white" : "text-slate-300 hover:text-white"
     }`;
 
   // ✅ Premium pill button (Valeria)
@@ -123,12 +75,6 @@ export default function Header() {
         ? "border-emerald-400/60 bg-emerald-500/15 text-emerald-100"
         : "border-slate-700 bg-slate-950/40 text-slate-100 hover:border-slate-500 hover:bg-slate-900/40"
     }`;
-
-  const ghostBtn =
-    "inline-flex items-center gap-2 rounded-full border border-slate-700 px-3 py-1.5 text-sm text-slate-200 hover:bg-slate-900 hover:border-slate-500 transition";
-
-  const primaryBtn =
-    "inline-flex items-center gap-2 rounded-full border border-emerald-500/40 bg-emerald-500/10 px-3 py-1.5 text-sm font-semibold text-emerald-200 hover:bg-emerald-500/15 hover:border-emerald-400/60 transition";
 
   return (
     <header className="sticky top-0 z-40 border-b border-slate-800 bg-slate-950/80 backdrop-blur">
@@ -167,21 +113,37 @@ export default function Header() {
             </span>
           </Link>
 
-          <Link href="/espace-ecoles" className={topLink(isActive(pathname, "/espace-ecoles"))}>
+          <Link
+            href="/espace-ecoles"
+            className={topLink(isActive(pathname, "/espace-ecoles"))}
+          >
             <span className="inline-flex items-center gap-2">
               <School className="h-4 w-4" />
               Établissement
             </span>
           </Link>
 
+          {/* ✅ Entreprise (simple link) */}
+          <Link
+            href="/valeria-consulting"
+            className={topLink(isActive(pathname, "/valeria-consulting"))}
+          >
+            <span className="inline-flex items-center gap-2">
+              <Building2 className="h-4 w-4" />
+              Entreprise
+            </span>
+          </Link>
+
           <span className="mx-2 h-5 w-px bg-slate-800" />
 
-          {/* ⭐ VALERIA — SYSTEM (CTA principal) */}
+          {/* ⭐ VALERIA (comme sidebar) */}
           <div ref={valeriaRef} className="relative">
             <button
               type="button"
               onClick={() => setValeriaOpen((v) => !v)}
-              className={pill(isActive(pathname, "/optimiseur") || isActive(pathname, "/valeria-consulting"))}
+              className={pill(
+                isActive(pathname, "/optimiseur") || isActive(pathname, "/valeria-consulting")
+              )}
               aria-expanded={valeriaOpen}
               aria-haspopup="menu"
               title="Valeria — Optimisation mesurable"
@@ -191,7 +153,9 @@ export default function Header() {
               <span className="rounded-full bg-slate-900 px-2 py-0.5 text-[10px] font-bold text-slate-200 border border-slate-700">
                 /20
               </span>
-              <ChevronDown className={`h-4 w-4 transition-transform ${valeriaOpen ? "rotate-180" : ""}`} />
+              <ChevronDown
+                className={`h-4 w-4 transition-transform ${valeriaOpen ? "rotate-180" : ""}`}
+              />
             </button>
 
             {valeriaOpen && (
@@ -233,9 +197,9 @@ export default function Header() {
                       <Building2 className="h-4 w-4" />
                     </span>
                     <span className="flex-1">
-                      <span className="block font-semibold">Formation & Consulting</span>
+                      <span className="block font-semibold">Valeria Consulting</span>
                       <span className="block text-[11px] text-slate-400 mt-0.5">
-                        Entreprises • centres de formation • accompagnement
+                        Audit IA • indicateurs • ISO/IEC 42001
                       </span>
                     </span>
                     <span className="rounded-full bg-slate-900 text-slate-200 text-[10px] font-bold px-2 py-0.5 border border-slate-700">
@@ -249,48 +213,12 @@ export default function Header() {
 
           <span className="mx-2 h-5 w-px bg-slate-800" />
 
-          <Link href="/tarifs" className={topLink(isActive(pathname, "/tarifs"))}>
-            <span className="inline-flex items-center gap-2">
-              <Euro className="h-4 w-4" />
-              Tarifs
-            </span>
-          </Link>
-
           <Link href="/contact" className={topLink(isActive(pathname, "/contact"))}>
             <span className="inline-flex items-center gap-2">
               <Mail className="h-4 w-4" />
               Contact
             </span>
           </Link>
-        </div>
-
-        {/* RIGHT CTA */}
-        <div className="hidden lg:flex items-center gap-2">
-          {!authLoading && !isLoggedIn && (
-            <>
-              <Link href={AUTH_ROUTES.signin} className={ghostBtn}>
-                <LogIn className="h-4 w-4" />
-                Connexion
-              </Link>
-              <Link href={AUTH_ROUTES.signup} className={primaryBtn}>
-                <UserPlus className="h-4 w-4" />
-                Inscription
-              </Link>
-            </>
-          )}
-
-          {!authLoading && isLoggedIn && (
-            <>
-              <Link href="/dashboard" className={primaryBtn}>
-                <LayoutDashboard className="h-4 w-4" />
-                Dashboard
-              </Link>
-              <button onClick={logout} className={ghostBtn} title={userEmail ?? "Déconnexion"}>
-                <LogOut className="h-4 w-4" />
-                Déconnexion
-              </button>
-            </>
-          )}
         </div>
 
         {/* MOBILE BUTTON */}
@@ -337,9 +265,27 @@ export default function Header() {
               >
                 Établissement
               </Link>
+
+              {/* ✅ Entreprise */}
+              <Link
+                href="/valeria-consulting"
+                onClick={() => setMobileOpen(false)}
+                className="rounded-xl border border-slate-800 px-3 py-2 text-sm text-slate-200 hover:bg-slate-900"
+              >
+                Entreprise
+              </Link>
+
+              {/* ✅ Contact */}
+              <Link
+                href="/contact"
+                onClick={() => setMobileOpen(false)}
+                className="rounded-xl border border-slate-800 px-3 py-2 text-sm text-slate-200 hover:bg-slate-900"
+              >
+                Contact
+              </Link>
             </div>
 
-            {/* Valeria (business highlight) */}
+            {/* Valeria (comme sidebar : Optimiseur + Consulting) */}
             <div className="rounded-2xl border border-emerald-500/20 bg-emerald-500/5 p-3">
               <p className="text-xs font-semibold text-emerald-200">Valeria</p>
               <div className="mt-2 grid grid-cols-2 gap-2">
@@ -359,74 +305,12 @@ export default function Header() {
                 </Link>
               </div>
               <p className="mt-2 text-[11px] text-slate-400">
-                Système d’optimisation mesurable • entreprises & formation
+                Optimisation mesurable • audit IA • ISO/IEC 42001
               </p>
             </div>
-
-            {/* Tarifs / Contact */}
-            <div className="grid grid-cols-2 gap-2">
-              <Link
-                href="/tarifs"
-                onClick={() => setMobileOpen(false)}
-                className="rounded-xl border border-slate-800 px-3 py-2 text-sm text-slate-200 hover:bg-slate-900"
-              >
-                Tarifs
-              </Link>
-              <Link
-                href="/contact"
-                onClick={() => setMobileOpen(false)}
-                className="rounded-xl border border-slate-800 px-3 py-2 text-sm text-slate-200 hover:bg-slate-900"
-              >
-                Contact
-              </Link>
-            </div>
-
-            {/* Auth */}
-            {!authLoading && !isLoggedIn && (
-              <div className="grid grid-cols-2 gap-2 pt-1">
-                <Link
-                  href={AUTH_ROUTES.signin}
-                  onClick={() => setMobileOpen(false)}
-                  className="rounded-xl border border-slate-800 px-3 py-2 text-sm text-slate-200 hover:bg-slate-900"
-                >
-                  Connexion
-                </Link>
-                <Link
-                  href={AUTH_ROUTES.signup}
-                  onClick={() => setMobileOpen(false)}
-                  className="rounded-xl border border-emerald-500/30 bg-emerald-500/10 px-3 py-2 text-sm font-semibold text-emerald-200 hover:bg-emerald-500/15"
-                >
-                  Inscription
-                </Link>
-              </div>
-            )}
-
-            {!authLoading && isLoggedIn && (
-              <div className="grid grid-cols-2 gap-2 pt-1">
-                <Link
-                  href="/dashboard"
-                  onClick={() => setMobileOpen(false)}
-                  className="rounded-xl border border-emerald-500/30 bg-emerald-500/10 px-3 py-2 text-sm font-semibold text-emerald-200 hover:bg-emerald-500/15"
-                >
-                  Dashboard
-                </Link>
-                <button
-                  type="button"
-                  onClick={async () => {
-                    await logout();
-                    setMobileOpen(false);
-                  }}
-                  className="rounded-xl border border-slate-800 px-3 py-2 text-sm text-slate-200 hover:bg-slate-900 text-left"
-                >
-                  Déconnexion
-                </button>
-              </div>
-            )}
           </div>
         </div>
       )}
     </header>
   );
 }
-
-

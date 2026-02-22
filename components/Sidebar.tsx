@@ -9,16 +9,12 @@ import {
   ChevronRight,
   Users,
   GraduationCap,
-  UsersRound,
-  FlaskConical,
   LogIn,
   UserPlus,
   User,
   LogOut,
   School,
   Building2,
-  Mail,
-  Library,
   BadgeCheck,
 } from "lucide-react";
 
@@ -30,12 +26,21 @@ type SidebarProps = {
   onNavigate?: () => void;
 };
 
-type Item = {
+type LinkItem = {
+  kind?: "link";
   href: string;
   label: string;
   description?: string;
   icon: React.ReactNode;
 };
+
+type DividerItem = {
+  kind: "divider";
+  label: string;
+  icon?: React.ReactNode;
+};
+
+type Item = LinkItem | DividerItem;
 
 function isActive(pathname: string, href: string) {
   return pathname === href || pathname.startsWith(href + "/");
@@ -50,7 +55,98 @@ function isLoggedFromAccess(access: any) {
       access?.role === "user" ||
       access?.role === "admin" ||
       access?.kind === "email_free" ||
-      access?.kind === "email_paid",
+      access?.kind === "email_paid"
+  );
+}
+
+function SectionDivider({
+  label,
+  open,
+  icon,
+}: {
+  label: string;
+  open: boolean;
+  icon?: React.ReactNode;
+}) {
+  const isEntreprise = label.toLowerCase().includes("entreprise");
+  return (
+    <div className="px-2 py-2">
+      <div className="flex items-center gap-2">
+        <div className="h-px flex-1 bg-slate-800" />
+        <span
+          className={[
+            "flex items-center gap-1.5 text-[10px] uppercase tracking-wider",
+            isEntreprise ? "text-orange-300/70" : "text-slate-500",
+            "transition-all duration-200",
+            open
+              ? "opacity-100"
+              : "opacity-0 pointer-events-none w-0 overflow-hidden",
+          ].join(" ")}
+        >
+          {icon ? <span className="opacity-90">{icon}</span> : null}
+          {label}
+        </span>
+        <div className="h-px flex-1 bg-slate-800" />
+      </div>
+    </div>
+  );
+}
+
+function SideItem({
+  href,
+  label,
+  description,
+  icon,
+  open,
+  active,
+  onClick,
+}: {
+  href: string;
+  label: string;
+  description?: string;
+  icon: React.ReactNode;
+  open: boolean;
+  active: boolean;
+  onClick?: () => void;
+}) {
+  return (
+    <Link
+      href={href}
+      onClick={onClick}
+      className={[
+        "group flex items-start gap-3 rounded-xl px-2.5 py-2 transition",
+        active
+          ? "bg-slate-900 border border-slate-700"
+          : "border border-transparent hover:bg-slate-900/60 hover:border-slate-800",
+      ].join(" ")}
+      title={!open ? label : undefined}
+    >
+      <span
+        className={[
+          "mt-0.5 shrink-0 rounded-lg p-1.5",
+          active ? "bg-slate-800/70" : "bg-slate-900/40 group-hover:bg-slate-800/40",
+        ].join(" ")}
+      >
+        {icon}
+      </span>
+
+      <span
+        className={[
+          "min-w-0 flex-1",
+          "transition-all duration-200",
+          open ? "opacity-100" : "opacity-0 pointer-events-none w-0 overflow-hidden",
+        ].join(" ")}
+      >
+        <span className="block text-sm font-semibold text-slate-100 truncate">
+          {label}
+        </span>
+        {description ? (
+          <span className="mt-0.5 block text-[12px] leading-snug text-slate-400 line-clamp-2">
+            {description}
+          </span>
+        ) : null}
+      </span>
+    </Link>
   );
 }
 
@@ -66,50 +162,58 @@ export default function Sidebar({
 
   /**
    * NAV : alignée “Éducation + Entreprise”
-   * - Valeria en 1er (méthode / score / optimisation)
-   * - espaces : Profs / Élèves / Parents / École / Entreprise / Atelier-IA
-   * - liens utiles : Contact
+   * - Valeria Optimiseur (méthode / score / optimisation)
+   * - section Éducation : Profs / Élèves
+   * - section Entreprise : Valeria Consulting
    */
-const itemsApp: Item[] = useMemo(
-  () => [
-    {
-      href: "/optimiseur",
-      label: "Valeria – Optimiseur IA (/20)",
-      description: "Optimisation mesurable de prompts (éducation & entreprise).",
-      icon: <BadgeCheck className="h-4 w-4 text-yellow-400" />,
-    },
+  const itemsApp: Item[] = useMemo(
+    () => [
+      {
+        kind: "link",
+        href: "/optimiseur",
+        label: "Valeria – Optimiseur IA (/20)",
+        description: "Optimisation mesurable de prompts (éducation & entreprise).",
+        icon: <BadgeCheck className="h-4 w-4 text-yellow-400" />,
+      },
 
-    {
-      href: "/espace-profs",
-      label: "Espace Professeurs",
-      description: "Séances • évaluations • différenciation • conformité BO.",
-      icon: <Users className="h-4 w-4 text-blue-400" />,
-    },
+      {
+        kind: "divider",
+        label: "Éducation",
+        icon: <School className="h-3.5 w-3.5" />,
+      },
 
-    {
-      href: "/espace-eleves",
-      label: "Espace Élèves",
-      description: "Méthode encadrée • traces IA • progression réelle.",
-      icon: <GraduationCap className="h-4 w-4 text-green-400" />,
-    },
+      {
+        kind: "link",
+        href: "/espace-profs",
+        label: "Espace Professeurs",
+        description: "Séances • évaluations • différenciation • conformité BO.",
+        icon: <Users className="h-4 w-4 text-blue-400" />,
+      },
 
-    {
-      href: "/espace-ecoles",
-      label: "Espace Établissement",
-      description: "Pilotage par codes • gestion rôles • suivi des usages.",
-      icon: <School className="h-4 w-4 text-purple-400" />,
-    },
+      {
+        kind: "link",
+        href: "/espace-eleves",
+        label: "Espace Élèves",
+        description: "Méthode encadrée • traces IA • progression réelle.",
+        icon: <GraduationCap className="h-4 w-4 text-green-400" />,
+      },
 
-    {
-      href: "/valeria-consulting",
-      label: "Valeria Formation & Consulting",
-      description: "Implantation IA • systèmes décisionnels • normes ISO.",
-      icon: <Building2 className="h-4 w-4 text-orange-400" />,
-    },
-  ],
-  []
-);
+      {
+        kind: "divider",
+        label: "Entreprise",
+        icon: <Building2 className="h-3.5 w-3.5" />,
+      },
 
+      {
+        kind: "link",
+        href: "/valeria",
+        label: "Valeria Consulting",
+        description: "Audit IA • Indicateurs • ISO/IEC 42001",
+        icon: <Building2 className="h-4 w-4 text-orange-400" />,
+      },
+    ],
+    []
+  );
 
   const wrapperClass =
     variant === "mobile"
@@ -162,21 +266,35 @@ const itemsApp: Item[] = useMemo(
 
       {/* NAV */}
       <nav className="flex-1 min-h-0 px-2 py-3 space-y-1 overflow-auto">
-        {itemsApp.map((item) => (
-          <SideItem
-            key={item.href}
-            href={item.href}
-            label={item.label}
-            description={item.description}
-            icon={item.icon}
-            open={open}
-            active={isActive(pathname, item.href)}
-            onClick={onNavigate}
-          />
-        ))}
+        {itemsApp.map((item, idx) => {
+          if (item.kind === "divider") {
+            return (
+              <SectionDivider
+                key={`div-${idx}-${item.label}`}
+                label={item.label}
+                open={open}
+                icon={item.icon}
+              />
+            );
+          }
+
+          return (
+            <SideItem
+              key={item.href}
+              href={item.href}
+              label={item.label}
+              description={item.description}
+              icon={item.icon}
+              open={open}
+              active={isActive(pathname, item.href)}
+              onClick={onNavigate}
+            />
+          );
+        })}
       </nav>
 
       {/* FOOTER AUTH */}
+      {/* 
       <div className="mt-auto border-t border-slate-800 p-2 space-y-1">
         {!isLoggedIn ? (
           <>
@@ -232,67 +350,7 @@ const itemsApp: Item[] = useMemo(
           Astuce : réduis la barre pour gagner de la place, comme sur ChatGPT.
         </p>
       </div>
+      */}
     </aside>
   );
 }
-
-/* ITEM */
-function SideItem({
-  href,
-  label,
-  description,
-  icon,
-  open,
-  active,
-  onClick,
-}: {
-  href: string;
-  label: string;
-  description?: string;
-  icon: React.ReactNode;
-  open: boolean;
-  active: boolean;
-  onClick?: () => void;
-}) {
-  return (
-    <Link
-      href={href}
-      onClick={onClick}
-      title={!open ? label : undefined}
-      className={[
-        "group flex items-start gap-3 rounded-xl px-3 py-2",
-        "transition-all duration-150",
-        active
-          ? "bg-emerald-500/15 text-emerald-200 ring-1 ring-emerald-500/20"
-          : "text-slate-300 hover:bg-slate-800 hover:text-slate-100",
-      ].join(" ")}
-    >
-      <span
-        className={[
-          "shrink-0 inline-flex h-8 w-8 items-center justify-center rounded-xl",
-          active ? "bg-emerald-500/10" : "bg-slate-900/60",
-          "border border-slate-800 group-hover:border-slate-700",
-        ].join(" ")}
-      >
-        {icon}
-      </span>
-
-      <span
-        className={[
-          "flex-1 min-w-0",
-          "transition-all duration-200",
-          open ? "opacity-100" : "opacity-0 w-0 overflow-hidden",
-        ].join(" ")}
-      >
-        <span className="block truncate text-sm font-medium">{label}</span>
-
-        {description ? (
-          <span className="mt-0.5 block text-[11px] leading-snug text-slate-500 group-hover:text-slate-300">
-            {description}
-          </span>
-        ) : null}
-      </span>
-    </Link>
-  );
-}
-

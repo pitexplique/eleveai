@@ -1,241 +1,185 @@
 "use client";
 
-import Link from "next/link";
+import React from "react";
 
-export default function ValeriaConsultingClient() {
+function YouTubeEmbed({ videoId }: { videoId: string }) {
+  return (
+    <div className="relative w-full overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+      <div className="aspect-video w-full">
+        <iframe
+          className="h-full w-full"
+          src={`https://www.youtube.com/embed/${videoId}`}
+          title="Valeria Demonstration"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowFullScreen
+        />
+      </div>
+    </div>
+  );
+}
+
+export default function ValeriaClient() {
+  const videoId = "ykRrez0CVN0"; // 👉 Remplace si besoin
+
   return (
     <main className="min-h-screen bg-white text-slate-900">
+
       {/* HERO */}
-      <section className="border-b border-slate-200 bg-slate-50">
-        <div className="mx-auto max-w-5xl px-4 py-16 text-center">
-          <p className="text-xs font-semibold uppercase tracking-wider text-slate-600">
+      <section className="border-b border-slate-200">
+        <div className="mx-auto max-w-5xl px-6 py-20 text-center">
+
+          <p className="text-xs uppercase tracking-wider text-slate-500">
             Valeria Consulting — La Réunion
           </p>
 
-          <h1 className="mt-4 text-4xl md:text-5xl font-extrabold">
-            Formations IA & accompagnement — objectifs mesurables, conformité, robustesse
+          <h1 className="mt-6 text-4xl md:text-5xl font-semibold tracking-tight">
+            Architecture & gouvernance structurée de l’IA
           </h1>
 
-          <p className="mt-6 text-lg text-slate-700 max-w-3xl mx-auto">
-            J’accompagne <strong>organismes de formation</strong>, <strong>établissements</strong> et{" "}
-            <strong>entreprises</strong> à structurer l’usage de l’IA (ChatGPT & LLM) :
-            transformation d’objectifs flous en critères testables, montée en compétences,
-            et amélioration continue.
+          <p className="mt-6 text-lg text-slate-600 max-w-3xl mx-auto">
+            J’accompagne les organisations dans l’intégration mesurable,
+            sécurisée et structurée de l’intelligence artificielle.
           </p>
 
-          <div className="mt-8 flex justify-center gap-4 flex-wrap">
-            <Link
-              href="/contact"
-              className="rounded-xl bg-blue-600 px-6 py-3 font-bold text-white hover:bg-blue-500 transition"
+          <div className="mt-8">
+            <a
+              href="#audit"
+              className="inline-block rounded-xl bg-slate-900 px-6 py-3 text-sm font-semibold text-white hover:bg-slate-800"
             >
-              Proposer un échange (OF / école / entreprise) →
-            </Link>
-
-            <Link
-              href="/optimiseur"
-              className="rounded-xl border border-slate-300 px-6 py-3 font-bold hover:bg-slate-100 transition"
-            >
-              Tester Valeria (notation de prompt) →
-            </Link>
-          </div>
-
-          <div className="mt-6 flex flex-wrap justify-center gap-2">
-            {[
-              "Présentiel / distanciel",
-              "Ateliers 2h → parcours 1–3 jours",
-              "Niveaux : débutant à avancé",
-              "Livrables : supports + grilles + templates",
-            ].map((t) => (
-              <span
-                key={t}
-                className="inline-flex items-center rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-semibold text-slate-700"
-              >
-                {t}
-              </span>
-            ))}
+              Demander un diagnostic
+            </a>
           </div>
         </div>
       </section>
 
-      {/* OFFRES (FORMATION) */}
-      <section className="mx-auto max-w-5xl px-4 py-16 space-y-10">
-        <div>
-          <h2 className="text-2xl font-extrabold mb-2">🎓 Offres pensées pour les organismes de formation</h2>
-          <p className="text-slate-700">
-            Pour les centres de formation (CFA/OF), écoles et universités : des modules prêts à intégrer dans un parcours,
-            avec objectifs, compétences, évaluation et livrables.
+      {/* PROBLEME */}
+      <section className="bg-slate-50 border-b border-slate-200">
+        <div className="mx-auto max-w-5xl px-6 py-16">
+
+          <h2 className="text-2xl font-semibold">
+            L’IA doit être structurée.
+          </h2>
+
+          <p className="mt-4 text-slate-600 max-w-3xl">
+            Sans objectifs clairs, sans indicateurs et sans cadre de gouvernance,
+            l’usage de l’IA devient fragile, risqué et difficilement mesurable.
           </p>
-        </div>
 
-        <div className="grid gap-6 md:grid-cols-3">
-          {/* Card 1 */}
-          <div className="rounded-2xl border border-slate-200 p-6 shadow-sm">
-            <h3 className="text-lg font-extrabold">Module 1 — “IA au quotidien” (2h à 1/2 journée)</h3>
-            <p className="mt-3 text-slate-700">
-              Prise en main des IA génératives : prompts efficaces, limites, vérification, bonnes pratiques.
-            </p>
-            <ul className="mt-4 space-y-2 text-sm text-slate-700">
-              <li>• Public : débutants / reconversion / apprentis</li>
-              <li>• Modalités : atelier + cas pratiques métiers</li>
-              <li>• Évaluation : mini-défis + grille simple</li>
-              <li>• Livrables : fiches méthode + templates</li>
-            </ul>
-          </div>
-
-          {/* Card 2 */}
-          <div className="rounded-2xl border border-slate-200 p-6 shadow-sm">
-            <h3 className="text-lg font-extrabold">Module 2 — “Prompt Engineering robuste” (1 journée)</h3>
-            <p className="mt-3 text-slate-700">
-              Passer de “ça marche parfois” à une méthode reproductible : objectifs, critères, tests, itérations.
-            </p>
-            <ul className="mt-4 space-y-2 text-sm text-slate-700">
-              <li>• Public : formateurs, référents numériques, dev/data</li>
-              <li>• Méthode : score indicateur + amélioration itérative</li>
-              <li>• Sortie : 10 prompts métiers “prêts à l’emploi”</li>
-              <li>• Outil : démonstration avec Valeria</li>
-            </ul>
-          </div>
-
-          {/* Card 3 */}
-          <div className="rounded-2xl border border-slate-200 p-6 shadow-sm">
-            <h3 className="text-lg font-extrabold">Module 3 — “IA responsable & conformité” (1 journée)</h3>
-            <p className="mt-3 text-slate-700">
-              Cadre d’usage : données, sécurité, biais, traçabilité, bonnes pratiques (éducation / entreprise).
-            </p>
-            <ul className="mt-4 space-y-2 text-sm text-slate-700">
-              <li>• Public : direction, équipes pédagogiques, RH/qualité</li>
-              <li>• Outils : charte IA, checklist, cas d’école</li>
-              <li>• Livrables : charte + procédures + kit formateur</li>
-              <li>• Objectif : déploiement sans “boîte noire”</li>
-            </ul>
-          </div>
         </div>
       </section>
 
-      {/* POUR LES OF: INTÉGRATION */}
-      <section className="mx-auto max-w-5xl px-4 pb-16">
-        <div className="rounded-2xl border border-slate-200 bg-white p-8">
-          <h2 className="text-2xl font-extrabold mb-4">🧩 Intégration facile dans vos parcours</h2>
+      {/* AUDIT */}
+      <section id="audit" className="border-b border-slate-200">
+        <div className="mx-auto max-w-5xl px-6 py-16">
 
-          <div className="grid gap-6 md:grid-cols-2">
+          <h2 className="text-2xl font-semibold">
+            Mission pilote — Audit IA structuré
+          </h2>
+
+          <div className="mt-8 grid md:grid-cols-2 gap-8 text-slate-600">
+
             <div>
-              <h3 className="font-bold">Ce que vous obtenez (concret)</h3>
-              <ul className="mt-3 space-y-2 text-slate-700">
-                <li>• Objectifs pédagogiques formulés + critères de réussite</li>
-                <li>• Déroulé formateur + activités apprenants (pas à pas)</li>
-                <li>• Grille d’évaluation + exercices corrigés</li>
-                <li>• Pack de prompts “métier” & anti-hallucination</li>
-                <li>• Supports (PDF/Word) + version tableau numérique</li>
-              </ul>
+              <h3 className="font-semibold text-slate-900">
+                Analyse des usages
+              </h3>
+              <p className="mt-2">
+                Cartographie des pratiques existantes, des outils utilisés
+                et des résultats attendus.
+              </p>
+
+              <h3 className="mt-6 font-semibold text-slate-900">
+                Identification des risques
+              </h3>
+              <p className="mt-2">
+                Confidentialité, fiabilité, dépendance, absence de traçabilité.
+              </p>
             </div>
 
             <div>
-              <h3 className="font-bold">Formats possibles</h3>
-              <ul className="mt-3 space-y-2 text-slate-700">
-                <li>• Ateliers ponctuels (2h / 1/2 journée)</li>
-                <li>• Bootcamp (1 à 3 jours)</li>
-                <li>• Parcours blended (distanciel + présentiel)</li>
-                <li>• Formation de formateurs (ToT)</li>
-                <li>• Adaptation par filière : tertiaire, industrie, éducation</li>
-              </ul>
+              <h3 className="font-semibold text-slate-900">
+                Définition d’indicateurs
+              </h3>
+              <p className="mt-2">
+                Mise en place d’indicateurs simples et mesurables.
+              </p>
 
-              <div className="mt-6 flex flex-wrap gap-2">
-                {["CFA / OF", "Écoles", "Université", "Entreprises"].map((tag) => (
-                  <span
-                    key={tag}
-                    className="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-700"
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
+              <h3 className="mt-6 font-semibold text-slate-900">
+                Plan d’intégration
+              </h3>
+              <p className="mt-2">
+                Recommandations concrètes et cadre d’amélioration continue.
+              </p>
             </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* VIDEO */}
+      <section className="bg-slate-50 border-b border-slate-200">
+        <div className="mx-auto max-w-5xl px-6 py-16">
+
+          <h2 className="text-2xl font-semibold">
+            Valeria en action
+          </h2>
+
+          <p className="mt-4 text-slate-600 max-w-3xl">
+            Illustration de la méthode : clarification des objectifs,
+            évaluation structurée, itération contrôlée.
+          </p>
+
+          <div className="mt-8">
+            <YouTubeEmbed videoId={videoId} />
           </div>
 
-          <div className="mt-8 flex flex-wrap gap-3">
-            <Link
-              href="/contact"
-              className="rounded-xl bg-blue-600 px-6 py-3 font-bold text-white hover:bg-blue-500 transition"
+        </div>
+      </section>
+
+      {/* A PROPOS */}
+      <section className="border-b border-slate-200">
+        <div className="mx-auto max-w-5xl px-6 py-16">
+
+          <h2 className="text-2xl font-semibold">
+            À propos
+          </h2>
+
+          <p className="mt-4 text-slate-600 max-w-3xl">
+            Ancien consultant en statistiques industrielles, j’interviens
+            aujourd’hui sur l’intégration structurée de l’IA, avec une
+            approche analytique et orientée indicateurs.
+          </p>
+
+        </div>
+      </section>
+
+
+      {/* CONTACT */}
+      <section className="bg-slate-900 text-white">
+        <div className="mx-auto max-w-5xl px-6 py-16 text-center">
+
+          <h2 className="text-2xl font-semibold">
+            Demander un diagnostic IA
+          </h2>
+
+          <p className="mt-4 text-slate-300">
+            Échange direct et confidentiel.
+          </p>
+
+          <div className="mt-8">
+            <a
+              href="https://wa.me/262692742958"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex flex-col items-center justify-center rounded-xl bg-emerald-500 px-6 py-4 text-sm font-semibold text-slate-900 hover:bg-emerald-400 transition"
             >
-              Demander une proposition (programme + devis) →
-            </Link>
-
-            <Link
-              href="/optimiseur"
-              className="rounded-xl border border-slate-300 px-6 py-3 font-bold hover:bg-slate-100 transition"
-            >
-              Voir la méthode “score + itérations” →
-            </Link>
+              <span>WhatsApp — +262 6 92 74 29 58</span>
+              <span className="text-xs font-medium mt-1">Frédéric Lacoste</span>
+            </a>
           </div>
+
         </div>
       </section>
 
-      {/* EXPERTISE (GEN) */}
-      <section className="mx-auto max-w-5xl px-4 pb-16 space-y-10">
-        <div>
-          <h2 className="text-2xl font-extrabold mb-4">🎯 Ce que j’apporte (différenciant)</h2>
-
-          <ul className="space-y-3 text-slate-700">
-            <li>• Transformation d’intentions floues en objectifs testables (compétences / tâches)</li>
-            <li>• Définition de critères mesurables (qualité, conformité, sécurité, traçabilité)</li>
-            <li>• Méthode d’itération contrôlée : score indicateur + amélioration continue</li>
-            <li>• Templates & prompts reproductibles (pas du “one shot”)</li>
-            <li>• Intégration IA sans perte de maîtrise humaine</li>
-          </ul>
-        </div>
-
-        <div className="grid gap-6 md:grid-cols-2">
-          <div className="rounded-2xl border border-slate-200 p-6">
-            <h2 className="text-xl font-extrabold mb-3">🏫 Éducation</h2>
-            <p className="text-slate-700">
-              Clarification de séances, évaluations, séquences. Formation d’équipe. Cadre IA encadrée et conforme.
-            </p>
-            <p className="mt-3 text-sm text-slate-600">
-              Idéal pour : équipes pédagogiques, référents numériques, direction, projets innovants.
-            </p>
-          </div>
-
-          <div className="rounded-2xl border border-slate-200 p-6">
-            <h2 className="text-xl font-extrabold mb-3">🏭 Entreprises</h2>
-            <p className="text-slate-700">
-              Procédures, supports de formation interne, critères qualité, optimisation de prompts métiers.
-              Adapté formation, qualité, RH.
-            </p>
-            <p className="mt-3 text-sm text-slate-600">
-              Idéal pour : responsables qualité, formation, managers, équipes opérationnelles.
-            </p>
-          </div>
-        </div>
-
-        <div className="rounded-2xl border border-slate-200 bg-slate-50 p-6">
-          <h2 className="text-xl font-extrabold mb-3">📍 Ancrage local (La Réunion)</h2>
-          <p className="text-slate-700">
-            Basé à La Réunion. Objectif : développer des usages concrets et responsables de l’IA au service du territoire.
-          </p>
-          <p className="mt-2 text-sm text-slate-600">
-            Interventions possibles à Saint-Pierre, Saint-Louis, Le Tampon, Saint-Denis et à distance.
-          </p>
-        </div>
-      </section>
-
-      {/* CTA FINAL */}
-      <section className="bg-slate-900 text-white py-16">
-        <div className="mx-auto max-w-4xl text-center px-4">
-          <h2 className="text-3xl font-extrabold">L’IA est un outil. La méthode fait la différence.</h2>
-
-          <p className="mt-6 text-slate-300">
-            Organisme de formation, école, université ou entreprise : je vous propose un échange court pour cadrer
-            vos objectifs et vous envoyer une proposition (programme + modalités + livrables).
-          </p>
-
-          <Link
-            href="/contact"
-            className="mt-8 inline-block rounded-xl bg-white px-6 py-3 font-bold text-slate-900 hover:bg-slate-200 transition"
-          >
-            Me contacter →
-          </Link>
-        </div>
-      </section>
     </main>
   );
 }

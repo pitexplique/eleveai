@@ -83,11 +83,33 @@ export default function AccueilPage() {
     </div>
   );
 
+  const SectionHeader = ({
+    id,
+    label,
+    subtitle,
+  }: {
+    id?: string;
+    label: string;
+    subtitle?: string;
+  }) => (
+    <div id={id} className="scroll-mt-24 flex items-center gap-3 pt-2">
+      <div className="h-px flex-1 bg-slate-200" />
+      <div className="text-center">
+        <p className="text-xs font-extrabold uppercase tracking-wider text-slate-700">
+          {label}
+        </p>
+        {subtitle ? (
+          <p className="mt-1 text-xs text-slate-500">{subtitle}</p>
+        ) : null}
+      </div>
+      <div className="h-px flex-1 bg-slate-200" />
+    </div>
+  );
+
   return (
     <main className="min-h-screen bg-white text-slate-900">
       {/* HERO */}
       <section className="relative overflow-hidden border-b border-slate-200">
-        {/* Fond clair avec halo discret */}
         <div className="absolute inset-0">
           <div className="absolute inset-0 bg-[radial-gradient(1200px_600px_at_50%_40%,rgba(59,130,246,0.12),transparent_60%)]" />
           <div className="absolute inset-0 bg-gradient-to-b from-white via-white to-slate-50" />
@@ -116,34 +138,41 @@ export default function AccueilPage() {
               <Chip label="👩‍🏫 Profs" onClick={() => scrollTo("profs")} />
               <Chip label="🎒 Élèves" onClick={() => scrollTo("eleves")} />
               <Chip label="👨‍👩‍👧 Parents" onClick={() => scrollTo("parents")} />
-              <Chip label="🏫 Établissement" onClick={() => scrollTo("etablissement")} />
+              <Chip
+                label="🏫 Établissement"
+                onClick={() => scrollTo("etablissement")}
+              />
               <Chip label="⭐ Valeria" onClick={() => scrollTo("valeria")} />
+              <Chip label="🏢 Entreprise" onClick={() => scrollTo("entreprise")} />
             </div>
 
             {/* CTA */}
             <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center sm:gap-4">
+              {/* Valeria /20 : noir (premium) */}
               <Link
-                href="/auth/signup"
+                href="/optimiseur"
+                className="inline-flex w-full items-center justify-center rounded-lg bg-slate-900 px-6 py-3 text-sm font-semibold text-white
+                          hover:bg-slate-800 transition sm:w-auto"
+              >
+                Valeria : score & optimisation (/20) →
+              </Link>
+
+              {/* Éducation : bleu */}
+              <Link
+                href="/espace-profs"
                 className="inline-flex w-full items-center justify-center rounded-lg bg-blue-600 px-6 py-3 text-sm font-semibold text-white
                           hover:bg-blue-500 transition sm:w-auto"
               >
-                S’inscrire gratuitement →
+                Générateur de prompts pédagogiques →
               </Link>
 
+              {/* Entreprise : orange */}
               <Link
-                href="/auth/signin"
-                className="inline-flex w-full items-center justify-center rounded-lg border border-blue-600 bg-white px-6 py-3 text-sm font-semibold text-blue-600
-                          hover:bg-blue-50 transition sm:w-auto"
+                href="/valeria"
+                className="inline-flex w-full items-center justify-center rounded-lg bg-orange-600 px-6 py-3 text-sm font-semibold text-white
+                          hover:bg-orange-500 transition sm:w-auto"
               >
-                Se connecter →
-              </Link>
-
-              <Link
-                href="/optimiseur"
-                className="inline-flex w-full items-center justify-center rounded-lg border border-slate-300 bg-white px-6 py-3 text-sm font-semibold text-slate-800
-                          hover:bg-slate-100 transition sm:w-auto"
-              >
-                Valeria (score /20) →
+                Offre entreprise (ISO/IEC 42001) →
               </Link>
             </div>
 
@@ -159,9 +188,12 @@ export default function AccueilPage() {
       </section>
 
       {/* SECTIONS */}
-      <section className="mx-auto max-w-6xl px-4 py-12 space-y-6">
-        {/* Valeria / Notation IA */}
-        <div id="valeria" className="scroll-mt-24 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+      <section className="mx-auto max-w-6xl px-4 py-12 space-y-8">
+        {/* 1) Valeria / Notation IA (pont) */}
+        <div
+          id="valeria"
+          className="scroll-mt-24 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm"
+        >
           <div className="flex flex-col md:flex-row gap-6 items-start">
             <Image
               src="/notationgpt.png"
@@ -179,9 +211,7 @@ export default function AccueilPage() {
 
               <p className="text-lg font-semibold">
                 Indicateur actuel :
-                <span className="ml-2 text-emerald-600">
-                  19,5 / 20
-                </span>
+                <span className="ml-2 text-emerald-600">19,5 / 20</span>
                 <span className="ml-2 text-xs text-slate-500">
                   (évaluation multi-critères)
                 </span>
@@ -189,8 +219,8 @@ export default function AccueilPage() {
 
               <p className="text-sm text-slate-600 max-w-md leading-relaxed">
                 Valeria améliore un prompt par itérations contrôlées : clarté,
-                structure, conformité, différenciation, et robustesse
-                (résultats stables et exploitables).
+                structure, conformité, différenciation, et robustesse (résultats
+                stables et exploitables).
               </p>
 
               <div className="rounded-xl border border-slate-200 bg-slate-50 p-4 text-sm text-slate-700 leading-relaxed">
@@ -198,13 +228,17 @@ export default function AccueilPage() {
                   Que signifie réellement “19,5 / 20” ?
                 </p>
                 <p>
-                  Ce n’est pas une “performance” : c’est un <span className="font-semibold">indice de reproductibilité pédagogique</span>.
-                  À ce niveau, un prompt donne des sorties plus constantes :
+                  Ce n’est pas une “performance” : c’est un{" "}
+                  <span className="font-semibold">
+                    indice de reproductibilité pédagogique
+                  </span>
+                  . À ce niveau, un prompt donne des sorties plus constantes :
                   objectif explicite, consignes univoques, progression, critères,
                   différenciation, et traces.
                 </p>
                 <p className="mt-2 text-xs text-slate-500">
-                  L’IA structure la demande. L’enseignant conserve la décision pédagogique.
+                  L’IA structure la demande. L’enseignant conserve la décision
+                  pédagogique.
                 </p>
               </div>
 
@@ -217,53 +251,28 @@ export default function AccueilPage() {
                 </Link>
 
                 <Link
-                  href="/valeria-consulting"
+                  href="/valeria"
                   className="inline-flex items-center justify-center rounded-lg border border-slate-300 px-4 py-2 text-sm font-semibold text-slate-800 hover:bg-slate-100 transition"
                 >
-                  Formation & Consulting →
+                  Valeria Consulting (Entreprise) →
                 </Link>
               </div>
 
-              {/* Formation */}
-              <div className="pt-2 space-y-2">
-                <p className="text-sm font-semibold text-slate-900">
-                  🎓 Ateliers & Webinaires (45 min → demi-journée)
-                </p>
-
-                <p className="text-sm text-slate-600 leading-relaxed">
-                  Comprendre la logique d’un prompt robuste, reproductible, et conforme :
-                  modèle, grille d’amélioration, exemples concrets, et méthode transférable.
-                </p>
-
-                <div className="mt-2 flex flex-col sm:flex-row gap-2">
-                  <a
-                    href="mailto:contact@eleveai.fr"
-                    className="inline-flex items-center justify-center rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-500 transition"
-                  >
-                    Contact email →
-                  </a>
-
-                  <a
-                    href="https://wa.me/33692742958"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center rounded-lg border border-emerald-600 px-4 py-2 text-sm font-semibold text-emerald-700 hover:bg-emerald-50 transition"
-                  >
-                    WhatsApp : +262 6 92 74 29 58 →
-                  </a>
-                </div>
-              </div>
-
               <p className="text-xs text-slate-500 italic leading-relaxed">
-                Approche inspirée d’une culture de modélisation issue de l’ingénierie statistique industrielle.{" "}
-                — Frédéric Lacoste, enseignant en mathématiques & statisticien.
+                Approche inspirée d’une culture de modélisation issue de
+                l’ingénierie statistique industrielle. — Frédéric Lacoste.
               </p>
             </div>
           </div>
         </div>
 
-        <div className="h-px w-full bg-slate-200" />
+        {/* 2) Séparation visuelle */}
+        <SectionHeader
+          label="ÉDUCATION"
+          subtitle="Profs • Élèves • Parents • Établissements"
+        />
 
+        {/* 3) Grille Éducation */}
         <div className="grid gap-6 lg:grid-cols-2">
           <div id="profs" className="scroll-mt-24">
             <Card
@@ -314,19 +323,77 @@ export default function AccueilPage() {
           </div>
         </div>
 
-        {/* Footer crédibilité */}
-        <div className="mt-10 rounded-2xl border border-slate-200 bg-slate-50 p-6">
-          <p className="text-sm font-semibold text-slate-900">
-            EleveAI : une IA utile, encadrée, et compatible avec la réalité des classes.
-          </p>
-          <p className="mt-2 text-sm text-slate-600 leading-relaxed">
-            Architecture pensée pour séparer clairement les usages email et établissement,
-            avec historiques, traces et règles serveur (pilotage par API). 
-          </p>
-          <p className="mt-2 text-xs text-slate-500">
-            ✅ Séparation EMAIL / ÉTABLISSEMENT • ✅ Traces • ✅ Conformité • ✅ Progression
+        {/* 4) Séparation Entreprise */}
+        <SectionHeader
+          id="entreprise"
+          label="ENTREPRISE"
+          subtitle="Gouvernance IA • Indicateurs • ISO/IEC 42001"
+        />
+
+        {/* 5) Bloc Entreprise (upgrade premium) */}
+        <div className="relative rounded-2xl border border-orange-200 bg-orange-50/40 p-6 overflow-hidden">
+          {/* ✅ mini-ligne verticale orange à gauche */}
+          <div className="absolute left-0 top-0 h-full w-[4px] bg-orange-500" />
+
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 pl-2">
+            <div className="space-y-2">
+              <div className="flex flex-wrap items-center gap-2">
+                <p className="text-xs font-extrabold uppercase tracking-wider text-orange-700">
+                  Valeria Consulting
+                </p>
+
+                {/* ✅ badge ISO/IEC 42001 */}
+                <span className="rounded-full border border-orange-200 bg-white/70 px-3 py-1 text-[11px] font-semibold text-orange-800">
+                  ISO/IEC 42001
+                </span>
+
+                <span className="rounded-full border border-slate-200 bg-white/70 px-3 py-1 text-[11px] font-semibold text-slate-700">
+                  Gouvernance IA
+                </span>
+              </div>
+
+              <h3 className="text-2xl font-extrabold text-slate-900">
+                Audit IA & indicateurs — gouvernance mesurable
+              </h3>
+
+              <p className="text-sm text-slate-700 max-w-2xl leading-relaxed">
+                Pour les PME et organismes de formation : cadrer l’usage IA, mesurer la
+                performance, réduire les risques (biais, dérives, décisions non traçables)
+                et mettre en place une amélioration continue.
+              </p>
+
+              <ul className="mt-3 grid gap-2 sm:grid-cols-2 text-sm text-slate-700">
+                <li>• Cartographie des usages IA</li>
+                <li>• KPI (robustesse, erreur, dérive)</li>
+                <li>• Procédures & validation humaine</li>
+                <li>• Feuille de route 30 / 60 / 90 jours</li>
+              </ul>
+            </div>
+
+            <div className="flex flex-col gap-2 sm:flex-row md:flex-col md:items-stretch">
+              {/* ✅ CTA entreprise : orange */}
+              <Link
+                href="/valeria"
+                className="inline-flex items-center justify-center rounded-lg bg-orange-600 px-5 py-3 text-sm font-semibold text-white hover:bg-orange-500 transition"
+              >
+                Découvrir l’offre entreprise →
+              </Link>
+
+              {/* ✅ CTA contact : neutre (pro) */}
+              <a
+                href="mailto:contact@eleveai.fr"
+                className="inline-flex items-center justify-center rounded-lg border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-slate-800 hover:bg-slate-100 transition"
+              >
+                Demander un audit pilote →
+              </a>
+            </div>
+          </div>
+
+          <p className="mt-4 text-xs text-slate-500 pl-2">
+            ⚠️ Positionnement : gouvernance IA mesurable (pas “formation IA vague”).
           </p>
         </div>
+
       </section>
     </main>
   );
