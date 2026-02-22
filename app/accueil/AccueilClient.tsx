@@ -379,14 +379,7 @@ export default function AccueilPage() {
                 Découvrir l’offre entreprise →
               </Link>
 
-              {/* ✅ CTA contact : neutre (pro) */}
-              <a
-                href="mailto:contact@eleveai.fr"
-                className="inline-flex items-center justify-center rounded-lg border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-slate-800 hover:bg-slate-100 transition"
-              >
-                Demander un audit pilote →
-              </a>
-            </div>
+           </div>
           </div>
 
           <p className="mt-4 text-xs text-slate-500 pl-2">
