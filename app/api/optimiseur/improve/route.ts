@@ -1,5 +1,4 @@
 // app/api/optimiseur/improve/route.ts
-
 import { NextResponse } from "next/server";
 import { openai } from "@/lib/openai";
 import { DEFAULT_MODEL_IMPROVE, normalizePromptType } from "@/lib/promptRubric";
@@ -14,8 +13,8 @@ function clamp(n: number, a: number, b: number) {
   return Math.max(a, Math.min(b, n));
 }
 
+// ✅ autorise seulement ces modèles côté API (anti “n’importe quoi depuis le client”)
 function pickModel(m: unknown) {
-  // ✅ autorise seulement ces modèles côté API (anti “n’importe quoi depuis le client”)
   return m === "gpt-4o" || m === "gpt-4o-mini" ? m : DEFAULT_MODEL_IMPROVE;
 }
 
@@ -23,6 +22,20 @@ function pickTemperature(t: unknown, def = 0) {
   const n = Number(t);
   if (!Number.isFinite(n)) return def;
   return clamp(n, 0, 1);
+}
+
+/**
+ * ✅ Normalisation robuste (minuscule + sans accents + espaces propres)
+ * IMPORTANT : utilisée pour l’ancre et le contrôle anti-hors-sujet.
+ */
+function normalizeText(s: string) {
+  return (s || "")
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "") // enlève les accents
+    .replace(/[^\p{L}\p{N}\s#]/gu, " ")
+    .replace(/\s+/g, " ")
+    .trim();
 }
 
 function stripCodeFences(s: string) {
@@ -76,44 +89,54 @@ function looksTruncatedJson(s: string) {
 }
 
 /**
- * 🔎 Extraction universelle d’ancre (FR/EN)
- * - évite les mots “métier” codés en dur
- * - sert seulement à repérer un hors-sujet grossier
+ * 🔎 Extraction universelle d’ancre (FR/EN) — ROBUSTE
+ * - normalise sans accents
+ * - keywords = mots “significatifs” du prompt original
+ * - sert seulement à détecter une dérive grossière
  */
 function extractAnchor(prompt: string) {
-  const text = prompt.toLowerCase();
+  const text = normalizeText(prompt);
 
-  // niveau/grade (FR + EN)
-  const levelMatch =
-    text.match(/\b(6e|5e|4e|3e|seconde|premi[eè]re|terminale|grade\s*\d+|year\s*\d+)\b/);
-
+  // niveau/grade (FR + EN) en version canonique (sans accents)
+  const levelMatch = text.match(
+    /\b(6e|5e|4e|3e|seconde|premiere|terminale|grade\s*\d+|year\s*\d+)\b/,
+  );
   const level = levelMatch ? levelMatch[0] : "unspecified level";
 
   // mots significatifs (lettres/nombres/#), on enlève le bruit court
   const words = text
-    .replace(/[^\p{L}\p{N}\s#]/gu, " ")
-    .split(/\s+/)
-    .filter(w => w.length >= 6 && !/^\d+$/.test(w))
-    .slice(0, 60);
+    .split(" ")
+    .filter((w) => w.length >= 6 && !/^\d+$/.test(w))
+    .slice(0, 80);
 
-  const keywords = Array.from(new Set(words)).slice(0, 10);
+  const keywords = Array.from(new Set(words)).slice(0, 12);
   return { level, keywords };
 }
 
+/**
+ * ✅ Détection “hors-sujet” plus souple :
+ * - vérifie le niveau via regex word-boundary
+ * - vérifie 1 à 2 “hits” de keywords selon quantité
+ * - évite les faux positifs (accents, reformulations)
+ */
 function seemsOffTopic(improved: string, anchor: { level: string; keywords: string[] }) {
-  const t = improved.toLowerCase();
+  const t = normalizeText(improved);
 
   const hasLevel =
-    anchor.level === "unspecified level" ? true : t.includes(anchor.level);
+    anchor.level === "unspecified level"
+      ? true
+      : new RegExp(`\\b${anchor.level}\\b`).test(t);
 
-  // si pas de keywords, on ne bloque pas
-  const hasKeyword =
-    anchor.keywords.length === 0 ? true : anchor.keywords.some(k => t.includes(k));
+  // s'il n'y a pas de keywords, on ne bloque pas (sauf niveau manquant)
+  if (anchor.keywords.length === 0) return !hasLevel;
 
-  return !(hasLevel && hasKeyword);
+  const hits = anchor.keywords.filter((k) => t.includes(k)).length;
+  const required = anchor.keywords.length <= 6 ? 1 : 2;
+
+  return !(hasLevel && hits >= required);
 }
 
-// ✅ (optionnel mais très efficace) : 1 retry “réparation JSON”
+// ✅ retry “réparation JSON” (1 fois)
 async function repairJsonOnce(raw: string, model: string) {
   const system = `Tu renvoies UNIQUEMENT du JSON valide, sans texte autour.`;
   const user = `
@@ -142,7 +165,7 @@ ${raw}
   return completion.choices?.[0]?.message?.content?.trim() || "";
 }
 
-// ✅ retry “anti-hors-sujet” (plus strict)
+// ✅ retry “anti-hors-sujet” (plus strict) — 1 fois
 async function regenerateStrictOnce(args: {
   model: string;
   prompt: string;
@@ -211,8 +234,8 @@ export async function POST(req: Request) {
 
     const anchor = extractAnchor(prompt);
 
-    // ⚠️ Avec ton nouveau promptRubricEditor.ts :
-    // PROMPT_RUBRIC_EDITOR_V2 est une FONCTION qui renvoie la rubrique typée
+    // ✅ Rubrique typée (ton promptRubricEditor.ts)
+    // PROMPT_RUBRIC_EDITOR_V2 est une fonction qui renvoie la rubrique typée
     const rubric = PROMPT_RUBRIC_EDITOR_V2(type);
 
     const system = `
@@ -312,7 +335,9 @@ ${scoreReport ? JSON.stringify(scoreReport, null, 2).slice(0, 12000) : "null"}
       );
     }
 
-    // 🔒 Vérification anti-dérive (soft): on tente 1 retry strict avant d’échouer
+    // 🔒 Vérification anti-dérive (soft):
+    // 1) on tente 1 retry strict
+    // 2) si encore “suspect”, on SOFT-FAIL en renvoyant le prompt précédent (200 OK)
     if (seemsOffTopic(improvedPrompt, anchor)) {
       const strictRaw = await regenerateStrictOnce({
         model,
@@ -335,14 +360,14 @@ ${scoreReport ? JSON.stringify(scoreReport, null, 2).slice(0, 12000) : "null"}
         });
       }
 
-      return NextResponse.json(
-        {
-          error: "Improve hors-sujet détecté.",
-          anchor,
-          used: { model, temperature, type, rubricVersion: RUBRIC_VERSION },
-        },
-        { status: 500 },
-      );
+      // ✅ SOFT-FAIL : pas de 500 (sinon boucle Valeria casse)
+      return NextResponse.json({
+        improvedPrompt: prompt, // on annule l'amélioration
+        changes: [
+          "Anti-hors-sujet: amélioration annulée (conservation du prompt précédent).",
+        ],
+        used: { model, temperature, type, rubricVersion: RUBRIC_VERSION },
+      });
     }
 
     return NextResponse.json({
@@ -357,7 +382,6 @@ ${scoreReport ? JSON.stringify(scoreReport, null, 2).slice(0, 12000) : "null"}
     );
   }
 }
-
 
 
 
