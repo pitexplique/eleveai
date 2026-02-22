@@ -383,7 +383,7 @@ export default function AccueilPage() {
           </div>
 
           <p className="mt-4 text-xs text-slate-500 pl-2">
-            ⚠️ Positionnement : gouvernance IA mesurable (pas “formation IA vague”).
+            ⚠️ Positionnement : gouvernance IA mesurable (Frédéric Lacoste”).
           </p>
         </div>
 

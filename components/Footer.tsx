@@ -5,213 +5,154 @@ export default function Footer() {
   return (
     <footer className="mt-12 border-t border-slate-800 bg-slate-950">
       <div className="mx-auto max-w-6xl px-4 py-8 sm:py-10">
-        {/* Bandeau partenariat / collège pilote */}
-        <div className="mb-8 rounded-2xl border border-sky-700/60 bg-sky-900/10 px-4 py-3 sm:px-6 sm:py-4 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-          <div className="text-sm sm:text-base text-sky-100">
-            <span className="font-semibold">Établissement pilote ?</span>{" "}
-            Testez EleveAI (IA pédagogique encadrée) dans votre collège ou lycée.
-          </div>
-          <div className="flex flex-wrap gap-2">
-            <Link
-              href="/offre-pilote"
-              className="rounded-xl border border-sky-500 bg-sky-500/10 px-3 py-1.5 text-xs sm:text-sm font-medium text-sky-100 hover:bg-sky-500/20"
-            >
-              Découvrir l’offre pilote
-            </Link>
-            <Link
-              href="/contact"
-              className="rounded-xl border border-amber-400/70 bg-amber-400/10 px-3 py-1.5 text-xs sm:text-sm font-medium text-amber-200 hover:bg-amber-400/20"
-            >
-              Demander un devis
-            </Link>
+        {/* Bandeau "pilotage" ultra simple */}
+        <div className="mb-8 rounded-2xl border border-slate-800 bg-slate-900/30 px-4 py-4 sm:px-6 sm:py-5">
+          <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+            <p className="text-sm text-slate-200">
+              <span className="font-semibold text-emerald-200">Valeria</span>{" "}
+              structure vos usages IA : objectifs mesurables, indicateurs, itérations.
+            </p>
+            <div className="flex flex-wrap gap-2">
+              <Link
+                href="/optimiseur"
+                className="rounded-xl border border-emerald-400/60 bg-emerald-400/10 px-3 py-2 text-xs font-semibold text-emerald-100 hover:bg-emerald-400/20"
+              >
+                🎯 Optimiseur Valeria
+              </Link>
+              <Link
+                href="/contact"
+                className="rounded-xl border border-amber-400/70 bg-amber-400/10 px-3 py-2 text-xs font-semibold text-amber-200 hover:bg-amber-400/20"
+              >
+                📩 Contact
+              </Link>
+            </div>
           </div>
         </div>
 
-        {/* Grille principale */}
+        {/* Grille principale (simple, business, comme la sidebar) */}
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-          {/* Bloc logo / pitch */}
+          {/* Marque / Pitch + "Valeria inside" */}
           <div className="space-y-3">
             <div className="flex items-center gap-2">
-              <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-emerald-500 text-slate-900 font-bold">
-                EA
-              </div>
-              <div className="flex flex-col leading-tight">
-                <span className="text-sm font-semibold text-slate-50">
-                  EleveAI
+              <div className="relative">
+                <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-emerald-500 text-slate-900 font-extrabold">
+                  EA
+                </div>
+
+                {/* ✅ label discret "Valeria inside" */}
+                <span className="absolute -top-2 -right-2 rounded-full border border-slate-800 bg-slate-950 px-2 py-0.5 text-[10px] font-semibold text-slate-300">
+                  Valeria inside
                 </span>
+              </div>
+
+              <div className="flex flex-col leading-tight">
+                <span className="text-sm font-semibold text-slate-50">EleveAI</span>
                 <span className="text-xs text-slate-400">
-                  IA pédagogique encadrée (Profs · Élèves · Parents)
+                  IA encadrée • Pilotage • Amélioration continue
                 </span>
               </div>
             </div>
 
             <p className="text-xs text-slate-400 leading-relaxed">
-              EleveAI aide les professeurs, élèves et parents à utiliser l’IA de
-              façon responsable : consignes, étapes, justification, correction —
-              sans “fait à la place”.
+              Une IA pédagogique structurée par des critères mesurables, des traces et des itérations
+              — pour aider sans remplacer.
             </p>
 
             <div className="pt-1 flex flex-wrap gap-2">
               <Link
-                href="/presse"
+                href="/profs"
                 className="inline-flex items-center gap-2 rounded-xl border border-slate-800 bg-slate-900/40 px-3 py-2 text-xs font-semibold text-slate-200 hover:bg-slate-900"
               >
-                📰 Presse & kit média →
+                🎓 Éducation →
               </Link>
               <Link
-                href="/communauté"
+                href="/valeria-consulting"
                 className="inline-flex items-center gap-2 rounded-xl border border-slate-800 bg-slate-900/40 px-3 py-2 text-xs font-semibold text-slate-200 hover:bg-slate-900"
               >
-                💬 Communauté →
+                🏢 Entreprises →
               </Link>
             </div>
           </div>
 
-          {/* Espaces */}
+          {/* Éducation (essentiel) */}
           <div>
-            <h3 className="text-sm font-semibold text-slate-100 mb-3">
-              Espaces
-            </h3>
+            <h3 className="text-sm font-semibold text-slate-100 mb-3">Éducation</h3>
             <ul className="space-y-1.5 text-sm">
               <li>
-                <Link
-                  href="/espace-profs"
-                  className="text-slate-300 hover:text-sky-300"
-                >
+                <Link href="/espace-profs" className="text-slate-300 hover:text-sky-300">
                   Espace Profs
                 </Link>
               </li>
               <li>
-                <Link
-                  href="/espace-eleves"
-                  className="text-slate-300 hover:text-sky-300"
-                >
-                  Espace Élèves
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/espace-parents"
-                  className="text-slate-300 hover:text-sky-300"
-                >
-                  Espace Parents
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/atelier-IA"
-                  className="text-slate-300 hover:text-sky-300"
-                >
+                <Link href="/atelier-IA" className="text-slate-300 hover:text-sky-300">
                   Atelier-IA
                 </Link>
               </li>
               <li>
-                <Link
-                  href="/concours-ia"
-                  className="text-slate-300 hover:text-sky-300"
-                >
-                  Concours IA
+                <Link href="/espace-eleves" className="text-slate-300 hover:text-sky-300">
+                  Espace Élèves
+                </Link>
+              </li>
+              <li>
+                <Link href="/espace-parents" className="text-slate-300 hover:text-sky-300">
+                  Espace Parents
                 </Link>
               </li>
             </ul>
+
+            <div className="mt-4 rounded-2xl border border-slate-800 bg-slate-900/25 p-3">
+              <p className="text-[11px] leading-relaxed text-slate-400">
+                <span className="text-slate-200 font-semibold">Objectif :</span>{" "}
+                des ressources claires, mesurables et réutilisables.
+              </p>
+            </div>
           </div>
 
-          {/* Établissements */}
+          {/* Entreprises (essentiel) */}
           <div>
-            <h3 className="text-sm font-semibold text-slate-100 mb-3">
-              Établissements
-            </h3>
+            <h3 className="text-sm font-semibold text-slate-100 mb-3">Entreprises</h3>
             <ul className="space-y-1.5 text-sm">
               <li>
-                <Link
-                  href="/offre-pilote"
-                  className="text-slate-300 hover:text-sky-300"
-                >
-                  Offre pilote
+                <Link href="/valeria-consulting" className="text-slate-300 hover:text-sky-300">
+                  Valeria Consulting
                 </Link>
               </li>
               <li>
-                <Link
-                  href="/tarifs#offre-etablissement"
-                  className="text-slate-300 hover:text-sky-300"
-                >
-                  Offre établissement
+                <Link href="/optimiseur" className="text-slate-300 hover:text-emerald-200">
+                  Optimisation de prompts (score)
                 </Link>
               </li>
               <li>
-                <Link
-                  href="/sponsor"
-                  className="text-slate-300 hover:text-sky-300"
-                >
-                  Soutenir EleveAI (Sponsor)
-                </Link>
-              </li>
-
-
-
-              <li>
-                <Link
-                  href="/contact"
-                  className="text-slate-300 hover:text-sky-300"
-                >
-                  Devis & contact
+                <Link href="/contact" className="text-slate-300 hover:text-sky-300">
+                  Audit / devis
                 </Link>
               </li>
             </ul>
+
+            <div className="mt-4 rounded-2xl border border-slate-800 bg-slate-900/25 p-3">
+              <p className="text-[11px] leading-relaxed text-slate-400">
+                <span className="text-slate-200 font-semibold">Approche :</span>{" "}
+                indicateurs, conformité, amélioration continue (pilotage).
+              </p>
+            </div>
           </div>
 
-          {/* À propos / légal */}
+          {/* Essentiels (minimal légal) */}
           <div>
-            <h3 className="text-sm font-semibold text-slate-100 mb-3">
-              À propos & légal
-            </h3>
+            <h3 className="text-sm font-semibold text-slate-100 mb-3">Essentiels</h3>
             <ul className="space-y-1.5 text-sm">
-              <li>
-                <Link
-                  href="/qui-sommes-nous"
-                  className="text-slate-300 hover:text-sky-300"
-                >
-                  Qui sommes-nous
-                </Link>
-              </li>
-
-              <li>
-                <Link
-                  href="/pourquoi-eleveai"
-                  className="text-slate-300 hover:text-sky-300"
-                >
-                  Pourquoi EleveAI
-                </Link>
-              </li>
-
-
-
-
-              {/* ✅ FAQ (page d’orientation vers Profs/Parents/Établissements) */}
-              <li>
-                <Link href="/faq" className="text-slate-300 hover:text-sky-300">
-                  FAQ
-                </Link>
-              </li>
-
               <li>
                 <Link href="/tarifs" className="text-slate-300 hover:text-sky-300">
                   Tarifs
                 </Link>
               </li>
               <li>
-                <Link
-                  href="/pourquoi-nos-tarifs-sont-justes"
-                  className="text-slate-300 hover:text-sky-300"
-                >
-                  Pourquoi nos tarifs sont justes
+                <Link href="/contact" className="text-slate-300 hover:text-sky-300">
+                  Contact
                 </Link>
               </li>
               <li>
-                <Link
-                  href="/mentions-legales"
-                  className="text-slate-300 hover:text-sky-300"
-                >
+                <Link href="/mentions-legales" className="text-slate-300 hover:text-sky-300">
                   Mentions légales
                 </Link>
               </li>
@@ -220,66 +161,26 @@ export default function Footer() {
                   href="/politique-confidentialite"
                   className="text-slate-300 hover:text-sky-300"
                 >
-                  Politique de confidentialité
-                </Link>
-              </li>
-              <li>
-                <Link href="/cgu" className="text-slate-300 hover:text-sky-300">
-                  CGU
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/charte"
-                  className="text-slate-300 hover:text-sky-300"
-                >
-                  Charte anti-triche
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/presse"
-                  className="text-slate-300 hover:text-sky-300"
-                >
-                  Presse & kit média
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/contact"
-                  className="text-slate-300 hover:text-sky-300"
-                >
-                  Contact
+                  Confidentialité
                 </Link>
               </li>
             </ul>
           </div>
         </div>
 
-        {/* Bas de page */}
+        {/* Bas de page minimal */}
         <div className="mt-8 flex flex-col gap-2 border-t border-slate-800 pt-4 text-xs text-slate-500 sm:flex-row sm:items-center sm:justify-between">
-          <p>© {new Date().getFullYear()} EleveAI. Tous droits réservés.</p>
+          <p>© {new Date().getFullYear()} EleveAI.</p>
 
           <div className="flex flex-wrap gap-x-3 gap-y-1 text-[11px] text-slate-500">
-            <span>Conçu à La Réunion pour les collèges & lycées de France.</span>
+            <span>Conçu à La Réunion.</span>
             <span className="hidden sm:inline">•</span>
-            <Link
-              href="/pourquoi-nos-tarifs-sont-justes"
-              className="hover:text-slate-200"
-            >
-              Transparence tarifs
+            <Link href="/tarifs" className="hover:text-slate-200">
+              Tarifs
             </Link>
             <span className="hidden sm:inline">•</span>
-            <Link href="/faq" className="hover:text-slate-200">
-              FAQ
-            </Link>
-            <span className="hidden sm:inline">•</span>
-            <Link href="/presse" className="hover:text-slate-200">
-              Presse
-            </Link>
-            <span className="hidden sm:inline">•</span>
-            <Link href="/communauté" className="hover:text-slate-200">
-              Communauté
+            <Link href="/contact" className="hover:text-slate-200">
+              Contact
             </Link>
           </div>
         </div>
