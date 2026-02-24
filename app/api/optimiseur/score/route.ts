@@ -1,13 +1,14 @@
 // app/api/optimiseur/score/route.ts
-
 import { NextResponse } from "next/server";
 import { openai } from "@/lib/openai";
 import {
   RUBRIC_VERSION,
   DEFAULT_MODEL_SCORE,
   normalizePromptType,
+  normalizeAudience,
   getPromptRubricScore,
   type PromptType,
+  type Audience,
 } from "@/lib/promptRubric";
 
 type ScoreResponse = {
@@ -74,35 +75,28 @@ function pickModel(m: unknown) {
 
 /**
  * ✅ Heuristiques DÉTERMINISTES (fiabilité)
- * Objectif : empêcher un prompt "propre" d'être sur-noté s'il manque
- * les éléments MESURABLES (barème, checklist, ref BO/Eduscol, etc.)
- *
- * + Version typée : les caps changent légèrement selon le type.
+ * + Typé (PromptType) + Audience (profs/eleves)
  */
-function computeDeterministicCaps(prompt: string, type: PromptType) {
+function computeDeterministicCaps(prompt: string, type: PromptType, audience: Audience) {
   const p = prompt.toLowerCase();
 
-  // --- Détection barème / points ---
   const hasBareme =
     /bar[eè]me/.test(p) ||
     /\/\s*20/.test(p) ||
     /\b\d+\s*points?\b/.test(p);
 
-  // --- Détection “seuil” / validation mesurable ---
   const hasSeuil =
     /seuil/.test(p) ||
     /%/.test(p) ||
     /à partir de/.test(p) ||
     /niveau de maîtrise/.test(p);
 
-  // --- Checklist / auto-contrôle ---
   const hasChecklist =
     /auto-contr[oô]le/.test(p) ||
     /checklist/.test(p) ||
     /\[\s*\]/.test(prompt) ||
     /-\s*\[.\]\s*/.test(prompt);
 
-  // --- BO/Eduscol + référence précise ---
   const hasBOorEduscol = /\bbo\b/.test(p) || /eduscol/.test(p);
   const hasPreciseRef =
     /bo\s*(sp[eé]cial|n[°o])/.test(p) ||
@@ -110,31 +104,33 @@ function computeDeterministicCaps(prompt: string, type: PromptType) {
     /\bcycle\s*3\b/.test(p) ||
     /\b26\s+novembre\s+2015\b/.test(p);
 
-  // --- Durée / supports / différenciation ---
   const hasDuration = /\b\d+\s*(min|minutes?|h|heure|heures)\b/.test(p);
   const hasSupports =
     /supports?\s*:/.test(p) ||
     /manuel|tableau|graphiques?|fiches?|calculatrice|ordinateur|tableur/.test(p);
-  const hasDifferenciation = /diff[eé]renciation|dys|ulis|aesh|base\/attendu\/d[ée]fi/.test(p);
 
-  // --- Structure exploitable (sections) ---
+  const hasDifferenciation =
+    /diff[eé]renciation|dys|ulis|aesh|base\/attendu\/d[ée]fi/.test(p);
+
   const hasStructuredSections =
-    /(introduction|objectifs|consignes|bar[eè]me|exercice|déroulé|bilan|conclusion)/.test(p);
+    /(introduction|objectifs|consignes|bar[eè]me|exercice|déroul[eé]|bilan|conclusion|auto-contr)/.test(
+      p,
+    );
 
-  // Caps init
+  // Élève-ready : espaces réponse
+  const hasStudentAnswerSpace = /r[eé]ponse\s*:\s*_{2,}|_{3,}/.test(prompt);
+
   let capRobustness = 4;
   let capCompliance = 4;
   let capStructure = 4;
   let capContext = 4;
 
-  // === Robustesse (typée) ===
-  // Évaluation : sans barème OU sans critères mesurables → cap plus bas
+  // === Robustesse ===
   if (type === "evaluation") {
     if (!hasBareme && !hasSeuil) capRobustness = 2.5;
     else if (!hasBareme || !hasSeuil) capRobustness = 3.0;
     if (!hasChecklist) capRobustness = Math.min(capRobustness, 3.0);
   } else {
-    // Séance / séquence / fiche / projet : on exige surtout checklist + critères
     if (!hasChecklist) capRobustness = 3.0;
     if (!hasSeuil && type !== "fiche") capRobustness = Math.min(capRobustness, 3.5);
   }
@@ -147,7 +143,19 @@ function computeDeterministicCaps(prompt: string, type: PromptType) {
   if (!hasStructuredSections) capStructure = 3.5;
 
   // === Contexte ===
-  if (!(hasDuration && hasSupports && hasDifferenciation)) capContext = 3.5;
+  if (!(hasDuration && hasSupports)) capContext = 3.5;
+
+  // === Audience ===
+  if (audience === "eleves") {
+    // attente "élève-ready" (surtout evaluation/fiche)
+    if (!hasStudentAnswerSpace && (type === "evaluation" || type === "fiche")) {
+      capStructure = Math.min(capStructure, 3.0);
+    }
+    // on ne pénalise pas l'absence de différenciation côté élève
+  } else {
+    // profs : différenciation aide souvent le contexte
+    if (!hasDifferenciation) capContext = Math.min(capContext, 3.5);
+  }
 
   return { capRobustness, capCompliance, capStructure, capContext };
 }
@@ -157,8 +165,8 @@ export async function POST(req: Request) {
     const body = await req.json().catch(() => ({}));
     const prompt = String(body?.prompt || "").trim();
 
-    // ✅ Type fourni par l’UI (recommandé)
     const type = normalizePromptType(body?.meta?.type);
+    const audience = normalizeAudience(body?.meta?.audience);
 
     const model = pickModel(body?.model) ?? DEFAULT_MODEL_SCORE;
     const temperature = 0;
@@ -167,8 +175,7 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Prompt manquant." }, { status: 400 });
     }
 
-    // ✅ Rubrique typée (score)
-    const rubric = getPromptRubricScore(type);
+    const rubric = getPromptRubricScore(type, audience);
 
     const system = `Tu renvoies UNIQUEMENT du JSON valide, sans texte autour.`;
 
@@ -219,13 +226,13 @@ Contraintes :
         {
           error: "Réponse scoring invalide (JSON).",
           raw: content,
-          used: { model, temperature, type },
+          used: { model, temperature, type, audience },
         },
         { status: 500 },
       );
     }
 
-    // 1) clamp + roundToHalf (pas de 0.5)
+    // 1) clamp + roundToHalf
     const b0 = {
       clarity: roundToHalf(clamp(parsed.breakdown.clarity, 0, 4)),
       context: roundToHalf(clamp(parsed.breakdown.context, 0, 4)),
@@ -234,8 +241,8 @@ Contraintes :
       robustness: roundToHalf(clamp(parsed.breakdown.robustness, 0, 4)),
     };
 
-    // 2) caps déterministes (fiabilité) — typés
-    const caps = computeDeterministicCaps(prompt, type);
+    // 2) caps déterministes
+    const caps = computeDeterministicCaps(prompt, type, audience);
     const b1 = {
       clarity: b0.clarity,
       context: Math.min(b0.context, caps.capContext),
@@ -244,7 +251,7 @@ Contraintes :
       robustness: Math.min(b0.robustness, caps.capRobustness),
     };
 
-    // 3) re-round après caps (toujours au pas 0.5)
+    // 3) re-round après caps
     const breakdown = {
       clarity: roundToHalf(b1.clarity),
       context: roundToHalf(b1.context),
@@ -273,8 +280,7 @@ Contraintes :
 
     return NextResponse.json({
       ...fixed,
-      // ✅ Optionnel : utile pour debug UI
-      used: { model, temperature, type },
+      used: { model, temperature, type, audience },
     });
   } catch (e: any) {
     return NextResponse.json(

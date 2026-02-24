@@ -1,6 +1,10 @@
 // lib/promptRubric.ts
+// ✅ Ajout Audience (profs/eleves) + exigences typées par audience
+// ✅ getPromptRubricScore / getPromptRubricEditor acceptent type + audience
+// ✅ normalizeAudience() robuste
+// ✅ rétro-compatible : si audience absente => "profs"
 
-export const RUBRIC_VERSION = 3.0;
+export const RUBRIC_VERSION = 3.1;
 
 /**
  * Types “produit” supportés par Valéria (simple + scalable)
@@ -13,14 +17,27 @@ export type PromptType =
   | "projet"
   | "autre";
 
+/**
+ * Audience (public cible)
+ */
+export type Audience = "profs" | "eleves";
+
 export function normalizePromptType(t: unknown): PromptType {
   const s = String(t || "").toLowerCase().trim();
-  if (s === "evaluation" || s === "eval" || s === "ds" || s === "controle") return "evaluation";
+  if (s === "evaluation" || s === "eval" || s === "ds" || s === "controle")
+    return "evaluation";
   if (s === "seance" || s === "séance" || s === "lesson") return "seance";
   if (s === "sequence" || s === "séquence" || s === "unit") return "sequence";
   if (s === "fiche" || s === "fiche_methode" || s === "handout") return "fiche";
   if (s === "projet" || s === "project") return "projet";
   return "autre";
+}
+
+export function normalizeAudience(a: unknown): Audience {
+  const s = String(a || "").toLowerCase().trim();
+  if (s === "eleves" || s === "élèves" || s === "eleve" || s === "student" || s === "students")
+    return "eleves";
+  return "profs";
 }
 
 /**
@@ -88,13 +105,39 @@ EXIGENCES MINIMALES (AUTRE) :
 }
 
 /**
- * ✅ Rubrique "SCORING" (évaluateur strict)
- * IMPORTANT : elle interdit de fournir un prompt amélioré.
- * Elle est faite UNIQUEMENT pour /score.
- *
- * 👉 Cette version est “typée” via les exigences spécifiques (sans multiplier les grilles).
+ * Exigences d’audience :
+ * - "profs" : plus exigeant (BO/Eduscol, différenciation, traces, correction séparée)
+ * - "eleves" : sortie “élève-ready” (consignes simples, espaces réponses, pas de correction par défaut)
  */
-export function getPromptRubricScore(type: PromptType = "autre") {
+export function getAudienceRequirements(audience: Audience): string {
+  if (audience === "eleves") {
+    return `
+EXIGENCES SPÉCIFIQUES (PUBLIC = ÉLÈVES) :
+- Consignes courtes, vocabulaire simple, 1 tâche à la fois.
+- Mise en page élève : espaces “Réponse : ____”, tableaux à compléter si pertinent.
+- Pas de correction détaillée dans la version élève (sauf demande explicite).
+- Rappels utiles (méthode) uniquement si demandés, sinon minimal.
+- Durée/temps de travail réalistes + critères de réussite compréhensibles.
+`.trim();
+  }
+
+  return `
+EXIGENCES SPÉCIFIQUES (PUBLIC = PROFS) :
+- Structure exploitable enseignant : déroulé, variables (durée, matériel, modalités).
+- Différenciation (base/attendu/défi) si pertinent.
+- Traces attendues + modalités de mise en commun.
+- Mention BO/Eduscol si pertinent + compétences/socle si contexte scolaire.
+- Si évaluation : barème + correction séparée si demandée.
+`.trim();
+}
+
+/**
+ * ✅ Rubrique "SCORING" (évaluateur strict) — typée + audience
+ */
+export function getPromptRubricScore(
+  type: PromptType = "autre",
+  audience: Audience = "profs",
+) {
   return `
 Tu es un évaluateur STRICT de prompts pédagogiques (cadre scolaire FR).
 Tu produis un score SUR 20 basé UNIQUEMENT sur la grille ci-dessous.
@@ -102,6 +145,7 @@ Tu dois être stable, cohérent, et parcimonieux : les scores >= 19 sont rares.
 Un score de 20 nécessite une excellence explicite sur les 5 critères.
 
 TYPE DÉCLARÉ (à respecter) : ${type}
+PUBLIC CIBLE (à respecter) : ${audience}
 
 RÈGLE ABSOLUE :
 - score global = somme EXACTE des 5 sous-scores.
@@ -140,7 +184,7 @@ GRILLE (5 critères x /4 = /20)
 2 : structure correcte mais peu exploitable
 3 : structure claire, sections explicites
 4 : structure exemplaire, immédiatement exploitable (copiable/collable), hiérarchie nette,
-    et conforme aux exigences spécifiques du TYPE (ci-dessous)
+    et conforme aux exigences spécifiques du TYPE + PUBLIC (ci-dessous)
 
 5) Robustesse & testabilité (/4)
 0 : aucune vérification
@@ -148,7 +192,7 @@ GRILLE (5 critères x /4 = /20)
 2 : critères présents mais peu vérifiables
 3 : critères observables + auto-contrôle
 4 : robustesse forte + anti-hallucination + conditions de validation explicites
-    (checklist + contraintes mesurables), conformes au TYPE
+    (checklist + contraintes mesurables), conformes au TYPE + PUBLIC
 
 ==================================================
 EXIGENCES SPÉCIFIQUES DU TYPE
@@ -156,10 +200,16 @@ EXIGENCES SPÉCIFIQUES DU TYPE
 ${getTypeRequirements(type)}
 
 ==================================================
+EXIGENCES SPÉCIFIQUES DU PUBLIC
+==================================================
+${getAudienceRequirements(audience)}
+
+==================================================
 CONDITIONS POUR 20/20
 ==================================================
 Un score de 20 exige :
 - Le TYPE est respecté sans ambiguïté (structure attendue conforme au type).
+- Le PUBLIC est respecté (élève-ready vs prof-ready).
 - contraintes vérifiables (durée, structure, critères)
 - auto-contrôle explicite
 - aucune contradiction interne
@@ -177,19 +227,19 @@ RÈGLES DE SORTIE
 }
 
 /**
- * ✅ Rubrique "EDITOR/IMPROVE" (optimiseur)
- * IMPORTANT : elle DOIT interdire les dérives (changement de sujet).
- * Elle est faite UNIQUEMENT pour /improve.
- *
- * 👉 Typée : elle force l’ajout de structure adaptée au type (évaluation/séance/etc.)
+ * ✅ Rubrique "EDITOR/IMPROVE" (optimiseur) — typée + audience
  */
-export function getPromptRubricEditor(type: PromptType = "autre") {
+export function getPromptRubricEditor(
+  type: PromptType = "autre",
+  audience: Audience = "profs",
+) {
   return `
 Tu es un ÉDITEUR DE PROMPT pédagogique (optimisation).
 Ton but : améliorer le prompt fourni SANS changer le sujet.
 Tu renvoies UNIQUEMENT un JSON valide.
 
 TYPE DÉCLARÉ (à respecter) : ${type}
+PUBLIC CIBLE (à respecter) : ${audience}
 
 ==================================================
 RÈGLES ANTI-DÉRIVE (CRITIQUES)
@@ -200,14 +250,14 @@ INTERDICTION ABSOLUE de modifier :
 - le thème/notions principales
 - le type de tâche demandé (évaluation/séance/séquence/fiche/projet)
 - la durée demandée (sauf contradiction interne à corriger)
+- le PUBLIC CIBLE (profs/élèves)
 
 Tu n’as PAS le droit d’introduire un autre domaine non demandé.
-Tu améliores UNIQUEMENT : clarté, structure, conformité, testabilité, différenciation.
+Tu améliores UNIQUEMENT : clarté, structure, conformité, testabilité, différenciation, mise en forme.
 
-Si le prompt contient une contradiction (ex : 55 min et “diagnostic 10 min”), tu dois :
+Si le prompt contient une contradiction, tu dois :
 - la SIGNALER dans "changes"
-- et CORRIGER en choisissant la version la plus cohérente avec le reste du prompt
-  (sans changer le thème).
+- et CORRIGER en choisissant la version la plus cohérente avec le reste du prompt (sans changer le thème).
 
 ==================================================
 OBJECTIFS D’AMÉLIORATION (OBLIGATOIRES)
@@ -224,11 +274,16 @@ EXIGENCES DU TYPE (à intégrer)
 ${getTypeRequirements(type)}
 
 ==================================================
+EXIGENCES DU PUBLIC (à intégrer)
+==================================================
+${getAudienceRequirements(audience)}
+
+==================================================
 FORMAT D’AMÉLIORATION (IMPORTANT)
 ==================================================
 - Interdit de donner des “conseils” vagues du type “Assurez-vous / Ajoutez / Pensez à…”.
 - Tu dois INSÉRER dans le prompt des sections concrètes :
-  A) "STRUCTURE ATTENDUE" adaptée au type
+  A) "STRUCTURE ATTENDUE" adaptée au type + public
   B) "CRITÈRES DE RÉUSSITE (MESURABLES)" (3 à 6 items)
   C) "AUTO-CONTRÔLE (CHECKLIST)" (6 à 10 cases)
 - Évite d’allonger inutilement : amélioration = précision + testabilité.
@@ -243,7 +298,7 @@ Tu dois renvoyer EXACTEMENT ce schéma (et rien d’autre) :
   "changes": ["...","..."]
 }
 
-- improvedPrompt : prompt complet amélioré (même sujet, même niveau, même type).
+- improvedPrompt : prompt complet amélioré (même sujet, même niveau, même type, même public).
 - changes : 5 à 12 items max, phrases courtes, actionnables.
 `.trim();
 }
