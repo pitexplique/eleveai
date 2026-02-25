@@ -1,3 +1,9 @@
+// app/accueil/page.tsx (ou app/page.tsx selon ton routing)
+// ✅ Ajout chip "🛡️ Gouvernance IA"
+// ✅ Ajout section "GOUVERNANCE IA" + CTA vers /iso-42001
+// ✅ Mentions ISO "safe" : "inspirée ISO/IEC 42001 (démarche progressive, non certifiée)"
+// ✅ Ajout liens ISO depuis Valeria + Entreprise
+
 "use client";
 
 import Link from "next/link";
@@ -126,9 +132,7 @@ export default function AccueilPage() {
             </h2>
 
             <p className="mt-5 text-sm sm:text-base text-slate-700 leading-relaxed">
-              <span className="font-semibold text-slate-900">
-                Vous gardez la main.
-              </span>{" "}
+              <span className="font-semibold text-slate-900">Vous gardez la main.</span>{" "}
               L’IA structure, vous décidez : consigne claire, étapes, critères,
               adaptations, et traces pour travailler proprement en classe.
             </p>
@@ -138,11 +142,9 @@ export default function AccueilPage() {
               <Chip label="👩‍🏫 Profs" onClick={() => scrollTo("profs")} />
               <Chip label="🎒 Élèves" onClick={() => scrollTo("eleves")} />
               <Chip label="👨‍👩‍👧 Parents" onClick={() => scrollTo("parents")} />
-              <Chip
-                label="🏫 Établissement"
-                onClick={() => scrollTo("etablissement")}
-              />
+              <Chip label="🏫 Établissement" onClick={() => scrollTo("etablissement")} />
               <Chip label="⭐ Valeria" onClick={() => scrollTo("valeria")} />
+              <Chip label="🛡️ Gouvernance IA" onClick={() => scrollTo("gouvernance")} />
               <Chip label="🏢 Entreprise" onClick={() => scrollTo("entreprise")} />
             </div>
 
@@ -172,7 +174,7 @@ export default function AccueilPage() {
                 className="inline-flex w-full items-center justify-center rounded-lg bg-orange-600 px-6 py-3 text-sm font-semibold text-white
                           hover:bg-orange-500 transition sm:w-auto"
               >
-                Offre entreprise (ISO/IEC 42001) →
+                Offre entreprise →
               </Link>
             </div>
 
@@ -181,7 +183,7 @@ export default function AccueilPage() {
             </p>
 
             <p className="mt-6 text-xs text-slate-500">
-              ✅ Cadre anti-triche (traces) · ✅ Cadre établissement · ✅ L’IA propose, l’humain justifie
+              ✅ Cadre anti-triche (traces) · ✅ Cadre établissement · ✅ L’IA propose, l’humain valide
             </p>
           </div>
         </div>
@@ -212,16 +214,41 @@ export default function AccueilPage() {
               <p className="text-lg font-semibold">
                 Indicateur actuel :
                 <span className="ml-2 text-emerald-600">19,5 / 20</span>
-                <span className="ml-2 text-xs text-slate-500">
-                  (évaluation multi-critères)
-                </span>
+                <span className="ml-2 text-xs text-slate-500">(évaluation multi-critères)</span>
               </p>
 
               <p className="text-sm text-slate-600 max-w-md leading-relaxed">
                 Valeria améliore un prompt par itérations contrôlées : clarté,
-                structure, conformité, différenciation, et robustesse (résultats
-                stables et exploitables).
+                structure, conformité, différenciation, et robustesse (sorties plus stables et exploitables).
               </p>
+
+              {/* Gouvernance IA (safe) */}
+              <div className="rounded-xl border border-emerald-200 bg-emerald-50 p-4 text-sm text-emerald-950 leading-relaxed">
+                <p className="font-semibold mb-1">
+                  Gouvernance IA (inspirée ISO/IEC 42001)
+                </p>
+                <p>
+                  Supervision humaine, indicateurs, traçabilité et amélioration continue :
+                  Valeria est conçu comme un système piloté, pas comme une “boîte magique”.
+                </p>
+                <div className="mt-3 flex flex-col sm:flex-row gap-2">
+                  <Link
+                    href="/iso-42001"
+                    className="inline-flex items-center justify-center rounded-lg bg-emerald-700 px-4 py-2 text-sm font-semibold text-white hover:bg-emerald-600 transition"
+                  >
+                    Lire notre philosophie ISO →
+                  </Link>
+                  <Link
+                    href="/optimiseur"
+                    className="inline-flex items-center justify-center rounded-lg border border-emerald-200 bg-white px-4 py-2 text-sm font-semibold text-emerald-900 hover:bg-emerald-50 transition"
+                  >
+                    Tester Valeria (/20) →
+                  </Link>
+                </div>
+                <p className="mt-2 text-xs text-emerald-800/80">
+                  Démarche progressive, non certifiée à ce stade.
+                </p>
+              </div>
 
               <div className="rounded-xl border border-slate-200 bg-slate-50 p-4 text-sm text-slate-700 leading-relaxed">
                 <p className="font-semibold text-slate-900 mb-2">
@@ -229,16 +256,12 @@ export default function AccueilPage() {
                 </p>
                 <p>
                   Ce n’est pas une “performance” : c’est un{" "}
-                  <span className="font-semibold">
-                    indice de reproductibilité pédagogique
-                  </span>
-                  . À ce niveau, un prompt donne des sorties plus constantes :
-                  objectif explicite, consignes univoques, progression, critères,
-                  différenciation, et traces.
+                  <span className="font-semibold">indice de reproductibilité pédagogique</span>.
+                  À ce niveau, un prompt donne des sorties plus constantes : objectif explicite,
+                  consignes univoques, progression, critères, différenciation, et traces.
                 </p>
                 <p className="mt-2 text-xs text-slate-500">
-                  L’IA structure la demande. L’enseignant conserve la décision
-                  pédagogique.
+                  L’IA structure la demande. L’enseignant conserve la décision pédagogique.
                 </p>
               </div>
 
@@ -259,20 +282,15 @@ export default function AccueilPage() {
               </div>
 
               <p className="text-xs text-slate-500 italic leading-relaxed">
-                Approche inspirée d’une culture de modélisation issue de
-                l’ingénierie statistique industrielle. — Frédéric Lacoste.
+                Approche inspirée d’une culture de modélisation issue de l’ingénierie statistique industrielle. — Frédéric Lacoste.
               </p>
             </div>
           </div>
         </div>
 
-        {/* 2) Séparation visuelle */}
-        <SectionHeader
-          label="ÉDUCATION"
-          subtitle="Profs • Élèves • Parents • Établissements"
-        />
+        {/* ÉDUCATION */}
+        <SectionHeader label="ÉDUCATION" subtitle="Profs • Élèves • Parents • Établissements" />
 
-        {/* 3) Grille Éducation */}
         <div className="grid gap-6 lg:grid-cols-2">
           <div id="profs" className="scroll-mt-24">
             <Card
@@ -323,16 +341,74 @@ export default function AccueilPage() {
           </div>
         </div>
 
-        {/* 4) Séparation Entreprise */}
+        {/* GOUVERNANCE IA */}
+        <SectionHeader
+          id="gouvernance"
+          label="GOUVERNANCE IA"
+          subtitle="Supervision humaine • Indicateurs • Traçabilité • Amélioration continue"
+        />
+
+        <div className="relative rounded-2xl border border-emerald-200 bg-emerald-50/40 p-6 overflow-hidden">
+          <div className="absolute left-0 top-0 h-full w-[4px] bg-emerald-600" />
+
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 pl-2">
+            <div className="space-y-2">
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="rounded-full border border-emerald-200 bg-white/70 px-3 py-1 text-[11px] font-semibold text-emerald-900">
+                  Inspirée ISO/IEC 42001
+                </span>
+                <span className="rounded-full border border-slate-200 bg-white/70 px-3 py-1 text-[11px] font-semibold text-slate-700">
+                  Démarche progressive
+                </span>
+              </div>
+
+              <h3 className="text-2xl font-extrabold text-slate-900">
+                L’IA propose, l’humain valide
+              </h3>
+
+              <p className="text-sm text-slate-700 max-w-2xl leading-relaxed">
+                Valeria applique des principes de pilotage d’un système IA :
+                supervision humaine, indicateurs, traçabilité et amélioration continue.
+                Objectif : des sorties fiables, exploitables, et pédagogiquement contrôlées.
+              </p>
+
+              <ul className="mt-3 grid gap-2 sm:grid-cols-2 text-sm text-slate-700">
+                <li>• Validation finale humaine</li>
+                <li>• Indicateurs (/20 + breakdown)</li>
+                <li>• Historique des itérations</li>
+                <li>• Procédures d’arrêt / anti-dérive</li>
+              </ul>
+
+              <p className="mt-3 text-xs text-slate-500">
+                Mention “ISO” = inspiration de gouvernance, pas une revendication de certification.
+              </p>
+            </div>
+
+            <div className="flex flex-col gap-2 sm:flex-row md:flex-col md:items-stretch">
+              <Link
+                href="/iso-42001"
+                className="inline-flex items-center justify-center rounded-lg bg-emerald-700 px-5 py-3 text-sm font-semibold text-white hover:bg-emerald-600 transition"
+              >
+                Page ISO / Gouvernance →
+              </Link>
+              <Link
+                href="/optimiseur"
+                className="inline-flex items-center justify-center rounded-lg border border-emerald-200 bg-white px-5 py-3 text-sm font-semibold text-emerald-900 hover:bg-emerald-50 transition"
+              >
+                Tester Valeria →
+              </Link>
+            </div>
+          </div>
+        </div>
+
+        {/* ENTREPRISE */}
         <SectionHeader
           id="entreprise"
           label="ENTREPRISE"
           subtitle="Gouvernance IA • Indicateurs • ISO/IEC 42001"
         />
 
-        {/* 5) Bloc Entreprise (upgrade premium) */}
         <div className="relative rounded-2xl border border-orange-200 bg-orange-50/40 p-6 overflow-hidden">
-          {/* ✅ mini-ligne verticale orange à gauche */}
           <div className="absolute left-0 top-0 h-full w-[4px] bg-orange-500" />
 
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 pl-2">
@@ -342,7 +418,6 @@ export default function AccueilPage() {
                   Valeria Consulting
                 </p>
 
-                {/* ✅ badge ISO/IEC 42001 */}
                 <span className="rounded-full border border-orange-200 bg-white/70 px-3 py-1 text-[11px] font-semibold text-orange-800">
                   ISO/IEC 42001
                 </span>
@@ -371,7 +446,6 @@ export default function AccueilPage() {
             </div>
 
             <div className="flex flex-col gap-2 sm:flex-row md:flex-col md:items-stretch">
-              {/* ✅ CTA entreprise : orange */}
               <Link
                 href="/valeria"
                 className="inline-flex items-center justify-center rounded-lg bg-orange-600 px-5 py-3 text-sm font-semibold text-white hover:bg-orange-500 transition"
@@ -379,14 +453,19 @@ export default function AccueilPage() {
                 Découvrir l’offre entreprise →
               </Link>
 
-           </div>
+              <Link
+                href="/iso-42001"
+                className="inline-flex items-center justify-center rounded-lg border border-orange-200 bg-white px-5 py-3 text-sm font-semibold text-orange-900 hover:bg-orange-50 transition"
+              >
+                Notre philosophie ISO →
+              </Link>
+            </div>
           </div>
 
           <p className="mt-4 text-xs text-slate-500 pl-2">
-            ⚠️ Positionnement : gouvernance IA mesurable (Frédéric Lacoste”).
+            ⚠️ Positionnement : gouvernance IA mesurable (supervision humaine + traçabilité).
           </p>
         </div>
-
       </section>
     </main>
   );
