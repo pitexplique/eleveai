@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { X, Image as ImageIcon } from "lucide-react";
+import { X, Image as ImageIcon, ShieldCheck } from "lucide-react";
 
 type DevBannerProps = {
   message?: string;
@@ -10,8 +10,8 @@ type DevBannerProps = {
 };
 
 export default function DevBanner({
-message = "Valerai : 1er systeme de d'optimisation dynamique de vos prompts IA (score en temps réel)",
-  storageKey = "eleveai_dev_banner_closed_v2",
+  message = "Valeria : optimisation mesurable de prompts IA (/20) avec supervision humaine, traçabilité et amélioration continue (inspiré ISO/IEC 42001).",
+  storageKey = "eleveai_dev_banner_closed_v3",
   className = "",
 }: DevBannerProps) {
   const [open, setOpen] = useState(false);
@@ -49,9 +49,13 @@ message = "Valerai : 1er systeme de d'optimisation dynamique de vos prompts IA (
 
         {/* Ligne principale */}
         <div className="flex items-center justify-between gap-3">
-          <p className="text-sm leading-snug font-medium tracking-wide">
-            {message}
-          </p>
+
+          <div className="flex items-center gap-2">
+            <ShieldCheck className="h-4 w-4 text-emerald-400" />
+            <p className="text-sm leading-snug font-medium tracking-wide">
+              {message}
+            </p>
+          </div>
 
           <div className="flex items-center gap-1">
             {/* Bouton image */}
@@ -91,7 +95,6 @@ message = "Valerai : 1er systeme de d'optimisation dynamique de vos prompts IA (
             />
           </div>
         )}
-
       </div>
     </div>
   );
