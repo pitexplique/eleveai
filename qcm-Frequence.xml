@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+
+<question type="category">
+  <category>
+    <text><![CDATA[ <infos><name>QXCM_Frequence_Probabilite_DNB_Reunion</name></infos> ]]></text>
+  </category>
+</question>
+
+<!-- Q1 -->
+<question type="multichoice">
+<questiontext format="html">
+<text><![CDATA[
+<div>À Saint-Pierre, sur 40 jours observés, il a plu 10 jours.<br>
+Sélectionner les affirmations correctes :</div>
+]]></text>
+</questiontext>
+<single>false</single>
+<answer fraction="0"><text><![CDATA[La probabilité de pluie est exactement 1/4]]></text></answer>
+<answer fraction="50"><text><![CDATA[La fréquence observée est 10/40]]></text></answer>
+<answer fraction="50"><text><![CDATA[La fréquence observée est 0,25]]></text></answer>
+<answer fraction="0"><text><![CDATA[La probabilité dépend des jours déjà observés]]></text></answer>
+</question>
+
+<!-- Q2 -->
+<question type="multichoice">
+<questiontext format="html">
+<text><![CDATA[
+<div>La probabilité théorique d’obtenir un 6 avec un dé équilibré est 1/6.<br>
+Choisir les affirmations vraies :</div>
+]]></text>
+</questiontext>
+<single>false</single>
+<answer fraction="50"><text><![CDATA[Cette valeur est calculée avant expérimentation]]></text></answer>
+<answer fraction="0"><text><![CDATA[Elle dépend du nombre de lancers effectués]]></text></answer>
+<answer fraction="50"><text><![CDATA[C’est une valeur théorique]]></text></answer>
+<answer fraction="0"><text><![CDATA[Elle est toujours égale à la fréquence observée]]></text></answer>
+</question>
+
+<!-- Q3 -->
+<question type="multichoice">
+<questiontext format="html">
+<text><![CDATA[
+<div>Au Piton de la Fournaise, sur 200 randonnées, 8 ont été annulées.<br>
+Sélectionner les réponses correctes :</div>
+]]></text>
+</questiontext>
+<single>false</single>
+<answer fraction="50"><text><![CDATA[La fréquence est 8/200]]></text></answer>
+<answer fraction="0"><text><![CDATA[La probabilité d’annulation est exactement 8/200]]></text></answer>
+<answer fraction="50"><text><![CDATA[La fréquence est 0,04]]></text></answer>
+<answer fraction="0"><text><![CDATA[C’est une estimation théorique]]></text></answer>
+</question>
+
+<!-- Q4 – Piège classique -->
+<question type="multichoice">
+<questiontext format="html">
+<text><![CDATA[
+<div>Après 5 lancers d’une pièce, on obtient 4 fois pile.<br>
+Choisir les affirmations correctes :</div>
+]]></text>
+</questiontext>
+<single>false</single>
+<answer fraction="0"><text><![CDATA[La probabilité de pile est maintenant 4/5]]></text></answer>
+<answer fraction="50"><text><![CDATA[La fréquence observée est 4/5]]></text></answer>
+<answer fraction="0"><text><![CDATA[La probabilité change après chaque série]]></text></answer>
+<answer fraction="50"><text><![CDATA[La probabilité théorique reste 1/2]]></text></answer>
+</question>
+
+<!-- Q5 -->
+<question type="multichoice">
+<questiontext format="html">
+<text><![CDATA[
+<div>Dans un sac : 3 mangues et 7 ananas.<br>
+Choisir les affirmations correctes :</div>
+]]></text>
+</questiontext>
+<single>false</single>
+<answer fraction="50"><text><![CDATA[La probabilité théorique de tirer une mangue est 3/10]]></text></answer>
+<answer fraction="0"><text><![CDATA[La fréquence est toujours 3/10]]></text></answer>
+<answer fraction="50"><text><![CDATA[La probabilité est calculée sans expérimentation]]></text></answer>
+<answer fraction="0"><text><![CDATA[La probabilité dépend du nombre de tirages réalisés]]></text></answer>
+</question>
+
+<!-- Q6 – Erreur fréquente -->
+<question type="multichoice">
+<questiontext format="html">
+<text><![CDATA[
+<div>Sur 100 bus au Tampon, 15 sont en retard.<br>
+Choisir les affirmations vraies :</div>
+]]></text>
+</questiontext>
+<single>false</single>
+<answer fraction="50"><text><![CDATA[La fréquence est 0,15]]></text></answer>
+<answer fraction="0"><text><![CDATA[La probabilité est exactement 0,15]]></text></answer>
+<answer fraction="50"><text><![CDATA[La fréquence dépend des observations réelles]]></text></answer>
+<answer fraction="0"><text><![CDATA[La probabilité change chaque jour]]></text></answer>
+</question>
+
+<!-- Q7 -->
+<question type="multichoice">
+<questiontext format="html">
+<text><![CDATA[
+<div>Choisir les différences correctes :</div>
+]]></text>
+</questiontext>
+<single>false</single>
+<answer fraction="33.33"><text><![CDATA[La fréquence varie selon l’échantillon]]></text></answer>
+<answer fraction="0"><text><![CDATA[La probabilité dépend des résultats déjà obtenus]]></text></answer>
+<answer fraction="33.33"><text><![CDATA[La probabilité est théorique]]></text></answer>
+<answer fraction="33.34"><text><![CDATA[La fréquence est expérimentale]]></text></answer>
+</question>
+
+<!-- Q8 – DNB classique -->
+<question type="multichoice">
+<questiontext format="html">
+<text><![CDATA[
+<div>Quand le nombre d’essais augmente :</div>
+]]></text>
+</questiontext>
+<single>false</single>
+<answer fraction="0"><text><![CDATA[La probabilité change]]></text></answer>
+<answer fraction="50"><text><![CDATA[La fréquence se rapproche de la probabilité]]></text></answer>
+<answer fraction="0"><text><![CDATA[La fréquence devient exactement égale]]></text></answer>
+<answer fraction="50"><text><![CDATA[La probabilité reste constante]]></text></answer>
+</question>
+
+<!-- Q9 -->
+<question type="multichoice">
+<questiontext format="html">
+<text><![CDATA[
+<div>Choisir les affirmations correctes :</div>
+]]></text>
+</questiontext>
+<single>false</single>
+<answer fraction="33.33"><text><![CDATA[Une probabilité est comprise entre 0 et 1]]></text></answer>
+<answer fraction="0"><text><![CDATA[Une fréquence est toujours égale à 1]]></text></answer>
+<answer fraction="33.33"><text><![CDATA[La fréquence est calculée après expérience]]></text></answer>
+<answer fraction="33.34"><text><![CDATA[La probabilité peut être calculée avant expérience]]></text></answer>
+</question>
+
+<!-- Q10 -->
+<question type="multichoice">
+<questiontext format="html">
+<text><![CDATA[
+<div>Après 1000 lancers d’un dé équilibré, on obtient 170 fois le 6.<br>
+Choisir les affirmations correctes :</div>
+]]></text>
+</questiontext>
+<single>false</single>
+<answer fraction="50"><text><![CDATA[La fréquence observée est 170/1000]]></text></answer>
+<answer fraction="0"><text><![CDATA[La probabilité du 6 est devenue 170/1000]]></text></answer>
+<answer fraction="50"><text><![CDATA[La probabilité théorique reste 1/6]]></text></answer>
+<answer fraction="0"><text><![CDATA[La probabilité change avec l’expérience]]></text></answer>
+</question>
+
+</quiz>

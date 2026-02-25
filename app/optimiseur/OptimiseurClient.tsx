@@ -2,6 +2,7 @@
 // ✅ Valeria V2-ready : Type en chips + Audience (Profs/Élèves) en chips
 // ✅ targetScore par défaut = 20
 // ✅ Envoie meta.type + meta.audience à /score, et type + audience à /improve
+// ✅ NEW : affiche un label dynamique (attendus) selon Type + Public
 
 "use client";
 
@@ -73,6 +74,101 @@ function Chip({
   );
 }
 
+/** ✅ Label dynamique : quelques attendus par Type + Public (UX) */
+function getExpectations(type: PromptType, audience: Audience) {
+  const baseEleve = [
+    "Consignes courtes (1 tâche à la fois)",
+    "Exemple + étapes",
+    "Checklist",
+  ];
+  const baseProf = [
+    "Durée + matériel",
+    "Déroulé + mise en commun",
+    "Critères mesurables + checklist",
+  ];
+
+  if (audience === "eleves") {
+    switch (type) {
+      case "evaluation":
+        return {
+          title: "Attendus (Élèves • Évaluation)",
+          pills: ["Consignes claires", "Espaces Réponse ____", "Sans correction"],
+          lines: [...baseEleve, "Espaces “Réponse : ____”", "Barème seulement si demandé"],
+        };
+      case "fiche":
+        return {
+          title: "Attendus (Élèves • Fiche / méthode)",
+          pills: ["Étapes numérotées", "Exemple", "Erreur fréquente"],
+          lines: [...baseEleve, "Synthèse “À retenir”", "Sans blabla"],
+        };
+      case "seance":
+        return {
+          title: "Attendus (Élèves • Séance)",
+          pills: ["Objectif", "Étapes", "Temps"],
+          lines: [...baseEleve, "Temps indicatifs", "Trace attendue simple"],
+        };
+      case "sequence":
+        return {
+          title: "Attendus (Élèves • Séquence)",
+          pills: ["Séances", "Objectifs", "Tâches"],
+          lines: [...baseEleve, "Ce que je fais séance 1/2/3", "Trace / production"],
+        };
+      case "projet":
+        return {
+          title: "Attendus (Élèves • Projet)",
+          pills: ["Livrable", "Étapes", "Critères"],
+          lines: [...baseEleve, "Rôles si groupe", "Critères simples"],
+        };
+      default:
+        return {
+          title: "Attendus (Élèves)",
+          pills: ["Clair", "Étapes", "Checklist"],
+          lines: baseEleve,
+        };
+    }
+  }
+
+  // audience === "profs"
+  switch (type) {
+    case "evaluation":
+      return {
+        title: "Attendus (Profs • Évaluation)",
+        pills: ["Barème /20", "Critères", "Correction séparée"],
+        lines: [...baseProf, "Barème explicite", "Une consigne = une question"],
+      };
+    case "fiche":
+      return {
+        title: "Attendus (Profs • Fiche / méthode)",
+        pills: ["Étapes", "Exemple", "Erreur fréquente"],
+        lines: [...baseProf, "À retenir + contre-exemple", "Version élève si demandé"],
+      };
+    case "seance":
+      return {
+        title: "Attendus (Profs • Séance)",
+        pills: ["Phases", "Différenciation", "Trace"],
+        lines: [...baseProf, "Différenciation (base/attendu/défi) si pertinent"],
+      };
+    case "sequence":
+      return {
+        title: "Attendus (Profs • Séquence)",
+        pills: ["Progression", "Traces", "Évaluation"],
+        lines: [...baseProf, "Progression séance 1→2→3", "Évaluation(s) / traces"],
+      };
+    case "projet":
+      return {
+        title: "Attendus (Profs • Projet)",
+        pills: ["Livrable", "Grille", "Modalités"],
+        lines: [...baseProf, "Rôles/étapes + exigences de traces"],
+      };
+    default:
+      return {
+        title: "Attendus (Profs)",
+        pills: ["Déroulé", "Critères", "Checklist"],
+        lines: baseProf,
+      };
+  }
+}
+
 export default function OptimiseurClient() {
   const [prompt, setPrompt] = useState("");
 
@@ -102,6 +198,12 @@ export default function OptimiseurClient() {
   // ✅ Audience (chips)
   const [audience, setAudience] = useState<Audience>("profs");
 
+  // ✅ NEW : label dynamique (attendus)
+  const expectations = useMemo(
+    () => getExpectations(promptType, audience),
+    [promptType, audience],
+  );
+
   const scores = useMemo(() => {
     return history
       .map((h) => (typeof h.score === "number" ? h.score : null))
@@ -122,8 +224,8 @@ export default function OptimiseurClient() {
         prompt: p,
         model,
         temperature: 0,
-        // ✅ IMPORTANT : ton API score lit body.meta.type
-        meta: { type: promptType, audience }, // ✅ NEW
+        // ✅ IMPORTANT : ton API score lit body.meta.type + meta.audience
+        meta: { type: promptType, audience },
       }),
     });
 
@@ -144,11 +246,7 @@ export default function OptimiseurClient() {
     return data as ScoreReport;
   };
 
-  const improveOnce = async (
-    p: string,
-    report: ScoreReport,
-    signal?: AbortSignal,
-  ) => {
+  const improveOnce = async (p: string, report: ScoreReport, signal?: AbortSignal) => {
     const res = await fetch("/api/optimiseur/improve", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -158,9 +256,9 @@ export default function OptimiseurClient() {
         scoreReport: report,
         model,
         temperature: formatTemp(temperatureImprove),
-        // ✅ IMPORTANT : ton API improve lit body.type
+        // ✅ IMPORTANT : ton API improve lit body.type + audience
         type: promptType,
-        audience, // ✅ NEW
+        audience,
       }),
     });
 
@@ -282,7 +380,6 @@ export default function OptimiseurClient() {
         }
 
         if (report.score >= targetScore) break;
-
         if (!optimisationOn) break;
         if (ctrl.signal.aborted) break;
 
@@ -376,13 +473,7 @@ export default function OptimiseurClient() {
         {pts.map((p, i) => (
           <g key={i}>
             <circle cx={p.x} cy={p.y} r="3.5" fill="currentColor" opacity="0.9" />
-            <text
-              x={p.x + 6}
-              y={p.y - 6}
-              fontSize="10"
-              fill="currentColor"
-              opacity="0.65"
-            >
+            <text x={p.x + 6} y={p.y - 6} fontSize="10" fill="currentColor" opacity="0.65">
               {p.s.toFixed(1)}
             </text>
           </g>
@@ -404,8 +495,8 @@ export default function OptimiseurClient() {
           </h1>
 
           <p className="text-sm text-slate-700 max-w-2xl">
-            Valeria évalue ton prompt sur 20 (grille v{RUBRIC_VERSION}), repère les points faibles,
-            puis l’améliore étape par étape jusqu’au score cible (ou arrêt manuel). Résultat : un prompt fiable
+            Valeria évalue ton prompt sur 20 (grille v{RUBRIC_VERSION}), repère les points faibles, puis
+            l’améliore étape par étape jusqu’au score cible (ou arrêt manuel). Résultat : un prompt fiable
             et directement exploitable.
           </p>
         </header>
@@ -420,16 +511,10 @@ export default function OptimiseurClient() {
                 <Chip active={promptType === "seance"} onClick={() => setPromptType("seance")}>
                   Séance
                 </Chip>
-                <Chip
-                  active={promptType === "evaluation"}
-                  onClick={() => setPromptType("evaluation")}
-                >
+                <Chip active={promptType === "evaluation"} onClick={() => setPromptType("evaluation")}>
                   Évaluation
                 </Chip>
-                <Chip
-                  active={promptType === "sequence"}
-                  onClick={() => setPromptType("sequence")}
-                >
+                <Chip active={promptType === "sequence"} onClick={() => setPromptType("sequence")}>
                   Séquence
                 </Chip>
                 <Chip active={promptType === "fiche"} onClick={() => setPromptType("fiche")}>
@@ -442,9 +527,7 @@ export default function OptimiseurClient() {
                   Autre
                 </Chip>
               </div>
-              <p className="text-[11px] text-slate-500">
-                Rend le scoring plus juste et évite les dérives.
-              </p>
+              <p className="text-[11px] text-slate-500">Rend le scoring plus juste et évite les dérives.</p>
             </div>
 
             {/* ✅ Audience chips */}
@@ -458,9 +541,7 @@ export default function OptimiseurClient() {
                   🧑‍🎓 Élèves
                 </Chip>
               </div>
-              <p className="text-[11px] text-slate-500">
-                Transmis à l’API (prêt pour adapter la grille selon le public).
-              </p>
+              <p className="text-[11px] text-slate-500">Transmis à l’API (scoring + improve).</p>
             </div>
 
             <div className="space-y-1">
@@ -535,6 +616,38 @@ export default function OptimiseurClient() {
             </div>
           </div>
 
+          {/* ✅ NEW : Label dynamique selon Type + Public */}
+          <div className="rounded-2xl border border-slate-200 bg-slate-50 p-3 sm:p-4">
+            <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
+              <div>
+                <p className="text-xs font-semibold text-slate-800">{expectations.title}</p>
+                <p className="mt-1 text-[11px] text-slate-600">
+                  Ces attendus servent de repères : si ton prompt les contient, tu montes plus facilement vers 19–20.
+                </p>
+              </div>
+
+              <div className="flex flex-wrap gap-2">
+                {expectations.pills.map((x) => (
+                  <span
+                    key={x}
+                    className="inline-flex items-center rounded-full border border-slate-200 bg-white px-2.5 py-1 text-[11px] font-semibold text-slate-800"
+                  >
+                    {x}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            <ul className="mt-3 grid gap-1 sm:grid-cols-2 text-[12px] text-slate-700">
+              {expectations.lines.map((x, i) => (
+                <li key={i} className="flex gap-2">
+                  <span className="mt-[2px] text-slate-400">•</span>
+                  <span>{x}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
           {/* Model + Temperature controls */}
           <div className="grid gap-3 sm:grid-cols-3 pt-2 border-t border-slate-100">
             <div className="space-y-1">
@@ -568,8 +681,7 @@ export default function OptimiseurClient() {
 
             <div className="space-y-1 sm:col-span-2">
               <label className="text-xs font-semibold text-slate-600">
-                Température (Improve) :{" "}
-                <span className="font-bold">{formatTemp(temperatureImprove)}</span>
+                Température (Improve) : <span className="font-bold">{formatTemp(temperatureImprove)}</span>
               </label>
               <input
                 type="range"
@@ -654,9 +766,7 @@ export default function OptimiseurClient() {
             </button>
 
             {loading && (
-              <span className="text-xs text-slate-600">
-                Valeria tourne… (tu peux Stop quand tu veux)
-              </span>
+              <span className="text-xs text-slate-600">Valeria tourne… (tu peux Stop quand tu veux)</span>
             )}
 
             {stopped && !loading && (
@@ -695,12 +805,10 @@ export default function OptimiseurClient() {
               </p>
               <p className="text-[11px] text-slate-500">Cible : {targetScore.toFixed(1)}</p>
               <p className="text-[11px] text-slate-500">
-                Type : <b>{promptType}</b> • Public : <b>{audience}</b> • Modèle :{" "}
-                <b>{model}</b> • Improve temp : <b>{formatTemp(temperatureImprove)}</b>
+                Type : <b>{promptType}</b> • Public : <b>{audience}</b> • Modèle : <b>{model}</b> • Improve temp :{" "}
+                <b>{formatTemp(temperatureImprove)}</b>
               </p>
-              <p className="text-[11px] text-slate-500">
-                Rubrique : v{RUBRIC_VERSION}
-              </p>
+              <p className="text-[11px] text-slate-500">Rubrique : v{RUBRIC_VERSION}</p>
             </div>
 
             <div className="rounded-xl border border-slate-200 bg-slate-50 p-3">
@@ -756,9 +864,7 @@ export default function OptimiseurClient() {
           <h2 className="text-lg font-bold text-[#0047B6]">3) Historique</h2>
 
           {history.length === 0 ? (
-            <p className="text-sm text-slate-600">
-              Aucun run. Clique sur “Scorer” ou “Lancer Valeria”.
-            </p>
+            <p className="text-sm text-slate-600">Aucun run. Clique sur “Scorer” ou “Lancer Valeria”.</p>
           ) : (
             <div className="space-y-2">
               {history
@@ -769,17 +875,10 @@ export default function OptimiseurClient() {
                   <div key={h.iter} className="rounded-xl border border-slate-200 bg-slate-50 p-3">
                     <div className="flex items-center justify-between gap-2">
                       <div>
-                        <p className="text-xs font-semibold text-slate-800">
-                          #{h.iter} — {h.note || "Itération"}
-                        </p>
+                        <p className="text-xs font-semibold text-slate-800">#{h.iter} — {h.note || "Itération"}</p>
                         <p className="text-xs text-slate-700">
-                          Score :{" "}
-                          <b>
-                            {typeof h.score === "number" ? `${h.score.toFixed(1)}/20` : "—"}
-                          </b>{" "}
-                          <span className="text-slate-500">
-                            • Type : {h.type || "—"} • Public : {h.audience || "—"}
-                          </span>
+                          Score : <b>{typeof h.score === "number" ? `${h.score.toFixed(1)}/20` : "—"}</b>{" "}
+                          <span className="text-slate-500">• Type : {h.type || "—"} • Public : {h.audience || "—"}</span>
                         </p>
                       </div>
 
@@ -806,4 +905,3 @@ export default function OptimiseurClient() {
     </main>
   );
 }
-

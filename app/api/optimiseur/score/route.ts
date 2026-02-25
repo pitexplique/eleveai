@@ -61,7 +61,11 @@ function validateScoreResponse(x: any): x is ScoreResponse {
 
   if (!okBreakdown) return false;
 
-  if (!Array.isArray(x.strengths) || !Array.isArray(x.fixes) || !Array.isArray(x.risks)) {
+  if (
+    !Array.isArray(x.strengths) ||
+    !Array.isArray(x.fixes) ||
+    !Array.isArray(x.risks)
+  ) {
     return false;
   }
 
@@ -77,7 +81,11 @@ function pickModel(m: unknown) {
  * ✅ Heuristiques DÉTERMINISTES (fiabilité)
  * + Typé (PromptType) + Audience (profs/eleves)
  */
-function computeDeterministicCaps(prompt: string, type: PromptType, audience: Audience) {
+function computeDeterministicCaps(
+  prompt: string,
+  type: PromptType,
+  audience: Audience,
+) {
   const p = prompt.toLowerCase();
 
   const hasBareme =
@@ -86,10 +94,7 @@ function computeDeterministicCaps(prompt: string, type: PromptType, audience: Au
     /\b\d+\s*points?\b/.test(p);
 
   const hasSeuil =
-    /seuil/.test(p) ||
-    /%/.test(p) ||
-    /à partir de/.test(p) ||
-    /niveau de maîtrise/.test(p);
+    /seuil/.test(p) || /%/.test(p) || /à partir de/.test(p) || /niveau de maîtrise/.test(p);
 
   const hasChecklist =
     /auto-contr[oô]le/.test(p) ||
@@ -136,8 +141,13 @@ function computeDeterministicCaps(prompt: string, type: PromptType, audience: Au
   }
 
   // === Compliance ===
-  if (!hasBOorEduscol) capCompliance = 3.0;
-  if (hasBOorEduscol && !hasPreciseRef) capCompliance = 3.5;
+  // ✅ IMPORTANT : on n’exige pas BO/Eduscol côté "eleves"
+  if (audience === "profs") {
+    if (!hasBOorEduscol) capCompliance = 3.0;
+    if (hasBOorEduscol && !hasPreciseRef) capCompliance = 3.5;
+  } else {
+    capCompliance = 4;
+  }
 
   // === Structure ===
   if (!hasStructuredSections) capStructure = 3.5;

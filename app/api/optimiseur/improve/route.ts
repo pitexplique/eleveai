@@ -1,4 +1,6 @@
 // app/api/optimiseur/improve/route.ts
+// ✅ inchangé (tu avais déjà type + audience + rubric typée + garde-fous)
+
 import { NextResponse } from "next/server";
 import { openai } from "@/lib/openai";
 import {

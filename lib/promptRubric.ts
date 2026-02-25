@@ -35,7 +35,13 @@ export function normalizePromptType(t: unknown): PromptType {
 
 export function normalizeAudience(a: unknown): Audience {
   const s = String(a || "").toLowerCase().trim();
-  if (s === "eleves" || s === "élèves" || s === "eleve" || s === "student" || s === "students")
+  if (
+    s === "eleves" ||
+    s === "élèves" ||
+    s === "eleve" ||
+    s === "student" ||
+    s === "students"
+  )
     return "eleves";
   return "profs";
 }
@@ -118,6 +124,7 @@ EXIGENCES SPÉCIFIQUES (PUBLIC = ÉLÈVES) :
 - Pas de correction détaillée dans la version élève (sauf demande explicite).
 - Rappels utiles (méthode) uniquement si demandés, sinon minimal.
 - Durée/temps de travail réalistes + critères de réussite compréhensibles.
+- AUCUNE exigence de mention BO/Eduscol (réservé au public profs).
 `.trim();
   }
 
@@ -176,7 +183,9 @@ GRILLE (5 critères x /4 = /20)
 1 : mentions partielles
 2 : garde-fous présents mais incomplets
 3 : conformité claire (neutralité, pas de données perso)
-4 : conformité excellente + anti-dérive explicite + référence BO/Eduscol si pertinent
+4 : conformité excellente + anti-dérive explicite.
+    Si PUBLIC = profs et contexte scolaire : BO/Eduscol/compétences/socle si pertinent.
+    Si PUBLIC = eleves : AUCUNE exigence de BO/Eduscol.
 
 4) Structure & format de sortie (/4)
 0 : sortie non cadrée
@@ -210,11 +219,11 @@ CONDITIONS POUR 20/20
 Un score de 20 exige :
 - Le TYPE est respecté sans ambiguïté (structure attendue conforme au type).
 - Le PUBLIC est respecté (élève-ready vs prof-ready).
-- contraintes vérifiables (durée, structure, critères)
-- auto-contrôle explicite
-- aucune contradiction interne
-- BO/Eduscol mentionné si pertinent
-- compétences du socle précisées si contexte scolaire
+- Contraintes vérifiables (durée, structure, critères).
+- Auto-contrôle explicite.
+- Aucune contradiction interne.
+- Si PUBLIC = profs et contexte scolaire : BO/Eduscol (ou compétences/socle) si pertinent.
+- Si PUBLIC = eleves : pas d’exigence BO/Eduscol.
 
 ==================================================
 RÈGLES DE SORTIE
