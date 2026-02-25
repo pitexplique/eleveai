@@ -1,8 +1,5 @@
 // app/optimiseur/OptimiseurClient.tsx
-// ✅ Valeria V2-ready : Type en chips + Audience (Profs/Élèves) en chips
-// ✅ targetScore par défaut = 20
-// ✅ Envoie meta.type + meta.audience à /score, et type + audience à /improve
-// ✅ NEW : affiche un label dynamique (attendus) selon Type + Public
+// ✅ Ajout du bandeau "Gouvernance IA (inspirée ISO/IEC 42001)" dans le header
 
 "use client";
 
@@ -93,7 +90,11 @@ function getExpectations(type: PromptType, audience: Audience) {
         return {
           title: "Attendus (Élèves • Évaluation)",
           pills: ["Consignes claires", "Espaces Réponse ____", "Sans correction"],
-          lines: [...baseEleve, "Espaces “Réponse : ____”", "Barème seulement si demandé"],
+          lines: [
+            ...baseEleve,
+            "Espaces “Réponse : ____”",
+            "Barème seulement si demandé",
+          ],
         };
       case "fiche":
         return {
@@ -111,7 +112,11 @@ function getExpectations(type: PromptType, audience: Audience) {
         return {
           title: "Attendus (Élèves • Séquence)",
           pills: ["Séances", "Objectifs", "Tâches"],
-          lines: [...baseEleve, "Ce que je fais séance 1/2/3", "Trace / production"],
+          lines: [
+            ...baseEleve,
+            "Ce que je fais séance 1/2/3",
+            "Trace / production",
+          ],
         };
       case "projet":
         return {
@@ -146,13 +151,20 @@ function getExpectations(type: PromptType, audience: Audience) {
       return {
         title: "Attendus (Profs • Séance)",
         pills: ["Phases", "Différenciation", "Trace"],
-        lines: [...baseProf, "Différenciation (base/attendu/défi) si pertinent"],
+        lines: [
+          ...baseProf,
+          "Différenciation (base/attendu/défi) si pertinent",
+        ],
       };
     case "sequence":
       return {
         title: "Attendus (Profs • Séquence)",
         pills: ["Progression", "Traces", "Évaluation"],
-        lines: [...baseProf, "Progression séance 1→2→3", "Évaluation(s) / traces"],
+        lines: [
+          ...baseProf,
+          "Progression séance 1→2→3",
+          "Évaluation(s) / traces",
+        ],
       };
     case "projet":
       return {
@@ -198,6 +210,15 @@ export default function OptimiseurClient() {
   // ✅ Audience (chips)
   const [audience, setAudience] = useState<Audience>("profs");
 
+  // ✅ NEW (AIMS) : validation humaine
+  const [validated, setValidated] = useState(false);
+  const [checks, setChecks] = useState({
+    read: false,
+    levelOk: false,
+    safe: false,
+  });
+  const allChecked = checks.read && checks.levelOk && checks.safe;
+
   // ✅ NEW : label dynamique (attendus)
   const expectations = useMemo(
     () => getExpectations(promptType, audience),
@@ -224,7 +245,6 @@ export default function OptimiseurClient() {
         prompt: p,
         model,
         temperature: 0,
-        // ✅ IMPORTANT : ton API score lit body.meta.type + meta.audience
         meta: { type: promptType, audience },
       }),
     });
@@ -246,7 +266,11 @@ export default function OptimiseurClient() {
     return data as ScoreReport;
   };
 
-  const improveOnce = async (p: string, report: ScoreReport, signal?: AbortSignal) => {
+  const improveOnce = async (
+    p: string,
+    report: ScoreReport,
+    signal?: AbortSignal,
+  ) => {
     const res = await fetch("/api/optimiseur/improve", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -256,7 +280,6 @@ export default function OptimiseurClient() {
         scoreReport: report,
         model,
         temperature: formatTemp(temperatureImprove),
-        // ✅ IMPORTANT : ton API improve lit body.type + audience
         type: promptType,
         audience,
       }),
@@ -294,6 +317,10 @@ export default function OptimiseurClient() {
     setHistory([]);
     setCurrentScore(null);
     setCurrentReport(null);
+
+    // ✅ AIMS : reset validation
+    setValidated(false);
+    setChecks({ read: false, levelOk: false, safe: false });
   };
 
   const runScoreOnly = async () => {
@@ -326,6 +353,10 @@ export default function OptimiseurClient() {
           audience,
         },
       ]);
+
+      // ✅ AIMS : toute nouvelle sortie => non validée
+      setValidated(false);
+      setChecks({ read: false, levelOk: false, safe: false });
     } catch (e: any) {
       if (String(e?.name) !== "AbortError") {
         setError(e?.message || "Erreur scoring.");
@@ -405,6 +436,10 @@ export default function OptimiseurClient() {
       }
 
       setPrompt(bestPrompt);
+
+      // ✅ AIMS : nouveau prompt final => revalidation nécessaire
+      setValidated(false);
+      setChecks({ read: false, levelOk: false, safe: false });
     } catch (e: any) {
       if (String(e?.name) !== "AbortError") {
         setError(e?.message || "Erreur optimisation.");
@@ -442,22 +477,8 @@ export default function OptimiseurClient() {
 
     return (
       <svg viewBox={`0 0 ${w} ${h}`} className="w-full h-[160px]">
-        <line
-          x1={pad}
-          y1={h - pad}
-          x2={w - pad}
-          y2={h - pad}
-          stroke="currentColor"
-          opacity="0.15"
-        />
-        <line
-          x1={pad}
-          y1={pad}
-          x2={pad}
-          y2={h - pad}
-          stroke="currentColor"
-          opacity="0.15"
-        />
+        <line x1={pad} y1={h - pad} x2={w - pad} y2={h - pad} stroke="currentColor" opacity="0.15" />
+        <line x1={pad} y1={pad} x2={pad} y2={h - pad} stroke="currentColor" opacity="0.15" />
 
         <line
           x1={pad}
@@ -485,9 +506,22 @@ export default function OptimiseurClient() {
   return (
     <main className="min-h-screen bg-gradient-to-b from-sky-50 via-white to-slate-50 text-slate-900">
       <div className="mx-auto w-full max-w-5xl px-4 py-8 space-y-6">
-        <header className="space-y-2">
-          <p className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-100 text-xs font-semibold text-sky-900">
-            ✨ Valeria — Optimiseur de prompts (notation + améliorations)
+        <header className="space-y-3">
+          <div className="flex flex-wrap items-center gap-2">
+            <p className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-100 text-xs font-semibold text-sky-900">
+              ✨ Valeria — Optimiseur de prompts (notation + améliorations)
+            </p>
+
+            {/* ✅ NEW : Bandeau ISO/AIMS */}
+            <p className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 text-xs font-semibold text-emerald-900 border border-emerald-200">
+              🛡️ Gouvernance IA (inspirée ISO/IEC 42001)
+            </p>
+          </div>
+
+          {/* ✅ NEW : texte ISO/AIMS */}
+          <p className="text-sm text-slate-700 max-w-3xl">
+            <b>Gouvernance IA (inspirée ISO/IEC 42001)</b> — Valeria applique des principes de pilotage d’un système IA :
+            <b> supervision humaine</b>, <b>indicateurs</b>, <b>traçabilité</b> et <b>amélioration continue</b>.
           </p>
 
           <h1 className="text-3xl font-extrabold text-[#0047B6]">
@@ -495,51 +529,34 @@ export default function OptimiseurClient() {
           </h1>
 
           <p className="text-sm text-slate-700 max-w-2xl">
-            Valeria évalue ton prompt sur 20 (grille v{RUBRIC_VERSION}), repère les points faibles, puis
-            l’améliore étape par étape jusqu’au score cible (ou arrêt manuel). Résultat : un prompt fiable
-            et directement exploitable.
+            Valeria évalue ton prompt sur 20 (grille v{RUBRIC_VERSION}), repère les points faibles, puis l’améliore étape
+            par étape jusqu’au score cible (ou arrêt manuel). Résultat : un prompt fiable et directement exploitable.
           </p>
         </header>
 
         {/* PARAMS */}
         <section className="bg-white border border-slate-200 rounded-2xl shadow-sm p-4 sm:p-5 space-y-4">
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-            {/* ✅ Type chips */}
+            {/* Type chips */}
             <div className="space-y-2">
               <label className="text-xs font-semibold text-slate-600">Type de ressource</label>
               <div className="flex flex-wrap gap-2">
-                <Chip active={promptType === "seance"} onClick={() => setPromptType("seance")}>
-                  Séance
-                </Chip>
-                <Chip active={promptType === "evaluation"} onClick={() => setPromptType("evaluation")}>
-                  Évaluation
-                </Chip>
-                <Chip active={promptType === "sequence"} onClick={() => setPromptType("sequence")}>
-                  Séquence
-                </Chip>
-                <Chip active={promptType === "fiche"} onClick={() => setPromptType("fiche")}>
-                  Fiche / méthode
-                </Chip>
-                <Chip active={promptType === "projet"} onClick={() => setPromptType("projet")}>
-                  Projet
-                </Chip>
-                <Chip active={promptType === "autre"} onClick={() => setPromptType("autre")}>
-                  Autre
-                </Chip>
+                <Chip active={promptType === "seance"} onClick={() => setPromptType("seance")}>Séance</Chip>
+                <Chip active={promptType === "evaluation"} onClick={() => setPromptType("evaluation")}>Évaluation</Chip>
+                <Chip active={promptType === "sequence"} onClick={() => setPromptType("sequence")}>Séquence</Chip>
+                <Chip active={promptType === "fiche"} onClick={() => setPromptType("fiche")}>Fiche / méthode</Chip>
+                <Chip active={promptType === "projet"} onClick={() => setPromptType("projet")}>Projet</Chip>
+                <Chip active={promptType === "autre"} onClick={() => setPromptType("autre")}>Autre</Chip>
               </div>
               <p className="text-[11px] text-slate-500">Rend le scoring plus juste et évite les dérives.</p>
             </div>
 
-            {/* ✅ Audience chips */}
+            {/* Audience chips */}
             <div className="space-y-2">
               <label className="text-xs font-semibold text-slate-600">Public</label>
               <div className="flex flex-wrap gap-2">
-                <Chip active={audience === "profs"} onClick={() => setAudience("profs")}>
-                  👩‍🏫 Profs
-                </Chip>
-                <Chip active={audience === "eleves"} onClick={() => setAudience("eleves")}>
-                  🧑‍🎓 Élèves
-                </Chip>
+                <Chip active={audience === "profs"} onClick={() => setAudience("profs")}>👩‍🏫 Profs</Chip>
+                <Chip active={audience === "eleves"} onClick={() => setAudience("eleves")}>🧑‍🎓 Élèves</Chip>
               </div>
               <p className="text-[11px] text-slate-500">Transmis à l’API (scoring + improve).</p>
             </div>
@@ -550,9 +567,7 @@ export default function OptimiseurClient() {
                 type="number"
                 step="0.5"
                 value={targetScore}
-                onChange={(e) =>
-                  setTargetScore(clamp(Number(e.target.value || DEFAULT_TARGET_SCORE), 0, 20))
-                }
+                onChange={(e) => setTargetScore(clamp(Number(e.target.value || DEFAULT_TARGET_SCORE), 0, 20))}
                 className="w-full border rounded-lg px-3 py-2 text-sm"
               />
               <p className="text-[11px] text-slate-500">Recommandé : 19.5 (mais 20 possible)</p>
@@ -565,9 +580,7 @@ export default function OptimiseurClient() {
                 min={1}
                 max={12}
                 value={maxIters}
-                onChange={(e) =>
-                  setMaxIters(clamp(Number(e.target.value || DEFAULT_MAX_ITERS), 1, 12))
-                }
+                onChange={(e) => setMaxIters(clamp(Number(e.target.value || DEFAULT_MAX_ITERS), 1, 12))}
                 className="w-full border rounded-lg px-3 py-2 text-sm"
               />
               <p className="text-[11px] text-slate-500">V1 stable : 6</p>
@@ -575,7 +588,6 @@ export default function OptimiseurClient() {
 
             <div className="space-y-2 lg:col-span-2">
               <label className="text-xs font-semibold text-slate-600">Options</label>
-
               <div className="flex flex-wrap gap-2">
                 <button
                   type="button"
@@ -593,9 +605,7 @@ export default function OptimiseurClient() {
                   type="button"
                   onClick={() => setShowCurve((v) => !v)}
                   className={`px-3 py-2 rounded-lg text-xs font-semibold border ${
-                    showCurve
-                      ? "bg-sky-50 border-sky-200 text-sky-900"
-                      : "bg-slate-50 border-slate-200 text-slate-700"
+                    showCurve ? "bg-sky-50 border-sky-200 text-sky-900" : "bg-slate-50 border-slate-200 text-slate-700"
                   }`}
                 >
                   {showCurve ? "📈 Courbe ON" : "📉 Courbe OFF"}
@@ -616,7 +626,7 @@ export default function OptimiseurClient() {
             </div>
           </div>
 
-          {/* ✅ NEW : Label dynamique selon Type + Public */}
+          {/* Label dynamique */}
           <div className="rounded-2xl border border-slate-200 bg-slate-50 p-3 sm:p-4">
             <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
               <div>
@@ -757,9 +767,7 @@ export default function OptimiseurClient() {
               onClick={stop}
               disabled={!loading}
               className={`px-4 py-2 rounded-lg text-sm font-semibold ${
-                !loading
-                  ? "bg-slate-100 text-slate-400"
-                  : "bg-amber-100 text-amber-900 hover:bg-amber-200"
+                !loading ? "bg-slate-100 text-slate-400" : "bg-amber-100 text-amber-900 hover:bg-amber-200"
               }`}
             >
               ⏹ Stop
@@ -781,10 +789,79 @@ export default function OptimiseurClient() {
           )}
         </section>
 
-        {/* SCORE LIVE */}
+        {/* VALIDATION HUMAINE */}
         <section className="bg-white border border-slate-200 rounded-2xl shadow-sm p-4 sm:p-5 space-y-3">
           <div className="flex items-center justify-between">
-            <h2 className="text-lg font-bold text-[#0047B6]">2) Score en temps réel</h2>
+            <h2 className="text-lg font-bold text-[#0047B6]">2) Validation humaine (obligatoire)</h2>
+
+            <span
+              className={`text-xs font-semibold px-2 py-1 rounded-full border ${
+                validated
+                  ? "bg-emerald-50 text-emerald-900 border-emerald-200"
+                  : "bg-amber-50 text-amber-900 border-amber-200"
+              }`}
+            >
+              {validated ? "✅ Validé" : "⚠️ Non validé"}
+            </span>
+          </div>
+
+          <p className="text-sm text-slate-700">
+            Le score est un indicateur. La diffusion d’une ressource nécessite une relecture humaine.
+          </p>
+
+          <div className="grid gap-2 sm:grid-cols-3">
+            <label className="flex items-start gap-2 text-sm">
+              <input
+                type="checkbox"
+                checked={checks.read}
+                onChange={(e) => setChecks((c) => ({ ...c, read: e.target.checked }))}
+              />
+              <span>J’ai relu la ressource / le prompt final.</span>
+            </label>
+
+            <label className="flex items-start gap-2 text-sm">
+              <input
+                type="checkbox"
+                checked={checks.levelOk}
+                onChange={(e) => setChecks((c) => ({ ...c, levelOk: e.target.checked }))}
+              />
+              <span>Niveau adapté ({audience}).</span>
+            </label>
+
+            <label className="flex items-start gap-2 text-sm">
+              <input
+                type="checkbox"
+                checked={checks.safe}
+                onChange={(e) => setChecks((c) => ({ ...c, safe: e.target.checked }))}
+              />
+              <span>Pas d’erreur / pas de contenu inapproprié.</span>
+            </label>
+          </div>
+
+          <div className="flex flex-wrap items-center gap-2">
+            <button
+              type="button"
+              disabled={!allChecked}
+              onClick={() => setValidated(true)}
+              className={`px-4 py-2 rounded-lg text-sm font-semibold ${
+                allChecked ? "bg-emerald-600 text-white hover:bg-emerald-700" : "bg-slate-100 text-slate-400"
+              }`}
+            >
+              ✅ Marquer comme validé
+            </button>
+
+            {!validated && (
+              <span className="text-xs text-slate-600">
+                Astuce : le compteur plaît, mais c’est la relecture qui protège et garantit la qualité.
+              </span>
+            )}
+          </div>
+        </section>
+
+        {/* SCORE */}
+        <section className="bg-white border border-slate-200 rounded-2xl shadow-sm p-4 sm:p-5 space-y-3">
+          <div className="flex items-center justify-between">
+            <h2 className="text-lg font-bold text-[#0047B6]">3) Indicateurs (aide à la décision)</h2>
             <div className="text-xs text-slate-600">
               {best !== null ? (
                 <span>
@@ -804,7 +881,14 @@ export default function OptimiseurClient() {
                 <span className="text-base font-semibold text-slate-600"> /20</span>
               </p>
               <p className="text-[11px] text-slate-500">Cible : {targetScore.toFixed(1)}</p>
-              <p className="text-[11px] text-slate-500">
+
+              {!validated && (
+                <p className="mt-2 text-[11px] font-semibold text-amber-700">
+                  ⚠️ Non validé : ne pas diffuser sans relecture.
+                </p>
+              )}
+
+              <p className="mt-2 text-[11px] text-slate-500">
                 Type : <b>{promptType}</b> • Public : <b>{audience}</b> • Modèle : <b>{model}</b> • Improve temp :{" "}
                 <b>{formatTemp(temperatureImprove)}</b>
               </p>
@@ -815,21 +899,11 @@ export default function OptimiseurClient() {
               <p className="text-xs text-slate-600">Breakdown</p>
               {currentReport ? (
                 <ul className="mt-2 text-[12px] text-slate-800 space-y-1">
-                  <li>
-                    Clarté : <b>{currentReport.breakdown.clarity}/4</b>
-                  </li>
-                  <li>
-                    Contexte : <b>{currentReport.breakdown.context}/4</b>
-                  </li>
-                  <li>
-                    Conformité : <b>{currentReport.breakdown.compliance}/4</b>
-                  </li>
-                  <li>
-                    Structure : <b>{currentReport.breakdown.structure}/4</b>
-                  </li>
-                  <li>
-                    Robustesse : <b>{currentReport.breakdown.robustness}/4</b>
-                  </li>
+                  <li>Clarté : <b>{currentReport.breakdown.clarity}/4</b></li>
+                  <li>Contexte : <b>{currentReport.breakdown.context}/4</b></li>
+                  <li>Conformité : <b>{currentReport.breakdown.compliance}/4</b></li>
+                  <li>Structure : <b>{currentReport.breakdown.structure}/4</b></li>
+                  <li>Robustesse : <b>{currentReport.breakdown.robustness}/4</b></li>
                 </ul>
               ) : (
                 <p className="mt-2 text-[12px] text-slate-500">Lance un scoring.</p>
@@ -861,7 +935,7 @@ export default function OptimiseurClient() {
 
         {/* HISTORIQUE */}
         <section className="bg-white border border-slate-200 rounded-2xl shadow-sm p-4 sm:p-5 space-y-3">
-          <h2 className="text-lg font-bold text-[#0047B6]">3) Historique</h2>
+          <h2 className="text-lg font-bold text-[#0047B6]">4) Historique</h2>
 
           {history.length === 0 ? (
             <p className="text-sm text-slate-600">Aucun run. Clique sur “Scorer” ou “Lancer Valeria”.</p>
@@ -875,10 +949,14 @@ export default function OptimiseurClient() {
                   <div key={h.iter} className="rounded-xl border border-slate-200 bg-slate-50 p-3">
                     <div className="flex items-center justify-between gap-2">
                       <div>
-                        <p className="text-xs font-semibold text-slate-800">#{h.iter} — {h.note || "Itération"}</p>
+                        <p className="text-xs font-semibold text-slate-800">
+                          #{h.iter} — {h.note || "Itération"}
+                        </p>
                         <p className="text-xs text-slate-700">
                           Score : <b>{typeof h.score === "number" ? `${h.score.toFixed(1)}/20` : "—"}</b>{" "}
-                          <span className="text-slate-500">• Type : {h.type || "—"} • Public : {h.audience || "—"}</span>
+                          <span className="text-slate-500">
+                            • Type : {h.type || "—"} • Public : {h.audience || "—"}
+                          </span>
                         </p>
                       </div>
 
