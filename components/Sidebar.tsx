@@ -172,9 +172,9 @@ export default function Sidebar({
       {
         kind: "link",
         href: "/optimiseur",
-        label: "Valeria – Optimiseur IA (/20)",
+        label: "Valeria ",
         // ✅ mieux : “inspirée ISO / AIMS” (pas “ISO” tout court)
-        description: "Optimisation mesurable de prompts • AIMS-ready (inspirée ISO/IEC 42001)",
+        description: "Optimisation mesurable de prompts ",
         icon: <BadgeCheck className="h-4 w-4 text-yellow-400" />,
       },
 

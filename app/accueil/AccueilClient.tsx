@@ -128,7 +128,7 @@ export default function AccueilPage() {
             </h1>
 
             <h2 className="mt-4 text-lg sm:text-xl font-semibold text-blue-600">
-              IA encadrée • Baisse Co2 - Optimisation de la pensée
+              IA encadrée 
             </h2>
 
             <p className="mt-5 text-sm sm:text-base text-slate-700 leading-relaxed">
