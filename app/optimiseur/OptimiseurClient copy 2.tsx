@@ -2,12 +2,6 @@
 // ✅ Version PUBLIQUE (élèves + profs)
 // - Retire le bandeau ISO/AIMS + la section "Validation humaine"
 // - Garde : chips Type + Public, scoring, optimisation, courbe, historique, label "attendus"
-// ✅ + OPTION 1 : Drawer “pitexplique Premium — passer à 20/20” (coach en 1–3 questions)
-// ✅ FIX BUG: Premium reprend parfois l'ancien prompt -> utilisation de refs "always-latest"
-//    - promptRef : dernier texte instantané
-//    - reportRef/scoreRef : dernier scoring instantané
-//    - startPremium() lit les refs
-//    - applyPremium() met à jour state + ref
 
 "use client";
 
@@ -45,15 +39,6 @@ type Iteration = {
   type?: PromptType;
   audience?: Audience;
 };
-
-// ✅ Premium types (Option 1)
-type PremiumQuestion = { id: string; gap: string; question: string };
-type PremiumResult = {
-  improvedPrompt: string;
-  changes: string[];
-  estimatedScoreAfter?: number;
-};
-type PremiumMsg = { role: "pit" | "user"; text: string };
 
 function clamp(n: number, a: number, b: number) {
   return Math.max(a, Math.min(b, n));
@@ -168,13 +153,20 @@ function getExpectations(type: PromptType, audience: Audience) {
       return {
         title: "Attendus (Profs • Séance)",
         pills: ["Phases", "Différenciation", "Trace"],
-        lines: [...baseProf, "Différenciation (base/attendu/défi) si pertinent"],
+        lines: [
+          ...baseProf,
+          "Différenciation (base/attendu/défi) si pertinent",
+        ],
       };
     case "sequence":
       return {
         title: "Attendus (Profs • Séquence)",
         pills: ["Progression", "Traces", "Évaluation"],
-        lines: [...baseProf, "Progression séance 1→2→3", "Évaluation(s) / traces"],
+        lines: [
+          ...baseProf,
+          "Progression séance 1→2→3",
+          "Évaluation(s) / traces",
+        ],
       };
     case "projet":
       return {
@@ -193,11 +185,6 @@ function getExpectations(type: PromptType, audience: Audience) {
 
 export default function OptimiseurClient() {
   const [prompt, setPrompt] = useState("");
-
-  // ✅ always-latest refs (FIX timing)
-  const promptRef = useRef<string>("");
-  const reportRef = useRef<ScoreReport | null>(null);
-  const scoreRef = useRef<number | null>(null);
 
   // ✅ MODIF : vise 20 par défaut (sinon remets DEFAULT_TARGET_SCORE)
   const [targetScore, setTargetScore] = useState<number>(20);
@@ -230,23 +217,6 @@ export default function OptimiseurClient() {
     () => getExpectations(promptType, audience),
     [promptType, audience],
   );
-
-  // ✅ PREMIUM state (Option 1)
-  const [premiumOpen, setPremiumOpen] = useState(false);
-  const [premiumLoading, setPremiumLoading] = useState(false);
-  const [premiumError, setPremiumError] = useState<string>("");
-
-  const [premiumSessionId, setPremiumSessionId] = useState<string | null>(null);
-  const [premiumStep, setPremiumStep] = useState(0);
-  const [premiumTotal, setPremiumTotal] = useState(0);
-
-  const [premiumQuestion, setPremiumQuestion] = useState<PremiumQuestion | null>(
-    null,
-  );
-  const [premiumDraft, setPremiumDraft] = useState("");
-  const [premiumChat, setPremiumChat] = useState<PremiumMsg[]>([]);
-  const [premiumDone, setPremiumDone] = useState(false);
-  const [premiumResult, setPremiumResult] = useState<PremiumResult | null>(null);
 
   const scores = useMemo(() => {
     return history
@@ -340,25 +310,10 @@ export default function OptimiseurClient() {
     setHistory([]);
     setCurrentScore(null);
     setCurrentReport(null);
-    reportRef.current = null;
-    scoreRef.current = null;
-
-    // ✅ reset premium too
-    setPremiumOpen(false);
-    setPremiumLoading(false);
-    setPremiumError("");
-    setPremiumSessionId(null);
-    setPremiumStep(0);
-    setPremiumTotal(0);
-    setPremiumQuestion(null);
-    setPremiumDraft("");
-    setPremiumChat([]);
-    setPremiumDone(false);
-    setPremiumResult(null);
   };
 
   const runScoreOnly = async () => {
-    const p = (promptRef.current || prompt || "").trim();
+    const p = prompt.trim();
     if (!p) {
       setError("Colle un prompt avant de scorer.");
       return;
@@ -374,8 +329,6 @@ export default function OptimiseurClient() {
       const report = await scoreOnce(p, abortRef.current.signal);
       setCurrentReport(report);
       setCurrentScore(report.score);
-      reportRef.current = report;
-      scoreRef.current = report.score;
 
       setHistory((h) => [
         ...h,
@@ -399,7 +352,7 @@ export default function OptimiseurClient() {
   };
 
   const runOptimisation = async () => {
-    const initial = (promptRef.current || prompt || "").trim();
+    const initial = prompt.trim();
     if (!initial) {
       setError("Colle un prompt avant de lancer Valeria.");
       return;
@@ -423,8 +376,6 @@ export default function OptimiseurClient() {
         const report = await scoreOnce(p, ctrl.signal);
         setCurrentReport(report);
         setCurrentScore(report.score);
-        reportRef.current = report;
-        scoreRef.current = report.score;
 
         setHistory((h) => [
           ...h,
@@ -470,7 +421,6 @@ export default function OptimiseurClient() {
       }
 
       setPrompt(bestPrompt);
-      promptRef.current = bestPrompt; // ✅ sync ref
     } catch (e: any) {
       if (String(e?.name) !== "AbortError") {
         setError(e?.message || "Erreur optimisation.");
@@ -484,173 +434,6 @@ export default function OptimiseurClient() {
     try {
       await navigator.clipboard.writeText(txt);
     } catch {}
-  };
-
-  // ✅ PREMIUM handlers (Option 1) — FIX: use refs to avoid stale prompt/report
-  const startPremium = async () => {
-    if (premiumLoading) return;
-
-    const latestPrompt = (promptRef.current || prompt || "").trim();
-    const latestReport = reportRef.current || currentReport;
-    const latestScore = scoreRef.current ?? currentScore;
-
-    if (!latestReport || latestScore === null) {
-      setPremiumError("Scorer d’abord.");
-      setPremiumOpen(true);
-      return;
-    }
-    if (!latestPrompt) {
-      setPremiumError("Colle un prompt d’abord.");
-      setPremiumOpen(true);
-      return;
-    }
-    if (latestScore >= 20) {
-      setPremiumError("");
-      setPremiumChat([{ role: "pit", text: "Tu es déjà à 20/20 ✅" }]);
-      setPremiumDone(true);
-      setPremiumOpen(true);
-      return;
-    }
-
-    setPremiumError("");
-    setPremiumLoading(true);
-    setPremiumResult(null);
-    setPremiumDone(false);
-    setPremiumChat([]);
-    setPremiumDraft("");
-    setPremiumSessionId(null);
-    setPremiumStep(0);
-    setPremiumTotal(0);
-    setPremiumQuestion(null);
-
-    try {
-      const res = await fetch("/api/optimiseur/premium/start", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          prompt: latestPrompt, // ✅ FIX
-          scoreReport: latestReport, // ✅ FIX
-          model,
-          type: promptType,
-          audience,
-        }),
-      });
-
-      const data = await res.json().catch(() => null);
-      if (!res.ok) throw new Error(data?.error || "Erreur premium start.");
-
-      if (data?.alreadyPerfect) {
-        setPremiumOpen(true);
-        setPremiumChat([{ role: "pit", text: "Tu es déjà à 20/20 ✅" }]);
-        setPremiumDone(true);
-        setPremiumLoading(false);
-        return;
-      }
-
-      setPremiumSessionId(data.sessionId);
-      setPremiumStep(data.step);
-      setPremiumTotal(data.totalSteps);
-      setPremiumQuestion(data.question);
-
-      setPremiumChat([
-        { role: "pit", text: `On vise 20/20. Question ${data.step}/${data.totalSteps} :` },
-        { role: "pit", text: data.question?.question || "—" },
-      ]);
-
-      setPremiumOpen(true);
-    } catch (e: any) {
-      setPremiumError(e?.message || "Erreur premium.");
-      setPremiumOpen(true);
-    } finally {
-      setPremiumLoading(false);
-    }
-  };
-
-  const sendPremiumAnswer = async () => {
-    if (!premiumSessionId || !premiumQuestion) return;
-    const a = premiumDraft.trim();
-    if (!a) return;
-
-    setPremiumError("");
-    setPremiumLoading(true);
-
-    try {
-      setPremiumChat((c) => [...c, { role: "user", text: a }]);
-      setPremiumDraft("");
-
-      const res = await fetch("/api/optimiseur/premium/answer", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          sessionId: premiumSessionId,
-          questionId: premiumQuestion.id,
-          answer: a,
-        }),
-      });
-
-      const data = await res.json().catch(() => null);
-      if (!res.ok) throw new Error(data?.error || "Erreur premium answer.");
-
-      if (data?.done) {
-        setPremiumDone(true);
-        setPremiumChat((c) => [
-          ...c,
-          { role: "pit", text: "Parfait. Je génère ta version 20/20…" },
-        ]);
-
-        const res2 = await fetch("/api/optimiseur/premium/complete", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ sessionId: premiumSessionId }),
-        });
-
-        const out = await res2.json().catch(() => null);
-        if (!res2.ok) throw new Error(out?.error || "Erreur premium complete.");
-
-        const improvedPrompt = String(out?.improvedPrompt || "").trim();
-        setPremiumResult({
-          improvedPrompt,
-          changes: Array.isArray(out?.changes) ? out.changes.map(String) : [],
-          estimatedScoreAfter: Number(out?.estimatedScoreAfter ?? 20),
-        });
-
-        setPremiumChat((c) => [
-          ...c,
-          { role: "pit", text: "✅ Version prête. Tu peux l’appliquer ou la copier." },
-        ]);
-
-        return;
-      }
-
-      // next question
-      setPremiumStep(data.step);
-      setPremiumTotal(data.totalSteps);
-      setPremiumQuestion(data.question);
-
-      setPremiumChat((c) => [
-        ...c,
-        { role: "pit", text: `Question ${data.step}/${data.totalSteps} :` },
-        { role: "pit", text: data.question?.question || "—" },
-      ]);
-    } catch (e: any) {
-      setPremiumError(e?.message || "Erreur premium.");
-    } finally {
-      setPremiumLoading(false);
-    }
-  };
-
-  const applyPremium = () => {
-    const next = String(premiumResult?.improvedPrompt || "").trim();
-    if (!next) return;
-
-    setPrompt(next);
-    promptRef.current = next; // ✅ FIX
-    setPremiumOpen(false);
-
-    // ✅ optionnel: rescoring automatique après apply
-    setTimeout(() => {
-      runScoreOnly().catch(() => {});
-    }, 0);
   };
 
   const curveSvg = useMemo(() => {
@@ -721,11 +504,6 @@ export default function OptimiseurClient() {
     );
   }, [scores, showCurve, targetScore]);
 
-  const premiumQCount = useMemo(() => {
-    if (currentScore === null) return 3;
-    return clamp(Math.ceil(20 - currentScore), 1, 3);
-  }, [currentScore]);
-
   return (
     <main className="min-h-screen bg-gradient-to-b from-sky-50 via-white to-slate-50 text-slate-900">
       <div className="mx-auto w-full max-w-5xl px-4 py-8 space-y-6">
@@ -741,9 +519,8 @@ export default function OptimiseurClient() {
           </h1>
 
           <p className="text-sm text-slate-700 max-w-2xl">
-            Valeria évalue ton prompt sur 20 (grille v{RUBRIC_VERSION}), repère les points
-            faibles, puis l’améliore étape par étape jusqu’au score cible (ou arrêt manuel).
-            Résultat : un prompt fiable et directement exploitable.
+            Valeria évalue ton prompt sur 20 (grille v{RUBRIC_VERSION}), repère les points faibles, puis l’améliore étape
+            par étape jusqu’au score cible (ou arrêt manuel). Résultat : un prompt fiable et directement exploitable.
           </p>
         </header>
 
@@ -757,10 +534,7 @@ export default function OptimiseurClient() {
                 <Chip active={promptType === "seance"} onClick={() => setPromptType("seance")}>
                   Séance
                 </Chip>
-                <Chip
-                  active={promptType === "evaluation"}
-                  onClick={() => setPromptType("evaluation")}
-                >
+                <Chip active={promptType === "evaluation"} onClick={() => setPromptType("evaluation")}>
                   Évaluation
                 </Chip>
                 <Chip active={promptType === "sequence"} onClick={() => setPromptType("sequence")}>
@@ -776,9 +550,7 @@ export default function OptimiseurClient() {
                   Autre
                 </Chip>
               </div>
-              <p className="text-[11px] text-slate-500">
-                Rend le scoring plus juste et évite les dérives.
-              </p>
+              <p className="text-[11px] text-slate-500">Rend le scoring plus juste et évite les dérives.</p>
             </div>
 
             {/* Audience chips */}
@@ -816,9 +588,7 @@ export default function OptimiseurClient() {
                 min={1}
                 max={12}
                 value={maxIters}
-                onChange={(e) =>
-                  setMaxIters(clamp(Number(e.target.value || DEFAULT_MAX_ITERS), 1, 12))
-                }
+                onChange={(e) => setMaxIters(clamp(Number(e.target.value || DEFAULT_MAX_ITERS), 1, 12))}
                 className="w-full border rounded-lg px-3 py-2 text-sm"
               />
               <p className="text-[11px] text-slate-500">V1 stable : 6</p>
@@ -931,7 +701,8 @@ export default function OptimiseurClient() {
 
             <div className="space-y-1 sm:col-span-2">
               <label className="text-xs font-semibold text-slate-600">
-                Température (Improve) : <span className="font-bold">{formatTemp(temperatureImprove)}</span>
+                Température (Improve) :{" "}
+                <span className="font-bold">{formatTemp(temperatureImprove)}</span>
               </label>
               <input
                 type="range"
@@ -956,10 +727,10 @@ export default function OptimiseurClient() {
             <h2 className="text-lg font-bold text-[#0047B6]">1) Prompt</h2>
             <button
               type="button"
-              onClick={() => copy((promptRef.current || prompt || "").trim())}
-              disabled={!((promptRef.current || prompt || "").trim())}
+              onClick={() => copy(prompt)}
+              disabled={!prompt.trim()}
               className={`px-3 py-2 rounded-lg text-xs font-semibold border ${
-                ((promptRef.current || prompt || "").trim())
+                prompt.trim()
                   ? "bg-slate-900 text-white border-slate-900"
                   : "bg-slate-100 text-slate-400 border-slate-200"
               }`}
@@ -970,11 +741,7 @@ export default function OptimiseurClient() {
 
           <textarea
             value={prompt}
-            onChange={(e) => {
-              const v = e.target.value;
-              setPrompt(v);
-              promptRef.current = v; // ✅ always latest
-            }}
+            onChange={(e) => setPrompt(e.target.value)}
             placeholder="Colle ici ton prompt à optimiser…"
             className="w-full min-h-[220px] border rounded-xl px-3 py-2 text-[12px] font-mono bg-slate-50"
           />
@@ -983,9 +750,9 @@ export default function OptimiseurClient() {
             <button
               type="button"
               onClick={runScoreOnly}
-              disabled={loading || !((promptRef.current || prompt || "").trim())}
+              disabled={loading || !prompt.trim()}
               className={`px-4 py-2 rounded-lg text-sm font-semibold ${
-                loading || !((promptRef.current || prompt || "").trim())
+                loading || !prompt.trim()
                   ? "bg-slate-100 text-slate-400"
                   : "bg-white border border-slate-300 hover:bg-slate-50"
               }`}
@@ -996,9 +763,9 @@ export default function OptimiseurClient() {
             <button
               type="button"
               onClick={runOptimisation}
-              disabled={loading || !((promptRef.current || prompt || "").trim())}
+              disabled={loading || !prompt.trim()}
               className={`px-4 py-2 rounded-lg text-sm font-semibold ${
-                loading || !((promptRef.current || prompt || "").trim())
+                loading || !prompt.trim()
                   ? "bg-sky-100 text-sky-500"
                   : "bg-[#0047B6] text-white hover:bg-[#003894]"
               }`}
@@ -1020,11 +787,15 @@ export default function OptimiseurClient() {
             </button>
 
             {loading && (
-              <span className="text-xs text-slate-600">Valeria tourne… (tu peux Stop quand tu veux)</span>
+              <span className="text-xs text-slate-600">
+                Valeria tourne… (tu peux Stop quand tu veux)
+              </span>
             )}
 
             {stopped && !loading && (
-              <span className="text-xs font-semibold text-amber-700">⏸ Arrêt demandé.</span>
+              <span className="text-xs font-semibold text-amber-700">
+                ⏸ Arrêt demandé.
+              </span>
             )}
           </div>
 
@@ -1038,7 +809,9 @@ export default function OptimiseurClient() {
         {/* SCORE */}
         <section className="bg-white border border-slate-200 rounded-2xl shadow-sm p-4 sm:p-5 space-y-3">
           <div className="flex items-center justify-between">
-            <h2 className="text-lg font-bold text-[#0047B6]">2) Indicateurs (aide à la décision)</h2>
+            <h2 className="text-lg font-bold text-[#0047B6]">
+              2) Indicateurs (aide à la décision)
+            </h2>
             <div className="text-xs text-slate-600">
               {best !== null ? (
                 <span>
@@ -1060,37 +833,10 @@ export default function OptimiseurClient() {
               <p className="text-[11px] text-slate-500">Cible : {targetScore.toFixed(1)}</p>
 
               <p className="mt-2 text-[11px] text-slate-500">
-                Type : <b>{promptType}</b> • Public : <b>{audience}</b> • Modèle : <b>{model}</b> • Improve temp :{" "}
-                <b>{formatTemp(temperatureImprove)}</b>
+                Type : <b>{promptType}</b> • Public : <b>{audience}</b> • Modèle :{" "}
+                <b>{model}</b> • Improve temp : <b>{formatTemp(temperatureImprove)}</b>
               </p>
               <p className="text-[11px] text-slate-500">Rubrique : v{RUBRIC_VERSION}</p>
-
-              {/* ✅ Premium button (Option 1) */}
-              <button
-                type="button"
-                onClick={startPremium}
-                disabled={
-                  premiumLoading ||
-                  loading ||
-                  !((promptRef.current || prompt || "").trim()) ||
-                  currentScore === null ||
-                  currentReport === null ||
-                  currentScore >= 20
-                }
-                className={[
-                  "mt-3 w-full px-3 py-2 rounded-lg text-xs font-bold border transition",
-                  premiumLoading ||
-                  loading ||
-                  !currentReport ||
-                  currentScore === null ||
-                  currentScore >= 20
-                    ? "bg-slate-100 text-slate-400 border-slate-200"
-                    : "bg-purple-600 text-white border-purple-700 hover:bg-purple-700",
-                ].join(" ")}
-              >
-                🟣 pitexplique Premium — passer à 20/20
-              </button>
-              <p className="mt-1 text-[11px] text-slate-500">Coaching : {premiumQCount} question(s).</p>
             </div>
 
             <div className="rounded-xl border border-slate-200 bg-slate-50 p-3">
@@ -1134,9 +880,13 @@ export default function OptimiseurClient() {
 
           {curveSvg && (
             <div className="rounded-xl border border-slate-200 bg-white p-3">
-              <p className="text-xs font-semibold text-slate-700 mb-2">📈 Courbe de convergence</p>
+              <p className="text-xs font-semibold text-slate-700 mb-2">
+                📈 Courbe de convergence
+              </p>
               <div className="text-slate-900">{curveSvg}</div>
-              <p className="mt-2 text-[11px] text-slate-500">Ligne pointillée = score cible.</p>
+              <p className="mt-2 text-[11px] text-slate-500">
+                Ligne pointillée = score cible.
+              </p>
             </div>
           )}
         </section>
@@ -1146,7 +896,9 @@ export default function OptimiseurClient() {
           <h2 className="text-lg font-bold text-[#0047B6]">3) Historique</h2>
 
           {history.length === 0 ? (
-            <p className="text-sm text-slate-600">Aucun run. Clique sur “Scorer” ou “Lancer Valeria”.</p>
+            <p className="text-sm text-slate-600">
+              Aucun run. Clique sur “Scorer” ou “Lancer Valeria”.
+            </p>
           ) : (
             <div className="space-y-2">
               {history
@@ -1154,13 +906,22 @@ export default function OptimiseurClient() {
                 .reverse()
                 .slice(0, 10)
                 .map((h) => (
-                  <div key={h.iter} className="rounded-xl border border-slate-200 bg-slate-50 p-3">
+                  <div
+                    key={h.iter}
+                    className="rounded-xl border border-slate-200 bg-slate-50 p-3"
+                  >
                     <div className="flex items-center justify-between gap-2">
                       <div>
-                        <p className="text-xs font-semibold text-slate-800">#{h.iter} — {h.note || "Itération"}</p>
+                        <p className="text-xs font-semibold text-slate-800">
+                          #{h.iter} — {h.note || "Itération"}
+                        </p>
                         <p className="text-xs text-slate-700">
                           Score :{" "}
-                          <b>{typeof h.score === "number" ? `${h.score.toFixed(1)}/20` : "—"}</b>{" "}
+                          <b>
+                            {typeof h.score === "number"
+                              ? `${h.score.toFixed(1)}/20`
+                              : "—"}
+                          </b>{" "}
                           <span className="text-slate-500">
                             • Type : {h.type || "—"} • Public : {h.audience || "—"}
                           </span>
@@ -1187,130 +948,6 @@ export default function OptimiseurClient() {
           )}
         </section>
       </div>
-
-      {/* ✅ PREMIUM DRAWER (Option 1) */}
-      {premiumOpen && (
-        <div className="fixed inset-0 z-50">
-          <div
-            className="absolute inset-0 bg-black/30"
-            onClick={() => !premiumLoading && setPremiumOpen(false)}
-          />
-          <div className="absolute right-0 top-0 h-full w-full sm:w-[460px] bg-white shadow-2xl border-l border-slate-200 flex flex-col">
-            <div className="p-4 border-b border-slate-200 flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <div className="h-9 w-9 rounded-full bg-slate-900 text-white flex items-center justify-center font-black">
-                  π
-                </div>
-                <div>
-                  <p className="text-sm font-extrabold">pitexplique Premium</p>
-                  <p className="text-[11px] text-slate-500">
-                    {premiumDone
-                      ? "Résultat"
-                      : premiumTotal
-                        ? `Question ${premiumStep}/${premiumTotal}`
-                        : "Coaching vers 20/20"}
-                  </p>
-                </div>
-              </div>
-
-              <button
-                type="button"
-                onClick={() => !premiumLoading && setPremiumOpen(false)}
-                className="px-2 py-1 rounded-md border text-xs font-semibold bg-white hover:bg-slate-50"
-              >
-                ✕
-              </button>
-            </div>
-
-            <div className="flex-1 overflow-auto p-4 space-y-3">
-              {premiumChat.map((m, i) => (
-                <div
-                  key={i}
-                  className={`flex ${m.role === "user" ? "justify-end" : "justify-start"}`}
-                >
-                  <div
-                    className={[
-                      "max-w-[85%] rounded-2xl px-3 py-2 text-[12px] leading-snug border whitespace-pre-wrap",
-                      m.role === "user"
-                        ? "bg-sky-50 border-sky-200 text-slate-900"
-                        : "bg-slate-50 border-slate-200 text-slate-900",
-                    ].join(" ")}
-                  >
-                    {m.text}
-                  </div>
-                </div>
-              ))}
-
-              {premiumError && (
-                <div className="rounded-xl border border-rose-200 bg-rose-50 px-3 py-2">
-                  <p className="text-xs font-semibold text-rose-800">⚠️ {premiumError}</p>
-                </div>
-              )}
-
-              {premiumResult && (
-                <div className="rounded-2xl border border-emerald-200 bg-emerald-50 p-3 space-y-2">
-                  <p className="text-xs font-extrabold text-emerald-900">
-                    ✅ Version prête ({(premiumResult.estimatedScoreAfter ?? 20).toFixed(1)}/20 estimé)
-                  </p>
-
-                  {premiumResult.changes?.length ? (
-                    <ul className="text-[12px] text-emerald-900 list-disc pl-4 space-y-1">
-                      {premiumResult.changes.slice(0, 6).map((x, i) => (
-                        <li key={i}>{x}</li>
-                      ))}
-                    </ul>
-                  ) : null}
-
-                  <div className="flex gap-2 pt-1">
-                    <button
-                      type="button"
-                      onClick={applyPremium}
-                      className="px-3 py-2 rounded-lg text-xs font-bold bg-emerald-700 text-white hover:bg-emerald-800"
-                    >
-                      Appliquer
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => copy(premiumResult.improvedPrompt)}
-                      className="px-3 py-2 rounded-lg text-xs font-bold border bg-white hover:bg-slate-50"
-                    >
-                      Copier
-                    </button>
-                  </div>
-                </div>
-              )}
-            </div>
-
-            {!premiumDone && (
-              <div className="p-4 border-t border-slate-200 space-y-2">
-                <textarea
-                  value={premiumDraft}
-                  onChange={(e) => setPremiumDraft(e.target.value)}
-                  placeholder="Ta réponse…"
-                  className="w-full min-h-[72px] border rounded-xl px-3 py-2 text-[12px] bg-slate-50"
-                  disabled={premiumLoading}
-                />
-                <button
-                  type="button"
-                  onClick={sendPremiumAnswer}
-                  disabled={premiumLoading || !premiumDraft.trim() || !premiumQuestion}
-                  className={[
-                    "w-full px-3 py-2 rounded-lg text-xs font-bold border transition",
-                    premiumLoading || !premiumDraft.trim() || !premiumQuestion
-                      ? "bg-slate-100 text-slate-400 border-slate-200"
-                      : "bg-slate-900 text-white border-slate-900 hover:bg-slate-800",
-                  ].join(" ")}
-                >
-                  {premiumLoading ? "…" : "Envoyer"}
-                </button>
-                <p className="text-[11px] text-slate-500">
-                  Objectif : répondre aux 1–3 points qui manquent pour atteindre 20/20.
-                </p>
-              </div>
-            )}
-          </div>
-        </div>
-      )}
     </main>
   );
 }
