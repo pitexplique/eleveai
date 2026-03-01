@@ -8,6 +8,7 @@
 //    - reportRef/scoreRef : dernier scoring instantané
 //    - startPremium() lit les refs
 //    - applyPremium() met à jour state + ref
+// ✅ FIX: clientRunId envoyé à /premium/start pour garantir 1 session active par "run" côté serveur
 
 "use client";
 
@@ -191,6 +192,19 @@ function getExpectations(type: PromptType, audience: Audience) {
   }
 }
 
+function makeClientRunId() {
+  // stable dans l’onglet tant que la page reste montée
+  // crypto.randomUUID() si dispo, sinon fallback
+  try {
+    // @ts-ignore
+    if (typeof crypto !== "undefined" && typeof crypto.randomUUID === "function") {
+      // @ts-ignore
+      return crypto.randomUUID();
+    }
+  } catch {}
+  return `cr_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 10)}`;
+}
+
 export default function OptimiseurClient() {
   const [prompt, setPrompt] = useState("");
 
@@ -198,6 +212,9 @@ export default function OptimiseurClient() {
   const promptRef = useRef<string>("");
   const reportRef = useRef<ScoreReport | null>(null);
   const scoreRef = useRef<number | null>(null);
+
+  // ✅ clientRunId pour Premium (évite reprise d’une session précédente)
+  const clientRunIdRef = useRef<string>(makeClientRunId());
 
   // ✅ MODIF : vise 20 par défaut (sinon remets DEFAULT_TARGET_SCORE)
   const [targetScore, setTargetScore] = useState<number>(20);
@@ -355,6 +372,9 @@ export default function OptimiseurClient() {
     setPremiumChat([]);
     setPremiumDone(false);
     setPremiumResult(null);
+
+    // ✅ nouveau run id Premium (optionnel mais propre)
+    clientRunIdRef.current = makeClientRunId();
   };
 
   const runScoreOnly = async () => {
@@ -486,85 +506,90 @@ export default function OptimiseurClient() {
     } catch {}
   };
 
-  // ✅ PREMIUM handlers (Option 1) — FIX: use refs to avoid stale prompt/report
-  const startPremium = async () => {
-    if (premiumLoading) return;
+// ✅ PREMIUM handlers (Option 1) — FIX: use refs to avoid stale prompt/report
+const startPremium = async () => {
+  if (premiumLoading) return;
 
-    const latestPrompt = (promptRef.current || prompt || "").trim();
-    const latestReport = reportRef.current || currentReport;
-    const latestScore = scoreRef.current ?? currentScore;
+  const latestPrompt = (promptRef.current || prompt || "").trim();
+  const latestReport = reportRef.current || currentReport;
+  const latestScore = scoreRef.current ?? currentScore;
 
-    if (!latestReport || latestScore === null) {
-      setPremiumError("Scorer d’abord.");
+  if (!latestReport || latestScore === null) {
+    setPremiumError("Scorer d’abord.");
+    setPremiumOpen(true);
+    return;
+  }
+  if (!latestPrompt) {
+    setPremiumError("Colle un prompt d’abord.");
+    setPremiumOpen(true);
+    return;
+  }
+  if (latestScore >= 20) {
+    setPremiumError("");
+    setPremiumChat([{ role: "pit", text: "Tu es déjà à 20/20 ✅" }]);
+    setPremiumDone(true);
+    setPremiumOpen(true);
+    return;
+  }
+
+  // ✅ 1 clic Premium = 1 run = 1 session (ultra robuste)
+  // (évite toute ambiguïté entre relances rapides / multi-clics)
+  clientRunIdRef.current = makeClientRunId();
+
+  setPremiumError("");
+  setPremiumLoading(true);
+  setPremiumResult(null);
+  setPremiumDone(false);
+  setPremiumChat([]);
+  setPremiumDraft("");
+  setPremiumSessionId(null);
+  setPremiumStep(0);
+  setPremiumTotal(0);
+  setPremiumQuestion(null);
+
+  try {
+    const res = await fetch("/api/optimiseur/premium/start", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        prompt: latestPrompt, // ✅ always latest
+        scoreReport: latestReport, // ✅ always latest
+        model,
+        type: promptType,
+        audience,
+        clientRunId: clientRunIdRef.current, // ✅ NEW run id for this click
+      }),
+    });
+
+    const data = await res.json().catch(() => null);
+    if (!res.ok) throw new Error(data?.error || "Erreur premium start.");
+
+    if (data?.alreadyPerfect) {
       setPremiumOpen(true);
-      return;
-    }
-    if (!latestPrompt) {
-      setPremiumError("Colle un prompt d’abord.");
-      setPremiumOpen(true);
-      return;
-    }
-    if (latestScore >= 20) {
-      setPremiumError("");
       setPremiumChat([{ role: "pit", text: "Tu es déjà à 20/20 ✅" }]);
       setPremiumDone(true);
-      setPremiumOpen(true);
+      setPremiumLoading(false);
       return;
     }
 
-    setPremiumError("");
-    setPremiumLoading(true);
-    setPremiumResult(null);
-    setPremiumDone(false);
-    setPremiumChat([]);
-    setPremiumDraft("");
-    setPremiumSessionId(null);
-    setPremiumStep(0);
-    setPremiumTotal(0);
-    setPremiumQuestion(null);
+    setPremiumSessionId(data.sessionId);
+    setPremiumStep(data.step);
+    setPremiumTotal(data.totalSteps);
+    setPremiumQuestion(data.question);
 
-    try {
-      const res = await fetch("/api/optimiseur/premium/start", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          prompt: latestPrompt, // ✅ FIX
-          scoreReport: latestReport, // ✅ FIX
-          model,
-          type: promptType,
-          audience,
-        }),
-      });
+    setPremiumChat([
+      { role: "pit", text: `On vise 20/20. Question ${data.step}/${data.totalSteps} :` },
+      { role: "pit", text: data.question?.question || "—" },
+    ]);
 
-      const data = await res.json().catch(() => null);
-      if (!res.ok) throw new Error(data?.error || "Erreur premium start.");
-
-      if (data?.alreadyPerfect) {
-        setPremiumOpen(true);
-        setPremiumChat([{ role: "pit", text: "Tu es déjà à 20/20 ✅" }]);
-        setPremiumDone(true);
-        setPremiumLoading(false);
-        return;
-      }
-
-      setPremiumSessionId(data.sessionId);
-      setPremiumStep(data.step);
-      setPremiumTotal(data.totalSteps);
-      setPremiumQuestion(data.question);
-
-      setPremiumChat([
-        { role: "pit", text: `On vise 20/20. Question ${data.step}/${data.totalSteps} :` },
-        { role: "pit", text: data.question?.question || "—" },
-      ]);
-
-      setPremiumOpen(true);
-    } catch (e: any) {
-      setPremiumError(e?.message || "Erreur premium.");
-      setPremiumOpen(true);
-    } finally {
-      setPremiumLoading(false);
-    }
-  };
+    setPremiumOpen(true);
+  } catch (e: any) {
+    setPremiumError(e?.message || "Erreur premium.");
+    setPremiumOpen(true);
+  } finally {
+    setPremiumLoading(false);
+  }
+};
 
   const sendPremiumAnswer = async () => {
     if (!premiumSessionId || !premiumQuestion) return;

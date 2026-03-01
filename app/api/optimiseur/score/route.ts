@@ -61,11 +61,7 @@ function validateScoreResponse(x: any): x is ScoreResponse {
 
   if (!okBreakdown) return false;
 
-  if (
-    !Array.isArray(x.strengths) ||
-    !Array.isArray(x.fixes) ||
-    !Array.isArray(x.risks)
-  ) {
+  if (!Array.isArray(x.strengths) || !Array.isArray(x.fixes) || !Array.isArray(x.risks)) {
     return false;
   }
 
@@ -80,21 +76,23 @@ function pickModel(m: unknown) {
 /**
  * ✅ Heuristiques DÉTERMINISTES (fiabilité)
  * + Typé (PromptType) + Audience (profs/eleves)
+ *
+ * 🎯 Objectif des caps:
+ * - empêcher un "prompt vide" de faire 19/20
+ * - MAIS laisser un prompt très complet atteindre 20/20,
+ *   surtout pour les "séances" (où "seuil" n'est pas obligatoire).
  */
-function computeDeterministicCaps(
-  prompt: string,
-  type: PromptType,
-  audience: Audience,
-) {
+function computeDeterministicCaps(prompt: string, type: PromptType, audience: Audience) {
   const p = prompt.toLowerCase();
 
   const hasBareme =
-    /bar[eè]me/.test(p) ||
-    /\/\s*20/.test(p) ||
-    /\b\d+\s*points?\b/.test(p);
+    /bar[eè]me/.test(p) || /\/\s*20/.test(p) || /\b\d+\s*points?\b/.test(p);
 
   const hasSeuil =
-    /seuil/.test(p) || /%/.test(p) || /à partir de/.test(p) || /niveau de maîtrise/.test(p);
+    /seuil/.test(p) ||
+    /%/.test(p) ||
+    /à partir de/.test(p) ||
+    /niveau de maîtrise/.test(p);
 
   const hasChecklist =
     /auto-contr[oô]le/.test(p) ||
@@ -131,13 +129,15 @@ function computeDeterministicCaps(
   let capContext = 4;
 
   // === Robustesse ===
+  // ✅ On garde l'exigence "barème/seuil" UNIQUEMENT pour Evaluation
   if (type === "evaluation") {
     if (!hasBareme && !hasSeuil) capRobustness = 2.5;
     else if (!hasBareme || !hasSeuil) capRobustness = 3.0;
     if (!hasChecklist) capRobustness = Math.min(capRobustness, 3.0);
   } else {
-    if (!hasChecklist) capRobustness = 3.0;
-    if (!hasSeuil && type !== "fiche") capRobustness = Math.min(capRobustness, 3.5);
+    // ✅ Pour séance/séquence/fiche/projet : pas besoin de "seuil"
+    // On sanctionne surtout l'absence de checklist (moins punitif qu'avant)
+    if (!hasChecklist) capRobustness = 3.5; // (avant 3.0)
   }
 
   // === Compliance ===
@@ -163,8 +163,10 @@ function computeDeterministicCaps(
     }
     // on ne pénalise pas l'absence de différenciation côté élève
   } else {
-    // profs : différenciation aide souvent le contexte
-    if (!hasDifferenciation) capContext = Math.min(capContext, 3.5);
+    // ✅ On ne plafonne PLUS automatiquement le contexte si pas de différenciation
+    // (un prof peut faire une séance excellente sans détailler la diff dans le prompt)
+    // if (!hasDifferenciation) capContext = Math.min(capContext, 3.5);
+    void hasDifferenciation; // garde la variable (lint/ts)
   }
 
   return { capRobustness, capCompliance, capStructure, capContext };
