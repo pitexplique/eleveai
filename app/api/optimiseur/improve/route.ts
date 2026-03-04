@@ -1,5 +1,4 @@
 // app/api/optimiseur/improve/route.ts
-// ✅ inchangé (tu avais déjà type + audience + rubric typée + garde-fous)
 
 import { NextResponse } from "next/server";
 import { openai } from "@/lib/openai";
@@ -16,6 +15,16 @@ type ImproveResponse = {
   improvedPrompt: string;
   changes: string[];
 };
+
+/* ======================================================
+   🔐 Activation gouvernance inspirée ISO 42001
+   ====================================================== */
+
+const governance_iso: boolean = true ; // ← ON / OFF ici
+
+/* ======================================================
+   UTILITAIRES
+   ====================================================== */
 
 function clamp(n: number, a: number, b: number) {
   return Math.max(a, Math.min(b, n));
@@ -71,6 +80,7 @@ function safeJsonParse<T>(raw: string): T | null {
 
   const extracted = extractFirstJsonObject(raw);
   if (!extracted) return null;
+
   try {
     return JSON.parse(extracted) as T;
   } catch {
@@ -88,12 +98,17 @@ function looksTruncatedJson(s: string) {
   return t.startsWith("{") && !t.endsWith("}");
 }
 
+/* ======================================================
+   ANCRAGE THÉMATIQUE
+   ====================================================== */
+
 function extractAnchor(prompt: string) {
   const text = normalizeText(prompt);
 
   const levelMatch = text.match(
     /\b(6e|5e|4e|3e|seconde|premiere|terminale|grade\s*\d+|year\s*\d+)\b/,
   );
+
   const level = levelMatch ? levelMatch[0] : "unspecified level";
 
   const words = text
@@ -102,14 +117,20 @@ function extractAnchor(prompt: string) {
     .slice(0, 80);
 
   const keywords = Array.from(new Set(words)).slice(0, 12);
+
   return { level, keywords };
 }
 
-function seemsOffTopic(improved: string, anchor: { level: string; keywords: string[] }) {
+function seemsOffTopic(
+  improved: string,
+  anchor: { level: string; keywords: string[] },
+) {
   const t = normalizeText(improved);
 
   const hasLevel =
-    anchor.level === "unspecified level" ? true : new RegExp(`\\b${anchor.level}\\b`).test(t);
+    anchor.level === "unspecified level"
+      ? true
+      : new RegExp(`\\b${anchor.level}\\b`).test(t);
 
   if (anchor.keywords.length === 0) return !hasLevel;
 
@@ -119,33 +140,9 @@ function seemsOffTopic(improved: string, anchor: { level: string; keywords: stri
   return !(hasLevel && hits >= required);
 }
 
-async function repairJsonOnce(raw: string, model: string) {
-  const system = `Tu renvoies UNIQUEMENT du JSON valide, sans texte autour.`;
-  const user = `
-Répare ce JSON pour qu'il soit valide et respecte EXACTEMENT ce schéma :
-
-{
-  "improvedPrompt": "string non vide",
-  "changes": ["..."]
-}
-
-JSON À RÉPARER :
-${raw}
-`.trim();
-
-  const completion = await openai.chat.completions.create({
-    model,
-    temperature: 0,
-    max_tokens: 800,
-    response_format: { type: "json_object" },
-    messages: [
-      { role: "system", content: system },
-      { role: "user", content: user },
-    ],
-  });
-
-  return completion.choices?.[0]?.message?.content?.trim() || "";
-}
+/* ======================================================
+   REGENERATION STRICTE
+   ====================================================== */
 
 async function regenerateStrictOnce(args: {
   model: string;
@@ -157,45 +154,46 @@ async function regenerateStrictOnce(args: {
 }) {
   const { model, prompt, scoreReport, type, audience, anchor } = args;
 
-  const system = `
-You are a prompt editor. Output ONLY valid JSON (no Markdown, no extra text).
-You MUST stay on the same topic, same level, same prompt type, same audience.
-
-ANCHOR:
-- level: ${anchor.level}
-- keywords: ${anchor.keywords.join(", ")}
-
-PROMPT TYPE: ${type}
-AUDIENCE: ${audience}
-
-JSON schema:
-{
-  "improvedPrompt": "non-empty string",
-  "changes": ["..."]
-}
-`.trim();
-
-  const user = `
-CURRENT PROMPT:
-"""${prompt}"""
-
-SCORE REPORT (if any):
-${scoreReport ? JSON.stringify(scoreReport).slice(0, 6000) : "null"}
-`.trim();
-
   const completion = await openai.chat.completions.create({
     model,
     temperature: 0,
     max_tokens: 1500,
     response_format: { type: "json_object" },
     messages: [
-      { role: "system", content: system },
-      { role: "user", content: user },
+      {
+        role: "system",
+        content: `
+You are a prompt editor.
+
+Stay strictly on topic.
+
+LEVEL: ${anchor.level}
+KEYWORDS: ${anchor.keywords.join(", ")}
+
+TYPE: ${type}
+AUDIENCE: ${audience}
+
+Output JSON only:
+
+{
+ "improvedPrompt": "string",
+ "changes": ["..."]
+}
+`.trim(),
+      },
+      {
+        role: "user",
+        content: `PROMPT:\n"""${prompt}"""`,
+      },
     ],
   });
 
   return completion.choices?.[0]?.message?.content?.trim() || "";
 }
+
+/* ======================================================
+   ROUTE PRINCIPALE
+   ====================================================== */
 
 export async function POST(req: Request) {
   try {
@@ -216,41 +214,60 @@ export async function POST(req: Request) {
 
     const anchor = extractAnchor(prompt);
 
-    // ✅ Rubrique typée + audience
     const rubric = getPromptRubricEditor(type, audience);
 
+    /* ======================================================
+       🔐 Bloc gouvernance ISO (invisible côté utilisateur)
+       ====================================================== */
+
+    const governanceBlock = governance_iso
+      ? `
+GOUVERNANCE IA (inspirée ISO/IEC 42001)
+
+- Réduire les risques d'hallucination, biais et ambiguïté.
+- Favoriser la clarté et la robustesse pédagogique.
+- Si un risque de données personnelles apparaît : anonymiser.
+- Si la tâche implique une évaluation ou sanction : privilégier grille + validation humaine.
+- Si public élève : favoriser raisonnement, indices et méthode plutôt que réponse brute.
+- Maintenir la traçabilité logique du prompt.
+`
+      : "";
+
     const system = `
-Tu es un éditeur de prompt pédagogique (optimisation).
-Tu renvoies UNIQUEMENT du JSON valide.
+Tu es un éditeur de prompt pédagogique.
+
+Réponds uniquement en JSON.
 
 RubricVersion: ${RUBRIC_VERSION}
 
 ${rubric}
 
-GARDE-FOUS (anti-dérive) :
-- Ne change pas le TYPE : "${type}".
-- Ne change pas le PUBLIC : "${audience}".
-- Ne change pas le niveau, ni le sujet principal.
-- Ne bascule pas vers un autre domaine.
-- Si contradiction interne : signale dans "changes" et corrige sans changer le thème.
+${governanceBlock}
 
-ANCRE (contrôle interne) :
-- Niveau détecté : ${anchor.level}
-- Mots-clés : ${anchor.keywords.join(", ")}
+GARDE-FOUS :
+- Ne change pas le TYPE: ${type}
+- Ne change pas le PUBLIC: ${audience}
+- Ne change pas le sujet
+- Reste dans le même domaine
 
-JSON OBLIGATOIRE :
+ANCRE :
+Niveau: ${anchor.level}
+Mots-clés: ${anchor.keywords.join(", ")}
+
+JSON attendu:
+
 {
-  "improvedPrompt": "...",
-  "changes": ["..."]
+ "improvedPrompt": "...",
+ "changes": ["..."]
 }
 `.trim();
 
     const user = `
-PROMPT ACTUEL :
+PROMPT ACTUEL:
 """${prompt}"""
 
-SCORE REPORT (si présent) :
-${scoreReport ? JSON.stringify(scoreReport, null, 2).slice(0, 12000) : "null"}
+SCORE REPORT:
+${scoreReport ? JSON.stringify(scoreReport).slice(0, 8000) : "null"}
 `.trim();
 
     const completion = await openai.chat.completions.create({
@@ -266,7 +283,9 @@ ${scoreReport ? JSON.stringify(scoreReport, null, 2).slice(0, 12000) : "null"}
 
     let raw = completion.choices?.[0]?.message?.content?.trim() || "";
 
-    if (looksTruncatedJson(raw)) {
+    let parsed = safeJsonParse<ImproveResponse>(raw);
+
+    if (!parsed?.improvedPrompt) {
       const strictRaw = await regenerateStrictOnce({
         model,
         prompt,
@@ -275,82 +294,50 @@ ${scoreReport ? JSON.stringify(scoreReport, null, 2).slice(0, 12000) : "null"}
         audience,
         anchor,
       });
-      raw = strictRaw || raw;
-    }
 
-    let parsed = safeJsonParse<ImproveResponse>(raw);
+      parsed = safeJsonParse(strictRaw);
 
-    if (!parsed?.improvedPrompt) {
-      const repairedRaw = await repairJsonOnce(raw, model);
-      const repairedParsed = safeJsonParse<ImproveResponse>(repairedRaw);
-
-      if (!repairedParsed?.improvedPrompt) {
+      if (!parsed?.improvedPrompt) {
         return NextResponse.json(
-          {
-            error: "Réponse improve invalide (JSON).",
-            raw,
-            repairedRaw,
-            used: { model, temperature, type, audience, rubricVersion: RUBRIC_VERSION },
-          },
+          { error: "Réponse JSON invalide.", raw },
           { status: 500 },
         );
       }
-
-      parsed = repairedParsed;
-      raw = repairedRaw;
     }
 
     const improvedPrompt = String(parsed.improvedPrompt || "").trim();
+
     const changes = Array.isArray(parsed.changes)
       ? parsed.changes.map(String).slice(0, 12)
       : [];
 
     if (!isNonEmptyString(improvedPrompt) || improvedPrompt.length < 40) {
       return NextResponse.json(
-        {
-          error: "Improve vide / trop court.",
-          raw,
-          used: { model, temperature, type, audience, rubricVersion: RUBRIC_VERSION },
-        },
+        { error: "Improve trop court.", raw },
         { status: 500 },
       );
     }
 
     if (seemsOffTopic(improvedPrompt, anchor)) {
-      const strictRaw = await regenerateStrictOnce({
-        model,
-        prompt,
-        scoreReport,
-        type,
-        audience,
-        anchor,
-      });
-
-      const strictParsed = safeJsonParse<ImproveResponse>(strictRaw);
-      const strictImproved = String(strictParsed?.improvedPrompt || "").trim();
-
-      if (strictImproved && !seemsOffTopic(strictImproved, anchor)) {
-        return NextResponse.json({
-          improvedPrompt: strictImproved,
-          changes: Array.isArray(strictParsed?.changes)
-            ? strictParsed!.changes.map(String).slice(0, 12)
-            : [],
-          used: { model, temperature, type, audience, rubricVersion: RUBRIC_VERSION },
-        });
-      }
-
-      // ✅ SOFT-FAIL : pas de 500
       return NextResponse.json({
         improvedPrompt: prompt,
-        changes: ["Anti-hors-sujet: amélioration annulée (conservation du prompt précédent)."],
-        used: { model, temperature, type, audience, rubricVersion: RUBRIC_VERSION },
+        changes: [
+          "Anti-hors-sujet: amélioration annulée (conservation du prompt précédent).",
+        ],
       });
     }
 
     return NextResponse.json({
       improvedPrompt,
       changes,
-      used: { model, temperature, type, audience, rubricVersion: RUBRIC_VERSION },
+      used: {
+        model,
+        temperature,
+        type,
+        audience,
+        rubricVersion: RUBRIC_VERSION,
+        governance_iso,
+      },
     });
   } catch (e: any) {
     return NextResponse.json(

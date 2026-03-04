@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { X, Image as ImageIcon, ShieldCheck } from "lucide-react";
+import { X, Image as ImageIcon, ShieldCheck, ClipboardCheck } from "lucide-react";
 
 type DevBannerProps = {
   message?: string;
@@ -10,12 +10,12 @@ type DevBannerProps = {
 };
 
 export default function DevBanner({
-  message = "Valeria : optimisation mesurable de prompts IA (/20) avec supervision humaine, traçabilité et amélioration continue (inspiré ISO/IEC 42001).",
-  storageKey = "eleveai_dev_banner_closed_v3",
+  message = "Valeria : qualité mesurable des ressources IA (pas seulement du prompt) — supervision humaine, traçabilité, amélioration continue (inspiré ISO/IEC 42001).",
+  storageKey = "eleveai_dev_banner_closed_v4",
   className = "",
 }: DevBannerProps) {
   const [open, setOpen] = useState(false);
-  const [showImage, setShowImage] = useState(false);
+  const [showDetails, setShowDetails] = useState(false);
 
   useEffect(() => {
     try {
@@ -46,29 +46,25 @@ export default function DevBanner({
       aria-live="polite"
     >
       <div className="mx-auto max-w-[1400px] space-y-2">
-
         {/* Ligne principale */}
         <div className="flex items-center justify-between gap-3">
-
           <div className="flex items-center gap-2">
             <ShieldCheck className="h-4 w-4 text-emerald-400" />
-            <p className="text-sm leading-snug font-medium tracking-wide">
-              {message}
-            </p>
+            <p className="text-sm leading-snug font-medium tracking-wide">{message}</p>
           </div>
 
           <div className="flex items-center gap-1">
-            {/* Bouton image */}
+            {/* Bouton détails */}
             <button
               type="button"
-              onClick={() => setShowImage((v) => !v)}
+              onClick={() => setShowDetails((v) => !v)}
               className="inline-flex h-8 items-center gap-1 rounded-full px-2 text-xs font-semibold
                          hover:bg-slate-800 active:bg-slate-700 transition"
-              aria-label="Afficher la notation"
-              title="Voir le détail"
+              aria-label="Afficher la grille"
+              title="Voir la grille"
             >
-              <ImageIcon className="h-4 w-4" />
-              Détail
+              <ClipboardCheck className="h-4 w-4" />
+              Grille
             </button>
 
             {/* Bouton fermer */}
@@ -85,12 +81,23 @@ export default function DevBanner({
           </div>
         </div>
 
-        {/* Image */}
-        {showImage && (
-          <div className="pt-2">
+        {/* Détails */}
+        {showDetails && (
+          <div className="pt-2 space-y-2">
+            <div className="text-xs text-slate-300 leading-relaxed">
+              <div className="flex items-center gap-2">
+                <ImageIcon className="h-4 w-4" />
+                <span>
+                  Objectif : produire des ressources <span className="text-slate-100 font-semibold">exploitables en classe</span>
+                  (données, tâches, traces), avec validation humaine.
+                </span>
+              </div>
+            </div>
+
+            {/* Image (optionnel, en attendant une UI plus riche) */}
             <img
               src="/notationgpt.png"
-              alt="Détail de la notation IA"
+              alt="Grille / Détail de l'évaluation"
               className="max-h-[240px] rounded-md border border-slate-700 shadow-sm"
             />
           </div>
@@ -99,4 +106,3 @@ export default function DevBanner({
     </div>
   );
 }
-

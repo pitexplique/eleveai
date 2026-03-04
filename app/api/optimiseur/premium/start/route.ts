@@ -18,19 +18,13 @@ function uid() {
 }
 
 function hash12(s: string) {
-  return crypto
-    .createHash("sha256")
-    .update(s || "", "utf8")
-    .digest("hex")
-    .slice(0, 12);
+  return crypto.createHash("sha256").update(s || "", "utf8").digest("hex").slice(0, 12);
 }
 
 /** ✅ Retire tout ancien bloc Premium (évite de repartir sur un prompt “sale”) */
 function stripPremiumBlock(input: string) {
   const s = String(input || "").replace(/^\uFEFF/, "");
-  return s
-    .replace(/\n?===\s*PRÉCISIONS\s*\(Valeria Premium\)\s*===([\s\S]*)$/i, "")
-    .trim();
+  return s.replace(/\n?===\s*PRÉCISIONS\s*\(Valeria Premium\)\s*===([\s\S]*)$/i, "").trim();
 }
 
 /**
@@ -52,41 +46,68 @@ function clamp(n: number, a: number, b: number) {
   return Math.max(a, Math.min(b, n));
 }
 
-/**
- * ✅ UX Prof : 2–3 questions point barre, seuil=18
- * - score >= 18 : 2 questions
- * - score < 18  : 3 questions
- */
-function desiredQuestionCountFromScore(scoreReport: unknown) {
-  const score0 = Number((scoreReport as any)?.score ?? NaN);
-  if (!Number.isFinite(score0)) return 3;
-  const score = clamp(score0, 0, 20);
-  return score >= 18 ? 2 : 3;
-}
-
 const ALL_GAPS = ["clarity", "context", "compliance", "structure", "robustness"] as const;
 type Gap = (typeof ALL_GAPS)[number];
 
 /**
- * ✅ Priorisation intelligente des gaps (ordre = plus faible → plus fort)
- * Tie-break stable via GAP_TIE_ORDER.
+ * ✅ Priorisation : on attaque d’abord ce qui bloque le 20/20 le plus souvent
+ * (robustness + compliance sont des “verrous” typiques quand on plafonne à 17.5–18)
  */
-const GAP_TIE_ORDER: Gap[] = ["clarity", "context", "structure", "robustness", "compliance"];
+const GAP_TIE_ORDER: Gap[] = ["robustness", "compliance", "structure", "context", "clarity"];
+
+/** Helper typé pour lire breakdown sans 'any' partout */
+type ScoreReportLike = {
+  score?: number;
+  breakdown?: Partial<Record<Gap, number>>;
+};
+
+function getBreakdownValues(scoreReport: unknown): Record<Gap, number> {
+  const sr = (scoreReport ?? {}) as ScoreReportLike;
+  const b = (sr.breakdown ?? {}) as Partial<Record<Gap, number>>;
+
+  const out = {} as Record<Gap, number>;
+  for (const gap of ALL_GAPS) {
+    const raw = Number(b[gap]);
+    out[gap] = Number.isFinite(raw) ? clamp(raw, 0, 4) : 4; // défaut = 4 si absent
+  }
+  return out;
+}
+
+/**
+ * ✅ UX Prof “SMART” : nombre de questions basé sur l’écart à 4
+ * (casse le plateau 17.5–18 quand plusieurs critères sont à 3.5/4)
+ */
+function desiredQuestionCountFromScore(scoreReport: unknown) {
+  const vals = getBreakdownValues(scoreReport);
+
+  const debt = ALL_GAPS.reduce((acc, g) => acc + (4 - vals[g]), 0); // somme des écarts à 4
+  const notPerfect = ALL_GAPS.filter((g) => vals[g] < 3.99).length;
+
+  let desired: number;
+  if (debt < 0.3) desired = 2;
+  else if (debt < 0.9) desired = 3;
+  else if (debt < 1.6) desired = 4;
+  else desired = 5;
+
+  // filet anti-plateau
+  if (notPerfect >= 3) desired = Math.max(desired, 4);
+
+  return clamp(desired, 2, 5);
+}
 
 function pickPriorityGaps(scoreReport: unknown, desiredCount: number): Gap[] {
-  const b = (scoreReport as any)?.breakdown ?? {};
+  const vals = getBreakdownValues(scoreReport);
 
-  const items: Array<{ gap: Gap; v: number; tie: number }> = GAP_TIE_ORDER.map((gap, i) => {
-    const raw = Number(b?.[gap]);
-    const v = Number.isFinite(raw) ? clamp(raw, 0, 4) : 4; // défaut = 4 si absent
-    return { gap, v, tie: i };
-  });
+  const items: Array<{ gap: Gap; v: number; tie: number }> = GAP_TIE_ORDER.map((gap, i) => ({
+    gap,
+    v: vals[gap],
+    tie: i,
+  }));
 
   items.sort((a, c) => (a.v !== c.v ? a.v - c.v : a.tie - c.tie));
 
-  const out = items.slice(0, clamp(desiredCount, 1, 3)).map((x) => x.gap);
+  const out = items.slice(0, clamp(desiredCount, 1, ALL_GAPS.length)).map((x) => x.gap);
 
-  // sécurité : si jamais desiredCount > longueur (ne devrait pas arriver)
   while (out.length < desiredCount) out.push(GAP_TIE_ORDER[out.length] ?? "structure");
   return out.slice(0, desiredCount);
 }
@@ -96,14 +117,10 @@ function validateQuestions(
   desiredCount: number,
   allowedGapsInOrder: readonly Gap[],
 ): { ok: true; questions: PremiumQuestion[] } | { ok: false; error: string } {
-  if (!raw || typeof raw !== "object") {
-    return { ok: false, error: "JSON invalide (objet attendu)." };
-  }
+  if (!raw || typeof raw !== "object") return { ok: false, error: "JSON invalide (objet attendu)." };
 
-  const qs = (raw as any).questions;
-  if (!Array.isArray(qs)) {
-    return { ok: false, error: "JSON invalide (questions[] manquant)." };
-  }
+  const qs = (raw as { questions?: unknown }).questions;
+  if (!Array.isArray(qs)) return { ok: false, error: "JSON invalide (questions[] manquant)." };
 
   if (qs.length !== desiredCount) {
     return {
@@ -131,29 +148,24 @@ function validateQuestions(
 
   for (let i = 0; i < qs.length; i++) {
     const qObj = qs[i] as Record<string, unknown>;
-
     const gap = String(qObj?.gap ?? "").trim() as Gap;
     const question = String(qObj?.question ?? "").trim();
     let id = String(qObj?.id ?? "").trim();
 
-    if (!ALL_GAPS.includes(gap)) {
-      return { ok: false, error: `gap invalide: ${gap}` };
-    }
+    if (!ALL_GAPS.includes(gap)) return { ok: false, error: `gap invalide: ${gap}` };
 
     if (!question || question.length < 8) {
       return { ok: false, error: `question trop courte pour gap=${gap}` };
     }
-    if (question.length > 220) {
-      return { ok: false, error: `question trop longue pour gap=${gap} (max 220)` };
+    if (question.length > 260) {
+      return { ok: false, error: `question trop longue pour gap=${gap} (max 260)` };
     }
 
     if (!id) id = `q${i + 1}_${gap}`;
     if (id.length < 2 || id.length > 40) {
       return { ok: false, error: `id invalide: "${id}" (2..40)` };
     }
-    if (seenIds.has(id)) {
-      return { ok: false, error: `id dupliqué: "${id}"` };
-    }
+    if (seenIds.has(id)) return { ok: false, error: `id dupliqué: "${id}"` };
     seenIds.add(id);
 
     out.push({ id, gap, question });
@@ -163,8 +175,6 @@ function validateQuestions(
 }
 
 function buildQuestionsSchema(desiredCount: number, allowedGapsInOrder: readonly Gap[]) {
-  // ✅ JSON Schema strict : EXACTEMENT desiredCount questions
-  // ✅ + gap enum limité aux gaps prioritaires (et validateQuestions force l’ordre exact)
   return {
     type: "object",
     additionalProperties: false,
@@ -179,7 +189,7 @@ function buildQuestionsSchema(desiredCount: number, allowedGapsInOrder: readonly
           properties: {
             id: { type: "string", minLength: 2, maxLength: 40 },
             gap: { type: "string", enum: allowedGapsInOrder },
-            question: { type: "string", minLength: 8, maxLength: 220 },
+            question: { type: "string", minLength: 8, maxLength: 260 },
           },
           required: ["id", "gap", "question"],
         },
@@ -190,7 +200,10 @@ function buildQuestionsSchema(desiredCount: number, allowedGapsInOrder: readonly
 }
 
 function extractJsonText(resp: unknown): string {
-  const r = resp as any;
+  const r = resp as {
+    output_text?: string;
+    output?: Array<{ content?: Array<{ text?: string; value?: string }> }>;
+  };
 
   const a = String(r?.output_text || "").trim();
   if (a) return a;
@@ -198,11 +211,63 @@ function extractJsonText(resp: unknown): string {
   const b = String(r?.output?.[0]?.content?.[0]?.text || "").trim();
   if (b) return b;
 
-  // fallback ultra défensif (rare)
   const c = String(r?.output?.[0]?.content?.[0]?.value || "").trim();
   if (c) return c;
 
   return "";
+}
+
+/**
+ * ✅ System prompt Premium (orienté prof) : casser le plateau + densifier la ressource
+ * Important: on ne "fait pas semblant" de connaître matière/niveau : on les DÉDUIT du prompt,
+ * et on fournit des exemples adaptés au thème détecté.
+ */
+function buildValeriaPremiumSystemPrompt(args: {
+  type: string;
+  audience: string;
+  priorityGaps: readonly Gap[];
+}) {
+  const { type, audience, priorityGaps } = args;
+
+  return (
+    "Tu es Valeria Premium.\n" +
+    "Mission: poser des questions de clarification qui TRANSFORMENT la ressource finale.\n" +
+    "But: passer d’un prompt correct à une ressource immédiatement exploitable en classe.\n\n" +
+
+    "CONTRAINTE CRITIQUE:\n" +
+    "- Tu dois d’abord DÉDUIRE du PROMPT BASE: matière, niveau, et type de ressource.\n" +
+    "- Si la matière ou le niveau ne sont pas explicitement présents, déduis la meilleure hypothèse et\n" +
+    "  reste neutre (ex: 'probablement cycle 4').\n" +
+    `- Type déclaré=${type} ; Public déclaré=${audience}\n\n` +
+
+    "RÈGLES STRICTES:\n" +
+    "- Réponds UNIQUEMENT avec le JSON demandé (schema strict). Aucun texte hors JSON.\n" +
+    "- 1 question = 1 information manquante/actionnable.\n" +
+    "- Interdit: questions vagues ('ajouter plus de détails'), redondantes, ou déjà couvertes.\n\n" +
+
+    "FORMAT (OBLIGATOIRE):\n" +
+    "- Question courte, simple, directement répondable.\n" +
+    "- Ajoute entre parenthèses 3 à 5 suggestions concrètes (exemples, données, tâches) adaptées au thème.\n" +
+    "- Les suggestions doivent être COPIABLES dans un prompt et rendre l’activité faisable.\n\n" +
+
+    "PRIORITÉ ABSOLUE = DENSITÉ PÉDAGOGIQUE EXPLOITABLE:\n" +
+    "- Si une activité mentionne un CALCUL → exiger des DONNÉES chiffrées fournies (valeurs, unités, source ou jeu de données).\n" +
+    "- Si une activité mentionne une DISCUSSION → exiger une TRACE écrite (production attendue) + critères.\n" +
+    "- Si une activité mentionne une MISE EN GROUPE → exiger une tâche précise + rôle + temps.\n\n" +
+
+    "CIBLAGE PAR BREAKDOWN:\n" +
+    "- Analyse le scoreReport.breakdown.\n" +
+    "- Cible d’abord les critères < 4/4, en évitant de revenir sur ceux déjà à 4/4.\n\n" +
+
+    "OBLIGATIONS (au moins 1 question de chaque si pertinent):\n" +
+    "- ROBUSTESSE: erreurs fréquentes + remédiations concrètes (2 mini-actions).\n" +
+    "- CONFORMITÉ (si public=profs): une compétence explicite programme/socle en phrase opérationnelle.\n" +
+    "- LIVRABLE/TRACE ÉLÈVE: ce que l’élève rend exactement.\n\n" +
+
+    "- Utilise EXACTEMENT ces gaps, dans cet ordre strict:\n" +
+    `  ${priorityGaps.join(" → ")}\n` +
+    "- Q1 cible gap1, Q2 gap2, etc.\n"
+  );
 }
 
 async function llmGenerateQuestionsJSONOnce(args: {
@@ -224,30 +289,13 @@ async function llmGenerateQuestionsJSONOnce(args: {
     input: [
       {
         role: "system",
-        content:
-          "Tu es Valeria Premium, experte en optimisation de prompts pédagogiques.\n" +
-          "Objectif: faire passer un prompt déjà bon (≈18/20) à un niveau expert (20/20).\n\n" +
-          "RÈGLES STRICTES:\n" +
-          "- Réponds UNIQUEMENT avec le JSON demandé (schema strict).\n" +
-          "- Aucun texte hors JSON.\n" +
-          "- Chaque question doit viser UNE amélioration précise, mesurable et concrète.\n" +
-          "- Interdit: questions vagues, générales ou déjà couvertes dans le prompt.\n" +
-          "- Interdit: formulations du type 'Souhaitez-vous ajouter plus de détails ?'\n" +
-          "- Chaque question doit améliorer au moins un des axes suivants :\n" +
-          "  précision des compétences visées, barème chiffré, livrable élève attendu,\n" +
-          "  évaluation formative/sommative, alignement explicite au programme.\n" +
-          "- Formule les questions comme une collègue experte exigeante mais bienveillante.\n" +
-          "- 1 question = 1 amélioration concrète vers 20/20.\n" +
-          "- Utilise EXACTEMENT ces gaps, dans cet ordre strict:\n" +
-          `  ${priorityGaps.join(" → ")}\n` +
-          "- La question 1 cible le 1er gap, la question 2 le 2e, etc.\n",
-              },
+        content: buildValeriaPremiumSystemPrompt({ type, audience, priorityGaps }),
+      },
       {
         role: "user",
         content:
           `PROMPT BASE:\n${prompt}\n\n` +
           `SCORE REPORT (JSON):\n${JSON.stringify(scoreReport ?? {}, null, 2)}\n\n` +
-          `CONTEXTE:\n- Type=${type}\n- Public=${audience}\n\n` +
           `ATTENDU:\n` +
           `- Génère exactement ${desiredCount} question(s).\n` +
           `- Gaps imposés (ordre strict): ${priorityGaps.join(", ")}\n`,
@@ -258,7 +306,7 @@ async function llmGenerateQuestionsJSONOnce(args: {
         type: "json_schema",
         name: "valeria_premium_questions",
         description:
-          "Questions de clarification premium structurées (2-3) pour optimiser un prompt vers 20/20.",
+          "Questions de clarification premium (2 à 5) orientées exploitabilité terrain (données, tâches, traces).",
         schema,
         strict: true,
       },
@@ -268,7 +316,7 @@ async function llmGenerateQuestionsJSONOnce(args: {
   const rawText = extractJsonText(resp);
   if (!rawText) throw new Error("LLM: sortie vide (JSON attendu).");
 
-  let parsed: unknown = null;
+  let parsed: unknown;
   try {
     parsed = JSON.parse(rawText);
   } catch {
@@ -276,9 +324,7 @@ async function llmGenerateQuestionsJSONOnce(args: {
   }
 
   const valid = validateQuestions(parsed, desiredCount, priorityGaps);
-  if (!valid.ok) {
-    throw new Error(`LLM: JSON invalide (${valid.error}).`);
-  }
+  if (!valid.ok) throw new Error(`LLM: JSON invalide (${valid.error}).`);
 
   return valid.questions;
 }
@@ -292,7 +338,6 @@ async function llmGenerateQuestionsJSON(args: {
   model: "gpt-4o-mini" | "gpt-4o";
   priorityGaps: readonly Gap[];
 }) {
-  // ✅ Retry 1 fois (robustesse prod)
   try {
     return await llmGenerateQuestionsJSONOnce(args);
   } catch {
@@ -303,24 +348,30 @@ async function llmGenerateQuestionsJSON(args: {
 export async function POST(req: Request) {
   try {
     cleanupOldSessions();
-    const body = (await req.json().catch(() => ({}))) as any;
+
+    const body = (await req.json().catch(() => ({}))) as {
+      prompt?: string;
+      scoreReport?: unknown;
+      type?: string;
+      audience?: string;
+      model?: string;
+      clientRunId?: string;
+    };
 
     const rawPrompt = String(body?.prompt || "").trim();
-    if (!rawPrompt) {
-      return NextResponse.json({ error: "Prompt manquant." }, { status: 400 });
-    }
+    if (!rawPrompt) return NextResponse.json({ error: "Prompt manquant." }, { status: 400 });
 
-    // ✅ IMPORTANT : base propre (retire les anciens Q/R premium ajoutés)
+    // ✅ base propre (retire les anciens Q/R premium ajoutés)
     const prompt = stripPremiumBlock(rawPrompt);
 
     const scoreReport: unknown = body?.scoreReport ?? null;
     const type = normalizePromptType(body?.type);
     const audience = normalizeAudience(body?.audience);
 
-    const model: "gpt-4o-mini" | "gpt-4o" =
-      body?.model === "gpt-4o" ? "gpt-4o" : "gpt-4o-mini";
+    const model: "gpt-4o-mini" | "gpt-4o" = body?.model === "gpt-4o" ? "gpt-4o" : "gpt-4o-mini";
 
-    const score = Number((scoreReport as any)?.score ?? NaN);
+    const sr = (scoreReport ?? {}) as ScoreReportLike;
+    const score = Number(sr?.score ?? NaN);
     if (Number.isFinite(score) && score >= 20) {
       return NextResponse.json({ alreadyPerfect: true });
     }
@@ -328,7 +379,7 @@ export async function POST(req: Request) {
     const desiredCount = desiredQuestionCountFromScore(scoreReport);
     const priorityGaps = pickPriorityGaps(scoreReport, desiredCount);
 
-    // ✅ clientRunId : fourni par le front pour isoler une “session premium” par lancement
+    // ✅ clientRunId : fourni par le front pour isoler une session premium par lancement
     const clientRunId = String(body?.clientRunId || "anonymous").trim() || "anonymous";
 
     // ✅ purge ancienne session liée à ce clientRunId
@@ -339,7 +390,7 @@ export async function POST(req: Request) {
       idx.delete(clientRunId);
     }
 
-    // ✅ Questions générées par LLM en JSON strict (ordre intelligent imposé)
+    // ✅ Questions générées par LLM (JSON strict)
     const questions = await llmGenerateQuestionsJSON({
       prompt,
       scoreReport,
@@ -365,6 +416,10 @@ export async function POST(req: Request) {
       answers: {},
     });
 
+    const vals = getBreakdownValues(scoreReport);
+    const qualityDebt =
+      Math.round(ALL_GAPS.reduce((acc, g) => acc + (4 - vals[g]), 0) * 100) / 100;
+
     return NextResponse.json({
       sessionId,
       step: 1,
@@ -376,13 +431,12 @@ export async function POST(req: Request) {
         stripped: rawPrompt !== prompt,
         desiredCount,
         priorityGaps,
-        source: "llm_json_schema_strict_priority_order",
+        qualityDebt,
+        source: "llm_json_schema_strict_priority_order_smart_count_pedagogical_density",
       },
     });
-  } catch (e: any) {
-    return NextResponse.json(
-      { error: e?.message || "Erreur premium start." },
-      { status: 500 },
-    );
+  } catch (e: unknown) {
+    const msg = e instanceof Error ? e.message : "Erreur premium start.";
+    return NextResponse.json({ error: msg }, { status: 500 });
   }
 }
