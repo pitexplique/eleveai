@@ -754,23 +754,30 @@ const startPremium = async () => {
   return (
     <main className="min-h-screen bg-gradient-to-b from-sky-50 via-white to-slate-50 text-slate-900">
       <div className="mx-auto w-full max-w-5xl px-4 py-8 space-y-6">
-        <header className="space-y-3">
-          <div className="flex flex-wrap items-center gap-2">
-            <p className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-100 text-xs font-semibold text-sky-900">
-              ✨ Valeria — Optimiseur de prompts (notation + améliorations)
-            </p>
-          </div>
+<header className="space-y-3">
+  <div className="flex flex-wrap items-center gap-2">
+    <p className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-100 text-xs font-semibold text-sky-900">
+      ✨ Valeria — Optimiseur de prompts pédagogique
+    </p>
+  </div>
 
-          <h1 className="text-3xl font-extrabold text-[#0047B6]">
-            Ton prompt devient plus clair, plus solide, plus conforme
-          </h1>
+  <h1 className="text-3xl font-extrabold text-[#0047B6]">
+    Ton prompt devient plus clair, plus solide et plus fiable
+  </h1>
 
-          <p className="text-sm text-slate-700 max-w-2xl">
-            Valeria évalue ton prompt sur 20 (grille v{RUBRIC_VERSION}), repère les points
-            faibles, puis l’améliore étape par étape jusqu’au score cible (ou arrêt manuel).
-            Résultat : un prompt fiable et directement exploitable.
-          </p>
-        </header>
+  <p className="text-sm text-slate-700 max-w-2xl">
+    Valeria analyse ton prompt, le note sur 20 (grille v{RUBRIC_VERSION}) et
+    propose des améliorations progressives pour atteindre un niveau
+    pédagogique élevé. Tu peux suivre l’évolution du score et décider
+    quand arrêter l’optimisation.
+  </p>
+
+  <p className="text-[12px] text-slate-500 max-w-2xl">
+    🔒 Valeria intègre en interne des garde-fous de qualité et de sécurité
+    inspirés des bonnes pratiques de gouvernance de l’IA (ISO/IEC 42001)
+    afin de limiter les dérives et améliorer la fiabilité des prompts.
+  </p>
+</header>
 
         {/* PARAMS */}
         <section className="bg-white border border-slate-200 rounded-2xl shadow-sm p-4 sm:p-5 space-y-4">
