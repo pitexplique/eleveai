@@ -16,7 +16,9 @@ import {
   School,
   Building2,
   BadgeCheck,
-  ShieldCheck, // ✅ NEW
+  ShieldCheck,
+  Brain, // ✅ NEW (Tutor)
+  FileText
 } from "lucide-react";
 
 type SidebarProps = {
@@ -199,6 +201,13 @@ export default function Sidebar({
         description: "Méthode encadrée • traces IA • progression réelle.",
         icon: <GraduationCap className="h-4 w-4 text-green-400" />,
       },
+      {
+        kind: "link",
+        href: "/tutor",
+        label: "Tutor",
+        description: "Tuteur adaptatif • diagnostic • progression.",
+        icon: <Brain className="h-4 w-4 text-purple-300" />,
+      },
 
       {
         kind: "divider",
@@ -221,6 +230,13 @@ export default function Sidebar({
         label: "Gouvernance IA (ISO/IEC 42001)",
         description: "Notre philosophie : supervision humaine, traçabilité, amélioration continue.",
         icon: <ShieldCheck className="h-4 w-4 text-emerald-300" />,
+      },
+      {
+        kind: "link",
+        href: "/tutor-developpement/iso",
+        label: "Tutor — ISO (développement)",
+        description: "Journal de conception : risques, contrôles, traçabilité.",
+        icon: <FileText className="h-4 w-4 text-emerald-200" />,
       },
     ],
     []

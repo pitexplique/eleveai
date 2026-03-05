@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { X, Image as ImageIcon, ShieldCheck, ClipboardCheck } from "lucide-react";
+import Link from "next/link";
+import { X, Brain, ShieldCheck } from "lucide-react";
 
 type DevBannerProps = {
   message?: string;
@@ -10,12 +11,11 @@ type DevBannerProps = {
 };
 
 export default function DevBanner({
-  message = "Valeria : qualité mesurable des ressources IA (pas seulement du prompt) — supervision humaine, traçabilité, amélioration continue (inspiré ISO/IEC 42001).",
-  storageKey = "eleveai_dev_banner_closed_v4",
+  message = "Nouveau : Tutor — tuteur adaptatif EleveAI. Diagnostic des notions, progression pas à pas et supervision pédagogique.",
+  storageKey = "eleveai_dev_banner_closed_v6",
   className = "",
 }: DevBannerProps) {
   const [open, setOpen] = useState(false);
-  const [showDetails, setShowDetails] = useState(false);
 
   useEffect(() => {
     try {
@@ -45,63 +45,51 @@ export default function DevBanner({
       role="status"
       aria-live="polite"
     >
-      <div className="mx-auto max-w-[1400px] space-y-2">
-        {/* Ligne principale */}
-        <div className="flex items-center justify-between gap-3">
-          <div className="flex items-center gap-2">
-            <ShieldCheck className="h-4 w-4 text-emerald-400" />
-            <p className="text-sm leading-snug font-medium tracking-wide">{message}</p>
-          </div>
+      <div className="mx-auto max-w-[1400px] flex items-center justify-between gap-3">
 
-          <div className="flex items-center gap-1">
-            {/* Bouton détails */}
-            <button
-              type="button"
-              onClick={() => setShowDetails((v) => !v)}
-              className="inline-flex h-8 items-center gap-1 rounded-full px-2 text-xs font-semibold
-                         hover:bg-slate-800 active:bg-slate-700 transition"
-              aria-label="Afficher la grille"
-              title="Voir la grille"
-            >
-              <ClipboardCheck className="h-4 w-4" />
-              Grille
-            </button>
-
-            {/* Bouton fermer */}
-            <button
-              type="button"
-              onClick={close}
-              className="inline-flex h-8 w-8 items-center justify-center rounded-full
-                         hover:bg-slate-800 active:bg-slate-700 transition"
-              aria-label="Fermer le bandeau"
-              title="Fermer"
-            >
-              <X className="h-4 w-4" />
-            </button>
-          </div>
+        {/* Message */}
+        <div className="flex items-center gap-2">
+          <Brain className="h-4 w-4 text-purple-400" />
+          <p className="text-sm leading-snug font-medium tracking-wide">
+            {message}
+          </p>
         </div>
 
-        {/* Détails */}
-        {showDetails && (
-          <div className="pt-2 space-y-2">
-            <div className="text-xs text-slate-300 leading-relaxed">
-              <div className="flex items-center gap-2">
-                <ImageIcon className="h-4 w-4" />
-                <span>
-                  Objectif : produire des ressources <span className="text-slate-100 font-semibold">exploitables en classe</span>
-                  (données, tâches, traces), avec validation humaine.
-                </span>
-              </div>
-            </div>
+        {/* Actions */}
+        <div className="flex items-center gap-2">
 
-            {/* Image (optionnel, en attendant une UI plus riche) */}
-            <img
-              src="/notationgpt.png"
-              alt="Grille / Détail de l'évaluation"
-              className="max-h-[240px] rounded-md border border-slate-700 shadow-sm"
-            />
-          </div>
-        )}
+          {/* Tutor */}
+          <Link
+            href="/tutor"
+            className="inline-flex h-8 items-center gap-1 rounded-full px-3 text-xs font-semibold
+                       bg-purple-600 hover:bg-purple-500 transition"
+          >
+            <Brain className="h-4 w-4" />
+            Essayer Tutor
+          </Link>
+
+          {/* Gouvernance */}
+          <Link
+            href="/tutor-developpement/iso"
+            className="inline-flex h-8 items-center gap-1 rounded-full px-3 text-xs font-semibold
+                       bg-emerald-700 hover:bg-emerald-600 transition"
+          >
+            <ShieldCheck className="h-4 w-4" />
+            Gouvernance
+          </Link>
+
+          {/* Fermer */}
+          <button
+            type="button"
+            onClick={close}
+            className="inline-flex h-8 w-8 items-center justify-center rounded-full
+                       hover:bg-slate-800 active:bg-slate-700 transition"
+            aria-label="Fermer le bandeau"
+          >
+            <X className="h-4 w-4" />
+          </button>
+
+        </div>
       </div>
     </div>
   );
