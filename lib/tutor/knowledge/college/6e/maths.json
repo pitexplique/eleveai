@@ -1,0 +1,129 @@
+{
+  "id": "college_6e_maths_v1",
+  "classe": "6e",
+  "matiere": "maths",
+  "bo_competences": [
+    { "boId": "C3_NUM", "label": "Nombres et calculs" },
+    { "boId": "C3_PROP", "label": "Proportionnalité (bases)" },
+    { "boId": "C3_GM", "label": "Grandeurs et mesures" },
+    { "boId": "C3_EG", "label": "Espace et géométrie" },
+    { "boId": "C3_DON", "label": "Organisation et gestion de données" }
+  ],
+  "notions": [
+    {
+      "id": "decimaux",
+      "label": "Nombres décimaux",
+      "boId": "C3_NUM",
+      "prerequis": [],
+      "microTargets": ["lire", "comparer", "placer_sur_droite"],
+      "levels": [1, 2, 3, 4, 5]
+    },
+    {
+      "id": "fractions",
+      "label": "Fractions",
+      "boId": "C3_NUM",
+      "prerequis": ["decimaux"],
+      "microTargets": ["partage", "ecriture", "comparer"],
+      "levels": [1, 2, 3, 4, 5]
+    },
+    {
+      "id": "priorites",
+      "label": "Priorités opératoires",
+      "boId": "C3_NUM",
+      "prerequis": [],
+      "microTargets": ["parentheses", "mult_avant_add", "calcul_mixte"],
+      "levels": [1, 2, 3, 4, 5]
+    },
+    {
+      "id": "unites",
+      "label": "Conversions d’unités",
+      "boId": "C3_GM",
+      "prerequis": [],
+      "microTargets": ["longueurs", "masses", "capacites", "temps"],
+      "levels": [1, 2, 3, 4, 5]
+    },
+    {
+      "id": "proportionnalite",
+      "label": "Proportionnalité",
+      "boId": "C3_PROP",
+      "prerequis": ["fractions", "unites"],
+      "microTargets": ["reconnaitre", "tableau", "coefficient"],
+      "levels": [1, 2, 3, 4, 5]
+    },
+    {
+      "id": "perimetre",
+      "label": "Périmètre",
+      "boId": "C3_GM",
+      "prerequis": [],
+      "microTargets": ["carre", "rectangle", "polygone"],
+      "levels": [1, 2, 3, 4, 5]
+    },
+    {
+      "id": "aires",
+      "label": "Aires",
+      "boId": "C3_GM",
+      "prerequis": ["perimetre"],
+      "microTargets": ["carre", "rectangle", "triangle"],
+      "levels": [1, 2, 3, 4, 5]
+    },
+    {
+      "id": "angles",
+      "label": "Angles",
+      "boId": "C3_EG",
+      "prerequis": [],
+      "microTargets": ["reconnaitre", "mesurer", "construire"],
+      "levels": [1, 2, 3, 4, 5]
+    },
+    {
+      "id": "symetrie",
+      "label": "Symétrie axiale",
+      "boId": "C3_EG",
+      "prerequis": [],
+      "microTargets": ["axe", "image_point", "image_figure"],
+      "levels": [1, 2, 3, 4, 5]
+    },
+    {
+      "id": "reperage",
+      "label": "Repérage / coordonnées",
+      "boId": "C3_EG",
+      "prerequis": [],
+      "microTargets": ["lire_coord", "placer_point"],
+      "levels": [1, 2, 3, 4, 5]
+    },
+    {
+      "id": "tableaux",
+      "label": "Lire un tableau / diagramme",
+      "boId": "C3_DON",
+      "prerequis": [],
+      "microTargets": ["lire_tableau", "lire_diagramme"],
+      "levels": [1, 2, 3, 4, 5]
+    },
+    {
+      "id": "moyenne",
+      "label": "Moyenne",
+      "boId": "C3_DON",
+      "prerequis": ["tableaux"],
+      "microTargets": ["addition", "division", "interpretation"],
+      "levels": [1, 2, 3, 4, 5]
+    }
+  ],
+  "questionTemplates": {
+    "basic": [
+      "Question très courte sur {notionLabel} (niveau {level}).",
+      "Si QCM: 3 choix maximum, un seul correct."
+    ],
+    "application": [
+      "Petit problème concret sur {notionLabel} (niveau {level}).",
+      "Une étape principale, réponse courte."
+    ],
+    "enigme": [
+      "Énigme logique courte sur {notionLabel} (niveau {level}).",
+      "Solution unique, texte bref."
+    ]
+  },
+  "styleProfiles": {
+    "dys": { "maxSentences": 2, "preferQcm": true, "shortLines": true, "allowHints": true },
+    "middle": { "maxSentences": 4, "preferQcm": false, "allowHints": true },
+    "challenge": { "maxSentences": 5, "preferQcm": false, "allowHints": false }
+  }
+}

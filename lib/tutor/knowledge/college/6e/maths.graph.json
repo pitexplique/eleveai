@@ -1,0 +1,24 @@
+{
+  "id": "college_6e_maths_graph_v1",
+  "nodes": [
+    "decimaux",
+    "fractions",
+    "priorites",
+    "unites",
+    "proportionnalite",
+    "perimetre",
+    "aires",
+    "angles",
+    "symetrie",
+    "reperage",
+    "tableaux",
+    "moyenne"
+  ],
+  "edges": [
+    { "from": "decimaux", "to": "fractions", "strength": "strong" },
+    { "from": "fractions", "to": "proportionnalite", "strength": "strong" },
+    { "from": "unites", "to": "proportionnalite", "strength": "medium" },
+    { "from": "perimetre", "to": "aires", "strength": "medium" },
+    { "from": "tableaux", "to": "moyenne", "strength": "medium" }
+  ]
+}
