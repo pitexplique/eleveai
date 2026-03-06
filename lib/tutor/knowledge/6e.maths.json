@@ -1,5 +1,5 @@
 {
-  "id": "6e_maths_v1",
+  "id": "6e_maths_micro_v1",
   "classe": "6e",
   "matiere": "maths",
   "bo_competences": [
@@ -14,7 +14,7 @@
       "label": "Nombres décimaux",
       "boId": "C3_NUM",
       "prerequis": [],
-      "microTargets": ["lire", "comparer", "écrire"],
+      "microTargets": ["decimal_compare", "decimal_write"],
       "levels": [1, 2, 3, 4, 5]
     },
     {
@@ -22,7 +22,7 @@
       "label": "Fractions",
       "boId": "C3_NUM",
       "prerequis": ["decimaux"],
-      "microTargets": ["partage", "écriture", "comparaison"],
+      "microTargets": ["fraction_read", "fraction_compare", "fraction_quantity"],
       "levels": [1, 2, 3, 4, 5]
     },
     {
@@ -30,7 +30,7 @@
       "label": "Proportionnalité",
       "boId": "C3_PROP",
       "prerequis": ["fractions"],
-      "microTargets": ["tableau", "coefficient", "situation"],
+      "microTargets": ["prop_table", "prop_unit", "prop_direct"],
       "levels": [1, 2, 3, 4, 5]
     },
     {
@@ -38,7 +38,7 @@
       "label": "Périmètre",
       "boId": "C3_GM",
       "prerequis": [],
-      "microTargets": ["carré", "rectangle", "polygone"],
+      "microTargets": ["perim_square", "perim_rectangle"],
       "levels": [1, 2, 3, 4, 5]
     },
     {
@@ -46,7 +46,7 @@
       "label": "Aires",
       "boId": "C3_GM",
       "prerequis": ["perimetre"],
-      "microTargets": ["carré", "rectangle"],
+      "microTargets": ["area_rectangle", "area_square"],
       "levels": [1, 2, 3, 4, 5]
     },
     {
@@ -54,8 +54,40 @@
       "label": "Angles",
       "boId": "C3_EG",
       "prerequis": [],
-      "microTargets": ["reconnaître", "mesurer"],
+      "microTargets": ["angle_right", "angle_compare"],
       "levels": [1, 2, 3, 4, 5]
     }
+  ],
+  "microSkills": [
+    { "id": "decimal_compare", "label": "Comparer des décimaux", "notionId": "decimaux", "boId": "C3_NUM", "prerequis": [] },
+    { "id": "decimal_write", "label": "Écrire un décimal", "notionId": "decimaux", "boId": "C3_NUM", "prerequis": [] },
+
+    { "id": "fraction_read", "label": "Lire une fraction", "notionId": "fractions", "boId": "C3_NUM", "prerequis": ["decimal_write"] },
+    { "id": "fraction_compare", "label": "Comparer des fractions", "notionId": "fractions", "boId": "C3_NUM", "prerequis": ["decimal_compare"] },
+    { "id": "fraction_quantity", "label": "Fraction d'une quantité", "notionId": "fractions", "boId": "C3_NUM", "prerequis": ["fraction_read"] },
+
+    { "id": "prop_table", "label": "Lire un tableau de proportionnalité", "notionId": "proportionnalite", "boId": "C3_PROP", "prerequis": ["fraction_read"] },
+    { "id": "prop_unit", "label": "Passer à l'unité", "notionId": "proportionnalite", "boId": "C3_PROP", "prerequis": ["fraction_quantity"] },
+    { "id": "prop_direct", "label": "Résoudre une situation simple", "notionId": "proportionnalite", "boId": "C3_PROP", "prerequis": ["prop_table", "prop_unit"] },
+
+    { "id": "perim_square", "label": "Périmètre d'un carré", "notionId": "perimetre", "boId": "C3_GM", "prerequis": [] },
+    { "id": "perim_rectangle", "label": "Périmètre d'un rectangle", "notionId": "perimetre", "boId": "C3_GM", "prerequis": [] },
+
+    { "id": "area_rectangle", "label": "Aire d'un rectangle", "notionId": "aires", "boId": "C3_GM", "prerequis": ["perim_rectangle"] },
+    { "id": "area_square", "label": "Aire d'un carré", "notionId": "aires", "boId": "C3_GM", "prerequis": ["perim_square"] },
+
+    { "id": "angle_right", "label": "Reconnaître un angle droit", "notionId": "angles", "boId": "C3_EG", "prerequis": [] },
+    { "id": "angle_compare", "label": "Comparer des angles", "notionId": "angles", "boId": "C3_EG", "prerequis": [] }
+  ],
+  "microGraph": [
+    { "from": "decimal_compare", "to": "fraction_compare", "strength": "strong" },
+    { "from": "decimal_write", "to": "fraction_read", "strength": "strong" },
+    { "from": "fraction_read", "to": "fraction_quantity", "strength": "strong" },
+    { "from": "fraction_read", "to": "prop_table", "strength": "medium" },
+    { "from": "fraction_quantity", "to": "prop_unit", "strength": "strong" },
+    { "from": "prop_table", "to": "prop_direct", "strength": "strong" },
+    { "from": "prop_unit", "to": "prop_direct", "strength": "strong" },
+    { "from": "perim_rectangle", "to": "area_rectangle", "strength": "strong" },
+    { "from": "perim_square", "to": "area_square", "strength": "strong" }
   ]
 }

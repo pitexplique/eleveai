@@ -11,7 +11,7 @@ type DevBannerProps = {
 };
 
 export default function DevBanner({
-  message = "Nouveau : Tutor — tuteur adaptatif EleveAI. Diagnostic des notions, progression pas à pas et supervision pédagogique.",
+  message = "En cours  : Tutor — tuteur adaptatif EleveAI. Diagnostic des notions, progression pas à pas et supervision pédagogique.",
   storageKey = "eleveai_dev_banner_closed_v6",
   className = "",
 }: DevBannerProps) {

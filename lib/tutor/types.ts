@@ -16,12 +16,12 @@ export type Notion = {
   levels: number[];
 };
 
-export type KnowledgePack = {
+export type MicroSkill = {
   id: string;
-  classe: string;
-  matiere: string;
-  bo_competences: BoCompetence[];
-  notions: Notion[];
+  label: string;
+  notionId: string;
+  boId: string;
+  prerequis: string[];
 };
 
 export type GraphEdge = {
@@ -30,15 +30,20 @@ export type GraphEdge = {
   strength: "strong" | "medium" | "weak";
 };
 
-export type KnowledgeGraph = {
+export type KnowledgePack = {
   id: string;
-  nodes: string[];
-  edges: GraphEdge[];
+  classe: string;
+  matiere: string;
+  bo_competences: BoCompetence[];
+  notions: Notion[];
+  microSkills: MicroSkill[];
+  microGraph: GraphEdge[];
 };
 
 export type TutorQuestion = {
   id: string;
   notionId: string;
+  microId: string;
   text: string;
   format: QuestionFormat;
   choices?: string[];
@@ -52,6 +57,7 @@ export type AuditEntry = {
   at: string;
   event: "start" | "turn";
   notionId: string;
+  microId: string;
   mode: TutorMode;
   difficulty: number;
   reason: string;
@@ -67,6 +73,7 @@ export type TutorSession = {
   style: StudentStyle;
   mode: TutorMode;
   notionFocus: string;
+  microFocus: string;
   difficulty: number;
   consecutiveErrors: number;
   consecutiveSuccess: number;
@@ -74,7 +81,7 @@ export type TutorSession = {
   recentQuestionIds: string[];
   masteryByNotion: MasteryMap;
   masteryByBo: MasteryMap;
+  masteryByMicro: MasteryMap;
   knowledgePackId: string;
-  graphId: string;
   audit: AuditEntry[];
 };

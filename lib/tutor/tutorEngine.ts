@@ -3,215 +3,40 @@ import { evaluateAnswer } from "@/lib/tutor/evaluator";
 import { appendAudit, guardFeedback } from "@/lib/tutor/governance";
 import { loadKnowledge } from "@/lib/tutor/loadKnowledge";
 import { initMastery, updateMastery } from "@/lib/tutor/mastery";
+import { buildQuestion } from "@/lib/tutor/questionBank";
 import { createSession, getSession, saveSession } from "@/lib/tutor/sessionStore";
 import type {
-  GraphEdge,
-  KnowledgeGraph,
   KnowledgePack,
-  Notion,
+  MicroSkill,
   StudentStyle,
-  TutorMode,
-  TutorQuestion,
   TutorSession,
 } from "@/lib/tutor/types";
-
-type QuestionVariant = {
-  text: string;
-  format: "short" | "qcm";
-  choices?: string[];
-  expected: string[];
-  hint?: string;
-};
 
 function findNotion(pack: KnowledgePack, notionId: string) {
   return pack.notions.find((n) => n.id === notionId) ?? pack.notions[0];
 }
 
-function getStrongPrereq(graph: KnowledgeGraph, notionId: string): string | null {
-  const strong = graph.edges.find((e) => e.to === notionId && e.strength === "strong");
-  if (strong) return strong.from;
-
-  const fallback = graph.edges.find((e) => e.to === notionId);
-  return fallback?.from ?? null;
+function findMicro(pack: KnowledgePack, microId: string) {
+  return pack.microSkills.find((m) => m.id === microId) ?? pack.microSkills[0];
 }
 
-function getQuestionVariants(notion: Notion, difficulty: number, style: StudentStyle, mode: TutorMode): QuestionVariant[] {
-  const isQcm = style === "dys";
-
-  if (notion.id === "fractions") {
-    if (difficulty <= 2) {
-      return [
-        {
-          text: "Quelle fraction représente 1 part sur 4 parts égales ?",
-          format: isQcm ? "qcm" : "short",
-          choices: isQcm ? ["1/2", "1/4", "4/1"] : undefined,
-          expected: ["1/4", "1 / 4"],
-          hint: "Le numérateur compte les parts prises."
-        },
-        {
-          text: "Un gâteau est partagé en 4 parts égales. Tu prends 1 part. Quelle fraction as-tu ?",
-          format: isQcm ? "qcm" : "short",
-          choices: isQcm ? ["1/3", "1/4", "2/4"] : undefined,
-          expected: ["1/4", "1 / 4"],
-          hint: "Une part sur quatre."
-        },
-        {
-          text: "Quelle fraction représente la moitié ?",
-          format: isQcm ? "qcm" : "short",
-          choices: isQcm ? ["1/2", "1/3", "2/5"] : undefined,
-          expected: ["1/2", "2/4", "0.5", "0,5"],
-          hint: "La moitié = deux parts égales."
-        }
-      ];
-    }
-
-    return [
-      {
-        text: "Compare 3/5 et 4/5 : lequel est le plus grand ?",
-        format: "short",
-        expected: ["4/5", "4 / 5", "4/5 est plus grand", "4/5 > 3/5"],
-        hint: "Même dénominateur : compare les numérateurs."
-      },
-      {
-        text: "Écris en décimal : 7/10",
-        format: "short",
-        expected: ["0,7", "0.7", "0,70", "0.70"],
-        hint: "7 dixièmes = 0,7."
-      }
-    ];
-  }
-
-  if (notion.id === "decimaux") {
-    return [
-      {
-        text: "Quel nombre est le plus grand : 0,7 ou 0,65 ?",
-        format: "short",
-        expected: ["0,7", "0.7"],
-        hint: "Compare d'abord les dixièmes."
-      },
-      {
-        text: "Écris en décimal : 3/4",
-        format: "short",
-        expected: ["0,75", "0.75", "3/4"],
-        hint: "3 quarts = 0,75."
-      },
-      {
-        text: "Quel nombre est le plus petit : 0,4 ou 0,8 ?",
-        format: isQcm ? "qcm" : "short",
-        choices: isQcm ? ["0,4", "0,8", "ils sont égaux"] : undefined,
-        expected: ["0,4", "0.4"],
-        hint: "Regarde les dixièmes."
-      }
-    ];
-  }
-
-  if (notion.id === "proportionnalite") {
-    return [
-      {
-        text: "4 cahiers coûtent 8 €. Combien coûtent 2 cahiers ?",
-        format: "short",
-        expected: ["4", "4 €", "4€"],
-        hint: "Si on divise par 2 le nombre de cahiers, on divise aussi le prix par 2."
-      },
-      {
-        text: "Complète : 3 bonbons → 6 €, donc 1 bonbon → ?",
-        format: "short",
-        expected: ["2", "2 €", "2€"],
-        hint: "Cherche le prix d'un seul bonbon."
-      }
-    ];
-  }
-
-  if (notion.id === "perimetre") {
-    return [
-      {
-        text: "Quel est le périmètre d’un carré de côté 5 cm ?",
-        format: "short",
-        expected: ["20", "20 cm", "20cm"],
-        hint: "Le périmètre d’un carré = 4 × côté."
-      },
-      {
-        text: "Un rectangle mesure 3 cm sur 7 cm. Quel est son périmètre ?",
-        format: "short",
-        expected: ["20", "20 cm", "20cm"],
-        hint: "2 × longueur + 2 × largeur."
-      }
-    ];
-  }
-
-  if (notion.id === "aires") {
-    return [
-      {
-        text: "Quelle est l’aire d’un rectangle de 4 cm sur 3 cm ?",
-        format: "short",
-        expected: ["12", "12 cm²", "12 cm2", "12cm²", "12cm2"],
-        hint: "Aire = longueur × largeur."
-      },
-      {
-        text: "Quelle est l’aire d’un carré de côté 5 cm ?",
-        format: "short",
-        expected: ["25", "25 cm²", "25 cm2", "25cm²", "25cm2"],
-        hint: "Aire du carré = côté × côté."
-      }
-    ];
-  }
-
-  if (notion.id === "angles") {
-    return [
-      {
-        text: "Un angle droit mesure combien de degrés ?",
-        format: isQcm ? "qcm" : "short",
-        choices: isQcm ? ["45", "90", "180"] : undefined,
-        expected: ["90", "90°"],
-        hint: "L’angle droit correspond au coin d’un carré."
-      },
-      {
-        text: "Quel est le plus grand : 30° ou 80° ?",
-        format: "short",
-        expected: ["80", "80°"],
-        hint: "Compare simplement les nombres."
-      }
-    ];
-  }
-
-  return [
-    {
-      text: `Question courte sur ${notion.label}.`,
-      format: "short",
-      expected: ["ok"],
-      hint: mode === "coaching" ? "Décris une première étape de raisonnement." : undefined
-    }
-  ];
+function getMicroForNotion(pack: KnowledgePack, notionId: string) {
+  return pack.microSkills.filter((m) => m.notionId === notionId);
 }
 
-function chooseVariant(
-  notion: Notion,
-  difficulty: number,
-  style: StudentStyle,
-  mode: TutorMode,
-  recentQuestionIds: string[]
-): TutorQuestion {
-  const variants = getQuestionVariants(notion, difficulty, style, mode);
+function selectWeakestMicroInNotion(pack: KnowledgePack, notionId: string, masteryByMicro: Record<string, number>) {
+  const micros = getMicroForNotion(pack, notionId);
+  return (
+    micros.sort((a, b) => (masteryByMicro[a.id] ?? 50) - (masteryByMicro[b.id] ?? 50))[0] ??
+    pack.microSkills[0]
+  );
+}
 
-  let selectedIndex = 0;
-  for (let i = 0; i < variants.length; i++) {
-    const candidateId = `${notion.id}-${difficulty}-${i}`;
-    if (!recentQuestionIds.includes(candidateId)) {
-      selectedIndex = i;
-      break;
-    }
-  }
-
-  const selected = variants[selectedIndex];
-  return {
-    id: `${notion.id}-${difficulty}-${selectedIndex}`,
-    notionId: notion.id,
-    text: selected.text,
-    format: selected.format,
-    choices: selected.choices,
-    expected: selected.expected,
-    hint: selected.hint
-  };
+function selectStrongPrereqMicro(pack: KnowledgePack, microId: string) {
+  const target = findMicro(pack, microId);
+  const prereqIds = target.prerequis ?? [];
+  if (prereqIds.length === 0) return null;
+  return findMicro(pack, prereqIds[0]);
 }
 
 export async function startTutorSession(input: {
@@ -220,9 +45,10 @@ export async function startTutorSession(input: {
   notion: string;
   style: StudentStyle;
 }) {
-  const { pack, graph } = await loadKnowledge(input.classe, input.matiere);
+  const pack = await loadKnowledge(input.classe, input.matiere);
   const notion = findNotion(pack, input.notion);
   const mastery = initMastery(pack);
+  const firstMicro = selectWeakestMicroInNotion(pack, notion.id, mastery.micro);
 
   const session: TutorSession = createSession({
     id: randomUUID(),
@@ -233,18 +59,26 @@ export async function startTutorSession(input: {
     style: input.style,
     mode: "evaluation",
     notionFocus: notion.id,
+    microFocus: firstMicro.id,
     difficulty: 2,
     consecutiveErrors: 0,
     consecutiveSuccess: 0,
     masteryByNotion: mastery.notion,
     masteryByBo: mastery.bo,
+    masteryByMicro: mastery.micro,
     knowledgePackId: pack.id,
-    graphId: graph.id,
     audit: [],
-    recentQuestionIds: []
+    recentQuestionIds: [],
   });
 
-  const question = chooseVariant(notion, session.difficulty, session.style, session.mode, session.recentQuestionIds);
+  const question = buildQuestion({
+    micro: firstMicro,
+    notionId: notion.id,
+    style: session.style,
+    mode: session.mode,
+    recentQuestionIds: session.recentQuestionIds,
+  });
+
   session.lastQuestion = question;
   session.recentQuestionIds = [question.id];
 
@@ -252,10 +86,11 @@ export async function startTutorSession(input: {
     at: new Date().toISOString(),
     event: "start",
     notionId: notion.id,
+    microId: firstMicro.id,
     mode: session.mode,
     difficulty: session.difficulty,
-    reason: "session_start",
-    flags: []
+    reason: "session_start_weakest_micro",
+    flags: [],
   });
 
   saveSession(session);
@@ -266,9 +101,10 @@ export async function startTutorSession(input: {
     notionCatalog: pack.notions.map((n) => ({ id: n.id, label: n.label })),
     mastery: {
       boMastery: session.masteryByBo,
-      notionMastery: session.masteryByNotion
+      notionMastery: session.masteryByNotion,
+      microMastery: session.masteryByMicro,
     },
-    mode: session.mode
+    mode: session.mode,
   };
 }
 
@@ -278,14 +114,16 @@ export async function handleTutorMessage(input: { sessionId: string; answer: str
     throw new Error("Session introuvable ou expirée.");
   }
 
-  const { pack, graph } = await loadKnowledge(session.classe, session.matiere);
-  const currentNotion = findNotion(pack, session.notionFocus);
+  const pack = await loadKnowledge(session.classe, session.matiere);
 
-  const currentQuestion =
-    session.lastQuestion ??
-    chooseVariant(currentNotion, session.difficulty, session.style, session.mode, session.recentQuestionIds);
+  const currentQuestion = session.lastQuestion;
+  if (!currentQuestion) {
+    throw new Error("Question introuvable.");
+  }
 
   const result = evaluateAnswer(currentQuestion, input.answer);
+  const currentMicro = findMicro(pack, currentQuestion.microId);
+  const currentNotion = findNotion(pack, currentQuestion.notionId);
 
   if (result.ok) {
     session.consecutiveSuccess += 1;
@@ -295,44 +133,52 @@ export async function handleTutorMessage(input: { sessionId: string; answer: str
     session.consecutiveSuccess = 0;
   }
 
-  let reason = "continue_same_notion";
+  updateMastery({
+    notionMastery: session.masteryByNotion,
+    boMastery: session.masteryByBo,
+    microMastery: session.masteryByMicro,
+    notionId: currentNotion.id,
+    boId: currentNotion.boId,
+    microId: currentMicro.id,
+    ok: result.ok,
+  });
 
-  if (session.consecutiveErrors >= 2) {
+  let nextMicro = currentMicro;
+  let nextNotion = currentNotion;
+  let reason = "continue_same_micro";
+
+  if (!result.ok && session.consecutiveErrors >= 2) {
     session.mode = "coaching";
-    session.difficulty = Math.max(1, session.difficulty - 1);
+    const prereq = selectStrongPrereqMicro(pack, currentMicro.id);
 
-    const prereq = getStrongPrereq(graph, session.notionFocus);
     if (prereq) {
-      session.notionFocus = prereq;
-      reason = "fallback_to_strong_prereq";
+      nextMicro = prereq;
+      nextNotion = findNotion(pack, prereq.notionId);
+      session.microFocus = prereq.id;
+      session.notionFocus = prereq.notionId;
+      reason = "fallback_to_prereq_micro";
     } else {
-      reason = "coaching_same_notion";
+      reason = "coaching_same_micro";
     }
-  } else if (session.consecutiveSuccess >= 2) {
+  } else if (result.ok && session.consecutiveSuccess >= 2) {
     if (session.mode === "coaching") {
       session.mode = "evaluation";
       reason = "return_to_evaluation";
+    } else {
+      const weakest = selectWeakestMicroInNotion(pack, session.notionFocus, session.masteryByMicro);
+      nextMicro = weakest;
+      session.microFocus = weakest.id;
+      reason = "refresh_weakest_micro_in_notion";
     }
-    session.difficulty = Math.min(5, session.difficulty + 1);
   }
 
-  const notionUsedForMastery = findNotion(pack, currentQuestion.notionId);
-  updateMastery(
-    session.masteryByNotion,
-    session.masteryByBo,
-    notionUsedForMastery.id,
-    notionUsedForMastery.boId,
-    result.ok
-  );
-
-  const nextNotion = findNotion(pack, session.notionFocus);
-  const nextQuestion = chooseVariant(
-    nextNotion,
-    session.difficulty,
-    session.style,
-    session.mode,
-    session.recentQuestionIds
-  );
+  const nextQuestion = buildQuestion({
+    micro: nextMicro,
+    notionId: nextNotion.id,
+    style: session.style,
+    mode: session.mode,
+    recentQuestionIds: session.recentQuestionIds,
+  });
 
   session.lastQuestion = nextQuestion;
   session.updatedAt = Date.now();
@@ -344,11 +190,12 @@ export async function handleTutorMessage(input: { sessionId: string; answer: str
   appendAudit(session, {
     at: new Date().toISOString(),
     event: "turn",
-    notionId: session.notionFocus,
+    notionId: nextNotion.id,
+    microId: nextMicro.id,
     mode: session.mode,
     difficulty: session.difficulty,
     reason,
-    flags
+    flags,
   });
 
   saveSession(session);
@@ -359,8 +206,9 @@ export async function handleTutorMessage(input: { sessionId: string; answer: str
     nextQuestion,
     mastery: {
       boMastery: session.masteryByBo,
-      notionMastery: session.masteryByNotion
+      notionMastery: session.masteryByNotion,
+      microMastery: session.masteryByMicro,
     },
-    mode: session.mode
+    mode: session.mode,
   };
 }

@@ -2,20 +2,24 @@
 
 import { useMemo, useState } from "react";
 
+type TutorQuestion = {
+  id: string;
+  notionId: string;
+  microId: string;
+  text: string;
+  format: "short" | "qcm";
+  choices?: string[];
+  hint?: string;
+};
+
 type StartResponse = {
   sessionId: string;
-  question: {
-    id: string;
-    notionId: string;
-    text: string;
-    format: "short" | "qcm";
-    choices?: string[];
-    hint?: string;
-  };
+  question: TutorQuestion;
   notionCatalog: Array<{ id: string; label: string }>;
   mastery: {
     boMastery: Record<string, number>;
     notionMastery: Record<string, number>;
+    microMastery: Record<string, number>;
   };
   mode: "evaluation" | "coaching";
 };
@@ -23,17 +27,11 @@ type StartResponse = {
 type MessageResponse = {
   feedback: string;
   result: { ok: boolean; flags: string[] };
-  nextQuestion: {
-    id: string;
-    notionId: string;
-    text: string;
-    format: "short" | "qcm";
-    choices?: string[];
-    hint?: string;
-  };
+  nextQuestion: TutorQuestion;
   mastery: {
     boMastery: Record<string, number>;
     notionMastery: Record<string, number>;
+    microMastery: Record<string, number>;
   };
   mode: "evaluation" | "coaching";
 };
@@ -45,21 +43,26 @@ export default function TutorPage() {
   const [notion, setNotion] = useState("fractions");
 
   const [sessionId, setSessionId] = useState<string | null>(null);
-  const [question, setQuestion] = useState<StartResponse["question"] | null>(null);
+  const [question, setQuestion] = useState<TutorQuestion | null>(null);
   const [feedback, setFeedback] = useState("");
   const [answer, setAnswer] = useState("");
   const [mode, setMode] = useState<"evaluation" | "coaching">("evaluation");
+
   const [notionCatalog, setNotionCatalog] = useState<Array<{ id: string; label: string }>>([]);
   const [boMastery, setBoMastery] = useState<Record<string, number>>({});
   const [notionMastery, setNotionMastery] = useState<Record<string, number>>({});
+  const [microMastery, setMicroMastery] = useState<Record<string, number>>({});
+  const [turnCount, setTurnCount] = useState(0);
 
-  const notionLabel = useMemo(() => {
-    return notionCatalog.find((n) => n.id === notion)?.label ?? notion;
-  }, [notionCatalog, notion]);
+  const notionLabel = useMemo(
+    () => notionCatalog.find((n) => n.id === notion)?.label ?? notion,
+    [notionCatalog, notion]
+  );
 
   async function startTutor() {
     setFeedback("");
     setAnswer("");
+    setTurnCount(0);
 
     const res = await fetch("/api/tutor/start", {
       method: "POST",
@@ -78,6 +81,7 @@ export default function TutorPage() {
     setNotionCatalog(data.notionCatalog);
     setBoMastery(data.mastery.boMastery);
     setNotionMastery(data.mastery.notionMastery);
+    setMicroMastery(data.mastery.microMastery);
     setMode(data.mode);
   }
 
@@ -100,20 +104,22 @@ export default function TutorPage() {
     setQuestion(data.nextQuestion);
     setBoMastery(data.mastery.boMastery);
     setNotionMastery(data.mastery.notionMastery);
+    setMicroMastery(data.mastery.microMastery);
     setMode(data.mode);
     setAnswer("");
+    setTurnCount((n) => n + 1);
   }
 
   return (
     <main className="min-h-screen bg-slate-50 px-4 py-8">
-      <div className="mx-auto max-w-5xl space-y-6">
+      <div className="mx-auto max-w-6xl space-y-6">
         <header className="space-y-2">
           <div className="inline-flex rounded-full bg-sky-100 px-3 py-1 text-xs font-semibold text-sky-900">
-            Tutor V1 — graphe + moteur déterministe
+            Tutor V1 — micro-compétences + graphe
           </div>
           <h1 className="text-3xl font-extrabold text-slate-900">Tuteur IA — EleveAI</h1>
           <p className="text-sm text-slate-700">
-            L’élève choisit une notion. Le tutor démarre avec cette notion, puis revient sur les prérequis si nécessaire.
+            Le tuteur travaille une notion, détecte une micro-compétence faible, puis revient sur les prérequis si nécessaire.
           </p>
         </header>
 
@@ -172,21 +178,33 @@ export default function TutorPage() {
           </div>
         </section>
 
-        <div>
+        <div className="flex flex-wrap items-center gap-3">
           <button
             onClick={startTutor}
             className="rounded-xl bg-sky-700 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-sky-600"
           >
             Démarrer le tutor
           </button>
+
+          <div className="rounded-full bg-white px-3 py-1 text-xs font-semibold text-slate-700 shadow-sm ring-1 ring-slate-200">
+            Mini-séance : {turnCount}/5
+          </div>
         </div>
 
         <section className="grid gap-6 md:grid-cols-[2fr_1fr]">
           <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-            <div className="mb-3 flex items-center justify-between">
-              <div className="text-sm font-semibold text-slate-800">
-                {question ? `Notion en cours : ${notionLabel}` : "En attente de démarrage"}
+            <div className="mb-3 flex items-center justify-between gap-3">
+              <div className="space-y-1">
+                <div className="text-sm font-semibold text-slate-800">
+                  {question ? `Notion en cours : ${notionLabel}` : "En attente de démarrage"}
+                </div>
+                {question ? (
+                  <div className="text-xs text-slate-500">
+                    Micro-compétence : <span className="font-semibold">{question.microId}</span>
+                  </div>
+                ) : null}
               </div>
+
               <div
                 className={`rounded-full px-3 py-1 text-xs font-semibold ${
                   mode === "evaluation"
@@ -245,6 +263,15 @@ export default function TutorPage() {
                     {feedback}
                   </div>
                 ) : null}
+
+                {turnCount >= 5 ? (
+                  <div className="rounded-xl border border-emerald-200 bg-emerald-50 p-4 text-sm">
+                    <p className="font-semibold text-emerald-800">Mini-séance terminée</p>
+                    <p className="mt-1 text-emerald-700">
+                      Tu peux recommencer pour continuer à progresser sur cette notion.
+                    </p>
+                  </div>
+                ) : null}
               </div>
             ) : (
               <div className="rounded-xl border border-slate-200 bg-slate-50 p-4 text-sm text-slate-600 shadow-sm">
@@ -258,18 +285,7 @@ export default function TutorPage() {
               <h2 className="mb-3 text-sm font-bold text-slate-900">BO mastery</h2>
               <div className="space-y-3">
                 {Object.entries(boMastery).map(([key, value]) => (
-                  <div key={key}>
-                    <div className="mb-1 flex justify-between text-xs text-slate-700">
-                      <span>{key}</span>
-                      <span>{Math.round(value)}</span>
-                    </div>
-                    <div className="h-2 rounded-full bg-slate-100">
-                      <div
-                        className="h-2 rounded-full bg-sky-500"
-                        style={{ width: `${Math.max(0, Math.min(100, value))}%` }}
-                      />
-                    </div>
-                  </div>
+                  <Bar key={key} label={key} value={value} color="bg-sky-500" />
                 ))}
               </div>
             </div>
@@ -278,18 +294,16 @@ export default function TutorPage() {
               <h2 className="mb-3 text-sm font-bold text-slate-900">Notion mastery</h2>
               <div className="space-y-3">
                 {Object.entries(notionMastery).map(([key, value]) => (
-                  <div key={key}>
-                    <div className="mb-1 flex justify-between text-xs text-slate-700">
-                      <span>{key}</span>
-                      <span>{Math.round(value)}</span>
-                    </div>
-                    <div className="h-2 rounded-full bg-slate-100">
-                      <div
-                        className="h-2 rounded-full bg-emerald-500"
-                        style={{ width: `${Math.max(0, Math.min(100, value))}%` }}
-                      />
-                    </div>
-                  </div>
+                  <Bar key={key} label={key} value={value} color="bg-emerald-500" />
+                ))}
+              </div>
+            </div>
+
+            <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+              <h2 className="mb-3 text-sm font-bold text-slate-900">Micro mastery</h2>
+              <div className="max-h-80 space-y-3 overflow-auto">
+                {Object.entries(microMastery).map(([key, value]) => (
+                  <Bar key={key} label={key} value={value} color="bg-violet-500" />
                 ))}
               </div>
             </div>
@@ -297,5 +311,30 @@ export default function TutorPage() {
         </section>
       </div>
     </main>
+  );
+}
+
+function Bar({
+  label,
+  value,
+  color,
+}: {
+  label: string;
+  value: number;
+  color: string;
+}) {
+  return (
+    <div>
+      <div className="mb-1 flex justify-between text-xs text-slate-700">
+        <span>{label}</span>
+        <span>{Math.round(value)}</span>
+      </div>
+      <div className="h-2 rounded-full bg-slate-100">
+        <div
+          className={`h-2 rounded-full ${color}`}
+          style={{ width: `${Math.max(0, Math.min(100, value))}%` }}
+        />
+      </div>
+    </div>
   );
 }
