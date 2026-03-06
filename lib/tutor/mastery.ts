@@ -15,7 +15,7 @@ export function updateMastery(
   boMastery: MasteryMap,
   notionId: string,
   boId: string,
-  ok: boolean,
+  ok: boolean
 ) {
   const delta = ok ? 8 : -10;
   notionMastery[notionId] = Math.max(0, Math.min(100, (notionMastery[notionId] ?? 50) + delta));

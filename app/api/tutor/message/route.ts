@@ -1,16 +1,23 @@
+export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
+
 import { NextResponse } from "next/server";
-import { handleTutorMessage } from "@/lib/tutor/engine/tutorEngine";
+import { handleTutorMessage } from "@/lib/tutor/tutorEngine";
 
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    const data = await handleTutorMessage({
-      sessionId: String(body?.sessionId || ""),
-      answer: String(body?.answer || ""),
+
+    const result = await handleTutorMessage({
+      sessionId: body.sessionId,
+      answer: body.answer,
     });
 
-    return NextResponse.json(data);
+    return NextResponse.json(result);
   } catch (error) {
-    return NextResponse.json({ error: error instanceof Error ? error.message : "Erreur message tutor." }, { status: 400 });
+    return NextResponse.json(
+      { error: error instanceof Error ? error.message : "Erreur tutor message." },
+      { status: 500 }
+    );
   }
 }

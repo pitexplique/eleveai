@@ -1,0 +1,16 @@
+{
+  "id": "6e_maths_graph_v1",
+  "nodes": [
+    "decimaux",
+    "fractions",
+    "proportionnalite",
+    "perimetre",
+    "aires",
+    "angles"
+  ],
+  "edges": [
+    { "from": "decimaux", "to": "fractions", "strength": "strong" },
+    { "from": "fractions", "to": "proportionnalite", "strength": "strong" },
+    { "from": "perimetre", "to": "aires", "strength": "strong" }
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "id": "6e_maths_v1",
+  "classe": "6e",
+  "matiere": "maths",
+  "bo_competences": [
+    { "boId": "C3_NUM", "label": "Nombres et calculs" },
+    { "boId": "C3_PROP", "label": "Proportionnalité" },
+    { "boId": "C3_GM", "label": "Grandeurs et mesures" },
+    { "boId": "C3_EG", "label": "Espace et géométrie" }
+  ],
+  "notions": [
+    {
+      "id": "decimaux",
+      "label": "Nombres décimaux",
+      "boId": "C3_NUM",
+      "prerequis": [],
+      "microTargets": ["lire", "comparer", "écrire"],
+      "levels": [1, 2, 3, 4, 5]
+    },
+    {
+      "id": "fractions",
+      "label": "Fractions",
+      "boId": "C3_NUM",
+      "prerequis": ["decimaux"],
+      "microTargets": ["partage", "écriture", "comparaison"],
+      "levels": [1, 2, 3, 4, 5]
+    },
+    {
+      "id": "proportionnalite",
+      "label": "Proportionnalité",
+      "boId": "C3_PROP",
+      "prerequis": ["fractions"],
+      "microTargets": ["tableau", "coefficient", "situation"],
+      "levels": [1, 2, 3, 4, 5]
+    },
+    {
+      "id": "perimetre",
+      "label": "Périmètre",
+      "boId": "C3_GM",
+      "prerequis": [],
+      "microTargets": ["carré", "rectangle", "polygone"],
+      "levels": [1, 2, 3, 4, 5]
+    },
+    {
+      "id": "aires",
+      "label": "Aires",
+      "boId": "C3_GM",
+      "prerequis": ["perimetre"],
+      "microTargets": ["carré", "rectangle"],
+      "levels": [1, 2, 3, 4, 5]
+    },
+    {
+      "id": "angles",
+      "label": "Angles",
+      "boId": "C3_EG",
+      "prerequis": [],
+      "microTargets": ["reconnaître", "mesurer"],
+      "levels": [1, 2, 3, 4, 5]
+    }
+  ]
+}
