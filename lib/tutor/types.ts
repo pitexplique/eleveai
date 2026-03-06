@@ -1,6 +1,12 @@
 export type StudentStyle = "dys" | "middle" | "challenge";
 export type TutorMode = "evaluation" | "coaching";
 export type QuestionFormat = "short" | "qcm";
+export type ComparatorName =
+  | "exact_text"
+  | "mcq_exact"
+  | "number_equal"
+  | "fraction_decimal_equivalent"
+  | "contains_keyword";
 
 export type BoCompetence = {
   boId: string;
@@ -40,6 +46,19 @@ export type KnowledgePack = {
   microGraph: GraphEdge[];
 };
 
+export type QuestionDefinition = {
+  id: string;
+  notionId: string;
+  microId: string;
+  difficulty: number;
+  format: QuestionFormat;
+  text: string;
+  choices?: string[];
+  expected: string[];
+  comparator: ComparatorName;
+  hint?: string;
+};
+
 export type TutorQuestion = {
   id: string;
   notionId: string;
@@ -48,6 +67,7 @@ export type TutorQuestion = {
   format: QuestionFormat;
   choices?: string[];
   expected: string[];
+  comparator: ComparatorName;
   hint?: string;
 };
 

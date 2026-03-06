@@ -115,35 +115,35 @@ export default function TutorPage() {
       <div className="mx-auto max-w-6xl space-y-6">
         <header className="space-y-2">
           <div className="inline-flex rounded-full bg-sky-100 px-3 py-1 text-xs font-semibold text-sky-900">
-            Tutor V1 — micro-compétences + graphe
+            Tutor V2 — session adaptative
           </div>
           <h1 className="text-3xl font-extrabold text-slate-900">Tuteur IA — EleveAI</h1>
           <p className="text-sm text-slate-700">
-            Le tuteur travaille une notion, détecte une micro-compétence faible, puis revient sur les prérequis si nécessaire.
+            Le tuteur travaille une notion, cible une micro-compétence et revient sur un prérequis si nécessaire.
           </p>
         </header>
 
         <section className="grid gap-4 md:grid-cols-4">
-          <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
-            <label className="mb-2 block text-xs font-semibold text-slate-600">Classe</label>
+          <Card>
+            <Label>Classe</Label>
             <input
               value={classe}
               disabled
               className="w-full rounded-xl border border-slate-300 bg-slate-100 px-3 py-2 text-sm text-slate-700 shadow-sm"
             />
-          </div>
+          </Card>
 
-          <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
-            <label className="mb-2 block text-xs font-semibold text-slate-600">Matière</label>
+          <Card>
+            <Label>Matière</Label>
             <input
               value={matiere}
               disabled
               className="w-full rounded-xl border border-slate-300 bg-slate-100 px-3 py-2 text-sm text-slate-700 shadow-sm"
             />
-          </div>
+          </Card>
 
-          <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
-            <label className="mb-2 block text-xs font-semibold text-slate-600">Profil</label>
+          <Card>
+            <Label>Profil</Label>
             <select
               value={style}
               onChange={(e) => setStyle(e.target.value as "dys" | "middle" | "challenge")}
@@ -153,10 +153,10 @@ export default function TutorPage() {
               <option value="middle">Standard</option>
               <option value="challenge">Challenge</option>
             </select>
-          </div>
+          </Card>
 
-          <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
-            <label className="mb-2 block text-xs font-semibold text-slate-600">Notion</label>
+          <Card>
+            <Label>Notion</Label>
             <select
               value={notion}
               onChange={(e) => setNotion(e.target.value)}
@@ -175,7 +175,7 @@ export default function TutorPage() {
                 </option>
               ))}
             </select>
-          </div>
+          </Card>
         </section>
 
         <div className="flex flex-wrap items-center gap-3">
@@ -281,32 +281,9 @@ export default function TutorPage() {
           </div>
 
           <div className="space-y-4">
-            <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
-              <h2 className="mb-3 text-sm font-bold text-slate-900">BO mastery</h2>
-              <div className="space-y-3">
-                {Object.entries(boMastery).map(([key, value]) => (
-                  <Bar key={key} label={key} value={value} color="bg-sky-500" />
-                ))}
-              </div>
-            </div>
-
-            <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
-              <h2 className="mb-3 text-sm font-bold text-slate-900">Notion mastery</h2>
-              <div className="space-y-3">
-                {Object.entries(notionMastery).map(([key, value]) => (
-                  <Bar key={key} label={key} value={value} color="bg-emerald-500" />
-                ))}
-              </div>
-            </div>
-
-            <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
-              <h2 className="mb-3 text-sm font-bold text-slate-900">Micro mastery</h2>
-              <div className="max-h-80 space-y-3 overflow-auto">
-                {Object.entries(microMastery).map(([key, value]) => (
-                  <Bar key={key} label={key} value={value} color="bg-violet-500" />
-                ))}
-              </div>
-            </div>
+            <ScoreCard title="BO mastery" data={boMastery} color="bg-sky-500" />
+            <ScoreCard title="Notion mastery" data={notionMastery} color="bg-emerald-500" />
+            <ScoreCard title="Micro mastery" data={microMastery} color="bg-violet-500" scroll />
           </div>
         </section>
       </div>
@@ -314,26 +291,43 @@ export default function TutorPage() {
   );
 }
 
-function Bar({
-  label,
-  value,
+function Card({ children }: { children: React.ReactNode }) {
+  return <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">{children}</div>;
+}
+
+function Label({ children }: { children: React.ReactNode }) {
+  return <label className="mb-2 block text-xs font-semibold text-slate-600">{children}</label>;
+}
+
+function ScoreCard({
+  title,
+  data,
   color,
+  scroll,
 }: {
-  label: string;
-  value: number;
+  title: string;
+  data: Record<string, number>;
   color: string;
+  scroll?: boolean;
 }) {
   return (
-    <div>
-      <div className="mb-1 flex justify-between text-xs text-slate-700">
-        <span>{label}</span>
-        <span>{Math.round(value)}</span>
-      </div>
-      <div className="h-2 rounded-full bg-slate-100">
-        <div
-          className={`h-2 rounded-full ${color}`}
-          style={{ width: `${Math.max(0, Math.min(100, value))}%` }}
-        />
+    <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+      <h2 className="mb-3 text-sm font-bold text-slate-900">{title}</h2>
+      <div className={scroll ? "max-h-80 space-y-3 overflow-auto" : "space-y-3"}>
+        {Object.entries(data).map(([key, value]) => (
+          <div key={key}>
+            <div className="mb-1 flex justify-between text-xs text-slate-700">
+              <span>{key}</span>
+              <span>{Math.round(value)}</span>
+            </div>
+            <div className="h-2 rounded-full bg-slate-100">
+              <div
+                className={`h-2 rounded-full ${color}`}
+                style={{ width: `${Math.max(0, Math.min(100, value))}%` }}
+              />
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );

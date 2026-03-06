@@ -2,7 +2,7 @@ export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 import { NextResponse } from "next/server";
-import { startTutorSession } from "@/lib/tutor/tutorEngine";
+import { startTutorSession } from "@/lib/tutor/engine/tutorEngine";
 
 export async function POST(req: Request) {
   try {
