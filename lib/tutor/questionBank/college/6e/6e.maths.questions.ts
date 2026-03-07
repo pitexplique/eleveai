@@ -1,4 +1,17 @@
-import type { QuestionDefinition, StudentStyle, TutorMode, TutorQuestion } from "@/lib/tutor/types";
+import type { ComparatorName, QuestionFormat, StudentStyle, TutorMode, TutorQuestion } from "@/lib/tutor/types";
+
+type QuestionDefinition = {
+  id: string;
+  notionId: string;
+  microId: string;
+  difficulty: number;
+  format: QuestionFormat;
+  text: string;
+  expected: string[];
+  comparator: ComparatorName;
+  choices?: string[];
+  hint?: string;
+};
 
 export const questions6eMaths: QuestionDefinition[] = [
   {

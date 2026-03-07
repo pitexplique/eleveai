@@ -1,64 +1,29 @@
-import type { BankItem, TutorMode, TutorQuestion } from "@/lib/tutor/types";
-import { materializeBankItem } from "@/lib/tutor/generation/templateEngine";
-import { decimauxBank } from "./decimaux.bank";
-import { fractionsBank } from "./fractions.bank";
-import { proportionnaliteBank } from "./proportionnalite.bank";
-import { perimetreBank } from "./perimetre.bank";
-import { airesBank } from "./aires.bank";
-import { anglesBank } from "./angles.bank";
+import type { AuditEntry, TutorMode, TutorSession } from "@/lib/tutor/types";
 
-export const bank6eMaths: BankItem[] = [
-  ...decimauxBank,
-  ...fractionsBank,
-  ...proportionnaliteBank,
-  ...perimetreBank,
-  ...airesBank,
-  ...anglesBank,
-];
+const solutionPatterns = [/la bonne réponse est/i, /réponse\s*:\s*/i, /il faut écrire/i];
 
-export function buildQuestionFromBank(args: {
-  questions: BankItem[];
-  notionId: string;
-  microId: string;
-  difficulty: number;
-  style: "dys" | "middle" | "challenge";
-  mode: TutorMode;
-  recentQuestionIds: string[];
-}): TutorQuestion {
-  let candidates = args.questions.filter(
-    (q) => q.notionId === args.notionId && q.microId === args.microId
-  );
+export function sanitizeText(text: string): string {
+  return text
+    .replace(/[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/gi, "[email-masked]")
+    .replace(/(?:\+33|0)\s*[1-9](?:[\s.-]*\d{2}){4}/g, "[phone-masked]");
+}
 
-  if (candidates.length === 0) {
-    candidates = args.questions.filter((q) => q.microId === args.microId);
-  }
+export function guardFeedback(text: string, mode: TutorMode): { text: string; flags: string[] } {
+  const sanitized = sanitizeText(text);
+  const flags: string[] = [];
 
-  if (candidates.length === 0) {
-    candidates = args.questions;
-  }
-
-  const fixedFirst = candidates.sort((a, b) => {
-    if (a.kind === "fixed" && b.kind === "template") return -1;
-    if (a.kind === "template" && b.kind === "fixed") return 1;
-    return 0;
-  });
-
-  const notRecentlyUsed = fixedFirst.filter((q) => !args.recentQuestionIds.includes(q.id));
-  const pool = notRecentlyUsed.length > 0 ? notRecentlyUsed : fixedFirst;
-  const picked = pool[0];
-
-  const materialized = materializeBankItem({
-    item: picked,
-    mode: args.mode,
-  });
-
-  if (args.style === "dys" && materialized.format === "short" && !materialized.choices) {
+  if (mode === "evaluation" && solutionPatterns.some((pattern) => pattern.test(sanitized))) {
+    flags.push("solution_blocked_in_evaluation");
     return {
-      ...materialized,
-      format: "qcm",
-      choices: [materialized.expected[0], "Autre réponse 1", "Autre réponse 2"],
+      text: "Bonne tentative. Je te donne une piste, mais pas la solution directe en mode évaluation.",
+      flags,
     };
   }
 
-  return materialized;
+  return { text: sanitized, flags };
+}
+
+export function appendAudit(session: TutorSession, entry: AuditEntry): void {
+  session.audit.push(entry);
+  session.audit = session.audit.slice(-30);
 }

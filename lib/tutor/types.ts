@@ -2,6 +2,13 @@ export type StudentStyle = "dys" | "middle" | "challenge";
 export type TutorMode = "evaluation" | "coaching";
 export type QuestionFormat = "short" | "qcm";
 
+export type MatrixValue = -2 | -1 | 0 | 1 | 2;
+
+export type SkillMatrix = {
+  microSkillIndex: string[];
+  matrix: MatrixValue[][];
+};
+
 export type ComparatorName =
   | "exact_text"
   | "mcq_exact"
@@ -78,6 +85,21 @@ export type TemplateQuestionDefinition = {
 };
 
 export type BankItem = FixedQuestionDefinition | TemplateQuestionDefinition;
+
+export type QuestionDefinition =
+  | BankItem
+  | {
+      id: string;
+      notionId: string;
+      microId: string;
+      difficulty: number;
+      text: string;
+      format: QuestionFormat;
+      choices?: string[];
+      expected: string[];
+      comparator: ComparatorName;
+      hint?: string;
+    };
 
 export type TutorQuestion = {
   id: string;

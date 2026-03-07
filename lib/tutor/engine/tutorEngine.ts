@@ -5,12 +5,14 @@ import { initMastery, updateMastery } from "@/lib/tutor/engine/mastery";
 import {
   findMicro,
   findNotion,
-  selectStrongPrereqMicro,
+  selectNextChildMicroFromMatrix,
+  selectStrongPrereqMicroFromMatrix,
   selectWeakestMicroInNotion,
 } from "@/lib/tutor/engine/selector";
 import { loadKnowledge } from "@/lib/tutor/loaders/loadKnowledge";
+import { loadMatrix } from "@/lib/tutor/loaders/loadMatrix";
 import { loadQuestionBank } from "@/lib/tutor/loaders/loadQuestionBank";
-import { buildQuestionFromBank } from "@/lib/tutor/questionBank/college/6e";
+import { buildQuestionFromBank } from "@/lib/tutor/knowledge/college/6e";
 import { createSession, getSession, saveSession } from "@/lib/tutor/session/sessionStore";
 import type { StudentStyle, TutorSession } from "@/lib/tutor/types";
 
@@ -22,6 +24,7 @@ export async function startTutorSession(input: {
 }) {
   const pack = await loadKnowledge(input.classe, input.matiere);
   const bank = await loadQuestionBank(input.classe, input.matiere);
+  await loadMatrix(input.classe, input.matiere);
 
   const notion = findNotion(pack, input.notion);
   const mastery = initMastery(pack);
@@ -93,6 +96,7 @@ export async function handleTutorMessage(input: { sessionId: string; answer: str
 
   const pack = await loadKnowledge(session.classe, session.matiere);
   const bank = await loadQuestionBank(session.classe, session.matiere);
+  const skillMatrix = await loadMatrix(session.classe, session.matiere);
 
   const currentQuestion = session.lastQuestion;
   if (!currentQuestion) throw new Error("Question introuvable.");
@@ -125,14 +129,14 @@ export async function handleTutorMessage(input: { sessionId: string; answer: str
 
   if (!result.ok && session.consecutiveErrors >= 2) {
     session.mode = "coaching";
-    const prereq = selectStrongPrereqMicro(pack, currentMicro.id);
+    const prereq = selectStrongPrereqMicroFromMatrix(pack, skillMatrix, currentMicro.id);
 
     if (prereq) {
       nextMicro = prereq;
       nextNotion = findNotion(pack, prereq.notionId);
       session.microFocus = prereq.id;
       session.notionFocus = prereq.notionId;
-      reason = "fallback_to_prereq_micro";
+      reason = "fallback_to_matrix_parent";
     } else {
       reason = "coaching_same_micro";
     }
@@ -140,12 +144,33 @@ export async function handleTutorMessage(input: { sessionId: string; answer: str
     if (session.mode === "coaching") {
       session.mode = "evaluation";
       reason = "return_to_evaluation";
+    }
+
+    const child = selectNextChildMicroFromMatrix(
+      pack,
+      skillMatrix,
+      currentMicro.id,
+      session.masteryByMicro
+    );
+
+    if (child && child.id !== currentMicro.id) {
+      nextMicro = child;
+      nextNotion = findNotion(pack, child.notionId);
+      session.microFocus = child.id;
+      session.notionFocus = child.notionId;
+      reason = session.mode === "evaluation" ? "advance_to_matrix_child" : reason;
     } else {
       const weakest = selectWeakestMicroInNotion(pack, session.notionFocus, session.masteryByMicro);
-      nextMicro = weakest;
-      session.microFocus = weakest.id;
-      reason = "refresh_weakest_micro_in_notion";
+      if (weakest.id !== currentMicro.id) {
+        nextMicro = weakest;
+        nextNotion = findNotion(pack, weakest.notionId);
+        session.microFocus = weakest.id;
+        session.notionFocus = weakest.notionId;
+        reason = "refresh_weakest_micro_in_notion";
+      }
     }
+
+    session.consecutiveSuccess = 0;
   }
 
   const nextQuestion = buildQuestionFromBank({

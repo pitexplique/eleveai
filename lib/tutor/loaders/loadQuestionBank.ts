@@ -1,4 +1,4 @@
-import { bank6eMaths } from "@/lib/tutor/questionBank/college/6e";
+import { bank6eMaths } from "@/lib/tutor/knowledge/college/6e";
 import type { BankItem } from "@/lib/tutor/types";
 
 export async function loadQuestionBank(classe: string, matiere: string): Promise<BankItem[]> {

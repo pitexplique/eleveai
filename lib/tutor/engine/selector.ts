@@ -1,4 +1,8 @@
-import type { KnowledgePack, MicroSkill } from "@/lib/tutor/types";
+import {
+  getSortedChildren,
+  getStrongestParentFromMatrix,
+} from "@/lib/tutor/matrix/matrixUtils";
+import type { KnowledgePack, MicroSkill, SkillMatrix } from "@/lib/tutor/types";
 
 export function findNotion(pack: KnowledgePack, notionId: string) {
   return pack.notions.find((n) => n.id === notionId) ?? pack.notions[0];
@@ -24,13 +28,29 @@ export function selectWeakestMicroInNotion(
   );
 }
 
-export function selectStrongPrereqMicro(pack: KnowledgePack, microId: string) {
-  const target = findMicro(pack, microId);
+export function selectStrongPrereqMicroFromMatrix(
+  pack: KnowledgePack,
+  skillMatrix: SkillMatrix,
+  microId: string
+): MicroSkill | null {
+  const parentId = getStrongestParentFromMatrix(microId, skillMatrix);
+  if (!parentId) return null;
 
-  const strongEdge = pack.microGraph.find((e) => e.to === target.id && e.strength === "strong");
-  if (strongEdge) return findMicro(pack, strongEdge.from);
+  return pack.microSkills.find((m) => m.id === parentId) ?? null;
+}
 
-  if (target.prerequis.length > 0) return findMicro(pack, target.prerequis[0]);
+export function selectNextChildMicroFromMatrix(
+  pack: KnowledgePack,
+  skillMatrix: SkillMatrix,
+  microId: string,
+  masteryByMicro: Record<string, number>
+): MicroSkill | null {
+  const sortedChildren = getSortedChildren(microId, skillMatrix);
+  const candidateId = sortedChildren
+    .map((item) => item.microId)
+    .sort((a, b) => (masteryByMicro[a] ?? 50) - (masteryByMicro[b] ?? 50))[0];
 
-  return null;
+  if (!candidateId) return null;
+
+  return pack.microSkills.find((m) => m.id === candidateId) ?? null;
 }
