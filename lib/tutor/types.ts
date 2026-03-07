@@ -1,6 +1,7 @@
 export type StudentStyle = "dys" | "middle" | "challenge";
 export type TutorMode = "evaluation" | "coaching";
 export type QuestionFormat = "short" | "qcm";
+
 export type ComparatorName =
   | "exact_text"
   | "mcq_exact"
@@ -46,18 +47,37 @@ export type KnowledgePack = {
   microGraph: GraphEdge[];
 };
 
-export type QuestionDefinition = {
+export type FixedQuestionDefinition = {
+  kind: "fixed";
   id: string;
   notionId: string;
   microId: string;
   difficulty: number;
-  format: QuestionFormat;
   text: string;
+  format: QuestionFormat;
   choices?: string[];
   expected: string[];
   comparator: ComparatorName;
   hint?: string;
 };
+
+export type TemplateQuestionDefinition = {
+  kind: "template";
+  id: string;
+  notionId: string;
+  microId: string;
+  difficulty: number;
+  generate: () => {
+    text: string;
+    format?: QuestionFormat;
+    expected: string[];
+    choices?: string[];
+    comparator: ComparatorName;
+  };
+  hint?: string;
+};
+
+export type BankItem = FixedQuestionDefinition | TemplateQuestionDefinition;
 
 export type TutorQuestion = {
   id: string;

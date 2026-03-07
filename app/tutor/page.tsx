@@ -47,17 +47,16 @@ export default function TutorPage() {
   const [feedback, setFeedback] = useState("");
   const [answer, setAnswer] = useState("");
   const [mode, setMode] = useState<"evaluation" | "coaching">("evaluation");
+  const [turnCount, setTurnCount] = useState(0);
 
   const [notionCatalog, setNotionCatalog] = useState<Array<{ id: string; label: string }>>([]);
   const [boMastery, setBoMastery] = useState<Record<string, number>>({});
   const [notionMastery, setNotionMastery] = useState<Record<string, number>>({});
   const [microMastery, setMicroMastery] = useState<Record<string, number>>({});
-  const [turnCount, setTurnCount] = useState(0);
 
-  const notionLabel = useMemo(
-    () => notionCatalog.find((n) => n.id === notion)?.label ?? notion,
-    [notionCatalog, notion]
-  );
+  const notionLabel = useMemo(() => {
+    return notionCatalog.find((n) => n.id === notion)?.label ?? notion;
+  }, [notionCatalog, notion]);
 
   async function startTutor() {
     setFeedback("");
@@ -71,6 +70,7 @@ export default function TutorPage() {
     });
 
     const data = (await res.json()) as StartResponse | { error: string };
+
     if (!res.ok || "error" in data) {
       setFeedback("Impossible de démarrer le tutor.");
       return;
@@ -95,6 +95,7 @@ export default function TutorPage() {
     });
 
     const data = (await res.json()) as MessageResponse | { error: string };
+
     if (!res.ok || "error" in data) {
       setFeedback("Erreur pendant l'échange.");
       return;
@@ -115,11 +116,11 @@ export default function TutorPage() {
       <div className="mx-auto max-w-6xl space-y-6">
         <header className="space-y-2">
           <div className="inline-flex rounded-full bg-sky-100 px-3 py-1 text-xs font-semibold text-sky-900">
-            Tutor V2 — session adaptative
+            Tutor V2 — hybride fixe + templates
           </div>
           <h1 className="text-3xl font-extrabold text-slate-900">Tuteur IA — EleveAI</h1>
           <p className="text-sm text-slate-700">
-            Le tuteur travaille une notion, cible une micro-compétence et revient sur un prérequis si nécessaire.
+            Le tuteur cible une micro-compétence, varie les questions et revient sur les prérequis si nécessaire.
           </p>
         </header>
 

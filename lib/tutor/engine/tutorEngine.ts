@@ -10,7 +10,7 @@ import {
 } from "@/lib/tutor/engine/selector";
 import { loadKnowledge } from "@/lib/tutor/loaders/loadKnowledge";
 import { loadQuestionBank } from "@/lib/tutor/loaders/loadQuestionBank";
-import { buildQuestionFromBank } from "@/lib/tutor/questionBank/college/6e.maths.questions";
+import { buildQuestionFromBank } from "@/lib/tutor/questionBank/college/6e";
 import { createSession, getSession, saveSession } from "@/lib/tutor/session/sessionStore";
 import type { StudentStyle, TutorSession } from "@/lib/tutor/types";
 

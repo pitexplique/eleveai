@@ -24,7 +24,9 @@ function cleanup() {
   const now = Date.now();
 
   for (const [key, record] of store.entries()) {
-    if (record.expiresAt < now) store.delete(key);
+    if (record.expiresAt < now) {
+      store.delete(key);
+    }
   }
 }
 

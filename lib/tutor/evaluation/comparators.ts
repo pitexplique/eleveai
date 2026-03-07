@@ -35,10 +35,7 @@ export function compareAnswer(args: {
       return args.expected.some((exp) => normalize(exp) === a);
 
     case "number_equal":
-      return args.expected.some((exp) => {
-        const e = normalize(exp);
-        return e === a;
-      });
+      return args.expected.some((exp) => normalize(exp) === a);
 
     case "fraction_decimal_equivalent":
       return args.expected.some((exp) => {

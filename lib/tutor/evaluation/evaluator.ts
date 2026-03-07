@@ -22,7 +22,7 @@ export function evaluateAnswer(question: TutorQuestion, answer: string) {
     normalizedAnswer: normalize(answer),
     feedback: ok
       ? "Bravo, c'est correct."
-      : "Ce n'est pas encore ça. On ajuste ensemble.",
+      : "Ce n'est pas encore ça.",
     flags: ok ? [] : ["wrong_answer"],
   };
 }
