@@ -1,16 +1,18 @@
 import { randomUUID } from "crypto";
 import { evaluateAnswer } from "@/lib/tutor/evaluation/evaluator";
 import { appendAudit, guardFeedback } from "@/lib/tutor/governance/audit";
-import { initMastery, updateMastery } from "@/lib/tutor/engine/mastery";
+import { loadKnowledge } from "@/lib/tutor/loaders/loadKnowledge";
+import { loadQuestionBank } from "@/lib/tutor/loaders/loadQuestionBank";
+import { loadMatrix } from "@/lib/tutor/loaders/loadMatrix";
+import { initMastery, updateMastery } from "@/lib/tutor/mastery/mastery";
+import { buildQuestionFromBank } from "@/lib/tutor/questionBank";
 import {
   findMicro,
   findNotion,
+  selectStrongChildMicro,
   selectStrongPrereqMicro,
   selectWeakestMicroInNotion,
-} from "@/lib/tutor/engine/selector";
-import { loadKnowledge } from "@/lib/tutor/loaders/loadKnowledge";
-import { loadQuestionBank } from "@/lib/tutor/loaders/loadQuestionBank";
-import { buildQuestionFromBank } from "@/lib/tutor/questionBank/college/6e";
+} from "@/lib/tutor/selection/selector";
 import { createSession, getSession, saveSession } from "@/lib/tutor/session/sessionStore";
 import type { StudentStyle, TutorSession } from "@/lib/tutor/types";
 
@@ -89,13 +91,18 @@ export async function startTutorSession(input: {
 
 export async function handleTutorMessage(input: { sessionId: string; answer: string }) {
   const session = getSession(input.sessionId);
-  if (!session) throw new Error("Session introuvable ou expirée.");
+  if (!session) {
+    throw new Error("Session introuvable ou expirée.");
+  }
 
   const pack = await loadKnowledge(session.classe, session.matiere);
   const bank = await loadQuestionBank(session.classe, session.matiere);
+  const skillMatrix = await loadMatrix(session.classe, session.matiere);
 
   const currentQuestion = session.lastQuestion;
-  if (!currentQuestion) throw new Error("Question introuvable.");
+  if (!currentQuestion) {
+    throw new Error("Question introuvable.");
+  }
 
   const result = evaluateAnswer(currentQuestion, input.answer);
   const currentMicro = findMicro(pack, currentQuestion.microId);
@@ -123,26 +130,44 @@ export async function handleTutorMessage(input: { sessionId: string; answer: str
   let nextNotion = currentNotion;
   let reason = "continue_same_micro";
 
+  // Cas 1 : l'élève bloque => on remonte au parent le plus fort via la matrice
   if (!result.ok && session.consecutiveErrors >= 2) {
     session.mode = "coaching";
-    const prereq = selectStrongPrereqMicro(pack, currentMicro.id);
+
+    const prereq = selectStrongPrereqMicro(pack, skillMatrix, currentMicro.id);
 
     if (prereq) {
       nextMicro = prereq;
       nextNotion = findNotion(pack, prereq.notionId);
       session.microFocus = prereq.id;
       session.notionFocus = prereq.notionId;
-      reason = "fallback_to_prereq_micro";
+      reason = "fallback_to_matrix_parent";
     } else {
       reason = "coaching_same_micro";
     }
-  } else if (result.ok && session.consecutiveSuccess >= 2) {
+  }
+  // Cas 2 : l'élève réussit bien => on peut proposer un enfant fort ou le plus faible de la notion
+  else if (result.ok && session.consecutiveSuccess >= 2) {
     if (session.mode === "coaching") {
       session.mode = "evaluation";
       reason = "return_to_evaluation";
+    }
+
+    const child = selectStrongChildMicro(pack, skillMatrix, currentMicro.id);
+
+    if (child && child.notionId === session.notionFocus) {
+      nextMicro = child;
+      nextNotion = findNotion(pack, child.notionId);
+      session.microFocus = child.id;
+      reason = "advance_to_matrix_child";
     } else {
-      const weakest = selectWeakestMicroInNotion(pack, session.notionFocus, session.masteryByMicro);
+      const weakest = selectWeakestMicroInNotion(
+        pack,
+        session.notionFocus,
+        session.masteryByMicro
+      );
       nextMicro = weakest;
+      nextNotion = findNotion(pack, weakest.notionId);
       session.microFocus = weakest.id;
       reason = "refresh_weakest_micro_in_notion";
     }

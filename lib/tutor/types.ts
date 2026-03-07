@@ -125,3 +125,21 @@ export type TutorSession = {
   knowledgePackId: string;
   audit: AuditEntry[];
 };
+
+/**
+ * V3 matrice
+ * +2 = parent fort
+ * +1 = parent faible
+ *  0 = aucun lien
+ * -1 = enfant faible
+ * -2 = enfant fort
+ */
+export type MatrixValue = -2 | -1 | 0 | 1 | 2;
+
+export type SkillMatrix = {
+  id: string;
+  classe: string;
+  matiere: string;
+  microSkillIndex: string[];
+  matrix: MatrixValue[][];
+};

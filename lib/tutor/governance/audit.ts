@@ -1,64 +1,29 @@
-import type { BankItem, TutorMode, TutorQuestion } from "@/lib/tutor/types";
-import { materializeBankItem } from "@/lib/tutor/generation/templateEngine";
-import { decimauxBank } from "./decimaux.bank";
-import { fractionsBank } from "./fractions.bank";
-import { proportionnaliteBank } from "./proportionnalite.bank";
-import { perimetreBank } from "./perimetre.bank";
-import { airesBank } from "./aires.bank";
-import { anglesBank } from "./angles.bank";
+import type { AuditEntry, TutorMode, TutorSession } from "@/lib/tutor/types";
 
-export const bank6eMaths: BankItem[] = [
-  ...decimauxBank,
-  ...fractionsBank,
-  ...proportionnaliteBank,
-  ...perimetreBank,
-  ...airesBank,
-  ...anglesBank,
-];
+const EMAIL_REGEX = /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/gi;
+const PHONE_REGEX = /(?:\+33|0)\s*[1-9](?:[ .-]?\d{2}){4}/g;
 
-export function buildQuestionFromBank(args: {
-  questions: BankItem[];
-  notionId: string;
-  microId: string;
-  difficulty: number;
-  style: "dys" | "middle" | "challenge";
-  mode: TutorMode;
-  recentQuestionIds: string[];
-}): TutorQuestion {
-  let candidates = args.questions.filter(
-    (q) => q.notionId === args.notionId && q.microId === args.microId
-  );
+export function sanitizeText(text: string) {
+  return text.replace(EMAIL_REGEX, "[email-masqué]").replace(PHONE_REGEX, "[tel-masqué]");
+}
 
-  if (candidates.length === 0) {
-    candidates = args.questions.filter((q) => q.microId === args.microId);
+export function guardFeedback(feedback: string, mode: TutorMode) {
+  let result = sanitizeText(feedback);
+  const flags: string[] = [];
+
+  if (mode === "evaluation" && /la bonne réponse est|solution est|réponse correcte/i.test(result)) {
+    flags.push("anti_solution_triggered");
+    result =
+      "Bonne tentative. Explique ton raisonnement en une étape, je te guide sans donner la réponse finale.";
   }
 
-  if (candidates.length === 0) {
-    candidates = args.questions;
+  if (!result.trim()) {
+    result = "Merci pour ta réponse. On continue étape par étape.";
   }
 
-  const fixedFirst = candidates.sort((a, b) => {
-    if (a.kind === "fixed" && b.kind === "template") return -1;
-    if (a.kind === "template" && b.kind === "fixed") return 1;
-    return 0;
-  });
+  return { text: result, flags };
+}
 
-  const notRecentlyUsed = fixedFirst.filter((q) => !args.recentQuestionIds.includes(q.id));
-  const pool = notRecentlyUsed.length > 0 ? notRecentlyUsed : fixedFirst;
-  const picked = pool[0];
-
-  const materialized = materializeBankItem({
-    item: picked,
-    mode: args.mode,
-  });
-
-  if (args.style === "dys" && materialized.format === "short" && !materialized.choices) {
-    return {
-      ...materialized,
-      format: "qcm",
-      choices: [materialized.expected[0], "Autre réponse 1", "Autre réponse 2"],
-    };
-  }
-
-  return materialized;
+export function appendAudit(session: TutorSession, entry: AuditEntry) {
+  session.audit.push(entry);
 }
