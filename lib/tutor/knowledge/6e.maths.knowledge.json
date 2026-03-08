@@ -1,0 +1,207 @@
+{
+  "id": "6e-maths",
+  "classe": "6e",
+  "matiere": "maths",
+
+  "bo_competences": [
+    { "boId": "BO6N1", "label": "Utiliser et comparer des nombres décimaux" },
+    { "boId": "BO6N2", "label": "Comprendre les fractions simples" },
+    { "boId": "BO6N3", "label": "Résoudre des problèmes de proportionnalité" },
+    { "boId": "BO6G1", "label": "Calculer périmètres et aires" },
+    { "boId": "BO6G2", "label": "Comparer et identifier des angles" }
+  ],
+
+  "notions": [
+    {
+      "id": "decimaux",
+      "label": "Nombres décimaux",
+      "boId": "BO6N1",
+      "prerequis": [],
+      "microTargets": [
+        "decimal_compare",
+        "decimal_write"
+      ],
+      "levels": [1,2,3]
+    },
+
+    {
+      "id": "fractions",
+      "label": "Fractions",
+      "boId": "BO6N2",
+      "prerequis": ["decimaux"],
+      "microTargets": [
+        "fraction_read",
+        "fraction_compare",
+        "fraction_quantity"
+      ],
+      "levels": [1,2,3]
+    },
+
+    {
+      "id": "proportionnalite",
+      "label": "Proportionnalité",
+      "boId": "BO6N3",
+      "prerequis": ["fractions"],
+      "microTargets": [
+        "prop_table",
+        "prop_unit",
+        "prop_direct"
+      ],
+      "levels": [1,2,3]
+    },
+
+    {
+      "id": "perimetre",
+      "label": "Périmètre",
+      "boId": "BO6G1",
+      "prerequis": [],
+      "microTargets": [
+        "perim_square",
+        "perim_rectangle"
+      ],
+      "levels": [1,2]
+    },
+
+    {
+      "id": "aires",
+      "label": "Aires",
+      "boId": "BO6G1",
+      "prerequis": ["perimetre"],
+      "microTargets": [
+        "area_rectangle",
+        "area_square"
+      ],
+      "levels": [1,2]
+    },
+
+    {
+      "id": "angles",
+      "label": "Angles",
+      "boId": "BO6G2",
+      "prerequis": [],
+      "microTargets": [
+        "angle_right",
+        "angle_compare"
+      ],
+      "levels": [1,2]
+    }
+  ],
+
+  "microSkills": [
+
+    {
+      "id": "decimal_compare",
+      "label": "Comparer des nombres décimaux",
+      "notionId": "decimaux",
+      "boId": "BO6N1",
+      "prerequis": []
+    },
+
+    {
+      "id": "decimal_write",
+      "label": "Lire et écrire un nombre décimal",
+      "notionId": "decimaux",
+      "boId": "BO6N1",
+      "prerequis": []
+    },
+
+    {
+      "id": "fraction_read",
+      "label": "Lire une fraction",
+      "notionId": "fractions",
+      "boId": "BO6N2",
+      "prerequis": ["decimal_write"]
+    },
+
+    {
+      "id": "fraction_compare",
+      "label": "Comparer deux fractions",
+      "notionId": "fractions",
+      "boId": "BO6N2",
+      "prerequis": ["decimal_compare"]
+    },
+
+    {
+      "id": "fraction_quantity",
+      "label": "Comprendre une fraction comme quantité",
+      "notionId": "fractions",
+      "boId": "BO6N2",
+      "prerequis": ["fraction_read"]
+    },
+
+    {
+      "id": "prop_table",
+      "label": "Compléter un tableau de proportionnalité",
+      "notionId": "proportionnalite",
+      "boId": "BO6N3",
+      "prerequis": ["fraction_quantity"]
+    },
+
+    {
+      "id": "prop_unit",
+      "label": "Passer par l’unité",
+      "notionId": "proportionnalite",
+      "boId": "BO6N3",
+      "prerequis": ["prop_table"]
+    },
+
+    {
+      "id": "prop_direct",
+      "label": "Résoudre une situation de proportionnalité",
+      "notionId": "proportionnalite",
+      "boId": "BO6N3",
+      "prerequis": ["prop_unit"]
+    },
+
+    {
+      "id": "perim_square",
+      "label": "Calculer le périmètre d’un carré",
+      "notionId": "perimetre",
+      "boId": "BO6G1",
+      "prerequis": []
+    },
+
+    {
+      "id": "perim_rectangle",
+      "label": "Calculer le périmètre d’un rectangle",
+      "notionId": "perimetre",
+      "boId": "BO6G1",
+      "prerequis": []
+    },
+
+    {
+      "id": "area_rectangle",
+      "label": "Calculer l’aire d’un rectangle",
+      "notionId": "aires",
+      "boId": "BO6G1",
+      "prerequis": ["perim_rectangle"]
+    },
+
+    {
+      "id": "area_square",
+      "label": "Calculer l’aire d’un carré",
+      "notionId": "aires",
+      "boId": "BO6G1",
+      "prerequis": ["perim_square"]
+    },
+
+    {
+      "id": "angle_right",
+      "label": "Identifier un angle droit",
+      "notionId": "angles",
+      "boId": "BO6G2",
+      "prerequis": []
+    },
+
+    {
+      "id": "angle_compare",
+      "label": "Comparer deux angles",
+      "notionId": "angles",
+      "boId": "BO6G2",
+      "prerequis": []
+    }
+
+  ],
+
+  "microGraph": []
+}
