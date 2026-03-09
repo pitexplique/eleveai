@@ -1,5 +1,8 @@
 "use client";
 
+// NOTE : section DON désactivée temporairement.
+// À activer lorsque la page /don sera prête.
+
 import Link from "next/link";
 import { useCallback } from "react";
 
@@ -71,22 +74,16 @@ export default function AccueilPage() {
   }) => {
     const styles = {
       blue: {
-        badge:
-          "border-blue-200 bg-blue-50 text-blue-700",
-        button:
-          "bg-blue-600 text-white hover:bg-blue-500",
+        badge: "border-blue-200 bg-blue-50 text-blue-700",
+        button: "bg-blue-600 text-white hover:bg-blue-500",
       },
       slate: {
-        badge:
-          "border-slate-200 bg-slate-100 text-slate-700",
-        button:
-          "bg-slate-900 text-white hover:bg-slate-800",
+        badge: "border-slate-200 bg-slate-100 text-slate-700",
+        button: "bg-slate-900 text-white hover:bg-slate-800",
       },
       emerald: {
-        badge:
-          "border-emerald-200 bg-emerald-50 text-emerald-700",
-        button:
-          "bg-emerald-700 text-white hover:bg-emerald-600",
+        badge: "border-emerald-200 bg-emerald-50 text-emerald-700",
+        button: "bg-emerald-700 text-white hover:bg-emerald-600",
       },
     };
 
@@ -198,10 +195,13 @@ export default function AccueilPage() {
 
             <div className="mt-8 flex flex-wrap justify-center gap-2">
               <Chip label="🧪 Le laboratoire" onClick={() => scrollTo("laboratoire")} />
-              <Chip label="🛡️ Sécuriser vos prompts" onClick={() => scrollTo("securiser")} />
+              <Chip
+                label="🛡️ Sécuriser vos prompts"
+                onClick={() => scrollTo("securiser")}
+              />
               <Chip label="⭐ Valeria" onClick={() => scrollTo("valeria")} />
               <Chip label="🎓 Tutor" onClick={() => scrollTo("tutor")} />
-              <Chip label="❤️ Faire un don" onClick={() => scrollTo("don")} />
+              {/* <Chip label="❤️ Faire un don" onClick={() => scrollTo("don")} /> */}
             </div>
 
             <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row sm:flex-wrap">
@@ -219,12 +219,14 @@ export default function AccueilPage() {
                 Découvrir le Tutor →
               </Link>
 
+              {/*
               <Link
                 href="/don"
                 className="inline-flex w-full items-center justify-center rounded-xl border border-slate-300 bg-white px-6 py-3 text-sm font-semibold text-slate-800 transition hover:bg-slate-100 sm:w-auto"
               >
                 Faire un don ❤️
               </Link>
+              */}
             </div>
 
             <p className="mt-6 text-xs text-slate-500">
@@ -239,7 +241,10 @@ export default function AccueilPage() {
       </section>
 
       {/* LABORATOIRE */}
-      <section id="laboratoire" className="mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:px-8">
+      <section
+        id="laboratoire"
+        className="mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:px-8"
+      >
         <SectionTitle
           overline="Le laboratoire"
           title="Un lieu d’étude, d’expérimentation et de création"
@@ -354,7 +359,7 @@ export default function AccueilPage() {
         </div>
       </section>
 
-      {/* DON */}
+      {/* DON SECTION — À activer plus tard
       <section
         id="don"
         className="scroll-mt-24 border-t border-slate-200 bg-slate-900 text-white"
@@ -384,6 +389,7 @@ export default function AccueilPage() {
           </div>
         </div>
       </section>
+      */}
     </main>
   );
 }
