@@ -1,3 +1,4 @@
+//lib/governance/audit.ts
 import type { AuditEntry, TutorMode, TutorSession } from "@/lib/tutor/types";
 
 const EMAIL_REGEX = /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/gi;

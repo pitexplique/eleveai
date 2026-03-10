@@ -1,3 +1,4 @@
+//app/lib/tutor/types.ts
 export type StudentStyle = "dys" | "middle" | "challenge";
 export type TutorMode = "evaluation" | "coaching";
 export type QuestionFormat = "short" | "qcm";

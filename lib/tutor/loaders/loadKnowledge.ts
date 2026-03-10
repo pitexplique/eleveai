@@ -1,3 +1,4 @@
+//app/lib/tutor/loadKnowledge.ts
 import knowledge6eMaths from "@/lib/tutor/knowledge/6e.maths.knowledge.json";
 import type { KnowledgePack } from "@/lib/tutor/types";
 

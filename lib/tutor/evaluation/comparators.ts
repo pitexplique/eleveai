@@ -1,3 +1,5 @@
+
+//lib/evaluation/comparators.ts
 import type { ComparatorName } from "@/lib/tutor/types";
 
 function normalize(value: string) {
