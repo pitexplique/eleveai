@@ -1,4 +1,3 @@
-// components/Header.tsx
 "use client";
 
 import Link from "next/link";
@@ -15,6 +14,7 @@ import {
   Menu,
   ChevronDown,
   Building2,
+  Brain,
 } from "lucide-react";
 
 function isActive(pathname: string, href: string) {
@@ -50,7 +50,6 @@ export default function Header() {
 
   const [mobileOpen, setMobileOpen] = useState(false);
 
-  // ✅ Valeria dropdown (desktop)
   const [valeriaOpen, setValeriaOpen] = useState(false);
   const valeriaRef = useRef<HTMLDivElement>(null);
 
@@ -62,13 +61,11 @@ export default function Header() {
     setValeriaOpen(false);
   }, [pathname]);
 
-  // ✅ Apple-like link (subtle)
   const topLink = (active: boolean) =>
     `px-2.5 py-1.5 text-sm rounded-lg transition ${
       active ? "text-white" : "text-slate-300 hover:text-white"
     }`;
 
-  // ✅ Premium pill button (Valeria)
   const pill = (active: boolean) =>
     `inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-sm font-semibold transition border ${
       active
@@ -123,7 +120,16 @@ export default function Header() {
             </span>
           </Link>
 
-          {/* ✅ Entreprise (simple link) */}
+          <Link
+            href="/tutor-v4"
+            className={topLink(isActive(pathname, "/tutor-v4"))}
+          >
+            <span className="inline-flex items-center gap-2">
+              <Brain className="h-4 w-4 text-purple-300" />
+              Tutor IA
+            </span>
+          </Link>
+
           <Link
             href="/valeria-consulting"
             className={topLink(isActive(pathname, "/valeria-consulting"))}
@@ -136,7 +142,7 @@ export default function Header() {
 
           <span className="mx-2 h-5 w-px bg-slate-800" />
 
-          {/* ⭐ VALERIA (comme sidebar) */}
+          {/* VALERIA */}
           <div ref={valeriaRef} className="relative">
             <button
               type="button"
@@ -235,7 +241,6 @@ export default function Header() {
       {mobileOpen && (
         <div className="lg:hidden border-t border-slate-800 bg-slate-950/95 backdrop-blur">
           <div className="mx-auto max-w-7xl px-4 py-4 space-y-2">
-            {/* EleveAI */}
             <div className="grid grid-cols-2 gap-2">
               <Link
                 href="/profs"
@@ -244,6 +249,7 @@ export default function Header() {
               >
                 Profs
               </Link>
+
               <Link
                 href="/eleves"
                 onClick={() => setMobileOpen(false)}
@@ -251,6 +257,7 @@ export default function Header() {
               >
                 Élèves
               </Link>
+
               <Link
                 href="/parents"
                 onClick={() => setMobileOpen(false)}
@@ -258,6 +265,7 @@ export default function Header() {
               >
                 Parents
               </Link>
+
               <Link
                 href="/espace-ecoles"
                 onClick={() => setMobileOpen(false)}
@@ -266,7 +274,14 @@ export default function Header() {
                 Établissement
               </Link>
 
-              {/* ✅ Entreprise */}
+              <Link
+                href="/tutor-v4"
+                onClick={() => setMobileOpen(false)}
+                className="rounded-xl border border-slate-800 px-3 py-2 text-sm text-slate-200 hover:bg-slate-900"
+              >
+                Tutor IA
+              </Link>
+
               <Link
                 href="/valeria-consulting"
                 onClick={() => setMobileOpen(false)}
@@ -275,7 +290,6 @@ export default function Header() {
                 Entreprise
               </Link>
 
-              {/* ✅ Contact */}
               <Link
                 href="/contact"
                 onClick={() => setMobileOpen(false)}
@@ -285,7 +299,6 @@ export default function Header() {
               </Link>
             </div>
 
-            {/* Valeria (comme sidebar : Optimiseur + Consulting) */}
             <div className="rounded-2xl border border-emerald-500/20 bg-emerald-500/5 p-3">
               <p className="text-xs font-semibold text-emerald-200">Valeria</p>
               <div className="mt-2 grid grid-cols-2 gap-2">

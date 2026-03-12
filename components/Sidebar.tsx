@@ -203,9 +203,9 @@ export default function Sidebar({
       },
       {
         kind: "link",
-        href: "/tutor",
-        label: "Tutor",
-        description: "Tuteur adaptatif • diagnostic • progression.",
+        href: "/tutor-v4",
+        label: "Tutor IA",
+        description: "Saphir s'adapte à ton niveau",
         icon: <Brain className="h-4 w-4 text-purple-300" />,
       },
 

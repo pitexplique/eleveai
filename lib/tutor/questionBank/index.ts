@@ -1,4 +1,3 @@
-//lib/tutor/questionBank/index.ts
 import type { BankItem, TutorMode, TutorQuestion } from "@/lib/tutor/types";
 import { materializeBankItem } from "@/lib/tutor/generation/templateEngine";
 import { decimauxBank } from "@/lib/tutor/questionBank/decimaux.bank";

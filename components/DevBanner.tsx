@@ -11,8 +11,8 @@ type DevBannerProps = {
 };
 
 export default function DevBanner({
-  message = "En cours  : Tutor — tuteur adaptatif EleveAI. Diagnostic des notions, progression pas à pas et supervision pédagogique.",
-  storageKey = "eleveai_dev_banner_closed_v6",
+  message = "Nouveau : Tutor IA adaptatif EleveAI. Saphir analyse les notions et adapte les questions à ton niveau.",
+  storageKey = "eleveai_dev_banner_closed_v7",
   className = "",
 }: DevBannerProps) {
   const [open, setOpen] = useState(false);
@@ -58,24 +58,24 @@ export default function DevBanner({
         {/* Actions */}
         <div className="flex items-center gap-2">
 
-          {/* Tutor */}
+          {/* Tutor IA */}
           <Link
-            href="/tutor"
+            href="/tutor-v4"
             className="inline-flex h-8 items-center gap-1 rounded-full px-3 text-xs font-semibold
                        bg-purple-600 hover:bg-purple-500 transition"
           >
             <Brain className="h-4 w-4" />
-            Essayer Tutor
+            Essayer Tutor IA
           </Link>
 
-          {/* Gouvernance */}
+          {/* Gouvernance IA */}
           <Link
             href="/tutor-developpement/iso"
             className="inline-flex h-8 items-center gap-1 rounded-full px-3 text-xs font-semibold
                        bg-emerald-700 hover:bg-emerald-600 transition"
           >
             <ShieldCheck className="h-4 w-4" />
-            Gouvernance
+            Gouvernance IA
           </Link>
 
           {/* Fermer */}
