@@ -6,7 +6,6 @@ import { useState } from "react";
 type StudentStyle = "dys" | "middle" | "challenge";
 type TutorMode = "evaluation" | "coaching";
 type StarLevel = 1 | 2 | 3 | 4 | 5;
-type DifficultyLevel = 1 | 2 | 3 | 4 | 5;
 type ConfidenceLevel = 1 | 2 | 3;
 
 type HiddenStarId =
@@ -57,7 +56,7 @@ type TutorQuestionOption = {
     supportLevel: "low" | "medium" | "high";
     readingLoad: "short" | "medium" | "long";
     challengeType: "direct" | "guided" | "transfer" | "challenge";
-    difficulty: DifficultyLevel;
+    difficulty: 1 | 2 | 3 | 4 | 5;
     starLevel: StarLevel;
   };
 };
@@ -66,7 +65,7 @@ type TutorQuestionPair = {
   pairId: string;
   notionId: string;
   microId: string;
-  recommendedDifficulty: DifficultyLevel;
+  recommendedDifficulty: 1 | 2 | 3 | 4 | 5;
   recommendedStar: StarLevel;
   optionA: TutorQuestionOption;
   optionB: TutorQuestionOption;
@@ -77,7 +76,7 @@ type StartResponse = {
   pair: TutorQuestionPair;
   mode: TutorMode;
   recommendedStar: StarLevel;
-  recommendedDifficulty: DifficultyLevel;
+  recommendedDifficulty: 1 | 2 | 3 | 4 | 5;
   notionCatalog: Array<{ id: string; label: string }>;
   visibleProgress: VisibleProgress;
 };
@@ -91,12 +90,35 @@ type AnswerResponse = {
   pair: TutorQuestionPair;
   mode: TutorMode;
   recommendedStar: StarLevel;
-  recommendedDifficulty: DifficultyLevel;
+  recommendedDifficulty: 1 | 2 | 3 | 4 | 5;
   visibleProgress: VisibleProgress;
 };
 
 function stars(level: number) {
   return "⭐".repeat(Math.max(1, Math.min(5, level)));
+}
+
+function studentBadgeLabel(star: HiddenStarState) {
+  switch (star.id) {
+    case "starter":
+      return "Je commence";
+    case "confidence":
+      return "Confiance";
+    case "regularity":
+      return "Régularité";
+    case "autonomy":
+      return "Autonomie";
+    case "precision":
+      return "Précision";
+    case "perseverance":
+      return "Persévérance";
+    case "theme_explorer":
+      return "Exploration";
+    case "micro_mastery":
+      return "Progression";
+    default:
+      return "Bravo";
+  }
 }
 
 export default function TutorV4Page() {
@@ -391,7 +413,7 @@ export default function TutorV4Page() {
                     key={star.id}
                     className="rounded-full bg-amber-100 px-3 py-1 text-xs font-semibold text-amber-900"
                   >
-                    ⭐ {star.label}
+                    ⭐ {studentBadgeLabel(star)}
                   </span>
                 ))}
               </div>
