@@ -6,9 +6,12 @@ export async function POST(req: NextRequest) {
     const body = await req.json();
     const { sessionId, level } = body;
 
-    if (!sessionId || !level) {
+    if (
+      typeof sessionId !== "string" ||
+      (level !== 1 && level !== 2 && level !== 3)
+    ) {
       return NextResponse.json(
-        { error: "sessionId ou level manquant" },
+        { error: "sessionId ou level invalide" },
         { status: 400 }
       );
     }

@@ -31,6 +31,18 @@ export const anglesBank: BankItem[] = [
   },
   {
     kind: "fixed",
+    id: "angle_right_fixed_3",
+    notionId: "angles",
+    microId: "angle_right",
+    difficulty: 1,
+    text: "Quelle est la mesure d’un angle droit ?",
+    format: "short",
+    expected: ["90", "90°"],
+    comparator: "number_equal",
+    hint: "Toujours 90°.",
+  },
+  {
+    kind: "fixed",
     id: "angle_right_qcm_1",
     notionId: "angles",
     microId: "angle_right",
@@ -41,6 +53,19 @@ export const anglesBank: BankItem[] = [
     expected: ["90°", "90"],
     comparator: "mcq_exact",
     hint: "Un angle droit mesure 90°.",
+  },
+  {
+    kind: "fixed",
+    id: "angle_right_qcm_2",
+    notionId: "angles",
+    microId: "angle_right",
+    difficulty: 2,
+    text: "Choisis la mesure d’un angle droit.",
+    format: "qcm",
+    choices: ["60°", "90°", "120°", "150°"],
+    expected: ["90°", "90"],
+    comparator: "mcq_exact",
+    hint: "Le bon choix est 90°.",
   },
   {
     kind: "fixed",
@@ -65,6 +90,30 @@ export const anglesBank: BankItem[] = [
     expected: ["70", "70°"],
     comparator: "number_equal",
     hint: "Le plus petit angle a la plus petite mesure.",
+  },
+  {
+    kind: "fixed",
+    id: "angle_compare_fixed_3",
+    notionId: "angles",
+    microId: "angle_compare",
+    difficulty: 1,
+    text: "Quel angle est le plus grand : 45° ou 95° ?",
+    format: "short",
+    expected: ["95", "95°"],
+    comparator: "number_equal",
+    hint: "Cherche la plus grande mesure.",
+  },
+  {
+    kind: "fixed",
+    id: "angle_compare_fixed_4",
+    notionId: "angles",
+    microId: "angle_compare",
+    difficulty: 1,
+    text: "Quel angle est le plus petit : 85° ou 55° ?",
+    format: "short",
+    expected: ["55", "55°"],
+    comparator: "number_equal",
+    hint: "Compare les deux nombres.",
   },
   {
     kind: "fixed",
@@ -93,6 +142,93 @@ export const anglesBank: BankItem[] = [
     hint: "Cherche le plus petit nombre.",
   },
   {
+    kind: "fixed",
+    id: "angle_compare_qcm_3",
+    notionId: "angles",
+    microId: "angle_compare",
+    difficulty: 2,
+    text: "Choisis l’angle le plus grand.",
+    format: "qcm",
+    choices: ["40°", "75°", "55°", "65°"],
+    expected: ["75°", "75"],
+    comparator: "mcq_exact",
+    hint: "Compare les quatre mesures.",
+  },
+  {
+    kind: "fixed",
+    id: "angle_compare_qcm_4",
+    notionId: "angles",
+    microId: "angle_compare",
+    difficulty: 2,
+    text: "Choisis l’angle le plus petit.",
+    format: "qcm",
+    choices: ["35°", "25°", "45°", "30°"],
+    expected: ["25°", "25"],
+    comparator: "mcq_exact",
+    hint: "L’angle le plus petit a la mesure la plus petite.",
+  },
+  {
+    kind: "fixed",
+    id: "angle_nature_fixed_1",
+    notionId: "angles",
+    microId: "angle_nature",
+    difficulty: 2,
+    text: "Un angle de 45° est-il plus petit ou plus grand qu’un angle droit ?",
+    format: "short",
+    expected: ["plus petit", "petit"],
+    comparator: "contains_keyword",
+    hint: "Un angle droit mesure 90°.",
+  },
+  {
+    kind: "fixed",
+    id: "angle_nature_fixed_2",
+    notionId: "angles",
+    microId: "angle_nature",
+    difficulty: 2,
+    text: "Un angle de 120° est-il plus petit ou plus grand qu’un angle droit ?",
+    format: "short",
+    expected: ["plus grand", "grand"],
+    comparator: "contains_keyword",
+    hint: "Compare 120° à 90°.",
+  },
+  {
+    kind: "fixed",
+    id: "angle_nature_qcm_1",
+    notionId: "angles",
+    microId: "angle_nature",
+    difficulty: 2,
+    text: "Un angle de 60° est :",
+    format: "qcm",
+    choices: [
+      "plus petit qu’un angle droit",
+      "égal à un angle droit",
+      "plus grand qu’un angle droit",
+      "impossible à savoir",
+    ],
+    expected: ["plus petit qu’un angle droit"],
+    comparator: "mcq_exact",
+    hint: "Un angle droit mesure 90°.",
+  },
+  {
+    kind: "fixed",
+    id: "angle_nature_qcm_2",
+    notionId: "angles",
+    microId: "angle_nature",
+    difficulty: 2,
+    text: "Un angle de 100° est :",
+    format: "qcm",
+    choices: [
+      "plus petit qu’un angle droit",
+      "égal à un angle droit",
+      "plus grand qu’un angle droit",
+      "nul",
+    ],
+    expected: ["plus grand qu’un angle droit"],
+    comparator: "mcq_exact",
+    hint: "Compare 100° à 90°.",
+  },
+
+  {
     kind: "template",
     id: "angle_right_tpl_1",
     notionId: "angles",
@@ -107,6 +243,22 @@ export const anglesBank: BankItem[] = [
       };
     },
     hint: "Toujours 90°.",
+  },
+  {
+    kind: "template",
+    id: "angle_right_tpl_2",
+    notionId: "angles",
+    microId: "angle_right",
+    difficulty: 1,
+    generate: () => {
+      return {
+        text: "Quelle est la mesure d’un angle droit ?",
+        format: "short",
+        expected: ["90", "90°"],
+        comparator: "number_equal",
+      };
+    },
+    hint: "Un angle droit ne change jamais de mesure.",
   },
   {
     kind: "template",
@@ -125,6 +277,24 @@ export const anglesBank: BankItem[] = [
       };
     },
     hint: "Un angle droit mesure 90°.",
+  },
+  {
+    kind: "template",
+    id: "angle_right_qcm_tpl_2",
+    notionId: "angles",
+    microId: "angle_right",
+    difficulty: 2,
+    generate: () => {
+      const choices = shuffle(["45°", "90°", "135°", "150°"]);
+      return {
+        text: "Parmi ces angles, lequel est un angle droit ?",
+        format: "qcm",
+        choices,
+        expected: ["90°", "90"],
+        comparator: "mcq_exact",
+      };
+    },
+    hint: "Cherche 90°.",
   },
   {
     kind: "template",
@@ -180,36 +350,158 @@ export const anglesBank: BankItem[] = [
   },
   {
     kind: "template",
+    id: "angle_compare_tpl_3",
+    notionId: "angles",
+    microId: "angle_compare",
+    difficulty: 1,
+    generate: () => {
+      const values = [25, 35, 45, 55, 65, 75, 85];
+      const a = values[Math.floor(Math.random() * values.length)];
+      let b = values[Math.floor(Math.random() * values.length)];
+
+      while (b === a) {
+        b = values[Math.floor(Math.random() * values.length)];
+      }
+
+      const max = Math.max(a, b);
+
+      return {
+        text: `Entre ${a}° et ${b}°, quel angle est le plus grand ?`,
+        format: "short",
+        expected: [String(max), `${max}°`],
+        comparator: "number_equal",
+      };
+    },
+    hint: "Compare simplement les deux mesures.",
+  },
+  {
+    kind: "template",
     id: "angle_compare_qcm_tpl_1",
     notionId: "angles",
     microId: "angle_compare",
     difficulty: 2,
     generate: () => {
       const values = [25, 35, 45, 55, 65, 75, 85, 95];
-      const good = values[Math.floor(Math.random() * values.length)];
+      const all = shuffle(values).slice(0, 4);
+      const good = Math.max(...all);
 
-      const distractors = Array.from(
-        new Set([
-          good - 10,
-          good + 10,
-          good + 20,
-          good - 20,
-        ])
-      ).filter((n) => n > 0 && n !== good).slice(0, 3);
-
-      const choices = shuffle([
-        `${good}°`,
-        ...distractors.map((n) => `${n}°`),
-      ]);
+      const choices = shuffle(all.map((n) => `${n}°`));
 
       return {
         text: "Choisis l’angle le plus grand.",
         format: "qcm",
         choices,
-        expected: [`${Math.max(good, ...distractors)}°`, String(Math.max(good, ...distractors))],
+        expected: [`${good}°`, String(good)],
         comparator: "mcq_exact",
       };
     },
     hint: "Compare toutes les mesures proposées.",
+  },
+  {
+    kind: "template",
+    id: "angle_compare_qcm_tpl_2",
+    notionId: "angles",
+    microId: "angle_compare",
+    difficulty: 2,
+    generate: () => {
+      const values = [20, 30, 40, 50, 60, 70, 80, 90];
+      const all = shuffle(values).slice(0, 4);
+      const good = Math.min(...all);
+
+      const choices = shuffle(all.map((n) => `${n}°`));
+
+      return {
+        text: "Choisis l’angle le plus petit.",
+        format: "qcm",
+        choices,
+        expected: [`${good}°`, String(good)],
+        comparator: "mcq_exact",
+      };
+    },
+    hint: "Cherche la plus petite mesure.",
+  },
+  {
+    kind: "template",
+    id: "angle_nature_tpl_1",
+    notionId: "angles",
+    microId: "angle_nature",
+    difficulty: 2,
+    generate: () => {
+      const value = [30, 40, 50, 60, 70, 80][Math.floor(Math.random() * 6)];
+
+      return {
+        text: `Un angle de ${value}° est-il plus petit ou plus grand qu’un angle droit ?`,
+        format: "short",
+        expected: ["plus petit", "petit"],
+        comparator: "contains_keyword",
+      };
+    },
+    hint: "Compare à 90°.",
+  },
+  {
+    kind: "template",
+    id: "angle_nature_tpl_2",
+    notionId: "angles",
+    microId: "angle_nature",
+    difficulty: 2,
+    generate: () => {
+      const value = [100, 110, 120, 130, 140][Math.floor(Math.random() * 5)];
+
+      return {
+        text: `Un angle de ${value}° est-il plus petit ou plus grand qu’un angle droit ?`,
+        format: "short",
+        expected: ["plus grand", "grand"],
+        comparator: "contains_keyword",
+      };
+    },
+    hint: "Compare ${value}° à 90°.",
+  },
+  {
+    kind: "template",
+    id: "angle_nature_qcm_tpl_1",
+    notionId: "angles",
+    microId: "angle_nature",
+    difficulty: 2,
+    generate: () => {
+      const value = [35, 45, 55, 65, 75, 85][Math.floor(Math.random() * 6)];
+
+      return {
+        text: `Un angle de ${value}° est :`,
+        format: "qcm",
+        choices: shuffle([
+          "plus petit qu’un angle droit",
+          "égal à un angle droit",
+          "plus grand qu’un angle droit",
+          "plat",
+        ]),
+        expected: ["plus petit qu’un angle droit"],
+        comparator: "mcq_exact",
+      };
+    },
+    hint: "Tous les angles inférieurs à 90° sont plus petits qu’un angle droit.",
+  },
+  {
+    kind: "template",
+    id: "angle_nature_qcm_tpl_2",
+    notionId: "angles",
+    microId: "angle_nature",
+    difficulty: 2,
+    generate: () => {
+      const value = [95, 105, 115, 125, 135][Math.floor(Math.random() * 5)];
+
+      return {
+        text: `Un angle de ${value}° est :`,
+        format: "qcm",
+        choices: shuffle([
+          "plus petit qu’un angle droit",
+          "égal à un angle droit",
+          "plus grand qu’un angle droit",
+          "nul",
+        ]),
+        expected: ["plus grand qu’un angle droit"],
+        comparator: "mcq_exact",
+      };
+    },
+    hint: "Tous les angles supérieurs à 90° sont plus grands qu’un angle droit.",
   },
 ];

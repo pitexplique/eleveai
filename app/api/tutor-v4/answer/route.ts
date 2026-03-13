@@ -6,9 +6,9 @@ export async function POST(req: NextRequest) {
     const body = await req.json();
     const { sessionId, answer } = body;
 
-    if (!sessionId || answer === undefined) {
+    if (!sessionId || typeof answer !== "string") {
       return NextResponse.json(
-        { error: "sessionId ou answer manquant" },
+        { error: "sessionId ou answer invalide" },
         { status: 400 }
       );
     }

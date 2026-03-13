@@ -242,11 +242,7 @@ export const decimauxBank: BankItem[] = [
       const good = (n / 10).toFixed(1).replace(".", ",");
 
       const distractors = Array.from(
-        new Set([
-          `0,0${n}`,
-          `${n},0`,
-          `0,${n}0`,
-        ])
+        new Set([`0,0${n}`, `${n},0`, `0,${n}0`])
       )
         .filter((x) => x !== good)
         .slice(0, 3);

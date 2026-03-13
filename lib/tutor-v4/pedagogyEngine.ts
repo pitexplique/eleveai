@@ -1,36 +1,64 @@
 /**
  * pedagogyEngine.ts
  *
- * Centralise des décisions pédagogiques simples.
+ * Centralise les décisions pédagogiques simples.
+ * Version V4 compatible avec la séparation :
+ * - difficulté interne
+ * - mode pédagogique
+ * - ton de feedback
  */
 
-import type { StarLevel, TutorMode } from "@/lib/tutor-v4/types";
+import type { DifficultyLevel, StarLevel, TutorMode } from "@/lib/tutor-v4/types";
+
+export type FeedbackTone = "encourage" | "coach" | "challenge";
+
+export type PedagogyReason =
+  | "stay"
+  | "promote_after_success"
+  | "downgrade_after_errors"
+  | "coach_after_error";
 
 export type PedagogyDecision = {
+  nextDifficulty: DifficultyLevel;
+
+  /**
+   * Compatibilité transitoire.
+   */
   nextStar: StarLevel;
+
   nextMode: TutorMode;
-  feedbackTone: "encourage" | "coach" | "challenge";
-  reason:
-    | "stay"
-    | "promote_after_success"
-    | "downgrade_after_errors"
-    | "coach_after_error";
+  feedbackTone: FeedbackTone;
+  reason: PedagogyReason;
 };
 
+function clampDifficulty(value: number): DifficultyLevel {
+  if (value <= 1) return 1;
+  if (value === 2) return 2;
+  if (value === 3) return 3;
+  if (value === 4) return 4;
+  return 5;
+}
+
+/**
+ * Alias de compatibilité transitoire.
+ */
 function clampStar(value: number): StarLevel {
-  return Math.max(1, Math.min(5, value)) as StarLevel;
+  return clampDifficulty(value);
 }
 
 export function decidePedagogy(args: {
-  currentStar: StarLevel;
+  currentDifficulty: DifficultyLevel;
   consecutiveSuccess: number;
   consecutiveErrors: number;
 }): PedagogyDecision {
-  const { currentStar, consecutiveSuccess, consecutiveErrors } = args;
+  const { currentDifficulty, consecutiveSuccess, consecutiveErrors } = args;
 
   if (consecutiveErrors >= 2) {
+    const nextDifficulty = clampDifficulty(currentDifficulty - 1);
+
     return {
-      nextStar: clampStar(currentStar - 1),
+      nextDifficulty,
+      nextStar: nextDifficulty,
       nextMode: "coaching",
       feedbackTone: "coach",
       reason: "downgrade_after_errors",
@@ -38,8 +66,11 @@ export function decidePedagogy(args: {
   }
 
   if (consecutiveSuccess >= 2) {
+    const nextDifficulty = clampDifficulty(currentDifficulty + 1);
+
     return {
-      nextStar: clampStar(currentStar + 1),
+      nextDifficulty,
+      nextStar: nextDifficulty,
       nextMode: "evaluation",
       feedbackTone: "challenge",
       reason: "promote_after_success",
@@ -48,7 +79,8 @@ export function decidePedagogy(args: {
 
   if (consecutiveErrors === 1) {
     return {
-      nextStar: currentStar,
+      nextDifficulty: currentDifficulty,
+      nextStar: currentDifficulty,
       nextMode: "coaching",
       feedbackTone: "coach",
       reason: "coach_after_error",
@@ -56,7 +88,8 @@ export function decidePedagogy(args: {
   }
 
   return {
-    nextStar: currentStar,
+    nextDifficulty: currentDifficulty,
+    nextStar: currentDifficulty,
     nextMode: "evaluation",
     feedbackTone: "encourage",
     reason: "stay",

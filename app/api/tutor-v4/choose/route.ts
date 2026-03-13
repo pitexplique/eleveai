@@ -6,9 +6,9 @@ export async function POST(req: NextRequest) {
     const body = await req.json();
     const { sessionId, optionId } = body;
 
-    if (!sessionId || !optionId) {
+    if (typeof sessionId !== "string" || typeof optionId !== "string") {
       return NextResponse.json(
-        { error: "sessionId ou optionId manquant" },
+        { error: "sessionId ou optionId invalide" },
         { status: 400 }
       );
     }

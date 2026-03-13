@@ -1,9 +1,40 @@
+// tutor-v4/page.tsx
 "use client";
 
 import { useState } from "react";
 
+type StudentStyle = "dys" | "middle" | "challenge";
+type TutorMode = "evaluation" | "coaching";
 type StarLevel = 1 | 2 | 3 | 4 | 5;
+type DifficultyLevel = 1 | 2 | 3 | 4 | 5;
 type ConfidenceLevel = 1 | 2 | 3;
+
+type HiddenStarId =
+  | "starter"
+  | "confidence"
+  | "regularity"
+  | "autonomy"
+  | "precision"
+  | "perseverance"
+  | "theme_explorer"
+  | "micro_mastery";
+
+type HiddenStarState = {
+  id: HiddenStarId;
+  label: string;
+  description: string;
+  unlocked: boolean;
+  unlockedAt?: number;
+  relatedMicroIds?: string[];
+};
+
+type VisibleProgress = {
+  unlockedStars: HiddenStarState[];
+  lastUnlockedStar?: HiddenStarState;
+  encouragement: string;
+  streak: number;
+  sessionStep: number;
+};
 
 type TutorQuestionOption = {
   id: string;
@@ -26,6 +57,7 @@ type TutorQuestionOption = {
     supportLevel: "low" | "medium" | "high";
     readingLoad: "short" | "medium" | "long";
     challengeType: "direct" | "guided" | "transfer" | "challenge";
+    difficulty: DifficultyLevel;
     starLevel: StarLevel;
   };
 };
@@ -34,6 +66,7 @@ type TutorQuestionPair = {
   pairId: string;
   notionId: string;
   microId: string;
+  recommendedDifficulty: DifficultyLevel;
   recommendedStar: StarLevel;
   optionA: TutorQuestionOption;
   optionB: TutorQuestionOption;
@@ -42,14 +75,11 @@ type TutorQuestionPair = {
 type StartResponse = {
   sessionId: string;
   pair: TutorQuestionPair;
-  mode: "evaluation" | "coaching";
+  mode: TutorMode;
   recommendedStar: StarLevel;
+  recommendedDifficulty: DifficultyLevel;
   notionCatalog: Array<{ id: string; label: string }>;
-  mastery: {
-    boMastery: Record<string, number>;
-    notionMastery: Record<string, number>;
-    microMastery: Record<string, number>;
-  };
+  visibleProgress: VisibleProgress;
 };
 
 type AnswerResponse = {
@@ -59,51 +89,41 @@ type AnswerResponse = {
     flags: string[];
   };
   pair: TutorQuestionPair;
-  mode: "evaluation" | "coaching";
+  mode: TutorMode;
   recommendedStar: StarLevel;
-  mastery: {
-    boMastery: Record<string, number>;
-    notionMastery: Record<string, number>;
-    microMastery: Record<string, number>;
-  };
+  recommendedDifficulty: DifficultyLevel;
+  visibleProgress: VisibleProgress;
 };
 
-function stars(level: StarLevel) {
-  return "⭐".repeat(level);
+function stars(level: number) {
+  return "⭐".repeat(Math.max(1, Math.min(5, level)));
 }
 
 export default function TutorV4Page() {
   const [classe] = useState("6e");
   const [matiere] = useState("maths");
-  const [style, setStyle] = useState<"dys" | "middle" | "challenge">("middle");
+  const [style, setStyle] = useState<StudentStyle>("middle");
   const [notion, setNotion] = useState("fractions");
 
   const [sessionId, setSessionId] = useState<string | null>(null);
   const [pair, setPair] = useState<TutorQuestionPair | null>(null);
-  const [mode, setMode] = useState<"evaluation" | "coaching">("evaluation");
+  const [mode, setMode] = useState<TutorMode>("evaluation");
   const [recommendedStar, setRecommendedStar] = useState<StarLevel>(2);
 
   const [selectedOptionId, setSelectedOptionId] = useState<string | null>(null);
   const [confidence, setConfidence] = useState<ConfidenceLevel | null>(null);
   const [answer, setAnswer] = useState("");
   const [feedback, setFeedback] = useState("");
-
-  const [boMastery, setBoMastery] = useState<Record<string, number>>({});
-  const [notionMastery, setNotionMastery] = useState<Record<string, number>>({});
-  const [microMastery, setMicroMastery] = useState<Record<string, number>>({});
   const [sessionResults, setSessionResults] = useState<boolean[]>([]);
+  const [visibleProgress, setVisibleProgress] = useState<VisibleProgress>({
+    unlockedStars: [],
+    lastUnlockedStar: undefined,
+    encouragement: "Bienvenue. On avance étape par étape.",
+    streak: 0,
+    sessionStep: 0,
+  });
 
   const [busy, setBusy] = useState(false);
-
-  const workedMicros = Object.values(microMastery).filter((v) => v !== 50);
-
-  const averageWorkedMicro =
-    workedMicros.length > 0
-      ? workedMicros.reduce((a, b) => a + b, 0) / workedMicros.length
-      : 50;
-
-  const niveauGlobalSur100 = Math.round(averageWorkedMicro);
-  const scoreGlobalSur20 = ((averageWorkedMicro / 100) * 20).toFixed(1);
 
   const bonnesReponses = sessionResults.filter(Boolean).length;
   const nbTentatives = sessionResults.length;
@@ -129,7 +149,7 @@ export default function TutorV4Page() {
       const data = await res.json();
 
       if (!res.ok) {
-        setFeedback(data?.error ?? "Erreur au démarrage du tutor V4.");
+        setFeedback(data?.error ?? "Erreur au démarrage du tutor.");
         return;
       }
 
@@ -139,9 +159,7 @@ export default function TutorV4Page() {
       setPair(typed.pair);
       setMode(typed.mode);
       setRecommendedStar(typed.recommendedStar);
-      setBoMastery(typed.mastery.boMastery);
-      setNotionMastery(typed.mastery.notionMastery);
-      setMicroMastery(typed.mastery.microMastery);
+      setVisibleProgress(typed.visibleProgress);
     } finally {
       setBusy(false);
     }
@@ -195,7 +213,9 @@ export default function TutorV4Page() {
       const data = await res.json();
 
       if (!res.ok) {
-        setFeedback(data?.error ?? "Erreur pendant l’enregistrement de la confiance.");
+        setFeedback(
+          data?.error ?? "Erreur pendant l’enregistrement de la confiance."
+        );
         return;
       }
 
@@ -212,7 +232,7 @@ export default function TutorV4Page() {
     }
 
     if (!selectedOptionId) {
-      setFeedback("Choisis d’abord une des deux questions.");
+      setFeedback("Choisis une question.");
       return;
     }
 
@@ -240,14 +260,11 @@ export default function TutorV4Page() {
       const typed = data as AnswerResponse;
 
       setSessionResults((prev) => [...prev, typed.result.ok]);
-
       setFeedback(typed.feedback);
       setPair(typed.pair);
       setMode(typed.mode);
       setRecommendedStar(typed.recommendedStar);
-      setBoMastery(typed.mastery.boMastery);
-      setNotionMastery(typed.mastery.notionMastery);
-      setMicroMastery(typed.mastery.microMastery);
+      setVisibleProgress(typed.visibleProgress);
 
       setSelectedOptionId(null);
       setConfidence(null);
@@ -265,16 +282,35 @@ export default function TutorV4Page() {
       : null;
 
   return (
-    <main className="min-h-screen bg-slate-50 px-4 py-8">
-      <div className="mx-auto max-w-6xl space-y-6">
-        <header className="space-y-2">
-          <div className="inline-flex rounded-full bg-violet-100 px-3 py-1 text-xs font-semibold text-violet-900">
-            Tutor V4 — page de test
+    <main className="min-h-screen bg-gradient-to-b from-sky-50 to-white px-4 py-6">
+      <div className="mx-auto max-w-4xl space-y-5">
+        <header className="rounded-3xl bg-white p-5 shadow-sm ring-1 ring-slate-200">
+          <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+            <div className="space-y-1">
+              <div className="inline-flex rounded-full bg-violet-100 px-3 py-1 text-xs font-semibold text-violet-900">
+                Tutor de maths
+              </div>
+              <h1 className="text-2xl font-extrabold text-slate-900">
+                Je m’entraîne
+              </h1>
+              <p className="text-sm text-slate-600">
+                Choisis une question et essaie d’améliorer ton score.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-2 gap-3 md:min-w-[300px]">
+              <BigStat
+                label="Score séance"
+                value={`${scoreSeanceSur20}/20`}
+                accent="bg-sky-100 text-sky-900"
+              />
+              <BigStat
+                label="Bonnes réponses"
+                value={`${bonnesReponses}/${nbTentatives}`}
+                accent="bg-emerald-100 text-emerald-900"
+              />
+            </div>
           </div>
-          <h1 className="text-3xl font-extrabold text-slate-900">Tutor V4</h1>
-          <p className="text-sm text-slate-700">
-            Test du moteur V4 : 2 questions au choix, étoiles, confiance, adaptation.
-          </p>
         </header>
 
         <section className="grid gap-4 md:grid-cols-4">
@@ -300,7 +336,7 @@ export default function TutorV4Page() {
             <Label>Profil</Label>
             <select
               value={style}
-              onChange={(e) => setStyle(e.target.value as "dys" | "middle" | "challenge")}
+              onChange={(e) => setStyle(e.target.value as StudentStyle)}
               className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900"
             >
               <option value="dys">DYS</option>
@@ -330,183 +366,199 @@ export default function TutorV4Page() {
           <button
             onClick={startSession}
             disabled={busy}
-            className="rounded-xl bg-sky-700 px-4 py-2 text-sm font-semibold text-white hover:bg-sky-600 disabled:opacity-50"
+            className="rounded-2xl bg-sky-700 px-5 py-3 text-sm font-bold text-white hover:bg-sky-600 disabled:opacity-50"
           >
-            Démarrer le tutor V4
+            Démarrer
           </button>
 
-          <Pill>Mode : {mode === "evaluation" ? "évaluation" : "coaching"}</Pill>
-          <Pill>Recommandé : {stars(recommendedStar)}</Pill>
-          <Pill>Score séance : {scoreSeanceSur20}/20</Pill>
-          <Pill>Niveau global estimé : {scoreGlobalSur20}/20</Pill>
-          <Pill>Maîtrise travaillée : {niveauGlobalSur100}/100</Pill>
-          {sessionId ? <Pill>Session active</Pill> : null}
+          <MiniPill>
+            {mode === "evaluation" ? "Mode évaluation" : "Mode coaching"}
+          </MiniPill>
+          <MiniPill>Niveau {stars(recommendedStar)}</MiniPill>
+          <MiniPill>Série {visibleProgress.streak}</MiniPill>
         </div>
 
+        <section className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+          <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+            <div className="text-sm font-semibold text-slate-800">
+              {visibleProgress.encouragement}
+            </div>
+
+            {visibleProgress.unlockedStars.length > 0 ? (
+              <div className="flex flex-wrap gap-2">
+                {visibleProgress.unlockedStars.map((star) => (
+                  <span
+                    key={star.id}
+                    className="rounded-full bg-amber-100 px-3 py-1 text-xs font-semibold text-amber-900"
+                  >
+                    ⭐ {star.label}
+                  </span>
+                ))}
+              </div>
+            ) : null}
+          </div>
+        </section>
+
         {pair ? (
-          <section className="grid gap-6 md:grid-cols-[2fr_1fr]">
-            <div className="space-y-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-              <div className="space-y-2">
-                <div className="text-sm font-semibold text-slate-800">
-                  Deux questions au choix
+          <section className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
+            <div className="space-y-1">
+              <div className="text-lg font-bold text-slate-900">
+                Choisis ta question
+              </div>
+              <p className="text-sm text-slate-500">
+                Tu peux prendre la question A ou la question B.
+              </p>
+            </div>
+
+            <div className="mt-4 grid gap-4 md:grid-cols-2">
+              {[pair.optionA, pair.optionB].map((option, idx) => {
+                const active = selectedOptionId === option.id;
+
+                return (
+                  <button
+                    key={option.id}
+                    type="button"
+                    onClick={() => chooseOption(option.id)}
+                    disabled={busy}
+                    className={`rounded-3xl border p-5 text-left transition ${
+                      active
+                        ? "border-sky-500 bg-sky-50 ring-2 ring-sky-200"
+                        : "border-slate-200 bg-white hover:bg-slate-50"
+                    }`}
+                  >
+                    <div className="mb-3 flex items-center justify-between gap-3">
+                      <span className="text-base font-bold text-slate-900">
+                        Question {idx === 0 ? "A" : "B"}
+                      </span>
+                      <span className="rounded-full bg-amber-100 px-3 py-1 text-xs font-semibold text-amber-900">
+                        {stars(option.meta.starLevel)}
+                      </span>
+                    </div>
+
+                    <div className="mb-3 flex flex-wrap gap-2">
+                      <Tag>{option.format === "qcm" ? "QCM" : "Réponse libre"}</Tag>
+                    </div>
+
+                    <p className="text-base leading-6 text-slate-900">
+                      {option.text}
+                    </p>
+                  </button>
+                );
+              })}
+            </div>
+
+            {chosenOption ? (
+              <div className="mt-5 space-y-4 rounded-2xl border border-slate-200 bg-slate-50 p-4">
+                <div className="text-base font-bold text-slate-900">
+                  Ta question
                 </div>
-                <p className="text-xs text-slate-500">
-                  Même micro-compétence, deux variantes possibles.
-                </p>
-              </div>
 
-              <div className="grid gap-4 md:grid-cols-2">
-                {[pair.optionA, pair.optionB].map((option, idx) => {
-                  const active = selectedOptionId === option.id;
+                <div className="rounded-2xl bg-white p-4 text-base text-slate-900 ring-1 ring-slate-200">
+                  {chosenOption.text}
+                </div>
 
-                  return (
-                    <button
-                      key={option.id}
-                      type="button"
-                      onClick={() => chooseOption(option.id)}
-                      disabled={busy}
-                      className={`rounded-2xl border p-4 text-left shadow-sm transition ${
-                        active
-                          ? "border-sky-500 bg-sky-50 ring-2 ring-sky-200"
-                          : "border-slate-200 bg-white hover:bg-slate-50"
-                      }`}
-                    >
-                      <div className="mb-3 flex items-center justify-between gap-3">
-                        <span className="text-sm font-bold text-slate-900">
-                          Question {idx === 0 ? "A" : "B"}
-                        </span>
-                        <span className="rounded-full bg-amber-100 px-3 py-1 text-xs font-semibold text-amber-900">
-                          {stars(option.meta.starLevel)}
-                        </span>
-                      </div>
-
-                      <div className="mb-2 flex flex-wrap gap-2">
-                        <span className="rounded-full bg-slate-100 px-2 py-1 text-[11px] font-semibold text-slate-700">
-                          thème : {option.meta.theme}
-                        </span>
-                        <span className="rounded-full bg-slate-100 px-2 py-1 text-[11px] font-semibold text-slate-700">
-                          format : {option.format}
-                        </span>
-                      </div>
-
-                      <p className="text-sm text-slate-900">{option.text}</p>
-                    </button>
-                  );
-                })}
-              </div>
-
-              {chosenOption ? (
-                <div className="space-y-4 rounded-xl border border-slate-200 bg-slate-50 p-4">
+                <div className="space-y-2">
                   <div className="text-sm font-semibold text-slate-800">
-                    Question choisie : {chosenOption.text}
+                    Comment tu te sens ?
                   </div>
 
+                  <div className="flex flex-wrap gap-2">
+                    {[1, 2, 3].map((level) => {
+                      const active = confidence === level;
+                      const label =
+                        level === 1
+                          ? "Pas sûr"
+                          : level === 2
+                          ? "Assez sûr"
+                          : "Très sûr";
+
+                      return (
+                        <button
+                          key={level}
+                          type="button"
+                          onClick={() => sendConfidence(level as ConfidenceLevel)}
+                          disabled={busy}
+                          className={`rounded-2xl px-4 py-2 text-sm font-medium ${
+                            active
+                              ? "bg-emerald-100 text-emerald-900 ring-2 ring-emerald-200"
+                              : "bg-white text-slate-700 ring-1 ring-slate-200 hover:bg-slate-50"
+                          }`}
+                        >
+                          {label}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                {chosenOption.format === "qcm" && chosenOption.choices?.length ? (
+                  <div className="space-y-3">
+                    <div className="text-sm font-semibold text-slate-800">
+                      Choisis ta réponse
+                    </div>
+
+                    <div className="grid gap-2">
+                      {chosenOption.choices.map((choice, idx) => (
+                        <button
+                          key={`${choice}-${idx}`}
+                          type="button"
+                          onClick={() => setAnswer(choice)}
+                          disabled={busy}
+                          className={`rounded-2xl border px-4 py-3 text-left text-sm font-medium ${
+                            answer === choice
+                              ? "border-sky-500 bg-sky-50 text-sky-900"
+                              : "border-slate-300 bg-white text-slate-900 hover:bg-slate-50"
+                          }`}
+                        >
+                          {choice}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                ) : (
                   <div className="space-y-2">
                     <div className="text-sm font-semibold text-slate-800">
-                      Confiance avant réponse
+                      Écris ta réponse
                     </div>
-
-                    <div className="flex flex-wrap gap-2">
-                      {[1, 2, 3].map((level) => {
-                        const active = confidence === level;
-                        const label =
-                          level === 1
-                            ? "⭐ Pas sûr"
-                            : level === 2
-                            ? "⭐⭐ Assez sûr"
-                            : "⭐⭐⭐ Très sûr";
-
-                        return (
-                          <button
-                            key={level}
-                            type="button"
-                            onClick={() => sendConfidence(level as ConfidenceLevel)}
-                            disabled={busy}
-                            className={`rounded-xl px-3 py-2 text-sm font-medium ${
-                              active
-                                ? "bg-emerald-100 text-emerald-900 ring-2 ring-emerald-200"
-                                : "bg-white text-slate-700 ring-1 ring-slate-200 hover:bg-slate-50"
-                            }`}
-                          >
-                            {label}
-                          </button>
-                        );
-                      })}
-                    </div>
+                    <input
+                      value={answer}
+                      onChange={(e) => setAnswer(e.target.value)}
+                      placeholder="Ta réponse..."
+                      className="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-base text-slate-900"
+                    />
                   </div>
+                )}
 
-                  {chosenOption.format === "qcm" && chosenOption.choices?.length ? (
-                    <div className="space-y-2">
-                      <div className="text-sm font-semibold text-slate-800">
-                        Réponses possibles
-                      </div>
+                {mode === "coaching" && chosenOption.hint ? (
+                  <div className="rounded-2xl border border-emerald-200 bg-emerald-50 p-4 text-sm text-emerald-900">
+                    <span className="font-bold">Indice :</span> {chosenOption.hint}
+                  </div>
+                ) : null}
 
-                      <div className="grid gap-2">
-                        {chosenOption.choices.map((choice, idx) => (
-                          <button
-                            key={`${choice}-${idx}`}
-                            type="button"
-                            onClick={() => setAnswer(choice)}
-                            disabled={busy}
-                            className={`rounded-lg border px-3 py-2 text-left text-sm ${
-                              answer === choice
-                                ? "border-sky-500 bg-sky-50 text-sky-900"
-                                : "border-slate-300 bg-white text-slate-900 hover:bg-slate-50"
-                            }`}
-                          >
-                            {choice}
-                          </button>
-                        ))}
-                      </div>
-                    </div>
-                  ) : (
-                    <div className="space-y-2">
-                      <div className="text-sm font-semibold text-slate-800">Réponse</div>
-                      <input
-                        value={answer}
-                        onChange={(e) => setAnswer(e.target.value)}
-                        placeholder="Ta réponse..."
-                        className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900"
-                      />
-                    </div>
-                  )}
+                <button
+                  onClick={sendAnswer}
+                  disabled={busy}
+                  className="rounded-2xl bg-slate-900 px-5 py-3 text-sm font-bold text-white hover:bg-slate-800 disabled:opacity-50"
+                >
+                  Valider ma réponse
+                </button>
+              </div>
+            ) : (
+              <div className="mt-5 rounded-2xl border border-slate-200 bg-slate-50 p-4 text-sm text-slate-600">
+                Choisis une question pour commencer.
+              </div>
+            )}
 
-                  {mode === "coaching" && chosenOption.hint ? (
-                    <div className="rounded-xl border border-emerald-200 bg-emerald-50 p-3 text-sm text-emerald-800">
-                      <span className="font-semibold">Indice :</span> {chosenOption.hint}
-                    </div>
-                  ) : null}
-
-                  <button
-                    onClick={sendAnswer}
-                    disabled={busy}
-                    className="rounded-xl bg-slate-900 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-800 disabled:opacity-50"
-                  >
-                    Envoyer la réponse
-                  </button>
-                </div>
-              ) : (
-                <div className="rounded-xl border border-slate-200 bg-slate-50 p-4 text-sm text-slate-600">
-                  Choisis d’abord une des deux questions.
-                </div>
-              )}
-
-              {feedback ? (
-                <div className="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-800">
-                  {feedback}
-                </div>
-              ) : null}
-            </div>
-
-            <div className="space-y-4">
-              <ScoreCard title="BO mastery" data={boMastery} color="bg-sky-500" />
-              <ScoreCard title="Notion mastery" data={notionMastery} color="bg-emerald-500" />
-              <ScoreCard title="Micro mastery" data={microMastery} color="bg-violet-500" />
-            </div>
+            {feedback ? (
+              <div className="mt-5 rounded-2xl border border-slate-200 bg-slate-50 px-4 py-4 text-sm text-slate-800">
+                {feedback}
+              </div>
+            ) : null}
           </section>
         ) : (
-          <div className="rounded-2xl border border-slate-200 bg-white p-6 text-sm text-slate-600 shadow-sm">
-            Démarre une session pour afficher la première paire de questions.
+          <div className="rounded-3xl border border-slate-200 bg-white p-8 text-center text-sm text-slate-600 shadow-sm">
+            Clique sur <span className="font-semibold">Démarrer</span> pour lancer
+            une séance.
           </div>
         )}
       </div>
@@ -515,14 +567,22 @@ export default function TutorV4Page() {
 }
 
 function Card({ children }: { children: React.ReactNode }) {
-  return <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">{children}</div>;
+  return (
+    <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+      {children}
+    </div>
+  );
 }
 
 function Label({ children }: { children: React.ReactNode }) {
-  return <label className="mb-2 block text-xs font-semibold text-slate-600">{children}</label>;
+  return (
+    <label className="mb-2 block text-xs font-semibold text-slate-600">
+      {children}
+    </label>
+  );
 }
 
-function Pill({ children }: { children: React.ReactNode }) {
+function MiniPill({ children }: { children: React.ReactNode }) {
   return (
     <div className="rounded-full bg-white px-3 py-1 text-xs font-semibold text-slate-700 shadow-sm ring-1 ring-slate-200">
       {children}
@@ -530,34 +590,27 @@ function Pill({ children }: { children: React.ReactNode }) {
   );
 }
 
-function ScoreCard({
-  title,
-  data,
-  color,
+function Tag({ children }: { children: React.ReactNode }) {
+  return (
+    <span className="rounded-full bg-slate-100 px-2 py-1 text-[11px] font-semibold text-slate-700">
+      {children}
+    </span>
+  );
+}
+
+function BigStat({
+  label,
+  value,
+  accent,
 }: {
-  title: string;
-  data: Record<string, number>;
-  color: string;
+  label: string;
+  value: string;
+  accent: string;
 }) {
   return (
-    <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
-      <h2 className="mb-3 text-sm font-bold text-slate-900">{title}</h2>
-      <div className="space-y-3">
-        {Object.entries(data).map(([key, value]) => (
-          <div key={key}>
-            <div className="mb-1 flex justify-between text-xs text-slate-700">
-              <span>{key}</span>
-              <span>{Math.round(value)}</span>
-            </div>
-            <div className="h-2 rounded-full bg-slate-100">
-              <div
-                className={`h-2 rounded-full ${color}`}
-                style={{ width: `${Math.max(0, Math.min(100, value))}%` }}
-              />
-            </div>
-          </div>
-        ))}
-      </div>
+    <div className={`rounded-2xl px-4 py-3 ${accent}`}>
+      <div className="text-xs font-semibold opacity-80">{label}</div>
+      <div className="text-2xl font-extrabold">{value}</div>
     </div>
   );
 }

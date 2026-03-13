@@ -155,12 +155,7 @@ export const fractionsBank: BankItem[] = [
     generate: () => {
       const den = [3, 4, 5, 6, 8][Math.floor(Math.random() * 5)];
       const good = `1/${den}`;
-      const choices = shuffle([
-        good,
-        `${den}/1`,
-        `2/${den}`,
-        `1/${den + 1}`,
-      ]);
+      const choices = shuffle([good, `${den}/1`, `2/${den}`, `1/${den + 1}`]);
 
       return {
         text: `Choisis la fraction qui représente 1 part sur ${den} parts égales.`,
@@ -205,15 +200,22 @@ export const fractionsBank: BankItem[] = [
     microId: "fraction_compare",
     difficulty: 2,
     generate: () => {
-      const den = [4, 5, 6, 8, 10][Math.floor(Math.random() * 5)];
+      const den = [4, 6, 8, 10][Math.floor(Math.random() * 4)];
       const a = 1;
       const b = den / 2;
-      const good = `1/2`;
+      const good = "1/2";
 
       return {
         text: `Compare ${a}/${den} et ${b}/${den} : lequel est le plus grand ?`,
         format: "short",
-        expected: [good, "1 / 2", "0,5", "0.5", `${b}/${den}`, `${b} / ${den}`],
+        expected: [
+          good,
+          "1 / 2",
+          "0,5",
+          "0.5",
+          `${b}/${den}`,
+          `${b} / ${den}`,
+        ],
         comparator: "fraction_decimal_equivalent",
       };
     },
@@ -232,11 +234,7 @@ export const fractionsBank: BankItem[] = [
       const good = `${goodNum}/${den}`;
 
       const distractors = Array.from(
-        new Set(
-          nums
-            .filter((n) => n !== goodNum)
-            .map((n) => `${n}/${den}`)
-        )
+        new Set(nums.filter((n) => n !== goodNum).map((n) => `${n}/${den}`))
       );
 
       while (distractors.length < 3) {
@@ -306,12 +304,7 @@ export const fractionsBank: BankItem[] = [
       const good = type === "moitié" ? base / 2 : base / 4;
 
       const distractors = Array.from(
-        new Set([
-          good + 1,
-          good + 2,
-          base / 2,
-          base / 4,
-        ])
+        new Set([good + 1, good + 2, base / 2, base / 4])
       )
         .filter((n) => n !== good)
         .slice(0, 3);

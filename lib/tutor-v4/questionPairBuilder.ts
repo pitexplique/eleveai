@@ -9,6 +9,7 @@ import { randomUUID } from "crypto";
 import type { BankItem } from "@/lib/tutor/types";
 import type {
   ComparatorName,
+  DifficultyLevel,
   QuestionFormat,
   QuestionTheme,
   StarLevel,
@@ -59,12 +60,16 @@ function materializeBankItem(item: BankItem): {
   };
 }
 
-function difficultyToStar(difficulty: number): StarLevel {
+function normalizeDifficulty(difficulty: number): DifficultyLevel {
   if (difficulty <= 1) return 1;
   if (difficulty === 2) return 2;
   if (difficulty === 3) return 3;
   if (difficulty === 4) return 4;
   return 5;
+}
+
+function difficultyToStar(difficulty: number): StarLevel {
+  return normalizeDifficulty(difficulty);
 }
 
 function inferTheme(text: string): QuestionTheme {
@@ -102,6 +107,7 @@ function inferTheme(text: string): QuestionTheme {
 
   if (
     t.includes("jeu vidéo") ||
+    t.includes("jeux vidéo") ||
     t.includes("potion") ||
     t.includes("pièce") ||
     t.includes("pièces")
@@ -120,6 +126,8 @@ function inferFamilyId(item: BankItem): string {
 
 function toTutorQuestionOption(item: BankItem): TutorQuestionOption {
   const q = materializeBankItem(item);
+  const difficulty = normalizeDifficulty(q.difficulty);
+  const starLevel = difficultyToStar(q.difficulty);
 
   return {
     id: q.id,
@@ -135,9 +143,11 @@ function toTutorQuestionOption(item: BankItem): TutorQuestionOption {
       familyId: inferFamilyId(item),
       theme: inferTheme(q.text),
       supportLevel: q.hint ? "medium" : "low",
-      readingLoad: q.text.length < 60 ? "short" : q.text.length < 120 ? "medium" : "long",
+      readingLoad:
+        q.text.length < 60 ? "short" : q.text.length < 120 ? "medium" : "long",
       challengeType: q.format === "qcm" ? "guided" : "direct",
-      starLevel: difficultyToStar(q.difficulty),
+      difficulty,
+      starLevel,
     },
   };
 }
@@ -153,7 +163,7 @@ function isGoodContrast(a: TutorQuestionOption, b: TutorQuestionOption): boolean
     a.meta.theme !== b.meta.theme ||
     a.meta.familyId !== b.meta.familyId ||
     a.format !== b.format ||
-    a.meta.starLevel !== b.meta.starLevel
+    a.meta.difficulty !== b.meta.difficulty
   );
 }
 
@@ -164,7 +174,8 @@ export function buildQuestionPair(args: {
   recommendedStar: StarLevel;
   recentQuestionIds?: string[];
 }): TutorQuestionPair {
-  const { bank, notionId, microId, recommendedStar, recentQuestionIds = [] } = args;
+  const { bank, notionId, microId, recommendedStar, recentQuestionIds = [] } =
+    args;
 
   const filtered = bank.filter(
     (item) =>
@@ -190,6 +201,13 @@ export function buildQuestionPair(args: {
   const optionA = toTutorQuestionOption(firstItem);
 
   const remaining = source.filter((item) => item.id !== firstItem.id);
+
+  if (remaining.length === 0) {
+    throw new Error(
+      `Impossible de construire une paire contrastée pour ${notionId}/${microId}.`
+    );
+  }
+
   const contrasted = remaining
     .map(toTutorQuestionOption)
     .filter((candidate) => isGoodContrast(optionA, candidate));
@@ -199,10 +217,13 @@ export function buildQuestionPair(args: {
       ? pickRandom(contrasted)
       : toTutorQuestionOption(pickRandom(remaining));
 
+  const recommendedDifficulty: DifficultyLevel = recommendedStar;
+
   return {
     pairId: randomUUID(),
     notionId,
     microId,
+    recommendedDifficulty,
     recommendedStar,
     optionA,
     optionB,

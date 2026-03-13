@@ -1,5 +1,5 @@
 /**
- * sessionStoreV4.ts
+ * lib/tutor-v4/sessionStoreV4.ts
  *
  * Stockage mémoire simple des sessions V4.
  */
