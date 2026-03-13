@@ -58,7 +58,7 @@ export default function DevBanner({
         {/* Actions */}
         <div className="flex items-center gap-2">
 
-          {/* Tutor IA */}
+          {/* Tutor IA */} 
           <Link
             href="/tutor-v4"
             className="inline-flex h-8 items-center gap-1 rounded-full px-3 text-xs font-semibold
