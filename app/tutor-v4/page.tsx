@@ -105,20 +105,35 @@ function studentBadgeLabel(star: HiddenStarState) {
     case "confidence":
       return "Confiance";
     case "regularity":
-      return "Régularité";
+      return "Régulier";
     case "autonomy":
-      return "Autonomie";
+      return "Autonome";
     case "precision":
-      return "Précision";
+      return "Précis";
     case "perseverance":
-      return "Persévérance";
+      return "Persévérant";
     case "theme_explorer":
-      return "Exploration";
+      return "Explorateur";
     case "micro_mastery":
-      return "Progression";
+      return "Tu progresses";
     default:
       return "Bravo";
   }
+}
+
+function studentEncouragement(text: string) {
+  const t = text.toLowerCase();
+
+  if (t.includes("étoile de maîtrise")) return "🎉 Bravo ! Tu as gagné un badge.";
+  if (t.includes("micro-compétence")) return "🎉 Bravo ! Tu progresses bien.";
+  if (t.includes("débloquée")) return "🎉 Bravo ! Nouveau badge gagné.";
+  if (t.includes("progression solide")) return "🎉 Bravo ! Tu avances bien.";
+  if (t.includes("confiance")) return "Bravo, continue comme ça.";
+  if (t.includes("régularité")) return "Bravo, tu travailles bien.";
+  if (t.includes("autonomie")) return "Bravo, tu réussis de plus en plus seul.";
+  if (t.includes("persévérance")) return "Bravo, tu continues tes efforts.";
+
+  return text;
 }
 
 export default function TutorV4Page() {
@@ -304,9 +319,14 @@ export default function TutorV4Page() {
       : null;
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-sky-50 to-white px-4 py-6">
-      <div className="mx-auto max-w-4xl space-y-5">
-        <header className="rounded-3xl bg-white p-5 shadow-sm ring-1 ring-slate-200">
+    <main
+      className="relative min-h-screen px-4 py-6 bg-cover bg-center bg-fixed"
+      style={{ backgroundImage: "url('/images/tutor-bg.png')" }}
+    >
+      <div className="absolute inset-0 bg-white-60 pointer-events-none" />
+
+      <div className="relative mx-auto max-w-4xl space-y-5">
+        <header className="rounded-3xl bg-white/95 p-5 shadow-sm ring-1 ring-slate-200 backdrop-blur-[1px]">
           <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
             <div className="space-y-1">
               <div className="inline-flex rounded-full bg-violet-100 px-3 py-1 text-xs font-semibold text-violet-900">
@@ -400,10 +420,10 @@ export default function TutorV4Page() {
           <MiniPill>Série {visibleProgress.streak}</MiniPill>
         </div>
 
-        <section className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+        <section className="rounded-2xl border border-slate-200 bg-white/95 p-4 shadow-sm backdrop-blur-[1px]">
           <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
             <div className="text-sm font-semibold text-slate-800">
-              {visibleProgress.encouragement}
+              {studentEncouragement(visibleProgress.encouragement)}
             </div>
 
             {visibleProgress.unlockedStars.length > 0 ? (
@@ -422,7 +442,7 @@ export default function TutorV4Page() {
         </section>
 
         {pair ? (
-          <section className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
+          <section className="rounded-3xl border border-slate-200 bg-white/95 p-5 shadow-sm backdrop-blur-[1px]">
             <div className="space-y-1">
               <div className="text-lg font-bold text-slate-900">
                 Choisis ta question
@@ -470,7 +490,7 @@ export default function TutorV4Page() {
             </div>
 
             {chosenOption ? (
-              <div className="mt-5 space-y-4 rounded-2xl border border-slate-200 bg-slate-50 p-4">
+              <div className="mt-5 space-y-4 rounded-2xl border border-slate-200 bg-slate-50/95 p-4">
                 <div className="text-base font-bold text-slate-900">
                   Ta question
                 </div>
@@ -578,7 +598,7 @@ export default function TutorV4Page() {
             ) : null}
           </section>
         ) : (
-          <div className="rounded-3xl border border-slate-200 bg-white p-8 text-center text-sm text-slate-600 shadow-sm">
+          <div className="rounded-3xl border border-slate-200 bg-white/95 p-8 text-center text-sm text-slate-600 shadow-sm backdrop-blur-[1px]">
             Clique sur <span className="font-semibold">Démarrer</span> pour lancer
             une séance.
           </div>
@@ -590,7 +610,7 @@ export default function TutorV4Page() {
 
 function Card({ children }: { children: React.ReactNode }) {
   return (
-    <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+    <div className="rounded-2xl border border-slate-200 bg-white/95 p-4 shadow-sm backdrop-blur-[1px]">
       {children}
     </div>
   );
@@ -606,7 +626,7 @@ function Label({ children }: { children: React.ReactNode }) {
 
 function MiniPill({ children }: { children: React.ReactNode }) {
   return (
-    <div className="rounded-full bg-white px-3 py-1 text-xs font-semibold text-slate-700 shadow-sm ring-1 ring-slate-200">
+    <div className="rounded-full bg-white/95 px-3 py-1 text-xs font-semibold text-slate-700 shadow-sm ring-1 ring-slate-200 backdrop-blur-[1px]">
       {children}
     </div>
   );
