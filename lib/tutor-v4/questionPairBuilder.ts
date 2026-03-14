@@ -6,7 +6,7 @@
  */
 
 import { randomUUID } from "crypto";
-import type { BankItem } from "@/lib/tutor/types";
+import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 import type {
   ComparatorName,
   DifficultyLevel,
@@ -17,7 +17,7 @@ import type {
   TutorQuestionPair,
 } from "@/lib/tutor-v4/types";
 
-function materializeBankItem(item: BankItem): {
+function materializeBankItem(item: TutorBankItemV4): {
   id: string;
   notionId: string;
   microId: string;
@@ -118,13 +118,13 @@ function inferTheme(text: string): QuestionTheme {
   return "neutral";
 }
 
-function inferFamilyId(item: BankItem): string {
+function inferFamilyId(item: TutorBankItemV4): string {
   if (item.id.includes("qcm")) return `${item.microId}_qcm`;
   if (item.id.includes("tpl")) return `${item.microId}_template`;
   return `${item.microId}_fixed`;
 }
 
-function toTutorQuestionOption(item: BankItem): TutorQuestionOption {
+function toTutorQuestionOption(item: TutorBankItemV4): TutorQuestionOption {
   const q = materializeBankItem(item);
   const difficulty = normalizeDifficulty(q.difficulty);
   const starLevel = difficultyToStar(q.difficulty);
@@ -168,7 +168,7 @@ function isGoodContrast(a: TutorQuestionOption, b: TutorQuestionOption): boolean
 }
 
 export function buildQuestionPair(args: {
-  bank: BankItem[];
+  bank: TutorBankItemV4[];
   notionId: string;
   microId: string;
   recommendedStar: StarLevel;

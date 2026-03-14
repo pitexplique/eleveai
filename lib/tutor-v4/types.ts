@@ -385,3 +385,56 @@ export type AnswerTutorV4Response = {
     microMastery: MasteryMap;
   };
 };
+
+/* =========================================================
+   TYPES V4 POUR LA BANQUE DE QUESTIONS
+   Préparent la séparation avec V3 et la future migration
+   vers Supabase.
+   ========================================================= */
+
+export type SchoolLevel = "6e" | "5e" | "4e" | "3e";
+export type SubjectCode = "maths";
+
+export type TutorGeneratedQuestionV4 = {
+  text: string;
+  format: QuestionFormat;
+  choices?: string[];
+  expected: string[];
+  comparator: ComparatorName;
+};
+
+export type TutorBankItemFixedV4 = {
+  kind: "fixed";
+  id: string;
+  niveau: SchoolLevel;
+  matiere: SubjectCode;
+  notionId: string;
+  microId: string;
+  difficulty: DifficultyLevel;
+  theme?: QuestionTheme;
+  text: string;
+  format: QuestionFormat;
+  choices?: string[];
+  expected: string[];
+  comparator: ComparatorName;
+  hint?: string;
+  tags?: string[];
+};
+
+export type TutorBankItemTemplateV4 = {
+  kind: "template";
+  id: string;
+  niveau: SchoolLevel;
+  matiere: SubjectCode;
+  notionId: string;
+  microId: string;
+  difficulty: DifficultyLevel;
+  theme?: QuestionTheme;
+  hint?: string;
+  tags?: string[];
+  generate: () => TutorGeneratedQuestionV4;
+};
+
+export type TutorBankItemV4 =
+  | TutorBankItemFixedV4
+  | TutorBankItemTemplateV4;

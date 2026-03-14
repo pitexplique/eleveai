@@ -44,6 +44,7 @@ import type {
   LearnerProfile,
   DifficultyLevel,
   StarLevel,
+  ErrorKind,
 } from "@/lib/tutor-v4/types";
 
 function createDefaultLearnerProfile(): LearnerProfile {
@@ -123,10 +124,28 @@ function createInitialVisibleProgress(): VisibleProgress {
   return {
     unlockedStars: [],
     lastUnlockedStar: undefined,
-    encouragement: "Bienvenue. On avance étape par étape.",
+    encouragement: "Choisis une question pour commencer.",
     streak: 0,
     sessionStep: 0,
   };
+}
+
+function normalizeErrorKind(value: unknown): ErrorKind {
+  if (
+    value === "none" ||
+    value === "careless" ||
+    value === "conceptual" ||
+    value === "format" ||
+    value === "incomplete"
+  ) {
+    return value;
+  }
+
+  return "none";
+}
+
+function normalizeEstimatedUnderstanding(value: unknown): number | undefined {
+  return typeof value === "number" ? value : undefined;
 }
 
 function unlockHiddenStar(
@@ -170,9 +189,9 @@ function refreshVisibleProgress(
 ): void {
   let lastUnlocked: HiddenStarState | undefined;
 
-  if (session.turnCount === 0) {
+  if (session.turnCount >= 1 && session.attempts.length >= 1) {
     lastUnlocked =
-      unlockHiddenStar(session, "starter", "Première étape lancée.") ??
+      unlockHiddenStar(session, "starter", "Première réponse envoyée.") ??
       lastUnlocked;
   }
 
@@ -366,11 +385,6 @@ export async function startTutorSessionV4(
       },
     ],
   };
-
-  refreshVisibleProgress(session, {
-    success: false,
-    usedHint: false,
-  });
 
   createSessionV4(session);
 
@@ -578,8 +592,10 @@ export async function answerTutorV4(
       normalizedAnswer: result.normalizedAnswer,
       feedback: result.feedback,
       flags: result.flags,
-      errorKind: result.errorKind,
-      estimatedUnderstanding: result.estimatedUnderstanding,
+      errorKind: normalizeErrorKind(result.errorKind),
+      estimatedUnderstanding: normalizeEstimatedUnderstanding(
+        result.estimatedUnderstanding
+      ),
     },
     usedHint: session.lastHintUsed,
     startedAt: session.turnStartedAt ?? Date.now(),
