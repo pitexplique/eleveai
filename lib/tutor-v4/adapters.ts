@@ -7,8 +7,8 @@
 
 import { evaluateAnswer as evaluateAnswerV3 } from "@/lib/tutor/evaluation/evaluator";
 import { guardFeedback as guardFeedbackV3 } from "@/lib/tutor/governance/audit";
-import { loadKnowledge as loadKnowledgeV3 } from "@/lib/tutor/loaders/loadKnowledge";
-import { loadMatrix as loadMatrixV3 } from "@/lib/tutor/loaders/loadMatrix";
+import { loadKnowledgeV4 } from "@/lib/tutor-v4/loaders/loadKnowledgeV4";
+import { loadMatrixV4 } from "@/lib/tutor-v4/loaders/loadMatrixV4";
 
 import {
   initMastery as initMasteryV3,
@@ -34,8 +34,8 @@ import type {
  * On réexporte les fonctions V3 qui restent compatibles.
  */
 
-export const loadKnowledge = loadKnowledgeV3;
-export const loadMatrix = loadMatrixV3;
+export const loadKnowledge = loadKnowledgeV4;
+export const loadMatrix = loadMatrixV4;
 export const loadQuestionBank = loadQuestionBankV4;
 
 export const initMastery = initMasteryV3;

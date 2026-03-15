@@ -438,3 +438,39 @@ export type TutorBankItemTemplateV4 = {
 export type TutorBankItemV4 =
   | TutorBankItemFixedV4
   | TutorBankItemTemplateV4;
+
+  /* =========================================================
+   TYPES V4 POUR KNOWLEDGE ET MATRICE
+   Préparent la séparation complète avec V3.
+   ========================================================= */
+
+export type MatrixValue = -3 | -2 | -1 | 0 | 1 | 2 | 3;
+
+export type SkillMatrix = {
+  id: string;
+  classe: SchoolLevel;
+  matiere: SubjectCode;
+
+  microSkillIndex: string[];
+  matrix: MatrixValue[][];
+};
+
+export type KnowledgeMicro = {
+  id: string;
+  label: string;
+  description?: string;
+};
+
+export type KnowledgeNotion = {
+  id: string;
+  label: string;
+  boId: string;
+  micros: KnowledgeMicro[];
+};
+
+export type KnowledgePack = {
+  id: string;
+  classe: string;
+  matiere: string;
+  notions: KnowledgeNotion[];
+};

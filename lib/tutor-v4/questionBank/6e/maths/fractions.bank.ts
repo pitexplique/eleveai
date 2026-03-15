@@ -14,7 +14,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_read",
     difficulty: 1,
     theme: "neutral",
-    text: "Quelle fraction représente 1 part sur 4 parts égales ?",
+    text: "v4-Quelle fraction représente 1 part sur 4 parts égales ?",
     format: "short",
     expected: ["1/4", "1 / 4", "0,25", "0.25"],
     comparator: "fraction_decimal_equivalent",
