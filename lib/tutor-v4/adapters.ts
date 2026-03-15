@@ -2,26 +2,28 @@
  * adapters.ts
  *
  * Pont entre la V4 et certaines briques encore réutilisées.
- * La questionBank, elle, vient désormais de tutor-v4.
+ * Le contenu (knowledge, matrix, questionBank, selection) vient désormais de tutor-v4.
  */
 
 import { evaluateAnswer as evaluateAnswerV3 } from "@/lib/tutor/evaluation/evaluator";
 import { guardFeedback as guardFeedbackV3 } from "@/lib/tutor/governance/audit";
-import { loadKnowledgeV4 } from "@/lib/tutor-v4/loaders/loadKnowledgeV4";
-import { loadMatrixV4 } from "@/lib/tutor-v4/loaders/loadMatrixV4";
 
 import {
   initMastery as initMasteryV3,
   updateMastery as updateMasteryV3,
 } from "@/lib/tutor/mastery/mastery";
 
-import {
-  findMicro as findMicroV3,
-  findNotion as findNotionV3,
-  selectWeakestMicroInNotion as selectWeakestMicroInNotionV3,
-} from "@/lib/tutor/selection/selector";
-
+import { loadKnowledgeV4 } from "@/lib/tutor-v4/loaders/loadKnowledgeV4";
+import { loadMatrixV4 } from "@/lib/tutor-v4/loaders/loadMatrixV4";
 import { loadQuestionBankV4 } from "@/lib/tutor-v4/loaders/loadQuestionBankV4";
+
+import {
+  findMicro as findMicroV4,
+  findNotion as findNotionV4,
+  selectWeakestMicroInNotion as selectWeakestMicroInNotionV4,
+  selectStrongPrereqMicro as selectStrongPrereqMicroV4,
+  selectStrongChildMicro as selectStrongChildMicroV4,
+} from "@/lib/tutor-v4/selection/selector";
 
 import type {
   TutorQuestionOption,
@@ -30,10 +32,6 @@ import type {
   ErrorKind,
 } from "@/lib/tutor-v4/types";
 
-/**
- * On réexporte les fonctions V3 qui restent compatibles.
- */
-
 export const loadKnowledge = loadKnowledgeV4;
 export const loadMatrix = loadMatrixV4;
 export const loadQuestionBank = loadQuestionBankV4;
@@ -41,13 +39,11 @@ export const loadQuestionBank = loadQuestionBankV4;
 export const initMastery = initMasteryV3;
 export const updateMastery = updateMasteryV3;
 
-export const findMicro = findMicroV3;
-export const findNotion = findNotionV3;
-export const selectWeakestMicroInNotion = selectWeakestMicroInNotionV3;
-
-/**
- * Typage du résultat V4 attendu par le moteur.
- */
+export const findMicro = findMicroV4;
+export const findNotion = findNotionV4;
+export const selectWeakestMicroInNotion = selectWeakestMicroInNotionV4;
+export const selectStrongPrereqMicro = selectStrongPrereqMicroV4;
+export const selectStrongChildMicro = selectStrongChildMicroV4;
 
 type EvaluateAnswerV4Result = {
   ok: boolean;
@@ -58,10 +54,6 @@ type EvaluateAnswerV4Result = {
   estimatedUnderstanding: number;
 };
 
-/**
- * Adapter V3 → V4 pour l'évaluation.
- */
-
 export function evaluateAnswer(
   option: TutorQuestionOption,
   answer: string
@@ -69,7 +61,6 @@ export function evaluateAnswer(
   const result = evaluateAnswerV3(option as any, answer);
 
   const errorKind: ErrorKind = result.ok ? "none" : "incomplete";
-
   const estimatedUnderstanding = result.ok ? 80 : 35;
 
   return {
@@ -82,16 +73,8 @@ export function evaluateAnswer(
   };
 }
 
-/**
- * Adapter du système de garde du feedback.
- */
-
 export function guardFeedback(feedback: string, mode: TutorMode) {
   return guardFeedbackV3(feedback, mode);
 }
-
-/**
- * Réexport du type utilisé par la questionBank V4
- */
 
 export type { TutorBankItemV4 };
