@@ -2,11 +2,12 @@
  * types.ts
  *
  * Définit toutes les structures de données utilisées par le tutor V4.
- * Version V4 "étoiles cachées" (transition propre depuis la V3/V4 actuelle).
- * Ce fichier ne contient aucune logique.
+ * Version V4 "étoiles cachées" simplifiée :
+ * - suppression du choix manuel dys / standard / challenge
+ * - suppression de la confiance déclarée côté élève
+ * - progression pilotée par le moteur
  */
 
-export type StudentStyle = "dys" | "middle" | "challenge";
 export type TutorMode = "evaluation" | "coaching";
 export type QuestionFormat = "short" | "qcm";
 
@@ -40,8 +41,6 @@ export type DifficultyLevel = 1 | 2 | 3 | 4 | 5;
  * À terme, on pourra supprimer StarLevel et utiliser DifficultyLevel partout.
  */
 export type StarLevel = DifficultyLevel;
-
-export type ConfidenceLevel = 1 | 2 | 3;
 
 export type MasteryMap = Record<string, number>;
 
@@ -135,7 +134,6 @@ export type LearnerPreferences = {
 };
 
 export type LearnerPedagogicalState = {
-  confidenceCalibration: number; // -100..100
   estimatedAutonomy: number; // 0..100
   estimatedNeedForSupport: number; // 0..100
   estimatedPersistence: number; // 0..100
@@ -162,11 +160,6 @@ export type QuestionChoice = {
 
   chosenTheme: QuestionTheme;
   chosenAt: number;
-};
-
-export type ConfidenceState = {
-  level: ConfidenceLevel;
-  declaredAt: number;
 };
 
 export type ErrorKind =
@@ -200,7 +193,6 @@ export type TurnAttempt = {
   starLevel: StarLevel;
 
   theme: QuestionTheme;
-  confidence?: ConfidenceLevel;
   answer: string;
   result: AnswerEvaluation;
   usedHint: boolean;
@@ -236,7 +228,6 @@ export type TutorAuditEvent =
   | "start"
   | "pair_generated"
   | "question_chosen"
-  | "confidence_declared"
   | "answer_submitted"
   | "pedagogical_decision"
   | "hidden_star_unlocked";
@@ -262,7 +253,6 @@ export type TutorSessionV4 = {
 
   classe: string;
   matiere: string;
-  style: StudentStyle;
   mode: TutorMode;
 
   notionFocus: string;
@@ -280,7 +270,6 @@ export type TutorSessionV4 = {
 
   currentPair?: TutorQuestionPair;
   currentChoice?: QuestionChoice;
-  currentConfidence?: ConfidenceState;
 
   consecutiveErrors: number;
   consecutiveSuccess: number;
@@ -310,7 +299,6 @@ export type StartTutorV4Input = {
   classe: string;
   matiere: string;
   notion: string;
-  style: StudentStyle;
 };
 
 export type StartTutorV4Response = {
@@ -345,11 +333,6 @@ export type StartTutorV4Response = {
 export type ChooseQuestionInput = {
   sessionId: string;
   optionId: string;
-};
-
-export type ConfidenceInput = {
-  sessionId: string;
-  level: ConfidenceLevel;
 };
 
 export type AnswerInput = {
@@ -439,7 +422,7 @@ export type TutorBankItemV4 =
   | TutorBankItemFixedV4
   | TutorBankItemTemplateV4;
 
-  /* =========================================================
+/* =========================================================
    TYPES V4 POUR KNOWLEDGE ET MATRICE
    Préparent la séparation complète avec V3.
    ========================================================= */
@@ -450,7 +433,6 @@ export type SkillMatrix = {
   id: string;
   classe: SchoolLevel;
   matiere: SubjectCode;
-
   microSkillIndex: string[];
   matrix: MatrixValue[][];
 };

@@ -19,9 +19,12 @@
       "prerequis": [],
       "microTargets": [
         "decimal_compare",
-        "decimal_write"
+        "decimal_write",
+        "decimal_add",
+        "decimal_multiply",
+        "decimal_divide_by_integer"
       ],
-      "levels": [1,2,3]
+      "levels": [1, 2, 3]
     },
 
     {
@@ -34,7 +37,7 @@
         "fraction_compare",
         "fraction_quantity"
       ],
-      "levels": [1,2,3]
+      "levels": [1, 2, 3]
     },
 
     {
@@ -47,7 +50,7 @@
         "prop_unit",
         "prop_direct"
       ],
-      "levels": [1,2,3]
+      "levels": [1, 2, 3]
     },
 
     {
@@ -59,7 +62,7 @@
         "perim_square",
         "perim_rectangle"
       ],
-      "levels": [1,2]
+      "levels": [1, 2]
     },
 
     {
@@ -71,7 +74,7 @@
         "area_rectangle",
         "area_square"
       ],
-      "levels": [1,2]
+      "levels": [1, 2]
     },
 
     {
@@ -83,12 +86,11 @@
         "angle_right",
         "angle_compare"
       ],
-      "levels": [1,2]
+      "levels": [1, 2]
     }
   ],
 
   "microSkills": [
-
     {
       "id": "decimal_compare",
       "label": "Comparer des nombres décimaux",
@@ -103,6 +105,30 @@
       "notionId": "decimaux",
       "boId": "BO6N1",
       "prerequis": []
+    },
+
+    {
+      "id": "decimal_add",
+      "label": "Additionner des nombres décimaux",
+      "notionId": "decimaux",
+      "boId": "BO6N1",
+      "prerequis": ["decimal_write"]
+    },
+
+    {
+      "id": "decimal_multiply",
+      "label": "Multiplier des nombres décimaux",
+      "notionId": "decimaux",
+      "boId": "BO6N1",
+      "prerequis": ["decimal_add"]
+    },
+
+    {
+      "id": "decimal_divide_by_integer",
+      "label": "Diviser un nombre décimal par un entier",
+      "notionId": "decimaux",
+      "boId": "BO6N1",
+      "prerequis": ["decimal_write"]
     },
 
     {
@@ -198,9 +224,8 @@
       "label": "Comparer deux angles",
       "notionId": "angles",
       "boId": "BO6G2",
-      "prerequis": []
+      "prerequis": ["angle_right"]
     }
-
   ],
 
   "microGraph": []

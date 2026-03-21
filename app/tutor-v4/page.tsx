@@ -3,10 +3,8 @@
 
 import { useState } from "react";
 
-type StudentStyle = "dys" | "middle" | "challenge";
 type TutorMode = "evaluation" | "coaching";
 type StarLevel = 1 | 2 | 3 | 4 | 5;
-type ConfidenceLevel = 1 | 2 | 3;
 
 type HiddenStarId =
   | "starter"
@@ -139,7 +137,6 @@ function studentEncouragement(text: string) {
 export default function TutorV4Page() {
   const [classe] = useState("6e");
   const [matiere] = useState("maths");
-  const [style, setStyle] = useState<StudentStyle>("middle");
   const [notion, setNotion] = useState("fractions");
 
   const [sessionId, setSessionId] = useState<string | null>(null);
@@ -148,7 +145,6 @@ export default function TutorV4Page() {
   const [recommendedStar, setRecommendedStar] = useState<StarLevel>(2);
 
   const [selectedOptionId, setSelectedOptionId] = useState<string | null>(null);
-  const [confidence, setConfidence] = useState<ConfidenceLevel | null>(null);
   const [answer, setAnswer] = useState("");
   const [feedback, setFeedback] = useState("");
   const [sessionResults, setSessionResults] = useState<boolean[]>([]);
@@ -173,14 +169,13 @@ export default function TutorV4Page() {
       setBusy(true);
       setFeedback("");
       setSelectedOptionId(null);
-      setConfidence(null);
       setAnswer("");
       setSessionResults([]);
 
       const res = await fetch("/api/tutor-v4/start", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ classe, matiere, notion, style }),
+        body: JSON.stringify({ classe, matiere, notion }),
       });
 
       const data = await res.json();
@@ -232,36 +227,6 @@ export default function TutorV4Page() {
     }
   }
 
-  async function sendConfidence(level: ConfidenceLevel) {
-    if (!sessionId) {
-      setFeedback("Aucune session active.");
-      return;
-    }
-
-    try {
-      setBusy(true);
-
-      const res = await fetch("/api/tutor-v4/confidence", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ sessionId, level }),
-      });
-
-      const data = await res.json();
-
-      if (!res.ok) {
-        setFeedback(
-          data?.error ?? "Erreur pendant l’enregistrement de la confiance."
-        );
-        return;
-      }
-
-      setConfidence(level);
-    } finally {
-      setBusy(false);
-    }
-  }
-
   async function sendAnswer() {
     if (!sessionId) {
       setFeedback("Aucune session active.");
@@ -304,7 +269,6 @@ export default function TutorV4Page() {
       setVisibleProgress(typed.visibleProgress);
 
       setSelectedOptionId(null);
-      setConfidence(null);
       setAnswer("");
     } finally {
       setBusy(false);
@@ -320,10 +284,10 @@ export default function TutorV4Page() {
 
   return (
     <main
-      className="relative min-h-screen px-4 py-6 bg-cover bg-center bg-fixed"
+      className="relative min-h-screen bg-cover bg-center bg-fixed px-4 py-6"
       style={{ backgroundImage: "url('/images/tutor-bg.png')" }}
     >
-      <div className="absolute inset-0 bg-white-60 pointer-events-none" />
+      <div className="absolute inset-0 pointer-events-none bg-white/60" />
 
       <div className="relative mx-auto max-w-4xl space-y-5">
         <header className="rounded-3xl bg-white/95 p-5 shadow-sm ring-1 ring-slate-200 backdrop-blur-[1px]">
@@ -336,7 +300,7 @@ export default function TutorV4Page() {
                 Je m’entraîne
               </h1>
               <p className="text-sm text-slate-600">
-                Choisis une question et essaie d’améliorer ton score.
+                Choisis une question et progresse étape par étape.
               </p>
             </div>
 
@@ -355,7 +319,7 @@ export default function TutorV4Page() {
           </div>
         </header>
 
-        <section className="grid gap-4 md:grid-cols-4">
+        <section className="grid gap-4 md:grid-cols-3">
           <Card>
             <Label>Classe</Label>
             <input
@@ -372,19 +336,6 @@ export default function TutorV4Page() {
               disabled
               className="w-full rounded-xl border border-slate-300 bg-slate-100 px-3 py-2 text-sm text-slate-700"
             />
-          </Card>
-
-          <Card>
-            <Label>Profil</Label>
-            <select
-              value={style}
-              onChange={(e) => setStyle(e.target.value as StudentStyle)}
-              className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900"
-            >
-              <option value="dys">DYS</option>
-              <option value="middle">Standard</option>
-              <option value="challenge">Challenge</option>
-            </select>
           </Card>
 
           <Card>
@@ -497,40 +448,6 @@ export default function TutorV4Page() {
 
                 <div className="rounded-2xl bg-white p-4 text-base text-slate-900 ring-1 ring-slate-200">
                   {chosenOption.text}
-                </div>
-
-                <div className="space-y-2">
-                  <div className="text-sm font-semibold text-slate-800">
-                    Comment tu te sens ?
-                  </div>
-
-                  <div className="flex flex-wrap gap-2">
-                    {[1, 2, 3].map((level) => {
-                      const active = confidence === level;
-                      const label =
-                        level === 1
-                          ? "Pas sûr"
-                          : level === 2
-                          ? "Assez sûr"
-                          : "Très sûr";
-
-                      return (
-                        <button
-                          key={level}
-                          type="button"
-                          onClick={() => sendConfidence(level as ConfidenceLevel)}
-                          disabled={busy}
-                          className={`rounded-2xl px-4 py-2 text-sm font-medium ${
-                            active
-                              ? "bg-emerald-100 text-emerald-900 ring-2 ring-emerald-200"
-                              : "bg-white text-slate-700 ring-1 ring-slate-200 hover:bg-slate-50"
-                          }`}
-                        >
-                          {label}
-                        </button>
-                      );
-                    })}
-                  </div>
                 </div>
 
                 {chosenOption.format === "qcm" && chosenOption.choices?.length ? (

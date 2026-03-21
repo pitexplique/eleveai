@@ -2,9 +2,10 @@
  * tutorEngineV4.ts
  *
  * Cœur du tuteur intelligent V4.
- * Version de transition vers le modèle "étoiles cachées" :
- * - le moteur continue de raisonner avec une difficulté interne
- * - l’élève reçoit surtout une progression visible simple et motivante
+ * Version simplifiée :
+ * - plus de choix manuel dys / standard / challenge
+ * - plus de confiance déclarée par l’élève
+ * - progression pilotée par les réponses et la difficulté interne
  */
 
 import { randomUUID } from "crypto";
@@ -59,7 +60,6 @@ function createDefaultLearnerProfile(): LearnerProfile {
       jeuxVideoThemePreference: 50,
     },
     pedagogy: {
-      confidenceCalibration: 0,
       estimatedAutonomy: 50,
       estimatedNeedForSupport: 50,
       estimatedPersistence: 50,
@@ -183,7 +183,6 @@ function refreshVisibleProgress(
   session: TutorSessionV4,
   params: {
     success: boolean;
-    confidenceLevel?: 1 | 2 | 3;
     usedHint: boolean;
   }
 ): void {
@@ -204,12 +203,12 @@ function refreshVisibleProgress(
       ) ?? lastUnlocked;
   }
 
-  if (params.success && params.confidenceLevel === 3) {
+  if (session.consecutiveSuccess >= 3) {
     lastUnlocked =
       unlockHiddenStar(
         session,
         "confidence",
-        "Réussite avec forte confiance déclarée."
+        "Réussites régulières sur plusieurs questions."
       ) ?? lastUnlocked;
   }
 
@@ -339,7 +338,6 @@ export async function startTutorSessionV4(
 
     classe: input.classe,
     matiere: input.matiere,
-    style: input.style,
     mode: "evaluation",
 
     notionFocus: notion.id,
@@ -349,7 +347,6 @@ export async function startTutorSessionV4(
     recommendedStar,
     currentPair: pair,
     currentChoice: undefined,
-    currentConfidence: undefined,
 
     consecutiveErrors: 0,
     consecutiveSuccess: 0,
@@ -468,38 +465,6 @@ export function chooseQuestionV4(sessionId: string, optionId: string) {
   };
 }
 
-export function recordConfidenceV4(sessionId: string, level: 1 | 2 | 3) {
-  const session = getSessionV4(sessionId);
-
-  if (!session) {
-    throw new Error("Session introuvable");
-  }
-
-  session.currentConfidence = {
-    level,
-    declaredAt: Date.now(),
-  };
-  session.updatedAt = Date.now();
-
-  session.audit.push({
-    at: new Date().toISOString(),
-    event: "confidence_declared",
-    notionId: session.notionFocus,
-    microId: session.microFocus,
-    pairId: session.currentPair?.pairId,
-    optionId: session.currentChoice?.chosenOptionId,
-    difficulty: session.currentChoice?.chosenDifficulty,
-    starLevel: session.currentChoice?.chosenStar,
-    mode: session.mode,
-    reason: `Confiance déclarée : ${level}`,
-    flags: [],
-  });
-
-  saveSessionV4(session);
-
-  return { ok: true };
-}
-
 export async function answerTutorV4(
   sessionId: string,
   answer: string
@@ -510,7 +475,6 @@ export async function answerTutorV4(
     throw new Error("Session introuvable");
   }
 
-  const confidenceLevel = session.currentConfidence?.level;
   const chosenOption = getChosenOption(session);
   const chosenDifficulty = getDifficultyFromOption(chosenOption);
 
@@ -565,7 +529,6 @@ export async function answerTutorV4(
   updateLearnerProfile({
     profile: session.learnerProfile,
     choice: session.currentChoice!,
-    confidence: confidenceLevel,
     success: result.ok,
   });
 
@@ -585,7 +548,6 @@ export async function answerTutorV4(
     difficulty: chosenDifficulty,
     starLevel: chosenOption.meta.starLevel,
     theme: chosenOption.meta.theme,
-    confidence: confidenceLevel,
     answer,
     result: {
       ok: result.ok,
@@ -619,7 +581,6 @@ export async function answerTutorV4(
 
   refreshVisibleProgress(session, {
     success: result.ok,
-    confidenceLevel,
     usedHint: session.lastHintUsed,
   });
 
@@ -645,7 +606,6 @@ export async function answerTutorV4(
   ];
 
   session.currentChoice = undefined;
-  session.currentConfidence = undefined;
   session.turnStartedAt = Date.now();
 
   saveSessionV4(session);

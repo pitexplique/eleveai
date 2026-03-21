@@ -1,14 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 import { startTutorSessionV4 } from "@/lib/tutor-v4/tutorEngineV4";
 
-function isStudentStyle(value: unknown): value is "dys" | "middle" | "challenge" {
-  return value === "dys" || value === "middle" || value === "challenge";
-}
-
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const { classe, matiere, notion, style } = body;
+    const { classe, matiere, notion } = body;
 
     if (
       typeof classe !== "string" ||
@@ -25,7 +21,6 @@ export async function POST(req: NextRequest) {
       classe,
       matiere,
       notion,
-      style: isStudentStyle(style) ? style : "middle",
     });
 
     return NextResponse.json(result);

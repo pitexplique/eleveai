@@ -2,21 +2,16 @@
  * profileEngine.ts
  *
  * Met à jour le profil implicite de l'élève
- * à partir des choix et de la confiance.
+ * à partir de ses choix et de sa réussite.
  */
 
 import type {
   LearnerProfile,
   QuestionChoice,
-  ConfidenceLevel,
   QuestionTheme,
 } from "@/lib/tutor-v4/types";
 
 function clamp(v: number, min = 0, max = 100) {
-  return Math.max(min, Math.min(max, v));
-}
-
-function clampSigned(v: number, min = -100, max = 100) {
   return Math.max(min, Math.min(max, v));
 }
 
@@ -48,16 +43,28 @@ function updateThemePreference(profile: LearnerProfile, theme: QuestionTheme) {
   }
 }
 
-function updateChallengePreference(profile: LearnerProfile, choice: QuestionChoice) {
-  const delta = 2;
+function updateChallengePreference(
+  profile: LearnerProfile,
+  choice: QuestionChoice,
+  success?: boolean
+) {
+  if (success === undefined) {
+    return;
+  }
 
-  if (choice.chosenDifficulty >= 4) {
+  if (choice.chosenDifficulty >= 4 && success) {
     profile.preferences.challengePreference = clamp(
-      profile.preferences.challengePreference + delta
+      profile.preferences.challengePreference + 2
     );
   }
 
-  if (choice.chosenDifficulty <= 2) {
+  if (choice.chosenDifficulty <= 2 && success) {
+    profile.preferences.challengePreference = clamp(
+      profile.preferences.challengePreference - 1
+    );
+  }
+
+  if (choice.chosenDifficulty >= 4 && !success) {
     profile.preferences.challengePreference = clamp(
       profile.preferences.challengePreference - 1
     );
@@ -66,56 +73,36 @@ function updateChallengePreference(profile: LearnerProfile, choice: QuestionChoi
 
 function updateGuidancePreference(
   profile: LearnerProfile,
-  confidence?: ConfidenceLevel,
+  choice: QuestionChoice,
   success?: boolean
 ) {
-  if (confidence === undefined || success === undefined) {
+  if (success === undefined) {
     return;
   }
 
-  if (confidence === 1 && !success) {
+  if (!success && choice.chosenDifficulty >= 3) {
     profile.preferences.guidancePreference = clamp(
       profile.preferences.guidancePreference + 3
     );
   }
 
-  if (confidence === 3 && success) {
+  if (success && choice.chosenDifficulty <= 2) {
     profile.preferences.guidancePreference = clamp(
-      profile.preferences.guidancePreference - 2
-    );
-  }
-}
-
-function updateConfidenceCalibration(
-  profile: LearnerProfile,
-  confidence: ConfidenceLevel,
-  success: boolean
-) {
-  const step = 5;
-
-  if (confidence === 3 && !success) {
-    profile.pedagogy.confidenceCalibration = clampSigned(
-      profile.pedagogy.confidenceCalibration - step
-    );
-  }
-
-  if (confidence === 1 && success) {
-    profile.pedagogy.confidenceCalibration = clampSigned(
-      profile.pedagogy.confidenceCalibration + step
+      profile.preferences.guidancePreference - 1
     );
   }
 }
 
 function updateAutonomyAndSupport(
   profile: LearnerProfile,
-  confidence?: ConfidenceLevel,
+  choice: QuestionChoice,
   success?: boolean
 ) {
-  if (confidence === undefined || success === undefined) {
+  if (success === undefined) {
     return;
   }
 
-  if (success && confidence >= 2) {
+  if (success && choice.chosenDifficulty >= 2) {
     profile.pedagogy.estimatedAutonomy = clamp(
       profile.pedagogy.estimatedAutonomy + 2
     );
@@ -124,9 +111,9 @@ function updateAutonomyAndSupport(
     );
   }
 
-  if (!success && confidence === 1) {
+  if (!success) {
     profile.pedagogy.estimatedAutonomy = clamp(
-      profile.pedagogy.estimatedAutonomy - 2
+      profile.pedagogy.estimatedAutonomy - 1
     );
     profile.pedagogy.estimatedNeedForSupport = clamp(
       profile.pedagogy.estimatedNeedForSupport + 3
@@ -145,7 +132,7 @@ function updatePersistence(profile: LearnerProfile, success?: boolean) {
     );
   } else {
     profile.pedagogy.estimatedPersistence = clamp(
-      profile.pedagogy.estimatedPersistence + 0
+      profile.pedagogy.estimatedPersistence + 1
     );
   }
 }
@@ -153,20 +140,15 @@ function updatePersistence(profile: LearnerProfile, success?: boolean) {
 export function updateLearnerProfile(args: {
   profile: LearnerProfile;
   choice: QuestionChoice;
-  confidence?: ConfidenceLevel;
   success?: boolean;
 }) {
-  const { profile, choice, confidence, success } = args;
+  const { profile, choice, success } = args;
 
   updateThemePreference(profile, choice.chosenTheme);
-  updateChallengePreference(profile, choice);
-  updateGuidancePreference(profile, confidence, success);
-  updateAutonomyAndSupport(profile, confidence, success);
+  updateChallengePreference(profile, choice, success);
+  updateGuidancePreference(profile, choice, success);
+  updateAutonomyAndSupport(profile, choice, success);
   updatePersistence(profile, success);
-
-  if (confidence !== undefined && success !== undefined) {
-    updateConfidenceCalibration(profile, confidence, success);
-  }
 
   return profile;
 }
