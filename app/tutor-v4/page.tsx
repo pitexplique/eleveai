@@ -263,7 +263,7 @@ function studentBadgeLabel(star: HiddenStarState) {
 export default function TutorV4Page() {
   const [classe] = useState("6e");
   const [matiere] = useState("maths");
-  const [notion, setNotion] = useState("fractions");
+  const [notion, setNotion] = useState("décimaux");
 
   const [sessionId, setSessionId] = useState<string | null>(null);
   const [pair, setPair] = useState<TutorQuestionPair | null>(null);
