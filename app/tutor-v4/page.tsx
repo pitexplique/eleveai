@@ -263,7 +263,7 @@ function studentBadgeLabel(star: HiddenStarState) {
 export default function TutorV4Page() {
   const [classe] = useState("6e");
   const [matiere] = useState("maths");
-  const [notion, setNotion] = useState("décimaux");
+  const [notion, setNotion] = useState("fractions");
 
   const [sessionId, setSessionId] = useState<string | null>(null);
   const [pair, setPair] = useState<TutorQuestionPair | null>(null);
@@ -759,6 +759,8 @@ export default function TutorV4Page() {
                 <StatLine label="Points" value={`${earnedPoints}/${possiblePoints}`} />
                 <StatLine label="Bonnes réponses" value={`${bonnesReponses}`} />
                 <StatLine label="Questions faites" value={`${nbTentatives}`} />
+                <StatLine label="Série" value={`${visibleProgress.streak}`} />
+                <StatLine label="Niveau" value={stars(recommendedStar)} />
               </div>
             </SidebarCard>
           <SidebarCard title={`Micro-compétences : ${notionLabel(notion)}`}>
