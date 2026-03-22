@@ -199,11 +199,11 @@ function statusLabel(status: MicroStatus) {
 function statusClasses(status: MicroStatus) {
   switch (status) {
     case "current":
-      return "border-sky-200 bg-gradient-to-r from-sky-100 to-cyan-100 text-sky-900";
+      return "border-sky-200 bg-gradient-to-r from-sky-100 via-cyan-100 to-blue-100 text-sky-900";
     case "success":
-      return "border-emerald-200 bg-gradient-to-r from-emerald-100 to-green-100 text-emerald-900";
+      return "border-emerald-200 bg-gradient-to-r from-emerald-100 via-lime-100 to-green-100 text-emerald-900";
     case "retry":
-      return "border-amber-200 bg-gradient-to-r from-amber-100 to-orange-100 text-amber-900";
+      return "border-amber-200 bg-gradient-to-r from-amber-100 via-orange-100 to-yellow-100 text-amber-900";
     default:
       return "border-slate-200 bg-gradient-to-r from-slate-50 to-slate-100 text-slate-700";
   }
@@ -763,6 +763,7 @@ export default function TutorV4Page() {
                 <StatLine label="Niveau" value={stars(recommendedStar)} />
               </div>
             </SidebarCard>
+
             <SidebarCard title={`Micro-compétences : ${notionLabel(notion)}`}>
               <div className="mb-3 text-xs text-slate-500">
                 Suis ta progression dans la notion choisie.
@@ -822,7 +823,7 @@ function SidebarCard({
   children: ReactNode;
 }) {
   return (
-    <section className="rounded-3xl border border-slate-200 bg-white/95 p-4 shadow-sm backdrop-blur-[1px]">
+    <section className="rounded-3xl border border-slate-200 bg-white/95 p-4 shadow-md ring-1 ring-slate-100 backdrop-blur-[1px]">
       <h2 className="mb-3 text-base font-bold text-slate-900">{title}</h2>
       {children}
     </section>
@@ -862,7 +863,7 @@ function StatLine({
         styles[label] ?? "bg-slate-200"
       }`}
     >
-      <span className="text-sm font-semibold flex items-center gap-2">
+      <span className="flex items-center gap-2 text-sm font-semibold">
         <span>{icons[label] ?? "📌"}</span>
         {label}
       </span>
