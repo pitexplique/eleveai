@@ -199,11 +199,11 @@ function statusLabel(status: MicroStatus) {
 function statusClasses(status: MicroStatus) {
   switch (status) {
     case "current":
-      return "border-sky-200 bg-gradient-to-r from-sky-100 via-cyan-100 to-blue-100 text-sky-900";
+      return "border-sky-200 bg-gradient-to-r from-sky-100 to-cyan-100 text-sky-900";
     case "success":
-      return "border-emerald-200 bg-gradient-to-r from-emerald-100 via-lime-100 to-green-100 text-emerald-900";
+      return "border-emerald-200 bg-gradient-to-r from-emerald-100 to-green-100 text-emerald-900";
     case "retry":
-      return "border-amber-200 bg-gradient-to-r from-amber-100 via-orange-100 to-yellow-100 text-amber-900";
+      return "border-amber-200 bg-gradient-to-r from-amber-100 to-orange-100 text-amber-900";
     default:
       return "border-slate-200 bg-gradient-to-r from-slate-50 to-slate-100 text-slate-700";
   }
@@ -263,7 +263,7 @@ function studentBadgeLabel(star: HiddenStarState) {
 export default function TutorV4Page() {
   const [classe] = useState("6e");
   const [matiere] = useState("maths");
-  const [notion, setNotion] = useState("décimaux");
+  const [notion, setNotion] = useState("fractions");
 
   const [sessionId, setSessionId] = useState<string | null>(null);
   const [pair, setPair] = useState<TutorQuestionPair | null>(null);
@@ -759,39 +759,36 @@ export default function TutorV4Page() {
                 <StatLine label="Points" value={`${earnedPoints}/${possiblePoints}`} />
                 <StatLine label="Bonnes réponses" value={`${bonnesReponses}`} />
                 <StatLine label="Questions faites" value={`${nbTentatives}`} />
-                <StatLine label="Série" value={`${visibleProgress.streak}`} />
-                <StatLine label="Niveau" value={stars(recommendedStar)} />
               </div>
             </SidebarCard>
+          <SidebarCard title={`Micro-compétences : ${notionLabel(notion)}`}>
+            <div className="mb-3 text-xs text-slate-500">
+              Suis ta progression dans la notion choisie.
+            </div>
 
-            <SidebarCard title={`Micro-compétences : ${notionLabel(notion)}`}>
-              <div className="mb-3 text-xs text-slate-500">
-                Suis ta progression dans la notion choisie.
-              </div>
+            <div className="space-y-3">
+              {notionMicros.map((microId) => {
+                const status = microStatuses[microId] ?? "idle";
 
-              <div className="space-y-3">
-                {notionMicros.map((microId) => {
-                  const status = microStatuses[microId] ?? "idle";
-
-                  return (
-                    <div
-                      key={microId}
-                      className={`rounded-2xl border px-4 py-3 shadow-sm transition ${statusClasses(status)}`}
-                    >
-                      <div className="flex items-start justify-between gap-3">
-                        <div className="text-sm font-semibold leading-5">
-                          {microLabel(microId)}
-                        </div>
-
-                        <span className="rounded-full bg-white/80 px-2 py-1 text-[11px] font-bold shadow-sm">
-                          {statusLabel(status)}
-                        </span>
+                return (
+                  <div
+                    key={microId}
+                    className={`rounded-2xl border px-4 py-3 shadow-sm transition ${statusClasses(status)}`}
+                  >
+                    <div className="flex items-start justify-between gap-3">
+                      <div className="text-sm font-semibold leading-5">
+                        {microLabel(microId)}
                       </div>
+
+                      <span className="rounded-full bg-white/80 px-2 py-1 text-[11px] font-bold shadow-sm">
+                        {statusLabel(status)}
+                      </span>
                     </div>
-                  );
-                })}
-              </div>
-            </SidebarCard>
+                  </div>
+                );
+              })}
+            </div>
+          </SidebarCard>
 
             <SidebarCard title="Repères">
               <div className="space-y-2 text-sm text-slate-700">
@@ -823,7 +820,7 @@ function SidebarCard({
   children: ReactNode;
 }) {
   return (
-    <section className="rounded-3xl border border-slate-200 bg-white/95 p-4 shadow-md ring-1 ring-slate-100 backdrop-blur-[1px]">
+    <section className="rounded-3xl border border-slate-200 bg-white/95 p-4 shadow-sm backdrop-blur-[1px]">
       <h2 className="mb-3 text-base font-bold text-slate-900">{title}</h2>
       {children}
     </section>
@@ -863,7 +860,7 @@ function StatLine({
         styles[label] ?? "bg-slate-200"
       }`}
     >
-      <span className="flex items-center gap-2 text-sm font-semibold">
+      <span className="text-sm font-semibold flex items-center gap-2">
         <span>{icons[label] ?? "📌"}</span>
         {label}
       </span>
