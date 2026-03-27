@@ -4,7 +4,7 @@
  * Cœur du tuteur intelligent V4.
  * Version simplifiée :
  * - plus de choix manuel dys / standard / challenge
- * - plus de confiance déclarée par l’élève
+ * - plus de confiance déclarée côté élève
  * - progression pilotée par les réponses et la difficulté interne
  *
  * NOTE canvas :
@@ -34,6 +34,8 @@ import {
   findMicro,
   findNotion,
   selectWeakestMicroInNotion,
+  selectStrongPrereqMicro,
+  selectStrongChildMicro,
   evaluateAnswer,
   guardFeedback,
 } from "@/lib/tutor-v4/adapters";
@@ -44,6 +46,7 @@ import type {
   TutorSessionV4,
   AnswerTutorV4Response,
   TutorQuestionOption,
+  TutorQuestionPair,
   HiddenStarState,
   HiddenStarId,
   VisibleProgress,
@@ -51,6 +54,10 @@ import type {
   DifficultyLevel,
   StarLevel,
   ErrorKind,
+  KnowledgePack,
+  KnowledgeMicroSkill,
+  SkillMatrix,
+  TutorBankItemV4,
 } from "@/lib/tutor-v4/types";
 
 function createDefaultLearnerProfile(): LearnerProfile {
@@ -291,11 +298,93 @@ function getDifficultyFromOption(option: TutorQuestionOption): DifficultyLevel {
   return option.meta.difficulty ?? option.meta.starLevel;
 }
 
+/**
+ * Essaie de construire une paire pour une micro-compétence.
+ * Si la banque est insuffisante, renvoie null au lieu de planter.
+ */
+function tryBuildPair(args: {
+  bank: TutorBankItemV4[];
+  notionId: string;
+  microId: string;
+  recommendedStar: StarLevel;
+  recentQuestionIds: string[];
+}): TutorQuestionPair | null {
+  try {
+    return buildQuestionPair(args);
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * Cherche une micro suivante dans la même notion si la micro courante
+ * n'a pas assez de questions.
+ */
+function findNextAvailableMicroInNotion(args: {
+  knowledge: KnowledgePack;
+  matrix: SkillMatrix;
+  bank: TutorBankItemV4[];
+  notionId: string;
+  currentMicroId: string;
+  masteryByMicro: Record<string, number>;
+  recommendedStar: StarLevel;
+  recentQuestionIds: string[];
+}): { micro: KnowledgeMicroSkill; pair: TutorQuestionPair } | null {
+  const {
+    knowledge,
+    matrix,
+    bank,
+    notionId,
+    currentMicroId,
+    masteryByMicro,
+    recommendedStar,
+    recentQuestionIds,
+  } = args;
+
+  const candidates: KnowledgeMicroSkill[] = [];
+  const seen = new Set<string>();
+
+  const pushCandidate = (m: KnowledgeMicroSkill | null | undefined) => {
+    if (!m) return;
+    if (m.notionId !== notionId) return;
+    if (seen.has(m.id)) return;
+    seen.add(m.id);
+    candidates.push(m);
+  };
+
+  pushCandidate(selectStrongChildMicro(knowledge, matrix, currentMicroId));
+  pushCandidate(selectStrongPrereqMicro(knowledge, matrix, currentMicroId));
+
+  const notionMicros = knowledge.microSkills
+    .filter((m) => m.notionId === notionId && m.id !== currentMicroId)
+    .sort((a, b) => (masteryByMicro[a.id] ?? 50) - (masteryByMicro[b.id] ?? 50));
+
+  for (const m of notionMicros) {
+    pushCandidate(m);
+  }
+
+  for (const micro of candidates) {
+    const pair = tryBuildPair({
+      bank,
+      notionId,
+      microId: micro.id,
+      recommendedStar,
+      recentQuestionIds,
+    });
+
+    if (pair) {
+      return { micro, pair };
+    }
+  }
+
+  return null;
+}
+
 export async function startTutorSessionV4(
   input: StartTutorV4Input
 ): Promise<StartTutorV4Response> {
   const knowledge = await loadKnowledge(input.classe, input.matiere);
-  await loadMatrix(input.classe, input.matiere);
+  const matrix = await loadMatrix(input.classe, input.matiere);
   const bank = await loadQuestionBank(input.classe, input.matiere);
 
   if (!bank || !Array.isArray(bank)) {
@@ -322,7 +411,7 @@ export async function startTutorSessionV4(
   const recommendedDifficulty: DifficultyLevel = 2;
   const recommendedStar: StarLevel = recommendedDifficulty;
 
-  const rawPair = buildQuestionPair({
+  let pair = tryBuildPair({
     bank,
     notionId: notion.id,
     microId: firstMicro.id,
@@ -330,8 +419,30 @@ export async function startTutorSessionV4(
     recentQuestionIds: [],
   });
 
-  const pair = {
-    ...rawPair,
+  let actualMicro = firstMicro;
+
+  if (!pair) {
+    const fallback = findNextAvailableMicroInNotion({
+      knowledge,
+      matrix,
+      bank,
+      notionId: notion.id,
+      currentMicroId: firstMicro.id,
+      masteryByMicro: mastery.micro,
+      recommendedStar,
+      recentQuestionIds: [],
+    });
+
+    if (!fallback) {
+      throw new Error(`Aucune paire disponible dans la notion ${notion.id}.`);
+    }
+
+    actualMicro = fallback.micro;
+    pair = fallback.pair;
+  }
+
+  const currentPair: TutorQuestionPair = {
+    ...pair,
     recommendedDifficulty,
     recommendedStar,
   };
@@ -346,11 +457,11 @@ export async function startTutorSessionV4(
     mode: "evaluation",
 
     notionFocus: notion.id,
-    microFocus: firstMicro.id,
+    microFocus: actualMicro.id,
 
     recommendedDifficulty,
     recommendedStar,
-    currentPair: pair,
+    currentPair,
     currentChoice: undefined,
 
     consecutiveErrors: 0,
@@ -370,7 +481,7 @@ export async function startTutorSessionV4(
     hiddenStars: createDefaultHiddenStars(),
     visibleProgress: createInitialVisibleProgress(),
 
-    recentQuestionIds: [pair.optionA.id, pair.optionB.id],
+    recentQuestionIds: [currentPair.optionA.id, currentPair.optionB.id],
     attempts: [],
 
     knowledgePackId: knowledge.id,
@@ -379,8 +490,8 @@ export async function startTutorSessionV4(
         at: new Date().toISOString(),
         event: "start",
         notionId: notion.id,
-        microId: firstMicro.id,
-        pairId: pair.pairId,
+        microId: actualMicro.id,
+        pairId: currentPair.pairId,
         mode: "evaluation",
         reason: "Démarrage de la session V4.",
         flags: [],
@@ -392,11 +503,11 @@ export async function startTutorSessionV4(
 
   return {
     sessionId: session.id,
-    pair,
+    pair: currentPair,
     mode: session.mode,
     recommendedStar: session.recommendedStar,
     recommendedDifficulty: session.recommendedDifficulty,
-    notionCatalog: knowledge.notions.map((n: any) => ({
+    notionCatalog: knowledge.notions.map((n) => ({
       id: n.id,
       label: n.label,
     })),
@@ -486,6 +597,7 @@ export async function answerTutorV4(
   const result = evaluateAnswer(chosenOption, answer);
 
   const knowledge = await loadKnowledge(session.classe, session.matiere);
+  const matrix = await loadMatrix(session.classe, session.matiere);
   const bank = await loadQuestionBank(session.classe, session.matiere);
 
   if (!bank || !Array.isArray(bank)) {
@@ -589,7 +701,7 @@ export async function answerTutorV4(
     usedHint: session.lastHintUsed,
   });
 
-  const nextPairRaw = buildQuestionPair({
+  let nextPair = tryBuildPair({
     bank,
     notionId: session.notionFocus,
     microId: session.microFocus,
@@ -597,17 +709,45 @@ export async function answerTutorV4(
     recentQuestionIds: session.recentQuestionIds,
   });
 
-  const nextPair = {
-    ...nextPairRaw,
+  let nextMicroId = session.microFocus;
+
+  if (!nextPair) {
+    const fallback = findNextAvailableMicroInNotion({
+      knowledge,
+      matrix,
+      bank,
+      notionId: session.notionFocus,
+      currentMicroId: session.microFocus,
+      masteryByMicro: session.masteryByMicro,
+      recommendedStar: session.recommendedStar,
+      recentQuestionIds: session.recentQuestionIds,
+    });
+
+    if (fallback) {
+      nextMicroId = fallback.micro.id;
+      nextPair = fallback.pair;
+    }
+  }
+
+  if (!nextPair) {
+    throw new Error(
+      `Aucune paire disponible pour continuer dans la notion ${session.notionFocus}.`
+    );
+  }
+
+  const nextCurrentPair: TutorQuestionPair = {
+    ...nextPair,
     recommendedDifficulty: session.recommendedDifficulty,
     recommendedStar: session.recommendedStar,
   };
 
-  session.currentPair = nextPair;
+  session.microFocus = nextMicroId;
+  session.currentPair = nextCurrentPair;
+
   session.recentQuestionIds = [
     ...session.recentQuestionIds.slice(-8),
-    nextPair.optionA.id,
-    nextPair.optionB.id,
+    nextCurrentPair.optionA.id,
+    nextCurrentPair.optionB.id,
   ];
 
   session.currentChoice = undefined;
@@ -621,7 +761,7 @@ export async function answerTutorV4(
       ok: result.ok,
       flags: [...result.flags, ...guarded.flags],
     },
-    pair: nextPair,
+    pair: nextCurrentPair,
     mode: session.mode,
     recommendedStar: session.recommendedStar,
     recommendedDifficulty: session.recommendedDifficulty,

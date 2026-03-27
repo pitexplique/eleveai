@@ -177,25 +177,28 @@ export function buildQuestionPair(args: {
   const { bank, notionId, microId, recommendedStar, recentQuestionIds = [] } =
     args;
 
-  const filtered = bank.filter(
-    (item) =>
-      item.notionId === notionId &&
-      item.microId === microId &&
-      !recentQuestionIds.includes(item.id)
+  const allForMicro = bank.filter(
+    (item) => item.notionId === notionId && item.microId === microId
   );
 
-  if (filtered.length < 2) {
+  const filtered = allForMicro.filter(
+    (item) => !recentQuestionIds.includes(item.id)
+  );
+
+  const usable = filtered.length >= 2 ? filtered : allForMicro;
+
+  if (usable.length < 2) {
     throw new Error(
       `Pas assez de questions disponibles pour ${notionId}/${microId} en V4.`
     );
   }
 
-  const nearLevel = filtered.filter((item) => {
+  const nearLevel = usable.filter((item) => {
     const star = difficultyToStar(item.difficulty);
     return Math.abs(star - recommendedStar) <= 1;
   });
 
-  const source = nearLevel.length >= 2 ? nearLevel : filtered;
+  const source = nearLevel.length >= 2 ? nearLevel : usable;
 
   const firstItem = pickRandom(source);
   const optionA = toTutorQuestionOption(firstItem);

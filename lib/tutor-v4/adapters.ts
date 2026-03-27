@@ -30,14 +30,12 @@ import type {
   TutorBankItemV4,
   TutorMode,
   ErrorKind,
+  KnowledgePack,
 } from "@/lib/tutor-v4/types";
 
 export const loadKnowledge = loadKnowledgeV4;
 export const loadMatrix = loadMatrixV4;
 export const loadQuestionBank = loadQuestionBankV4;
-
-export const initMastery = initMasteryV3;
-export const updateMastery = updateMasteryV3;
 
 export const findMicro = findMicroV4;
 export const findNotion = findNotionV4;
@@ -54,20 +52,90 @@ type EvaluateAnswerV4Result = {
   estimatedUnderstanding: number;
 };
 
+type LegacyEvaluatorQuestion = {
+  id: string;
+  text: string;
+  format: "short" | "qcm";
+  choices?: string[];
+  expected: string[];
+  comparator:
+    | "exact_text"
+    | "mcq_exact"
+    | "number_equal"
+    | "fraction_decimal_equivalent"
+    | "contains_keyword";
+  hint?: string;
+};
+
+function toLegacyEvaluatorQuestion(
+  option: TutorQuestionOption
+): LegacyEvaluatorQuestion {
+  return {
+    id: option.id,
+    text: option.text,
+    format: option.format,
+    choices: option.choices,
+    expected: option.expected,
+    comparator: option.comparator,
+    hint: option.hint,
+  };
+}
+
+/**
+ * Adaptation V4 -> format attendu par la mastery V3.
+ * La V3 attend :
+ * - notions[]
+ * - bo_competences[]
+ * - microSkills[]
+ */
+function toLegacyKnowledgeForMastery(pack: KnowledgePack) {
+  return {
+    id: pack.id,
+    classe: pack.classe,
+    matiere: pack.matiere,
+    bo_competences: pack.bo_competences.map((c) => ({
+      boId: c.boId,
+      label: c.label,
+    })),
+    notions: pack.notions.map((n) => ({
+      id: n.id,
+      label: n.label,
+      boId: n.boId,
+      prerequis: n.prerequis,
+      microTargets: n.microTargets,
+      levels: n.levels,
+    })),
+    microSkills: pack.microSkills.map((m) => ({
+      id: m.id,
+      label: m.label,
+      notionId: m.notionId,
+      boId: m.boId,
+      prerequis: m.prerequis,
+    })),
+  };
+}
+
+export function initMastery(pack: KnowledgePack) {
+  return initMasteryV3(toLegacyKnowledgeForMastery(pack) as any);
+}
+
+export const updateMastery = updateMasteryV3;
+
 export function evaluateAnswer(
   option: TutorQuestionOption,
   answer: string
 ): EvaluateAnswerV4Result {
-  const result = evaluateAnswerV3(option as any, answer);
+  const legacyQuestion = toLegacyEvaluatorQuestion(option);
+  const result = evaluateAnswerV3(legacyQuestion as any, answer);
 
   const errorKind: ErrorKind = result.ok ? "none" : "incomplete";
   const estimatedUnderstanding = result.ok ? 80 : 35;
 
   return {
     ok: result.ok,
-    normalizedAnswer: result.normalizedAnswer,
+    normalizedAnswer: result.normalizedAnswer ?? answer.trim(),
     feedback: result.feedback,
-    flags: result.flags,
+    flags: result.flags ?? [],
     errorKind,
     estimatedUnderstanding,
   };
