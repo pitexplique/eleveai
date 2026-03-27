@@ -1,6 +1,12 @@
 "use client";
 
-import { useEffect, useMemo, useState, type KeyboardEvent, type ReactNode } from "react";
+import {
+  useEffect,
+  useMemo,
+  useState,
+  type KeyboardEvent,
+  type ReactNode,
+} from "react";
 import TriangleCanvas from "@/lib/tutor-v4/components/TriangleCanvas";
 import {
   NOTION_MICRO_MAP,
@@ -9,7 +15,6 @@ import {
   notionLabel,
 } from "@/lib/tutor-v4/catalog";
 import type {
-  CanvasFigure,
   HiddenStarState,
   StarLevel,
   StartTutorV4Response,
@@ -42,24 +47,24 @@ function formatDuration(totalSeconds: number) {
 function statusLabel(status: MicroStatus) {
   switch (status) {
     case "current":
-      return "🔵 En cours";
+      return "Mission en cours";
     case "success":
-      return "🟢 Réussi";
+      return "Réussie";
     case "retry":
-      return "🟠 À retravailler";
+      return "À retravailler";
     default:
-      return "⚪ Pas encore";
+      return "Pas encore";
   }
 }
 
 function statusClasses(status: MicroStatus) {
   switch (status) {
     case "current":
-      return "border-sky-200 bg-gradient-to-r from-sky-100 to-cyan-100 text-sky-900";
+      return "border-sky-300 bg-gradient-to-r from-sky-100 to-cyan-100 text-sky-900";
     case "success":
-      return "border-emerald-200 bg-gradient-to-r from-emerald-100 to-green-100 text-emerald-900";
+      return "border-emerald-300 bg-gradient-to-r from-emerald-100 to-green-100 text-emerald-900";
     case "retry":
-      return "border-amber-200 bg-gradient-to-r from-amber-100 to-orange-100 text-amber-900";
+      return "border-amber-300 bg-gradient-to-r from-amber-100 to-orange-100 text-amber-900";
     default:
       return "border-slate-200 bg-gradient-to-r from-slate-50 to-slate-100 text-slate-700";
   }
@@ -72,31 +77,31 @@ function simpleEncouragement(args: {
   mode: TutorMode;
 }) {
   if (args.ok === undefined || !args.microId) {
-    return "Choisis une question puis réponds tranquillement.";
+    return "Choisis une mission puis avance à ton rythme.";
   }
 
   if (args.ok) {
-    return `✅ Bonne réponse sur : ${microLabel(args.microId)}${
+    return `✅ Mission réussie : ${microLabel(args.microId)}${
       args.points ? ` — +${args.points} point${args.points > 1 ? "s" : ""}` : ""
     }`;
   }
 
   return args.mode === "coaching"
-    ? `⚠️ À retravailler : ${microLabel(args.microId)} — un indice est proposé.`
-    : `⚠️ À retravailler : ${microLabel(args.microId)}`;
+    ? `⚠️ Mission à retravailler : ${microLabel(args.microId)} — un indice apparaît.`
+    : `⚠️ Mission à retravailler : ${microLabel(args.microId)}`;
 }
 
 function visibleProgressText(text: string) {
   const t = text.toLowerCase();
-  if (t.includes("débloquée")) return "⭐ Nouveau badge gagné";
-  if (t.includes("progression solide")) return "⭐ Belle progression";
+  if (t.includes("débloquée")) return "⭐ Badge gagné";
+  if (t.includes("progression solide")) return "🚀 Progression solide";
   return "";
 }
 
 function studentBadgeLabel(star: HiddenStarState) {
   switch (star.id) {
     case "starter":
-      return "Je commence";
+      return "Départ";
     case "confidence":
       return "Confiance";
     case "regularity":
@@ -110,10 +115,17 @@ function studentBadgeLabel(star: HiddenStarState) {
     case "theme_explorer":
       return "Explorateur";
     case "micro_mastery":
-      return "Tu progresses";
+      return "Maîtrise";
     default:
       return "Bravo";
   }
+}
+
+function feedbackTone(ok?: boolean) {
+  if (ok === undefined) return "border-slate-200 bg-slate-50 text-slate-800";
+  return ok
+    ? "border-emerald-200 bg-emerald-50 text-emerald-900"
+    : "border-amber-200 bg-amber-50 text-amber-900";
 }
 
 export default function TutorV4Page() {
@@ -127,7 +139,8 @@ export default function TutorV4Page() {
   const [recommendedStar, setRecommendedStar] = useState<StarLevel>(2);
 
   const [selectedOptionId, setSelectedOptionId] = useState<string | null>(null);
-  const [currentQuestion, setCurrentQuestion] = useState<TutorQuestionOption | null>(null);
+  const [currentQuestion, setCurrentQuestion] =
+    useState<TutorQuestionOption | null>(null);
   const [answer, setAnswer] = useState("");
   const [feedback, setFeedback] = useState("");
 
@@ -140,7 +153,9 @@ export default function TutorV4Page() {
     points?: number;
   }>({});
 
-  const [microStatuses, setMicroStatuses] = useState<Record<string, MicroStatus>>({});
+  const [microStatuses, setMicroStatuses] = useState<
+    Record<string, MicroStatus>
+  >({});
 
   const [visibleProgress, setVisibleProgress] = useState<VisibleProgress>({
     unlockedStars: [],
@@ -175,7 +190,10 @@ export default function TutorV4Page() {
 
   const notionMicros = useMemo(() => NOTION_MICRO_MAP[notion] ?? [], [notion]);
 
-  async function activateQuestion(currentSessionId: string, option: TutorQuestionOption) {
+  async function activateQuestion(
+    currentSessionId: string,
+    option: TutorQuestionOption
+  ) {
     const res = await fetch("/api/tutor-v4/choose", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -245,7 +263,9 @@ export default function TutorV4Page() {
       setVisibleProgress(typed.visibleProgress);
       setSessionStartedAt(Date.now());
     } catch (error) {
-      setFeedback(error instanceof Error ? error.message : "Erreur au démarrage du tutor.");
+      setFeedback(
+        error instanceof Error ? error.message : "Erreur au démarrage du tutor."
+      );
     } finally {
       setBusy(false);
     }
@@ -263,7 +283,9 @@ export default function TutorV4Page() {
       setFeedback("");
     } catch (error) {
       setFeedback(
-        error instanceof Error ? error.message : "Erreur pendant le choix de la question."
+        error instanceof Error
+          ? error.message
+          : "Erreur pendant le choix de la question."
       );
     } finally {
       setBusy(false);
@@ -312,6 +334,7 @@ export default function TutorV4Page() {
 
       setSessionResults((prev) => [...prev, typed.result.ok]);
       setPossiblePoints((prev) => prev + pointsForQuestion);
+
       if (typed.result.ok) {
         setEarnedPoints((prev) => prev + pointsForQuestion);
       }
@@ -339,7 +362,9 @@ export default function TutorV4Page() {
       setCurrentQuestion(null);
       setAnswer("");
     } catch (error) {
-      setFeedback(error instanceof Error ? error.message : "Erreur pendant la correction.");
+      setFeedback(
+        error instanceof Error ? error.message : "Erreur pendant la correction."
+      );
     } finally {
       setBusy(false);
     }
@@ -358,13 +383,8 @@ export default function TutorV4Page() {
   }
 
   return (
-    <main
-      className="relative min-h-screen bg-cover bg-center bg-fixed px-4 py-6"
-      style={{ backgroundImage: "url('/images/tutor-bg.png')" }}
-    >
-      <div className="absolute inset-0 pointer-events-none bg-white/60" />
-
-      <div className="relative mx-auto max-w-7xl">
+    <main className="min-h-screen bg-[radial-gradient(circle_at_top,_#dbeafe,_#f8fafc_45%,_#eef2ff_70%,_#ffffff)] px-4 py-6">
+      <div className="mx-auto max-w-7xl">
         <div className="grid gap-5 xl:grid-cols-[minmax(0,1fr)_320px]">
           <div className="space-y-5">
             <section className="grid gap-4 md:grid-cols-3">
@@ -402,39 +422,47 @@ export default function TutorV4Page() {
               </Card>
             </section>
 
-            <header className="rounded-3xl bg-white/95 p-5 shadow-sm ring-1 ring-slate-200 backdrop-blur-[1px]">
-              <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-                <div className="space-y-1">
-                  <div className="inline-flex rounded-full bg-violet-100 px-3 py-1 text-xs font-semibold text-violet-900">
-                    Tutor de maths
+            <header className="overflow-hidden rounded-[28px] border border-slate-200 bg-white shadow-lg">
+              <div className="bg-gradient-to-r from-indigo-600 via-sky-600 to-cyan-500 px-6 py-5 text-white">
+                <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+                  <div className="space-y-2">
+                    <div className="inline-flex rounded-full bg-white/20 px-3 py-1 text-xs font-bold tracking-wide">
+                      MODE MISSION
+                    </div>
+                    <h1 className="text-3xl font-black tracking-tight">
+                      Tutor Maths V4
+                    </h1>
+                    <p className="text-sm text-white/90">
+                      Choisis ta mission, gagne des points et débloque des badges.
+                    </p>
                   </div>
-                  <h1 className="text-2xl font-extrabold text-slate-900">
-                    Je m’entraîne
-                  </h1>
-                  <p className="text-sm text-slate-600">
-                    Choisis la question qui te convient, puis réponds à ton rythme.
-                  </p>
+
+                  <div className="flex flex-wrap items-center gap-3">
+                    <GamePill>🎮 {mode === "evaluation" ? "Évaluation" : "Coaching"}</GamePill>
+                    <GamePill>⭐ {stars(recommendedStar)}</GamePill>
+                    <GamePill>🔥 Série {visibleProgress.streak}</GamePill>
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex flex-col gap-4 px-6 py-5 md:flex-row md:items-center md:justify-between">
+                <div className="grid flex-1 gap-3 sm:grid-cols-3">
+                  <HeroStat title="Score" value={`${scoreSeanceSur20}/20`} icon="🎯" />
+                  <HeroStat title="Points" value={`${earnedPoints}/${possiblePoints}`} icon="⭐" />
+                  <HeroStat title="Temps" value={formatDuration(elapsedSeconds)} icon="⏱️" />
                 </div>
 
-                <div className="flex flex-wrap items-center gap-3">
-                  <button
-                    onClick={startSession}
-                    disabled={busy}
-                    className="rounded-2xl bg-sky-700 px-5 py-3 text-sm font-bold text-white hover:bg-sky-600 disabled:opacity-50"
-                  >
-                    Démarrer
-                  </button>
-
-                  <MiniPill>
-                    {mode === "evaluation" ? "Mode évaluation" : "Mode coaching"}
-                  </MiniPill>
-                  <MiniPill>Niveau {stars(recommendedStar)}</MiniPill>
-                  <MiniPill>Série {visibleProgress.streak}</MiniPill>
-                </div>
+                <button
+                  onClick={startSession}
+                  disabled={busy}
+                  className="rounded-2xl bg-slate-900 px-6 py-3 text-sm font-black text-white shadow hover:bg-slate-800 disabled:opacity-50"
+                >
+                  {busy ? "Chargement..." : "Démarrer une mission"}
+                </button>
               </div>
             </header>
 
-            <section className="rounded-2xl border border-slate-200 bg-white/95 p-4 shadow-sm backdrop-blur-[1px]">
+            <section className="rounded-2xl border border-slate-200 bg-white/95 p-4 shadow-sm">
               <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
                 <div className="text-sm font-semibold text-slate-800">
                   {simpleEncouragement({
@@ -465,30 +493,34 @@ export default function TutorV4Page() {
             </section>
 
             {pair && !currentQuestion ? (
-              <section className="rounded-3xl border border-slate-200 bg-white/95 p-5 shadow-sm backdrop-blur-[1px]">
-                <div className="space-y-1">
-                  <div className="text-lg font-bold text-slate-900">
-                    Choisis ta question
+              <section className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
+                <div className="mb-4 space-y-1">
+                  <div className="text-xl font-black text-slate-900">
+                    Choisis ta mission
                   </div>
                   <p className="text-sm text-slate-500">
-                    Tu peux prendre la plus rassurante ou tenter la plus ambitieuse.
+                    Tu peux choisir la mission la plus simple ou tenter la plus ambitieuse.
                   </p>
                 </div>
 
-                <div className="mt-4 grid gap-4 md:grid-cols-2">
+                <div className="grid gap-4 md:grid-cols-2">
                   {[pair.optionA, pair.optionB].map((option, idx) => (
                     <button
                       key={option.id}
                       type="button"
                       onClick={() => void chooseOption(option)}
                       disabled={busy}
-                      className="rounded-3xl border border-slate-200 bg-white p-5 text-left transition hover:bg-slate-50 disabled:opacity-50"
+                      className={`group rounded-[26px] border p-5 text-left shadow-sm transition hover:-translate-y-0.5 hover:shadow-lg disabled:opacity-50 ${
+                        idx === 0
+                          ? "border-sky-200 bg-gradient-to-b from-sky-50 to-white"
+                          : "border-violet-200 bg-gradient-to-b from-violet-50 to-white"
+                      }`}
                     >
                       <div className="mb-3 flex items-center justify-between gap-3">
-                        <span className="text-base font-bold text-slate-900">
-                          Question {idx === 0 ? "A" : "B"}
+                        <span className="text-base font-black text-slate-900">
+                          Mission {idx === 0 ? "A" : "B"}
                         </span>
-                        <span className="rounded-full bg-amber-100 px-3 py-1 text-xs font-semibold text-amber-900">
+                        <span className="rounded-full bg-amber-100 px-3 py-1 text-xs font-bold text-amber-900">
                           {stars(option.meta.starLevel)}
                         </span>
                       </div>
@@ -500,7 +532,17 @@ export default function TutorV4Page() {
                         {option.canvas ? <Tag>Figure</Tag> : null}
                       </div>
 
+                      {option.canvas ? (
+                        <div className="mb-4 rounded-2xl bg-slate-50 p-3">
+                          <TriangleCanvas figure={option.canvas} />
+                        </div>
+                      ) : null}
+
                       <p className="text-base leading-6 text-slate-900">{option.text}</p>
+
+                      <div className="mt-4 text-xs font-bold uppercase tracking-wide text-slate-500 group-hover:text-slate-700">
+                        Cliquer pour choisir
+                      </div>
                     </button>
                   ))}
                 </div>
@@ -508,36 +550,38 @@ export default function TutorV4Page() {
             ) : null}
 
             {currentQuestion ? (
-              <section className="rounded-3xl border border-slate-200 bg-white/95 p-5 shadow-sm backdrop-blur-[1px]">
+              <section className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
                 <div className="mb-4 flex flex-wrap items-start justify-between gap-3">
                   <div className="space-y-1">
-                    <div className="text-lg font-bold text-slate-900">Ta question</div>
+                    <div className="text-xl font-black text-slate-900">
+                      Mission en cours
+                    </div>
                     <p className="text-sm text-slate-500">
-                      Réponds puis une nouvelle paire de questions apparaîtra.
+                      Réponds pour débloquer la mission suivante.
                     </p>
                   </div>
 
                   <div className="flex flex-wrap gap-2">
-                    <span className="rounded-full bg-amber-100 px-3 py-1 text-xs font-semibold text-amber-900">
+                    <span className="rounded-full bg-amber-100 px-3 py-1 text-xs font-bold text-amber-900">
                       {stars(currentQuestion.meta.starLevel)}
                     </span>
-                    <span className="rounded-full bg-emerald-100 px-3 py-1 text-xs font-semibold text-emerald-900">
+                    <span className="rounded-full bg-emerald-100 px-3 py-1 text-xs font-bold text-emerald-900">
                       {starPoints(currentQuestion.meta.starLevel)} pts
                     </span>
                   </div>
                 </div>
 
-                <div className="mb-4 rounded-2xl bg-violet-50 px-4 py-3 text-sm font-semibold text-violet-900 ring-1 ring-violet-200">
+                <div className="mb-4 rounded-2xl bg-gradient-to-r from-violet-100 to-fuchsia-100 px-4 py-3 text-sm font-bold text-violet-900">
                   Compétence travaillée : {microLabel(currentQuestion.microId)}
                 </div>
 
-                <div className="mb-4 rounded-2xl bg-white p-4 text-base text-slate-900 ring-1 ring-slate-200">
+                <div className="mb-4 rounded-2xl border border-slate-200 bg-white p-4 text-base text-slate-900">
                   {currentQuestion.text}
                 </div>
 
                 {currentQuestion.canvas ? (
-                  <div className="mb-5">
-                    <TriangleCanvas figure={currentQuestion.canvas as CanvasFigure} />
+                  <div className="mb-5 rounded-2xl bg-slate-50 p-3">
+                    <TriangleCanvas figure={currentQuestion.canvas} />
                   </div>
                 ) : null}
 
@@ -546,10 +590,11 @@ export default function TutorV4Page() {
                   <Tag>{mode === "evaluation" ? "Évaluation" : "Coaching"}</Tag>
                 </div>
 
-                {currentQuestion.format === "qcm" && currentQuestion.choices?.length ? (
+                {currentQuestion.format === "qcm" &&
+                currentQuestion.choices?.length ? (
                   <div className="space-y-3">
-                    <div className="text-sm font-semibold text-slate-800">
-                      Clique sur ta réponse
+                    <div className="text-sm font-bold text-slate-800">
+                      Choisis ta réponse
                     </div>
 
                     <div className="grid gap-2">
@@ -568,7 +613,7 @@ export default function TutorV4Page() {
                   </div>
                 ) : (
                   <div className="space-y-3">
-                    <div className="text-sm font-semibold text-slate-800">
+                    <div className="text-sm font-bold text-slate-800">
                       Écris ta réponse
                     </div>
 
@@ -584,21 +629,25 @@ export default function TutorV4Page() {
                     <button
                       onClick={() => void submitAnswer()}
                       disabled={busy}
-                      className="rounded-2xl bg-slate-900 px-5 py-3 text-sm font-bold text-white hover:bg-slate-800 disabled:opacity-50"
+                      className="rounded-2xl bg-slate-900 px-5 py-3 text-sm font-black text-white hover:bg-slate-800 disabled:opacity-50"
                     >
-                      Valider ma réponse
+                      Valider la mission
                     </button>
                   </div>
                 )}
 
                 {mode === "coaching" && currentQuestion.hint ? (
                   <div className="mt-4 rounded-2xl border border-emerald-200 bg-emerald-50 p-4 text-sm text-emerald-900">
-                    <span className="font-bold">Indice :</span> {currentQuestion.hint}
+                    <span className="font-black">Indice :</span> {currentQuestion.hint}
                   </div>
                 ) : null}
 
                 {feedback ? (
-                  <div className="mt-5 whitespace-pre-line rounded-2xl border border-slate-200 bg-slate-50 px-4 py-4 text-sm text-slate-800">
+                  <div
+                    className={`mt-5 whitespace-pre-line rounded-2xl border px-4 py-4 text-sm font-medium ${feedbackTone(
+                      lastResult.ok
+                    )}`}
+                  >
                     {feedback}
                   </div>
                 ) : null}
@@ -606,9 +655,9 @@ export default function TutorV4Page() {
             ) : null}
 
             {!pair && !currentQuestion ? (
-              <div className="rounded-3xl border border-slate-200 bg-white/95 p-8 text-center text-sm text-slate-600 shadow-sm backdrop-blur-[1px]">
-                Clique sur <span className="font-semibold">Démarrer</span> pour lancer
-                une séance.
+              <div className="rounded-3xl border border-slate-200 bg-white p-10 text-center text-sm text-slate-600 shadow-sm">
+                Clique sur <span className="font-bold">Démarrer une mission</span> pour lancer
+                ta séance.
               </div>
             ) : null}
           </div>
@@ -624,9 +673,9 @@ export default function TutorV4Page() {
               </div>
             </SidebarCard>
 
-            <SidebarCard title={`Micro-compétences : ${notionLabel(notion)}`}>
+            <SidebarCard title={`Progression : ${notionLabel(notion)}`}>
               <div className="mb-3 text-xs text-slate-500">
-                Suis ta progression dans la notion choisie.
+                Suis tes missions dans la notion choisie.
               </div>
 
               <div className="space-y-3">
@@ -636,7 +685,9 @@ export default function TutorV4Page() {
                   return (
                     <div
                       key={microId}
-                      className={`rounded-2xl border px-4 py-3 shadow-sm transition ${statusClasses(status)}`}
+                      className={`rounded-2xl border px-4 py-3 shadow-sm transition ${statusClasses(
+                        status
+                      )}`}
                     >
                       <div className="flex items-start justify-between gap-3">
                         <div className="text-sm font-semibold leading-5">
@@ -653,12 +704,29 @@ export default function TutorV4Page() {
               </div>
             </SidebarCard>
 
+            <SidebarCard title="Badges gagnés">
+              {visibleProgress.unlockedStars.length === 0 ? (
+                <p className="text-sm text-slate-500">Aucun badge pour le moment.</p>
+              ) : (
+                <div className="flex flex-wrap gap-2">
+                  {visibleProgress.unlockedStars.map((star) => (
+                    <span
+                      key={star.id}
+                      className="rounded-full bg-amber-100 px-3 py-2 text-xs font-bold text-amber-900"
+                    >
+                      ⭐ {studentBadgeLabel(star)}
+                    </span>
+                  ))}
+                </div>
+              )}
+            </SidebarCard>
+
             <SidebarCard title="Repères">
               <div className="space-y-2 text-sm text-slate-700">
-                <p>• Plus la question a d’étoiles, plus elle rapporte de points.</p>
-                <p>• Tu peux choisir la question qui te semble la plus adaptée.</p>
+                <p>• Plus une mission a d’étoiles, plus elle rapporte de points.</p>
+                <p>• Tu peux choisir la mission qui te paraît la plus adaptée.</p>
                 <p>• En coaching, un indice peut apparaître pour t’aider.</p>
-                <p>• Certaines questions affichent une figure.</p>
+                <p>• Certaines missions affichent une figure.</p>
               </div>
             </SidebarCard>
           </aside>
@@ -670,7 +738,7 @@ export default function TutorV4Page() {
 
 function Card({ children }: { children: ReactNode }) {
   return (
-    <div className="rounded-2xl border border-slate-200 bg-white/95 p-4 shadow-sm backdrop-blur-[1px]">
+    <div className="rounded-2xl border border-slate-200 bg-white/95 p-4 shadow-sm">
       {children}
     </div>
   );
@@ -684,10 +752,30 @@ function SidebarCard({
   children: ReactNode;
 }) {
   return (
-    <section className="rounded-3xl border border-slate-200 bg-white/95 p-4 shadow-sm backdrop-blur-[1px]">
-      <h2 className="mb-3 text-base font-bold text-slate-900">{title}</h2>
+    <section className="rounded-3xl border border-slate-200 bg-white/95 p-4 shadow-sm">
+      <h2 className="mb-3 text-base font-black text-slate-900">{title}</h2>
       {children}
     </section>
+  );
+}
+
+function HeroStat({
+  title,
+  value,
+  icon,
+}: {
+  title: string;
+  value: string;
+  icon: string;
+}) {
+  return (
+    <div className="rounded-2xl border border-slate-200 bg-white px-4 py-3 shadow-sm">
+      <div className="mb-1 flex items-center gap-2 text-xs font-bold uppercase tracking-wide text-slate-500">
+        <span>{icon}</span>
+        <span>{title}</span>
+      </div>
+      <div className="text-2xl font-black text-slate-900">{value}</div>
+    </div>
   );
 }
 
@@ -702,8 +790,10 @@ function StatLine({
     Score: "bg-gradient-to-r from-sky-400 to-blue-500 text-white",
     Temps: "bg-gradient-to-r from-violet-400 to-purple-500 text-white",
     Points: "bg-gradient-to-r from-emerald-400 to-green-500 text-white",
-    "Bonnes réponses": "bg-gradient-to-r from-green-400 to-emerald-600 text-white",
-    "Questions faites": "bg-gradient-to-r from-amber-400 to-orange-500 text-white",
+    "Bonnes réponses":
+      "bg-gradient-to-r from-green-400 to-emerald-600 text-white",
+    "Questions faites":
+      "bg-gradient-to-r from-amber-400 to-orange-500 text-white",
     Série: "bg-gradient-to-r from-pink-400 to-rose-500 text-white",
     Niveau: "bg-gradient-to-r from-indigo-400 to-indigo-600 text-white",
   };
@@ -744,7 +834,15 @@ function Label({ children }: { children: ReactNode }) {
 
 function MiniPill({ children }: { children: ReactNode }) {
   return (
-    <div className="rounded-full bg-white/95 px-3 py-1 text-xs font-semibold text-slate-700 shadow-sm ring-1 ring-slate-200 backdrop-blur-[1px]">
+    <div className="rounded-full bg-white/95 px-3 py-1 text-xs font-semibold text-slate-700 shadow-sm ring-1 ring-slate-200">
+      {children}
+    </div>
+  );
+}
+
+function GamePill({ children }: { children: ReactNode }) {
+  return (
+    <div className="rounded-full bg-white/15 px-3 py-1 text-xs font-black text-white ring-1 ring-white/20 backdrop-blur-sm">
       {children}
     </div>
   );
