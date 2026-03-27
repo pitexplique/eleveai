@@ -1,13 +1,7 @@
-/**
- * questionPairBuilder.ts
- *
- * Construit une paire de questions à partir de la questionBank existante.
- * Ne contient aucune question en dur.
- */
-
 import { randomUUID } from "crypto";
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 import type {
+  CanvasFigure,
   ComparatorName,
   DifficultyLevel,
   QuestionFormat,
@@ -27,6 +21,7 @@ function materializeBankItem(item: TutorBankItemV4): {
   expected: string[];
   comparator: ComparatorName;
   hint?: string;
+  canvas?: CanvasFigure;
   difficulty: number;
 } {
   if (item.kind === "fixed") {
@@ -40,6 +35,7 @@ function materializeBankItem(item: TutorBankItemV4): {
       expected: item.expected,
       comparator: item.comparator,
       hint: item.hint,
+      canvas: item.canvas,
       difficulty: item.difficulty,
     };
   }
@@ -56,6 +52,7 @@ function materializeBankItem(item: TutorBankItemV4): {
     expected: generated.expected,
     comparator: generated.comparator,
     hint: item.hint,
+    canvas: generated.canvas,
     difficulty: item.difficulty,
   };
 }
@@ -78,6 +75,7 @@ function inferTheme(text: string): QuestionTheme {
   if (
     t.includes("réunion") ||
     t.includes("saint-pierre") ||
+    t.includes("saint-paul") ||
     t.includes("samoussa") ||
     t.includes("bouchon") ||
     t.includes("mangue")
@@ -121,6 +119,7 @@ function inferTheme(text: string): QuestionTheme {
 function inferFamilyId(item: TutorBankItemV4): string {
   if (item.id.includes("qcm")) return `${item.microId}_qcm`;
   if (item.id.includes("tpl")) return `${item.microId}_template`;
+  if (item.id.includes("canvas")) return `${item.microId}_canvas`;
   return `${item.microId}_fixed`;
 }
 
@@ -139,6 +138,7 @@ function toTutorQuestionOption(item: TutorBankItemV4): TutorQuestionOption {
     expected: q.expected,
     comparator: q.comparator,
     hint: q.hint,
+    canvas: q.canvas,
     meta: {
       familyId: inferFamilyId(item),
       theme: inferTheme(q.text),

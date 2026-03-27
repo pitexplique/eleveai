@@ -2,15 +2,14 @@
   "id": "6e-maths",
   "classe": "6e",
   "matiere": "maths",
-
   "bo_competences": [
     { "boId": "BO6N1", "label": "Utiliser et comparer des nombres décimaux" },
     { "boId": "BO6N2", "label": "Comprendre les fractions simples" },
     { "boId": "BO6N3", "label": "Résoudre des problèmes de proportionnalité" },
     { "boId": "BO6G1", "label": "Calculer périmètres et aires" },
-    { "boId": "BO6G2", "label": "Comparer et identifier des angles" }
+    { "boId": "BO6G2", "label": "Comparer et identifier des angles" },
+    { "boId": "BO6G3", "label": "Reconnaître, décrire et utiliser les triangles" }
   ],
-
   "notions": [
     {
       "id": "decimaux",
@@ -26,7 +25,6 @@
       ],
       "levels": [1, 2, 3]
     },
-
     {
       "id": "fractions",
       "label": "Fractions",
@@ -39,7 +37,6 @@
       ],
       "levels": [1, 2, 3]
     },
-
     {
       "id": "proportionnalite",
       "label": "Proportionnalité",
@@ -52,44 +49,47 @@
       ],
       "levels": [1, 2, 3]
     },
-
     {
       "id": "perimetre",
       "label": "Périmètre",
       "boId": "BO6G1",
       "prerequis": [],
-      "microTargets": [
-        "perim_square",
-        "perim_rectangle"
-      ],
+      "microTargets": ["perim_square", "perim_rectangle"],
       "levels": [1, 2]
     },
-
     {
       "id": "aires",
       "label": "Aires",
       "boId": "BO6G1",
       "prerequis": ["perimetre"],
-      "microTargets": [
-        "area_rectangle",
-        "area_square"
-      ],
+      "microTargets": ["area_rectangle", "area_square"],
       "levels": [1, 2]
     },
-
     {
       "id": "angles",
       "label": "Angles",
       "boId": "BO6G2",
       "prerequis": [],
-      "microTargets": [
-        "angle_right",
-        "angle_compare"
-      ],
+      "microTargets": ["angle_right", "angle_compare"],
       "levels": [1, 2]
+    },
+    {
+      "id": "triangles",
+      "label": "Triangles",
+      "boId": "BO6G3",
+      "prerequis": ["angles"],
+      "microTargets": [
+        "triangle_name",
+        "triangle_vertices_sides",
+        "triangle_type_sides",
+        "triangle_type_angles",
+        "triangle_angle_sum",
+        "triangle_missing_angle",
+        "triangle_possible_or_not"
+      ],
+      "levels": [1, 2, 3]
     }
   ],
-
   "microSkills": [
     {
       "id": "decimal_compare",
@@ -98,7 +98,6 @@
       "boId": "BO6N1",
       "prerequis": []
     },
-
     {
       "id": "decimal_write",
       "label": "Lire et écrire un nombre décimal",
@@ -106,7 +105,6 @@
       "boId": "BO6N1",
       "prerequis": []
     },
-
     {
       "id": "decimal_add",
       "label": "Additionner des nombres décimaux",
@@ -114,7 +112,6 @@
       "boId": "BO6N1",
       "prerequis": ["decimal_write"]
     },
-
     {
       "id": "decimal_multiply",
       "label": "Multiplier des nombres décimaux",
@@ -122,7 +119,6 @@
       "boId": "BO6N1",
       "prerequis": ["decimal_add"]
     },
-
     {
       "id": "decimal_divide_by_integer",
       "label": "Diviser un nombre décimal par un entier",
@@ -138,7 +134,6 @@
       "boId": "BO6N2",
       "prerequis": ["decimal_write"]
     },
-
     {
       "id": "fraction_compare",
       "label": "Comparer deux fractions",
@@ -146,7 +141,6 @@
       "boId": "BO6N2",
       "prerequis": ["decimal_compare"]
     },
-
     {
       "id": "fraction_quantity",
       "label": "Comprendre une fraction comme quantité",
@@ -162,7 +156,6 @@
       "boId": "BO6N3",
       "prerequis": ["fraction_quantity"]
     },
-
     {
       "id": "prop_unit",
       "label": "Passer par l’unité",
@@ -170,7 +163,6 @@
       "boId": "BO6N3",
       "prerequis": ["prop_table"]
     },
-
     {
       "id": "prop_direct",
       "label": "Résoudre une situation de proportionnalité",
@@ -186,7 +178,6 @@
       "boId": "BO6G1",
       "prerequis": []
     },
-
     {
       "id": "perim_rectangle",
       "label": "Calculer le périmètre d’un rectangle",
@@ -202,7 +193,6 @@
       "boId": "BO6G1",
       "prerequis": ["perim_rectangle"]
     },
-
     {
       "id": "area_square",
       "label": "Calculer l’aire d’un carré",
@@ -218,15 +208,63 @@
       "boId": "BO6G2",
       "prerequis": []
     },
-
     {
       "id": "angle_compare",
       "label": "Comparer deux angles",
       "notionId": "angles",
       "boId": "BO6G2",
       "prerequis": ["angle_right"]
+    },
+
+    {
+      "id": "triangle_name",
+      "label": "Nommer un triangle",
+      "notionId": "triangles",
+      "boId": "BO6G3",
+      "prerequis": []
+    },
+    {
+      "id": "triangle_vertices_sides",
+      "label": "Identifier sommets et côtés d’un triangle",
+      "notionId": "triangles",
+      "boId": "BO6G3",
+      "prerequis": ["triangle_name"]
+    },
+    {
+      "id": "triangle_type_sides",
+      "label": "Reconnaître un triangle selon ses côtés",
+      "notionId": "triangles",
+      "boId": "BO6G3",
+      "prerequis": ["triangle_vertices_sides"]
+    },
+    {
+      "id": "triangle_type_angles",
+      "label": "Reconnaître un triangle selon ses angles",
+      "notionId": "triangles",
+      "boId": "BO6G3",
+      "prerequis": ["angle_right", "angle_compare"]
+    },
+    {
+      "id": "triangle_angle_sum",
+      "label": "Utiliser la somme des angles d’un triangle",
+      "notionId": "triangles",
+      "boId": "BO6G3",
+      "prerequis": ["triangle_type_angles"]
+    },
+    {
+      "id": "triangle_missing_angle",
+      "label": "Calculer un angle manquant dans un triangle",
+      "notionId": "triangles",
+      "boId": "BO6G3",
+      "prerequis": ["triangle_angle_sum"]
+    },
+    {
+      "id": "triangle_possible_or_not",
+      "label": "Décider si un triangle est constructible",
+      "notionId": "triangles",
+      "boId": "BO6G3",
+      "prerequis": ["triangle_vertices_sides"]
     }
   ],
-
   "microGraph": []
 }

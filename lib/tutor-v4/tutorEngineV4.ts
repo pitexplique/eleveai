@@ -6,6 +6,11 @@
  * - plus de choix manuel dys / standard / challenge
  * - plus de confiance déclarée par l’élève
  * - progression pilotée par les réponses et la difficulté interne
+ *
+ * NOTE canvas :
+ * Le moteur n'a pas besoin de logique spéciale pour les figures.
+ * Il transporte simplement les questions construites par buildQuestionPair,
+ * y compris leur éventuel champ `canvas`.
  */
 
 import { randomUUID } from "crypto";

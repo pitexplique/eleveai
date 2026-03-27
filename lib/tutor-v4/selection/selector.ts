@@ -1,19 +1,30 @@
-//app/lib/tutor/selection/selector.ts
 import {
   getStrongestChildFromMatrix,
   getStrongestParentFromMatrix,
-} from "@/lib/tutor/matrix/matrixUtils";
-import type { KnowledgePack, MicroSkill, SkillMatrix } from "@/lib/tutor/types";
+} from "@/lib/tutor-v4/matrix/matrixUtils";
 
-export function findNotion(pack: KnowledgePack, notionId: string) {
+import type {
+  KnowledgePack,
+  KnowledgeMicroSkill,
+  KnowledgeNotion,
+  SkillMatrix,
+} from "@/lib/tutor-v4/types";
+
+export function findNotion(pack: KnowledgePack, notionId: string): KnowledgeNotion {
   return pack.notions.find((n) => n.id === notionId) ?? pack.notions[0];
 }
 
-export function findMicro(pack: KnowledgePack, microId: string) {
+export function findMicro(
+  pack: KnowledgePack,
+  microId: string
+): KnowledgeMicroSkill {
   return pack.microSkills.find((m) => m.id === microId) ?? pack.microSkills[0];
 }
 
-export function getMicrosForNotion(pack: KnowledgePack, notionId: string) {
+export function getMicrosForNotion(
+  pack: KnowledgePack,
+  notionId: string
+): KnowledgeMicroSkill[] {
   return pack.microSkills.filter((m) => m.notionId === notionId);
 }
 
@@ -21,20 +32,25 @@ export function selectWeakestMicroInNotion(
   pack: KnowledgePack,
   notionId: string,
   masteryByMicro: Record<string, number>
-): MicroSkill {
+): KnowledgeMicroSkill {
   const micros = getMicrosForNotion(pack, notionId);
 
-  return (
-    micros.sort((a, b) => (masteryByMicro[a.id] ?? 50) - (masteryByMicro[b.id] ?? 50))[0] ??
-    pack.microSkills[0]
+  if (micros.length === 0) {
+    return pack.microSkills[0];
+  }
+
+  const sorted = [...micros].sort(
+    (a, b) => (masteryByMicro[a.id] ?? 50) - (masteryByMicro[b.id] ?? 50)
   );
+
+  return sorted[0] ?? pack.microSkills[0];
 }
 
 export function selectStrongPrereqMicro(
   pack: KnowledgePack,
   skillMatrix: SkillMatrix,
   microId: string
-): MicroSkill | null {
+): KnowledgeMicroSkill | null {
   const parentId = getStrongestParentFromMatrix(skillMatrix, microId);
   if (!parentId) return null;
 
@@ -45,7 +61,7 @@ export function selectStrongChildMicro(
   pack: KnowledgePack,
   skillMatrix: SkillMatrix,
   microId: string
-): MicroSkill | null {
+): KnowledgeMicroSkill | null {
   const childId = getStrongestChildFromMatrix(skillMatrix, microId);
   if (!childId) return null;
 

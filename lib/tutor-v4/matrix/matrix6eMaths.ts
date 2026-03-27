@@ -1,4 +1,3 @@
-// lib/tutor/matrix6eMaths.ts
 import type { SkillMatrix } from "@/lib/tutor-v4/types";
 
 /**
@@ -23,6 +22,13 @@ export const microSkillIndex6eMaths = [
   "area_square",                // 14
   "angle_right",                // 15
   "angle_compare",              // 16
+  "triangle_name",              // 17
+  "triangle_vertices_sides",    // 18
+  "triangle_type_sides",        // 19
+  "triangle_type_angles",       // 20
+  "triangle_angle_sum",         // 21
+  "triangle_missing_angle",     // 22
+  "triangle_possible_or_not",   // 23
 ] as const;
 
 /**
@@ -31,41 +37,32 @@ export const microSkillIndex6eMaths = [
  * M[i][j] < 0  => j est enfant de i
  */
 export const matrix6eMathsValues = [
-  // dec_cmp dec_wrt dec_add dec_mul dec_div frac_rd frac_cmp frac_qty prop_tbl prop_unit prop_dir per_sq per_rect area_rect area_sq ang_r ang_cmp
+  //  0   1   2   3   4   5   6   7   8   9   10  11  12  13  14  15  16  17  18  19  20  21  22  23
 
-  [ 0,      0,      0,      0,      0,      0,      -2,      0,       0,       0,        0,      0,     0,       0,        0,      0,    0 ], // decimal_compare
-
-  [ 0,      0,      -2,     0,      -2,     -2,     0,       0,       0,       0,        0,      0,     0,       0,        0,      0,    0 ], // decimal_write
-
-  [ 0,      2,      0,      -2,     0,      0,      0,       0,       0,       0,        0,      0,     0,       0,        0,      0,    0 ], // decimal_add
-
-  [ 0,      0,      2,      0,      0,      0,      0,       0,       0,       0,        0,      0,     0,       0,        0,      0,    0 ], // decimal_multiply
-
-  [ 0,      2,      0,      0,      0,      0,      0,       0,       0,       0,        0,      0,     0,       0,        0,      0,    0 ], // decimal_divide_by_integer
-
-  [ 0,      2,      0,      0,      0,      0,      0,       -2,      -1,      0,        0,      0,     0,       0,        0,      0,    0 ], // fraction_read
-
-  [ 2,      0,      0,      0,      0,      0,      0,       0,       0,       0,        0,      0,     0,       0,        0,      0,    0 ], // fraction_compare
-
-  [ 0,      0,      0,      0,      0,      2,      0,       0,       -2,      0,        0,      0,     0,       0,        0,      0,    0 ], // fraction_quantity
-
-  [ 0,      0,      0,      0,      0,      1,      0,       2,       0,       -2,       -2,     0,     0,       0,        0,      0,    0 ], // prop_table
-
-  [ 0,      0,      0,      0,      0,      0,      0,       0,       2,       0,        -2,     0,     0,       0,        0,      0,    0 ], // prop_unit
-
-  [ 0,      0,      0,      0,      0,      0,      0,       0,       2,       2,        0,      0,     0,       0,        0,      0,    0 ], // prop_direct
-
-  [ 0,      0,      0,      0,      0,      0,      0,       0,       0,       0,        0,      0,     0,       0,        -2,     0,    0 ], // perim_square
-
-  [ 0,      0,      0,      0,      0,      0,      0,       0,       0,       0,        0,      0,     0,       -2,       0,      0,    0 ], // perim_rectangle
-
-  [ 0,      0,      0,      0,      0,      0,      0,       0,       0,       0,        0,      0,     2,       0,        0,      0,    0 ], // area_rectangle
-
-  [ 0,      0,      0,      0,      0,      0,      0,       0,       0,       0,        0,      2,     0,       0,        0,      0,    0 ], // area_square
-
-  [ 0,      0,      0,      0,      0,      0,      0,       0,       0,       0,        0,      0,     0,       0,        0,      0,    -1], // angle_right
-
-  [ 0,      0,      0,      0,      0,      0,      0,       0,       0,       0,        0,      0,     0,       0,        0,      1,    0 ], // angle_compare
+  [ 0,  0,  0,  0,  0,  0, -2,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0 ], // decimal_compare
+  [ 0,  0, -2,  0, -2, -2,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0 ], // decimal_write
+  [ 0,  2,  0, -2,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0 ], // decimal_add
+  [ 0,  0,  2,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0 ], // decimal_multiply
+  [ 0,  2,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0 ], // decimal_divide_by_integer
+  [ 0,  2,  0,  0,  0,  0,  0, -2, -1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0 ], // fraction_read
+  [ 2,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0 ], // fraction_compare
+  [ 0,  0,  0,  0,  0,  2,  0,  0, -2,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0 ], // fraction_quantity
+  [ 0,  0,  0,  0,  0,  1,  0,  2,  0, -2, -2,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0 ], // prop_table
+  [ 0,  0,  0,  0,  0,  0,  0,  0,  2,  0, -2,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0 ], // prop_unit
+  [ 0,  0,  0,  0,  0,  0,  0,  0,  2,  2,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0 ], // prop_direct
+  [ 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, -2,  0,  0,  0,  0,  0,  0,  0,  0,  0 ], // perim_square
+  [ 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, -2,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0 ], // perim_rectangle
+  [ 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  2,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0 ], // area_rectangle
+  [ 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  2,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0 ], // area_square
+  [ 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, -1,  0,  0,  0, -2,  0,  0,  0 ], // angle_right
+  [ 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  1,  0,  0,  0,  0, -2, -1,  0,  0 ], // angle_compare
+  [ 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, -2,  0,  0,  0,  0,  0 ], // triangle_name
+  [ 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  2,  0, -2,  0,  0,  0, -2 ], // triangle_vertices_sides
+  [ 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  2,  0,  0,  0,  0,  0 ], // triangle_type_sides
+  [ 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  2,  2,  0,  0,  0,  0, -2, -1,  0 ], // triangle_type_angles
+  [ 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  1,  0,  0,  0,  2,  0, -2,  0 ], // triangle_angle_sum
+  [ 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  1,  2,  0,  0 ], // triangle_missing_angle
+  [ 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  2,  0,  0,  0,  0,  0 ], // triangle_possible_or_not
 ] as const;
 
 export const matrix6eMaths: SkillMatrix = {

@@ -29,17 +29,7 @@ export type SupportLevel = "low" | "medium" | "high";
 export type ReadingLoad = "short" | "medium" | "long";
 export type ChallengeType = "direct" | "guided" | "transfer" | "challenge";
 
-/**
- * IMPORTANT :
- * On sépare désormais la difficulté interne du moteur
- * et les étoiles visibles par l’élève.
- */
 export type DifficultyLevel = 1 | 2 | 3 | 4 | 5;
-
-/**
- * Alias de transition pour éviter de casser trop de fichiers d’un coup.
- * À terme, on pourra supprimer StarLevel et utiliser DifficultyLevel partout.
- */
 export type StarLevel = DifficultyLevel;
 
 export type MasteryMap = Record<string, number>;
@@ -71,23 +61,45 @@ export type VisibleProgress = {
   sessionStep: number;
 };
 
+export type CanvasPointLabel = "A" | "B" | "C";
+export type CanvasSideLabel = "AB" | "BC" | "CA";
+
+export type TriangleCanvasData = {
+  kind: "triangle";
+  size?: {
+    width: number;
+    height: number;
+  };
+  points: {
+    A: { x: number; y: number };
+    B: { x: number; y: number };
+    C: { x: number; y: number };
+  };
+  display?: {
+    showPoints?: boolean;
+    showLabels?: boolean;
+    showSides?: boolean;
+    showAngles?: boolean;
+  };
+  labels?: Partial<Record<CanvasPointLabel, string>>;
+  angleLabels?: Partial<Record<CanvasPointLabel, string>>;
+  sideLabels?: Partial<Record<CanvasSideLabel, string>>;
+  marks?: {
+    rightAngleAt?: CanvasPointLabel;
+    equalSides?: Array<[CanvasSideLabel, CanvasSideLabel]>;
+    equalAngles?: Array<[CanvasPointLabel, CanvasPointLabel]>;
+  };
+};
+
+export type CanvasFigure = TriangleCanvasData;
+
 export type QuestionVariantMeta = {
   familyId: string;
   theme: QuestionTheme;
   supportLevel: SupportLevel;
   readingLoad: ReadingLoad;
   challengeType: ChallengeType;
-
-  /**
-   * Difficulté interne recommandée par le moteur.
-   * Visible ou non selon l’UI, mais pensée d’abord pour le moteur.
-   */
   difficulty: DifficultyLevel;
-
-  /**
-   * Champ de transition pour compatibilité avec les fichiers existants.
-   * À terme : supprimer et ne garder que `difficulty`.
-   */
   starLevel: StarLevel;
 };
 
@@ -101,6 +113,7 @@ export type TutorQuestionOption = {
   expected: string[];
   comparator: ComparatorName;
   hint?: string;
+  canvas?: CanvasFigure;
   meta: QuestionVariantMeta;
 };
 
@@ -108,35 +121,26 @@ export type TutorQuestionPair = {
   pairId: string;
   notionId: string;
   microId: string;
-
-  /**
-   * Difficulté recommandée par le moteur.
-   */
   recommendedDifficulty: DifficultyLevel;
-
-  /**
-   * Champ de transition pour compatibilité.
-   */
   recommendedStar: StarLevel;
-
   optionA: TutorQuestionOption;
   optionB: TutorQuestionOption;
 };
 
 export type LearnerPreferences = {
-  challengePreference: number; // 0..100
-  guidancePreference: number; // 0..100
-  shortTextPreference: number; // 0..100
-  reunionThemePreference: number; // 0..100
-  sportThemePreference: number; // 0..100
-  cuisineThemePreference: number; // 0..100
-  jeuxVideoThemePreference: number; // 0..100
+  challengePreference: number;
+  guidancePreference: number;
+  shortTextPreference: number;
+  reunionThemePreference: number;
+  sportThemePreference: number;
+  cuisineThemePreference: number;
+  jeuxVideoThemePreference: number;
 };
 
 export type LearnerPedagogicalState = {
-  estimatedAutonomy: number; // 0..100
-  estimatedNeedForSupport: number; // 0..100
-  estimatedPersistence: number; // 0..100
+  estimatedAutonomy: number;
+  estimatedNeedForSupport: number;
+  estimatedPersistence: number;
 };
 
 export type LearnerProfile = {
@@ -147,17 +151,8 @@ export type LearnerProfile = {
 export type QuestionChoice = {
   pairId: string;
   chosenOptionId: string;
-
-  /**
-   * Difficulté interne effectivement choisie.
-   */
   chosenDifficulty: DifficultyLevel;
-
-  /**
-   * Champ de transition pour compatibilité.
-   */
   chosenStar: StarLevel;
-
   chosenTheme: QuestionTheme;
   chosenAt: number;
 };
@@ -175,7 +170,7 @@ export type AnswerEvaluation = {
   feedback: string;
   flags: string[];
   errorKind?: ErrorKind;
-  estimatedUnderstanding?: number; // 0..100
+  estimatedUnderstanding?: number;
 };
 
 export type TurnAttempt = {
@@ -184,14 +179,8 @@ export type TurnAttempt = {
   chosenOptionId: string;
   notionId: string;
   microId: string;
-
   difficulty: DifficultyLevel;
-
-  /**
-   * Champ de transition pour compatibilité.
-   */
   starLevel: StarLevel;
-
   theme: QuestionTheme;
   answer: string;
   result: AnswerEvaluation;
@@ -214,12 +203,7 @@ export type PedagogicalDecision = {
   reason: string;
   nextMode: TutorMode;
   nextRecommendedDifficulty: DifficultyLevel;
-
-  /**
-   * Champ de transition pour compatibilité.
-   */
   nextRecommendedStar: StarLevel;
-
   nextNotionId: string;
   nextMicroId: string;
 };
@@ -250,47 +234,29 @@ export type TutorSessionV4 = {
   id: string;
   createdAt: number;
   updatedAt: number;
-
   classe: string;
   matiere: string;
   mode: TutorMode;
-
   notionFocus: string;
   microFocus: string;
-
-  /**
-   * Difficulté interne recommandée par le moteur.
-   */
   recommendedDifficulty: DifficultyLevel;
-
-  /**
-   * Champ de transition pour compatibilité avec l’ancien code.
-   */
   recommendedStar: StarLevel;
-
   currentPair?: TutorQuestionPair;
   currentChoice?: QuestionChoice;
-
   consecutiveErrors: number;
   consecutiveSuccess: number;
   consecutiveErrorsSameStar: number;
-
   lastHintUsed: boolean;
   turnCount: number;
   turnStartedAt?: number;
-
   masteryByNotion: MasteryMap;
   masteryByBo: MasteryMap;
   masteryByMicro: MasteryMap;
-
   learnerProfile: LearnerProfile;
-
   hiddenStars: HiddenStarState[];
   visibleProgress: VisibleProgress;
-
   recentQuestionIds: string[];
   attempts: TurnAttempt[];
-
   knowledgePackId: string;
   audit: TutorAuditEntryV4[];
 };
@@ -305,24 +271,10 @@ export type StartTutorV4Response = {
   sessionId: string;
   pair: TutorQuestionPair;
   mode: TutorMode;
-
-  /**
-   * Champ de transition pour compatibilité.
-   */
   recommendedStar: StarLevel;
-
-  /**
-   * Nouveau champ recommandé.
-   */
   recommendedDifficulty: DifficultyLevel;
-
   notionCatalog: Array<{ id: string; label: string }>;
   visibleProgress: VisibleProgress;
-
-  /**
-   * Compatibilité temporaire.
-   * À terme, à ne plus envoyer au front élève.
-   */
   mastery?: {
     boMastery: MasteryMap;
     notionMastery: MasteryMap;
@@ -345,23 +297,9 @@ export type AnswerTutorV4Response = {
   result: { ok: boolean; flags: string[] };
   pair: TutorQuestionPair;
   mode: TutorMode;
-
-  /**
-   * Champ de transition.
-   */
   recommendedStar: StarLevel;
-
-  /**
-   * Nouveau champ recommandé.
-   */
   recommendedDifficulty: DifficultyLevel;
-
   visibleProgress: VisibleProgress;
-
-  /**
-   * Compatibilité temporaire.
-   * À terme, à retirer de l’API élève.
-   */
   mastery?: {
     boMastery: MasteryMap;
     notionMastery: MasteryMap;
@@ -371,8 +309,6 @@ export type AnswerTutorV4Response = {
 
 /* =========================================================
    TYPES V4 POUR LA BANQUE DE QUESTIONS
-   Préparent la séparation avec V3 et la future migration
-   vers Supabase.
    ========================================================= */
 
 export type SchoolLevel = "6e" | "5e" | "4e" | "3e";
@@ -384,6 +320,7 @@ export type TutorGeneratedQuestionV4 = {
   choices?: string[];
   expected: string[];
   comparator: ComparatorName;
+  canvas?: CanvasFigure;
 };
 
 export type TutorBankItemFixedV4 = {
@@ -402,6 +339,7 @@ export type TutorBankItemFixedV4 = {
   comparator: ComparatorName;
   hint?: string;
   tags?: string[];
+  canvas?: CanvasFigure;
 };
 
 export type TutorBankItemTemplateV4 = {
@@ -424,7 +362,6 @@ export type TutorBankItemV4 =
 
 /* =========================================================
    TYPES V4 POUR KNOWLEDGE ET MATRICE
-   Préparent la séparation complète avec V3.
    ========================================================= */
 
 export type MatrixValue = -3 | -2 | -1 | 0 | 1 | 2 | 3;
@@ -437,22 +374,34 @@ export type SkillMatrix = {
   matrix: MatrixValue[][];
 };
 
-export type KnowledgeMicro = {
-  id: string;
+export type KnowledgeBoCompetence = {
+  boId: string;
   label: string;
-  description?: string;
 };
 
 export type KnowledgeNotion = {
   id: string;
   label: string;
   boId: string;
-  micros: KnowledgeMicro[];
+  prerequis: string[];
+  microTargets: string[];
+  levels: number[];
+};
+
+export type KnowledgeMicroSkill = {
+  id: string;
+  label: string;
+  notionId: string;
+  boId: string;
+  prerequis: string[];
 };
 
 export type KnowledgePack = {
   id: string;
   classe: string;
   matiere: string;
+  bo_competences: KnowledgeBoCompetence[];
   notions: KnowledgeNotion[];
+  microSkills: KnowledgeMicroSkill[];
+  microGraph: unknown[];
 };

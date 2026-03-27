@@ -1,113 +1,29 @@
-// tutor-v4/page.tsx
 "use client";
 
 import { useEffect, useMemo, useState, type KeyboardEvent, type ReactNode } from "react";
+import TriangleCanvas from "@/lib/tutor-v4/components/TriangleCanvas";
+import {
+  NOTION_MICRO_MAP,
+  NOTION_OPTIONS,
+  microLabel,
+  notionLabel,
+} from "@/lib/tutor-v4/catalog";
+import type {
+  CanvasFigure,
+  HiddenStarState,
+  StarLevel,
+  StartTutorV4Response,
+  AnswerTutorV4Response,
+  TutorMode,
+  TutorQuestionOption,
+  TutorQuestionPair,
+  VisibleProgress,
+} from "@/lib/tutor-v4/types";
 
-type TutorMode = "evaluation" | "coaching";
-type StarLevel = 1 | 2 | 3 | 4 | 5;
-
-type HiddenStarId =
-  | "starter"
-  | "confidence"
-  | "regularity"
-  | "autonomy"
-  | "precision"
-  | "perseverance"
-  | "theme_explorer"
-  | "micro_mastery";
-
-type HiddenStarState = {
-  id: HiddenStarId;
-  label: string;
-  description: string;
-  unlocked: boolean;
-  unlockedAt?: number;
-  relatedMicroIds?: string[];
-};
-
-type VisibleProgress = {
-  unlockedStars: HiddenStarState[];
-  lastUnlockedStar?: HiddenStarState;
-  encouragement: string;
-  streak: number;
-  sessionStep: number;
-};
-
-type TutorQuestionOption = {
-  id: string;
-  notionId: string;
-  microId: string;
-  text: string;
-  format: "short" | "qcm";
-  choices?: string[];
-  expected: string[];
-  comparator:
-    | "exact_text"
-    | "mcq_exact"
-    | "number_equal"
-    | "fraction_decimal_equivalent"
-    | "contains_keyword";
-  hint?: string;
-  meta: {
-    familyId: string;
-    theme: "neutral" | "reunion" | "sport" | "cuisine" | "jeux_video";
-    supportLevel: "low" | "medium" | "high";
-    readingLoad: "short" | "medium" | "long";
-    challengeType: "direct" | "guided" | "transfer" | "challenge";
-    difficulty: 1 | 2 | 3 | 4 | 5;
-    starLevel: StarLevel;
-  };
-};
-
-type TutorQuestionPair = {
-  pairId: string;
-  notionId: string;
-  microId: string;
-  recommendedDifficulty: 1 | 2 | 3 | 4 | 5;
-  recommendedStar: StarLevel;
-  optionA: TutorQuestionOption;
-  optionB: TutorQuestionOption;
-};
-
-type StartResponse = {
-  sessionId: string;
-  pair: TutorQuestionPair;
-  mode: TutorMode;
-  recommendedStar: StarLevel;
-  recommendedDifficulty: 1 | 2 | 3 | 4 | 5;
-  notionCatalog: Array<{ id: string; label: string }>;
-  visibleProgress: VisibleProgress;
-};
-
-type AnswerResponse = {
-  feedback: string;
-  result: {
-    ok: boolean;
-    flags: string[];
-  };
-  pair: TutorQuestionPair;
-  mode: TutorMode;
-  recommendedStar: StarLevel;
-  recommendedDifficulty: 1 | 2 | 3 | 4 | 5;
-  visibleProgress: VisibleProgress;
-};
+type StartResponse = StartTutorV4Response;
+type AnswerResponse = AnswerTutorV4Response;
 
 type MicroStatus = "idle" | "current" | "success" | "retry";
-
-const notionMicroMap: Record<string, string[]> = {
-  decimaux: [
-    "decimal_compare",
-    "decimal_write",
-    "decimal_add",
-    "decimal_multiply",
-    "decimal_divide_by_integer",
-  ],
-  fractions: ["fraction_read", "fraction_compare", "fraction_quantity"],
-  proportionnalite: ["prop_table", "prop_unit", "prop_direct"],
-  perimetre: ["perim_square", "perim_rectangle"],
-  aires: ["area_rectangle", "area_square"],
-  angles: ["angle_right", "angle_compare"],
-};
 
 function stars(level: number) {
   return "⭐".repeat(Math.max(1, Math.min(5, level)));
@@ -121,66 +37,6 @@ function formatDuration(totalSeconds: number) {
   const minutes = Math.floor(totalSeconds / 60);
   const seconds = totalSeconds % 60;
   return `${minutes}:${String(seconds).padStart(2, "0")}`;
-}
-
-function microLabel(microId?: string) {
-  switch (microId) {
-    case "decimal_compare":
-      return "Comparer des nombres décimaux";
-    case "decimal_write":
-      return "Écrire un nombre décimal";
-    case "decimal_add":
-      return "Additionner des nombres décimaux";
-    case "decimal_multiply":
-      return "Multiplier des nombres décimaux";
-    case "decimal_divide_by_integer":
-      return "Diviser un nombre décimal par un entier";
-    case "fraction_read":
-      return "Lire une fraction";
-    case "fraction_compare":
-      return "Comparer des fractions";
-    case "fraction_quantity":
-      return "Comprendre une fraction comme quantité";
-    case "prop_table":
-      return "Compléter un tableau de proportionnalité";
-    case "prop_unit":
-      return "Passer par l’unité";
-    case "prop_direct":
-      return "Résoudre une situation de proportionnalité";
-    case "perim_square":
-      return "Calculer le périmètre d’un carré";
-    case "perim_rectangle":
-      return "Calculer le périmètre d’un rectangle";
-    case "area_rectangle":
-      return "Calculer l’aire d’un rectangle";
-    case "area_square":
-      return "Calculer l’aire d’un carré";
-    case "angle_right":
-      return "Identifier un angle droit";
-    case "angle_compare":
-      return "Comparer deux angles";
-    default:
-      return "Compétence en cours";
-  }
-}
-
-function notionLabel(notionId: string) {
-  switch (notionId) {
-    case "decimaux":
-      return "Nombres décimaux";
-    case "fractions":
-      return "Fractions";
-    case "proportionnalite":
-      return "Proportionnalité";
-    case "perimetre":
-      return "Périmètre";
-    case "aires":
-      return "Aires";
-    case "angles":
-      return "Angles";
-    default:
-      return notionId;
-  }
 }
 
 function statusLabel(status: MicroStatus) {
@@ -317,7 +173,7 @@ export default function TutorV4Page() {
   const scoreSeanceSur20 =
     possiblePoints > 0 ? ((earnedPoints / possiblePoints) * 20).toFixed(1) : "0.0";
 
-  const notionMicros = useMemo(() => notionMicroMap[notion] ?? [], [notion]);
+  const notionMicros = useMemo(() => NOTION_MICRO_MAP[notion] ?? [], [notion]);
 
   async function activateQuestion(currentSessionId: string, option: TutorQuestionOption) {
     const res = await fetch("/api/tutor-v4/choose", {
@@ -343,7 +199,7 @@ export default function TutorV4Page() {
   }
 
   function resetMicroStatusesForNotion(notionId: string) {
-    const micros = notionMicroMap[notionId] ?? [];
+    const micros = NOTION_MICRO_MAP[notionId] ?? [];
     const initial: Record<string, MicroStatus> = {};
     micros.forEach((microId) => {
       initial[microId] = "idle";
@@ -537,12 +393,11 @@ export default function TutorV4Page() {
                   onChange={(e) => setNotion(e.target.value)}
                   className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900"
                 >
-                  <option value="decimaux">Nombres décimaux</option>
-                  <option value="fractions">Fractions</option>
-                  <option value="proportionnalite">Proportionnalité</option>
-                  <option value="perimetre">Périmètre</option>
-                  <option value="aires">Aires</option>
-                  <option value="angles">Angles</option>
+                  {NOTION_OPTIONS.map((item) => (
+                    <option key={item.id} value={item.id}>
+                      {item.label}
+                    </option>
+                  ))}
                 </select>
               </Card>
             </section>
@@ -642,6 +497,7 @@ export default function TutorV4Page() {
                         <Tag>{option.format === "qcm" ? "QCM" : "Réponse libre"}</Tag>
                         <Tag>{microLabel(option.microId)}</Tag>
                         <Tag>{starPoints(option.meta.starLevel)} pts</Tag>
+                        {option.canvas ? <Tag>Figure</Tag> : null}
                       </div>
 
                       <p className="text-base leading-6 text-slate-900">{option.text}</p>
@@ -675,9 +531,15 @@ export default function TutorV4Page() {
                   Compétence travaillée : {microLabel(currentQuestion.microId)}
                 </div>
 
-                <div className="mb-5 rounded-2xl bg-white p-4 text-base text-slate-900 ring-1 ring-slate-200">
+                <div className="mb-4 rounded-2xl bg-white p-4 text-base text-slate-900 ring-1 ring-slate-200">
                   {currentQuestion.text}
                 </div>
+
+                {currentQuestion.canvas ? (
+                  <div className="mb-5">
+                    <TriangleCanvas figure={currentQuestion.canvas as CanvasFigure} />
+                  </div>
+                ) : null}
 
                 <div className="mb-4 flex flex-wrap gap-2">
                   <Tag>{currentQuestion.format === "qcm" ? "QCM" : "Réponse libre"}</Tag>
@@ -761,40 +623,42 @@ export default function TutorV4Page() {
                 <StatLine label="Questions faites" value={`${nbTentatives}`} />
               </div>
             </SidebarCard>
-          <SidebarCard title={`Micro-compétences : ${notionLabel(notion)}`}>
-            <div className="mb-3 text-xs text-slate-500">
-              Suis ta progression dans la notion choisie.
-            </div>
 
-            <div className="space-y-3">
-              {notionMicros.map((microId) => {
-                const status = microStatuses[microId] ?? "idle";
+            <SidebarCard title={`Micro-compétences : ${notionLabel(notion)}`}>
+              <div className="mb-3 text-xs text-slate-500">
+                Suis ta progression dans la notion choisie.
+              </div>
 
-                return (
-                  <div
-                    key={microId}
-                    className={`rounded-2xl border px-4 py-3 shadow-sm transition ${statusClasses(status)}`}
-                  >
-                    <div className="flex items-start justify-between gap-3">
-                      <div className="text-sm font-semibold leading-5">
-                        {microLabel(microId)}
+              <div className="space-y-3">
+                {notionMicros.map((microId) => {
+                  const status = microStatuses[microId] ?? "idle";
+
+                  return (
+                    <div
+                      key={microId}
+                      className={`rounded-2xl border px-4 py-3 shadow-sm transition ${statusClasses(status)}`}
+                    >
+                      <div className="flex items-start justify-between gap-3">
+                        <div className="text-sm font-semibold leading-5">
+                          {microLabel(microId)}
+                        </div>
+
+                        <span className="rounded-full bg-white/80 px-2 py-1 text-[11px] font-bold shadow-sm">
+                          {statusLabel(status)}
+                        </span>
                       </div>
-
-                      <span className="rounded-full bg-white/80 px-2 py-1 text-[11px] font-bold shadow-sm">
-                        {statusLabel(status)}
-                      </span>
                     </div>
-                  </div>
-                );
-              })}
-            </div>
-          </SidebarCard>
+                  );
+                })}
+              </div>
+            </SidebarCard>
 
             <SidebarCard title="Repères">
               <div className="space-y-2 text-sm text-slate-700">
                 <p>• Plus la question a d’étoiles, plus elle rapporte de points.</p>
                 <p>• Tu peux choisir la question qui te semble la plus adaptée.</p>
                 <p>• En coaching, un indice peut apparaître pour t’aider.</p>
+                <p>• Certaines questions affichent une figure.</p>
               </div>
             </SidebarCard>
           </aside>
@@ -860,7 +724,7 @@ function StatLine({
         styles[label] ?? "bg-slate-200"
       }`}
     >
-      <span className="text-sm font-semibold flex items-center gap-2">
+      <span className="flex items-center gap-2 text-sm font-semibold">
         <span>{icons[label] ?? "📌"}</span>
         {label}
       </span>
