@@ -265,6 +265,7 @@ export type StartTutorV4Input = {
   classe: string;
   matiere: string;
   notion: string;
+  microId?: string;
 };
 
 export type StartTutorV4Response = {

@@ -58,6 +58,7 @@ import type {
   KnowledgeMicroSkill,
   SkillMatrix,
   TutorBankItemV4,
+  TutorMode,
 } from "@/lib/tutor-v4/types";
 
 function createDefaultLearnerProfile(): LearnerProfile {
@@ -318,7 +319,7 @@ function tryBuildPair(args: {
 
 /**
  * Cherche une micro suivante dans la même notion si la micro courante
- * n'a pas assez de questions.
+ * n'a pas assez de questions ou si on veut faire progresser l'élève.
  */
 function findNextAvailableMicroInNotion(args: {
   knowledge: KnowledgePack;
@@ -398,11 +399,13 @@ export async function startTutorSessionV4(
     throw new Error("Notion inconnue");
   }
 
-  const firstMicro = selectWeakestMicroInNotion(
-    knowledge,
-    notion.id,
-    mastery.micro
-  );
+  const requestedMicro =
+    input.microId ? findMicro(knowledge, input.microId) : null;
+
+  const firstMicro =
+    requestedMicro && requestedMicro.notionId === notion.id
+      ? requestedMicro
+      : selectWeakestMicroInNotion(knowledge, notion.id, mastery.micro);
 
   if (!firstMicro) {
     throw new Error("Aucune micro-compétence trouvée.");
@@ -493,7 +496,9 @@ export async function startTutorSessionV4(
         microId: actualMicro.id,
         pairId: currentPair.pairId,
         mode: "evaluation",
-        reason: "Démarrage de la session V4.",
+        reason: input.microId
+          ? "Démarrage ciblé sur une micro-compétence choisie."
+          : "Démarrage adaptatif de la session V4.",
         flags: [],
       },
     ],
@@ -511,6 +516,123 @@ export async function startTutorSessionV4(
       id: n.id,
       label: n.label,
     })),
+    visibleProgress: session.visibleProgress,
+    mastery: {
+      boMastery: session.masteryByBo,
+      notionMastery: session.masteryByNotion,
+      microMastery: session.masteryByMicro,
+    },
+  };
+}
+
+export async function jumpToMicroV4(
+  sessionId: string,
+  microId: string
+): Promise<{
+  pair: TutorQuestionPair;
+  mode: TutorMode;
+  recommendedStar: StarLevel;
+  recommendedDifficulty: DifficultyLevel;
+  visibleProgress: VisibleProgress;
+  mastery: {
+    boMastery: Record<string, number>;
+    notionMastery: Record<string, number>;
+    microMastery: Record<string, number>;
+  };
+}> {
+  const session = getSessionV4(sessionId);
+
+  if (!session) {
+    throw new Error("Session introuvable");
+  }
+
+  const knowledge = await loadKnowledge(session.classe, session.matiere);
+  const matrix = await loadMatrix(session.classe, session.matiere);
+  const bank = await loadQuestionBank(session.classe, session.matiere);
+
+  if (!bank || !Array.isArray(bank)) {
+    throw new Error("La questionBank n'a pas été chargée correctement.");
+  }
+
+  const targetMicro = findMicro(knowledge, microId);
+
+  if (!targetMicro) {
+    throw new Error(`Micro-compétence introuvable : ${microId}`);
+  }
+
+  if (targetMicro.notionId !== session.notionFocus) {
+    throw new Error(
+      `La micro-compétence ${microId} n'appartient pas à la notion ${session.notionFocus}.`
+    );
+  }
+
+  let pair = tryBuildPair({
+    bank,
+    notionId: session.notionFocus,
+    microId: targetMicro.id,
+    recommendedStar: session.recommendedStar,
+    recentQuestionIds: session.recentQuestionIds,
+  });
+
+  if (!pair) {
+    const fallback = findNextAvailableMicroInNotion({
+      knowledge,
+      matrix,
+      bank,
+      notionId: session.notionFocus,
+      currentMicroId: targetMicro.id,
+      masteryByMicro: session.masteryByMicro,
+      recommendedStar: session.recommendedStar,
+      recentQuestionIds: session.recentQuestionIds,
+    });
+
+    if (!fallback) {
+      throw new Error(
+        `Aucune paire disponible pour la micro-compétence ${microId}.`
+      );
+    }
+
+    pair = fallback.pair;
+    session.microFocus = fallback.micro.id;
+  } else {
+    session.microFocus = targetMicro.id;
+  }
+
+  const nextCurrentPair: TutorQuestionPair = {
+    ...pair,
+    recommendedDifficulty: session.recommendedDifficulty,
+    recommendedStar: session.recommendedStar,
+  };
+
+  session.currentPair = nextCurrentPair;
+  session.currentChoice = undefined;
+  session.turnStartedAt = Date.now();
+  session.updatedAt = Date.now();
+
+  session.audit.push({
+    at: new Date().toISOString(),
+    event: "pedagogical_decision",
+    notionId: session.notionFocus,
+    microId: session.microFocus,
+    pairId: nextCurrentPair.pairId,
+    mode: session.mode,
+    reason: "Changement manuel de micro-compétence dans la session.",
+    flags: [],
+  });
+
+  session.recentQuestionIds = [
+    ...session.recentQuestionIds.slice(-8),
+    nextCurrentPair.optionA.id,
+    nextCurrentPair.optionB.id,
+  ];
+
+  saveSessionV4(session);
+
+  return {
+    pair: nextCurrentPair,
+    mode: session.mode,
+    recommendedStar: session.recommendedStar,
+    recommendedDifficulty: session.recommendedDifficulty,
     visibleProgress: session.visibleProgress,
     mastery: {
       boMastery: session.masteryByBo,
@@ -701,15 +823,25 @@ export async function answerTutorV4(
     usedHint: session.lastHintUsed,
   });
 
-  let nextPair = tryBuildPair({
-    bank,
-    notionId: session.notionFocus,
-    microId: session.microFocus,
-    recommendedStar: session.recommendedStar,
-    recentQuestionIds: session.recentQuestionIds,
-  });
+  const currentMicroMastery = session.masteryByMicro[session.microFocus] ?? 0;
 
+  const shouldSwitchMicro =
+    session.consecutiveSuccess >= 2 ||
+    session.consecutiveErrorsSameStar >= 2 ||
+    currentMicroMastery >= 0.7;
+
+  let nextPair: TutorQuestionPair | null = null;
   let nextMicroId = session.microFocus;
+
+  if (!shouldSwitchMicro) {
+    nextPair = tryBuildPair({
+      bank,
+      notionId: session.notionFocus,
+      microId: session.microFocus,
+      recommendedStar: session.recommendedStar,
+      recentQuestionIds: session.recentQuestionIds,
+    });
+  }
 
   if (!nextPair) {
     const fallback = findNextAvailableMicroInNotion({
@@ -734,6 +866,18 @@ export async function answerTutorV4(
       `Aucune paire disponible pour continuer dans la notion ${session.notionFocus}.`
     );
   }
+
+  session.audit.push({
+    at: new Date().toISOString(),
+    event: "pedagogical_decision",
+    notionId: session.notionFocus,
+    microId: nextMicroId,
+    mode: session.mode,
+    reason: shouldSwitchMicro
+      ? "Changement de micro-compétence (progression ou difficulté)."
+      : "Maintien sur la même micro-compétence.",
+    flags: [],
+  });
 
   const nextCurrentPair: TutorQuestionPair = {
     ...nextPair,

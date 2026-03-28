@@ -28,7 +28,27 @@ import type {
 type StartResponse = StartTutorV4Response;
 type AnswerResponse = AnswerTutorV4Response;
 
+type JumpResponse = {
+  pair: TutorQuestionPair;
+  mode: TutorMode;
+  recommendedStar: StarLevel;
+  recommendedDifficulty: 1 | 2 | 3 | 4 | 5;
+  visibleProgress: VisibleProgress;
+  mastery: {
+    boMastery: Record<string, number>;
+    notionMastery: Record<string, number>;
+    microMastery: Record<string, number>;
+  };
+};
+
 type MicroStatus = "idle" | "current" | "success" | "retry";
+
+type MicroScore = {
+  attempts: number;
+  success: number;
+  earnedPoints: number;
+  possiblePoints: number;
+};
 
 function stars(level: number) {
   return "⭐".repeat(Math.max(1, Math.min(5, level)));
@@ -128,6 +148,11 @@ function feedbackTone(ok?: boolean) {
     : "border-amber-200 bg-amber-50 text-amber-900";
 }
 
+function scoreOn20(earned: number, possible: number) {
+  if (possible <= 0) return "—";
+  return ((earned / possible) * 20).toFixed(1);
+}
+
 export default function TutorV4Page() {
   const [classe] = useState("6e");
   const [matiere] = useState("maths");
@@ -156,6 +181,8 @@ export default function TutorV4Page() {
   const [microStatuses, setMicroStatuses] = useState<
     Record<string, MicroStatus>
   >({});
+  const [microScores, setMicroScores] = useState<Record<string, MicroScore>>({});
+  const [activeMicroId, setActiveMicroId] = useState<string | null>(null);
 
   const [visibleProgress, setVisibleProgress] = useState<VisibleProgress>({
     unlockedStars: [],
@@ -190,6 +217,29 @@ export default function TutorV4Page() {
 
   const notionMicros = useMemo(() => NOTION_MICRO_MAP[notion] ?? [], [notion]);
 
+  function resetMicroStatusesForNotion(notionId: string) {
+    const micros = NOTION_MICRO_MAP[notionId] ?? [];
+    const initial: Record<string, MicroStatus> = {};
+    micros.forEach((microId) => {
+      initial[microId] = "idle";
+    });
+    setMicroStatuses(initial);
+  }
+
+  function initMicroScoresForNotion(notionId: string) {
+    const micros = NOTION_MICRO_MAP[notionId] ?? [];
+    const initial: Record<string, MicroScore> = {};
+    micros.forEach((microId) => {
+      initial[microId] = {
+        attempts: 0,
+        success: 0,
+        earnedPoints: 0,
+        possiblePoints: 0,
+      };
+    });
+    setMicroScores(initial);
+  }
+
   async function activateQuestion(
     currentSessionId: string,
     option: TutorQuestionOption
@@ -209,6 +259,8 @@ export default function TutorV4Page() {
     setSelectedOptionId(option.id);
     setCurrentQuestion(option);
     setAnswer("");
+    setActiveMicroId(option.microId);
+
     setMicroStatuses((prev) => ({
       ...prev,
       [option.microId]:
@@ -216,16 +268,7 @@ export default function TutorV4Page() {
     }));
   }
 
-  function resetMicroStatusesForNotion(notionId: string) {
-    const micros = NOTION_MICRO_MAP[notionId] ?? [];
-    const initial: Record<string, MicroStatus> = {};
-    micros.forEach((microId) => {
-      initial[microId] = "idle";
-    });
-    setMicroStatuses(initial);
-  }
-
-  async function startSession() {
+  async function startSession(targetMicroId?: string) {
     try {
       setBusy(true);
       setFeedback("");
@@ -240,11 +283,18 @@ export default function TutorV4Page() {
       setSessionStartedAt(null);
       setElapsedSeconds(0);
       resetMicroStatusesForNotion(notion);
+      initMicroScoresForNotion(notion);
+      setActiveMicroId(targetMicroId ?? null);
 
       const res = await fetch("/api/tutor-v4/start", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ classe, matiere, notion }),
+        body: JSON.stringify({
+          classe,
+          matiere,
+          notion,
+          microId: targetMicroId,
+        }),
       });
 
       const data = await res.json();
@@ -262,9 +312,67 @@ export default function TutorV4Page() {
       setRecommendedStar(typed.recommendedStar);
       setVisibleProgress(typed.visibleProgress);
       setSessionStartedAt(Date.now());
+      setActiveMicroId(typed.pair.microId);
+
+      setMicroStatuses((prev) => ({
+        ...prev,
+        [typed.pair.microId]: "current",
+      }));
     } catch (error) {
       setFeedback(
         error instanceof Error ? error.message : "Erreur au démarrage du tutor."
+      );
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  async function jumpToMicro(microId: string) {
+    if (!sessionId) {
+      await startSession(microId);
+      return;
+    }
+
+    try {
+      setBusy(true);
+      setFeedback("");
+      setSelectedOptionId(null);
+      setCurrentQuestion(null);
+      setAnswer("");
+
+      const res = await fetch("/api/tutor-v4/jump", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ sessionId, microId }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        setFeedback(
+          data?.error ?? "Erreur pendant le changement de micro-compétence."
+        );
+        return;
+      }
+
+      const typed = data as JumpResponse;
+
+      setPair(typed.pair);
+      setMode(typed.mode);
+      setRecommendedStar(typed.recommendedStar);
+      setVisibleProgress(typed.visibleProgress);
+      setActiveMicroId(typed.pair.microId);
+
+      setMicroStatuses((prev) => ({
+        ...prev,
+        [typed.pair.microId]:
+          prev[typed.pair.microId] === "success" ? "success" : "current",
+      }));
+    } catch (error) {
+      setFeedback(
+        error instanceof Error
+          ? error.message
+          : "Erreur pendant le changement de micro-compétence."
       );
     } finally {
       setBusy(false);
@@ -339,6 +447,26 @@ export default function TutorV4Page() {
         setEarnedPoints((prev) => prev + pointsForQuestion);
       }
 
+      setMicroScores((prev) => {
+        const current = prev[currentMicro] ?? {
+          attempts: 0,
+          success: 0,
+          earnedPoints: 0,
+          possiblePoints: 0,
+        };
+
+        return {
+          ...prev,
+          [currentMicro]: {
+            attempts: current.attempts + 1,
+            success: current.success + (typed.result.ok ? 1 : 0),
+            earnedPoints:
+              current.earnedPoints + (typed.result.ok ? pointsForQuestion : 0),
+            possiblePoints: current.possiblePoints + pointsForQuestion,
+          },
+        };
+      });
+
       setLastResult({
         ok: typed.result.ok,
         microId: currentMicro,
@@ -357,6 +485,13 @@ export default function TutorV4Page() {
       setMode(typed.mode);
       setRecommendedStar(typed.recommendedStar);
       setVisibleProgress(typed.visibleProgress);
+      setActiveMicroId(typed.pair.microId);
+
+      setMicroStatuses((prev) => ({
+        ...prev,
+        [typed.pair.microId]:
+          prev[typed.pair.microId] === "success" ? "success" : "current",
+      }));
 
       setSelectedOptionId(null);
       setCurrentQuestion(null);
@@ -382,10 +517,14 @@ export default function TutorV4Page() {
     }
   }
 
+  function handleMicroClick(microId: string) {
+    void jumpToMicro(microId);
+  }
+
   return (
     <main className="min-h-screen bg-[radial-gradient(circle_at_top,_#dbeafe,_#f8fafc_45%,_#eef2ff_70%,_#ffffff)] px-4 py-6">
       <div className="mx-auto max-w-7xl">
-        <div className="grid gap-5 xl:grid-cols-[minmax(0,1fr)_320px]">
+        <div className="grid gap-5 xl:grid-cols-[minmax(0,1fr)_340px]">
           <div className="space-y-5">
             <section className="grid gap-4 md:grid-cols-3">
               <Card>
@@ -433,12 +572,14 @@ export default function TutorV4Page() {
                       Tutor Maths V4
                     </h1>
                     <p className="text-sm text-white/90">
-                      Choisis ta mission, gagne des points et débloque des badges.
+                      Clique sur une micro-compétence à droite pour cibler ton entraînement.
                     </p>
                   </div>
 
                   <div className="flex flex-wrap items-center gap-3">
-                    <GamePill>🎮 {mode === "evaluation" ? "Évaluation" : "Coaching"}</GamePill>
+                    <GamePill>
+                      🎮 {mode === "evaluation" ? "Évaluation" : "Coaching"}
+                    </GamePill>
                     <GamePill>⭐ {stars(recommendedStar)}</GamePill>
                     <GamePill>🔥 Série {visibleProgress.streak}</GamePill>
                   </div>
@@ -448,12 +589,16 @@ export default function TutorV4Page() {
               <div className="flex flex-col gap-4 px-6 py-5 md:flex-row md:items-center md:justify-between">
                 <div className="grid flex-1 gap-3 sm:grid-cols-3">
                   <HeroStat title="Score" value={`${scoreSeanceSur20}/20`} icon="🎯" />
-                  <HeroStat title="Points" value={`${earnedPoints}/${possiblePoints}`} icon="⭐" />
+                  <HeroStat
+                    title="Points"
+                    value={`${earnedPoints}/${possiblePoints}`}
+                    icon="⭐"
+                  />
                   <HeroStat title="Temps" value={formatDuration(elapsedSeconds)} icon="⏱️" />
                 </div>
 
                 <button
-                  onClick={startSession}
+                  onClick={() => void startSession()}
                   disabled={busy}
                   className="rounded-2xl bg-slate-900 px-6 py-3 text-sm font-black text-white shadow hover:bg-slate-800 disabled:opacity-50"
                 >
@@ -496,10 +641,11 @@ export default function TutorV4Page() {
               <section className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
                 <div className="mb-4 space-y-1">
                   <div className="text-xl font-black text-slate-900">
-                    Choisis ta mission
+                    Choisis ta question
                   </div>
                   <p className="text-sm text-slate-500">
-                    Tu peux choisir la mission la plus simple ou tenter la plus ambitieuse.
+                    Micro active :{" "}
+                    <span className="font-semibold">{microLabel(pair.microId)}</span>
                   </p>
                 </div>
 
@@ -518,7 +664,7 @@ export default function TutorV4Page() {
                     >
                       <div className="mb-3 flex items-center justify-between gap-3">
                         <span className="text-base font-black text-slate-900">
-                          Mission {idx === 0 ? "A" : "B"}
+                          Question {idx === 0 ? "A" : "B"}
                         </span>
                         <span className="rounded-full bg-amber-100 px-3 py-1 text-xs font-bold text-amber-900">
                           {stars(option.meta.starLevel)}
@@ -539,10 +685,6 @@ export default function TutorV4Page() {
                       ) : null}
 
                       <p className="text-base leading-6 text-slate-900">{option.text}</p>
-
-                      <div className="mt-4 text-xs font-bold uppercase tracking-wide text-slate-500 group-hover:text-slate-700">
-                        Cliquer pour choisir
-                      </div>
                     </button>
                   ))}
                 </div>
@@ -557,7 +699,10 @@ export default function TutorV4Page() {
                       Mission en cours
                     </div>
                     <p className="text-sm text-slate-500">
-                      Réponds pour débloquer la mission suivante.
+                      Compétence :{" "}
+                      <span className="font-semibold">
+                        {microLabel(currentQuestion.microId)}
+                      </span>
                     </p>
                   </div>
 
@@ -594,7 +739,7 @@ export default function TutorV4Page() {
                 currentQuestion.choices?.length ? (
                   <div className="space-y-3">
                     <div className="text-sm font-bold text-slate-800">
-                      Choisis ta réponse
+                      Clique sur ta réponse
                     </div>
 
                     <div className="grid gap-2">
@@ -631,7 +776,7 @@ export default function TutorV4Page() {
                       disabled={busy}
                       className="rounded-2xl bg-slate-900 px-5 py-3 text-sm font-black text-white hover:bg-slate-800 disabled:opacity-50"
                     >
-                      Valider la mission
+                      Valider ma réponse
                     </button>
                   </div>
                 )}
@@ -656,8 +801,8 @@ export default function TutorV4Page() {
 
             {!pair && !currentQuestion ? (
               <div className="rounded-3xl border border-slate-200 bg-white p-10 text-center text-sm text-slate-600 shadow-sm">
-                Clique sur <span className="font-bold">Démarrer une mission</span> pour lancer
-                ta séance.
+                Clique sur <span className="font-bold">Démarrer une mission</span> ou
+                sur une micro-compétence à droite.
               </div>
             ) : null}
           </div>
@@ -673,23 +818,33 @@ export default function TutorV4Page() {
               </div>
             </SidebarCard>
 
-            <SidebarCard title={`Progression : ${notionLabel(notion)}`}>
+            <SidebarCard title={`Micro-compétences : ${notionLabel(notion)}`}>
               <div className="mb-3 text-xs text-slate-500">
-                Suis tes missions dans la notion choisie.
+                Clique sur une micro-compétence pour t’entraîner dessus.
               </div>
 
               <div className="space-y-3">
                 {notionMicros.map((microId) => {
                   const status = microStatuses[microId] ?? "idle";
+                  const score = microScores[microId] ?? {
+                    attempts: 0,
+                    success: 0,
+                    earnedPoints: 0,
+                    possiblePoints: 0,
+                  };
+                  const isActive = activeMicroId === microId;
 
                   return (
-                    <div
+                    <button
                       key={microId}
-                      className={`rounded-2xl border px-4 py-3 shadow-sm transition ${statusClasses(
-                        status
-                      )}`}
+                      type="button"
+                      onClick={() => handleMicroClick(microId)}
+                      disabled={busy}
+                      className={`w-full rounded-2xl border px-4 py-3 text-left shadow-sm transition hover:shadow-md disabled:opacity-50 ${
+                        statusClasses(status)
+                      } ${isActive ? "ring-2 ring-slate-900/20" : ""}`}
                     >
-                      <div className="flex items-start justify-between gap-3">
+                      <div className="mb-2 flex items-start justify-between gap-3">
                         <div className="text-sm font-semibold leading-5">
                           {microLabel(microId)}
                         </div>
@@ -698,7 +853,19 @@ export default function TutorV4Page() {
                           {statusLabel(status)}
                         </span>
                       </div>
-                    </div>
+
+                      <div className="grid grid-cols-3 gap-2 text-[11px] font-semibold text-slate-700">
+                        <div className="rounded-xl bg-white/70 px-2 py-1">
+                          Score : {scoreOn20(score.earnedPoints, score.possiblePoints)}
+                        </div>
+                        <div className="rounded-xl bg-white/70 px-2 py-1">
+                          Réussites : {score.success}/{score.attempts}
+                        </div>
+                        <div className="rounded-xl bg-white/70 px-2 py-1">
+                          Points : {score.earnedPoints}/{score.possiblePoints}
+                        </div>
+                      </div>
+                    </button>
                   );
                 })}
               </div>
@@ -794,8 +961,6 @@ function StatLine({
       "bg-gradient-to-r from-green-400 to-emerald-600 text-white",
     "Questions faites":
       "bg-gradient-to-r from-amber-400 to-orange-500 text-white",
-    Série: "bg-gradient-to-r from-pink-400 to-rose-500 text-white",
-    Niveau: "bg-gradient-to-r from-indigo-400 to-indigo-600 text-white",
   };
 
   const icons: Record<string, string> = {
@@ -804,8 +969,6 @@ function StatLine({
     Points: "⭐",
     "Bonnes réponses": "✅",
     "Questions faites": "📊",
-    Série: "🔥",
-    Niveau: "🚀",
   };
 
   return (
@@ -829,14 +992,6 @@ function Label({ children }: { children: ReactNode }) {
     <label className="mb-2 block text-xs font-semibold text-slate-600">
       {children}
     </label>
-  );
-}
-
-function MiniPill({ children }: { children: ReactNode }) {
-  return (
-    <div className="rounded-full bg-white/95 px-3 py-1 text-xs font-semibold text-slate-700 shadow-sm ring-1 ring-slate-200">
-      {children}
-    </div>
   );
 }
 
