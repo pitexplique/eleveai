@@ -29,6 +29,7 @@ export const NOTION_MICRO_MAP: Record<string, string[]> = {
     "triangle_angle_sum",
     "triangle_missing_angle",
     "triangle_possible_or_not",
+    "triangle_defis"
   ],
 };
 
@@ -63,6 +64,7 @@ export const MICRO_LABELS: Record<string, string> = {
   triangle_angle_sum: "Utiliser la somme des angles",
   triangle_missing_angle: "Calculer un angle manquant",
   triangle_possible_or_not: "Décider si un triangle est constructible",
+  triangle_defis: "Défis sur les triangles"
 };
 
 export const NOTION_LABELS: Record<string, string> = {

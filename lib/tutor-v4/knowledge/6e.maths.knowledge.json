@@ -85,7 +85,8 @@
         "triangle_type_angles",
         "triangle_angle_sum",
         "triangle_missing_angle",
-        "triangle_possible_or_not"
+        "triangle_possible_or_not",
+        "triangle_defis"
       ],
       "levels": [1, 2, 3]
     }
@@ -264,6 +265,19 @@
       "notionId": "triangles",
       "boId": "BO6G3",
       "prerequis": ["triangle_vertices_sides"]
+    },
+    {
+      "id": "triangle_defis",
+      "label": "Résoudre des défis sur les triangles",
+      "notionId": "triangles",
+      "boId": "BO6G3",
+      "prerequis": [
+        "triangle_type_sides",
+        "triangle_type_angles",
+        "triangle_angle_sum",
+        "triangle_missing_angle",
+        "triangle_possible_or_not"
+      ]
     }
   ],
   "microGraph": []

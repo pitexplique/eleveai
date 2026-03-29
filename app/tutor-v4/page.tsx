@@ -196,6 +196,18 @@ export default function TutorV4Page() {
   const [sessionStartedAt, setSessionStartedAt] = useState<number | null>(null);
   const [elapsedSeconds, setElapsedSeconds] = useState(0);
 
+  const [resultModal, setResultModal] = useState<{
+    open: boolean;
+    ok: boolean;
+    title: string;
+    message?: string;
+  }>({
+    open: false,
+    ok: true,
+    title: "",
+    message: "",
+  });
+
   useEffect(() => {
     if (!sessionStartedAt) {
       setElapsedSeconds(0);
@@ -238,6 +250,24 @@ export default function TutorV4Page() {
       };
     });
     setMicroScores(initial);
+  }
+
+  function randomSuccessTitle() {
+    const items = ["Super !", "Magnifique !", "OK !"];
+    return items[Math.floor(Math.random() * items.length)];
+  }
+
+  function openResultModal(ok: boolean, message?: string) {
+    setResultModal({
+      open: true,
+      ok,
+      title: ok ? randomSuccessTitle() : "Oups !",
+      message,
+    });
+  }
+
+  function closeResultModal() {
+    setResultModal((prev) => ({ ...prev, open: false }));
   }
 
   async function activateQuestion(
@@ -481,6 +511,14 @@ export default function TutorV4Page() {
       setFeedback(
         `${typed.result.ok ? "✅ Bonne réponse" : "⚠️ À retravailler"} : ${currentMicroLabel}\n\n${typed.feedback}`
       );
+
+      openResultModal(
+        typed.result.ok,
+        typed.result.ok
+          ? `Mission réussie : ${currentMicroLabel}`
+          : `Mission à retravailler : ${currentMicroLabel}`
+      );
+
       setPair(typed.pair);
       setMode(typed.mode);
       setRecommendedStar(typed.recommendedStar);
@@ -899,6 +937,14 @@ export default function TutorV4Page() {
           </aside>
         </div>
       </div>
+
+      <ResultModal
+        open={resultModal.open}
+        ok={resultModal.ok}
+        title={resultModal.title}
+        message={resultModal.message}
+        onClose={closeResultModal}
+      />
     </main>
   );
 }
@@ -1008,5 +1054,83 @@ function Tag({ children }: { children: ReactNode }) {
     <span className="rounded-full bg-slate-100 px-2 py-1 text-[11px] font-semibold text-slate-700">
       {children}
     </span>
+  );
+}
+
+function ResultModal({
+  open,
+  ok,
+  title,
+  message,
+  onClose,
+}: {
+  open: boolean;
+  ok: boolean;
+  title: string;
+  message?: string;
+  onClose: () => void;
+}) {
+  useEffect(() => {
+    if (!open) return;
+
+    const timeout = window.setTimeout(() => {
+      onClose();
+    }, 1000);
+
+    const onKeyDown = (e: globalThis.KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+
+    window.addEventListener("keydown", onKeyDown);
+
+    return () => {
+      window.clearTimeout(timeout);
+      window.removeEventListener("keydown", onKeyDown);
+    };
+  }, [open, onClose]);
+
+  if (!open) return null;
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/50 px-4">
+      <div
+        className={`w-full max-w-md rounded-[28px] border p-6 shadow-2xl ${
+          ok
+            ? "border-emerald-200 bg-white"
+            : "border-amber-200 bg-white"
+        }`}
+      >
+        <div className="mb-4 flex items-center gap-3">
+          <div
+            className={`flex h-14 w-14 items-center justify-center rounded-full text-2xl shadow-sm ${
+              ok
+                ? "bg-emerald-100 text-emerald-700"
+                : "bg-amber-100 text-amber-700"
+            }`}
+          >
+            {ok ? "🎉" : "😅"}
+          </div>
+
+          <div>
+            <div
+              className={`text-2xl font-black ${
+                ok ? "text-emerald-700" : "text-amber-700"
+              }`}
+            >
+              {title}
+            </div>
+            <div className="text-sm text-slate-500">
+              {ok ? "Ta réponse est correcte." : "Ce n’est pas grave, on continue."}
+            </div>
+          </div>
+        </div>
+
+        {message ? (
+          <div className="rounded-2xl bg-slate-50 px-4 py-3 text-sm text-slate-700">
+            {message}
+          </div>
+        ) : null}
+      </div>
+    </div>
   );
 }

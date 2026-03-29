@@ -822,5 +822,342 @@ export const trianglesBank: TutorBankItemV4[] = [
         CA: "7 cm"
       }
     }
+  },
+
+  // =========================
+  // TRIANGLE DEFIS (OLYMPIADE)
+  // =========================
+  {
+    kind: "fixed",
+    id: "triangle_defis_fixed_1",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "triangles",
+    microId: "triangle_defis",
+    difficulty: 1,
+    text: "Un triangle a deux angles de 40° et 60°. Combien mesure le troisième angle ?",
+    format: "short",
+    expected: ["80", "80°"],
+    comparator: "number_equal",
+    hint: "La somme des angles d’un triangle vaut 180°.",
+    tags: ["triangles", "defi", "olympiade", "angles"]
+  },
+  {
+    kind: "fixed",
+    id: "triangle_defis_fixed_2",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "triangles",
+    microId: "triangle_defis",
+    difficulty: 1,
+    text: "Un triangle a deux côtés égaux. Quel est son type ?",
+    format: "short",
+    expected: ["isocèle", "isocele"],
+    comparator: "contains_keyword",
+    hint: "Deux côtés égaux → triangle isocèle.",
+    tags: ["triangles", "defi", "olympiade", "types"]
+  },
+  {
+    kind: "fixed",
+    id: "triangle_defis_fixed_3",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "triangles",
+    microId: "triangle_defis",
+    difficulty: 2,
+    text: "Un triangle a pour angles 90°, 45° et 45°. Est-ce possible ?",
+    format: "qcm",
+    choices: ["oui", "non"],
+    expected: ["oui"],
+    comparator: "mcq_exact",
+    hint: "Vérifie la somme des angles.",
+    tags: ["triangles", "defi", "olympiade", "qcm", "angles"]
+  },
+  {
+    kind: "fixed",
+    id: "triangle_defis_fixed_4",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "triangles",
+    microId: "triangle_defis",
+    difficulty: 2,
+    text: "Peut-on construire un triangle avec les longueurs 3 cm, 4 cm et 8 cm ?",
+    format: "qcm",
+    choices: ["oui", "non"],
+    expected: ["non"],
+    comparator: "mcq_exact",
+    hint: "La somme de deux côtés doit être plus grande que le troisième.",
+    tags: ["triangles", "defi", "olympiade", "construction", "qcm"]
+  },
+  {
+    kind: "fixed",
+    id: "triangle_defis_canvas_1",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "triangles",
+    microId: "triangle_defis",
+    difficulty: 2,
+    text: "Observe la figure. Ce triangle est-il rectangle ?",
+    format: "qcm",
+    choices: ["oui", "non"],
+    expected: ["oui"],
+    comparator: "mcq_exact",
+    hint: "Le petit carré rouge indique un angle droit.",
+    tags: ["triangles", "defi", "olympiade", "canvas", "qcm"],
+    canvas: {
+      kind: "triangle",
+      points: {
+        A: { x: 70, y: 210 },
+        B: { x: 250, y: 210 },
+        C: { x: 250, y: 90 }
+      },
+      display: {
+        showPoints: true,
+        showLabels: true
+      },
+      marks: {
+        rightAngleAt: "B"
+      }
+    }
+  },
+  {
+    kind: "fixed",
+    id: "triangle_defis_fixed_5",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "triangles",
+    microId: "triangle_defis",
+    difficulty: 3,
+    text: "Un triangle a deux angles égaux et un angle de 100°. Combien mesurent les deux autres angles ?",
+    format: "short",
+    expected: ["40", "40°"],
+    comparator: "number_equal",
+    hint: "Les deux autres angles sont égaux et la somme totale vaut 180°.",
+    tags: ["triangles", "defi", "olympiade", "raisonnement", "angles"]
+  },
+  {
+    kind: "fixed",
+    id: "triangle_defis_fixed_6",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "triangles",
+    microId: "triangle_defis",
+    difficulty: 3,
+    text: "Peut-on avoir un triangle avec deux angles droits ?",
+    format: "qcm",
+    choices: ["oui", "non"],
+    expected: ["non"],
+    comparator: "mcq_exact",
+    hint: "Deux angles droits feraient déjà 180°.",
+    tags: ["triangles", "defi", "olympiade", "logique", "qcm"]
+  },
+  {
+    kind: "fixed",
+    id: "triangle_defis_canvas_2",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "triangles",
+    microId: "triangle_defis",
+    difficulty: 3,
+    text: "Observe les codages. Ce triangle est-il isocèle ?",
+    format: "qcm",
+    choices: ["oui", "non"],
+    expected: ["oui"],
+    comparator: "mcq_exact",
+    hint: "Deux traits verts identiques sur deux côtés signifient que ces côtés sont égaux.",
+    tags: ["triangles", "defi", "olympiade", "canvas", "qcm", "types"],
+    canvas: {
+      kind: "triangle",
+      points: {
+        A: { x: 160, y: 50 },
+        B: { x: 70, y: 210 },
+        C: { x: 250, y: 210 }
+      },
+      display: {
+        showPoints: true,
+        showLabels: true
+      },
+      marks: {
+        equalSides: [["CA", "AB"]]
+      }
+    }
+  },
+  {
+    kind: "fixed",
+    id: "triangle_defis_fixed_7",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "triangles",
+    microId: "triangle_defis",
+    difficulty: 4,
+    text: "Un triangle a un angle droit et deux côtés égaux. Quel est son type précis ?",
+    format: "qcm",
+    choices: [
+      "triangle rectangle",
+      "triangle isocèle",
+      "triangle rectangle isocèle",
+      "triangle équilatéral"
+    ],
+    expected: ["triangle rectangle isocèle"],
+    comparator: "mcq_exact",
+    hint: "Il est à la fois rectangle et isocèle.",
+    tags: ["triangles", "defi", "olympiade", "types", "raisonnement"]
+  },
+  {
+    kind: "fixed",
+    id: "triangle_defis_fixed_8",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "triangles",
+    microId: "triangle_defis",
+    difficulty: 4,
+    text: "Dans un triangle équilatéral, combien mesure chaque angle ?",
+    format: "short",
+    expected: ["60", "60°"],
+    comparator: "number_equal",
+    hint: "Les trois angles sont égaux et leur somme vaut 180°.",
+    tags: ["triangles", "defi", "olympiade", "equilateral", "angles"]
+  },
+  {
+    kind: "fixed",
+    id: "triangle_defis_canvas_3",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "triangles",
+    microId: "triangle_defis",
+    difficulty: 4,
+    text: "Observe la figure. Ce triangle est-il équilatéral ?",
+    format: "qcm",
+    choices: ["oui", "non"],
+    expected: ["oui"],
+    comparator: "mcq_exact",
+    hint: "Les trois côtés portent le même codage.",
+    tags: ["triangles", "defi", "olympiade", "canvas", "qcm", "equilateral"],
+    canvas: {
+      kind: "triangle",
+      points: {
+        A: { x: 160, y: 55 },
+        B: { x: 80, y: 210 },
+        C: { x: 240, y: 210 }
+      },
+      display: {
+        showPoints: true,
+        showLabels: true
+      },
+      marks: {
+        equalSides: [["AB", "BC"], ["BC", "CA"]]
+      }
+    }
+  },
+  {
+    kind: "fixed",
+    id: "triangle_defis_fixed_9",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "triangles",
+    microId: "triangle_defis",
+    difficulty: 5,
+    text: "Peut-on avoir un triangle dont un angle mesure 179° ?",
+    format: "qcm",
+    choices: ["oui", "non"],
+    expected: ["oui"],
+    comparator: "mcq_exact",
+    hint: "C’est possible si les deux autres angles sont très petits.",
+    tags: ["triangles", "defi", "olympiade", "hpi", "qcm", "angles"]
+  },
+  {
+    kind: "fixed",
+    id: "triangle_defis_fixed_10",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "triangles",
+    microId: "triangle_defis",
+    difficulty: 5,
+    text: "Peut-on connaître exactement les longueurs des côtés d’un triangle si on connaît seulement ses trois angles ?",
+    format: "qcm",
+    choices: ["oui", "non"],
+    expected: ["non"],
+    comparator: "mcq_exact",
+    hint: "Deux triangles peuvent avoir les mêmes angles mais des tailles différentes.",
+    tags: ["triangles", "defi", "olympiade", "hpi", "logique", "qcm"]
+  },
+  {
+    kind: "fixed",
+    id: "triangle_defis_fixed_11",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "triangles",
+    microId: "triangle_defis",
+    difficulty: 5,
+    text: "Explique pourquoi on ne peut pas construire un triangle ayant deux angles droits.",
+    format: "short",
+    expected: ["180", "somme", "triangle"],
+    comparator: "contains_keyword",
+    hint: "Deux angles droits font déjà 180°.",
+    tags: ["triangles", "defi", "olympiade", "hpi", "raisonnement"]
+  },
+  {
+    kind: "template",
+    id: "triangle_defis_tpl_1",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "triangles",
+    microId: "triangle_defis",
+    difficulty: 4,
+    hint: "Additionne mentalement les angles et compare à 180°.",
+    tags: ["triangles", "defi", "olympiade", "template", "angles"],
+    generate: () => {
+      const triples = [
+        [70, 60, 50],
+        [90, 50, 40],
+        [100, 40, 40],
+        [80, 60, 40],
+      ];
+      const [a, b, c] = triples[Math.floor(Math.random() * triples.length)];
+
+      return {
+        text: `Peut-on construire un triangle ayant pour angles ${a}°, ${b}° et ${c}° ?`,
+        format: "qcm",
+        choices: shuffle(["oui", "non"]),
+        expected: ["oui"],
+        comparator: "mcq_exact"
+      };
+    }
+  },
+  {
+    kind: "template",
+    id: "triangle_defis_tpl_2",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "triangles",
+    microId: "triangle_defis",
+    difficulty: 5,
+    hint: "Teste si la somme de deux côtés est plus grande que le troisième.",
+    tags: ["triangles", "defi", "olympiade", "template", "construction", "hpi"],
+    generate: () => {
+      const possibleCases = [
+        [4, 5, 7],
+        [6, 6, 10],
+        [5, 8, 9],
+      ];
+      const impossibleCases = [
+        [2, 3, 6],
+        [4, 5, 9],
+        [3, 3, 7],
+      ];
+
+      const usePossible = Math.random() < 0.5;
+      const trio = usePossible
+        ? possibleCases[Math.floor(Math.random() * possibleCases.length)]
+        : impossibleCases[Math.floor(Math.random() * impossibleCases.length)];
+
+      return {
+        text: `Peut-on construire un triangle de côtés ${trio[0]} cm, ${trio[1]} cm et ${trio[2]} cm ?`,
+        format: "qcm",
+        choices: shuffle(["oui", "non"]),
+        expected: [usePossible ? "oui" : "non"],
+        comparator: "mcq_exact"
+      };
+    }
   }
 ];
