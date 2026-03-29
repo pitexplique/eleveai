@@ -213,7 +213,7 @@ export default function AccueilPage() {
               </Link>
 
               <Link
-                href="/tutor"
+                href="/tutor-v4"
                 className="inline-flex w-full items-center justify-center rounded-xl bg-blue-600 px-6 py-3 text-sm font-semibold text-white transition hover:bg-blue-500 sm:w-auto"
               >
                 Découvrir le Tutor →
@@ -316,7 +316,7 @@ export default function AccueilPage() {
               title="Système d’apprentissage"
               description="Un tutorat IA orienté progression : adaptation, accompagnement, consolidation et suivi."
               details="L’objectif n’est pas de remplacer l’enseignant, mais de renforcer l’apprentissage par étapes."
-              href="/tutor"
+              href="/tutor-v4"
               cta="Découvrir Tutor"
               variant="blue"
             />
