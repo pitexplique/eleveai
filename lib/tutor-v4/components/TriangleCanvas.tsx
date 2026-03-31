@@ -21,7 +21,7 @@ function norm(vx: number, vy: number) {
   return { x: vx / n, y: vy / n };
 }
 
-function angleSquarePath(vertex: Point, p1: Point, p2: Point, size = 12) {
+function angleSquarePath(vertex: Point, p1: Point, p2: Point, size = 20) {
   const v1x = p1.x - vertex.x;
   const v1y = p1.y - vertex.y;
   const v2x = p2.x - vertex.x;
@@ -157,14 +157,14 @@ export default function TriangleCanvas({ figure }: Props) {
           points={`${A.x},${A.y} ${B.x},${B.y} ${C.x},${C.y}`}
           fill="#f8fafc"
           stroke="#0f172a"
-          strokeWidth={1.8}
+          strokeWidth={2.8}
         />
 
         {showPoints && (
           <>
-            <circle cx={A.x} cy={A.y} r={3} fill="#0f172a" />
-            <circle cx={B.x} cy={B.y} r={3} fill="#0f172a" />
-            <circle cx={C.x} cy={C.y} r={3} fill="#0f172a" />
+            <circle cx={A.x} cy={A.y} r={4.5} fill="#0f172a" />
+            <circle cx={B.x} cy={B.y} r={4.5} fill="#0f172a" />
+            <circle cx={C.x} cy={C.y} r={4.5} fill="#0f172a" />
           </>
         )}
 
@@ -173,27 +173,36 @@ export default function TriangleCanvas({ figure }: Props) {
             <text
               x={posLabelA.x}
               y={posLabelA.y}
-              fontSize="12"
-              fontWeight="700"
+              fontSize="18"
+              fontWeight="900"
               fill="#0f172a"
+              stroke="white"
+              strokeWidth="2"
+              paintOrder="stroke"
             >
               {labelA}
             </text>
             <text
               x={posLabelB.x}
               y={posLabelB.y}
-              fontSize="12"
-              fontWeight="700"
+              fontSize="18"
+              fontWeight="900"
               fill="#0f172a"
+              stroke="white"
+              strokeWidth="2"
+              paintOrder="stroke"
             >
               {labelB}
             </text>
             <text
               x={posLabelC.x}
               y={posLabelC.y}
-              fontSize="12"
-              fontWeight="700"
+              fontSize="18"
+              fontWeight="900"
               fill="#0f172a"
+              stroke="white"
+              strokeWidth="2"
+              paintOrder="stroke"
             >
               {labelC}
             </text>
@@ -203,37 +212,81 @@ export default function TriangleCanvas({ figure }: Props) {
         {showAngles && (
           <>
             {angleA ? (
-              <text
-                x={posAngleA.x}
-                y={posAngleA.y}
-                fontSize="11"
-                fill="#7c3aed"
-                fontWeight="700"
-              >
-                {angleA}
-              </text>
+              <g>
+                <rect
+                  x={posAngleA.x - 4}
+                  y={posAngleA.y - 14}
+                  width={34}
+                  height={22}
+                  rx={4}
+                  fill="white"
+                  opacity={0.9}
+                />
+                <text
+                  x={posAngleA.x}
+                  y={posAngleA.y}
+                  fontSize="16"
+                  fill="#7c3aed"
+                  fontWeight="900"
+                  stroke="white"
+                  strokeWidth="2"
+                  paintOrder="stroke"
+                >
+                  {angleA}
+                </text>
+              </g>
             ) : null}
+
             {angleB ? (
-              <text
-                x={posAngleB.x}
-                y={posAngleB.y}
-                fontSize="11"
-                fill="#7c3aed"
-                fontWeight="700"
-              >
-                {angleB}
-              </text>
+              <g>
+                <rect
+                  x={posAngleB.x - 4}
+                  y={posAngleB.y - 14}
+                  width={34}
+                  height={22}
+                  rx={4}
+                  fill="white"
+                  opacity={0.9}
+                />
+                <text
+                  x={posAngleB.x}
+                  y={posAngleB.y}
+                  fontSize="16"
+                  fill="#7c3aed"
+                  fontWeight="900"
+                  stroke="white"
+                  strokeWidth="2"
+                  paintOrder="stroke"
+                >
+                  {angleB}
+                </text>
+              </g>
             ) : null}
+
             {angleC ? (
-              <text
-                x={posAngleC.x}
-                y={posAngleC.y}
-                fontSize="11"
-                fill="#7c3aed"
-                fontWeight="700"
-              >
-                {angleC}
-              </text>
+              <g>
+                <rect
+                  x={posAngleC.x - 4}
+                  y={posAngleC.y - 14}
+                  width={34}
+                  height={22}
+                  rx={4}
+                  fill="white"
+                  opacity={0.9}
+                />
+                <text
+                  x={posAngleC.x}
+                  y={posAngleC.y}
+                  fontSize="16"
+                  fill="#7c3aed"
+                  fontWeight="900"
+                  stroke="white"
+                  strokeWidth="2"
+                  paintOrder="stroke"
+                >
+                  {angleC}
+                </text>
+              </g>
             ) : null}
           </>
         )}
@@ -241,40 +294,84 @@ export default function TriangleCanvas({ figure }: Props) {
         {showSides && (
           <>
             {sideAB ? (
-              <text
-                x={mAB.x}
-                y={mAB.y + 14}
-                textAnchor="middle"
-                fontSize="11"
-                fill="#0369a1"
-                fontWeight="700"
-              >
-                {sideAB}
-              </text>
+              <g>
+                <rect
+                  x={mAB.x - 22}
+                  y={mAB.y + 2}
+                  width={44}
+                  height={20}
+                  rx={5}
+                  fill="white"
+                  opacity={0.9}
+                />
+                <text
+                  x={mAB.x}
+                  y={mAB.y + 16}
+                  textAnchor="middle"
+                  fontSize="15"
+                  fill="#0369a1"
+                  fontWeight="900"
+                  stroke="white"
+                  strokeWidth="2"
+                  paintOrder="stroke"
+                >
+                  {sideAB}
+                </text>
+              </g>
             ) : null}
+
             {sideBC ? (
-              <text
-                x={mBC.x + 11}
-                y={mBC.y}
-                textAnchor="middle"
-                fontSize="11"
-                fill="#0369a1"
-                fontWeight="700"
-              >
-                {sideBC}
-              </text>
+              <g>
+                <rect
+                  x={mBC.x - 22}
+                  y={mBC.y - 12}
+                  width={44}
+                  height={20}
+                  rx={5}
+                  fill="white"
+                  opacity={0.9}
+                />
+                <text
+                  x={mBC.x}
+                  y={mBC.y + 4}
+                  textAnchor="middle"
+                  fontSize="15"
+                  fill="#0369a1"
+                  fontWeight="900"
+                  stroke="white"
+                  strokeWidth="2"
+                  paintOrder="stroke"
+                >
+                  {sideBC}
+                </text>
+              </g>
             ) : null}
+
             {sideCA ? (
-              <text
-                x={mCA.x - 11}
-                y={mCA.y}
-                textAnchor="middle"
-                fontSize="11"
-                fill="#0369a1"
-                fontWeight="700"
-              >
-                {sideCA}
-              </text>
+              <g>
+                <rect
+                  x={mCA.x - 22}
+                  y={mCA.y - 12}
+                  width={44}
+                  height={20}
+                  rx={5}
+                  fill="white"
+                  opacity={0.9}
+                />
+                <text
+                  x={mCA.x}
+                  y={mCA.y + 4}
+                  textAnchor="middle"
+                  fontSize="15"
+                  fill="#0369a1"
+                  fontWeight="900"
+                  stroke="white"
+                  strokeWidth="2"
+                  paintOrder="stroke"
+                >
+                  {sideCA}
+                </text>
+              </g>
             ) : null}
           </>
         )}
@@ -290,7 +387,9 @@ export default function TriangleCanvas({ figure }: Props) {
             }
             fill="none"
             stroke="#dc2626"
-            strokeWidth={1.8}
+            strokeWidth={3}
+            strokeLinecap="round"
+            strokeLinejoin="round"
           />
         ) : null}
 
@@ -301,7 +400,7 @@ export default function TriangleCanvas({ figure }: Props) {
           const m1 = mid(p1a, p1b);
           const m2 = mid(p2a, p2b);
 
-          const tickSize = 7;
+          const tickSize = 12;
 
           const dx1 = p1b.x - p1a.x;
           const dy1 = p1b.y - p1a.y;
@@ -316,7 +415,12 @@ export default function TriangleCanvas({ figure }: Props) {
           const ny2 = dx2 / n2;
 
           return (
-            <g key={`${s1}-${s2}-${idx}`} stroke="#16a34a" strokeWidth={1.8}>
+            <g
+              key={`${s1}-${s2}-${idx}`}
+              stroke="#16a34a"
+              strokeWidth={3}
+              strokeLinecap="round"
+            >
               <line
                 x1={m1.x - (nx1 * tickSize) / 2}
                 y1={m1.y - (ny1 * tickSize) / 2}
@@ -337,14 +441,15 @@ export default function TriangleCanvas({ figure }: Props) {
           const [vertex1, p1a, p1b] = getAngleNeighbors(v1, A, B, C);
           const [vertex2, p2a, p2b] = getAngleNeighbors(v2, A, B, C);
 
-          const radius = 14 + idx * 2;
+          const radius = 20 + idx * 6;
 
           return (
             <g
               key={`${v1}-${v2}-${idx}`}
               fill="none"
               stroke="#f59e0b"
-              strokeWidth={1.8}
+              strokeWidth={3}
+              strokeLinecap="round"
             >
               <path d={angleArcPath(vertex1, p1a, p1b, radius)} />
               <path d={angleArcPath(vertex2, p2a, p2b, radius)} />
