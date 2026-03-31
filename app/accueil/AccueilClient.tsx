@@ -80,24 +80,6 @@ export default function AccueilPage() {
   return (
     <main className="min-h-screen bg-[#fffaf2] text-slate-900">
       <section className="border-y border-orange-100 bg-gradient-to-b from-[#fff6e7] to-[#fffaf2]">
-                <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:px-8">
-          <div className="mx-auto max-w-3xl text-center">
-            <p className="text-xs font-extrabold uppercase tracking-[0.2em] text-orange-500">
-              Défis du jour
-            </p>
-
-            <h1 className="mt-3 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-5xl">
-              Trois piliers pour structurer EleveAI
-            </h1>
-
-            <p className="mt-4 text-sm leading-relaxed text-slate-600 sm:text-base">
-               “Et si l’IA te donnait toujours la réponse…  saurais-tu encore apprendre ?”
-            </p>
-           <p className="mt-4 text-sm leading-relaxed text-slate-600 sm:text-base">
-               “”
-            </p>
-          </div>
-        </div>
         <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-3xl text-center">
             <p className="text-xs font-extrabold uppercase tracking-[0.2em] text-orange-500">
