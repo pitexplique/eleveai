@@ -15,6 +15,7 @@ export const NOTION_MICRO_MAP: Record<string, string[]> = {
     "decimal_add",
     "decimal_multiply",
     "decimal_divide_by_integer",
+    "decimal_defis",
   ],
   fractions: ["fraction_read", "fraction_compare", "fraction_quantity"],
   proportionnalite: ["prop_table", "prop_unit", "prop_direct"],
@@ -39,6 +40,7 @@ export const MICRO_LABELS: Record<string, string> = {
   decimal_add: "Additionner des nombres décimaux",
   decimal_multiply: "Multiplier des nombres décimaux",
   decimal_divide_by_integer: "Diviser un nombre décimal par un entier",
+  decimal_defis: "Défis",
 
   fraction_read: "Lire une fraction",
   fraction_compare: "Comparer des fractions",

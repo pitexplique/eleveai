@@ -21,7 +21,8 @@
         "decimal_write",
         "decimal_add",
         "decimal_multiply",
-        "decimal_divide_by_integer"
+        "decimal_divide_by_integer",
+        "decimal_defis"
       ],
       "levels": [1, 2, 3]
     },
@@ -126,6 +127,18 @@
       "notionId": "decimaux",
       "boId": "BO6N1",
       "prerequis": ["decimal_write"]
+    },
+    {
+      "id": "decimal_defis",
+      "label": "Résoudre des défis sur les nombres décimaux",
+      "notionId": "decimaux",
+      "boId": "BO6N1",
+      "prerequis": [
+        "decimal_compare",
+        "decimal_write",
+        "decimal_add",
+        "decimal_multiply",
+        "decimal_divide_by_integer"]
     },
 
     {
