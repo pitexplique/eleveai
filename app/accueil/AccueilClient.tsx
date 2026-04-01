@@ -1,8 +1,14 @@
 "use client";
 
 import Link from "next/link";
+import DefiDuJourCard from "@/components/defis/DefiDuJourCard";
+import { getDefiDuJour } from "@/lib/defis/helpers";
 
 export default function AccueilPage() {
+  // 🔹 Récupère automatiquement le défi du jour
+  const defiDuJour = getDefiDuJour();
+
+  // 🔹 Carte réutilisable pour les 3 piliers
   const Card = ({
     id,
     badge,
@@ -29,7 +35,7 @@ export default function AccueilPage() {
           "bg-gradient-to-r from-cyan-500 to-sky-600 text-white hover:from-cyan-400 hover:to-sky-500",
       },
       slate: {
-        badge: "border-amber-200 bg-amber-50 text-amber-700",
+        badge: "border-slate-200 bg-slate-100 text-slate-700",
         button:
           "bg-gradient-to-r from-slate-900 to-slate-700 text-white hover:from-slate-800 hover:to-slate-600",
       },
@@ -45,26 +51,31 @@ export default function AccueilPage() {
     return (
       <div
         id={id}
-        className="rounded-3xl border border-orange-100 bg-white/95 p-6 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
+        className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
       >
+        {/* Badge */}
         <div
           className={`inline-flex rounded-full border px-3 py-1 text-xs font-semibold ${current.badge}`}
         >
           {badge}
         </div>
 
+        {/* Titre */}
         <h3 className="mt-4 text-2xl font-extrabold tracking-tight text-slate-900 sm:text-3xl">
           {title}
         </h3>
 
+        {/* Description */}
         <p className="mt-4 text-sm leading-relaxed text-slate-700 sm:text-base">
           {description}
         </p>
 
+        {/* Détails */}
         <p className="mt-3 text-sm leading-relaxed text-slate-500">
           {details}
         </p>
 
+        {/* Bouton */}
         <div className="mt-6">
           <Link
             href={href}
@@ -78,9 +89,10 @@ export default function AccueilPage() {
   };
 
   return (
-    <main className="min-h-screen bg-[#fffaf2] text-slate-900">
-      <section className="border-y border-orange-100 bg-gradient-to-b from-[#fff6e7] to-[#fffaf2]">
+    <main className="min-h-screen bg-white text-slate-900">
+      <section className="border-y border-slate-200 bg-gradient-to-b from-white to-slate-50">
         <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:px-8">
+          {/* En-tête principal */}
           <div className="mx-auto max-w-3xl text-center">
             <p className="text-xs font-extrabold uppercase tracking-[0.2em] text-orange-500">
               Mi ed a zot
@@ -96,6 +108,7 @@ export default function AccueilPage() {
             </p>
           </div>
 
+          {/* Les 3 cartes principales */}
           <div className="mt-12 grid gap-6 lg:grid-cols-3">
             <Card
               id="securiser"
@@ -129,6 +142,41 @@ export default function AccueilPage() {
               cta="Découvrir Tutor"
               variant="blue"
             />
+          </div>
+
+          {/* Bloc Défi IA du jour */}
+          <div className="mt-20">
+            <div className="mx-auto max-w-4xl text-center">
+              <p className="text-xs font-extrabold uppercase tracking-[0.2em] text-indigo-600">
+                Défi IA du jour
+              </p>
+
+              <h2 className="mt-3 text-2xl font-extrabold tracking-tight text-slate-900 sm:text-3xl">
+                Une question pour réfléchir à l’IA
+              </h2>
+
+              <p className="mt-3 text-sm leading-relaxed text-slate-600 sm:text-base">
+                Réponds en quelques secondes, puis découvre une idée
+                essentielle sur l’utilité de l’intelligence artificielle.
+              </p>
+            </div>
+
+            {/* Carte interactive du défi du jour */}
+            <div className="mt-8 mx-auto max-w-3xl">
+              <div className="rounded-3xl border border-indigo-100 bg-white p-2 shadow-sm">
+                <DefiDuJourCard defi={defiDuJour} />
+              </div>
+            </div>
+
+            {/* Lien vers le répertoire complet des défis */}
+            <div className="mt-6 text-center">
+              <Link
+                href="/defis"
+                className="text-sm font-semibold text-slate-600 transition hover:text-indigo-700"
+              >
+                Voir tous les défis →
+              </Link>
+            </div>
           </div>
         </div>
       </section>
