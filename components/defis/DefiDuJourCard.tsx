@@ -1,6 +1,11 @@
 "use client";
 
-// 🔹 Composant principal : affiche un défi + gestion des réponses
+// 🔹 Composant principal : affiche un défi + gère les réponses
+// 🔹 Version améliorée :
+//    - sélection en bleu avant validation
+//    - bonne réponse en vert
+//    - mauvaise réponse en rouge
+//    - image affichée seulement si elle existe vraiment
 
 import { useMemo, useState } from "react";
 import type { Defi } from "@/lib/defis/types";
@@ -21,6 +26,10 @@ export default function DefiDuJourCard({ defi }: Props) {
     return selected === defi.bonneReponse;
   }, [selected, defi.bonneReponse]);
 
+  // 🔸 on n'affiche l'image que si elle existe vraiment
+  const imageSrc =
+    defi.image && defi.image.trim() !== "" ? defi.image : null;
+
   return (
     <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
       {/* Badge */}
@@ -34,10 +43,10 @@ export default function DefiDuJourCard({ defi }: Props) {
       </p>
 
       {/* Image (si présente) */}
-      {defi.image && (
+      {imageSrc && (
         <div className="mt-5 overflow-hidden rounded-2xl border border-slate-200">
           <img
-            src={defi.image}
+            src={imageSrc}
             alt={defi.question}
             className="h-56 w-full object-cover"
           />
@@ -46,11 +55,15 @@ export default function DefiDuJourCard({ defi }: Props) {
 
       {/* Choix */}
       <div className="mt-6 space-y-3">
-        {defi.choix.map((choix) => {
+        {defi.choix.map((choix, index) => {
           const isSelected = selected === choix;
           const isBonne = choix === defi.bonneReponse;
 
-          let style = "border-slate-200 bg-white text-slate-700 hover:border-slate-300 hover:bg-slate-50";
+          // 🔸 lettres A / B / C / D ...
+          const label = String.fromCharCode(65 + index);
+
+          let style =
+            "border-slate-200 bg-white text-slate-700 hover:border-slate-300 hover:bg-slate-50";
           let icon = null;
 
           // 🔹 Avant validation : l'option cliquée devient bleue
@@ -62,10 +75,10 @@ export default function DefiDuJourCard({ defi }: Props) {
           if (submitted) {
             if (isBonne) {
               style = "border-emerald-400 bg-emerald-50 text-emerald-700";
-              icon = <span className="ml-2">✅</span>;
+              icon = <span className="ml-3 shrink-0">✅</span>;
             } else if (isSelected && !isBonne) {
               style = "border-red-400 bg-red-50 text-red-700";
-              icon = <span className="ml-2">❌</span>;
+              icon = <span className="ml-3 shrink-0">❌</span>;
             } else {
               style = "border-slate-200 bg-white text-slate-500";
             }
@@ -82,7 +95,13 @@ export default function DefiDuJourCard({ defi }: Props) {
                 submitted ? "cursor-default" : "cursor-pointer"
               }`}
             >
-              <span>{choix}</span>
+              <span className="flex items-start gap-3">
+                <span className="mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-current text-xs font-bold">
+                  {label}
+                </span>
+                <span>{choix}</span>
+              </span>
+
               {icon}
             </button>
           );
