@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 import { getAllBlogPosts } from "@/data/blogPosts";
 
-// 🔵 Version canonique (sans www si ton domaine principal est eleveai.fr)
+// Domaine canonique
 const BASE_URL = "https://eleveai.fr";
 const u = (path: string) => `${BASE_URL}${path}`;
 
@@ -12,7 +12,6 @@ const LASTMOD_LEGAL = new Date("2026-02-18");
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes: MetadataRoute.Sitemap = [
-
     /* ==============================
        🔵 PAGES STRATÉGIQUES MAJEURES
     ============================== */
@@ -98,6 +97,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.75,
     },
 
+    {
+      url: u("/defis"),
+      lastModified: LASTMOD_CORE,
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
+
+    {
+      url: u("/tutor-v4"),
+      lastModified: LASTMOD_CORE,
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
+
     /* ==============================
        🟡 CONTENU & AUTORITÉ
     ============================== */
@@ -171,5 +184,4 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   return [...staticRoutes, ...blogRoutes];
 }
-
 
