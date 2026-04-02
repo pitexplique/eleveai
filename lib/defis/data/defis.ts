@@ -14,12 +14,17 @@ export const defis: Defi[] = [
 
 {
   id: "defi-2",
-  question: "5 + 7 = ?",
-  choix: ["10", "11", "12", "13"],
-  bonneReponse: "12",
-  explication: "5 + 7 = 12",
-  reflexion: "Calcul mental de base.",
-  theme: "maths",
+  question: "Un élève utilise l’IA pour répondre à 5 + 7 = 13. Que doit-il faire ?",
+  choix: [
+    "Faire confiance à l’IA",
+    "Vérifier le calcul mentalement",
+    "Copier la réponse",
+    "Changer d’exercice"
+  ],
+  bonneReponse: "Vérifier le calcul mentalement",
+  explication: "5 + 7 = 12, donc la réponse est fausse.",
+  reflexion: "Même un calcul simple doit être vérifié par toi.",
+  theme: "ia-maths",
 },
 
 {
@@ -54,9 +59,9 @@ export const defis: Defi[] = [
 
 {
   id: "defi-6",
-  question: "10 × 0 = ?",
+  question: "10 × 0,1 = ?",
   choix: ["0", "10", "1", "100"],
-  bonneReponse: "0",
+  bonneReponse: "1",
   explication: "Tout × 0 = 0",
   reflexion: "Règle fondamentale.",
   theme: "maths",
