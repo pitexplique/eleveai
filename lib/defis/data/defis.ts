@@ -1,210 +1,212 @@
 import type { Defi } from "../types";
 
 export const defis: Defi[] = [
+  {
+    id: "reunion-ia-1",
+    question: "Si l’IA prédit un cyclone à La Réunion, peut-elle l’empêcher ?",
+    choix: [
+      "Oui",
+      "Non",
+      "Parfois",
+      "Seulement la nuit",
+    ],
+    bonneReponse: "Non",
+    explication:
+      "L’IA peut analyser des données et prévoir un risque, mais elle ne peut pas arrêter un cyclone.",
+    reflexion:
+      "Prévoir n’est pas contrôler. L’IA aide à anticiper, mais la nature ne lui obéit pas.",
+    theme: "ia-reunion",
+    type: "reflexion",
+    difficulty: 2,
+    image: "",
+  },
 
-{
-  id: "defi-1",
-  question: "L’IA te dit que 2 × 3 = 5. Que dois-tu faire ?",
-  choix: ["La croire", "Vérifier le calcul", "Copier", "Passer"],
-  bonneReponse: "Vérifier le calcul",
-  explication: "2 × 3 = 6, donc l’IA s’est trompée.",
-  reflexion: "Toujours vérifier, même une réponse sûre.",
-  theme: "ia-maths",
-},
+  {
+    id: "reunion-ia-2",
+    question:
+      "Si l’IA prévoit une inondation dans un quartier, à quoi sert-elle surtout ?",
+    choix: [
+      "À remplacer les secours",
+      "À empêcher la pluie",
+      "À aider les humains à se préparer",
+      "À vider les ravines",
+    ],
+    bonneReponse: "À aider les humains à se préparer",
+    explication:
+      "L’IA peut aider à anticiper un danger, mais ce sont ensuite les humains qui décident et agissent.",
+    reflexion:
+      "Une bonne prévision n’est utile que si elle permet une meilleure décision humaine.",
+    theme: "ia-reunion",
+    type: "reflexion",
+    difficulty: 2,
+    image: "",
+  },
 
-{
-  id: "defi-2",
-  question: "Un élève utilise l’IA pour répondre à 5 + 7 = 13. Que doit-il faire ?",
-  choix: [
-    "Faire confiance à l’IA",
-    "Vérifier le calcul mentalement",
-    "Copier la réponse",
-    "Changer d’exercice"
-  ],
-  bonneReponse: "Vérifier le calcul mentalement",
-  explication: "5 + 7 = 12, donc la réponse est fausse.",
-  reflexion: "Même un calcul simple doit être vérifié par toi.",
-  theme: "ia-maths",
-},
+  {
+    id: "reunion-ia-3",
+    question:
+      "Si une IA aide à régler les feux de circulation à Saint-Denis, quel est son but ?",
+    choix: [
+      "Créer plus d’embouteillages",
+      "Supprimer toutes les voitures",
+      "Optimiser la circulation",
+      "Fermer les routes",
+    ],
+    bonneReponse: "Optimiser la circulation",
+    explication:
+      "L’IA peut analyser le trafic et ajuster les feux pour fluidifier les déplacements.",
+    reflexion:
+      "Optimiser ne veut pas dire tout résoudre. L’IA améliore un système, elle ne le remplace pas.",
+    theme: "ia-reunion",
+    type: "reel",
+    difficulty: 2,
+    image: "",
+  },
 
-{
-  id: "defi-3",
-  question: "Si tu ne comprends pas 1/2 + 1/2 = 1, as-tu appris ?",
-  choix: ["Oui", "Non", "Parfois", "Toujours"],
-  bonneReponse: "Non",
-  explication: "Comprendre est essentiel.",
-  reflexion: "Savoir ≠ comprendre.",
-  theme: "reflexion",
-},
+  {
+    id: "reunion-ia-4",
+    question:
+      "Si l’IA aide à mieux gérer l’eau à La Réunion, peut-elle créer de l’eau ?",
+    choix: [
+      "Oui",
+      "Seulement dans les montagnes",
+      "Parfois",
+      "Non",
+    ],
+    bonneReponse: "Non",
+    explication:
+      "L’IA ne crée pas la ressource. Elle peut seulement aider à mieux prévoir, répartir ou économiser l’eau.",
+    reflexion:
+      "L’IA n’invente pas les ressources naturelles. Elle aide à mieux utiliser ce qui existe déjà.",
+    theme: "ia-reunion",
+    type: "reflexion",
+    difficulty: 1,
+    image: "",
+  },
 
-{
-  id: "defi-4",
-  question: "0,9 + 0,1 = ?",
-  choix: ["1", "0,10", "0,91", "1,1"],
-  bonneReponse: "1",
-  explication: "0,9 + 0,1 = 1",
-  reflexion: "Attention aux décimaux.",
-  theme: "maths",
-},
+  {
+    id: "reunion-ia-5",
+    question:
+      "Si l’IA analyse les déchets sur l’île, que peut-elle améliorer ?",
+    choix: [
+      "Les faire disparaître",
+      "Mieux organiser le tri et la collecte",
+      "Supprimer les emballages toute seule",
+      "Envoyer automatiquement les déchets dans l’espace",
+    ],
+    bonneReponse: "Mieux organiser le tri et la collecte",
+    explication:
+      "L’IA peut aider à repérer des volumes, améliorer des tournées ou mieux trier les déchets.",
+    reflexion:
+      "L’IA améliore l’organisation, mais elle ne remplace pas les gestes humains ni les choix de société.",
+    theme: "ia-reunion",
+    type: "reel",
+    difficulty: 2,
+    image: "",
+  },
 
-{
-  id: "defi-5",
-  question: "Si l’IA fait tout à ta place, que perds-tu ?",
-  choix: ["Du temps", "La réflexion", "La vitesse", "Rien"],
-  bonneReponse: "La réflexion",
-  explication: "Tu ne pratiques plus.",
-  reflexion: "Apprendre = réfléchir.",
-  theme: "ia",
-},
+  {
+    id: "reunion-ia-6",
+    question:
+      "Si l’IA se trompe dans une prévision météo importante, quel est le meilleur réflexe ?",
+    choix: [
+      "La croire quand même",
+      "L’ignorer pour toujours",
+      "La vérifier avec d’autres sources",
+      "Supprimer toute la météo",
+    ],
+    bonneReponse: "La vérifier avec d’autres sources",
+    explication:
+      "Une prévision IA doit pouvoir être comparée à d’autres informations avant de prendre une décision importante.",
+    reflexion:
+      "Faire confiance ne veut pas dire obéir aveuglément. Vérifier, c’est penser.",
+    theme: "ia-reunion",
+    type: "ia",
+    difficulty: 2,
+    image: "",
+  },
 
-{
-  id: "defi-6",
-  question: "10 × 0,1 = ?",
-  choix: ["0", "10", "1", "100"],
-  bonneReponse: "1",
-  explication: "Tout × 0 = 0",
-  reflexion: "Règle fondamentale.",
-  theme: "maths",
-},
+  {
+    id: "reunion-ia-7",
+    question:
+      "Si l’IA aide à prévoir les embouteillages sur la route du littoral, remplace-t-elle les conducteurs ?",
+    choix: [
+      "Oui",
+      "Non",
+      "Seulement le matin",
+      "Seulement quand il pleut",
+    ],
+    bonneReponse: "Non",
+    explication:
+      "L’IA peut aider à anticiper le trafic, mais elle ne conduit pas à la place des personnes dans ce cas.",
+    reflexion:
+      "Aider n’est pas remplacer. Beaucoup d’outils intelligents restent des aides à la décision.",
+    theme: "ia-reunion",
+    type: "reflexion",
+    difficulty: 1,
+    image: "",
+  },
 
-{
-  id: "defi-7",
-  question: "L’IA donne une réponse. Que dois-tu faire ?",
-  choix: ["Vérifier", "Copier", "Ignorer", "Changer"],
-  bonneReponse: "Vérifier",
-  explication: "Elle peut se tromper.",
-  reflexion: "Esprit critique.",
-  theme: "ia",
-},
+  {
+    id: "reunion-ia-8",
+    question:
+      "Si l’IA analyse plus vite qu’un humain les données d’un cyclone, qui doit prendre la décision finale ?",
+    choix: [
+      "L’IA seule",
+      "Un hasard automatique",
+      "L’humain seul sans regarder les données",
+      "L’humain aidé par l’IA",
+    ],
+    bonneReponse: "L’humain aidé par l’IA",
+    explication:
+      "L’IA peut assister, mais la responsabilité de la décision importante doit rester humaine.",
+    reflexion:
+      "Une machine peut calculer vite. Décider demande aussi du jugement, de la responsabilité et parfois de l’éthique.",
+    theme: "ia-reunion",
+    type: "reflexion",
+    difficulty: 3,
+    image: "",
+  },
 
-{
-  id: "defi-8",
-  question: "2 + 3 × 4 = ?",
-  choix: ["14", "20", "10", "24"],
-  bonneReponse: "14",
-  explication: "2 + 12 = 14",
-  reflexion: "Priorité ×.",
-  theme: "maths",
-},
+  {
+    id: "reunion-ia-9",
+    question:
+      "Si l’IA aide à mieux utiliser l’énergie solaire à La Réunion, que fait-elle surtout ?",
+    choix: [
+      "Elle crée le soleil",
+      "Elle fabrique des centrales toute seule",
+      "Elle optimise la production et la consommation",
+      "Elle remplace tous les techniciens",
+    ],
+    bonneReponse: "Elle optimise la production et la consommation",
+    explication:
+      "L’IA peut aider à mieux répartir l’énergie, prévoir les besoins et ajuster les usages.",
+    reflexion:
+      "L’IA ne crée pas la nature. Elle aide à mieux gérer l’existant.",
+    theme: "ia-reunion",
+    type: "reel",
+    difficulty: 2,
+    image: "",
+  },
 
-{
-  id: "defi-9",
-  question: "Comprendre, c’est :",
-  choix: ["Expliquer", "Copier", "Lire", "Regarder"],
-  bonneReponse: "Expliquer",
-  explication: "Si tu expliques, tu comprends.",
-  reflexion: "Test ultime.",
-  theme: "reflexion",
-},
-
-{
-  id: "defi-10",
-  question: "1 km = ? m",
-  choix: ["100", "1000", "10", "10000"],
-  bonneReponse: "1000",
-  explication: "1 km = 1000 m",
-  reflexion: "Conversion.",
-  theme: "maths",
-},
-
-{
-  id: "defi-11",
-  question: "L’IA peut-elle se tromper ?",
-  choix: ["Oui", "Non", "Jamais", "Toujours"],
-  bonneReponse: "Oui",
-  explication: "Elle peut faire des erreurs.",
-  reflexion: "Rester critique.",
-  theme: "ia",
-},
-
-{
-  id: "defi-12",
-  question: "3 × 4 = ?",
-  choix: ["12", "10", "14", "8"],
-  bonneReponse: "12",
-  explication: "3 × 4 = 12",
-  reflexion: "Base du calcul.",
-  theme: "maths",
-},
-
-{
-  id: "defi-13",
-  question: "Apprendre demande :",
-  choix: ["Effort", "Chance", "Vitesse", "Hasard"],
-  bonneReponse: "Effort",
-  explication: "Il faut travailler.",
-  reflexion: "Progression.",
-  theme: "reflexion",
-},
-
-{
-  id: "defi-14",
-  question: "0,5 = ?",
-  choix: ["1/2", "1/5", "2/5", "5/10"],
-  bonneReponse: "1/2",
-  explication: "0,5 = 1/2",
-  reflexion: "Lien fraction.",
-  theme: "maths",
-},
-
-{
-  id: "defi-15",
-  question: "Pourquoi vérifier une réponse IA ?",
-  choix: ["Elle peut être fausse", "Elle est lente", "Elle refuse", "Elle bloque"],
-  bonneReponse: "Elle peut être fausse",
-  explication: "Erreur possible.",
-  reflexion: "Toujours vérifier.",
-  theme: "ia",
-},
-
-{
-  id: "defi-16",
-  question: "10 ÷ 2 = ?",
-  choix: ["5", "2", "10", "8"],
-  bonneReponse: "5",
-  explication: "10 ÷ 2 = 5",
-  reflexion: "Division simple.",
-  theme: "maths",
-},
-
-{
-  id: "defi-17",
-  question: "Si tu copies sans comprendre ?",
-  choix: ["Tu apprends", "Tu ne comprends pas", "Tu progresses", "Tu gagnes"],
-  bonneReponse: "Tu ne comprends pas",
-  explication: "Compréhension essentielle.",
-  reflexion: "Apprendre ≠ copier.",
-  theme: "ia",
-},
-
-{
-  id: "defi-18",
-  question: "Somme des angles d’un triangle ?",
-  choix: ["180°", "90°", "360°", "270°"],
-  bonneReponse: "180°",
-  explication: "Propriété.",
-  reflexion: "À connaître.",
-  theme: "maths",
-},
-
-{
-  id: "defi-19",
-  question: "Faire une erreur, c’est :",
-  choix: ["Apprendre", "Perdre", "Échouer", "Inutile"],
-  bonneReponse: "Apprendre",
-  explication: "Les erreurs font progresser.",
-  reflexion: "Important.",
-  theme: "reflexion",
-},
-
-{
-  id: "defi-20",
-  question: "Plus vite = mieux apprendre ?",
-  choix: ["Non", "Oui", "Toujours", "Souvent"],
-  bonneReponse: "Non",
-  explication: "Comprendre > vitesse",
-  reflexion: "Prendre le temps.",
-  theme: "reflexion",
-},
-
+  {
+    id: "reunion-ia-10",
+    question:
+      "Si tu fais totalement confiance à l’IA pour comprendre le monde autour de toi, que risques-tu ?",
+    choix: [
+      "De perdre ton esprit critique",
+      "De tout comprendre immédiatement",
+      "De ne plus jamais te tromper",
+      "De devenir plus rapide",
+    ],
+    bonneReponse: "De perdre ton esprit critique",
+    explication:
+      "L’IA peut être utile, mais elle ne doit jamais remplacer la réflexion personnelle.",
+    reflexion:
+      "Comprendre le monde, c’est garder un cerveau actif, poser des questions et parfois douter.",
+    theme: "ia-reunion",
+    type: "reflexion",
+    difficulty: 3,
+    image: "",
+  },
 ];
