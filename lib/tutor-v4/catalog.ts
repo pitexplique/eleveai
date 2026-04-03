@@ -6,6 +6,7 @@ export const NOTION_OPTIONS = [
   { id: "aires", label: "Aires" },
   { id: "angles", label: "Angles" },
   { id: "triangles", label: "Triangles" },
+  { id: "calcul_mental", label: "Calcul mental" },
 ] as const;
 
 export const NOTION_MICRO_MAP: Record<string, string[]> = {
@@ -30,7 +31,15 @@ export const NOTION_MICRO_MAP: Record<string, string[]> = {
     "triangle_angle_sum",
     "triangle_missing_angle",
     "triangle_possible_or_not",
-    "triangle_defis"
+    "triangle_defis",
+  ],
+  calcul_mental: [
+    "mental_addition",
+    "mental_subtraction",
+    "mental_multiplication",
+    "mental_division",
+    "mental_strategies",
+    "mental_defis",
   ],
 };
 
@@ -66,7 +75,14 @@ export const MICRO_LABELS: Record<string, string> = {
   triangle_angle_sum: "Utiliser la somme des angles",
   triangle_missing_angle: "Calculer un angle manquant",
   triangle_possible_or_not: "Décider si un triangle est constructible",
-  triangle_defis: "Défis sur les triangles"
+  triangle_defis: "Défis sur les triangles",
+
+  mental_addition: "Calculer rapidement une addition",
+  mental_subtraction: "Calculer rapidement une soustraction",
+  mental_multiplication: "Calculer rapidement une multiplication",
+  mental_division: "Calculer rapidement une division",
+  mental_strategies: "Utiliser une stratégie de calcul mental",
+  mental_defis: "Défis de calcul mental",
 };
 
 export const NOTION_LABELS: Record<string, string> = {
@@ -77,6 +93,7 @@ export const NOTION_LABELS: Record<string, string> = {
   aires: "Aires",
   angles: "Angles",
   triangles: "Triangles",
+  calcul_mental: "Calcul mental",
 };
 
 export function microLabel(microId?: string) {
