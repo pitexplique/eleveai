@@ -16,8 +16,6 @@ export const defis: Defi[] = [
     reflexion:
       "Prévoir n’est pas contrôler. L’IA aide à anticiper, mais la nature ne lui obéit pas.",
     theme: "ia-reunion",
-    type: "reflexion",
-    difficulty: 2,
     image: "",
   },
 
@@ -37,8 +35,6 @@ export const defis: Defi[] = [
     reflexion:
       "Une bonne prévision n’est utile que si elle permet une meilleure décision humaine.",
     theme: "ia-reunion",
-    type: "reflexion",
-    difficulty: 2,
     image: "",
   },
 
@@ -58,8 +54,6 @@ export const defis: Defi[] = [
     reflexion:
       "Optimiser ne veut pas dire tout résoudre. L’IA améliore un système, elle ne le remplace pas.",
     theme: "ia-reunion",
-    type: "reel",
-    difficulty: 2,
     image: "",
   },
 
@@ -79,8 +73,6 @@ export const defis: Defi[] = [
     reflexion:
       "L’IA n’invente pas les ressources naturelles. Elle aide à mieux utiliser ce qui existe déjà.",
     theme: "ia-reunion",
-    type: "reflexion",
-    difficulty: 1,
     image: "",
   },
 
@@ -100,8 +92,6 @@ export const defis: Defi[] = [
     reflexion:
       "L’IA améliore l’organisation, mais elle ne remplace pas les gestes humains ni les choix de société.",
     theme: "ia-reunion",
-    type: "reel",
-    difficulty: 2,
     image: "",
   },
 
@@ -121,8 +111,6 @@ export const defis: Defi[] = [
     reflexion:
       "Faire confiance ne veut pas dire obéir aveuglément. Vérifier, c’est penser.",
     theme: "ia-reunion",
-    type: "ia",
-    difficulty: 2,
     image: "",
   },
 
@@ -142,8 +130,6 @@ export const defis: Defi[] = [
     reflexion:
       "Aider n’est pas remplacer. Beaucoup d’outils intelligents restent des aides à la décision.",
     theme: "ia-reunion",
-    type: "reflexion",
-    difficulty: 1,
     image: "",
   },
 
@@ -161,10 +147,8 @@ export const defis: Defi[] = [
     explication:
       "L’IA peut assister, mais la responsabilité de la décision importante doit rester humaine.",
     reflexion:
-      "Une machine peut calculer vite. Décider demande aussi du jugement, de la responsabilité et parfois de l’éthique.",
+      "Une machine peut calculer vite. Décider demande aussi du jugement et de la responsabilité.",
     theme: "ia-reunion",
-    type: "reflexion",
-    difficulty: 3,
     image: "",
   },
 
@@ -180,12 +164,10 @@ export const defis: Defi[] = [
     ],
     bonneReponse: "Elle optimise la production et la consommation",
     explication:
-      "L’IA peut aider à mieux répartir l’énergie, prévoir les besoins et ajuster les usages.",
+      "L’IA peut aider à mieux répartir l’énergie et prévoir les besoins.",
     reflexion:
       "L’IA ne crée pas la nature. Elle aide à mieux gérer l’existant.",
     theme: "ia-reunion",
-    type: "reel",
-    difficulty: 2,
     image: "",
   },
 
@@ -203,10 +185,8 @@ export const defis: Defi[] = [
     explication:
       "L’IA peut être utile, mais elle ne doit jamais remplacer la réflexion personnelle.",
     reflexion:
-      "Comprendre le monde, c’est garder un cerveau actif, poser des questions et parfois douter.",
+      "Comprendre le monde demande de penser, de questionner et parfois de douter.",
     theme: "ia-reunion",
-    type: "reflexion",
-    difficulty: 3,
     image: "",
   },
 ];
