@@ -1,9 +1,10 @@
+// tutor-v4/components/TriangleCanvas.tsx
 "use client";
 
 import type {
   CanvasFigure,
-  CanvasPointLabel,
-  CanvasSideLabel,
+  TriangleCanvasPointLabel,
+  TriangleCanvasSideLabel,
 } from "@/lib/tutor-v4/types";
 
 type Props = {
@@ -38,7 +39,7 @@ function angleSquarePath(vertex: Point, p1: Point, p2: Point, size = 20) {
 }
 
 function getSidePoints(
-  side: CanvasSideLabel,
+  side: TriangleCanvasSideLabel,
   A: Point,
   B: Point,
   C: Point
@@ -67,7 +68,7 @@ function angleArcPath(vertex: Point, p1: Point, p2: Point, radius = 16) {
 }
 
 function getAngleNeighbors(
-  vertexLabel: CanvasPointLabel,
+  vertexLabel: TriangleCanvasPointLabel,
   A: Point,
   B: Point,
   C: Point
@@ -82,7 +83,7 @@ function getAngleNeighbors(
   }
 }
 
-function labelPosition(label: CanvasPointLabel, p: Point): Point {
+function labelPosition(label: TriangleCanvasPointLabel, p: Point): Point {
   switch (label) {
     case "A":
       return { x: p.x - 16, y: p.y - 8 };
@@ -93,7 +94,10 @@ function labelPosition(label: CanvasPointLabel, p: Point): Point {
   }
 }
 
-function angleLabelPosition(label: CanvasPointLabel, p: Point): Point {
+function angleLabelPosition(
+  label: TriangleCanvasPointLabel,
+  p: Point
+): Point {
   switch (label) {
     case "A":
       return { x: p.x + 10, y: p.y - 10 };
@@ -382,8 +386,8 @@ export default function TriangleCanvas({ figure }: Props) {
               figure.marks.rightAngleAt === "A"
                 ? angleSquarePath(A, B, C)
                 : figure.marks.rightAngleAt === "B"
-                ? angleSquarePath(B, A, C)
-                : angleSquarePath(C, A, B)
+                  ? angleSquarePath(B, A, C)
+                  : angleSquarePath(C, A, B)
             }
             fill="none"
             stroke="#dc2626"

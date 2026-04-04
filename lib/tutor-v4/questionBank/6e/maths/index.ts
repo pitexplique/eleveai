@@ -7,6 +7,7 @@ import { airesBank } from "./aires.bank";
 import { perimetresBank } from "./perimetres.bank";
 import { proportionnaliteBank } from "./proportionnalite.bank";
 import { trianglesBank } from "./triangles.bank";
+import { quadrilateresBank } from "./quadrilateres.bank";
 import { calculMentalBank } from "./calcul-mental.bank";
 
 export const maths6eQuestionBank: TutorBankItemV4[] = [
@@ -17,5 +18,6 @@ export const maths6eQuestionBank: TutorBankItemV4[] = [
   ...perimetresBank,
   ...proportionnaliteBank,
   ...trianglesBank,
+  ...quadrilateresBank,
   ...calculMentalBank,
 ];

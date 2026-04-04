@@ -61,8 +61,17 @@ export type VisibleProgress = {
   sessionStep: number;
 };
 
-export type CanvasPointLabel = "A" | "B" | "C";
-export type CanvasSideLabel = "AB" | "BC" | "CA";
+export type TriangleCanvasPointLabel = "A" | "B" | "C";
+export type TriangleCanvasSideLabel = "AB" | "BC" | "CA";
+
+export type QuadrilatereCanvasPointLabel = "A" | "B" | "C" | "D";
+export type QuadrilatereCanvasSideLabel =
+  | "AB"
+  | "BC"
+  | "CD"
+  | "DA"
+  | "AC"
+  | "BD";
 
 export type TriangleCanvasData = {
   kind: "triangle";
@@ -81,17 +90,53 @@ export type TriangleCanvasData = {
     showSides?: boolean;
     showAngles?: boolean;
   };
-  labels?: Partial<Record<CanvasPointLabel, string>>;
-  angleLabels?: Partial<Record<CanvasPointLabel, string>>;
-  sideLabels?: Partial<Record<CanvasSideLabel, string>>;
+  labels?: Partial<Record<TriangleCanvasPointLabel, string>>;
+  angleLabels?: Partial<Record<TriangleCanvasPointLabel, string>>;
+  sideLabels?: Partial<Record<TriangleCanvasSideLabel, string>>;
   marks?: {
-    rightAngleAt?: CanvasPointLabel;
-    equalSides?: Array<[CanvasSideLabel, CanvasSideLabel]>;
-    equalAngles?: Array<[CanvasPointLabel, CanvasPointLabel]>;
+    rightAngleAt?: TriangleCanvasPointLabel;
+    equalSides?: Array<[TriangleCanvasSideLabel, TriangleCanvasSideLabel]>;
+    equalAngles?: Array<[TriangleCanvasPointLabel, TriangleCanvasPointLabel]>;
   };
 };
 
-export type CanvasFigure = TriangleCanvasData;
+export type QuadrilatereCanvasData = {
+  kind: "quadrilatere";
+  size?: {
+    width: number;
+    height: number;
+  };
+  points: {
+    A: { x: number; y: number };
+    B: { x: number; y: number };
+    C: { x: number; y: number };
+    D: { x: number; y: number };
+  };
+  display?: {
+    showPoints?: boolean;
+    showLabels?: boolean;
+    showSides?: boolean;
+    showAngles?: boolean;
+    showDiagonals?: boolean;
+  };
+  labels?: Partial<Record<QuadrilatereCanvasPointLabel, string>>;
+  angleLabels?: Partial<Record<QuadrilatereCanvasPointLabel, string>>;
+  sideLabels?: Partial<Record<QuadrilatereCanvasSideLabel, string>>;
+  marks?: {
+    rightAnglesAt?: QuadrilatereCanvasPointLabel[];
+    equalSides?: Array<
+      [QuadrilatereCanvasSideLabel, QuadrilatereCanvasSideLabel]
+    >;
+    equalAngles?: Array<
+      [QuadrilatereCanvasPointLabel, QuadrilatereCanvasPointLabel]
+    >;
+    parallelSides?: Array<
+      [QuadrilatereCanvasSideLabel, QuadrilatereCanvasSideLabel]
+    >;
+  };
+};
+
+export type CanvasFigure = TriangleCanvasData | QuadrilatereCanvasData;
 
 export type QuestionVariantMeta = {
   familyId: string;

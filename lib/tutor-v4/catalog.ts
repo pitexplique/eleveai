@@ -6,6 +6,7 @@ export const NOTION_OPTIONS = [
   { id: "aires", label: "Aires" },
   { id: "angles", label: "Angles" },
   { id: "triangles", label: "Triangles" },
+  { id: "quadrilateres", label: "Quadrilatères" },
   { id: "calcul_mental", label: "Calcul mental" },
 ] as const;
 
@@ -32,6 +33,14 @@ export const NOTION_MICRO_MAP: Record<string, string[]> = {
     "triangle_missing_angle",
     "triangle_possible_or_not",
     "triangle_defis",
+  ],
+  quadrilateres: [
+    "quadrilatere_identifier_nature",
+    "quadrilatere_lire_proprietes",
+    "quadrilatere_lien_proprietes",
+    "quadrilatere_distinguer",
+    "quadrilatere_conclusion",
+    "quadrilatere_defis",
   ],
   calcul_mental: [
     "mental_addition",
@@ -77,6 +86,16 @@ export const MICRO_LABELS: Record<string, string> = {
   triangle_possible_or_not: "Décider si un triangle est constructible",
   triangle_defis: "Défis sur les triangles",
 
+  quadrilatere_identifier_nature: "Identifier la nature d’un quadrilatère",
+  quadrilatere_lire_proprietes: "Lire les propriétés d’un quadrilatère",
+  quadrilatere_lien_proprietes:
+    "Faire le lien entre propriétés et nature",
+  quadrilatere_distinguer:
+    "Distinguer carré, rectangle, losange et quadrilatère quelconque",
+  quadrilatere_conclusion:
+    "Décider si les informations suffisent pour conclure",
+  quadrilatere_defis: "Défis sur les quadrilatères",
+
   mental_addition: "Calculer rapidement une addition",
   mental_subtraction: "Calculer rapidement une soustraction",
   mental_multiplication: "Calculer rapidement une multiplication",
@@ -93,6 +112,7 @@ export const NOTION_LABELS: Record<string, string> = {
   aires: "Aires",
   angles: "Angles",
   triangles: "Triangles",
+  quadrilateres: "Quadrilatères",
   calcul_mental: "Calcul mental",
 };
 

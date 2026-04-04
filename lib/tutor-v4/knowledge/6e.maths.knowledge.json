@@ -9,6 +9,10 @@
     { "boId": "BO6G1", "label": "Calculer périmètres et aires" },
     { "boId": "BO6G2", "label": "Comparer et identifier des angles" },
     { "boId": "BO6G3", "label": "Reconnaître, décrire et utiliser les triangles" },
+    {
+      "boId": "BO6G4",
+      "label": "Reconnaître, décrire et utiliser les quadrilatères"
+    },
     { "boId": "BO6N4", "label": "Pratiquer le calcul mental" }
   ],
   "notions": [
@@ -89,6 +93,21 @@
         "triangle_missing_angle",
         "triangle_possible_or_not",
         "triangle_defis"
+      ],
+      "levels": [1, 2, 3]
+    },
+    {
+      "id": "quadrilateres",
+      "label": "Quadrilatères",
+      "boId": "BO6G4",
+      "prerequis": ["angles"],
+      "microTargets": [
+        "quadrilatere_identifier_nature",
+        "quadrilatere_lire_proprietes",
+        "quadrilatere_lien_proprietes",
+        "quadrilatere_distinguer",
+        "quadrilatere_conclusion",
+        "quadrilatere_defis"
       ],
       "levels": [1, 2, 3]
     },
@@ -307,6 +326,65 @@
         "triangle_angle_sum",
         "triangle_missing_angle",
         "triangle_possible_or_not"
+      ]
+    },
+
+    {
+      "id": "quadrilatere_identifier_nature",
+      "label": "Identifier la nature d’un quadrilatère",
+      "notionId": "quadrilateres",
+      "boId": "BO6G4",
+      "prerequis": []
+    },
+    {
+      "id": "quadrilatere_lire_proprietes",
+      "label": "Lire les propriétés d’un quadrilatère",
+      "notionId": "quadrilateres",
+      "boId": "BO6G4",
+      "prerequis": ["angle_right", "angle_compare"]
+    },
+    {
+      "id": "quadrilatere_lien_proprietes",
+      "label": "Faire le lien entre propriétés et nature d’un quadrilatère",
+      "notionId": "quadrilateres",
+      "boId": "BO6G4",
+      "prerequis": [
+        "quadrilatere_identifier_nature",
+        "quadrilatere_lire_proprietes"
+      ]
+    },
+    {
+      "id": "quadrilatere_distinguer",
+      "label": "Distinguer carré, rectangle, losange et quadrilatère quelconque",
+      "notionId": "quadrilateres",
+      "boId": "BO6G4",
+      "prerequis": [
+        "quadrilatere_identifier_nature",
+        "quadrilatere_lien_proprietes"
+      ]
+    },
+    {
+      "id": "quadrilatere_conclusion",
+      "label": "Décider si les informations suffisent pour conclure",
+      "notionId": "quadrilateres",
+      "boId": "BO6G4",
+      "prerequis": [
+        "quadrilatere_lire_proprietes",
+        "quadrilatere_lien_proprietes",
+        "quadrilatere_distinguer"
+      ]
+    },
+    {
+      "id": "quadrilatere_defis",
+      "label": "Résoudre des défis sur les quadrilatères",
+      "notionId": "quadrilateres",
+      "boId": "BO6G4",
+      "prerequis": [
+        "quadrilatere_identifier_nature",
+        "quadrilatere_lire_proprietes",
+        "quadrilatere_lien_proprietes",
+        "quadrilatere_distinguer",
+        "quadrilatere_conclusion"
       ]
     },
 

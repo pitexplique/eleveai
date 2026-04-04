@@ -1,3 +1,4 @@
+// app/tutor-v4/page.tsx
 "use client";
 
 import {
@@ -8,6 +9,7 @@ import {
   type ReactNode,
 } from "react";
 import TriangleCanvas from "@/lib/tutor-v4/components/TriangleCanvas";
+import QuadrilatereCanvas from "@/lib/tutor-v4/components/QuadrilatereCanvas";
 import {
   NOTION_MICRO_MAP,
   NOTION_OPTIONS,
@@ -23,6 +25,7 @@ import type {
   TutorQuestionOption,
   TutorQuestionPair,
   VisibleProgress,
+  CanvasFigure,
 } from "@/lib/tutor-v4/types";
 
 type StartResponse = StartTutorV4Response;
@@ -151,6 +154,20 @@ function feedbackTone(ok?: boolean) {
 function scoreOn20(earned: number, possible: number) {
   if (possible <= 0) return "—";
   return ((earned / possible) * 20).toFixed(1);
+}
+
+function renderCanvas(canvas?: CanvasFigure | null) {
+  if (!canvas) return null;
+
+  if (canvas.kind === "triangle") {
+    return <TriangleCanvas figure={canvas} />;
+  }
+
+  if (canvas.kind === "quadrilatere") {
+    return <QuadrilatereCanvas figure={canvas} />;
+  }
+
+  return null;
 }
 
 export default function TutorV4Page() {
@@ -718,7 +735,7 @@ export default function TutorV4Page() {
 
                       {option.canvas ? (
                         <div className="mb-4 rounded-2xl bg-slate-50 p-3">
-                          <TriangleCanvas figure={option.canvas} />
+                          {renderCanvas(option.canvas)}
                         </div>
                       ) : null}
 
@@ -764,7 +781,7 @@ export default function TutorV4Page() {
 
                 {currentQuestion.canvas ? (
                   <div className="mb-5 rounded-2xl bg-slate-50 p-3">
-                    <TriangleCanvas figure={currentQuestion.canvas} />
+                    {renderCanvas(currentQuestion.canvas)}
                   </div>
                 ) : null}
 
