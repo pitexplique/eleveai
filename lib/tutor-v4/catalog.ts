@@ -35,11 +35,13 @@ export const NOTION_MICRO_MAP: Record<string, string[]> = {
     "triangle_defis",
   ],
   quadrilateres: [
+    "quadrilatere_nommer_vocabulaire",
     "quadrilatere_identifier_nature",
     "quadrilatere_lire_proprietes",
     "quadrilatere_lien_proprietes",
     "quadrilatere_distinguer",
     "quadrilatere_conclusion",
+    "quadrilatere_completer_construire",
     "quadrilatere_defis",
   ],
   calcul_mental: [
@@ -86,6 +88,8 @@ export const MICRO_LABELS: Record<string, string> = {
   triangle_possible_or_not: "Décider si un triangle est constructible",
   triangle_defis: "Défis sur les triangles",
 
+  quadrilatere_nommer_vocabulaire:
+    "Nommer un quadrilatère et utiliser le vocabulaire",
   quadrilatere_identifier_nature: "Identifier la nature d’un quadrilatère",
   quadrilatere_lire_proprietes: "Lire les propriétés d’un quadrilatère",
   quadrilatere_lien_proprietes:
@@ -94,6 +98,8 @@ export const MICRO_LABELS: Record<string, string> = {
     "Distinguer carré, rectangle, losange et quadrilatère quelconque",
   quadrilatere_conclusion:
     "Décider si les informations suffisent pour conclure",
+  quadrilatere_completer_construire:
+    "Compléter ou construire un quadrilatère à partir d’informations",
   quadrilatere_defis: "Défis sur les quadrilatères",
 
   mental_addition: "Calculer rapidement une addition",

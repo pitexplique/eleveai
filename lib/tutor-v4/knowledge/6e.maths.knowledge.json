@@ -102,11 +102,13 @@
       "boId": "BO6G4",
       "prerequis": ["angles"],
       "microTargets": [
+        "quadrilatere_nommer_vocabulaire",
         "quadrilatere_identifier_nature",
         "quadrilatere_lire_proprietes",
         "quadrilatere_lien_proprietes",
         "quadrilatere_distinguer",
         "quadrilatere_conclusion",
+        "quadrilatere_completer_construire",
         "quadrilatere_defis"
       ],
       "levels": [1, 2, 3]
@@ -330,18 +332,25 @@
     },
 
     {
+      "id": "quadrilatere_nommer_vocabulaire",
+      "label": "Nommer un quadrilatère et utiliser le vocabulaire géométrique",
+      "notionId": "quadrilateres",
+      "boId": "BO6G4",
+      "prerequis": []
+    },
+    {
       "id": "quadrilatere_identifier_nature",
       "label": "Identifier la nature d’un quadrilatère",
       "notionId": "quadrilateres",
       "boId": "BO6G4",
-      "prerequis": []
+      "prerequis": ["quadrilatere_nommer_vocabulaire"]
     },
     {
       "id": "quadrilatere_lire_proprietes",
       "label": "Lire les propriétés d’un quadrilatère",
       "notionId": "quadrilateres",
       "boId": "BO6G4",
-      "prerequis": ["angle_right", "angle_compare"]
+      "prerequis": ["angle_right", "angle_compare", "quadrilatere_nommer_vocabulaire"]
     },
     {
       "id": "quadrilatere_lien_proprietes",
@@ -375,16 +384,29 @@
       ]
     },
     {
+      "id": "quadrilatere_completer_construire",
+      "label": "Compléter ou construire un quadrilatère à partir d’informations",
+      "notionId": "quadrilateres",
+      "boId": "BO6G4",
+      "prerequis": [
+        "quadrilatere_nommer_vocabulaire",
+        "quadrilatere_lire_proprietes",
+        "quadrilatere_lien_proprietes"
+      ]
+    },
+    {
       "id": "quadrilatere_defis",
       "label": "Résoudre des défis sur les quadrilatères",
       "notionId": "quadrilateres",
       "boId": "BO6G4",
       "prerequis": [
+        "quadrilatere_nommer_vocabulaire",
         "quadrilatere_identifier_nature",
         "quadrilatere_lire_proprietes",
         "quadrilatere_lien_proprietes",
         "quadrilatere_distinguer",
-        "quadrilatere_conclusion"
+        "quadrilatere_conclusion",
+        "quadrilatere_completer_construire"
       ]
     },
 

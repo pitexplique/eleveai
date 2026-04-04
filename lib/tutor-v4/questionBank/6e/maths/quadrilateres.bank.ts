@@ -10,6 +10,203 @@ function randomInt(min: number, max: number) {
 
 export const quadrilateresBank: TutorBankItemV4[] = [
   // =========================
+  // QUADRILATERE NOMMER VOCABULAIRE
+  // =========================
+  {
+    kind: "fixed",
+    id: "quadrilatere_nommer_vocabulaire_fixed_1",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "quadrilateres",
+    microId: "quadrilatere_nommer_vocabulaire",
+    difficulty: 1,
+    text: "Comment nomme-t-on ce quadrilatère ?",
+    format: "short",
+    expected: ["quadrilatere abcd", "abcd", "ABCD"],
+    comparator: "contains_keyword",
+    hint: "On nomme la figure avec ses 4 sommets dans l’ordre.",
+    tags: ["quadrilatere", "nommage", "canvas"],
+    canvas: {
+      kind: "quadrilatere",
+      points: {
+        A: { x: 70, y: 80 },
+        B: { x: 240, y: 80 },
+        C: { x: 255, y: 190 },
+        D: { x: 85, y: 205 }
+      },
+      display: {
+        showPoints: true,
+        showLabels: true
+      }
+    }
+  },
+  {
+    kind: "fixed",
+    id: "quadrilatere_nommer_vocabulaire_fixed_2",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "quadrilateres",
+    microId: "quadrilatere_nommer_vocabulaire",
+    difficulty: 1,
+    text: "Combien de sommets possède un quadrilatère ?",
+    format: "qcm",
+    choices: ["3", "4", "5", "6"],
+    expected: ["4"],
+    comparator: "mcq_exact",
+    hint: "Le préfixe « quadri » aide.",
+    tags: ["quadrilatere", "sommets"]
+  },
+  {
+    kind: "fixed",
+    id: "quadrilatere_nommer_vocabulaire_fixed_3",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "quadrilateres",
+    microId: "quadrilatere_nommer_vocabulaire",
+    difficulty: 1,
+    text: "Combien de côtés possède un quadrilatère ?",
+    format: "qcm",
+    choices: ["3", "4", "5", "6"],
+    expected: ["4"],
+    comparator: "mcq_exact",
+    hint: "Un quadrilatère a autant de côtés que de sommets.",
+    tags: ["quadrilatere", "cotes"]
+  },
+  {
+    kind: "fixed",
+    id: "quadrilatere_nommer_vocabulaire_fixed_4",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "quadrilateres",
+    microId: "quadrilatere_nommer_vocabulaire",
+    difficulty: 2,
+    text: "Observe la figure. Quelles sont les diagonales de ce quadrilatère ?",
+    format: "qcm",
+    choices: ["AB et BC", "AC et BD", "AB et CD", "AD et BC"],
+    expected: ["AC et BD"],
+    comparator: "mcq_exact",
+    hint: "Une diagonale relie deux sommets opposés.",
+    tags: ["quadrilatere", "diagonales", "canvas"],
+    canvas: {
+      kind: "quadrilatere",
+      points: {
+        A: { x: 70, y: 80 },
+        B: { x: 240, y: 70 },
+        C: { x: 260, y: 190 },
+        D: { x: 90, y: 210 }
+      },
+      display: {
+        showPoints: true,
+        showLabels: true,
+        showDiagonals: true
+      },
+      sideLabels: {
+        AC: "AC",
+        BD: "BD"
+      }
+    }
+  },
+  {
+    kind: "fixed",
+    id: "quadrilatere_nommer_vocabulaire_fixed_5",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "quadrilateres",
+    microId: "quadrilatere_nommer_vocabulaire",
+    difficulty: 2,
+    text: "Dans le quadrilatère ABCD, quels sont les côtés opposés à AB et CD ?",
+    format: "qcm",
+    choices: ["AB et BC", "AB et CD", "AB et AD", "BC et CD"],
+    expected: ["AB et CD"],
+    comparator: "mcq_exact",
+    hint: "Deux côtés opposés ne se touchent pas.",
+    tags: ["quadrilatere", "vocabulaire", "cotes-opposes"]
+  },
+  {
+    kind: "fixed",
+    id: "quadrilatere_nommer_vocabulaire_fixed_6",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "quadrilateres",
+    microId: "quadrilatere_nommer_vocabulaire",
+    difficulty: 2,
+    text: "Dans le quadrilatère ABCD, AB et BC sont des côtés…",
+    format: "qcm",
+    choices: ["opposés", "consécutifs", "parallèles", "égaux"],
+    expected: ["consécutifs"],
+    comparator: "mcq_exact",
+    hint: "Ils se touchent au sommet B.",
+    tags: ["quadrilatere", "vocabulaire", "cotes-consecutifs"]
+  },
+  {
+    kind: "template",
+    id: "quadrilatere_nommer_vocabulaire_tpl_1",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "quadrilateres",
+    microId: "quadrilatere_nommer_vocabulaire",
+    difficulty: 2,
+    hint: "Relis bien le vocabulaire : sommets, côtés, diagonales.",
+    tags: ["quadrilatere", "template", "vocabulaire"],
+    generate: () => {
+      const type = shuffle(["nommer", "diagonales", "sommets"])[0];
+
+      if (type === "nommer") {
+        const letters = [
+          ["A", "B", "C", "D"],
+          ["E", "F", "G", "H"],
+          ["K", "L", "M", "N"],
+        ];
+        const q = letters[Math.floor(Math.random() * letters.length)];
+        const name = q.join("");
+        return {
+          text: `Comment nomme-t-on le quadrilatère de sommets ${q[0]}, ${q[1]}, ${q[2]} et ${q[3]} ?`,
+          format: "short",
+          expected: [`quadrilatere ${name.toLowerCase()}`, name.toLowerCase(), name],
+          comparator: "contains_keyword",
+          canvas: {
+            kind: "quadrilatere",
+            points: {
+              A: { x: 70, y: 80 },
+              B: { x: 240, y: 80 },
+              C: { x: 255, y: 190 },
+              D: { x: 85, y: 205 }
+            },
+            labels: {
+              A: q[0],
+              B: q[1],
+              C: q[2],
+              D: q[3]
+            },
+            display: {
+              showPoints: true,
+              showLabels: true
+            }
+          }
+        };
+      }
+
+      if (type === "diagonales") {
+        return {
+          text: "Combien de diagonales possède un quadrilatère ?",
+          format: "qcm",
+          choices: shuffle(["1", "2", "3", "4"]),
+          expected: ["2"],
+          comparator: "mcq_exact"
+        };
+      }
+
+      return {
+        text: "Combien de sommets possède un quadrilatère ?",
+        format: "qcm",
+        choices: shuffle(["3", "4", "5", "6"]),
+        expected: ["4"],
+        comparator: "mcq_exact"
+      };
+    }
+  },
+
+  // =========================
   // QUADRILATERE IDENTIFIER NATURE
   // =========================
   {
@@ -213,12 +410,7 @@ export const quadrilateresBank: TutorBankItemV4[] = [
     difficulty: 3,
     text: "Avec les codages donnés, que peut-on affirmer sur cette figure ?",
     format: "qcm",
-    choices: [
-      "rectangle",
-      "losange",
-      "carré",
-      "on ne peut pas savoir"
-    ],
+    choices: ["rectangle", "losange", "carré", "on ne peut pas savoir"],
     expected: ["on ne peut pas savoir"],
     comparator: "mcq_exact",
     hint: "La figure n’a qu’une partie des informations utiles.",
@@ -1065,6 +1257,194 @@ export const quadrilateresBank: TutorBankItemV4[] = [
         format: "qcm",
         choices: shuffle(["oui", "non"]),
         expected: item.expected,
+        comparator: "mcq_exact"
+      };
+    }
+  },
+
+  // =========================
+  // QUADRILATERE COMPLETER CONSTRUIRE
+  // =========================
+  {
+    kind: "fixed",
+    id: "quadrilatere_completer_construire_fixed_1",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "quadrilateres",
+    microId: "quadrilatere_completer_construire",
+    difficulty: 2,
+    text: "Pour être sûr qu’un losange soit aussi un carré, quelle information faut-il ajouter ?",
+    format: "qcm",
+    choices: [
+      "qu’il a 4 angles droits",
+      "qu’il a 4 côtés",
+      "qu’il a 2 diagonales",
+      "qu’il a 4 sommets"
+    ],
+    expected: ["qu’il a 4 angles droits"],
+    comparator: "mcq_exact",
+    hint: "Le carré est un losange avec une propriété en plus.",
+    tags: ["quadrilatere", "completer", "carre"]
+  },
+  {
+    kind: "fixed",
+    id: "quadrilatere_completer_construire_fixed_2",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "quadrilateres",
+    microId: "quadrilatere_completer_construire",
+    difficulty: 2,
+    text: "Pour être sûr qu’un rectangle soit aussi un carré, quelle information faut-il ajouter ?",
+    format: "qcm",
+    choices: [
+      "qu’il a 4 côtés égaux",
+      "qu’il a 4 angles",
+      "qu’il a 2 diagonales",
+      "qu’il a 2 côtés parallèles"
+    ],
+    expected: ["qu’il a 4 côtés égaux"],
+    comparator: "mcq_exact",
+    hint: "Le carré est un rectangle avec une propriété en plus.",
+    tags: ["quadrilatere", "completer", "rectangle"]
+  },
+  {
+    kind: "fixed",
+    id: "quadrilatere_completer_construire_fixed_3",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "quadrilateres",
+    microId: "quadrilatere_completer_construire",
+    difficulty: 3,
+    text: "Que faut-il ajouter comme codage pour affirmer que cette figure est un carré ?",
+    format: "qcm",
+    choices: [
+      "coder 4 angles droits",
+      "ajouter une diagonale",
+      "changer le nom des sommets",
+      "supprimer un côté"
+    ],
+    expected: ["coder 4 angles droits"],
+    comparator: "mcq_exact",
+    hint: "Les 4 côtés égaux sont déjà codés.",
+    tags: ["quadrilatere", "completer", "canvas"],
+    canvas: {
+      kind: "quadrilatere",
+      points: {
+        A: { x: 160, y: 45 },
+        B: { x: 255, y: 120 },
+        C: { x: 160, y: 205 },
+        D: { x: 65, y: 120 }
+      },
+      display: {
+        showPoints: true,
+        showLabels: true
+      },
+      marks: {
+        equalSides: [["AB", "BC"], ["BC", "CD"], ["CD", "DA"]]
+      }
+    }
+  },
+  {
+    kind: "fixed",
+    id: "quadrilatere_completer_construire_fixed_4",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "quadrilateres",
+    microId: "quadrilatere_completer_construire",
+    difficulty: 3,
+    text: "Que faut-il ajouter comme codage pour affirmer que cette figure est un carré ?",
+    format: "qcm",
+    choices: [
+      "coder 4 côtés égaux",
+      "ajouter une diagonale",
+      "changer le nom des sommets",
+      "retirer un angle droit"
+    ],
+    expected: ["coder 4 côtés égaux"],
+    comparator: "mcq_exact",
+    hint: "Les 4 angles droits sont déjà codés.",
+    tags: ["quadrilatere", "completer", "canvas"],
+    canvas: {
+      kind: "quadrilatere",
+      points: {
+        A: { x: 70, y: 70 },
+        B: { x: 250, y: 70 },
+        C: { x: 250, y: 190 },
+        D: { x: 70, y: 190 }
+      },
+      display: {
+        showPoints: true,
+        showLabels: true
+      },
+      marks: {
+        rightAnglesAt: ["A", "B", "C", "D"]
+      }
+    }
+  },
+  {
+    kind: "fixed",
+    id: "quadrilatere_completer_construire_fixed_5",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "quadrilateres",
+    microId: "quadrilatere_completer_construire",
+    difficulty: 3,
+    text: "Pour construire un quadrilatère ABCD, combien de sommets faut-il placer ?",
+    format: "qcm",
+    choices: ["2", "3", "4", "5"],
+    expected: ["4"],
+    comparator: "mcq_exact",
+    hint: "Le nom ABCD donne déjà l’information.",
+    tags: ["quadrilatere", "construire"]
+  },
+  {
+    kind: "template",
+    id: "quadrilatere_completer_construire_tpl_1",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "quadrilateres",
+    microId: "quadrilatere_completer_construire",
+    difficulty: 3,
+    hint: "Cherche l’information manquante pour conclure ou construire.",
+    tags: ["quadrilatere", "template", "completer"],
+    generate: () => {
+      const type = shuffle(["losange_vers_carre", "rectangle_vers_carre", "compter"])[0];
+
+      if (type === "losange_vers_carre") {
+        return {
+          text: "Pour être sûr qu’un losange soit aussi un carré, quelle information faut-il ajouter ?",
+          format: "qcm",
+          choices: shuffle([
+            "qu’il a 4 angles droits",
+            "qu’il a 4 côtés",
+            "qu’il a 2 diagonales",
+            "qu’il a 4 sommets"
+          ]),
+          expected: ["qu’il a 4 angles droits"],
+          comparator: "mcq_exact"
+        };
+      }
+
+      if (type === "rectangle_vers_carre") {
+        return {
+          text: "Pour être sûr qu’un rectangle soit aussi un carré, quelle information faut-il ajouter ?",
+          format: "qcm",
+          choices: shuffle([
+            "qu’il a 4 côtés égaux",
+            "qu’il a 4 angles",
+            "qu’il a 2 diagonales",
+            "qu’il a 2 côtés parallèles"
+          ]),
+          expected: ["qu’il a 4 côtés égaux"],
+          comparator: "mcq_exact"
+        };
+      }
+
+      return {
+        text: "Pour construire un quadrilatère ABCD, combien de sommets faut-il placer ?",
+        format: "qcm",
+        choices: shuffle(["2", "3", "4", "5"]),
+        expected: ["4"],
         comparator: "mcq_exact"
       };
     }
