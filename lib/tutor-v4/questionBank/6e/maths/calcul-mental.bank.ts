@@ -53,11 +53,11 @@ export const calculMentalBank: TutorBankItemV4[] = [
     microId: "mental_addition",
     difficulty: 1,
     theme: "neutral",
-    text: "Calcule : 47 + 6",
+    text: "Calcule : 56 + 8",
     format: "short",
-    expected: ["53"],
+    expected: ["64"],
     comparator: "number_equal",
-    hint: "47 + 3 = 50, puis + 3.",
+    hint: "56 + 4 = 60, puis + 4.",
     tags: ["calcul_mental", "addition"],
   },
   {
@@ -69,12 +69,12 @@ export const calculMentalBank: TutorBankItemV4[] = [
     microId: "mental_addition",
     difficulty: 1,
     theme: "neutral",
-    text: "Quel est le résultat de 54 + 8 ?",
+    text: "Quel est le résultat de 45 + 8 ?",
     format: "qcm",
-    choices: ["60", "61", "62", "63"],
-    expected: ["62"],
+    choices: ["51", "52", "53", "54"],
+    expected: ["53"],
     comparator: "mcq_exact",
-    hint: "54 + 6 = 60, puis + 2.",
+    hint: "45 + 5 = 50, puis + 3.",
     tags: ["calcul_mental", "addition", "qcm"],
   },
 
@@ -179,7 +179,7 @@ export const calculMentalBank: TutorBankItemV4[] = [
     format: "short",
     expected: ["90"],
     comparator: "number_equal",
-    hint: "Multiplier par 5, c’est la moitié de ×10.",
+    hint: "Multiplier par 5, c’est prendre la moitié de ×10.",
     tags: ["calcul_mental", "multiplication"],
   },
   {
@@ -195,7 +195,7 @@ export const calculMentalBank: TutorBankItemV4[] = [
     format: "short",
     expected: ["99"],
     comparator: "number_equal",
-    hint: "11 fois 9.",
+    hint: "Utilise la table de 9.",
     tags: ["calcul_mental", "multiplication"],
   },
   {
@@ -366,7 +366,7 @@ export const calculMentalBank: TutorBankItemV4[] = [
     microId: "mental_defis",
     difficulty: 2,
     theme: "neutral",
-    text: "À la boulangerie, Léa achète une tarte à 5 €, un jus à 3 € et un gâteau à 26 €. Combien paie-t-elle en tout ?",
+    text: "À la boulangerie, Léa achète une tarte à 5 €, un jus à 3 € ainsi qu’un gâteau à 26 €. Combien Léa va-t-elle payer en tout ?",
     format: "short",
     expected: ["34", "34 €", "34€"],
     comparator: "contains_keyword",
@@ -430,7 +430,7 @@ export const calculMentalBank: TutorBankItemV4[] = [
     microId: "mental_defis",
     difficulty: 2,
     theme: "reunion",
-    text: "Dans un jardin à Saint-Pierre, il y a 9 rangées de 7 fleurs. Combien y a-t-il de fleurs en tout ?",
+    text: "Dans un jardin à Saint-Pierre, il y a 9 rangées de 7 fleurs. Combien de fleurs y a-t-il en tout ?",
     format: "short",
     expected: ["63"],
     comparator: "number_equal",
@@ -454,7 +454,7 @@ export const calculMentalBank: TutorBankItemV4[] = [
     tags: ["calcul_mental", "addition", "template"],
     generate: () => {
       const a = [26, 37, 48, 59, 67][Math.floor(Math.random() * 5)];
-      const b = [4, 5, 6, 7, 8][Math.floor(Math.random() * 5)];
+      const b = [4, 5, 6, 7, 8, 9][Math.floor(Math.random() * 6)];
       const sum = a + b;
 
       return {
@@ -474,11 +474,11 @@ export const calculMentalBank: TutorBankItemV4[] = [
     microId: "mental_addition",
     difficulty: 2,
     theme: "neutral",
-    hint: "Tu peux ajouter les dizaines puis les unités.",
+    hint: "Tu peux ajouter 10 puis corriger.",
     tags: ["calcul_mental", "addition", "template"],
     generate: () => {
-      const a = [104, 116, 127, 138, 142][Math.floor(Math.random() * 5)];
-      const b = [17, 18, 24, 26, 35][Math.floor(Math.random() * 5)];
+      const a = [104, 116, 127, 138][Math.floor(Math.random() * 4)];
+      const b = [18, 24, 29][Math.floor(Math.random() * 3)];
       const sum = a + b;
 
       return {
@@ -526,11 +526,11 @@ export const calculMentalBank: TutorBankItemV4[] = [
     microId: "mental_subtraction",
     difficulty: 2,
     theme: "neutral",
-    hint: "Enlève d’abord les dizaines, puis les unités.",
+    hint: "Enlève les dizaines puis les unités.",
     tags: ["calcul_mental", "soustraction", "template"],
     generate: () => {
-      const a = [92, 104, 115, 126, 137][Math.floor(Math.random() * 5)];
-      const b = [16, 18, 24, 27, 35][Math.floor(Math.random() * 5)];
+      const a = [92, 104, 115, 126][Math.floor(Math.random() * 4)];
+      const b = [16, 24, 27][Math.floor(Math.random() * 3)];
       const diff = a - b;
 
       return {
@@ -557,14 +557,8 @@ export const calculMentalBank: TutorBankItemV4[] = [
     hint: "Utilise les tables.",
     tags: ["calcul_mental", "multiplication", "template"],
     generate: () => {
-      const pairs = [
-        [6, 7],
-        [7, 8],
-        [8, 9],
-        [9, 4],
-        [12, 6],
-      ];
-      const [a, b] = pairs[Math.floor(Math.random() * pairs.length)];
+      const a = [6, 7, 8, 9, 11][Math.floor(Math.random() * 5)];
+      const b = [4, 5, 6, 7, 8][Math.floor(Math.random() * 5)];
       const product = a * b;
 
       return {
@@ -587,7 +581,7 @@ export const calculMentalBank: TutorBankItemV4[] = [
     hint: "Multiplier par 5, c’est parfois faire ×10 puis ÷2.",
     tags: ["calcul_mental", "multiplication", "template"],
     generate: () => {
-      const a = [12, 14, 16, 18, 22, 26][Math.floor(Math.random() * 6)];
+      const a = [12, 16, 18, 22, 26][Math.floor(Math.random() * 5)];
       const b = 5;
       const product = a * b;
 
@@ -639,7 +633,7 @@ export const calculMentalBank: TutorBankItemV4[] = [
     hint: "Avec ÷10, la virgule se déplace.",
     tags: ["calcul_mental", "division", "template", "decimaux"],
     generate: () => {
-      const values = [125, 248, 376, 540, 645, 812];
+      const values = [145, 236, 384, 645, 812];
       const dividend = values[Math.floor(Math.random() * values.length)];
       const quotient = dividend / 10;
 
@@ -664,15 +658,15 @@ export const calculMentalBank: TutorBankItemV4[] = [
     microId: "mental_strategies",
     difficulty: 1,
     theme: "neutral",
-    hint: "Double, moitié ou quart.",
+    hint: "Double ou moitié.",
     tags: ["calcul_mental", "strategie", "template"],
     generate: () => {
-      const type = ["double", "moitie", "quart"][
-        Math.floor(Math.random() * 3)
-      ];
+      const type = Math.random() < 0.5 ? "double" : "moitie";
 
       if (type === "double") {
-        const n = [30, 40, 50, 60, 70, 80][Math.floor(Math.random() * 6)];
+        const n = [30, 40, 50, 60, 70, 80, 90][
+          Math.floor(Math.random() * 7)
+        ];
         return {
           text: `Donne le double de ${n}.`,
           format: "short",
@@ -681,21 +675,13 @@ export const calculMentalBank: TutorBankItemV4[] = [
         };
       }
 
-      if (type === "moitie") {
-        const n = [14, 18, 22, 26, 30, 40][Math.floor(Math.random() * 6)];
-        return {
-          text: `Donne la moitié de ${n}.`,
-          format: "short",
-          expected: [String(n / 2)],
-          comparator: "number_equal",
-        };
-      }
-
-      const n = [20, 24, 28, 32, 36, 40][Math.floor(Math.random() * 6)];
+      const n = [14, 16, 18, 20, 24, 30, 40][
+        Math.floor(Math.random() * 7)
+      ];
       return {
-        text: `Donne le quart de ${n}.`,
+        text: `Donne la moitié de ${n}.`,
         format: "short",
-        expected: [String(n / 4)],
+        expected: [String(n / 2)],
         comparator: "number_equal",
       };
     },
@@ -748,16 +734,15 @@ export const calculMentalBank: TutorBankItemV4[] = [
     microId: "mental_defis",
     difficulty: 2,
     theme: "neutral",
-    hint: "Additionne les trois prix.",
+    hint: "Additionne les deux prix.",
     tags: ["calcul_mental", "probleme", "template"],
     generate: () => {
       const a = [2, 3, 4, 5][Math.floor(Math.random() * 4)];
-      const b = [3, 4, 5, 6][Math.floor(Math.random() * 4)];
-      const c = [18, 22, 26, 31][Math.floor(Math.random() * 4)];
-      const total = a + b + c;
+      const b = [11, 14, 17, 19][Math.floor(Math.random() * 4)];
+      const total = a + b;
 
       return {
-        text: `Dans un magasin, un cahier coûte ${a} €, une règle coûte ${b} € et un jeu coûte ${c} €. Combien paie-t-on en tout ?`,
+        text: `Dans un magasin, un cahier coûte ${a} € et une trousse coûte ${b} €. Combien paie-t-on en tout ?`,
         format: "short",
         expected: [String(total), `${total} €`, `${total}€`],
         comparator: "contains_keyword",
@@ -773,15 +758,15 @@ export const calculMentalBank: TutorBankItemV4[] = [
     microId: "mental_defis",
     difficulty: 2,
     theme: "reunion",
-    hint: "Multiplie le nombre de rangées par le nombre d’objets.",
+    hint: "Multiplie le nombre de rangées par le nombre d’arbres.",
     tags: ["calcul_mental", "probleme", "template", "reunion"],
     generate: () => {
-      const rows = [6, 7, 8, 9, 10][Math.floor(Math.random() * 5)];
-      const perRow = [4, 5, 6, 7, 8][Math.floor(Math.random() * 5)];
+      const rows = [5, 6, 7, 9][Math.floor(Math.random() * 4)];
+      const perRow = [4, 5, 6, 7][Math.floor(Math.random() * 4)];
       const total = rows * perRow;
 
       return {
-        text: `Dans un jardin à La Réunion, il y a ${rows} rangées de ${perRow} plantes. Combien y a-t-il de plantes en tout ?`,
+        text: `Dans un verger à La Réunion, il y a ${rows} rangées de ${perRow} arbres. Combien y a-t-il d’arbres en tout ?`,
         format: "short",
         expected: [String(total)],
         comparator: "number_equal",
