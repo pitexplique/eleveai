@@ -4,10 +4,12 @@
 import {
   useEffect,
   useMemo,
+  useRef,
   useState,
   type KeyboardEvent,
   type ReactNode,
 } from "react";
+import { useSearchParams } from "next/navigation";
 import TriangleCanvas from "@/lib/tutor-v4/components/TriangleCanvas";
 import QuadrilatereCanvas from "@/lib/tutor-v4/components/QuadrilatereCanvas";
 import {
@@ -171,9 +173,13 @@ function renderCanvas(canvas?: CanvasFigure | null) {
 }
 
 export default function TutorV4Page() {
-  const [classe] = useState("6e");
-  const [matiere] = useState("maths");
+  const searchParams = useSearchParams();
+
+  const [classe, setClasse] = useState("6e");
+  const [matiere, setMatiere] = useState("maths");
   const [notion, setNotion] = useState("decimaux");
+
+  const hasInitializedFromUrl = useRef(false);
 
   const [sessionId, setSessionId] = useState<string | null>(null);
   const [pair, setPair] = useState<TutorQuestionPair | null>(null);
@@ -224,6 +230,28 @@ export default function TutorV4Page() {
     title: "",
     message: "",
   });
+
+  useEffect(() => {
+    if (hasInitializedFromUrl.current) return;
+
+    const urlClasse = searchParams.get("classe");
+    const urlMatiere = searchParams.get("matiere");
+    const urlNotion = searchParams.get("notion");
+
+    if (urlClasse) {
+      setClasse(urlClasse);
+    }
+
+    if (urlMatiere) {
+      setMatiere(urlMatiere);
+    }
+
+    if (urlNotion && NOTION_OPTIONS.some((item) => item.id === urlNotion)) {
+      setNotion(urlNotion);
+    }
+
+    hasInitializedFromUrl.current = true;
+  }, [searchParams]);
 
   useEffect(() => {
     if (!sessionStartedAt) {
