@@ -4,30 +4,63 @@ function shuffle<T>(arr: T[]): T[] {
   return [...arr].sort(() => Math.random() - 0.5);
 }
 
+function gcd(a: number, b: number): number {
+  let x = Math.abs(a);
+  let y = Math.abs(b);
+  while (y !== 0) {
+    const t = y;
+    y = x % y;
+    x = t;
+  }
+  return x || 1;
+}
+
+function simplifyFraction(n: number, d: number) {
+  const g = gcd(n, d);
+  return { n: n / g, d: d / g };
+}
+
+function fractionString(n: number, d: number) {
+  return `${n}/${d}`;
+}
+
+function fractionStringSpaced(n: number, d: number) {
+  return `${n} / ${d}`;
+}
+
+function decimalComma(value: number, digits?: number) {
+  const s =
+    typeof digits === "number" ? value.toFixed(digits) : String(value);
+  return s.replace(".", ",");
+}
+
 export const fractionsBank: TutorBankItemV4[] = [
+  // =========================
+  // FRACTION_LIRE_ECRIRE
+  // =========================
   {
     kind: "fixed",
-    id: "fraction_read_fixed_1",
+    id: "fraction_lire_ecrire_fixed_1",
     niveau: "6e",
     matiere: "maths",
     notionId: "fractions",
-    microId: "fraction_read",
+    microId: "fraction_lire_ecrire",
     difficulty: 1,
     theme: "neutral",
-    text: "v4-Quelle fraction représente 1 part sur 4 parts égales ?",
+    text: "Quelle fraction représente 1 part sur 4 parts égales ?",
     format: "short",
     expected: ["1/4", "1 / 4", "0,25", "0.25"],
     comparator: "fraction_decimal_equivalent",
     hint: "Une part sur quatre.",
-    tags: ["lecture", "fraction", "partage"],
+    tags: ["fractions", "lecture", "ecriture"],
   },
   {
     kind: "fixed",
-    id: "fraction_read_fixed_2",
+    id: "fraction_lire_ecrire_fixed_2",
     niveau: "6e",
     matiere: "maths",
     notionId: "fractions",
-    microId: "fraction_read",
+    microId: "fraction_lire_ecrire",
     difficulty: 1,
     theme: "neutral",
     text: "Quelle fraction représente 1 part sur 2 parts égales ?",
@@ -35,15 +68,31 @@ export const fractionsBank: TutorBankItemV4[] = [
     expected: ["1/2", "1 / 2", "0,5", "0.5"],
     comparator: "fraction_decimal_equivalent",
     hint: "Une part sur deux, c’est une moitié.",
-    tags: ["lecture", "fraction", "moitie"],
+    tags: ["fractions", "lecture", "moitie"],
   },
   {
     kind: "fixed",
-    id: "fraction_read_qcm_1",
+    id: "fraction_lire_ecrire_fixed_3",
     niveau: "6e",
     matiere: "maths",
     notionId: "fractions",
-    microId: "fraction_read",
+    microId: "fraction_lire_ecrire",
+    difficulty: 1,
+    theme: "neutral",
+    text: "Quelle fraction représente 3 parts sur 5 parts égales ?",
+    format: "short",
+    expected: ["3/5", "3 / 5"],
+    comparator: "fraction_decimal_equivalent",
+    hint: "Le numérateur donne les parts prises.",
+    tags: ["fractions", "lecture", "ecriture"],
+  },
+  {
+    kind: "fixed",
+    id: "fraction_lire_ecrire_qcm_1",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "fractions",
+    microId: "fraction_lire_ecrire",
     difficulty: 2,
     theme: "neutral",
     text: "Choisis la fraction qui représente une part sur 5 parts égales.",
@@ -52,8 +101,319 @@ export const fractionsBank: TutorBankItemV4[] = [
     expected: ["1/5", "1 / 5"],
     comparator: "mcq_exact",
     hint: "Le dénominateur donne le nombre total de parts.",
-    tags: ["lecture", "fraction", "qcm"],
+    tags: ["fractions", "lecture", "qcm"],
   },
+  {
+    kind: "fixed",
+    id: "fraction_lire_ecrire_qcm_2",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "fractions",
+    microId: "fraction_lire_ecrire",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Quelle fraction signifie “3 parts sur 4 parts égales” ?",
+    format: "qcm",
+    choices: ["3/4", "4/3", "1/4", "2/4"],
+    expected: ["3/4", "3 / 4"],
+    comparator: "mcq_exact",
+    hint: "3 parts prises, 4 parts au total.",
+    tags: ["fractions", "lecture", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "fraction_lire_ecrire_reunion_1",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "fractions",
+    microId: "fraction_lire_ecrire",
+    difficulty: 2,
+    theme: "reunion",
+    text: "À La Réunion, 2 parts de gâteau sur 8 ont déjà été mangées. Quelle fraction cela représente-t-il ?",
+    format: "short",
+    expected: ["2/8", "2 / 8", "1/4", "1 / 4", "0,25", "0.25"],
+    comparator: "fraction_decimal_equivalent",
+    hint: "2 parts sur 8, c’est aussi une fraction simplifiable.",
+    tags: ["fractions", "lecture", "reunion"],
+  },
+
+  // =========================
+  // FRACTION_REPRESENTER
+  // =========================
+  {
+    kind: "fixed",
+    id: "fraction_representer_fixed_1",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "fractions",
+    microId: "fraction_representer",
+    difficulty: 1,
+    theme: "neutral",
+    text: "Combien faut-il colorier de parts pour représenter 3/4 d’une figure partagée en 4 parts égales ?",
+    format: "short",
+    expected: ["3", "trois"],
+    comparator: "contains_keyword",
+    hint: "Le numérateur indique le nombre de parts à colorier.",
+    tags: ["fractions", "representation"],
+  },
+  {
+    kind: "fixed",
+    id: "fraction_representer_fixed_2",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "fractions",
+    microId: "fraction_representer",
+    difficulty: 1,
+    theme: "neutral",
+    text: "Combien faut-il colorier de parts pour représenter 2/5 ?",
+    format: "short",
+    expected: ["2", "deux"],
+    comparator: "contains_keyword",
+    hint: "Le numérateur donne le nombre de parts colorées.",
+    tags: ["fractions", "representation"],
+  },
+  {
+    kind: "fixed",
+    id: "fraction_representer_qcm_1",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "fractions",
+    microId: "fraction_representer",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Pour représenter 4/6, combien de parts égales doit avoir la figure au total ?",
+    format: "qcm",
+    choices: ["4", "6", "10", "24"],
+    expected: ["6"],
+    comparator: "mcq_exact",
+    hint: "Le dénominateur donne le nombre total de parts.",
+    tags: ["fractions", "representation", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "fraction_representer_qcm_2",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "fractions",
+    microId: "fraction_representer",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Pour représenter 5/8, combien de parts doivent être colorées ?",
+    format: "qcm",
+    choices: ["3", "5", "8", "13"],
+    expected: ["5"],
+    comparator: "mcq_exact",
+    hint: "Le numérateur donne le nombre de parts colorées.",
+    tags: ["fractions", "representation", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "fraction_representer_reunion_1",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "fractions",
+    microId: "fraction_representer",
+    difficulty: 2,
+    theme: "reunion",
+    text: "Un plateau de bonbons piments est partagé en 6 parts égales. Pour représenter 4/6 du plateau, combien de parts faut-il prendre ?",
+    format: "short",
+    expected: ["4", "quatre"],
+    comparator: "contains_keyword",
+    hint: "4/6 signifie 4 parts parmi 6.",
+    tags: ["fractions", "representation", "reunion"],
+  },
+
+  // =========================
+  // FRACTION_QUANTITE
+  // =========================
+  {
+    kind: "fixed",
+    id: "fraction_quantite_fixed_1",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "fractions",
+    microId: "fraction_quantite",
+    difficulty: 2,
+    theme: "neutral",
+    text: "La moitié de 10, c’est combien ?",
+    format: "short",
+    expected: ["5"],
+    comparator: "number_equal",
+    hint: "Partage 10 en 2 parts égales.",
+    tags: ["fractions", "quantite", "moitie"],
+  },
+  {
+    kind: "fixed",
+    id: "fraction_quantite_fixed_2",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "fractions",
+    microId: "fraction_quantite",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Le quart de 20, c’est combien ?",
+    format: "short",
+    expected: ["5"],
+    comparator: "number_equal",
+    hint: "Le quart, c’est partager en 4 parts égales.",
+    tags: ["fractions", "quantite", "quart"],
+  },
+  {
+    kind: "fixed",
+    id: "fraction_quantite_fixed_3",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "fractions",
+    microId: "fraction_quantite",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Les 3/4 de 12, c’est combien ?",
+    format: "short",
+    expected: ["9"],
+    comparator: "number_equal",
+    hint: "Commence par trouver 1/4 de 12.",
+    tags: ["fractions", "quantite"],
+  },
+  {
+    kind: "fixed",
+    id: "fraction_quantite_qcm_1",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "fractions",
+    microId: "fraction_quantite",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Quelle est la moitié de 14 ?",
+    format: "qcm",
+    choices: ["6", "7", "8", "9"],
+    expected: ["7"],
+    comparator: "mcq_exact",
+    hint: "Divise par 2.",
+    tags: ["fractions", "quantite", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "fraction_quantite_qcm_2",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "fractions",
+    microId: "fraction_quantite",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Quel est le quart de 16 ?",
+    format: "qcm",
+    choices: ["2", "4", "8", "12"],
+    expected: ["4"],
+    comparator: "mcq_exact",
+    hint: "Divise par 4.",
+    tags: ["fractions", "quantite", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "fraction_quantite_reunion_1",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "fractions",
+    microId: "fraction_quantite",
+    difficulty: 3,
+    theme: "reunion",
+    text: "Au marché de Saint-Pierre, 1/2 d’une caisse de 18 mangues est vendue. Combien de mangues cela fait-il ?",
+    format: "short",
+    expected: ["9"],
+    comparator: "number_equal",
+    hint: "La moitié de 18.",
+    tags: ["fractions", "quantite", "reunion"],
+  },
+
+  // =========================
+  // FRACTION_DECIMAL
+  // =========================
+  {
+    kind: "fixed",
+    id: "fraction_decimal_fixed_1",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "fractions",
+    microId: "fraction_decimal",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Écris 1/2 sous forme décimale.",
+    format: "short",
+    expected: ["0,5", "0.5", "1/2", "1 / 2"],
+    comparator: "fraction_decimal_equivalent",
+    hint: "Une moitié vaut 0,5.",
+    tags: ["fractions", "decimal"],
+  },
+  {
+    kind: "fixed",
+    id: "fraction_decimal_fixed_2",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "fractions",
+    microId: "fraction_decimal",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Écris 1/4 sous forme décimale.",
+    format: "short",
+    expected: ["0,25", "0.25", "1/4", "1 / 4"],
+    comparator: "fraction_decimal_equivalent",
+    hint: "Un quart vaut 0,25.",
+    tags: ["fractions", "decimal"],
+  },
+  {
+    kind: "fixed",
+    id: "fraction_decimal_fixed_3",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "fractions",
+    microId: "fraction_decimal",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Écris 3/4 sous forme décimale.",
+    format: "short",
+    expected: ["0,75", "0.75", "3/4", "3 / 4"],
+    comparator: "fraction_decimal_equivalent",
+    hint: "3 quarts = 0,75.",
+    tags: ["fractions", "decimal"],
+  },
+  {
+    kind: "fixed",
+    id: "fraction_decimal_qcm_1",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "fractions",
+    microId: "fraction_decimal",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Quelle écriture décimale correspond à 1/2 ?",
+    format: "qcm",
+    choices: ["0,2", "0,25", "0,5", "2,0"],
+    expected: ["0,5", "0.5"],
+    comparator: "mcq_exact",
+    hint: "Une moitié.",
+    tags: ["fractions", "decimal", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "fraction_decimal_qcm_2",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "fractions",
+    microId: "fraction_decimal",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Quelle écriture décimale correspond à 1/4 ?",
+    format: "qcm",
+    choices: ["0,4", "0,25", "0,14", "0,75"],
+    expected: ["0,25", "0.25"],
+    comparator: "mcq_exact",
+    hint: "Un quart.",
+    tags: ["fractions", "decimal", "qcm"],
+  },
+
+  // =========================
+  // FRACTION_COMPARE
+  // =========================
   {
     kind: "fixed",
     id: "fraction_compare_fixed_1",
@@ -63,12 +423,12 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_compare",
     difficulty: 2,
     theme: "neutral",
-    text: "Compare 1/4 et 1/2 : lequel est le plus grand ?",
+    text: "Compare 1/4 et 1/2 : laquelle est la plus grande ?",
     format: "short",
     expected: ["1/2", "1 / 2", "0,5", "0.5"],
     comparator: "fraction_decimal_equivalent",
     hint: "Une moitié est plus grande qu’un quart.",
-    tags: ["comparaison", "fraction"],
+    tags: ["fractions", "comparaison"],
   },
   {
     kind: "fixed",
@@ -79,12 +439,28 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_compare",
     difficulty: 2,
     theme: "neutral",
-    text: "Compare 3/5 et 1/5 : lequel est le plus grand ?",
+    text: "Compare 3/5 et 1/5 : laquelle est la plus grande ?",
     format: "short",
     expected: ["3/5", "3 / 5"],
     comparator: "fraction_decimal_equivalent",
     hint: "Même dénominateur : compare les numérateurs.",
-    tags: ["comparaison", "fraction"],
+    tags: ["fractions", "comparaison"],
+  },
+  {
+    kind: "fixed",
+    id: "fraction_compare_fixed_3",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "fractions",
+    microId: "fraction_compare",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Compare 2/4 et 3/4 : laquelle est la plus grande ?",
+    format: "short",
+    expected: ["3/4", "3 / 4"],
+    comparator: "fraction_decimal_equivalent",
+    hint: "Même dénominateur.",
+    tags: ["fractions", "comparaison"],
   },
   {
     kind: "fixed",
@@ -101,120 +477,401 @@ export const fractionsBank: TutorBankItemV4[] = [
     expected: ["2/3", "2 / 3"],
     comparator: "mcq_exact",
     hint: "Tu peux comparer les fractions ou penser à leur valeur.",
-    tags: ["comparaison", "fraction", "qcm"],
+    tags: ["fractions", "comparaison", "qcm"],
   },
   {
     kind: "fixed",
-    id: "fraction_quantity_fixed_1",
+    id: "fraction_compare_qcm_2",
     niveau: "6e",
     matiere: "maths",
     notionId: "fractions",
-    microId: "fraction_quantity",
+    microId: "fraction_compare",
     difficulty: 2,
     theme: "neutral",
-    text: "La moitié de 10, c'est combien ?",
-    format: "short",
-    expected: ["5"],
-    comparator: "number_equal",
-    hint: "Partage 10 en 2 parts égales.",
-    tags: ["moitie", "quantite"],
-  },
-  {
-    kind: "fixed",
-    id: "fraction_quantity_fixed_2",
-    niveau: "6e",
-    matiere: "maths",
-    notionId: "fractions",
-    microId: "fraction_quantity",
-    difficulty: 2,
-    theme: "neutral",
-    text: "Le quart de 20, c'est combien ?",
-    format: "short",
-    expected: ["5"],
-    comparator: "number_equal",
-    hint: "Le quart, c’est partager en 4 parts égales.",
-    tags: ["quart", "quantite"],
-  },
-  {
-    kind: "fixed",
-    id: "fraction_quantity_qcm_1",
-    niveau: "6e",
-    matiere: "maths",
-    notionId: "fractions",
-    microId: "fraction_quantity",
-    difficulty: 2,
-    theme: "neutral",
-    text: "Quelle est la moitié de 14 ?",
+    text: "Quelle fraction est la plus petite ?",
     format: "qcm",
-    choices: ["6", "7", "8", "9"],
-    expected: ["7"],
+    choices: ["1/2", "1/4", "3/4", "2/4"],
+    expected: ["1/4", "1 / 4"],
     comparator: "mcq_exact",
-    hint: "Divise par 2.",
-    tags: ["moitie", "qcm"],
+    hint: "Pense à 0,5 ; 0,25 ; 0,75.",
+    tags: ["fractions", "comparaison", "qcm"],
   },
+
+  // =========================
+  // FRACTION_DEFIS
+  // =========================
   {
     kind: "fixed",
-    id: "fraction_quantity_qcm_2",
+    id: "fraction_defis_fixed_1",
     niveau: "6e",
     matiere: "maths",
     notionId: "fractions",
-    microId: "fraction_quantity",
+    microId: "fraction_defis",
+    difficulty: 1,
+    theme: "neutral",
+    text: "Si une pizza est partagée en 8 parts égales et que tu en manges 4, quelle fraction de la pizza as-tu mangée ?",
+    format: "short",
+    expected: ["4/8", "4 / 8", "1/2", "1 / 2", "0,5", "0.5"],
+    comparator: "fraction_decimal_equivalent",
+    hint: "4 parts sur 8, c’est aussi une moitié.",
+    tags: ["fractions", "defi"],
+  },
+  {
+    kind: "fixed",
+    id: "fraction_defis_fixed_2",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "fractions",
+    microId: "fraction_defis",
     difficulty: 2,
     theme: "neutral",
-    text: "Quel est le quart de 16 ?",
-    format: "qcm",
-    choices: ["2", "4", "8", "12"],
+    text: "Dans une boîte de 12 biscuits, Léa mange 1/3 de la boîte. Combien de biscuits mange-t-elle ?",
+    format: "short",
     expected: ["4"],
-    comparator: "mcq_exact",
-    hint: "Divise par 4.",
-    tags: ["quart", "qcm"],
+    comparator: "number_equal",
+    hint: "Partage 12 en 3 parts égales.",
+    tags: ["fractions", "defi", "quantite"],
   },
+  {
+    kind: "fixed",
+    id: "fraction_defis_fixed_3",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "fractions",
+    microId: "fraction_defis",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Quelle fraction est équivalente à 2/8 ?",
+    format: "qcm",
+    choices: ["1/2", "1/4", "2/4", "4/8"],
+    expected: ["1/4", "1 / 4"],
+    comparator: "mcq_exact",
+    hint: "Simplifie 2/8.",
+    tags: ["fractions", "defi", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "fraction_defis_fixed_4",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "fractions",
+    microId: "fraction_defis",
+    difficulty: 3,
+    theme: "reunion",
+    text: "À La Réunion, une famille partage 24 samoussas. Si 1/4 est mangé, combien de samoussas ont été mangés ?",
+    format: "short",
+    expected: ["6"],
+    comparator: "number_equal",
+    hint: "Le quart de 24.",
+    tags: ["fractions", "defi", "reunion"],
+  },
+  {
+    kind: "fixed",
+    id: "fraction_defis_fixed_5",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "fractions",
+    microId: "fraction_defis",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Tu hésites entre 2/3 et 3/4. Quelle fraction est la plus grande ?",
+    format: "short",
+    expected: ["3/4", "3 / 4", "0,75", "0.75"],
+    comparator: "fraction_decimal_equivalent",
+    hint: "Compare leurs valeurs décimales.",
+    tags: ["fractions", "defi", "comparaison"],
+  },
+  {
+    kind: "fixed",
+    id: "fraction_defis_fixed_6",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "fractions",
+    microId: "fraction_defis",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Explique pourquoi 2/4 et 1/2 représentent la même quantité.",
+    format: "short",
+    expected: ["même", "quantité", "2/4", "1/2"],
+    comparator: "contains_keyword",
+    hint: "Pense à une figure partagée en 4 parts.",
+    tags: ["fractions", "defi", "raisonnement"],
+  },
+
+  // =========================
+  // TEMPLATES - LIRE ET ECRIRE
+  // =========================
   {
     kind: "template",
-    id: "fraction_read_tpl_1",
+    id: "fraction_lire_ecrire_tpl_1",
     niveau: "6e",
     matiere: "maths",
     notionId: "fractions",
-    microId: "fraction_read",
+    microId: "fraction_lire_ecrire",
     difficulty: 1,
     theme: "neutral",
     hint: "Numérateur = parts prises ; dénominateur = parts totales.",
-    tags: ["lecture", "fraction", "template"],
+    tags: ["fractions", "lecture", "template"],
     generate: () => {
       const den = [2, 3, 4, 5, 6, 8][Math.floor(Math.random() * 6)];
+      const num = 1 + Math.floor(Math.random() * Math.min(den - 1, 3));
+
       return {
-        text: `Quelle fraction représente 1 part sur ${den} parts égales ?`,
+        text: `Quelle fraction représente ${num} part${num > 1 ? "s" : ""} sur ${den} parts égales ?`,
         format: "short",
-        expected: [`1/${den}`, `1 / ${den}`],
+        expected: [fractionString(num, den), fractionStringSpaced(num, den)],
         comparator: "fraction_decimal_equivalent",
       };
     },
   },
   {
     kind: "template",
-    id: "fraction_read_qcm_tpl_1",
+    id: "fraction_lire_ecrire_qcm_tpl_1",
     niveau: "6e",
     matiere: "maths",
     notionId: "fractions",
-    microId: "fraction_read",
+    microId: "fraction_lire_ecrire",
     difficulty: 2,
     theme: "neutral",
-    hint: "Une seule part prise : le numérateur vaut 1.",
-    tags: ["lecture", "fraction", "qcm", "template"],
+    hint: "Le dénominateur correspond au nombre total de parts.",
+    tags: ["fractions", "lecture", "qcm", "template"],
     generate: () => {
       const den = [3, 4, 5, 6, 8][Math.floor(Math.random() * 5)];
-      const good = `1/${den}`;
-      const choices = shuffle([good, `${den}/1`, `2/${den}`, `1/${den + 1}`]);
+      const num = 1 + Math.floor(Math.random() * Math.min(den - 1, 3));
+      const good = fractionString(num, den);
+
+      const distractors = shuffle(
+        Array.from(
+          new Set([
+            fractionString(den, num),
+            fractionString(1, den),
+            fractionString(num + 1 <= den ? num + 1 : num - 1, den),
+            fractionString(num, den + 1),
+          ])
+        ).filter((x) => x !== good)
+      ).slice(0, 3);
 
       return {
-        text: `Choisis la fraction qui représente 1 part sur ${den} parts égales.`,
+        text: `Choisis la fraction qui représente ${num} part${num > 1 ? "s" : ""} sur ${den} parts égales.`,
         format: "qcm",
-        choices,
+        choices: shuffle([good, ...distractors]),
         expected: [good, good.replace("/", " / ")],
         comparator: "mcq_exact",
       };
     },
   },
+
+  // =========================
+  // TEMPLATES - REPRESENTER
+  // =========================
+  {
+    kind: "template",
+    id: "fraction_representer_tpl_1",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "fractions",
+    microId: "fraction_representer",
+    difficulty: 1,
+    theme: "neutral",
+    hint: "Le numérateur donne le nombre de parts colorées.",
+    tags: ["fractions", "representation", "template"],
+    generate: () => {
+      const den = [3, 4, 5, 6, 8][Math.floor(Math.random() * 5)];
+      const num = 1 + Math.floor(Math.random() * Math.min(den - 1, 4));
+
+      return {
+        text: `Combien faut-il colorier de parts pour représenter ${num}/${den} ?`,
+        format: "short",
+        expected: [String(num)],
+        comparator: "number_equal",
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "fraction_representer_qcm_tpl_1",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "fractions",
+    microId: "fraction_representer",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Le dénominateur donne le nombre total de parts.",
+    tags: ["fractions", "representation", "qcm", "template"],
+    generate: () => {
+      const den = [4, 5, 6, 8][Math.floor(Math.random() * 4)];
+      const num = 1 + Math.floor(Math.random() * Math.min(den - 1, 4));
+
+      return {
+        text: `Pour représenter ${num}/${den}, combien de parts égales faut-il au total ?`,
+        format: "qcm",
+        choices: shuffle([
+          String(den),
+          String(num),
+          String(den + 1),
+          String(num + den),
+        ]),
+        expected: [String(den)],
+        comparator: "mcq_exact",
+      };
+    },
+  },
+
+  // =========================
+  // TEMPLATES - QUANTITE
+  // =========================
+  {
+    kind: "template",
+    id: "fraction_quantite_tpl_1",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "fractions",
+    microId: "fraction_quantite",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Partage la quantité en parts égales.",
+    tags: ["fractions", "quantite", "template"],
+    generate: () => {
+      const type = ["moitié", "quart"][Math.floor(Math.random() * 2)];
+      const base =
+        type === "moitié"
+          ? [8, 10, 12, 14, 16, 20][Math.floor(Math.random() * 6)]
+          : [8, 12, 16, 20, 24][Math.floor(Math.random() * 5)];
+      const expected = type === "moitié" ? base / 2 : base / 4;
+
+      return {
+        text: `Le ${type} de ${base}, c’est combien ?`,
+        format: "short",
+        expected: [String(expected)],
+        comparator: "number_equal",
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "fraction_quantite_tpl_2",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "fractions",
+    microId: "fraction_quantite",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Commence par trouver une part.",
+    tags: ["fractions", "quantite", "template"],
+    generate: () => {
+      const den = [3, 4, 5][Math.floor(Math.random() * 3)];
+      const num = [2, 3][Math.floor(Math.random() * 2)];
+      const base = den * [3, 4, 5][Math.floor(Math.random() * 3)];
+      const expected = (base / den) * num;
+
+      return {
+        text: `Les ${num}/${den} de ${base}, c’est combien ?`,
+        format: "short",
+        expected: [String(expected)],
+        comparator: "number_equal",
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "fraction_quantite_qcm_tpl_1",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "fractions",
+    microId: "fraction_quantite",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Moitié = ÷2 ; quart = ÷4.",
+    tags: ["fractions", "quantite", "qcm", "template"],
+    generate: () => {
+      const base = [8, 12, 16, 20][Math.floor(Math.random() * 4)];
+      const type = Math.random() > 0.5 ? "moitié" : "quart";
+      const good = type === "moitié" ? base / 2 : base / 4;
+
+      const distractors = Array.from(
+        new Set([good + 1, good + 2, base / 2, base / 4])
+      )
+        .filter((n) => n !== good)
+        .slice(0, 3);
+
+      return {
+        text: `Quel est le ${type} de ${base} ?`,
+        format: "qcm",
+        choices: shuffle([String(good), ...distractors.map(String)]),
+        expected: [String(good)],
+        comparator: "mcq_exact",
+      };
+    },
+  },
+
+  // =========================
+  // TEMPLATES - FRACTION DECIMALE
+  // =========================
+  {
+    kind: "template",
+    id: "fraction_decimal_tpl_1",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "fractions",
+    microId: "fraction_decimal",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Certaines fractions simples ont une écriture décimale connue.",
+    tags: ["fractions", "decimal", "template"],
+    generate: () => {
+      const items = [
+        { n: 1, d: 2, dec: 0.5 },
+        { n: 1, d: 4, dec: 0.25 },
+        { n: 3, d: 4, dec: 0.75 },
+        { n: 1, d: 5, dec: 0.2 },
+      ];
+      const item = items[Math.floor(Math.random() * items.length)];
+
+      return {
+        text: `Écris ${item.n}/${item.d} sous forme décimale.`,
+        format: "short",
+        expected: [
+          decimalComma(item.dec),
+          String(item.dec),
+          fractionString(item.n, item.d),
+          fractionStringSpaced(item.n, item.d),
+        ],
+        comparator: "fraction_decimal_equivalent",
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "fraction_decimal_qcm_tpl_1",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "fractions",
+    microId: "fraction_decimal",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Une moitié vaut 0,5 ; un quart vaut 0,25.",
+    tags: ["fractions", "decimal", "qcm", "template"],
+    generate: () => {
+      const items = [
+        { frac: "1/2", good: "0,5", distractors: ["0,2", "0,25", "2,0"] },
+        { frac: "1/4", good: "0,25", distractors: ["0,4", "0,14", "0,75"] },
+        { frac: "3/4", good: "0,75", distractors: ["0,34", "0,5", "0,25"] },
+      ];
+      const item = items[Math.floor(Math.random() * items.length)];
+
+      return {
+        text: `Quelle écriture décimale correspond à ${item.frac} ?`,
+        format: "qcm",
+        choices: shuffle([item.good, ...item.distractors]),
+        expected: [item.good, item.good.replace(",", ".")],
+        comparator: "mcq_exact",
+      };
+    },
+  },
+
+  // =========================
+  // TEMPLATES - COMPARE
+  // =========================
   {
     kind: "template",
     id: "fraction_compare_tpl_1",
@@ -225,7 +882,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     difficulty: 2,
     theme: "neutral",
     hint: "Même dénominateur : compare les numérateurs.",
-    tags: ["comparaison", "fraction", "template"],
+    tags: ["fractions", "comparaison", "template"],
     generate: () => {
       const den = [3, 4, 5, 6, 8, 10][Math.floor(Math.random() * 6)];
       const a = 1 + Math.floor(Math.random() * (den - 2));
@@ -238,9 +895,9 @@ export const fractionsBank: TutorBankItemV4[] = [
       const max = Math.max(a, b);
 
       return {
-        text: `Compare ${a}/${den} et ${b}/${den} : lequel est le plus grand ?`,
+        text: `Compare ${a}/${den} et ${b}/${den} : laquelle est la plus grande ?`,
         format: "short",
-        expected: [`${max}/${den}`, `${max} / ${den}`],
+        expected: [fractionString(max, den), fractionStringSpaced(max, den)],
         comparator: "fraction_decimal_equivalent",
       };
     },
@@ -252,26 +909,30 @@ export const fractionsBank: TutorBankItemV4[] = [
     matiere: "maths",
     notionId: "fractions",
     microId: "fraction_compare",
-    difficulty: 2,
+    difficulty: 3,
     theme: "neutral",
-    hint: "Une moitié est souvent plus grande qu’une seule petite part.",
-    tags: ["comparaison", "fraction", "template"],
+    hint: "Tu peux penser à la valeur décimale.",
+    tags: ["fractions", "comparaison", "template"],
     generate: () => {
-      const den = [4, 6, 8, 10][Math.floor(Math.random() * 4)];
-      const a = 1;
-      const b = den / 2;
-      const good = "1/2";
+      const pairs = [
+        [{ n: 1, d: 2 }, { n: 3, d: 4 }],
+        [{ n: 1, d: 4 }, { n: 2, d: 3 }],
+        [{ n: 2, d: 5 }, { n: 1, d: 2 }],
+      ];
+      const pair = pairs[Math.floor(Math.random() * pairs.length)];
+      const left = pair[0];
+      const right = pair[1];
+
+      const leftVal = left.n / left.d;
+      const rightVal = right.n / right.d;
+      const good = leftVal > rightVal ? left : right;
 
       return {
-        text: `Compare ${a}/${den} et ${b}/${den} : lequel est le plus grand ?`,
+        text: `Compare ${left.n}/${left.d} et ${right.n}/${right.d} : laquelle est la plus grande ?`,
         format: "short",
         expected: [
-          good,
-          "1 / 2",
-          "0,5",
-          "0.5",
-          `${b}/${den}`,
-          `${b} / ${den}`,
+          fractionString(good.n, good.d),
+          fractionStringSpaced(good.n, good.d),
         ],
         comparator: "fraction_decimal_equivalent",
       };
@@ -287,7 +948,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     difficulty: 2,
     theme: "neutral",
     hint: "Quand les dénominateurs sont identiques, le plus grand numérateur donne la plus grande fraction.",
-    tags: ["comparaison", "fraction", "qcm", "template"],
+    tags: ["fractions", "comparaison", "qcm", "template"],
     generate: () => {
       const den = [4, 5, 6, 8][Math.floor(Math.random() * 4)];
       const nums = [1, 2, 3].filter((n) => n < den);
@@ -302,93 +963,71 @@ export const fractionsBank: TutorBankItemV4[] = [
         distractors.push(`1/${den + distractors.length + 1}`);
       }
 
-      const choices = shuffle([good, ...distractors.slice(0, 3)]);
-
       return {
         text: "Quelle fraction est la plus grande ?",
         format: "qcm",
-        choices,
+        choices: shuffle([good, ...distractors.slice(0, 3)]),
         expected: [good, good.replace("/", " / ")],
         comparator: "mcq_exact",
       };
     },
   },
+
+  // =========================
+  // TEMPLATES - DEFIS
+  // =========================
   {
     kind: "template",
-    id: "fraction_quantity_tpl_1",
+    id: "fraction_defis_tpl_1",
     niveau: "6e",
     matiere: "maths",
     notionId: "fractions",
-    microId: "fraction_quantity",
-    difficulty: 2,
+    microId: "fraction_defis",
+    difficulty: 4,
     theme: "neutral",
-    hint: "Partage la quantité en parts égales.",
-    tags: ["moitie", "quart", "quantite", "template"],
+    hint: "Pense au partage ou à la simplification.",
+    tags: ["fractions", "defi", "template"],
     generate: () => {
-      const base = [8, 10, 12, 16, 20][Math.floor(Math.random() * 5)];
-      const type = Math.random() > 0.5 ? "moitié" : "quart";
-      const expected = type === "moitié" ? String(base / 2) : String(base / 4);
+      const total = [8, 12, 16, 20, 24][Math.floor(Math.random() * 5)];
+      const den = [2, 3, 4][Math.floor(Math.random() * 3)];
+      const num = [1, 2, 3].filter((n) => n < den)[
+        Math.floor(Math.random() * [1, 2, 3].filter((n) => n < den).length)
+      ];
+      const expected = (total / den) * num;
 
       return {
-        text: `Le ${type} de ${base}, c'est combien ?`,
+        text: `Dans une boîte de ${total} objets, on prend ${num}/${den} de la boîte. Combien d’objets cela représente-t-il ?`,
         format: "short",
-        expected: [expected],
+        expected: [String(expected)],
         comparator: "number_equal",
       };
     },
   },
   {
     kind: "template",
-    id: "fraction_quantity_tpl_2",
+    id: "fraction_defis_tpl_2",
     niveau: "6e",
     matiere: "maths",
     notionId: "fractions",
-    microId: "fraction_quantity",
-    difficulty: 2,
+    microId: "fraction_defis",
+    difficulty: 5,
     theme: "neutral",
-    hint: "La moitié, c’est diviser par 2.",
-    tags: ["moitie", "quantite", "template"],
+    hint: "Cherche si les deux fractions représentent la même quantité.",
+    tags: ["fractions", "defi", "template", "qcm"],
     generate: () => {
-      const base = [12, 16, 20, 24][Math.floor(Math.random() * 4)];
-      const expected = String(base / 2);
+      const items = [
+        { a: [2, 4], b: [1, 2], answer: "oui" },
+        { a: [3, 6], b: [1, 2], answer: "oui" },
+        { a: [2, 5], b: [1, 2], answer: "non" },
+        { a: [3, 4], b: [2, 3], answer: "non" },
+      ];
+      const item = items[Math.floor(Math.random() * items.length)];
 
       return {
-        text: `Quelle est la moitié de ${base} ?`,
-        format: "short",
-        expected: [expected],
-        comparator: "number_equal",
-      };
-    },
-  },
-  {
-    kind: "template",
-    id: "fraction_quantity_qcm_tpl_1",
-    niveau: "6e",
-    matiere: "maths",
-    notionId: "fractions",
-    microId: "fraction_quantity",
-    difficulty: 2,
-    theme: "neutral",
-    hint: "Moitié = ÷2 ; quart = ÷4.",
-    tags: ["moitie", "quart", "qcm", "template"],
-    generate: () => {
-      const base = [8, 12, 16, 20][Math.floor(Math.random() * 4)];
-      const type = Math.random() > 0.5 ? "moitié" : "quart";
-      const good = type === "moitié" ? base / 2 : base / 4;
-
-      const distractors = Array.from(
-        new Set([good + 1, good + 2, base / 2, base / 4])
-      )
-        .filter((n) => n !== good)
-        .slice(0, 3);
-
-      const choices = shuffle([String(good), ...distractors.map(String)]);
-
-      return {
-        text: `Quel est le ${type} de ${base} ?`,
+        text: `Les fractions ${item.a[0]}/${item.a[1]} et ${item.b[0]}/${item.b[1]} représentent-elles la même quantité ?`,
         format: "qcm",
-        choices,
-        expected: [String(good)],
+        choices: shuffle(["oui", "non"]),
+        expected: [item.answer],
         comparator: "mcq_exact",
       };
     },
