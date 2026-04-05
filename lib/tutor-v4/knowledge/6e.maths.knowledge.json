@@ -3,27 +3,42 @@
   "classe": "6e",
   "matiere": "maths",
   "bo_competences": [
-    { "boId": "BO6N1", "label": "Utiliser et comparer des nombres décimaux" },
-    { "boId": "BO6N2", "label": "Comprendre les fractions simples" },
+    { "boId": "BO6N1", "label": "Utiliser et comparer des nombres" },
+    { "boId": "BO6N2", "label": "Comprendre fractions et pourcentages" },
     { "boId": "BO6N3", "label": "Résoudre des problèmes de proportionnalité" },
-    { "boId": "BO6G1", "label": "Calculer périmètres et aires" },
-    { "boId": "BO6G2", "label": "Comparer et identifier des angles" },
-    { "boId": "BO6G3", "label": "Reconnaître, décrire et utiliser les triangles" },
-    {
-      "boId": "BO6G4",
-      "label": "Reconnaître, décrire et utiliser les quadrilatères"
-    },
-    { "boId": "BO6N4", "label": "Pratiquer le calcul mental" }
+    { "boId": "BO6N4", "label": "Pratiquer le calcul mental et posé" },
+    { "boId": "BO6G1", "label": "Grandeurs et mesures" },
+    { "boId": "BO6G2", "label": "Angles" },
+    { "boId": "BO6G3", "label": "Triangles" },
+    { "boId": "BO6G4", "label": "Quadrilatères et symétrie" },
+    { "boId": "BO6D1", "label": "Données" },
+    { "boId": "BO6P1", "label": "Probabilités" }
   ],
   "notions": [
+    {
+      "id": "nombres_entiers",
+      "label": "Nombres entiers",
+      "boId": "BO6N1",
+      "prerequis": [],
+      "microTargets": [
+        "entier_lire_ecrire",
+        "entier_rang",
+        "entier_compare",
+        "entier_decomposer",
+        "entier_encadrer",
+        "entier_defis"
+      ],
+      "levels": [1, 2, 3]
+    },
     {
       "id": "decimaux",
       "label": "Nombres décimaux",
       "boId": "BO6N1",
-      "prerequis": [],
+      "prerequis": ["nombres_entiers"],
       "microTargets": [
+        "decimal_lire_ecrire",
+        "decimal_rang",
         "decimal_compare",
-        "decimal_write",
         "decimal_add",
         "decimal_multiply",
         "decimal_divide_by_integer",
@@ -37,9 +52,26 @@
       "boId": "BO6N2",
       "prerequis": ["decimaux"],
       "microTargets": [
-        "fraction_read",
+        "fraction_lire_ecrire",
+        "fraction_representer",
+        "fraction_quantite",
+        "fraction_decimal",
         "fraction_compare",
-        "fraction_quantity"
+        "fraction_defis"
+      ],
+      "levels": [1, 2, 3]
+    },
+    {
+      "id": "pourcentages",
+      "label": "Pourcentages",
+      "boId": "BO6N2",
+      "prerequis": ["fractions"],
+      "microTargets": [
+        "pourcentage_comprendre",
+        "pourcentage_fraction",
+        "pourcentage_decimal",
+        "pourcentage_calcul_simple",
+        "pourcentage_defis"
       ],
       "levels": [1, 2, 3]
     },
@@ -47,28 +79,96 @@
       "id": "proportionnalite",
       "label": "Proportionnalité",
       "boId": "BO6N3",
-      "prerequis": ["fractions"],
+      "prerequis": ["pourcentages"],
       "microTargets": [
+        "prop_reconnaitre",
         "prop_table",
+        "prop_coeff",
         "prop_unit",
-        "prop_direct"
+        "prop_direct",
+        "prop_defis"
       ],
       "levels": [1, 2, 3]
     },
     {
-      "id": "perimetre",
-      "label": "Périmètre",
+      "id": "calcul_pose",
+      "label": "Calcul posé",
+      "boId": "BO6N4",
+      "prerequis": ["nombres_entiers"],
+      "microTargets": [
+        "pose_addition",
+        "pose_soustraction",
+        "pose_multiplication",
+        "pose_division",
+        "pose_verifier",
+        "pose_defis"
+      ],
+      "levels": [1, 2, 3]
+    },
+    {
+      "id": "calcul_mental",
+      "label": "Calcul mental",
+      "boId": "BO6N4",
+      "prerequis": [],
+      "microTargets": [
+        "mental_addition",
+        "mental_subtraction",
+        "mental_multiplication",
+        "mental_division",
+        "mental_strategies",
+        "mental_defis"
+      ],
+      "levels": [1, 2, 3]
+    },
+    {
+      "id": "longueurs",
+      "label": "Longueurs",
       "boId": "BO6G1",
       "prerequis": [],
-      "microTargets": ["perim_square", "perim_rectangle"],
+      "microTargets": [
+        "longueur_mesurer",
+        "longueur_convertir",
+        "longueur_comparer",
+        "longueur_defis"
+      ],
+      "levels": [1, 2]
+    },
+    {
+      "id": "perimetres",
+      "label": "Périmètres",
+      "boId": "BO6G1",
+      "prerequis": ["longueurs"],
+      "microTargets": [
+        "perim_square",
+        "perim_rectangle",
+        "perim_figure",
+        "perim_defis"
+      ],
       "levels": [1, 2]
     },
     {
       "id": "aires",
       "label": "Aires",
       "boId": "BO6G1",
-      "prerequis": ["perimetre"],
-      "microTargets": ["area_rectangle", "area_square"],
+      "prerequis": ["perimetres"],
+      "microTargets": [
+        "area_rectangle",
+        "area_square",
+        "area_compter",
+        "area_defis"
+      ],
+      "levels": [1, 2]
+    },
+    {
+      "id": "volumes",
+      "label": "Volumes",
+      "boId": "BO6G1",
+      "prerequis": ["aires"],
+      "microTargets": [
+        "volume_compter",
+        "volume_comparer",
+        "volume_defis"
+      ],
       "levels": [1, 2]
     },
     {
@@ -76,7 +176,12 @@
       "label": "Angles",
       "boId": "BO6G2",
       "prerequis": [],
-      "microTargets": ["angle_right", "angle_compare"],
+      "microTargets": [
+        "angle_right",
+        "angle_compare",
+        "angle_mesurer",
+        "angle_defis"
+      ],
       "levels": [1, 2]
     },
     {
@@ -114,355 +219,45 @@
       "levels": [1, 2, 3]
     },
     {
-      "id": "calcul_mental",
-      "label": "Calcul mental",
-      "boId": "BO6N4",
+      "id": "symetrie",
+      "label": "Symétrie axiale",
+      "boId": "BO6G4",
+      "prerequis": ["angles"],
+      "microTargets": [
+        "sym_reconnaitre",
+        "sym_point",
+        "sym_figure",
+        "sym_defis"
+      ],
+      "levels": [1, 2]
+    },
+    {
+      "id": "donnees",
+      "label": "Données",
+      "boId": "BO6D1",
       "prerequis": [],
       "microTargets": [
-        "mental_addition",
-        "mental_subtraction",
-        "mental_multiplication",
-        "mental_division",
-        "mental_strategies",
-        "mental_defis"
+        "data_lire_tableau",
+        "data_lire_graphique",
+        "data_interpreter",
+        "data_defis"
       ],
-      "levels": [1, 2, 3]
+      "levels": [1, 2]
+    },
+    {
+      "id": "probabilites",
+      "label": "Probabilités",
+      "boId": "BO6P1",
+      "prerequis": ["donnees"],
+      "microTargets": [
+        "proba_vocabulaire",
+        "proba_comparer",
+        "proba_estimer",
+        "proba_defis"
+      ],
+      "levels": [1, 2]
     }
   ],
-  "microSkills": [
-    {
-      "id": "decimal_compare",
-      "label": "Comparer des nombres décimaux",
-      "notionId": "decimaux",
-      "boId": "BO6N1",
-      "prerequis": []
-    },
-    {
-      "id": "decimal_write",
-      "label": "Lire et écrire un nombre décimal",
-      "notionId": "decimaux",
-      "boId": "BO6N1",
-      "prerequis": []
-    },
-    {
-      "id": "decimal_add",
-      "label": "Additionner des nombres décimaux",
-      "notionId": "decimaux",
-      "boId": "BO6N1",
-      "prerequis": ["decimal_write"]
-    },
-    {
-      "id": "decimal_multiply",
-      "label": "Multiplier des nombres décimaux",
-      "notionId": "decimaux",
-      "boId": "BO6N1",
-      "prerequis": ["decimal_add"]
-    },
-    {
-      "id": "decimal_divide_by_integer",
-      "label": "Diviser un nombre décimal par un entier",
-      "notionId": "decimaux",
-      "boId": "BO6N1",
-      "prerequis": ["decimal_write"]
-    },
-    {
-      "id": "decimal_defis",
-      "label": "Résoudre des défis sur les nombres décimaux",
-      "notionId": "decimaux",
-      "boId": "BO6N1",
-      "prerequis": [
-        "decimal_compare",
-        "decimal_write",
-        "decimal_add",
-        "decimal_multiply",
-        "decimal_divide_by_integer"
-      ]
-    },
-
-    {
-      "id": "fraction_read",
-      "label": "Lire une fraction",
-      "notionId": "fractions",
-      "boId": "BO6N2",
-      "prerequis": ["decimal_write"]
-    },
-    {
-      "id": "fraction_compare",
-      "label": "Comparer deux fractions",
-      "notionId": "fractions",
-      "boId": "BO6N2",
-      "prerequis": ["decimal_compare"]
-    },
-    {
-      "id": "fraction_quantity",
-      "label": "Comprendre une fraction comme quantité",
-      "notionId": "fractions",
-      "boId": "BO6N2",
-      "prerequis": ["fraction_read"]
-    },
-
-    {
-      "id": "prop_table",
-      "label": "Compléter un tableau de proportionnalité",
-      "notionId": "proportionnalite",
-      "boId": "BO6N3",
-      "prerequis": ["fraction_quantity"]
-    },
-    {
-      "id": "prop_unit",
-      "label": "Passer par l’unité",
-      "notionId": "proportionnalite",
-      "boId": "BO6N3",
-      "prerequis": ["prop_table"]
-    },
-    {
-      "id": "prop_direct",
-      "label": "Résoudre une situation de proportionnalité",
-      "notionId": "proportionnalite",
-      "boId": "BO6N3",
-      "prerequis": ["prop_unit"]
-    },
-
-    {
-      "id": "perim_square",
-      "label": "Calculer le périmètre d’un carré",
-      "notionId": "perimetre",
-      "boId": "BO6G1",
-      "prerequis": []
-    },
-    {
-      "id": "perim_rectangle",
-      "label": "Calculer le périmètre d’un rectangle",
-      "notionId": "perimetre",
-      "boId": "BO6G1",
-      "prerequis": []
-    },
-
-    {
-      "id": "area_rectangle",
-      "label": "Calculer l’aire d’un rectangle",
-      "notionId": "aires",
-      "boId": "BO6G1",
-      "prerequis": ["perim_rectangle"]
-    },
-    {
-      "id": "area_square",
-      "label": "Calculer l’aire d’un carré",
-      "notionId": "aires",
-      "boId": "BO6G1",
-      "prerequis": ["perim_square"]
-    },
-
-    {
-      "id": "angle_right",
-      "label": "Identifier un angle droit",
-      "notionId": "angles",
-      "boId": "BO6G2",
-      "prerequis": []
-    },
-    {
-      "id": "angle_compare",
-      "label": "Comparer deux angles",
-      "notionId": "angles",
-      "boId": "BO6G2",
-      "prerequis": ["angle_right"]
-    },
-
-    {
-      "id": "triangle_name",
-      "label": "Nommer un triangle",
-      "notionId": "triangles",
-      "boId": "BO6G3",
-      "prerequis": []
-    },
-    {
-      "id": "triangle_vertices_sides",
-      "label": "Identifier sommets et côtés d’un triangle",
-      "notionId": "triangles",
-      "boId": "BO6G3",
-      "prerequis": ["triangle_name"]
-    },
-    {
-      "id": "triangle_type_sides",
-      "label": "Reconnaître un triangle selon ses côtés",
-      "notionId": "triangles",
-      "boId": "BO6G3",
-      "prerequis": ["triangle_vertices_sides"]
-    },
-    {
-      "id": "triangle_type_angles",
-      "label": "Reconnaître un triangle selon ses angles",
-      "notionId": "triangles",
-      "boId": "BO6G3",
-      "prerequis": ["angle_right", "angle_compare"]
-    },
-    {
-      "id": "triangle_angle_sum",
-      "label": "Utiliser la somme des angles d’un triangle",
-      "notionId": "triangles",
-      "boId": "BO6G3",
-      "prerequis": ["triangle_type_angles"]
-    },
-    {
-      "id": "triangle_missing_angle",
-      "label": "Calculer un angle manquant dans un triangle",
-      "notionId": "triangles",
-      "boId": "BO6G3",
-      "prerequis": ["triangle_angle_sum"]
-    },
-    {
-      "id": "triangle_possible_or_not",
-      "label": "Décider si un triangle est constructible",
-      "notionId": "triangles",
-      "boId": "BO6G3",
-      "prerequis": ["triangle_vertices_sides"]
-    },
-    {
-      "id": "triangle_defis",
-      "label": "Résoudre des défis sur les triangles",
-      "notionId": "triangles",
-      "boId": "BO6G3",
-      "prerequis": [
-        "triangle_type_sides",
-        "triangle_type_angles",
-        "triangle_angle_sum",
-        "triangle_missing_angle",
-        "triangle_possible_or_not"
-      ]
-    },
-
-    {
-      "id": "quadrilatere_nommer_vocabulaire",
-      "label": "Nommer un quadrilatère et utiliser le vocabulaire géométrique",
-      "notionId": "quadrilateres",
-      "boId": "BO6G4",
-      "prerequis": []
-    },
-    {
-      "id": "quadrilatere_identifier_nature",
-      "label": "Identifier la nature d’un quadrilatère",
-      "notionId": "quadrilateres",
-      "boId": "BO6G4",
-      "prerequis": ["quadrilatere_nommer_vocabulaire"]
-    },
-    {
-      "id": "quadrilatere_lire_proprietes",
-      "label": "Lire les propriétés d’un quadrilatère",
-      "notionId": "quadrilateres",
-      "boId": "BO6G4",
-      "prerequis": ["angle_right", "angle_compare", "quadrilatere_nommer_vocabulaire"]
-    },
-    {
-      "id": "quadrilatere_lien_proprietes",
-      "label": "Faire le lien entre propriétés et nature d’un quadrilatère",
-      "notionId": "quadrilateres",
-      "boId": "BO6G4",
-      "prerequis": [
-        "quadrilatere_identifier_nature",
-        "quadrilatere_lire_proprietes"
-      ]
-    },
-    {
-      "id": "quadrilatere_distinguer",
-      "label": "Distinguer carré, rectangle, losange et quadrilatère quelconque",
-      "notionId": "quadrilateres",
-      "boId": "BO6G4",
-      "prerequis": [
-        "quadrilatere_identifier_nature",
-        "quadrilatere_lien_proprietes"
-      ]
-    },
-    {
-      "id": "quadrilatere_conclusion",
-      "label": "Décider si les informations suffisent pour conclure",
-      "notionId": "quadrilateres",
-      "boId": "BO6G4",
-      "prerequis": [
-        "quadrilatere_lire_proprietes",
-        "quadrilatere_lien_proprietes",
-        "quadrilatere_distinguer"
-      ]
-    },
-    {
-      "id": "quadrilatere_completer_construire",
-      "label": "Compléter ou construire un quadrilatère à partir d’informations",
-      "notionId": "quadrilateres",
-      "boId": "BO6G4",
-      "prerequis": [
-        "quadrilatere_nommer_vocabulaire",
-        "quadrilatere_lire_proprietes",
-        "quadrilatere_lien_proprietes"
-      ]
-    },
-    {
-      "id": "quadrilatere_defis",
-      "label": "Résoudre des défis sur les quadrilatères",
-      "notionId": "quadrilateres",
-      "boId": "BO6G4",
-      "prerequis": [
-        "quadrilatere_nommer_vocabulaire",
-        "quadrilatere_identifier_nature",
-        "quadrilatere_lire_proprietes",
-        "quadrilatere_lien_proprietes",
-        "quadrilatere_distinguer",
-        "quadrilatere_conclusion",
-        "quadrilatere_completer_construire"
-      ]
-    },
-
-    {
-      "id": "mental_addition",
-      "label": "Calculer rapidement une addition",
-      "notionId": "calcul_mental",
-      "boId": "BO6N4",
-      "prerequis": []
-    },
-    {
-      "id": "mental_subtraction",
-      "label": "Calculer rapidement une soustraction",
-      "notionId": "calcul_mental",
-      "boId": "BO6N4",
-      "prerequis": ["mental_addition"]
-    },
-    {
-      "id": "mental_multiplication",
-      "label": "Calculer rapidement une multiplication",
-      "notionId": "calcul_mental",
-      "boId": "BO6N4",
-      "prerequis": ["mental_addition"]
-    },
-    {
-      "id": "mental_division",
-      "label": "Calculer rapidement une division",
-      "notionId": "calcul_mental",
-      "boId": "BO6N4",
-      "prerequis": ["mental_multiplication"]
-    },
-    {
-      "id": "mental_strategies",
-      "label": "Utiliser une stratégie de calcul mental",
-      "notionId": "calcul_mental",
-      "boId": "BO6N4",
-      "prerequis": [
-        "mental_addition",
-        "mental_subtraction",
-        "mental_multiplication",
-        "mental_division"
-      ]
-    },
-    {
-      "id": "mental_defis",
-      "label": "Résoudre des défis de calcul mental",
-      "notionId": "calcul_mental",
-      "boId": "BO6N4",
-      "prerequis": [
-        "mental_addition",
-        "mental_subtraction",
-        "mental_multiplication",
-        "mental_division",
-        "mental_strategies"
-      ]
-    }
-  ],
+  "microSkills": [],
   "microGraph": []
 }

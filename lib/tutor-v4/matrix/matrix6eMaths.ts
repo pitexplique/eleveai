@@ -6,54 +6,162 @@ import type { SkillMatrix, MatrixValue } from "@/lib/tutor-v4/types";
  * L'ordre doit correspondre exactement aux lignes/colonnes de la matrice.
  */
 export const microSkillIndex6eMaths = [
-  "decimal_compare",                     // 0
-  "decimal_write",                       // 1
-  "decimal_add",                         // 2
-  "decimal_multiply",                    // 3
-  "decimal_divide_by_integer",           // 4
-  "decimal_defis",                       // 5
+  // =========================
+  // NOMBRES ENTIERS
+  // =========================
+  "entier_lire_ecrire",                  // 0
+  "entier_rang",                         // 1
+  "entier_compare",                      // 2
+  "entier_decomposer",                   // 3
+  "entier_encadrer",                     // 4
+  "entier_defis",                        // 5
 
-  "fraction_read",                       // 6
-  "fraction_compare",                    // 7
-  "fraction_quantity",                   // 8
+  // =========================
+  // DECIMAUX
+  // =========================
+  "decimal_lire_ecrire",                 // 6
+  "decimal_rang",                        // 7
+  "decimal_compare",                     // 8
+  "decimal_add",                         // 9
+  "decimal_multiply",                    // 10
+  "decimal_divide_by_integer",           // 11
+  "decimal_defis",                       // 12
 
-  "prop_table",                          // 9
-  "prop_unit",                           // 10
-  "prop_direct",                         // 11
+  // =========================
+  // FRACTIONS
+  // =========================
+  "fraction_lire_ecrire",                // 13
+  "fraction_representer",                // 14
+  "fraction_quantite",                   // 15
+  "fraction_decimal",                    // 16
+  "fraction_compare",                    // 17
+  "fraction_defis",                      // 18
 
-  "perim_square",                        // 12
-  "perim_rectangle",                     // 13
+  // =========================
+  // POURCENTAGES
+  // =========================
+  "pourcentage_comprendre",              // 19
+  "pourcentage_fraction",                // 20
+  "pourcentage_decimal",                 // 21
+  "pourcentage_calcul_simple",           // 22
+  "pourcentage_defis",                   // 23
 
-  "area_rectangle",                      // 14
-  "area_square",                         // 15
+  // =========================
+  // PROPORTIONNALITE
+  // =========================
+  "prop_reconnaitre",                    // 24
+  "prop_table",                          // 25
+  "prop_coeff",                          // 26
+  "prop_unit",                           // 27
+  "prop_direct",                         // 28
+  "prop_defis",                          // 29
 
-  "angle_right",                         // 16
-  "angle_compare",                       // 17
+  // =========================
+  // CALCUL POSE
+  // =========================
+  "pose_addition",                       // 30
+  "pose_soustraction",                   // 31
+  "pose_multiplication",                 // 32
+  "pose_division",                       // 33
+  "pose_verifier",                       // 34
+  "pose_defis",                          // 35
 
-  "triangle_name",                       // 18
-  "triangle_vertices_sides",             // 19
-  "triangle_type_sides",                 // 20
-  "triangle_type_angles",                // 21
-  "triangle_angle_sum",                  // 22
-  "triangle_missing_angle",              // 23
-  "triangle_possible_or_not",            // 24
-  "triangle_defis",                      // 25
+  // =========================
+  // CALCUL MENTAL
+  // =========================
+  "mental_addition",                     // 36
+  "mental_subtraction",                  // 37
+  "mental_multiplication",               // 38
+  "mental_division",                     // 39
+  "mental_strategies",                   // 40
+  "mental_defis",                        // 41
 
-  "quadrilatere_nommer_vocabulaire",     // 26
-  "quadrilatere_identifier_nature",      // 27
-  "quadrilatere_lire_proprietes",        // 28
-  "quadrilatere_lien_proprietes",        // 29
-  "quadrilatere_distinguer",             // 30
-  "quadrilatere_conclusion",             // 31
-  "quadrilatere_completer_construire",   // 32
-  "quadrilatere_defis",                  // 33
+  // =========================
+  // LONGUEURS
+  // =========================
+  "longueur_mesurer",                    // 42
+  "longueur_convertir",                  // 43
+  "longueur_comparer",                   // 44
+  "longueur_defis",                      // 45
 
-  "mental_addition",                     // 34
-  "mental_subtraction",                  // 35
-  "mental_multiplication",               // 36
-  "mental_division",                     // 37
-  "mental_strategies",                   // 38
-  "mental_defis",                        // 39
+  // =========================
+  // PERIMETRES
+  // =========================
+  "perim_square",                        // 46
+  "perim_rectangle",                     // 47
+  "perim_figure",                        // 48
+  "perim_defis",                         // 49
+
+  // =========================
+  // AIRES
+  // =========================
+  "area_rectangle",                      // 50
+  "area_square",                         // 51
+  "area_compter",                        // 52
+  "area_defis",                          // 53
+
+  // =========================
+  // VOLUMES
+  // =========================
+  "volume_compter",                      // 54
+  "volume_comparer",                     // 55
+  "volume_defis",                        // 56
+
+  // =========================
+  // ANGLES
+  // =========================
+  "angle_right",                         // 57
+  "angle_compare",                       // 58
+  "angle_mesurer",                       // 59
+  "angle_defis",                         // 60
+
+  // =========================
+  // TRIANGLES
+  // =========================
+  "triangle_name",                       // 61
+  "triangle_vertices_sides",             // 62
+  "triangle_type_sides",                 // 63
+  "triangle_type_angles",                // 64
+  "triangle_angle_sum",                  // 65
+  "triangle_missing_angle",              // 66
+  "triangle_possible_or_not",            // 67
+  "triangle_defis",                      // 68
+
+  // =========================
+  // QUADRILATERES
+  // =========================
+  "quadrilatere_nommer_vocabulaire",     // 69
+  "quadrilatere_identifier_nature",      // 70
+  "quadrilatere_lire_proprietes",        // 71
+  "quadrilatere_lien_proprietes",        // 72
+  "quadrilatere_distinguer",             // 73
+  "quadrilatere_conclusion",             // 74
+  "quadrilatere_completer_construire",   // 75
+  "quadrilatere_defis",                  // 76
+
+  // =========================
+  // SYMETRIE
+  // =========================
+  "sym_reconnaitre",                     // 77
+  "sym_point",                           // 78
+  "sym_figure",                          // 79
+  "sym_defis",                           // 80
+
+  // =========================
+  // DONNEES
+  // =========================
+  "data_lire_tableau",                   // 81
+  "data_lire_graphique",                 // 82
+  "data_interpreter",                    // 83
+  "data_defis",                          // 84
+
+  // =========================
+  // PROBABILITES
+  // =========================
+  "proba_vocabulaire",                   // 85
+  "proba_comparer",                      // 86
+  "proba_estimer",                       // 87
+  "proba_defis",                         // 88
 ] as const;
 
 /**
@@ -64,30 +172,185 @@ export const microSkillIndex6eMaths = [
  * - M[B][A] = -2
  */
 const directParents: Record<string, string[]> = {
-  decimal_add: ["decimal_write"],
+  // =========================
+  // NOMBRES ENTIERS
+  // =========================
+  entier_rang: ["entier_lire_ecrire"],
+  entier_compare: ["entier_lire_ecrire"],
+  entier_decomposer: ["entier_rang"],
+  entier_encadrer: ["entier_compare"],
+  entier_defis: [
+    "entier_lire_ecrire",
+    "entier_rang",
+    "entier_compare",
+    "entier_decomposer",
+    "entier_encadrer",
+  ],
+
+  // =========================
+  // DECIMAUX
+  // =========================
+  decimal_lire_ecrire: ["entier_lire_ecrire"],
+  decimal_rang: ["decimal_lire_ecrire"],
+  decimal_compare: ["decimal_rang"],
+  decimal_add: ["decimal_lire_ecrire"],
   decimal_multiply: ["decimal_add"],
-  decimal_divide_by_integer: ["decimal_write"],
+  decimal_divide_by_integer: ["decimal_lire_ecrire"],
   decimal_defis: [
+    "decimal_lire_ecrire",
+    "decimal_rang",
     "decimal_compare",
-    "decimal_write",
     "decimal_add",
     "decimal_multiply",
     "decimal_divide_by_integer",
   ],
 
-  fraction_read: ["decimal_write"],
-  fraction_compare: ["decimal_compare"],
-  fraction_quantity: ["fraction_read"],
+  // =========================
+  // FRACTIONS
+  // =========================
+  fraction_lire_ecrire: ["decimal_lire_ecrire"],
+  fraction_representer: ["fraction_lire_ecrire"],
+  fraction_quantite: ["fraction_representer"],
+  fraction_decimal: ["fraction_quantite", "decimal_lire_ecrire"],
+  fraction_compare: ["fraction_lire_ecrire"],
+  fraction_defis: [
+    "fraction_lire_ecrire",
+    "fraction_representer",
+    "fraction_quantite",
+    "fraction_decimal",
+    "fraction_compare",
+  ],
 
-  prop_table: ["fraction_quantity"],
+  // =========================
+  // POURCENTAGES
+  // =========================
+  pourcentage_comprendre: ["fraction_quantite"],
+  pourcentage_fraction: ["pourcentage_comprendre"],
+  pourcentage_decimal: ["pourcentage_fraction", "fraction_decimal"],
+  pourcentage_calcul_simple: ["pourcentage_decimal"],
+  pourcentage_defis: [
+    "pourcentage_comprendre",
+    "pourcentage_fraction",
+    "pourcentage_decimal",
+    "pourcentage_calcul_simple",
+  ],
+
+  // =========================
+  // PROPORTIONNALITE
+  // =========================
+  prop_reconnaitre: ["pourcentage_comprendre"],
+  prop_table: ["prop_reconnaitre"],
+  prop_coeff: ["prop_table"],
   prop_unit: ["prop_table"],
-  prop_direct: ["prop_unit"],
+  prop_direct: ["prop_coeff", "prop_unit"],
+  prop_defis: [
+    "prop_reconnaitre",
+    "prop_table",
+    "prop_coeff",
+    "prop_unit",
+    "prop_direct",
+  ],
 
-  area_rectangle: ["perim_rectangle"],
-  area_square: ["perim_square"],
+  // =========================
+  // CALCUL POSE
+  // =========================
+  pose_addition: ["entier_lire_ecrire"],
+  pose_soustraction: ["pose_addition"],
+  pose_multiplication: ["pose_addition"],
+  pose_division: ["pose_multiplication"],
+  pose_verifier: [
+    "pose_addition",
+    "pose_soustraction",
+    "pose_multiplication",
+    "pose_division",
+  ],
+  pose_defis: [
+    "pose_addition",
+    "pose_soustraction",
+    "pose_multiplication",
+    "pose_division",
+    "pose_verifier",
+  ],
 
+  // =========================
+  // CALCUL MENTAL
+  // =========================
+  mental_subtraction: ["mental_addition"],
+  mental_multiplication: ["mental_addition"],
+  mental_division: ["mental_multiplication"],
+  mental_strategies: [
+    "mental_addition",
+    "mental_subtraction",
+    "mental_multiplication",
+    "mental_division",
+  ],
+  mental_defis: [
+    "mental_addition",
+    "mental_subtraction",
+    "mental_multiplication",
+    "mental_division",
+    "mental_strategies",
+  ],
+
+  // =========================
+  // LONGUEURS
+  // =========================
+  longueur_convertir: ["longueur_mesurer"],
+  longueur_comparer: ["longueur_mesurer"],
+  longueur_defis: [
+    "longueur_mesurer",
+    "longueur_convertir",
+    "longueur_comparer",
+  ],
+
+  // =========================
+  // PERIMETRES
+  // =========================
+  perim_square: ["longueur_mesurer"],
+  perim_rectangle: ["longueur_mesurer"],
+  perim_figure: ["perim_square", "perim_rectangle"],
+  perim_defis: [
+    "perim_square",
+    "perim_rectangle",
+    "perim_figure",
+  ],
+
+  // =========================
+  // AIRES
+  // =========================
+  area_compter: ["perim_figure"],
+  area_rectangle: ["area_compter", "perim_rectangle"],
+  area_square: ["area_compter", "perim_square"],
+  area_defis: [
+    "area_rectangle",
+    "area_square",
+    "area_compter",
+  ],
+
+  // =========================
+  // VOLUMES
+  // =========================
+  volume_compter: ["area_compter"],
+  volume_comparer: ["volume_compter"],
+  volume_defis: [
+    "volume_compter",
+    "volume_comparer",
+  ],
+
+  // =========================
+  // ANGLES
+  // =========================
   angle_compare: ["angle_right"],
+  angle_mesurer: ["angle_right"],
+  angle_defis: [
+    "angle_right",
+    "angle_compare",
+    "angle_mesurer",
+  ],
 
+  // =========================
+  // TRIANGLES
+  // =========================
   triangle_vertices_sides: ["triangle_name"],
   triangle_type_sides: ["triangle_vertices_sides"],
   triangle_type_angles: ["angle_right", "angle_compare"],
@@ -102,6 +365,9 @@ const directParents: Record<string, string[]> = {
     "triangle_possible_or_not",
   ],
 
+  // =========================
+  // QUADRILATERES
+  // =========================
   quadrilatere_identifier_nature: ["quadrilatere_nommer_vocabulaire"],
   quadrilatere_lire_proprietes: [
     "angle_right",
@@ -136,21 +402,37 @@ const directParents: Record<string, string[]> = {
     "quadrilatere_completer_construire",
   ],
 
-  mental_subtraction: ["mental_addition"],
-  mental_multiplication: ["mental_addition"],
-  mental_division: ["mental_multiplication"],
-  mental_strategies: [
-    "mental_addition",
-    "mental_subtraction",
-    "mental_multiplication",
-    "mental_division",
+  // =========================
+  // SYMETRIE
+  // =========================
+  sym_point: ["sym_reconnaitre"],
+  sym_figure: ["sym_point"],
+  sym_defis: [
+    "sym_reconnaitre",
+    "sym_point",
+    "sym_figure",
   ],
-  mental_defis: [
-    "mental_addition",
-    "mental_subtraction",
-    "mental_multiplication",
-    "mental_division",
-    "mental_strategies",
+
+  // =========================
+  // DONNEES
+  // =========================
+  data_lire_graphique: ["data_lire_tableau"],
+  data_interpreter: ["data_lire_tableau", "data_lire_graphique"],
+  data_defis: [
+    "data_lire_tableau",
+    "data_lire_graphique",
+    "data_interpreter",
+  ],
+
+  // =========================
+  // PROBABILITES
+  // =========================
+  proba_comparer: ["proba_vocabulaire"],
+  proba_estimer: ["proba_comparer"],
+  proba_defis: [
+    "proba_vocabulaire",
+    "proba_comparer",
+    "proba_estimer",
   ],
 };
 
@@ -160,14 +442,33 @@ const directParents: Record<string, string[]> = {
  * On générera :
  * - M[A][B] = 1
  * - M[B][A] = -1
- *
- * Tu peux en ajouter plus tard si tu veux enrichir.
  */
 const supportLinks: Record<string, string[]> = {
-  fraction_read: ["decimal_add", "decimal_multiply"],
+  decimal_compare: ["entier_compare"],
+  decimal_add: ["mental_addition"],
+  decimal_multiply: ["mental_multiplication"],
+  decimal_divide_by_integer: ["mental_division"],
+
+  fraction_decimal: ["decimal_compare"],
+  fraction_compare: ["decimal_compare"],
+
+  pourcentage_decimal: ["decimal_multiply"],
+  pourcentage_calcul_simple: ["mental_multiplication"],
+
   prop_table: ["mental_multiplication"],
   prop_unit: ["mental_division"],
+
+  pose_verifier: ["mental_strategies"],
+
+  perim_figure: ["longueur_comparer"],
+  area_compter: ["perim_figure"],
+  triangle_possible_or_not: ["longueur_comparer"],
+
   quadrilatere_lire_proprietes: ["triangle_vertices_sides"],
+  sym_reconnaitre: ["quadrilatere_identifier_nature"],
+
+  data_interpreter: ["entier_compare"],
+  proba_estimer: ["data_interpreter"],
 };
 
 /**

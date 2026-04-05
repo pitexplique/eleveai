@@ -15,8 +15,8 @@ import QuadrilatereCanvas from "@/lib/tutor-v4/components/QuadrilatereCanvas";
 import {
   NOTION_MICRO_MAP,
   NOTION_OPTIONS,
-  microLabel,
   notionLabel,
+  microLabel,
 } from "@/lib/tutor-v4/catalog";
 import type {
   HiddenStarState,
