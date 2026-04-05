@@ -9,159 +9,177 @@ export const microSkillIndex6eMaths = [
   // =========================
   // NOMBRES ENTIERS
   // =========================
-  "entier_lire_ecrire",                  // 0
-  "entier_rang",                         // 1
-  "entier_compare",                      // 2
-  "entier_decomposer",                   // 3
-  "entier_encadrer",                     // 4
-  "entier_defis",                        // 5
+  "entier_lire_ecrire", // 0
+  "entier_rang", // 1
+  "entier_compare", // 2
+  "entier_decomposer", // 3
+  "entier_encadrer", // 4
+  "entier_defis", // 5
 
   // =========================
   // DECIMAUX
   // =========================
-  "decimal_lire_ecrire",                 // 6
-  "decimal_rang",                        // 7
-  "decimal_compare",                     // 8
-  "decimal_add",                         // 9
-  "decimal_multiply",                    // 10
-  "decimal_divide_by_integer",           // 11
-  "decimal_defis",                       // 12
+  "decimal_lire_ecrire", // 6
+  "decimal_rang", // 7
+  "decimal_compare", // 8
+  "decimal_add", // 9
+  "decimal_multiply", // 10
+  "decimal_divide_by_integer", // 11
+  "decimal_defis", // 12
 
   // =========================
   // FRACTIONS
   // =========================
-  "fraction_lire_ecrire",                // 13
-  "fraction_representer",                // 14
-  "fraction_quantite",                   // 15
-  "fraction_decimal",                    // 16
-  "fraction_compare",                    // 17
-  "fraction_defis",                      // 18
+  "fraction_lire_ecrire", // 13
+  "fraction_representer", // 14
+  "fraction_quantite", // 15
+  "fraction_decimal", // 16
+  "fraction_compare", // 17
+  "fraction_defis", // 18
 
   // =========================
   // POURCENTAGES
   // =========================
-  "pourcentage_comprendre",              // 19
-  "pourcentage_fraction",                // 20
-  "pourcentage_decimal",                 // 21
-  "pourcentage_calcul_simple",           // 22
-  "pourcentage_defis",                   // 23
+  "pourcentage_comprendre", // 19
+  "pourcentage_fraction", // 20
+  "pourcentage_decimal", // 21
+  "pourcentage_lire", // 22
+  "pourcentage_calcul_simple", // 23
+  "pourcentage_defis", // 24
 
   // =========================
   // PROPORTIONNALITE
   // =========================
-  "prop_reconnaitre",                    // 24
-  "prop_table",                          // 25
-  "prop_coeff",                          // 26
-  "prop_unit",                           // 27
-  "prop_direct",                         // 28
-  "prop_defis",                          // 29
+  "prop_reconnaitre", // 25
+  "prop_table", // 26
+  "prop_coeff", // 27
+  "prop_unit", // 28
+  "prop_direct", // 29
+  "prop_defis", // 30
 
   // =========================
   // CALCUL POSE
   // =========================
-  "pose_addition",                       // 30
-  "pose_soustraction",                   // 31
-  "pose_multiplication",                 // 32
-  "pose_division",                       // 33
-  "pose_verifier",                       // 34
-  "pose_defis",                          // 35
+  "pose_addition", // 31
+  "pose_soustraction", // 32
+  "pose_multiplication", // 33
+  "pose_division", // 34
+  "pose_verifier", // 35
+  "pose_defis", // 36
 
   // =========================
   // CALCUL MENTAL
   // =========================
-  "mental_addition",                     // 36
-  "mental_subtraction",                  // 37
-  "mental_multiplication",               // 38
-  "mental_division",                     // 39
-  "mental_strategies",                   // 40
-  "mental_defis",                        // 41
+  "mental_addition", // 37
+  "mental_subtraction", // 38
+  "mental_multiplication", // 39
+  "mental_division", // 40
+  "mental_strategies", // 41
+  "mental_defis", // 42
 
   // =========================
   // LONGUEURS
   // =========================
-  "longueur_mesurer",                    // 42
-  "longueur_convertir",                  // 43
-  "longueur_comparer",                   // 44
-  "longueur_defis",                      // 45
+  "longueur_mesurer", // 43
+  "longueur_unites", // 44
+  "longueur_convertir", // 45
+  "longueur_comparer", // 46
+  "longueur_probleme", // 47
+  "longueur_defis", // 48
 
   // =========================
   // PERIMETRES
   // =========================
-  "perim_square",                        // 46
-  "perim_rectangle",                     // 47
-  "perim_figure",                        // 48
-  "perim_defis",                         // 49
+  "perim_comprendre", // 49
+  "perim_square", // 50
+  "perim_rectangle", // 51
+  "perim_figure", // 52
+  "perim_probleme", // 53
+  "perim_defis", // 54
 
   // =========================
   // AIRES
   // =========================
-  "area_rectangle",                      // 50
-  "area_square",                         // 51
-  "area_compter",                        // 52
-  "area_defis",                          // 53
+  "area_comprendre", // 55
+  "area_rectangle", // 56
+  "area_square", // 57
+  "area_compter", // 58
+  "area_comparer", // 59
+  "area_defis", // 60
 
   // =========================
   // VOLUMES
   // =========================
-  "volume_compter",                      // 54
-  "volume_comparer",                     // 55
-  "volume_defis",                        // 56
+  "volume_unite", // 61
+  "volume_compter", // 62
+  "volume_comparer", // 63
+  "volume_assemblage", // 64
+  "volume_lire", // 65
+  "volume_defis", // 66
 
   // =========================
   // ANGLES
   // =========================
-  "angle_right",                         // 57
-  "angle_compare",                       // 58
-  "angle_mesurer",                       // 59
-  "angle_defis",                         // 60
+  "angle_reconnaitre", // 67
+  "angle_right", // 68
+  "angle_compare", // 69
+  "angle_mesurer", // 70
+  "angle_tracer", // 71
+  "angle_defis", // 72
 
   // =========================
   // TRIANGLES
   // =========================
-  "triangle_name",                       // 61
-  "triangle_vertices_sides",             // 62
-  "triangle_type_sides",                 // 63
-  "triangle_type_angles",                // 64
-  "triangle_angle_sum",                  // 65
-  "triangle_missing_angle",              // 66
-  "triangle_possible_or_not",            // 67
-  "triangle_defis",                      // 68
+  "triangle_name", // 73
+  "triangle_vertices_sides", // 74
+  "triangle_type_sides", // 75
+  "triangle_type_angles", // 76
+  "triangle_angle_sum", // 77
+  "triangle_missing_angle", // 78
+  "triangle_possible_or_not", // 79
+  "triangle_defis", // 80
 
   // =========================
   // QUADRILATERES
   // =========================
-  "quadrilatere_nommer_vocabulaire",     // 69
-  "quadrilatere_identifier_nature",      // 70
-  "quadrilatere_lire_proprietes",        // 71
-  "quadrilatere_lien_proprietes",        // 72
-  "quadrilatere_distinguer",             // 73
-  "quadrilatere_conclusion",             // 74
-  "quadrilatere_completer_construire",   // 75
-  "quadrilatere_defis",                  // 76
+  "quadrilatere_nommer_vocabulaire", // 81
+  "quadrilatere_identifier_nature", // 82
+  "quadrilatere_lire_proprietes", // 83
+  "quadrilatere_lien_proprietes", // 84
+  "quadrilatere_distinguer", // 85
+  "quadrilatere_conclusion", // 86
+  "quadrilatere_completer_construire", // 87
+  "quadrilatere_defis", // 88
 
   // =========================
   // SYMETRIE
   // =========================
-  "sym_reconnaitre",                     // 77
-  "sym_point",                           // 78
-  "sym_figure",                          // 79
-  "sym_defis",                           // 80
+  "sym_reconnaitre", // 89
+  "sym_point", // 90
+  "sym_figure", // 91
+  "sym_proprietes", // 92
+  "sym_axes", // 93
+  "sym_defis", // 94
 
   // =========================
   // DONNEES
   // =========================
-  "data_lire_tableau",                   // 81
-  "data_lire_graphique",                 // 82
-  "data_interpreter",                    // 83
-  "data_defis",                          // 84
+  "data_lire_tableau", // 95
+  "data_lire_graphique", // 96
+  "data_prelever", // 97
+  "data_comparer", // 98
+  "data_interpreter", // 99
+  "data_defis", // 100
 
   // =========================
   // PROBABILITES
   // =========================
-  "proba_vocabulaire",                   // 85
-  "proba_comparer",                      // 86
-  "proba_estimer",                       // 87
-  "proba_defis",                         // 88
+  "proba_vocabulaire", // 101
+  "proba_comparer", // 102
+  "proba_issue", // 103
+  "proba_estimer", // 104
+  "proba_lire", // 105
+  "proba_defis", // 106
 ] as const;
 
 /**
@@ -227,11 +245,13 @@ const directParents: Record<string, string[]> = {
   pourcentage_comprendre: ["fraction_quantite"],
   pourcentage_fraction: ["pourcentage_comprendre"],
   pourcentage_decimal: ["pourcentage_fraction", "fraction_decimal"],
+  pourcentage_lire: ["pourcentage_comprendre"],
   pourcentage_calcul_simple: ["pourcentage_decimal"],
   pourcentage_defis: [
     "pourcentage_comprendre",
     "pourcentage_fraction",
     "pourcentage_decimal",
+    "pourcentage_lire",
     "pourcentage_calcul_simple",
   ],
 
@@ -295,57 +315,80 @@ const directParents: Record<string, string[]> = {
   // =========================
   // LONGUEURS
   // =========================
-  longueur_convertir: ["longueur_mesurer"],
+  longueur_unites: ["longueur_mesurer"],
+  longueur_convertir: ["longueur_unites"],
   longueur_comparer: ["longueur_mesurer"],
+  longueur_probleme: ["longueur_convertir", "longueur_comparer"],
   longueur_defis: [
     "longueur_mesurer",
+    "longueur_unites",
     "longueur_convertir",
     "longueur_comparer",
+    "longueur_probleme",
   ],
 
   // =========================
   // PERIMETRES
   // =========================
-  perim_square: ["longueur_mesurer"],
-  perim_rectangle: ["longueur_mesurer"],
+  perim_comprendre: ["longueur_mesurer"],
+  perim_square: ["perim_comprendre"],
+  perim_rectangle: ["perim_comprendre"],
   perim_figure: ["perim_square", "perim_rectangle"],
+  perim_probleme: ["perim_figure"],
   perim_defis: [
+    "perim_comprendre",
     "perim_square",
     "perim_rectangle",
     "perim_figure",
+    "perim_probleme",
   ],
 
   // =========================
   // AIRES
   // =========================
-  area_compter: ["perim_figure"],
+  area_comprendre: ["perim_comprendre"],
+  area_compter: ["area_comprendre"],
   area_rectangle: ["area_compter", "perim_rectangle"],
   area_square: ["area_compter", "perim_square"],
+  area_comparer: ["area_rectangle", "area_square"],
   area_defis: [
+    "area_comprendre",
     "area_rectangle",
     "area_square",
     "area_compter",
+    "area_comparer",
   ],
 
   // =========================
   // VOLUMES
   // =========================
-  volume_compter: ["area_compter"],
+  volume_unite: ["area_comprendre"],
+  volume_compter: ["volume_unite", "area_compter"],
   volume_comparer: ["volume_compter"],
+  volume_assemblage: ["volume_compter"],
+  volume_lire: ["volume_compter"],
   volume_defis: [
+    "volume_unite",
     "volume_compter",
     "volume_comparer",
+    "volume_assemblage",
+    "volume_lire",
   ],
 
   // =========================
   // ANGLES
   // =========================
+  angle_reconnaitre: [],
+  angle_right: ["angle_reconnaitre"],
   angle_compare: ["angle_right"],
-  angle_mesurer: ["angle_right"],
+  angle_mesurer: ["angle_reconnaitre"],
+  angle_tracer: ["angle_mesurer"],
   angle_defis: [
+    "angle_reconnaitre",
     "angle_right",
     "angle_compare",
     "angle_mesurer",
+    "angle_tracer",
   ],
 
   // =========================
@@ -407,20 +450,28 @@ const directParents: Record<string, string[]> = {
   // =========================
   sym_point: ["sym_reconnaitre"],
   sym_figure: ["sym_point"],
+  sym_proprietes: ["sym_figure"],
+  sym_axes: ["sym_reconnaitre"],
   sym_defis: [
     "sym_reconnaitre",
     "sym_point",
     "sym_figure",
+    "sym_proprietes",
+    "sym_axes",
   ],
 
   // =========================
   // DONNEES
   // =========================
   data_lire_graphique: ["data_lire_tableau"],
-  data_interpreter: ["data_lire_tableau", "data_lire_graphique"],
+  data_prelever: ["data_lire_tableau", "data_lire_graphique"],
+  data_comparer: ["data_prelever"],
+  data_interpreter: ["data_prelever", "data_comparer"],
   data_defis: [
     "data_lire_tableau",
     "data_lire_graphique",
+    "data_prelever",
+    "data_comparer",
     "data_interpreter",
   ],
 
@@ -428,11 +479,15 @@ const directParents: Record<string, string[]> = {
   // PROBABILITES
   // =========================
   proba_comparer: ["proba_vocabulaire"],
+  proba_issue: ["proba_vocabulaire"],
   proba_estimer: ["proba_comparer"],
+  proba_lire: ["proba_issue"],
   proba_defis: [
     "proba_vocabulaire",
     "proba_comparer",
+    "proba_issue",
     "proba_estimer",
+    "proba_lire",
   ],
 };
 
@@ -460,8 +515,12 @@ const supportLinks: Record<string, string[]> = {
 
   pose_verifier: ["mental_strategies"],
 
+  longueur_probleme: ["entier_compare"],
   perim_figure: ["longueur_comparer"],
+  perim_probleme: ["longueur_probleme"],
   area_compter: ["perim_figure"],
+  area_comparer: ["longueur_comparer"],
+  volume_lire: ["data_lire_tableau"],
   triangle_possible_or_not: ["longueur_comparer"],
 
   quadrilatere_lire_proprietes: ["triangle_vertices_sides"],
@@ -469,6 +528,7 @@ const supportLinks: Record<string, string[]> = {
 
   data_interpreter: ["entier_compare"],
   proba_estimer: ["data_interpreter"],
+  proba_lire: ["data_interpreter"],
 };
 
 /**
@@ -513,7 +573,6 @@ function buildMatrix(
       const supportIndex = indexMap.get(supportId);
       if (supportIndex === undefined) continue;
 
-      // on n’écrase pas un lien fort
       if (matrix[childIndex][supportIndex] === 0) {
         matrix[childIndex][supportIndex] = 1;
         matrix[supportIndex][childIndex] = -1;
