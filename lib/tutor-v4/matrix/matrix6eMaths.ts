@@ -1,5 +1,5 @@
 // loaders/matrix/matrix6eMaths.ts
-import type { SkillMatrix } from "@/lib/tutor-v4/types";
+import type { SkillMatrix, MatrixValue } from "@/lib/tutor-v4/types";
 
 /**
  * Ordre des micro-compétences.
@@ -57,67 +57,182 @@ export const microSkillIndex6eMaths = [
 ] as const;
 
 /**
- * Convention :
- * M[i][j] > 0  => j est parent de i
- * M[i][j] < 0  => j est enfant de i
+ * Liens forts :
+ * si A dépend de B, alors B est parent direct de A.
+ * On générera :
+ * - M[A][B] = 2
+ * - M[B][A] = -2
  */
-export const matrix6eMathsValues = [
-  //   0   1   2   3   4   5   6   7   8   9   10  11  12  13  14  15  16  17  18  19  20  21  22  23  24  25  26  27  28  29  30  31  32  33  34  35  36  37  38  39
+const directParents: Record<string, string[]> = {
+  decimal_add: ["decimal_write"],
+  decimal_multiply: ["decimal_add"],
+  decimal_divide_by_integer: ["decimal_write"],
+  decimal_defis: [
+    "decimal_compare",
+    "decimal_write",
+    "decimal_add",
+    "decimal_multiply",
+    "decimal_divide_by_integer",
+  ],
 
-  [  0,  0,  0,  0,  0, -2,  0, -2,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0 ], // decimal_compare
-  [  0,  0, -2,  0, -2, -2, -2,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0 ], // decimal_write
-  [  0,  2,  0, -2,  0, -2, -1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  1,  0,  0,  0,  0,  0 ], // decimal_add
-  [  0,  0,  2,  0,  0, -2, -1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  1,  0,  0,  0 ], // decimal_multiply
-  [  0,  2,  0,  0,  0, -2, -1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  1,  0,  0 ], // decimal_divide_by_integer
-  [  2,  2,  2,  2,  2,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0 ], // decimal_defis
+  fraction_read: ["decimal_write"],
+  fraction_compare: ["decimal_compare"],
+  fraction_quantity: ["fraction_read"],
 
-  [  0,  2,  1,  1,  1,  0,  0,  0, -2,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0 ], // fraction_read
-  [  2,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0 ], // fraction_compare
-  [  0,  0,  0,  0,  0,  0,  2,  0,  0, -2,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0 ], // fraction_quantity
+  prop_table: ["fraction_quantity"],
+  prop_unit: ["prop_table"],
+  prop_direct: ["prop_unit"],
 
-  [  0,  0,  0,  0,  0,  0,  0,  0,  2,  0, -2,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  1,  0,  0,  0 ], // prop_table
-  [  0,  0,  0,  0,  0,  0,  0,  0,  0,  2,  0, -2,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  1,  0,  0 ], // prop_unit
-  [  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  2,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0 ], // prop_direct
+  area_rectangle: ["perim_rectangle"],
+  area_square: ["perim_square"],
 
-  [  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, -2,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0 ], // perim_square
-  [  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, -2,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0 ], // perim_rectangle
+  angle_compare: ["angle_right"],
 
-  [  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  2,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0 ], // area_rectangle
-  [  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  2,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0 ], // area_square
+  triangle_vertices_sides: ["triangle_name"],
+  triangle_type_sides: ["triangle_vertices_sides"],
+  triangle_type_angles: ["angle_right", "angle_compare"],
+  triangle_angle_sum: ["triangle_type_angles"],
+  triangle_missing_angle: ["triangle_angle_sum"],
+  triangle_possible_or_not: ["triangle_vertices_sides"],
+  triangle_defis: [
+    "triangle_type_sides",
+    "triangle_type_angles",
+    "triangle_angle_sum",
+    "triangle_missing_angle",
+    "triangle_possible_or_not",
+  ],
 
-  [  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, -1,  0,  0,  0, -2,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0 ], // angle_right
-  [  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  1,  0,  0,  0,  0, -2, -1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0 ], // angle_compare
+  quadrilatere_identifier_nature: ["quadrilatere_nommer_vocabulaire"],
+  quadrilatere_lire_proprietes: [
+    "angle_right",
+    "angle_compare",
+    "quadrilatere_nommer_vocabulaire",
+  ],
+  quadrilatere_lien_proprietes: [
+    "quadrilatere_identifier_nature",
+    "quadrilatere_lire_proprietes",
+  ],
+  quadrilatere_distinguer: [
+    "quadrilatere_identifier_nature",
+    "quadrilatere_lien_proprietes",
+  ],
+  quadrilatere_conclusion: [
+    "quadrilatere_lire_proprietes",
+    "quadrilatere_lien_proprietes",
+    "quadrilatere_distinguer",
+  ],
+  quadrilatere_completer_construire: [
+    "quadrilatere_nommer_vocabulaire",
+    "quadrilatere_lire_proprietes",
+    "quadrilatere_lien_proprietes",
+  ],
+  quadrilatere_defis: [
+    "quadrilatere_nommer_vocabulaire",
+    "quadrilatere_identifier_nature",
+    "quadrilatere_lire_proprietes",
+    "quadrilatere_lien_proprietes",
+    "quadrilatere_distinguer",
+    "quadrilatere_conclusion",
+    "quadrilatere_completer_construire",
+  ],
 
-  [  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, -2,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0 ], // triangle_name
-  [  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  2,  0, -2,  0,  0,  0, -2, -1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0 ], // triangle_vertices_sides
-  [  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  2,  0,  0,  0,  0,  0, -2,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0 ], // triangle_type_sides
-  [  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  2,  2,  0,  0,  0,  0, -2, -1,  0, -2,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0 ], // triangle_type_angles
-  [  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  1,  0,  0,  0,  2,  0, -2,  0, -2,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0 ], // triangle_angle_sum
-  [  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  1,  2,  0,  0, -2,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0 ], // triangle_missing_angle
-  [  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  2,  0,  0,  0,  0,  0, -2,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0 ], // triangle_possible_or_not
-  [  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  1,  2,  2,  2,  2,  2,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0 ], // triangle_defis
+  mental_subtraction: ["mental_addition"],
+  mental_multiplication: ["mental_addition"],
+  mental_division: ["mental_multiplication"],
+  mental_strategies: [
+    "mental_addition",
+    "mental_subtraction",
+    "mental_multiplication",
+    "mental_division",
+  ],
+  mental_defis: [
+    "mental_addition",
+    "mental_subtraction",
+    "mental_multiplication",
+    "mental_division",
+    "mental_strategies",
+  ],
+};
 
-  [  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, -2, -2,  0,  0,  0, -2, -1,  0,  0,  0,  0,  0,  0 ], // quadrilatere_nommer_vocabulaire
-  [  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  2,  0, -2, -2,  0,  0,  0, -1,  0,  0,  0,  0,  0,  0 ], // quadrilatere_identifier_nature
-  [  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  2,  2,  0,  0,  0,  0,  0,  0,  0,  0,  2,  0,  0, -2,  0, -2, -2, -1,  0,  0,  0,  0,  0,  0 ], // quadrilatere_lire_proprietes
-  [  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  2,  2,  0, -2, -2, -2, -2,  0,  0,  0,  0,  0,  0 ], // quadrilatere_lien_proprietes
-  [  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  1,  0,  2,  0, -2,  0, -2,  0,  0,  0,  0,  0,  0 ], // quadrilatere_distinguer
-  [  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  1,  2,  2,  0,  0, -2,  0,  0,  0,  0,  0,  0 ], // quadrilatere_conclusion
-  [  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  2,  0,  2,  2,  0,  0,  0, -2,  0,  0,  0,  0,  0,  0 ], // quadrilatere_completer_construire
-  [  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  2,  2,  2,  2,  2,  2,  2,  0,  0,  0,  0,  0,  0,  0 ], // quadrilatere_defis
+/**
+ * Liens secondaires :
+ * plus faibles, mais utiles pour guider.
+ * On générera :
+ * - M[A][B] = 1
+ * - M[B][A] = -1
+ *
+ * Tu peux en ajouter plus tard si tu veux enrichir.
+ */
+const supportLinks: Record<string, string[]> = {
+  fraction_read: ["decimal_add", "decimal_multiply"],
+  prop_table: ["mental_multiplication"],
+  prop_unit: ["mental_division"],
+  quadrilatere_lire_proprietes: ["triangle_vertices_sides"],
+};
 
-  [  0,  0, -1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, -2, -2,  0, -2, -2 ], // mental_addition
-  [  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  2,  0,  0,  0, -2, -2 ], // mental_subtraction
-  [  0,  0,  0, -1,  0,  0,  0,  0,  0, -1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  2,  0,  0, -2, -2, -2 ], // mental_multiplication
-  [  0,  0,  0,  0, -1,  0,  0,  0,  0,  0, -1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  2,  0, -2, -2 ], // mental_division
-  [  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  2,  2,  2,  2,  0, -2 ], // mental_strategies
-  [  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  2,  2,  2,  2,  2,  0 ], // mental_defis
-] as const;
+/**
+ * Génère automatiquement la matrice.
+ */
+function buildMatrix(
+  skillIndex: readonly string[],
+  parentsMap: Record<string, string[]>,
+  supportMap: Record<string, string[]>
+): MatrixValue[][] {
+  const size = skillIndex.length;
+
+  const matrix: MatrixValue[][] = Array.from({ length: size }, () =>
+    Array.from({ length: size }, () => 0 as MatrixValue)
+  );
+
+  const indexMap = new Map<string, number>();
+  skillIndex.forEach((id, index) => {
+    indexMap.set(id, index);
+  });
+
+  // Liens forts : parent direct
+  for (const [childId, parentIds] of Object.entries(parentsMap)) {
+    const childIndex = indexMap.get(childId);
+    if (childIndex === undefined) continue;
+
+    for (const parentId of parentIds) {
+      const parentIndex = indexMap.get(parentId);
+      if (parentIndex === undefined) continue;
+
+      matrix[childIndex][parentIndex] = 2;
+      matrix[parentIndex][childIndex] = -2;
+    }
+  }
+
+  // Liens secondaires
+  for (const [childId, supportIds] of Object.entries(supportMap)) {
+    const childIndex = indexMap.get(childId);
+    if (childIndex === undefined) continue;
+
+    for (const supportId of supportIds) {
+      const supportIndex = indexMap.get(supportId);
+      if (supportIndex === undefined) continue;
+
+      // on n’écrase pas un lien fort
+      if (matrix[childIndex][supportIndex] === 0) {
+        matrix[childIndex][supportIndex] = 1;
+        matrix[supportIndex][childIndex] = -1;
+      }
+    }
+  }
+
+  return matrix;
+}
+
+export const matrix6eMathsValues = buildMatrix(
+  microSkillIndex6eMaths,
+  directParents,
+  supportLinks
+);
 
 export const matrix6eMaths: SkillMatrix = {
   id: "6e_maths_matrix_v4",
   classe: "6e",
   matiere: "maths",
   microSkillIndex: [...microSkillIndex6eMaths],
-  matrix: matrix6eMathsValues.map((row) => [...row]),
+  matrix: matrix6eMathsValues,
 };

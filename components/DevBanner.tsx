@@ -11,7 +11,7 @@ type DevBannerProps = {
 };
 
 export default function DevBanner({
-  message = "Nouveau : Tutor IA adaptatif EleveAI. Saphir analyse les notions et adapte les questions à ton niveau.",
+  message = "Nouveau : Coach Matrhs IA adaptatif EleveAI. Saphir analyse les notions et adapte les questions à ton niveau.",
   storageKey = "eleveai_dev_banner_closed_v7",
   className = "",
 }: DevBannerProps) {
@@ -60,12 +60,12 @@ export default function DevBanner({
 
           {/* Tutor IA */} 
           <Link
-            href="/tutor-v4"
+            href="/coach-maths-ia"
             className="inline-flex h-8 items-center gap-1 rounded-full px-3 text-xs font-semibold
                        bg-purple-600 hover:bg-purple-500 transition"
           >
             <Brain className="h-4 w-4" />
-            Essayer Tutor IA
+            Coach Maths IA
           </Link>
 
           {/* Gouvernance IA */}

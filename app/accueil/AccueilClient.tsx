@@ -133,13 +133,13 @@ export default function AccueilPage() {
             />
 
             <Card
-              id="tutor"
-              badge="Tutor"
-              title="Système d’apprentissage"
-              description="Un tutorat IA orienté progression : adaptation, accompagnement, consolidation et suivi."
-              details="L’objectif n’est pas de remplacer l’enseignant, mais de renforcer l’apprentissage par étapes."
-              href="/tutor-v4"
-              cta="Découvrir Tutor"
+              id="coach"
+              badge="Coach Maths IA"
+              title="Coach Maths IA"
+              description="adaptation, accompagnement, consolidation et suivi."
+              details="L objectif est de renforcer l’apprentissage par étapes."
+              href="/coach-maths-ia"
+              cta="Découvrir ton coach"
               variant="blue"
             />
           </div>
