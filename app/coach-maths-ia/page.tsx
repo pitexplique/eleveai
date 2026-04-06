@@ -5,6 +5,7 @@ import {
   NOTION_OPTIONS,
   NOTION_MICRO_MAP,
   MICRO_LABELS,
+  notionLabel,
 } from "@/lib/tutor-v4/catalog";
 
 export default function CoachMathsIA() {
@@ -16,14 +17,18 @@ export default function CoachMathsIA() {
 
   function getColor(microId: string) {
     if (microId.includes("defis")) return "green";
+
     if (
       microId.includes("angle") ||
       microId.includes("add") ||
+      microId.includes("addition") ||
       microId.includes("compare") ||
+      microId.includes("comparer") ||
       microId.includes("identifier")
     ) {
       return "blue";
     }
+
     return "gray";
   }
 
@@ -44,6 +49,7 @@ export default function CoachMathsIA() {
   return (
     <div className="min-h-screen w-full bg-[url('/images/reunion.png')] bg-cover bg-center bg-fixed">
       <div className="min-h-screen w-full bg-gradient-to-b from-black/30 via-black/20 to-black/40 px-6 py-10">
+        
         {/* HEADER */}
         <div className="mx-auto max-w-5xl text-center text-white">
           <h1 className="text-4xl font-extrabold sm:text-5xl">
@@ -61,25 +67,25 @@ export default function CoachMathsIA() {
 
         {/* CONTENU */}
         <div className="mx-auto mt-10 max-w-6xl space-y-10">
-          {NOTION_OPTIONS.map((notion) => {
-            const micros = NOTION_MICRO_MAP[notion.id] || [];
+          {NOTION_OPTIONS.map((notionId) => {
+            const micros = NOTION_MICRO_MAP[notionId] || [];
 
             return (
               <section
-                key={notion.id}
+                key={notionId}
                 className="rounded-2xl border border-white/20 bg-white/10 p-5 backdrop-blur-sm"
               >
                 {/* TITRE NOTION */}
                 <h2 className="mb-5 text-2xl font-bold text-white">
-                  {notion.label}
+                  {notionLabel(notionId)}
                 </h2>
 
-                {/* GRID MICRO SKILLS */}
+                {/* GRID MICRO */}
                 <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
                   {micros.map((microId) => (
                     <button
                       key={microId}
-                      onClick={() => handleClick(notion.id, microId)}
+                      onClick={() => handleClick(notionId, microId)}
                       className={[
                         "rounded-xl",
                         "p-3",

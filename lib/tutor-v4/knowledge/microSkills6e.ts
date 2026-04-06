@@ -536,7 +536,7 @@ export const microSkills6e: KnowledgeMicroSkill[] = [
     prerequis: [],
   },
   {
-    id: "angle_right",
+    id: "angle_droit",
     label: "Reconnaître un angle droit",
     notionId: "angles",
     boId: "BO6G2",
@@ -547,7 +547,7 @@ export const microSkills6e: KnowledgeMicroSkill[] = [
     label: "Comparer des angles",
     notionId: "angles",
     boId: "BO6G2",
-    prerequis: ["angle_right"],
+    prerequis: ["angle_droit"],
   },
   {
     id: "angle_mesurer",
@@ -600,7 +600,7 @@ export const microSkills6e: KnowledgeMicroSkill[] = [
     label: "Reconnaître un triangle selon ses angles",
     notionId: "triangles",
     boId: "BO6G3",
-    prerequis: ["angle_right", "angle_compare"],
+    prerequis: ["angle_droit", "angle_compare"],
   },
   {
     id: "triangle_angle_sum",
@@ -660,7 +660,7 @@ export const microSkills6e: KnowledgeMicroSkill[] = [
     notionId: "quadrilateres",
     boId: "BO6G4",
     prerequis: [
-      "angle_right",
+      "angle_droit",
       "angle_compare",
       "quadrilatere_nommer_vocabulaire",
     ],

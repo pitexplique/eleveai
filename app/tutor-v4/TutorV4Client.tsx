@@ -1,4 +1,3 @@
-// app/tutor-v4/page.tsx
 "use client";
 
 import {
@@ -180,6 +179,8 @@ export default function TutorV4Page() {
   const [notion, setNotion] = useState("decimaux");
 
   const hasInitializedFromUrl = useRef(false);
+  const hasStartedFromUrl = useRef(false);
+  const initialMicroIdRef = useRef<string | null>(null);
 
   const [sessionId, setSessionId] = useState<string | null>(null);
   const [pair, setPair] = useState<TutorQuestionPair | null>(null);
@@ -237,6 +238,7 @@ export default function TutorV4Page() {
     const urlClasse = searchParams.get("classe");
     const urlMatiere = searchParams.get("matiere");
     const urlNotion = searchParams.get("notion");
+    const urlMicroId = searchParams.get("microId");
 
     if (urlClasse) {
       setClasse(urlClasse);
@@ -246,12 +248,28 @@ export default function TutorV4Page() {
       setMatiere(urlMatiere);
     }
 
-    if (urlNotion && NOTION_OPTIONS.some((item) => item.id === urlNotion)) {
+    if (
+      urlNotion &&
+      NOTION_OPTIONS.includes(urlNotion as (typeof NOTION_OPTIONS)[number])
+    ) {
       setNotion(urlNotion);
+    }
+
+    if (urlMicroId) {
+      initialMicroIdRef.current = urlMicroId;
     }
 
     hasInitializedFromUrl.current = true;
   }, [searchParams]);
+
+  useEffect(() => {
+    if (!hasInitializedFromUrl.current) return;
+    if (hasStartedFromUrl.current) return;
+    if (!initialMicroIdRef.current) return;
+
+    hasStartedFromUrl.current = true;
+    void startSession(initialMicroIdRef.current);
+  }, [notion]);
 
   useEffect(() => {
     if (!sessionStartedAt) {
@@ -272,10 +290,13 @@ export default function TutorV4Page() {
   const scoreSeanceSur20 =
     possiblePoints > 0 ? ((earnedPoints / possiblePoints) * 20).toFixed(1) : "0.0";
 
-  const notionMicros = useMemo(() => NOTION_MICRO_MAP[notion] ?? [], [notion]);
+  const notionMicros = useMemo(
+    () => NOTION_MICRO_MAP[notion as keyof typeof NOTION_MICRO_MAP] ?? [],
+    [notion]
+  );
 
   function resetMicroStatusesForNotion(notionId: string) {
-    const micros = NOTION_MICRO_MAP[notionId] ?? [];
+    const micros = NOTION_MICRO_MAP[notionId as keyof typeof NOTION_MICRO_MAP] ?? [];
     const initial: Record<string, MicroStatus> = {};
     micros.forEach((microId) => {
       initial[microId] = "idle";
@@ -284,7 +305,7 @@ export default function TutorV4Page() {
   }
 
   function initMicroScoresForNotion(notionId: string) {
-    const micros = NOTION_MICRO_MAP[notionId] ?? [];
+    const micros = NOTION_MICRO_MAP[notionId as keyof typeof NOTION_MICRO_MAP] ?? [];
     const initial: Record<string, MicroScore> = {};
     micros.forEach((microId) => {
       initial[microId] = {
@@ -636,8 +657,8 @@ export default function TutorV4Page() {
                   className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900"
                 >
                   {NOTION_OPTIONS.map((item) => (
-                    <option key={item.id} value={item.id}>
-                      {item.label}
+                    <option key={item} value={item}>
+                      {notionLabel(item)}
                     </option>
                   ))}
                 </select>

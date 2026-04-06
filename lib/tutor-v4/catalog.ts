@@ -1,40 +1,29 @@
-// catalog.ts
-
-/* =========================================================
-   NOTIONS
-========================================================= */
+// lib/tutor-v4/catalog.ts
 
 export const NOTION_OPTIONS = [
-  { id: "nombres_entiers", label: "Nombres entiers" },
-  { id: "decimaux", label: "Nombres décimaux" },
-  { id: "fractions", label: "Fractions" },
-  { id: "pourcentages", label: "Pourcentages" },
-  { id: "proportionnalite", label: "Proportionnalité" },
-
-  { id: "calcul_pose", label: "Calcul posé" },
-  { id: "calcul_mental", label: "Calcul mental" },
-
-  { id: "longueurs", label: "Longueurs" },
-  { id: "perimetres", label: "Périmètres" },
-  { id: "aires", label: "Aires" },
-  { id: "volumes", label: "Volumes" },
-
-  { id: "angles", label: "Angles" },
-  { id: "triangles", label: "Triangles" },
-  { id: "quadrilateres", label: "Quadrilatères" },
-  { id: "symetrie", label: "Symétrie axiale" },
-
-  { id: "donnees", label: "Données" },
-  { id: "probabilites", label: "Probabilités" },
+  "entiers",
+  "decimaux",
+  "fractions",
+  "pourcentages",
+  "proportionnalite",
+  "calcul_pose",
+  "calcul_mental",
+  "longueurs",
+  "perimetres",
+  "aires",
+  "volumes",
+  "angles",
+  "triangles",
+  "quadrilateres",
+  "symetrie",
+  "donnees",
+  "probabilites",
 ] as const;
 
-/* =========================================================
-   MAP NOTION → MICRO COMPÉTENCES
-========================================================= */
+export type NotionId = (typeof NOTION_OPTIONS)[number];
 
-export const NOTION_MICRO_MAP: Record<string, string[]> = {
-
-  nombres_entiers: [
+export const NOTION_MICRO_MAP: Record<NotionId, string[]> = {
+  entiers: [
     "entier_lire_ecrire",
     "entier_rang",
     "entier_compare",
@@ -46,10 +35,10 @@ export const NOTION_MICRO_MAP: Record<string, string[]> = {
   decimaux: [
     "decimal_lire_ecrire",
     "decimal_rang",
-    "decimal_compare",
-    "decimal_add",
-    "decimal_multiply",
-    "decimal_divide_by_integer",
+    "decimal_comparer",
+    "decimal_additionner",
+    "decimal_multiplier",
+    "decimal_diviser_par_entier",
     "decimal_defis",
   ],
 
@@ -136,7 +125,7 @@ export const NOTION_MICRO_MAP: Record<string, string[]> = {
 
   angles: [
     "angle_reconnaitre",
-    "angle_right",
+    "angle_droit",
     "angle_compare",
     "angle_mesurer",
     "angle_tracer",
@@ -144,13 +133,13 @@ export const NOTION_MICRO_MAP: Record<string, string[]> = {
   ],
 
   triangles: [
-    "triangle_name",
-    "triangle_vertices_sides",
-    "triangle_type_sides",
+    "triangle_nommer",
+    "triangle_sommets_cotes",
+    "triangle_type_cotes",
     "triangle_type_angles",
-    "triangle_angle_sum",
-    "triangle_missing_angle",
-    "triangle_possible_or_not",
+    "triangle_somme_angles",
+    "triangle_angle_manquant",
+    "triangle_possible_ou_non",
     "triangle_defis",
   ],
 
@@ -193,154 +182,173 @@ export const NOTION_MICRO_MAP: Record<string, string[]> = {
   ],
 };
 
-/* =========================================================
-   LABELS NOTIONS
-========================================================= */
-
-export const NOTION_LABELS: Record<string, string> = Object.fromEntries(
-  NOTION_OPTIONS.map((n) => [n.id, n.label])
-);
-
-export function notionLabel(notionId?: string) {
-  if (!notionId) return "Notion";
-  return NOTION_LABELS[notionId] ?? notionId;
-}
-
-/* =========================================================
-   LABELS MICRO COMPÉTENCES
-========================================================= */
-
-export const MICRO_LABELS: Record<string, string> = {
-  entier_lire_ecrire: "Lire et écrire un nombre entier",
-  entier_rang: "Identifier le rang d’un chiffre",
-  entier_compare: "Comparer des nombres entiers",
-  entier_decomposer: "Décomposer un nombre entier",
-  entier_encadrer: "Encadrer un nombre entier",
-  entier_defis: "Défis sur les nombres entiers",
-
-  decimal_lire_ecrire: "Lire et écrire un nombre décimal",
-  decimal_rang: "Identifier le rang d’un chiffre décimal",
-  decimal_compare: "Comparer des nombres décimaux",
-  decimal_add: "Additionner des nombres décimaux",
-  decimal_multiply: "Multiplier des nombres décimaux",
-  decimal_divide_by_integer: "Diviser un nombre décimal par un entier",
-  decimal_defis: "Défis sur les nombres décimaux",
-
-  fraction_lire_ecrire: "Lire et écrire une fraction",
-  fraction_representer: "Représenter une fraction",
-  fraction_quantite: "Comprendre une fraction comme quantité",
-  fraction_decimal: "Relier fraction et décimal",
-  fraction_compare: "Comparer des fractions",
-  fraction_defis: "Défis sur les fractions",
-
-  pourcentage_comprendre: "Comprendre un pourcentage",
-  pourcentage_fraction: "Relier pourcentage et fraction",
-  pourcentage_decimal: "Relier pourcentage et décimal",
-  pourcentage_lire: "Lire un pourcentage",
-  pourcentage_calcul_simple: "Calculer un pourcentage simple",
-  pourcentage_defis: "Défis sur les pourcentages",
-
-  prop_reconnaitre: "Reconnaître une situation de proportionnalité",
-  prop_table: "Compléter un tableau de proportionnalité",
-  prop_coeff: "Utiliser un coefficient",
-  prop_unit: "Passer par l’unité",
-  prop_direct: "Résoudre une situation",
-  prop_defis: "Défis de proportionnalité",
-
-  pose_addition: "Poser une addition",
-  pose_soustraction: "Poser une soustraction",
-  pose_multiplication: "Poser une multiplication",
-  pose_division: "Poser une division",
-  pose_verifier: "Vérifier un calcul",
-  pose_defis: "Défis de calcul posé",
-
-  mental_addition: "Calcul mental : addition",
-  mental_subtraction: "Calcul mental : soustraction",
-  mental_multiplication: "Calcul mental : multiplication",
-  mental_division: "Calcul mental : division",
-  mental_strategies: "Stratégies de calcul mental",
-  mental_defis: "Défis de calcul mental",
-
-  longueur_mesurer: "Mesurer une longueur",
-  longueur_unites: "Connaître les unités",
-  longueur_convertir: "Convertir des longueurs",
-  longueur_comparer: "Comparer des longueurs",
-  longueur_probleme: "Résoudre un problème",
-  longueur_defis: "Défis de longueurs",
-
-  perim_comprendre: "Comprendre le périmètre",
-  perim_square: "Périmètre du carré",
-  perim_rectangle: "Périmètre du rectangle",
-  perim_figure: "Périmètre d’une figure",
-  perim_probleme: "Problème de périmètre",
-  perim_defis: "Défis de périmètre",
-
-  area_comprendre: "Comprendre l’aire",
-  area_rectangle: "Aire du rectangle",
-  area_square: "Aire du carré",
-  area_compter: "Aire par comptage",
-  area_comparer: "Comparer des aires",
-  area_defis: "Défis sur les aires",
-
-  volume_unite: "Unité de volume",
-  volume_compter: "Compter des volumes",
-  volume_comparer: "Comparer des volumes",
-  volume_assemblage: "Assemblage de volumes",
-  volume_lire: "Lire un volume",
-  volume_defis: "Défis sur les volumes",
-
-  angle_reconnaitre: "Reconnaître un angle",
-  angle_right: "Angle droit",
-  angle_compare: "Comparer des angles",
-  angle_mesurer: "Mesurer un angle",
-  angle_tracer: "Tracer un angle",
-  angle_defis: "Défis sur les angles",
-
-  triangle_name: "Nommer un triangle",
-  triangle_vertices_sides: "Sommets et côtés",
-  triangle_type_sides: "Type selon les côtés",
-  triangle_type_angles: "Type selon les angles",
-  triangle_angle_sum: "Somme des angles",
-  triangle_missing_angle: "Angle manquant",
-  triangle_possible_or_not: "Triangle possible ou non",
-  triangle_defis: "Défis triangles",
-
-  quadrilatere_nommer_vocabulaire: "Nommer un quadrilatère",
-  quadrilatere_identifier_nature: "Identifier la nature",
-  quadrilatere_lire_proprietes: "Lire les propriétés",
-  quadrilatere_lien_proprietes: "Lien propriétés/nature",
-  quadrilatere_distinguer: "Distinguer les quadrilatères",
-  quadrilatere_conclusion: "Conclure",
-  quadrilatere_completer_construire: "Construire",
-  quadrilatere_defis: "Défis quadrilatères",
-
-  sym_reconnaitre: "Reconnaître une symétrie",
-  sym_point: "Image d’un point",
-  sym_figure: "Image d’une figure",
-  sym_proprietes: "Propriétés",
-  sym_axes: "Axes de symétrie",
-  sym_defis: "Défis symétrie",
-
-  data_lire_tableau: "Lire un tableau",
-  data_lire_graphique: "Lire un graphique",
-  data_prelever: "Prélever une info",
-  data_comparer: "Comparer",
-  data_interpreter: "Interpréter",
-  data_defis: "Défis données",
-
-  proba_vocabulaire: "Vocabulaire",
-  proba_comparer: "Comparer des probabilités",
-  proba_issue: "Issues possibles",
-  proba_estimer: "Estimer une probabilité",
-  proba_lire: "Lire une situation",
-  proba_defis: "Défis probabilités",
+const NOTION_LABELS: Record<NotionId, string> = {
+  entiers: "Nombres entiers",
+  decimaux: "Nombres décimaux",
+  fractions: "Fractions",
+  pourcentages: "Pourcentages",
+  proportionnalite: "Proportionnalité",
+  calcul_pose: "Calcul posé",
+  calcul_mental: "Calcul mental",
+  longueurs: "Longueurs",
+  perimetres: "Périmètres",
+  aires: "Aires",
+  volumes: "Volumes",
+  angles: "Angles",
+  triangles: "Triangles",
+  quadrilateres: "Quadrilatères",
+  symetrie: "Symétrie",
+  donnees: "Données",
+  probabilites: "Probabilités",
 };
 
-/* =========================================================
-   HELPER MICRO LABEL
-========================================================= */
+export const MICRO_LABELS: Record<string, string> = {
+  // ENTIER
+  entier_lire_ecrire: "Lire et écrire des entiers",
+  entier_rang: "Rang des chiffres",
+  entier_compare: "Comparer des entiers",
+  entier_decomposer: "Décomposer un entier",
+  entier_encadrer: "Encadrer un entier",
+  entier_defis: "Défis entiers",
 
-export function microLabel(microId?: string) {
-  if (!microId) return "Compétence";
+  // DECIMAUX
+  decimal_lire_ecrire: "Lire et écrire des décimaux",
+  decimal_rang: "Rang des chiffres",
+  decimal_comparer: "Comparer des décimaux",
+  decimal_additionner: "Additionner des décimaux",
+  decimal_multiplier: "Multiplier des décimaux",
+  decimal_diviser_par_entier: "Diviser un décimal",
+  decimal_defis: "Défis décimaux",
+
+  // FRACTIONS
+  fraction_lire_ecrire: "Lire des fractions",
+  fraction_representer: "Représenter une fraction",
+  fraction_quantite: "Fraction d’une quantité",
+  fraction_decimal: "Fraction → décimal",
+  fraction_compare: "Comparer des fractions",
+  fraction_defis: "Défis fractions",
+
+  // POURCENTAGES
+  pourcentage_comprendre: "Comprendre %",
+  pourcentage_fraction: "% → fraction",
+  pourcentage_decimal: "% → décimal",
+  pourcentage_lire: "Lire %",
+  pourcentage_calcul_simple: "Calcul %",
+  pourcentage_defis: "Défis %",
+
+  // PROPORTIONNALITE
+  prop_reconnaitre: "Reconnaître",
+  prop_table: "Tableau",
+  prop_coeff: "Coefficient",
+  prop_unit: "Passage à l’unité",
+  prop_direct: "Résoudre",
+  prop_defis: "Défis",
+
+  // CALCUL POSE
+  pose_addition: "Addition posée",
+  pose_soustraction: "Soustraction posée",
+  pose_multiplication: "Multiplication posée",
+  pose_division: "Division posée",
+  pose_verifier: "Vérifier",
+  pose_defis: "Défis",
+
+  // CALCUL MENTAL
+  mental_addition: "Addition",
+  mental_subtraction: "Soustraction",
+  mental_multiplication: "Multiplication",
+  mental_division: "Division",
+  mental_strategies: "Stratégies",
+  mental_defis: "Défis",
+
+  // LONGUEURS
+  longueur_mesurer: "Mesurer",
+  longueur_unites: "Unités",
+  longueur_convertir: "Convertir",
+  longueur_comparer: "Comparer",
+  longueur_probleme: "Problème",
+  longueur_defis: "Défis",
+
+  // PERIMETRES
+  perim_comprendre: "Comprendre",
+  perim_square: "Carré",
+  perim_rectangle: "Rectangle",
+  perim_figure: "Figure",
+  perim_probleme: "Problème",
+  perim_defis: "Défis",
+
+  // AIRES
+  area_comprendre: "Comprendre",
+  area_rectangle: "Rectangle",
+  area_square: "Carré",
+  area_compter: "Compter",
+  area_comparer: "Comparer",
+  area_defis: "Défis",
+
+  // VOLUMES
+  volume_unite: "Unités",
+  volume_compter: "Compter",
+  volume_comparer: "Comparer",
+  volume_assemblage: "Assemblage",
+  volume_lire: "Lire",
+  volume_defis: "Défis",
+
+  // ANGLES
+  angle_reconnaitre: "Reconnaître",
+  angle_droit: "Angle droit",
+  angle_compare: "Comparer",
+  angle_mesurer: "Mesurer",
+  angle_tracer: "Tracer",
+  angle_defis: "Défis",
+
+  // TRIANGLES
+  triangle_nommer: "Nommer",
+  triangle_sommets_cotes: "Sommets / côtés",
+  triangle_type_cotes: "Type (côtés)",
+  triangle_type_angles: "Type (angles)",
+  triangle_somme_angles: "Somme angles",
+  triangle_angle_manquant: "Angle manquant",
+  triangle_possible_ou_non: "Possible ?",
+  triangle_defis: "Défis",
+
+  // QUADRILATERES
+  quadrilatere_nommer_vocabulaire: "Nommer",
+  quadrilatere_identifier_nature: "Identifier",
+  quadrilatere_lire_proprietes: "Propriétés",
+  quadrilatere_lien_proprietes: "Lien",
+  quadrilatere_distinguer: "Distinguer",
+  quadrilatere_conclusion: "Conclusion",
+  quadrilatere_completer_construire: "Construire",
+  quadrilatere_defis: "Défis",
+
+  // SYMETRIE
+  sym_reconnaitre: "Reconnaître",
+  sym_point: "Point",
+  sym_figure: "Figure",
+  sym_proprietes: "Propriétés",
+  sym_axes: "Axes",
+  sym_defis: "Défis",
+
+  // DONNEES
+  data_lire_tableau: "Tableau",
+  data_lire_graphique: "Graphique",
+  data_prelever: "Prélever",
+  data_comparer: "Comparer",
+  data_interpreter: "Interpréter",
+  data_defis: "Défis",
+
+  // PROBA
+  proba_vocabulaire: "Vocabulaire",
+  proba_comparer: "Comparer",
+  proba_issue: "Issue",
+  proba_estimer: "Estimer",
+  proba_lire: "Lire",
+  proba_defis: "Défis",
+};
+
+export function notionLabel(notionId: string) {
+  return NOTION_LABELS[notionId as NotionId] ?? notionId;
+}
+
+export function microLabel(microId: string) {
   return MICRO_LABELS[microId] ?? microId;
 }

@@ -21,10 +21,10 @@ export const microSkillIndex6eMaths = [
   // =========================
   "decimal_lire_ecrire", // 6
   "decimal_rang", // 7
-  "decimal_compare", // 8
-  "decimal_add", // 9
-  "decimal_multiply", // 10
-  "decimal_divide_by_integer", // 11
+  "decimal_comparer", // 8
+  "decimal_additionner", // 9
+  "decimal_multiplier", // 10
+  "decimal_diviser_par_entier", // 11
   "decimal_defis", // 12
 
   // =========================
@@ -121,7 +121,7 @@ export const microSkillIndex6eMaths = [
   // ANGLES
   // =========================
   "angle_reconnaitre", // 67
-  "angle_right", // 68
+  "angle_droit", // 68
   "angle_compare", // 69
   "angle_mesurer", // 70
   "angle_tracer", // 71
@@ -130,13 +130,13 @@ export const microSkillIndex6eMaths = [
   // =========================
   // TRIANGLES
   // =========================
-  "triangle_name", // 73
-  "triangle_vertices_sides", // 74
-  "triangle_type_sides", // 75
+  "triangle_nommer", // 73
+  "triangle_sommets_cotes", // 74
+  "triangle_type_cotes", // 75
   "triangle_type_angles", // 76
-  "triangle_angle_sum", // 77
-  "triangle_missing_angle", // 78
-  "triangle_possible_or_not", // 79
+  "triangle_somme_angles", // 77
+  "triangle_angle_manquant", // 78
+  "triangle_possible_ou_non", // 79
   "triangle_defis", // 80
 
   // =========================
@@ -210,17 +210,17 @@ const directParents: Record<string, string[]> = {
   // =========================
   decimal_lire_ecrire: ["entier_lire_ecrire"],
   decimal_rang: ["decimal_lire_ecrire"],
-  decimal_compare: ["decimal_rang"],
-  decimal_add: ["decimal_lire_ecrire"],
-  decimal_multiply: ["decimal_add"],
-  decimal_divide_by_integer: ["decimal_lire_ecrire"],
+  decimal_comparer: ["decimal_rang"],
+  decimal_additionner: ["decimal_lire_ecrire"],
+  decimal_multiplier: ["decimal_additionner"],
+  decimal_diviser_par_entier: ["decimal_lire_ecrire"],
   decimal_defis: [
     "decimal_lire_ecrire",
     "decimal_rang",
-    "decimal_compare",
-    "decimal_add",
-    "decimal_multiply",
-    "decimal_divide_by_integer",
+    "decimal_comparer",
+    "decimal_additionner",
+    "decimal_multiplier",
+    "decimal_diviser_par_entier",
   ],
 
   // =========================
@@ -379,13 +379,13 @@ const directParents: Record<string, string[]> = {
   // ANGLES
   // =========================
   angle_reconnaitre: [],
-  angle_right: ["angle_reconnaitre"],
-  angle_compare: ["angle_right"],
+  angle_droit: ["angle_reconnaitre"],
+  angle_compare: ["angle_droit"],
   angle_mesurer: ["angle_reconnaitre"],
   angle_tracer: ["angle_mesurer"],
   angle_defis: [
     "angle_reconnaitre",
-    "angle_right",
+    "angle_droit",
     "angle_compare",
     "angle_mesurer",
     "angle_tracer",
@@ -394,18 +394,18 @@ const directParents: Record<string, string[]> = {
   // =========================
   // TRIANGLES
   // =========================
-  triangle_vertices_sides: ["triangle_name"],
-  triangle_type_sides: ["triangle_vertices_sides"],
-  triangle_type_angles: ["angle_right", "angle_compare"],
-  triangle_angle_sum: ["triangle_type_angles"],
-  triangle_missing_angle: ["triangle_angle_sum"],
-  triangle_possible_or_not: ["triangle_vertices_sides"],
+  triangle_sommets_cotes: ["triangle_nommer"],
+  triangle_type_cotes: ["triangle_sommets_cotes"],
+  triangle_type_angles: ["angle_droit", "angle_compare"],
+  triangle_somme_angles: ["triangle_type_angles"],
+  triangle_angle_manquant: ["triangle_somme_angles"],
+  triangle_possible_ou_non: ["triangle_sommets_cotes"],
   triangle_defis: [
-    "triangle_type_sides",
+    "triangle_type_cotes",
     "triangle_type_angles",
-    "triangle_angle_sum",
-    "triangle_missing_angle",
-    "triangle_possible_or_not",
+    "triangle_somme_angles",
+    "triangle_angle_manquant",
+    "triangle_possible_ou_non",
   ],
 
   // =========================
@@ -413,7 +413,7 @@ const directParents: Record<string, string[]> = {
   // =========================
   quadrilatere_identifier_nature: ["quadrilatere_nommer_vocabulaire"],
   quadrilatere_lire_proprietes: [
-    "angle_right",
+    "angle_droit",
     "angle_compare",
     "quadrilatere_nommer_vocabulaire",
   ],
@@ -499,15 +499,15 @@ const directParents: Record<string, string[]> = {
  * - M[B][A] = -1
  */
 const supportLinks: Record<string, string[]> = {
-  decimal_compare: ["entier_compare"],
-  decimal_add: ["mental_addition"],
-  decimal_multiply: ["mental_multiplication"],
-  decimal_divide_by_integer: ["mental_division"],
+  decimal_comparer: ["entier_compare"],
+  decimal_additionner: ["mental_addition"],
+  decimal_multiplier: ["mental_multiplication"],
+  decimal_diviser_par_entier: ["mental_division"],
 
-  fraction_decimal: ["decimal_compare"],
-  fraction_compare: ["decimal_compare"],
+  fraction_decimal: ["decimal_comparer"],
+  fraction_compare: ["decimal_comparer"],
 
-  pourcentage_decimal: ["decimal_multiply"],
+  pourcentage_decimal: ["decimal_multiplier"],
   pourcentage_calcul_simple: ["mental_multiplication"],
 
   prop_table: ["mental_multiplication"],
@@ -521,9 +521,9 @@ const supportLinks: Record<string, string[]> = {
   area_compter: ["perim_figure"],
   area_comparer: ["longueur_comparer"],
   volume_lire: ["data_lire_tableau"],
-  triangle_possible_or_not: ["longueur_comparer"],
+  triangle_possible_ou_non: ["longueur_comparer"],
 
-  quadrilatere_lire_proprietes: ["triangle_vertices_sides"],
+  quadrilatere_lire_proprietes: ["triangle_sommets_cotes"],
   sym_reconnaitre: ["quadrilatere_identifier_nature"],
 
   data_interpreter: ["entier_compare"],
