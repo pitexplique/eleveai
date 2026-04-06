@@ -159,15 +159,15 @@ export const decimauxBank: TutorBankItemV4[] = [
   },
 
   // =========================
-  // DECIMAL_WRITE
+  // DECIMAL_lire_ecrire
   // =========================
   {
     kind: "fixed",
-    id: "decimal_write_fixed_1",
+    id: "decimal_lire_ecrire_fixed_1",
     niveau: "6e",
     matiere: "maths",
     notionId: "decimaux",
-    microId: "decimal_write",
+    microId: "decimal_lire_ecrire",
     difficulty: 1,
     theme: "neutral",
     text: "Écris en décimal : 7/10",
@@ -179,11 +179,11 @@ export const decimauxBank: TutorBankItemV4[] = [
   },
   {
     kind: "fixed",
-    id: "decimal_write_fixed_2",
+    id: "decimal_lire_ecrire_fixed_2",
     niveau: "6e",
     matiere: "maths",
     notionId: "decimaux",
-    microId: "decimal_write",
+    microId: "decimal_lire_ecrire",
     difficulty: 1,
     theme: "neutral",
     text: "Écris en décimal : 3/10",
@@ -195,11 +195,11 @@ export const decimauxBank: TutorBankItemV4[] = [
   },
   {
     kind: "fixed",
-    id: "decimal_write_fixed_3",
+    id: "decimal_lire_ecrire_fixed_3",
     niveau: "6e",
     matiere: "maths",
     notionId: "decimaux",
-    microId: "decimal_write",
+    microId: "decimal_lire_ecrire",
     difficulty: 1,
     theme: "neutral",
     text: "Écris en décimal : 9/10",
@@ -211,11 +211,11 @@ export const decimauxBank: TutorBankItemV4[] = [
   },
   {
     kind: "fixed",
-    id: "decimal_write_fixed_4",
+    id: "decimal_lire_ecrire_fixed_4",
     niveau: "6e",
     matiere: "maths",
     notionId: "decimaux",
-    microId: "decimal_write",
+    microId: "decimal_lire_ecrire",
     difficulty: 2,
     theme: "neutral",
     text: "Écris en décimal : 25/10",
@@ -227,11 +227,11 @@ export const decimauxBank: TutorBankItemV4[] = [
   },
   {
     kind: "fixed",
-    id: "decimal_write_qcm_1",
+    id: "decimal_lire_ecrire_qcm_1",
     niveau: "6e",
     matiere: "maths",
     notionId: "decimaux",
-    microId: "decimal_write",
+    microId: "decimal_lire_ecrire",
     difficulty: 2,
     theme: "neutral",
     text: "Quelle écriture décimale correspond à 9/10 ?",
@@ -244,11 +244,11 @@ export const decimauxBank: TutorBankItemV4[] = [
   },
   {
     kind: "fixed",
-    id: "decimal_write_qcm_2",
+    id: "decimal_lire_ecrire_qcm_2",
     niveau: "6e",
     matiere: "maths",
     notionId: "decimaux",
-    microId: "decimal_write",
+    microId: "decimal_lire_ecrire",
     difficulty: 2,
     theme: "neutral",
     text: "Quelle écriture décimale correspond à 15/10 ?",
@@ -691,15 +691,15 @@ export const decimauxBank: TutorBankItemV4[] = [
   },
 
   // =========================
-  // TEMPLATES - WRITE
+  // TEMPLATES - lire_ecrire
   // =========================
   {
     kind: "template",
-    id: "decimal_write_tpl_1",
+    id: "decimal_lire_ecrire_tpl_1",
     niveau: "6e",
     matiere: "maths",
     notionId: "decimaux",
-    microId: "decimal_write",
+    microId: "decimal_lire_ecrire",
     difficulty: 1,
     theme: "neutral",
     hint: "n/10 = n dixièmes.",
@@ -719,11 +719,11 @@ export const decimauxBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "decimal_write_tpl_2",
+    id: "decimal_lire_ecrire_tpl_2",
     niveau: "6e",
     matiere: "maths",
     notionId: "decimaux",
-    microId: "decimal_write",
+    microId: "decimal_lire_ecrire",
     difficulty: 2,
     theme: "neutral",
     hint: "Le numérateur peut être plus grand que 10.",
@@ -743,11 +743,11 @@ export const decimauxBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "decimal_write_qcm_tpl_1",
+    id: "decimal_lire_ecrire_qcm_tpl_1",
     niveau: "6e",
     matiere: "maths",
     notionId: "decimaux",
-    microId: "decimal_write",
+    microId: "decimal_lire_ecrire",
     difficulty: 2,
     theme: "neutral",
     hint: "Attention aux zéros inutiles.",
