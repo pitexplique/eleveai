@@ -1,9 +1,5 @@
-import knowledge from "../6e.maths.knowledge.json";
-import { microSkills6e } from "../microSkills6e";
+import { buildKnowledge6eMaths } from "../maths/6e/buildKnowledge6e";
 
 export function loadKnowledge6eMaths() {
-  return {
-    ...knowledge,
-    microSkills: microSkills6e,
-  };
+  return buildKnowledge6eMaths();
 }

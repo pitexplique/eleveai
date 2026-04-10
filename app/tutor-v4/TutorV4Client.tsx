@@ -1,3 +1,4 @@
+// app/tutor-v4/TutorV4Client.tsx
 "use client";
 
 import {
@@ -171,6 +172,10 @@ function renderCanvas(canvas?: CanvasFigure | null) {
   return null;
 }
 
+function isValidNotionId(value: string): boolean {
+  return NOTION_OPTIONS.includes(value);
+}
+
 export default function TutorV4Page() {
   const searchParams = useSearchParams();
 
@@ -248,10 +253,7 @@ export default function TutorV4Page() {
       setMatiere(urlMatiere);
     }
 
-    if (
-      urlNotion &&
-      NOTION_OPTIONS.includes(urlNotion as (typeof NOTION_OPTIONS)[number])
-    ) {
+    if (urlNotion && isValidNotionId(urlNotion)) {
       setNotion(urlNotion);
     }
 
@@ -290,13 +292,10 @@ export default function TutorV4Page() {
   const scoreSeanceSur20 =
     possiblePoints > 0 ? ((earnedPoints / possiblePoints) * 20).toFixed(1) : "0.0";
 
-  const notionMicros = useMemo(
-    () => NOTION_MICRO_MAP[notion as keyof typeof NOTION_MICRO_MAP] ?? [],
-    [notion]
-  );
+  const notionMicros = useMemo(() => NOTION_MICRO_MAP[notion] ?? [], [notion]);
 
   function resetMicroStatusesForNotion(notionId: string) {
-    const micros = NOTION_MICRO_MAP[notionId as keyof typeof NOTION_MICRO_MAP] ?? [];
+    const micros = NOTION_MICRO_MAP[notionId] ?? [];
     const initial: Record<string, MicroStatus> = {};
     micros.forEach((microId) => {
       initial[microId] = "idle";
@@ -305,7 +304,7 @@ export default function TutorV4Page() {
   }
 
   function initMicroScoresForNotion(notionId: string) {
-    const micros = NOTION_MICRO_MAP[notionId as keyof typeof NOTION_MICRO_MAP] ?? [];
+    const micros = NOTION_MICRO_MAP[notionId] ?? [];
     const initial: Record<string, MicroScore> = {};
     micros.forEach((microId) => {
       initial[microId] = {
