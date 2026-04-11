@@ -28,7 +28,7 @@ export const notions: NotionSource[] = [
     id: "proportionnalite",
     label: "Proportionnalité",
     boId: "BO5N2",
-    prerequis: ["fractions"],
+    prerequis: ["fractions", "operations_relatifs"],
     levels: [1, 2, 3],
   },
   {
@@ -60,10 +60,17 @@ export const notions: NotionSource[] = [
     levels: [1, 2],
   },
   {
-    id: "aires_volumes",
-    label: "Aires et volumes",
+    id: "aires",
+    label: "Aires",
     boId: "BO5G2",
     prerequis: [],
+    levels: [1, 2],
+  },
+  {
+    id: "volumes",
+    label: "Volumes",
+    boId: "BO5G2",
+    prerequis: ["aires"],
     levels: [1, 2],
   },
   {

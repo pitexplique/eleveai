@@ -195,8 +195,21 @@ export default function TutorV4Page() {
   const [selectedOptionId, setSelectedOptionId] = useState<string | null>(null);
   const [currentQuestion, setCurrentQuestion] =
     useState<TutorQuestionOption | null>(null);
+
   const [answer, setAnswer] = useState("");
   const [feedback, setFeedback] = useState("");
+  const [explanationText, setExplanationText] = useState("");
+  const [wrongAnswerPanelOpen, setWrongAnswerPanelOpen] = useState(false);
+  const [lastSubmittedAnswer, setLastSubmittedAnswer] = useState("");
+
+  const [pendingNextPair, setPendingNextPair] = useState<TutorQuestionPair | null>(
+    null
+  );
+  const [pendingNextMode, setPendingNextMode] = useState<TutorMode | null>(null);
+  const [pendingNextRecommendedStar, setPendingNextRecommendedStar] =
+    useState<StarLevel | null>(null);
+  const [pendingNextVisibleProgress, setPendingNextVisibleProgress] =
+    useState<VisibleProgress | null>(null);
 
   const [sessionResults, setSessionResults] = useState<boolean[]>([]);
   const [earnedPoints, setEarnedPoints] = useState(0);
@@ -245,21 +258,10 @@ export default function TutorV4Page() {
     const urlNotion = searchParams.get("notion");
     const urlMicroId = searchParams.get("microId");
 
-    if (urlClasse) {
-      setClasse(urlClasse);
-    }
-
-    if (urlMatiere) {
-      setMatiere(urlMatiere);
-    }
-
-    if (urlNotion && isValidNotionId(urlNotion)) {
-      setNotion(urlNotion);
-    }
-
-    if (urlMicroId) {
-      initialMicroIdRef.current = urlMicroId;
-    }
+    if (urlClasse) setClasse(urlClasse);
+    if (urlMatiere) setMatiere(urlMatiere);
+    if (urlNotion && isValidNotionId(urlNotion)) setNotion(urlNotion);
+    if (urlMicroId) initialMicroIdRef.current = urlMicroId;
 
     hasInitializedFromUrl.current = true;
   }, [searchParams]);
@@ -335,6 +337,45 @@ export default function TutorV4Page() {
     setResultModal((prev) => ({ ...prev, open: false }));
   }
 
+  function resetWrongAnswerFlow() {
+    setFeedback("");
+    setExplanationText("");
+    setWrongAnswerPanelOpen(false);
+    setLastSubmittedAnswer("");
+    setPendingNextPair(null);
+    setPendingNextMode(null);
+    setPendingNextRecommendedStar(null);
+    setPendingNextVisibleProgress(null);
+  }
+
+  function continueAfterExplanation() {
+    if (
+      !pendingNextPair ||
+      !pendingNextMode ||
+      !pendingNextRecommendedStar ||
+      !pendingNextVisibleProgress
+    ) {
+      return;
+    }
+
+    setPair(pendingNextPair);
+    setMode(pendingNextMode);
+    setRecommendedStar(pendingNextRecommendedStar);
+    setVisibleProgress(pendingNextVisibleProgress);
+    setActiveMicroId(pendingNextPair.microId);
+
+    setMicroStatuses((prev) => ({
+      ...prev,
+      [pendingNextPair.microId]:
+        prev[pendingNextPair.microId] === "success" ? "success" : "current",
+    }));
+
+    setSelectedOptionId(null);
+    setCurrentQuestion(null);
+    setAnswer("");
+    resetWrongAnswerFlow();
+  }
+
   async function activateQuestion(
     currentSessionId: string,
     option: TutorQuestionOption
@@ -354,6 +395,7 @@ export default function TutorV4Page() {
     setSelectedOptionId(option.id);
     setCurrentQuestion(option);
     setAnswer("");
+    resetWrongAnswerFlow();
     setActiveMicroId(option.microId);
 
     setMicroStatuses((prev) => ({
@@ -366,7 +408,6 @@ export default function TutorV4Page() {
   async function startSession(targetMicroId?: string) {
     try {
       setBusy(true);
-      setFeedback("");
       setAnswer("");
       setSessionResults([]);
       setEarnedPoints(0);
@@ -377,6 +418,7 @@ export default function TutorV4Page() {
       setLastResult({});
       setSessionStartedAt(null);
       setElapsedSeconds(0);
+      resetWrongAnswerFlow();
       resetMicroStatusesForNotion(notion);
       initMicroScoresForNotion(notion);
       setActiveMicroId(targetMicroId ?? null);
@@ -430,7 +472,7 @@ export default function TutorV4Page() {
 
     try {
       setBusy(true);
-      setFeedback("");
+      resetWrongAnswerFlow();
       setSelectedOptionId(null);
       setCurrentQuestion(null);
       setAnswer("");
@@ -506,6 +548,10 @@ export default function TutorV4Page() {
       return;
     }
 
+    if (wrongAnswerPanelOpen) {
+      return;
+    }
+
     const finalAnswer = (submittedAnswer ?? answer).trim();
 
     if (!finalAnswer) {
@@ -519,6 +565,7 @@ export default function TutorV4Page() {
       const currentMicro = currentQuestion.microId;
       const currentMicroLabel = microLabel(currentMicro);
       const pointsForQuestion = starPoints(currentQuestion.meta.starLevel);
+      const currentExplanation = currentQuestion.explanation?.trim();
 
       const res = await fetch("/api/tutor-v4/answer", {
         method: "POST",
@@ -573,32 +620,46 @@ export default function TutorV4Page() {
         [currentMicro]: typed.result.ok ? "success" : "retry",
       }));
 
-      setFeedback(
-        `${typed.result.ok ? "✅ Bonne réponse" : "⚠️ À retravailler"} : ${currentMicroLabel}\n\n${typed.feedback}`
-      );
+      if (typed.result.ok) {
+        setFeedback(`Bonne réponse : ${currentMicroLabel}`);
+        setExplanationText("");
+        setWrongAnswerPanelOpen(false);
+        setLastSubmittedAnswer("");
 
-      openResultModal(
-        typed.result.ok,
-        typed.result.ok
-          ? `Mission réussie : ${currentMicroLabel}`
-          : `Mission à retravailler : ${currentMicroLabel}`
-      );
+        openResultModal(true, `Mission réussie : ${currentMicroLabel}`);
 
-      setPair(typed.pair);
-      setMode(typed.mode);
-      setRecommendedStar(typed.recommendedStar);
-      setVisibleProgress(typed.visibleProgress);
-      setActiveMicroId(typed.pair.microId);
+        setPair(typed.pair);
+        setMode(typed.mode);
+        setRecommendedStar(typed.recommendedStar);
+        setVisibleProgress(typed.visibleProgress);
+        setActiveMicroId(typed.pair.microId);
 
-      setMicroStatuses((prev) => ({
-        ...prev,
-        [typed.pair.microId]:
-          prev[typed.pair.microId] === "success" ? "success" : "current",
-      }));
+        setMicroStatuses((prev) => ({
+          ...prev,
+          [typed.pair.microId]:
+            prev[typed.pair.microId] === "success" ? "success" : "current",
+        }));
 
-      setSelectedOptionId(null);
-      setCurrentQuestion(null);
-      setAnswer("");
+        setSelectedOptionId(null);
+        setCurrentQuestion(null);
+        setAnswer("");
+        setPendingNextPair(null);
+        setPendingNextMode(null);
+        setPendingNextRecommendedStar(null);
+        setPendingNextVisibleProgress(null);
+      } else {
+        setFeedback("Ce n’est pas la bonne réponse…");
+        setExplanationText(currentExplanation || typed.feedback);
+        setWrongAnswerPanelOpen(true);
+        setLastSubmittedAnswer(finalAnswer);
+
+        setPendingNextPair(typed.pair);
+        setPendingNextMode(typed.mode);
+        setPendingNextRecommendedStar(typed.recommendedStar);
+        setPendingNextVisibleProgress(typed.visibleProgress);
+
+        openResultModal(false, undefined);
+      }
     } catch (error) {
       setFeedback(
         error instanceof Error ? error.message : "Erreur pendant la correction."
@@ -614,7 +675,7 @@ export default function TutorV4Page() {
   }
 
   function handleInputKeyDown(e: KeyboardEvent<HTMLInputElement>) {
-    if (e.key === "Enter" && !busy) {
+    if (e.key === "Enter" && !busy && !wrongAnswerPanelOpen) {
       e.preventDefault();
       void submitAnswer();
     }
@@ -625,7 +686,7 @@ export default function TutorV4Page() {
   }
 
   return (
-    <main className="min-h-screen bg-[radial-gradient(circle_at_top,_#dbeafe,_#f8fafc_45%,_#eef2ff_70%,_#ffffff)] px-4 py-6">
+    <main className="min-h-screen bg-[#f3f4f6] px-4 py-6">
       <div className="mx-auto max-w-7xl">
         <div className="grid gap-5 xl:grid-cols-[minmax(0,1fr)_340px]">
           <div className="space-y-5">
@@ -702,7 +763,7 @@ export default function TutorV4Page() {
 
                 <button
                   onClick={() => void startSession()}
-                  disabled={busy}
+                  disabled={busy || wrongAnswerPanelOpen}
                   className="rounded-2xl bg-slate-900 px-6 py-3 text-sm font-black text-white shadow hover:bg-slate-800 disabled:opacity-50"
                 >
                   {busy ? "Chargement..." : "Démarrer une mission"}
@@ -758,7 +819,7 @@ export default function TutorV4Page() {
                       key={option.id}
                       type="button"
                       onClick={() => void chooseOption(option)}
-                      disabled={busy}
+                      disabled={busy || wrongAnswerPanelOpen}
                       className={`group rounded-[26px] border p-5 text-left shadow-sm transition hover:-translate-y-0.5 hover:shadow-lg disabled:opacity-50 ${
                         idx === 0
                           ? "border-sky-200 bg-gradient-to-b from-sky-50 to-white"
@@ -819,86 +880,90 @@ export default function TutorV4Page() {
                   </div>
                 </div>
 
-                <div className="mb-4 rounded-2xl bg-gradient-to-r from-violet-100 to-fuchsia-100 px-4 py-3 text-sm font-bold text-violet-900">
-                  Compétence travaillée : {microLabel(currentQuestion.microId)}
-                </div>
-
-                <div className="mb-4 rounded-2xl border border-slate-200 bg-white p-4 text-base text-slate-900">
-                  {currentQuestion.text}
-                </div>
-
-                {currentQuestion.canvas ? (
-                  <div className="mb-5 rounded-2xl bg-slate-50 p-3">
-                    {renderCanvas(currentQuestion.canvas)}
-                  </div>
-                ) : null}
-
-                <div className="mb-4 flex flex-wrap gap-2">
-                  <Tag>{currentQuestion.format === "qcm" ? "QCM" : "Réponse libre"}</Tag>
-                  <Tag>{mode === "evaluation" ? "Évaluation" : "Coaching"}</Tag>
-                </div>
-
-                {currentQuestion.format === "qcm" &&
-                currentQuestion.choices?.length ? (
-                  <div className="space-y-3">
-                    <div className="text-sm font-bold text-slate-800">
-                      Clique sur ta réponse
+                {!wrongAnswerPanelOpen ? (
+                  <>
+                    <div className="mb-4 rounded-2xl bg-gradient-to-r from-violet-100 to-fuchsia-100 px-4 py-3 text-sm font-bold text-violet-900">
+                      Compétence travaillée : {microLabel(currentQuestion.microId)}
                     </div>
 
-                    <div className="grid gap-2">
-                      {currentQuestion.choices.map((choice, idx) => (
+                    <div className="mb-4 rounded-2xl border border-slate-200 bg-white p-4 text-base text-slate-900">
+                      {currentQuestion.text}
+                    </div>
+
+                    {currentQuestion.canvas ? (
+                      <div className="mb-5 rounded-2xl bg-slate-50 p-3">
+                        {renderCanvas(currentQuestion.canvas)}
+                      </div>
+                    ) : null}
+
+                    <div className="mb-4 flex flex-wrap gap-2">
+                      <Tag>
+                        {currentQuestion.format === "qcm" ? "QCM" : "Réponse libre"}
+                      </Tag>
+                      <Tag>{mode === "evaluation" ? "Évaluation" : "Coaching"}</Tag>
+                    </div>
+
+                    {currentQuestion.format === "qcm" &&
+                    currentQuestion.choices?.length ? (
+                      <div className="space-y-3">
+                        <div className="text-sm font-bold text-slate-800">
+                          Clique sur ta réponse
+                        </div>
+
+                        <div className="grid gap-2">
+                          {currentQuestion.choices.map((choice, idx) => (
+                            <button
+                              key={`${choice}-${idx}`}
+                              type="button"
+                              onClick={() => void handleQcmClick(choice)}
+                              disabled={busy || wrongAnswerPanelOpen}
+                              className="rounded-2xl border border-slate-300 bg-white px-4 py-3 text-left text-sm font-medium text-slate-900 transition hover:bg-slate-50 disabled:opacity-50"
+                            >
+                              {choice}
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="space-y-3">
+                        <div className="text-sm font-bold text-slate-800">
+                          Écris ta réponse
+                        </div>
+
+                        <input
+                          value={answer}
+                          onChange={(e) => setAnswer(e.target.value)}
+                          onKeyDown={handleInputKeyDown}
+                          placeholder="Ta réponse..."
+                          disabled={busy || wrongAnswerPanelOpen}
+                          className="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-base text-slate-900"
+                        />
+
                         <button
-                          key={`${choice}-${idx}`}
-                          type="button"
-                          onClick={() => void handleQcmClick(choice)}
-                          disabled={busy}
-                          className="rounded-2xl border border-slate-300 bg-white px-4 py-3 text-left text-sm font-medium text-slate-900 transition hover:bg-slate-50 disabled:opacity-50"
+                          onClick={() => void submitAnswer()}
+                          disabled={busy || wrongAnswerPanelOpen}
+                          className="rounded-2xl bg-slate-900 px-5 py-3 text-sm font-black text-white hover:bg-slate-800 disabled:opacity-50"
                         >
-                          {choice}
+                          Valider ma réponse
                         </button>
-                      ))}
-                    </div>
-                  </div>
+                      </div>
+                    )}
+
+                    {mode === "coaching" && currentQuestion.hint ? (
+                      <div className="mt-4 rounded-2xl border border-emerald-200 bg-emerald-50 p-4 text-sm text-emerald-900">
+                        <span className="font-black">Indice :</span>{" "}
+                        {currentQuestion.hint}
+                      </div>
+                    ) : null}
+                  </>
                 ) : (
-                  <div className="space-y-3">
-                    <div className="text-sm font-bold text-slate-800">
-                      Écris ta réponse
-                    </div>
-
-                    <input
-                      value={answer}
-                      onChange={(e) => setAnswer(e.target.value)}
-                      onKeyDown={handleInputKeyDown}
-                      placeholder="Ta réponse..."
-                      disabled={busy}
-                      className="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-base text-slate-900"
-                    />
-
-                    <button
-                      onClick={() => void submitAnswer()}
-                      disabled={busy}
-                      className="rounded-2xl bg-slate-900 px-5 py-3 text-sm font-black text-white hover:bg-slate-800 disabled:opacity-50"
-                    >
-                      Valider ma réponse
-                    </button>
-                  </div>
+                  <WrongAnswerPanel
+                    question={currentQuestion}
+                    userAnswer={lastSubmittedAnswer}
+                    explanation={explanationText}
+                    onContinue={continueAfterExplanation}
+                  />
                 )}
-
-                {mode === "coaching" && currentQuestion.hint ? (
-                  <div className="mt-4 rounded-2xl border border-emerald-200 bg-emerald-50 p-4 text-sm text-emerald-900">
-                    <span className="font-black">Indice :</span> {currentQuestion.hint}
-                  </div>
-                ) : null}
-
-                {feedback ? (
-                  <div
-                    className={`mt-5 whitespace-pre-line rounded-2xl border px-4 py-4 text-sm font-medium ${feedbackTone(
-                      lastResult.ok
-                    )}`}
-                  >
-                    {feedback}
-                  </div>
-                ) : null}
               </section>
             ) : null}
 
@@ -942,7 +1007,7 @@ export default function TutorV4Page() {
                       key={microId}
                       type="button"
                       onClick={() => handleMicroClick(microId)}
-                      disabled={busy}
+                      disabled={busy || wrongAnswerPanelOpen}
                       className={`w-full rounded-2xl border px-4 py-3 text-left shadow-sm transition hover:shadow-md disabled:opacity-50 ${
                         statusClasses(status)
                       } ${isActive ? "ring-2 ring-slate-900/20" : ""}`}
@@ -1011,6 +1076,109 @@ export default function TutorV4Page() {
         onClose={closeResultModal}
       />
     </main>
+  );
+}
+
+function WrongAnswerPanel({
+  question,
+  userAnswer,
+  explanation,
+  onContinue,
+}: {
+  question: TutorQuestionOption;
+  userAnswer: string;
+  explanation: string;
+  onContinue: () => void;
+}) {
+  return (
+    <div className="space-y-6">
+      <div className="rounded-[28px] border border-sky-200 bg-[#f5f7fa] p-6">
+        <div className="mb-5 flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
+          <div>
+            <h2 className="text-4xl font-light tracking-tight text-sky-500 md:text-6xl">
+              Ce n&apos;est pas la bonne réponse…
+            </h2>
+            <div className="mt-4 text-lg text-lime-700">La bonne réponse est :</div>
+            <div className="mt-2 inline-flex min-w-[96px] items-center justify-center rounded-md border border-sky-400 bg-white px-4 py-2 text-3xl font-semibold text-slate-900 shadow-sm">
+              ?
+            </div>
+          </div>
+
+          <div className="pt-2">
+            <ContinueButton onClick={onContinue} />
+          </div>
+        </div>
+
+        <div className="text-5xl font-light text-lime-700">Explication</div>
+      </div>
+
+      <div className="relative rounded-sm border border-violet-200 bg-white p-6 shadow-sm">
+        <VerticalRibbon label="examiner" colorClass="bg-lime-500" />
+        <div className="pl-2">
+          <div className="rounded-xl bg-white p-4">
+            <div className="mb-4 text-base text-slate-900">{question.text}</div>
+
+            {question.canvas ? (
+              <div className="mb-4 rounded-2xl bg-slate-50 p-3">
+                {renderCanvas(question.canvas)}
+              </div>
+            ) : null}
+
+            <div className="mb-4 inline-flex min-w-[88px] rounded-sm border border-sky-400 bg-[#eaf3ff] px-3 py-2 text-lg text-slate-900">
+              {""}
+            </div>
+
+            <div className="text-2xl font-light text-lime-700">Ta réponse :</div>
+
+            <div className="mt-3 inline-flex min-w-[88px] rounded-sm border border-sky-400 bg-[#eaf3ff] px-3 py-2 text-lg text-slate-900">
+              {userAnswer || "—"}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="relative rounded-sm border border-violet-200 bg-white p-6 shadow-sm">
+        <VerticalRibbon label="résoudre" colorClass="bg-orange-400" />
+        <div className="pl-2">
+          <div className="whitespace-pre-line text-[15px] leading-8 text-slate-900">
+            {explanation || "Relis l’énoncé et compare bien les rangs des chiffres."}
+          </div>
+        </div>
+      </div>
+
+      <div className="flex justify-start">
+        <ContinueButton onClick={onContinue} />
+      </div>
+    </div>
+  );
+}
+
+function ContinueButton({ onClick }: { onClick: () => void }) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className="rounded-md bg-lime-500 px-6 py-3 text-base font-bold text-white shadow hover:bg-lime-600"
+    >
+      J&apos;ai compris
+    </button>
+  );
+}
+
+function VerticalRibbon({
+  label,
+  colorClass,
+}: {
+  label: string;
+  colorClass: string;
+}) {
+  return (
+    <div
+      className={`absolute left-0 top-6 -translate-x-1/2 rounded-sm px-2 py-1 text-sm font-medium text-white shadow ${colorClass}`}
+      style={{ writingMode: "vertical-rl", transform: "translateX(-50%) rotate(180deg)" }}
+    >
+      {label}
+    </div>
   );
 }
 

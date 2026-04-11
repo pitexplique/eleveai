@@ -158,6 +158,7 @@ export type TutorQuestionOption = {
   expected: string[];
   comparator: ComparatorName;
   hint?: string;
+  explanation?: string;
   canvas?: CanvasFigure;
   meta: QuestionVariantMeta;
 };
@@ -366,6 +367,7 @@ export type TutorGeneratedQuestionV4 = {
   choices?: string[];
   expected: string[];
   comparator: ComparatorName;
+  explanation?: string;
   canvas?: CanvasFigure;
 };
 
@@ -384,6 +386,7 @@ export type TutorBankItemFixedV4 = {
   expected: string[];
   comparator: ComparatorName;
   hint?: string;
+  explanation?: string;
   tags?: string[];
   canvas?: CanvasFigure;
 };
