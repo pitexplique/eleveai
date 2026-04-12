@@ -9,7 +9,15 @@ function getSupabaseAdminClient() {
     return null;
   }
 
-  return createClient(supabaseUrl, serviceRoleKey);
+  if (!supabaseUrl.startsWith("http://") && !supabaseUrl.startsWith("https://")) {
+    return null;
+  }
+
+  try {
+    return createClient(supabaseUrl, serviceRoleKey);
+  } catch {
+    return null;
+  }
 }
 
 export async function POST(req: Request) {
