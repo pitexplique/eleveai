@@ -1,6 +1,7 @@
 // knowledge/maths/6e/microSkills.ts
 
 import type { MicroSkillSource } from "@/lib/tutor-v4/knowledge/buildKnowledge";
+
 export const microSkills: MicroSkillSource[] = [
   /* =========================
      NOMBRES ENTIERS
@@ -388,6 +389,12 @@ export const microSkills: MicroSkillSource[] = [
     prerequis: ["perim_comprendre"],
   },
   {
+    id: "area_compter",
+    label: "Calculer une aire par comptage",
+    notionId: "aires",
+    prerequis: ["area_comprendre"],
+  },
+  {
     id: "area_rectangle",
     label: "Calculer l’aire d’un rectangle",
     notionId: "aires",
@@ -400,22 +407,34 @@ export const microSkills: MicroSkillSource[] = [
     prerequis: ["area_compter", "perim_square"],
   },
   {
-    id: "area_compter",
-    label: "Calculer une aire par comptage",
-    notionId: "aires",
-    prerequis: ["area_comprendre"],
-  },
-  {
     id: "area_comparer",
     label: "Comparer des aires",
     notionId: "aires",
     prerequis: ["area_rectangle", "area_square"],
   },
   {
+    id: "area_decomposer",
+    label: "Décomposer une figure pour calculer son aire",
+    notionId: "aires",
+    prerequis: ["area_rectangle", "area_square", "area_comparer"],
+  },
+  {
+    id: "area_problemes",
+    label: "Résoudre des problèmes d’aires",
+    notionId: "aires",
+    prerequis: [
+      "area_rectangle",
+      "area_square",
+      "area_decomposer",
+      "decimal_multiplier",
+      "prop_reconnaitre",
+    ],
+  },
+  {
     id: "area_defis",
     label: "Défis sur les aires",
     notionId: "aires",
-    prerequis: ["area_comparer"],
+    prerequis: ["area_comparer", "area_decomposer", "area_problemes"],
   },
 
   /* =========================

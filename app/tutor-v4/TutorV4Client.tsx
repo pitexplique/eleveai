@@ -12,6 +12,8 @@ import {
 import { useSearchParams } from "next/navigation";
 import TriangleCanvas from "@/lib/tutor-v4/components/TriangleCanvas";
 import QuadrilatereCanvas from "@/lib/tutor-v4/components/QuadrilatereCanvas";
+import FigureLibreCanvas from "@/lib/tutor-v4/components/FigureLibreCanvas";
+
 import {
   NOTION_MICRO_MAP,
   NOTION_OPTIONS,
@@ -167,6 +169,10 @@ function renderCanvas(canvas?: CanvasFigure | null) {
 
   if (canvas.kind === "quadrilatere") {
     return <QuadrilatereCanvas figure={canvas} />;
+  }
+
+    if (canvas.kind === "figure_libre") {
+    return <FigureLibreCanvas figure={canvas} />;
   }
 
   return null;

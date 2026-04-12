@@ -5,7 +5,7 @@ import { microSkills } from "@/lib/tutor-v4/knowledge/maths/6e/microSkills";
 
 /**
  * Ordre des micro-compétences.
- * Désormais dérivé du référentiel central.
+ * Dérivé automatiquement du référentiel central.
  */
 export const microSkillIndex6eMaths = microSkills.map((micro) => micro.id);
 
@@ -48,8 +48,18 @@ const supportLinks: Record<string, string[]> = {
   longueur_probleme: ["entier_compare"],
   perim_figure: ["longueur_comparer"],
   perim_probleme: ["longueur_probleme"],
+
   area_compter: ["perim_figure"],
   area_comparer: ["longueur_comparer"],
+  area_decomposer: ["area_rectangle", "area_square", "perim_figure"],
+  area_problemes: [
+    "area_decomposer",
+    "longueur_probleme",
+    "decimal_multiplier",
+    "prop_direct",
+  ],
+  area_defis: ["area_decomposer", "area_problemes"],
+
   volume_lire: ["data_lire_tableau"],
   triangle_possible_ou_non: ["longueur_comparer"],
 
@@ -80,7 +90,7 @@ function buildMatrix(
     indexMap.set(id, index);
   });
 
-  // Liens forts : parent direct
+  // Liens forts : parents directs
   for (const [childId, parentIds] of Object.entries(parentsMap)) {
     const childIndex = indexMap.get(childId);
     if (childIndex === undefined) continue;

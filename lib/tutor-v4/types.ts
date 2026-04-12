@@ -73,11 +73,14 @@ export type QuadrilatereCanvasSideLabel =
   | "AC"
   | "BD";
 
+export type FigureLibreCanvasGridCell = [row: number, col: number];
+export type FigureLibreCanvasGridPoint = [row: number, col: number];
+
 export type TriangleCanvasData = {
   kind: "triangle";
   size?: {
-    width: number;
-    height: number;
+    width?: number;
+    height?: number;
   };
   points: {
     A: { x: number; y: number };
@@ -103,8 +106,8 @@ export type TriangleCanvasData = {
 export type QuadrilatereCanvasData = {
   kind: "quadrilatere";
   size?: {
-    width: number;
-    height: number;
+    width?: number;
+    height?: number;
   };
   points: {
     A: { x: number; y: number };
@@ -136,7 +139,43 @@ export type QuadrilatereCanvasData = {
   };
 };
 
-export type CanvasFigure = TriangleCanvasData | QuadrilatereCanvasData;
+export type FigureLibreCanvasData = {
+  kind: "figure_libre";
+  size?: {
+    width?: number;
+    height?: number;
+    cellSize?: number;
+    padding?: number;
+  };
+  grid: {
+    rows: number;
+    cols: number;
+    filledCells: FigureLibreCanvasGridCell[];
+  };
+  display?: {
+    showGrid?: boolean;
+    showFilled?: boolean;
+    showCellLabels?: boolean;
+    showPerimeter?: boolean;
+    showVertices?: boolean;
+    showVertexLabels?: boolean;
+  };
+  colors?: {
+    filled?: string;
+    grid?: string;
+    border?: string;
+    perimeter?: string;
+    vertex?: string;
+    vertexLabel?: string;
+  };
+  perimeterPath?: FigureLibreCanvasGridPoint[];
+  vertices?: Record<string, FigureLibreCanvasGridPoint>;
+};
+
+export type CanvasFigure =
+  | TriangleCanvasData
+  | QuadrilatereCanvasData
+  | FigureLibreCanvasData;
 
 export type QuestionVariantMeta = {
   familyId: string;
