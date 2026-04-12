@@ -537,96 +537,134 @@ export default function TutorV4Page() {
     }
   }
 
-  async function submitAnswer(submittedAnswer?: string) {
-    if (!sessionId) {
-      setFeedback("Aucune session active.");
+async function submitAnswer(submittedAnswer?: string) {
+  if (!sessionId) {
+    setFeedback("Aucune session active.");
+    return;
+  }
+
+  if (!currentQuestion) {
+    setFeedback("Choisis d’abord une question.");
+    return;
+  }
+
+  if (wrongAnswerPanelOpen) {
+    return;
+  }
+
+  const finalAnswer = (submittedAnswer ?? answer).trim();
+
+  if (!finalAnswer) {
+    setFeedback("Entre une réponse ou clique sur un choix.");
+    return;
+  }
+
+  try {
+    setBusy(true);
+
+    const currentMicro = currentQuestion.microId;
+    const currentMicroLabel = microLabel(currentMicro);
+    const pointsForQuestion = starPoints(currentQuestion.meta.starLevel);
+    const currentExplanation = currentQuestion.explanation?.trim();
+    const hasExplanation =
+      typeof currentExplanation === "string" &&
+      currentExplanation.length > 0;
+
+    const res = await fetch("/api/tutor-v4/answer", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ sessionId, answer: finalAnswer }),
+    });
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      setFeedback(data?.error ?? "Erreur pendant la correction.");
       return;
     }
 
-    if (!currentQuestion) {
-      setFeedback("Choisis d’abord une question.");
-      return;
+    const typed = data as AnswerResponse;
+
+    setSessionResults((prev) => [...prev, typed.result.ok]);
+    setPossiblePoints((prev) => prev + pointsForQuestion);
+
+    if (typed.result.ok) {
+      setEarnedPoints((prev) => prev + pointsForQuestion);
     }
 
-    if (wrongAnswerPanelOpen) {
-      return;
-    }
+    setMicroScores((prev) => {
+      const current = prev[currentMicro] ?? {
+        attempts: 0,
+        success: 0,
+        earnedPoints: 0,
+        possiblePoints: 0,
+      };
 
-    const finalAnswer = (submittedAnswer ?? answer).trim();
+      return {
+        ...prev,
+        [currentMicro]: {
+          attempts: current.attempts + 1,
+          success: current.success + (typed.result.ok ? 1 : 0),
+          earnedPoints:
+            current.earnedPoints + (typed.result.ok ? pointsForQuestion : 0),
+          possiblePoints: current.possiblePoints + pointsForQuestion,
+        },
+      };
+    });
 
-    if (!finalAnswer) {
-      setFeedback("Entre une réponse ou clique sur un choix.");
-      return;
-    }
+    setLastResult({
+      ok: typed.result.ok,
+      microId: currentMicro,
+      points: typed.result.ok ? pointsForQuestion : 0,
+    });
 
-    try {
-      setBusy(true);
+    setMicroStatuses((prev) => ({
+      ...prev,
+      [currentMicro]: typed.result.ok ? "success" : "retry",
+    }));
 
-      const currentMicro = currentQuestion.microId;
-      const currentMicroLabel = microLabel(currentMicro);
-      const pointsForQuestion = starPoints(currentQuestion.meta.starLevel);
-      const currentExplanation = currentQuestion.explanation?.trim();
+    if (typed.result.ok) {
+      setFeedback(`Bonne réponse : ${currentMicroLabel}`);
+      setExplanationText("");
+      setWrongAnswerPanelOpen(false);
+      setLastSubmittedAnswer("");
 
-      const res = await fetch("/api/tutor-v4/answer", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ sessionId, answer: finalAnswer }),
-      });
+      openResultModal(true, `Mission réussie : ${currentMicroLabel}`);
 
-      const data = await res.json();
-
-      if (!res.ok) {
-        setFeedback(data?.error ?? "Erreur pendant la correction.");
-        return;
-      }
-
-      const typed = data as AnswerResponse;
-
-      setSessionResults((prev) => [...prev, typed.result.ok]);
-      setPossiblePoints((prev) => prev + pointsForQuestion);
-
-      if (typed.result.ok) {
-        setEarnedPoints((prev) => prev + pointsForQuestion);
-      }
-
-      setMicroScores((prev) => {
-        const current = prev[currentMicro] ?? {
-          attempts: 0,
-          success: 0,
-          earnedPoints: 0,
-          possiblePoints: 0,
-        };
-
-        return {
-          ...prev,
-          [currentMicro]: {
-            attempts: current.attempts + 1,
-            success: current.success + (typed.result.ok ? 1 : 0),
-            earnedPoints:
-              current.earnedPoints + (typed.result.ok ? pointsForQuestion : 0),
-            possiblePoints: current.possiblePoints + pointsForQuestion,
-          },
-        };
-      });
-
-      setLastResult({
-        ok: typed.result.ok,
-        microId: currentMicro,
-        points: typed.result.ok ? pointsForQuestion : 0,
-      });
+      setPair(typed.pair);
+      setMode(typed.mode);
+      setRecommendedStar(typed.recommendedStar);
+      setVisibleProgress(typed.visibleProgress);
+      setActiveMicroId(typed.pair.microId);
 
       setMicroStatuses((prev) => ({
         ...prev,
-        [currentMicro]: typed.result.ok ? "success" : "retry",
+        [typed.pair.microId]:
+          prev[typed.pair.microId] === "success" ? "success" : "current",
       }));
 
-      if (typed.result.ok) {
-        setFeedback(`Bonne réponse : ${currentMicroLabel}`);
+      setSelectedOptionId(null);
+      setCurrentQuestion(null);
+      setAnswer("");
+      setPendingNextPair(null);
+      setPendingNextMode(null);
+      setPendingNextRecommendedStar(null);
+      setPendingNextVisibleProgress(null);
+    } else {
+      setFeedback("Ce n’est pas la bonne réponse…");
+      setLastSubmittedAnswer(finalAnswer);
+
+      if (hasExplanation) {
+        setExplanationText(currentExplanation);
+        setWrongAnswerPanelOpen(true);
+
+        setPendingNextPair(typed.pair);
+        setPendingNextMode(typed.mode);
+        setPendingNextRecommendedStar(typed.recommendedStar);
+        setPendingNextVisibleProgress(typed.visibleProgress);
+      } else {
         setExplanationText("");
         setWrongAnswerPanelOpen(false);
-        setLastSubmittedAnswer("");
-
-        openResultModal(true, `Mission réussie : ${currentMicroLabel}`);
 
         setPair(typed.pair);
         setMode(typed.mode);
@@ -647,27 +685,23 @@ export default function TutorV4Page() {
         setPendingNextMode(null);
         setPendingNextRecommendedStar(null);
         setPendingNextVisibleProgress(null);
-      } else {
-        setFeedback("Ce n’est pas la bonne réponse…");
-        setExplanationText(currentExplanation || typed.feedback);
-        setWrongAnswerPanelOpen(true);
-        setLastSubmittedAnswer(finalAnswer);
-
-        setPendingNextPair(typed.pair);
-        setPendingNextMode(typed.mode);
-        setPendingNextRecommendedStar(typed.recommendedStar);
-        setPendingNextVisibleProgress(typed.visibleProgress);
-
-        openResultModal(false, undefined);
       }
-    } catch (error) {
-      setFeedback(
-        error instanceof Error ? error.message : "Erreur pendant la correction."
-      );
-    } finally {
-      setBusy(false);
+
+      setResultModal({
+        open: false,
+        ok: false,
+        title: "",
+        message: "",
+      });
     }
+  } catch (error) {
+    setFeedback(
+      error instanceof Error ? error.message : "Erreur pendant la correction."
+    );
+  } finally {
+    setBusy(false);
   }
+}
 
   async function handleQcmClick(choice: string) {
     setAnswer(choice);
