@@ -238,12 +238,10 @@ export default function TutorV4Page() {
 
   const [resultModal, setResultModal] = useState<{
     open: boolean;
-    ok: boolean;
     title: string;
     message?: string;
   }>({
     open: false,
-    ok: true,
     title: "",
     message: "",
   });
@@ -330,11 +328,10 @@ export default function TutorV4Page() {
     return items[Math.floor(Math.random() * items.length)];
   }
 
-  function openResultModal(ok: boolean, message?: string) {
+  function openResultModal(message?: string) {
     setResultModal({
       open: true,
-      ok,
-      title: ok ? randomSuccessTitle() : "Oups !",
+      title: randomSuccessTitle(),
       message,
     });
   }
@@ -633,7 +630,7 @@ export default function TutorV4Page() {
         setWrongAnswerPanelOpen(false);
         setLastSubmittedAnswer("");
 
-        openResultModal(true, `Mission réussie : ${currentMicroLabel}`);
+        openResultModal(`Mission réussie : ${currentMicroLabel}`);
 
         setPair(typed.pair);
         setMode(typed.mode);
@@ -1081,7 +1078,6 @@ export default function TutorV4Page() {
 
       <ResultModal
         open={resultModal.open}
-        ok={resultModal.ok}
         title={resultModal.title}
         message={resultModal.message}
         onClose={closeResultModal}
@@ -1303,13 +1299,11 @@ function Tag({ children }: { children: ReactNode }) {
 
 function ResultModal({
   open,
-  ok,
   title,
   message,
   onClose,
 }: {
   open: boolean;
-  ok: boolean;
   title: string;
   message?: string;
   onClose: () => void;
@@ -1338,33 +1332,23 @@ function ResultModal({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/50 px-4">
       <div
-        className={`w-full max-w-md rounded-[28px] border p-6 shadow-2xl ${
-          ok
-            ? "border-emerald-200 bg-white"
-            : "border-amber-200 bg-white"
-        }`}
+        className="w-full max-w-md rounded-[28px] border border-emerald-200 bg-white p-6 shadow-2xl"
       >
         <div className="mb-4 flex items-center gap-3">
           <div
-            className={`flex h-14 w-14 items-center justify-center rounded-full text-2xl shadow-sm ${
-              ok
-                ? "bg-emerald-100 text-emerald-700"
-                : "bg-amber-100 text-amber-700"
-            }`}
+            className="flex h-14 w-14 items-center justify-center rounded-full bg-emerald-100 text-2xl text-emerald-700 shadow-sm"
           >
-            {ok ? "🎉" : "😅"}
+            🎉
           </div>
 
           <div>
             <div
-              className={`text-2xl font-black ${
-                ok ? "text-emerald-700" : "text-amber-700"
-              }`}
+              className="text-2xl font-black text-emerald-700"
             >
               {title}
             </div>
             <div className="text-sm text-slate-500">
-              {ok ? "Ta réponse est correcte." : "Ce n’est pas grave, on continue."}
+              Ta réponse est correcte.
             </div>
           </div>
         </div>
