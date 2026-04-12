@@ -1,5 +1,13 @@
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 
+function expectedExplanation(expected: string[]) {
+  const answer = expected[0] ?? "";
+  return answer
+    ? `La bonne réponse attendue est : ${answer}. Relis les données puis compare ton raisonnement.`
+    : "Relis les données de l’énoncé et vérifie chaque étape du calcul.";
+}
+
+
 function shuffle<T>(arr: T[]): T[] {
   return [...arr].sort(() => Math.random() - 0.5);
 }
@@ -17,6 +25,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     text: "Si 2 cahiers coûtent 4 €, combien coûtent 4 cahiers ?",
     format: "short",
     expected: ["8", "8€", "8 €"],
+    explanation: expectedExplanation(["8", "8€", "8 €"]),
     comparator: "number_equal",
     hint: "Si on double, le prix double.",
     tags: ["proportionnalite", "tableau"],
@@ -33,6 +42,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     text: "Si 3 stylos coûtent 6 €, combien coûtent 9 stylos ?",
     format: "short",
     expected: ["18", "18€", "18 €"],
+    explanation: expectedExplanation(["18", "18€", "18 €"]),
     comparator: "number_equal",
     hint: "De 3 à 9, on multiplie par 3.",
     tags: ["proportionnalite", "tableau"],
@@ -49,6 +59,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     text: "À La Réunion, 3 samoussas coûtent 6 €. Combien coûtent 6 samoussas ?",
     format: "short",
     expected: ["12", "12€", "12 €"],
+    explanation: expectedExplanation(["12", "12€", "12 €"]),
     comparator: "number_equal",
     hint: "Si on multiplie la quantité par 2, le prix aussi.",
     tags: ["proportionnalite", "tableau", "reunion"],
@@ -65,6 +76,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     text: "Au marché forain, 2 ananas coûtent 8 €. Combien coûtent 6 ananas ?",
     format: "short",
     expected: ["24", "24€", "24 €"],
+    explanation: expectedExplanation(["24", "24€", "24 €"]),
     comparator: "number_equal",
     hint: "De 2 à 6, on multiplie par 3.",
     tags: ["proportionnalite", "tableau", "reunion"],
@@ -81,6 +93,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     text: "3 bonbons coûtent 6 €. Combien coûte 1 bonbon ?",
     format: "short",
     expected: ["2", "2€", "2 €"],
+    explanation: expectedExplanation(["2", "2€", "2 €"]),
     comparator: "number_equal",
     hint: "Passe à l’unité.",
     tags: ["proportionnalite", "unite"],
@@ -97,6 +110,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     text: "5 cahiers coûtent 15 €. Combien coûte 1 cahier ?",
     format: "short",
     expected: ["3", "3€", "3 €"],
+    explanation: expectedExplanation(["3", "3€", "3 €"]),
     comparator: "number_equal",
     hint: "Divise le prix total par 5.",
     tags: ["proportionnalite", "unite"],
@@ -113,6 +127,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     text: "Pour une recette, 4 yaourts coûtent 8 €. Combien coûte 1 yaourt ?",
     format: "short",
     expected: ["2", "2€", "2 €"],
+    explanation: expectedExplanation(["2", "2€", "2 €"]),
     comparator: "number_equal",
     hint: "Divise le prix total par le nombre de yaourts.",
     tags: ["proportionnalite", "unite", "cuisine"],
@@ -129,6 +144,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     text: "Pour cuisiner, 6 œufs coûtent 12 €. Combien coûte 1 œuf ?",
     format: "short",
     expected: ["2", "2€", "2 €"],
+    explanation: expectedExplanation(["2", "2€", "2 €"]),
     comparator: "number_equal",
     hint: "Passe par l’unité.",
     tags: ["proportionnalite", "unite", "cuisine"],
@@ -145,6 +161,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     text: "4 cahiers coûtent 8 €. Combien coûtent 2 cahiers ?",
     format: "short",
     expected: ["4", "4€", "4 €"],
+    explanation: expectedExplanation(["4", "4€", "4 €"]),
     comparator: "number_equal",
     hint: "Si on divise par 2, le prix aussi.",
     tags: ["proportionnalite", "direct"],
@@ -161,6 +178,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     text: "8 feutres coûtent 16 €. Combien coûtent 4 feutres ?",
     format: "short",
     expected: ["8", "8€", "8 €"],
+    explanation: expectedExplanation(["8", "8€", "8 €"]),
     comparator: "number_equal",
     hint: "4 est la moitié de 8.",
     tags: ["proportionnalite", "direct"],
@@ -177,6 +195,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     text: "Pendant un tournoi de foot, 6 bouteilles d’eau coûtent 12 €. Combien coûtent 3 bouteilles ?",
     format: "short",
     expected: ["6", "6€", "6 €"],
+    explanation: expectedExplanation(["6", "6€", "6 €"]),
     comparator: "number_equal",
     hint: "Si on prend deux fois moins, on paie deux fois moins.",
     tags: ["proportionnalite", "direct", "sport"],
@@ -193,6 +212,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     text: "Pour un match, 10 maillots coûtent 50 €. Combien coûtent 5 maillots ?",
     format: "short",
     expected: ["25", "25€", "25 €"],
+    explanation: expectedExplanation(["25", "25€", "25 €"]),
     comparator: "number_equal",
     hint: "Passe à la moitié.",
     tags: ["proportionnalite", "direct", "sport"],
@@ -210,6 +230,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     format: "qcm",
     choices: ["20", "25", "30", "60"],
     expected: ["30"],
+    explanation: expectedExplanation(["30"]),
     comparator: "mcq_exact",
     hint: "De 2 à 6, on multiplie par 3.",
     tags: ["proportionnalite", "tableau", "jeux_video", "qcm"],
@@ -227,6 +248,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     format: "qcm",
     choices: ["16", "20", "24", "48"],
     expected: ["24"],
+    explanation: expectedExplanation(["24"]),
     comparator: "mcq_exact",
     hint: "De 4 à 8, on double.",
     tags: ["proportionnalite", "tableau", "jeux_video", "qcm"],
@@ -244,6 +266,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     format: "qcm",
     choices: ["2 €", "3 €", "4 €", "5 €"],
     expected: ["3 €", "3€", "3"],
+    explanation: expectedExplanation(["3 €", "3€", "3"]),
     comparator: "mcq_exact",
     hint: "Passe par l’unité.",
     tags: ["proportionnalite", "unite", "reunion", "qcm"],
@@ -261,6 +284,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     format: "qcm",
     choices: ["1 €", "2 €", "3 €", "4 €"],
     expected: ["2 €", "2€", "2"],
+    explanation: expectedExplanation(["2 €", "2€", "2"]),
     comparator: "mcq_exact",
     hint: "Divise 8 par 4.",
     tags: ["proportionnalite", "unite", "reunion", "qcm"],
@@ -278,6 +302,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     format: "qcm",
     choices: ["4 €", "6 €", "8 €", "12 €"],
     expected: ["8 €", "8€", "8"],
+    explanation: expectedExplanation(["8 €", "8€", "8"]),
     comparator: "mcq_exact",
     hint: "4 est la moitié de 8.",
     tags: ["proportionnalite", "direct", "cuisine", "qcm"],
@@ -295,6 +320,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     format: "qcm",
     choices: ["3 €", "4 €", "6 €", "9 €"],
     expected: ["6 €", "6€", "6"],
+    explanation: expectedExplanation(["6 €", "6€", "6"]),
     comparator: "mcq_exact",
     hint: "3 est la moitié de 6.",
     tags: ["proportionnalite", "direct", "cuisine", "qcm"],
@@ -323,6 +349,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
         text: `Si ${a} objets coûtent ${total} €, combien coûtent ${targetQty} objets ?`,
         format: "short",
         expected: [String(targetTotal), `${targetTotal}€`, `${targetTotal} €`],
+        explanation: expectedExplanation([String(targetTotal), `${targetTotal}€`, `${targetTotal} €`]),
         comparator: "number_equal",
       };
     },
@@ -350,6 +377,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
         text: `${qty} billets coûtent ${total} €. Combien coûtent ${newQty} billets ?`,
         format: "short",
         expected: [String(newTotal), `${newTotal}€`, `${newTotal} €`],
+        explanation: expectedExplanation([String(newTotal), `${newTotal}€`, `${newTotal} €`]),
         comparator: "number_equal",
       };
     },
@@ -377,6 +405,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
         text: `À La Réunion, ${qty} bouchons coûtent ${total} €. Combien coûtent ${newQty} bouchons ?`,
         format: "short",
         expected: [String(newTotal), `${newTotal}€`, `${newTotal} €`],
+        explanation: expectedExplanation([String(newTotal), `${newTotal}€`, `${newTotal} €`]),
         comparator: "number_equal",
       };
     },
@@ -404,6 +433,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
         text: `Au marché de Saint-Paul, ${qty} mangues coûtent ${total} €. Combien coûtent ${newQty} mangues ?`,
         format: "short",
         expected: [String(newTotal), `${newTotal}€`, `${newTotal} €`],
+        explanation: expectedExplanation([String(newTotal), `${newTotal}€`, `${newTotal} €`]),
         comparator: "number_equal",
       };
     },
@@ -431,6 +461,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
         text: `Pour un entraînement de sport, ${qty} gourdes coûtent ${total} €. Combien coûtent ${newQty} gourdes ?`,
         format: "short",
         expected: [String(newTotal), `${newTotal}€`, `${newTotal} €`],
+        explanation: expectedExplanation([String(newTotal), `${newTotal}€`, `${newTotal} €`]),
         comparator: "number_equal",
       };
     },
@@ -458,6 +489,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
         text: `Pour une équipe de basket, ${qty} maillots coûtent ${total} €. Combien coûtent ${newQty} maillots ?`,
         format: "short",
         expected: [String(newTotal), `${newTotal}€`, `${newTotal} €`],
+        explanation: expectedExplanation([String(newTotal), `${newTotal}€`, `${newTotal} €`]),
         comparator: "number_equal",
       };
     },
@@ -493,6 +525,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
         format: "qcm",
         choices,
         expected: [String(good)],
+        explanation: expectedExplanation([String(good)]),
         comparator: "mcq_exact",
       };
     },
@@ -517,6 +550,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
         text: `${qty} objets coûtent ${total} €. Combien coûte 1 objet ?`,
         format: "short",
         expected: [String(unit), `${unit}€`, `${unit} €`],
+        explanation: expectedExplanation([String(unit), `${unit}€`, `${unit} €`]),
         comparator: "number_equal",
       };
     },
@@ -541,6 +575,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
         text: `${qty} stylos coûtent ${total} €. Combien coûte 1 stylo ?`,
         format: "short",
         expected: [String(unit), `${unit}€`, `${unit} €`],
+        explanation: expectedExplanation([String(unit), `${unit}€`, `${unit} €`]),
         comparator: "number_equal",
       };
     },
@@ -565,6 +600,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
         text: `En cuisine, ${qty} yaourts coûtent ${total} €. Combien coûte 1 yaourt ?`,
         format: "short",
         expected: [String(unit), `${unit}€`, `${unit} €`],
+        explanation: expectedExplanation([String(unit), `${unit}€`, `${unit} €`]),
         comparator: "number_equal",
       };
     },
@@ -589,6 +625,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
         text: `Pour une recette, ${qty} citrons coûtent ${total} €. Combien coûte 1 citron ?`,
         format: "short",
         expected: [String(unit), `${unit}€`, `${unit} €`],
+        explanation: expectedExplanation([String(unit), `${unit}€`, `${unit} €`]),
         comparator: "number_equal",
       };
     },
@@ -613,6 +650,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
         text: `Dans un jeu vidéo, ${qty} potions coûtent ${total} pièces. Combien coûte 1 potion ?`,
         format: "short",
         expected: [String(unit)],
+        explanation: expectedExplanation([String(unit)]),
         comparator: "number_equal",
       };
     },
@@ -645,6 +683,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
         format: "qcm",
         choices,
         expected: [String(unit)],
+        explanation: expectedExplanation([String(unit)]),
         comparator: "mcq_exact",
       };
     },
@@ -672,6 +711,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
         text: `Si ${qty} objets coûtent ${total} €, combien coûtent ${targetQty} objets ?`,
         format: "short",
         expected: [String(targetTotal), `${targetTotal}€`, `${targetTotal} €`],
+        explanation: expectedExplanation([String(targetTotal), `${targetTotal}€`, `${targetTotal} €`]),
         comparator: "number_equal",
       };
     },
@@ -698,6 +738,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
         text: `${qty} billets coûtent ${total} €. Combien coûtent ${targetQty} billets ?`,
         format: "short",
         expected: [String(targetTotal), `${targetTotal}€`, `${targetTotal} €`],
+        explanation: expectedExplanation([String(targetTotal), `${targetTotal}€`, `${targetTotal} €`]),
         comparator: "number_equal",
       };
     },
@@ -724,6 +765,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
         text: `Sur un stand à La Réunion, ${qty} samoussas coûtent ${total} €. Combien coûtent ${targetQty} samoussas ?`,
         format: "short",
         expected: [String(targetTotal), `${targetTotal}€`, `${targetTotal} €`],
+        explanation: expectedExplanation([String(targetTotal), `${targetTotal}€`, `${targetTotal} €`]),
         comparator: "number_equal",
       };
     },
@@ -750,6 +792,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
         text: `Au marché de Saint-Pierre, ${qty} mangues coûtent ${total} €. Combien coûtent ${targetQty} mangues ?`,
         format: "short",
         expected: [String(targetTotal), `${targetTotal}€`, `${targetTotal} €`],
+        explanation: expectedExplanation([String(targetTotal), `${targetTotal}€`, `${targetTotal} €`]),
         comparator: "number_equal",
       };
     },
@@ -784,6 +827,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
         format: "qcm",
         choices,
         expected: [String(good)],
+        explanation: expectedExplanation([String(good)]),
         comparator: "mcq_exact",
       };
     },
@@ -818,6 +862,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
         format: "qcm",
         choices,
         expected: [String(good)],
+        explanation: expectedExplanation([String(good)]),
         comparator: "mcq_exact",
       };
     },

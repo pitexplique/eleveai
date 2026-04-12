@@ -1,5 +1,13 @@
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 
+function expectedExplanation(expected: string[]) {
+  const answer = expected[0] ?? "";
+  return answer
+    ? `La bonne réponse attendue est : ${answer}. Relis les données puis compare ton raisonnement.`
+    : "Relis les données de l’énoncé et vérifie chaque étape du calcul.";
+}
+
+
 function shuffle<T>(arr: T[]): T[] {
   return [...arr].sort(() => Math.random() - 0.5);
 }
@@ -17,6 +25,7 @@ export const airesBank: TutorBankItemV4[] = [
     text: "Quelle est l’aire d’un rectangle de 4 cm sur 3 cm ?",
     format: "short",
     expected: ["12", "12 cm²", "12 cm2", "12cm²", "12cm2"],
+    explanation: expectedExplanation(["12", "12 cm²", "12 cm2", "12cm²", "12cm2"]),
     comparator: "number_equal",
     hint: "Aire du rectangle = longueur × largeur.",
     tags: ["aires", "rectangle"],
@@ -33,6 +42,7 @@ export const airesBank: TutorBankItemV4[] = [
     text: "Quelle est l’aire d’un carré de côté 5 cm ?",
     format: "short",
     expected: ["25", "25 cm²", "25 cm2", "25cm²", "25cm2"],
+    explanation: expectedExplanation(["25", "25 cm²", "25 cm2", "25cm²", "25cm2"]),
     comparator: "number_equal",
     hint: "Aire du carré = côté × côté.",
     tags: ["aires", "carre"],
@@ -50,6 +60,7 @@ export const airesBank: TutorBankItemV4[] = [
     format: "qcm",
     choices: ["10 cm²", "20 cm²", "24 cm²", "28 cm²"],
     expected: ["24 cm²", "24 cm2", "24"],
+    explanation: expectedExplanation(["24 cm²", "24 cm2", "24"]),
     comparator: "mcq_exact",
     hint: "Pour l’aire, on multiplie longueur et largeur.",
     tags: ["aires", "rectangle", "qcm"],
@@ -67,6 +78,7 @@ export const airesBank: TutorBankItemV4[] = [
     format: "qcm",
     choices: ["14 cm²", "28 cm²", "49 cm²", "21 cm²"],
     expected: ["49 cm²", "49 cm2", "49"],
+    explanation: expectedExplanation(["49 cm²", "49 cm2", "49"]),
     comparator: "mcq_exact",
     hint: "Il faut multiplier le côté par lui-même.",
     tags: ["aires", "carre", "qcm"],
@@ -84,6 +96,7 @@ export const airesBank: TutorBankItemV4[] = [
     format: "qcm",
     choices: ["13 cm²", "26 cm²", "40 cm²", "16 cm²"],
     expected: ["40 cm²", "40 cm2", "40"],
+    explanation: expectedExplanation(["40 cm²", "40 cm2", "40"]),
     comparator: "mcq_exact",
     hint: "Attention à ne pas confondre aire et périmètre.",
     tags: ["aires", "rectangle", "confusion", "qcm"],
@@ -101,6 +114,7 @@ export const airesBank: TutorBankItemV4[] = [
     format: "qcm",
     choices: ["18 cm²", "36 cm²", "81 cm²", "27 cm²"],
     expected: ["81 cm²", "81 cm2", "81"],
+    explanation: expectedExplanation(["81 cm²", "81 cm2", "81"]),
     comparator: "mcq_exact",
     hint: "Un carré de côté 9 a une aire de 9 × 9.",
     tags: ["aires", "carre", "confusion", "qcm"],
@@ -125,6 +139,7 @@ export const airesBank: TutorBankItemV4[] = [
         text: `Quelle est l’aire d’un rectangle de ${l} cm sur ${w} cm ?`,
         format: "short",
         expected: [String(a), `${a} cm²`, `${a} cm2`, `${a}cm²`, `${a}cm2`],
+        explanation: expectedExplanation([String(a), `${a} cm²`, `${a} cm2`, `${a}cm²`, `${a}cm2`]),
         comparator: "number_equal",
       };
     },
@@ -148,6 +163,7 @@ export const airesBank: TutorBankItemV4[] = [
         text: `Quelle est l’aire d’un carré de côté ${c} cm ?`,
         format: "short",
         expected: [String(a), `${a} cm²`, `${a} cm2`, `${a}cm²`, `${a}cm2`],
+        explanation: expectedExplanation([String(a), `${a} cm²`, `${a} cm2`, `${a}cm²`, `${a}cm2`]),
         comparator: "number_equal",
       };
     },
@@ -183,6 +199,7 @@ export const airesBank: TutorBankItemV4[] = [
         format: "qcm",
         choices,
         expected: [`${good} cm²`, `${good} cm2`, String(good)],
+        explanation: expectedExplanation([`${good} cm²`, `${good} cm2`, String(good)]),
         comparator: "mcq_exact",
       };
     },
@@ -217,6 +234,7 @@ export const airesBank: TutorBankItemV4[] = [
         format: "qcm",
         choices,
         expected: [`${good} cm²`, `${good} cm2`, String(good)],
+        explanation: expectedExplanation([`${good} cm²`, `${good} cm2`, String(good)]),
         comparator: "mcq_exact",
       };
     },

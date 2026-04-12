@@ -1,5 +1,13 @@
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 
+function expectedExplanation(expected: string[]) {
+  const answer = expected[0] ?? "";
+  return answer
+    ? `La bonne réponse attendue est : ${answer}. Relis les données puis compare ton raisonnement.`
+    : "Relis les données de l’énoncé et vérifie chaque étape du calcul.";
+}
+
+
 function shuffle<T>(arr: T[]): T[] {
   return [...arr].sort(() => Math.random() - 0.5);
 }
@@ -23,6 +31,7 @@ export const trianglesBank: TutorBankItemV4[] = [
     text: "Comment nomme-t-on un triangle qui a pour sommets A, B et C ?",
     format: "short",
     expected: ["triangle abc", "abc", "ABC"],
+    explanation: expectedExplanation(["triangle abc", "abc", "ABC"]),
     comparator: "contains_keyword",
     hint: "On écrit souvent : triangle ABC.",
     tags: ["triangles", "nommage"],
@@ -50,6 +59,7 @@ export const trianglesBank: TutorBankItemV4[] = [
     text: "Un triangle a pour sommets D, E et F. Comment peut-on le nommer ?",
     format: "short",
     expected: ["triangle def", "def", "DEF"],
+    explanation: expectedExplanation(["triangle def", "def", "DEF"]),
     comparator: "contains_keyword",
     hint: "On écrit les trois sommets dans l’ordre : triangle DEF.",
     tags: ["triangles", "nommage"],
@@ -83,6 +93,7 @@ export const trianglesBank: TutorBankItemV4[] = [
     format: "qcm",
     choices: ["triangle AB", "triangle ABC", "triangle AC", "triangle ACBF"],
     expected: ["triangle ABC"],
+    explanation: expectedExplanation(["triangle ABC"]),
     comparator: "mcq_exact",
     hint: "Un triangle se nomme avec ses trois sommets.",
     tags: ["triangles", "nommage", "qcm"],
@@ -123,6 +134,7 @@ export const trianglesBank: TutorBankItemV4[] = [
         text: `Comment nomme-t-on un triangle qui a pour sommets ${trio[0]}, ${trio[1]} et ${trio[2]} ?`,
         format: "short",
         expected: [`triangle ${name.toLowerCase()}`, name.toLowerCase(), name],
+        explanation: expectedExplanation([`triangle ${name.toLowerCase()}`, name.toLowerCase(), name]),
         comparator: "contains_keyword",
         canvas: {
           kind: "triangle",
@@ -159,6 +171,7 @@ export const trianglesBank: TutorBankItemV4[] = [
     text: "Observe la figure. Combien de côtés possède un triangle ?",
     format: "short",
     expected: ["3", "trois"],
+    explanation: expectedExplanation(["3", "trois"]),
     comparator: "contains_keyword",
     hint: "Un triangle a toujours 3 côtés.",
     tags: ["triangles", "canvas"],
@@ -187,6 +200,7 @@ export const trianglesBank: TutorBankItemV4[] = [
     format: "qcm",
     choices: ["2", "3", "4", "5"],
     expected: ["3"],
+    explanation: expectedExplanation(["3"]),
     comparator: "mcq_exact",
     hint: "Un triangle a 3 sommets.",
     tags: ["triangles", "canvas", "qcm"],
@@ -221,6 +235,7 @@ export const trianglesBank: TutorBankItemV4[] = [
     format: "qcm",
     choices: ["AB", "AD", "AE", "BD"],
     expected: ["AB"],
+    explanation: expectedExplanation(["AB"]),
     comparator: "mcq_exact",
     hint: "Les côtés relient deux sommets du triangle.",
     tags: ["triangles", "canvas", "qcm"],
@@ -258,6 +273,7 @@ export const trianglesBank: TutorBankItemV4[] = [
     text: "Un triangle a deux côtés de même longueur. Quel est son type ?",
     format: "short",
     expected: ["isocèle", "isocele"],
+    explanation: expectedExplanation(["isocèle", "isocele"]),
     comparator: "contains_keyword",
     hint: "Deux côtés égaux → triangle isocèle.",
     tags: ["triangles", "types"]
@@ -273,6 +289,7 @@ export const trianglesBank: TutorBankItemV4[] = [
     text: "Un triangle a trois côtés de même longueur. Quel est son type ?",
     format: "short",
     expected: ["équilatéral", "equilateral"],
+    explanation: expectedExplanation(["équilatéral", "equilateral"]),
     comparator: "contains_keyword",
     hint: "Trois côtés égaux → triangle équilatéral.",
     tags: ["triangles", "types"]
@@ -289,6 +306,7 @@ export const trianglesBank: TutorBankItemV4[] = [
     format: "qcm",
     choices: ["rectangle", "isocèle", "quelconque", "obtus"],
     expected: ["isocèle"],
+    explanation: expectedExplanation(["isocèle"]),
     comparator: "mcq_exact",
     hint: "Les deux côtés marqués de la même façon sont égaux.",
     tags: ["triangles", "canvas", "qcm"],
@@ -320,6 +338,7 @@ export const trianglesBank: TutorBankItemV4[] = [
     format: "qcm",
     choices: ["rectangle", "équilatéral", "obtus", "quelconque"],
     expected: ["équilatéral"],
+    explanation: expectedExplanation(["équilatéral"]),
     comparator: "mcq_exact",
     tags: ["triangles", "qcm"]
   },
@@ -335,6 +354,7 @@ export const trianglesBank: TutorBankItemV4[] = [
     format: "qcm",
     choices: ["équilatéral", "isocèle", "rectangle", "quelconque"],
     expected: ["équilatéral"],
+    explanation: expectedExplanation(["équilatéral"]),
     comparator: "mcq_exact",
     hint: "Les trois côtés sont marqués comme égaux.",
     tags: ["triangles", "canvas", "qcm"],
@@ -369,6 +389,7 @@ export const trianglesBank: TutorBankItemV4[] = [
     text: "Un triangle possède un angle droit. Quel est son type ?",
     format: "short",
     expected: ["rectangle"],
+    explanation: expectedExplanation(["rectangle"]),
     comparator: "contains_keyword",
     hint: "Un angle droit → triangle rectangle.",
     tags: ["triangles", "types"]
@@ -384,6 +405,7 @@ export const trianglesBank: TutorBankItemV4[] = [
     text: "Un triangle a un angle supérieur à 90°. Quel est son type ?",
     format: "short",
     expected: ["obtus"],
+    explanation: expectedExplanation(["obtus"]),
     comparator: "contains_keyword",
     hint: "Un angle > 90° → triangle obtusangle.",
     tags: ["triangles", "types"]
@@ -400,6 +422,7 @@ export const trianglesBank: TutorBankItemV4[] = [
     format: "qcm",
     choices: ["rectangle", "obtus", "aigu"],
     expected: ["aigu"],
+    explanation: expectedExplanation(["aigu"]),
     comparator: "mcq_exact",
     tags: ["triangles", "qcm"]
   },
@@ -415,6 +438,7 @@ export const trianglesBank: TutorBankItemV4[] = [
     format: "qcm",
     choices: ["aigu", "rectangle", "obtus"],
     expected: ["rectangle"],
+    explanation: expectedExplanation(["rectangle"]),
     comparator: "mcq_exact",
     hint: "Le petit carré indique un angle droit.",
     tags: ["triangles", "canvas", "qcm"],
@@ -453,6 +477,7 @@ export const trianglesBank: TutorBankItemV4[] = [
           format: "qcm",
           choices: shuffle(["rectangle", "aigu", "obtus"]),
           expected: ["rectangle"],
+          explanation: expectedExplanation(["rectangle"]),
           comparator: "mcq_exact",
           canvas: {
             kind: "triangle",
@@ -530,6 +555,7 @@ export const trianglesBank: TutorBankItemV4[] = [
     text: "Quelle est la somme des angles d’un triangle ?",
     format: "short",
     expected: ["180", "180°"],
+    explanation: expectedExplanation(["180", "180°"]),
     comparator: "number_equal",
     hint: "Dans tout triangle, la somme est 180°.",
     tags: ["triangles", "angles"]
@@ -546,6 +572,7 @@ export const trianglesBank: TutorBankItemV4[] = [
     format: "qcm",
     choices: ["90°", "180°", "270°", "360°"],
     expected: ["180°"],
+    explanation: expectedExplanation(["180°"]),
     comparator: "mcq_exact",
     hint: "C’est une propriété valable pour tous les triangles.",
     tags: ["triangles", "angles", "qcm", "canvas"],
@@ -583,6 +610,7 @@ export const trianglesBank: TutorBankItemV4[] = [
         text: "Complète : la somme des angles d’un triangle est égale à ...",
         format: "short",
         expected: ["180", "180°"],
+        explanation: expectedExplanation(["180", "180°"]),
         comparator: "number_equal"
       };
     }
@@ -602,6 +630,7 @@ export const trianglesBank: TutorBankItemV4[] = [
     text: "Dans un triangle, deux angles mesurent 60° et 70°. Combien mesure le troisième ?",
     format: "short",
     expected: ["50", "50°"],
+    explanation: expectedExplanation(["50", "50°"]),
     comparator: "number_equal",
     hint: "180 - 60 - 70",
     tags: ["triangles", "angles"]
@@ -617,6 +646,7 @@ export const trianglesBank: TutorBankItemV4[] = [
     text: "Observe la figure et calcule l’angle C.",
     format: "short",
     expected: ["50", "50°"],
+    explanation: expectedExplanation(["50", "50°"]),
     comparator: "number_equal",
     hint: "La somme des angles d’un triangle vaut 180°.",
     tags: ["triangles", "canvas"],
@@ -651,6 +681,7 @@ export const trianglesBank: TutorBankItemV4[] = [
     format: "qcm",
     choices: ["40°", "50°", "60°", "70°"],
     expected: ["50°"],
+    explanation: expectedExplanation(["50°"]),
     comparator: "mcq_exact",
     tags: ["triangles", "qcm"]
   },
@@ -674,6 +705,7 @@ export const trianglesBank: TutorBankItemV4[] = [
           text: "Dans un triangle, deux angles mesurent 50° et 60°. Combien mesure le troisième ?",
           format: "short",
           expected: ["70", "70°"],
+          explanation: expectedExplanation(["70", "70°"]),
           comparator: "number_equal"
         };
       }
@@ -706,6 +738,7 @@ export const trianglesBank: TutorBankItemV4[] = [
           text: "Observe la figure et calcule l’angle C.",
           format: "short",
           expected: ["50", "50°"],
+          explanation: expectedExplanation(["50", "50°"]),
           comparator: "number_equal",
           canvas: {
             kind: "triangle",
@@ -769,6 +802,7 @@ export const trianglesBank: TutorBankItemV4[] = [
     text: "Peut-on construire un triangle de côtés 2 cm, 3 cm et 6 cm ?",
     format: "short",
     expected: ["non"],
+    explanation: expectedExplanation(["non"]),
     comparator: "contains_keyword",
     hint: "2 + 3 < 6, donc ce n’est pas possible.",
     tags: ["triangles", "construction"]
@@ -785,6 +819,7 @@ export const trianglesBank: TutorBankItemV4[] = [
     format: "qcm",
     choices: ["oui", "non"],
     expected: ["oui"],
+    explanation: expectedExplanation(["oui"]),
     comparator: "mcq_exact",
     hint: "4 + 5 > 7",
     tags: ["triangles", "qcm", "construction"]
@@ -801,6 +836,7 @@ export const trianglesBank: TutorBankItemV4[] = [
     format: "qcm",
     choices: ["oui", "non"],
     expected: ["oui"],
+    explanation: expectedExplanation(["oui"]),
     comparator: "mcq_exact",
     hint: "Vérifie si la somme de deux côtés est plus grande que le troisième.",
     tags: ["triangles", "canvas", "qcm", "construction"],
@@ -838,6 +874,7 @@ export const trianglesBank: TutorBankItemV4[] = [
     text: "Un triangle a deux angles de 40° et 60°. Combien mesure le troisième angle ?",
     format: "short",
     expected: ["80", "80°"],
+    explanation: expectedExplanation(["80", "80°"]),
     comparator: "number_equal",
     hint: "La somme des angles d’un triangle vaut 180°.",
     tags: ["triangles", "defi", "olympiade", "angles"]
@@ -853,6 +890,7 @@ export const trianglesBank: TutorBankItemV4[] = [
     text: "Un triangle a deux côtés égaux. Quel est son type ?",
     format: "short",
     expected: ["isocèle", "isocele"],
+    explanation: expectedExplanation(["isocèle", "isocele"]),
     comparator: "contains_keyword",
     hint: "Deux côtés égaux → triangle isocèle.",
     tags: ["triangles", "defi", "olympiade", "types"]
@@ -869,6 +907,7 @@ export const trianglesBank: TutorBankItemV4[] = [
     format: "qcm",
     choices: ["oui", "non"],
     expected: ["oui"],
+    explanation: expectedExplanation(["oui"]),
     comparator: "mcq_exact",
     hint: "Vérifie la somme des angles.",
     tags: ["triangles", "defi", "olympiade", "qcm", "angles"]
@@ -885,6 +924,7 @@ export const trianglesBank: TutorBankItemV4[] = [
     format: "qcm",
     choices: ["oui", "non"],
     expected: ["non"],
+    explanation: expectedExplanation(["non"]),
     comparator: "mcq_exact",
     hint: "La somme de deux côtés doit être plus grande que le troisième.",
     tags: ["triangles", "defi", "olympiade", "construction", "qcm"]
@@ -901,6 +941,7 @@ export const trianglesBank: TutorBankItemV4[] = [
     format: "qcm",
     choices: ["oui", "non"],
     expected: ["oui"],
+    explanation: expectedExplanation(["oui"]),
     comparator: "mcq_exact",
     hint: "Le petit carré rouge indique un angle droit.",
     tags: ["triangles", "defi", "olympiade", "canvas", "qcm"],
@@ -931,6 +972,7 @@ export const trianglesBank: TutorBankItemV4[] = [
     text: "Un triangle a deux angles égaux et un angle de 100°. Combien mesurent les deux autres angles ?",
     format: "short",
     expected: ["40", "40°"],
+    explanation: expectedExplanation(["40", "40°"]),
     comparator: "number_equal",
     hint: "Les deux autres angles sont égaux et la somme totale vaut 180°.",
     tags: ["triangles", "defi", "olympiade", "raisonnement", "angles"]
@@ -947,6 +989,7 @@ export const trianglesBank: TutorBankItemV4[] = [
     format: "qcm",
     choices: ["oui", "non"],
     expected: ["non"],
+    explanation: expectedExplanation(["non"]),
     comparator: "mcq_exact",
     hint: "Deux angles droits feraient déjà 180°.",
     tags: ["triangles", "defi", "olympiade", "logique", "qcm"]
@@ -963,6 +1006,7 @@ export const trianglesBank: TutorBankItemV4[] = [
     format: "qcm",
     choices: ["oui", "non"],
     expected: ["oui"],
+    explanation: expectedExplanation(["oui"]),
     comparator: "mcq_exact",
     hint: "Deux traits verts identiques sur deux côtés signifient que ces côtés sont égaux.",
     tags: ["triangles", "defi", "olympiade", "canvas", "qcm", "types"],
@@ -999,6 +1043,7 @@ export const trianglesBank: TutorBankItemV4[] = [
       "triangle équilatéral"
     ],
     expected: ["triangle rectangle isocèle"],
+    explanation: expectedExplanation(["triangle rectangle isocèle"]),
     comparator: "mcq_exact",
     hint: "Il est à la fois rectangle et isocèle.",
     tags: ["triangles", "defi", "olympiade", "types", "raisonnement"]
@@ -1014,6 +1059,7 @@ export const trianglesBank: TutorBankItemV4[] = [
     text: "Dans un triangle équilatéral, combien mesure chaque angle ?",
     format: "short",
     expected: ["60", "60°"],
+    explanation: expectedExplanation(["60", "60°"]),
     comparator: "number_equal",
     hint: "Les trois angles sont égaux et leur somme vaut 180°.",
     tags: ["triangles", "defi", "olympiade", "equilateral", "angles"]
@@ -1030,6 +1076,7 @@ export const trianglesBank: TutorBankItemV4[] = [
     format: "qcm",
     choices: ["oui", "non"],
     expected: ["oui"],
+    explanation: expectedExplanation(["oui"]),
     comparator: "mcq_exact",
     hint: "Les trois côtés portent le même codage.",
     tags: ["triangles", "defi", "olympiade", "canvas", "qcm", "equilateral"],
@@ -1061,6 +1108,7 @@ export const trianglesBank: TutorBankItemV4[] = [
     format: "qcm",
     choices: ["oui", "non"],
     expected: ["oui"],
+    explanation: expectedExplanation(["oui"]),
     comparator: "mcq_exact",
     hint: "C’est possible si les deux autres angles sont très petits.",
     tags: ["triangles", "defi", "olympiade", "hpi", "qcm", "angles"]
@@ -1077,6 +1125,7 @@ export const trianglesBank: TutorBankItemV4[] = [
     format: "qcm",
     choices: ["oui", "non"],
     expected: ["non"],
+    explanation: expectedExplanation(["non"]),
     comparator: "mcq_exact",
     hint: "Deux triangles peuvent avoir les mêmes angles mais des tailles différentes.",
     tags: ["triangles", "defi", "olympiade", "hpi", "logique", "qcm"]
@@ -1092,6 +1141,7 @@ export const trianglesBank: TutorBankItemV4[] = [
     text: "Explique pourquoi on ne peut pas construire un triangle ayant deux angles droits.",
     format: "short",
     expected: ["180", "somme", "triangle"],
+    explanation: expectedExplanation(["180", "somme", "triangle"]),
     comparator: "contains_keyword",
     hint: "Deux angles droits font déjà 180°.",
     tags: ["triangles", "defi", "olympiade", "hpi", "raisonnement"]
@@ -1120,6 +1170,7 @@ export const trianglesBank: TutorBankItemV4[] = [
         format: "qcm",
         choices: shuffle(["oui", "non"]),
         expected: ["oui"],
+        explanation: expectedExplanation(["oui"]),
         comparator: "mcq_exact"
       };
     }
@@ -1156,6 +1207,7 @@ export const trianglesBank: TutorBankItemV4[] = [
         format: "qcm",
         choices: shuffle(["oui", "non"]),
         expected: [usePossible ? "oui" : "non"],
+        explanation: expectedExplanation([usePossible ? "oui" : "non"]),
         comparator: "mcq_exact"
       };
     }

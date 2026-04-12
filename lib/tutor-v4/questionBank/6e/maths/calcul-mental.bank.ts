@@ -1,5 +1,13 @@
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 
+function expectedExplanation(expected: string[]) {
+  const answer = expected[0] ?? "";
+  return answer
+    ? `La bonne réponse attendue est : ${answer}. Relis les données puis compare ton raisonnement.`
+    : "Relis les données de l’énoncé et vérifie chaque étape du calcul.";
+}
+
+
 function shuffle<T>(arr: T[]): T[] {
   return [...arr].sort(() => Math.random() - 0.5);
 }
@@ -24,6 +32,7 @@ export const calculMentalBank: TutorBankItemV4[] = [
     text: "Calcule : 68 + 7",
     format: "short",
     expected: ["75"],
+    explanation: expectedExplanation(["75"]),
     comparator: "number_equal",
     hint: "68 + 2 = 70, puis + 5.",
     tags: ["calcul_mental", "addition"],
@@ -40,6 +49,7 @@ export const calculMentalBank: TutorBankItemV4[] = [
     text: "Calcule : 134 + 28",
     format: "short",
     expected: ["162"],
+    explanation: expectedExplanation(["162"]),
     comparator: "number_equal",
     hint: "134 + 20 = 154, puis + 8.",
     tags: ["calcul_mental", "addition"],
@@ -56,6 +66,7 @@ export const calculMentalBank: TutorBankItemV4[] = [
     text: "Calcule : 56 + 8",
     format: "short",
     expected: ["64"],
+    explanation: expectedExplanation(["64"]),
     comparator: "number_equal",
     hint: "56 + 4 = 60, puis + 4.",
     tags: ["calcul_mental", "addition"],
@@ -73,6 +84,7 @@ export const calculMentalBank: TutorBankItemV4[] = [
     format: "qcm",
     choices: ["51", "52", "53", "54"],
     expected: ["53"],
+    explanation: expectedExplanation(["53"]),
     comparator: "mcq_exact",
     hint: "45 + 5 = 50, puis + 3.",
     tags: ["calcul_mental", "addition", "qcm"],
@@ -93,6 +105,7 @@ export const calculMentalBank: TutorBankItemV4[] = [
     text: "Calcule : 183 - 6",
     format: "short",
     expected: ["177"],
+    explanation: expectedExplanation(["177"]),
     comparator: "number_equal",
     hint: "183 - 3 = 180, puis - 3.",
     tags: ["calcul_mental", "soustraction"],
@@ -109,6 +122,7 @@ export const calculMentalBank: TutorBankItemV4[] = [
     text: "Calcule : 96 - 27",
     format: "short",
     expected: ["69"],
+    explanation: expectedExplanation(["69"]),
     comparator: "number_equal",
     hint: "96 - 20 = 76, puis - 7.",
     tags: ["calcul_mental", "soustraction"],
@@ -125,6 +139,7 @@ export const calculMentalBank: TutorBankItemV4[] = [
     text: "Calcule : 121 - 38",
     format: "short",
     expected: ["83"],
+    explanation: expectedExplanation(["83"]),
     comparator: "number_equal",
     hint: "121 - 40 = 81, puis ajoute 2.",
     tags: ["calcul_mental", "soustraction"],
@@ -142,6 +157,7 @@ export const calculMentalBank: TutorBankItemV4[] = [
     format: "qcm",
     choices: ["62", "63", "64", "65"],
     expected: ["64"],
+    explanation: expectedExplanation(["64"]),
     comparator: "mcq_exact",
     hint: "72 - 2 = 70, puis - 6.",
     tags: ["calcul_mental", "soustraction", "qcm"],
@@ -162,6 +178,7 @@ export const calculMentalBank: TutorBankItemV4[] = [
     text: "Calcule : 8 × 7",
     format: "short",
     expected: ["56"],
+    explanation: expectedExplanation(["56"]),
     comparator: "number_equal",
     hint: "Utilise la table de 8.",
     tags: ["calcul_mental", "multiplication"],
@@ -178,6 +195,7 @@ export const calculMentalBank: TutorBankItemV4[] = [
     text: "Calcule : 18 × 5",
     format: "short",
     expected: ["90"],
+    explanation: expectedExplanation(["90"]),
     comparator: "number_equal",
     hint: "Multiplier par 5, c’est prendre la moitié de ×10.",
     tags: ["calcul_mental", "multiplication"],
@@ -194,6 +212,7 @@ export const calculMentalBank: TutorBankItemV4[] = [
     text: "Calcule : 11 × 9",
     format: "short",
     expected: ["99"],
+    explanation: expectedExplanation(["99"]),
     comparator: "number_equal",
     hint: "Utilise la table de 9.",
     tags: ["calcul_mental", "multiplication"],
@@ -211,6 +230,7 @@ export const calculMentalBank: TutorBankItemV4[] = [
     format: "qcm",
     choices: ["46", "48", "52", "54"],
     expected: ["48"],
+    explanation: expectedExplanation(["48"]),
     comparator: "mcq_exact",
     hint: "Table de 6 ou de 8.",
     tags: ["calcul_mental", "multiplication", "qcm"],
@@ -231,6 +251,7 @@ export const calculMentalBank: TutorBankItemV4[] = [
     text: "Calcule : 645 ÷ 10",
     format: "short",
     expected: ["64,5", "64.5"],
+    explanation: expectedExplanation(["64,5", "64.5"]),
     comparator: "number_equal",
     hint: "Diviser par 10 décale la virgule d’un rang.",
     tags: ["calcul_mental", "division"],
@@ -247,6 +268,7 @@ export const calculMentalBank: TutorBankItemV4[] = [
     text: "Calcule : 63 ÷ 9",
     format: "short",
     expected: ["7"],
+    explanation: expectedExplanation(["7"]),
     comparator: "number_equal",
     hint: "9 × 7 = 63.",
     tags: ["calcul_mental", "division"],
@@ -263,6 +285,7 @@ export const calculMentalBank: TutorBankItemV4[] = [
     text: "Calcule : 56 ÷ 8",
     format: "short",
     expected: ["7"],
+    explanation: expectedExplanation(["7"]),
     comparator: "number_equal",
     hint: "8 × 7 = 56.",
     tags: ["calcul_mental", "division"],
@@ -280,6 +303,7 @@ export const calculMentalBank: TutorBankItemV4[] = [
     format: "qcm",
     choices: ["8", "9", "10", "11"],
     expected: ["9"],
+    explanation: expectedExplanation(["9"]),
     comparator: "mcq_exact",
     hint: "5 × 9 = 45.",
     tags: ["calcul_mental", "division", "qcm"],
@@ -300,6 +324,7 @@ export const calculMentalBank: TutorBankItemV4[] = [
     text: "Donne le quart de 28.",
     format: "short",
     expected: ["7"],
+    explanation: expectedExplanation(["7"]),
     comparator: "number_equal",
     hint: "Partager en 4 parts égales.",
     tags: ["calcul_mental", "strategie"],
@@ -316,6 +341,7 @@ export const calculMentalBank: TutorBankItemV4[] = [
     text: "Donne le double de 70.",
     format: "short",
     expected: ["140"],
+    explanation: expectedExplanation(["140"]),
     comparator: "number_equal",
     hint: "70 + 70.",
     tags: ["calcul_mental", "strategie"],
@@ -332,6 +358,7 @@ export const calculMentalBank: TutorBankItemV4[] = [
     text: "Calcule : 4,23 × 10",
     format: "short",
     expected: ["42,3", "42.3"],
+    explanation: expectedExplanation(["42,3", "42.3"]),
     comparator: "number_equal",
     hint: "Multiplier par 10 décale la virgule d’un rang.",
     tags: ["calcul_mental", "strategie", "decimaux"],
@@ -349,6 +376,7 @@ export const calculMentalBank: TutorBankItemV4[] = [
     format: "qcm",
     choices: ["12", "13", "14", "15"],
     expected: ["13"],
+    explanation: expectedExplanation(["13"]),
     comparator: "mcq_exact",
     hint: "26 partagé en 2.",
     tags: ["calcul_mental", "strategie", "qcm"],
@@ -369,6 +397,7 @@ export const calculMentalBank: TutorBankItemV4[] = [
     text: "À la boulangerie, Léa achète une tarte à 5 €, un jus à 3 € ainsi qu’un gâteau à 26 €. Combien Léa va-t-elle payer en tout ?",
     format: "short",
     expected: ["34", "34 €", "34€"],
+    explanation: expectedExplanation(["34", "34 €", "34€"]),
     comparator: "contains_keyword",
     hint: "Additionne 5 + 3 + 26.",
     tags: ["calcul_mental", "probleme"],
@@ -385,6 +414,7 @@ export const calculMentalBank: TutorBankItemV4[] = [
     text: "Un album contient 87 pages. Tu en as déjà lu 39. Combien de pages te reste-t-il à lire ?",
     format: "short",
     expected: ["48"],
+    explanation: expectedExplanation(["48"]),
     comparator: "number_equal",
     hint: "Fais 87 - 39.",
     tags: ["calcul_mental", "probleme", "soustraction"],
@@ -401,6 +431,7 @@ export const calculMentalBank: TutorBankItemV4[] = [
     text: "63 mangues sont partagées entre 9 enfants. Combien chaque enfant reçoit-il de mangues ?",
     format: "short",
     expected: ["7"],
+    explanation: expectedExplanation(["7"]),
     comparator: "number_equal",
     hint: "Fais 63 ÷ 9.",
     tags: ["calcul_mental", "probleme", "reunion", "division"],
@@ -417,6 +448,7 @@ export const calculMentalBank: TutorBankItemV4[] = [
     text: "Un spectacle commence à 15 h 35 et dure 1 heure et 25 minutes. À quelle heure se termine-t-il ?",
     format: "short",
     expected: ["17 h 00", "17h00", "17:00", "17 h"],
+    explanation: expectedExplanation(["17 h 00", "17h00", "17:00", "17 h"]),
     comparator: "contains_keyword",
     hint: "Ajoute 1 heure puis 25 minutes.",
     tags: ["calcul_mental", "probleme", "heure"],
@@ -433,6 +465,7 @@ export const calculMentalBank: TutorBankItemV4[] = [
     text: "Dans un jardin à Saint-Pierre, il y a 9 rangées de 7 fleurs. Combien de fleurs y a-t-il en tout ?",
     format: "short",
     expected: ["63"],
+    explanation: expectedExplanation(["63"]),
     comparator: "number_equal",
     hint: "Fais 9 × 7.",
     tags: ["calcul_mental", "probleme", "reunion", "multiplication"],
@@ -461,6 +494,7 @@ export const calculMentalBank: TutorBankItemV4[] = [
         text: `Calcule : ${a} + ${b}`,
         format: "short",
         expected: [String(sum)],
+        explanation: expectedExplanation([String(sum)]),
         comparator: "number_equal",
       };
     },
@@ -485,6 +519,7 @@ export const calculMentalBank: TutorBankItemV4[] = [
         text: `Calcule : ${a} + ${b}`,
         format: "short",
         expected: [String(sum)],
+        explanation: expectedExplanation([String(sum)]),
         comparator: "number_equal",
       };
     },
@@ -513,6 +548,7 @@ export const calculMentalBank: TutorBankItemV4[] = [
         text: `Calcule : ${a} - ${b}`,
         format: "short",
         expected: [String(diff)],
+        explanation: expectedExplanation([String(diff)]),
         comparator: "number_equal",
       };
     },
@@ -537,6 +573,7 @@ export const calculMentalBank: TutorBankItemV4[] = [
         text: `Calcule : ${a} - ${b}`,
         format: "short",
         expected: [String(diff)],
+        explanation: expectedExplanation([String(diff)]),
         comparator: "number_equal",
       };
     },
@@ -565,6 +602,7 @@ export const calculMentalBank: TutorBankItemV4[] = [
         text: `Calcule : ${a} × ${b}`,
         format: "short",
         expected: [String(product)],
+        explanation: expectedExplanation([String(product)]),
         comparator: "number_equal",
       };
     },
@@ -589,6 +627,7 @@ export const calculMentalBank: TutorBankItemV4[] = [
         text: `Calcule : ${a} × ${b}`,
         format: "short",
         expected: [String(product)],
+        explanation: expectedExplanation([String(product)]),
         comparator: "number_equal",
       };
     },
@@ -617,6 +656,7 @@ export const calculMentalBank: TutorBankItemV4[] = [
         text: `Calcule : ${dividend} ÷ ${divisor}`,
         format: "short",
         expected: [String(quotient)],
+        explanation: expectedExplanation([String(quotient)]),
         comparator: "number_equal",
       };
     },
@@ -641,6 +681,7 @@ export const calculMentalBank: TutorBankItemV4[] = [
         text: `Calcule : ${dividend} ÷ 10`,
         format: "short",
         expected: [String(quotient), formatComma(quotient)],
+        explanation: expectedExplanation([String(quotient), formatComma(quotient)]),
         comparator: "number_equal",
       };
     },
@@ -671,6 +712,7 @@ export const calculMentalBank: TutorBankItemV4[] = [
           text: `Donne le double de ${n}.`,
           format: "short",
           expected: [String(n * 2)],
+          explanation: expectedExplanation([String(n * 2)]),
           comparator: "number_equal",
         };
       }
@@ -707,6 +749,7 @@ export const calculMentalBank: TutorBankItemV4[] = [
           text: `Calcule : ${formatComma(n)} × 10`,
           format: "short",
           expected: [String(answer), formatComma(answer)],
+          explanation: expectedExplanation([String(answer), formatComma(answer)]),
           comparator: "number_equal",
         };
       }
@@ -745,6 +788,7 @@ export const calculMentalBank: TutorBankItemV4[] = [
         text: `Dans un magasin, un cahier coûte ${a} € et une trousse coûte ${b} €. Combien paie-t-on en tout ?`,
         format: "short",
         expected: [String(total), `${total} €`, `${total}€`],
+        explanation: expectedExplanation([String(total), `${total} €`, `${total}€`]),
         comparator: "contains_keyword",
       };
     },
@@ -769,6 +813,7 @@ export const calculMentalBank: TutorBankItemV4[] = [
         text: `Dans un verger à La Réunion, il y a ${rows} rangées de ${perRow} arbres. Combien y a-t-il d’arbres en tout ?`,
         format: "short",
         expected: [String(total)],
+        explanation: expectedExplanation([String(total)]),
         comparator: "number_equal",
       };
     },

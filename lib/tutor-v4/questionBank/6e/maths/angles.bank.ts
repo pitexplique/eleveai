@@ -1,5 +1,13 @@
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 
+function expectedExplanation(expected: string[]) {
+  const answer = expected[0] ?? "";
+  return answer
+    ? `La bonne réponse attendue est : ${answer}. Relis les données puis compare ton raisonnement.`
+    : "Relis les données de l’énoncé et vérifie chaque étape du calcul.";
+}
+
+
 function shuffle<T>(arr: T[]): T[] {
   return [...arr].sort(() => Math.random() - 0.5);
 }
@@ -17,6 +25,7 @@ export const anglesBank: TutorBankItemV4[] = [
     text: "Un angle droit mesure combien de degrés ?",
     format: "short",
     expected: ["90", "90°"],
+    explanation: expectedExplanation(["90", "90°"]),
     comparator: "number_equal",
     hint: "Le coin d'un carré mesure 90°.",
     tags: ["angles", "angle_droit"],
@@ -33,6 +42,7 @@ export const anglesBank: TutorBankItemV4[] = [
     text: "Complète : un angle droit mesure ___ degrés.",
     format: "short",
     expected: ["90", "90°"],
+    explanation: expectedExplanation(["90", "90°"]),
     comparator: "number_equal",
     hint: "Un angle droit vaut toujours 90°.",
     tags: ["angles", "angle_droit"],
@@ -49,6 +59,7 @@ export const anglesBank: TutorBankItemV4[] = [
     text: "Quelle est la mesure d’un angle droit ?",
     format: "short",
     expected: ["90", "90°"],
+    explanation: expectedExplanation(["90", "90°"]),
     comparator: "number_equal",
     hint: "Toujours 90°.",
     tags: ["angles", "angle_droit"],
@@ -66,6 +77,7 @@ export const anglesBank: TutorBankItemV4[] = [
     format: "qcm",
     choices: ["45°", "90°", "100°", "180°"],
     expected: ["90°", "90"],
+    explanation: expectedExplanation(["90°", "90"]),
     comparator: "mcq_exact",
     hint: "Un angle droit mesure 90°.",
     tags: ["angles", "angle_droit", "qcm"],
@@ -83,6 +95,7 @@ export const anglesBank: TutorBankItemV4[] = [
     format: "qcm",
     choices: ["60°", "90°", "120°", "150°"],
     expected: ["90°", "90"],
+    explanation: expectedExplanation(["90°", "90"]),
     comparator: "mcq_exact",
     hint: "Le bon choix est 90°.",
     tags: ["angles", "angle_droit", "qcm"],
@@ -99,6 +112,7 @@ export const anglesBank: TutorBankItemV4[] = [
     text: "Quel angle est le plus grand : 30° ou 80° ?",
     format: "short",
     expected: ["80", "80°"],
+    explanation: expectedExplanation(["80", "80°"]),
     comparator: "number_equal",
     hint: "Compare les nombres.",
     tags: ["angles", "comparaison"],
@@ -115,6 +129,7 @@ export const anglesBank: TutorBankItemV4[] = [
     text: "Quel angle est le plus petit : 120° ou 70° ?",
     format: "short",
     expected: ["70", "70°"],
+    explanation: expectedExplanation(["70", "70°"]),
     comparator: "number_equal",
     hint: "Le plus petit angle a la plus petite mesure.",
     tags: ["angles", "comparaison"],
@@ -131,6 +146,7 @@ export const anglesBank: TutorBankItemV4[] = [
     text: "Quel angle est le plus grand : 45° ou 95° ?",
     format: "short",
     expected: ["95", "95°"],
+    explanation: expectedExplanation(["95", "95°"]),
     comparator: "number_equal",
     hint: "Cherche la plus grande mesure.",
     tags: ["angles", "comparaison"],
@@ -147,6 +163,7 @@ export const anglesBank: TutorBankItemV4[] = [
     text: "Quel angle est le plus petit : 85° ou 55° ?",
     format: "short",
     expected: ["55", "55°"],
+    explanation: expectedExplanation(["55", "55°"]),
     comparator: "number_equal",
     hint: "Compare les deux nombres.",
     tags: ["angles", "comparaison"],
@@ -164,6 +181,7 @@ export const anglesBank: TutorBankItemV4[] = [
     format: "qcm",
     choices: ["25°", "65°", "85°", "45°"],
     expected: ["85°", "85"],
+    explanation: expectedExplanation(["85°", "85"]),
     comparator: "mcq_exact",
     hint: "Cherche le plus grand nombre.",
     tags: ["angles", "comparaison", "qcm"],
@@ -181,6 +199,7 @@ export const anglesBank: TutorBankItemV4[] = [
     format: "qcm",
     choices: ["110°", "95°", "70°", "100°"],
     expected: ["70°", "70"],
+    explanation: expectedExplanation(["70°", "70"]),
     comparator: "mcq_exact",
     hint: "Cherche le plus petit nombre.",
     tags: ["angles", "comparaison", "qcm"],
@@ -198,6 +217,7 @@ export const anglesBank: TutorBankItemV4[] = [
     format: "qcm",
     choices: ["40°", "75°", "55°", "65°"],
     expected: ["75°", "75"],
+    explanation: expectedExplanation(["75°", "75"]),
     comparator: "mcq_exact",
     hint: "Compare les quatre mesures.",
     tags: ["angles", "comparaison", "qcm"],
@@ -215,6 +235,7 @@ export const anglesBank: TutorBankItemV4[] = [
     format: "qcm",
     choices: ["35°", "25°", "45°", "30°"],
     expected: ["25°", "25"],
+    explanation: expectedExplanation(["25°", "25"]),
     comparator: "mcq_exact",
     hint: "L’angle le plus petit a la mesure la plus petite.",
     tags: ["angles", "comparaison", "qcm"],
@@ -231,6 +252,7 @@ export const anglesBank: TutorBankItemV4[] = [
     text: "Un angle de 45° est-il plus petit ou plus grand qu’un angle droit ?",
     format: "short",
     expected: ["plus petit", "petit"],
+    explanation: expectedExplanation(["plus petit", "petit"]),
     comparator: "contains_keyword",
     hint: "Un angle droit mesure 90°.",
     tags: ["angles", "compare"],
@@ -247,6 +269,7 @@ export const anglesBank: TutorBankItemV4[] = [
     text: "Un angle de 120° est-il plus petit ou plus grand qu’un angle droit ?",
     format: "short",
     expected: ["plus grand", "grand"],
+    explanation: expectedExplanation(["plus grand", "grand"]),
     comparator: "contains_keyword",
     hint: "Compare 120° à 90°.",
     tags: ["angles", "compare"],
@@ -269,6 +292,7 @@ export const anglesBank: TutorBankItemV4[] = [
       "impossible à savoir",
     ],
     expected: ["plus petit qu’un angle droit"],
+    explanation: expectedExplanation(["plus petit qu’un angle droit"]),
     comparator: "mcq_exact",
     hint: "Un angle droit mesure 90°.",
     tags: ["angles", "compare", "qcm"],
@@ -291,6 +315,7 @@ export const anglesBank: TutorBankItemV4[] = [
       "nul",
     ],
     expected: ["plus grand qu’un angle droit"],
+    explanation: expectedExplanation(["plus grand qu’un angle droit"]),
     comparator: "mcq_exact",
     hint: "Compare 100° à 90°.",
     tags: ["angles", "compare", "qcm"],
@@ -311,6 +336,7 @@ export const anglesBank: TutorBankItemV4[] = [
         text: "Combien mesure un angle droit ?",
         format: "short",
         expected: ["90", "90°"],
+        explanation: expectedExplanation(["90", "90°"]),
         comparator: "number_equal",
       };
     },
@@ -331,6 +357,7 @@ export const anglesBank: TutorBankItemV4[] = [
         text: "Quelle est la mesure d’un angle droit ?",
         format: "short",
         expected: ["90", "90°"],
+        explanation: expectedExplanation(["90", "90°"]),
         comparator: "number_equal",
       };
     },
@@ -353,6 +380,7 @@ export const anglesBank: TutorBankItemV4[] = [
         format: "qcm",
         choices,
         expected: ["90°", "90"],
+        explanation: expectedExplanation(["90°", "90"]),
         comparator: "mcq_exact",
       };
     },
@@ -375,6 +403,7 @@ export const anglesBank: TutorBankItemV4[] = [
         format: "qcm",
         choices,
         expected: ["90°", "90"],
+        explanation: expectedExplanation(["90°", "90"]),
         comparator: "mcq_exact",
       };
     },
@@ -405,6 +434,7 @@ export const anglesBank: TutorBankItemV4[] = [
         text: `Quel angle est le plus grand : ${a}° ou ${b}° ?`,
         format: "short",
         expected: [String(max), `${max}°`],
+        explanation: expectedExplanation([String(max), `${max}°`]),
         comparator: "number_equal",
       };
     },
@@ -435,6 +465,7 @@ export const anglesBank: TutorBankItemV4[] = [
         text: `Quel angle est le plus petit : ${a}° ou ${b}° ?`,
         format: "short",
         expected: [String(min), `${min}°`],
+        explanation: expectedExplanation([String(min), `${min}°`]),
         comparator: "number_equal",
       };
     },
@@ -465,6 +496,7 @@ export const anglesBank: TutorBankItemV4[] = [
         text: `Entre ${a}° et ${b}°, quel angle est le plus grand ?`,
         format: "short",
         expected: [String(max), `${max}°`],
+        explanation: expectedExplanation([String(max), `${max}°`]),
         comparator: "number_equal",
       };
     },
@@ -492,6 +524,7 @@ export const anglesBank: TutorBankItemV4[] = [
         format: "qcm",
         choices,
         expected: [`${good}°`, String(good)],
+        explanation: expectedExplanation([`${good}°`, String(good)]),
         comparator: "mcq_exact",
       };
     },
@@ -519,6 +552,7 @@ export const anglesBank: TutorBankItemV4[] = [
         format: "qcm",
         choices,
         expected: [`${good}°`, String(good)],
+        explanation: expectedExplanation([`${good}°`, String(good)]),
         comparator: "mcq_exact",
       };
     },
@@ -541,6 +575,7 @@ export const anglesBank: TutorBankItemV4[] = [
         text: `Un angle de ${value}° est-il plus petit ou plus grand qu’un angle droit ?`,
         format: "short",
         expected: ["plus petit", "petit"],
+        explanation: expectedExplanation(["plus petit", "petit"]),
         comparator: "contains_keyword",
       };
     },
@@ -563,6 +598,7 @@ export const anglesBank: TutorBankItemV4[] = [
         text: `Un angle de ${value}° est-il plus petit ou plus grand qu’un angle droit ?`,
         format: "short",
         expected: ["plus grand", "grand"],
+        explanation: expectedExplanation(["plus grand", "grand"]),
         comparator: "contains_keyword",
       };
     },
@@ -591,6 +627,7 @@ export const anglesBank: TutorBankItemV4[] = [
           "plat",
         ]),
         expected: ["plus petit qu’un angle droit"],
+        explanation: expectedExplanation(["plus petit qu’un angle droit"]),
         comparator: "mcq_exact",
       };
     },
@@ -619,6 +656,7 @@ export const anglesBank: TutorBankItemV4[] = [
           "nul",
         ]),
         expected: ["plus grand qu’un angle droit"],
+        explanation: expectedExplanation(["plus grand qu’un angle droit"]),
         comparator: "mcq_exact",
       };
     },

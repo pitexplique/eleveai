@@ -1,5 +1,13 @@
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 
+function expectedExplanation(expected: string[]) {
+  const answer = expected[0] ?? "";
+  return answer
+    ? `La bonne réponse attendue est : ${answer}. Relis les données puis compare ton raisonnement.`
+    : "Relis les données de l’énoncé et vérifie chaque étape du calcul.";
+}
+
+
 function shuffle<T>(arr: T[]): T[] {
   return [...arr].sort(() => Math.random() - 0.5);
 }
@@ -23,6 +31,7 @@ export const quadrilateresBank: TutorBankItemV4[] = [
     text: "Comment nomme-t-on ce quadrilatère ?",
     format: "short",
     expected: ["quadrilatere abcd", "abcd", "ABCD"],
+    explanation: expectedExplanation(["quadrilatere abcd", "abcd", "ABCD"]),
     comparator: "contains_keyword",
     hint: "On nomme la figure avec ses 4 sommets dans l’ordre.",
     tags: ["quadrilatere", "nommage", "canvas"],
@@ -52,6 +61,7 @@ export const quadrilateresBank: TutorBankItemV4[] = [
     format: "qcm",
     choices: ["3", "4", "5", "6"],
     expected: ["4"],
+    explanation: expectedExplanation(["4"]),
     comparator: "mcq_exact",
     hint: "Le préfixe « quadri » aide.",
     tags: ["quadrilatere", "sommets"]
@@ -68,6 +78,7 @@ export const quadrilateresBank: TutorBankItemV4[] = [
     format: "qcm",
     choices: ["3", "4", "5", "6"],
     expected: ["4"],
+    explanation: expectedExplanation(["4"]),
     comparator: "mcq_exact",
     hint: "Un quadrilatère a autant de côtés que de sommets.",
     tags: ["quadrilatere", "cotes"]
@@ -84,6 +95,7 @@ export const quadrilateresBank: TutorBankItemV4[] = [
     format: "qcm",
     choices: ["AB et BC", "AC et BD", "AB et CD", "AD et BC"],
     expected: ["AC et BD"],
+    explanation: expectedExplanation(["AC et BD"]),
     comparator: "mcq_exact",
     hint: "Une diagonale relie deux sommets opposés.",
     tags: ["quadrilatere", "diagonales", "canvas"],
@@ -118,6 +130,7 @@ export const quadrilateresBank: TutorBankItemV4[] = [
     format: "qcm",
     choices: ["AB et BC", "AB et CD", "AB et AD", "BC et CD"],
     expected: ["AB et CD"],
+    explanation: expectedExplanation(["AB et CD"]),
     comparator: "mcq_exact",
     hint: "Deux côtés opposés ne se touchent pas.",
     tags: ["quadrilatere", "vocabulaire", "cotes-opposes"]
@@ -134,6 +147,7 @@ export const quadrilateresBank: TutorBankItemV4[] = [
     format: "qcm",
     choices: ["opposés", "consécutifs", "parallèles", "égaux"],
     expected: ["consécutifs"],
+    explanation: expectedExplanation(["consécutifs"]),
     comparator: "mcq_exact",
     hint: "Ils se touchent au sommet B.",
     tags: ["quadrilatere", "vocabulaire", "cotes-consecutifs"]
@@ -163,6 +177,7 @@ export const quadrilateresBank: TutorBankItemV4[] = [
           text: `Comment nomme-t-on le quadrilatère de sommets ${q[0]}, ${q[1]}, ${q[2]} et ${q[3]} ?`,
           format: "short",
           expected: [`quadrilatere ${name.toLowerCase()}`, name.toLowerCase(), name],
+          explanation: expectedExplanation([`quadrilatere ${name.toLowerCase()}`, name.toLowerCase(), name]),
           comparator: "contains_keyword",
           canvas: {
             kind: "quadrilatere",
@@ -221,6 +236,7 @@ export const quadrilateresBank: TutorBankItemV4[] = [
     format: "qcm",
     choices: ["rectangle", "losange", "carré", "quadrilatère quelconque"],
     expected: ["rectangle"],
+    explanation: expectedExplanation(["rectangle"]),
     comparator: "mcq_exact",
     hint: "La figure a 4 angles droits.",
     tags: ["quadrilatere", "rectangle", "canvas"],
@@ -253,6 +269,7 @@ export const quadrilateresBank: TutorBankItemV4[] = [
     format: "qcm",
     choices: ["rectangle", "losange", "carré", "quadrilatère quelconque"],
     expected: ["losange"],
+    explanation: expectedExplanation(["losange"]),
     comparator: "mcq_exact",
     hint: "Les 4 côtés sont égaux mais il n’y a pas d’angle droit codé.",
     tags: ["quadrilatere", "losange", "canvas"],
@@ -285,6 +302,7 @@ export const quadrilateresBank: TutorBankItemV4[] = [
     format: "qcm",
     choices: ["rectangle", "losange", "carré", "quadrilatère quelconque"],
     expected: ["carré"],
+    explanation: expectedExplanation(["carré"]),
     comparator: "mcq_exact",
     hint: "Il y a 4 côtés égaux et 4 angles droits.",
     tags: ["quadrilatere", "carre", "canvas"],
@@ -318,6 +336,7 @@ export const quadrilateresBank: TutorBankItemV4[] = [
     format: "qcm",
     choices: ["rectangle", "losange", "carré", "quadrilatère quelconque"],
     expected: ["quadrilatère quelconque"],
+    explanation: expectedExplanation(["quadrilatère quelconque"]),
     comparator: "mcq_exact",
     hint: "Aucune propriété particulière n’est codée.",
     tags: ["quadrilatere", "quelconque", "canvas"],
@@ -347,6 +366,7 @@ export const quadrilateresBank: TutorBankItemV4[] = [
     format: "qcm",
     choices: ["rectangle", "losange", "carré", "quadrilatère quelconque"],
     expected: ["rectangle"],
+    explanation: expectedExplanation(["rectangle"]),
     comparator: "mcq_exact",
     hint: "Même penché, un rectangle garde ses 4 angles droits.",
     tags: ["quadrilatere", "rectangle", "penche", "canvas"],
@@ -379,6 +399,7 @@ export const quadrilateresBank: TutorBankItemV4[] = [
     format: "qcm",
     choices: ["rectangle", "losange", "carré", "quadrilatère quelconque"],
     expected: ["carré"],
+    explanation: expectedExplanation(["carré"]),
     comparator: "mcq_exact",
     hint: "Même penché, le carré garde 4 côtés égaux et 4 angles droits.",
     tags: ["quadrilatere", "carre", "penche", "canvas"],
@@ -412,6 +433,7 @@ export const quadrilateresBank: TutorBankItemV4[] = [
     format: "qcm",
     choices: ["rectangle", "losange", "carré", "on ne peut pas savoir"],
     expected: ["on ne peut pas savoir"],
+    explanation: expectedExplanation(["on ne peut pas savoir"]),
     comparator: "mcq_exact",
     hint: "La figure n’a qu’une partie des informations utiles.",
     tags: ["quadrilatere", "nature", "savoir", "canvas"],
@@ -461,6 +483,7 @@ export const quadrilateresBank: TutorBankItemV4[] = [
             "quadrilatère quelconque"
           ]),
           expected: ["rectangle"],
+          explanation: expectedExplanation(["rectangle"]),
           comparator: "mcq_exact",
           canvas: {
             kind: "quadrilatere",
@@ -587,6 +610,7 @@ export const quadrilateresBank: TutorBankItemV4[] = [
     format: "qcm",
     choices: ["0", "2", "4", "6"],
     expected: ["4"],
+    explanation: expectedExplanation(["4"]),
     comparator: "mcq_exact",
     hint: "Compte les petits carrés rouges.",
     tags: ["quadrilatere", "angles", "canvas"],
@@ -624,6 +648,7 @@ export const quadrilateresBank: TutorBankItemV4[] = [
       "aucun côté égal"
     ],
     expected: ["4 côtés égaux"],
+    explanation: expectedExplanation(["4 côtés égaux"]),
     comparator: "mcq_exact",
     hint: "Les mêmes codages verts indiquent des longueurs égales.",
     tags: ["quadrilatere", "cotes", "canvas"],
@@ -656,6 +681,7 @@ export const quadrilateresBank: TutorBankItemV4[] = [
     format: "qcm",
     choices: ["0", "1", "2", "4"],
     expected: ["2"],
+    explanation: expectedExplanation(["2"]),
     comparator: "mcq_exact",
     hint: "Regarde les codages violets de parallélisme.",
     tags: ["quadrilatere", "paralleles", "canvas"],
@@ -688,6 +714,7 @@ export const quadrilateresBank: TutorBankItemV4[] = [
     format: "qcm",
     choices: ["1", "2", "3", "4"],
     expected: ["2"],
+    explanation: expectedExplanation(["2"]),
     comparator: "mcq_exact",
     hint: "Les diagonales relient deux sommets opposés.",
     tags: ["quadrilatere", "diagonales"]
@@ -704,6 +731,7 @@ export const quadrilateresBank: TutorBankItemV4[] = [
     format: "qcm",
     choices: ["AB et BC", "AC et BD", "AB et CD", "AD et BC"],
     expected: ["AC et BD"],
+    explanation: expectedExplanation(["AC et BD"]),
     comparator: "mcq_exact",
     hint: "Une diagonale relie deux sommets opposés.",
     tags: ["quadrilatere", "diagonales", "canvas"],
@@ -745,6 +773,7 @@ export const quadrilateresBank: TutorBankItemV4[] = [
           format: "qcm",
           choices: ["0", "2", "4", "5"],
           expected: ["4"],
+          explanation: expectedExplanation(["4"]),
           comparator: "mcq_exact",
           canvas: {
             kind: "quadrilatere",
@@ -847,6 +876,7 @@ export const quadrilateresBank: TutorBankItemV4[] = [
     format: "qcm",
     choices: ["rectangle", "losange", "carré", "quadrilatère quelconque"],
     expected: ["rectangle"],
+    explanation: expectedExplanation(["rectangle"]),
     comparator: "mcq_exact",
     hint: "4 angles droits suffisent pour reconnaître un rectangle.",
     tags: ["quadrilatere", "proprietes"]
@@ -863,6 +893,7 @@ export const quadrilateresBank: TutorBankItemV4[] = [
     format: "qcm",
     choices: ["rectangle", "losange", "carré", "quadrilatère quelconque"],
     expected: ["losange"],
+    explanation: expectedExplanation(["losange"]),
     comparator: "mcq_exact",
     hint: "4 côtés égaux suffisent pour reconnaître un losange.",
     tags: ["quadrilatere", "proprietes"]
@@ -879,6 +910,7 @@ export const quadrilateresBank: TutorBankItemV4[] = [
     format: "qcm",
     choices: ["rectangle", "losange", "carré", "quadrilatère quelconque"],
     expected: ["carré"],
+    explanation: expectedExplanation(["carré"]),
     comparator: "mcq_exact",
     hint: "Il cumule les propriétés du rectangle et du losange.",
     tags: ["quadrilatere", "proprietes", "carre"]
@@ -895,6 +927,7 @@ export const quadrilateresBank: TutorBankItemV4[] = [
     format: "qcm",
     choices: ["rectangle", "losange", "carré", "quadrilatère quelconque"],
     expected: ["rectangle"],
+    explanation: expectedExplanation(["rectangle"]),
     comparator: "mcq_exact",
     hint: "L’information essentielle ici reste : 4 angles droits.",
     tags: ["quadrilatere", "proprietes", "paralleles"]
@@ -923,6 +956,7 @@ export const quadrilateresBank: TutorBankItemV4[] = [
             "quadrilatère quelconque"
           ]),
           expected: ["rectangle"],
+          explanation: expectedExplanation(["rectangle"]),
           comparator: "mcq_exact"
         };
       }
@@ -977,6 +1011,7 @@ export const quadrilateresBank: TutorBankItemV4[] = [
       "Le carré a 2 diagonales"
     ],
     expected: ["Le carré a 4 côtés égaux"],
+    explanation: expectedExplanation(["Le carré a 4 côtés égaux"]),
     comparator: "mcq_exact",
     hint: "Le rectangle n’a pas forcément 4 côtés égaux.",
     tags: ["quadrilatere", "distinguer", "carre", "rectangle"]
@@ -998,6 +1033,7 @@ export const quadrilateresBank: TutorBankItemV4[] = [
       "Le carré a des sommets"
     ],
     expected: ["Le carré a 4 angles droits"],
+    explanation: expectedExplanation(["Le carré a 4 angles droits"]),
     comparator: "mcq_exact",
     hint: "Le losange n’a pas forcément 4 angles droits.",
     tags: ["quadrilatere", "distinguer", "carre", "losange"]
@@ -1014,6 +1050,7 @@ export const quadrilateresBank: TutorBankItemV4[] = [
     format: "qcm",
     choices: ["carré", "losange"],
     expected: ["losange"],
+    explanation: expectedExplanation(["losange"]),
     comparator: "mcq_exact",
     hint: "Les 4 côtés sont égaux, mais aucun angle droit n’est codé.",
     tags: ["quadrilatere", "canvas", "distinguer"],
@@ -1046,6 +1083,7 @@ export const quadrilateresBank: TutorBankItemV4[] = [
     format: "qcm",
     choices: ["carré", "rectangle"],
     expected: ["rectangle"],
+    explanation: expectedExplanation(["rectangle"]),
     comparator: "mcq_exact",
     hint: "Il y a 4 angles droits, mais les côtés ne sont pas tous égaux.",
     tags: ["quadrilatere", "canvas", "distinguer"],
@@ -1090,6 +1128,7 @@ export const quadrilateresBank: TutorBankItemV4[] = [
             "Le carré a 2 diagonales"
           ]),
           expected: ["Le carré a 4 côtés égaux"],
+          explanation: expectedExplanation(["Le carré a 4 côtés égaux"]),
           comparator: "mcq_exact"
         };
       }
@@ -1124,6 +1163,7 @@ export const quadrilateresBank: TutorBankItemV4[] = [
     format: "qcm",
     choices: ["oui", "non"],
     expected: ["non"],
+    explanation: expectedExplanation(["non"]),
     comparator: "mcq_exact",
     hint: "Il manque l’information sur les angles droits.",
     tags: ["quadrilatere", "conclusion"]
@@ -1140,6 +1180,7 @@ export const quadrilateresBank: TutorBankItemV4[] = [
     format: "qcm",
     choices: ["oui", "non"],
     expected: ["oui"],
+    explanation: expectedExplanation(["oui"]),
     comparator: "mcq_exact",
     hint: "Oui, 4 angles droits suffisent.",
     tags: ["quadrilatere", "conclusion"]
@@ -1156,6 +1197,7 @@ export const quadrilateresBank: TutorBankItemV4[] = [
     format: "qcm",
     choices: ["oui", "non"],
     expected: ["non"],
+    explanation: expectedExplanation(["non"]),
     comparator: "mcq_exact",
     hint: "Il manque l’information : les 4 côtés égaux.",
     tags: ["quadrilatere", "conclusion"]
@@ -1172,6 +1214,7 @@ export const quadrilateresBank: TutorBankItemV4[] = [
     format: "qcm",
     choices: ["oui", "non"],
     expected: ["non"],
+    explanation: expectedExplanation(["non"]),
     comparator: "mcq_exact",
     hint: "Les côtés sont égaux, mais aucun angle droit n’est codé.",
     tags: ["quadrilatere", "canvas", "conclusion"],
@@ -1204,6 +1247,7 @@ export const quadrilateresBank: TutorBankItemV4[] = [
     format: "qcm",
     choices: ["oui", "non"],
     expected: ["non"],
+    explanation: expectedExplanation(["non"]),
     comparator: "mcq_exact",
     hint: "Une seule paire de côtés égaux ne suffit pas.",
     tags: ["quadrilatere", "canvas", "conclusion", "piege"],
@@ -1257,6 +1301,7 @@ export const quadrilateresBank: TutorBankItemV4[] = [
         format: "qcm",
         choices: shuffle(["oui", "non"]),
         expected: item.expected,
+        explanation: expectedExplanation(item.expected),
         comparator: "mcq_exact"
       };
     }
@@ -1282,6 +1327,7 @@ export const quadrilateresBank: TutorBankItemV4[] = [
       "qu’il a 4 sommets"
     ],
     expected: ["qu’il a 4 angles droits"],
+    explanation: expectedExplanation(["qu’il a 4 angles droits"]),
     comparator: "mcq_exact",
     hint: "Le carré est un losange avec une propriété en plus.",
     tags: ["quadrilatere", "completer", "carre"]
@@ -1303,6 +1349,7 @@ export const quadrilateresBank: TutorBankItemV4[] = [
       "qu’il a 2 côtés parallèles"
     ],
     expected: ["qu’il a 4 côtés égaux"],
+    explanation: expectedExplanation(["qu’il a 4 côtés égaux"]),
     comparator: "mcq_exact",
     hint: "Le carré est un rectangle avec une propriété en plus.",
     tags: ["quadrilatere", "completer", "rectangle"]
@@ -1324,6 +1371,7 @@ export const quadrilateresBank: TutorBankItemV4[] = [
       "supprimer un côté"
     ],
     expected: ["coder 4 angles droits"],
+    explanation: expectedExplanation(["coder 4 angles droits"]),
     comparator: "mcq_exact",
     hint: "Les 4 côtés égaux sont déjà codés.",
     tags: ["quadrilatere", "completer", "canvas"],
@@ -1361,6 +1409,7 @@ export const quadrilateresBank: TutorBankItemV4[] = [
       "retirer un angle droit"
     ],
     expected: ["coder 4 côtés égaux"],
+    explanation: expectedExplanation(["coder 4 côtés égaux"]),
     comparator: "mcq_exact",
     hint: "Les 4 angles droits sont déjà codés.",
     tags: ["quadrilatere", "completer", "canvas"],
@@ -1393,6 +1442,7 @@ export const quadrilateresBank: TutorBankItemV4[] = [
     format: "qcm",
     choices: ["2", "3", "4", "5"],
     expected: ["4"],
+    explanation: expectedExplanation(["4"]),
     comparator: "mcq_exact",
     hint: "Le nom ABCD donne déjà l’information.",
     tags: ["quadrilatere", "construire"]
@@ -1421,6 +1471,7 @@ export const quadrilateresBank: TutorBankItemV4[] = [
             "qu’il a 4 sommets"
           ]),
           expected: ["qu’il a 4 angles droits"],
+          explanation: expectedExplanation(["qu’il a 4 angles droits"]),
           comparator: "mcq_exact"
         };
       }
@@ -1465,6 +1516,7 @@ export const quadrilateresBank: TutorBankItemV4[] = [
     format: "qcm",
     choices: ["rectangle", "losange", "carré", "quadrilatère quelconque"],
     expected: ["losange"],
+    explanation: expectedExplanation(["losange"]),
     comparator: "mcq_exact",
     hint: "4 côtés égaux sans angle droit : ce n’est pas un carré.",
     tags: ["quadrilatere", "defi"]
@@ -1480,6 +1532,7 @@ export const quadrilateresBank: TutorBankItemV4[] = [
     text: "Un quadrilatère a 4 angles droits et 4 côtés égaux. Quel est son type ?",
     format: "short",
     expected: ["carré", "carre"],
+    explanation: expectedExplanation(["carré", "carre"]),
     comparator: "contains_keyword",
     hint: "Il a à la fois les propriétés du rectangle et du losange.",
     tags: ["quadrilatere", "defi"]
@@ -1496,6 +1549,7 @@ export const quadrilateresBank: TutorBankItemV4[] = [
     format: "qcm",
     choices: ["oui", "non"],
     expected: ["oui"],
+    explanation: expectedExplanation(["oui"]),
     comparator: "mcq_exact",
     hint: "Un carré possède bien 4 angles droits.",
     tags: ["quadrilatere", "defi", "logique"]
@@ -1512,6 +1566,7 @@ export const quadrilateresBank: TutorBankItemV4[] = [
     format: "qcm",
     choices: ["oui", "non"],
     expected: ["oui"],
+    explanation: expectedExplanation(["oui"]),
     comparator: "mcq_exact",
     hint: "Un carré possède bien 4 côtés égaux.",
     tags: ["quadrilatere", "defi", "logique"]
@@ -1528,6 +1583,7 @@ export const quadrilateresBank: TutorBankItemV4[] = [
     format: "qcm",
     choices: ["oui", "non"],
     expected: ["oui"],
+    explanation: expectedExplanation(["oui"]),
     comparator: "mcq_exact",
     hint: "Les 4 côtés sont égaux et les 4 angles sont droits.",
     tags: ["quadrilatere", "defi", "canvas"],
@@ -1561,6 +1617,7 @@ export const quadrilateresBank: TutorBankItemV4[] = [
     format: "qcm",
     choices: ["oui", "non"],
     expected: ["non"],
+    explanation: expectedExplanation(["non"]),
     comparator: "mcq_exact",
     hint: "Tous les quadrilatères ont deux diagonales.",
     tags: ["quadrilatere", "defi", "diagonales"]
@@ -1576,6 +1633,7 @@ export const quadrilateresBank: TutorBankItemV4[] = [
     text: "Explique pourquoi un quadrilatère ayant 4 côtés égaux n’est pas forcément un carré.",
     format: "short",
     expected: ["angle", "droit", "losange"],
+    explanation: expectedExplanation(["angle", "droit", "losange"]),
     comparator: "contains_keyword",
     hint: "Pense au losange.",
     tags: ["quadrilatere", "defi", "raisonnement"]
@@ -1621,6 +1679,7 @@ export const quadrilateresBank: TutorBankItemV4[] = [
         format: "qcm",
         choices: shuffle(item.choices),
         expected: item.expected,
+        explanation: expectedExplanation(item.expected),
         comparator: "mcq_exact"
       };
     }
