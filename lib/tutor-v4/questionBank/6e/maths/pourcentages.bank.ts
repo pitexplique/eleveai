@@ -30,6 +30,8 @@ export const pourcentagesBank: TutorBankItemV4[] = [
     expected: ["25 sur 100", "25/100", "25 / 100"],
     comparator: "contains_keyword",
     hint: "Le symbole % veut dire “sur 100”.",
+    explanation:
+      "25 % signifie 25 sur 100. Un pourcentage représente toujours une part sur 100.",
     tags: ["pourcentages", "comprendre"],
   },
   {
@@ -46,6 +48,26 @@ export const pourcentagesBank: TutorBankItemV4[] = [
     expected: ["50 sur 100", "50/100", "50 / 100", "la moitié", "moitié"],
     comparator: "contains_keyword",
     hint: "50 %, c’est 50 sur 100.",
+    explanation:
+      "50 % signifie 50 sur 100. Comme 50/100 = 1/2, cela représente aussi la moitié.",
+    tags: ["pourcentages", "comprendre"],
+  },
+  {
+    kind: "fixed",
+    id: "pourcentage_comprendre_fixed_3",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "pourcentages",
+    microId: "pourcentage_comprendre",
+    difficulty: 1,
+    theme: "neutral",
+    text: "Que signifie 10 % ?",
+    format: "short",
+    expected: ["10 sur 100", "10/100", "10 / 100"],
+    comparator: "contains_keyword",
+    hint: "Un pourcentage se lit toujours “sur 100”.",
+    explanation:
+      "10 % signifie 10 sur 100. Cela veut dire que l’on prend 10 parts parmi 100.",
     tags: ["pourcentages", "comprendre"],
   },
   {
@@ -63,6 +85,8 @@ export const pourcentagesBank: TutorBankItemV4[] = [
     expected: ["sur 100"],
     comparator: "mcq_exact",
     hint: "Un pourcentage exprime une part sur 100.",
+    explanation:
+      "Le symbole % signifie “sur 100”. Un pourcentage exprime donc une part sur 100.",
     tags: ["pourcentages", "comprendre", "qcm"],
   },
   {
@@ -80,6 +104,8 @@ export const pourcentagesBank: TutorBankItemV4[] = [
     expected: ["75 sur 100"],
     comparator: "mcq_exact",
     hint: "On lit toujours un pourcentage “sur 100”.",
+    explanation:
+      "75 % signifie 75 sur 100. C’est la définition même d’un pourcentage.",
     tags: ["pourcentages", "comprendre", "qcm"],
   },
   {
@@ -96,6 +122,8 @@ export const pourcentagesBank: TutorBankItemV4[] = [
     expected: ["30"],
     comparator: "number_equal",
     hint: "30 %, c’est 30 sur 100.",
+    explanation:
+      "30 % signifie 30 sur 100. Dans une classe de 100 élèves, cela représente donc 30 élèves.",
     tags: ["pourcentages", "comprendre", "reunion"],
   },
 
@@ -116,6 +144,8 @@ export const pourcentagesBank: TutorBankItemV4[] = [
     expected: ["25/100", "25 / 100"],
     comparator: "fraction_decimal_equivalent",
     hint: "25 % = 25 sur 100.",
+    explanation:
+      "25 % signifie 25 sur 100. On l’écrit donc 25/100.",
     tags: ["pourcentages", "fraction"],
   },
   {
@@ -132,6 +162,8 @@ export const pourcentagesBank: TutorBankItemV4[] = [
     expected: ["50/100", "50 / 100", "1/2", "1 / 2"],
     comparator: "fraction_decimal_equivalent",
     hint: "50 % = 50 sur 100.",
+    explanation:
+      "50 % signifie 50 sur 100, donc 50/100. Cette fraction se simplifie aussi en 1/2.",
     tags: ["pourcentages", "fraction"],
   },
   {
@@ -148,6 +180,26 @@ export const pourcentagesBank: TutorBankItemV4[] = [
     expected: ["10/100", "10 / 100", "1/10", "1 / 10"],
     comparator: "fraction_decimal_equivalent",
     hint: "10 % = 10 sur 100.",
+    explanation:
+      "10 % signifie 10 sur 100. On peut écrire 10/100, ce qui correspond aussi à 1/10.",
+    tags: ["pourcentages", "fraction"],
+  },
+  {
+    kind: "fixed",
+    id: "pourcentage_fraction_fixed_4",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "pourcentages",
+    microId: "pourcentage_fraction",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Écris 75 % sous forme de fraction sur 100.",
+    format: "short",
+    expected: ["75/100", "75 / 100", "3/4", "3 / 4"],
+    comparator: "fraction_decimal_equivalent",
+    hint: "75 % = 75 sur 100.",
+    explanation:
+      "75 % signifie 75 sur 100. On peut écrire 75/100, ce qui correspond aussi à 3/4.",
     tags: ["pourcentages", "fraction"],
   },
   {
@@ -165,6 +217,8 @@ export const pourcentagesBank: TutorBankItemV4[] = [
     expected: ["40/100"],
     comparator: "mcq_exact",
     hint: "40 % = 40 sur 100.",
+    explanation:
+      "40 % signifie 40 sur 100. La bonne fraction est donc 40/100.",
     tags: ["pourcentages", "fraction", "qcm"],
   },
   {
@@ -182,6 +236,8 @@ export const pourcentagesBank: TutorBankItemV4[] = [
     expected: ["5/100"],
     comparator: "mcq_exact",
     hint: "5 % = 5 sur 100.",
+    explanation:
+      "5 % signifie 5 sur 100. La bonne écriture est donc 5/100.",
     tags: ["pourcentages", "fraction", "qcm"],
   },
 
@@ -202,6 +258,8 @@ export const pourcentagesBank: TutorBankItemV4[] = [
     expected: ["0,5", "0.5", "50/100", "50 / 100"],
     comparator: "fraction_decimal_equivalent",
     hint: "50 % = 50/100 = 0,5.",
+    explanation:
+      "50 % signifie 50/100. En écriture décimale, cela donne 0,5.",
     tags: ["pourcentages", "decimal"],
   },
   {
@@ -218,6 +276,8 @@ export const pourcentagesBank: TutorBankItemV4[] = [
     expected: ["0,25", "0.25", "25/100", "25 / 100"],
     comparator: "fraction_decimal_equivalent",
     hint: "25 % = 25/100 = 0,25.",
+    explanation:
+      "25 % signifie 25/100. En écriture décimale, cela donne 0,25.",
     tags: ["pourcentages", "decimal"],
   },
   {
@@ -234,6 +294,26 @@ export const pourcentagesBank: TutorBankItemV4[] = [
     expected: ["0,1", "0.1", "10/100", "10 / 100"],
     comparator: "fraction_decimal_equivalent",
     hint: "10 % = 10/100 = 0,1.",
+    explanation:
+      "10 % signifie 10/100. En écriture décimale, cela donne 0,1.",
+    tags: ["pourcentages", "decimal"],
+  },
+  {
+    kind: "fixed",
+    id: "pourcentage_decimal_fixed_4",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "pourcentages",
+    microId: "pourcentage_decimal",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Écris 5 % sous forme décimale.",
+    format: "short",
+    expected: ["0,05", "0.05", "5/100", "5 / 100"],
+    comparator: "fraction_decimal_equivalent",
+    hint: "5 % = 5/100.",
+    explanation:
+      "5 % signifie 5/100. En écriture décimale, cela donne 0,05.",
     tags: ["pourcentages", "decimal"],
   },
   {
@@ -248,9 +328,11 @@ export const pourcentagesBank: TutorBankItemV4[] = [
     text: "Quelle écriture décimale correspond à 75 % ?",
     format: "qcm",
     choices: ["0,75", "7,5", "0,075", "75,0"],
-    expected: ["0,75", "0.75"],
+    expected: ["0,75"],
     comparator: "mcq_exact",
     hint: "75 % = 75/100.",
+    explanation:
+      "75 % signifie 75/100. En écriture décimale, cela donne 0,75.",
     tags: ["pourcentages", "decimal", "qcm"],
   },
   {
@@ -265,9 +347,11 @@ export const pourcentagesBank: TutorBankItemV4[] = [
     text: "Quelle écriture décimale correspond à 5 % ?",
     format: "qcm",
     choices: ["0,5", "0,05", "5,0", "0,005"],
-    expected: ["0,05", "0.05"],
+    expected: ["0,05"],
     comparator: "mcq_exact",
     hint: "5 % = 5/100.",
+    explanation:
+      "5 % signifie 5/100. En écriture décimale, cela donne 0,05.",
     tags: ["pourcentages", "decimal", "qcm"],
   },
 
@@ -288,6 +372,8 @@ export const pourcentagesBank: TutorBankItemV4[] = [
     expected: ["20"],
     comparator: "number_equal",
     hint: "20 % signifie 20 sur 100.",
+    explanation:
+      "Dans un groupe de 100 élèves, 20 % signifie 20 sur 100. Cela représente donc 20 élèves.",
     tags: ["pourcentages", "lecture"],
   },
   {
@@ -304,6 +390,26 @@ export const pourcentagesBank: TutorBankItemV4[] = [
     expected: ["60"],
     comparator: "number_equal",
     hint: "60 % = 60 sur 100.",
+    explanation:
+      "Sur 100 bonbons, 60 % signifie 60 sur 100. Il y a donc 60 bonbons rouges.",
+    tags: ["pourcentages", "lecture"],
+  },
+  {
+    kind: "fixed",
+    id: "pourcentage_lire_fixed_3",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "pourcentages",
+    microId: "pourcentage_lire",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Dans un groupe de 100 personnes, 8 % aiment les échecs. Combien cela représente-t-il ?",
+    format: "short",
+    expected: ["8"],
+    comparator: "number_equal",
+    hint: "Le pourcentage donne directement le nombre sur 100.",
+    explanation:
+      "8 % signifie 8 sur 100. Dans un groupe de 100 personnes, cela représente 8 personnes.",
     tags: ["pourcentages", "lecture"],
   },
   {
@@ -321,6 +427,8 @@ export const pourcentagesBank: TutorBankItemV4[] = [
     expected: ["15"],
     comparator: "mcq_exact",
     hint: "15 % = 15 sur 100.",
+    explanation:
+      "15 % signifie 15 sur 100. Dans un groupe de 100 personnes, cela fait donc 15 personnes.",
     tags: ["pourcentages", "lecture", "qcm"],
   },
   {
@@ -338,6 +446,8 @@ export const pourcentagesBank: TutorBankItemV4[] = [
     expected: ["35"],
     comparator: "mcq_exact",
     hint: "35 % signifie 35 sur 100.",
+    explanation:
+      "35 % signifie 35 sur 100. Sur 100 ananas, cela représente donc 35 ananas vendus.",
     tags: ["pourcentages", "lecture", "reunion", "qcm"],
   },
 
@@ -358,6 +468,8 @@ export const pourcentagesBank: TutorBankItemV4[] = [
     expected: ["6"],
     comparator: "number_equal",
     hint: "10 % = 0,1.",
+    explanation:
+      "10 % de 60, c’est 0,1 × 60 = 6. On peut aussi dire que 10 % est le dixième de 60.",
     tags: ["pourcentages", "calcul"],
   },
   {
@@ -374,6 +486,8 @@ export const pourcentagesBank: TutorBankItemV4[] = [
     expected: ["9"],
     comparator: "number_equal",
     hint: "50 %, c’est la moitié.",
+    explanation:
+      "50 % signifie la moitié. La moitié de 18 est 9.",
     tags: ["pourcentages", "calcul"],
   },
   {
@@ -390,6 +504,26 @@ export const pourcentagesBank: TutorBankItemV4[] = [
     expected: ["5"],
     comparator: "number_equal",
     hint: "25 %, c’est un quart.",
+    explanation:
+      "25 % correspond à un quart. Le quart de 20 est 5.",
+    tags: ["pourcentages", "calcul"],
+  },
+  {
+    kind: "fixed",
+    id: "pourcentage_calcul_simple_fixed_4",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "pourcentages",
+    microId: "pourcentage_calcul_simple",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Calcule 10 % de 40.",
+    format: "short",
+    expected: ["4"],
+    comparator: "number_equal",
+    hint: "10 % = 1/10.",
+    explanation:
+      "10 % signifie un dixième. Le dixième de 40 est 4.",
     tags: ["pourcentages", "calcul"],
   },
   {
@@ -407,6 +541,8 @@ export const pourcentagesBank: TutorBankItemV4[] = [
     expected: ["4"],
     comparator: "mcq_exact",
     hint: "10 % = 1/10.",
+    explanation:
+      "10 % de 40, c’est le dixième de 40. Le résultat est 4.",
     tags: ["pourcentages", "calcul", "qcm"],
   },
   {
@@ -424,6 +560,8 @@ export const pourcentagesBank: TutorBankItemV4[] = [
     expected: ["10"],
     comparator: "mcq_exact",
     hint: "50 %, c’est la moitié.",
+    explanation:
+      "50 % signifie la moitié. La moitié de 20 est 10. Il y a donc 10 adultes.",
     tags: ["pourcentages", "calcul", "reunion", "qcm"],
   },
 
@@ -444,6 +582,8 @@ export const pourcentagesBank: TutorBankItemV4[] = [
     expected: ["8"],
     comparator: "number_equal",
     hint: "8 % = 8 sur 100.",
+    explanation:
+      "8 % signifie 8 sur 100. Dans une collection de 100 cartes, cela représente 8 cartes brillantes.",
     tags: ["pourcentages", "defi"],
   },
   {
@@ -460,6 +600,8 @@ export const pourcentagesBank: TutorBankItemV4[] = [
     expected: ["1", "1,0", "1.0"],
     comparator: "number_equal",
     hint: "5 % = 5/100 de 20.",
+    explanation:
+      "5 % de 20 €, c’est 0,05 × 20 = 1. Ce pourcentage vaut donc 1 €.",
     tags: ["pourcentages", "defi"],
   },
   {
@@ -476,6 +618,8 @@ export const pourcentagesBank: TutorBankItemV4[] = [
     expected: ["football"],
     comparator: "contains_keyword",
     hint: "Compare 25 % et 50 %.",
+    explanation:
+      "25 % représente 25 élèves sur 100 et 50 % représente 50 élèves sur 100. Comme 50 est plus grand que 25, le football est le plus pratiqué.",
     tags: ["pourcentages", "defi", "comparaison"],
   },
   {
@@ -492,6 +636,8 @@ export const pourcentagesBank: TutorBankItemV4[] = [
     expected: ["40"],
     comparator: "number_equal",
     hint: "40 % = 40 sur 100.",
+    explanation:
+      "40 % signifie 40 sur 100. Sur 100 letchis, cela représente donc 40 letchis mûrs.",
     tags: ["pourcentages", "defi", "reunion"],
   },
   {
@@ -508,6 +654,8 @@ export const pourcentagesBank: TutorBankItemV4[] = [
     expected: ["50", "50%"],
     comparator: "contains_keyword",
     hint: "La moitié, c’est 1 sur 2.",
+    explanation:
+      "La moitié correspond à 1/2. Or 1/2 = 50/100, donc cela représente 50 %.",
     tags: ["pourcentages", "defi", "raisonnement"],
   },
   {
@@ -524,6 +672,8 @@ export const pourcentagesBank: TutorBankItemV4[] = [
     expected: ["25/100", "1/4", "100", "4"],
     comparator: "contains_keyword",
     hint: "Commence par écrire 25 % sous forme de fraction.",
+    explanation:
+      "25 % signifie 25/100. Si on simplifie cette fraction en divisant par 25, on obtient 1/4. Donc 25 % correspond à 1/4.",
     tags: ["pourcentages", "defi", "raisonnement"],
   },
 
@@ -551,6 +701,7 @@ export const pourcentagesBank: TutorBankItemV4[] = [
         format: "short",
         expected: [`${p}/100`, `${p} / 100`, `${p} sur 100`],
         comparator: "contains_keyword",
+        explanation: `${p} % signifie ${p} sur 100.`,
       };
     },
   },
@@ -580,6 +731,7 @@ export const pourcentagesBank: TutorBankItemV4[] = [
         ]),
         expected: [good],
         comparator: "mcq_exact",
+        explanation: `${p} % signifie ${p} sur 100.`,
       };
     },
   },
@@ -606,6 +758,7 @@ export const pourcentagesBank: TutorBankItemV4[] = [
         format: "short",
         expected: [`${p}/100`, `${p} / 100`],
         comparator: "fraction_decimal_equivalent",
+        explanation: `${p} % signifie ${p} sur 100. On l’écrit donc ${p}/100.`,
       };
     },
   },
@@ -635,6 +788,7 @@ export const pourcentagesBank: TutorBankItemV4[] = [
         ]),
         expected: [good],
         comparator: "mcq_exact",
+        explanation: `${p} % signifie ${p} sur 100. La bonne fraction est donc ${good}.`,
       };
     },
   },
@@ -662,6 +816,7 @@ export const pourcentagesBank: TutorBankItemV4[] = [
         format: "short",
         expected: [formatComma(dec), String(dec), `${p}/100`, `${p} / 100`],
         comparator: "fraction_decimal_equivalent",
+        explanation: `${p} % signifie ${p}/100. En écriture décimale, cela donne ${formatComma(dec)}.`,
       };
     },
   },
@@ -694,8 +849,9 @@ export const pourcentagesBank: TutorBankItemV4[] = [
         text: `Quelle écriture décimale correspond à ${p} % ?`,
         format: "qcm",
         choices: shuffle([good, ...distractors]),
-        expected: [good, good.replace(",", ".")],
+        expected: [good],
         comparator: "mcq_exact",
+        explanation: `${p} % signifie ${p}/100. En écriture décimale, cela donne ${good}.`,
       };
     },
   },
@@ -724,6 +880,7 @@ export const pourcentagesBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(p)],
         comparator: "number_equal",
+        explanation: `${p} % signifie ${p} sur 100. Dans un groupe de 100 élèves, cela représente ${p} élèves.`,
       };
     },
   },
@@ -752,6 +909,7 @@ export const pourcentagesBank: TutorBankItemV4[] = [
         ]),
         expected: [String(p)],
         comparator: "mcq_exact",
+        explanation: `${p} % signifie ${p} sur 100. Il y a donc ${p} objets bleus.`,
       };
     },
   },
@@ -782,11 +940,21 @@ export const pourcentagesBank: TutorBankItemV4[] = [
       ];
       const c = cases[Math.floor(Math.random() * cases.length)];
 
+      let explanation = "";
+      if (c.p === 10) {
+        explanation = `10 % correspond à un dixième. Le dixième de ${c.n} est ${c.r}.`;
+      } else if (c.p === 50) {
+        explanation = `50 % correspond à la moitié. La moitié de ${c.n} est ${c.r}.`;
+      } else {
+        explanation = `25 % correspond à un quart. Le quart de ${c.n} est ${c.r}.`;
+      }
+
       return {
         text: `Calcule ${c.p} % de ${c.n}.`,
         format: "short",
         expected: [String(c.r)],
         comparator: "number_equal",
+        explanation,
       };
     },
   },
@@ -809,6 +977,15 @@ export const pourcentagesBank: TutorBankItemV4[] = [
       ];
       const c = cases[Math.floor(Math.random() * cases.length)];
 
+      let explanation = "";
+      if (c.p === 10) {
+        explanation = `10 % correspond à un dixième. Le dixième de ${c.n} est ${c.r}.`;
+      } else if (c.p === 50) {
+        explanation = `50 % correspond à la moitié. La moitié de ${c.n} est ${c.r}.`;
+      } else {
+        explanation = `25 % correspond à un quart. Le quart de ${c.n} est ${c.r}.`;
+      }
+
       return {
         text: `Quel est ${c.p} % de ${c.n} ?`,
         format: "qcm",
@@ -820,6 +997,7 @@ export const pourcentagesBank: TutorBankItemV4[] = [
         ]),
         expected: [String(c.r)],
         comparator: "mcq_exact",
+        explanation,
       };
     },
   },
@@ -840,9 +1018,21 @@ export const pourcentagesBank: TutorBankItemV4[] = [
     tags: ["pourcentages", "defi", "template"],
     generate: () => {
       const cases = [
-        { text: "Quel pourcentage correspond à une moitié ?", expected: ["50", "50%"] },
-        { text: "Quel pourcentage correspond à un quart ?", expected: ["25", "25%"] },
-        { text: "Quel pourcentage correspond à un dixième ?", expected: ["10", "10%"] },
+        {
+          text: "Quel pourcentage correspond à une moitié ?",
+          expected: ["50", "50%"],
+          explanation: "Une moitié correspond à 1/2, soit 50/100. Cela représente donc 50 %.",
+        },
+        {
+          text: "Quel pourcentage correspond à un quart ?",
+          expected: ["25", "25%"],
+          explanation: "Un quart correspond à 1/4, soit 25/100. Cela représente donc 25 %.",
+        },
+        {
+          text: "Quel pourcentage correspond à un dixième ?",
+          expected: ["10", "10%"],
+          explanation: "Un dixième correspond à 1/10, soit 10/100. Cela représente donc 10 %.",
+        },
       ];
       const c = cases[Math.floor(Math.random() * cases.length)];
 
@@ -851,6 +1041,7 @@ export const pourcentagesBank: TutorBankItemV4[] = [
         format: "short",
         expected: c.expected,
         comparator: "contains_keyword",
+        explanation: c.explanation,
       };
     },
   },
@@ -871,16 +1062,19 @@ export const pourcentagesBank: TutorBankItemV4[] = [
           text: "Quel pourcentage représente exactement la moitié ?",
           good: "50 %",
           choices: ["25 %", "50 %", "75 %", "100 %"],
+          explanation: "La moitié correspond à 1/2, soit 50/100. Cela représente donc 50 %.",
         },
         {
           text: "Quel pourcentage représente exactement le quart ?",
           good: "25 %",
           choices: ["10 %", "20 %", "25 %", "40 %"],
+          explanation: "Le quart correspond à 1/4, soit 25/100. Cela représente donc 25 %.",
         },
         {
           text: "Quel pourcentage est le plus grand ?",
           good: "75 %",
           choices: ["25 %", "50 %", "75 %", "5 %"],
+          explanation: "Parmi 25 %, 50 %, 75 % et 5 %, le plus grand est 75 %.",
         },
       ];
       const c = cases[Math.floor(Math.random() * cases.length)];
@@ -891,6 +1085,7 @@ export const pourcentagesBank: TutorBankItemV4[] = [
         choices: shuffle(c.choices),
         expected: [c.good],
         comparator: "mcq_exact",
+        explanation: c.explanation,
       };
     },
   },

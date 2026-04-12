@@ -12,6 +12,98 @@ function chunkedNumber(n: number) {
   return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, " ");
 }
 
+function numberBelow100ToFrench(n: number): string {
+  const units = [
+    "zéro",
+    "un",
+    "deux",
+    "trois",
+    "quatre",
+    "cinq",
+    "six",
+    "sept",
+    "huit",
+    "neuf",
+    "dix",
+    "onze",
+    "douze",
+    "treize",
+    "quatorze",
+    "quinze",
+    "seize",
+  ];
+
+  if (n <= 16) return units[n];
+  if (n < 20) return `dix-${units[n - 10]}`;
+
+  const tensMap: Record<number, string> = {
+    20: "vingt",
+    30: "trente",
+    40: "quarante",
+    50: "cinquante",
+    60: "soixante",
+  };
+
+  if (n < 70) {
+    const ten = Math.floor(n / 10) * 10;
+    const unit = n % 10;
+    if (unit === 0) return tensMap[ten];
+    if (unit === 1) return `${tensMap[ten]} et un`;
+    return `${tensMap[ten]}-${units[unit]}`;
+  }
+
+  if (n < 80) {
+    if (n === 71) return "soixante et onze";
+    return `soixante-${numberBelow100ToFrench(n - 60)}`;
+  }
+
+  if (n === 80) return "quatre-vingts";
+  if (n < 100) {
+    return `quatre-vingt-${numberBelow100ToFrench(n - 80)}`;
+  }
+
+  return String(n);
+}
+
+function numberBelow1000ToFrench(n: number): string {
+  if (n < 100) return numberBelow100ToFrench(n);
+
+  const hundreds = Math.floor(n / 100);
+  const rest = n % 100;
+
+  let hundredPart = "";
+  if (hundreds === 1) {
+    hundredPart = "cent";
+  } else {
+    hundredPart = `${numberBelow100ToFrench(hundreds)} cent`;
+  }
+
+  if (rest === 0) {
+    if (hundreds > 1) return `${hundredPart}s`;
+    return hundredPart;
+  }
+
+  return `${hundredPart} ${numberBelow100ToFrench(rest)}`;
+}
+
+function numberToFrenchWords(n: number): string {
+  if (n < 1000) return numberBelow1000ToFrench(n);
+
+  const thousands = Math.floor(n / 1000);
+  const rest = n % 1000;
+
+  let thousandPart = "";
+  if (thousands === 1) {
+    thousandPart = "mille";
+  } else {
+    thousandPart = `${numberBelow1000ToFrench(thousands)} mille`;
+  }
+
+  if (rest === 0) return thousandPart;
+
+  return `${thousandPart} ${numberBelow1000ToFrench(rest)}`;
+}
+
 export const entiersBank: TutorBankItemV4[] = [
   // =========================
   // ENTIER_LIRE_ECRIRE
@@ -30,6 +122,8 @@ export const entiersBank: TutorBankItemV4[] = [
     expected: ["123"],
     comparator: "number_equal",
     hint: "100 + 20 + 3",
+    explanation:
+      "Cent vingt-trois signifie 100 + 20 + 3. On écrit donc 123.",
     tags: ["entiers", "lecture", "ecriture"],
   },
   {
@@ -46,6 +140,8 @@ export const entiersBank: TutorBankItemV4[] = [
     expected: ["90"],
     comparator: "number_equal",
     hint: "4 vingtaines + 10",
+    explanation:
+      "Quatre-vingt-dix correspond à 80 + 10. On écrit donc 90.",
     tags: ["entiers", "lecture", "ecriture"],
   },
   {
@@ -59,9 +155,11 @@ export const entiersBank: TutorBankItemV4[] = [
     theme: "neutral",
     text: "Écris en chiffres : deux mille trente-cinq",
     format: "short",
-    expected: ["2035"],
+    expected: ["2035", "2 035"],
     comparator: "number_equal",
     hint: "2000 + 35",
+    explanation:
+      "Deux mille trente-cinq signifie 2000 + 35. On écrit donc 2035.",
     tags: ["entiers", "lecture", "ecriture"],
   },
   {
@@ -79,6 +177,8 @@ export const entiersBank: TutorBankItemV4[] = [
     expected: ["304"],
     comparator: "mcq_exact",
     hint: "3 centaines et 4 unités.",
+    explanation:
+      "Trois cent quatre signifie 3 centaines, 0 dizaine et 4 unités. Le bon nombre est 304.",
     tags: ["entiers", "lecture", "qcm"],
   },
   {
@@ -96,6 +196,8 @@ export const entiersBank: TutorBankItemV4[] = [
     expected: ["1042"],
     comparator: "mcq_exact",
     hint: "1000 + 42",
+    explanation:
+      "Mille quarante-deux signifie 1000 + 42. Le bon nombre est 1042.",
     tags: ["entiers", "lecture", "qcm"],
   },
   {
@@ -109,9 +211,11 @@ export const entiersBank: TutorBankItemV4[] = [
     theme: "reunion",
     text: "Au volcan, un sentier imaginaire reçoit mille deux cents visiteurs. Écris ce nombre en chiffres.",
     format: "short",
-    expected: ["1200"],
+    expected: ["1200", "1 200"],
     comparator: "number_equal",
     hint: "1000 + 200",
+    explanation:
+      "Mille deux cents signifie 1000 + 200. On écrit donc 1200.",
     tags: ["entiers", "lecture", "reunion"],
   },
 
@@ -132,6 +236,8 @@ export const entiersBank: TutorBankItemV4[] = [
     expected: ["5"],
     comparator: "number_equal",
     hint: "Le chiffre des dizaines est au milieu.",
+    explanation:
+      "Dans 352, il y a 3 centaines, 5 dizaines et 2 unités. Le chiffre des dizaines est donc 5.",
     tags: ["entiers", "rang"],
   },
   {
@@ -148,6 +254,8 @@ export const entiersBank: TutorBankItemV4[] = [
     expected: ["6"],
     comparator: "number_equal",
     hint: "Le chiffre des centaines est le premier à gauche.",
+    explanation:
+      "Dans 684, le premier chiffre à gauche représente les centaines. C’est 6.",
     tags: ["entiers", "rang"],
   },
   {
@@ -164,6 +272,8 @@ export const entiersBank: TutorBankItemV4[] = [
     expected: ["3"],
     comparator: "number_equal",
     hint: "Le chiffre des unités est le dernier.",
+    explanation:
+      "Dans 4 273, le chiffre des unités est le dernier à droite. C’est 3.",
     tags: ["entiers", "rang"],
   },
   {
@@ -181,6 +291,8 @@ export const entiersBank: TutorBankItemV4[] = [
     expected: ["8"],
     comparator: "mcq_exact",
     hint: "Unités à droite, puis dizaines.",
+    explanation:
+      "Dans 5 482, le chiffre des unités est 2, donc juste avant se trouve le chiffre des dizaines : 8.",
     tags: ["entiers", "rang", "qcm"],
   },
   {
@@ -198,6 +310,8 @@ export const entiersBank: TutorBankItemV4[] = [
     expected: ["3"],
     comparator: "mcq_exact",
     hint: "Milliers, centaines, dizaines, unités.",
+    explanation:
+      "Dans 7 306, le 7 est au rang des milliers, le 3 au rang des centaines, le 0 au rang des dizaines et le 6 au rang des unités. Le chiffre des centaines est donc 3.",
     tags: ["entiers", "rang", "qcm"],
   },
 
@@ -218,6 +332,8 @@ export const entiersBank: TutorBankItemV4[] = [
     expected: ["354"],
     comparator: "number_equal",
     hint: "Compare les dizaines.",
+    explanation:
+      "Les deux nombres ont 3 centaines. On compare alors les dizaines : 5 dizaines est plus grand que 4 dizaines. Donc 354 est plus grand que 345.",
     tags: ["entiers", "comparaison"],
   },
   {
@@ -234,6 +350,8 @@ export const entiersBank: TutorBankItemV4[] = [
     expected: ["890"],
     comparator: "number_equal",
     hint: "Compare les dizaines après les centaines.",
+    explanation:
+      "Les deux nombres ont 8 ou 9 centaines ? En réalité, 908 a 9 centaines et 890 a 8 centaines. Comme 8 centaines est plus petit que 9 centaines, 890 est le plus petit.",
     tags: ["entiers", "comparaison"],
   },
   {
@@ -250,6 +368,8 @@ export const entiersBank: TutorBankItemV4[] = [
     expected: ["2350", "2 350"],
     comparator: "number_equal",
     hint: "Compare les dizaines.",
+    explanation:
+      "Les deux nombres ont 2 milliers et 3 centaines. On compare ensuite les dizaines : 5 dizaines est plus grand que 0 dizaine. Donc 2 350 est plus grand que 2 305.",
     tags: ["entiers", "comparaison"],
   },
   {
@@ -267,6 +387,8 @@ export const entiersBank: TutorBankItemV4[] = [
     expected: ["1 250"],
     comparator: "mcq_exact",
     hint: "Compare les centaines puis les dizaines.",
+    explanation:
+      "Tous les nombres ont 1 millier. En comparant ensuite les centaines et les dizaines, 1 250 est le plus grand.",
     tags: ["entiers", "comparaison", "qcm"],
   },
   {
@@ -284,6 +406,8 @@ export const entiersBank: TutorBankItemV4[] = [
     expected: ["1 408"],
     comparator: "mcq_exact",
     hint: "Compare les dizaines.",
+    explanation:
+      "Les deux nombres ont 1 millier et 4 centaines. On compare alors les dizaines : 0 dizaine est plus petit que 8 dizaines. Donc 1 408 est plus petit que 1 480.",
     tags: ["entiers", "comparaison", "reunion", "qcm"],
   },
 
@@ -304,6 +428,8 @@ export const entiersBank: TutorBankItemV4[] = [
     expected: ["300", "50", "2"],
     comparator: "contains_keyword",
     hint: "3 centaines, 5 dizaines, 2 unités.",
+    explanation:
+      "Dans 352, le 3 représente 300, le 5 représente 50 et le 2 représente 2. On peut donc écrire 352 = 300 + 50 + 2.",
     tags: ["entiers", "decomposition"],
   },
   {
@@ -320,6 +446,8 @@ export const entiersBank: TutorBankItemV4[] = [
     expected: ["4000", "200", "6"],
     comparator: "contains_keyword",
     hint: "4 milliers, 2 centaines, 0 dizaine, 6 unités.",
+    explanation:
+      "Dans 4 206, le 4 représente 4000, le 2 représente 200, le 0 représente 0 dizaine et le 6 représente 6. On peut écrire 4 206 = 4000 + 200 + 6.",
     tags: ["entiers", "decomposition"],
   },
   {
@@ -337,6 +465,8 @@ export const entiersBank: TutorBankItemV4[] = [
     expected: ["500 + 7"],
     comparator: "mcq_exact",
     hint: "Il y a 5 centaines, 0 dizaine, 7 unités.",
+    explanation:
+      "507 contient 5 centaines, 0 dizaine et 7 unités. Sa bonne décomposition est donc 500 + 7.",
     tags: ["entiers", "decomposition", "qcm"],
   },
   {
@@ -354,6 +484,8 @@ export const entiersBank: TutorBankItemV4[] = [
     expected: ["2000 + 300 + 40"],
     comparator: "mcq_exact",
     hint: "2 milliers, 3 centaines, 4 dizaines.",
+    explanation:
+      "2 340 contient 2 milliers, 3 centaines, 4 dizaines et 0 unité. La bonne décomposition est donc 2000 + 300 + 40.",
     tags: ["entiers", "decomposition", "qcm"],
   },
 
@@ -374,6 +506,8 @@ export const entiersBank: TutorBankItemV4[] = [
     expected: ["40", "50"],
     comparator: "contains_keyword",
     hint: "47 est entre 40 et 50.",
+    explanation:
+      "Le nombre 47 est plus grand que 40 et plus petit que 50. Il est donc encadré entre 40 et 50.",
     tags: ["entiers", "encadrement"],
   },
   {
@@ -390,6 +524,8 @@ export const entiersBank: TutorBankItemV4[] = [
     expected: ["300", "400"],
     comparator: "contains_keyword",
     hint: "326 est entre 300 et 400.",
+    explanation:
+      "Le nombre 326 est compris entre 300 et 400. Ce sont les deux centaines consécutives qui l’encadrent.",
     tags: ["entiers", "encadrement"],
   },
   {
@@ -407,6 +543,8 @@ export const entiersBank: TutorBankItemV4[] = [
     expected: ["500 et 600"],
     comparator: "mcq_exact",
     hint: "On parle ici de centaines consécutives.",
+    explanation:
+      "Comme 582 est compris entre 500 et 600, le bon encadrement est 500 et 600.",
     tags: ["entiers", "encadrement", "qcm"],
   },
   {
@@ -424,6 +562,8 @@ export const entiersBank: TutorBankItemV4[] = [
     expected: ["70 et 80"],
     comparator: "mcq_exact",
     hint: "Deux dizaines consécutives.",
+    explanation:
+      "73 est plus grand que 70 et plus petit que 80. Il est donc entre 70 et 80.",
     tags: ["entiers", "encadrement", "qcm"],
   },
 
@@ -444,6 +584,8 @@ export const entiersBank: TutorBankItemV4[] = [
     expected: ["427"],
     comparator: "number_equal",
     hint: "Assemble les chiffres dans l’ordre.",
+    explanation:
+      "Le chiffre des centaines est 4, celui des dizaines est 2 et celui des unités est 7. Le nombre est donc 427.",
     tags: ["entiers", "defi"],
   },
   {
@@ -460,6 +602,8 @@ export const entiersBank: TutorBankItemV4[] = [
     expected: ["20"],
     comparator: "number_equal",
     hint: "Calcule l’écart.",
+    explanation:
+      "Pour passer de 380 à 400, on calcule 400 - 380 = 20. Il faut donc ajouter 20.",
     tags: ["entiers", "defi"],
   },
   {
@@ -473,9 +617,11 @@ export const entiersBank: TutorBankItemV4[] = [
     theme: "neutral",
     text: "Quel est le plus petit nombre de quatre chiffres que l’on peut écrire avec les chiffres 3, 0, 5 et 1, une seule fois chacun ?",
     format: "short",
-    expected: ["1035"],
+    expected: ["1035", "1 035"],
     comparator: "number_equal",
     hint: "Le nombre ne peut pas commencer par 0.",
+    explanation:
+      "Pour obtenir le plus petit nombre possible, on place d’abord le plus petit chiffre non nul, donc 1. Ensuite on place 0, puis 3 et 5. On obtient 1035.",
     tags: ["entiers", "defi", "raisonnement"],
   },
   {
@@ -492,39 +638,9 @@ export const entiersBank: TutorBankItemV4[] = [
     expected: ["2230", "2 230"],
     comparator: "number_equal",
     hint: "Additionne 1 250 et 980.",
+    explanation:
+      "On additionne 1 250 et 980 : 1250 + 980 = 2230. Le site reçoit donc 2 230 visiteurs au total.",
     tags: ["entiers", "defi", "reunion"],
-  },
-  {
-    kind: "fixed",
-    id: "entier_defis_fixed_5",
-    niveau: "6e",
-    matiere: "maths",
-    notionId: "nombres_entiers",
-    microId: "entier_defis",
-    difficulty: 4,
-    theme: "neutral",
-    text: "Explique pourquoi 509 est plus grand que 490.",
-    format: "short",
-    expected: ["dizaines", "509", "490"],
-    comparator: "contains_keyword",
-    hint: "Compare d’abord les centaines, puis les dizaines.",
-    tags: ["entiers", "defi", "raisonnement"],
-  },
-  {
-    kind: "fixed",
-    id: "entier_defis_fixed_6",
-    niveau: "6e",
-    matiere: "maths",
-    notionId: "nombres_entiers",
-    microId: "entier_defis",
-    difficulty: 5,
-    theme: "neutral",
-    text: "Trouve un nombre compris entre 300 et 400 dont le chiffre des dizaines est 7 et le chiffre des unités est plus petit que 5.",
-    format: "short",
-    expected: ["370", "371", "372", "373", "374"],
-    comparator: "exact_text",
-    hint: "Il y a plusieurs réponses possibles.",
-    tags: ["entiers", "defi", "raisonnement"],
   },
 
   // =========================
@@ -539,15 +655,18 @@ export const entiersBank: TutorBankItemV4[] = [
     microId: "entier_lire_ecrire",
     difficulty: 1,
     theme: "neutral",
-    hint: "Lis les centaines, dizaines et unités.",
-    tags: ["entiers", "lecture", "template"],
+    hint: "Transforme les mots en nombre.",
+    tags: ["entiers", "lecture", "ecriture", "template"],
     generate: () => {
       const n = randomInt(101, 999);
+      const words = numberToFrenchWords(n);
+
       return {
-        text: `Écris en chiffres : ${chunkedNumber(n)}.`,
+        text: `Écris en chiffres : ${words}`,
         format: "short",
         expected: [String(n), chunkedNumber(n)],
         comparator: "number_equal",
+        explanation: `${words} s’écrit ${chunkedNumber(n)} en chiffres.`,
       };
     },
   },
@@ -560,24 +679,32 @@ export const entiersBank: TutorBankItemV4[] = [
     microId: "entier_lire_ecrire",
     difficulty: 2,
     theme: "neutral",
-    hint: "Repère les milliers et les centaines.",
+    hint: "Lis bien les milliers, centaines, dizaines et unités.",
     tags: ["entiers", "lecture", "qcm", "template"],
     generate: () => {
       const n = randomInt(1000, 3999);
+      const words = numberToFrenchWords(n);
       const good = chunkedNumber(n);
-      const choices = shuffle([
-        good,
-        chunkedNumber(n + 10),
-        chunkedNumber(n + 100),
-        chunkedNumber(n - 1),
-      ]);
+
+      const wrong1 = chunkedNumber(n + 10);
+      const wrong2 = chunkedNumber(n + 100);
+      const wrong3 = chunkedNumber(n - 1);
+
+      const choices = shuffle(
+        Array.from(new Set([good, wrong1, wrong2, wrong3]))
+      ).slice(0, 4);
+
+      if (!choices.includes(good)) {
+        choices[Math.floor(Math.random() * choices.length)] = good;
+      }
 
       return {
-        text: `Quel nombre correspond à ${good} ?`,
+        text: `Quel nombre correspond à « ${words} » ?`,
         format: "qcm",
         choices,
         expected: [good],
         comparator: "mcq_exact",
+        explanation: `« ${words} » s’écrit ${good}.`,
       };
     },
   },
@@ -603,13 +730,18 @@ export const entiersBank: TutorBankItemV4[] = [
         Math.floor(Math.random() * 3)
       ];
       const answer =
-        target === "centaines" ? digits[0] : target === "dizaines" ? digits[1] : digits[2];
+        target === "centaines"
+          ? digits[0]
+          : target === "dizaines"
+          ? digits[1]
+          : digits[2];
 
       return {
         text: `Dans le nombre ${n}, quel est le chiffre des ${target} ?`,
         format: "short",
         expected: [answer],
         comparator: "number_equal",
+        explanation: `Dans ${n}, le chiffre demandé au rang des ${target} est ${answer}.`,
       };
     },
   },
@@ -639,12 +771,22 @@ export const entiersBank: TutorBankItemV4[] = [
           ? digits[2]
           : digits[3];
 
+      const wrongChoices = shuffle(
+        Array.from(new Set(digits.filter((d) => d !== answer)))
+      );
+      const choices = shuffle([answer, ...wrongChoices]).slice(0, 4);
+
       return {
-        text: `Dans le nombre ${chunkedNumber(n)}, quel est le chiffre des ${target} ?`,
+        text: `Dans le nombre ${chunkedNumber(
+          n
+        )}, quel est le chiffre des ${target} ?`,
         format: "qcm",
-        choices: shuffle([...new Set(digits)]),
+        choices,
         expected: [answer],
         comparator: "mcq_exact",
+        explanation: `Dans ${chunkedNumber(
+          n
+        )}, le chiffre des ${target} est ${answer}.`,
       };
     },
   },
@@ -668,12 +810,14 @@ export const entiersBank: TutorBankItemV4[] = [
       let b = randomInt(100, 999);
       while (a === b) b = randomInt(100, 999);
       const good = Math.max(a, b);
+      const small = Math.min(a, b);
 
       return {
         text: `Quel nombre est le plus grand : ${a} ou ${b} ?`,
         format: "short",
         expected: [String(good), chunkedNumber(good)],
         comparator: "number_equal",
+        explanation: `On compare ${a} et ${b}. Comme ${good} est plus grand que ${small}, la bonne réponse est ${good}.`,
       };
     },
   },
@@ -704,6 +848,9 @@ export const entiersBank: TutorBankItemV4[] = [
         choices,
         expected: [chunkedNumber(good)],
         comparator: "mcq_exact",
+        explanation: `Parmi les nombres proposés, ${chunkedNumber(
+          good
+        )} est le plus grand.`,
       };
     },
   },
@@ -720,7 +867,7 @@ export const entiersBank: TutorBankItemV4[] = [
     microId: "entier_decomposer",
     difficulty: 2,
     theme: "neutral",
-    hint: "Décompose en milliers, centaines, dizaines, unités.",
+    hint: "Décompose en centaines, dizaines, unités.",
     tags: ["entiers", "decomposition", "template"],
     generate: () => {
       const n = randomInt(100, 999);
@@ -733,6 +880,7 @@ export const entiersBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(hundreds), String(tens), String(units)],
         comparator: "contains_keyword",
+        explanation: `${n} se décompose en ${hundreds} + ${tens} + ${units}.`,
       };
     },
   },
@@ -765,6 +913,7 @@ export const entiersBank: TutorBankItemV4[] = [
         ]),
         expected: [good],
         comparator: "mcq_exact",
+        explanation: `Dans ${n}, les chiffres représentent ${hundreds}, ${tens} et ${units}. La bonne décomposition est donc ${good}.`,
       };
     },
   },
@@ -781,7 +930,7 @@ export const entiersBank: TutorBankItemV4[] = [
     microId: "entier_encadrer",
     difficulty: 2,
     theme: "neutral",
-    hint: "Trouve la dizaine ou la centaine juste avant et juste après.",
+    hint: "Trouve la dizaine juste avant et juste après.",
     tags: ["entiers", "encadrement", "template"],
     generate: () => {
       const n = randomInt(11, 98);
@@ -793,6 +942,7 @@ export const entiersBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(low), String(high)],
         comparator: "contains_keyword",
+        explanation: `${n} est plus grand que ${low} et plus petit que ${high}. Il est donc encadré entre ${low} et ${high}.`,
       };
     },
   },
@@ -824,6 +974,7 @@ export const entiersBank: TutorBankItemV4[] = [
         ]),
         expected: [good],
         comparator: "mcq_exact",
+        explanation: `${n} est compris entre ${low} et ${high}.`,
       };
     },
   },
@@ -853,6 +1004,7 @@ export const entiersBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(n)],
         comparator: "number_equal",
+        explanation: `Le nombre recherché a ${a} au rang des centaines, ${b} au rang des dizaines et ${c} au rang des unités. C’est donc ${n}.`,
       };
     },
   },
@@ -868,7 +1020,6 @@ export const entiersBank: TutorBankItemV4[] = [
     hint: "Attention à la place du zéro.",
     tags: ["entiers", "defi", "qcm", "template"],
     generate: () => {
-      const digits = shuffle(["0", "2", "4", "7"]);
       const choices = shuffle(["2047", "2074", "2407", "2470"]);
       const good = "2047";
 
@@ -878,6 +1029,8 @@ export const entiersBank: TutorBankItemV4[] = [
         choices,
         expected: [good],
         comparator: "mcq_exact",
+        explanation:
+          "Le nombre ne peut pas commencer par 0. On place donc d’abord 2, puis 0, puis 4 et 7. Le plus petit nombre possible est 2047.",
       };
     },
   },

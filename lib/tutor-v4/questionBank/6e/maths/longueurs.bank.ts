@@ -31,6 +31,8 @@ export const longueursBank: TutorBankItemV4[] = [
     expected: ["cm"],
     comparator: "mcq_exact",
     hint: "Un crayon mesure environ quelques dizaines de centimètres.",
+    explanation:
+      "Un crayon est un objet de petite taille. L’unité la plus adaptée est donc le centimètre.",
     tags: ["longueurs", "mesure", "unite"],
   },
   {
@@ -48,6 +50,8 @@ export const longueursBank: TutorBankItemV4[] = [
     expected: ["km"],
     comparator: "mcq_exact",
     hint: "Pour une grande distance, on utilise une grande unité.",
+    explanation:
+      "La distance entre deux villes est très grande. L’unité adaptée est donc le kilomètre.",
     tags: ["longueurs", "mesure", "unite"],
   },
   {
@@ -65,6 +69,8 @@ export const longueursBank: TutorBankItemV4[] = [
     expected: ["mm"],
     comparator: "mcq_exact",
     hint: "L’épaisseur d’un petit objet se mesure avec une petite unité.",
+    explanation:
+      "L’épaisseur d’une pièce est très petite. On la mesure donc en millimètres.",
     tags: ["longueurs", "mesure", "unite"],
   },
   {
@@ -82,6 +88,27 @@ export const longueursBank: TutorBankItemV4[] = [
     expected: ["m"],
     comparator: "mcq_exact",
     hint: "Une salle de classe mesure plusieurs mètres.",
+    explanation:
+      "Une salle de classe a une longueur de quelques mètres. L’unité la plus adaptée est donc le mètre.",
+    tags: ["longueurs", "mesure", "unite"],
+  },
+  {
+    kind: "fixed",
+    id: "longueur_mesurer_fixed_5",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "longueurs",
+    microId: "longueur_mesurer",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Quelle unité est la plus adaptée pour mesurer la taille d’un élève ?",
+    format: "qcm",
+    choices: ["mm", "cm", "km", "hm"],
+    expected: ["cm"],
+    comparator: "mcq_exact",
+    hint: "La taille d’un élève est souvent exprimée en centimètres.",
+    explanation:
+      "La taille d’un élève est généralement comprise entre 100 cm et 200 cm. L’unité adaptée est donc le centimètre.",
     tags: ["longueurs", "mesure", "unite"],
   },
   {
@@ -99,6 +126,8 @@ export const longueursBank: TutorBankItemV4[] = [
     expected: ["km"],
     comparator: "mcq_exact",
     hint: "Un sentier se mesure sur une grande distance.",
+    explanation:
+      "Un sentier de randonnée mesure souvent plusieurs milliers de mètres. L’unité adaptée est donc le kilomètre.",
     tags: ["longueurs", "mesure", "reunion"],
   },
 
@@ -119,6 +148,8 @@ export const longueursBank: TutorBankItemV4[] = [
     expected: ["100"],
     comparator: "number_equal",
     hint: "1 m = 100 cm.",
+    explanation:
+      "Dans le système métrique, 1 mètre correspond à 100 centimètres.",
     tags: ["longueurs", "unites"],
   },
   {
@@ -135,6 +166,8 @@ export const longueursBank: TutorBankItemV4[] = [
     expected: ["1000"],
     comparator: "number_equal",
     hint: "1 km = 1000 m.",
+    explanation:
+      "Un kilomètre correspond à 1000 mètres.",
     tags: ["longueurs", "unites"],
   },
   {
@@ -151,6 +184,26 @@ export const longueursBank: TutorBankItemV4[] = [
     expected: ["10"],
     comparator: "number_equal",
     hint: "1 cm = 10 mm.",
+    explanation:
+      "Un centimètre correspond à 10 millimètres.",
+    tags: ["longueurs", "unites"],
+  },
+  {
+    kind: "fixed",
+    id: "longueur_unites_fixed_4",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "longueurs",
+    microId: "longueur_unites",
+    difficulty: 1,
+    theme: "neutral",
+    text: "Combien y a-t-il de décimètres dans 1 mètre ?",
+    format: "short",
+    expected: ["10"],
+    comparator: "number_equal",
+    hint: "1 m = 10 dm.",
+    explanation:
+      "Un mètre contient 10 décimètres.",
     tags: ["longueurs", "unites"],
   },
   {
@@ -168,6 +221,8 @@ export const longueursBank: TutorBankItemV4[] = [
     expected: ["100 cm"],
     comparator: "mcq_exact",
     hint: "Le mètre est 100 fois plus grand que le centimètre.",
+    explanation:
+      "Un mètre correspond à 100 centimètres. Le bon choix est donc 100 cm.",
     tags: ["longueurs", "unites", "qcm"],
   },
   {
@@ -185,6 +240,8 @@ export const longueursBank: TutorBankItemV4[] = [
     expected: ["1000 m"],
     comparator: "mcq_exact",
     hint: "Le kilomètre contient mille mètres.",
+    explanation:
+      "Un kilomètre correspond à 1000 mètres. Le bon choix est donc 1000 m.",
     tags: ["longueurs", "unites", "qcm"],
   },
 
@@ -205,6 +262,8 @@ export const longueursBank: TutorBankItemV4[] = [
     expected: ["200"],
     comparator: "number_equal",
     hint: "1 m = 100 cm.",
+    explanation:
+      "Comme 1 m = 100 cm, 2 m = 2 × 100 = 200 cm.",
     tags: ["longueurs", "conversion"],
   },
   {
@@ -221,6 +280,8 @@ export const longueursBank: TutorBankItemV4[] = [
     expected: ["3"],
     comparator: "number_equal",
     hint: "On divise par 100.",
+    explanation:
+      "Comme 100 cm = 1 m, 300 cm = 300 ÷ 100 = 3 m.",
     tags: ["longueurs", "conversion"],
   },
   {
@@ -237,6 +298,8 @@ export const longueursBank: TutorBankItemV4[] = [
     expected: ["4000"],
     comparator: "number_equal",
     hint: "1 km = 1000 m.",
+    explanation:
+      "Comme 1 km = 1000 m, 4 km = 4 × 1000 = 4000 m.",
     tags: ["longueurs", "conversion"],
   },
   {
@@ -253,6 +316,8 @@ export const longueursBank: TutorBankItemV4[] = [
     expected: ["7"],
     comparator: "number_equal",
     hint: "10 mm = 1 cm.",
+    explanation:
+      "Comme 10 mm = 1 cm, 70 mm = 70 ÷ 10 = 7 cm.",
     tags: ["longueurs", "conversion"],
   },
   {
@@ -269,6 +334,26 @@ export const longueursBank: TutorBankItemV4[] = [
     expected: ["250"],
     comparator: "number_equal",
     hint: "Multiplie par 100.",
+    explanation:
+      "Comme 1 m = 100 cm, 2,5 m = 2,5 × 100 = 250 cm.",
+    tags: ["longueurs", "conversion"],
+  },
+  {
+    kind: "fixed",
+    id: "longueur_convertir_fixed_6",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "longueurs",
+    microId: "longueur_convertir",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Convertis 150 cm en m.",
+    format: "short",
+    expected: ["1,5", "1.5"],
+    comparator: "number_equal",
+    hint: "On divise par 100.",
+    explanation:
+      "Comme 100 cm = 1 m, 150 cm = 150 ÷ 100 = 1,5 m.",
     tags: ["longueurs", "conversion"],
   },
   {
@@ -286,6 +371,8 @@ export const longueursBank: TutorBankItemV4[] = [
     expected: ["5"],
     comparator: "mcq_exact",
     hint: "On divise par 100.",
+    explanation:
+      "500 cm = 500 ÷ 100 = 5 m. Le bon choix est 5.",
     tags: ["longueurs", "conversion", "qcm"],
   },
   {
@@ -303,6 +390,8 @@ export const longueursBank: TutorBankItemV4[] = [
     expected: ["3000"],
     comparator: "mcq_exact",
     hint: "1 km = 1000 m.",
+    explanation:
+      "3 km = 3 × 1000 = 3000 m. Le bon choix est 3000.",
     tags: ["longueurs", "conversion", "qcm"],
   },
   {
@@ -319,6 +408,8 @@ export const longueursBank: TutorBankItemV4[] = [
     expected: ["5000"],
     comparator: "number_equal",
     hint: "Chaque kilomètre vaut 1000 mètres.",
+    explanation:
+      "Comme 1 km = 1000 m, 5 km = 5 × 1000 = 5000 m.",
     tags: ["longueurs", "conversion", "reunion"],
   },
 
@@ -340,6 +431,8 @@ export const longueursBank: TutorBankItemV4[] = [
     expected: ["2 m"],
     comparator: "mcq_exact",
     hint: "Convertis tout en cm.",
+    explanation:
+      "2 m = 200 cm, 150 cm = 150 cm, 180 cm = 180 cm et 1 m = 100 cm. La plus grande longueur est donc 2 m.",
     tags: ["longueurs", "comparaison"],
   },
   {
@@ -357,6 +450,8 @@ export const longueursBank: TutorBankItemV4[] = [
     expected: ["250 cm"],
     comparator: "mcq_exact",
     hint: "3 m = 300 cm.",
+    explanation:
+      "3 m = 300 cm. En comparant 300 cm, 250 cm, 280 cm et 320 cm, la plus petite longueur est 250 cm.",
     tags: ["longueurs", "comparaison"],
   },
   {
@@ -373,6 +468,26 @@ export const longueursBank: TutorBankItemV4[] = [
     expected: ["1,5 m", "1.5 m", "150 cm"],
     comparator: "contains_keyword",
     hint: "1,5 m = 150 cm.",
+    explanation:
+      "1,5 m = 150 cm. Comme 150 cm est plus grand que 140 cm, la plus grande longueur est 1,5 m.",
+    tags: ["longueurs", "comparaison"],
+  },
+  {
+    kind: "fixed",
+    id: "longueur_comparer_fixed_4",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "longueurs",
+    microId: "longueur_comparer",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Quel est le plus petit : 2 m ou 190 cm ?",
+    format: "short",
+    expected: ["190 cm", "1,9 m", "1.9 m"],
+    comparator: "contains_keyword",
+    hint: "2 m = 200 cm.",
+    explanation:
+      "2 m = 200 cm. Comme 190 cm est plus petit que 200 cm, la plus petite longueur est 190 cm.",
     tags: ["longueurs", "comparaison"],
   },
   {
@@ -390,6 +505,8 @@ export const longueursBank: TutorBankItemV4[] = [
     expected: ["1 m"],
     comparator: "mcq_exact",
     hint: "1 m = 100 cm.",
+    explanation:
+      "1 m = 100 cm. Comme 100 cm est plus grand que 99 cm, 95 cm et 90 cm, la plus grande longueur est 1 m.",
     tags: ["longueurs", "comparaison", "qcm"],
   },
   {
@@ -406,6 +523,8 @@ export const longueursBank: TutorBankItemV4[] = [
     expected: ["3 km", "3000 m"],
     comparator: "contains_keyword",
     hint: "3 km = 3000 m.",
+    explanation:
+      "3 km = 3000 m. Comme 3000 m est plus grand que 2800 m, le sentier de 3 km est le plus long.",
     tags: ["longueurs", "comparaison", "reunion"],
   },
 
@@ -426,6 +545,8 @@ export const longueursBank: TutorBankItemV4[] = [
     expected: ["15"],
     comparator: "number_equal",
     hint: "Addition simple.",
+    explanation:
+      "On ajoute 5 m à 10 m, donc 10 + 5 = 15. La nouvelle longueur est 15 m.",
     tags: ["longueurs", "probleme"],
   },
   {
@@ -442,6 +563,8 @@ export const longueursBank: TutorBankItemV4[] = [
     expected: ["150"],
     comparator: "number_equal",
     hint: "2 m = 200 cm.",
+    explanation:
+      "2 m = 200 cm. Si on coupe 50 cm, il reste 200 - 50 = 150 cm.",
     tags: ["longueurs", "probleme"],
   },
   {
@@ -458,6 +581,26 @@ export const longueursBank: TutorBankItemV4[] = [
     expected: ["1"],
     comparator: "number_equal",
     hint: "Partage 3 m en 3 parts égales.",
+    explanation:
+      "3 m partagés en 3 parts égales donnent 3 ÷ 3 = 1. Une part mesure donc 1 m.",
+    tags: ["longueurs", "probleme"],
+  },
+  {
+    kind: "fixed",
+    id: "longueur_probleme_fixed_4",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "longueurs",
+    microId: "longueur_probleme",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Un ruban mesure 250 cm. On utilise 100 cm. Quelle longueur reste-t-il ?",
+    format: "short",
+    expected: ["150"],
+    comparator: "number_equal",
+    hint: "Soustraction simple.",
+    explanation:
+      "On enlève 100 cm à 250 cm, donc 250 - 100 = 150 cm. Il reste 150 cm.",
     tags: ["longueurs", "probleme"],
   },
   {
@@ -475,6 +618,8 @@ export const longueursBank: TutorBankItemV4[] = [
     expected: ["2 m"],
     comparator: "mcq_exact",
     hint: "4 ÷ 2 = 2.",
+    explanation:
+      "Si 4 m sont partagés en 2 morceaux égaux, chaque morceau mesure 4 ÷ 2 = 2 m.",
     tags: ["longueurs", "probleme", "qcm"],
   },
   {
@@ -491,6 +636,8 @@ export const longueursBank: TutorBankItemV4[] = [
     expected: ["4"],
     comparator: "number_equal",
     hint: "On enlève 2 km à 6 km.",
+    explanation:
+      "Il reste à parcourir 6 - 2 = 4 km.",
     tags: ["longueurs", "probleme", "reunion"],
   },
 
@@ -511,6 +658,8 @@ export const longueursBank: TutorBankItemV4[] = [
     expected: ["unité adaptée", "trop petit", "pas adapté", "grande distance"],
     comparator: "contains_keyword",
     hint: "On choisit une unité adaptée à la taille de ce qu’on mesure.",
+    explanation:
+      "Une ville est très grande. Le centimètre est une unité trop petite et pas adaptée pour mesurer une si grande distance. On utilise plutôt les kilomètres.",
     tags: ["longueurs", "defi", "raisonnement"],
   },
   {
@@ -527,6 +676,8 @@ export const longueursBank: TutorBankItemV4[] = [
     expected: ["200", "150", "cm", "m"],
     comparator: "contains_keyword",
     hint: "Convertis tout dans la même unité.",
+    explanation:
+      "2 m = 200 cm. Comme 200 cm est plus grand que 150 cm, 2 m est plus grand que 150 cm.",
     tags: ["longueurs", "defi", "raisonnement"],
   },
   {
@@ -543,6 +694,8 @@ export const longueursBank: TutorBankItemV4[] = [
     expected: ["101", "110", "120", "130", "140", "149"],
     comparator: "exact_text",
     hint: "1 m = 100 cm.",
+    explanation:
+      "1 m = 100 cm. On cherche donc une longueur plus grande que 100 cm et plus petite que 150 cm. Par exemple : 120 cm.",
     tags: ["longueurs", "defi", "raisonnement"],
   },
   {
@@ -559,6 +712,8 @@ export const longueursBank: TutorBankItemV4[] = [
     expected: ["3500"],
     comparator: "number_equal",
     hint: "2 km = 2000 m.",
+    explanation:
+      "2 km = 2000 m. Ensuite 2000 m + 1500 m = 3500 m. La distance totale est donc 3500 m.",
     tags: ["longueurs", "defi", "reunion"],
   },
 
@@ -578,10 +733,34 @@ export const longueursBank: TutorBankItemV4[] = [
     tags: ["longueurs", "mesure", "template"],
     generate: () => {
       const items = [
-        { obj: "une gomme", good: "cm", bad: ["km", "m", "hm"] },
-        { obj: "une route entre deux villes", good: "km", bad: ["cm", "mm", "dm"] },
-        { obj: "un cahier", good: "cm", bad: ["km", "m", "hm"] },
-        { obj: "l’épaisseur d’un ongle", good: "mm", bad: ["m", "km", "cm"] },
+        {
+          obj: "une gomme",
+          good: "cm",
+          bad: ["km", "m", "hm"],
+          explanation:
+            "Une gomme est un petit objet. Le centimètre est donc l’unité adaptée.",
+        },
+        {
+          obj: "une route entre deux villes",
+          good: "km",
+          bad: ["cm", "mm", "dm"],
+          explanation:
+            "La distance entre deux villes est grande. On la mesure donc en kilomètres.",
+        },
+        {
+          obj: "un cahier",
+          good: "cm",
+          bad: ["km", "m", "hm"],
+          explanation:
+            "Un cahier mesure quelques dizaines de centimètres. L’unité adaptée est le centimètre.",
+        },
+        {
+          obj: "l’épaisseur d’un ongle",
+          good: "mm",
+          bad: ["m", "km", "cm"],
+          explanation:
+            "L’épaisseur d’un ongle est très petite. On la mesure en millimètres.",
+        },
       ];
       const item = items[Math.floor(Math.random() * items.length)];
 
@@ -591,6 +770,7 @@ export const longueursBank: TutorBankItemV4[] = [
         choices: shuffle([item.good, ...item.bad]),
         expected: [item.good],
         comparator: "mcq_exact",
+        explanation: item.explanation,
       };
     },
   },
@@ -611,9 +791,21 @@ export const longueursBank: TutorBankItemV4[] = [
     tags: ["longueurs", "unites", "template"],
     generate: () => {
       const items = [
-        { q: "Combien y a-t-il de centimètres dans 1 mètre ?", a: "100" },
-        { q: "Combien y a-t-il de millimètres dans 1 centimètre ?", a: "10" },
-        { q: "Combien y a-t-il de mètres dans 1 kilomètre ?", a: "1000" },
+        {
+          q: "Combien y a-t-il de centimètres dans 1 mètre ?",
+          a: "100",
+          explanation: "1 mètre correspond à 100 centimètres.",
+        },
+        {
+          q: "Combien y a-t-il de millimètres dans 1 centimètre ?",
+          a: "10",
+          explanation: "1 centimètre correspond à 10 millimètres.",
+        },
+        {
+          q: "Combien y a-t-il de mètres dans 1 kilomètre ?",
+          a: "1000",
+          explanation: "1 kilomètre correspond à 1000 mètres.",
+        },
       ];
       const item = items[Math.floor(Math.random() * items.length)];
 
@@ -622,6 +814,7 @@ export const longueursBank: TutorBankItemV4[] = [
         format: "short",
         expected: [item.a],
         comparator: "number_equal",
+        explanation: item.explanation,
       };
     },
   },
@@ -647,6 +840,7 @@ export const longueursBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(m * 100)],
         comparator: "number_equal",
+        explanation: `${m} m = ${m} × 100 = ${m * 100} cm.`,
       };
     },
   },
@@ -668,6 +862,7 @@ export const longueursBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(km * 1000)],
         comparator: "number_equal",
+        explanation: `${km} km = ${km} × 1000 = ${km * 1000} m.`,
       };
     },
   },
@@ -689,9 +884,15 @@ export const longueursBank: TutorBankItemV4[] = [
       return {
         text: `Combien font ${cm} cm en m ?`,
         format: "qcm",
-        choices: shuffle([good, String(cm), formatComma(cm / 10), formatComma(cm / 1000)]),
+        choices: shuffle([
+          good,
+          String(cm),
+          formatComma(cm / 10),
+          formatComma(cm / 1000),
+        ]),
         expected: [good],
         comparator: "mcq_exact",
+        explanation: `${cm} cm = ${cm} ÷ 100 = ${good} m.`,
       };
     },
   },
@@ -711,8 +912,11 @@ export const longueursBank: TutorBankItemV4[] = [
     hint: "Compare dans la même unité.",
     tags: ["longueurs", "comparaison", "template"],
     generate: () => {
-      const a = 100 + Math.floor(Math.random() * 200);
-      const b = 100 + Math.floor(Math.random() * 200);
+      let a = 100 + Math.floor(Math.random() * 200);
+      let b = 100 + Math.floor(Math.random() * 200);
+      while (a === b) {
+        b = 100 + Math.floor(Math.random() * 200);
+      }
       const good = Math.max(a, b);
 
       return {
@@ -720,6 +924,7 @@ export const longueursBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(good)],
         comparator: "number_equal",
+        explanation: `En comparant ${a} cm et ${b} cm, la plus grande longueur est ${good} cm.`,
       };
     },
   },
@@ -745,6 +950,7 @@ export const longueursBank: TutorBankItemV4[] = [
         format: "short",
         expected: [good, String(Math.max(metersInCm, centimeters))],
         comparator: "contains_keyword",
+        explanation: `${meters} m = ${metersInCm} cm. En comparant ${metersInCm} cm et ${centimeters} cm, la plus grande longueur est ${good}.`,
       };
     },
   },
@@ -772,6 +978,7 @@ export const longueursBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(a + b)],
         comparator: "number_equal",
+        explanation: `On ajoute ${b} m à ${a} m, donc ${a} + ${b} = ${a + b}.`,
       };
     },
   },
@@ -795,6 +1002,7 @@ export const longueursBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(a - b)],
         comparator: "number_equal",
+        explanation: `On enlève ${b} cm à ${a} cm, donc ${a} - ${b} = ${a - b} cm.`,
       };
     },
   },
@@ -822,6 +1030,7 @@ export const longueursBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(low + 1), String(low + 10), String(high - 1)],
         comparator: "exact_text",
+        explanation: `On cherche une longueur strictement comprise entre ${low} cm et ${high} cm. Par exemple ${low + 10} cm convient.`,
       };
     },
   },
@@ -838,18 +1047,35 @@ export const longueursBank: TutorBankItemV4[] = [
     tags: ["longueurs", "defi", "template"],
     generate: () => {
       const items = [
-        "un stade",
-        "une aiguille",
-        "une route",
-        "une table",
+        {
+          item: "un stade",
+          explanation:
+            "Un stade est grand. Une unité comme le mètre est adaptée, voire le kilomètre pour de très grandes distances.",
+        },
+        {
+          item: "une aiguille",
+          explanation:
+            "Une aiguille est très petite. Une unité comme le millimètre est adaptée.",
+        },
+        {
+          item: "une route",
+          explanation:
+            "Une route peut être très longue. Le kilomètre est souvent l’unité la plus adaptée.",
+        },
+        {
+          item: "une table",
+          explanation:
+            "Une table mesure généralement quelques mètres ou moins. Le mètre ou le centimètre sont adaptés.",
+        },
       ];
       const item = items[Math.floor(Math.random() * items.length)];
 
       return {
-        text: `Quelle unité choisirais-tu pour mesurer ${item} ? Explique pourquoi.`,
+        text: `Quelle unité choisirais-tu pour mesurer ${item.item} ? Explique pourquoi.`,
         format: "short",
         expected: ["unité", "adaptée", "mesurer"],
         comparator: "contains_keyword",
+        explanation: item.explanation,
       };
     },
   },
