@@ -1,3 +1,4 @@
+// app/tutor-v4/questionpairbuilder
 import { randomUUID } from "crypto";
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 import type {
@@ -21,6 +22,7 @@ function materializeBankItem(item: TutorBankItemV4): {
   expected: string[];
   comparator: ComparatorName;
   hint?: string;
+  explanation?: string;
   canvas?: CanvasFigure;
   difficulty: number;
 } {
@@ -35,6 +37,7 @@ function materializeBankItem(item: TutorBankItemV4): {
       expected: item.expected,
       comparator: item.comparator,
       hint: item.hint,
+      explanation: item.explanation,
       canvas: item.canvas,
       difficulty: item.difficulty,
     };
@@ -52,6 +55,7 @@ function materializeBankItem(item: TutorBankItemV4): {
     expected: generated.expected,
     comparator: generated.comparator,
     hint: item.hint,
+    explanation: generated.explanation,
     canvas: generated.canvas,
     difficulty: item.difficulty,
   };
@@ -138,6 +142,7 @@ function toTutorQuestionOption(item: TutorBankItemV4): TutorQuestionOption {
     expected: q.expected,
     comparator: q.comparator,
     hint: q.hint,
+    explanation: q.explanation,
     canvas: q.canvas,
     meta: {
       familyId: inferFamilyId(item),
