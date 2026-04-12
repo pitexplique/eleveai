@@ -13,8 +13,8 @@ import { useSearchParams } from "next/navigation";
 import TriangleCanvas from "@/lib/tutor-v4/components/TriangleCanvas";
 import QuadrilatereCanvas from "@/lib/tutor-v4/components/QuadrilatereCanvas";
 import {
-  NOTION_MICRO_MAP,
-  NOTION_OPTIONS,
+  getNotionMicroMap,
+  getNotionOptions,
   notionLabel,
   microLabel,
 } from "@/lib/tutor-v4/catalog";
@@ -100,20 +100,21 @@ function simpleEncouragement(args: {
   microId?: string;
   points?: number;
   mode: TutorMode;
+  classe: string;
 }) {
   if (args.ok === undefined || !args.microId) {
     return "Choisis une mission puis avance à ton rythme.";
   }
 
   if (args.ok) {
-    return `✅ Mission réussie : ${microLabel(args.microId)}${
+    return `✅ Mission réussie : ${microLabel(args.microId, args.classe)}${
       args.points ? ` — +${args.points} point${args.points > 1 ? "s" : ""}` : ""
     }`;
   }
 
   return args.mode === "coaching"
-    ? `⚠️ Mission à retravailler : ${microLabel(args.microId)} — un indice apparaît.`
-    : `⚠️ Mission à retravailler : ${microLabel(args.microId)}`;
+    ? `⚠️ Mission à retravailler : ${microLabel(args.microId, args.classe)} — un indice apparaît.`
+    : `⚠️ Mission à retravailler : ${microLabel(args.microId, args.classe)}`;
 }
 
 function visibleProgressText(text: string) {
@@ -172,16 +173,13 @@ function renderCanvas(canvas?: CanvasFigure | null) {
   return null;
 }
 
-function isValidNotionId(value: string): boolean {
-  return NOTION_OPTIONS.includes(value);
-}
 
 export default function TutorV4Page() {
   const searchParams = useSearchParams();
 
   const [classe, setClasse] = useState("6e");
   const [matiere, setMatiere] = useState("maths");
-  const [notion, setNotion] = useState("decimaux");
+  const [notion, setNotion] = useState(getNotionOptions("6e")[0] ?? "decimaux");
 
   const hasInitializedFromUrl = useRef(false);
   const hasStartedFromUrl = useRef(false);
@@ -260,7 +258,7 @@ export default function TutorV4Page() {
 
     if (urlClasse) setClasse(urlClasse);
     if (urlMatiere) setMatiere(urlMatiere);
-    if (urlNotion && isValidNotionId(urlNotion)) setNotion(urlNotion);
+    if (urlNotion) setNotion(urlNotion);
     if (urlMicroId) initialMicroIdRef.current = urlMicroId;
 
     hasInitializedFromUrl.current = true;
@@ -294,10 +292,18 @@ export default function TutorV4Page() {
   const scoreSeanceSur20 =
     possiblePoints > 0 ? ((earnedPoints / possiblePoints) * 20).toFixed(1) : "0.0";
 
-  const notionMicros = useMemo(() => NOTION_MICRO_MAP[notion] ?? [], [notion]);
+  const notionOptions = useMemo(() => getNotionOptions(classe), [classe]);
+  const notionMicroMap = useMemo(() => getNotionMicroMap(classe), [classe]);
+  const notionMicros = useMemo(() => notionMicroMap[notion] ?? [], [notionMicroMap, notion]);
+
+  useEffect(() => {
+    if (!notionOptions.includes(notion)) {
+      setNotion(notionOptions[0] ?? "");
+    }
+  }, [notion, notionOptions]);
 
   function resetMicroStatusesForNotion(notionId: string) {
-    const micros = NOTION_MICRO_MAP[notionId] ?? [];
+    const micros = notionMicroMap[notionId] ?? [];
     const initial: Record<string, MicroStatus> = {};
     micros.forEach((microId) => {
       initial[microId] = "idle";
@@ -306,7 +312,7 @@ export default function TutorV4Page() {
   }
 
   function initMicroScoresForNotion(notionId: string) {
-    const micros = NOTION_MICRO_MAP[notionId] ?? [];
+    const micros = notionMicroMap[notionId] ?? [];
     const initial: Record<string, MicroScore> = {};
     micros.forEach((microId) => {
       initial[microId] = {
@@ -561,9 +567,10 @@ export default function TutorV4Page() {
 
     try {
       setBusy(true);
+      closeResultModal();
 
       const currentMicro = currentQuestion.microId;
-      const currentMicroLabel = microLabel(currentMicro);
+      const currentMicroLabel = microLabel(currentMicro, classe);
       const pointsForQuestion = starPoints(currentQuestion.meta.starLevel);
       const currentExplanation = currentQuestion.explanation?.trim();
 
@@ -658,7 +665,6 @@ export default function TutorV4Page() {
         setPendingNextRecommendedStar(typed.recommendedStar);
         setPendingNextVisibleProgress(typed.visibleProgress);
 
-        openResultModal(false, undefined);
       }
     } catch (error) {
       setFeedback(
@@ -693,11 +699,15 @@ export default function TutorV4Page() {
             <section className="grid gap-4 md:grid-cols-3">
               <Card>
                 <Label>Classe</Label>
-                <input
+                <select
                   value={classe}
-                  disabled
-                  className="w-full rounded-xl border border-slate-300 bg-slate-100 px-3 py-2 text-sm text-slate-700"
-                />
+                  onChange={(e) => setClasse(e.target.value)}
+                  disabled={busy || wrongAnswerPanelOpen}
+                  className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 disabled:opacity-60"
+                >
+                  <option value="6e">6e</option>
+                  <option value="5e">5e</option>
+                </select>
               </Card>
 
               <Card>
@@ -716,9 +726,9 @@ export default function TutorV4Page() {
                   onChange={(e) => setNotion(e.target.value)}
                   className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900"
                 >
-                  {NOTION_OPTIONS.map((item) => (
+                  {notionOptions.map((item) => (
                     <option key={item} value={item}>
-                      {notionLabel(item)}
+                      {notionLabel(item, classe)}
                     </option>
                   ))}
                 </select>
@@ -779,6 +789,7 @@ export default function TutorV4Page() {
                     microId: lastResult.microId,
                     points: lastResult.points,
                     mode,
+                    classe,
                   })}
                 </div>
 
@@ -809,7 +820,7 @@ export default function TutorV4Page() {
                   </div>
                   <p className="text-sm text-slate-500">
                     Micro active :{" "}
-                    <span className="font-semibold">{microLabel(pair.microId)}</span>
+                    <span className="font-semibold">{microLabel(pair.microId, classe)}</span>
                   </p>
                 </div>
 
@@ -837,7 +848,7 @@ export default function TutorV4Page() {
 
                       <div className="mb-3 flex flex-wrap gap-2">
                         <Tag>{option.format === "qcm" ? "QCM" : "Réponse libre"}</Tag>
-                        <Tag>{microLabel(option.microId)}</Tag>
+                        <Tag>{microLabel(option.microId, classe)}</Tag>
                         <Tag>{starPoints(option.meta.starLevel)} pts</Tag>
                         {option.canvas ? <Tag>Figure</Tag> : null}
                       </div>
@@ -865,7 +876,7 @@ export default function TutorV4Page() {
                     <p className="text-sm text-slate-500">
                       Compétence :{" "}
                       <span className="font-semibold">
-                        {microLabel(currentQuestion.microId)}
+                        {microLabel(currentQuestion.microId, classe)}
                       </span>
                     </p>
                   </div>
@@ -883,7 +894,7 @@ export default function TutorV4Page() {
                 {!wrongAnswerPanelOpen ? (
                   <>
                     <div className="mb-4 rounded-2xl bg-gradient-to-r from-violet-100 to-fuchsia-100 px-4 py-3 text-sm font-bold text-violet-900">
-                      Compétence travaillée : {microLabel(currentQuestion.microId)}
+                      Compétence travaillée : {microLabel(currentQuestion.microId, classe)}
                     </div>
 
                     <div className="mb-4 rounded-2xl border border-slate-200 bg-white p-4 text-base text-slate-900">
@@ -986,7 +997,7 @@ export default function TutorV4Page() {
               </div>
             </SidebarCard>
 
-            <SidebarCard title={`Micro-compétences : ${notionLabel(notion)}`}>
+            <SidebarCard title={`Micro-compétences : ${notionLabel(notion, classe)}`}>
               <div className="mb-3 text-xs text-slate-500">
                 Clique sur une micro-compétence pour t’entraîner dessus.
               </div>
@@ -1014,7 +1025,7 @@ export default function TutorV4Page() {
                     >
                       <div className="mb-2 flex items-start justify-between gap-3">
                         <div className="text-sm font-semibold leading-5">
-                          {microLabel(microId)}
+                          {microLabel(microId, classe)}
                         </div>
 
                         <span className="rounded-full bg-white/80 px-2 py-1 text-[11px] font-bold shadow-sm">

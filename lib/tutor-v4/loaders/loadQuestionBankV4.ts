@@ -5,7 +5,17 @@ export async function loadQuestionBankV4(
   classe: string,
   matiere: string
 ): Promise<TutorBankItemV4[]> {
-  if (classe === "6e" && matiere === "maths") {
+  if (matiere !== "maths") {
+    throw new Error(`QuestionBank V4 introuvable pour ${classe}/${matiere}`);
+  }
+
+  if (classe === "6e") {
+    return maths6eQuestionBank;
+  }
+
+  if (classe === "5e") {
+    // Proposition temporaire : fallback sur la banque 6e,
+    // le temps d'ajouter les .bank 5e dédiés.
     return maths6eQuestionBank;
   }
 

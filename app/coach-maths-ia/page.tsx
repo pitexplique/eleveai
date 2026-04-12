@@ -1,18 +1,23 @@
 "use client";
 
+import { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import {
-  NOTION_OPTIONS,
-  NOTION_MICRO_MAP,
-  MICRO_LABELS,
+  getNotionOptions,
+  getNotionMicroMap,
+  microLabel,
   notionLabel,
 } from "@/lib/tutor-v4/catalog";
 
 export default function CoachMathsIA() {
   const router = useRouter();
+  const [classe, setClasse] = useState<"6e" | "5e">("6e");
+
+  const notions = useMemo(() => getNotionOptions(classe), [classe]);
+  const notionMicros = useMemo(() => getNotionMicroMap(classe), [classe]);
 
   function handleClick(notionId: string, microId: string) {
-    router.push(`/tutor-v4?notion=${notionId}&microId=${microId}`);
+    router.push(`/tutor-v4?classe=${classe}&notion=${notionId}&microId=${microId}`);
   }
 
   function getColor(microId: string) {
@@ -49,38 +54,52 @@ export default function CoachMathsIA() {
   return (
     <div className="min-h-screen w-full bg-[url('/images/reunion.png')] bg-cover bg-center bg-fixed">
       <div className="min-h-screen w-full bg-gradient-to-b from-black/30 via-black/20 to-black/40 px-6 py-10">
-        
-        {/* HEADER */}
         <div className="mx-auto max-w-5xl text-center text-white">
-          <h1 className="text-4xl font-extrabold sm:text-5xl">
-            Coach Maths IA
-          </h1>
+          <h1 className="text-4xl font-extrabold sm:text-5xl">Coach Maths IA</h1>
 
           <p className="mt-3 text-lg opacity-95 sm:text-xl">
             Choisis une compétence et progresse à ton rythme
           </p>
 
-          <p className="mt-2 text-sm italic opacity-85 sm:text-base">
-            "À La Réunion, on avance pas à pas… mais on avance toujours."
-          </p>
+          <div className="mx-auto mt-4 inline-flex items-center gap-2 rounded-2xl border border-white/30 bg-white/20 p-2">
+            <button
+              type="button"
+              onClick={() => setClasse("6e")}
+              className={`rounded-xl px-4 py-2 text-sm font-bold transition ${
+                classe === "6e"
+                  ? "bg-white text-slate-900"
+                  : "bg-transparent text-white hover:bg-white/20"
+              }`}
+            >
+              6e
+            </button>
+            <button
+              type="button"
+              onClick={() => setClasse("5e")}
+              className={`rounded-xl px-4 py-2 text-sm font-bold transition ${
+                classe === "5e"
+                  ? "bg-white text-slate-900"
+                  : "bg-transparent text-white hover:bg-white/20"
+              }`}
+            >
+              5e
+            </button>
+          </div>
         </div>
 
-        {/* CONTENU */}
         <div className="mx-auto mt-10 max-w-6xl space-y-10">
-          {NOTION_OPTIONS.map((notionId) => {
-            const micros = NOTION_MICRO_MAP[notionId] || [];
+          {notions.map((notionId) => {
+            const micros = notionMicros[notionId] || [];
 
             return (
               <section
                 key={notionId}
                 className="rounded-2xl border border-white/20 bg-white/10 p-5 backdrop-blur-sm"
               >
-                {/* TITRE NOTION */}
                 <h2 className="mb-5 text-2xl font-bold text-white">
-                  {notionLabel(notionId)}
+                  {notionLabel(notionId, classe)}
                 </h2>
 
-                {/* GRID MICRO */}
                 <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
                   {micros.map((microId) => (
                     <button
@@ -103,7 +122,7 @@ export default function CoachMathsIA() {
                         getButtonClasses(microId),
                       ].join(" ")}
                     >
-                      {MICRO_LABELS[microId] || microId}
+                      {microLabel(microId, classe)}
                     </button>
                   ))}
                 </div>
