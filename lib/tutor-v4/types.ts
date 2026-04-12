@@ -341,6 +341,7 @@ export type AnswerInput = {
 
 export type AnswerTutorV4Response = {
   feedback: string;
+  explanation?: string;
   result: { ok: boolean; flags: string[] };
   pair: TutorQuestionPair;
   mode: TutorMode;

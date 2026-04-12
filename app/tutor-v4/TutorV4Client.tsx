@@ -649,7 +649,7 @@ export default function TutorV4Page() {
         setPendingNextVisibleProgress(null);
       } else {
         setFeedback("Ce n’est pas la bonne réponse…");
-        setExplanationText(currentExplanation || typed.feedback);
+        setExplanationText(typed.explanation?.trim() || currentExplanation || typed.feedback);
         setWrongAnswerPanelOpen(true);
         setLastSubmittedAnswer(finalAnswer);
 
@@ -657,8 +657,6 @@ export default function TutorV4Page() {
         setPendingNextMode(typed.mode);
         setPendingNextRecommendedStar(typed.recommendedStar);
         setPendingNextVisibleProgress(typed.visibleProgress);
-
-        openResultModal(false, undefined);
       }
     } catch (error) {
       setFeedback(
@@ -1069,7 +1067,7 @@ export default function TutorV4Page() {
       </div>
 
       <ResultModal
-        open={resultModal.open}
+        open={resultModal.open && resultModal.ok}
         ok={resultModal.ok}
         title={resultModal.title}
         message={resultModal.message}

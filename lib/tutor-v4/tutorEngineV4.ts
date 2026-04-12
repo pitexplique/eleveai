@@ -901,6 +901,7 @@ export async function answerTutorV4(
 
   return {
     feedback: guarded.text,
+    explanation: chosenOption.explanation,
     result: {
       ok: result.ok,
       flags: [...result.flags, ...guarded.flags],
