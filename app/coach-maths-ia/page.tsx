@@ -86,7 +86,7 @@ function getClasseSubtitle(classe: Classe) {
 
 function getMicroButtonStyle(microId: string) {
   if (microId.includes("defis")) {
-    return "border-emerald-200 bg-emerald-50 text-emerald-800 hover:bg-emerald-100";
+    return "border-emerald-200 bg-emerald-50/95 text-emerald-900 hover:bg-emerald-100";
   }
 
   if (
@@ -96,10 +96,10 @@ function getMicroButtonStyle(microId: string) {
     microId.includes("mesurer") ||
     microId.includes("identifier")
   ) {
-    return "border-sky-200 bg-sky-50 text-sky-800 hover:bg-sky-100";
+    return "border-sky-200 bg-sky-50/95 text-sky-900 hover:bg-sky-100";
   }
 
-  return "border-slate-200 bg-white text-slate-800 hover:bg-orange-50 hover:border-orange-200";
+  return "border-slate-200 bg-white/95 text-slate-800 hover:bg-orange-50 hover:border-orange-200";
 }
 
 export default function CoachMathsIA() {
@@ -135,44 +135,11 @@ export default function CoachMathsIA() {
   }
 
   return (
-    <main className="min-h-screen bg-[#f6f6f4]">
-      <div className="mx-auto flex max-w-[1400px]">
-        <aside className="hidden min-h-screen w-[96px] flex-col items-center border-r border-slate-200 bg-white pt-8 shadow-sm md:flex">
-          <div className="flex flex-col gap-4">
-            {CLASSES.map((item) => {
-              const active = classe === item;
-
-              return (
-                <button
-                  key={item}
-                  type="button"
-                  onClick={() => setClasse(item)}
-                  className={[
-                    "h-16 w-16 rounded-full text-xl font-bold transition",
-                    active
-                      ? "bg-orange-500 text-white shadow-lg"
-                      : "border border-slate-300 bg-white text-orange-500 hover:bg-orange-50",
-                  ].join(" ")}
-                >
-                  {item}
-                </button>
-              );
-            })}
-          </div>
-        </aside>
-
-        <div className="flex-1 px-5 py-8 sm:px-8 md:px-10">
-          <header className="max-w-5xl">
-            <h1 className="text-4xl font-light tracking-tight text-orange-600 sm:text-5xl">
-              {getClasseTitle(classe)}
-            </h1>
-
-            <p className="mt-4 max-w-4xl text-base leading-7 text-slate-700">
-              {getClasseSubtitle(classe)} Clique sur une micro-compétence pour
-              démarrer un entraînement ciblé avec le tutor.
-            </p>
-
-            <div className="mt-5 flex gap-3 md:hidden">
+    <main className="min-h-screen w-full bg-[url('/images/reunion.png')] bg-cover bg-center bg-fixed">
+      <div className="min-h-screen w-full bg-gradient-to-b from-black/40 via-black/30 to-black/50">
+        <div className="mx-auto flex max-w-[1400px]">
+          <aside className="hidden min-h-screen w-[96px] flex-col items-center border-r border-white/15 bg-white/10 pt-8 shadow-sm backdrop-blur-sm md:flex">
+            <div className="flex flex-col gap-4">
               {CLASSES.map((item) => {
                 const active = classe === item;
 
@@ -182,10 +149,10 @@ export default function CoachMathsIA() {
                     type="button"
                     onClick={() => setClasse(item)}
                     className={[
-                      "rounded-full px-4 py-2 text-sm font-semibold transition",
+                      "h-16 w-16 rounded-full text-xl font-bold transition",
                       active
-                        ? "bg-orange-500 text-white"
-                        : "border border-slate-300 bg-white text-orange-600",
+                        ? "bg-orange-500 text-white shadow-lg ring-4 ring-white/20"
+                        : "border border-white/30 bg-white/90 text-orange-500 hover:bg-orange-50",
                     ].join(" ")}
                   >
                     {item}
@@ -193,79 +160,122 @@ export default function CoachMathsIA() {
                 );
               })}
             </div>
+          </aside>
 
-            <div className="mt-6 flex flex-wrap gap-3">
-              <span className="rounded-lg border border-orange-200 bg-white px-4 py-2 text-sm font-medium text-orange-700 shadow-sm">
-                📚 {totalNotions} notions
-              </span>
-              <span className="rounded-lg border border-orange-200 bg-white px-4 py-2 text-sm font-medium text-orange-700 shadow-sm">
-                🎯 {totalMicros} micro-compétences
-              </span>
-              <span className="rounded-lg border border-orange-200 bg-white px-4 py-2 text-sm font-medium text-orange-700 shadow-sm">
-                🚀 progression guidée
-              </span>
-            </div>
+          <div className="flex-1 px-5 py-8 sm:px-8 md:px-10">
+            <header className="max-w-5xl">
+              <h1 className="text-4xl font-light tracking-tight text-white sm:text-5xl">
+                {getClasseTitle(classe)}
+              </h1>
 
-            <div className="mt-6 flex flex-wrap gap-3">
-              {domaines.map((domaine) => (
-                <span
-                  key={domaine.id}
-                  className="rounded-lg border border-orange-200 bg-white px-4 py-2 text-sm font-medium text-orange-700 shadow-sm"
-                >
-                  {domaine.label}
+              <p className="mt-4 max-w-4xl text-base leading-7 text-white/90">
+                {getClasseSubtitle(classe)} Clique sur une micro-compétence pour
+                démarrer un entraînement ciblé avec le tutor.
+              </p>
+
+              <p className="mt-3 text-sm italic text-white/90 sm:text-base">
+                "Ici à La Réunion, on avance pas à pas… mais on avance toujours."
+              </p>
+
+              <div className="mt-5 flex gap-3 md:hidden">
+                {CLASSES.map((item) => {
+                  const active = classe === item;
+
+                  return (
+                    <button
+                      key={item}
+                      type="button"
+                      onClick={() => setClasse(item)}
+                      className={[
+                        "rounded-full px-4 py-2 text-sm font-semibold transition",
+                        active
+                          ? "bg-orange-500 text-white"
+                          : "border border-white/30 bg-white/90 text-orange-600",
+                      ].join(" ")}
+                    >
+                      {item}
+                    </button>
+                  );
+                })}
+              </div>
+
+              <div className="mt-6 flex flex-wrap gap-3">
+                <span className="rounded-lg border border-white/20 bg-white/10 px-4 py-2 text-sm font-medium text-white shadow-sm backdrop-blur-sm">
+                  📚 {totalNotions} notions
                 </span>
+                <span className="rounded-lg border border-white/20 bg-white/10 px-4 py-2 text-sm font-medium text-white shadow-sm backdrop-blur-sm">
+                  🎯 {totalMicros} micro-compétences
+                </span>
+                <span className="rounded-lg border border-white/20 bg-white/10 px-4 py-2 text-sm font-medium text-white shadow-sm backdrop-blur-sm">
+                  🚀 progression guidée
+                </span>
+              </div>
+
+              <div className="mt-6 flex flex-wrap gap-3">
+                {domaines.map((domaine) => (
+                  <span
+                    key={domaine.id}
+                    className="rounded-lg border border-white/20 bg-white/10 px-4 py-2 text-sm font-medium text-white shadow-sm backdrop-blur-sm"
+                  >
+                    {domaine.label}
+                  </span>
+                ))}
+              </div>
+            </header>
+
+            <div className="mt-10 space-y-10">
+              {domaines.map((domaine) => (
+                <section
+                  key={domaine.id}
+                  className="rounded-3xl border border-white/15 bg-white/10 p-5 shadow-xl backdrop-blur-sm sm:p-6"
+                >
+                  <h2 className="mb-6 text-2xl font-semibold text-orange-300">
+                    {domaine.label}
+                  </h2>
+
+                  <div className="grid gap-8 lg:grid-cols-2 xl:grid-cols-3">
+                    {domaine.notions.map((notionId) => {
+                      const micros = notionMicroMap[notionId] || [];
+
+                      return (
+                        <article key={notionId} className="min-w-0">
+                          <div className="mb-3 flex items-center justify-between gap-3">
+                            <h3 className="text-[32px] font-semibold leading-tight text-lime-300">
+                              {notionLabel(notionId, classe)}
+                            </h3>
+                            <span className="shrink-0 rounded-full bg-lime-50 px-3 py-1 text-xs font-semibold text-lime-700">
+                              {micros.length} micro{micros.length > 1 ? "s" : ""}
+                            </span>
+                          </div>
+
+                          <div className="space-y-2">
+                            {micros.map((microId, index) => (
+                              <button
+                                key={microId}
+                                onClick={() => handleClick(notionId, microId)}
+                                className={[
+                                  "flex w-full items-start gap-3 rounded-xl border px-3 py-3 text-left transition",
+                                  "shadow-sm",
+                                  getMicroButtonStyle(microId),
+                                ].join(" ")}
+                              >
+                                <span className="min-w-[42px] font-bold text-slate-900">
+                                  {String.fromCharCode(65 + (index % 26))}.{index + 1}
+                                </span>
+
+                                <span className="text-sm leading-5">
+                                  {microLabels[microId] || microId}
+                                </span>
+                              </button>
+                            ))}
+                          </div>
+                        </article>
+                      );
+                    })}
+                  </div>
+                </section>
               ))}
             </div>
-          </header>
-
-          <div className="mt-10 space-y-10">
-            {domaines.map((domaine) => (
-              <section key={domaine.id}>
-                <h2 className="mb-6 text-2xl font-semibold text-orange-600">
-                  {domaine.label}
-                </h2>
-
-                <div className="grid gap-8 lg:grid-cols-2 xl:grid-cols-3">
-                  {domaine.notions.map((notionId) => {
-                    const micros = notionMicroMap[notionId] || [];
-
-                    return (
-                      <article key={notionId} className="min-w-0">
-                        <div className="mb-3 flex items-center justify-between gap-3">
-                          <h3 className="text-[32px] font-semibold leading-tight text-lime-600">
-                            {notionLabel(notionId, classe)}
-                          </h3>
-                          <span className="shrink-0 rounded-full bg-lime-50 px-3 py-1 text-xs font-semibold text-lime-700">
-                            {micros.length} micro{micros.length > 1 ? "s" : ""}
-                          </span>
-                        </div>
-
-                        <div className="space-y-2">
-                          {micros.map((microId, index) => (
-                            <button
-                              key={microId}
-                              onClick={() => handleClick(notionId, microId)}
-                              className={[
-                                "flex w-full items-start gap-3 rounded-xl border px-3 py-3 text-left transition",
-                                getMicroButtonStyle(microId),
-                              ].join(" ")}
-                            >
-                              <span className="min-w-[42px] font-bold text-slate-900">
-                                {String.fromCharCode(65 + (index % 26))}.{index + 1}
-                              </span>
-
-                              <span className="text-sm leading-5">
-                                {microLabels[microId] || microId}
-                              </span>
-                            </button>
-                          ))}
-                        </div>
-                      </article>
-                    );
-                  })}
-                </div>
-              </section>
-            ))}
           </div>
         </div>
       </div>
