@@ -75,7 +75,7 @@ function buildDomaines(classe: Classe): Domaine[] {
 }
 
 function getClasseTitle(classe: Classe) {
-  return classe === "6e" ? "Réussir ma 6e" : "Réussir ma 5e";
+  return classe === "6e" ? "Réussir ma 6 ème" : "Réussir ma 5 ème";
 }
 
 function getClasseSubtitle(classe: Classe) {
