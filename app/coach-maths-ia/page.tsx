@@ -110,6 +110,11 @@ export default function CoachMathsIA() {
   const notionMicroMap = getNotionMicroMap(classe);
   const microLabels = getMicroLabelMap(classe);
 
+  const totalNotions = notionOptions.length;
+  const totalMicros = notionOptions.reduce((sum, notionId) => {
+    return sum + (notionMicroMap[notionId]?.length ?? 0);
+  }, 0);
+
   const domaines = useMemo(() => {
     const defs = buildDomaines(classe);
 
@@ -132,7 +137,6 @@ export default function CoachMathsIA() {
   return (
     <main className="min-h-screen bg-[#f6f6f4]">
       <div className="mx-auto flex max-w-[1400px]">
-        {/* COLONNE CLASSES */}
         <aside className="hidden min-h-screen w-[96px] flex-col items-center border-r border-slate-200 bg-white pt-8 shadow-sm md:flex">
           <div className="flex flex-col gap-4">
             {CLASSES.map((item) => {
@@ -157,7 +161,6 @@ export default function CoachMathsIA() {
           </div>
         </aside>
 
-        {/* CONTENU */}
         <div className="flex-1 px-5 py-8 sm:px-8 md:px-10">
           <header className="max-w-5xl">
             <h1 className="text-4xl font-light tracking-tight text-orange-600 sm:text-5xl">
@@ -169,7 +172,6 @@ export default function CoachMathsIA() {
               démarrer un entraînement ciblé avec le tutor.
             </p>
 
-            {/* chips mobile */}
             <div className="mt-5 flex gap-3 md:hidden">
               {CLASSES.map((item) => {
                 const active = classe === item;
@@ -192,7 +194,18 @@ export default function CoachMathsIA() {
               })}
             </div>
 
-            {/* domaines */}
+            <div className="mt-6 flex flex-wrap gap-3">
+              <span className="rounded-lg border border-orange-200 bg-white px-4 py-2 text-sm font-medium text-orange-700 shadow-sm">
+                📚 {totalNotions} notions
+              </span>
+              <span className="rounded-lg border border-orange-200 bg-white px-4 py-2 text-sm font-medium text-orange-700 shadow-sm">
+                🎯 {totalMicros} micro-compétences
+              </span>
+              <span className="rounded-lg border border-orange-200 bg-white px-4 py-2 text-sm font-medium text-orange-700 shadow-sm">
+                🚀 progression guidée
+              </span>
+            </div>
+
             <div className="mt-6 flex flex-wrap gap-3">
               {domaines.map((domaine) => (
                 <span
@@ -218,9 +231,14 @@ export default function CoachMathsIA() {
 
                     return (
                       <article key={notionId} className="min-w-0">
-                        <h3 className="mb-3 text-[32px] font-semibold leading-tight text-lime-600">
-                          {notionLabel(notionId, classe)}
-                        </h3>
+                        <div className="mb-3 flex items-center justify-between gap-3">
+                          <h3 className="text-[32px] font-semibold leading-tight text-lime-600">
+                            {notionLabel(notionId, classe)}
+                          </h3>
+                          <span className="shrink-0 rounded-full bg-lime-50 px-3 py-1 text-xs font-semibold text-lime-700">
+                            {micros.length} micro{micros.length > 1 ? "s" : ""}
+                          </span>
+                        </div>
 
                         <div className="space-y-2">
                           {micros.map((microId, index) => (
