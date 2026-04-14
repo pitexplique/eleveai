@@ -1,5 +1,3 @@
-// knowledge/maths/5e/buildKnowledge5e.ts
-
 import { buildKnowledge } from "@/lib/tutor-v4/knowledge/buildKnowledge";
 
 import { bo } from "./bo";

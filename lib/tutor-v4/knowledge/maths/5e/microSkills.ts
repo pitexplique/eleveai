@@ -1,5 +1,3 @@
-// knowledge/maths/5e/microSkills.ts
-
 import type { MicroSkillSource } from "@/lib/tutor-v4/knowledge/buildKnowledge";
 
 export const microSkills: MicroSkillSource[] = [
@@ -8,77 +6,95 @@ export const microSkills: MicroSkillSource[] = [
   ========================= */
   {
     id: "relatif_lire",
-    label: "Lire un nombre relatif",
+    label: "Lire et écrire un nombre relatif",
     notionId: "nombres_relatifs",
     prerequis: [],
   },
   {
-    id: "relatif_comparer",
-    label: "Comparer des relatifs",
+    id: "relatif_signe",
+    label: "Identifier le signe d’un nombre relatif",
     notionId: "nombres_relatifs",
     prerequis: ["relatif_lire"],
+  },
+  {
+    id: "relatif_comparer",
+    label: "Comparer des nombres relatifs",
+    notionId: "nombres_relatifs",
+    prerequis: ["relatif_lire", "relatif_signe"],
   },
   {
     id: "relatif_placer",
-    label: "Placer sur une droite",
+    label: "Placer des nombres relatifs sur une droite",
     notionId: "nombres_relatifs",
-    prerequis: ["relatif_lire"],
+    prerequis: ["relatif_lire", "relatif_comparer"],
   },
   {
     id: "relatif_opposes",
-    label: "Trouver l’opposé",
+    label: "Déterminer l’opposé d’un nombre relatif",
     notionId: "nombres_relatifs",
-    prerequis: ["relatif_lire"],
+    prerequis: ["relatif_signe"],
+  },
+  {
+    id: "relatif_valeur_absolue",
+    label: "Déterminer la valeur absolue d’un nombre relatif",
+    notionId: "nombres_relatifs",
+    prerequis: ["relatif_opposes"],
   },
   {
     id: "relatif_defis",
-    label: "Défis relatifs",
+    label: "Défis sur les nombres relatifs",
     notionId: "nombres_relatifs",
-    prerequis: ["relatif_comparer"],
+    prerequis: ["relatif_comparer", "relatif_valeur_absolue"],
   },
 
   /* =========================
-     OPERATIONS SUR LES RELATIFS
+     OPÉRATIONS SUR LES RELATIFS
   ========================= */
   {
     id: "relatif_addition",
-    label: "Additionner des relatifs",
+    label: "Additionner des nombres relatifs",
     notionId: "operations_relatifs",
-    prerequis: ["relatif_lire"],
+    prerequis: ["relatif_lire", "relatif_signe"],
   },
   {
     id: "relatif_soustraction",
-    label: "Soustraire des relatifs",
+    label: "Soustraire des nombres relatifs",
     notionId: "operations_relatifs",
     prerequis: ["relatif_addition"],
   },
   {
-    id: "relatif_multiplication",
-    label: "Multiplier des relatifs",
+    id: "relatif_calcul",
+    label: "Effectuer des calculs avec des nombres relatifs",
     notionId: "operations_relatifs",
-    prerequis: ["relatif_addition"],
+    prerequis: ["relatif_addition", "relatif_soustraction"],
   },
   {
-    id: "relatif_division",
-    label: "Diviser des relatifs",
+    id: "relatif_probleme",
+    label: "Résoudre un problème avec des nombres relatifs",
     notionId: "operations_relatifs",
-    prerequis: ["relatif_multiplication"],
+    prerequis: ["relatif_calcul"],
   },
   {
     id: "relatif_defis_ops",
-    label: "Défis opérations",
+    label: "Défis sur les opérations avec les relatifs",
     notionId: "operations_relatifs",
-    prerequis: ["relatif_division"],
+    prerequis: ["relatif_probleme"],
   },
 
   /* =========================
      FRACTIONS
   ========================= */
   {
+    id: "fraction_egales",
+    label: "Reconnaître des fractions égales",
+    notionId: "fractions",
+    prerequis: [],
+  },
+  {
     id: "fraction_simplifier",
     label: "Simplifier une fraction",
     notionId: "fractions",
-    prerequis: [],
+    prerequis: ["fraction_egales"],
   },
   {
     id: "fraction_comparer",
@@ -88,7 +104,7 @@ export const microSkills: MicroSkillSource[] = [
   },
   {
     id: "fraction_addition",
-    label: "Additionner des fractions",
+    label: "Additionner ou soustraire des fractions",
     notionId: "fractions",
     prerequis: ["fraction_comparer"],
   },
@@ -100,71 +116,83 @@ export const microSkills: MicroSkillSource[] = [
   },
   {
     id: "fraction_defis",
-    label: "Défis fractions",
+    label: "Défis sur les fractions",
     notionId: "fractions",
-    prerequis: ["fraction_multiplier"],
+    prerequis: ["fraction_addition", "fraction_multiplier"],
   },
 
   /* =========================
-     PROPORTIONNALITE
+     PROPORTIONNALITÉ
   ========================= */
   {
-    id: "prop_table",
-    label: "Utiliser un tableau",
+    id: "prop_reconnaitre",
+    label: "Reconnaître une situation de proportionnalité",
     notionId: "proportionnalite",
     prerequis: [],
   },
   {
+    id: "prop_table",
+    label: "Utiliser un tableau de proportionnalité",
+    notionId: "proportionnalite",
+    prerequis: ["prop_reconnaitre"],
+  },
+  {
     id: "prop_coeff",
-    label: "Coefficient de proportionnalité",
+    label: "Utiliser un coefficient de proportionnalité",
     notionId: "proportionnalite",
     prerequis: ["prop_table"],
   },
   {
     id: "prop_pourcentage",
-    label: "Appliquer un pourcentage",
+    label: "Appliquer un pourcentage dans une situation de proportionnalité",
     notionId: "proportionnalite",
     prerequis: ["prop_coeff"],
   },
   {
     id: "prop_probleme",
-    label: "Résoudre un problème",
+    label: "Résoudre un problème de proportionnalité",
     notionId: "proportionnalite",
     prerequis: ["prop_coeff"],
   },
   {
     id: "prop_defis",
-    label: "Défis proportionnalité",
+    label: "Défis sur la proportionnalité",
     notionId: "proportionnalite",
-    prerequis: ["prop_probleme"],
+    prerequis: ["prop_probleme", "prop_pourcentage"],
   },
 
   /* =========================
-     CALCUL LITTERAL
+     CALCUL LITTÉRAL
   ========================= */
   {
     id: "litteral_expression",
-    label: "Comprendre une expression",
+    label: "Comprendre une expression littérale",
     notionId: "calcul_litteral",
     prerequis: [],
   },
   {
+    id: "litteral_traduire",
+    label: "Traduire une phrase en expression littérale",
+    notionId: "calcul_litteral",
+    prerequis: ["litteral_expression"],
+  },
+  {
     id: "litteral_substituer",
-    label: "Substituer une valeur",
+    label: "Substituer une valeur dans une expression littérale",
     notionId: "calcul_litteral",
     prerequis: ["litteral_expression"],
   },
   {
     id: "litteral_reduire",
-    label: "Réduire une expression",
+    label: "Réduire une expression littérale simple",
     notionId: "calcul_litteral",
     prerequis: ["litteral_expression"],
   },
   {
     id: "litteral_defis",
-    label: "Défis littéral",
+    label: "Défis sur le calcul littéral",
     notionId: "calcul_litteral",
-    prerequis: ["litteral_reduire"],
+    prerequis: ["litteral_traduire", "litteral_substituer", "litteral_reduire"],
   },
 
   /* =========================
@@ -190,15 +218,15 @@ export const microSkills: MicroSkillSource[] = [
   },
   {
     id: "angle_estimer",
-    label: "Estimer un angle",
+    label: "Estimer la mesure d’un angle",
     notionId: "angles",
     prerequis: ["angle_lire"],
   },
   {
-    id: "angle_defis_5e",
-    label: "Défis angles",
+    id: "angle_defis",
+    label: "Défis sur les angles",
     notionId: "angles",
-    prerequis: ["angle_tracer"],
+    prerequis: ["angle_tracer", "angle_estimer"],
   },
 
   /* =========================
@@ -211,32 +239,32 @@ export const microSkills: MicroSkillSource[] = [
     prerequis: [],
   },
   {
+    id: "triangle_nature",
+    label: "Reconnaître la nature d’un triangle",
+    notionId: "triangles",
+    prerequis: ["triangle_reconnaitre"],
+  },
+  {
     id: "triangle_construire",
     label: "Construire un triangle",
     notionId: "triangles",
     prerequis: ["triangle_reconnaitre", "angle_tracer"],
   },
   {
-    id: "triangle_somme_angles_5e",
-    label: "Utiliser la somme des angles",
+    id: "triangle_somme_angles",
+    label: "Utiliser la somme des angles d’un triangle",
     notionId: "triangles",
-    prerequis: ["angle_mesurer"],
+    prerequis: ["triangle_reconnaitre", "angle_mesurer"],
   },
   {
-    id: "triangle_hauteur_mediatrice",
-    label: "Identifier hauteur et médiatrice",
+    id: "triangle_defis",
+    label: "Défis sur les triangles",
     notionId: "triangles",
-    prerequis: ["triangle_reconnaitre"],
-  },
-  {
-    id: "triangle_defis_5e",
-    label: "Défis triangles",
-    notionId: "triangles",
-    prerequis: ["triangle_construire", "triangle_somme_angles_5e"],
+    prerequis: ["triangle_nature", "triangle_construire", "triangle_somme_angles"],
   },
 
   /* =========================
-     SYMETRIE CENTRALE
+     SYMÉTRIE CENTRALE
   ========================= */
   {
     id: "sym_centrale_reconnaitre",
@@ -246,25 +274,25 @@ export const microSkills: MicroSkillSource[] = [
   },
   {
     id: "sym_centrale_point",
-    label: "Construire l’image d’un point",
+    label: "Construire l’image d’un point par symétrie centrale",
     notionId: "symetrie_centrale",
     prerequis: ["sym_centrale_reconnaitre"],
   },
   {
     id: "sym_centrale_figure",
-    label: "Construire l’image d’une figure",
+    label: "Construire l’image d’une figure par symétrie centrale",
     notionId: "symetrie_centrale",
     prerequis: ["sym_centrale_point"],
   },
   {
     id: "sym_centrale_proprietes",
-    label: "Utiliser les propriétés",
+    label: "Utiliser les propriétés de la symétrie centrale",
     notionId: "symetrie_centrale",
     prerequis: ["sym_centrale_figure"],
   },
   {
     id: "sym_centrale_defis",
-    label: "Défis symétrie centrale",
+    label: "Défis sur la symétrie centrale",
     notionId: "symetrie_centrale",
     prerequis: ["sym_centrale_proprietes"],
   },
@@ -273,8 +301,8 @@ export const microSkills: MicroSkillSource[] = [
      AIRES
   ========================= */
   {
-    id: "aire_comprendre_5e",
-    label: "Comprendre une aire",
+    id: "aire_comprendre",
+    label: "Comprendre ce qu’est une aire",
     notionId: "aires",
     prerequis: [],
   },
@@ -282,23 +310,23 @@ export const microSkills: MicroSkillSource[] = [
     id: "aire_triangle",
     label: "Calculer l’aire d’un triangle",
     notionId: "aires",
-    prerequis: ["aire_comprendre_5e"],
+    prerequis: ["aire_comprendre"],
   },
   {
     id: "aire_parallelogramme",
     label: "Calculer l’aire d’un parallélogramme",
     notionId: "aires",
-    prerequis: ["aire_comprendre_5e"],
+    prerequis: ["aire_comprendre"],
   },
   {
     id: "aire_composer",
-    label: "Calculer une aire composée",
+    label: "Calculer l’aire d’une figure composée",
     notionId: "aires",
     prerequis: ["aire_triangle", "aire_parallelogramme"],
   },
   {
-    id: "aire_defis_5e",
-    label: "Défis aires",
+    id: "aire_defis",
+    label: "Défis sur les aires",
     notionId: "aires",
     prerequis: ["aire_composer"],
   },
@@ -307,67 +335,101 @@ export const microSkills: MicroSkillSource[] = [
      VOLUMES
   ========================= */
   {
-    id: "volume_comprendre_5e",
-    label: "Comprendre un volume",
+    id: "volume_comprendre",
+    label: "Comprendre ce qu’est un volume",
     notionId: "volumes",
     prerequis: [],
-  },
-  {
-    id: "volume_prisme",
-    label: "Calculer le volume d’un prisme",
-    notionId: "volumes",
-    prerequis: ["volume_comprendre_5e", "aire_comprendre_5e"],
   },
   {
     id: "volume_pave",
     label: "Calculer le volume d’un pavé droit",
     notionId: "volumes",
-    prerequis: ["volume_comprendre_5e"],
+    prerequis: ["volume_comprendre"],
+  },
+  {
+    id: "volume_prisme",
+    label: "Calculer le volume d’un prisme",
+    notionId: "volumes",
+    prerequis: ["volume_comprendre", "aire_comprendre"],
   },
   {
     id: "volume_unites",
     label: "Utiliser les unités de volume",
     notionId: "volumes",
-    prerequis: ["volume_comprendre_5e"],
+    prerequis: ["volume_comprendre"],
   },
   {
-    id: "volume_defis_5e",
-    label: "Défis volumes",
+    id: "volume_defis",
+    label: "Défis sur les volumes",
     notionId: "volumes",
-    prerequis: ["volume_prisme", "volume_pave"],
+    prerequis: ["volume_pave", "volume_prisme", "volume_unites"],
   },
 
   /* =========================
      STATISTIQUES
   ========================= */
   {
-    id: "stat_lire_tableau_5e",
+    id: "stat_lire_tableau",
     label: "Lire un tableau statistique",
     notionId: "statistiques",
     prerequis: [],
   },
   {
-    id: "stat_lire_graphique_5e",
+    id: "stat_lire_graphique",
     label: "Lire un graphique statistique",
     notionId: "statistiques",
-    prerequis: ["stat_lire_tableau_5e"],
+    prerequis: ["stat_lire_tableau"],
   },
   {
     id: "stat_effectif_frequence",
     label: "Calculer un effectif ou une fréquence",
     notionId: "statistiques",
-    prerequis: ["stat_lire_tableau_5e"],
+    prerequis: ["stat_lire_tableau"],
   },
   {
     id: "stat_moyenne",
-    label: "Calculer une moyenne simple",
+    label: "Calculer une moyenne",
     notionId: "statistiques",
     prerequis: ["stat_effectif_frequence"],
   },
   {
-    id: "stat_defis_5e",
-    label: "Défis statistiques",
+    id: "stat_defis",
+    label: "Défis sur les statistiques",
     notionId: "statistiques",
-    prerequis: ["stat_moyenne", "stat_lire_graphique_5e"],
+    prerequis: ["stat_lire_graphique", "stat_moyenne"],
+  },
+
+  /* =========================
+     PROBABILITÉS
+  ========================= */
+  {
+    id: "proba_vocabulaire",
+    label: "Comprendre le vocabulaire des probabilités",
+    notionId: "probabilites",
+    prerequis: [],
+  },
+  {
+    id: "proba_issues",
+    label: "Déterminer les issues d’une expérience aléatoire simple",
+    notionId: "probabilites",
+    prerequis: ["proba_vocabulaire"],
+  },
+  {
+    id: "proba_equiprobabilite",
+    label: "Reconnaître une situation d’équiprobabilité",
+    notionId: "probabilites",
+    prerequis: ["proba_issues"],
+  },
+  {
+    id: "proba_calculer",
+    label: "Calculer une probabilité simple",
+    notionId: "probabilites",
+    prerequis: ["proba_issues", "fraction_comparer"],
+  },
+  {
+    id: "proba_defis",
+    label: "Défis sur les probabilités",
+    notionId: "probabilites",
+    prerequis: ["proba_equiprobabilite", "proba_calculer"],
   },
 ];

@@ -172,10 +172,36 @@ export type FigureLibreCanvasData = {
   vertices?: Record<string, FigureLibreCanvasGridPoint>;
 };
 
+export type NumberLineCanvasPoint = {
+  value: number;
+  label?: string;
+  color?: string;
+};
+
+export type NumberLineCanvasData = {
+  kind: "number_line";
+  size?: {
+    width?: number;
+    height?: number;
+  };
+  min?: number;
+  max?: number;
+  step?: number;
+  points?: NumberLineCanvasPoint[];
+  display?: {
+    showTicks?: boolean;
+    showValues?: boolean;
+    showPoints?: boolean;
+    showPointLabels?: boolean;
+    showZero?: boolean;
+  };
+};
+
 export type CanvasFigure =
   | TriangleCanvasData
   | QuadrilatereCanvasData
-  | FigureLibreCanvasData;
+  | FigureLibreCanvasData
+  | NumberLineCanvasData;
 
 export type QuestionVariantMeta = {
   familyId: string;

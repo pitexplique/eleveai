@@ -1,117 +1,256 @@
 "use client";
 
+import { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import {
-  NOTION_OPTIONS,
-  NOTION_MICRO_MAP,
-  MICRO_LABELS,
+  getNotionOptions,
+  getNotionMicroMap,
+  getMicroLabelMap,
   notionLabel,
+  type Classe,
 } from "@/lib/tutor-v4/catalog";
+
+const CLASSES: Classe[] = ["6e", "5e"];
+
+type Domaine = {
+  id: string;
+  label: string;
+  notions: string[];
+};
+
+function buildDomaines(classe: Classe): Domaine[] {
+  if (classe === "6e") {
+    return [
+      {
+        id: "nombres-calculs",
+        label: "Nombres et calculs",
+        notions: ["decimaux", "fractions", "proportionnalite", "calcul_mental"],
+      },
+      {
+        id: "grandeurs-mesures",
+        label: "Grandeurs et mesures",
+        notions: ["perimetres", "aires", "longueurs", "volumes"],
+      },
+      {
+        id: "espace-geometrie",
+        label: "Espace et géométrie",
+        notions: ["angles", "triangles", "quadrilateres"],
+      },
+      {
+        id: "donnees",
+        label: "Données",
+        notions: ["statistiques", "probabilites"],
+      },
+    ];
+  }
+
+  return [
+    {
+      id: "nombres-calculs",
+      label: "Nombres et calculs",
+      notions: [
+        "nombres_relatifs",
+        "operations_relatifs",
+        "fractions",
+        "proportionnalite",
+        "calcul_litteral",
+      ],
+    },
+    {
+      id: "geometrie-plane",
+      label: "Géométrie plane",
+      notions: ["angles", "triangles", "symetrie_centrale"],
+    },
+    {
+      id: "grandeurs-mesures",
+      label: "Grandeurs et mesures",
+      notions: ["aires", "volumes"],
+    },
+    {
+      id: "donnees",
+      label: "Données",
+      notions: ["statistiques", "probabilites"],
+    },
+  ];
+}
+
+function getClasseTitle(classe: Classe) {
+  return classe === "6e" ? "Réussir ma 6e" : "Réussir ma 5e";
+}
+
+function getClasseSubtitle(classe: Classe) {
+  return classe === "6e"
+    ? "Voici les compétences essentielles en mathématiques de Sixième, organisées pour travailler pas à pas."
+    : "Voici les compétences essentielles en mathématiques de Cinquième, organisées pour progresser avec méthode.";
+}
+
+function getMicroButtonStyle(microId: string) {
+  if (microId.includes("defis")) {
+    return "border-emerald-200 bg-emerald-50 text-emerald-800 hover:bg-emerald-100";
+  }
+
+  if (
+    microId.includes("lire") ||
+    microId.includes("reconnaitre") ||
+    microId.includes("comparer") ||
+    microId.includes("mesurer") ||
+    microId.includes("identifier")
+  ) {
+    return "border-sky-200 bg-sky-50 text-sky-800 hover:bg-sky-100";
+  }
+
+  return "border-slate-200 bg-white text-slate-800 hover:bg-orange-50 hover:border-orange-200";
+}
 
 export default function CoachMathsIA() {
   const router = useRouter();
+  const [classe, setClasse] = useState<Classe>("6e");
+
+  const notionOptions = getNotionOptions(classe);
+  const notionMicroMap = getNotionMicroMap(classe);
+  const microLabels = getMicroLabelMap(classe);
+
+  const domaines = useMemo(() => {
+    const defs = buildDomaines(classe);
+
+    return defs
+      .map((domaine) => ({
+        ...domaine,
+        notions: domaine.notions.filter((id) => notionOptions.includes(id)),
+      }))
+      .filter((domaine) => domaine.notions.length > 0);
+  }, [classe, notionOptions]);
 
   function handleClick(notionId: string, microId: string) {
-    router.push(`/tutor-v4?notion=${notionId}&microId=${microId}`);
-  }
-
-  function getColor(microId: string) {
-    if (microId.includes("defis")) return "green";
-
-    if (
-      microId.includes("angle") ||
-      microId.includes("add") ||
-      microId.includes("addition") ||
-      microId.includes("compare") ||
-      microId.includes("comparer") ||
-      microId.includes("identifier")
-    ) {
-      return "blue";
-    }
-
-    return "gray";
-  }
-
-  function getButtonClasses(microId: string) {
-    const color = getColor(microId);
-
-    if (color === "green") {
-      return "bg-green-500 text-white hover:bg-green-600";
-    }
-
-    if (color === "blue") {
-      return "bg-blue-500 text-white hover:bg-blue-600";
-    }
-
-    return "bg-white/90 text-slate-800 hover:bg-blue-500 hover:text-white";
+    router.push(
+      `/tutor-v4?classe=${encodeURIComponent(classe)}&matiere=maths&notion=${encodeURIComponent(
+        notionId
+      )}&microId=${encodeURIComponent(microId)}`
+    );
   }
 
   return (
-    <div className="min-h-screen w-full bg-[url('/images/reunion.png')] bg-cover bg-center bg-fixed">
-      <div className="min-h-screen w-full bg-gradient-to-b from-black/30 via-black/20 to-black/40 px-6 py-10">
-        
-        {/* HEADER */}
-        <div className="mx-auto max-w-5xl text-center text-white">
-          <h1 className="text-4xl font-extrabold sm:text-5xl">
-            Coach Maths IA
-          </h1>
+    <main className="min-h-screen bg-[#f6f6f4]">
+      <div className="mx-auto flex max-w-[1400px]">
+        {/* COLONNE CLASSES */}
+        <aside className="hidden min-h-screen w-[96px] flex-col items-center border-r border-slate-200 bg-white pt-8 shadow-sm md:flex">
+          <div className="flex flex-col gap-4">
+            {CLASSES.map((item) => {
+              const active = classe === item;
 
-          <p className="mt-3 text-lg opacity-95 sm:text-xl">
-            Choisis une compétence et progresse à ton rythme
-          </p>
-
-          <p className="mt-2 text-sm italic opacity-85 sm:text-base">
-            "À La Réunion, on avance pas à pas… mais on avance toujours."
-          </p>
-        </div>
+              return (
+                <button
+                  key={item}
+                  type="button"
+                  onClick={() => setClasse(item)}
+                  className={[
+                    "h-16 w-16 rounded-full text-xl font-bold transition",
+                    active
+                      ? "bg-orange-500 text-white shadow-lg"
+                      : "border border-slate-300 bg-white text-orange-500 hover:bg-orange-50",
+                  ].join(" ")}
+                >
+                  {item}
+                </button>
+              );
+            })}
+          </div>
+        </aside>
 
         {/* CONTENU */}
-        <div className="mx-auto mt-10 max-w-6xl space-y-10">
-          {NOTION_OPTIONS.map((notionId) => {
-            const micros = NOTION_MICRO_MAP[notionId] || [];
+        <div className="flex-1 px-5 py-8 sm:px-8 md:px-10">
+          <header className="max-w-5xl">
+            <h1 className="text-4xl font-light tracking-tight text-orange-600 sm:text-5xl">
+              {getClasseTitle(classe)}
+            </h1>
 
-            return (
-              <section
-                key={notionId}
-                className="rounded-2xl border border-white/20 bg-white/10 p-5 backdrop-blur-sm"
-              >
-                {/* TITRE NOTION */}
-                <h2 className="mb-5 text-2xl font-bold text-white">
-                  {notionLabel(notionId)}
+            <p className="mt-4 max-w-4xl text-base leading-7 text-slate-700">
+              {getClasseSubtitle(classe)} Clique sur une micro-compétence pour
+              démarrer un entraînement ciblé avec le tutor.
+            </p>
+
+            {/* chips mobile */}
+            <div className="mt-5 flex gap-3 md:hidden">
+              {CLASSES.map((item) => {
+                const active = classe === item;
+
+                return (
+                  <button
+                    key={item}
+                    type="button"
+                    onClick={() => setClasse(item)}
+                    className={[
+                      "rounded-full px-4 py-2 text-sm font-semibold transition",
+                      active
+                        ? "bg-orange-500 text-white"
+                        : "border border-slate-300 bg-white text-orange-600",
+                    ].join(" ")}
+                  >
+                    {item}
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* domaines */}
+            <div className="mt-6 flex flex-wrap gap-3">
+              {domaines.map((domaine) => (
+                <span
+                  key={domaine.id}
+                  className="rounded-lg border border-orange-200 bg-white px-4 py-2 text-sm font-medium text-orange-700 shadow-sm"
+                >
+                  {domaine.label}
+                </span>
+              ))}
+            </div>
+          </header>
+
+          <div className="mt-10 space-y-10">
+            {domaines.map((domaine) => (
+              <section key={domaine.id}>
+                <h2 className="mb-6 text-2xl font-semibold text-orange-600">
+                  {domaine.label}
                 </h2>
 
-                {/* GRID MICRO */}
-                <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
-                  {micros.map((microId) => (
-                    <button
-                      key={microId}
-                      onClick={() => handleClick(notionId, microId)}
-                      className={[
-                        "rounded-xl",
-                        "p-3",
-                        "text-sm",
-                        "font-semibold",
-                        "shadow-md",
-                        "transition",
-                        "duration-200",
-                        "hover:scale-105",
-                        "min-h-[84px]",
-                        "flex",
-                        "items-center",
-                        "justify-center",
-                        "text-center",
-                        getButtonClasses(microId),
-                      ].join(" ")}
-                    >
-                      {MICRO_LABELS[microId] || microId}
-                    </button>
-                  ))}
+                <div className="grid gap-8 lg:grid-cols-2 xl:grid-cols-3">
+                  {domaine.notions.map((notionId) => {
+                    const micros = notionMicroMap[notionId] || [];
+
+                    return (
+                      <article key={notionId} className="min-w-0">
+                        <h3 className="mb-3 text-[32px] font-semibold leading-tight text-lime-600">
+                          {notionLabel(notionId, classe)}
+                        </h3>
+
+                        <div className="space-y-2">
+                          {micros.map((microId, index) => (
+                            <button
+                              key={microId}
+                              onClick={() => handleClick(notionId, microId)}
+                              className={[
+                                "flex w-full items-start gap-3 rounded-xl border px-3 py-3 text-left transition",
+                                getMicroButtonStyle(microId),
+                              ].join(" ")}
+                            >
+                              <span className="min-w-[42px] font-bold text-slate-900">
+                                {String.fromCharCode(65 + (index % 26))}.{index + 1}
+                              </span>
+
+                              <span className="text-sm leading-5">
+                                {microLabels[microId] || microId}
+                              </span>
+                            </button>
+                          ))}
+                        </div>
+                      </article>
+                    );
+                  })}
                 </div>
               </section>
-            );
-          })}
+            ))}
+          </div>
         </div>
       </div>
-    </div>
+    </main>
   );
 }

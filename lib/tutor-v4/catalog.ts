@@ -1,53 +1,83 @@
-// lib/tutor-v4/catalog.ts
+import { buildKnowledge6eMaths } from "@/lib/tutor-v4/knowledge/maths/6e/buildKnowledge6e";
+import { buildKnowledge5eMaths } from "@/lib/tutor-v4/knowledge/maths/5e/buildKnowledge5e";
 
-import { notions } from "@/lib/tutor-v4/knowledge/maths/6e/notions";
-import { microSkills } from "@/lib/tutor-v4/knowledge/maths/6e/microSkills";
+// =========================
+// TYPES
+// =========================
+
+export type Classe = "6e" | "5e";
+
+// =========================
+// KNOWLEDGE PAR CLASSE
+// =========================
+
+function getKnowledge(classe: Classe) {
+  switch (classe) {
+    case "6e":
+      return buildKnowledge6eMaths();
+    case "5e":
+      return buildKnowledge5eMaths();
+    default:
+      return buildKnowledge6eMaths();
+  }
+}
 
 // =========================
 // NOTIONS
 // =========================
 
-export const NOTION_OPTIONS = notions.map((n) => n.id) as readonly string[];
-
-export type NotionId = (typeof NOTION_OPTIONS)[number];
+export function getNotionOptions(classe: Classe): string[] {
+  const knowledge = getKnowledge(classe);
+  return knowledge.notions.map((n) => n.id);
+}
 
 // =========================
 // MAP NOTION -> MICROS
 // =========================
 
-export const NOTION_MICRO_MAP: Record<string, string[]> = Object.fromEntries(
-  notions.map((notion) => [
-    notion.id,
-    microSkills
-      .filter((micro) => micro.notionId === notion.id)
-      .map((micro) => micro.id),
-  ])
-);
+export function getNotionMicroMap(classe: Classe): Record<string, string[]> {
+  const knowledge = getKnowledge(classe);
+
+  return Object.fromEntries(
+    knowledge.notions.map((notion) => [
+      notion.id,
+      knowledge.microSkills
+        .filter((micro) => micro.notionId === notion.id)
+        .map((micro) => micro.id),
+    ])
+  );
+}
 
 // =========================
-// LABELS NOTIONS
+// LABELS
 // =========================
 
-const NOTION_LABELS: Record<string, string> = Object.fromEntries(
-  notions.map((notion) => [notion.id, notion.label])
-);
+export function getNotionLabelMap(classe: Classe): Record<string, string> {
+  const knowledge = getKnowledge(classe);
 
-// =========================
-// LABELS MICROS
-// =========================
+  return Object.fromEntries(
+    knowledge.notions.map((notion) => [notion.id, notion.label])
+  );
+}
 
-export const MICRO_LABELS: Record<string, string> = Object.fromEntries(
-  microSkills.map((micro) => [micro.id, micro.label])
-);
+export function getMicroLabelMap(classe: Classe): Record<string, string> {
+  const knowledge = getKnowledge(classe);
+
+  return Object.fromEntries(
+    knowledge.microSkills.map((micro) => [micro.id, micro.label])
+  );
+}
 
 // =========================
 // HELPERS
 // =========================
 
-export function notionLabel(notionId: string) {
-  return NOTION_LABELS[notionId] ?? notionId;
+export function notionLabel(notionId: string, classe: Classe): string {
+  const map = getNotionLabelMap(classe);
+  return map[notionId] ?? notionId;
 }
 
-export function microLabel(microId: string) {
-  return MICRO_LABELS[microId] ?? microId;
+export function microLabel(microId: string, classe: Classe): string {
+  const map = getMicroLabelMap(classe);
+  return map[microId] ?? microId;
 }

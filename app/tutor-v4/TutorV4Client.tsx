@@ -1,4 +1,3 @@
-// app/tutor-v4/TutorV4Client.tsx
 "use client";
 
 import {
@@ -15,11 +14,13 @@ import QuadrilatereCanvas from "@/lib/tutor-v4/components/QuadrilatereCanvas";
 import FigureLibreCanvas from "@/lib/tutor-v4/components/FigureLibreCanvas";
 
 import {
-  NOTION_MICRO_MAP,
-  NOTION_OPTIONS,
+  getNotionMicroMap,
+  getNotionOptions,
   notionLabel,
   microLabel,
+  type Classe,
 } from "@/lib/tutor-v4/catalog";
+
 import type {
   HiddenStarState,
   StarLevel,
@@ -102,20 +103,21 @@ function simpleEncouragement(args: {
   microId?: string;
   points?: number;
   mode: TutorMode;
+  classe: Classe;
 }) {
   if (args.ok === undefined || !args.microId) {
     return "Choisis une mission puis avance à ton rythme.";
   }
 
   if (args.ok) {
-    return `✅ Mission réussie : ${microLabel(args.microId)}${
+    return `✅ Mission réussie : ${microLabel(args.microId, args.classe)}${
       args.points ? ` — +${args.points} point${args.points > 1 ? "s" : ""}` : ""
     }`;
   }
 
   return args.mode === "coaching"
-    ? `⚠️ Mission à retravailler : ${microLabel(args.microId)} — un indice apparaît.`
-    : `⚠️ Mission à retravailler : ${microLabel(args.microId)}`;
+    ? `⚠️ Mission à retravailler : ${microLabel(args.microId, args.classe)} — un indice apparaît.`
+    : `⚠️ Mission à retravailler : ${microLabel(args.microId, args.classe)}`;
 }
 
 function visibleProgressText(text: string) {
@@ -148,13 +150,6 @@ function studentBadgeLabel(star: HiddenStarState) {
   }
 }
 
-function feedbackTone(ok?: boolean) {
-  if (ok === undefined) return "border-slate-200 bg-slate-50 text-slate-800";
-  return ok
-    ? "border-emerald-200 bg-emerald-50 text-emerald-900"
-    : "border-amber-200 bg-amber-50 text-amber-900";
-}
-
 function scoreOn20(earned: number, possible: number) {
   if (possible <= 0) return "—";
   return ((earned / possible) * 20).toFixed(1);
@@ -171,27 +166,30 @@ function renderCanvas(canvas?: CanvasFigure | null) {
     return <QuadrilatereCanvas figure={canvas} />;
   }
 
-    if (canvas.kind === "figure_libre") {
+  if (canvas.kind === "figure_libre") {
     return <FigureLibreCanvas figure={canvas} />;
   }
 
   return null;
 }
 
-function isValidNotionId(value: string): boolean {
-  return NOTION_OPTIONS.includes(value);
+function normalizeClasse(value: string | null): Classe {
+  return value === "5e" ? "5e" : "6e";
 }
 
 export default function TutorV4Page() {
   const searchParams = useSearchParams();
 
-  const [classe, setClasse] = useState("6e");
+  const [classe, setClasse] = useState<Classe>("6e");
   const [matiere, setMatiere] = useState("maths");
-  const [notion, setNotion] = useState("decimaux");
+  const [notion, setNotion] = useState("");
 
   const hasInitializedFromUrl = useRef(false);
   const hasStartedFromUrl = useRef(false);
   const initialMicroIdRef = useRef<string | null>(null);
+
+  const notionOptions = useMemo(() => getNotionOptions(classe), [classe]);
+  const notionMicroMap = useMemo(() => getNotionMicroMap(classe), [classe]);
 
   const [sessionId, setSessionId] = useState<string | null>(null);
   const [pair, setPair] = useState<TutorQuestionPair | null>(null);
@@ -256,26 +254,48 @@ export default function TutorV4Page() {
     message: "",
   });
 
+  function isValidNotionId(value: string, currentClasse: Classe): boolean {
+    return getNotionOptions(currentClasse).includes(value);
+  }
+
   useEffect(() => {
     if (hasInitializedFromUrl.current) return;
 
-    const urlClasse = searchParams.get("classe");
+    const urlClasse = normalizeClasse(searchParams.get("classe"));
     const urlMatiere = searchParams.get("matiere");
     const urlNotion = searchParams.get("notion");
     const urlMicroId = searchParams.get("microId");
 
-    if (urlClasse) setClasse(urlClasse);
+    const options = getNotionOptions(urlClasse);
+    const firstNotion = options[0] ?? "";
+
+    setClasse(urlClasse);
     if (urlMatiere) setMatiere(urlMatiere);
-    if (urlNotion && isValidNotionId(urlNotion)) setNotion(urlNotion);
+
+    if (urlNotion && isValidNotionId(urlNotion, urlClasse)) {
+      setNotion(urlNotion);
+    } else {
+      setNotion(firstNotion);
+    }
+
     if (urlMicroId) initialMicroIdRef.current = urlMicroId;
 
     hasInitializedFromUrl.current = true;
   }, [searchParams]);
 
   useEffect(() => {
+    if (!notionOptions.length) return;
+
+    if (!notion || !notionOptions.includes(notion)) {
+      setNotion(notionOptions[0]);
+    }
+  }, [classe, notion, notionOptions]);
+
+  useEffect(() => {
     if (!hasInitializedFromUrl.current) return;
     if (hasStartedFromUrl.current) return;
     if (!initialMicroIdRef.current) return;
+    if (!notion) return;
 
     hasStartedFromUrl.current = true;
     void startSession(initialMicroIdRef.current);
@@ -300,10 +320,13 @@ export default function TutorV4Page() {
   const scoreSeanceSur20 =
     possiblePoints > 0 ? ((earnedPoints / possiblePoints) * 20).toFixed(1) : "0.0";
 
-  const notionMicros = useMemo(() => NOTION_MICRO_MAP[notion] ?? [], [notion]);
+  const notionMicros = useMemo(() => {
+    if (!notion) return [];
+    return notionMicroMap[notion] ?? [];
+  }, [notion, notionMicroMap]);
 
   function resetMicroStatusesForNotion(notionId: string) {
-    const micros = NOTION_MICRO_MAP[notionId] ?? [];
+    const micros = notionMicroMap[notionId] ?? [];
     const initial: Record<string, MicroStatus> = {};
     micros.forEach((microId) => {
       initial[microId] = "idle";
@@ -312,7 +335,7 @@ export default function TutorV4Page() {
   }
 
   function initMicroScoresForNotion(notionId: string) {
-    const micros = NOTION_MICRO_MAP[notionId] ?? [];
+    const micros = notionMicroMap[notionId] ?? [];
     const initial: Record<string, MicroScore> = {};
     micros.forEach((microId) => {
       initial[microId] = {
@@ -412,6 +435,8 @@ export default function TutorV4Page() {
   }
 
   async function startSession(targetMicroId?: string) {
+    if (!notion) return;
+
     try {
       setBusy(true);
       setAnswer("");
@@ -543,134 +568,99 @@ export default function TutorV4Page() {
     }
   }
 
-async function submitAnswer(submittedAnswer?: string) {
-  if (!sessionId) {
-    setFeedback("Aucune session active.");
-    return;
-  }
-
-  if (!currentQuestion) {
-    setFeedback("Choisis d’abord une question.");
-    return;
-  }
-
-  if (wrongAnswerPanelOpen) {
-    return;
-  }
-
-  const finalAnswer = (submittedAnswer ?? answer).trim();
-
-  if (!finalAnswer) {
-    setFeedback("Entre une réponse ou clique sur un choix.");
-    return;
-  }
-
-  try {
-    setBusy(true);
-
-    const currentMicro = currentQuestion.microId;
-    const currentMicroLabel = microLabel(currentMicro);
-    const pointsForQuestion = starPoints(currentQuestion.meta.starLevel);
-    const currentExplanation = currentQuestion.explanation?.trim();
-    const hasExplanation =
-      typeof currentExplanation === "string" &&
-      currentExplanation.length > 0;
-
-    const res = await fetch("/api/tutor-v4/answer", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ sessionId, answer: finalAnswer }),
-    });
-
-    const data = await res.json();
-
-    if (!res.ok) {
-      setFeedback(data?.error ?? "Erreur pendant la correction.");
+  async function submitAnswer(submittedAnswer?: string) {
+    if (!sessionId) {
+      setFeedback("Aucune session active.");
       return;
     }
 
-    const typed = data as AnswerResponse;
-
-    setSessionResults((prev) => [...prev, typed.result.ok]);
-    setPossiblePoints((prev) => prev + pointsForQuestion);
-
-    if (typed.result.ok) {
-      setEarnedPoints((prev) => prev + pointsForQuestion);
+    if (!currentQuestion) {
+      setFeedback("Choisis d’abord une question.");
+      return;
     }
 
-    setMicroScores((prev) => {
-      const current = prev[currentMicro] ?? {
-        attempts: 0,
-        success: 0,
-        earnedPoints: 0,
-        possiblePoints: 0,
-      };
+    if (wrongAnswerPanelOpen) {
+      return;
+    }
 
-      return {
-        ...prev,
-        [currentMicro]: {
-          attempts: current.attempts + 1,
-          success: current.success + (typed.result.ok ? 1 : 0),
-          earnedPoints:
-            current.earnedPoints + (typed.result.ok ? pointsForQuestion : 0),
-          possiblePoints: current.possiblePoints + pointsForQuestion,
-        },
-      };
-    });
+    const finalAnswer = (submittedAnswer ?? answer).trim();
 
-    setLastResult({
-      ok: typed.result.ok,
-      microId: currentMicro,
-      points: typed.result.ok ? pointsForQuestion : 0,
-    });
+    if (!finalAnswer) {
+      setFeedback("Entre une réponse ou clique sur un choix.");
+      return;
+    }
 
-    setMicroStatuses((prev) => ({
-      ...prev,
-      [currentMicro]: typed.result.ok ? "success" : "retry",
-    }));
+    try {
+      setBusy(true);
 
-    if (typed.result.ok) {
-      setFeedback(`Bonne réponse : ${currentMicroLabel}`);
-      setExplanationText("");
-      setWrongAnswerPanelOpen(false);
-      setLastSubmittedAnswer("");
+      const currentMicro = currentQuestion.microId;
+      const currentMicroLabel = microLabel(currentMicro, classe);
+      const pointsForQuestion = starPoints(currentQuestion.meta.starLevel);
+      const currentExplanation = currentQuestion.explanation?.trim();
+      const hasExplanation =
+        typeof currentExplanation === "string" &&
+        currentExplanation.length > 0;
 
-      openResultModal(true, `Mission réussie : ${currentMicroLabel}`);
+      const res = await fetch("/api/tutor-v4/answer", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ sessionId, answer: finalAnswer }),
+      });
 
-      setPair(typed.pair);
-      setMode(typed.mode);
-      setRecommendedStar(typed.recommendedStar);
-      setVisibleProgress(typed.visibleProgress);
-      setActiveMicroId(typed.pair.microId);
+      const data = await res.json();
+
+      if (!res.ok) {
+        setFeedback(data?.error ?? "Erreur pendant la correction.");
+        return;
+      }
+
+      const typed = data as AnswerResponse;
+
+      setSessionResults((prev) => [...prev, typed.result.ok]);
+      setPossiblePoints((prev) => prev + pointsForQuestion);
+
+      if (typed.result.ok) {
+        setEarnedPoints((prev) => prev + pointsForQuestion);
+      }
+
+      setMicroScores((prev) => {
+        const current = prev[currentMicro] ?? {
+          attempts: 0,
+          success: 0,
+          earnedPoints: 0,
+          possiblePoints: 0,
+        };
+
+        return {
+          ...prev,
+          [currentMicro]: {
+            attempts: current.attempts + 1,
+            success: current.success + (typed.result.ok ? 1 : 0),
+            earnedPoints:
+              current.earnedPoints + (typed.result.ok ? pointsForQuestion : 0),
+            possiblePoints: current.possiblePoints + pointsForQuestion,
+          },
+        };
+      });
+
+      setLastResult({
+        ok: typed.result.ok,
+        microId: currentMicro,
+        points: typed.result.ok ? pointsForQuestion : 0,
+      });
 
       setMicroStatuses((prev) => ({
         ...prev,
-        [typed.pair.microId]:
-          prev[typed.pair.microId] === "success" ? "success" : "current",
+        [currentMicro]: typed.result.ok ? "success" : "retry",
       }));
 
-      setSelectedOptionId(null);
-      setCurrentQuestion(null);
-      setAnswer("");
-      setPendingNextPair(null);
-      setPendingNextMode(null);
-      setPendingNextRecommendedStar(null);
-      setPendingNextVisibleProgress(null);
-    } else {
-      setFeedback("Ce n’est pas la bonne réponse…");
-      setLastSubmittedAnswer(finalAnswer);
-
-      if (hasExplanation) {
-        setExplanationText(currentExplanation);
-        setWrongAnswerPanelOpen(true);
-
-        setPendingNextPair(typed.pair);
-        setPendingNextMode(typed.mode);
-        setPendingNextRecommendedStar(typed.recommendedStar);
-        setPendingNextVisibleProgress(typed.visibleProgress);
-      } else {
+      if (typed.result.ok) {
+        setFeedback(`Bonne réponse : ${currentMicroLabel}`);
         setExplanationText("");
         setWrongAnswerPanelOpen(false);
+        setLastSubmittedAnswer("");
+
+        openResultModal(true, `Mission réussie : ${currentMicroLabel}`);
 
         setPair(typed.pair);
         setMode(typed.mode);
@@ -691,23 +681,58 @@ async function submitAnswer(submittedAnswer?: string) {
         setPendingNextMode(null);
         setPendingNextRecommendedStar(null);
         setPendingNextVisibleProgress(null);
-      }
+      } else {
+        setFeedback("Ce n’est pas la bonne réponse…");
+        setLastSubmittedAnswer(finalAnswer);
 
-      setResultModal({
-        open: false,
-        ok: false,
-        title: "",
-        message: "",
-      });
+        if (hasExplanation) {
+          setExplanationText(currentExplanation);
+          setWrongAnswerPanelOpen(true);
+
+          setPendingNextPair(typed.pair);
+          setPendingNextMode(typed.mode);
+          setPendingNextRecommendedStar(typed.recommendedStar);
+          setPendingNextVisibleProgress(typed.visibleProgress);
+        } else {
+          setExplanationText("");
+          setWrongAnswerPanelOpen(false);
+
+          setPair(typed.pair);
+          setMode(typed.mode);
+          setRecommendedStar(typed.recommendedStar);
+          setVisibleProgress(typed.visibleProgress);
+          setActiveMicroId(typed.pair.microId);
+
+          setMicroStatuses((prev) => ({
+            ...prev,
+            [typed.pair.microId]:
+              prev[typed.pair.microId] === "success" ? "success" : "current",
+          }));
+
+          setSelectedOptionId(null);
+          setCurrentQuestion(null);
+          setAnswer("");
+          setPendingNextPair(null);
+          setPendingNextMode(null);
+          setPendingNextRecommendedStar(null);
+          setPendingNextVisibleProgress(null);
+        }
+
+        setResultModal({
+          open: false,
+          ok: false,
+          title: "",
+          message: "",
+        });
+      }
+    } catch (error) {
+      setFeedback(
+        error instanceof Error ? error.message : "Erreur pendant la correction."
+      );
+    } finally {
+      setBusy(false);
     }
-  } catch (error) {
-    setFeedback(
-      error instanceof Error ? error.message : "Erreur pendant la correction."
-    );
-  } finally {
-    setBusy(false);
   }
-}
 
   async function handleQcmClick(choice: string) {
     setAnswer(choice);
@@ -756,9 +781,9 @@ async function submitAnswer(submittedAnswer?: string) {
                   onChange={(e) => setNotion(e.target.value)}
                   className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900"
                 >
-                  {NOTION_OPTIONS.map((item) => (
+                  {notionOptions.map((item) => (
                     <option key={item} value={item}>
-                      {notionLabel(item)}
+                      {notionLabel(item, classe)}
                     </option>
                   ))}
                 </select>
@@ -803,7 +828,7 @@ async function submitAnswer(submittedAnswer?: string) {
 
                 <button
                   onClick={() => void startSession()}
-                  disabled={busy || wrongAnswerPanelOpen}
+                  disabled={busy || wrongAnswerPanelOpen || !notion}
                   className="rounded-2xl bg-slate-900 px-6 py-3 text-sm font-black text-white shadow hover:bg-slate-800 disabled:opacity-50"
                 >
                   {busy ? "Chargement..." : "Démarrer une mission"}
@@ -819,6 +844,7 @@ async function submitAnswer(submittedAnswer?: string) {
                     microId: lastResult.microId,
                     points: lastResult.points,
                     mode,
+                    classe,
                   })}
                 </div>
 
@@ -849,7 +875,7 @@ async function submitAnswer(submittedAnswer?: string) {
                   </div>
                   <p className="text-sm text-slate-500">
                     Micro active :{" "}
-                    <span className="font-semibold">{microLabel(pair.microId)}</span>
+                    <span className="font-semibold">{microLabel(pair.microId, classe)}</span>
                   </p>
                 </div>
 
@@ -877,7 +903,7 @@ async function submitAnswer(submittedAnswer?: string) {
 
                       <div className="mb-3 flex flex-wrap gap-2">
                         <Tag>{option.format === "qcm" ? "QCM" : "Réponse libre"}</Tag>
-                        <Tag>{microLabel(option.microId)}</Tag>
+                        <Tag>{microLabel(option.microId, classe)}</Tag>
                         <Tag>{starPoints(option.meta.starLevel)} pts</Tag>
                         {option.canvas ? <Tag>Figure</Tag> : null}
                       </div>
@@ -905,7 +931,7 @@ async function submitAnswer(submittedAnswer?: string) {
                     <p className="text-sm text-slate-500">
                       Compétence :{" "}
                       <span className="font-semibold">
-                        {microLabel(currentQuestion.microId)}
+                        {microLabel(currentQuestion.microId, classe)}
                       </span>
                     </p>
                   </div>
@@ -923,7 +949,7 @@ async function submitAnswer(submittedAnswer?: string) {
                 {!wrongAnswerPanelOpen ? (
                   <>
                     <div className="mb-4 rounded-2xl bg-gradient-to-r from-violet-100 to-fuchsia-100 px-4 py-3 text-sm font-bold text-violet-900">
-                      Compétence travaillée : {microLabel(currentQuestion.microId)}
+                      Compétence travaillée : {microLabel(currentQuestion.microId, classe)}
                     </div>
 
                     <div className="mb-4 rounded-2xl border border-slate-200 bg-white p-4 text-base text-slate-900">
@@ -1026,7 +1052,7 @@ async function submitAnswer(submittedAnswer?: string) {
               </div>
             </SidebarCard>
 
-            <SidebarCard title={`Micro-compétences : ${notionLabel(notion)}`}>
+            <SidebarCard title={`Micro-compétences : ${notionLabel(notion, classe)}`}>
               <div className="mb-3 text-xs text-slate-500">
                 Clique sur une micro-compétence pour t’entraîner dessus.
               </div>
@@ -1054,7 +1080,7 @@ async function submitAnswer(submittedAnswer?: string) {
                     >
                       <div className="mb-2 flex items-start justify-between gap-3">
                         <div className="text-sm font-semibold leading-5">
-                          {microLabel(microId)}
+                          {microLabel(microId, classe)}
                         </div>
 
                         <span className="rounded-full bg-white/80 px-2 py-1 text-[11px] font-bold shadow-sm">
@@ -1368,9 +1394,7 @@ function ResultModal({
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/50 px-4">
       <div
         className={`w-full max-w-md rounded-[28px] border p-6 shadow-2xl ${
-          ok
-            ? "border-emerald-200 bg-white"
-            : "border-amber-200 bg-white"
+          ok ? "border-emerald-200 bg-white" : "border-amber-200 bg-white"
         }`}
       >
         <div className="mb-4 flex items-center gap-3">

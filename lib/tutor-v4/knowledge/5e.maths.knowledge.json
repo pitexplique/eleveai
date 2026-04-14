@@ -1,0 +1,178 @@
+{
+  "id": "5e-maths",
+  "classe": "5e",
+  "matiere": "maths",
+
+  "bo_competences": [
+    { "boId": "BO5N1", "label": "Nombres relatifs et calculs" },
+    { "boId": "BO5N2", "label": "Fractions et nombres rationnels" },
+    { "boId": "BO5P1", "label": "Proportionnalité" },
+    { "boId": "BO5A1", "label": "Calcul littéral et algébrique" },
+    { "boId": "BO5G1", "label": "Géométrie plane" },
+    { "boId": "BO5G2", "label": "Géométrie dans l’espace" },
+    { "boId": "BO5M1", "label": "Grandeurs et mesures" },
+    { "boId": "BO5D1", "label": "Statistiques" },
+    { "boId": "BO5D2", "label": "Probabilités" }
+  ],
+
+  "notions": [
+    {
+      "id": "nombres_relatifs",
+      "label": "Nombres relatifs",
+      "boId": "BO5N1",
+      "prerequis": [],
+      "levels": [1, 2, 3],
+      "microTargets": [
+        "relatif_lire",
+        "relatif_signe",
+        "relatif_comparer",
+        "relatif_placer",
+        "relatif_opposes",
+        "relatif_valeur_absolue",
+        "relatif_defis"
+      ]
+    },
+    {
+      "id": "operations_relatifs",
+      "label": "Opérations sur les nombres relatifs",
+      "boId": "BO5N1",
+      "prerequis": ["nombres_relatifs"],
+      "levels": [1, 2, 3],
+      "microTargets": [
+        "relatif_addition",
+        "relatif_soustraction",
+        "relatif_calcul",
+        "relatif_probleme",
+        "relatif_defis_ops"
+      ]
+    },
+    {
+      "id": "fractions",
+      "label": "Fractions et nombres rationnels",
+      "boId": "BO5N2",
+      "prerequis": [],
+      "levels": [1, 2, 3],
+      "microTargets": [
+        "fraction_egales",
+        "fraction_simplifier",
+        "fraction_comparer",
+        "fraction_addition",
+        "fraction_multiplier",
+        "fraction_defis"
+      ]
+    },
+    {
+      "id": "proportionnalite",
+      "label": "Proportionnalité",
+      "boId": "BO5P1",
+      "prerequis": ["fractions"],
+      "levels": [1, 2, 3],
+      "microTargets": [
+        "prop_reconnaitre",
+        "prop_table",
+        "prop_coeff",
+        "prop_pourcentage",
+        "prop_probleme",
+        "prop_defis"
+      ]
+    },
+    {
+      "id": "calcul_litteral",
+      "label": "Calcul littéral",
+      "boId": "BO5A1",
+      "prerequis": [],
+      "levels": [1, 2, 3],
+      "microTargets": [
+        "litteral_expression",
+        "litteral_traduire",
+        "litteral_substituer",
+        "litteral_reduire",
+        "litteral_defis"
+      ]
+    },
+    {
+      "id": "angles",
+      "label": "Angles",
+      "boId": "BO5G1",
+      "prerequis": [],
+      "levels": [1, 2],
+      "microTargets": [
+        "angle_lire",
+        "angle_mesurer",
+        "angle_tracer",
+        "angle_estimer",
+        "angle_defis_5e"
+      ]
+    },
+    {
+      "id": "triangles",
+      "label": "Triangles",
+      "boId": "BO5G1",
+      "prerequis": ["angles"],
+      "levels": [1, 2, 3],
+      "microTargets": [
+        "triangle_reconnaitre",
+        "triangle_nature",
+        "triangle_construire",
+        "triangle_somme_angles_5e",
+        "triangle_defis_5e"
+      ]
+    },
+    {
+      "id": "symetrie_centrale",
+      "label": "Symétrie centrale",
+      "boId": "BO5G1",
+      "prerequis": ["angles"],
+      "levels": [1, 2],
+      "microTargets": [
+        "sym_centrale_reconnaitre",
+        "sym_centrale_point",
+        "sym_centrale_figure",
+        "sym_centrale_proprietes",
+        "sym_centrale_defis"
+      ]
+    },
+    {
+      "id": "aires",
+      "label": "Aires",
+      "boId": "BO5M1",
+      "prerequis": [],
+      "levels": [1, 2],
+      "microTargets": [
+        "aire_comprendre_5e",
+        "aire_triangle",
+        "aire_parallelogramme",
+        "aire_composer",
+        "aire_defis_5e"
+      ]
+    },
+    {
+      "id": "volumes",
+      "label": "Volumes",
+      "boId": "BO5G2",
+      "prerequis": ["aires"],
+      "levels": [1, 2],
+      "microTargets": [
+        "volume_comprendre_5e",
+        "volume_pave",
+        "volume_prisme",
+        "volume_unites",
+        "volume_defis_5e"
+      ]
+    },
+    {
+      "id": "statistiques",
+      "label": "Statistiques",
+      "boId": "BO5D1",
+      "prerequis": [],
+      "levels": [1, 2],
+      "microTargets": [
+        "stat_lire_tableau_5e",
+        "stat_lire_graphique_5e",
+        "stat_effectif_frequence",
+        "stat_moyenne",
+        "stat_defis_5e"
+      ]
+    }
+  ]
+}

@@ -1,11 +1,9 @@
-// loaders/matrix/matrix5eMaths.ts
-
 import type { SkillMatrix, MatrixValue } from "@/lib/tutor-v4/types";
 import { microSkills } from "@/lib/tutor-v4/knowledge/maths/5e/microSkills";
 
 /**
  * Ordre des micro-compétences.
- * Dérivé du référentiel central 5e.
+ * Dérivé automatiquement du référentiel central 5e.
  */
 export const microSkillIndex5eMaths = microSkills.map((micro) => micro.id);
 
@@ -23,70 +21,99 @@ const directParents: Record<string, string[]> = Object.fromEntries(
 
 /**
  * Liens secondaires :
- * plus faibles, mais utiles pour guider.
+ * plus faibles, mais utiles pour guider la progression.
  */
 const supportLinks: Record<string, string[]> = {
-  // Nombres relatifs
+  // =========================
+  // NOMBRES RELATIFS
+  // =========================
   relatif_comparer: ["relatif_placer"],
   relatif_defis: ["relatif_opposes"],
 
-  // Opérations sur les relatifs
+  // =========================
+  // OPÉRATIONS SUR LES RELATIFS
+  // =========================
   relatif_soustraction: ["relatif_comparer"],
-  relatif_multiplication: ["relatif_comparer"],
-  relatif_division: ["relatif_multiplication"],
+  relatif_calcul: ["relatif_comparer"],
+  relatif_probleme: ["relatif_placer"],
   relatif_defis_ops: ["relatif_soustraction"],
 
-  // Fractions
+  // =========================
+  // FRACTIONS
+  // =========================
   fraction_comparer: ["relatif_comparer"],
   fraction_addition: ["fraction_simplifier"],
   fraction_multiplier: ["fraction_comparer"],
   fraction_defis: ["fraction_addition"],
 
-  // Proportionnalité
+  // =========================
+  // PROPORTIONNALITÉ
+  // =========================
   prop_coeff: ["fraction_comparer"],
   prop_pourcentage: ["prop_table"],
-  prop_probleme: ["relatif_multiplication"],
+  prop_probleme: ["fraction_addition", "relatif_calcul"],
   prop_defis: ["prop_pourcentage"],
 
-  // Calcul littéral
-  litteral_substituer: ["relatif_addition"],
+  // =========================
+  // CALCUL LITTÉRAL
+  // =========================
+  litteral_substituer: ["relatif_calcul"],
   litteral_reduire: ["litteral_substituer"],
-  litteral_defis: ["relatif_multiplication"],
+  litteral_defis: ["litteral_reduire"],
 
-  // Angles
+  // =========================
+  // ANGLES
+  // =========================
   angle_mesurer: ["relatif_lire"],
   angle_tracer: ["angle_estimer"],
-  angle_defis_5e: ["angle_mesurer"],
+  angle_defis: ["angle_mesurer"],
 
-  // Triangles
+  // =========================
+  // TRIANGLES
+  // =========================
   triangle_construire: ["angle_tracer"],
-  triangle_somme_angles_5e: ["angle_mesurer"],
-  triangle_hauteur_mediatrice: ["triangle_reconnaitre"],
-  triangle_defis_5e: ["triangle_construire"],
+  triangle_somme_angles: ["angle_mesurer"],
+  triangle_defis: ["triangle_construire"],
 
-  // Symétrie centrale
+  // =========================
+  // SYMÉTRIE CENTRALE
+  // =========================
   sym_centrale_point: ["relatif_placer"],
   sym_centrale_figure: ["sym_centrale_point"],
   sym_centrale_proprietes: ["sym_centrale_figure"],
   sym_centrale_defis: ["sym_centrale_proprietes"],
 
-  // Aires
+  // =========================
+  // AIRES
+  // =========================
   aire_triangle: ["triangle_reconnaitre"],
   aire_parallelogramme: ["angle_lire"],
-  aire_composer: ["aire_triangle"],
-  aire_defis_5e: ["aire_composer"],
+  aire_composer: ["aire_triangle", "aire_parallelogramme"],
+  aire_defis: ["aire_composer"],
 
-  // Volumes
+  // =========================
+  // VOLUMES
+  // =========================
   volume_prisme: ["aire_triangle"],
-  volume_pave: ["relatif_multiplication"],
-  volume_unites: ["volume_comprendre_5e"],
-  volume_defis_5e: ["volume_prisme"],
+  volume_pave: ["relatif_calcul"],
+  volume_unites: ["volume_comprendre"],
+  volume_defis: ["volume_prisme", "volume_pave"],
 
-  // Statistiques
-  stat_lire_graphique_5e: ["stat_lire_tableau_5e"],
+  // =========================
+  // STATISTIQUES
+  // =========================
+  stat_lire_graphique: ["stat_lire_tableau"],
   stat_effectif_frequence: ["fraction_comparer"],
-  stat_moyenne: ["relatif_addition"],
-  stat_defis_5e: ["stat_moyenne"],
+  stat_moyenne: ["relatif_calcul"],
+  stat_defis: ["stat_moyenne"],
+
+  // =========================
+  // PROBABILITÉS
+  // =========================
+  proba_issues: ["stat_lire_tableau"],
+  proba_equiprobabilite: ["proba_issues"],
+  proba_calculer: ["fraction_comparer", "stat_effectif_frequence"],
+  proba_defis: ["proba_calculer"],
 };
 
 /**
