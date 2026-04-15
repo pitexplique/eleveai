@@ -33,10 +33,12 @@ function fractionStr(n: number, d: number) {
 
 function equivalentFractionAnswers(n: number, d: number): string[] {
   const simp = simplifyFraction(n, d);
-  return [
-    `${simp.n}/${simp.d}`,
-    `${n}/${d}`,
-  ];
+  return Array.from(
+    new Set([
+      `${simp.n}/${simp.d}`,
+      `${n}/${d}`,
+    ])
+  );
 }
 
 export const fractionsBank: TutorBankItemV4[] = [
@@ -390,6 +392,113 @@ export const fractionsBank: TutorBankItemV4[] = [
         expected: [sign],
         comparator: "contains_keyword",
         explanation: `${n1}/${d1} ${sign} ${n2}/${d2}.`,
+      };
+    },
+  },
+
+  // =========================
+  // FRACTION_ADDITION
+  // =========================
+  {
+    kind: "fixed",
+    id: "fraction_addition_fixed_1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "fractions",
+    microId: "fraction_addition",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Calcule 1/4 + 2/4.",
+    format: "short",
+    expected: ["3/4"],
+    comparator: "fraction_decimal_equivalent",
+    hint: "Les dénominateurs sont déjà égaux.",
+    explanation:
+      "1/4 + 2/4 = 3/4.",
+    tags: ["fractions", "addition"],
+  },
+  {
+    kind: "fixed",
+    id: "fraction_addition_fixed_2",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "fractions",
+    microId: "fraction_addition",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Calcule 3/5 - 1/5.",
+    format: "short",
+    expected: ["2/5"],
+    comparator: "fraction_decimal_equivalent",
+    hint: "Quand les dénominateurs sont égaux, on additionne ou on soustrait seulement les numérateurs.",
+    explanation:
+      "3/5 - 1/5 = 2/5.",
+    tags: ["fractions", "addition", "soustraction"],
+  },
+  {
+    kind: "fixed",
+    id: "fraction_addition_fixed_3",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "fractions",
+    microId: "fraction_addition",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Calcule 1/2 + 1/3.",
+    format: "short",
+    expected: ["5/6"],
+    comparator: "fraction_decimal_equivalent",
+    hint: "Mets les fractions au même dénominateur.",
+    explanation:
+      "1/2 = 3/6 et 1/3 = 2/6, donc 1/2 + 1/3 = 5/6.",
+    tags: ["fractions", "addition"],
+  },
+  {
+    kind: "fixed",
+    id: "fraction_addition_qcm_1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "fractions",
+    microId: "fraction_addition",
+    difficulty: 3,
+    theme: "reunion",
+    text: "À La Réunion, Inès mange 1/4 d’un gâteau le matin puis 1/2 du même gâteau à midi. Quelle quantité a-t-elle mangée en tout ?",
+    format: "qcm",
+    choices: ["2/3", "3/4", "1", "5/8"],
+    expected: ["3/4"],
+    comparator: "mcq_exact",
+    hint: "Transforme 1/2 en une fraction de dénominateur 4.",
+    explanation:
+      "1/2 = 2/4. Donc 1/4 + 2/4 = 3/4.",
+    tags: ["fractions", "addition", "qcm", "reunion"],
+  },
+  {
+    kind: "template",
+    id: "fraction_addition_tpl_1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "fractions",
+    microId: "fraction_addition",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Commence par mettre les fractions au même dénominateur.",
+    tags: ["fractions", "addition", "template"],
+    generate: () => {
+      const pairs = [
+        [1, 2, 1, 3],
+        [1, 4, 1, 2],
+        [2, 3, 1, 6],
+        [3, 4, 1, 8],
+      ];
+      const [n1, d1, n2, d2] = randomChoice(pairs);
+      const simp = simplifyFraction(n1 * d2 + n2 * d1, d1 * d2);
+
+      return {
+        text: `Calcule ${n1}/${d1} + ${n2}/${d2}.`,
+        format: "short",
+        expected: [fractionStr(simp.n, simp.d)],
+        comparator: "fraction_decimal_equivalent",
+        explanation: `${n1}/${d1} + ${n2}/${d2} = ${n1 * d2}/${d1 * d2} + ${n2 * d1}/${d1 * d2} = ${(n1 * d2) + (n2 * d1)}/${d1 * d2} = ${simp.n}/${simp.d}.`,
       };
     },
   },

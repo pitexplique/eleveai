@@ -81,69 +81,72 @@ export const microSkills: MicroSkillSource[] = [
     prerequis: ["relatif_probleme"],
   },
 
-  /* =========================
-     FRACTIONS ET NOMBRES RATIONNELS
-  ========================= */
-  {
-    id: "fraction_egales",
-    label: "Reconnaître des fractions égales",
-    notionId: "fractions",
-    prerequis: [],
-  },
-  {
-    id: "fraction_simplifier",
-    label: "Simplifier une fraction",
-    notionId: "fractions",
-    prerequis: ["fraction_egales"],
-  },
-  {
-    id: "fraction_rationnel",
-    label: "Reconnaître un nombre rationnel et ses écritures",
-    notionId: "fractions",
-    prerequis: ["fraction_egales"],
-  },
-  {
-    id: "fraction_comparer",
-    label: "Comparer des fractions",
-    notionId: "fractions",
-    prerequis: ["fraction_simplifier"],
-  },
-  {
-    id: "fraction_produit",
-    label: "Multiplier des fractions",
-    notionId: "fractions",
-    prerequis: ["fraction_simplifier"],
-  },
-  {
-    id: "fraction_quantite",
-    label: "Calculer la fraction d’un nombre, d’une quantité ou d’une fraction",
-    notionId: "fractions",
-    prerequis: ["fraction_comparer", "fraction_produit"],
-  },
-  {
-    id: "fraction_inverse",
-    label: "Déterminer l’inverse d’un nombre rationnel ou d’une fraction",
-    notionId: "fractions",
-    prerequis: ["fraction_rationnel", "fraction_produit"],
-  },
-  {
-    id: "fraction_division",
-    label: "Diviser des fractions",
-    notionId: "fractions",
-    prerequis: ["fraction_inverse", "fraction_produit"],
-  },
-  {
-    id: "fraction_oppose",
-    label: "Exprimer l’opposé d’un nombre rationnel",
-    notionId: "fractions",
-    prerequis: ["fraction_rationnel"],
-  },
-  {
-    id: "fraction_defis",
-    label: "Défis sur les fractions et les nombres rationnels",
-    notionId: "fractions",
-    prerequis: ["fraction_quantite", "fraction_division", "fraction_oppose"],
-  },
+{
+  id: "fraction_egales",
+  label: "Reconnaître des fractions égales",
+  notionId: "fractions",
+  prerequis: [],
+},
+{
+  id: "fraction_simplifier",
+  label: "Simplifier une fraction",
+  notionId: "fractions",
+  prerequis: ["fraction_egales"],
+},
+{
+  id: "fraction_rationnel",
+  label: "Reconnaître un nombre rationnel et ses écritures",
+  notionId: "fractions",
+  prerequis: ["fraction_egales"],
+},
+{
+  id: "fraction_comparer",
+  label: "Comparer des fractions",
+  notionId: "fractions",
+  prerequis: ["fraction_simplifier"],
+},
+{
+  id: "fraction_addition",
+  label: "Additionner ou soustraire des fractions simples",
+  notionId: "fractions",
+  prerequis: ["fraction_comparer"],
+},
+{
+  id: "fraction_produit",
+  label: "Multiplier des fractions",
+  notionId: "fractions",
+  prerequis: ["fraction_simplifier"],
+},
+{
+  id: "fraction_quantite",
+  label: "Calculer la fraction d’un nombre, d’une quantité ou d’une fraction",
+  notionId: "fractions",
+  prerequis: ["fraction_comparer", "fraction_produit"],
+},
+{
+  id: "fraction_inverse",
+  label: "Déterminer l’inverse d’un nombre rationnel ou d’une fraction",
+  notionId: "fractions",
+  prerequis: ["fraction_rationnel", "fraction_produit"],
+},
+{
+  id: "fraction_division",
+  label: "Diviser des fractions",
+  notionId: "fractions",
+  prerequis: ["fraction_inverse", "fraction_produit"],
+},
+{
+  id: "fraction_oppose",
+  label: "Exprimer l’opposé d’un nombre rationnel",
+  notionId: "fractions",
+  prerequis: ["fraction_rationnel"],
+},
+{
+  id: "fraction_defis",
+  label: "Défis sur les fractions et les nombres rationnels",
+  notionId: "fractions",
+  prerequis: ["fraction_addition", "fraction_quantite", "fraction_division", "fraction_oppose"],
+},
 
   /* =========================
      PROPORTIONNALITÉ

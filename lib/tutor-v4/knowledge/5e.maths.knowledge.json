@@ -57,6 +57,7 @@
     "fraction_simplifier",
     "fraction_rationnel",
     "fraction_comparer",
+    "fraction_addition",
     "fraction_produit",
     "fraction_quantite",
     "fraction_inverse",
