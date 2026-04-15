@@ -46,49 +46,49 @@
         "relatif_defis_ops"
       ]
     },
-{
-  "id": "fractions",
-  "label": "Fractions et nombres rationnels",
-  "boId": "BO5N2",
-  "prerequis": [],
-  "levels": [1, 2, 3],
-  "microTargets": [
-    "fraction_egales",
-    "fraction_simplifier",
-    "fraction_rationnel",
-    "fraction_comparer",
-    "fraction_addition",
-    "fraction_produit",
-    "fraction_quantite",
-    "fraction_inverse",
-    "fraction_division",
-    "fraction_oppose",
-    "fraction_defis"
-  ]
-},
-{
-  "id": "proportionnalite",
-  "label": "Proportionnalité",
-  "boId": "BO5P1",
-  "prerequis": ["fractions"],
-  "levels": [1, 2, 3],
-  "microTargets": [
-    "prop_reconnaitre",
-    "prop_table",
-    "prop_quatrieme",
-    "prop_coeff",
-    "prop_ratio",
-    "prop_pourcentage",
-    "prop_coeff_mult",
-    "prop_probleme",
-    "prop_defis"
-  ]
-},
+    {
+      "id": "fractions",
+      "label": "Fractions et nombres rationnels",
+      "boId": "BO5N2",
+      "prerequis": ["nombres_relatifs"],
+      "levels": [1, 2, 3],
+      "microTargets": [
+        "fraction_egales",
+        "fraction_simplifier",
+        "fraction_rationnel",
+        "fraction_comparer",
+        "fraction_addition",
+        "fraction_produit",
+        "fraction_quantite",
+        "fraction_inverse",
+        "fraction_division",
+        "fraction_oppose",
+        "fraction_defis"
+      ]
+    },
+    {
+      "id": "proportionnalite",
+      "label": "Proportionnalité",
+      "boId": "BO5P1",
+      "prerequis": ["fractions"],
+      "levels": [1, 2, 3],
+      "microTargets": [
+        "prop_reconnaitre",
+        "prop_table",
+        "prop_quatrieme",
+        "prop_coeff",
+        "prop_ratio",
+        "prop_pourcentage",
+        "prop_coeff_mult",
+        "prop_probleme",
+        "prop_defis"
+      ]
+    },
     {
       "id": "calcul_litteral",
       "label": "Calcul littéral",
       "boId": "BO5A1",
-      "prerequis": [],
+      "prerequis": ["operations_relatifs"],
       "levels": [1, 2, 3],
       "microTargets": [
         "litteral_expression",
@@ -144,7 +144,7 @@
       "id": "aires",
       "label": "Aires",
       "boId": "BO5M1",
-      "prerequis": [],
+      "prerequis": ["triangles"],
       "levels": [1, 2],
       "microTargets": [
         "aire_comprendre_5e",
@@ -180,6 +180,20 @@
         "stat_effectif_frequence",
         "stat_moyenne",
         "stat_defis_5e"
+      ]
+    },
+    {
+      "id": "probabilites",
+      "label": "Probabilités",
+      "boId": "BO5D2",
+      "prerequis": ["statistiques"],
+      "levels": [1, 2],
+      "microTargets": [
+        "proba_vocabulaire",
+        "proba_issues",
+        "proba_equiprobabilite",
+        "proba_calculer",
+        "proba_defis"
       ]
     }
   ]

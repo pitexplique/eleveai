@@ -207,38 +207,38 @@ export const microSkills: MicroSkillSource[] = [
   },
 
   /* =========================
-     CALCUL LITTÉRAL
-  ========================= */
-  {
-    id: "litteral_expression",
-    label: "Comprendre une expression littérale",
-    notionId: "calcul_litteral",
-    prerequis: [],
-  },
-  {
-    id: "litteral_traduire",
-    label: "Traduire une phrase en expression littérale",
-    notionId: "calcul_litteral",
-    prerequis: ["litteral_expression"],
-  },
-  {
-    id: "litteral_substituer",
-    label: "Substituer une valeur dans une expression littérale",
-    notionId: "calcul_litteral",
-    prerequis: ["litteral_expression"],
-  },
-  {
-    id: "litteral_reduire",
-    label: "Réduire une expression littérale simple",
-    notionId: "calcul_litteral",
-    prerequis: ["litteral_expression"],
-  },
-  {
-    id: "litteral_defis",
-    label: "Défis sur le calcul littéral",
-    notionId: "calcul_litteral",
-    prerequis: ["litteral_traduire", "litteral_substituer", "litteral_reduire"],
-  },
+   CALCUL LITTÉRAL
+========================= */
+{
+  id: "litteral_expression",
+  label: "Comprendre une expression littérale simple",
+  notionId: "calcul_litteral",
+  prerequis: [],
+},
+{
+  id: "litteral_traduire",
+  label: "Traduire une phrase ou une situation en expression littérale",
+  notionId: "calcul_litteral",
+  prerequis: ["litteral_expression"],
+},
+{
+  id: "litteral_substituer",
+  label: "Calculer la valeur d’une expression littérale pour une valeur donnée",
+  notionId: "calcul_litteral",
+  prerequis: ["litteral_expression"],
+},
+{
+  id: "litteral_reduire",
+  label: "Réduire une expression littérale simple",
+  notionId: "calcul_litteral",
+  prerequis: ["litteral_expression"],
+},
+{
+  id: "litteral_defis",
+  label: "Défis sur le calcul littéral",
+  notionId: "calcul_litteral",
+  prerequis: ["litteral_traduire", "litteral_substituer", "litteral_reduire"],
+},
 
   /* =========================
      ANGLES

@@ -65,6 +65,7 @@ const supportLinks: Record<string, string[]> = {
   // =========================
   // CALCUL LITTÉRAL
   // =========================
+  litteral_traduire: ["relatif_lire"],
   litteral_substituer: ["relatif_calcul"],
   litteral_reduire: ["litteral_substituer"],
   litteral_defis: ["litteral_reduire"],
