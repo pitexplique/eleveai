@@ -46,13 +46,17 @@ const supportLinks: Record<string, string[]> = {
   fraction_multiplier: ["fraction_comparer"],
   fraction_defis: ["fraction_addition"],
 
-  // =========================
-  // PROPORTIONNALITÉ
-  // =========================
-  prop_coeff: ["fraction_comparer"],
-  prop_pourcentage: ["prop_table"],
-  prop_probleme: ["fraction_addition", "relatif_calcul"],
-  prop_defis: ["prop_pourcentage"],
+// =========================
+// PROPORTIONNALITÉ
+// =========================
+prop_table: ["fraction_comparer"],
+prop_quatrieme: ["prop_coeff", "fraction_comparer"],
+prop_coeff: ["fraction_comparer"],
+prop_ratio: ["fraction_comparer", "prop_reconnaitre"],
+prop_pourcentage: ["prop_table", "fraction_comparer"],
+prop_coeff_mult: ["prop_pourcentage", "prop_coeff"],
+prop_probleme: ["prop_quatrieme", "fraction_addition", "relatif_calcul"],
+prop_defis: ["prop_ratio", "prop_coeff_mult", "prop_pourcentage"],
 
   // =========================
   // CALCUL LITTÉRAL

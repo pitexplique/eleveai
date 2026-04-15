@@ -121,45 +121,63 @@ export const microSkills: MicroSkillSource[] = [
     prerequis: ["fraction_addition", "fraction_multiplier"],
   },
 
-  /* =========================
-     PROPORTIONNALITÉ
-  ========================= */
-  {
-    id: "prop_reconnaitre",
-    label: "Reconnaître une situation de proportionnalité",
-    notionId: "proportionnalite",
-    prerequis: [],
-  },
-  {
-    id: "prop_table",
-    label: "Utiliser un tableau de proportionnalité",
-    notionId: "proportionnalite",
-    prerequis: ["prop_reconnaitre"],
-  },
-  {
-    id: "prop_coeff",
-    label: "Utiliser un coefficient de proportionnalité",
-    notionId: "proportionnalite",
-    prerequis: ["prop_table"],
-  },
-  {
-    id: "prop_pourcentage",
-    label: "Appliquer un pourcentage dans une situation de proportionnalité",
-    notionId: "proportionnalite",
-    prerequis: ["prop_coeff"],
-  },
-  {
-    id: "prop_probleme",
-    label: "Résoudre un problème de proportionnalité",
-    notionId: "proportionnalite",
-    prerequis: ["prop_coeff"],
-  },
-  {
-    id: "prop_defis",
-    label: "Défis sur la proportionnalité",
-    notionId: "proportionnalite",
-    prerequis: ["prop_probleme", "prop_pourcentage"],
-  },
+/* =========================
+   PROPORTIONNALITÉ
+========================= */
+{
+  id: "prop_reconnaitre",
+  label: "Reconnaître une situation de proportionnalité ou de non-proportionnalité",
+  notionId: "proportionnalite",
+  prerequis: [],
+},
+{
+  id: "prop_table",
+  label: "Compléter et utiliser un tableau de proportionnalité",
+  notionId: "proportionnalite",
+  prerequis: ["prop_reconnaitre"],
+},
+{
+  id: "prop_quatrieme",
+  label: "Calculer une quatrième proportionnelle",
+  notionId: "proportionnalite",
+  prerequis: ["prop_table"],
+},
+{
+  id: "prop_coeff",
+  label: "Utiliser un coefficient de proportionnalité ou un passage à l’unité",
+  notionId: "proportionnalite",
+  prerequis: ["prop_table"],
+},
+{
+  id: "prop_ratio",
+  label: "Exprimer et utiliser un ratio simple",
+  notionId: "proportionnalite",
+  prerequis: ["prop_reconnaitre"],
+},
+{
+  id: "prop_pourcentage",
+  label: "Calculer et interpréter un pourcentage simple",
+  notionId: "proportionnalite",
+  prerequis: ["prop_coeff"],
+},
+{
+  id: "prop_coeff_mult",
+  label: "Utiliser un coefficient multiplicateur simple",
+  notionId: "proportionnalite",
+  prerequis: ["prop_pourcentage"],
+},
+{
+  id: "prop_probleme",
+  label: "Résoudre un problème de proportionnalité",
+  notionId: "proportionnalite",
+  prerequis: ["prop_quatrieme", "prop_coeff", "prop_pourcentage"],
+},
+{
+  id: "prop_defis",
+  label: "Défis sur la proportionnalité, les ratios et les pourcentages",
+  notionId: "proportionnalite",
+  prerequis: ["prop_ratio", "prop_probleme", "prop_coeff_mult"],
+},
 
   /* =========================
      CALCUL LITTÉRAL

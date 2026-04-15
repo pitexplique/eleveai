@@ -242,14 +242,12 @@ export default function TutorV4Page() {
   const [sessionStartedAt, setSessionStartedAt] = useState<number | null>(null);
   const [elapsedSeconds, setElapsedSeconds] = useState(0);
 
-  const [resultModal, setResultModal] = useState<{
+  const [successBanner, setSuccessBanner] = useState<{
     open: boolean;
-    ok: boolean;
     title: string;
     message?: string;
   }>({
     open: false,
-    ok: true,
     title: "",
     message: "",
   });
@@ -314,6 +312,16 @@ export default function TutorV4Page() {
     return () => clearInterval(interval);
   }, [sessionStartedAt]);
 
+  useEffect(() => {
+    if (!successBanner.open) return;
+
+    const timeout = window.setTimeout(() => {
+      closeSuccessBanner();
+    }, 1200);
+
+    return () => window.clearTimeout(timeout);
+  }, [successBanner.open]);
+
   const bonnesReponses = sessionResults.filter(Boolean).length;
   const nbTentatives = sessionResults.length;
 
@@ -353,17 +361,20 @@ export default function TutorV4Page() {
     return items[Math.floor(Math.random() * items.length)];
   }
 
-  function openResultModal(ok: boolean, message?: string) {
-    setResultModal({
+  function openSuccessBanner(message?: string) {
+    setSuccessBanner({
       open: true,
-      ok,
-      title: ok ? randomSuccessTitle() : "Oups !",
+      title: randomSuccessTitle(),
       message,
     });
   }
 
-  function closeResultModal() {
-    setResultModal((prev) => ({ ...prev, open: false }));
+  function closeSuccessBanner() {
+    setSuccessBanner({
+      open: false,
+      title: "",
+      message: "",
+    });
   }
 
   function resetWrongAnswerFlow() {
@@ -425,6 +436,7 @@ export default function TutorV4Page() {
     setCurrentQuestion(option);
     setAnswer("");
     resetWrongAnswerFlow();
+    closeSuccessBanner();
     setActiveMicroId(option.microId);
 
     setMicroStatuses((prev) => ({
@@ -449,6 +461,7 @@ export default function TutorV4Page() {
       setLastResult({});
       setSessionStartedAt(null);
       setElapsedSeconds(0);
+      closeSuccessBanner();
       resetWrongAnswerFlow();
       resetMicroStatusesForNotion(notion);
       initMicroScoresForNotion(notion);
@@ -504,6 +517,7 @@ export default function TutorV4Page() {
     try {
       setBusy(true);
       resetWrongAnswerFlow();
+      closeSuccessBanner();
       setSelectedOptionId(null);
       setCurrentQuestion(null);
       setAnswer("");
@@ -660,7 +674,15 @@ export default function TutorV4Page() {
         setWrongAnswerPanelOpen(false);
         setLastSubmittedAnswer("");
 
-        openResultModal(true, `Mission réussie : ${currentMicroLabel}`);
+        openSuccessBanner(
+          `Mission réussie : ${currentMicroLabel}${
+            pointsForQuestion > 0
+              ? ` — +${pointsForQuestion} point${
+                  pointsForQuestion > 1 ? "s" : ""
+                }`
+              : ""
+          }`
+        );
 
         setPair(typed.pair);
         setMode(typed.mode);
@@ -682,6 +704,7 @@ export default function TutorV4Page() {
         setPendingNextRecommendedStar(null);
         setPendingNextVisibleProgress(null);
       } else {
+        closeSuccessBanner();
         setFeedback("Ce n’est pas la bonne réponse…");
         setLastSubmittedAnswer(finalAnswer);
 
@@ -717,13 +740,6 @@ export default function TutorV4Page() {
           setPendingNextRecommendedStar(null);
           setPendingNextVisibleProgress(null);
         }
-
-        setResultModal({
-          open: false,
-          ok: false,
-          title: "",
-          message: "",
-        });
       }
     } catch (error) {
       setFeedback(
@@ -866,6 +882,25 @@ export default function TutorV4Page() {
                 </div>
               </div>
             </section>
+
+            {successBanner.open ? (
+              <section className="rounded-2xl border border-emerald-200 bg-emerald-50 px-4 py-4 shadow-sm">
+                <div className="text-lg font-black text-emerald-800">
+                  {successBanner.title}
+                </div>
+                {successBanner.message ? (
+                  <div className="mt-1 text-sm font-medium text-emerald-700">
+                    {successBanner.message}
+                  </div>
+                ) : null}
+              </section>
+            ) : null}
+
+            {feedback && !wrongAnswerPanelOpen ? (
+              <section className="rounded-2xl border border-slate-200 bg-white/95 p-4 shadow-sm">
+                <div className="text-sm font-semibold text-slate-700">{feedback}</div>
+              </section>
+            ) : null}
 
             {pair && !currentQuestion ? (
               <section className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
@@ -1133,14 +1168,6 @@ export default function TutorV4Page() {
           </aside>
         </div>
       </div>
-
-      <ResultModal
-        open={resultModal.open}
-        ok={resultModal.ok}
-        title={resultModal.title}
-        message={resultModal.message}
-        onClose={closeResultModal}
-      />
     </main>
   );
 }
@@ -1226,7 +1253,7 @@ function ContinueButton({ onClick }: { onClick: () => void }) {
       onClick={onClick}
       className="rounded-md bg-lime-500 px-6 py-3 text-base font-bold text-white shadow hover:bg-lime-600"
     >
-      J&apos;ai compris
+      Question suivante
     </button>
   );
 }
@@ -1353,81 +1380,5 @@ function Tag({ children }: { children: ReactNode }) {
     <span className="rounded-full bg-slate-100 px-2 py-1 text-[11px] font-semibold text-slate-700">
       {children}
     </span>
-  );
-}
-
-function ResultModal({
-  open,
-  ok,
-  title,
-  message,
-  onClose,
-}: {
-  open: boolean;
-  ok: boolean;
-  title: string;
-  message?: string;
-  onClose: () => void;
-}) {
-  useEffect(() => {
-    if (!open) return;
-
-    const timeout = window.setTimeout(() => {
-      onClose();
-    }, 1000);
-
-    const onKeyDown = (e: globalThis.KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
-    };
-
-    window.addEventListener("keydown", onKeyDown);
-
-    return () => {
-      window.clearTimeout(timeout);
-      window.removeEventListener("keydown", onKeyDown);
-    };
-  }, [open, onClose]);
-
-  if (!open) return null;
-
-  return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/50 px-4">
-      <div
-        className={`w-full max-w-md rounded-[28px] border p-6 shadow-2xl ${
-          ok ? "border-emerald-200 bg-white" : "border-amber-200 bg-white"
-        }`}
-      >
-        <div className="mb-4 flex items-center gap-3">
-          <div
-            className={`flex h-14 w-14 items-center justify-center rounded-full text-2xl shadow-sm ${
-              ok
-                ? "bg-emerald-100 text-emerald-700"
-                : "bg-amber-100 text-amber-700"
-            }`}
-          >
-            {ok ? "🎉" : "😅"}
-          </div>
-
-          <div>
-            <div
-              className={`text-2xl font-black ${
-                ok ? "text-emerald-700" : "text-amber-700"
-              }`}
-            >
-              {title}
-            </div>
-            <div className="text-sm text-slate-500">
-              {ok ? "Ta réponse est correcte." : "Ce n’est pas grave, on continue."}
-            </div>
-          </div>
-        </div>
-
-        {message ? (
-          <div className="rounded-2xl bg-slate-50 px-4 py-3 text-sm text-slate-700">
-            {message}
-          </div>
-        ) : null}
-      </div>
-    </div>
   );
 }
