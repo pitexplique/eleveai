@@ -1,0 +1,635 @@
+// knowledge/maths/4e/microSkills.ts
+//
+// Micro-compétences de mathématiques pour la classe de 4e.
+// Ce fichier est aligné avec la structure 5e, mais avec un découpage
+// plus fin de l’algèbre afin de permettre un suivi plus précis.
+//
+// Choix retenu :
+// - une notion d’algèbre = un bloc pédagogique identifiable ;
+// - une micro-compétence = une action précise et entraînable ;
+// - présence d’une micro "defis" dans chaque notion lorsque pertinent.
+
+import type { MicroSkillSource } from "@/lib/tutor-v4/knowledge/buildKnowledge";
+
+export const microSkills: MicroSkillSource[] = [
+  /* =========================
+     NOMBRES RELATIFS
+  ========================= */
+  {
+    id: "relatif_lire",
+    label: "Lire et écrire un nombre relatif",
+    notionId: "nombres_relatifs",
+    prerequis: [],
+  },
+  {
+    id: "relatif_signe",
+    label: "Identifier le signe d’un nombre relatif",
+    notionId: "nombres_relatifs",
+    prerequis: ["relatif_lire"],
+  },
+  {
+    id: "relatif_comparer",
+    label: "Comparer des nombres relatifs",
+    notionId: "nombres_relatifs",
+    prerequis: ["relatif_lire", "relatif_signe"],
+  },
+  {
+    id: "relatif_placer",
+    label: "Placer des nombres relatifs sur une droite",
+    notionId: "nombres_relatifs",
+    prerequis: ["relatif_lire", "relatif_comparer"],
+  },
+  {
+    id: "relatif_opposes",
+    label: "Déterminer l’opposé d’un nombre relatif",
+    notionId: "nombres_relatifs",
+    prerequis: ["relatif_signe"],
+  },
+  {
+    id: "relatif_valeur_absolue",
+    label: "Déterminer la valeur absolue d’un nombre relatif",
+    notionId: "nombres_relatifs",
+    prerequis: ["relatif_opposes"],
+  },
+  {
+    id: "relatif_defis",
+    label: "Défis sur les nombres relatifs",
+    notionId: "nombres_relatifs",
+    prerequis: ["relatif_comparer", "relatif_valeur_absolue"],
+  },
+
+  /* =========================
+     OPÉRATIONS SUR LES RELATIFS
+  ========================= */
+  {
+    id: "relatif_addition",
+    label: "Additionner des nombres relatifs",
+    notionId: "operations_relatifs",
+    prerequis: ["relatif_lire", "relatif_signe"],
+  },
+  {
+    id: "relatif_soustraction",
+    label: "Soustraire des nombres relatifs",
+    notionId: "operations_relatifs",
+    prerequis: ["relatif_addition"],
+  },
+  {
+    id: "relatif_multiplication",
+    label: "Multiplier des nombres relatifs",
+    notionId: "operations_relatifs",
+    prerequis: ["relatif_addition"],
+  },
+  {
+    id: "relatif_division",
+    label: "Diviser des nombres relatifs",
+    notionId: "operations_relatifs",
+    prerequis: ["relatif_multiplication"],
+  },
+  {
+    id: "relatif_calcul",
+    label: "Effectuer des calculs avec des nombres relatifs",
+    notionId: "operations_relatifs",
+    prerequis: [
+      "relatif_addition",
+      "relatif_soustraction",
+      "relatif_multiplication",
+      "relatif_division",
+    ],
+  },
+  {
+    id: "relatif_probleme",
+    label: "Résoudre un problème avec des nombres relatifs",
+    notionId: "operations_relatifs",
+    prerequis: ["relatif_calcul"],
+  },
+  {
+    id: "relatif_defis_ops",
+    label: "Défis sur les opérations avec les relatifs",
+    notionId: "operations_relatifs",
+    prerequis: ["relatif_probleme"],
+  },
+
+  /* =========================
+     FRACTIONS
+  ========================= */
+  {
+    id: "fraction_egales",
+    label: "Reconnaître des fractions égales",
+    notionId: "fractions",
+    prerequis: [],
+  },
+  {
+    id: "fraction_simplifier",
+    label: "Simplifier une fraction",
+    notionId: "fractions",
+    prerequis: ["fraction_egales"],
+  },
+  {
+    id: "fraction_rationnel",
+    label: "Reconnaître un nombre rationnel et ses écritures",
+    notionId: "fractions",
+    prerequis: ["fraction_egales"],
+  },
+  {
+    id: "fraction_comparer",
+    label: "Comparer des fractions",
+    notionId: "fractions",
+    prerequis: ["fraction_simplifier"],
+  },
+  {
+    id: "fraction_addition",
+    label: "Additionner ou soustraire des fractions",
+    notionId: "fractions",
+    prerequis: ["fraction_comparer"],
+  },
+  {
+    id: "fraction_produit",
+    label: "Multiplier des fractions",
+    notionId: "fractions",
+    prerequis: ["fraction_simplifier"],
+  },
+  {
+    id: "fraction_inverse",
+    label: "Déterminer l’inverse d’un nombre rationnel ou d’une fraction",
+    notionId: "fractions",
+    prerequis: ["fraction_rationnel", "fraction_produit"],
+  },
+  {
+    id: "fraction_division",
+    label: "Diviser des fractions",
+    notionId: "fractions",
+    prerequis: ["fraction_inverse", "fraction_produit"],
+  },
+  {
+    id: "fraction_quantite",
+    label: "Calculer la fraction d’un nombre ou d’une quantité",
+    notionId: "fractions",
+    prerequis: ["fraction_comparer", "fraction_produit"],
+  },
+  {
+    id: "fraction_oppose",
+    label: "Exprimer l’opposé d’un nombre rationnel",
+    notionId: "fractions",
+    prerequis: ["fraction_rationnel"],
+  },
+  {
+    id: "fraction_defis",
+    label: "Défis sur les fractions et les nombres rationnels",
+    notionId: "fractions",
+    prerequis: [
+      "fraction_addition",
+      "fraction_division",
+      "fraction_quantite",
+      "fraction_oppose",
+    ],
+  },
+
+  /* =========================
+     PROPORTIONNALITÉ
+  ========================= */
+  {
+    id: "prop_reconnaitre",
+    label: "Reconnaître une situation de proportionnalité ou de non-proportionnalité",
+    notionId: "proportionnalite",
+    prerequis: [],
+  },
+  {
+    id: "prop_table",
+    label: "Compléter et utiliser un tableau de proportionnalité",
+    notionId: "proportionnalite",
+    prerequis: ["prop_reconnaitre"],
+  },
+  {
+    id: "prop_quatrieme",
+    label: "Calculer une quatrième proportionnelle",
+    notionId: "proportionnalite",
+    prerequis: ["prop_table"],
+  },
+  {
+    id: "prop_coeff",
+    label: "Utiliser un coefficient de proportionnalité ou un passage à l’unité",
+    notionId: "proportionnalite",
+    prerequis: ["prop_table"],
+  },
+  {
+    id: "prop_pourcentage",
+    label: "Calculer et interpréter un pourcentage",
+    notionId: "proportionnalite",
+    prerequis: ["prop_coeff"],
+  },
+  {
+    id: "prop_coeff_mult",
+    label: "Utiliser un coefficient multiplicateur",
+    notionId: "proportionnalite",
+    prerequis: ["prop_pourcentage"],
+  },
+  {
+    id: "prop_evolution",
+    label: "Interpréter une évolution en pourcentage",
+    notionId: "proportionnalite",
+    prerequis: ["prop_pourcentage", "prop_coeff_mult"],
+  },
+  {
+    id: "prop_probleme",
+    label: "Résoudre un problème de proportionnalité",
+    notionId: "proportionnalite",
+    prerequis: ["prop_quatrieme", "prop_coeff", "prop_pourcentage"],
+  },
+  {
+    id: "prop_defis",
+    label: "Défis sur la proportionnalité et les pourcentages",
+    notionId: "proportionnalite",
+    prerequis: ["prop_evolution", "prop_probleme"],
+  },
+
+  /* =========================
+     EXPRESSIONS LITTÉRALES
+  ========================= */
+  {
+    id: "expr_litterale_comprendre",
+    label: "Comprendre une expression littérale",
+    notionId: "expressions_litterales",
+    prerequis: [],
+  },
+  {
+    id: "expr_litterale_traduire",
+    label: "Traduire une phrase ou une situation en expression littérale",
+    notionId: "expressions_litterales",
+    prerequis: ["expr_litterale_comprendre"],
+  },
+  {
+    id: "expr_litterale_substituer",
+    label: "Calculer la valeur d’une expression littérale pour une valeur donnée",
+    notionId: "expressions_litterales",
+    prerequis: ["expr_litterale_comprendre"],
+  },
+  {
+    id: "expr_litterale_reduire",
+    label: "Réduire une expression littérale",
+    notionId: "expressions_litterales",
+    prerequis: ["expr_litterale_comprendre"],
+  },
+  {
+    id: "expr_litterale_defis",
+    label: "Défis sur les expressions littérales",
+    notionId: "expressions_litterales",
+    prerequis: [
+      "expr_litterale_traduire",
+      "expr_litterale_substituer",
+      "expr_litterale_reduire",
+    ],
+  },
+
+  /* =========================
+     DISTRIBUTIVITÉ
+  ========================= */
+  {
+    id: "distrib_simple",
+    label: "Développer avec la distributivité simple",
+    notionId: "distributivite",
+    prerequis: ["expr_litterale_reduire"],
+  },
+  {
+    id: "distrib_double",
+    label: "Développer avec la double distributivité",
+    notionId: "distributivite",
+    prerequis: ["distrib_simple"],
+  },
+  {
+    id: "distrib_reduire",
+    label: "Réduire une expression après développement",
+    notionId: "distributivite",
+    prerequis: ["distrib_double"],
+  },
+  {
+    id: "distrib_reconnaitre",
+    label: "Reconnaître une forme à développer",
+    notionId: "distributivite",
+    prerequis: ["distrib_simple"],
+  },
+  {
+    id: "distrib_defis",
+    label: "Défis sur la distributivité",
+    notionId: "distributivite",
+    prerequis: ["distrib_reduire", "distrib_reconnaitre"],
+  },
+
+  /* =========================
+     IDENTITÉS REMARQUABLES
+  ========================= */
+  {
+    id: "ir_reconnaitre",
+    label: "Reconnaître une identité remarquable simple",
+    notionId: "identites_remarquables",
+    prerequis: ["distrib_double"],
+  },
+  {
+    id: "ir_developper",
+    label: "Développer une expression avec une identité remarquable",
+    notionId: "identites_remarquables",
+    prerequis: ["ir_reconnaitre"],
+  },
+  {
+    id: "ir_choisir",
+    label: "Choisir la bonne identité remarquable",
+    notionId: "identites_remarquables",
+    prerequis: ["ir_developper"],
+  },
+  {
+    id: "ir_lier_distributivite",
+    label: "Relier identité remarquable et distributivité",
+    notionId: "identites_remarquables",
+    prerequis: ["ir_developper", "distrib_double"],
+  },
+  {
+    id: "ir_defis",
+    label: "Défis sur les identités remarquables",
+    notionId: "identites_remarquables",
+    prerequis: ["ir_choisir", "ir_lier_distributivite"],
+  },
+
+  /* =========================
+     FACTORISATION
+  ========================= */
+  {
+    id: "facteur_commun",
+    label: "Repérer un facteur commun",
+    notionId: "factorisation",
+    prerequis: ["distrib_simple"],
+  },
+  {
+    id: "factoriser_simple",
+    label: "Factoriser une expression simple",
+    notionId: "factorisation",
+    prerequis: ["facteur_commun"],
+  },
+  {
+    id: "factoriser_ir",
+    label: "Factoriser avec une identité remarquable",
+    notionId: "factorisation",
+    prerequis: ["factoriser_simple", "ir_reconnaitre"],
+  },
+  {
+    id: "factoriser_verifier",
+    label: "Vérifier une factorisation par développement",
+    notionId: "factorisation",
+    prerequis: ["factoriser_simple", "distrib_simple"],
+  },
+  {
+    id: "factorisation_defis",
+    label: "Défis sur la factorisation",
+    notionId: "factorisation",
+    prerequis: ["factoriser_ir", "factoriser_verifier"],
+  },
+
+  /* =========================
+     ÉQUATIONS
+  ========================= */
+  {
+    id: "equation_reconnaitre",
+    label: "Reconnaître une équation",
+    notionId: "equations",
+    prerequis: [],
+  },
+  {
+    id: "equation_traduire",
+    label: "Traduire un problème par une équation",
+    notionId: "equations",
+    prerequis: ["equation_reconnaitre", "expr_litterale_traduire"],
+  },
+  {
+    id: "equation_resoudre_simple",
+    label: "Résoudre une équation simple",
+    notionId: "equations",
+    prerequis: ["equation_reconnaitre", "relatif_calcul"],
+  },
+  {
+    id: "equation_resoudre_reduction",
+    label: "Résoudre une équation nécessitant réduction",
+    notionId: "equations",
+    prerequis: ["equation_resoudre_simple", "expr_litterale_reduire"],
+  },
+  {
+    id: "equation_resoudre_distributivite",
+    label: "Résoudre une équation avec distributivité",
+    notionId: "equations",
+    prerequis: ["equation_resoudre_simple", "distrib_simple"],
+  },
+  {
+    id: "equation_verifier",
+    label: "Vérifier la solution d’une équation",
+    notionId: "equations",
+    prerequis: ["equation_resoudre_simple", "expr_litterale_substituer"],
+  },
+  {
+    id: "equation_probleme",
+    label: "Résoudre un problème à l’aide d’une équation",
+    notionId: "equations",
+    prerequis: [
+      "equation_traduire",
+      "equation_resoudre_reduction",
+      "equation_verifier",
+    ],
+  },
+  {
+    id: "equation_defis",
+    label: "Défis sur les équations",
+    notionId: "equations",
+    prerequis: ["equation_probleme", "equation_resoudre_distributivite"],
+  },
+
+  /* =========================
+     TRIANGLES
+  ========================= */
+  {
+    id: "triangle_reconnaitre",
+    label: "Reconnaître un triangle",
+    notionId: "triangles",
+    prerequis: [],
+  },
+  {
+    id: "triangle_nature",
+    label: "Reconnaître la nature d’un triangle",
+    notionId: "triangles",
+    prerequis: ["triangle_reconnaitre"],
+  },
+  {
+    id: "triangle_construire",
+    label: "Construire un triangle",
+    notionId: "triangles",
+    prerequis: ["triangle_reconnaitre"],
+  },
+  {
+    id: "triangle_egalite",
+    label: "Utiliser l’inégalité triangulaire",
+    notionId: "triangles",
+    prerequis: ["triangle_reconnaitre"],
+  },
+  {
+    id: "triangle_defis",
+    label: "Défis sur les triangles",
+    notionId: "triangles",
+    prerequis: ["triangle_nature", "triangle_construire", "triangle_egalite"],
+  },
+
+  /* =========================
+     PYTHAGORE
+  ========================= */
+  {
+    id: "pythagore_reconnaitre",
+    label: "Reconnaître une situation relevant du théorème de Pythagore",
+    notionId: "pythagore",
+    prerequis: ["triangle_nature"],
+  },
+  {
+    id: "pythagore_calculer",
+    label: "Calculer une longueur avec le théorème de Pythagore",
+    notionId: "pythagore",
+    prerequis: ["pythagore_reconnaitre"],
+  },
+  {
+    id: "pythagore_verifier",
+    label: "Vérifier si un triangle est rectangle",
+    notionId: "pythagore",
+    prerequis: ["pythagore_calculer"],
+  },
+  {
+    id: "pythagore_rediger",
+    label: "Rédiger une justification avec le théorème de Pythagore",
+    notionId: "pythagore",
+    prerequis: ["pythagore_calculer"],
+  },
+  {
+    id: "pythagore_defis",
+    label: "Défis sur le théorème de Pythagore",
+    notionId: "pythagore",
+    prerequis: ["pythagore_verifier", "pythagore_rediger"],
+  },
+
+  /* =========================
+     TRANSFORMATIONS
+  ========================= */
+  {
+    id: "transfo_symetrie_centrale",
+    label: "Utiliser la symétrie centrale",
+    notionId: "transformations",
+    prerequis: [],
+  },
+  {
+    id: "transfo_translation",
+    label: "Reconnaître et utiliser une translation",
+    notionId: "transformations",
+    prerequis: ["transfo_symetrie_centrale"],
+  },
+  {
+    id: "transfo_rotation",
+    label: "Reconnaître et utiliser une rotation",
+    notionId: "transformations",
+    prerequis: ["transfo_symetrie_centrale"],
+  },
+  {
+    id: "transfo_proprietes",
+    label: "Utiliser les propriétés des transformations",
+    notionId: "transformations",
+    prerequis: [
+      "transfo_symetrie_centrale",
+      "transfo_translation",
+      "transfo_rotation",
+    ],
+  },
+  {
+    id: "transfo_defis",
+    label: "Défis sur les transformations",
+    notionId: "transformations",
+    prerequis: ["transfo_proprietes"],
+  },
+
+  /* =========================
+     GRANDEURS ET MESURES
+  ========================= */
+  {
+    id: "grandeur_unites",
+    label: "Choisir et utiliser une unité adaptée",
+    notionId: "grandeurs",
+    prerequis: [],
+  },
+  {
+    id: "grandeur_convertir",
+    label: "Convertir des unités",
+    notionId: "grandeurs",
+    prerequis: ["grandeur_unites"],
+  },
+  {
+    id: "grandeur_vitesse",
+    label: "Calculer une vitesse moyenne",
+    notionId: "grandeurs",
+    prerequis: ["grandeur_convertir", "prop_coeff"],
+  },
+  {
+    id: "grandeur_probleme",
+    label: "Résoudre un problème de grandeurs et mesures",
+    notionId: "grandeurs",
+    prerequis: ["grandeur_vitesse"],
+  },
+  {
+    id: "grandeur_defis",
+    label: "Défis sur les grandeurs et mesures",
+    notionId: "grandeurs",
+    prerequis: ["grandeur_probleme"],
+  },
+
+  /* =========================
+     VOLUMES
+  ========================= */
+  {
+    id: "volume_comprendre",
+    label: "Comprendre ce qu’est un volume",
+    notionId: "volumes",
+    prerequis: [],
+  },
+  {
+    id: "volume_pave",
+    label: "Calculer le volume d’un pavé droit",
+    notionId: "volumes",
+    prerequis: ["volume_comprendre"],
+  },
+  {
+    id: "volume_prisme",
+    label: "Calculer le volume d’un prisme",
+    notionId: "volumes",
+    prerequis: ["volume_comprendre"],
+  },
+  {
+    id: "volume_unites",
+    label: "Utiliser les unités de volume",
+    notionId: "volumes",
+    prerequis: ["volume_comprendre"],
+  },
+  {
+    id: "volume_defis",
+    label: "Défis sur les volumes",
+    notionId: "volumes",
+    prerequis: ["volume_pave", "volume_prisme", "volume_unites"],
+  },
+
+  /* =========================
+     STATISTIQUES
+  ========================= */
+  {
+    id: "stat_lire_tableau",
+    label: "Lire un tableau statistique",
+    notionId: "statistiques",
+    prerequis: [],
+  },
+  {
+    id: "stat_lire_graphique",
+    label: "Lire un graphique statistique",
+    notionId: "statistiques",
+    prerequis: ["stat_lire_tableau"],
+  },
+  {
+    id: "stat_effectif_frequence",
+    label: "Calculer un effectif ou une fréquence",
+    notionId: "statistiques",
+    prerequis: ["stat_lire_tableau"],
+  }]

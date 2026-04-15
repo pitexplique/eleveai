@@ -1,0 +1,269 @@
+{
+  "id": "4e-maths",
+  "classe": "4e",
+  "matiere": "maths",
+
+  "bo_competences": [
+    { "boId": "BO4N1", "label": "Nombres relatifs et calculs" },
+    { "boId": "BO4N2", "label": "Fractions et nombres rationnels" },
+    { "boId": "BO4P1", "label": "Proportionnalité" },
+    { "boId": "BO4A1", "label": "Calcul littéral et algébrique" },
+    { "boId": "BO4G1", "label": "Géométrie plane" },
+    { "boId": "BO4G2", "label": "Géométrie dans l’espace" },
+    { "boId": "BO4M1", "label": "Grandeurs et mesures" },
+    { "boId": "BO4D1", "label": "Statistiques" },
+    { "boId": "BO4D2", "label": "Probabilités" }
+  ],
+
+  "notions": [
+    {
+      "id": "nombres_relatifs",
+      "label": "Nombres relatifs",
+      "boId": "BO4N1",
+      "prerequis": [],
+      "levels": [1, 2, 3],
+      "microTargets": [
+        "relatif_lire",
+        "relatif_signe",
+        "relatif_comparer",
+        "relatif_placer",
+        "relatif_opposes",
+        "relatif_valeur_absolue",
+        "relatif_defis"
+      ]
+    },
+    {
+      "id": "operations_relatifs",
+      "label": "Opérations sur les nombres relatifs",
+      "boId": "BO4N1",
+      "prerequis": ["nombres_relatifs"],
+      "levels": [1, 2, 3],
+      "microTargets": [
+        "relatif_addition",
+        "relatif_soustraction",
+        "relatif_multiplication",
+        "relatif_division",
+        "relatif_calcul",
+        "relatif_probleme",
+        "relatif_defis_ops"
+      ]
+    },
+    {
+      "id": "fractions",
+      "label": "Fractions et nombres rationnels",
+      "boId": "BO4N2",
+      "prerequis": ["operations_relatifs"],
+      "levels": [1, 2, 3],
+      "microTargets": [
+        "fraction_egales",
+        "fraction_simplifier",
+        "fraction_rationnel",
+        "fraction_comparer",
+        "fraction_addition",
+        "fraction_produit",
+        "fraction_inverse",
+        "fraction_division",
+        "fraction_quantite",
+        "fraction_oppose",
+        "fraction_defis"
+      ]
+    },
+    {
+      "id": "proportionnalite",
+      "label": "Proportionnalité",
+      "boId": "BO4P1",
+      "prerequis": ["fractions"],
+      "levels": [1, 2, 3],
+      "microTargets": [
+        "prop_reconnaitre",
+        "prop_table",
+        "prop_quatrieme",
+        "prop_coeff",
+        "prop_pourcentage",
+        "prop_coeff_mult",
+        "prop_evolution",
+        "prop_probleme",
+        "prop_defis"
+      ]
+    },
+
+
+    {
+      "id": "expressions_litterales",
+      "label": "Expressions littérales",
+      "boId": "BO4A1",
+      "prerequis": ["operations_relatifs"],
+      "levels": [1, 2, 3],
+      "microTargets": [
+        "expr_litterale_comprendre",
+        "expr_litterale_traduire",
+        "expr_litterale_substituer",
+        "expr_litterale_reduire",
+        "expr_litterale_defis"
+      ]
+    },
+    {
+      "id": "distributivite",
+      "label": "Distributivité",
+      "boId": "BO4A1",
+      "prerequis": ["expressions_litterales"],
+      "levels": [1, 2, 3],
+      "microTargets": [
+        "distrib_simple",
+        "distrib_double",
+        "distrib_reduire",
+        "distrib_reconnaitre",
+        "distrib_defis"
+      ]
+    },
+    {
+      "id": "identites_remarquables",
+      "label": "Identités remarquables",
+      "boId": "BO4A1",
+      "prerequis": ["distributivite"],
+      "levels": [1, 2, 3],
+      "microTargets": [
+        "ir_reconnaitre",
+        "ir_developper",
+        "ir_choisir",
+        "ir_lier_distributivite",
+        "ir_defis"
+      ]
+    },
+    {
+      "id": "factorisation",
+      "label": "Factorisation",
+      "boId": "BO4A1",
+      "prerequis": ["distributivite", "identites_remarquables"],
+      "levels": [1, 2, 3],
+      "microTargets": [
+        "facteur_commun",
+        "factoriser_simple",
+        "factoriser_ir",
+        "factoriser_verifier",
+        "factorisation_defis"
+      ]
+    },
+    {
+      "id": "equations",
+      "label": "Équations",
+      "boId": "BO4A1",
+      "prerequis": ["expressions_litterales", "distributivite"],
+      "levels": [1, 2, 3],
+      "microTargets": [
+        "equation_reconnaitre",
+        "equation_traduire",
+        "equation_resoudre_simple",
+        "equation_resoudre_reduction",
+        "equation_resoudre_distributivite",
+        "equation_verifier",
+        "equation_probleme",
+        "equation_defis"
+      ]
+    },
+
+
+    {
+      "id": "triangles",
+      "label": "Triangles",
+      "boId": "BO4G1",
+      "prerequis": [],
+      "levels": [1, 2, 3],
+      "microTargets": [
+        "triangle_reconnaitre",
+        "triangle_nature",
+        "triangle_construire",
+        "triangle_egalite",
+        "triangle_defis"
+      ]
+    },
+    {
+      "id": "pythagore",
+      "label": "Théorème de Pythagore",
+      "boId": "BO4G1",
+      "prerequis": ["triangles"],
+      "levels": [1, 2, 3],
+      "microTargets": [
+        "pythagore_reconnaitre",
+        "pythagore_calculer",
+        "pythagore_verifier",
+        "pythagore_rediger",
+        "pythagore_defis"
+      ]
+    },
+    {
+      "id": "transformations",
+      "label": "Transformations",
+      "boId": "BO4G1",
+      "prerequis": ["triangles"],
+      "levels": [1, 2],
+      "microTargets": [
+        "transfo_symetrie_centrale",
+        "transfo_translation",
+        "transfo_rotation",
+        "transfo_proprietes",
+        "transfo_defis"
+      ]
+    },
+
+
+    {
+      "id": "grandeurs",
+      "label": "Grandeurs et mesures",
+      "boId": "BO4M1",
+      "prerequis": [],
+      "levels": [1, 2],
+      "microTargets": [
+        "grandeur_unites",
+        "grandeur_convertir",
+        "grandeur_vitesse",
+        "grandeur_probleme",
+        "grandeur_defis"
+      ]
+    },
+    {
+      "id": "volumes",
+      "label": "Volumes",
+      "boId": "BO4G2",
+      "prerequis": ["grandeurs"],
+      "levels": [1, 2],
+      "microTargets": [
+        "volume_comprendre",
+        "volume_pave",
+        "volume_prisme",
+        "volume_unites",
+        "volume_defis"
+      ]
+    },
+    {
+      "id": "statistiques",
+      "label": "Statistiques",
+      "boId": "BO4D1",
+      "prerequis": [],
+      "levels": [1, 2],
+      "microTargets": [
+        "stat_lire_tableau",
+        "stat_lire_graphique",
+        "stat_effectif_frequence",
+        "stat_moyenne",
+        "stat_mediane",
+        "stat_defis"
+      ]
+    },
+    {
+      "id": "probabilites",
+      "label": "Probabilités",
+      "boId": "BO4D2",
+      "prerequis": ["statistiques"],
+      "levels": [1, 2],
+      "microTargets": [
+        "proba_vocabulaire",
+        "proba_issues",
+        "proba_equiprobabilite",
+        "proba_calculer",
+        "proba_comparer",
+        "proba_defis"
+      ]
+    }
+  ]
+}
