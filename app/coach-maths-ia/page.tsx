@@ -10,7 +10,7 @@ import {
   type Classe,
 } from "@/lib/tutor-v4/catalog";
 
-const CLASSES: Classe[] = ["6e", "5e"];
+const CLASSES: Classe[] = ["6e", "5e", "4e"];
 
 type Domaine = {
   id: string;
@@ -44,6 +44,37 @@ function buildDomaines(classe: Classe): Domaine[] {
     ];
   }
 
+  if (classe === "5e") {
+    return [
+      {
+        id: "nombres-calculs",
+        label: "Nombres et calculs",
+        notions: [
+          "nombres_relatifs",
+          "operations_relatifs",
+          "fractions",
+          "proportionnalite",
+          "calcul_litteral",
+        ],
+      },
+      {
+        id: "geometrie-plane",
+        label: "Géométrie plane",
+        notions: ["angles", "triangles", "symetrie_centrale"],
+      },
+      {
+        id: "grandeurs-mesures",
+        label: "Grandeurs et mesures",
+        notions: ["aires", "volumes"],
+      },
+      {
+        id: "donnees",
+        label: "Données",
+        notions: ["statistiques", "probabilites"],
+      },
+    ];
+  }
+
   return [
     {
       id: "nombres-calculs",
@@ -53,18 +84,28 @@ function buildDomaines(classe: Classe): Domaine[] {
         "operations_relatifs",
         "fractions",
         "proportionnalite",
-        "calcul_litteral",
+      ],
+    },
+    {
+      id: "algebre",
+      label: "Algèbre",
+      notions: [
+        "expressions_litterales",
+        "distributivite",
+        "identites_remarquables",
+        "factorisation",
+        "equations",
       ],
     },
     {
       id: "geometrie-plane",
       label: "Géométrie plane",
-      notions: ["angles", "triangles", "symetrie_centrale"],
+      notions: ["triangles", "pythagore", "transformations"],
     },
     {
       id: "grandeurs-mesures",
       label: "Grandeurs et mesures",
-      notions: ["aires", "volumes"],
+      notions: ["grandeurs", "volumes"],
     },
     {
       id: "donnees",
@@ -75,13 +116,21 @@ function buildDomaines(classe: Classe): Domaine[] {
 }
 
 function getClasseTitle(classe: Classe) {
-  return classe === "6e" ? "Réussir ma 6 ème" : "Réussir ma 5 ème";
+  if (classe === "6e") return "Réussir ma 6 ème";
+  if (classe === "5e") return "Réussir ma 5 ème";
+  return "Réussir ma 4 ème";
 }
 
 function getClasseSubtitle(classe: Classe) {
-  return classe === "6e"
-    ? "Voici les compétences essentielles en mathématiques de Sixième, organisées pour travailler pas à pas."
-    : "Voici les compétences essentielles en mathématiques de Cinquième, organisées pour progresser avec méthode.";
+  if (classe === "6e") {
+    return "Voici les compétences essentielles en mathématiques de Sixième, organisées pour travailler pas à pas.";
+  }
+
+  if (classe === "5e") {
+    return "Voici les compétences essentielles en mathématiques de Cinquième, organisées pour progresser avec méthode.";
+  }
+
+  return "Voici les compétences essentielles en mathématiques de Quatrième, avec un accent particulier sur l’algèbre et le raisonnement.";
 }
 
 function getMicroButtonStyle(microId: string) {

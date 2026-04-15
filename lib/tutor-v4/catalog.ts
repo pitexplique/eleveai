@@ -1,11 +1,12 @@
 import { buildKnowledge6eMaths } from "@/lib/tutor-v4/knowledge/maths/6e/buildKnowledge6e";
 import { buildKnowledge5eMaths } from "@/lib/tutor-v4/knowledge/maths/5e/buildKnowledge5e";
+import { buildKnowledge4eMaths } from "@/lib/tutor-v4/knowledge/maths/4e/buildKnowledge4e";
 
 // =========================
 // TYPES
 // =========================
 
-export type Classe = "6e" | "5e";
+export type Classe = "6e" | "5e" | "4e";
 
 // =========================
 // KNOWLEDGE PAR CLASSE
@@ -17,6 +18,8 @@ function getKnowledge(classe: Classe) {
       return buildKnowledge6eMaths();
     case "5e":
       return buildKnowledge5eMaths();
+    case "4e":
+      return buildKnowledge4eMaths();
     default:
       return buildKnowledge6eMaths();
   }

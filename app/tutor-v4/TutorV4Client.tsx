@@ -174,7 +174,10 @@ function renderCanvas(canvas?: CanvasFigure | null) {
 }
 
 function normalizeClasse(value: string | null): Classe {
-  return value === "5e" ? "5e" : "6e";
+  if (value === "6e" || value === "5e" || value === "4e") {
+    return value;
+  }
+  return "6e";
 }
 
 export default function TutorV4Page() {
