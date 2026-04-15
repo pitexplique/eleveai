@@ -46,36 +46,43 @@
         "relatif_defis_ops"
       ]
     },
-    {
-      "id": "fractions",
-      "label": "Fractions et nombres rationnels",
-      "boId": "BO5N2",
-      "prerequis": [],
-      "levels": [1, 2, 3],
-      "microTargets": [
-        "fraction_egales",
-        "fraction_simplifier",
-        "fraction_comparer",
-        "fraction_addition",
-        "fraction_multiplier",
-        "fraction_defis"
-      ]
-    },
-    {
-      "id": "proportionnalite",
-      "label": "Proportionnalité",
-      "boId": "BO5P1",
-      "prerequis": ["fractions"],
-      "levels": [1, 2, 3],
-      "microTargets": [
-        "prop_reconnaitre",
-        "prop_table",
-        "prop_coeff",
-        "prop_pourcentage",
-        "prop_probleme",
-        "prop_defis"
-      ]
-    },
+{
+  "id": "fractions",
+  "label": "Fractions et nombres rationnels",
+  "boId": "BO5N2",
+  "prerequis": [],
+  "levels": [1, 2, 3],
+  "microTargets": [
+    "fraction_egales",
+    "fraction_simplifier",
+    "fraction_rationnel",
+    "fraction_comparer",
+    "fraction_produit",
+    "fraction_quantite",
+    "fraction_inverse",
+    "fraction_division",
+    "fraction_oppose",
+    "fraction_defis"
+  ]
+},
+{
+  "id": "proportionnalite",
+  "label": "Proportionnalité",
+  "boId": "BO5P1",
+  "prerequis": ["fractions"],
+  "levels": [1, 2, 3],
+  "microTargets": [
+    "prop_reconnaitre",
+    "prop_table",
+    "prop_quatrieme",
+    "prop_coeff",
+    "prop_ratio",
+    "prop_pourcentage",
+    "prop_coeff_mult",
+    "prop_probleme",
+    "prop_defis"
+  ]
+},
     {
       "id": "calcul_litteral",
       "label": "Calcul littéral",

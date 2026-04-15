@@ -39,24 +39,28 @@ const supportLinks: Record<string, string[]> = {
   relatif_defis_ops: ["relatif_soustraction"],
 
   // =========================
-  // FRACTIONS
+  // FRACTIONS ET NOMBRES RATIONNELS
   // =========================
-  fraction_comparer: ["relatif_comparer"],
-  fraction_addition: ["fraction_simplifier"],
-  fraction_multiplier: ["fraction_comparer"],
-  fraction_defis: ["fraction_addition"],
+  fraction_rationnel: ["relatif_lire", "relatif_signe"],
+  fraction_comparer: ["relatif_comparer", "fraction_rationnel"],
+  fraction_produit: ["fraction_comparer"],
+  fraction_quantite: ["fraction_comparer", "fraction_produit"],
+  fraction_inverse: ["fraction_simplifier", "fraction_rationnel"],
+  fraction_division: ["fraction_inverse", "fraction_produit"],
+  fraction_oppose: ["relatif_opposes", "fraction_rationnel"],
+  fraction_defis: ["fraction_quantite", "fraction_division", "fraction_oppose"],
 
-// =========================
-// PROPORTIONNALITÉ
-// =========================
-prop_table: ["fraction_comparer"],
-prop_quatrieme: ["prop_coeff", "fraction_comparer"],
-prop_coeff: ["fraction_comparer"],
-prop_ratio: ["fraction_comparer", "prop_reconnaitre"],
-prop_pourcentage: ["prop_table", "fraction_comparer"],
-prop_coeff_mult: ["prop_pourcentage", "prop_coeff"],
-prop_probleme: ["prop_quatrieme", "fraction_addition", "relatif_calcul"],
-prop_defis: ["prop_ratio", "prop_coeff_mult", "prop_pourcentage"],
+  // =========================
+  // PROPORTIONNALITÉ
+  // =========================
+  prop_table: ["fraction_comparer"],
+  prop_quatrieme: ["prop_coeff", "fraction_comparer"],
+  prop_coeff: ["fraction_comparer"],
+  prop_ratio: ["fraction_comparer", "prop_reconnaitre"],
+  prop_pourcentage: ["prop_table", "fraction_comparer"],
+  prop_coeff_mult: ["prop_pourcentage", "prop_coeff"],
+  prop_probleme: ["prop_quatrieme", "fraction_quantite", "relatif_calcul"],
+  prop_defis: ["prop_ratio", "prop_coeff_mult", "prop_pourcentage"],
 
   // =========================
   // CALCUL LITTÉRAL

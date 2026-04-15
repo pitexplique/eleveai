@@ -82,7 +82,7 @@ export const microSkills: MicroSkillSource[] = [
   },
 
   /* =========================
-     FRACTIONS
+     FRACTIONS ET NOMBRES RATIONNELS
   ========================= */
   {
     id: "fraction_egales",
@@ -97,87 +97,111 @@ export const microSkills: MicroSkillSource[] = [
     prerequis: ["fraction_egales"],
   },
   {
+    id: "fraction_rationnel",
+    label: "Reconnaître un nombre rationnel et ses écritures",
+    notionId: "fractions",
+    prerequis: ["fraction_egales"],
+  },
+  {
     id: "fraction_comparer",
     label: "Comparer des fractions",
     notionId: "fractions",
     prerequis: ["fraction_simplifier"],
   },
   {
-    id: "fraction_addition",
-    label: "Additionner ou soustraire des fractions",
-    notionId: "fractions",
-    prerequis: ["fraction_comparer"],
-  },
-  {
-    id: "fraction_multiplier",
+    id: "fraction_produit",
     label: "Multiplier des fractions",
     notionId: "fractions",
     prerequis: ["fraction_simplifier"],
   },
   {
-    id: "fraction_defis",
-    label: "Défis sur les fractions",
+    id: "fraction_quantite",
+    label: "Calculer la fraction d’un nombre, d’une quantité ou d’une fraction",
     notionId: "fractions",
-    prerequis: ["fraction_addition", "fraction_multiplier"],
+    prerequis: ["fraction_comparer", "fraction_produit"],
+  },
+  {
+    id: "fraction_inverse",
+    label: "Déterminer l’inverse d’un nombre rationnel ou d’une fraction",
+    notionId: "fractions",
+    prerequis: ["fraction_rationnel", "fraction_produit"],
+  },
+  {
+    id: "fraction_division",
+    label: "Diviser des fractions",
+    notionId: "fractions",
+    prerequis: ["fraction_inverse", "fraction_produit"],
+  },
+  {
+    id: "fraction_oppose",
+    label: "Exprimer l’opposé d’un nombre rationnel",
+    notionId: "fractions",
+    prerequis: ["fraction_rationnel"],
+  },
+  {
+    id: "fraction_defis",
+    label: "Défis sur les fractions et les nombres rationnels",
+    notionId: "fractions",
+    prerequis: ["fraction_quantite", "fraction_division", "fraction_oppose"],
   },
 
-/* =========================
-   PROPORTIONNALITÉ
-========================= */
-{
-  id: "prop_reconnaitre",
-  label: "Reconnaître une situation de proportionnalité ou de non-proportionnalité",
-  notionId: "proportionnalite",
-  prerequis: [],
-},
-{
-  id: "prop_table",
-  label: "Compléter et utiliser un tableau de proportionnalité",
-  notionId: "proportionnalite",
-  prerequis: ["prop_reconnaitre"],
-},
-{
-  id: "prop_quatrieme",
-  label: "Calculer une quatrième proportionnelle",
-  notionId: "proportionnalite",
-  prerequis: ["prop_table"],
-},
-{
-  id: "prop_coeff",
-  label: "Utiliser un coefficient de proportionnalité ou un passage à l’unité",
-  notionId: "proportionnalite",
-  prerequis: ["prop_table"],
-},
-{
-  id: "prop_ratio",
-  label: "Exprimer et utiliser un ratio simple",
-  notionId: "proportionnalite",
-  prerequis: ["prop_reconnaitre"],
-},
-{
-  id: "prop_pourcentage",
-  label: "Calculer et interpréter un pourcentage simple",
-  notionId: "proportionnalite",
-  prerequis: ["prop_coeff"],
-},
-{
-  id: "prop_coeff_mult",
-  label: "Utiliser un coefficient multiplicateur simple",
-  notionId: "proportionnalite",
-  prerequis: ["prop_pourcentage"],
-},
-{
-  id: "prop_probleme",
-  label: "Résoudre un problème de proportionnalité",
-  notionId: "proportionnalite",
-  prerequis: ["prop_quatrieme", "prop_coeff", "prop_pourcentage"],
-},
-{
-  id: "prop_defis",
-  label: "Défis sur la proportionnalité, les ratios et les pourcentages",
-  notionId: "proportionnalite",
-  prerequis: ["prop_ratio", "prop_probleme", "prop_coeff_mult"],
-},
+  /* =========================
+     PROPORTIONNALITÉ
+  ========================= */
+  {
+    id: "prop_reconnaitre",
+    label: "Reconnaître une situation de proportionnalité ou de non-proportionnalité",
+    notionId: "proportionnalite",
+    prerequis: [],
+  },
+  {
+    id: "prop_table",
+    label: "Compléter et utiliser un tableau de proportionnalité",
+    notionId: "proportionnalite",
+    prerequis: ["prop_reconnaitre"],
+  },
+  {
+    id: "prop_quatrieme",
+    label: "Calculer une quatrième proportionnelle",
+    notionId: "proportionnalite",
+    prerequis: ["prop_table"],
+  },
+  {
+    id: "prop_coeff",
+    label: "Utiliser un coefficient de proportionnalité ou un passage à l’unité",
+    notionId: "proportionnalite",
+    prerequis: ["prop_table"],
+  },
+  {
+    id: "prop_ratio",
+    label: "Exprimer et utiliser un ratio simple",
+    notionId: "proportionnalite",
+    prerequis: ["prop_reconnaitre"],
+  },
+  {
+    id: "prop_pourcentage",
+    label: "Calculer et interpréter un pourcentage simple",
+    notionId: "proportionnalite",
+    prerequis: ["prop_coeff"],
+  },
+  {
+    id: "prop_coeff_mult",
+    label: "Utiliser un coefficient multiplicateur simple",
+    notionId: "proportionnalite",
+    prerequis: ["prop_pourcentage"],
+  },
+  {
+    id: "prop_probleme",
+    label: "Résoudre un problème de proportionnalité",
+    notionId: "proportionnalite",
+    prerequis: ["prop_quatrieme", "prop_coeff", "prop_pourcentage"],
+  },
+  {
+    id: "prop_defis",
+    label: "Défis sur la proportionnalité, les ratios et les pourcentages",
+    notionId: "proportionnalite",
+    prerequis: ["prop_ratio", "prop_probleme", "prop_coeff_mult"],
+  },
 
   /* =========================
      CALCUL LITTÉRAL

@@ -22,7 +22,7 @@ export const notions: NotionSource[] = [
     id: "fractions",
     label: "Fractions et nombres rationnels",
     boId: "BO5N2",
-    prerequis: [],
+    prerequis: ["nombres_relatifs"], // 🔥 important pédagogiquement
     levels: [1, 2, 3],
   },
 
@@ -33,7 +33,7 @@ export const notions: NotionSource[] = [
     id: "proportionnalite",
     label: "Proportionnalité",
     boId: "BO5P1",
-    prerequis: ["fractions"],
+    prerequis: ["fractions"], // cohérent avec ton choix
     levels: [1, 2, 3],
   },
 
@@ -44,7 +44,7 @@ export const notions: NotionSource[] = [
     id: "calcul_litteral",
     label: "Calcul littéral",
     boId: "BO5A1",
-    prerequis: [],
+    prerequis: ["operations_relatifs"], // 🔥 logique cycle 4
     levels: [1, 2, 3],
   },
 
@@ -80,7 +80,7 @@ export const notions: NotionSource[] = [
     id: "aires",
     label: "Aires",
     boId: "BO5M1",
-    prerequis: [],
+    prerequis: ["triangles"], // 🔥 important pour aire triangle
     levels: [1, 2],
   },
 
@@ -109,7 +109,7 @@ export const notions: NotionSource[] = [
     id: "probabilites",
     label: "Probabilités",
     boId: "BO5D2",
-    prerequis: [],
+    prerequis: ["statistiques"], // 🔥 très cohérent
     levels: [1, 2],
   },
 ];
