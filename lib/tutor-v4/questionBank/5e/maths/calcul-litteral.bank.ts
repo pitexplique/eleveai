@@ -1,3 +1,4 @@
+//calcul-litteral.bank.ts
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 
 function shuffle<T>(arr: T[]): T[] {
@@ -584,6 +585,60 @@ export const calculLitteralBank: TutorBankItemV4[] = [
   },
   {
     kind: "fixed",
+    id: "litteral_defis_fixed_4",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "calcul_litteral",
+    microId: "litteral_defis",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Explique pourquoi 3x + 2 ne peut pas se réduire en 5x.",
+    format: "short",
+    expected: ["pas", "semblables", "3x+2", "lettre", "constant"],
+    comparator: "contains_keyword",
+    hint: "3x contient une lettre, mais 2 n’en contient pas.",
+    explanation:
+      "3x et 2 ne sont pas des termes semblables. 3x dépend de x alors que 2 est un terme constant. On ne peut donc pas écrire 3x + 2 = 5x.",
+    tags: ["calcul_litteral", "defi", "piege", "raisonnement"],
+  },
+  {
+    kind: "fixed",
+    id: "litteral_defis_fixed_5",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "calcul_litteral",
+    microId: "litteral_defis",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Un rectangle a pour longueur x + 3 et pour largeur 2. Écris l’expression de son périmètre puis calcule-la pour x = 5.",
+    format: "short",
+    expected: ["20"],
+    comparator: "number_equal",
+    hint: "Le périmètre d’un rectangle est 2 × longueur + 2 × largeur.",
+    explanation:
+      "Le périmètre vaut 2(x + 3) + 2×2. Pour x = 5, on obtient 2×8 + 4 = 16 + 4 = 20.",
+    tags: ["calcul_litteral", "defi", "probleme", "geometrie"],
+  },
+  {
+    kind: "fixed",
+    id: "litteral_defis_fixed_6",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "calcul_litteral",
+    microId: "litteral_defis",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Calcule pour x = -2 : 3x + x + 5",
+    format: "short",
+    expected: ["-3"],
+    comparator: "number_equal",
+    hint: "Réduis d’abord 3x + x.",
+    explanation:
+      "3x + x + 5 = 4x + 5. Pour x = -2, on obtient 4×(-2) + 5 = -8 + 5 = -3.",
+    tags: ["calcul_litteral", "defi", "relatifs", "substituer", "reduire"],
+  },
+  {
+    kind: "fixed",
     id: "litteral_defis_qcm_1",
     niveau: "5e",
     matiere: "maths",
@@ -600,6 +655,44 @@ export const calculLitteralBank: TutorBankItemV4[] = [
     explanation:
       "Le double de x est 2x, puis augmenté de 7 donne 2x + 7.",
     tags: ["calcul_litteral", "defi", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "litteral_defis_qcm_2",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "calcul_litteral",
+    microId: "litteral_defis",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Quelle réduction est correcte ?",
+    format: "qcm",
+    choices: ["3x + 2 = 5x", "4x + x = 5x", "2x + 3x = 6x", "x + 5 = 6x"],
+    expected: ["4x + x = 5x"],
+    comparator: "mcq_exact",
+    hint: "Seuls les termes semblables peuvent se réduire.",
+    explanation:
+      "4x + x = 4x + 1x = 5x. Les autres propositions confondent termes en x et termes constants, ou additionnent mal les coefficients.",
+    tags: ["calcul_litteral", "defi", "qcm", "piege"],
+  },
+  {
+    kind: "fixed",
+    id: "litteral_defis_qcm_3",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "calcul_litteral",
+    microId: "litteral_defis",
+    difficulty: 5,
+    theme: "neutral",
+    text: "On sait que x = 4. Quelle est la valeur de 2x + x + 3 ?",
+    format: "qcm",
+    choices: ["11", "12", "15", "18"],
+    expected: ["15"],
+    comparator: "mcq_exact",
+    hint: "Réduis d’abord 2x + x.",
+    explanation:
+      "2x + x + 3 = 3x + 3. Pour x = 4, cela donne 3×4 + 3 = 12 + 3 = 15.",
+    tags: ["calcul_litteral", "defi", "qcm", "substituer"],
   },
   {
     kind: "template",
@@ -626,6 +719,55 @@ export const calculLitteralBank: TutorBankItemV4[] = [
         expected: [String(result)],
         comparator: "number_equal",
         explanation: `${a}x + ${b}x + ${c} = ${coef}x + ${c}. Pour x = ${x}, on obtient ${coef} × ${x} + ${c} = ${result}.`,
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "litteral_defis_tpl_2",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "calcul_litteral",
+    microId: "litteral_defis",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Fais attention : on ne peut réduire que les termes semblables.",
+    tags: ["calcul_litteral", "defi", "template", "piege"],
+    generate: () => {
+      const a = randomChoice([2, 3, 4, 5]);
+      const b = randomChoice([1, 2, 3, 4, 5]);
+      const good = `${a}x+${b}`;
+      return {
+        text: `Peut-on réduire l’expression ${a}x + ${b} ? Réponds par oui ou non.`,
+        format: "short",
+        expected: ["non"],
+        comparator: "contains_keyword",
+        explanation: `${a}x et ${b} ne sont pas des termes semblables. L’expression ${good.replace("+", " + ")} ne se réduit pas.`,
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "litteral_defis_tpl_3",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "calcul_litteral",
+    microId: "litteral_defis",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Traduis d’abord la phrase, puis calcule.",
+    tags: ["calcul_litteral", "defi", "template", "traduire", "substituer"],
+    generate: () => {
+      const add = randomChoice([3, 4, 5, 6, 7]);
+      const x = randomChoice([2, 3, 4, 5, 6]);
+      const result = 2 * x + add;
+
+      return {
+        text: `Le double d’un nombre x augmenté de ${add}. Calcule cette expression pour x = ${x}.`,
+        format: "short",
+        expected: [String(result)],
+        comparator: "number_equal",
+        explanation: `L’expression est 2x + ${add}. Pour x = ${x}, on obtient 2×${x} + ${add} = ${result}.`,
       };
     },
   },
