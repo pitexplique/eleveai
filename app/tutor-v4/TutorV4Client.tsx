@@ -12,6 +12,7 @@ import { useSearchParams } from "next/navigation";
 import TriangleCanvas from "@/lib/tutor-v4/components/TriangleCanvas";
 import QuadrilatereCanvas from "@/lib/tutor-v4/components/QuadrilatereCanvas";
 import FigureLibreCanvas from "@/lib/tutor-v4/components/FigureLibreCanvas";
+import DroiteGradueeCanvas from "@/lib/tutor-v4/components/DroiteGradueeCanvas";
 
 import {
   getNotionMicroMap,
@@ -168,6 +169,10 @@ function renderCanvas(canvas?: CanvasFigure | null) {
 
   if (canvas.kind === "figure_libre") {
     return <FigureLibreCanvas figure={canvas} />;
+  }
+
+  if (canvas.kind === "number_line") {
+    return <DroiteGradueeCanvas figure={canvas} />;
   }
 
   return null;

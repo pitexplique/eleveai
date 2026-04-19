@@ -87,7 +87,6 @@
       ]
     },
 
-
     {
       "id": "expressions_litterales",
       "label": "Expressions littérales",
@@ -162,7 +161,6 @@
       ]
     },
 
-
     {
       "id": "triangles",
       "label": "Triangles",
@@ -192,6 +190,22 @@
       ]
     },
     {
+      "id": "parallelogrammes",
+      "label": "Parallélogrammes",
+      "boId": "BO4G1",
+      "prerequis": ["triangles"],
+      "levels": [1, 2, 3],
+      "microTargets": [
+        "para_reconnaitre",
+        "para_proprietes",
+        "para_diagonales",
+        "para_montrer",
+        "para_aire",
+        "para_probleme",
+        "para_defis"
+      ]
+    },
+    {
       "id": "transformations",
       "label": "Transformations",
       "boId": "BO4G1",
@@ -206,26 +220,44 @@
       ]
     },
 
-
     {
-      "id": "grandeurs",
-      "label": "Grandeurs et mesures",
+      "id": "perimetres",
+      "label": "Périmètres",
       "boId": "BO4M1",
       "prerequis": [],
-      "levels": [1, 2],
+      "levels": [1, 2, 3],
       "microTargets": [
-        "grandeur_unites",
-        "grandeur_convertir",
-        "grandeur_vitesse",
-        "grandeur_probleme",
-        "grandeur_defis"
+        "perimetre_comprendre",
+        "perimetre_rectangle",
+        "perimetre_carre",
+        "perimetre_triangle",
+        "perimetre_figure",
+        "perimetre_probleme",
+        "perimetre_defis"
+      ]
+    },
+    {
+      "id": "aires",
+      "label": "Aires",
+      "boId": "BO4M1",
+      "prerequis": ["perimetres"],
+      "levels": [1, 2, 3],
+      "microTargets": [
+        "aire_comprendre",
+        "aire_rectangle",
+        "aire_carre",
+        "aire_triangle",
+        "aire_parallelogramme",
+        "aire_figure",
+        "aire_probleme",
+        "aire_defis"
       ]
     },
     {
       "id": "volumes",
       "label": "Volumes",
       "boId": "BO4G2",
-      "prerequis": ["grandeurs"],
+      "prerequis": ["aires"],
       "levels": [1, 2],
       "microTargets": [
         "volume_comprendre",

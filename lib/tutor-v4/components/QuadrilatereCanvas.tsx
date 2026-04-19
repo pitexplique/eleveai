@@ -117,7 +117,7 @@ function angleLabelPosition(label: CanvasQuadPointLabel, p: Point): Point {
   }
 }
 
-function getTickSegment(a: Point, b: Point, tickSize = 12) {
+function getTickSegment(a: Point, b: Point, tickSize = 12, offset = 0) {
   const m = mid(a, b);
   const dx = b.x - a.x;
   const dy = b.y - a.y;
@@ -125,12 +125,36 @@ function getTickSegment(a: Point, b: Point, tickSize = 12) {
   const nx = -dy / n;
   const ny = dx / n;
 
+  const cx = m.x + nx * offset;
+  const cy = m.y + ny * offset;
+
   return {
-    x1: m.x - (nx * tickSize) / 2,
-    y1: m.y - (ny * tickSize) / 2,
-    x2: m.x + (nx * tickSize) / 2,
-    y2: m.y + (ny * tickSize) / 2,
+    x1: cx - (nx * tickSize) / 2,
+    y1: cy - (ny * tickSize) / 2,
+    x2: cx + (nx * tickSize) / 2,
+    y2: cy + (ny * tickSize) / 2,
   };
+}
+
+function getMultipleTickSegments(
+  a: Point,
+  b: Point,
+  tickCount: number,
+  tickSize = 12,
+  spacing = 7
+) {
+  if (tickCount <= 1) {
+    return [getTickSegment(a, b, tickSize, 0)];
+  }
+
+  const segments = [];
+  const startOffset = -((tickCount - 1) * spacing) / 2;
+
+  for (let i = 0; i < tickCount; i++) {
+    segments.push(getTickSegment(a, b, tickSize, startOffset + i * spacing));
+  }
+
+  return segments;
 }
 
 function getParallelMarkSegments(a: Point, b: Point, variant: 1 | 2) {
@@ -624,8 +648,9 @@ export default function QuadrilatereCanvas({ figure }: Props) {
           const [p1a, p1b] = getSidePoints(s1, A, B, C, D);
           const [p2a, p2b] = getSidePoints(s2, A, B, C, D);
 
-          const seg1 = getTickSegment(p1a, p1b);
-          const seg2 = getTickSegment(p2a, p2b);
+          const tickCount = idx + 1;
+          const segs1 = getMultipleTickSegments(p1a, p1b, tickCount, 12, 7);
+          const segs2 = getMultipleTickSegments(p2a, p2b, tickCount, 12, 7);
 
           return (
             <g
@@ -634,18 +659,24 @@ export default function QuadrilatereCanvas({ figure }: Props) {
               strokeWidth={3}
               strokeLinecap="round"
             >
-              <line
-                x1={seg1.x1}
-                y1={seg1.y1}
-                x2={seg1.x2}
-                y2={seg1.y2}
-              />
-              <line
-                x1={seg2.x1}
-                y1={seg2.y1}
-                x2={seg2.x2}
-                y2={seg2.y2}
-              />
+              {segs1.map((seg, i) => (
+                <line
+                  key={`seg1-${idx}-${i}`}
+                  x1={seg.x1}
+                  y1={seg.y1}
+                  x2={seg.x2}
+                  y2={seg.y2}
+                />
+              ))}
+              {segs2.map((seg, i) => (
+                <line
+                  key={`seg2-${idx}-${i}`}
+                  x1={seg.x1}
+                  y1={seg.y1}
+                  x2={seg.x2}
+                  y2={seg.y2}
+                />
+              ))}
             </g>
           );
         })}

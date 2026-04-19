@@ -5,7 +5,7 @@
 // plus fin de l’algèbre afin de permettre un suivi plus précis.
 //
 // Choix retenu :
-// - une notion d’algèbre = un bloc pédagogique identifiable ;
+// - une notion = un bloc pédagogique identifiable ;
 // - une micro-compétence = une action précise et entraînable ;
 // - présence d’une micro "defis" dans chaque notion lorsque pertinent.
 
@@ -507,6 +507,52 @@ export const microSkills: MicroSkillSource[] = [
   },
 
   /* =========================
+     PARALLÉLOGRAMMES
+  ========================= */
+  {
+    id: "para_reconnaitre",
+    label: "Reconnaître un parallélogramme",
+    notionId: "parallelogrammes",
+    prerequis: [],
+  },
+  {
+    id: "para_proprietes",
+    label: "Utiliser les propriétés d’un parallélogramme",
+    notionId: "parallelogrammes",
+    prerequis: ["para_reconnaitre"],
+  },
+  {
+    id: "para_diagonales",
+    label: "Utiliser les diagonales d’un parallélogramme",
+    notionId: "parallelogrammes",
+    prerequis: ["para_proprietes"],
+  },
+  {
+    id: "para_montrer",
+    label: "Montrer qu’un quadrilatère est un parallélogramme",
+    notionId: "parallelogrammes",
+    prerequis: ["para_proprietes", "para_diagonales"],
+  },
+  {
+    id: "para_aire",
+    label: "Calculer l’aire d’un parallélogramme",
+    notionId: "parallelogrammes",
+    prerequis: ["para_reconnaitre"],
+  },
+  {
+    id: "para_probleme",
+    label: "Résoudre un problème avec un parallélogramme",
+    notionId: "parallelogrammes",
+    prerequis: ["para_montrer", "para_aire"],
+  },
+  {
+    id: "para_defis",
+    label: "Défis sur les parallélogrammes",
+    notionId: "parallelogrammes",
+    prerequis: ["para_probleme"],
+  },
+
+  /* =========================
      TRANSFORMATIONS
   ========================= */
   {
@@ -545,37 +591,110 @@ export const microSkills: MicroSkillSource[] = [
   },
 
   /* =========================
-     GRANDEURS ET MESURES
+     PÉRIMÈTRES
   ========================= */
   {
-    id: "grandeur_unites",
-    label: "Choisir et utiliser une unité adaptée",
-    notionId: "grandeurs",
+    id: "perimetre_comprendre",
+    label: "Comprendre ce qu’est un périmètre",
+    notionId: "perimetres",
     prerequis: [],
   },
   {
-    id: "grandeur_convertir",
-    label: "Convertir des unités",
-    notionId: "grandeurs",
-    prerequis: ["grandeur_unites"],
+    id: "perimetre_rectangle",
+    label: "Calculer le périmètre d’un rectangle",
+    notionId: "perimetres",
+    prerequis: ["perimetre_comprendre"],
   },
   {
-    id: "grandeur_vitesse",
-    label: "Calculer une vitesse moyenne",
-    notionId: "grandeurs",
-    prerequis: ["grandeur_convertir", "prop_coeff"],
+    id: "perimetre_carre",
+    label: "Calculer le périmètre d’un carré",
+    notionId: "perimetres",
+    prerequis: ["perimetre_comprendre"],
   },
   {
-    id: "grandeur_probleme",
-    label: "Résoudre un problème de grandeurs et mesures",
-    notionId: "grandeurs",
-    prerequis: ["grandeur_vitesse"],
+    id: "perimetre_triangle",
+    label: "Calculer le périmètre d’un triangle",
+    notionId: "perimetres",
+    prerequis: ["perimetre_comprendre"],
   },
   {
-    id: "grandeur_defis",
-    label: "Défis sur les grandeurs et mesures",
-    notionId: "grandeurs",
-    prerequis: ["grandeur_probleme"],
+    id: "perimetre_figure",
+    label: "Calculer le périmètre d’une figure",
+    notionId: "perimetres",
+    prerequis: [
+      "perimetre_rectangle",
+      "perimetre_carre",
+      "perimetre_triangle",
+    ],
+  },
+  {
+    id: "perimetre_probleme",
+    label: "Résoudre un problème de périmètre",
+    notionId: "perimetres",
+    prerequis: ["perimetre_figure"],
+  },
+  {
+    id: "perimetre_defis",
+    label: "Défis sur les périmètres",
+    notionId: "perimetres",
+    prerequis: ["perimetre_probleme"],
+  },
+
+  /* =========================
+     AIRES
+  ========================= */
+  {
+    id: "aire_comprendre",
+    label: "Comprendre ce qu’est une aire",
+    notionId: "aires",
+    prerequis: [],
+  },
+  {
+    id: "aire_rectangle",
+    label: "Calculer l’aire d’un rectangle",
+    notionId: "aires",
+    prerequis: ["aire_comprendre"],
+  },
+  {
+    id: "aire_carre",
+    label: "Calculer l’aire d’un carré",
+    notionId: "aires",
+    prerequis: ["aire_comprendre"],
+  },
+  {
+    id: "aire_triangle",
+    label: "Calculer l’aire d’un triangle",
+    notionId: "aires",
+    prerequis: ["aire_comprendre"],
+  },
+  {
+    id: "aire_parallelogramme",
+    label: "Calculer l’aire d’un parallélogramme",
+    notionId: "aires",
+    prerequis: ["aire_comprendre"],
+  },
+  {
+    id: "aire_figure",
+    label: "Calculer l’aire d’une figure",
+    notionId: "aires",
+    prerequis: [
+      "aire_rectangle",
+      "aire_carre",
+      "aire_triangle",
+      "aire_parallelogramme",
+    ],
+  },
+  {
+    id: "aire_probleme",
+    label: "Résoudre un problème d’aire",
+    notionId: "aires",
+    prerequis: ["aire_figure"],
+  },
+  {
+    id: "aire_defis",
+    label: "Défis sur les aires",
+    notionId: "aires",
+    prerequis: ["aire_probleme"],
   },
 
   /* =========================
@@ -632,4 +751,63 @@ export const microSkills: MicroSkillSource[] = [
     label: "Calculer un effectif ou une fréquence",
     notionId: "statistiques",
     prerequis: ["stat_lire_tableau"],
-  }]
+  },
+  {
+    id: "stat_moyenne",
+    label: "Calculer une moyenne",
+    notionId: "statistiques",
+    prerequis: ["stat_effectif_frequence"],
+  },
+  {
+    id: "stat_mediane",
+    label: "Déterminer une médiane",
+    notionId: "statistiques",
+    prerequis: ["stat_lire_tableau", "stat_effectif_frequence"],
+  },
+  {
+    id: "stat_defis",
+    label: "Défis sur les statistiques",
+    notionId: "statistiques",
+    prerequis: ["stat_lire_graphique", "stat_moyenne", "stat_mediane"],
+  },
+
+  /* =========================
+     PROBABILITÉS
+  ========================= */
+  {
+    id: "proba_vocabulaire",
+    label: "Comprendre le vocabulaire des probabilités",
+    notionId: "probabilites",
+    prerequis: [],
+  },
+  {
+    id: "proba_issues",
+    label: "Déterminer les issues d’une expérience aléatoire simple",
+    notionId: "probabilites",
+    prerequis: ["proba_vocabulaire"],
+  },
+  {
+    id: "proba_equiprobabilite",
+    label: "Reconnaître une situation d’équiprobabilité",
+    notionId: "probabilites",
+    prerequis: ["proba_issues"],
+  },
+  {
+    id: "proba_calculer",
+    label: "Calculer une probabilité simple",
+    notionId: "probabilites",
+    prerequis: ["proba_issues", "fraction_comparer"],
+  },
+  {
+    id: "proba_comparer",
+    label: "Comparer des probabilités simples",
+    notionId: "probabilites",
+    prerequis: ["proba_calculer"],
+  },
+  {
+    id: "proba_defis",
+    label: "Défis sur les probabilités",
+    notionId: "probabilites",
+    prerequis: ["proba_equiprobabilite", "proba_comparer"],
+  },
+];

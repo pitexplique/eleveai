@@ -128,6 +128,16 @@ const supportLinks: Record<string, string[]> = {
   pythagore_defis: ["pythagore_verifier", "pythagore_rediger"],
 
   // =========================
+  // PARALLÉLOGRAMMES
+  // =========================
+  para_proprietes: ["triangle_nature"],
+  para_diagonales: ["para_proprietes"],
+  para_montrer: ["para_proprietes", "para_diagonales"],
+  para_aire: ["aire_parallelogramme"],
+  para_probleme: ["para_montrer", "para_aire"],
+  para_defis: ["para_probleme"],
+
+  // =========================
   // TRANSFORMATIONS
   // =========================
   transfo_translation: ["relatif_placer"],
@@ -136,19 +146,32 @@ const supportLinks: Record<string, string[]> = {
   transfo_defis: ["transfo_translation", "transfo_rotation"],
 
   // =========================
-  // GRANDEURS ET MESURES
+  // PÉRIMÈTRES
   // =========================
-  grandeur_convertir: ["fraction_quantite"],
-  grandeur_vitesse: ["prop_coeff", "relatif_calcul"],
-  grandeur_probleme: ["grandeur_vitesse"],
-  grandeur_defis: ["grandeur_probleme"],
+  perimetre_rectangle: ["relatif_addition"],
+  perimetre_carre: ["relatif_multiplication"],
+  perimetre_triangle: ["relatif_addition"],
+  perimetre_figure: ["perimetre_rectangle", "perimetre_carre", "perimetre_triangle"],
+  perimetre_probleme: ["perimetre_figure"],
+  perimetre_defis: ["perimetre_probleme"],
+
+  // =========================
+  // AIRES
+  // =========================
+  aire_rectangle: ["relatif_multiplication"],
+  aire_carre: ["relatif_multiplication"],
+  aire_triangle: ["aire_rectangle"],
+  aire_parallelogramme: ["aire_rectangle"],
+  aire_figure: ["aire_rectangle", "aire_carre", "aire_triangle", "aire_parallelogramme"],
+  aire_probleme: ["aire_figure"],
+  aire_defis: ["aire_probleme"],
 
   // =========================
   // VOLUMES
   // =========================
-  volume_pave: ["relatif_calcul"],
-  volume_prisme: ["fraction_quantite"],
-  volume_unites: ["grandeur_convertir"],
+  volume_pave: ["aire_rectangle", "relatif_multiplication"],
+  volume_prisme: ["aire_parallelogramme", "aire_triangle"],
+  volume_unites: ["aire_comprendre"],
   volume_defis: ["volume_prisme", "volume_pave"],
 
   // =========================
@@ -169,7 +192,6 @@ const supportLinks: Record<string, string[]> = {
   proba_comparer: ["relatif_comparer", "proba_calculer"],
   proba_defis: ["proba_calculer", "proba_comparer"],
 };
-
 /**
  * Génère automatiquement la matrice.
  */

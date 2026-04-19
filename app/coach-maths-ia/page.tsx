@@ -100,12 +100,17 @@ function buildDomaines(classe: Classe): Domaine[] {
     {
       id: "geometrie-plane",
       label: "Géométrie plane",
-      notions: ["triangles", "pythagore", "transformations"],
+      notions: [
+        "triangles",
+        "pythagore",
+        "transformations",
+        "parallelogrammes",
+      ],
     },
     {
       id: "grandeurs-mesures",
       label: "Grandeurs et mesures",
-      notions: ["grandeurs", "volumes"],
+      notions: ["grandeurs", "perimetres", "aires", "volumes"],
     },
     {
       id: "donnees",
@@ -130,7 +135,7 @@ function getClasseSubtitle(classe: Classe) {
     return "Voici les compétences essentielles en mathématiques de Cinquième, organisées pour progresser avec méthode.";
   }
 
-  return "Voici les compétences essentielles en mathématiques de Quatrième, avec un accent particulier sur l’algèbre et le raisonnement.";
+  return "Voici les compétences essentielles en mathématiques de Quatrième, avec un accent particulier sur l’algèbre, la géométrie et le raisonnement.";
 }
 
 function getMicroButtonStyle(microId: string) {

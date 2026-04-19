@@ -7,6 +7,7 @@
 // Choix retenu :
 // - conserver un BO simple et stable ;
 // - découper l’algèbre en plusieurs notions distinctes ;
+// - séparer clairement périmètres, aires et parallélogrammes ;
 // - améliorer la finesse du suivi pédagogique dans Tutor V4.
 
 import type { NotionSource } from "@/lib/tutor-v4/knowledge/buildKnowledge";
@@ -105,6 +106,13 @@ export const notions: NotionSource[] = [
     levels: [1, 2, 3],
   },
   {
+    id: "parallelogrammes",
+    label: "Parallélogrammes",
+    boId: "BO4G1",
+    prerequis: ["triangles"],
+    levels: [1, 2, 3],
+  },
+  {
     id: "transformations",
     label: "Transformations (symétrie, translation, rotation)",
     boId: "BO4G1",
@@ -116,11 +124,18 @@ export const notions: NotionSource[] = [
   // GRANDEURS ET MESURES
   // =========================
   {
-    id: "grandeurs",
-    label: "Grandeurs et mesures",
+    id: "perimetres",
+    label: "Périmètres",
     boId: "BO4M1",
     prerequis: [],
-    levels: [1, 2],
+    levels: [1, 2, 3],
+  },
+  {
+    id: "aires",
+    label: "Aires",
+    boId: "BO4M1",
+    prerequis: ["perimetres"],
+    levels: [1, 2, 3],
   },
 
   // =========================
@@ -130,7 +145,7 @@ export const notions: NotionSource[] = [
     id: "volumes",
     label: "Volumes",
     boId: "BO4G2",
-    prerequis: ["grandeurs"],
+    prerequis: ["aires"],
     levels: [1, 2],
   },
 
