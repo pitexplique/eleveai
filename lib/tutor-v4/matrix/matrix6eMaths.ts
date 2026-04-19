@@ -53,7 +53,6 @@ const supportLinks: Record<string, string[]> = {
   area_comparer: ["longueur_comparer"],
   area_decomposer: ["area_rectangle", "area_square", "perim_figure"],
   area_problemes: [
-    "area_decomposer",
     "longueur_probleme",
     "decimal_multiplier",
     "prop_direct",

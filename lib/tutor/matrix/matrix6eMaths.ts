@@ -18,7 +18,7 @@ export const microSkillIndex6eMaths = [
   "perim_rectangle",   // 9
   "area_rectangle",    // 10
   "area_square",       // 11
-  "angle_right",       // 12
+  "angle_droit",       // 12
   "angle_compare",     // 13
 ] as const;
 
@@ -46,7 +46,7 @@ export const matrix6eMathsValues = [
   [ 0,      0,      0,      0,       0,       0,       0,        0,      0,     0,       -2,       0,      0,    0 ], // perim_rectangle
   [ 0,      0,      0,      0,       0,       0,       0,        0,      0,     2,       0,        0,      0,    0 ], // area_rectangle
   [ 0,      0,      0,      0,       0,       0,       0,        0,      2,     0,       0,        0,      0,    0 ], // area_square
-  [ 0,      0,      0,      0,       0,       0,       0,        0,      2,     0,       0,        0,      0,    0 ], // angle_right
+  [ 0,      0,      0,      0,       0,       0,       0,        0,      2,     0,       0,        0,      0,    0 ], // angle_droit
   [ 0,      0,      0,      0,       0,       0,       0,        0,      0,     0,       0,        0,      0,    0 ], // angle_compare
 ] as const;
 

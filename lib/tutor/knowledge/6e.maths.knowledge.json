@@ -80,7 +80,7 @@
       "boId": "BO6G2",
       "prerequis": [],
       "microTargets": [
-        "angle_right",
+        "angle_droit",
         "angle_compare"
       ],
       "levels": [1,2]
@@ -186,7 +186,7 @@
     },
 
     {
-      "id": "angle_right",
+      "id": "angle_droit",
       "label": "Identifier un angle droit",
       "notionId": "angles",
       "boId": "BO6G2",

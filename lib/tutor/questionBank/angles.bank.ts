@@ -7,9 +7,9 @@ function shuffle<T>(arr: T[]): T[] {
 export const anglesBank: BankItem[] = [
   {
     kind: "fixed",
-    id: "angle_right_fixed_1",
+    id: "angle_droit_fixed_1",
     notionId: "angles",
-    microId: "angle_right",
+    microId: "angle_droit",
     difficulty: 1,
     text: "Un angle droit mesure combien de degrés ?",
     format: "short",
@@ -19,9 +19,9 @@ export const anglesBank: BankItem[] = [
   },
   {
     kind: "fixed",
-    id: "angle_right_fixed_2",
+    id: "angle_droit_fixed_2",
     notionId: "angles",
-    microId: "angle_right",
+    microId: "angle_droit",
     difficulty: 1,
     text: "Complète : un angle droit mesure ___ degrés.",
     format: "short",
@@ -31,9 +31,9 @@ export const anglesBank: BankItem[] = [
   },
   {
     kind: "fixed",
-    id: "angle_right_fixed_3",
+    id: "angle_droit_fixed_3",
     notionId: "angles",
-    microId: "angle_right",
+    microId: "angle_droit",
     difficulty: 1,
     text: "Quelle est la mesure d’un angle droit ?",
     format: "short",
@@ -43,9 +43,9 @@ export const anglesBank: BankItem[] = [
   },
   {
     kind: "fixed",
-    id: "angle_right_qcm_1",
+    id: "angle_droit_qcm_1",
     notionId: "angles",
-    microId: "angle_right",
+    microId: "angle_droit",
     difficulty: 2,
     text: "Parmi ces mesures, laquelle correspond à un angle droit ?",
     format: "qcm",
@@ -56,9 +56,9 @@ export const anglesBank: BankItem[] = [
   },
   {
     kind: "fixed",
-    id: "angle_right_qcm_2",
+    id: "angle_droit_qcm_2",
     notionId: "angles",
-    microId: "angle_right",
+    microId: "angle_droit",
     difficulty: 2,
     text: "Choisis la mesure d’un angle droit.",
     format: "qcm",
@@ -230,9 +230,9 @@ export const anglesBank: BankItem[] = [
 
   {
     kind: "template",
-    id: "angle_right_tpl_1",
+    id: "angle_droit_tpl_1",
     notionId: "angles",
-    microId: "angle_right",
+    microId: "angle_droit",
     difficulty: 1,
     generate: () => {
       return {
@@ -246,9 +246,9 @@ export const anglesBank: BankItem[] = [
   },
   {
     kind: "template",
-    id: "angle_right_tpl_2",
+    id: "angle_droit_tpl_2",
     notionId: "angles",
-    microId: "angle_right",
+    microId: "angle_droit",
     difficulty: 1,
     generate: () => {
       return {
@@ -262,9 +262,9 @@ export const anglesBank: BankItem[] = [
   },
   {
     kind: "template",
-    id: "angle_right_qcm_tpl_1",
+    id: "angle_droit_qcm_tpl_1",
     notionId: "angles",
-    microId: "angle_right",
+    microId: "angle_droit",
     difficulty: 2,
     generate: () => {
       const choices = shuffle(["90°", "60°", "120°", "180°"]);
@@ -280,9 +280,9 @@ export const anglesBank: BankItem[] = [
   },
   {
     kind: "template",
-    id: "angle_right_qcm_tpl_2",
+    id: "angle_droit_qcm_tpl_2",
     notionId: "angles",
-    microId: "angle_right",
+    microId: "angle_droit",
     difficulty: 2,
     generate: () => {
       const choices = shuffle(["45°", "90°", "135°", "150°"]);
