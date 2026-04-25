@@ -1,0 +1,6 @@
+
+  | "neutral"
+  | "reunion"
+  | "sport"
+  | "cuisine"
+  | "jeux_video";

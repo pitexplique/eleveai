@@ -843,4 +843,133 @@ export const calculMentalBank: TutorBankItemV4[] = [
       };
     },
   },
+  // =========================
+// TEMPLATES - DEFIS LONGUEURS
+// =========================
+{
+  kind: "template",
+  id: "mental_defis_longueurs_tpl_1",
+  niveau: "6e",
+  matiere: "maths",
+  notionId: "calcul_mental",
+  microId: "mental_defis",
+  difficulty: 2,
+  theme: "neutral",
+  hint: "Additionne les longueurs.",
+  tags: ["calcul_mental", "probleme", "template", "longueurs"],
+  generate: () => {
+    const a = [12, 15, 18, 20][Math.floor(Math.random() * 4)];
+    const b = [5, 7, 9][Math.floor(Math.random() * 3)];
+    const total = a + b;
+
+    return {
+      text: `Une corde mesure ${a} cm puis on ajoute ${b} cm. Quelle est la longueur totale ?`,
+      format: "short",
+      expected: [String(total), `${total} cm`, `${total}cm`],
+      comparator: "contains_keyword",
+      explanation: `On additionne ${a} + ${b} = ${total}.`,
+    };
+  },
+},
+{
+  kind: "template",
+  id: "mental_defis_longueurs_tpl_2",
+  niveau: "6e",
+  matiere: "maths",
+  notionId: "calcul_mental",
+  microId: "mental_defis",
+  difficulty: 2,
+  theme: "cuisine",
+  hint: "Soustrais la partie utilisée.",
+  tags: ["calcul_mental", "probleme", "template", "longueurs"],
+  generate: () => {
+    const total = [40, 50, 60][Math.floor(Math.random() * 3)];
+    const used = [12, 15, 20][Math.floor(Math.random() * 3)];
+    const rest = total - used;
+
+    return {
+      text: `Un ruban de ${total} cm est utilisé pour un gâteau. On utilise ${used} cm. Combien reste-t-il ?`,
+      format: "short",
+      expected: [String(rest), `${rest} cm`, `${rest}cm`],
+      comparator: "contains_keyword",
+      explanation: `${total} - ${used} = ${rest}.`,
+    };
+  },
+},
+{
+  kind: "template",
+  id: "mental_defis_longueurs_tpl_3",
+  niveau: "6e",
+  matiere: "maths",
+  notionId: "calcul_mental",
+  microId: "mental_defis",
+  difficulty: 3,
+  theme: "reunion",
+  hint: "Multiplie.",
+  tags: ["calcul_mental", "probleme", "template", "longueurs"],
+  generate: () => {
+    const rows = [4, 5, 6][Math.floor(Math.random() * 3)];
+    const length = [7, 8, 9][Math.floor(Math.random() * 3)];
+    const total = rows * length;
+
+    return {
+      text: `À La Réunion, un jardin a ${rows} rangées de ${length} m chacune. Quelle est la longueur totale ?`,
+      format: "short",
+      expected: [String(total), `${total} m`, `${total}m`],
+      comparator: "contains_keyword",
+      explanation: `${rows} × ${length} = ${total}.`,
+    };
+  },
+},
+{
+  kind: "template",
+  id: "mental_defis_longueurs_tpl_4",
+  niveau: "6e",
+  matiere: "maths",
+  notionId: "calcul_mental",
+  microId: "mental_defis",
+  difficulty: 3,
+  theme: "sport",
+  hint: "Partage.",
+  tags: ["calcul_mental", "probleme", "template", "longueurs"],
+  generate: () => {
+    const total = [24, 30, 36][Math.floor(Math.random() * 3)];
+    const parts = [4, 6][Math.floor(Math.random() * 2)];
+    const each = total / parts;
+
+    return {
+      text: `Une piste de ${total} m est divisée en ${parts} parties égales. Quelle est la longueur d’une partie ?`,
+      format: "short",
+      expected: [String(each), `${each} m`, `${each}m`],
+      comparator: "contains_keyword",
+      explanation: `${total} ÷ ${parts} = ${each}.`,
+    };
+  },
+},
+{
+  kind: "template",
+  id: "mental_defis_longueurs_tpl_5",
+  niveau: "6e",
+  matiere: "maths",
+  notionId: "calcul_mental",
+  microId: "mental_defis",
+  difficulty: 4,
+  theme: "jeux_video",
+  hint: "Plusieurs étapes.",
+  tags: ["calcul_mental", "probleme", "template", "longueurs"],
+  generate: () => {
+    const a = [15, 20][Math.floor(Math.random() * 2)];
+    const b = [10, 12][Math.floor(Math.random() * 2)];
+    const total = [40, 50][Math.floor(Math.random() * 2)];
+    const rest = total - (a + b);
+
+    return {
+      text: `Dans un jeu, un personnage doit parcourir ${total} m. Il a déjà parcouru ${a} m puis ${b} m. Combien lui reste-t-il ?`,
+      format: "short",
+      expected: [String(rest), `${rest} m`, `${rest}m`],
+      comparator: "contains_keyword",
+      explanation: `${a} + ${b} = ${a + b} puis ${total} - ${a + b} = ${rest}.`,
+    };
+  },
+},
 ];

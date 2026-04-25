@@ -1,183 +1,80 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
-import DefiDuJourCard from "@/components/defis/DefiDuJourCard";
-import { getDefiDuJour } from "@/lib/defis/helpers";
+import { useEffect, useState } from "react";
+
+const HEADER_HEIGHT = 72;
+
+const cards = [
+  { href: "/optimiseur", image: "/images/cards/valeria.png" },
+  { href: "/defis", image: "/images/cards/defis.png" },
+  { href: "/coach-maths-ia", image: "/images/cards/coach.png" },
+  { href: "/parcours", image: "/images/cards/parcours.png" },
+];
 
 export default function AccueilPage() {
-  // 🔹 Récupère automatiquement le défi du jour
-  const defiDuJour = getDefiDuJour();
+  const [offset, setOffset] = useState(0);
 
-  // 🔹 Carte réutilisable pour les 3 piliers
-  const Card = ({
-    id,
-    badge,
-    title,
-    description,
-    details,
-    href,
-    cta,
-    variant = "blue",
-  }: {
-    id: string;
-    badge: string;
-    title: string;
-    description: string;
-    details: string;
-    href: string;
-    cta: string;
-    variant?: "blue" | "slate" | "emerald";
-  }) => {
-    const styles = {
-      blue: {
-        badge: "border-cyan-200 bg-cyan-50 text-cyan-700",
-        button:
-          "bg-gradient-to-r from-cyan-500 to-sky-600 text-white hover:from-cyan-400 hover:to-sky-500",
-      },
-      slate: {
-        badge: "border-slate-200 bg-slate-100 text-slate-700",
-        button:
-          "bg-gradient-to-r from-slate-900 to-slate-700 text-white hover:from-slate-800 hover:to-slate-600",
-      },
-      emerald: {
-        badge: "border-emerald-200 bg-emerald-50 text-emerald-700",
-        button:
-          "bg-gradient-to-r from-emerald-600 to-teal-600 text-white hover:from-emerald-500 hover:to-teal-500",
-      },
-    };
-
-    const current = styles[variant];
-
-    return (
-      <div
-        id={id}
-        className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
-      >
-        {/* Badge */}
-        <div
-          className={`inline-flex rounded-full border px-3 py-1 text-xs font-semibold ${current.badge}`}
-        >
-          {badge}
-        </div>
-
-        {/* Titre */}
-        <h3 className="mt-4 text-2xl font-extrabold tracking-tight text-slate-900 sm:text-3xl">
-          {title}
-        </h3>
-
-        {/* Description */}
-        <p className="mt-4 text-sm leading-relaxed text-slate-700 sm:text-base">
-          {description}
-        </p>
-
-        {/* Détails */}
-        <p className="mt-3 text-sm leading-relaxed text-slate-500">
-          {details}
-        </p>
-
-        {/* Bouton */}
-        <div className="mt-6">
-          <Link
-            href={href}
-            className={`inline-flex items-center justify-center rounded-xl px-5 py-3 text-sm font-semibold shadow-sm transition ${current.button}`}
-          >
-            {cta} →
-          </Link>
-        </div>
-      </div>
-    );
-  };
+  useEffect(() => {
+    const handleScroll = () => setOffset(window.scrollY);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
-    <main className="min-h-screen bg-white text-slate-900">
-      <section className="border-y border-slate-200 bg-gradient-to-b from-white to-slate-50">
-        <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:px-8">
-          {/* En-tête principal */}
-          <div className="mx-auto max-w-3xl text-center">
-            <p className="text-xs font-extrabold uppercase tracking-[0.2em] text-orange-500">
-              Mi ed a zot
-            </p>
+    <main className="relative min-h-[120vh]">
+      {/* IMAGE DE FOND (PARALLAX) */}
+      <div
+        className="fixed bottom-0 left-0 right-0 top-[72px] -z-10"
+        style={{
+          transform: `translateY(${offset * 0.25}px)`,
+        }}
+      >
+        <Image
+          src="/images/accueil-eleveai-reunion.png"
+          alt="EleveAI Réunion"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-top"
+        />
+      </div>
 
-            <h1 className="mt-3 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-5xl">
-              Trois piliers pour structurer EleveAI
-            </h1>
+      {/* CONTENU */}
+      <section
+        className="relative flex items-end pb-0"
+        style={{
+          minHeight: `calc(100vh - ${HEADER_HEIGHT}px)`,
+        }}
+      >
+        <div className="mx-auto flex max-w-5xl translate-y-1 flex-wrap justify-center gap-6 px-4">
+          {cards.map((card, index) => (
+            <Link
+              key={index}
+              href={card.href}
+              className="
+                group relative h-[115px] w-[220px]
+                overflow-hidden rounded-3xl
+                border border-white/40
+                shadow-lg transition-all duration-300
+                hover:-translate-y-2 hover:scale-[1.05]
+                hover:shadow-[0_0_30px_rgba(255,255,255,0.35)]
+                focus:outline-none focus:ring-4 focus:ring-white/70
+              "
+            >
+              <Image
+                src={card.image}
+                alt=""
+                fill
+                sizes="220px"
+                className="object-cover transition-transform duration-500 group-hover:scale-[1.05]"
+              />
 
-            <p className="mt-4 text-sm leading-relaxed text-slate-600 sm:text-base">
-              Une architecture simple et lisible : sécuriser les usages,
-              optimiser les prompts, développer des systèmes d’apprentissage.
-            </p>
-          </div>
-
-          {/* Les 3 cartes principales */}
-          <div className="mt-12 grid gap-6 lg:grid-cols-3">
-            <Card
-              id="securiser"
-              badge="Profs · élèves"
-              title="Sécuriser vos prompts"
-              description="Un cadre pour produire des demandes plus claires, plus fiables et plus adaptées au contexte scolaire."
-              details="Objectif : éviter les prompts flous, les réponses instables, les oublis de critères et les usages peu maîtrisés."
-              href="/espace-profs"
-              cta="Sécuriser mes prompts"
-              variant="emerald"
-            />
-
-            <Card
-              id="valeria"
-              badge="Valeria"
-              title="Optimiser vos prompts"
-              description="Valeria évalue, score et améliore un prompt pour le rendre plus robuste, plus exploitable et plus constant."
-              details="Le prompt devient une vraie base de travail : plus clair, plus structuré, plus facile à réutiliser."
-              href="/optimiseur"
-              cta="Ouvrir Valeria"
-              variant="slate"
-            />
-
-            <Card
-              id="coach"
-              badge="Coach Maths IA"
-              title="Coach Maths IA"
-              description="adaptation, accompagnement, consolidation et suivi."
-              details="L objectif est de renforcer l’apprentissage par étapes."
-              href="/coach-maths-ia"
-              cta="Découvrir ton coach"
-              variant="blue"
-            />
-          </div>
-
-          {/* Bloc Défi IA du jour */}
-          <div className="mt-20">
-            <div className="mx-auto max-w-4xl text-center">
-              <p className="text-xs font-extrabold uppercase tracking-[0.2em] text-indigo-600">
-                Défi IA du jour
-              </p>
-
-              <h2 className="mt-3 text-2xl font-extrabold tracking-tight text-slate-900 sm:text-3xl">
-                Une question pour réfléchir à l’IA
-              </h2>
-
-              <p className="mt-3 text-sm leading-relaxed text-slate-600 sm:text-base">
-                Réponds en quelques secondes, puis découvre une idée
-                essentielle sur l’utilité de l’intelligence artificielle.
-              </p>
-            </div>
-
-            {/* Carte interactive du défi du jour */}
-            <div className="mt-8 mx-auto max-w-3xl">
-              <div className="rounded-3xl border border-indigo-100 bg-white p-2 shadow-sm">
-                <DefiDuJourCard defi={defiDuJour} />
-              </div>
-            </div>
-
-            {/* Lien vers le répertoire complet des défis */}
-            <div className="mt-6 text-center">
-              <Link
-                href="/defis"
-                className="text-sm font-semibold text-slate-600 transition hover:text-indigo-700"
-              >
-                Voir tous les défis →
-              </Link>
-            </div>
-          </div>
+              {/* Effet glow */}
+              <div className="pointer-events-none absolute -left-20 top-0 h-full w-16 rotate-12 bg-white/30 blur-md transition-transform duration-700 group-hover:translate-x-[300px]" />
+            </Link>
+          ))}
         </div>
       </section>
     </main>

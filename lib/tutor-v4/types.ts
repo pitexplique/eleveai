@@ -9,7 +9,7 @@
  */
 
 export type TutorMode = "evaluation" | "coaching";
-export type QuestionFormat = "short" | "qcm";
+export type QuestionFormat = "short" | "qcm" | "open";
 
 export type ComparatorName =
   | "exact_text"

@@ -763,12 +763,16 @@ export default function TutorV4Page() {
     await submitAnswer(choice);
   }
 
-  function handleInputKeyDown(e: KeyboardEvent<HTMLInputElement>) {
-    if (e.key === "Enter" && !busy && !wrongAnswerPanelOpen) {
-      e.preventDefault();
-      void submitAnswer();
-    }
+function handleInputKeyDown(
+  e: KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>
+) {
+  if (currentQuestion?.format !== "short") return;
+
+  if (e.key === "Enter" && !busy && !wrongAnswerPanelOpen) {
+    e.preventDefault();
+    void submitAnswer();
   }
+}
 
   function handleMicroClick(microId: string) {
     void jumpToMicro(microId);
@@ -945,7 +949,13 @@ export default function TutorV4Page() {
                       </div>
 
                       <div className="mb-3 flex flex-wrap gap-2">
-                        <Tag>{option.format === "qcm" ? "QCM" : "Réponse libre"}</Tag>
+                        <Tag>
+                          {option.format === "qcm"
+                            ? "QCM"
+                            : option.format === "open"
+                            ? "Réponse rédigée"
+                            : "Réponse courte"}
+                        </Tag>
                         <Tag>{microLabel(option.microId, classe)}</Tag>
                         <Tag>{starPoints(option.meta.starLevel)} pts</Tag>
                         {option.canvas ? <Tag>Figure</Tag> : null}
@@ -1007,7 +1017,11 @@ export default function TutorV4Page() {
 
                     <div className="mb-4 flex flex-wrap gap-2">
                       <Tag>
-                        {currentQuestion.format === "qcm" ? "QCM" : "Réponse libre"}
+                        {currentQuestion.format === "qcm"
+                          ? "QCM"
+                          : currentQuestion.format === "open"
+                          ? "Réponse rédigée"
+                          : "Réponse courte"}
                       </Tag>
                       <Tag>{mode === "evaluation" ? "Évaluation" : "Coaching"}</Tag>
                     </div>
@@ -1033,6 +1047,30 @@ export default function TutorV4Page() {
                           ))}
                         </div>
                       </div>
+                    ) : currentQuestion.format === "open" ? (
+                      <div className="space-y-3">
+                        <div className="text-sm font-bold text-slate-800">
+                          Rédige ta réponse
+                        </div>
+
+                        <textarea
+                          value={answer}
+                          onChange={(e) => setAnswer(e.target.value)}
+                          onKeyDown={handleInputKeyDown}
+                          placeholder="Explique ton raisonnement..."
+                          disabled={busy || wrongAnswerPanelOpen}
+                          rows={5}
+                          className="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-base text-slate-900"
+                        />
+
+                        <button
+                          onClick={() => void submitAnswer()}
+                          disabled={busy || wrongAnswerPanelOpen}
+                          className="rounded-2xl bg-slate-900 px-5 py-3 text-sm font-black text-white hover:bg-slate-800 disabled:opacity-50"
+                        >
+                          Valider ma réponse
+                        </button>
+                      </div>
                     ) : (
                       <div className="space-y-3">
                         <div className="text-sm font-bold text-slate-800">
@@ -1057,7 +1095,6 @@ export default function TutorV4Page() {
                         </button>
                       </div>
                     )}
-
                     {mode === "coaching" && currentQuestion.hint ? (
                       <div className="mt-4 rounded-2xl border border-emerald-200 bg-emerald-50 p-4 text-sm text-emerald-900">
                         <span className="font-black">Indice :</span>{" "}
@@ -1230,8 +1267,13 @@ function WrongAnswerPanel({
             </div>
 
             <div className="text-2xl font-light text-lime-700">Ta réponse :</div>
-
-            <div className="mt-3 inline-flex min-w-[88px] rounded-sm border border-sky-400 bg-[#eaf3ff] px-3 py-2 text-lg text-slate-900">
+            <div
+              className={`mt-3 rounded-sm border border-sky-400 bg-[#eaf3ff] px-3 py-2 text-slate-900 ${
+                question.format === "open"
+                  ? "min-h-[96px] whitespace-pre-wrap text-base"
+                  : "inline-flex min-w-[88px] text-lg"
+              }`}
+            >
               {userAnswer || "—"}
             </div>
           </div>

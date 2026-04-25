@@ -73,7 +73,7 @@ function toLegacyEvaluatorQuestion(
   return {
     id: option.id,
     text: option.text,
-    format: option.format,
+    format: option.format === "open" ? "short" : option.format,
     choices: option.choices,
     expected: option.expected,
     comparator: option.comparator,
