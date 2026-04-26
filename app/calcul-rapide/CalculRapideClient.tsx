@@ -16,7 +16,7 @@ const questions6e: Question[] = [
   {
     id: "q1",
     type: "calcul",
-    text: "43,1 - 6,2",
+    text: "11 * 12",
     durationSec: 20,
     expected: ["36.9", "36,9"],
   },
@@ -30,9 +30,9 @@ const questions6e: Question[] = [
   {
     id: "q3",
     type: "calcul",
-    text: "Quel est le quotient de 205 ÷ 4 ?",
+    text: "Quel est le reste de la division euclidienne de 206 par 5 ?",
     durationSec: 20,
-    expected: ["50"],
+    expected: ["1"],
   },
   {
     id: "q4",
