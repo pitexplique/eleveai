@@ -8,8 +8,8 @@ const HEADER_HEIGHT = 72;
 
 const cards = [
   { href: "/optimiseur", image: "/images/cards/valeria.png" },
-  { href: "/defis", image: "/images/cards/defis.png" },
   { href: "/coach-maths-ia", image: "/images/cards/coach.png" },
+   { href: "/espace-profs", image: "/images/cards/prompt_prof.png" },
   { href: "/parcours", image: "/images/cards/parcours.png" },
 ];
 
