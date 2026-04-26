@@ -1,6 +1,5 @@
-// app/calcul-rapide/page.tsx
-
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import CalculRapideClient from "./CalculRapideClient";
 
 export const metadata: Metadata = {
@@ -10,5 +9,15 @@ export const metadata: Metadata = {
 };
 
 export default function CalculRapidePage() {
-  return <CalculRapideClient />;
+  return (
+    <Suspense
+      fallback={
+        <main className="flex min-h-screen items-center justify-center bg-slate-950 text-white">
+          <p className="text-xl font-bold">Chargement...</p>
+        </main>
+      }
+    >
+      <CalculRapideClient />
+    </Suspense>
+  );
 }
