@@ -11,7 +11,6 @@ const cards = [
   { href: "/espace-profs", image: "/images/cards/prompt_prof.png" },
   { href: "/coach-maths-ia", image: "/images/cards/coach.png" },
   { href: "/calcul-rapide", image: "/images/cards/calcul-rapide.png" },
-  { href: "/parcours", image: "/images/cards/parcours.png" },
 ];
 
 export default function AccueilPage() {
@@ -20,11 +19,12 @@ export default function AccueilPage() {
   useEffect(() => {
     const handleScroll = () => setOffset(window.scrollY);
     window.addEventListener("scroll", handleScroll, { passive: true });
+
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
-    <main className="relative min-h-[120vh]">
+    <main className="relative min-h-[120vh] overflow-hidden">
       {/* IMAGE DE FOND (PARALLAX) */}
       <div
         className="fixed bottom-0 left-0 right-0 top-[72px] -z-10"
@@ -44,12 +44,12 @@ export default function AccueilPage() {
 
       {/* CONTENU */}
       <section
-        className="relative flex items-end pb-0"
+        className="relative flex items-end pb-4 sm:pb-0"
         style={{
           minHeight: `calc(100vh - ${HEADER_HEIGHT}px)`,
         }}
       >
-<div className="mx-auto grid max-w-6xl translate-y-1 grid-cols-5 gap-6 px-4 justify-items-center">
+        <div className="mx-auto flex max-w-6xl translate-y-1 flex-wrap justify-center gap-4 px-4 sm:gap-6">
           {cards.map((card, index) => (
             <Link
               key={index}
@@ -72,7 +72,6 @@ export default function AccueilPage() {
                 className="object-cover transition-transform duration-500 group-hover:scale-[1.05]"
               />
 
-              {/* Effet glow */}
               <div className="pointer-events-none absolute -left-20 top-0 h-full w-16 rotate-12 bg-white/30 blur-md transition-transform duration-700 group-hover:translate-x-[300px]" />
             </Link>
           ))}

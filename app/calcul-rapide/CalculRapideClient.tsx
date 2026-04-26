@@ -23,7 +23,7 @@ const questions6e: Question[] = [
   {
     id: "q2",
     type: "calcul",
-    text: "Combien font 25 % de 500 ?",
+    text: "Combien font 75 % de 500 ?",
     durationSec: 20,
     expected: ["125"],
   },
@@ -44,14 +44,14 @@ const questions6e: Question[] = [
   {
     id: "q5",
     type: "calcul",
-    text: "0,2 × 24",
+    text: "Convertir 150 cm en métres",
     durationSec: 20,
-    expected: ["4,8", "34.8"],
+    expected: ["1,5", "1.5"],
   },
   {
     id: "q6",
     type: "probleme",
-    text: "Combien vaut l’e périmèetre d’un carré d'aire 49 cm² ?",
+    text: "Combien vaut l’e périmètre d’un carré d'aire 49 cm² ?",
     durationSec: 60,
     expected: ["28", "28 cm²", "28 cm2"],
   },
