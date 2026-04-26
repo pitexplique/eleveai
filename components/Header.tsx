@@ -85,16 +85,17 @@ export default function Header() {
             Générateur profs
           </Link>
 
+           <Link href="/coach-maths-ia" className={linkClass(isActive(pathname, "/coach"))}>
+            <Brain className="h-4 w-4 text-orange-300" />
+            Coach Maths
+          </Link>
+
           <Link href="/defis" className={linkClass(isActive(pathname, "/defis"))}>
             <Target className="h-4 w-4 text-green-300" />
             Défis
           </Link>
 
-          <Link href="/coach-maths-ia" className={linkClass(isActive(pathname, "/coach"))}>
-            <Brain className="h-4 w-4 text-orange-300" />
-            Coach
-          </Link>
-
+*
           <Link href="/parcours" className={linkClass(isActive(pathname, "/parcours"))}>
             <Route className="h-4 w-4 text-purple-300" />
             Parcours
