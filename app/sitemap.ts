@@ -4,8 +4,8 @@ import { getAllBlogPosts } from "@/data/blogPosts";
 const BASE_URL = "https://eleveai.fr";
 const u = (path: string) => `${BASE_URL}${path}`;
 
-const LASTMOD_HOME = new Date("2026-02-18");
-const LASTMOD_CORE = new Date("2026-02-18");
+const LASTMOD_HOME = new Date("2026-04-26");
+const LASTMOD_CORE = new Date("2026-04-26");
 const LASTMOD_LEGAL = new Date("2026-02-18");
 
 type RouteConfig = {
@@ -15,49 +15,56 @@ type RouteConfig = {
   lastMod?: Date;
 };
 
-/* ==============================
-   🧠 CONFIG CENTRALISÉE
-============================== */
-
 const ROUTES: RouteConfig[] = [
-  // 🔵 MAJEUR
+  // ==============================
+  // 🏠 PAGES PRINCIPALES
+  // ==============================
   { path: "/", priority: 1.0, changeFrequency: "weekly", lastMod: LASTMOD_HOME },
   { path: "/accueil", priority: 0.95, changeFrequency: "weekly", lastMod: LASTMOD_HOME },
-  { path: "/optimiseur", priority: 0.95, changeFrequency: "weekly" },
 
-  // 🟢 BUSINESS
-  { path: "/espace-entreprise", priority: 0.9, changeFrequency: "monthly" },
-  { path: "/contact", priority: 0.85, changeFrequency: "monthly" },
-  { path: "/tarifs", priority: 0.85, changeFrequency: "monthly" },
+  // ==============================
+  // 🚀 PRODUITS ELEVEAI
+  // ==============================
+  { path: "/optimiseur", priority: 0.95, changeFrequency: "weekly", lastMod: LASTMOD_CORE },
+  { path: "/defis", priority: 0.9, changeFrequency: "weekly", lastMod: LASTMOD_CORE },
+  { path: "/coach-maths-ia", priority: 0.9, changeFrequency: "weekly", lastMod: LASTMOD_CORE },
+  { path: "/parcours", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_CORE },
 
-  // 🟢 ÉDUCATION
-  { path: "/espace-profs", priority: 0.85, changeFrequency: "weekly" },
-  { path: "/espace-eleves", priority: 0.8, changeFrequency: "weekly" },
-  { path: "/espace-parents", priority: 0.75, changeFrequency: "monthly" },
-  { path: "/espace-ecoles", priority: 0.75, changeFrequency: "monthly" },
-  { path: "/atelier-IA", priority: 0.75, changeFrequency: "monthly" },
+  // ==============================
+  // 🎓 ESPACES UTILISATEURS
+  // ==============================
+  { path: "/espace-profs", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_CORE },
+  { path: "/espace-eleves", priority: 0.8, changeFrequency: "weekly", lastMod: LASTMOD_CORE },
+  { path: "/espace-parents", priority: 0.75, changeFrequency: "monthly", lastMod: LASTMOD_CORE },
+  { path: "/espace-ecoles", priority: 0.75, changeFrequency: "monthly", lastMod: LASTMOD_CORE },
 
-  // 🔥 PRODUIT (important pour SEO)
-  { path: "/defis", priority: 0.85, changeFrequency: "weekly" },
+  // ==============================
+  // 💼 BUSINESS / INSTITUTIONNEL
+  // ==============================
+  { path: "/espace-entreprise", priority: 0.85, changeFrequency: "monthly", lastMod: LASTMOD_CORE },
+  { path: "/tarifs", priority: 0.85, changeFrequency: "monthly", lastMod: LASTMOD_CORE },
+  { path: "/contact", priority: 0.8, changeFrequency: "monthly", lastMod: LASTMOD_CORE },
 
-  // ⚠️ à garder seulement si public
-  { path: "/tutor-v4", priority: 0.7, changeFrequency: "weekly" },
+  // ==============================
+  // 🧠 CONTENU / CONFIANCE
+  // ==============================
+  { path: "/blog", priority: 0.8, changeFrequency: "weekly", lastMod: LASTMOD_CORE },
+  { path: "/qui-sommes-nous", priority: 0.7, changeFrequency: "monthly", lastMod: LASTMOD_CORE },
+  { path: "/pourquoi-eleveai", priority: 0.7, changeFrequency: "monthly", lastMod: LASTMOD_CORE },
+  { path: "/faq", priority: 0.65, changeFrequency: "monthly", lastMod: LASTMOD_CORE },
 
-  // 🟡 CONTENU
-  { path: "/blog", priority: 0.8, changeFrequency: "weekly" },
-  { path: "/qui-sommes-nous", priority: 0.7, changeFrequency: "monthly" },
-  { path: "/pourquoi-eleveai", priority: 0.7, changeFrequency: "monthly" },
-  { path: "/faq", priority: 0.6, changeFrequency: "monthly" },
+  // ==============================
+  // ⚠️ OUTILS INTERNES / PUBLICS
+  // ==============================
+  { path: "/tutor-v4", priority: 0.65, changeFrequency: "weekly", lastMod: LASTMOD_CORE },
 
+  // ==============================
   // ⚖️ LÉGAL
+  // ==============================
   { path: "/mentions-legales", priority: 0.3, changeFrequency: "yearly", lastMod: LASTMOD_LEGAL },
   { path: "/politique-confidentialite", priority: 0.3, changeFrequency: "yearly", lastMod: LASTMOD_LEGAL },
   { path: "/cgu", priority: 0.3, changeFrequency: "yearly", lastMod: LASTMOD_LEGAL },
 ];
-
-/* ==============================
-   🚀 SITEMAP
-============================== */
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes: MetadataRoute.Sitemap = ROUTES.map((route) => ({
@@ -66,10 +73,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     changeFrequency: route.changeFrequency,
     priority: route.priority,
   }));
-
-  /* ==============================
-     📰 BLOG DYNAMIQUE
-  ============================== */
 
   const posts = getAllBlogPosts() ?? [];
 
@@ -82,4 +85,3 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   return [...staticRoutes, ...blogRoutes];
 }
-
