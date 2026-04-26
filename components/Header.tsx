@@ -46,7 +46,6 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-50 border-b border-white/10 bg-slate-950/80 backdrop-blur-xl">
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3">
-        {/* LOGO */}
         <Link href="/accueil" className="flex items-center gap-3">
           <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-gradient-to-br from-emerald-300 via-cyan-300 to-amber-300 text-slate-950 shadow-lg">
             <Sparkles className="h-5 w-5" />
@@ -62,40 +61,32 @@ export default function Header() {
           </div>
         </Link>
 
-        {/* DESKTOP */}
         <div className="hidden items-center gap-2 lg:flex">
           <Link href="/accueil" className={linkClass(isActive(pathname, "/accueil"))}>
             <Home className="h-4 w-4 text-cyan-300" />
             Accueil
           </Link>
 
-          <Link
-            href="/optimiseur"
-            className={linkClass(isActive(pathname, "/espace-profs"))}
-          >
+          <Link href="/optimiseur" className={linkClass(isActive(pathname, "/optimiseur"))}>
             <BadgeCheck className="h-4 w-4 text-amber-300" />
             Valéria
           </Link>
 
-          <Link
-            href="/espace-profs"
-            className={linkClass(pathname === "/espace-profs")}
-          >
+          <Link href="/espace-profs" className={linkClass(isActive(pathname, "/espace-profs"))}>
             <Wand2 className="h-4 w-4 text-blue-300" />
             Générateur profs
           </Link>
 
-           <Link href="/coach-maths-ia" className={linkClass(isActive(pathname, "/coach"))}>
+          <Link href="/coach-maths-ia" className={linkClass(isActive(pathname, "/coach-maths-ia"))}>
             <Brain className="h-4 w-4 text-orange-300" />
             Coach Maths
           </Link>
 
-          <Link href="/defis" className={linkClass(isActive(pathname, "/defis"))}>
+          <Link href="/calcul-rapide" className={linkClass(isActive(pathname, "/calcul-rapide"))}>
             <Target className="h-4 w-4 text-green-300" />
-            Défis
+            Calcul Rapide
           </Link>
 
-*
           <Link href="/parcours" className={linkClass(isActive(pathname, "/parcours"))}>
             <Route className="h-4 w-4 text-purple-300" />
             Parcours
@@ -107,7 +98,6 @@ export default function Header() {
           </Link>
         </div>
 
-        {/* MOBILE BUTTON */}
         <button
           type="button"
           onClick={() => setMobileOpen((v) => !v)}
@@ -118,7 +108,6 @@ export default function Header() {
         </button>
       </nav>
 
-      {/* MOBILE MENU */}
       {mobileOpen && (
         <div className="border-t border-white/10 bg-slate-950/95 px-4 py-4 backdrop-blur-xl lg:hidden">
           <div className="mx-auto grid max-w-7xl gap-2">
@@ -127,30 +116,24 @@ export default function Header() {
               Accueil
             </Link>
 
-            <Link
-              href="/espace-profs"
-              className={mobileLinkClass(isActive(pathname, "/optimiseur"))}
-            >
+            <Link href="/optimiseur" className={mobileLinkClass(isActive(pathname, "/optimiseur"))}>
               <BadgeCheck className="h-4 w-4 text-amber-300" />
               Valéria
             </Link>
 
-            <Link
-              href="/espace-profs"
-              className={mobileLinkClass(pathname === "/espace-profs")}
-            >
+            <Link href="/espace-profs" className={mobileLinkClass(isActive(pathname, "/espace-profs"))}>
               <Wand2 className="h-4 w-4 text-blue-300" />
               Générateur de prompts profs
             </Link>
 
-            <Link href="/defis" className={mobileLinkClass(isActive(pathname, "/defis"))}>
-              <Target className="h-4 w-4 text-green-300" />
-              Défis de La Réunion
-            </Link>
-
-            <Link href="/coach-maths-ia" className={mobileLinkClass(isActive(pathname, "/coach"))}>
+            <Link href="/coach-maths-ia" className={mobileLinkClass(isActive(pathname, "/coach-maths-ia"))}>
               <Brain className="h-4 w-4 text-orange-300" />
               Coach maths
+            </Link>
+
+            <Link href="/calcul-rapide" className={mobileLinkClass(isActive(pathname, "/calcul-rapide"))}>
+              <Target className="h-4 w-4 text-green-300" />
+              Calcul Rapide
             </Link>
 
             <Link href="/parcours" className={mobileLinkClass(isActive(pathname, "/parcours"))}>

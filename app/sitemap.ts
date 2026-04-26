@@ -16,51 +16,30 @@ type RouteConfig = {
 };
 
 const ROUTES: RouteConfig[] = [
-  // ==============================
-  // 🏠 PAGES PRINCIPALES
-  // ==============================
   { path: "/", priority: 1.0, changeFrequency: "weekly", lastMod: LASTMOD_HOME },
   { path: "/accueil", priority: 0.95, changeFrequency: "weekly", lastMod: LASTMOD_HOME },
 
-  // ==============================
-  // 🚀 PRODUITS ELEVEAI
-  // ==============================
   { path: "/optimiseur", priority: 0.95, changeFrequency: "weekly", lastMod: LASTMOD_CORE },
-  { path: "/defis", priority: 0.9, changeFrequency: "weekly", lastMod: LASTMOD_CORE },
+  { path: "/calcul-rapide", priority: 0.9, changeFrequency: "weekly", lastMod: LASTMOD_CORE },
   { path: "/coach-maths-ia", priority: 0.9, changeFrequency: "weekly", lastMod: LASTMOD_CORE },
   { path: "/parcours", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_CORE },
 
-  // ==============================
-  // 🎓 ESPACES UTILISATEURS
-  // ==============================
   { path: "/espace-profs", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_CORE },
   { path: "/espace-eleves", priority: 0.8, changeFrequency: "weekly", lastMod: LASTMOD_CORE },
   { path: "/espace-parents", priority: 0.75, changeFrequency: "monthly", lastMod: LASTMOD_CORE },
   { path: "/espace-ecoles", priority: 0.75, changeFrequency: "monthly", lastMod: LASTMOD_CORE },
 
-  // ==============================
-  // 💼 BUSINESS / INSTITUTIONNEL
-  // ==============================
   { path: "/espace-entreprise", priority: 0.85, changeFrequency: "monthly", lastMod: LASTMOD_CORE },
   { path: "/tarifs", priority: 0.85, changeFrequency: "monthly", lastMod: LASTMOD_CORE },
   { path: "/contact", priority: 0.8, changeFrequency: "monthly", lastMod: LASTMOD_CORE },
 
-  // ==============================
-  // 🧠 CONTENU / CONFIANCE
-  // ==============================
   { path: "/blog", priority: 0.8, changeFrequency: "weekly", lastMod: LASTMOD_CORE },
   { path: "/qui-sommes-nous", priority: 0.7, changeFrequency: "monthly", lastMod: LASTMOD_CORE },
   { path: "/pourquoi-eleveai", priority: 0.7, changeFrequency: "monthly", lastMod: LASTMOD_CORE },
   { path: "/faq", priority: 0.65, changeFrequency: "monthly", lastMod: LASTMOD_CORE },
 
-  // ==============================
-  // ⚠️ OUTILS INTERNES / PUBLICS
-  // ==============================
   { path: "/tutor-v4", priority: 0.65, changeFrequency: "weekly", lastMod: LASTMOD_CORE },
 
-  // ==============================
-  // ⚖️ LÉGAL
-  // ==============================
   { path: "/mentions-legales", priority: 0.3, changeFrequency: "yearly", lastMod: LASTMOD_LEGAL },
   { path: "/politique-confidentialite", priority: 0.3, changeFrequency: "yearly", lastMod: LASTMOD_LEGAL },
   { path: "/cgu", priority: 0.3, changeFrequency: "yearly", lastMod: LASTMOD_LEGAL },

@@ -8,8 +8,9 @@ const HEADER_HEIGHT = 72;
 
 const cards = [
   { href: "/optimiseur", image: "/images/cards/valeria.png" },
+  { href: "/espace-profs", image: "/images/cards/prompt_prof.png" },
   { href: "/coach-maths-ia", image: "/images/cards/coach.png" },
-   { href: "/espace-profs", image: "/images/cards/prompt_prof.png" },
+  { href: "/calcul-rapide", image: "/images/cards/calcul-rapide.png" },
   { href: "/parcours", image: "/images/cards/parcours.png" },
 ];
 
@@ -48,7 +49,7 @@ export default function AccueilPage() {
           minHeight: `calc(100vh - ${HEADER_HEIGHT}px)`,
         }}
       >
-        <div className="mx-auto flex max-w-5xl translate-y-1 flex-wrap justify-center gap-6 px-4">
+<div className="mx-auto grid max-w-6xl translate-y-1 grid-cols-5 gap-6 px-4 justify-items-center">
           {cards.map((card, index) => (
             <Link
               key={index}
