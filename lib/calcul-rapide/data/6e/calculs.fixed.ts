@@ -4,7 +4,7 @@ import type { CalculRapideItem } from "../../types";
 
 export const calculsFixed6e: CalculRapideItem[] = [
   {
-    id: "6e_calcul_decimal_soustraction_001",
+    id: "6e_calcul_decimal_soustraction_002",
     niveau: "6e",
     type: "calcul",
     mode: "fixed",
@@ -13,19 +13,17 @@ export const calculsFixed6e: CalculRapideItem[] = [
     difficulty: 2,
     durationSec: 20,
     media: {
-      text: "23,1 - 4,9",
-      audio: {
-        src: "/audio/calcul-rapide/6e/23-1-moins-4-9.mp3",
-        autoPlay: false,
-      },
+      text: "31,2 - 6,8",
     },
-    expected: ["18,2", "18.2"],
-    hint: "Tu peux faire 23,1 - 5 puis ajouter 0,1.",
-    explanation: "23,1 - 4,9 = 23,1 - 5 + 0,1 = 18,2.",
-    tags: ["decimaux", "soustraction", "calcul-mental"],
+    expected: ["24,4", "24.4"],
+    hint: "Enlève 7 puis ajoute 0,2.",
+    explanation:
+      "31,2 - 6,8 = 31,2 - 7 + 0,2 = 24,2 + 0,2 = 24,4.",
+    tags: ["decimaux", "soustraction", "astuce"],
   },
+
   {
-    id: "6e_calcul_pourcentage_001",
+    id: "6e_calcul_pourcentage_002",
     niveau: "6e",
     type: "calcul",
     mode: "fixed",
@@ -34,15 +32,17 @@ export const calculsFixed6e: CalculRapideItem[] = [
     difficulty: 2,
     durationSec: 20,
     media: {
-      text: "Combien font 25 % de 224 ?",
+      text: "25 % de 180",
     },
-    expected: ["56"],
+    expected: ["45"],
     hint: "25 %, c’est un quart.",
-    explanation: "25 % de 224, c’est 224 ÷ 4 = 56.",
-    tags: ["pourcentage", "quart", "proportionnalite"],
+    explanation:
+      "180 ÷ 4 = 45.",
+    tags: ["pourcentage", "quart"],
   },
+
   {
-    id: "6e_calcul_division_euclidienne_001",
+    id: "6e_calcul_division_euclidienne_002",
     niveau: "6e",
     type: "calcul",
     mode: "fixed",
@@ -51,15 +51,17 @@ export const calculsFixed6e: CalculRapideItem[] = [
     difficulty: 2,
     durationSec: 20,
     media: {
-      text: "Quel est le quotient de la division euclidienne de 103 par 4 ?",
+      text: "87 ÷ 5 (quotient ?)",
     },
-    expected: ["25"],
-    hint: "Cherche combien de fois 4 rentre dans 103.",
-    explanation: "4 × 25 = 100 et il reste 3. Le quotient est donc 25.",
-    tags: ["division", "quotient", "division-euclidienne"],
+    expected: ["17"],
+    hint: "5 × 17 = ?",
+    explanation:
+      "5 × 17 = 85, reste 2 → quotient = 17.",
+    tags: ["division"],
   },
+
   {
-    id: "6e_calcul_diviser_100_001",
+    id: "6e_calcul_diviser_100_002",
     niveau: "6e",
     type: "calcul",
     mode: "fixed",
@@ -68,15 +70,17 @@ export const calculsFixed6e: CalculRapideItem[] = [
     difficulty: 1,
     durationSec: 20,
     media: {
-      text: "513,7 : 100",
+      text: "742,5 ÷ 100",
     },
-    expected: ["5,137", "5.137"],
-    hint: "Diviser par 100 décale la virgule de deux rangs vers la gauche.",
-    explanation: "513,7 ÷ 100 = 5,137.",
-    tags: ["decimaux", "division-par-100"],
+    expected: ["7,425", "7.425"],
+    hint: "Décale la virgule de 2 rangs.",
+    explanation:
+      "742,5 → 7,425.",
+    tags: ["decimaux"],
   },
+
   {
-    id: "6e_calcul_decimal_multiplication_001",
+    id: "6e_calcul_decimal_multiplication_002",
     niveau: "6e",
     type: "calcul",
     mode: "fixed",
@@ -85,11 +89,31 @@ export const calculsFixed6e: CalculRapideItem[] = [
     difficulty: 2,
     durationSec: 20,
     media: {
-      text: "0,3 × 12",
+      text: "0,4 × 15",
     },
-    expected: ["3,6", "3.6"],
-    hint: "0,3 c’est 3 dixièmes.",
-    explanation: "0,3 × 12 = 3,6.",
-    tags: ["decimaux", "multiplication"],
+    expected: ["6"],
+    hint: "4 × 15 = 60 puis ÷10.",
+    explanation:
+      "0,4 × 15 = 6.",
+    tags: ["decimaux"],
+  },
+
+  {
+    id: "6e_calcul_mental_facile_002",
+    niveau: "6e",
+    type: "calcul",
+    mode: "fixed",
+    notionId: "calcul_mental",
+    microId: "addition_mentale",
+    difficulty: 1,
+    durationSec: 15,
+    media: {
+      text: "98 + 6",
+    },
+    expected: ["104"],
+    hint: "Fais 100 + 4.",
+    explanation:
+      "98 + 6 = 100 + 4 = 104.",
+    tags: ["calcul-mental"],
   },
 ];
