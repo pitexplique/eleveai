@@ -3,111 +3,252 @@
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
+import type { CalculRapideItem, NiveauCalculRapide } from "@/lib/calcul-rapide/types";
 
-type Question = {
-  id: string;
-  type: "calcul" | "probleme";
-  text: string;
-  durationSec: number;
-  expected: string[];
+import { weekly6e } from "@/lib/calcul-rapide/data/6e/weekly";
+import { calculsFixed6e } from "@/lib/calcul-rapide/data/6e/calculs.fixed";
+import { calculsTemplates6e } from "@/lib/calcul-rapide/data/6e/calculs.templates";
+import { problemesFixed6e } from "@/lib/calcul-rapide/data/6e/problemes.fixed";
+import { problemesTemplates6e } from "@/lib/calcul-rapide/data/6e/problemes.templates";
+
+import { weekly5e } from "@/lib/calcul-rapide/data/5e/weekly";
+import { calculsFixed5e } from "@/lib/calcul-rapide/data/5e/calculs.fixed";
+import { calculsTemplates5e } from "@/lib/calcul-rapide/data/5e/calculs.templates";
+import { problemesFixed5e } from "@/lib/calcul-rapide/data/5e/problemes.fixed";
+import { problemesTemplates5e } from "@/lib/calcul-rapide/data/5e/problemes.templates";
+
+import { weekly4e } from "@/lib/calcul-rapide/data/4e/weekly";
+import { calculsFixed4e } from "@/lib/calcul-rapide/data/4e/calculs.fixed";
+import { calculsTemplates4e } from "@/lib/calcul-rapide/data/4e/calculs.templates";
+import { problemesFixed4e } from "@/lib/calcul-rapide/data/4e/problemes.fixed";
+import { problemesTemplates4e } from "@/lib/calcul-rapide/data/4e/problemes.templates";
+
+import { weekly3e } from "@/lib/calcul-rapide/data/3e/weekly";
+import { calculsFixed3e } from "@/lib/calcul-rapide/data/3e/calculs.fixed";
+import { calculsTemplates3e } from "@/lib/calcul-rapide/data/3e/calculs.templates";
+import { problemesFixed3e } from "@/lib/calcul-rapide/data/3e/problemes.fixed";
+import { problemesTemplates3e } from "@/lib/calcul-rapide/data/3e/problemes.templates";
+
+type GeneratedCalculRapideItem = CalculRapideItem & {
+  displayText: string;
+  displayExplanation?: string;
+  generatedExpected: string[];
 };
-
-const questions6e: Question[] = [
-  {
-    id: "q1",
-    type: "calcul",
-    text: "11 × 12",
-    durationSec: 20,
-    expected: ["132"],
-  },
-  {
-    id: "q2",
-    type: "calcul",
-    text: "Combien font 75 % de 500 ?",
-    durationSec: 20,
-    expected: ["375"],
-  },
-  {
-    id: "q3",
-    type: "calcul",
-    text: "Quel est le reste de la division euclidienne de 206 par 5 ?",
-    durationSec: 20,
-    expected: ["1"],
-  },
-  {
-    id: "q4",
-    type: "calcul",
-    text: "4130,7 : 100",
-    durationSec: 20,
-    expected: ["41,307", "41.307"],
-  },
-  {
-    id: "q5",
-    type: "calcul",
-    text: "Convertir 150 cm en mètres",
-    durationSec: 20,
-    expected: ["1,5", "1.5", "1,5 m", "1.5 m"],
-  },
-  {
-    id: "q6",
-    type: "probleme",
-    text: "Quel est le périmètre d’un carré d’aire 49 cm² ?",
-    durationSec: 60,
-    expected: ["28", "28 cm"],
-  },
-  {
-    id: "q7",
-    type: "probleme",
-    text: "Dans un collège de 2000 élèves, il y a 400 demi-pensionnaires. Donne le pourcentage.",
-    durationSec: 60,
-    expected: ["20", "20%", "20 %"],
-  },
-];
 
 function normalize(value: string) {
   return value.trim().toLowerCase().replace(",", ".").replace(/\s/g, "");
 }
 
+function formatNumber(value: number) {
+  if (Number.isInteger(value)) return String(value);
+  return String(Number(value.toFixed(6))).replace(".", ",");
+}
+
+function pickRandom(values: unknown[]) {
+  return values[Math.floor(Math.random() * values.length)];
+}
+
+function replaceTemplate(text: string, values: Record<string, unknown>) {
+  return text.replace(/\{\{(\w+)\}\}/g, (_, key) => String(values[key] ?? ""));
+}
+
+function computeAnswer(rule: string, values: Record<string, unknown>) {
+  const keys = Object.keys(values);
+  const args = keys.map((key) => Number(values[key]));
+  const fn = new Function(...keys, `return ${rule};`);
+  const result = fn(...args);
+
+  return typeof result === "number" ? formatNumber(result) : String(result);
+}
+
+function generateItem(item: CalculRapideItem): GeneratedCalculRapideItem {
+  if (item.mode !== "template" || !item.template || !item.variables || !item.answerRule) {
+    return {
+      ...item,
+      displayText: item.media.text,
+      displayExplanation: item.explanation,
+      generatedExpected: item.expected ?? [],
+    };
+  }
+
+  const values: Record<string, unknown> = {};
+
+  Object.entries(item.variables).forEach(([key, possibleValues]) => {
+    if (Array.isArray(possibleValues)) values[key] = pickRandom(possibleValues);
+  });
+
+  const answer = computeAnswer(item.answerRule, values);
+  const displayText = replaceTemplate(item.template, values);
+
+  const explanationWithValues = item.explanationTemplate
+    ? replaceTemplate(item.explanationTemplate, { ...values, answer })
+    : undefined;
+
+  return {
+    ...item,
+    media: { ...item.media, text: displayText },
+    displayText,
+    displayExplanation: explanationWithValues,
+    generatedExpected: [answer, answer.replace(".", ","), answer.replace(",", ".")],
+  };
+}
+
+function getDataByNiveau(niveau: NiveauCalculRapide) {
+  if (niveau === "5e") {
+    return {
+      weeks: weekly5e,
+      items: [
+        ...calculsFixed5e,
+        ...calculsTemplates5e,
+        ...problemesFixed5e,
+        ...problemesTemplates5e,
+      ],
+    };
+  }
+  if (niveau === "4e") {
+  return {
+    weeks: weekly4e,
+    items: [
+      ...calculsFixed4e,
+      ...calculsTemplates4e,
+      ...problemesFixed4e,
+      ...problemesTemplates4e,
+    ],
+  };
+}
+if (niveau === "3e") {
+  return {
+    weeks: weekly3e,
+    items: [
+      ...calculsFixed3e,
+      ...calculsTemplates3e,
+      ...problemesFixed3e,
+      ...problemesTemplates3e,
+    ],
+  };
+}
+  return {
+    weeks: weekly6e,
+    items: [
+      ...calculsFixed6e,
+      ...calculsTemplates6e,
+      ...problemesFixed6e,
+      ...problemesTemplates6e,
+    ],
+  };
+}
+
+function getTodayDay() {
+  const todayRaw = new Date()
+    .toLocaleDateString("fr-FR", { weekday: "long" })
+    .toLowerCase();
+
+  const map: Record<string, string> = {
+    lundi: "lundi",
+    mardi: "mardi",
+    mercredi: "mercredi",
+    jeudi: "jeudi",
+    vendredi: "vendredi",
+    monday: "lundi",
+    tuesday: "mardi",
+    wednesday: "mercredi",
+    thursday: "jeudi",
+    friday: "vendredi",
+  };
+
+  return map[todayRaw];
+}
+
+function buildSession(niveau: NiveauCalculRapide): GeneratedCalculRapideItem[] {
+  const { weeks, items } = getDataByNiveau(niveau);
+  const day = getTodayDay();
+
+  const week = weeks[0];
+  const session = week?.sessions.find((session) => session.day === day);
+
+  if (!session) return [];
+
+  return session.itemIds
+    .map((id: string) => items.find((item) => item.id === id))
+    .filter((item): item is CalculRapideItem => Boolean(item))
+    .map(generateItem);
+}
+
 export default function CalculRapideDefiClient() {
   const searchParams = useSearchParams();
-  const niveau = searchParams.get("niveau") ?? "6e";
+  const niveauParam = searchParams.get("niveau");
 
-  const questions = useMemo(() => questions6e, []);
+  const niveau: NiveauCalculRapide =
+    niveauParam === "5e" || niveauParam === "6e" || niveauParam === "4e" || niveauParam === "3e"
+      ? niveauParam
+      : "6e";
+
+  const questions = useMemo(() => buildSession(niveau), [niveau]);
 
   const [started, setStarted] = useState(false);
+  const [paused, setPaused] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [timeLeft, setTimeLeft] = useState(questions[0].durationSec);
   const [answer, setAnswer] = useState("");
   const [score, setScore] = useState(0);
   const [finished, setFinished] = useState(false);
+  const [feedback, setFeedback] = useState<null | boolean>(null);
+  const [showHint, setShowHint] = useState(false);
 
   const currentQuestion = questions[currentIndex];
+  const [timeLeft, setTimeLeft] = useState(currentQuestion?.durationSec ?? 20);
+
+  useEffect(() => {
+    setStarted(false);
+    setPaused(false);
+    setCurrentIndex(0);
+    setAnswer("");
+    setScore(0);
+    setFinished(false);
+    setFeedback(null);
+    setShowHint(false);
+  }, [niveau]);
+
+  useEffect(() => {
+    if (currentQuestion) setTimeLeft(currentQuestion.durationSec);
+  }, [currentIndex, currentQuestion]);
+
+  if (!questions.length) {
+    return (
+      <main className="flex min-h-screen items-center justify-center bg-slate-950 text-white">
+        Aucune session trouvée pour le niveau {niveau}
+      </main>
+    );
+  }
 
   function goNext() {
     setAnswer("");
+    setFeedback(null);
+    setShowHint(false);
 
     if (currentIndex + 1 >= questions.length) {
       setFinished(true);
       return;
     }
 
-    const nextIndex = currentIndex + 1;
-    setCurrentIndex(nextIndex);
-    setTimeLeft(questions[nextIndex].durationSec);
+    setCurrentIndex((index) => index + 1);
   }
 
   function validateAndNext() {
-    const isCorrect = currentQuestion.expected
-      .map(normalize)
-      .includes(normalize(answer));
+    const acceptedAnswers = [
+      ...(currentQuestion.expected ?? []),
+      ...currentQuestion.generatedExpected,
+    ];
 
-    if (isCorrect) setScore((s) => s + 1);
+    const isCorrect = acceptedAnswers.map(normalize).includes(normalize(answer));
 
-    goNext();
+    setFeedback(isCorrect);
+    if (isCorrect) setScore((score) => score + 1);
+
+    setTimeout(goNext, 1200);
   }
 
   useEffect(() => {
-    if (!started || finished) return;
+    if (!started || finished || paused) return;
 
     if (timeLeft <= 0) {
       goNext();
@@ -115,11 +256,11 @@ export default function CalculRapideDefiClient() {
     }
 
     const timer = window.setTimeout(() => {
-      setTimeLeft((t) => t - 1);
+      setTimeLeft((time) => time - 1);
     }, 1000);
 
     return () => window.clearTimeout(timer);
-  }, [started, finished, timeLeft]);
+  }, [started, finished, paused, timeLeft]);
 
   if (!started) {
     return (
@@ -129,18 +270,14 @@ export default function CalculRapideDefiClient() {
             Niveau {niveau}
           </div>
 
-          <h1 className="text-5xl font-black md:text-7xl">
-            Défi calcul rapide
-          </h1>
+          <h1 className="text-5xl font-black md:text-7xl">Défi calcul rapide</h1>
 
-          <p className="mt-5 text-2xl text-white/80">
-            5 calculs + 2 problèmes. Chronomètre visible.
-          </p>
+          <p className="mt-5 text-2xl text-white/80">⚡ Calculs + 🧠 Défis</p>
 
           <button
             type="button"
             onClick={() => setStarted(true)}
-            className="mt-10 rounded-full bg-emerald-400 px-10 py-5 text-2xl font-black text-slate-950 transition hover:scale-105"
+            className="mt-10 rounded-full bg-emerald-400 px-10 py-5 text-2xl font-black text-slate-950"
           >
             🚀 Démarrer
           </button>
@@ -169,14 +306,7 @@ export default function CalculRapideDefiClient() {
 
             <button
               type="button"
-              onClick={() => {
-                setStarted(true);
-                setFinished(false);
-                setCurrentIndex(0);
-                setTimeLeft(questions[0].durationSec);
-                setScore(0);
-                setAnswer("");
-              }}
+              onClick={() => window.location.reload()}
               className="rounded-full bg-emerald-400 px-8 py-4 text-xl font-black text-slate-950"
             >
               Recommencer
@@ -195,31 +325,45 @@ export default function CalculRapideDefiClient() {
             Question {currentIndex + 1} / {questions.length}
           </div>
 
-          <div
-            className={`rounded-full px-6 py-3 text-3xl font-black ${
-              timeLeft <= 5
-                ? "bg-red-500 text-white"
-                : "bg-emerald-400 text-slate-950"
-            }`}
-          >
-            ⏱️ {timeLeft}s
+          <div className="flex gap-3">
+            <button
+              type="button"
+              onClick={() => setPaused((paused) => !paused)}
+              className="rounded-full bg-yellow-400 px-4 py-2 text-lg font-black text-slate-950"
+            >
+              {paused ? "▶️" : "⏸️"}
+            </button>
+
+            <div
+              className={`rounded-full px-6 py-3 text-3xl font-black ${
+                timeLeft <= 5
+                  ? "bg-red-500 text-white"
+                  : "bg-emerald-400 text-slate-950"
+              }`}
+            >
+              ⏱️ {timeLeft}s
+            </div>
           </div>
         </div>
 
         <div className="mb-6 inline-flex rounded-full border border-white/20 bg-white/10 px-5 py-2 text-lg font-bold uppercase tracking-widest text-white/75">
-          {currentQuestion.type === "calcul" ? "Calcul" : "Problème"}
+          {currentQuestion.type === "calcul"
+            ? "Calcul"
+            : currentQuestion.type === "boss"
+              ? "Boss 🔥"
+              : "Problème"}
         </div>
 
         <h1 className="mx-auto flex min-h-[220px] max-w-5xl items-center justify-center text-5xl font-black leading-tight md:text-7xl">
-          {currentQuestion.text}
+          {currentQuestion.displayText}
         </h1>
 
         <div className="mx-auto mt-8 flex max-w-3xl flex-col gap-4 sm:flex-row">
           <input
             value={answer}
-            onChange={(e) => setAnswer(e.target.value)}
-            onKeyDown={(e) => {
-              if (e.key === "Enter") validateAndNext();
+            onChange={(event) => setAnswer(event.target.value)}
+            onKeyDown={(event) => {
+              if (event.key === "Enter") validateAndNext();
             }}
             autoFocus
             placeholder="Ta réponse..."
@@ -229,11 +373,38 @@ export default function CalculRapideDefiClient() {
           <button
             type="button"
             onClick={validateAndNext}
-            className="rounded-3xl bg-emerald-400 px-8 py-5 text-2xl font-black text-slate-950 transition hover:scale-105"
+            className="rounded-3xl bg-emerald-400 px-8 py-5 text-2xl font-black text-slate-950"
           >
             Valider
           </button>
         </div>
+
+        <button
+          type="button"
+          onClick={() => setShowHint(true)}
+          className="mt-4 text-blue-300"
+        >
+          💡 Aide
+        </button>
+
+        {showHint && (
+          <p className="mt-2 text-blue-200">{currentQuestion.hint}</p>
+        )}
+
+        {feedback !== null && (
+          <div className="mt-4 text-2xl font-bold">
+            {feedback ? (
+              <span className="text-green-400">✔ Bonne réponse</span>
+            ) : (
+              <span className="text-red-400">
+                ❌{" "}
+                {currentQuestion.displayExplanation ??
+                  currentQuestion.explanation ??
+                  "Réponse incorrecte."}
+              </span>
+            )}
+          </div>
+        )}
 
         <button
           type="button"
