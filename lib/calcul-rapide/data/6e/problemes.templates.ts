@@ -18,8 +18,9 @@ export const problemesTemplates6e: CalculRapideItem[] = [
     template:
       "{{total}} letchis sont partagés entre {{personnes}} enfants. Combien chaque enfant reçoit-il de letchis ?",
     variables: {
-      total: [36, 48, 56, 72, 81, 96],
-      personnes: [4, 6, 7, 8, 9, 12],
+      total: [30, 60, 90, 120],
+      personnes: [2,3,5],
+      nombres: []
     },
     answerRule: "total / personnes",
     hint: "C’est une situation de partage.",
