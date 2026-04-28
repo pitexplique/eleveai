@@ -35,13 +35,13 @@ export const weekly3e: CalculRapideWeek[] = [
         theme: "Réactivation brevet",
         durationTotalSec: 300,
         itemIds: [
-          "3e_calcul_puissance_001",
+          "3e_template_puissance_001",
           "3e_calcul_racine_001",
           "3e_template_equation_001",
           "3e_calcul_equation_001",
           "3e_template_fonction_001",
           "3e_calcul_fonction_001",
-          "3e_probleme_pythagore_001",
+          "3e_probleme_vitesse_001",
         ],
       },
       {
@@ -75,7 +75,7 @@ export const weekly3e: CalculRapideWeek[] = [
           "3e_template_equation_001",
           "3e_calcul_equation_001",
           "3e_calcul_fonction_001",
-          "3e_probleme_pythagore_001",
+          "3e_probleme_vitesse_001",
         ],
       },
       {
