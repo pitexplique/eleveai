@@ -13,10 +13,10 @@ export const problemesTemplates6e: CalculRapideItem[] = [
     difficulty: 2,
     durationSec: 60,
     media: {
-      text: "{{total}} letchis sont partagés entre {{personnes}} enfants. Combien chaque enfant reçoit-il de letchis ?",
+      text: "{{total}} ananas sont partagés entre {{personnes}} enfants. Combien chaque enfant reçoit-il d'ananas ?",
     },
     template:
-      "{{total}} letchis sont partagés entre {{personnes}} enfants. Combien chaque enfant reçoit-il de letchis ?",
+      "{{total}} d'ananas sont partagés entre {{personnes}} enfants. Combien chaque enfant reçoit-il de d'ananas ?",
     variables: {
       total: [30, 60, 90, 120],
       personnes: [2,3,5],
@@ -26,7 +26,7 @@ export const problemesTemplates6e: CalculRapideItem[] = [
     hint: "C’est une situation de partage.",
     explanationTemplate:
       "On partage {{total}} en {{personnes}} parts égales : {{total}} ÷ {{personnes}} = {{answer}}.",
-    tags: ["division", "partage", "reunion", "letchis"],
+    tags: ["division", "partage", "reunion", "ananas"],
   },
   {
     id: "6e_template_verger_tampon_001",
