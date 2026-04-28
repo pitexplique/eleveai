@@ -4,21 +4,21 @@ import type { CalculRapideItem } from "../../types";
 
 export const problemesTemplates3e: CalculRapideItem[] = [
   {
-    id: "3e_template_vitesse_001",
+    id: "3e_template_pourcentage_001",
     niveau: "3e",
     type: "probleme",
     mode: "template",
     notionId: "proportionnalite",
-    microId: "vitesse",
+    microId: "pourcentage",
     difficulty: 2,
     durationSec: 60,
-    media: { text: "{{d}} km en {{t}} h. Vitesse ?" },
-    template: "{{d}} km en {{t}} h. Vitesse ?",
+    media: { text: "{{p}} % de {{n}}" },
+    template: "{{p}} % de {{n}}",
     variables: {
-      d: [60, 120, 180],
-      t: [1, 2, 3],
+      p: [15, 20, 25],
+      n: [200, 300, 400],
     },
-    answerRule: "d / t",
-    explanationTemplate: "{{answer}} km/h",
+    answerRule: "(p/100)*n",
+    explanationTemplate: "{{p}} % de {{n}} = {{answer}}",
   },
 ];
