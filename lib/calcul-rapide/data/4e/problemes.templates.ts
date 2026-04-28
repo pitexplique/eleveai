@@ -56,7 +56,7 @@ export const problemesTemplates4e: CalculRapideItem[] = [
     template: "Triangle rectangle avec côtés {{a}} cm et {{b}} cm. Hypoténuse ?",
     variables: {
       a: [3, 5, 6],
-      b: [4, 12, 8],
+      b: [6, 8, 12],
     },
     answerRule: "Math.sqrt(a*a + b*b)",
     hint: "Utilise le théorème de Pythagore.",
@@ -83,24 +83,35 @@ export const problemesTemplates4e: CalculRapideItem[] = [
     explanationTemplate: "x = {{b}} - {{a}} = {{answer}}.",
     tags: ["equations", "template"],
   },
-  {
-    id: "4e_template_puissance_croissance_001",
-    niveau: "4e",
-    type: "probleme",
-    mode: "template",
-    notionId: "puissances",
-    microId: "puissance_calcul",
-    difficulty: 3,
-    durationSec: 60,
-    media: { text: "Une quantité initiale {{n}} double {{t}} fois. Quelle est la valeur finale ?" },
-    template: "Une quantité initiale {{n}} double {{t}} fois. Quelle est la valeur finale ?",
-    variables: {
-      n: [2, 3, 4],
-      t: [2, 3, 4],
-    },
-    answerRule: "n * Math.pow(2, t)",
-    hint: "Chaque doublement multiplie par 2.",
-    explanationTemplate: "{{n}} × 2^{{t}} = {{answer}}.",
-    tags: ["puissances", "croissance", "template"],
+{
+  id: "4e_template_puissance_produit_001",
+  niveau: "4e",
+  type: "probleme",
+  mode: "template",
+  notionId: "puissances",
+  microId: "puissance_calcul",
+  difficulty: 3,
+  durationSec: 60,
+
+  media: {
+    text: "Simplifie : {{a}}^{{n}} × {{a}}^{{m}}",
   },
+
+  template: "Simplifie : {{a}}^{{n}} × {{a}}^{{m}}",
+
+  variables: {
+    a: [2, 3, 4, 5],
+    n: [2, 3, 4],
+    m: [2, 3, 4],
+  },
+
+  answerRule: "Math.pow(a, n + m)",
+
+  hint: "Même base → on additionne les exposants.",
+
+  explanationTemplate:
+    "{{a}}^{{n}} × {{a}}^{{m}} = {{a}}^{{n + m}} = {{answer}}.",
+
+  tags: ["puissances", "produit", "template"],
+}
 ];

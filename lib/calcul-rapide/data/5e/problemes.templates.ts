@@ -37,10 +37,10 @@ export const problemesTemplates5e: CalculRapideItem[] = [
     difficulty: 3,
     durationSec: 60,
     media: {
-      text: "On prend {{a}}/{{b}} de {{n}} fruits. Combien de fruits cela représente-t-il ?",
+      text: "On prend {{a}}/{{b}} de {{n}} fruits. Combien de fruits cela représente-t-il en fraction?",
     },
     template:
-      "On prend {{a}}/{{b}} de {{n}} fruits. Combien de fruits cela représente-t-il ?",
+      "On prend {{a}}/{{b}} de {{n}} fruits. Combien de fruits cela représente-t-il en fractions?",
     variables: {
       a: [1, 2, 3],
       b: [2, 3, 4],
