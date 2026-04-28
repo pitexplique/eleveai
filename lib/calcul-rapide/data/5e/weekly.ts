@@ -13,7 +13,7 @@ export const weekly5e: CalculRapideWeek[] = [
       {
         id: "5e_lundi",
         niveau: "5e",
-        day: "lundi",
+        day: "mardi",
         title: "Relatifs",
         theme: "Calculs relatifs",
         durationTotalSec: 300,

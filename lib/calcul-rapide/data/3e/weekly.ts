@@ -13,7 +13,7 @@ export const weekly3e: CalculRapideWeek[] = [
       {
         id: "3e_lundi",
         niveau: "3e",
-        day: "lundi",
+        day: "mardi",
         title: "Défi",
         theme: "Mix",
         durationTotalSec: 300,

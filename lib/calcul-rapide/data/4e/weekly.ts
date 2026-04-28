@@ -13,7 +13,7 @@ export const weekly4e: CalculRapideWeek[] = [
       {
         id: "4e_lundi",
         niveau: "4e",
-        day: "lundi",
+        day: "mardi",
         title: "Calculs",
         theme: "Relatifs et puissances",
         durationTotalSec: 300,
