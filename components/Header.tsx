@@ -85,11 +85,6 @@ function logoutEleve() {
             Valéria
           </Link>
 
-          <Link href="/espace-profs" className={linkClass(isActive(pathname, "/espace-profs"))}>
-            <Wand2 className="h-4 w-4 text-blue-300" />
-            Générateur profs
-          </Link>
-
           <Link href="/coach-maths-ia" className={linkClass(isActive(pathname, "/coach-maths-ia"))}>
             <Brain className="h-4 w-4 text-orange-300" />
             Coach Maths
