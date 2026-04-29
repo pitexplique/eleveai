@@ -198,6 +198,7 @@ export default function TutorV4Page() {
   const hasInitializedFromUrl = useRef(false);
   const hasStartedFromUrl = useRef(false);
   const initialMicroIdRef = useRef<string | null>(null);
+  const lastUrlSelectionRef = useRef<string>("");
 
   const notionOptions = useMemo(() => getNotionOptions(classe), [classe]);
   const notionMicroMap = useMemo(() => getNotionMicroMap(classe), [classe]);
@@ -268,8 +269,6 @@ export default function TutorV4Page() {
   }
 
   useEffect(() => {
-    if (hasInitializedFromUrl.current) return;
-
     const urlClasse = normalizeClasse(searchParams.get("classe"));
     const urlMatiere = searchParams.get("matiere");
     const urlNotion = searchParams.get("notion");
@@ -277,18 +276,24 @@ export default function TutorV4Page() {
 
     const options = getNotionOptions(urlClasse);
     const firstNotion = options[0] ?? "";
+    const nextNotion =
+      urlNotion && isValidNotionId(urlNotion, urlClasse) ? urlNotion : firstNotion;
+
+    const selectionKey = [urlClasse, urlMatiere ?? "", nextNotion, urlMicroId ?? ""].join("|");
+    const hasSelectionChanged = lastUrlSelectionRef.current !== selectionKey;
 
     setClasse(urlClasse);
     if (urlMatiere) setMatiere(urlMatiere);
+    setNotion(nextNotion);
 
-    if (urlNotion && isValidNotionId(urlNotion, urlClasse)) {
-      setNotion(urlNotion);
-    } else {
-      setNotion(firstNotion);
+    initialMicroIdRef.current = urlMicroId;
+
+    if (hasInitializedFromUrl.current && hasSelectionChanged) {
+      hasStartedFromUrl.current = false;
+      setSessionId(null);
     }
 
-    if (urlMicroId) initialMicroIdRef.current = urlMicroId;
-
+    lastUrlSelectionRef.current = selectionKey;
     hasInitializedFromUrl.current = true;
   }, [searchParams]);
 
