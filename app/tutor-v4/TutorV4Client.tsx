@@ -34,6 +34,8 @@ import type {
   CanvasFigure,
 } from "@/lib/tutor-v4/types";
 
+import { useRouter } from "next/navigation";
+
 type StartResponse = StartTutorV4Response;
 type AnswerResponse = AnswerTutorV4Response;
 
@@ -187,6 +189,7 @@ function normalizeClasse(value: string | null): Classe {
 
 export default function TutorV4Page() {
   const searchParams = useSearchParams();
+   const router = useRouter(); // ✅ ICI
 
   const [classe, setClasse] = useState<Classe>("6e");
   const [matiere, setMatiere] = useState("maths");
@@ -784,40 +787,85 @@ function handleInputKeyDown(
       <div className="mx-auto max-w-7xl">
         <div className="grid gap-5 xl:grid-cols-[minmax(0,1fr)_340px]">
           <div className="space-y-5">
-            <section className="grid gap-4 md:grid-cols-3">
-              <Card>
-                <Label>Classe</Label>
-                <input
-                  value={classe}
-                  disabled
-                  className="w-full rounded-xl border border-slate-300 bg-slate-100 px-3 py-2 text-sm text-slate-700"
-                />
-              </Card>
+<section className="mb-5 space-y-4">
+  {/* Ligne 1 : retour + classe */}
+  <div className="grid gap-3 sm:grid-cols-[1fr_160px]">
+    <button
+      onClick={() => router.push("/coach-maths-ia")}
+      className="flex w-full items-center justify-center rounded-2xl bg-orange-500 px-4 py-3 text-sm font-black text-white shadow hover:bg-orange-600"
+    >
+      ← Retour au Coach
+    </button>
 
-              <Card>
-                <Label>Matière</Label>
-                <input
-                  value={matiere}
-                  disabled
-                  className="w-full rounded-xl border border-slate-300 bg-slate-100 px-3 py-2 text-sm text-slate-700"
-                />
-              </Card>
+    <div className="flex items-center justify-center rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm font-black text-slate-800 shadow-sm">
+      Classe : {classe}
+    </div>
+  </div>
 
-              <Card>
-                <Label>Notion</Label>
-                <select
-                  value={notion}
-                  onChange={(e) => setNotion(e.target.value)}
-                  className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900"
-                >
-                  {notionOptions.map((item) => (
-                    <option key={item} value={item}>
-                      {notionLabel(item, classe)}
-                    </option>
-                  ))}
-                </select>
-              </Card>
-            </section>
+  {/* Ligne 2 : notions */}
+  <div className="rounded-2xl border border-slate-200 bg-white p-3 shadow-sm">
+    <div className="mb-2 text-xs font-black uppercase tracking-wide text-slate-500">
+      Notions
+    </div>
+
+    <div className="flex gap-2 overflow-x-auto pb-1">
+      {notionOptions.map((notionId) => (
+        <button
+          key={notionId}
+          type="button"
+          onClick={() => {
+            setNotion(notionId);
+            setPair(null);
+            setCurrentQuestion(null);
+            setSessionId(null);
+            setActiveMicroId(null);
+            resetWrongAnswerFlow();
+            resetMicroStatusesForNotion(notionId);
+            initMicroScoresForNotion(notionId);
+          }}
+          className={[
+            "shrink-0 rounded-full border px-3 py-2 text-xs font-bold transition",
+            notion === notionId
+              ? "border-orange-500 bg-orange-500 text-white"
+              : "border-slate-200 bg-slate-50 text-slate-700 hover:bg-orange-50",
+          ].join(" ")}
+        >
+          {notionLabel(notionId, classe)}
+        </button>
+      ))}
+    </div>
+  </div>
+
+  {/* Ligne 3 : micro-compétences */}
+  <div className="rounded-2xl border border-slate-200 bg-white p-3 shadow-sm">
+    <div className="mb-2 text-xs font-black uppercase tracking-wide text-slate-500">
+      Micro-compétences
+    </div>
+
+    <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+      {notionMicros.map((microId) => {
+        const isActive = activeMicroId === microId;
+
+        return (
+          <button
+            key={microId}
+            type="button"
+            onClick={() => handleMicroClick(microId)}
+            disabled={busy || wrongAnswerPanelOpen}
+            className={[
+              "rounded-xl border px-3 py-2 text-left text-xs font-bold shadow-sm transition disabled:opacity-50",
+              isActive
+                ? "border-sky-500 bg-sky-50 text-sky-800 ring-2 ring-sky-200"
+                : "border-slate-200 bg-slate-50 text-slate-700 hover:bg-sky-50 hover:text-sky-700",
+            ].join(" ")}
+          >
+            {microLabel(microId, classe)}
+          </button>
+        );
+      })}
+    </div>
+  </div>
+</section>
 
             <header className="overflow-hidden rounded-[28px] border border-slate-200 bg-white shadow-lg">
               <div className="bg-gradient-to-r from-indigo-600 via-sky-600 to-cyan-500 px-6 py-5 text-white">
