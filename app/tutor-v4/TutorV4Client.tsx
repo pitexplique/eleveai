@@ -289,13 +289,14 @@ export default function TutorV4Page() {
     hasInitializedFromUrl.current = true;
   }, [searchParams]);
 
-  useEffect(() => {
-    if (!notionOptions.length) return;
+useEffect(() => {
+  if (!hasInitializedFromUrl.current) return;
+  if (!notionOptions.length) return;
 
-    if (!notion || !notionOptions.includes(notion)) {
-      setNotion(notionOptions[0]);
-    }
-  }, [classe, notion, notionOptions]);
+  if (!notion || !notionOptions.includes(notion)) {
+    setNotion(notionOptions[0]);
+  }
+}, [classe, notion, notionOptions]);
 
   useEffect(() => {
     if (!hasInitializedFromUrl.current) return;
