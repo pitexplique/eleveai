@@ -198,6 +198,7 @@ export default function TutorV4Page() {
   const hasInitializedFromUrl = useRef(false);
   const hasStartedFromUrl = useRef(false);
   const initialMicroIdRef = useRef<string | null>(null);
+   const lastUrlSelectionRef = useRef<string>("");
 
   const notionOptions = useMemo(() => getNotionOptions(classe), [classe]);
   const notionMicroMap = useMemo(() => getNotionMicroMap(classe), [classe]);
@@ -268,8 +269,6 @@ export default function TutorV4Page() {
   }
 
   useEffect(() => {
-    if (hasInitializedFromUrl.current) return;
-
     const urlClasse = normalizeClasse(searchParams.get("classe"));
     const urlMatiere = searchParams.get("matiere");
     const urlNotion = searchParams.get("notion");
@@ -277,18 +276,24 @@ export default function TutorV4Page() {
 
     const options = getNotionOptions(urlClasse);
     const firstNotion = options[0] ?? "";
+    const nextNotion =
+      urlNotion && isValidNotionId(urlNotion, urlClasse) ? urlNotion : firstNotion;
+
+    const selectionKey = [urlClasse, urlMatiere ?? "", nextNotion, urlMicroId ?? ""].join("|");
+    const hasSelectionChanged = lastUrlSelectionRef.current !== selectionKey;
+
 
     setClasse(urlClasse);
     if (urlMatiere) setMatiere(urlMatiere);
+    setNotion(nextNotion);
 
-    if (urlNotion && isValidNotionId(urlNotion, urlClasse)) {
-      setNotion(urlNotion);
-    } else {
-      setNotion(firstNotion);
+    initialMicroIdRef.current = urlMicroId;
+  if (hasInitializedFromUrl.current && hasSelectionChanged) {
+      hasStartedFromUrl.current = false;
+      setSessionId(null);
     }
 
-    if (urlMicroId) initialMicroIdRef.current = urlMicroId;
-
+    lastUrlSelectionRef.current = selectionKey;
     hasInitializedFromUrl.current = true;
   }, [searchParams]);
 
@@ -782,488 +787,471 @@ function handleInputKeyDown(
     void jumpToMicro(microId);
   }
 
-  return (
-    <main className="min-h-screen bg-[#f3f4f6] px-4 py-6">
-      <div className="mx-auto max-w-7xl">
-        <div className="grid gap-5 xl:grid-cols-[minmax(0,1fr)_340px]">
-          <div className="space-y-5">
-<section className="mb-5 space-y-4">
-  {/* Ligne 1 : retour + classe */}
-  <div className="grid gap-3 sm:grid-cols-[1fr_160px]">
-    <button
-      onClick={() => router.push("/coach-maths-ia")}
-      className="flex w-full items-center justify-center rounded-2xl bg-orange-500 px-4 py-3 text-sm font-black text-white shadow hover:bg-orange-600"
-    >
-      ← Retour au Coach
-    </button>
+ return (
+  <main className="min-h-screen bg-[#f3f4f6] px-2 py-3 sm:px-4 sm:py-6">
+    <div className="mx-auto max-w-7xl">
+      <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_340px]">
+        <div className="space-y-4">
+          <section className="space-y-3">
+            <div className="grid gap-3 sm:grid-cols-[1fr_180px]">
+              <button
+                onClick={() => router.push("/coach-maths-ia")}
+                className="flex w-full items-center justify-center rounded-2xl bg-orange-500 px-4 py-3 text-sm font-black text-white shadow hover:bg-orange-600"
+              >
+                ← Retour Coach
+              </button>
 
-    <div className="flex items-center justify-center rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm font-black text-slate-800 shadow-sm">
-      Classe : {classe}
-    </div>
-  </div>
-
-  {/* Ligne 2 : notions */}
-  <div className="rounded-2xl border border-slate-200 bg-white p-3 shadow-sm">
-    <div className="mb-2 text-xs font-black uppercase tracking-wide text-slate-500">
-      Notions
-    </div>
-
-    <div className="flex gap-2 overflow-x-auto pb-1">
-      {notionOptions.map((notionId) => (
-        <button
-          key={notionId}
-          type="button"
-          onClick={() => {
-            setNotion(notionId);
-            setPair(null);
-            setCurrentQuestion(null);
-            setSessionId(null);
-            setActiveMicroId(null);
-            resetWrongAnswerFlow();
-            resetMicroStatusesForNotion(notionId);
-            initMicroScoresForNotion(notionId);
-          }}
-          className={[
-            "shrink-0 rounded-full border px-3 py-2 text-xs font-bold transition",
-            notion === notionId
-              ? "border-orange-500 bg-orange-500 text-white"
-              : "border-slate-200 bg-slate-50 text-slate-700 hover:bg-orange-50",
-          ].join(" ")}
-        >
-          {notionLabel(notionId, classe)}
-        </button>
-      ))}
-    </div>
-  </div>
-
-  {/* Ligne 3 : micro-compétences */}
-  <div className="rounded-2xl border border-slate-200 bg-white p-3 shadow-sm">
-    <div className="mb-2 text-xs font-black uppercase tracking-wide text-slate-500">
-      Micro-compétences
-    </div>
-
-    <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
-      {notionMicros.map((microId) => {
-        const isActive = activeMicroId === microId;
-
-        return (
-          <button
-            key={microId}
-            type="button"
-            onClick={() => handleMicroClick(microId)}
-            disabled={busy || wrongAnswerPanelOpen}
-            className={[
-              "rounded-xl border px-3 py-2 text-left text-xs font-bold shadow-sm transition disabled:opacity-50",
-              isActive
-                ? "border-sky-500 bg-sky-50 text-sky-800 ring-2 ring-sky-200"
-                : "border-slate-200 bg-slate-50 text-slate-700 hover:bg-sky-50 hover:text-sky-700",
-            ].join(" ")}
-          >
-            {microLabel(microId, classe)}
-          </button>
-        );
-      })}
-    </div>
-  </div>
-</section>
-
-            <header className="overflow-hidden rounded-[28px] border border-slate-200 bg-white shadow-lg">
-              <div className="bg-gradient-to-r from-indigo-600 via-sky-600 to-cyan-500 px-6 py-5 text-white">
-                <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-                  <div className="space-y-2">
-                    <div className="inline-flex rounded-full bg-white/20 px-3 py-1 text-xs font-bold tracking-wide">
-                      MODE MISSION
-                    </div>
-                    <h1 className="text-3xl font-black tracking-tight">
-                      Tutor Maths V4
-                    </h1>
-                    <p className="text-sm text-white/90">
-                      Clique sur une micro-compétence à droite pour cibler ton entraînement.
-                    </p>
-                  </div>
-
-                  <div className="flex flex-wrap items-center gap-3">
-                    <GamePill>
-                      🎮 {mode === "evaluation" ? "Évaluation" : "Coaching"}
-                    </GamePill>
-                    <GamePill>⭐ {stars(recommendedStar)}</GamePill>
-                    <GamePill>🔥 Série {visibleProgress.streak}</GamePill>
-                  </div>
-                </div>
+              <div className="rounded-2xl border border-slate-200 bg-white px-4 py-3 text-center text-sm font-black text-slate-800 shadow-sm">
+                Classe : {classe}
               </div>
+            </div>
 
-              <div className="flex flex-col gap-4 px-6 py-5 md:flex-row md:items-center md:justify-between">
-                <div className="grid flex-1 gap-3 sm:grid-cols-3">
-                  <HeroStat title="Score" value={`${scoreSeanceSur20}/20`} icon="🎯" />
-                  <HeroStat
-                    title="Points"
-                    value={`${earnedPoints}/${possiblePoints}`}
-                    icon="⭐"
-                  />
-                  <HeroStat title="Temps" value={formatDuration(elapsedSeconds)} icon="⏱️" />
-                </div>
+            <div className="rounded-2xl border border-slate-200 bg-white p-3 shadow-sm">
+              <label className="mb-2 block text-xs font-black uppercase tracking-wide text-slate-500">
+                Notion
+              </label>
 
-                <button
-                  onClick={() => void startSession()}
-                  disabled={busy || wrongAnswerPanelOpen || !notion}
-                  className="rounded-2xl bg-slate-900 px-6 py-3 text-sm font-black text-white shadow hover:bg-slate-800 disabled:opacity-50"
-                >
-                  {busy ? "Chargement..." : "Démarrer une mission"}
-                </button>
-              </div>
-            </header>
+              <select
+                value={notion}
+                onChange={(e) => {
+                  const notionId = e.target.value;
+                  setNotion(notionId);
+                  setPair(null);
+                  setCurrentQuestion(null);
+                  setSessionId(null);
+                  setActiveMicroId(null);
+                  resetWrongAnswerFlow();
+                  resetMicroStatusesForNotion(notionId);
+                  initMicroScoresForNotion(notionId);
+                }}
+                className="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-base font-bold text-slate-900 outline-none focus:border-orange-500"
+              >
+                {notionOptions.map((notionId) => (
+                  <option key={notionId} value={notionId}>
+                    {notionLabel(notionId, classe)}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </section>
 
-            <section className="rounded-2xl border border-slate-200 bg-white/95 p-4 shadow-sm">
-              <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
-                <div className="text-sm font-semibold text-slate-800">
-                  {simpleEncouragement({
-                    ok: lastResult.ok,
-                    microId: lastResult.microId,
-                    points: lastResult.points,
-                    mode,
-                    classe,
-                  })}
-                </div>
-
-                <div className="flex flex-wrap gap-2">
-                  {visibleProgressText(visibleProgress.encouragement) ? (
-                    <span className="rounded-full bg-violet-100 px-3 py-1 text-xs font-semibold text-violet-900">
-                      {visibleProgressText(visibleProgress.encouragement)}
-                    </span>
-                  ) : null}
-
-                  {visibleProgress.unlockedStars.map((star) => (
-                    <span
-                      key={star.id}
-                      className="rounded-full bg-amber-100 px-3 py-1 text-xs font-semibold text-amber-900"
-                    >
-                      ⭐ {studentBadgeLabel(star)}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </section>
-
-            {successBanner.open ? (
-              <section className="rounded-2xl border border-emerald-200 bg-emerald-50 px-4 py-4 shadow-sm">
-                <div className="text-lg font-black text-emerald-800">
-                  {successBanner.title}
-                </div>
-                {successBanner.message ? (
-                  <div className="mt-1 text-sm font-medium text-emerald-700">
-                    {successBanner.message}
+          <header className="overflow-hidden rounded-[24px] border border-slate-200 bg-white shadow-lg sm:rounded-[28px]">
+            <div className="bg-gradient-to-r from-indigo-600 via-sky-600 to-cyan-500 px-4 py-5 text-white sm:px-6">
+              <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+                <div className="space-y-2">
+                  <div className="inline-flex rounded-full bg-white/20 px-3 py-1 text-xs font-bold tracking-wide">
+                    MODE MISSION
                   </div>
-                ) : null}
-              </section>
-            ) : null}
 
-            {feedback && !wrongAnswerPanelOpen ? (
-              <section className="rounded-2xl border border-slate-200 bg-white/95 p-4 shadow-sm">
-                <div className="text-sm font-semibold text-slate-700">{feedback}</div>
-              </section>
-            ) : null}
+                  <h1 className="text-2xl font-black tracking-tight sm:text-3xl">
+                    Tutor Maths V4
+                  </h1>
 
-            {pair && !currentQuestion ? (
-              <section className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
-                <div className="mb-4 space-y-1">
-                  <div className="text-xl font-black text-slate-900">
-                    Choisis ta question
-                  </div>
-                  <p className="text-sm text-slate-500">
-                    Micro active :{" "}
-                    <span className="font-semibold">{microLabel(pair.microId, classe)}</span>
+                  <p className="text-sm text-white/90">
+                    Choisis une notion, puis démarre une mission.
                   </p>
                 </div>
 
-                <div className="grid gap-4 md:grid-cols-2">
-                  {[pair.optionA, pair.optionB].map((option, idx) => (
-                    <button
-                      key={option.id}
-                      type="button"
-                      onClick={() => void chooseOption(option)}
-                      disabled={busy || wrongAnswerPanelOpen}
-                      className={`group rounded-[26px] border p-5 text-left shadow-sm transition hover:-translate-y-0.5 hover:shadow-lg disabled:opacity-50 ${
-                        idx === 0
-                          ? "border-sky-200 bg-gradient-to-b from-sky-50 to-white"
-                          : "border-violet-200 bg-gradient-to-b from-violet-50 to-white"
-                      }`}
-                    >
-                      <div className="mb-3 flex items-center justify-between gap-3">
-                        <span className="text-base font-black text-slate-900">
-                          Question {idx === 0 ? "A" : "B"}
-                        </span>
-                        <span className="rounded-full bg-amber-100 px-3 py-1 text-xs font-bold text-amber-900">
-                          {stars(option.meta.starLevel)}
-                        </span>
-                      </div>
-
-                      <div className="mb-3 flex flex-wrap gap-2">
-                        <Tag>
-                          {option.format === "qcm"
-                            ? "QCM"
-                            : option.format === "open"
-                            ? "Réponse rédigée"
-                            : "Réponse courte"}
-                        </Tag>
-                        <Tag>{microLabel(option.microId, classe)}</Tag>
-                        <Tag>{starPoints(option.meta.starLevel)} pts</Tag>
-                        {option.canvas ? <Tag>Figure</Tag> : null}
-                      </div>
-
-                      {option.canvas ? (
-                        <div className="mb-4 rounded-2xl bg-slate-50 p-3">
-                          {renderCanvas(option.canvas)}
-                        </div>
-                      ) : null}
-
-                      <p className="text-base leading-6 text-slate-900">{option.text}</p>
-                    </button>
-                  ))}
+                <div className="flex flex-wrap items-center gap-2 sm:gap-3">
+                  <GamePill>
+                    🎮 {mode === "evaluation" ? "Évaluation" : "Coaching"}
+                  </GamePill>
+                  <GamePill>⭐ {stars(recommendedStar)}</GamePill>
+                  <GamePill>🔥 Série {visibleProgress.streak}</GamePill>
                 </div>
-              </section>
-            ) : null}
+              </div>
+            </div>
 
-            {currentQuestion ? (
-              <section className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
-                <div className="mb-4 flex flex-wrap items-start justify-between gap-3">
-                  <div className="space-y-1">
-                    <div className="text-xl font-black text-slate-900">
-                      Mission en cours
-                    </div>
-                    <p className="text-sm text-slate-500">
-                      Compétence :{" "}
-                      <span className="font-semibold">
-                        {microLabel(currentQuestion.microId, classe)}
+            <div className="hidden gap-4 px-6 py-5 md:flex md:items-center md:justify-between">
+              <div className="grid flex-1 gap-3 sm:grid-cols-3">
+                <HeroStat title="Score" value={`${scoreSeanceSur20}/20`} icon="🎯" />
+                <HeroStat title="Points" value={`${earnedPoints}/${possiblePoints}`} icon="⭐" />
+                <HeroStat title="Temps" value={formatDuration(elapsedSeconds)} icon="⏱️" />
+              </div>
+
+              <button
+                onClick={() => void startSession()}
+                disabled={busy || wrongAnswerPanelOpen || !notion}
+                className="rounded-2xl bg-slate-900 px-6 py-3 text-sm font-black text-white shadow hover:bg-slate-800 disabled:opacity-50"
+              >
+                {busy ? "Chargement..." : "Démarrer une mission"}
+              </button>
+            </div>
+          </header>
+
+          <section className="grid gap-3 rounded-3xl border border-slate-200 bg-white p-4 shadow-sm md:hidden">
+            <h2 className="text-base font-black text-slate-900">Tableau de bord</h2>
+
+            <div className="grid grid-cols-2 gap-3">
+              <HeroStat title="Score" value={`${scoreSeanceSur20}/20`} icon="🎯" />
+              <HeroStat title="Temps" value={formatDuration(elapsedSeconds)} icon="⏱️" />
+            </div>
+
+            <button
+              onClick={() => void startSession()}
+              disabled={busy || wrongAnswerPanelOpen || !notion}
+              className="mt-1 rounded-2xl bg-slate-900 px-5 py-4 text-base font-black text-white shadow hover:bg-slate-800 disabled:opacity-50"
+            >
+              {busy ? "Chargement..." : "Démarrer une mission"}
+            </button>
+          </section>
+
+          <section className="rounded-2xl border border-slate-200 bg-white/95 p-4 shadow-sm">
+            <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+              <div className="text-sm font-semibold text-slate-800">
+                {simpleEncouragement({
+                  ok: lastResult.ok,
+                  microId: lastResult.microId,
+                  points: lastResult.points,
+                  mode,
+                  classe,
+                })}
+              </div>
+
+              <div className="flex flex-wrap gap-2">
+                {visibleProgressText(visibleProgress.encouragement) ? (
+                  <span className="rounded-full bg-violet-100 px-3 py-1 text-xs font-semibold text-violet-900">
+                    {visibleProgressText(visibleProgress.encouragement)}
+                  </span>
+                ) : null}
+
+                {visibleProgress.unlockedStars.map((star) => (
+                  <span
+                    key={star.id}
+                    className="rounded-full bg-amber-100 px-3 py-1 text-xs font-semibold text-amber-900"
+                  >
+                    ⭐ {studentBadgeLabel(star)}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          {successBanner.open ? (
+            <section className="rounded-2xl border border-emerald-200 bg-emerald-50 px-4 py-4 shadow-sm">
+              <div className="text-lg font-black text-emerald-800">
+                {successBanner.title}
+              </div>
+              {successBanner.message ? (
+                <div className="mt-1 text-sm font-medium text-emerald-700">
+                  {successBanner.message}
+                </div>
+              ) : null}
+            </section>
+          ) : null}
+
+          {feedback && !wrongAnswerPanelOpen ? (
+            <section className="rounded-2xl border border-slate-200 bg-white/95 p-4 shadow-sm">
+              <div className="text-sm font-semibold text-slate-700">{feedback}</div>
+            </section>
+          ) : null}
+
+          {pair && !currentQuestion ? (
+            <section className="rounded-3xl border border-slate-200 bg-white p-4 shadow-sm sm:p-5">
+              <div className="mb-4 space-y-1">
+                <div className="text-xl font-black text-slate-900">
+                  Choisis ta question
+                </div>
+                <p className="text-sm text-slate-500">
+                  Compétence active :{" "}
+                  <span className="font-semibold">
+                    {microLabel(pair.microId, classe)}
+                  </span>
+                </p>
+              </div>
+
+              <div className="grid gap-4 md:grid-cols-2">
+                {[pair.optionA, pair.optionB].map((option, idx) => (
+                  <button
+                    key={option.id}
+                    type="button"
+                    onClick={() => void chooseOption(option)}
+                    disabled={busy || wrongAnswerPanelOpen}
+                    className={`group rounded-[24px] border p-4 text-left shadow-sm transition hover:-translate-y-0.5 hover:shadow-lg disabled:opacity-50 sm:p-5 ${
+                      idx === 0
+                        ? "border-sky-200 bg-gradient-to-b from-sky-50 to-white"
+                        : "border-violet-200 bg-gradient-to-b from-violet-50 to-white"
+                    }`}
+                  >
+                    <div className="mb-3 flex items-center justify-between gap-3">
+                      <span className="text-base font-black text-slate-900">
+                        Question {idx === 0 ? "A" : "B"}
                       </span>
-                    </p>
-                  </div>
-
-                  <div className="flex flex-wrap gap-2">
-                    <span className="rounded-full bg-amber-100 px-3 py-1 text-xs font-bold text-amber-900">
-                      {stars(currentQuestion.meta.starLevel)}
-                    </span>
-                    <span className="rounded-full bg-emerald-100 px-3 py-1 text-xs font-bold text-emerald-900">
-                      {starPoints(currentQuestion.meta.starLevel)} pts
-                    </span>
-                  </div>
-                </div>
-
-                {!wrongAnswerPanelOpen ? (
-                  <>
-                    <div className="mb-4 rounded-2xl bg-gradient-to-r from-violet-100 to-fuchsia-100 px-4 py-3 text-sm font-bold text-violet-900">
-                      Compétence travaillée : {microLabel(currentQuestion.microId, classe)}
+                      <span className="rounded-full bg-amber-100 px-3 py-1 text-xs font-bold text-amber-900">
+                        {stars(option.meta.starLevel)}
+                      </span>
                     </div>
 
-                    <div className="mb-4 rounded-2xl border border-slate-200 bg-white p-4 text-base text-slate-900">
-                      {currentQuestion.text}
-                    </div>
-
-                    {currentQuestion.canvas ? (
-                      <div className="mb-5 rounded-2xl bg-slate-50 p-3">
-                        {renderCanvas(currentQuestion.canvas)}
-                      </div>
-                    ) : null}
-
-                    <div className="mb-4 flex flex-wrap gap-2">
+                    <div className="mb-3 flex flex-wrap gap-2">
                       <Tag>
-                        {currentQuestion.format === "qcm"
+                        {option.format === "qcm"
                           ? "QCM"
-                          : currentQuestion.format === "open"
+                          : option.format === "open"
                           ? "Réponse rédigée"
                           : "Réponse courte"}
                       </Tag>
-                      <Tag>{mode === "evaluation" ? "Évaluation" : "Coaching"}</Tag>
+                      <Tag>{microLabel(option.microId, classe)}</Tag>
+                      <Tag>{starPoints(option.meta.starLevel)} pts</Tag>
+                      {option.canvas ? <Tag>Figure</Tag> : null}
                     </div>
 
-                    {currentQuestion.format === "qcm" &&
-                    currentQuestion.choices?.length ? (
-                      <div className="space-y-3">
-                        <div className="text-sm font-bold text-slate-800">
-                          Clique sur ta réponse
-                        </div>
-
-                        <div className="grid gap-2">
-                          {currentQuestion.choices.map((choice, idx) => (
-                            <button
-                              key={`${choice}-${idx}`}
-                              type="button"
-                              onClick={() => void handleQcmClick(choice)}
-                              disabled={busy || wrongAnswerPanelOpen}
-                              className="rounded-2xl border border-slate-300 bg-white px-4 py-3 text-left text-sm font-medium text-slate-900 transition hover:bg-slate-50 disabled:opacity-50"
-                            >
-                              {choice}
-                            </button>
-                          ))}
-                        </div>
-                      </div>
-                    ) : currentQuestion.format === "open" ? (
-                      <div className="space-y-3">
-                        <div className="text-sm font-bold text-slate-800">
-                          Rédige ta réponse
-                        </div>
-
-                        <textarea
-                          value={answer}
-                          onChange={(e) => setAnswer(e.target.value)}
-                          onKeyDown={handleInputKeyDown}
-                          placeholder="Explique ton raisonnement..."
-                          disabled={busy || wrongAnswerPanelOpen}
-                          rows={5}
-                          className="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-base text-slate-900"
-                        />
-
-                        <button
-                          onClick={() => void submitAnswer()}
-                          disabled={busy || wrongAnswerPanelOpen}
-                          className="rounded-2xl bg-slate-900 px-5 py-3 text-sm font-black text-white hover:bg-slate-800 disabled:opacity-50"
-                        >
-                          Valider ma réponse
-                        </button>
-                      </div>
-                    ) : (
-                      <div className="space-y-3">
-                        <div className="text-sm font-bold text-slate-800">
-                          Écris ta réponse
-                        </div>
-
-                        <input
-                          value={answer}
-                          onChange={(e) => setAnswer(e.target.value)}
-                          onKeyDown={handleInputKeyDown}
-                          placeholder="Ta réponse..."
-                          disabled={busy || wrongAnswerPanelOpen}
-                          className="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-base text-slate-900"
-                        />
-
-                        <button
-                          onClick={() => void submitAnswer()}
-                          disabled={busy || wrongAnswerPanelOpen}
-                          className="rounded-2xl bg-slate-900 px-5 py-3 text-sm font-black text-white hover:bg-slate-800 disabled:opacity-50"
-                        >
-                          Valider ma réponse
-                        </button>
-                      </div>
-                    )}
-                    {mode === "coaching" && currentQuestion.hint ? (
-                      <div className="mt-4 rounded-2xl border border-emerald-200 bg-emerald-50 p-4 text-sm text-emerald-900">
-                        <span className="font-black">Indice :</span>{" "}
-                        {currentQuestion.hint}
+                    {option.canvas ? (
+                      <div className="mb-4 overflow-x-auto rounded-2xl bg-slate-50 p-3">
+                        {renderCanvas(option.canvas)}
                       </div>
                     ) : null}
-                  </>
-                ) : (
-                  <WrongAnswerPanel
-                    question={currentQuestion}
-                    userAnswer={lastSubmittedAnswer}
-                    explanation={explanationText}
-                    onContinue={continueAfterExplanation}
-                  />
-                )}
-              </section>
-            ) : null}
 
-            {!pair && !currentQuestion ? (
-              <div className="rounded-3xl border border-slate-200 bg-white p-10 text-center text-sm text-slate-600 shadow-sm">
-                Clique sur <span className="font-bold">Démarrer une mission</span> ou
-                sur une micro-compétence à droite.
+                    <p className="text-base leading-6 text-slate-900">
+                      {option.text}
+                    </p>
+                  </button>
+                ))}
               </div>
-            ) : null}
-          </div>
+            </section>
+          ) : null}
 
-          <aside className="space-y-5">
-            <SidebarCard title="Tableau de bord">
-              <div className="grid gap-3">
-                <StatLine label="Score" value={`${scoreSeanceSur20}/20`} />
-                <StatLine label="Temps" value={formatDuration(elapsedSeconds)} />
-                <StatLine label="Points" value={`${earnedPoints}/${possiblePoints}`} />
-                <StatLine label="Bonnes réponses" value={`${bonnesReponses}`} />
-                <StatLine label="Questions faites" value={`${nbTentatives}`} />
-              </div>
-            </SidebarCard>
-
-            <SidebarCard title={`Micro-compétences : ${notionLabel(notion, classe)}`}>
-              <div className="mb-3 text-xs text-slate-500">
-                Clique sur une micro-compétence pour t’entraîner dessus.
-              </div>
-
-              <div className="space-y-3">
-                {notionMicros.map((microId) => {
-                  const status = microStatuses[microId] ?? "idle";
-                  const score = microScores[microId] ?? {
-                    attempts: 0,
-                    success: 0,
-                    earnedPoints: 0,
-                    possiblePoints: 0,
-                  };
-                  const isActive = activeMicroId === microId;
-
-                  return (
-                    <button
-                      key={microId}
-                      type="button"
-                      onClick={() => handleMicroClick(microId)}
-                      disabled={busy || wrongAnswerPanelOpen}
-                      className={`w-full rounded-2xl border px-4 py-3 text-left shadow-sm transition hover:shadow-md disabled:opacity-50 ${
-                        statusClasses(status)
-                      } ${isActive ? "ring-2 ring-slate-900/20" : ""}`}
-                    >
-                      <div className="mb-2 flex items-start justify-between gap-3">
-                        <div className="text-sm font-semibold leading-5">
-                          {microLabel(microId, classe)}
-                        </div>
-
-                        <span className="rounded-full bg-white/80 px-2 py-1 text-[11px] font-bold shadow-sm">
-                          {statusLabel(status)}
-                        </span>
-                      </div>
-
-                      <div className="grid grid-cols-3 gap-2 text-[11px] font-semibold text-slate-700">
-                        <div className="rounded-xl bg-white/70 px-2 py-1">
-                          Score : {scoreOn20(score.earnedPoints, score.possiblePoints)}
-                        </div>
-                        <div className="rounded-xl bg-white/70 px-2 py-1">
-                          Réussites : {score.success}/{score.attempts}
-                        </div>
-                        <div className="rounded-xl bg-white/70 px-2 py-1">
-                          Points : {score.earnedPoints}/{score.possiblePoints}
-                        </div>
-                      </div>
-                    </button>
-                  );
-                })}
-              </div>
-            </SidebarCard>
-
-            <SidebarCard title="Badges gagnés">
-              {visibleProgress.unlockedStars.length === 0 ? (
-                <p className="text-sm text-slate-500">Aucun badge pour le moment.</p>
-              ) : (
-                <div className="flex flex-wrap gap-2">
-                  {visibleProgress.unlockedStars.map((star) => (
-                    <span
-                      key={star.id}
-                      className="rounded-full bg-amber-100 px-3 py-2 text-xs font-bold text-amber-900"
-                    >
-                      ⭐ {studentBadgeLabel(star)}
+          {currentQuestion ? (
+            <section className="rounded-3xl border border-slate-200 bg-white p-4 shadow-sm sm:p-5">
+              <div className="mb-4 flex flex-wrap items-start justify-between gap-3">
+                <div className="space-y-1">
+                  <div className="text-xl font-black text-slate-900">
+                    Mission en cours
+                  </div>
+                  <p className="text-sm text-slate-500">
+                    Compétence :{" "}
+                    <span className="font-semibold">
+                      {microLabel(currentQuestion.microId, classe)}
                     </span>
-                  ))}
+                  </p>
                 </div>
-              )}
-            </SidebarCard>
 
-            <SidebarCard title="Repères">
-              <div className="space-y-2 text-sm text-slate-700">
-                <p>• Plus une mission a d’étoiles, plus elle rapporte de points.</p>
-                <p>• Tu peux choisir la mission qui te paraît la plus adaptée.</p>
-                <p>• En coaching, un indice peut apparaître pour t’aider.</p>
-                <p>• Certaines missions affichent une figure.</p>
+                <div className="flex flex-wrap gap-2">
+                  <span className="rounded-full bg-amber-100 px-3 py-1 text-xs font-bold text-amber-900">
+                    {stars(currentQuestion.meta.starLevel)}
+                  </span>
+                  <span className="rounded-full bg-emerald-100 px-3 py-1 text-xs font-bold text-emerald-900">
+                    {starPoints(currentQuestion.meta.starLevel)} pts
+                  </span>
+                </div>
               </div>
-            </SidebarCard>
-          </aside>
+
+              {!wrongAnswerPanelOpen ? (
+                <>
+                  <div className="mb-4 rounded-2xl bg-gradient-to-r from-violet-100 to-fuchsia-100 px-4 py-3 text-sm font-bold text-violet-900">
+                    Compétence travaillée :{" "}
+                    {microLabel(currentQuestion.microId, classe)}
+                  </div>
+
+                  <div className="mb-4 rounded-2xl border border-slate-200 bg-white p-4 text-base text-slate-900">
+                    {currentQuestion.text}
+                  </div>
+
+                  {currentQuestion.canvas ? (
+                    <div className="mb-5 overflow-x-auto rounded-2xl bg-slate-50 p-3">
+                      {renderCanvas(currentQuestion.canvas)}
+                    </div>
+                  ) : null}
+
+                  <div className="mb-4 flex flex-wrap gap-2">
+                    <Tag>
+                      {currentQuestion.format === "qcm"
+                        ? "QCM"
+                        : currentQuestion.format === "open"
+                        ? "Réponse rédigée"
+                        : "Réponse courte"}
+                    </Tag>
+                    <Tag>{mode === "evaluation" ? "Évaluation" : "Coaching"}</Tag>
+                  </div>
+
+                  {currentQuestion.format === "qcm" &&
+                  currentQuestion.choices?.length ? (
+                    <div className="space-y-3">
+                      <div className="text-sm font-bold text-slate-800">
+                        Clique sur ta réponse
+                      </div>
+
+                      <div className="grid gap-2">
+                        {currentQuestion.choices.map((choice, idx) => (
+                          <button
+                            key={`${choice}-${idx}`}
+                            type="button"
+                            onClick={() => void handleQcmClick(choice)}
+                            disabled={busy || wrongAnswerPanelOpen}
+                            className="rounded-2xl border border-slate-300 bg-white px-4 py-4 text-left text-base font-medium text-slate-900 transition hover:bg-slate-50 disabled:opacity-50"
+                          >
+                            {choice}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  ) : currentQuestion.format === "open" ? (
+                    <div className="space-y-3">
+                      <div className="text-sm font-bold text-slate-800">
+                        Rédige ta réponse
+                      </div>
+
+                      <textarea
+                        value={answer}
+                        onChange={(e) => setAnswer(e.target.value)}
+                        onKeyDown={handleInputKeyDown}
+                        placeholder="Explique ton raisonnement..."
+                        disabled={busy || wrongAnswerPanelOpen}
+                        rows={5}
+                        className="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-base text-slate-900"
+                      />
+
+                      <button
+                        onClick={() => void submitAnswer()}
+                        disabled={busy || wrongAnswerPanelOpen}
+                        className="w-full rounded-2xl bg-slate-900 px-5 py-4 text-base font-black text-white hover:bg-slate-800 disabled:opacity-50 sm:w-auto"
+                      >
+                        Valider ma réponse
+                      </button>
+                    </div>
+                  ) : (
+                    <div className="space-y-3">
+                      <div className="text-sm font-bold text-slate-800">
+                        Écris ta réponse
+                      </div>
+
+                      <input
+                        value={answer}
+                        onChange={(e) => setAnswer(e.target.value)}
+                        onKeyDown={handleInputKeyDown}
+                        placeholder="Ta réponse..."
+                        disabled={busy || wrongAnswerPanelOpen}
+                        className="w-full rounded-2xl border border-slate-300 bg-white px-4 py-4 text-base text-slate-900"
+                      />
+
+                      <button
+                        onClick={() => void submitAnswer()}
+                        disabled={busy || wrongAnswerPanelOpen}
+                        className="w-full rounded-2xl bg-slate-900 px-5 py-4 text-base font-black text-white hover:bg-slate-800 disabled:opacity-50 sm:w-auto"
+                      >
+                        Valider ma réponse
+                      </button>
+                    </div>
+                  )}
+
+                  {mode === "coaching" && currentQuestion.hint ? (
+                    <div className="mt-4 rounded-2xl border border-emerald-200 bg-emerald-50 p-4 text-sm text-emerald-900">
+                      <span className="font-black">Indice :</span>{" "}
+                      {currentQuestion.hint}
+                    </div>
+                  ) : null}
+                </>
+              ) : (
+                <WrongAnswerPanel
+                  question={currentQuestion}
+                  userAnswer={lastSubmittedAnswer}
+                  explanation={explanationText}
+                  onContinue={continueAfterExplanation}
+                />
+              )}
+            </section>
+          ) : null}
+
+          {!pair && !currentQuestion ? (
+            <div className="rounded-3xl border border-slate-200 bg-white p-6 text-center text-sm text-slate-600 shadow-sm sm:p-10">
+              Clique sur <span className="font-bold">Démarrer une mission</span>.
+            </div>
+          ) : null}
         </div>
+
+        <aside className="hidden space-y-5 lg:block">
+          <SidebarCard title="Tableau de bord">
+            <div className="grid gap-3">
+              <StatLine label="Score" value={`${scoreSeanceSur20}/20`} />
+              <StatLine label="Temps" value={formatDuration(elapsedSeconds)} />
+              <StatLine label="Points" value={`${earnedPoints}/${possiblePoints}`} />
+              <StatLine label="Bonnes réponses" value={`${bonnesReponses}`} />
+              <StatLine label="Questions faites" value={`${nbTentatives}`} />
+            </div>
+          </SidebarCard>
+
+          <SidebarCard title={`Micro-compétences : ${notionLabel(notion, classe)}`}>
+            <div className="mb-3 text-xs text-slate-500">
+              Clique sur une micro-compétence pour t’entraîner dessus.
+            </div>
+
+            <div className="space-y-3">
+              {notionMicros.map((microId) => {
+                const status = microStatuses[microId] ?? "idle";
+                const score = microScores[microId] ?? {
+                  attempts: 0,
+                  success: 0,
+                  earnedPoints: 0,
+                  possiblePoints: 0,
+                };
+                const isActive = activeMicroId === microId;
+
+                return (
+                  <button
+                    key={microId}
+                    type="button"
+                    onClick={() => handleMicroClick(microId)}
+                    disabled={busy || wrongAnswerPanelOpen}
+                    className={`w-full rounded-2xl border px-4 py-3 text-left shadow-sm transition hover:shadow-md disabled:opacity-50 ${
+                      statusClasses(status)
+                    } ${isActive ? "ring-2 ring-slate-900/20" : ""}`}
+                  >
+                    <div className="mb-2 flex items-start justify-between gap-3">
+                      <div className="text-sm font-semibold leading-5">
+                        {microLabel(microId, classe)}
+                      </div>
+
+                      <span className="rounded-full bg-white/80 px-2 py-1 text-[11px] font-bold shadow-sm">
+                        {statusLabel(status)}
+                      </span>
+                    </div>
+
+                    <div className="grid grid-cols-3 gap-2 text-[11px] font-semibold text-slate-700">
+                      <div className="rounded-xl bg-white/70 px-2 py-1">
+                        Score : {scoreOn20(score.earnedPoints, score.possiblePoints)}
+                      </div>
+                      <div className="rounded-xl bg-white/70 px-2 py-1">
+                        Réussites : {score.success}/{score.attempts}
+                      </div>
+                      <div className="rounded-xl bg-white/70 px-2 py-1">
+                        Points : {score.earnedPoints}/{score.possiblePoints}
+                      </div>
+                    </div>
+                  </button>
+                );
+              })}
+            </div>
+          </SidebarCard>
+
+          <SidebarCard title="Badges gagnés">
+            {visibleProgress.unlockedStars.length === 0 ? (
+              <p className="text-sm text-slate-500">Aucun badge pour le moment.</p>
+            ) : (
+              <div className="flex flex-wrap gap-2">
+                {visibleProgress.unlockedStars.map((star) => (
+                  <span
+                    key={star.id}
+                    className="rounded-full bg-amber-100 px-3 py-2 text-xs font-bold text-amber-900"
+                  >
+                    ⭐ {studentBadgeLabel(star)}
+                  </span>
+                ))}
+              </div>
+            )}
+          </SidebarCard>
+
+          <SidebarCard title="Repères">
+            <div className="space-y-2 text-sm text-slate-700">
+              <p>• Plus une mission a d’étoiles, plus elle rapporte de points.</p>
+              <p>• Tu peux choisir la mission qui te paraît la plus adaptée.</p>
+              <p>• En coaching, un indice peut apparaître pour t’aider.</p>
+              <p>• Certaines missions affichent une figure.</p>
+            </div>
+          </SidebarCard>
+        </aside>
       </div>
-    </main>
-  );
+    </div>
+  </main>
+);
 }
 
 function WrongAnswerPanel({
@@ -1397,25 +1385,27 @@ function SidebarCard({
   );
 }
 
-function HeroStat({
-  title,
-  value,
-  icon,
-}: {
-  title: string;
-  value: string;
-  icon: string;
-}) {
-  return (
-    <div className="rounded-2xl border border-slate-200 bg-white px-4 py-3 shadow-sm">
-      <div className="mb-1 flex items-center gap-2 text-xs font-bold uppercase tracking-wide text-slate-500">
-        <span>{icon}</span>
-        <span>{title}</span>
+  function HeroStat({
+    title,
+    value,
+    icon,
+  }: {
+    title: string;
+    value: string;
+    icon: string;
+  }) {
+    return (
+      <div className="rounded-2xl border border-slate-200 bg-white px-3 py-3 shadow-sm sm:px-4">
+        <div className="mb-1 flex items-center gap-1 text-[10px] font-bold uppercase tracking-wide text-slate-500 sm:text-xs">
+          <span>{icon}</span>
+          <span>{title}</span>
+        </div>
+        <div className="text-xl font-black text-slate-900 sm:text-2xl">
+          {value}
+        </div>
       </div>
-      <div className="text-2xl font-black text-slate-900">{value}</div>
-    </div>
-  );
-}
+    );
+  }
 
 function StatLine({
   label,
