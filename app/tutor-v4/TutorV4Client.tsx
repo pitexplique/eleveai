@@ -197,6 +197,7 @@ export default function TutorV4Page() {
   const [classe, setClasse] = useState<Classe>("6e");
   const [matiere, setMatiere] = useState("maths");
   const [notion, setNotion] = useState("");
+  const [urlInitDone, setUrlInitDone] = useState(false);
 
   const hasInitializedFromUrl = useRef(false);
   const hasStartedFromUrl = useRef(false);
@@ -288,28 +289,49 @@ useEffect(() => {
   setNotion(validUrlNotion);
 
   initialMicroIdRef.current = urlMicroId;
-
   hasInitializedFromUrl.current = true;
+  setUrlInitDone(true);
 }, [searchParams]);
 
 useEffect(() => {
-  if (!hasInitializedFromUrl.current) return;
+  if (hasInitializedFromUrl.current) return;
+
+  const urlClasse = normalizeClasse(searchParams.get("classe"));
+  const urlMatiere = searchParams.get("matiere") ?? "maths";
+  const urlNotion = searchParams.get("notion");
+  const urlMicroId = searchParams.get("microId");
+
+  const options = getNotionOptions(urlClasse);
+  const initialNotion =
+    urlNotion && options.includes(urlNotion) ? urlNotion : options[0] ?? "";
+
+  setClasse(urlClasse);
+  setMatiere(urlMatiere);
+  setNotion(initialNotion);
+
+  initialMicroIdRef.current = urlMicroId;
+  hasInitializedFromUrl.current = true;
+  setUrlInitDone(true);
+}, [searchParams]);
+
+useEffect(() => {
+  if (!urlInitDone) return;
   if (!notionOptions.length) return;
 
   if (!notion || !notionOptions.includes(notion)) {
     setNotion(notionOptions[0]);
   }
-}, [notion, notionOptions]);
+}, [urlInitDone, notion, notionOptions]);
 
-  useEffect(() => {
-    if (!hasInitializedFromUrl.current) return;
-    if (hasStartedFromUrl.current) return;
-    if (!initialMicroIdRef.current) return;
-    if (!notion) return;
+useEffect(() => {
+  if (!urlInitDone) return;
+  if (hasStartedFromUrl.current) return;
+  if (!initialMicroIdRef.current) return;
+  if (!notion) return;
 
-    hasStartedFromUrl.current = true;
-    void startSession(initialMicroIdRef.current);
-  }, [notion]);
+  hasStartedFromUrl.current = true;
+  void startSession(initialMicroIdRef.current);
+}, [urlInitDone, notion]);
 
   useEffect(() => {
     if (!sessionStartedAt) {
