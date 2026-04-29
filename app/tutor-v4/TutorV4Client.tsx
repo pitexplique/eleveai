@@ -189,7 +189,7 @@ function normalizeClasse(value: string | null): Classe {
 
 export default function TutorV4Page() {
   const searchParams = useSearchParams();
-   const router = useRouter(); // ✅ ICI
+  const router = useRouter(); // ✅ ICI
 
   const [classe, setClasse] = useState<Classe>("6e");
   const [matiere, setMatiere] = useState("maths");
@@ -198,7 +198,7 @@ export default function TutorV4Page() {
   const hasInitializedFromUrl = useRef(false);
   const hasStartedFromUrl = useRef(false);
   const initialMicroIdRef = useRef<string | null>(null);
-   const lastUrlSelectionRef = useRef<string>("");
+  const lastUrlSelectionRef = useRef<string>("");
 
   const notionOptions = useMemo(() => getNotionOptions(classe), [classe]);
   const notionMicroMap = useMemo(() => getNotionMicroMap(classe), [classe]);
@@ -268,43 +268,44 @@ export default function TutorV4Page() {
     return getNotionOptions(currentClasse).includes(value);
   }
 
-  useEffect(() => {
-    const urlClasse = normalizeClasse(searchParams.get("classe"));
-    const urlMatiere = searchParams.get("matiere");
-    const urlNotion = searchParams.get("notion");
-    const urlMicroId = searchParams.get("microId");
+useEffect(() => {
+  if (hasInitializedFromUrl.current) return;
 
-    const options = getNotionOptions(urlClasse);
-    const firstNotion = options[0] ?? "";
-    const nextNotion =
-      urlNotion && isValidNotionId(urlNotion, urlClasse) ? urlNotion : firstNotion;
+  const urlClasse = normalizeClasse(searchParams.get("classe"));
+  const urlMatiere = searchParams.get("matiere") ?? "maths";
+  const urlNotion = searchParams.get("notion");
+  const urlMicroId = searchParams.get("microId");
 
-    const selectionKey = [urlClasse, urlMatiere ?? "", nextNotion, urlMicroId ?? ""].join("|");
-    const hasSelectionChanged = lastUrlSelectionRef.current !== selectionKey;
+  const options = getNotionOptions(urlClasse);
+  const validUrlNotion =
+    urlNotion && options.includes(urlNotion) ? urlNotion : options[0] ?? "";
 
+  setClasse(urlClasse);
+  setMatiere(urlMatiere);
+  setNotion(validUrlNotion);
 
-    setClasse(urlClasse);
-    if (urlMatiere) setMatiere(urlMatiere);
-    setNotion(nextNotion);
+  initialMicroIdRef.current = urlMicroId;
 
-    initialMicroIdRef.current = urlMicroId;
-  if (hasInitializedFromUrl.current && hasSelectionChanged) {
-      hasStartedFromUrl.current = false;
-      setSessionId(null);
-    }
-
-    lastUrlSelectionRef.current = selectionKey;
-    hasInitializedFromUrl.current = true;
-  }, [searchParams]);
+  hasInitializedFromUrl.current = true;
+}, [searchParams]);
 
 useEffect(() => {
   if (!hasInitializedFromUrl.current) return;
   if (!notionOptions.length) return;
 
+  const urlNotion = searchParams.get("notion");
+
+  // ✅ Si la notion vient de l'URL et est valide, on ne l'écrase jamais
+  if (urlNotion && notionOptions.includes(urlNotion)) {
+    if (notion !== urlNotion) setNotion(urlNotion);
+    return;
+  }
+
+  // ✅ Sinon seulement, on corrige vers la première notion
   if (!notion || !notionOptions.includes(notion)) {
     setNotion(notionOptions[0]);
   }
-}, [classe, notion, notionOptions]);
+}, [notion, notionOptions, searchParams]);
 
   useEffect(() => {
     if (!hasInitializedFromUrl.current) return;
@@ -510,6 +511,7 @@ useEffect(() => {
       setRecommendedStar(typed.recommendedStar);
       setVisibleProgress(typed.visibleProgress);
       setSessionStartedAt(Date.now());
+      setNotion(typed.pair.notionId);
       setActiveMicroId(typed.pair.microId);
 
       setMicroStatuses((prev) => ({
