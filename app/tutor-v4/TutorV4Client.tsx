@@ -108,19 +108,22 @@ function simpleEncouragement(args: {
   mode: TutorMode;
   classe: Classe;
 }) {
+  // ❌ plus de message par défaut
   if (args.ok === undefined || !args.microId) {
-    return "Choisis une mission puis avance à ton rythme.";
+    return "";
   }
 
+  // ✅ succès → court et impactant
   if (args.ok) {
-    return `✅ Mission réussie : ${microLabel(args.microId, args.classe)}${
-      args.points ? ` — +${args.points} point${args.points > 1 ? "s" : ""}` : ""
+    return `✅ ${microLabel(args.microId, args.classe)}${
+      args.points ? ` +${args.points}` : ""
     }`;
   }
 
+  // ⚠️ erreur → simple
   return args.mode === "coaching"
-    ? `⚠️ Mission à retravailler : ${microLabel(args.microId, args.classe)} — un indice apparaît.`
-    : `⚠️ Mission à retravailler : ${microLabel(args.microId, args.classe)}`;
+    ? `⚠️ ${microLabel(args.microId, args.classe)} (indice)`
+    : `⚠️ ${microLabel(args.microId, args.classe)}`;
 }
 
 function visibleProgressText(text: string) {
