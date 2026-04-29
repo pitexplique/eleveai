@@ -296,19 +296,10 @@ useEffect(() => {
   if (!hasInitializedFromUrl.current) return;
   if (!notionOptions.length) return;
 
-  const urlNotion = searchParams.get("notion");
-
-  // ✅ Si la notion vient de l'URL et est valide, on ne l'écrase jamais
-  if (urlNotion && notionOptions.includes(urlNotion)) {
-    if (notion !== urlNotion) setNotion(urlNotion);
-    return;
-  }
-
-  // ✅ Sinon seulement, on corrige vers la première notion
   if (!notion || !notionOptions.includes(notion)) {
     setNotion(notionOptions[0]);
   }
-}, [notion, notionOptions, searchParams]);
+}, [notion, notionOptions]);
 
   useEffect(() => {
     if (!hasInitializedFromUrl.current) return;
@@ -815,7 +806,6 @@ function handleInputKeyDown(
               <label className="mb-2 block text-xs font-black uppercase tracking-wide text-slate-500">
                 Notion
               </label>
-
               <select
                 value={notion}
                 onChange={(e) => {
