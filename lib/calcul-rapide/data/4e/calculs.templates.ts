@@ -15,8 +15,8 @@ export const calculsTemplates4e: CalculRapideItem[] = [
     media: { text: "{{a}} × {{b}}" },
     template: "{{a}} × {{b}}",
     variables: {
-      a: [-9, -8, -7, -5, 4, 6, 7],
-      b: [-6, -4, -3, 2, 5, 7],
+      a: [-9, -8, -7, -5, -4, -3 , -2],
+      b: [6, 4, 3, 2, 5, 7],
     },
     answerRule: "a * b",
     hint: "Regarde d’abord les signes, puis multiplie les nombres.",
@@ -35,8 +35,8 @@ export const calculsTemplates4e: CalculRapideItem[] = [
     media: { text: "{{a}} + {{b}}" },
     template: "{{a}} + {{b}}",
     variables: {
-      a: [-15, -12, -8, 6, 9, 14],
-      b: [-9, -5, 4, 7, 11],
+      a: [-15, -12, -8, -6, -9, 14],
+      b: [9, 5, 4, 7, 11],
     },
     answerRule: "a + b",
     hint: "Additionne en tenant compte des signes.",
@@ -55,7 +55,7 @@ export const calculsTemplates4e: CalculRapideItem[] = [
     media: { text: "{{a}}²" },
     template: "{{a}}²",
     variables: {
-      a: [3, 4, 5, 6, 7, 8, 9],
+      a: [3, 4, 5, 6, 7, 8, 9, ],
     },
     answerRule: "a * a",
     hint: "Un carré signifie multiplier le nombre par lui-même.",
@@ -111,7 +111,7 @@ export const calculsTemplates4e: CalculRapideItem[] = [
     microId: "equation_simple",
     difficulty: 2,
     durationSec: 25,
-    media: { text: "x + {{a}} = {{b}}" },
+    media: { text: "Résoudre x + {{a}} = {{b}}" },
     template: "x + {{a}} = {{b}}",
     variables: {
       a: [3, 5, 7, 9, 12],
