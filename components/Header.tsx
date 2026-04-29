@@ -14,7 +14,11 @@ import {
   X,
   Home,
   BadgeCheck,
+  GraduationCap,
+  LogOut,
 } from "lucide-react";
+import { useEleve } from "@/context/EleveContext";
+
 
 function isActive(pathname: string, href: string) {
   if (href === "/") return pathname === "/";
@@ -24,10 +28,17 @@ function isActive(pathname: string, href: string) {
 export default function Header() {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const { eleve, logout } = useEleve();
 
   useEffect(() => {
     setMobileOpen(false);
   }, [pathname]);
+
+
+function logoutEleve() {
+  logout();
+  window.location.href = "/accueil";
+}
 
   const linkClass = (active: boolean) =>
     `inline-flex items-center gap-2 rounded-full px-3.5 py-2 text-sm font-semibold transition ${
@@ -42,6 +53,8 @@ export default function Header() {
         ? "bg-white text-slate-950"
         : "bg-white/10 text-white hover:bg-white/15"
     }`;
+
+  const eleveLabel = eleve?.nom || eleve?.code_eleve || "Élève";
 
   return (
     <header className="sticky top-0 z-50 border-b border-white/10 bg-slate-950/80 backdrop-blur-xl">
@@ -92,10 +105,34 @@ export default function Header() {
             Parcours
           </Link>
 
-          <Link href="/contact" className={linkClass(isActive(pathname, "/contact"))}>
-            <Mail className="h-4 w-4 text-cyan-300" />
-            Contact
-          </Link>
+          {eleve ? (
+            <div className="ml-2 flex items-center gap-2">
+              <Link
+                href="/parcours"
+                className="inline-flex items-center gap-2 rounded-full bg-emerald-400 px-4 py-2 text-sm font-black text-slate-950 shadow-lg transition hover:bg-emerald-300"
+              >
+                <GraduationCap className="h-4 w-4" />
+                {eleveLabel}
+              </Link>
+
+              <button
+                type="button"
+                onClick={logoutEleve}
+                className="inline-flex items-center gap-2 rounded-full bg-red-500 px-3.5 py-2 text-sm font-bold text-white shadow transition hover:bg-red-600"
+              >
+                <LogOut className="h-4 w-4" />
+                Déconnexion
+              </button>
+            </div>
+          ) : (
+            <Link
+              href="/auth/signin-eleve"
+              className="ml-2 inline-flex items-center gap-2 rounded-full bg-emerald-400 px-4 py-2 text-sm font-black text-slate-950 shadow-lg transition hover:bg-emerald-300"
+            >
+              <GraduationCap className="h-4 w-4" />
+              Connexion élève
+            </Link>
+          )}
         </div>
 
         <button
@@ -111,19 +148,38 @@ export default function Header() {
       {mobileOpen && (
         <div className="border-t border-white/10 bg-slate-950/95 px-4 py-4 backdrop-blur-xl lg:hidden">
           <div className="mx-auto grid max-w-7xl gap-2">
+            {eleve ? (
+              <>
+                <Link
+                  href="/parcours"
+                  className="flex items-center justify-center gap-3 rounded-2xl bg-emerald-400 px-4 py-4 text-sm font-black text-slate-950 shadow-lg"
+                >
+                  <GraduationCap className="h-5 w-5" />
+                  {eleveLabel}
+                </Link>
+
+                <button
+                  type="button"
+                  onClick={logoutEleve}
+                  className="flex items-center justify-center gap-3 rounded-2xl bg-red-500 px-4 py-4 text-sm font-black text-white shadow-lg"
+                >
+                  <LogOut className="h-5 w-5" />
+                  Déconnexion
+                </button>
+              </>
+            ) : (
+              <Link
+                href="/auth/signin-eleve"
+                className="flex items-center justify-center gap-3 rounded-2xl bg-emerald-400 px-4 py-4 text-sm font-black text-slate-950 shadow-lg"
+              >
+                <GraduationCap className="h-5 w-5" />
+                Connexion élève
+              </Link>
+            )}
+
             <Link href="/accueil" className={mobileLinkClass(isActive(pathname, "/accueil"))}>
               <Home className="h-4 w-4 text-cyan-300" />
               Accueil
-            </Link>
-
-            <Link href="/optimiseur" className={mobileLinkClass(isActive(pathname, "/optimiseur"))}>
-              <BadgeCheck className="h-4 w-4 text-amber-300" />
-              Valéria
-            </Link>
-
-            <Link href="/espace-profs" className={mobileLinkClass(isActive(pathname, "/espace-profs"))}>
-              <Wand2 className="h-4 w-4 text-blue-300" />
-              Générateur de prompts profs
             </Link>
 
             <Link href="/coach-maths-ia" className={mobileLinkClass(isActive(pathname, "/coach-maths-ia"))}>
@@ -139,6 +195,16 @@ export default function Header() {
             <Link href="/parcours" className={mobileLinkClass(isActive(pathname, "/parcours"))}>
               <Route className="h-4 w-4 text-purple-300" />
               Parcours
+            </Link>
+
+            <Link href="/optimiseur" className={mobileLinkClass(isActive(pathname, "/optimiseur"))}>
+              <BadgeCheck className="h-4 w-4 text-amber-300" />
+              Valéria
+            </Link>
+
+            <Link href="/espace-profs" className={mobileLinkClass(isActive(pathname, "/espace-profs"))}>
+              <Wand2 className="h-4 w-4 text-blue-300" />
+              Générateur de prompts profs
             </Link>
 
             <Link href="/contact" className={mobileLinkClass(isActive(pathname, "/contact"))}>

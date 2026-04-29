@@ -6,6 +6,7 @@ import "katex/dist/katex.min.css";
 import { Analytics } from "@vercel/analytics/react";
 import DevBanner from "@/components/DevBanner";
 import Header from "@/components/Header";
+import { EleveProvider } from "@/context/EleveContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -118,11 +119,13 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} min-h-screen antialiased`}
       >
-        <DevBanner />
+        <EleveProvider>
+          <DevBanner />
 
-        <Header />
+          <Header />
 
-        {children}
+          {children}
+        </EleveProvider>
 
         <script
           type="application/ld+json"
