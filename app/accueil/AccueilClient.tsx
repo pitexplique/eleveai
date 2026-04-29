@@ -7,10 +7,9 @@ import { useEffect, useState } from "react";
 const HEADER_HEIGHT = 72;
 
 const cards = [
-  { href: "/optimiseur", image: "/images/cards/valeria.png" },
-  { href: "/espace-profs", image: "/images/cards/prompt_prof.png" },
   { href: "/coach-maths-ia", image: "/images/cards/coach.png" },
   { href: "/calcul-rapide", image: "/images/cards/calcul-rapide.png" },
+  { href: "/optimiseur", image: "/images/cards/valeria.png" },
 ];
 
 export default function AccueilPage() {
