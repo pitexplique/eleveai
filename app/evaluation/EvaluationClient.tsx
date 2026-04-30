@@ -108,7 +108,7 @@ export default function EvaluationClient() {
 
           <p className="mt-4 max-w-3xl text-lg font-medium text-slate-700">
             Un test court pour voir tes forces, repérer ce qu’il faut
-            retravailler et mesurer tes progrès.
+            retravailler, mesurer tes progrès et concourir
           </p>
 
           {/* 🔥 Bloc chrono */}
