@@ -103,7 +103,7 @@ export default function EvaluationClient() {
           </p>
 
           <h1 className="text-3xl font-black md:text-5xl">
-            Où en es-tu en maths ?
+             Teste ton niveau, améliore ton score et entre dans le concours - Classement🏅
           </h1>
 
           <p className="mt-4 max-w-3xl text-lg font-medium text-slate-700">
