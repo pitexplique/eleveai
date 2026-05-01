@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { X, Smartphone, BookOpen, Sparkles } from "lucide-react";
+import { X, Smartphone, Sparkles } from "lucide-react";
 
 const HEADER_HEIGHT = 72;
 
@@ -87,7 +87,9 @@ export default function AccueilPage() {
               </div>
 
               <div>
-                <h2 className="text-xl font-black">EleveAI sur ton téléphone</h2>
+                <h2 className="text-xl font-black">
+                  EleveAI sur ton téléphone
+                </h2>
                 <p className="text-sm text-slate-600">
                   Une leçon de maths par jour, en 1 clic.
                 </p>
@@ -107,23 +109,20 @@ export default function AccueilPage() {
               </p>
             </div>
 
-            <div className="mt-5 flex flex-col gap-3 sm:flex-row">
-              <Link
-                href="/lecon-du-jour"
-                onClick={closeModal}
-                className="inline-flex flex-1 items-center justify-center gap-2 rounded-2xl bg-yellow-400 px-4 py-3 text-sm font-black text-slate-950 shadow hover:bg-yellow-300"
-              >
-                <BookOpen className="h-5 w-5" />
-                Leçon du jour
-              </Link>
-
+            <div className="mt-5">
               <button
                 type="button"
                 onClick={closeModal}
-                className="inline-flex flex-1 items-center justify-center rounded-2xl border border-slate-300 px-4 py-3 text-sm font-bold text-slate-700 hover:bg-slate-50"
+                className="inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-blue-600 px-4 py-3 text-sm font-black text-white shadow hover:bg-blue-500"
               >
-                Continuer
+                <Smartphone className="h-5 w-5" />
+                Télécharger EleveAI
               </button>
+
+              <p className="mt-2 text-center text-xs text-slate-500">
+                Suis les instructions ci-dessus pour l’ajouter à l’écran
+                d’accueil.
+              </p>
             </div>
           </div>
         </div>
