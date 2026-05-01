@@ -16,9 +16,9 @@ import {
   BadgeCheck,
   GraduationCap,
   LogOut,
+  Flame,
 } from "lucide-react";
 import { useEleve } from "@/context/EleveContext";
-
 
 function isActive(pathname: string, href: string) {
   if (href === "/") return pathname === "/";
@@ -34,11 +34,10 @@ export default function Header() {
     setMobileOpen(false);
   }, [pathname]);
 
-
-function logoutEleve() {
-  logout();
-  window.location.href = "/accueil";
-}
+  function logoutEleve() {
+    logout();
+    window.location.href = "/accueil";
+  }
 
   const linkClass = (active: boolean) =>
     `inline-flex items-center gap-2 rounded-full px-3.5 py-2 text-sm font-semibold transition ${
@@ -59,6 +58,8 @@ function logoutEleve() {
   return (
     <header className="sticky top-0 z-50 border-b border-white/10 bg-slate-950/80 backdrop-blur-xl">
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3">
+
+        {/* LOGO */}
         <Link href="/accueil" className="flex items-center gap-3">
           <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-gradient-to-br from-emerald-300 via-cyan-300 to-amber-300 text-slate-950 shadow-lg">
             <Sparkles className="h-5 w-5" />
@@ -74,15 +75,29 @@ function logoutEleve() {
           </div>
         </Link>
 
+        {/* DESKTOP MENU */}
         <div className="hidden items-center gap-2 lg:flex">
+
           <Link href="/accueil" className={linkClass(isActive(pathname, "/accueil"))}>
             <Home className="h-4 w-4 text-cyan-300" />
             Accueil
           </Link>
+                 <Link
+            href="/lecondujour"
+            className={`relative ${linkClass(isActive(pathname, "/lecondujour"))}`}
+          >
+            <Flame className="h-4 w-4 text-orange-300" />
+            Leçon du jour
 
-          <Link href="/optimiseur" className={linkClass(isActive(pathname, "/optimiseur"))}>
-            <BadgeCheck className="h-4 w-4 text-amber-300" />
-            Valéria
+            {/* badge */}
+            <span className="absolute -top-2 -right-2 rounded-full bg-red-500 px-1.5 text-[10px] text-white">
+              🔥
+            </span>
+          </Link>
+
+          <Link href="/calcul-rapide" className={linkClass(isActive(pathname, "/calcul-rapide"))}>
+            <Target className="h-4 w-4 text-green-300" />
+            Calcul rapide
           </Link>
 
           <Link href="/coach-maths-ia" className={linkClass(isActive(pathname, "/coach-maths-ia"))}>
@@ -90,30 +105,30 @@ function logoutEleve() {
             Coach Maths
           </Link>
 
-          <Link href="/calcul-rapide" className={linkClass(isActive(pathname, "/calcul-rapide"))}>
-            <Target className="h-4 w-4 text-green-300" />
-            Calcul Rapide
-          </Link>
-
           <Link href="/parcours" className={linkClass(isActive(pathname, "/parcours"))}>
             <Route className="h-4 w-4 text-purple-300" />
             Parcours
           </Link>
 
+          <Link href="/optimiseur" className={linkClass(isActive(pathname, "/optimiseur"))}>
+            <BadgeCheck className="h-4 w-4 text-amber-300" />
+            Valéria
+          </Link>
+
+          {/* USER */}
           {eleve ? (
             <div className="ml-2 flex items-center gap-2">
               <Link
                 href="/parcours"
-                className="inline-flex items-center gap-2 rounded-full bg-emerald-400 px-4 py-2 text-sm font-black text-slate-950 shadow-lg transition hover:bg-emerald-300"
+                className="inline-flex items-center gap-2 rounded-full bg-emerald-400 px-4 py-2 text-sm font-black text-slate-950 shadow-lg hover:bg-emerald-300"
               >
                 <GraduationCap className="h-4 w-4" />
                 {eleveLabel}
               </Link>
 
               <button
-                type="button"
                 onClick={logoutEleve}
-                className="inline-flex items-center gap-2 rounded-full bg-red-500 px-3.5 py-2 text-sm font-bold text-white shadow transition hover:bg-red-600"
+                className="inline-flex items-center gap-2 rounded-full bg-red-500 px-3.5 py-2 text-sm font-bold text-white hover:bg-red-600"
               >
                 <LogOut className="h-4 w-4" />
                 Déconnexion
@@ -122,7 +137,7 @@ function logoutEleve() {
           ) : (
             <Link
               href="/auth/signin-eleve"
-              className="ml-2 inline-flex items-center gap-2 rounded-full bg-emerald-400 px-4 py-2 text-sm font-black text-slate-950 shadow-lg transition hover:bg-emerald-300"
+              className="ml-2 inline-flex items-center gap-2 rounded-full bg-emerald-400 px-4 py-2 text-sm font-black text-slate-950 hover:bg-emerald-300"
             >
               <GraduationCap className="h-4 w-4" />
               Connexion élève
@@ -130,61 +145,37 @@ function logoutEleve() {
           )}
         </div>
 
+        {/* MOBILE BUTTON */}
         <button
-          type="button"
           onClick={() => setMobileOpen((v) => !v)}
-          className="inline-flex items-center justify-center rounded-full border border-white/15 bg-white/10 p-2 text-white transition hover:bg-white/20 lg:hidden"
-          aria-label="Ouvrir le menu"
+          className="rounded-full border border-white/15 bg-white/10 p-2 text-white lg:hidden"
         >
-          {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          {mobileOpen ? <X /> : <Menu />}
         </button>
       </nav>
 
+      {/* MOBILE MENU */}
       {mobileOpen && (
-        <div className="border-t border-white/10 bg-slate-950/95 px-4 py-4 backdrop-blur-xl lg:hidden">
-          <div className="mx-auto grid max-w-7xl gap-2">
-            {eleve ? (
-              <>
-                <Link
-                  href="/parcours"
-                  className="flex items-center justify-center gap-3 rounded-2xl bg-emerald-400 px-4 py-4 text-sm font-black text-slate-950 shadow-lg"
-                >
-                  <GraduationCap className="h-5 w-5" />
-                  {eleveLabel}
-                </Link>
+        <div className="border-t border-white/10 bg-slate-950 px-4 py-4 lg:hidden">
+          <div className="grid gap-2">
 
-                <button
-                  type="button"
-                  onClick={logoutEleve}
-                  className="flex items-center justify-center gap-3 rounded-2xl bg-red-500 px-4 py-4 text-sm font-black text-white shadow-lg"
-                >
-                  <LogOut className="h-5 w-5" />
-                  Déconnexion
-                </button>
-              </>
-            ) : (
-              <Link
-                href="/auth/signin-eleve"
-                className="flex items-center justify-center gap-3 rounded-2xl bg-emerald-400 px-4 py-4 text-sm font-black text-slate-950 shadow-lg"
-              >
-                <GraduationCap className="h-5 w-5" />
-                Connexion élève
-              </Link>
-            )}
+            {/* 🔥 LEÇON DU JOUR */}
+            <Link
+              href="/lecondujour"
+              className="flex items-center justify-center gap-3 rounded-2xl bg-orange-500 px-4 py-4 font-black text-white shadow-lg"
+            >
+              <Flame className="h-5 w-5" />
+              Leçon du jour 🔥
+            </Link>
 
-            <Link href="/accueil" className={mobileLinkClass(isActive(pathname, "/accueil"))}>
-              <Home className="h-4 w-4 text-cyan-300" />
-              Accueil
+            <Link href="/calcul-rapide" className={mobileLinkClass(isActive(pathname, "/calcul-rapide"))}>
+              <Target className="h-4 w-4 text-green-300" />
+              Calcul rapide
             </Link>
 
             <Link href="/coach-maths-ia" className={mobileLinkClass(isActive(pathname, "/coach-maths-ia"))}>
               <Brain className="h-4 w-4 text-orange-300" />
               Coach maths
-            </Link>
-
-            <Link href="/calcul-rapide" className={mobileLinkClass(isActive(pathname, "/calcul-rapide"))}>
-              <Target className="h-4 w-4 text-green-300" />
-              Calcul Rapide
             </Link>
 
             <Link href="/parcours" className={mobileLinkClass(isActive(pathname, "/parcours"))}>
@@ -197,15 +188,6 @@ function logoutEleve() {
               Valéria
             </Link>
 
-            <Link href="/espace-profs" className={mobileLinkClass(isActive(pathname, "/espace-profs"))}>
-              <Wand2 className="h-4 w-4 text-blue-300" />
-              Générateur de prompts profs
-            </Link>
-
-            <Link href="/contact" className={mobileLinkClass(isActive(pathname, "/contact"))}>
-              <Mail className="h-4 w-4 text-cyan-300" />
-              Contact
-            </Link>
           </div>
         </div>
       )}
