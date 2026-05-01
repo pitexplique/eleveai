@@ -83,7 +83,7 @@ export default function Header() {
             Accueil
           </Link>
                  <Link
-            href="/lecondujour"
+            href="/lecon-du-jour"
             className={`relative ${linkClass(isActive(pathname, "/lecondujour"))}`}
           >
             <Flame className="h-4 w-4 text-orange-300" />
@@ -161,7 +161,7 @@ export default function Header() {
 
             {/* 🔥 LEÇON DU JOUR */}
             <Link
-              href="/lecondujour"
+              href="/lecon-du-jour"
               className="flex items-center justify-center gap-3 rounded-2xl bg-orange-500 px-4 py-4 font-black text-white shadow-lg"
             >
               <Flame className="h-5 w-5" />
