@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 const lessons = [
   {
@@ -50,11 +50,41 @@ const lessons = [
 
 export default function LeconDuJourPage() {
   const [selectedDay, setSelectedDay] = useState(1);
+  const [seconds, setSeconds] = useState(0);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
 
   const lesson = useMemo(
     () => lessons.find((l) => l.day === selectedDay) ?? lessons[0],
     [selectedDay]
   );
+
+  useEffect(() => {
+    setSeconds(0);
+
+    const interval = window.setInterval(() => {
+      setSeconds((s) => s + 1);
+    }, 1000);
+
+    return () => window.clearInterval(interval);
+  }, [selectedDay]);
+
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    audio.currentTime = 0;
+
+    const playAudio = async () => {
+      try {
+        await audio.play();
+      } catch {
+        // Certains navigateurs bloquent l'autoplay audio.
+        // L'élève devra alors appuyer une fois sur play.
+      }
+    };
+
+    playAudio();
+  }, [lesson.audio]);
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-orange-50 via-yellow-50 to-emerald-50 px-4 py-8 text-slate-900">
@@ -71,6 +101,9 @@ export default function LeconDuJourPage() {
             </h1>
             <p className="mt-2 text-sm text-slate-600">
               10 secondes pour comprendre. Puis entraîne-toi.
+            </p>
+            <p className="mt-2 text-sm font-bold text-orange-600">
+              ⏱️ {seconds} s
             </p>
           </div>
 
@@ -104,7 +137,13 @@ export default function LeconDuJourPage() {
             </div>
 
             {/* AUDIO */}
-            <audio key={lesson.audio} controls className="w-full mb-4">
+            <audio
+              ref={audioRef}
+              key={lesson.audio}
+              controls
+              autoPlay
+              className="w-full mb-4"
+            >
               <source src={lesson.audio} type="audio/mpeg" />
             </audio>
 
