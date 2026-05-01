@@ -24,23 +24,38 @@ const CANONICAL = "/accueil";
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
 
+  // 🔥 PWA
+  manifest: "/manifest.webmanifest",
+  themeColor: "#2563eb",
+
+  appleWebApp: {
+    capable: true,
+    title: "EleveAI",
+    statusBarStyle: "black-translucent",
+  },
+
+  icons: {
+    icon: "/icons/icon-192.png",
+    apple: "/icons/icon-192.png",
+  },
+
+  // SEO
   title: {
     default: "EleveAI — IA pédagogique à La Réunion",
     template: "%s — EleveAI",
   },
 
   description:
-    "EleveAI accompagne les professeurs et les élèves : Valéria, générateur de prompts profs, défis de La Réunion, coach maths et parcours de progression.",
+    "EleveAI accompagne les professeurs et les élèves : leçon du jour, coach maths, défis et parcours de progression.",
 
   keywords: [
     "EleveAI",
+    "leçon du jour",
+    "maths collège",
     "IA pédagogique",
-    "Valéria",
-    "générateur de prompts",
-    "défis mathématiques",
     "coach maths",
+    "révision quotidienne",
     "La Réunion",
-    "professeurs",
     "élèves",
     "collège",
     "lycée",
@@ -51,9 +66,9 @@ export const metadata: Metadata = {
   },
 
   openGraph: {
-    title: "EleveAI — Comprendre · S’entraîner · Réussir",
+    title: "EleveAI — 1 leçon par jour",
     description:
-      "Une plateforme pédagogique avec Valéria, un générateur de prompts profs, des défis de La Réunion, un coach maths et des parcours de progression.",
+      "Progresse en maths avec une leçon du jour. Installe EleveAI sur ton téléphone 📱",
     url: CANONICAL,
     type: "website",
     siteName: "EleveAI",
@@ -63,16 +78,16 @@ export const metadata: Metadata = {
         url: "/preview.jpg",
         width: 1200,
         height: 630,
-        alt: "EleveAI — IA pédagogique à La Réunion",
+        alt: "EleveAI — IA pédagogique",
       },
     ],
   },
 
   twitter: {
     card: "summary_large_image",
-    title: "EleveAI — Comprendre · S’entraîner · Réussir",
+    title: "EleveAI — 1 leçon par jour",
     description:
-      "Valéria, générateur de prompts profs, défis de La Réunion, coach maths et parcours de progression.",
+      "Une leçon de maths chaque jour pour progresser rapidement.",
     images: ["/preview.jpg"],
   },
 };
@@ -121,9 +136,7 @@ export default function RootLayout({
       >
         <EleveProvider>
           <DevBanner />
-
           <Header />
-
           {children}
         </EleveProvider>
 
