@@ -1,5 +1,5 @@
 // app/layout.tsx
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import "katex/dist/katex.min.css";
@@ -21,12 +21,15 @@ const geistMono = Geist_Mono({
 const SITE_URL = "https://eleveai.fr";
 const CANONICAL = "/accueil";
 
+export const viewport: Viewport = {
+  themeColor: "#2563eb",
+};
+
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
 
-  // 🔥 PWA
+  // PWA
   manifest: "/manifest.webmanifest",
-  themeColor: "#2563eb",
 
   appleWebApp: {
     capable: true,
@@ -86,8 +89,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "EleveAI — 1 leçon par jour",
-    description:
-      "Une leçon de maths chaque jour pour progresser rapidement.",
+    description: "Une leçon de maths chaque jour pour progresser rapidement.",
     images: ["/preview.jpg"],
   },
 };

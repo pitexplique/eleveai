@@ -1,8 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Link from "next/link";
-import { X, Sparkles, Smartphone, BookOpen } from "lucide-react";
+import { X, Sparkles, Smartphone } from "lucide-react";
 
 type DevBannerProps = {
   message?: string;
@@ -11,7 +10,7 @@ type DevBannerProps = {
 };
 
 export default function DevBanner({
-  message = "Nouveau : une leçon de maths par jour sur EleveAI. Ajoute le site à ton écran d’accueil pour y accéder en 1 clic.",
+  message = "Ajoute EleveAI sur ton téléphone pour accéder à la leçon du jour en 1 clic.",
   storageKey = "eleveai_dev_banner_seen_lecon_du_jour_daily_v1",
   className = "",
 }: DevBannerProps) {
@@ -61,30 +60,23 @@ export default function DevBanner({
           </p>
         </div>
 
-        {/* Actions */}
-        <div className="flex shrink-0 items-center gap-2">
-          <Link
-            href="/lecon-du-jour"
-            className="inline-flex h-8 items-center gap-1 rounded-full bg-yellow-400 px-3 text-xs font-bold text-slate-950 transition hover:bg-yellow-300"
-          >
-            <BookOpen className="h-4 w-4" />
-            Leçon du jour
-          </Link>
-
-          <Link
-            href="/accueil#installer"
-            className="hidden h-8 items-center gap-1 rounded-full bg-blue-600 px-3 text-xs font-semibold text-white transition hover:bg-blue-500 sm:inline-flex"
+        {/* Bouton unique */}
+        <div className="flex items-center gap-2">
+          <button
+            type="button"
+            onClick={close}
+            className="inline-flex items-center gap-1 rounded-full bg-blue-600 px-3 py-1 text-xs font-bold text-white transition hover:bg-blue-500"
           >
             <Smartphone className="h-4 w-4" />
-            Installer
-          </Link>
+            Télécharger
+          </button>
 
           {/* Fermer */}
           <button
             type="button"
             onClick={close}
-            className="inline-flex h-8 w-8 items-center justify-center rounded-full transition hover:bg-white/10 active:bg-white/15"
-            aria-label="Fermer le bandeau"
+            className="inline-flex h-8 w-8 items-center justify-center rounded-full transition hover:bg-white/10"
+            aria-label="Fermer"
           >
             <X className="h-4 w-4" />
           </button>
