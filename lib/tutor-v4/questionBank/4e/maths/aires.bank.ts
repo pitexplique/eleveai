@@ -1,18 +1,20 @@
 /**
  * Banque de questions Tutor V4 - Mathématiques 4e
- * Notion : Expressions littérales
+ * Notion : Aires
  *
  * Objectifs :
- * - comprendre le rôle d’une lettre dans une expression ;
- * - identifier coefficient, variable et constante ;
- * - traduire une phrase en expression littérale ;
- * - substituer une valeur dans une expression ;
- * - réduire des termes semblables ;
- * - repérer les erreurs fréquentes de réduction.
+ * - comprendre qu’une aire mesure une surface ;
+ * - distinguer aire et périmètre ;
+ * - utiliser les unités carrées ;
+ * - calculer l’aire d’un rectangle, d’un carré, d’un triangle et d’un parallélogramme ;
+ * - calculer l’aire d’une figure composée ;
+ * - résoudre des problèmes concrets d’aires ;
+ * - éviter les erreurs fréquentes : utiliser le côté incliné au lieu de la hauteur, confondre aire et périmètre.
  *
  * Organisation :
- * - fixed : ancrage des notions essentielles ;
- * - templates : variations de lettres, nombres et situations ;
+ * - fixed : ancrage des définitions et formules essentielles ;
+ * - templates : variation des longueurs, figures et contextes ;
+ * - canvas : figures géométriques et figures sur quadrillage ;
  * - open : justification et verbalisation du raisonnement.
  */
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
@@ -286,6 +288,24 @@ export const airesBank: TutorBankItemV4[] = [
       "Une aire s’exprime avec une unité carrée, par exemple en cm².",
     tags: ["aire", "unites"],
   },
+    {
+    kind: "fixed",
+    id: "aire_comprendre_open_1",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "aires",
+    microId: "aire_comprendre",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Explique la différence entre aire et périmètre.",
+    format: "open",
+    expected: ["aire", "surface", "périmètre", "contour"],
+    comparator: "contains_keyword",
+    hint: "L’un mesure l’intérieur, l’autre le tour.",
+    explanation:
+      "L’aire mesure la surface occupée par une figure. Le périmètre mesure la longueur de son contour.",
+    tags: ["aire", "perimetre", "open"],
+  },
 
   // =========================
   // AIRE_RECTANGLE
@@ -382,6 +402,24 @@ export const airesBank: TutorBankItemV4[] = [
         canvas: quadrilatereRectangleFigure(L, l),
       };
     },
+  },
+    {
+    kind: "fixed",
+    id: "aire_rectangle_open_1",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "aires",
+    microId: "aire_rectangle",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Explique pourquoi l’aire d’un rectangle de longueur 8 cm et de largeur 3 cm vaut 24 cm².",
+    format: "open",
+    expected: ["8", "3", "24", "multiplie"],
+    comparator: "contains_keyword",
+    hint: "On multiplie la longueur par la largeur.",
+    explanation:
+      "L’aire d’un rectangle se calcule en multipliant longueur × largeur : 8 × 3 = 24 cm².",
+    tags: ["aire", "rectangle", "open"],
   },
 
   // =========================
@@ -504,6 +542,24 @@ export const airesBank: TutorBankItemV4[] = [
       };
     },
   },
+    {
+    kind: "fixed",
+    id: "aire_triangle_open_1",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "aires",
+    microId: "aire_triangle",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Explique pourquoi on divise par 2 dans la formule de l’aire d’un triangle.",
+    format: "open",
+    expected: ["rectangle", "moitié", "2"],
+    comparator: "contains_keyword",
+    hint: "Un triangle peut être vu comme la moitié d’un rectangle.",
+    explanation:
+      "Un triangle de base et de hauteur données correspond à la moitié d’un rectangle de même base et même hauteur. C’est pourquoi on divise par 2.",
+    tags: ["aire", "triangle", "open"],
+  },
 
   // =========================
   // AIRE_PARALLELOGRAMME
@@ -551,6 +607,24 @@ export const airesBank: TutorBankItemV4[] = [
         canvas: quadrilatereParallelogramFigure(base, side, height),
       };
     },
+  },
+    {
+    kind: "fixed",
+    id: "aire_parallelogramme_open_1",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "aires",
+    microId: "aire_parallelogramme",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Explique pourquoi on utilise la hauteur et non le côté incliné pour calculer l’aire d’un parallélogramme.",
+    format: "open",
+    expected: ["hauteur", "base", "côté incliné"],
+    comparator: "contains_keyword",
+    hint: "La hauteur est perpendiculaire à la base.",
+    explanation:
+      "L’aire d’un parallélogramme se calcule avec base × hauteur. Le côté incliné n’est pas la hauteur car il n’est pas perpendiculaire à la base.",
+    tags: ["aire", "parallelogramme", "open", "erreur"],
   },
 
   // =========================
@@ -611,6 +685,24 @@ export const airesBank: TutorBankItemV4[] = [
         canvas: figureLibreFromCells(a, b, cells, false),
       };
     },
+  },
+    {
+    kind: "fixed",
+    id: "aire_figure_open_1",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "aires",
+    microId: "aire_figure",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Explique comment calculer l’aire d’une figure dessinée sur un quadrillage.",
+    format: "open",
+    expected: ["compter", "carrés", "unité"],
+    comparator: "contains_keyword",
+    hint: "Chaque petit carré représente une unité d’aire.",
+    explanation:
+      "Pour une figure sur quadrillage, on compte les carrés unités qui composent la figure.",
+    tags: ["aire", "quadrillage", "open"],
   },
 
   // =========================
@@ -763,6 +855,28 @@ export const airesBank: TutorBankItemV4[] = [
         comparator: "mcq_exact",
         explanation:
           `Aire du rectangle : ${a} × ${b} = ${rectArea}. Aire du carré : ${squareSide} × ${squareSide} = ${squareArea}.`,
+      };
+    },
+  },
+    {
+    kind: "template",
+    id: "aire_defis_open_1",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "aires",
+    microId: "aire_defis",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Même aire ne veut pas forcément dire même forme ou même périmètre.",
+    tags: ["aire", "defi", "open", "raisonnement"],
+    generate: () => {
+      return {
+        text: "Explique pourquoi deux figures différentes peuvent avoir la même aire.",
+        format: "open",
+        expected: ["même", "aire", "surface", "différentes"],
+        comparator: "contains_keyword",
+        explanation:
+          "Deux figures peuvent avoir des formes différentes mais occuper la même surface. Par exemple, deux figures contenant chacune 8 carrés unités ont la même aire.",
       };
     },
   },

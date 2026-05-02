@@ -1,3 +1,20 @@
+/**
+ * Banque de questions Tutor V4 - Mathématiques 4e
+ * Notion : Expressions littérales
+ *
+ * Objectifs :
+ * - comprendre le rôle d’une lettre dans une expression ;
+ * - identifier coefficient, variable et constante ;
+ * - traduire une phrase en expression littérale ;
+ * - substituer une valeur dans une expression ;
+ * - réduire des termes semblables ;
+ * - repérer les erreurs fréquentes de réduction.
+ *
+ * Organisation :
+ * - fixed : ancrage des notions essentielles ;
+ * - templates : variations de lettres, nombres et situations ;
+ * - open : justification et verbalisation du raisonnement.
+ */
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 
 function randomInt(min: number, max: number) {

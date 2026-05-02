@@ -1,3 +1,21 @@
+/**
+ * Banque de questions Tutor V4 - Mathématiques 4e
+ * Notion : Parallélogrammes
+ *
+ * Objectifs :
+ * - reconnaître un parallélogramme ;
+ * - utiliser ses propriétés : côtés opposés, angles, diagonales ;
+ * - montrer qu’un quadrilatère est un parallélogramme ;
+ * - calculer l’aire d’un parallélogramme ;
+ * - résoudre des problèmes de géométrie plane ;
+ * - éviter les confusions : rectangle/parallélogramme, diagonales égales, hauteur/côté incliné.
+ *
+ * Organisation :
+ * - fixed : définitions et propriétés essentielles ;
+ * - templates : variations de longueurs, angles, figures et situations ;
+ * - canvas : figures codées avec côtés parallèles, côtés égaux, diagonales ;
+ * - open : justification et rédaction courte.
+ */
 import type {
   TutorBankItemV4,
   QuadrilatereCanvasData,
@@ -310,6 +328,24 @@ export const parallelogrammesBank: TutorBankItemV4[] = [
       };
     },
   },
+    {
+    kind: "fixed",
+    id: "para_reconnaitre_open_1",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "parallelogrammes",
+    microId: "para_reconnaitre",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Explique pourquoi un rectangle est un parallélogramme particulier.",
+    format: "open",
+    expected: ["rectangle", "côtés opposés", "parallèles"],
+    comparator: "contains_keyword",
+    hint: "Observe les côtés opposés d’un rectangle.",
+    explanation:
+      "Un rectangle a ses côtés opposés parallèles deux à deux. Il vérifie donc la définition d’un parallélogramme.",
+    tags: ["parallelogramme", "rectangle", "open"],
+  },
 
   // =========================
   // PARA_PROPRIETES
@@ -403,6 +439,24 @@ export const parallelogrammesBank: TutorBankItemV4[] = [
       };
     },
   },
+    {
+    kind: "fixed",
+    id: "para_proprietes_open_1",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "parallelogrammes",
+    microId: "para_proprietes",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Explique quelles propriétés possèdent les côtés opposés d’un parallélogramme.",
+    format: "open",
+    expected: ["opposés", "parallèles", "égaux"],
+    comparator: "contains_keyword",
+    hint: "Il y a deux propriétés importantes : direction et longueur.",
+    explanation:
+      "Dans un parallélogramme, les côtés opposés sont parallèles et de même longueur.",
+    tags: ["parallelogramme", "proprietes", "open"],
+  },
 
   // =========================
   // PARA_DIAGONALES
@@ -487,6 +541,24 @@ export const parallelogrammesBank: TutorBankItemV4[] = [
       };
     },
   },
+    {
+    kind: "fixed",
+    id: "para_diagonales_open_1",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "parallelogrammes",
+    microId: "para_diagonales",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Explique ce que signifie : « les diagonales d’un parallélogramme se coupent en leur milieu ».",
+    format: "open",
+    expected: ["diagonales", "milieu", "moitiés"],
+    comparator: "contains_keyword",
+    hint: "Chaque diagonale est partagée en deux morceaux égaux.",
+    explanation:
+      "Cela signifie que le point d’intersection partage chaque diagonale en deux segments de même longueur.",
+    tags: ["parallelogramme", "diagonales", "open"],
+  },
 
   // =========================
   // PARA_MONTRER
@@ -561,6 +633,24 @@ export const parallelogrammesBank: TutorBankItemV4[] = [
         canvas: parallelogramFigure(randomInt(6, 12), randomInt(4, 8)),
       };
     },
+  },
+    {
+    kind: "fixed",
+    id: "para_montrer_open_1",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "parallelogrammes",
+    microId: "para_montrer",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Explique comment montrer qu’un quadrilatère est un parallélogramme à partir de ses diagonales.",
+    format: "open",
+    expected: ["diagonales", "milieu", "parallélogramme"],
+    comparator: "contains_keyword",
+    hint: "Cherche la propriété réciproque avec les diagonales.",
+    explanation:
+      "Si les diagonales d’un quadrilatère se coupent en leur milieu, alors ce quadrilatère est un parallélogramme.",
+    tags: ["parallelogramme", "demonstration", "open"],
   },
 
   // =========================
@@ -638,6 +728,24 @@ export const parallelogrammesBank: TutorBankItemV4[] = [
         canvas: slantedParallelogramForArea(base, side, height),
       };
     },
+  },
+    {
+    kind: "fixed",
+    id: "para_aire_open_1",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "parallelogrammes",
+    microId: "para_aire",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Explique pourquoi on utilise la hauteur et non le côté incliné pour calculer l’aire d’un parallélogramme.",
+    format: "open",
+    expected: ["base", "hauteur", "côté incliné"],
+    comparator: "contains_keyword",
+    hint: "La hauteur est perpendiculaire à la base.",
+    explanation:
+      "L’aire d’un parallélogramme se calcule avec base × hauteur. Le côté incliné n’est pas forcément perpendiculaire à la base, donc ce n’est pas la hauteur.",
+    tags: ["parallelogramme", "aire", "open", "erreur"],
   },
 
   // =========================
@@ -729,7 +837,7 @@ export const parallelogrammesBank: TutorBankItemV4[] = [
       if (property === "cotes_paralleles") {
         return {
           text: "Explique pourquoi un quadrilatère dont les côtés opposés sont parallèles deux à deux est un parallélogramme.",
-          format: "short",
+          format: "open",
           expected: ["parallèles", "opposés", "parallélogramme"],
           comparator: "contains_keyword",
           explanation:
@@ -740,7 +848,7 @@ export const parallelogrammesBank: TutorBankItemV4[] = [
       if (property === "cotes_egaux") {
         return {
           text: "Explique pourquoi un quadrilatère dont les côtés opposés sont égaux deux à deux est un parallélogramme.",
-          format: "short",
+          format: "open",
           expected: ["égaux", "opposés", "parallélogramme"],
           comparator: "contains_keyword",
           explanation:
@@ -750,7 +858,7 @@ export const parallelogrammesBank: TutorBankItemV4[] = [
 
       return {
         text: "Explique pourquoi un quadrilatère dont les diagonales se coupent en leur milieu est un parallélogramme.",
-        format: "short",
+        format: "open",
         expected: ["diagonales", "milieu", "parallélogramme"],
         comparator: "contains_keyword",
         explanation:
