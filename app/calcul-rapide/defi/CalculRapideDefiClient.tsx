@@ -149,13 +149,15 @@ function getTodayDay() {
     mercredi: "mercredi",
     jeudi: "jeudi",
     vendredi: "vendredi",
-    samedi: "samedi",
-    dimanche: "dimanche",
     monday: "lundi",
     tuesday: "mardi",
     wednesday: "mercredi",
     thursday: "jeudi",
     friday: "vendredi",
+    samedi: "samedi",
+    saturday: "samedi",
+    dimanche: "dimanche",
+    sunday: "dimanche",
   };
 
   return map[todayRaw];
