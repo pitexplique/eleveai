@@ -502,6 +502,31 @@ export const equationsBank: TutorBankItemV4[] = [
       };
     },
   },
+  {
+  kind: "template",
+  id: "equation_probleme_tpl_2",
+  niveau: "4e",
+  matiere: "maths",
+  notionId: "equations",
+  microId: "equation_probleme",
+  difficulty: 5,
+  theme: "reunion",
+  hint: "Pose une équation avec x.",
+  tags: ["equation", "probleme", "reunion"],
+  generate: () => {
+    const x = randomInt(5, 15);
+    const prix = randomInt(2, 5);
+    const total = x * prix;
+
+    return {
+      text: `Au marché de saint Pierre, on achète des mangues à ${prix} € l’unité. On paie ${total} €. Combien de mangues a-t-on achetées ?`,
+      format: "short",
+      expected: [String(x)],
+      comparator: "number_equal",
+      explanation: `${prix}x = ${total} donc x = ${total} ÷ ${prix} = ${x}.`,
+    };
+  },
+},
 
   // =========================
   // EQUATION_DEFIS
@@ -536,11 +561,11 @@ export const equationsBank: TutorBankItemV4[] = [
     text: "Léo dit : « dans 2x + 3 = 11, x = 4 car 2 + 3 + 4 = 9 ». A-t-il raison ?",
     format: "qcm",
     choices: ["oui", "non"],
-    expected: ["oui"],
+    expected: ["non"],
     comparator: "mcq_exact",
     hint: "Teste vraiment x = 4 dans l’équation.",
-    explanation:
-      "Oui, x = 4 est bien solution car 2 × 4 + 3 = 8 + 3 = 11. Le raisonnement de Léo est mauvais, mais sa réponse finale est correcte.",
+   explanation:
+  "Non. Même si x = 4 est bien solution, le raisonnement de Léo est faux. Il faut remplacer x dans l’expression, pas additionner les nombres.",
     tags: ["equation", "defi", "erreur"],
   },
   {
@@ -561,4 +586,53 @@ export const equationsBank: TutorBankItemV4[] = [
       "2(x + 3) = 3x + 1 donne 2x + 6 = 3x + 1. Donc 6 = x + 1 puis x = 5.",
     tags: ["equation", "defi", "avance"],
   },
+  {
+  kind: "template",
+  id: "equation_open_justifier_1",
+  niveau: "4e",
+  matiere: "maths",
+  notionId: "equations",
+  microId: "equation_defis",
+  difficulty: 4,
+  theme: "neutral",
+  hint: "Remplace x dans l’équation.",
+  tags: ["equation", "open", "justification"],
+  generate: () => {
+    const x = randomInt(2, 8);
+    const a = randomInt(2, 5);
+    const b = a * x;
+
+    return {
+      text: `Explique pourquoi x = ${x} est solution de ${a}x = ${b}.`,
+      format: "open",
+      expected: ["remplace", "multiplie", "égalité", `${b}`],
+      comparator: "contains_keyword",
+      explanation: `On remplace x par ${x} : ${a} × ${x} = ${b}, donc l’égalité est vérifiée.`,
+    };
+  },
+},
+{
+  kind: "template",
+  id: "equation_open_erreur_1",
+  niveau: "4e",
+  matiere: "maths",
+  notionId: "equations",
+  microId: "equation_defis",
+  difficulty: 4,
+  theme: "neutral",
+  hint: "Regarde ce qui ne va pas dans le raisonnement.",
+  tags: ["equation", "open", "erreur"],
+  generate: () => {
+    const a = randomInt(2, 5);
+    const b = randomInt(2, 8);
+
+    return {
+      text: `Un élève dit : "${a}x = ${a + b} donc x = ${b}". Explique pourquoi c’est faux.`,
+      format: "open",
+      expected: ["division", "erreur", "multiplier", "égalité"],
+      comparator: "contains_keyword",
+      explanation: `On doit diviser par ${a}, pas soustraire.`,
+    };
+  },
+},
 ];

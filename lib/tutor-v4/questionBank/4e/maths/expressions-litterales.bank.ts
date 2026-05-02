@@ -67,6 +67,24 @@ export const expressionsLitteralesBank: TutorBankItemV4[] = [
       "Oui, 4x + 1 est une expression littérale, car elle contient la lettre x.",
     tags: ["expression", "reconnaitre"],
   },
+    {
+    kind: "fixed",
+    id: "expr_litterale_comprendre_open_1",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "expressions_litterales",
+    microId: "expr_litterale_comprendre",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Explique ce que représente la lettre x dans une expression comme 3x + 5.",
+    format: "open",
+    expected: ["lettre", "nombre", "variable"],
+    comparator: "contains_keyword",
+    hint: "La lettre peut représenter un nombre qui change.",
+    explanation:
+      "Dans une expression littérale, la lettre représente un nombre variable ou inconnu.",
+    tags: ["expression", "variable", "open"],
+  },
   {
     kind: "template",
     id: "expr_litterale_comprendre_tpl_1",
@@ -148,6 +166,24 @@ export const expressionsLitteralesBank: TutorBankItemV4[] = [
     explanation: "Le triple de y est 3y. Diminué de 5 donne 3y - 5.",
     tags: ["traduction", "soustraction"],
   },
+    {
+    kind: "fixed",
+    id: "expr_litterale_traduire_qcm_1",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "expressions_litterales",
+    microId: "expr_litterale_traduire",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Quelle expression traduit : « le double de x augmenté de 5 » ?",
+    format: "qcm",
+    choices: ["2x + 5", "2(x + 5)", "x + 10", "5x + 2"],
+    expected: ["2x + 5"],
+    comparator: "mcq_exact",
+    hint: "Le double de x est 2x, puis on ajoute 5.",
+    explanation: "Le double de x augmenté de 5 se traduit par 2x + 5.",
+    tags: ["expression", "traduction", "qcm"],
+  },
   {
     kind: "template",
     id: "expr_litterale_traduire_tpl_1",
@@ -197,6 +233,24 @@ export const expressionsLitteralesBank: TutorBankItemV4[] = [
         explanation: picked.explanation,
       };
     },
+  },
+    {
+    kind: "fixed",
+    id: "expr_litterale_traduire_open_1",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "expressions_litterales",
+    microId: "expr_litterale_traduire",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Explique pourquoi « le triple de x diminué de 4 » se traduit par 3x - 4.",
+    format: "open",
+    expected: ["triple", "3x", "diminué", "4"],
+    comparator: "contains_keyword",
+    hint: "Traduis séparément « triple » puis « diminué de 4 ».",
+    explanation:
+      "Le triple de x se traduit par 3x. Diminué de 4 signifie qu’on enlève 4, donc on obtient 3x - 4.",
+    tags: ["expression", "traduction", "open"],
   },
 
   // =========================
@@ -254,6 +308,24 @@ export const expressionsLitteralesBank: TutorBankItemV4[] = [
       "2x + 3y avec x = 2 et y = 5 donne 2 × 2 + 3 × 5 = 4 + 15 = 19.",
     tags: ["substitution", "deux-lettres"],
   },
+    {
+    kind: "fixed",
+    id: "expr_litterale_substituer_qcm_1",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "expressions_litterales",
+    microId: "expr_litterale_substituer",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Pour calculer 4x + 1 avec x = 3, quel calcul faut-il faire ?",
+    format: "qcm",
+    choices: ["4 + 3 + 1", "4 × 3 + 1", "4 × 1 + 3", "4x + 3"],
+    expected: ["4 × 3 + 1"],
+    comparator: "mcq_exact",
+    hint: "Remplace x par 3.",
+    explanation: "On remplace x par 3 : 4x + 1 devient 4 × 3 + 1.",
+    tags: ["expression", "substitution", "qcm"],
+  },
   {
     kind: "template",
     id: "expr_litterale_substituer_tpl_1",
@@ -280,6 +352,24 @@ export const expressionsLitteralesBank: TutorBankItemV4[] = [
         explanation: `${k}${letter} + ${c} avec ${letter} = ${value} donne ${k} × ${value} + ${c} = ${result}.`,
       };
     },
+  },
+    {
+    kind: "fixed",
+    id: "expr_litterale_substituer_open_1",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "expressions_litterales",
+    microId: "expr_litterale_substituer",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Explique comment calculer 3x + 2 pour x = 4.",
+    format: "open",
+    expected: ["remplace", "4", "3", "14"],
+    comparator: "contains_keyword",
+    hint: "Remplace x par 4 puis effectue le calcul.",
+    explanation:
+      "On remplace x par 4 : 3x + 2 = 3 × 4 + 2 = 12 + 2 = 14.",
+    tags: ["expression", "substitution", "open"],
   },
 
   // =========================
@@ -337,6 +427,25 @@ export const expressionsLitteralesBank: TutorBankItemV4[] = [
     explanation: "2x + 5 + 3x = 5x + 5, car 2x + 3x = 5x.",
     tags: ["reduction", "ordre"],
   },
+    {
+    kind: "fixed",
+    id: "expr_litterale_reduire_qcm_1",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "expressions_litterales",
+    microId: "expr_litterale_reduire",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Quelle réduction est correcte ?",
+    format: "qcm",
+    choices: ["2x + 3 = 5x", "2x + 3x = 5x", "2x + 3x = 6x", "2x + 3 = 5"],
+    expected: ["2x + 3x = 5x"],
+    comparator: "mcq_exact",
+    hint: "On peut additionner seulement les termes semblables.",
+    explanation:
+      "2x et 3x sont des termes semblables, donc 2x + 3x = 5x.",
+    tags: ["expression", "reduction", "qcm"],
+  },
   {
     kind: "template",
     id: "expr_litterale_reduire_tpl_1",
@@ -363,6 +472,24 @@ export const expressionsLitteralesBank: TutorBankItemV4[] = [
       };
     },
   },
+    {
+    kind: "fixed",
+    id: "expr_litterale_reduire_open_1",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "expressions_litterales",
+    microId: "expr_litterale_reduire",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Explique pourquoi on ne peut pas réduire 2x + 3 en 5x.",
+    format: "open",
+    expected: ["2x", "3", "pas", "semblables"],
+    comparator: "contains_keyword",
+    hint: "Compare 2x et 3 : sont-ils de même nature ?",
+    explanation:
+      "2x contient une lettre, alors que 3 est un nombre seul. Ce ne sont pas des termes semblables, donc on ne peut pas écrire 5x.",
+    tags: ["expression", "reduction", "erreur", "open"],
+  },
 
   // =========================
   // EXPR_LITTERALE_DEFIS
@@ -377,7 +504,7 @@ export const expressionsLitteralesBank: TutorBankItemV4[] = [
     difficulty: 3,
     theme: "neutral",
     text: "Explique pourquoi 3x + 2x peut se réduire en 5x.",
-    format: "short",
+    format: "open",
     expected: [
       "5x",
       "termes semblables",
@@ -427,5 +554,29 @@ export const expressionsLitteralesBank: TutorBankItemV4[] = [
     explanation:
       "x stylos à 2 euros chacun coûtent 2x euros. Avec 3 euros de frais fixes, le total est 2x + 3.",
     tags: ["defi", "situation"],
+  },
+    {
+    kind: "template",
+    id: "expr_litterale_defis_open_1",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "expressions_litterales",
+    microId: "expr_litterale_defis",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Explique le prix variable puis les frais fixes.",
+    tags: ["expression", "defi", "open", "situation"],
+    generate: () => {
+      const prix = randomInt(2, 6);
+      const frais = randomInt(1, 8);
+
+      return {
+        text: `Un vendeur propose x objets à ${prix} euros chacun et ajoute ${frais} euros de frais fixes. Explique pourquoi le prix total est ${prix}x + ${frais}.`,
+        format: "open",
+        expected: [String(prix), "x", String(frais), "frais"],
+        comparator: "contains_keyword",
+        explanation: `Les x objets coûtent ${prix}x euros. On ajoute ensuite ${frais} euros de frais fixes, donc le prix total est ${prix}x + ${frais}.`,
+      };
+    },
   },
 ];
