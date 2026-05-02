@@ -95,6 +95,46 @@ export const weekly6e: CalculRapideWeek[] = [
           "6e_template_verger_tampon_001",
         ],
       },
+
+      // 🔵 NOUVEAU : SAMEDI (MÉLANGE LARGE)
+      {
+        id: "6e_2026_S18_samedi",
+        niveau: "6e",
+        day: "samedi",
+        title: "Défi du samedi",
+        theme: "Mix de la semaine",
+        durationTotalSec: 300,
+        itemIds: [
+          // mélange des jours précédents
+          "6e_template_addition_flash_001",
+          "6e_template_multiplication_flash_001",
+          "6e_template_diviser_10_100_001",
+          "6e_calcul_pourcentage_002",
+          "6e_calcul_decimal_soustraction_002",
+          "6e_probleme_aire_carre_001",
+          "6e_template_verger_tampon_001",
+        ],
+      },
+
+      // 🔴 NOUVEAU : DIMANCHE (FINAL SEMAINE)
+      {
+        id: "6e_2026_S18_dimanche",
+        niveau: "6e",
+        day: "dimanche",
+        title: "Final du dimanche 🏆",
+        theme: "Challenge global",
+        durationTotalSec: 300,
+        itemIds: [
+          // version plus “challenge”
+          "6e_template_multiplication_flash_001",
+          "6e_template_pourcentage_25_001",
+          "6e_calcul_decimal_multiplication_002",
+          "6e_calcul_division_euclidienne_002",
+          "6e_template_diviser_10_100_001",
+          "6e_probleme_proba_boules_001",
+          "6e_probleme_pourcentage_college_001",
+        ],
+      },
     ],
   },
 ];

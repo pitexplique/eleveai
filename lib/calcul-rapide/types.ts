@@ -46,7 +46,10 @@ export type CalculRapideDay =
   | "mardi"
   | "mercredi"
   | "jeudi"
-  | "vendredi";
+  | "vendredi"
+  | "samedi"
+  | "dimanche";
+  
 
 export type CalculRapideSession = {
   id: string;

@@ -95,6 +95,44 @@ export const weekly5e: CalculRapideWeek[] = [
           "5e_template_fraction_produit_001",
         ],
       },
+
+      // 🔵 SAMEDI : MÉLANGE DE LA SEMAINE
+      {
+        id: "5e_2026_S18_samedi",
+        niveau: "5e",
+        day: "samedi",
+        title: "Défi du samedi",
+        theme: "Mix de la semaine",
+        durationTotalSec: 300,
+        itemIds: [
+          "5e_calcul_relatif_addition_001",
+          "5e_template_fraction_produit_001",
+          "5e_calcul_relatif_soustraction_001",
+          "5e_calcul_fraction_simplifier_001",
+          "5e_template_relatifs_001",
+          "5e_calcul_fraction_addition_001",
+          "5e_template_fraction_produit_001",
+        ],
+      },
+
+      // 🔴 DIMANCHE : FINAL DE LA SEMAINE
+      {
+        id: "5e_2026_S18_dimanche",
+        niveau: "5e",
+        day: "dimanche",
+        title: "Final du dimanche 🏆",
+        theme: "Challenge global",
+        durationTotalSec: 300,
+        itemIds: [
+          "5e_template_relatifs_001",
+          "5e_calcul_fraction_addition_001",
+          "5e_calcul_relatif_soustraction_001",
+          "5e_template_fraction_produit_001",
+          "5e_calcul_relatif_addition_001",
+          "5e_calcul_fraction_simplifier_001",
+          "5e_template_relatifs_001",
+        ],
+      },
     ],
   },
 ];

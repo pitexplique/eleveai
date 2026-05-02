@@ -95,6 +95,44 @@ export const weekly4e: CalculRapideWeek[] = [
           "4e_probleme_pythagore_001",
         ],
       },
+
+      // 🔵 SAMEDI : CONSOLIDATION
+      {
+        id: "4e_2026_S18_samedi",
+        niveau: "4e",
+        day: "samedi",
+        title: "Défi du samedi",
+        theme: "Mix de la semaine",
+        durationTotalSec: 300,
+        itemIds: [
+          "4e_template_relatifs_001",
+          "4e_calcul_puissance_001",
+          "4e_calcul_fraction_001",
+          "4e_calcul_relatif_001",
+          "4e_template_puissance_001",
+          "4e_probleme_vitesse_001",
+          "4e_probleme_pythagore_001",
+        ],
+      },
+
+      // 🔴 DIMANCHE : FINAL
+      {
+        id: "4e_2026_S18_dimanche",
+        niveau: "4e",
+        day: "dimanche",
+        title: "Final du dimanche 🏆",
+        theme: "Challenge global",
+        durationTotalSec: 300,
+        itemIds: [
+          "4e_template_puissance_001",
+          "4e_calcul_relatif_001",
+          "4e_calcul_puissance_001",
+          "4e_calcul_fraction_001",
+          "4e_template_relatifs_001",
+          "4e_probleme_pythagore_001",
+          "4e_probleme_vitesse_001",
+        ],
+      },
     ],
   },
 ];
