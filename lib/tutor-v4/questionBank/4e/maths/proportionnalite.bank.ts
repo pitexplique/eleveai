@@ -20,7 +20,10 @@
  * - éviter les pièges classiques.
  */
 
-import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
+import type {
+  TutorBankItemV4,
+  TableauProportionnaliteCanvasData,
+} from "@/lib/tutor-v4/types";
 
 function randomInt(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -40,6 +43,30 @@ function formatNumber(n: number) {
 
 function makeChoices(correct: string, wrongs: string[]) {
   return shuffle([correct, ...wrongs]).slice(0, 4);
+}
+function tableauProportionnaliteCanvas(params: {
+  rowLabels: string[];
+  values: string[][];
+  missing: Array<{ row: number; col: number }>;
+  colLabels?: string[];
+  highlightedCells?: Array<{ row: number; col: number }>;
+}): TableauProportionnaliteCanvasData {
+  return {
+    kind: "tableau_proportionnalite",
+    rows: params.values.length,
+    cols: params.values[0]?.length ?? 0,
+    rowLabels: params.rowLabels,
+    colLabels: params.colLabels,
+    values: params.values,
+    missing: params.missing,
+    highlightedCells: params.highlightedCells,
+    display: {
+      showRowLabels: true,
+      showColLabels: true,
+      showMissing: true,
+      showGrid: true,
+    },
+  };
 }
 
 export const proportionnaliteBank: TutorBankItemV4[] = [
@@ -203,7 +230,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     difficulty: 2,
     theme: "neutral",
     hint: "Utilise le coefficient multiplicatif.",
-    tags: ["proportionnalite", "tableau", "template"],
+    tags: ["proportionnalite", "tableau", "template", "canvas"],
     generate: () => {
       const x1 = randomInt(2, 6);
       const k = randomInt(2, 8);
@@ -212,11 +239,21 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
       const y2 = x2 * k;
 
       return {
-        text: `Compléter le tableau de proportionnalité : ${x1} → ${y1} ; ${x2} → ?`,
+        text: "Compléter le tableau de proportionnalité.",
         format: "short",
         expected: [String(y2)],
         comparator: "number_equal",
         explanation: `Le coefficient est ${y1} ÷ ${x1} = ${k}. Donc ${x2} → ${x2} × ${k} = ${y2}.`,
+        canvas: tableauProportionnaliteCanvas({
+          rowLabels: ["Quantité", "Prix (€)"],
+          colLabels: ["A", "B"],
+          values: [
+            [String(x1), String(x2)],
+            [String(y1), ""],
+          ],
+          missing: [{ row: 1, col: 1 }],
+          highlightedCells: [{ row: 1, col: 1 }],
+        }),
       };
     },
   },
@@ -473,7 +510,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     difficulty: 3,
     theme: "reunion",
     hint: "Même prix au kg.",
-    tags: ["proportionnalite", "reunion", "quatrieme_proportionnelle", "template"],
+    tags: ["proportionnalite", "reunion", "quatrieme_proportionnelle", "template", "canvas"],
     generate: () => {
       const kg1 = randomInt(2, 5);
       const pricePerKg = randomInt(4, 9);
@@ -482,11 +519,21 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
       const p2 = kg2 * pricePerKg;
 
       return {
-        text: `À Saint-Leu, ${kg1} kg d’ananas coûtent ${p1} €. Combien coûtent ${kg2} kg ?`,
+        text: "À Saint-Leu, complète le tableau de proportionnalité.",
         format: "short",
         expected: [String(p2)],
         comparator: "number_equal",
         explanation: `Le prix au kg est ${p1} ÷ ${kg1} = ${pricePerKg} €. Donc ${kg2} kg coûtent ${p2} €.`,
+        canvas: tableauProportionnaliteCanvas({
+          rowLabels: ["Masse (kg)", "Prix (€)"],
+          colLabels: ["Situation 1", "Situation 2"],
+          values: [
+            [String(kg1), String(kg2)],
+            [String(p1), ""],
+          ],
+          missing: [{ row: 1, col: 1 }],
+          highlightedCells: [{ row: 1, col: 1 }],
+        }),
       };
     },
   },
