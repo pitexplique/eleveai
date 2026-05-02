@@ -81,7 +81,7 @@ export const weekly5e: CalculRapideWeek[] = [
       {
         id: "5e_2026_S18_vendredi",
         niveau: "5e",
-        day: "vendredi",
+        day: "samedi",
         title: "Défi du vendredi",
         theme: "Boss final mixte",
         durationTotalSec: 300,
@@ -100,7 +100,7 @@ export const weekly5e: CalculRapideWeek[] = [
       {
         id: "5e_2026_S18_samedi",
         niveau: "5e",
-        day: "samedi",
+        day: "vendredi",
         title: "Défi du samedi",
         theme: "Mix de la semaine",
         durationTotalSec: 300,
