@@ -22,6 +22,11 @@ import { airesBank } from "./aires.bank";
 import { parallelogrammesBank } from "./parallelogrammes.bank";
 import { pythagoreBank } from "./pythagore.bank";
 import { probabilitesBank } from"./probabilites.bank";
+import { fractionsBank } from"./fractions.bank";
+import { operationsRelatifsBank } from "./operations-relatifs.banks";
+import { identitesRemarquablesBank} from "./identites-remarquables.bank"
+import { factorisationBank } from "./factorisation.bank";
+import { proportionnaliteBank} from "./proportionnalite.bank"
 
 
 // =========================
@@ -37,4 +42,9 @@ export const maths4eQuestionBank: TutorBankItemV4[] = [
   ...parallelogrammesBank,
   ...pythagoreBank,
   ...probabilitesBank,
+  ...fractionsBank,
+  ...operationsRelatifsBank,
+  ...identitesRemarquablesBank,
+  ...factorisationBank,
+  ...proportionnaliteBank
 ];

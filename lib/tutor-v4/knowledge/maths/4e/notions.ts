@@ -17,17 +17,10 @@ export const notions: NotionSource[] = [
   // NOMBRES
   // =========================
   {
-    id: "nombres_relatifs",
-    label: "Nombres relatifs",
-    boId: "BO4N1",
-    prerequis: [],
-    levels: [1, 2, 3],
-  },
-  {
     id: "operations_relatifs",
     label: "Opérations sur les nombres relatifs",
     boId: "BO4N1",
-    prerequis: ["nombres_relatifs"],
+    prerequis: [],
     levels: [1, 2, 3],
   },
   {

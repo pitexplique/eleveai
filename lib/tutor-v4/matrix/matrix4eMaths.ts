@@ -25,50 +25,58 @@ const directParents: Record<string, string[]> = Object.fromEntries(
  */
 const supportLinks: Record<string, string[]> = {
   // =========================
-  // NOMBRES RELATIFS
-  // =========================
-  relatif_comparer: ["relatif_placer"],
-  relatif_defis: ["relatif_opposes"],
-
-  // =========================
   // OPÉRATIONS SUR LES RELATIFS
   // =========================
-  relatif_soustraction: ["relatif_comparer"],
-  relatif_multiplication: ["relatif_comparer"],
-  relatif_division: ["fraction_rationnel"],
-  relatif_calcul: ["relatif_comparer"],
-  relatif_probleme: ["relatif_placer"],
+  relatif_soustraction: ["relatif_addition"],
+  relatif_multiplication: ["relatif_addition"],
+  relatif_division: ["relatif_multiplication"],
+  relatif_calcul: [
+    "relatif_addition",
+    "relatif_soustraction",
+    "relatif_multiplication",
+    "relatif_division",
+  ],
+  relatif_probleme: ["relatif_calcul"],
   relatif_defis_ops: ["relatif_soustraction", "relatif_multiplication"],
 
   // =========================
   // FRACTIONS
   // =========================
-  fraction_rationnel: ["relatif_lire", "relatif_signe"],
-  fraction_comparer: ["relatif_comparer", "fraction_rationnel"],
-  fraction_addition: ["relatif_addition"],
-  fraction_produit: ["fraction_comparer"],
+  fraction_simplifier: ["fraction_egales"],
+  fraction_decimal: ["fraction_simplifier"],
+  fraction_rationnel: ["fraction_egales", "fraction_decimal"],
+  fraction_comparer: ["fraction_simplifier", "fraction_decimal"],
+  fraction_addition: ["fraction_comparer", "relatif_addition"],
+  fraction_produit: ["fraction_simplifier"],
   fraction_quantite: ["fraction_comparer", "fraction_produit"],
   fraction_inverse: ["fraction_simplifier", "fraction_rationnel"],
   fraction_division: ["fraction_inverse", "fraction_produit"],
-  fraction_oppose: ["relatif_opposes", "fraction_rationnel"],
+  fraction_oppose: ["fraction_rationnel", "relatif_multiplication"],
   fraction_defis: ["fraction_quantite", "fraction_division", "fraction_oppose"],
 
   // =========================
   // PROPORTIONNALITÉ
   // =========================
-  prop_table: ["fraction_comparer"],
-  prop_quatrieme: ["prop_coeff", "fraction_comparer"],
-  prop_coeff: ["fraction_comparer"],
-  prop_pourcentage: ["prop_table", "fraction_comparer"],
+  prop_table: ["prop_reconnaitre", "fraction_comparer"],
+  prop_coeff: ["prop_table", "fraction_comparer"],
+  prop_quatrieme: ["prop_table", "prop_coeff", "fraction_comparer"],
+  prop_pourcentage: ["prop_coeff", "fraction_comparer"],
   prop_coeff_mult: ["prop_pourcentage", "prop_coeff"],
   prop_evolution: ["prop_pourcentage", "prop_coeff_mult", "relatif_calcul"],
-  prop_probleme: ["prop_quatrieme", "fraction_quantite", "relatif_calcul"],
-  prop_defis: ["prop_evolution", "prop_pourcentage", "prop_coeff_mult"],
+  prop_probleme: [
+    "prop_quatrieme",
+    "prop_coeff",
+    "prop_pourcentage",
+    "prop_evolution",
+    "fraction_quantite",
+    "relatif_calcul",
+  ],
+  prop_defis: ["prop_evolution", "prop_probleme", "prop_coeff_mult"],
 
   // =========================
   // EXPRESSIONS LITTÉRALES
   // =========================
-  expr_litterale_traduire: ["relatif_lire"],
+  expr_litterale_traduire: ["relatif_calcul"],
   expr_litterale_substituer: ["relatif_calcul"],
   expr_litterale_reduire: ["expr_litterale_substituer"],
   expr_litterale_defis: ["expr_litterale_reduire"],
@@ -85,26 +93,27 @@ const supportLinks: Record<string, string[]> = {
   // =========================
   // IDENTITÉS REMARQUABLES
   // =========================
-  ir_reconnaitre: ["distrib_reconnaitre"],
-  ir_developper: ["distrib_double"],
-  ir_choisir: ["ir_reconnaitre"],
-  ir_lier_distributivite: ["ir_developper", "distrib_double"],
-  ir_defis: ["ir_choisir", "ir_lier_distributivite"],
+  ir_lier_distributivite: ["distrib_double", "distrib_reduire"],
+  ir_reconnaitre: ["ir_lier_distributivite", "distrib_reconnaitre"],
+  ir_developper: ["ir_reconnaitre", "ir_lier_distributivite", "distrib_double"],
+  ir_choisir: ["ir_reconnaitre", "ir_developper"],
+  ir_defis: ["ir_choisir", "ir_developper", "distrib_double"],
+
 
   // =========================
   // FACTORISATION
   // =========================
-  facteur_commun: ["expr_litterale_reduire"],
-  factoriser_simple: ["distrib_simple"],
-  factoriser_ir: ["ir_reconnaitre", "ir_developper"],
-  factoriser_verifier: ["distrib_simple", "factoriser_simple"],
+  facteur_commun: ["distrib_simple", "expr_litterale_reduire"],
+  factoriser_simple: ["facteur_commun", "distrib_simple"],
+  factoriser_ir: ["factoriser_simple", "ir_reconnaitre", "ir_developper"],
+  factoriser_verifier: ["factoriser_simple", "distrib_simple"],
   factorisation_defis: ["factoriser_ir", "factoriser_verifier"],
 
   // =========================
   // ÉQUATIONS
   // =========================
   equation_traduire: ["expr_litterale_traduire"],
-  equation_resoudre_simple: ["expr_litterale_substituer"],
+  equation_resoudre_simple: ["expr_litterale_substituer", "relatif_calcul"],
   equation_resoudre_reduction: ["expr_litterale_reduire"],
   equation_resoudre_distributivite: ["distrib_simple"],
   equation_verifier: ["expr_litterale_substituer"],
@@ -114,9 +123,8 @@ const supportLinks: Record<string, string[]> = {
   // =========================
   // TRIANGLES
   // =========================
-  triangle_nature: ["relatif_comparer"],
   triangle_construire: ["triangle_nature"],
-  triangle_egalite: ["relatif_addition", "relatif_comparer"],
+  triangle_egalite: ["relatif_addition"],
   triangle_defis: ["triangle_construire", "triangle_egalite"],
 
   // =========================
@@ -163,8 +171,8 @@ const supportLinks: Record<string, string[]> = {
   // =========================
   // TRANSFORMATIONS
   // =========================
-  transfo_translation: ["relatif_placer"],
-  transfo_rotation: ["relatif_placer"],
+  transfo_translation: ["transfo_symetrie_centrale"],
+  transfo_rotation: ["transfo_symetrie_centrale"],
   transfo_proprietes: ["triangle_nature"],
   transfo_defis: ["transfo_translation", "transfo_rotation"],
 
@@ -174,7 +182,11 @@ const supportLinks: Record<string, string[]> = {
   perimetre_rectangle: ["relatif_addition"],
   perimetre_carre: ["relatif_multiplication"],
   perimetre_triangle: ["relatif_addition"],
-  perimetre_figure: ["perimetre_rectangle", "perimetre_carre", "perimetre_triangle"],
+  perimetre_figure: [
+    "perimetre_rectangle",
+    "perimetre_carre",
+    "perimetre_triangle",
+  ],
   perimetre_probleme: ["perimetre_figure"],
   perimetre_defis: ["perimetre_probleme"],
 
@@ -185,7 +197,12 @@ const supportLinks: Record<string, string[]> = {
   aire_carre: ["relatif_multiplication"],
   aire_triangle: ["aire_rectangle"],
   aire_parallelogramme: ["aire_rectangle"],
-  aire_figure: ["aire_rectangle", "aire_carre", "aire_triangle", "aire_parallelogramme"],
+  aire_figure: [
+    "aire_rectangle",
+    "aire_carre",
+    "aire_triangle",
+    "aire_parallelogramme",
+  ],
   aire_probleme: ["aire_figure"],
   aire_defis: ["aire_probleme"],
 
@@ -203,7 +220,7 @@ const supportLinks: Record<string, string[]> = {
   stat_lire_graphique: ["stat_lire_tableau"],
   stat_effectif_frequence: ["fraction_comparer"],
   stat_moyenne: ["relatif_calcul"],
-  stat_mediane: ["relatif_comparer", "stat_lire_tableau"],
+  stat_mediane: ["stat_lire_tableau"],
   stat_defis: ["stat_moyenne", "stat_mediane"],
 
   // =========================
@@ -217,14 +234,10 @@ const supportLinks: Record<string, string[]> = {
     "proba_equiprobabilite",
     "fraction_comparer",
   ],
-  proba_convertir: [
-    "proba_calculer_fraction",
-    "prop_pourcentage",
-  ],
+  proba_convertir: ["proba_calculer_fraction", "prop_pourcentage"],
   proba_comparer: [
     "proba_calculer_fraction",
     "fraction_comparer",
-    "relatif_comparer",
   ],
   proba_defis: [
     "proba_evenements",

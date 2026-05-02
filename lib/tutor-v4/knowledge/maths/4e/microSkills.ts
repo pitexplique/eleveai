@@ -12,106 +12,56 @@
 import type { MicroSkillSource } from "@/lib/tutor-v4/knowledge/buildKnowledge";
 
 export const microSkills: MicroSkillSource[] = [
-  /* =========================
-     NOMBRES RELATIFS
-  ========================= */
-  {
-    id: "relatif_lire",
-    label: "Lire et écrire un nombre relatif",
-    notionId: "nombres_relatifs",
-    prerequis: [],
-  },
-  {
-    id: "relatif_signe",
-    label: "Identifier le signe d’un nombre relatif",
-    notionId: "nombres_relatifs",
-    prerequis: ["relatif_lire"],
-  },
-  {
-    id: "relatif_comparer",
-    label: "Comparer des nombres relatifs",
-    notionId: "nombres_relatifs",
-    prerequis: ["relatif_lire", "relatif_signe"],
-  },
-  {
-    id: "relatif_placer",
-    label: "Placer des nombres relatifs sur une droite",
-    notionId: "nombres_relatifs",
-    prerequis: ["relatif_lire", "relatif_comparer"],
-  },
-  {
-    id: "relatif_opposes",
-    label: "Déterminer l’opposé d’un nombre relatif",
-    notionId: "nombres_relatifs",
-    prerequis: ["relatif_signe"],
-  },
-  {
-    id: "relatif_valeur_absolue",
-    label: "Déterminer la valeur absolue d’un nombre relatif",
-    notionId: "nombres_relatifs",
-    prerequis: ["relatif_opposes"],
-  },
-  {
-    id: "relatif_defis",
-    label: "Défis sur les nombres relatifs",
-    notionId: "nombres_relatifs",
-    prerequis: ["relatif_comparer", "relatif_valeur_absolue"],
-  },
+ 
+{
+  id: "relatif_addition",
+  label: "Additionner des nombres relatifs",
+  notionId: "operations_relatifs",
+  prerequis: [],
+},
+{
+  id: "relatif_soustraction",
+  label: "Soustraire des nombres relatifs",
+  notionId: "operations_relatifs",
+  prerequis: ["relatif_addition"],
+},
+{
+  id: "relatif_multiplication",
+  label: "Multiplier des nombres relatifs",
+  notionId: "operations_relatifs",
+  prerequis: ["relatif_addition"],
+},
+{
+  id: "relatif_division",
+  label: "Diviser des nombres relatifs",
+  notionId: "operations_relatifs",
+  prerequis: ["relatif_multiplication"],
+},
+{
+  id: "relatif_calcul",
+  label: "Effectuer des calculs avec des nombres relatifs",
+  notionId: "operations_relatifs",
+  prerequis: [
+    "relatif_addition",
+    "relatif_soustraction",
+    "relatif_multiplication",
+    "relatif_division",
+  ],
+},
+{
+  id: "relatif_probleme",
+  label: "Résoudre un problème avec des nombres relatifs",
+  notionId: "operations_relatifs",
+  prerequis: ["relatif_calcul"],
+},
+{
+  id: "relatif_defis_ops",
+  label: "Défis sur les opérations avec les relatifs",
+  notionId: "operations_relatifs",
+  prerequis: ["relatif_probleme"],
+},
 
-  /* =========================
-     OPÉRATIONS SUR LES RELATIFS
-  ========================= */
-  {
-    id: "relatif_addition",
-    label: "Additionner des nombres relatifs",
-    notionId: "operations_relatifs",
-    prerequis: ["relatif_lire", "relatif_signe"],
-  },
-  {
-    id: "relatif_soustraction",
-    label: "Soustraire des nombres relatifs",
-    notionId: "operations_relatifs",
-    prerequis: ["relatif_addition"],
-  },
-  {
-    id: "relatif_multiplication",
-    label: "Multiplier des nombres relatifs",
-    notionId: "operations_relatifs",
-    prerequis: ["relatif_addition"],
-  },
-  {
-    id: "relatif_division",
-    label: "Diviser des nombres relatifs",
-    notionId: "operations_relatifs",
-    prerequis: ["relatif_multiplication"],
-  },
-  {
-    id: "relatif_calcul",
-    label: "Effectuer des calculs avec des nombres relatifs",
-    notionId: "operations_relatifs",
-    prerequis: [
-      "relatif_addition",
-      "relatif_soustraction",
-      "relatif_multiplication",
-      "relatif_division",
-    ],
-  },
-  {
-    id: "relatif_probleme",
-    label: "Résoudre un problème avec des nombres relatifs",
-    notionId: "operations_relatifs",
-    prerequis: ["relatif_calcul"],
-  },
-  {
-    id: "relatif_defis_ops",
-    label: "Défis sur les opérations avec les relatifs",
-    notionId: "operations_relatifs",
-    prerequis: ["relatif_probleme"],
-  },
-
-  /* =========================
-     FRACTIONS
-  ========================= */
+  /// Fractions //
   {
     id: "fraction_egales",
     label: "Reconnaître des fractions égales",
@@ -124,9 +74,18 @@ export const microSkills: MicroSkillSource[] = [
     notionId: "fractions",
     prerequis: ["fraction_egales"],
   },
+
+  // 👉 ICI
+  {
+    id: "fraction_decimal",
+    label: "Passer d’une fraction à un nombre décimal",
+    notionId: "fractions",
+    prerequis: ["fraction_simplifier"],
+  },
+
   {
     id: "fraction_rationnel",
-    label: "Reconnaître un nombre rationnel et ses écritures",
+    label: "Reconnaître qu’un nombre est rationnel et passer d’une écriture à une autre",
     notionId: "fractions",
     prerequis: ["fraction_egales"],
   },
@@ -136,55 +95,8 @@ export const microSkills: MicroSkillSource[] = [
     notionId: "fractions",
     prerequis: ["fraction_simplifier"],
   },
-  {
-    id: "fraction_addition",
-    label: "Additionner ou soustraire des fractions",
-    notionId: "fractions",
-    prerequis: ["fraction_comparer"],
-  },
-  {
-    id: "fraction_produit",
-    label: "Multiplier des fractions",
-    notionId: "fractions",
-    prerequis: ["fraction_simplifier"],
-  },
-  {
-    id: "fraction_inverse",
-    label: "Déterminer l’inverse d’un nombre rationnel ou d’une fraction",
-    notionId: "fractions",
-    prerequis: ["fraction_rationnel", "fraction_produit"],
-  },
-  {
-    id: "fraction_division",
-    label: "Diviser des fractions",
-    notionId: "fractions",
-    prerequis: ["fraction_inverse", "fraction_produit"],
-  },
-  {
-    id: "fraction_quantite",
-    label: "Calculer la fraction d’un nombre ou d’une quantité",
-    notionId: "fractions",
-    prerequis: ["fraction_comparer", "fraction_produit"],
-  },
-  {
-    id: "fraction_oppose",
-    label: "Exprimer l’opposé d’un nombre rationnel",
-    notionId: "fractions",
-    prerequis: ["fraction_rationnel"],
-  },
-  {
-    id: "fraction_defis",
-    label: "Défis sur les fractions et les nombres rationnels",
-    notionId: "fractions",
-    prerequis: [
-      "fraction_addition",
-      "fraction_division",
-      "fraction_quantite",
-      "fraction_oppose",
-    ],
-  },
 
-  /* =========================
+    /* =========================
      PROPORTIONNALITÉ
   ========================= */
   {
@@ -200,16 +112,16 @@ export const microSkills: MicroSkillSource[] = [
     prerequis: ["prop_reconnaitre"],
   },
   {
-    id: "prop_quatrieme",
-    label: "Calculer une quatrième proportionnelle",
-    notionId: "proportionnalite",
-    prerequis: ["prop_table"],
-  },
-  {
     id: "prop_coeff",
     label: "Utiliser un coefficient de proportionnalité ou un passage à l’unité",
     notionId: "proportionnalite",
     prerequis: ["prop_table"],
+  },
+  {
+    id: "prop_quatrieme",
+    label: "Calculer une quatrième proportionnelle",
+    notionId: "proportionnalite",
+    prerequis: ["prop_table", "prop_coeff"],
   },
   {
     id: "prop_pourcentage",
@@ -221,7 +133,7 @@ export const microSkills: MicroSkillSource[] = [
     id: "prop_coeff_mult",
     label: "Utiliser un coefficient multiplicateur",
     notionId: "proportionnalite",
-    prerequis: ["prop_pourcentage"],
+    prerequis: ["prop_pourcentage", "prop_coeff"],
   },
   {
     id: "prop_evolution",
@@ -233,7 +145,12 @@ export const microSkills: MicroSkillSource[] = [
     id: "prop_probleme",
     label: "Résoudre un problème de proportionnalité",
     notionId: "proportionnalite",
-    prerequis: ["prop_quatrieme", "prop_coeff", "prop_pourcentage"],
+    prerequis: [
+      "prop_quatrieme",
+      "prop_coeff",
+      "prop_pourcentage",
+      "prop_evolution",
+    ],
   },
   {
     id: "prop_defis",
@@ -314,38 +231,39 @@ export const microSkills: MicroSkillSource[] = [
     prerequis: ["distrib_reduire", "distrib_reconnaitre"],
   },
 
+
   /* =========================
      IDENTITÉS REMARQUABLES
   ========================= */
   {
-    id: "ir_reconnaitre",
-    label: "Reconnaître une identité remarquable simple",
+    id: "ir_lier_distributivite",
+    label: "Comprendre qu’une identité remarquable vient de la double distributivité",
     notionId: "identites_remarquables",
     prerequis: ["distrib_double"],
   },
   {
-    id: "ir_developper",
-    label: "Développer une expression avec une identité remarquable",
+    id: "ir_reconnaitre",
+    label: "Reconnaître une forme d’identité remarquable",
     notionId: "identites_remarquables",
-    prerequis: ["ir_reconnaitre"],
+    prerequis: ["ir_lier_distributivite"],
+  },
+  {
+    id: "ir_developper",
+    label: "Développer une expression en utilisant le lien avec la double distributivité",
+    notionId: "identites_remarquables",
+    prerequis: ["ir_reconnaitre", "ir_lier_distributivite"],
   },
   {
     id: "ir_choisir",
-    label: "Choisir la bonne identité remarquable",
+    label: "Choisir la bonne méthode entre double distributivité et identité remarquable",
     notionId: "identites_remarquables",
-    prerequis: ["ir_developper"],
-  },
-  {
-    id: "ir_lier_distributivite",
-    label: "Relier identité remarquable et distributivité",
-    notionId: "identites_remarquables",
-    prerequis: ["ir_developper", "distrib_double"],
+    prerequis: ["ir_reconnaitre", "ir_developper"],
   },
   {
     id: "ir_defis",
-    label: "Défis sur les identités remarquables",
+    label: "Défis sur les identités remarquables et leurs erreurs fréquentes",
     notionId: "identites_remarquables",
-    prerequis: ["ir_choisir", "ir_lier_distributivite"],
+    prerequis: ["ir_choisir", "ir_developper"],
   },
 
   /* =========================

@@ -236,13 +236,45 @@ export type CanvasProbabilitesData = {
     casesSurlignees?: Array<[number, number]>;
   };
 };
+export type TableauProportionnaliteCell = {
+  row: number;
+  col: number;
+};
 
+export type TableauProportionnaliteCanvasData = {
+  kind: "tableau_proportionnalite";
+
+  size?: {
+    width?: number;
+    height?: number;
+  };
+
+  rows: number;
+  cols: number;
+
+  rowLabels?: string[];
+  colLabels?: string[];
+
+  values: string[][];
+
+  missing: TableauProportionnaliteCell[];
+
+  highlightedCells?: TableauProportionnaliteCell[];
+
+  display?: {
+    showRowLabels?: boolean;
+    showColLabels?: boolean;
+    showMissing?: boolean;
+    showGrid?: boolean;
+  };
+};
 
 export type CanvasFigure =
   | TriangleCanvasData
   | QuadrilatereCanvasData
   | FigureLibreCanvasData
   | CanvasProbabilitesData
+  | TableauProportionnaliteCanvasData
   | NumberLineCanvasData;
 
 export type QuestionVariantMeta = {
