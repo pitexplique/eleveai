@@ -474,36 +474,58 @@ export const microSkills: MicroSkillSource[] = [
 
   /* =========================
      PYTHAGORE
-  ========================= */
+   /* ====================== */
+  {
+    id: "pythagore_carres_racines",
+    label: "Utiliser les carrés et les racines carrées",
+    notionId: "pythagore",
+    prerequis: ["relatif_calcul"],
+  },
   {
     id: "pythagore_reconnaitre",
-    label: "Reconnaître une situation relevant du théorème de Pythagore",
+    label: "Reconnaître un triangle rectangle et son hypoténuse",
     notionId: "pythagore",
     prerequis: ["triangle_nature"],
   },
   {
-    id: "pythagore_calculer",
-    label: "Calculer une longueur avec le théorème de Pythagore",
+    id: "pythagore_calculer_hypotenuse",
+    label: "Calculer l’hypoténuse avec le théorème de Pythagore",
     notionId: "pythagore",
-    prerequis: ["pythagore_reconnaitre"],
+    prerequis: ["pythagore_carres_racines", "pythagore_reconnaitre"],
   },
   {
-    id: "pythagore_verifier",
-    label: "Vérifier si un triangle est rectangle",
+    id: "pythagore_calculer_cote",
+    label: "Calculer un côté de l’angle droit avec le théorème de Pythagore",
     notionId: "pythagore",
-    prerequis: ["pythagore_calculer"],
+    prerequis: ["pythagore_carres_racines", "pythagore_reconnaitre"],
+  },
+  {
+    id: "pythagore_reciproque_verifier",
+    label: "Vérifier une égalité de Pythagore avec trois longueurs",
+    notionId: "pythagore",
+    prerequis: ["pythagore_carres_racines"],
+  },
+  {
+    id: "pythagore_reciproque_conclure",
+    label: "Utiliser la réciproque pour conclure qu’un triangle est rectangle",
+    notionId: "pythagore",
+    prerequis: ["pythagore_reciproque_verifier"],
   },
   {
     id: "pythagore_rediger",
-    label: "Rédiger une justification avec le théorème de Pythagore",
+    label: "Rédiger une justification avec Pythagore ou sa réciproque",
     notionId: "pythagore",
-    prerequis: ["pythagore_calculer"],
+    prerequis: [
+      "pythagore_calculer_hypotenuse",
+      "pythagore_calculer_cote",
+      "pythagore_reciproque_conclure",
+    ],
   },
   {
     id: "pythagore_defis",
-    label: "Défis sur le théorème de Pythagore",
+    label: "Défis sur Pythagore et sa réciproque",
     notionId: "pythagore",
-    prerequis: ["pythagore_verifier", "pythagore_rediger"],
+    prerequis: ["pythagore_rediger"],
   },
 
   /* =========================
@@ -787,27 +809,43 @@ export const microSkills: MicroSkillSource[] = [
     prerequis: ["proba_vocabulaire"],
   },
   {
+    id: "proba_evenements",
+    label: "Reconnaître un événement certain, impossible ou contraire",
+    notionId: "probabilites",
+    prerequis: ["proba_vocabulaire", "proba_issues"],
+  },
+  {
     id: "proba_equiprobabilite",
     label: "Reconnaître une situation d’équiprobabilité",
     notionId: "probabilites",
     prerequis: ["proba_issues"],
   },
   {
-    id: "proba_calculer",
-    label: "Calculer une probabilité simple",
+    id: "proba_calculer_fraction",
+    label: "Calculer une probabilité simple sous forme de fraction",
     notionId: "probabilites",
-    prerequis: ["proba_issues", "fraction_comparer"],
+    prerequis: ["proba_issues", "proba_equiprobabilite", "fraction_comparer"],
+  },
+  {
+    id: "proba_convertir",
+    label: "Exprimer une probabilité sous forme décimale ou en pourcentage",
+    notionId: "probabilites",
+    prerequis: ["proba_calculer_fraction", "prop_pourcentage"],
   },
   {
     id: "proba_comparer",
     label: "Comparer des probabilités simples",
     notionId: "probabilites",
-    prerequis: ["proba_calculer"],
+    prerequis: ["proba_calculer_fraction", "fraction_comparer"],
   },
   {
     id: "proba_defis",
     label: "Défis sur les probabilités",
     notionId: "probabilites",
-    prerequis: ["proba_equiprobabilite", "proba_comparer"],
+    prerequis: [
+      "proba_evenements",
+      "proba_convertir",
+      "proba_comparer",
+    ],
   },
 ];

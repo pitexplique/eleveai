@@ -1,3 +1,112 @@
+/**
+ * =========================================================
+ * DISTRIBUTIVITE.BANK.TS
+ * =========================================================
+ *
+ * Banque de questions pour la notion de DISTRIBUTIVITÉ (4e).
+ *
+ * 🎯 OBJECTIF PÉDAGOGIQUE
+ * Construire une maîtrise progressive de la distributivité :
+ * - comprendre le principe (multiplier chaque terme)
+ * - savoir développer
+ * - savoir réduire
+ * - reconnaître les situations
+ * - éviter les erreurs fréquentes
+ * - expliquer et justifier (niveau rédaction)
+ *
+ * ---------------------------------------------------------
+ * 🧠 STRUCTURE PAR MICRO-COMPÉTENCES
+ * ---------------------------------------------------------
+ *
+ * 1. distrib_simple
+ *    → distributivité simple (a(x + b))
+ *    → formes positives, négatives
+ *    → contextes concrets (jardin, maison, achats)
+ *
+ * 2. distrib_double
+ *    → double distributivité ( (x + a)(x + b) )
+ *    → compréhension des 4 produits
+ *
+ * 3. distrib_reduire
+ *    → développer puis regrouper les termes semblables
+ *    → simplification d’expressions
+ *
+ * 4. distrib_reconnaitre
+ *    → identifier une expression à développer
+ *    → distinguer forme développée / non développée
+ *
+ * 5. distrib_defis
+ *    → erreurs fréquentes
+ *    → justification
+ *    → problèmes complexes et modélisation
+ *
+ * ---------------------------------------------------------
+ * 🧩 TYPES DE QUESTIONS UTILISÉS
+ * ---------------------------------------------------------
+ *
+ * ✔ TEMPLATE (majoritaire)
+ *   → génération infinie de variations
+ *   → évite le bachotage
+ *   → permet progression adaptative
+ *
+ * ✔ FIXED (QCM)
+ *   → stabilisation des bases
+ *   → correction immédiate
+ *   → ancrage des notions clés
+ *
+ * ✔ OPEN (réponses ouvertes)
+ *   → explication / justification
+ *   → développement du raisonnement
+ *   → aligné avec les attentes du collège
+ *
+ * ---------------------------------------------------------
+ * ⚙️ CHOIX TECHNIQUES
+ * ---------------------------------------------------------
+ *
+ * - comparator "contains_keyword" :
+ *   → tolérance aux écritures (espaces, formats)
+ *   → permet validation partielle en open
+ *
+ * - génération contrôlée :
+ *   → valeurs simples pour favoriser calcul mental
+ *   → expressions lisibles (pas de surcharge cognitive)
+ *
+ * - thèmes contextualisés :
+ *   → situations concrètes (maison, nature, achats)
+ *   → engagement des élèves
+ *
+ * ---------------------------------------------------------
+ * ⚠️ POINTS DE VIGILANCE PÉDAGOGIQUES
+ * ---------------------------------------------------------
+ *
+ * - éviter la confusion :
+ *   ❌ a(x + b) = ax + b
+ *   ✔ a(x + b) = ax + ab
+ *
+ * - bien distinguer :
+ *   → développer vs réduire
+ *
+ * - insister sur :
+ *   → "le coefficient multiplie chaque terme"
+ *
+ * ---------------------------------------------------------
+ * 🚀 OBJECTIF FINAL
+ * ---------------------------------------------------------
+ *
+ * Amener l’élève à :
+ * - automatiser la distributivité
+ * - comprendre ce qu’il fait (et pas juste appliquer)
+ * - expliquer ses calculs
+ * - éviter les erreurs classiques
+ *
+ * Cette banque est conçue pour être :
+ * ✔ robuste (beaucoup de cas)
+ * ✔ progressive (difficulté 1 → 5)
+ * ✔ intelligente (templates + open)
+ * ✔ adaptée au Tutor V4 (pilotage IA)
+ *
+ * =========================================================
+ */
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 
 function randomInt(min: number, max: number) {
@@ -12,6 +121,24 @@ export const distributiviteBank: TutorBankItemV4[] = [
   // =========================
   // DISTRIB_SIMPLE
   // =========================
+    {
+    kind: "fixed",
+    id: "distrib_simple_fixed_1",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "distributivite",
+    microId: "distrib_simple",
+    difficulty: 1,
+    theme: "neutral",
+    text: "Quelle égalité est correcte ?",
+    format: "qcm",
+    choices: ["3(x + 4) = 3x + 4", "3(x + 4) = 3x + 12", "3(x + 4) = x + 12", "3(x + 4) = 7x"],
+    expected: ["3(x + 4) = 3x + 12"],
+    comparator: "mcq_exact",
+    hint: "Le 3 multiplie x et 4.",
+    explanation: "3(x + 4) = 3×x + 3×4 = 3x + 12.",
+    tags: ["distributivite", "simple", "qcm"],
+  },
   {
     kind: "template",
     id: "distrib_simple_tpl_formel_1",
@@ -85,6 +212,23 @@ export const distributiviteBank: TutorBankItemV4[] = [
         explanation: `-${a}(x + ${b}) = -${a}x - ${a * b}.`,
       };
     },
+  },
+    {
+    kind: "fixed",
+    id: "distrib_simple_open_1",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "distributivite",
+    microId: "distrib_simple",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Explique pourquoi 4(x + 3) donne 4x + 12.",
+    format: "open",
+    expected: ["4", "multiplie", "x", "3"],
+    comparator: "contains_keyword",
+    hint: "Le nombre devant la parenthèse multiplie chaque terme.",
+    explanation: "4 multiplie les deux termes de la parenthèse : 4×x et 4×3. Donc 4(x + 3) = 4x + 12.",
+    tags: ["distributivite", "simple", "open"],
   },
   {
     kind: "template",
@@ -162,6 +306,24 @@ export const distributiviteBank: TutorBankItemV4[] = [
   // =========================
   // DISTRIB_DOUBLE
   // =========================
+    {
+    kind: "fixed",
+    id: "distrib_double_fixed_1",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "distributivite",
+    microId: "distrib_double",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Dans (x + 2)(x + 5), combien de produits doit-on effectuer avant de réduire ?",
+    format: "qcm",
+    choices: ["2", "3", "4", "5"],
+    expected: ["4"],
+    comparator: "mcq_exact",
+    hint: "Chaque terme de la première parenthèse multiplie chaque terme de la seconde.",
+    explanation: "On effectue 4 produits : x×x, x×5, 2×x et 2×5.",
+    tags: ["distributivite", "double", "qcm"],
+  },
   {
     kind: "template",
     id: "distrib_double_tpl_formel_1",
@@ -228,10 +390,45 @@ export const distributiviteBank: TutorBankItemV4[] = [
       };
     },
   },
+    {
+    kind: "fixed",
+    id: "distrib_double_open_1",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "distributivite",
+    microId: "distrib_double",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Explique pourquoi (x + 2)(x + 3) donne x² + 5x + 6.",
+    format: "open",
+    expected: ["x²", "2x", "3x", "6"],
+    comparator: "contains_keyword",
+    hint: "Écris les quatre produits.",
+    explanation: "(x + 2)(x + 3) = x×x + x×3 + 2×x + 2×3 = x² + 3x + 2x + 6 = x² + 5x + 6.",
+    tags: ["distributivite", "double", "open"],
+  },
 
   // =========================
   // DISTRIB_REDUIRE
   // =========================
+    {
+    kind: "fixed",
+    id: "distrib_reduire_fixed_1",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "distributivite",
+    microId: "distrib_reduire",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Quelle est la forme réduite de 2x + 5 + 3x ?",
+    format: "qcm",
+    choices: ["5x + 5", "5x", "6x + 5", "2x + 8"],
+    expected: ["5x + 5"],
+    comparator: "mcq_exact",
+    hint: "Regroupe les termes en x.",
+    explanation: "2x + 3x = 5x, donc 2x + 5 + 3x = 5x + 5.",
+    tags: ["distributivite", "reduire", "qcm"],
+  },
   {
     kind: "template",
     id: "distrib_reduire_tpl_formel_1",
@@ -287,6 +484,23 @@ export const distributiviteBank: TutorBankItemV4[] = [
       };
     },
   },
+    {
+    kind: "fixed",
+    id: "distrib_reduire_open_1",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "distributivite",
+    microId: "distrib_reduire",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Explique comment réduire 2x + 7 + 3x.",
+    format: "open",
+    expected: ["2x", "3x", "5x", "7"],
+    comparator: "contains_keyword",
+    hint: "Regroupe seulement les termes semblables.",
+    explanation: "On regroupe les termes en x : 2x + 3x = 5x. Le 7 reste une constante. Donc 2x + 7 + 3x = 5x + 7.",
+    tags: ["distributivite", "reduire", "open"],
+  },
   {
     kind: "template",
     id: "distrib_reduire_tpl_batiment_1",
@@ -318,6 +532,24 @@ export const distributiviteBank: TutorBankItemV4[] = [
   // =========================
   // DISTRIB_RECONNAITRE
   // =========================
+    {
+    kind: "fixed",
+    id: "distrib_reconnaitre_fixed_1",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "distributivite",
+    microId: "distrib_reconnaitre",
+    difficulty: 1,
+    theme: "neutral",
+    text: "Quelle expression contient une distributivité à effectuer ?",
+    format: "qcm",
+    choices: ["5x + 3", "2(x + 7)", "x + 4", "3x - 1"],
+    expected: ["2(x + 7)"],
+    comparator: "mcq_exact",
+    hint: "Cherche un produit avec une parenthèse.",
+    explanation: "2(x + 7) contient un nombre qui multiplie une parenthèse : il faut distribuer.",
+    tags: ["distributivite", "reconnaitre", "qcm"],
+  },
   {
     kind: "template",
     id: "distrib_reconnaitre_tpl_1",
@@ -392,6 +624,23 @@ export const distributiviteBank: TutorBankItemV4[] = [
       };
     },
   },
+    {
+    kind: "fixed",
+    id: "distrib_reconnaitre_open_1",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "distributivite",
+    microId: "distrib_reconnaitre",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Explique pourquoi 3(x + 2) n’est pas encore une expression développée.",
+    format: "open",
+    expected: ["parenthèse", "développer", "3"],
+    comparator: "contains_keyword",
+    hint: "Regarde s’il reste une parenthèse avec un coefficient devant.",
+    explanation: "3(x + 2) contient encore une parenthèse précédée d’un coefficient. Il faut développer : 3(x + 2) = 3x + 6.",
+    tags: ["distributivite", "reconnaitre", "open"],
+  },
 
   // =========================
   // DISTRIB_DEFIS
@@ -448,6 +697,30 @@ export const distributiviteBank: TutorBankItemV4[] = [
         expected: ["non"],
         comparator: "mcq_exact",
         explanation: `Non. ${a} doit multiplier x et aussi ${b}. On obtient ${a}x + ${a * b}.`,
+      };
+    },
+  },
+    {
+    kind: "template",
+    id: "distrib_defis_open_erreur_1",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "distributivite",
+    microId: "distrib_defis",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Cherche quel terme n’a pas été multiplié.",
+    tags: ["distributivite", "defi", "erreur", "open", "template"],
+    generate: () => {
+      const a = randomInt(2, 6);
+      const b = randomInt(1, 6);
+
+      return {
+        text: `Explique l’erreur dans l’égalité : ${a}(x + ${b}) = ${a}x + ${b}.`,
+        format: "open",
+        expected: ["erreur", "multiplier", String(b)],
+        comparator: "contains_keyword",
+        explanation: `L’erreur est que ${b} n’a pas été multiplié par ${a}. La bonne égalité est ${a}(x + ${b}) = ${a}x + ${a * b}.`,
       };
     },
   },

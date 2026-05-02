@@ -122,10 +122,33 @@ const supportLinks: Record<string, string[]> = {
   // =========================
   // PYTHAGORE
   // =========================
-  pythagore_calculer: ["relatif_calcul"],
-  pythagore_verifier: ["triangle_nature", "pythagore_calculer"],
-  pythagore_rediger: ["pythagore_calculer"],
-  pythagore_defis: ["pythagore_verifier", "pythagore_rediger"],
+  pythagore_carres_racines: ["relatif_calcul"],
+  pythagore_reconnaitre: ["triangle_nature"],
+  pythagore_calculer_hypotenuse: [
+    "pythagore_carres_racines",
+    "pythagore_reconnaitre",
+  ],
+  pythagore_calculer_cote: [
+    "pythagore_carres_racines",
+    "pythagore_reconnaitre",
+  ],
+  pythagore_reciproque_verifier: [
+    "pythagore_carres_racines",
+    "triangle_nature",
+  ],
+  pythagore_reciproque_conclure: [
+    "pythagore_reciproque_verifier",
+    "pythagore_reconnaitre",
+  ],
+  pythagore_rediger: [
+    "pythagore_calculer_hypotenuse",
+    "pythagore_calculer_cote",
+    "pythagore_reciproque_conclure",
+  ],
+  pythagore_defis: [
+    "pythagore_rediger",
+    "pythagore_reciproque_conclure",
+  ],
 
   // =========================
   // PARALLÉLOGRAMMES
@@ -186,11 +209,28 @@ const supportLinks: Record<string, string[]> = {
   // =========================
   // PROBABILITÉS
   // =========================
-  proba_issues: ["stat_lire_tableau"],
+  proba_issues: ["proba_vocabulaire", "stat_lire_tableau"],
+  proba_evenements: ["proba_vocabulaire", "proba_issues"],
   proba_equiprobabilite: ["proba_issues"],
-  proba_calculer: ["fraction_comparer", "stat_effectif_frequence"],
-  proba_comparer: ["relatif_comparer", "proba_calculer"],
-  proba_defis: ["proba_calculer", "proba_comparer"],
+  proba_calculer_fraction: [
+    "proba_issues",
+    "proba_equiprobabilite",
+    "fraction_comparer",
+  ],
+  proba_convertir: [
+    "proba_calculer_fraction",
+    "prop_pourcentage",
+  ],
+  proba_comparer: [
+    "proba_calculer_fraction",
+    "fraction_comparer",
+    "relatif_comparer",
+  ],
+  proba_defis: [
+    "proba_evenements",
+    "proba_convertir",
+    "proba_comparer",
+  ],
 };
 /**
  * Génère automatiquement la matrice.

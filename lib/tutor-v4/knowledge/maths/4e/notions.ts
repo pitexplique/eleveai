@@ -100,7 +100,7 @@ export const notions: NotionSource[] = [
   },
   {
     id: "pythagore",
-    label: "Théorème de Pythagore",
+    label: "Pythagore et sa réciproque",
     boId: "BO4G1",
     prerequis: ["triangles"],
     levels: [1, 2, 3],
@@ -163,7 +163,7 @@ export const notions: NotionSource[] = [
     id: "probabilites",
     label: "Probabilités",
     boId: "BO4D2",
-    prerequis: ["statistiques"],
+    prerequis: ["fractions", "statistiques"],
     levels: [1, 2],
   },
 ];

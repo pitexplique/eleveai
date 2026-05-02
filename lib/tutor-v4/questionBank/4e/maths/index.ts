@@ -20,6 +20,9 @@ import { distributiviteBank } from "./distributivite.bank";
 import { perimetresBank } from "./perimetres.bank";
 import { airesBank } from "./aires.bank";
 import { parallelogrammesBank } from "./parallelogrammes.bank";
+import { pythagoreBank } from "./pythagore.bank";
+import { probabilitesBank } from"./probabilites.bank";
+
 
 // =========================
 // AGRÉGATION DES BANKS 4e
@@ -32,4 +35,6 @@ export const maths4eQuestionBank: TutorBankItemV4[] = [
   ...perimetresBank,
   ...airesBank,
   ...parallelogrammesBank,
+  ...pythagoreBank,
+  ...probabilitesBank,
 ];

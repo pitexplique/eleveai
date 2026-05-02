@@ -197,10 +197,52 @@ export type NumberLineCanvasData = {
   };
 };
 
+export type CanvasProbabilitesData = {
+  kind: "probabilites";
+  variant: "de" | "roue" | "billes" | "tableau";
+
+  size?: {
+    width?: number;
+    height?: number;
+  };
+
+  // 🎲 Dé
+  de?: {
+    faces: Array<1 | 2 | 3 | 4 | 5 | 6>;
+    surligne?: number[];
+  };
+
+  // 🎡 Roue
+  roue?: {
+    segments: {
+      label: string;
+      poids: number;
+      couleur?: string;
+    }[];
+  };
+
+  // 🔴 Billes
+  billes?: {
+    elements: {
+      label?: string;
+      couleur: string;
+    }[];
+  };
+
+  // 📊 Tableau
+  tableau?: {
+    entetes?: string[];
+    lignes: string[][];
+    casesSurlignees?: Array<[number, number]>;
+  };
+};
+
+
 export type CanvasFigure =
   | TriangleCanvasData
   | QuadrilatereCanvasData
   | FigureLibreCanvasData
+  | CanvasProbabilitesData
   | NumberLineCanvasData;
 
 export type QuestionVariantMeta = {
