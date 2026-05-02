@@ -149,6 +149,8 @@ function getTodayDay() {
     mercredi: "mercredi",
     jeudi: "jeudi",
     vendredi: "vendredi",
+    samedi: "samedi",
+    dimanche: "dimanche",
     monday: "lundi",
     tuesday: "mardi",
     wednesday: "mercredi",
