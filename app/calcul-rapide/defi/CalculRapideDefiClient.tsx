@@ -178,6 +178,32 @@ function buildSession(niveau: NiveauCalculRapide): GeneratedCalculRapideItem[] {
     .map(generateItem);
 }
 
+function getScoreMessage(score: number, total: number) {
+  const ratio = score / total;
+
+  if (ratio >= 0.85) {
+    return {
+      title: "Excellent 🔥",
+      message: "Tu maîtrises bien les automatismes. Continue avec des défis plus difficiles dans Coach-IA.",
+      color: "text-emerald-300",
+    };
+  }
+
+  if (ratio >= 0.6) {
+    return {
+      title: "Bon travail 💪",
+      message: "Tu as de bonnes bases, mais quelques notions méritent d’être renforcées dans Coach-IA.",
+      color: "text-amber-300",
+    };
+  }
+
+  return {
+    title: "Il faut s’entraîner 🧠",
+    message: "Pas grave : l’erreur sert à apprendre. Va t’entraîner dans Coach-IA puis reviens refaire le défi.",
+    color: "text-red-300",
+  };
+}
+
 export default function CalculRapideDefiClient() {
   const searchParams = useSearchParams();
   const niveauParam = searchParams.get("niveau");
@@ -290,36 +316,55 @@ export default function CalculRapideDefiClient() {
     );
   }
 
-  if (finished) {
-    return (
-      <main className="flex min-h-screen items-center justify-center bg-slate-950 px-4 text-white">
-        <section className="w-full max-w-4xl rounded-3xl border border-white/15 bg-white/10 p-10 text-center shadow-2xl backdrop-blur">
-          <h1 className="text-5xl font-black md:text-7xl">Bravo 🎉</h1>
+if (finished) {
+  const bilan = getScoreMessage(score, questions.length);
 
-          <p className="mt-6 text-4xl font-black text-emerald-300">
-            Score : {score} / {questions.length}
+  return (
+    <main className="flex min-h-screen items-center justify-center bg-slate-950 px-4 text-white">
+      <section className="w-full max-w-4xl rounded-3xl border border-white/15 bg-white/10 p-10 text-center shadow-2xl backdrop-blur">
+        <h1 className="text-5xl font-black md:text-7xl">Bravo 🎉</h1>
+
+        <p className="mt-6 text-4xl font-black text-emerald-300">
+          Score : {score} / {questions.length}
+        </p>
+
+        <div className="mx-auto mt-8 max-w-3xl rounded-3xl border border-white/15 bg-slate-900/80 p-6">
+          <p className={`text-3xl font-black ${bilan.color}`}>
+            {bilan.title}
           </p>
 
-          <div className="mt-10 flex flex-col justify-center gap-4 sm:flex-row">
-            <Link
-              href="/calcul-rapide"
-              className="rounded-full bg-white px-8 py-4 text-xl font-black text-slate-950"
-            >
-              Retour
-            </Link>
+          <p className="mt-4 text-xl font-bold text-white/85">
+            {bilan.message}
+          </p>
+        </div>
 
-            <button
-              type="button"
-              onClick={() => window.location.reload()}
-              className="rounded-full bg-emerald-400 px-8 py-4 text-xl font-black text-slate-950"
-            >
-              Recommencer
-            </button>
-          </div>
-        </section>
-      </main>
-    );
-  }
+        <div className="mt-10 flex flex-col justify-center gap-4 sm:flex-row">
+          <Link
+            href="/calcul-rapide"
+            className="rounded-full bg-white px-8 py-4 text-xl font-black text-slate-950"
+          >
+            Retour
+          </Link>
+
+          <Link
+            href={`/coach-maths-ia?classe=${niveau}`}
+            className="rounded-full bg-amber-300 px-8 py-4 text-xl font-black text-slate-950"
+          >
+            S’entraîner dans Coach-IA
+          </Link>
+
+          <button
+            type="button"
+            onClick={() => window.location.reload()}
+            className="rounded-full bg-emerald-400 px-8 py-4 text-xl font-black text-slate-950"
+          >
+            Recommencer
+          </button>
+        </div>
+      </section>
+    </main>
+  );
+}
 
   return (
     <main className="flex min-h-screen items-center justify-center bg-slate-950 px-6 text-white">
