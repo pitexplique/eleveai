@@ -328,45 +328,7 @@ export type Solide3DCanvasData = {
   cubes?: CubeCell3D[];
 };
 
-export type CanvasProbabilitesData = {
-  kind: "probabilites";
-  variant: "de" | "roue" | "billes" | "tableau";
 
-  size?: {
-    width?: number;
-    height?: number;
-  };
-
-  // 🎲 Dé
-  de?: {
-    faces: Array<1 | 2 | 3 | 4 | 5 | 6>;
-    surligne?: number[];
-  };
-
-  // 🎡 Roue
-  roue?: {
-    segments: {
-      label: string;
-      poids: number;
-      couleur?: string;
-    }[];
-  };
-
-  // 🔴 Billes
-  billes?: {
-    elements: {
-      label?: string;
-      couleur: string;
-    }[];
-  };
-
-  // 📊 Tableau
-  tableau?: {
-    entetes?: string[];
-    lignes: string[][];
-    casesSurlignees?: Array<[number, number]>;
-  };
-};
 export type TableauProportionnaliteCell = {
   row: number;
   col: number;
@@ -400,6 +362,74 @@ export type TableauProportionnaliteCanvasData = {
   };
 };
 
+export type AngleCanvasData = {
+  kind: "angle";
+
+  angle: {
+    angleDeg: number;
+
+    labels?: {
+      vertex?: string;
+      left?: string;
+      right?: string;
+      angle?: string;
+    };
+
+    display?: {
+      showLabels?: boolean;
+      showMeasure?: boolean;
+      showArc?: boolean;
+      showRightAngle?: boolean;
+      placeholder?: string;
+    };
+  };
+
+  size?: {
+    width?: number;
+    height?: number;
+  };
+};
+
+// =========================
+// 🎲 PROBABILITÉS
+// =========================
+export type CanvasProbabilitesData = {
+  kind: "probabilites";
+
+  variant: "de" | "roue" | "billes" | "tableau";
+
+  de?: {
+    faces: number[];
+    surligne?: number[];
+  };
+
+  roue?: {
+    segments: {
+      label: string;
+      poids: number;
+      couleur?: string;
+    }[];
+  };
+
+  billes?: {
+    elements: {
+      label?: string;
+      couleur: string;
+    }[];
+  };
+
+  tableau?: {
+    entetes: string[];
+    lignes: string[][];
+    casesSurlignees?: Array<[number, number]>;
+  };
+
+  size?: {
+    width?: number;
+    height?: number;
+  };
+};
+
 export type CanvasFigure =
   | TriangleCanvasData
   | QuadrilatereCanvasData
@@ -409,7 +439,8 @@ export type CanvasFigure =
   | NumberLineCanvasData
   | Solide3DCanvasData
   | ThalesCanvasData
-  | StatGraphCanvasData;
+  | StatGraphCanvasData
+  | AngleCanvasData;
 
 export type QuestionVariantMeta = {
   familyId: string;

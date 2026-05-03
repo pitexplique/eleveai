@@ -15,6 +15,8 @@ import DroiteGradueeCanvas from "@/lib/tutor-v4/components/DroiteGradueeCanvas";
 import ThalesCanvas from "@/lib/tutor-v4/components/ThalesCanvas";
 import Solide3DCanvas from "@/lib/tutor-v4/components/Solide3DCanvas";
 import StatGraphCanvas from "@/lib/tutor-v4/components/StatGraphCanvas";
+import CanvasProbabilites from "@/lib/tutor-v4/components/ProbabilitesCanvas";
+import AngleCanvas from "@/lib/tutor-v4/components/AngleCanvas";
 
 import {
   getNotionMicroMap,
@@ -182,8 +184,6 @@ function renderCanvas(canvas?: CanvasFigure | null) {
     return <DroiteGradueeCanvas figure={canvas} />;
   }
 
-  // 🔥 NOUVEAUX
-
   if (canvas.kind === "thales") {
     return <ThalesCanvas figure={canvas} />;
   }
@@ -196,7 +196,14 @@ function renderCanvas(canvas?: CanvasFigure | null) {
     return <StatGraphCanvas figure={canvas} />;
   }
 
-  // fallback sécurité
+  if (canvas.kind === "probabilites") {
+    return <CanvasProbabilites figure={canvas} />;
+  }
+
+  if (canvas.kind === "angle") {
+    return <AngleCanvas figure={canvas} />;
+  }
+
   return null;
 }
 
