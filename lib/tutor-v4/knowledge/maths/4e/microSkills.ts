@@ -646,30 +646,47 @@ export const microSkills: MicroSkillSource[] = [
     notionId: "volumes",
     prerequis: [],
   },
-  {
-    id: "volume_pave",
-    label: "Calculer le volume d’un pavé droit",
-    notionId: "volumes",
-    prerequis: ["volume_comprendre"],
-  },
-  {
-    id: "volume_prisme",
-    label: "Calculer le volume d’un prisme",
-    notionId: "volumes",
-    prerequis: ["volume_comprendre"],
-  },
-  {
-    id: "volume_unites",
-    label: "Utiliser les unités de volume",
-    notionId: "volumes",
-    prerequis: ["volume_comprendre"],
-  },
-  {
-    id: "volume_defis",
-    label: "Défis sur les volumes",
-    notionId: "volumes",
-    prerequis: ["volume_pave", "volume_prisme", "volume_unites"],
-  },
+{
+  id: "volume_lien_aire",
+  label: "Faire le lien entre aire de base et volume",
+  notionId: "volumes",
+  prerequis: ["volume_comprendre"],
+},
+{
+  id: "volume_pave",
+  label: "Calculer le volume d’un pavé droit",
+  notionId: "volumes",
+  prerequis: ["volume_lien_aire"],
+},
+{
+  id: "volume_prisme",
+  label: "Calculer le volume d’un prisme",
+  notionId: "volumes",
+  prerequis: ["volume_lien_aire"],
+},
+{
+  id: "volume_cylindre",
+  label: "Calculer le volume d’un cylindre",
+  notionId: "volumes",
+  prerequis: ["volume_lien_aire"],
+},
+{
+  id: "volume_unites",
+  label: "Utiliser les unités de volume",
+  notionId: "volumes",
+  prerequis: ["volume_comprendre"],
+},
+{
+  id: "volume_defis",
+  label: "Défis sur les volumes",
+  notionId: "volumes",
+  prerequis: [
+    "volume_pave",
+    "volume_prisme",
+    "volume_cylindre",
+    "volume_unites",
+  ],
+},
 
   /* =========================
      STATISTIQUES

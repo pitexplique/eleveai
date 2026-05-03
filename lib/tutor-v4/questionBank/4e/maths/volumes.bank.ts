@@ -1,0 +1,819 @@
+// lib/tutor-v4/question-banks/maths/4e/volumes.bank.ts
+
+/**
+ * =========================================================
+ * VOLUMES.BANK.TS
+ * =========================================================
+ *
+ * Banque de questions Tutor V4 - Mathématiques 4e
+ * Notion : Volumes
+ *
+ * Micro-compétences :
+ * - volume_comprendre
+ * - volume_lien_aire
+ * - volume_pave
+ * - volume_prisme
+ * - volume_cylindre
+ * - volume_unites
+ * - volume_defis
+ *
+ * Choix pédagogiques :
+ * - progression du simple vers le complexe ;
+ * - priorité aux templates ;
+ * - usage du Solide3DCanvas ;
+ * - base colorée pour ancrer l'idée :
+ *      Volume = aire de base × hauteur
+ * - défis contextualisés et courts.
+ */
+
+import type {
+  TutorBankItemV4,
+  Solide3DCanvasData,
+} from "@/lib/tutor-v4/types";
+
+function randomInt(min: number, max: number) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function randomChoice<T>(arr: T[]): T {
+  return arr[Math.floor(Math.random() * arr.length)];
+}
+
+function shuffle<T>(arr: T[]): T[] {
+  return [...arr].sort(() => Math.random() - 0.5);
+}
+
+function formatNumber(n: number) {
+  return Number.isInteger(n) ? String(n) : String(Math.round(n * 100) / 100);
+}
+
+function makeChoices(correct: string, wrongs: string[]) {
+  return shuffle([correct, ...wrongs]).slice(0, 4);
+}
+
+function solideCanvas(params: Omit<Solide3DCanvasData, "kind">): Solide3DCanvasData {
+  return {
+    kind: "solide_3d",
+    ...params,
+  };
+}
+
+export const volumesBank: TutorBankItemV4[] = [
+  /* =========================
+     VOLUME_COMPRENDRE
+  ========================= */
+
+  {
+    kind: "fixed",
+    id: "volume_comprendre_fixed_1",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "volumes",
+    microId: "volume_comprendre",
+    difficulty: 1,
+    theme: "neutral",
+    text: "Que mesure un volume ?",
+    format: "qcm",
+    choices: [
+      "la place occupée par un solide",
+      "la longueur d’un contour",
+      "la surface d’une figure",
+      "la masse d’un objet",
+    ],
+    expected: ["la place occupée par un solide"],
+    comparator: "mcq_exact",
+    hint: "Le volume concerne un objet en 3 dimensions.",
+    explanation:
+      "Un volume mesure la place occupée par un solide dans l’espace.",
+    tags: ["volume", "definition", "qcm"],
+  },
+
+  {
+    kind: "fixed",
+    id: "volume_comprendre_fixed_2",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "volumes",
+    microId: "volume_comprendre",
+    difficulty: 1,
+    theme: "neutral",
+    text: "Un solide est formé de 6 cubes unités. Quel est son volume ?",
+    format: "qcm",
+    choices: ["3 unités de volume", "6 unités de volume", "12 unités de volume", "36 unités de volume"],
+    expected: ["6 unités de volume"],
+    comparator: "mcq_exact",
+    hint: "Chaque petit cube compte pour 1 unité de volume.",
+    explanation:
+      "Le solide contient 6 cubes unités, donc son volume est 6 unités de volume.",
+    canvas: solideCanvas({
+      solide: "assemblage_cubes",
+      cubes: [
+        { x: 0, y: 0, z: 0 },
+        { x: 1, y: 0, z: 0 },
+        { x: 0, y: 1, z: 0 },
+        { x: 1, y: 1, z: 0 },
+        { x: 0, y: 0, z: 1 },
+        { x: 1, y: 0, z: 1 },
+      ],
+      display: { showLabels: true },
+    }),
+    tags: ["volume", "cubes_unites", "canvas"],
+  },
+
+  {
+    kind: "template",
+    id: "volume_comprendre_tpl_1",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "volumes",
+    microId: "volume_comprendre",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Compte les cubes unités.",
+    tags: ["volume", "cubes_unites", "template", "canvas"],
+    generate: () => {
+      const n = randomInt(4, 10);
+      const cubes = Array.from({ length: n }, (_, i) => ({
+        x: i % 3,
+        y: Math.floor(i / 3) % 2,
+        z: Math.floor(i / 6),
+      }));
+
+      return {
+        text: "Quel est le volume du solide en cubes unités ?",
+        format: "short",
+        expected: [String(n)],
+        comparator: "number_equal",
+        explanation: `On compte ${n} cubes unités. Le volume est donc ${n} unités de volume.`,
+        canvas: solideCanvas({
+          solide: "assemblage_cubes",
+          cubes,
+          display: { showLabels: true },
+        }),
+      };
+    },
+  },
+
+  /* =========================
+     VOLUME_LIEN_AIRE
+  ========================= */
+
+  {
+    kind: "fixed",
+    id: "volume_lien_aire_fixed_1",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "volumes",
+    microId: "volume_lien_aire",
+    difficulty: 1,
+    theme: "neutral",
+    text: "Pour calculer le volume d’un prisme ou d’un cylindre, on utilise souvent la formule…",
+    format: "qcm",
+    choices: [
+      "Volume = aire de base × hauteur",
+      "Volume = périmètre × hauteur",
+      "Volume = longueur + largeur + hauteur",
+      "Volume = aire de base + hauteur",
+    ],
+    expected: ["Volume = aire de base × hauteur"],
+    comparator: "mcq_exact",
+    hint: "On empile une base sur une certaine hauteur.",
+    explanation:
+      "Le volume d’un prisme ou d’un cylindre se calcule avec : Volume = aire de base × hauteur.",
+    tags: ["volume", "aire_base", "formule"],
+  },
+
+  {
+    kind: "template",
+    id: "volume_lien_aire_tpl_1",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "volumes",
+    microId: "volume_lien_aire",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Multiplie l’aire de la base par la hauteur.",
+    tags: ["volume", "aire_base", "template", "canvas"],
+    generate: () => {
+      const aireBase = randomChoice([12, 15, 18, 20, 24, 30]);
+      const hauteur = randomInt(3, 9);
+      const volume = aireBase * hauteur;
+
+      return {
+        text: `Un solide a une aire de base de ${aireBase} cm² et une hauteur de ${hauteur} cm. Quel est son volume ?`,
+        format: "short",
+        expected: [String(volume)],
+        comparator: "number_equal",
+        explanation: `Volume = aire de base × hauteur = ${aireBase} × ${hauteur} = ${volume} cm³.`,
+        canvas: solideCanvas({
+          solide: "prisme",
+          dimensions: { aireBase, hauteur },
+          labels: {
+            aireBase: `${aireBase} cm²`,
+            hauteur: `${hauteur} cm`,
+          },
+          highlight: { base: true, hauteur: true },
+          display: { showLabels: true, showDimensions: true, showFormulaHint: true },
+        }),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "volume_lien_aire_tpl_2",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "volumes",
+    microId: "volume_lien_aire",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "La base est déjà donnée : il ne reste qu’à multiplier par la hauteur.",
+    tags: ["volume", "aire_base", "piege", "template"],
+    generate: () => {
+      const aireBase = randomChoice([10, 14, 16, 25, 28]);
+      const hauteur = randomInt(2, 8);
+      const volume = aireBase * hauteur;
+
+      return {
+        text: `Un élève dit : « L’aire de base vaut ${aireBase} cm² et la hauteur vaut ${hauteur} cm, donc le volume vaut ${aireBase + hauteur} cm³. » A-t-il raison ?`,
+        format: "qcm",
+        choices: ["oui", "non"],
+        expected: ["non"],
+        comparator: "mcq_exact",
+        explanation: `Non. Il ne faut pas additionner. Volume = ${aireBase} × ${hauteur} = ${volume} cm³.`,
+      };
+    },
+  },
+
+  /* =========================
+     VOLUME_PAVE
+  ========================= */
+
+  {
+    kind: "fixed",
+    id: "volume_pave_fixed_1",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "volumes",
+    microId: "volume_pave",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Un pavé droit mesure 4 cm de longueur, 3 cm de largeur et 5 cm de hauteur. Quel est son volume ?",
+    format: "qcm",
+    choices: ["12 cm³", "20 cm³", "60 cm³", "45 cm³"],
+    expected: ["60 cm³"],
+    comparator: "mcq_exact",
+    hint: "Volume = longueur × largeur × hauteur.",
+    explanation: "V = 4 × 3 × 5 = 60 cm³.",
+    canvas: solideCanvas({
+      solide: "pave_droit",
+      dimensions: { longueur: 4, largeur: 3, hauteur: 5 },
+      labels: {
+        longueur: "4 cm",
+        largeur: "3 cm",
+        hauteur: "5 cm",
+        aireBase: "12 cm²",
+      },
+      highlight: { base: true, hauteur: true },
+      display: { showLabels: true, showDimensions: true },
+    }),
+    tags: ["volume", "pave_droit", "canvas"],
+  },
+
+  {
+    kind: "template",
+    id: "volume_pave_tpl_1",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "volumes",
+    microId: "volume_pave",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Calcule longueur × largeur × hauteur.",
+    tags: ["volume", "pave_droit", "template", "canvas"],
+    generate: () => {
+      const longueur = randomInt(3, 10);
+      const largeur = randomInt(2, 8);
+      const hauteur = randomInt(2, 9);
+      const aireBase = longueur * largeur;
+      const volume = aireBase * hauteur;
+
+      return {
+        text: `Calculer le volume du pavé droit.`,
+        format: "short",
+        expected: [String(volume)],
+        comparator: "number_equal",
+        explanation: `Aire de base = ${longueur} × ${largeur} = ${aireBase} cm². Volume = ${aireBase} × ${hauteur} = ${volume} cm³.`,
+        canvas: solideCanvas({
+          solide: "pave_droit",
+          dimensions: { longueur, largeur, hauteur, aireBase, volume },
+          labels: {
+            longueur: `${longueur} cm`,
+            largeur: `${largeur} cm`,
+            hauteur: `${hauteur} cm`,
+            aireBase: `${aireBase} cm²`,
+          },
+          highlight: { base: true, hauteur: true },
+          display: { showLabels: true, showDimensions: true, showFormulaHint: true },
+        }),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "volume_pave_tpl_2",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "volumes",
+    microId: "volume_pave",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Commence par calculer l’aire de la base.",
+    tags: ["volume", "pave_droit", "aire_base", "template"],
+    generate: () => {
+      const longueur = randomInt(5, 12);
+      const largeur = randomInt(3, 8);
+      const hauteur = randomInt(2, 10);
+      const aireBase = longueur * largeur;
+      const volume = aireBase * hauteur;
+
+      return {
+        text: `La base d’un pavé droit est un rectangle de ${longueur} cm sur ${largeur} cm. Sa hauteur est ${hauteur} cm. Quel est son volume ?`,
+        format: "short",
+        expected: [String(volume)],
+        comparator: "number_equal",
+        explanation: `Aire de base = ${longueur} × ${largeur} = ${aireBase} cm². Volume = ${aireBase} × ${hauteur} = ${volume} cm³.`,
+        canvas: solideCanvas({
+          solide: "pave_droit",
+          dimensions: { longueur, largeur, hauteur },
+          labels: {
+            longueur: `${longueur} cm`,
+            largeur: `${largeur} cm`,
+            hauteur: `${hauteur} cm`,
+            aireBase: `${aireBase} cm²`,
+          },
+          highlight: { base: true, hauteur: true },
+          display: { showLabels: true, showDimensions: true },
+        }),
+      };
+    },
+  },
+
+  /* =========================
+     VOLUME_PRISME
+  ========================= */
+
+  {
+    kind: "fixed",
+    id: "volume_prisme_fixed_1",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "volumes",
+    microId: "volume_prisme",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Un prisme droit a une aire de base de 18 cm² et une hauteur de 7 cm. Quel est son volume ?",
+    format: "qcm",
+    choices: ["25 cm³", "126 cm³", "63 cm³", "36 cm³"],
+    expected: ["126 cm³"],
+    comparator: "mcq_exact",
+    hint: "Volume = aire de base × hauteur.",
+    explanation: "V = 18 × 7 = 126 cm³.",
+    canvas: solideCanvas({
+      solide: "prisme",
+      dimensions: { aireBase: 18, hauteur: 7 },
+      labels: { aireBase: "18 cm²", hauteur: "7 cm" },
+      highlight: { base: true, hauteur: true },
+      display: { showLabels: true, showDimensions: true, showFormulaHint: true },
+    }),
+    tags: ["volume", "prisme", "canvas"],
+  },
+
+  {
+    kind: "template",
+    id: "volume_prisme_tpl_1",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "volumes",
+    microId: "volume_prisme",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Multiplie l’aire de la base par la hauteur.",
+    tags: ["volume", "prisme", "template", "canvas"],
+    generate: () => {
+      const aireBase = randomChoice([12, 15, 18, 21, 24, 30, 36]);
+      const hauteur = randomInt(3, 12);
+      const volume = aireBase * hauteur;
+
+      return {
+        text: `Un prisme droit a une aire de base de ${aireBase} cm² et une hauteur de ${hauteur} cm. Calculer son volume.`,
+        format: "short",
+        expected: [String(volume)],
+        comparator: "number_equal",
+        explanation: `V = aire de base × hauteur = ${aireBase} × ${hauteur} = ${volume} cm³.`,
+        canvas: solideCanvas({
+          solide: "prisme",
+          dimensions: { aireBase, hauteur, volume },
+          labels: {
+            aireBase: `${aireBase} cm²`,
+            hauteur: `${hauteur} cm`,
+          },
+          highlight: { base: true, hauteur: true },
+          display: { showLabels: true, showDimensions: true, showFormulaHint: true },
+        }),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "volume_prisme_tpl_2",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "volumes",
+    microId: "volume_prisme",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Calcule d’abord l’aire du triangle de base.",
+    tags: ["volume", "prisme", "triangle_base", "template"],
+    generate: () => {
+      const base = randomChoice([4, 6, 8, 10, 12]);
+      const hauteurTriangle = randomChoice([3, 5, 6, 8]);
+      const hauteurPrisme = randomInt(4, 10);
+      const aireBase = (base * hauteurTriangle) / 2;
+      const volume = aireBase * hauteurPrisme;
+
+      return {
+        text: `La base d’un prisme droit est un triangle de base ${base} cm et de hauteur ${hauteurTriangle} cm. La hauteur du prisme est ${hauteurPrisme} cm. Quel est son volume ?`,
+        format: "short",
+        expected: [formatNumber(volume)],
+        comparator: "number_equal",
+        explanation: `Aire de la base triangulaire = ${base} × ${hauteurTriangle} ÷ 2 = ${formatNumber(aireBase)} cm². Volume = ${formatNumber(aireBase)} × ${hauteurPrisme} = ${formatNumber(volume)} cm³.`,
+        canvas: solideCanvas({
+          solide: "prisme",
+          dimensions: { aireBase, hauteur: hauteurPrisme, volume },
+          labels: {
+            aireBase: `${formatNumber(aireBase)} cm²`,
+            hauteur: `${hauteurPrisme} cm`,
+          },
+          highlight: { base: true, hauteur: true },
+          display: { showLabels: true, showDimensions: true },
+        }),
+      };
+    },
+  },
+
+  /* =========================
+     VOLUME_CYLINDRE
+  ========================= */
+
+  {
+    kind: "fixed",
+    id: "volume_cylindre_fixed_1",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "volumes",
+    microId: "volume_cylindre",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Un cylindre a une aire de base de 25π cm² et une hauteur de 4 cm. Quel est son volume ?",
+    format: "qcm",
+    choices: ["29π cm³", "100π cm³", "50π cm³", "25π cm³"],
+    expected: ["100π cm³"],
+    comparator: "mcq_exact",
+    hint: "Volume = aire de base × hauteur.",
+    explanation: "V = 25π × 4 = 100π cm³.",
+    canvas: solideCanvas({
+      solide: "cylindre",
+      dimensions: { rayon: 5, hauteur: 4 },
+      labels: {
+        rayon: "5 cm",
+        hauteur: "4 cm",
+        aireBase: "25π cm²",
+      },
+      highlight: { base: true, hauteur: true },
+      display: { showLabels: true, showDimensions: true, showFormulaHint: true },
+    }),
+    tags: ["volume", "cylindre", "pi", "canvas"],
+  },
+
+  {
+    kind: "template",
+    id: "volume_cylindre_tpl_1",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "volumes",
+    microId: "volume_cylindre",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Aire de base d’un disque : π × r².",
+    tags: ["volume", "cylindre", "template", "canvas"],
+    generate: () => {
+      const rayon = randomChoice([2, 3, 4, 5, 6]);
+      const hauteur = randomInt(3, 10);
+      const r2 = rayon * rayon;
+      const coeff = r2 * hauteur;
+
+      return {
+        text: `Un cylindre a un rayon de ${rayon} cm et une hauteur de ${hauteur} cm. Donner son volume sous la forme aπ.`,
+        format: "short",
+        expected: [`${coeff}π`, `${coeff} pi`, `${coeff}`],
+        comparator: "contains_keyword",
+        explanation: `Aire de base = π × ${rayon}² = ${r2}π cm². Volume = ${r2}π × ${hauteur} = ${coeff}π cm³.`,
+        canvas: solideCanvas({
+          solide: "cylindre",
+          dimensions: { rayon, hauteur },
+          labels: {
+            rayon: `${rayon} cm`,
+            hauteur: `${hauteur} cm`,
+            aireBase: `${r2}π cm²`,
+          },
+          highlight: { base: true, hauteur: true },
+          display: { showLabels: true, showDimensions: true, showFormulaHint: true },
+        }),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "volume_cylindre_tpl_2",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "volumes",
+    microId: "volume_cylindre",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Attention : le rayon n’est pas le diamètre.",
+    tags: ["volume", "cylindre", "diametre", "piege", "template"],
+    generate: () => {
+      const rayon = randomChoice([2, 3, 4, 5]);
+      const diametre = rayon * 2;
+      const hauteur = randomInt(3, 9);
+      const coeff = rayon * rayon * hauteur;
+
+      return {
+        text: `Un cylindre a un diamètre de ${diametre} cm et une hauteur de ${hauteur} cm. Donner son volume sous la forme aπ.`,
+        format: "short",
+        expected: [`${coeff}π`, `${coeff} pi`, `${coeff}`],
+        comparator: "contains_keyword",
+        explanation: `Le rayon vaut ${diametre} ÷ 2 = ${rayon} cm. Volume = π × ${rayon}² × ${hauteur} = ${coeff}π cm³.`,
+        canvas: solideCanvas({
+          solide: "cylindre",
+          dimensions: { rayon, hauteur },
+          labels: {
+            rayon: `${rayon} cm`,
+            hauteur: `${hauteur} cm`,
+            aireBase: `${rayon * rayon}π cm²`,
+          },
+          highlight: { base: true, hauteur: true },
+          display: { showLabels: true, showDimensions: true },
+        }),
+      };
+    },
+  },
+
+  /* =========================
+     VOLUME_UNITES
+  ========================= */
+
+  {
+    kind: "fixed",
+    id: "volume_unites_fixed_1",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "volumes",
+    microId: "volume_unites",
+    difficulty: 1,
+    theme: "neutral",
+    text: "Quelle unité est une unité de volume ?",
+    format: "qcm",
+    choices: ["cm", "cm²", "cm³", "kg"],
+    expected: ["cm³"],
+    comparator: "mcq_exact",
+    hint: "Un volume se mesure avec une unité au cube.",
+    explanation: "Le cm³ est une unité de volume.",
+    tags: ["volume", "unites"],
+  },
+
+  {
+    kind: "fixed",
+    id: "volume_unites_fixed_2",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "volumes",
+    microId: "volume_unites",
+    difficulty: 2,
+    theme: "neutral",
+    text: "1 dm³ correspond à combien de cm³ ?",
+    format: "qcm",
+    choices: ["10 cm³", "100 cm³", "1 000 cm³", "10 000 cm³"],
+    expected: ["1 000 cm³"],
+    comparator: "mcq_exact",
+    hint: "1 dm = 10 cm, donc 1 dm³ = 10 × 10 × 10 cm³.",
+    explanation: "1 dm³ = 10³ cm³ = 1 000 cm³.",
+    tags: ["volume", "conversion", "unites"],
+  },
+
+  {
+    kind: "template",
+    id: "volume_unites_tpl_1",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "volumes",
+    microId: "volume_unites",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "1 L = 1 dm³.",
+    tags: ["volume", "litre", "conversion", "template"],
+    generate: () => {
+      const litres = randomChoice([2, 3, 4, 5, 10, 12]);
+      return {
+        text: `${litres} L correspondent à combien de dm³ ?`,
+        format: "short",
+        expected: [String(litres)],
+        comparator: "number_equal",
+        explanation: `1 L = 1 dm³, donc ${litres} L = ${litres} dm³.`,
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "volume_unites_tpl_2",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "volumes",
+    microId: "volume_unites",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "1 dm³ = 1 000 cm³.",
+    tags: ["volume", "conversion", "template"],
+    generate: () => {
+      const dm3 = randomChoice([2, 3, 4, 5, 6, 8]);
+      const cm3 = dm3 * 1000;
+
+      return {
+        text: `${dm3} dm³ correspondent à combien de cm³ ?`,
+        format: "short",
+        expected: [String(cm3)],
+        comparator: "number_equal",
+        explanation: `1 dm³ = 1 000 cm³, donc ${dm3} dm³ = ${cm3} cm³.`,
+      };
+    },
+  },
+
+  /* =========================
+     VOLUME_DEFIS
+  ========================= */
+
+  {
+    kind: "fixed",
+    id: "volume_defis_fixed_1",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "volumes",
+    microId: "volume_defis",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Un élève calcule le volume d’un pavé droit de dimensions 5 cm, 4 cm et 3 cm. Il écrit : 5 + 4 + 3 = 12 cm³. A-t-il raison ?",
+    format: "qcm",
+    choices: ["oui", "non"],
+    expected: ["non"],
+    comparator: "mcq_exact",
+    hint: "Pour un volume de pavé droit, on multiplie les trois dimensions.",
+    explanation: "Non. Le volume vaut 5 × 4 × 3 = 60 cm³.",
+    tags: ["volume", "defi", "erreur"],
+  },
+
+  {
+    kind: "template",
+    id: "volume_defis_tpl_1",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "volumes",
+    microId: "volume_defis",
+    difficulty: 4,
+    theme: "reunion",
+    hint: "Modélise la réserve par un pavé droit.",
+    tags: ["volume", "defi", "reunion", "pave", "template"],
+    generate: () => {
+      const longueur = randomInt(4, 9);
+      const largeur = randomInt(2, 5);
+      const hauteur = randomInt(2, 6);
+      const volume = longueur * largeur * hauteur;
+
+      return {
+        text: `À La Réunion, une petite réserve d’eau a la forme d’un pavé droit de ${longueur} m de long, ${largeur} m de large et ${hauteur} m de haut. Quel est son volume en m³ ?`,
+        format: "short",
+        expected: [String(volume)],
+        comparator: "number_equal",
+        explanation: `Volume = ${longueur} × ${largeur} × ${hauteur} = ${volume} m³.`,
+        canvas: solideCanvas({
+          solide: "pave_droit",
+          dimensions: { longueur, largeur, hauteur, volume },
+          labels: {
+            longueur: `${longueur} m`,
+            largeur: `${largeur} m`,
+            hauteur: `${hauteur} m`,
+            aireBase: `${longueur * largeur} m²`,
+          },
+          highlight: { base: true, hauteur: true },
+          display: { showLabels: true, showDimensions: true },
+        }),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "volume_defis_tpl_2",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "volumes",
+    microId: "volume_defis",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Compare les volumes, pas seulement les hauteurs.",
+    tags: ["volume", "defi", "comparaison", "template"],
+    generate: () => {
+      const aireA = randomChoice([12, 15, 20, 24]);
+      const hA = randomInt(4, 8);
+      const aireB = randomChoice([10, 18, 22, 30]);
+      const hB = randomInt(3, 9);
+      const vA = aireA * hA;
+      const vB = aireB * hB;
+
+      const correct =
+        vA > vB ? "solide A" : vB > vA ? "solide B" : "les deux";
+
+      return {
+        text: `Solide A : aire de base ${aireA} cm² et hauteur ${hA} cm. Solide B : aire de base ${aireB} cm² et hauteur ${hB} cm. Lequel a le plus grand volume ?`,
+        format: "qcm",
+        choices: ["solide A", "solide B", "les deux"],
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: `Volume A = ${aireA} × ${hA} = ${vA} cm³. Volume B = ${aireB} × ${hB} = ${vB} cm³.`,
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "volume_defis_tpl_3",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "volumes",
+    microId: "volume_defis",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Attention : il faut d’abord trouver le rayon.",
+    tags: ["volume", "defi", "cylindre", "diametre", "template"],
+    generate: () => {
+      const rayon = randomChoice([2, 3, 4]);
+      const diametre = rayon * 2;
+      const hauteur = randomChoice([5, 6, 8, 10]);
+      const coeff = rayon * rayon * hauteur;
+
+      return {
+        text: `Un réservoir cylindrique a un diamètre de ${diametre} m et une hauteur de ${hauteur} m. Donner son volume sous la forme aπ.`,
+        format: "short",
+        expected: [`${coeff}π`, `${coeff} pi`, `${coeff}`],
+        comparator: "contains_keyword",
+        explanation: `Le rayon vaut ${rayon} m. Volume = π × ${rayon}² × ${hauteur} = ${coeff}π m³.`,
+        canvas: solideCanvas({
+          solide: "cylindre",
+          dimensions: { rayon, hauteur },
+          labels: {
+            rayon: `${rayon} m`,
+            hauteur: `${hauteur} m`,
+            aireBase: `${rayon * rayon}π m²`,
+          },
+          highlight: { base: true, hauteur: true },
+          display: { showLabels: true, showDimensions: true },
+        }),
+      };
+    },
+  },
+
+  {
+    kind: "fixed",
+    id: "volume_defis_open_1",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "volumes",
+    microId: "volume_defis",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Explique pourquoi la formule Volume = aire de base × hauteur fonctionne pour un prisme droit.",
+    format: "open",
+    expected: ["base", "hauteur", "empile", "aire"],
+    comparator: "contains_keyword",
+    hint: "Imagine que l’on empile la même base plusieurs fois.",
+    explanation:
+      "Un prisme droit peut être vu comme une base que l’on empile sur une certaine hauteur. On multiplie donc l’aire de la base par la hauteur.",
+    tags: ["volume", "defi", "open", "raisonnement"],
+  },
+];

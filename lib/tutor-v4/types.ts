@@ -197,6 +197,75 @@ export type NumberLineCanvasData = {
   };
 };
 
+export type SolideKind =
+  | "cube"
+  | "pave_droit"
+  | "prisme"
+  | "cylindre"
+  | "assemblage_cubes";
+
+export type CubeCell3D = {
+  x: number;
+  y: number;
+  z: number;
+};
+
+export type Solide3DCanvasData = {
+  kind: "solide_3d";
+  solide: SolideKind;
+
+  size?: {
+    width?: number;
+    height?: number;
+  };
+
+  dimensions?: {
+    longueur?: number;
+    largeur?: number;
+    hauteur?: number;
+    cote?: number;
+    rayon?: number;
+    aireBase?: number;
+    volume?: number;
+  };
+
+  labels?: {
+    longueur?: string;
+    largeur?: string;
+    hauteur?: string;
+    cote?: string;
+    rayon?: string;
+    aireBase?: string;
+    volume?: string;
+  };
+
+  highlight?: {
+    base?: boolean;
+    hauteur?: boolean;
+    volume?: boolean;
+  };
+
+  display?: {
+    showLabels?: boolean;
+    showDimensions?: boolean;
+    showFormulaHint?: boolean;
+    showUnitCubes?: boolean;
+  };
+
+  colors?: {
+    baseFill?: string;
+    baseStroke?: string;
+    bodyFill?: string;
+    bodyStroke?: string;
+    heightStroke?: string;
+    labelFill?: string;
+    cubeFill?: string;
+    cubeStroke?: string;
+  };
+
+  cubes?: CubeCell3D[];
+};
+
 export type CanvasProbabilitesData = {
   kind: "probabilites";
   variant: "de" | "roue" | "billes" | "tableau";
@@ -275,7 +344,8 @@ export type CanvasFigure =
   | FigureLibreCanvasData
   | CanvasProbabilitesData
   | TableauProportionnaliteCanvasData
-  | NumberLineCanvasData;
+  | NumberLineCanvasData
+  | Solide3DCanvasData;
 
 export type QuestionVariantMeta = {
   familyId: string;

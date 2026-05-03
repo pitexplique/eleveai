@@ -206,13 +206,38 @@ const supportLinks: Record<string, string[]> = {
   aire_probleme: ["aire_figure"],
   aire_defis: ["aire_probleme"],
 
-  // =========================
-  // VOLUMES
-  // =========================
-  volume_pave: ["aire_rectangle", "relatif_multiplication"],
-  volume_prisme: ["aire_parallelogramme", "aire_triangle"],
-  volume_unites: ["aire_comprendre"],
-  volume_defis: ["volume_prisme", "volume_pave"],
+// =========================
+// VOLUMES
+// =========================
+volume_lien_aire: [
+  "aire_rectangle",
+  "aire_triangle",
+  "aire_parallelogramme",
+],
+
+volume_pave: ["volume_lien_aire", "aire_rectangle", "relatif_multiplication"],
+
+volume_prisme: [
+  "volume_lien_aire",
+  "aire_triangle",
+  "aire_parallelogramme",
+  "relatif_multiplication",
+],
+
+volume_cylindre: [
+  "volume_lien_aire",
+  "aire_carre",
+  "relatif_multiplication",
+],
+
+volume_unites: ["volume_pave", "volume_prisme", "volume_cylindre"],
+
+volume_defis: [
+  "volume_pave",
+  "volume_prisme",
+  "volume_cylindre",
+  "volume_unites",
+],
 
   // =========================
   // STATISTIQUES

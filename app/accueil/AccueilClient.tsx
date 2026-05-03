@@ -2,18 +2,9 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
-import {
-  X,
-  Smartphone,
-  Sparkles,
-  Share2,
-  MoreVertical,
-  MonitorDown,
-} from "lucide-react";
+import { useEffect, useState } from "react";
 
 const HEADER_HEIGHT = 72;
-const MODAL_KEY = "eleveai_home_modal_lecon_seen_daily_v2";
 
 const cards = [
   { href: "/lecon-du-jour", image: "/images/cards/lecondujour.png" },
@@ -22,31 +13,8 @@ const cards = [
   { href: "/optimiseur", image: "/images/cards/valeria.png" },
 ];
 
-type DeviceType = "ios" | "android" | "desktop-chrome" | "other";
-
-function detectDevice(): DeviceType {
-  if (typeof window === "undefined") return "other";
-
-  const ua = window.navigator.userAgent.toLowerCase();
-
-  const isIOS =
-    /iphone|ipad|ipod/.test(ua) ||
-    (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
-
-  const isAndroid = /android/.test(ua);
-  const isChrome = /chrome|crios/.test(ua) && !/edg|opr|opera/.test(ua);
-
-  if (isIOS) return "ios";
-  if (isAndroid) return "android";
-  if (isChrome) return "desktop-chrome";
-
-  return "other";
-}
-
 export default function AccueilPage() {
   const [offset, setOffset] = useState(0);
-  const [modalOpen, setModalOpen] = useState(false);
-  const [device, setDevice] = useState<DeviceType>("other");
 
   useEffect(() => {
     const handleScroll = () => setOffset(window.scrollY);
@@ -54,80 +22,6 @@ export default function AccueilPage() {
 
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  useEffect(() => {
-    setDevice(detectDevice());
-
-    try {
-      const today = new Date().toDateString();
-      const lastSeen = localStorage.getItem(MODAL_KEY);
-
-      if (lastSeen !== today) {
-        setModalOpen(true);
-      }
-    } catch {
-      setModalOpen(true);
-    }
-  }, []);
-
-  function closeModal() {
-    setModalOpen(false);
-
-    try {
-      const today = new Date().toDateString();
-      localStorage.setItem(MODAL_KEY, today);
-    } catch {}
-  }
-
-  const installContent = useMemo(() => {
-    if (device === "ios") {
-      return {
-        title: "Installer EleveAI sur iPhone",
-        icon: <Share2 className="h-6 w-6" />,
-        steps: [
-          "Ouvre EleveAI avec Safari.",
-          "Appuie sur le bouton Partager.",
-          "Choisis “Ajouter à l’écran d’accueil”.",
-          "Appuie sur “Ajouter”.",
-        ],
-      };
-    }
-
-    if (device === "android") {
-      return {
-        title: "Installer EleveAI sur Android",
-        icon: <MoreVertical className="h-6 w-6" />,
-        steps: [
-          "Ouvre EleveAI avec Chrome.",
-          "Appuie sur ⋮ en haut à droite.",
-          "Choisis “Ajouter à l’écran d’accueil” ou “Installer l’application”.",
-          "Valide l’installation.",
-        ],
-      };
-    }
-
-    if (device === "desktop-chrome") {
-      return {
-        title: "Installer EleveAI sur Chrome",
-        icon: <MonitorDown className="h-6 w-6" />,
-        steps: [
-          "Regarde la barre d’adresse.",
-          "Clique sur l’icône d’installation.",
-          "Valide “Installer”.",
-        ],
-      };
-    }
-
-    return {
-      title: "Installer EleveAI sur ton téléphone",
-      icon: <Smartphone className="h-6 w-6" />,
-      steps: [
-        "Sur iPhone : Safari → Partager → Ajouter à l’écran d’accueil.",
-        "Sur Android : Chrome → ⋮ → Ajouter à l’écran d’accueil.",
-        "Ensuite, EleveAI apparaît comme une application.",
-      ],
-    };
-  }, [device]);
 
   return (
     <main className="relative min-h-[120vh] overflow-hidden">
@@ -147,61 +41,6 @@ export default function AccueilPage() {
           className="object-cover object-top"
         />
       </div>
-
-      {/* MODAL INSTALLATION INTELLIGENTE */}
-      {modalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/70 px-4 backdrop-blur-sm">
-          <div className="relative w-full max-w-md rounded-3xl border border-white/20 bg-white p-6 text-slate-900 shadow-2xl">
-            <button
-              type="button"
-              onClick={closeModal}
-              className="absolute right-4 top-4 rounded-full p-2 text-slate-500 hover:bg-slate-100 hover:text-slate-900"
-              aria-label="Fermer"
-            >
-              <X className="h-5 w-5" />
-            </button>
-
-            <div className="mb-4 flex items-center gap-3">
-              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-600 text-white">
-                {installContent.icon}
-              </div>
-
-              <div>
-                <h2 className="text-xl font-black">{installContent.title}</h2>
-                <p className="text-sm text-slate-600">
-                  Une leçon de maths par jour, en 1 clic.
-                </p>
-              </div>
-            </div>
-
-            <div className="rounded-2xl bg-blue-50 p-4">
-              <p className="mb-3 flex items-center gap-2 font-bold text-blue-900">
-                <Sparkles className="h-5 w-5" />
-                Télécharger EleveAI
-              </p>
-
-              <ol className="list-decimal space-y-2 pl-5 text-sm leading-relaxed text-slate-700">
-                {installContent.steps.map((step, index) => (
-                  <li key={index}>{step}</li>
-                ))}
-              </ol>
-            </div>
-
-            <button
-              type="button"
-              onClick={closeModal}
-              className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-blue-600 px-4 py-3 text-sm font-black text-white shadow hover:bg-blue-500"
-            >
-              <Smartphone className="h-5 w-5" />
-              J’ai compris
-            </button>
-
-            <p className="mt-2 text-center text-xs text-slate-500">
-              Une fois installé, EleveAI apparaîtra sur l’écran d’accueil.
-            </p>
-          </div>
-        </div>
-      )}
 
       {/* CONTENU */}
       <section
