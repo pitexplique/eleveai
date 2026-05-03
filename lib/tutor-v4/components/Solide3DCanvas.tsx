@@ -1,6 +1,4 @@
 // tutor-v4/components/Solide3DCanvas.tsx
-// tutor-v4/components/Solide3DCanvas.tsx
-"use client";
 
 /**
  * ============================================
@@ -88,6 +86,9 @@
 
 "use client";
 
+"use client";
+
+import type { ReactNode } from "react";
 import type { CanvasFigure } from "@/lib/tutor-v4/types";
 
 type Props = {
@@ -201,9 +202,9 @@ function Label({
 }: {
   x: number;
   y: number;
-  children: string;
+  children: ReactNode;
   color?: string;
-}) {
+})   {
   return (
     <text
       x={x}

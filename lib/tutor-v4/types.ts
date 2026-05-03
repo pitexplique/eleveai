@@ -235,6 +235,30 @@ export type NumberLineCanvasData = {
   };
 };
 
+export type StatGraphKind = "barres" | "batons" | "camembert";
+export type StatGraphCanvasData = {
+  kind: "stat_graph";
+
+  graphType: StatGraphKind;
+
+  size?: {
+    width?: number;
+    height?: number;
+  };
+
+  data: {
+    label: string;
+    value: number;
+    color?: string;
+  }[];
+
+  display?: {
+    showValues?: boolean;
+    showLabels?: boolean;
+    highlightIndex?: number;
+  };
+};
+
 export type SolideKind =
   | "cube"
   | "pave_droit"
@@ -384,7 +408,8 @@ export type CanvasFigure =
   | TableauProportionnaliteCanvasData
   | NumberLineCanvasData
   | Solide3DCanvasData
-  | ThalesCanvasData;
+  | ThalesCanvasData
+  | StatGraphCanvasData;
 
 export type QuestionVariantMeta = {
   familyId: string;

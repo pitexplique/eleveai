@@ -8,11 +8,13 @@ import {
   type KeyboardEvent,
   type ReactNode,
 } from "react";
-import { useSearchParams } from "next/navigation";
 import TriangleCanvas from "@/lib/tutor-v4/components/TriangleCanvas";
 import QuadrilatereCanvas from "@/lib/tutor-v4/components/QuadrilatereCanvas";
 import FigureLibreCanvas from "@/lib/tutor-v4/components/FigureLibreCanvas";
 import DroiteGradueeCanvas from "@/lib/tutor-v4/components/DroiteGradueeCanvas";
+import ThalesCanvas from "@/lib/tutor-v4/components/ThalesCanvas";
+import Solide3DCanvas from "@/lib/tutor-v4/components/Solide3DCanvas";
+import StatGraphCanvas from "@/lib/tutor-v4/components/StatGraphCanvas";
 
 import {
   getNotionMicroMap,
@@ -34,7 +36,7 @@ import type {
   CanvasFigure,
 } from "@/lib/tutor-v4/types";
 
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 type StartResponse = StartTutorV4Response;
 type AnswerResponse = AnswerTutorV4Response;
@@ -180,6 +182,21 @@ function renderCanvas(canvas?: CanvasFigure | null) {
     return <DroiteGradueeCanvas figure={canvas} />;
   }
 
+  // 🔥 NOUVEAUX
+
+  if (canvas.kind === "thales") {
+    return <ThalesCanvas figure={canvas} />;
+  }
+
+  if (canvas.kind === "solide_3d") {
+    return <Solide3DCanvas figure={canvas} />;
+  }
+
+  if (canvas.kind === "stat_graph") {
+    return <StatGraphCanvas figure={canvas} />;
+  }
+
+  // fallback sécurité
   return null;
 }
 

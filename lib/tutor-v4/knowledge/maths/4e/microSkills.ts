@@ -700,9 +700,9 @@ export const microSkills: MicroSkillSource[] = [
   ],
 },
 
-  /* =========================
-     STATISTIQUES
-  ========================= */
+/* =========================
+   STATISTIQUES
+========================= */
   {
     id: "stat_lire_tableau",
     label: "Lire un tableau statistique",
@@ -716,28 +716,56 @@ export const microSkills: MicroSkillSource[] = [
     prerequis: ["stat_lire_tableau"],
   },
   {
-    id: "stat_effectif_frequence",
-    label: "Calculer un effectif ou une fréquence",
+    id: "stat_effectif",
+    label: "Déterminer un effectif",
     notionId: "statistiques",
     prerequis: ["stat_lire_tableau"],
+  },
+  {
+    id: "stat_frequence",
+    label: "Calculer une fréquence",
+    notionId: "statistiques",
+    prerequis: ["stat_effectif"],
   },
   {
     id: "stat_moyenne",
     label: "Calculer une moyenne",
     notionId: "statistiques",
-    prerequis: ["stat_effectif_frequence"],
+    prerequis: ["stat_effectif", "relatif_calcul"],
   },
   {
     id: "stat_mediane",
     label: "Déterminer une médiane",
     notionId: "statistiques",
-    prerequis: ["stat_lire_tableau", "stat_effectif_frequence"],
+    prerequis: ["stat_effectif"],
+  },
+  {
+    id: "stat_etendue",
+    label: "Calculer l’étendue d’une série statistique",
+    notionId: "statistiques",
+    prerequis: ["stat_lire_tableau"],
+  },
+  {
+    id: "stat_interpretation",
+    label: "Interpréter des indicateurs statistiques",
+    notionId: "statistiques",
+    prerequis: [
+      "stat_moyenne",
+      "stat_mediane",
+      "stat_etendue",
+    ],
+  },
+  {
+    id: "stat_probleme",
+    label: "Résoudre un problème statistique",
+    notionId: "statistiques",
+    prerequis: ["stat_interpretation"],
   },
   {
     id: "stat_defis",
     label: "Défis sur les statistiques",
     notionId: "statistiques",
-    prerequis: ["stat_lire_graphique", "stat_moyenne", "stat_mediane"],
+    prerequis: ["stat_probleme"],
   },
 
   /* =========================

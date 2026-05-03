@@ -267,14 +267,18 @@ const supportLinks: Record<string, string[]> = {
     "volume_unites",
   ],
 
-  // =========================
-  // STATISTIQUES
-  // =========================
+// =========================
+// STATISTIQUES
+// =========================
   stat_lire_graphique: ["stat_lire_tableau"],
-  stat_effectif_frequence: ["fraction_comparer"],
-  stat_moyenne: ["relatif_calcul"],
-  stat_mediane: ["stat_lire_tableau"],
-  stat_defis: ["stat_moyenne", "stat_mediane"],
+  stat_effectif: ["stat_lire_tableau"],
+  stat_frequence: ["stat_effectif"],
+  stat_moyenne: ["stat_effectif", "relatif_calcul"],
+  stat_mediane: ["stat_effectif"],
+  stat_etendue: ["stat_lire_tableau"],
+  stat_interpretation: ["stat_moyenne", "stat_mediane", "stat_etendue"],
+  stat_probleme: ["stat_interpretation"],
+  stat_defis: ["stat_probleme"],
 
   // =========================
   // PROBABILITÉS
