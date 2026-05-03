@@ -357,40 +357,6 @@ export const microSkills: MicroSkillSource[] = [
   },
 
   /* =========================
-     TRIANGLES
-  ========================= */
-  {
-    id: "triangle_reconnaitre",
-    label: "Reconnaître un triangle",
-    notionId: "triangles",
-    prerequis: [],
-  },
-  {
-    id: "triangle_nature",
-    label: "Reconnaître la nature d’un triangle",
-    notionId: "triangles",
-    prerequis: ["triangle_reconnaitre"],
-  },
-  {
-    id: "triangle_construire",
-    label: "Construire un triangle",
-    notionId: "triangles",
-    prerequis: ["triangle_reconnaitre"],
-  },
-  {
-    id: "triangle_egalite",
-    label: "Utiliser l’inégalité triangulaire",
-    notionId: "triangles",
-    prerequis: ["triangle_reconnaitre"],
-  },
-  {
-    id: "triangle_defis",
-    label: "Défis sur les triangles",
-    notionId: "triangles",
-    prerequis: ["triangle_nature", "triangle_construire", "triangle_egalite"],
-  },
-
-  /* =========================
      PYTHAGORE
    /* ====================== */
   {
@@ -403,7 +369,7 @@ export const microSkills: MicroSkillSource[] = [
     id: "pythagore_reconnaitre",
     label: "Reconnaître un triangle rectangle et son hypoténuse",
     notionId: "pythagore",
-    prerequis: ["triangle_nature"],
+    prerequis: [],
   },
   {
     id: "pythagore_calculer_hypotenuse",
@@ -445,6 +411,52 @@ export const microSkills: MicroSkillSource[] = [
     notionId: "pythagore",
     prerequis: ["pythagore_rediger"],
   },
+
+/* =========================
+   THALÈS
+========================= */
+    {
+      id: "thales_configuration",
+      label: "Reconnaître une configuration de Thalès",
+      notionId: "thales",
+      prerequis: [],
+    },
+    {
+      id: "thales_rapports",
+      label: "Écrire les rapports de longueurs dans une configuration de Thalès",
+      notionId: "thales",
+      prerequis: ["thales_configuration", "prop_table"],
+    },
+    {
+      id: "thales_calculer_longueur",
+      label: "Calculer une longueur avec le théorème de Thalès",
+      notionId: "thales",
+      prerequis: ["thales_rapports", "prop_quatrieme"],
+    },
+    {
+      id: "thales_reciproque_verifier",
+      label: "Vérifier une égalité de rapports pour utiliser la réciproque de Thalès",
+      notionId: "thales",
+      prerequis: ["thales_rapports"],
+    },
+    {
+      id: "thales_reciproque_conclure",
+      label: "Utiliser la réciproque de Thalès pour conclure à un parallélisme",
+      notionId: "thales",
+      prerequis: ["thales_reciproque_verifier"],
+    },
+    {
+      id: "thales_rediger",
+      label: "Rédiger une justification avec Thalès ou sa réciproque",
+      notionId: "thales",
+      prerequis: ["thales_calculer_longueur", "thales_reciproque_conclure"],
+    },
+    {
+      id: "thales_defis",
+      label: "Défis sur Thalès et sa réciproque",
+      notionId: "thales",
+      prerequis: ["thales_rediger"],
+    },
 
   /* =========================
      PARALLÉLOGRAMMES

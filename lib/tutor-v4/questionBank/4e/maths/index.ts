@@ -27,6 +27,8 @@ import { operationsRelatifsBank } from "./operations-relatifs.banks";
 import { identitesRemarquablesBank} from "./identites-remarquables.bank"
 import { factorisationBank } from "./factorisation.bank";
 import { proportionnaliteBank} from "./proportionnalite.bank"
+import { volumesBank } from "./volumes.bank";
+import { thalesBank } from "./thales.bank";
 
 
 // =========================
@@ -46,5 +48,8 @@ export const maths4eQuestionBank: TutorBankItemV4[] = [
   ...operationsRelatifsBank,
   ...identitesRemarquablesBank,
   ...factorisationBank,
-  ...proportionnaliteBank
+  ...proportionnaliteBank,
+  ...volumesBank,
+  ...thalesBank
+  
 ];

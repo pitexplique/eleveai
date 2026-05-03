@@ -103,6 +103,44 @@ export type TriangleCanvasData = {
   };
 };
 
+export type ThalesCanvasPointLabel = "A" | "B" | "C" | "M" | "N";
+
+export type ThalesCanvasData = {
+  kind: "thales";
+  variant: "triangle" | "papillon";
+
+  size?: {
+    width?: number;
+    height?: number;
+  };
+
+  points?: Partial<Record<ThalesCanvasPointLabel, { x: number; y: number }>>;
+
+  labels?: Partial<Record<ThalesCanvasPointLabel, string>>;
+
+  sideLabels?: Partial<
+    Record<"AB" | "AC" | "BC" | "AM" | "AN" | "MN" | "BM" | "CN", string>
+  >;
+
+  display?: {
+    showPoints?: boolean;
+    showLabels?: boolean;
+    showSideLabels?: boolean;
+    showParallelMarks?: boolean;
+    highlightParallel?: boolean;
+    highlightRatios?: boolean;
+  };
+
+  colors?: {
+    triangleStroke?: string;
+    parallelStroke?: string;
+    pointFill?: string;
+    labelFill?: string;
+    sideLabelFill?: string;
+    highlightStroke?: string;
+  };
+};
+
 export type QuadrilatereCanvasData = {
   kind: "quadrilatere";
   size?: {
@@ -345,7 +383,8 @@ export type CanvasFigure =
   | CanvasProbabilitesData
   | TableauProportionnaliteCanvasData
   | NumberLineCanvasData
-  | Solide3DCanvasData;
+  | Solide3DCanvasData
+  | ThalesCanvasData;
 
 export type QuestionVariantMeta = {
   familyId: string;

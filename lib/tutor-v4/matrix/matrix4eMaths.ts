@@ -120,18 +120,12 @@ const supportLinks: Record<string, string[]> = {
   equation_probleme: ["equation_traduire", "relatif_calcul"],
   equation_defis: ["equation_probleme", "equation_resoudre_distributivite"],
 
-  // =========================
-  // TRIANGLES
-  // =========================
-  triangle_construire: ["triangle_nature"],
-  triangle_egalite: ["relatif_addition"],
-  triangle_defis: ["triangle_construire", "triangle_egalite"],
 
   // =========================
   // PYTHAGORE
   // =========================
   pythagore_carres_racines: ["relatif_calcul"],
-  pythagore_reconnaitre: ["triangle_nature"],
+  pythagore_reconnaitre: [],
   pythagore_calculer_hypotenuse: [
     "pythagore_carres_racines",
     "pythagore_reconnaitre",
@@ -140,10 +134,7 @@ const supportLinks: Record<string, string[]> = {
     "pythagore_carres_racines",
     "pythagore_reconnaitre",
   ],
-  pythagore_reciproque_verifier: [
-    "pythagore_carres_racines",
-    "triangle_nature",
-  ],
+  pythagore_reciproque_verifier: ["pythagore_carres_racines"],
   pythagore_reciproque_conclure: [
     "pythagore_reciproque_verifier",
     "pythagore_reconnaitre",
@@ -159,9 +150,46 @@ const supportLinks: Record<string, string[]> = {
   ],
 
   // =========================
+  // THALÈS
+  // =========================
+  thales_configuration: ["prop_reconnaitre"],
+  thales_rapports: [
+    "thales_configuration",
+    "prop_table",
+    "prop_coeff",
+    "fraction_comparer",
+  ],
+  thales_calculer_longueur: [
+    "thales_rapports",
+    "prop_quatrieme",
+    "prop_coeff",
+    "relatif_calcul",
+  ],
+  thales_reciproque_verifier: [
+    "thales_rapports",
+    "fraction_comparer",
+    "prop_coeff",
+  ],
+  thales_reciproque_conclure: [
+    "thales_reciproque_verifier",
+    "thales_configuration",
+  ],
+  thales_rediger: [
+    "thales_calculer_longueur",
+    "thales_reciproque_conclure",
+    "prop_probleme",
+  ],
+  thales_defis: [
+    "thales_rediger",
+    "thales_calculer_longueur",
+    "thales_reciproque_conclure",
+    "prop_defis",
+  ],
+
+  // =========================
   // PARALLÉLOGRAMMES
   // =========================
-  para_proprietes: ["triangle_nature"],
+  para_proprietes: ["para_reconnaitre"],
   para_diagonales: ["para_proprietes"],
   para_montrer: ["para_proprietes", "para_diagonales"],
   para_aire: ["aire_parallelogramme"],
@@ -173,7 +201,7 @@ const supportLinks: Record<string, string[]> = {
   // =========================
   transfo_translation: ["transfo_symetrie_centrale"],
   transfo_rotation: ["transfo_symetrie_centrale"],
-  transfo_proprietes: ["triangle_nature"],
+  transfo_proprietes: ["transfo_symetrie_centrale","transfo_translation","transfo_rotation"],
   transfo_defis: ["transfo_translation", "transfo_rotation"],
 
   // =========================
@@ -206,38 +234,38 @@ const supportLinks: Record<string, string[]> = {
   aire_probleme: ["aire_figure"],
   aire_defis: ["aire_probleme"],
 
-// =========================
-// VOLUMES
-// =========================
-volume_lien_aire: [
-  "aire_rectangle",
-  "aire_triangle",
-  "aire_parallelogramme",
-],
+  // =========================
+  // VOLUMES
+  // =========================
+  volume_lien_aire: [
+    "aire_rectangle",
+    "aire_triangle",
+    "aire_parallelogramme",
+  ],
 
-volume_pave: ["volume_lien_aire", "aire_rectangle", "relatif_multiplication"],
+  volume_pave: ["volume_lien_aire", "aire_rectangle", "relatif_multiplication"],
 
-volume_prisme: [
-  "volume_lien_aire",
-  "aire_triangle",
-  "aire_parallelogramme",
-  "relatif_multiplication",
-],
+  volume_prisme: [
+    "volume_lien_aire",
+    "aire_triangle",
+    "aire_parallelogramme",
+    "relatif_multiplication",
+  ],
 
-volume_cylindre: [
-  "volume_lien_aire",
-  "aire_carre",
-  "relatif_multiplication",
-],
+  volume_cylindre: [
+    "volume_lien_aire",
+    "aire_carre",
+    "relatif_multiplication",
+  ],
 
-volume_unites: ["volume_pave", "volume_prisme", "volume_cylindre"],
+  volume_unites: ["volume_pave", "volume_prisme", "volume_cylindre"],
 
-volume_defis: [
-  "volume_pave",
-  "volume_prisme",
-  "volume_cylindre",
-  "volume_unites",
-],
+  volume_defis: [
+    "volume_pave",
+    "volume_prisme",
+    "volume_cylindre",
+    "volume_unites",
+  ],
 
   // =========================
   // STATISTIQUES

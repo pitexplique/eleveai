@@ -84,18 +84,19 @@ export const notions: NotionSource[] = [
   // =========================
   // GÉOMÉTRIE PLANE
   // =========================
-  {
-    id: "triangles",
-    label: "Triangles",
-    boId: "BO4G1",
-    prerequis: [],
-    levels: [1, 2, 3],
-  },
+
   {
     id: "pythagore",
     label: "Pythagore et sa réciproque",
     boId: "BO4G1",
     prerequis: ["triangles"],
+    levels: [1, 2, 3],
+  },
+  {
+    id: "thales",
+    label: "Thalès et sa réciproque",
+    boId: "BO4G1",
+    prerequis: ["triangles", "proportionnalite"],
     levels: [1, 2, 3],
   },
   {
