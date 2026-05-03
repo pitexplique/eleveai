@@ -43,19 +43,24 @@ const couleurs = {
   orange: "#f97316",
 };
 
-function deCanvas(
-  surligne?: Array<1 | 2 | 3 | 4 | 5 | 6>
-): CanvasProbabilitesData {
+type DiceFace = 1 | 2 | 3 | 4 | 5 | 6;
+
+function isDiceFace(n: number): n is DiceFace {
+  return n === 1 || n === 2 || n === 3 || n === 4 || n === 5 || n === 6;
+}
+
+function deCanvas(surligne?: number[]): CanvasProbabilitesData {
+  const safeSurligne = surligne?.filter(isDiceFace);
+
   return {
     kind: "probabilites",
     variant: "de",
     de: {
       faces: [1, 2, 3, 4, 5, 6],
-      surligne,
+      surligne: safeSurligne,
     },
   };
 }
-
 function billesCanvas(
   elements: { label?: string; couleur: string }[]
 ): CanvasProbabilitesData {
