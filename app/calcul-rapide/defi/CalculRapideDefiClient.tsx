@@ -375,8 +375,14 @@ export default function CalculRapideDefiClient() {
   >
     👉 Obtenir un indice
   </button>
+  {showHint && (
+  <div className="mx-auto mt-4 max-w-3xl rounded-2xl border border-amber-300/40 bg-amber-100 px-5 py-4 text-lg font-bold text-slate-900">
+    {currentQuestion.hint}
+  </div>
+)}
 
 </div>
+
 
 
         <h1 className="mx-auto flex min-h-[220px] max-w-5xl items-center justify-center text-5xl font-black leading-tight md:text-7xl">
