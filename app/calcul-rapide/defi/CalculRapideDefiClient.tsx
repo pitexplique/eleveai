@@ -378,6 +378,7 @@ export default function CalculRapideDefiClient() {
 
 </div>
 
+
         <h1 className="mx-auto flex min-h-[220px] max-w-5xl items-center justify-center text-5xl font-black leading-tight md:text-7xl">
           {currentQuestion.displayText}
         </h1>

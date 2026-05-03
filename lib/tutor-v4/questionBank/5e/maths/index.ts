@@ -7,7 +7,7 @@ import { fractionsBank } from "./fractions.bank";
 import { operationsRelatifsBank } from "./operations-relatifs.bank.ts";
 import { calculLitteralBank } from "./calcul-litteral.bank";
 import { statistiquesBank } from "./statistiques.bank";
-s
+
 
 export const maths5eQuestionBank: TutorBankItemV4[] = [
   ...nombresRelatifsBank,
