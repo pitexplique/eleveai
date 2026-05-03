@@ -410,40 +410,54 @@ export const microSkills: MicroSkillSource[] = [
     prerequis: ["volume_pave", "volume_prisme", "volume_unites"],
   },
 
-  /* =========================
-     STATISTIQUES
-  ========================= */
-  {
-    id: "stat_lire_tableau",
-    label: "Lire un tableau statistique",
-    notionId: "statistiques",
-    prerequis: [],
-  },
-  {
-    id: "stat_lire_graphique",
-    label: "Lire un graphique statistique",
-    notionId: "statistiques",
-    prerequis: ["stat_lire_tableau"],
-  },
-  {
-    id: "stat_effectif_frequence",
-    label: "Calculer un effectif ou une fréquence",
-    notionId: "statistiques",
-    prerequis: ["stat_lire_tableau"],
-  },
-  {
-    id: "stat_moyenne",
-    label: "Calculer une moyenne",
-    notionId: "statistiques",
-    prerequis: ["stat_effectif_frequence"],
-  },
-  {
-    id: "stat_defis",
-    label: "Défis sur les statistiques",
-    notionId: "statistiques",
-    prerequis: ["stat_lire_graphique", "stat_moyenne"],
-  },
-
+{
+  id: "stat_organiser_donnees",
+  label: "Recueillir et organiser des données",
+  notionId: "statistiques",
+  prerequis: [],
+},
+{
+  id: "stat_lire_tableau",
+  label: "Lire et interpréter un tableau statistique",
+  notionId: "statistiques",
+  prerequis: ["stat_organiser_donnees"],
+},
+{
+  id: "stat_lire_graphique",
+  label: "Lire et interpréter un diagramme ou un graphique",
+  notionId: "statistiques",
+  prerequis: ["stat_lire_tableau"],
+},
+{
+  id: "stat_effectif_frequence",
+  label: "Calculer un effectif ou une fréquence",
+  notionId: "statistiques",
+  prerequis: ["stat_lire_tableau"],
+},
+{
+  id: "stat_representer",
+  label: "Représenter des données par un tableau, un diagramme ou un graphique",
+  notionId: "statistiques",
+  prerequis: ["stat_lire_tableau", "stat_effectif_frequence"],
+},
+{
+  id: "stat_choisir_representation",
+  label: "Choisir une représentation adaptée",
+  notionId: "statistiques",
+  prerequis: ["stat_lire_graphique", "stat_representer"],
+},
+{
+  id: "stat_moyenne",
+  label: "Calculer et interpréter une moyenne simple",
+  notionId: "statistiques",
+  prerequis: ["stat_effectif_frequence"],
+},
+{
+  id: "stat_defis",
+  label: "Défis sur les statistiques",
+  notionId: "statistiques",
+  prerequis: ["stat_lire_graphique", "stat_choisir_representation", "stat_moyenne"],
+},
   /* =========================
      PROBABILITÉS
   ========================= */

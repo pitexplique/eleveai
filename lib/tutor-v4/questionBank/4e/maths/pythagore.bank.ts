@@ -115,8 +115,8 @@ function rightTriangleFigure(params: {
   variant?: number;
 }): TriangleCanvasData {
   const labels = params.labels ?? randomChoice(triangleNames);
-  const rightAngleAt = params.rightAngleAt ?? randomChoice(["A", "B", "C"]);
-  const variant = params.variant ?? randomInt(1, 4);
+  const rightAngleAt = params.rightAngleAt ?? "B";
+  const variant = params.variant ?? 1;
 
   const variants: Record<number, TriangleCanvasData["points"]> = {
     1: {
@@ -547,7 +547,7 @@ export const pythagoreBank: TutorBankItemV4[] = [
           ? "Oui, le triangle est codé rectangle."
           : "Non, aucun angle droit n’est codé sur la figure.",
         canvas: isRight
-          ? rightTriangleFigure({ labels })
+          ? rightTriangleFigure({ labels, rightAngleAt: "A", variant: 1 })
           : nonRightTriangleFigure({ labels }),
       };
     },

@@ -6,119 +6,12 @@ import {
   getNotionOptions,
   getNotionMicroMap,
   getMicroLabelMap,
+  getDomaineMap,
   notionLabel,
   type Classe,
 } from "@/lib/tutor-v4/catalog";
 
 const CLASSES: Classe[] = ["6e", "5e", "4e"];
-
-type Domaine = {
-  id: string;
-  label: string;
-  notions: string[];
-};
-
-function buildDomaines(classe: Classe): Domaine[] {
-  if (classe === "6e") {
-    return [
-      {
-        id: "nombres-calculs",
-        label: "Nombres et calculs",
-        notions: ["decimaux", "fractions", "proportionnalite", "calcul_mental"],
-      },
-      {
-        id: "grandeurs-mesures",
-        label: "Grandeurs et mesures",
-        notions: ["perimetres", "aires", "longueurs", "volumes"],
-      },
-      {
-        id: "espace-geometrie",
-        label: "Espace et géométrie",
-        notions: ["angles", "triangles", "quadrilateres"],
-      },
-      {
-        id: "donnees",
-        label: "Données",
-        notions: ["statistiques", "probabilites"],
-      },
-    ];
-  }
-
-  if (classe === "5e") {
-    return [
-      {
-        id: "nombres-calculs",
-        label: "Nombres et calculs",
-        notions: [
-          "nombres_relatifs",
-          "operations_relatifs",
-          "fractions",
-          "proportionnalite",
-          "calcul_litteral",
-        ],
-      },
-      {
-        id: "geometrie-plane",
-        label: "Géométrie plane",
-        notions: ["angles", "triangles", "symetrie_centrale"],
-      },
-      {
-        id: "grandeurs-mesures",
-        label: "Grandeurs et mesures",
-        notions: ["aires", "volumes"],
-      },
-      {
-        id: "donnees",
-        label: "Données",
-        notions: ["statistiques", "probabilites"],
-      },
-    ];
-  }
-
-  return [
-    {
-      id: "nombres-calculs",
-      label: "Nombres et calculs",
-      notions: [
-        "nombres_relatifs",
-        "operations_relatifs",
-        "fractions",
-        "proportionnalite",
-      ],
-    },
-    {
-      id: "algebre",
-      label: "Algèbre",
-      notions: [
-        "expressions_litterales",
-        "distributivite",
-        "identites_remarquables",
-        "factorisation",
-        "equations",
-      ],
-    },
-    {
-      id: "geometrie-plane",
-      label: "Géométrie plane",
-      notions: [
-        "triangles",
-        "pythagore",
-        "transformations",
-        "parallelogrammes",
-      ],
-    },
-    {
-      id: "grandeurs-mesures",
-      label: "Grandeurs et mesures",
-      notions: ["grandeurs", "perimetres", "aires", "volumes"],
-    },
-    {
-      id: "donnees",
-      label: "Données",
-      notions: ["statistiques", "probabilites"],
-    },
-  ];
-}
 
 function getClasseTitle(classe: Classe) {
   if (classe === "6e") return "Maths 6e";
@@ -145,28 +38,28 @@ function getMicroButtonStyle(microId: string) {
 }
 
 function getDomaineAccent(domaineId: string) {
-  if (domaineId.includes("nombres")) {
+  if (domaineId.includes("N") || domaineId.includes("P")) {
     return {
       title: "text-green-700",
       pill: "bg-green-100 text-green-800",
     };
   }
 
-  if (domaineId.includes("geometrie") || domaineId.includes("espace")) {
+  if (domaineId.includes("G")) {
     return {
       title: "text-sky-700",
       pill: "bg-sky-100 text-sky-800",
     };
   }
 
-  if (domaineId.includes("grandeurs")) {
+  if (domaineId.includes("M")) {
     return {
       title: "text-orange-600",
       pill: "bg-orange-100 text-orange-700",
     };
   }
 
-  if (domaineId.includes("donnees")) {
+  if (domaineId.includes("D")) {
     return {
       title: "text-violet-700",
       pill: "bg-violet-100 text-violet-800",
@@ -188,34 +81,8 @@ export default function CoachMathsIA() {
   const microLabels = getMicroLabelMap(classe);
 
   const domaines = useMemo(() => {
-    const defs = buildDomaines(classe);
-
-    return defs
-      .map((domaine) => ({
-        ...domaine,
-        notions: domaine.notions.filter((id) => notionOptions.includes(id)),
-      }))
-      .filter((domaine) => domaine.notions.length > 0);
-  }, [classe, notionOptions]);
-
-  const domainesComplets = useMemo(() => {
-    const notionsDejaClassees = domaines.flatMap((domaine) => domaine.notions);
-
-    const notionsNonClassees = notionOptions.filter(
-      (notionId) => !notionsDejaClassees.includes(notionId)
-    );
-
-    if (notionsNonClassees.length === 0) return domaines;
-
-    return [
-      ...domaines,
-      {
-        id: "autres",
-        label: "Autres compétences",
-        notions: notionsNonClassees,
-      },
-    ];
-  }, [domaines, notionOptions]);
+    return getDomaineMap(classe);
+  }, [classe]);
 
   const totalNotions = notionOptions.length;
 
@@ -311,10 +178,10 @@ export default function CoachMathsIA() {
           </header>
 
           <div className="columns-1 gap-8 lg:columns-2 2xl:columns-3">
-            {domainesComplets.map((domaine) => {
+            {domaines.map((domaine) => {
               const notionsAvecMicros = domaine.notions
                 .map((notionId) => {
-                  const micros = notionMicroMap[notionId] || [];
+                  const micros = notionMicroMap[notionId] ?? [];
 
                   return {
                     notionId,

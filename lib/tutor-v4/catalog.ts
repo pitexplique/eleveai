@@ -84,3 +84,25 @@ export function microLabel(microId: string, classe: Classe): string {
   const map = getMicroLabelMap(classe);
   return map[microId] ?? microId;
 }
+
+// =========================
+// DOMAINES BO -> NOTIONS
+// =========================
+
+export function getDomaineMap(classe: Classe) {
+  const knowledge = getKnowledge(classe);
+
+  const domaines = knowledge.bo_competences.map((bo) => {
+    const notions = knowledge.notions
+      .filter((notion) => notion.boId === bo.boId)
+      .map((notion) => notion.id);
+
+    return {
+      id: bo.boId,
+      label: bo.label,
+      notions,
+    };
+  });
+
+  return domaines.filter((domaine) => domaine.notions.length > 0);
+}

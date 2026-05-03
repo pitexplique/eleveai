@@ -22,7 +22,7 @@ export const notions: NotionSource[] = [
     id: "fractions",
     label: "Fractions et nombres rationnels",
     boId: "BO5N2",
-    prerequis: ["nombres_relatifs"],
+    prerequis: [],
     levels: [1, 2, 3],
   },
 
