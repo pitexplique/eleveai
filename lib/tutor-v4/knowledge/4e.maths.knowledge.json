@@ -162,24 +162,10 @@
     },
 
     {
-      "id": "triangles",
-      "label": "Triangles",
-      "boId": "BO4G1",
-      "prerequis": [],
-      "levels": [1, 2, 3],
-      "microTargets": [
-        "triangle_reconnaitre",
-        "triangle_nature",
-        "triangle_construire",
-        "triangle_egalite",
-        "triangle_defis"
-      ]
-    },
-    {
       "id": "pythagore",
       "label": "Théorème de Pythagore",
       "boId": "BO4G1",
-      "prerequis": ["triangles"],
+      "prerequis": [],
       "levels": [1, 2, 3],
       "microTargets": [
         "pythagore_reconnaitre",
@@ -193,7 +179,7 @@
       "id": "parallelogrammes",
       "label": "Parallélogrammes",
       "boId": "BO4G1",
-      "prerequis": ["triangles"],
+      "prerequis": [],
       "levels": [1, 2, 3],
       "microTargets": [
         "para_reconnaitre",
@@ -209,7 +195,7 @@
       "id": "transformations",
       "label": "Transformations",
       "boId": "BO4G1",
-      "prerequis": ["triangles"],
+      "prerequis": [],
       "levels": [1, 2],
       "microTargets": [
         "transfo_symetrie_centrale",
