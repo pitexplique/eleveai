@@ -357,29 +357,26 @@ export default function CalculRapideDefiClient() {
               ? "Boss 🔥"
               : "Problème"}
         </div>
-<div className="mb-5 flex items-center justify-center gap-4">
+<div className="mb-6 flex flex-col items-center gap-2">
 
-  {/* PERSONNAGE */}
-  <div className="text-5xl animate-bounce">
-    🧠
+  {/* MASCOTTE */}
+  <div className="text-6xl">
+    🦎
   </div>
 
-  {/* BOUTON INDICE */}
+  <p className="text-lg font-bold text-amber-200">
+    Besoin d’un coup de pouce ?
+  </p>
+
   <button
     type="button"
     onClick={() => setShowHint((v) => !v)}
-    className="rounded-2xl bg-amber-300 px-6 py-3 text-lg font-black text-slate-950 shadow-lg hover:bg-amber-200"
+    className="rounded-full bg-amber-300 px-6 py-3 text-lg font-black text-slate-950 shadow-lg hover:bg-amber-200"
   >
-    Obtenir un indice
+    👉 Obtenir un indice
   </button>
 
 </div>
-
-{showHint && (
-  <div className="mx-auto mt-4 max-w-3xl rounded-2xl border border-amber-300/40 bg-amber-100 px-5 py-4 text-lg font-bold text-slate-900">
-    {currentQuestion.hint}
-  </div>
-)}
 
         <h1 className="mx-auto flex min-h-[220px] max-w-5xl items-center justify-center text-5xl font-black leading-tight md:text-7xl">
           {currentQuestion.displayText}
