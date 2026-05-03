@@ -357,31 +357,31 @@ export default function CalculRapideDefiClient() {
               ? "Boss 🔥"
               : "Problème"}
         </div>
-<div className="mb-6 flex flex-col items-center gap-2">
+        <div className="mb-6 flex flex-col items-center gap-2">
 
-  {/* MASCOTTE */}
-  <div className="text-6xl">
-    🦎
-  </div>
+          <div className="text-6xl animate-bounce">
+            🦎
+          </div>
 
-  <p className="text-lg font-bold text-amber-200">
-    Besoin d’un coup de pouce ?
-  </p>
+          <p className="text-lg font-bold text-amber-200">
+            Besoin d’un coup de pouce ?
+          </p>
 
-  <button
-    type="button"
-    onClick={() => setShowHint((v) => !v)}
-    className="rounded-full bg-amber-300 px-6 py-3 text-lg font-black text-slate-950 shadow-lg hover:bg-amber-200"
-  >
-    👉 Obtenir un indice
-  </button>
-  {showHint && (
-  <div className="mx-auto mt-4 max-w-3xl rounded-2xl border border-amber-300/40 bg-amber-100 px-5 py-4 text-lg font-bold text-slate-900">
-    {currentQuestion.hint}
-  </div>
-)}
+          <button
+            type="button"
+            onClick={() => setShowHint((v) => !v)}
+            className="rounded-full bg-amber-300 px-6 py-3 text-lg font-black text-slate-950 shadow-lg hover:bg-amber-200"
+          >
+            👉 Obtenir un indice
+          </button>
 
-</div>
+        </div>
+
+        {showHint && (
+          <div className="mx-auto mt-4 max-w-3xl rounded-2xl border border-amber-300/40 bg-amber-100 px-5 py-4 text-lg font-bold text-slate-900">
+            {currentQuestion.hint}
+          </div>
+        )}
 
 
 
