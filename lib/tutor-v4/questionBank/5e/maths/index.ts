@@ -9,6 +9,7 @@ import { calculLitteralBank } from "./calcul-litteral.bank";
 import { statistiquesBank } from "./statistiques.bank";
 import { probabilitesBank } from "./probabilites.bank";
 import { anglesBank } from "./angles.bank";
+import { trianglesBank } from "./triangles.bank";
 
 
 export const maths5eQuestionBank: TutorBankItemV4[] = [
@@ -20,5 +21,6 @@ export const maths5eQuestionBank: TutorBankItemV4[] = [
   ...statistiquesBank,
   ...probabilitesBank,
   ...anglesBank,
+  ...trianglesBank,
 
 ];
