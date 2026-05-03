@@ -8,15 +8,17 @@ import {
   type KeyboardEvent,
   type ReactNode,
 } from "react";
-import TriangleCanvas from "@/lib/tutor-v4/components/TriangleCanvas";
-import QuadrilatereCanvas from "@/lib/tutor-v4/components/QuadrilatereCanvas";
-import FigureLibreCanvas from "@/lib/tutor-v4/components/FigureLibreCanvas";
-import DroiteGradueeCanvas from "@/lib/tutor-v4/components/DroiteGradueeCanvas";
-import ThalesCanvas from "@/lib/tutor-v4/components/ThalesCanvas";
-import Solide3DCanvas from "@/lib/tutor-v4/components/Solide3DCanvas";
-import StatGraphCanvas from "@/lib/tutor-v4/components/StatGraphCanvas";
-import CanvasProbabilites from "@/lib/tutor-v4/components/ProbabilitesCanvas";
-import AngleCanvas from "@/lib/tutor-v4/components/AngleCanvas";
+import {
+  TriangleCanvas,
+  QuadrilatereCanvas,
+  FigureLibreCanvas,
+  DroiteGradueeCanvas,
+  ThalesCanvas,
+  Solide3DCanvas,
+  StatGraphCanvas,
+  CanvasProbabilites,
+  AngleCanvas,
+} from "@/lib/tutor-v4/components";
 
 import {
   getNotionMicroMap,

@@ -1,0 +1,9 @@
+export { default as TriangleCanvas } from "./TriangleCanvas";
+export { default as QuadrilatereCanvas } from "./QuadrilatereCanvas";
+export { default as FigureLibreCanvas } from "./FigureLibreCanvas";
+export { default as DroiteGradueeCanvas } from "./DroiteGradueeCanvas";
+export { default as ThalesCanvas } from "./ThalesCanvas";
+export { default as Solide3DCanvas } from "./Solide3DCanvas";
+export { default as StatGraphCanvas } from "./StatGraphCanvas";
+export { default as CanvasProbabilites } from "./ProbabilitesCanvas";
+export { default as AngleCanvas } from "./AngleCanvas";
