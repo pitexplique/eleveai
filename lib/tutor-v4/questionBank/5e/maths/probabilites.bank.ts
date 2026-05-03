@@ -43,7 +43,9 @@ const couleurs = {
   orange: "#f97316",
 };
 
-function deCanvas(surligne?: number[]): CanvasProbabilitesData {
+function deCanvas(
+  surligne?: Array<1 | 2 | 3 | 4 | 5 | 6>
+): CanvasProbabilitesData {
   return {
     kind: "probabilites",
     variant: "de",
@@ -649,21 +651,26 @@ export const probabilitesBank: TutorBankItemV4[] = [
     hint: "Compte les faces qui vérifient la condition.",
     tags: ["probabilites", "calcul", "de", "template", "piege"],
     generate: () => {
-      const seuil = randomChoice([2, 3, 4]);
-      const favorables = [1, 2, 3, 4, 5, 6].filter((n) => n > seuil);
-      const result = rawFraction(favorables.length, 6);
 
-      return {
-        text: `On lance un dé. Quelle est la probabilité d’obtenir un nombre strictement supérieur à ${seuil} ?`,
-        format: "short",
-        expected: [result, fraction(favorables.length, 6)],
-        comparator: "fraction_decimal_equivalent",
-        explanation: `Les issues favorables sont ${favorables.join(
-          ", "
-        )} : il y en a ${favorables.length} sur 6. La probabilité est donc ${result}.`,
-        canvas: deCanvas(favorables),
-      };
-    },
+                      const seuil = randomChoice([2, 3, 4] as const);
+
+                      const favorables = [1, 2, 3, 4, 5, 6].filter(
+                        (n): n is 1 | 2 | 3 | 4 | 5 | 6 => n > seuil
+                      );
+
+                      const result = rawFraction(favorables.length, 6);
+
+                      return {
+                        text: `On lance un dé. Quelle est la probabilité d’obtenir un nombre strictement supérieur à ${seuil} ?`,
+                        format: "short",
+                        expected: [result, fraction(favorables.length, 6)],
+                        comparator: "fraction_decimal_equivalent",
+                        explanation: `Les issues favorables sont ${favorables.join(
+                          ", "
+                        )} : il y en a ${favorables.length} sur 6. La probabilité est donc ${result}.`,
+                        canvas: deCanvas(favorables),
+                      };
+                    },
   },
 
   // =========================

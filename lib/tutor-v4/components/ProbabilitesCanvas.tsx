@@ -7,6 +7,8 @@ type Props = {
   figure: CanvasFigure;
 };
 
+type DiceFace = 1 | 2 | 3 | 4 | 5 | 6;
+
 const COULEURS = [
   "#ef4444",
   "#3b82f6",
@@ -20,6 +22,10 @@ function couleur(index: number) {
   return COULEURS[index % COULEURS.length];
 }
 
+function isDiceFace(face: number): face is DiceFace {
+  return face === 1 || face === 2 || face === 3 || face === 4 || face === 5 || face === 6;
+}
+
 function estSurligne(
   casesSurlignees: Array<[number, number]> | undefined,
   row: number,
@@ -28,7 +34,7 @@ function estSurligne(
   return casesSurlignees?.some(([r, c]) => r === row && c === col) ?? false;
 }
 
-function pointsDe(face: 1 | 2 | 3 | 4 | 5 | 6) {
+function pointsDe(face: DiceFace) {
   const positions = {
     1: [[50, 50]],
     2: [
@@ -73,8 +79,11 @@ export default function CanvasProbabilites({ figure }: Props) {
   const height = figure.size?.height ?? 240;
 
   if (figure.variant === "de") {
-    const faces = figure.de?.faces ?? [1, 2, 3, 4, 5, 6];
-    const surligne = figure.de?.surligne ?? [];
+    const rawFaces = figure.de?.faces ?? [1, 2, 3, 4, 5, 6];
+    const faces: DiceFace[] = rawFaces.filter(isDiceFace);
+
+    const rawSurligne = figure.de?.surligne ?? [];
+    const surligne: DiceFace[] = rawSurligne.filter(isDiceFace);
 
     return (
       <div className="mx-auto w-full max-w-[320px] rounded-xl border border-slate-200 bg-white p-3 shadow-sm">
@@ -88,7 +97,9 @@ export default function CanvasProbabilites({ figure }: Props) {
                 viewBox="0 0 100 100"
                 className={[
                   "h-auto w-full rounded-xl border-2",
-                  active ? "border-amber-400 bg-amber-50" : "border-slate-300 bg-white",
+                  active
+                    ? "border-amber-400 bg-amber-50"
+                    : "border-slate-300 bg-white",
                 ].join(" ")}
                 aria-label={`Dé face ${face}`}
               >
@@ -102,6 +113,7 @@ export default function CanvasProbabilites({ figure }: Props) {
                   stroke="#0f172a"
                   strokeWidth="3"
                 />
+
                 {pointsDe(face).map(([x, y], i) => (
                   <circle key={i} cx={x} cy={y} r="6" fill="#0f172a" />
                 ))}

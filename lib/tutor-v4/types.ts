@@ -399,8 +399,8 @@ export type CanvasProbabilitesData = {
   variant: "de" | "roue" | "billes" | "tableau";
 
   de?: {
-    faces: number[];
-    surligne?: number[];
+    faces: Array<1 | 2 | 3 | 4 | 5 | 6>;
+    surligne?: Array<1 | 2 | 3 | 4 | 5 | 6>;
   };
 
   roue?: {
