@@ -23,6 +23,7 @@ import { puissancesBank } from "./puissances.bank";
 import { racineCarreeBank } from "./racine_carree.bank";
 import { arithmetiqueBank } from "./arithmetique.bank";
 import { volumesBank } from "./volumes.bank"; // déjà fait
+import { proportionnaliteBank} from "./proportionnalite.bank"
 // (tu ajouteras les autres plus tard)
 
 // =========================
@@ -35,4 +36,5 @@ export const maths3eQuestionBank: TutorBankItemV4[] = [
   ...racineCarreeBank,
   ...arithmetiqueBank,
   ...volumesBank,
+  ...proportionnaliteBank,
 ];
