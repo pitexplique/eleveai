@@ -1,7 +1,7 @@
 /**
- * Question Bank 4e Maths
+ * Question Bank 3e Maths
  *
- * Ce fichier regroupe toutes les banques de questions de 4e.
+ * Ce fichier regroupe toutes les banques de questions de 3e.
  *
  * 👉 Objectif :
  * - centraliser toutes les questions
@@ -14,20 +14,25 @@
 
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 
-import { volumesBank } from "./volumes.bank";
-import { nombresRationnelsBank} from "./nombres_rationnels.bank";
+// =========================
+// IMPORT DES BANKS
+// =========================
+
+import { nombresRationnelsBank } from "./nombres_rationnels.bank";
 import { puissancesBank } from "./puissances.bank";
-import { racineCarreeBank} from "./racine_carree.bank"
-
+import { racineCarreeBank } from "./racine_carree.bank";
+import { arithmetiqueBank } from "./arithmetique.bank";
+import { volumesBank } from "./volumes.bank"; // déjà fait
+// (tu ajouteras les autres plus tard)
 
 // =========================
-// AGRÉGATION DES BANKS 4e
+// AGRÉGATION DES BANKS 3e
 // =========================
 
-export const maths4eQuestionBank: TutorBankItemV4[] = [
-   ...volumesBank,
-   ...nombresRationnelsBank,
-   ...puissancesBank,
-   ...racineCarreeBank,
- 
+export const maths3eQuestionBank: TutorBankItemV4[] = [
+  ...nombresRationnelsBank,
+  ...puissancesBank,
+  ...racineCarreeBank,
+  ...arithmetiqueBank,
+  ...volumesBank,
 ];
