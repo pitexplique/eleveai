@@ -86,21 +86,16 @@
 
 "use client";
 
-"use client";
-
 import type { ReactNode } from "react";
-import type { CanvasFigure } from "@/lib/tutor-v4/types";
+import type {
+  CanvasFigure,
+  Solide3DCanvasData,
+} from "@/lib/tutor-v4/types";
 
 type Props = {
   figure: CanvasFigure;
 };
 
-type SolideKind =
-  | "cube"
-  | "pave_droit"
-  | "prisme"
-  | "cylindre"
-  | "assemblage_cubes";
 
 type Point = {
   x: number;
@@ -111,61 +106,6 @@ type CubeCell3D = {
   x: number;
   y: number;
   z: number;
-};
-
-type Solide3DCanvasData = {
-  kind: "solide_3d";
-  solide: SolideKind;
-
-  dimensions?: {
-    longueur?: number;
-    largeur?: number;
-    hauteur?: number;
-    cote?: number;
-    rayon?: number;
-    aireBase?: number;
-  };
-
-  labels?: {
-    longueur?: string;
-    largeur?: string;
-    hauteur?: string;
-    cote?: string;
-    rayon?: string;
-    aireBase?: string;
-    volume?: string;
-  };
-
-  highlight?: {
-    base?: boolean;
-    hauteur?: boolean;
-    volume?: boolean;
-  };
-
-  display?: {
-    showLabels?: boolean;
-    showDimensions?: boolean;
-    showFormulaHint?: boolean;
-    showUnitCubes?: boolean;
-  };
-
-  colors?: {
-    baseFill?: string;
-    baseStroke?: string;
-    bodyFill?: string;
-    bodyStroke?: string;
-    heightStroke?: string;
-    labelFill?: string;
-    cubeFill?: string;
-    cubeStroke?: string;
-  };
-
-  cubes?: CubeCell3D[];
-
-  size?: {
-    width?: number;
-    height?: number;
-  };
 };
 
 const DEFAULT_COLORS = {
@@ -630,6 +570,99 @@ function drawCylindre({
   );
 }
 
+function drawBoule({
+  data,
+  colors,
+}: {
+  data: Solide3DCanvasData;
+  colors: typeof DEFAULT_COLORS;
+}) {
+  const showLabels = data.display?.showLabels ?? true;
+  const showDimensions = data.display?.showDimensions ?? true;
+  const showFormulaHint = data.display?.showFormulaHint ?? false;
+
+  const cx = 170;
+  const cy = 126;
+  const r = 72;
+
+  const rayon = data.labels?.rayon ?? `${data.dimensions?.rayon ?? "r"} cm`;
+  const diametre =
+    data.labels?.diametre ?? `${data.dimensions?.diametre ?? "2r"} cm`;
+
+  return (
+    <>
+      {/* boule */}
+      <circle
+        cx={cx}
+        cy={cy}
+        r={r}
+        fill={colors.bodyFill}
+        stroke={colors.bodyStroke}
+        strokeWidth={3}
+        opacity={0.9}
+      />
+
+      {/* effet 3D : ellipse centrale */}
+      <ellipse
+        cx={cx}
+        cy={cy}
+        rx={r}
+        ry={22}
+        fill="none"
+        stroke={colors.bodyStroke}
+        strokeWidth={2}
+        opacity={0.45}
+      />
+
+      {/* ombre légère */}
+      <ellipse
+        cx={cx + 8}
+        cy={cy + 18}
+        rx={42}
+        ry={20}
+        fill="#bfdbfe"
+        opacity={0.45}
+      />
+
+      {/* rayon */}
+      {showDimensions ? (
+        <>
+          <DimensionLine
+            from={{ x: cx, y: cy }}
+            to={{ x: cx + r, y: cy }}
+            label={rayon}
+            color="#0369a1"
+            labelOffset={{ x: 0, y: -12 }}
+          />
+
+          <DimensionLine
+            from={{ x: cx - r, y: cy + 48 }}
+            to={{ x: cx + r, y: cy + 48 }}
+            label={diametre}
+            color="#7c3aed"
+            labelOffset={{ x: 0, y: 22 }}
+          />
+        </>
+      ) : null}
+
+      {/* centre */}
+      <circle cx={cx} cy={cy} r={4} fill="#0f172a" />
+
+      {showLabels ? (
+        <Label x={cx} y={cy - r - 14} color={colors.bodyStroke}>
+          boule
+        </Label>
+      ) : null}
+
+      {showFormulaHint ? (
+        <Label x={170} y={232} color="#16a34a">
+          V = (4/3)πr³
+        </Label>
+      ) : null}
+    </>
+  );
+}
+
 function isoPoint(cell: CubeCell3D, origin: Point, s: number): Point {
   const dx = 0.85 * s;
   const dy = 0.48 * s;
@@ -809,6 +842,13 @@ export default function Solide3DCanvas({ figure }: Props) {
 
         {figure.solide === "cylindre"
           ? drawCylindre({
+              data: figure,
+              colors,
+            })
+          : null}
+
+        {figure.solide === "boule"
+          ? drawBoule({
               data: figure,
               colors,
             })

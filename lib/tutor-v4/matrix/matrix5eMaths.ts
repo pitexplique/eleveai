@@ -103,10 +103,18 @@ const supportLinks: Record<string, string[]> = {
   // =========================
   // VOLUMES
   // =========================
-  volume_prisme: ["aire_triangle"],
-  volume_pave: ["relatif_calcul"],
-  volume_unites: ["volume_comprendre"],
-  volume_defis: ["volume_prisme", "volume_pave"],
+  volume_pave: ["relatif_calcul", "aire_comprendre"],
+  volume_prisme: ["aire_triangle", "aire_comprendre"],
+  volume_cylindre: ["aire_comprendre"],
+  volume_assemblage: ["volume_pave", "volume_prisme", "volume_cylindre"],
+  volume_unites: ["volume_comprendre", "prop_coeff"],
+  volume_defis: [
+    "volume_pave",
+    "volume_prisme",
+    "volume_cylindre",
+    "volume_assemblage",
+    "volume_unites",
+  ],
 
   // =========================
   // STATISTIQUES

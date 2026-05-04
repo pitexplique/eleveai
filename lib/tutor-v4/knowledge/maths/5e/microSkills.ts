@@ -376,40 +376,71 @@ export const microSkills: MicroSkillSource[] = [
     prerequis: ["aire_composer"],
   },
 
-  /* =========================
-     VOLUMES
-  ========================= */
-  {
-    id: "volume_comprendre",
-    label: "Comprendre ce qu’est un volume",
-    notionId: "volumes",
-    prerequis: [],
-  },
-  {
-    id: "volume_pave",
-    label: "Calculer le volume d’un pavé droit",
-    notionId: "volumes",
-    prerequis: ["volume_comprendre"],
-  },
-  {
-    id: "volume_prisme",
-    label: "Calculer le volume d’un prisme",
-    notionId: "volumes",
-    prerequis: ["volume_comprendre", "aire_comprendre"],
-  },
-  {
-    id: "volume_unites",
-    label: "Utiliser les unités de volume",
-    notionId: "volumes",
-    prerequis: ["volume_comprendre"],
-  },
-  {
-    id: "volume_defis",
-    label: "Défis sur les volumes",
-    notionId: "volumes",
-    prerequis: ["volume_pave", "volume_prisme", "volume_unites"],
-  },
+/* =========================
+   VOLUMES
+========================= */
 
+{
+  id: "volume_comprendre",
+  label: "Comprendre ce qu’est un volume",
+  notionId: "volumes",
+  prerequis: [],
+},
+
+{
+  id: "volume_pave",
+  label: "Calculer le volume d’un pavé droit",
+  notionId: "volumes",
+  prerequis: ["volume_comprendre"],
+},
+
+{
+  id: "volume_prisme",
+  label: "Calculer le volume d’un prisme droit",
+  notionId: "volumes",
+  prerequis: ["volume_comprendre", "aire_comprendre"],
+},
+
+{
+  id: "volume_cylindre",
+  label: "Calculer le volume d’un cylindre",
+  notionId: "volumes",
+  prerequis: ["volume_comprendre", "aire_comprendre"],
+},
+
+{
+  id: "volume_assemblage",
+  label: "Calculer le volume d’un assemblage de solides",
+  notionId: "volumes",
+  prerequis: [
+    "volume_pave",
+    "volume_prisme",
+    "volume_cylindre",
+  ],
+},
+
+{
+  id: "volume_unites",
+  label: "Convertir et utiliser les unités de volume",
+  notionId: "volumes",
+  prerequis: ["volume_comprendre"],
+},
+
+{
+  id: "volume_defis",
+  label: "Résoudre des problèmes et défis sur les volumes",
+  notionId: "volumes",
+  prerequis: [
+    "volume_pave",
+    "volume_prisme",
+    "volume_cylindre",
+    "volume_unites",
+  ],
+},
+
+  /* ======================
+     STATISTIQUES
+  ========================= */
 {
   id: "stat_organiser_donnees",
   label: "Recueillir et organiser des données",

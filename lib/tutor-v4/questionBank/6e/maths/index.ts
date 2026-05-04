@@ -17,6 +17,8 @@ import { calculMentalBank } from "./calcul-mental.bank";
 
 import { longueursBank } from "./longueurs.bank";
 
+import { volumesBank } from "./volumes.bank"
+
 export const maths6eQuestionBank: TutorBankItemV4[] = [
   // Nombres
   ...entiersBank,
@@ -35,4 +37,5 @@ export const maths6eQuestionBank: TutorBankItemV4[] = [
   ...airesBank,
   ...trianglesBank,
   ...quadrilateresBank,
+  ...volumesBank
 ];

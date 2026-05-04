@@ -264,6 +264,7 @@ export type SolideKind =
   | "pave_droit"
   | "prisme"
   | "cylindre"
+  | "boule"
   | "assemblage_cubes";
 
 export type CubeCell3D = {
@@ -287,6 +288,7 @@ export type Solide3DCanvasData = {
     hauteur?: number;
     cote?: number;
     rayon?: number;
+    diametre?: number;
     aireBase?: number;
     volume?: number;
   };
@@ -297,6 +299,7 @@ export type Solide3DCanvasData = {
     hauteur?: string;
     cote?: string;
     rayon?: string;
+    diametre?: string;
     aireBase?: string;
     volume?: string;
   };
