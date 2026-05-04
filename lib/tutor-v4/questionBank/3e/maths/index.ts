@@ -15,7 +15,9 @@
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 
 import { volumesBank } from "./volumes.bank";
-
+import { nombresRationnelsBank} from "./nombres_rationnels.bank";
+import { puissancesBank } from "./puissances.bank";
+import { racineCarreeBank} from "./racine_carree.bank"
 
 
 // =========================
@@ -24,5 +26,8 @@ import { volumesBank } from "./volumes.bank";
 
 export const maths4eQuestionBank: TutorBankItemV4[] = [
    ...volumesBank,
+   ...nombresRationnelsBank,
+   ...puissancesBank,
+   ...racineCarreeBank,
  
 ];

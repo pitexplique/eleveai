@@ -59,7 +59,7 @@ export const notions: NotionSource[] = [
     id: "proportionnalite",
     label: "Proportionnalité",
     boId: "BO3P1",
-    prerequis: ["fractions"],
+    prerequis: ["nombres_rationnels"],
     levels: [1, 2, 3],
   },
 

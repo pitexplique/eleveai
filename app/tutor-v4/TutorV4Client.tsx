@@ -1314,7 +1314,7 @@ function WrongAnswerPanel({
         <div className="mb-5 flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
           <div>
             <h2 className="text-4xl font-light tracking-tight text-sky-500 md:text-6xl">
-              Ce n&apos;est pas la bonne réponse…
+              Hmm… pas tout à fait 🤖"
             </h2>
             <div className="mt-4 text-lg text-lime-700">La bonne réponse est :</div>
             <div className="mt-2 inline-flex min-w-[96px] items-center justify-center rounded-md border border-sky-400 bg-white px-4 py-2 text-3xl font-semibold text-slate-900 shadow-sm">

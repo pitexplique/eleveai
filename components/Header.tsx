@@ -82,7 +82,12 @@ export default function Header() {
             <Home className="h-4 w-4 text-cyan-300" />
             Accueil
           </Link>
-                 <Link
+
+          <Link href="/coach-maths-ia" className={linkClass(isActive(pathname, "/coach-maths-ia"))}>
+            <Brain className="h-4 w-4 text-orange-300" />
+            Coach Maths
+          </Link>
+          <Link
             href="/lecon-du-jour"
             className={`relative ${linkClass(isActive(pathname, "/lecondujour"))}`}
           >
@@ -100,10 +105,6 @@ export default function Header() {
             Calcul rapide
           </Link>
 
-          <Link href="/coach-maths-ia" className={linkClass(isActive(pathname, "/coach-maths-ia"))}>
-            <Brain className="h-4 w-4 text-orange-300" />
-            Coach Maths
-          </Link>
 
           <Link href="/parcours" className={linkClass(isActive(pathname, "/parcours"))}>
             <Route className="h-4 w-4 text-purple-300" />
