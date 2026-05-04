@@ -3,12 +3,29 @@
 import type { ComparatorName } from "@/lib/tutor/types";
 
 function normalize(value: string) {
-  return value
+ const normalized = value
     .trim()
     .toLowerCase()
     .replace(/\s+/g, " ")
     .replace(/\s*\/\s*/g, "/")
+    .replace(/\s*:\s*/g, "/")
+    .replace(/\bsur\b/g, "/")
+    .replace(/\s*\/\s*/g, "/")
     .replace(",", ".");
+    
+  // Canonicalise les fractions simples écrites en "a/b".
+  // Exemples acceptés : "1 : 10", "1 sur 10", " 1/10 ".
+  const fractionMatch = normalized.match(/^(-?\d+)\s*\/\s*(-?\d+)$/);
+  if (fractionMatch) {
+    const numerator = Number(fractionMatch[1]);
+    const denominator = Number(fractionMatch[2]);
+
+    if (Number.isFinite(numerator) && Number.isFinite(denominator) && denominator !== 0) {
+      return `${numerator}/${denominator}`;
+    }
+  }
+
+  return normalized;
 }
 
 function inEquivalenceGroup(a: string, e: string) {
