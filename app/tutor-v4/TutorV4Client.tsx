@@ -227,8 +227,19 @@ export default function TutorV4Page() {
 
   const hasInitializedFromUrl = useRef(false);
   const hasStartedFromUrl = useRef(false);
-  const initialMicroIdRef = useRef<string | null>(null);
-  const lastUrlSelectionRef = useRef<string>("");
+const initialMicroIdRef = useRef<string | null>(null);
+const lastUrlSelectionRef = useRef<string>("");
+
+const questionTopRef = useRef<HTMLDivElement | null>(null);
+
+function scrollToQuestions() {
+  window.setTimeout(() => {
+    questionTopRef.current?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  }, 80);
+}
 
   const notionOptions = useMemo(() => getNotionOptions(classe), [classe]);
   const notionMicroMap = useMemo(() => getNotionMicroMap(classe), [classe]);
@@ -448,33 +459,35 @@ useEffect(() => {
     setPendingNextVisibleProgress(null);
   }
 
-  function continueAfterExplanation() {
-    if (
-      !pendingNextPair ||
-      !pendingNextMode ||
-      !pendingNextRecommendedStar ||
-      !pendingNextVisibleProgress
-    ) {
-      return;
-    }
-
-    setPair(pendingNextPair);
-    setMode(pendingNextMode);
-    setRecommendedStar(pendingNextRecommendedStar);
-    setVisibleProgress(pendingNextVisibleProgress);
-    setActiveMicroId(pendingNextPair.microId);
-
-    setMicroStatuses((prev) => ({
-      ...prev,
-      [pendingNextPair.microId]:
-        prev[pendingNextPair.microId] === "success" ? "success" : "current",
-    }));
-
-    setSelectedOptionId(null);
-    setCurrentQuestion(null);
-    setAnswer("");
-    resetWrongAnswerFlow();
+function continueAfterExplanation() {
+  if (
+    !pendingNextPair ||
+    !pendingNextMode ||
+    !pendingNextRecommendedStar ||
+    !pendingNextVisibleProgress
+  ) {
+    return;
   }
+
+  setPair(pendingNextPair);
+  setMode(pendingNextMode);
+  setRecommendedStar(pendingNextRecommendedStar);
+  setVisibleProgress(pendingNextVisibleProgress);
+  setActiveMicroId(pendingNextPair.microId);
+
+  setMicroStatuses((prev) => ({
+    ...prev,
+    [pendingNextPair.microId]:
+      prev[pendingNextPair.microId] === "success" ? "success" : "current",
+  }));
+
+  setSelectedOptionId(null);
+  setCurrentQuestion(null);
+  setAnswer("");
+  resetWrongAnswerFlow();
+
+  scrollToQuestions();
+}
 
   async function activateQuestion(
     currentSessionId: string,
@@ -696,6 +709,7 @@ useEffect(() => {
 
       if (typed.result.ok) {
         setEarnedPoints((prev) => prev + pointsForQuestion);
+        scrollToQuestions();
       }
 
       setMicroScores((prev) => {
@@ -989,6 +1003,7 @@ function handleInputKeyDown(
             </section>
           ) : null}
 
+          <div ref={questionTopRef} />
           {pair && !currentQuestion ? (
             <section className="rounded-3xl border border-slate-200 bg-white p-4 shadow-sm sm:p-5">
               <div className="mb-4 space-y-1">
