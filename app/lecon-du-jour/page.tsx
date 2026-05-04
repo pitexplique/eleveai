@@ -3,6 +3,13 @@
 import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
 
+const tutorLinks = {
+  pourcentages: {
+    comprendre:
+      "/tutor-v4?classe=6e&matiere=maths&notion=pourcentages&microId=pourcentage_comprendre",
+  },
+};
+
 const lessons = [
   {
     day: 1,
@@ -78,8 +85,7 @@ export default function LeconDuJourPage() {
       try {
         await audio.play();
       } catch {
-        // Certains navigateurs bloquent l'autoplay audio.
-        // L'élève devra alors appuyer une fois sur play.
+        // Autoplay parfois bloqué : l'élève appuie sur play.
       }
     };
 
@@ -87,35 +93,38 @@ export default function LeconDuJourPage() {
   }, [lesson.audio]);
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-orange-50 via-yellow-50 to-emerald-50 px-4 py-8 text-slate-900">
-      <section className="mx-auto max-w-3xl">
-        <div className="rounded-[2rem] border border-orange-200 bg-white/90 p-6 shadow-xl">
-
+    <main className="min-h-screen bg-gradient-to-br from-orange-50 via-yellow-50 to-emerald-50 px-3 py-4 text-slate-900 sm:px-5 sm:py-6 lg:px-6 lg:py-8">
+      <section className="mx-auto flex min-h-[calc(100vh-2rem)] w-full max-w-3xl items-center">
+        <div className="w-full rounded-[1.5rem] border border-orange-200 bg-white/95 p-4 shadow-xl sm:rounded-[2rem] sm:p-6 lg:p-7">
           {/* HEADER */}
-          <div className="mb-6 text-center">
-            <p className="text-sm font-bold uppercase tracking-wide text-orange-600">
+          <div className="mb-5 text-center sm:mb-6">
+            <p className="text-xs font-bold uppercase tracking-wide text-orange-600 sm:text-sm">
               Semaine des pourcentages
             </p>
-            <h1 className="mt-2 text-3xl font-black">
+
+            <h1 className="mt-2 text-2xl font-black sm:text-3xl lg:text-4xl">
               🧠 Leçon du jour
             </h1>
-            <p className="mt-2 text-sm text-slate-600">
-              10 secondes pour comprendre. Puis entraîne-toi.
+
+            <p className="mt-2 text-sm text-slate-600 sm:text-base">
+              Écoute, comprends, puis relis la leçon à l’écrit.
             </p>
+
             <p className="mt-2 text-sm font-bold text-orange-600">
               ⏱️ {seconds} s
             </p>
           </div>
 
           {/* SELECT JOUR */}
-          <div className="mb-5 grid grid-cols-7 gap-2">
+          <div className="mb-5 grid grid-cols-7 gap-1.5 sm:gap-2">
             {lessons.map((l) => (
               <button
                 key={l.day}
+                type="button"
                 onClick={() => setSelectedDay(l.day)}
-                className={`rounded-xl py-2 text-sm font-black transition ${
+                className={`rounded-xl py-2 text-xs font-black transition sm:text-sm ${
                   selectedDay === l.day
-                    ? "bg-orange-500 text-white shadow scale-105"
+                    ? "scale-105 bg-orange-500 text-white shadow"
                     : "bg-orange-100 text-orange-800 hover:bg-orange-200"
                 }`}
               >
@@ -125,13 +134,13 @@ export default function LeconDuJourPage() {
           </div>
 
           {/* CARD */}
-          <div className="rounded-3xl bg-gradient-to-br from-orange-100 to-yellow-100 p-5">
-
+          <div className="rounded-3xl bg-gradient-to-br from-orange-100 to-yellow-100 p-4 sm:p-5 lg:p-6">
             <div className="mb-4">
-              <h2 className="text-2xl font-black text-orange-700">
+              <h2 className="text-xl font-black text-orange-700 sm:text-2xl">
                 {lesson.title}
               </h2>
-              <p className="mt-1 text-lg font-semibold text-slate-800">
+
+              <p className="mt-2 text-base font-semibold leading-relaxed text-slate-800 sm:text-lg">
                 {lesson.notion}
               </p>
             </div>
@@ -142,33 +151,32 @@ export default function LeconDuJourPage() {
               key={lesson.audio}
               controls
               autoPlay
-              className="w-full mb-4"
+              className="mb-4 w-full"
             >
               <source src={lesson.audio} type="audio/mpeg" />
             </audio>
 
-            {/* CTA */}
+            {/* LIENS */}
             <div className="grid gap-3 sm:grid-cols-2">
               <Link
-                href="/calcul-rapide"
-                className="rounded-2xl bg-emerald-500 px-5 py-3 text-center font-black text-white shadow hover:bg-emerald-600"
+                href={`/lecon-du-jour/ecrit/pourcentages`}
+                className="rounded-2xl bg-orange-500 px-5 py-3 text-center text-sm font-black text-white shadow hover:bg-orange-600 sm:text-base"
               >
-                ⚡ Calcul rapide
+                📖 Voir la leçon écrite
               </Link>
 
-              <Link
-                href="/coach-maths-ia"
-                className="rounded-2xl bg-purple-500 px-5 py-3 text-center font-black text-white shadow hover:bg-purple-600"
-              >
-                🧠 Coach IA
-              </Link>
+            <Link
+              href={tutorLinks.pourcentages.comprendre}
+              className="rounded-2xl bg-purple-500 px-5 py-3 text-center text-sm font-black text-white shadow hover:bg-purple-600 sm:text-base"
+            >
+              🧠 S’entraîner avec le Coach IA
+            </Link>
             </div>
 
             {/* FOOTER */}
-            <div className="mt-4 text-center text-sm text-slate-600">
+            <div className="mt-4 text-center text-sm font-semibold text-slate-600">
               📅 Jour {lesson.day} / 7
             </div>
-
           </div>
         </div>
       </section>
