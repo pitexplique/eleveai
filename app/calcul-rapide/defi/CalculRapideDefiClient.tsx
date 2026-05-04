@@ -105,28 +105,31 @@ function getDataByNiveau(niveau: NiveauCalculRapide) {
       ],
     };
   }
+
   if (niveau === "4e") {
-  return {
-    weeks: weekly4e,
-    items: [
-      ...calculsFixed4e,
-      ...calculsTemplates4e,
-      ...problemesFixed4e,
-      ...problemesTemplates4e,
-    ],
-  };
-}
-if (niveau === "3e") {
-  return {
-    weeks: weekly3e,
-    items: [
-      ...calculsFixed3e,
-      ...calculsTemplates3e,
-      ...problemesFixed3e,
-      ...problemesTemplates3e,
-    ],
-  };
-}
+    return {
+      weeks: weekly4e,
+      items: [
+        ...calculsFixed4e,
+        ...calculsTemplates4e,
+        ...problemesFixed4e,
+        ...problemesTemplates4e,
+      ],
+    };
+  }
+
+  if (niveau === "3e") {
+    return {
+      weeks: weekly3e,
+      items: [
+        ...calculsFixed3e,
+        ...calculsTemplates3e,
+        ...problemesFixed3e,
+        ...problemesTemplates3e,
+      ],
+    };
+  }
+
   return {
     weeks: weekly6e,
     items: [
@@ -209,7 +212,10 @@ export default function CalculRapideDefiClient() {
   const niveauParam = searchParams.get("niveau");
 
   const niveau: NiveauCalculRapide =
-    niveauParam === "5e" || niveauParam === "6e" || niveauParam === "4e" || niveauParam === "3e"
+    niveauParam === "5e" ||
+    niveauParam === "6e" ||
+    niveauParam === "4e" ||
+    niveauParam === "3e"
       ? niveauParam
       : "6e";
 
@@ -244,7 +250,7 @@ export default function CalculRapideDefiClient() {
 
   if (!questions.length) {
     return (
-      <main className="flex min-h-screen items-center justify-center bg-slate-950 text-white">
+      <main className="flex min-h-[100svh] items-center justify-center bg-slate-950 px-4 text-center text-white">
         Aucune session trouvée pour le niveau {niveau}
       </main>
     );
@@ -294,20 +300,24 @@ export default function CalculRapideDefiClient() {
 
   if (!started) {
     return (
-      <main className="flex min-h-screen items-center justify-center bg-slate-950 px-4 text-white">
-        <section className="w-full max-w-4xl rounded-3xl border border-white/15 bg-white/10 p-10 text-center shadow-2xl backdrop-blur">
-          <div className="mx-auto mb-6 inline-flex rounded-full bg-emerald-400 px-5 py-2 font-black text-slate-950">
+      <main className="flex min-h-[100svh] items-center justify-center bg-slate-950 px-4 py-4 text-white">
+        <section className="w-full max-w-4xl rounded-3xl border border-white/15 bg-white/10 p-6 text-center shadow-2xl backdrop-blur sm:p-8">
+          <div className="mx-auto mb-4 inline-flex rounded-full bg-emerald-400 px-5 py-2 text-sm font-black text-slate-950 sm:text-base">
             Niveau {niveau}
           </div>
 
-          <h1 className="text-5xl font-black md:text-7xl">Défi calcul rapide</h1>
+          <h1 className="text-4xl font-black sm:text-5xl md:text-6xl">
+            Défi calcul rapide
+          </h1>
 
-          <p className="mt-5 text-2xl text-white/80">⚡ Calculs + 🧠 Défis</p>
+          <p className="mt-4 text-lg text-white/80 sm:text-2xl">
+            ⚡ Calculs + 🧠 Défis
+          </p>
 
           <button
             type="button"
             onClick={() => setStarted(true)}
-            className="mt-10 rounded-full bg-emerald-400 px-10 py-5 text-2xl font-black text-slate-950"
+            className="mt-8 rounded-full bg-emerald-400 px-9 py-4 text-xl font-black text-slate-950 sm:text-2xl"
           >
             🚀 Démarrer
           </button>
@@ -316,75 +326,77 @@ export default function CalculRapideDefiClient() {
     );
   }
 
-if (finished) {
-  const bilan = getScoreMessage(score, questions.length);
+  if (finished) {
+    const bilan = getScoreMessage(score, questions.length);
 
-  return (
-    <main className="flex min-h-screen items-center justify-center bg-slate-950 px-4 text-white">
-      <section className="w-full max-w-4xl rounded-3xl border border-white/15 bg-white/10 p-10 text-center shadow-2xl backdrop-blur">
-        <h1 className="text-5xl font-black md:text-7xl">Bravo 🎉</h1>
+    return (
+      <main className="flex min-h-[100svh] items-center justify-center bg-slate-950 px-4 py-4 text-white">
+        <section className="w-full max-w-4xl rounded-3xl border border-white/15 bg-white/10 p-6 text-center shadow-2xl backdrop-blur sm:p-8">
+          <h1 className="text-4xl font-black sm:text-5xl md:text-6xl">
+            Bravo 🎉
+          </h1>
 
-        <p className="mt-6 text-4xl font-black text-emerald-300">
-          Score : {score} / {questions.length}
-        </p>
-
-        <div className="mx-auto mt-8 max-w-3xl rounded-3xl border border-white/15 bg-slate-900/80 p-6">
-          <p className={`text-3xl font-black ${bilan.color}`}>
-            {bilan.title}
+          <p className="mt-4 text-3xl font-black text-emerald-300 sm:text-4xl">
+            Score : {score} / {questions.length}
           </p>
 
-          <p className="mt-4 text-xl font-bold text-white/85">
-            {bilan.message}
-          </p>
-        </div>
+          <div className="mx-auto mt-5 max-w-3xl rounded-3xl border border-white/15 bg-slate-900/80 p-4 sm:p-5">
+            <p className={`text-2xl font-black sm:text-3xl ${bilan.color}`}>
+              {bilan.title}
+            </p>
 
-        <div className="mt-10 flex flex-col justify-center gap-4 sm:flex-row">
-          <Link
-            href="/calcul-rapide"
-            className="rounded-full bg-white px-8 py-4 text-xl font-black text-slate-950"
-          >
-            Retour
-          </Link>
+            <p className="mt-3 text-base font-bold text-white/85 sm:text-xl">
+              {bilan.message}
+            </p>
+          </div>
 
-          <Link
-            href={`/coach-maths-ia?classe=${niveau}`}
-            className="rounded-full bg-amber-300 px-8 py-4 text-xl font-black text-slate-950"
-          >
-            S’entraîner dans Coach-IA
-          </Link>
+          <div className="mt-6 flex flex-col justify-center gap-3 sm:flex-row">
+            <Link
+              href="/calcul-rapide"
+              className="rounded-full bg-white px-8 py-4 text-xl font-black text-slate-950"
+            >
+              Retour
+            </Link>
 
-          <button
-            type="button"
-            onClick={() => window.location.reload()}
-            className="rounded-full bg-emerald-400 px-8 py-4 text-xl font-black text-slate-950"
-          >
-            Recommencer
-          </button>
-        </div>
-      </section>
-    </main>
-  );
-}
+            <Link
+              href={`/coach-maths-ia?classe=${niveau}`}
+              className="rounded-full bg-amber-300 px-8 py-4 text-xl font-black text-slate-950"
+            >
+              S’entraîner dans Coach-IA
+            </Link>
+
+            <button
+              type="button"
+              onClick={() => window.location.reload()}
+              className="rounded-full bg-emerald-400 px-8 py-4 text-xl font-black text-slate-950"
+            >
+              Recommencer
+            </button>
+          </div>
+        </section>
+      </main>
+    );
+  }
 
   return (
-    <main className="flex min-h-screen items-center justify-center bg-slate-950 px-6 text-white">
-      <section className="w-full max-w-6xl rounded-[2rem] border border-white/15 bg-white/10 p-8 text-center shadow-2xl backdrop-blur">
-        <div className="mb-8 flex items-center justify-between gap-4">
-          <div className="rounded-full bg-white/10 px-5 py-3 text-xl font-black">
+    <main className="flex min-h-[100svh] items-center justify-center bg-slate-950 px-3 py-3 text-white sm:px-6">
+      <section className="w-full max-w-6xl rounded-[1.75rem] border border-white/15 bg-white/10 p-4 text-center shadow-2xl backdrop-blur sm:p-6">
+        <div className="mb-4 flex items-center justify-between gap-2 sm:mb-5">
+          <div className="rounded-full bg-white/10 px-3 py-2 text-sm font-black sm:px-5 sm:text-xl">
             Question {currentIndex + 1} / {questions.length}
           </div>
 
-          <div className="flex gap-3">
+          <div className="flex gap-2 sm:gap-3">
             <button
               type="button"
               onClick={() => setPaused((paused) => !paused)}
-              className="rounded-full bg-yellow-400 px-4 py-2 text-lg font-black text-slate-950"
+              className="rounded-full bg-yellow-400 px-3 py-2 text-base font-black text-slate-950 sm:px-4 sm:text-lg"
             >
               {paused ? "▶️" : "⏸️"}
             </button>
 
             <div
-              className={`rounded-full px-6 py-3 text-3xl font-black ${
+              className={`rounded-full px-4 py-2 text-xl font-black sm:px-6 sm:text-3xl ${
                 timeLeft <= 5
                   ? "bg-red-500 text-white"
                   : "bg-emerald-400 text-slate-950"
@@ -395,46 +407,41 @@ if (finished) {
           </div>
         </div>
 
-        <div className="mb-6 inline-flex rounded-full border border-white/20 bg-white/10 px-5 py-2 text-lg font-bold uppercase tracking-widest text-white/75">
+        <div className="mb-3 inline-flex rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-sm font-bold uppercase tracking-widest text-white/75 sm:text-base">
           {currentQuestion.type === "calcul"
             ? "Calcul"
             : currentQuestion.type === "boss"
               ? "Boss 🔥"
               : "Problème"}
         </div>
-        <div className="mb-6 flex flex-col items-center gap-2">
 
-          <div className="text-6xl animate-bounce">
-            🦎
-          </div>
+        <div className="mb-3 flex flex-col items-center gap-1">
+          <div className="text-4xl animate-bounce sm:text-5xl">🦎</div>
 
-          <p className="text-lg font-bold text-amber-200">
+          <p className="hidden text-lg font-bold text-amber-200 sm:block">
             Besoin d’un coup de pouce ?
           </p>
 
           <button
             type="button"
             onClick={() => setShowHint((v) => !v)}
-            className="rounded-full bg-amber-300 px-6 py-3 text-lg font-black text-slate-950 shadow-lg hover:bg-amber-200"
+            className="rounded-full bg-amber-300 px-5 py-2 text-base font-black text-slate-950 shadow-lg hover:bg-amber-200 sm:text-lg"
           >
             👉 Obtenir un indice
           </button>
-
         </div>
 
         {showHint && (
-          <div className="mx-auto mt-4 max-w-3xl rounded-2xl border border-amber-300/40 bg-amber-100 px-5 py-4 text-lg font-bold text-slate-900">
+          <div className="mx-auto mb-3 mt-2 max-w-3xl rounded-2xl border border-amber-300/40 bg-amber-100 px-4 py-3 text-base font-bold text-slate-900 sm:text-lg">
             {currentQuestion.hint}
           </div>
         )}
 
-
-
-        <h1 className="mx-auto flex min-h-[220px] max-w-5xl items-center justify-center text-5xl font-black leading-tight md:text-7xl">
+        <h1 className="mx-auto flex min-h-[110px] max-w-5xl items-center justify-center text-3xl font-black leading-tight sm:min-h-[130px] sm:text-5xl md:text-6xl">
           {currentQuestion.displayText}
         </h1>
 
-        <div className="mx-auto mt-8 flex max-w-3xl flex-col gap-4 sm:flex-row">
+        <div className="mx-auto mt-5 flex max-w-3xl flex-col gap-3 sm:flex-row">
           <input
             value={answer}
             onChange={(event) => setAnswer(event.target.value)}
@@ -443,20 +450,20 @@ if (finished) {
             }}
             autoFocus
             placeholder="Ta réponse..."
-            className="min-h-[70px] flex-1 rounded-3xl border border-white/20 bg-white px-6 text-3xl font-black text-slate-950 outline-none"
+            className="min-h-[56px] flex-1 rounded-3xl border border-white/20 bg-white px-5 text-2xl font-black text-slate-950 outline-none sm:min-h-[64px] sm:text-3xl"
           />
 
           <button
             type="button"
             onClick={validateAndNext}
-            className="rounded-3xl bg-emerald-400 px-8 py-5 text-2xl font-black text-slate-950"
+            className="rounded-3xl bg-emerald-400 px-7 py-4 text-xl font-black text-slate-950 sm:text-2xl"
           >
             Valider
           </button>
         </div>
 
         {feedback !== null && (
-          <div className="mt-4 text-2xl font-bold">
+          <div className="mt-3 text-lg font-bold sm:text-2xl">
             {feedback ? (
               <span className="text-green-400">✔ Bonne réponse</span>
             ) : (
@@ -473,7 +480,7 @@ if (finished) {
         <button
           type="button"
           onClick={goNext}
-          className="mt-6 text-lg font-bold text-white/60 hover:text-white"
+          className="mt-3 text-sm font-bold text-white/60 hover:text-white sm:text-lg"
         >
           Passer cette question
         </button>
