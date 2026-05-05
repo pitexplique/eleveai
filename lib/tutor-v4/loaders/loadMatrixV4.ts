@@ -1,6 +1,8 @@
 import { matrix6eMaths } from "@/lib/tutor-v4/matrix/matrix6eMaths";
 import { matrix5eMaths } from "@/lib/tutor-v4/matrix/matrix5eMaths";
 import { matrix4eMaths } from "@/lib/tutor-v4/matrix/matrix4eMaths";
+import { matrix3eMaths } from "@/lib/tutor-v4/matrix/matrix3eMaths";
+
 import type { SkillMatrix } from "@/lib/tutor-v4/types";
 
 export async function loadMatrixV4(
@@ -15,8 +17,13 @@ export async function loadMatrixV4(
     return matrix5eMaths;
   }
 
-    if (classe === "4e" && matiere === "maths") {
+  if (classe === "4e" && matiere === "maths") {
     return matrix4eMaths;
   }
+
+  if (classe === "3e" && matiere === "maths") {
+    return matrix3eMaths;
+  }
+
   throw new Error(`Matrix V4 introuvable pour ${classe}/${matiere}`);
 }
