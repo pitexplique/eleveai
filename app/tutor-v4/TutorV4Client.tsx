@@ -216,7 +216,7 @@ function normalizeClasse(value: string | null): Classe {
   if (value === "6e" || value === "5e" || value === "4e") {
     return value;
   }
-  return "6e";
+  return "3e";
 }
 
 export default function TutorV4Page() {
