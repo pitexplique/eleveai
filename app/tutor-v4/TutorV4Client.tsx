@@ -40,6 +40,9 @@ import type {
   CanvasFigure,
 } from "@/lib/tutor-v4/types";
 
+import { getTutorLesson } from "@/lib/tutor-v4/lessons/getTutorLesson";
+import { LessonPanel } from "@/lib/tutor-v4/lessons/components/LessonPanel";
+
 import { useRouter, useSearchParams } from "next/navigation";
 
 type StartResponse = StartTutorV4Response;
@@ -224,6 +227,7 @@ export default function TutorV4Page() {
   const [matiere, setMatiere] = useState("maths");
   const [notion, setNotion] = useState("");
   const [urlInitDone, setUrlInitDone] = useState(false);
+  const [showLesson, setShowLesson] = useState(false);
 
   const hasInitializedFromUrl = useRef(false);
   const hasStartedFromUrl = useRef(false);
@@ -318,27 +322,6 @@ useEffect(() => {
   const urlMicroId = searchParams.get("microId");
 
   const options = getNotionOptions(urlClasse);
-  const validUrlNotion =
-    urlNotion && options.includes(urlNotion) ? urlNotion : options[0] ?? "";
-
-  setClasse(urlClasse);
-  setMatiere(urlMatiere);
-  setNotion(validUrlNotion);
-
-  initialMicroIdRef.current = urlMicroId;
-  hasInitializedFromUrl.current = true;
-  setUrlInitDone(true);
-}, [searchParams]);
-
-useEffect(() => {
-  if (hasInitializedFromUrl.current) return;
-
-  const urlClasse = normalizeClasse(searchParams.get("classe"));
-  const urlMatiere = searchParams.get("matiere") ?? "maths";
-  const urlNotion = searchParams.get("notion");
-  const urlMicroId = searchParams.get("microId");
-
-  const options = getNotionOptions(urlClasse);
   const initialNotion =
     urlNotion && options.includes(urlNotion) ? urlNotion : options[0] ?? "";
 
@@ -403,6 +386,19 @@ useEffect(() => {
     if (!notion) return [];
     return notionMicroMap[notion] ?? [];
   }, [notion, notionMicroMap]);
+
+  const currentLesson = useMemo(() => {
+  if (!notion) return null;
+
+  return getTutorLesson({
+    classe,
+    matiere,
+    notionId: notion,
+    microId: activeMicroId,
+    notionLabel: notionLabel(notion, classe),
+    microLabel: activeMicroId ? microLabel(activeMicroId, classe) : undefined,
+  });
+}, [classe, matiere, notion, activeMicroId]);
 
   function resetMicroStatusesForNotion(notionId: string) {
     const micros = notionMicroMap[notionId] ?? [];
@@ -848,6 +844,25 @@ function handleInputKeyDown(
  return (
   <main className="min-h-screen bg-[#f3f4f6] px-2 py-3 sm:px-4 sm:py-6">
     <div className="mx-auto max-w-7xl">
+       <div className="fixed bottom-4 right-4 z-50 flex flex-col gap-2">
+        <button
+          type="button"
+          onClick={() => setShowLesson(true)}
+          className="rounded-full bg-sky-500 px-5 py-3 text-sm font-black text-white shadow-xl hover:bg-sky-600"
+        >
+          📘 Leçon écrite
+        </button>
+        {showLesson ? (
+        <div className="fixed inset-0 z-[60] overflow-y-auto bg-black/60 px-3 py-6">
+          <div className="mx-auto max-w-2xl">
+            <LessonPanel
+              lesson={currentLesson}
+              onClose={() => setShowLesson(false)}
+            />
+          </div>
+        </div>
+      ) : null}
+      </div>
       <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_340px]">
         <div className="space-y-4">
           <section className="space-y-3">

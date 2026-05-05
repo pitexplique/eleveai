@@ -27,6 +27,8 @@ function getClasseBadgeColor(item: Classe, active: boolean) {
 
   if (item === "6e") return "border-lime-500 bg-lime-500 text-white";
   if (item === "5e") return "border-sky-500 bg-sky-500 text-white";
+  if (item === "4e") return "border-sky-500 bg-sky-500 text-white";
+  if (item === "3e") return "border-sky-500 bg-sky-500 text-white";
   return "border-violet-500 bg-violet-500 text-white";
 }
 
