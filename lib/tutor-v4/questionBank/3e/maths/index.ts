@@ -25,6 +25,7 @@ import { arithmetiqueBank } from "./arithmetique.bank";
 import { volumesBank } from "./volumes.bank"; // déjà fait
 import { proportionnaliteBank} from "./proportionnalite.bank"
 import { pythagore3eBank } from "./pythagore.bank";
+import { fonctionsBank } from "./fonctions.bank";
 // (tu ajouteras les autres plus tard)
 
 // =========================
@@ -39,6 +40,7 @@ export const maths3eQuestionBank: TutorBankItemV4[] = [
   ...volumesBank,
   ...proportionnaliteBank,
   ...pythagore3eBank,
+  ...fonctionsBank,
 ];
 
 export function getMaths3eQuestionBank(args?: {

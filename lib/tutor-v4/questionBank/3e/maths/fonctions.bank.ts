@@ -138,26 +138,26 @@ export const fonctionsBank: TutorBankItemV4[] = [
     "Conclusion : f(2) est le prix payé pour 2 heures de location.", tags: ["fonction", "vocabulaire", "reunion"]
     },
 
-{
-  kind: "fixed",
-  id: "fonction_vocabulaire_open_1",
-  niveau: "3e",
-  matiere: "maths",
-  notionId: "fonctions",
-  microId: "fonction_vocabulaire",
-  difficulty: 2,
-  theme: "neutral",
-  text: "Explique avec tes mots ce qu’est une fonction.",
-  format: "open",
-  expected: ["associe", "nombre", "image"],
-  comparator: "contains_keyword",
-  hint: "Une fonction relie deux nombres.",
-explanation:
-"Définition : une fonction est une règle qui associe à un nombre de départ un nombre résultat.\n\n" +
-"Le nombre de départ s’appelle un antécédent. Le nombre obtenu s’appelle une image.\n\n" +
-"Exemple : si f(3) = 8, alors 3 est un antécédent et 8 est son image.\n\n" +
-"Conclusion : une fonction permet de relier deux grandeurs, comme une durée et un prix.", tags: ["fonction", "definition"]
-},
+    {
+    kind: "fixed",
+    id: "fonction_vocabulaire_open_1",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "fonctions",
+    microId: "fonction_vocabulaire",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Explique avec tes mots ce qu’est une fonction.",
+    format: "open",
+    expected: ["associe", "nombre", "image"],
+    comparator: "contains_keyword",
+    hint: "Une fonction relie deux nombres.",
+    explanation:
+    "Définition : une fonction est une règle qui associe à un nombre de départ un nombre résultat.\n\n" +
+    "Le nombre de départ s’appelle un antécédent. Le nombre obtenu s’appelle une image.\n\n" +
+    "Exemple : si f(3) = 8, alors 3 est un antécédent et 8 est son image.\n\n" +
+    "Conclusion : une fonction permet de relier deux grandeurs, comme une durée et un prix.", tags: ["fonction", "definition"]
+    },
 
 /* =========================
    IMAGE
