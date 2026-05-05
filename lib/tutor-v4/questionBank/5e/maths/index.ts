@@ -24,3 +24,20 @@ export const maths5eQuestionBank: TutorBankItemV4[] = [
   ...trianglesBank,
 
 ];
+
+export function getMaths5eQuestionBank(args?: {
+  notionId?: string | null;
+  microId?: string | null;
+}): TutorBankItemV4[] {
+  let bank = maths5eQuestionBank;
+
+  if (args?.notionId) {
+    bank = bank.filter((item) => item.notionId === args.notionId);
+  }
+
+  if (args?.microId) {
+    bank = bank.filter((item) => item.microId === args.microId);
+  }
+
+  return bank;
+}

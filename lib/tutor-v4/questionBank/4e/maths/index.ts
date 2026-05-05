@@ -55,3 +55,20 @@ export const maths4eQuestionBank: TutorBankItemV4[] = [
   ...statistiquesBank
   
 ];
+
+export function getMaths4eQuestionBank(args?: {
+  notionId?: string | null;
+  microId?: string | null;
+}): TutorBankItemV4[] {
+  let bank = maths4eQuestionBank;
+
+  if (args?.notionId) {
+    bank = bank.filter((item) => item.notionId === args.notionId);
+  }
+
+  if (args?.microId) {
+    bank = bank.filter((item) => item.microId === args.microId);
+  }
+
+  return bank;
+}

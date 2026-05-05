@@ -1,16 +1,42 @@
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
-import { pourcentagesBank } from "@/lib/tutor-v4/questionBank/6e/maths/pourcentages.bank";
+
+import { getMaths6eQuestionBank } from "@/lib/tutor-v4/questionBank/6e/maths";
+import { getMaths5eQuestionBank } from "@/lib/tutor-v4/questionBank/5e/maths";
+import { getMaths4eQuestionBank } from "@/lib/tutor-v4/questionBank/4e/maths";
+import { getMaths3eQuestionBank } from "@/lib/tutor-v4/questionBank/3e/maths";
+
+type GetQuestionBankArgs = {
+  notionId: string;
+  microId?: string | null;
+};
 
 export function getLessonBank(args: {
   classe: string;
   matiere: string;
   notionId: string;
+  microId?: string | null;
 }): TutorBankItemV4[] {
-  const key = `${args.classe}:${args.matiere}:${args.notionId}`;
+  if (args.matiere !== "maths") {
+    return [];
+  }
 
-  switch (key) {
-    case "6e:maths:pourcentages":
-      return pourcentagesBank;
+  const bankArgs: GetQuestionBankArgs = {
+    notionId: args.notionId,
+    microId: args.microId,
+  };
+
+  switch (args.classe) {
+    case "6e":
+      return getMaths6eQuestionBank(bankArgs);
+
+    case "5e":
+      return getMaths5eQuestionBank(bankArgs);
+
+    case "4e":
+      return getMaths4eQuestionBank(bankArgs);
+
+    case "3e":
+      return getMaths3eQuestionBank(bankArgs);
 
     default:
       return [];
