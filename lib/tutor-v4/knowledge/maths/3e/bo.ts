@@ -20,48 +20,17 @@
 import type { KnowledgeBoCompetence } from "@/lib/tutor-v4/types";
 
 export const bo: KnowledgeBoCompetence[] = [
-  {
-    boId: "BO3N1",
-    label: "Nombres rationnels, puissances et racines carrées",
-  },
-  {
-    boId: "BO3N2",
-    label: "Multiples, diviseurs et arithmétique",
-  },
-  {
-    boId: "BO3P1",
-    label: "Proportionnalité",
-  },
-  {
-    boId: "BO3F1",
-    label: "Fonctions",
-  },
-  {
-    boId: "BO3A1",
-    label: "Calcul littéral et algébrique",
-  },
-  {
-    boId: "BO3G1",
-    label: "Géométrie plane",
-  },
-  {
-    boId: "BO3G2",
-    label: "Géométrie dans l’espace",
-  },
-  {
-    boId: "BO3M1",
-    label: "Grandeurs et mesures",
-  },
-  {
-    boId: "BO3D1",
-    label: "Statistiques",
-  },
-  {
-    boId: "BO3D2",
-    label: "Probabilités",
-  },
-  {
-    boId: "BO3I1",
-    label: "Pensée informatique et algorithmique",
-  },
-];
+
+  
+    { "boId": "BO3N1", "label": "Nombres rationnels, puissances et racines carrées" },
+    { "boId": "BO3N2", "label": "Multiples, diviseurs et arithmétique" },
+    { "boId": "BO3P1", "label": "Proportionnalité" },
+    { "boId": "BO3F1", "label": "Fonctions" },
+    { "boId": "BO3A1", "label": "Calcul littéral et algébrique" },
+    { "boId": "BO3G1", "label": "Géométrie plane" },
+    { "boId": "BO3G2", "label": "Géométrie dans l’espace" },
+    { "boId": "BO3M1", "label": "Grandeurs et mesures" },
+    { "boId": "BO3D1", "label": "Statistiques" },
+    { "boId": "BO3D2", "label": "Probabilités" },
+    { "boId": "BO3I1", "label": "Pensée informatique et algorithmique" }
+  ];

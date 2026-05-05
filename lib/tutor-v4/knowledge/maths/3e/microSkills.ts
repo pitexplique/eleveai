@@ -1,13 +1,4 @@
 // knowledge/maths/3e/microSkills.ts
-//
-// Micro-compétences de mathématiques pour la classe de 3e.
-//
-// Choix retenu :
-// - continuité 6e → 5e → 4e → 3e ;
-// - micro-compétences entraînables dans Tutor V4 ;
-// - une micro "defis" par notion importante ;
-// - consolidation des acquis de 4e + nouveautés fortes de 3e :
-//   fonctions, racines carrées, arithmétique, trigonométrie, homothétie.
 
 import type { MicroSkillSource } from "@/lib/tutor-v4/knowledge/buildKnowledge";
 
@@ -345,13 +336,47 @@ export const microSkills: MicroSkillSource[] = [
   },
 
   /* =========================
+     TRIANGLES
+  ========================= */
+  {
+    id: "triangle_reconnaitre",
+    label: "Reconnaître les triangles usuels",
+    notionId: "triangles",
+    prerequis: [],
+  },
+  {
+    id: "triangle_angles",
+    label: "Utiliser la somme des angles d’un triangle",
+    notionId: "triangles",
+    prerequis: ["triangle_reconnaitre"],
+  },
+  {
+    id: "triangle_inegalite",
+    label: "Utiliser l’inégalité triangulaire",
+    notionId: "triangles",
+    prerequis: ["triangle_reconnaitre"],
+  },
+  {
+    id: "triangle_construire",
+    label: "Construire ou analyser un triangle à partir de données",
+    notionId: "triangles",
+    prerequis: ["triangle_angles", "triangle_inegalite"],
+  },
+  {
+    id: "triangle_defis",
+    label: "Défis sur les triangles",
+    notionId: "triangles",
+    prerequis: ["triangle_construire"],
+  },
+
+  /* =========================
      PYTHAGORE
   ========================= */
   {
     id: "pythagore_reconnaitre",
     label: "Reconnaître un triangle rectangle et son hypoténuse",
     notionId: "pythagore",
-    prerequis: [],
+    prerequis: ["triangle_reconnaitre"],
   },
   {
     id: "pythagore_calculer_hypotenuse",
@@ -395,7 +420,7 @@ export const microSkills: MicroSkillSource[] = [
     id: "thales_configuration",
     label: "Reconnaître une configuration de Thalès",
     notionId: "thales",
-    prerequis: [],
+    prerequis: ["triangle_reconnaitre"],
   },
   {
     id: "thales_rapports",
@@ -487,7 +512,7 @@ export const microSkills: MicroSkillSource[] = [
     id: "transfo_symetrie_translation_rotation",
     label: "Réactiver symétrie, translation et rotation",
     notionId: "transformations",
-    prerequis: [],
+    prerequis: ["triangle_reconnaitre"],
   },
   {
     id: "transfo_homothetie_reconnaitre",
@@ -549,6 +574,40 @@ export const microSkills: MicroSkillSource[] = [
   },
 
   /* =========================
+     PÉRIMÈTRES
+  ========================= */
+  {
+    id: "perimetre_comprendre",
+    label: "Comprendre ce qu’est un périmètre",
+    notionId: "perimetres",
+    prerequis: [],
+  },
+  {
+    id: "perimetre_polygone",
+    label: "Calculer le périmètre d’un polygone",
+    notionId: "perimetres",
+    prerequis: ["perimetre_comprendre"],
+  },
+  {
+    id: "perimetre_cercle",
+    label: "Calculer la longueur d’un cercle",
+    notionId: "perimetres",
+    prerequis: ["perimetre_comprendre"],
+  },
+  {
+    id: "perimetre_figure_composee",
+    label: "Calculer le périmètre d’une figure composée",
+    notionId: "perimetres",
+    prerequis: ["perimetre_polygone", "perimetre_cercle"],
+  },
+  {
+    id: "perimetre_defis",
+    label: "Défis sur les périmètres",
+    notionId: "perimetres",
+    prerequis: ["perimetre_figure_composee"],
+  },
+
+  /* =========================
      AIRES
   ========================= */
   {
@@ -561,7 +620,7 @@ export const microSkills: MicroSkillSource[] = [
     id: "aire_triangle",
     label: "Calculer l’aire d’un triangle",
     notionId: "aires",
-    prerequis: ["aire_comprendre"],
+    prerequis: ["aire_comprendre", "triangle_reconnaitre"],
   },
   {
     id: "aire_disque",

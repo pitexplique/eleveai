@@ -35,38 +35,57 @@ const supportLinks: Record<string, string[]> = {
   // =========================
   // RACINES
   // =========================
+  racine_comprendre: ["puissance_comprendre"],
   racine_calculer: ["puissance_calculer"],
   racine_encadrer: ["rationnel_comparer"],
 
   // =========================
-  // LIEN PUISSANCE ↔ RACINE
+  // TRIANGLES
   // =========================
-  racine_comprendre: ["puissance_comprendre"],
+  triangle_construire: ["triangle_angles", "triangle_inegalite"],
 
   // =========================
-  // Pythagore
+  // PYTHAGORE
   // =========================
+  pythagore_reconnaitre: ["triangle_reconnaitre"],
   pythagore_calculer_hypotenuse: ["racine_calculer"],
   pythagore_calculer_cote: ["racine_calculer"],
+  pythagore_reciproque: ["triangle_inegalite"],
 
   // =========================
-  // Trigonométrie
+  // THALÈS
   // =========================
+  thales_rapports: ["prop_quatrieme"],
+  thales_calculer_longueur: ["prop_quatrieme"],
+  thales_reciproque: ["prop_reconnaitre"],
+
+  // =========================
+  // TRIGONOMÉTRIE
+  // =========================
+  trigo_triangle_rectangle: ["pythagore_reconnaitre"],
   trigo_calculer_longueur: ["pythagore_calculer_hypotenuse"],
   trigo_calculer_angle: ["pythagore_calculer_cote"],
 
   // =========================
-  // Fonctions
+  // FONCTIONS
   // =========================
   fonction_graphique: ["prop_reconnaitre"],
-  fonction_affine_lineaire: ["prop_coeff"],
+  fonction_affine_lineaire: ["prop_reconnaitre", "prop_quatrieme"],
 
   // =========================
-  // Probas
+  // GRANDEURS
+  // =========================
+  aire_triangle: ["triangle_reconnaitre"],
+  volume_prisme: ["aire_triangle"],
+  volume_cylindre: ["aire_disque"],
+  volume_boule: ["volume_cylindre"],
+
+  // =========================
+  // PROBAS
   // =========================
   proba_calculer: ["rationnel_comparer"],
+  proba_deux_epreuves: ["proba_calculer"],
 };
-
 /**
  * Génération matrice
  */
