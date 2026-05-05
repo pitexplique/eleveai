@@ -537,7 +537,7 @@ export type CanvasFigure =
   | StatGraphCanvasData
   | AngleCanvasData
   | FonctionGraphiqueCanvasData
-  |FonctionTableauCanvasData;
+  | FonctionTableauCanvasData;
 
 export type QuestionVariantMeta = {
   familyId: string;
