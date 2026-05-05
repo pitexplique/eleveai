@@ -16,7 +16,7 @@ const CLASSES: Classe[] = ["6e", "5e", "4e", "3e"];
 function getClasseTitle(classe: Classe) {
   if (classe === "6e") return "Maths 6e";
   if (classe === "5e") return "Maths 5e";
-    if (classe === "4e") return "Maths 4e";
+  if (classe === "4e") return "Maths 4e";
   return "Maths 3e";
 }
 
