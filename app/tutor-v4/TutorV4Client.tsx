@@ -213,10 +213,11 @@ function renderCanvas(canvas?: CanvasFigure | null) {
 }
 
 function normalizeClasse(value: string | null): Classe {
-  if (value === "6e" || value === "5e" || value === "4e") {
+  if (value === "6e" || value === "5e" || value === "4e" || value === "3e") {
     return value;
   }
-  return "3e";
+
+  return "6e";
 }
 
 export default function TutorV4Page() {
