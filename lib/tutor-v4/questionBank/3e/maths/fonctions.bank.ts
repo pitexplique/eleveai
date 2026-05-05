@@ -131,10 +131,12 @@ export const fonctionsBank: TutorBankItemV4[] = [
   expected: ["le prix pour 2 heures"],
   comparator: "mcq_exact",
   hint: "f(x) donne le résultat quand on entre x.",
-  explanation:
-    "f(2) signifie qu’on remplace x par 2. Ici, c’est donc le prix pour 2 heures de location.",
-  tags: ["fonction", "vocabulaire", "reunion"]
-},
+    explanation:
+    "Définition : f(2) se lit « f de 2 ».\n\n" +
+    "Méthode : on donne la valeur 2 à la fonction. La fonction renvoie alors un résultat.\n\n" +
+    "Ici, x représente le nombre d’heures de location. Donc f(2) représente le prix pour 2 heures.\n\n" +
+    "Conclusion : f(2) est le prix payé pour 2 heures de location.", tags: ["fonction", "vocabulaire", "reunion"]
+    },
 
 {
   kind: "fixed",
@@ -150,9 +152,11 @@ export const fonctionsBank: TutorBankItemV4[] = [
   expected: ["associe", "nombre", "image"],
   comparator: "contains_keyword",
   hint: "Une fonction relie deux nombres.",
-  explanation:
-    "Une fonction est une règle qui associe à un nombre (appelé antécédent) un autre nombre (appelé image).",
-  tags: ["fonction", "definition"]
+explanation:
+"Définition : une fonction est une règle qui associe à un nombre de départ un nombre résultat.\n\n" +
+"Le nombre de départ s’appelle un antécédent. Le nombre obtenu s’appelle une image.\n\n" +
+"Exemple : si f(3) = 8, alors 3 est un antécédent et 8 est son image.\n\n" +
+"Conclusion : une fonction permet de relier deux grandeurs, comme une durée et un prix.", tags: ["fonction", "definition"]
 },
 
 /* =========================
@@ -180,9 +184,12 @@ export const fonctionsBank: TutorBankItemV4[] = [
       format: "short",
       expected: [String(result)],
       comparator: "number_equal",
-      explanation:
-        `On remplace x par ${x} : f(${x}) = ${a} × ${x} + ${b} = ${result}.`,
-      canvas: fonctionGraphiqueCanvas({
+    explanation:
+    `Définition : calculer une image, c’est calculer f(x) pour une valeur donnée de x.\n\n` +
+    `Méthode : on remplace x par ${x} dans la formule.\n\n` +
+    `Ici : f(x) = ${a}x + ${b}\n` +
+    `Donc f(${x}) = ${a} × ${x} + ${b} = ${result}.\n\n` +
+    `Conclusion : l’image de ${x} est ${result}.`,canvas: fonctionGraphiqueCanvas({
         titre: "Lecture de l’image",
         a,
         b,
@@ -209,8 +216,11 @@ export const fonctionsBank: TutorBankItemV4[] = [
   expected: ["11"],
   comparator: "mcq_exact",
   hint: "On remplace x par 4.",
-  explanation:
-    "f(4) = 2 × 4 + 3 = 8 + 3 = 11.",
+explanation:
+  "Définition : f(4) signifie que l’on cherche l’image de 4 par la fonction f.\n\n" +
+  "Méthode : on remplace x par 4 dans la formule f(x) = 2x + 3.\n\n" +
+  "Calcul : f(4) = 2 × 4 + 3 = 8 + 3 = 11.\n\n" +
+  "Conclusion : l’image de 4 est 11.",
   tags: ["fonction", "image"]
 },
 
