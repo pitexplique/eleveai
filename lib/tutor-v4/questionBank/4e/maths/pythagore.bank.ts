@@ -27,7 +27,6 @@
 import type {
   TutorBankItemV4,
   TriangleCanvasData,
-  TriangleCanvasPointLabel,
 } from "@/lib/tutor-v4/types";
 
 function randomInt(min: number, max: number) {
@@ -93,59 +92,30 @@ const triangleNames: TriangleName[] = [
   { A: "I", B: "J", C: "K" },
 ];
 
-type Orientation = "A" | "B" | "C";
-
 function sideName(labels: TriangleName, side: "AB" | "BC" | "CA") {
   if (side === "AB") return `${labels.A}${labels.B}`;
   if (side === "BC") return `${labels.B}${labels.C}`;
   return `${labels.C}${labels.A}`;
 }
 
-function oppositeSideOf(vertex: TriangleCanvasPointLabel): "AB" | "BC" | "CA" {
-  if (vertex === "A") return "BC";
-  if (vertex === "B") return "CA";
-  return "AB";
+function hypotenuseSide(): "BC" {
+  return "BC";
 }
 
 function rightTriangleFigure(params: {
   labels?: TriangleName;
-  rightAngleAt?: Orientation;
   sideLabels?: Partial<Record<"AB" | "BC" | "CA", string>>;
   showRightAngle?: boolean;
-  variant?: number;
 }): TriangleCanvasData {
   const labels = params.labels ?? randomChoice(triangleNames);
-  const rightAngleAt = params.rightAngleAt ?? "B";
-  const variant = params.variant ?? 1;
 
-  const variants: Record<number, TriangleCanvasData["points"]> = {
-    1: {
+  return {
+    kind: "triangle",
+    points: {
       A: { x: 55, y: 175 },
       B: { x: 225, y: 175 },
       C: { x: 55, y: 55 },
     },
-    2: {
-      A: { x: 60, y: 65 },
-      B: { x: 230, y: 65 },
-      C: { x: 230, y: 180 },
-    },
-    3: {
-      A: { x: 65, y: 170 },
-      B: { x: 220, y: 70 },
-      C: { x: 220, y: 170 },
-    },
-    4: {
-      A: { x: 75, y: 70 },
-      B: { x: 75, y: 180 },
-      C: { x: 230, y: 180 },
-    },
-  };
-
-  const basePoints = variants[variant];
-
-  return {
-    kind: "triangle",
-    points: basePoints,
     labels,
     sideLabels: params.sideLabels,
     display: {
@@ -154,7 +124,10 @@ function rightTriangleFigure(params: {
       showSides: true,
       showAngles: true,
     },
-    marks: params.showRightAngle === false ? undefined : { rightAngleAt },
+    marks:
+      params.showRightAngle === false
+        ? undefined
+        : { rightAngleAt: "A" },
     size: {
       width: 280,
       height: 230,
@@ -302,50 +275,29 @@ export const pythagoreBank: TutorBankItemV4[] = [
     explanation: "Comme 6² = 36, alors √36 = 6.",
     tags: ["pythagore", "racine"],
   },
-  {
-    kind: "template",
-    id: "pythagore_carres_racines_tpl_1",
-    niveau: "4e",
-    matiere: "maths",
-    notionId: "pythagore",
-    microId: "pythagore_carres_racines",
-    difficulty: 1,
-    theme: "neutral",
-    hint: "n² signifie n × n.",
-    tags: ["pythagore", "carre", "template"],
-    generate: () => {
-      const { n, square } = randomChoice(knownSquares);
-      return {
-        text: `Combien vaut ${n}² ?`,
-        format: "short",
-        expected: [String(square)],
-        comparator: "number_equal",
-        explanation: `${n}² = ${n} × ${n} = ${square}.`,
-      };
-    },
+
+ {
+  kind: "template",
+  id: "pythagore_carres_racines_tpl_2",
+  niveau: "4e",
+  matiere: "maths",
+  notionId: "pythagore",
+  microId: "pythagore_carres_racines",
+  difficulty: 1,
+  theme: "neutral",
+  hint: "Cherche le nombre positif dont le carré donne ce résultat.",
+  tags: ["pythagore", "racine", "template"],
+  generate: () => {
+    const { n, square } = randomChoice(knownSquares);
+    return {
+      text: `Combien vaut √${square} ?`,
+      format: "short",
+      expected: [String(n)],
+      comparator: "number_equal",
+      explanation: `Comme ${n}² = ${square}, alors √${square} = ${n}.`,
+    };
   },
-  {
-    kind: "template",
-    id: "pythagore_carres_racines_tpl_2",
-    niveau: "4e",
-    matiere: "maths",
-    notionId: "pythagore",
-    microId: "pythagore_carres_racines",
-    difficulty: 1,
-    theme: "neutral",
-    hint: "Cherche le nombre positif dont le carré donne ce résultat.",
-    tags: ["pythagore", "racine", "template"],
-    generate: () => {
-      const { n, square } = randomChoice(knownSquares);
-      return {
-        text: `Combien vaut √${square} ?`,
-        format: "short",
-        expected: [String(n)],
-        comparator: "number_equal",
-        explanation: `Comme ${n}² = ${square}, alors √${square} = ${n}.`,
-      };
-    },
-  },
+},
   {
     kind: "template",
     id: "pythagore_carres_racines_tpl_3",
@@ -499,28 +451,27 @@ export const pythagoreBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "L’hypoténuse est le côté opposé à l’angle droit.",
     tags: ["pythagore", "hypotenuse", "canvas", "template"],
-    generate: () => {
-      const labels = randomChoice(triangleNames);
-      const rightAngleAt = randomChoice(["A", "B", "C"] as Orientation[]);
-      const hyp = oppositeSideOf(rightAngleAt);
+generate: () => {
+  const labels = randomChoice(triangleNames);
+  const hyp = hypotenuseSide();
 
-      return {
-        text: `Dans le triangle représenté, quel côté est l’hypoténuse ?`,
-        format: "qcm",
-        choices: shuffle([
-          sideName(labels, "AB"),
-          sideName(labels, "BC"),
-          sideName(labels, "CA"),
-        ]),
-        expected: [sideName(labels, hyp)],
-        comparator: "mcq_exact",
-        explanation: `L’hypoténuse est le côté opposé à l’angle droit : ici, c’est ${sideName(
-          labels,
-          hyp
-        )}.`,
-        canvas: rightTriangleFigure({ labels, rightAngleAt }),
-      };
-    },
+  return {
+    text: `Dans le triangle représenté, quel côté est l’hypoténuse ?`,
+    format: "qcm",
+    choices: shuffle([
+      sideName(labels, "AB"),
+      sideName(labels, "BC"),
+      sideName(labels, "CA"),
+    ]),
+    expected: [sideName(labels, hyp)],
+    comparator: "mcq_exact",
+    explanation: `Le triangle est rectangle en ${labels.A}. L’hypoténuse est le côté opposé à l’angle droit, donc c’est le côté ${sideName(
+      labels,
+      hyp
+    )}.`,
+    canvas: rightTriangleFigure({ labels }),
+  };
+},
   },
   {
     kind: "template",
@@ -547,7 +498,7 @@ export const pythagoreBank: TutorBankItemV4[] = [
           ? "Oui, le triangle est codé rectangle."
           : "Non, aucun angle droit n’est codé sur la figure.",
         canvas: isRight
-          ? rightTriangleFigure({ labels, rightAngleAt: "A", variant: 1 })
+          ? rightTriangleFigure({ labels })
           : nonRightTriangleFigure({ labels }),
       };
     },
@@ -635,7 +586,6 @@ export const pythagoreBank: TutorBankItemV4[] = [
         }, donc c = √${c * c} = ${c}.`,
         canvas: rightTriangleFigure({
           labels,
-          rightAngleAt: "A",
           sideLabels: {
             AB: String(a),
             CA: String(b),
@@ -762,7 +712,6 @@ export const pythagoreBank: TutorBankItemV4[] = [
         } = ${missingLeg}.`,
         canvas: rightTriangleFigure({
           labels,
-          rightAngleAt: "A",
           sideLabels: {
             AB: knownLeg === triple.a ? String(triple.a) : "?",
             CA: knownLeg === triple.b ? String(triple.b) : "?",

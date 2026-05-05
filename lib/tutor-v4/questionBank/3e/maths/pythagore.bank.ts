@@ -1,7 +1,6 @@
 import type {
   TutorBankItemV4,
   TriangleCanvasData,
-  TriangleCanvasPointLabel,
 } from "@/lib/tutor-v4/types";
 
 function randomInt(min: number, max: number) {
@@ -48,28 +47,22 @@ const triangleNames: TriangleName[] = [
   { A: "E", B: "F", C: "G" },
 ];
 
-type Orientation = "A" | "B" | "C";
-
 function sideName(labels: TriangleName, side: "AB" | "BC" | "CA") {
   if (side === "AB") return `${labels.A}${labels.B}`;
   if (side === "BC") return `${labels.B}${labels.C}`;
   return `${labels.C}${labels.A}`;
 }
 
-function oppositeSideOf(vertex: TriangleCanvasPointLabel): "AB" | "BC" | "CA" {
-  if (vertex === "A") return "BC";
-  if (vertex === "B") return "CA";
-  return "AB";
+function hypotenuseSide(): "BC" {
+  return "BC";
 }
 
 function rightTriangleFigure(params: {
   labels?: TriangleName;
-  rightAngleAt?: Orientation;
   sideLabels?: Partial<Record<"AB" | "BC" | "CA", string>>;
   showRightAngle?: boolean;
 }): TriangleCanvasData {
   const labels = params.labels ?? randomChoice(triangleNames);
-  const rightAngleAt = params.rightAngleAt ?? "A";
 
   return {
     kind: "triangle",
@@ -86,7 +79,10 @@ function rightTriangleFigure(params: {
       showSides: true,
       showAngles: true,
     },
-    marks: params.showRightAngle === false ? undefined : { rightAngleAt },
+    marks:
+      params.showRightAngle === false
+        ? undefined
+        : { rightAngleAt: "A" },
     size: { width: 280, height: 230 },
   };
 }
@@ -115,6 +111,8 @@ function nonRightTriangleFigure(params?: {
     size: { width: 280, height: 230 },
   };
 }
+
+
 
 function makeChoices(correct: number, spread = 6): string[] {
   const values = new Set<number>([correct]);
@@ -192,8 +190,7 @@ export const pythagore3eBank: TutorBankItemV4[] = [
     tags: ["pythagore", "hypotenuse", "canvas", "template"],
     generate: () => {
       const labels = randomChoice(triangleNames);
-      const rightAngleAt = randomChoice(["A", "B", "C"] as Orientation[]);
-      const hyp = oppositeSideOf(rightAngleAt);
+      const hyp = hypotenuseSide();
 
       return {
         text: "Dans le triangle représenté, quel côté est l’hypoténuse ?",
@@ -205,11 +202,11 @@ export const pythagore3eBank: TutorBankItemV4[] = [
         ]),
         expected: [sideName(labels, hyp)],
         comparator: "mcq_exact",
-        explanation: `L’hypoténuse est le côté opposé à l’angle droit. Ici, l’angle droit est au sommet ${labels[rightAngleAt]}, donc l’hypoténuse est le côté ${sideName(
+        explanation: `Le triangle est rectangle en ${labels.A}. L’hypoténuse est le côté opposé à l’angle droit, donc c’est le côté ${sideName(
           labels,
           hyp
         )}.`,
-        canvas: rightTriangleFigure({ labels, rightAngleAt }),
+        canvas: rightTriangleFigure({ labels }),
       };
     },
   },
@@ -279,7 +276,6 @@ export const pythagore3eBank: TutorBankItemV4[] = [
         }. La longueur de l’hypoténuse est donc √${c * c} = ${c} cm.`,
         canvas: rightTriangleFigure({
           labels,
-          rightAngleAt: "A",
           sideLabels: {
             AB: String(a),
             CA: String(b),
@@ -392,7 +388,6 @@ export const pythagore3eBank: TutorBankItemV4[] = [
         } = ${missingLeg} cm.`,
         canvas: rightTriangleFigure({
           labels,
-          rightAngleAt: "A",
           sideLabels: {
             AB: knownLeg === triple.a ? String(triple.a) : "?",
             CA: knownLeg === triple.b ? String(triple.b) : "?",
