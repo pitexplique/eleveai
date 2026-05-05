@@ -7,3 +7,5 @@ export { default as Solide3DCanvas } from "./Solide3DCanvas";
 export { default as StatGraphCanvas } from "./StatGraphCanvas";
 export { default as CanvasProbabilites } from "./ProbabilitesCanvas";
 export { default as AngleCanvas } from "./AngleCanvas";
+export { default as FonctionGraphiqueCanvas } from "./FonctionGraphiqueCanvas";
+export { default as FonctionTableauCanvas } from "./FonctionTableauCanvas";

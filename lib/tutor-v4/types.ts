@@ -433,6 +433,98 @@ export type CanvasProbabilitesData = {
   };
 };
 
+export type FonctionGraphiquePoint = {
+  x: number;
+  y: number;
+  label?: string;
+  couleur?: string;
+};
+
+export type FonctionGraphiqueCourbe = {
+  id: string;
+  label?: string;
+  type: "lineaire" | "affine" | "quadratique" | "points";
+  a?: number;
+  b?: number;
+  c?: number;
+  points?: FonctionGraphiquePoint[];
+  couleur?: string;
+};
+
+export type FonctionGraphiqueCanvasData = {
+  kind: "fonctionGraphique";
+
+  titre?: string;
+
+  size?: {
+    width?: number;
+    height?: number;
+  };
+
+  xmin: number;
+  xmax: number;
+  ymin: number;
+  ymax: number;
+
+  grille?: boolean;
+
+  courbes?: {
+    id: string;
+    type: "lineaire" | "affine" | "quadratique" | "points";
+    a?: number;
+    b?: number;
+    c?: number;
+    couleur?: string;
+    points?: { x: number; y: number }[];
+  }[];
+
+  points?: {
+    x: number;
+    y: number;
+    label?: string;
+    couleur?: string;
+  }[];
+
+  misesEnEvidence?: {
+    verticale?: {
+      x: number;
+      couleur?: string;
+    };
+    horizontale?: {
+      y: number;
+      couleur?: string;
+    };
+    point?: {
+      x: number;
+      y: number;
+      label?: string;
+      couleur?: string;
+    };
+  }[];
+};
+
+export type FonctionTableauCanvasData = {
+  kind: "fonction_tableau";
+
+  titre?: string;
+  consigne?: string;
+
+  xValues: number[];
+  yValues: number[];
+
+  missing?: {
+    type: "image" | "antecedent";
+    index: number;
+  };
+
+  highlightIndex?: number;
+
+  size?: {
+    width?: number;
+    height?: number;
+  };
+};
+
 export type CanvasFigure =
   | TriangleCanvasData
   | QuadrilatereCanvasData
@@ -443,7 +535,9 @@ export type CanvasFigure =
   | Solide3DCanvasData
   | ThalesCanvasData
   | StatGraphCanvasData
-  | AngleCanvasData;
+  | AngleCanvasData
+  | FonctionGraphiqueCanvasData
+  |FonctionTableauCanvasData;
 
 export type QuestionVariantMeta = {
   familyId: string;

@@ -18,6 +18,8 @@ import {
   StatGraphCanvas,
   CanvasProbabilites,
   AngleCanvas,
+  FonctionGraphiqueCanvas,
+  FonctionTableauCanvas,
 } from "@/lib/tutor-v4/components";
 
 import {
@@ -208,6 +210,14 @@ function renderCanvas(canvas?: CanvasFigure | null) {
   if (canvas.kind === "angle") {
     return <AngleCanvas figure={canvas} />;
   }
+
+  if (canvas.kind === "fonctionGraphique") {
+    return <FonctionGraphiqueCanvas figure={canvas} />;
+  }
+
+  if (canvas.kind === "fonction_tableau") {
+  return <FonctionTableauCanvas figure={canvas} />;
+}
 
   return null;
 }
