@@ -84,7 +84,10 @@ export const volumesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Le volume concerne un objet en 3 dimensions.",
     explanation:
-      "Un volume mesure la place occupée par un solide dans l’espace.",
+      "Définition : un volume mesure la place occupée par un solide dans l’espace.\n\n" +
+      "Méthode : on repère qu’il s’agit d’une grandeur en trois dimensions.\n\n" +
+      "Calcul : aucun calcul n’est nécessaire.\n\n" +
+      "Conclusion : un volume mesure la place occupée.",
     tags: ["volume", "definition", "qcm"],
   },
 
@@ -104,7 +107,10 @@ export const volumesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Chaque petit cube compte pour 1 unité de volume.",
     explanation:
-      "Le solide contient 6 cubes unités, donc son volume est 6 unités de volume.",
+      "Définition : un cube unité représente 1 unité de volume.\n\n" +
+      "Méthode : on compte tous les cubes unités du solide.\n\n" +
+      "Calcul : il y a 6 cubes unités.\n\n" +
+      "Conclusion : le volume est 6 unités de volume.",
     canvas: solideCanvas({
       solide: "assemblage_cubes",
       cubes: [
@@ -144,7 +150,11 @@ export const volumesBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(n)],
         comparator: "number_equal",
-        explanation: `On compte ${n} cubes unités. Le volume est donc ${n} unités de volume.`,
+        explanation:
+          `Définition : un cube unité représente 1 unité de volume.\n\n` +
+          `Méthode : on compte les cubes unités du solide.\n\n` +
+          `Calcul : il y a ${n} cubes unités.\n\n` +
+          `Conclusion : le volume est ${n} unités de volume.`,
         canvas: solideCanvas({
           solide: "assemblage_cubes",
           cubes,
@@ -179,7 +189,10 @@ export const volumesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "On empile une base sur une certaine hauteur.",
     explanation:
-      "Le volume d’un prisme ou d’un cylindre se calcule avec : Volume = aire de base × hauteur.",
+      "Définition : pour un prisme droit ou un cylindre, le volume est l’aire de base multipliée par la hauteur.\n\n" +
+      "Méthode : on utilise la formule Volume = aire de base × hauteur.\n\n" +
+      "Calcul : aucun calcul n’est nécessaire ici.\n\n" +
+      "Conclusion : la bonne formule est Volume = aire de base × hauteur.",
     tags: ["volume", "aire_base", "formule"],
   },
 
@@ -204,7 +217,11 @@ export const volumesBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(volume)],
         comparator: "number_equal",
-        explanation: `Volume = aire de base × hauteur = ${aireBase} × ${hauteur} = ${volume} cm³.`,
+        explanation:
+          `Définition : le volume se calcule par aire de base × hauteur.\n\n` +
+          `Méthode : on multiplie l’aire de base par la hauteur.\n\n` +
+          `Calcul : ${aireBase} × ${hauteur} = ${volume}.\n\n` +
+          `Conclusion : le volume est ${volume} cm³.`,
         canvas: solideCanvas({
           solide: "prisme",
           dimensions: { aireBase, hauteur },
@@ -241,7 +258,11 @@ export const volumesBank: TutorBankItemV4[] = [
         choices: ["oui", "non"],
         expected: ["non"],
         comparator: "mcq_exact",
-        explanation: `Non. Il ne faut pas additionner. Volume = ${aireBase} × ${hauteur} = ${volume} cm³.`,
+        explanation:
+          `Définition : le volume se calcule par aire de base × hauteur.\n\n` +
+          `Méthode : on multiplie, on n’additionne pas.\n\n` +
+          `Calcul : ${aireBase} × ${hauteur} = ${volume}.\n\n` +
+          `Conclusion : l’élève a tort, le volume est ${volume} cm³.`,
       };
     },
   },
@@ -265,7 +286,11 @@ export const volumesBank: TutorBankItemV4[] = [
     expected: ["60 cm³"],
     comparator: "mcq_exact",
     hint: "Volume = longueur × largeur × hauteur.",
-    explanation: "V = 4 × 3 × 5 = 60 cm³.",
+    explanation:
+      "Définition : le volume d’un pavé droit est longueur × largeur × hauteur.\n\n" +
+      "Méthode : on multiplie les trois dimensions.\n\n" +
+      "Calcul : 4 × 3 × 5 = 60.\n\n" +
+      "Conclusion : le volume est 60 cm³.",
     canvas: solideCanvas({
       solide: "pave_droit",
       dimensions: { longueur: 4, largeur: 3, hauteur: 5 },
@@ -304,7 +329,11 @@ export const volumesBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(volume)],
         comparator: "number_equal",
-        explanation: `Aire de base = ${longueur} × ${largeur} = ${aireBase} cm². Volume = ${aireBase} × ${hauteur} = ${volume} cm³.`,
+        explanation:
+          `Définition : le volume d’un pavé droit est aire de base × hauteur.\n\n` +
+          `Méthode : on calcule l’aire de la base, puis on multiplie par la hauteur.\n\n` +
+          `Calcul : ${longueur} × ${largeur} = ${aireBase}, puis ${aireBase} × ${hauteur} = ${volume}.\n\n` +
+          `Conclusion : le volume est ${volume} cm³.`,
         canvas: solideCanvas({
           solide: "pave_droit",
           dimensions: { longueur, largeur, hauteur, aireBase, volume },
@@ -344,7 +373,11 @@ export const volumesBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(volume)],
         comparator: "number_equal",
-        explanation: `Aire de base = ${longueur} × ${largeur} = ${aireBase} cm². Volume = ${aireBase} × ${hauteur} = ${volume} cm³.`,
+        explanation:
+          `Définition : le volume d’un pavé droit est aire de base × hauteur.\n\n` +
+          `Méthode : on calcule l’aire de la base, puis on multiplie par la hauteur.\n\n` +
+          `Calcul : ${longueur} × ${largeur} = ${aireBase}, puis ${aireBase} × ${hauteur} = ${volume}.\n\n` +
+          `Conclusion : le volume est ${volume} cm³.`,
         canvas: solideCanvas({
           solide: "pave_droit",
           dimensions: { longueur, largeur, hauteur },
@@ -380,7 +413,11 @@ export const volumesBank: TutorBankItemV4[] = [
     expected: ["126 cm³"],
     comparator: "mcq_exact",
     hint: "Volume = aire de base × hauteur.",
-    explanation: "V = 18 × 7 = 126 cm³.",
+    explanation:
+      "Définition : le volume d’un prisme droit est aire de base × hauteur.\n\n" +
+      "Méthode : on multiplie l’aire de base par la hauteur.\n\n" +
+      "Calcul : 18 × 7 = 126.\n\n" +
+      "Conclusion : le volume est 126 cm³.",
     canvas: solideCanvas({
       solide: "prisme",
       dimensions: { aireBase: 18, hauteur: 7 },
@@ -412,7 +449,11 @@ export const volumesBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(volume)],
         comparator: "number_equal",
-        explanation: `V = aire de base × hauteur = ${aireBase} × ${hauteur} = ${volume} cm³.`,
+        explanation:
+          `Définition : le volume d’un prisme droit est aire de base × hauteur.\n\n` +
+          `Méthode : on multiplie l’aire de base par la hauteur.\n\n` +
+          `Calcul : ${aireBase} × ${hauteur} = ${volume}.\n\n` +
+          `Conclusion : le volume est ${volume} cm³.`,
         canvas: solideCanvas({
           solide: "prisme",
           dimensions: { aireBase, hauteur, volume },
@@ -450,7 +491,11 @@ export const volumesBank: TutorBankItemV4[] = [
         format: "short",
         expected: [formatNumber(volume)],
         comparator: "number_equal",
-        explanation: `Aire de la base triangulaire = ${base} × ${hauteurTriangle} ÷ 2 = ${formatNumber(aireBase)} cm². Volume = ${formatNumber(aireBase)} × ${hauteurPrisme} = ${formatNumber(volume)} cm³.`,
+        explanation:
+          `Définition : le volume d’un prisme droit est aire de base × hauteur.\n\n` +
+          `Méthode : on calcule d’abord l’aire de la base triangulaire, puis on multiplie par la hauteur du prisme.\n\n` +
+          `Calcul : ${base} × ${hauteurTriangle} ÷ 2 = ${formatNumber(aireBase)}, puis ${formatNumber(aireBase)} × ${hauteurPrisme} = ${formatNumber(volume)}.\n\n` +
+          `Conclusion : le volume est ${formatNumber(volume)} cm³.`,
         canvas: solideCanvas({
           solide: "prisme",
           dimensions: { aireBase, hauteur: hauteurPrisme, volume },
@@ -484,7 +529,11 @@ export const volumesBank: TutorBankItemV4[] = [
     expected: ["100π cm³"],
     comparator: "mcq_exact",
     hint: "Volume = aire de base × hauteur.",
-    explanation: "V = 25π × 4 = 100π cm³.",
+    explanation:
+      "Définition : le volume d’un cylindre est aire de base × hauteur.\n\n" +
+      "Méthode : on multiplie l’aire du disque de base par la hauteur.\n\n" +
+      "Calcul : 25π × 4 = 100π.\n\n" +
+      "Conclusion : le volume est 100π cm³.",
     canvas: solideCanvas({
       solide: "cylindre",
       dimensions: { rayon: 5, hauteur: 4 },
@@ -521,7 +570,11 @@ export const volumesBank: TutorBankItemV4[] = [
         format: "short",
         expected: [`${coeff}π`, `${coeff} pi`, `${coeff}`],
         comparator: "contains_keyword",
-        explanation: `Aire de base = π × ${rayon}² = ${r2}π cm². Volume = ${r2}π × ${hauteur} = ${coeff}π cm³.`,
+        explanation:
+          `Définition : le volume d’un cylindre est aire de base × hauteur.\n\n` +
+          `Méthode : on calcule l’aire du disque de base, puis on multiplie par la hauteur.\n\n` +
+          `Calcul : π × ${rayon}² = ${r2}π, puis ${r2}π × ${hauteur} = ${coeff}π.\n\n` +
+          `Conclusion : le volume est ${coeff}π cm³.`,
         canvas: solideCanvas({
           solide: "cylindre",
           dimensions: { rayon, hauteur },
@@ -559,7 +612,11 @@ export const volumesBank: TutorBankItemV4[] = [
         format: "short",
         expected: [`${coeff}π`, `${coeff} pi`, `${coeff}`],
         comparator: "contains_keyword",
-        explanation: `Le rayon vaut ${diametre} ÷ 2 = ${rayon} cm. Volume = π × ${rayon}² × ${hauteur} = ${coeff}π cm³.`,
+        explanation:
+          `Définition : le volume d’un cylindre est π × rayon² × hauteur.\n\n` +
+          `Méthode : on trouve d’abord le rayon, puis on applique la formule.\n\n` +
+          `Calcul : ${diametre} ÷ 2 = ${rayon}, puis π × ${rayon}² × ${hauteur} = ${coeff}π.\n\n` +
+          `Conclusion : le volume est ${coeff}π cm³.`,
         canvas: solideCanvas({
           solide: "cylindre",
           dimensions: { rayon, hauteur },
@@ -594,7 +651,11 @@ export const volumesBank: TutorBankItemV4[] = [
     expected: ["cm³"],
     comparator: "mcq_exact",
     hint: "Un volume se mesure avec une unité au cube.",
-    explanation: "Le cm³ est une unité de volume.",
+    explanation:
+      "Définition : une unité de volume est une unité au cube.\n\n" +
+      "Méthode : on cherche l’unité écrite avec un exposant 3.\n\n" +
+      "Calcul : cm³ signifie centimètre cube.\n\n" +
+      "Conclusion : cm³ est une unité de volume.",
     tags: ["volume", "unites"],
   },
 
@@ -613,7 +674,11 @@ export const volumesBank: TutorBankItemV4[] = [
     expected: ["1 000 cm³"],
     comparator: "mcq_exact",
     hint: "1 dm = 10 cm, donc 1 dm³ = 10 × 10 × 10 cm³.",
-    explanation: "1 dm³ = 10³ cm³ = 1 000 cm³.",
+    explanation:
+      "Définition : convertir un volume demande de convertir les trois dimensions.\n\n" +
+      "Méthode : comme 1 dm = 10 cm, alors 1 dm³ = 10 × 10 × 10 cm³.\n\n" +
+      "Calcul : 10³ = 1 000.\n\n" +
+      "Conclusion : 1 dm³ = 1 000 cm³.",
     tags: ["volume", "conversion", "unites"],
   },
 
@@ -635,7 +700,11 @@ export const volumesBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(litres)],
         comparator: "number_equal",
-        explanation: `1 L = 1 dm³, donc ${litres} L = ${litres} dm³.`,
+        explanation:
+          `Définition : 1 litre correspond à 1 dm³.\n\n` +
+          `Méthode : on remplace chaque litre par un dm³.\n\n` +
+          `Calcul : ${litres} L = ${litres} dm³.\n\n` +
+          `Conclusion : ${litres} L correspondent à ${litres} dm³.`,
       };
     },
   },
@@ -660,7 +729,11 @@ export const volumesBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(cm3)],
         comparator: "number_equal",
-        explanation: `1 dm³ = 1 000 cm³, donc ${dm3} dm³ = ${cm3} cm³.`,
+        explanation:
+          `Définition : 1 dm³ vaut 1 000 cm³.\n\n` +
+          `Méthode : on multiplie le nombre de dm³ par 1 000.\n\n` +
+          `Calcul : ${dm3} × 1 000 = ${cm3}.\n\n` +
+          `Conclusion : ${dm3} dm³ correspondent à ${cm3} cm³.`,
       };
     },
   },
@@ -684,7 +757,11 @@ export const volumesBank: TutorBankItemV4[] = [
     expected: ["non"],
     comparator: "mcq_exact",
     hint: "Pour un volume de pavé droit, on multiplie les trois dimensions.",
-    explanation: "Non. Le volume vaut 5 × 4 × 3 = 60 cm³.",
+    explanation:
+      "Définition : le volume d’un pavé droit est le produit de ses trois dimensions.\n\n" +
+      "Méthode : on multiplie les dimensions, on ne les additionne pas.\n\n" +
+      "Calcul : 5 × 4 × 3 = 60.\n\n" +
+      "Conclusion : l’élève a tort, le volume est 60 cm³.",
     tags: ["volume", "defi", "erreur"],
   },
 
@@ -710,7 +787,11 @@ export const volumesBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(volume)],
         comparator: "number_equal",
-        explanation: `Volume = ${longueur} × ${largeur} × ${hauteur} = ${volume} m³.`,
+        explanation:
+          `Définition : le volume d’un pavé droit est longueur × largeur × hauteur.\n\n` +
+          `Méthode : on multiplie les trois dimensions de la réserve.\n\n` +
+          `Calcul : ${longueur} × ${largeur} × ${hauteur} = ${volume}.\n\n` +
+          `Conclusion : le volume est ${volume} m³.`,
         canvas: solideCanvas({
           solide: "pave_droit",
           dimensions: { longueur, largeur, hauteur, volume },
@@ -755,7 +836,15 @@ export const volumesBank: TutorBankItemV4[] = [
         choices: ["solide A", "solide B", "les deux"],
         expected: [correct],
         comparator: "mcq_exact",
-        explanation: `Volume A = ${aireA} × ${hA} = ${vA} cm³. Volume B = ${aireB} × ${hB} = ${vB} cm³.`,
+        explanation:
+          `Définition : pour comparer deux solides, on compare leurs volumes.\n\n` +
+          `Méthode : on calcule chaque volume avec aire de base × hauteur.\n\n` +
+          `Calcul : A = ${aireA} × ${hA} = ${vA} cm³ ; B = ${aireB} × ${hB} = ${vB} cm³.\n\n` +
+          `Conclusion : ${
+            correct === "les deux"
+              ? "les deux solides ont le même volume"
+              : `le plus grand volume est celui de ${correct}`
+          }.`,
       };
     },
   },
@@ -782,7 +871,11 @@ export const volumesBank: TutorBankItemV4[] = [
         format: "short",
         expected: [`${coeff}π`, `${coeff} pi`, `${coeff}`],
         comparator: "contains_keyword",
-        explanation: `Le rayon vaut ${rayon} m. Volume = π × ${rayon}² × ${hauteur} = ${coeff}π m³.`,
+        explanation:
+          `Définition : le volume d’un cylindre est π × rayon² × hauteur.\n\n` +
+          `Méthode : on utilise le rayon, pas le diamètre, puis on applique la formule.\n\n` +
+          `Calcul : ${diametre} ÷ 2 = ${rayon}, puis π × ${rayon}² × ${hauteur} = ${coeff}π.\n\n` +
+          `Conclusion : le volume est ${coeff}π m³.`,
         canvas: solideCanvas({
           solide: "cylindre",
           dimensions: { rayon, hauteur },
@@ -813,7 +906,10 @@ export const volumesBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "Imagine que l’on empile la même base plusieurs fois.",
     explanation:
-      "Un prisme droit peut être vu comme une base que l’on empile sur une certaine hauteur. On multiplie donc l’aire de la base par la hauteur.",
+      "Définition : un prisme droit garde la même base tout le long de sa hauteur.\n\n" +
+      "Méthode : on imagine la base empilée régulièrement sur la hauteur.\n\n" +
+      "Calcul : aire de base × hauteur donne la place occupée par l’empilement.\n\n" +
+      "Conclusion : la formule Volume = aire de base × hauteur fonctionne pour un prisme droit.",
     tags: ["volume", "defi", "open", "raisonnement"],
   },
 ];
