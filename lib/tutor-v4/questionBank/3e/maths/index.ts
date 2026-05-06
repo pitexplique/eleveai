@@ -27,6 +27,7 @@ import { proportionnaliteBank} from "./proportionnalite.bank"
 import { pythagore3eBank } from "./pythagore.bank";
 import { fonctionsBank } from "./fonctions.bank";
 import { trigonometrieBank} from "./trigonometrie.bank"
+import { probabilitesBank } from "./probabilites.bank";
 // (tu ajouteras les autres plus tard)
 
 // =========================
@@ -42,7 +43,8 @@ export const maths3eQuestionBank: TutorBankItemV4[] = [
   ...proportionnaliteBank,
   ...pythagore3eBank,
   ...fonctionsBank,
-  ...trigonometrieBank
+  ...trigonometrieBank,
+  ...probabilitesBank
 ];
 
 export function getMaths3eQuestionBank(args?: {
