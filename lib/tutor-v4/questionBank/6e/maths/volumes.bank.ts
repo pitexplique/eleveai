@@ -28,7 +28,11 @@ export const volumesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Un volume se mesure en unités “cubes”.",
     explanation:
-      "Le volume mesure l’espace occupé par un objet en trois dimensions. On utilise donc des unités cubes, ici cm³.",
+      "Définition : un volume mesure la place occupée par un solide.\n\n" +
+      "Méthode : on compte les cubes unités ou on utilise les dimensions données.\n\n" +
+      "Calcul : " +
+      ("Le volume mesure l’espace occupé par un objet en trois dimensions. On utilise donc des unités cubes, ici cm³.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["volumes", "unite", "qcm"],
   },
   {
@@ -47,7 +51,11 @@ export const volumesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Le petit 3 indique un volume.",
     explanation:
-      "Une longueur s’écrit en m, une aire en m², et un volume en m³. L’exposant 3 correspond à trois dimensions.",
+      "Définition : un volume mesure la place occupée par un solide.\n\n" +
+      "Méthode : on compte les cubes unités ou on utilise les dimensions données.\n\n" +
+      "Calcul : " +
+      ("Une longueur s’écrit en m, une aire en m², et un volume en m³. L’exposant 3 correspond à trois dimensions.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["volumes", "unite", "qcm"],
   },
   {
@@ -66,7 +74,11 @@ export const volumesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "On peut imaginer qu’on remplit avec des petits cubes.",
     explanation:
-      "Pour mesurer un volume, on compte combien de petits cubes unités remplissent l’espace. On parle donc d’unités cubes.",
+      "Définition : un volume mesure la place occupée par un solide.\n\n" +
+      "Méthode : on compte les cubes unités ou on utilise les dimensions données.\n\n" +
+      "Calcul : " +
+      ("Pour mesurer un volume, on compte combien de petits cubes unités remplissent l’espace. On parle donc d’unités cubes.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["volumes", "unite", "qcm"],
   },
   {
@@ -85,7 +97,11 @@ export const volumesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Regarde l’exposant.",
     explanation:
-      "12 cm correspond à une longueur, 12 cm² à une aire, 12 g à une masse. Seule l’écriture 12 cm³ désigne un volume.",
+      "Définition : un volume mesure la place occupée par un solide.\n\n" +
+      "Méthode : on compte les cubes unités ou on utilise les dimensions données.\n\n" +
+      "Calcul : " +
+      ("12 cm correspond à une longueur, 12 cm² à une aire, 12 g à une masse. Seule l’écriture 12 cm³ désigne un volume.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["volumes", "unite", "qcm"],
   },
   {
@@ -104,7 +120,11 @@ export const volumesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Un grand bac occupe un espace en trois dimensions.",
     explanation:
-      "Un grand bac prend de la place en longueur, largeur et hauteur. On mesure donc son volume en mètres cubes, notés m³.",
+      "Définition : un volume mesure la place occupée par un solide.\n\n" +
+      "Méthode : on compte les cubes unités ou on utilise les dimensions données.\n\n" +
+      "Calcul : " +
+      ("Un grand bac prend de la place en longueur, largeur et hauteur. On mesure donc son volume en mètres cubes, notés m³.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["volumes", "unite", "reunion", "qcm"],
   },
 
@@ -126,7 +146,11 @@ export const volumesBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "On compte simplement les cubes.",
     explanation:
-      "Le volume en cubes unités correspond ici au nombre total de petits cubes. Comme il y en a 6, le volume est 6 cubes unités.",
+      "Définition : un volume mesure la place occupée par un solide.\n\n" +
+      "Méthode : on compte les cubes unités ou on utilise les dimensions données.\n\n" +
+      "Calcul : " +
+      ("Le volume en cubes unités correspond ici au nombre total de petits cubes. Comme il y en a 6, le volume est 6 cubes unités.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["volumes", "compter"],
   },
   {
@@ -144,7 +168,11 @@ export const volumesBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Le volume correspond ici au nombre de cubes.",
     explanation:
-      "Chaque cube unité compte pour 1 unité de volume. Avec 10 cubes unités, le volume est donc 10.",
+      "Définition : un volume mesure la place occupée par un solide.\n\n" +
+      "Méthode : on compte les cubes unités ou on utilise les dimensions données.\n\n" +
+      "Calcul : " +
+      ("Chaque cube unité compte pour 1 unité de volume. Avec 10 cubes unités, le volume est donc 10.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["volumes", "compter"],
   },
   {
@@ -162,7 +190,11 @@ export const volumesBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "2 × 4 cubes.",
     explanation:
-      "Il y a 2 rangées de 4 cubes. Donc le nombre total de cubes est 2 × 4 = 8. Le volume est 8 cubes unités.",
+      "Définition : un volume mesure la place occupée par un solide.\n\n" +
+      "Méthode : on compte les cubes unités ou on utilise les dimensions données.\n\n" +
+      "Calcul : " +
+      ("Il y a 2 rangées de 4 cubes. Donc le nombre total de cubes est 2 × 4 = 8. Le volume est 8 cubes unités.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["volumes", "compter"],
   },
   {
@@ -181,7 +213,11 @@ export const volumesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "On compte les cubes unités.",
     explanation:
-      "Le volume d’un solide construit avec des cubes unités est égal au nombre de cubes. Ici, 12 cubes donnent un volume de 12.",
+      "Définition : un volume mesure la place occupée par un solide.\n\n" +
+      "Méthode : on compte les cubes unités ou on utilise les dimensions données.\n\n" +
+      "Calcul : " +
+      ("Le volume d’un solide construit avec des cubes unités est égal au nombre de cubes. Ici, 12 cubes donnent un volume de 12.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["volumes", "compter", "qcm"],
   },
   {
@@ -200,7 +236,11 @@ export const volumesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "3 × 5 cubes.",
     explanation:
-      "Chaque couche contient 5 cubes et il y a 3 couches. On calcule donc 3 × 5 = 15. Le volume est 15 cubes unités.",
+      "Définition : un volume mesure la place occupée par un solide.\n\n" +
+      "Méthode : on compte les cubes unités ou on utilise les dimensions données.\n\n" +
+      "Calcul : " +
+      ("Chaque couche contient 5 cubes et il y a 3 couches. On calcule donc 3 × 5 = 15. Le volume est 15 cubes unités.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["volumes", "compter", "qcm"],
   },
 
@@ -222,7 +262,11 @@ export const volumesBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "Compare les nombres 8 et 12.",
     explanation:
-      "Les deux volumes sont exprimés dans la même unité. Il suffit donc de comparer 8 et 12. Comme 12 est plus grand, 12 cm³ est le plus grand volume.",
+      "Définition : un volume mesure la place occupée par un solide.\n\n" +
+      "Méthode : on compte les cubes unités ou on utilise les dimensions données.\n\n" +
+      "Calcul : " +
+      ("Les deux volumes sont exprimés dans la même unité. Il suffit donc de comparer 8 et 12. Comme 12 est plus grand, 12 cm³ est le plus grand volume.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["volumes", "comparer"],
   },
   {
@@ -240,7 +284,11 @@ export const volumesBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "Compare les nombres 15 et 9.",
     explanation:
-      "Comme les unités sont les mêmes, on compare seulement les nombres. 9 est plus petit que 15, donc 9 cm³ est le plus petit volume.",
+      "Définition : un volume mesure la place occupée par un solide.\n\n" +
+      "Méthode : on compte les cubes unités ou on utilise les dimensions données.\n\n" +
+      "Calcul : " +
+      ("Comme les unités sont les mêmes, on compare seulement les nombres. 9 est plus petit que 15, donc 9 cm³ est le plus petit volume.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["volumes", "comparer"],
   },
   {
@@ -259,7 +307,11 @@ export const volumesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Choisis le plus grand nombre.",
     explanation:
-      "Tous les volumes sont en cm³. Le plus grand nombre proposé est 11, donc le plus grand volume est 11 cm³.",
+      "Définition : un volume mesure la place occupée par un solide.\n\n" +
+      "Méthode : on compte les cubes unités ou on utilise les dimensions données.\n\n" +
+      "Calcul : " +
+      ("Tous les volumes sont en cm³. Le plus grand nombre proposé est 11, donc le plus grand volume est 11 cm³.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["volumes", "comparer", "qcm"],
   },
   {
@@ -278,7 +330,11 @@ export const volumesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Le plus de cubes donne le plus grand volume.",
     explanation:
-      "Le volume dépend ici du nombre de cubes unités. Le solide A contient 14 cubes contre 12 pour B, donc A a le plus grand volume.",
+      "Définition : un volume mesure la place occupée par un solide.\n\n" +
+      "Méthode : on compte les cubes unités ou on utilise les dimensions données.\n\n" +
+      "Calcul : " +
+      ("Le volume dépend ici du nombre de cubes unités. Le solide A contient 14 cubes contre 12 pour B, donc A a le plus grand volume.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["volumes", "comparer", "qcm"],
   },
   {
@@ -296,7 +352,11 @@ export const volumesBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "Le plus grand nombre donne le plus grand volume.",
     explanation:
-      "Comme les deux volumes sont donnés en cm³, on compare 18 et 25. Le plus grand est 25, donc le bac de 25 cm³ contient le plus.",
+      "Définition : un volume mesure la place occupée par un solide.\n\n" +
+      "Méthode : on compte les cubes unités ou on utilise les dimensions données.\n\n" +
+      "Calcul : " +
+      ("Comme les deux volumes sont donnés en cm³, on compare 18 et 25. Le plus grand est 25, donc le bac de 25 cm³ contient le plus.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["volumes", "comparer", "reunion"],
   },
 
@@ -318,7 +378,11 @@ export const volumesBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "On additionne les cubes.",
     explanation:
-      "Quand on assemble deux solides sans enlever de cubes, on additionne leurs volumes. Ici 4 + 3 = 7.",
+      "Définition : un volume mesure la place occupée par un solide.\n\n" +
+      "Méthode : on compte les cubes unités ou on utilise les dimensions données.\n\n" +
+      "Calcul : " +
+      ("Quand on assemble deux solides sans enlever de cubes, on additionne leurs volumes. Ici 4 + 3 = 7.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["volumes", "assemblage"],
   },
   {
@@ -336,7 +400,11 @@ export const volumesBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "6 + 5.",
     explanation:
-      "Le volume total est la somme des cubes des deux solides : 6 + 5 = 11.",
+      "Définition : un volume mesure la place occupée par un solide.\n\n" +
+      "Méthode : on compte les cubes unités ou on utilise les dimensions données.\n\n" +
+      "Calcul : " +
+      ("Le volume total est la somme des cubes des deux solides : 6 + 5 = 11.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["volumes", "assemblage"],
   },
   {
@@ -355,7 +423,11 @@ export const volumesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Additionne 8 et 4.",
     explanation:
-      "Assembler 8 cubes et 4 cubes donne un total de 12 cubes. Le volume total est donc 12.",
+      "Définition : un volume mesure la place occupée par un solide.\n\n" +
+      "Méthode : on compte les cubes unités ou on utilise les dimensions données.\n\n" +
+      "Calcul : " +
+      ("Assembler 8 cubes et 4 cubes donne un total de 12 cubes. Le volume total est donc 12.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["volumes", "assemblage", "qcm"],
   },
   {
@@ -374,7 +446,11 @@ export const volumesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Le volume total reste le même.",
     explanation:
-      "Couper puis réassembler ne change pas le nombre total de cubes. Comme 4 + 6 = 10, on retrouve un volume de 10.",
+      "Définition : un volume mesure la place occupée par un solide.\n\n" +
+      "Méthode : on compte les cubes unités ou on utilise les dimensions données.\n\n" +
+      "Calcul : " +
+      ("Couper puis réassembler ne change pas le nombre total de cubes. Comme 4 + 6 = 10, on retrouve un volume de 10.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["volumes", "assemblage", "qcm"],
   },
 
@@ -396,7 +472,11 @@ export const volumesBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Lis le nombre avant l’unité.",
     explanation:
-      "Dans 18 cm³, le nombre 18 indique la quantité de volume. Le volume vaut donc 18 cm³.",
+      "Définition : un volume mesure la place occupée par un solide.\n\n" +
+      "Méthode : on compte les cubes unités ou on utilise les dimensions données.\n\n" +
+      "Calcul : " +
+      ("Dans 18 cm³, le nombre 18 indique la quantité de volume. Le volume vaut donc 18 cm³.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["volumes", "lire"],
   },
   {
@@ -414,7 +494,11 @@ export const volumesBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "24 cm³ = 24 cubes de 1 cm³.",
     explanation:
-      "Un cube unité de 1 cm³ compte pour 1. Donc un volume de 24 cm³ correspond à 24 cubes unités.",
+      "Définition : un volume mesure la place occupée par un solide.\n\n" +
+      "Méthode : on compte les cubes unités ou on utilise les dimensions données.\n\n" +
+      "Calcul : " +
+      ("Un cube unité de 1 cm³ compte pour 1. Donc un volume de 24 cm³ correspond à 24 cubes unités.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["volumes", "lire"],
   },
   {
@@ -433,7 +517,11 @@ export const volumesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "On lit directement le nombre.",
     explanation:
-      "Dans l’écriture 9 m³, le nombre qui donne la valeur du volume est 9.",
+      "Définition : un volume mesure la place occupée par un solide.\n\n" +
+      "Méthode : on compte les cubes unités ou on utilise les dimensions données.\n\n" +
+      "Calcul : " +
+      ("Dans l’écriture 9 m³, le nombre qui donne la valeur du volume est 9.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["volumes", "lire", "qcm"],
   },
   {
@@ -452,7 +540,11 @@ export const volumesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Lis le nombre avant l’unité.",
     explanation:
-      "Tous les volumes sont donnés dans la même unité. Le plus grand nombre est 14, donc le plus grand volume est 14 cm³.",
+      "Définition : un volume mesure la place occupée par un solide.\n\n" +
+      "Méthode : on compte les cubes unités ou on utilise les dimensions données.\n\n" +
+      "Calcul : " +
+      ("Tous les volumes sont donnés dans la même unité. Le plus grand nombre est 14, donc le plus grand volume est 14 cm³.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["volumes", "lire", "qcm"],
   },
   {
@@ -470,7 +562,11 @@ export const volumesBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Le nombre donne directement le volume en cubes unités de 1 cm³.",
     explanation:
-      "Si chaque cube unité vaut 1 cm³, alors 30 cm³ correspond à 30 cubes unités.",
+      "Définition : un volume mesure la place occupée par un solide.\n\n" +
+      "Méthode : on compte les cubes unités ou on utilise les dimensions données.\n\n" +
+      "Calcul : " +
+      ("Si chaque cube unité vaut 1 cm³, alors 30 cm³ correspond à 30 cubes unités.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["volumes", "lire", "reunion"],
   },
 
@@ -492,7 +588,11 @@ export const volumesBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "Une aire est en 2 dimensions, un volume en 3 dimensions.",
     explanation:
-      "Une aire mesure une surface, donc une grandeur en 2 dimensions : elle s’exprime en cm². Un volume mesure un espace en 3 dimensions : il s’exprime en cm³.",
+      "Définition : un volume mesure la place occupée par un solide.\n\n" +
+      "Méthode : on compte les cubes unités ou on utilise les dimensions données.\n\n" +
+      "Calcul : " +
+      ("Une aire mesure une surface, donc une grandeur en 2 dimensions : elle s’exprime en cm². Un volume mesure un espace en 3 dimensions : il s’exprime en cm³.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["volumes", "defi", "raisonnement"],
   },
   {
@@ -510,7 +610,11 @@ export const volumesBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "Plus il y a de cubes, plus le volume est grand.",
     explanation:
-      "Le volume correspond ici au nombre de cubes unités. Comme 12 cubes est plus grand que 9 cubes, le solide de 12 cubes a le plus grand volume.",
+      "Définition : un volume mesure la place occupée par un solide.\n\n" +
+      "Méthode : on compte les cubes unités ou on utilise les dimensions données.\n\n" +
+      "Calcul : " +
+      ("Le volume correspond ici au nombre de cubes unités. Comme 12 cubes est plus grand que 9 cubes, le solide de 12 cubes a le plus grand volume.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["volumes", "defi", "raisonnement"],
   },
   {
@@ -528,7 +632,11 @@ export const volumesBank: TutorBankItemV4[] = [
     comparator: "exact_text",
     hint: "Choisis un nombre strictement entre 10 et 15.",
     explanation:
-      "Un nombre compris strictement entre 10 et 15 peut être 11, 12, 13 ou 14. Chacun convient comme exemple.",
+      "Définition : un volume mesure la place occupée par un solide.\n\n" +
+      "Méthode : on compte les cubes unités ou on utilise les dimensions données.\n\n" +
+      "Calcul : " +
+      ("Un nombre compris strictement entre 10 et 15 peut être 11, 12, 13 ou 14. Chacun convient comme exemple.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["volumes", "defi", "raisonnement"],
   },
   {
@@ -546,7 +654,11 @@ export const volumesBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Additionne les deux volumes.",
     explanation:
-      "Quand on réunit deux volumes, on les additionne. Ici 18 + 12 = 30 cm³.",
+      "Définition : un volume mesure la place occupée par un solide.\n\n" +
+      "Méthode : on compte les cubes unités ou on utilise les dimensions données.\n\n" +
+      "Calcul : " +
+      ("Quand on réunit deux volumes, on les additionne. Ici 18 + 12 = 30 cm³.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["volumes", "defi", "reunion"],
   },
 
@@ -573,7 +685,11 @@ export const volumesBank: TutorBankItemV4[] = [
         expected: ["cm³"],
         comparator: "mcq_exact",
         explanation:
-          "Un volume mesure un espace en trois dimensions. On utilise donc une unité cube, ici cm³.",
+          "Définition : un volume mesure la place occupée par un solide.\n\n" +
+          "Méthode : on compte les cubes unités ou on utilise les dimensions données.\n\n" +
+          "Calcul : " +
+          ("Un volume mesure un espace en trois dimensions. On utilise donc une unité cube, ici cm³.") +
+          "\n\nConclusion : on garde la réponse obtenue.",
       };
     },
   },
@@ -600,7 +716,11 @@ export const volumesBank: TutorBankItemV4[] = [
         choices: shuffle([good, ...badBase]),
         expected: [good],
         comparator: "mcq_exact",
-        explanation: `L’écriture correcte est ${good}, car un volume s’écrit avec un exposant 3.`,
+        explanation: "Définition : un volume mesure la place occupée par un solide.\n\n" +
+          "Méthode : on compte les cubes unités ou on utilise les dimensions données.\n\n" +
+          "Calcul : " +
+          (`L’écriture correcte est ${good}, car un volume s’écrit avec un exposant 3.`) +
+          "\n\nConclusion : on garde la réponse obtenue.",
       };
     },
   },
@@ -626,7 +746,11 @@ export const volumesBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(n)],
         comparator: "number_equal",
-        explanation: `Le volume est égal au nombre de cubes unités. Comme il y a ${n} cubes, le volume vaut ${n}.`,
+        explanation: "Définition : un volume mesure la place occupée par un solide.\n\n" +
+          "Méthode : on compte les cubes unités ou on utilise les dimensions données.\n\n" +
+          "Calcul : " +
+          (`Le volume est égal au nombre de cubes unités. Comme il y a ${n} cubes, le volume vaut ${n}.`) +
+          "\n\nConclusion : on garde la réponse obtenue.",
       };
     },
   },
@@ -649,9 +773,13 @@ export const volumesBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(a * b)],
         comparator: "number_equal",
-        explanation: `Il y a ${a} couches de ${b} cubes. On calcule donc ${a} × ${b} = ${
+        explanation: "Définition : un volume mesure la place occupée par un solide.\n\n" +
+          "Méthode : on compte les cubes unités ou on utilise les dimensions données.\n\n" +
+          "Calcul : " +
+          (`Il y a ${a} couches de ${b} cubes. On calcule donc ${a} × ${b} = ${
           a * b
-        }.`,
+        }.`) +
+          "\n\nConclusion : on garde la réponse obtenue.",
       };
     },
   },
@@ -681,7 +809,11 @@ export const volumesBank: TutorBankItemV4[] = [
         ]),
         expected: [String(good)],
         comparator: "mcq_exact",
-        explanation: `Le nombre total de cubes est ${a} × ${b} = ${good}. Le volume vaut donc ${good}.`,
+        explanation: "Définition : un volume mesure la place occupée par un solide.\n\n" +
+          "Méthode : on compte les cubes unités ou on utilise les dimensions données.\n\n" +
+          "Calcul : " +
+          (`Le nombre total de cubes est ${a} × ${b} = ${good}. Le volume vaut donc ${good}.`) +
+          "\n\nConclusion : on garde la réponse obtenue.",
       };
     },
   },
@@ -711,7 +843,11 @@ export const volumesBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(good), `${good} cm³`, `${good} cm3`],
         comparator: "contains_keyword",
-        explanation: `Comme les deux volumes sont dans la même unité, on compare ${a} et ${b}. Le plus grand est ${good}.`,
+        explanation: "Définition : un volume mesure la place occupée par un solide.\n\n" +
+          "Méthode : on compte les cubes unités ou on utilise les dimensions données.\n\n" +
+          "Calcul : " +
+          (`Comme les deux volumes sont dans la même unité, on compare ${a} et ${b}. Le plus grand est ${good}.`) +
+          "\n\nConclusion : on garde la réponse obtenue.",
       };
     },
   },
@@ -741,7 +877,11 @@ export const volumesBank: TutorBankItemV4[] = [
         choices: values.map((v) => `${v} cm³`),
         expected: [`${good} cm³`],
         comparator: "mcq_exact",
-        explanation: `Le plus grand des nombres proposés est ${good}. Le plus grand volume est donc ${good} cm³.`,
+        explanation: "Définition : un volume mesure la place occupée par un solide.\n\n" +
+          "Méthode : on compte les cubes unités ou on utilise les dimensions données.\n\n" +
+          "Calcul : " +
+          (`Le plus grand des nombres proposés est ${good}. Le plus grand volume est donc ${good} cm³.`) +
+          "\n\nConclusion : on garde la réponse obtenue.",
       };
     },
   },
@@ -768,7 +908,11 @@ export const volumesBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(a + b)],
         comparator: "number_equal",
-        explanation: `On additionne les volumes : ${a} + ${b} = ${a + b}.`,
+        explanation: "Définition : un volume mesure la place occupée par un solide.\n\n" +
+          "Méthode : on compte les cubes unités ou on utilise les dimensions données.\n\n" +
+          "Calcul : " +
+          (`On additionne les volumes : ${a} + ${b} = ${a + b}.`) +
+          "\n\nConclusion : on garde la réponse obtenue.",
       };
     },
   },
@@ -798,7 +942,11 @@ export const volumesBank: TutorBankItemV4[] = [
         ]),
         expected: [String(good)],
         comparator: "mcq_exact",
-        explanation: `Le volume total est ${a} + ${b} = ${good}.`,
+        explanation: "Définition : un volume mesure la place occupée par un solide.\n\n" +
+          "Méthode : on compte les cubes unités ou on utilise les dimensions données.\n\n" +
+          "Calcul : " +
+          (`Le volume total est ${a} + ${b} = ${good}.`) +
+          "\n\nConclusion : on garde la réponse obtenue.",
       };
     },
   },
@@ -824,7 +972,11 @@ export const volumesBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(n)],
         comparator: "number_equal",
-        explanation: `Dans ${n} cm³, le nombre qui indique la valeur du volume est ${n}.`,
+        explanation: "Définition : un volume mesure la place occupée par un solide.\n\n" +
+          "Méthode : on compte les cubes unités ou on utilise les dimensions données.\n\n" +
+          "Calcul : " +
+          (`Dans ${n} cm³, le nombre qui indique la valeur du volume est ${n}.`) +
+          "\n\nConclusion : on garde la réponse obtenue.",
       };
     },
   },
@@ -854,7 +1006,11 @@ export const volumesBank: TutorBankItemV4[] = [
         choices: values.map((v) => `${v} cm³`),
         expected: [`${good} cm³`],
         comparator: "mcq_exact",
-        explanation: `Le plus grand nombre proposé est ${good}. Le plus grand volume est donc ${good} cm³.`,
+        explanation: "Définition : un volume mesure la place occupée par un solide.\n\n" +
+          "Méthode : on compte les cubes unités ou on utilise les dimensions données.\n\n" +
+          "Calcul : " +
+          (`Le plus grand nombre proposé est ${good}. Le plus grand volume est donc ${good} cm³.`) +
+          "\n\nConclusion : on garde la réponse obtenue.",
       };
     },
   },
@@ -883,7 +1039,11 @@ export const volumesBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(bigger)],
         comparator: "contains_keyword",
-        explanation: `Le solide qui contient le plus de cubes a le plus grand volume. Entre ${a} et ${b}, le plus grand est ${bigger}.`,
+        explanation: "Définition : un volume mesure la place occupée par un solide.\n\n" +
+          "Méthode : on compte les cubes unités ou on utilise les dimensions données.\n\n" +
+          "Calcul : " +
+          (`Le solide qui contient le plus de cubes a le plus grand volume. Entre ${a} et ${b}, le plus grand est ${bigger}.`) +
+          "\n\nConclusion : on garde la réponse obtenue.",
       };
     },
   },
@@ -912,9 +1072,13 @@ export const volumesBank: TutorBankItemV4[] = [
         format: "short",
         expected: validAnswers,
         comparator: "exact_text",
-        explanation: `Il faut choisir un nombre strictement compris entre ${low} et ${high}. Par exemple : ${validAnswers.join(
+        explanation: "Définition : un volume mesure la place occupée par un solide.\n\n" +
+          "Méthode : on compte les cubes unités ou on utilise les dimensions données.\n\n" +
+          "Calcul : " +
+          (`Il faut choisir un nombre strictement compris entre ${low} et ${high}. Par exemple : ${validAnswers.join(
           ", "
-        )}.`,
+        )}.`) +
+          "\n\nConclusion : on garde la réponse obtenue.",
       };
     },
   },

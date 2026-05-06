@@ -28,7 +28,11 @@ export const airesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "L’aire mesure la place occupée à l’intérieur.",
     explanation:
-      "L’aire mesure la surface occupée par une figure, c’est-à-dire tout l’intérieur de la figure.",
+      "Définition : une aire mesure la surface occupée par une figure.\n\n" +
+      "Méthode : on repère la figure, les mesures utiles ou les carreaux, puis on applique la formule adaptée.\n\n" +
+      "Calcul : " +
+      ("L’aire mesure la surface occupée par une figure, c’est-à-dire tout l’intérieur de la figure.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["aires", "comprendre", "qcm"],
   },
   {
@@ -47,7 +51,11 @@ export const airesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Une aire se mesure en unités carrées.",
     explanation:
-      "Une aire se mesure avec des unités carrées. Par exemple, on utilise cm² pour mesurer une surface.",
+      "Définition : une aire mesure la surface occupée par une figure.\n\n" +
+      "Méthode : on repère la figure, les mesures utiles ou les carreaux, puis on applique la formule adaptée.\n\n" +
+      "Calcul : " +
+      ("Une aire se mesure avec des unités carrées. Par exemple, on utilise cm² pour mesurer une surface.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["aires", "comprendre", "qcm"],
   },
   {
@@ -66,7 +74,11 @@ export const airesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Cherche l’unité carrée.",
     explanation:
-      "15 cm est une longueur, 15 cm³ un volume, 15 kg une masse. Une aire s’écrit ici 15 cm².",
+      "Définition : une aire mesure la surface occupée par une figure.\n\n" +
+      "Méthode : on repère la figure, les mesures utiles ou les carreaux, puis on applique la formule adaptée.\n\n" +
+      "Calcul : " +
+      ("15 cm est une longueur, 15 cm³ un volume, 15 kg une masse. Une aire s’écrit ici 15 cm².") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["aires", "comprendre", "qcm"],
   },
   {
@@ -85,7 +97,11 @@ export const airesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Une surface se mesure en unités carrées.",
     explanation:
-      "La surface d’un jardin est une aire. On la mesure donc en mètres carrés, notés m².",
+      "Définition : une aire mesure la surface occupée par une figure.\n\n" +
+      "Méthode : on repère la figure, les mesures utiles ou les carreaux, puis on applique la formule adaptée.\n\n" +
+      "Calcul : " +
+      ("La surface d’un jardin est une aire. On la mesure donc en mètres carrés, notés m².") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["aires", "comprendre", "reunion", "qcm"],
   },
   {
@@ -104,7 +120,11 @@ export const airesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Pour l’aire du rectangle, on multiplie longueur et largeur.",
     explanation:
-      "Pour un rectangle de 5 cm sur 4 cm, l’aire vaut 5 × 4 = 20 cm². Le périmètre vaudrait 18 cm.",
+      "Définition : une aire mesure la surface occupée par une figure.\n\n" +
+      "Méthode : on repère la figure, les mesures utiles ou les carreaux, puis on applique la formule adaptée.\n\n" +
+      "Calcul : " +
+      ("Pour un rectangle de 5 cm sur 4 cm, l’aire vaut 5 × 4 = 20 cm². Le périmètre vaudrait 18 cm.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["aires", "comprendre", "confusion", "qcm"],
   },
 
@@ -126,7 +146,11 @@ export const airesBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "On compte les carreaux unités.",
     explanation:
-      "Quand on mesure une aire par comptage, on compte les carreaux unités. Ici, 6 carreaux donnent une aire de 6 unités d’aire.",
+      "Définition : une aire mesure la surface occupée par une figure.\n\n" +
+      "Méthode : on repère la figure, les mesures utiles ou les carreaux, puis on applique la formule adaptée.\n\n" +
+      "Calcul : " +
+      ("Quand on mesure une aire par comptage, on compte les carreaux unités. Ici, 6 carreaux donnent une aire de 6 unités d’aire.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["aires", "compter"],
   },
   {
@@ -144,7 +168,11 @@ export const airesBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "L’aire est égale au nombre de carreaux unités.",
     explanation:
-      "L’aire d’une figure mesurée sur quadrillage est le nombre de carreaux unités qu’elle recouvre. Ici, cela fait 12.",
+      "Définition : une aire mesure la surface occupée par une figure.\n\n" +
+      "Méthode : on repère la figure, les mesures utiles ou les carreaux, puis on applique la formule adaptée.\n\n" +
+      "Calcul : " +
+      ("L’aire d’une figure mesurée sur quadrillage est le nombre de carreaux unités qu’elle recouvre. Ici, cela fait 12.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["aires", "compter"],
   },
   {
@@ -163,7 +191,11 @@ export const airesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "On compte les carreaux.",
     explanation:
-      "Chaque carreau unité compte pour 1 unité d’aire. Avec 9 carreaux, l’aire est donc 9.",
+      "Définition : une aire mesure la surface occupée par une figure.\n\n" +
+      "Méthode : on repère la figure, les mesures utiles ou les carreaux, puis on applique la formule adaptée.\n\n" +
+      "Calcul : " +
+      ("Chaque carreau unité compte pour 1 unité d’aire. Avec 9 carreaux, l’aire est donc 9.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["aires", "compter", "qcm"],
   },
   {
@@ -182,7 +214,11 @@ export const airesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "3 × 4 carreaux.",
     explanation:
-      "Il y a 3 rangées de 4 carreaux, donc 3 × 4 = 12 carreaux unités. L’aire est 12.",
+      "Définition : une aire mesure la surface occupée par une figure.\n\n" +
+      "Méthode : on repère la figure, les mesures utiles ou les carreaux, puis on applique la formule adaptée.\n\n" +
+      "Calcul : " +
+      ("Il y a 3 rangées de 4 carreaux, donc 3 × 4 = 12 carreaux unités. L’aire est 12.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["aires", "compter", "qcm"],
   },
   {
@@ -200,7 +236,11 @@ export const airesBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Compte les carreaux remplis.",
     explanation:
-      "La figure recouvre 5 carreaux unités. Son aire vaut donc 5 unités d’aire.",
+      "Définition : une aire mesure la surface occupée par une figure.\n\n" +
+      "Méthode : on repère la figure, les mesures utiles ou les carreaux, puis on applique la formule adaptée.\n\n" +
+      "Calcul : " +
+      ("La figure recouvre 5 carreaux unités. Son aire vaut donc 5 unités d’aire.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["aires", "compter", "canvas"],
     canvas: {
       kind: "figure_libre",
@@ -237,7 +277,11 @@ export const airesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Compte uniquement les carreaux remplis.",
     explanation:
-      "La figure recouvre 6 carreaux unités. Son aire vaut donc 6 unités d’aire.",
+      "Définition : une aire mesure la surface occupée par une figure.\n\n" +
+      "Méthode : on repère la figure, les mesures utiles ou les carreaux, puis on applique la formule adaptée.\n\n" +
+      "Calcul : " +
+      ("La figure recouvre 6 carreaux unités. Son aire vaut donc 6 unités d’aire.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["aires", "compter", "canvas", "qcm"],
     canvas: {
       kind: "figure_libre",
@@ -278,7 +322,11 @@ export const airesBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Aire du rectangle = longueur × largeur.",
     explanation:
-      "L’aire d’un rectangle se calcule en multipliant la longueur par la largeur : 4 × 3 = 12. L’aire est donc 12 cm².",
+      "Définition : une aire mesure la surface occupée par une figure.\n\n" +
+      "Méthode : on repère la figure, les mesures utiles ou les carreaux, puis on applique la formule adaptée.\n\n" +
+      "Calcul : " +
+      ("L’aire d’un rectangle se calcule en multipliant la longueur par la largeur : 4 × 3 = 12. L’aire est donc 12 cm².") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["aires", "rectangle"],
   },
   {
@@ -297,7 +345,11 @@ export const airesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Pour l’aire, on multiplie longueur et largeur.",
     explanation:
-      "On applique la formule de l’aire du rectangle : 6 × 4 = 24. L’aire est donc 24 cm².",
+      "Définition : une aire mesure la surface occupée par une figure.\n\n" +
+      "Méthode : on repère la figure, les mesures utiles ou les carreaux, puis on applique la formule adaptée.\n\n" +
+      "Calcul : " +
+      ("On applique la formule de l’aire du rectangle : 6 × 4 = 24. L’aire est donc 24 cm².") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["aires", "rectangle", "qcm"],
   },
   {
@@ -316,7 +368,11 @@ export const airesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Attention à ne pas confondre aire et périmètre.",
     explanation:
-      "L’aire d’un rectangle est longueur × largeur. Ici, 8 × 5 = 40. L’aire est donc 40 cm².",
+      "Définition : une aire mesure la surface occupée par une figure.\n\n" +
+      "Méthode : on repère la figure, les mesures utiles ou les carreaux, puis on applique la formule adaptée.\n\n" +
+      "Calcul : " +
+      ("L’aire d’un rectangle est longueur × largeur. Ici, 8 × 5 = 40. L’aire est donc 40 cm².") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["aires", "rectangle", "confusion", "qcm"],
   },
   {
@@ -334,7 +390,11 @@ export const airesBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Multiplie la longueur par la largeur.",
     explanation:
-      "Le rectangle a une longueur de 6 cm et une largeur de 3 cm. Son aire vaut 6 × 3 = 18 cm².",
+      "Définition : une aire mesure la surface occupée par une figure.\n\n" +
+      "Méthode : on repère la figure, les mesures utiles ou les carreaux, puis on applique la formule adaptée.\n\n" +
+      "Calcul : " +
+      ("Le rectangle a une longueur de 6 cm et une largeur de 3 cm. Son aire vaut 6 × 3 = 18 cm².") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["aires", "rectangle", "canvas"],
     canvas: {
       kind: "quadrilatere",
@@ -379,7 +439,11 @@ export const airesBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Aire du carré = côté × côté.",
     explanation:
-      "Dans un carré, les côtés sont égaux. On calcule donc 5 × 5 = 25. L’aire est 25 cm².",
+      "Définition : une aire mesure la surface occupée par une figure.\n\n" +
+      "Méthode : on repère la figure, les mesures utiles ou les carreaux, puis on applique la formule adaptée.\n\n" +
+      "Calcul : " +
+      ("Dans un carré, les côtés sont égaux. On calcule donc 5 × 5 = 25. L’aire est 25 cm².") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["aires", "carre"],
   },
   {
@@ -398,7 +462,11 @@ export const airesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Il faut multiplier le côté par lui-même.",
     explanation:
-      "L’aire d’un carré de côté 7 cm vaut 7 × 7 = 49. La bonne réponse est 49 cm².",
+      "Définition : une aire mesure la surface occupée par une figure.\n\n" +
+      "Méthode : on repère la figure, les mesures utiles ou les carreaux, puis on applique la formule adaptée.\n\n" +
+      "Calcul : " +
+      ("L’aire d’un carré de côté 7 cm vaut 7 × 7 = 49. La bonne réponse est 49 cm².") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["aires", "carre", "qcm"],
   },
   {
@@ -417,7 +485,11 @@ export const airesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Un carré de côté 9 a une aire de 9 × 9.",
     explanation:
-      "Pour un carré, on calcule côté × côté. Ici 9 × 9 = 81. L’aire est donc 81 cm².",
+      "Définition : une aire mesure la surface occupée par une figure.\n\n" +
+      "Méthode : on repère la figure, les mesures utiles ou les carreaux, puis on applique la formule adaptée.\n\n" +
+      "Calcul : " +
+      ("Pour un carré, on calcule côté × côté. Ici 9 × 9 = 81. L’aire est donc 81 cm².") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["aires", "carre", "confusion", "qcm"],
   },
   {
@@ -435,7 +507,11 @@ export const airesBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Dans un carré, on fait côté × côté.",
     explanation:
-      "Le côté du carré mesure 4 cm. Son aire vaut donc 4 × 4 = 16 cm².",
+      "Définition : une aire mesure la surface occupée par une figure.\n\n" +
+      "Méthode : on repère la figure, les mesures utiles ou les carreaux, puis on applique la formule adaptée.\n\n" +
+      "Calcul : " +
+      ("Le côté du carré mesure 4 cm. Son aire vaut donc 4 × 4 = 16 cm².") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["aires", "carre", "canvas"],
     canvas: {
       kind: "quadrilatere",
@@ -479,7 +555,11 @@ export const airesBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "Compare les nombres 12 et 15.",
     explanation:
-      "Les deux aires sont dans la même unité. On compare donc 12 et 15. Comme 15 est plus grand, 15 cm² est la plus grande aire.",
+      "Définition : une aire mesure la surface occupée par une figure.\n\n" +
+      "Méthode : on repère la figure, les mesures utiles ou les carreaux, puis on applique la formule adaptée.\n\n" +
+      "Calcul : " +
+      ("Les deux aires sont dans la même unité. On compare donc 12 et 15. Comme 15 est plus grand, 15 cm² est la plus grande aire.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["aires", "comparer"],
   },
   {
@@ -497,7 +577,11 @@ export const airesBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "Compare les nombres.",
     explanation:
-      "Comme les unités sont identiques, il suffit de comparer 20 et 9. La plus petite aire est 9 cm².",
+      "Définition : une aire mesure la surface occupée par une figure.\n\n" +
+      "Méthode : on repère la figure, les mesures utiles ou les carreaux, puis on applique la formule adaptée.\n\n" +
+      "Calcul : " +
+      ("Comme les unités sont identiques, il suffit de comparer 20 et 9. La plus petite aire est 9 cm².") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["aires", "comparer"],
   },
   {
@@ -516,7 +600,11 @@ export const airesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Choisis la plus grande valeur.",
     explanation:
-      "La plus grande des quatre aires proposées est 14 cm². C’est donc la bonne réponse.",
+      "Définition : une aire mesure la surface occupée par une figure.\n\n" +
+      "Méthode : on repère la figure, les mesures utiles ou les carreaux, puis on applique la formule adaptée.\n\n" +
+      "Calcul : " +
+      ("La plus grande des quatre aires proposées est 14 cm². C’est donc la bonne réponse.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["aires", "comparer", "qcm"],
   },
   {
@@ -534,7 +622,11 @@ export const airesBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "Le plus grand nombre donne la plus grande aire.",
     explanation:
-      "18 m² et 21 m² sont deux aires. Comme 21 est plus grand que 18, le potager de 21 m² est le plus grand.",
+      "Définition : une aire mesure la surface occupée par une figure.\n\n" +
+      "Méthode : on repère la figure, les mesures utiles ou les carreaux, puis on applique la formule adaptée.\n\n" +
+      "Calcul : " +
+      ("18 m² et 21 m² sont deux aires. Comme 21 est plus grand que 18, le potager de 21 m² est le plus grand.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["aires", "comparer", "reunion"],
   },
   {
@@ -553,7 +645,11 @@ export const airesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "L’aire du carré vaut côté × côté.",
     explanation:
-      "Les aires valent 9 cm², 16 cm², 25 cm² et 36 cm². La plus grande aire est celle du carré de côté 6 cm.",
+      "Définition : une aire mesure la surface occupée par une figure.\n\n" +
+      "Méthode : on repère la figure, les mesures utiles ou les carreaux, puis on applique la formule adaptée.\n\n" +
+      "Calcul : " +
+      ("Les aires valent 9 cm², 16 cm², 25 cm² et 36 cm². La plus grande aire est celle du carré de côté 6 cm.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["aires", "comparer", "qcm", "carre"],
   },
 
@@ -575,7 +671,11 @@ export const airesBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "On additionne les aires des deux rectangles.",
     explanation:
-      "Quand une figure est décomposée en deux rectangles sans chevauchement, on additionne les aires : 8 + 5 = 13 cm².",
+      "Définition : une aire mesure la surface occupée par une figure.\n\n" +
+      "Méthode : on repère la figure, les mesures utiles ou les carreaux, puis on applique la formule adaptée.\n\n" +
+      "Calcul : " +
+      ("Quand une figure est décomposée en deux rectangles sans chevauchement, on additionne les aires : 8 + 5 = 13 cm².") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["aires", "decomposer"],
   },
   {
@@ -593,7 +693,11 @@ export const airesBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Additionne les aires des deux parties.",
     explanation:
-      "On décompose la figure en deux parties simples : 12 cm² et 9 cm². Leur somme vaut 21 cm².",
+      "Définition : une aire mesure la surface occupée par une figure.\n\n" +
+      "Méthode : on repère la figure, les mesures utiles ou les carreaux, puis on applique la formule adaptée.\n\n" +
+      "Calcul : " +
+      ("On décompose la figure en deux parties simples : 12 cm² et 9 cm². Leur somme vaut 21 cm².") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["aires", "decomposer"],
   },
   {
@@ -612,7 +716,11 @@ export const airesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "On additionne les aires des deux rectangles.",
     explanation:
-      "La figure en L est découpée en deux rectangles. L’aire totale vaut 10 + 6 = 16 cm².",
+      "Définition : une aire mesure la surface occupée par une figure.\n\n" +
+      "Méthode : on repère la figure, les mesures utiles ou les carreaux, puis on applique la formule adaptée.\n\n" +
+      "Calcul : " +
+      ("La figure en L est découpée en deux rectangles. L’aire totale vaut 10 + 6 = 16 cm².") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["aires", "decomposer", "qcm"],
   },
   {
@@ -636,7 +744,11 @@ export const airesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "On cherche une méthode pour transformer une figure complexe en figures connues.",
     explanation:
-      "Pour calculer l’aire d’une figure composée, on peut la décomposer en rectangles ou carrés plus simples, puis additionner leurs aires.",
+      "Définition : une aire mesure la surface occupée par une figure.\n\n" +
+      "Méthode : on repère la figure, les mesures utiles ou les carreaux, puis on applique la formule adaptée.\n\n" +
+      "Calcul : " +
+      ("Pour calculer l’aire d’une figure composée, on peut la décomposer en rectangles ou carrés plus simples, puis additionner leurs aires.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["aires", "decomposer", "qcm", "methode"],
   },
   {
@@ -654,7 +766,11 @@ export const airesBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "Additionne les aires des deux parties.",
     explanation:
-      "La figure peut être vue comme un rectangle de 4 unités d’aire et un autre de 2 unités d’aire. L’aire totale vaut 6.",
+      "Définition : une aire mesure la surface occupée par une figure.\n\n" +
+      "Méthode : on repère la figure, les mesures utiles ou les carreaux, puis on applique la formule adaptée.\n\n" +
+      "Calcul : " +
+      ("La figure peut être vue comme un rectangle de 4 unités d’aire et un autre de 2 unités d’aire. L’aire totale vaut 6.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["aires", "decomposer", "canvas"],
     canvas: {
       kind: "figure_libre",
@@ -695,7 +811,11 @@ export const airesBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Aire du rectangle = longueur × largeur.",
     explanation:
-      "Le jardin est un rectangle. Son aire vaut 7 × 3 = 21 m².",
+      "Définition : une aire mesure la surface occupée par une figure.\n\n" +
+      "Méthode : on repère la figure, les mesures utiles ou les carreaux, puis on applique la formule adaptée.\n\n" +
+      "Calcul : " +
+      ("Le jardin est un rectangle. Son aire vaut 7 × 3 = 21 m².") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["aires", "problemes"],
   },
   {
@@ -713,7 +833,11 @@ export const airesBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Multiplie la longueur par la largeur.",
     explanation:
-      "Comme la parcelle est rectangulaire, on calcule son aire en faisant 8 × 5 = 40 m².",
+      "Définition : une aire mesure la surface occupée par une figure.\n\n" +
+      "Méthode : on repère la figure, les mesures utiles ou les carreaux, puis on applique la formule adaptée.\n\n" +
+      "Calcul : " +
+      ("Comme la parcelle est rectangulaire, on calcule son aire en faisant 8 × 5 = 40 m².") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["aires", "problemes", "reunion"],
   },
   {
@@ -732,7 +856,11 @@ export const airesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "On multiplie 4,5 par 2.",
     explanation:
-      "L’aire d’un rectangle se calcule par longueur × largeur. Ici, 4,5 × 2 = 9. L’aire est donc 9 m².",
+      "Définition : une aire mesure la surface occupée par une figure.\n\n" +
+      "Méthode : on repère la figure, les mesures utiles ou les carreaux, puis on applique la formule adaptée.\n\n" +
+      "Calcul : " +
+      ("L’aire d’un rectangle se calcule par longueur × largeur. Ici, 4,5 × 2 = 9. L’aire est donc 9 m².") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["aires", "problemes", "qcm", "decimaux"],
   },
   {
@@ -751,7 +879,11 @@ export const airesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "L’aire = longueur × largeur.",
     explanation:
-      "Si la largeur reste la même et que la longueur est multipliée par 2, alors l’aire est aussi multipliée par 2. Elle double.",
+      "Définition : une aire mesure la surface occupée par une figure.\n\n" +
+      "Méthode : on repère la figure, les mesures utiles ou les carreaux, puis on applique la formule adaptée.\n\n" +
+      "Calcul : " +
+      ("Si la largeur reste la même et que la longueur est multipliée par 2, alors l’aire est aussi multipliée par 2. Elle double.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["aires", "problemes", "qcm", "proportionnalite"],
   },
   {
@@ -770,7 +902,11 @@ export const airesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Multiplie 2,5 par 4.",
     explanation:
-      "L’aire de la terrasse vaut 2,5 × 4 = 10 m².",
+      "Définition : une aire mesure la surface occupée par une figure.\n\n" +
+      "Méthode : on repère la figure, les mesures utiles ou les carreaux, puis on applique la formule adaptée.\n\n" +
+      "Calcul : " +
+      ("L’aire de la terrasse vaut 2,5 × 4 = 10 m².") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["aires", "problemes", "qcm", "decimaux"],
   },
 
@@ -792,7 +928,11 @@ export const airesBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "Une aire mesure une surface, pas un volume.",
     explanation:
-      "Une aire mesure une surface en 2 dimensions, donc elle s’exprime en cm². Le cm³ sert à mesurer un volume en 3 dimensions.",
+      "Définition : une aire mesure la surface occupée par une figure.\n\n" +
+      "Méthode : on repère la figure, les mesures utiles ou les carreaux, puis on applique la formule adaptée.\n\n" +
+      "Calcul : " +
+      ("Une aire mesure une surface en 2 dimensions, donc elle s’exprime en cm². Le cm³ sert à mesurer un volume en 3 dimensions.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["aires", "defi", "raisonnement"],
   },
   {
@@ -810,7 +950,11 @@ export const airesBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "Compare 6 × 6 et 5 × 5.",
     explanation:
-      "Un carré de côté 6 cm a une aire de 6 × 6 = 36 cm². Un carré de côté 5 cm a une aire de 5 × 5 = 25 cm². Comme 36 est plus grand que 25, son aire est plus grande.",
+      "Définition : une aire mesure la surface occupée par une figure.\n\n" +
+      "Méthode : on repère la figure, les mesures utiles ou les carreaux, puis on applique la formule adaptée.\n\n" +
+      "Calcul : " +
+      ("Un carré de côté 6 cm a une aire de 6 × 6 = 36 cm². Un carré de côté 5 cm a une aire de 5 × 5 = 25 cm². Comme 36 est plus grand que 25, son aire est plus grande.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["aires", "defi", "raisonnement"],
   },
   {
@@ -829,7 +973,11 @@ export const airesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Compare par exemple 3 × 4 et 2 × 6.",
     explanation:
-      "Oui. Deux rectangles peuvent avoir la même aire mais des périmètres différents. Par exemple, 3 × 4 et 2 × 6 ont tous deux une aire de 12 cm², mais pas le même périmètre.",
+      "Définition : une aire mesure la surface occupée par une figure.\n\n" +
+      "Méthode : on repère la figure, les mesures utiles ou les carreaux, puis on applique la formule adaptée.\n\n" +
+      "Calcul : " +
+      ("Oui. Deux rectangles peuvent avoir la même aire mais des périmètres différents. Par exemple, 3 × 4 et 2 × 6 ont tous deux une aire de 12 cm², mais pas le même périmètre.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["aires", "defi", "qcm", "raisonnement"],
   },
   {
@@ -848,7 +996,11 @@ export const airesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "L’aire vaut longueur × largeur.",
     explanation:
-      "Si la largeur reste la même et que la longueur est multipliée par 2, alors l’aire est aussi multipliée par 2. Elle double.",
+      "Définition : une aire mesure la surface occupée par une figure.\n\n" +
+      "Méthode : on repère la figure, les mesures utiles ou les carreaux, puis on applique la formule adaptée.\n\n" +
+      "Calcul : " +
+      ("Si la largeur reste la même et que la longueur est multipliée par 2, alors l’aire est aussi multipliée par 2. Elle double.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["aires", "defi", "qcm", "proportionnalite"],
   },
   {
@@ -866,7 +1018,11 @@ export const airesBank: TutorBankItemV4[] = [
     comparator: "exact_text",
     hint: "Choisis un nombre strictement entre 10 et 15.",
     explanation:
-      "Une aire strictement comprise entre 10 cm² et 15 cm² peut être 11 cm², 12 cm², 13 cm² ou 14 cm².",
+      "Définition : une aire mesure la surface occupée par une figure.\n\n" +
+      "Méthode : on repère la figure, les mesures utiles ou les carreaux, puis on applique la formule adaptée.\n\n" +
+      "Calcul : " +
+      ("Une aire strictement comprise entre 10 cm² et 15 cm² peut être 11 cm², 12 cm², 13 cm² ou 14 cm².") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["aires", "defi", "raisonnement"],
   },
   {
@@ -884,7 +1040,11 @@ export const airesBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Cherche le nombre qui multiplié par lui-même donne 36.",
     explanation:
-      "Comme 6 × 6 = 36, un carré d’aire 36 cm² a un côté de 6 cm.",
+      "Définition : une aire mesure la surface occupée par une figure.\n\n" +
+      "Méthode : on repère la figure, les mesures utiles ou les carreaux, puis on applique la formule adaptée.\n\n" +
+      "Calcul : " +
+      ("Comme 6 × 6 = 36, un carré d’aire 36 cm² a un côté de 6 cm.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["aires", "defi", "inverse"],
   },
   {
@@ -902,7 +1062,11 @@ export const airesBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Aire = longueur × largeur.",
     explanation:
-      "Si l’aire vaut 24 cm² et la largeur 4 cm, alors la longueur vaut 24 ÷ 4 = 6 cm.",
+      "Définition : une aire mesure la surface occupée par une figure.\n\n" +
+      "Méthode : on repère la figure, les mesures utiles ou les carreaux, puis on applique la formule adaptée.\n\n" +
+      "Calcul : " +
+      ("Si l’aire vaut 24 cm² et la largeur 4 cm, alors la longueur vaut 24 ÷ 4 = 6 cm.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["aires", "defi", "inverse"],
   },
   {
@@ -921,7 +1085,11 @@ export const airesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Le rectangle de 3 sur 2 a une aire de 6.",
     explanation:
-      "Le rectangle de 3 unités sur 2 unités a une aire de 6. La figure sur quadrillage recouvre aussi 6 carreaux unités. Les deux aires sont donc égales.",
+      "Définition : une aire mesure la surface occupée par une figure.\n\n" +
+      "Méthode : on repère la figure, les mesures utiles ou les carreaux, puis on applique la formule adaptée.\n\n" +
+      "Calcul : " +
+      ("Le rectangle de 3 unités sur 2 unités a une aire de 6. La figure sur quadrillage recouvre aussi 6 carreaux unités. Les deux aires sont donc égales.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["aires", "defi", "canvas", "qcm", "comparaison"],
     canvas: {
       kind: "figure_libre",
@@ -958,7 +1126,11 @@ export const airesBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Additionne les deux aires.",
     explanation:
-      "Quand on réunit deux parcelles sans chevauchement, on additionne leurs aires : 12 + 9 = 21 m².",
+      "Définition : une aire mesure la surface occupée par une figure.\n\n" +
+      "Méthode : on repère la figure, les mesures utiles ou les carreaux, puis on applique la formule adaptée.\n\n" +
+      "Calcul : " +
+      ("Quand on réunit deux parcelles sans chevauchement, on additionne leurs aires : 12 + 9 = 21 m².") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["aires", "defi", "reunion"],
   },
 
@@ -984,7 +1156,11 @@ export const airesBank: TutorBankItemV4[] = [
         expected: ["cm²"],
         comparator: "mcq_exact",
         explanation:
-          "Une aire mesure une surface. Elle se mesure donc en unités carrées, par exemple en cm².",
+          "Définition : une aire mesure la surface occupée par une figure.\n\n" +
+          "Méthode : on repère la figure, les mesures utiles ou les carreaux, puis on applique la formule adaptée.\n\n" +
+          "Calcul : " +
+          ("Une aire mesure une surface. Elle se mesure donc en unités carrées, par exemple en cm².") +
+          "\n\nConclusion : on garde la réponse obtenue.",
       };
     },
   },
@@ -1010,7 +1186,11 @@ export const airesBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(n)],
         comparator: "number_equal",
-        explanation: `L’aire d’une figure mesurée par comptage est égale au nombre de carreaux unités. Ici, cela fait ${n}.`,
+        explanation: "Définition : une aire mesure la surface occupée par une figure.\n\n" +
+          "Méthode : on repère la figure, les mesures utiles ou les carreaux, puis on applique la formule adaptée.\n\n" +
+          "Calcul : " +
+          (`L’aire d’une figure mesurée par comptage est égale au nombre de carreaux unités. Ici, cela fait ${n}.`) +
+          "\n\nConclusion : on garde la réponse obtenue.",
       };
     },
   },
@@ -1041,7 +1221,11 @@ export const airesBank: TutorBankItemV4[] = [
         ]),
         expected: [String(good)],
         comparator: "mcq_exact",
-        explanation: `Il y a ${a} rangées de ${b} carreaux, donc ${a} × ${b} = ${good}. L’aire est ${good}.`,
+        explanation: "Définition : une aire mesure la surface occupée par une figure.\n\n" +
+          "Méthode : on repère la figure, les mesures utiles ou les carreaux, puis on applique la formule adaptée.\n\n" +
+          "Calcul : " +
+          (`Il y a ${a} rangées de ${b} carreaux, donc ${a} × ${b} = ${good}. L’aire est ${good}.`) +
+          "\n\nConclusion : on garde la réponse obtenue.",
       };
     },
   },
@@ -1070,7 +1254,11 @@ export const airesBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(a), `${a} cm²`, `${a} cm2`, `${a}cm²`, `${a}cm2`],
         comparator: "number_equal",
-        explanation: `L’aire d’un rectangle se calcule en faisant ${l} × ${w} = ${a}. L’aire vaut donc ${a} cm².`,
+        explanation: "Définition : une aire mesure la surface occupée par une figure.\n\n" +
+          "Méthode : on repère la figure, les mesures utiles ou les carreaux, puis on applique la formule adaptée.\n\n" +
+          "Calcul : " +
+          (`L’aire d’un rectangle se calcule en faisant ${l} × ${w} = ${a}. L’aire vaut donc ${a} cm².`) +
+          "\n\nConclusion : on garde la réponse obtenue.",
       };
     },
   },
@@ -1106,7 +1294,11 @@ export const airesBank: TutorBankItemV4[] = [
         choices,
         expected: [`${good} cm²`],
         comparator: "mcq_exact",
-        explanation: `Pour l’aire du rectangle, on calcule ${l} × ${w} = ${good}. La bonne réponse est donc ${good} cm².`,
+        explanation: "Définition : une aire mesure la surface occupée par une figure.\n\n" +
+          "Méthode : on repère la figure, les mesures utiles ou les carreaux, puis on applique la formule adaptée.\n\n" +
+          "Calcul : " +
+          (`Pour l’aire du rectangle, on calcule ${l} × ${w} = ${good}. La bonne réponse est donc ${good} cm².`) +
+          "\n\nConclusion : on garde la réponse obtenue.",
       };
     },
   },
@@ -1134,7 +1326,11 @@ export const airesBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(a), `${a} cm²`, `${a} cm2`, `${a}cm²`, `${a}cm2`],
         comparator: "number_equal",
-        explanation: `L’aire d’un carré se calcule en faisant ${c} × ${c} = ${a}. L’aire vaut donc ${a} cm².`,
+        explanation: "Définition : une aire mesure la surface occupée par une figure.\n\n" +
+          "Méthode : on repère la figure, les mesures utiles ou les carreaux, puis on applique la formule adaptée.\n\n" +
+          "Calcul : " +
+          (`L’aire d’un carré se calcule en faisant ${c} × ${c} = ${a}. L’aire vaut donc ${a} cm².`) +
+          "\n\nConclusion : on garde la réponse obtenue.",
       };
     },
   },
@@ -1167,7 +1363,11 @@ export const airesBank: TutorBankItemV4[] = [
         choices,
         expected: [`${good} cm²`],
         comparator: "mcq_exact",
-        explanation: `Pour un carré de côté ${c} cm, on calcule ${c} × ${c} = ${good}. L’aire est donc ${good} cm².`,
+        explanation: "Définition : une aire mesure la surface occupée par une figure.\n\n" +
+          "Méthode : on repère la figure, les mesures utiles ou les carreaux, puis on applique la formule adaptée.\n\n" +
+          "Calcul : " +
+          (`Pour un carré de côté ${c} cm, on calcule ${c} × ${c} = ${good}. L’aire est donc ${good} cm².`) +
+          "\n\nConclusion : on garde la réponse obtenue.",
       };
     },
   },
@@ -1197,7 +1397,11 @@ export const airesBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(good), `${good} cm²`, `${good} cm2`],
         comparator: "contains_keyword",
-        explanation: `Comme les deux aires sont dans la même unité, on compare ${a} et ${b}. La plus grande est ${good} cm².`,
+        explanation: "Définition : une aire mesure la surface occupée par une figure.\n\n" +
+          "Méthode : on repère la figure, les mesures utiles ou les carreaux, puis on applique la formule adaptée.\n\n" +
+          "Calcul : " +
+          (`Comme les deux aires sont dans la même unité, on compare ${a} et ${b}. La plus grande est ${good} cm².`) +
+          "\n\nConclusion : on garde la réponse obtenue.",
       };
     },
   },
@@ -1226,7 +1430,11 @@ export const airesBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(total), `${total} cm²`, `${total} cm2`],
         comparator: "number_equal",
-        explanation: `On additionne les aires des deux rectangles : ${a} + ${b} = ${total} cm².`,
+        explanation: "Définition : une aire mesure la surface occupée par une figure.\n\n" +
+          "Méthode : on repère la figure, les mesures utiles ou les carreaux, puis on applique la formule adaptée.\n\n" +
+          "Calcul : " +
+          (`On additionne les aires des deux rectangles : ${a} + ${b} = ${total} cm².`) +
+          "\n\nConclusion : on garde la réponse obtenue.",
       };
     },
   },
@@ -1257,7 +1465,11 @@ export const airesBank: TutorBankItemV4[] = [
         ]),
         expected: [`${good} cm²`],
         comparator: "mcq_exact",
-        explanation: `On additionne les aires des deux parties : ${a} + ${b} = ${good} cm².`,
+        explanation: "Définition : une aire mesure la surface occupée par une figure.\n\n" +
+          "Méthode : on repère la figure, les mesures utiles ou les carreaux, puis on applique la formule adaptée.\n\n" +
+          "Calcul : " +
+          (`On additionne les aires des deux parties : ${a} + ${b} = ${good} cm².`) +
+          "\n\nConclusion : on garde la réponse obtenue.",
       };
     },
   },
@@ -1286,7 +1498,11 @@ export const airesBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(a), `${a} m²`, `${a} m2`],
         comparator: "number_equal",
-        explanation: `Le jardin est un rectangle. Son aire vaut ${l} × ${w} = ${a} m².`,
+        explanation: "Définition : une aire mesure la surface occupée par une figure.\n\n" +
+          "Méthode : on repère la figure, les mesures utiles ou les carreaux, puis on applique la formule adaptée.\n\n" +
+          "Calcul : " +
+          (`Le jardin est un rectangle. Son aire vaut ${l} × ${w} = ${a} m².`) +
+          "\n\nConclusion : on garde la réponse obtenue.",
       };
     },
   },
@@ -1327,9 +1543,13 @@ export const airesBank: TutorBankItemV4[] = [
         choices,
         expected: [`${String(good).replace(".", ",")} m²`],
         comparator: "mcq_exact",
-        explanation: `L’aire du rectangle vaut ${String(l).replace(".", ",")} × ${w} = ${String(
+        explanation: "Définition : une aire mesure la surface occupée par une figure.\n\n" +
+          "Méthode : on repère la figure, les mesures utiles ou les carreaux, puis on applique la formule adaptée.\n\n" +
+          "Calcul : " +
+          (`L’aire du rectangle vaut ${String(l).replace(".", ",")} × ${w} = ${String(
           good
-        ).replace(".", ",")} m².`,
+        ).replace(".", ",")} m².`) +
+          "\n\nConclusion : on garde la réponse obtenue.",
       };
     },
   },
@@ -1362,9 +1582,13 @@ export const airesBank: TutorBankItemV4[] = [
         format: "short",
         expected: validAnswers,
         comparator: "exact_text",
-        explanation: `Il faut choisir une valeur strictement comprise entre ${low} et ${high}. Par exemple : ${validAnswers.join(
+        explanation: "Définition : une aire mesure la surface occupée par une figure.\n\n" +
+          "Méthode : on repère la figure, les mesures utiles ou les carreaux, puis on applique la formule adaptée.\n\n" +
+          "Calcul : " +
+          (`Il faut choisir une valeur strictement comprise entre ${low} et ${high}. Par exemple : ${validAnswers.join(
           ", "
-        )}.`,
+        )}.`) +
+          "\n\nConclusion : on garde la réponse obtenue.",
       };
     },
   },
@@ -1388,7 +1612,11 @@ export const airesBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(side), `${side} cm`, `${side}cm`],
         comparator: "number_equal",
-        explanation: `Comme ${side} × ${side} = ${area}, le côté du carré mesure ${side} cm.`,
+        explanation: "Définition : une aire mesure la surface occupée par une figure.\n\n" +
+          "Méthode : on repère la figure, les mesures utiles ou les carreaux, puis on applique la formule adaptée.\n\n" +
+          "Calcul : " +
+          (`Comme ${side} × ${side} = ${area}, le côté du carré mesure ${side} cm.`) +
+          "\n\nConclusion : on garde la réponse obtenue.",
       };
     },
   },

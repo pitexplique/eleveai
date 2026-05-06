@@ -32,7 +32,11 @@ export const longueursBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Un crayon mesure environ quelques dizaines de centimètres.",
     explanation:
-      "Un crayon est un objet de petite taille. L’unité la plus adaptée est donc le centimètre.",
+      "Définition : une longueur mesure une distance ou la taille d’un segment.\n\n" +
+      "Méthode : on repère les longueurs données et on vérifie les unités.\n\n" +
+      "Calcul : " +
+      ("Un crayon est un objet de petite taille. L’unité la plus adaptée est donc le centimètre.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["longueurs", "mesure", "unite"],
   },
   {
@@ -51,7 +55,11 @@ export const longueursBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Pour une grande distance, on utilise une grande unité.",
     explanation:
-      "La distance entre deux villes est très grande. L’unité adaptée est donc le kilomètre.",
+      "Définition : une longueur mesure une distance ou la taille d’un segment.\n\n" +
+      "Méthode : on repère les longueurs données et on vérifie les unités.\n\n" +
+      "Calcul : " +
+      ("La distance entre deux villes est très grande. L’unité adaptée est donc le kilomètre.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["longueurs", "mesure", "unite"],
   },
   {
@@ -70,7 +78,11 @@ export const longueursBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "L’épaisseur d’un petit objet se mesure avec une petite unité.",
     explanation:
-      "L’épaisseur d’une pièce est très petite. On la mesure donc en millimètres.",
+      "Définition : une longueur mesure une distance ou la taille d’un segment.\n\n" +
+      "Méthode : on repère les longueurs données et on vérifie les unités.\n\n" +
+      "Calcul : " +
+      ("L’épaisseur d’une pièce est très petite. On la mesure donc en millimètres.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["longueurs", "mesure", "unite"],
   },
   {
@@ -89,7 +101,11 @@ export const longueursBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Une salle de classe mesure plusieurs mètres.",
     explanation:
-      "Une salle de classe a une longueur de quelques mètres. L’unité la plus adaptée est donc le mètre.",
+      "Définition : une longueur mesure une distance ou la taille d’un segment.\n\n" +
+      "Méthode : on repère les longueurs données et on vérifie les unités.\n\n" +
+      "Calcul : " +
+      ("Une salle de classe a une longueur de quelques mètres. L’unité la plus adaptée est donc le mètre.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["longueurs", "mesure", "unite"],
   },
   {
@@ -108,7 +124,11 @@ export const longueursBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "La taille d’un élève est souvent exprimée en centimètres.",
     explanation:
-      "La taille d’un élève est généralement comprise entre 100 cm et 200 cm. L’unité adaptée est donc le centimètre.",
+      "Définition : une longueur mesure une distance ou la taille d’un segment.\n\n" +
+      "Méthode : on repère les longueurs données et on vérifie les unités.\n\n" +
+      "Calcul : " +
+      ("La taille d’un élève est généralement comprise entre 100 cm et 200 cm. L’unité adaptée est donc le centimètre.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["longueurs", "mesure", "unite"],
   },
   {
@@ -127,7 +147,11 @@ export const longueursBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Un sentier se mesure sur une grande distance.",
     explanation:
-      "Un sentier de randonnée mesure souvent plusieurs milliers de mètres. L’unité adaptée est donc le kilomètre.",
+      "Définition : une longueur mesure une distance ou la taille d’un segment.\n\n" +
+      "Méthode : on repère les longueurs données et on vérifie les unités.\n\n" +
+      "Calcul : " +
+      ("Un sentier de randonnée mesure souvent plusieurs milliers de mètres. L’unité adaptée est donc le kilomètre.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["longueurs", "mesure", "reunion"],
   },
 
@@ -149,7 +173,11 @@ export const longueursBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "1 m = 100 cm.",
     explanation:
-      "Dans le système métrique, 1 mètre correspond à 100 centimètres.",
+      "Définition : une longueur mesure une distance ou la taille d’un segment.\n\n" +
+      "Méthode : on repère les longueurs données et on vérifie les unités.\n\n" +
+      "Calcul : " +
+      ("Dans le système métrique, 1 mètre correspond à 100 centimètres.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["longueurs", "unites"],
   },
   {
@@ -167,7 +195,11 @@ export const longueursBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "1 km = 1000 m.",
     explanation:
-      "Un kilomètre correspond à 1000 mètres.",
+      "Définition : une longueur mesure une distance ou la taille d’un segment.\n\n" +
+      "Méthode : on repère les longueurs données et on vérifie les unités.\n\n" +
+      "Calcul : " +
+      ("Un kilomètre correspond à 1000 mètres.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["longueurs", "unites"],
   },
   {
@@ -185,7 +217,11 @@ export const longueursBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "1 cm = 10 mm.",
     explanation:
-      "Un centimètre correspond à 10 millimètres.",
+      "Définition : une longueur mesure une distance ou la taille d’un segment.\n\n" +
+      "Méthode : on repère les longueurs données et on vérifie les unités.\n\n" +
+      "Calcul : " +
+      ("Un centimètre correspond à 10 millimètres.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["longueurs", "unites"],
   },
   {
@@ -203,7 +239,11 @@ export const longueursBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "1 m = 10 dm.",
     explanation:
-      "Un mètre contient 10 décimètres.",
+      "Définition : une longueur mesure une distance ou la taille d’un segment.\n\n" +
+      "Méthode : on repère les longueurs données et on vérifie les unités.\n\n" +
+      "Calcul : " +
+      ("Un mètre contient 10 décimètres.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["longueurs", "unites"],
   },
   {
@@ -222,7 +262,11 @@ export const longueursBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Le mètre est 100 fois plus grand que le centimètre.",
     explanation:
-      "Un mètre correspond à 100 centimètres. Le bon choix est donc 100 cm.",
+      "Définition : une longueur mesure une distance ou la taille d’un segment.\n\n" +
+      "Méthode : on repère les longueurs données et on vérifie les unités.\n\n" +
+      "Calcul : " +
+      ("Un mètre correspond à 100 centimètres. Le bon choix est donc 100 cm.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["longueurs", "unites", "qcm"],
   },
   {
@@ -241,7 +285,11 @@ export const longueursBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Le kilomètre contient mille mètres.",
     explanation:
-      "Un kilomètre correspond à 1000 mètres. Le bon choix est donc 1000 m.",
+      "Définition : une longueur mesure une distance ou la taille d’un segment.\n\n" +
+      "Méthode : on repère les longueurs données et on vérifie les unités.\n\n" +
+      "Calcul : " +
+      ("Un kilomètre correspond à 1000 mètres. Le bon choix est donc 1000 m.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["longueurs", "unites", "qcm"],
   },
 
@@ -263,7 +311,11 @@ export const longueursBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "1 m = 100 cm.",
     explanation:
-      "Comme 1 m = 100 cm, 2 m = 2 × 100 = 200 cm.",
+      "Définition : une longueur mesure une distance ou la taille d’un segment.\n\n" +
+      "Méthode : on repère les longueurs données et on vérifie les unités.\n\n" +
+      "Calcul : " +
+      ("Comme 1 m = 100 cm, 2 m = 2 × 100 = 200 cm.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["longueurs", "conversion"],
   },
   {
@@ -281,7 +333,11 @@ export const longueursBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "On divise par 100.",
     explanation:
-      "Comme 100 cm = 1 m, 300 cm = 300 ÷ 100 = 3 m.",
+      "Définition : une longueur mesure une distance ou la taille d’un segment.\n\n" +
+      "Méthode : on repère les longueurs données et on vérifie les unités.\n\n" +
+      "Calcul : " +
+      ("Comme 100 cm = 1 m, 300 cm = 300 ÷ 100 = 3 m.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["longueurs", "conversion"],
   },
   {
@@ -299,7 +355,11 @@ export const longueursBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "1 km = 1000 m.",
     explanation:
-      "Comme 1 km = 1000 m, 4 km = 4 × 1000 = 4000 m.",
+      "Définition : une longueur mesure une distance ou la taille d’un segment.\n\n" +
+      "Méthode : on repère les longueurs données et on vérifie les unités.\n\n" +
+      "Calcul : " +
+      ("Comme 1 km = 1000 m, 4 km = 4 × 1000 = 4000 m.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["longueurs", "conversion"],
   },
   {
@@ -317,7 +377,11 @@ export const longueursBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "10 mm = 1 cm.",
     explanation:
-      "Comme 10 mm = 1 cm, 70 mm = 70 ÷ 10 = 7 cm.",
+      "Définition : une longueur mesure une distance ou la taille d’un segment.\n\n" +
+      "Méthode : on repère les longueurs données et on vérifie les unités.\n\n" +
+      "Calcul : " +
+      ("Comme 10 mm = 1 cm, 70 mm = 70 ÷ 10 = 7 cm.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["longueurs", "conversion"],
   },
   {
@@ -335,7 +399,11 @@ export const longueursBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Multiplie par 100.",
     explanation:
-      "Comme 1 m = 100 cm, 2,5 m = 2,5 × 100 = 250 cm.",
+      "Définition : une longueur mesure une distance ou la taille d’un segment.\n\n" +
+      "Méthode : on repère les longueurs données et on vérifie les unités.\n\n" +
+      "Calcul : " +
+      ("Comme 1 m = 100 cm, 2,5 m = 2,5 × 100 = 250 cm.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["longueurs", "conversion"],
   },
   {
@@ -353,7 +421,11 @@ export const longueursBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "On divise par 100.",
     explanation:
-      "Comme 100 cm = 1 m, 150 cm = 150 ÷ 100 = 1,5 m.",
+      "Définition : une longueur mesure une distance ou la taille d’un segment.\n\n" +
+      "Méthode : on repère les longueurs données et on vérifie les unités.\n\n" +
+      "Calcul : " +
+      ("Comme 100 cm = 1 m, 150 cm = 150 ÷ 100 = 1,5 m.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["longueurs", "conversion"],
   },
   {
@@ -372,7 +444,11 @@ export const longueursBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "On divise par 100.",
     explanation:
-      "500 cm = 500 ÷ 100 = 5 m. Le bon choix est 5.",
+      "Définition : une longueur mesure une distance ou la taille d’un segment.\n\n" +
+      "Méthode : on repère les longueurs données et on vérifie les unités.\n\n" +
+      "Calcul : " +
+      ("500 cm = 500 ÷ 100 = 5 m. Le bon choix est 5.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["longueurs", "conversion", "qcm"],
   },
   {
@@ -391,7 +467,11 @@ export const longueursBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "1 km = 1000 m.",
     explanation:
-      "3 km = 3 × 1000 = 3000 m. Le bon choix est 3000.",
+      "Définition : une longueur mesure une distance ou la taille d’un segment.\n\n" +
+      "Méthode : on repère les longueurs données et on vérifie les unités.\n\n" +
+      "Calcul : " +
+      ("3 km = 3 × 1000 = 3000 m. Le bon choix est 3000.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["longueurs", "conversion", "qcm"],
   },
   {
@@ -409,7 +489,11 @@ export const longueursBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Chaque kilomètre vaut 1000 mètres.",
     explanation:
-      "Comme 1 km = 1000 m, 5 km = 5 × 1000 = 5000 m.",
+      "Définition : une longueur mesure une distance ou la taille d’un segment.\n\n" +
+      "Méthode : on repère les longueurs données et on vérifie les unités.\n\n" +
+      "Calcul : " +
+      ("Comme 1 km = 1000 m, 5 km = 5 × 1000 = 5000 m.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["longueurs", "conversion", "reunion"],
   },
 
@@ -432,7 +516,11 @@ export const longueursBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Convertis tout en cm.",
     explanation:
-      "2 m = 200 cm, 150 cm = 150 cm, 180 cm = 180 cm et 1 m = 100 cm. La plus grande longueur est donc 2 m.",
+      "Définition : une longueur mesure une distance ou la taille d’un segment.\n\n" +
+      "Méthode : on repère les longueurs données et on vérifie les unités.\n\n" +
+      "Calcul : " +
+      ("2 m = 200 cm, 150 cm = 150 cm, 180 cm = 180 cm et 1 m = 100 cm. La plus grande longueur est donc 2 m.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["longueurs", "comparaison"],
   },
   {
@@ -451,7 +539,11 @@ export const longueursBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "3 m = 300 cm.",
     explanation:
-      "3 m = 300 cm. En comparant 300 cm, 250 cm, 280 cm et 320 cm, la plus petite longueur est 250 cm.",
+      "Définition : une longueur mesure une distance ou la taille d’un segment.\n\n" +
+      "Méthode : on repère les longueurs données et on vérifie les unités.\n\n" +
+      "Calcul : " +
+      ("3 m = 300 cm. En comparant 300 cm, 250 cm, 280 cm et 320 cm, la plus petite longueur est 250 cm.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["longueurs", "comparaison"],
   },
   {
@@ -469,7 +561,11 @@ export const longueursBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "1,5 m = 150 cm.",
     explanation:
-      "1,5 m = 150 cm. Comme 150 cm est plus grand que 140 cm, la plus grande longueur est 1,5 m.",
+      "Définition : une longueur mesure une distance ou la taille d’un segment.\n\n" +
+      "Méthode : on repère les longueurs données et on vérifie les unités.\n\n" +
+      "Calcul : " +
+      ("1,5 m = 150 cm. Comme 150 cm est plus grand que 140 cm, la plus grande longueur est 1,5 m.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["longueurs", "comparaison"],
   },
   {
@@ -487,7 +583,11 @@ export const longueursBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "2 m = 200 cm.",
     explanation:
-      "2 m = 200 cm. Comme 190 cm est plus petit que 200 cm, la plus petite longueur est 190 cm.",
+      "Définition : une longueur mesure une distance ou la taille d’un segment.\n\n" +
+      "Méthode : on repère les longueurs données et on vérifie les unités.\n\n" +
+      "Calcul : " +
+      ("2 m = 200 cm. Comme 190 cm est plus petit que 200 cm, la plus petite longueur est 190 cm.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["longueurs", "comparaison"],
   },
   {
@@ -506,7 +606,11 @@ export const longueursBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "1 m = 100 cm.",
     explanation:
-      "1 m = 100 cm. Comme 100 cm est plus grand que 99 cm, 95 cm et 90 cm, la plus grande longueur est 1 m.",
+      "Définition : une longueur mesure une distance ou la taille d’un segment.\n\n" +
+      "Méthode : on repère les longueurs données et on vérifie les unités.\n\n" +
+      "Calcul : " +
+      ("1 m = 100 cm. Comme 100 cm est plus grand que 99 cm, 95 cm et 90 cm, la plus grande longueur est 1 m.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["longueurs", "comparaison", "qcm"],
   },
   {
@@ -524,7 +628,11 @@ export const longueursBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "3 km = 3000 m.",
     explanation:
-      "3 km = 3000 m. Comme 3000 m est plus grand que 2800 m, le sentier de 3 km est le plus long.",
+      "Définition : une longueur mesure une distance ou la taille d’un segment.\n\n" +
+      "Méthode : on repère les longueurs données et on vérifie les unités.\n\n" +
+      "Calcul : " +
+      ("3 km = 3000 m. Comme 3000 m est plus grand que 2800 m, le sentier de 3 km est le plus long.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["longueurs", "comparaison", "reunion"],
   },
 
@@ -546,7 +654,11 @@ export const longueursBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Addition simple.",
     explanation:
-      "On ajoute 5 m à 10 m, donc 10 + 5 = 15. La nouvelle longueur est 15 m.",
+      "Définition : une longueur mesure une distance ou la taille d’un segment.\n\n" +
+      "Méthode : on repère les longueurs données et on vérifie les unités.\n\n" +
+      "Calcul : " +
+      ("On ajoute 5 m à 10 m, donc 10 + 5 = 15. La nouvelle longueur est 15 m.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["longueurs", "probleme"],
   },
   {
@@ -564,7 +676,11 @@ export const longueursBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "2 m = 200 cm.",
     explanation:
-      "2 m = 200 cm. Si on coupe 50 cm, il reste 200 - 50 = 150 cm.",
+      "Définition : une longueur mesure une distance ou la taille d’un segment.\n\n" +
+      "Méthode : on repère les longueurs données et on vérifie les unités.\n\n" +
+      "Calcul : " +
+      ("2 m = 200 cm. Si on coupe 50 cm, il reste 200 - 50 = 150 cm.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["longueurs", "probleme"],
   },
   {
@@ -582,7 +698,11 @@ export const longueursBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Partage 3 m en 3 parts égales.",
     explanation:
-      "3 m partagés en 3 parts égales donnent 3 ÷ 3 = 1. Une part mesure donc 1 m.",
+      "Définition : une longueur mesure une distance ou la taille d’un segment.\n\n" +
+      "Méthode : on repère les longueurs données et on vérifie les unités.\n\n" +
+      "Calcul : " +
+      ("3 m partagés en 3 parts égales donnent 3 ÷ 3 = 1. Une part mesure donc 1 m.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["longueurs", "probleme"],
   },
   {
@@ -600,7 +720,11 @@ export const longueursBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Soustraction simple.",
     explanation:
-      "On enlève 100 cm à 250 cm, donc 250 - 100 = 150 cm. Il reste 150 cm.",
+      "Définition : une longueur mesure une distance ou la taille d’un segment.\n\n" +
+      "Méthode : on repère les longueurs données et on vérifie les unités.\n\n" +
+      "Calcul : " +
+      ("On enlève 100 cm à 250 cm, donc 250 - 100 = 150 cm. Il reste 150 cm.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["longueurs", "probleme"],
   },
   {
@@ -619,7 +743,11 @@ export const longueursBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "4 ÷ 2 = 2.",
     explanation:
-      "Si 4 m sont partagés en 2 morceaux égaux, chaque morceau mesure 4 ÷ 2 = 2 m.",
+      "Définition : une longueur mesure une distance ou la taille d’un segment.\n\n" +
+      "Méthode : on repère les longueurs données et on vérifie les unités.\n\n" +
+      "Calcul : " +
+      ("Si 4 m sont partagés en 2 morceaux égaux, chaque morceau mesure 4 ÷ 2 = 2 m.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["longueurs", "probleme", "qcm"],
   },
   {
@@ -637,7 +765,11 @@ export const longueursBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "On enlève 2 km à 6 km.",
     explanation:
-      "Il reste à parcourir 6 - 2 = 4 km.",
+      "Définition : une longueur mesure une distance ou la taille d’un segment.\n\n" +
+      "Méthode : on repère les longueurs données et on vérifie les unités.\n\n" +
+      "Calcul : " +
+      ("Il reste à parcourir 6 - 2 = 4 km.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["longueurs", "probleme", "reunion"],
   },
 
@@ -659,7 +791,11 @@ export const longueursBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "On choisit une unité adaptée à la taille de ce qu’on mesure.",
     explanation:
-      "Une ville est très grande. Le centimètre est une unité trop petite et pas adaptée pour mesurer une si grande distance. On utilise plutôt les kilomètres.",
+      "Définition : une longueur mesure une distance ou la taille d’un segment.\n\n" +
+      "Méthode : on repère les longueurs données et on vérifie les unités.\n\n" +
+      "Calcul : " +
+      ("Une ville est très grande. Le centimètre est une unité trop petite et pas adaptée pour mesurer une si grande distance. On utilise plutôt les kilomètres.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["longueurs", "defi", "raisonnement"],
   },
   {
@@ -677,7 +813,11 @@ export const longueursBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "Convertis tout dans la même unité.",
     explanation:
-      "2 m = 200 cm. Comme 200 cm est plus grand que 150 cm, 2 m est plus grand que 150 cm.",
+      "Définition : une longueur mesure une distance ou la taille d’un segment.\n\n" +
+      "Méthode : on repère les longueurs données et on vérifie les unités.\n\n" +
+      "Calcul : " +
+      ("2 m = 200 cm. Comme 200 cm est plus grand que 150 cm, 2 m est plus grand que 150 cm.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["longueurs", "defi", "raisonnement"],
   },
   {
@@ -695,7 +835,11 @@ export const longueursBank: TutorBankItemV4[] = [
     comparator: "exact_text",
     hint: "1 m = 100 cm.",
     explanation:
-      "1 m = 100 cm. On cherche donc une longueur plus grande que 100 cm et plus petite que 150 cm. Par exemple : 120 cm.",
+      "Définition : une longueur mesure une distance ou la taille d’un segment.\n\n" +
+      "Méthode : on repère les longueurs données et on vérifie les unités.\n\n" +
+      "Calcul : " +
+      ("1 m = 100 cm. On cherche donc une longueur plus grande que 100 cm et plus petite que 150 cm. Par exemple : 120 cm.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["longueurs", "defi", "raisonnement"],
   },
   {
@@ -713,7 +857,11 @@ export const longueursBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "2 km = 2000 m.",
     explanation:
-      "2 km = 2000 m. Ensuite 2000 m + 1500 m = 3500 m. La distance totale est donc 3500 m.",
+      "Définition : une longueur mesure une distance ou la taille d’un segment.\n\n" +
+      "Méthode : on repère les longueurs données et on vérifie les unités.\n\n" +
+      "Calcul : " +
+      ("2 km = 2000 m. Ensuite 2000 m + 1500 m = 3500 m. La distance totale est donc 3500 m.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["longueurs", "defi", "reunion"],
   },
 
@@ -738,28 +886,44 @@ export const longueursBank: TutorBankItemV4[] = [
           good: "cm",
           bad: ["km", "m", "hm"],
           explanation:
-            "Une gomme est un petit objet. Le centimètre est donc l’unité adaptée.",
+            "Définition : une longueur mesure une distance ou la taille d’un segment.\n\n" +
+            "Méthode : on repère les longueurs données et on vérifie les unités.\n\n" +
+            "Calcul : " +
+            ("Une gomme est un petit objet. Le centimètre est donc l’unité adaptée.") +
+            "\n\nConclusion : on garde la réponse obtenue.",
         },
         {
           obj: "une route entre deux villes",
           good: "km",
           bad: ["cm", "mm", "dm"],
           explanation:
-            "La distance entre deux villes est grande. On la mesure donc en kilomètres.",
+            "Définition : une longueur mesure une distance ou la taille d’un segment.\n\n" +
+            "Méthode : on repère les longueurs données et on vérifie les unités.\n\n" +
+            "Calcul : " +
+            ("La distance entre deux villes est grande. On la mesure donc en kilomètres.") +
+            "\n\nConclusion : on garde la réponse obtenue.",
         },
         {
           obj: "un cahier",
           good: "cm",
           bad: ["km", "m", "hm"],
           explanation:
-            "Un cahier mesure quelques dizaines de centimètres. L’unité adaptée est le centimètre.",
+            "Définition : une longueur mesure une distance ou la taille d’un segment.\n\n" +
+            "Méthode : on repère les longueurs données et on vérifie les unités.\n\n" +
+            "Calcul : " +
+            ("Un cahier mesure quelques dizaines de centimètres. L’unité adaptée est le centimètre.") +
+            "\n\nConclusion : on garde la réponse obtenue.",
         },
         {
           obj: "l’épaisseur d’un ongle",
           good: "mm",
           bad: ["m", "km", "cm"],
           explanation:
-            "L’épaisseur d’un ongle est très petite. On la mesure en millimètres.",
+            "Définition : une longueur mesure une distance ou la taille d’un segment.\n\n" +
+            "Méthode : on repère les longueurs données et on vérifie les unités.\n\n" +
+            "Calcul : " +
+            ("L’épaisseur d’un ongle est très petite. On la mesure en millimètres.") +
+            "\n\nConclusion : on garde la réponse obtenue.",
         },
       ];
       const item = items[Math.floor(Math.random() * items.length)];
@@ -794,17 +958,29 @@ export const longueursBank: TutorBankItemV4[] = [
         {
           q: "Combien y a-t-il de centimètres dans 1 mètre ?",
           a: "100",
-          explanation: "1 mètre correspond à 100 centimètres.",
+          explanation: "Définition : une longueur mesure une distance ou la taille d’un segment.\n\n" +
+            "Méthode : on repère les longueurs données et on vérifie les unités.\n\n" +
+            "Calcul : " +
+            ("1 mètre correspond à 100 centimètres.") +
+            "\n\nConclusion : on garde la réponse obtenue.",
         },
         {
           q: "Combien y a-t-il de millimètres dans 1 centimètre ?",
           a: "10",
-          explanation: "1 centimètre correspond à 10 millimètres.",
+          explanation: "Définition : une longueur mesure une distance ou la taille d’un segment.\n\n" +
+            "Méthode : on repère les longueurs données et on vérifie les unités.\n\n" +
+            "Calcul : " +
+            ("1 centimètre correspond à 10 millimètres.") +
+            "\n\nConclusion : on garde la réponse obtenue.",
         },
         {
           q: "Combien y a-t-il de mètres dans 1 kilomètre ?",
           a: "1000",
-          explanation: "1 kilomètre correspond à 1000 mètres.",
+          explanation: "Définition : une longueur mesure une distance ou la taille d’un segment.\n\n" +
+            "Méthode : on repère les longueurs données et on vérifie les unités.\n\n" +
+            "Calcul : " +
+            ("1 kilomètre correspond à 1000 mètres.") +
+            "\n\nConclusion : on garde la réponse obtenue.",
         },
       ];
       const item = items[Math.floor(Math.random() * items.length)];
@@ -840,7 +1016,11 @@ export const longueursBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(m * 100)],
         comparator: "number_equal",
-        explanation: `${m} m = ${m} × 100 = ${m * 100} cm.`,
+        explanation: "Définition : une longueur mesure une distance ou la taille d’un segment.\n\n" +
+          "Méthode : on repère les longueurs données et on vérifie les unités.\n\n" +
+          "Calcul : " +
+          (`${m} m = ${m} × 100 = ${m * 100} cm.`) +
+          "\n\nConclusion : on garde la réponse obtenue.",
       };
     },
   },
@@ -862,7 +1042,11 @@ export const longueursBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(km * 1000)],
         comparator: "number_equal",
-        explanation: `${km} km = ${km} × 1000 = ${km * 1000} m.`,
+        explanation: "Définition : une longueur mesure une distance ou la taille d’un segment.\n\n" +
+          "Méthode : on repère les longueurs données et on vérifie les unités.\n\n" +
+          "Calcul : " +
+          (`${km} km = ${km} × 1000 = ${km * 1000} m.`) +
+          "\n\nConclusion : on garde la réponse obtenue.",
       };
     },
   },
@@ -892,7 +1076,11 @@ export const longueursBank: TutorBankItemV4[] = [
         ]),
         expected: [good],
         comparator: "mcq_exact",
-        explanation: `${cm} cm = ${cm} ÷ 100 = ${good} m.`,
+        explanation: "Définition : une longueur mesure une distance ou la taille d’un segment.\n\n" +
+          "Méthode : on repère les longueurs données et on vérifie les unités.\n\n" +
+          "Calcul : " +
+          (`${cm} cm = ${cm} ÷ 100 = ${good} m.`) +
+          "\n\nConclusion : on garde la réponse obtenue.",
       };
     },
   },
@@ -924,7 +1112,11 @@ export const longueursBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(good)],
         comparator: "number_equal",
-        explanation: `En comparant ${a} cm et ${b} cm, la plus grande longueur est ${good} cm.`,
+        explanation: "Définition : une longueur mesure une distance ou la taille d’un segment.\n\n" +
+          "Méthode : on repère les longueurs données et on vérifie les unités.\n\n" +
+          "Calcul : " +
+          (`En comparant ${a} cm et ${b} cm, la plus grande longueur est ${good} cm.`) +
+          "\n\nConclusion : on garde la réponse obtenue.",
       };
     },
   },
@@ -950,7 +1142,11 @@ export const longueursBank: TutorBankItemV4[] = [
         format: "short",
         expected: [good, String(Math.max(metersInCm, centimeters))],
         comparator: "contains_keyword",
-        explanation: `${meters} m = ${metersInCm} cm. En comparant ${metersInCm} cm et ${centimeters} cm, la plus grande longueur est ${good}.`,
+        explanation: "Définition : une longueur mesure une distance ou la taille d’un segment.\n\n" +
+          "Méthode : on repère les longueurs données et on vérifie les unités.\n\n" +
+          "Calcul : " +
+          (`${meters} m = ${metersInCm} cm. En comparant ${metersInCm} cm et ${centimeters} cm, la plus grande longueur est ${good}.`) +
+          "\n\nConclusion : on garde la réponse obtenue.",
       };
     },
   },
@@ -978,7 +1174,11 @@ export const longueursBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(a + b)],
         comparator: "number_equal",
-        explanation: `On ajoute ${b} m à ${a} m, donc ${a} + ${b} = ${a + b}.`,
+        explanation: "Définition : une longueur mesure une distance ou la taille d’un segment.\n\n" +
+          "Méthode : on repère les longueurs données et on vérifie les unités.\n\n" +
+          "Calcul : " +
+          (`On ajoute ${b} m à ${a} m, donc ${a} + ${b} = ${a + b}.`) +
+          "\n\nConclusion : on garde la réponse obtenue.",
       };
     },
   },
@@ -1002,7 +1202,11 @@ export const longueursBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(a - b)],
         comparator: "number_equal",
-        explanation: `On enlève ${b} cm à ${a} cm, donc ${a} - ${b} = ${a - b} cm.`,
+        explanation: "Définition : une longueur mesure une distance ou la taille d’un segment.\n\n" +
+          "Méthode : on repère les longueurs données et on vérifie les unités.\n\n" +
+          "Calcul : " +
+          (`On enlève ${b} cm à ${a} cm, donc ${a} - ${b} = ${a - b} cm.`) +
+          "\n\nConclusion : on garde la réponse obtenue.",
       };
     },
   },
@@ -1030,7 +1234,11 @@ export const longueursBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(low + 1), String(low + 10), String(high - 1)],
         comparator: "exact_text",
-        explanation: `On cherche une longueur strictement comprise entre ${low} cm et ${high} cm. Par exemple ${low + 10} cm convient.`,
+        explanation: "Définition : une longueur mesure une distance ou la taille d’un segment.\n\n" +
+          "Méthode : on repère les longueurs données et on vérifie les unités.\n\n" +
+          "Calcul : " +
+          (`On cherche une longueur strictement comprise entre ${low} cm et ${high} cm. Par exemple ${low + 10} cm convient.`) +
+          "\n\nConclusion : on garde la réponse obtenue.",
       };
     },
   },
@@ -1050,22 +1258,38 @@ export const longueursBank: TutorBankItemV4[] = [
         {
           item: "un stade",
           explanation:
-            "Un stade est grand. Une unité comme le mètre est adaptée, voire le kilomètre pour de très grandes distances.",
+            "Définition : une longueur mesure une distance ou la taille d’un segment.\n\n" +
+            "Méthode : on repère les longueurs données et on vérifie les unités.\n\n" +
+            "Calcul : " +
+            ("Un stade est grand. Une unité comme le mètre est adaptée, voire le kilomètre pour de très grandes distances.") +
+            "\n\nConclusion : on garde la réponse obtenue.",
         },
         {
           item: "une aiguille",
           explanation:
-            "Une aiguille est très petite. Une unité comme le millimètre est adaptée.",
+            "Définition : une longueur mesure une distance ou la taille d’un segment.\n\n" +
+            "Méthode : on repère les longueurs données et on vérifie les unités.\n\n" +
+            "Calcul : " +
+            ("Une aiguille est très petite. Une unité comme le millimètre est adaptée.") +
+            "\n\nConclusion : on garde la réponse obtenue.",
         },
         {
           item: "une route",
           explanation:
-            "Une route peut être très longue. Le kilomètre est souvent l’unité la plus adaptée.",
+            "Définition : une longueur mesure une distance ou la taille d’un segment.\n\n" +
+            "Méthode : on repère les longueurs données et on vérifie les unités.\n\n" +
+            "Calcul : " +
+            ("Une route peut être très longue. Le kilomètre est souvent l’unité la plus adaptée.") +
+            "\n\nConclusion : on garde la réponse obtenue.",
         },
         {
           item: "une table",
           explanation:
-            "Une table mesure généralement quelques mètres ou moins. Le mètre ou le centimètre sont adaptés.",
+            "Définition : une longueur mesure une distance ou la taille d’un segment.\n\n" +
+            "Méthode : on repère les longueurs données et on vérifie les unités.\n\n" +
+            "Calcul : " +
+            ("Une table mesure généralement quelques mètres ou moins. Le mètre ou le centimètre sont adaptés.") +
+            "\n\nConclusion : on garde la réponse obtenue.",
         },
       ];
       const item = items[Math.floor(Math.random() * items.length)];
