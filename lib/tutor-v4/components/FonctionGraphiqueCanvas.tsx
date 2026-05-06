@@ -1,8 +1,6 @@
 // tutor-v4/components/FonctionGraphiqueCanvas.tsx
 "use client";
 
-"use client";
-
 import type { FonctionGraphiqueCanvasData } from "@/lib/tutor-v4/types";
 
 type Props = {
@@ -10,6 +8,7 @@ type Props = {
 };
 
 type Point = { x: number; y: number };
+type CourbeFonction = NonNullable<FonctionGraphiqueCanvasData["courbes"]>[number];
 
 const COULEUR_AXES = "#0f172a";
 const COULEUR_GRILLE = "#cbd5e1";
@@ -55,14 +54,14 @@ export default function FonctionGraphiqueCanvas({ figure }: Props) {
     };
   }
 
-  function computeY(courbe: NonNullable<typeof figure.courbes>[number], x: number) {
+  function computeY(courbe: CourbeFonction, x: number) {
     if (courbe.type === "lineaire") return (courbe.a ?? 1) * x;
     if (courbe.type === "affine") return (courbe.a ?? 1) * x + (courbe.b ?? 0);
     if (courbe.type === "quadratique") {
       return (courbe.a ?? 1) * x * x + (courbe.b ?? 0) * x + (courbe.c ?? 0);
     }
     return null;
-  }
+}
 
   function pathForCourbe(courbe: NonNullable<typeof figure.courbes>[number]) {
     if (courbe.type === "points") {
