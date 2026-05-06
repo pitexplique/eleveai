@@ -72,6 +72,18 @@ const supportLinks: Record<string, string[]> = {
   fonction_graphique: ["prop_reconnaitre"],
   fonction_affine_lineaire: ["prop_reconnaitre", "prop_quatrieme"],
 
+    // =========================
+  // FONCTIONS AFFINES
+  // =========================
+  affine_reconnaitre: ["fonction_affine_lineaire"],
+  affine_coeff_directeur: ["prop_quatrieme", "fonction_graphique"],
+  affine_ordonnee_origine: ["fonction_graphique"],
+  affine_calcul_image: ["fonction_image", "equation_resoudre_simple"],
+  affine_expression: ["equation_resoudre_simple", "fonction_tableau"],
+  affine_graphique: ["fonction_graphique", "affine_coeff_directeur"],
+  affine_problemes: ["proportionnalite_defis", "equation_defis"],
+  affine_defis: ["fonction_defis", "equation_defis"],
+
   // =========================
   // GRANDEURS
   // =========================

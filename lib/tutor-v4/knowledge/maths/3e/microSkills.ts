@@ -334,6 +334,74 @@ export const microSkills: MicroSkillSource[] = [
     notionId: "fonctions",
     prerequis: ["fonction_affine_lineaire"],
   },
+    /* =========================
+     FONCTIONS AFFINES
+  ========================= */
+
+  {
+    id: "affine_reconnaitre",
+    label: "Reconnaître une fonction affine ou linéaire",
+    notionId: "affine",
+    prerequis: ["fonction_affine_lineaire"],
+  },
+
+  {
+    id: "affine_coeff_directeur",
+    label: "Comprendre et déterminer le coefficient directeur",
+    notionId: "affine",
+    prerequis: ["affine_reconnaitre"],
+  },
+
+  {
+    id: "affine_ordonnee_origine",
+    label: "Comprendre et déterminer l’ordonnée à l’origine",
+    notionId: "affine",
+    prerequis: ["affine_reconnaitre"],
+  },
+
+  {
+    id: "affine_calcul_image",
+    label: "Calculer une image avec une fonction affine",
+    notionId: "affine",
+    prerequis: [
+      "affine_coeff_directeur",
+      "affine_ordonnee_origine",
+    ],
+  },
+
+  {
+    id: "affine_expression",
+    label: "Déterminer l’expression d’une fonction affine",
+    notionId: "affine",
+    prerequis: [
+      "affine_coeff_directeur",
+      "affine_ordonnee_origine",
+    ],
+  },
+
+  {
+    id: "affine_graphique",
+    label: "Lire et interpréter graphiquement une fonction affine",
+    notionId: "affine",
+    prerequis: ["affine_expression"],
+  },
+
+  {
+    id: "affine_problemes",
+    label: "Résoudre un problème avec une fonction affine",
+    notionId: "affine",
+    prerequis: [
+      "affine_calcul_image",
+      "affine_graphique",
+    ],
+  },
+
+  {
+    id: "affine_defis",
+    label: "Défis sur les fonctions affines",
+    notionId: "affine",
+    prerequis: ["affine_problemes"],
+  },
 
   /* =========================
      TRIANGLES

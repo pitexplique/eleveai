@@ -22,6 +22,7 @@ import { trigonometrieBank } from "./trigonometrie.bank";
 import { probabilitesBank } from "./probabilites.bank";
 import { equationsBank } from "./equations.bank";
 import { statistiquesBank } from "./statistiques.bank";
+import { affineBank } from "./affine.bank";
 
 // =========================
 // AGRÉGATION DES BANKS 3e
@@ -40,6 +41,7 @@ export const maths3eQuestionBank: TutorBankItemV4[] = [
   ...probabilitesBank,
   ...equationsBank,
   ...statistiquesBank,
+  ...affineBank,
 ];
 
 export function getMaths3eQuestionBank(args?: {

@@ -91,6 +91,14 @@ export const notions: NotionSource[] = [
     levels: [1, 2, 3],
   },
 
+  {
+    id: "affine",
+    label: "Fonctions affines",
+    boId: "BO3F1",
+    prerequis: ["fonctions", "equations"],
+    levels: [1, 2, 3],
+  },
+
   /* =========================
      GÉOMÉTRIE
   ========================= */
