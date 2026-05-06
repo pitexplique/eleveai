@@ -38,7 +38,10 @@ export const operationsRelatifsBank: TutorBankItemV4[] = [
     expected: ["5", "+5"],
     comparator: "number_equal",
     hint: "Additionne deux nombres positifs.",
-    explanation: "3 + 2 = 5.",
+    explanation: "Définition : les opérations sur les nombres relatifs utilisent les signes et les distances à zéro.\n\n" +
+          "Méthode : on applique la règle des signes, puis on calcule les distances à zéro.\n\nCalcul : " +
+          ("3 + 2 = 5.") +
+          "\n\nConclusion : le résultat obtenu est la bonne réponse.",
     tags: ["relatifs", "addition"],
   },
   {
@@ -55,7 +58,10 @@ export const operationsRelatifsBank: TutorBankItemV4[] = [
     expected: ["-7"],
     comparator: "number_equal",
     hint: "Quand les deux nombres sont négatifs, on additionne les distances à 0 et on garde le signe -.",
-    explanation: "-4 + (-3) = -7.",
+    explanation: "Définition : les opérations sur les nombres relatifs utilisent les signes et les distances à zéro.\n\n" +
+          "Méthode : on applique la règle des signes, puis on calcule les distances à zéro.\n\nCalcul : " +
+          ("-4 + (-3) = -7.") +
+          "\n\nConclusion : le résultat obtenu est la bonne réponse.",
     tags: ["relatifs", "addition"],
   },
   {
@@ -72,7 +78,10 @@ export const operationsRelatifsBank: TutorBankItemV4[] = [
     expected: ["-3"],
     comparator: "number_equal",
     hint: "Les signes sont différents : on soustrait les distances à 0.",
-    explanation: "-5 + 2 = -3 car 5 - 2 = 3 et le résultat garde le signe du nombre qui a la plus grande distance à 0.",
+    explanation: "Définition : les opérations sur les nombres relatifs utilisent les signes et les distances à zéro.\n\n" +
+          "Méthode : on applique la règle des signes, puis on calcule les distances à zéro.\n\nCalcul : " +
+          ("-5 + 2 = -3 car 5 - 2 = 3 et le résultat garde le signe du nombre qui a la plus grande distance à 0.") +
+          "\n\nConclusion : le résultat obtenu est la bonne réponse.",
     tags: ["relatifs", "addition"],
   },
   {
@@ -89,7 +98,10 @@ export const operationsRelatifsBank: TutorBankItemV4[] = [
     expected: ["-3"],
     comparator: "number_equal",
     hint: "Additionner un nombre négatif revient à reculer sur la droite graduée.",
-    explanation: "7 + (-10) = -3.",
+    explanation: "Définition : les opérations sur les nombres relatifs utilisent les signes et les distances à zéro.\n\n" +
+          "Méthode : on applique la règle des signes, puis on calcule les distances à zéro.\n\nCalcul : " +
+          ("7 + (-10) = -3.") +
+          "\n\nConclusion : le résultat obtenu est la bonne réponse.",
     tags: ["relatifs", "addition"],
   },
   {
@@ -106,7 +118,10 @@ export const operationsRelatifsBank: TutorBankItemV4[] = [
     expected: ["0"],
     comparator: "number_equal",
     hint: "Un nombre et son opposé ont une somme nulle.",
-    explanation: "+(+2) + (-2) = 2 + (-2) = 0.",
+    explanation: "Définition : les opérations sur les nombres relatifs utilisent les signes et les distances à zéro.\n\n" +
+          "Méthode : on applique la règle des signes, puis on calcule les distances à zéro.\n\nCalcul : " +
+          ("+(+2) + (-2) = 2 + (-2) = 0.") +
+          "\n\nConclusion : le résultat obtenu est la bonne réponse.",
     tags: ["relatifs", "addition", "parentheses"],
   },
   {
@@ -124,7 +139,10 @@ export const operationsRelatifsBank: TutorBankItemV4[] = [
     expected: ["3"],
     comparator: "mcq_exact",
     hint: "Les signes sont différents : on soustrait 9 et 6.",
-    explanation: "-6 + 9 = 3.",
+    explanation: "Définition : les opérations sur les nombres relatifs utilisent les signes et les distances à zéro.\n\n" +
+          "Méthode : on applique la règle des signes, puis on calcule les distances à zéro.\n\nCalcul : " +
+          ("-6 + 9 = 3.") +
+          "\n\nConclusion : le résultat obtenu est la bonne réponse.",
     tags: ["relatifs", "addition", "qcm"],
   },
   {
@@ -148,7 +166,10 @@ export const operationsRelatifsBank: TutorBankItemV4[] = [
         format: "short",
         expected: asExpectedNumber(result),
         comparator: "number_equal",
-        explanation: `${signed(a)} + ${withParens(b)} = ${signed(result)}.`,
+        explanation: "Définition : les opérations sur les nombres relatifs utilisent les signes et les distances à zéro.\n\n" +
+          "Méthode : on applique la règle des signes, puis on calcule les distances à zéro.\n\nCalcul : " +
+          (`${signed(a)} + ${withParens(b)} = ${signed(result)}.`) +
+          "\n\nConclusion : le résultat obtenu est la bonne réponse.",
       };
     },
   },
@@ -170,7 +191,10 @@ export const operationsRelatifsBank: TutorBankItemV4[] = [
     expected: ["3", "+3"],
     comparator: "number_equal",
     hint: "Soustraire 2, c’est reculer de 2.",
-    explanation: "5 - 2 = 3.",
+    explanation: "Définition : les opérations sur les nombres relatifs utilisent les signes et les distances à zéro.\n\n" +
+          "Méthode : on applique la règle des signes, puis on calcule les distances à zéro.\n\nCalcul : " +
+          ("5 - 2 = 3.") +
+          "\n\nConclusion : le résultat obtenu est la bonne réponse.",
     tags: ["relatifs", "soustraction"],
   },
   {
@@ -187,7 +211,10 @@ export const operationsRelatifsBank: TutorBankItemV4[] = [
     expected: ["-5"],
     comparator: "number_equal",
     hint: "Partir de -2 puis encore reculer de 3 donne un nombre plus petit.",
-    explanation: "-2 - 3 = -2 + (-3) = -5.",
+    explanation: "Définition : les opérations sur les nombres relatifs utilisent les signes et les distances à zéro.\n\n" +
+          "Méthode : on applique la règle des signes, puis on calcule les distances à zéro.\n\nCalcul : " +
+          ("-2 - 3 = -2 + (-3) = -5.") +
+          "\n\nConclusion : le résultat obtenu est la bonne réponse.",
     tags: ["relatifs", "soustraction", "sans_parentheses"],
   },
   {
@@ -204,7 +231,10 @@ export const operationsRelatifsBank: TutorBankItemV4[] = [
     expected: ["7", "+7"],
     comparator: "number_equal",
     hint: "Soustraire un nombre négatif revient à ajouter son opposé.",
-    explanation: "4 - (-3) = 4 + 3 = 7.",
+    explanation: "Définition : les opérations sur les nombres relatifs utilisent les signes et les distances à zéro.\n\n" +
+          "Méthode : on applique la règle des signes, puis on calcule les distances à zéro.\n\nCalcul : " +
+          ("4 - (-3) = 4 + 3 = 7.") +
+          "\n\nConclusion : le résultat obtenu est la bonne réponse.",
     tags: ["relatifs", "soustraction", "regle_signes"],
   },
   {
@@ -221,7 +251,10 @@ export const operationsRelatifsBank: TutorBankItemV4[] = [
     expected: ["-3"],
     comparator: "number_equal",
     hint: "Soustraire un négatif revient à ajouter un positif.",
-    explanation: "-5 - (-2) = -5 + 2 = -3.",
+    explanation: "Définition : les opérations sur les nombres relatifs utilisent les signes et les distances à zéro.\n\n" +
+          "Méthode : on applique la règle des signes, puis on calcule les distances à zéro.\n\nCalcul : " +
+          ("-5 - (-2) = -5 + 2 = -3.") +
+          "\n\nConclusion : le résultat obtenu est la bonne réponse.",
     tags: ["relatifs", "soustraction", "regle_signes"],
   },
   {
@@ -238,7 +271,10 @@ export const operationsRelatifsBank: TutorBankItemV4[] = [
     expected: ["4", "+4"],
     comparator: "number_equal",
     hint: "Le double signe -(-2) devient +2.",
-    explanation: "+(+2) - (-2) = 2 + 2 = 4.",
+    explanation: "Définition : les opérations sur les nombres relatifs utilisent les signes et les distances à zéro.\n\n" +
+          "Méthode : on applique la règle des signes, puis on calcule les distances à zéro.\n\nCalcul : " +
+          ("+(+2) - (-2) = 2 + 2 = 4.") +
+          "\n\nConclusion : le résultat obtenu est la bonne réponse.",
     tags: ["relatifs", "soustraction", "parentheses", "regle_signes"],
   },
   {
@@ -255,7 +291,10 @@ export const operationsRelatifsBank: TutorBankItemV4[] = [
     expected: ["2", "+2"],
     comparator: "number_equal",
     hint: "L’opposé d’un nombre négatif est un nombre positif.",
-    explanation: "-(-2) = +2.",
+    explanation: "Définition : les opérations sur les nombres relatifs utilisent les signes et les distances à zéro.\n\n" +
+          "Méthode : on applique la règle des signes, puis on calcule les distances à zéro.\n\nCalcul : " +
+          ("-(-2) = +2.") +
+          "\n\nConclusion : le résultat obtenu est la bonne réponse.",
     tags: ["relatifs", "soustraction", "parentheses", "regle_signes"],
   },
   {
@@ -273,7 +312,10 @@ export const operationsRelatifsBank: TutorBankItemV4[] = [
     expected: ["-3"],
     comparator: "mcq_exact",
     hint: "Soustraire un négatif revient à ajouter.",
-    explanation: "-7 - (-4) = -7 + 4 = -3.",
+    explanation: "Définition : les opérations sur les nombres relatifs utilisent les signes et les distances à zéro.\n\n" +
+          "Méthode : on applique la règle des signes, puis on calcule les distances à zéro.\n\nCalcul : " +
+          ("-7 - (-4) = -7 + 4 = -3.") +
+          "\n\nConclusion : le résultat obtenu est la bonne réponse.",
     tags: ["relatifs", "soustraction", "qcm"],
   },
   {
@@ -297,7 +339,10 @@ export const operationsRelatifsBank: TutorBankItemV4[] = [
         format: "short",
         expected: asExpectedNumber(result),
         comparator: "number_equal",
-        explanation: `${signed(a)} - ${withParens(b)} = ${signed(a)} + ${withParens(-b)} = ${signed(result)}.`,
+        explanation: "Définition : les opérations sur les nombres relatifs utilisent les signes et les distances à zéro.\n\n" +
+          "Méthode : on applique la règle des signes, puis on calcule les distances à zéro.\n\nCalcul : " +
+          (`${signed(a)} - ${withParens(b)} = ${signed(a)} + ${withParens(-b)} = ${signed(result)}.`) +
+          "\n\nConclusion : le résultat obtenu est la bonne réponse.",
       };
     },
   },
@@ -319,7 +364,10 @@ export const operationsRelatifsBank: TutorBankItemV4[] = [
     expected: ["0"],
     comparator: "number_equal",
     hint: "Calcule étape par étape de gauche à droite.",
-    explanation: "-2 + 5 = 3 puis 3 - 3 = 0.",
+    explanation: "Définition : les opérations sur les nombres relatifs utilisent les signes et les distances à zéro.\n\n" +
+          "Méthode : on applique la règle des signes, puis on calcule les distances à zéro.\n\nCalcul : " +
+          ("-2 + 5 = 3 puis 3 - 3 = 0.") +
+          "\n\nConclusion : le résultat obtenu est la bonne réponse.",
     tags: ["relatifs", "calcul"],
   },
   {
@@ -336,7 +384,10 @@ export const operationsRelatifsBank: TutorBankItemV4[] = [
     expected: ["3", "+3"],
     comparator: "number_equal",
     hint: "Attention à -4 - 3.",
-    explanation: "-4 - 3 = -7 puis -7 + 10 = 3.",
+    explanation: "Définition : les opérations sur les nombres relatifs utilisent les signes et les distances à zéro.\n\n" +
+          "Méthode : on applique la règle des signes, puis on calcule les distances à zéro.\n\nCalcul : " +
+          ("-4 - 3 = -7 puis -7 + 10 = 3.") +
+          "\n\nConclusion : le résultat obtenu est la bonne réponse.",
     tags: ["relatifs", "calcul", "sans_parentheses"],
   },
   {
@@ -353,7 +404,10 @@ export const operationsRelatifsBank: TutorBankItemV4[] = [
     expected: ["3", "+3"],
     comparator: "number_equal",
     hint: "Remplace chaque écriture à double signe par une écriture simple.",
-    explanation: "+(+2) + (-3) - (-4) = 2 - 3 + 4 = -1 + 4 = 3.",
+    explanation: "Définition : les opérations sur les nombres relatifs utilisent les signes et les distances à zéro.\n\n" +
+          "Méthode : on applique la règle des signes, puis on calcule les distances à zéro.\n\nCalcul : " +
+          ("+(+2) + (-3) - (-4) = 2 - 3 + 4 = -1 + 4 = 3.") +
+          "\n\nConclusion : le résultat obtenu est la bonne réponse.",
     tags: ["relatifs", "calcul", "parentheses", "regle_signes"],
   },
   {
@@ -371,7 +425,10 @@ export const operationsRelatifsBank: TutorBankItemV4[] = [
     expected: ["-3"],
     comparator: "mcq_exact",
     hint: "Commence par transformer la soustraction du négatif.",
-    explanation: "-6 - (-2) + 1 = -6 + 2 + 1 = -4 + 1 = -3.",
+    explanation: "Définition : les opérations sur les nombres relatifs utilisent les signes et les distances à zéro.\n\n" +
+          "Méthode : on applique la règle des signes, puis on calcule les distances à zéro.\n\nCalcul : " +
+          ("-6 - (-2) + 1 = -6 + 2 + 1 = -4 + 1 = -3.") +
+          "\n\nConclusion : le résultat obtenu est la bonne réponse.",
     tags: ["relatifs", "calcul", "qcm"],
   },
   {
@@ -396,7 +453,10 @@ export const operationsRelatifsBank: TutorBankItemV4[] = [
         format: "short",
         expected: asExpectedNumber(result),
         comparator: "number_equal",
-        explanation: `${withParens(a)} + ${withParens(b)} - ${withParens(c)} = ${signed(result)}.`,
+        explanation: "Définition : les opérations sur les nombres relatifs utilisent les signes et les distances à zéro.\n\n" +
+          "Méthode : on applique la règle des signes, puis on calcule les distances à zéro.\n\nCalcul : " +
+          (`${withParens(a)} + ${withParens(b)} - ${withParens(c)} = ${signed(result)}.`) +
+          "\n\nConclusion : le résultat obtenu est la bonne réponse.",
       };
     },
   },
@@ -418,7 +478,10 @@ export const operationsRelatifsBank: TutorBankItemV4[] = [
     expected: ["-5"],
     comparator: "number_equal",
     hint: "Baisser de 3 °C, c’est soustraire 3.",
-    explanation: "-2 - 3 = -5. La nouvelle température est donc -5 °C.",
+    explanation: "Définition : les opérations sur les nombres relatifs utilisent les signes et les distances à zéro.\n\n" +
+          "Méthode : on applique la règle des signes, puis on calcule les distances à zéro.\n\nCalcul : " +
+          ("-2 - 3 = -5. La nouvelle température est donc -5 °C.") +
+          "\n\nConclusion : le résultat obtenu est la bonne réponse.",
     tags: ["relatifs", "probleme", "temperature"],
   },
   {
@@ -435,7 +498,10 @@ export const operationsRelatifsBank: TutorBankItemV4[] = [
     expected: ["3", "+3"],
     comparator: "number_equal",
     hint: "Perdre 4 points correspond à -4 et gagner 7 points à +7.",
-    explanation: "-4 + 7 = 3. La variation totale est de +3 points.",
+    explanation: "Définition : les opérations sur les nombres relatifs utilisent les signes et les distances à zéro.\n\n" +
+          "Méthode : on applique la règle des signes, puis on calcule les distances à zéro.\n\nCalcul : " +
+          ("-4 + 7 = 3. La variation totale est de +3 points.") +
+          "\n\nConclusion : le résultat obtenu est la bonne réponse.",
     tags: ["relatifs", "probleme", "sport"],
   },
   {
@@ -452,7 +518,10 @@ export const operationsRelatifsBank: TutorBankItemV4[] = [
     expected: ["-9"],
     comparator: "number_equal",
     hint: "Remonter correspond à ajouter, redescendre à soustraire.",
-    explanation: "-6 + 2 - 5 = -4 - 5 = -9. Le plongeur est à -9 m.",
+    explanation: "Définition : les opérations sur les nombres relatifs utilisent les signes et les distances à zéro.\n\n" +
+          "Méthode : on applique la règle des signes, puis on calcule les distances à zéro.\n\nCalcul : " +
+          ("-6 + 2 - 5 = -4 - 5 = -9. Le plongeur est à -9 m.") +
+          "\n\nConclusion : le résultat obtenu est la bonne réponse.",
     tags: ["relatifs", "probleme", "reunion"],
   },
   {
@@ -470,7 +539,10 @@ export const operationsRelatifsBank: TutorBankItemV4[] = [
     expected: ["-3 €"],
     comparator: "mcq_exact",
     hint: "On calcule -8 + 5.",
-    explanation: "-8 + 5 = -3. Le nouveau solde est de -3 €.",
+    explanation: "Définition : les opérations sur les nombres relatifs utilisent les signes et les distances à zéro.\n\n" +
+          "Méthode : on applique la règle des signes, puis on calcule les distances à zéro.\n\nCalcul : " +
+          ("-8 + 5 = -3. Le nouveau solde est de -3 €.") +
+          "\n\nConclusion : le résultat obtenu est la bonne réponse.",
     tags: ["relatifs", "probleme", "qcm"],
   },
 
@@ -491,7 +563,10 @@ export const operationsRelatifsBank: TutorBankItemV4[] = [
     expected: ["-5", "reculer", "negatif", "gauche"],
     comparator: "contains_keyword",
     hint: "Pars de -2 sur la droite graduée puis recule encore de 3.",
-    explanation: "À partir de -2, soustraire 3 revient à reculer de 3 unités vers la gauche. On arrive à -5, qui est négatif.",
+    explanation: "Définition : les opérations sur les nombres relatifs utilisent les signes et les distances à zéro.\n\n" +
+          "Méthode : on applique la règle des signes, puis on calcule les distances à zéro.\n\nCalcul : " +
+          ("À partir de -2, soustraire 3 revient à reculer de 3 unités vers la gauche. On arrive à -5, qui est négatif.") +
+          "\n\nConclusion : le résultat obtenu est la bonne réponse.",
     tags: ["relatifs", "defi", "raisonnement", "sans_parentheses"],
   },
   {
@@ -508,7 +583,10 @@ export const operationsRelatifsBank: TutorBankItemV4[] = [
     expected: ["2", "+2"],
     comparator: "number_equal",
     hint: "Commence par simplifier -(+3).",
-    explanation: "-(+3) = -3 et -(-5) = +5, donc -3 + 5 = 2.",
+    explanation: "Définition : les opérations sur les nombres relatifs utilisent les signes et les distances à zéro.\n\n" +
+          "Méthode : on applique la règle des signes, puis on calcule les distances à zéro.\n\nCalcul : " +
+          ("-(+3) = -3 et -(-5) = +5, donc -3 + 5 = 2.") +
+          "\n\nConclusion : le résultat obtenu est la bonne réponse.",
     tags: ["relatifs", "defi", "parentheses", "regle_signes"],
   },
   {
@@ -526,7 +604,10 @@ export const operationsRelatifsBank: TutorBankItemV4[] = [
     expected: ["-2 - (-6)"],
     comparator: "mcq_exact",
     hint: "Teste mentalement chaque écriture.",
-    explanation: "-2 - (-6) = -2 + 6 = 4.",
+    explanation: "Définition : les opérations sur les nombres relatifs utilisent les signes et les distances à zéro.\n\n" +
+          "Méthode : on applique la règle des signes, puis on calcule les distances à zéro.\n\nCalcul : " +
+          ("-2 - (-6) = -2 + 6 = 4.") +
+          "\n\nConclusion : le résultat obtenu est la bonne réponse.",
     tags: ["relatifs", "defi", "qcm"],
   },
   {
@@ -550,7 +631,10 @@ export const operationsRelatifsBank: TutorBankItemV4[] = [
         format: "short",
         expected: asExpectedNumber(result),
         comparator: "number_equal",
-        explanation: `-(${signed(a)}) = ${signed(-a)} puis ${signed(-a)} - (${signed(b)}) = ${signed(result)}.`,
+        explanation: "Définition : les opérations sur les nombres relatifs utilisent les signes et les distances à zéro.\n\n" +
+          "Méthode : on applique la règle des signes, puis on calcule les distances à zéro.\n\nCalcul : " +
+          (`-(${signed(a)}) = ${signed(-a)} puis ${signed(-a)} - (${signed(b)}) = ${signed(result)}.`) +
+          "\n\nConclusion : le résultat obtenu est la bonne réponse.",
       };
     },
   },
@@ -571,7 +655,10 @@ export const operationsRelatifsBank: TutorBankItemV4[] = [
     expected: ["-5", "2", "-3", "droite"],
     comparator: "contains_keyword",
     hint: "Imagine un déplacement sur une droite graduée.",
-    explanation: "On part de -5 et on avance de 2 unités vers la droite : on arrive à -3.",
+    explanation: "Définition : les opérations sur les nombres relatifs utilisent les signes et les distances à zéro.\n\n" +
+          "Méthode : on applique la règle des signes, puis on calcule les distances à zéro.\n\nCalcul : " +
+          ("On part de -5 et on avance de 2 unités vers la droite : on arrive à -3.") +
+          "\n\nConclusion : le résultat obtenu est la bonne réponse.",
     tags: ["relatifs", "open", "addition"],
   },
   {
@@ -588,7 +675,10 @@ export const operationsRelatifsBank: TutorBankItemV4[] = [
     expected: ["soustraire", "négatif", "ajouter", "opposé", "7"],
     comparator: "contains_keyword",
     hint: "Soustraire un nombre négatif revient à ajouter son opposé.",
-    explanation: "Soustraire -3 revient à ajouter +3. Donc 4 - (-3) = 4 + 3 = 7.",
+    explanation: "Définition : les opérations sur les nombres relatifs utilisent les signes et les distances à zéro.\n\n" +
+          "Méthode : on applique la règle des signes, puis on calcule les distances à zéro.\n\nCalcul : " +
+          ("Soustraire -3 revient à ajouter +3. Donc 4 - (-3) = 4 + 3 = 7.") +
+          "\n\nConclusion : le résultat obtenu est la bonne réponse.",
     tags: ["relatifs", "open", "soustraction"],
   },
   {
@@ -605,7 +695,10 @@ export const operationsRelatifsBank: TutorBankItemV4[] = [
     expected: ["-6", "+2", "+1", "-3"],
     comparator: "contains_keyword",
     hint: "Commence par transformer -(-2) en +2.",
-    explanation: "-6 - (-2) + 1 = -6 + 2 + 1 = -4 + 1 = -3.",
+    explanation: "Définition : les opérations sur les nombres relatifs utilisent les signes et les distances à zéro.\n\n" +
+          "Méthode : on applique la règle des signes, puis on calcule les distances à zéro.\n\nCalcul : " +
+          ("-6 - (-2) + 1 = -6 + 2 + 1 = -4 + 1 = -3.") +
+          "\n\nConclusion : le résultat obtenu est la bonne réponse.",
     tags: ["relatifs", "open", "calcul"],
   },
   {
@@ -622,7 +715,10 @@ export const operationsRelatifsBank: TutorBankItemV4[] = [
     expected: ["-6", "+2", "-5", "-9"],
     comparator: "contains_keyword",
     hint: "Remonter correspond à ajouter ; redescendre correspond à soustraire.",
-    explanation: "On calcule -6 + 2 - 5. Le plongeur remonte à -4 m, puis redescend à -9 m.",
+    explanation: "Définition : les opérations sur les nombres relatifs utilisent les signes et les distances à zéro.\n\n" +
+          "Méthode : on applique la règle des signes, puis on calcule les distances à zéro.\n\nCalcul : " +
+          ("On calcule -6 + 2 - 5. Le plongeur remonte à -4 m, puis redescend à -9 m.") +
+          "\n\nConclusion : le résultat obtenu est la bonne réponse.",
     tags: ["relatifs", "open", "probleme", "reunion"],
   },
   {
@@ -639,7 +735,10 @@ export const operationsRelatifsBank: TutorBankItemV4[] = [
     expected: ["soustraire", "négatif", "ajouter", "-3"],
     comparator: "contains_keyword",
     hint: "Il a oublié que soustraire un négatif revient à ajouter.",
-    explanation: "L’élève a traité -(-4) comme -4. Or soustraire -4 revient à ajouter 4 : -7 - (-4) = -7 + 4 = -3.",
+    explanation: "Définition : les opérations sur les nombres relatifs utilisent les signes et les distances à zéro.\n\n" +
+          "Méthode : on applique la règle des signes, puis on calcule les distances à zéro.\n\nCalcul : " +
+          ("L’élève a traité -(-4) comme -4. Or soustraire -4 revient à ajouter 4 : -7 - (-4) = -7 + 4 = -3.") +
+          "\n\nConclusion : le résultat obtenu est la bonne réponse.",
     tags: ["relatifs", "open", "defi", "erreur"],
   },
 ];

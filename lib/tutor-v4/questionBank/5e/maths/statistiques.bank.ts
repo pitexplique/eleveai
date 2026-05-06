@@ -75,7 +75,10 @@ export const statistiquesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Un tableau statistique organise des effectifs.",
     explanation:
-      "Pour faire un tableau statistique, on compte l’effectif de chaque catégorie.",
+      "Définition : les statistiques servent à organiser et résumer une série de données.\n\n" +
+          "Méthode : on lit le tableau ou le graphique, puis on calcule l’indicateur demandé.\n\nCalcul : " +
+          ("Pour faire un tableau statistique, on compte l’effectif de chaque catégorie.") +
+          "\n\nConclusion : l’indicateur obtenu résume correctement les données.",
     tags: ["statistiques", "organiser", "qcm"],
   },
   {
@@ -93,7 +96,10 @@ export const statistiquesBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "Avant un graphique, il faut savoir combien il y a de données dans chaque catégorie.",
     explanation:
-      "On organise les données pour les classer et compter les effectifs. Ensuite, on peut construire un tableau ou un graphique.",
+      "Définition : les statistiques servent à organiser et résumer une série de données.\n\n" +
+          "Méthode : on lit le tableau ou le graphique, puis on calcule l’indicateur demandé.\n\nCalcul : " +
+          ("On organise les données pour les classer et compter les effectifs. Ensuite, on peut construire un tableau ou un graphique.") +
+          "\n\nConclusion : l’indicateur obtenu résume correctement les données.",
     tags: ["statistiques", "organiser", "open"],
   },
 
@@ -114,7 +120,10 @@ export const statistiquesBank: TutorBankItemV4[] = [
     expected: ["6"],
     comparator: "number_equal",
     hint: "Lis directement l’effectif associé au basket.",
-    explanation: "L’effectif du basket est 6.",
+    explanation: "Définition : les statistiques servent à organiser et résumer une série de données.\n\n" +
+          "Méthode : on lit le tableau ou le graphique, puis on calcule l’indicateur demandé.\n\nCalcul : " +
+          ("L’effectif du basket est 6.") +
+          "\n\nConclusion : l’indicateur obtenu résume correctement les données.",
     tags: ["statistiques", "tableau", "lecture"],
   },
   {
@@ -131,7 +140,10 @@ export const statistiquesBank: TutorBankItemV4[] = [
     expected: ["18"],
     comparator: "number_equal",
     hint: "Additionne les effectifs.",
-    explanation: "L’effectif total est 8 + 6 + 4 = 18.",
+    explanation: "Définition : les statistiques servent à organiser et résumer une série de données.\n\n" +
+          "Méthode : on lit le tableau ou le graphique, puis on calcule l’indicateur demandé.\n\nCalcul : " +
+          ("L’effectif total est 8 + 6 + 4 = 18.") +
+          "\n\nConclusion : l’indicateur obtenu résume correctement les données.",
     tags: ["statistiques", "tableau", "effectif_total"],
   },
   {
@@ -156,7 +168,10 @@ export const statistiquesBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(total)],
         comparator: "number_equal",
-        explanation: `On additionne les effectifs : ${a} + ${b} + ${c} = ${total}.`,
+        explanation: "Définition : les statistiques servent à organiser et résumer une série de données.\n\n" +
+          "Méthode : on lit le tableau ou le graphique, puis on calcule l’indicateur demandé.\n\nCalcul : " +
+          (`On additionne les effectifs : ${a} + ${b} + ${c} = ${total}.`) +
+          "\n\nConclusion : l’indicateur obtenu résume correctement les données.",
       };
     },
   },
@@ -180,7 +195,10 @@ export const statistiquesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Regarde la barre la plus haute.",
     explanation:
-      "La barre la plus haute est celle du foot : c’est l’activité la plus choisie.",
+      "Définition : les statistiques servent à organiser et résumer une série de données.\n\n" +
+          "Méthode : on lit le tableau ou le graphique, puis on calcule l’indicateur demandé.\n\nCalcul : " +
+          ("La barre la plus haute est celle du foot : c’est l’activité la plus choisie.") +
+          "\n\nConclusion : l’indicateur obtenu résume correctement les données.",
     tags: ["statistiques", "graphique", "canvas", "qcm"],
     canvas: statGraphCanvas({
       graphType: "barres",
@@ -208,7 +226,10 @@ export const statistiquesBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "Observe la hauteur des barres.",
     explanation:
-      "La catégorie la plus fréquente est celle dont la barre est la plus haute, car elle a le plus grand effectif.",
+      "Définition : les statistiques servent à organiser et résumer une série de données.\n\n" +
+          "Méthode : on lit le tableau ou le graphique, puis on calcule l’indicateur demandé.\n\nCalcul : " +
+          ("La catégorie la plus fréquente est celle dont la barre est la plus haute, car elle a le plus grand effectif.") +
+          "\n\nConclusion : l’indicateur obtenu résume correctement les données.",
     tags: ["statistiques", "graphique", "open"],
   },
   {
@@ -234,7 +255,10 @@ export const statistiquesBank: TutorBankItemV4[] = [
         choices: labels,
         expected: [labels[index]],
         comparator: "mcq_exact",
-        explanation: `La plus grande valeur est ${max}. Elle correspond à la catégorie ${labels[index]}.`,
+        explanation: "Définition : les statistiques servent à organiser et résumer une série de données.\n\n" +
+          "Méthode : on lit le tableau ou le graphique, puis on calcule l’indicateur demandé.\n\nCalcul : " +
+          (`La plus grande valeur est ${max}. Elle correspond à la catégorie ${labels[index]}.`) +
+          "\n\nConclusion : l’indicateur obtenu résume correctement les données.",
         canvas: statGraphCanvas({
           graphType: "barres",
           data: labels.map((label, i) => ({ label, value: values[i] })),
@@ -262,7 +286,10 @@ export const statistiquesBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Fréquence = effectif ÷ effectif total.",
     explanation:
-      "La fréquence est 10 ÷ 25 = 0,4, soit 40 %.",
+      "Définition : les statistiques servent à organiser et résumer une série de données.\n\n" +
+          "Méthode : on lit le tableau ou le graphique, puis on calcule l’indicateur demandé.\n\nCalcul : " +
+          ("La fréquence est 10 ÷ 25 = 0,4, soit 40 %.") +
+          "\n\nConclusion : l’indicateur obtenu résume correctement les données.",
     tags: ["statistiques", "frequence"],
   },
   {
@@ -281,7 +308,10 @@ export const statistiquesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Calcule 5 ÷ 20.",
     explanation:
-      "La fréquence est 5 ÷ 20 = 0,25.",
+      "Définition : les statistiques servent à organiser et résumer une série de données.\n\n" +
+          "Méthode : on lit le tableau ou le graphique, puis on calcule l’indicateur demandé.\n\nCalcul : " +
+          ("La fréquence est 5 ÷ 20 = 0,25.") +
+          "\n\nConclusion : l’indicateur obtenu résume correctement les données.",
     tags: ["statistiques", "frequence", "qcm"],
   },
   {
@@ -305,7 +335,10 @@ export const statistiquesBank: TutorBankItemV4[] = [
         format: "short",
         expected: [formatNumber(freq), String(freq).replace(".", ",")],
         comparator: "number_equal",
-        explanation: `Fréquence = ${effectif} ÷ ${total} = ${formatNumber(freq)}.`,
+        explanation: "Définition : les statistiques servent à organiser et résumer une série de données.\n\n" +
+          "Méthode : on lit le tableau ou le graphique, puis on calcule l’indicateur demandé.\n\nCalcul : " +
+          (`Fréquence = ${effectif} ÷ ${total} = ${formatNumber(freq)}.`) +
+          "\n\nConclusion : l’indicateur obtenu résume correctement les données.",
       };
     },
   },
@@ -324,7 +357,10 @@ export const statistiquesBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "Il faut comparer l’effectif à l’effectif total.",
     explanation:
-      "Pour calculer une fréquence, on divise l’effectif de la catégorie par l’effectif total.",
+      "Définition : les statistiques servent à organiser et résumer une série de données.\n\n" +
+          "Méthode : on lit le tableau ou le graphique, puis on calcule l’indicateur demandé.\n\nCalcul : " +
+          ("Pour calculer une fréquence, on divise l’effectif de la catégorie par l’effectif total.") +
+          "\n\nConclusion : l’indicateur obtenu résume correctement les données.",
     tags: ["statistiques", "frequence", "open"],
   },
 
@@ -352,7 +388,10 @@ export const statistiquesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "On veut comparer plusieurs quantités.",
     explanation:
-      "Un diagramme en barres est adapté pour comparer les effectifs de plusieurs catégories.",
+      "Définition : les statistiques servent à organiser et résumer une série de données.\n\n" +
+          "Méthode : on lit le tableau ou le graphique, puis on calcule l’indicateur demandé.\n\nCalcul : " +
+          ("Un diagramme en barres est adapté pour comparer les effectifs de plusieurs catégories.") +
+          "\n\nConclusion : l’indicateur obtenu résume correctement les données.",
     tags: ["statistiques", "representation", "qcm"],
   },
   {
@@ -378,9 +417,12 @@ export const statistiquesBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(sum(data.map((d) => d.value)))],
         comparator: "number_equal",
-        explanation: `On additionne les effectifs : ${data
+        explanation: "Définition : les statistiques servent à organiser et résumer une série de données.\n\n" +
+          "Méthode : on lit le tableau ou le graphique, puis on calcule l’indicateur demandé.\n\nCalcul : " +
+          (`On additionne les effectifs : ${data
           .map((d) => d.value)
-          .join(" + ")} = ${sum(data.map((d) => d.value))}.`,
+          .join(" + ")} = ${sum(data.map((d) => d.value))}.`) +
+          "\n\nConclusion : l’indicateur obtenu résume correctement les données.",
         canvas: statGraphCanvas({
           graphType: "batons",
           data,
@@ -403,7 +445,10 @@ export const statistiquesBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "Regarde le rôle de la hauteur des barres.",
     explanation:
-      "La hauteur des barres représente les effectifs. On peut donc comparer rapidement les catégories.",
+      "Définition : les statistiques servent à organiser et résumer une série de données.\n\n" +
+          "Méthode : on lit le tableau ou le graphique, puis on calcule l’indicateur demandé.\n\nCalcul : " +
+          ("La hauteur des barres représente les effectifs. On peut donc comparer rapidement les catégories.") +
+          "\n\nConclusion : l’indicateur obtenu résume correctement les données.",
     tags: ["statistiques", "representation", "open"],
   },
 
@@ -431,7 +476,10 @@ export const statistiquesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "On veut voir des parts d’un total.",
     explanation:
-      "Un diagramme circulaire permet de visualiser la répartition d’un total en plusieurs parties.",
+      "Définition : les statistiques servent à organiser et résumer une série de données.\n\n" +
+          "Méthode : on lit le tableau ou le graphique, puis on calcule l’indicateur demandé.\n\nCalcul : " +
+          ("Un diagramme circulaire permet de visualiser la répartition d’un total en plusieurs parties.") +
+          "\n\nConclusion : l’indicateur obtenu résume correctement les données.",
     tags: ["statistiques", "representation", "camembert", "qcm"],
   },
   {
@@ -449,7 +497,10 @@ export const statistiquesBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "Le tableau organise les données ; le graphique les visualise.",
     explanation:
-      "Un tableau présente les données sous forme de lignes et de colonnes. Un diagramme en barres permet de visualiser et comparer les effectifs.",
+      "Définition : les statistiques servent à organiser et résumer une série de données.\n\n" +
+          "Méthode : on lit le tableau ou le graphique, puis on calcule l’indicateur demandé.\n\nCalcul : " +
+          ("Un tableau présente les données sous forme de lignes et de colonnes. Un diagramme en barres permet de visualiser et comparer les effectifs.") +
+          "\n\nConclusion : l’indicateur obtenu résume correctement les données.",
     tags: ["statistiques", "representation", "open"],
   },
 
@@ -471,7 +522,10 @@ export const statistiquesBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Additionne les notes puis divise par 3.",
     explanation:
-      "Moyenne = (10 + 12 + 14) ÷ 3 = 36 ÷ 3 = 12.",
+      "Définition : les statistiques servent à organiser et résumer une série de données.\n\n" +
+          "Méthode : on lit le tableau ou le graphique, puis on calcule l’indicateur demandé.\n\nCalcul : " +
+          ("Moyenne = (10 + 12 + 14) ÷ 3 = 36 ÷ 3 = 12.") +
+          "\n\nConclusion : l’indicateur obtenu résume correctement les données.",
     tags: ["statistiques", "moyenne"],
   },
   {
@@ -490,7 +544,10 @@ export const statistiquesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Additionne puis divise par 4.",
     explanation:
-      "8 + 10 + 12 + 14 = 44. Puis 44 ÷ 4 = 11.",
+      "Définition : les statistiques servent à organiser et résumer une série de données.\n\n" +
+          "Méthode : on lit le tableau ou le graphique, puis on calcule l’indicateur demandé.\n\nCalcul : " +
+          ("8 + 10 + 12 + 14 = 44. Puis 44 ÷ 4 = 11.") +
+          "\n\nConclusion : l’indicateur obtenu résume correctement les données.",
     tags: ["statistiques", "moyenne", "qcm"],
   },
   {
@@ -515,7 +572,10 @@ export const statistiquesBank: TutorBankItemV4[] = [
         format: "short",
         expected: [formatNumber(mean)],
         comparator: "number_equal",
-        explanation: `Moyenne = (${a} + ${b} + ${c}) ÷ 3 = ${formatNumber(mean)}.`,
+        explanation: "Définition : les statistiques servent à organiser et résumer une série de données.\n\n" +
+          "Méthode : on lit le tableau ou le graphique, puis on calcule l’indicateur demandé.\n\nCalcul : " +
+          (`Moyenne = (${a} + ${b} + ${c}) ÷ 3 = ${formatNumber(mean)}.`) +
+          "\n\nConclusion : l’indicateur obtenu résume correctement les données.",
       };
     },
   },
@@ -534,7 +594,10 @@ export const statistiquesBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "Il y a deux étapes.",
     explanation:
-      "On additionne les trois valeurs : 10 + 12 + 14 = 36. Puis on divise par 3 : 36 ÷ 3 = 12.",
+      "Définition : les statistiques servent à organiser et résumer une série de données.\n\n" +
+          "Méthode : on lit le tableau ou le graphique, puis on calcule l’indicateur demandé.\n\nCalcul : " +
+          ("On additionne les trois valeurs : 10 + 12 + 14 = 36. Puis on divise par 3 : 36 ÷ 3 = 12.") +
+          "\n\nConclusion : l’indicateur obtenu résume correctement les données.",
     tags: ["statistiques", "moyenne", "open"],
   },
 
@@ -556,7 +619,10 @@ export const statistiquesBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Additionne les trois effectifs.",
     explanation:
-      "L’effectif total est 12 + 8 + 10 = 30.",
+      "Définition : les statistiques servent à organiser et résumer une série de données.\n\n" +
+          "Méthode : on lit le tableau ou le graphique, puis on calcule l’indicateur demandé.\n\nCalcul : " +
+          ("L’effectif total est 12 + 8 + 10 = 30.") +
+          "\n\nConclusion : l’indicateur obtenu résume correctement les données.",
     tags: ["statistiques", "defi", "reunion"],
     canvas: statGraphCanvas({
       graphType: "barres",
@@ -582,7 +648,10 @@ export const statistiquesBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "36 est la somme, pas la moyenne.",
     explanation:
-      "L’élève a seulement additionné les valeurs. Il faut ensuite diviser par le nombre de valeurs : 36 ÷ 3 = 12.",
+      "Définition : les statistiques servent à organiser et résumer une série de données.\n\n" +
+          "Méthode : on lit le tableau ou le graphique, puis on calcule l’indicateur demandé.\n\nCalcul : " +
+          ("L’élève a seulement additionné les valeurs. Il faut ensuite diviser par le nombre de valeurs : 36 ÷ 3 = 12.") +
+          "\n\nConclusion : l’indicateur obtenu résume correctement les données.",
     tags: ["statistiques", "defi", "open", "erreur"],
   },
   {
@@ -608,7 +677,10 @@ export const statistiquesBank: TutorBankItemV4[] = [
         format: "short",
         expected: [formatNumber(freq), String(freq).replace(".", ",")],
         comparator: "number_equal",
-        explanation: `Total = ${mangues} + ${ananas} + ${letchis} = ${total}. Fréquence des mangues = ${mangues} ÷ ${total} = ${formatNumber(freq)}.`,
+        explanation: "Définition : les statistiques servent à organiser et résumer une série de données.\n\n" +
+          "Méthode : on lit le tableau ou le graphique, puis on calcule l’indicateur demandé.\n\nCalcul : " +
+          (`Total = ${mangues} + ${ananas} + ${letchis} = ${total}. Fréquence des mangues = ${mangues} ÷ ${total} = ${formatNumber(freq)}.`) +
+          "\n\nConclusion : l’indicateur obtenu résume correctement les données.",
         canvas: statGraphCanvas({
           graphType: "barres",
           data: [
