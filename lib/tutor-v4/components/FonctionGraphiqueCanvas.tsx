@@ -1,10 +1,12 @@
 // tutor-v4/components/FonctionGraphiqueCanvas.tsx
 "use client";
 
-import type { CanvasFigure } from "@/lib/tutor-v4/types";
+"use client";
+
+import type { FonctionGraphiqueCanvasData } from "@/lib/tutor-v4/types";
 
 type Props = {
-  figure: CanvasFigure;
+  figure: FonctionGraphiqueCanvasData;
 };
 
 type Point = { x: number; y: number };
