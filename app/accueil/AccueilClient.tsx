@@ -1,9 +1,17 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 const HEADER_HEIGHT = 72;
+
+const cards = [
+  { href: "/coach-maths-ia", image: "/images/cards/coach.png" },
+  { href: "/calcul-rapide", image: "/images/cards/calcul-rapide.png" },
+  { href: "/lecon-du-jour", image: "/images/cards/lecondujour.png" },
+  { href: "/optimiseur", image: "/images/cards/valeria.png" },
+];
 
 export default function AccueilPage() {
   const [offset, setOffset] = useState(0);
@@ -34,7 +42,7 @@ export default function AccueilPage() {
     : "/images/accueil-eleveai-reunion.png";
 
   return (
-    <main className="relative min-h-screen overflow-hidden">
+    <main className="relative min-h-[120vh] overflow-hidden">
       
       {/* IMAGE DE FOND */}
       <div
@@ -57,40 +65,65 @@ export default function AccueilPage() {
         />
 
         {/* OVERLAY */}
-        <div className="absolute inset-0 bg-black/15 sm:bg-black/10" />
+        <div className="absolute inset-0 bg-black/10 sm:bg-black/5" />
       </div>
 
       {/* CONTENU */}
       <section
-        className="relative flex items-start justify-center px-4"
+        className="relative flex justify-center"
         style={{
           minHeight: `calc(100vh - ${HEADER_HEIGHT}px)`,
         }}
       >
-        <div className="mt-10 flex max-w-2xl flex-col items-center text-center">
-          
-          {/* MARGOUILLAT */}
-          <div className="mb-4 text-7xl drop-shadow-2xl sm:text-8xl">
-            🦎
-          </div>
+        {/* CARDS */}
+<div
+  className="
+    mt-[30vh]
+    grid grid-cols-2
+    gap-3 px-4
+    sm:mt-[64vh]
+    sm:flex sm:max-w-6xl sm:flex-wrap sm:justify-center sm:gap-6
+  "
+>
+          {cards.map((card, index) => (
+            <Link
+              key={index}
+              href={card.href}
+              className="
+                group relative
+                h-[92px] w-[176px]
+                sm:h-[115px] sm:w-[220px]
+                overflow-hidden rounded-3xl
+                border border-white/40
+                shadow-xl transition-all duration-300
+                hover:-translate-y-2 hover:scale-[1.05]
+                hover:shadow-[0_0_30px_rgba(255,255,255,0.35)]
+                focus:outline-none focus:ring-4 focus:ring-white/70
+              "
+            >
+              <Image
+                src={card.image}
+                alt=""
+                fill
+                sizes="(max-width: 640px) 176px, 220px"
+                className="
+                  object-cover
+                  transition-transform duration-500
+                  group-hover:scale-[1.05]
+                "
+              />
 
-          {/* PHRASE */}
-          <h1
-            className="
-              rounded-3xl
-              bg-black/35
-              px-6 py-4
-              text-2xl font-black
-              text-white
-              backdrop-blur-sm
-              sm:text-4xl
-            "
-          >
-            Apprendre autrement.
-            <br />
-            Avancer chaque jour.
-          </h1>
-
+              {/* EFFET LUMIÈRE */}
+              <div
+                className="
+                  pointer-events-none absolute -left-20 top-0
+                  h-full w-16 rotate-12 bg-white/30 blur-md
+                  transition-transform duration-700
+                  group-hover:translate-x-[300px]
+                "
+              />
+            </Link>
+          ))}
         </div>
       </section>
     </main>
