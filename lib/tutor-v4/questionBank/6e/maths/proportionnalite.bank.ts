@@ -27,7 +27,11 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "Quand le prix unitaire reste constant, c’est proportionnel.",
     explanation:
-      "Une situation est proportionnelle quand le prix par objet reste le même. Si 1 cahier coûte toujours le même prix, alors la situation est proportionnelle.",
+      "Définition : deux grandeurs sont proportionnelles quand on multiplie toujours par le même nombre.\n\n" +
+      "Méthode : on cherche le coefficient de proportionnalité ou le passage entre les grandeurs.\n\n" +
+      "Calcul : " +
+      ("Une situation est proportionnelle quand le prix par objet reste le même. Si 1 cahier coûte toujours le même prix, alors la situation est proportionnelle.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["proportionnalite", "reconnaitre"],
   },
   {
@@ -45,7 +49,11 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "Quand on double la quantité, le prix double aussi.",
     explanation:
-      "On passe de 2 pommes à 4 pommes en multipliant par 2. Le prix passe aussi de 4 € à 8 € en multipliant par 2. La situation est donc proportionnelle.",
+      "Définition : deux grandeurs sont proportionnelles quand on multiplie toujours par le même nombre.\n\n" +
+      "Méthode : on cherche le coefficient de proportionnalité ou le passage entre les grandeurs.\n\n" +
+      "Calcul : " +
+      ("On passe de 2 pommes à 4 pommes en multipliant par 2. Le prix passe aussi de 4 € à 8 € en multipliant par 2. La situation est donc proportionnelle.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["proportionnalite", "reconnaitre"],
   },
   {
@@ -63,7 +71,11 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "Si on double la quantité, le prix devrait aussi doubler.",
     explanation:
-      "Si la situation était proportionnelle, en passant de 2 billets à 4 billets, le prix devrait passer de 6 € à 12 €. Or ici on obtient 11 €. La situation n’est donc pas proportionnelle.",
+      "Définition : deux grandeurs sont proportionnelles quand on multiplie toujours par le même nombre.\n\n" +
+      "Méthode : on cherche le coefficient de proportionnalité ou le passage entre les grandeurs.\n\n" +
+      "Calcul : " +
+      ("Si la situation était proportionnelle, en passant de 2 billets à 4 billets, le prix devrait passer de 6 € à 12 €. Or ici on obtient 11 €. La situation n’est donc pas proportionnelle.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["proportionnalite", "reconnaitre"],
   },
   {
@@ -87,7 +99,11 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Dans une situation proportionnelle, si on multiplie la quantité, on multiplie aussi l’autre valeur par le même nombre.",
     explanation:
-      "Seule la première situation est proportionnelle : quand on passe de 3 à 6 stylos, on multiplie par 2, et le prix passe de 6 € à 12 €, donc il est aussi multiplié par 2.",
+      "Définition : deux grandeurs sont proportionnelles quand on multiplie toujours par le même nombre.\n\n" +
+      "Méthode : on cherche le coefficient de proportionnalité ou le passage entre les grandeurs.\n\n" +
+      "Calcul : " +
+      ("Seule la première situation est proportionnelle : quand on passe de 3 à 6 stylos, on multiplie par 2, et le prix passe de 6 € à 12 €, donc il est aussi multiplié par 2.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["proportionnalite", "reconnaitre", "qcm"],
   },
   {
@@ -111,7 +127,11 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Cherche le cas où le prix suit exactement le même coefficient que la quantité.",
     explanation:
-      "Dans la première situation, on passe de 2 à 6 mangues en multipliant par 3, et le prix passe de 4 € à 12 € en multipliant aussi par 3. C’est donc une situation proportionnelle.",
+      "Définition : deux grandeurs sont proportionnelles quand on multiplie toujours par le même nombre.\n\n" +
+      "Méthode : on cherche le coefficient de proportionnalité ou le passage entre les grandeurs.\n\n" +
+      "Calcul : " +
+      ("Dans la première situation, on passe de 2 à 6 mangues en multipliant par 3, et le prix passe de 4 € à 12 € en multipliant aussi par 3. C’est donc une situation proportionnelle.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["proportionnalite", "reconnaitre", "reunion", "qcm"],
   },
 
@@ -133,7 +153,11 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Si on double, le prix double.",
     explanation:
-      "On passe de 2 cahiers à 4 cahiers en multipliant par 2. On multiplie donc aussi le prix par 2 : 4 € × 2 = 8 €.",
+      "Définition : deux grandeurs sont proportionnelles quand on multiplie toujours par le même nombre.\n\n" +
+      "Méthode : on cherche le coefficient de proportionnalité ou le passage entre les grandeurs.\n\n" +
+      "Calcul : " +
+      ("On passe de 2 cahiers à 4 cahiers en multipliant par 2. On multiplie donc aussi le prix par 2 : 4 € × 2 = 8 €.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["proportionnalite", "tableau"],
   },
   {
@@ -151,7 +175,11 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "De 3 à 9, on multiplie par 3.",
     explanation:
-      "On passe de 3 stylos à 9 stylos en multipliant par 3. Le prix est donc aussi multiplié par 3 : 6 € × 3 = 18 €.",
+      "Définition : deux grandeurs sont proportionnelles quand on multiplie toujours par le même nombre.\n\n" +
+      "Méthode : on cherche le coefficient de proportionnalité ou le passage entre les grandeurs.\n\n" +
+      "Calcul : " +
+      ("On passe de 3 stylos à 9 stylos en multipliant par 3. Le prix est donc aussi multiplié par 3 : 6 € × 3 = 18 €.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["proportionnalite", "tableau"],
   },
   {
@@ -169,7 +197,11 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Si on multiplie la quantité par 2, le prix aussi.",
     explanation:
-      "On passe de 3 samoussas à 6 samoussas en multipliant par 2. Le prix passe donc de 6 € à 12 €.",
+      "Définition : deux grandeurs sont proportionnelles quand on multiplie toujours par le même nombre.\n\n" +
+      "Méthode : on cherche le coefficient de proportionnalité ou le passage entre les grandeurs.\n\n" +
+      "Calcul : " +
+      ("On passe de 3 samoussas à 6 samoussas en multipliant par 2. Le prix passe donc de 6 € à 12 €.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["proportionnalite", "tableau", "reunion"],
   },
   {
@@ -187,7 +219,11 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "De 2 à 6, on multiplie par 3.",
     explanation:
-      "On passe de 2 ananas à 6 ananas en multipliant par 3. Le prix passe donc de 8 € à 24 €.",
+      "Définition : deux grandeurs sont proportionnelles quand on multiplie toujours par le même nombre.\n\n" +
+      "Méthode : on cherche le coefficient de proportionnalité ou le passage entre les grandeurs.\n\n" +
+      "Calcul : " +
+      ("On passe de 2 ananas à 6 ananas en multipliant par 3. Le prix passe donc de 8 € à 24 €.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["proportionnalite", "tableau", "reunion"],
   },
   {
@@ -206,7 +242,11 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "De 2 à 6, on multiplie par 3.",
     explanation:
-      "On passe de 2 potions à 6 potions en multipliant par 3. Le prix passe donc de 10 à 30 pièces.",
+      "Définition : deux grandeurs sont proportionnelles quand on multiplie toujours par le même nombre.\n\n" +
+      "Méthode : on cherche le coefficient de proportionnalité ou le passage entre les grandeurs.\n\n" +
+      "Calcul : " +
+      ("On passe de 2 potions à 6 potions en multipliant par 3. Le prix passe donc de 10 à 30 pièces.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["proportionnalite", "tableau", "jeux_video", "qcm"],
   },
   {
@@ -225,7 +265,11 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "De 4 à 8, on double.",
     explanation:
-      "On passe de 4 coffres à 8 coffres en multipliant par 2. Le prix passe donc de 12 à 24 pièces.",
+      "Définition : deux grandeurs sont proportionnelles quand on multiplie toujours par le même nombre.\n\n" +
+      "Méthode : on cherche le coefficient de proportionnalité ou le passage entre les grandeurs.\n\n" +
+      "Calcul : " +
+      ("On passe de 4 coffres à 8 coffres en multipliant par 2. Le prix passe donc de 12 à 24 pièces.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["proportionnalite", "tableau", "jeux_video", "qcm"],
   },
 
@@ -247,7 +291,11 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Prix = nombre de cahiers × coefficient.",
     explanation:
-      "Si un cahier coûte 3 €, alors le prix total s’obtient en multipliant le nombre de cahiers par 3. Le coefficient est donc 3.",
+      "Définition : deux grandeurs sont proportionnelles quand on multiplie toujours par le même nombre.\n\n" +
+      "Méthode : on cherche le coefficient de proportionnalité ou le passage entre les grandeurs.\n\n" +
+      "Calcul : " +
+      ("Si un cahier coûte 3 €, alors le prix total s’obtient en multipliant le nombre de cahiers par 3. Le coefficient est donc 3.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["proportionnalite", "coefficient"],
   },
   {
@@ -265,7 +313,11 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Cherche le prix pour 1 stylo.",
     explanation:
-      "Si 2 stylos coûtent 8 €, alors 1 stylo coûte 8 ÷ 2 = 4 €. Le coefficient de proportionnalité est donc 4.",
+      "Définition : deux grandeurs sont proportionnelles quand on multiplie toujours par le même nombre.\n\n" +
+      "Méthode : on cherche le coefficient de proportionnalité ou le passage entre les grandeurs.\n\n" +
+      "Calcul : " +
+      ("Si 2 stylos coûtent 8 €, alors 1 stylo coûte 8 ÷ 2 = 4 €. Le coefficient de proportionnalité est donc 4.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["proportionnalite", "coefficient"],
   },
   {
@@ -284,7 +336,11 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Passe d’abord à l’unité.",
     explanation:
-      "3 objets coûtent 12 €, donc 1 objet coûte 12 ÷ 3 = 4 €. Le coefficient est 4.",
+      "Définition : deux grandeurs sont proportionnelles quand on multiplie toujours par le même nombre.\n\n" +
+      "Méthode : on cherche le coefficient de proportionnalité ou le passage entre les grandeurs.\n\n" +
+      "Calcul : " +
+      ("3 objets coûtent 12 €, donc 1 objet coûte 12 ÷ 3 = 4 €. Le coefficient est 4.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["proportionnalite", "coefficient", "qcm"],
   },
   {
@@ -303,7 +359,11 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Cherche le prix d’une mangue.",
     explanation:
-      "5 mangues coûtent 15 €, donc 1 mangue coûte 15 ÷ 5 = 3 €. Le coefficient est 3.",
+      "Définition : deux grandeurs sont proportionnelles quand on multiplie toujours par le même nombre.\n\n" +
+      "Méthode : on cherche le coefficient de proportionnalité ou le passage entre les grandeurs.\n\n" +
+      "Calcul : " +
+      ("5 mangues coûtent 15 €, donc 1 mangue coûte 15 ÷ 5 = 3 €. Le coefficient est 3.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["proportionnalite", "coefficient", "reunion", "qcm"],
   },
 
@@ -325,7 +385,11 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Passe à l’unité.",
     explanation:
-      "Pour trouver le prix d’un bonbon, on divise 6 € par 3. On obtient 2 €. Un bonbon coûte donc 2 €.",
+      "Définition : deux grandeurs sont proportionnelles quand on multiplie toujours par le même nombre.\n\n" +
+      "Méthode : on cherche le coefficient de proportionnalité ou le passage entre les grandeurs.\n\n" +
+      "Calcul : " +
+      ("Pour trouver le prix d’un bonbon, on divise 6 € par 3. On obtient 2 €. Un bonbon coûte donc 2 €.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["proportionnalite", "unite"],
   },
   {
@@ -343,7 +407,11 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Divise le prix total par 5.",
     explanation:
-      "15 € ÷ 5 = 3 €. Un cahier coûte donc 3 €.",
+      "Définition : deux grandeurs sont proportionnelles quand on multiplie toujours par le même nombre.\n\n" +
+      "Méthode : on cherche le coefficient de proportionnalité ou le passage entre les grandeurs.\n\n" +
+      "Calcul : " +
+      ("15 € ÷ 5 = 3 €. Un cahier coûte donc 3 €.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["proportionnalite", "unite"],
   },
   {
@@ -361,7 +429,11 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Divise le prix total par le nombre de yaourts.",
     explanation:
-      "8 € ÷ 4 = 2 €. Un yaourt coûte donc 2 €.",
+      "Définition : deux grandeurs sont proportionnelles quand on multiplie toujours par le même nombre.\n\n" +
+      "Méthode : on cherche le coefficient de proportionnalité ou le passage entre les grandeurs.\n\n" +
+      "Calcul : " +
+      ("8 € ÷ 4 = 2 €. Un yaourt coûte donc 2 €.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["proportionnalite", "unite", "cuisine"],
   },
   {
@@ -379,7 +451,11 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Passe par l’unité.",
     explanation:
-      "12 € ÷ 6 = 2 €. Un œuf coûte donc 2 €.",
+      "Définition : deux grandeurs sont proportionnelles quand on multiplie toujours par le même nombre.\n\n" +
+      "Méthode : on cherche le coefficient de proportionnalité ou le passage entre les grandeurs.\n\n" +
+      "Calcul : " +
+      ("12 € ÷ 6 = 2 €. Un œuf coûte donc 2 €.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["proportionnalite", "unite", "cuisine"],
   },
   {
@@ -398,7 +474,11 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Passe par l’unité.",
     explanation:
-      "15 € ÷ 5 = 3 €. Une mangue coûte donc 3 €.",
+      "Définition : deux grandeurs sont proportionnelles quand on multiplie toujours par le même nombre.\n\n" +
+      "Méthode : on cherche le coefficient de proportionnalité ou le passage entre les grandeurs.\n\n" +
+      "Calcul : " +
+      ("15 € ÷ 5 = 3 €. Une mangue coûte donc 3 €.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["proportionnalite", "unite", "reunion", "qcm"],
   },
   {
@@ -417,7 +497,11 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Divise 8 par 4.",
     explanation:
-      "8 € ÷ 4 = 2 €. Un bouchon coûte donc 2 €.",
+      "Définition : deux grandeurs sont proportionnelles quand on multiplie toujours par le même nombre.\n\n" +
+      "Méthode : on cherche le coefficient de proportionnalité ou le passage entre les grandeurs.\n\n" +
+      "Calcul : " +
+      ("8 € ÷ 4 = 2 €. Un bouchon coûte donc 2 €.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["proportionnalite", "unite", "reunion", "qcm"],
   },
 
@@ -439,7 +523,11 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Si on divise par 2, le prix aussi.",
     explanation:
-      "On passe de 4 cahiers à 2 cahiers en divisant par 2. On divise donc aussi le prix par 2 : 8 € ÷ 2 = 4 €.",
+      "Définition : deux grandeurs sont proportionnelles quand on multiplie toujours par le même nombre.\n\n" +
+      "Méthode : on cherche le coefficient de proportionnalité ou le passage entre les grandeurs.\n\n" +
+      "Calcul : " +
+      ("On passe de 4 cahiers à 2 cahiers en divisant par 2. On divise donc aussi le prix par 2 : 8 € ÷ 2 = 4 €.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["proportionnalite", "direct"],
   },
   {
@@ -457,7 +545,11 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "4 est la moitié de 8.",
     explanation:
-      "4 feutres, c’est la moitié de 8 feutres. Le prix est donc la moitié de 16 €, soit 8 €.",
+      "Définition : deux grandeurs sont proportionnelles quand on multiplie toujours par le même nombre.\n\n" +
+      "Méthode : on cherche le coefficient de proportionnalité ou le passage entre les grandeurs.\n\n" +
+      "Calcul : " +
+      ("4 feutres, c’est la moitié de 8 feutres. Le prix est donc la moitié de 16 €, soit 8 €.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["proportionnalite", "direct"],
   },
   {
@@ -475,7 +567,11 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Si on prend deux fois moins, on paie deux fois moins.",
     explanation:
-      "3 bouteilles, c’est la moitié de 6 bouteilles. Le prix est donc la moitié de 12 €, soit 6 €.",
+      "Définition : deux grandeurs sont proportionnelles quand on multiplie toujours par le même nombre.\n\n" +
+      "Méthode : on cherche le coefficient de proportionnalité ou le passage entre les grandeurs.\n\n" +
+      "Calcul : " +
+      ("3 bouteilles, c’est la moitié de 6 bouteilles. Le prix est donc la moitié de 12 €, soit 6 €.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["proportionnalite", "direct", "sport"],
   },
   {
@@ -493,7 +589,11 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Passe à la moitié.",
     explanation:
-      "5 maillots, c’est la moitié de 10 maillots. Le prix est donc la moitié de 50 €, soit 25 €.",
+      "Définition : deux grandeurs sont proportionnelles quand on multiplie toujours par le même nombre.\n\n" +
+      "Méthode : on cherche le coefficient de proportionnalité ou le passage entre les grandeurs.\n\n" +
+      "Calcul : " +
+      ("5 maillots, c’est la moitié de 10 maillots. Le prix est donc la moitié de 50 €, soit 25 €.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["proportionnalite", "direct", "sport"],
   },
   {
@@ -512,7 +612,11 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "4 est la moitié de 8.",
     explanation:
-      "4 œufs, c’est la moitié de 8 œufs. Le prix est donc la moitié de 16 €, soit 8 €.",
+      "Définition : deux grandeurs sont proportionnelles quand on multiplie toujours par le même nombre.\n\n" +
+      "Méthode : on cherche le coefficient de proportionnalité ou le passage entre les grandeurs.\n\n" +
+      "Calcul : " +
+      ("4 œufs, c’est la moitié de 8 œufs. Le prix est donc la moitié de 16 €, soit 8 €.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["proportionnalite", "direct", "cuisine", "qcm"],
   },
   {
@@ -531,7 +635,11 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "3 est la moitié de 6.",
     explanation:
-      "3 citrons, c’est la moitié de 6 citrons. Le prix est donc la moitié de 12 €, soit 6 €.",
+      "Définition : deux grandeurs sont proportionnelles quand on multiplie toujours par le même nombre.\n\n" +
+      "Méthode : on cherche le coefficient de proportionnalité ou le passage entre les grandeurs.\n\n" +
+      "Calcul : " +
+      ("3 citrons, c’est la moitié de 6 citrons. Le prix est donc la moitié de 12 €, soit 6 €.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["proportionnalite", "direct", "cuisine", "qcm"],
   },
 
@@ -553,7 +661,11 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Passe d’abord à l’unité.",
     explanation:
-      "2 objets coûtent 6 €, donc 1 objet coûte 3 €. Alors 5 objets coûtent 5 × 3 = 15 €.",
+      "Définition : deux grandeurs sont proportionnelles quand on multiplie toujours par le même nombre.\n\n" +
+      "Méthode : on cherche le coefficient de proportionnalité ou le passage entre les grandeurs.\n\n" +
+      "Calcul : " +
+      ("2 objets coûtent 6 €, donc 1 objet coûte 3 €. Alors 5 objets coûtent 5 × 3 = 15 €.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["proportionnalite", "defi"],
   },
   {
@@ -571,7 +683,11 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "Si on double la quantité, le prix devrait doubler aussi.",
     explanation:
-      "Si la situation était proportionnelle, en passant de 2 à 4 tickets, on doublerait la quantité, donc le prix devrait passer de 4 € à 8 €. Or ici on obtient 10 €. La situation n’est pas proportionnelle.",
+      "Définition : deux grandeurs sont proportionnelles quand on multiplie toujours par le même nombre.\n\n" +
+      "Méthode : on cherche le coefficient de proportionnalité ou le passage entre les grandeurs.\n\n" +
+      "Calcul : " +
+      ("Si la situation était proportionnelle, en passant de 2 à 4 tickets, on doublerait la quantité, donc le prix devrait passer de 4 € à 8 €. Or ici on obtient 10 €. La situation n’est pas proportionnelle.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["proportionnalite", "defi", "raisonnement"],
   },
   {
@@ -589,7 +705,11 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Commence par trouver le prix d’un samoussa.",
     explanation:
-      "4 samoussas coûtent 8 €, donc 1 samoussa coûte 2 €. Alors 7 samoussas coûtent 7 × 2 = 14 €.",
+      "Définition : deux grandeurs sont proportionnelles quand on multiplie toujours par le même nombre.\n\n" +
+      "Méthode : on cherche le coefficient de proportionnalité ou le passage entre les grandeurs.\n\n" +
+      "Calcul : " +
+      ("4 samoussas coûtent 8 €, donc 1 samoussa coûte 2 €. Alors 7 samoussas coûtent 7 × 2 = 14 €.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["proportionnalite", "defi", "reunion"],
   },
   {
@@ -608,7 +728,11 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Passe à l’unité.",
     explanation:
-      "3 cahiers coûtent 9 €, donc 1 cahier coûte 3 €. Alors 7 cahiers coûtent 7 × 3 = 21 €.",
+      "Définition : deux grandeurs sont proportionnelles quand on multiplie toujours par le même nombre.\n\n" +
+      "Méthode : on cherche le coefficient de proportionnalité ou le passage entre les grandeurs.\n\n" +
+      "Calcul : " +
+      ("3 cahiers coûtent 9 €, donc 1 cahier coûte 3 €. Alors 7 cahiers coûtent 7 × 3 = 21 €.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["proportionnalite", "defi", "qcm"],
   },
 
@@ -640,9 +764,13 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
         format: "short",
         expected: [isProp ? "oui" : "non"],
         comparator: "contains_keyword",
-        explanation: isProp
+        explanation: "Définition : deux grandeurs sont proportionnelles quand on multiplie toujours par le même nombre.\n\n" +
+          "Méthode : on cherche le coefficient de proportionnalité ou le passage entre les grandeurs.\n\n" +
+          "Calcul : " +
+          (isProp
           ? `On passe de ${qty} à ${targetQty} en multipliant par ${coef}, et le prix passe aussi de ${total} à ${targetTotal} en multipliant par ${coef}. La situation est donc proportionnelle.`
-          : `On passe de ${qty} à ${targetQty} en multipliant par ${coef}, mais le prix ne suit pas exactement le même coefficient. La situation n’est donc pas proportionnelle.`,
+          : `On passe de ${qty} à ${targetQty} en multipliant par ${coef}, mais le prix ne suit pas exactement le même coefficient. La situation n’est donc pas proportionnelle.`) +
+          "\n\nConclusion : on garde la réponse obtenue.",
       };
     },
   },
@@ -673,7 +801,11 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
         expected: [good],
         comparator: "mcq_exact",
         explanation:
-          "Dans la bonne réponse, on passe de 2 à 6 objets en multipliant par 3, et le prix passe aussi de 6 € à 18 € en multipliant par 3.",
+          "Définition : deux grandeurs sont proportionnelles quand on multiplie toujours par le même nombre.\n\n" +
+          "Méthode : on cherche le coefficient de proportionnalité ou le passage entre les grandeurs.\n\n" +
+          "Calcul : " +
+          ("Dans la bonne réponse, on passe de 2 à 6 objets en multipliant par 3, et le prix passe aussi de 6 € à 18 € en multipliant par 3.") +
+          "\n\nConclusion : on garde la réponse obtenue.",
       };
     },
   },
@@ -705,7 +837,11 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(targetTotal), `${targetTotal}€`, `${targetTotal} €`],
         comparator: "number_equal",
-        explanation: `On passe de ${a} à ${targetQty} objets en multipliant par ${coef}. Le prix est donc aussi multiplié par ${coef} : ${total} × ${coef} = ${targetTotal} €.`,
+        explanation: "Définition : deux grandeurs sont proportionnelles quand on multiplie toujours par le même nombre.\n\n" +
+          "Méthode : on cherche le coefficient de proportionnalité ou le passage entre les grandeurs.\n\n" +
+          "Calcul : " +
+          (`On passe de ${a} à ${targetQty} objets en multipliant par ${coef}. Le prix est donc aussi multiplié par ${coef} : ${total} × ${coef} = ${targetTotal} €.`) +
+          "\n\nConclusion : on garde la réponse obtenue.",
       };
     },
   },
@@ -733,7 +869,11 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(newTotal), `${newTotal}€`, `${newTotal} €`],
         comparator: "number_equal",
-        explanation: `On passe de ${qty} à ${newQty} billets en multipliant par ${coef}. Le prix passe donc de ${total} € à ${newTotal} €.`,
+        explanation: "Définition : deux grandeurs sont proportionnelles quand on multiplie toujours par le même nombre.\n\n" +
+          "Méthode : on cherche le coefficient de proportionnalité ou le passage entre les grandeurs.\n\n" +
+          "Calcul : " +
+          (`On passe de ${qty} à ${newQty} billets en multipliant par ${coef}. Le prix passe donc de ${total} € à ${newTotal} €.`) +
+          "\n\nConclusion : on garde la réponse obtenue.",
       };
     },
   },
@@ -769,7 +909,11 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
         choices,
         expected: [String(good)],
         comparator: "mcq_exact",
-        explanation: `On passe de ${qty} à ${targetQty} objets en multipliant par ${coef}. Le prix est donc ${total} × ${coef} = ${good} €.`,
+        explanation: "Définition : deux grandeurs sont proportionnelles quand on multiplie toujours par le même nombre.\n\n" +
+          "Méthode : on cherche le coefficient de proportionnalité ou le passage entre les grandeurs.\n\n" +
+          "Calcul : " +
+          (`On passe de ${qty} à ${targetQty} objets en multipliant par ${coef}. Le prix est donc ${total} × ${coef} = ${good} €.`) +
+          "\n\nConclusion : on garde la réponse obtenue.",
       };
     },
   },
@@ -798,7 +942,11 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(unit)],
         comparator: "number_equal",
-        explanation: `${qty} objets coûtent ${total} €, donc 1 objet coûte ${total} ÷ ${qty} = ${unit} €. Le coefficient est ${unit}.`,
+        explanation: "Définition : deux grandeurs sont proportionnelles quand on multiplie toujours par le même nombre.\n\n" +
+          "Méthode : on cherche le coefficient de proportionnalité ou le passage entre les grandeurs.\n\n" +
+          "Calcul : " +
+          (`${qty} objets coûtent ${total} €, donc 1 objet coûte ${total} ÷ ${qty} = ${unit} €. Le coefficient est ${unit}.`) +
+          "\n\nConclusion : on garde la réponse obtenue.",
       };
     },
   },
@@ -829,7 +977,11 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
         ]),
         expected: [String(unit)],
         comparator: "mcq_exact",
-        explanation: `${total} ÷ ${qty} = ${unit}. Le coefficient de proportionnalité est donc ${unit}.`,
+        explanation: "Définition : deux grandeurs sont proportionnelles quand on multiplie toujours par le même nombre.\n\n" +
+          "Méthode : on cherche le coefficient de proportionnalité ou le passage entre les grandeurs.\n\n" +
+          "Calcul : " +
+          (`${total} ÷ ${qty} = ${unit}. Le coefficient de proportionnalité est donc ${unit}.`) +
+          "\n\nConclusion : on garde la réponse obtenue.",
       };
     },
   },
@@ -858,7 +1010,11 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(unit), `${unit}€`, `${unit} €`],
         comparator: "number_equal",
-        explanation: `Pour passer à l’unité, on divise ${total} € par ${qty}. On obtient ${unit} €.`,
+        explanation: "Définition : deux grandeurs sont proportionnelles quand on multiplie toujours par le même nombre.\n\n" +
+          "Méthode : on cherche le coefficient de proportionnalité ou le passage entre les grandeurs.\n\n" +
+          "Calcul : " +
+          (`Pour passer à l’unité, on divise ${total} € par ${qty}. On obtient ${unit} €.`) +
+          "\n\nConclusion : on garde la réponse obtenue.",
       };
     },
   },
@@ -883,7 +1039,11 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(unit), `${unit}€`, `${unit} €`],
         comparator: "number_equal",
-        explanation: `${total} € ÷ ${qty} = ${unit} €. Un stylo coûte donc ${unit} €.`,
+        explanation: "Définition : deux grandeurs sont proportionnelles quand on multiplie toujours par le même nombre.\n\n" +
+          "Méthode : on cherche le coefficient de proportionnalité ou le passage entre les grandeurs.\n\n" +
+          "Calcul : " +
+          (`${total} € ÷ ${qty} = ${unit} €. Un stylo coûte donc ${unit} €.`) +
+          "\n\nConclusion : on garde la réponse obtenue.",
       };
     },
   },
@@ -916,7 +1076,11 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
         choices,
         expected: [String(unit)],
         comparator: "mcq_exact",
-        explanation: `${total} ÷ ${qty} = ${unit}. Un objet coûte donc ${unit} €.`,
+        explanation: "Définition : deux grandeurs sont proportionnelles quand on multiplie toujours par le même nombre.\n\n" +
+          "Méthode : on cherche le coefficient de proportionnalité ou le passage entre les grandeurs.\n\n" +
+          "Calcul : " +
+          (`${total} ÷ ${qty} = ${unit}. Un objet coûte donc ${unit} €.`) +
+          "\n\nConclusion : on garde la réponse obtenue.",
       };
     },
   },
@@ -948,7 +1112,11 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(targetTotal), `${targetTotal}€`, `${targetTotal} €`],
         comparator: "number_equal",
-        explanation: `On passe de ${qty} à ${targetQty} objets en divisant par ${divisor}. On divise donc aussi le prix par ${divisor} : ${total} ÷ ${divisor} = ${targetTotal} €.`,
+        explanation: "Définition : deux grandeurs sont proportionnelles quand on multiplie toujours par le même nombre.\n\n" +
+          "Méthode : on cherche le coefficient de proportionnalité ou le passage entre les grandeurs.\n\n" +
+          "Calcul : " +
+          (`On passe de ${qty} à ${targetQty} objets en divisant par ${divisor}. On divise donc aussi le prix par ${divisor} : ${total} ÷ ${divisor} = ${targetTotal} €.`) +
+          "\n\nConclusion : on garde la réponse obtenue.",
       };
     },
   },
@@ -975,7 +1143,11 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(targetTotal), `${targetTotal}€`, `${targetTotal} €`],
         comparator: "number_equal",
-        explanation: `${targetQty} est la moitié de ${qty}, donc le prix est la moitié de ${total} €. On obtient ${targetTotal} €.`,
+        explanation: "Définition : deux grandeurs sont proportionnelles quand on multiplie toujours par le même nombre.\n\n" +
+          "Méthode : on cherche le coefficient de proportionnalité ou le passage entre les grandeurs.\n\n" +
+          "Calcul : " +
+          (`${targetQty} est la moitié de ${qty}, donc le prix est la moitié de ${total} €. On obtient ${targetTotal} €.`) +
+          "\n\nConclusion : on garde la réponse obtenue.",
       };
     },
   },
@@ -1010,7 +1182,11 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
         choices,
         expected: [String(good)],
         comparator: "mcq_exact",
-        explanation: `${targetQty} est la moitié de ${qty}. Le prix est donc la moitié de ${total} €, soit ${good} €.`,
+        explanation: "Définition : deux grandeurs sont proportionnelles quand on multiplie toujours par le même nombre.\n\n" +
+          "Méthode : on cherche le coefficient de proportionnalité ou le passage entre les grandeurs.\n\n" +
+          "Calcul : " +
+          (`${targetQty} est la moitié de ${qty}. Le prix est donc la moitié de ${total} €, soit ${good} €.`) +
+          "\n\nConclusion : on garde la réponse obtenue.",
       };
     },
   },
@@ -1040,7 +1216,11 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(targetQty * unit), `${targetQty * unit}€`, `${targetQty * unit} €`],
         comparator: "number_equal",
-        explanation: `${qty} objets coûtent ${total} €, donc 1 objet coûte ${unit} €. Alors ${targetQty} objets coûtent ${targetQty} × ${unit} = ${targetQty * unit} €.`,
+        explanation: "Définition : deux grandeurs sont proportionnelles quand on multiplie toujours par le même nombre.\n\n" +
+          "Méthode : on cherche le coefficient de proportionnalité ou le passage entre les grandeurs.\n\n" +
+          "Calcul : " +
+          (`${qty} objets coûtent ${total} €, donc 1 objet coûte ${unit} €. Alors ${targetQty} objets coûtent ${targetQty} × ${unit} = ${targetQty * unit} €.`) +
+          "\n\nConclusion : on garde la réponse obtenue.",
       };
     },
   },
@@ -1073,7 +1253,11 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
         ]),
         expected: [`${good} €`],
         comparator: "mcq_exact",
-        explanation: `${qty} objets coûtent ${total} €, donc 1 objet coûte ${unit} €. Alors ${targetQty} objets coûtent ${good} €.`,
+        explanation: "Définition : deux grandeurs sont proportionnelles quand on multiplie toujours par le même nombre.\n\n" +
+          "Méthode : on cherche le coefficient de proportionnalité ou le passage entre les grandeurs.\n\n" +
+          "Calcul : " +
+          (`${qty} objets coûtent ${total} €, donc 1 objet coûte ${unit} €. Alors ${targetQty} objets coûtent ${good} €.`) +
+          "\n\nConclusion : on garde la réponse obtenue.",
       };
     },
   },

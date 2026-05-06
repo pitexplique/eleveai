@@ -27,7 +27,11 @@ export const decimauxBank: TutorBankItemV4[] = [
     comparator: "fraction_decimal_equivalent",
     hint: "7 dixièmes = 0,7.",
     explanation:
-      "7/10 signifie 7 dixièmes. Un dixième s’écrit 0,1, donc 7 dixièmes s’écrivent 0,7.",
+      "Définition : un nombre décimal peut s’écrire avec une partie entière et une partie décimale.\n\n" +
+      "Méthode : on lit bien les chiffres et leur position, puis on compare ou on calcule.\n\n" +
+      "Calcul : " +
+      ("7/10 signifie 7 dixièmes. Un dixième s’écrit 0,1, donc 7 dixièmes s’écrivent 0,7.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["decimaux", "ecriture"],
   },
   {
@@ -44,7 +48,11 @@ export const decimauxBank: TutorBankItemV4[] = [
     expected: ["0,3", "0.3", "0,30", "0.30"],
     comparator: "fraction_decimal_equivalent",
     hint: "3 dixièmes = 0,3.",
-    explanation: "3/10 signifie 3 dixièmes. Cela s’écrit 0,3.",
+    explanation: "Définition : un nombre décimal peut s’écrire avec une partie entière et une partie décimale.\n\n" +
+      "Méthode : on lit bien les chiffres et leur position, puis on compare ou on calcule.\n\n" +
+      "Calcul : " +
+      ("3/10 signifie 3 dixièmes. Cela s’écrit 0,3.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["decimaux", "ecriture"],
   },
   {
@@ -61,7 +69,11 @@ export const decimauxBank: TutorBankItemV4[] = [
     expected: ["0,9", "0.9", "0,90", "0.90"],
     comparator: "fraction_decimal_equivalent",
     hint: "9 dixièmes = 0,9.",
-    explanation: "9/10 signifie 9 dixièmes. Cela s’écrit 0,9.",
+    explanation: "Définition : un nombre décimal peut s’écrire avec une partie entière et une partie décimale.\n\n" +
+      "Méthode : on lit bien les chiffres et leur position, puis on compare ou on calcule.\n\n" +
+      "Calcul : " +
+      ("9/10 signifie 9 dixièmes. Cela s’écrit 0,9.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["decimaux", "ecriture"],
   },
   {
@@ -79,7 +91,11 @@ export const decimauxBank: TutorBankItemV4[] = [
     comparator: "fraction_decimal_equivalent",
     hint: "25 dixièmes = 2 unités et 5 dixièmes.",
     explanation:
-      "25/10 signifie 25 dixièmes. 20 dixièmes font 2 unités et il reste 5 dixièmes. Donc cela s’écrit 2,5.",
+      "Définition : un nombre décimal peut s’écrire avec une partie entière et une partie décimale.\n\n" +
+      "Méthode : on lit bien les chiffres et leur position, puis on compare ou on calcule.\n\n" +
+      "Calcul : " +
+      ("25/10 signifie 25 dixièmes. 20 dixièmes font 2 unités et il reste 5 dixièmes. Donc cela s’écrit 2,5.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["decimaux", "ecriture"],
   },
   {
@@ -98,7 +114,11 @@ export const decimauxBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "9/10 signifie 9 dixièmes.",
     explanation:
-      "9/10 signifie 9 dixièmes. L’écriture correcte est 0,9. 0,09 correspondrait à 9 centièmes.",
+      "Définition : un nombre décimal peut s’écrire avec une partie entière et une partie décimale.\n\n" +
+      "Méthode : on lit bien les chiffres et leur position, puis on compare ou on calcule.\n\n" +
+      "Calcul : " +
+      ("9/10 signifie 9 dixièmes. L’écriture correcte est 0,9. 0,09 correspondrait à 9 centièmes.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["decimaux", "ecriture", "qcm"],
   },
   {
@@ -117,7 +137,11 @@ export const decimauxBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "15 dixièmes = 1,5.",
     explanation:
-      "15/10 signifie 15 dixièmes. Cela fait 1 unité et 5 dixièmes, donc 1,5.",
+      "Définition : un nombre décimal peut s’écrire avec une partie entière et une partie décimale.\n\n" +
+      "Méthode : on lit bien les chiffres et leur position, puis on compare ou on calcule.\n\n" +
+      "Calcul : " +
+      ("15/10 signifie 15 dixièmes. Cela fait 1 unité et 5 dixièmes, donc 1,5.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["decimaux", "ecriture", "qcm"],
   },
 
@@ -139,7 +163,11 @@ export const decimauxBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Le chiffre des dixièmes est juste après la virgule.",
     explanation:
-      "Dans 3,4, le chiffre placé juste après la virgule est 4. Il est donc au rang des dixièmes.",
+      "Définition : un nombre décimal peut s’écrire avec une partie entière et une partie décimale.\n\n" +
+      "Méthode : on lit bien les chiffres et leur position, puis on compare ou on calcule.\n\n" +
+      "Calcul : " +
+      ("Dans 3,4, le chiffre placé juste après la virgule est 4. Il est donc au rang des dixièmes.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["decimaux", "rang"],
   },
   {
@@ -157,7 +185,11 @@ export const decimauxBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Le chiffre des centièmes est le deuxième après la virgule.",
     explanation:
-      "Dans 5,83, le premier chiffre après la virgule est 8 pour les dixièmes, et le deuxième est 3 pour les centièmes.",
+      "Définition : un nombre décimal peut s’écrire avec une partie entière et une partie décimale.\n\n" +
+      "Méthode : on lit bien les chiffres et leur position, puis on compare ou on calcule.\n\n" +
+      "Calcul : " +
+      ("Dans 5,83, le premier chiffre après la virgule est 8 pour les dixièmes, et le deuxième est 3 pour les centièmes.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["decimaux", "rang"],
   },
   {
@@ -175,7 +207,11 @@ export const decimauxBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Le chiffre des dixièmes est le premier après la virgule.",
     explanation:
-      "Dans 12,764, le chiffre 7 est juste après la virgule. C’est donc le chiffre des dixièmes.",
+      "Définition : un nombre décimal peut s’écrire avec une partie entière et une partie décimale.\n\n" +
+      "Méthode : on lit bien les chiffres et leur position, puis on compare ou on calcule.\n\n" +
+      "Calcul : " +
+      ("Dans 12,764, le chiffre 7 est juste après la virgule. C’est donc le chiffre des dixièmes.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["decimaux", "rang"],
   },
   {
@@ -193,7 +229,11 @@ export const decimauxBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Le chiffre des millièmes est le troisième après la virgule.",
     explanation:
-      "Dans 12,764, les chiffres après la virgule sont 7, 6 et 4. Le troisième, 4, est au rang des millièmes.",
+      "Définition : un nombre décimal peut s’écrire avec une partie entière et une partie décimale.\n\n" +
+      "Méthode : on lit bien les chiffres et leur position, puis on compare ou on calcule.\n\n" +
+      "Calcul : " +
+      ("Dans 12,764, les chiffres après la virgule sont 7, 6 et 4. Le troisième, 4, est au rang des millièmes.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["decimaux", "rang"],
   },
   {
@@ -212,7 +252,11 @@ export const decimauxBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Regarde le premier chiffre après la virgule.",
     explanation:
-      "Dans 4,58, le premier chiffre après la virgule est 5. Il est donc au rang des dixièmes.",
+      "Définition : un nombre décimal peut s’écrire avec une partie entière et une partie décimale.\n\n" +
+      "Méthode : on lit bien les chiffres et leur position, puis on compare ou on calcule.\n\n" +
+      "Calcul : " +
+      ("Dans 4,58, le premier chiffre après la virgule est 5. Il est donc au rang des dixièmes.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["decimaux", "rang", "qcm"],
   },
   {
@@ -231,7 +275,11 @@ export const decimauxBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Après la virgule : 2 = dixièmes, 6 = centièmes, 4 = millièmes.",
     explanation:
-      "Dans 3,264, le 2 est au rang des dixièmes, le 6 au rang des centièmes et le 4 au rang des millièmes. Le 6 est donc au rang des centièmes.",
+      "Définition : un nombre décimal peut s’écrire avec une partie entière et une partie décimale.\n\n" +
+      "Méthode : on lit bien les chiffres et leur position, puis on compare ou on calcule.\n\n" +
+      "Calcul : " +
+      ("Dans 3,264, le 2 est au rang des dixièmes, le 6 au rang des centièmes et le 4 au rang des millièmes. Le 6 est donc au rang des centièmes.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["decimaux", "rang", "qcm"],
   },
 
@@ -253,7 +301,11 @@ export const decimauxBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Compare d’abord les dixièmes.",
     explanation:
-      "0,7 = 0,70. On compare donc 0,70 et 0,65. Comme 70 centièmes est plus grand que 65 centièmes, la bonne réponse est 0,7.",
+      "Définition : un nombre décimal peut s’écrire avec une partie entière et une partie décimale.\n\n" +
+      "Méthode : on lit bien les chiffres et leur position, puis on compare ou on calcule.\n\n" +
+      "Calcul : " +
+      ("0,7 = 0,70. On compare donc 0,70 et 0,65. Comme 70 centièmes est plus grand que 65 centièmes, la bonne réponse est 0,7.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["decimaux", "comparaison"],
   },
   {
@@ -271,7 +323,11 @@ export const decimauxBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "0,09 a 0 dixième et 9 centièmes.",
     explanation:
-      "0,4 = 0,40. On compare donc 0,40 et 0,09. Comme 9 centièmes est plus petit que 40 centièmes, la bonne réponse est 0,09.",
+      "Définition : un nombre décimal peut s’écrire avec une partie entière et une partie décimale.\n\n" +
+      "Méthode : on lit bien les chiffres et leur position, puis on compare ou on calcule.\n\n" +
+      "Calcul : " +
+      ("0,4 = 0,40. On compare donc 0,40 et 0,09. Comme 9 centièmes est plus petit que 40 centièmes, la bonne réponse est 0,09.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["decimaux", "comparaison"],
   },
   {
@@ -289,7 +345,11 @@ export const decimauxBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Compare 0,30 et 0,27.",
     explanation:
-      "0,3 = 0,30. On compare 30 centièmes à 27 centièmes. Comme 30 est plus grand que 27, la bonne réponse est 0,3.",
+      "Définition : un nombre décimal peut s’écrire avec une partie entière et une partie décimale.\n\n" +
+      "Méthode : on lit bien les chiffres et leur position, puis on compare ou on calcule.\n\n" +
+      "Calcul : " +
+      ("0,3 = 0,30. On compare 30 centièmes à 27 centièmes. Comme 30 est plus grand que 27, la bonne réponse est 0,3.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["decimaux", "comparaison"],
   },
   {
@@ -307,7 +367,11 @@ export const decimauxBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Compare 0,520 et 0,507.",
     explanation:
-      "0,52 = 0,520. On compare donc 520 millièmes et 507 millièmes. Comme 507 est plus petit que 520, la bonne réponse est 0,507.",
+      "Définition : un nombre décimal peut s’écrire avec une partie entière et une partie décimale.\n\n" +
+      "Méthode : on lit bien les chiffres et leur position, puis on compare ou on calcule.\n\n" +
+      "Calcul : " +
+      ("0,52 = 0,520. On compare donc 520 millièmes et 507 millièmes. Comme 507 est plus petit que 520, la bonne réponse est 0,507.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["decimaux", "comparaison"],
   },
   {
@@ -325,7 +389,11 @@ export const decimauxBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "0,50 vs 0,45.",
     explanation:
-      "0,5 = 0,50. On compare 50 centièmes à 45 centièmes. Comme 50 est plus grand que 45, la bonne réponse est 0,5.",
+      "Définition : un nombre décimal peut s’écrire avec une partie entière et une partie décimale.\n\n" +
+      "Méthode : on lit bien les chiffres et leur position, puis on compare ou on calcule.\n\n" +
+      "Calcul : " +
+      ("0,5 = 0,50. On compare 50 centièmes à 45 centièmes. Comme 50 est plus grand que 45, la bonne réponse est 0,5.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["decimaux", "comparaison", "piege"],
   },
   {
@@ -343,7 +411,11 @@ export const decimauxBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Écris 0,35 sous la forme 0,350.",
     explanation:
-      "0,35 = 0,350. On compare donc 305 millièmes à 350 millièmes. Comme 305 est plus petit que 350, la bonne réponse est 0,305.",
+      "Définition : un nombre décimal peut s’écrire avec une partie entière et une partie décimale.\n\n" +
+      "Méthode : on lit bien les chiffres et leur position, puis on compare ou on calcule.\n\n" +
+      "Calcul : " +
+      ("0,35 = 0,350. On compare donc 305 millièmes à 350 millièmes. Comme 305 est plus petit que 350, la bonne réponse est 0,305.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["decimaux", "comparaison", "piege"],
   },
   {
@@ -362,7 +434,11 @@ export const decimauxBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Compare chiffre par chiffre après la virgule.",
     explanation:
-      "0,54 = 54 centièmes. Les autres valent 45 centièmes, 50 centièmes et 49 centièmes. Le plus grand est donc 0,54.",
+      "Définition : un nombre décimal peut s’écrire avec une partie entière et une partie décimale.\n\n" +
+      "Méthode : on lit bien les chiffres et leur position, puis on compare ou on calcule.\n\n" +
+      "Calcul : " +
+      ("0,54 = 54 centièmes. Les autres valent 45 centièmes, 50 centièmes et 49 centièmes. Le plus grand est donc 0,54.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["decimaux", "comparaison", "qcm"],
   },
   {
@@ -381,7 +457,11 @@ export const decimauxBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "0,41 = 0,410.",
     explanation:
-      "0,41 = 0,410, 0,401 = 0,401, 0,39 = 0,390 et 0,4 = 0,400. Le plus grand est donc 0,41.",
+      "Définition : un nombre décimal peut s’écrire avec une partie entière et une partie décimale.\n\n" +
+      "Méthode : on lit bien les chiffres et leur position, puis on compare ou on calcule.\n\n" +
+      "Calcul : " +
+      ("0,41 = 0,410, 0,401 = 0,401, 0,39 = 0,390 et 0,4 = 0,400. Le plus grand est donc 0,41.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["decimaux", "comparaison", "qcm"],
   },
   {
@@ -399,7 +479,11 @@ export const decimauxBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Compare 2,50 et 2,45.",
     explanation:
-      "2,5 € = 2,50 €. En comparant 2,50 € et 2,45 €, on voit que 2,50 € est plus grand. Le fruit à 2,5 € coûte donc le plus cher.",
+      "Définition : un nombre décimal peut s’écrire avec une partie entière et une partie décimale.\n\n" +
+      "Méthode : on lit bien les chiffres et leur position, puis on compare ou on calcule.\n\n" +
+      "Calcul : " +
+      ("2,5 € = 2,50 €. En comparant 2,50 € et 2,45 €, on voit que 2,50 € est plus grand. Le fruit à 2,5 € coûte donc le plus cher.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["decimaux", "comparaison", "reunion"],
   },
 
@@ -421,7 +505,11 @@ export const decimauxBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Aligne bien les virgules.",
     explanation:
-      "1,2 + 0,5 = 12 dixièmes + 5 dixièmes = 17 dixièmes, donc 1,7.",
+      "Définition : un nombre décimal peut s’écrire avec une partie entière et une partie décimale.\n\n" +
+      "Méthode : on lit bien les chiffres et leur position, puis on compare ou on calcule.\n\n" +
+      "Calcul : " +
+      ("1,2 + 0,5 = 12 dixièmes + 5 dixièmes = 17 dixièmes, donc 1,7.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["decimaux", "addition"],
   },
   {
@@ -439,7 +527,11 @@ export const decimauxBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Additionne les unités puis les dixièmes.",
     explanation:
-      "2,4 + 1,3 = 24 dixièmes + 13 dixièmes = 37 dixièmes, donc 3,7.",
+      "Définition : un nombre décimal peut s’écrire avec une partie entière et une partie décimale.\n\n" +
+      "Méthode : on lit bien les chiffres et leur position, puis on compare ou on calcule.\n\n" +
+      "Calcul : " +
+      ("2,4 + 1,3 = 24 dixièmes + 13 dixièmes = 37 dixièmes, donc 3,7.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["decimaux", "addition"],
   },
   {
@@ -457,7 +549,11 @@ export const decimauxBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Ajoute un zéro : 1,70.",
     explanation:
-      "On écrit 1,7 sous la forme 1,70. Puis 3,45 + 1,70 = 5,15.",
+      "Définition : un nombre décimal peut s’écrire avec une partie entière et une partie décimale.\n\n" +
+      "Méthode : on lit bien les chiffres et leur position, puis on compare ou on calcule.\n\n" +
+      "Calcul : " +
+      ("On écrit 1,7 sous la forme 1,70. Puis 3,45 + 1,70 = 5,15.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["decimaux", "addition"],
   },
   {
@@ -475,7 +571,11 @@ export const decimauxBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Écris 2,8 sous la forme 2,80.",
     explanation:
-      "On écrit 2,8 sous la forme 2,80. Puis 0,75 + 2,80 = 3,55.",
+      "Définition : un nombre décimal peut s’écrire avec une partie entière et une partie décimale.\n\n" +
+      "Méthode : on lit bien les chiffres et leur position, puis on compare ou on calcule.\n\n" +
+      "Calcul : " +
+      ("On écrit 2,8 sous la forme 2,80. Puis 0,75 + 2,80 = 3,55.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["decimaux", "addition"],
   },
   {
@@ -493,7 +593,11 @@ export const decimauxBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "6 dixièmes + 9 dixièmes = 15 dixièmes.",
     explanation:
-      "0,6 + 0,9 = 6 dixièmes + 9 dixièmes = 15 dixièmes, donc 1,5.",
+      "Définition : un nombre décimal peut s’écrire avec une partie entière et une partie décimale.\n\n" +
+      "Méthode : on lit bien les chiffres et leur position, puis on compare ou on calcule.\n\n" +
+      "Calcul : " +
+      ("0,6 + 0,9 = 6 dixièmes + 9 dixièmes = 15 dixièmes, donc 1,5.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["decimaux", "addition"],
   },
   {
@@ -510,7 +614,11 @@ export const decimauxBank: TutorBankItemV4[] = [
     expected: ["3,75", "3.75"],
     comparator: "number_equal",
     hint: "Écris 1,4 sous la forme 1,40.",
-    explanation: "On écrit 1,4 = 1,40. Puis 2,35 + 1,40 = 3,75.",
+    explanation: "Définition : un nombre décimal peut s’écrire avec une partie entière et une partie décimale.\n\n" +
+      "Méthode : on lit bien les chiffres et leur position, puis on compare ou on calcule.\n\n" +
+      "Calcul : " +
+      ("On écrit 1,4 = 1,40. Puis 2,35 + 1,40 = 3,75.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["decimaux", "addition"],
   },
   {
@@ -529,7 +637,11 @@ export const decimauxBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "8 dixièmes + 7 dixièmes = 15 dixièmes.",
     explanation:
-      "0,8 + 0,7 = 8 dixièmes + 7 dixièmes = 15 dixièmes, donc 1,5.",
+      "Définition : un nombre décimal peut s’écrire avec une partie entière et une partie décimale.\n\n" +
+      "Méthode : on lit bien les chiffres et leur position, puis on compare ou on calcule.\n\n" +
+      "Calcul : " +
+      ("0,8 + 0,7 = 8 dixièmes + 7 dixièmes = 15 dixièmes, donc 1,5.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["decimaux", "addition", "qcm"],
   },
   {
@@ -547,7 +659,11 @@ export const decimauxBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "On peut faire l’opération inverse.",
     explanation:
-      "Si x + 1,5 = 3,2, alors x = 3,2 - 1,5 = 1,7.",
+      "Définition : un nombre décimal peut s’écrire avec une partie entière et une partie décimale.\n\n" +
+      "Méthode : on lit bien les chiffres et leur position, puis on compare ou on calcule.\n\n" +
+      "Calcul : " +
+      ("Si x + 1,5 = 3,2, alors x = 3,2 - 1,5 = 1,7.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["decimaux", "addition", "defi"],
   },
 
@@ -569,7 +685,11 @@ export const decimauxBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "0,5 c’est la moitié.",
     explanation:
-      "0,5 est la moitié de 1. Quatre moitiés font 2. Donc 0,5 × 4 = 2.",
+      "Définition : un nombre décimal peut s’écrire avec une partie entière et une partie décimale.\n\n" +
+      "Méthode : on lit bien les chiffres et leur position, puis on compare ou on calcule.\n\n" +
+      "Calcul : " +
+      ("0,5 est la moitié de 1. Quatre moitiés font 2. Donc 0,5 × 4 = 2.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["decimaux", "multiplication"],
   },
   {
@@ -586,7 +706,11 @@ export const decimauxBank: TutorBankItemV4[] = [
     expected: ["3", "3,0", "3.0"],
     comparator: "number_equal",
     hint: "1,5 + 1,5 = 3.",
-    explanation: "Multiplier par 2 revient à doubler. Le double de 1,5 est 3.",
+    explanation: "Définition : un nombre décimal peut s’écrire avec une partie entière et une partie décimale.\n\n" +
+      "Méthode : on lit bien les chiffres et leur position, puis on compare ou on calcule.\n\n" +
+      "Calcul : " +
+      ("Multiplier par 2 revient à doubler. Le double de 1,5 est 3.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["decimaux", "multiplication"],
   },
   {
@@ -603,7 +727,11 @@ export const decimauxBank: TutorBankItemV4[] = [
     expected: ["7,2", "7.2"],
     comparator: "number_equal",
     hint: "2,4 + 2,4 + 2,4.",
-    explanation: "2,4 × 3 = 2,4 + 2,4 + 2,4 = 7,2.",
+    explanation: "Définition : un nombre décimal peut s’écrire avec une partie entière et une partie décimale.\n\n" +
+      "Méthode : on lit bien les chiffres et leur position, puis on compare ou on calcule.\n\n" +
+      "Calcul : " +
+      ("2,4 × 3 = 2,4 + 2,4 + 2,4 = 7,2.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["decimaux", "multiplication"],
   },
   {
@@ -621,7 +749,11 @@ export const decimauxBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Un quart multiplié par 4 donne 1.",
     explanation:
-      "0,25 représente un quart. Quatre quarts font 1. Donc 0,25 × 4 = 1.",
+      "Définition : un nombre décimal peut s’écrire avec une partie entière et une partie décimale.\n\n" +
+      "Méthode : on lit bien les chiffres et leur position, puis on compare ou on calcule.\n\n" +
+      "Calcul : " +
+      ("0,25 représente un quart. Quatre quarts font 1. Donc 0,25 × 4 = 1.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["decimaux", "multiplication"],
   },
   {
@@ -639,7 +771,11 @@ export const decimauxBank: TutorBankItemV4[] = [
     expected: ["5"],
     comparator: "mcq_exact",
     hint: "Doubler 2,5 donne 5.",
-    explanation: "Multiplier par 2 revient à doubler. Le double de 2,5 est 5.",
+    explanation: "Définition : un nombre décimal peut s’écrire avec une partie entière et une partie décimale.\n\n" +
+      "Méthode : on lit bien les chiffres et leur position, puis on compare ou on calcule.\n\n" +
+      "Calcul : " +
+      ("Multiplier par 2 revient à doubler. Le double de 2,5 est 5.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["decimaux", "multiplication", "qcm"],
   },
   {
@@ -657,7 +793,11 @@ export const decimauxBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Multiplie 2,5 par 6.",
     explanation:
-      "Chaque objet coûte 2,5 €. Pour 6 objets, on calcule 2,5 × 6 = 15. Le total est donc 15 €.",
+      "Définition : un nombre décimal peut s’écrire avec une partie entière et une partie décimale.\n\n" +
+      "Méthode : on lit bien les chiffres et leur position, puis on compare ou on calcule.\n\n" +
+      "Calcul : " +
+      ("Chaque objet coûte 2,5 €. Pour 6 objets, on calcule 2,5 × 6 = 15. Le total est donc 15 €.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["decimaux", "multiplication", "defi"],
   },
 
@@ -679,7 +819,11 @@ export const decimauxBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Partager 3,6 en 2 parts égales.",
     explanation:
-      "3,6 partagé en 2 parts égales donne 1,8 dans chaque part. Donc 3,6 ÷ 2 = 1,8.",
+      "Définition : un nombre décimal peut s’écrire avec une partie entière et une partie décimale.\n\n" +
+      "Méthode : on lit bien les chiffres et leur position, puis on compare ou on calcule.\n\n" +
+      "Calcul : " +
+      ("3,6 partagé en 2 parts égales donne 1,8 dans chaque part. Donc 3,6 ÷ 2 = 1,8.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["decimaux", "division"],
   },
   {
@@ -697,7 +841,11 @@ export const decimauxBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "48 dixièmes ÷ 4 = 12 dixièmes.",
     explanation:
-      "4,8 = 48 dixièmes. 48 dixièmes divisés par 4 donnent 12 dixièmes, soit 1,2.",
+      "Définition : un nombre décimal peut s’écrire avec une partie entière et une partie décimale.\n\n" +
+      "Méthode : on lit bien les chiffres et leur position, puis on compare ou on calcule.\n\n" +
+      "Calcul : " +
+      ("4,8 = 48 dixièmes. 48 dixièmes divisés par 4 donnent 12 dixièmes, soit 1,2.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["decimaux", "division"],
   },
   {
@@ -715,7 +863,11 @@ export const decimauxBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "56 dixièmes ÷ 4 = 14 dixièmes.",
     explanation:
-      "56 dixièmes divisés par 4 donnent 14 dixièmes, soit 1,4.",
+      "Définition : un nombre décimal peut s’écrire avec une partie entière et une partie décimale.\n\n" +
+      "Méthode : on lit bien les chiffres et leur position, puis on compare ou on calcule.\n\n" +
+      "Calcul : " +
+      ("56 dixièmes divisés par 4 donnent 14 dixièmes, soit 1,4.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["decimaux", "division"],
   },
   {
@@ -733,7 +885,11 @@ export const decimauxBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "96 dixièmes ÷ 3 = 32 dixièmes.",
     explanation:
-      "96 dixièmes divisés par 3 donnent 32 dixièmes, soit 3,2.",
+      "Définition : un nombre décimal peut s’écrire avec une partie entière et une partie décimale.\n\n" +
+      "Méthode : on lit bien les chiffres et leur position, puis on compare ou on calcule.\n\n" +
+      "Calcul : " +
+      ("96 dixièmes divisés par 3 donnent 32 dixièmes, soit 3,2.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["decimaux", "division"],
   },
   {
@@ -752,7 +908,11 @@ export const decimauxBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "2,4 partagé en 2 fait 1,2.",
     explanation:
-      "Partager 2,4 en 2 parts égales donne 1,2 dans chaque part.",
+      "Définition : un nombre décimal peut s’écrire avec une partie entière et une partie décimale.\n\n" +
+      "Méthode : on lit bien les chiffres et leur position, puis on compare ou on calcule.\n\n" +
+      "Calcul : " +
+      ("Partager 2,4 en 2 parts égales donne 1,2 dans chaque part.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["decimaux", "division", "qcm"],
   },
   {
@@ -770,7 +930,11 @@ export const decimauxBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Calcule 7,5 ÷ 5.",
     explanation:
-      "Si 7,5 litres sont partagés dans 5 bouteilles, on calcule 7,5 ÷ 5 = 1,5. Chaque bouteille contient donc 1,5 litre.",
+      "Définition : un nombre décimal peut s’écrire avec une partie entière et une partie décimale.\n\n" +
+      "Méthode : on lit bien les chiffres et leur position, puis on compare ou on calcule.\n\n" +
+      "Calcul : " +
+      ("Si 7,5 litres sont partagés dans 5 bouteilles, on calcule 7,5 ÷ 5 = 1,5. Chaque bouteille contient donc 1,5 litre.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["decimaux", "division", "defi"],
   },
 
@@ -793,7 +957,11 @@ export const decimauxBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "10 % = 0,1.",
     explanation:
-      "10 % signifie 10 sur 100, donc 0,1. Ainsi 0,1 × 60 = 6.",
+      "Définition : un nombre décimal peut s’écrire avec une partie entière et une partie décimale.\n\n" +
+      "Méthode : on lit bien les chiffres et leur position, puis on compare ou on calcule.\n\n" +
+      "Calcul : " +
+      ("10 % signifie 10 sur 100, donc 0,1. Ainsi 0,1 × 60 = 6.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["decimaux", "defi", "pourcentage", "calcul"],
   },
   {
@@ -812,7 +980,11 @@ export const decimauxBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Décimal vient de « dix ».",
     explanation:
-      "Le mot « décimal » vient du latin lié au nombre dix. Notre système d’écriture usuel est un système en base 10.",
+      "Définition : un nombre décimal peut s’écrire avec une partie entière et une partie décimale.\n\n" +
+      "Méthode : on lit bien les chiffres et leur position, puis on compare ou on calcule.\n\n" +
+      "Calcul : " +
+      ("Le mot « décimal » vient du latin lié au nombre dix. Notre système d’écriture usuel est un système en base 10.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["decimaux", "defi", "culture", "qcm"],
   },
   {
@@ -831,7 +1003,11 @@ export const decimauxBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Entier - entier = entier.",
     explanation:
-      "Quand on soustrait deux nombres entiers, le résultat reste un entier. On n’obtient donc pas de nombre décimal dans ce cas.",
+      "Définition : un nombre décimal peut s’écrire avec une partie entière et une partie décimale.\n\n" +
+      "Méthode : on lit bien les chiffres et leur position, puis on compare ou on calcule.\n\n" +
+      "Calcul : " +
+      ("Quand on soustrait deux nombres entiers, le résultat reste un entier. On n’obtient donc pas de nombre décimal dans ce cas.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["decimaux", "defi", "piege", "qcm"],
   },
   {
@@ -855,7 +1031,11 @@ export const decimauxBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "360 ÷ 6 = 60°.",
     explanation:
-      "Un cercle mesure 360°. Pour faire 6 parts égales, on partage 360 par 6, ce qui donne 60°. Il faut donc faire des secteurs de 60°.",
+      "Définition : un nombre décimal peut s’écrire avec une partie entière et une partie décimale.\n\n" +
+      "Méthode : on lit bien les chiffres et leur position, puis on compare ou on calcule.\n\n" +
+      "Calcul : " +
+      ("Un cercle mesure 360°. Pour faire 6 parts égales, on partage 360 par 6, ce qui donne 60°. Il faut donc faire des secteurs de 60°.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["decimaux", "defi", "geometrie", "qcm"],
   },
   {
@@ -874,7 +1054,11 @@ export const decimauxBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "1 km = 1000 m.",
     explanation:
-      "0,5 km signifie la moitié d’un kilomètre. Or 1 km = 1000 m, donc 0,5 km = 500 m.",
+      "Définition : un nombre décimal peut s’écrire avec une partie entière et une partie décimale.\n\n" +
+      "Méthode : on lit bien les chiffres et leur position, puis on compare ou on calcule.\n\n" +
+      "Calcul : " +
+      ("0,5 km signifie la moitié d’un kilomètre. Or 1 km = 1000 m, donc 0,5 km = 500 m.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["decimaux", "defi", "reunion", "qcm"],
   },
   {
@@ -898,7 +1082,11 @@ export const decimauxBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Les décimaux permettent une mesure plus fine.",
     explanation:
-      "2,75 est plus précis que 2 ou 3. Les nombres décimaux servent justement à donner une valeur plus exacte.",
+      "Définition : un nombre décimal peut s’écrire avec une partie entière et une partie décimale.\n\n" +
+      "Méthode : on lit bien les chiffres et leur position, puis on compare ou on calcule.\n\n" +
+      "Calcul : " +
+      ("2,75 est plus précis que 2 ou 3. Les nombres décimaux servent justement à donner une valeur plus exacte.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["decimaux", "defi", "sens", "qcm"],
   },
   {
@@ -917,7 +1105,11 @@ export const decimauxBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "5 % = 5/100 = 0,05.",
     explanation:
-      "5 % de 20 €, c’est 0,05 × 20 = 1 €. Le pourboire est donc de 1 €.",
+      "Définition : un nombre décimal peut s’écrire avec une partie entière et une partie décimale.\n\n" +
+      "Méthode : on lit bien les chiffres et leur position, puis on compare ou on calcule.\n\n" +
+      "Calcul : " +
+      ("5 % de 20 €, c’est 0,05 × 20 = 1 €. Le pourboire est donc de 1 €.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["decimaux", "defi", "pourcentage", "qcm"],
   },
   {
@@ -936,7 +1128,11 @@ export const decimauxBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "360 ÷ 6.",
     explanation:
-      "Un cercle complet mesure 360°. En le partageant en 6 parts égales, on obtient 360 ÷ 6 = 60°.",
+      "Définition : un nombre décimal peut s’écrire avec une partie entière et une partie décimale.\n\n" +
+      "Méthode : on lit bien les chiffres et leur position, puis on compare ou on calcule.\n\n" +
+      "Calcul : " +
+      ("Un cercle complet mesure 360°. En le partageant en 6 parts égales, on obtient 360 ÷ 6 = 60°.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["decimaux", "defi", "geometrie", "qcm"],
   },
   {
@@ -960,7 +1156,11 @@ export const decimauxBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Le regroupement par 10 est pratique.",
     explanation:
-      "Le système décimal est pratique car il permet d’écrire les nombres et de faire les calculs simplement avec des regroupements par 10, 100, 1000, etc.",
+      "Définition : un nombre décimal peut s’écrire avec une partie entière et une partie décimale.\n\n" +
+      "Méthode : on lit bien les chiffres et leur position, puis on compare ou on calcule.\n\n" +
+      "Calcul : " +
+      ("Le système décimal est pratique car il permet d’écrire les nombres et de faire les calculs simplement avec des regroupements par 10, 100, 1000, etc.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["decimaux", "defi", "raisonnement", "qcm"],
   },
 
@@ -989,7 +1189,11 @@ export const decimauxBank: TutorBankItemV4[] = [
         format: "short",
         expected: [decimal, decimalComma],
         comparator: "fraction_decimal_equivalent",
-        explanation: `${n}/10 signifie ${n} dixièmes. Cela s’écrit ${decimalComma}.`,
+        explanation: "Définition : un nombre décimal peut s’écrire avec une partie entière et une partie décimale.\n\n" +
+          "Méthode : on lit bien les chiffres et leur position, puis on compare ou on calcule.\n\n" +
+          "Calcul : " +
+          (`${n}/10 signifie ${n} dixièmes. Cela s’écrit ${decimalComma}.`) +
+          "\n\nConclusion : on garde la réponse obtenue.",
       };
     },
   },
@@ -1015,7 +1219,11 @@ export const decimauxBank: TutorBankItemV4[] = [
         format: "short",
         expected: [decimal, decimalComma],
         comparator: "fraction_decimal_equivalent",
-        explanation: `${n}/10 signifie ${n} dixièmes. Cela correspond à ${decimalComma}.`,
+        explanation: "Définition : un nombre décimal peut s’écrire avec une partie entière et une partie décimale.\n\n" +
+          "Méthode : on lit bien les chiffres et leur position, puis on compare ou on calcule.\n\n" +
+          "Calcul : " +
+          (`${n}/10 signifie ${n} dixièmes. Cela correspond à ${decimalComma}.`) +
+          "\n\nConclusion : on garde la réponse obtenue.",
       };
     },
   },
@@ -1049,7 +1257,11 @@ export const decimauxBank: TutorBankItemV4[] = [
         choices,
         expected: [good],
         comparator: "mcq_exact",
-        explanation: `${n}/10 signifie ${n} dixièmes. L’écriture décimale correcte est ${good}.`,
+        explanation: "Définition : un nombre décimal peut s’écrire avec une partie entière et une partie décimale.\n\n" +
+          "Méthode : on lit bien les chiffres et leur position, puis on compare ou on calcule.\n\n" +
+          "Calcul : " +
+          (`${n}/10 signifie ${n} dixièmes. L’écriture décimale correcte est ${good}.`) +
+          "\n\nConclusion : on garde la réponse obtenue.",
       };
     },
   },
@@ -1078,7 +1290,11 @@ export const decimauxBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(tenth)],
         comparator: "number_equal",
-        explanation: `Dans ${number}, le chiffre placé juste après la virgule est ${tenth}. C’est donc le chiffre des dixièmes.`,
+        explanation: "Définition : un nombre décimal peut s’écrire avec une partie entière et une partie décimale.\n\n" +
+          "Méthode : on lit bien les chiffres et leur position, puis on compare ou on calcule.\n\n" +
+          "Calcul : " +
+          (`Dans ${number}, le chiffre placé juste après la virgule est ${tenth}. C’est donc le chiffre des dixièmes.`) +
+          "\n\nConclusion : on garde la réponse obtenue.",
       };
     },
   },
@@ -1104,7 +1320,11 @@ export const decimauxBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(hundredth)],
         comparator: "number_equal",
-        explanation: `Dans ${number}, le premier chiffre après la virgule est ${tenth} pour les dixièmes et le deuxième est ${hundredth} pour les centièmes.`,
+        explanation: "Définition : un nombre décimal peut s’écrire avec une partie entière et une partie décimale.\n\n" +
+          "Méthode : on lit bien les chiffres et leur position, puis on compare ou on calcule.\n\n" +
+          "Calcul : " +
+          (`Dans ${number}, le premier chiffre après la virgule est ${tenth} pour les dixièmes et le deuxième est ${hundredth} pour les centièmes.`) +
+          "\n\nConclusion : on garde la réponse obtenue.",
       };
     },
   },
@@ -1139,9 +1359,13 @@ export const decimauxBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(max), formatComma(max)],
         comparator: "number_equal",
-        explanation: `On compare ${formatComma(a)} et ${formatComma(b)}. Le plus grand est ${formatComma(
+        explanation: "Définition : un nombre décimal peut s’écrire avec une partie entière et une partie décimale.\n\n" +
+          "Méthode : on lit bien les chiffres et leur position, puis on compare ou on calcule.\n\n" +
+          "Calcul : " +
+          (`On compare ${formatComma(a)} et ${formatComma(b)}. Le plus grand est ${formatComma(
           max
-        )} et le plus petit est ${formatComma(min)}.`,
+        )} et le plus petit est ${formatComma(min)}.`) +
+          "\n\nConclusion : on garde la réponse obtenue.",
       };
     },
   },
@@ -1172,9 +1396,13 @@ export const decimauxBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(min), formatComma(min)],
         comparator: "number_equal",
-        explanation: `On compare ${formatComma(a)} et ${formatComma(b)}. Le plus petit est ${formatComma(
+        explanation: "Définition : un nombre décimal peut s’écrire avec une partie entière et une partie décimale.\n\n" +
+          "Méthode : on lit bien les chiffres et leur position, puis on compare ou on calcule.\n\n" +
+          "Calcul : " +
+          (`On compare ${formatComma(a)} et ${formatComma(b)}. Le plus petit est ${formatComma(
           min
-        )} et le plus grand est ${formatComma(max)}.`,
+        )} et le plus grand est ${formatComma(max)}.`) +
+          "\n\nConclusion : on garde la réponse obtenue.",
       };
     },
   },
@@ -1211,7 +1439,11 @@ export const decimauxBank: TutorBankItemV4[] = [
         choices,
         expected: [formatComma(good)],
         comparator: "mcq_exact",
-        explanation: `${formatComma(good)} est le plus grand nombre proposé.`,
+        explanation: "Définition : un nombre décimal peut s’écrire avec une partie entière et une partie décimale.\n\n" +
+          "Méthode : on lit bien les chiffres et leur position, puis on compare ou on calcule.\n\n" +
+          "Calcul : " +
+          (`${formatComma(good)} est le plus grand nombre proposé.`) +
+          "\n\nConclusion : on garde la réponse obtenue.",
       };
     },
   },
@@ -1240,9 +1472,13 @@ export const decimauxBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(sum), formatComma(sum)],
         comparator: "number_equal",
-        explanation: `${formatComma(a)} + ${formatComma(b)} = ${formatComma(
+        explanation: "Définition : un nombre décimal peut s’écrire avec une partie entière et une partie décimale.\n\n" +
+          "Méthode : on lit bien les chiffres et leur position, puis on compare ou on calcule.\n\n" +
+          "Calcul : " +
+          (`${formatComma(a)} + ${formatComma(b)} = ${formatComma(
           sum
-        )}.`,
+        )}.`) +
+          "\n\nConclusion : on garde la réponse obtenue.",
       };
     },
   },
@@ -1267,9 +1503,13 @@ export const decimauxBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(sum), formatComma(sum)],
         comparator: "number_equal",
-        explanation: `En alignant les virgules, on trouve ${formatComma(a)} + ${formatComma(
+        explanation: "Définition : un nombre décimal peut s’écrire avec une partie entière et une partie décimale.\n\n" +
+          "Méthode : on lit bien les chiffres et leur position, puis on compare ou on calcule.\n\n" +
+          "Calcul : " +
+          (`En alignant les virgules, on trouve ${formatComma(a)} + ${formatComma(
           b
-        )} = ${formatComma(sum)}.`,
+        )} = ${formatComma(sum)}.`) +
+          "\n\nConclusion : on garde la réponse obtenue.",
       };
     },
   },
@@ -1296,9 +1536,13 @@ export const decimauxBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(sum), formatComma(sum)],
         comparator: "number_equal",
-        explanation: `On additionne ${formatComma(a)} € et ${formatComma(
+        explanation: "Définition : un nombre décimal peut s’écrire avec une partie entière et une partie décimale.\n\n" +
+          "Méthode : on lit bien les chiffres et leur position, puis on compare ou on calcule.\n\n" +
+          "Calcul : " +
+          (`On additionne ${formatComma(a)} € et ${formatComma(
           b
-        )} €. Le total est ${formatComma(sum)} €.`,
+        )} €. Le total est ${formatComma(sum)} €.`) +
+          "\n\nConclusion : on garde la réponse obtenue.",
       };
     },
   },
@@ -1329,11 +1573,15 @@ export const decimauxBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(product), formatComma(product)],
         comparator: "number_equal",
-        explanation: `Multiplier ${formatComma(
+        explanation: "Définition : un nombre décimal peut s’écrire avec une partie entière et une partie décimale.\n\n" +
+          "Méthode : on lit bien les chiffres et leur position, puis on compare ou on calcule.\n\n" +
+          "Calcul : " +
+          (`Multiplier ${formatComma(
           a
         )} par ${b}, c’est ajouter ${formatComma(a)} ${b} fois. On obtient ${formatComma(
           product
-        )}.`,
+        )}.`) +
+          "\n\nConclusion : on garde la réponse obtenue.",
       };
     },
   },
@@ -1360,7 +1608,11 @@ export const decimauxBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(product), formatComma(product)],
         comparator: "number_equal",
-        explanation: `${formatComma(a)} × ${b} = ${formatComma(product)}.`,
+        explanation: "Définition : un nombre décimal peut s’écrire avec une partie entière et une partie décimale.\n\n" +
+          "Méthode : on lit bien les chiffres et leur position, puis on compare ou on calcule.\n\n" +
+          "Calcul : " +
+          (`${formatComma(a)} × ${b} = ${formatComma(product)}.`) +
+          "\n\nConclusion : on garde la réponse obtenue.",
       };
     },
   },
@@ -1387,11 +1639,15 @@ export const decimauxBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(total), formatComma(total)],
         comparator: "number_equal",
-        explanation: `Chaque ananas coûte ${formatComma(
+        explanation: "Définition : un nombre décimal peut s’écrire avec une partie entière et une partie décimale.\n\n" +
+          "Méthode : on lit bien les chiffres et leur position, puis on compare ou on calcule.\n\n" +
+          "Calcul : " +
+          (`Chaque ananas coûte ${formatComma(
           price
         )} €. Pour ${qty} ananas, on calcule ${formatComma(
           price
-        )} × ${qty} = ${formatComma(total)} €.`,
+        )} × ${qty} = ${formatComma(total)} €.`) +
+          "\n\nConclusion : on garde la réponse obtenue.",
       };
     },
   },
@@ -1423,9 +1679,13 @@ export const decimauxBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(quotient), formatComma(quotient)],
         comparator: "number_equal",
-        explanation: `${formatComma(dividend)} partagé en ${divisor} parts égales donne ${formatComma(
+        explanation: "Définition : un nombre décimal peut s’écrire avec une partie entière et une partie décimale.\n\n" +
+          "Méthode : on lit bien les chiffres et leur position, puis on compare ou on calcule.\n\n" +
+          "Calcul : " +
+          (`${formatComma(dividend)} partagé en ${divisor} parts égales donne ${formatComma(
           quotient
-        )}.`,
+        )}.`) +
+          "\n\nConclusion : on garde la réponse obtenue.",
       };
     },
   },
@@ -1452,11 +1712,15 @@ export const decimauxBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(quotient), formatComma(quotient)],
         comparator: "number_equal",
-        explanation: `On partage ${formatComma(
+        explanation: "Définition : un nombre décimal peut s’écrire avec une partie entière et une partie décimale.\n\n" +
+          "Méthode : on lit bien les chiffres et leur position, puis on compare ou on calcule.\n\n" +
+          "Calcul : " +
+          (`On partage ${formatComma(
           dividend
         )} en ${divisor} parts égales. Chaque part vaut ${formatComma(
           quotient
-        )}.`,
+        )}.`) +
+          "\n\nConclusion : on garde la réponse obtenue.",
       };
     },
   },
@@ -1483,9 +1747,13 @@ export const decimauxBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(quotient), formatComma(quotient)],
         comparator: "number_equal",
-        explanation: `On calcule ${formatComma(dividend)} ÷ ${divisor} = ${formatComma(
+        explanation: "Définition : un nombre décimal peut s’écrire avec une partie entière et une partie décimale.\n\n" +
+          "Méthode : on lit bien les chiffres et leur position, puis on compare ou on calcule.\n\n" +
+          "Calcul : " +
+          (`On calcule ${formatComma(dividend)} ÷ ${divisor} = ${formatComma(
           quotient
-        )}. Chaque personne reçoit donc ${formatComma(quotient)} litre(s).`,
+        )}. Chaque personne reçoit donc ${formatComma(quotient)} litre(s).`) +
+          "\n\nConclusion : on garde la réponse obtenue.",
       };
     },
   },

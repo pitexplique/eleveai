@@ -23,7 +23,11 @@ export const anglesBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "Elles ont la même origine.",
     explanation:
-      "Un angle est formé par deux demi-droites qui partent du même point. Ce point commun s’appelle le sommet de l’angle.",
+      "Définition : un angle mesure l’ouverture entre deux demi-droites.\n\n" +
+      "Méthode : on observe le codage ou la mesure, puis on compare avec les angles de référence.\n\n" +
+      "Calcul : " +
+      ("Un angle est formé par deux demi-droites qui partent du même point. Ce point commun s’appelle le sommet de l’angle.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["angles", "reconnaitre"],
   },
   {
@@ -41,7 +45,11 @@ export const anglesBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "C’est le point de départ des deux demi-droites.",
     explanation:
-      "Les deux côtés d’un angle partent du même point. Ce point commun s’appelle le sommet.",
+      "Définition : un angle mesure l’ouverture entre deux demi-droites.\n\n" +
+      "Méthode : on observe le codage ou la mesure, puis on compare avec les angles de référence.\n\n" +
+      "Calcul : " +
+      ("Les deux côtés d’un angle partent du même point. Ce point commun s’appelle le sommet.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["angles", "reconnaitre", "vocabulaire"],
   },
   {
@@ -65,7 +73,11 @@ export const anglesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Les deux côtés partent du même point.",
     explanation:
-      "Un angle est formé par deux demi-droites de même origine. Leur point commun est le sommet.",
+      "Définition : un angle mesure l’ouverture entre deux demi-droites.\n\n" +
+      "Méthode : on observe le codage ou la mesure, puis on compare avec les angles de référence.\n\n" +
+      "Calcul : " +
+      ("Un angle est formé par deux demi-droites de même origine. Leur point commun est le sommet.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["angles", "reconnaitre", "qcm"],
   },
   {
@@ -84,7 +96,11 @@ export const anglesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "C’est le point où les deux côtés se rencontrent.",
     explanation:
-      "Le point commun aux deux côtés d’un angle s’appelle le sommet.",
+      "Définition : un angle mesure l’ouverture entre deux demi-droites.\n\n" +
+      "Méthode : on observe le codage ou la mesure, puis on compare avec les angles de référence.\n\n" +
+      "Calcul : " +
+      ("Le point commun aux deux côtés d’un angle s’appelle le sommet.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["angles", "reconnaitre", "qcm"],
   },
 
@@ -106,7 +122,11 @@ export const anglesBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Le coin d’un carré mesure 90°.",
     explanation:
-      "Un angle droit a toujours la même mesure : 90 degrés. On le retrouve par exemple dans les coins d’un carré ou d’un rectangle.",
+      "Définition : un angle mesure l’ouverture entre deux demi-droites.\n\n" +
+      "Méthode : on observe le codage ou la mesure, puis on compare avec les angles de référence.\n\n" +
+      "Calcul : " +
+      ("Un angle droit a toujours la même mesure : 90 degrés. On le retrouve par exemple dans les coins d’un carré ou d’un rectangle.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["angles", "angle_droit"],
   },
   {
@@ -124,7 +144,11 @@ export const anglesBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Un angle droit vaut toujours 90°.",
     explanation:
-      "Par définition, un angle droit mesure 90 degrés.",
+      "Définition : un angle mesure l’ouverture entre deux demi-droites.\n\n" +
+      "Méthode : on observe le codage ou la mesure, puis on compare avec les angles de référence.\n\n" +
+      "Calcul : " +
+      ("Par définition, un angle droit mesure 90 degrés.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["angles", "angle_droit"],
   },
   {
@@ -142,7 +166,11 @@ export const anglesBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Toujours 90°.",
     explanation:
-      "Un angle droit se reconnaît à sa mesure : 90°.",
+      "Définition : un angle mesure l’ouverture entre deux demi-droites.\n\n" +
+      "Méthode : on observe le codage ou la mesure, puis on compare avec les angles de référence.\n\n" +
+      "Calcul : " +
+      ("Un angle droit se reconnaît à sa mesure : 90°.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["angles", "angle_droit"],
   },
   {
@@ -161,7 +189,11 @@ export const anglesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Un angle droit mesure 90°.",
     explanation:
-      "Parmi les mesures proposées, seule 90° correspond à un angle droit.",
+      "Définition : un angle mesure l’ouverture entre deux demi-droites.\n\n" +
+      "Méthode : on observe le codage ou la mesure, puis on compare avec les angles de référence.\n\n" +
+      "Calcul : " +
+      ("Parmi les mesures proposées, seule 90° correspond à un angle droit.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["angles", "angle_droit", "qcm"],
   },
   {
@@ -180,7 +212,11 @@ export const anglesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Le bon choix est 90°.",
     explanation:
-      "Un angle droit ne mesure ni 60°, ni 120°, ni 150°. Il mesure exactement 90°.",
+      "Définition : un angle mesure l’ouverture entre deux demi-droites.\n\n" +
+      "Méthode : on observe le codage ou la mesure, puis on compare avec les angles de référence.\n\n" +
+      "Calcul : " +
+      ("Un angle droit ne mesure ni 60°, ni 120°, ni 150°. Il mesure exactement 90°.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["angles", "angle_droit", "qcm"],
   },
   {
@@ -199,7 +235,11 @@ export const anglesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Tous les angles d’un rectangle sont droits.",
     explanation:
-      "Les coins d’un rectangle sont des angles droits. Ils mesurent donc 90°.",
+      "Définition : un angle mesure l’ouverture entre deux demi-droites.\n\n" +
+      "Méthode : on observe le codage ou la mesure, puis on compare avec les angles de référence.\n\n" +
+      "Calcul : " +
+      ("Les coins d’un rectangle sont des angles droits. Ils mesurent donc 90°.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["angles", "angle_droit", "qcm"],
   },
 
@@ -221,7 +261,11 @@ export const anglesBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Compare les nombres.",
     explanation:
-      "Pour comparer deux angles donnés en degrés, on compare leurs mesures. Comme 80 est plus grand que 30, l’angle de 80° est le plus grand.",
+      "Définition : un angle mesure l’ouverture entre deux demi-droites.\n\n" +
+      "Méthode : on observe le codage ou la mesure, puis on compare avec les angles de référence.\n\n" +
+      "Calcul : " +
+      ("Pour comparer deux angles donnés en degrés, on compare leurs mesures. Comme 80 est plus grand que 30, l’angle de 80° est le plus grand.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["angles", "comparaison"],
   },
   {
@@ -239,7 +283,11 @@ export const anglesBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Le plus petit angle a la plus petite mesure.",
     explanation:
-      "Comme 70 est plus petit que 120, l’angle de 70° est le plus petit.",
+      "Définition : un angle mesure l’ouverture entre deux demi-droites.\n\n" +
+      "Méthode : on observe le codage ou la mesure, puis on compare avec les angles de référence.\n\n" +
+      "Calcul : " +
+      ("Comme 70 est plus petit que 120, l’angle de 70° est le plus petit.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["angles", "comparaison"],
   },
   {
@@ -257,7 +305,11 @@ export const anglesBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Cherche la plus grande mesure.",
     explanation:
-      "95° est plus grand que 45°. Donc l’angle de 95° est le plus grand.",
+      "Définition : un angle mesure l’ouverture entre deux demi-droites.\n\n" +
+      "Méthode : on observe le codage ou la mesure, puis on compare avec les angles de référence.\n\n" +
+      "Calcul : " +
+      ("95° est plus grand que 45°. Donc l’angle de 95° est le plus grand.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["angles", "comparaison"],
   },
   {
@@ -275,7 +327,11 @@ export const anglesBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Compare les deux nombres.",
     explanation:
-      "Comme 55 est plus petit que 85, l’angle de 55° est le plus petit.",
+      "Définition : un angle mesure l’ouverture entre deux demi-droites.\n\n" +
+      "Méthode : on observe le codage ou la mesure, puis on compare avec les angles de référence.\n\n" +
+      "Calcul : " +
+      ("Comme 55 est plus petit que 85, l’angle de 55° est le plus petit.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["angles", "comparaison"],
   },
   {
@@ -293,7 +349,11 @@ export const anglesBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "Un angle droit mesure 90°.",
     explanation:
-      "Un angle droit mesure 90°. Comme 45° est inférieur à 90°, un angle de 45° est plus petit qu’un angle droit.",
+      "Définition : un angle mesure l’ouverture entre deux demi-droites.\n\n" +
+      "Méthode : on observe le codage ou la mesure, puis on compare avec les angles de référence.\n\n" +
+      "Calcul : " +
+      ("Un angle droit mesure 90°. Comme 45° est inférieur à 90°, un angle de 45° est plus petit qu’un angle droit.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["angles", "comparaison", "angle_droit"],
   },
   {
@@ -311,7 +371,11 @@ export const anglesBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "Compare 120° à 90°.",
     explanation:
-      "Un angle droit mesure 90°. Comme 120° est supérieur à 90°, un angle de 120° est plus grand qu’un angle droit.",
+      "Définition : un angle mesure l’ouverture entre deux demi-droites.\n\n" +
+      "Méthode : on observe le codage ou la mesure, puis on compare avec les angles de référence.\n\n" +
+      "Calcul : " +
+      ("Un angle droit mesure 90°. Comme 120° est supérieur à 90°, un angle de 120° est plus grand qu’un angle droit.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["angles", "comparaison", "angle_droit"],
   },
   {
@@ -330,7 +394,11 @@ export const anglesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Cherche le plus grand nombre.",
     explanation:
-      "Parmi 25°, 65°, 85° et 45°, la plus grande mesure est 85°.",
+      "Définition : un angle mesure l’ouverture entre deux demi-droites.\n\n" +
+      "Méthode : on observe le codage ou la mesure, puis on compare avec les angles de référence.\n\n" +
+      "Calcul : " +
+      ("Parmi 25°, 65°, 85° et 45°, la plus grande mesure est 85°.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["angles", "comparaison", "qcm"],
   },
   {
@@ -349,7 +417,11 @@ export const anglesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Cherche le plus petit nombre.",
     explanation:
-      "Parmi les mesures proposées, 70° est la plus petite.",
+      "Définition : un angle mesure l’ouverture entre deux demi-droites.\n\n" +
+      "Méthode : on observe le codage ou la mesure, puis on compare avec les angles de référence.\n\n" +
+      "Calcul : " +
+      ("Parmi les mesures proposées, 70° est la plus petite.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["angles", "comparaison", "qcm"],
   },
   {
@@ -368,7 +440,11 @@ export const anglesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Compare les quatre mesures.",
     explanation:
-      "75° est plus grand que 40°, 55° et 65°. C’est donc le plus grand angle.",
+      "Définition : un angle mesure l’ouverture entre deux demi-droites.\n\n" +
+      "Méthode : on observe le codage ou la mesure, puis on compare avec les angles de référence.\n\n" +
+      "Calcul : " +
+      ("75° est plus grand que 40°, 55° et 65°. C’est donc le plus grand angle.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["angles", "comparaison", "qcm"],
   },
   {
@@ -387,7 +463,11 @@ export const anglesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "L’angle le plus petit a la mesure la plus petite.",
     explanation:
-      "25° est la plus petite des quatre mesures proposées.",
+      "Définition : un angle mesure l’ouverture entre deux demi-droites.\n\n" +
+      "Méthode : on observe le codage ou la mesure, puis on compare avec les angles de référence.\n\n" +
+      "Calcul : " +
+      ("25° est la plus petite des quatre mesures proposées.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["angles", "comparaison", "qcm"],
   },
   {
@@ -411,7 +491,11 @@ export const anglesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Un angle droit mesure 90°.",
     explanation:
-      "Comme 60° est inférieur à 90°, cet angle est plus petit qu’un angle droit.",
+      "Définition : un angle mesure l’ouverture entre deux demi-droites.\n\n" +
+      "Méthode : on observe le codage ou la mesure, puis on compare avec les angles de référence.\n\n" +
+      "Calcul : " +
+      ("Comme 60° est inférieur à 90°, cet angle est plus petit qu’un angle droit.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["angles", "comparaison", "qcm", "angle_droit"],
   },
   {
@@ -435,7 +519,11 @@ export const anglesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Compare 100° à 90°.",
     explanation:
-      "Comme 100° est supérieur à 90°, cet angle est plus grand qu’un angle droit.",
+      "Définition : un angle mesure l’ouverture entre deux demi-droites.\n\n" +
+      "Méthode : on observe le codage ou la mesure, puis on compare avec les angles de référence.\n\n" +
+      "Calcul : " +
+      ("Comme 100° est supérieur à 90°, cet angle est plus grand qu’un angle droit.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["angles", "comparaison", "qcm", "angle_droit"],
   },
 
@@ -457,7 +545,11 @@ export const anglesBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "C’est l’instrument gradué utilisé en géométrie.",
     explanation:
-      "Pour mesurer un angle, on utilise un rapporteur. Il est gradué en degrés.",
+      "Définition : un angle mesure l’ouverture entre deux demi-droites.\n\n" +
+      "Méthode : on observe le codage ou la mesure, puis on compare avec les angles de référence.\n\n" +
+      "Calcul : " +
+      ("Pour mesurer un angle, on utilise un rapporteur. Il est gradué en degrés.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["angles", "mesure", "instrument"],
   },
   {
@@ -475,7 +567,11 @@ export const anglesBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "On note souvent cette unité avec le symbole °.",
     explanation:
-      "On mesure les angles en degrés. Le symbole utilisé est °.",
+      "Définition : un angle mesure l’ouverture entre deux demi-droites.\n\n" +
+      "Méthode : on observe le codage ou la mesure, puis on compare avec les angles de référence.\n\n" +
+      "Calcul : " +
+      ("On mesure les angles en degrés. Le symbole utilisé est °.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["angles", "mesure", "unite"],
   },
   {
@@ -494,7 +590,11 @@ export const anglesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "C’est l’instrument gradué en degrés.",
     explanation:
-      "L’instrument adapté pour mesurer un angle est le rapporteur.",
+      "Définition : un angle mesure l’ouverture entre deux demi-droites.\n\n" +
+      "Méthode : on observe le codage ou la mesure, puis on compare avec les angles de référence.\n\n" +
+      "Calcul : " +
+      ("L’instrument adapté pour mesurer un angle est le rapporteur.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["angles", "mesure", "qcm"],
   },
   {
@@ -513,7 +613,11 @@ export const anglesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "On écrit souvent 90°.",
     explanation:
-      "Les angles se mesurent en degrés. Les autres unités proposées servent à mesurer autre chose.",
+      "Définition : un angle mesure l’ouverture entre deux demi-droites.\n\n" +
+      "Méthode : on observe le codage ou la mesure, puis on compare avec les angles de référence.\n\n" +
+      "Calcul : " +
+      ("Les angles se mesurent en degrés. Les autres unités proposées servent à mesurer autre chose.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["angles", "mesure", "qcm"],
   },
 
@@ -535,7 +639,11 @@ export const anglesBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "C’est le même instrument que pour mesurer un angle.",
     explanation:
-      "Pour tracer précisément un angle de 40°, on utilise un rapporteur, car il permet de placer la bonne mesure en degrés.",
+      "Définition : un angle mesure l’ouverture entre deux demi-droites.\n\n" +
+      "Méthode : on observe le codage ou la mesure, puis on compare avec les angles de référence.\n\n" +
+      "Calcul : " +
+      ("Pour tracer précisément un angle de 40°, on utilise un rapporteur, car il permet de placer la bonne mesure en degrés.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["angles", "tracer", "instrument"],
   },
   {
@@ -553,7 +661,11 @@ export const anglesBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "Les deux côtés partent de ce point.",
     explanation:
-      "Pour tracer un angle, on commence par placer le sommet, car les deux côtés de l’angle partent de ce point.",
+      "Définition : un angle mesure l’ouverture entre deux demi-droites.\n\n" +
+      "Méthode : on observe le codage ou la mesure, puis on compare avec les angles de référence.\n\n" +
+      "Calcul : " +
+      ("Pour tracer un angle, on commence par placer le sommet, car les deux côtés de l’angle partent de ce point.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["angles", "tracer", "vocabulaire"],
   },
   {
@@ -572,7 +684,11 @@ export const anglesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Il permet de lire les degrés.",
     explanation:
-      "Le rapporteur est l’instrument adapté pour tracer un angle d’une mesure donnée.",
+      "Définition : un angle mesure l’ouverture entre deux demi-droites.\n\n" +
+      "Méthode : on observe le codage ou la mesure, puis on compare avec les angles de référence.\n\n" +
+      "Calcul : " +
+      ("Le rapporteur est l’instrument adapté pour tracer un angle d’une mesure donnée.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["angles", "tracer", "qcm"],
   },
   {
@@ -596,7 +712,11 @@ export const anglesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "C’est le point commun des deux côtés.",
     explanation:
-      "On commence par le sommet, car c’est depuis ce point que l’on trace les deux côtés de l’angle.",
+      "Définition : un angle mesure l’ouverture entre deux demi-droites.\n\n" +
+      "Méthode : on observe le codage ou la mesure, puis on compare avec les angles de référence.\n\n" +
+      "Calcul : " +
+      ("On commence par le sommet, car c’est depuis ce point que l’on trace les deux côtés de l’angle.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["angles", "tracer", "qcm"],
   },
 
@@ -618,7 +738,11 @@ export const anglesBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "Un angle droit mesure 90°.",
     explanation:
-      "Comme un angle droit mesure exactement 90°, un angle de 90° est égal à un angle droit.",
+      "Définition : un angle mesure l’ouverture entre deux demi-droites.\n\n" +
+      "Méthode : on observe le codage ou la mesure, puis on compare avec les angles de référence.\n\n" +
+      "Calcul : " +
+      ("Comme un angle droit mesure exactement 90°, un angle de 90° est égal à un angle droit.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["angles", "defi", "angle_droit"],
   },
   {
@@ -636,7 +760,11 @@ export const anglesBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Un angle droit mesure 90°.",
     explanation:
-      "Un angle droit mesure 90°. Parmi les valeurs proposées, 90° est exactement un angle droit, donc c’est le plus proche.",
+      "Définition : un angle mesure l’ouverture entre deux demi-droites.\n\n" +
+      "Méthode : on observe le codage ou la mesure, puis on compare avec les angles de référence.\n\n" +
+      "Calcul : " +
+      ("Un angle droit mesure 90°. Parmi les valeurs proposées, 90° est exactement un angle droit, donc c’est le plus proche.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["angles", "defi", "comparaison"],
   },
   {
@@ -655,7 +783,11 @@ export const anglesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Un angle droit vaut 90°.",
     explanation:
-      "Un angle plus petit qu’un angle droit doit mesurer moins de 90°. Parmi les choix, seul 60° convient.",
+      "Définition : un angle mesure l’ouverture entre deux demi-droites.\n\n" +
+      "Méthode : on observe le codage ou la mesure, puis on compare avec les angles de référence.\n\n" +
+      "Calcul : " +
+      ("Un angle plus petit qu’un angle droit doit mesurer moins de 90°. Parmi les choix, seul 60° convient.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["angles", "defi", "qcm"],
   },
   {
@@ -674,7 +806,11 @@ export const anglesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Cherche une mesure supérieure à 90°.",
     explanation:
-      "Un angle plus grand qu’un angle droit mesure plus de 90°. Ici, 100° est le bon choix.",
+      "Définition : un angle mesure l’ouverture entre deux demi-droites.\n\n" +
+      "Méthode : on observe le codage ou la mesure, puis on compare avec les angles de référence.\n\n" +
+      "Calcul : " +
+      ("Un angle plus grand qu’un angle droit mesure plus de 90°. Ici, 100° est le bon choix.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["angles", "defi", "qcm"],
   },
   {
@@ -698,7 +834,11 @@ export const anglesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "90° correspond à un angle droit.",
     explanation:
-      "Un angle de 90° est exactement un angle droit.",
+      "Définition : un angle mesure l’ouverture entre deux demi-droites.\n\n" +
+      "Méthode : on observe le codage ou la mesure, puis on compare avec les angles de référence.\n\n" +
+      "Calcul : " +
+      ("Un angle de 90° est exactement un angle droit.") +
+      "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["angles", "defi", "reunion", "qcm"],
   },
 
@@ -723,7 +863,11 @@ export const anglesBank: TutorBankItemV4[] = [
         expected: ["2", "deux"],
         comparator: "contains_keyword",
         explanation:
-          "Un angle est formé par deux demi-droites de même origine.",
+          "Définition : un angle mesure l’ouverture entre deux demi-droites.\n\n" +
+          "Méthode : on observe le codage ou la mesure, puis on compare avec les angles de référence.\n\n" +
+          "Calcul : " +
+          ("Un angle est formé par deux demi-droites de même origine.") +
+          "\n\nConclusion : on garde la réponse obtenue.",
       };
     },
   },
@@ -753,7 +897,11 @@ export const anglesBank: TutorBankItemV4[] = [
         expected: ["deux demi-droites de même origine"],
         comparator: "mcq_exact",
         explanation:
-          "Un angle est formé par deux demi-droites de même origine.",
+          "Définition : un angle mesure l’ouverture entre deux demi-droites.\n\n" +
+          "Méthode : on observe le codage ou la mesure, puis on compare avec les angles de référence.\n\n" +
+          "Calcul : " +
+          ("Un angle est formé par deux demi-droites de même origine.") +
+          "\n\nConclusion : on garde la réponse obtenue.",
       };
     },
   },
@@ -779,7 +927,11 @@ export const anglesBank: TutorBankItemV4[] = [
         expected: ["90", "90°"],
         comparator: "number_equal",
         explanation:
-          "Un angle droit mesure toujours 90 degrés.",
+          "Définition : un angle mesure l’ouverture entre deux demi-droites.\n\n" +
+          "Méthode : on observe le codage ou la mesure, puis on compare avec les angles de référence.\n\n" +
+          "Calcul : " +
+          ("Un angle droit mesure toujours 90 degrés.") +
+          "\n\nConclusion : on garde la réponse obtenue.",
       };
     },
   },
@@ -801,7 +953,11 @@ export const anglesBank: TutorBankItemV4[] = [
         expected: ["90", "90°"],
         comparator: "number_equal",
         explanation:
-          "Par définition, un angle droit mesure 90°.",
+          "Définition : un angle mesure l’ouverture entre deux demi-droites.\n\n" +
+          "Méthode : on observe le codage ou la mesure, puis on compare avec les angles de référence.\n\n" +
+          "Calcul : " +
+          ("Par définition, un angle droit mesure 90°.") +
+          "\n\nConclusion : on garde la réponse obtenue.",
       };
     },
   },
@@ -825,7 +981,11 @@ export const anglesBank: TutorBankItemV4[] = [
         expected: ["90°"],
         comparator: "mcq_exact",
         explanation:
-          "Un angle droit mesure exactement 90°.",
+          "Définition : un angle mesure l’ouverture entre deux demi-droites.\n\n" +
+          "Méthode : on observe le codage ou la mesure, puis on compare avec les angles de référence.\n\n" +
+          "Calcul : " +
+          ("Un angle droit mesure exactement 90°.") +
+          "\n\nConclusion : on garde la réponse obtenue.",
       };
     },
   },
@@ -849,7 +1009,11 @@ export const anglesBank: TutorBankItemV4[] = [
         expected: ["90°"],
         comparator: "mcq_exact",
         explanation:
-          "Parmi les mesures proposées, seule 90° correspond à un angle droit.",
+          "Définition : un angle mesure l’ouverture entre deux demi-droites.\n\n" +
+          "Méthode : on observe le codage ou la mesure, puis on compare avec les angles de référence.\n\n" +
+          "Calcul : " +
+          ("Parmi les mesures proposées, seule 90° correspond à un angle droit.") +
+          "\n\nConclusion : on garde la réponse obtenue.",
       };
     },
   },
@@ -885,7 +1049,11 @@ export const anglesBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(max), `${max}°`],
         comparator: "number_equal",
-        explanation: `On compare ${a}° et ${b}°. Comme ${max} est plus grand que ${min}, l’angle le plus grand est ${max}°.`,
+        explanation: "Définition : un angle mesure l’ouverture entre deux demi-droites.\n\n" +
+          "Méthode : on observe le codage ou la mesure, puis on compare avec les angles de référence.\n\n" +
+          "Calcul : " +
+          (`On compare ${a}° et ${b}°. Comme ${max} est plus grand que ${min}, l’angle le plus grand est ${max}°.`) +
+          "\n\nConclusion : on garde la réponse obtenue.",
       };
     },
   },
@@ -917,7 +1085,11 @@ export const anglesBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(min), `${min}°`],
         comparator: "number_equal",
-        explanation: `On compare ${a}° et ${b}°. Comme ${min} est plus petit que ${max}, l’angle le plus petit est ${min}°.`,
+        explanation: "Définition : un angle mesure l’ouverture entre deux demi-droites.\n\n" +
+          "Méthode : on observe le codage ou la mesure, puis on compare avec les angles de référence.\n\n" +
+          "Calcul : " +
+          (`On compare ${a}° et ${b}°. Comme ${min} est plus petit que ${max}, l’angle le plus petit est ${min}°.`) +
+          "\n\nConclusion : on garde la réponse obtenue.",
       };
     },
   },
@@ -940,7 +1112,11 @@ export const anglesBank: TutorBankItemV4[] = [
         format: "short",
         expected: ["plus petit", "petit"],
         comparator: "contains_keyword",
-        explanation: `Un angle droit mesure 90°. Comme ${value}° est inférieur à 90°, cet angle est plus petit qu’un angle droit.`,
+        explanation: "Définition : un angle mesure l’ouverture entre deux demi-droites.\n\n" +
+          "Méthode : on observe le codage ou la mesure, puis on compare avec les angles de référence.\n\n" +
+          "Calcul : " +
+          (`Un angle droit mesure 90°. Comme ${value}° est inférieur à 90°, cet angle est plus petit qu’un angle droit.`) +
+          "\n\nConclusion : on garde la réponse obtenue.",
       };
     },
   },
@@ -963,7 +1139,11 @@ export const anglesBank: TutorBankItemV4[] = [
         format: "short",
         expected: ["plus grand", "grand"],
         comparator: "contains_keyword",
-        explanation: `Un angle droit mesure 90°. Comme ${value}° est supérieur à 90°, cet angle est plus grand qu’un angle droit.`,
+        explanation: "Définition : un angle mesure l’ouverture entre deux demi-droites.\n\n" +
+          "Méthode : on observe le codage ou la mesure, puis on compare avec les angles de référence.\n\n" +
+          "Calcul : " +
+          (`Un angle droit mesure 90°. Comme ${value}° est supérieur à 90°, cet angle est plus grand qu’un angle droit.`) +
+          "\n\nConclusion : on garde la réponse obtenue.",
       };
     },
   },
@@ -990,7 +1170,11 @@ export const anglesBank: TutorBankItemV4[] = [
         choices,
         expected: [`${good}°`],
         comparator: "mcq_exact",
-        explanation: `Parmi les mesures proposées, ${good}° est la plus grande.`,
+        explanation: "Définition : un angle mesure l’ouverture entre deux demi-droites.\n\n" +
+          "Méthode : on observe le codage ou la mesure, puis on compare avec les angles de référence.\n\n" +
+          "Calcul : " +
+          (`Parmi les mesures proposées, ${good}° est la plus grande.`) +
+          "\n\nConclusion : on garde la réponse obtenue.",
       };
     },
   },
@@ -1017,7 +1201,11 @@ export const anglesBank: TutorBankItemV4[] = [
         choices,
         expected: [`${good}°`],
         comparator: "mcq_exact",
-        explanation: `Parmi les mesures proposées, ${good}° est la plus petite.`,
+        explanation: "Définition : un angle mesure l’ouverture entre deux demi-droites.\n\n" +
+          "Méthode : on observe le codage ou la mesure, puis on compare avec les angles de référence.\n\n" +
+          "Calcul : " +
+          (`Parmi les mesures proposées, ${good}° est la plus petite.`) +
+          "\n\nConclusion : on garde la réponse obtenue.",
       };
     },
   },
@@ -1046,7 +1234,11 @@ export const anglesBank: TutorBankItemV4[] = [
         ]),
         expected: ["plus petit qu’un angle droit"],
         comparator: "mcq_exact",
-        explanation: `Comme ${value}° est inférieur à 90°, cet angle est plus petit qu’un angle droit.`,
+        explanation: "Définition : un angle mesure l’ouverture entre deux demi-droites.\n\n" +
+          "Méthode : on observe le codage ou la mesure, puis on compare avec les angles de référence.\n\n" +
+          "Calcul : " +
+          (`Comme ${value}° est inférieur à 90°, cet angle est plus petit qu’un angle droit.`) +
+          "\n\nConclusion : on garde la réponse obtenue.",
       };
     },
   },
@@ -1075,7 +1267,11 @@ export const anglesBank: TutorBankItemV4[] = [
         ]),
         expected: ["plus grand qu’un angle droit"],
         comparator: "mcq_exact",
-        explanation: `Comme ${value}° est supérieur à 90°, cet angle est plus grand qu’un angle droit.`,
+        explanation: "Définition : un angle mesure l’ouverture entre deux demi-droites.\n\n" +
+          "Méthode : on observe le codage ou la mesure, puis on compare avec les angles de référence.\n\n" +
+          "Calcul : " +
+          (`Comme ${value}° est supérieur à 90°, cet angle est plus grand qu’un angle droit.`) +
+          "\n\nConclusion : on garde la réponse obtenue.",
       };
     },
   },
@@ -1101,7 +1297,11 @@ export const anglesBank: TutorBankItemV4[] = [
         expected: ["rapporteur", "un rapporteur"],
         comparator: "contains_keyword",
         explanation:
-          "On mesure un angle avec un rapporteur.",
+          "Définition : un angle mesure l’ouverture entre deux demi-droites.\n\n" +
+          "Méthode : on observe le codage ou la mesure, puis on compare avec les angles de référence.\n\n" +
+          "Calcul : " +
+          ("On mesure un angle avec un rapporteur.") +
+          "\n\nConclusion : on garde la réponse obtenue.",
       };
     },
   },
@@ -1131,7 +1331,11 @@ export const anglesBank: TutorBankItemV4[] = [
         expected: ["un rapporteur"],
         comparator: "mcq_exact",
         explanation:
-          "Le rapporteur est l’instrument gradué qui sert à mesurer les angles.",
+          "Définition : un angle mesure l’ouverture entre deux demi-droites.\n\n" +
+          "Méthode : on observe le codage ou la mesure, puis on compare avec les angles de référence.\n\n" +
+          "Calcul : " +
+          ("Le rapporteur est l’instrument gradué qui sert à mesurer les angles.") +
+          "\n\nConclusion : on garde la réponse obtenue.",
       };
     },
   },
@@ -1160,7 +1364,11 @@ export const anglesBank: TutorBankItemV4[] = [
         format: "short",
         expected: ["rapporteur", "un rapporteur"],
         comparator: "contains_keyword",
-        explanation: `Pour tracer un angle de ${value}°, on utilise un rapporteur afin de placer correctement la mesure.`,
+        explanation: "Définition : un angle mesure l’ouverture entre deux demi-droites.\n\n" +
+          "Méthode : on observe le codage ou la mesure, puis on compare avec les angles de référence.\n\n" +
+          "Calcul : " +
+          (`Pour tracer un angle de ${value}°, on utilise un rapporteur afin de placer correctement la mesure.`) +
+          "\n\nConclusion : on garde la réponse obtenue.",
       };
     },
   },
@@ -1188,7 +1396,11 @@ export const anglesBank: TutorBankItemV4[] = [
         expected: ["du sommet"],
         comparator: "mcq_exact",
         explanation:
-          "On commence par placer le sommet, car les deux côtés de l’angle partent de ce point.",
+          "Définition : un angle mesure l’ouverture entre deux demi-droites.\n\n" +
+          "Méthode : on observe le codage ou la mesure, puis on compare avec les angles de référence.\n\n" +
+          "Calcul : " +
+          ("On commence par placer le sommet, car les deux côtés de l’angle partent de ce point.") +
+          "\n\nConclusion : on garde la réponse obtenue.",
       };
     },
   },
@@ -1256,7 +1468,11 @@ export const anglesBank: TutorBankItemV4[] = [
         expected: ["40°"],
         comparator: "mcq_exact",
         explanation:
-          "Un angle plus petit qu’un angle droit doit mesurer moins de 90°. Ici, 40° est le bon choix.",
+          "Définition : un angle mesure l’ouverture entre deux demi-droites.\n\n" +
+          "Méthode : on observe le codage ou la mesure, puis on compare avec les angles de référence.\n\n" +
+          "Calcul : " +
+          ("Un angle plus petit qu’un angle droit doit mesurer moins de 90°. Ici, 40° est le bon choix.") +
+          "\n\nConclusion : on garde la réponse obtenue.",
       };
     },
   },
