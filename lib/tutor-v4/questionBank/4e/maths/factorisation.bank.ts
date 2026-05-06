@@ -70,7 +70,10 @@ export const factorisationBank: TutorBankItemV4[] = [
     expected: ["3"],
     comparator: "mcq_exact",
     hint: "Cherche un nombre qui divise les deux termes.",
-    explanation: "3x = 3 × x et 12 = 3 × 4. Le facteur commun est donc 3.",
+    explanation: "Définition : factoriser, c’est transformer une somme ou une différence en produit en faisant apparaître un facteur commun.\n\n" +
+          "Méthode : on cherche un facteur commun ou une forme connue, puis on met ce facteur devant une parenthèse.\n\nCalcul : " +
+          ("3x = 3 × x et 12 = 3 × 4. Le facteur commun est donc 3.") +
+          "\n\nConclusion : la forme finale est un produit équivalent à l’expression de départ.",
     tags: ["factorisation", "facteur_commun", "qcm"],
   },
   {
@@ -88,7 +91,10 @@ export const factorisationBank: TutorBankItemV4[] = [
     expected: ["5"],
     comparator: "mcq_exact",
     hint: "Le même nombre multiplie x et y.",
-    explanation: "5x = 5 × x et 5y = 5 × y. Le facteur commun est donc 5.",
+    explanation: "Définition : factoriser, c’est transformer une somme ou une différence en produit en faisant apparaître un facteur commun.\n\n" +
+          "Méthode : on cherche un facteur commun ou une forme connue, puis on met ce facteur devant une parenthèse.\n\nCalcul : " +
+          ("5x = 5 × x et 5y = 5 × y. Le facteur commun est donc 5.") +
+          "\n\nConclusion : la forme finale est un produit équivalent à l’expression de départ.",
     tags: ["factorisation", "facteur_commun"],
   },
   {
@@ -111,7 +117,10 @@ export const factorisationBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(a)],
         comparator: "number_equal",
-        explanation: `${a}x = ${a} × x et ${a * b} = ${a} × ${b}. Le facteur commun est ${a}.`,
+        explanation: "Définition : factoriser, c’est transformer une somme ou une différence en produit en faisant apparaître un facteur commun.\n\n" +
+          "Méthode : on cherche un facteur commun ou une forme connue, puis on met ce facteur devant une parenthèse.\n\nCalcul : " +
+          (`${a}x = ${a} × x et ${a * b} = ${a} × ${b}. Le facteur commun est ${a}.`) +
+          "\n\nConclusion : la forme finale est un produit équivalent à l’expression de départ.",
       };
     },
   },
@@ -129,7 +138,10 @@ export const factorisationBank: TutorBankItemV4[] = [
     expected: ["4", "multiplie", "x", "5"],
     comparator: "contains_keyword",
     hint: "Écris chaque terme sous forme d’un produit par 4.",
-    explanation: "4x = 4 × x et 20 = 4 × 5. Donc 4 est un facteur commun.",
+    explanation: "Définition : factoriser, c’est transformer une somme ou une différence en produit en faisant apparaître un facteur commun.\n\n" +
+          "Méthode : on cherche un facteur commun ou une forme connue, puis on met ce facteur devant une parenthèse.\n\nCalcul : " +
+          ("4x = 4 × x et 20 = 4 × 5. Donc 4 est un facteur commun.") +
+          "\n\nConclusion : la forme finale est un produit équivalent à l’expression de départ.",
     tags: ["factorisation", "facteur_commun", "open"],
   },
 
@@ -151,7 +163,10 @@ export const factorisationBank: TutorBankItemV4[] = [
     expected: ["3(x + 4)"],
     comparator: "mcq_exact",
     hint: "Mets 3 en facteur.",
-    explanation: "3x + 12 = 3 × x + 3 × 4 = 3(x + 4).",
+    explanation: "Définition : factoriser, c’est transformer une somme ou une différence en produit en faisant apparaître un facteur commun.\n\n" +
+          "Méthode : on cherche un facteur commun ou une forme connue, puis on met ce facteur devant une parenthèse.\n\nCalcul : " +
+          ("3x + 12 = 3 × x + 3 × 4 = 3(x + 4).") +
+          "\n\nConclusion : la forme finale est un produit équivalent à l’expression de départ.",
     tags: ["factorisation", "simple", "qcm"],
   },
   {
@@ -169,7 +184,10 @@ export const factorisationBank: TutorBankItemV4[] = [
     expected: ["5(x - 4)"],
     comparator: "mcq_exact",
     hint: "20 = 5 × 4.",
-    explanation: "5x - 20 = 5 × x - 5 × 4 = 5(x - 4).",
+    explanation: "Définition : factoriser, c’est transformer une somme ou une différence en produit en faisant apparaître un facteur commun.\n\n" +
+          "Méthode : on cherche un facteur commun ou une forme connue, puis on met ce facteur devant une parenthèse.\n\nCalcul : " +
+          ("5x - 20 = 5 × x - 5 × 4 = 5(x - 4).") +
+          "\n\nConclusion : la forme finale est un produit équivalent à l’expression de départ.",
     tags: ["factorisation", "simple", "signe"],
   },
   {
@@ -192,7 +210,10 @@ export const factorisationBank: TutorBankItemV4[] = [
         format: "short",
         expected: factorizedForms(a, b, "+"),
         comparator: "contains_keyword",
-        explanation: `${a}x + ${a * b} = ${a} × x + ${a} × ${b} = ${a}(x + ${b}).`,
+        explanation: "Définition : factoriser, c’est transformer une somme ou une différence en produit en faisant apparaître un facteur commun.\n\n" +
+          "Méthode : on cherche un facteur commun ou une forme connue, puis on met ce facteur devant une parenthèse.\n\nCalcul : " +
+          (`${a}x + ${a * b} = ${a} × x + ${a} × ${b} = ${a}(x + ${b}).`) +
+          "\n\nConclusion : la forme finale est un produit équivalent à l’expression de départ.",
       };
     },
   },
@@ -216,7 +237,10 @@ export const factorisationBank: TutorBankItemV4[] = [
         format: "short",
         expected: factorizedForms(a, b, "-"),
         comparator: "contains_keyword",
-        explanation: `${a}x - ${a * b} = ${a} × x - ${a} × ${b} = ${a}(x - ${b}).`,
+        explanation: "Définition : factoriser, c’est transformer une somme ou une différence en produit en faisant apparaître un facteur commun.\n\n" +
+          "Méthode : on cherche un facteur commun ou une forme connue, puis on met ce facteur devant une parenthèse.\n\nCalcul : " +
+          (`${a}x - ${a * b} = ${a} × x - ${a} × ${b} = ${a}(x - ${b}).`) +
+          "\n\nConclusion : la forme finale est un produit équivalent à l’expression de départ.",
       };
     },
   },
@@ -239,7 +263,10 @@ export const factorisationBank: TutorBankItemV4[] = [
         format: "short",
         expected: [`x(x+${a})`, `x(x + ${a})`],
         comparator: "contains_keyword",
-        explanation: `x² + ${a}x = x × x + ${a} × x = x(x + ${a}).`,
+        explanation: "Définition : factoriser, c’est transformer une somme ou une différence en produit en faisant apparaître un facteur commun.\n\n" +
+          "Méthode : on cherche un facteur commun ou une forme connue, puis on met ce facteur devant une parenthèse.\n\nCalcul : " +
+          (`x² + ${a}x = x × x + ${a} × x = x(x + ${a}).`) +
+          "\n\nConclusion : la forme finale est un produit équivalent à l’expression de départ.",
       };
     },
   },
@@ -257,7 +284,10 @@ export const factorisationBank: TutorBankItemV4[] = [
     expected: ["6", "facteur commun", "x", "3"],
     comparator: "contains_keyword",
     hint: "Écris 6x et 18 comme des produits par 6.",
-    explanation: "6x = 6 × x et 18 = 6 × 3. Donc 6x + 18 = 6(x + 3).",
+    explanation: "Définition : factoriser, c’est transformer une somme ou une différence en produit en faisant apparaître un facteur commun.\n\n" +
+          "Méthode : on cherche un facteur commun ou une forme connue, puis on met ce facteur devant une parenthèse.\n\nCalcul : " +
+          ("6x = 6 × x et 18 = 6 × 3. Donc 6x + 18 = 6(x + 3).") +
+          "\n\nConclusion : la forme finale est un produit équivalent à l’expression de départ.",
     tags: ["factorisation", "simple", "open"],
   },
 
@@ -279,7 +309,10 @@ export const factorisationBank: TutorBankItemV4[] = [
     expected: ["(x + 3)²"],
     comparator: "mcq_exact",
     hint: "9 = 3² et 6x = 2 × 3 × x.",
-    explanation: "x² + 6x + 9 = x² + 2 × x × 3 + 3² = (x + 3)².",
+    explanation: "Définition : factoriser, c’est transformer une somme ou une différence en produit en faisant apparaître un facteur commun.\n\n" +
+          "Méthode : on cherche un facteur commun ou une forme connue, puis on met ce facteur devant une parenthèse.\n\nCalcul : " +
+          ("x² + 6x + 9 = x² + 2 × x × 3 + 3² = (x + 3)².") +
+          "\n\nConclusion : la forme finale est un produit équivalent à l’expression de départ.",
     tags: ["factorisation", "identite_remarquable", "somme"],
   },
   {
@@ -297,7 +330,10 @@ export const factorisationBank: TutorBankItemV4[] = [
     expected: ["(x - 4)²"],
     comparator: "mcq_exact",
     hint: "16 = 4² et -8x = -2 × 4 × x.",
-    explanation: "x² - 8x + 16 = x² - 2 × x × 4 + 4² = (x - 4)².",
+    explanation: "Définition : factoriser, c’est transformer une somme ou une différence en produit en faisant apparaître un facteur commun.\n\n" +
+          "Méthode : on cherche un facteur commun ou une forme connue, puis on met ce facteur devant une parenthèse.\n\nCalcul : " +
+          ("x² - 8x + 16 = x² - 2 × x × 4 + 4² = (x - 4)².") +
+          "\n\nConclusion : la forme finale est un produit équivalent à l’expression de départ.",
     tags: ["factorisation", "identite_remarquable", "difference"],
   },
   {
@@ -315,7 +351,10 @@ export const factorisationBank: TutorBankItemV4[] = [
     expected: ["(x - 5)(x + 5)"],
     comparator: "mcq_exact",
     hint: "C’est une différence de deux carrés.",
-    explanation: "x² - 25 = x² - 5² = (x - 5)(x + 5).",
+    explanation: "Définition : factoriser, c’est transformer une somme ou une différence en produit en faisant apparaître un facteur commun.\n\n" +
+          "Méthode : on cherche un facteur commun ou une forme connue, puis on met ce facteur devant une parenthèse.\n\nCalcul : " +
+          ("x² - 25 = x² - 5² = (x - 5)(x + 5).") +
+          "\n\nConclusion : la forme finale est un produit équivalent à l’expression de départ.",
     tags: ["factorisation", "difference_carres"],
   },
   {
@@ -339,7 +378,10 @@ export const factorisationBank: TutorBankItemV4[] = [
         format: "short",
         expected: [`(x+${a})²`, `(x + ${a})²`, `(x+${a})^2`, `(x + ${a})^2`],
         comparator: "contains_keyword",
-        explanation: `x² + ${mid}x + ${square} = x² + 2 × x × ${a} + ${a}² = (x + ${a})².`,
+        explanation: "Définition : factoriser, c’est transformer une somme ou une différence en produit en faisant apparaître un facteur commun.\n\n" +
+          "Méthode : on cherche un facteur commun ou une forme connue, puis on met ce facteur devant une parenthèse.\n\nCalcul : " +
+          (`x² + ${mid}x + ${square} = x² + 2 × x × ${a} + ${a}² = (x + ${a})².`) +
+          "\n\nConclusion : la forme finale est un produit équivalent à l’expression de départ.",
       };
     },
   },
@@ -364,7 +406,10 @@ export const factorisationBank: TutorBankItemV4[] = [
         format: "short",
         expected: [`(x-${a})²`, `(x - ${a})²`, `(x-${a})^2`, `(x - ${a})^2`],
         comparator: "contains_keyword",
-        explanation: `x² - ${mid}x + ${square} = x² - 2 × x × ${a} + ${a}² = (x - ${a})².`,
+        explanation: "Définition : factoriser, c’est transformer une somme ou une différence en produit en faisant apparaître un facteur commun.\n\n" +
+          "Méthode : on cherche un facteur commun ou une forme connue, puis on met ce facteur devant une parenthèse.\n\nCalcul : " +
+          (`x² - ${mid}x + ${square} = x² - 2 × x × ${a} + ${a}² = (x - ${a})².`) +
+          "\n\nConclusion : la forme finale est un produit équivalent à l’expression de départ.",
       };
     },
   },
@@ -393,7 +438,10 @@ export const factorisationBank: TutorBankItemV4[] = [
           `(x + ${a})(x - ${a})`,
         ],
         comparator: "contains_keyword",
-        explanation: `x² - ${square} = x² - ${a}² = (x - ${a})(x + ${a}).`,
+        explanation: "Définition : factoriser, c’est transformer une somme ou une différence en produit en faisant apparaître un facteur commun.\n\n" +
+          "Méthode : on cherche un facteur commun ou une forme connue, puis on met ce facteur devant une parenthèse.\n\nCalcul : " +
+          (`x² - ${square} = x² - ${a}² = (x - ${a})(x + ${a}).`) +
+          "\n\nConclusion : la forme finale est un produit équivalent à l’expression de départ.",
       };
     },
   },
@@ -416,7 +464,10 @@ export const factorisationBank: TutorBankItemV4[] = [
     expected: ["oui"],
     comparator: "mcq_exact",
     hint: "Développe 4(x + 3).",
-    explanation: "4(x + 3) = 4x + 12. La factorisation est correcte.",
+    explanation: "Définition : factoriser, c’est transformer une somme ou une différence en produit en faisant apparaître un facteur commun.\n\n" +
+          "Méthode : on cherche un facteur commun ou une forme connue, puis on met ce facteur devant une parenthèse.\n\nCalcul : " +
+          ("4(x + 3) = 4x + 12. La factorisation est correcte.") +
+          "\n\nConclusion : la forme finale est un produit équivalent à l’expression de départ.",
     tags: ["factorisation", "verifier"],
   },
   {
@@ -434,7 +485,10 @@ export const factorisationBank: TutorBankItemV4[] = [
     expected: ["non"],
     comparator: "mcq_exact",
     hint: "Développe 3(x + 15).",
-    explanation: "3(x + 15) = 3x + 45, pas 3x + 15. La bonne factorisation est 3(x + 5).",
+    explanation: "Définition : factoriser, c’est transformer une somme ou une différence en produit en faisant apparaître un facteur commun.\n\n" +
+          "Méthode : on cherche un facteur commun ou une forme connue, puis on met ce facteur devant une parenthèse.\n\nCalcul : " +
+          ("3(x + 15) = 3x + 45, pas 3x + 15. La bonne factorisation est 3(x + 5).") +
+          "\n\nConclusion : la forme finale est un produit équivalent à l’expression de départ.",
     tags: ["factorisation", "verifier", "erreur"],
   },
   {
@@ -461,9 +515,12 @@ export const factorisationBank: TutorBankItemV4[] = [
         choices: ["oui", "non"],
         expected: [isCorrect ? "oui" : "non"],
         comparator: "mcq_exact",
-        explanation: isCorrect
+        explanation: "Définition : factoriser, c’est transformer une somme ou une différence en produit en faisant apparaître un facteur commun.\n\n" +
+          "Méthode : on cherche un facteur commun ou une forme connue, puis on met ce facteur devant une parenthèse.\n\nCalcul : " +
+          (isCorrect
           ? `${proposed} = ${expected}. La factorisation est correcte.`
-          : `${proposed} ne donne pas ${expected} après développement. La bonne factorisation est ${a}(x + ${b}).`,
+          : `${proposed} ne donne pas ${expected} après développement. La bonne factorisation est ${a}(x + ${b}).`) +
+          "\n\nConclusion : la forme finale est un produit équivalent à l’expression de départ.",
       };
     },
   },
@@ -481,7 +538,10 @@ export const factorisationBank: TutorBankItemV4[] = [
     expected: ["développer", "x²", "25"],
     comparator: "contains_keyword",
     hint: "Développe (x - 5)(x + 5).",
-    explanation: "On développe : (x - 5)(x + 5) = x² + 5x - 5x - 25 = x² - 25.",
+    explanation: "Définition : factoriser, c’est transformer une somme ou une différence en produit en faisant apparaître un facteur commun.\n\n" +
+          "Méthode : on cherche un facteur commun ou une forme connue, puis on met ce facteur devant une parenthèse.\n\nCalcul : " +
+          ("On développe : (x - 5)(x + 5) = x² + 5x - 5x - 25 = x² - 25.") +
+          "\n\nConclusion : la forme finale est un produit équivalent à l’expression de départ.",
     tags: ["factorisation", "verifier", "open"],
   },
 
@@ -503,7 +563,10 @@ export const factorisationBank: TutorBankItemV4[] = [
     expected: ["non"],
     comparator: "mcq_exact",
     hint: "Développe 5(x + 20).",
-    explanation: "Non. 5(x + 20) = 5x + 100. La bonne factorisation est 5(x + 4).",
+    explanation: "Définition : factoriser, c’est transformer une somme ou une différence en produit en faisant apparaître un facteur commun.\n\n" +
+          "Méthode : on cherche un facteur commun ou une forme connue, puis on met ce facteur devant une parenthèse.\n\nCalcul : " +
+          ("Non. 5(x + 20) = 5x + 100. La bonne factorisation est 5(x + 4).") +
+          "\n\nConclusion : la forme finale est un produit équivalent à l’expression de départ.",
     tags: ["factorisation", "defi", "erreur"],
   },
   {
@@ -526,7 +589,10 @@ export const factorisationBank: TutorBankItemV4[] = [
     expected: ["utiliser la différence de deux carrés"],
     comparator: "mcq_exact",
     hint: "36 est un carré parfait.",
-    explanation: "x² - 36 = x² - 6² = (x - 6)(x + 6).",
+    explanation: "Définition : factoriser, c’est transformer une somme ou une différence en produit en faisant apparaître un facteur commun.\n\n" +
+          "Méthode : on cherche un facteur commun ou une forme connue, puis on met ce facteur devant une parenthèse.\n\nCalcul : " +
+          ("x² - 36 = x² - 6² = (x - 6)(x + 6).") +
+          "\n\nConclusion : la forme finale est un produit équivalent à l’expression de départ.",
     tags: ["factorisation", "defi", "choix_methode"],
   },
   {
@@ -549,7 +615,10 @@ export const factorisationBank: TutorBankItemV4[] = [
         format: "open",
         expected: ["erreur", String(b), String(a), "développer"],
         comparator: "contains_keyword",
-        explanation: `L’élève a gardé ${a * b} dans la parenthèse. Or ${a * b} = ${a} × ${b}. La bonne factorisation est ${a}(x + ${b}).`,
+        explanation: "Définition : factoriser, c’est transformer une somme ou une différence en produit en faisant apparaître un facteur commun.\n\n" +
+          "Méthode : on cherche un facteur commun ou une forme connue, puis on met ce facteur devant une parenthèse.\n\nCalcul : " +
+          (`L’élève a gardé ${a * b} dans la parenthèse. Or ${a * b} = ${a} × ${b}. La bonne factorisation est ${a}(x + ${b}).`) +
+          "\n\nConclusion : la forme finale est un produit équivalent à l’expression de départ.",
       };
     },
   },
@@ -573,7 +642,10 @@ export const factorisationBank: TutorBankItemV4[] = [
         format: "short",
         expected: [`${lots}(x+${extra})`, `${lots}(x + ${extra})`],
         comparator: "contains_keyword",
-        explanation: `Chaque groupe prend x + ${extra} objets. Pour ${lots} groupes, cela donne ${lots}(x + ${extra}).`,
+        explanation: "Définition : factoriser, c’est transformer une somme ou une différence en produit en faisant apparaître un facteur commun.\n\n" +
+          "Méthode : on cherche un facteur commun ou une forme connue, puis on met ce facteur devant une parenthèse.\n\nCalcul : " +
+          (`Chaque groupe prend x + ${extra} objets. Pour ${lots} groupes, cela donne ${lots}(x + ${extra}).`) +
+          "\n\nConclusion : la forme finale est un produit équivalent à l’expression de départ.",
       };
     },
   },

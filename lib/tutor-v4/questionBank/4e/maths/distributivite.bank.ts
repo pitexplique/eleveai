@@ -136,7 +136,10 @@ export const distributiviteBank: TutorBankItemV4[] = [
     expected: ["3(x + 4) = 3x + 12"],
     comparator: "mcq_exact",
     hint: "Le 3 multiplie x et 4.",
-    explanation: "3(x + 4) = 3×x + 3×4 = 3x + 12.",
+    explanation: "Définition : la distributivité permet de transformer un produit en somme, par exemple a × (b + c) = a × b + a × c.\n\n" +
+          "Méthode : on distribue le facteur devant la parenthèse à chaque terme, puis on réduit si nécessaire.\n\nCalcul : " +
+          ("3(x + 4) = 3×x + 3×4 = 3x + 12.") +
+          "\n\nConclusion : l’expression obtenue est développée ou réduite correctement.",
     tags: ["distributivite", "simple", "qcm"],
   },
   {
@@ -160,7 +163,10 @@ export const distributiviteBank: TutorBankItemV4[] = [
         format: "short",
         expected: [`${a}${letter}+${a * b}`, `${a}${letter} + ${a * b}`],
         comparator: "contains_keyword",
-        explanation: `${a}(${letter} + ${b}) = ${a}×${letter} + ${a}×${b} = ${a}${letter} + ${a * b}.`,
+        explanation: "Définition : la distributivité permet de transformer un produit en somme, par exemple a × (b + c) = a × b + a × c.\n\n" +
+          "Méthode : on distribue le facteur devant la parenthèse à chaque terme, puis on réduit si nécessaire.\n\nCalcul : " +
+          (`${a}(${letter} + ${b}) = ${a}×${letter} + ${a}×${b} = ${a}${letter} + ${a * b}.`) +
+          "\n\nConclusion : l’expression obtenue est développée ou réduite correctement.",
       };
     },
   },
@@ -185,7 +191,10 @@ export const distributiviteBank: TutorBankItemV4[] = [
         format: "short",
         expected: [`${a}${letter}-${a * b}`, `${a}${letter} - ${a * b}`],
         comparator: "contains_keyword",
-        explanation: `${a}(${letter} - ${b}) = ${a}×${letter} - ${a}×${b} = ${a}${letter} - ${a * b}.`,
+        explanation: "Définition : la distributivité permet de transformer un produit en somme, par exemple a × (b + c) = a × b + a × c.\n\n" +
+          "Méthode : on distribue le facteur devant la parenthèse à chaque terme, puis on réduit si nécessaire.\n\nCalcul : " +
+          (`${a}(${letter} - ${b}) = ${a}×${letter} - ${a}×${b} = ${a}${letter} - ${a * b}.`) +
+          "\n\nConclusion : l’expression obtenue est développée ou réduite correctement.",
       };
     },
   },
@@ -209,7 +218,10 @@ export const distributiviteBank: TutorBankItemV4[] = [
         format: "short",
         expected: [`-${a}x-${a * b}`, `-${a}x - ${a * b}`],
         comparator: "contains_keyword",
-        explanation: `-${a}(x + ${b}) = -${a}x - ${a * b}.`,
+        explanation: "Définition : la distributivité permet de transformer un produit en somme, par exemple a × (b + c) = a × b + a × c.\n\n" +
+          "Méthode : on distribue le facteur devant la parenthèse à chaque terme, puis on réduit si nécessaire.\n\nCalcul : " +
+          (`-${a}(x + ${b}) = -${a}x - ${a * b}.`) +
+          "\n\nConclusion : l’expression obtenue est développée ou réduite correctement.",
       };
     },
   },
@@ -227,7 +239,10 @@ export const distributiviteBank: TutorBankItemV4[] = [
     expected: ["4", "multiplie", "x", "3"],
     comparator: "contains_keyword",
     hint: "Le nombre devant la parenthèse multiplie chaque terme.",
-    explanation: "4 multiplie les deux termes de la parenthèse : 4×x et 4×3. Donc 4(x + 3) = 4x + 12.",
+    explanation: "Définition : la distributivité permet de transformer un produit en somme, par exemple a × (b + c) = a × b + a × c.\n\n" +
+          "Méthode : on distribue le facteur devant la parenthèse à chaque terme, puis on réduit si nécessaire.\n\nCalcul : " +
+          ("4 multiplie les deux termes de la parenthèse : 4×x et 4×3. Donc 4(x + 3) = 4x + 12.") +
+          "\n\nConclusion : l’expression obtenue est développée ou réduite correctement.",
     tags: ["distributivite", "simple", "open"],
   },
   {
@@ -250,7 +265,10 @@ export const distributiviteBank: TutorBankItemV4[] = [
         format: "short",
         expected: [`${rows}x+${rows * extra}`, `${rows}x + ${rows * extra}`],
         comparator: "contains_keyword",
-        explanation: `${rows} rangées de x + ${extra} fleurs donnent ${rows}(x + ${extra}) = ${rows}x + ${rows * extra}.`,
+        explanation: "Définition : la distributivité permet de transformer un produit en somme, par exemple a × (b + c) = a × b + a × c.\n\n" +
+          "Méthode : on distribue le facteur devant la parenthèse à chaque terme, puis on réduit si nécessaire.\n\nCalcul : " +
+          (`${rows} rangées de x + ${extra} fleurs donnent ${rows}(x + ${extra}) = ${rows}x + ${rows * extra}.`) +
+          "\n\nConclusion : l’expression obtenue est développée ou réduite correctement.",
       };
     },
   },
@@ -274,7 +292,10 @@ export const distributiviteBank: TutorBankItemV4[] = [
         format: "short",
         expected: [`${pieces}x+${pieces * extra}`, `${pieces}x + ${pieces * extra}`],
         comparator: "contains_keyword",
-        explanation: `${pieces}(x + ${extra}) = ${pieces}x + ${pieces * extra}.`,
+        explanation: "Définition : la distributivité permet de transformer un produit en somme, par exemple a × (b + c) = a × b + a × c.\n\n" +
+          "Méthode : on distribue le facteur devant la parenthèse à chaque terme, puis on réduit si nécessaire.\n\nCalcul : " +
+          (`${pieces}(x + ${extra}) = ${pieces}x + ${pieces * extra}.`) +
+          "\n\nConclusion : l’expression obtenue est développée ou réduite correctement.",
       };
     },
   },
@@ -298,7 +319,10 @@ export const distributiviteBank: TutorBankItemV4[] = [
         format: "short",
         expected: [`${lots}x+${lots * bonus}`, `${lots}x + ${lots * bonus}`],
         comparator: "contains_keyword",
-        explanation: `${lots}(x + ${bonus}) = ${lots}x + ${lots * bonus}.`,
+        explanation: "Définition : la distributivité permet de transformer un produit en somme, par exemple a × (b + c) = a × b + a × c.\n\n" +
+          "Méthode : on distribue le facteur devant la parenthèse à chaque terme, puis on réduit si nécessaire.\n\nCalcul : " +
+          (`${lots}(x + ${bonus}) = ${lots}x + ${lots * bonus}.`) +
+          "\n\nConclusion : l’expression obtenue est développée ou réduite correctement.",
       };
     },
   },
@@ -321,7 +345,10 @@ export const distributiviteBank: TutorBankItemV4[] = [
     expected: ["4"],
     comparator: "mcq_exact",
     hint: "Chaque terme de la première parenthèse multiplie chaque terme de la seconde.",
-    explanation: "On effectue 4 produits : x×x, x×5, 2×x et 2×5.",
+    explanation: "Définition : la distributivité permet de transformer un produit en somme, par exemple a × (b + c) = a × b + a × c.\n\n" +
+          "Méthode : on distribue le facteur devant la parenthèse à chaque terme, puis on réduit si nécessaire.\n\nCalcul : " +
+          ("On effectue 4 produits : x×x, x×5, 2×x et 2×5.") +
+          "\n\nConclusion : l’expression obtenue est développée ou réduite correctement.",
     tags: ["distributivite", "double", "qcm"],
   },
   {
@@ -351,7 +378,10 @@ export const distributiviteBank: TutorBankItemV4[] = [
           `x^2 + ${sum}x + ${prod}`,
         ],
         comparator: "contains_keyword",
-        explanation: `(x + ${b})(x + ${c}) = x² + ${c}x + ${b}x + ${prod} = x² + ${sum}x + ${prod}.`,
+        explanation: "Définition : la distributivité permet de transformer un produit en somme, par exemple a × (b + c) = a × b + a × c.\n\n" +
+          "Méthode : on distribue le facteur devant la parenthèse à chaque terme, puis on réduit si nécessaire.\n\nCalcul : " +
+          (`(x + ${b})(x + ${c}) = x² + ${c}x + ${b}x + ${prod} = x² + ${sum}x + ${prod}.`) +
+          "\n\nConclusion : l’expression obtenue est développée ou réduite correctement.",
       };
     },
   },
@@ -386,7 +416,10 @@ export const distributiviteBank: TutorBankItemV4[] = [
           `x^2 - ${Math.abs(sum)}x - ${b * c}`,
         ],
         comparator: "contains_keyword",
-        explanation: `(x - ${b})(x + ${c}) = x² + ${c}x - ${b}x - ${b * c}.`,
+        explanation: "Définition : la distributivité permet de transformer un produit en somme, par exemple a × (b + c) = a × b + a × c.\n\n" +
+          "Méthode : on distribue le facteur devant la parenthèse à chaque terme, puis on réduit si nécessaire.\n\nCalcul : " +
+          (`(x - ${b})(x + ${c}) = x² + ${c}x - ${b}x - ${b * c}.`) +
+          "\n\nConclusion : l’expression obtenue est développée ou réduite correctement.",
       };
     },
   },
@@ -404,7 +437,10 @@ export const distributiviteBank: TutorBankItemV4[] = [
     expected: ["x²", "2x", "3x", "6"],
     comparator: "contains_keyword",
     hint: "Écris les quatre produits.",
-    explanation: "(x + 2)(x + 3) = x×x + x×3 + 2×x + 2×3 = x² + 3x + 2x + 6 = x² + 5x + 6.",
+    explanation: "Définition : la distributivité permet de transformer un produit en somme, par exemple a × (b + c) = a × b + a × c.\n\n" +
+          "Méthode : on distribue le facteur devant la parenthèse à chaque terme, puis on réduit si nécessaire.\n\nCalcul : " +
+          ("(x + 2)(x + 3) = x×x + x×3 + 2×x + 2×3 = x² + 3x + 2x + 6 = x² + 5x + 6.") +
+          "\n\nConclusion : l’expression obtenue est développée ou réduite correctement.",
     tags: ["distributivite", "double", "open"],
   },
 
@@ -426,7 +462,10 @@ export const distributiviteBank: TutorBankItemV4[] = [
     expected: ["5x + 5"],
     comparator: "mcq_exact",
     hint: "Regroupe les termes en x.",
-    explanation: "2x + 3x = 5x, donc 2x + 5 + 3x = 5x + 5.",
+    explanation: "Définition : la distributivité permet de transformer un produit en somme, par exemple a × (b + c) = a × b + a × c.\n\n" +
+          "Méthode : on distribue le facteur devant la parenthèse à chaque terme, puis on réduit si nécessaire.\n\nCalcul : " +
+          ("2x + 3x = 5x, donc 2x + 5 + 3x = 5x + 5.") +
+          "\n\nConclusion : l’expression obtenue est développée ou réduite correctement.",
     tags: ["distributivite", "reduire", "qcm"],
   },
   {
@@ -452,7 +491,10 @@ export const distributiviteBank: TutorBankItemV4[] = [
         format: "short",
         expected: [`${coeff}x+${constante}`, `${coeff}x + ${constante}`],
         comparator: "contains_keyword",
-        explanation: `${a}(x + ${b}) + ${c}x = ${a}x + ${constante} + ${c}x = ${coeff}x + ${constante}.`,
+        explanation: "Définition : la distributivité permet de transformer un produit en somme, par exemple a × (b + c) = a × b + a × c.\n\n" +
+          "Méthode : on distribue le facteur devant la parenthèse à chaque terme, puis on réduit si nécessaire.\n\nCalcul : " +
+          (`${a}(x + ${b}) + ${c}x = ${a}x + ${constante} + ${c}x = ${coeff}x + ${constante}.`) +
+          "\n\nConclusion : l’expression obtenue est développée ou réduite correctement.",
       };
     },
   },
@@ -480,7 +522,10 @@ export const distributiviteBank: TutorBankItemV4[] = [
         format: "short",
         expected: [`${coeff}x+${constante}`, `${coeff}x + ${constante}`],
         comparator: "contains_keyword",
-        explanation: `${a}(x + ${b}) + ${c}x + ${d} = ${a}x + ${a * b} + ${c}x + ${d} = ${coeff}x + ${constante}.`,
+        explanation: "Définition : la distributivité permet de transformer un produit en somme, par exemple a × (b + c) = a × b + a × c.\n\n" +
+          "Méthode : on distribue le facteur devant la parenthèse à chaque terme, puis on réduit si nécessaire.\n\nCalcul : " +
+          (`${a}(x + ${b}) + ${c}x + ${d} = ${a}x + ${a * b} + ${c}x + ${d} = ${coeff}x + ${constante}.`) +
+          "\n\nConclusion : l’expression obtenue est développée ou réduite correctement.",
       };
     },
   },
@@ -498,7 +543,10 @@ export const distributiviteBank: TutorBankItemV4[] = [
     expected: ["2x", "3x", "5x", "7"],
     comparator: "contains_keyword",
     hint: "Regroupe seulement les termes semblables.",
-    explanation: "On regroupe les termes en x : 2x + 3x = 5x. Le 7 reste une constante. Donc 2x + 7 + 3x = 5x + 7.",
+    explanation: "Définition : la distributivité permet de transformer un produit en somme, par exemple a × (b + c) = a × b + a × c.\n\n" +
+          "Méthode : on distribue le facteur devant la parenthèse à chaque terme, puis on réduit si nécessaire.\n\nCalcul : " +
+          ("On regroupe les termes en x : 2x + 3x = 5x. Le 7 reste une constante. Donc 2x + 7 + 3x = 5x + 7.") +
+          "\n\nConclusion : l’expression obtenue est développée ou réduite correctement.",
     tags: ["distributivite", "reduire", "open"],
   },
   {
@@ -524,7 +572,10 @@ export const distributiviteBank: TutorBankItemV4[] = [
         format: "short",
         expected: [`${coeff}x+${constante}`, `${coeff}x + ${constante}`],
         comparator: "contains_keyword",
-        explanation: `${sections}(x + ${extra}) + ${fixed} = ${coeff}x + ${sections * extra} + ${fixed} = ${coeff}x + ${constante}.`,
+        explanation: "Définition : la distributivité permet de transformer un produit en somme, par exemple a × (b + c) = a × b + a × c.\n\n" +
+          "Méthode : on distribue le facteur devant la parenthèse à chaque terme, puis on réduit si nécessaire.\n\nCalcul : " +
+          (`${sections}(x + ${extra}) + ${fixed} = ${coeff}x + ${sections * extra} + ${fixed} = ${coeff}x + ${constante}.`) +
+          "\n\nConclusion : l’expression obtenue est développée ou réduite correctement.",
       };
     },
   },
@@ -547,7 +598,10 @@ export const distributiviteBank: TutorBankItemV4[] = [
     expected: ["2(x + 7)"],
     comparator: "mcq_exact",
     hint: "Cherche un produit avec une parenthèse.",
-    explanation: "2(x + 7) contient un nombre qui multiplie une parenthèse : il faut distribuer.",
+    explanation: "Définition : la distributivité permet de transformer un produit en somme, par exemple a × (b + c) = a × b + a × c.\n\n" +
+          "Méthode : on distribue le facteur devant la parenthèse à chaque terme, puis on réduit si nécessaire.\n\nCalcul : " +
+          ("2(x + 7) contient un nombre qui multiplie une parenthèse : il faut distribuer.") +
+          "\n\nConclusion : l’expression obtenue est développée ou réduite correctement.",
     tags: ["distributivite", "reconnaitre", "qcm"],
   },
   {
@@ -584,7 +638,10 @@ export const distributiviteBank: TutorBankItemV4[] = [
         choices,
         expected: [correct],
         comparator: "mcq_exact",
-        explanation: `${correct} doit être développée car il y a un produit devant une parenthèse.`,
+        explanation: "Définition : la distributivité permet de transformer un produit en somme, par exemple a × (b + c) = a × b + a × c.\n\n" +
+          "Méthode : on distribue le facteur devant la parenthèse à chaque terme, puis on réduit si nécessaire.\n\nCalcul : " +
+          (`${correct} doit être développée car il y a un produit devant une parenthèse.`) +
+          "\n\nConclusion : l’expression obtenue est développée ou réduite correctement.",
       };
     },
   },
@@ -620,7 +677,10 @@ export const distributiviteBank: TutorBankItemV4[] = [
         choices,
         expected: [correct],
         comparator: "mcq_exact",
-        explanation: `${correct} est déjà développée car il n’y a plus de parenthèses.`,
+        explanation: "Définition : la distributivité permet de transformer un produit en somme, par exemple a × (b + c) = a × b + a × c.\n\n" +
+          "Méthode : on distribue le facteur devant la parenthèse à chaque terme, puis on réduit si nécessaire.\n\nCalcul : " +
+          (`${correct} est déjà développée car il n’y a plus de parenthèses.`) +
+          "\n\nConclusion : l’expression obtenue est développée ou réduite correctement.",
       };
     },
   },
@@ -638,7 +698,10 @@ export const distributiviteBank: TutorBankItemV4[] = [
     expected: ["parenthèse", "développer", "3"],
     comparator: "contains_keyword",
     hint: "Regarde s’il reste une parenthèse avec un coefficient devant.",
-    explanation: "3(x + 2) contient encore une parenthèse précédée d’un coefficient. Il faut développer : 3(x + 2) = 3x + 6.",
+    explanation: "Définition : la distributivité permet de transformer un produit en somme, par exemple a × (b + c) = a × b + a × c.\n\n" +
+          "Méthode : on distribue le facteur devant la parenthèse à chaque terme, puis on réduit si nécessaire.\n\nCalcul : " +
+          ("3(x + 2) contient encore une parenthèse précédée d’un coefficient. Il faut développer : 3(x + 2) = 3x + 6.") +
+          "\n\nConclusion : l’expression obtenue est développée ou réduite correctement.",
     tags: ["distributivite", "reconnaitre", "open"],
   },
 
@@ -671,7 +734,10 @@ export const distributiviteBank: TutorBankItemV4[] = [
           "chaque terme",
         ],
         comparator: "contains_keyword",
-        explanation: `Le coefficient ${a} multiplie les deux termes de la parenthèse : ${a}×x et ${a}×${b}.`,
+        explanation: "Définition : la distributivité permet de transformer un produit en somme, par exemple a × (b + c) = a × b + a × c.\n\n" +
+          "Méthode : on distribue le facteur devant la parenthèse à chaque terme, puis on réduit si nécessaire.\n\nCalcul : " +
+          (`Le coefficient ${a} multiplie les deux termes de la parenthèse : ${a}×x et ${a}×${b}.`) +
+          "\n\nConclusion : l’expression obtenue est développée ou réduite correctement.",
       };
     },
   },
@@ -696,7 +762,10 @@ export const distributiviteBank: TutorBankItemV4[] = [
         choices: ["oui", "non"],
         expected: ["non"],
         comparator: "mcq_exact",
-        explanation: `Non. ${a} doit multiplier x et aussi ${b}. On obtient ${a}x + ${a * b}.`,
+        explanation: "Définition : la distributivité permet de transformer un produit en somme, par exemple a × (b + c) = a × b + a × c.\n\n" +
+          "Méthode : on distribue le facteur devant la parenthèse à chaque terme, puis on réduit si nécessaire.\n\nCalcul : " +
+          (`Non. ${a} doit multiplier x et aussi ${b}. On obtient ${a}x + ${a * b}.`) +
+          "\n\nConclusion : l’expression obtenue est développée ou réduite correctement.",
       };
     },
   },
@@ -720,7 +789,10 @@ export const distributiviteBank: TutorBankItemV4[] = [
         format: "open",
         expected: ["erreur", "multiplier", String(b)],
         comparator: "contains_keyword",
-        explanation: `L’erreur est que ${b} n’a pas été multiplié par ${a}. La bonne égalité est ${a}(x + ${b}) = ${a}x + ${a * b}.`,
+        explanation: "Définition : la distributivité permet de transformer un produit en somme, par exemple a × (b + c) = a × b + a × c.\n\n" +
+          "Méthode : on distribue le facteur devant la parenthèse à chaque terme, puis on réduit si nécessaire.\n\nCalcul : " +
+          (`L’erreur est que ${b} n’a pas été multiplié par ${a}. La bonne égalité est ${a}(x + ${b}) = ${a}x + ${a * b}.`) +
+          "\n\nConclusion : l’expression obtenue est développée ou réduite correctement.",
       };
     },
   },
@@ -748,7 +820,10 @@ export const distributiviteBank: TutorBankItemV4[] = [
         format: "short",
         expected: [`${coeff}x+${constante}`, `${coeff}x + ${constante}`],
         comparator: "contains_keyword",
-        explanation: `${a}(x + ${b}) + ${c}(x + ${d}) = ${a}x + ${a * b} + ${c}x + ${c * d} = ${coeff}x + ${constante}.`,
+        explanation: "Définition : la distributivité permet de transformer un produit en somme, par exemple a × (b + c) = a × b + a × c.\n\n" +
+          "Méthode : on distribue le facteur devant la parenthèse à chaque terme, puis on réduit si nécessaire.\n\nCalcul : " +
+          (`${a}(x + ${b}) + ${c}(x + ${d}) = ${a}x + ${a * b} + ${c}x + ${c * d} = ${coeff}x + ${constante}.`) +
+          "\n\nConclusion : l’expression obtenue est développée ou réduite correctement.",
       };
     },
   },
@@ -772,7 +847,10 @@ export const distributiviteBank: TutorBankItemV4[] = [
         format: "short",
         expected: [`${groupes}x+${groupes * arbres}`, `${groupes}x + ${groupes * arbres}`],
         comparator: "contains_keyword",
-        explanation: `${groupes}(x + ${arbres}) = ${groupes}x + ${groupes * arbres}.`,
+        explanation: "Définition : la distributivité permet de transformer un produit en somme, par exemple a × (b + c) = a × b + a × c.\n\n" +
+          "Méthode : on distribue le facteur devant la parenthèse à chaque terme, puis on réduit si nécessaire.\n\nCalcul : " +
+          (`${groupes}(x + ${arbres}) = ${groupes}x + ${groupes * arbres}.`) +
+          "\n\nConclusion : l’expression obtenue est développée ou réduite correctement.",
       };
     },
   },

@@ -78,7 +78,10 @@ export const statistiquesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "L’effectif répond à la question : combien ?",
     explanation:
-      "L’effectif indique combien d’individus correspondent à une valeur ou à une catégorie.",
+      "Définition : les statistiques permettent d’organiser et de résumer une série de données.\n\n" +
+          "Méthode : on choisit l’indicateur demandé : effectif, fréquence, moyenne, médiane ou étendue.\n\nCalcul : " +
+          ("L’effectif indique combien d’individus correspondent à une valeur ou à une catégorie.") +
+          "\n\nConclusion : l’indicateur obtenu résume correctement la série.",
     tags: ["statistiques", "tableau", "effectif", "definition"],
   },
 
@@ -103,7 +106,10 @@ export const statistiquesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Le nombre est placé en face de la catégorie vélo.",
     explanation:
-      "Le nombre 12 est l’effectif de la catégorie vélo : 12 élèves ont choisi vélo.",
+      "Définition : les statistiques permettent d’organiser et de résumer une série de données.\n\n" +
+          "Méthode : on choisit l’indicateur demandé : effectif, fréquence, moyenne, médiane ou étendue.\n\nCalcul : " +
+          ("Le nombre 12 est l’effectif de la catégorie vélo : 12 élèves ont choisi vélo.") +
+          "\n\nConclusion : l’indicateur obtenu résume correctement la série.",
     tags: ["statistiques", "tableau", "lecture"],
   },
 
@@ -128,7 +134,10 @@ export const statistiquesBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(values[i])],
         comparator: "number_equal",
-        explanation: `On lit directement la ligne ou la colonne correspondant à ${labels[i]} : l’effectif est ${values[i]}.`,
+        explanation: "Définition : les statistiques permettent d’organiser et de résumer une série de données.\n\n" +
+          "Méthode : on choisit l’indicateur demandé : effectif, fréquence, moyenne, médiane ou étendue.\n\nCalcul : " +
+          (`On lit directement la ligne ou la colonne correspondant à ${labels[i]} : l’effectif est ${values[i]}.`) +
+          "\n\nConclusion : l’indicateur obtenu résume correctement la série.",
       };
     },
   },
@@ -154,7 +163,10 @@ export const statistiquesBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(values[i])],
         comparator: "number_equal",
-        explanation: `Pour ${labels[i]}, le tableau indique ${values[i]}.`,
+        explanation: "Définition : les statistiques permettent d’organiser et de résumer une série de données.\n\n" +
+          "Méthode : on choisit l’indicateur demandé : effectif, fréquence, moyenne, médiane ou étendue.\n\nCalcul : " +
+          (`Pour ${labels[i]}, le tableau indique ${values[i]}.`) +
+          "\n\nConclusion : l’indicateur obtenu résume correctement la série.",
       };
     },
   },
@@ -174,7 +186,10 @@ export const statistiquesBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "Il faut dire quelle catégorie est concernée et combien d’élèves sont concernés.",
     explanation:
-      "Cela signifie que 18 élèves appartiennent à la catégorie « marche », par exemple qu’ils ont choisi cette activité.",
+      "Définition : les statistiques permettent d’organiser et de résumer une série de données.\n\n" +
+          "Méthode : on choisit l’indicateur demandé : effectif, fréquence, moyenne, médiane ou étendue.\n\nCalcul : " +
+          ("Cela signifie que 18 élèves appartiennent à la catégorie « marche », par exemple qu’ils ont choisi cette activité.") +
+          "\n\nConclusion : l’indicateur obtenu résume correctement la série.",
     tags: ["statistiques", "tableau", "open"],
   },
 
@@ -203,7 +218,10 @@ export const statistiquesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Plus la barre est haute, plus la valeur est grande.",
     explanation:
-      "La hauteur d’une barre représente la valeur ou l’effectif associé à une catégorie.",
+      "Définition : les statistiques permettent d’organiser et de résumer une série de données.\n\n" +
+          "Méthode : on choisit l’indicateur demandé : effectif, fréquence, moyenne, médiane ou étendue.\n\nCalcul : " +
+          ("La hauteur d’une barre représente la valeur ou l’effectif associé à une catégorie.") +
+          "\n\nConclusion : l’indicateur obtenu résume correctement la série.",
     tags: ["statistiques", "graphique", "barres"],
   },
 
@@ -232,7 +250,10 @@ export const statistiquesBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(data[i].value)],
         comparator: "number_equal",
-        explanation: `La barre ${data[i].label} indique la valeur ${data[i].value}.`,
+        explanation: "Définition : les statistiques permettent d’organiser et de résumer une série de données.\n\n" +
+          "Méthode : on choisit l’indicateur demandé : effectif, fréquence, moyenne, médiane ou étendue.\n\nCalcul : " +
+          (`La barre ${data[i].label} indique la valeur ${data[i].value}.`) +
+          "\n\nConclusion : l’indicateur obtenu résume correctement la série.",
         canvas: statGraphCanvas({
           graphType: "barres",
           data,
@@ -271,7 +292,10 @@ export const statistiquesBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(data[i].value)],
         comparator: "number_equal",
-        explanation: `Le bâton au-dessus de ${data[i].label} monte jusqu’à ${data[i].value}.`,
+        explanation: "Définition : les statistiques permettent d’organiser et de résumer une série de données.\n\n" +
+          "Méthode : on choisit l’indicateur demandé : effectif, fréquence, moyenne, médiane ou étendue.\n\nCalcul : " +
+          (`Le bâton au-dessus de ${data[i].label} monte jusqu’à ${data[i].value}.`) +
+          "\n\nConclusion : l’indicateur obtenu résume correctement la série.",
         canvas: statGraphCanvas({
           graphType: "batons",
           data,
@@ -311,7 +335,10 @@ export const statistiquesBank: TutorBankItemV4[] = [
         choices: data.map((d) => d.label),
         expected: [correct],
         comparator: "mcq_exact",
-        explanation: `${correct} correspond à la barre la plus haute : ${max}.`,
+        explanation: "Définition : les statistiques permettent d’organiser et de résumer une série de données.\n\n" +
+          "Méthode : on choisit l’indicateur demandé : effectif, fréquence, moyenne, médiane ou étendue.\n\nCalcul : " +
+          (`${correct} correspond à la barre la plus haute : ${max}.`) +
+          "\n\nConclusion : l’indicateur obtenu résume correctement la série.",
         canvas: statGraphCanvas({
           graphType: "barres",
           data,
@@ -340,7 +367,10 @@ export const statistiquesBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "Tu dois parler de la catégorie et de la hauteur de la barre.",
     explanation:
-      "On repère la catégorie demandée, puis on lit la hauteur de sa barre pour obtenir la valeur ou l’effectif.",
+      "Définition : les statistiques permettent d’organiser et de résumer une série de données.\n\n" +
+          "Méthode : on choisit l’indicateur demandé : effectif, fréquence, moyenne, médiane ou étendue.\n\nCalcul : " +
+          ("On repère la catégorie demandée, puis on lit la hauteur de sa barre pour obtenir la valeur ou l’effectif.") +
+          "\n\nConclusion : l’indicateur obtenu résume correctement la série.",
     tags: ["statistiques", "graphique", "open"],
   },
     /* =========================
@@ -362,7 +392,10 @@ export const statistiquesBank: TutorBankItemV4[] = [
     expected: ["25"],
     comparator: "mcq_exact",
     hint: "Additionne les effectifs.",
-    explanation: "L’effectif total vaut 14 + 11 = 25.",
+    explanation: "Définition : les statistiques permettent d’organiser et de résumer une série de données.\n\n" +
+          "Méthode : on choisit l’indicateur demandé : effectif, fréquence, moyenne, médiane ou étendue.\n\nCalcul : " +
+          ("L’effectif total vaut 14 + 11 = 25.") +
+          "\n\nConclusion : l’indicateur obtenu résume correctement la série.",
     tags: ["statistiques", "effectif", "total"],
   },
 
@@ -388,7 +421,10 @@ export const statistiquesBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(total)],
         comparator: "number_equal",
-        explanation: `Effectif total = ${a} + ${b} + ${c} = ${total}.`,
+        explanation: "Définition : les statistiques permettent d’organiser et de résumer une série de données.\n\n" +
+          "Méthode : on choisit l’indicateur demandé : effectif, fréquence, moyenne, médiane ou étendue.\n\nCalcul : " +
+          (`Effectif total = ${a} + ${b} + ${c} = ${total}.`) +
+          "\n\nConclusion : l’indicateur obtenu résume correctement la série.",
       };
     },
   },
@@ -418,7 +454,10 @@ export const statistiquesBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(total)],
         comparator: "number_equal",
-        explanation: `On additionne : ${data.map((d) => d.value).join(" + ")} = ${total}.`,
+        explanation: "Définition : les statistiques permettent d’organiser et de résumer une série de données.\n\n" +
+          "Méthode : on choisit l’indicateur demandé : effectif, fréquence, moyenne, médiane ou étendue.\n\nCalcul : " +
+          (`On additionne : ${data.map((d) => d.value).join(" + ")} = ${total}.`) +
+          "\n\nConclusion : l’indicateur obtenu résume correctement la série.",
         canvas: statGraphCanvas({
           graphType: "barres",
           data,
@@ -442,7 +481,10 @@ export const statistiquesBank: TutorBankItemV4[] = [
     expected: ["additionne", "effectifs", "total"],
     comparator: "contains_keyword",
     hint: "On regroupe toutes les catégories.",
-    explanation: "Pour trouver l’effectif total, on additionne tous les effectifs des catégories.",
+    explanation: "Définition : les statistiques permettent d’organiser et de résumer une série de données.\n\n" +
+          "Méthode : on choisit l’indicateur demandé : effectif, fréquence, moyenne, médiane ou étendue.\n\nCalcul : " +
+          ("Pour trouver l’effectif total, on additionne tous les effectifs des catégories.") +
+          "\n\nConclusion : l’indicateur obtenu résume correctement la série.",
     tags: ["statistiques", "effectif", "open"],
   },
 
@@ -465,7 +507,10 @@ export const statistiquesBank: TutorBankItemV4[] = [
     expected: ["0,4"],
     comparator: "mcq_exact",
     hint: "Fréquence = effectif ÷ effectif total.",
-    explanation: "La fréquence vaut 10 ÷ 25 = 0,4.",
+    explanation: "Définition : les statistiques permettent d’organiser et de résumer une série de données.\n\n" +
+          "Méthode : on choisit l’indicateur demandé : effectif, fréquence, moyenne, médiane ou étendue.\n\nCalcul : " +
+          ("La fréquence vaut 10 ÷ 25 = 0,4.") +
+          "\n\nConclusion : l’indicateur obtenu résume correctement la série.",
     tags: ["statistiques", "frequence", "qcm"],
   },
 
@@ -490,7 +535,10 @@ export const statistiquesBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(freq), String(freq).replace(".", ",")],
         comparator: "number_equal",
-        explanation: `Fréquence = ${effectif} ÷ ${total} = ${formatNumber(freq)}.`,
+        explanation: "Définition : les statistiques permettent d’organiser et de résumer une série de données.\n\n" +
+          "Méthode : on choisit l’indicateur demandé : effectif, fréquence, moyenne, médiane ou étendue.\n\nCalcul : " +
+          (`Fréquence = ${effectif} ÷ ${total} = ${formatNumber(freq)}.`) +
+          "\n\nConclusion : l’indicateur obtenu résume correctement la série.",
       };
     },
   },
@@ -516,7 +564,10 @@ export const statistiquesBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(pourcentage)],
         comparator: "number_equal",
-        explanation: `Fréquence = ${effectif} ÷ ${total} = ${formatNumber(effectif / total)}, soit ${pourcentage} %.`,
+        explanation: "Définition : les statistiques permettent d’organiser et de résumer une série de données.\n\n" +
+          "Méthode : on choisit l’indicateur demandé : effectif, fréquence, moyenne, médiane ou étendue.\n\nCalcul : " +
+          (`Fréquence = ${effectif} ÷ ${total} = ${formatNumber(effectif / total)}, soit ${pourcentage} %.`) +
+          "\n\nConclusion : l’indicateur obtenu résume correctement la série.",
       };
     },
   },
@@ -547,7 +598,10 @@ export const statistiquesBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(freq), String(freq).replace(".", ",")],
         comparator: "number_equal",
-        explanation: `Effectif total = ${total}. Fréquence de ${data[i].label} = ${data[i].value} ÷ ${total} = ${formatNumber(freq)}.`,
+        explanation: "Définition : les statistiques permettent d’organiser et de résumer une série de données.\n\n" +
+          "Méthode : on choisit l’indicateur demandé : effectif, fréquence, moyenne, médiane ou étendue.\n\nCalcul : " +
+          (`Effectif total = ${total}. Fréquence de ${data[i].label} = ${data[i].value} ÷ ${total} = ${formatNumber(freq)}.`) +
+          "\n\nConclusion : l’indicateur obtenu résume correctement la série.",
         canvas: statGraphCanvas({
           graphType: "barres",
           data,
@@ -571,7 +625,10 @@ export const statistiquesBank: TutorBankItemV4[] = [
     expected: ["effectif", "total", "divise"],
     comparator: "contains_keyword",
     hint: "C’est un quotient.",
-    explanation: "On divise l’effectif de la catégorie par l’effectif total.",
+    explanation: "Définition : les statistiques permettent d’organiser et de résumer une série de données.\n\n" +
+          "Méthode : on choisit l’indicateur demandé : effectif, fréquence, moyenne, médiane ou étendue.\n\nCalcul : " +
+          ("On divise l’effectif de la catégorie par l’effectif total.") +
+          "\n\nConclusion : l’indicateur obtenu résume correctement la série.",
     tags: ["statistiques", "frequence", "open"],
   },
 
@@ -594,7 +651,10 @@ export const statistiquesBank: TutorBankItemV4[] = [
     expected: ["10"],
     comparator: "mcq_exact",
     hint: "Additionne puis divise par le nombre de valeurs.",
-    explanation: "Moyenne = (8 + 10 + 12) ÷ 3 = 30 ÷ 3 = 10.",
+    explanation: "Définition : les statistiques permettent d’organiser et de résumer une série de données.\n\n" +
+          "Méthode : on choisit l’indicateur demandé : effectif, fréquence, moyenne, médiane ou étendue.\n\nCalcul : " +
+          ("Moyenne = (8 + 10 + 12) ÷ 3 = 30 ÷ 3 = 10.") +
+          "\n\nConclusion : l’indicateur obtenu résume correctement la série.",
     tags: ["statistiques", "moyenne", "qcm"],
   },
 
@@ -613,7 +673,10 @@ export const statistiquesBank: TutorBankItemV4[] = [
     expected: ["non"],
     comparator: "mcq_exact",
     hint: "30 est la somme, pas la moyenne.",
-    explanation: "La somme est 30, mais il faut diviser par 3. La moyenne vaut 10.",
+    explanation: "Définition : les statistiques permettent d’organiser et de résumer une série de données.\n\n" +
+          "Méthode : on choisit l’indicateur demandé : effectif, fréquence, moyenne, médiane ou étendue.\n\nCalcul : " +
+          ("La somme est 30, mais il faut diviser par 3. La moyenne vaut 10.") +
+          "\n\nConclusion : l’indicateur obtenu résume correctement la série.",
     tags: ["statistiques", "moyenne", "erreur"],
   },
 
@@ -637,7 +700,10 @@ export const statistiquesBank: TutorBankItemV4[] = [
         format: "short",
         expected: [formatNumber(avg)],
         comparator: "number_equal",
-        explanation: `Moyenne = (${values.join(" + ")}) ÷ ${values.length} = ${formatNumber(avg)}.`,
+        explanation: "Définition : les statistiques permettent d’organiser et de résumer une série de données.\n\n" +
+          "Méthode : on choisit l’indicateur demandé : effectif, fréquence, moyenne, médiane ou étendue.\n\nCalcul : " +
+          (`Moyenne = (${values.join(" + ")}) ÷ ${values.length} = ${formatNumber(avg)}.`) +
+          "\n\nConclusion : l’indicateur obtenu résume correctement la série.",
       };
     },
   },
@@ -666,7 +732,10 @@ export const statistiquesBank: TutorBankItemV4[] = [
         format: "short",
         expected: [formatNumber(avg)],
         comparator: "number_equal",
-        explanation: `Moyenne = (${v1} × ${e1} + ${v2} × ${e2}) ÷ ${total} = ${formatNumber(avg)}.`,
+        explanation: "Définition : les statistiques permettent d’organiser et de résumer une série de données.\n\n" +
+          "Méthode : on choisit l’indicateur demandé : effectif, fréquence, moyenne, médiane ou étendue.\n\nCalcul : " +
+          (`Moyenne = (${v1} × ${e1} + ${v2} × ${e2}) ÷ ${total} = ${formatNumber(avg)}.`) +
+          "\n\nConclusion : l’indicateur obtenu résume correctement la série.",
       };
     },
   },
@@ -694,7 +763,10 @@ export const statistiquesBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(x)],
         comparator: "number_equal",
-        explanation: `La somme totale doit être ${target} × 4 = ${target * 4}. Donc x = ${target * 4} - (${a} + ${b} + ${c}) = ${x}.`,
+        explanation: "Définition : les statistiques permettent d’organiser et de résumer une série de données.\n\n" +
+          "Méthode : on choisit l’indicateur demandé : effectif, fréquence, moyenne, médiane ou étendue.\n\nCalcul : " +
+          (`La somme totale doit être ${target} × 4 = ${target * 4}. Donc x = ${target * 4} - (${a} + ${b} + ${c}) = ${x}.`) +
+          "\n\nConclusion : l’indicateur obtenu résume correctement la série.",
       };
     },
   },
@@ -713,7 +785,10 @@ export const statistiquesBank: TutorBankItemV4[] = [
     expected: ["somme", "divise", "valeurs"],
     comparator: "contains_keyword",
     hint: "La moyenne est un calcul, pas forcément une valeur observée.",
-    explanation: "La moyenne est obtenue en additionnant les valeurs puis en divisant par leur nombre. Elle peut donc ne pas apparaître dans la série.",
+    explanation: "Définition : les statistiques permettent d’organiser et de résumer une série de données.\n\n" +
+          "Méthode : on choisit l’indicateur demandé : effectif, fréquence, moyenne, médiane ou étendue.\n\nCalcul : " +
+          ("La moyenne est obtenue en additionnant les valeurs puis en divisant par leur nombre. Elle peut donc ne pas apparaître dans la série.") +
+          "\n\nConclusion : l’indicateur obtenu résume correctement la série.",
     tags: ["statistiques", "moyenne", "open"],
   },
     /* =========================
@@ -735,7 +810,10 @@ export const statistiquesBank: TutorBankItemV4[] = [
     expected: ["9"],
     comparator: "mcq_exact",
     hint: "La médiane est la valeur centrale.",
-    explanation: "Il y a 5 valeurs. La valeur centrale est la 3e : 9.",
+    explanation: "Définition : les statistiques permettent d’organiser et de résumer une série de données.\n\n" +
+          "Méthode : on choisit l’indicateur demandé : effectif, fréquence, moyenne, médiane ou étendue.\n\nCalcul : " +
+          ("Il y a 5 valeurs. La valeur centrale est la 3e : 9.") +
+          "\n\nConclusion : l’indicateur obtenu résume correctement la série.",
     tags: ["statistiques", "mediane", "qcm"],
   },
 
@@ -754,7 +832,10 @@ export const statistiquesBank: TutorBankItemV4[] = [
     expected: ["9"],
     comparator: "mcq_exact",
     hint: "Avec 4 valeurs, on prend la moyenne des deux valeurs centrales.",
-    explanation: "Les deux valeurs centrales sont 8 et 10. Médiane = (8 + 10) ÷ 2 = 9.",
+    explanation: "Définition : les statistiques permettent d’organiser et de résumer une série de données.\n\n" +
+          "Méthode : on choisit l’indicateur demandé : effectif, fréquence, moyenne, médiane ou étendue.\n\nCalcul : " +
+          ("Les deux valeurs centrales sont 8 et 10. Médiane = (8 + 10) ÷ 2 = 9.") +
+          "\n\nConclusion : l’indicateur obtenu résume correctement la série.",
     tags: ["statistiques", "mediane", "pair"],
   },
 
@@ -785,7 +866,10 @@ export const statistiquesBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(med)],
         comparator: "number_equal",
-        explanation: `On range la série : ${sorted.join(" ; ")}. La valeur centrale est ${med}.`,
+        explanation: "Définition : les statistiques permettent d’organiser et de résumer une série de données.\n\n" +
+          "Méthode : on choisit l’indicateur demandé : effectif, fréquence, moyenne, médiane ou étendue.\n\nCalcul : " +
+          (`On range la série : ${sorted.join(" ; ")}. La valeur centrale est ${med}.`) +
+          "\n\nConclusion : l’indicateur obtenu résume correctement la série.",
       };
     },
   },
@@ -816,7 +900,10 @@ export const statistiquesBank: TutorBankItemV4[] = [
         format: "short",
         expected: [formatNumber(med)],
         comparator: "number_equal",
-        explanation: `On range la série : ${sorted.join(" ; ")}. Les deux valeurs centrales sont ${sorted[1]} et ${sorted[2]}. Médiane = (${sorted[1]} + ${sorted[2]}) ÷ 2 = ${formatNumber(med)}.`,
+        explanation: "Définition : les statistiques permettent d’organiser et de résumer une série de données.\n\n" +
+          "Méthode : on choisit l’indicateur demandé : effectif, fréquence, moyenne, médiane ou étendue.\n\nCalcul : " +
+          (`On range la série : ${sorted.join(" ; ")}. Les deux valeurs centrales sont ${sorted[1]} et ${sorted[2]}. Médiane = (${sorted[1]} + ${sorted[2]}) ÷ 2 = ${formatNumber(med)}.`) +
+          "\n\nConclusion : l’indicateur obtenu résume correctement la série.",
       };
     },
   },
@@ -835,7 +922,10 @@ export const statistiquesBank: TutorBankItemV4[] = [
     expected: ["ranger", "ordre", "centrale"],
     comparator: "contains_keyword",
     hint: "La médiane dépend de la position centrale.",
-    explanation: "Il faut ranger la série dans l’ordre croissant pour identifier correctement la ou les valeurs centrales.",
+    explanation: "Définition : les statistiques permettent d’organiser et de résumer une série de données.\n\n" +
+          "Méthode : on choisit l’indicateur demandé : effectif, fréquence, moyenne, médiane ou étendue.\n\nCalcul : " +
+          ("Il faut ranger la série dans l’ordre croissant pour identifier correctement la ou les valeurs centrales.") +
+          "\n\nConclusion : l’indicateur obtenu résume correctement la série.",
     tags: ["statistiques", "mediane", "open"],
   },
 
@@ -858,7 +948,10 @@ export const statistiquesBank: TutorBankItemV4[] = [
     expected: ["11"],
     comparator: "mcq_exact",
     hint: "Étendue = maximum - minimum.",
-    explanation: "Maximum = 15, minimum = 4. Étendue = 15 - 4 = 11.",
+    explanation: "Définition : les statistiques permettent d’organiser et de résumer une série de données.\n\n" +
+          "Méthode : on choisit l’indicateur demandé : effectif, fréquence, moyenne, médiane ou étendue.\n\nCalcul : " +
+          ("Maximum = 15, minimum = 4. Étendue = 15 - 4 = 11.") +
+          "\n\nConclusion : l’indicateur obtenu résume correctement la série.",
     tags: ["statistiques", "etendue", "qcm"],
   },
 
@@ -884,7 +977,10 @@ export const statistiquesBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(result)],
         comparator: "number_equal",
-        explanation: `Minimum = ${min}, maximum = ${max}. Étendue = ${max} - ${min} = ${result}.`,
+        explanation: "Définition : les statistiques permettent d’organiser et de résumer une série de données.\n\n" +
+          "Méthode : on choisit l’indicateur demandé : effectif, fréquence, moyenne, médiane ou étendue.\n\nCalcul : " +
+          (`Minimum = ${min}, maximum = ${max}. Étendue = ${max} - ${min} = ${result}.`) +
+          "\n\nConclusion : l’indicateur obtenu résume correctement la série.",
       };
     },
   },
@@ -914,7 +1010,10 @@ export const statistiquesBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(result)],
         comparator: "number_equal",
-        explanation: `Maximum = ${Math.max(...values)}, minimum = ${Math.min(...values)}. Étendue = ${result}.`,
+        explanation: "Définition : les statistiques permettent d’organiser et de résumer une série de données.\n\n" +
+          "Méthode : on choisit l’indicateur demandé : effectif, fréquence, moyenne, médiane ou étendue.\n\nCalcul : " +
+          (`Maximum = ${Math.max(...values)}, minimum = ${Math.min(...values)}. Étendue = ${result}.`) +
+          "\n\nConclusion : l’indicateur obtenu résume correctement la série.",
         canvas: statGraphCanvas({
           graphType: "barres",
           data,
@@ -938,7 +1037,10 @@ export const statistiquesBank: TutorBankItemV4[] = [
     expected: ["maximum", "minimum", "écart"],
     comparator: "contains_keyword",
     hint: "L’étendue compare les extrêmes.",
-    explanation: "L’étendue mesure l’écart entre la plus grande valeur et la plus petite valeur de la série.",
+    explanation: "Définition : les statistiques permettent d’organiser et de résumer une série de données.\n\n" +
+          "Méthode : on choisit l’indicateur demandé : effectif, fréquence, moyenne, médiane ou étendue.\n\nCalcul : " +
+          ("L’étendue mesure l’écart entre la plus grande valeur et la plus petite valeur de la série.") +
+          "\n\nConclusion : l’indicateur obtenu résume correctement la série.",
     tags: ["statistiques", "etendue", "open"],
   },
 
@@ -966,7 +1068,10 @@ export const statistiquesBank: TutorBankItemV4[] = [
     expected: ["ses valeurs sont plus dispersées"],
     comparator: "mcq_exact",
     hint: "L’étendue mesure la dispersion entre les extrêmes.",
-    explanation: "Une étendue plus grande indique des valeurs plus dispersées.",
+    explanation: "Définition : les statistiques permettent d’organiser et de résumer une série de données.\n\n" +
+          "Méthode : on choisit l’indicateur demandé : effectif, fréquence, moyenne, médiane ou étendue.\n\nCalcul : " +
+          ("Une étendue plus grande indique des valeurs plus dispersées.") +
+          "\n\nConclusion : l’indicateur obtenu résume correctement la série.",
     tags: ["statistiques", "interpretation", "etendue"],
   },
 
@@ -985,7 +1090,10 @@ export const statistiquesBank: TutorBankItemV4[] = [
     expected: ["non"],
     comparator: "mcq_exact",
     hint: "La moyenne résume le groupe, elle ne donne pas chaque valeur.",
-    explanation: "Non. Une moyenne de 12 peut venir de notes différentes, par exemple 10 et 14.",
+    explanation: "Définition : les statistiques permettent d’organiser et de résumer une série de données.\n\n" +
+          "Méthode : on choisit l’indicateur demandé : effectif, fréquence, moyenne, médiane ou étendue.\n\nCalcul : " +
+          ("Non. Une moyenne de 12 peut venir de notes différentes, par exemple 10 et 14.") +
+          "\n\nConclusion : l’indicateur obtenu résume correctement la série.",
     tags: ["statistiques", "interpretation", "moyenne", "piege"],
   },
 
@@ -1011,7 +1119,10 @@ export const statistiquesBank: TutorBankItemV4[] = [
         choices: ["groupe A", "groupe B"],
         expected: ["groupe B"],
         comparator: "mcq_exact",
-        explanation: `Le groupe B a l’étendue la plus grande (${etendueB}), donc ses valeurs sont plus dispersées.`,
+        explanation: "Définition : les statistiques permettent d’organiser et de résumer une série de données.\n\n" +
+          "Méthode : on choisit l’indicateur demandé : effectif, fréquence, moyenne, médiane ou étendue.\n\nCalcul : " +
+          (`Le groupe B a l’étendue la plus grande (${etendueB}), donc ses valeurs sont plus dispersées.`) +
+          "\n\nConclusion : l’indicateur obtenu résume correctement la série.",
       };
     },
   },
@@ -1030,7 +1141,10 @@ export const statistiquesBank: TutorBankItemV4[] = [
     expected: ["moyenne", "médiane", "étendue"],
     comparator: "contains_keyword",
     hint: "La moyenne résume, la médiane coupe la série, l’étendue mesure l’écart.",
-    explanation: "La moyenne est un équilibre calculé, la médiane est la valeur centrale d’une série rangée, et l’étendue est l’écart entre le maximum et le minimum.",
+    explanation: "Définition : les statistiques permettent d’organiser et de résumer une série de données.\n\n" +
+          "Méthode : on choisit l’indicateur demandé : effectif, fréquence, moyenne, médiane ou étendue.\n\nCalcul : " +
+          ("La moyenne est un équilibre calculé, la médiane est la valeur centrale d’une série rangée, et l’étendue est l’écart entre le maximum et le minimum.") +
+          "\n\nConclusion : l’indicateur obtenu résume correctement la série.",
     tags: ["statistiques", "interpretation", "open"],
   },
 
@@ -1063,7 +1177,10 @@ export const statistiquesBank: TutorBankItemV4[] = [
         format: "short",
         expected: [formatNumber(avg)],
         comparator: "number_equal",
-        explanation: `Moyenne = (${values.join(" + ")}) ÷ 4 = ${formatNumber(avg)} °C.`,
+        explanation: "Définition : les statistiques permettent d’organiser et de résumer une série de données.\n\n" +
+          "Méthode : on choisit l’indicateur demandé : effectif, fréquence, moyenne, médiane ou étendue.\n\nCalcul : " +
+          (`Moyenne = (${values.join(" + ")}) ÷ 4 = ${formatNumber(avg)} °C.`) +
+          "\n\nConclusion : l’indicateur obtenu résume correctement la série.",
       };
     },
   },
@@ -1092,7 +1209,10 @@ export const statistiquesBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(total)],
         comparator: "number_equal",
-        explanation: `On additionne les effectifs : ${data.map((d) => d.value).join(" + ")} = ${total}.`,
+        explanation: "Définition : les statistiques permettent d’organiser et de résumer une série de données.\n\n" +
+          "Méthode : on choisit l’indicateur demandé : effectif, fréquence, moyenne, médiane ou étendue.\n\nCalcul : " +
+          (`On additionne les effectifs : ${data.map((d) => d.value).join(" + ")} = ${total}.`) +
+          "\n\nConclusion : l’indicateur obtenu résume correctement la série.",
         canvas: statGraphCanvas({
           graphType: "barres",
           data,
@@ -1116,7 +1236,10 @@ export const statistiquesBank: TutorBankItemV4[] = [
     expected: ["moyenne", "médiane", "étendue"],
     comparator: "contains_keyword",
     hint: "Utilise au moins deux indicateurs.",
-    explanation: "Les statistiques permettent de résumer et comparer des groupes avec des indicateurs comme la moyenne, la médiane et l’étendue.",
+    explanation: "Définition : les statistiques permettent d’organiser et de résumer une série de données.\n\n" +
+          "Méthode : on choisit l’indicateur demandé : effectif, fréquence, moyenne, médiane ou étendue.\n\nCalcul : " +
+          ("Les statistiques permettent de résumer et comparer des groupes avec des indicateurs comme la moyenne, la médiane et l’étendue.") +
+          "\n\nConclusion : l’indicateur obtenu résume correctement la série.",
     tags: ["statistiques", "probleme", "open"],
   },
 
@@ -1139,7 +1262,10 @@ export const statistiquesBank: TutorBankItemV4[] = [
     expected: ["non"],
     comparator: "mcq_exact",
     hint: "La moyenne et la médiane ne mesurent pas la même chose.",
-    explanation: "Non. La moyenne utilise toutes les valeurs, alors que la médiane dépend de la position centrale dans la série rangée.",
+    explanation: "Définition : les statistiques permettent d’organiser et de résumer une série de données.\n\n" +
+          "Méthode : on choisit l’indicateur demandé : effectif, fréquence, moyenne, médiane ou étendue.\n\nCalcul : " +
+          ("Non. La moyenne utilise toutes les valeurs, alors que la médiane dépend de la position centrale dans la série rangée.") +
+          "\n\nConclusion : l’indicateur obtenu résume correctement la série.",
     tags: ["statistiques", "defi", "erreur"],
   },
 
@@ -1166,7 +1292,10 @@ export const statistiquesBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(x)],
         comparator: "number_equal",
-        explanation: `Somme totale = ${target} × 4 = ${target * 4}. Donc x = ${target * 4} - (${a} + ${b} + ${c}) = ${x}.`,
+        explanation: "Définition : les statistiques permettent d’organiser et de résumer une série de données.\n\n" +
+          "Méthode : on choisit l’indicateur demandé : effectif, fréquence, moyenne, médiane ou étendue.\n\nCalcul : " +
+          (`Somme totale = ${target} × 4 = ${target * 4}. Donc x = ${target * 4} - (${a} + ${b} + ${c}) = ${x}.`) +
+          "\n\nConclusion : l’indicateur obtenu résume correctement la série.",
       };
     },
   },
@@ -1185,7 +1314,10 @@ export const statistiquesBank: TutorBankItemV4[] = [
     expected: ["valeur", "extrême", "moyenne"],
     comparator: "contains_keyword",
     hint: "La moyenne utilise toutes les valeurs.",
-    explanation: "Une valeur extrême entre dans le calcul de la somme totale, donc elle peut tirer la moyenne vers le haut ou vers le bas.",
+    explanation: "Définition : les statistiques permettent d’organiser et de résumer une série de données.\n\n" +
+          "Méthode : on choisit l’indicateur demandé : effectif, fréquence, moyenne, médiane ou étendue.\n\nCalcul : " +
+          ("Une valeur extrême entre dans le calcul de la somme totale, donc elle peut tirer la moyenne vers le haut ou vers le bas.") +
+          "\n\nConclusion : l’indicateur obtenu résume correctement la série.",
     tags: ["statistiques", "defi", "open"],
   },
 ];

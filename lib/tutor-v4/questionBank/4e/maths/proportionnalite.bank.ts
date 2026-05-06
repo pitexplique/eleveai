@@ -93,7 +93,10 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     expected: ["2 kg coûtent 6 € et 4 kg coûtent 12 €"],
     comparator: "mcq_exact",
     hint: "Le coefficient doit rester le même.",
-    explanation: "6 ÷ 2 = 3 et 12 ÷ 4 = 3. Le coefficient est le même : c’est proportionnel.",
+    explanation: "Définition : deux grandeurs sont proportionnelles quand on passe de l’une à l’autre en multipliant toujours par le même nombre.\n\n" +
+          "Méthode : on vérifie si le même coefficient multiplicateur relie les deux grandeurs.\n\nCalcul : " +
+          ("6 ÷ 2 = 3 et 12 ÷ 4 = 3. Le coefficient est le même : c’est proportionnel.") +
+          "\n\nConclusion : la valeur trouvée respecte la situation de proportionnalité.",
     tags: ["proportionnalite", "reconnaitre", "qcm"],
   },
   {
@@ -116,7 +119,10 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     expected: ["on multiplie toujours par le même coefficient"],
     comparator: "mcq_exact",
     hint: "La proportionnalité repose sur une multiplication.",
-    explanation: "Dans une situation proportionnelle, on passe d’une grandeur à l’autre par un même coefficient multiplicatif.",
+    explanation: "Définition : deux grandeurs sont proportionnelles quand on passe de l’une à l’autre en multipliant toujours par le même nombre.\n\n" +
+          "Méthode : on vérifie si le même coefficient multiplicateur relie les deux grandeurs.\n\nCalcul : " +
+          ("Dans une situation proportionnelle, on passe d’une grandeur à l’autre par un même coefficient multiplicatif.") +
+          "\n\nConclusion : la valeur trouvée respecte la situation de proportionnalité.",
     tags: ["proportionnalite", "definition"],
   },
   {
@@ -144,9 +150,12 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
         choices: ["oui", "non"],
         expected: [yes ? "oui" : "non"],
         comparator: "mcq_exact",
-        explanation: yes
+        explanation: "Définition : deux grandeurs sont proportionnelles quand on passe de l’une à l’autre en multipliant toujours par le même nombre.\n\n" +
+          "Méthode : on vérifie si le même coefficient multiplicateur relie les deux grandeurs.\n\nCalcul : " +
+          (yes
           ? `${y1} ÷ ${a} = ${k} et ${y2} ÷ ${b} = ${k}. Le coefficient est le même.`
-          : `${y1} ÷ ${a} = ${k}, mais ${y2} ÷ ${b} n’est pas égal à ${k}. Ce n’est pas proportionnel.`,
+          : `${y1} ÷ ${a} = ${k}, mais ${y2} ÷ ${b} n’est pas égal à ${k}. Ce n’est pas proportionnel.`) +
+          "\n\nConclusion : la valeur trouvée respecte la situation de proportionnalité.",
       };
     },
   },
@@ -175,9 +184,12 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
         choices: ["oui", "non"],
         expected: [yes ? "oui" : "non"],
         comparator: "mcq_exact",
-        explanation: yes
+        explanation: "Définition : deux grandeurs sont proportionnelles quand on passe de l’une à l’autre en multipliant toujours par le même nombre.\n\n" +
+          "Méthode : on vérifie si le même coefficient multiplicateur relie les deux grandeurs.\n\nCalcul : " +
+          (yes
           ? `Le prix au kg est le même : ${p1} ÷ ${kg1} = ${pricePerKg} et ${p2} ÷ ${kg2} = ${pricePerKg}.`
-          : `Le prix au kg n’est pas le même. Ce n’est donc pas une situation proportionnelle.`,
+          : `Le prix au kg n’est pas le même. Ce n’est donc pas une situation proportionnelle.`) +
+          "\n\nConclusion : la valeur trouvée respecte la situation de proportionnalité.",
       };
     },
   },
@@ -195,7 +207,10 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     expected: ["12", "3", "20", "5", "coefficient"],
     comparator: "contains_keyword",
     hint: "Calcule le prix pour 1 kg ou compare les coefficients.",
-    explanation: "12 ÷ 3 = 4 et 20 ÷ 5 = 4. Le prix au kg est constant : la situation est proportionnelle.",
+    explanation: "Définition : deux grandeurs sont proportionnelles quand on passe de l’une à l’autre en multipliant toujours par le même nombre.\n\n" +
+          "Méthode : on vérifie si le même coefficient multiplicateur relie les deux grandeurs.\n\nCalcul : " +
+          ("12 ÷ 3 = 4 et 20 ÷ 5 = 4. Le prix au kg est constant : la situation est proportionnelle.") +
+          "\n\nConclusion : la valeur trouvée respecte la situation de proportionnalité.",
     tags: ["proportionnalite", "open", "justification"],
   },
 
@@ -217,7 +232,10 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     expected: ["20"],
     comparator: "mcq_exact",
     hint: "4 est le double de 2.",
-    explanation: "Comme 4 est le double de 2, l’image est aussi doublée : 10 × 2 = 20.",
+    explanation: "Définition : deux grandeurs sont proportionnelles quand on passe de l’une à l’autre en multipliant toujours par le même nombre.\n\n" +
+          "Méthode : on vérifie si le même coefficient multiplicateur relie les deux grandeurs.\n\nCalcul : " +
+          ("Comme 4 est le double de 2, l’image est aussi doublée : 10 × 2 = 20.") +
+          "\n\nConclusion : la valeur trouvée respecte la situation de proportionnalité.",
     tags: ["proportionnalite", "tableau", "qcm"],
   },
   {
@@ -243,7 +261,10 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(y2)],
         comparator: "number_equal",
-        explanation: `Le coefficient est ${y1} ÷ ${x1} = ${k}. Donc ${x2} → ${x2} × ${k} = ${y2}.`,
+        explanation: "Définition : deux grandeurs sont proportionnelles quand on passe de l’une à l’autre en multipliant toujours par le même nombre.\n\n" +
+          "Méthode : on vérifie si le même coefficient multiplicateur relie les deux grandeurs.\n\nCalcul : " +
+          (`Le coefficient est ${y1} ÷ ${x1} = ${k}. Donc ${x2} → ${x2} × ${k} = ${y2}.`) +
+          "\n\nConclusion : la valeur trouvée respecte la situation de proportionnalité.",
         canvas: tableauProportionnaliteCanvas({
           rowLabels: ["Quantité", "Prix (€)"],
           colLabels: ["A", "B"],
@@ -280,7 +301,10 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(y2)],
         comparator: "number_equal",
-        explanation: `On multiplie aussi ${y1} par ${factor}. Donc ${y1} × ${factor} = ${y2}.`,
+        explanation: "Définition : deux grandeurs sont proportionnelles quand on passe de l’une à l’autre en multipliant toujours par le même nombre.\n\n" +
+          "Méthode : on vérifie si le même coefficient multiplicateur relie les deux grandeurs.\n\nCalcul : " +
+          (`On multiplie aussi ${y1} par ${factor}. Donc ${y1} × ${factor} = ${y2}.`) +
+          "\n\nConclusion : la valeur trouvée respecte la situation de proportionnalité.",
       };
     },
   },
@@ -307,7 +331,10 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(y2)],
         comparator: "number_equal",
-        explanation: `Une unité coûte ${k} €. Donc ${x2} unités coûtent ${x2} × ${k} = ${y2} €.`,
+        explanation: "Définition : deux grandeurs sont proportionnelles quand on passe de l’une à l’autre en multipliant toujours par le même nombre.\n\n" +
+          "Méthode : on vérifie si le même coefficient multiplicateur relie les deux grandeurs.\n\nCalcul : " +
+          (`Une unité coûte ${k} €. Donc ${x2} unités coûtent ${x2} × ${k} = ${y2} €.`) +
+          "\n\nConclusion : la valeur trouvée respecte la situation de proportionnalité.",
       };
     },
   },
@@ -330,7 +357,10 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     expected: ["5"],
     comparator: "mcq_exact",
     hint: "Coefficient = 20 ÷ 4.",
-    explanation: "20 ÷ 4 = 5. Le coefficient de proportionnalité est 5.",
+    explanation: "Définition : deux grandeurs sont proportionnelles quand on passe de l’une à l’autre en multipliant toujours par le même nombre.\n\n" +
+          "Méthode : on vérifie si le même coefficient multiplicateur relie les deux grandeurs.\n\nCalcul : " +
+          ("20 ÷ 4 = 5. Le coefficient de proportionnalité est 5.") +
+          "\n\nConclusion : la valeur trouvée respecte la situation de proportionnalité.",
     tags: ["proportionnalite", "coefficient"],
   },
   {
@@ -354,7 +384,10 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(k)],
         comparator: "number_equal",
-        explanation: `${y} ÷ ${x} = ${k}.`,
+        explanation: "Définition : deux grandeurs sont proportionnelles quand on passe de l’une à l’autre en multipliant toujours par le même nombre.\n\n" +
+          "Méthode : on vérifie si le même coefficient multiplicateur relie les deux grandeurs.\n\nCalcul : " +
+          (`${y} ÷ ${x} = ${k}.`) +
+          "\n\nConclusion : la valeur trouvée respecte la situation de proportionnalité.",
       };
     },
   },
@@ -379,7 +412,10 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(pricePerKg)],
         comparator: "number_equal",
-        explanation: `${price} ÷ ${kg} = ${pricePerKg}. Un kg coûte ${pricePerKg} €.`,
+        explanation: "Définition : deux grandeurs sont proportionnelles quand on passe de l’une à l’autre en multipliant toujours par le même nombre.\n\n" +
+          "Méthode : on vérifie si le même coefficient multiplicateur relie les deux grandeurs.\n\nCalcul : " +
+          (`${price} ÷ ${kg} = ${pricePerKg}. Un kg coûte ${pricePerKg} €.`) +
+          "\n\nConclusion : la valeur trouvée respecte la situation de proportionnalité.",
       };
     },
   },
@@ -404,7 +440,10 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(speed)],
         comparator: "number_equal",
-        explanation: `${time} ÷ ${distance} = ${speed}.`,
+        explanation: "Définition : deux grandeurs sont proportionnelles quand on passe de l’une à l’autre en multipliant toujours par le même nombre.\n\n" +
+          "Méthode : on vérifie si le même coefficient multiplicateur relie les deux grandeurs.\n\nCalcul : " +
+          (`${time} ÷ ${distance} = ${speed}.`) +
+          "\n\nConclusion : la valeur trouvée respecte la situation de proportionnalité.",
       };
     },
   },
@@ -422,7 +461,10 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     expected: ["42", "6", "divise", "7"],
     comparator: "contains_keyword",
     hint: "On divise l’image par le nombre de départ.",
-    explanation: "On calcule 42 ÷ 6 = 7. Le coefficient est donc 7.",
+    explanation: "Définition : deux grandeurs sont proportionnelles quand on passe de l’une à l’autre en multipliant toujours par le même nombre.\n\n" +
+          "Méthode : on vérifie si le même coefficient multiplicateur relie les deux grandeurs.\n\nCalcul : " +
+          ("On calcule 42 ÷ 6 = 7. Le coefficient est donc 7.") +
+          "\n\nConclusion : la valeur trouvée respecte la situation de proportionnalité.",
     tags: ["proportionnalite", "coefficient", "open"],
   },
 
@@ -444,7 +486,10 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     expected: ["20 €"],
     comparator: "mcq_exact",
     hint: "Trouve d’abord le prix de 1 kg.",
-    explanation: "3 kg coûtent 12 €, donc 1 kg coûte 4 €. Alors 5 kg coûtent 5 × 4 = 20 €.",
+    explanation: "Définition : deux grandeurs sont proportionnelles quand on passe de l’une à l’autre en multipliant toujours par le même nombre.\n\n" +
+          "Méthode : on vérifie si le même coefficient multiplicateur relie les deux grandeurs.\n\nCalcul : " +
+          ("3 kg coûtent 12 €, donc 1 kg coûte 4 €. Alors 5 kg coûtent 5 × 4 = 20 €.") +
+          "\n\nConclusion : la valeur trouvée respecte la situation de proportionnalité.",
     tags: ["proportionnalite", "quatrieme_proportionnelle"],
   },
   {
@@ -470,7 +515,10 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(p2)],
         comparator: "number_equal",
-        explanation: `Un objet coûte ${p1} ÷ ${q1} = ${unit} €. Donc ${q2} objets coûtent ${q2} × ${unit} = ${p2} €.`,
+        explanation: "Définition : deux grandeurs sont proportionnelles quand on passe de l’une à l’autre en multipliant toujours par le même nombre.\n\n" +
+          "Méthode : on vérifie si le même coefficient multiplicateur relie les deux grandeurs.\n\nCalcul : " +
+          (`Un objet coûte ${p1} ÷ ${q1} = ${unit} €. Donc ${q2} objets coûtent ${q2} × ${unit} = ${p2} €.`) +
+          "\n\nConclusion : la valeur trouvée respecte la situation de proportionnalité.",
       };
     },
   },
@@ -496,7 +544,10 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
         format: "short",
         expected: [formatNumber(result)],
         comparator: "number_equal",
-        explanation: `On calcule ${b} × ${c} ÷ ${a} = ${formatNumber(result)}.`,
+        explanation: "Définition : deux grandeurs sont proportionnelles quand on passe de l’une à l’autre en multipliant toujours par le même nombre.\n\n" +
+          "Méthode : on vérifie si le même coefficient multiplicateur relie les deux grandeurs.\n\nCalcul : " +
+          (`On calcule ${b} × ${c} ÷ ${a} = ${formatNumber(result)}.`) +
+          "\n\nConclusion : la valeur trouvée respecte la situation de proportionnalité.",
       };
     },
   },
@@ -523,7 +574,10 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(p2)],
         comparator: "number_equal",
-        explanation: `Le prix au kg est ${p1} ÷ ${kg1} = ${pricePerKg} €. Donc ${kg2} kg coûtent ${p2} €.`,
+        explanation: "Définition : deux grandeurs sont proportionnelles quand on passe de l’une à l’autre en multipliant toujours par le même nombre.\n\n" +
+          "Méthode : on vérifie si le même coefficient multiplicateur relie les deux grandeurs.\n\nCalcul : " +
+          (`Le prix au kg est ${p1} ÷ ${kg1} = ${pricePerKg} €. Donc ${kg2} kg coûtent ${p2} €.`) +
+          "\n\nConclusion : la valeur trouvée respecte la situation de proportionnalité.",
         canvas: tableauProportionnaliteCanvas({
           rowLabels: ["Masse (kg)", "Prix (€)"],
           colLabels: ["Situation 1", "Situation 2"],
@@ -556,7 +610,10 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     expected: ["1/4"],
     comparator: "mcq_exact",
     hint: "25 % = 25 sur 100.",
-    explanation: "25 % = 25/100 = 1/4.",
+    explanation: "Définition : deux grandeurs sont proportionnelles quand on passe de l’une à l’autre en multipliant toujours par le même nombre.\n\n" +
+          "Méthode : on vérifie si le même coefficient multiplicateur relie les deux grandeurs.\n\nCalcul : " +
+          ("25 % = 25/100 = 1/4.") +
+          "\n\nConclusion : la valeur trouvée respecte la situation de proportionnalité.",
     tags: ["proportionnalite", "pourcentage"],
   },
   {
@@ -574,7 +631,10 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     expected: ["8"],
     comparator: "mcq_exact",
     hint: "10 % signifie diviser par 10.",
-    explanation: "10 % de 80 = 80 ÷ 10 = 8.",
+    explanation: "Définition : deux grandeurs sont proportionnelles quand on passe de l’une à l’autre en multipliant toujours par le même nombre.\n\n" +
+          "Méthode : on vérifie si le même coefficient multiplicateur relie les deux grandeurs.\n\nCalcul : " +
+          ("10 % de 80 = 80 ÷ 10 = 8.") +
+          "\n\nConclusion : la valeur trouvée respecte la situation de proportionnalité.",
     tags: ["proportionnalite", "pourcentage", "qcm"],
   },
   {
@@ -598,7 +658,10 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(result)],
         comparator: "number_equal",
-        explanation: `${p} % de ${n} = ${n} × ${p} ÷ 100 = ${result}.`,
+        explanation: "Définition : deux grandeurs sont proportionnelles quand on passe de l’une à l’autre en multipliant toujours par le même nombre.\n\n" +
+          "Méthode : on vérifie si le même coefficient multiplicateur relie les deux grandeurs.\n\nCalcul : " +
+          (`${p} % de ${n} = ${n} × ${p} ÷ 100 = ${result}.`) +
+          "\n\nConclusion : la valeur trouvée respecte la situation de proportionnalité.",
       };
     },
   },
@@ -623,7 +686,10 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(p)],
         comparator: "number_equal",
-        explanation: `${part} ÷ ${total} × 100 = ${p} %.`,
+        explanation: "Définition : deux grandeurs sont proportionnelles quand on passe de l’une à l’autre en multipliant toujours par le même nombre.\n\n" +
+          "Méthode : on vérifie si le même coefficient multiplicateur relie les deux grandeurs.\n\nCalcul : " +
+          (`${part} ÷ ${total} × 100 = ${p} %.`) +
+          "\n\nConclusion : la valeur trouvée respecte la situation de proportionnalité.",
       };
     },
   },
@@ -648,7 +714,10 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(result)],
         comparator: "number_equal",
-        explanation: `${p} % de ${total} = ${total} × ${p} ÷ 100 = ${result}.`,
+        explanation: "Définition : deux grandeurs sont proportionnelles quand on passe de l’une à l’autre en multipliant toujours par le même nombre.\n\n" +
+          "Méthode : on vérifie si le même coefficient multiplicateur relie les deux grandeurs.\n\nCalcul : " +
+          (`${p} % de ${total} = ${total} × ${p} ÷ 100 = ${result}.`) +
+          "\n\nConclusion : la valeur trouvée respecte la situation de proportionnalité.",
       };
     },
   },
@@ -673,7 +742,10 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
         choices: makeChoices(correct, [`100/${p}`, `${p}/10`, `${100 - p}/100`]),
         expected: [correct],
         comparator: "mcq_exact",
-        explanation: `${p} % signifie ${p} sur 100, donc ${correct}.`,
+        explanation: "Définition : deux grandeurs sont proportionnelles quand on passe de l’une à l’autre en multipliant toujours par le même nombre.\n\n" +
+          "Méthode : on vérifie si le même coefficient multiplicateur relie les deux grandeurs.\n\nCalcul : " +
+          (`${p} % signifie ${p} sur 100, donc ${correct}.`) +
+          "\n\nConclusion : la valeur trouvée respecte la situation de proportionnalité.",
       };
     },
   },
@@ -696,7 +768,10 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     expected: ["1,2"],
     comparator: "mcq_exact",
     hint: "On garde 100 % puis on ajoute 20 %.",
-    explanation: "Augmenter de 20 %, c’est passer à 120 %, donc multiplier par 1,2.",
+    explanation: "Définition : deux grandeurs sont proportionnelles quand on passe de l’une à l’autre en multipliant toujours par le même nombre.\n\n" +
+          "Méthode : on vérifie si le même coefficient multiplicateur relie les deux grandeurs.\n\nCalcul : " +
+          ("Augmenter de 20 %, c’est passer à 120 %, donc multiplier par 1,2.") +
+          "\n\nConclusion : la valeur trouvée respecte la situation de proportionnalité.",
     tags: ["proportionnalite", "coefficient_multiplicateur"],
   },
   {
@@ -714,7 +789,10 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     expected: ["0,7"],
     comparator: "mcq_exact",
     hint: "Après une baisse de 30 %, il reste 70 %.",
-    explanation: "Réduire de 30 %, c’est garder 70 %, donc multiplier par 0,7.",
+    explanation: "Définition : deux grandeurs sont proportionnelles quand on passe de l’une à l’autre en multipliant toujours par le même nombre.\n\n" +
+          "Méthode : on vérifie si le même coefficient multiplicateur relie les deux grandeurs.\n\nCalcul : " +
+          ("Réduire de 30 %, c’est garder 70 %, donc multiplier par 0,7.") +
+          "\n\nConclusion : la valeur trouvée respecte la situation de proportionnalité.",
     tags: ["proportionnalite", "coefficient_multiplicateur", "reduction"],
   },
   {
@@ -737,7 +815,10 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(coeff)],
         comparator: "number_equal",
-        explanation: `1 + ${p}/100 = ${coeff}.`,
+        explanation: "Définition : deux grandeurs sont proportionnelles quand on passe de l’une à l’autre en multipliant toujours par le même nombre.\n\n" +
+          "Méthode : on vérifie si le même coefficient multiplicateur relie les deux grandeurs.\n\nCalcul : " +
+          (`1 + ${p}/100 = ${coeff}.`) +
+          "\n\nConclusion : la valeur trouvée respecte la situation de proportionnalité.",
       };
     },
   },
@@ -761,7 +842,10 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(coeff)],
         comparator: "number_equal",
-        explanation: `1 - ${p}/100 = ${coeff}.`,
+        explanation: "Définition : deux grandeurs sont proportionnelles quand on passe de l’une à l’autre en multipliant toujours par le même nombre.\n\n" +
+          "Méthode : on vérifie si le même coefficient multiplicateur relie les deux grandeurs.\n\nCalcul : " +
+          (`1 - ${p}/100 = ${coeff}.`) +
+          "\n\nConclusion : la valeur trouvée respecte la situation de proportionnalité.",
       };
     },
   },
@@ -785,7 +869,10 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(p)],
         comparator: "number_equal",
-        explanation: `${coeff} = 1 + ${p}/100. Cela correspond à une augmentation de ${p} %.`,
+        explanation: "Définition : deux grandeurs sont proportionnelles quand on passe de l’une à l’autre en multipliant toujours par le même nombre.\n\n" +
+          "Méthode : on vérifie si le même coefficient multiplicateur relie les deux grandeurs.\n\nCalcul : " +
+          (`${coeff} = 1 + ${p}/100. Cela correspond à une augmentation de ${p} %.`) +
+          "\n\nConclusion : la valeur trouvée respecte la situation de proportionnalité.",
       };
     },
   },
@@ -808,7 +895,10 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     expected: ["115 €"],
     comparator: "mcq_exact",
     hint: "100 € + 15 % de 100 €.",
-    explanation: "15 % de 100 € vaut 15 €. Le nouveau prix est 100 + 15 = 115 €.",
+    explanation: "Définition : deux grandeurs sont proportionnelles quand on passe de l’une à l’autre en multipliant toujours par le même nombre.\n\n" +
+          "Méthode : on vérifie si le même coefficient multiplicateur relie les deux grandeurs.\n\nCalcul : " +
+          ("15 % de 100 € vaut 15 €. Le nouveau prix est 100 + 15 = 115 €.") +
+          "\n\nConclusion : la valeur trouvée respecte la situation de proportionnalité.",
     tags: ["proportionnalite", "evolution", "augmentation"],
   },
   {
@@ -826,7 +916,10 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     expected: ["60 €"],
     comparator: "mcq_exact",
     hint: "25 % de 80 vaut 20.",
-    explanation: "25 % de 80 € vaut 20 €. Le nouveau prix est 80 - 20 = 60 €.",
+    explanation: "Définition : deux grandeurs sont proportionnelles quand on passe de l’une à l’autre en multipliant toujours par le même nombre.\n\n" +
+          "Méthode : on vérifie si le même coefficient multiplicateur relie les deux grandeurs.\n\nCalcul : " +
+          ("25 % de 80 € vaut 20 €. Le nouveau prix est 80 - 20 = 60 €.") +
+          "\n\nConclusion : la valeur trouvée respecte la situation de proportionnalité.",
     tags: ["proportionnalite", "evolution", "reduction"],
   },
   {
@@ -850,7 +943,10 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(result)],
         comparator: "number_equal",
-        explanation: `Coefficient multiplicateur : ${1 + p / 100}. Nouveau prix : ${initial} × ${1 + p / 100} = ${result} €.`,
+        explanation: "Définition : deux grandeurs sont proportionnelles quand on passe de l’une à l’autre en multipliant toujours par le même nombre.\n\n" +
+          "Méthode : on vérifie si le même coefficient multiplicateur relie les deux grandeurs.\n\nCalcul : " +
+          (`Coefficient multiplicateur : ${1 + p / 100}. Nouveau prix : ${initial} × ${1 + p / 100} = ${result} €.`) +
+          "\n\nConclusion : la valeur trouvée respecte la situation de proportionnalité.",
       };
     },
   },
@@ -875,7 +971,10 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(result)],
         comparator: "number_equal",
-        explanation: `Coefficient multiplicateur : ${1 - p / 100}. Nouveau prix : ${initial} × ${1 - p / 100} = ${result} €.`,
+        explanation: "Définition : deux grandeurs sont proportionnelles quand on passe de l’une à l’autre en multipliant toujours par le même nombre.\n\n" +
+          "Méthode : on vérifie si le même coefficient multiplicateur relie les deux grandeurs.\n\nCalcul : " +
+          (`Coefficient multiplicateur : ${1 - p / 100}. Nouveau prix : ${initial} × ${1 - p / 100} = ${result} €.`) +
+          "\n\nConclusion : la valeur trouvée respecte la situation de proportionnalité.",
       };
     },
   },
@@ -900,7 +999,10 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(result)],
         comparator: "number_equal",
-        explanation: `${initial} × ${1 + p / 100} = ${result} €.`,
+        explanation: "Définition : deux grandeurs sont proportionnelles quand on passe de l’une à l’autre en multipliant toujours par le même nombre.\n\n" +
+          "Méthode : on vérifie si le même coefficient multiplicateur relie les deux grandeurs.\n\nCalcul : " +
+          (`${initial} × ${1 + p / 100} = ${result} €.`) +
+          "\n\nConclusion : la valeur trouvée respecte la situation de proportionnalité.",
       };
     },
   },
@@ -925,7 +1027,10 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(p)],
         comparator: "number_equal",
-        explanation: `L’augmentation est ${newPrice - oldPrice} €. Le taux vaut (${newPrice - oldPrice} ÷ ${oldPrice}) × 100 = ${p} %.`,
+        explanation: "Définition : deux grandeurs sont proportionnelles quand on passe de l’une à l’autre en multipliant toujours par le même nombre.\n\n" +
+          "Méthode : on vérifie si le même coefficient multiplicateur relie les deux grandeurs.\n\nCalcul : " +
+          (`L’augmentation est ${newPrice - oldPrice} €. Le taux vaut (${newPrice - oldPrice} ÷ ${oldPrice}) × 100 = ${p} %.`) +
+          "\n\nConclusion : la valeur trouvée respecte la situation de proportionnalité.",
       };
     },
   },
@@ -943,7 +1048,10 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     expected: ["100", "20", "80", "0,8"],
     comparator: "contains_keyword",
     hint: "Après une baisse de 20 %, il reste 80 %.",
-    explanation: "Une baisse de 20 % signifie qu’il reste 80 % de la valeur initiale. Or 80 % = 80/100 = 0,8.",
+    explanation: "Définition : deux grandeurs sont proportionnelles quand on passe de l’une à l’autre en multipliant toujours par le même nombre.\n\n" +
+          "Méthode : on vérifie si le même coefficient multiplicateur relie les deux grandeurs.\n\nCalcul : " +
+          ("Une baisse de 20 % signifie qu’il reste 80 % de la valeur initiale. Or 80 % = 80/100 = 0,8.") +
+          "\n\nConclusion : la valeur trouvée respecte la situation de proportionnalité.",
     tags: ["proportionnalite", "evolution", "open"],
   },
 
@@ -973,7 +1081,10 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(p2)],
         comparator: "number_equal",
-        explanation: `Le prix au kg est ${p1} ÷ ${kg1} = ${unit} €. Donc ${kg2} kg coûtent ${p2} €.`,
+        explanation: "Définition : deux grandeurs sont proportionnelles quand on passe de l’une à l’autre en multipliant toujours par le même nombre.\n\n" +
+          "Méthode : on vérifie si le même coefficient multiplicateur relie les deux grandeurs.\n\nCalcul : " +
+          (`Le prix au kg est ${p1} ÷ ${kg1} = ${unit} €. Donc ${kg2} kg coûtent ${p2} €.`) +
+          "\n\nConclusion : la valeur trouvée respecte la situation de proportionnalité.",
       };
     },
   },
@@ -998,7 +1109,10 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(distance)],
         comparator: "number_equal",
-        explanation: `À vitesse constante, la distance est proportionnelle au temps : ${speed} × ${time} = ${distance} km.`,
+        explanation: "Définition : deux grandeurs sont proportionnelles quand on passe de l’une à l’autre en multipliant toujours par le même nombre.\n\n" +
+          "Méthode : on vérifie si le même coefficient multiplicateur relie les deux grandeurs.\n\nCalcul : " +
+          (`À vitesse constante, la distance est proportionnelle au temps : ${speed} × ${time} = ${distance} km.`) +
+          "\n\nConclusion : la valeur trouvée respecte la situation de proportionnalité.",
       };
     },
   },
@@ -1025,7 +1139,10 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(q2)],
         comparator: "number_equal",
-        explanation: `Par personne, il faut ${q1} ÷ ${people1} = ${gramsPerPerson} g. Donc pour ${people2} personnes : ${q2} g.`,
+        explanation: "Définition : deux grandeurs sont proportionnelles quand on passe de l’une à l’autre en multipliant toujours par le même nombre.\n\n" +
+          "Méthode : on vérifie si le même coefficient multiplicateur relie les deux grandeurs.\n\nCalcul : " +
+          (`Par personne, il faut ${q1} ÷ ${people1} = ${gramsPerPerson} g. Donc pour ${people2} personnes : ${q2} g.`) +
+          "\n\nConclusion : la valeur trouvée respecte la situation de proportionnalité.",
       };
     },
   },
@@ -1050,7 +1167,10 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(result)],
         comparator: "number_equal",
-        explanation: `${p} % de ${total} L = ${result} L.`,
+        explanation: "Définition : deux grandeurs sont proportionnelles quand on passe de l’une à l’autre en multipliant toujours par le même nombre.\n\n" +
+          "Méthode : on vérifie si le même coefficient multiplicateur relie les deux grandeurs.\n\nCalcul : " +
+          (`${p} % de ${total} L = ${result} L.`) +
+          "\n\nConclusion : la valeur trouvée respecte la situation de proportionnalité.",
       };
     },
   },
@@ -1068,7 +1188,10 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     expected: ["12", "4", "3", "7", "21"],
     comparator: "contains_keyword",
     hint: "Passe par le prix d’un cahier.",
-    explanation: "Un cahier coûte 12 ÷ 4 = 3 €. Donc 7 cahiers coûtent 7 × 3 = 21 €.",
+    explanation: "Définition : deux grandeurs sont proportionnelles quand on passe de l’une à l’autre en multipliant toujours par le même nombre.\n\n" +
+          "Méthode : on vérifie si le même coefficient multiplicateur relie les deux grandeurs.\n\nCalcul : " +
+          ("Un cahier coûte 12 ÷ 4 = 3 €. Donc 7 cahiers coûtent 7 × 3 = 21 €.") +
+          "\n\nConclusion : la valeur trouvée respecte la situation de proportionnalité.",
     tags: ["proportionnalite", "probleme", "open"],
   },
   {
@@ -1085,7 +1208,10 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     expected: ["coefficient", "multiplier", "ajouter"],
     comparator: "contains_keyword",
     hint: "La proportionnalité repose sur une multiplication, pas une addition.",
-    explanation: "Une situation proportionnelle utilise un coefficient multiplicatif constant. Ajouter toujours le même nombre décrit une relation additive, pas proportionnelle.",
+    explanation: "Définition : deux grandeurs sont proportionnelles quand on passe de l’une à l’autre en multipliant toujours par le même nombre.\n\n" +
+          "Méthode : on vérifie si le même coefficient multiplicateur relie les deux grandeurs.\n\nCalcul : " +
+          ("Une situation proportionnelle utilise un coefficient multiplicatif constant. Ajouter toujours le même nombre décrit une relation additive, pas proportionnelle.") +
+          "\n\nConclusion : la valeur trouvée respecte la situation de proportionnalité.",
     tags: ["proportionnalite", "probleme", "open", "piege"],
   },
 
@@ -1107,7 +1233,10 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     expected: ["non"],
     comparator: "mcq_exact",
     hint: "On ne doit pas ajouter, on doit multiplier par un même coefficient.",
-    explanation: "Non. Si 2 → 6, le coefficient est 3. Donc 5 → 15, pas 9.",
+    explanation: "Définition : deux grandeurs sont proportionnelles quand on passe de l’une à l’autre en multipliant toujours par le même nombre.\n\n" +
+          "Méthode : on vérifie si le même coefficient multiplicateur relie les deux grandeurs.\n\nCalcul : " +
+          ("Non. Si 2 → 6, le coefficient est 3. Donc 5 → 15, pas 9.") +
+          "\n\nConclusion : la valeur trouvée respecte la situation de proportionnalité.",
     tags: ["proportionnalite", "defi", "erreur"],
   },
   {
@@ -1125,7 +1254,10 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     expected: ["non"],
     comparator: "mcq_exact",
     hint: "La baisse de 20 % ne s’applique pas au prix initial, mais au prix augmenté.",
-    explanation: "Non. Par exemple, 100 € augmente de 20 % : 120 €. Puis 120 € baisse de 20 % : 96 €.",
+    explanation: "Définition : deux grandeurs sont proportionnelles quand on passe de l’une à l’autre en multipliant toujours par le même nombre.\n\n" +
+          "Méthode : on vérifie si le même coefficient multiplicateur relie les deux grandeurs.\n\nCalcul : " +
+          ("Non. Par exemple, 100 € augmente de 20 % : 120 €. Puis 120 € baisse de 20 % : 96 €.") +
+          "\n\nConclusion : la valeur trouvée respecte la situation de proportionnalité.",
     tags: ["proportionnalite", "defi", "evolution", "piege"],
   },
   {
@@ -1152,7 +1284,10 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
         choices: ["oui", "non"],
         expected: ["non"],
         comparator: "mcq_exact",
-        explanation: `Non. Le coefficient est ${k}, donc ${x2} devrait donner ${x2 * k}.`,
+        explanation: "Définition : deux grandeurs sont proportionnelles quand on passe de l’une à l’autre en multipliant toujours par le même nombre.\n\n" +
+          "Méthode : on vérifie si le même coefficient multiplicateur relie les deux grandeurs.\n\nCalcul : " +
+          (`Non. Le coefficient est ${k}, donc ${x2} devrait donner ${x2 * k}.`) +
+          "\n\nConclusion : la valeur trouvée respecte la situation de proportionnalité.",
       };
     },
   },
@@ -1178,7 +1313,10 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
         format: "short",
         expected: [formatNumber(result)],
         comparator: "number_equal",
-        explanation: `Prix final = ${initial} × ${1 + up / 100} × ${1 - down / 100} = ${formatNumber(result)} €.`,
+        explanation: "Définition : deux grandeurs sont proportionnelles quand on passe de l’une à l’autre en multipliant toujours par le même nombre.\n\n" +
+          "Méthode : on vérifie si le même coefficient multiplicateur relie les deux grandeurs.\n\nCalcul : " +
+          (`Prix final = ${initial} × ${1 + up / 100} × ${1 - down / 100} = ${formatNumber(result)} €.`) +
+          "\n\nConclusion : la valeur trouvée respecte la situation de proportionnalité.",
       };
     },
   },
@@ -1209,7 +1347,10 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
         choices: ["offre A", "offre B"],
         expected: [correct],
         comparator: "mcq_exact",
-        explanation: `Offre A : ${priceA} ÷ ${kgA} = ${unitA} €/kg. Offre B : ${priceB} ÷ ${kgB} = ${unitB} €/kg.`,
+        explanation: "Définition : deux grandeurs sont proportionnelles quand on passe de l’une à l’autre en multipliant toujours par le même nombre.\n\n" +
+          "Méthode : on vérifie si le même coefficient multiplicateur relie les deux grandeurs.\n\nCalcul : " +
+          (`Offre A : ${priceA} ÷ ${kgA} = ${unitA} €/kg. Offre B : ${priceB} ÷ ${kgB} = ${unitB} €/kg.`) +
+          "\n\nConclusion : la valeur trouvée respecte la situation de proportionnalité.",
       };
     },
   },
@@ -1227,7 +1368,10 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     expected: ["1,3", "100", "30"],
     comparator: "contains_keyword",
     hint: "Quand on augmente, on garde 100 % et on ajoute 30 %.",
-    explanation: "Augmenter de 30 %, c’est passer à 130 % de la valeur initiale, donc multiplier par 1,3.",
+    explanation: "Définition : deux grandeurs sont proportionnelles quand on passe de l’une à l’autre en multipliant toujours par le même nombre.\n\n" +
+          "Méthode : on vérifie si le même coefficient multiplicateur relie les deux grandeurs.\n\nCalcul : " +
+          ("Augmenter de 30 %, c’est passer à 130 % de la valeur initiale, donc multiplier par 1,3.") +
+          "\n\nConclusion : la valeur trouvée respecte la situation de proportionnalité.",
     tags: ["proportionnalite", "defi", "open", "erreur"],
   },
   {
@@ -1244,7 +1388,10 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     expected: ["75", "0,75", "reste"],
     comparator: "contains_keyword",
     hint: "Après une baisse de 25 %, il reste 75 %.",
-    explanation: "Une réduction de 25 % signifie qu’il reste 75 % de la valeur initiale. On multiplie donc par 0,75, pas par 25.",
+    explanation: "Définition : deux grandeurs sont proportionnelles quand on passe de l’une à l’autre en multipliant toujours par le même nombre.\n\n" +
+          "Méthode : on vérifie si le même coefficient multiplicateur relie les deux grandeurs.\n\nCalcul : " +
+          ("Une réduction de 25 % signifie qu’il reste 75 % de la valeur initiale. On multiplie donc par 0,75, pas par 25.") +
+          "\n\nConclusion : la valeur trouvée respecte la situation de proportionnalité.",
     tags: ["proportionnalite", "defi", "open", "erreur"],
   },
 ];
