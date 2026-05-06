@@ -33,7 +33,9 @@ export const perimetresBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Le périmètre, c’est le tour de la figure.",
     explanation:
-      "Le périmètre correspond à la longueur du contour d’une figure, c’est-à-dire tout son tour.",
+      "Définition : un périmètre mesure la longueur du contour d’une figure.\n\nMéthode : on repère tous les côtés du contour et on les exprime dans la même unité.\n\nCalcul : " +
+      ("Le périmètre correspond à la longueur du contour d’une figure, c’est-à-dire tout son tour.") +
+      "\n\nConclusion : on obtient la longueur totale du contour.",
     tags: ["perimetres", "comprendre", "qcm"],
   },
   {
@@ -52,7 +54,9 @@ export const perimetresBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Le périmètre est une longueur.",
     explanation:
-      "Le périmètre est une longueur. On l’exprime donc avec une unité de longueur, par exemple en centimètres.",
+      "Définition : un périmètre mesure la longueur du contour d’une figure.\n\nMéthode : on repère tous les côtés du contour et on les exprime dans la même unité.\n\nCalcul : " +
+      ("Le périmètre est une longueur. On l’exprime donc avec une unité de longueur, par exemple en centimètres.") +
+      "\n\nConclusion : on obtient la longueur totale du contour.",
     tags: ["perimetres", "comprendre", "qcm"],
   },
   {
@@ -71,7 +75,9 @@ export const perimetresBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Le périmètre se mesure en unités de longueur.",
     explanation:
-      "18 cm désigne une longueur. 18 cm² désigne une aire et 18 cm³ un volume. Un périmètre s’exprime donc ici en cm.",
+      "Définition : un périmètre mesure la longueur du contour d’une figure.\n\nMéthode : on repère tous les côtés du contour et on les exprime dans la même unité.\n\nCalcul : " +
+      ("18 cm désigne une longueur. 18 cm² désigne une aire et 18 cm³ un volume. Un périmètre s’exprime donc ici en cm.") +
+      "\n\nConclusion : on obtient la longueur totale du contour.",
     tags: ["perimetres", "comprendre", "qcm"],
   },
   {
@@ -90,7 +96,9 @@ export const perimetresBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Le tour d’une figure s’appelle le périmètre.",
     explanation:
-      "Le tour d’un jardin correspond à son contour. On mesure donc son périmètre.",
+      "Définition : un périmètre mesure la longueur du contour d’une figure.\n\nMéthode : on repère tous les côtés du contour et on les exprime dans la même unité.\n\nCalcul : " +
+      ("Le tour d’un jardin correspond à son contour. On mesure donc son périmètre.") +
+      "\n\nConclusion : on obtient la longueur totale du contour.",
     tags: ["perimetres", "comprendre", "reunion", "qcm"],
   },
   {
@@ -109,7 +117,9 @@ export const perimetresBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Attention à ne pas faire longueur × largeur.",
     explanation:
-      "Le périmètre du rectangle vaut 2 × (5 + 4) = 18 cm. Le calcul 5 × 4 = 20 donne l’aire, pas le périmètre.",
+      "Définition : un périmètre mesure la longueur du contour d’une figure.\n\nMéthode : on repère tous les côtés du contour et on les exprime dans la même unité.\n\nCalcul : " +
+      ("Le périmètre du rectangle vaut 2 × (5 + 4) = 18 cm. Le calcul 5 × 4 = 20 donne l’aire, pas le périmètre.") +
+      "\n\nConclusion : on obtient la longueur totale du contour.",
     tags: ["perimetres", "comprendre", "confusion", "qcm"],
   },
 
@@ -131,7 +141,9 @@ export const perimetresBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Périmètre du carré = 4 × côté.",
     explanation:
-      "Un carré a 4 côtés égaux. Avec un côté de 5 cm, on calcule 4 × 5 = 20 cm.",
+      "Définition : un périmètre mesure la longueur du contour d’une figure.\n\nMéthode : on repère tous les côtés du contour et on les exprime dans la même unité.\n\nCalcul : " +
+      ("Un carré a 4 côtés égaux. Avec un côté de 5 cm, on calcule 4 × 5 = 20 cm.") +
+      "\n\nConclusion : on obtient la longueur totale du contour.",
     tags: ["perimetres", "carre"],
   },
   {
@@ -149,7 +161,9 @@ export const perimetresBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Le carré a 4 côtés égaux.",
     explanation:
-      "Le périmètre d’un carré est égal à 4 fois la longueur d’un côté. Ici, 4 × 7 = 28 cm.",
+      "Définition : un périmètre mesure la longueur du contour d’une figure.\n\nMéthode : on repère tous les côtés du contour et on les exprime dans la même unité.\n\nCalcul : " +
+      ("Le périmètre d’un carré est égal à 4 fois la longueur d’un côté. Ici, 4 × 7 = 28 cm.") +
+      "\n\nConclusion : on obtient la longueur totale du contour.",
     tags: ["perimetres", "carre"],
   },
   {
@@ -168,7 +182,9 @@ export const perimetresBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Pour le périmètre, on additionne les 4 côtés.",
     explanation:
-      "Un carré a 4 côtés de 6 cm. Son périmètre vaut donc 6 + 6 + 6 + 6 = 24 cm.",
+      "Définition : un périmètre mesure la longueur du contour d’une figure.\n\nMéthode : on repère tous les côtés du contour et on les exprime dans la même unité.\n\nCalcul : " +
+      ("Un carré a 4 côtés de 6 cm. Son périmètre vaut donc 6 + 6 + 6 + 6 = 24 cm.") +
+      "\n\nConclusion : on obtient la longueur totale du contour.",
     tags: ["perimetres", "carre", "qcm"],
   },
   {
@@ -187,7 +203,9 @@ export const perimetresBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Attention à ne pas confondre périmètre et aire.",
     explanation:
-      "Le périmètre d’un carré de côté 9 cm vaut 4 × 9 = 36 cm. 81 correspondrait à l’aire.",
+      "Définition : un périmètre mesure la longueur du contour d’une figure.\n\nMéthode : on repère tous les côtés du contour et on les exprime dans la même unité.\n\nCalcul : " +
+      ("Le périmètre d’un carré de côté 9 cm vaut 4 × 9 = 36 cm. 81 correspondrait à l’aire.") +
+      "\n\nConclusion : on obtient la longueur totale du contour.",
     tags: ["perimetres", "carre", "qcm"],
   },
   {
@@ -205,7 +223,9 @@ export const perimetresBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Le carré a 4 côtés de même longueur.",
     explanation:
-      "Le côté AB mesure 5 cm et tous les côtés d’un carré sont égaux. Le périmètre vaut donc 4 × 5 = 20 cm.",
+      "Définition : un périmètre mesure la longueur du contour d’une figure.\n\nMéthode : on repère tous les côtés du contour et on les exprime dans la même unité.\n\nCalcul : " +
+      ("Le côté AB mesure 5 cm et tous les côtés d’un carré sont égaux. Le périmètre vaut donc 4 × 5 = 20 cm.") +
+      "\n\nConclusion : on obtient la longueur totale du contour.",
     tags: ["perimetres", "carre", "canvas"],
     canvas: {
       kind: "quadrilatere",
@@ -249,7 +269,9 @@ export const perimetresBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Périmètre du rectangle = 2 × longueur + 2 × largeur.",
     explanation:
-      "Un rectangle a 2 longueurs et 2 largeurs. Ici, 7 + 7 + 3 + 3 = 20 cm.",
+      "Définition : un périmètre mesure la longueur du contour d’une figure.\n\nMéthode : on repère tous les côtés du contour et on les exprime dans la même unité.\n\nCalcul : " +
+      ("Un rectangle a 2 longueurs et 2 largeurs. Ici, 7 + 7 + 3 + 3 = 20 cm.") +
+      "\n\nConclusion : on obtient la longueur totale du contour.",
     tags: ["perimetres", "rectangle"],
   },
   {
@@ -267,7 +289,9 @@ export const perimetresBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Additionne les 4 côtés ou fais 2 × (L + l).",
     explanation:
-      "Le périmètre du rectangle vaut 2 × (8 + 4) = 2 × 12 = 24 cm.",
+      "Définition : un périmètre mesure la longueur du contour d’une figure.\n\nMéthode : on repère tous les côtés du contour et on les exprime dans la même unité.\n\nCalcul : " +
+      ("Le périmètre du rectangle vaut 2 × (8 + 4) = 2 × 12 = 24 cm.") +
+      "\n\nConclusion : on obtient la longueur totale du contour.",
     tags: ["perimetres", "rectangle"],
   },
   {
@@ -285,7 +309,9 @@ export const perimetresBank: TutorBankItemV4[] = [
     expected: ["14 cm"],
     comparator: "mcq_exact",
     hint: "Il y a 2 longueurs et 2 largeurs.",
-    explanation: "Le périmètre vaut 5 + 5 + 2 + 2 = 14 cm.",
+    explanation: "Définition : un périmètre mesure la longueur du contour d’une figure.\n\nMéthode : on repère tous les côtés du contour et on les exprime dans la même unité.\n\nCalcul : " +
+      ("Le périmètre vaut 5 + 5 + 2 + 2 = 14 cm.") +
+      "\n\nConclusion : on obtient la longueur totale du contour.",
     tags: ["perimetres", "rectangle", "qcm"],
   },
   {
@@ -303,7 +329,9 @@ export const perimetresBank: TutorBankItemV4[] = [
     expected: ["20 cm"],
     comparator: "mcq_exact",
     hint: "Le périmètre est le tour complet de la figure.",
-    explanation: "On additionne tous les côtés : 6 + 6 + 4 + 4 = 20 cm.",
+    explanation: "Définition : un périmètre mesure la longueur du contour d’une figure.\n\nMéthode : on repère tous les côtés du contour et on les exprime dans la même unité.\n\nCalcul : " +
+      ("On additionne tous les côtés : 6 + 6 + 4 + 4 = 20 cm.") +
+      "\n\nConclusion : on obtient la longueur totale du contour.",
     tags: ["perimetres", "rectangle", "qcm"],
   },
   {
@@ -322,7 +350,9 @@ export const perimetresBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "24 correspond à l’aire, pas au périmètre.",
     explanation:
-      "Le périmètre vaut 8 + 8 + 3 + 3 = 22 cm. 24 correspond au produit 8 × 3, donc à l’aire.",
+      "Définition : un périmètre mesure la longueur du contour d’une figure.\n\nMéthode : on repère tous les côtés du contour et on les exprime dans la même unité.\n\nCalcul : " +
+      ("Le périmètre vaut 8 + 8 + 3 + 3 = 22 cm. 24 correspond au produit 8 × 3, donc à l’aire.") +
+      "\n\nConclusion : on obtient la longueur totale du contour.",
     tags: ["perimetres", "rectangle", "confusion", "qcm"],
   },
   {
@@ -341,7 +371,9 @@ export const perimetresBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Il y a deux longueurs et deux largeurs.",
     explanation:
-      "Le périmètre vaut 2 × (6 + 2) = 16 cm. 8 cm correspond seulement à 6 + 2.",
+      "Définition : un périmètre mesure la longueur du contour d’une figure.\n\nMéthode : on repère tous les côtés du contour et on les exprime dans la même unité.\n\nCalcul : " +
+      ("Le périmètre vaut 2 × (6 + 2) = 16 cm. 8 cm correspond seulement à 6 + 2.") +
+      "\n\nConclusion : on obtient la longueur totale du contour.",
     tags: ["perimetres", "rectangle", "erreur", "qcm"],
   },
   {
@@ -359,7 +391,9 @@ export const perimetresBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Il y a 2 côtés de 6 cm et 2 côtés de 3 cm.",
     explanation:
-      "Le rectangle a deux côtés de 6 cm et deux côtés de 3 cm. Son périmètre vaut 6 + 6 + 3 + 3 = 18 cm.",
+      "Définition : un périmètre mesure la longueur du contour d’une figure.\n\nMéthode : on repère tous les côtés du contour et on les exprime dans la même unité.\n\nCalcul : " +
+      ("Le rectangle a deux côtés de 6 cm et deux côtés de 3 cm. Son périmètre vaut 6 + 6 + 3 + 3 = 18 cm.") +
+      "\n\nConclusion : on obtient la longueur totale du contour.",
     tags: ["perimetres", "rectangle", "canvas"],
     canvas: {
       kind: "quadrilatere",
@@ -404,7 +438,9 @@ export const perimetresBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Additionne toutes les longueurs du contour.",
     explanation:
-      "Le périmètre d’une figure se calcule en additionnant toutes les longueurs de son contour : 3 + 4 + 5 + 6 = 18 cm.",
+      "Définition : un périmètre mesure la longueur du contour d’une figure.\n\nMéthode : on repère tous les côtés du contour et on les exprime dans la même unité.\n\nCalcul : " +
+      ("Le périmètre d’une figure se calcule en additionnant toutes les longueurs de son contour : 3 + 4 + 5 + 6 = 18 cm.") +
+      "\n\nConclusion : on obtient la longueur totale du contour.",
     tags: ["perimetres", "figure"],
   },
   {
@@ -422,7 +458,9 @@ export const perimetresBank: TutorBankItemV4[] = [
     expected: ["14 cm"],
     comparator: "mcq_exact",
     hint: "Additionne tous les côtés.",
-    explanation: "Le périmètre vaut 2 + 2 + 3 + 3 + 4 = 14 cm.",
+    explanation: "Définition : un périmètre mesure la longueur du contour d’une figure.\n\nMéthode : on repère tous les côtés du contour et on les exprime dans la même unité.\n\nCalcul : " +
+      ("Le périmètre vaut 2 + 2 + 3 + 3 + 4 = 14 cm.") +
+      "\n\nConclusion : on obtient la longueur totale du contour.",
     tags: ["perimetres", "figure", "qcm"],
   },
   {
@@ -440,7 +478,9 @@ export const perimetresBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Compte seulement le contour extérieur.",
     explanation:
-      "La figure est un carré de 2 cases sur 2. Son contour extérieur compte 8 unités.",
+      "Définition : un périmètre mesure la longueur du contour d’une figure.\n\nMéthode : on repère tous les côtés du contour et on les exprime dans la même unité.\n\nCalcul : " +
+      ("La figure est un carré de 2 cases sur 2. Son contour extérieur compte 8 unités.") +
+      "\n\nConclusion : on obtient la longueur totale du contour.",
     tags: ["perimetres", "figure", "canvas"],
     canvas: {
       kind: "figure_libre",
@@ -477,7 +517,9 @@ export const perimetresBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Compte le contour extérieur sans compter l’intérieur.",
     explanation:
-      "On suit tout le contour extérieur de la figure en L. On obtient un périmètre total de 10 unités.",
+      "Définition : un périmètre mesure la longueur du contour d’une figure.\n\nMéthode : on repère tous les côtés du contour et on les exprime dans la même unité.\n\nCalcul : " +
+      ("On suit tout le contour extérieur de la figure en L. On obtient un périmètre total de 10 unités.") +
+      "\n\nConclusion : on obtient la longueur totale du contour.",
     tags: ["perimetres", "figure", "canvas", "qcm"],
     canvas: {
       kind: "figure_libre",
@@ -515,7 +557,9 @@ export const perimetresBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Ne compte pas les côtés à l’intérieur.",
     explanation:
-      "Seul le contour extérieur compte. Les segments internes ne font pas partie du périmètre. Le périmètre de cette figure est 12 unités.",
+      "Définition : un périmètre mesure la longueur du contour d’une figure.\n\nMéthode : on repère tous les côtés du contour et on les exprime dans la même unité.\n\nCalcul : " +
+      ("Seul le contour extérieur compte. Les segments internes ne font pas partie du périmètre. Le périmètre de cette figure est 12 unités.") +
+      "\n\nConclusion : on obtient la longueur totale du contour.",
     tags: ["perimetres", "figure", "canvas", "erreur", "qcm"],
     canvas: {
       kind: "figure_libre",
@@ -556,7 +600,9 @@ export const perimetresBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Il faut calculer le périmètre du rectangle.",
     explanation:
-      "Le grillage doit faire tout le tour du jardin. On calcule donc le périmètre : 2 × (8 + 3) = 22 m.",
+      "Définition : un périmètre mesure la longueur du contour d’une figure.\n\nMéthode : on repère tous les côtés du contour et on les exprime dans la même unité.\n\nCalcul : " +
+      ("Le grillage doit faire tout le tour du jardin. On calcule donc le périmètre : 2 × (8 + 3) = 22 m.") +
+      "\n\nConclusion : on obtient la longueur totale du contour.",
     tags: ["perimetres", "probleme"],
   },
   {
@@ -573,7 +619,9 @@ export const perimetresBank: TutorBankItemV4[] = [
     expected: ["28", "28 m", "28m"],
     comparator: "number_equal",
     hint: "Périmètre du rectangle = 2 × (L + l).",
-    explanation: "On calcule le tour du terrain : 2 × (10 + 4) = 28 m.",
+    explanation: "Définition : un périmètre mesure la longueur du contour d’une figure.\n\nMéthode : on repère tous les côtés du contour et on les exprime dans la même unité.\n\nCalcul : " +
+      ("On calcule le tour du terrain : 2 × (10 + 4) = 28 m.") +
+      "\n\nConclusion : on obtient la longueur totale du contour.",
     tags: ["perimetres", "probleme", "reunion"],
   },
   {
@@ -592,7 +640,9 @@ export const perimetresBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Le carré a 4 côtés égaux.",
     explanation:
-      "Le tour de la cour correspond au périmètre du carré : 4 × 12 = 48 m.",
+      "Définition : un périmètre mesure la longueur du contour d’une figure.\n\nMéthode : on repère tous les côtés du contour et on les exprime dans la même unité.\n\nCalcul : " +
+      ("Le tour de la cour correspond au périmètre du carré : 4 × 12 = 48 m.") +
+      "\n\nConclusion : on obtient la longueur totale du contour.",
     tags: ["perimetres", "probleme", "qcm"],
   },
   {
@@ -611,7 +661,9 @@ export const perimetresBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Calcule 2 × (9 + 2,5).",
     explanation:
-      "Le périmètre vaut 2 × (9 + 2,5) = 2 × 11,5 = 23 m.",
+      "Définition : un périmètre mesure la longueur du contour d’une figure.\n\nMéthode : on repère tous les côtés du contour et on les exprime dans la même unité.\n\nCalcul : " +
+      ("Le périmètre vaut 2 × (9 + 2,5) = 2 × 11,5 = 23 m.") +
+      "\n\nConclusion : on obtient la longueur totale du contour.",
     tags: ["perimetres", "probleme", "qcm", "decimaux"],
   },
 
@@ -633,7 +685,9 @@ export const perimetresBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "Le périmètre mesure un contour, pas une surface.",
     explanation:
-      "Le périmètre mesure une longueur, donc il s’exprime en cm, m, etc. Les cm² servent à mesurer une aire, c’est-à-dire une surface.",
+      "Définition : un périmètre mesure la longueur du contour d’une figure.\n\nMéthode : on repère tous les côtés du contour et on les exprime dans la même unité.\n\nCalcul : " +
+      ("Le périmètre mesure une longueur, donc il s’exprime en cm, m, etc. Les cm² servent à mesurer une aire, c’est-à-dire une surface.") +
+      "\n\nConclusion : on obtient la longueur totale du contour.",
     tags: ["perimetres", "defi", "raisonnement"],
   },
   {
@@ -651,7 +705,9 @@ export const perimetresBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "Compare 4 × 6 et 4 × 4.",
     explanation:
-      "Un carré de côté 6 cm a pour périmètre 4 × 6 = 24 cm. Un carré de côté 4 cm a pour périmètre 4 × 4 = 16 cm. Comme 24 est plus grand que 16, son périmètre est plus grand.",
+      "Définition : un périmètre mesure la longueur du contour d’une figure.\n\nMéthode : on repère tous les côtés du contour et on les exprime dans la même unité.\n\nCalcul : " +
+      ("Un carré de côté 6 cm a pour périmètre 4 × 6 = 24 cm. Un carré de côté 4 cm a pour périmètre 4 × 4 = 16 cm. Comme 24 est plus grand que 16, son périmètre est plus grand.") +
+      "\n\nConclusion : on obtient la longueur totale du contour.",
     tags: ["perimetres", "defi", "raisonnement"],
   },
   {
@@ -669,7 +725,9 @@ export const perimetresBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "La longueur apparaît deux fois dans le périmètre.",
     explanation:
-      "Le périmètre d’un rectangle vaut 2 × longueur + 2 × largeur. Si la longueur augmente de 1 cm, elle augmente en fait deux côtés. Le périmètre augmente donc de 2 cm.",
+      "Définition : un périmètre mesure la longueur du contour d’une figure.\n\nMéthode : on repère tous les côtés du contour et on les exprime dans la même unité.\n\nCalcul : " +
+      ("Le périmètre d’un rectangle vaut 2 × longueur + 2 × largeur. Si la longueur augmente de 1 cm, elle augmente en fait deux côtés. Le périmètre augmente donc de 2 cm.") +
+      "\n\nConclusion : on obtient la longueur totale du contour.",
     tags: ["perimetres", "defi", "raisonnement"],
   },
   {
@@ -688,7 +746,9 @@ export const perimetresBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Compare par exemple 3 × 4 et 2 × 6.",
     explanation:
-      "Non. Deux rectangles peuvent avoir la même aire sans avoir le même périmètre. Par exemple, 3 × 4 et 2 × 6 ont tous deux une aire de 12, mais leurs périmètres sont différents.",
+      "Définition : un périmètre mesure la longueur du contour d’une figure.\n\nMéthode : on repère tous les côtés du contour et on les exprime dans la même unité.\n\nCalcul : " +
+      ("Non. Deux rectangles peuvent avoir la même aire sans avoir le même périmètre. Par exemple, 3 × 4 et 2 × 6 ont tous deux une aire de 12, mais leurs périmètres sont différents.") +
+      "\n\nConclusion : on obtient la longueur totale du contour.",
     tags: ["perimetres", "defi", "qcm", "raisonnement"],
   },
   {
@@ -706,7 +766,9 @@ export const perimetresBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Dans un carré, les 4 côtés sont égaux.",
     explanation:
-      "Le périmètre d’un carré vaut 4 × côté. Donc le côté vaut 28 ÷ 4 = 7 cm.",
+      "Définition : un périmètre mesure la longueur du contour d’une figure.\n\nMéthode : on repère tous les côtés du contour et on les exprime dans la même unité.\n\nCalcul : " +
+      ("Le périmètre d’un carré vaut 4 × côté. Donc le côté vaut 28 ÷ 4 = 7 cm.") +
+      "\n\nConclusion : on obtient la longueur totale du contour.",
     tags: ["perimetres", "defi", "inverse"],
   },
   {
@@ -724,7 +786,9 @@ export const perimetresBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "6 + 6 = 12 cm. Il reste 6 cm pour les deux largeurs.",
     explanation:
-      "Le périmètre vaut 18 cm. Les deux longueurs valent déjà 6 + 6 = 12 cm. Il reste donc 6 cm pour les deux largeurs, soit 3 cm pour une largeur.",
+      "Définition : un périmètre mesure la longueur du contour d’une figure.\n\nMéthode : on repère tous les côtés du contour et on les exprime dans la même unité.\n\nCalcul : " +
+      ("Le périmètre vaut 18 cm. Les deux longueurs valent déjà 6 + 6 = 12 cm. Il reste donc 6 cm pour les deux largeurs, soit 3 cm pour une largeur.") +
+      "\n\nConclusion : on obtient la longueur totale du contour.",
     tags: ["perimetres", "defi", "inverse"],
   },
   {
@@ -748,7 +812,9 @@ export const perimetresBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Calcule les trois périmètres.",
     explanation:
-      "6 sur 2 donne 2 × (6 + 2) = 16 cm. 5 sur 3 donne 2 × (5 + 3) = 16 cm. 4 sur 4 donne 2 × (4 + 4) = 16 cm. Les trois rectangles ont donc le même périmètre.",
+      "Définition : un périmètre mesure la longueur du contour d’une figure.\n\nMéthode : on repère tous les côtés du contour et on les exprime dans la même unité.\n\nCalcul : " +
+      ("6 sur 2 donne 2 × (6 + 2) = 16 cm. 5 sur 3 donne 2 × (5 + 3) = 16 cm. 4 sur 4 donne 2 × (4 + 4) = 16 cm. Les trois rectangles ont donc le même périmètre.") +
+      "\n\nConclusion : on obtient la longueur totale du contour.",
     tags: ["perimetres", "defi", "qcm", "comparaison"],
   },
   {
@@ -767,7 +833,9 @@ export const perimetresBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Le périmètre du carré vaut 4 × côté.",
     explanation:
-      "Si le côté est multiplié par 2, alors le périmètre 4 × côté est lui aussi multiplié par 2. Le périmètre double.",
+      "Définition : un périmètre mesure la longueur du contour d’une figure.\n\nMéthode : on repère tous les côtés du contour et on les exprime dans la même unité.\n\nCalcul : " +
+      ("Si le côté est multiplié par 2, alors le périmètre 4 × côté est lui aussi multiplié par 2. Le périmètre double.") +
+      "\n\nConclusion : on obtient la longueur totale du contour.",
     tags: ["perimetres", "defi", "qcm", "proportionnalite"],
   },
   {
@@ -786,7 +854,9 @@ export const perimetresBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Le même contour total ne force pas la même forme.",
     explanation:
-      "Oui. Deux figures différentes peuvent avoir le même périmètre. Le périmètre donne seulement la longueur totale du contour, pas la forme exacte.",
+      "Définition : un périmètre mesure la longueur du contour d’une figure.\n\nMéthode : on repère tous les côtés du contour et on les exprime dans la même unité.\n\nCalcul : " +
+      ("Oui. Deux figures différentes peuvent avoir le même périmètre. Le périmètre donne seulement la longueur totale du contour, pas la forme exacte.") +
+      "\n\nConclusion : on obtient la longueur totale du contour.",
     tags: ["perimetres", "defi", "qcm", "raisonnement"],
   },
   {
@@ -804,7 +874,9 @@ export const perimetresBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Compte uniquement le contour extérieur.",
     explanation:
-      "La figure recouvre 5 cases en forme de L. En suivant uniquement le contour extérieur, on obtient un périmètre de 10 unités.",
+      "Définition : un périmètre mesure la longueur du contour d’une figure.\n\nMéthode : on repère tous les côtés du contour et on les exprime dans la même unité.\n\nCalcul : " +
+      ("La figure recouvre 5 cases en forme de L. En suivant uniquement le contour extérieur, on obtient un périmètre de 10 unités.") +
+      "\n\nConclusion : on obtient la longueur totale du contour.",
     tags: ["perimetres", "defi", "canvas"],
     canvas: {
       kind: "figure_libre",
@@ -842,7 +914,9 @@ export const perimetresBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Le carré de côté 3 a pour périmètre 12 unités.",
     explanation:
-      "Un carré de côté 3 a pour périmètre 4 × 3 = 12 unités. En comptant le contour de la figure, on trouve aussi 12 unités. Les deux périmètres sont donc égaux.",
+      "Définition : un périmètre mesure la longueur du contour d’une figure.\n\nMéthode : on repère tous les côtés du contour et on les exprime dans la même unité.\n\nCalcul : " +
+      ("Un carré de côté 3 a pour périmètre 4 × 3 = 12 unités. En comptant le contour de la figure, on trouve aussi 12 unités. Les deux périmètres sont donc égaux.") +
+      "\n\nConclusion : on obtient la longueur totale du contour.",
     tags: ["perimetres", "defi", "canvas", "qcm", "comparaison"],
     canvas: {
       kind: "figure_libre",
@@ -879,7 +953,9 @@ export const perimetresBank: TutorBankItemV4[] = [
     comparator: "exact_text",
     hint: "Choisis un nombre strictement entre 20 et 25.",
     explanation:
-      "Un périmètre strictement compris entre 20 cm et 25 cm peut être 21 cm, 22 cm, 23 cm ou 24 cm.",
+      "Définition : un périmètre mesure la longueur du contour d’une figure.\n\nMéthode : on repère tous les côtés du contour et on les exprime dans la même unité.\n\nCalcul : " +
+      ("Un périmètre strictement compris entre 20 cm et 25 cm peut être 21 cm, 22 cm, 23 cm ou 24 cm.") +
+      "\n\nConclusion : on obtient la longueur totale du contour.",
     tags: ["perimetres", "defi", "raisonnement"],
   },
   {
@@ -896,7 +972,9 @@ export const perimetresBank: TutorBankItemV4[] = [
     expected: ["24", "24 m", "24m"],
     comparator: "number_equal",
     hint: "Le rectangle a deux longueurs et deux largeurs.",
-    explanation: "Le périmètre du terrain vaut 2 × (7 + 5) = 24 m.",
+    explanation: "Définition : un périmètre mesure la longueur du contour d’une figure.\n\nMéthode : on repère tous les côtés du contour et on les exprime dans la même unité.\n\nCalcul : " +
+      ("Le périmètre du terrain vaut 2 × (7 + 5) = 24 m.") +
+      "\n\nConclusion : on obtient la longueur totale du contour.",
     tags: ["perimetres", "defi", "reunion"],
   },
 
@@ -922,7 +1000,9 @@ export const perimetresBank: TutorBankItemV4[] = [
         expected: ["cm"],
         comparator: "mcq_exact",
         explanation:
-          "Le périmètre mesure une longueur. Il s’exprime donc avec une unité de longueur, par exemple en cm.",
+          "Définition : un périmètre mesure la longueur du contour d’une figure.\n\nMéthode : on repère tous les côtés du contour et on les exprime dans la même unité.\n\nCalcul : " +
+      ("Le périmètre mesure une longueur. Il s’exprime donc avec une unité de longueur, par exemple en cm.") +
+      "\n\nConclusion : on obtient la longueur totale du contour.",
       };
     },
   },
@@ -950,7 +1030,9 @@ export const perimetresBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(p), `${p} cm`, `${p}cm`],
         comparator: "number_equal",
-        explanation: `Le périmètre du carré vaut 4 × ${c} = ${p} cm.`,
+        explanation: "Définition : un périmètre mesure la longueur du contour d’une figure.\n\nMéthode : on repère tous les côtés du contour et on les exprime dans la même unité.\n\nCalcul : " +
+      (`Le périmètre du carré vaut 4 × ${c} = ${p} cm.`) +
+      "\n\nConclusion : on obtient la longueur totale du contour.",
       };
     },
   },
@@ -974,7 +1056,9 @@ export const perimetresBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(p), `${p} cm`, `${p}cm`],
         comparator: "number_equal",
-        explanation: `Comme le carré a 4 côtés égaux, son périmètre vaut 4 × ${c} = ${p} cm.`,
+        explanation: "Définition : un périmètre mesure la longueur du contour d’une figure.\n\nMéthode : on repère tous les côtés du contour et on les exprime dans la même unité.\n\nCalcul : " +
+      (`Comme le carré a 4 côtés égaux, son périmètre vaut 4 × ${c} = ${p} cm.`) +
+      "\n\nConclusion : on obtient la longueur totale du contour.",
       };
     },
   },
@@ -1010,7 +1094,9 @@ export const perimetresBank: TutorBankItemV4[] = [
         choices,
         expected: [`${good} cm`],
         comparator: "mcq_exact",
-        explanation: `Le périmètre du carré vaut 4 × ${c} = ${good} cm.`,
+        explanation: "Définition : un périmètre mesure la longueur du contour d’une figure.\n\nMéthode : on repère tous les côtés du contour et on les exprime dans la même unité.\n\nCalcul : " +
+      (`Le périmètre du carré vaut 4 × ${c} = ${good} cm.`) +
+      "\n\nConclusion : on obtient la longueur totale du contour.",
       };
     },
   },
@@ -1039,7 +1125,9 @@ export const perimetresBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(p), `${p} cm`, `${p}cm`],
         comparator: "number_equal",
-        explanation: `Le périmètre du rectangle vaut 2 × (${l} + ${w}) = ${p} cm.`,
+        explanation: "Définition : un périmètre mesure la longueur du contour d’une figure.\n\nMéthode : on repère tous les côtés du contour et on les exprime dans la même unité.\n\nCalcul : " +
+      (`Le périmètre du rectangle vaut 2 × (${l} + ${w}) = ${p} cm.`) +
+      "\n\nConclusion : on obtient la longueur totale du contour.",
       };
     },
   },
@@ -1064,7 +1152,9 @@ export const perimetresBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(p), `${p} cm`, `${p}cm`],
         comparator: "number_equal",
-        explanation: `Le périmètre vaut 2 × (${l} + ${w}) = ${p} cm.`,
+        explanation: "Définition : un périmètre mesure la longueur du contour d’une figure.\n\nMéthode : on repère tous les côtés du contour et on les exprime dans la même unité.\n\nCalcul : " +
+      (`Le périmètre vaut 2 × (${l} + ${w}) = ${p} cm.`) +
+      "\n\nConclusion : on obtient la longueur totale du contour.",
       };
     },
   },
@@ -1101,7 +1191,9 @@ export const perimetresBank: TutorBankItemV4[] = [
         choices,
         expected: [`${good} cm`],
         comparator: "mcq_exact",
-        explanation: `Le périmètre vaut 2 × (${l} + ${w}) = ${good} cm.`,
+        explanation: "Définition : un périmètre mesure la longueur du contour d’une figure.\n\nMéthode : on repère tous les côtés du contour et on les exprime dans la même unité.\n\nCalcul : " +
+      (`Le périmètre vaut 2 × (${l} + ${w}) = ${good} cm.`) +
+      "\n\nConclusion : on obtient la longueur totale du contour.",
       };
     },
   },
@@ -1132,7 +1224,9 @@ export const perimetresBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(total), `${total} cm`, `${total}cm`],
         comparator: "number_equal",
-        explanation: `Le périmètre se calcule en additionnant tous les côtés : ${a} + ${b} + ${c} + ${d} = ${total} cm.`,
+        explanation: "Définition : un périmètre mesure la longueur du contour d’une figure.\n\nMéthode : on repère tous les côtés du contour et on les exprime dans la même unité.\n\nCalcul : " +
+      (`Le périmètre se calcule en additionnant tous les côtés : ${a} + ${b} + ${c} + ${d} = ${total} cm.`) +
+      "\n\nConclusion : on obtient la longueur totale du contour.",
       };
     },
   },
@@ -1185,7 +1279,9 @@ export const perimetresBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(shape.perimeter)],
         comparator: "number_equal",
-        explanation: `En suivant le contour extérieur de la figure, on obtient un périmètre de ${shape.perimeter} unités.`,
+        explanation: "Définition : un périmètre mesure la longueur du contour d’une figure.\n\nMéthode : on repère tous les côtés du contour et on les exprime dans la même unité.\n\nCalcul : " +
+      (`En suivant le contour extérieur de la figure, on obtient un périmètre de ${shape.perimeter} unités.`) +
+      "\n\nConclusion : on obtient la longueur totale du contour.",
         canvas: {
           kind: "figure_libre",
           grid: {
@@ -1227,7 +1323,9 @@ export const perimetresBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(p), `${p} m`, `${p}m`],
         comparator: "number_equal",
-        explanation: `La clôture doit faire tout le tour du jardin. On calcule donc le périmètre : 2 × (${l} + ${w}) = ${p} m.`,
+        explanation: "Définition : un périmètre mesure la longueur du contour d’une figure.\n\nMéthode : on repère tous les côtés du contour et on les exprime dans la même unité.\n\nCalcul : " +
+      (`La clôture doit faire tout le tour du jardin. On calcule donc le périmètre : 2 × (${l} + ${w}) = ${p} m.`) +
+      "\n\nConclusion : on obtient la longueur totale du contour.",
       };
     },
   },
@@ -1270,10 +1368,12 @@ export const perimetresBank: TutorBankItemV4[] = [
         ]),
         expected: [format(good)],
         comparator: "mcq_exact",
-        explanation: `Le périmètre vaut 2 × (${l} + ${String(w).replace(
+        explanation: "Définition : un périmètre mesure la longueur du contour d’une figure.\n\nMéthode : on repère tous les côtés du contour et on les exprime dans la même unité.\n\nCalcul : " +
+      (`Le périmètre vaut 2 × (${l} + ${String(w).replace(
           ".",
           ","
-        )}) = ${String(good).replace(".", ",")} m.`,
+        )}) = ${String(good).replace(".", ",")} m.`) +
+      "\n\nConclusion : on obtient la longueur totale du contour.",
       };
     },
   },
@@ -1301,7 +1401,9 @@ export const perimetresBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(side), `${side} cm`, `${side}cm`],
         comparator: "number_equal",
-        explanation: `Le côté vaut ${perim} ÷ 4 = ${side} cm.`,
+        explanation: "Définition : un périmètre mesure la longueur du contour d’une figure.\n\nMéthode : on repère tous les côtés du contour et on les exprime dans la même unité.\n\nCalcul : " +
+      (`Le côté vaut ${perim} ÷ 4 = ${side} cm.`) +
+      "\n\nConclusion : on obtient la longueur totale du contour.",
       };
     },
   },
@@ -1327,7 +1429,9 @@ export const perimetresBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(delta), `${delta} cm`, `${delta}cm`],
         comparator: "number_equal",
-        explanation: `La longueur apparaît deux fois dans le périmètre. Si elle augmente de ${increase} cm, le périmètre augmente de ${increase} + ${increase} = ${delta} cm.`,
+        explanation: "Définition : un périmètre mesure la longueur du contour d’une figure.\n\nMéthode : on repère tous les côtés du contour et on les exprime dans la même unité.\n\nCalcul : " +
+      (`La longueur apparaît deux fois dans le périmètre. Si elle augmente de ${increase} cm, le périmètre augmente de ${increase} + ${increase} = ${delta} cm.`) +
+      "\n\nConclusion : on obtient la longueur totale du contour.",
       };
     },
   },
@@ -1350,7 +1454,9 @@ export const perimetresBank: TutorBankItemV4[] = [
         expected: ["oui"],
         comparator: "mcq_exact",
         explanation:
-          "Oui. Deux figures différentes peuvent avoir le même périmètre car le périmètre donne seulement la longueur totale du contour.",
+          "Définition : un périmètre mesure la longueur du contour d’une figure.\n\nMéthode : on repère tous les côtés du contour et on les exprime dans la même unité.\n\nCalcul : " +
+      ("Oui. Deux figures différentes peuvent avoir le même périmètre car le périmètre donne seulement la longueur totale du contour.") +
+      "\n\nConclusion : on obtient la longueur totale du contour.",
       };
     },
   },

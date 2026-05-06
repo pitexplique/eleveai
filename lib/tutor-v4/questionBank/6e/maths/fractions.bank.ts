@@ -53,7 +53,9 @@ export const fractionsBank: TutorBankItemV4[] = [
     comparator: "fraction_decimal_equivalent",
     hint: "Une part sur quatre.",
     explanation:
-      "Une fraction s’écrit avec le nombre de parts prises au numérateur et le nombre total de parts au dénominateur. Ici, une part sur 4 se note 1/4.",
+      "Définition : une fraction représente un partage équitable ou un quotient.\n\nMéthode : on repère le numérateur, le dénominateur et le sens du partage demandé.\n\nCalcul : " +
+      ("Une fraction s’écrit avec le nombre de parts prises au numérateur et le nombre total de parts au dénominateur. Ici, une part sur 4 se note 1/4.") +
+      "\n\nConclusion : la fraction ou la quantité obtenue répond à la question.",
     tags: ["fractions", "lecture", "ecriture"],
   },
   {
@@ -71,7 +73,9 @@ export const fractionsBank: TutorBankItemV4[] = [
     comparator: "fraction_decimal_equivalent",
     hint: "Une part sur deux, c’est une moitié.",
     explanation:
-      "Une part sur 2 parts égales se note 1/2. Cette fraction représente une moitié.",
+      "Définition : une fraction représente un partage équitable ou un quotient.\n\nMéthode : on repère le numérateur, le dénominateur et le sens du partage demandé.\n\nCalcul : " +
+      ("Une part sur 2 parts égales se note 1/2. Cette fraction représente une moitié.") +
+      "\n\nConclusion : la fraction ou la quantité obtenue répond à la question.",
     tags: ["fractions", "lecture", "moitie"],
   },
   {
@@ -89,7 +93,9 @@ export const fractionsBank: TutorBankItemV4[] = [
     comparator: "fraction_decimal_equivalent",
     hint: "Le numérateur donne les parts prises.",
     explanation:
-      "3 parts prises sur 5 parts égales se notent 3/5. Le 3 indique les parts prises et le 5 le nombre total de parts.",
+      "Définition : une fraction représente un partage équitable ou un quotient.\n\nMéthode : on repère le numérateur, le dénominateur et le sens du partage demandé.\n\nCalcul : " +
+      ("3 parts prises sur 5 parts égales se notent 3/5. Le 3 indique les parts prises et le 5 le nombre total de parts.") +
+      "\n\nConclusion : la fraction ou la quantité obtenue répond à la question.",
     tags: ["fractions", "lecture", "ecriture"],
   },
   {
@@ -107,7 +113,9 @@ export const fractionsBank: TutorBankItemV4[] = [
     comparator: "fraction_decimal_equivalent",
     hint: "2 parts prises sur 8 au total.",
     explanation:
-      "2 parts sur 8 se notent 2/8. Cette fraction peut aussi se simplifier en 1/4.",
+      "Définition : une fraction représente un partage équitable ou un quotient.\n\nMéthode : on repère le numérateur, le dénominateur et le sens du partage demandé.\n\nCalcul : " +
+      ("2 parts sur 8 se notent 2/8. Cette fraction peut aussi se simplifier en 1/4.") +
+      "\n\nConclusion : la fraction ou la quantité obtenue répond à la question.",
     tags: ["fractions", "lecture", "ecriture"],
   },
   {
@@ -126,7 +134,9 @@ export const fractionsBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Le dénominateur donne le nombre total de parts.",
     explanation:
-      "Une part sur 5 parts égales se note 1/5. Le 1 représente la part prise et le 5 le total.",
+      "Définition : une fraction représente un partage équitable ou un quotient.\n\nMéthode : on repère le numérateur, le dénominateur et le sens du partage demandé.\n\nCalcul : " +
+      ("Une part sur 5 parts égales se note 1/5. Le 1 représente la part prise et le 5 le total.") +
+      "\n\nConclusion : la fraction ou la quantité obtenue répond à la question.",
     tags: ["fractions", "lecture", "qcm"],
   },
   {
@@ -145,7 +155,9 @@ export const fractionsBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "3 parts prises, 4 parts au total.",
     explanation:
-      "3 parts sur 4 se notent 3/4. Le numérateur est 3 et le dénominateur est 4.",
+      "Définition : une fraction représente un partage équitable ou un quotient.\n\nMéthode : on repère le numérateur, le dénominateur et le sens du partage demandé.\n\nCalcul : " +
+      ("3 parts sur 4 se notent 3/4. Le numérateur est 3 et le dénominateur est 4.") +
+      "\n\nConclusion : la fraction ou la quantité obtenue répond à la question.",
     tags: ["fractions", "lecture", "qcm"],
   },
   {
@@ -163,7 +175,9 @@ export const fractionsBank: TutorBankItemV4[] = [
     comparator: "fraction_decimal_equivalent",
     hint: "2 parts sur 8, c’est aussi une fraction simplifiable.",
     explanation:
-      "2 parts mangées sur 8 se notent 2/8. Cette fraction se simplifie en 1/4.",
+      "Définition : une fraction représente un partage équitable ou un quotient.\n\nMéthode : on repère le numérateur, le dénominateur et le sens du partage demandé.\n\nCalcul : " +
+      ("2 parts mangées sur 8 se notent 2/8. Cette fraction se simplifie en 1/4.") +
+      "\n\nConclusion : la fraction ou la quantité obtenue répond à la question.",
     tags: ["fractions", "lecture", "reunion"],
   },
 
@@ -185,7 +199,9 @@ export const fractionsBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "Le numérateur indique le nombre de parts à colorier.",
     explanation:
-      "Dans la fraction 3/4, le numérateur 3 indique le nombre de parts à prendre ou à colorier. Il faut donc colorier 3 parts.",
+      "Définition : une fraction représente un partage équitable ou un quotient.\n\nMéthode : on repère le numérateur, le dénominateur et le sens du partage demandé.\n\nCalcul : " +
+      ("Dans la fraction 3/4, le numérateur 3 indique le nombre de parts à prendre ou à colorier. Il faut donc colorier 3 parts.") +
+      "\n\nConclusion : la fraction ou la quantité obtenue répond à la question.",
     tags: ["fractions", "representation"],
   },
   {
@@ -203,7 +219,9 @@ export const fractionsBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "Le numérateur donne le nombre de parts colorées.",
     explanation:
-      "Dans 2/5, le numérateur vaut 2. Il faut donc colorier 2 parts.",
+      "Définition : une fraction représente un partage équitable ou un quotient.\n\nMéthode : on repère le numérateur, le dénominateur et le sens du partage demandé.\n\nCalcul : " +
+      ("Dans 2/5, le numérateur vaut 2. Il faut donc colorier 2 parts.") +
+      "\n\nConclusion : la fraction ou la quantité obtenue répond à la question.",
     tags: ["fractions", "representation"],
   },
   {
@@ -221,7 +239,9 @@ export const fractionsBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "Le dénominateur donne le nombre total de parts.",
     explanation:
-      "Dans 4/6, le dénominateur 6 indique le nombre total de parts égales. La figure doit donc être partagée en 6 parts.",
+      "Définition : une fraction représente un partage équitable ou un quotient.\n\nMéthode : on repère le numérateur, le dénominateur et le sens du partage demandé.\n\nCalcul : " +
+      ("Dans 4/6, le dénominateur 6 indique le nombre total de parts égales. La figure doit donc être partagée en 6 parts.") +
+      "\n\nConclusion : la fraction ou la quantité obtenue répond à la question.",
     tags: ["fractions", "representation"],
   },
   {
@@ -240,7 +260,9 @@ export const fractionsBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Le dénominateur donne le nombre total de parts.",
     explanation:
-      "Le dénominateur de 4/6 est 6. Il faut donc 6 parts égales au total.",
+      "Définition : une fraction représente un partage équitable ou un quotient.\n\nMéthode : on repère le numérateur, le dénominateur et le sens du partage demandé.\n\nCalcul : " +
+      ("Le dénominateur de 4/6 est 6. Il faut donc 6 parts égales au total.") +
+      "\n\nConclusion : la fraction ou la quantité obtenue répond à la question.",
     tags: ["fractions", "representation", "qcm"],
   },
   {
@@ -259,7 +281,9 @@ export const fractionsBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Le numérateur donne le nombre de parts colorées.",
     explanation:
-      "Dans 5/8, le numérateur vaut 5. Il faut donc colorier 5 parts.",
+      "Définition : une fraction représente un partage équitable ou un quotient.\n\nMéthode : on repère le numérateur, le dénominateur et le sens du partage demandé.\n\nCalcul : " +
+      ("Dans 5/8, le numérateur vaut 5. Il faut donc colorier 5 parts.") +
+      "\n\nConclusion : la fraction ou la quantité obtenue répond à la question.",
     tags: ["fractions", "representation", "qcm"],
   },
   {
@@ -277,7 +301,9 @@ export const fractionsBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "4/6 signifie 4 parts parmi 6.",
     explanation:
-      "4/6 signifie que l’on prend 4 parts sur 6 parts égales. Il faut donc prendre 4 parts.",
+      "Définition : une fraction représente un partage équitable ou un quotient.\n\nMéthode : on repère le numérateur, le dénominateur et le sens du partage demandé.\n\nCalcul : " +
+      ("4/6 signifie que l’on prend 4 parts sur 6 parts égales. Il faut donc prendre 4 parts.") +
+      "\n\nConclusion : la fraction ou la quantité obtenue répond à la question.",
     tags: ["fractions", "representation", "reunion"],
   },
 
@@ -299,7 +325,9 @@ export const fractionsBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Partage 10 en 2 parts égales.",
     explanation:
-      "La moitié signifie partager en 2 parts égales. 10 partagé en 2 donne 5.",
+      "Définition : une fraction représente un partage équitable ou un quotient.\n\nMéthode : on repère le numérateur, le dénominateur et le sens du partage demandé.\n\nCalcul : " +
+      ("La moitié signifie partager en 2 parts égales. 10 partagé en 2 donne 5.") +
+      "\n\nConclusion : la fraction ou la quantité obtenue répond à la question.",
     tags: ["fractions", "quantite", "moitie"],
   },
   {
@@ -317,7 +345,9 @@ export const fractionsBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Le quart, c’est partager en 4 parts égales.",
     explanation:
-      "Le quart signifie partager en 4 parts égales. 20 partagé en 4 donne 5.",
+      "Définition : une fraction représente un partage équitable ou un quotient.\n\nMéthode : on repère le numérateur, le dénominateur et le sens du partage demandé.\n\nCalcul : " +
+      ("Le quart signifie partager en 4 parts égales. 20 partagé en 4 donne 5.") +
+      "\n\nConclusion : la fraction ou la quantité obtenue répond à la question.",
     tags: ["fractions", "quantite", "quart"],
   },
   {
@@ -335,7 +365,9 @@ export const fractionsBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Commence par trouver 1/4 de 12.",
     explanation:
-      "Le quart de 12 vaut 3. Donc les 3/4 de 12 valent 3 × 3 = 9.",
+      "Définition : une fraction représente un partage équitable ou un quotient.\n\nMéthode : on repère le numérateur, le dénominateur et le sens du partage demandé.\n\nCalcul : " +
+      ("Le quart de 12 vaut 3. Donc les 3/4 de 12 valent 3 × 3 = 9.") +
+      "\n\nConclusion : la fraction ou la quantité obtenue répond à la question.",
     tags: ["fractions", "quantite"],
   },
   {
@@ -353,7 +385,9 @@ export const fractionsBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Commence par trouver 1/3 de 15.",
     explanation:
-      "Le tiers de 15 vaut 5. Donc les 2/3 de 15 valent 2 × 5 = 10.",
+      "Définition : une fraction représente un partage équitable ou un quotient.\n\nMéthode : on repère le numérateur, le dénominateur et le sens du partage demandé.\n\nCalcul : " +
+      ("Le tiers de 15 vaut 5. Donc les 2/3 de 15 valent 2 × 5 = 10.") +
+      "\n\nConclusion : la fraction ou la quantité obtenue répond à la question.",
     tags: ["fractions", "quantite"],
   },
   {
@@ -372,7 +406,9 @@ export const fractionsBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Divise par 2.",
     explanation:
-      "La moitié de 14 s’obtient en divisant 14 par 2. On trouve 7.",
+      "Définition : une fraction représente un partage équitable ou un quotient.\n\nMéthode : on repère le numérateur, le dénominateur et le sens du partage demandé.\n\nCalcul : " +
+      ("La moitié de 14 s’obtient en divisant 14 par 2. On trouve 7.") +
+      "\n\nConclusion : la fraction ou la quantité obtenue répond à la question.",
     tags: ["fractions", "quantite", "qcm"],
   },
   {
@@ -391,7 +427,9 @@ export const fractionsBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Divise par 4.",
     explanation:
-      "Le quart de 16 s’obtient en divisant 16 par 4. On trouve 4.",
+      "Définition : une fraction représente un partage équitable ou un quotient.\n\nMéthode : on repère le numérateur, le dénominateur et le sens du partage demandé.\n\nCalcul : " +
+      ("Le quart de 16 s’obtient en divisant 16 par 4. On trouve 4.") +
+      "\n\nConclusion : la fraction ou la quantité obtenue répond à la question.",
     tags: ["fractions", "quantite", "qcm"],
   },
   {
@@ -409,7 +447,9 @@ export const fractionsBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "La moitié de 18.",
     explanation:
-      "La moitié de 18 vaut 9. Donc 1/2 d’une caisse de 18 mangues représente 9 mangues.",
+      "Définition : une fraction représente un partage équitable ou un quotient.\n\nMéthode : on repère le numérateur, le dénominateur et le sens du partage demandé.\n\nCalcul : " +
+      ("La moitié de 18 vaut 9. Donc 1/2 d’une caisse de 18 mangues représente 9 mangues.") +
+      "\n\nConclusion : la fraction ou la quantité obtenue répond à la question.",
     tags: ["fractions", "quantite", "reunion"],
   },
 
@@ -431,7 +471,9 @@ export const fractionsBank: TutorBankItemV4[] = [
     comparator: "fraction_decimal_equivalent",
     hint: "Une moitié vaut 0,5.",
     explanation:
-      "1/2 représente une moitié. En écriture décimale, une moitié vaut 0,5.",
+      "Définition : une fraction représente un partage équitable ou un quotient.\n\nMéthode : on repère le numérateur, le dénominateur et le sens du partage demandé.\n\nCalcul : " +
+      ("1/2 représente une moitié. En écriture décimale, une moitié vaut 0,5.") +
+      "\n\nConclusion : la fraction ou la quantité obtenue répond à la question.",
     tags: ["fractions", "decimal"],
   },
   {
@@ -449,7 +491,9 @@ export const fractionsBank: TutorBankItemV4[] = [
     comparator: "fraction_decimal_equivalent",
     hint: "Un quart vaut 0,25.",
     explanation:
-      "1/4 représente un quart. En écriture décimale, un quart vaut 0,25.",
+      "Définition : une fraction représente un partage équitable ou un quotient.\n\nMéthode : on repère le numérateur, le dénominateur et le sens du partage demandé.\n\nCalcul : " +
+      ("1/4 représente un quart. En écriture décimale, un quart vaut 0,25.") +
+      "\n\nConclusion : la fraction ou la quantité obtenue répond à la question.",
     tags: ["fractions", "decimal"],
   },
   {
@@ -467,7 +511,9 @@ export const fractionsBank: TutorBankItemV4[] = [
     comparator: "fraction_decimal_equivalent",
     hint: "3 quarts = 0,75.",
     explanation:
-      "1/4 vaut 0,25. Donc 3/4 vaut 3 × 0,25 = 0,75.",
+      "Définition : une fraction représente un partage équitable ou un quotient.\n\nMéthode : on repère le numérateur, le dénominateur et le sens du partage demandé.\n\nCalcul : " +
+      ("1/4 vaut 0,25. Donc 3/4 vaut 3 × 0,25 = 0,75.") +
+      "\n\nConclusion : la fraction ou la quantité obtenue répond à la question.",
     tags: ["fractions", "decimal"],
   },
   {
@@ -485,7 +531,9 @@ export const fractionsBank: TutorBankItemV4[] = [
     comparator: "fraction_decimal_equivalent",
     hint: "Un cinquième vaut 0,2.",
     explanation:
-      "1/5 représente un cinquième. En écriture décimale, cela vaut 0,2.",
+      "Définition : une fraction représente un partage équitable ou un quotient.\n\nMéthode : on repère le numérateur, le dénominateur et le sens du partage demandé.\n\nCalcul : " +
+      ("1/5 représente un cinquième. En écriture décimale, cela vaut 0,2.") +
+      "\n\nConclusion : la fraction ou la quantité obtenue répond à la question.",
     tags: ["fractions", "decimal"],
   },
   {
@@ -504,7 +552,9 @@ export const fractionsBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Une moitié.",
     explanation:
-      "1/2 signifie une moitié. En décimal, une moitié vaut 0,5.",
+      "Définition : une fraction représente un partage équitable ou un quotient.\n\nMéthode : on repère le numérateur, le dénominateur et le sens du partage demandé.\n\nCalcul : " +
+      ("1/2 signifie une moitié. En décimal, une moitié vaut 0,5.") +
+      "\n\nConclusion : la fraction ou la quantité obtenue répond à la question.",
     tags: ["fractions", "decimal", "qcm"],
   },
   {
@@ -523,7 +573,9 @@ export const fractionsBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Un quart.",
     explanation:
-      "1/4 signifie un quart. En décimal, un quart vaut 0,25.",
+      "Définition : une fraction représente un partage équitable ou un quotient.\n\nMéthode : on repère le numérateur, le dénominateur et le sens du partage demandé.\n\nCalcul : " +
+      ("1/4 signifie un quart. En décimal, un quart vaut 0,25.") +
+      "\n\nConclusion : la fraction ou la quantité obtenue répond à la question.",
     tags: ["fractions", "decimal", "qcm"],
   },
 
@@ -545,7 +597,9 @@ export const fractionsBank: TutorBankItemV4[] = [
     comparator: "fraction_decimal_equivalent",
     hint: "Une moitié est plus grande qu’un quart.",
     explanation:
-      "1/2 vaut 0,5 et 1/4 vaut 0,25. Comme 0,5 est plus grand que 0,25, la plus grande fraction est 1/2.",
+      "Définition : une fraction représente un partage équitable ou un quotient.\n\nMéthode : on repère le numérateur, le dénominateur et le sens du partage demandé.\n\nCalcul : " +
+      ("1/2 vaut 0,5 et 1/4 vaut 0,25. Comme 0,5 est plus grand que 0,25, la plus grande fraction est 1/2.") +
+      "\n\nConclusion : la fraction ou la quantité obtenue répond à la question.",
     tags: ["fractions", "comparaison"],
   },
   {
@@ -563,7 +617,9 @@ export const fractionsBank: TutorBankItemV4[] = [
     comparator: "fraction_decimal_equivalent",
     hint: "Même dénominateur : compare les numérateurs.",
     explanation:
-      "Quand les dénominateurs sont les mêmes, on compare les numérateurs. Comme 3 est plus grand que 1, 3/5 est plus grande que 1/5.",
+      "Définition : une fraction représente un partage équitable ou un quotient.\n\nMéthode : on repère le numérateur, le dénominateur et le sens du partage demandé.\n\nCalcul : " +
+      ("Quand les dénominateurs sont les mêmes, on compare les numérateurs. Comme 3 est plus grand que 1, 3/5 est plus grande que 1/5.") +
+      "\n\nConclusion : la fraction ou la quantité obtenue répond à la question.",
     tags: ["fractions", "comparaison"],
   },
   {
@@ -581,7 +637,9 @@ export const fractionsBank: TutorBankItemV4[] = [
     comparator: "fraction_decimal_equivalent",
     hint: "Même dénominateur.",
     explanation:
-      "Les deux fractions ont le même dénominateur 4. Comme 3 est plus grand que 2, 3/4 est plus grande que 2/4.",
+      "Définition : une fraction représente un partage équitable ou un quotient.\n\nMéthode : on repère le numérateur, le dénominateur et le sens du partage demandé.\n\nCalcul : " +
+      ("Les deux fractions ont le même dénominateur 4. Comme 3 est plus grand que 2, 3/4 est plus grande que 2/4.") +
+      "\n\nConclusion : la fraction ou la quantité obtenue répond à la question.",
     tags: ["fractions", "comparaison"],
   },
   {
@@ -599,7 +657,9 @@ export const fractionsBank: TutorBankItemV4[] = [
     comparator: "fraction_decimal_equivalent",
     hint: "Tu peux comparer les valeurs décimales.",
     explanation:
-      "2/3 vaut environ 0,67 et 3/4 vaut 0,75. Comme 0,75 est plus grand, 3/4 est la plus grande fraction.",
+      "Définition : une fraction représente un partage équitable ou un quotient.\n\nMéthode : on repère le numérateur, le dénominateur et le sens du partage demandé.\n\nCalcul : " +
+      ("2/3 vaut environ 0,67 et 3/4 vaut 0,75. Comme 0,75 est plus grand, 3/4 est la plus grande fraction.") +
+      "\n\nConclusion : la fraction ou la quantité obtenue répond à la question.",
     tags: ["fractions", "comparaison"],
   },
   {
@@ -618,7 +678,9 @@ export const fractionsBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Tu peux comparer les fractions ou penser à leur valeur.",
     explanation:
-      "2/3 vaut environ 0,67. C’est plus grand que 1/2, 1/3 et 1/6. La plus grande fraction est donc 2/3.",
+      "Définition : une fraction représente un partage équitable ou un quotient.\n\nMéthode : on repère le numérateur, le dénominateur et le sens du partage demandé.\n\nCalcul : " +
+      ("2/3 vaut environ 0,67. C’est plus grand que 1/2, 1/3 et 1/6. La plus grande fraction est donc 2/3.") +
+      "\n\nConclusion : la fraction ou la quantité obtenue répond à la question.",
     tags: ["fractions", "comparaison", "qcm"],
   },
   {
@@ -637,7 +699,9 @@ export const fractionsBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Pense à 0,5 ; 0,25 ; 0,75.",
     explanation:
-      "1/2 vaut 0,5, 1/4 vaut 0,25, 3/4 vaut 0,75 et 2/4 vaut aussi 0,5. La plus petite fraction est donc 1/4.",
+      "Définition : une fraction représente un partage équitable ou un quotient.\n\nMéthode : on repère le numérateur, le dénominateur et le sens du partage demandé.\n\nCalcul : " +
+      ("1/2 vaut 0,5, 1/4 vaut 0,25, 3/4 vaut 0,75 et 2/4 vaut aussi 0,5. La plus petite fraction est donc 1/4.") +
+      "\n\nConclusion : la fraction ou la quantité obtenue répond à la question.",
     tags: ["fractions", "comparaison", "qcm"],
   },
 
@@ -659,7 +723,9 @@ export const fractionsBank: TutorBankItemV4[] = [
     comparator: "fraction_decimal_equivalent",
     hint: "4 parts sur 8, c’est aussi une moitié.",
     explanation:
-      "4 parts mangées sur 8 parts égales se notent 4/8. Cette fraction correspond aussi à 1/2.",
+      "Définition : une fraction représente un partage équitable ou un quotient.\n\nMéthode : on repère le numérateur, le dénominateur et le sens du partage demandé.\n\nCalcul : " +
+      ("4 parts mangées sur 8 parts égales se notent 4/8. Cette fraction correspond aussi à 1/2.") +
+      "\n\nConclusion : la fraction ou la quantité obtenue répond à la question.",
     tags: ["fractions", "defi"],
   },
   {
@@ -677,7 +743,9 @@ export const fractionsBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Partage 12 en 3 parts égales.",
     explanation:
-      "Le tiers de 12 vaut 12 ÷ 3 = 4. Léa mange donc 4 biscuits.",
+      "Définition : une fraction représente un partage équitable ou un quotient.\n\nMéthode : on repère le numérateur, le dénominateur et le sens du partage demandé.\n\nCalcul : " +
+      ("Le tiers de 12 vaut 12 ÷ 3 = 4. Léa mange donc 4 biscuits.") +
+      "\n\nConclusion : la fraction ou la quantité obtenue répond à la question.",
     tags: ["fractions", "defi", "quantite"],
   },
   {
@@ -696,7 +764,9 @@ export const fractionsBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Simplifie 2/8.",
     explanation:
-      "Si on simplifie 2/8 en divisant le numérateur et le dénominateur par 2, on obtient 1/4. Les deux fractions sont donc équivalentes.",
+      "Définition : une fraction représente un partage équitable ou un quotient.\n\nMéthode : on repère le numérateur, le dénominateur et le sens du partage demandé.\n\nCalcul : " +
+      ("Si on simplifie 2/8 en divisant le numérateur et le dénominateur par 2, on obtient 1/4. Les deux fractions sont donc équivalentes.") +
+      "\n\nConclusion : la fraction ou la quantité obtenue répond à la question.",
     tags: ["fractions", "defi", "qcm"],
   },
   {
@@ -714,7 +784,9 @@ export const fractionsBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Le quart de 24.",
     explanation:
-      "Le quart de 24 vaut 24 ÷ 4 = 6. Donc 6 samoussas ont été mangés.",
+      "Définition : une fraction représente un partage équitable ou un quotient.\n\nMéthode : on repère le numérateur, le dénominateur et le sens du partage demandé.\n\nCalcul : " +
+      ("Le quart de 24 vaut 24 ÷ 4 = 6. Donc 6 samoussas ont été mangés.") +
+      "\n\nConclusion : la fraction ou la quantité obtenue répond à la question.",
     tags: ["fractions", "defi", "reunion"],
   },
   {
@@ -732,7 +804,9 @@ export const fractionsBank: TutorBankItemV4[] = [
     comparator: "fraction_decimal_equivalent",
     hint: "Compare leurs valeurs décimales.",
     explanation:
-      "2/3 vaut environ 0,67 alors que 3/4 vaut 0,75. Comme 0,75 est plus grand, la plus grande fraction est 3/4.",
+      "Définition : une fraction représente un partage équitable ou un quotient.\n\nMéthode : on repère le numérateur, le dénominateur et le sens du partage demandé.\n\nCalcul : " +
+      ("2/3 vaut environ 0,67 alors que 3/4 vaut 0,75. Comme 0,75 est plus grand, la plus grande fraction est 3/4.") +
+      "\n\nConclusion : la fraction ou la quantité obtenue répond à la question.",
     tags: ["fractions", "defi", "comparaison"],
   },
   {
@@ -750,7 +824,9 @@ export const fractionsBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "Pense à une figure partagée en 4 parts.",
     explanation:
-      "2/4 signifie 2 parts sur 4. Si on regroupe ces 4 parts en 2 groupes égaux, 2 parts sur 4 correspondent à 1 part sur 2. Donc 2/4 et 1/2 représentent la même quantité.",
+      "Définition : une fraction représente un partage équitable ou un quotient.\n\nMéthode : on repère le numérateur, le dénominateur et le sens du partage demandé.\n\nCalcul : " +
+      ("2/4 signifie 2 parts sur 4. Si on regroupe ces 4 parts en 2 groupes égaux, 2 parts sur 4 correspondent à 1 part sur 2. Donc 2/4 et 1/2 représentent la même quantité.") +
+      "\n\nConclusion : la fraction ou la quantité obtenue répond à la question.",
     tags: ["fractions", "defi", "raisonnement"],
   },
 
@@ -777,7 +853,9 @@ export const fractionsBank: TutorBankItemV4[] = [
         format: "short",
         expected: [fractionString(num, den), fractionStringSpaced(num, den)],
         comparator: "fraction_decimal_equivalent",
-        explanation: `${num} part${num > 1 ? "s" : ""} sur ${den} parts égales se notent ${num}/${den}.`,
+        explanation: "Définition : une fraction représente un partage équitable ou un quotient.\n\nMéthode : on repère le numérateur, le dénominateur et le sens du partage demandé.\n\nCalcul : " +
+      (`${num} part${num > 1 ? "s" : ""} sur ${den} parts égales se notent ${num}/${den}.`) +
+      "\n\nConclusion : la fraction ou la quantité obtenue répond à la question.",
       };
     },
   },
@@ -814,7 +892,9 @@ export const fractionsBank: TutorBankItemV4[] = [
         choices: shuffle([good, ...distractors]),
         expected: [good],
         comparator: "mcq_exact",
-        explanation: `${num} part${num > 1 ? "s" : ""} sur ${den} parts égales se notent ${good}.`,
+        explanation: "Définition : une fraction représente un partage équitable ou un quotient.\n\nMéthode : on repère le numérateur, le dénominateur et le sens du partage demandé.\n\nCalcul : " +
+      (`${num} part${num > 1 ? "s" : ""} sur ${den} parts égales se notent ${good}.`) +
+      "\n\nConclusion : la fraction ou la quantité obtenue répond à la question.",
       };
     },
   },
@@ -842,7 +922,9 @@ export const fractionsBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(num)],
         comparator: "number_equal",
-        explanation: `Dans ${num}/${den}, le numérateur ${num} indique le nombre de parts à colorier.`,
+        explanation: "Définition : une fraction représente un partage équitable ou un quotient.\n\nMéthode : on repère le numérateur, le dénominateur et le sens du partage demandé.\n\nCalcul : " +
+      (`Dans ${num}/${den}, le numérateur ${num} indique le nombre de parts à colorier.`) +
+      "\n\nConclusion : la fraction ou la quantité obtenue répond à la question.",
       };
     },
   },
@@ -872,7 +954,9 @@ export const fractionsBank: TutorBankItemV4[] = [
         ]),
         expected: [String(den)],
         comparator: "mcq_exact",
-        explanation: `Dans ${num}/${den}, le dénominateur ${den} indique le nombre total de parts.`,
+        explanation: "Définition : une fraction représente un partage équitable ou un quotient.\n\nMéthode : on repère le numérateur, le dénominateur et le sens du partage demandé.\n\nCalcul : " +
+      (`Dans ${num}/${den}, le dénominateur ${den} indique le nombre total de parts.`) +
+      "\n\nConclusion : la fraction ou la quantité obtenue répond à la question.",
       };
     },
   },
@@ -905,9 +989,11 @@ export const fractionsBank: TutorBankItemV4[] = [
         expected: [String(expected)],
         comparator: "number_equal",
         explanation:
-          type === "moitié"
+          "Définition : une fraction représente un partage équitable ou un quotient.\n\nMéthode : on repère le numérateur, le dénominateur et le sens du partage demandé.\n\nCalcul : " +
+      (type === "moitié"
             ? `La moitié de ${base}, c’est ${base} ÷ 2 = ${expected}.`
-            : `Le quart de ${base}, c’est ${base} ÷ 4 = ${expected}.`,
+            : `Le quart de ${base}, c’est ${base} ÷ 4 = ${expected}.`) +
+      "\n\nConclusion : la fraction ou la quantité obtenue répond à la question.",
       };
     },
   },
@@ -933,7 +1019,9 @@ export const fractionsBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(expected)],
         comparator: "number_equal",
-        explanation: `Une part vaut ${base} ÷ ${den} = ${base / den}. Donc ${num}/${den} de ${base} vaut ${expected}.`,
+        explanation: "Définition : une fraction représente un partage équitable ou un quotient.\n\nMéthode : on repère le numérateur, le dénominateur et le sens du partage demandé.\n\nCalcul : " +
+      (`Une part vaut ${base} ÷ ${den} = ${base / den}. Donc ${num}/${den} de ${base} vaut ${expected}.`) +
+      "\n\nConclusion : la fraction ou la quantité obtenue répond à la question.",
       };
     },
   },
@@ -966,9 +1054,11 @@ export const fractionsBank: TutorBankItemV4[] = [
         expected: [String(good)],
         comparator: "mcq_exact",
         explanation:
-          type === "moitié"
+          "Définition : une fraction représente un partage équitable ou un quotient.\n\nMéthode : on repère le numérateur, le dénominateur et le sens du partage demandé.\n\nCalcul : " +
+      (type === "moitié"
             ? `La moitié de ${base} vaut ${base} ÷ 2 = ${good}.`
-            : `Le quart de ${base} vaut ${base} ÷ 4 = ${good}.`,
+            : `Le quart de ${base} vaut ${base} ÷ 4 = ${good}.`) +
+      "\n\nConclusion : la fraction ou la quantité obtenue répond à la question.",
       };
     },
   },
@@ -1006,7 +1096,9 @@ export const fractionsBank: TutorBankItemV4[] = [
           fractionStringSpaced(item.n, item.d),
         ],
         comparator: "fraction_decimal_equivalent",
-        explanation: `${item.n}/${item.d} s’écrit ${decimalComma(item.dec)} en décimal.`,
+        explanation: "Définition : une fraction représente un partage équitable ou un quotient.\n\nMéthode : on repère le numérateur, le dénominateur et le sens du partage demandé.\n\nCalcul : " +
+      (`${item.n}/${item.d} s’écrit ${decimalComma(item.dec)} en décimal.`) +
+      "\n\nConclusion : la fraction ou la quantité obtenue répond à la question.",
       };
     },
   },
@@ -1035,7 +1127,9 @@ export const fractionsBank: TutorBankItemV4[] = [
         choices: shuffle([item.good, ...item.distractors]),
         expected: [item.good],
         comparator: "mcq_exact",
-        explanation: `${item.frac} correspond à ${item.good}.`,
+        explanation: "Définition : une fraction représente un partage équitable ou un quotient.\n\nMéthode : on repère le numérateur, le dénominateur et le sens du partage demandé.\n\nCalcul : " +
+      (`${item.frac} correspond à ${item.good}.`) +
+      "\n\nConclusion : la fraction ou la quantité obtenue répond à la question.",
       };
     },
   },
@@ -1070,7 +1164,9 @@ export const fractionsBank: TutorBankItemV4[] = [
         format: "short",
         expected: [fractionString(max, den), fractionStringSpaced(max, den)],
         comparator: "fraction_decimal_equivalent",
-        explanation: `Les deux fractions ont le même dénominateur ${den}. On compare donc les numérateurs, et ${max}/${den} est la plus grande.`,
+        explanation: "Définition : une fraction représente un partage équitable ou un quotient.\n\nMéthode : on repère le numérateur, le dénominateur et le sens du partage demandé.\n\nCalcul : " +
+      (`Les deux fractions ont le même dénominateur ${den}. On compare donc les numérateurs, et ${max}/${den} est la plus grande.`) +
+      "\n\nConclusion : la fraction ou la quantité obtenue répond à la question.",
       };
     },
   },
@@ -1107,13 +1203,15 @@ export const fractionsBank: TutorBankItemV4[] = [
           fractionStringSpaced(good.n, good.d),
         ],
         comparator: "fraction_decimal_equivalent",
-        explanation: `${left.n}/${left.d} vaut environ ${decimalComma(
+        explanation: "Définition : une fraction représente un partage équitable ou un quotient.\n\nMéthode : on repère le numérateur, le dénominateur et le sens du partage demandé.\n\nCalcul : " +
+      (`${left.n}/${left.d} vaut environ ${decimalComma(
           leftVal,
           2
         )} et ${right.n}/${right.d} vaut environ ${decimalComma(
           rightVal,
           2
-        )}. La plus grande fraction est donc ${good.n}/${good.d}.`,
+        )}. La plus grande fraction est donc ${good.n}/${good.d}.`) +
+      "\n\nConclusion : la fraction ou la quantité obtenue répond à la question.",
       };
     },
   },
@@ -1148,7 +1246,9 @@ export const fractionsBank: TutorBankItemV4[] = [
         choices: shuffle([good, ...distractors.slice(0, 3)]),
         expected: [good],
         comparator: "mcq_exact",
-        explanation: `Parmi les fractions proposées, ${good} est la plus grande.`,
+        explanation: "Définition : une fraction représente un partage équitable ou un quotient.\n\nMéthode : on repère le numérateur, le dénominateur et le sens du partage demandé.\n\nCalcul : " +
+      (`Parmi les fractions proposées, ${good} est la plus grande.`) +
+      "\n\nConclusion : la fraction ou la quantité obtenue répond à la question.",
       };
     },
   },
@@ -1179,9 +1279,11 @@ export const fractionsBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(expected)],
         comparator: "number_equal",
-        explanation: `Une part vaut ${total} ÷ ${den} = ${
+        explanation: "Définition : une fraction représente un partage équitable ou un quotient.\n\nMéthode : on repère le numérateur, le dénominateur et le sens du partage demandé.\n\nCalcul : " +
+      (`Une part vaut ${total} ÷ ${den} = ${
           total / den
-        }. Donc ${num}/${den} de ${total} vaut ${expected}.`,
+        }. Donc ${num}/${den} de ${total} vaut ${expected}.`) +
+      "\n\nConclusion : la fraction ou la quantité obtenue répond à la question.",
       };
     },
   },
@@ -1215,7 +1317,8 @@ export const fractionsBank: TutorBankItemV4[] = [
         expected: [item.answer],
         comparator: "mcq_exact",
         explanation:
-          item.answer === "oui"
+          "Définition : une fraction représente un partage équitable ou un quotient.\n\nMéthode : on repère le numérateur, le dénominateur et le sens du partage demandé.\n\nCalcul : " +
+      (item.answer === "oui"
             ? `${item.a[0]}/${item.a[1]} et ${item.b[0]}/${item.b[1]} ont la même valeur. Elles représentent donc la même quantité.`
             : `${item.a[0]}/${item.a[1]} vaut ${decimalComma(
                 aVal,
@@ -1223,7 +1326,8 @@ export const fractionsBank: TutorBankItemV4[] = [
               )} et ${item.b[0]}/${item.b[1]} vaut ${decimalComma(
                 bVal,
                 2
-              )}. Elles ne représentent donc pas la même quantité.`,
+              )}. Elles ne représentent donc pas la même quantité.`) +
+      "\n\nConclusion : la fraction ou la quantité obtenue répond à la question.",
       };
     },
   },

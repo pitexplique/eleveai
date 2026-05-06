@@ -123,7 +123,9 @@ export const entiersBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "100 + 20 + 3",
     explanation:
-      "Cent vingt-trois signifie 100 + 20 + 3. On écrit donc 123.",
+      "Définition : un nombre entier sert à compter des unités entières, sans partie décimale.\n\nMéthode : on lit les chiffres selon leur rang ou on applique l’opération demandée.\n\nCalcul : " +
+      ("Cent vingt-trois signifie 100 + 20 + 3. On écrit donc 123.") +
+      "\n\nConclusion : on obtient l’entier ou le résultat demandé.",
     tags: ["entiers", "lecture", "ecriture"],
   },
   {
@@ -141,7 +143,9 @@ export const entiersBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "4 vingtaines + 10",
     explanation:
-      "Quatre-vingt-dix correspond à 80 + 10. On écrit donc 90.",
+      "Définition : un nombre entier sert à compter des unités entières, sans partie décimale.\n\nMéthode : on lit les chiffres selon leur rang ou on applique l’opération demandée.\n\nCalcul : " +
+      ("Quatre-vingt-dix correspond à 80 + 10. On écrit donc 90.") +
+      "\n\nConclusion : on obtient l’entier ou le résultat demandé.",
     tags: ["entiers", "lecture", "ecriture"],
   },
   {
@@ -159,7 +163,9 @@ export const entiersBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "2000 + 35",
     explanation:
-      "Deux mille trente-cinq signifie 2000 + 35. On écrit donc 2035.",
+      "Définition : un nombre entier sert à compter des unités entières, sans partie décimale.\n\nMéthode : on lit les chiffres selon leur rang ou on applique l’opération demandée.\n\nCalcul : " +
+      ("Deux mille trente-cinq signifie 2000 + 35. On écrit donc 2035.") +
+      "\n\nConclusion : on obtient l’entier ou le résultat demandé.",
     tags: ["entiers", "lecture", "ecriture"],
   },
   {
@@ -178,7 +184,9 @@ export const entiersBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "3 centaines et 4 unités.",
     explanation:
-      "Trois cent quatre signifie 3 centaines, 0 dizaine et 4 unités. Le bon nombre est 304.",
+      "Définition : un nombre entier sert à compter des unités entières, sans partie décimale.\n\nMéthode : on lit les chiffres selon leur rang ou on applique l’opération demandée.\n\nCalcul : " +
+      ("Trois cent quatre signifie 3 centaines, 0 dizaine et 4 unités. Le bon nombre est 304.") +
+      "\n\nConclusion : on obtient l’entier ou le résultat demandé.",
     tags: ["entiers", "lecture", "qcm"],
   },
   {
@@ -197,7 +205,9 @@ export const entiersBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "1000 + 42",
     explanation:
-      "Mille quarante-deux signifie 1000 + 42. Le bon nombre est 1042.",
+      "Définition : un nombre entier sert à compter des unités entières, sans partie décimale.\n\nMéthode : on lit les chiffres selon leur rang ou on applique l’opération demandée.\n\nCalcul : " +
+      ("Mille quarante-deux signifie 1000 + 42. Le bon nombre est 1042.") +
+      "\n\nConclusion : on obtient l’entier ou le résultat demandé.",
     tags: ["entiers", "lecture", "qcm"],
   },
   {
@@ -215,7 +225,9 @@ export const entiersBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "1000 + 200",
     explanation:
-      "Mille deux cents signifie 1000 + 200. On écrit donc 1200.",
+      "Définition : un nombre entier sert à compter des unités entières, sans partie décimale.\n\nMéthode : on lit les chiffres selon leur rang ou on applique l’opération demandée.\n\nCalcul : " +
+      ("Mille deux cents signifie 1000 + 200. On écrit donc 1200.") +
+      "\n\nConclusion : on obtient l’entier ou le résultat demandé.",
     tags: ["entiers", "lecture", "reunion"],
   },
 
@@ -237,7 +249,9 @@ export const entiersBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Le chiffre des dizaines est au milieu.",
     explanation:
-      "Dans 352, il y a 3 centaines, 5 dizaines et 2 unités. Le chiffre des dizaines est donc 5.",
+      "Définition : un nombre entier sert à compter des unités entières, sans partie décimale.\n\nMéthode : on lit les chiffres selon leur rang ou on applique l’opération demandée.\n\nCalcul : " +
+      ("Dans 352, il y a 3 centaines, 5 dizaines et 2 unités. Le chiffre des dizaines est donc 5.") +
+      "\n\nConclusion : on obtient l’entier ou le résultat demandé.",
     tags: ["entiers", "rang"],
   },
   {
@@ -255,7 +269,9 @@ export const entiersBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Le chiffre des centaines est le premier à gauche.",
     explanation:
-      "Dans 684, le premier chiffre à gauche représente les centaines. C’est 6.",
+      "Définition : un nombre entier sert à compter des unités entières, sans partie décimale.\n\nMéthode : on lit les chiffres selon leur rang ou on applique l’opération demandée.\n\nCalcul : " +
+      ("Dans 684, le premier chiffre à gauche représente les centaines. C’est 6.") +
+      "\n\nConclusion : on obtient l’entier ou le résultat demandé.",
     tags: ["entiers", "rang"],
   },
   {
@@ -273,7 +289,9 @@ export const entiersBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Le chiffre des unités est le dernier.",
     explanation:
-      "Dans 4 273, le chiffre des unités est le dernier à droite. C’est 3.",
+      "Définition : un nombre entier sert à compter des unités entières, sans partie décimale.\n\nMéthode : on lit les chiffres selon leur rang ou on applique l’opération demandée.\n\nCalcul : " +
+      ("Dans 4 273, le chiffre des unités est le dernier à droite. C’est 3.") +
+      "\n\nConclusion : on obtient l’entier ou le résultat demandé.",
     tags: ["entiers", "rang"],
   },
   {
@@ -292,7 +310,9 @@ export const entiersBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Unités à droite, puis dizaines.",
     explanation:
-      "Dans 5 482, le chiffre des unités est 2, donc juste avant se trouve le chiffre des dizaines : 8.",
+      "Définition : un nombre entier sert à compter des unités entières, sans partie décimale.\n\nMéthode : on lit les chiffres selon leur rang ou on applique l’opération demandée.\n\nCalcul : " +
+      ("Dans 5 482, le chiffre des unités est 2, donc juste avant se trouve le chiffre des dizaines : 8.") +
+      "\n\nConclusion : on obtient l’entier ou le résultat demandé.",
     tags: ["entiers", "rang", "qcm"],
   },
   {
@@ -311,7 +331,9 @@ export const entiersBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Milliers, centaines, dizaines, unités.",
     explanation:
-      "Dans 7 306, le 7 est au rang des milliers, le 3 au rang des centaines, le 0 au rang des dizaines et le 6 au rang des unités. Le chiffre des centaines est donc 3.",
+      "Définition : un nombre entier sert à compter des unités entières, sans partie décimale.\n\nMéthode : on lit les chiffres selon leur rang ou on applique l’opération demandée.\n\nCalcul : " +
+      ("Dans 7 306, le 7 est au rang des milliers, le 3 au rang des centaines, le 0 au rang des dizaines et le 6 au rang des unités. Le chiffre des centaines est donc 3.") +
+      "\n\nConclusion : on obtient l’entier ou le résultat demandé.",
     tags: ["entiers", "rang", "qcm"],
   },
 
@@ -333,7 +355,9 @@ export const entiersBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Compare les dizaines.",
     explanation:
-      "Les deux nombres ont 3 centaines. On compare alors les dizaines : 5 dizaines est plus grand que 4 dizaines. Donc 354 est plus grand que 345.",
+      "Définition : un nombre entier sert à compter des unités entières, sans partie décimale.\n\nMéthode : on lit les chiffres selon leur rang ou on applique l’opération demandée.\n\nCalcul : " +
+      ("Les deux nombres ont 3 centaines. On compare alors les dizaines : 5 dizaines est plus grand que 4 dizaines. Donc 354 est plus grand que 345.") +
+      "\n\nConclusion : on obtient l’entier ou le résultat demandé.",
     tags: ["entiers", "comparaison"],
   },
   {
@@ -351,7 +375,9 @@ export const entiersBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Compare les dizaines après les centaines.",
     explanation:
-      "Les deux nombres ont 8 ou 9 centaines ? En réalité, 908 a 9 centaines et 890 a 8 centaines. Comme 8 centaines est plus petit que 9 centaines, 890 est le plus petit.",
+      "Définition : un nombre entier sert à compter des unités entières, sans partie décimale.\n\nMéthode : on lit les chiffres selon leur rang ou on applique l’opération demandée.\n\nCalcul : " +
+      ("Les deux nombres ont 8 ou 9 centaines ? En réalité, 908 a 9 centaines et 890 a 8 centaines. Comme 8 centaines est plus petit que 9 centaines, 890 est le plus petit.") +
+      "\n\nConclusion : on obtient l’entier ou le résultat demandé.",
     tags: ["entiers", "comparaison"],
   },
   {
@@ -369,7 +395,9 @@ export const entiersBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Compare les dizaines.",
     explanation:
-      "Les deux nombres ont 2 milliers et 3 centaines. On compare ensuite les dizaines : 5 dizaines est plus grand que 0 dizaine. Donc 2 350 est plus grand que 2 305.",
+      "Définition : un nombre entier sert à compter des unités entières, sans partie décimale.\n\nMéthode : on lit les chiffres selon leur rang ou on applique l’opération demandée.\n\nCalcul : " +
+      ("Les deux nombres ont 2 milliers et 3 centaines. On compare ensuite les dizaines : 5 dizaines est plus grand que 0 dizaine. Donc 2 350 est plus grand que 2 305.") +
+      "\n\nConclusion : on obtient l’entier ou le résultat demandé.",
     tags: ["entiers", "comparaison"],
   },
   {
@@ -388,7 +416,9 @@ export const entiersBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Compare les centaines puis les dizaines.",
     explanation:
-      "Tous les nombres ont 1 millier. En comparant ensuite les centaines et les dizaines, 1 250 est le plus grand.",
+      "Définition : un nombre entier sert à compter des unités entières, sans partie décimale.\n\nMéthode : on lit les chiffres selon leur rang ou on applique l’opération demandée.\n\nCalcul : " +
+      ("Tous les nombres ont 1 millier. En comparant ensuite les centaines et les dizaines, 1 250 est le plus grand.") +
+      "\n\nConclusion : on obtient l’entier ou le résultat demandé.",
     tags: ["entiers", "comparaison", "qcm"],
   },
   {
@@ -407,7 +437,9 @@ export const entiersBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Compare les dizaines.",
     explanation:
-      "Les deux nombres ont 1 millier et 4 centaines. On compare alors les dizaines : 0 dizaine est plus petit que 8 dizaines. Donc 1 408 est plus petit que 1 480.",
+      "Définition : un nombre entier sert à compter des unités entières, sans partie décimale.\n\nMéthode : on lit les chiffres selon leur rang ou on applique l’opération demandée.\n\nCalcul : " +
+      ("Les deux nombres ont 1 millier et 4 centaines. On compare alors les dizaines : 0 dizaine est plus petit que 8 dizaines. Donc 1 408 est plus petit que 1 480.") +
+      "\n\nConclusion : on obtient l’entier ou le résultat demandé.",
     tags: ["entiers", "comparaison", "reunion", "qcm"],
   },
 
@@ -429,7 +461,9 @@ export const entiersBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "3 centaines, 5 dizaines, 2 unités.",
     explanation:
-      "Dans 352, le 3 représente 300, le 5 représente 50 et le 2 représente 2. On peut donc écrire 352 = 300 + 50 + 2.",
+      "Définition : un nombre entier sert à compter des unités entières, sans partie décimale.\n\nMéthode : on lit les chiffres selon leur rang ou on applique l’opération demandée.\n\nCalcul : " +
+      ("Dans 352, le 3 représente 300, le 5 représente 50 et le 2 représente 2. On peut donc écrire 352 = 300 + 50 + 2.") +
+      "\n\nConclusion : on obtient l’entier ou le résultat demandé.",
     tags: ["entiers", "decomposition"],
   },
   {
@@ -447,7 +481,9 @@ export const entiersBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "4 milliers, 2 centaines, 0 dizaine, 6 unités.",
     explanation:
-      "Dans 4 206, le 4 représente 4000, le 2 représente 200, le 0 représente 0 dizaine et le 6 représente 6. On peut écrire 4 206 = 4000 + 200 + 6.",
+      "Définition : un nombre entier sert à compter des unités entières, sans partie décimale.\n\nMéthode : on lit les chiffres selon leur rang ou on applique l’opération demandée.\n\nCalcul : " +
+      ("Dans 4 206, le 4 représente 4000, le 2 représente 200, le 0 représente 0 dizaine et le 6 représente 6. On peut écrire 4 206 = 4000 + 200 + 6.") +
+      "\n\nConclusion : on obtient l’entier ou le résultat demandé.",
     tags: ["entiers", "decomposition"],
   },
   {
@@ -466,7 +502,9 @@ export const entiersBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Il y a 5 centaines, 0 dizaine, 7 unités.",
     explanation:
-      "507 contient 5 centaines, 0 dizaine et 7 unités. Sa bonne décomposition est donc 500 + 7.",
+      "Définition : un nombre entier sert à compter des unités entières, sans partie décimale.\n\nMéthode : on lit les chiffres selon leur rang ou on applique l’opération demandée.\n\nCalcul : " +
+      ("507 contient 5 centaines, 0 dizaine et 7 unités. Sa bonne décomposition est donc 500 + 7.") +
+      "\n\nConclusion : on obtient l’entier ou le résultat demandé.",
     tags: ["entiers", "decomposition", "qcm"],
   },
   {
@@ -485,7 +523,9 @@ export const entiersBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "2 milliers, 3 centaines, 4 dizaines.",
     explanation:
-      "2 340 contient 2 milliers, 3 centaines, 4 dizaines et 0 unité. La bonne décomposition est donc 2000 + 300 + 40.",
+      "Définition : un nombre entier sert à compter des unités entières, sans partie décimale.\n\nMéthode : on lit les chiffres selon leur rang ou on applique l’opération demandée.\n\nCalcul : " +
+      ("2 340 contient 2 milliers, 3 centaines, 4 dizaines et 0 unité. La bonne décomposition est donc 2000 + 300 + 40.") +
+      "\n\nConclusion : on obtient l’entier ou le résultat demandé.",
     tags: ["entiers", "decomposition", "qcm"],
   },
 
@@ -507,7 +547,9 @@ export const entiersBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "47 est entre 40 et 50.",
     explanation:
-      "Le nombre 47 est plus grand que 40 et plus petit que 50. Il est donc encadré entre 40 et 50.",
+      "Définition : un nombre entier sert à compter des unités entières, sans partie décimale.\n\nMéthode : on lit les chiffres selon leur rang ou on applique l’opération demandée.\n\nCalcul : " +
+      ("Le nombre 47 est plus grand que 40 et plus petit que 50. Il est donc encadré entre 40 et 50.") +
+      "\n\nConclusion : on obtient l’entier ou le résultat demandé.",
     tags: ["entiers", "encadrement"],
   },
   {
@@ -525,7 +567,9 @@ export const entiersBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "326 est entre 300 et 400.",
     explanation:
-      "Le nombre 326 est compris entre 300 et 400. Ce sont les deux centaines consécutives qui l’encadrent.",
+      "Définition : un nombre entier sert à compter des unités entières, sans partie décimale.\n\nMéthode : on lit les chiffres selon leur rang ou on applique l’opération demandée.\n\nCalcul : " +
+      ("Le nombre 326 est compris entre 300 et 400. Ce sont les deux centaines consécutives qui l’encadrent.") +
+      "\n\nConclusion : on obtient l’entier ou le résultat demandé.",
     tags: ["entiers", "encadrement"],
   },
   {
@@ -544,7 +588,9 @@ export const entiersBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "On parle ici de centaines consécutives.",
     explanation:
-      "Comme 582 est compris entre 500 et 600, le bon encadrement est 500 et 600.",
+      "Définition : un nombre entier sert à compter des unités entières, sans partie décimale.\n\nMéthode : on lit les chiffres selon leur rang ou on applique l’opération demandée.\n\nCalcul : " +
+      ("Comme 582 est compris entre 500 et 600, le bon encadrement est 500 et 600.") +
+      "\n\nConclusion : on obtient l’entier ou le résultat demandé.",
     tags: ["entiers", "encadrement", "qcm"],
   },
   {
@@ -563,7 +609,9 @@ export const entiersBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Deux dizaines consécutives.",
     explanation:
-      "73 est plus grand que 70 et plus petit que 80. Il est donc entre 70 et 80.",
+      "Définition : un nombre entier sert à compter des unités entières, sans partie décimale.\n\nMéthode : on lit les chiffres selon leur rang ou on applique l’opération demandée.\n\nCalcul : " +
+      ("73 est plus grand que 70 et plus petit que 80. Il est donc entre 70 et 80.") +
+      "\n\nConclusion : on obtient l’entier ou le résultat demandé.",
     tags: ["entiers", "encadrement", "qcm"],
   },
 
@@ -585,7 +633,9 @@ export const entiersBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Assemble les chiffres dans l’ordre.",
     explanation:
-      "Le chiffre des centaines est 4, celui des dizaines est 2 et celui des unités est 7. Le nombre est donc 427.",
+      "Définition : un nombre entier sert à compter des unités entières, sans partie décimale.\n\nMéthode : on lit les chiffres selon leur rang ou on applique l’opération demandée.\n\nCalcul : " +
+      ("Le chiffre des centaines est 4, celui des dizaines est 2 et celui des unités est 7. Le nombre est donc 427.") +
+      "\n\nConclusion : on obtient l’entier ou le résultat demandé.",
     tags: ["entiers", "defi"],
   },
   {
@@ -603,7 +653,9 @@ export const entiersBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Calcule l’écart.",
     explanation:
-      "Pour passer de 380 à 400, on calcule 400 - 380 = 20. Il faut donc ajouter 20.",
+      "Définition : un nombre entier sert à compter des unités entières, sans partie décimale.\n\nMéthode : on lit les chiffres selon leur rang ou on applique l’opération demandée.\n\nCalcul : " +
+      ("Pour passer de 380 à 400, on calcule 400 - 380 = 20. Il faut donc ajouter 20.") +
+      "\n\nConclusion : on obtient l’entier ou le résultat demandé.",
     tags: ["entiers", "defi"],
   },
   {
@@ -621,7 +673,9 @@ export const entiersBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Le nombre ne peut pas commencer par 0.",
     explanation:
-      "Pour obtenir le plus petit nombre possible, on place d’abord le plus petit chiffre non nul, donc 1. Ensuite on place 0, puis 3 et 5. On obtient 1035.",
+      "Définition : un nombre entier sert à compter des unités entières, sans partie décimale.\n\nMéthode : on lit les chiffres selon leur rang ou on applique l’opération demandée.\n\nCalcul : " +
+      ("Pour obtenir le plus petit nombre possible, on place d’abord le plus petit chiffre non nul, donc 1. Ensuite on place 0, puis 3 et 5. On obtient 1035.") +
+      "\n\nConclusion : on obtient l’entier ou le résultat demandé.",
     tags: ["entiers", "defi", "raisonnement"],
   },
   {
@@ -639,7 +693,9 @@ export const entiersBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Additionne 1 250 et 980.",
     explanation:
-      "On additionne 1 250 et 980 : 1250 + 980 = 2230. Le site reçoit donc 2 230 visiteurs au total.",
+      "Définition : un nombre entier sert à compter des unités entières, sans partie décimale.\n\nMéthode : on lit les chiffres selon leur rang ou on applique l’opération demandée.\n\nCalcul : " +
+      ("On additionne 1 250 et 980 : 1250 + 980 = 2230. Le site reçoit donc 2 230 visiteurs au total.") +
+      "\n\nConclusion : on obtient l’entier ou le résultat demandé.",
     tags: ["entiers", "defi", "reunion"],
   },
 
@@ -666,7 +722,9 @@ export const entiersBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(n), chunkedNumber(n)],
         comparator: "number_equal",
-        explanation: `${words} s’écrit ${chunkedNumber(n)} en chiffres.`,
+        explanation: "Définition : un nombre entier sert à compter des unités entières, sans partie décimale.\n\nMéthode : on lit les chiffres selon leur rang ou on applique l’opération demandée.\n\nCalcul : " +
+      (`${words} s’écrit ${chunkedNumber(n)} en chiffres.`) +
+      "\n\nConclusion : on obtient l’entier ou le résultat demandé.",
       };
     },
   },
@@ -704,7 +762,9 @@ export const entiersBank: TutorBankItemV4[] = [
         choices,
         expected: [good],
         comparator: "mcq_exact",
-        explanation: `« ${words} » s’écrit ${good}.`,
+        explanation: "Définition : un nombre entier sert à compter des unités entières, sans partie décimale.\n\nMéthode : on lit les chiffres selon leur rang ou on applique l’opération demandée.\n\nCalcul : " +
+      (`« ${words} » s’écrit ${good}.`) +
+      "\n\nConclusion : on obtient l’entier ou le résultat demandé.",
       };
     },
   },
@@ -741,7 +801,9 @@ export const entiersBank: TutorBankItemV4[] = [
         format: "short",
         expected: [answer],
         comparator: "number_equal",
-        explanation: `Dans ${n}, le chiffre demandé au rang des ${target} est ${answer}.`,
+        explanation: "Définition : un nombre entier sert à compter des unités entières, sans partie décimale.\n\nMéthode : on lit les chiffres selon leur rang ou on applique l’opération demandée.\n\nCalcul : " +
+      (`Dans ${n}, le chiffre demandé au rang des ${target} est ${answer}.`) +
+      "\n\nConclusion : on obtient l’entier ou le résultat demandé.",
       };
     },
   },
@@ -784,9 +846,11 @@ export const entiersBank: TutorBankItemV4[] = [
         choices,
         expected: [answer],
         comparator: "mcq_exact",
-        explanation: `Dans ${chunkedNumber(
+        explanation: "Définition : un nombre entier sert à compter des unités entières, sans partie décimale.\n\nMéthode : on lit les chiffres selon leur rang ou on applique l’opération demandée.\n\nCalcul : " +
+      (`Dans ${chunkedNumber(
           n
-        )}, le chiffre des ${target} est ${answer}.`,
+        )}, le chiffre des ${target} est ${answer}.`) +
+      "\n\nConclusion : on obtient l’entier ou le résultat demandé.",
       };
     },
   },
@@ -817,7 +881,9 @@ export const entiersBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(good), chunkedNumber(good)],
         comparator: "number_equal",
-        explanation: `On compare ${a} et ${b}. Comme ${good} est plus grand que ${small}, la bonne réponse est ${good}.`,
+        explanation: "Définition : un nombre entier sert à compter des unités entières, sans partie décimale.\n\nMéthode : on lit les chiffres selon leur rang ou on applique l’opération demandée.\n\nCalcul : " +
+      (`On compare ${a} et ${b}. Comme ${good} est plus grand que ${small}, la bonne réponse est ${good}.`) +
+      "\n\nConclusion : on obtient l’entier ou le résultat demandé.",
       };
     },
   },
@@ -848,9 +914,11 @@ export const entiersBank: TutorBankItemV4[] = [
         choices,
         expected: [chunkedNumber(good)],
         comparator: "mcq_exact",
-        explanation: `Parmi les nombres proposés, ${chunkedNumber(
+        explanation: "Définition : un nombre entier sert à compter des unités entières, sans partie décimale.\n\nMéthode : on lit les chiffres selon leur rang ou on applique l’opération demandée.\n\nCalcul : " +
+      (`Parmi les nombres proposés, ${chunkedNumber(
           good
-        )} est le plus grand.`,
+        )} est le plus grand.`) +
+      "\n\nConclusion : on obtient l’entier ou le résultat demandé.",
       };
     },
   },
@@ -880,7 +948,9 @@ export const entiersBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(hundreds), String(tens), String(units)],
         comparator: "contains_keyword",
-        explanation: `${n} se décompose en ${hundreds} + ${tens} + ${units}.`,
+        explanation: "Définition : un nombre entier sert à compter des unités entières, sans partie décimale.\n\nMéthode : on lit les chiffres selon leur rang ou on applique l’opération demandée.\n\nCalcul : " +
+      (`${n} se décompose en ${hundreds} + ${tens} + ${units}.`) +
+      "\n\nConclusion : on obtient l’entier ou le résultat demandé.",
       };
     },
   },
@@ -913,7 +983,9 @@ export const entiersBank: TutorBankItemV4[] = [
         ]),
         expected: [good],
         comparator: "mcq_exact",
-        explanation: `Dans ${n}, les chiffres représentent ${hundreds}, ${tens} et ${units}. La bonne décomposition est donc ${good}.`,
+        explanation: "Définition : un nombre entier sert à compter des unités entières, sans partie décimale.\n\nMéthode : on lit les chiffres selon leur rang ou on applique l’opération demandée.\n\nCalcul : " +
+      (`Dans ${n}, les chiffres représentent ${hundreds}, ${tens} et ${units}. La bonne décomposition est donc ${good}.`) +
+      "\n\nConclusion : on obtient l’entier ou le résultat demandé.",
       };
     },
   },
@@ -942,7 +1014,9 @@ export const entiersBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(low), String(high)],
         comparator: "contains_keyword",
-        explanation: `${n} est plus grand que ${low} et plus petit que ${high}. Il est donc encadré entre ${low} et ${high}.`,
+        explanation: "Définition : un nombre entier sert à compter des unités entières, sans partie décimale.\n\nMéthode : on lit les chiffres selon leur rang ou on applique l’opération demandée.\n\nCalcul : " +
+      (`${n} est plus grand que ${low} et plus petit que ${high}. Il est donc encadré entre ${low} et ${high}.`) +
+      "\n\nConclusion : on obtient l’entier ou le résultat demandé.",
       };
     },
   },
@@ -974,7 +1048,9 @@ export const entiersBank: TutorBankItemV4[] = [
         ]),
         expected: [good],
         comparator: "mcq_exact",
-        explanation: `${n} est compris entre ${low} et ${high}.`,
+        explanation: "Définition : un nombre entier sert à compter des unités entières, sans partie décimale.\n\nMéthode : on lit les chiffres selon leur rang ou on applique l’opération demandée.\n\nCalcul : " +
+      (`${n} est compris entre ${low} et ${high}.`) +
+      "\n\nConclusion : on obtient l’entier ou le résultat demandé.",
       };
     },
   },
@@ -1004,7 +1080,9 @@ export const entiersBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(n)],
         comparator: "number_equal",
-        explanation: `Le nombre recherché a ${a} au rang des centaines, ${b} au rang des dizaines et ${c} au rang des unités. C’est donc ${n}.`,
+        explanation: "Définition : un nombre entier sert à compter des unités entières, sans partie décimale.\n\nMéthode : on lit les chiffres selon leur rang ou on applique l’opération demandée.\n\nCalcul : " +
+      (`Le nombre recherché a ${a} au rang des centaines, ${b} au rang des dizaines et ${c} au rang des unités. C’est donc ${n}.`) +
+      "\n\nConclusion : on obtient l’entier ou le résultat demandé.",
       };
     },
   },
@@ -1030,7 +1108,9 @@ export const entiersBank: TutorBankItemV4[] = [
         expected: [good],
         comparator: "mcq_exact",
         explanation:
-          "Le nombre ne peut pas commencer par 0. On place donc d’abord 2, puis 0, puis 4 et 7. Le plus petit nombre possible est 2047.",
+          "Définition : un nombre entier sert à compter des unités entières, sans partie décimale.\n\nMéthode : on lit les chiffres selon leur rang ou on applique l’opération demandée.\n\nCalcul : " +
+      ("Le nombre ne peut pas commencer par 0. On place donc d’abord 2, puis 0, puis 4 et 7. Le plus petit nombre possible est 2047.") +
+      "\n\nConclusion : on obtient l’entier ou le résultat demandé.",
       };
     },
   },

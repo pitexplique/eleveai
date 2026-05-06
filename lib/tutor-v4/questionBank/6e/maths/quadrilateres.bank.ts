@@ -27,7 +27,9 @@ export const quadrilateresBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "On nomme la figure avec ses 4 sommets dans l’ordre.",
     explanation:
-      "Un quadrilatère se nomme en donnant les sommets dans l’ordre autour de la figure. Ici, on peut le nommer ABCD.",
+      "Définition : un quadrilatère est une figure qui possède quatre côtés.\n\nMéthode : on observe les côtés, les angles et les propriétés de la figure.\n\nCalcul : " +
+      ("Un quadrilatère se nomme en donnant les sommets dans l’ordre autour de la figure. Ici, on peut le nommer ABCD.") +
+      "\n\nConclusion : on reconnaît le quadrilatère ou la propriété demandée.",
     tags: ["quadrilatere", "nommage", "canvas"],
     canvas: {
       kind: "quadrilatere",
@@ -59,7 +61,9 @@ export const quadrilateresBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Le préfixe « quadri » aide.",
     explanation:
-      "Le mot quadrilatère indique une figure à 4 côtés, donc elle possède aussi 4 sommets.",
+      "Définition : un quadrilatère est une figure qui possède quatre côtés.\n\nMéthode : on observe les côtés, les angles et les propriétés de la figure.\n\nCalcul : " +
+      ("Le mot quadrilatère indique une figure à 4 côtés, donc elle possède aussi 4 sommets.") +
+      "\n\nConclusion : on reconnaît le quadrilatère ou la propriété demandée.",
     tags: ["quadrilatere", "sommets"],
   },
   {
@@ -78,7 +82,9 @@ export const quadrilateresBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Un quadrilatère a autant de côtés que de sommets.",
     explanation:
-      "Un quadrilatère est une figure qui possède 4 côtés.",
+      "Définition : un quadrilatère est une figure qui possède quatre côtés.\n\nMéthode : on observe les côtés, les angles et les propriétés de la figure.\n\nCalcul : " +
+      ("Un quadrilatère est une figure qui possède 4 côtés.") +
+      "\n\nConclusion : on reconnaît le quadrilatère ou la propriété demandée.",
     tags: ["quadrilatere", "cotes"],
   },
   {
@@ -97,7 +103,9 @@ export const quadrilateresBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Une diagonale relie deux sommets opposés.",
     explanation:
-      "Dans un quadrilatère, une diagonale relie deux sommets opposés. Ici, les diagonales sont AC et BD.",
+      "Définition : un quadrilatère est une figure qui possède quatre côtés.\n\nMéthode : on observe les côtés, les angles et les propriétés de la figure.\n\nCalcul : " +
+      ("Dans un quadrilatère, une diagonale relie deux sommets opposés. Ici, les diagonales sont AC et BD.") +
+      "\n\nConclusion : on reconnaît le quadrilatère ou la propriété demandée.",
     tags: ["quadrilatere", "diagonales", "canvas"],
     canvas: {
       kind: "quadrilatere",
@@ -134,7 +142,9 @@ export const quadrilateresBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Deux côtés opposés ne se touchent pas.",
     explanation:
-      "Dans ABCD, les côtés opposés sont AB et CD d’une part, puis BC et AD d’autre part.",
+      "Définition : un quadrilatère est une figure qui possède quatre côtés.\n\nMéthode : on observe les côtés, les angles et les propriétés de la figure.\n\nCalcul : " +
+      ("Dans ABCD, les côtés opposés sont AB et CD d’une part, puis BC et AD d’autre part.") +
+      "\n\nConclusion : on reconnaît le quadrilatère ou la propriété demandée.",
     tags: ["quadrilatere", "vocabulaire", "cotes-opposes"],
   },
   {
@@ -153,7 +163,9 @@ export const quadrilateresBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Ils se touchent au sommet B.",
     explanation:
-      "AB et BC ont un sommet commun, B. Ce sont donc deux côtés consécutifs.",
+      "Définition : un quadrilatère est une figure qui possède quatre côtés.\n\nMéthode : on observe les côtés, les angles et les propriétés de la figure.\n\nCalcul : " +
+      ("AB et BC ont un sommet commun, B. Ce sont donc deux côtés consécutifs.") +
+      "\n\nConclusion : on reconnaît le quadrilatère ou la propriété demandée.",
     tags: ["quadrilatere", "vocabulaire", "cotes-consecutifs"],
   },
   {
@@ -184,7 +196,9 @@ export const quadrilateresBank: TutorBankItemV4[] = [
           format: "short",
           expected: [`quadrilatere ${name.toLowerCase()}`, name.toLowerCase(), name],
           comparator: "contains_keyword",
-          explanation: `On nomme le quadrilatère en donnant les sommets dans l’ordre : ${name}.`,
+          explanation: "Définition : un quadrilatère est une figure qui possède quatre côtés.\n\nMéthode : on observe les côtés, les angles et les propriétés de la figure.\n\nCalcul : " +
+      (`On nomme le quadrilatère en donnant les sommets dans l’ordre : ${name}.`) +
+      "\n\nConclusion : on reconnaît le quadrilatère ou la propriété demandée.",
           canvas: {
             kind: "quadrilatere",
             points: {
@@ -215,7 +229,9 @@ export const quadrilateresBank: TutorBankItemV4[] = [
           expected: ["2"],
           comparator: "mcq_exact",
           explanation:
-            "Un quadrilatère possède 2 diagonales, car on peut relier les deux paires de sommets opposés.",
+            "Définition : un quadrilatère est une figure qui possède quatre côtés.\n\nMéthode : on observe les côtés, les angles et les propriétés de la figure.\n\nCalcul : " +
+      ("Un quadrilatère possède 2 diagonales, car on peut relier les deux paires de sommets opposés.") +
+      "\n\nConclusion : on reconnaît le quadrilatère ou la propriété demandée.",
         };
       }
 
@@ -225,7 +241,9 @@ export const quadrilateresBank: TutorBankItemV4[] = [
         choices: shuffle(["3", "4", "5", "6"]),
         expected: ["4"],
         comparator: "mcq_exact",
-        explanation: "Un quadrilatère possède 4 sommets.",
+        explanation: "Définition : un quadrilatère est une figure qui possède quatre côtés.\n\nMéthode : on observe les côtés, les angles et les propriétés de la figure.\n\nCalcul : " +
+      ("Un quadrilatère possède 4 sommets.") +
+      "\n\nConclusion : on reconnaît le quadrilatère ou la propriété demandée.",
       };
     },
   },
@@ -249,7 +267,9 @@ export const quadrilateresBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "La figure a 4 angles droits.",
     explanation:
-      "Une figure qui possède 4 angles droits est un rectangle.",
+      "Définition : un quadrilatère est une figure qui possède quatre côtés.\n\nMéthode : on observe les côtés, les angles et les propriétés de la figure.\n\nCalcul : " +
+      ("Une figure qui possède 4 angles droits est un rectangle.") +
+      "\n\nConclusion : on reconnaît le quadrilatère ou la propriété demandée.",
     tags: ["quadrilatere", "rectangle", "canvas"],
     canvas: {
       kind: "quadrilatere",
@@ -284,7 +304,9 @@ export const quadrilateresBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Les 4 côtés sont égaux mais il n’y a pas d’angle droit codé.",
     explanation:
-      "Une figure qui possède 4 côtés égaux, sans information d’angles droits, est un losange.",
+      "Définition : un quadrilatère est une figure qui possède quatre côtés.\n\nMéthode : on observe les côtés, les angles et les propriétés de la figure.\n\nCalcul : " +
+      ("Une figure qui possède 4 côtés égaux, sans information d’angles droits, est un losange.") +
+      "\n\nConclusion : on reconnaît le quadrilatère ou la propriété demandée.",
     tags: ["quadrilatere", "losange", "canvas"],
     canvas: {
       kind: "quadrilatere",
@@ -319,7 +341,9 @@ export const quadrilateresBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Il y a 4 côtés égaux et 4 angles droits.",
     explanation:
-      "Une figure qui possède 4 angles droits et 4 côtés égaux est un carré.",
+      "Définition : un quadrilatère est une figure qui possède quatre côtés.\n\nMéthode : on observe les côtés, les angles et les propriétés de la figure.\n\nCalcul : " +
+      ("Une figure qui possède 4 angles droits et 4 côtés égaux est un carré.") +
+      "\n\nConclusion : on reconnaît le quadrilatère ou la propriété demandée.",
     tags: ["quadrilatere", "carre", "canvas"],
     canvas: {
       kind: "quadrilatere",
@@ -355,7 +379,9 @@ export const quadrilateresBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Aucune propriété particulière n’est codée.",
     explanation:
-      "Sans codage d’angles droits, de côtés égaux ou d’autres propriétés particulières, on parle de quadrilatère quelconque.",
+      "Définition : un quadrilatère est une figure qui possède quatre côtés.\n\nMéthode : on observe les côtés, les angles et les propriétés de la figure.\n\nCalcul : " +
+      ("Sans codage d’angles droits, de côtés égaux ou d’autres propriétés particulières, on parle de quadrilatère quelconque.") +
+      "\n\nConclusion : on reconnaît le quadrilatère ou la propriété demandée.",
     tags: ["quadrilatere", "quelconque", "canvas"],
     canvas: {
       kind: "quadrilatere",
@@ -387,7 +413,9 @@ export const quadrilateresBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Même penché, un rectangle garde ses 4 angles droits.",
     explanation:
-      "Une figure peut être penchée à l’écran tout en gardant 4 angles droits. C’est donc un rectangle.",
+      "Définition : un quadrilatère est une figure qui possède quatre côtés.\n\nMéthode : on observe les côtés, les angles et les propriétés de la figure.\n\nCalcul : " +
+      ("Une figure peut être penchée à l’écran tout en gardant 4 angles droits. C’est donc un rectangle.") +
+      "\n\nConclusion : on reconnaît le quadrilatère ou la propriété demandée.",
     tags: ["quadrilatere", "rectangle", "penche", "canvas"],
     canvas: {
       kind: "quadrilatere",
@@ -422,7 +450,9 @@ export const quadrilateresBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Même penché, le carré garde 4 côtés égaux et 4 angles droits.",
     explanation:
-      "Le carré reste un carré même s’il est penché sur le dessin : il a toujours 4 côtés égaux et 4 angles droits.",
+      "Définition : un quadrilatère est une figure qui possède quatre côtés.\n\nMéthode : on observe les côtés, les angles et les propriétés de la figure.\n\nCalcul : " +
+      ("Le carré reste un carré même s’il est penché sur le dessin : il a toujours 4 côtés égaux et 4 angles droits.") +
+      "\n\nConclusion : on reconnaît le quadrilatère ou la propriété demandée.",
     tags: ["quadrilatere", "carre", "penche", "canvas"],
     canvas: {
       kind: "quadrilatere",
@@ -458,7 +488,9 @@ export const quadrilateresBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "La figure n’a qu’une partie des informations utiles.",
     explanation:
-      "Le codage donné n’est pas suffisant pour reconnaître avec certitude un rectangle, un losange ou un carré. On ne peut donc pas savoir.",
+      "Définition : un quadrilatère est une figure qui possède quatre côtés.\n\nMéthode : on observe les côtés, les angles et les propriétés de la figure.\n\nCalcul : " +
+      ("Le codage donné n’est pas suffisant pour reconnaître avec certitude un rectangle, un losange ou un carré. On ne peut donc pas savoir.") +
+      "\n\nConclusion : on reconnaît le quadrilatère ou la propriété demandée.",
     tags: ["quadrilatere", "nature", "savoir", "canvas"],
     canvas: {
       kind: "quadrilatere",
@@ -509,7 +541,9 @@ export const quadrilateresBank: TutorBankItemV4[] = [
           expected: ["rectangle"],
           comparator: "mcq_exact",
           explanation:
-            "La figure possède 4 angles droits. C’est donc un rectangle.",
+            "Définition : un quadrilatère est une figure qui possède quatre côtés.\n\nMéthode : on observe les côtés, les angles et les propriétés de la figure.\n\nCalcul : " +
+      ("La figure possède 4 angles droits. C’est donc un rectangle.") +
+      "\n\nConclusion : on reconnaît le quadrilatère ou la propriété demandée.",
           canvas: {
             kind: "quadrilatere",
             points: {
@@ -542,7 +576,9 @@ export const quadrilateresBank: TutorBankItemV4[] = [
           expected: ["losange"],
           comparator: "mcq_exact",
           explanation:
-            "La figure possède 4 côtés égaux sans information sur des angles droits. C’est donc un losange.",
+            "Définition : un quadrilatère est une figure qui possède quatre côtés.\n\nMéthode : on observe les côtés, les angles et les propriétés de la figure.\n\nCalcul : " +
+      ("La figure possède 4 côtés égaux sans information sur des angles droits. C’est donc un losange.") +
+      "\n\nConclusion : on reconnaît le quadrilatère ou la propriété demandée.",
           canvas: {
             kind: "quadrilatere",
             points: {
@@ -575,7 +611,9 @@ export const quadrilateresBank: TutorBankItemV4[] = [
           expected: ["carré"],
           comparator: "mcq_exact",
           explanation:
-            "La figure possède à la fois 4 angles droits et 4 côtés égaux. C’est donc un carré.",
+            "Définition : un quadrilatère est une figure qui possède quatre côtés.\n\nMéthode : on observe les côtés, les angles et les propriétés de la figure.\n\nCalcul : " +
+      ("La figure possède à la fois 4 angles droits et 4 côtés égaux. C’est donc un carré.") +
+      "\n\nConclusion : on reconnaît le quadrilatère ou la propriété demandée.",
           canvas: {
             kind: "quadrilatere",
             points: {
@@ -608,7 +646,9 @@ export const quadrilateresBank: TutorBankItemV4[] = [
         expected: ["quadrilatère quelconque"],
         comparator: "mcq_exact",
         explanation:
-          "Aucun codage particulier ne permet de reconnaître un rectangle, un losange ou un carré. C’est donc un quadrilatère quelconque.",
+          "Définition : un quadrilatère est une figure qui possède quatre côtés.\n\nMéthode : on observe les côtés, les angles et les propriétés de la figure.\n\nCalcul : " +
+      ("Aucun codage particulier ne permet de reconnaître un rectangle, un losange ou un carré. C’est donc un quadrilatère quelconque.") +
+      "\n\nConclusion : on reconnaît le quadrilatère ou la propriété demandée.",
         canvas: {
           kind: "quadrilatere",
           points: {
@@ -645,7 +685,9 @@ export const quadrilateresBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Compte les petits carrés rouges.",
     explanation:
-      "Les petits carrés indiquent les angles droits. Ici, on en compte 4.",
+      "Définition : un quadrilatère est une figure qui possède quatre côtés.\n\nMéthode : on observe les côtés, les angles et les propriétés de la figure.\n\nCalcul : " +
+      ("Les petits carrés indiquent les angles droits. Ici, on en compte 4.") +
+      "\n\nConclusion : on reconnaît le quadrilatère ou la propriété demandée.",
     tags: ["quadrilatere", "angles", "canvas"],
     canvas: {
       kind: "quadrilatere",
@@ -685,7 +727,9 @@ export const quadrilateresBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Les mêmes codages verts indiquent des longueurs égales.",
     explanation:
-      "Le même codage sur chaque côté indique que les 4 côtés sont égaux.",
+      "Définition : un quadrilatère est une figure qui possède quatre côtés.\n\nMéthode : on observe les côtés, les angles et les propriétés de la figure.\n\nCalcul : " +
+      ("Le même codage sur chaque côté indique que les 4 côtés sont égaux.") +
+      "\n\nConclusion : on reconnaît le quadrilatère ou la propriété demandée.",
     tags: ["quadrilatere", "cotes", "canvas"],
     canvas: {
       kind: "quadrilatere",
@@ -720,7 +764,9 @@ export const quadrilateresBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Regarde les codages de parallélisme.",
     explanation:
-      "Le codage indique deux paires de côtés parallèles.",
+      "Définition : un quadrilatère est une figure qui possède quatre côtés.\n\nMéthode : on observe les côtés, les angles et les propriétés de la figure.\n\nCalcul : " +
+      ("Le codage indique deux paires de côtés parallèles.") +
+      "\n\nConclusion : on reconnaît le quadrilatère ou la propriété demandée.",
     tags: ["quadrilatere", "paralleles", "canvas"],
     canvas: {
       kind: "quadrilatere",
@@ -755,7 +801,9 @@ export const quadrilateresBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Les diagonales relient deux sommets opposés.",
     explanation:
-      "Un quadrilatère possède 2 diagonales, car il y a 2 façons de relier les sommets opposés.",
+      "Définition : un quadrilatère est une figure qui possède quatre côtés.\n\nMéthode : on observe les côtés, les angles et les propriétés de la figure.\n\nCalcul : " +
+      ("Un quadrilatère possède 2 diagonales, car il y a 2 façons de relier les sommets opposés.") +
+      "\n\nConclusion : on reconnaît le quadrilatère ou la propriété demandée.",
     tags: ["quadrilatere", "diagonales"],
   },
   {
@@ -774,7 +822,9 @@ export const quadrilateresBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Une diagonale relie deux sommets opposés.",
     explanation:
-      "Les diagonales relient des sommets opposés. Ici, les diagonales sont AC et BD.",
+      "Définition : un quadrilatère est une figure qui possède quatre côtés.\n\nMéthode : on observe les côtés, les angles et les propriétés de la figure.\n\nCalcul : " +
+      ("Les diagonales relient des sommets opposés. Ici, les diagonales sont AC et BD.") +
+      "\n\nConclusion : on reconnaît le quadrilatère ou la propriété demandée.",
     tags: ["quadrilatere", "diagonales", "canvas"],
     canvas: {
       kind: "quadrilatere",
@@ -816,7 +866,9 @@ export const quadrilateresBank: TutorBankItemV4[] = [
           choices: ["0", "2", "4", "5"],
           expected: ["4"],
           comparator: "mcq_exact",
-          explanation: "La figure présente 4 angles droits codés.",
+          explanation: "Définition : un quadrilatère est une figure qui possède quatre côtés.\n\nMéthode : on observe les côtés, les angles et les propriétés de la figure.\n\nCalcul : " +
+      ("La figure présente 4 angles droits codés.") +
+      "\n\nConclusion : on reconnaît le quadrilatère ou la propriété demandée.",
           canvas: {
             kind: "quadrilatere",
             points: {
@@ -849,7 +901,9 @@ export const quadrilateresBank: TutorBankItemV4[] = [
           expected: ["4 côtés égaux"],
           comparator: "mcq_exact",
           explanation:
-            "Le même codage est présent sur les 4 côtés : ils sont donc tous égaux.",
+            "Définition : un quadrilatère est une figure qui possède quatre côtés.\n\nMéthode : on observe les côtés, les angles et les propriétés de la figure.\n\nCalcul : " +
+      ("Le même codage est présent sur les 4 côtés : ils sont donc tous égaux.") +
+      "\n\nConclusion : on reconnaît le quadrilatère ou la propriété demandée.",
           canvas: {
             kind: "quadrilatere",
             points: {
@@ -877,7 +931,9 @@ export const quadrilateresBank: TutorBankItemV4[] = [
           expected: ["2"],
           comparator: "mcq_exact",
           explanation:
-            "Le codage montre 2 paires de côtés parallèles.",
+            "Définition : un quadrilatère est une figure qui possède quatre côtés.\n\nMéthode : on observe les côtés, les angles et les propriétés de la figure.\n\nCalcul : " +
+      ("Le codage montre 2 paires de côtés parallèles.") +
+      "\n\nConclusion : on reconnaît le quadrilatère ou la propriété demandée.",
           canvas: {
             kind: "quadrilatere",
             points: {
@@ -903,7 +959,9 @@ export const quadrilateresBank: TutorBankItemV4[] = [
         choices: shuffle(["1", "2", "3", "4"]),
         expected: ["2"],
         comparator: "mcq_exact",
-        explanation: "Un quadrilatère possède toujours 2 diagonales.",
+        explanation: "Définition : un quadrilatère est une figure qui possède quatre côtés.\n\nMéthode : on observe les côtés, les angles et les propriétés de la figure.\n\nCalcul : " +
+      ("Un quadrilatère possède toujours 2 diagonales.") +
+      "\n\nConclusion : on reconnaît le quadrilatère ou la propriété demandée.",
       };
     },
   },
@@ -927,7 +985,9 @@ export const quadrilateresBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "4 angles droits suffisent pour reconnaître un rectangle.",
     explanation:
-      "Un quadrilatère qui possède 4 angles droits est un rectangle.",
+      "Définition : un quadrilatère est une figure qui possède quatre côtés.\n\nMéthode : on observe les côtés, les angles et les propriétés de la figure.\n\nCalcul : " +
+      ("Un quadrilatère qui possède 4 angles droits est un rectangle.") +
+      "\n\nConclusion : on reconnaît le quadrilatère ou la propriété demandée.",
     tags: ["quadrilatere", "proprietes"],
   },
   {
@@ -946,7 +1006,9 @@ export const quadrilateresBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "4 côtés égaux suffisent pour reconnaître un losange.",
     explanation:
-      "Un quadrilatère qui possède 4 côtés égaux est un losange.",
+      "Définition : un quadrilatère est une figure qui possède quatre côtés.\n\nMéthode : on observe les côtés, les angles et les propriétés de la figure.\n\nCalcul : " +
+      ("Un quadrilatère qui possède 4 côtés égaux est un losange.") +
+      "\n\nConclusion : on reconnaît le quadrilatère ou la propriété demandée.",
     tags: ["quadrilatere", "proprietes"],
   },
   {
@@ -965,7 +1027,9 @@ export const quadrilateresBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Il cumule les propriétés du rectangle et du losange.",
     explanation:
-      "Un quadrilatère qui possède 4 côtés égaux et 4 angles droits est un carré.",
+      "Définition : un quadrilatère est une figure qui possède quatre côtés.\n\nMéthode : on observe les côtés, les angles et les propriétés de la figure.\n\nCalcul : " +
+      ("Un quadrilatère qui possède 4 côtés égaux et 4 angles droits est un carré.") +
+      "\n\nConclusion : on reconnaît le quadrilatère ou la propriété demandée.",
     tags: ["quadrilatere", "proprietes", "carre"],
   },
   {
@@ -984,7 +1048,9 @@ export const quadrilateresBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "L’information essentielle ici reste : 4 angles droits.",
     explanation:
-      "Dès qu’un quadrilatère possède 4 angles droits, c’est un rectangle.",
+      "Définition : un quadrilatère est une figure qui possède quatre côtés.\n\nMéthode : on observe les côtés, les angles et les propriétés de la figure.\n\nCalcul : " +
+      ("Dès qu’un quadrilatère possède 4 angles droits, c’est un rectangle.") +
+      "\n\nConclusion : on reconnaît le quadrilatère ou la propriété demandée.",
     tags: ["quadrilatere", "proprietes", "paralleles"],
   },
   {
@@ -1014,7 +1080,9 @@ export const quadrilateresBank: TutorBankItemV4[] = [
           expected: ["rectangle"],
           comparator: "mcq_exact",
           explanation:
-            "4 angles droits permettent de reconnaître un rectangle.",
+            "Définition : un quadrilatère est une figure qui possède quatre côtés.\n\nMéthode : on observe les côtés, les angles et les propriétés de la figure.\n\nCalcul : " +
+      ("4 angles droits permettent de reconnaître un rectangle.") +
+      "\n\nConclusion : on reconnaît le quadrilatère ou la propriété demandée.",
         };
       }
 
@@ -1031,7 +1099,9 @@ export const quadrilateresBank: TutorBankItemV4[] = [
           expected: ["losange"],
           comparator: "mcq_exact",
           explanation:
-            "4 côtés égaux permettent de reconnaître un losange.",
+            "Définition : un quadrilatère est une figure qui possède quatre côtés.\n\nMéthode : on observe les côtés, les angles et les propriétés de la figure.\n\nCalcul : " +
+      ("4 côtés égaux permettent de reconnaître un losange.") +
+      "\n\nConclusion : on reconnaît le quadrilatère ou la propriété demandée.",
         };
       }
 
@@ -1047,7 +1117,9 @@ export const quadrilateresBank: TutorBankItemV4[] = [
         expected: ["carré"],
         comparator: "mcq_exact",
         explanation:
-          "4 côtés égaux et 4 angles droits permettent de reconnaître un carré.",
+          "Définition : un quadrilatère est une figure qui possède quatre côtés.\n\nMéthode : on observe les côtés, les angles et les propriétés de la figure.\n\nCalcul : " +
+      ("4 côtés égaux et 4 angles droits permettent de reconnaître un carré.") +
+      "\n\nConclusion : on reconnaît le quadrilatère ou la propriété demandée.",
       };
     },
   },
@@ -1076,7 +1148,9 @@ export const quadrilateresBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Le rectangle n’a pas forcément 4 côtés égaux.",
     explanation:
-      "Le carré et le rectangle ont tous deux 4 angles droits, mais seul le carré a forcément 4 côtés égaux.",
+      "Définition : un quadrilatère est une figure qui possède quatre côtés.\n\nMéthode : on observe les côtés, les angles et les propriétés de la figure.\n\nCalcul : " +
+      ("Le carré et le rectangle ont tous deux 4 angles droits, mais seul le carré a forcément 4 côtés égaux.") +
+      "\n\nConclusion : on reconnaît le quadrilatère ou la propriété demandée.",
     tags: ["quadrilatere", "distinguer", "carre", "rectangle"],
   },
   {
@@ -1100,7 +1174,9 @@ export const quadrilateresBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Le losange n’a pas forcément 4 angles droits.",
     explanation:
-      "Le carré et le losange ont tous deux 4 côtés égaux, mais seul le carré a forcément 4 angles droits.",
+      "Définition : un quadrilatère est une figure qui possède quatre côtés.\n\nMéthode : on observe les côtés, les angles et les propriétés de la figure.\n\nCalcul : " +
+      ("Le carré et le losange ont tous deux 4 côtés égaux, mais seul le carré a forcément 4 angles droits.") +
+      "\n\nConclusion : on reconnaît le quadrilatère ou la propriété demandée.",
     tags: ["quadrilatere", "distinguer", "carre", "losange"],
   },
   {
@@ -1119,7 +1195,9 @@ export const quadrilateresBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Les 4 côtés sont égaux, mais aucun angle droit n’est codé.",
     explanation:
-      "Comme les 4 côtés sont égaux mais qu’aucun angle droit n’est indiqué, cette figure est un losange.",
+      "Définition : un quadrilatère est une figure qui possède quatre côtés.\n\nMéthode : on observe les côtés, les angles et les propriétés de la figure.\n\nCalcul : " +
+      ("Comme les 4 côtés sont égaux mais qu’aucun angle droit n’est indiqué, cette figure est un losange.") +
+      "\n\nConclusion : on reconnaît le quadrilatère ou la propriété demandée.",
     tags: ["quadrilatere", "canvas", "distinguer"],
     canvas: {
       kind: "quadrilatere",
@@ -1154,7 +1232,9 @@ export const quadrilateresBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Il y a 4 angles droits, mais les côtés ne sont pas tous égaux.",
     explanation:
-      "La figure possède 4 angles droits, donc c’est un rectangle. Comme les 4 côtés ne sont pas tous codés égaux, ce n’est pas un carré.",
+      "Définition : un quadrilatère est une figure qui possède quatre côtés.\n\nMéthode : on observe les côtés, les angles et les propriétés de la figure.\n\nCalcul : " +
+      ("La figure possède 4 angles droits, donc c’est un rectangle. Comme les 4 côtés ne sont pas tous codés égaux, ce n’est pas un carré.") +
+      "\n\nConclusion : on reconnaît le quadrilatère ou la propriété demandée.",
     tags: ["quadrilatere", "canvas", "distinguer"],
     canvas: {
       kind: "quadrilatere",
@@ -1200,7 +1280,9 @@ export const quadrilateresBank: TutorBankItemV4[] = [
           expected: ["Le carré a 4 côtés égaux"],
           comparator: "mcq_exact",
           explanation:
-            "Le rectangle n’a pas forcément 4 côtés égaux, contrairement au carré.",
+            "Définition : un quadrilatère est une figure qui possède quatre côtés.\n\nMéthode : on observe les côtés, les angles et les propriétés de la figure.\n\nCalcul : " +
+      ("Le rectangle n’a pas forcément 4 côtés égaux, contrairement au carré.") +
+      "\n\nConclusion : on reconnaît le quadrilatère ou la propriété demandée.",
         };
       }
 
@@ -1216,7 +1298,9 @@ export const quadrilateresBank: TutorBankItemV4[] = [
         expected: ["Le carré a 4 angles droits"],
         comparator: "mcq_exact",
         explanation:
-          "Le losange n’a pas forcément 4 angles droits, contrairement au carré.",
+          "Définition : un quadrilatère est une figure qui possède quatre côtés.\n\nMéthode : on observe les côtés, les angles et les propriétés de la figure.\n\nCalcul : " +
+      ("Le losange n’a pas forcément 4 angles droits, contrairement au carré.") +
+      "\n\nConclusion : on reconnaît le quadrilatère ou la propriété demandée.",
       };
     },
   },
@@ -1240,7 +1324,9 @@ export const quadrilateresBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Il manque l’information sur les angles droits.",
     explanation:
-      "Avec seulement 4 côtés égaux, on peut conclure que c’est un losange, mais pas forcément un carré, car il manque l’information “4 angles droits”.",
+      "Définition : un quadrilatère est une figure qui possède quatre côtés.\n\nMéthode : on observe les côtés, les angles et les propriétés de la figure.\n\nCalcul : " +
+      ("Avec seulement 4 côtés égaux, on peut conclure que c’est un losange, mais pas forcément un carré, car il manque l’information “4 angles droits”.") +
+      "\n\nConclusion : on reconnaît le quadrilatère ou la propriété demandée.",
     tags: ["quadrilatere", "conclusion"],
   },
   {
@@ -1259,7 +1345,9 @@ export const quadrilateresBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Oui, 4 angles droits suffisent.",
     explanation:
-      "Oui. Un quadrilatère qui a 4 angles droits est un rectangle.",
+      "Définition : un quadrilatère est une figure qui possède quatre côtés.\n\nMéthode : on observe les côtés, les angles et les propriétés de la figure.\n\nCalcul : " +
+      ("Oui. Un quadrilatère qui a 4 angles droits est un rectangle.") +
+      "\n\nConclusion : on reconnaît le quadrilatère ou la propriété demandée.",
     tags: ["quadrilatere", "conclusion"],
   },
   {
@@ -1278,7 +1366,9 @@ export const quadrilateresBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Il manque l’information : les 4 côtés égaux.",
     explanation:
-      "Non. Avec 4 angles droits, on sait que c’est un rectangle, mais pour affirmer que c’est un carré il faut aussi savoir que les 4 côtés sont égaux.",
+      "Définition : un quadrilatère est une figure qui possède quatre côtés.\n\nMéthode : on observe les côtés, les angles et les propriétés de la figure.\n\nCalcul : " +
+      ("Non. Avec 4 angles droits, on sait que c’est un rectangle, mais pour affirmer que c’est un carré il faut aussi savoir que les 4 côtés sont égaux.") +
+      "\n\nConclusion : on reconnaît le quadrilatère ou la propriété demandée.",
     tags: ["quadrilatere", "conclusion"],
   },
   {
@@ -1297,7 +1387,9 @@ export const quadrilateresBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Les côtés sont égaux, mais aucun angle droit n’est codé.",
     explanation:
-      "Les 4 côtés sont égaux, mais on ne sait pas si les angles sont droits. On ne peut donc pas affirmer que c’est un carré.",
+      "Définition : un quadrilatère est une figure qui possède quatre côtés.\n\nMéthode : on observe les côtés, les angles et les propriétés de la figure.\n\nCalcul : " +
+      ("Les 4 côtés sont égaux, mais on ne sait pas si les angles sont droits. On ne peut donc pas affirmer que c’est un carré.") +
+      "\n\nConclusion : on reconnaît le quadrilatère ou la propriété demandée.",
     tags: ["quadrilatere", "canvas", "conclusion"],
     canvas: {
       kind: "quadrilatere",
@@ -1332,7 +1424,9 @@ export const quadrilateresBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Une seule paire de côtés égaux ne suffit pas.",
     explanation:
-      "Le codage donné ne montre pas 4 angles droits. On ne peut donc pas affirmer que cette figure est un rectangle.",
+      "Définition : un quadrilatère est une figure qui possède quatre côtés.\n\nMéthode : on observe les côtés, les angles et les propriétés de la figure.\n\nCalcul : " +
+      ("Le codage donné ne montre pas 4 angles droits. On ne peut donc pas affirmer que cette figure est un rectangle.") +
+      "\n\nConclusion : on reconnaît le quadrilatère ou la propriété demandée.",
     tags: ["quadrilatere", "canvas", "conclusion", "piege"],
     canvas: {
       kind: "quadrilatere",
@@ -1368,19 +1462,25 @@ export const quadrilateresBank: TutorBankItemV4[] = [
           text: "Un quadrilatère a 4 côtés égaux. Peut-on affirmer que c’est un carré ?",
           expected: ["non"],
           explanation:
-            "Non, car il manque l’information “4 angles droits”.",
+            "Définition : un quadrilatère est une figure qui possède quatre côtés.\n\nMéthode : on observe les côtés, les angles et les propriétés de la figure.\n\nCalcul : " +
+      ("Non, car il manque l’information “4 angles droits”.") +
+      "\n\nConclusion : on reconnaît le quadrilatère ou la propriété demandée.",
         },
         {
           text: "Un quadrilatère a 4 angles droits. Peut-on affirmer que c’est un rectangle ?",
           expected: ["oui"],
           explanation:
-            "Oui, car 4 angles droits suffisent pour reconnaître un rectangle.",
+            "Définition : un quadrilatère est une figure qui possède quatre côtés.\n\nMéthode : on observe les côtés, les angles et les propriétés de la figure.\n\nCalcul : " +
+      ("Oui, car 4 angles droits suffisent pour reconnaître un rectangle.") +
+      "\n\nConclusion : on reconnaît le quadrilatère ou la propriété demandée.",
         },
         {
           text: "Un quadrilatère a 4 angles droits. Peut-on affirmer que c’est un carré ?",
           expected: ["non"],
           explanation:
-            "Non, car il manque l’information “4 côtés égaux”.",
+            "Définition : un quadrilatère est une figure qui possède quatre côtés.\n\nMéthode : on observe les côtés, les angles et les propriétés de la figure.\n\nCalcul : " +
+      ("Non, car il manque l’information “4 côtés égaux”.") +
+      "\n\nConclusion : on reconnaît le quadrilatère ou la propriété demandée.",
         },
       ];
 
@@ -1392,7 +1492,9 @@ export const quadrilateresBank: TutorBankItemV4[] = [
         choices: shuffle(["oui", "non"]),
         expected: item.expected,
         comparator: "mcq_exact",
-        explanation: item.explanation,
+        explanation: "Définition : un quadrilatère est une figure qui possède quatre côtés.\n\nMéthode : on observe les côtés, les angles et les propriétés de la figure.\n\nCalcul : " +
+      (item.explanation) +
+      "\n\nConclusion : on reconnaît le quadrilatère ou la propriété demandée.",
       };
     },
   },
@@ -1421,7 +1523,9 @@ export const quadrilateresBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Le carré est un losange avec une propriété en plus.",
     explanation:
-      "Un losange devient un carré si on sait en plus qu’il a 4 angles droits.",
+      "Définition : un quadrilatère est une figure qui possède quatre côtés.\n\nMéthode : on observe les côtés, les angles et les propriétés de la figure.\n\nCalcul : " +
+      ("Un losange devient un carré si on sait en plus qu’il a 4 angles droits.") +
+      "\n\nConclusion : on reconnaît le quadrilatère ou la propriété demandée.",
     tags: ["quadrilatere", "completer", "carre"],
   },
   {
@@ -1445,7 +1549,9 @@ export const quadrilateresBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Le carré est un rectangle avec une propriété en plus.",
     explanation:
-      "Un rectangle devient un carré si on sait en plus que ses 4 côtés sont égaux.",
+      "Définition : un quadrilatère est une figure qui possède quatre côtés.\n\nMéthode : on observe les côtés, les angles et les propriétés de la figure.\n\nCalcul : " +
+      ("Un rectangle devient un carré si on sait en plus que ses 4 côtés sont égaux.") +
+      "\n\nConclusion : on reconnaît le quadrilatère ou la propriété demandée.",
     tags: ["quadrilatere", "completer", "rectangle"],
   },
   {
@@ -1469,7 +1575,9 @@ export const quadrilateresBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Les 4 côtés égaux sont déjà codés.",
     explanation:
-      "Les 4 côtés égaux sont déjà indiqués. Pour conclure à un carré, il faut ajouter le codage des 4 angles droits.",
+      "Définition : un quadrilatère est une figure qui possède quatre côtés.\n\nMéthode : on observe les côtés, les angles et les propriétés de la figure.\n\nCalcul : " +
+      ("Les 4 côtés égaux sont déjà indiqués. Pour conclure à un carré, il faut ajouter le codage des 4 angles droits.") +
+      "\n\nConclusion : on reconnaît le quadrilatère ou la propriété demandée.",
     tags: ["quadrilatere", "completer", "canvas"],
     canvas: {
       kind: "quadrilatere",
@@ -1509,7 +1617,9 @@ export const quadrilateresBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Les 4 angles droits sont déjà codés.",
     explanation:
-      "Les 4 angles droits sont déjà indiqués. Pour conclure à un carré, il faut encore coder les 4 côtés égaux.",
+      "Définition : un quadrilatère est une figure qui possède quatre côtés.\n\nMéthode : on observe les côtés, les angles et les propriétés de la figure.\n\nCalcul : " +
+      ("Les 4 angles droits sont déjà indiqués. Pour conclure à un carré, il faut encore coder les 4 côtés égaux.") +
+      "\n\nConclusion : on reconnaît le quadrilatère ou la propriété demandée.",
     tags: ["quadrilatere", "completer", "canvas"],
     canvas: {
       kind: "quadrilatere",
@@ -1544,7 +1654,9 @@ export const quadrilateresBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Le nom ABCD donne déjà l’information.",
     explanation:
-      "Le nom ABCD montre qu’il y a 4 sommets à placer : A, B, C et D.",
+      "Définition : un quadrilatère est une figure qui possède quatre côtés.\n\nMéthode : on observe les côtés, les angles et les propriétés de la figure.\n\nCalcul : " +
+      ("Le nom ABCD montre qu’il y a 4 sommets à placer : A, B, C et D.") +
+      "\n\nConclusion : on reconnaît le quadrilatère ou la propriété demandée.",
     tags: ["quadrilatere", "construire"],
   },
   {
@@ -1574,7 +1686,9 @@ export const quadrilateresBank: TutorBankItemV4[] = [
           expected: ["qu’il a 4 angles droits"],
           comparator: "mcq_exact",
           explanation:
-            "Un losange devient un carré si on ajoute l’information “4 angles droits”.",
+            "Définition : un quadrilatère est une figure qui possède quatre côtés.\n\nMéthode : on observe les côtés, les angles et les propriétés de la figure.\n\nCalcul : " +
+      ("Un losange devient un carré si on ajoute l’information “4 angles droits”.") +
+      "\n\nConclusion : on reconnaît le quadrilatère ou la propriété demandée.",
         };
       }
 
@@ -1591,7 +1705,9 @@ export const quadrilateresBank: TutorBankItemV4[] = [
           expected: ["qu’il a 4 côtés égaux"],
           comparator: "mcq_exact",
           explanation:
-            "Un rectangle devient un carré si on ajoute l’information “4 côtés égaux”.",
+            "Définition : un quadrilatère est une figure qui possède quatre côtés.\n\nMéthode : on observe les côtés, les angles et les propriétés de la figure.\n\nCalcul : " +
+      ("Un rectangle devient un carré si on ajoute l’information “4 côtés égaux”.") +
+      "\n\nConclusion : on reconnaît le quadrilatère ou la propriété demandée.",
         };
       }
 
@@ -1601,7 +1717,9 @@ export const quadrilateresBank: TutorBankItemV4[] = [
         choices: shuffle(["2", "3", "4", "5"]),
         expected: ["4"],
         comparator: "mcq_exact",
-        explanation: "ABCD désigne 4 sommets, donc il faut en placer 4.",
+        explanation: "Définition : un quadrilatère est une figure qui possède quatre côtés.\n\nMéthode : on observe les côtés, les angles et les propriétés de la figure.\n\nCalcul : " +
+      ("ABCD désigne 4 sommets, donc il faut en placer 4.") +
+      "\n\nConclusion : on reconnaît le quadrilatère ou la propriété demandée.",
       };
     },
   },
@@ -1625,7 +1743,9 @@ export const quadrilateresBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "4 côtés égaux sans angle droit : ce n’est pas un carré.",
     explanation:
-      "Avec 4 côtés égaux, on reconnaît un losange. Comme il n’y a pas d’angle droit, ce n’est pas un carré.",
+      "Définition : un quadrilatère est une figure qui possède quatre côtés.\n\nMéthode : on observe les côtés, les angles et les propriétés de la figure.\n\nCalcul : " +
+      ("Avec 4 côtés égaux, on reconnaît un losange. Comme il n’y a pas d’angle droit, ce n’est pas un carré.") +
+      "\n\nConclusion : on reconnaît le quadrilatère ou la propriété demandée.",
     tags: ["quadrilatere", "defi"],
   },
   {
@@ -1643,7 +1763,9 @@ export const quadrilateresBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "Il a à la fois les propriétés du rectangle et du losange.",
     explanation:
-      "Un quadrilatère qui possède 4 angles droits et 4 côtés égaux est un carré.",
+      "Définition : un quadrilatère est une figure qui possède quatre côtés.\n\nMéthode : on observe les côtés, les angles et les propriétés de la figure.\n\nCalcul : " +
+      ("Un quadrilatère qui possède 4 angles droits et 4 côtés égaux est un carré.") +
+      "\n\nConclusion : on reconnaît le quadrilatère ou la propriété demandée.",
     tags: ["quadrilatere", "defi"],
   },
   {
@@ -1662,7 +1784,9 @@ export const quadrilateresBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Un carré possède bien 4 angles droits.",
     explanation:
-      "Oui. Comme un carré possède 4 angles droits, c’est aussi un rectangle.",
+      "Définition : un quadrilatère est une figure qui possède quatre côtés.\n\nMéthode : on observe les côtés, les angles et les propriétés de la figure.\n\nCalcul : " +
+      ("Oui. Comme un carré possède 4 angles droits, c’est aussi un rectangle.") +
+      "\n\nConclusion : on reconnaît le quadrilatère ou la propriété demandée.",
     tags: ["quadrilatere", "defi", "logique"],
   },
   {
@@ -1681,7 +1805,9 @@ export const quadrilateresBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Un carré possède bien 4 côtés égaux.",
     explanation:
-      "Oui. Comme un carré possède 4 côtés égaux, c’est aussi un losange.",
+      "Définition : un quadrilatère est une figure qui possède quatre côtés.\n\nMéthode : on observe les côtés, les angles et les propriétés de la figure.\n\nCalcul : " +
+      ("Oui. Comme un carré possède 4 côtés égaux, c’est aussi un losange.") +
+      "\n\nConclusion : on reconnaît le quadrilatère ou la propriété demandée.",
     tags: ["quadrilatere", "defi", "logique"],
   },
   {
@@ -1700,7 +1826,9 @@ export const quadrilateresBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Les 4 côtés sont égaux et les 4 angles sont droits.",
     explanation:
-      "Oui. Les codages montrent à la fois 4 côtés égaux et 4 angles droits. C’est donc un carré.",
+      "Définition : un quadrilatère est une figure qui possède quatre côtés.\n\nMéthode : on observe les côtés, les angles et les propriétés de la figure.\n\nCalcul : " +
+      ("Oui. Les codages montrent à la fois 4 côtés égaux et 4 angles droits. C’est donc un carré.") +
+      "\n\nConclusion : on reconnaît le quadrilatère ou la propriété demandée.",
     tags: ["quadrilatere", "defi", "canvas"],
     canvas: {
       kind: "quadrilatere",
@@ -1736,7 +1864,9 @@ export const quadrilateresBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Tous les quadrilatères ont deux diagonales.",
     explanation:
-      "Non. Le fait d’avoir 2 diagonales ne suffit pas, car tous les quadrilatères en ont 2.",
+      "Définition : un quadrilatère est une figure qui possède quatre côtés.\n\nMéthode : on observe les côtés, les angles et les propriétés de la figure.\n\nCalcul : " +
+      ("Non. Le fait d’avoir 2 diagonales ne suffit pas, car tous les quadrilatères en ont 2.") +
+      "\n\nConclusion : on reconnaît le quadrilatère ou la propriété demandée.",
     tags: ["quadrilatere", "defi", "diagonales"],
   },
   {
@@ -1754,7 +1884,9 @@ export const quadrilateresBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "Pense au losange.",
     explanation:
-      "Un quadrilatère à 4 côtés égaux peut être un losange. Pour être un carré, il faut en plus que ses 4 angles soient droits.",
+      "Définition : un quadrilatère est une figure qui possède quatre côtés.\n\nMéthode : on observe les côtés, les angles et les propriétés de la figure.\n\nCalcul : " +
+      ("Un quadrilatère à 4 côtés égaux peut être un losange. Pour être un carré, il faut en plus que ses 4 angles soient droits.") +
+      "\n\nConclusion : on reconnaît le quadrilatère ou la propriété demandée.",
     tags: ["quadrilatere", "defi", "raisonnement"],
   },
   {
@@ -1775,28 +1907,36 @@ export const quadrilateresBank: TutorBankItemV4[] = [
           choices: ["oui", "non"],
           expected: ["oui"],
           explanation:
-            "Oui, car un carré possède bien 4 angles droits.",
+            "Définition : un quadrilatère est une figure qui possède quatre côtés.\n\nMéthode : on observe les côtés, les angles et les propriétés de la figure.\n\nCalcul : " +
+      ("Oui, car un carré possède bien 4 angles droits.") +
+      "\n\nConclusion : on reconnaît le quadrilatère ou la propriété demandée.",
         },
         {
           text: "Peut-on dire qu’un carré est aussi un losange ?",
           choices: ["oui", "non"],
           expected: ["oui"],
           explanation:
-            "Oui, car un carré possède bien 4 côtés égaux.",
+            "Définition : un quadrilatère est une figure qui possède quatre côtés.\n\nMéthode : on observe les côtés, les angles et les propriétés de la figure.\n\nCalcul : " +
+      ("Oui, car un carré possède bien 4 côtés égaux.") +
+      "\n\nConclusion : on reconnaît le quadrilatère ou la propriété demandée.",
         },
         {
           text: "Un quadrilatère a 4 côtés égaux et aucun angle droit. Quel est son type ?",
           choices: ["rectangle", "losange", "carré", "quadrilatère quelconque"],
           expected: ["losange"],
           explanation:
-            "Avec 4 côtés égaux mais sans angle droit, on reconnaît un losange.",
+            "Définition : un quadrilatère est une figure qui possède quatre côtés.\n\nMéthode : on observe les côtés, les angles et les propriétés de la figure.\n\nCalcul : " +
+      ("Avec 4 côtés égaux mais sans angle droit, on reconnaît un losange.") +
+      "\n\nConclusion : on reconnaît le quadrilatère ou la propriété demandée.",
         },
         {
           text: "Peut-on connaître exactement la nature d’un quadrilatère si l’on sait seulement qu’il a deux diagonales ?",
           choices: ["oui", "non"],
           expected: ["non"],
           explanation:
-            "Non, car tous les quadrilatères ont deux diagonales.",
+            "Définition : un quadrilatère est une figure qui possède quatre côtés.\n\nMéthode : on observe les côtés, les angles et les propriétés de la figure.\n\nCalcul : " +
+      ("Non, car tous les quadrilatères ont deux diagonales.") +
+      "\n\nConclusion : on reconnaît le quadrilatère ou la propriété demandée.",
         },
       ];
 
@@ -1808,7 +1948,9 @@ export const quadrilateresBank: TutorBankItemV4[] = [
         choices: shuffle(item.choices),
         expected: item.expected,
         comparator: "mcq_exact",
-        explanation: item.explanation,
+        explanation: "Définition : un quadrilatère est une figure qui possède quatre côtés.\n\nMéthode : on observe les côtés, les angles et les propriétés de la figure.\n\nCalcul : " +
+      (item.explanation) +
+      "\n\nConclusion : on reconnaît le quadrilatère ou la propriété demandée.",
       };
     },
   },

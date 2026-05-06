@@ -27,7 +27,9 @@ export const calculMentalBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "68 + 2 = 70, puis + 5.",
     explanation:
-      "On peut passer par la dizaine : 68 + 2 = 70, puis il reste 5 à ajouter. Donc 68 + 7 = 75.",
+      "Définition : le calcul mental consiste à effectuer un calcul sans poser l’opération.\n\nMéthode : on choisit une stratégie simple : décomposer, compléter, multiplier ou utiliser une propriété connue.\n\nCalcul : " +
+      ("On peut passer par la dizaine : 68 + 2 = 70, puis il reste 5 à ajouter. Donc 68 + 7 = 75.") +
+      "\n\nConclusion : le résultat obtenu répond au calcul demandé.",
     tags: ["calcul_mental", "addition"],
   },
   {
@@ -45,7 +47,9 @@ export const calculMentalBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "134 + 20 = 154, puis + 8.",
     explanation:
-      "On ajoute d’abord 20 : 134 + 20 = 154. Puis on ajoute 8 : 154 + 8 = 162. Donc 134 + 28 = 162.",
+      "Définition : le calcul mental consiste à effectuer un calcul sans poser l’opération.\n\nMéthode : on choisit une stratégie simple : décomposer, compléter, multiplier ou utiliser une propriété connue.\n\nCalcul : " +
+      ("On ajoute d’abord 20 : 134 + 20 = 154. Puis on ajoute 8 : 154 + 8 = 162. Donc 134 + 28 = 162.") +
+      "\n\nConclusion : le résultat obtenu répond au calcul demandé.",
     tags: ["calcul_mental", "addition"],
   },
   {
@@ -63,7 +67,9 @@ export const calculMentalBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "56 + 4 = 60, puis + 4.",
     explanation:
-      "On peut compléter jusqu’à la dizaine : 56 + 4 = 60, puis on ajoute encore 4. Donc 56 + 8 = 64.",
+      "Définition : le calcul mental consiste à effectuer un calcul sans poser l’opération.\n\nMéthode : on choisit une stratégie simple : décomposer, compléter, multiplier ou utiliser une propriété connue.\n\nCalcul : " +
+      ("On peut compléter jusqu’à la dizaine : 56 + 4 = 60, puis on ajoute encore 4. Donc 56 + 8 = 64.") +
+      "\n\nConclusion : le résultat obtenu répond au calcul demandé.",
     tags: ["calcul_mental", "addition"],
   },
   {
@@ -82,7 +88,9 @@ export const calculMentalBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "45 + 5 = 50, puis + 3.",
     explanation:
-      "On peut passer par 50 : 45 + 5 = 50, puis il reste 3 à ajouter. Donc 45 + 8 = 53.",
+      "Définition : le calcul mental consiste à effectuer un calcul sans poser l’opération.\n\nMéthode : on choisit une stratégie simple : décomposer, compléter, multiplier ou utiliser une propriété connue.\n\nCalcul : " +
+      ("On peut passer par 50 : 45 + 5 = 50, puis il reste 3 à ajouter. Donc 45 + 8 = 53.") +
+      "\n\nConclusion : le résultat obtenu répond au calcul demandé.",
     tags: ["calcul_mental", "addition", "qcm"],
   },
 
@@ -104,7 +112,9 @@ export const calculMentalBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "183 - 3 = 180, puis - 3.",
     explanation:
-      "On enlève 3 pour arriver à 180, puis encore 3. Donc 183 - 6 = 177.",
+      "Définition : le calcul mental consiste à effectuer un calcul sans poser l’opération.\n\nMéthode : on choisit une stratégie simple : décomposer, compléter, multiplier ou utiliser une propriété connue.\n\nCalcul : " +
+      ("On enlève 3 pour arriver à 180, puis encore 3. Donc 183 - 6 = 177.") +
+      "\n\nConclusion : le résultat obtenu répond au calcul demandé.",
     tags: ["calcul_mental", "soustraction"],
   },
   {
@@ -122,7 +132,9 @@ export const calculMentalBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "96 - 20 = 76, puis - 7.",
     explanation:
-      "On enlève d’abord 20 : 96 - 20 = 76. Puis on enlève 7 : 76 - 7 = 69. Donc 96 - 27 = 69.",
+      "Définition : le calcul mental consiste à effectuer un calcul sans poser l’opération.\n\nMéthode : on choisit une stratégie simple : décomposer, compléter, multiplier ou utiliser une propriété connue.\n\nCalcul : " +
+      ("On enlève d’abord 20 : 96 - 20 = 76. Puis on enlève 7 : 76 - 7 = 69. Donc 96 - 27 = 69.") +
+      "\n\nConclusion : le résultat obtenu répond au calcul demandé.",
     tags: ["calcul_mental", "soustraction"],
   },
   {
@@ -140,7 +152,9 @@ export const calculMentalBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "121 - 40 = 81, puis ajoute 2.",
     explanation:
-      "On peut enlever 40 au lieu de 38 : 121 - 40 = 81. Comme on a enlevé 2 de trop, on ajoute 2. Donc 121 - 38 = 83.",
+      "Définition : le calcul mental consiste à effectuer un calcul sans poser l’opération.\n\nMéthode : on choisit une stratégie simple : décomposer, compléter, multiplier ou utiliser une propriété connue.\n\nCalcul : " +
+      ("On peut enlever 40 au lieu de 38 : 121 - 40 = 81. Comme on a enlevé 2 de trop, on ajoute 2. Donc 121 - 38 = 83.") +
+      "\n\nConclusion : le résultat obtenu répond au calcul demandé.",
     tags: ["calcul_mental", "soustraction"],
   },
   {
@@ -159,7 +173,9 @@ export const calculMentalBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "72 - 2 = 70, puis - 6.",
     explanation:
-      "On peut passer par la dizaine : 72 - 2 = 70, puis on enlève encore 6. Donc 72 - 8 = 64.",
+      "Définition : le calcul mental consiste à effectuer un calcul sans poser l’opération.\n\nMéthode : on choisit une stratégie simple : décomposer, compléter, multiplier ou utiliser une propriété connue.\n\nCalcul : " +
+      ("On peut passer par la dizaine : 72 - 2 = 70, puis on enlève encore 6. Donc 72 - 8 = 64.") +
+      "\n\nConclusion : le résultat obtenu répond au calcul demandé.",
     tags: ["calcul_mental", "soustraction", "qcm"],
   },
 
@@ -181,7 +197,9 @@ export const calculMentalBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Utilise la table de 8.",
     explanation:
-      "Dans la table de 8, 8 × 7 = 56. Donc le résultat est 56.",
+      "Définition : le calcul mental consiste à effectuer un calcul sans poser l’opération.\n\nMéthode : on choisit une stratégie simple : décomposer, compléter, multiplier ou utiliser une propriété connue.\n\nCalcul : " +
+      ("Dans la table de 8, 8 × 7 = 56. Donc le résultat est 56.") +
+      "\n\nConclusion : le résultat obtenu répond au calcul demandé.",
     tags: ["calcul_mental", "multiplication"],
   },
   {
@@ -199,7 +217,9 @@ export const calculMentalBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Multiplier par 5, c’est prendre la moitié de ×10.",
     explanation:
-      "Multiplier par 5 revient à multiplier par 10 puis à prendre la moitié. 18 × 10 = 180, et la moitié de 180 est 90. Donc 18 × 5 = 90.",
+      "Définition : le calcul mental consiste à effectuer un calcul sans poser l’opération.\n\nMéthode : on choisit une stratégie simple : décomposer, compléter, multiplier ou utiliser une propriété connue.\n\nCalcul : " +
+      ("Multiplier par 5 revient à multiplier par 10 puis à prendre la moitié. 18 × 10 = 180, et la moitié de 180 est 90. Donc 18 × 5 = 90.") +
+      "\n\nConclusion : le résultat obtenu répond au calcul demandé.",
     tags: ["calcul_mental", "multiplication"],
   },
   {
@@ -217,7 +237,9 @@ export const calculMentalBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Utilise la table de 9.",
     explanation:
-      "11 × 9 = 99. On peut aussi voir que 10 × 9 = 90 puis ajouter encore 9, ce qui donne 99.",
+      "Définition : le calcul mental consiste à effectuer un calcul sans poser l’opération.\n\nMéthode : on choisit une stratégie simple : décomposer, compléter, multiplier ou utiliser une propriété connue.\n\nCalcul : " +
+      ("11 × 9 = 99. On peut aussi voir que 10 × 9 = 90 puis ajouter encore 9, ce qui donne 99.") +
+      "\n\nConclusion : le résultat obtenu répond au calcul demandé.",
     tags: ["calcul_mental", "multiplication"],
   },
   {
@@ -236,7 +258,9 @@ export const calculMentalBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Table de 6 ou de 8.",
     explanation:
-      "Dans les tables, 6 × 8 = 48. La bonne réponse est donc 48.",
+      "Définition : le calcul mental consiste à effectuer un calcul sans poser l’opération.\n\nMéthode : on choisit une stratégie simple : décomposer, compléter, multiplier ou utiliser une propriété connue.\n\nCalcul : " +
+      ("Dans les tables, 6 × 8 = 48. La bonne réponse est donc 48.") +
+      "\n\nConclusion : le résultat obtenu répond au calcul demandé.",
     tags: ["calcul_mental", "multiplication", "qcm"],
   },
 
@@ -258,7 +282,9 @@ export const calculMentalBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Diviser par 10 décale la virgule d’un rang.",
     explanation:
-      "Quand on divise par 10, chaque chiffre prend une place dix fois plus petite. Ainsi 645 ÷ 10 = 64,5.",
+      "Définition : le calcul mental consiste à effectuer un calcul sans poser l’opération.\n\nMéthode : on choisit une stratégie simple : décomposer, compléter, multiplier ou utiliser une propriété connue.\n\nCalcul : " +
+      ("Quand on divise par 10, chaque chiffre prend une place dix fois plus petite. Ainsi 645 ÷ 10 = 64,5.") +
+      "\n\nConclusion : le résultat obtenu répond au calcul demandé.",
     tags: ["calcul_mental", "division"],
   },
   {
@@ -276,7 +302,9 @@ export const calculMentalBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "9 × 7 = 63.",
     explanation:
-      "On cherche combien de fois 9 est contenu dans 63. Comme 9 × 7 = 63, on a 63 ÷ 9 = 7.",
+      "Définition : le calcul mental consiste à effectuer un calcul sans poser l’opération.\n\nMéthode : on choisit une stratégie simple : décomposer, compléter, multiplier ou utiliser une propriété connue.\n\nCalcul : " +
+      ("On cherche combien de fois 9 est contenu dans 63. Comme 9 × 7 = 63, on a 63 ÷ 9 = 7.") +
+      "\n\nConclusion : le résultat obtenu répond au calcul demandé.",
     tags: ["calcul_mental", "division"],
   },
   {
@@ -294,7 +322,9 @@ export const calculMentalBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "8 × 7 = 56.",
     explanation:
-      "Comme 8 × 7 = 56, alors 56 ÷ 8 = 7.",
+      "Définition : le calcul mental consiste à effectuer un calcul sans poser l’opération.\n\nMéthode : on choisit une stratégie simple : décomposer, compléter, multiplier ou utiliser une propriété connue.\n\nCalcul : " +
+      ("Comme 8 × 7 = 56, alors 56 ÷ 8 = 7.") +
+      "\n\nConclusion : le résultat obtenu répond au calcul demandé.",
     tags: ["calcul_mental", "division"],
   },
   {
@@ -313,7 +343,9 @@ export const calculMentalBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "5 × 9 = 45.",
     explanation:
-      "On cherche le nombre qui multiplié par 5 donne 45. Comme 5 × 9 = 45, alors 45 ÷ 5 = 9.",
+      "Définition : le calcul mental consiste à effectuer un calcul sans poser l’opération.\n\nMéthode : on choisit une stratégie simple : décomposer, compléter, multiplier ou utiliser une propriété connue.\n\nCalcul : " +
+      ("On cherche le nombre qui multiplié par 5 donne 45. Comme 5 × 9 = 45, alors 45 ÷ 5 = 9.") +
+      "\n\nConclusion : le résultat obtenu répond au calcul demandé.",
     tags: ["calcul_mental", "division", "qcm"],
   },
 
@@ -335,7 +367,9 @@ export const calculMentalBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Partager en 4 parts égales.",
     explanation:
-      "Prendre le quart d’un nombre, c’est le diviser par 4. Donc 28 ÷ 4 = 7. Le quart de 28 est 7.",
+      "Définition : le calcul mental consiste à effectuer un calcul sans poser l’opération.\n\nMéthode : on choisit une stratégie simple : décomposer, compléter, multiplier ou utiliser une propriété connue.\n\nCalcul : " +
+      ("Prendre le quart d’un nombre, c’est le diviser par 4. Donc 28 ÷ 4 = 7. Le quart de 28 est 7.") +
+      "\n\nConclusion : le résultat obtenu répond au calcul demandé.",
     tags: ["calcul_mental", "strategie"],
   },
   {
@@ -353,7 +387,9 @@ export const calculMentalBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "70 + 70.",
     explanation:
-      "Le double d’un nombre, c’est ce nombre ajouté à lui-même. Donc 70 + 70 = 140.",
+      "Définition : le calcul mental consiste à effectuer un calcul sans poser l’opération.\n\nMéthode : on choisit une stratégie simple : décomposer, compléter, multiplier ou utiliser une propriété connue.\n\nCalcul : " +
+      ("Le double d’un nombre, c’est ce nombre ajouté à lui-même. Donc 70 + 70 = 140.") +
+      "\n\nConclusion : le résultat obtenu répond au calcul demandé.",
     tags: ["calcul_mental", "strategie"],
   },
   {
@@ -371,7 +407,9 @@ export const calculMentalBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Multiplier par 10 décale la virgule d’un rang.",
     explanation:
-      "Quand on multiplie par 10, chaque chiffre prend une place dix fois plus grande. Ainsi 4,23 × 10 = 42,3.",
+      "Définition : le calcul mental consiste à effectuer un calcul sans poser l’opération.\n\nMéthode : on choisit une stratégie simple : décomposer, compléter, multiplier ou utiliser une propriété connue.\n\nCalcul : " +
+      ("Quand on multiplie par 10, chaque chiffre prend une place dix fois plus grande. Ainsi 4,23 × 10 = 42,3.") +
+      "\n\nConclusion : le résultat obtenu répond au calcul demandé.",
     tags: ["calcul_mental", "strategie", "decimaux"],
   },
   {
@@ -390,7 +428,9 @@ export const calculMentalBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "26 partagé en 2.",
     explanation:
-      "La moitié d’un nombre, c’est ce nombre divisé par 2. Donc 26 ÷ 2 = 13.",
+      "Définition : le calcul mental consiste à effectuer un calcul sans poser l’opération.\n\nMéthode : on choisit une stratégie simple : décomposer, compléter, multiplier ou utiliser une propriété connue.\n\nCalcul : " +
+      ("La moitié d’un nombre, c’est ce nombre divisé par 2. Donc 26 ÷ 2 = 13.") +
+      "\n\nConclusion : le résultat obtenu répond au calcul demandé.",
     tags: ["calcul_mental", "strategie", "qcm"],
   },
 
@@ -412,7 +452,9 @@ export const calculMentalBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "Additionne 5 + 3 + 26.",
     explanation:
-      "On additionne les trois prix : 5 + 3 + 26 = 34. Léa paiera donc 34 €.",
+      "Définition : le calcul mental consiste à effectuer un calcul sans poser l’opération.\n\nMéthode : on choisit une stratégie simple : décomposer, compléter, multiplier ou utiliser une propriété connue.\n\nCalcul : " +
+      ("On additionne les trois prix : 5 + 3 + 26 = 34. Léa paiera donc 34 €.") +
+      "\n\nConclusion : le résultat obtenu répond au calcul demandé.",
     tags: ["calcul_mental", "probleme"],
   },
   {
@@ -430,7 +472,9 @@ export const calculMentalBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Fais 87 - 39.",
     explanation:
-      "Le nombre de pages restantes se calcule par une soustraction : 87 - 39 = 48. Il reste donc 48 pages à lire.",
+      "Définition : le calcul mental consiste à effectuer un calcul sans poser l’opération.\n\nMéthode : on choisit une stratégie simple : décomposer, compléter, multiplier ou utiliser une propriété connue.\n\nCalcul : " +
+      ("Le nombre de pages restantes se calcule par une soustraction : 87 - 39 = 48. Il reste donc 48 pages à lire.") +
+      "\n\nConclusion : le résultat obtenu répond au calcul demandé.",
     tags: ["calcul_mental", "probleme", "soustraction"],
   },
   {
@@ -448,7 +492,9 @@ export const calculMentalBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Fais 63 ÷ 9.",
     explanation:
-      "On partage 63 mangues en 9 parts égales. Comme 63 ÷ 9 = 7, chaque enfant reçoit 7 mangues.",
+      "Définition : le calcul mental consiste à effectuer un calcul sans poser l’opération.\n\nMéthode : on choisit une stratégie simple : décomposer, compléter, multiplier ou utiliser une propriété connue.\n\nCalcul : " +
+      ("On partage 63 mangues en 9 parts égales. Comme 63 ÷ 9 = 7, chaque enfant reçoit 7 mangues.") +
+      "\n\nConclusion : le résultat obtenu répond au calcul demandé.",
     tags: ["calcul_mental", "probleme", "reunion", "division"],
   },
   {
@@ -466,7 +512,9 @@ export const calculMentalBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "Ajoute 1 heure puis 25 minutes.",
     explanation:
-      "À 15 h 35, on ajoute 1 heure : on obtient 16 h 35. Puis on ajoute 25 minutes : on arrive à 17 h 00. Le spectacle se termine donc à 17 h.",
+      "Définition : le calcul mental consiste à effectuer un calcul sans poser l’opération.\n\nMéthode : on choisit une stratégie simple : décomposer, compléter, multiplier ou utiliser une propriété connue.\n\nCalcul : " +
+      ("À 15 h 35, on ajoute 1 heure : on obtient 16 h 35. Puis on ajoute 25 minutes : on arrive à 17 h 00. Le spectacle se termine donc à 17 h.") +
+      "\n\nConclusion : le résultat obtenu répond au calcul demandé.",
     tags: ["calcul_mental", "probleme", "heure"],
   },
   {
@@ -484,7 +532,9 @@ export const calculMentalBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Fais 9 × 7.",
     explanation:
-      "Il y a 9 rangées de 7 fleurs, donc on calcule 9 × 7 = 63. Il y a 63 fleurs en tout.",
+      "Définition : le calcul mental consiste à effectuer un calcul sans poser l’opération.\n\nMéthode : on choisit une stratégie simple : décomposer, compléter, multiplier ou utiliser une propriété connue.\n\nCalcul : " +
+      ("Il y a 9 rangées de 7 fleurs, donc on calcule 9 × 7 = 63. Il y a 63 fleurs en tout.") +
+      "\n\nConclusion : le résultat obtenu répond au calcul demandé.",
     tags: ["calcul_mental", "probleme", "reunion", "multiplication"],
   },
 
@@ -512,7 +562,9 @@ export const calculMentalBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(sum)],
         comparator: "number_equal",
-        explanation: `On peut compléter jusqu’à la dizaine puis ajouter le reste. Ici, ${a} + ${b} = ${sum}.`,
+        explanation: "Définition : le calcul mental consiste à effectuer un calcul sans poser l’opération.\n\nMéthode : on choisit une stratégie simple : décomposer, compléter, multiplier ou utiliser une propriété connue.\n\nCalcul : " +
+      (`On peut compléter jusqu’à la dizaine puis ajouter le reste. Ici, ${a} + ${b} = ${sum}.`) +
+      "\n\nConclusion : le résultat obtenu répond au calcul demandé.",
       };
     },
   },
@@ -537,7 +589,9 @@ export const calculMentalBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(sum)],
         comparator: "number_equal",
-        explanation: `On peut décomposer le second nombre pour calculer mentalement. Ici, ${a} + ${b} = ${sum}.`,
+        explanation: "Définition : le calcul mental consiste à effectuer un calcul sans poser l’opération.\n\nMéthode : on choisit une stratégie simple : décomposer, compléter, multiplier ou utiliser une propriété connue.\n\nCalcul : " +
+      (`On peut décomposer le second nombre pour calculer mentalement. Ici, ${a} + ${b} = ${sum}.`) +
+      "\n\nConclusion : le résultat obtenu répond au calcul demandé.",
       };
     },
   },
@@ -566,7 +620,9 @@ export const calculMentalBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(diff)],
         comparator: "number_equal",
-        explanation: `On peut enlever une partie pour atteindre une dizaine, puis enlever le reste. Ici, ${a} - ${b} = ${diff}.`,
+        explanation: "Définition : le calcul mental consiste à effectuer un calcul sans poser l’opération.\n\nMéthode : on choisit une stratégie simple : décomposer, compléter, multiplier ou utiliser une propriété connue.\n\nCalcul : " +
+      (`On peut enlever une partie pour atteindre une dizaine, puis enlever le reste. Ici, ${a} - ${b} = ${diff}.`) +
+      "\n\nConclusion : le résultat obtenu répond au calcul demandé.",
       };
     },
   },
@@ -591,7 +647,9 @@ export const calculMentalBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(diff)],
         comparator: "number_equal",
-        explanation: `On peut décomposer ${b} en dizaines et unités. Ici, ${a} - ${b} = ${diff}.`,
+        explanation: "Définition : le calcul mental consiste à effectuer un calcul sans poser l’opération.\n\nMéthode : on choisit une stratégie simple : décomposer, compléter, multiplier ou utiliser une propriété connue.\n\nCalcul : " +
+      (`On peut décomposer ${b} en dizaines et unités. Ici, ${a} - ${b} = ${diff}.`) +
+      "\n\nConclusion : le résultat obtenu répond au calcul demandé.",
       };
     },
   },
@@ -620,7 +678,9 @@ export const calculMentalBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(product)],
         comparator: "number_equal",
-        explanation: `On utilise les tables de multiplication ou une décomposition simple. Ici, ${a} × ${b} = ${product}.`,
+        explanation: "Définition : le calcul mental consiste à effectuer un calcul sans poser l’opération.\n\nMéthode : on choisit une stratégie simple : décomposer, compléter, multiplier ou utiliser une propriété connue.\n\nCalcul : " +
+      (`On utilise les tables de multiplication ou une décomposition simple. Ici, ${a} × ${b} = ${product}.`) +
+      "\n\nConclusion : le résultat obtenu répond au calcul demandé.",
       };
     },
   },
@@ -645,7 +705,9 @@ export const calculMentalBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(product)],
         comparator: "number_equal",
-        explanation: `Multiplier par 5 revient à multiplier par 10 puis à prendre la moitié. Ici, ${a} × 5 = ${product}.`,
+        explanation: "Définition : le calcul mental consiste à effectuer un calcul sans poser l’opération.\n\nMéthode : on choisit une stratégie simple : décomposer, compléter, multiplier ou utiliser une propriété connue.\n\nCalcul : " +
+      (`Multiplier par 5 revient à multiplier par 10 puis à prendre la moitié. Ici, ${a} × 5 = ${product}.`) +
+      "\n\nConclusion : le résultat obtenu répond au calcul demandé.",
       };
     },
   },
@@ -674,7 +736,9 @@ export const calculMentalBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(quotient)],
         comparator: "number_equal",
-        explanation: `On cherche le nombre qui multiplié par ${divisor} donne ${dividend}. C’est ${quotient}, donc ${dividend} ÷ ${divisor} = ${quotient}.`,
+        explanation: "Définition : le calcul mental consiste à effectuer un calcul sans poser l’opération.\n\nMéthode : on choisit une stratégie simple : décomposer, compléter, multiplier ou utiliser une propriété connue.\n\nCalcul : " +
+      (`On cherche le nombre qui multiplié par ${divisor} donne ${dividend}. C’est ${quotient}, donc ${dividend} ÷ ${divisor} = ${quotient}.`) +
+      "\n\nConclusion : le résultat obtenu répond au calcul demandé.",
       };
     },
   },
@@ -699,9 +763,11 @@ export const calculMentalBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(quotient), formatComma(quotient)],
         comparator: "number_equal",
-        explanation: `Diviser par 10 décale la virgule d’un rang vers la gauche. Donc ${dividend} ÷ 10 = ${formatComma(
+        explanation: "Définition : le calcul mental consiste à effectuer un calcul sans poser l’opération.\n\nMéthode : on choisit une stratégie simple : décomposer, compléter, multiplier ou utiliser une propriété connue.\n\nCalcul : " +
+      (`Diviser par 10 décale la virgule d’un rang vers la gauche. Donc ${dividend} ÷ 10 = ${formatComma(
           quotient
-        )}.`,
+        )}.`) +
+      "\n\nConclusion : le résultat obtenu répond au calcul demandé.",
       };
     },
   },
@@ -732,7 +798,9 @@ export const calculMentalBank: TutorBankItemV4[] = [
           format: "short",
           expected: [String(n * 2)],
           comparator: "number_equal",
-          explanation: `Le double de ${n}, c’est ${n} + ${n}. Donc le résultat est ${n * 2}.`,
+          explanation: "Définition : le calcul mental consiste à effectuer un calcul sans poser l’opération.\n\nMéthode : on choisit une stratégie simple : décomposer, compléter, multiplier ou utiliser une propriété connue.\n\nCalcul : " +
+      (`Le double de ${n}, c’est ${n} + ${n}. Donc le résultat est ${n * 2}.`) +
+      "\n\nConclusion : le résultat obtenu répond au calcul demandé.",
         };
       }
 
@@ -744,7 +812,9 @@ export const calculMentalBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(n / 2)],
         comparator: "number_equal",
-        explanation: `La moitié de ${n}, c’est ${n} ÷ 2. Donc le résultat est ${n / 2}.`,
+        explanation: "Définition : le calcul mental consiste à effectuer un calcul sans poser l’opération.\n\nMéthode : on choisit une stratégie simple : décomposer, compléter, multiplier ou utiliser une propriété connue.\n\nCalcul : " +
+      (`La moitié de ${n}, c’est ${n} ÷ 2. Donc le résultat est ${n / 2}.`) +
+      "\n\nConclusion : le résultat obtenu répond au calcul demandé.",
       };
     },
   },
@@ -770,9 +840,11 @@ export const calculMentalBank: TutorBankItemV4[] = [
           format: "short",
           expected: [String(answer), formatComma(answer)],
           comparator: "number_equal",
-          explanation: `Multiplier par 10 décale la virgule d’un rang vers la droite. Donc ${formatComma(
+          explanation: "Définition : le calcul mental consiste à effectuer un calcul sans poser l’opération.\n\nMéthode : on choisit une stratégie simple : décomposer, compléter, multiplier ou utiliser une propriété connue.\n\nCalcul : " +
+      (`Multiplier par 10 décale la virgule d’un rang vers la droite. Donc ${formatComma(
             n
-          )} × 10 = ${formatComma(answer)}.`,
+          )} × 10 = ${formatComma(answer)}.`) +
+      "\n\nConclusion : le résultat obtenu répond au calcul demandé.",
         };
       }
 
@@ -783,9 +855,11 @@ export const calculMentalBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(answer), formatComma(answer)],
         comparator: "number_equal",
-        explanation: `Diviser par 10 décale la virgule d’un rang vers la gauche. Donc ${n} ÷ 10 = ${formatComma(
+        explanation: "Définition : le calcul mental consiste à effectuer un calcul sans poser l’opération.\n\nMéthode : on choisit une stratégie simple : décomposer, compléter, multiplier ou utiliser une propriété connue.\n\nCalcul : " +
+      (`Diviser par 10 décale la virgule d’un rang vers la gauche. Donc ${n} ÷ 10 = ${formatComma(
           answer
-        )}.`,
+        )}.`) +
+      "\n\nConclusion : le résultat obtenu répond au calcul demandé.",
       };
     },
   },
@@ -814,7 +888,9 @@ export const calculMentalBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(total), `${total} €`, `${total}€`],
         comparator: "contains_keyword",
-        explanation: `On additionne les deux prix : ${a} + ${b} = ${total}. On paie donc ${total} €.`,
+        explanation: "Définition : le calcul mental consiste à effectuer un calcul sans poser l’opération.\n\nMéthode : on choisit une stratégie simple : décomposer, compléter, multiplier ou utiliser une propriété connue.\n\nCalcul : " +
+      (`On additionne les deux prix : ${a} + ${b} = ${total}. On paie donc ${total} €.`) +
+      "\n\nConclusion : le résultat obtenu répond au calcul demandé.",
       };
     },
   },
@@ -839,7 +915,9 @@ export const calculMentalBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(total)],
         comparator: "number_equal",
-        explanation: `Il y a ${rows} rangées de ${perRow} arbres. On calcule donc ${rows} × ${perRow} = ${total}. Il y a ${total} arbres en tout.`,
+        explanation: "Définition : le calcul mental consiste à effectuer un calcul sans poser l’opération.\n\nMéthode : on choisit une stratégie simple : décomposer, compléter, multiplier ou utiliser une propriété connue.\n\nCalcul : " +
+      (`Il y a ${rows} rangées de ${perRow} arbres. On calcule donc ${rows} × ${perRow} = ${total}. Il y a ${total} arbres en tout.`) +
+      "\n\nConclusion : le résultat obtenu répond au calcul demandé.",
       };
     },
   },
@@ -867,7 +945,9 @@ export const calculMentalBank: TutorBankItemV4[] = [
       format: "short",
       expected: [String(total), `${total} cm`, `${total}cm`],
       comparator: "contains_keyword",
-      explanation: `On additionne ${a} + ${b} = ${total}.`,
+      explanation: "Définition : le calcul mental consiste à effectuer un calcul sans poser l’opération.\n\nMéthode : on choisit une stratégie simple : décomposer, compléter, multiplier ou utiliser une propriété connue.\n\nCalcul : " +
+      (`On additionne ${a} + ${b} = ${total}.`) +
+      "\n\nConclusion : le résultat obtenu répond au calcul demandé.",
     };
   },
 },
@@ -892,7 +972,9 @@ export const calculMentalBank: TutorBankItemV4[] = [
       format: "short",
       expected: [String(rest), `${rest} cm`, `${rest}cm`],
       comparator: "contains_keyword",
-      explanation: `${total} - ${used} = ${rest}.`,
+      explanation: "Définition : le calcul mental consiste à effectuer un calcul sans poser l’opération.\n\nMéthode : on choisit une stratégie simple : décomposer, compléter, multiplier ou utiliser une propriété connue.\n\nCalcul : " +
+      (`${total} - ${used} = ${rest}.`) +
+      "\n\nConclusion : le résultat obtenu répond au calcul demandé.",
     };
   },
 },
@@ -917,7 +999,9 @@ export const calculMentalBank: TutorBankItemV4[] = [
       format: "short",
       expected: [String(total), `${total} m`, `${total}m`],
       comparator: "contains_keyword",
-      explanation: `${rows} × ${length} = ${total}.`,
+      explanation: "Définition : le calcul mental consiste à effectuer un calcul sans poser l’opération.\n\nMéthode : on choisit une stratégie simple : décomposer, compléter, multiplier ou utiliser une propriété connue.\n\nCalcul : " +
+      (`${rows} × ${length} = ${total}.`) +
+      "\n\nConclusion : le résultat obtenu répond au calcul demandé.",
     };
   },
 },
@@ -942,7 +1026,9 @@ export const calculMentalBank: TutorBankItemV4[] = [
       format: "short",
       expected: [String(each), `${each} m`, `${each}m`],
       comparator: "contains_keyword",
-      explanation: `${total} ÷ ${parts} = ${each}.`,
+      explanation: "Définition : le calcul mental consiste à effectuer un calcul sans poser l’opération.\n\nMéthode : on choisit une stratégie simple : décomposer, compléter, multiplier ou utiliser une propriété connue.\n\nCalcul : " +
+      (`${total} ÷ ${parts} = ${each}.`) +
+      "\n\nConclusion : le résultat obtenu répond au calcul demandé.",
     };
   },
 },
@@ -968,7 +1054,9 @@ export const calculMentalBank: TutorBankItemV4[] = [
       format: "short",
       expected: [String(rest), `${rest} m`, `${rest}m`],
       comparator: "contains_keyword",
-      explanation: `${a} + ${b} = ${a + b} puis ${total} - ${a + b} = ${rest}.`,
+      explanation: "Définition : le calcul mental consiste à effectuer un calcul sans poser l’opération.\n\nMéthode : on choisit une stratégie simple : décomposer, compléter, multiplier ou utiliser une propriété connue.\n\nCalcul : " +
+      (`${a} + ${b} = ${a + b} puis ${total} - ${a + b} = ${rest}.`) +
+      "\n\nConclusion : le résultat obtenu répond au calcul demandé.",
     };
   },
 },

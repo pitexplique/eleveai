@@ -27,7 +27,9 @@ export const trianglesBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "On écrit souvent : triangle ABC.",
     explanation:
-      "Un triangle se nomme avec ses trois sommets. Ici, on peut l’appeler triangle ABC.",
+      "Définition : un triangle est une figure qui possède trois côtés et trois sommets.\n\nMéthode : on observe les côtés, les angles ou on utilise la règle de construction demandée.\n\nCalcul : " +
+      ("Un triangle se nomme avec ses trois sommets. Ici, on peut l’appeler triangle ABC.") +
+      "\n\nConclusion : on reconnaît ou construit le triangle demandé.",
     tags: ["triangles", "nommage"],
     canvas: {
       kind: "triangle",
@@ -57,7 +59,9 @@ export const trianglesBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "On écrit les trois sommets dans l’ordre : triangle DEF.",
     explanation:
-      "Pour nommer un triangle, on utilise les lettres de ses trois sommets. Ici, c’est le triangle DEF.",
+      "Définition : un triangle est une figure qui possède trois côtés et trois sommets.\n\nMéthode : on observe les côtés, les angles ou on utilise la règle de construction demandée.\n\nCalcul : " +
+      ("Pour nommer un triangle, on utilise les lettres de ses trois sommets. Ici, c’est le triangle DEF.") +
+      "\n\nConclusion : on reconnaît ou construit le triangle demandé.",
     tags: ["triangles", "nommage"],
     canvas: {
       kind: "triangle",
@@ -93,7 +97,9 @@ export const trianglesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Un triangle se nomme avec ses trois sommets.",
     explanation:
-      "Un triangle se nomme avec ses trois sommets. La bonne réponse est donc triangle ABC.",
+      "Définition : un triangle est une figure qui possède trois côtés et trois sommets.\n\nMéthode : on observe les côtés, les angles ou on utilise la règle de construction demandée.\n\nCalcul : " +
+      ("Un triangle se nomme avec ses trois sommets. La bonne réponse est donc triangle ABC.") +
+      "\n\nConclusion : on reconnaît ou construit le triangle demandé.",
     tags: ["triangles", "nommage", "qcm"],
     canvas: {
       kind: "triangle",
@@ -134,7 +140,9 @@ export const trianglesBank: TutorBankItemV4[] = [
         format: "short",
         expected: [`triangle ${name.toLowerCase()}`, name.toLowerCase(), name],
         comparator: "contains_keyword",
-        explanation: `On nomme le triangle avec les trois sommets : ${name}.`,
+        explanation: "Définition : un triangle est une figure qui possède trois côtés et trois sommets.\n\nMéthode : on observe les côtés, les angles ou on utilise la règle de construction demandée.\n\nCalcul : " +
+      (`On nomme le triangle avec les trois sommets : ${name}.`) +
+      "\n\nConclusion : on reconnaît ou construit le triangle demandé.",
         canvas: {
           kind: "triangle",
           points: {
@@ -174,7 +182,9 @@ export const trianglesBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "Un triangle a toujours 3 côtés.",
     explanation:
-      "Un triangle est une figure qui possède toujours 3 côtés.",
+      "Définition : un triangle est une figure qui possède trois côtés et trois sommets.\n\nMéthode : on observe les côtés, les angles ou on utilise la règle de construction demandée.\n\nCalcul : " +
+      ("Un triangle est une figure qui possède toujours 3 côtés.") +
+      "\n\nConclusion : on reconnaît ou construit le triangle demandé.",
     tags: ["triangles", "cotes", "canvas"],
     canvas: {
       kind: "triangle",
@@ -205,7 +215,9 @@ export const trianglesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Un triangle a 3 sommets.",
     explanation:
-      "Les trois sommets du triangle sont les trois points de la figure. Un triangle possède donc 3 sommets.",
+      "Définition : un triangle est une figure qui possède trois côtés et trois sommets.\n\nMéthode : on observe les côtés, les angles ou on utilise la règle de construction demandée.\n\nCalcul : " +
+      ("Les trois sommets du triangle sont les trois points de la figure. Un triangle possède donc 3 sommets.") +
+      "\n\nConclusion : on reconnaît ou construit le triangle demandé.",
     tags: ["triangles", "sommets", "canvas", "qcm"],
     canvas: {
       kind: "triangle",
@@ -242,7 +254,9 @@ export const trianglesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Les côtés relient deux sommets du triangle.",
     explanation:
-      "Un côté d’un triangle relie deux sommets du triangle. Ici, AB est bien un côté du triangle.",
+      "Définition : un triangle est une figure qui possède trois côtés et trois sommets.\n\nMéthode : on observe les côtés, les angles ou on utilise la règle de construction demandée.\n\nCalcul : " +
+      ("Un côté d’un triangle relie deux sommets du triangle. Ici, AB est bien un côté du triangle.") +
+      "\n\nConclusion : on reconnaît ou construit le triangle demandé.",
     tags: ["triangles", "cotes", "canvas", "qcm"],
     canvas: {
       kind: "triangle",
@@ -278,7 +292,9 @@ export const trianglesBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "Le côté BC ne contient pas le sommet A.",
     explanation:
-      "Le côté BC relie les sommets B et C. Le sommet opposé à ce côté est donc A.",
+      "Définition : un triangle est une figure qui possède trois côtés et trois sommets.\n\nMéthode : on observe les côtés, les angles ou on utilise la règle de construction demandée.\n\nCalcul : " +
+      ("Le côté BC relie les sommets B et C. Le sommet opposé à ce côté est donc A.") +
+      "\n\nConclusion : on reconnaît ou construit le triangle demandé.",
     tags: ["triangles", "sommets", "cotes"],
   },
   {
@@ -302,7 +318,9 @@ export const trianglesBank: TutorBankItemV4[] = [
           choices: shuffle(["2", "3", "4", "5"]),
           expected: ["3"],
           comparator: "mcq_exact",
-          explanation: "Un triangle possède 3 sommets.",
+          explanation: "Définition : un triangle est une figure qui possède trois côtés et trois sommets.\n\nMéthode : on observe les côtés, les angles ou on utilise la règle de construction demandée.\n\nCalcul : " +
+      ("Un triangle possède 3 sommets.") +
+      "\n\nConclusion : on reconnaît ou construit le triangle demandé.",
         };
       }
 
@@ -311,7 +329,9 @@ export const trianglesBank: TutorBankItemV4[] = [
         format: "short",
         expected: ["3", "trois"],
         comparator: "contains_keyword",
-        explanation: "Un triangle possède 3 côtés.",
+        explanation: "Définition : un triangle est une figure qui possède trois côtés et trois sommets.\n\nMéthode : on observe les côtés, les angles ou on utilise la règle de construction demandée.\n\nCalcul : " +
+      ("Un triangle possède 3 côtés.") +
+      "\n\nConclusion : on reconnaît ou construit le triangle demandé.",
       };
     },
   },
@@ -334,7 +354,9 @@ export const trianglesBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "Deux côtés égaux → triangle isocèle.",
     explanation:
-      "Un triangle qui possède deux côtés de même longueur est un triangle isocèle.",
+      "Définition : un triangle est une figure qui possède trois côtés et trois sommets.\n\nMéthode : on observe les côtés, les angles ou on utilise la règle de construction demandée.\n\nCalcul : " +
+      ("Un triangle qui possède deux côtés de même longueur est un triangle isocèle.") +
+      "\n\nConclusion : on reconnaît ou construit le triangle demandé.",
     tags: ["triangles", "types", "cotes"],
   },
   {
@@ -352,7 +374,9 @@ export const trianglesBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "Trois côtés égaux → triangle équilatéral.",
     explanation:
-      "Un triangle qui possède trois côtés de même longueur est un triangle équilatéral.",
+      "Définition : un triangle est une figure qui possède trois côtés et trois sommets.\n\nMéthode : on observe les côtés, les angles ou on utilise la règle de construction demandée.\n\nCalcul : " +
+      ("Un triangle qui possède trois côtés de même longueur est un triangle équilatéral.") +
+      "\n\nConclusion : on reconnaît ou construit le triangle demandé.",
     tags: ["triangles", "types", "cotes"],
   },
   {
@@ -371,7 +395,9 @@ export const trianglesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Les deux côtés marqués de la même façon sont égaux.",
     explanation:
-      "Deux côtés ont le même codage, donc ils sont égaux. Le triangle est donc isocèle.",
+      "Définition : un triangle est une figure qui possède trois côtés et trois sommets.\n\nMéthode : on observe les côtés, les angles ou on utilise la règle de construction demandée.\n\nCalcul : " +
+      ("Deux côtés ont le même codage, donc ils sont égaux. Le triangle est donc isocèle.") +
+      "\n\nConclusion : on reconnaît ou construit le triangle demandé.",
     tags: ["triangles", "canvas", "qcm", "cotes"],
     canvas: {
       kind: "triangle",
@@ -405,7 +431,9 @@ export const trianglesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Trois côtés égaux → équilatéral.",
     explanation:
-      "Le triangle qui possède trois côtés égaux est le triangle équilatéral.",
+      "Définition : un triangle est une figure qui possède trois côtés et trois sommets.\n\nMéthode : on observe les côtés, les angles ou on utilise la règle de construction demandée.\n\nCalcul : " +
+      ("Le triangle qui possède trois côtés égaux est le triangle équilatéral.") +
+      "\n\nConclusion : on reconnaît ou construit le triangle demandé.",
     tags: ["triangles", "qcm", "cotes"],
   },
   {
@@ -424,7 +452,9 @@ export const trianglesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Les trois côtés sont marqués comme égaux.",
     explanation:
-      "Les trois côtés portent le même codage, donc ils sont tous égaux. Le triangle est équilatéral.",
+      "Définition : un triangle est une figure qui possède trois côtés et trois sommets.\n\nMéthode : on observe les côtés, les angles ou on utilise la règle de construction demandée.\n\nCalcul : " +
+      ("Les trois côtés portent le même codage, donc ils sont tous égaux. Le triangle est équilatéral.") +
+      "\n\nConclusion : on reconnaît ou construit le triangle demandé.",
     tags: ["triangles", "canvas", "qcm", "cotes"],
     canvas: {
       kind: "triangle",
@@ -463,7 +493,9 @@ export const trianglesBank: TutorBankItemV4[] = [
           expected: ["isocèle", "isocele"],
           comparator: "contains_keyword",
           explanation:
-            "Un triangle qui possède deux côtés égaux est isocèle.",
+            "Définition : un triangle est une figure qui possède trois côtés et trois sommets.\n\nMéthode : on observe les côtés, les angles ou on utilise la règle de construction demandée.\n\nCalcul : " +
+      ("Un triangle qui possède deux côtés égaux est isocèle.") +
+      "\n\nConclusion : on reconnaît ou construit le triangle demandé.",
         };
       }
 
@@ -473,7 +505,9 @@ export const trianglesBank: TutorBankItemV4[] = [
         expected: ["équilatéral", "equilateral"],
         comparator: "contains_keyword",
         explanation:
-          "Un triangle qui possède trois côtés égaux est équilatéral.",
+          "Définition : un triangle est une figure qui possède trois côtés et trois sommets.\n\nMéthode : on observe les côtés, les angles ou on utilise la règle de construction demandée.\n\nCalcul : " +
+      ("Un triangle qui possède trois côtés égaux est équilatéral.") +
+      "\n\nConclusion : on reconnaît ou construit le triangle demandé.",
       };
     },
   },
@@ -496,7 +530,9 @@ export const trianglesBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "Un angle droit → triangle rectangle.",
     explanation:
-      "Un triangle qui possède un angle droit est un triangle rectangle.",
+      "Définition : un triangle est une figure qui possède trois côtés et trois sommets.\n\nMéthode : on observe les côtés, les angles ou on utilise la règle de construction demandée.\n\nCalcul : " +
+      ("Un triangle qui possède un angle droit est un triangle rectangle.") +
+      "\n\nConclusion : on reconnaît ou construit le triangle demandé.",
     tags: ["triangles", "types", "angles"],
   },
   {
@@ -514,7 +550,9 @@ export const trianglesBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "Un angle > 90° → triangle obtusangle.",
     explanation:
-      "Quand un triangle possède un angle supérieur à 90°, c’est un triangle obtusangle.",
+      "Définition : un triangle est une figure qui possède trois côtés et trois sommets.\n\nMéthode : on observe les côtés, les angles ou on utilise la règle de construction demandée.\n\nCalcul : " +
+      ("Quand un triangle possède un angle supérieur à 90°, c’est un triangle obtusangle.") +
+      "\n\nConclusion : on reconnaît ou construit le triangle demandé.",
     tags: ["triangles", "types", "angles"],
   },
   {
@@ -533,7 +571,9 @@ export const trianglesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Tous les angles < 90°.",
     explanation:
-      "Quand les trois angles d’un triangle sont inférieurs à 90°, on dit que c’est un triangle aigu.",
+      "Définition : un triangle est une figure qui possède trois côtés et trois sommets.\n\nMéthode : on observe les côtés, les angles ou on utilise la règle de construction demandée.\n\nCalcul : " +
+      ("Quand les trois angles d’un triangle sont inférieurs à 90°, on dit que c’est un triangle aigu.") +
+      "\n\nConclusion : on reconnaît ou construit le triangle demandé.",
     tags: ["triangles", "qcm", "angles"],
   },
   {
@@ -552,7 +592,9 @@ export const trianglesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Le petit carré indique un angle droit.",
     explanation:
-      "Le petit carré montre qu’il y a un angle droit. Le triangle est donc rectangle.",
+      "Définition : un triangle est une figure qui possède trois côtés et trois sommets.\n\nMéthode : on observe les côtés, les angles ou on utilise la règle de construction demandée.\n\nCalcul : " +
+      ("Le petit carré montre qu’il y a un angle droit. Le triangle est donc rectangle.") +
+      "\n\nConclusion : on reconnaît ou construit le triangle demandé.",
     tags: ["triangles", "canvas", "qcm", "angles"],
     canvas: {
       kind: "triangle",
@@ -592,7 +634,9 @@ export const trianglesBank: TutorBankItemV4[] = [
           expected: ["rectangle"],
           comparator: "mcq_exact",
           explanation:
-            "Le petit carré indique un angle droit. Le triangle est rectangle.",
+            "Définition : un triangle est une figure qui possède trois côtés et trois sommets.\n\nMéthode : on observe les côtés, les angles ou on utilise la règle de construction demandée.\n\nCalcul : " +
+      ("Le petit carré indique un angle droit. Le triangle est rectangle.") +
+      "\n\nConclusion : on reconnaît ou construit le triangle demandé.",
           canvas: {
             kind: "triangle",
             points: {
@@ -619,7 +663,9 @@ export const trianglesBank: TutorBankItemV4[] = [
           expected: ["obtus"],
           comparator: "mcq_exact",
           explanation:
-            "Le triangle possède un angle plus grand que 90°. C’est donc un triangle obtusangle.",
+            "Définition : un triangle est une figure qui possède trois côtés et trois sommets.\n\nMéthode : on observe les côtés, les angles ou on utilise la règle de construction demandée.\n\nCalcul : " +
+      ("Le triangle possède un angle plus grand que 90°. C’est donc un triangle obtusangle.") +
+      "\n\nConclusion : on reconnaît ou construit le triangle demandé.",
           canvas: {
             kind: "triangle",
             points: {
@@ -642,7 +688,9 @@ export const trianglesBank: TutorBankItemV4[] = [
         expected: ["aigu"],
         comparator: "mcq_exact",
         explanation:
-          "Tous les angles du triangle sont inférieurs à 90°. C’est donc un triangle aigu.",
+          "Définition : un triangle est une figure qui possède trois côtés et trois sommets.\n\nMéthode : on observe les côtés, les angles ou on utilise la règle de construction demandée.\n\nCalcul : " +
+      ("Tous les angles du triangle sont inférieurs à 90°. C’est donc un triangle aigu.") +
+      "\n\nConclusion : on reconnaît ou construit le triangle demandé.",
         canvas: {
           kind: "triangle",
           points: {
@@ -677,7 +725,9 @@ export const trianglesBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Dans tout triangle, la somme est 180°.",
     explanation:
-      "Dans tous les triangles, la somme des trois angles est toujours égale à 180°.",
+      "Définition : un triangle est une figure qui possède trois côtés et trois sommets.\n\nMéthode : on observe les côtés, les angles ou on utilise la règle de construction demandée.\n\nCalcul : " +
+      ("Dans tous les triangles, la somme des trois angles est toujours égale à 180°.") +
+      "\n\nConclusion : on reconnaît ou construit le triangle demandé.",
     tags: ["triangles", "angles"],
   },
   {
@@ -696,7 +746,9 @@ export const trianglesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "C’est une propriété valable pour tous les triangles.",
     explanation:
-      "Quelle que soit la forme du triangle, la somme de ses angles vaut toujours 180°.",
+      "Définition : un triangle est une figure qui possède trois côtés et trois sommets.\n\nMéthode : on observe les côtés, les angles ou on utilise la règle de construction demandée.\n\nCalcul : " +
+      ("Quelle que soit la forme du triangle, la somme de ses angles vaut toujours 180°.") +
+      "\n\nConclusion : on reconnaît ou construit le triangle demandé.",
     tags: ["triangles", "angles", "qcm", "canvas"],
     canvas: {
       kind: "triangle",
@@ -735,7 +787,9 @@ export const trianglesBank: TutorBankItemV4[] = [
         expected: ["180", "180°"],
         comparator: "number_equal",
         explanation:
-          "La somme des angles d’un triangle est toujours égale à 180°.",
+          "Définition : un triangle est une figure qui possède trois côtés et trois sommets.\n\nMéthode : on observe les côtés, les angles ou on utilise la règle de construction demandée.\n\nCalcul : " +
+      ("La somme des angles d’un triangle est toujours égale à 180°.") +
+      "\n\nConclusion : on reconnaît ou construit le triangle demandé.",
       };
     },
   },
@@ -758,7 +812,9 @@ export const trianglesBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "180 - 60 - 70",
     explanation:
-      "La somme des angles d’un triangle vaut 180°. Donc le troisième angle vaut 180 - 60 - 70 = 50°.",
+      "Définition : un triangle est une figure qui possède trois côtés et trois sommets.\n\nMéthode : on observe les côtés, les angles ou on utilise la règle de construction demandée.\n\nCalcul : " +
+      ("La somme des angles d’un triangle vaut 180°. Donc le troisième angle vaut 180 - 60 - 70 = 50°.") +
+      "\n\nConclusion : on reconnaît ou construit le triangle demandé.",
     tags: ["triangles", "angles"],
   },
   {
@@ -776,7 +832,9 @@ export const trianglesBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "La somme des angles d’un triangle vaut 180°.",
     explanation:
-      "On connaît deux angles : 60° et 70°. L’angle manquant vaut donc 180 - 60 - 70 = 50°.",
+      "Définition : un triangle est une figure qui possède trois côtés et trois sommets.\n\nMéthode : on observe les côtés, les angles ou on utilise la règle de construction demandée.\n\nCalcul : " +
+      ("On connaît deux angles : 60° et 70°. L’angle manquant vaut donc 180 - 60 - 70 = 50°.") +
+      "\n\nConclusion : on reconnaît ou construit le triangle demandé.",
     tags: ["triangles", "canvas", "angles"],
     canvas: {
       kind: "triangle",
@@ -813,7 +871,9 @@ export const trianglesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "180 - 40 - 90",
     explanation:
-      "Le troisième angle vaut 180 - 40 - 90 = 50°.",
+      "Définition : un triangle est une figure qui possède trois côtés et trois sommets.\n\nMéthode : on observe les côtés, les angles ou on utilise la règle de construction demandée.\n\nCalcul : " +
+      ("Le troisième angle vaut 180 - 40 - 90 = 50°.") +
+      "\n\nConclusion : on reconnaît ou construit le triangle demandé.",
     tags: ["triangles", "qcm", "angles"],
   },
   {
@@ -839,7 +899,9 @@ export const trianglesBank: TutorBankItemV4[] = [
           expected: ["70", "70°"],
           comparator: "number_equal",
           explanation:
-            "Le troisième angle vaut 180 - 50 - 60 = 70°.",
+            "Définition : un triangle est une figure qui possède trois côtés et trois sommets.\n\nMéthode : on observe les côtés, les angles ou on utilise la règle de construction demandée.\n\nCalcul : " +
+      ("Le troisième angle vaut 180 - 50 - 60 = 70°.") +
+      "\n\nConclusion : on reconnaît ou construit le triangle demandé.",
         };
       }
 
@@ -848,7 +910,9 @@ export const trianglesBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(c), `${c}°`],
         comparator: "number_equal",
-        explanation: `Le troisième angle vaut 180 - ${a} - ${b} = ${c}°.`,
+        explanation: "Définition : un triangle est une figure qui possède trois côtés et trois sommets.\n\nMéthode : on observe les côtés, les angles ou on utilise la règle de construction demandée.\n\nCalcul : " +
+      (`Le troisième angle vaut 180 - ${a} - ${b} = ${c}°.`) +
+      "\n\nConclusion : on reconnaît ou construit le triangle demandé.",
       };
     },
   },
@@ -875,7 +939,9 @@ export const trianglesBank: TutorBankItemV4[] = [
           expected: ["50", "50°"],
           comparator: "number_equal",
           explanation:
-            "L’angle manquant vaut 180 - 60 - 70 = 50°.",
+            "Définition : un triangle est une figure qui possède trois côtés et trois sommets.\n\nMéthode : on observe les côtés, les angles ou on utilise la règle de construction demandée.\n\nCalcul : " +
+      ("L’angle manquant vaut 180 - 60 - 70 = 50°.") +
+      "\n\nConclusion : on reconnaît ou construit le triangle demandé.",
           canvas: {
             kind: "triangle",
             points: {
@@ -902,7 +968,9 @@ export const trianglesBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(c), `${c}°`],
         comparator: "number_equal",
-        explanation: `L’angle manquant vaut 180 - ${a} - ${b} = ${c}°.`,
+        explanation: "Définition : un triangle est une figure qui possède trois côtés et trois sommets.\n\nMéthode : on observe les côtés, les angles ou on utilise la règle de construction demandée.\n\nCalcul : " +
+      (`L’angle manquant vaut 180 - ${a} - ${b} = ${c}°.`) +
+      "\n\nConclusion : on reconnaît ou construit le triangle demandé.",
         canvas: {
           kind: "triangle",
           points: {
@@ -943,7 +1011,9 @@ export const trianglesBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "2 + 3 < 6, donc ce n’est pas possible.",
     explanation:
-      "Pour construire un triangle, la somme de deux côtés doit être plus grande que le troisième. Ici 2 + 3 = 5, et 5 est plus petit que 6. Ce n’est donc pas possible.",
+      "Définition : un triangle est une figure qui possède trois côtés et trois sommets.\n\nMéthode : on observe les côtés, les angles ou on utilise la règle de construction demandée.\n\nCalcul : " +
+      ("Pour construire un triangle, la somme de deux côtés doit être plus grande que le troisième. Ici 2 + 3 = 5, et 5 est plus petit que 6. Ce n’est donc pas possible.") +
+      "\n\nConclusion : on reconnaît ou construit le triangle demandé.",
     tags: ["triangles", "construction"],
   },
   {
@@ -962,7 +1032,9 @@ export const trianglesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "4 + 5 > 7",
     explanation:
-      "On vérifie : 4 + 5 = 9, et 9 est plus grand que 7. Le triangle est donc possible.",
+      "Définition : un triangle est une figure qui possède trois côtés et trois sommets.\n\nMéthode : on observe les côtés, les angles ou on utilise la règle de construction demandée.\n\nCalcul : " +
+      ("On vérifie : 4 + 5 = 9, et 9 est plus grand que 7. Le triangle est donc possible.") +
+      "\n\nConclusion : on reconnaît ou construit le triangle demandé.",
     tags: ["triangles", "qcm", "construction"],
   },
   {
@@ -981,7 +1053,9 @@ export const trianglesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Vérifie si la somme de deux côtés est plus grande que le troisième.",
     explanation:
-      "On vérifie 4 + 5 = 9, et 9 est plus grand que 7. On peut donc construire ce triangle.",
+      "Définition : un triangle est une figure qui possède trois côtés et trois sommets.\n\nMéthode : on observe les côtés, les angles ou on utilise la règle de construction demandée.\n\nCalcul : " +
+      ("On vérifie 4 + 5 = 9, et 9 est plus grand que 7. On peut donc construire ce triangle.") +
+      "\n\nConclusion : on reconnaît ou construit le triangle demandé.",
     tags: ["triangles", "canvas", "qcm", "construction"],
     canvas: {
       kind: "triangle",
@@ -1036,9 +1110,11 @@ export const trianglesBank: TutorBankItemV4[] = [
         choices: shuffle(["oui", "non"]),
         expected: [usePossible ? "oui" : "non"],
         comparator: "mcq_exact",
-        explanation: usePossible
+        explanation: "Définition : un triangle est une figure qui possède trois côtés et trois sommets.\n\nMéthode : on observe les côtés, les angles ou on utilise la règle de construction demandée.\n\nCalcul : " +
+      (usePossible
           ? `La somme de deux côtés est bien plus grande que le troisième. Le triangle est possible.`
-          : `La somme de deux côtés n’est pas plus grande que le troisième. Le triangle n’est pas possible.`,
+          : `La somme de deux côtés n’est pas plus grande que le troisième. Le triangle n’est pas possible.`) +
+      "\n\nConclusion : on reconnaît ou construit le triangle demandé.",
       };
     },
   },
@@ -1061,7 +1137,9 @@ export const trianglesBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "La somme des angles d’un triangle vaut 180°.",
     explanation:
-      "Le troisième angle vaut 180 - 40 - 60 = 80°.",
+      "Définition : un triangle est une figure qui possède trois côtés et trois sommets.\n\nMéthode : on observe les côtés, les angles ou on utilise la règle de construction demandée.\n\nCalcul : " +
+      ("Le troisième angle vaut 180 - 40 - 60 = 80°.") +
+      "\n\nConclusion : on reconnaît ou construit le triangle demandé.",
     tags: ["triangles", "defi", "angles"],
   },
   {
@@ -1079,7 +1157,9 @@ export const trianglesBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "Deux côtés égaux → triangle isocèle.",
     explanation:
-      "Un triangle qui a deux côtés égaux est un triangle isocèle.",
+      "Définition : un triangle est une figure qui possède trois côtés et trois sommets.\n\nMéthode : on observe les côtés, les angles ou on utilise la règle de construction demandée.\n\nCalcul : " +
+      ("Un triangle qui a deux côtés égaux est un triangle isocèle.") +
+      "\n\nConclusion : on reconnaît ou construit le triangle demandé.",
     tags: ["triangles", "defi", "types"],
   },
   {
@@ -1098,7 +1178,9 @@ export const trianglesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Vérifie la somme des angles.",
     explanation:
-      "90 + 45 + 45 = 180. Ce triangle est donc possible.",
+      "Définition : un triangle est une figure qui possède trois côtés et trois sommets.\n\nMéthode : on observe les côtés, les angles ou on utilise la règle de construction demandée.\n\nCalcul : " +
+      ("90 + 45 + 45 = 180. Ce triangle est donc possible.") +
+      "\n\nConclusion : on reconnaît ou construit le triangle demandé.",
     tags: ["triangles", "defi", "qcm", "angles"],
   },
   {
@@ -1117,7 +1199,9 @@ export const trianglesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "La somme de deux côtés doit être plus grande que le troisième.",
     explanation:
-      "3 + 4 = 7, et 7 est plus petit que 8. On ne peut donc pas construire ce triangle.",
+      "Définition : un triangle est une figure qui possède trois côtés et trois sommets.\n\nMéthode : on observe les côtés, les angles ou on utilise la règle de construction demandée.\n\nCalcul : " +
+      ("3 + 4 = 7, et 7 est plus petit que 8. On ne peut donc pas construire ce triangle.") +
+      "\n\nConclusion : on reconnaît ou construit le triangle demandé.",
     tags: ["triangles", "defi", "construction", "qcm"],
   },
   {
@@ -1136,7 +1220,9 @@ export const trianglesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Le petit carré rouge indique un angle droit.",
     explanation:
-      "Le petit carré rouge indique un angle droit. Le triangle est donc rectangle.",
+      "Définition : un triangle est une figure qui possède trois côtés et trois sommets.\n\nMéthode : on observe les côtés, les angles ou on utilise la règle de construction demandée.\n\nCalcul : " +
+      ("Le petit carré rouge indique un angle droit. Le triangle est donc rectangle.") +
+      "\n\nConclusion : on reconnaît ou construit le triangle demandé.",
     tags: ["triangles", "defi", "canvas", "qcm"],
     canvas: {
       kind: "triangle",
@@ -1169,7 +1255,9 @@ export const trianglesBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Les deux autres angles sont égaux et la somme totale vaut 180°.",
     explanation:
-      "Il reste 180 - 100 = 80° pour les deux autres angles. Comme ils sont égaux, chacun mesure 40°.",
+      "Définition : un triangle est une figure qui possède trois côtés et trois sommets.\n\nMéthode : on observe les côtés, les angles ou on utilise la règle de construction demandée.\n\nCalcul : " +
+      ("Il reste 180 - 100 = 80° pour les deux autres angles. Comme ils sont égaux, chacun mesure 40°.") +
+      "\n\nConclusion : on reconnaît ou construit le triangle demandé.",
     tags: ["triangles", "defi", "raisonnement", "angles"],
   },
   {
@@ -1188,7 +1276,9 @@ export const trianglesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Deux angles droits feraient déjà 180°.",
     explanation:
-      "Deux angles droits valent déjà 90 + 90 = 180°. Il ne resterait plus rien pour le troisième angle. Ce n’est donc pas possible.",
+      "Définition : un triangle est une figure qui possède trois côtés et trois sommets.\n\nMéthode : on observe les côtés, les angles ou on utilise la règle de construction demandée.\n\nCalcul : " +
+      ("Deux angles droits valent déjà 90 + 90 = 180°. Il ne resterait plus rien pour le troisième angle. Ce n’est donc pas possible.") +
+      "\n\nConclusion : on reconnaît ou construit le triangle demandé.",
     tags: ["triangles", "defi", "logique", "qcm"],
   },
   {
@@ -1207,7 +1297,9 @@ export const trianglesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Deux traits identiques sur deux côtés signifient que ces côtés sont égaux.",
     explanation:
-      "Deux côtés portent le même codage, donc ils sont égaux. Le triangle est donc isocèle.",
+      "Définition : un triangle est une figure qui possède trois côtés et trois sommets.\n\nMéthode : on observe les côtés, les angles ou on utilise la règle de construction demandée.\n\nCalcul : " +
+      ("Deux côtés portent le même codage, donc ils sont égaux. Le triangle est donc isocèle.") +
+      "\n\nConclusion : on reconnaît ou construit le triangle demandé.",
     tags: ["triangles", "defi", "canvas", "qcm", "types"],
     canvas: {
       kind: "triangle",
@@ -1246,7 +1338,9 @@ export const trianglesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Il est à la fois rectangle et isocèle.",
     explanation:
-      "Il possède un angle droit, donc il est rectangle, et deux côtés égaux, donc il est isocèle. C’est donc un triangle rectangle isocèle.",
+      "Définition : un triangle est une figure qui possède trois côtés et trois sommets.\n\nMéthode : on observe les côtés, les angles ou on utilise la règle de construction demandée.\n\nCalcul : " +
+      ("Il possède un angle droit, donc il est rectangle, et deux côtés égaux, donc il est isocèle. C’est donc un triangle rectangle isocèle.") +
+      "\n\nConclusion : on reconnaît ou construit le triangle demandé.",
     tags: ["triangles", "defi", "types", "raisonnement"],
   },
   {
@@ -1264,7 +1358,9 @@ export const trianglesBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Les trois angles sont égaux et leur somme vaut 180°.",
     explanation:
-      "Dans un triangle équilatéral, les trois angles sont égaux. Comme leur somme vaut 180°, chaque angle mesure 180 ÷ 3 = 60°.",
+      "Définition : un triangle est une figure qui possède trois côtés et trois sommets.\n\nMéthode : on observe les côtés, les angles ou on utilise la règle de construction demandée.\n\nCalcul : " +
+      ("Dans un triangle équilatéral, les trois angles sont égaux. Comme leur somme vaut 180°, chaque angle mesure 180 ÷ 3 = 60°.") +
+      "\n\nConclusion : on reconnaît ou construit le triangle demandé.",
     tags: ["triangles", "defi", "equilateral", "angles"],
   },
   {
@@ -1283,7 +1379,9 @@ export const trianglesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Les trois côtés portent le même codage.",
     explanation:
-      "Les trois côtés sont codés égaux. Le triangle est donc équilatéral.",
+      "Définition : un triangle est une figure qui possède trois côtés et trois sommets.\n\nMéthode : on observe les côtés, les angles ou on utilise la règle de construction demandée.\n\nCalcul : " +
+      ("Les trois côtés sont codés égaux. Le triangle est donc équilatéral.") +
+      "\n\nConclusion : on reconnaît ou construit le triangle demandé.",
     tags: ["triangles", "defi", "canvas", "qcm", "equilateral"],
     canvas: {
       kind: "triangle",
@@ -1317,7 +1415,9 @@ export const trianglesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "C’est possible si les deux autres angles sont très petits.",
     explanation:
-      "Oui. Si un angle mesure 179°, les deux autres angles peuvent par exemple mesurer 1° et 0° impossible exactement, mais on peut avoir deux angles très petits dont la somme vaut 1°. Donc en théorie un triangle peut avoir un angle de 179°.",
+      "Définition : un triangle est une figure qui possède trois côtés et trois sommets.\n\nMéthode : on observe les côtés, les angles ou on utilise la règle de construction demandée.\n\nCalcul : " +
+      ("Oui. Si un angle mesure 179°, les deux autres angles peuvent par exemple mesurer 1° et 0° impossible exactement, mais on peut avoir deux angles très petits dont la somme vaut 1°. Donc en théorie un triangle peut avoir un angle de 179°.") +
+      "\n\nConclusion : on reconnaît ou construit le triangle demandé.",
     tags: ["triangles", "defi", "angles", "qcm"],
   },
   {
@@ -1336,7 +1436,9 @@ export const trianglesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Deux triangles peuvent avoir les mêmes angles mais des tailles différentes.",
     explanation:
-      "Non. Deux triangles peuvent avoir les mêmes angles tout en ayant des tailles différentes. Les angles seuls ne suffisent donc pas à connaître exactement les longueurs.",
+      "Définition : un triangle est une figure qui possède trois côtés et trois sommets.\n\nMéthode : on observe les côtés, les angles ou on utilise la règle de construction demandée.\n\nCalcul : " +
+      ("Non. Deux triangles peuvent avoir les mêmes angles tout en ayant des tailles différentes. Les angles seuls ne suffisent donc pas à connaître exactement les longueurs.") +
+      "\n\nConclusion : on reconnaît ou construit le triangle demandé.",
     tags: ["triangles", "defi", "logique", "qcm"],
   },
   {
@@ -1354,7 +1456,9 @@ export const trianglesBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "Deux angles droits font déjà 180°.",
     explanation:
-      "Dans un triangle, la somme des angles vaut 180°. Or deux angles droits font déjà 180°. Il ne resterait donc plus de place pour le troisième angle.",
+      "Définition : un triangle est une figure qui possède trois côtés et trois sommets.\n\nMéthode : on observe les côtés, les angles ou on utilise la règle de construction demandée.\n\nCalcul : " +
+      ("Dans un triangle, la somme des angles vaut 180°. Or deux angles droits font déjà 180°. Il ne resterait donc plus de place pour le troisième angle.") +
+      "\n\nConclusion : on reconnaît ou construit le triangle demandé.",
     tags: ["triangles", "defi", "raisonnement"],
   },
   {
@@ -1383,7 +1487,9 @@ export const trianglesBank: TutorBankItemV4[] = [
         choices: shuffle(["oui", "non"]),
         expected: ["oui"],
         comparator: "mcq_exact",
-        explanation: `${a} + ${b} + ${c} = 180°. Le triangle est donc possible.`,
+        explanation: "Définition : un triangle est une figure qui possède trois côtés et trois sommets.\n\nMéthode : on observe les côtés, les angles ou on utilise la règle de construction demandée.\n\nCalcul : " +
+      (`${a} + ${b} + ${c} = 180°. Le triangle est donc possible.`) +
+      "\n\nConclusion : on reconnaît ou construit le triangle demandé.",
       };
     },
   },
@@ -1421,9 +1527,11 @@ export const trianglesBank: TutorBankItemV4[] = [
         choices: shuffle(["oui", "non"]),
         expected: [usePossible ? "oui" : "non"],
         comparator: "mcq_exact",
-        explanation: usePossible
+        explanation: "Définition : un triangle est une figure qui possède trois côtés et trois sommets.\n\nMéthode : on observe les côtés, les angles ou on utilise la règle de construction demandée.\n\nCalcul : " +
+      (usePossible
           ? `La somme de deux côtés est bien plus grande que le troisième, donc le triangle est possible.`
-          : `La somme de deux côtés n’est pas plus grande que le troisième, donc le triangle n’est pas possible.`,
+          : `La somme de deux côtés n’est pas plus grande que le troisième, donc le triangle n’est pas possible.`) +
+      "\n\nConclusion : on reconnaît ou construit le triangle demandé.",
       };
     },
   },
