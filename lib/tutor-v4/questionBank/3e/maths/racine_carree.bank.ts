@@ -40,10 +40,6 @@ function shuffle<T>(arr: T[]): T[] {
   return [...arr].sort(() => Math.random() - 0.5);
 }
 
-function makeChoices(correct: string, wrongs: string[]) {
-  return shuffle([correct, ...wrongs]).slice(0, 4);
-}
-
 /* =========================
    BANK
 ========================= */
@@ -69,7 +65,11 @@ export const racineCarreeBank: TutorBankItemV4[] = [
   expected: ["3"],
   comparator: "mcq_exact",
   hint: "On cherche le nombre dont le carré vaut 9.",
-  explanation: "√9 = 3 car 3² = 9.",
+  explanation:
+  "Définition : la racine carrée d’un nombre positif est le nombre positif dont le carré vaut ce nombre.\n\n" +
+  "Méthode : pour trouver √9, on cherche le nombre positif dont le carré vaut 9.\n\n" +
+  "Calcul : 3² = 9.\n\n" +
+  "Conclusion : √9 = 3.",
   tags: ["racine", "definition"],
 },
 
@@ -87,8 +87,12 @@ export const racineCarreeBank: TutorBankItemV4[] = [
   choices: ["4", "-4", "4 ou -4", "8"],
   expected: ["4"],
   comparator: "mcq_exact",
-  hint: "La racine carrée est toujours positive.",
-  explanation: "√16 = 4. La racine carrée est positive.",
+  hint: "La racine carrée est toujours positive Oo nulle.",
+  explanation:
+  "Définition : la racine carrée désigne toujours le nombre positif.\n\n" +
+  "Méthode : on cherche le nombre positif dont le carré vaut 16.\n\n" +
+  "Calcul : 4² = 16 et (-4)² = 16, mais √16 désigne la valeur positive.\n\n" +
+  "Conclusion : √16 = 4.",
   tags: ["racine", "positif", "qcm"],
 },
 
@@ -107,7 +111,11 @@ export const racineCarreeBank: TutorBankItemV4[] = [
   expected: ["non"],
   comparator: "mcq_exact",
   hint: "La racine carrée n’est pas une division.",
-  explanation: "√25 = 5 car 5² = 25. Ce n’est pas une division.",
+  explanation:
+  "Définition : une racine carrée n’est pas une division par 2.\n\n" +
+  "Méthode : pour calculer √25, on cherche le nombre positif dont le carré vaut 25.\n\n" +
+  "Calcul : 5² = 25, alors que 25 ÷ 2 = 12,5.\n\n" +
+  "Conclusion : √25 = 5. L’élève a tort.",
   tags: ["racine", "erreur"],
 },
 
@@ -131,7 +139,11 @@ export const racineCarreeBank: TutorBankItemV4[] = [
       format: "short",
       expected: [String(r)],
       comparator: "number_equal",
-      explanation: `√${n} = ${r} car ${r}² = ${n}.`,
+      explanation:
+        `Définition : la racine carrée d’un nombre positif est le nombre positif dont le carré vaut ce nombre.\n\n` +
+        `Méthode : pour trouver √${n}, on cherche le nombre positif dont le carré vaut ${n}.\n\n` +
+        `Calcul : ${r}² = ${n}.\n\n` +
+        `Conclusion : √${n} = ${r}.`,
     };
   },
 },
@@ -155,7 +167,11 @@ export const racineCarreeBank: TutorBankItemV4[] = [
   expected: ["36"],
   comparator: "mcq_exact",
   hint: "Un carré parfait est le carré d’un entier.",
-  explanation: "36 = 6², donc c’est un carré parfait.",
+  explanation:
+  "Définition : un carré parfait est un nombre qui peut s’écrire comme le carré d’un entier.\n\n" +
+  "Méthode : on cherche parmi les réponses un nombre de la forme n².\n\n" +
+  "Calcul : 36 = 6².\n\n" +
+  "Conclusion : 36 est un carré parfait.",
   tags: ["racine", "carre_parfait"],
 },
 
@@ -174,7 +190,11 @@ export const racineCarreeBank: TutorBankItemV4[] = [
   expected: ["49"],
   comparator: "mcq_exact",
   hint: "On cherche 7².",
-  explanation: "7² = 49.",
+  explanation:
+  "Définition : si un nombre a pour racine carrée 7, alors ce nombre est 7².\n\n" +
+  "Méthode : on calcule le carré de 7.\n\n" +
+  "Calcul : 7² = 49.\n\n" +
+  "Conclusion : le nombre qui a pour racine carrée 7 est 49.",
   tags: ["racine", "carre_parfait"],
 },
 
@@ -198,7 +218,11 @@ export const racineCarreeBank: TutorBankItemV4[] = [
       format: "short",
       expected: [String(square)],
       comparator: "number_equal",
-      explanation: `${n}² = ${square}.`,
+      explanation:
+        `Définition : le carré d’un nombre est le produit de ce nombre par lui-même.\n\n` +
+        `Méthode : pour calculer le carré de ${n}, on calcule ${n} × ${n}.\n\n` +
+        `Calcul : ${n}² = ${n} × ${n} = ${square}.\n\n` +
+        `Conclusion : le carré de ${n} est ${square}.`,
     };
   },
 },
@@ -215,7 +239,7 @@ export const racineCarreeBank: TutorBankItemV4[] = [
   hint: "Teste les carrés connus.",
   tags: ["racine", "template"],
   generate: () => {
-    const n = randomChoice([12, 18, 20, 27, 30, 40]);
+    const n = randomChoice([12, 16, 18, 20, 25, 27, 30, 36, 40, 49, 60 ,64 ,81 ,90 ,100 ,110,121,144,169]);
     const correct = Math.sqrt(n);
     const isPerfect = Number.isInteger(correct);
 
@@ -226,10 +250,16 @@ export const racineCarreeBank: TutorBankItemV4[] = [
       expected: [isPerfect ? "oui" : "non"],
       comparator: "mcq_exact",
       explanation: isPerfect
-        ? `${n} = ${correct}²`
-        : `${n} n’est pas un carré parfait.`,
-    };
-  },
+        ? `Définition : un carré parfait est le carré d’un entier.\n\n` +
+          `Méthode : on vérifie si ${n} peut s’écrire sous la forme k² avec k entier.\n\n` +
+          `Calcul : ${n} = ${correct}².\n\n` +
+          `Conclusion : ${n} est un carré parfait.`
+        : `Définition : un carré parfait est le carré d’un entier.\n\n` +
+          `Méthode : on compare ${n} avec les carrés parfaits connus.\n\n` +
+          `Calcul : ${n} ne correspond pas au carré d’un entier.\n\n` +
+          `Conclusion : ${n} n’est pas un carré parfait.`,
+          };
+        },
 },
 /* =========================
    RACINE_CALCULER
@@ -249,7 +279,11 @@ export const racineCarreeBank: TutorBankItemV4[] = [
   expected: ["8"],
   comparator: "number_equal",
   hint: "Cherche le nombre dont le carré vaut 64.",
-  explanation: "√64 = 8 car 8² = 64.",
+  explanation:
+    "Définition : la racine carrée d’un nombre positif est le nombre positif dont le carré vaut ce nombre.\n\n" +
+    "Méthode : pour calculer √64, on cherche le nombre positif dont le carré vaut 64.\n\n" +
+    "Calcul : 8² = 64.\n\n" +
+    "Conclusion : √64 = 8.",
   tags: ["racine", "calcul"],
 },
 
@@ -268,7 +302,11 @@ export const racineCarreeBank: TutorBankItemV4[] = [
   expected: ["9"],
   comparator: "mcq_exact",
   hint: "9² = ?",
-  explanation: "√81 = 9 car 9² = 81.",
+  explanation:
+    "Définition : calculer une racine carrée revient à chercher un carré connu.\n\n" +
+    "Méthode : on cherche quel nombre a pour carré 81.\n\n" +
+    "Calcul : 9² = 81.\n\n" +
+    "Conclusion : √81 = 9.",
   tags: ["racine", "calcul", "qcm"],
 },
 
@@ -311,8 +349,12 @@ export const racineCarreeBank: TutorBankItemV4[] = [
       format: "short",
       expected: [String(r)],
       comparator: "number_equal",
-      explanation: `√${n} = ${r} car ${r}² = ${n}.`,
-    };
+      explanation:
+        `Définition : la racine carrée d’un nombre positif est le nombre positif dont le carré vaut ce nombre.\n\n` +
+        `Méthode : pour calculer √${n}, on cherche le nombre positif dont le carré vaut ${n}.\n\n` +
+        `Calcul : ${r}² = ${n}.\n\n` +
+        `Conclusion : √${n} = ${r}.`,
+          };
   },
 },
 
@@ -337,10 +379,12 @@ export const racineCarreeBank: TutorBankItemV4[] = [
       format: "short",
       expected: [String(result)],
       comparator: "number_equal",
-      explanation: `√${a} = ${Math.sqrt(a)} et √${b} = ${Math.sqrt(
-        b
-      )}. Donc √${a} + √${b} = ${result}.`,
-    };
+      explanation:
+        `Définition : pour additionner des racines carrées simples, on peut calculer chaque racine séparément.\n\n` +
+        `Méthode : on calcule d’abord √${a}, puis √${b}, avant d’additionner les résultats.\n\n` +
+        `Calcul : √${a} = ${Math.sqrt(a)} et √${b} = ${Math.sqrt(b)}. Donc ${Math.sqrt(a)} + ${Math.sqrt(b)} = ${result}.\n\n` +
+        `Conclusion : √${a} + √${b} = ${result}.`,
+          };
   },
 },
 
@@ -359,7 +403,10 @@ export const racineCarreeBank: TutorBankItemV4[] = [
   comparator: "contains_keyword",
   hint: "La racine carrée désigne le nombre positif.",
   explanation:
-    "Même si 7² = 49 et (-7)² = 49, la notation √49 désigne la racine carrée positive. Donc √49 = 7.",
+    "Définition : la notation √a désigne toujours la racine carrée positive.\n\n" +
+    "Méthode : on cherche le nombre positif dont le carré vaut 49.\n\n" +
+    "Calcul : 7² = 49 et (-7)² = 49, mais √49 désigne uniquement la valeur positive.\n\n" +
+    "Conclusion : √49 = 7 et non -7.",
   tags: ["racine", "calcul", "open", "signe"],
 },
 
@@ -381,10 +428,12 @@ export const racineCarreeBank: TutorBankItemV4[] = [
   choices: ["entre 3 et 4", "entre 4 et 5", "entre 5 et 6", "entre 10 et 11"],
   expected: ["entre 4 et 5"],
   comparator: "mcq_exact",
-  hint: "Compare 20 avec les carrés parfaits proches.",
   explanation:
-    "4² = 16 et 5² = 25. Comme 16 < 20 < 25, on a 4 < √20 < 5.",
-  tags: ["racine", "encadrer", "qcm"],
+    "Définition : encadrer une racine carrée consiste à trouver entre quels entiers elle se situe.\n\n" +
+    "Méthode : on compare 20 avec les carrés parfaits les plus proches.\n\n" +
+    "Calcul : 4² = 16 et 5² = 25. Comme 16 < 20 < 25, alors 4 < √20 < 5.\n\n" +
+    "Conclusion : √20 est compris entre 4 et 5.",
+    tags: ["racine", "encadrer", "qcm"],
 },
 
 {
@@ -401,8 +450,11 @@ export const racineCarreeBank: TutorBankItemV4[] = [
   expected: ["8"],
   comparator: "number_equal",
   hint: "Compare 60 avec 7² et 8².",
-  explanation:
-    "7² = 49 et 8² = 64. Comme 49 < 60 < 64, on a 7 < √60 < 8.",
+explanation:
+  "Définition : pour encadrer une racine carrée, on utilise les carrés parfaits connus.\n\n" +
+  "Méthode : on compare 60 avec les carrés de 7 et de 8.\n\n" +
+  "Calcul : 7² = 49 et 8² = 64. Comme 49 < 60 < 64, alors 7 < √60 < 8.\n\n" +
+  "Conclusion : le nombre manquant est 8.",
   tags: ["racine", "encadrer", "short"],
 },
 
@@ -432,12 +484,12 @@ export const racineCarreeBank: TutorBankItemV4[] = [
       ]),
       expected: [`entre ${a} et ${a + 1}`],
       comparator: "mcq_exact",
-      explanation: `${a}² = ${a * a} et ${a + 1}² = ${
-        (a + 1) * (a + 1)
-      }. Comme ${a * a} < ${n} < ${(a + 1) * (a + 1)}, alors ${a} < √${n} < ${
-        a + 1
-      }.`,
-    };
+      explanation:
+        `Définition : une racine carrée se situe entre les racines des deux carrés parfaits qui encadrent le nombre.\n\n` +
+        `Méthode : on compare ${n} avec deux carrés parfaits consécutifs.\n\n` +
+        `Calcul : ${a}² = ${a * a} et ${(a + 1)}² = ${(a + 1) * (a + 1)}. Comme ${a * a} < ${n} < ${(a + 1) * (a + 1)}, alors ${a} < √${n} < ${a + 1}.\n\n` +
+        `Conclusion : √${n} est compris entre ${a} et ${a + 1}.`,
+          };
   },
 },
 
@@ -461,11 +513,13 @@ export const racineCarreeBank: TutorBankItemV4[] = [
       format: "short",
       expected: [String(a + 1)],
       comparator: "number_equal",
-      explanation: `${a}² = ${a * a} et ${a + 1}² = ${
-        (a + 1) * (a + 1)
-      }. Donc ${a} < √${n} < ${a + 1}.`,
-    };
-  },
+      explanation:
+        `Définition : encadrer une racine carrée consiste à trouver deux entiers consécutifs entre lesquels elle se situe.\n\n` +
+        `Méthode : on compare ${n} avec les carrés parfaits voisins.\n\n` +
+        `Calcul : ${a}² = ${a * a} et ${(a + 1)}² = ${(a + 1) * (a + 1)}. Donc ${a * a} < ${n} < ${(a + 1) * (a + 1)}.\n\n` +
+        `Conclusion : ${a} < √${n} < ${a + 1}.`,
+          };
+        },
 },
 
 {
@@ -507,8 +561,11 @@ export const racineCarreeBank: TutorBankItemV4[] = [
   comparator: "mcq_exact",
   hint: "Calcule les deux côtés séparément.",
   explanation:
-    "Non. √(9 + 16) = √25 = 5, alors que √9 + √16 = 3 + 4 = 7.",
-  tags: ["racine", "defi", "erreur", "qcm"],
+    "Définition : en général, la racine carrée d’une somme n’est pas la somme des racines carrées.\n\n" +
+    "Méthode : on calcule séparément les deux membres de l’égalité.\n\n" +
+    "Calcul : √(9 + 16) = √25 = 5, alors que √9 + √16 = 3 + 4 = 7.\n\n" +
+    "Conclusion : l’élève a tort.",
+    tags: ["racine", "defi", "erreur", "qcm"],
 },
 
 {
@@ -524,10 +581,12 @@ export const racineCarreeBank: TutorBankItemV4[] = [
   format: "short",
   expected: ["10"],
   comparator: "number_equal",
-  hint: "Utilise Pythagore : h² = 6² + 8².",
   explanation:
-    "h² = 6² + 8² = 36 + 64 = 100. Donc h = √100 = 10 cm.",
-  tags: ["racine", "defi", "pythagore"],
+    "Définition : dans un triangle rectangle, le théorème de Pythagore permet de calculer le carré de l’hypoténuse.\n\n" +
+    "Méthode : on additionne les carrés des deux côtés de l’angle droit, puis on prend la racine carrée.\n\n" +
+    "Calcul : h² = 6² + 8² = 36 + 64 = 100. Donc h = √100 = 10.\n\n" +
+    "Conclusion : l’hypoténuse mesure 10 cm.",
+    tags: ["racine", "defi", "pythagore"],
 },
 
 {
@@ -544,19 +603,19 @@ export const racineCarreeBank: TutorBankItemV4[] = [
   generate: () => {
     const a = randomChoice([4, 9, 16, 25]);
     const b = randomChoice([4, 9, 16, 25]);
-    const left = Math.sqrt(a + b);
     const right = Math.sqrt(a) + Math.sqrt(b);
-    const equal = left === right;
-
+    
     return {
       text: `L’égalité √(${a} + ${b}) = √${a} + √${b} est-elle vraie ?`,
       format: "qcm",
       choices: ["oui", "non"],
-      expected: [equal ? "oui" : "non"],
+      expected: ["non"],
       comparator: "mcq_exact",
-      explanation: `√(${a} + ${b}) = √${a + b}, tandis que √${a} + √${b} = ${Math.sqrt(
-        a
-      )} + ${Math.sqrt(b)} = ${right}. En général, ces deux résultats ne sont pas égaux.`,
+      explanation:
+      `Définition : en général, la racine carrée d’une somme n’est pas la somme des racines carrées.\n\n` +
+      `Méthode : on compare les deux côtés de l’égalité.\n\n` +
+      `Calcul : √(${a} + ${b}) = √${a + b}, tandis que √${a} + √${b} = ${Math.sqrt(a)} + ${Math.sqrt(b)} = ${right}.\n\n` +
+      `Conclusion : l’égalité proposée est fausse.`,
     };
   },
 },
@@ -586,9 +645,11 @@ export const racineCarreeBank: TutorBankItemV4[] = [
       format: "short",
       expected: [String(t.h)],
       comparator: "number_equal",
-      explanation: `h² = ${t.a}² + ${t.b}² = ${t.a * t.a} + ${t.b * t.b} = ${
-        t.h * t.h
-      }. Donc h = √${t.h * t.h} = ${t.h} cm.`,
+      explanation:
+        `Définition : dans un triangle rectangle, le théorème de Pythagore permet de calculer le carré de l’hypoténuse.\n\n` +
+        `Méthode : on additionne les carrés des deux côtés de l’angle droit, puis on prend la racine carrée.\n\n` +
+        `Calcul : h² = ${t.a}² + ${t.b}² = ${t.a * t.a} + ${t.b * t.b} = ${t.h * t.h}. Donc h = √${t.h * t.h} = ${t.h}.\n\n` +
+        `Conclusion : l’hypoténuse mesure ${t.h} cm.`,
     };
   },
 },
@@ -607,8 +668,11 @@ export const racineCarreeBank: TutorBankItemV4[] = [
   expected: ["carré", "longueur", "hypoténuse", "racine", "pythagore"],
   comparator: "contains_keyword",
   hint: "Pythagore donne souvent le carré d’une longueur.",
-  explanation:
-    "Le théorème de Pythagore permet souvent de trouver le carré d’une longueur. Pour retrouver la longueur elle-même, on utilise la racine carrée.",
+explanation:
+  "Définition : le théorème de Pythagore donne souvent le carré d’une longueur.\n\n" +
+  "Méthode : pour retrouver la longueur elle-même, on utilise la racine carrée.\n\n" +
+  "Calcul : si h² = 100, alors h = √100 = 10.\n\n" +
+  "Conclusion : la racine carrée est utile pour passer du carré d’une longueur à la longueur.",
   tags: ["racine", "defi", "open", "pythagore", "raisonnement"],
 },
 ];

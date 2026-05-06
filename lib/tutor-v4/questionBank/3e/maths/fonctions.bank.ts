@@ -12,39 +12,27 @@ function shuffle<T>(arr: T[]): T[] {
   return [...arr].sort(() => Math.random() - 0.5);
 }
 
-function makeChoices(correct: number, spread = 5): string[] {
-  const values = new Set<number>([correct]);
 
-  while (values.size < 4) {
-    const v = correct + randomInt(-spread, spread);
-    values.add(v);
-  }
-
-  return shuffle([...values]).map(String);
-}
-
-function makeTextChoices(correct: string, wrongs: string[]) {
-  return shuffle([correct, ...wrongs]).slice(0, 4);
-}
-
-function imageAffine(a: number, b: number, x: number) {
-  return a * x + b;
-}
 
 function fonctionTableauCanvas(params: {
   titre: string;
   xValues: number[];
   yValues: Array<number | "?">;
-  highlightedCells?: Array<[number, number]>;
-  missingCells?: Array<[number, number]>;
+  highlightIndex?: number;
+  missing?: {
+    type: "antecedent" | "image";
+    index: number;
+  };
+  consigne?: string;
 }) {
   return {
-    kind: "fonctionTableau",
+    kind: "fonction_tableau",
     titre: params.titre,
-    headers: ["x", ...params.xValues.map(String)],
-    rows: [["f(x)", ...params.yValues.map(String)]],
-    highlightedCells: params.highlightedCells ?? [],
-    missingCells: params.missingCells ?? [],
+    xValues: params.xValues,
+    yValues: params.yValues,
+    highlightIndex: params.highlightIndex,
+    missing: params.missing,
+    consigne: params.consigne,
     size: { width: 340, height: 120 },
   } as any;
 }
@@ -250,7 +238,10 @@ explanation:
       expected: [String(x)],
       comparator: "number_equal",
       explanation:
-        `On cherche x tel que ${a}x + ${b} = ${y}. On trouve x = ${x}.`,
+        `Définition : chercher un antécédent, c’est chercher la valeur de x qui donne une image donnée.\n\n` +
+        `Méthode : on cherche x tel que f(x) = ${y}.\n\n` +
+        `Calcul : ${a}x + ${b} = ${y}. On trouve x = ${x}.\n\n` +
+        `Conclusion : il faut acheter ${x} entrée(s).`,
       canvas: fonctionGraphiqueCanvas({
         titre: "Recherche d’antécédent",
         a,
@@ -296,7 +287,8 @@ explanation:
         titre: "Tableau de valeurs",
         xValues,
         yValues,
-        highlightedCells: [[1, index + 1]]
+        highlightIndex: index,
+        consigne: "Lis l’image du nombre surligné.",
       })
     };
   }
@@ -327,7 +319,8 @@ explanation:
       canvas: fonctionTableauCanvas({
         titre: "Comprendre une fonction",
         xValues,
-        yValues
+        yValues,
+         consigne: "Observe la règle qui permet de passer de x à f(x).",
       })
     };
   }
@@ -358,7 +351,10 @@ explanation:
       expected: [String(y)],
       comparator: "number_equal",
       explanation:
-        `On lit l’image de ${x} sur le graphique : f(${x}) = ${y}.`,
+        `Définition : sur un graphique, l’image de x est la valeur lue sur l’axe vertical.\n\n` +
+        `Méthode : on repère x = ${x}, puis on lit la valeur de f(${x}).\n\n` +
+        `Calcul : f(${x}) = ${a} × ${x} + ${b} = ${y}.\n\n` +
+        `Conclusion : ${x} tacos coûtent ${y} €.`,
       canvas: fonctionGraphiqueCanvas({
         titre: "Prix des tacos",
         a,
@@ -454,7 +450,10 @@ explanation:
       expected: [String(y)],
       comparator: "number_equal",
       explanation:
-        `Prix = ${a} × ${x} + ${b} = ${y}€.`,
+        `Définition : une fonction affine peut s’écrire f(x) = ax + b.\n\n` +
+        `Méthode : ici, ${b} € est le prix de départ et ${a} € est le prix par km.\n\n` +
+        `Calcul : f(${x}) = ${a} × ${x} + ${b} = ${y}.\n\n` +
+        `Conclusion : le trajet de ${x} km coûte ${y} €.`,
       canvas: fonctionGraphiqueCanvas({
         titre: "Tarif VTC",
         a,
@@ -507,10 +506,13 @@ explanation:
       text: "Deux loueurs de jet-ski proposent : f(x) = 20x et g(x) = 15x + 10. Pour 2 heures, lequel est le moins cher ?",
       format: "qcm",
       choices: ["f", "g", "les deux", "on ne sait pas"],
-      expected: ["g"],
+      expected: ["les deux"],
       comparator: "mcq_exact",
       explanation:
-        "f(2) = 40 et g(2) = 40. Oups égalité 😄 → les deux coûtent pareil ici.",
+        "Définition : comparer deux fonctions, c’est comparer leurs valeurs pour une même valeur de x.\n\n" +
+        "Méthode : on calcule f(2), puis g(2), car on cherche le prix pour 2 heures.\n\n" +
+        "Calcul : f(2) = 20 × 2 = 40. Et g(2) = 15 × 2 + 10 = 30 + 10 = 40.\n\n" +
+        "Conclusion : les deux loueurs coûtent le même prix pour 2 heures.",
     };
   }
 },
