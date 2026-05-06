@@ -122,7 +122,10 @@ export const probabilitesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Aléatoire signifie qu’on ne peut pas prévoir le résultat avec certitude.",
     explanation:
-      "Une expérience aléatoire est une expérience dont on ne peut pas connaître le résultat à l’avance avec certitude.",
+      "Définition : une probabilité mesure la chance qu’un événement se produise entre 0 et 1.\n\n" +
+          "Méthode : on compte les issues favorables et les issues possibles, puis on forme le quotient.\n\nCalcul : " +
+          ("Une expérience aléatoire est une expérience dont on ne peut pas connaître le résultat à l’avance avec certitude.") +
+          "\n\nConclusion : la probabilité obtenue répond à la question.",
     tags: ["probabilites", "vocabulaire", "qcm"],
   },
   {
@@ -141,7 +144,10 @@ export const probabilitesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Une issue est un résultat possible.",
     explanation:
-      "Obtenir 4 est un résultat possible du lancer de dé : c’est une issue.",
+      "Définition : une probabilité mesure la chance qu’un événement se produise entre 0 et 1.\n\n" +
+          "Méthode : on compte les issues favorables et les issues possibles, puis on forme le quotient.\n\nCalcul : " +
+          ("Obtenir 4 est un résultat possible du lancer de dé : c’est une issue.") +
+          "\n\nConclusion : la probabilité obtenue répond à la question.",
     tags: ["probabilites", "vocabulaire", "issue", "qcm"],
     canvas: deCanvas([4]),
   },
@@ -161,7 +167,10 @@ export const probabilitesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Cet événement regroupe plusieurs issues : 2, 4 et 6.",
     explanation:
-      "Un événement peut regrouper plusieurs issues. Ici, « obtenir un nombre pair » correspond aux issues 2, 4 et 6.",
+      "Définition : une probabilité mesure la chance qu’un événement se produise entre 0 et 1.\n\n" +
+          "Méthode : on compte les issues favorables et les issues possibles, puis on forme le quotient.\n\nCalcul : " +
+          ("Un événement peut regrouper plusieurs issues. Ici, « obtenir un nombre pair » correspond aux issues 2, 4 et 6.") +
+          "\n\nConclusion : la probabilité obtenue répond à la question.",
     tags: ["probabilites", "vocabulaire", "evenement", "qcm"],
     canvas: deCanvas([2, 4, 6]),
   },
@@ -180,7 +189,10 @@ export const probabilitesBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "On ne peut pas savoir avec certitude le résultat avant de faire l’expérience.",
     explanation:
-      "Une expérience aléatoire est une expérience dont on ne connaît pas le résultat à l’avance.",
+      "Définition : une probabilité mesure la chance qu’un événement se produise entre 0 et 1.\n\n" +
+          "Méthode : on compte les issues favorables et les issues possibles, puis on forme le quotient.\n\nCalcul : " +
+          ("Une expérience aléatoire est une expérience dont on ne connaît pas le résultat à l’avance.") +
+          "\n\nConclusion : la probabilité obtenue répond à la question.",
     tags: ["probabilites", "vocabulaire", "open"],
   },
   {
@@ -198,7 +210,10 @@ export const probabilitesBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "Une issue est un résultat possible ; un événement peut contenir une ou plusieurs issues.",
     explanation:
-      "Une issue est un résultat possible. Un événement est une condition qui peut regrouper une ou plusieurs issues.",
+      "Définition : une probabilité mesure la chance qu’un événement se produise entre 0 et 1.\n\n" +
+          "Méthode : on compte les issues favorables et les issues possibles, puis on forme le quotient.\n\nCalcul : " +
+          ("Une issue est un résultat possible. Un événement est une condition qui peut regrouper une ou plusieurs issues.") +
+          "\n\nConclusion : la probabilité obtenue répond à la question.",
     tags: ["probabilites", "vocabulaire", "open"],
   },
 
@@ -221,7 +236,10 @@ export const probabilitesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Un dé classique a 6 faces.",
     explanation:
-      "Les issues possibles sont 1, 2, 3, 4, 5 et 6 : il y en a 6.",
+      "Définition : une probabilité mesure la chance qu’un événement se produise entre 0 et 1.\n\n" +
+          "Méthode : on compte les issues favorables et les issues possibles, puis on forme le quotient.\n\nCalcul : " +
+          ("Les issues possibles sont 1, 2, 3, 4, 5 et 6 : il y en a 6.") +
+          "\n\nConclusion : la probabilité obtenue répond à la question.",
     tags: ["probabilites", "issues", "de", "qcm"],
     canvas: deCanvas(),
   },
@@ -240,7 +258,10 @@ export const probabilitesBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Liste les nombres pairs du dé.",
     explanation:
-      "Les issues favorables sont 2, 4 et 6. Il y en a donc 3.",
+      "Définition : une probabilité mesure la chance qu’un événement se produise entre 0 et 1.\n\n" +
+          "Méthode : on compte les issues favorables et les issues possibles, puis on forme le quotient.\n\nCalcul : " +
+          ("Les issues favorables sont 2, 4 et 6. Il y en a donc 3.") +
+          "\n\nConclusion : la probabilité obtenue répond à la question.",
     tags: ["probabilites", "issues", "de", "pair"],
     canvas: deCanvas([2, 4, 6]),
   },
@@ -259,7 +280,10 @@ export const probabilitesBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Compte toutes les billes.",
     explanation:
-      "Le sac contient 3 billes rouges et 2 billes bleues, donc 5 billes au total.",
+      "Définition : une probabilité mesure la chance qu’un événement se produise entre 0 et 1.\n\n" +
+          "Méthode : on compte les issues favorables et les issues possibles, puis on forme le quotient.\n\nCalcul : " +
+          ("Le sac contient 3 billes rouges et 2 billes bleues, donc 5 billes au total.") +
+          "\n\nConclusion : la probabilité obtenue répond à la question.",
     tags: ["probabilites", "issues", "billes", "canvas"],
     canvas: billesCanvas([
       { couleur: couleurs.rouge, label: "R" },
@@ -285,7 +309,10 @@ export const probabilitesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Supérieur à 4 signifie strictement plus grand que 4.",
     explanation:
-      "Les nombres strictement supérieurs à 4 sur un dé sont 5 et 6.",
+      "Définition : une probabilité mesure la chance qu’un événement se produise entre 0 et 1.\n\n" +
+          "Méthode : on compte les issues favorables et les issues possibles, puis on forme le quotient.\n\nCalcul : " +
+          ("Les nombres strictement supérieurs à 4 sur un dé sont 5 et 6.") +
+          "\n\nConclusion : la probabilité obtenue répond à la question.",
     tags: ["probabilites", "issues", "qcm", "piege"],
     canvas: deCanvas([5, 6]),
   },
@@ -304,7 +331,10 @@ export const probabilitesBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "Liste les résultats possibles du dé.",
     explanation:
-      "Les issues possibles sont 1, 2, 3, 4, 5 et 6. Il y a donc 6 issues possibles.",
+      "Définition : une probabilité mesure la chance qu’un événement se produise entre 0 et 1.\n\n" +
+          "Méthode : on compte les issues favorables et les issues possibles, puis on forme le quotient.\n\nCalcul : " +
+          ("Les issues possibles sont 1, 2, 3, 4, 5 et 6. Il y a donc 6 issues possibles.") +
+          "\n\nConclusion : la probabilité obtenue répond à la question.",
     tags: ["probabilites", "issues", "open"],
     canvas: deCanvas(),
   },
@@ -329,7 +359,10 @@ export const probabilitesBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(total)],
         comparator: "number_equal",
-        explanation: `Il y a ${rouges} + ${bleues} = ${total} billes au total.`,
+        explanation: "Définition : une probabilité mesure la chance qu’un événement se produise entre 0 et 1.\n\n" +
+          "Méthode : on compte les issues favorables et les issues possibles, puis on forme le quotient.\n\nCalcul : " +
+          (`Il y a ${rouges} + ${bleues} = ${total} billes au total.`) +
+          "\n\nConclusion : la probabilité obtenue répond à la question.",
         canvas: billesCanvas([
           ...Array.from({ length: rouges }, () => ({
             couleur: couleurs.rouge,
@@ -363,7 +396,10 @@ export const probabilitesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Un dé équilibré ne favorise aucune face.",
     explanation:
-      "Oui. Chaque face a la même probabilité d’apparaître : la situation est équiprobable.",
+      "Définition : une probabilité mesure la chance qu’un événement se produise entre 0 et 1.\n\n" +
+          "Méthode : on compte les issues favorables et les issues possibles, puis on forme le quotient.\n\nCalcul : " +
+          ("Oui. Chaque face a la même probabilité d’apparaître : la situation est équiprobable.") +
+          "\n\nConclusion : la probabilité obtenue répond à la question.",
     tags: ["probabilites", "equiprobabilite", "de"],
     canvas: deCanvas(),
   },
@@ -383,7 +419,10 @@ export const probabilitesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Regarde si toutes les zones ont le même poids.",
     explanation:
-      "Non. Le secteur rouge a un poids 3, alors que le secteur bleu a un poids 1. Les issues ne sont pas équiprobables.",
+      "Définition : une probabilité mesure la chance qu’un événement se produise entre 0 et 1.\n\n" +
+          "Méthode : on compte les issues favorables et les issues possibles, puis on forme le quotient.\n\nCalcul : " +
+          ("Non. Le secteur rouge a un poids 3, alors que le secteur bleu a un poids 1. Les issues ne sont pas équiprobables.") +
+          "\n\nConclusion : la probabilité obtenue répond à la question.",
     tags: ["probabilites", "equiprobabilite", "roue", "piege"],
     canvas: roueCanvas([
       { label: "Rouge", poids: 3, couleur: couleurs.rouge },
@@ -406,7 +445,10 @@ export const probabilitesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Compte les billes de chaque couleur.",
     explanation:
-      "Il y a 4 billes rouges et 2 billes bleues. Les couleurs n’ont donc pas la même probabilité.",
+      "Définition : une probabilité mesure la chance qu’un événement se produise entre 0 et 1.\n\n" +
+          "Méthode : on compte les issues favorables et les issues possibles, puis on forme le quotient.\n\nCalcul : " +
+          ("Il y a 4 billes rouges et 2 billes bleues. Les couleurs n’ont donc pas la même probabilité.") +
+          "\n\nConclusion : la probabilité obtenue répond à la question.",
     tags: ["probabilites", "equiprobabilite", "billes", "piege"],
     canvas: billesCanvas([
       ...Array.from({ length: 4 }, () => ({ couleur: couleurs.rouge, label: "R" })),
@@ -428,7 +470,10 @@ export const probabilitesBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "Les couleurs ne sont pas présentes en même quantité.",
     explanation:
-      "Le rouge apparaît 3 fois et le bleu 1 fois. Les deux couleurs n’ont pas la même chance d’être obtenues.",
+      "Définition : une probabilité mesure la chance qu’un événement se produise entre 0 et 1.\n\n" +
+          "Méthode : on compte les issues favorables et les issues possibles, puis on forme le quotient.\n\nCalcul : " +
+          ("Le rouge apparaît 3 fois et le bleu 1 fois. Les deux couleurs n’ont pas la même chance d’être obtenues.") +
+          "\n\nConclusion : la probabilité obtenue répond à la question.",
     tags: ["probabilites", "equiprobabilite", "open", "raisonnement"],
     canvas: roueCanvas([
       { label: "Rouge", poids: 3, couleur: couleurs.rouge },
@@ -467,9 +512,12 @@ export const probabilitesBank: TutorBankItemV4[] = [
         choices: ["oui", "non"],
         expected: [equal ? "oui" : "non"],
         comparator: "mcq_exact",
-        explanation: equal
+        explanation: "Définition : une probabilité mesure la chance qu’un événement se produise entre 0 et 1.\n\n" +
+          "Méthode : on compte les issues favorables et les issues possibles, puis on forme le quotient.\n\nCalcul : " +
+          (equal
           ? "Oui. Toutes les zones ont le même poids."
-          : "Non. Les zones n’ont pas toutes le même poids.",
+          : "Non. Les zones n’ont pas toutes le même poids.") +
+          "\n\nConclusion : la probabilité obtenue répond à la question.",
         canvas: roueCanvas(segments),
       };
     },
@@ -493,7 +541,10 @@ export const probabilitesBank: TutorBankItemV4[] = [
     comparator: "fraction_decimal_equivalent",
     hint: "Il y a 1 issue favorable sur 6 issues possibles.",
     explanation:
-      "Obtenir 3 correspond à une seule issue favorable parmi 6 issues possibles. La probabilité est donc 1/6.",
+      "Définition : une probabilité mesure la chance qu’un événement se produise entre 0 et 1.\n\n" +
+          "Méthode : on compte les issues favorables et les issues possibles, puis on forme le quotient.\n\nCalcul : " +
+          ("Obtenir 3 correspond à une seule issue favorable parmi 6 issues possibles. La probabilité est donc 1/6.") +
+          "\n\nConclusion : la probabilité obtenue répond à la question.",
     tags: ["probabilites", "calcul", "de"],
     canvas: deCanvas([3]),
   },
@@ -512,7 +563,10 @@ export const probabilitesBank: TutorBankItemV4[] = [
     comparator: "fraction_decimal_equivalent",
     hint: "Les nombres pairs sont 2, 4 et 6.",
     explanation:
-      "Les issues favorables sont 2, 4 et 6 : 3 issues sur 6. Donc la probabilité est 3/6 = 1/2.",
+      "Définition : une probabilité mesure la chance qu’un événement se produise entre 0 et 1.\n\n" +
+          "Méthode : on compte les issues favorables et les issues possibles, puis on forme le quotient.\n\nCalcul : " +
+          ("Les issues favorables sont 2, 4 et 6 : 3 issues sur 6. Donc la probabilité est 3/6 = 1/2.") +
+          "\n\nConclusion : la probabilité obtenue répond à la question.",
     tags: ["probabilites", "calcul", "de", "pair"],
     canvas: deCanvas([2, 4, 6]),
   },
@@ -531,7 +585,10 @@ export const probabilitesBank: TutorBankItemV4[] = [
     comparator: "fraction_decimal_equivalent",
     hint: "Compte les billes rouges et le total.",
     explanation:
-      "Il y a 3 billes rouges sur 5 billes au total. La probabilité est donc 3/5.",
+      "Définition : une probabilité mesure la chance qu’un événement se produise entre 0 et 1.\n\n" +
+          "Méthode : on compte les issues favorables et les issues possibles, puis on forme le quotient.\n\nCalcul : " +
+          ("Il y a 3 billes rouges sur 5 billes au total. La probabilité est donc 3/5.") +
+          "\n\nConclusion : la probabilité obtenue répond à la question.",
     tags: ["probabilites", "calcul", "billes"],
     canvas: billesCanvas([
       ...Array.from({ length: 3 }, () => ({ couleur: couleurs.rouge, label: "R" })),
@@ -554,7 +611,10 @@ export const probabilitesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Les nombres strictement supérieurs à 4 sont 5 et 6.",
     explanation:
-      "Les issues favorables sont 5 et 6 : 2 issues sur 6. La probabilité est donc 2/6.",
+      "Définition : une probabilité mesure la chance qu’un événement se produise entre 0 et 1.\n\n" +
+          "Méthode : on compte les issues favorables et les issues possibles, puis on forme le quotient.\n\nCalcul : " +
+          ("Les issues favorables sont 5 et 6 : 2 issues sur 6. La probabilité est donc 2/6.") +
+          "\n\nConclusion : la probabilité obtenue répond à la question.",
     tags: ["probabilites", "calcul", "qcm", "piege"],
     canvas: deCanvas([5, 6]),
   },
@@ -573,7 +633,10 @@ export const probabilitesBank: TutorBankItemV4[] = [
     comparator: "fraction_decimal_equivalent",
     hint: "Probabilité = effectif favorable / effectif total.",
     explanation:
-      "Il y a 2 billes bleues sur 6 billes au total. La probabilité est donc 2/6 = 1/3.",
+      "Définition : une probabilité mesure la chance qu’un événement se produise entre 0 et 1.\n\n" +
+          "Méthode : on compte les issues favorables et les issues possibles, puis on forme le quotient.\n\nCalcul : " +
+          ("Il y a 2 billes bleues sur 6 billes au total. La probabilité est donc 2/6 = 1/3.") +
+          "\n\nConclusion : la probabilité obtenue répond à la question.",
     tags: ["probabilites", "calcul", "tableau"],
     canvas: tableauCanvas(
       ["Couleur", "Rouge", "Bleu", "Vert", "Total"],
@@ -599,7 +662,10 @@ export const probabilitesBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "Compte les nombres pairs, puis le nombre total d’issues.",
     explanation:
-      "Les nombres pairs sont 2, 4 et 6 : il y a 3 issues favorables sur 6 issues possibles. La probabilité est donc 3/6.",
+      "Définition : une probabilité mesure la chance qu’un événement se produise entre 0 et 1.\n\n" +
+          "Méthode : on compte les issues favorables et les issues possibles, puis on forme le quotient.\n\nCalcul : " +
+          ("Les nombres pairs sont 2, 4 et 6 : il y a 3 issues favorables sur 6 issues possibles. La probabilité est donc 3/6.") +
+          "\n\nConclusion : la probabilité obtenue répond à la question.",
     tags: ["probabilites", "calcul", "de", "open"],
     canvas: deCanvas([2, 4, 6]),
   },
@@ -630,7 +696,10 @@ export const probabilitesBank: TutorBankItemV4[] = [
         ]),
         expected: [result],
         comparator: "mcq_exact",
-        explanation: `Il y a ${rouges} bille(s) rouge(s) sur ${total} bille(s) au total, donc la probabilité est ${result}.`,
+        explanation: "Définition : une probabilité mesure la chance qu’un événement se produise entre 0 et 1.\n\n" +
+          "Méthode : on compte les issues favorables et les issues possibles, puis on forme le quotient.\n\nCalcul : " +
+          (`Il y a ${rouges} bille(s) rouge(s) sur ${total} bille(s) au total, donc la probabilité est ${result}.`) +
+          "\n\nConclusion : la probabilité obtenue répond à la question.",
         canvas: billesCanvas([
           ...Array.from({ length: rouges }, () => ({
             couleur: couleurs.rouge,
@@ -670,9 +739,12 @@ export const probabilitesBank: TutorBankItemV4[] = [
                         format: "short",
                         expected: [result, fraction(favorables.length, 6)],
                         comparator: "fraction_decimal_equivalent",
-                        explanation: `Les issues favorables sont ${favorables.join(
+                        explanation: "Définition : une probabilité mesure la chance qu’un événement se produise entre 0 et 1.\n\n" +
+          "Méthode : on compte les issues favorables et les issues possibles, puis on forme le quotient.\n\nCalcul : " +
+          (`Les issues favorables sont ${favorables.join(
                           ", "
-                        )} : il y en a ${favorables.length} sur 6. La probabilité est donc ${result}.`,
+                        )} : il y en a ${favorables.length} sur 6. La probabilité est donc ${result}.`) +
+          "\n\nConclusion : la probabilité obtenue répond à la question.",
                         canvas: deCanvas(favorables),
                       };
                     },
@@ -697,7 +769,10 @@ export const probabilitesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Une probabilité est comprise entre 0 et 1.",
     explanation:
-      "Non. Une probabilité est toujours comprise entre 0 et 1.",
+      "Définition : une probabilité mesure la chance qu’un événement se produise entre 0 et 1.\n\n" +
+          "Méthode : on compte les issues favorables et les issues possibles, puis on forme le quotient.\n\nCalcul : " +
+          ("Non. Une probabilité est toujours comprise entre 0 et 1.") +
+          "\n\nConclusion : la probabilité obtenue répond à la question.",
     tags: ["probabilites", "defi", "bornes"],
   },
   {
@@ -715,7 +790,10 @@ export const probabilitesBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "Il faut compter les issues favorables.",
     explanation:
-      "Les issues favorables sont 2, 4 et 6 : il y en a 3. La probabilité est donc 3/6, pas 2/6.",
+      "Définition : une probabilité mesure la chance qu’un événement se produise entre 0 et 1.\n\n" +
+          "Méthode : on compte les issues favorables et les issues possibles, puis on forme le quotient.\n\nCalcul : " +
+          ("Les issues favorables sont 2, 4 et 6 : il y en a 3. La probabilité est donc 3/6, pas 2/6.") +
+          "\n\nConclusion : la probabilité obtenue répond à la question.",
     tags: ["probabilites", "defi", "open", "erreur", "piege"],
     canvas: deCanvas([2, 4, 6]),
   },
@@ -734,7 +812,10 @@ export const probabilitesBank: TutorBankItemV4[] = [
     comparator: "fraction_decimal_equivalent",
     hint: "Compte les mangues puis le total de fruits.",
     explanation:
-      "Il y a 4 mangues sur 9 fruits au total. La probabilité est donc 4/9.",
+      "Définition : une probabilité mesure la chance qu’un événement se produise entre 0 et 1.\n\n" +
+          "Méthode : on compte les issues favorables et les issues possibles, puis on forme le quotient.\n\nCalcul : " +
+          ("Il y a 4 mangues sur 9 fruits au total. La probabilité est donc 4/9.") +
+          "\n\nConclusion : la probabilité obtenue répond à la question.",
     tags: ["probabilites", "defi", "reunion", "billes"],
     canvas: billesCanvas([
       ...Array.from({ length: 4 }, () => ({
@@ -767,7 +848,10 @@ export const probabilitesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Regarde le secteur qui a le plus grand poids.",
     explanation:
-      "Le secteur Rouge a le poids le plus grand, donc c’est l’issue la plus probable.",
+      "Définition : une probabilité mesure la chance qu’un événement se produise entre 0 et 1.\n\n" +
+          "Méthode : on compte les issues favorables et les issues possibles, puis on forme le quotient.\n\nCalcul : " +
+          ("Le secteur Rouge a le poids le plus grand, donc c’est l’issue la plus probable.") +
+          "\n\nConclusion : la probabilité obtenue répond à la question.",
     tags: ["probabilites", "defi", "roue", "piege"],
     canvas: roueCanvas([
       { label: "Rouge", poids: 3, couleur: couleurs.rouge },
@@ -803,7 +887,10 @@ export const probabilitesBank: TutorBankItemV4[] = [
         ]),
         expected: [result],
         comparator: "mcq_exact",
-        explanation: `Il y a ${mangue} mangue(s) sur ${total} fruits au total, donc la probabilité est ${result}.`,
+        explanation: "Définition : une probabilité mesure la chance qu’un événement se produise entre 0 et 1.\n\n" +
+          "Méthode : on compte les issues favorables et les issues possibles, puis on forme le quotient.\n\nCalcul : " +
+          (`Il y a ${mangue} mangue(s) sur ${total} fruits au total, donc la probabilité est ${result}.`) +
+          "\n\nConclusion : la probabilité obtenue répond à la question.",
         canvas: billesCanvas([
           ...Array.from({ length: mangue }, () => ({
             label: "M",
@@ -839,7 +926,10 @@ export const probabilitesBank: TutorBankItemV4[] = [
         expected: ["rouge", "poids", "plus grand"],
         comparator: "contains_keyword",
         explanation:
-          "Le secteur Rouge a un poids 3, alors que Bleu et Vert ont chacun un poids 1. Rouge occupe donc la plus grande partie de la roue.",
+          "Définition : une probabilité mesure la chance qu’un événement se produise entre 0 et 1.\n\n" +
+          "Méthode : on compte les issues favorables et les issues possibles, puis on forme le quotient.\n\nCalcul : " +
+          ("Le secteur Rouge a un poids 3, alors que Bleu et Vert ont chacun un poids 1. Rouge occupe donc la plus grande partie de la roue.") +
+          "\n\nConclusion : la probabilité obtenue répond à la question.",
         canvas: roueCanvas([
           { label: "Rouge", poids: 3, couleur: couleurs.rouge },
           { label: "Bleu", poids: 1, couleur: couleurs.bleu },

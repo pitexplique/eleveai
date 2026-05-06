@@ -60,7 +60,10 @@ export const fractionsBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "On peut multiplier le numérateur et le dénominateur par le même nombre.",
     explanation:
-      "1/2 = 2/4 car on a multiplié le numérateur et le dénominateur de 1/2 par 2.",
+      "Définition : une fraction représente un partage ou un quotient avec un numérateur et un dénominateur.\n\n" +
+          "Méthode : on applique la règle adaptée : lire, simplifier, comparer ou calculer avec les fractions.\n\nCalcul : " +
+          ("1/2 = 2/4 car on a multiplié le numérateur et le dénominateur de 1/2 par 2.") +
+          "\n\nConclusion : la fraction ou le nombre obtenu est la bonne réponse.",
     tags: ["fractions", "fractions_egales"],
   },
   {
@@ -78,7 +81,10 @@ export const fractionsBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "Passe de 3/5 à une fraction de dénominateur 10.",
     explanation:
-      "3/5 = 6/10 car on a multiplié 3 et 5 par 2.",
+      "Définition : une fraction représente un partage ou un quotient avec un numérateur et un dénominateur.\n\n" +
+          "Méthode : on applique la règle adaptée : lire, simplifier, comparer ou calculer avec les fractions.\n\nCalcul : " +
+          ("3/5 = 6/10 car on a multiplié 3 et 5 par 2.") +
+          "\n\nConclusion : la fraction ou le nombre obtenu est la bonne réponse.",
     tags: ["fractions", "fractions_egales"],
   },
   {
@@ -96,7 +102,10 @@ export const fractionsBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "Cherche si on peut obtenir l’une en multipliant l’autre en haut et en bas par le même nombre.",
     explanation:
-      "2/3 ne devient pas 4/5 en multipliant le numérateur et le dénominateur par un même nombre. Ces fractions ne sont donc pas égales.",
+      "Définition : une fraction représente un partage ou un quotient avec un numérateur et un dénominateur.\n\n" +
+          "Méthode : on applique la règle adaptée : lire, simplifier, comparer ou calculer avec les fractions.\n\nCalcul : " +
+          ("2/3 ne devient pas 4/5 en multipliant le numérateur et le dénominateur par un même nombre. Ces fractions ne sont donc pas égales.") +
+          "\n\nConclusion : la fraction ou le nombre obtenu est la bonne réponse.",
     tags: ["fractions", "fractions_egales"],
   },
   {
@@ -115,7 +124,10 @@ export const fractionsBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Multiplie 3 et 4 par le même nombre.",
     explanation:
-      "3/4 = 6/8 car 3 × 2 = 6 et 4 × 2 = 8.",
+      "Définition : une fraction représente un partage ou un quotient avec un numérateur et un dénominateur.\n\n" +
+          "Méthode : on applique la règle adaptée : lire, simplifier, comparer ou calculer avec les fractions.\n\nCalcul : " +
+          ("3/4 = 6/8 car 3 × 2 = 6 et 4 × 2 = 8.") +
+          "\n\nConclusion : la fraction ou le nombre obtenu est la bonne réponse.",
     tags: ["fractions", "fractions_egales", "qcm"],
   },
   {
@@ -142,9 +154,12 @@ export const fractionsBank: TutorBankItemV4[] = [
         format: "short",
         expected: [isEqual ? "oui" : "non"],
         comparator: "contains_keyword",
-        explanation: isEqual
+        explanation: "Définition : une fraction représente un partage ou un quotient avec un numérateur et un dénominateur.\n\n" +
+          "Méthode : on applique la règle adaptée : lire, simplifier, comparer ou calculer avec les fractions.\n\nCalcul : " +
+          (isEqual
           ? `${n}/${d} = ${n2}/${d2} car on a multiplié le numérateur et le dénominateur par ${k}.`
-          : `${n}/${d} et ${n2}/${d2} ne sont pas égales car le numérateur et le dénominateur n’ont pas été transformés avec le même coefficient.`,
+          : `${n}/${d} et ${n2}/${d2} ne sont pas égales car le numérateur et le dénominateur n’ont pas été transformés avec le même coefficient.`) +
+          "\n\nConclusion : la fraction ou le nombre obtenu est la bonne réponse.",
       };
     },
   },
@@ -167,7 +182,10 @@ export const fractionsBank: TutorBankItemV4[] = [
     comparator: "fraction_decimal_equivalent",
     hint: "Divise le numérateur et le dénominateur par leur plus grand diviseur commun.",
     explanation:
-      "6 et 8 sont divisibles par 2. On obtient 6/8 = 3/4.",
+      "Définition : une fraction représente un partage ou un quotient avec un numérateur et un dénominateur.\n\n" +
+          "Méthode : on applique la règle adaptée : lire, simplifier, comparer ou calculer avec les fractions.\n\nCalcul : " +
+          ("6 et 8 sont divisibles par 2. On obtient 6/8 = 3/4.") +
+          "\n\nConclusion : la fraction ou le nombre obtenu est la bonne réponse.",
     tags: ["fractions", "simplifier"],
   },
   {
@@ -185,7 +203,10 @@ export const fractionsBank: TutorBankItemV4[] = [
     comparator: "fraction_decimal_equivalent",
     hint: "9 et 12 ont un diviseur commun.",
     explanation:
-      "9 et 12 sont divisibles par 3. Donc 9/12 = 3/4.",
+      "Définition : une fraction représente un partage ou un quotient avec un numérateur et un dénominateur.\n\n" +
+          "Méthode : on applique la règle adaptée : lire, simplifier, comparer ou calculer avec les fractions.\n\nCalcul : " +
+          ("9 et 12 sont divisibles par 3. Donc 9/12 = 3/4.") +
+          "\n\nConclusion : la fraction ou le nombre obtenu est la bonne réponse.",
     tags: ["fractions", "simplifier"],
   },
   {
@@ -204,7 +225,10 @@ export const fractionsBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "15 et 20 sont divisibles par 5.",
     explanation:
-      "15/20 = 3/4 car on divise 15 et 20 par 5.",
+      "Définition : une fraction représente un partage ou un quotient avec un numérateur et un dénominateur.\n\n" +
+          "Méthode : on applique la règle adaptée : lire, simplifier, comparer ou calculer avec les fractions.\n\nCalcul : " +
+          ("15/20 = 3/4 car on divise 15 et 20 par 5.") +
+          "\n\nConclusion : la fraction ou le nombre obtenu est la bonne réponse.",
     tags: ["fractions", "simplifier", "qcm"],
   },
   {
@@ -231,7 +255,10 @@ export const fractionsBank: TutorBankItemV4[] = [
         format: "short",
         expected: [fractionStr(simp.n, simp.d)],
         comparator: "fraction_decimal_equivalent",
-        explanation: `${n}/${d} = ${simp.n}/${simp.d} après simplification.`,
+        explanation: "Définition : une fraction représente un partage ou un quotient avec un numérateur et un dénominateur.\n\n" +
+          "Méthode : on applique la règle adaptée : lire, simplifier, comparer ou calculer avec les fractions.\n\nCalcul : " +
+          (`${n}/${d} = ${simp.n}/${simp.d} après simplification.`) +
+          "\n\nConclusion : la fraction ou le nombre obtenu est la bonne réponse.",
       };
     },
   },
@@ -254,7 +281,10 @@ export const fractionsBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "Un nombre rationnel peut s’écrire comme quotient de deux entiers.",
     explanation:
-      "3/5 est un quotient de deux entiers. C’est donc un nombre rationnel.",
+      "Définition : une fraction représente un partage ou un quotient avec un numérateur et un dénominateur.\n\n" +
+          "Méthode : on applique la règle adaptée : lire, simplifier, comparer ou calculer avec les fractions.\n\nCalcul : " +
+          ("3/5 est un quotient de deux entiers. C’est donc un nombre rationnel.") +
+          "\n\nConclusion : la fraction ou le nombre obtenu est la bonne réponse.",
     tags: ["fractions", "rationnel"],
   },
   {
@@ -272,7 +302,10 @@ export const fractionsBank: TutorBankItemV4[] = [
     comparator: "fraction_decimal_equivalent",
     hint: "Place le signe moins devant la fraction.",
     explanation:
-      "Le nombre 'moins deux tiers' s’écrit -2/3.",
+      "Définition : une fraction représente un partage ou un quotient avec un numérateur et un dénominateur.\n\n" +
+          "Méthode : on applique la règle adaptée : lire, simplifier, comparer ou calculer avec les fractions.\n\nCalcul : " +
+          ("Le nombre 'moins deux tiers' s’écrit -2/3.") +
+          "\n\nConclusion : la fraction ou le nombre obtenu est la bonne réponse.",
     tags: ["fractions", "rationnel"],
   },
   {
@@ -291,7 +324,10 @@ export const fractionsBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "On cherche une écriture de type entier sur entier non nul.",
     explanation:
-      "7/4 est le quotient de deux entiers. C’est un nombre rationnel.",
+      "Définition : une fraction représente un partage ou un quotient avec un numérateur et un dénominateur.\n\n" +
+          "Méthode : on applique la règle adaptée : lire, simplifier, comparer ou calculer avec les fractions.\n\nCalcul : " +
+          ("7/4 est le quotient de deux entiers. C’est un nombre rationnel.") +
+          "\n\nConclusion : la fraction ou le nombre obtenu est la bonne réponse.",
     tags: ["fractions", "rationnel", "qcm"],
   },
 
@@ -313,7 +349,10 @@ export const fractionsBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "Tu peux comparer leurs valeurs décimales ou utiliser des fractions de même dénominateur.",
     explanation:
-      "1/2 = 2/4, donc 3/4 est plus grand que 1/2.",
+      "Définition : une fraction représente un partage ou un quotient avec un numérateur et un dénominateur.\n\n" +
+          "Méthode : on applique la règle adaptée : lire, simplifier, comparer ou calculer avec les fractions.\n\nCalcul : " +
+          ("1/2 = 2/4, donc 3/4 est plus grand que 1/2.") +
+          "\n\nConclusion : la fraction ou le nombre obtenu est la bonne réponse.",
     tags: ["fractions", "comparer"],
   },
   {
@@ -331,7 +370,10 @@ export const fractionsBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "Tu peux comparer 2 × 5 et 3 × 3.",
     explanation:
-      "2/3 et 3/5 : 2 × 5 = 10 et 3 × 3 = 9, donc 2/3 > 3/5.",
+      "Définition : une fraction représente un partage ou un quotient avec un numérateur et un dénominateur.\n\n" +
+          "Méthode : on applique la règle adaptée : lire, simplifier, comparer ou calculer avec les fractions.\n\nCalcul : " +
+          ("2/3 et 3/5 : 2 × 5 = 10 et 3 × 3 = 9, donc 2/3 > 3/5.") +
+          "\n\nConclusion : la fraction ou le nombre obtenu est la bonne réponse.",
     tags: ["fractions", "comparer"],
   },
   {
@@ -350,7 +392,10 @@ export const fractionsBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Compare leurs valeurs approximatives.",
     explanation:
-      "2/3 ≈ 0,67 ; 3/4 = 0,75 ; 5/6 ≈ 0,83 ; 7/8 = 0,875. La plus petite est 2/3.",
+      "Définition : une fraction représente un partage ou un quotient avec un numérateur et un dénominateur.\n\n" +
+          "Méthode : on applique la règle adaptée : lire, simplifier, comparer ou calculer avec les fractions.\n\nCalcul : " +
+          ("2/3 ≈ 0,67 ; 3/4 = 0,75 ; 5/6 ≈ 0,83 ; 7/8 = 0,875. La plus petite est 2/3.") +
+          "\n\nConclusion : la fraction ou le nombre obtenu est la bonne réponse.",
     tags: ["fractions", "comparer", "qcm"],
   },
   {
@@ -391,7 +436,10 @@ export const fractionsBank: TutorBankItemV4[] = [
         format: "short",
         expected: [sign],
         comparator: "contains_keyword",
-        explanation: `${n1}/${d1} ${sign} ${n2}/${d2}.`,
+        explanation: "Définition : une fraction représente un partage ou un quotient avec un numérateur et un dénominateur.\n\n" +
+          "Méthode : on applique la règle adaptée : lire, simplifier, comparer ou calculer avec les fractions.\n\nCalcul : " +
+          (`${n1}/${d1} ${sign} ${n2}/${d2}.`) +
+          "\n\nConclusion : la fraction ou le nombre obtenu est la bonne réponse.",
       };
     },
   },
@@ -414,7 +462,10 @@ export const fractionsBank: TutorBankItemV4[] = [
     comparator: "fraction_decimal_equivalent",
     hint: "Les dénominateurs sont déjà égaux.",
     explanation:
-      "1/4 + 2/4 = 3/4.",
+      "Définition : une fraction représente un partage ou un quotient avec un numérateur et un dénominateur.\n\n" +
+          "Méthode : on applique la règle adaptée : lire, simplifier, comparer ou calculer avec les fractions.\n\nCalcul : " +
+          ("1/4 + 2/4 = 3/4.") +
+          "\n\nConclusion : la fraction ou le nombre obtenu est la bonne réponse.",
     tags: ["fractions", "addition"],
   },
   {
@@ -432,7 +483,10 @@ export const fractionsBank: TutorBankItemV4[] = [
     comparator: "fraction_decimal_equivalent",
     hint: "Quand les dénominateurs sont égaux, on additionne ou on soustrait seulement les numérateurs.",
     explanation:
-      "3/5 - 1/5 = 2/5.",
+      "Définition : une fraction représente un partage ou un quotient avec un numérateur et un dénominateur.\n\n" +
+          "Méthode : on applique la règle adaptée : lire, simplifier, comparer ou calculer avec les fractions.\n\nCalcul : " +
+          ("3/5 - 1/5 = 2/5.") +
+          "\n\nConclusion : la fraction ou le nombre obtenu est la bonne réponse.",
     tags: ["fractions", "addition", "soustraction"],
   },
   {
@@ -450,7 +504,10 @@ export const fractionsBank: TutorBankItemV4[] = [
     comparator: "fraction_decimal_equivalent",
     hint: "Mets les fractions au même dénominateur.",
     explanation:
-      "1/2 = 3/6 et 1/3 = 2/6, donc 1/2 + 1/3 = 5/6.",
+      "Définition : une fraction représente un partage ou un quotient avec un numérateur et un dénominateur.\n\n" +
+          "Méthode : on applique la règle adaptée : lire, simplifier, comparer ou calculer avec les fractions.\n\nCalcul : " +
+          ("1/2 = 3/6 et 1/3 = 2/6, donc 1/2 + 1/3 = 5/6.") +
+          "\n\nConclusion : la fraction ou le nombre obtenu est la bonne réponse.",
     tags: ["fractions", "addition"],
   },
   {
@@ -469,7 +526,10 @@ export const fractionsBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Transforme 1/2 en une fraction de dénominateur 4.",
     explanation:
-      "1/2 = 2/4. Donc 1/4 + 2/4 = 3/4.",
+      "Définition : une fraction représente un partage ou un quotient avec un numérateur et un dénominateur.\n\n" +
+          "Méthode : on applique la règle adaptée : lire, simplifier, comparer ou calculer avec les fractions.\n\nCalcul : " +
+          ("1/2 = 2/4. Donc 1/4 + 2/4 = 3/4.") +
+          "\n\nConclusion : la fraction ou le nombre obtenu est la bonne réponse.",
     tags: ["fractions", "addition", "qcm", "reunion"],
   },
   {
@@ -498,7 +558,10 @@ export const fractionsBank: TutorBankItemV4[] = [
         format: "short",
         expected: [fractionStr(simp.n, simp.d)],
         comparator: "fraction_decimal_equivalent",
-        explanation: `${n1}/${d1} + ${n2}/${d2} = ${n1 * d2}/${d1 * d2} + ${n2 * d1}/${d1 * d2} = ${(n1 * d2) + (n2 * d1)}/${d1 * d2} = ${simp.n}/${simp.d}.`,
+        explanation: "Définition : une fraction représente un partage ou un quotient avec un numérateur et un dénominateur.\n\n" +
+          "Méthode : on applique la règle adaptée : lire, simplifier, comparer ou calculer avec les fractions.\n\nCalcul : " +
+          (`${n1}/${d1} + ${n2}/${d2} = ${n1 * d2}/${d1 * d2} + ${n2 * d1}/${d1 * d2} = ${(n1 * d2) + (n2 * d1)}/${d1 * d2} = ${simp.n}/${simp.d}.`) +
+          "\n\nConclusion : la fraction ou le nombre obtenu est la bonne réponse.",
       };
     },
   },
@@ -521,7 +584,10 @@ export const fractionsBank: TutorBankItemV4[] = [
     comparator: "fraction_decimal_equivalent",
     hint: "Multiplie les numérateurs entre eux, puis les dénominateurs entre eux.",
     explanation:
-      "2/3 × 3/4 = 6/12 = 1/2.",
+      "Définition : une fraction représente un partage ou un quotient avec un numérateur et un dénominateur.\n\n" +
+          "Méthode : on applique la règle adaptée : lire, simplifier, comparer ou calculer avec les fractions.\n\nCalcul : " +
+          ("2/3 × 3/4 = 6/12 = 1/2.") +
+          "\n\nConclusion : la fraction ou le nombre obtenu est la bonne réponse.",
     tags: ["fractions", "produit"],
   },
   {
@@ -539,7 +605,10 @@ export const fractionsBank: TutorBankItemV4[] = [
     comparator: "fraction_decimal_equivalent",
     hint: "Puis simplifie le résultat.",
     explanation:
-      "5/6 × 2/5 = 10/30 = 1/3.",
+      "Définition : une fraction représente un partage ou un quotient avec un numérateur et un dénominateur.\n\n" +
+          "Méthode : on applique la règle adaptée : lire, simplifier, comparer ou calculer avec les fractions.\n\nCalcul : " +
+          ("5/6 × 2/5 = 10/30 = 1/3.") +
+          "\n\nConclusion : la fraction ou le nombre obtenu est la bonne réponse.",
     tags: ["fractions", "produit"],
   },
   {
@@ -558,7 +627,10 @@ export const fractionsBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Multiplie et simplifie.",
     explanation:
-      "3/4 × 2/3 = 6/12 = 1/2.",
+      "Définition : une fraction représente un partage ou un quotient avec un numérateur et un dénominateur.\n\n" +
+          "Méthode : on applique la règle adaptée : lire, simplifier, comparer ou calculer avec les fractions.\n\nCalcul : " +
+          ("3/4 × 2/3 = 6/12 = 1/2.") +
+          "\n\nConclusion : la fraction ou le nombre obtenu est la bonne réponse.",
     tags: ["fractions", "produit", "qcm"],
   },
   {
@@ -588,7 +660,10 @@ export const fractionsBank: TutorBankItemV4[] = [
         format: "short",
         expected: [fractionStr(simp.n, simp.d)],
         comparator: "fraction_decimal_equivalent",
-        explanation: `${n1}/${d1} × ${n2}/${d2} = ${n1 * n2}/${d1 * d2} = ${simp.n}/${simp.d}.`,
+        explanation: "Définition : une fraction représente un partage ou un quotient avec un numérateur et un dénominateur.\n\n" +
+          "Méthode : on applique la règle adaptée : lire, simplifier, comparer ou calculer avec les fractions.\n\nCalcul : " +
+          (`${n1}/${d1} × ${n2}/${d2} = ${n1 * n2}/${d1 * d2} = ${simp.n}/${simp.d}.`) +
+          "\n\nConclusion : la fraction ou le nombre obtenu est la bonne réponse.",
       };
     },
   },
@@ -611,7 +686,10 @@ export const fractionsBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Prendre 3/4 d’un nombre, c’est multiplier ce nombre par 3/4.",
     explanation:
-      "3/4 de 20 = 20 × 3/4 = 15.",
+      "Définition : une fraction représente un partage ou un quotient avec un numérateur et un dénominateur.\n\n" +
+          "Méthode : on applique la règle adaptée : lire, simplifier, comparer ou calculer avec les fractions.\n\nCalcul : " +
+          ("3/4 de 20 = 20 × 3/4 = 15.") +
+          "\n\nConclusion : la fraction ou le nombre obtenu est la bonne réponse.",
     tags: ["fractions", "quantite"],
   },
   {
@@ -629,7 +707,10 @@ export const fractionsBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Commence par calculer 1/5 de 30.",
     explanation:
-      "1/5 de 30 vaut 6, donc 2/5 de 30 vaut 12.",
+      "Définition : une fraction représente un partage ou un quotient avec un numérateur et un dénominateur.\n\n" +
+          "Méthode : on applique la règle adaptée : lire, simplifier, comparer ou calculer avec les fractions.\n\nCalcul : " +
+          ("1/5 de 30 vaut 6, donc 2/5 de 30 vaut 12.") +
+          "\n\nConclusion : la fraction ou le nombre obtenu est la bonne réponse.",
     tags: ["fractions", "quantite"],
   },
   {
@@ -647,7 +728,10 @@ export const fractionsBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Calcule 1/4 puis multiplie par 3.",
     explanation:
-      "1/4 de 28 vaut 7, donc 3/4 de 28 vaut 21.",
+      "Définition : une fraction représente un partage ou un quotient avec un numérateur et un dénominateur.\n\n" +
+          "Méthode : on applique la règle adaptée : lire, simplifier, comparer ou calculer avec les fractions.\n\nCalcul : " +
+          ("1/4 de 28 vaut 7, donc 3/4 de 28 vaut 21.") +
+          "\n\nConclusion : la fraction ou le nombre obtenu est la bonne réponse.",
     tags: ["fractions", "quantite", "cuisine"],
   },
   {
@@ -673,7 +757,10 @@ export const fractionsBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(good)],
         comparator: "number_equal",
-        explanation: `${n}/${d} de ${quantity} = ${quantity} × ${n}/${d} = ${good}.`,
+        explanation: "Définition : une fraction représente un partage ou un quotient avec un numérateur et un dénominateur.\n\n" +
+          "Méthode : on applique la règle adaptée : lire, simplifier, comparer ou calculer avec les fractions.\n\nCalcul : " +
+          (`${n}/${d} de ${quantity} = ${quantity} × ${n}/${d} = ${good}.`) +
+          "\n\nConclusion : la fraction ou le nombre obtenu est la bonne réponse.",
       };
     },
   },
@@ -696,7 +783,10 @@ export const fractionsBank: TutorBankItemV4[] = [
     comparator: "fraction_decimal_equivalent",
     hint: "On échange le numérateur et le dénominateur.",
     explanation:
-      "L’inverse de 2/3 est 3/2.",
+      "Définition : une fraction représente un partage ou un quotient avec un numérateur et un dénominateur.\n\n" +
+          "Méthode : on applique la règle adaptée : lire, simplifier, comparer ou calculer avec les fractions.\n\nCalcul : " +
+          ("L’inverse de 2/3 est 3/2.") +
+          "\n\nConclusion : la fraction ou le nombre obtenu est la bonne réponse.",
     tags: ["fractions", "inverse"],
   },
   {
@@ -714,7 +804,10 @@ export const fractionsBank: TutorBankItemV4[] = [
     comparator: "fraction_decimal_equivalent",
     hint: "On échange le haut et le bas, en gardant le signe.",
     explanation:
-      "L’inverse de -5/7 est -7/5.",
+      "Définition : une fraction représente un partage ou un quotient avec un numérateur et un dénominateur.\n\n" +
+          "Méthode : on applique la règle adaptée : lire, simplifier, comparer ou calculer avec les fractions.\n\nCalcul : " +
+          ("L’inverse de -5/7 est -7/5.") +
+          "\n\nConclusion : la fraction ou le nombre obtenu est la bonne réponse.",
     tags: ["fractions", "inverse"],
   },
   {
@@ -733,7 +826,10 @@ export const fractionsBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "On retourne la fraction.",
     explanation:
-      "L’inverse de 4/9 est 9/4.",
+      "Définition : une fraction représente un partage ou un quotient avec un numérateur et un dénominateur.\n\n" +
+          "Méthode : on applique la règle adaptée : lire, simplifier, comparer ou calculer avec les fractions.\n\nCalcul : " +
+          ("L’inverse de 4/9 est 9/4.") +
+          "\n\nConclusion : la fraction ou le nombre obtenu est la bonne réponse.",
     tags: ["fractions", "inverse", "qcm"],
   },
 
@@ -755,7 +851,10 @@ export const fractionsBank: TutorBankItemV4[] = [
     comparator: "fraction_decimal_equivalent",
     hint: "Diviser par une fraction, c’est multiplier par son inverse.",
     explanation:
-      "2/3 ÷ 4/5 = 2/3 × 5/4 = 10/12 = 5/6.",
+      "Définition : une fraction représente un partage ou un quotient avec un numérateur et un dénominateur.\n\n" +
+          "Méthode : on applique la règle adaptée : lire, simplifier, comparer ou calculer avec les fractions.\n\nCalcul : " +
+          ("2/3 ÷ 4/5 = 2/3 × 5/4 = 10/12 = 5/6.") +
+          "\n\nConclusion : la fraction ou le nombre obtenu est la bonne réponse.",
     tags: ["fractions", "division"],
   },
   {
@@ -773,7 +872,10 @@ export const fractionsBank: TutorBankItemV4[] = [
     comparator: "fraction_decimal_equivalent",
     hint: "Multiplie par l’inverse de 2/3.",
     explanation:
-      "3/4 ÷ 2/3 = 3/4 × 3/2 = 9/8.",
+      "Définition : une fraction représente un partage ou un quotient avec un numérateur et un dénominateur.\n\n" +
+          "Méthode : on applique la règle adaptée : lire, simplifier, comparer ou calculer avec les fractions.\n\nCalcul : " +
+          ("3/4 ÷ 2/3 = 3/4 × 3/2 = 9/8.") +
+          "\n\nConclusion : la fraction ou le nombre obtenu est la bonne réponse.",
     tags: ["fractions", "division"],
   },
   {
@@ -792,7 +894,10 @@ export const fractionsBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Multiplie 5/6 par l’inverse de 5/3.",
     explanation:
-      "5/6 ÷ 5/3 = 5/6 × 3/5 = 15/30 = 1/2.",
+      "Définition : une fraction représente un partage ou un quotient avec un numérateur et un dénominateur.\n\n" +
+          "Méthode : on applique la règle adaptée : lire, simplifier, comparer ou calculer avec les fractions.\n\nCalcul : " +
+          ("5/6 ÷ 5/3 = 5/6 × 3/5 = 15/30 = 1/2.") +
+          "\n\nConclusion : la fraction ou le nombre obtenu est la bonne réponse.",
     tags: ["fractions", "division", "qcm"],
   },
   {
@@ -821,7 +926,10 @@ export const fractionsBank: TutorBankItemV4[] = [
         format: "short",
         expected: [fractionStr(simp.n, simp.d)],
         comparator: "fraction_decimal_equivalent",
-        explanation: `${n1}/${d1} ÷ ${n2}/${d2} = ${n1}/${d1} × ${d2}/${n2} = ${simp.n}/${simp.d}.`,
+        explanation: "Définition : une fraction représente un partage ou un quotient avec un numérateur et un dénominateur.\n\n" +
+          "Méthode : on applique la règle adaptée : lire, simplifier, comparer ou calculer avec les fractions.\n\nCalcul : " +
+          (`${n1}/${d1} ÷ ${n2}/${d2} = ${n1}/${d1} × ${d2}/${n2} = ${simp.n}/${simp.d}.`) +
+          "\n\nConclusion : la fraction ou le nombre obtenu est la bonne réponse.",
       };
     },
   },
@@ -844,7 +952,10 @@ export const fractionsBank: TutorBankItemV4[] = [
     comparator: "fraction_decimal_equivalent",
     hint: "L’opposé a la même distance à 0 mais un signe contraire.",
     explanation:
-      "L’opposé de 3/5 est -3/5.",
+      "Définition : une fraction représente un partage ou un quotient avec un numérateur et un dénominateur.\n\n" +
+          "Méthode : on applique la règle adaptée : lire, simplifier, comparer ou calculer avec les fractions.\n\nCalcul : " +
+          ("L’opposé de 3/5 est -3/5.") +
+          "\n\nConclusion : la fraction ou le nombre obtenu est la bonne réponse.",
     tags: ["fractions", "oppose"],
   },
   {
@@ -862,7 +973,10 @@ export const fractionsBank: TutorBankItemV4[] = [
     comparator: "fraction_decimal_equivalent",
     hint: "On change simplement le signe.",
     explanation:
-      "L’opposé de -7/9 est 7/9.",
+      "Définition : une fraction représente un partage ou un quotient avec un numérateur et un dénominateur.\n\n" +
+          "Méthode : on applique la règle adaptée : lire, simplifier, comparer ou calculer avec les fractions.\n\nCalcul : " +
+          ("L’opposé de -7/9 est 7/9.") +
+          "\n\nConclusion : la fraction ou le nombre obtenu est la bonne réponse.",
     tags: ["fractions", "oppose"],
   },
 
@@ -884,7 +998,10 @@ export const fractionsBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "Quand on partage la même quantité en moins de parts, les parts sont plus grandes.",
     explanation:
-      "Si on partage une même quantité en 3 parts égales, chaque part est plus grande que si on la partage en 4 parts égales. Donc 1/3 > 1/4.",
+      "Définition : une fraction représente un partage ou un quotient avec un numérateur et un dénominateur.\n\n" +
+          "Méthode : on applique la règle adaptée : lire, simplifier, comparer ou calculer avec les fractions.\n\nCalcul : " +
+          ("Si on partage une même quantité en 3 parts égales, chaque part est plus grande que si on la partage en 4 parts égales. Donc 1/3 > 1/4.") +
+          "\n\nConclusion : la fraction ou le nombre obtenu est la bonne réponse.",
     tags: ["fractions", "defi", "raisonnement"],
   },
   {
@@ -902,7 +1019,10 @@ export const fractionsBank: TutorBankItemV4[] = [
     comparator: "fraction_decimal_equivalent",
     hint: "Prendre la moitié de 2/3, c’est multiplier par 1/2.",
     explanation:
-      "La moitié de 2/3 vaut 2/3 × 1/2 = 2/6 = 1/3. Il faut donc 1/3 de litre de lait.",
+      "Définition : une fraction représente un partage ou un quotient avec un numérateur et un dénominateur.\n\n" +
+          "Méthode : on applique la règle adaptée : lire, simplifier, comparer ou calculer avec les fractions.\n\nCalcul : " +
+          ("La moitié de 2/3 vaut 2/3 × 1/2 = 2/6 = 1/3. Il faut donc 1/3 de litre de lait.") +
+          "\n\nConclusion : la fraction ou le nombre obtenu est la bonne réponse.",
     tags: ["fractions", "defi", "cuisine"],
   },
   {
@@ -921,7 +1041,10 @@ export const fractionsBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Mets les fractions au même dénominateur.",
     explanation:
-      "3/4 = 9/12 et 1/6 = 2/12. Donc 9/12 + 2/12 = 11/12.",
+      "Définition : une fraction représente un partage ou un quotient avec un numérateur et un dénominateur.\n\n" +
+          "Méthode : on applique la règle adaptée : lire, simplifier, comparer ou calculer avec les fractions.\n\nCalcul : " +
+          ("3/4 = 9/12 et 1/6 = 2/12. Donc 9/12 + 2/12 = 11/12.") +
+          "\n\nConclusion : la fraction ou le nombre obtenu est la bonne réponse.",
     tags: ["fractions", "defi", "qcm", "reunion"],
   },
     /* =========================
@@ -941,7 +1064,10 @@ export const fractionsBank: TutorBankItemV4[] = [
     expected: ["multiplie", "numérateur", "dénominateur", "2"],
     comparator: "contains_keyword",
     hint: "On passe de 1/2 à 2/4 en multipliant en haut et en bas par le même nombre.",
-    explanation: "1/2 = 2/4 car on multiplie le numérateur et le dénominateur par 2.",
+    explanation: "Définition : une fraction représente un partage ou un quotient avec un numérateur et un dénominateur.\n\n" +
+          "Méthode : on applique la règle adaptée : lire, simplifier, comparer ou calculer avec les fractions.\n\nCalcul : " +
+          ("1/2 = 2/4 car on multiplie le numérateur et le dénominateur par 2.") +
+          "\n\nConclusion : la fraction ou le nombre obtenu est la bonne réponse.",
     tags: ["fractions", "open", "fractions_egales"],
   },
   {
@@ -958,7 +1084,10 @@ export const fractionsBank: TutorBankItemV4[] = [
     expected: ["divise", "6", "2/3"],
     comparator: "contains_keyword",
     hint: "Cherche un diviseur commun à 12 et 18.",
-    explanation: "12 et 18 sont divisibles par 6. Donc 12/18 = 2/3.",
+    explanation: "Définition : une fraction représente un partage ou un quotient avec un numérateur et un dénominateur.\n\n" +
+          "Méthode : on applique la règle adaptée : lire, simplifier, comparer ou calculer avec les fractions.\n\nCalcul : " +
+          ("12 et 18 sont divisibles par 6. Donc 12/18 = 2/3.") +
+          "\n\nConclusion : la fraction ou le nombre obtenu est la bonne réponse.",
     tags: ["fractions", "open", "simplifier"],
   },
   {
@@ -975,7 +1104,10 @@ export const fractionsBank: TutorBankItemV4[] = [
     expected: ["2/3", "3/5", "10", "9"],
     comparator: "contains_keyword",
     hint: "Tu peux comparer par produit en croix.",
-    explanation: "On compare 2 × 5 = 10 et 3 × 3 = 9. Comme 10 > 9, alors 2/3 > 3/5.",
+    explanation: "Définition : une fraction représente un partage ou un quotient avec un numérateur et un dénominateur.\n\n" +
+          "Méthode : on applique la règle adaptée : lire, simplifier, comparer ou calculer avec les fractions.\n\nCalcul : " +
+          ("On compare 2 × 5 = 10 et 3 × 3 = 9. Comme 10 > 9, alors 2/3 > 3/5.") +
+          "\n\nConclusion : la fraction ou le nombre obtenu est la bonne réponse.",
     tags: ["fractions", "open", "comparer"],
   },
   {
@@ -992,7 +1124,10 @@ export const fractionsBank: TutorBankItemV4[] = [
     expected: ["même dénominateur", "3/6", "2/6", "5/6"],
     comparator: "contains_keyword",
     hint: "Mets 1/2 et 1/3 au même dénominateur.",
-    explanation: "1/2 = 3/6 et 1/3 = 2/6. Donc 1/2 + 1/3 = 3/6 + 2/6 = 5/6.",
+    explanation: "Définition : une fraction représente un partage ou un quotient avec un numérateur et un dénominateur.\n\n" +
+          "Méthode : on applique la règle adaptée : lire, simplifier, comparer ou calculer avec les fractions.\n\nCalcul : " +
+          ("1/2 = 3/6 et 1/3 = 2/6. Donc 1/2 + 1/3 = 3/6 + 2/6 = 5/6.") +
+          "\n\nConclusion : la fraction ou le nombre obtenu est la bonne réponse.",
     tags: ["fractions", "open", "addition"],
   },
   {
@@ -1009,7 +1144,10 @@ export const fractionsBank: TutorBankItemV4[] = [
     expected: ["multiplie", "numérateurs", "dénominateurs", "1/2"],
     comparator: "contains_keyword",
     hint: "Multiplie les numérateurs entre eux et les dénominateurs entre eux.",
-    explanation: "2/3 × 3/4 = 6/12, puis on simplifie : 6/12 = 1/2.",
+    explanation: "Définition : une fraction représente un partage ou un quotient avec un numérateur et un dénominateur.\n\n" +
+          "Méthode : on applique la règle adaptée : lire, simplifier, comparer ou calculer avec les fractions.\n\nCalcul : " +
+          ("2/3 × 3/4 = 6/12, puis on simplifie : 6/12 = 1/2.") +
+          "\n\nConclusion : la fraction ou le nombre obtenu est la bonne réponse.",
     tags: ["fractions", "open", "produit"],
   },
   {
@@ -1026,7 +1164,10 @@ export const fractionsBank: TutorBankItemV4[] = [
     expected: ["20", "4", "5", "15"],
     comparator: "contains_keyword",
     hint: "Commence par calculer 1/4 de 20.",
-    explanation: "1/4 de 20 vaut 5, donc 3/4 de 20 vaut 3 × 5 = 15.",
+    explanation: "Définition : une fraction représente un partage ou un quotient avec un numérateur et un dénominateur.\n\n" +
+          "Méthode : on applique la règle adaptée : lire, simplifier, comparer ou calculer avec les fractions.\n\nCalcul : " +
+          ("1/4 de 20 vaut 5, donc 3/4 de 20 vaut 3 × 5 = 15.") +
+          "\n\nConclusion : la fraction ou le nombre obtenu est la bonne réponse.",
     tags: ["fractions", "open", "quantite"],
   },
   {
@@ -1043,7 +1184,10 @@ export const fractionsBank: TutorBankItemV4[] = [
     expected: ["signe", "-3/5", "0"],
     comparator: "contains_keyword",
     hint: "Deux nombres opposés ont des signes contraires et leur somme vaut 0.",
-    explanation: "L’opposé de 3/5 est -3/5. Les deux nombres ont des signes contraires et leur somme vaut 0.",
+    explanation: "Définition : une fraction représente un partage ou un quotient avec un numérateur et un dénominateur.\n\n" +
+          "Méthode : on applique la règle adaptée : lire, simplifier, comparer ou calculer avec les fractions.\n\nCalcul : " +
+          ("L’opposé de 3/5 est -3/5. Les deux nombres ont des signes contraires et leur somme vaut 0.") +
+          "\n\nConclusion : la fraction ou le nombre obtenu est la bonne réponse.",
     tags: ["fractions", "open", "oppose"],
   },
   {
@@ -1060,7 +1204,10 @@ export const fractionsBank: TutorBankItemV4[] = [
     expected: ["dénominateur", "même dénominateur", "5/6", "erreur"],
     comparator: "contains_keyword",
     hint: "On n’additionne pas les dénominateurs entre eux.",
-    explanation: "L’élève additionne les numérateurs et les dénominateurs séparément. Il faut mettre au même dénominateur : 1/2 = 3/6 et 1/3 = 2/6, donc le résultat est 5/6.",
+    explanation: "Définition : une fraction représente un partage ou un quotient avec un numérateur et un dénominateur.\n\n" +
+          "Méthode : on applique la règle adaptée : lire, simplifier, comparer ou calculer avec les fractions.\n\nCalcul : " +
+          ("L’élève additionne les numérateurs et les dénominateurs séparément. Il faut mettre au même dénominateur : 1/2 = 3/6 et 1/3 = 2/6, donc le résultat est 5/6.") +
+          "\n\nConclusion : la fraction ou le nombre obtenu est la bonne réponse.",
     tags: ["fractions", "open", "defi", "erreur"],
   },
 ];

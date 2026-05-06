@@ -97,7 +97,10 @@ export const trianglesBank: TutorBankItemV4[] = [
     expected: ["3"],
     comparator: "mcq_exact",
     hint: "Le mot triangle commence par tri-, qui indique trois.",
-    explanation: "Un triangle possède 3 côtés, 3 sommets et 3 angles.",
+    explanation: "Définition : un triangle est une figure à trois côtés et trois sommets.\n\n" +
+          "Méthode : on utilise les propriétés des triangles, des angles ou des constructions.\n\nCalcul : " +
+          ("Un triangle possède 3 côtés, 3 sommets et 3 angles.") +
+          "\n\nConclusion : la propriété ou la mesure obtenue convient pour ce triangle.",
     tags: ["triangles", "reconnaitre", "qcm"],
     canvas: triangleCanvas({}),
   },
@@ -116,7 +119,10 @@ export const trianglesBank: TutorBankItemV4[] = [
     expected: ["A, B et C"],
     comparator: "mcq_exact",
     hint: "Les sommets sont les points du triangle.",
-    explanation: "Les sommets du triangle ABC sont les points A, B et C.",
+    explanation: "Définition : un triangle est une figure à trois côtés et trois sommets.\n\n" +
+          "Méthode : on utilise les propriétés des triangles, des angles ou des constructions.\n\nCalcul : " +
+          ("Les sommets du triangle ABC sont les points A, B et C.") +
+          "\n\nConclusion : la propriété ou la mesure obtenue convient pour ce triangle.",
     tags: ["triangles", "sommets", "qcm"],
     canvas: triangleCanvas({}),
   },
@@ -134,7 +140,10 @@ export const trianglesBank: TutorBankItemV4[] = [
     expected: ["3", "côtés", "sommets"],
     comparator: "contains_keyword",
     hint: "Pense au nombre de côtés et de sommets.",
-    explanation: "Un triangle est une figure qui possède 3 côtés, 3 sommets et 3 angles.",
+    explanation: "Définition : un triangle est une figure à trois côtés et trois sommets.\n\n" +
+          "Méthode : on utilise les propriétés des triangles, des angles ou des constructions.\n\nCalcul : " +
+          ("Un triangle est une figure qui possède 3 côtés, 3 sommets et 3 angles.") +
+          "\n\nConclusion : la propriété ou la mesure obtenue convient pour ce triangle.",
     tags: ["triangles", "reconnaitre", "open"],
   },
 
@@ -156,7 +165,10 @@ export const trianglesBank: TutorBankItemV4[] = [
     expected: ["triangle rectangle"],
     comparator: "mcq_exact",
     hint: "Cherche le codage de l’angle droit.",
-    explanation: "Le petit carré rouge indique un angle droit. Le triangle est donc rectangle.",
+    explanation: "Définition : un triangle est une figure à trois côtés et trois sommets.\n\n" +
+          "Méthode : on utilise les propriétés des triangles, des angles ou des constructions.\n\nCalcul : " +
+          ("Le petit carré rouge indique un angle droit. Le triangle est donc rectangle.") +
+          "\n\nConclusion : la propriété ou la mesure obtenue convient pour ce triangle.",
     tags: ["triangles", "nature", "rectangle", "qcm"],
     canvas: triangleCanvas({ type: "rectangle" }),
   },
@@ -175,7 +187,10 @@ export const trianglesBank: TutorBankItemV4[] = [
     expected: ["triangle isocèle"],
     comparator: "mcq_exact",
     hint: "Deux côtés portent le même codage.",
-    explanation: "Deux côtés sont codés égaux. Le triangle est donc isocèle.",
+    explanation: "Définition : un triangle est une figure à trois côtés et trois sommets.\n\n" +
+          "Méthode : on utilise les propriétés des triangles, des angles ou des constructions.\n\nCalcul : " +
+          ("Deux côtés sont codés égaux. Le triangle est donc isocèle.") +
+          "\n\nConclusion : la propriété ou la mesure obtenue convient pour ce triangle.",
     tags: ["triangles", "nature", "isocele", "qcm"],
     canvas: triangleCanvas({ type: "isocele" }),
   },
@@ -194,7 +209,10 @@ export const trianglesBank: TutorBankItemV4[] = [
     expected: ["équilatéral"],
     comparator: "mcq_exact",
     hint: "Équi- signifie égal.",
-    explanation: "Un triangle avec trois côtés égaux est un triangle équilatéral.",
+    explanation: "Définition : un triangle est une figure à trois côtés et trois sommets.\n\n" +
+          "Méthode : on utilise les propriétés des triangles, des angles ou des constructions.\n\nCalcul : " +
+          ("Un triangle avec trois côtés égaux est un triangle équilatéral.") +
+          "\n\nConclusion : la propriété ou la mesure obtenue convient pour ce triangle.",
     tags: ["triangles", "nature", "equilateral", "qcm"],
     canvas: triangleCanvas({ type: "equilateral" }),
   },
@@ -212,7 +230,10 @@ export const trianglesBank: TutorBankItemV4[] = [
     expected: ["angle droit", "90", "carré"],
     comparator: "contains_keyword",
     hint: "Cherche le codage de l’angle droit.",
-    explanation: "On reconnaît un triangle rectangle lorsqu’un de ses angles est droit, c’est-à-dire égal à 90°.",
+    explanation: "Définition : un triangle est une figure à trois côtés et trois sommets.\n\n" +
+          "Méthode : on utilise les propriétés des triangles, des angles ou des constructions.\n\nCalcul : " +
+          ("On reconnaît un triangle rectangle lorsqu’un de ses angles est droit, c’est-à-dire égal à 90°.") +
+          "\n\nConclusion : la propriété ou la mesure obtenue convient pour ce triangle.",
     tags: ["triangles", "nature", "rectangle", "open"],
     canvas: triangleCanvas({ type: "rectangle" }),
   },
@@ -248,11 +269,14 @@ export const trianglesBank: TutorBankItemV4[] = [
         expected: [expected],
         comparator: "mcq_exact",
         explanation:
-          type === "rectangle"
+          "Définition : un triangle est une figure à trois côtés et trois sommets.\n\n" +
+          "Méthode : on utilise les propriétés des triangles, des angles ou des constructions.\n\nCalcul : " +
+          (type === "rectangle"
             ? "Le triangle possède un angle droit : c’est un triangle rectangle."
             : type === "isocele"
             ? "Deux côtés sont codés égaux : c’est un triangle isocèle."
-            : "Les côtés sont codés égaux : c’est un triangle équilatéral.",
+            : "Les côtés sont codés égaux : c’est un triangle équilatéral.") +
+          "\n\nConclusion : la propriété ou la mesure obtenue convient pour ce triangle.",
         canvas: triangleCanvas({ type }),
       };
     },
@@ -276,7 +300,10 @@ export const trianglesBank: TutorBankItemV4[] = [
     expected: ["un compas"],
     comparator: "mcq_exact",
     hint: "On reporte des distances avec un compas.",
-    explanation: "Pour construire un triangle à partir de trois longueurs, on utilise notamment le compas pour reporter les distances.",
+    explanation: "Définition : un triangle est une figure à trois côtés et trois sommets.\n\n" +
+          "Méthode : on utilise les propriétés des triangles, des angles ou des constructions.\n\nCalcul : " +
+          ("Pour construire un triangle à partir de trois longueurs, on utilise notamment le compas pour reporter les distances.") +
+          "\n\nConclusion : la propriété ou la mesure obtenue convient pour ce triangle.",
     tags: ["triangles", "construire", "instrument", "qcm"],
   },
   {
@@ -294,7 +321,10 @@ export const trianglesBank: TutorBankItemV4[] = [
     expected: ["non"],
     comparator: "mcq_exact",
     hint: "Dans un triangle, le plus grand côté doit être plus petit que la somme des deux autres.",
-    explanation: "2 + 3 = 5, et 5 est plus petit que 8. On ne peut donc pas construire ce triangle.",
+    explanation: "Définition : un triangle est une figure à trois côtés et trois sommets.\n\n" +
+          "Méthode : on utilise les propriétés des triangles, des angles ou des constructions.\n\nCalcul : " +
+          ("2 + 3 = 5, et 5 est plus petit que 8. On ne peut donc pas construire ce triangle.") +
+          "\n\nConclusion : la propriété ou la mesure obtenue convient pour ce triangle.",
     tags: ["triangles", "construire", "inegalite_triangulaire", "piege"],
   },
   {
@@ -312,7 +342,10 @@ export const trianglesBank: TutorBankItemV4[] = [
     expected: ["oui"],
     comparator: "mcq_exact",
     hint: "Compare le plus grand côté avec la somme des deux autres.",
-    explanation: "Le plus grand côté est 7 cm. Or 4 + 5 = 9, et 9 > 7. Le triangle est constructible.",
+    explanation: "Définition : un triangle est une figure à trois côtés et trois sommets.\n\n" +
+          "Méthode : on utilise les propriétés des triangles, des angles ou des constructions.\n\nCalcul : " +
+          ("Le plus grand côté est 7 cm. Or 4 + 5 = 9, et 9 > 7. Le triangle est constructible.") +
+          "\n\nConclusion : la propriété ou la mesure obtenue convient pour ce triangle.",
     tags: ["triangles", "construire", "inegalite_triangulaire"],
   },
   {
@@ -329,7 +362,10 @@ export const trianglesBank: TutorBankItemV4[] = [
     expected: ["2", "3", "8", "somme", "plus petit"],
     comparator: "contains_keyword",
     hint: "Regarde la somme des deux plus petits côtés.",
-    explanation: "On ne peut pas le construire car 2 + 3 = 5, et 5 est inférieur à 8. Les deux petits côtés ne peuvent pas rejoindre le grand côté.",
+    explanation: "Définition : un triangle est une figure à trois côtés et trois sommets.\n\n" +
+          "Méthode : on utilise les propriétés des triangles, des angles ou des constructions.\n\nCalcul : " +
+          ("On ne peut pas le construire car 2 + 3 = 5, et 5 est inférieur à 8. Les deux petits côtés ne peuvent pas rejoindre le grand côté.") +
+          "\n\nConclusion : la propriété ou la mesure obtenue convient pour ce triangle.",
     tags: ["triangles", "construire", "open", "raisonnement"],
   },
   {
@@ -359,9 +395,12 @@ export const trianglesBank: TutorBankItemV4[] = [
         expected: [item.ok],
         comparator: "mcq_exact",
         explanation:
-          item.ok === "oui"
+          "Définition : un triangle est une figure à trois côtés et trois sommets.\n\n" +
+          "Méthode : on utilise les propriétés des triangles, des angles ou des constructions.\n\nCalcul : " +
+          (item.ok === "oui"
             ? `Oui, car le plus grand côté est plus petit que la somme des deux autres.`
-            : `Non, car la somme des deux plus petits côtés n’est pas assez grande pour rejoindre le plus grand côté.`,
+            : `Non, car la somme des deux plus petits côtés n’est pas assez grande pour rejoindre le plus grand côté.`) +
+          "\n\nConclusion : la propriété ou la mesure obtenue convient pour ce triangle.",
       };
     },
   },
@@ -384,7 +423,10 @@ export const trianglesBank: TutorBankItemV4[] = [
     expected: ["180°"],
     comparator: "mcq_exact",
     hint: "C’est une propriété fondamentale des triangles.",
-    explanation: "Dans tout triangle, la somme des mesures des trois angles est égale à 180°.",
+    explanation: "Définition : un triangle est une figure à trois côtés et trois sommets.\n\n" +
+          "Méthode : on utilise les propriétés des triangles, des angles ou des constructions.\n\nCalcul : " +
+          ("Dans tout triangle, la somme des mesures des trois angles est égale à 180°.") +
+          "\n\nConclusion : la propriété ou la mesure obtenue convient pour ce triangle.",
     tags: ["triangles", "somme_angles", "qcm"],
     canvas: triangleCanvas({
       angleLabels: { A: "60°", B: "70°", C: "50°" },
@@ -404,7 +446,10 @@ export const trianglesBank: TutorBankItemV4[] = [
     expected: ["70"],
     comparator: "number_equal",
     hint: "Calcule 180 - 50 - 60.",
-    explanation: "La somme des angles vaut 180°. Donc le troisième angle vaut 180 - 50 - 60 = 70°.",
+    explanation: "Définition : un triangle est une figure à trois côtés et trois sommets.\n\n" +
+          "Méthode : on utilise les propriétés des triangles, des angles ou des constructions.\n\nCalcul : " +
+          ("La somme des angles vaut 180°. Donc le troisième angle vaut 180 - 50 - 60 = 70°.") +
+          "\n\nConclusion : la propriété ou la mesure obtenue convient pour ce triangle.",
     tags: ["triangles", "somme_angles", "calcul"],
     canvas: triangleCanvas({
       angleLabels: { A: "50°", B: "60°", C: "?" },
@@ -425,7 +470,10 @@ export const trianglesBank: TutorBankItemV4[] = [
     expected: ["90°"],
     comparator: "mcq_exact",
     hint: "45 + 45 = 90, puis complète jusqu’à 180.",
-    explanation: "45° + 45° = 90°. Il reste donc 180° - 90° = 90°.",
+    explanation: "Définition : un triangle est une figure à trois côtés et trois sommets.\n\n" +
+          "Méthode : on utilise les propriétés des triangles, des angles ou des constructions.\n\nCalcul : " +
+          ("45° + 45° = 90°. Il reste donc 180° - 90° = 90°.") +
+          "\n\nConclusion : la propriété ou la mesure obtenue convient pour ce triangle.",
     tags: ["triangles", "somme_angles", "rectangle", "qcm"],
     canvas: triangleCanvas({
       type: "rectangle",
@@ -446,7 +494,10 @@ export const trianglesBank: TutorBankItemV4[] = [
     expected: ["180", "soustraire", "angles"],
     comparator: "contains_keyword",
     hint: "La somme des trois angles d’un triangle vaut 180°.",
-    explanation: "On additionne les deux angles connus, puis on soustrait cette somme à 180°.",
+    explanation: "Définition : un triangle est une figure à trois côtés et trois sommets.\n\n" +
+          "Méthode : on utilise les propriétés des triangles, des angles ou des constructions.\n\nCalcul : " +
+          ("On additionne les deux angles connus, puis on soustrait cette somme à 180°.") +
+          "\n\nConclusion : la propriété ou la mesure obtenue convient pour ce triangle.",
     tags: ["triangles", "somme_angles", "open", "methode"],
   },
   {
@@ -476,7 +527,10 @@ export const trianglesBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(c)],
         comparator: "number_equal",
-        explanation: `La somme des angles vaut 180°. Le troisième angle mesure donc 180 - ${a} - ${b} = ${c}°.`,
+        explanation: "Définition : un triangle est une figure à trois côtés et trois sommets.\n\n" +
+          "Méthode : on utilise les propriétés des triangles, des angles ou des constructions.\n\nCalcul : " +
+          (`La somme des angles vaut 180°. Le troisième angle mesure donc 180 - ${a} - ${b} = ${c}°.`) +
+          "\n\nConclusion : la propriété ou la mesure obtenue convient pour ce triangle.",
         canvas: triangleCanvas({
           angleLabels: { A: `${a}°`, B: `${b}°`, C: "?" },
         }),
@@ -501,7 +555,10 @@ export const trianglesBank: TutorBankItemV4[] = [
     expected: ["angle droit", "90", "horizontal"],
     comparator: "contains_keyword",
     hint: "Un triangle rectangle dépend d’un angle, pas de l’orientation d’un côté.",
-    explanation: "Un triangle est rectangle s’il possède un angle droit. Avoir un côté horizontal ne suffit pas.",
+    explanation: "Définition : un triangle est une figure à trois côtés et trois sommets.\n\n" +
+          "Méthode : on utilise les propriétés des triangles, des angles ou des constructions.\n\nCalcul : " +
+          ("Un triangle est rectangle s’il possède un angle droit. Avoir un côté horizontal ne suffit pas.") +
+          "\n\nConclusion : la propriété ou la mesure obtenue convient pour ce triangle.",
     tags: ["triangles", "defi", "open", "piege", "rectangle"],
     canvas: triangleCanvas({ type: "quelconque" }),
   },
@@ -520,7 +577,10 @@ export const trianglesBank: TutorBankItemV4[] = [
     expected: ["non"],
     comparator: "mcq_exact",
     hint: "Deux angles droits feraient déjà 180°.",
-    explanation: "Non. Deux angles droits feraient 90° + 90° = 180°, il ne resterait plus de place pour le troisième angle.",
+    explanation: "Définition : un triangle est une figure à trois côtés et trois sommets.\n\n" +
+          "Méthode : on utilise les propriétés des triangles, des angles ou des constructions.\n\nCalcul : " +
+          ("Non. Deux angles droits feraient 90° + 90° = 180°, il ne resterait plus de place pour le troisième angle.") +
+          "\n\nConclusion : la propriété ou la mesure obtenue convient pour ce triangle.",
     tags: ["triangles", "defi", "somme_angles", "piege"],
   },
   {
@@ -537,7 +597,10 @@ export const trianglesBank: TutorBankItemV4[] = [
     expected: ["60"],
     comparator: "number_equal",
     hint: "Utilise 180 - 35 - 85.",
-    explanation: "La somme des angles d’un triangle vaut 180°. Le troisième angle mesure 180 - 35 - 85 = 60°.",
+    explanation: "Définition : un triangle est une figure à trois côtés et trois sommets.\n\n" +
+          "Méthode : on utilise les propriétés des triangles, des angles ou des constructions.\n\nCalcul : " +
+          ("La somme des angles d’un triangle vaut 180°. Le troisième angle mesure 180 - 35 - 85 = 60°.") +
+          "\n\nConclusion : la propriété ou la mesure obtenue convient pour ce triangle.",
     tags: ["triangles", "defi", "reunion", "somme_angles"],
     canvas: triangleCanvas({
       angleLabels: { A: "35°", B: "85°", C: "?" },
@@ -570,9 +633,12 @@ export const trianglesBank: TutorBankItemV4[] = [
         expected: [item.ok],
         comparator: "mcq_exact",
         explanation:
-          item.ok === "oui"
+          "Définition : un triangle est une figure à trois côtés et trois sommets.\n\n" +
+          "Méthode : on utilise les propriétés des triangles, des angles ou des constructions.\n\nCalcul : " +
+          (item.ok === "oui"
             ? `${item.a} + ${item.b} + ${item.c} = 180. C’est possible.`
-            : `${item.a} + ${item.b} + ${item.c} ne vaut pas 180. Ce n’est pas possible pour un triangle.`,
+            : `${item.a} + ${item.b} + ${item.c} ne vaut pas 180. Ce n’est pas possible pour un triangle.`) +
+          "\n\nConclusion : la propriété ou la mesure obtenue convient pour ce triangle.",
         canvas: triangleCanvas({
           angleLabels: { A: `${item.a}°`, B: `${item.b}°`, C: `${item.c}°` },
         }),

@@ -76,7 +76,10 @@ export const anglesBank: TutorBankItemV4[] = [
     expected: ["60"],
     comparator: "number_equal",
     hint: "Lis la mesure indiquée en bleu.",
-    explanation: "La mesure indiquée sur la figure est 60°. La réponse est donc 60.",
+    explanation: "Définition : un angle mesure l’ouverture entre deux demi-droites et s’exprime en degrés.\n\n" +
+          "Méthode : on identifie le sommet, les côtés ou la mesure, puis on utilise la règle ou le rapporteur.\n\nCalcul : " +
+          ("La mesure indiquée sur la figure est 60°. La réponse est donc 60.") +
+          "\n\nConclusion : la mesure ou le nom trouvé convient pour cet angle.",
     tags: ["angles", "lire", "canvas"],
     canvas: angleCanvas({ angleDeg: 60, showMeasure: true }),
   },
@@ -95,7 +98,10 @@ export const anglesBank: TutorBankItemV4[] = [
     expected: ["O"],
     comparator: "mcq_exact",
     hint: "Le sommet est le point où les deux côtés de l’angle se rejoignent.",
-    explanation: "Dans l’angle AOB, la lettre du milieu indique le sommet : c’est O.",
+    explanation: "Définition : un angle mesure l’ouverture entre deux demi-droites et s’exprime en degrés.\n\n" +
+          "Méthode : on identifie le sommet, les côtés ou la mesure, puis on utilise la règle ou le rapporteur.\n\nCalcul : " +
+          ("Dans l’angle AOB, la lettre du milieu indique le sommet : c’est O.") +
+          "\n\nConclusion : la mesure ou le nom trouvé convient pour cet angle.",
     tags: ["angles", "lire", "vocabulaire", "qcm"],
     canvas: angleCanvas({ angleDeg: 70, showMeasure: false, placeholder: "?" }),
   },
@@ -114,7 +120,10 @@ export const anglesBank: TutorBankItemV4[] = [
     expected: ["angle droit"],
     comparator: "mcq_exact",
     hint: "Un angle droit mesure 90°.",
-    explanation: "Un angle de 90° est un angle droit.",
+    explanation: "Définition : un angle mesure l’ouverture entre deux demi-droites et s’exprime en degrés.\n\n" +
+          "Méthode : on identifie le sommet, les côtés ou la mesure, puis on utilise la règle ou le rapporteur.\n\nCalcul : " +
+          ("Un angle de 90° est un angle droit.") +
+          "\n\nConclusion : la mesure ou le nom trouvé convient pour cet angle.",
     tags: ["angles", "lire", "angle_droit", "qcm"],
     canvas: angleCanvas({ angleDeg: 90, showMeasure: false, showRightAngle: true }),
   },
@@ -132,7 +141,10 @@ export const anglesBank: TutorBankItemV4[] = [
     expected: ["sommet", "côtés", "rejoignent"],
     comparator: "contains_keyword",
     hint: "Regarde le point commun aux deux côtés de l’angle.",
-    explanation: "Le sommet d’un angle est le point où les deux côtés de l’angle se rejoignent.",
+    explanation: "Définition : un angle mesure l’ouverture entre deux demi-droites et s’exprime en degrés.\n\n" +
+          "Méthode : on identifie le sommet, les côtés ou la mesure, puis on utilise la règle ou le rapporteur.\n\nCalcul : " +
+          ("Le sommet d’un angle est le point où les deux côtés de l’angle se rejoignent.") +
+          "\n\nConclusion : la mesure ou le nom trouvé convient pour cet angle.",
     tags: ["angles", "lire", "open", "vocabulaire"],
   },
   {
@@ -153,7 +165,10 @@ export const anglesBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(a)],
         comparator: "number_equal",
-        explanation: `La mesure affichée est ${a}°. La réponse est donc ${a}.`,
+        explanation: "Définition : un angle mesure l’ouverture entre deux demi-droites et s’exprime en degrés.\n\n" +
+          "Méthode : on identifie le sommet, les côtés ou la mesure, puis on utilise la règle ou le rapporteur.\n\nCalcul : " +
+          (`La mesure affichée est ${a}°. La réponse est donc ${a}.`) +
+          "\n\nConclusion : la mesure ou le nom trouvé convient pour cet angle.",
         canvas: angleCanvas({
           angleDeg: a,
           showMeasure: true,
@@ -181,7 +196,10 @@ export const anglesBank: TutorBankItemV4[] = [
     expected: ["un rapporteur"],
     comparator: "mcq_exact",
     hint: "L’instrument sert à lire une mesure en degrés.",
-    explanation: "On mesure un angle avec un rapporteur.",
+    explanation: "Définition : un angle mesure l’ouverture entre deux demi-droites et s’exprime en degrés.\n\n" +
+          "Méthode : on identifie le sommet, les côtés ou la mesure, puis on utilise la règle ou le rapporteur.\n\nCalcul : " +
+          ("On mesure un angle avec un rapporteur.") +
+          "\n\nConclusion : la mesure ou le nom trouvé convient pour cet angle.",
     tags: ["angles", "mesurer", "qcm", "instrument"],
   },
   {
@@ -198,7 +216,10 @@ export const anglesBank: TutorBankItemV4[] = [
     expected: ["45"],
     comparator: "number_equal",
     hint: "L’angle est deux fois plus petit qu’un angle droit.",
-    explanation: "L’angle représenté mesure 45°.",
+    explanation: "Définition : un angle mesure l’ouverture entre deux demi-droites et s’exprime en degrés.\n\n" +
+          "Méthode : on identifie le sommet, les côtés ou la mesure, puis on utilise la règle ou le rapporteur.\n\nCalcul : " +
+          ("L’angle représenté mesure 45°.") +
+          "\n\nConclusion : la mesure ou le nom trouvé convient pour cet angle.",
     tags: ["angles", "mesurer", "canvas"],
     canvas: angleCanvas({ angleDeg: 45, showMeasure: false, placeholder: "?" }),
   },
@@ -222,7 +243,10 @@ export const anglesBank: TutorBankItemV4[] = [
     expected: ["lire une mesure fausse"],
     comparator: "mcq_exact",
     hint: "Le centre du rapporteur doit être placé sur le sommet de l’angle.",
-    explanation: "Si le centre du rapporteur est mal placé, la mesure lue peut être fausse.",
+    explanation: "Définition : un angle mesure l’ouverture entre deux demi-droites et s’exprime en degrés.\n\n" +
+          "Méthode : on identifie le sommet, les côtés ou la mesure, puis on utilise la règle ou le rapporteur.\n\nCalcul : " +
+          ("Si le centre du rapporteur est mal placé, la mesure lue peut être fausse.") +
+          "\n\nConclusion : la mesure ou le nom trouvé convient pour cet angle.",
     tags: ["angles", "mesurer", "rapporteur", "piege", "qcm"],
   },
   {
@@ -240,7 +264,10 @@ export const anglesBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "Pense au centre du rapporteur et au zéro.",
     explanation:
-      "Il faut placer le centre du rapporteur sur le sommet de l’angle, puis aligner le zéro du rapporteur avec un côté de l’angle.",
+      "Définition : un angle mesure l’ouverture entre deux demi-droites et s’exprime en degrés.\n\n" +
+          "Méthode : on identifie le sommet, les côtés ou la mesure, puis on utilise la règle ou le rapporteur.\n\nCalcul : " +
+          ("Il faut placer le centre du rapporteur sur le sommet de l’angle, puis aligner le zéro du rapporteur avec un côté de l’angle.") +
+          "\n\nConclusion : la mesure ou le nom trouvé convient pour cet angle.",
     tags: ["angles", "mesurer", "open", "rapporteur"],
   },
   {
@@ -261,7 +288,10 @@ export const anglesBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(a)],
         comparator: "number_equal",
-        explanation: `L’angle représenté mesure ${a}°.`,
+        explanation: "Définition : un angle mesure l’ouverture entre deux demi-droites et s’exprime en degrés.\n\n" +
+          "Méthode : on identifie le sommet, les côtés ou la mesure, puis on utilise la règle ou le rapporteur.\n\nCalcul : " +
+          (`L’angle représenté mesure ${a}°.`) +
+          "\n\nConclusion : la mesure ou le nom trouvé convient pour cet angle.",
         canvas: angleCanvas({
           angleDeg: a,
           showMeasure: false,
@@ -289,7 +319,10 @@ export const anglesBank: TutorBankItemV4[] = [
     expected: ["50"],
     comparator: "number_equal",
     hint: "La mesure demandée est 50°.",
-    explanation: "Pour tracer un angle de 50°, on repère la graduation 50° sur le rapporteur.",
+    explanation: "Définition : un angle mesure l’ouverture entre deux demi-droites et s’exprime en degrés.\n\n" +
+          "Méthode : on identifie le sommet, les côtés ou la mesure, puis on utilise la règle ou le rapporteur.\n\nCalcul : " +
+          ("Pour tracer un angle de 50°, on repère la graduation 50° sur le rapporteur.") +
+          "\n\nConclusion : la mesure ou le nom trouvé convient pour cet angle.",
     tags: ["angles", "tracer", "rapporteur"],
     canvas: angleCanvas({ angleDeg: 50, showMeasure: true }),
   },
@@ -313,7 +346,10 @@ export const anglesBank: TutorBankItemV4[] = [
     expected: ["choisir le sommet O"],
     comparator: "mcq_exact",
     hint: "Un angle se construit à partir de son sommet.",
-    explanation: "Pour tracer un angle AOB, on commence par placer le sommet O.",
+    explanation: "Définition : un angle mesure l’ouverture entre deux demi-droites et s’exprime en degrés.\n\n" +
+          "Méthode : on identifie le sommet, les côtés ou la mesure, puis on utilise la règle ou le rapporteur.\n\nCalcul : " +
+          ("Pour tracer un angle AOB, on commence par placer le sommet O.") +
+          "\n\nConclusion : la mesure ou le nom trouvé convient pour cet angle.",
     tags: ["angles", "tracer", "qcm", "methode"],
   },
   {
@@ -331,7 +367,10 @@ export const anglesBank: TutorBankItemV4[] = [
     expected: ["un angle obtus"],
     comparator: "mcq_exact",
     hint: "120° est plus grand que 90° et plus petit que 180°.",
-    explanation: "Un angle de 120° est plus grand que 90° : c’est un angle obtus.",
+    explanation: "Définition : un angle mesure l’ouverture entre deux demi-droites et s’exprime en degrés.\n\n" +
+          "Méthode : on identifie le sommet, les côtés ou la mesure, puis on utilise la règle ou le rapporteur.\n\nCalcul : " +
+          ("Un angle de 120° est plus grand que 90° : c’est un angle obtus.") +
+          "\n\nConclusion : la mesure ou le nom trouvé convient pour cet angle.",
     tags: ["angles", "tracer", "obtus", "qcm"],
     canvas: angleCanvas({ angleDeg: 120, showMeasure: true }),
   },
@@ -350,7 +389,10 @@ export const anglesBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "Décris les étapes : sommet, premier côté, rapporteur, graduation.",
     explanation:
-      "On place le sommet, on trace un premier côté, on place le centre du rapporteur sur le sommet, on repère 70°, puis on trace le second côté.",
+      "Définition : un angle mesure l’ouverture entre deux demi-droites et s’exprime en degrés.\n\n" +
+          "Méthode : on identifie le sommet, les côtés ou la mesure, puis on utilise la règle ou le rapporteur.\n\nCalcul : " +
+          ("On place le sommet, on trace un premier côté, on place le centre du rapporteur sur le sommet, on repère 70°, puis on trace le second côté.") +
+          "\n\nConclusion : la mesure ou le nom trouvé convient pour cet angle.",
     tags: ["angles", "tracer", "open", "methode"],
   },
   {
@@ -371,7 +413,10 @@ export const anglesBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(a)],
         comparator: "number_equal",
-        explanation: `Il faut repérer la graduation ${a}° sur le rapporteur.`,
+        explanation: "Définition : un angle mesure l’ouverture entre deux demi-droites et s’exprime en degrés.\n\n" +
+          "Méthode : on identifie le sommet, les côtés ou la mesure, puis on utilise la règle ou le rapporteur.\n\nCalcul : " +
+          (`Il faut repérer la graduation ${a}° sur le rapporteur.`) +
+          "\n\nConclusion : la mesure ou le nom trouvé convient pour cet angle.",
         canvas: angleCanvas({ angleDeg: a, showMeasure: true }),
       };
     },
@@ -395,7 +440,10 @@ export const anglesBank: TutorBankItemV4[] = [
     expected: ["aigu"],
     comparator: "mcq_exact",
     hint: "Il est plus petit qu’un angle droit.",
-    explanation: "L’angle représenté mesure environ 50°. Il est donc aigu.",
+    explanation: "Définition : un angle mesure l’ouverture entre deux demi-droites et s’exprime en degrés.\n\n" +
+          "Méthode : on identifie le sommet, les côtés ou la mesure, puis on utilise la règle ou le rapporteur.\n\nCalcul : " +
+          ("L’angle représenté mesure environ 50°. Il est donc aigu.") +
+          "\n\nConclusion : la mesure ou le nom trouvé convient pour cet angle.",
     tags: ["angles", "estimer", "aigu", "canvas", "qcm"],
     canvas: angleCanvas({ angleDeg: 50, showMeasure: false, placeholder: "?" }),
   },
@@ -414,7 +462,10 @@ export const anglesBank: TutorBankItemV4[] = [
     expected: ["obtus"],
     comparator: "mcq_exact",
     hint: "Il est plus grand qu’un angle droit.",
-    explanation: "L’angle représenté mesure environ 120°. Il est donc obtus.",
+    explanation: "Définition : un angle mesure l’ouverture entre deux demi-droites et s’exprime en degrés.\n\n" +
+          "Méthode : on identifie le sommet, les côtés ou la mesure, puis on utilise la règle ou le rapporteur.\n\nCalcul : " +
+          ("L’angle représenté mesure environ 120°. Il est donc obtus.") +
+          "\n\nConclusion : la mesure ou le nom trouvé convient pour cet angle.",
     tags: ["angles", "estimer", "obtus", "canvas", "qcm"],
     canvas: angleCanvas({ angleDeg: 120, showMeasure: false, placeholder: "?" }),
   },
@@ -433,7 +484,10 @@ export const anglesBank: TutorBankItemV4[] = [
     expected: ["100°"],
     comparator: "mcq_exact",
     hint: "Un angle droit mesure 90°.",
-    explanation: "Un angle légèrement plus grand que 90° peut mesurer environ 100°.",
+    explanation: "Définition : un angle mesure l’ouverture entre deux demi-droites et s’exprime en degrés.\n\n" +
+          "Méthode : on identifie le sommet, les côtés ou la mesure, puis on utilise la règle ou le rapporteur.\n\nCalcul : " +
+          ("Un angle légèrement plus grand que 90° peut mesurer environ 100°.") +
+          "\n\nConclusion : la mesure ou le nom trouvé convient pour cet angle.",
     tags: ["angles", "estimer", "qcm", "piege"],
   },
   {
@@ -451,7 +505,10 @@ export const anglesBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "Compare l’angle à un angle droit.",
     explanation:
-      "On compare l’angle à 90°. S’il est plus petit que 90°, il est aigu. S’il est plus grand que 90° et plus petit que 180°, il est obtus.",
+      "Définition : un angle mesure l’ouverture entre deux demi-droites et s’exprime en degrés.\n\n" +
+          "Méthode : on identifie le sommet, les côtés ou la mesure, puis on utilise la règle ou le rapporteur.\n\nCalcul : " +
+          ("On compare l’angle à 90°. S’il est plus petit que 90°, il est aigu. S’il est plus grand que 90° et plus petit que 180°, il est obtus.") +
+          "\n\nConclusion : la mesure ou le nom trouvé convient pour cet angle.",
     tags: ["angles", "estimer", "open", "raisonnement"],
   },
   {
@@ -475,11 +532,14 @@ export const anglesBank: TutorBankItemV4[] = [
         expected: [type],
         comparator: "mcq_exact",
         explanation:
-          type === "aigu"
+          "Définition : un angle mesure l’ouverture entre deux demi-droites et s’exprime en degrés.\n\n" +
+          "Méthode : on identifie le sommet, les côtés ou la mesure, puis on utilise la règle ou le rapporteur.\n\nCalcul : " +
+          (type === "aigu"
             ? `${a}° est plus petit que 90°, donc l’angle est aigu.`
             : type === "droit"
             ? `${a}° est égal à 90°, donc l’angle est droit.`
-            : `${a}° est plus grand que 90° et plus petit que 180°, donc l’angle est obtus.`,
+            : `${a}° est plus grand que 90° et plus petit que 180°, donc l’angle est obtus.`) +
+          "\n\nConclusion : la mesure ou le nom trouvé convient pour cet angle.",
         canvas: angleCanvas({
           angleDeg: a,
           showMeasure: false,
@@ -508,7 +568,10 @@ export const anglesBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "Un angle obtus a une définition précise.",
     explanation:
-      "Dire qu’un angle est grand ne suffit pas. Un angle obtus mesure plus de 90° et moins de 180°.",
+      "Définition : un angle mesure l’ouverture entre deux demi-droites et s’exprime en degrés.\n\n" +
+          "Méthode : on identifie le sommet, les côtés ou la mesure, puis on utilise la règle ou le rapporteur.\n\nCalcul : " +
+          ("Dire qu’un angle est grand ne suffit pas. Un angle obtus mesure plus de 90° et moins de 180°.") +
+          "\n\nConclusion : la mesure ou le nom trouvé convient pour cet angle.",
     tags: ["angles", "defi", "open", "raisonnement", "piege"],
     canvas: angleCanvas({ angleDeg: 120, showMeasure: false, placeholder: "?" }),
   },
@@ -527,7 +590,10 @@ export const anglesBank: TutorBankItemV4[] = [
     expected: ["angle droit"],
     comparator: "mcq_exact",
     hint: "90° correspond à un angle droit.",
-    explanation: "Un virage de 90° correspond à un angle droit.",
+    explanation: "Définition : un angle mesure l’ouverture entre deux demi-droites et s’exprime en degrés.\n\n" +
+          "Méthode : on identifie le sommet, les côtés ou la mesure, puis on utilise la règle ou le rapporteur.\n\nCalcul : " +
+          ("Un virage de 90° correspond à un angle droit.") +
+          "\n\nConclusion : la mesure ou le nom trouvé convient pour cet angle.",
     tags: ["angles", "defi", "sport", "angle_droit"],
     canvas: angleCanvas({ angleDeg: 90, showMeasure: false, showRightAngle: true }),
   },
@@ -546,7 +612,10 @@ export const anglesBank: TutorBankItemV4[] = [
     expected: ["obtus"],
     comparator: "mcq_exact",
     hint: "Compare 120° à 90°.",
-    explanation: "120° est plus grand que 90° et plus petit que 180°. C’est donc un angle obtus.",
+    explanation: "Définition : un angle mesure l’ouverture entre deux demi-droites et s’exprime en degrés.\n\n" +
+          "Méthode : on identifie le sommet, les côtés ou la mesure, puis on utilise la règle ou le rapporteur.\n\nCalcul : " +
+          ("120° est plus grand que 90° et plus petit que 180°. C’est donc un angle obtus.") +
+          "\n\nConclusion : la mesure ou le nom trouvé convient pour cet angle.",
     tags: ["angles", "defi", "reunion", "obtus"],
     canvas: angleCanvas({ angleDeg: 120, showMeasure: true }),
   },
@@ -572,11 +641,14 @@ export const anglesBank: TutorBankItemV4[] = [
         expected: [type],
         comparator: "mcq_exact",
         explanation:
-          type === "aigu"
+          "Définition : un angle mesure l’ouverture entre deux demi-droites et s’exprime en degrés.\n\n" +
+          "Méthode : on identifie le sommet, les côtés ou la mesure, puis on utilise la règle ou le rapporteur.\n\nCalcul : " +
+          (type === "aigu"
             ? `${a}° est inférieur à 90°, donc l’angle est aigu.`
             : type === "droit"
             ? `${a}° est égal à 90°, donc l’angle est droit.`
-            : `${a}° est supérieur à 90° et inférieur à 180°, donc l’angle est obtus.`,
+            : `${a}° est supérieur à 90° et inférieur à 180°, donc l’angle est obtus.`) +
+          "\n\nConclusion : la mesure ou le nom trouvé convient pour cet angle.",
         canvas: angleCanvas({ angleDeg: a, showMeasure: true, showRightAngle: a === 90 }),
       };
     },
@@ -605,9 +677,12 @@ export const anglesBank: TutorBankItemV4[] = [
             : [String(a), "90", "180", "obtus"],
         comparator: "contains_keyword",
         explanation:
-          type === "aigu"
+          "Définition : un angle mesure l’ouverture entre deux demi-droites et s’exprime en degrés.\n\n" +
+          "Méthode : on identifie le sommet, les côtés ou la mesure, puis on utilise la règle ou le rapporteur.\n\nCalcul : " +
+          (type === "aigu"
             ? `${a}° est inférieur à 90°, donc c’est un angle aigu.`
-            : `${a}° est supérieur à 90° et inférieur à 180°, donc c’est un angle obtus.`,
+            : `${a}° est supérieur à 90° et inférieur à 180°, donc c’est un angle obtus.`) +
+          "\n\nConclusion : la mesure ou le nom trouvé convient pour cet angle.",
         canvas: angleCanvas({ angleDeg: a, showMeasure: true }),
       };
     },

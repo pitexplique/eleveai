@@ -36,7 +36,10 @@ export const calculLitteralBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "La lettre sert à représenter un nombre que l’on ne connaît pas encore.",
     explanation:
-      "Dans 3x + 2, la lettre x représente un nombre.",
+      "Définition : une expression littérale contient des nombres, des lettres et des opérations.\n\n" +
+          "Méthode : on remplace la lettre par la valeur donnée ou on simplifie l’écriture.\n\nCalcul : " +
+          ("Dans 3x + 2, la lettre x représente un nombre.") +
+          "\n\nConclusion : l’expression obtenue répond à la question.",
     tags: ["calcul_litteral", "expression"],
   },
   {
@@ -54,7 +57,10 @@ export const calculLitteralBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "5a veut dire 5 multiplié par a.",
     explanation:
-      "Dans 5a, le 5 est le coefficient : il signifie que l’on multiplie a par 5.",
+      "Définition : une expression littérale contient des nombres, des lettres et des opérations.\n\n" +
+          "Méthode : on remplace la lettre par la valeur donnée ou on simplifie l’écriture.\n\nCalcul : " +
+          ("Dans 5a, le 5 est le coefficient : il signifie que l’on multiplie a par 5.") +
+          "\n\nConclusion : l’expression obtenue répond à la question.",
     tags: ["calcul_litteral", "expression"],
   },
   {
@@ -72,7 +78,10 @@ export const calculLitteralBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "Quand un nombre est collé à une lettre, cela signifie une multiplication.",
     explanation:
-      "2x signifie 2 × x, c’est-à-dire 2 multiplié par x.",
+      "Définition : une expression littérale contient des nombres, des lettres et des opérations.\n\n" +
+          "Méthode : on remplace la lettre par la valeur donnée ou on simplifie l’écriture.\n\nCalcul : " +
+          ("2x signifie 2 × x, c’est-à-dire 2 multiplié par x.") +
+          "\n\nConclusion : l’expression obtenue répond à la question.",
     tags: ["calcul_litteral", "expression"],
   },
   {
@@ -91,7 +100,10 @@ export const calculLitteralBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Une expression littérale contient au moins une lettre.",
     explanation:
-      "4x - 1 contient la lettre x : c’est une expression littérale.",
+      "Définition : une expression littérale contient des nombres, des lettres et des opérations.\n\n" +
+          "Méthode : on remplace la lettre par la valeur donnée ou on simplifie l’écriture.\n\nCalcul : " +
+          ("4x - 1 contient la lettre x : c’est une expression littérale.") +
+          "\n\nConclusion : l’expression obtenue répond à la question.",
     tags: ["calcul_litteral", "expression", "qcm"],
   },
   {
@@ -110,7 +122,10 @@ export const calculLitteralBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Le terme constant est celui qui ne contient pas de lettre.",
     explanation:
-      "Dans 2x + 5, le terme constant est 5 car il ne contient pas de lettre.",
+      "Définition : une expression littérale contient des nombres, des lettres et des opérations.\n\n" +
+          "Méthode : on remplace la lettre par la valeur donnée ou on simplifie l’écriture.\n\nCalcul : " +
+          ("Dans 2x + 5, le terme constant est 5 car il ne contient pas de lettre.") +
+          "\n\nConclusion : l’expression obtenue répond à la question.",
     tags: ["calcul_litteral", "expression", "qcm"],
   },
   {
@@ -131,7 +146,10 @@ export const calculLitteralBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(coef)],
         comparator: "number_equal",
-        explanation: `Dans ${coef}x + 4, le coefficient de x est ${coef}.`,
+        explanation: "Définition : une expression littérale contient des nombres, des lettres et des opérations.\n\n" +
+          "Méthode : on remplace la lettre par la valeur donnée ou on simplifie l’écriture.\n\nCalcul : " +
+          (`Dans ${coef}x + 4, le coefficient de x est ${coef}.`) +
+          "\n\nConclusion : l’expression obtenue répond à la question.",
       };
     },
   },
@@ -154,7 +172,10 @@ export const calculLitteralBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "« augmenté de 3 » correspond à + 3.",
     explanation:
-      "« un nombre x augmenté de 3 » se traduit par x + 3.",
+      "Définition : une expression littérale contient des nombres, des lettres et des opérations.\n\n" +
+          "Méthode : on remplace la lettre par la valeur donnée ou on simplifie l’écriture.\n\nCalcul : " +
+          ("« un nombre x augmenté de 3 » se traduit par x + 3.") +
+          "\n\nConclusion : l’expression obtenue répond à la question.",
     tags: ["calcul_litteral", "traduire"],
   },
   {
@@ -172,7 +193,10 @@ export const calculLitteralBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "Le double signifie multiplier par 2.",
     explanation:
-      "Le double de x se traduit par 2x.",
+      "Définition : une expression littérale contient des nombres, des lettres et des opérations.\n\n" +
+          "Méthode : on remplace la lettre par la valeur donnée ou on simplifie l’écriture.\n\nCalcul : " +
+          ("Le double de x se traduit par 2x.") +
+          "\n\nConclusion : l’expression obtenue répond à la question.",
     tags: ["calcul_litteral", "traduire"],
   },
   {
@@ -190,7 +214,10 @@ export const calculLitteralBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "« de plus que y » signifie qu’on ajoute 5 à y.",
     explanation:
-      "« 5 de plus que y » se traduit par y + 5.",
+      "Définition : une expression littérale contient des nombres, des lettres et des opérations.\n\n" +
+          "Méthode : on remplace la lettre par la valeur donnée ou on simplifie l’écriture.\n\nCalcul : " +
+          ("« 5 de plus que y » se traduit par y + 5.") +
+          "\n\nConclusion : l’expression obtenue répond à la question.",
     tags: ["calcul_litteral", "traduire"],
   },
   {
@@ -208,7 +235,10 @@ export const calculLitteralBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "Le triple de n donne 3n, puis on enlève 4.",
     explanation:
-      "« le triple d’un nombre n diminué de 4 » se traduit par 3n - 4.",
+      "Définition : une expression littérale contient des nombres, des lettres et des opérations.\n\n" +
+          "Méthode : on remplace la lettre par la valeur donnée ou on simplifie l’écriture.\n\nCalcul : " +
+          ("« le triple d’un nombre n diminué de 4 » se traduit par 3n - 4.") +
+          "\n\nConclusion : l’expression obtenue répond à la question.",
     tags: ["calcul_litteral", "traduire"],
   },
   {
@@ -227,7 +257,10 @@ export const calculLitteralBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Le quart signifie diviser par 4.",
     explanation:
-      "Le quart de x se note x/4.",
+      "Définition : une expression littérale contient des nombres, des lettres et des opérations.\n\n" +
+          "Méthode : on remplace la lettre par la valeur donnée ou on simplifie l’écriture.\n\nCalcul : " +
+          ("Le quart de x se note x/4.") +
+          "\n\nConclusion : l’expression obtenue répond à la question.",
     tags: ["calcul_litteral", "traduire", "qcm"],
   },
   {
@@ -250,7 +283,10 @@ export const calculLitteralBank: TutorBankItemV4[] = [
           format: "short",
           expected: [`2x+${n}`, `2x + ${n}`],
           comparator: "contains_keyword",
-          explanation: `Le double de x est 2x, puis on ajoute ${n}, donc on obtient 2x + ${n}.`,
+          explanation: "Définition : une expression littérale contient des nombres, des lettres et des opérations.\n\n" +
+          "Méthode : on remplace la lettre par la valeur donnée ou on simplifie l’écriture.\n\nCalcul : " +
+          (`Le double de x est 2x, puis on ajoute ${n}, donc on obtient 2x + ${n}.`) +
+          "\n\nConclusion : l’expression obtenue répond à la question.",
         };
       }
       return {
@@ -258,7 +294,10 @@ export const calculLitteralBank: TutorBankItemV4[] = [
         format: "short",
         expected: [`3x-${n}`, `3x - ${n}`],
         comparator: "contains_keyword",
-        explanation: `Le triple de x est 3x, puis on enlève ${n}, donc on obtient 3x - ${n}.`,
+        explanation: "Définition : une expression littérale contient des nombres, des lettres et des opérations.\n\n" +
+          "Méthode : on remplace la lettre par la valeur donnée ou on simplifie l’écriture.\n\nCalcul : " +
+          (`Le triple de x est 3x, puis on enlève ${n}, donc on obtient 3x - ${n}.`) +
+          "\n\nConclusion : l’expression obtenue répond à la question.",
       };
     },
   },
@@ -281,7 +320,10 @@ export const calculLitteralBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Remplace x par 5, puis calcule.",
     explanation:
-      "Si x = 5, alors x + 3 = 5 + 3 = 8.",
+      "Définition : une expression littérale contient des nombres, des lettres et des opérations.\n\n" +
+          "Méthode : on remplace la lettre par la valeur donnée ou on simplifie l’écriture.\n\nCalcul : " +
+          ("Si x = 5, alors x + 3 = 5 + 3 = 8.") +
+          "\n\nConclusion : l’expression obtenue répond à la question.",
     tags: ["calcul_litteral", "substituer"],
   },
   {
@@ -299,7 +341,10 @@ export const calculLitteralBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "2x signifie 2 multiplié par x.",
     explanation:
-      "Si x = 4, alors 2x = 2 × 4 = 8.",
+      "Définition : une expression littérale contient des nombres, des lettres et des opérations.\n\n" +
+          "Méthode : on remplace la lettre par la valeur donnée ou on simplifie l’écriture.\n\nCalcul : " +
+          ("Si x = 4, alors 2x = 2 × 4 = 8.") +
+          "\n\nConclusion : l’expression obtenue répond à la question.",
     tags: ["calcul_litteral", "substituer"],
   },
   {
@@ -317,7 +362,10 @@ export const calculLitteralBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Commence par calculer 3 × 6.",
     explanation:
-      "Si x = 6, alors 3x - 2 = 3 × 6 - 2 = 18 - 2 = 16.",
+      "Définition : une expression littérale contient des nombres, des lettres et des opérations.\n\n" +
+          "Méthode : on remplace la lettre par la valeur donnée ou on simplifie l’écriture.\n\nCalcul : " +
+          ("Si x = 6, alors 3x - 2 = 3 × 6 - 2 = 18 - 2 = 16.") +
+          "\n\nConclusion : l’expression obtenue répond à la question.",
     tags: ["calcul_litteral", "substituer"],
   },
   {
@@ -335,7 +383,10 @@ export const calculLitteralBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Remplace x par -3 en gardant les parenthèses mentalement.",
     explanation:
-      "Si x = -3, alors 2x + 5 = 2 × (-3) + 5 = -6 + 5 = -1.",
+      "Définition : une expression littérale contient des nombres, des lettres et des opérations.\n\n" +
+          "Méthode : on remplace la lettre par la valeur donnée ou on simplifie l’écriture.\n\nCalcul : " +
+          ("Si x = -3, alors 2x + 5 = 2 × (-3) + 5 = -6 + 5 = -1.") +
+          "\n\nConclusion : l’expression obtenue répond à la question.",
     tags: ["calcul_litteral", "substituer", "relatifs"],
   },
   {
@@ -354,7 +405,10 @@ export const calculLitteralBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Remplace y par 10.",
     explanation:
-      "Si y = 10, alors y - 4 = 10 - 4 = 6.",
+      "Définition : une expression littérale contient des nombres, des lettres et des opérations.\n\n" +
+          "Méthode : on remplace la lettre par la valeur donnée ou on simplifie l’écriture.\n\nCalcul : " +
+          ("Si y = 10, alors y - 4 = 10 - 4 = 6.") +
+          "\n\nConclusion : l’expression obtenue répond à la question.",
     tags: ["calcul_litteral", "substituer", "qcm"],
   },
   {
@@ -379,7 +433,10 @@ export const calculLitteralBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(result), formatSigned(result)],
         comparator: "number_equal",
-        explanation: `${a}x + ${b} = ${a} × (${x}) + ${b} = ${result}.`,
+        explanation: "Définition : une expression littérale contient des nombres, des lettres et des opérations.\n\n" +
+          "Méthode : on remplace la lettre par la valeur donnée ou on simplifie l’écriture.\n\nCalcul : " +
+          (`${a}x + ${b} = ${a} × (${x}) + ${b} = ${result}.`) +
+          "\n\nConclusion : l’expression obtenue répond à la question.",
       };
     },
   },
@@ -402,7 +459,10 @@ export const calculLitteralBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "Un x plus un autre x, cela fait deux x.",
     explanation:
-      "x + x = 2x.",
+      "Définition : une expression littérale contient des nombres, des lettres et des opérations.\n\n" +
+          "Méthode : on remplace la lettre par la valeur donnée ou on simplifie l’écriture.\n\nCalcul : " +
+          ("x + x = 2x.") +
+          "\n\nConclusion : l’expression obtenue répond à la question.",
     tags: ["calcul_litteral", "reduire"],
   },
   {
@@ -420,7 +480,10 @@ export const calculLitteralBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "On additionne les coefficients des termes semblables.",
     explanation:
-      "3x + 2x = 5x.",
+      "Définition : une expression littérale contient des nombres, des lettres et des opérations.\n\n" +
+          "Méthode : on remplace la lettre par la valeur donnée ou on simplifie l’écriture.\n\nCalcul : " +
+          ("3x + 2x = 5x.") +
+          "\n\nConclusion : l’expression obtenue répond à la question.",
     tags: ["calcul_litteral", "reduire"],
   },
   {
@@ -438,7 +501,10 @@ export const calculLitteralBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "4x - x = 4x - 1x.",
     explanation:
-      "4x - x = 4x - 1x = 3x.",
+      "Définition : une expression littérale contient des nombres, des lettres et des opérations.\n\n" +
+          "Méthode : on remplace la lettre par la valeur donnée ou on simplifie l’écriture.\n\nCalcul : " +
+          ("4x - x = 4x - 1x = 3x.") +
+          "\n\nConclusion : l’expression obtenue répond à la question.",
     tags: ["calcul_litteral", "reduire"],
   },
   {
@@ -456,7 +522,10 @@ export const calculLitteralBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "Regroupe les termes en x ensemble.",
     explanation:
-      "x + x + 3 = 2x + 3.",
+      "Définition : une expression littérale contient des nombres, des lettres et des opérations.\n\n" +
+          "Méthode : on remplace la lettre par la valeur donnée ou on simplifie l’écriture.\n\nCalcul : " +
+          ("x + x + 3 = 2x + 3.") +
+          "\n\nConclusion : l’expression obtenue répond à la question.",
     tags: ["calcul_litteral", "reduire"],
   },
   {
@@ -474,7 +543,10 @@ export const calculLitteralBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "Multiplier x par x donne le carré de x.",
     explanation:
-      "x × x = x².",
+      "Définition : une expression littérale contient des nombres, des lettres et des opérations.\n\n" +
+          "Méthode : on remplace la lettre par la valeur donnée ou on simplifie l’écriture.\n\nCalcul : " +
+          ("x × x = x².") +
+          "\n\nConclusion : l’expression obtenue répond à la question.",
     tags: ["calcul_litteral", "reduire"],
   },
   {
@@ -493,7 +565,10 @@ export const calculLitteralBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "On additionne seulement les coefficients.",
     explanation:
-      "2x + 5x = 7x.",
+      "Définition : une expression littérale contient des nombres, des lettres et des opérations.\n\n" +
+          "Méthode : on remplace la lettre par la valeur donnée ou on simplifie l’écriture.\n\nCalcul : " +
+          ("2x + 5x = 7x.") +
+          "\n\nConclusion : l’expression obtenue répond à la question.",
     tags: ["calcul_litteral", "reduire", "qcm"],
   },
   {
@@ -519,9 +594,12 @@ export const calculLitteralBank: TutorBankItemV4[] = [
         expected: [`${result}x`, `${result}*x`, `${result} x`],
         comparator: "contains_keyword",
         explanation:
-          sign === "+"
+          "Définition : une expression littérale contient des nombres, des lettres et des opérations.\n\n" +
+          "Méthode : on remplace la lettre par la valeur donnée ou on simplifie l’écriture.\n\nCalcul : " +
+          (sign === "+"
             ? `${a}x + ${b}x = ${result}x.`
-            : `${a}x - ${b}x = ${result}x.`,
+            : `${a}x - ${b}x = ${result}x.`) +
+          "\n\nConclusion : l’expression obtenue répond à la question.",
       };
     },
   },
@@ -544,7 +622,10 @@ export const calculLitteralBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "3x et 2x représentent des quantités de même nature.",
     explanation:
-      "3x et 2x sont des termes semblables car ils contiennent la même lettre x. On peut donc additionner leurs coefficients : 3 + 2 = 5, d’où 5x.",
+      "Définition : une expression littérale contient des nombres, des lettres et des opérations.\n\n" +
+          "Méthode : on remplace la lettre par la valeur donnée ou on simplifie l’écriture.\n\nCalcul : " +
+          ("3x et 2x sont des termes semblables car ils contiennent la même lettre x. On peut donc additionner leurs coefficients : 3 + 2 = 5, d’où 5x.") +
+          "\n\nConclusion : l’expression obtenue répond à la question.",
     tags: ["calcul_litteral", "defi", "raisonnement"],
   },
   {
@@ -562,7 +643,10 @@ export const calculLitteralBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "L’expression est x + 5 puis on remplace x par 12.",
     explanation:
-      "L’expression est x + 5. Si x = 12, alors x + 5 = 17.",
+      "Définition : une expression littérale contient des nombres, des lettres et des opérations.\n\n" +
+          "Méthode : on remplace la lettre par la valeur donnée ou on simplifie l’écriture.\n\nCalcul : " +
+          ("L’expression est x + 5. Si x = 12, alors x + 5 = 17.") +
+          "\n\nConclusion : l’expression obtenue répond à la question.",
     tags: ["calcul_litteral", "defi", "probleme"],
   },
   {
@@ -580,7 +664,10 @@ export const calculLitteralBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Commence par réduire 2x + x.",
     explanation:
-      "2x + x + 4 = 3x + 4. Pour x = 3, on obtient 3 × 3 + 4 = 13.",
+      "Définition : une expression littérale contient des nombres, des lettres et des opérations.\n\n" +
+          "Méthode : on remplace la lettre par la valeur donnée ou on simplifie l’écriture.\n\nCalcul : " +
+          ("2x + x + 4 = 3x + 4. Pour x = 3, on obtient 3 × 3 + 4 = 13.") +
+          "\n\nConclusion : l’expression obtenue répond à la question.",
     tags: ["calcul_litteral", "defi", "reduire", "substituer"],
   },
   {
@@ -598,7 +685,10 @@ export const calculLitteralBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "3x contient une lettre, mais 2 n’en contient pas.",
     explanation:
-      "3x et 2 ne sont pas des termes semblables. 3x dépend de x alors que 2 est un terme constant. On ne peut donc pas écrire 3x + 2 = 5x.",
+      "Définition : une expression littérale contient des nombres, des lettres et des opérations.\n\n" +
+          "Méthode : on remplace la lettre par la valeur donnée ou on simplifie l’écriture.\n\nCalcul : " +
+          ("3x et 2 ne sont pas des termes semblables. 3x dépend de x alors que 2 est un terme constant. On ne peut donc pas écrire 3x + 2 = 5x.") +
+          "\n\nConclusion : l’expression obtenue répond à la question.",
     tags: ["calcul_litteral", "defi", "piege", "raisonnement"],
   },
   {
@@ -616,7 +706,10 @@ export const calculLitteralBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Le périmètre d’un rectangle est 2 × longueur + 2 × largeur.",
     explanation:
-      "Le périmètre vaut 2(x + 3) + 2×2. Pour x = 5, on obtient 2×8 + 4 = 16 + 4 = 20.",
+      "Définition : une expression littérale contient des nombres, des lettres et des opérations.\n\n" +
+          "Méthode : on remplace la lettre par la valeur donnée ou on simplifie l’écriture.\n\nCalcul : " +
+          ("Le périmètre vaut 2(x + 3) + 2×2. Pour x = 5, on obtient 2×8 + 4 = 16 + 4 = 20.") +
+          "\n\nConclusion : l’expression obtenue répond à la question.",
     tags: ["calcul_litteral", "defi", "probleme", "geometrie"],
   },
   {
@@ -634,7 +727,10 @@ export const calculLitteralBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Réduis d’abord 3x + x.",
     explanation:
-      "3x + x + 5 = 4x + 5. Pour x = -2, on obtient 4×(-2) + 5 = -8 + 5 = -3.",
+      "Définition : une expression littérale contient des nombres, des lettres et des opérations.\n\n" +
+          "Méthode : on remplace la lettre par la valeur donnée ou on simplifie l’écriture.\n\nCalcul : " +
+          ("3x + x + 5 = 4x + 5. Pour x = -2, on obtient 4×(-2) + 5 = -8 + 5 = -3.") +
+          "\n\nConclusion : l’expression obtenue répond à la question.",
     tags: ["calcul_litteral", "defi", "relatifs", "substituer", "reduire"],
   },
   {
@@ -653,7 +749,10 @@ export const calculLitteralBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "On prend d’abord le double de x, puis on ajoute 7.",
     explanation:
-      "Le double de x est 2x, puis augmenté de 7 donne 2x + 7.",
+      "Définition : une expression littérale contient des nombres, des lettres et des opérations.\n\n" +
+          "Méthode : on remplace la lettre par la valeur donnée ou on simplifie l’écriture.\n\nCalcul : " +
+          ("Le double de x est 2x, puis augmenté de 7 donne 2x + 7.") +
+          "\n\nConclusion : l’expression obtenue répond à la question.",
     tags: ["calcul_litteral", "defi", "qcm"],
   },
   {
@@ -672,7 +771,10 @@ export const calculLitteralBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Seuls les termes semblables peuvent se réduire.",
     explanation:
-      "4x + x = 4x + 1x = 5x. Les autres propositions confondent termes en x et termes constants, ou additionnent mal les coefficients.",
+      "Définition : une expression littérale contient des nombres, des lettres et des opérations.\n\n" +
+          "Méthode : on remplace la lettre par la valeur donnée ou on simplifie l’écriture.\n\nCalcul : " +
+          ("4x + x = 4x + 1x = 5x. Les autres propositions confondent termes en x et termes constants, ou additionnent mal les coefficients.") +
+          "\n\nConclusion : l’expression obtenue répond à la question.",
     tags: ["calcul_litteral", "defi", "qcm", "piege"],
   },
   {
@@ -691,7 +793,10 @@ export const calculLitteralBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Réduis d’abord 2x + x.",
     explanation:
-      "2x + x + 3 = 3x + 3. Pour x = 4, cela donne 3×4 + 3 = 12 + 3 = 15.",
+      "Définition : une expression littérale contient des nombres, des lettres et des opérations.\n\n" +
+          "Méthode : on remplace la lettre par la valeur donnée ou on simplifie l’écriture.\n\nCalcul : " +
+          ("2x + x + 3 = 3x + 3. Pour x = 4, cela donne 3×4 + 3 = 12 + 3 = 15.") +
+          "\n\nConclusion : l’expression obtenue répond à la question.",
     tags: ["calcul_litteral", "defi", "qcm", "substituer"],
   },
   {
@@ -718,7 +823,10 @@ export const calculLitteralBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(result)],
         comparator: "number_equal",
-        explanation: `${a}x + ${b}x + ${c} = ${coef}x + ${c}. Pour x = ${x}, on obtient ${coef} × ${x} + ${c} = ${result}.`,
+        explanation: "Définition : une expression littérale contient des nombres, des lettres et des opérations.\n\n" +
+          "Méthode : on remplace la lettre par la valeur donnée ou on simplifie l’écriture.\n\nCalcul : " +
+          (`${a}x + ${b}x + ${c} = ${coef}x + ${c}. Pour x = ${x}, on obtient ${coef} × ${x} + ${c} = ${result}.`) +
+          "\n\nConclusion : l’expression obtenue répond à la question.",
       };
     },
   },
@@ -742,7 +850,10 @@ export const calculLitteralBank: TutorBankItemV4[] = [
         format: "short",
         expected: ["non"],
         comparator: "contains_keyword",
-        explanation: `${a}x et ${b} ne sont pas des termes semblables. L’expression ${good.replace("+", " + ")} ne se réduit pas.`,
+        explanation: "Définition : une expression littérale contient des nombres, des lettres et des opérations.\n\n" +
+          "Méthode : on remplace la lettre par la valeur donnée ou on simplifie l’écriture.\n\nCalcul : " +
+          (`${a}x et ${b} ne sont pas des termes semblables. L’expression ${good.replace("+", " + ")} ne se réduit pas.`) +
+          "\n\nConclusion : l’expression obtenue répond à la question.",
       };
     },
   },
@@ -767,7 +878,10 @@ export const calculLitteralBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(result)],
         comparator: "number_equal",
-        explanation: `L’expression est 2x + ${add}. Pour x = ${x}, on obtient 2×${x} + ${add} = ${result}.`,
+        explanation: "Définition : une expression littérale contient des nombres, des lettres et des opérations.\n\n" +
+          "Méthode : on remplace la lettre par la valeur donnée ou on simplifie l’écriture.\n\nCalcul : " +
+          (`L’expression est 2x + ${add}. Pour x = ${x}, on obtient 2×${x} + ${add} = ${result}.`) +
+          "\n\nConclusion : l’expression obtenue répond à la question.",
       };
     },
   },
@@ -788,7 +902,10 @@ export const calculLitteralBank: TutorBankItemV4[] = [
     expected: ["4", "x", "multiplier"],
     comparator: "contains_keyword",
     hint: "Quand un nombre est collé à une lettre, cela signifie une multiplication.",
-    explanation: "4x signifie 4 × x : on multiplie le nombre représenté par x par 4.",
+    explanation: "Définition : une expression littérale contient des nombres, des lettres et des opérations.\n\n" +
+          "Méthode : on remplace la lettre par la valeur donnée ou on simplifie l’écriture.\n\nCalcul : " +
+          ("4x signifie 4 × x : on multiplie le nombre représenté par x par 4.") +
+          "\n\nConclusion : l’expression obtenue répond à la question.",
     tags: ["calcul_litteral", "open", "expression"],
   },
   {
@@ -805,7 +922,10 @@ export const calculLitteralBank: TutorBankItemV4[] = [
     expected: ["double", "x", "ajoute", "5"],
     comparator: "contains_keyword",
     hint: "On prend d’abord le double de x, puis on ajoute 5.",
-    explanation: "Le double de x est 2x. Ensuite on augmente ce résultat de 5, donc on obtient 2x + 5.",
+    explanation: "Définition : une expression littérale contient des nombres, des lettres et des opérations.\n\n" +
+          "Méthode : on remplace la lettre par la valeur donnée ou on simplifie l’écriture.\n\nCalcul : " +
+          ("Le double de x est 2x. Ensuite on augmente ce résultat de 5, donc on obtient 2x + 5.") +
+          "\n\nConclusion : l’expression obtenue répond à la question.",
     tags: ["calcul_litteral", "open", "traduire", "piege"],
   },
   {
@@ -822,7 +942,10 @@ export const calculLitteralBank: TutorBankItemV4[] = [
     expected: ["remplace", "4", "3", "14"],
     comparator: "contains_keyword",
     hint: "Commence par remplacer x par 4.",
-    explanation: "On remplace x par 4 : 3x + 2 = 3 × 4 + 2 = 12 + 2 = 14.",
+    explanation: "Définition : une expression littérale contient des nombres, des lettres et des opérations.\n\n" +
+          "Méthode : on remplace la lettre par la valeur donnée ou on simplifie l’écriture.\n\nCalcul : " +
+          ("On remplace x par 4 : 3x + 2 = 3 × 4 + 2 = 12 + 2 = 14.") +
+          "\n\nConclusion : l’expression obtenue répond à la question.",
     tags: ["calcul_litteral", "open", "substituer"],
   },
   {
@@ -839,7 +962,10 @@ export const calculLitteralBank: TutorBankItemV4[] = [
     expected: ["termes semblables", "coefficients", "3", "2", "5"],
     comparator: "contains_keyword",
     hint: "3x et 2x contiennent la même lettre.",
-    explanation: "3x et 2x sont des termes semblables. On additionne les coefficients : 3 + 2 = 5, donc 3x + 2x = 5x.",
+    explanation: "Définition : une expression littérale contient des nombres, des lettres et des opérations.\n\n" +
+          "Méthode : on remplace la lettre par la valeur donnée ou on simplifie l’écriture.\n\nCalcul : " +
+          ("3x et 2x sont des termes semblables. On additionne les coefficients : 3 + 2 = 5, donc 3x + 2x = 5x.") +
+          "\n\nConclusion : l’expression obtenue répond à la question.",
     tags: ["calcul_litteral", "open", "reduire"],
   },
   {
@@ -856,7 +982,10 @@ export const calculLitteralBank: TutorBankItemV4[] = [
     expected: ["pas", "termes semblables", "lettre", "constant"],
     comparator: "contains_keyword",
     hint: "3x contient une lettre, mais 2 n’en contient pas.",
-    explanation: "3x est un terme avec la lettre x, alors que 2 est un terme constant. Ce ne sont pas des termes semblables, donc on ne peut pas écrire 3x + 2 = 5x.",
+    explanation: "Définition : une expression littérale contient des nombres, des lettres et des opérations.\n\n" +
+          "Méthode : on remplace la lettre par la valeur donnée ou on simplifie l’écriture.\n\nCalcul : " +
+          ("3x est un terme avec la lettre x, alors que 2 est un terme constant. Ce ne sont pas des termes semblables, donc on ne peut pas écrire 3x + 2 = 5x.") +
+          "\n\nConclusion : l’expression obtenue répond à la question.",
     tags: ["calcul_litteral", "open", "reduire", "piege"],
   },
   {
@@ -873,7 +1002,10 @@ export const calculLitteralBank: TutorBankItemV4[] = [
     expected: ["coefficients", "additionne", "pas", "x²", "5x"],
     comparator: "contains_keyword",
     hint: "On additionne les coefficients, mais on ne multiplie pas les lettres.",
-    explanation: "L’élève confond addition et multiplication. Dans 2x + 3x, on additionne seulement les coefficients : 2 + 3 = 5. Donc 2x + 3x = 5x, pas 5x².",
+    explanation: "Définition : une expression littérale contient des nombres, des lettres et des opérations.\n\n" +
+          "Méthode : on remplace la lettre par la valeur donnée ou on simplifie l’écriture.\n\nCalcul : " +
+          ("L’élève confond addition et multiplication. Dans 2x + 3x, on additionne seulement les coefficients : 2 + 3 = 5. Donc 2x + 3x = 5x, pas 5x².") +
+          "\n\nConclusion : l’expression obtenue répond à la question.",
     tags: ["calcul_litteral", "open", "defi", "erreur"],
   },
 ];
