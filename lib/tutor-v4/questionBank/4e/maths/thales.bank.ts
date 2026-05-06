@@ -55,7 +55,10 @@ export const thalesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Thalès utilise une configuration avec des droites parallèles.",
     explanation:
-      "En 4e, la configuration classique de Thalès se fait dans un triangle avec une droite parallèle à un côté.",
+      "Définition : le théorème de Thalès relie des longueurs dans une configuration avec des droites parallèles.\n\n" +
+          "Méthode : on repère les triangles en situation de Thalès et on associe les côtés correspondants.\n\nCalcul : " +
+          ("En 4e, la configuration classique de Thalès se fait dans un triangle avec une droite parallèle à un côté.") +
+          "\n\nConclusion : la longueur ou la relation obtenue respecte la configuration de Thalès.",
     tags: ["thales", "configuration", "qcm"],
   },
 
@@ -75,7 +78,10 @@ export const thalesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Regarde si une droite est parallèle à un côté du triangle.",
     explanation:
-      "Oui. Dans le triangle ABC, M est sur [AB], N est sur [AC] et (MN) est parallèle à (BC).",
+      "Définition : le théorème de Thalès relie des longueurs dans une configuration avec des droites parallèles.\n\n" +
+          "Méthode : on repère les triangles en situation de Thalès et on associe les côtés correspondants.\n\nCalcul : " +
+          ("Oui. Dans le triangle ABC, M est sur [AB], N est sur [AC] et (MN) est parallèle à (BC).") +
+          "\n\nConclusion : la longueur ou la relation obtenue respecte la configuration de Thalès.",
     canvas: thalesCanvas({
       display: {
         showPoints: true,
@@ -110,9 +116,12 @@ export const thalesBank: TutorBankItemV4[] = [
         choices: ["oui", "non"],
         expected: [parallel ? "oui" : "non"],
         comparator: "mcq_exact",
-        explanation: parallel
+        explanation: "Définition : le théorème de Thalès relie des longueurs dans une configuration avec des droites parallèles.\n\n" +
+          "Méthode : on repère les triangles en situation de Thalès et on associe les côtés correspondants.\n\nCalcul : " +
+          (parallel
           ? "Oui, les conditions de la configuration de Thalès sont réunies."
-          : "Non, il manque l’information de parallélisme. On ne peut pas utiliser Thalès directement.",
+          : "Non, il manque l’information de parallélisme. On ne peut pas utiliser Thalès directement.") +
+          "\n\nConclusion : la longueur ou la relation obtenue respecte la configuration de Thalès.",
         canvas: thalesCanvas({
           display: {
             showPoints: true,
@@ -151,7 +160,10 @@ export const thalesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "On compare les longueurs sur les mêmes demi-droites issues de A.",
     explanation:
-      "Dans cette configuration, on a AM / AB = AN / AC = MN / BC.",
+      "Définition : le théorème de Thalès relie des longueurs dans une configuration avec des droites parallèles.\n\n" +
+          "Méthode : on repère les triangles en situation de Thalès et on associe les côtés correspondants.\n\nCalcul : " +
+          ("Dans cette configuration, on a AM / AB = AN / AC = MN / BC.") +
+          "\n\nConclusion : la longueur ou la relation obtenue respecte la configuration de Thalès.",
     canvas: thalesCanvas({
       display: {
         showPoints: true,
@@ -186,7 +198,10 @@ export const thalesBank: TutorBankItemV4[] = [
         expected: ["AN / AC"],
         comparator: "mcq_exact",
         explanation:
-          "Les longueurs AM et AB sont sur la même demi-droite. De même, AN et AC sont sur l’autre demi-droite. Donc AM / AB = AN / AC.",
+          "Définition : le théorème de Thalès relie des longueurs dans une configuration avec des droites parallèles.\n\n" +
+          "Méthode : on repère les triangles en situation de Thalès et on associe les côtés correspondants.\n\nCalcul : " +
+          ("Les longueurs AM et AB sont sur la même demi-droite. De même, AN et AC sont sur l’autre demi-droite. Donc AM / AB = AN / AC.") +
+          "\n\nConclusion : la longueur ou la relation obtenue respecte la configuration de Thalès.",
         canvas: thalesCanvas({
           display: {
             showPoints: true,
@@ -226,7 +241,10 @@ export const thalesBank: TutorBankItemV4[] = [
         ]),
         expected: [`${am}/${ab} = ${an}/${ac}`],
         comparator: "mcq_exact",
-        explanation: `On compare les longueurs correspondantes : AM / AB = AN / AC, donc ${am}/${ab} = ${an}/${ac}.`,
+        explanation: "Définition : le théorème de Thalès relie des longueurs dans une configuration avec des droites parallèles.\n\n" +
+          "Méthode : on repère les triangles en situation de Thalès et on associe les côtés correspondants.\n\nCalcul : " +
+          (`On compare les longueurs correspondantes : AM / AB = AN / AC, donc ${am}/${ab} = ${an}/${ac}.`) +
+          "\n\nConclusion : la longueur ou la relation obtenue respecte la configuration de Thalès.",
         canvas: thalesCanvas({
           sideLabels: {
             AM: `${am} cm`,
@@ -265,7 +283,10 @@ export const thalesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "3 / 6 = 4 / AC.",
     explanation:
-      "On a 3 / 6 = 4 / AC. Comme 3 / 6 = 1 / 2, alors AC = 8 cm.",
+      "Définition : le théorème de Thalès relie des longueurs dans une configuration avec des droites parallèles.\n\n" +
+          "Méthode : on repère les triangles en situation de Thalès et on associe les côtés correspondants.\n\nCalcul : " +
+          ("On a 3 / 6 = 4 / AC. Comme 3 / 6 = 1 / 2, alors AC = 8 cm.") +
+          "\n\nConclusion : la longueur ou la relation obtenue respecte la configuration de Thalès.",
     canvas: thalesCanvas({
       sideLabels: {
         AM: "3 cm",
@@ -306,7 +327,10 @@ export const thalesBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(ac)],
         comparator: "number_equal",
-        explanation: `AM / AB = AN / AC, donc ${am}/${ab} = ${an}/AC. Le coefficient est ${k}, donc AC = ${an} × ${k} = ${ac} cm.`,
+        explanation: "Définition : le théorème de Thalès relie des longueurs dans une configuration avec des droites parallèles.\n\n" +
+          "Méthode : on repère les triangles en situation de Thalès et on associe les côtés correspondants.\n\nCalcul : " +
+          (`AM / AB = AN / AC, donc ${am}/${ab} = ${an}/AC. Le coefficient est ${k}, donc AC = ${an} × ${k} = ${ac} cm.`) +
+          "\n\nConclusion : la longueur ou la relation obtenue respecte la configuration de Thalès.",
         canvas: thalesCanvas({
           sideLabels: {
             AM: `${am} cm`,
@@ -348,7 +372,10 @@ export const thalesBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(am)],
         comparator: "number_equal",
-        explanation: `On a AM / AB = AN / AC. Or ${an}/${ac} = 1/${k}. Donc AM / ${ab} = 1/${k}, alors AM = ${am} cm.`,
+        explanation: "Définition : le théorème de Thalès relie des longueurs dans une configuration avec des droites parallèles.\n\n" +
+          "Méthode : on repère les triangles en situation de Thalès et on associe les côtés correspondants.\n\nCalcul : " +
+          (`On a AM / AB = AN / AC. Or ${an}/${ac} = 1/${k}. Donc AM / ${ab} = 1/${k}, alors AM = ${am} cm.`) +
+          "\n\nConclusion : la longueur ou la relation obtenue respecte la configuration de Thalès.",
         canvas: thalesCanvas({
           sideLabels: {
             AM: "?",
@@ -391,7 +418,10 @@ export const thalesBank: TutorBankItemV4[] = [
           expected: ["15"],
           comparator: "number_equal",
           explanation:
-            "AM / AB = AN / AC, donc 4 / 12 = 5 / AC. Le coefficient est 3, donc AC = 15 cm.",
+            "Définition : le théorème de Thalès relie des longueurs dans une configuration avec des droites parallèles.\n\n" +
+          "Méthode : on repère les triangles en situation de Thalès et on associe les côtés correspondants.\n\nCalcul : " +
+          ("AM / AB = AN / AC, donc 4 / 12 = 5 / AC. Le coefficient est 3, donc AC = 15 cm.") +
+          "\n\nConclusion : la longueur ou la relation obtenue respecte la configuration de Thalès.",
           canvas: thalesCanvas({
             sideLabels: {
               AM: "4 cm",
@@ -414,7 +444,10 @@ export const thalesBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(ac)],
         comparator: "number_equal",
-        explanation: `AM / AB = AN / AC, donc ${am}/${ab} = ${an}/AC. Ainsi AC = ${ab} × ${an} ÷ ${am} = ${ac} cm.`,
+        explanation: "Définition : le théorème de Thalès relie des longueurs dans une configuration avec des droites parallèles.\n\n" +
+          "Méthode : on repère les triangles en situation de Thalès et on associe les côtés correspondants.\n\nCalcul : " +
+          (`AM / AB = AN / AC, donc ${am}/${ab} = ${an}/AC. Ainsi AC = ${ab} × ${an} ÷ ${am} = ${ac} cm.`) +
+          "\n\nConclusion : la longueur ou la relation obtenue respecte la configuration de Thalès.",
         canvas: thalesCanvas({
           sideLabels: {
             AM: `${am} cm`,
@@ -452,7 +485,10 @@ export const thalesBank: TutorBankItemV4[] = [
     expected: ["oui"],
     comparator: "mcq_exact",
     hint: "Compare 3/6 et 4/8.",
-    explanation: "3/6 = 1/2 et 4/8 = 1/2. Les rapports sont égaux.",
+    explanation: "Définition : le théorème de Thalès relie des longueurs dans une configuration avec des droites parallèles.\n\n" +
+          "Méthode : on repère les triangles en situation de Thalès et on associe les côtés correspondants.\n\nCalcul : " +
+          ("3/6 = 1/2 et 4/8 = 1/2. Les rapports sont égaux.") +
+          "\n\nConclusion : la longueur ou la relation obtenue respecte la configuration de Thalès.",
     canvas: thalesCanvas({
       sideLabels: {
         AM: "3 cm",
@@ -495,9 +531,12 @@ export const thalesBank: TutorBankItemV4[] = [
         choices: ["oui", "non"],
         expected: [equal ? "oui" : "non"],
         comparator: "mcq_exact",
-        explanation: equal
+        explanation: "Définition : le théorème de Thalès relie des longueurs dans une configuration avec des droites parallèles.\n\n" +
+          "Méthode : on repère les triangles en situation de Thalès et on associe les côtés correspondants.\n\nCalcul : " +
+          (equal
           ? `${am}/${ab} = ${an}/${ac}. Les rapports sont égaux.`
-          : `${am}/${ab} n’est pas égal à ${an}/${ac}. Les rapports ne sont pas égaux.`,
+          : `${am}/${ab} n’est pas égal à ${an}/${ac}. Les rapports ne sont pas égaux.`) +
+          "\n\nConclusion : la longueur ou la relation obtenue respecte la configuration de Thalès.",
         canvas: thalesCanvas({
           sideLabels: {
             AM: `${am} cm`,
@@ -541,7 +580,10 @@ export const thalesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "C’est la réciproque de Thalès.",
     explanation:
-      "D’après la réciproque du théorème de Thalès, si les rapports sont égaux, alors les droites sont parallèles.",
+      "Définition : le théorème de Thalès relie des longueurs dans une configuration avec des droites parallèles.\n\n" +
+          "Méthode : on repère les triangles en situation de Thalès et on associe les côtés correspondants.\n\nCalcul : " +
+          ("D’après la réciproque du théorème de Thalès, si les rapports sont égaux, alors les droites sont parallèles.") +
+          "\n\nConclusion : la longueur ou la relation obtenue respecte la configuration de Thalès.",
     tags: ["thales", "reciproque", "conclure"],
   },
 
@@ -570,9 +612,12 @@ export const thalesBank: TutorBankItemV4[] = [
         choices: ["oui", "non"],
         expected: [equal ? "oui" : "non"],
         comparator: "mcq_exact",
-        explanation: equal
+        explanation: "Définition : le théorème de Thalès relie des longueurs dans une configuration avec des droites parallèles.\n\n" +
+          "Méthode : on repère les triangles en situation de Thalès et on associe les côtés correspondants.\n\nCalcul : " +
+          (equal
           ? `Oui. ${am}/${ab} = ${an}/${ac}. D’après la réciproque de Thalès, (MN) est parallèle à (BC).`
-          : `Non. ${am}/${ab} n’est pas égal à ${an}/${ac}. On ne peut pas conclure que (MN) est parallèle à (BC).`,
+          : `Non. ${am}/${ab} n’est pas égal à ${an}/${ac}. On ne peut pas conclure que (MN) est parallèle à (BC).`) +
+          "\n\nConclusion : la longueur ou la relation obtenue respecte la configuration de Thalès.",
         canvas: thalesCanvas({
           sideLabels: {
             AM: `${am}`,
@@ -618,7 +663,10 @@ export const thalesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Il faut annoncer la configuration et le parallélisme.",
     explanation:
-      "Pour utiliser le théorème de Thalès, on commence par préciser la configuration et les droites parallèles.",
+      "Définition : le théorème de Thalès relie des longueurs dans une configuration avec des droites parallèles.\n\n" +
+          "Méthode : on repère les triangles en situation de Thalès et on associe les côtés correspondants.\n\nCalcul : " +
+          ("Pour utiliser le théorème de Thalès, on commence par préciser la configuration et les droites parallèles.") +
+          "\n\nConclusion : la longueur ou la relation obtenue respecte la configuration de Thalès.",
     tags: ["thales", "redaction", "qcm"],
   },
 
@@ -637,7 +685,10 @@ export const thalesBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "Dans un cas, on sait déjà que les droites sont parallèles. Dans l’autre, on veut le prouver.",
     explanation:
-      "Le théorème de Thalès sert à calculer une longueur quand on sait que les droites sont parallèles. La réciproque sert à démontrer que deux droites sont parallèles à partir de rapports égaux.",
+      "Définition : le théorème de Thalès relie des longueurs dans une configuration avec des droites parallèles.\n\n" +
+          "Méthode : on repère les triangles en situation de Thalès et on associe les côtés correspondants.\n\nCalcul : " +
+          ("Le théorème de Thalès sert à calculer une longueur quand on sait que les droites sont parallèles. La réciproque sert à démontrer que deux droites sont parallèles à partir de rapports égaux.") +
+          "\n\nConclusion : la longueur ou la relation obtenue respecte la configuration de Thalès.",
     tags: ["thales", "redaction", "open"],
   },
 
@@ -664,7 +715,10 @@ export const thalesBank: TutorBankItemV4[] = [
         format: "open",
         expected: ["triangle", "parallèle", "AM", "AB", "AN", "AC"],
         comparator: "contains_keyword",
-        explanation: `Dans le triangle ABC, M appartient à [AB], N appartient à [AC] et (MN) est parallèle à (BC). D’après le théorème de Thalès, AM/AB = AN/AC.`,
+        explanation: "Définition : le théorème de Thalès relie des longueurs dans une configuration avec des droites parallèles.\n\n" +
+          "Méthode : on repère les triangles en situation de Thalès et on associe les côtés correspondants.\n\nCalcul : " +
+          (`Dans le triangle ABC, M appartient à [AB], N appartient à [AC] et (MN) est parallèle à (BC). D’après le théorème de Thalès, AM/AB = AN/AC.`) +
+          "\n\nConclusion : la longueur ou la relation obtenue respecte la configuration de Thalès.",
         canvas: thalesCanvas({
           sideLabels: {
             AM: `${am}`,
@@ -703,7 +757,10 @@ export const thalesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Il faut une condition de parallélisme.",
     explanation:
-      "Non. Pour utiliser le théorème de Thalès, il faut une configuration avec des droites parallèles.",
+      "Définition : le théorème de Thalès relie des longueurs dans une configuration avec des droites parallèles.\n\n" +
+          "Méthode : on repère les triangles en situation de Thalès et on associe les côtés correspondants.\n\nCalcul : " +
+          ("Non. Pour utiliser le théorème de Thalès, il faut une configuration avec des droites parallèles.") +
+          "\n\nConclusion : la longueur ou la relation obtenue respecte la configuration de Thalès.",
     tags: ["thales", "defi", "erreur"],
   },
 
@@ -730,7 +787,10 @@ export const thalesBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(grand)],
         comparator: "number_equal",
-        explanation: `Les rayons du soleil donnent une configuration de Thalès. Le coefficient est ${ombreArbre} ÷ ${ombreObjet} = ${k}. La hauteur de l’arbre vaut ${petit} × ${k} = ${grand} m.`,
+        explanation: "Définition : le théorème de Thalès relie des longueurs dans une configuration avec des droites parallèles.\n\n" +
+          "Méthode : on repère les triangles en situation de Thalès et on associe les côtés correspondants.\n\nCalcul : " +
+          (`Les rayons du soleil donnent une configuration de Thalès. Le coefficient est ${ombreArbre} ÷ ${ombreObjet} = ${k}. La hauteur de l’arbre vaut ${petit} × ${k} = ${grand} m.`) +
+          "\n\nConclusion : la longueur ou la relation obtenue respecte la configuration de Thalès.",
       };
     },
   },
@@ -760,9 +820,12 @@ export const thalesBank: TutorBankItemV4[] = [
         choices: ["oui", "non"],
         expected: [equal ? "oui" : "non"],
         comparator: "mcq_exact",
-        explanation: equal
+        explanation: "Définition : le théorème de Thalès relie des longueurs dans une configuration avec des droites parallèles.\n\n" +
+          "Méthode : on repère les triangles en situation de Thalès et on associe les côtés correspondants.\n\nCalcul : " +
+          (equal
           ? `Oui, car ${am}/${ab} = ${an}/${ac}. Les rapports sont égaux.`
-          : `Non, car ${am}/${ab} n’est pas égal à ${an}/${ac}.`,
+          : `Non, car ${am}/${ab} n’est pas égal à ${an}/${ac}.`) +
+          "\n\nConclusion : la longueur ou la relation obtenue respecte la configuration de Thalès.",
         canvas: thalesCanvas({
           sideLabels: {
             AM: `${am}`,

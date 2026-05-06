@@ -67,7 +67,10 @@ export const identitesRemarquablesBank: TutorBankItemV4[] = [
     expected: ["car le carré signifie multiplier par soi-même"],
     comparator: "mcq_exact",
     hint: "Un carré signifie qu’une expression est multipliée par elle-même.",
-    explanation: "(x + 3)² signifie (x + 3) multiplié par lui-même, donc (x + 3)(x + 3).",
+    explanation: "Définition : une identité remarquable est une formule qui permet de développer ou factoriser rapidement certaines expressions.\n\n" +
+          "Méthode : on reconnaît la forme (a + b)², (a - b)² ou (a + b)(a - b).\n\nCalcul : " +
+          ("(x + 3)² signifie (x + 3) multiplié par lui-même, donc (x + 3)(x + 3).") +
+          "\n\nConclusion : la formule donne directement l’expression correcte.",
     tags: ["identites_remarquables", "double_distributivite", "sens"],
   },
   {
@@ -90,7 +93,10 @@ export const identitesRemarquablesBank: TutorBankItemV4[] = [
     expected: ["x² + 4x + 4"],
     comparator: "mcq_exact",
     hint: "Fais les 4 produits : x×x, x×2, 2×x, 2×2.",
-    explanation: "(x + 2)(x + 2) = x² + 2x + 2x + 4 = x² + 4x + 4.",
+    explanation: "Définition : une identité remarquable est une formule qui permet de développer ou factoriser rapidement certaines expressions.\n\n" +
+          "Méthode : on reconnaît la forme (a + b)², (a - b)² ou (a + b)(a - b).\n\nCalcul : " +
+          ("(x + 2)(x + 2) = x² + 2x + 2x + 4 = x² + 4x + 4.") +
+          "\n\nConclusion : la formule donne directement l’expression correcte.",
     tags: ["identites_remarquables", "double_distributivite"],
   },
   {
@@ -118,7 +124,10 @@ export const identitesRemarquablesBank: TutorBankItemV4[] = [
         ]),
         expected: [`(x + ${a})(x + ${a})`],
         comparator: "mcq_exact",
-        explanation: `(x + ${a})² signifie (x + ${a}) multiplié par lui-même : (x + ${a})(x + ${a}).`,
+        explanation: "Définition : une identité remarquable est une formule qui permet de développer ou factoriser rapidement certaines expressions.\n\n" +
+          "Méthode : on reconnaît la forme (a + b)², (a - b)² ou (a + b)(a - b).\n\nCalcul : " +
+          (`(x + ${a})² signifie (x + ${a}) multiplié par lui-même : (x + ${a})(x + ${a}).`) +
+          "\n\nConclusion : la formule donne directement l’expression correcte.",
       };
     },
   },
@@ -148,7 +157,10 @@ export const identitesRemarquablesBank: TutorBankItemV4[] = [
           `x^2 + ${mid}x + ${last}`,
         ],
         comparator: "contains_keyword",
-        explanation: `(x + ${a})(x + ${a}) = x² + ${a}x + ${a}x + ${last} = x² + ${mid}x + ${last}.`,
+        explanation: "Définition : une identité remarquable est une formule qui permet de développer ou factoriser rapidement certaines expressions.\n\n" +
+          "Méthode : on reconnaît la forme (a + b)², (a - b)² ou (a + b)(a - b).\n\nCalcul : " +
+          (`(x + ${a})(x + ${a}) = x² + ${a}x + ${a}x + ${last} = x² + ${mid}x + ${last}.`) +
+          "\n\nConclusion : la formule donne directement l’expression correcte.",
       };
     },
   },
@@ -166,7 +178,10 @@ export const identitesRemarquablesBank: TutorBankItemV4[] = [
     expected: ["(x + 4)(x + 4)", "x²", "4x", "8x", "16"],
     comparator: "contains_keyword",
     hint: "Commence par écrire (x + 4)² sous forme de produit.",
-    explanation: "(x + 4)² = (x + 4)(x + 4) = x² + 4x + 4x + 16 = x² + 8x + 16.",
+    explanation: "Définition : une identité remarquable est une formule qui permet de développer ou factoriser rapidement certaines expressions.\n\n" +
+          "Méthode : on reconnaît la forme (a + b)², (a - b)² ou (a + b)(a - b).\n\nCalcul : " +
+          ("(x + 4)² = (x + 4)(x + 4) = x² + 4x + 4x + 16 = x² + 8x + 16.") +
+          "\n\nConclusion : la formule donne directement l’expression correcte.",
     tags: ["identites_remarquables", "open", "justification"],
   },
 
@@ -188,7 +203,10 @@ export const identitesRemarquablesBank: TutorBankItemV4[] = [
     expected: ["(x + 5)²"],
     comparator: "mcq_exact",
     hint: "On cherche une somme entre parenthèses élevée au carré.",
-    explanation: "(x + 5)² est bien de la forme (a + b)².",
+    explanation: "Définition : une identité remarquable est une formule qui permet de développer ou factoriser rapidement certaines expressions.\n\n" +
+          "Méthode : on reconnaît la forme (a + b)², (a - b)² ou (a + b)(a - b).\n\nCalcul : " +
+          ("(x + 5)² est bien de la forme (a + b)².") +
+          "\n\nConclusion : la formule donne directement l’expression correcte.",
     tags: ["identites_remarquables", "reconnaitre"],
   },
   {
@@ -206,7 +224,10 @@ export const identitesRemarquablesBank: TutorBankItemV4[] = [
     expected: ["(x - 3)(x + 3)"],
     comparator: "mcq_exact",
     hint: "La différence de deux carrés vient de (a - b)(a + b).",
-    explanation: "(x - 3)(x + 3) correspond à la forme (a - b)(a + b), qui donne a² - b².",
+    explanation: "Définition : une identité remarquable est une formule qui permet de développer ou factoriser rapidement certaines expressions.\n\n" +
+          "Méthode : on reconnaît la forme (a + b)², (a - b)² ou (a + b)(a - b).\n\nCalcul : " +
+          ("(x - 3)(x + 3) correspond à la forme (a - b)(a + b), qui donne a² - b².") +
+          "\n\nConclusion : la formule donne directement l’expression correcte.",
     tags: ["identites_remarquables", "difference_carres"],
   },
   {
@@ -250,11 +271,14 @@ export const identitesRemarquablesBank: TutorBankItemV4[] = [
         expected: [correct],
         comparator: "mcq_exact",
         explanation:
-          mode === "somme"
+          "Définition : une identité remarquable est une formule qui permet de développer ou factoriser rapidement certaines expressions.\n\n" +
+          "Méthode : on reconnaît la forme (a + b)², (a - b)² ou (a + b)(a - b).\n\nCalcul : " +
+          (mode === "somme"
             ? `${expression} est de la forme (a + b)².`
             : mode === "difference"
               ? `${expression} est de la forme (a - b)².`
-              : `${expression} est de la forme (a - b)(a + b).`,
+              : `${expression} est de la forme (a - b)(a + b).`) +
+          "\n\nConclusion : la formule donne directement l’expression correcte.",
       };
     },
   },
@@ -282,7 +306,10 @@ export const identitesRemarquablesBank: TutorBankItemV4[] = [
     expected: ["x² + 6x + 9"],
     comparator: "mcq_exact",
     hint: "Pense à (x + 3)(x + 3).",
-    explanation: "(x + 3)² = (x + 3)(x + 3) = x² + 6x + 9.",
+    explanation: "Définition : une identité remarquable est une formule qui permet de développer ou factoriser rapidement certaines expressions.\n\n" +
+          "Méthode : on reconnaît la forme (a + b)², (a - b)² ou (a + b)(a - b).\n\nCalcul : " +
+          ("(x + 3)² = (x + 3)(x + 3) = x² + 6x + 9.") +
+          "\n\nConclusion : la formule donne directement l’expression correcte.",
     tags: ["identites_remarquables", "developper"],
   },
   {
@@ -305,7 +332,10 @@ export const identitesRemarquablesBank: TutorBankItemV4[] = [
     expected: ["x² - 8x + 16"],
     comparator: "mcq_exact",
     hint: "Pense à (x - 4)(x - 4).",
-    explanation: "(x - 4)² = (x - 4)(x - 4) = x² - 4x - 4x + 16 = x² - 8x + 16.",
+    explanation: "Définition : une identité remarquable est une formule qui permet de développer ou factoriser rapidement certaines expressions.\n\n" +
+          "Méthode : on reconnaît la forme (a + b)², (a - b)² ou (a + b)(a - b).\n\nCalcul : " +
+          ("(x - 4)² = (x - 4)(x - 4) = x² - 4x - 4x + 16 = x² - 8x + 16.") +
+          "\n\nConclusion : la formule donne directement l’expression correcte.",
     tags: ["identites_remarquables", "developper", "signe"],
   },
   {
@@ -328,7 +358,10 @@ export const identitesRemarquablesBank: TutorBankItemV4[] = [
     expected: ["x² - 25"],
     comparator: "mcq_exact",
     hint: "C’est une différence de deux carrés.",
-    explanation: "(x - 5)(x + 5) = x² - 25.",
+    explanation: "Définition : une identité remarquable est une formule qui permet de développer ou factoriser rapidement certaines expressions.\n\n" +
+          "Méthode : on reconnaît la forme (a + b)², (a - b)² ou (a + b)(a - b).\n\nCalcul : " +
+          ("(x - 5)(x + 5) = x² - 25.") +
+          "\n\nConclusion : la formule donne directement l’expression correcte.",
     tags: ["identites_remarquables", "difference_carres"],
   },
   {
@@ -357,7 +390,10 @@ export const identitesRemarquablesBank: TutorBankItemV4[] = [
           `x^2 + ${mid}x + ${last}`,
         ],
         comparator: "contains_keyword",
-        explanation: `(x + ${a})² = (x + ${a})(x + ${a}) = x² + ${a}x + ${a}x + ${last} = x² + ${mid}x + ${last}.`,
+        explanation: "Définition : une identité remarquable est une formule qui permet de développer ou factoriser rapidement certaines expressions.\n\n" +
+          "Méthode : on reconnaît la forme (a + b)², (a - b)² ou (a + b)(a - b).\n\nCalcul : " +
+          (`(x + ${a})² = (x + ${a})(x + ${a}) = x² + ${a}x + ${a}x + ${last} = x² + ${mid}x + ${last}.`) +
+          "\n\nConclusion : la formule donne directement l’expression correcte.",
       };
     },
   },
@@ -387,7 +423,10 @@ export const identitesRemarquablesBank: TutorBankItemV4[] = [
           `x^2 - ${mid}x + ${last}`,
         ],
         comparator: "contains_keyword",
-        explanation: `(x - ${a})² = (x - ${a})(x - ${a}) = x² - ${a}x - ${a}x + ${last} = x² - ${mid}x + ${last}.`,
+        explanation: "Définition : une identité remarquable est une formule qui permet de développer ou factoriser rapidement certaines expressions.\n\n" +
+          "Méthode : on reconnaît la forme (a + b)², (a - b)² ou (a + b)(a - b).\n\nCalcul : " +
+          (`(x - ${a})² = (x - ${a})(x - ${a}) = x² - ${a}x - ${a}x + ${last} = x² - ${mid}x + ${last}.`) +
+          "\n\nConclusion : la formule donne directement l’expression correcte.",
       };
     },
   },
@@ -416,7 +455,10 @@ export const identitesRemarquablesBank: TutorBankItemV4[] = [
           `x^2 - ${last}`,
         ],
         comparator: "contains_keyword",
-        explanation: `(x - ${a})(x + ${a}) = x² + ${a}x - ${a}x - ${last} = x² - ${last}.`,
+        explanation: "Définition : une identité remarquable est une formule qui permet de développer ou factoriser rapidement certaines expressions.\n\n" +
+          "Méthode : on reconnaît la forme (a + b)², (a - b)² ou (a + b)(a - b).\n\nCalcul : " +
+          (`(x - ${a})(x + ${a}) = x² + ${a}x - ${a}x - ${last} = x² - ${last}.`) +
+          "\n\nConclusion : la formule donne directement l’expression correcte.",
       };
     },
   },
@@ -444,7 +486,10 @@ export const identitesRemarquablesBank: TutorBankItemV4[] = [
     expected: ["écrire (x + 7)(x + 7), puis appliquer la double distributivité"],
     comparator: "mcq_exact",
     hint: "Un carré d’expression signifie produit par soi-même.",
-    explanation: "La méthode correcte est de passer par (x + 7)(x + 7), puis de développer.",
+    explanation: "Définition : une identité remarquable est une formule qui permet de développer ou factoriser rapidement certaines expressions.\n\n" +
+          "Méthode : on reconnaît la forme (a + b)², (a - b)² ou (a + b)(a - b).\n\nCalcul : " +
+          ("La méthode correcte est de passer par (x + 7)(x + 7), puis de développer.") +
+          "\n\nConclusion : la formule donne directement l’expression correcte.",
     tags: ["identites_remarquables", "choisir"],
   },
   {
@@ -492,9 +537,12 @@ export const identitesRemarquablesBank: TutorBankItemV4[] = [
         expected: [correct],
         comparator: "mcq_exact",
         explanation:
-          mode === "classique"
+          "Définition : une identité remarquable est une formule qui permet de développer ou factoriser rapidement certaines expressions.\n\n" +
+          "Méthode : on reconnaît la forme (a + b)², (a - b)² ou (a + b)(a - b).\n\nCalcul : " +
+          (mode === "classique"
             ? `${expression} n’a pas deux parenthèses identiques ni une forme (a - b)(a + b), donc on utilise la double distributivité classique.`
-            : `${expression} correspond à : ${correct}.`,
+            : `${expression} correspond à : ${correct}.`) +
+          "\n\nConclusion : la formule donne directement l’expression correcte.",
       };
     },
   },
@@ -517,7 +565,10 @@ export const identitesRemarquablesBank: TutorBankItemV4[] = [
     expected: ["non"],
     comparator: "mcq_exact",
     hint: "Il manque le double produit.",
-    explanation: "Non. (x + 5)² = (x + 5)(x + 5) = x² + 10x + 25. Il manque 10x.",
+    explanation: "Définition : une identité remarquable est une formule qui permet de développer ou factoriser rapidement certaines expressions.\n\n" +
+          "Méthode : on reconnaît la forme (a + b)², (a - b)² ou (a + b)(a - b).\n\nCalcul : " +
+          ("Non. (x + 5)² = (x + 5)(x + 5) = x² + 10x + 25. Il manque 10x.") +
+          "\n\nConclusion : la formule donne directement l’expression correcte.",
     tags: ["identites_remarquables", "erreur", "defi"],
   },
   {
@@ -535,7 +586,10 @@ export const identitesRemarquablesBank: TutorBankItemV4[] = [
     expected: ["non"],
     comparator: "mcq_exact",
     hint: "Il confond carré d’une différence et différence de deux carrés.",
-    explanation: "Non. (x - 4)² = x² - 8x + 16. En revanche, (x - 4)(x + 4) = x² - 16.",
+    explanation: "Définition : une identité remarquable est une formule qui permet de développer ou factoriser rapidement certaines expressions.\n\n" +
+          "Méthode : on reconnaît la forme (a + b)², (a - b)² ou (a + b)(a - b).\n\nCalcul : " +
+          ("Non. (x - 4)² = x² - 8x + 16. En revanche, (x - 4)(x + 4) = x² - 16.") +
+          "\n\nConclusion : la formule donne directement l’expression correcte.",
     tags: ["identites_remarquables", "erreur", "defi"],
   },
   {
@@ -559,7 +613,10 @@ export const identitesRemarquablesBank: TutorBankItemV4[] = [
         format: "open",
         expected: ["double produit", `${mid}x`, "manque"],
         comparator: "contains_keyword",
-        explanation: `L’erreur est l’oubli du double produit. (x + ${a})² = (x + ${a})(x + ${a}) = x² + ${mid}x + ${last}. Il manque ${mid}x.`,
+        explanation: "Définition : une identité remarquable est une formule qui permet de développer ou factoriser rapidement certaines expressions.\n\n" +
+          "Méthode : on reconnaît la forme (a + b)², (a - b)² ou (a + b)(a - b).\n\nCalcul : " +
+          (`L’erreur est l’oubli du double produit. (x + ${a})² = (x + ${a})(x + ${a}) = x² + ${mid}x + ${last}. Il manque ${mid}x.`) +
+          "\n\nConclusion : la formule donne directement l’expression correcte.",
       };
     },
   },
@@ -592,7 +649,10 @@ export const identitesRemarquablesBank: TutorBankItemV4[] = [
           `(x - ${a})² = x² - ${mid}x + ${square}, tandis que (x - ${a})(x + ${a}) = x² - ${square}`,
         ],
         comparator: "mcq_exact",
-        explanation: `(x - ${a})² est un carré d’une différence : x² - ${mid}x + ${square}. Mais (x - ${a})(x + ${a}) est une différence de deux carrés : x² - ${square}.`,
+        explanation: "Définition : une identité remarquable est une formule qui permet de développer ou factoriser rapidement certaines expressions.\n\n" +
+          "Méthode : on reconnaît la forme (a + b)², (a - b)² ou (a + b)(a - b).\n\nCalcul : " +
+          (`(x - ${a})² est un carré d’une différence : x² - ${mid}x + ${square}. Mais (x - ${a})(x + ${a}) est une différence de deux carrés : x² - ${square}.`) +
+          "\n\nConclusion : la formule donne directement l’expression correcte.",
       };
     },
   },

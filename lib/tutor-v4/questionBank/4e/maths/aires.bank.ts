@@ -266,7 +266,10 @@ export const airesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "On parle de l’intérieur de la figure.",
     explanation:
-      "L’aire mesure la surface occupée par une figure, et non son contour.",
+      "Définition : une aire mesure la surface occupée par une figure, avec une unité carrée comme cm² ou m².\n\n" +
+          "Méthode : on choisit la formule adaptée à la figure ou on compte les carreaux quand la figure est quadrillée.\n\nCalcul : " +
+          ("L’aire mesure la surface occupée par une figure, et non son contour.") +
+          "\n\nConclusion : on obtient l’aire demandée avec une unité carrée.",
     tags: ["aire", "definition"],
   },
   {
@@ -285,7 +288,10 @@ export const airesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Une aire s’exprime en unité carrée.",
     explanation:
-      "Une aire s’exprime avec une unité carrée, par exemple en cm².",
+      "Définition : une aire mesure la surface occupée par une figure, avec une unité carrée comme cm² ou m².\n\n" +
+          "Méthode : on choisit la formule adaptée à la figure ou on compte les carreaux quand la figure est quadrillée.\n\nCalcul : " +
+          ("Une aire s’exprime avec une unité carrée, par exemple en cm².") +
+          "\n\nConclusion : on obtient l’aire demandée avec une unité carrée.",
     tags: ["aire", "unites"],
   },
     {
@@ -303,7 +309,10 @@ export const airesBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "L’un mesure l’intérieur, l’autre le tour.",
     explanation:
-      "L’aire mesure la surface occupée par une figure. Le périmètre mesure la longueur de son contour.",
+      "Définition : une aire mesure la surface occupée par une figure, avec une unité carrée comme cm² ou m².\n\n" +
+          "Méthode : on choisit la formule adaptée à la figure ou on compte les carreaux quand la figure est quadrillée.\n\nCalcul : " +
+          ("L’aire mesure la surface occupée par une figure. Le périmètre mesure la longueur de son contour.") +
+          "\n\nConclusion : on obtient l’aire demandée avec une unité carrée.",
     tags: ["aire", "perimetre", "open"],
   },
 
@@ -324,7 +333,10 @@ export const airesBank: TutorBankItemV4[] = [
     expected: ["24"],
     comparator: "number_equal",
     hint: "Aire du rectangle = longueur × largeur.",
-    explanation: "A = 8 × 3 = 24.",
+    explanation: "Définition : une aire mesure la surface occupée par une figure, avec une unité carrée comme cm² ou m².\n\n" +
+          "Méthode : on choisit la formule adaptée à la figure ou on compte les carreaux quand la figure est quadrillée.\n\nCalcul : " +
+          ("A = 8 × 3 = 24.") +
+          "\n\nConclusion : on obtient l’aire demandée avec une unité carrée.",
     tags: ["aire", "rectangle"],
   },
   {
@@ -348,7 +360,10 @@ export const airesBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(area)],
         comparator: "number_equal",
-        explanation: `A = ${L} × ${l} = ${area}.`,
+        explanation: "Définition : une aire mesure la surface occupée par une figure, avec une unité carrée comme cm² ou m².\n\n" +
+          "Méthode : on choisit la formule adaptée à la figure ou on compte les carreaux quand la figure est quadrillée.\n\nCalcul : " +
+          (`A = ${L} × ${l} = ${area}.`) +
+          "\n\nConclusion : on obtient l’aire demandée avec une unité carrée.",
       };
     },
   },
@@ -373,7 +388,10 @@ export const airesBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(area)],
         comparator: "number_equal",
-        explanation: `La surface d’un rectangle vaut longueur × largeur, donc ${L} × ${l} = ${area}.`,
+        explanation: "Définition : une aire mesure la surface occupée par une figure, avec une unité carrée comme cm² ou m².\n\n" +
+          "Méthode : on choisit la formule adaptée à la figure ou on compte les carreaux quand la figure est quadrillée.\n\nCalcul : " +
+          (`La surface d’un rectangle vaut longueur × largeur, donc ${L} × ${l} = ${area}.`) +
+          "\n\nConclusion : on obtient l’aire demandée avec une unité carrée.",
       };
     },
   },
@@ -398,7 +416,10 @@ export const airesBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(area)],
         comparator: "number_equal",
-        explanation: `L’aire du rectangle vaut ${L} × ${l} = ${area}.`,
+        explanation: "Définition : une aire mesure la surface occupée par une figure, avec une unité carrée comme cm² ou m².\n\n" +
+          "Méthode : on choisit la formule adaptée à la figure ou on compte les carreaux quand la figure est quadrillée.\n\nCalcul : " +
+          (`L’aire du rectangle vaut ${L} × ${l} = ${area}.`) +
+          "\n\nConclusion : on obtient l’aire demandée avec une unité carrée.",
         canvas: quadrilatereRectangleFigure(L, l),
       };
     },
@@ -418,7 +439,10 @@ export const airesBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "On multiplie la longueur par la largeur.",
     explanation:
-      "L’aire d’un rectangle se calcule en multipliant longueur × largeur : 8 × 3 = 24 cm².",
+      "Définition : une aire mesure la surface occupée par une figure, avec une unité carrée comme cm² ou m².\n\n" +
+          "Méthode : on choisit la formule adaptée à la figure ou on compte les carreaux quand la figure est quadrillée.\n\nCalcul : " +
+          ("L’aire d’un rectangle se calcule en multipliant longueur × largeur : 8 × 3 = 24 cm².") +
+          "\n\nConclusion : on obtient l’aire demandée avec une unité carrée.",
     tags: ["aire", "rectangle", "open"],
   },
 
@@ -439,7 +463,10 @@ export const airesBank: TutorBankItemV4[] = [
     expected: ["36"],
     comparator: "number_equal",
     hint: "Aire du carré = côté × côté.",
-    explanation: "A = 6 × 6 = 36.",
+    explanation: "Définition : une aire mesure la surface occupée par une figure, avec une unité carrée comme cm² ou m².\n\n" +
+          "Méthode : on choisit la formule adaptée à la figure ou on compte les carreaux quand la figure est quadrillée.\n\nCalcul : " +
+          ("A = 6 × 6 = 36.") +
+          "\n\nConclusion : on obtient l’aire demandée avec une unité carrée.",
     tags: ["aire", "carre"],
   },
   {
@@ -462,7 +489,10 @@ export const airesBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(area)],
         comparator: "number_equal",
-        explanation: `L’aire du carré vaut ${c} × ${c} = ${area}.`,
+        explanation: "Définition : une aire mesure la surface occupée par une figure, avec une unité carrée comme cm² ou m².\n\n" +
+          "Méthode : on choisit la formule adaptée à la figure ou on compte les carreaux quand la figure est quadrillée.\n\nCalcul : " +
+          (`L’aire du carré vaut ${c} × ${c} = ${area}.`) +
+          "\n\nConclusion : on obtient l’aire demandée avec une unité carrée.",
       };
     },
   },
@@ -484,7 +514,10 @@ export const airesBank: TutorBankItemV4[] = [
     expected: ["20"],
     comparator: "number_equal",
     hint: "Aire du triangle = (base × hauteur) ÷ 2.",
-    explanation: "A = (10 × 4) ÷ 2 = 20.",
+    explanation: "Définition : une aire mesure la surface occupée par une figure, avec une unité carrée comme cm² ou m².\n\n" +
+          "Méthode : on choisit la formule adaptée à la figure ou on compte les carreaux quand la figure est quadrillée.\n\nCalcul : " +
+          ("A = (10 × 4) ÷ 2 = 20.") +
+          "\n\nConclusion : on obtient l’aire demandée avec une unité carrée.",
     tags: ["aire", "triangle"],
   },
   {
@@ -510,7 +543,10 @@ export const airesBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(area)],
         comparator: "number_equal",
-        explanation: `A = (${base} × ${height}) ÷ 2 = ${area}.`,
+        explanation: "Définition : une aire mesure la surface occupée par une figure, avec une unité carrée comme cm² ou m².\n\n" +
+          "Méthode : on choisit la formule adaptée à la figure ou on compte les carreaux quand la figure est quadrillée.\n\nCalcul : " +
+          (`A = (${base} × ${height}) ÷ 2 = ${area}.`) +
+          "\n\nConclusion : on obtient l’aire demandée avec une unité carrée.",
         canvas: triangleFigure(base, other1, other2),
       };
     },
@@ -537,7 +573,10 @@ export const airesBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(area)],
         comparator: "number_equal",
-        explanation: `Comme le triangle est rectangle, on prend les deux côtés perpendiculaires : A = (${base} × ${height}) ÷ 2 = ${area}.`,
+        explanation: "Définition : une aire mesure la surface occupée par une figure, avec une unité carrée comme cm² ou m².\n\n" +
+          "Méthode : on choisit la formule adaptée à la figure ou on compte les carreaux quand la figure est quadrillée.\n\nCalcul : " +
+          (`Comme le triangle est rectangle, on prend les deux côtés perpendiculaires : A = (${base} × ${height}) ÷ 2 = ${area}.`) +
+          "\n\nConclusion : on obtient l’aire demandée avec une unité carrée.",
         canvas: triangleRectangleFigure(base, height, hypotenuse),
       };
     },
@@ -557,7 +596,10 @@ export const airesBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "Un triangle peut être vu comme la moitié d’un rectangle.",
     explanation:
-      "Un triangle de base et de hauteur données correspond à la moitié d’un rectangle de même base et même hauteur. C’est pourquoi on divise par 2.",
+      "Définition : une aire mesure la surface occupée par une figure, avec une unité carrée comme cm² ou m².\n\n" +
+          "Méthode : on choisit la formule adaptée à la figure ou on compte les carreaux quand la figure est quadrillée.\n\nCalcul : " +
+          ("Un triangle de base et de hauteur données correspond à la moitié d’un rectangle de même base et même hauteur. C’est pourquoi on divise par 2.") +
+          "\n\nConclusion : on obtient l’aire demandée avec une unité carrée.",
     tags: ["aire", "triangle", "open"],
   },
 
@@ -578,7 +620,10 @@ export const airesBank: TutorBankItemV4[] = [
     expected: ["40"],
     comparator: "number_equal",
     hint: "Aire du parallélogramme = base × hauteur.",
-    explanation: "A = 8 × 5 = 40.",
+    explanation: "Définition : une aire mesure la surface occupée par une figure, avec une unité carrée comme cm² ou m².\n\n" +
+          "Méthode : on choisit la formule adaptée à la figure ou on compte les carreaux quand la figure est quadrillée.\n\nCalcul : " +
+          ("A = 8 × 5 = 40.") +
+          "\n\nConclusion : on obtient l’aire demandée avec une unité carrée.",
     tags: ["aire", "parallelogramme"],
   },
   {
@@ -603,7 +648,10 @@ export const airesBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(area)],
         comparator: "number_equal",
-        explanation: `L’aire d’un parallélogramme vaut base × hauteur, donc ${base} × ${height} = ${area}.`,
+        explanation: "Définition : une aire mesure la surface occupée par une figure, avec une unité carrée comme cm² ou m².\n\n" +
+          "Méthode : on choisit la formule adaptée à la figure ou on compte les carreaux quand la figure est quadrillée.\n\nCalcul : " +
+          (`L’aire d’un parallélogramme vaut base × hauteur, donc ${base} × ${height} = ${area}.`) +
+          "\n\nConclusion : on obtient l’aire demandée avec une unité carrée.",
         canvas: quadrilatereParallelogramFigure(base, side, height),
       };
     },
@@ -623,7 +671,10 @@ export const airesBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "La hauteur est perpendiculaire à la base.",
     explanation:
-      "L’aire d’un parallélogramme se calcule avec base × hauteur. Le côté incliné n’est pas la hauteur car il n’est pas perpendiculaire à la base.",
+      "Définition : une aire mesure la surface occupée par une figure, avec une unité carrée comme cm² ou m².\n\n" +
+          "Méthode : on choisit la formule adaptée à la figure ou on compte les carreaux quand la figure est quadrillée.\n\nCalcul : " +
+          ("L’aire d’un parallélogramme se calcule avec base × hauteur. Le côté incliné n’est pas la hauteur car il n’est pas perpendiculaire à la base.") +
+          "\n\nConclusion : on obtient l’aire demandée avec une unité carrée.",
     tags: ["aire", "parallelogramme", "open", "erreur"],
   },
 
@@ -652,7 +703,10 @@ export const airesBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(area)],
         comparator: "number_equal",
-        explanation: `On compte ${area} petits carrés, donc l’aire vaut ${area}.`,
+        explanation: "Définition : une aire mesure la surface occupée par une figure, avec une unité carrée comme cm² ou m².\n\n" +
+          "Méthode : on choisit la formule adaptée à la figure ou on compte les carreaux quand la figure est quadrillée.\n\nCalcul : " +
+          (`On compte ${area} petits carrés, donc l’aire vaut ${area}.`) +
+          "\n\nConclusion : on obtient l’aire demandée avec une unité carrée.",
         canvas: figureLibreFromCells(h, w, cells, false),
       };
     },
@@ -681,7 +735,10 @@ export const airesBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(area)],
         comparator: "number_equal",
-        explanation: `La figure contient ${area} carrés unité, donc son aire vaut ${area}.`,
+        explanation: "Définition : une aire mesure la surface occupée par une figure, avec une unité carrée comme cm² ou m².\n\n" +
+          "Méthode : on choisit la formule adaptée à la figure ou on compte les carreaux quand la figure est quadrillée.\n\nCalcul : " +
+          (`La figure contient ${area} carrés unité, donc son aire vaut ${area}.`) +
+          "\n\nConclusion : on obtient l’aire demandée avec une unité carrée.",
         canvas: figureLibreFromCells(a, b, cells, false),
       };
     },
@@ -701,7 +758,10 @@ export const airesBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "Chaque petit carré représente une unité d’aire.",
     explanation:
-      "Pour une figure sur quadrillage, on compte les carrés unités qui composent la figure.",
+      "Définition : une aire mesure la surface occupée par une figure, avec une unité carrée comme cm² ou m².\n\n" +
+          "Méthode : on choisit la formule adaptée à la figure ou on compte les carreaux quand la figure est quadrillée.\n\nCalcul : " +
+          ("Pour une figure sur quadrillage, on compte les carrés unités qui composent la figure.") +
+          "\n\nConclusion : on obtient l’aire demandée avec une unité carrée.",
     tags: ["aire", "quadrillage", "open"],
   },
 
@@ -729,7 +789,10 @@ export const airesBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(area)],
         comparator: "number_equal",
-        explanation: `La surface d’une terrasse rectangulaire vaut ${L} × ${l} = ${area}.`,
+        explanation: "Définition : une aire mesure la surface occupée par une figure, avec une unité carrée comme cm² ou m².\n\n" +
+          "Méthode : on choisit la formule adaptée à la figure ou on compte les carreaux quand la figure est quadrillée.\n\nCalcul : " +
+          (`La surface d’une terrasse rectangulaire vaut ${L} × ${l} = ${area}.`) +
+          "\n\nConclusion : on obtient l’aire demandée avec une unité carrée.",
       };
     },
   },
@@ -754,7 +817,10 @@ export const airesBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(area)],
         comparator: "number_equal",
-        explanation: `A = (${base} × ${height}) ÷ 2 = ${area}.`,
+        explanation: "Définition : une aire mesure la surface occupée par une figure, avec une unité carrée comme cm² ou m².\n\n" +
+          "Méthode : on choisit la formule adaptée à la figure ou on compte les carreaux quand la figure est quadrillée.\n\nCalcul : " +
+          (`A = (${base} × ${height}) ÷ 2 = ${area}.`) +
+          "\n\nConclusion : on obtient l’aire demandée avec une unité carrée.",
       };
     },
   },
@@ -789,7 +855,10 @@ export const airesBank: TutorBankItemV4[] = [
         expected: ["oui"],
         comparator: "mcq_exact",
         explanation:
-          `Oui. Par exemple, deux figures contenant chacune ${rect.length} carrés unité ont la même aire, même si leur forme est différente.`,
+          "Définition : une aire mesure la surface occupée par une figure, avec une unité carrée comme cm² ou m².\n\n" +
+          "Méthode : on choisit la formule adaptée à la figure ou on compte les carreaux quand la figure est quadrillée.\n\nCalcul : " +
+          (`Oui. Par exemple, deux figures contenant chacune ${rect.length} carrés unité ont la même aire, même si leur forme est différente.`) +
+          "\n\nConclusion : on obtient l’aire demandée avec une unité carrée.",
       };
     },
   },
@@ -818,7 +887,10 @@ export const airesBank: TutorBankItemV4[] = [
         expected: ["non"],
         comparator: "mcq_exact",
         explanation:
-          `Non. L’aire d’un parallélogramme se calcule avec la base et la hauteur : ${base} × ${height} = ${good}, et non avec le côté incliné.`,
+          "Définition : une aire mesure la surface occupée par une figure, avec une unité carrée comme cm² ou m².\n\n" +
+          "Méthode : on choisit la formule adaptée à la figure ou on compte les carreaux quand la figure est quadrillée.\n\nCalcul : " +
+          (`Non. L’aire d’un parallélogramme se calcule avec la base et la hauteur : ${base} × ${height} = ${good}, et non avec le côté incliné.`) +
+          "\n\nConclusion : on obtient l’aire demandée avec une unité carrée.",
       };
     },
   },
@@ -854,7 +926,10 @@ export const airesBank: TutorBankItemV4[] = [
         expected: [correct],
         comparator: "mcq_exact",
         explanation:
-          `Aire du rectangle : ${a} × ${b} = ${rectArea}. Aire du carré : ${squareSide} × ${squareSide} = ${squareArea}.`,
+          "Définition : une aire mesure la surface occupée par une figure, avec une unité carrée comme cm² ou m².\n\n" +
+          "Méthode : on choisit la formule adaptée à la figure ou on compte les carreaux quand la figure est quadrillée.\n\nCalcul : " +
+          (`Aire du rectangle : ${a} × ${b} = ${rectArea}. Aire du carré : ${squareSide} × ${squareSide} = ${squareArea}.`) +
+          "\n\nConclusion : on obtient l’aire demandée avec une unité carrée.",
       };
     },
   },
@@ -876,7 +951,10 @@ export const airesBank: TutorBankItemV4[] = [
         expected: ["même", "aire", "surface", "différentes"],
         comparator: "contains_keyword",
         explanation:
-          "Deux figures peuvent avoir des formes différentes mais occuper la même surface. Par exemple, deux figures contenant chacune 8 carrés unités ont la même aire.",
+          "Définition : une aire mesure la surface occupée par une figure, avec une unité carrée comme cm² ou m².\n\n" +
+          "Méthode : on choisit la formule adaptée à la figure ou on compte les carreaux quand la figure est quadrillée.\n\nCalcul : " +
+          ("Deux figures peuvent avoir des formes différentes mais occuper la même surface. Par exemple, deux figures contenant chacune 8 carrés unités ont la même aire.") +
+          "\n\nConclusion : on obtient l’aire demandée avec une unité carrée.",
       };
     },
   },

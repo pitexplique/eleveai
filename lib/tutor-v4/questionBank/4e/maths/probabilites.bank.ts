@@ -140,7 +140,10 @@ export const probabilitesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Aléatoire veut dire qu’on ne connaît pas le résultat avant de faire l’expérience.",
     explanation:
-      "Une expérience aléatoire est une expérience dont on ne peut pas prévoir avec certitude le résultat.",
+      "Définition : une probabilité mesure la chance qu’un événement se produise, entre 0 et 1.\n\n" +
+          "Méthode : on compare les cas favorables à tous les cas possibles dans l’expérience aléatoire.\n\nCalcul : " +
+          ("Une expérience aléatoire est une expérience dont on ne peut pas prévoir avec certitude le résultat.") +
+          "\n\nConclusion : la probabilité obtenue correspond à l’événement demandé.",
     tags: ["probabilites", "vocabulaire"],
   },
   {
@@ -158,7 +161,10 @@ export const probabilitesBank: TutorBankItemV4[] = [
     expected: ["une issue"],
     comparator: "mcq_exact",
     hint: "Une issue est un résultat possible.",
-    explanation: "Obtenir 4 est un résultat possible du lancer de dé : c’est une issue.",
+    explanation: "Définition : une probabilité mesure la chance qu’un événement se produise, entre 0 et 1.\n\n" +
+          "Méthode : on compare les cas favorables à tous les cas possibles dans l’expérience aléatoire.\n\nCalcul : " +
+          ("Obtenir 4 est un résultat possible du lancer de dé : c’est une issue.") +
+          "\n\nConclusion : la probabilité obtenue correspond à l’événement demandé.",
     tags: ["probabilites", "issue"],
     canvas: deCanvas([4]),
   },
@@ -177,7 +183,10 @@ export const probabilitesBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "On ne peut pas savoir avec certitude le résultat avant de faire l’expérience.",
     explanation:
-      "Une expérience aléatoire est une expérience dont on ne connaît pas le résultat à l’avance.",
+      "Définition : une probabilité mesure la chance qu’un événement se produise, entre 0 et 1.\n\n" +
+          "Méthode : on compare les cas favorables à tous les cas possibles dans l’expérience aléatoire.\n\nCalcul : " +
+          ("Une expérience aléatoire est une expérience dont on ne connaît pas le résultat à l’avance.") +
+          "\n\nConclusion : la probabilité obtenue correspond à l’événement demandé.",
     tags: ["probabilites", "vocabulaire", "open"],
   },
 
@@ -199,7 +208,10 @@ export const probabilitesBank: TutorBankItemV4[] = [
     expected: ["6"],
     comparator: "mcq_exact",
     hint: "Un dé classique a 6 faces.",
-    explanation: "Les issues possibles sont 1, 2, 3, 4, 5 et 6 : il y en a 6.",
+    explanation: "Définition : une probabilité mesure la chance qu’un événement se produise, entre 0 et 1.\n\n" +
+          "Méthode : on compare les cas favorables à tous les cas possibles dans l’expérience aléatoire.\n\nCalcul : " +
+          ("Les issues possibles sont 1, 2, 3, 4, 5 et 6 : il y en a 6.") +
+          "\n\nConclusion : la probabilité obtenue correspond à l’événement demandé.",
     tags: ["probabilites", "issues", "de"],
     canvas: deCanvas(),
   },
@@ -229,7 +241,10 @@ export const probabilitesBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(total)],
         comparator: "number_equal",
-        explanation: `Il y a ${rouges} + ${bleues} = ${total} billes au total.`,
+        explanation: "Définition : une probabilité mesure la chance qu’un événement se produise, entre 0 et 1.\n\n" +
+          "Méthode : on compare les cas favorables à tous les cas possibles dans l’expérience aléatoire.\n\nCalcul : " +
+          (`Il y a ${rouges} + ${bleues} = ${total} billes au total.`) +
+          "\n\nConclusion : la probabilité obtenue correspond à l’événement demandé.",
         canvas: billesCanvas(elements),
       };
     },
@@ -249,7 +264,10 @@ export const probabilitesBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "Liste les résultats possibles du dé.",
     explanation:
-      "Les issues possibles sont 1, 2, 3, 4, 5 et 6. Il y a donc 6 issues.",
+      "Définition : une probabilité mesure la chance qu’un événement se produise, entre 0 et 1.\n\n" +
+          "Méthode : on compare les cas favorables à tous les cas possibles dans l’expérience aléatoire.\n\nCalcul : " +
+          ("Les issues possibles sont 1, 2, 3, 4, 5 et 6. Il y a donc 6 issues.") +
+          "\n\nConclusion : la probabilité obtenue correspond à l’événement demandé.",
     tags: ["probabilites", "issues", "open"],
     canvas: deCanvas(),
   },
@@ -272,7 +290,10 @@ export const probabilitesBank: TutorBankItemV4[] = [
     expected: ["certain"],
     comparator: "mcq_exact",
     hint: "Toutes les faces du dé sont inférieures à 7.",
-    explanation: "Les issues 1, 2, 3, 4, 5 et 6 sont toutes inférieures à 7 : l’événement est certain.",
+    explanation: "Définition : une probabilité mesure la chance qu’un événement se produise, entre 0 et 1.\n\n" +
+          "Méthode : on compare les cas favorables à tous les cas possibles dans l’expérience aléatoire.\n\nCalcul : " +
+          ("Les issues 1, 2, 3, 4, 5 et 6 sont toutes inférieures à 7 : l’événement est certain.") +
+          "\n\nConclusion : la probabilité obtenue correspond à l’événement demandé.",
     tags: ["probabilites", "certain"],
     canvas: deCanvas([1, 2, 3, 4, 5, 6]),
   },
@@ -291,7 +312,10 @@ export const probabilitesBank: TutorBankItemV4[] = [
     expected: ["impossible"],
     comparator: "mcq_exact",
     hint: "Un dé classique ne possède pas de face 8.",
-    explanation: "La face 8 n’existe pas sur un dé à 6 faces : l’événement est impossible.",
+    explanation: "Définition : une probabilité mesure la chance qu’un événement se produise, entre 0 et 1.\n\n" +
+          "Méthode : on compare les cas favorables à tous les cas possibles dans l’expérience aléatoire.\n\nCalcul : " +
+          ("La face 8 n’existe pas sur un dé à 6 faces : l’événement est impossible.") +
+          "\n\nConclusion : la probabilité obtenue correspond à l’événement demandé.",
     tags: ["probabilites", "impossible"],
     canvas: deCanvas(),
   },
@@ -321,7 +345,10 @@ export const probabilitesBank: TutorBankItemV4[] = [
         ]),
         expected: [contraire],
         comparator: "mcq_exact",
-        explanation: `Le contraire de « obtenir un nombre ${mode} » est « ${contraire} ».`,
+        explanation: "Définition : une probabilité mesure la chance qu’un événement se produise, entre 0 et 1.\n\n" +
+          "Méthode : on compare les cas favorables à tous les cas possibles dans l’expérience aléatoire.\n\nCalcul : " +
+          (`Le contraire de « obtenir un nombre ${mode} » est « ${contraire} ».`) +
+          "\n\nConclusion : la probabilité obtenue correspond à l’événement demandé.",
         canvas: deCanvas(favorables),
       };
     },
@@ -341,7 +368,10 @@ export const probabilitesBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "Regarde les faces possibles du dé.",
     explanation:
-      "Un dé à 6 faces possède les faces 1, 2, 3, 4, 5 et 6. Il n’a pas de face 8, donc l’événement est impossible.",
+      "Définition : une probabilité mesure la chance qu’un événement se produise, entre 0 et 1.\n\n" +
+          "Méthode : on compare les cas favorables à tous les cas possibles dans l’expérience aléatoire.\n\nCalcul : " +
+          ("Un dé à 6 faces possède les faces 1, 2, 3, 4, 5 et 6. Il n’a pas de face 8, donc l’événement est impossible.") +
+          "\n\nConclusion : la probabilité obtenue correspond à l’événement demandé.",
     tags: ["probabilites", "evenement", "impossible", "open"],
     canvas: deCanvas(),
   },
@@ -364,7 +394,10 @@ export const probabilitesBank: TutorBankItemV4[] = [
     expected: ["oui"],
     comparator: "mcq_exact",
     hint: "Un dé équilibré ne favorise aucune face.",
-    explanation: "Oui. Chaque face a la même probabilité d’apparaître : la situation est équiprobable.",
+    explanation: "Définition : une probabilité mesure la chance qu’un événement se produise, entre 0 et 1.\n\n" +
+          "Méthode : on compare les cas favorables à tous les cas possibles dans l’expérience aléatoire.\n\nCalcul : " +
+          ("Oui. Chaque face a la même probabilité d’apparaître : la situation est équiprobable.") +
+          "\n\nConclusion : la probabilité obtenue correspond à l’événement demandé.",
     tags: ["probabilites", "equiprobabilite", "de"],
     canvas: deCanvas(),
   },
@@ -401,9 +434,12 @@ export const probabilitesBank: TutorBankItemV4[] = [
         choices: ["oui", "non"],
         expected: [equal ? "oui" : "non"],
         comparator: "mcq_exact",
-        explanation: equal
+        explanation: "Définition : une probabilité mesure la chance qu’un événement se produise, entre 0 et 1.\n\n" +
+          "Méthode : on compare les cas favorables à tous les cas possibles dans l’expérience aléatoire.\n\nCalcul : " +
+          (equal
           ? "Oui. Toutes les zones ont le même poids."
-          : "Non. Les zones n’ont pas toutes le même poids.",
+          : "Non. Les zones n’ont pas toutes le même poids.") +
+          "\n\nConclusion : la probabilité obtenue correspond à l’événement demandé.",
         canvas: roueCanvas(segments),
       };
     },
@@ -427,7 +463,10 @@ export const probabilitesBank: TutorBankItemV4[] = [
     expected: ["3/6"],
     comparator: "mcq_exact",
     hint: "Les nombres pairs sont 2, 4 et 6.",
-    explanation: "Il y a 3 issues favorables sur 6 issues possibles, donc la probabilité est 3/6.",
+    explanation: "Définition : une probabilité mesure la chance qu’un événement se produise, entre 0 et 1.\n\n" +
+          "Méthode : on compare les cas favorables à tous les cas possibles dans l’expérience aléatoire.\n\nCalcul : " +
+          ("Il y a 3 issues favorables sur 6 issues possibles, donc la probabilité est 3/6.") +
+          "\n\nConclusion : la probabilité obtenue correspond à l’événement demandé.",
     tags: ["probabilites", "fraction", "de"],
     canvas: deCanvas([2, 4, 6]),
   },
@@ -463,7 +502,10 @@ export const probabilitesBank: TutorBankItemV4[] = [
         ]),
         expected: [result],
         comparator: "mcq_exact",
-        explanation: `Il y a ${rouges} billes rouges sur ${total} billes au total, donc la probabilité est ${result}.`,
+        explanation: "Définition : une probabilité mesure la chance qu’un événement se produise, entre 0 et 1.\n\n" +
+          "Méthode : on compare les cas favorables à tous les cas possibles dans l’expérience aléatoire.\n\nCalcul : " +
+          (`Il y a ${rouges} billes rouges sur ${total} billes au total, donc la probabilité est ${result}.`) +
+          "\n\nConclusion : la probabilité obtenue correspond à l’événement demandé.",
         canvas: billesCanvas(elements),
       };
     },
@@ -496,7 +538,10 @@ export const probabilitesBank: TutorBankItemV4[] = [
         ]),
         expected: [result],
         comparator: "mcq_exact",
-        explanation: `Le secteur Rouge a un poids ${poidsRouge} sur un poids total ${total}, donc la probabilité est ${result}.`,
+        explanation: "Définition : une probabilité mesure la chance qu’un événement se produise, entre 0 et 1.\n\n" +
+          "Méthode : on compare les cas favorables à tous les cas possibles dans l’expérience aléatoire.\n\nCalcul : " +
+          (`Le secteur Rouge a un poids ${poidsRouge} sur un poids total ${total}, donc la probabilité est ${result}.`) +
+          "\n\nConclusion : la probabilité obtenue correspond à l’événement demandé.",
         canvas: roueCanvas([
           { label: "Rouge", poids: poidsRouge, couleur: couleurs.rouge },
           { label: "Bleu", poids: poidsBleu, couleur: couleurs.bleu },
@@ -520,7 +565,10 @@ export const probabilitesBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "Compte les nombres pairs, puis le nombre total d’issues.",
     explanation:
-      "Les nombres pairs sont 2, 4 et 6 : il y a 3 issues favorables sur 6 issues possibles. La probabilité est donc 3/6.",
+      "Définition : une probabilité mesure la chance qu’un événement se produise, entre 0 et 1.\n\n" +
+          "Méthode : on compare les cas favorables à tous les cas possibles dans l’expérience aléatoire.\n\nCalcul : " +
+          ("Les nombres pairs sont 2, 4 et 6 : il y a 3 issues favorables sur 6 issues possibles. La probabilité est donc 3/6.") +
+          "\n\nConclusion : la probabilité obtenue correspond à l’événement demandé.",
     tags: ["probabilites", "fraction", "de", "open"],
     canvas: deCanvas([2, 4, 6]),
   },
@@ -543,7 +591,10 @@ export const probabilitesBank: TutorBankItemV4[] = [
     expected: ["50 %"],
     comparator: "mcq_exact",
     hint: "1/2 = 0,5.",
-    explanation: "1/2 = 0,5 = 50 %.",
+    explanation: "Définition : une probabilité mesure la chance qu’un événement se produise, entre 0 et 1.\n\n" +
+          "Méthode : on compare les cas favorables à tous les cas possibles dans l’expérience aléatoire.\n\nCalcul : " +
+          ("1/2 = 0,5 = 50 %.") +
+          "\n\nConclusion : la probabilité obtenue correspond à l’événement demandé.",
     tags: ["probabilites", "pourcentage"],
   },
   {
@@ -573,7 +624,10 @@ export const probabilitesBank: TutorBankItemV4[] = [
         choices: makeChoices(item.p, ["10 %", "20 %", "25 %", "50 %", "75 %"].filter((x) => x !== item.p)),
         expected: [item.p],
         comparator: "mcq_exact",
-        explanation: `${item.f} correspond à ${item.p}.`,
+        explanation: "Définition : une probabilité mesure la chance qu’un événement se produise, entre 0 et 1.\n\n" +
+          "Méthode : on compare les cas favorables à tous les cas possibles dans l’expérience aléatoire.\n\nCalcul : " +
+          (`${item.f} correspond à ${item.p}.`) +
+          "\n\nConclusion : la probabilité obtenue correspond à l’événement demandé.",
       };
     },
   },
@@ -592,7 +646,10 @@ export const probabilitesBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "1/2 signifie une chance sur deux.",
     explanation:
-      "1/2 = 0,5. Pour passer en pourcentage, on multiplie par 100 : 0,5 = 50 %.",
+      "Définition : une probabilité mesure la chance qu’un événement se produise, entre 0 et 1.\n\n" +
+          "Méthode : on compare les cas favorables à tous les cas possibles dans l’expérience aléatoire.\n\nCalcul : " +
+          ("1/2 = 0,5. Pour passer en pourcentage, on multiplie par 100 : 0,5 = 50 %.") +
+          "\n\nConclusion : la probabilité obtenue correspond à l’événement demandé.",
     tags: ["probabilites", "conversion", "pourcentage", "open"],
   },
 
@@ -614,7 +671,10 @@ export const probabilitesBank: TutorBankItemV4[] = [
     expected: ["1/2"],
     comparator: "mcq_exact",
     hint: "À numérateur égal, plus le dénominateur est petit, plus la fraction est grande.",
-    explanation: "1/2 est plus grand que 1/4, 1/6 et 1/10.",
+    explanation: "Définition : une probabilité mesure la chance qu’un événement se produise, entre 0 et 1.\n\n" +
+          "Méthode : on compare les cas favorables à tous les cas possibles dans l’expérience aléatoire.\n\nCalcul : " +
+          ("1/2 est plus grand que 1/4, 1/6 et 1/10.") +
+          "\n\nConclusion : la probabilité obtenue correspond à l’événement demandé.",
     tags: ["probabilites", "comparer", "fractions"],
   },
   {
@@ -641,7 +701,10 @@ export const probabilitesBank: TutorBankItemV4[] = [
         choices: ["Rouge", "Bleu", "Vert", "elles sont égales"],
         expected: ["Rouge"],
         comparator: "mcq_exact",
-        explanation: "Rouge correspond à 3/6, Bleu à 2/6 et Vert à 1/6. La plus grande probabilité est Rouge.",
+        explanation: "Définition : une probabilité mesure la chance qu’un événement se produise, entre 0 et 1.\n\n" +
+          "Méthode : on compare les cas favorables à tous les cas possibles dans l’expérience aléatoire.\n\nCalcul : " +
+          ("Rouge correspond à 3/6, Bleu à 2/6 et Vert à 1/6. La plus grande probabilité est Rouge.") +
+          "\n\nConclusion : la probabilité obtenue correspond à l’événement demandé.",
         canvas: tableauCanvas(["Couleur", "Favorables", "Total", "Probabilité"], lignes, [[0, 3]]),
       };
     },
@@ -661,7 +724,10 @@ export const probabilitesBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "Compare une moitié et un quart.",
     explanation:
-      "1/2 représente une moitié, alors que 1/4 représente un quart. Une moitié est plus grande qu’un quart.",
+      "Définition : une probabilité mesure la chance qu’un événement se produise, entre 0 et 1.\n\n" +
+          "Méthode : on compare les cas favorables à tous les cas possibles dans l’expérience aléatoire.\n\nCalcul : " +
+          ("1/2 représente une moitié, alors que 1/4 représente un quart. Une moitié est plus grande qu’un quart.") +
+          "\n\nConclusion : la probabilité obtenue correspond à l’événement demandé.",
     tags: ["probabilites", "comparer", "fractions", "open"],
   },
 
@@ -683,7 +749,10 @@ export const probabilitesBank: TutorBankItemV4[] = [
     expected: ["non"],
     comparator: "mcq_exact",
     hint: "Une probabilité est comprise entre 0 et 1.",
-    explanation: "Non. Une probabilité est toujours comprise entre 0 et 1.",
+    explanation: "Définition : une probabilité mesure la chance qu’un événement se produise, entre 0 et 1.\n\n" +
+          "Méthode : on compare les cas favorables à tous les cas possibles dans l’expérience aléatoire.\n\nCalcul : " +
+          ("Non. Une probabilité est toujours comprise entre 0 et 1.") +
+          "\n\nConclusion : la probabilité obtenue correspond à l’événement demandé.",
     tags: ["probabilites", "defi", "bornes"],
   },
   {
@@ -720,7 +789,10 @@ export const probabilitesBank: TutorBankItemV4[] = [
         ]),
         expected: [result],
         comparator: "mcq_exact",
-        explanation: `Il y a ${mangue} mangues sur ${total} fruits au total, donc la probabilité est ${result}.`,
+        explanation: "Définition : une probabilité mesure la chance qu’un événement se produise, entre 0 et 1.\n\n" +
+          "Méthode : on compare les cas favorables à tous les cas possibles dans l’expérience aléatoire.\n\nCalcul : " +
+          (`Il y a ${mangue} mangues sur ${total} fruits au total, donc la probabilité est ${result}.`) +
+          "\n\nConclusion : la probabilité obtenue correspond à l’événement demandé.",
         canvas: billesCanvas(elements),
       };
     },
@@ -743,7 +815,10 @@ export const probabilitesBank: TutorBankItemV4[] = [
         choices: ["Rouge", "Bleu", "Vert", "Elles sont toutes aussi probables"],
         expected: ["Rouge"],
         comparator: "mcq_exact",
-        explanation: "Le secteur Rouge a le poids le plus grand, donc c’est l’issue la plus probable.",
+        explanation: "Définition : une probabilité mesure la chance qu’un événement se produise, entre 0 et 1.\n\n" +
+          "Méthode : on compare les cas favorables à tous les cas possibles dans l’expérience aléatoire.\n\nCalcul : " +
+          ("Le secteur Rouge a le poids le plus grand, donc c’est l’issue la plus probable.") +
+          "\n\nConclusion : la probabilité obtenue correspond à l’événement demandé.",
         canvas: roueCanvas([
           { label: "Rouge", poids: 3, couleur: couleurs.rouge },
           { label: "Bleu", poids: 1, couleur: couleurs.bleu },
@@ -770,7 +845,10 @@ export const probabilitesBank: TutorBankItemV4[] = [
         expected: ["rouge", "poids", "plus grand"],
         comparator: "contains_keyword",
         explanation:
-          "Le secteur Rouge a un poids 3, alors que Bleu et Vert ont chacun un poids 1. Rouge occupe donc la plus grande partie de la roue.",
+          "Définition : une probabilité mesure la chance qu’un événement se produise, entre 0 et 1.\n\n" +
+          "Méthode : on compare les cas favorables à tous les cas possibles dans l’expérience aléatoire.\n\nCalcul : " +
+          ("Le secteur Rouge a un poids 3, alors que Bleu et Vert ont chacun un poids 1. Rouge occupe donc la plus grande partie de la roue.") +
+          "\n\nConclusion : la probabilité obtenue correspond à l’événement demandé.",
         canvas: roueCanvas([
           { label: "Rouge", poids: 3, couleur: couleurs.rouge },
           { label: "Bleu", poids: 1, couleur: couleurs.bleu },

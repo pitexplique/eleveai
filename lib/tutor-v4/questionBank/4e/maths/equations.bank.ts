@@ -28,7 +28,10 @@ export const equationsBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Une équation contient un signe = et une inconnue.",
     explanation:
-      "Une équation contient une inconnue, ici x, et une égalité. Donc 3x + 2 = 11 est une équation.",
+      "Définition : une équation est une égalité avec une inconnue ; la résoudre, c’est trouver la valeur qui rend l’égalité vraie.\n\n" +
+          "Méthode : on garde l’égalité équilibrée en faisant la même opération des deux côtés.\n\nCalcul : " +
+          ("Une équation contient une inconnue, ici x, et une égalité. Donc 3x + 2 = 11 est une équation.") +
+          "\n\nConclusion : la valeur trouvée est la solution de l’équation.",
     tags: ["equation", "reconnaitre"],
   },
   {
@@ -47,7 +50,10 @@ export const equationsBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Vérifie s’il y a une inconnue et un signe =.",
     explanation:
-      "Oui. x + 4 = 9 contient une inconnue x et un signe égal.",
+      "Définition : une équation est une égalité avec une inconnue ; la résoudre, c’est trouver la valeur qui rend l’égalité vraie.\n\n" +
+          "Méthode : on garde l’égalité équilibrée en faisant la même opération des deux côtés.\n\nCalcul : " +
+          ("Oui. x + 4 = 9 contient une inconnue x et un signe égal.") +
+          "\n\nConclusion : la valeur trouvée est la solution de l’équation.",
     tags: ["equation", "vocabulaire"],
   },
   {
@@ -83,7 +89,10 @@ export const equationsBank: TutorBankItemV4[] = [
         choices,
         expected: [eq],
         comparator: "mcq_exact",
-        explanation: `${eq} est une équation car elle contient une inconnue x et une égalité.`,
+        explanation: "Définition : une équation est une égalité avec une inconnue ; la résoudre, c’est trouver la valeur qui rend l’égalité vraie.\n\n" +
+          "Méthode : on garde l’égalité équilibrée en faisant la même opération des deux côtés.\n\nCalcul : " +
+          (`${eq} est une équation car elle contient une inconnue x et une égalité.`) +
+          "\n\nConclusion : la valeur trouvée est la solution de l’équation.",
       };
     },
   },
@@ -106,7 +115,10 @@ export const equationsBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "« augmenté de 3 » puis « vaut 11 ».",
     explanation:
-      "« Un nombre x augmenté de 3 vaut 11 » se traduit par x + 3 = 11.",
+      "Définition : une équation est une égalité avec une inconnue ; la résoudre, c’est trouver la valeur qui rend l’égalité vraie.\n\n" +
+          "Méthode : on garde l’égalité équilibrée en faisant la même opération des deux côtés.\n\nCalcul : " +
+          ("« Un nombre x augmenté de 3 vaut 11 » se traduit par x + 3 = 11.") +
+          "\n\nConclusion : la valeur trouvée est la solution de l’équation.",
     tags: ["equation", "traduction"],
   },
   {
@@ -124,7 +136,10 @@ export const equationsBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "Le double de x signifie 2x.",
     explanation:
-      "« Le double de x est égal à 14 » se traduit par 2x = 14.",
+      "Définition : une équation est une égalité avec une inconnue ; la résoudre, c’est trouver la valeur qui rend l’égalité vraie.\n\n" +
+          "Méthode : on garde l’égalité équilibrée en faisant la même opération des deux côtés.\n\nCalcul : " +
+          ("« Le double de x est égal à 14 » se traduit par 2x = 14.") +
+          "\n\nConclusion : la valeur trouvée est la solution de l’équation.",
     tags: ["equation", "traduction"],
   },
   {
@@ -152,7 +167,10 @@ export const equationsBank: TutorBankItemV4[] = [
             `${a}*x+${b}=${c}`,
             `${a}*x + ${b} = ${c}`,
           ],
-          explanation: `La phrase se traduit par ${a}x + ${b} = ${c}.`,
+          explanation: "Définition : une équation est une égalité avec une inconnue ; la résoudre, c’est trouver la valeur qui rend l’égalité vraie.\n\n" +
+          "Méthode : on garde l’égalité équilibrée en faisant la même opération des deux côtés.\n\nCalcul : " +
+          (`La phrase se traduit par ${a}x + ${b} = ${c}.`) +
+          "\n\nConclusion : la valeur trouvée est la solution de l’équation.",
         },
         {
           text: `Traduire en équation : « ${a} fois x moins ${b} vaut ${c} »`,
@@ -162,7 +180,10 @@ export const equationsBank: TutorBankItemV4[] = [
             `${a}*x-${b}=${c}`,
             `${a}*x - ${b} = ${c}`,
           ],
-          explanation: `La phrase se traduit par ${a}x - ${b} = ${c}.`,
+          explanation: "Définition : une équation est une égalité avec une inconnue ; la résoudre, c’est trouver la valeur qui rend l’égalité vraie.\n\n" +
+          "Méthode : on garde l’égalité équilibrée en faisant la même opération des deux côtés.\n\nCalcul : " +
+          (`La phrase se traduit par ${a}x - ${b} = ${c}.`) +
+          "\n\nConclusion : la valeur trouvée est la solution de l’équation.",
         },
       ];
 
@@ -173,7 +194,10 @@ export const equationsBank: TutorBankItemV4[] = [
         format: "short",
         expected: picked.expected,
         comparator: "contains_keyword",
-        explanation: picked.explanation,
+        explanation: "Définition : une équation est une égalité avec une inconnue ; la résoudre, c’est trouver la valeur qui rend l’égalité vraie.\n\n" +
+          "Méthode : on garde l’égalité équilibrée en faisant la même opération des deux côtés.\n\nCalcul : " +
+          (picked.explanation) +
+          "\n\nConclusion : la valeur trouvée est la solution de l’équation.",
       };
     },
   },
@@ -195,7 +219,10 @@ export const equationsBank: TutorBankItemV4[] = [
     expected: ["5"],
     comparator: "number_equal",
     hint: "Quel nombre plus 4 donne 9 ?",
-    explanation: "x + 4 = 9 donc x = 5.",
+    explanation: "Définition : une équation est une égalité avec une inconnue ; la résoudre, c’est trouver la valeur qui rend l’égalité vraie.\n\n" +
+          "Méthode : on garde l’égalité équilibrée en faisant la même opération des deux côtés.\n\nCalcul : " +
+          ("x + 4 = 9 donc x = 5.") +
+          "\n\nConclusion : la valeur trouvée est la solution de l’équation.",
     tags: ["equation", "resolution"],
   },
   {
@@ -212,7 +239,10 @@ export const equationsBank: TutorBankItemV4[] = [
     expected: ["5"],
     comparator: "number_equal",
     hint: "Divise 15 par 3.",
-    explanation: "3x = 15 donc x = 15 ÷ 3 = 5.",
+    explanation: "Définition : une équation est une égalité avec une inconnue ; la résoudre, c’est trouver la valeur qui rend l’égalité vraie.\n\n" +
+          "Méthode : on garde l’égalité équilibrée en faisant la même opération des deux côtés.\n\nCalcul : " +
+          ("3x = 15 donc x = 15 ÷ 3 = 5.") +
+          "\n\nConclusion : la valeur trouvée est la solution de l’équation.",
     tags: ["equation", "resolution"],
   },
   {
@@ -236,7 +266,10 @@ export const equationsBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(x)],
         comparator: "number_equal",
-        explanation: `${a}x = ${b} donc x = ${b} ÷ ${a} = ${x}.`,
+        explanation: "Définition : une équation est une égalité avec une inconnue ; la résoudre, c’est trouver la valeur qui rend l’égalité vraie.\n\n" +
+          "Méthode : on garde l’égalité équilibrée en faisant la même opération des deux côtés.\n\nCalcul : " +
+          (`${a}x = ${b} donc x = ${b} ÷ ${a} = ${x}.`) +
+          "\n\nConclusion : la valeur trouvée est la solution de l’équation.",
       };
     },
   },
@@ -258,7 +291,10 @@ export const equationsBank: TutorBankItemV4[] = [
     expected: ["3"],
     comparator: "number_equal",
     hint: "Réduis d’abord 2x + 3x.",
-    explanation: "2x + 3x = 5x, donc 5x = 15 et x = 3.",
+    explanation: "Définition : une équation est une égalité avec une inconnue ; la résoudre, c’est trouver la valeur qui rend l’égalité vraie.\n\n" +
+          "Méthode : on garde l’égalité équilibrée en faisant la même opération des deux côtés.\n\nCalcul : " +
+          ("2x + 3x = 5x, donc 5x = 15 et x = 3.") +
+          "\n\nConclusion : la valeur trouvée est la solution de l’équation.",
     tags: ["equation", "reduction"],
   },
   {
@@ -275,7 +311,10 @@ export const equationsBank: TutorBankItemV4[] = [
     expected: ["4"],
     comparator: "number_equal",
     hint: "Réduis 4x - x.",
-    explanation: "4x - x = 3x, donc 3x = 12 et x = 4.",
+    explanation: "Définition : une équation est une égalité avec une inconnue ; la résoudre, c’est trouver la valeur qui rend l’égalité vraie.\n\n" +
+          "Méthode : on garde l’égalité équilibrée en faisant la même opération des deux côtés.\n\nCalcul : " +
+          ("4x - x = 3x, donc 3x = 12 et x = 4.") +
+          "\n\nConclusion : la valeur trouvée est la solution de l’équation.",
     tags: ["equation", "reduction"],
   },
   {
@@ -301,7 +340,10 @@ export const equationsBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(x)],
         comparator: "number_equal",
-        explanation: `${a}x + ${b}x = ${coeff}x. Donc ${coeff}x = ${total}, d’où x = ${x}.`,
+        explanation: "Définition : une équation est une égalité avec une inconnue ; la résoudre, c’est trouver la valeur qui rend l’égalité vraie.\n\n" +
+          "Méthode : on garde l’égalité équilibrée en faisant la même opération des deux côtés.\n\nCalcul : " +
+          (`${a}x + ${b}x = ${coeff}x. Donc ${coeff}x = ${total}, d’où x = ${x}.`) +
+          "\n\nConclusion : la valeur trouvée est la solution de l’équation.",
       };
     },
   },
@@ -323,7 +365,10 @@ export const equationsBank: TutorBankItemV4[] = [
     expected: ["4"],
     comparator: "number_equal",
     hint: "Développe ou divise d’abord par 2.",
-    explanation: "2(x + 3) = 14 donc x + 3 = 7 puis x = 4.",
+    explanation: "Définition : une équation est une égalité avec une inconnue ; la résoudre, c’est trouver la valeur qui rend l’égalité vraie.\n\n" +
+          "Méthode : on garde l’égalité équilibrée en faisant la même opération des deux côtés.\n\nCalcul : " +
+          ("2(x + 3) = 14 donc x + 3 = 7 puis x = 4.") +
+          "\n\nConclusion : la valeur trouvée est la solution de l’équation.",
     tags: ["equation", "distributivite"],
   },
   {
@@ -340,7 +385,10 @@ export const equationsBank: TutorBankItemV4[] = [
     expected: ["5"],
     comparator: "number_equal",
     hint: "Commence par diviser par 3.",
-    explanation: "3(x - 1) = 12 donc x - 1 = 4 puis x = 5.",
+    explanation: "Définition : une équation est une égalité avec une inconnue ; la résoudre, c’est trouver la valeur qui rend l’égalité vraie.\n\n" +
+          "Méthode : on garde l’égalité équilibrée en faisant la même opération des deux côtés.\n\nCalcul : " +
+          ("3(x - 1) = 12 donc x - 1 = 4 puis x = 5.") +
+          "\n\nConclusion : la valeur trouvée est la solution de l’équation.",
     tags: ["equation", "distributivite"],
   },
   {
@@ -365,7 +413,10 @@ export const equationsBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(x)],
         comparator: "number_equal",
-        explanation: `${a}(x + ${b}) = ${rhs} donc x + ${b} = ${rhs / a}, puis x = ${x}.`,
+        explanation: "Définition : une équation est une égalité avec une inconnue ; la résoudre, c’est trouver la valeur qui rend l’égalité vraie.\n\n" +
+          "Méthode : on garde l’égalité équilibrée en faisant la même opération des deux côtés.\n\nCalcul : " +
+          (`${a}(x + ${b}) = ${rhs} donc x + ${b} = ${rhs / a}, puis x = ${x}.`) +
+          "\n\nConclusion : la valeur trouvée est la solution de l’équation.",
       };
     },
   },
@@ -388,7 +439,10 @@ export const equationsBank: TutorBankItemV4[] = [
     expected: ["oui"],
     comparator: "mcq_exact",
     hint: "Remplace x par 4.",
-    explanation: "4 + 3 = 7, donc 4 est bien solution.",
+    explanation: "Définition : une équation est une égalité avec une inconnue ; la résoudre, c’est trouver la valeur qui rend l’égalité vraie.\n\n" +
+          "Méthode : on garde l’égalité équilibrée en faisant la même opération des deux côtés.\n\nCalcul : " +
+          ("4 + 3 = 7, donc 4 est bien solution.") +
+          "\n\nConclusion : la valeur trouvée est la solution de l’équation.",
     tags: ["equation", "verification"],
   },
   {
@@ -406,7 +460,10 @@ export const equationsBank: TutorBankItemV4[] = [
     expected: ["non"],
     comparator: "mcq_exact",
     hint: "Calcule 3 × 2.",
-    explanation: "3 × 2 = 6, ce n’est pas 9. Donc 2 n’est pas solution.",
+    explanation: "Définition : une équation est une égalité avec une inconnue ; la résoudre, c’est trouver la valeur qui rend l’égalité vraie.\n\n" +
+          "Méthode : on garde l’égalité équilibrée en faisant la même opération des deux côtés.\n\nCalcul : " +
+          ("3 × 2 = 6, ce n’est pas 9. Donc 2 n’est pas solution.") +
+          "\n\nConclusion : la valeur trouvée est la solution de l’équation.",
     tags: ["equation", "verification"],
   },
   {
@@ -433,9 +490,12 @@ export const equationsBank: TutorBankItemV4[] = [
         choices: ["oui", "non"],
         expected: [isSolution ? "oui" : "non"],
         comparator: "mcq_exact",
-        explanation: `${a} × ${candidate} = ${a * candidate}. ${
+        explanation: "Définition : une équation est une égalité avec une inconnue ; la résoudre, c’est trouver la valeur qui rend l’égalité vraie.\n\n" +
+          "Méthode : on garde l’égalité équilibrée en faisant la même opération des deux côtés.\n\nCalcul : " +
+          (`${a} × ${candidate} = ${a * candidate}. ${
           isSolution ? "Cela donne bien" : "Cela ne donne pas"
-        } ${b}.`,
+        } ${b}.`) +
+          "\n\nConclusion : la valeur trouvée est la solution de l’équation.",
       };
     },
   },
@@ -457,7 +517,10 @@ export const equationsBank: TutorBankItemV4[] = [
     expected: ["12"],
     comparator: "number_equal",
     hint: "Pose x + 5 = 17.",
-    explanation: "On pose x + 5 = 17. Donc x = 12.",
+    explanation: "Définition : une équation est une égalité avec une inconnue ; la résoudre, c’est trouver la valeur qui rend l’égalité vraie.\n\n" +
+          "Méthode : on garde l’égalité équilibrée en faisant la même opération des deux côtés.\n\nCalcul : " +
+          ("On pose x + 5 = 17. Donc x = 12.") +
+          "\n\nConclusion : la valeur trouvée est la solution de l’équation.",
     tags: ["equation", "probleme"],
   },
   {
@@ -474,7 +537,10 @@ export const equationsBank: TutorBankItemV4[] = [
     expected: ["7"],
     comparator: "number_equal",
     hint: "Pose 2x - 3 = 11.",
-    explanation: "2x - 3 = 11 donc 2x = 14 puis x = 7.",
+    explanation: "Définition : une équation est une égalité avec une inconnue ; la résoudre, c’est trouver la valeur qui rend l’égalité vraie.\n\n" +
+          "Méthode : on garde l’égalité équilibrée en faisant la même opération des deux côtés.\n\nCalcul : " +
+          ("2x - 3 = 11 donc 2x = 14 puis x = 7.") +
+          "\n\nConclusion : la valeur trouvée est la solution de l’équation.",
     tags: ["equation", "probleme"],
   },
   {
@@ -498,7 +564,10 @@ export const equationsBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(x)],
         comparator: "number_equal",
-        explanation: `On pose x + ${b} = ${total}. Donc x = ${total} - ${b} = ${x}.`,
+        explanation: "Définition : une équation est une égalité avec une inconnue ; la résoudre, c’est trouver la valeur qui rend l’égalité vraie.\n\n" +
+          "Méthode : on garde l’égalité équilibrée en faisant la même opération des deux côtés.\n\nCalcul : " +
+          (`On pose x + ${b} = ${total}. Donc x = ${total} - ${b} = ${x}.`) +
+          "\n\nConclusion : la valeur trouvée est la solution de l’équation.",
       };
     },
   },
@@ -523,7 +592,10 @@ export const equationsBank: TutorBankItemV4[] = [
       format: "short",
       expected: [String(x)],
       comparator: "number_equal",
-      explanation: `${prix}x = ${total} donc x = ${total} ÷ ${prix} = ${x}.`,
+      explanation: "Définition : une équation est une égalité avec une inconnue ; la résoudre, c’est trouver la valeur qui rend l’égalité vraie.\n\n" +
+          "Méthode : on garde l’égalité équilibrée en faisant la même opération des deux côtés.\n\nCalcul : " +
+          (`${prix}x = ${total} donc x = ${total} ÷ ${prix} = ${x}.`) +
+          "\n\nConclusion : la valeur trouvée est la solution de l’équation.",
     };
   },
 },
@@ -546,7 +618,10 @@ export const equationsBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "Remplace x par 3 dans l’équation.",
     explanation:
-      "On remplace x par 3 : 2 × 3 + 1 = 6 + 1 = 7. L’égalité est vraie, donc 3 est solution.",
+      "Définition : une équation est une égalité avec une inconnue ; la résoudre, c’est trouver la valeur qui rend l’égalité vraie.\n\n" +
+          "Méthode : on garde l’égalité équilibrée en faisant la même opération des deux côtés.\n\nCalcul : " +
+          ("On remplace x par 3 : 2 × 3 + 1 = 6 + 1 = 7. L’égalité est vraie, donc 3 est solution.") +
+          "\n\nConclusion : la valeur trouvée est la solution de l’équation.",
     tags: ["equation", "defi", "justification"],
   },
   {
@@ -565,7 +640,10 @@ export const equationsBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Teste vraiment x = 4 dans l’équation.",
    explanation:
-  "Non. Même si x = 4 est bien solution, le raisonnement de Léo est faux. Il faut remplacer x dans l’expression, pas additionner les nombres.",
+  "Définition : une équation est une égalité avec une inconnue ; la résoudre, c’est trouver la valeur qui rend l’égalité vraie.\n\n" +
+          "Méthode : on garde l’égalité équilibrée en faisant la même opération des deux côtés.\n\nCalcul : " +
+          ("Non. Même si x = 4 est bien solution, le raisonnement de Léo est faux. Il faut remplacer x dans l’expression, pas additionner les nombres.") +
+          "\n\nConclusion : la valeur trouvée est la solution de l’équation.",
     tags: ["equation", "defi", "erreur"],
   },
   {
@@ -583,7 +661,10 @@ export const equationsBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Développe puis regroupe les termes.",
     explanation:
-      "2(x + 3) = 3x + 1 donne 2x + 6 = 3x + 1. Donc 6 = x + 1 puis x = 5.",
+      "Définition : une équation est une égalité avec une inconnue ; la résoudre, c’est trouver la valeur qui rend l’égalité vraie.\n\n" +
+          "Méthode : on garde l’égalité équilibrée en faisant la même opération des deux côtés.\n\nCalcul : " +
+          ("2(x + 3) = 3x + 1 donne 2x + 6 = 3x + 1. Donc 6 = x + 1 puis x = 5.") +
+          "\n\nConclusion : la valeur trouvée est la solution de l’équation.",
     tags: ["equation", "defi", "avance"],
   },
   {
@@ -607,7 +688,10 @@ export const equationsBank: TutorBankItemV4[] = [
       format: "open",
       expected: ["remplace", "multiplie", "égalité", `${b}`],
       comparator: "contains_keyword",
-      explanation: `On remplace x par ${x} : ${a} × ${x} = ${b}, donc l’égalité est vérifiée.`,
+      explanation: "Définition : une équation est une égalité avec une inconnue ; la résoudre, c’est trouver la valeur qui rend l’égalité vraie.\n\n" +
+          "Méthode : on garde l’égalité équilibrée en faisant la même opération des deux côtés.\n\nCalcul : " +
+          (`On remplace x par ${x} : ${a} × ${x} = ${b}, donc l’égalité est vérifiée.`) +
+          "\n\nConclusion : la valeur trouvée est la solution de l’équation.",
     };
   },
 },
@@ -631,7 +715,10 @@ export const equationsBank: TutorBankItemV4[] = [
       format: "open",
       expected: ["division", "erreur", "multiplier", "égalité"],
       comparator: "contains_keyword",
-      explanation: `On doit diviser par ${a}, pas soustraire.`,
+      explanation: "Définition : une équation est une égalité avec une inconnue ; la résoudre, c’est trouver la valeur qui rend l’égalité vraie.\n\n" +
+          "Méthode : on garde l’égalité équilibrée en faisant la même opération des deux côtés.\n\nCalcul : " +
+          (`On doit diviser par ${a}, pas soustraire.`) +
+          "\n\nConclusion : la valeur trouvée est la solution de l’équation.",
     };
   },
 },

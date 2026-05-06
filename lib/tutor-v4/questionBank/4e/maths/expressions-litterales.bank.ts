@@ -44,7 +44,10 @@ export const expressionsLitteralesBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "Cherche le symbole qui peut représenter un nombre variable.",
     explanation:
-      "Dans 3x + 5, la lettre est x. Elle représente une valeur qui peut changer.",
+      "Définition : une expression littérale contient des lettres qui représentent des nombres.\n\n" +
+          "Méthode : on identifie les termes semblables et on respecte les priorités de calcul.\n\nCalcul : " +
+          ("Dans 3x + 5, la lettre est x. Elle représente une valeur qui peut changer.") +
+          "\n\nConclusion : l’expression finale respecte les règles du calcul littéral.",
     tags: ["expression", "lettre", "variable"],
   },
   {
@@ -62,7 +65,10 @@ export const expressionsLitteralesBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Le coefficient est le nombre placé devant la lettre.",
     explanation:
-      "Dans 7a - 2, le coefficient de a est 7, car 7a signifie 7 multiplié par a.",
+      "Définition : une expression littérale contient des lettres qui représentent des nombres.\n\n" +
+          "Méthode : on identifie les termes semblables et on respecte les priorités de calcul.\n\nCalcul : " +
+          ("Dans 7a - 2, le coefficient de a est 7, car 7a signifie 7 multiplié par a.") +
+          "\n\nConclusion : l’expression finale respecte les règles du calcul littéral.",
     tags: ["expression", "coefficient"],
   },
   {
@@ -81,7 +87,10 @@ export const expressionsLitteralesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Une expression littérale contient au moins une lettre.",
     explanation:
-      "Oui, 4x + 1 est une expression littérale, car elle contient la lettre x.",
+      "Définition : une expression littérale contient des lettres qui représentent des nombres.\n\n" +
+          "Méthode : on identifie les termes semblables et on respecte les priorités de calcul.\n\nCalcul : " +
+          ("Oui, 4x + 1 est une expression littérale, car elle contient la lettre x.") +
+          "\n\nConclusion : l’expression finale respecte les règles du calcul littéral.",
     tags: ["expression", "reconnaitre"],
   },
     {
@@ -99,7 +108,10 @@ export const expressionsLitteralesBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "La lettre peut représenter un nombre qui change.",
     explanation:
-      "Dans une expression littérale, la lettre représente un nombre variable ou inconnu.",
+      "Définition : une expression littérale contient des lettres qui représentent des nombres.\n\n" +
+          "Méthode : on identifie les termes semblables et on respecte les priorités de calcul.\n\nCalcul : " +
+          ("Dans une expression littérale, la lettre représente un nombre variable ou inconnu.") +
+          "\n\nConclusion : l’expression finale respecte les règles du calcul littéral.",
     tags: ["expression", "variable", "open"],
   },
   {
@@ -124,7 +136,10 @@ export const expressionsLitteralesBank: TutorBankItemV4[] = [
         format: "short",
         expected: [letter],
         comparator: "contains_keyword",
-        explanation: `Dans l’expression ${a}${letter} + ${b}, la lettre est ${letter}.`,
+        explanation: "Définition : une expression littérale contient des lettres qui représentent des nombres.\n\n" +
+          "Méthode : on identifie les termes semblables et on respecte les priorités de calcul.\n\nCalcul : " +
+          (`Dans l’expression ${a}${letter} + ${b}, la lettre est ${letter}.`) +
+          "\n\nConclusion : l’expression finale respecte les règles du calcul littéral.",
       };
     },
   },
@@ -146,7 +161,10 @@ export const expressionsLitteralesBank: TutorBankItemV4[] = [
     expected: ["x+4", "x + 4", "4+x", "4 + x"],
     comparator: "contains_keyword",
     hint: "« augmenté de 4 » signifie qu’on ajoute 4.",
-    explanation: "« Un nombre x augmenté de 4 » se traduit par x + 4.",
+    explanation: "Définition : une expression littérale contient des lettres qui représentent des nombres.\n\n" +
+          "Méthode : on identifie les termes semblables et on respecte les priorités de calcul.\n\nCalcul : " +
+          ("« Un nombre x augmenté de 4 » se traduit par x + 4.") +
+          "\n\nConclusion : l’expression finale respecte les règles du calcul littéral.",
     tags: ["traduction", "addition"],
   },
   {
@@ -163,7 +181,10 @@ export const expressionsLitteralesBank: TutorBankItemV4[] = [
     expected: ["2x", "2*x"],
     comparator: "contains_keyword",
     hint: "Le double signifie 2 fois.",
-    explanation: "Le double de x se traduit par 2x.",
+    explanation: "Définition : une expression littérale contient des lettres qui représentent des nombres.\n\n" +
+          "Méthode : on identifie les termes semblables et on respecte les priorités de calcul.\n\nCalcul : " +
+          ("Le double de x se traduit par 2x.") +
+          "\n\nConclusion : l’expression finale respecte les règles du calcul littéral.",
     tags: ["traduction", "multiplication"],
   },
   {
@@ -180,7 +201,10 @@ export const expressionsLitteralesBank: TutorBankItemV4[] = [
     expected: ["3y-5", "3y - 5", "3*y-5", "3*y - 5"],
     comparator: "contains_keyword",
     hint: "Le triple de y, puis on enlève 5.",
-    explanation: "Le triple de y est 3y. Diminué de 5 donne 3y - 5.",
+    explanation: "Définition : une expression littérale contient des lettres qui représentent des nombres.\n\n" +
+          "Méthode : on identifie les termes semblables et on respecte les priorités de calcul.\n\nCalcul : " +
+          ("Le triple de y est 3y. Diminué de 5 donne 3y - 5.") +
+          "\n\nConclusion : l’expression finale respecte les règles du calcul littéral.",
     tags: ["traduction", "soustraction"],
   },
     {
@@ -198,7 +222,10 @@ export const expressionsLitteralesBank: TutorBankItemV4[] = [
     expected: ["2x + 5"],
     comparator: "mcq_exact",
     hint: "Le double de x est 2x, puis on ajoute 5.",
-    explanation: "Le double de x augmenté de 5 se traduit par 2x + 5.",
+    explanation: "Définition : une expression littérale contient des lettres qui représentent des nombres.\n\n" +
+          "Méthode : on identifie les termes semblables et on respecte les priorités de calcul.\n\nCalcul : " +
+          ("Le double de x augmenté de 5 se traduit par 2x + 5.") +
+          "\n\nConclusion : l’expression finale respecte les règles du calcul littéral.",
     tags: ["expression", "traduction", "qcm"],
   },
   {
@@ -226,7 +253,10 @@ export const expressionsLitteralesBank: TutorBankItemV4[] = [
             `${k}*${letter}+${c}`,
             `${k}*${letter} + ${c}`,
           ],
-          explanation: `« ${k} fois ${letter} plus ${c} » se traduit par ${k}${letter} + ${c}.`,
+          explanation: "Définition : une expression littérale contient des lettres qui représentent des nombres.\n\n" +
+          "Méthode : on identifie les termes semblables et on respecte les priorités de calcul.\n\nCalcul : " +
+          (`« ${k} fois ${letter} plus ${c} » se traduit par ${k}${letter} + ${c}.`) +
+          "\n\nConclusion : l’expression finale respecte les règles du calcul littéral.",
         },
         {
           text: `Traduire par une expression littérale : « ${k} fois ${letter} moins ${c} »`,
@@ -236,7 +266,10 @@ export const expressionsLitteralesBank: TutorBankItemV4[] = [
             `${k}*${letter}-${c}`,
             `${k}*${letter} - ${c}`,
           ],
-          explanation: `« ${k} fois ${letter} moins ${c} » se traduit par ${k}${letter} - ${c}.`,
+          explanation: "Définition : une expression littérale contient des lettres qui représentent des nombres.\n\n" +
+          "Méthode : on identifie les termes semblables et on respecte les priorités de calcul.\n\nCalcul : " +
+          (`« ${k} fois ${letter} moins ${c} » se traduit par ${k}${letter} - ${c}.`) +
+          "\n\nConclusion : l’expression finale respecte les règles du calcul littéral.",
         },
       ];
 
@@ -247,7 +280,10 @@ export const expressionsLitteralesBank: TutorBankItemV4[] = [
         format: "short",
         expected: picked.expected,
         comparator: "contains_keyword",
-        explanation: picked.explanation,
+        explanation: "Définition : une expression littérale contient des lettres qui représentent des nombres.\n\n" +
+          "Méthode : on identifie les termes semblables et on respecte les priorités de calcul.\n\nCalcul : " +
+          (picked.explanation) +
+          "\n\nConclusion : l’expression finale respecte les règles du calcul littéral.",
       };
     },
   },
@@ -266,7 +302,10 @@ export const expressionsLitteralesBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "Traduis séparément « triple » puis « diminué de 4 ».",
     explanation:
-      "Le triple de x se traduit par 3x. Diminué de 4 signifie qu’on enlève 4, donc on obtient 3x - 4.",
+      "Définition : une expression littérale contient des lettres qui représentent des nombres.\n\n" +
+          "Méthode : on identifie les termes semblables et on respecte les priorités de calcul.\n\nCalcul : " +
+          ("Le triple de x se traduit par 3x. Diminué de 4 signifie qu’on enlève 4, donc on obtient 3x - 4.") +
+          "\n\nConclusion : l’expression finale respecte les règles du calcul littéral.",
     tags: ["expression", "traduction", "open"],
   },
 
@@ -287,7 +326,10 @@ export const expressionsLitteralesBank: TutorBankItemV4[] = [
     expected: ["14"],
     comparator: "number_equal",
     hint: "Remplace x par 4, puis calcule.",
-    explanation: "3x + 2 avec x = 4 donne 3 × 4 + 2 = 12 + 2 = 14.",
+    explanation: "Définition : une expression littérale contient des lettres qui représentent des nombres.\n\n" +
+          "Méthode : on identifie les termes semblables et on respecte les priorités de calcul.\n\nCalcul : " +
+          ("3x + 2 avec x = 4 donne 3 × 4 + 2 = 12 + 2 = 14.") +
+          "\n\nConclusion : l’expression finale respecte les règles du calcul littéral.",
     tags: ["substitution", "calcul"],
   },
   {
@@ -304,7 +346,10 @@ export const expressionsLitteralesBank: TutorBankItemV4[] = [
     expected: ["14"],
     comparator: "number_equal",
     hint: "Remplace a par 3.",
-    explanation: "5a - 1 avec a = 3 donne 5 × 3 - 1 = 15 - 1 = 14.",
+    explanation: "Définition : une expression littérale contient des lettres qui représentent des nombres.\n\n" +
+          "Méthode : on identifie les termes semblables et on respecte les priorités de calcul.\n\nCalcul : " +
+          ("5a - 1 avec a = 3 donne 5 × 3 - 1 = 15 - 1 = 14.") +
+          "\n\nConclusion : l’expression finale respecte les règles du calcul littéral.",
     tags: ["substitution", "calcul"],
   },
   {
@@ -322,7 +367,10 @@ export const expressionsLitteralesBank: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Remplace chaque lettre par sa valeur.",
     explanation:
-      "2x + 3y avec x = 2 et y = 5 donne 2 × 2 + 3 × 5 = 4 + 15 = 19.",
+      "Définition : une expression littérale contient des lettres qui représentent des nombres.\n\n" +
+          "Méthode : on identifie les termes semblables et on respecte les priorités de calcul.\n\nCalcul : " +
+          ("2x + 3y avec x = 2 et y = 5 donne 2 × 2 + 3 × 5 = 4 + 15 = 19.") +
+          "\n\nConclusion : l’expression finale respecte les règles du calcul littéral.",
     tags: ["substitution", "deux-lettres"],
   },
     {
@@ -340,7 +388,10 @@ export const expressionsLitteralesBank: TutorBankItemV4[] = [
     expected: ["4 × 3 + 1"],
     comparator: "mcq_exact",
     hint: "Remplace x par 3.",
-    explanation: "On remplace x par 3 : 4x + 1 devient 4 × 3 + 1.",
+    explanation: "Définition : une expression littérale contient des lettres qui représentent des nombres.\n\n" +
+          "Méthode : on identifie les termes semblables et on respecte les priorités de calcul.\n\nCalcul : " +
+          ("On remplace x par 3 : 4x + 1 devient 4 × 3 + 1.") +
+          "\n\nConclusion : l’expression finale respecte les règles du calcul littéral.",
     tags: ["expression", "substitution", "qcm"],
   },
   {
@@ -366,7 +417,10 @@ export const expressionsLitteralesBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(result)],
         comparator: "number_equal",
-        explanation: `${k}${letter} + ${c} avec ${letter} = ${value} donne ${k} × ${value} + ${c} = ${result}.`,
+        explanation: "Définition : une expression littérale contient des lettres qui représentent des nombres.\n\n" +
+          "Méthode : on identifie les termes semblables et on respecte les priorités de calcul.\n\nCalcul : " +
+          (`${k}${letter} + ${c} avec ${letter} = ${value} donne ${k} × ${value} + ${c} = ${result}.`) +
+          "\n\nConclusion : l’expression finale respecte les règles du calcul littéral.",
       };
     },
   },
@@ -385,7 +439,10 @@ export const expressionsLitteralesBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "Remplace x par 4 puis effectue le calcul.",
     explanation:
-      "On remplace x par 4 : 3x + 2 = 3 × 4 + 2 = 12 + 2 = 14.",
+      "Définition : une expression littérale contient des lettres qui représentent des nombres.\n\n" +
+          "Méthode : on identifie les termes semblables et on respecte les priorités de calcul.\n\nCalcul : " +
+          ("On remplace x par 4 : 3x + 2 = 3 × 4 + 2 = 12 + 2 = 14.") +
+          "\n\nConclusion : l’expression finale respecte les règles du calcul littéral.",
     tags: ["expression", "substitution", "open"],
   },
 
@@ -407,7 +464,10 @@ export const expressionsLitteralesBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "3x et 2x sont des termes de même nature.",
     explanation:
-      "3x + 2x = 5x, car on additionne les coefficients : 3 + 2 = 5.",
+      "Définition : une expression littérale contient des lettres qui représentent des nombres.\n\n" +
+          "Méthode : on identifie les termes semblables et on respecte les priorités de calcul.\n\nCalcul : " +
+          ("3x + 2x = 5x, car on additionne les coefficients : 3 + 2 = 5.") +
+          "\n\nConclusion : l’expression finale respecte les règles du calcul littéral.",
     tags: ["reduction", "termes-semblables"],
   },
   {
@@ -424,7 +484,10 @@ export const expressionsLitteralesBank: TutorBankItemV4[] = [
     expected: ["3a", "3*a"],
     comparator: "contains_keyword",
     hint: "Soustraire a revient à soustraire 1a.",
-    explanation: "4a - a = 4a - 1a = 3a.",
+    explanation: "Définition : une expression littérale contient des lettres qui représentent des nombres.\n\n" +
+          "Méthode : on identifie les termes semblables et on respecte les priorités de calcul.\n\nCalcul : " +
+          ("4a - a = 4a - 1a = 3a.") +
+          "\n\nConclusion : l’expression finale respecte les règles du calcul littéral.",
     tags: ["reduction"],
   },
   {
@@ -441,7 +504,10 @@ export const expressionsLitteralesBank: TutorBankItemV4[] = [
     expected: ["5x+5", "5x + 5", "5+5x", "5 + 5x"],
     comparator: "contains_keyword",
     hint: "Réunis les termes en x, puis garde le nombre seul.",
-    explanation: "2x + 5 + 3x = 5x + 5, car 2x + 3x = 5x.",
+    explanation: "Définition : une expression littérale contient des lettres qui représentent des nombres.\n\n" +
+          "Méthode : on identifie les termes semblables et on respecte les priorités de calcul.\n\nCalcul : " +
+          ("2x + 5 + 3x = 5x + 5, car 2x + 3x = 5x.") +
+          "\n\nConclusion : l’expression finale respecte les règles du calcul littéral.",
     tags: ["reduction", "ordre"],
   },
     {
@@ -460,7 +526,10 @@ export const expressionsLitteralesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "On peut additionner seulement les termes semblables.",
     explanation:
-      "2x et 3x sont des termes semblables, donc 2x + 3x = 5x.",
+      "Définition : une expression littérale contient des lettres qui représentent des nombres.\n\n" +
+          "Méthode : on identifie les termes semblables et on respecte les priorités de calcul.\n\nCalcul : " +
+          ("2x et 3x sont des termes semblables, donc 2x + 3x = 5x.") +
+          "\n\nConclusion : l’expression finale respecte les règles du calcul littéral.",
     tags: ["expression", "reduction", "qcm"],
   },
   {
@@ -485,7 +554,10 @@ export const expressionsLitteralesBank: TutorBankItemV4[] = [
         format: "short",
         expected: [`${total}${letter}`, `${total}*${letter}`],
         comparator: "contains_keyword",
-        explanation: `${c1}${letter} + ${c2}${letter} = ${total}${letter}, car ${c1} + ${c2} = ${total}.`,
+        explanation: "Définition : une expression littérale contient des lettres qui représentent des nombres.\n\n" +
+          "Méthode : on identifie les termes semblables et on respecte les priorités de calcul.\n\nCalcul : " +
+          (`${c1}${letter} + ${c2}${letter} = ${total}${letter}, car ${c1} + ${c2} = ${total}.`) +
+          "\n\nConclusion : l’expression finale respecte les règles du calcul littéral.",
       };
     },
   },
@@ -504,7 +576,10 @@ export const expressionsLitteralesBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "Compare 2x et 3 : sont-ils de même nature ?",
     explanation:
-      "2x contient une lettre, alors que 3 est un nombre seul. Ce ne sont pas des termes semblables, donc on ne peut pas écrire 5x.",
+      "Définition : une expression littérale contient des lettres qui représentent des nombres.\n\n" +
+          "Méthode : on identifie les termes semblables et on respecte les priorités de calcul.\n\nCalcul : " +
+          ("2x contient une lettre, alors que 3 est un nombre seul. Ce ne sont pas des termes semblables, donc on ne peut pas écrire 5x.") +
+          "\n\nConclusion : l’expression finale respecte les règles du calcul littéral.",
     tags: ["expression", "reduction", "erreur", "open"],
   },
 
@@ -532,7 +607,10 @@ export const expressionsLitteralesBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "3x et 2x représentent des quantités de même nature.",
     explanation:
-      "3x et 2x sont des termes semblables : ils contiennent la même lettre x. On peut donc additionner leurs coefficients : 3 + 2 = 5, donc 3x + 2x = 5x.",
+      "Définition : une expression littérale contient des lettres qui représentent des nombres.\n\n" +
+          "Méthode : on identifie les termes semblables et on respecte les priorités de calcul.\n\nCalcul : " +
+          ("3x et 2x sont des termes semblables : ils contiennent la même lettre x. On peut donc additionner leurs coefficients : 3 + 2 = 5, donc 3x + 2x = 5x.") +
+          "\n\nConclusion : l’expression finale respecte les règles du calcul littéral.",
     tags: ["defi", "justification", "reduction"],
   },
   {
@@ -551,7 +629,10 @@ export const expressionsLitteralesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Peut-on additionner 2x et 3 ?",
     explanation:
-      "Non. 2x et 3 ne sont pas des termes semblables. 2x contient une lettre, 3 est un nombre seul. On ne peut pas les additionner en 5x.",
+      "Définition : une expression littérale contient des lettres qui représentent des nombres.\n\n" +
+          "Méthode : on identifie les termes semblables et on respecte les priorités de calcul.\n\nCalcul : " +
+          ("Non. 2x et 3 ne sont pas des termes semblables. 2x contient une lettre, 3 est un nombre seul. On ne peut pas les additionner en 5x.") +
+          "\n\nConclusion : l’expression finale respecte les règles du calcul littéral.",
     tags: ["defi", "erreur-frequente"],
   },
   {
@@ -569,7 +650,10 @@ export const expressionsLitteralesBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "Prix des stylos + frais fixes.",
     explanation:
-      "x stylos à 2 euros chacun coûtent 2x euros. Avec 3 euros de frais fixes, le total est 2x + 3.",
+      "Définition : une expression littérale contient des lettres qui représentent des nombres.\n\n" +
+          "Méthode : on identifie les termes semblables et on respecte les priorités de calcul.\n\nCalcul : " +
+          ("x stylos à 2 euros chacun coûtent 2x euros. Avec 3 euros de frais fixes, le total est 2x + 3.") +
+          "\n\nConclusion : l’expression finale respecte les règles du calcul littéral.",
     tags: ["defi", "situation"],
   },
     {
@@ -592,7 +676,10 @@ export const expressionsLitteralesBank: TutorBankItemV4[] = [
         format: "open",
         expected: [String(prix), "x", String(frais), "frais"],
         comparator: "contains_keyword",
-        explanation: `Les x objets coûtent ${prix}x euros. On ajoute ensuite ${frais} euros de frais fixes, donc le prix total est ${prix}x + ${frais}.`,
+        explanation: "Définition : une expression littérale contient des lettres qui représentent des nombres.\n\n" +
+          "Méthode : on identifie les termes semblables et on respecte les priorités de calcul.\n\nCalcul : " +
+          (`Les x objets coûtent ${prix}x euros. On ajoute ensuite ${frais} euros de frais fixes, donc le prix total est ${prix}x + ${frais}.`) +
+          "\n\nConclusion : l’expression finale respecte les règles du calcul littéral.",
       };
     },
   },

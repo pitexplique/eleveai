@@ -256,7 +256,10 @@ export const parallelogrammesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "C’est la définition du parallélogramme.",
     explanation:
-      "Un parallélogramme est un quadrilatère dont les côtés opposés sont parallèles deux à deux.",
+      "Définition : un parallélogramme est un quadrilatère dont les côtés opposés sont parallèles deux à deux.\n\n" +
+          "Méthode : on utilise la propriété du parallélogramme qui correspond aux données de l’énoncé.\n\nCalcul : " +
+          ("Un parallélogramme est un quadrilatère dont les côtés opposés sont parallèles deux à deux.") +
+          "\n\nConclusion : la propriété choisie permet de conclure sur la figure.",
     tags: ["parallelogramme", "definition"],
   },
   {
@@ -274,7 +277,10 @@ export const parallelogrammesBank: TutorBankItemV4[] = [
     expected: ["oui"],
     comparator: "mcq_exact",
     hint: "Un rectangle a aussi ses côtés opposés parallèles.",
-    explanation: "Oui. Un rectangle est un parallélogramme particulier.",
+    explanation: "Définition : un parallélogramme est un quadrilatère dont les côtés opposés sont parallèles deux à deux.\n\n" +
+          "Méthode : on utilise la propriété du parallélogramme qui correspond aux données de l’énoncé.\n\nCalcul : " +
+          ("Oui. Un rectangle est un parallélogramme particulier.") +
+          "\n\nConclusion : la propriété choisie permet de conclure sur la figure.",
     tags: ["parallelogramme", "rectangle"],
   },
   {
@@ -321,9 +327,12 @@ export const parallelogrammesBank: TutorBankItemV4[] = [
         choices: ["oui", "non"],
         expected: [yes ? "oui" : "non"],
         comparator: "mcq_exact",
-        explanation: yes
+        explanation: "Définition : un parallélogramme est un quadrilatère dont les côtés opposés sont parallèles deux à deux.\n\n" +
+          "Méthode : on utilise la propriété du parallélogramme qui correspond aux données de l’énoncé.\n\nCalcul : " +
+          (yes
           ? "Oui. Les côtés opposés sont parallèles deux à deux."
-          : "Non. Un seul couple de côtés opposés est codé parallèle.",
+          : "Non. Un seul couple de côtés opposés est codé parallèle.") +
+          "\n\nConclusion : la propriété choisie permet de conclure sur la figure.",
         canvas,
       };
     },
@@ -343,7 +352,10 @@ export const parallelogrammesBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "Observe les côtés opposés d’un rectangle.",
     explanation:
-      "Un rectangle a ses côtés opposés parallèles deux à deux. Il vérifie donc la définition d’un parallélogramme.",
+      "Définition : un parallélogramme est un quadrilatère dont les côtés opposés sont parallèles deux à deux.\n\n" +
+          "Méthode : on utilise la propriété du parallélogramme qui correspond aux données de l’énoncé.\n\nCalcul : " +
+          ("Un rectangle a ses côtés opposés parallèles deux à deux. Il vérifie donc la définition d’un parallélogramme.") +
+          "\n\nConclusion : la propriété choisie permet de conclure sur la figure.",
     tags: ["parallelogramme", "rectangle", "open"],
   },
 
@@ -371,7 +383,10 @@ export const parallelogrammesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "C’est une propriété fondamentale du parallélogramme.",
     explanation:
-      "Dans un parallélogramme, les côtés opposés sont parallèles et de même longueur.",
+      "Définition : un parallélogramme est un quadrilatère dont les côtés opposés sont parallèles deux à deux.\n\n" +
+          "Méthode : on utilise la propriété du parallélogramme qui correspond aux données de l’énoncé.\n\nCalcul : " +
+          ("Dans un parallélogramme, les côtés opposés sont parallèles et de même longueur.") +
+          "\n\nConclusion : la propriété choisie permet de conclure sur la figure.",
     tags: ["parallelogramme", "proprietes"],
   },
   {
@@ -402,7 +417,10 @@ export const parallelogrammesBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(answerMap[ask])],
         comparator: "number_equal",
-        explanation: `Dans un parallélogramme, les côtés opposés sont égaux : AB = CD = ${base} et BC = DA = ${side}.`,
+        explanation: "Définition : un parallélogramme est un quadrilatère dont les côtés opposés sont parallèles deux à deux.\n\n" +
+          "Méthode : on utilise la propriété du parallélogramme qui correspond aux données de l’énoncé.\n\nCalcul : " +
+          (`Dans un parallélogramme, les côtés opposés sont égaux : AB = CD = ${base} et BC = DA = ${side}.`) +
+          "\n\nConclusion : la propriété choisie permet de conclure sur la figure.",
         canvas: parallelogramFigure(base, side),
       };
     },
@@ -434,7 +452,10 @@ export const parallelogrammesBank: TutorBankItemV4[] = [
         expected: [String(answerMap[ask])],
         comparator: "number_equal",
         explanation:
-          "Les angles opposés sont égaux et deux angles consécutifs sont supplémentaires.",
+          "Définition : un parallélogramme est un quadrilatère dont les côtés opposés sont parallèles deux à deux.\n\n" +
+          "Méthode : on utilise la propriété du parallélogramme qui correspond aux données de l’énoncé.\n\nCalcul : " +
+          ("Les angles opposés sont égaux et deux angles consécutifs sont supplémentaires.") +
+          "\n\nConclusion : la propriété choisie permet de conclure sur la figure.",
         canvas: parallelogramFigure(),
       };
     },
@@ -454,7 +475,10 @@ export const parallelogrammesBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "Il y a deux propriétés importantes : direction et longueur.",
     explanation:
-      "Dans un parallélogramme, les côtés opposés sont parallèles et de même longueur.",
+      "Définition : un parallélogramme est un quadrilatère dont les côtés opposés sont parallèles deux à deux.\n\n" +
+          "Méthode : on utilise la propriété du parallélogramme qui correspond aux données de l’énoncé.\n\nCalcul : " +
+          ("Dans un parallélogramme, les côtés opposés sont parallèles et de même longueur.") +
+          "\n\nConclusion : la propriété choisie permet de conclure sur la figure.",
     tags: ["parallelogramme", "proprietes", "open"],
   },
 
@@ -482,7 +506,10 @@ export const parallelogrammesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "C’est une propriété centrale du parallélogramme.",
     explanation:
-      "Dans un parallélogramme, les diagonales se coupent en leur milieu.",
+      "Définition : un parallélogramme est un quadrilatère dont les côtés opposés sont parallèles deux à deux.\n\n" +
+          "Méthode : on utilise la propriété du parallélogramme qui correspond aux données de l’énoncé.\n\nCalcul : " +
+          ("Dans un parallélogramme, les diagonales se coupent en leur milieu.") +
+          "\n\nConclusion : la propriété choisie permet de conclure sur la figure.",
     tags: ["parallelogramme", "diagonales"],
   },
   {
@@ -510,9 +537,12 @@ export const parallelogrammesBank: TutorBankItemV4[] = [
         expected: [String(ask === "demi" ? half : whole)],
         comparator: "number_equal",
         explanation:
-          ask === "demi"
+          "Définition : un parallélogramme est un quadrilatère dont les côtés opposés sont parallèles deux à deux.\n\n" +
+          "Méthode : on utilise la propriété du parallélogramme qui correspond aux données de l’énoncé.\n\nCalcul : " +
+          (ask === "demi"
             ? `Les diagonales se coupent en leur milieu, donc chaque moitié mesure ${half} cm.`
-            : `La diagonale entière vaut ${half} + ${half} = ${whole} cm.`,
+            : `La diagonale entière vaut ${half} + ${half} = ${whole} cm.`) +
+          "\n\nConclusion : la propriété choisie permet de conclure sur la figure.",
         canvas: parallelogramWithDiagonals(randomInt(8, 16), randomInt(6, 14)),
       };
     },
@@ -536,7 +566,10 @@ export const parallelogrammesBank: TutorBankItemV4[] = [
         expected: ["non"],
         comparator: "mcq_exact",
         explanation:
-          "Non. Des diagonales égales ne suffisent pas. Par exemple, un trapèze isocèle peut avoir des diagonales égales sans être un parallélogramme.",
+          "Définition : un parallélogramme est un quadrilatère dont les côtés opposés sont parallèles deux à deux.\n\n" +
+          "Méthode : on utilise la propriété du parallélogramme qui correspond aux données de l’énoncé.\n\nCalcul : " +
+          ("Non. Des diagonales égales ne suffisent pas. Par exemple, un trapèze isocèle peut avoir des diagonales égales sans être un parallélogramme.") +
+          "\n\nConclusion : la propriété choisie permet de conclure sur la figure.",
         canvas: genericQuadWithDiagonals(randomInt(8, 16), randomInt(8, 16)),
       };
     },
@@ -556,7 +589,10 @@ export const parallelogrammesBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "Chaque diagonale est partagée en deux morceaux égaux.",
     explanation:
-      "Cela signifie que le point d’intersection partage chaque diagonale en deux segments de même longueur.",
+      "Définition : un parallélogramme est un quadrilatère dont les côtés opposés sont parallèles deux à deux.\n\n" +
+          "Méthode : on utilise la propriété du parallélogramme qui correspond aux données de l’énoncé.\n\nCalcul : " +
+          ("Cela signifie que le point d’intersection partage chaque diagonale en deux segments de même longueur.") +
+          "\n\nConclusion : la propriété choisie permet de conclure sur la figure.",
     tags: ["parallelogramme", "diagonales", "open"],
   },
 
@@ -579,7 +615,10 @@ export const parallelogrammesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "C’est une condition caractéristique du parallélogramme.",
     explanation:
-      "Si les diagonales d’un quadrilatère se coupent en leur milieu, alors ce quadrilatère est un parallélogramme.",
+      "Définition : un parallélogramme est un quadrilatère dont les côtés opposés sont parallèles deux à deux.\n\n" +
+          "Méthode : on utilise la propriété du parallélogramme qui correspond aux données de l’énoncé.\n\nCalcul : " +
+          ("Si les diagonales d’un quadrilatère se coupent en leur milieu, alors ce quadrilatère est un parallélogramme.") +
+          "\n\nConclusion : la propriété choisie permet de conclure sur la figure.",
     tags: ["parallelogramme", "demonstration"],
   },
   {
@@ -604,7 +643,10 @@ export const parallelogrammesBank: TutorBankItemV4[] = [
           expected: ["oui"],
           comparator: "mcq_exact",
           explanation:
-            "Oui. Si les côtés opposés d’un quadrilatère sont parallèles deux à deux, alors c’est un parallélogramme.",
+            "Définition : un parallélogramme est un quadrilatère dont les côtés opposés sont parallèles deux à deux.\n\n" +
+          "Méthode : on utilise la propriété du parallélogramme qui correspond aux données de l’énoncé.\n\nCalcul : " +
+          ("Oui. Si les côtés opposés d’un quadrilatère sont parallèles deux à deux, alors c’est un parallélogramme.") +
+          "\n\nConclusion : la propriété choisie permet de conclure sur la figure.",
           canvas: parallelogramFigure(),
         };
       }
@@ -617,7 +659,10 @@ export const parallelogrammesBank: TutorBankItemV4[] = [
           expected: ["oui"],
           comparator: "mcq_exact",
           explanation:
-            "Oui. C’est une condition suffisante pour montrer qu’un quadrilatère est un parallélogramme.",
+            "Définition : un parallélogramme est un quadrilatère dont les côtés opposés sont parallèles deux à deux.\n\n" +
+          "Méthode : on utilise la propriété du parallélogramme qui correspond aux données de l’énoncé.\n\nCalcul : " +
+          ("Oui. C’est une condition suffisante pour montrer qu’un quadrilatère est un parallélogramme.") +
+          "\n\nConclusion : la propriété choisie permet de conclure sur la figure.",
           canvas: parallelogramWithDiagonals(randomInt(8, 14), randomInt(6, 12)),
         };
       }
@@ -629,7 +674,10 @@ export const parallelogrammesBank: TutorBankItemV4[] = [
         expected: ["oui"],
         comparator: "mcq_exact",
         explanation:
-          "Oui. Si dans un quadrilatère les côtés opposés sont égaux deux à deux, alors c’est un parallélogramme.",
+          "Définition : un parallélogramme est un quadrilatère dont les côtés opposés sont parallèles deux à deux.\n\n" +
+          "Méthode : on utilise la propriété du parallélogramme qui correspond aux données de l’énoncé.\n\nCalcul : " +
+          ("Oui. Si dans un quadrilatère les côtés opposés sont égaux deux à deux, alors c’est un parallélogramme.") +
+          "\n\nConclusion : la propriété choisie permet de conclure sur la figure.",
         canvas: parallelogramFigure(randomInt(6, 12), randomInt(4, 8)),
       };
     },
@@ -649,7 +697,10 @@ export const parallelogrammesBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "Cherche la propriété réciproque avec les diagonales.",
     explanation:
-      "Si les diagonales d’un quadrilatère se coupent en leur milieu, alors ce quadrilatère est un parallélogramme.",
+      "Définition : un parallélogramme est un quadrilatère dont les côtés opposés sont parallèles deux à deux.\n\n" +
+          "Méthode : on utilise la propriété du parallélogramme qui correspond aux données de l’énoncé.\n\nCalcul : " +
+          ("Si les diagonales d’un quadrilatère se coupent en leur milieu, alors ce quadrilatère est un parallélogramme.") +
+          "\n\nConclusion : la propriété choisie permet de conclure sur la figure.",
     tags: ["parallelogramme", "demonstration", "open"],
   },
 
@@ -670,7 +721,10 @@ export const parallelogrammesBank: TutorBankItemV4[] = [
     expected: ["40"],
     comparator: "number_equal",
     hint: "Aire du parallélogramme = base × hauteur.",
-    explanation: "A = 8 × 5 = 40.",
+    explanation: "Définition : un parallélogramme est un quadrilatère dont les côtés opposés sont parallèles deux à deux.\n\n" +
+          "Méthode : on utilise la propriété du parallélogramme qui correspond aux données de l’énoncé.\n\nCalcul : " +
+          ("A = 8 × 5 = 40.") +
+          "\n\nConclusion : la propriété choisie permet de conclure sur la figure.",
     tags: ["parallelogramme", "aire"],
   },
   {
@@ -695,7 +749,10 @@ export const parallelogrammesBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(area)],
         comparator: "number_equal",
-        explanation: `L’aire vaut base × hauteur = ${base} × ${height} = ${area}.`,
+        explanation: "Définition : un parallélogramme est un quadrilatère dont les côtés opposés sont parallèles deux à deux.\n\n" +
+          "Méthode : on utilise la propriété du parallélogramme qui correspond aux données de l’énoncé.\n\nCalcul : " +
+          (`L’aire vaut base × hauteur = ${base} × ${height} = ${area}.`) +
+          "\n\nConclusion : la propriété choisie permet de conclure sur la figure.",
         canvas: slantedParallelogramForArea(base, side, height),
       };
     },
@@ -724,7 +781,10 @@ export const parallelogrammesBank: TutorBankItemV4[] = [
         expected: ["non"],
         comparator: "mcq_exact",
         explanation:
-          `Non. Il faut utiliser la hauteur, pas le côté incliné. La bonne aire est ${base} × ${height}.`,
+          "Définition : un parallélogramme est un quadrilatère dont les côtés opposés sont parallèles deux à deux.\n\n" +
+          "Méthode : on utilise la propriété du parallélogramme qui correspond aux données de l’énoncé.\n\nCalcul : " +
+          (`Non. Il faut utiliser la hauteur, pas le côté incliné. La bonne aire est ${base} × ${height}.`) +
+          "\n\nConclusion : la propriété choisie permet de conclure sur la figure.",
         canvas: slantedParallelogramForArea(base, side, height),
       };
     },
@@ -744,7 +804,10 @@ export const parallelogrammesBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "La hauteur est perpendiculaire à la base.",
     explanation:
-      "L’aire d’un parallélogramme se calcule avec base × hauteur. Le côté incliné n’est pas forcément perpendiculaire à la base, donc ce n’est pas la hauteur.",
+      "Définition : un parallélogramme est un quadrilatère dont les côtés opposés sont parallèles deux à deux.\n\n" +
+          "Méthode : on utilise la propriété du parallélogramme qui correspond aux données de l’énoncé.\n\nCalcul : " +
+          ("L’aire d’un parallélogramme se calcule avec base × hauteur. Le côté incliné n’est pas forcément perpendiculaire à la base, donc ce n’est pas la hauteur.") +
+          "\n\nConclusion : la propriété choisie permet de conclure sur la figure.",
     tags: ["parallelogramme", "aire", "open", "erreur"],
   },
 
@@ -775,7 +838,10 @@ export const parallelogrammesBank: TutorBankItemV4[] = [
           format: "short",
           expected: [String(area)],
           comparator: "number_equal",
-          explanation: `La surface d’un parallélogramme vaut base × hauteur, donc ${base} × ${height} = ${area}.`,
+          explanation: "Définition : un parallélogramme est un quadrilatère dont les côtés opposés sont parallèles deux à deux.\n\n" +
+          "Méthode : on utilise la propriété du parallélogramme qui correspond aux données de l’énoncé.\n\nCalcul : " +
+          (`La surface d’un parallélogramme vaut base × hauteur, donc ${base} × ${height} = ${area}.`) +
+          "\n\nConclusion : la propriété choisie permet de conclure sur la figure.",
         };
       }
 
@@ -785,7 +851,10 @@ export const parallelogrammesBank: TutorBankItemV4[] = [
         expected: ["parallelogramme"],
         comparator: "contains_keyword",
         explanation:
-          "Un quadrilatère dont les côtés opposés sont parallèles deux à deux est un parallélogramme.",
+          "Définition : un parallélogramme est un quadrilatère dont les côtés opposés sont parallèles deux à deux.\n\n" +
+          "Méthode : on utilise la propriété du parallélogramme qui correspond aux données de l’énoncé.\n\nCalcul : " +
+          ("Un quadrilatère dont les côtés opposés sont parallèles deux à deux est un parallélogramme.") +
+          "\n\nConclusion : la propriété choisie permet de conclure sur la figure.",
       };
     },
   },
@@ -812,7 +881,10 @@ export const parallelogrammesBank: TutorBankItemV4[] = [
         expected: ["oui / non"],
         comparator: "mcq_exact",
         explanation:
-          "Un rectangle est toujours un parallélogramme, mais un parallélogramme n’a pas forcément d’angles droits, donc ce n’est pas toujours un rectangle.",
+          "Définition : un parallélogramme est un quadrilatère dont les côtés opposés sont parallèles deux à deux.\n\n" +
+          "Méthode : on utilise la propriété du parallélogramme qui correspond aux données de l’énoncé.\n\nCalcul : " +
+          ("Un rectangle est toujours un parallélogramme, mais un parallélogramme n’a pas forcément d’angles droits, donc ce n’est pas toujours un rectangle.") +
+          "\n\nConclusion : la propriété choisie permet de conclure sur la figure.",
       };
     },
   },
@@ -841,7 +913,10 @@ export const parallelogrammesBank: TutorBankItemV4[] = [
           expected: ["parallèles", "opposés", "parallélogramme"],
           comparator: "contains_keyword",
           explanation:
-            "C’est la définition même du parallélogramme : un quadrilatère ayant ses côtés opposés parallèles deux à deux.",
+            "Définition : un parallélogramme est un quadrilatère dont les côtés opposés sont parallèles deux à deux.\n\n" +
+          "Méthode : on utilise la propriété du parallélogramme qui correspond aux données de l’énoncé.\n\nCalcul : " +
+          ("C’est la définition même du parallélogramme : un quadrilatère ayant ses côtés opposés parallèles deux à deux.") +
+          "\n\nConclusion : la propriété choisie permet de conclure sur la figure.",
         };
       }
 
@@ -852,7 +927,10 @@ export const parallelogrammesBank: TutorBankItemV4[] = [
           expected: ["égaux", "opposés", "parallélogramme"],
           comparator: "contains_keyword",
           explanation:
-            "Dans un quadrilatère, si les côtés opposés sont égaux deux à deux, alors on peut conclure que c’est un parallélogramme.",
+            "Définition : un parallélogramme est un quadrilatère dont les côtés opposés sont parallèles deux à deux.\n\n" +
+          "Méthode : on utilise la propriété du parallélogramme qui correspond aux données de l’énoncé.\n\nCalcul : " +
+          ("Dans un quadrilatère, si les côtés opposés sont égaux deux à deux, alors on peut conclure que c’est un parallélogramme.") +
+          "\n\nConclusion : la propriété choisie permet de conclure sur la figure.",
         };
       }
 
@@ -862,7 +940,10 @@ export const parallelogrammesBank: TutorBankItemV4[] = [
         expected: ["diagonales", "milieu", "parallélogramme"],
         comparator: "contains_keyword",
         explanation:
-          "Si les diagonales d’un quadrilatère se coupent en leur milieu, alors ce quadrilatère est un parallélogramme.",
+          "Définition : un parallélogramme est un quadrilatère dont les côtés opposés sont parallèles deux à deux.\n\n" +
+          "Méthode : on utilise la propriété du parallélogramme qui correspond aux données de l’énoncé.\n\nCalcul : " +
+          ("Si les diagonales d’un quadrilatère se coupent en leur milieu, alors ce quadrilatère est un parallélogramme.") +
+          "\n\nConclusion : la propriété choisie permet de conclure sur la figure.",
       };
     },
   },
@@ -889,7 +970,10 @@ export const parallelogrammesBank: TutorBankItemV4[] = [
         expected: ["oui"],
         comparator: "mcq_exact",
         explanation:
-          `Oui. Par exemple, on peut changer la base et la hauteur tout en gardant le même produit base × hauteur = ${area}.`,
+          "Définition : un parallélogramme est un quadrilatère dont les côtés opposés sont parallèles deux à deux.\n\n" +
+          "Méthode : on utilise la propriété du parallélogramme qui correspond aux données de l’énoncé.\n\nCalcul : " +
+          (`Oui. Par exemple, on peut changer la base et la hauteur tout en gardant le même produit base × hauteur = ${area}.`) +
+          "\n\nConclusion : la propriété choisie permet de conclure sur la figure.",
       };
     },
   },
