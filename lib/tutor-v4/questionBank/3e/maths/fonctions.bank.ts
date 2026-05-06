@@ -119,12 +119,13 @@ export const fonctionsBank: TutorBankItemV4[] = [
   expected: ["le prix pour 2 heures"],
   comparator: "mcq_exact",
   hint: "f(x) donne le résultat quand on entre x.",
-    explanation:
-    "Définition : f(2) se lit « f de 2 ».\n\n" +
-    "Méthode : on donne la valeur 2 à la fonction. La fonction renvoie alors un résultat.\n\n" +
-    "Ici, x représente le nombre d’heures de location. Donc f(2) représente le prix pour 2 heures.\n\n" +
-    "Conclusion : f(2) est le prix payé pour 2 heures de location.", tags: ["fonction", "vocabulaire", "reunion"]
-    },
+  explanation:
+    "Définition : f(2) se lit « f de 2 » et désigne l’image de 2 par la fonction f.\n\n" +
+    "Méthode : on remplace x par 2 dans le contexte de la fonction.\n\n" +
+    "Calcul : ici, x représente le nombre d’heures de location. Donc f(2) représente le prix pour 2 heures.\n\n" +
+    "Conclusion : f(2) est le prix payé pour 2 heures de location.",
+  tags: ["fonction", "vocabulaire", "reunion"]
+},
 
     {
     kind: "fixed",
@@ -141,10 +142,11 @@ export const fonctionsBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "Une fonction relie deux nombres.",
     explanation:
-    "Définition : une fonction est une règle qui associe à un nombre de départ un nombre résultat.\n\n" +
-    "Le nombre de départ s’appelle un antécédent. Le nombre obtenu s’appelle une image.\n\n" +
-    "Exemple : si f(3) = 8, alors 3 est un antécédent et 8 est son image.\n\n" +
-    "Conclusion : une fonction permet de relier deux grandeurs, comme une durée et un prix.", tags: ["fonction", "definition"]
+      "Définition : une fonction est une règle qui associe à un nombre de départ un nombre résultat.\n\n" +
+      "Méthode : on précise les mots importants : le nombre de départ est un antécédent et le nombre obtenu est une image.\n\n" +
+      "Calcul : par exemple, si f(3) = 8, alors 3 est un antécédent et 8 est son image.\n\n" +
+      "Conclusion : une fonction permet de relier deux grandeurs, comme une durée et un prix.",
+    tags: ["fonction", "definition"]
     },
 
 /* =========================
@@ -173,11 +175,15 @@ export const fonctionsBank: TutorBankItemV4[] = [
       expected: [String(result)],
       comparator: "number_equal",
     explanation:
-    `Définition : calculer une image, c’est calculer f(x) pour une valeur donnée de x.\n\n` +
+    `Définition : une fonction associe à un nombre de départ une image ; un antécédent est un nombre qui donne une image donnée.\n\n` +
+      `Méthode : on identifie la règle, le tableau ou le graphique, puis on lit ou on calcule la valeur demandée.\n\n` +
+      `Calcul : on applique la règle de la fonction ou on lit directement l’information demandée. ` +
+      (`Définition : calculer une image, c’est calculer f(x) pour une valeur donnée de x.\n\n` +
     `Méthode : on remplace x par ${x} dans la formule.\n\n` +
     `Ici : f(x) = ${a}x + ${b}\n` +
     `Donc f(${x}) = ${a} × ${x} + ${b} = ${result}.\n\n` +
-    `Conclusion : l’image de ${x} est ${result}.`,canvas: fonctionGraphiqueCanvas({
+    `Conclusion : l’image de ${x} est ${result}.`) +
+      `\n\nConclusion : on obtient ainsi l’image, l’antécédent ou la comparaison demandé.`,canvas: fonctionGraphiqueCanvas({
         titre: "Lecture de l’image",
         a,
         b,
@@ -282,7 +288,11 @@ explanation:
       expected: [String(yValues[index])],
       comparator: "number_equal",
       explanation:
-        `On lit dans le tableau que pour x = ${xValues[index]}, f(x) = ${yValues[index]}.`,
+        `Définition : une fonction associe à un nombre de départ une image ; un antécédent est un nombre qui donne une image donnée.\n\n` +
+        `Méthode : on identifie la règle, le tableau ou le graphique, puis on lit ou on calcule la valeur demandée.\n\n` +
+        `Calcul : on applique la règle de la fonction ou on lit directement l’information demandée. ` +
+        (`On lit dans le tableau que pour x = ${xValues[index]}, f(x) = ${yValues[index]}.`) +
+        `\n\nConclusion : on obtient ainsi l’image, l’antécédent ou la comparaison demandé.`,
       canvas: fonctionTableauCanvas({
         titre: "Tableau de valeurs",
         xValues,
@@ -315,7 +325,11 @@ explanation:
       expected: ["multiplie", "2", "ajoute", "1"],
       comparator: "contains_keyword",
       explanation:
-        "On remarque que f(x) = 2x + 1 : on multiplie x par 2 puis on ajoute 1.",
+        `Définition : une fonction associe à un nombre de départ une image ; un antécédent est un nombre qui donne une image donnée.\n\n` +
+        `Méthode : on identifie la règle, le tableau ou le graphique, puis on lit ou on calcule la valeur demandée.\n\n` +
+        `Calcul : on applique la règle de la fonction ou on lit directement l’information demandée. ` +
+        ("On remarque que f(x) = 2x + 1 : on multiplie x par 2 puis on ajoute 1.") +
+        `\n\nConclusion : on obtient ainsi l’image, l’antécédent ou la comparaison demandé.`,
       canvas: fonctionTableauCanvas({
         titre: "Comprendre une fonction",
         xValues,
@@ -388,7 +402,11 @@ explanation:
       expected: ["1"],
       comparator: "number_equal",
       explanation:
-        "On cherche où la droite coupe l’axe des abscisses : ici en x = 1.",
+        `Définition : une fonction associe à un nombre de départ une image ; un antécédent est un nombre qui donne une image donnée.\n\n` +
+        `Méthode : on identifie la règle, le tableau ou le graphique, puis on lit ou on calcule la valeur demandée.\n\n` +
+        `Calcul : on applique la règle de la fonction ou on lit directement l’information demandée. ` +
+        ("On cherche où la droite coupe l’axe des abscisses : ici en x = 1.") +
+        `\n\nConclusion : on obtient ainsi l’image, l’antécédent ou la comparaison demandé.`,
       canvas: fonctionGraphiqueCanvas({
         titre: "Intersection avec l’axe",
         a,
@@ -423,7 +441,11 @@ explanation:
   comparator: "mcq_exact",
   hint: "Il n’y a pas de + b.",
   explanation:
-    "Une fonction de la forme f(x) = ax est linéaire. Ici f(x) = 5x.",
+    `Définition : une fonction associe à un nombre de départ une image ; un antécédent est un nombre qui donne une image donnée.\n\n` +
+    `Méthode : on identifie la règle, le tableau ou le graphique, puis on lit ou on calcule la valeur demandée.\n\n` +
+    `Calcul : on applique la règle de la fonction ou on lit directement l’information demandée. ` +
+    ("Une fonction de la forme f(x) = ax est linéaire. Ici f(x) = 5x.") +
+    `\n\nConclusion : on obtient ainsi l’image, l’antécédent ou la comparaison demandé.`,
   tags: ["fonction", "affine", "lineaire"]
 },
 
@@ -482,7 +504,11 @@ explanation:
       expected: ["droite", "ligne", "constante"],
       comparator: "contains_keyword",
       explanation:
-        "Une fonction affine est représentée par une droite. L’augmentation est régulière (variation constante).",
+        `Définition : une fonction associe à un nombre de départ une image ; un antécédent est un nombre qui donne une image donnée.\n\n` +
+        `Méthode : on identifie la règle, le tableau ou le graphique, puis on lit ou on calcule la valeur demandée.\n\n` +
+        `Calcul : on applique la règle de la fonction ou on lit directement l’information demandée. ` +
+        ("Une fonction affine est représentée par une droite. L’augmentation est régulière (variation constante).") +
+        `\n\nConclusion : on obtient ainsi l’image, l’antécédent ou la comparaison demandé.`,
     };
   }
 },
@@ -541,7 +567,11 @@ explanation:
       expected: ["f"],
       comparator: "mcq_exact",
       explanation:
-        "La pente de f est plus grande, donc elle augmente plus vite.",
+        `Définition : une fonction associe à un nombre de départ une image ; un antécédent est un nombre qui donne une image donnée.\n\n` +
+        `Méthode : on identifie la règle, le tableau ou le graphique, puis on lit ou on calcule la valeur demandée.\n\n` +
+        `Calcul : on applique la règle de la fonction ou on lit directement l’information demandée. ` +
+        ("La pente de f est plus grande, donc elle augmente plus vite.") +
+        `\n\nConclusion : on obtient ainsi l’image, l’antécédent ou la comparaison demandé.`,
       canvas: fonctionGraphiqueCanvas({
         titre: "Comparaison de deux fonctions",
         a: a1,
@@ -569,7 +599,11 @@ explanation:
       expected: ["relie", "grandeurs", "depend"],
       comparator: "contains_keyword",
       explanation:
-        "Une fonction permet de relier deux grandeurs : une dépend de l’autre (prix, distance, temps…).",
+        `Définition : une fonction associe à un nombre de départ une image ; un antécédent est un nombre qui donne une image donnée.\n\n` +
+        `Méthode : on identifie la règle, le tableau ou le graphique, puis on lit ou on calcule la valeur demandée.\n\n` +
+        `Calcul : on applique la règle de la fonction ou on lit directement l’information demandée. ` +
+        ("Une fonction permet de relier deux grandeurs : une dépend de l’autre (prix, distance, temps…).") +
+        `\n\nConclusion : on obtient ainsi l’image, l’antécédent ou la comparaison demandé.`,
     };
   }
 }]

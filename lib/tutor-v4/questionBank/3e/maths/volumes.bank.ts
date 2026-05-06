@@ -876,7 +876,10 @@ export const volumesBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "Un volume dépend de trois dimensions.",
     explanation:
-      "Un volume dépend de trois dimensions. Si chaque longueur est multipliée par k, alors le volume est multiplié par k × k × k = k³.",
+      "Définition : un volume dépend de trois dimensions : longueur, largeur et hauteur.\n\n" +
+      "Méthode : lors d’un agrandissement de rapport k, chaque longueur est multipliée par k.\n\n" +
+      "Calcul : pour le volume, on multiplie donc par k × k × k = k³.\n\n" +
+      "Conclusion : un agrandissement de rapport k multiplie les volumes par k³.",
     tags: ["volume", "agrandissement", "open", "raisonnement"],
   },
 

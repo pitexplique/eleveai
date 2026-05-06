@@ -325,7 +325,11 @@ export const racineCarreeBank: TutorBankItemV4[] = [
   expected: ["non"],
   comparator: "mcq_exact",
   hint: "La racine carrée n’est pas la moitié.",
-  explanation: "Non. √100 = 10 car 10² = 100.",
+  explanation:
+    "Définition : calculer une racine carrée revient à chercher le nombre positif dont le carré donne le nombre de départ.\n\n" +
+    "Méthode : on ne divise pas par 2 ; on cherche un carré connu.\n\n" +
+    "Calcul : 10² = 100, alors que 50² ne vaut pas 100.\n\n" +
+    "Conclusion : √100 = 10. L’élève a donc tort.",
   tags: ["racine", "calcul", "erreur"],
 },
 
@@ -537,7 +541,10 @@ explanation:
   comparator: "contains_keyword",
   hint: "Compare 40 avec 36 et 49.",
   explanation:
-    "6² = 36 et 7² = 49. Comme 36 < 40 < 49, alors 6 < √40 < 7.",
+    "Définition : encadrer une racine carrée consiste à trouver deux entiers entre lesquels elle se situe.\n\n" +
+    "Méthode : on compare le nombre sous la racine avec les carrés parfaits voisins.\n\n" +
+    "Calcul : 6² = 36 et 7² = 49. Comme 36 < 40 < 49, alors 6 < √40 < 7.\n\n" +
+    "Conclusion : √40 est bien comprise entre 6 et 7.",
   tags: ["racine", "encadrer", "open", "raisonnement"],
 },
 

@@ -58,7 +58,11 @@ export const nombresRationnelsBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Pense à une écriture fractionnaire.",
     explanation:
-      "Un nombre rationnel est un nombre qui peut s’écrire sous la forme a/b, où a et b sont des entiers et b est non nul.",
+      `Définition : un nombre rationnel est un nombre qui peut s’écrire sous la forme a/b, avec a et b entiers et b non nul.\n\n` +
+      `Méthode : on écrit les nombres sous une forme adaptée : fraction, décimal ou même dénominateur, puis on calcule ou on compare.\n\n` +
+      `Calcul : on effectue les transformations ou les opérations nécessaires étape par étape. ` +
+      ("Un nombre rationnel est un nombre qui peut s’écrire sous la forme a/b, où a et b sont des entiers et b est non nul.") +
+      `\n\nConclusion : le résultat obtenu donne la réponse attendue sous forme exacte ou simplifiée.`,
     tags: ["rationnel", "definition", "qcm"],
   },
 
@@ -78,7 +82,11 @@ export const nombresRationnelsBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Il est déjà écrit sous forme de fraction.",
     explanation:
-      "Oui. 3/4 est une écriture fractionnaire avec un dénominateur non nul. C’est donc un nombre rationnel.",
+      `Définition : un nombre rationnel est un nombre qui peut s’écrire sous la forme a/b, avec a et b entiers et b non nul.\n\n` +
+      `Méthode : on écrit les nombres sous une forme adaptée : fraction, décimal ou même dénominateur, puis on calcule ou on compare.\n\n` +
+      `Calcul : on effectue les transformations ou les opérations nécessaires étape par étape. ` +
+      ("Oui. 3/4 est une écriture fractionnaire avec un dénominateur non nul. C’est donc un nombre rationnel.") +
+      `\n\nConclusion : le résultat obtenu donne la réponse attendue sous forme exacte ou simplifiée.`,
     tags: ["rationnel", "fraction", "qcm"],
   },
 
@@ -98,7 +106,11 @@ export const nombresRationnelsBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "-2,5 peut s’écrire sous forme de fraction.",
     explanation:
-      "Oui. -2,5 = -25/10 = -5/2. Il peut s’écrire sous forme fractionnaire, donc c’est un nombre rationnel.",
+      `Définition : un nombre rationnel est un nombre qui peut s’écrire sous la forme a/b, avec a et b entiers et b non nul.\n\n` +
+      `Méthode : on écrit les nombres sous une forme adaptée : fraction, décimal ou même dénominateur, puis on calcule ou on compare.\n\n` +
+      `Calcul : on effectue les transformations ou les opérations nécessaires étape par étape. ` +
+      ("Oui. -2,5 = -25/10 = -5/2. Il peut s’écrire sous forme fractionnaire, donc c’est un nombre rationnel.") +
+      `\n\nConclusion : le résultat obtenu donne la réponse attendue sous forme exacte ou simplifiée.`,
     tags: ["rationnel", "decimal", "negatif", "qcm"],
   },
 
@@ -117,7 +129,11 @@ export const nombresRationnelsBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "Essaie d’écrire 0,75 sous forme de fraction.",
     explanation:
-      "0,75 est rationnel car 0,75 = 75/100 = 3/4. Il peut donc s’écrire sous forme d’une fraction.",
+      `Définition : un nombre rationnel est un nombre qui peut s’écrire sous la forme a/b, avec a et b entiers et b non nul.\n\n` +
+      `Méthode : on écrit les nombres sous une forme adaptée : fraction, décimal ou même dénominateur, puis on calcule ou on compare.\n\n` +
+      `Calcul : on effectue les transformations ou les opérations nécessaires étape par étape. ` +
+      ("0,75 est rationnel car 0,75 = 75/100 = 3/4. Il peut donc s’écrire sous forme d’une fraction.") +
+      `\n\nConclusion : le résultat obtenu donne la réponse attendue sous forme exacte ou simplifiée.`,
     tags: ["rationnel", "open", "raisonnement"],
   },
 
@@ -141,7 +157,11 @@ export const nombresRationnelsBank: TutorBankItemV4[] = [
         choices: ["oui", "non"],
         expected: ["oui"],
         comparator: "mcq_exact",
-        explanation: `Oui. Tout entier est rationnel car ${n} peut s’écrire ${n}/1.`,
+        explanation: `Définition : un nombre rationnel est un nombre qui peut s’écrire sous la forme a/b, avec a et b entiers et b non nul.\n\n` +
+          `Méthode : on écrit les nombres sous une forme adaptée : fraction, décimal ou même dénominateur, puis on calcule ou on compare.\n\n` +
+          `Calcul : on effectue les transformations ou les opérations nécessaires étape par étape. ` +
+          (`Oui. Tout entier est rationnel car ${n} peut s’écrire ${n}/1.`) +
+          `\n\nConclusion : le résultat obtenu donne la réponse attendue sous forme exacte ou simplifiée.`,
       };
     },
   },
@@ -172,7 +192,11 @@ export const nombresRationnelsBank: TutorBankItemV4[] = [
         choices: ["oui", "non"],
         expected: ["oui"],
         comparator: "mcq_exact",
-        explanation: `Oui. ${item.text} peut s’écrire sous forme fractionnaire, par exemple ${item.frac}.`,
+        explanation: `Définition : un nombre rationnel est un nombre qui peut s’écrire sous la forme a/b, avec a et b entiers et b non nul.\n\n` +
+          `Méthode : on écrit les nombres sous une forme adaptée : fraction, décimal ou même dénominateur, puis on calcule ou on compare.\n\n` +
+          `Calcul : on effectue les transformations ou les opérations nécessaires étape par étape. ` +
+          (`Oui. ${item.text} peut s’écrire sous forme fractionnaire, par exemple ${item.frac}.`) +
+          `\n\nConclusion : le résultat obtenu donne la réponse attendue sous forme exacte ou simplifiée.`,
       };
     },
   },
@@ -197,7 +221,11 @@ export const nombresRationnelsBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "1 ÷ 2 = ?",
     explanation:
-      "1/2 = 1 ÷ 2 = 0,5.",
+      `Définition : un nombre rationnel est un nombre qui peut s’écrire sous la forme a/b, avec a et b entiers et b non nul.\n\n` +
+      `Méthode : on écrit les nombres sous une forme adaptée : fraction, décimal ou même dénominateur, puis on calcule ou on compare.\n\n` +
+      `Calcul : on effectue les transformations ou les opérations nécessaires étape par étape. ` +
+      ("1/2 = 1 ÷ 2 = 0,5.") +
+      `\n\nConclusion : le résultat obtenu donne la réponse attendue sous forme exacte ou simplifiée.`,
     tags: ["rationnel", "ecritures", "decimal", "qcm"],
   },
 
@@ -217,7 +245,11 @@ export const nombresRationnelsBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "0,25 = 25/100.",
     explanation:
-      "0,25 = 25/100. En simplifiant par 25, on obtient 1/4.",
+      `Définition : un nombre rationnel est un nombre qui peut s’écrire sous la forme a/b, avec a et b entiers et b non nul.\n\n` +
+      `Méthode : on écrit les nombres sous une forme adaptée : fraction, décimal ou même dénominateur, puis on calcule ou on compare.\n\n` +
+      `Calcul : on effectue les transformations ou les opérations nécessaires étape par étape. ` +
+      ("0,25 = 25/100. En simplifiant par 25, on obtient 1/4.") +
+      `\n\nConclusion : le résultat obtenu donne la réponse attendue sous forme exacte ou simplifiée.`,
     tags: ["rationnel", "ecritures", "simplification", "qcm"],
   },
 
@@ -236,7 +268,11 @@ export const nombresRationnelsBank: TutorBankItemV4[] = [
     comparator: "exact_text",
     hint: "3 ÷ 4 = ?",
     explanation:
-      "3/4 = 3 ÷ 4 = 0,75.",
+      `Définition : un nombre rationnel est un nombre qui peut s’écrire sous la forme a/b, avec a et b entiers et b non nul.\n\n` +
+      `Méthode : on écrit les nombres sous une forme adaptée : fraction, décimal ou même dénominateur, puis on calcule ou on compare.\n\n` +
+      `Calcul : on effectue les transformations ou les opérations nécessaires étape par étape. ` +
+      ("3/4 = 3 ÷ 4 = 0,75.") +
+      `\n\nConclusion : le résultat obtenu donne la réponse attendue sous forme exacte ou simplifiée.`,
     tags: ["rationnel", "decimal", "short"],
   },
 
@@ -255,7 +291,11 @@ export const nombresRationnelsBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "Écris 0,4 sous forme de fraction décimale.",
     explanation:
-      "0,4 = 4/10. En simplifiant par 2, on obtient 2/5.",
+      `Définition : un nombre rationnel est un nombre qui peut s’écrire sous la forme a/b, avec a et b entiers et b non nul.\n\n` +
+      `Méthode : on écrit les nombres sous une forme adaptée : fraction, décimal ou même dénominateur, puis on calcule ou on compare.\n\n` +
+      `Calcul : on effectue les transformations ou les opérations nécessaires étape par étape. ` +
+      ("0,4 = 4/10. En simplifiant par 2, on obtient 2/5.") +
+      `\n\nConclusion : le résultat obtenu donne la réponse attendue sous forme exacte ou simplifiée.`,
     tags: ["rationnel", "open", "ecritures"],
   },
 
@@ -286,7 +326,11 @@ export const nombresRationnelsBank: TutorBankItemV4[] = [
         format: "short",
         expected: [item.dec, item.dec.replace(",", ".")],
         comparator: "exact_text",
-        explanation: `${item.frac} = ${item.dec}.`,
+        explanation: `Définition : un nombre rationnel est un nombre qui peut s’écrire sous la forme a/b, avec a et b entiers et b non nul.\n\n` +
+          `Méthode : on écrit les nombres sous une forme adaptée : fraction, décimal ou même dénominateur, puis on calcule ou on compare.\n\n` +
+          `Calcul : on effectue les transformations ou les opérations nécessaires étape par étape. ` +
+          (`${item.frac} = ${item.dec}.`) +
+          `\n\nConclusion : le résultat obtenu donne la réponse attendue sous forme exacte ou simplifiée.`,
       };
     },
   },
@@ -317,7 +361,11 @@ export const nombresRationnelsBank: TutorBankItemV4[] = [
         choices: shuffle([item.frac, ...item.wrongs]),
         expected: [item.frac],
         comparator: "mcq_exact",
-        explanation: `${item.dec} s’écrit sous forme de fraction, puis on simplifie pour obtenir ${item.frac}.`,
+        explanation: `Définition : un nombre rationnel est un nombre qui peut s’écrire sous la forme a/b, avec a et b entiers et b non nul.\n\n` +
+          `Méthode : on écrit les nombres sous une forme adaptée : fraction, décimal ou même dénominateur, puis on calcule ou on compare.\n\n` +
+          `Calcul : on effectue les transformations ou les opérations nécessaires étape par étape. ` +
+          (`${item.dec} s’écrit sous forme de fraction, puis on simplifie pour obtenir ${item.frac}.`) +
+          `\n\nConclusion : le résultat obtenu donne la réponse attendue sous forme exacte ou simplifiée.`,
       };
     },
   },
@@ -342,7 +390,11 @@ export const nombresRationnelsBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Les dénominateurs sont identiques.",
     explanation:
-      "Les deux fractions ont le même dénominateur. On compare donc les numérateurs : 2 > 1, donc 2/3 est plus grand.",
+      `Définition : un nombre rationnel est un nombre qui peut s’écrire sous la forme a/b, avec a et b entiers et b non nul.\n\n` +
+      `Méthode : on écrit les nombres sous une forme adaptée : fraction, décimal ou même dénominateur, puis on calcule ou on compare.\n\n` +
+      `Calcul : on effectue les transformations ou les opérations nécessaires étape par étape. ` +
+      ("Les deux fractions ont le même dénominateur. On compare donc les numérateurs : 2 > 1, donc 2/3 est plus grand.") +
+      `\n\nConclusion : le résultat obtenu donne la réponse attendue sous forme exacte ou simplifiée.`,
     tags: ["rationnel", "comparer", "qcm"],
   },
 
@@ -362,7 +414,11 @@ export const nombresRationnelsBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Un nombre négatif est plus petit qu’un nombre positif.",
     explanation:
-      "-1/2 est négatif alors que 1/3 est positif. Donc -1/2 est le plus petit.",
+      `Définition : un nombre rationnel est un nombre qui peut s’écrire sous la forme a/b, avec a et b entiers et b non nul.\n\n` +
+      `Méthode : on écrit les nombres sous une forme adaptée : fraction, décimal ou même dénominateur, puis on calcule ou on compare.\n\n` +
+      `Calcul : on effectue les transformations ou les opérations nécessaires étape par étape. ` +
+      ("-1/2 est négatif alors que 1/3 est positif. Donc -1/2 est le plus petit.") +
+      `\n\nConclusion : le résultat obtenu donne la réponse attendue sous forme exacte ou simplifiée.`,
     tags: ["rationnel", "comparer", "negatif", "qcm"],
   },
 
@@ -382,7 +438,11 @@ export const nombresRationnelsBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Tu peux comparer les produits en croix.",
     explanation:
-      "On compare 3/4 et 2/3 par produits en croix : 3 × 3 = 9 et 2 × 4 = 8. Comme 9 > 8, 3/4 > 2/3.",
+      `Définition : un nombre rationnel est un nombre qui peut s’écrire sous la forme a/b, avec a et b entiers et b non nul.\n\n` +
+      `Méthode : on écrit les nombres sous une forme adaptée : fraction, décimal ou même dénominateur, puis on calcule ou on compare.\n\n` +
+      `Calcul : on effectue les transformations ou les opérations nécessaires étape par étape. ` +
+      ("On compare 3/4 et 2/3 par produits en croix : 3 × 3 = 9 et 2 × 4 = 8. Comme 9 > 8, 3/4 > 2/3.") +
+      `\n\nConclusion : le résultat obtenu donne la réponse attendue sous forme exacte ou simplifiée.`,
     tags: ["rationnel", "comparer", "produits_croix", "qcm"],
   },
 
@@ -401,7 +461,11 @@ export const nombresRationnelsBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "Compare leurs écritures décimales.",
     explanation:
-      "-3/4 = -0,75 et -1/2 = -0,5. Sur une droite graduée, -0,75 est plus à gauche que -0,5, donc -3/4 est plus petit.",
+      `Définition : un nombre rationnel est un nombre qui peut s’écrire sous la forme a/b, avec a et b entiers et b non nul.\n\n` +
+      `Méthode : on écrit les nombres sous une forme adaptée : fraction, décimal ou même dénominateur, puis on calcule ou on compare.\n\n` +
+      `Calcul : on effectue les transformations ou les opérations nécessaires étape par étape. ` +
+      ("-3/4 = -0,75 et -1/2 = -0,5. Sur une droite graduée, -0,75 est plus à gauche que -0,5, donc -3/4 est plus petit.") +
+      `\n\nConclusion : le résultat obtenu donne la réponse attendue sous forme exacte ou simplifiée.`,
     tags: ["rationnel", "comparer", "open", "negatif"],
   },
 
@@ -436,9 +500,13 @@ export const nombresRationnelsBank: TutorBankItemV4[] = [
         choices: shuffle([f1, f2, "ils sont égaux"]),
         expected: [correct],
         comparator: "mcq_exact",
-        explanation: `On compare ${f1} et ${f2}. On peut utiliser les produits en croix : ${a} × ${d} = ${
+        explanation: `Définition : un nombre rationnel est un nombre qui peut s’écrire sous la forme a/b, avec a et b entiers et b non nul.\n\n` +
+          `Méthode : on écrit les nombres sous une forme adaptée : fraction, décimal ou même dénominateur, puis on calcule ou on compare.\n\n` +
+          `Calcul : on effectue les transformations ou les opérations nécessaires étape par étape. ` +
+          (`On compare ${f1} et ${f2}. On peut utiliser les produits en croix : ${a} × ${d} = ${
           a * d
-        } et ${c} × ${b} = ${c * b}.`,
+        } et ${c} × ${b} = ${c * b}.`) +
+          `\n\nConclusion : le résultat obtenu donne la réponse attendue sous forme exacte ou simplifiée.`,
       };
     },
   },
@@ -468,7 +536,11 @@ export const nombresRationnelsBank: TutorBankItemV4[] = [
         choices: shuffle([item.a, item.b, "ils ont parcouru la même fraction"]),
         expected: [item.correct],
         comparator: "mcq_exact",
-        explanation: `On compare ${item.a} et ${item.b}. La plus grande fraction est ${item.correct}.`,
+        explanation: `Définition : un nombre rationnel est un nombre qui peut s’écrire sous la forme a/b, avec a et b entiers et b non nul.\n\n` +
+          `Méthode : on écrit les nombres sous une forme adaptée : fraction, décimal ou même dénominateur, puis on calcule ou on compare.\n\n` +
+          `Calcul : on effectue les transformations ou les opérations nécessaires étape par étape. ` +
+          (`On compare ${item.a} et ${item.b}. La plus grande fraction est ${item.correct}.`) +
+          `\n\nConclusion : le résultat obtenu donne la réponse attendue sous forme exacte ou simplifiée.`,
       };
     },
   },
@@ -492,7 +564,11 @@ export const nombresRationnelsBank: TutorBankItemV4[] = [
     comparator: "exact_text",
     hint: "Les dénominateurs sont identiques.",
     explanation:
-      "1/3 + 2/3 = 3/3 = 1.",
+      `Définition : un nombre rationnel est un nombre qui peut s’écrire sous la forme a/b, avec a et b entiers et b non nul.\n\n` +
+      `Méthode : on écrit les nombres sous une forme adaptée : fraction, décimal ou même dénominateur, puis on calcule ou on compare.\n\n` +
+      `Calcul : on effectue les transformations ou les opérations nécessaires étape par étape. ` +
+      ("1/3 + 2/3 = 3/3 = 1.") +
+      `\n\nConclusion : le résultat obtenu donne la réponse attendue sous forme exacte ou simplifiée.`,
     tags: ["rationnel", "calcul", "addition"],
   },
 
@@ -512,7 +588,11 @@ export const nombresRationnelsBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "On multiplie les numérateurs entre eux et les dénominateurs entre eux.",
     explanation:
-      "3/4 × 2/5 = (3 × 2)/(4 × 5) = 6/20. On peut simplifier ensuite en 3/10.",
+      `Définition : un nombre rationnel est un nombre qui peut s’écrire sous la forme a/b, avec a et b entiers et b non nul.\n\n` +
+      `Méthode : on écrit les nombres sous une forme adaptée : fraction, décimal ou même dénominateur, puis on calcule ou on compare.\n\n` +
+      `Calcul : on effectue les transformations ou les opérations nécessaires étape par étape. ` +
+      ("3/4 × 2/5 = (3 × 2)/(4 × 5) = 6/20. On peut simplifier ensuite en 3/10.") +
+      `\n\nConclusion : le résultat obtenu donne la réponse attendue sous forme exacte ou simplifiée.`,
     tags: ["rationnel", "calcul", "produit", "qcm"],
   },
 
@@ -531,7 +611,11 @@ export const nombresRationnelsBank: TutorBankItemV4[] = [
     comparator: "exact_text",
     hint: "Mets les fractions au même dénominateur.",
     explanation:
-      "1/2 = 2/4. Donc 1/2 + 1/4 = 2/4 + 1/4 = 3/4.",
+      `Définition : un nombre rationnel est un nombre qui peut s’écrire sous la forme a/b, avec a et b entiers et b non nul.\n\n` +
+      `Méthode : on écrit les nombres sous une forme adaptée : fraction, décimal ou même dénominateur, puis on calcule ou on compare.\n\n` +
+      `Calcul : on effectue les transformations ou les opérations nécessaires étape par étape. ` +
+      ("1/2 = 2/4. Donc 1/2 + 1/4 = 2/4 + 1/4 = 3/4.") +
+      `\n\nConclusion : le résultat obtenu donne la réponse attendue sous forme exacte ou simplifiée.`,
     tags: ["rationnel", "calcul", "addition", "denominateur"],
   },
 
@@ -551,7 +635,11 @@ export const nombresRationnelsBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Pour additionner des fractions, on ne additionne pas les dénominateurs.",
     explanation:
-      "Non. Il faut mettre au même dénominateur : 1/2 = 3/6 et 1/3 = 2/6. Donc 1/2 + 1/3 = 5/6.",
+      `Définition : un nombre rationnel est un nombre qui peut s’écrire sous la forme a/b, avec a et b entiers et b non nul.\n\n` +
+      `Méthode : on écrit les nombres sous une forme adaptée : fraction, décimal ou même dénominateur, puis on calcule ou on compare.\n\n` +
+      `Calcul : on effectue les transformations ou les opérations nécessaires étape par étape. ` +
+      ("Non. Il faut mettre au même dénominateur : 1/2 = 3/6 et 1/3 = 2/6. Donc 1/2 + 1/3 = 5/6.") +
+      `\n\nConclusion : le résultat obtenu donne la réponse attendue sous forme exacte ou simplifiée.`,
     tags: ["rationnel", "calcul", "erreur", "qcm"],
   },
 
@@ -570,7 +658,11 @@ export const nombresRationnelsBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "Multiplie puis simplifie.",
     explanation:
-      "On calcule 2/3 × 3/5 = 6/15. En simplifiant par 3, on obtient 2/5.",
+      `Définition : un nombre rationnel est un nombre qui peut s’écrire sous la forme a/b, avec a et b entiers et b non nul.\n\n` +
+      `Méthode : on écrit les nombres sous une forme adaptée : fraction, décimal ou même dénominateur, puis on calcule ou on compare.\n\n` +
+      `Calcul : on effectue les transformations ou les opérations nécessaires étape par étape. ` +
+      ("On calcule 2/3 × 3/5 = 6/15. En simplifiant par 3, on obtient 2/5.") +
+      `\n\nConclusion : le résultat obtenu donne la réponse attendue sous forme exacte ou simplifiée.`,
     tags: ["rationnel", "calcul", "open", "produit"],
   },
 
@@ -597,10 +689,14 @@ export const nombresRationnelsBank: TutorBankItemV4[] = [
         format: "short",
         expected: [formatFraction(s.num, s.den), `${num}/${den}`],
         comparator: "exact_text",
-        explanation: `Les dénominateurs sont identiques : ${a}/${den} + ${b}/${den} = ${num}/${den}. En simplifiant si possible, on obtient ${formatFraction(
+        explanation: `Définition : un nombre rationnel est un nombre qui peut s’écrire sous la forme a/b, avec a et b entiers et b non nul.\n\n` +
+          `Méthode : on écrit les nombres sous une forme adaptée : fraction, décimal ou même dénominateur, puis on calcule ou on compare.\n\n` +
+          `Calcul : on effectue les transformations ou les opérations nécessaires étape par étape. ` +
+          (`Les dénominateurs sont identiques : ${a}/${den} + ${b}/${den} = ${num}/${den}. En simplifiant si possible, on obtient ${formatFraction(
           s.num,
           s.den
-        )}.`,
+        )}.`) +
+          `\n\nConclusion : le résultat obtenu donne la réponse attendue sous forme exacte ou simplifiée.`,
       };
     },
   },
@@ -631,10 +727,14 @@ export const nombresRationnelsBank: TutorBankItemV4[] = [
         format: "short",
         expected: [formatFraction(s.num, s.den), formatFraction(num, den)],
         comparator: "exact_text",
-        explanation: `${a}/${b} × ${c}/${d} = ${num}/${den}. En simplifiant, on obtient ${formatFraction(
+        explanation: `Définition : un nombre rationnel est un nombre qui peut s’écrire sous la forme a/b, avec a et b entiers et b non nul.\n\n` +
+          `Méthode : on écrit les nombres sous une forme adaptée : fraction, décimal ou même dénominateur, puis on calcule ou on compare.\n\n` +
+          `Calcul : on effectue les transformations ou les opérations nécessaires étape par étape. ` +
+          (`${a}/${b} × ${c}/${d} = ${num}/${den}. En simplifiant, on obtient ${formatFraction(
           s.num,
           s.den
-        )}.`,
+        )}.`) +
+          `\n\nConclusion : le résultat obtenu donne la réponse attendue sous forme exacte ou simplifiée.`,
       };
     },
   },
@@ -673,7 +773,11 @@ export const nombresRationnelsBank: TutorBankItemV4[] = [
         format: "short",
         expected,
         comparator: "exact_text",
-        explanation: `${a.text} = ${a.frac}. On additionne ensuite ${a.frac} et ${b.text}.`,
+        explanation: `Définition : un nombre rationnel est un nombre qui peut s’écrire sous la forme a/b, avec a et b entiers et b non nul.\n\n` +
+          `Méthode : on écrit les nombres sous une forme adaptée : fraction, décimal ou même dénominateur, puis on calcule ou on compare.\n\n` +
+          `Calcul : on effectue les transformations ou les opérations nécessaires étape par étape. ` +
+          (`${a.text} = ${a.frac}. On additionne ensuite ${a.frac} et ${b.text}.`) +
+          `\n\nConclusion : le résultat obtenu donne la réponse attendue sous forme exacte ou simplifiée.`,
       };
     },
   },
@@ -697,7 +801,11 @@ export const nombresRationnelsBank: TutorBankItemV4[] = [
     comparator: "exact_text",
     hint: "Tu peux choisir un décimal entre 0,5 et 0,75.",
     explanation:
-      "1/2 = 0,5 et 3/4 = 0,75. Par exemple 0,6, 5/8 ou 2/3 conviennent.",
+      `Définition : un nombre rationnel est un nombre qui peut s’écrire sous la forme a/b, avec a et b entiers et b non nul.\n\n` +
+      `Méthode : on écrit les nombres sous une forme adaptée : fraction, décimal ou même dénominateur, puis on calcule ou on compare.\n\n` +
+      `Calcul : on effectue les transformations ou les opérations nécessaires étape par étape. ` +
+      ("1/2 = 0,5 et 3/4 = 0,75. Par exemple 0,6, 5/8 ou 2/3 conviennent.") +
+      `\n\nConclusion : le résultat obtenu donne la réponse attendue sous forme exacte ou simplifiée.`,
     tags: ["rationnel", "defi", "encadrement"],
   },
 
@@ -717,7 +825,11 @@ export const nombresRationnelsBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Essaie entre 1/2 et 3/4.",
     explanation:
-      "Non. Entre deux rationnels, on peut toujours trouver un autre rationnel. Par exemple entre 1/2 et 3/4, il y a 2/3.",
+      `Définition : un nombre rationnel est un nombre qui peut s’écrire sous la forme a/b, avec a et b entiers et b non nul.\n\n` +
+      `Méthode : on écrit les nombres sous une forme adaptée : fraction, décimal ou même dénominateur, puis on calcule ou on compare.\n\n` +
+      `Calcul : on effectue les transformations ou les opérations nécessaires étape par étape. ` +
+      ("Non. Entre deux rationnels, on peut toujours trouver un autre rationnel. Par exemple entre 1/2 et 3/4, il y a 2/3.") +
+      `\n\nConclusion : le résultat obtenu donne la réponse attendue sous forme exacte ou simplifiée.`,
     tags: ["rationnel", "defi", "densite", "qcm"],
   },
 
@@ -736,7 +848,11 @@ export const nombresRationnelsBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "Un décimal fini peut s’écrire avec un dénominateur 10, 100 ou 1000.",
     explanation:
-      "Tout nombre décimal fini peut s’écrire sous forme d’une fraction dont le dénominateur est 10, 100, 1000, etc. Il est donc rationnel.",
+      `Définition : un nombre rationnel est un nombre qui peut s’écrire sous la forme a/b, avec a et b entiers et b non nul.\n\n` +
+      `Méthode : on écrit les nombres sous une forme adaptée : fraction, décimal ou même dénominateur, puis on calcule ou on compare.\n\n` +
+      `Calcul : on effectue les transformations ou les opérations nécessaires étape par étape. ` +
+      ("Tout nombre décimal fini peut s’écrire sous forme d’une fraction dont le dénominateur est 10, 100, 1000, etc. Il est donc rationnel.") +
+      `\n\nConclusion : le résultat obtenu donne la réponse attendue sous forme exacte ou simplifiée.`,
     tags: ["rationnel", "defi", "open", "raisonnement"],
   },
 
@@ -758,14 +874,22 @@ export const nombresRationnelsBank: TutorBankItemV4[] = [
           b: "3/4",
           candidates: ["2/3", "4/5", "1/4"],
           correct: "2/3",
-          explanation: "1/2 = 0,5 ; 3/4 = 0,75 ; 2/3 ≈ 0,67.",
+          explanation: `Définition : un nombre rationnel est un nombre qui peut s’écrire sous la forme a/b, avec a et b entiers et b non nul.\n\n` +
+            `Méthode : on écrit les nombres sous une forme adaptée : fraction, décimal ou même dénominateur, puis on calcule ou on compare.\n\n` +
+            `Calcul : on effectue les transformations ou les opérations nécessaires étape par étape. ` +
+            ("1/2 = 0,5 ; 3/4 = 0,75 ; 2/3 ≈ 0,67.") +
+            `\n\nConclusion : le résultat obtenu donne la réponse attendue sous forme exacte ou simplifiée.`,
         },
         {
           a: "1/4",
           b: "1/2",
           candidates: ["1/3", "3/4", "1/5"],
           correct: "1/3",
-          explanation: "1/4 = 0,25 ; 1/2 = 0,5 ; 1/3 ≈ 0,33.",
+          explanation: `Définition : un nombre rationnel est un nombre qui peut s’écrire sous la forme a/b, avec a et b entiers et b non nul.\n\n` +
+            `Méthode : on écrit les nombres sous une forme adaptée : fraction, décimal ou même dénominateur, puis on calcule ou on compare.\n\n` +
+            `Calcul : on effectue les transformations ou les opérations nécessaires étape par étape. ` +
+            ("1/4 = 0,25 ; 1/2 = 0,5 ; 1/3 ≈ 0,33.") +
+            `\n\nConclusion : le résultat obtenu donne la réponse attendue sous forme exacte ou simplifiée.`,
         },
       ];
       const item = randomChoice(items);
@@ -776,7 +900,11 @@ export const nombresRationnelsBank: TutorBankItemV4[] = [
         choices: shuffle(item.candidates),
         expected: [item.correct],
         comparator: "mcq_exact",
-        explanation: item.explanation,
+        explanation: `Définition : un nombre rationnel est un nombre qui peut s’écrire sous la forme a/b, avec a et b entiers et b non nul.\n\n` +
+          `Méthode : on écrit les nombres sous une forme adaptée : fraction, décimal ou même dénominateur, puis on calcule ou on compare.\n\n` +
+          `Calcul : on effectue les transformations ou les opérations nécessaires étape par étape. ` +
+          (item.explanation) +
+          `\n\nConclusion : le résultat obtenu donne la réponse attendue sous forme exacte ou simplifiée.`,
       };
     },
   },
@@ -803,7 +931,11 @@ export const nombresRationnelsBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(consumed)],
         comparator: "number_equal",
-        explanation: `On calcule ${part1}/${den1} de ${total} : ${total} × ${part1}/${den1} = ${consumed}.`,
+        explanation: `Définition : un nombre rationnel est un nombre qui peut s’écrire sous la forme a/b, avec a et b entiers et b non nul.\n\n` +
+          `Méthode : on écrit les nombres sous une forme adaptée : fraction, décimal ou même dénominateur, puis on calcule ou on compare.\n\n` +
+          `Calcul : on effectue les transformations ou les opérations nécessaires étape par étape. ` +
+          (`On calcule ${part1}/${den1} de ${total} : ${total} × ${part1}/${den1} = ${consumed}.`) +
+          `\n\nConclusion : le résultat obtenu donne la réponse attendue sous forme exacte ou simplifiée.`,
       };
     },
   },

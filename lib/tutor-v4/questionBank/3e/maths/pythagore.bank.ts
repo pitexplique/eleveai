@@ -150,7 +150,11 @@ export const pythagore3eBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Le théorème de Pythagore nécessite une condition précise sur le triangle.",
     explanation:
-      "Le théorème de Pythagore s’utilise directement seulement dans un triangle rectangle. Il permet de relier les longueurs des deux côtés de l’angle droit et de l’hypoténuse.",
+      `Définition : dans un triangle rectangle, le théorème de Pythagore relie les carrés des longueurs des trois côtés.\n\n` +
+      `Méthode : on repère l’hypoténuse ou le plus grand côté, puis on choisit le théorème direct ou sa réciproque.\n\n` +
+      `Calcul : on compare ou on calcule les carrés des longueurs indiquées. ` +
+      ("Le théorème de Pythagore s’utilise directement seulement dans un triangle rectangle. Il permet de relier les longueurs des deux côtés de l’angle droit et de l’hypoténuse.") +
+      `\n\nConclusion : on peut alors donner la longueur cherchée ou conclure sur le triangle.`,
     tags: ["pythagore", "reconnaitre", "qcm"],
   },
   {
@@ -174,7 +178,11 @@ export const pythagore3eBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Regarde le côté qui est en face de l’angle droit.",
     explanation:
-      "Dans un triangle rectangle, l’hypoténuse est le côté opposé à l’angle droit. C’est aussi le plus long côté du triangle rectangle.",
+      `Définition : dans un triangle rectangle, le théorème de Pythagore relie les carrés des longueurs des trois côtés.\n\n` +
+      `Méthode : on repère l’hypoténuse ou le plus grand côté, puis on choisit le théorème direct ou sa réciproque.\n\n` +
+      `Calcul : on compare ou on calcule les carrés des longueurs indiquées. ` +
+      ("Dans un triangle rectangle, l’hypoténuse est le côté opposé à l’angle droit. C’est aussi le plus long côté du triangle rectangle.") +
+      `\n\nConclusion : on peut alors donner la longueur cherchée ou conclure sur le triangle.`,
     tags: ["pythagore", "hypotenuse", "qcm"],
   },
   {
@@ -202,10 +210,14 @@ export const pythagore3eBank: TutorBankItemV4[] = [
         ]),
         expected: [sideName(labels, hyp)],
         comparator: "mcq_exact",
-        explanation: `Le triangle est rectangle en ${labels.A}. L’hypoténuse est le côté opposé à l’angle droit, donc c’est le côté ${sideName(
+        explanation: `Définition : dans un triangle rectangle, le théorème de Pythagore relie les carrés des longueurs des trois côtés.\n\n` +
+          `Méthode : on repère l’hypoténuse ou le plus grand côté, puis on choisit le théorème direct ou sa réciproque.\n\n` +
+          `Calcul : on compare ou on calcule les carrés des longueurs indiquées. ` +
+          (`Le triangle est rectangle en ${labels.A}. L’hypoténuse est le côté opposé à l’angle droit, donc c’est le côté ${sideName(
           labels,
           hyp
-        )}.`,
+        )}.`) +
+          `\n\nConclusion : on peut alors donner la longueur cherchée ou conclure sur le triangle.`,
         canvas: rightTriangleFigure({ labels }),
       };
     },
@@ -225,7 +237,11 @@ export const pythagore3eBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "Le théorème de Pythagore demande une condition avant de commencer.",
     explanation:
-      "On ne peut pas utiliser directement le théorème de Pythagore dans n’importe quel triangle, car ce théorème s’applique seulement dans un triangle rectangle. Il faut donc d’abord savoir ou prouver que le triangle est rectangle.",
+      `Définition : dans un triangle rectangle, le théorème de Pythagore relie les carrés des longueurs des trois côtés.\n\n` +
+      `Méthode : on repère l’hypoténuse ou le plus grand côté, puis on choisit le théorème direct ou sa réciproque.\n\n` +
+      `Calcul : on compare ou on calcule les carrés des longueurs indiquées. ` +
+      ("On ne peut pas utiliser directement le théorème de Pythagore dans n’importe quel triangle, car ce théorème s’applique seulement dans un triangle rectangle. Il faut donc d’abord savoir ou prouver que le triangle est rectangle.") +
+      `\n\nConclusion : on peut alors donner la longueur cherchée ou conclure sur le triangle.`,
     tags: ["pythagore", "reconnaitre", "open"],
   },
 
@@ -248,7 +264,11 @@ export const pythagore3eBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Pour calculer l’hypoténuse, on additionne les carrés des deux côtés de l’angle droit.",
     explanation:
-      "Dans un triangle rectangle, le carré de l’hypoténuse est égal à la somme des carrés des deux côtés de l’angle droit. On calcule : 3² + 4² = 9 + 16 = 25. Donc l’hypoténuse mesure √25 = 5 cm.",
+      `Définition : dans un triangle rectangle, le théorème de Pythagore relie les carrés des longueurs des trois côtés.\n\n` +
+      `Méthode : on repère l’hypoténuse ou le plus grand côté, puis on choisit le théorème direct ou sa réciproque.\n\n` +
+      `Calcul : on compare ou on calcule les carrés des longueurs indiquées. ` +
+      ("Dans un triangle rectangle, le carré de l’hypoténuse est égal à la somme des carrés des deux côtés de l’angle droit. On calcule : 3² + 4² = 9 + 16 = 25. Donc l’hypoténuse mesure √25 = 5 cm.") +
+      `\n\nConclusion : on peut alors donner la longueur cherchée ou conclure sur le triangle.`,
     tags: ["pythagore", "hypotenuse", "triplet"],
   },
   {
@@ -271,9 +291,13 @@ export const pythagore3eBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(c)],
         comparator: "number_equal",
-        explanation: `On cherche l’hypoténuse, donc on additionne les carrés des deux côtés de l’angle droit : ${a}² + ${b}² = ${a * a} + ${b * b} = ${
+        explanation: `Définition : dans un triangle rectangle, le théorème de Pythagore relie les carrés des longueurs des trois côtés.\n\n` +
+          `Méthode : on repère l’hypoténuse ou le plus grand côté, puis on choisit le théorème direct ou sa réciproque.\n\n` +
+          `Calcul : on compare ou on calcule les carrés des longueurs indiquées. ` +
+          (`On cherche l’hypoténuse, donc on additionne les carrés des deux côtés de l’angle droit : ${a}² + ${b}² = ${a * a} + ${b * b} = ${
           c * c
-        }. La longueur de l’hypoténuse est donc √${c * c} = ${c} cm.`,
+        }. La longueur de l’hypoténuse est donc √${c * c} = ${c} cm.`) +
+          `\n\nConclusion : on peut alors donner la longueur cherchée ou conclure sur le triangle.`,
         canvas: rightTriangleFigure({
           labels,
           sideLabels: {
@@ -305,9 +329,13 @@ export const pythagore3eBank: TutorBankItemV4[] = [
         choices: makeChoices(c, 8),
         expected: [String(c)],
         comparator: "mcq_exact",
-        explanation: `D’après le théorème de Pythagore, l’hypoténuse vérifie : h² = ${a}² + ${b}². Donc h² = ${a * a} + ${b * b} = ${
+        explanation: `Définition : dans un triangle rectangle, le théorème de Pythagore relie les carrés des longueurs des trois côtés.\n\n` +
+          `Méthode : on repère l’hypoténuse ou le plus grand côté, puis on choisit le théorème direct ou sa réciproque.\n\n` +
+          `Calcul : on compare ou on calcule les carrés des longueurs indiquées. ` +
+          (`D’après le théorème de Pythagore, l’hypoténuse vérifie : h² = ${a}² + ${b}². Donc h² = ${a * a} + ${b * b} = ${
           c * c
-        }. Ainsi h = √${c * c} = ${c} cm.`,
+        }. Ainsi h = √${c * c} = ${c} cm.`) +
+          `\n\nConclusion : on peut alors donner la longueur cherchée ou conclure sur le triangle.`,
       };
     },
   },
@@ -330,9 +358,13 @@ export const pythagore3eBank: TutorBankItemV4[] = [
         format: "open",
         expected: [String(a), String(b), String(c), "Pythagore"],
         comparator: "contains_keyword",
-        explanation: `Dans un triangle rectangle, d’après le théorème de Pythagore, le carré de l’hypoténuse est égal à la somme des carrés des deux côtés de l’angle droit. On calcule : ${a}² + ${b}² = ${a * a} + ${b * b} = ${
+        explanation: `Définition : dans un triangle rectangle, le théorème de Pythagore relie les carrés des longueurs des trois côtés.\n\n` +
+          `Méthode : on repère l’hypoténuse ou le plus grand côté, puis on choisit le théorème direct ou sa réciproque.\n\n` +
+          `Calcul : on compare ou on calcule les carrés des longueurs indiquées. ` +
+          (`Dans un triangle rectangle, d’après le théorème de Pythagore, le carré de l’hypoténuse est égal à la somme des carrés des deux côtés de l’angle droit. On calcule : ${a}² + ${b}² = ${a * a} + ${b * b} = ${
           c * c
-        }. Donc l’hypoténuse vaut √${c * c} = ${c} cm.`,
+        }. Donc l’hypoténuse vaut √${c * c} = ${c} cm.`) +
+          `\n\nConclusion : on peut alors donner la longueur cherchée ou conclure sur le triangle.`,
       };
     },
   },
@@ -356,7 +388,11 @@ export const pythagore3eBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Quand on cherche un côté de l’angle droit, on soustrait les carrés.",
     explanation:
-      "On connaît l’hypoténuse et un côté de l’angle droit. On calcule donc la différence des carrés : 5² - 3² = 25 - 9 = 16. La longueur cherchée vaut √16 = 4 cm.",
+      `Définition : dans un triangle rectangle, le théorème de Pythagore relie les carrés des longueurs des trois côtés.\n\n` +
+      `Méthode : on repère l’hypoténuse ou le plus grand côté, puis on choisit le théorème direct ou sa réciproque.\n\n` +
+      `Calcul : on compare ou on calcule les carrés des longueurs indiquées. ` +
+      ("On connaît l’hypoténuse et un côté de l’angle droit. On calcule donc la différence des carrés : 5² - 3² = 25 - 9 = 16. La longueur cherchée vaut √16 = 4 cm.") +
+      `\n\nConclusion : on peut alors donner la longueur cherchée ou conclure sur le triangle.`,
     tags: ["pythagore", "cote", "triplet"],
   },
   {
@@ -381,11 +417,15 @@ export const pythagore3eBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(missingLeg)],
         comparator: "number_equal",
-        explanation: `On cherche un côté de l’angle droit. On soustrait donc les carrés : ${triple.c}² - ${knownLeg}² = ${
+        explanation: `Définition : dans un triangle rectangle, le théorème de Pythagore relie les carrés des longueurs des trois côtés.\n\n` +
+          `Méthode : on repère l’hypoténuse ou le plus grand côté, puis on choisit le théorème direct ou sa réciproque.\n\n` +
+          `Calcul : on compare ou on calcule les carrés des longueurs indiquées. ` +
+          (`On cherche un côté de l’angle droit. On soustrait donc les carrés : ${triple.c}² - ${knownLeg}² = ${
           triple.c * triple.c
         } - ${knownLeg * knownLeg} = ${missingLeg * missingLeg}. La longueur cherchée vaut √${
           missingLeg * missingLeg
-        } = ${missingLeg} cm.`,
+        } = ${missingLeg} cm.`) +
+          `\n\nConclusion : on peut alors donner la longueur cherchée ou conclure sur le triangle.`,
         canvas: rightTriangleFigure({
           labels,
           sideLabels: {
@@ -419,9 +459,13 @@ export const pythagore3eBank: TutorBankItemV4[] = [
         choices: makeChoices(missingLeg, 8),
         expected: [String(missingLeg)],
         comparator: "mcq_exact",
-        explanation: `Comme on cherche un côté de l’angle droit, on ne calcule pas ${triple.c}² + ${knownLeg}². On calcule ${triple.c}² - ${knownLeg}² = ${
+        explanation: `Définition : dans un triangle rectangle, le théorème de Pythagore relie les carrés des longueurs des trois côtés.\n\n` +
+          `Méthode : on repère l’hypoténuse ou le plus grand côté, puis on choisit le théorème direct ou sa réciproque.\n\n` +
+          `Calcul : on compare ou on calcule les carrés des longueurs indiquées. ` +
+          (`Comme on cherche un côté de l’angle droit, on ne calcule pas ${triple.c}² + ${knownLeg}². On calcule ${triple.c}² - ${knownLeg}² = ${
           triple.c * triple.c
-        } - ${knownLeg * knownLeg} = ${missingLeg * missingLeg}. Donc la longueur vaut ${missingLeg} cm.`,
+        } - ${knownLeg * knownLeg} = ${missingLeg * missingLeg}. Donc la longueur vaut ${missingLeg} cm.`) +
+          `\n\nConclusion : on peut alors donner la longueur cherchée ou conclure sur le triangle.`,
       };
     },
   },
@@ -446,11 +490,15 @@ export const pythagore3eBank: TutorBankItemV4[] = [
         format: "open",
         expected: [String(triple.c), String(knownLeg), String(missingLeg), "Pythagore"],
         comparator: "contains_keyword",
-        explanation: `Dans un triangle rectangle, d’après le théorème de Pythagore, le carré de l’hypoténuse est égal à la somme des carrés des deux côtés de l’angle droit. Ici, on connaît l’hypoténuse et un côté. On calcule donc : ${triple.c}² - ${knownLeg}² = ${
+        explanation: `Définition : dans un triangle rectangle, le théorème de Pythagore relie les carrés des longueurs des trois côtés.\n\n` +
+          `Méthode : on repère l’hypoténuse ou le plus grand côté, puis on choisit le théorème direct ou sa réciproque.\n\n` +
+          `Calcul : on compare ou on calcule les carrés des longueurs indiquées. ` +
+          (`Dans un triangle rectangle, d’après le théorème de Pythagore, le carré de l’hypoténuse est égal à la somme des carrés des deux côtés de l’angle droit. Ici, on connaît l’hypoténuse et un côté. On calcule donc : ${triple.c}² - ${knownLeg}² = ${
           triple.c * triple.c
         } - ${knownLeg * knownLeg} = ${missingLeg * missingLeg}. La longueur cherchée vaut √${
           missingLeg * missingLeg
-        } = ${missingLeg} cm.`,
+        } = ${missingLeg} cm.`) +
+          `\n\nConclusion : on peut alors donner la longueur cherchée ou conclure sur le triangle.`,
       };
     },
   },
@@ -479,7 +527,11 @@ export const pythagore3eBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "On ne sait pas encore si le triangle est rectangle.",
     explanation:
-      "Quand on connaît les trois longueurs d’un triangle et qu’on veut savoir s’il est rectangle, on utilise la réciproque du théorème de Pythagore. Le théorème direct sert plutôt à calculer une longueur dans un triangle déjà rectangle.",
+      `Définition : dans un triangle rectangle, le théorème de Pythagore relie les carrés des longueurs des trois côtés.\n\n` +
+      `Méthode : on repère l’hypoténuse ou le plus grand côté, puis on choisit le théorème direct ou sa réciproque.\n\n` +
+      `Calcul : on compare ou on calcule les carrés des longueurs indiquées. ` +
+      ("Quand on connaît les trois longueurs d’un triangle et qu’on veut savoir s’il est rectangle, on utilise la réciproque du théorème de Pythagore. Le théorème direct sert plutôt à calculer une longueur dans un triangle déjà rectangle.") +
+      `\n\nConclusion : on peut alors donner la longueur cherchée ou conclure sur le triangle.`,
     tags: ["pythagore", "reciproque", "qcm"],
   },
   {
@@ -509,9 +561,13 @@ export const pythagore3eBank: TutorBankItemV4[] = [
         expected: [left === right ? "oui" : "non"],
         comparator: "mcq_exact",
         explanation:
-          left === right
+          `Définition : dans un triangle rectangle, le théorème de Pythagore relie les carrés des longueurs des trois côtés.\n\n` +
+          `Méthode : on repère l’hypoténuse ou le plus grand côté, puis on choisit le théorème direct ou sa réciproque.\n\n` +
+          `Calcul : on compare ou on calcule les carrés des longueurs indiquées. ` +
+          (left === right
             ? `Le plus grand côté mesure ${triple.c} cm. On compare ${triple.a}² + ${triple.b}² et ${triple.c}² : ${triple.a}² + ${triple.b}² = ${left} et ${triple.c}² = ${right}. Les deux résultats sont égaux, donc d’après la réciproque du théorème de Pythagore, le triangle est rectangle.`
-            : `Le plus grand côté mesure ${triple.c} cm. On compare ${triple.a}² + ${triple.b}² et ${triple.c}² : ${triple.a}² + ${triple.b}² = ${left}, alors que ${triple.c}² = ${right}. Les deux résultats ne sont pas égaux, donc le triangle n’est pas rectangle.`,
+            : `Le plus grand côté mesure ${triple.c} cm. On compare ${triple.a}² + ${triple.b}² et ${triple.c}² : ${triple.a}² + ${triple.b}² = ${left}, alors que ${triple.c}² = ${right}. Les deux résultats ne sont pas égaux, donc le triangle n’est pas rectangle.`) +
+          `\n\nConclusion : on peut alors donner la longueur cherchée ou conclure sur le triangle.`,
       };
     },
   },
@@ -536,7 +592,11 @@ export const pythagore3eBank: TutorBankItemV4[] = [
         choices: shuffle([labels.A, labels.B, labels.C]),
         expected: [labels.A],
         comparator: "mcq_exact",
-        explanation: `Le plus grand côté est ${sideName(labels, "BC")}. Si le triangle est rectangle, ce côté serait l’hypoténuse. L’angle droit serait donc au sommet opposé, c’est-à-dire au point ${labels.A}.`,
+        explanation: `Définition : dans un triangle rectangle, le théorème de Pythagore relie les carrés des longueurs des trois côtés.\n\n` +
+          `Méthode : on repère l’hypoténuse ou le plus grand côté, puis on choisit le théorème direct ou sa réciproque.\n\n` +
+          `Calcul : on compare ou on calcule les carrés des longueurs indiquées. ` +
+          (`Le plus grand côté est ${sideName(labels, "BC")}. Si le triangle est rectangle, ce côté serait l’hypoténuse. L’angle droit serait donc au sommet opposé, c’est-à-dire au point ${labels.A}.`) +
+          `\n\nConclusion : on peut alors donner la longueur cherchée ou conclure sur le triangle.`,
         canvas: nonRightTriangleFigure({
           labels,
           sideLabels: {
@@ -568,9 +628,13 @@ export const pythagore3eBank: TutorBankItemV4[] = [
         format: "open",
         expected: [String(triple.a), String(triple.b), String(triple.c), "rectangle"],
         comparator: "contains_keyword",
-        explanation: `Le plus grand côté mesure ${triple.c} cm. On compare la somme des carrés des deux plus petits côtés avec le carré du plus grand côté : ${triple.a}² + ${triple.b}² = ${left} et ${triple.c}² = ${
+        explanation: `Définition : dans un triangle rectangle, le théorème de Pythagore relie les carrés des longueurs des trois côtés.\n\n` +
+          `Méthode : on repère l’hypoténuse ou le plus grand côté, puis on choisit le théorème direct ou sa réciproque.\n\n` +
+          `Calcul : on compare ou on calcule les carrés des longueurs indiquées. ` +
+          (`Le plus grand côté mesure ${triple.c} cm. On compare la somme des carrés des deux plus petits côtés avec le carré du plus grand côté : ${triple.a}² + ${triple.b}² = ${left} et ${triple.c}² = ${
           triple.c * triple.c
-        }. Les deux résultats sont égaux. Donc, d’après la réciproque du théorème de Pythagore, le triangle est rectangle.`,
+        }. Les deux résultats sont égaux. Donc, d’après la réciproque du théorème de Pythagore, le triangle est rectangle.`) +
+          `\n\nConclusion : on peut alors donner la longueur cherchée ou conclure sur le triangle.`,
       };
     },
   },
@@ -599,7 +663,11 @@ export const pythagore3eBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Le théorème direct commence par un triangle déjà rectangle.",
     explanation:
-      "Pour utiliser le théorème de Pythagore direct, il faut d’abord indiquer que le triangle est rectangle. Une rédaction correcte commence donc par une phrase du type : « Dans le triangle ABC rectangle en A, d’après le théorème de Pythagore… »",
+      `Définition : dans un triangle rectangle, le théorème de Pythagore relie les carrés des longueurs des trois côtés.\n\n` +
+      `Méthode : on repère l’hypoténuse ou le plus grand côté, puis on choisit le théorème direct ou sa réciproque.\n\n` +
+      `Calcul : on compare ou on calcule les carrés des longueurs indiquées. ` +
+      ("Pour utiliser le théorème de Pythagore direct, il faut d’abord indiquer que le triangle est rectangle. Une rédaction correcte commence donc par une phrase du type : « Dans le triangle ABC rectangle en A, d’après le théorème de Pythagore… »") +
+      `\n\nConclusion : on peut alors donner la longueur cherchée ou conclure sur le triangle.`,
     tags: ["pythagore", "redaction", "qcm"],
   },
   {
@@ -625,7 +693,11 @@ export const pythagore3eBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "La réciproque sert à vérifier si le triangle est rectangle.",
     explanation:
-      "Pour utiliser la réciproque du théorème de Pythagore, on ne suppose pas que le triangle est rectangle. On compare la somme des carrés des deux plus petits côtés avec le carré du plus grand côté, puis on conclut.",
+      `Définition : dans un triangle rectangle, le théorème de Pythagore relie les carrés des longueurs des trois côtés.\n\n` +
+      `Méthode : on repère l’hypoténuse ou le plus grand côté, puis on choisit le théorème direct ou sa réciproque.\n\n` +
+      `Calcul : on compare ou on calcule les carrés des longueurs indiquées. ` +
+      ("Pour utiliser la réciproque du théorème de Pythagore, on ne suppose pas que le triangle est rectangle. On compare la somme des carrés des deux plus petits côtés avec le carré du plus grand côté, puis on conclut.") +
+      `\n\nConclusion : on peut alors donner la longueur cherchée ou conclure sur le triangle.`,
     tags: ["pythagore", "redaction", "reciproque"],
   },
   {
@@ -643,7 +715,11 @@ export const pythagore3eBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "Dans un cas, on sait déjà que le triangle est rectangle. Dans l’autre, on veut le vérifier.",
     explanation:
-      "Le théorème de Pythagore sert à calculer une longueur dans un triangle dont on sait déjà qu’il est rectangle. La réciproque sert à montrer qu’un triangle est rectangle à partir de ses trois longueurs.",
+      `Définition : dans un triangle rectangle, le théorème de Pythagore relie les carrés des longueurs des trois côtés.\n\n` +
+      `Méthode : on repère l’hypoténuse ou le plus grand côté, puis on choisit le théorème direct ou sa réciproque.\n\n` +
+      `Calcul : on compare ou on calcule les carrés des longueurs indiquées. ` +
+      ("Le théorème de Pythagore sert à calculer une longueur dans un triangle dont on sait déjà qu’il est rectangle. La réciproque sert à montrer qu’un triangle est rectangle à partir de ses trois longueurs.") +
+      `\n\nConclusion : on peut alors donner la longueur cherchée ou conclure sur le triangle.`,
     tags: ["pythagore", "redaction", "open"],
   },
 
@@ -669,9 +745,13 @@ export const pythagore3eBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(c)],
         comparator: "number_equal",
-        explanation: `On modélise la situation par un triangle rectangle. Les deux côtés de l’angle droit mesurent ${a} et ${b} centaines de mètres. D’après le théorème de Pythagore, la distance en ligne droite vérifie : d² = ${a}² + ${b}² = ${
+        explanation: `Définition : dans un triangle rectangle, le théorème de Pythagore relie les carrés des longueurs des trois côtés.\n\n` +
+          `Méthode : on repère l’hypoténuse ou le plus grand côté, puis on choisit le théorème direct ou sa réciproque.\n\n` +
+          `Calcul : on compare ou on calcule les carrés des longueurs indiquées. ` +
+          (`On modélise la situation par un triangle rectangle. Les deux côtés de l’angle droit mesurent ${a} et ${b} centaines de mètres. D’après le théorème de Pythagore, la distance en ligne droite vérifie : d² = ${a}² + ${b}² = ${
           c * c
-        }. Donc d = ${c}. La distance est donc de ${c} centaines de mètres.`,
+        }. Donc d = ${c}. La distance est donc de ${c} centaines de mètres.`) +
+          `\n\nConclusion : on peut alors donner la longueur cherchée ou conclure sur le triangle.`,
       };
     },
   },
@@ -696,7 +776,11 @@ export const pythagore3eBank: TutorBankItemV4[] = [
         expected: ["non"],
         comparator: "mcq_exact",
         explanation:
-          "Non. Quand on connaît les trois longueurs et qu’on veut savoir si le triangle est rectangle, on utilise la réciproque du théorème de Pythagore. Le théorème direct s’utilise lorsque le triangle est déjà connu comme rectangle et que l’on cherche une longueur.",
+          `Définition : dans un triangle rectangle, le théorème de Pythagore relie les carrés des longueurs des trois côtés.\n\n` +
+          `Méthode : on repère l’hypoténuse ou le plus grand côté, puis on choisit le théorème direct ou sa réciproque.\n\n` +
+          `Calcul : on compare ou on calcule les carrés des longueurs indiquées. ` +
+          ("Non. Quand on connaît les trois longueurs et qu’on veut savoir si le triangle est rectangle, on utilise la réciproque du théorème de Pythagore. Le théorème direct s’utilise lorsque le triangle est déjà connu comme rectangle et que l’on cherche une longueur.") +
+          `\n\nConclusion : on peut alors donner la longueur cherchée ou conclure sur le triangle.`,
       };
     },
   },
@@ -726,9 +810,13 @@ export const pythagore3eBank: TutorBankItemV4[] = [
         expected: [String(triple.a), String(triple.b), String(triple.c)],
         comparator: "contains_keyword",
         explanation:
-          left === right
+          `Définition : dans un triangle rectangle, le théorème de Pythagore relie les carrés des longueurs des trois côtés.\n\n` +
+          `Méthode : on repère l’hypoténuse ou le plus grand côté, puis on choisit le théorème direct ou sa réciproque.\n\n` +
+          `Calcul : on compare ou on calcule les carrés des longueurs indiquées. ` +
+          (left === right
             ? `Le plus grand côté mesure ${triple.c} cm. On compare ${triple.a}² + ${triple.b}² et ${triple.c}² : ${left} = ${right}. L’égalité de Pythagore est vérifiée. Donc, d’après la réciproque du théorème de Pythagore, le triangle est rectangle.`
-            : `Le plus grand côté mesure ${triple.c} cm. On compare ${triple.a}² + ${triple.b}² et ${triple.c}² : ${left} ≠ ${right}. L’égalité de Pythagore n’est pas vérifiée. Donc le triangle n’est pas rectangle.`,
+            : `Le plus grand côté mesure ${triple.c} cm. On compare ${triple.a}² + ${triple.b}² et ${triple.c}² : ${left} ≠ ${right}. L’égalité de Pythagore n’est pas vérifiée. Donc le triangle n’est pas rectangle.`) +
+          `\n\nConclusion : on peut alors donner la longueur cherchée ou conclure sur le triangle.`,
       };
     },
   },

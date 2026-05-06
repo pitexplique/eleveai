@@ -51,7 +51,11 @@ export const arithmetiqueBank: TutorBankItemV4[] = [
     expected: ["oui"],
     comparator: "mcq_exact",
     hint: "Cherche si 12 est dans la table de 3.",
-    explanation: "Oui, car 12 = 3 × 4.",
+    explanation: `Définition : l’arithmétique étudie les diviseurs, les multiples, les critères de divisibilité, les nombres premiers et les diviseurs communs.\n\n` +
+      `Méthode : on repère la propriété utile, puis on vérifie avec une égalité, un critère ou une décomposition.\n\n` +
+      `Calcul : on utilise les données de la question pour justifier la réponse. ` +
+      ("Oui, car 12 = 3 × 4.") +
+      `\n\nConclusion : la réponse est donc celle indiquée, avec une justification arithmétique.`,
     tags: ["arithmetique", "multiple", "diviseur"],
   },
 
@@ -70,7 +74,11 @@ export const arithmetiqueBank: TutorBankItemV4[] = [
     expected: ["oui"],
     comparator: "mcq_exact",
     hint: "On cherche si 35 se divise exactement par 5.",
-    explanation: "Oui, car 35 = 5 × 7.",
+    explanation: `Définition : l’arithmétique étudie les diviseurs, les multiples, les critères de divisibilité, les nombres premiers et les diviseurs communs.\n\n` +
+      `Méthode : on repère la propriété utile, puis on vérifie avec une égalité, un critère ou une décomposition.\n\n` +
+      `Calcul : on utilise les données de la question pour justifier la réponse. ` +
+      ("Oui, car 35 = 5 × 7.") +
+      `\n\nConclusion : la réponse est donc celle indiquée, avec une justification arithmétique.`,
     tags: ["arithmetique", "diviseur", "qcm"],
   },
 
@@ -89,7 +97,11 @@ export const arithmetiqueBank: TutorBankItemV4[] = [
     expected: ["6"],
     comparator: "mcq_exact",
     hint: "42 doit être divisible sans reste.",
-    explanation: "6 est un diviseur de 42 car 42 = 6 × 7.",
+    explanation: `Définition : l’arithmétique étudie les diviseurs, les multiples, les critères de divisibilité, les nombres premiers et les diviseurs communs.\n\n` +
+      `Méthode : on repère la propriété utile, puis on vérifie avec une égalité, un critère ou une décomposition.\n\n` +
+      `Calcul : on utilise les données de la question pour justifier la réponse. ` +
+      ("6 est un diviseur de 42 car 42 = 6 × 7.") +
+      `\n\nConclusion : la réponse est donc celle indiquée, avec une justification arithmétique.`,
     tags: ["arithmetique", "diviseur", "qcm"],
   },
 
@@ -107,7 +119,11 @@ export const arithmetiqueBank: TutorBankItemV4[] = [
     expected: ["56", "8", "7"],
     comparator: "contains_keyword",
     hint: "Écris 56 comme un produit contenant 8.",
-    explanation: "8 est un diviseur de 56 car 56 = 8 × 7.",
+    explanation: `Définition : l’arithmétique étudie les diviseurs, les multiples, les critères de divisibilité, les nombres premiers et les diviseurs communs.\n\n` +
+      `Méthode : on repère la propriété utile, puis on vérifie avec une égalité, un critère ou une décomposition.\n\n` +
+      `Calcul : on utilise les données de la question pour justifier la réponse. ` +
+      ("8 est un diviseur de 56 car 56 = 8 × 7.") +
+      `\n\nConclusion : la réponse est donc celle indiquée, avec une justification arithmétique.`,
     tags: ["arithmetique", "diviseur", "open"],
   },
 
@@ -133,7 +149,11 @@ export const arithmetiqueBank: TutorBankItemV4[] = [
         choices: ["oui", "non"],
         expected: ["oui"],
         comparator: "mcq_exact",
-        explanation: `Oui, car ${n} = ${d} × ${k}.`,
+        explanation: `Définition : l’arithmétique étudie les diviseurs, les multiples, les critères de divisibilité, les nombres premiers et les diviseurs communs.\n\n` +
+          `Méthode : on repère la propriété utile, puis on vérifie avec une égalité, un critère ou une décomposition.\n\n` +
+          `Calcul : on utilise les données de la question pour justifier la réponse. ` +
+          (`Oui, car ${n} = ${d} × ${k}.`) +
+          `\n\nConclusion : la réponse est donc celle indiquée, avec une justification arithmétique.`,
       };
     },
   },
@@ -161,9 +181,13 @@ export const arithmetiqueBank: TutorBankItemV4[] = [
         choices: ["oui", "non"],
         expected: [yes ? "oui" : "non"],
         comparator: "mcq_exact",
-        explanation: yes
+        explanation: `Définition : l’arithmétique étudie les diviseurs, les multiples, les critères de divisibilité, les nombres premiers et les diviseurs communs.\n\n` +
+          `Méthode : on repère la propriété utile, puis on vérifie avec une égalité, un critère ou une décomposition.\n\n` +
+          `Calcul : on utilise les données de la question pour justifier la réponse. ` +
+          (yes
           ? `Oui, car ${n} = ${d} × ${k}.`
-          : `Non, ${n} n’est pas divisible exactement par ${d}.`,
+          : `Non, ${n} n’est pas divisible exactement par ${d}.`) +
+          `\n\nConclusion : la réponse est donc celle indiquée, avec une justification arithmétique.`,
       };
     },
   },
@@ -192,7 +216,11 @@ export const arithmetiqueBank: TutorBankItemV4[] = [
     expected: ["un nombre pair"],
     comparator: "mcq_exact",
     hint: "Regarde le chiffre des unités.",
-    explanation: "Un nombre divisible par 2 est un nombre pair.",
+    explanation: `Définition : l’arithmétique étudie les diviseurs, les multiples, les critères de divisibilité, les nombres premiers et les diviseurs communs.\n\n` +
+      `Méthode : on repère la propriété utile, puis on vérifie avec une égalité, un critère ou une décomposition.\n\n` +
+      `Calcul : on utilise les données de la question pour justifier la réponse. ` +
+      ("Un nombre divisible par 2 est un nombre pair.") +
+      `\n\nConclusion : la réponse est donc celle indiquée, avec une justification arithmétique.`,
     tags: ["arithmetique", "criteres", "divisibilite"],
   },
 
@@ -211,7 +239,11 @@ export const arithmetiqueBank: TutorBankItemV4[] = [
     expected: ["3"],
     comparator: "mcq_exact",
     hint: "Additionne les chiffres de 135.",
-    explanation: "1 + 3 + 5 = 9, et 9 est divisible par 3. Donc 135 est divisible par 3.",
+    explanation: `Définition : l’arithmétique étudie les diviseurs, les multiples, les critères de divisibilité, les nombres premiers et les diviseurs communs.\n\n` +
+      `Méthode : on repère la propriété utile, puis on vérifie avec une égalité, un critère ou une décomposition.\n\n` +
+      `Calcul : on utilise les données de la question pour justifier la réponse. ` +
+      ("1 + 3 + 5 = 9, et 9 est divisible par 3. Donc 135 est divisible par 3.") +
+      `\n\nConclusion : la réponse est donc celle indiquée, avec une justification arithmétique.`,
     tags: ["arithmetique", "criteres", "qcm"],
   },
 
@@ -230,7 +262,11 @@ export const arithmetiqueBank: TutorBankItemV4[] = [
     expected: ["5"],
     comparator: "mcq_exact",
     hint: "Un nombre divisible par 5 finit par 0 ou 5.",
-    explanation: "250 finit par 0, donc il est divisible par 5.",
+    explanation: `Définition : l’arithmétique étudie les diviseurs, les multiples, les critères de divisibilité, les nombres premiers et les diviseurs communs.\n\n` +
+      `Méthode : on repère la propriété utile, puis on vérifie avec une égalité, un critère ou une décomposition.\n\n` +
+      `Calcul : on utilise les données de la question pour justifier la réponse. ` +
+      ("250 finit par 0, donc il est divisible par 5.") +
+      `\n\nConclusion : la réponse est donc celle indiquée, avec une justification arithmétique.`,
     tags: ["arithmetique", "criteres", "qcm"],
   },
 
@@ -254,7 +290,11 @@ export const arithmetiqueBank: TutorBankItemV4[] = [
         choices: ["oui", "non"],
         expected: ["oui"],
         comparator: "mcq_exact",
-        explanation: `${n} finit par 0 ou 5, donc il est divisible par 5.`,
+        explanation: `Définition : l’arithmétique étudie les diviseurs, les multiples, les critères de divisibilité, les nombres premiers et les diviseurs communs.\n\n` +
+          `Méthode : on repère la propriété utile, puis on vérifie avec une égalité, un critère ou une décomposition.\n\n` +
+          `Calcul : on utilise les données de la question pour justifier la réponse. ` +
+          (`${n} finit par 0 ou 5, donc il est divisible par 5.`) +
+          `\n\nConclusion : la réponse est donc celle indiquée, avec une justification arithmétique.`,
       };
     },
   },
@@ -283,11 +323,15 @@ export const arithmetiqueBank: TutorBankItemV4[] = [
         choices: ["oui", "non"],
         expected: [divisible ? "oui" : "non"],
         comparator: "mcq_exact",
-        explanation: `La somme des chiffres vaut ${sum}. ${
+        explanation: `Définition : l’arithmétique étudie les diviseurs, les multiples, les critères de divisibilité, les nombres premiers et les diviseurs communs.\n\n` +
+          `Méthode : on repère la propriété utile, puis on vérifie avec une égalité, un critère ou une décomposition.\n\n` +
+          `Calcul : on utilise les données de la question pour justifier la réponse. ` +
+          (`La somme des chiffres vaut ${sum}. ${
           divisible
             ? `${sum} est divisible par 3, donc ${n} est divisible par 3.`
             : `${sum} n’est pas divisible par 3, donc ${n} n’est pas divisible par 3.`
-        }`,
+        }`) +
+          `\n\nConclusion : la réponse est donc celle indiquée, avec une justification arithmétique.`,
       };
     },
   },
@@ -306,7 +350,11 @@ export const arithmetiqueBank: TutorBankItemV4[] = [
     expected: ["7", "3", "8", "18", "3"],
     comparator: "contains_keyword",
     hint: "Additionne les chiffres.",
-    explanation: "7 + 3 + 8 = 18, et 18 est divisible par 3. Donc 738 est divisible par 3.",
+    explanation: `Définition : l’arithmétique étudie les diviseurs, les multiples, les critères de divisibilité, les nombres premiers et les diviseurs communs.\n\n` +
+      `Méthode : on repère la propriété utile, puis on vérifie avec une égalité, un critère ou une décomposition.\n\n` +
+      `Calcul : on utilise les données de la question pour justifier la réponse. ` +
+      ("7 + 3 + 8 = 18, et 18 est divisible par 3. Donc 738 est divisible par 3.") +
+      `\n\nConclusion : la réponse est donc celle indiquée, avec une justification arithmétique.`,
     tags: ["arithmetique", "criteres", "open"],
   },
 
@@ -334,7 +382,11 @@ export const arithmetiqueBank: TutorBankItemV4[] = [
     expected: ["deux diviseurs : 1 et lui-même"],
     comparator: "mcq_exact",
     hint: "Exemple : 7 a pour diviseurs 1 et 7.",
-    explanation: "Un nombre premier possède exactement deux diviseurs : 1 et lui-même.",
+    explanation: `Définition : l’arithmétique étudie les diviseurs, les multiples, les critères de divisibilité, les nombres premiers et les diviseurs communs.\n\n` +
+      `Méthode : on repère la propriété utile, puis on vérifie avec une égalité, un critère ou une décomposition.\n\n` +
+      `Calcul : on utilise les données de la question pour justifier la réponse. ` +
+      ("Un nombre premier possède exactement deux diviseurs : 1 et lui-même.") +
+      `\n\nConclusion : la réponse est donc celle indiquée, avec une justification arithmétique.`,
     tags: ["arithmetique", "nombre_premier", "definition"],
   },
 
@@ -353,7 +405,11 @@ export const arithmetiqueBank: TutorBankItemV4[] = [
     expected: ["17"],
     comparator: "mcq_exact",
     hint: "Un nombre premier n’a que deux diviseurs.",
-    explanation: "17 est premier car ses seuls diviseurs sont 1 et 17.",
+    explanation: `Définition : l’arithmétique étudie les diviseurs, les multiples, les critères de divisibilité, les nombres premiers et les diviseurs communs.\n\n` +
+      `Méthode : on repère la propriété utile, puis on vérifie avec une égalité, un critère ou une décomposition.\n\n` +
+      `Calcul : on utilise les données de la question pour justifier la réponse. ` +
+      ("17 est premier car ses seuls diviseurs sont 1 et 17.") +
+      `\n\nConclusion : la réponse est donc celle indiquée, avec une justification arithmétique.`,
     tags: ["arithmetique", "nombre_premier", "qcm"],
   },
 
@@ -372,7 +428,11 @@ export const arithmetiqueBank: TutorBankItemV4[] = [
     expected: ["non"],
     comparator: "mcq_exact",
     hint: "Un nombre premier doit avoir exactement deux diviseurs.",
-    explanation: "Non. 1 n’a qu’un seul diviseur : lui-même. Donc 1 n’est pas un nombre premier.",
+    explanation: `Définition : l’arithmétique étudie les diviseurs, les multiples, les critères de divisibilité, les nombres premiers et les diviseurs communs.\n\n` +
+      `Méthode : on repère la propriété utile, puis on vérifie avec une égalité, un critère ou une décomposition.\n\n` +
+      `Calcul : on utilise les données de la question pour justifier la réponse. ` +
+      ("Non. 1 n’a qu’un seul diviseur : lui-même. Donc 1 n’est pas un nombre premier.") +
+      `\n\nConclusion : la réponse est donc celle indiquée, avec une justification arithmétique.`,
     tags: ["arithmetique", "nombre_premier", "erreur"],
   },
 
@@ -397,9 +457,13 @@ export const arithmetiqueBank: TutorBankItemV4[] = [
         choices: ["oui", "non"],
         expected: [prime ? "oui" : "non"],
         comparator: "mcq_exact",
-        explanation: prime
+        explanation: `Définition : l’arithmétique étudie les diviseurs, les multiples, les critères de divisibilité, les nombres premiers et les diviseurs communs.\n\n` +
+          `Méthode : on repère la propriété utile, puis on vérifie avec une égalité, un critère ou une décomposition.\n\n` +
+          `Calcul : on utilise les données de la question pour justifier la réponse. ` +
+          (prime
           ? `${n} est premier : ses seuls diviseurs sont 1 et ${n}.`
-          : `${n} n’est pas premier : il possède d’autres diviseurs que 1 et lui-même.`,
+          : `${n} n’est pas premier : il possède d’autres diviseurs que 1 et lui-même.`) +
+          `\n\nConclusion : la réponse est donc celle indiquée, avec une justification arithmétique.`,
       };
     },
   },
@@ -425,7 +489,11 @@ export const arithmetiqueBank: TutorBankItemV4[] = [
         choices: shuffle([String(good), ...wrongs]),
         expected: [String(good)],
         comparator: "mcq_exact",
-        explanation: `${good} est premier car il n’a que deux diviseurs : 1 et ${good}.`,
+        explanation: `Définition : l’arithmétique étudie les diviseurs, les multiples, les critères de divisibilité, les nombres premiers et les diviseurs communs.\n\n` +
+          `Méthode : on repère la propriété utile, puis on vérifie avec une égalité, un critère ou une décomposition.\n\n` +
+          `Calcul : on utilise les données de la question pour justifier la réponse. ` +
+          (`${good} est premier car il n’a que deux diviseurs : 1 et ${good}.`) +
+          `\n\nConclusion : la réponse est donc celle indiquée, avec une justification arithmétique.`,
       };
     },
   },
@@ -444,7 +512,11 @@ export const arithmetiqueBank: TutorBankItemV4[] = [
     expected: ["21", "3", "7"],
     comparator: "contains_keyword",
     hint: "Écris 21 comme un produit.",
-    explanation: "21 n’est pas premier car 21 = 3 × 7. Il a donc d’autres diviseurs que 1 et 21.",
+    explanation: `Définition : l’arithmétique étudie les diviseurs, les multiples, les critères de divisibilité, les nombres premiers et les diviseurs communs.\n\n` +
+      `Méthode : on repère la propriété utile, puis on vérifie avec une égalité, un critère ou une décomposition.\n\n` +
+      `Calcul : on utilise les données de la question pour justifier la réponse. ` +
+      ("21 n’est pas premier car 21 = 3 × 7. Il a donc d’autres diviseurs que 1 et 21.") +
+      `\n\nConclusion : la réponse est donc celle indiquée, avec une justification arithmétique.`,
     tags: ["arithmetique", "nombre_premier", "open"],
   },
     /* =========================
@@ -466,7 +538,11 @@ export const arithmetiqueBank: TutorBankItemV4[] = [
     expected: ["2² × 3"],
     comparator: "mcq_exact",
     hint: "Tous les facteurs doivent être premiers.",
-    explanation: "12 = 2 × 2 × 3 = 2² × 3.",
+    explanation: `Définition : l’arithmétique étudie les diviseurs, les multiples, les critères de divisibilité, les nombres premiers et les diviseurs communs.\n\n` +
+      `Méthode : on repère la propriété utile, puis on vérifie avec une égalité, un critère ou une décomposition.\n\n` +
+      `Calcul : on utilise les données de la question pour justifier la réponse. ` +
+      ("12 = 2 × 2 × 3 = 2² × 3.") +
+      `\n\nConclusion : la réponse est donc celle indiquée, avec une justification arithmétique.`,
     tags: ["arithmetique", "decomposition", "facteurs_premiers"],
   },
 
@@ -484,7 +560,11 @@ export const arithmetiqueBank: TutorBankItemV4[] = [
     expected: ["3^2×5", "3²×5", "3^2 × 5", "3² × 5"],
     comparator: "exact_text",
     hint: "45 = 9 × 5.",
-    explanation: "45 = 9 × 5 = 3² × 5.",
+    explanation: `Définition : l’arithmétique étudie les diviseurs, les multiples, les critères de divisibilité, les nombres premiers et les diviseurs communs.\n\n` +
+      `Méthode : on repère la propriété utile, puis on vérifie avec une égalité, un critère ou une décomposition.\n\n` +
+      `Calcul : on utilise les données de la question pour justifier la réponse. ` +
+      ("45 = 9 × 5 = 3² × 5.") +
+      `\n\nConclusion : la réponse est donc celle indiquée, avec une justification arithmétique.`,
     tags: ["arithmetique", "decomposition"],
   },
 
@@ -514,7 +594,11 @@ export const arithmetiqueBank: TutorBankItemV4[] = [
         format: "short",
         expected: item.expected,
         comparator: "exact_text",
-        explanation: item.exp,
+        explanation: `Définition : l’arithmétique étudie les diviseurs, les multiples, les critères de divisibilité, les nombres premiers et les diviseurs communs.\n\n` +
+          `Méthode : on repère la propriété utile, puis on vérifie avec une égalité, un critère ou une décomposition.\n\n` +
+          `Calcul : on utilise les données de la question pour justifier la réponse. ` +
+          (item.exp) +
+          `\n\nConclusion : la réponse est donc celle indiquée, avec une justification arithmétique.`,
       };
     },
   },
@@ -538,7 +622,11 @@ export const arithmetiqueBank: TutorBankItemV4[] = [
     expected: ["6"],
     comparator: "mcq_exact",
     hint: "Liste les diviseurs communs.",
-    explanation: "Les diviseurs communs de 12 et 18 sont 1, 2, 3 et 6. Le plus grand est 6.",
+    explanation: `Définition : l’arithmétique étudie les diviseurs, les multiples, les critères de divisibilité, les nombres premiers et les diviseurs communs.\n\n` +
+      `Méthode : on repère la propriété utile, puis on vérifie avec une égalité, un critère ou une décomposition.\n\n` +
+      `Calcul : on utilise les données de la question pour justifier la réponse. ` +
+      ("Les diviseurs communs de 12 et 18 sont 1, 2, 3 et 6. Le plus grand est 6.") +
+      `\n\nConclusion : la réponse est donc celle indiquée, avec une justification arithmétique.`,
     tags: ["arithmetique", "pgcd", "qcm"],
   },
 
@@ -556,7 +644,11 @@ export const arithmetiqueBank: TutorBankItemV4[] = [
     expected: ["12"],
     comparator: "number_equal",
     hint: "Cherche le plus grand diviseur commun de 24 et 36.",
-    explanation: "Le plus grand diviseur commun de 24 et 36 est 12. On peut donc faire 12 sachets identiques.",
+    explanation: `Définition : l’arithmétique étudie les diviseurs, les multiples, les critères de divisibilité, les nombres premiers et les diviseurs communs.\n\n` +
+      `Méthode : on repère la propriété utile, puis on vérifie avec une égalité, un critère ou une décomposition.\n\n` +
+      `Calcul : on utilise les données de la question pour justifier la réponse. ` +
+      ("Le plus grand diviseur commun de 24 et 36 est 12. On peut donc faire 12 sachets identiques.") +
+      `\n\nConclusion : la réponse est donc celle indiquée, avec une justification arithmétique.`,
     tags: ["arithmetique", "pgcd", "probleme"],
   },
 
@@ -581,7 +673,11 @@ export const arithmetiqueBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(d)],
         comparator: "number_equal",
-        explanation: `${d} divise ${a} et ${b}. Dans cet exercice, c’est le plus grand diviseur commun.`,
+        explanation: `Définition : l’arithmétique étudie les diviseurs, les multiples, les critères de divisibilité, les nombres premiers et les diviseurs communs.\n\n` +
+          `Méthode : on repère la propriété utile, puis on vérifie avec une égalité, un critère ou une décomposition.\n\n` +
+          `Calcul : on utilise les données de la question pour justifier la réponse. ` +
+          (`${d} divise ${a} et ${b}. Dans cet exercice, c’est le plus grand diviseur commun.`) +
+          `\n\nConclusion : la réponse est donc celle indiquée, avec une justification arithmétique.`,
       };
     },
   },
@@ -607,7 +703,11 @@ export const arithmetiqueBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(d)],
         comparator: "number_equal",
-        explanation: `Le nombre de paniers doit diviser ${mangues} et ${letchis}. Le plus grand diviseur commun est ${d}.`,
+        explanation: `Définition : l’arithmétique étudie les diviseurs, les multiples, les critères de divisibilité, les nombres premiers et les diviseurs communs.\n\n` +
+          `Méthode : on repère la propriété utile, puis on vérifie avec une égalité, un critère ou une décomposition.\n\n` +
+          `Calcul : on utilise les données de la question pour justifier la réponse. ` +
+          (`Le nombre de paniers doit diviser ${mangues} et ${letchis}. Le plus grand diviseur commun est ${d}.`) +
+          `\n\nConclusion : la réponse est donc celle indiquée, avec une justification arithmétique.`,
       };
     },
   },
@@ -631,7 +731,11 @@ export const arithmetiqueBank: TutorBankItemV4[] = [
     expected: ["non"],
     comparator: "mcq_exact",
     hint: "Tous les facteurs doivent être premiers.",
-    explanation: "Non. 15 n’est pas premier. La décomposition en facteurs premiers est 30 = 2 × 3 × 5.",
+    explanation: `Définition : l’arithmétique étudie les diviseurs, les multiples, les critères de divisibilité, les nombres premiers et les diviseurs communs.\n\n` +
+      `Méthode : on repère la propriété utile, puis on vérifie avec une égalité, un critère ou une décomposition.\n\n` +
+      `Calcul : on utilise les données de la question pour justifier la réponse. ` +
+      ("Non. 15 n’est pas premier. La décomposition en facteurs premiers est 30 = 2 × 3 × 5.") +
+      `\n\nConclusion : la réponse est donc celle indiquée, avec une justification arithmétique.`,
     tags: ["arithmetique", "defi", "erreur"],
   },
 
@@ -649,7 +753,11 @@ export const arithmetiqueBank: TutorBankItemV4[] = [
     expected: ["pair", "2", "divisible"],
     comparator: "contains_keyword",
     hint: "Un nombre pair est divisible par 2.",
-    explanation: "Un nombre pair supérieur à 2 est divisible par 2 et par lui-même. Il a donc plus de deux diviseurs, donc il n’est pas premier.",
+    explanation: `Définition : l’arithmétique étudie les diviseurs, les multiples, les critères de divisibilité, les nombres premiers et les diviseurs communs.\n\n` +
+      `Méthode : on repère la propriété utile, puis on vérifie avec une égalité, un critère ou une décomposition.\n\n` +
+      `Calcul : on utilise les données de la question pour justifier la réponse. ` +
+      ("Un nombre pair supérieur à 2 est divisible par 2 et par lui-même. Il a donc plus de deux diviseurs, donc il n’est pas premier.") +
+      `\n\nConclusion : la réponse est donc celle indiquée, avec une justification arithmétique.`,
     tags: ["arithmetique", "defi", "open"],
   },
 
@@ -674,7 +782,11 @@ export const arithmetiqueBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(d)],
         comparator: "number_equal",
-        explanation: `On cherche le plus grand diviseur commun de ${a} et ${b}. Il vaut ${d}.`,
+        explanation: `Définition : l’arithmétique étudie les diviseurs, les multiples, les critères de divisibilité, les nombres premiers et les diviseurs communs.\n\n` +
+          `Méthode : on repère la propriété utile, puis on vérifie avec une égalité, un critère ou une décomposition.\n\n` +
+          `Calcul : on utilise les données de la question pour justifier la réponse. ` +
+          (`On cherche le plus grand diviseur commun de ${a} et ${b}. Il vaut ${d}.`) +
+          `\n\nConclusion : la réponse est donc celle indiquée, avec une justification arithmétique.`,
       };
     },
   },
@@ -697,7 +809,11 @@ export const arithmetiqueBank: TutorBankItemV4[] = [
         format: "open",
         expected: [String(n), "1"],
         comparator: "contains_keyword",
-        explanation: `${n} n’est divisible par aucun entier autre que 1 et lui-même. Il est donc premier.`,
+        explanation: `Définition : l’arithmétique étudie les diviseurs, les multiples, les critères de divisibilité, les nombres premiers et les diviseurs communs.\n\n` +
+          `Méthode : on repère la propriété utile, puis on vérifie avec une égalité, un critère ou une décomposition.\n\n` +
+          `Calcul : on utilise les données de la question pour justifier la réponse. ` +
+          (`${n} n’est divisible par aucun entier autre que 1 et lui-même. Il est donc premier.`) +
+          `\n\nConclusion : la réponse est donc celle indiquée, avec une justification arithmétique.`,
       };
     },
   },

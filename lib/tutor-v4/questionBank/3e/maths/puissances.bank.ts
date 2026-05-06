@@ -34,7 +34,11 @@ export const puissancesBank: TutorBankItemV4[] = [
     expected: ["3 × 3"],
     comparator: "mcq_exact",
     hint: "Une puissance correspond à une multiplication répétée.",
-    explanation: "3² = 3 × 3.",
+    explanation: `Définition : une puissance est une écriture qui résume des multiplications répétées d’un même nombre.\n\n` +
+      `Méthode : on utilise la définition d’une puissance ou les règles sur les puissances de même base et les puissances de 10.\n\n` +
+      `Calcul : on applique la règle choisie, puis on simplifie l’écriture si nécessaire. ` +
+      ("3² = 3 × 3.") +
+      `\n\nConclusion : l’écriture obtenue est la réponse attendue.`,
     tags: ["puissance", "definition"],
   },
 
@@ -52,7 +56,11 @@ export const puissancesBank: TutorBankItemV4[] = [
     choices: ["2 × 3", "2 + 2 + 2", "2 × 2 × 2", "3 × 3"],
     expected: ["2 × 2 × 2"],
     comparator: "mcq_exact",
-    explanation: "2³ = 2 × 2 × 2.",
+    explanation: `Définition : une puissance est une écriture qui résume des multiplications répétées d’un même nombre.\n\n` +
+      `Méthode : on utilise la définition d’une puissance ou les règles sur les puissances de même base et les puissances de 10.\n\n` +
+      `Calcul : on applique la règle choisie, puis on simplifie l’écriture si nécessaire. ` +
+      ("2³ = 2 × 2 × 2.") +
+      `\n\nConclusion : l’écriture obtenue est la réponse attendue.`,
   },
 
   {
@@ -70,7 +78,11 @@ export const puissancesBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "Pense au nombre de fois où on multiplie.",
     explanation:
-      "5⁴ signifie 5 × 5 × 5 × 5, soit 5 multiplié 4 fois par lui-même.",
+      `Définition : une puissance est une écriture qui résume des multiplications répétées d’un même nombre.\n\n` +
+      `Méthode : on utilise la définition d’une puissance ou les règles sur les puissances de même base et les puissances de 10.\n\n` +
+      `Calcul : on applique la règle choisie, puis on simplifie l’écriture si nécessaire. ` +
+      ("5⁴ signifie 5 × 5 × 5 × 5, soit 5 multiplié 4 fois par lui-même.") +
+      `\n\nConclusion : l’écriture obtenue est la réponse attendue.`,
   },
 
   {
@@ -94,7 +106,11 @@ export const puissancesBank: TutorBankItemV4[] = [
         format: "short",
         expected: [correct],
         comparator: "contains_keyword",
-        explanation: `${base}^${exp} = ${correct}.`,
+        explanation: `Définition : une puissance est une écriture qui résume des multiplications répétées d’un même nombre.\n\n` +
+          `Méthode : on utilise la définition d’une puissance ou les règles sur les puissances de même base et les puissances de 10.\n\n` +
+          `Calcul : on applique la règle choisie, puis on simplifie l’écriture si nécessaire. ` +
+          (`${base}^${exp} = ${correct}.`) +
+          `\n\nConclusion : l’écriture obtenue est la réponse attendue.`,
       };
     },
   },
@@ -117,7 +133,11 @@ export const puissancesBank: TutorBankItemV4[] = [
     choices: ["6", "8", "9", "12"],
     expected: ["8"],
     comparator: "mcq_exact",
-    explanation: "2³ = 2 × 2 × 2 = 8.",
+    explanation: `Définition : une puissance est une écriture qui résume des multiplications répétées d’un même nombre.\n\n` +
+      `Méthode : on utilise la définition d’une puissance ou les règles sur les puissances de même base et les puissances de 10.\n\n` +
+      `Calcul : on applique la règle choisie, puis on simplifie l’écriture si nécessaire. ` +
+      ("2³ = 2 × 2 × 2 = 8.") +
+      `\n\nConclusion : l’écriture obtenue est la réponse attendue.`,
   },
 
   {
@@ -133,7 +153,11 @@ export const puissancesBank: TutorBankItemV4[] = [
     format: "short",
     expected: ["25"],
     comparator: "number_equal",
-    explanation: "5² = 5 × 5 = 25.",
+    explanation: `Définition : une puissance est une écriture qui résume des multiplications répétées d’un même nombre.\n\n` +
+      `Méthode : on utilise la définition d’une puissance ou les règles sur les puissances de même base et les puissances de 10.\n\n` +
+      `Calcul : on applique la règle choisie, puis on simplifie l’écriture si nécessaire. ` +
+      ("5² = 5 × 5 = 25.") +
+      `\n\nConclusion : l’écriture obtenue est la réponse attendue.`,
   },
 
   {
@@ -151,7 +175,11 @@ export const puissancesBank: TutorBankItemV4[] = [
     expected: ["-8"],
     comparator: "mcq_exact",
     hint: "Attention au signe !",
-    explanation: "(-2)³ = (-2) × (-2) × (-2) = -8.",
+    explanation: `Définition : une puissance est une écriture qui résume des multiplications répétées d’un même nombre.\n\n` +
+      `Méthode : on utilise la définition d’une puissance ou les règles sur les puissances de même base et les puissances de 10.\n\n` +
+      `Calcul : on applique la règle choisie, puis on simplifie l’écriture si nécessaire. ` +
+      ("(-2)³ = (-2) × (-2) × (-2) = -8.") +
+      `\n\nConclusion : l’écriture obtenue est la réponse attendue.`,
   },
 
   {
@@ -168,7 +196,11 @@ export const puissancesBank: TutorBankItemV4[] = [
     choices: ["oui", "non"],
     expected: ["non"],
     comparator: "mcq_exact",
-    explanation: "(-2)² = (-2) × (-2) = 4.",
+    explanation: `Définition : une puissance est une écriture qui résume des multiplications répétées d’un même nombre.\n\n` +
+      `Méthode : on utilise la définition d’une puissance ou les règles sur les puissances de même base et les puissances de 10.\n\n` +
+      `Calcul : on applique la règle choisie, puis on simplifie l’écriture si nécessaire. ` +
+      ("(-2)² = (-2) × (-2) = 4.") +
+      `\n\nConclusion : l’écriture obtenue est la réponse attendue.`,
   },
 
   {
@@ -192,7 +224,11 @@ export const puissancesBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(value)],
         comparator: "number_equal",
-        explanation: `${base}^${exp} = ${value}.`,
+        explanation: `Définition : une puissance est une écriture qui résume des multiplications répétées d’un même nombre.\n\n` +
+          `Méthode : on utilise la définition d’une puissance ou les règles sur les puissances de même base et les puissances de 10.\n\n` +
+          `Calcul : on applique la règle choisie, puis on simplifie l’écriture si nécessaire. ` +
+          (`${base}^${exp} = ${value}.`) +
+          `\n\nConclusion : l’écriture obtenue est la réponse attendue.`,
       };
     },
   },
@@ -216,7 +252,11 @@ export const puissancesBank: TutorBankItemV4[] = [
     expected: ["2⁵"],
     comparator: "mcq_exact",
     hint: "Même base → on additionne les exposants.",
-    explanation: "2² × 2³ = 2^(2+3) = 2⁵.",
+    explanation: `Définition : une puissance est une écriture qui résume des multiplications répétées d’un même nombre.\n\n` +
+      `Méthode : on utilise la définition d’une puissance ou les règles sur les puissances de même base et les puissances de 10.\n\n` +
+      `Calcul : on applique la règle choisie, puis on simplifie l’écriture si nécessaire. ` +
+      ("2² × 2³ = 2^(2+3) = 2⁵.") +
+      `\n\nConclusion : l’écriture obtenue est la réponse attendue.`,
   },
 
   {
@@ -233,7 +273,11 @@ export const puissancesBank: TutorBankItemV4[] = [
     choices: ["3²", "3⁶", "3⁸", "1"],
     expected: ["3²"],
     comparator: "mcq_exact",
-    explanation: "3⁴ ÷ 3² = 3^(4-2) = 3².",
+    explanation: `Définition : une puissance est une écriture qui résume des multiplications répétées d’un même nombre.\n\n` +
+      `Méthode : on utilise la définition d’une puissance ou les règles sur les puissances de même base et les puissances de 10.\n\n` +
+      `Calcul : on applique la règle choisie, puis on simplifie l’écriture si nécessaire. ` +
+      ("3⁴ ÷ 3² = 3^(4-2) = 3².") +
+      `\n\nConclusion : l’écriture obtenue est la réponse attendue.`,
   },
 
   {
@@ -251,7 +295,11 @@ export const puissancesBank: TutorBankItemV4[] = [
     expected: ["non"],
     comparator: "mcq_exact",
     explanation:
-      "Non. On ne change pas la base : 2² × 2³ = 2⁵.",
+      `Définition : une puissance est une écriture qui résume des multiplications répétées d’un même nombre.\n\n` +
+      `Méthode : on utilise la définition d’une puissance ou les règles sur les puissances de même base et les puissances de 10.\n\n` +
+      `Calcul : on applique la règle choisie, puis on simplifie l’écriture si nécessaire. ` +
+      ("Non. On ne change pas la base : 2² × 2³ = 2⁵.") +
+      `\n\nConclusion : l’écriture obtenue est la réponse attendue.`,
   },
 
   {
@@ -274,7 +322,11 @@ export const puissancesBank: TutorBankItemV4[] = [
         format: "short",
         expected: [`${base}^${a + b}`],
         comparator: "exact_text",
-        explanation: `${base}^${a} × ${base}^${b} = ${base}^${a + b}.`,
+        explanation: `Définition : une puissance est une écriture qui résume des multiplications répétées d’un même nombre.\n\n` +
+          `Méthode : on utilise la définition d’une puissance ou les règles sur les puissances de même base et les puissances de 10.\n\n` +
+          `Calcul : on applique la règle choisie, puis on simplifie l’écriture si nécessaire. ` +
+          (`${base}^${a} × ${base}^${b} = ${base}^${a + b}.`) +
+          `\n\nConclusion : l’écriture obtenue est la réponse attendue.`,
       };
     },
   },
@@ -297,7 +349,11 @@ export const puissancesBank: TutorBankItemV4[] = [
     expected: ["1 000"],
     comparator: "mcq_exact",
     hint: "10³ = 10 × 10 × 10.",
-    explanation: "10³ = 10 × 10 × 10 = 1 000.",
+    explanation: `Définition : une puissance est une écriture qui résume des multiplications répétées d’un même nombre.\n\n` +
+      `Méthode : on utilise la définition d’une puissance ou les règles sur les puissances de même base et les puissances de 10.\n\n` +
+      `Calcul : on applique la règle choisie, puis on simplifie l’écriture si nécessaire. ` +
+      ("10³ = 10 × 10 × 10 = 1 000.") +
+      `\n\nConclusion : l’écriture obtenue est la réponse attendue.`,
     tags: ["puissance", "puissance_de_10", "qcm"],
   },
 
@@ -316,7 +372,11 @@ export const puissancesBank: TutorBankItemV4[] = [
     expected: ["0,01"],
     comparator: "mcq_exact",
     hint: "10⁻² = 1 / 10².",
-    explanation: "10⁻² = 1 / 100 = 0,01.",
+    explanation: `Définition : une puissance est une écriture qui résume des multiplications répétées d’un même nombre.\n\n` +
+      `Méthode : on utilise la définition d’une puissance ou les règles sur les puissances de même base et les puissances de 10.\n\n` +
+      `Calcul : on applique la règle choisie, puis on simplifie l’écriture si nécessaire. ` +
+      ("10⁻² = 1 / 100 = 0,01.") +
+      `\n\nConclusion : l’écriture obtenue est la réponse attendue.`,
     tags: ["puissance", "puissance_de_10", "exposant_negatif", "qcm"],
   },
 
@@ -340,7 +400,11 @@ export const puissancesBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(value)],
         comparator: "number_equal",
-        explanation: `10^${exp} = ${value}.`,
+        explanation: `Définition : une puissance est une écriture qui résume des multiplications répétées d’un même nombre.\n\n` +
+          `Méthode : on utilise la définition d’une puissance ou les règles sur les puissances de même base et les puissances de 10.\n\n` +
+          `Calcul : on applique la règle choisie, puis on simplifie l’écriture si nécessaire. ` +
+          (`10^${exp} = ${value}.`) +
+          `\n\nConclusion : l’écriture obtenue est la réponse attendue.`,
       };
     },
   },
@@ -366,7 +430,11 @@ export const puissancesBank: TutorBankItemV4[] = [
         format: "short",
         expected: [expected, value.toString()],
         comparator: "exact_text",
-        explanation: `10^-${exp} = 1 / 10^${exp} = ${expected}.`,
+        explanation: `Définition : une puissance est une écriture qui résume des multiplications répétées d’un même nombre.\n\n` +
+          `Méthode : on utilise la définition d’une puissance ou les règles sur les puissances de même base et les puissances de 10.\n\n` +
+          `Calcul : on applique la règle choisie, puis on simplifie l’écriture si nécessaire. ` +
+          (`10^-${exp} = 1 / 10^${exp} = ${expected}.`) +
+          `\n\nConclusion : l’écriture obtenue est la réponse attendue.`,
       };
     },
   },
@@ -391,7 +459,11 @@ export const puissancesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Le nombre devant ×10ⁿ doit être compris entre 1 et 10.",
     explanation:
-      "En écriture scientifique, le nombre devant la puissance de 10 doit être compris entre 1 et 10. Donc 5 600 = 5,6 × 10³.",
+      `Définition : une puissance est une écriture qui résume des multiplications répétées d’un même nombre.\n\n` +
+      `Méthode : on utilise la définition d’une puissance ou les règles sur les puissances de même base et les puissances de 10.\n\n` +
+      `Calcul : on applique la règle choisie, puis on simplifie l’écriture si nécessaire. ` +
+      ("En écriture scientifique, le nombre devant la puissance de 10 doit être compris entre 1 et 10. Donc 5 600 = 5,6 × 10³.") +
+      `\n\nConclusion : l’écriture obtenue est la réponse attendue.`,
     tags: ["puissance", "ecriture_scientifique", "qcm"],
   },
 
@@ -410,7 +482,11 @@ export const puissancesBank: TutorBankItemV4[] = [
     expected: ["32 000"],
     comparator: "mcq_exact",
     hint: "Multiplier par 10⁴ déplace la virgule de 4 rangs vers la droite.",
-    explanation: "3,2 × 10⁴ = 3,2 × 10 000 = 32 000.",
+    explanation: `Définition : une puissance est une écriture qui résume des multiplications répétées d’un même nombre.\n\n` +
+      `Méthode : on utilise la définition d’une puissance ou les règles sur les puissances de même base et les puissances de 10.\n\n` +
+      `Calcul : on applique la règle choisie, puis on simplifie l’écriture si nécessaire. ` +
+      ("3,2 × 10⁴ = 3,2 × 10 000 = 32 000.") +
+      `\n\nConclusion : l’écriture obtenue est la réponse attendue.`,
     tags: ["puissance", "ecriture_scientifique", "qcm"],
   },
 
@@ -429,7 +505,11 @@ export const puissancesBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "Regarde le nombre placé devant la puissance de 10.",
     explanation:
-      "42 × 10³ n’est pas une écriture scientifique car 42 n’est pas compris entre 1 et 10. On écrirait plutôt 4,2 × 10⁴.",
+      `Définition : une puissance est une écriture qui résume des multiplications répétées d’un même nombre.\n\n` +
+      `Méthode : on utilise la définition d’une puissance ou les règles sur les puissances de même base et les puissances de 10.\n\n` +
+      `Calcul : on applique la règle choisie, puis on simplifie l’écriture si nécessaire. ` +
+      ("42 × 10³ n’est pas une écriture scientifique car 42 n’est pas compris entre 1 et 10. On écrirait plutôt 4,2 × 10⁴.") +
+      `\n\nConclusion : l’écriture obtenue est la réponse attendue.`,
     tags: ["puissance", "ecriture_scientifique", "open", "raisonnement"],
   },
 
@@ -455,7 +535,11 @@ export const puissancesBank: TutorBankItemV4[] = [
         format: "short",
         expected: [`${mantisseText}×10^${exp}`, `${mantisseText} × 10^${exp}`, `${mantisseText}x10^${exp}`],
         comparator: "exact_text",
-        explanation: `${value.toLocaleString("fr-FR")} = ${mantisseText} × 10^${exp}.`,
+        explanation: `Définition : une puissance est une écriture qui résume des multiplications répétées d’un même nombre.\n\n` +
+          `Méthode : on utilise la définition d’une puissance ou les règles sur les puissances de même base et les puissances de 10.\n\n` +
+          `Calcul : on applique la règle choisie, puis on simplifie l’écriture si nécessaire. ` +
+          (`${value.toLocaleString("fr-FR")} = ${mantisseText} × 10^${exp}.`) +
+          `\n\nConclusion : l’écriture obtenue est la réponse attendue.`,
       };
     },
   },
@@ -482,7 +566,11 @@ export const puissancesBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(value), value.toLocaleString("fr-FR")],
         comparator: "exact_text",
-        explanation: `${mantisseText} × 10^${exp} = ${value.toLocaleString("fr-FR")}.`,
+        explanation: `Définition : une puissance est une écriture qui résume des multiplications répétées d’un même nombre.\n\n` +
+          `Méthode : on utilise la définition d’une puissance ou les règles sur les puissances de même base et les puissances de 10.\n\n` +
+          `Calcul : on applique la règle choisie, puis on simplifie l’écriture si nécessaire. ` +
+          (`${mantisseText} × 10^${exp} = ${value.toLocaleString("fr-FR")}.`) +
+          `\n\nConclusion : l’écriture obtenue est la réponse attendue.`,
       };
     },
   },
@@ -507,7 +595,11 @@ export const puissancesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Les règles sur les exposants ne s’appliquent pas à une addition.",
     explanation:
-      "Non. 10³ + 10² = 1 000 + 100 = 1 100. On ne peut pas additionner les exposants dans une somme.",
+      `Définition : une puissance est une écriture qui résume des multiplications répétées d’un même nombre.\n\n` +
+      `Méthode : on utilise la définition d’une puissance ou les règles sur les puissances de même base et les puissances de 10.\n\n` +
+      `Calcul : on applique la règle choisie, puis on simplifie l’écriture si nécessaire. ` +
+      ("Non. 10³ + 10² = 1 000 + 100 = 1 100. On ne peut pas additionner les exposants dans une somme.") +
+      `\n\nConclusion : l’écriture obtenue est la réponse attendue.`,
     tags: ["puissance", "defi", "erreur", "qcm"],
   },
 
@@ -527,7 +619,11 @@ export const puissancesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Ici, les exposants sont identiques.",
     explanation:
-      "Oui. 2³ × 3³ = (2 × 3)³ = 6³.",
+      `Définition : une puissance est une écriture qui résume des multiplications répétées d’un même nombre.\n\n` +
+      `Méthode : on utilise la définition d’une puissance ou les règles sur les puissances de même base et les puissances de 10.\n\n` +
+      `Calcul : on applique la règle choisie, puis on simplifie l’écriture si nécessaire. ` +
+      ("Oui. 2³ × 3³ = (2 × 3)³ = 6³.") +
+      `\n\nConclusion : l’écriture obtenue est la réponse attendue.`,
     tags: ["puissance", "defi", "calcul", "qcm"],
   },
 
@@ -546,7 +642,11 @@ export const puissancesBank: TutorBankItemV4[] = [
     comparator: "contains_keyword",
     hint: "La règle d’addition des exposants fonctionne pour un produit de puissances de même base.",
     explanation:
-      "Dans un produit de puissances de même base, on additionne les exposants : 2³ × 2⁴ = 2⁷. Mais pour une somme, cette règle ne s’applique pas : 2³ + 2⁴ = 8 + 16 = 24.",
+      `Définition : une puissance est une écriture qui résume des multiplications répétées d’un même nombre.\n\n` +
+      `Méthode : on utilise la définition d’une puissance ou les règles sur les puissances de même base et les puissances de 10.\n\n` +
+      `Calcul : on applique la règle choisie, puis on simplifie l’écriture si nécessaire. ` +
+      ("Dans un produit de puissances de même base, on additionne les exposants : 2³ × 2⁴ = 2⁷. Mais pour une somme, cette règle ne s’applique pas : 2³ + 2⁴ = 8 + 16 = 24.") +
+      `\n\nConclusion : l’écriture obtenue est la réponse attendue.`,
     tags: ["puissance", "defi", "open", "raisonnement"],
   },
 
@@ -571,7 +671,11 @@ export const puissancesBank: TutorBankItemV4[] = [
         format: "short",
         expected: [`${base}^${a + b}`],
         comparator: "exact_text",
-        explanation: `Même base et multiplication : ${base}^${a} × ${base}^${b} = ${base}^${a + b}.`,
+        explanation: `Définition : une puissance est une écriture qui résume des multiplications répétées d’un même nombre.\n\n` +
+          `Méthode : on utilise la définition d’une puissance ou les règles sur les puissances de même base et les puissances de 10.\n\n` +
+          `Calcul : on applique la règle choisie, puis on simplifie l’écriture si nécessaire. ` +
+          (`Même base et multiplication : ${base}^${a} × ${base}^${b} = ${base}^${a + b}.`) +
+          `\n\nConclusion : l’écriture obtenue est la réponse attendue.`,
       };
     },
   },
@@ -599,7 +703,11 @@ export const puissancesBank: TutorBankItemV4[] = [
         format: "short",
         expected: [distance.sci, distance.sci.replace(" × ", "×")],
         comparator: "exact_text",
-        explanation: `${distance.value} = ${distance.sci}.`,
+        explanation: `Définition : une puissance est une écriture qui résume des multiplications répétées d’un même nombre.\n\n` +
+          `Méthode : on utilise la définition d’une puissance ou les règles sur les puissances de même base et les puissances de 10.\n\n` +
+          `Calcul : on applique la règle choisie, puis on simplifie l’écriture si nécessaire. ` +
+          (`${distance.value} = ${distance.sci}.`) +
+          `\n\nConclusion : l’écriture obtenue est la réponse attendue.`,
       };
     },
   },
