@@ -40,7 +40,11 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
   expected: ["Le prix est proportionnel à la quantité"],
   comparator: "mcq_exact",
   hint: "Cherche une situation avec un coefficient constant.",
-  explanation: "Dans une situation proportionnelle, on multiplie toujours par le même nombre.",
+  explanation: `Définition : dans une situation de proportionnalité, deux grandeurs varient avec un même coefficient multiplicateur.\n\n` +
+    `Méthode : on choisit la formule adaptée : coefficient, produit en croix, pourcentage, vitesse, débit ou densité.\n\n` +
+    `Calcul : on remplace les valeurs de l’énoncé dans la formule puis on calcule. ` +
+    ("Dans une situation proportionnelle, on multiplie toujours par le même nombre.") +
+    `\n\nConclusion : on obtient la valeur demandée avec l’unité ou le pourcentage adapté.`,
   tags: ["proportionnalite", "reconnaitre"]
 },
 
@@ -72,7 +76,11 @@ Est-ce proportionnel ?`,
       choices: ["oui", "non"],
       expected: ["non"],
       comparator: "mcq_exact",
-      explanation: "Les rapports ne sont pas constants, donc ce n’est pas proportionnel.",
+      explanation: `Définition : dans une situation de proportionnalité, deux grandeurs varient avec un même coefficient multiplicateur.\n\n` +
+        `Méthode : on choisit la formule adaptée : coefficient, produit en croix, pourcentage, vitesse, débit ou densité.\n\n` +
+        `Calcul : on remplace les valeurs de l’énoncé dans la formule puis on calcule. ` +
+        ("Les rapports ne sont pas constants, donc ce n’est pas proportionnel.") +
+        `\n\nConclusion : on obtient la valeur demandée avec l’unité ou le pourcentage adapté.`,
     };
   },
 },
@@ -95,7 +103,11 @@ Est-ce proportionnel ?`,
   expected: ["12"],
   comparator: "number_equal",
   hint: "On multiplie par le même coefficient.",
-  explanation: "Coefficient = 3 donc 4 × 3 = 12.",
+  explanation: `Définition : dans une situation de proportionnalité, deux grandeurs varient avec un même coefficient multiplicateur.\n\n` +
+    `Méthode : on choisit la formule adaptée : coefficient, produit en croix, pourcentage, vitesse, débit ou densité.\n\n` +
+    `Calcul : on remplace les valeurs de l’énoncé dans la formule puis on calcule. ` +
+    ("Coefficient = 3 donc 4 × 3 = 12.") +
+    `\n\nConclusion : on obtient la valeur demandée avec l’unité ou le pourcentage adapté.`,
   tags: ["proportionnalite", "tableau"]
 },
 
@@ -124,7 +136,11 @@ ${x2} → ?`,
       format: "short",
       expected: [String(result)],
       comparator: "number_equal",
-      explanation: `Coefficient = ${k}, donc ${x2} × ${k} = ${result}.`,
+      explanation: `Définition : dans une situation de proportionnalité, deux grandeurs varient avec un même coefficient multiplicateur.\n\n` +
+        `Méthode : on choisit la formule adaptée : coefficient, produit en croix, pourcentage, vitesse, débit ou densité.\n\n` +
+        `Calcul : on remplace les valeurs de l’énoncé dans la formule puis on calcule. ` +
+        (`Coefficient = ${k}, donc ${x2} × ${k} = ${result}.`) +
+        `\n\nConclusion : on obtient la valeur demandée avec l’unité ou le pourcentage adapté.`,
     };
   },
 },
@@ -147,7 +163,11 @@ ${x2} → ?`,
   expected: ["12"],
   comparator: "number_equal",
   hint: "Produit en croix.",
-  explanation: "x = (3 × 20) / 5 = 12.",
+  explanation: `Définition : dans une situation de proportionnalité, deux grandeurs varient avec un même coefficient multiplicateur.\n\n` +
+    `Méthode : on choisit la formule adaptée : coefficient, produit en croix, pourcentage, vitesse, débit ou densité.\n\n` +
+    `Calcul : on remplace les valeurs de l’énoncé dans la formule puis on calcule. ` +
+    ("x = (3 × 20) / 5 = 12.") +
+    `\n\nConclusion : on obtient la valeur demandée avec l’unité ou le pourcentage adapté.`,
   tags: ["proportionnalite", "quatrieme"]
 },
 
@@ -174,7 +194,11 @@ ${x2} → ?`,
       format: "short",
       expected: [String(x)],
       comparator: "number_equal",
-      explanation: `x = (${a} × ${c}) / ${b} = ${x}.`,
+      explanation: `Définition : dans une situation de proportionnalité, deux grandeurs varient avec un même coefficient multiplicateur.\n\n` +
+        `Méthode : on choisit la formule adaptée : coefficient, produit en croix, pourcentage, vitesse, débit ou densité.\n\n` +
+        `Calcul : on remplace les valeurs de l’énoncé dans la formule puis on calcule. ` +
+        (`x = (${a} × ${c}) / ${b} = ${x}.`) +
+        `\n\nConclusion : on obtient la valeur demandée avec l’unité ou le pourcentage adapté.`,
       };
     },
   },
@@ -196,7 +220,11 @@ ${x2} → ?`,
   expected: ["30"],
   comparator: "number_equal",
   hint: "20% = 20/100 = 0,2.",
-  explanation: "20% de 150 = 0,2 × 150 = 30.",
+  explanation: `Définition : dans une situation de proportionnalité, deux grandeurs varient avec un même coefficient multiplicateur.\n\n` +
+    `Méthode : on choisit la formule adaptée : coefficient, produit en croix, pourcentage, vitesse, débit ou densité.\n\n` +
+    `Calcul : on remplace les valeurs de l’énoncé dans la formule puis on calcule. ` +
+    ("20% de 150 = 0,2 × 150 = 30.") +
+    `\n\nConclusion : on obtient la valeur demandée avec l’unité ou le pourcentage adapté.`,
   tags: ["proportionnalite", "pourcentage"],
 },
 
@@ -215,7 +243,11 @@ ${x2} → ?`,
   expected: ["48%"],
   comparator: "mcq_exact",
   hint: "Calcule 12 / 25 × 100.",
-  explanation: "12 / 25 = 0,48, donc cela représente 48%.",
+  explanation: `Définition : dans une situation de proportionnalité, deux grandeurs varient avec un même coefficient multiplicateur.\n\n` +
+    `Méthode : on choisit la formule adaptée : coefficient, produit en croix, pourcentage, vitesse, débit ou densité.\n\n` +
+    `Calcul : on remplace les valeurs de l’énoncé dans la formule puis on calcule. ` +
+    ("12 / 25 = 0,48, donc cela représente 48%.") +
+    `\n\nConclusion : on obtient la valeur demandée avec l’unité ou le pourcentage adapté.`,
   tags: ["proportionnalite", "pourcentage", "qcm"],
 },
 
@@ -240,7 +272,11 @@ ${x2} → ?`,
       format: "short",
       expected: [String(result)],
       comparator: "number_equal",
-      explanation: `${p}% de ${n} = ${p}/100 × ${n} = ${result}.`,
+      explanation: `Définition : dans une situation de proportionnalité, deux grandeurs varient avec un même coefficient multiplicateur.\n\n` +
+        `Méthode : on choisit la formule adaptée : coefficient, produit en croix, pourcentage, vitesse, débit ou densité.\n\n` +
+        `Calcul : on remplace les valeurs de l’énoncé dans la formule puis on calcule. ` +
+        (`${p}% de ${n} = ${p}/100 × ${n} = ${result}.`) +
+        `\n\nConclusion : on obtient la valeur demandée avec l’unité ou le pourcentage adapté.`,
     };
   },
 },
@@ -266,7 +302,11 @@ ${x2} → ?`,
       format: "short",
       expected: [String(percent)],
       comparator: "number_equal",
-      explanation: `On calcule ${part} / ${total} × 100 = ${percent}%.`,
+      explanation: `Définition : dans une situation de proportionnalité, deux grandeurs varient avec un même coefficient multiplicateur.\n\n` +
+        `Méthode : on choisit la formule adaptée : coefficient, produit en croix, pourcentage, vitesse, débit ou densité.\n\n` +
+        `Calcul : on remplace les valeurs de l’énoncé dans la formule puis on calcule. ` +
+        (`On calcule ${part} / ${total} × 100 = ${percent}%.`) +
+        `\n\nConclusion : on obtient la valeur demandée avec l’unité ou le pourcentage adapté.`,
     };
   },
 },
@@ -286,7 +326,11 @@ ${x2} → ?`,
   expected: ["non"],
   comparator: "mcq_exact",
   hint: "30% de 200, ce n’est pas 30.",
-  explanation: "Non. 30% de 200 = 0,3 × 200 = 60.",
+  explanation: `Définition : dans une situation de proportionnalité, deux grandeurs varient avec un même coefficient multiplicateur.\n\n` +
+    `Méthode : on choisit la formule adaptée : coefficient, produit en croix, pourcentage, vitesse, débit ou densité.\n\n` +
+    `Calcul : on remplace les valeurs de l’énoncé dans la formule puis on calcule. ` +
+    ("Non. 30% de 200 = 0,3 × 200 = 60.") +
+    `\n\nConclusion : on obtient la valeur demandée avec l’unité ou le pourcentage adapté.`,
   tags: ["proportionnalite", "pourcentage", "erreur"],
 },
 
@@ -308,7 +352,11 @@ ${x2} → ?`,
   expected: ["100"],
   comparator: "number_equal",
   hint: "Augmenter de 25%, c’est multiplier par 1,25.",
-  explanation: "80 × 1,25 = 100. Le nouveau prix est 100 €.",
+  explanation: `Définition : dans une situation de proportionnalité, deux grandeurs varient avec un même coefficient multiplicateur.\n\n` +
+    `Méthode : on choisit la formule adaptée : coefficient, produit en croix, pourcentage, vitesse, débit ou densité.\n\n` +
+    `Calcul : on remplace les valeurs de l’énoncé dans la formule puis on calcule. ` +
+    ("80 × 1,25 = 100. Le nouveau prix est 100 €.") +
+    `\n\nConclusion : on obtient la valeur demandée avec l’unité ou le pourcentage adapté.`,
   tags: ["proportionnalite", "evolution", "augmentation"],
 },
 
@@ -327,7 +375,11 @@ ${x2} → ?`,
   expected: ["108 €"],
   comparator: "mcq_exact",
   hint: "Diminuer de 10%, c’est multiplier par 0,9.",
-  explanation: "120 × 0,9 = 108. Le nouveau prix est 108 €.",
+  explanation: `Définition : dans une situation de proportionnalité, deux grandeurs varient avec un même coefficient multiplicateur.\n\n` +
+    `Méthode : on choisit la formule adaptée : coefficient, produit en croix, pourcentage, vitesse, débit ou densité.\n\n` +
+    `Calcul : on remplace les valeurs de l’énoncé dans la formule puis on calcule. ` +
+    ("120 × 0,9 = 108. Le nouveau prix est 108 €.") +
+    `\n\nConclusion : on obtient la valeur demandée avec l’unité ou le pourcentage adapté.`,
   tags: ["proportionnalite", "evolution", "diminution", "qcm"],
 },
 
@@ -352,7 +404,11 @@ ${x2} → ?`,
       format: "short",
       expected: [String(nouveau)],
       comparator: "number_equal",
-      explanation: `Augmenter de ${taux}%, c’est multiplier par ${1 + taux / 100}. Donc ${prix} × ${1 + taux / 100} = ${nouveau} €.`,
+      explanation: `Définition : dans une situation de proportionnalité, deux grandeurs varient avec un même coefficient multiplicateur.\n\n` +
+        `Méthode : on choisit la formule adaptée : coefficient, produit en croix, pourcentage, vitesse, débit ou densité.\n\n` +
+        `Calcul : on remplace les valeurs de l’énoncé dans la formule puis on calcule. ` +
+        (`Augmenter de ${taux}%, c’est multiplier par ${1 + taux / 100}. Donc ${prix} × ${1 + taux / 100} = ${nouveau} €.`) +
+        `\n\nConclusion : on obtient la valeur demandée avec l’unité ou le pourcentage adapté.`,
     };
   },
 },
@@ -378,7 +434,11 @@ ${x2} → ?`,
       format: "short",
       expected: [String(nouveau)],
       comparator: "number_equal",
-      explanation: `Diminuer de ${taux}%, c’est multiplier par ${1 - taux / 100}. Donc ${prix} × ${1 - taux / 100} = ${nouveau} €.`,
+      explanation: `Définition : dans une situation de proportionnalité, deux grandeurs varient avec un même coefficient multiplicateur.\n\n` +
+        `Méthode : on choisit la formule adaptée : coefficient, produit en croix, pourcentage, vitesse, débit ou densité.\n\n` +
+        `Calcul : on remplace les valeurs de l’énoncé dans la formule puis on calcule. ` +
+        (`Diminuer de ${taux}%, c’est multiplier par ${1 - taux / 100}. Donc ${prix} × ${1 - taux / 100} = ${nouveau} €.`) +
+        `\n\nConclusion : on obtient la valeur demandée avec l’unité ou le pourcentage adapté.`,
     };
   },
 },
@@ -398,7 +458,11 @@ ${x2} → ?`,
   comparator: "contains_keyword",
   hint: "20% dépend de la valeur de départ.",
   explanation:
-    "Ajouter 20 est une quantité fixe. Augmenter de 20% dépend de la valeur de départ : on ajoute 20/100 de cette valeur.",
+    `Définition : dans une situation de proportionnalité, deux grandeurs varient avec un même coefficient multiplicateur.\n\n` +
+    `Méthode : on choisit la formule adaptée : coefficient, produit en croix, pourcentage, vitesse, débit ou densité.\n\n` +
+    `Calcul : on remplace les valeurs de l’énoncé dans la formule puis on calcule. ` +
+    ("Ajouter 20 est une quantité fixe. Augmenter de 20% dépend de la valeur de départ : on ajoute 20/100 de cette valeur.") +
+    `\n\nConclusion : on obtient la valeur demandée avec l’unité ou le pourcentage adapté.`,
   tags: ["proportionnalite", "evolution", "open", "raisonnement"],
 },
 
@@ -420,7 +484,11 @@ ${x2} → ?`,
   expected: ["60"],
   comparator: "number_equal",
   hint: "Vitesse = distance / temps.",
-  explanation: "Vitesse moyenne = 180 ÷ 3 = 60 km/h.",
+  explanation: `Définition : dans une situation de proportionnalité, deux grandeurs varient avec un même coefficient multiplicateur.\n\n` +
+    `Méthode : on choisit la formule adaptée : coefficient, produit en croix, pourcentage, vitesse, débit ou densité.\n\n` +
+    `Calcul : on remplace les valeurs de l’énoncé dans la formule puis on calcule. ` +
+    ("Vitesse moyenne = 180 ÷ 3 = 60 km/h.") +
+    `\n\nConclusion : on obtient la valeur demandée avec l’unité ou le pourcentage adapté.`,
   tags: ["proportionnalite", "vitesse"],
 },
 
@@ -439,7 +507,11 @@ ${x2} → ?`,
   expected: ["6 L/min"],
   comparator: "mcq_exact",
   hint: "Débit = volume / temps.",
-  explanation: "Débit = 24 ÷ 4 = 6 L/min.",
+  explanation: `Définition : dans une situation de proportionnalité, deux grandeurs varient avec un même coefficient multiplicateur.\n\n` +
+    `Méthode : on choisit la formule adaptée : coefficient, produit en croix, pourcentage, vitesse, débit ou densité.\n\n` +
+    `Calcul : on remplace les valeurs de l’énoncé dans la formule puis on calcule. ` +
+    ("Débit = 24 ÷ 4 = 6 L/min.") +
+    `\n\nConclusion : on obtient la valeur demandée avec l’unité ou le pourcentage adapté.`,
   tags: ["proportionnalite", "debit", "qcm"],
 },
 
@@ -464,7 +536,11 @@ ${x2} → ?`,
       format: "short",
       expected: [String(vitesse)],
       comparator: "number_equal",
-      explanation: `Vitesse moyenne = distance ÷ temps = ${distance} ÷ ${temps} = ${vitesse} km/h.`,
+      explanation: `Définition : dans une situation de proportionnalité, deux grandeurs varient avec un même coefficient multiplicateur.\n\n` +
+        `Méthode : on choisit la formule adaptée : coefficient, produit en croix, pourcentage, vitesse, débit ou densité.\n\n` +
+        `Calcul : on remplace les valeurs de l’énoncé dans la formule puis on calcule. ` +
+        (`Vitesse moyenne = distance ÷ temps = ${distance} ÷ ${temps} = ${vitesse} km/h.`) +
+        `\n\nConclusion : on obtient la valeur demandée avec l’unité ou le pourcentage adapté.`,
     };
   },
 },
@@ -490,7 +566,11 @@ ${x2} → ?`,
       format: "short",
       expected: [String(debit)],
       comparator: "number_equal",
-      explanation: `Débit = volume ÷ temps = ${volume} ÷ ${temps} = ${debit} L/min.`,
+      explanation: `Définition : dans une situation de proportionnalité, deux grandeurs varient avec un même coefficient multiplicateur.\n\n` +
+        `Méthode : on choisit la formule adaptée : coefficient, produit en croix, pourcentage, vitesse, débit ou densité.\n\n` +
+        `Calcul : on remplace les valeurs de l’énoncé dans la formule puis on calcule. ` +
+        (`Débit = volume ÷ temps = ${volume} ÷ ${temps} = ${debit} L/min.`) +
+        `\n\nConclusion : on obtient la valeur demandée avec l’unité ou le pourcentage adapté.`,
     };
   },
 },
@@ -516,7 +596,11 @@ ${x2} → ?`,
       format: "short",
       expected: [String(densite)],
       comparator: "number_equal",
-      explanation: `Densité = ${total} ÷ ${surface} = ${densite} arbres par hectare.`,
+      explanation: `Définition : dans une situation de proportionnalité, deux grandeurs varient avec un même coefficient multiplicateur.\n\n` +
+        `Méthode : on choisit la formule adaptée : coefficient, produit en croix, pourcentage, vitesse, débit ou densité.\n\n` +
+        `Calcul : on remplace les valeurs de l’énoncé dans la formule puis on calcule. ` +
+        (`Densité = ${total} ÷ ${surface} = ${densite} arbres par hectare.`) +
+        `\n\nConclusion : on obtient la valeur demandée avec l’unité ou le pourcentage adapté.`,
     };
   },
 },
@@ -541,7 +625,11 @@ ${x2} → ?`,
   comparator: "mcq_exact",
   hint: "Teste avec un prix de 100 €.",
   explanation:
-    "Non. Si le prix vaut 100 €, après +20% il vaut 120 €. Puis -20% de 120 €, cela donne 96 €. On ne revient pas au prix de départ.",
+    `Définition : dans une situation de proportionnalité, deux grandeurs varient avec un même coefficient multiplicateur.\n\n` +
+    `Méthode : on choisit la formule adaptée : coefficient, produit en croix, pourcentage, vitesse, débit ou densité.\n\n` +
+    `Calcul : on remplace les valeurs de l’énoncé dans la formule puis on calcule. ` +
+    ("Non. Si le prix vaut 100 €, après +20% il vaut 120 €. Puis -20% de 120 €, cela donne 96 €. On ne revient pas au prix de départ.") +
+    `\n\nConclusion : on obtient la valeur demandée avec l’unité ou le pourcentage adapté.`,
   tags: ["proportionnalite", "defi", "evolution", "erreur"],
 },
 
@@ -560,7 +648,11 @@ ${x2} → ?`,
   comparator: "contains_keyword",
   hint: "Si la vitesse est constante, distance = vitesse × temps.",
   explanation:
-    "Lorsque la vitesse est constante, la distance parcourue est proportionnelle au temps : distance = vitesse × temps. Le coefficient de proportionnalité est la vitesse.",
+    `Définition : dans une situation de proportionnalité, deux grandeurs varient avec un même coefficient multiplicateur.\n\n` +
+    `Méthode : on choisit la formule adaptée : coefficient, produit en croix, pourcentage, vitesse, débit ou densité.\n\n` +
+    `Calcul : on remplace les valeurs de l’énoncé dans la formule puis on calcule. ` +
+    ("Lorsque la vitesse est constante, la distance parcourue est proportionnelle au temps : distance = vitesse × temps. Le coefficient de proportionnalité est la vitesse.") +
+    `\n\nConclusion : on obtient la valeur demandée avec l’unité ou le pourcentage adapté.`,
   tags: ["proportionnalite", "defi", "vitesse", "open"],
 },
 
@@ -587,7 +679,11 @@ ${x2} → ?`,
       format: "short",
       expected: [String(final)],
       comparator: "number_equal",
-      explanation: `Après augmentation : ${prix} × ${1 + hausse / 100} = ${apresHausse}. Après diminution : ${apresHausse} × ${1 - baisse / 100} = ${final} €.`,
+      explanation: `Définition : dans une situation de proportionnalité, deux grandeurs varient avec un même coefficient multiplicateur.\n\n` +
+        `Méthode : on choisit la formule adaptée : coefficient, produit en croix, pourcentage, vitesse, débit ou densité.\n\n` +
+        `Calcul : on remplace les valeurs de l’énoncé dans la formule puis on calcule. ` +
+        (`Après augmentation : ${prix} × ${1 + hausse / 100} = ${apresHausse}. Après diminution : ${apresHausse} × ${1 - baisse / 100} = ${final} €.`) +
+        `\n\nConclusion : on obtient la valeur demandée avec l’unité ou le pourcentage adapté.`,
     };
   },
 },
@@ -613,7 +709,11 @@ ${x2} → ?`,
       format: "short",
       expected: [String(distance)],
       comparator: "number_equal",
-      explanation: `Distance = vitesse × temps = ${vitesse} × ${temps} = ${distance} km.`,
+      explanation: `Définition : dans une situation de proportionnalité, deux grandeurs varient avec un même coefficient multiplicateur.\n\n` +
+        `Méthode : on choisit la formule adaptée : coefficient, produit en croix, pourcentage, vitesse, débit ou densité.\n\n` +
+        `Calcul : on remplace les valeurs de l’énoncé dans la formule puis on calcule. ` +
+        (`Distance = vitesse × temps = ${vitesse} × ${temps} = ${distance} km.`) +
+        `\n\nConclusion : on obtient la valeur demandée avec l’unité ou le pourcentage adapté.`,
     };
   },
 },
@@ -633,7 +733,11 @@ ${x2} → ?`,
   comparator: "contains_keyword",
   hint: "Multiplie les coefficients multiplicateurs.",
   explanation:
-    "Une hausse de 10% correspond à ×1,1 et une hausse de 20% à ×1,2. Au total, on multiplie par 1,1 × 1,2 = 1,32, soit une hausse de 32%, pas 30%.",
+    `Définition : dans une situation de proportionnalité, deux grandeurs varient avec un même coefficient multiplicateur.\n\n` +
+    `Méthode : on choisit la formule adaptée : coefficient, produit en croix, pourcentage, vitesse, débit ou densité.\n\n` +
+    `Calcul : on remplace les valeurs de l’énoncé dans la formule puis on calcule. ` +
+    ("Une hausse de 10% correspond à ×1,1 et une hausse de 20% à ×1,2. Au total, on multiplie par 1,1 × 1,2 = 1,32, soit une hausse de 32%, pas 30%.") +
+    `\n\nConclusion : on obtient la valeur demandée avec l’unité ou le pourcentage adapté.`,
   tags: ["proportionnalite", "defi", "evolution", "open"],
 },
 ];
