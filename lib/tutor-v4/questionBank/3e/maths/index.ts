@@ -2,14 +2,6 @@
  * Question Bank 3e Maths
  *
  * Ce fichier regroupe toutes les banques de questions de 3e.
- *
- * 👉 Objectif :
- * - centraliser toutes les questions
- * - permettre au loader de récupérer facilement toutes les banks
- *
- * 👉 Convention :
- * - une bank par notion
- * - on les assemble ici
  */
 
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
@@ -22,13 +14,14 @@ import { nombresRationnelsBank } from "./nombres_rationnels.bank";
 import { puissancesBank } from "./puissances.bank";
 import { racineCarreeBank } from "./racine_carree.bank";
 import { arithmetiqueBank } from "./arithmetique.bank";
-import { volumesBank } from "./volumes.bank"; // déjà fait
-import { proportionnaliteBank} from "./proportionnalite.bank"
+import { volumesBank } from "./volumes.bank";
+import { proportionnaliteBank } from "./proportionnalite.bank";
 import { pythagore3eBank } from "./pythagore.bank";
 import { fonctionsBank } from "./fonctions.bank";
-import { trigonometrieBank} from "./trigonometrie.bank"
+import { trigonometrieBank } from "./trigonometrie.bank";
 import { probabilitesBank } from "./probabilites.bank";
-// (tu ajouteras les autres plus tard)
+import { equationsBank } from "./equations.bank";
+import { statistiquesBank } from "./statistiques.bank";
 
 // =========================
 // AGRÉGATION DES BANKS 3e
@@ -44,7 +37,9 @@ export const maths3eQuestionBank: TutorBankItemV4[] = [
   ...pythagore3eBank,
   ...fonctionsBank,
   ...trigonometrieBank,
-  ...probabilitesBank
+  ...probabilitesBank,
+  ...equationsBank,
+  ...statistiquesBank,
 ];
 
 export function getMaths3eQuestionBank(args?: {
