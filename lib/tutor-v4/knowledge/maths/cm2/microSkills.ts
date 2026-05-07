@@ -354,7 +354,7 @@ export const microSkills: MicroSkillSource[] = [
   {
     id: "proportionnalite_defis",
     label: "Défis de proportionnalité",
-    notionId: "echelles_simples",
+    notionId: "defis_proportionnalite",
     prerequis: ["calculer_quatrieme", "utiliser_pourcentage_simple", "utiliser_echelle"],
   },
   {

@@ -44,6 +44,7 @@ export const notions: NotionSource[] = [
   { id: "quatrieme_proportionnelle", label: "Quatrième proportionnelle", boId: "BOCM2R", prerequis: ["tableaux_proportionnalite"], levels: [2, 3] },
   { id: "pourcentages_simples", label: "Pourcentages simples", boId: "BOCM2R", prerequis: ["fractions", "tableaux_proportionnalite"], levels: [1, 2] },
   { id: "echelles_simples", label: "Échelles simples", boId: "BOCM2R", prerequis: ["tableaux_proportionnalite", "longueurs"], levels: [2, 3] },
+  { id: "defis_proportionnalite", label: "Défis de proportionnalité", boId: "BOCM2R", prerequis: ["quatrieme_proportionnelle", "pourcentages_simples", "echelles_simples"], levels: [3, 4, 5] },
 
   { id: "suites_instructions", label: "Suites d’instructions", boId: "BOCM2I", prerequis: [], levels: [1, 2] },
   { id: "logique", label: "Logique", boId: "BOCM2I", prerequis: ["suites_instructions"], levels: [1, 2] },
