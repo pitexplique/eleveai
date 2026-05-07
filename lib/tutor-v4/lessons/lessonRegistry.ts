@@ -1,5 +1,6 @@
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 
+import { getMathsCm2QuestionBank } from "@/lib/tutor-v4/questionBank/cm2/maths";
 import { getMaths6eQuestionBank } from "@/lib/tutor-v4/questionBank/6e/maths";
 import { getMaths5eQuestionBank } from "@/lib/tutor-v4/questionBank/5e/maths";
 import { getMaths4eQuestionBank } from "@/lib/tutor-v4/questionBank/4e/maths";
@@ -26,6 +27,9 @@ export function getLessonBank(args: {
   };
 
   switch (args.classe) {
+    case "cm2":
+      return getMathsCm2QuestionBank(bankArgs);
+
     case "6e":
       return getMaths6eQuestionBank(bankArgs);
 

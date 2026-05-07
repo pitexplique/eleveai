@@ -1,28 +1,33 @@
-import { loadKnowledge6eMaths } from "@/lib/tutor-v4/knowledge/loaders/loadKnowledge6eMaths";
-import { loadKnowledge5eMaths } from "@/lib/tutor-v4/knowledge/loaders/loadKnowledge5eMaths";
-import { loadKnowledge4eMaths } from "@/lib/tutor-v4/knowledge/loaders/loadKnowledge4eMaths";
-import { loadKnowledge3eMaths } from "@/lib/tutor-v4/knowledge/loaders/loadKnowledge3eMaths";
-import type { KnowledgePack } from "@/lib/tutor-v4/types";
+import { mathsCm2QuestionBank } from "@/lib/tutor-v4/questionBank/cm2/maths";
+import { maths6eQuestionBank } from "@/lib/tutor-v4/questionBank/6e/maths";
+import { maths5eQuestionBank } from "@/lib/tutor-v4/questionBank/5e/maths";
+import { maths4eQuestionBank } from "@/lib/tutor-v4/questionBank/4e/maths";
+import { maths3eQuestionBank } from "@/lib/tutor-v4/questionBank/3e/maths";
+import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 
-export async function loadKnowledgeV4(
+export async function loadQuestionBankV4(
   classe: string,
   matiere: string
-): Promise<KnowledgePack> {
+): Promise<TutorBankItemV4[]> {
+  if (classe === "cm2" && matiere === "maths") {
+    return mathsCm2QuestionBank;
+  }
+
   if (classe === "6e" && matiere === "maths") {
-    return loadKnowledge6eMaths() as KnowledgePack;
+    return maths6eQuestionBank;
   }
 
   if (classe === "5e" && matiere === "maths") {
-    return loadKnowledge5eMaths() as KnowledgePack;
+    return maths5eQuestionBank;
   }
 
   if (classe === "4e" && matiere === "maths") {
-    return loadKnowledge4eMaths() as KnowledgePack;
+    return maths4eQuestionBank;
   }
 
   if (classe === "3e" && matiere === "maths") {
-    return loadKnowledge3eMaths() as KnowledgePack;
+    return maths3eQuestionBank;
   }
 
-  throw new Error(`Knowledge V4 introuvable pour ${classe}/${matiere}`);
+  throw new Error(`QuestionBank V4 introuvable pour ${classe}/${matiere}`);
 }
