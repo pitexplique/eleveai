@@ -5,11 +5,9 @@ import { usePathname } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import {
   Sparkles,
-  Wand2,
   Target,
   Brain,
   Route,
-  Mail,
   Menu,
   X,
   Home,
@@ -17,6 +15,7 @@ import {
   GraduationCap,
   LogOut,
   Flame,
+  Puzzle,
 } from "lucide-react";
 import { useEleve } from "@/context/EleveContext";
 
@@ -58,8 +57,6 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-50 border-b border-white/10 bg-slate-950/80 backdrop-blur-xl">
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3">
-
-        {/* LOGO */}
         <Link href="/accueil" className="flex items-center gap-3">
           <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-gradient-to-br from-emerald-300 via-cyan-300 to-amber-300 text-slate-950 shadow-lg">
             <Sparkles className="h-5 w-5" />
@@ -75,48 +72,68 @@ export default function Header() {
           </div>
         </Link>
 
-        {/* DESKTOP MENU */}
         <div className="hidden items-center gap-2 lg:flex">
-
-          <Link href="/accueil" className={linkClass(isActive(pathname, "/accueil"))}>
+          <Link
+            href="/accueil"
+            className={linkClass(isActive(pathname, "/accueil"))}
+          >
             <Home className="h-4 w-4 text-cyan-300" />
             Accueil
           </Link>
 
-          <Link href="/coach-maths-ia" className={linkClass(isActive(pathname, "/coach-maths-ia"))}>
-            <Brain className="h-4 w-4 text-orange-300" />
-            Coach Maths
-          </Link>
           <Link
             href="/lecon-du-jour"
-            className={`relative ${linkClass(isActive(pathname, "/lecondujour"))}`}
+            className={`relative ${linkClass(
+              isActive(pathname, "/lecon-du-jour")
+            )}`}
           >
             <Flame className="h-4 w-4 text-orange-300" />
             Leçon du jour
-
-            {/* badge */}
-            <span className="absolute -top-2 -right-2 rounded-full bg-red-500 px-1.5 text-[10px] text-white">
+            <span className="absolute -right-2 -top-2 rounded-full bg-red-500 px-1.5 text-[10px] text-white">
               🔥
             </span>
           </Link>
 
-          <Link href="/calcul-rapide" className={linkClass(isActive(pathname, "/calcul-rapide"))}>
+          <Link
+            href="/calcul-rapide"
+            className={linkClass(isActive(pathname, "/calcul-rapide"))}
+          >
             <Target className="h-4 w-4 text-green-300" />
             Calcul rapide
           </Link>
 
+          <Link
+            href="/probleme-du-jour"
+            className={linkClass(isActive(pathname, "/probleme-du-jour"))}
+          >
+            <Puzzle className="h-4 w-4 text-pink-300" />
+            Problème du jour
+          </Link>
 
-          <Link href="/parcours" className={linkClass(isActive(pathname, "/parcours"))}>
+          <Link
+            href="/coach-maths-ia"
+            className={linkClass(isActive(pathname, "/coach-maths-ia"))}
+          >
+            <Brain className="h-4 w-4 text-orange-300" />
+            Coach Maths
+          </Link>
+
+          <Link
+            href="/parcours"
+            className={linkClass(isActive(pathname, "/parcours"))}
+          >
             <Route className="h-4 w-4 text-purple-300" />
             Parcours
           </Link>
 
-          <Link href="/optimiseur" className={linkClass(isActive(pathname, "/optimiseur"))}>
+          <Link
+            href="/optimiseur"
+            className={linkClass(isActive(pathname, "/optimiseur"))}
+          >
             <BadgeCheck className="h-4 w-4 text-amber-300" />
             Valéria
           </Link>
 
-          {/* USER */}
           {eleve ? (
             <div className="ml-2 flex items-center gap-2">
               <Link
@@ -146,7 +163,6 @@ export default function Header() {
           )}
         </div>
 
-        {/* MOBILE BUTTON */}
         <button
           onClick={() => setMobileOpen((v) => !v)}
           className="rounded-full border border-white/15 bg-white/10 p-2 text-white lg:hidden"
@@ -155,12 +171,9 @@ export default function Header() {
         </button>
       </nav>
 
-      {/* MOBILE MENU */}
       {mobileOpen && (
         <div className="border-t border-white/10 bg-slate-950 px-4 py-4 lg:hidden">
           <div className="grid gap-2">
-
-            {/* 🔥 LEÇON DU JOUR */}
             <Link
               href="/lecon-du-jour"
               className="flex items-center justify-center gap-3 rounded-2xl bg-orange-500 px-4 py-4 font-black text-white shadow-lg"
@@ -169,26 +182,47 @@ export default function Header() {
               Leçon du jour 🔥
             </Link>
 
-            <Link href="/calcul-rapide" className={mobileLinkClass(isActive(pathname, "/calcul-rapide"))}>
+            <Link
+              href="/calcul-rapide"
+              className={mobileLinkClass(isActive(pathname, "/calcul-rapide"))}
+            >
               <Target className="h-4 w-4 text-green-300" />
               Calcul rapide
             </Link>
 
-            <Link href="/coach-maths-ia" className={mobileLinkClass(isActive(pathname, "/coach-maths-ia"))}>
+            <Link
+              href="/probleme-du-jour"
+              className={mobileLinkClass(
+                isActive(pathname, "/probleme-du-jour")
+              )}
+            >
+              <Puzzle className="h-4 w-4 text-pink-300" />
+              Problème du jour
+            </Link>
+
+            <Link
+              href="/coach-maths-ia"
+              className={mobileLinkClass(isActive(pathname, "/coach-maths-ia"))}
+            >
               <Brain className="h-4 w-4 text-orange-300" />
               Coach maths
             </Link>
 
-            <Link href="/parcours" className={mobileLinkClass(isActive(pathname, "/parcours"))}>
+            <Link
+              href="/parcours"
+              className={mobileLinkClass(isActive(pathname, "/parcours"))}
+            >
               <Route className="h-4 w-4 text-purple-300" />
               Parcours
             </Link>
 
-            <Link href="/optimiseur" className={mobileLinkClass(isActive(pathname, "/optimiseur"))}>
+            <Link
+              href="/optimiseur"
+              className={mobileLinkClass(isActive(pathname, "/optimiseur"))}
+            >
               <BadgeCheck className="h-4 w-4 text-amber-300" />
               Valéria
             </Link>
-
           </div>
         </div>
       )}

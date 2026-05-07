@@ -1,5 +1,3 @@
-// lib/tutor-v4/question-banks/maths/3e/thales.bank.ts
-
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 
 function randomInt(min: number, max: number) {
@@ -14,8 +12,14 @@ function shuffle<T>(arr: T[]) {
   return [...arr].sort(() => Math.random() - 0.5);
 }
 
+function makeChoices(correct: string, wrongs: string[]) {
+  return shuffle([correct, ...wrongs]).slice(0, 4);
+}
+
 function formatNumber(n: number) {
-  return Number.isInteger(n) ? String(n) : String(n).replace(".", ",");
+  return Number.isInteger(n)
+    ? String(n)
+    : String(n).replace(".", ",");
 }
 
 function thalesCanvas(data: {
@@ -247,4 +251,453 @@ export const thalesBank: TutorBankItemV4[] = [
       };
     },
   },
-];
+    /* =========================
+     THALES_CALCULER_LONGUEUR
+  ========================= */
+
+  {
+    kind: "template",
+    id: "3e_thales_calculer_longueur_tpl_1_trouver_ac",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "thales",
+    microId: "thales_calculer_longueur",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Utilise AM/AB = AN/AC puis fais un produit en croix.",
+    tags: ["thales", "calculer_longueur", "produit_en_croix", "template"],
+
+    generate: () => {
+      const AM = randomChoice([2, 3, 4, 5]);
+      const k = randomChoice([2, 3, 4]);
+      const AB = AM * k;
+
+      const AN = randomChoice([3, 4, 5, 6]);
+      const AC = AN * k;
+
+      return {
+        text:
+          `Dans le triangle ABC, les droites (MN) et (BC) sont parallèles. ` +
+          `On sait que AM = ${AM} cm, AB = ${AB} cm et AN = ${AN} cm. Calculer AC.`,
+        format: "short",
+        expected: [String(AC)],
+        comparator: "number_equal",
+        explanation:
+          "Définition : le théorème de Thalès permet d’écrire des rapports égaux dans une configuration avec des droites parallèles.\n\n" +
+          "Méthode : on écrit AM/AB = AN/AC.\n\n" +
+          `Calcul : ${AM}/${AB} = ${AN}/AC.\n` +
+          `Comme ${AB} = ${k} × ${AM}, alors AC = ${k} × ${AN} = ${AC}.\n\n` +
+          `Conclusion : AC = ${AC} cm.`,
+        canvas: thalesCanvas({
+          sideLabels: {
+            AM: `${AM} cm`,
+            AB: `${AB} cm`,
+            AN: `${AN} cm`,
+            AC: "?",
+          },
+        }),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "3e_thales_calculer_longueur_tpl_2_trouver_an",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "thales",
+    microId: "thales_calculer_longueur",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Le petit triangle est une réduction du grand triangle.",
+    tags: ["thales", "calculer_longueur", "reduction", "template"],
+
+    generate: () => {
+      const AN = randomChoice([2, 3, 4, 5]);
+      const k = randomChoice([2, 3, 4]);
+      const AC = AN * k;
+
+      const AM = randomChoice([3, 4, 5]);
+      const AB = AM * k;
+
+      return {
+        text:
+          `Dans une configuration de Thalès, (MN) est parallèle à (BC). ` +
+          `On sait que AM = ${AM} cm, AB = ${AB} cm et AC = ${AC} cm. Calculer AN.`,
+        format: "short",
+        expected: [String(AN)],
+        comparator: "number_equal",
+        explanation:
+          "Définition : avec Thalès, les longueurs correspondantes sont proportionnelles.\n\n" +
+          "Méthode : on utilise AM/AB = AN/AC.\n\n" +
+          `Calcul : ${AM}/${AB} = AN/${AC}.\n` +
+          `Le coefficient de réduction est ${AM}/${AB} = 1/${k}. Donc AN = ${AC} ÷ ${k} = ${AN}.\n\n` +
+          `Conclusion : AN = ${AN} cm.`,
+        canvas: thalesCanvas({
+          sideLabels: {
+            AM: `${AM} cm`,
+            AB: `${AB} cm`,
+            AN: "?",
+            AC: `${AC} cm`,
+          },
+        }),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "3e_thales_calculer_longueur_tpl_3_trouver_mn",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "thales",
+    microId: "thales_calculer_longueur",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Utilise aussi le rapport MN/BC.",
+    tags: ["thales", "calculer_longueur", "mn_bc", "template"],
+
+    generate: () => {
+      const AM = randomChoice([2, 3, 4]);
+      const k = randomChoice([2, 3]);
+      const AB = AM * k;
+
+      const MN = randomChoice([3, 4, 5]);
+      const BC = MN * k;
+
+      return {
+        text:
+          `Dans le triangle ABC, les droites (MN) et (BC) sont parallèles. ` +
+          `On sait que AM = ${AM} cm, AB = ${AB} cm et BC = ${BC} cm. Calculer MN.`,
+        format: "short",
+        expected: [String(MN)],
+        comparator: "number_equal",
+        explanation:
+          "Définition : dans une configuration de Thalès, AM/AB = AN/AC = MN/BC.\n\n" +
+          "Méthode : on utilise les deux rapports AM/AB et MN/BC.\n\n" +
+          `Calcul : ${AM}/${AB} = MN/${BC}.\n` +
+          `Le coefficient est ${AM}/${AB} = 1/${k}. Donc MN = ${BC} ÷ ${k} = ${MN}.\n\n` +
+          `Conclusion : MN = ${MN} cm.`,
+        canvas: thalesCanvas({
+          sideLabels: {
+            AM: `${AM} cm`,
+            AB: `${AB} cm`,
+            MN: "?",
+            BC: `${BC} cm`,
+          },
+        }),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "3e_thales_calculer_longueur_tpl_4_produit_croix",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "thales",
+    microId: "thales_calculer_longueur",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Produit en croix : AM × AC = AB × AN.",
+    tags: ["thales", "calculer_longueur", "produit_en_croix", "template"],
+
+    generate: () => {
+      const AM = randomChoice([3, 4, 5]);
+      const AB = randomChoice([6, 8, 10, 12]);
+      const AN = randomChoice([2, 3, 4, 5]);
+
+      const AC = (AB * AN) / AM;
+
+      if (!Number.isInteger(AC)) {
+        return {
+          text:
+            `Dans le triangle ABC, (MN) // (BC). On sait que AM = 4 cm, AB = 8 cm et AN = 5 cm. Calculer AC.`,
+          format: "short",
+          expected: ["10"],
+          comparator: "number_equal",
+          explanation:
+            "Définition : le théorème de Thalès permet d’écrire AM/AB = AN/AC.\n\n" +
+            "Méthode : on utilise un produit en croix.\n\n" +
+            "Calcul : 4/8 = 5/AC, donc 4 × AC = 8 × 5 = 40, donc AC = 10.\n\n" +
+            "Conclusion : AC = 10 cm.",
+          canvas: thalesCanvas({
+            sideLabels: {
+              AM: "4 cm",
+              AB: "8 cm",
+              AN: "5 cm",
+              AC: "?",
+            },
+          }),
+        };
+      }
+
+      return {
+        text:
+          `Dans le triangle ABC, (MN) // (BC). On sait que AM = ${AM} cm, AB = ${AB} cm et AN = ${AN} cm. Calculer AC.`,
+        format: "short",
+        expected: [String(AC)],
+        comparator: "number_equal",
+        explanation:
+          "Définition : le théorème de Thalès donne une égalité de rapports.\n\n" +
+          "Méthode : on écrit AM/AB = AN/AC puis on fait un produit en croix.\n\n" +
+          `Calcul : ${AM}/${AB} = ${AN}/AC.\n` +
+          `${AM} × AC = ${AB} × ${AN} = ${AB * AN}.\n` +
+          `AC = ${AB * AN} ÷ ${AM} = ${AC}.\n\n` +
+          `Conclusion : AC = ${AC} cm.`,
+        canvas: thalesCanvas({
+          sideLabels: {
+            AM: `${AM} cm`,
+            AB: `${AB} cm`,
+            AN: `${AN} cm`,
+            AC: "?",
+          },
+        }),
+      };
+    },
+  },
+
+  {
+    kind: "fixed",
+    id: "3e_thales_calculer_longueur_piege_1",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "thales",
+    microId: "thales_calculer_longueur",
+    difficulty: 4,
+    theme: "neutral",
+    text:
+      "Dans une configuration de Thalès, un élève écrit AM/AN = AB/AC sans vérifier les côtés correspondants. Est-ce toujours correct ?",
+    format: "qcm",
+    choices: ["oui", "non"],
+    expected: ["non"],
+    comparator: "mcq_exact",
+    hint: "Il faut respecter les côtés correspondants.",
+    explanation:
+      "Définition : le théorème de Thalès compare des longueurs correspondantes.\n\n" +
+      "Méthode : on écrit les rapports dans le même ordre sur les deux demi-droites.\n\n" +
+      "Calcul : dans la configuration usuelle, on écrit plutôt AM/AB = AN/AC = MN/BC.\n\n" +
+      "Conclusion : l’élève risque de mélanger les rapports.",
+    tags: ["thales", "piege", "rapports", "correspondance"],
+  },
+
+  {
+    kind: "fixed",
+    id: "3e_thales_calculer_longueur_open_1",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "thales",
+    microId: "thales_calculer_longueur",
+    difficulty: 4,
+    theme: "neutral",
+    text:
+      "Explique la méthode pour calculer une longueur avec le théorème de Thalès.",
+    format: "open",
+    expected: ["parallèles", "rapports", "produit", "croix"],
+    comparator: "contains_keyword",
+    hint: "Tu dois parler des droites parallèles et des rapports égaux.",
+    explanation:
+      "Définition : le théorème de Thalès s’applique quand deux droites parallèles coupent deux droites sécantes.\n\n" +
+      "Méthode : on vérifie le parallélisme, puis on écrit les rapports de longueurs correspondantes.\n\n" +
+      "Calcul : on remplace les longueurs connues et on utilise un produit en croix pour trouver la longueur manquante.\n\n" +
+      "Conclusion : Thalès permet de calculer une longueur grâce à la proportionnalité.",
+    tags: ["thales", "calculer_longueur", "open", "methode"],
+  },
+    /* =========================
+     THALES_RECIPROQUE
+  ========================= */
+
+  {
+    kind: "template",
+    id: "3e_thales_reciproque_tpl_1_verifier_oui",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "thales",
+    microId: "thales_reciproque",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Compare les rapports AM/AB et AN/AC.",
+    tags: ["thales", "reciproque", "paralleles", "template"],
+
+    generate: () => {
+      const AM = randomChoice([2, 3, 4, 5]);
+      const k = randomChoice([2, 3, 4]);
+      const AB = AM * k;
+
+      const AN = randomChoice([3, 4, 5, 6]);
+      const AC = AN * k;
+
+      return {
+        text:
+          `Dans la figure, les points A, M, B sont alignés et les points A, N, C sont alignés dans le même ordre. ` +
+          `AM = ${AM} cm, AB = ${AB} cm, AN = ${AN} cm et AC = ${AC} cm. Peut-on conclure que (MN) est parallèle à (BC) ?`,
+        format: "qcm",
+        choices: ["oui", "non"],
+        expected: ["oui"],
+        comparator: "mcq_exact",
+        explanation:
+          "Définition : la réciproque du théorème de Thalès permet de prouver que deux droites sont parallèles.\n\n" +
+          "Méthode : on compare les rapports AM/AB et AN/AC.\n\n" +
+          `Calcul : AM/AB = ${AM}/${AB} = 1/${k} et AN/AC = ${AN}/${AC} = 1/${k}.\n\n` +
+          "Conclusion : les rapports sont égaux, donc (MN) est parallèle à (BC).",
+        canvas: thalesCanvas({
+          sideLabels: {
+            AM: `${AM} cm`,
+            AB: `${AB} cm`,
+            AN: `${AN} cm`,
+            AC: `${AC} cm`,
+          },
+          showFormula: false,
+        }),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "3e_thales_reciproque_tpl_2_verifier_non",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "thales",
+    microId: "thales_reciproque",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Si les rapports ne sont pas égaux, les droites ne sont pas parallèles.",
+    tags: ["thales", "reciproque", "non_paralleles", "template"],
+
+    generate: () => {
+      const AM = randomChoice([2, 3, 4]);
+      const AB = AM * 2;
+
+      const AN = randomChoice([3, 4, 5]);
+      const AC = AN * 2 + randomChoice([1, 2]);
+
+      return {
+        text:
+          `Les points A, M, B sont alignés et les points A, N, C sont alignés dans le même ordre. ` +
+          `AM = ${AM} cm, AB = ${AB} cm, AN = ${AN} cm et AC = ${AC} cm. Peut-on conclure que (MN) est parallèle à (BC) ?`,
+        format: "qcm",
+        choices: ["oui", "non"],
+        expected: ["non"],
+        comparator: "mcq_exact",
+        explanation:
+          "Définition : la réciproque de Thalès s’utilise en comparant deux rapports.\n\n" +
+          "Méthode : on calcule AM/AB et AN/AC.\n\n" +
+          `Calcul : AM/AB = ${AM}/${AB}, tandis que AN/AC = ${AN}/${AC}. Ces rapports ne sont pas égaux.\n\n` +
+          "Conclusion : on ne peut pas conclure que (MN) est parallèle à (BC).",
+        canvas: thalesCanvas({
+          sideLabels: {
+            AM: `${AM} cm`,
+            AB: `${AB} cm`,
+            AN: `${AN} cm`,
+            AC: `${AC} cm`,
+          },
+          showFormula: false,
+        }),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "3e_thales_reciproque_tpl_3_qcm_rapports",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "thales",
+    microId: "thales_reciproque",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Calcule les deux rapports puis compare-les.",
+    tags: ["thales", "reciproque", "rapports", "qcm", "template"],
+
+    generate: () => {
+      const same = randomChoice([true, false]);
+
+      const AM = 3;
+      const AB = 6;
+      const AN = 4;
+      const AC = same ? 8 : 9;
+
+      const expected = same
+        ? "les droites sont parallèles"
+        : "les droites ne sont pas parallèles";
+
+      return {
+        text:
+          `On sait que AM = ${AM}, AB = ${AB}, AN = ${AN} et AC = ${AC}. ` +
+          `Quelle conclusion est correcte ?`,
+        format: "qcm",
+        choices: makeChoices(expected, [
+          "les droites sont perpendiculaires",
+          "le triangle est rectangle",
+          same ? "les droites ne sont pas parallèles" : "les droites sont parallèles",
+        ]),
+        expected: [expected],
+        comparator: "mcq_exact",
+        explanation:
+          "Définition : la réciproque de Thalès permet de tester un parallélisme.\n\n" +
+          "Méthode : on compare AM/AB et AN/AC.\n\n" +
+          `Calcul : AM/AB = ${AM}/${AB} = 1/2. AN/AC = ${AN}/${AC} ${
+            same ? "= 1/2" : "≠ 1/2"
+          }.\n\n` +
+          `Conclusion : ${expected}.`,
+        canvas: thalesCanvas({
+          sideLabels: {
+            AM: `${AM}`,
+            AB: `${AB}`,
+            AN: `${AN}`,
+            AC: `${AC}`,
+          },
+          showFormula: false,
+        }),
+      };
+    },
+  },
+
+  {
+    kind: "fixed",
+    id: "3e_thales_reciproque_piege_1",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "thales",
+    microId: "thales_reciproque",
+    difficulty: 4,
+    theme: "neutral",
+    text:
+      "Pour utiliser la réciproque de Thalès, suffit-il de vérifier que deux rapports sont à peu près égaux sur un dessin ?",
+    format: "qcm",
+    choices: ["oui", "non"],
+    expected: ["non"],
+    comparator: "mcq_exact",
+    hint: "Une figure peut être trompeuse.",
+    explanation:
+      "Définition : la réciproque de Thalès demande une égalité exacte de rapports.\n\n" +
+      "Méthode : on utilise les longueurs données et un calcul, pas seulement l’apparence du dessin.\n\n" +
+      "Calcul : deux segments peuvent sembler parallèles sur une figure sans l’être exactement.\n\n" +
+      "Conclusion : il faut comparer les rapports par le calcul.",
+    tags: ["thales", "reciproque", "piege", "figure"],
+  },
+
+  {
+    kind: "fixed",
+    id: "3e_thales_reciproque_open_1",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "thales",
+    microId: "thales_reciproque",
+    difficulty: 5,
+    theme: "neutral",
+    text:
+      "Explique comment utiliser la réciproque du théorème de Thalès pour prouver que deux droites sont parallèles.",
+    format: "open",
+    expected: ["alignés", "rapports", "égaux", "parallèles"],
+    comparator: "contains_keyword",
+    hint: "Tu dois parler des points alignés et des rapports égaux.",
+    explanation:
+      "Définition : la réciproque de Thalès permet de démontrer un parallélisme.\n\n" +
+      "Méthode : on vérifie d’abord que les points sont alignés dans le même ordre, puis on compare deux rapports de longueurs correspondantes.\n\n" +
+      "Calcul : si les rapports sont égaux, alors les droites correspondantes sont parallèles.\n\n" +
+      "Conclusion : la réciproque transforme une égalité de rapports en conclusion de parallélisme.",
+    tags: ["thales", "reciproque", "open", "redaction"],
+  },
+]

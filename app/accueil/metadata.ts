@@ -5,10 +5,10 @@ const SITE_URL = "https://eleveai.fr";
 
 export const metadata: Metadata = {
   title:
-    "EleveAI — Mathématiques, automatismes et raisonnement scientifique",
+    "EleveAI — Mathématiques, automatismes et raisonnement",
 
   description:
-    "EleveAI aide les élèves à progresser en mathématiques grâce à des entraînements courts, du calcul rapide, des parcours guidés et des explications étape par étape. Une approche pédagogique centrée sur les automatismes, le raisonnement et la confiance.",
+    "EleveAI aide les élèves à progresser en mathématiques grâce au calcul rapide, aux parcours guidés, à la leçon du jour et à des entraînements réguliers centrés sur les automatismes et le raisonnement scientifique.",
 
   alternates: {
     canonical: `${SITE_URL}/accueil`,
@@ -16,10 +16,10 @@ export const metadata: Metadata = {
 
   openGraph: {
     title:
-      "EleveAI — Apprendre, raisonner, progresser en mathématiques",
+      "EleveAI — Apprendre, raisonner et progresser en mathématiques",
 
     description:
-      "Calcul rapide, parcours guidés, leçon du jour et entraînement progressif : EleveAI aide les élèves à consolider leurs bases et développer leur raisonnement scientifique.",
+      "Calcul rapide, leçon du jour, défis et parcours guidés : EleveAI aide les élèves à développer leurs automatismes et leur raisonnement scientifique.",
 
     url: `${SITE_URL}/accueil`,
     type: "website",
@@ -40,10 +40,10 @@ export const metadata: Metadata = {
     card: "summary_large_image",
 
     title:
-      "EleveAI — Mathématiques, automatismes et progression",
+      "EleveAI — Mathématiques, raisonnement et progression",
 
     description:
-      "Une plateforme pédagogique pour aider les élèves à progresser grâce au calcul rapide, aux parcours guidés et au raisonnement étape par étape.",
+      "Une plateforme pédagogique pour progresser en maths grâce au calcul rapide, aux défis et aux parcours guidés.",
 
     images: ["/preview.jpg"],
   },
@@ -53,7 +53,7 @@ export const metadata: Metadata = {
     "calcul rapide",
     "automatismes",
     "raisonnement scientifique",
-    "brevet 2026",
+    "défis mathématiques",
     "révision maths",
     "collège",
     "6e",
@@ -66,5 +66,3 @@ export const metadata: Metadata = {
     "La Réunion",
   ],
 };
-
-

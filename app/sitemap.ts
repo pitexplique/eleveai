@@ -55,6 +55,12 @@ const ROUTES: RouteConfig[] = [
     changeFrequency: "weekly",
     lastMod: LASTMOD_CORE,
   },
+    {
+    path: "/probleme-du-jour",
+    priority: 0.9,
+    changeFrequency: "daily",
+    lastMod: LASTMOD_CORE,
+  },
   {
     path: "/parcours",
     priority: 0.85,
