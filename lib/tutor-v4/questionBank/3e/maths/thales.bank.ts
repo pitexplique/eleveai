@@ -700,4 +700,377 @@ export const thalesBank: TutorBankItemV4[] = [
       "Conclusion : la réciproque transforme une égalité de rapports en conclusion de parallélisme.",
     tags: ["thales", "reciproque", "open", "redaction"],
   },
-]
+    /* =========================
+     THALES_REDIGER
+  ========================= */
+
+  {
+    kind: "fixed",
+    id: "3e_thales_rediger_fixed_1",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "thales",
+    microId: "thales_rediger",
+    difficulty: 4,
+    theme: "neutral",
+    text:
+      "Dans une rédaction avec Thalès, quelle information faut-il écrire avant les rapports ?",
+    format: "qcm",
+    choices: [
+      "les points alignés et les droites parallèles",
+      "seulement le résultat final",
+      "l’aire du triangle",
+      "le périmètre du triangle",
+    ],
+    expected: ["les points alignés et les droites parallèles"],
+    comparator: "mcq_exact",
+    hint: "Il faut d’abord justifier que Thalès peut s’appliquer.",
+    explanation:
+      "Définition : une rédaction avec Thalès doit montrer que les conditions du théorème sont réunies.\n\n" +
+      "Méthode : on commence par citer les points alignés et les droites parallèles.\n\n" +
+      "Calcul : ensuite seulement, on écrit les rapports égaux.\n\n" +
+      "Conclusion : il faut toujours annoncer les conditions avant les calculs.",
+    tags: ["thales", "redaction", "qcm", "methode"],
+  },
+
+  {
+    kind: "template",
+    id: "3e_thales_rediger_tpl_1_choisir_phrase",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "thales",
+    microId: "thales_rediger",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Une bonne phrase cite les alignements et le parallélisme.",
+    tags: ["thales", "rediger", "template", "qcm"],
+
+    generate: () => {
+      return {
+        text:
+          "Quelle phrase convient le mieux pour commencer une rédaction avec le théorème de Thalès ?",
+        format: "qcm",
+        choices: makeChoices(
+          "Les points A, M, B sont alignés, les points A, N, C sont alignés et (MN) // (BC).",
+          [
+            "Le triangle ABC est rectangle.",
+            "Les longueurs sont à peu près proportionnelles sur le dessin.",
+            "On voit que les droites ont l’air parallèles.",
+          ]
+        ),
+        expected: [
+          "Les points A, M, B sont alignés, les points A, N, C sont alignés et (MN) // (BC).",
+        ],
+        comparator: "mcq_exact",
+        explanation:
+          "Définition : pour utiliser Thalès, il faut une configuration avec points alignés et droites parallèles.\n\n" +
+          "Méthode : la rédaction commence par vérifier ces conditions.\n\n" +
+          "Calcul : aucune longueur n’est encore calculée à cette étape.\n\n" +
+          "Conclusion : la bonne phrase annonce clairement les alignements et le parallélisme.",
+        canvas: thalesCanvas({
+          sideLabels: {
+            AM: "3 cm",
+            AB: "6 cm",
+            AN: "4 cm",
+            AC: "8 cm",
+          },
+          showFormula: false,
+        }),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "3e_thales_rediger_tpl_2_calcul_ac",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "thales",
+    microId: "thales_rediger",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Rédige : conditions, rapports, remplacement, calcul, conclusion.",
+    tags: ["thales", "rediger", "calcul", "template"],
+
+    generate: () => {
+      const AM = randomChoice([2, 3, 4]);
+      const k = randomChoice([2, 3]);
+      const AB = AM * k;
+      const AN = randomChoice([3, 4, 5]);
+      const AC = AN * k;
+
+      return {
+        text:
+          `Rédiger le calcul de AC sachant que A, M, B sont alignés, A, N, C sont alignés, (MN) // (BC), ` +
+          `AM = ${AM} cm, AB = ${AB} cm et AN = ${AN} cm.`,
+        format: "open",
+        expected: ["alignés", "parallèles", "AM", "AB", "AN", "AC"],
+        comparator: "contains_keyword",
+        explanation:
+          "Définition : le théorème de Thalès permet de calculer une longueur dans une configuration de droites parallèles.\n\n" +
+          "Méthode : on rédige les conditions, puis les rapports.\n\n" +
+          `Calcul : les points A, M, B sont alignés, les points A, N, C sont alignés et (MN) // (BC).\n` +
+          `D’après le théorème de Thalès : AM/AB = AN/AC.\n` +
+          `Donc ${AM}/${AB} = ${AN}/AC.\n` +
+          `Comme ${AB} = ${k} × ${AM}, on obtient AC = ${k} × ${AN} = ${AC}.\n\n` +
+          `Conclusion : AC = ${AC} cm.`,
+        canvas: thalesCanvas({
+          sideLabels: {
+            AM: `${AM} cm`,
+            AB: `${AB} cm`,
+            AN: `${AN} cm`,
+            AC: "?",
+          },
+        }),
+      };
+    },
+  },
+
+  {
+    kind: "fixed",
+    id: "3e_thales_rediger_open_1",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "thales",
+    microId: "thales_rediger",
+    difficulty: 5,
+    theme: "neutral",
+    text:
+      "Explique les étapes d’une rédaction complète avec le théorème de Thalès.",
+    format: "open",
+    expected: ["alignés", "parallèles", "rapports", "conclusion"],
+    comparator: "contains_keyword",
+    hint: "Pense à l’ordre : conditions → théorème → rapports → calcul → conclusion.",
+    explanation:
+      "Définition : une rédaction complète avec Thalès doit justifier l’utilisation du théorème.\n\n" +
+      "Méthode : on écrit d’abord les points alignés et les droites parallèles, puis on cite le théorème.\n\n" +
+      "Calcul : on écrit les rapports, on remplace par les valeurs et on calcule la longueur cherchée.\n\n" +
+      "Conclusion : on termine par une phrase avec l’unité.",
+    tags: ["thales", "redaction", "open", "methode"],
+  },
+  /* =========================
+     THALES_DEFIS
+  ========================= */
+
+  {
+    kind: "template",
+    id: "3e_thales_defis_tpl_1_brevet_calcul",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "thales",
+    microId: "thales_defis",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Repère les triangles semblables puis utilise les rapports de Thalès.",
+    tags: ["thales", "defi", "brevet", "calcul", "template"],
+
+    generate: () => {
+      const AM = randomChoice([2, 3, 4, 5]);
+      const k = randomChoice([2, 3]);
+      const AB = AM * k;
+      const AN = randomChoice([3, 4, 5, 6]);
+      const AC = AN * k;
+
+      return {
+        text:
+          `Dans une configuration de Thalès, A, M, B sont alignés, A, N, C sont alignés et (MN) // (BC). ` +
+          `On sait que AM = ${AM} cm, AB = ${AB} cm et AN = ${AN} cm. Calculer AC.`,
+        format: "short",
+        expected: [String(AC)],
+        comparator: "number_equal",
+        explanation:
+          "Définition : Thalès permet de calculer une longueur grâce à des rapports égaux.\n\n" +
+          "Méthode : on écrit AM/AB = AN/AC.\n\n" +
+          `Calcul : ${AM}/${AB} = ${AN}/AC. Le coefficient est ${AB} ÷ ${AM} = ${k}. Donc AC = ${AN} × ${k} = ${AC}.\n\n` +
+          `Conclusion : AC = ${AC} cm.`,
+        canvas: thalesCanvas({
+          sideLabels: {
+            AM: `${AM} cm`,
+            AB: `${AB} cm`,
+            AN: `${AN} cm`,
+            AC: "?",
+          },
+        }),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "3e_thales_defis_tpl_2_reciproque",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "thales",
+    microId: "thales_defis",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Compare les deux rapports.",
+    tags: ["thales", "defi", "reciproque", "template"],
+
+    generate: () => {
+      const same = randomChoice([true, false]);
+
+      const AM = 4;
+      const AB = 8;
+      const AN = 5;
+      const AC = same ? 10 : 11;
+
+      const correct = same ? "oui" : "non";
+
+      return {
+        text:
+          `Les points A, M, B sont alignés et les points A, N, C sont alignés dans le même ordre. ` +
+          `AM = ${AM} cm, AB = ${AB} cm, AN = ${AN} cm et AC = ${AC} cm. ` +
+          `Peut-on conclure que (MN) // (BC) ?`,
+        format: "qcm",
+        choices: ["oui", "non"],
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation:
+          "Définition : la réciproque de Thalès permet de prouver un parallélisme.\n\n" +
+          "Méthode : on compare AM/AB et AN/AC.\n\n" +
+          `Calcul : AM/AB = ${AM}/${AB} = 1/2. AN/AC = ${AN}/${AC} ${
+            same ? "= 1/2" : "≠ 1/2"
+          }.\n\n` +
+          `Conclusion : la réponse est ${correct}.`,
+        canvas: thalesCanvas({
+          sideLabels: {
+            AM: `${AM} cm`,
+            AB: `${AB} cm`,
+            AN: `${AN} cm`,
+            AC: `${AC} cm`,
+          },
+          showFormula: false,
+        }),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "3e_thales_defis_tpl_3_papillon_calcul",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "thales",
+    microId: "thales_defis",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Dans la configuration papillon, on compare les distances depuis le point d’intersection.",
+    tags: ["thales", "defi", "papillon", "template"],
+
+    generate: () => {
+      const AB = randomChoice([3, 4, 5]);
+      const k = randomChoice([2, 3]);
+      const AC = AB * k;
+
+      const AM = randomChoice([2, 3, 4]);
+      const AN = AM * k;
+
+      return {
+        text:
+          `Dans une configuration papillon de Thalès, les droites (BM) et (CN) sont parallèles. ` +
+          `On sait que AB = ${AB} cm, AC = ${AC} cm et AM = ${AM} cm. Calculer AN.`,
+        format: "short",
+        expected: [String(AN)],
+        comparator: "number_equal",
+        explanation:
+          "Définition : dans une configuration papillon, Thalès s’applique aussi avec deux droites sécantes et deux parallèles.\n\n" +
+          "Méthode : on compare les longueurs situées sur les mêmes droites sécantes.\n\n" +
+          `Calcul : AC/AB = ${AC}/${AB} = ${k}. Donc AN = ${AM} × ${k} = ${AN}.\n\n` +
+          `Conclusion : AN = ${AN} cm.`,
+        canvas: thalesCanvas({
+          variant: "papillon",
+          sideLabels: {
+            AB: `${AB} cm`,
+            AC: `${AC} cm`,
+            AM: `${AM} cm`,
+            AN: "?",
+          },
+        }),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "3e_thales_defis_tpl_4_reunion_ombre",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "thales",
+    microId: "thales_defis",
+    difficulty: 5,
+    theme: "reunion",
+    hint: "Les rayons du soleil sont parallèles : les triangles sont proportionnels.",
+    tags: ["thales", "defi", "reunion", "ombre", "template"],
+
+    generate: () => {
+      const batonHauteur = randomChoice([1, 2]);
+      const batonOmbre = randomChoice([2, 3]);
+      const arbreOmbre = batonOmbre * randomChoice([4, 5, 6]);
+      const arbreHauteur = (batonHauteur * arbreOmbre) / batonOmbre;
+
+      return {
+        text:
+          `À La Réunion, un bâton de ${batonHauteur} m projette une ombre de ${batonOmbre} m. ` +
+          `Au même moment, un arbre projette une ombre de ${arbreOmbre} m. Quelle est la hauteur de l’arbre ?`,
+        format: "short",
+        expected: [String(arbreHauteur)],
+        comparator: "number_equal",
+        explanation:
+          "Définition : les rayons du soleil peuvent être considérés comme parallèles, ce qui crée une situation de Thalès.\n\n" +
+          "Méthode : les hauteurs et les ombres sont proportionnelles.\n\n" +
+          `Calcul : hauteur arbre / ${arbreOmbre} = ${batonHauteur} / ${batonOmbre}.\n` +
+          `Donc hauteur arbre = ${arbreOmbre} × ${batonHauteur} ÷ ${batonOmbre} = ${arbreHauteur}.\n\n` +
+          `Conclusion : l’arbre mesure ${arbreHauteur} m.`,
+      };
+    },
+  },
+
+  {
+    kind: "fixed",
+    id: "3e_thales_defis_piege_1",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "thales",
+    microId: "thales_defis",
+    difficulty: 5,
+    theme: "neutral",
+    text:
+      "Un élève applique Thalès uniquement parce que deux segments semblent parallèles sur le dessin. Est-ce suffisant ?",
+    format: "qcm",
+    choices: ["oui", "non"],
+    expected: ["non"],
+    comparator: "mcq_exact",
+    hint: "Une figure peut ne pas être à l’échelle.",
+    explanation:
+      "Définition : Thalès nécessite des droites parallèles indiquées ou démontrées.\n\n" +
+      "Méthode : on ne se fie jamais seulement à l’apparence du dessin.\n\n" +
+      "Calcul : si le parallélisme n’est pas donné ou prouvé, on ne peut pas appliquer directement Thalès.\n\n" +
+      "Conclusion : ce n’est pas suffisant.",
+    tags: ["thales", "defi", "piege", "figure"],
+  },
+
+  {
+    kind: "fixed",
+    id: "3e_thales_defis_open_1",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "thales",
+    microId: "thales_defis",
+    difficulty: 5,
+    theme: "neutral",
+    text:
+      "Explique la différence entre le théorème de Thalès et sa réciproque.",
+    format: "open",
+    expected: ["calculer", "longueur", "prouver", "parallèles"],
+    comparator: "contains_keyword",
+    hint: "Le théorème calcule une longueur ; la réciproque prouve un parallélisme.",
+    explanation:
+      "Définition : le théorème de Thalès et sa réciproque n’ont pas le même objectif.\n\n" +
+      "Méthode : le théorème s’utilise quand les parallèles sont connues ; la réciproque s’utilise quand on veut prouver le parallélisme.\n\n" +
+      "Calcul : avec le théorème, on écrit des rapports pour calculer une longueur. Avec la réciproque, on compare des rapports pour conclure que des droites sont parallèles.\n\n" +
+      "Conclusion : théorème = calculer ; réciproque = prouver.",
+    tags: ["thales", "defi", "open", "theoreme", "reciproque"],
+  },
+];
+
