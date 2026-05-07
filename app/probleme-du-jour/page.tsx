@@ -149,7 +149,7 @@ export default function ProblemeDuJourPage() {
                     setAnswer(e.target.value);
                     setShowCorrection(false);
                   }}
-                  placeholder="Exemple : 15"
+                  placeholder=" Choisis ton chemin 🧭"
                   className="w-full rounded-2xl border border-slate-700 bg-slate-950/90 p-4 text-sm text-white outline-none focus:border-emerald-400"
                 />
               )}
