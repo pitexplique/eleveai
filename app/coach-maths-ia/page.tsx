@@ -11,10 +11,11 @@ import {
   type Classe,
 } from "@/lib/tutor-v4/catalog";
 
-const CLASSES: Classe[] = ["cm2", "6e", "5e", "4e", "3e"];
+//const CLASSES: Classe[] = ["cm2", "6e", "5e", "4e", "3e"];
+const CLASSES: Classe[] = ["6e", "5e", "4e", "3e"];
 
 function getClasseTitle(classe: Classe) {
-  if (classe === "cm2") return "Maths CM2";
+ // if (classe === "cm2") return "Maths CM2";
   if (classe === "6e") return "Maths 6e";
   if (classe === "5e") return "Maths 5e";
   if (classe === "4e") return "Maths 4e";
@@ -26,7 +27,7 @@ function getClasseBadgeColor(item: Classe, active: boolean) {
     return "border-slate-200 bg-white text-orange-500 hover:bg-orange-50";
   }
 
-  if (item === "cm2") return "border-emerald-500 bg-emerald-500 text-white";
+ // if (item === "cm2") return "border-emerald-500 bg-emerald-500 text-white";
   if (item === "6e") return "border-lime-500 bg-lime-500 text-white";
   if (item === "5e") return "border-sky-500 bg-sky-500 text-white";
   if (item === "4e") return "border-sky-500 bg-sky-500 text-white";
