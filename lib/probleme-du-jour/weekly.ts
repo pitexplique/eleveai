@@ -11,7 +11,7 @@ export const problemeDuJourWeekly = {
 
     {
       day: 2,
-      problemId: "pourcentage_reduction_001",
+      problemId: "eau_reunion_001",
     },
 
     {
@@ -21,7 +21,7 @@ export const problemeDuJourWeekly = {
 
     {
       day: 4,
-      problemId: "pourcentage_reduction_001",
+      problemId: "eau_reunion_001",
     },
 
     {

@@ -42,4 +42,56 @@ export const problemesFixed: ProblemeDuJour[] = [
       },
     ],
   },
+  {
+  id: "eau_reunion_001",
+
+  title: "Économiser l’eau",
+
+  theme: "Écologie & mathématiques",
+
+  statement:
+    "À La Réunion, une famille utilise 120 litres d’eau par jour. Après plusieurs gestes écologiques, elle réduit sa consommation de 25 %.",
+
+  question:
+    "Combien de litres d’eau la famille économise-t-elle chaque jour ?",
+
+  expectedAnswer: "30",
+
+  explanation:
+    "25 %, c’est un quart. Le quart de 120 est 30. La famille économise donc 30 litres d’eau chaque jour.",
+
+  directions: [
+    {
+      id: "schema",
+      label: "Faire un schéma",
+      type: "guided",
+      content:
+        "Imagine une barre qui représente 120 litres d’eau. Coupe-la en 4 parts égales. Combien vaut une part ?",
+    },
+
+    {
+      id: "calcul",
+      label: "Chercher le calcul",
+      type: "guided",
+      content:
+        "25 % signifie un quart. Quelle opération permet de trouver le quart de 120 ?",
+    },
+
+    {
+      id: "questionnement",
+      label: "Répondre étape par étape",
+      type: "guided",
+      content:
+        "1. Que signifie 25 % ?\n2. Combien vaut le quart de 120 ?\n3. Combien de litres sont économisés ?",
+    },
+
+    {
+      id: "open",
+      label: "Expliquer avec mes mots",
+      type: "open",
+      content:
+        "Explique pourquoi économiser l’eau est important à La Réunion.",
+    },
+  ],
+}
 ];
