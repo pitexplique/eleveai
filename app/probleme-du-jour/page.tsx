@@ -68,7 +68,7 @@ export default function ProblemeDuJourPage() {
           / Problème du jour
         </div>
 
-        <header className="rounded-3xl border border-emerald-500/30 bg-slate-900/85 p-6 shadow-2xl backdrop-blur-sm">
+        <header className="rounded-3xl border border-emerald-500/30 bg-slate-900/70s p-6 shadow-2xl backdrop-blur-sm">
           <p className="mb-2 text-xs font-bold uppercase tracking-wide text-emerald-300">
             Problème du jour · {probleme.theme}
           </p>
@@ -86,7 +86,7 @@ export default function ProblemeDuJourPage() {
           </p>
         </header>
 
-        <section className="rounded-3xl border border-slate-700 bg-slate-900/85 p-5 backdrop-blur-sm">
+        <section className="rounded-3xl border border-slate-700 bg-slate-900/70 p-5 backdrop-blur-sm">
           <h2 className="mb-4 text-lg font-black text-white">
             Par quelle direction veux-tu commencer ?
           </h2>
@@ -118,7 +118,7 @@ export default function ProblemeDuJourPage() {
         </section>
 
         {selectedDirection ? (
-          <section className="rounded-3xl border border-slate-700 bg-slate-900/85 p-5 backdrop-blur-sm">
+          <section className="rounded-3xl border border-slate-700 bg-slate-900/70 p-5 backdrop-blur-sm">
             <p className="text-sm font-black text-emerald-300">
               {selectedDirection.label}
             </p>
