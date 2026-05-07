@@ -24,7 +24,7 @@ export const problemesFixed: ProblemeDuJour[] = [
         label: "Chercher le calcul",
         type: "guided",
         content:
-          "25 % = 1/4. Donc 25 % de 20 = 20 ÷ 4 = 5. Puis on calcule 20 - 5 = 15.",
+          "25 % = 1/4. Donc 25 % de 20 = ?. Puis on calcule 20 - ton resultat = ?",
       },
       {
         id: "indice",
