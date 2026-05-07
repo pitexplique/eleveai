@@ -122,14 +122,15 @@ export type ThalesCanvasData = {
     Record<"AB" | "AC" | "BC" | "AM" | "AN" | "MN" | "BM" | "CN", string>
   >;
 
-  display?: {
-    showPoints?: boolean;
-    showLabels?: boolean;
-    showSideLabels?: boolean;
-    showParallelMarks?: boolean;
-    highlightParallel?: boolean;
-    highlightRatios?: boolean;
-  };
+    display?: {
+      showPoints?: boolean;
+      showLabels?: boolean;
+      showSideLabels?: boolean;
+      showParallelMarks?: boolean;
+      highlightParallel?: boolean;
+      highlightRatios?: boolean;
+      showFormula?: boolean;
+    };
 
   colors?: {
     triangleStroke?: string;

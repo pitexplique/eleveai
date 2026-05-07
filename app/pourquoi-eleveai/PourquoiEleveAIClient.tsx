@@ -1,5 +1,4 @@
-
-//app/pourquoi--eleveai/PourquoiEleveAIClient.tsx
+// app/pourquoi-eleveai/PourquoiEleveAIClient.tsx
 "use client";
 
 import Link from "next/link";
@@ -29,194 +28,164 @@ export default function PourquoiEleveAIClient() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }}
       />
 
-      {/* HERO */}
-      <section className="border-b border-slate-800 bg-gradient-to-b from-slate-900/60 to-slate-950">
-        <div className="mx-auto max-w-4xl px-4 py-12 sm:py-16 space-y-8">
-          <div className="text-sm text-slate-400 flex items-center gap-2">
-            <Link href="/" className="hover:text-emerald-300 transition">
+      <section className="border-b border-slate-800 bg-gradient-to-b from-emerald-950/30 via-slate-900 to-slate-950">
+        <div className="mx-auto max-w-5xl px-4 py-12 sm:py-16">
+          <div className="mb-8 flex items-center gap-2 text-sm text-slate-400">
+            <Link href="/" className="hover:text-emerald-300">
               Accueil
             </Link>
-            <span className="text-slate-600">/</span>
+            <span>/</span>
             <span className="text-slate-200">Pourquoi EleveAI</span>
           </div>
 
-          <header className="space-y-4">
-            <p className="inline-flex items-center rounded-full border border-emerald-500/40 bg-emerald-500/10 px-3 py-1 text-xs font-medium uppercase tracking-wide text-emerald-300">
-              EleveAI · Marque éducative · IA encadrée
+          <header className="space-y-5">
+            <p className="inline-flex rounded-full border border-emerald-400/40 bg-emerald-400/10 px-4 py-1 text-xs font-bold uppercase tracking-wide text-emerald-300">
+              Apprendre · Raisonner · Progresser
             </p>
 
-            <h1 className="text-3xl sm:text-4xl font-bold tracking-tight">
-              Pourquoi EleveAI ?
+            <h1 className="max-w-3xl text-3xl font-black tracking-tight sm:text-5xl">
+              EleveAI aide les élèves à progresser sans faire à leur place.
             </h1>
 
-            <p className="max-w-2xl text-slate-300">
-              Le nom{" "}
-              <span className="font-semibold text-slate-100">EleveAI</span>{" "}
-              ressemble à “élève” — et c’est volontaire : notre objectif n’est pas
-              de faire à la place, mais d’aider à{" "}
-              <span className="font-semibold">apprendre</span>,{" "}
-              <span className="font-semibold">comprendre</span> et{" "}
-              <span className="font-semibold">devenir autonome</span>.
+            <p className="max-w-3xl text-base leading-relaxed text-slate-300 sm:text-lg">
+              EleveAI est pensé pour renforcer les bases, développer le
+              raisonnement scientifique et redonner confiance aux élèves grâce à
+              des entraînements courts, guidés et réguliers.
             </p>
 
-            <div className="rounded-2xl border border-emerald-500/40 bg-slate-900/60 p-4 sm:p-5">
-              <p className="text-sm font-semibold text-emerald-300">En une phrase</p>
-              <p className="mt-2 text-sm text-slate-200">
-                EleveAI est une IA pédagogique{" "}
-                <span className="font-semibold">encadrée</span> — conçue pour
-                professeurs, parents et établissements — afin de favoriser la
-                méthode et la compréhension, pas la triche.
-              </p>
+            <div className="flex flex-col gap-3 sm:flex-row">
+              <Link
+                href="/auth/signin-eleve"
+                className="rounded-2xl bg-emerald-400 px-5 py-3 text-center text-sm font-black text-slate-950 hover:bg-emerald-300"
+              >
+                Connexion élève
+              </Link>
+
+              <Link
+                href="/accueil"
+                className="rounded-2xl border border-slate-700 px-5 py-3 text-center text-sm font-black text-slate-100 hover:bg-slate-900"
+              >
+                Découvrir EleveAI
+              </Link>
             </div>
           </header>
         </div>
       </section>
 
-      {/* CONTENT */}
-      <section className="mx-auto max-w-4xl px-4 py-10 sm:py-12 space-y-8">
-        {/* Pourquoi (fond) */}
-        <div className="rounded-2xl border border-slate-800 bg-slate-900/60 p-5 sm:p-6 space-y-3">
-          <h2 className="text-xl font-semibold text-slate-50">
-            Le problème : l’IA existe déjà… souvent sans cadre
-          </h2>
-          <p className="text-sm text-slate-300">
-            Les élèves utilisent l’IA. Sans règles, cela mène facilement à la copie,
-            à la perte de méthode et à une fausse impression de réussite.
-            EleveAI part de l’idée inverse :{" "}
-            <span className="font-semibold text-slate-100">
-              l’IA doit obliger à réfléchir
-            </span>
-            .
-          </p>
+      <section className="mx-auto max-w-5xl px-4 py-10 sm:py-14">
+        <div className="grid gap-5 sm:grid-cols-3">
+          {[
+            {
+              title: "Automatismes",
+              text: "Des entraînements courts pour consolider les bases en mathématiques.",
+              href: "/calcul-rapide",
+              cta: "Calcul rapide",
+            },
+            {
+              title: "Raisonnement",
+              text: "Des questions guidées pour apprendre à chercher, justifier et corriger.",
+              href: "/coach-maths-ia",
+              cta: "Coach Maths IA",
+            },
+            {
+              title: "Mémoire",
+              text: "Des leçons courtes et régulières pour réactiver les notions essentielles.",
+              href: "/lecon-du-jour",
+              cta: "Leçon du jour",
+            },
+          ].map((item) => (
+            <div
+              key={item.title}
+              className="rounded-3xl border border-slate-800 bg-slate-900/70 p-5 shadow-xl"
+            >
+              <h2 className="text-xl font-black text-emerald-300">
+                {item.title}
+              </h2>
+              <p className="mt-3 text-sm leading-relaxed text-slate-300">
+                {item.text}
+              </p>
+              <Link
+                href={item.href}
+                className="mt-5 inline-flex text-sm font-bold text-emerald-300 hover:text-emerald-200"
+              >
+                {item.cta} →
+              </Link>
+            </div>
+          ))}
         </div>
 
-        {/* Ce qui rend EleveAI différente */}
-        <div className="rounded-2xl border border-emerald-500/40 bg-slate-900/60 p-5 sm:p-6 space-y-4">
-          <h2 className="text-xl font-semibold text-emerald-300">
-            Ce qui rend EleveAI différente
+        <div className="mt-10 rounded-3xl border border-slate-800 bg-slate-900/70 p-6 sm:p-8">
+          <h2 className="text-2xl font-black text-slate-50">
+            Une IA discrète, au service de l’apprentissage
           </h2>
 
-          <div className="grid gap-3 sm:grid-cols-2 text-sm">
+          <p className="mt-4 text-sm leading-relaxed text-slate-300 sm:text-base">
+            EleveAI n’est pas conçu pour donner directement une réponse à
+            recopier. L’objectif est d’aider l’élève à comprendre la méthode, à
+            repérer ses erreurs et à progresser étape par étape.
+          </p>
+
+          <div className="mt-6 grid gap-4 sm:grid-cols-2">
             {[
-              ["Anti-triche par design", "Pas de production prête à rendre : méthode, justification, correction."],
-              ["Transparence", "L’élève apprend à montrer sa démarche et ses choix."],
-              ["Le professeur reste la référence", "L’IA assiste, ne remplace pas le métier."],
-              ["Accessible", "Reformulation, pas à pas, supports simples et DYS-friendly."],
-            ].map(([t, d]) => (
+              "L’élève reste actif.",
+              "L’erreur devient un moment d’apprentissage.",
+              "Les exercices sont progressifs.",
+              "Le professeur garde son rôle essentiel.",
+              "Les parents peuvent accompagner sans faire à la place.",
+              "L’IA reste encadrée et pédagogique.",
+            ].map((text) => (
               <div
-                key={t}
-                className="rounded-2xl border border-slate-800 bg-slate-950/40 p-4"
+                key={text}
+                className="rounded-2xl border border-slate-800 bg-slate-950/50 p-4 text-sm font-semibold text-slate-200"
               >
-                <p className="font-semibold text-slate-50">{t}</p>
-                <p className="mt-1 text-slate-300">{d}</p>
+                ✅ {text}
               </div>
             ))}
           </div>
-
-          <div className="text-sm text-slate-400">
-            Pour le cadre complet :{" "}
-            <Link href="/charte" className="text-emerald-300 font-semibold hover:text-emerald-200">
-              lire la charte
-            </Link>
-            {" · "}
-            <Link href="/faq" className="text-emerald-300 font-semibold hover:text-emerald-200">
-              consulter la FAQ
-            </Link>
-          </div>
         </div>
 
-        {/* Conversion : 3 publics */}
-        <div className="rounded-2xl border border-slate-800 bg-slate-900/60 p-5 sm:p-6 space-y-4">
-          <h2 className="text-xl font-semibold text-slate-50">
-            Choisissez votre accès
+        <div className="mt-10 rounded-3xl border border-emerald-500/30 bg-emerald-500/10 p-6 sm:p-8">
+          <h2 className="text-2xl font-black text-emerald-300">
+            Pourquoi maintenant ?
           </h2>
 
-          <div className="grid gap-4 sm:grid-cols-3">
-            {/* Profs */}
-            <div className="rounded-2xl border border-slate-800 bg-slate-950/40 p-4">
-              <p className="font-semibold text-emerald-300">Professeurs</p>
-              <p className="mt-2 text-sm text-slate-300">
-                Préparer, différencier, remédier, encadrer l’IA en classe.
-              </p>
-              <div className="mt-3 flex flex-col gap-2">
-                <Link
-                  href="/espace-profs"
-                  className="rounded-xl border border-emerald-500/60 bg-emerald-500/10 px-3 py-2 text-sm font-semibold text-emerald-200 hover:bg-emerald-500/20 transition text-center"
-                >
-                  Accès prof
-                </Link>
-                <Link
-                  href="/tarifs"
-                  className="text-xs text-slate-400 hover:text-slate-200 text-center"
-                >
-                  Voir l’abonnement prof
-                </Link>
-              </div>
-            </div>
-
-            {/* Parents */}
-            <div className="rounded-2xl border border-slate-800 bg-slate-950/40 p-4">
-              <p className="font-semibold text-emerald-300">Parents</p>
-              <p className="mt-2 text-sm text-slate-300">
-                Aider sans faire à la place. Suivre la méthode et la progression.
-              </p>
-              <div className="mt-3 flex flex-col gap-2">
-                <Link
-                  href="/espace-parents"
-                  className="rounded-xl border border-emerald-500/60 bg-emerald-500/10 px-3 py-2 text-sm font-semibold text-emerald-200 hover:bg-emerald-500/20 transition text-center"
-                >
-                  Accès parent
-                </Link>
-                <Link
-                  href="/tarifs"
-                  className="text-xs text-slate-400 hover:text-slate-200 text-center"
-                >
-                  Voir l’abonnement parent
-                </Link>
-              </div>
-            </div>
-
-            {/* Établissements */}
-            <div className="rounded-2xl border border-slate-800 bg-slate-950/40 p-4">
-              <p className="font-semibold text-emerald-300">Établissements</p>
-              <p className="mt-2 text-sm text-slate-300">
-                Pilote encadré, charte, gouvernance, accompagnement.
-              </p>
-              <div className="mt-3 flex flex-col gap-2">
-                <Link
-                  href="/offre-pilote"
-                  className="rounded-xl border border-sky-500 bg-sky-500/10 px-3 py-2 text-sm font-semibold text-sky-100 hover:bg-sky-500/20 transition text-center"
-                >
-                  Offre pilote
-                </Link>
-                <Link
-                  href="/contact"
-                  className="text-xs text-slate-400 hover:text-slate-200 text-center"
-                >
-                  Demander un devis
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Preuve & confiance */}
-        <div className="rounded-2xl border border-slate-800 bg-slate-900/60 p-5 sm:p-6 space-y-3">
-          <h2 className="text-xl font-semibold text-slate-50">
-            Une marque, pas un gadget
-          </h2>
-          <p className="text-sm text-slate-300">
-            EleveAI met l’humain au centre : le professeur garde la main, l’élève apprend
-            par étapes, et les familles sont rassurées par un cadre clair.
+          <p className="mt-4 text-sm leading-relaxed text-slate-200 sm:text-base">
+            Les élèves ont besoin de bases solides, de méthode et d’autonomie.
+            EleveAI répond à ce besoin avec des parcours simples, motivants et
+            réguliers : un peu chaque jour, pour progresser durablement.
           </p>
-          <div className="text-sm text-slate-400">
-            En savoir plus :{" "}
-            <Link href="/qui-sommes-nous" className="text-emerald-300 font-semibold hover:text-emerald-200">
-              Qui sommes-nous
+        </div>
+
+        <div className="mt-10 grid gap-5 sm:grid-cols-2">
+          <div className="rounded-3xl border border-slate-800 bg-slate-900/70 p-6">
+            <h2 className="text-xl font-black text-slate-50">
+              Pour les élèves
+            </h2>
+            <p className="mt-3 text-sm leading-relaxed text-slate-300">
+              S’entraîner, comprendre ses erreurs, reprendre confiance et voir
+              sa progression.
+            </p>
+            <Link
+              href="/auth/signin-eleve"
+              className="mt-5 inline-flex rounded-2xl bg-emerald-400 px-4 py-2 text-sm font-black text-slate-950 hover:bg-emerald-300"
+            >
+              Se connecter
             </Link>
-            {" · "}
-            <Link href="/faq" className="text-emerald-300 font-semibold hover:text-emerald-200">
-              FAQ
+          </div>
+
+          <div className="rounded-3xl border border-slate-800 bg-slate-900/70 p-6">
+            <h2 className="text-xl font-black text-slate-50">
+              Pour les familles et les professeurs
+            </h2>
+            <p className="mt-3 text-sm leading-relaxed text-slate-300">
+              Un cadre rassurant : l’élève apprend à faire, à expliquer et à
+              progresser sans tricher.
+            </p>
+            <Link
+              href="/contact"
+              className="mt-5 inline-flex rounded-2xl border border-slate-700 px-4 py-2 text-sm font-black text-slate-100 hover:bg-slate-800"
+            >
+              Nous contacter
             </Link>
           </div>
         </div>

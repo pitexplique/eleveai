@@ -1,76 +1,93 @@
 // tutor-v4/components/ThalesCanvas.tsx
 "use client";
 
-/**
- * ============================================
- * 🎯 THALES CANVAS — Tutor V4
- * ============================================
- *
- * Ce composant affiche une configuration de Thalès.
- *
- * ✔ Variantes :
- * - "triangle" → niveau 4e (programme officiel)
- * - "papillon" → prévu pour 3e (non utilisé ici)
- *
- * ✔ Objectifs pédagogiques :
- * - visualiser des droites parallèles
- * - repérer les points A, B, C, M, N
- * - comprendre les rapports :
- *      AM / AB = AN / AC
- * - aider à la rédaction
- *
- * ============================================
- * 🧪 EXEMPLE D’UTILISATION (QuestionBank)
- * ============================================
- *
- * canvas: {
- *   kind: "thales",
- *   variant: "triangle",
- *
- *   sideLabels: {
- *     AM: "3 cm",
- *     AB: "6 cm",
- *     AN: "4 cm",
- *     AC: "?",
- *   },
- *
- *   display: {
- *     showPoints: true,
- *     showLabels: true,
- *     showSideLabels: true,
- *     showParallelMarks: true,
- *     highlightParallel: true,
- *   },
- * }
- *
- * ============================================
- */
-
 import type { ThalesCanvasData } from "@/lib/tutor-v4/types";
 
 type Props = {
   figure: ThalesCanvasData;
 };
 
+type Point = { x: number; y: number };
+
+function mid(P: Point, Q: Point) {
+  return {
+    x: (P.x + Q.x) / 2,
+    y: (P.y + Q.y) / 2,
+  };
+}
+
+function labelText(
+  x: number,
+  y: number,
+  text: string,
+  color = "#0f172a",
+  anchor: "start" | "middle" | "end" = "middle"
+) {
+  return (
+    <text
+      x={x}
+      y={y}
+      textAnchor={anchor}
+      fontSize="13"
+      fontWeight="900"
+      fill={color}
+      stroke="white"
+      strokeWidth="3"
+      paintOrder="stroke"
+    >
+      {text}
+    </text>
+  );
+}
+
+function parallelMarks(P: Point, Q: Point, color: string, double = false) {
+  const mx = (P.x + Q.x) / 2;
+  const my = (P.y + Q.y) / 2;
+
+  return (
+    <g>
+      <line
+        x1={mx - 8}
+        y1={my - 6}
+        x2={mx + 2}
+        y2={my + 6}
+        stroke={color}
+        strokeWidth={2.5}
+        strokeLinecap="round"
+      />
+      {double ? (
+        <line
+          x1={mx + 2}
+          y1={my - 6}
+          x2={mx + 12}
+          y2={my + 6}
+          stroke={color}
+          strokeWidth={2.5}
+          strokeLinecap="round"
+        />
+      ) : null}
+    </g>
+  );
+}
+
 export default function ThalesCanvas({ figure }: Props) {
   if (figure.kind !== "thales") return null;
 
-  const width = figure.size?.width ?? 320;
-  const height = figure.size?.height ?? 240;
+  const width = figure.size?.width ?? 340;
+  const height = figure.size?.height ?? 250;
+
+  const variant = figure.variant ?? "triangle";
 
   const showLabels = figure.display?.showLabels ?? true;
   const showPoints = figure.display?.showPoints ?? true;
   const showSideLabels = figure.display?.showSideLabels ?? true;
   const showParallelMarks = figure.display?.showParallelMarks ?? true;
+  const highlightParallel = figure.display?.highlightParallel ?? true;
+  const showFormula = figure.display?.showFormula ?? true;
 
-  const A = { x: 60, y: 200 };
-  const B = { x: 260, y: 200 };
-  const C = { x: 180, y: 60 };
-
-  const M = { x: 120, y: 200 };
-  const N = { x: 160, y: 140 };
-
-  const parallelColor = "#dc2626";
+  const strokeMain = "#0f172a";
+  const parallelColor = highlightParallel ? "#dc2626" : "#0f172a";
+  const helperColor = "#64748b";
 
   const getLabel = (key: "A" | "B" | "C" | "M" | "N", fallback: string) =>
     figure.labels?.[key] ?? fallback;
@@ -79,14 +96,104 @@ export default function ThalesCanvas({ figure }: Props) {
     key: "AB" | "AC" | "BC" | "AM" | "AN" | "MN" | "BM" | "CN"
   ) => figure.sideLabels?.[key];
 
+  if (variant === "papillon") {
+    const A = { x: 170, y: 125 };
+    const B = { x: 55, y: 215 };
+    const C = { x: 285, y: 35 };
+    const M = { x: 65, y: 35 };
+    const N = { x: 275, y: 215 };
+
+    return (
+      <div className="mx-auto w-full max-w-[360px] rounded-xl border border-slate-200 bg-white p-3 shadow-sm">
+        <svg viewBox={`0 0 ${width} ${height}`} className="block h-auto w-full">
+          <line x1={B.x} y1={B.y} x2={C.x} y2={C.y} stroke={strokeMain} strokeWidth={2.5} />
+          <line x1={M.x} y1={M.y} x2={N.x} y2={N.y} stroke={strokeMain} strokeWidth={2.5} />
+
+          <line x1={B.x} y1={B.y} x2={M.x} y2={M.y} stroke={parallelColor} strokeWidth={3} />
+          <line x1={C.x} y1={C.y} x2={N.x} y2={N.y} stroke={parallelColor} strokeWidth={3} />
+
+          {showParallelMarks ? (
+            <>
+              {parallelMarks(B, M, parallelColor)}
+              {parallelMarks(C, N, parallelColor)}
+            </>
+          ) : null}
+
+          {showPoints
+            ? [A, B, C, M, N].map((p, i) => (
+                <circle key={i} cx={p.x} cy={p.y} r={4} fill={strokeMain} />
+              ))
+            : null}
+
+          {showLabels ? (
+            <>
+              {labelText(A.x, A.y - 10, getLabel("A", "A"))}
+              {labelText(B.x - 8, B.y + 18, getLabel("B", "B"), strokeMain, "end")}
+              {labelText(C.x + 8, C.y - 8, getLabel("C", "C"), strokeMain, "start")}
+              {labelText(M.x - 8, M.y - 8, getLabel("M", "M"), strokeMain, "end")}
+              {labelText(N.x + 8, N.y + 18, getLabel("N", "N"), strokeMain, "start")}
+            </>
+          ) : null}
+
+          {showSideLabels ? (
+            <>
+              {getSideLabel("AB")
+                ? labelText(mid(A, B).x - 12, mid(A, B).y + 10, getSideLabel("AB")!)
+                : null}
+              {getSideLabel("AC")
+                ? labelText(mid(A, C).x + 14, mid(A, C).y - 8, getSideLabel("AC")!)
+                : null}
+              {getSideLabel("AM")
+                ? labelText(mid(A, M).x - 14, mid(A, M).y - 8, getSideLabel("AM")!)
+                : null}
+              {getSideLabel("AN")
+                ? labelText(mid(A, N).x + 14, mid(A, N).y + 12, getSideLabel("AN")!)
+                : null}
+              {getSideLabel("BM")
+                ? labelText(mid(B, M).x - 22, mid(B, M).y, getSideLabel("BM")!, parallelColor)
+                : null}
+              {getSideLabel("CN")
+                ? labelText(mid(C, N).x + 22, mid(C, N).y, getSideLabel("CN")!, parallelColor)
+                : null}
+            </>
+          ) : null}
+
+          {showFormula ? (
+            <text
+              x={width / 2}
+              y={height - 12}
+              textAnchor="middle"
+              fontSize="13"
+              fontWeight="900"
+              fill="#16a34a"
+              stroke="white"
+              strokeWidth="3"
+              paintOrder="stroke"
+            >
+              AM / AN = AB / AC
+            </text>
+          ) : null}
+        </svg>
+      </div>
+    );
+  }
+
+  const A = { x: 55, y: 210 };
+  const B = { x: 285, y: 210 };
+  const C = { x: 180, y: 35 };
+
+  const M = { x: 120, y: 210 };
+  const N = { x: 150, y: 115 };
+
   return (
-    <div className="mx-auto w-full max-w-[320px] rounded-xl border bg-white p-2">
-      <svg viewBox={`0 0 ${width} ${height}`} className="h-auto w-full">
+    <div className="mx-auto w-full max-w-[360px] rounded-xl border border-slate-200 bg-white p-3 shadow-sm">
+      <svg viewBox={`0 0 ${width} ${height}`} className="block h-auto w-full">
         <polygon
           points={`${A.x},${A.y} ${B.x},${B.y} ${C.x},${C.y}`}
           fill="none"
-          stroke="#0f172a"
+          stroke={strokeMain}
           strokeWidth={2.5}
+          strokeLinejoin="round"
         />
 
         <line
@@ -95,86 +202,87 @@ export default function ThalesCanvas({ figure }: Props) {
           x2={N.x}
           y2={N.y}
           stroke={parallelColor}
-          strokeWidth={2.5}
+          strokeWidth={3}
+          strokeLinecap="round"
         />
 
-        {showParallelMarks && (
+        <line
+          x1={A.x}
+          y1={A.y}
+          x2={N.x}
+          y2={N.y}
+          stroke={helperColor}
+          strokeWidth={1.2}
+          strokeDasharray="4 4"
+          opacity={0.45}
+        />
+
+        {showParallelMarks ? (
           <>
-            <line
-              x1={200}
-              y1={120}
-              x2={210}
-              y2={130}
-              stroke={parallelColor}
-              strokeWidth={2}
-            />
-            <line
-              x1={210}
-              y1={120}
-              x2={220}
-              y2={130}
-              stroke={parallelColor}
-              strokeWidth={2}
-            />
+            {parallelMarks(M, N, parallelColor)}
+            {parallelMarks(B, C, parallelColor)}
           </>
-        )}
+        ) : null}
 
-        {showPoints &&
-          [A, B, C, M, N].map((p, i) => (
-            <circle key={i} cx={p.x} cy={p.y} r={3.5} fill="#0f172a" />
-          ))}
+        {showPoints
+          ? [A, B, C, M, N].map((p, i) => (
+              <circle key={i} cx={p.x} cy={p.y} r={4} fill={strokeMain} />
+            ))
+          : null}
 
-        {showLabels && (
+        {showLabels ? (
           <>
-            <text x={A.x - 10} y={A.y + 15}>
-              {getLabel("A", "A")}
-            </text>
-            <text x={B.x + 5} y={B.y + 15}>
-              {getLabel("B", "B")}
-            </text>
-            <text x={C.x} y={C.y - 10}>
-              {getLabel("C", "C")}
-            </text>
-            <text x={M.x - 10} y={M.y + 15}>
-              {getLabel("M", "M")}
-            </text>
-            <text x={N.x + 5} y={N.y - 5}>
-              {getLabel("N", "N")}
-            </text>
+            {labelText(A.x - 8, A.y + 18, getLabel("A", "A"), strokeMain, "end")}
+            {labelText(B.x + 8, B.y + 18, getLabel("B", "B"), strokeMain, "start")}
+            {labelText(C.x, C.y - 10, getLabel("C", "C"))}
+            {labelText(M.x, M.y + 18, getLabel("M", "M"))}
+            {labelText(N.x - 8, N.y - 8, getLabel("N", "N"), strokeMain, "end")}
           </>
-        )}
+        ) : null}
 
-        {showSideLabels && (
+        {showSideLabels ? (
           <>
-            {getSideLabel("AM") && (
-              <text x={(A.x + M.x) / 2} y={A.y + 25}>
-                {getSideLabel("AM")}
-              </text>
-            )}
+            {getSideLabel("AM")
+              ? labelText(mid(A, M).x, A.y + 32, getSideLabel("AM")!)
+              : null}
 
-            {getSideLabel("AB") && (
-              <text x={(A.x + B.x) / 2} y={A.y + 40}>
-                {getSideLabel("AB")}
-              </text>
-            )}
+            {getSideLabel("AB")
+              ? labelText(mid(A, B).x, A.y + 48, getSideLabel("AB")!)
+              : null}
 
-            {getSideLabel("AN") && (
-              <text x={(A.x + N.x) / 2 - 10} y={(A.y + N.y) / 2}>
-                {getSideLabel("AN")}
-              </text>
-            )}
+            {getSideLabel("AN")
+              ? labelText(mid(A, N).x - 20, mid(A, N).y - 4, getSideLabel("AN")!)
+              : null}
 
-            {getSideLabel("AC") && (
-              <text x={(A.x + C.x) / 2 - 15} y={(A.y + C.y) / 2 - 10}>
-                {getSideLabel("AC")}
-              </text>
-            )}
+            {getSideLabel("AC")
+              ? labelText(mid(A, C).x - 28, mid(A, C).y - 16, getSideLabel("AC")!)
+              : null}
+
+            {getSideLabel("MN")
+              ? labelText(mid(M, N).x - 18, mid(M, N).y + 4, getSideLabel("MN")!, parallelColor)
+              : null}
+
+            {getSideLabel("BC")
+              ? labelText(mid(B, C).x + 24, mid(B, C).y + 2, getSideLabel("BC")!, parallelColor)
+              : null}
           </>
-        )}
+        ) : null}
 
-        <text x={100} y={220} fill="#16a34a" fontWeight="bold">
-          AM / AB = AN / AC
-        </text>
+        {showFormula ? (
+          <text
+            x={width / 2}
+            y={height - 12}
+            textAnchor="middle"
+            fontSize="13"
+            fontWeight="900"
+            fill="#16a34a"
+            stroke="white"
+            strokeWidth="3"
+            paintOrder="stroke"
+          >
+            AM / AB = AN / AC = MN / BC
+          </text>
+        ) : null}
       </svg>
     </div>
   );
