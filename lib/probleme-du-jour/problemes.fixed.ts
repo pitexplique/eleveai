@@ -17,7 +17,7 @@ export const problemesFixed: ProblemeDuJour[] = [
         label: "Faire un schéma",
         type: "guided",
         content:
-          "Imagine une barre qui représente 20 €. Coupe-la en 4 parts égales. Une part vaut 5 €. La réduction est donc de 5 €.",
+          "Imagine une barre qui représente 20 €. Coupe-la en ? parts égales. Une part donc ...",
       },
       {
         id: "calcul",
