@@ -4,40 +4,67 @@ import type { Metadata } from "next";
 const SITE_URL = "https://eleveai.fr";
 
 export const metadata: Metadata = {
-  title: "EleveAI • Valeria — IA encadrée (Éducation & Entreprise)",
+  title:
+    "EleveAI — Mathématiques, automatismes et raisonnement scientifique",
 
   description:
-    "EleveAI génère des ressources pédagogiques robustes. Valeria (score /20) clarifie et optimise vos prompts avec des critères mesurables : éducation, formation, entreprise (procédures, qualité, checklists).",
+    "EleveAI aide les élèves à progresser en mathématiques grâce à des entraînements courts, du calcul rapide, des parcours guidés et des explications étape par étape. Une approche pédagogique centrée sur les automatismes, le raisonnement et la confiance.",
 
   alternates: {
     canonical: `${SITE_URL}/accueil`,
   },
 
   openGraph: {
-    title: "EleveAI • Valeria — IA encadrée (Éducation & Entreprise)",
+    title:
+      "EleveAI — Apprendre, raisonner, progresser en mathématiques",
+
     description:
-      "Clarifier → mesurer → améliorer. Valeria (score /20) renforce la robustesse des prompts. EleveAI génère des ressources pour l’école. Valeria Consulting accompagne aussi les entreprises (formation, procédures, qualité).",
+      "Calcul rapide, parcours guidés, leçon du jour et entraînement progressif : EleveAI aide les élèves à consolider leurs bases et développer leur raisonnement scientifique.",
+
     url: `${SITE_URL}/accueil`,
     type: "website",
     siteName: "EleveAI",
     locale: "fr_FR",
+
     images: [
       {
-        url: "/preview.jpg", // garde ton image ou remplace par /preview-valeria.jpg
+        url: "/preview.jpg",
         width: 1200,
         height: 630,
-        alt: "EleveAI • Valeria — IA encadrée pour l’éducation et l’entreprise",
+        alt: "EleveAI — plateforme pédagogique de mathématiques",
       },
     ],
   },
 
   twitter: {
     card: "summary_large_image",
-    title: "EleveAI • Valeria — IA encadrée (Éducation & Entreprise)",
+
+    title:
+      "EleveAI — Mathématiques, automatismes et progression",
+
     description:
-      "Valeria (score /20) clarifie et sécurise vos prompts. EleveAI génère des ressources pédagogiques. Entreprises : formation, procédures, qualité (critères mesurables).",
+      "Une plateforme pédagogique pour aider les élèves à progresser grâce au calcul rapide, aux parcours guidés et au raisonnement étape par étape.",
+
     images: ["/preview.jpg"],
   },
+
+  keywords: [
+    "mathématiques",
+    "calcul rapide",
+    "automatismes",
+    "raisonnement scientifique",
+    "brevet 2026",
+    "révision maths",
+    "collège",
+    "6e",
+    "5e",
+    "4e",
+    "3e",
+    "entraînement mathématiques",
+    "parcours pédagogique",
+    "EleveAI",
+    "La Réunion",
+  ],
 };
 
 

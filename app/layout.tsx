@@ -22,13 +22,12 @@ const SITE_URL = "https://eleveai.fr";
 const CANONICAL = "/accueil";
 
 export const viewport: Viewport = {
-  themeColor: "#2563eb",
+  themeColor: "#020617",
 };
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
 
-  // PWA
   manifest: "/manifest.webmanifest",
 
   appleWebApp: {
@@ -42,26 +41,31 @@ export const metadata: Metadata = {
     apple: "/icons/icon-192.png",
   },
 
-  // SEO
   title: {
-    default: "EleveAI — IA pédagogique à La Réunion",
+    default: "EleveAI — Mathématiques, automatismes et raisonnement",
     template: "%s — EleveAI",
   },
 
   description:
-    "EleveAI accompagne les professeurs et les élèves : leçon du jour, coach maths, défis et parcours de progression.",
+    "EleveAI aide les élèves à progresser en mathématiques grâce au calcul rapide, aux parcours guidés, à la leçon du jour et à des entraînements courts centrés sur les automatismes et le raisonnement.",
 
   keywords: [
     "EleveAI",
-    "leçon du jour",
-    "maths collège",
-    "IA pédagogique",
+    "mathématiques",
+    "calcul rapide",
+    "automatismes",
+    "raisonnement scientifique",
     "coach maths",
-    "révision quotidienne",
-    "La Réunion",
-    "élèves",
+    "leçon du jour",
+    "parcours de progression",
+    "révision maths",
     "collège",
-    "lycée",
+    "6e",
+    "5e",
+    "4e",
+    "3e",
+    "brevet 2026",
+    "La Réunion",
   ],
 
   alternates: {
@@ -69,9 +73,9 @@ export const metadata: Metadata = {
   },
 
   openGraph: {
-    title: "EleveAI — 1 leçon par jour",
+    title: "EleveAI — Apprendre, raisonner, progresser",
     description:
-      "Progresse en maths avec une leçon du jour. Installe EleveAI sur ton téléphone 📱",
+      "Calcul rapide, leçon du jour, coach maths et parcours guidés : EleveAI accompagne les élèves pour consolider leurs bases et développer leur raisonnement.",
     url: CANONICAL,
     type: "website",
     siteName: "EleveAI",
@@ -81,15 +85,16 @@ export const metadata: Metadata = {
         url: "/preview.jpg",
         width: 1200,
         height: 630,
-        alt: "EleveAI — IA pédagogique",
+        alt: "EleveAI — plateforme pédagogique de mathématiques",
       },
     ],
   },
 
   twitter: {
     card: "summary_large_image",
-    title: "EleveAI — 1 leçon par jour",
-    description: "Une leçon de maths chaque jour pour progresser rapidement.",
+    title: "EleveAI — Mathématiques et progression",
+    description:
+      "Une plateforme pédagogique pour progresser en maths avec des entraînements courts, réguliers et guidés.",
     images: ["/preview.jpg"],
   },
 };
@@ -106,6 +111,7 @@ export default function RootLayout({
       name: "EleveAI",
       url: SITE_URL,
       logo: `${SITE_URL}/preview.jpg`,
+      sameAs: [],
     },
     {
       "@context": "https://schema.org",
@@ -116,11 +122,24 @@ export default function RootLayout({
     },
     {
       "@context": "https://schema.org",
-      "@type": "WebApplication",
+      "@type": "EducationalApplication",
       name: "EleveAI",
       url: SITE_URL,
       applicationCategory: "EducationalApplication",
       operatingSystem: "Web",
+      educationalLevel: ["Collège"],
+      learningResourceType: [
+        "Calcul rapide",
+        "Leçon du jour",
+        "Parcours guidé",
+        "Entraînement mathématique",
+      ],
+      teaches: [
+        "Mathématiques",
+        "Automatismes",
+        "Raisonnement scientifique",
+        "Résolution de problèmes",
+      ],
       inLanguage: "fr-FR",
     },
     {
