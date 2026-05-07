@@ -11,6 +11,7 @@ import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 // =========================
 
 import { nombresRationnelsBank } from "./nombres_rationnels.bank";
+import { calculLitteralBank } from "./calcul_litteral.bank";
 import { puissancesBank } from "./puissances.bank";
 import { racineCarreeBank } from "./racine_carree.bank";
 import { arithmetiqueBank } from "./arithmetique.bank";
@@ -30,6 +31,7 @@ import { affineBank } from "./affine.bank";
 
 export const maths3eQuestionBank: TutorBankItemV4[] = [
   ...nombresRationnelsBank,
+  ...calculLitteralBank,
   ...puissancesBank,
   ...racineCarreeBank,
   ...arithmetiqueBank,
