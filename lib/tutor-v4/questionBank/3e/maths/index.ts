@@ -11,19 +11,28 @@ import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 // =========================
 
 import { nombresRationnelsBank } from "./nombres_rationnels.bank";
-import { calculLitteralBank } from "./calcul_litteral.bank";
 import { puissancesBank } from "./puissances.bank";
 import { racineCarreeBank } from "./racine_carree.bank";
 import { arithmetiqueBank } from "./arithmetique.bank";
-import { volumesBank } from "./volumes.bank";
+
 import { proportionnaliteBank } from "./proportionnalite.bank";
-import { pythagore3eBank } from "./pythagore.bank";
-import { fonctionsBank } from "./fonctions.bank";
-import { trigonometrieBank } from "./trigonometrie.bank";
-import { probabilitesBank } from "./probabilites.bank";
+
+import { calculLitteralBank } from "./calcul_litteral.bank";
 import { equationsBank } from "./equations.bank";
-import { statistiquesBank } from "./statistiques.bank";
+
+import { fonctionsBank } from "./fonctions.bank";
 import { affineBank } from "./affine.bank";
+
+import { pythagore3eBank } from "./pythagore.bank";
+import { trigonometrieBank } from "./trigonometrie.bank";
+import { trianglesBank } from "./triangles.bank";
+
+import { airesBank } from "./aires.bank";
+import { perimetresBank } from "./perimetres.bank";
+import { volumesBank } from "./volumes.bank";
+
+import { probabilitesBank } from "./probabilites.bank";
+import { statistiquesBank } from "./statistiques.bank";
 
 // =========================
 // AGRÉGATION DES BANKS 3e
@@ -31,19 +40,28 @@ import { affineBank } from "./affine.bank";
 
 export const maths3eQuestionBank: TutorBankItemV4[] = [
   ...nombresRationnelsBank,
-  ...calculLitteralBank,
   ...puissancesBank,
   ...racineCarreeBank,
   ...arithmetiqueBank,
-  ...volumesBank,
+
   ...proportionnaliteBank,
-  ...pythagore3eBank,
-  ...fonctionsBank,
-  ...trigonometrieBank,
-  ...probabilitesBank,
+
+  ...calculLitteralBank,
   ...equationsBank,
-  ...statistiquesBank,
+
+  ...fonctionsBank,
   ...affineBank,
+
+  ...pythagore3eBank,
+  ...trigonometrieBank,
+
+  ...airesBank,
+  ...perimetresBank,
+  ...volumesBank,
+  ...trianglesBank,
+
+  ...probabilitesBank,
+  ...statistiquesBank,
 ];
 
 export function getMaths3eQuestionBank(args?: {
