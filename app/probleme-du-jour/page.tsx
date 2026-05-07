@@ -11,13 +11,13 @@ export default function ProblemeDuJourPage() {
     const today = new Date().getDay();
 
     const mapping: Record<number, number> = {
-      1: 0, // lundi
-      2: 1, // mardi
-      3: 2, // mercredi
-      4: 3, // jeudi
-      5: 4, // vendredi
-      6: 4, // samedi
-      0: 4, // dimanche
+      1: 0,
+      2: 1,
+      3: 2,
+      4: 3,
+      5: 4,
+      6: 4,
+      0: 4,
     };
 
     const index = mapping[today] ?? 0;
@@ -32,7 +32,6 @@ export default function ProblemeDuJourPage() {
   const [selectedDirectionId, setSelectedDirectionId] = useState<string | null>(
     null
   );
-
   const [answer, setAnswer] = useState("");
   const [showCorrection, setShowCorrection] = useState(false);
   const [pointsGagnes, setPointsGagnes] = useState<number | null>(null);
@@ -83,43 +82,43 @@ export default function ProblemeDuJourPage() {
 
   return (
     <main
-      className="relative min-h-screen bg-cover bg-center bg-fixed px-4 py-8 text-white"
+      className="relative min-h-screen bg-cover bg-center px-4 py-6 text-white"
       style={{
         backgroundImage: "url('/images/reunion.png')",
       }}
     >
       <div className="absolute inset-0 bg-slate-950/55" />
 
-      <section className="relative z-10 mx-auto max-w-3xl space-y-6">
-        <div className="text-sm text-slate-300">
+      <section className="relative z-10 mx-auto max-w-3xl space-y-5">
+        <div className="text-xs text-slate-300">
           <Link href="/accueil" className="hover:text-emerald-300">
             Accueil
           </Link>{" "}
           / Problème du jour
         </div>
 
-        <header className="rounded-3xl border border-emerald-500/30 bg-slate-900/70 p-6 shadow-2xl backdrop-blur-sm">
-          <p className="mb-2 text-xs font-bold uppercase tracking-wide text-emerald-300">
+        <header className="rounded-3xl border border-emerald-500/30 bg-slate-900/70 p-4 shadow-2xl backdrop-blur-sm">
+          <p className="mb-1 text-[11px] font-bold uppercase tracking-wide text-emerald-300">
             Problème du jour · {probleme.theme}
           </p>
 
-          <h1 className="text-2xl font-black text-white">{probleme.title}</h1>
+          <h1 className="text-xl font-black text-white">{probleme.title}</h1>
 
-          <p className="mt-4 text-base leading-relaxed text-slate-100">
+          <p className="mt-3 text-sm leading-relaxed text-slate-100">
             {probleme.statement}
           </p>
 
-          <p className="mt-4 rounded-2xl bg-emerald-400/10 p-4 text-lg font-bold text-emerald-200">
+          <p className="mt-3 rounded-2xl bg-emerald-400/10 p-3 text-base font-bold text-emerald-200">
             {probleme.question}
           </p>
         </header>
 
-        <section className="rounded-3xl border border-slate-700 bg-slate-900/70 p-5 backdrop-blur-sm">
-          <h2 className="mb-4 text-lg font-black text-white">
+        <section className="rounded-3xl border border-slate-700 bg-slate-900/70 p-4 backdrop-blur-sm">
+          <h2 className="mb-3 text-base font-black text-white">
             Choisis ton chemin 🧭
           </h2>
 
-          <div className="grid gap-3 sm:grid-cols-2">
+          <div className="grid gap-2 sm:grid-cols-2">
             {probleme.directions.map((direction) => {
               const active = selectedDirectionId === direction.id;
 
@@ -134,7 +133,7 @@ export default function ProblemeDuJourPage() {
                     setPointsGagnes(null);
                     setScoreAdded(false);
                   }}
-                  className={`rounded-2xl border p-4 text-left text-sm font-bold transition ${
+                  className={`rounded-2xl border p-3 text-left text-sm font-bold transition ${
                     active
                       ? "border-emerald-400 bg-emerald-400/10 text-emerald-200"
                       : "border-slate-700 bg-slate-950/80 text-slate-200 hover:bg-slate-800"
@@ -148,16 +147,16 @@ export default function ProblemeDuJourPage() {
         </section>
 
         {selectedDirection ? (
-          <section className="rounded-3xl border border-slate-700 bg-slate-900/70 p-5 backdrop-blur-sm">
+          <section className="rounded-3xl border border-slate-700 bg-slate-900/70 p-4 backdrop-blur-sm">
             <p className="text-sm font-black text-emerald-300">
               {selectedDirection.label}
             </p>
 
-            <p className="mt-3 text-sm leading-relaxed text-slate-100">
+            <p className="mt-2 text-sm leading-relaxed text-slate-100">
               {selectedDirection.content}
             </p>
 
-            <div className="mt-5 space-y-3">
+            <div className="mt-4 space-y-2">
               <label className="block text-sm font-bold text-slate-200">
                 Ta réponse
               </label>
@@ -172,7 +171,7 @@ export default function ProblemeDuJourPage() {
                     setScoreAdded(false);
                   }}
                   placeholder="Explique comment tu as réfléchi..."
-                  className="min-h-28 w-full rounded-2xl border border-slate-700 bg-slate-950/90 p-4 text-sm text-white outline-none focus:border-emerald-400"
+                  className="min-h-20 w-full rounded-2xl border border-slate-700 bg-slate-950/90 p-3 text-sm text-white outline-none focus:border-emerald-400"
                 />
               ) : (
                 <input
@@ -184,7 +183,7 @@ export default function ProblemeDuJourPage() {
                     setScoreAdded(false);
                   }}
                   placeholder="Cherche étape par étape..."
-                  className="w-full rounded-2xl border border-slate-700 bg-slate-950/90 p-4 text-sm text-white outline-none focus:border-emerald-400"
+                  className="w-full rounded-2xl border border-slate-700 bg-slate-950/90 p-3 text-sm text-white outline-none focus:border-emerald-400"
                 />
               )}
 
@@ -192,7 +191,7 @@ export default function ProblemeDuJourPage() {
                 type="button"
                 onClick={handleVerify}
                 disabled={!answer.trim()}
-                className="rounded-2xl bg-emerald-400 px-5 py-3 text-sm font-black text-slate-950 hover:bg-emerald-300 disabled:cursor-not-allowed disabled:opacity-50"
+                className="rounded-2xl bg-emerald-400 px-5 py-2.5 text-sm font-black text-slate-950 hover:bg-emerald-300 disabled:cursor-not-allowed disabled:opacity-50"
               >
                 Vérifier
               </button>
@@ -201,20 +200,20 @@ export default function ProblemeDuJourPage() {
         ) : null}
 
         {showCorrection ? (
-          <section className="rounded-3xl border border-emerald-500/30 bg-emerald-500/10 p-5 backdrop-blur-sm">
+          <section className="rounded-3xl border border-emerald-500/30 bg-emerald-500/10 p-4 backdrop-blur-sm">
             {selectedDirection?.type !== "open" ? (
-              <p className="text-lg font-black text-emerald-300">
+              <p className="text-base font-black text-emerald-300">
                 {isCorrect
                   ? `✅ Bonne réponse ! +${pointsGagnes ?? 0} points`
                   : "🦎 Tu es sur la bonne piste."}
               </p>
             ) : (
-              <p className="text-lg font-black text-emerald-300">
+              <p className="text-base font-black text-emerald-300">
                 🦎 Merci pour ton explication. +{pointsGagnes ?? 0} points
               </p>
             )}
 
-            <p className="mt-3 text-sm leading-relaxed text-slate-100">
+            <p className="mt-2 text-sm leading-relaxed text-slate-100">
               {probleme.explanation}
             </p>
           </section>
