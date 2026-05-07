@@ -5,10 +5,10 @@ const SITE_URL = "https://eleveai.fr";
 
 export const metadata: Metadata = {
   title:
-    "EleveAI — Mathématiques, automatismes et raisonnement",
+    "EleveAI — Coach Maths IA, calcul rapide et parcours de progression",
 
   description:
-    "EleveAI aide les élèves à progresser en mathématiques grâce au calcul rapide, aux parcours guidés, à la leçon du jour et à des entraînements réguliers centrés sur les automatismes et le raisonnement scientifique.",
+    "EleveAI aide les collégiens à progresser en mathématiques avec le Coach Maths IA, le calcul rapide, les parcours guidés, les défis et la leçon du jour.",
 
   alternates: {
     canonical: `${SITE_URL}/accueil`,
@@ -16,10 +16,10 @@ export const metadata: Metadata = {
 
   openGraph: {
     title:
-      "EleveAI — Apprendre, raisonner et progresser en mathématiques",
+      "EleveAI — Apprendre les maths autrement",
 
     description:
-      "Calcul rapide, leçon du jour, défis et parcours guidés : EleveAI aide les élèves à développer leurs automatismes et leur raisonnement scientifique.",
+      "Calcul rapide, Coach Maths IA, parcours guidés et leçon du jour : une plateforme conçue pour développer les automatismes, la compréhension et la progression des élèves.",
 
     url: `${SITE_URL}/accueil`,
     type: "website",
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
 
     images: [
       {
-        url: "/preview.jpg",
+        url: "/images/accueil-eleveai-reunion.png",
         width: 1200,
         height: 630,
         alt: "EleveAI — plateforme pédagogique de mathématiques",
@@ -40,29 +40,34 @@ export const metadata: Metadata = {
     card: "summary_large_image",
 
     title:
-      "EleveAI — Mathématiques, raisonnement et progression",
+      "EleveAI — Coach Maths IA et calcul rapide",
 
     description:
-      "Une plateforme pédagogique pour progresser en maths grâce au calcul rapide, aux défis et aux parcours guidés.",
+      "Une plateforme pédagogique moderne pour progresser en mathématiques grâce aux automatismes, aux défis et aux parcours personnalisés.",
 
-    images: ["/preview.jpg"],
+    images: ["/images/accueil-eleveai-reunion.png"],
   },
 
   keywords: [
+    "EleveAI",
     "mathématiques",
+    "coach maths IA",
     "calcul rapide",
+    "leçon du jour",
+    "parcours maths",
     "automatismes",
-    "raisonnement scientifique",
+    "raisonnement",
     "défis mathématiques",
-    "révision maths",
-    "collège",
+    "révision collège",
+    "entraînement maths",
     "6e",
     "5e",
     "4e",
     "3e",
-    "entraînement mathématiques",
-    "parcours pédagogique",
-    "EleveAI",
+    "maths collège",
+    "plateforme éducative",
+    "IA éducation",
     "La Réunion",
+    "apprendre autrement",
   ],
 };
