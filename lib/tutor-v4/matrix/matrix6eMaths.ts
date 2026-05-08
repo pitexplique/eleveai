@@ -29,45 +29,210 @@ const directParents: Record<string, string[]> = Object.fromEntries(
  * - M[B][A] = -1
  */
 const supportLinks: Record<string, string[]> = {
-  decimal_comparer: ["entier_compare"],
-  decimal_additionner: ["mental_addition"],
-  decimal_multiplier: ["mental_multiplication"],
-  decimal_diviser_par_entier: ["mental_division"],
+  // =========================
+  // NOMBRES / DÉCIMAUX
+  // =========================
+  decimal_comparer: ["entier_compare", "entier_rang"],
+  decimal_additionner: ["mental_addition", "entier_lire_ecrire"],
+  decimal_multiplier: ["mental_multiplication", "decimal_additionner"],
+  decimal_diviser_par_entier: ["mental_division", "decimal_lire_ecrire"],
 
-  fraction_decimal: ["decimal_comparer"],
-  fraction_compare: ["decimal_comparer"],
+  // =========================
+  // FRACTIONS / POURCENTAGES
+  // =========================
+  fraction_decimal: ["decimal_comparer", "decimal_lire_ecrire"],
+  fraction_compare: ["decimal_comparer", "fraction_quantite"],
 
-  pourcentage_decimal: ["decimal_multiplier"],
-  pourcentage_calcul_simple: ["mental_multiplication"],
+  pourcentage_decimal: ["decimal_multiplier", "fraction_decimal"],
+  pourcentage_calcul_simple: [
+    "mental_multiplication",
+    "fraction_quantite",
+    "pourcentage_decimal",
+  ],
 
-  prop_table: ["mental_multiplication"],
-  prop_unit: ["mental_division"],
+  // =========================
+  // PROPORTIONNALITÉ
+  // =========================
+  prop_table: ["mental_multiplication", "fraction_quantite"],
+  prop_coeff: ["prop_table", "decimal_multiplier"],
+  prop_unit: ["mental_division", "prop_table"],
+  prop_direct: ["prop_coeff", "prop_unit", "pourcentage_calcul_simple"],
+  prop_defis: ["prop_direct", "fraction_decimal", "decimal_multiplier"],
 
-  pose_verifier: ["mental_strategies"],
+  // =========================
+  // CALCUL POSÉ / MENTAL
+  // =========================
+  pose_verifier: ["mental_strategies", "entier_compare"],
 
-  longueur_probleme: ["entier_compare"],
-  perim_figure: ["longueur_comparer"],
-  perim_probleme: ["longueur_probleme"],
+  mental_strategies: [
+    "mental_addition",
+    "mental_subtraction",
+    "mental_multiplication",
+    "mental_division",
+  ],
 
+  // =========================
+  // LONGUEURS / PÉRIMÈTRES
+  // =========================
+  longueur_convertir: ["decimal_multiplier", "decimal_diviser_par_entier"],
+  longueur_comparer: ["entier_compare", "decimal_comparer"],
+  longueur_probleme: ["entier_compare", "decimal_comparer"],
+
+  perim_square: ["mental_multiplication", "longueur_mesurer"],
+  perim_rectangle: ["mental_addition", "mental_multiplication"],
+  perim_figure: ["longueur_comparer", "perim_square", "perim_rectangle"],
+  perim_probleme: ["longueur_probleme", "perim_figure"],
+
+  // =========================
+  // AIRES
+  // =========================
   area_compter: ["perim_figure"],
-  area_comparer: ["longueur_comparer"],
+  area_rectangle: ["decimal_multiplier", "longueur_mesurer"],
+  area_square: ["decimal_multiplier", "area_rectangle"],
+  area_comparer: ["longueur_comparer", "area_compter"],
   area_decomposer: ["area_rectangle", "area_square", "perim_figure"],
   area_problemes: [
     "longueur_probleme",
     "decimal_multiplier",
     "prop_direct",
+    "area_decomposer",
   ],
   area_defis: ["area_decomposer", "area_problemes"],
 
-  volume_lire: ["data_lire_tableau"],
-  triangle_possible_ou_non: ["longueur_comparer"],
+  // =========================
+  // VOLUMES
+  // =========================
+  volume_unite: ["area_comprendre"],
+  volume_compter: ["area_compter", "volume_unite"],
+  volume_comparer: ["volume_compter", "area_comparer"],
+  volume_assemblage: ["volume_compter"],
+  volume_lire: ["data_lire_tableau", "volume_compter"],
+  volume_defis: ["volume_lire", "volume_assemblage", "area_decomposer"],
 
-  quadrilatere_lire_proprietes: ["triangle_sommets_cotes"],
-  sym_reconnaitre: ["quadrilatere_identifier_nature"],
+  // =========================
+  // ANGLES / TRIANGLES
+  // =========================
+  angle_compare: ["angle_droit"],
+  angle_mesurer: ["angle_reconnaitre"],
+  angle_tracer: ["angle_mesurer"],
 
-  data_interpreter: ["entier_compare"],
-  proba_estimer: ["data_interpreter"],
-  proba_lire: ["data_interpreter"],
+  triangle_sommets_cotes: ["triangle_nommer"],
+  triangle_type_cotes: ["triangle_sommets_cotes", "longueur_comparer"],
+  triangle_type_angles: ["angle_droit", "angle_compare"],
+  triangle_somme_angles: ["angle_mesurer", "triangle_type_angles"],
+  triangle_angle_manquant: ["triangle_somme_angles", "mental_addition"],
+  triangle_possible_ou_non: ["longueur_comparer", "triangle_sommets_cotes"],
+  triangle_defis: [
+    "triangle_type_cotes",
+    "triangle_type_angles",
+    "triangle_angle_manquant",
+    "triangle_possible_ou_non",
+  ],
+
+  // =========================
+  // QUADRILATÈRES
+  // =========================
+  quadrilatere_identifier_nature: [
+    "quadrilatere_nommer_vocabulaire",
+    "angle_droit",
+  ],
+  quadrilatere_lire_proprietes: [
+    "triangle_sommets_cotes",
+    "angle_droit",
+    "longueur_comparer",
+  ],
+  quadrilatere_lien_proprietes: [
+    "quadrilatere_identifier_nature",
+    "quadrilatere_lire_proprietes",
+  ],
+  quadrilatere_distinguer: [
+    "quadrilatere_identifier_nature",
+    "quadrilatere_lien_proprietes",
+  ],
+  quadrilatere_conclusion: [
+    "quadrilatere_lire_proprietes",
+    "quadrilatere_lien_proprietes",
+    "quadrilatere_distinguer",
+  ],
+  quadrilatere_completer_construire: [
+    "quadrilatere_lire_proprietes",
+    "angle_tracer",
+    "longueur_mesurer",
+  ],
+  quadrilatere_defis: [
+    "quadrilatere_conclusion",
+    "quadrilatere_completer_construire",
+  ],
+
+  // =========================
+  // SYMÉTRIE
+  // =========================
+  sym_reconnaitre: [
+    "quadrilatere_identifier_nature",
+    "triangle_sommets_cotes",
+  ],
+  sym_point: ["sym_reconnaitre", "longueur_mesurer"],
+  sym_figure: ["sym_point", "triangle_sommets_cotes", "quadrilatere_nommer_vocabulaire"],
+  sym_proprietes: [
+    "sym_figure",
+    "longueur_comparer",
+    "angle_compare",
+  ],
+  sym_axes: [
+    "sym_reconnaitre",
+    "quadrilatere_identifier_nature",
+    "triangle_type_cotes",
+  ],
+  sym_defis: [
+    "sym_reconnaitre",
+    "sym_point",
+    "sym_figure",
+    "sym_proprietes",
+    "sym_axes",
+  ],
+
+  // =========================
+  // DONNÉES
+  // =========================
+  data_lire_graphique: ["data_lire_tableau"],
+  data_prelever: ["data_lire_tableau", "data_lire_graphique"],
+  data_comparer: ["data_prelever", "entier_compare"],
+  data_interpreter: [
+    "data_prelever",
+    "data_comparer",
+    "entier_compare",
+  ],
+  data_defis: [
+    "data_lire_tableau",
+    "data_lire_graphique",
+    "data_prelever",
+    "data_comparer",
+    "data_interpreter",
+  ],
+
+  // =========================
+  // PROBABILITÉS
+  // =========================
+  proba_comparer: ["proba_vocabulaire", "fraction_compare"],
+  proba_issue: ["proba_vocabulaire", "data_lire_tableau"],
+  proba_estimer: [
+    "proba_vocabulaire",
+    "proba_comparer",
+    "data_interpreter",
+  ],
+  proba_lire: [
+    "proba_vocabulaire",
+    "proba_issue",
+    "data_interpreter",
+  ],
+  proba_defis: [
+    "proba_vocabulaire",
+    "proba_comparer",
+    "proba_issue",
+    "proba_estimer",
+    "proba_lire",
+    "data_interpreter",
+  ],
 };
 
 /**
