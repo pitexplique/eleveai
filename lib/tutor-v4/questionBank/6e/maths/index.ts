@@ -18,6 +18,9 @@ import { calculMentalBank } from "./calcul-mental.bank";
 import { longueursBank } from "./longueurs.bank";
 import { volumesBank } from "./volumes.bank";
 
+import { donneesBank } from "./donnees.bank";
+import { probabilitesBank } from "./probabilites.bank";
+
 export const maths6eQuestionBank: TutorBankItemV4[] = [
   // =========================
   // NOMBRES
@@ -48,6 +51,12 @@ export const maths6eQuestionBank: TutorBankItemV4[] = [
   ...quadrilateresBank,
   ...symetrieBank,
   ...volumesBank,
+
+  // =========================
+  // DONNÉES ET PROBABILITÉS
+  // =========================
+  ...donneesBank,
+  ...probabilitesBank,
 ];
 
 export function getMaths6eQuestionBank(args?: {
