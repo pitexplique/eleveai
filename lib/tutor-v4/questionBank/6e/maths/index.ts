@@ -12,13 +12,16 @@ import { proportionnaliteBank } from "./proportionnalite.bank";
 
 import { trianglesBank } from "./triangles.bank";
 import { quadrilateresBank } from "./quadrilateres.bank";
+import { symetrieBank } from "./symetrie.bank";
 
 import { calculMentalBank } from "./calcul-mental.bank";
 import { longueursBank } from "./longueurs.bank";
 import { volumesBank } from "./volumes.bank";
 
 export const maths6eQuestionBank: TutorBankItemV4[] = [
-  // Nombres
+  // =========================
+  // NOMBRES
+  // =========================
   ...entiersBank,
   ...decimauxBank,
   ...fractionsBank,
@@ -26,15 +29,24 @@ export const maths6eQuestionBank: TutorBankItemV4[] = [
   ...proportionnaliteBank,
   ...longueursBank,
 
-  // Calcul
+  // =========================
+  // CALCUL
+  // =========================
   ...calculMentalBank,
 
-  // Grandeurs et géométrie
+  // =========================
+  // GRANDEURS ET GÉOMÉTRIE
+  // =========================
   ...anglesBank,
   ...perimetresBank,
   ...airesBank,
+
+  // =========================
+  // GÉOMÉTRIE
+  // =========================
   ...trianglesBank,
   ...quadrilateresBank,
+  ...symetrieBank,
   ...volumesBank,
 ];
 

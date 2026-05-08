@@ -600,6 +600,36 @@ export type TransformationCanvasData = {
   };
 };
 
+export type TableauDonneesCanvasData = {
+  kind: "tableau_donnees";
+
+  title?: string;
+  caption?: string;
+
+  headers: string[];
+
+  rows: {
+    label?: string;
+    values: (string | number)[];
+  }[];
+
+  highlight?: {
+    row?: number;
+    col?: number;
+    cell?: {
+      row: number;
+      col: number;
+    };
+  };
+
+  display?: {
+    compact?: boolean;
+    striped?: boolean;
+  };
+
+  questionLabel?: string;
+};
+
 export type CanvasFigure =
   | TriangleCanvasData
   | QuadrilatereCanvasData
@@ -613,6 +643,7 @@ export type CanvasFigure =
   | AngleCanvasData
   | FonctionGraphiqueCanvasData
   | FonctionTableauCanvasData
+  | TableauDonneesCanvasData
   | TransformationCanvasData;
 
 export type QuestionVariantMeta = {

@@ -8,6 +8,7 @@ import {
   type KeyboardEvent,
   type ReactNode,
 } from "react";
+
 import {
   TriangleCanvas,
   QuadrilatereCanvas,
@@ -20,7 +21,8 @@ import {
   AngleCanvas,
   FonctionGraphiqueCanvas,
   FonctionTableauCanvas,
-  TransformationCanvas
+  TransformationCanvas,
+  TableauDonneesCanvas,
 } from "@/lib/tutor-v4/components";
 
 import {
@@ -222,6 +224,10 @@ function renderCanvas(canvas?: CanvasFigure | null) {
 
   if (canvas.kind === "transformation") {
     return <TransformationCanvas figure={canvas} />;
+  }
+
+ if (canvas.kind === "tableau_donnees") {
+    return <TableauDonneesCanvas figure={canvas} />;
   }
 
   return null;
