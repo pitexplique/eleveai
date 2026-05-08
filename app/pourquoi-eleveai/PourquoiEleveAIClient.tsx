@@ -1,8 +1,46 @@
-// app/pourquoi-eleveai/PourquoiEleveAIClient.tsx
 "use client";
 
 import Link from "next/link";
 import Script from "next/script";
+
+const features = [
+  {
+    title: "Tutor IA guidé",
+    text: "Des entraînements progressifs par compétence avec indices, corrections et explications.",
+    href: "/tutor-v4",
+    cta: "Essayer Tutor IA",
+  },
+  {
+    title: "Coach Maths IA",
+    text: "Un repérage clair des notions et micro-compétences à travailler selon le niveau.",
+    href: "/coach-maths-ia",
+    cta: "Voir le coach",
+  },
+  {
+    title: "Calcul rapide",
+    text: "Des sessions courtes pour renforcer les automatismes essentiels en mathématiques.",
+    href: "/calcul-rapide",
+    cta: "Calcul rapide",
+  },
+  {
+    title: "Problème du jour",
+    text: "Un problème court pour apprendre à chercher, modéliser et expliquer sa démarche.",
+    href: "/probleme-du-jour",
+    cta: "Voir le problème",
+  },
+  {
+    title: "Leçon du jour",
+    text: "Des rappels réguliers pour consolider les notions importantes.",
+    href: "/lecon-du-jour",
+    cta: "Leçon du jour",
+  },
+  {
+    title: "Parcours",
+    text: "Une progression visible pour aider l’élève à avancer étape par étape.",
+    href: "/parcours",
+    cta: "Voir le parcours",
+  },
+];
 
 export default function PourquoiEleveAIClient() {
   const orgJsonLd = {
@@ -28,8 +66,8 @@ export default function PourquoiEleveAIClient() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }}
       />
 
-      <section className="border-b border-slate-800 bg-gradient-to-b from-emerald-950/30 via-slate-900 to-slate-950">
-        <div className="mx-auto max-w-5xl px-4 py-12 sm:py-16">
+      <section className="border-b border-slate-800 bg-gradient-to-b from-emerald-950/40 via-slate-900 to-slate-950">
+        <div className="mx-auto max-w-6xl px-4 py-12 sm:py-16">
           <div className="mb-8 flex items-center gap-2 text-sm text-slate-400">
             <Link href="/" className="hover:text-emerald-300">
               Accueil
@@ -40,60 +78,41 @@ export default function PourquoiEleveAIClient() {
 
           <header className="space-y-5">
             <p className="inline-flex rounded-full border border-emerald-400/40 bg-emerald-400/10 px-4 py-1 text-xs font-bold uppercase tracking-wide text-emerald-300">
-              Apprendre · Raisonner · Progresser
+              Comprendre · S’entraîner · Progresser
             </p>
 
-            <h1 className="max-w-3xl text-3xl font-black tracking-tight sm:text-5xl">
-              EleveAI aide les élèves à progresser sans faire à leur place.
+            <h1 className="max-w-4xl text-3xl font-black tracking-tight sm:text-5xl">
+              EleveAI aide les élèves à progresser en mathématiques sans faire à leur place.
             </h1>
 
             <p className="max-w-3xl text-base leading-relaxed text-slate-300 sm:text-lg">
-              EleveAI est pensé pour renforcer les bases, développer le
-              raisonnement scientifique et redonner confiance aux élèves grâce à
-              des entraînements courts, guidés et réguliers.
+              EleveAI est une plateforme pédagogique construite autour des compétences :
+              calcul rapide, tutor guidé, défis, leçons courtes et parcours de progression.
+              L’objectif est simple : rendre l’élève actif, régulier et plus confiant.
             </p>
 
             <div className="flex flex-col gap-3 sm:flex-row">
               <Link
-                href="/auth/signin-eleve"
+                href="/accueil"
                 className="rounded-2xl bg-emerald-400 px-5 py-3 text-center text-sm font-black text-slate-950 hover:bg-emerald-300"
               >
-                Connexion élève
+                Découvrir EleveAI
               </Link>
 
               <Link
-                href="/accueil"
+                href="/coach-maths-ia"
                 className="rounded-2xl border border-slate-700 px-5 py-3 text-center text-sm font-black text-slate-100 hover:bg-slate-900"
               >
-                Découvrir EleveAI
+                Voir Coach Maths IA
               </Link>
             </div>
           </header>
         </div>
       </section>
 
-      <section className="mx-auto max-w-5xl px-4 py-10 sm:py-14">
-        <div className="grid gap-5 sm:grid-cols-3">
-          {[
-            {
-              title: "Automatismes",
-              text: "Des entraînements courts pour consolider les bases en mathématiques.",
-              href: "/calcul-rapide",
-              cta: "Calcul rapide",
-            },
-            {
-              title: "Raisonnement",
-              text: "Des questions guidées pour apprendre à chercher, justifier et corriger.",
-              href: "/coach-maths-ia",
-              cta: "Coach Maths IA",
-            },
-            {
-              title: "Mémoire",
-              text: "Des leçons courtes et régulières pour réactiver les notions essentielles.",
-              href: "/lecon-du-jour",
-              cta: "Leçon du jour",
-            },
-          ].map((item) => (
+      <section className="mx-auto max-w-6xl px-4 py-10 sm:py-14">
+        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {features.map((item) => (
             <div
               key={item.title}
               className="rounded-3xl border border-slate-800 bg-slate-900/70 p-5 shadow-xl"
@@ -101,9 +120,11 @@ export default function PourquoiEleveAIClient() {
               <h2 className="text-xl font-black text-emerald-300">
                 {item.title}
               </h2>
+
               <p className="mt-3 text-sm leading-relaxed text-slate-300">
                 {item.text}
               </p>
+
               <Link
                 href={item.href}
                 className="mt-5 inline-flex text-sm font-bold text-emerald-300 hover:text-emerald-200"
@@ -116,23 +137,23 @@ export default function PourquoiEleveAIClient() {
 
         <div className="mt-10 rounded-3xl border border-slate-800 bg-slate-900/70 p-6 sm:p-8">
           <h2 className="text-2xl font-black text-slate-50">
-            Une IA discrète, au service de l’apprentissage
+            Une IA pédagogique, encadrée et utile
           </h2>
 
           <p className="mt-4 text-sm leading-relaxed text-slate-300 sm:text-base">
-            EleveAI n’est pas conçu pour donner directement une réponse à
-            recopier. L’objectif est d’aider l’élève à comprendre la méthode, à
-            repérer ses erreurs et à progresser étape par étape.
+            EleveAI n’est pas une IA qui remplace le travail de l’élève. La plateforme
+            propose des questions progressives, des indices, des corrections expliquées
+            et des défis pour apprendre à raisonner.
           </p>
 
           <div className="mt-6 grid gap-4 sm:grid-cols-2">
             {[
-              "L’élève reste actif.",
-              "L’erreur devient un moment d’apprentissage.",
-              "Les exercices sont progressifs.",
-              "Le professeur garde son rôle essentiel.",
-              "Les parents peuvent accompagner sans faire à la place.",
-              "L’IA reste encadrée et pédagogique.",
+              "L’élève répond, cherche et essaie.",
+              "Les erreurs servent à comprendre.",
+              "Les questions sont progressives.",
+              "Les défis développent la résolution de problèmes.",
+              "Les automatismes sont travaillés régulièrement.",
+              "Le professeur garde son rôle central.",
             ].map((text) => (
               <div
                 key={text}
@@ -146,13 +167,14 @@ export default function PourquoiEleveAIClient() {
 
         <div className="mt-10 rounded-3xl border border-emerald-500/30 bg-emerald-500/10 p-6 sm:p-8">
           <h2 className="text-2xl font-black text-emerald-300">
-            Pourquoi maintenant ?
+            Pourquoi EleveAI ?
           </h2>
 
           <p className="mt-4 text-sm leading-relaxed text-slate-200 sm:text-base">
-            Les élèves ont besoin de bases solides, de méthode et d’autonomie.
-            EleveAI répond à ce besoin avec des parcours simples, motivants et
-            réguliers : un peu chaque jour, pour progresser durablement.
+            Parce que beaucoup d’élèves ont besoin de reprendre confiance, de
+            consolider les bases et de s’entraîner régulièrement. EleveAI propose
+            un cadre simple : une compétence, une question, un indice, une correction,
+            puis une progression.
           </p>
         </div>
 
@@ -161,15 +183,17 @@ export default function PourquoiEleveAIClient() {
             <h2 className="text-xl font-black text-slate-50">
               Pour les élèves
             </h2>
+
             <p className="mt-3 text-sm leading-relaxed text-slate-300">
-              S’entraîner, comprendre ses erreurs, reprendre confiance et voir
-              sa progression.
+              S’entraîner, comprendre ses erreurs, progresser à son rythme et
+              gagner en confiance.
             </p>
+
             <Link
-              href="/auth/signin-eleve"
+              href="/accueil"
               className="mt-5 inline-flex rounded-2xl bg-emerald-400 px-4 py-2 text-sm font-black text-slate-950 hover:bg-emerald-300"
             >
-              Se connecter
+              Commencer
             </Link>
           </div>
 
@@ -177,10 +201,12 @@ export default function PourquoiEleveAIClient() {
             <h2 className="text-xl font-black text-slate-50">
               Pour les familles et les professeurs
             </h2>
+
             <p className="mt-3 text-sm leading-relaxed text-slate-300">
-              Un cadre rassurant : l’élève apprend à faire, à expliquer et à
-              progresser sans tricher.
+              Un outil rassurant pour accompagner le travail régulier, sans
+              encourager la copie ni remplacer l’explication humaine.
             </p>
+
             <Link
               href="/contact"
               className="mt-5 inline-flex rounded-2xl border border-slate-700 px-4 py-2 text-sm font-black text-slate-100 hover:bg-slate-800"
