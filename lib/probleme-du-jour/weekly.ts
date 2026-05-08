@@ -16,17 +16,17 @@ export const problemeDuJourWeekly = {
 
     {
       day: 3,
-      problemId: "pourcentage_reduction_001",
+      problemId: "bus_scolaire_001",
     },
 
     {
       day: 4,
-      problemId: "eau_reunion_001",
+      problemId: "mangues_reunion_001",
     },
 
     {
       day: 5,
-      problemId: "pourcentage_reduction_001",
+      problemId: "plage_reunion_001",
     },
   ],
 };
