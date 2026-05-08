@@ -20,6 +20,7 @@ import {
   AngleCanvas,
   FonctionGraphiqueCanvas,
   FonctionTableauCanvas,
+  TransformationCanvas
 } from "@/lib/tutor-v4/components";
 
 import {
@@ -218,6 +219,10 @@ function renderCanvas(canvas?: CanvasFigure | null) {
   if (canvas.kind === "fonction_tableau") {
   return <FonctionTableauCanvas figure={canvas} />;
 }
+
+  if (canvas.kind === "transformation") {
+    return <TransformationCanvas figure={canvas} />;
+  }
 
   return null;
 }

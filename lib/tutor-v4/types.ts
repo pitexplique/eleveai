@@ -526,6 +526,80 @@ export type FonctionTableauCanvasData = {
   };
 };
 
+export type TransformationKind =
+  | "symetrie_axiale"
+  | "symetrie_centrale"
+  | "translation"
+  | "rotation"
+  | "homothetie";
+
+export type TransformationCanvasPoint = {
+  x: number;
+  y: number;
+};
+
+export type TransformationCanvasData = {
+  kind: "transformation";
+  transformation: TransformationKind;
+
+  size?: {
+    width?: number;
+    height?: number;
+    cellSize?: number;
+    padding?: number;
+  };
+
+  grid?: {
+    rows: number;
+    cols: number;
+  };
+
+  source: {
+    points: TransformationCanvasPoint[];
+    label?: string;
+    color?: string;
+    fill?: string;
+  };
+
+  image?: {
+    points: TransformationCanvasPoint[];
+    label?: string;
+    color?: string;
+    fill?: string;
+  };
+
+  axis?: {
+    type: "vertical" | "horizontal" | "line";
+    x?: number;
+    y?: number;
+    from?: TransformationCanvasPoint;
+    to?: TransformationCanvasPoint;
+    label?: string;
+  };
+
+  center?: {
+    point: TransformationCanvasPoint;
+    label?: string;
+  };
+
+  vector?: {
+    from: TransformationCanvasPoint;
+    to: TransformationCanvasPoint;
+    label?: string;
+  };
+
+  angleDeg?: number;
+  ratio?: number;
+
+  display?: {
+    showGrid?: boolean;
+    showLabels?: boolean;
+    showPoints?: boolean;
+    showDashedLinks?: boolean;
+    showTransformationInfo?: boolean;
+  };
+};
+
 export type CanvasFigure =
   | TriangleCanvasData
   | QuadrilatereCanvasData
@@ -538,7 +612,8 @@ export type CanvasFigure =
   | StatGraphCanvasData
   | AngleCanvasData
   | FonctionGraphiqueCanvasData
-  | FonctionTableauCanvasData;
+  | FonctionTableauCanvasData
+  | TransformationCanvasData;
 
 export type QuestionVariantMeta = {
   familyId: string;

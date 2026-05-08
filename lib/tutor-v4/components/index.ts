@@ -9,3 +9,4 @@ export { default as CanvasProbabilites } from "./ProbabilitesCanvas";
 export { default as AngleCanvas } from "./AngleCanvas";
 export { default as FonctionGraphiqueCanvas } from "./FonctionGraphiqueCanvas";
 export { default as FonctionTableauCanvas } from "./FonctionTableauCanvas";
+export { default as TransformationCanvas } from "./TransformationCanvas";
