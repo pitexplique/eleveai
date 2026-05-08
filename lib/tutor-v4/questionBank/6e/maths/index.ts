@@ -15,6 +15,8 @@ import { quadrilateresBank } from "./quadrilateres.bank";
 import { symetrieBank } from "./symetrie.bank";
 
 import { calculMentalBank } from "./calcul-mental.bank";
+import { calculPoseBank } from "./calcul-pose.bank";
+
 import { longueursBank } from "./longueurs.bank";
 import { volumesBank } from "./volumes.bank";
 
@@ -36,6 +38,7 @@ export const maths6eQuestionBank: TutorBankItemV4[] = [
   // CALCUL
   // =========================
   ...calculMentalBank,
+  ...calculPoseBank,
 
   // =========================
   // GRANDEURS ET GÉOMÉTRIE

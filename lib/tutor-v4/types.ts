@@ -630,6 +630,40 @@ export type TableauDonneesCanvasData = {
   questionLabel?: string;
 };
 
+export type CalculPoseCanvasData = {
+  kind: "calcul_pose";
+
+  operation: "addition" | "soustraction" | "multiplication" | "division";
+  title?: string;
+
+  numbers: string[];
+  result?: string;
+  retenues?: string[];
+
+  highlight?: {
+    row?: number;
+    col?: number;
+    cell?: {
+      row: number;
+      col: number;
+    };
+  };
+
+  division?: {
+    dividende: string;
+    diviseur: string;
+    quotient?: string;
+    reste?: string;
+  };
+
+  display?: {
+    showResult?: boolean;
+    showRetenues?: boolean;
+    compact?: boolean;
+  };
+
+  questionLabel?: string;
+};
 export type CanvasFigure =
   | TriangleCanvasData
   | QuadrilatereCanvasData
@@ -644,6 +678,7 @@ export type CanvasFigure =
   | FonctionGraphiqueCanvasData
   | FonctionTableauCanvasData
   | TableauDonneesCanvasData
+  | CalculPoseCanvasData
   | TransformationCanvasData;
 
 export type QuestionVariantMeta = {

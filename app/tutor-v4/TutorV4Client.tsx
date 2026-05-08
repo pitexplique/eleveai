@@ -23,6 +23,7 @@ import {
   FonctionTableauCanvas,
   TransformationCanvas,
   TableauDonneesCanvas,
+  CalculPoseCanvas ,
 } from "@/lib/tutor-v4/components";
 
 import {
@@ -229,6 +230,10 @@ function renderCanvas(canvas?: CanvasFigure | null) {
  if (canvas.kind === "tableau_donnees") {
     return <TableauDonneesCanvas figure={canvas} />;
   }
+
+  if (canvas.kind === "calcul_pose") {
+  return <CalculPoseCanvas figure={canvas} />;
+}
 
   return null;
 }
