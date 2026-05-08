@@ -28,5 +28,15 @@ export const problemeDuJourWeekly = {
       day: 5,
       problemId: "plage_reunion_001",
     },
+
+    {
+      day: 6,
+      problemId: "pourcentage_reduction_001",
+    },
+
+    {
+      day: 7,
+      problemId: "eau_reunion_001",
+    },
   ],
 };

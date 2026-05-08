@@ -209,4 +209,90 @@ export const problemesFixed: ProblemeDuJour[] = [
       },
     ],
   },
+
+  {
+    id: "volcan_reunion_001",
+    title: "Randonnée au volcan",
+    theme: "Distances & pourcentages",
+    statement:
+      "Une randonnée au Piton de la Fournaise mesure 12 km. Les élèves ont déjà parcouru 50 % du trajet.",
+    question:
+      "Combien de kilomètres les élèves ont-ils déjà parcourus ?",
+    expectedAnswer: "6",
+    explanation:
+      "50 %, c’est la moitié. La moitié de 12 km est 6 km. Les élèves ont donc déjà parcouru 6 km.",
+    directions: [
+      {
+        id: "schema",
+        label: "Faire un schéma",
+        type: "guided",
+        content:
+          "Dessine une barre représentant 12 km puis partage-la en 2 parties égales.",
+      },
+      {
+        id: "calcul",
+        label: "Chercher le calcul",
+        type: "guided",
+        content:
+          "50 % signifie la moitié. Quelle opération permet de trouver la moitié de 12 ?",
+      },
+      {
+        id: "indice",
+        label: "Demander un indice",
+        type: "hint",
+        content:
+          "Pour trouver 50 %, on divise par 2.",
+      },
+      {
+        id: "open",
+        label: "Expliquer avec mes mots",
+        type: "open",
+        content:
+          "Explique pourquoi 50 % correspond à la moitié d’un trajet.",
+      },
+    ],
+  },
+
+  {
+    id: "ananas_reunion_001",
+    title: "Les ananas Victoria",
+    theme: "Pourcentages & produits locaux",
+    statement:
+      "Un agriculteur récolte 60 ananas Victoria. Il en réserve 20 % pour le marché local.",
+    question:
+      "Combien d’ananas sont réservés pour le marché local ?",
+    expectedAnswer: "12",
+    explanation:
+      "10 % de 60 vaut 6. Donc 20 %, c’est deux fois 10 %, soit 12. L’agriculteur réserve 12 ananas.",
+    directions: [
+      {
+        id: "schema",
+        label: "Faire un schéma",
+        type: "guided",
+        content:
+          "Imagine 60 ananas répartis en 10 groupes égaux. Combien vaut un groupe ?",
+      },
+      {
+        id: "calcul",
+        label: "Chercher le calcul",
+        type: "guided",
+        content:
+          "10 % de 60 = ?. Donc 20 % de 60 = deux fois ce résultat.",
+      },
+      {
+        id: "indice",
+        label: "Demander un indice",
+        type: "hint",
+        content:
+          "Commence par calculer 10 % de 60, puis double le résultat.",
+      },
+      {
+        id: "open",
+        label: "Expliquer avec mes mots",
+        type: "open",
+        content:
+          "Explique pourquoi les produits locaux sont importants à La Réunion.",
+      },
+    ],
+  },
 ];

@@ -16,8 +16,8 @@ export default function ProblemeDuJourPage() {
       3: 2,
       4: 3,
       5: 4,
-      6: 4,
-      0: 4,
+      6: 6,
+      7: 6,
     };
 
     const index = mapping[today] ?? 0;
