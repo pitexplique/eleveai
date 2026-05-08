@@ -10,6 +10,7 @@ import { statistiquesBank } from "./statistiques.bank";
 import { probabilitesBank } from "./probabilites.bank";
 import { anglesBank } from "./angles.bank";
 import { trianglesBank } from "./triangles.bank";
+import { symetrieCentraleBank} from "./symetrie_centrale.bank"
 
 
 export const maths5eQuestionBank: TutorBankItemV4[] = [
@@ -22,6 +23,7 @@ export const maths5eQuestionBank: TutorBankItemV4[] = [
   ...probabilitesBank,
   ...anglesBank,
   ...trianglesBank,
+  ...symetrieCentraleBank,
 
 ];
 
