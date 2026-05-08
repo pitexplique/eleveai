@@ -199,10 +199,34 @@ const supportLinks: Record<string, string[]> = {
   // =========================
   // TRANSFORMATIONS
   // =========================
-  transfo_translation: ["transfo_symetrie_centrale"],
-  transfo_rotation: ["transfo_symetrie_centrale"],
-  transfo_proprietes: ["transfo_symetrie_centrale","transfo_translation","transfo_rotation"],
-  transfo_defis: ["transfo_translation", "transfo_rotation"],
+  // =========================
+  // TRANSFORMATIONS
+  // =========================
+    transfo_symetrie_centrale: ["transfo_symetrie_axiale"],
+
+    transfo_translation: [
+      "transfo_symetrie_axiale",
+      "transfo_symetrie_centrale",
+    ],
+
+    transfo_rotation: [
+      "transfo_symetrie_centrale",
+    ],
+
+    transfo_proprietes: [
+      "transfo_symetrie_axiale",
+      "transfo_symetrie_centrale",
+      "transfo_translation",
+      "transfo_rotation",
+    ],
+
+    transfo_defis: [
+      "transfo_symetrie_axiale",
+      "transfo_symetrie_centrale",
+      "transfo_translation",
+      "transfo_rotation",
+      "transfo_proprietes",
+    ],
 
   // =========================
   // PÉRIMÈTRES

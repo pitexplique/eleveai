@@ -1,76 +1,16 @@
 // tutor-v4/components/TransformationCanvas.tsx
 "use client";
 
-import type { CanvasFigure } from "@/lib/tutor-v4/types";
+import type { CanvasFigure, TransformationCanvasData } from "@/lib/tutor-v4/types";
 
 type Point = { x: number; y: number };
 
-type TransformationKind =
-  | "symetrie_axiale"
-  | "symetrie_centrale"
-  | "translation"
-  | "rotation"
-  | "homothetie";
-
-type TransformationCanvasData = {
-  kind: "transformation";
-  transformation: TransformationKind;
-  size?: {
-    width?: number;
-    height?: number;
-    cellSize?: number;
-    padding?: number;
-  };
-  grid?: {
-    rows: number;
-    cols: number;
-  };
-  source: {
-    points: Point[];
-    label?: string;
-    color?: string;
-    fill?: string;
-  };
-  image?: {
-    points: Point[];
-    label?: string;
-    color?: string;
-    fill?: string;
-  };
-  axis?: {
-    type: "vertical" | "horizontal" | "line";
-    x?: number;
-    y?: number;
-    from?: Point;
-    to?: Point;
-    label?: string;
-  };
-  center?: {
-    point: Point;
-    label?: string;
-  };
-  vector?: {
-    from: Point;
-    to: Point;
-    label?: string;
-  };
-  angleDeg?: number;
-  ratio?: number;
-  display?: {
-    showGrid?: boolean;
-    showLabels?: boolean;
-    showPoints?: boolean;
-    showDashedLinks?: boolean;
-    showTransformationInfo?: boolean;
-  };
-};
-
 type Props = {
-  figure: CanvasFigure | TransformationCanvasData;
+  figure: CanvasFigure;
 };
 
 function isTransformationCanvas(
-  figure: CanvasFigure | TransformationCanvasData
+  figure: CanvasFigure
 ): figure is TransformationCanvasData {
   return figure.kind === "transformation";
 }
@@ -98,7 +38,7 @@ function mid(a: Point, b: Point): Point {
   };
 }
 
-function transformationLabel(kind: TransformationKind) {
+function transformationLabel(kind: TransformationCanvasData["transformation"]) {
   switch (kind) {
     case "symetrie_axiale":
       return "Symétrie axiale";
@@ -250,7 +190,6 @@ export default function TransformationCanvas({ figure }: Props) {
       >
         <rect x={0} y={0} width={width} height={height} rx={12} fill="white" />
 
-        {/* Quadrillage */}
         {showGrid ? (
           <>
             {Array.from({ length: rows + 1 }, (_, r) => {
@@ -285,60 +224,93 @@ export default function TransformationCanvas({ figure }: Props) {
           </>
         ) : null}
 
-        {/* Axe de symétrie */}
+        {/* Axe pour symétrie axiale */}
         {figure.axis ? (
           <>
             {figure.axis.type === "vertical" && figure.axis.x !== undefined ? (
-              <line
-                x1={padding + figure.axis.x * cellSize}
-                y1={padding}
-                x2={padding + figure.axis.x * cellSize}
-                y2={padding + rows * cellSize}
-                stroke="#16a34a"
-                strokeWidth={3}
-                strokeDasharray="8 5"
-              />
+              <>
+                <line
+                  x1={padding + figure.axis.x * cellSize}
+                  y1={padding}
+                  x2={padding + figure.axis.x * cellSize}
+                  y2={padding + rows * cellSize}
+                  stroke="#16a34a"
+                  strokeWidth={3}
+                  strokeDasharray="8 5"
+                />
+                {figure.axis.label ? (
+                  <Label
+                    x={padding + figure.axis.x * cellSize}
+                    y={padding - 6}
+                    color="#16a34a"
+                  >
+                    {figure.axis.label}
+                  </Label>
+                ) : null}
+              </>
             ) : null}
 
             {figure.axis.type === "horizontal" && figure.axis.y !== undefined ? (
-              <line
-                x1={padding}
-                y1={padding + figure.axis.y * cellSize}
-                x2={padding + cols * cellSize}
-                y2={padding + figure.axis.y * cellSize}
-                stroke="#16a34a"
-                strokeWidth={3}
-                strokeDasharray="8 5"
-              />
+              <>
+                <line
+                  x1={padding}
+                  y1={padding + figure.axis.y * cellSize}
+                  x2={padding + cols * cellSize}
+                  y2={padding + figure.axis.y * cellSize}
+                  stroke="#16a34a"
+                  strokeWidth={3}
+                  strokeDasharray="8 5"
+                />
+                {figure.axis.label ? (
+                  <Label
+                    x={width - padding}
+                    y={padding + figure.axis.y * cellSize - 8}
+                    color="#16a34a"
+                  >
+                    {figure.axis.label}
+                  </Label>
+                ) : null}
+              </>
             ) : null}
 
             {figure.axis.type === "line" &&
             figure.axis.from &&
             figure.axis.to ? (
-              <line
-                x1={gridToSvg(figure.axis.from, cellSize, padding).x}
-                y1={gridToSvg(figure.axis.from, cellSize, padding).y}
-                x2={gridToSvg(figure.axis.to, cellSize, padding).x}
-                y2={gridToSvg(figure.axis.to, cellSize, padding).y}
-                stroke="#16a34a"
-                strokeWidth={3}
-                strokeDasharray="8 5"
-              />
-            ) : null}
-
-            {figure.axis.label ? (
-              <Label
-                x={width - 34}
-                y={padding + 18}
-                color="#16a34a"
-              >
-                {figure.axis.label}
-              </Label>
+              <>
+                <line
+                  x1={gridToSvg(figure.axis.from, cellSize, padding).x}
+                  y1={gridToSvg(figure.axis.from, cellSize, padding).y}
+                  x2={gridToSvg(figure.axis.to, cellSize, padding).x}
+                  y2={gridToSvg(figure.axis.to, cellSize, padding).y}
+                  stroke="#16a34a"
+                  strokeWidth={3}
+                  strokeDasharray="8 5"
+                />
+                {figure.axis.label ? (
+                  <Label
+                    x={
+                      mid(
+                        gridToSvg(figure.axis.from, cellSize, padding),
+                        gridToSvg(figure.axis.to, cellSize, padding)
+                      ).x
+                    }
+                    y={
+                      mid(
+                        gridToSvg(figure.axis.from, cellSize, padding),
+                        gridToSvg(figure.axis.to, cellSize, padding)
+                      ).y - 10
+                    }
+                    color="#16a34a"
+                  >
+                    {figure.axis.label}
+                  </Label>
+                ) : null}
+              </>
             ) : null}
           </>
         ) : null}
 
-        {/* Liens entre points correspondants */}
+        {/* Segments point → image */}
         {showDashedLinks && imageSvg.length === sourceSvg.length
           ? sourceSvg.map((p, i) => (
               <line
@@ -354,7 +326,6 @@ export default function TransformationCanvas({ figure }: Props) {
             ))
           : null}
 
-        {/* Figure source */}
         <polygon
           points={polygonPoints(figure.source.points, cellSize, padding)}
           fill={sourceFill}
@@ -363,7 +334,6 @@ export default function TransformationCanvas({ figure }: Props) {
           strokeLinejoin="round"
         />
 
-        {/* Figure image */}
         {figure.image ? (
           <polygon
             points={polygonPoints(figure.image.points, cellSize, padding)}
@@ -374,7 +344,6 @@ export default function TransformationCanvas({ figure }: Props) {
           />
         ) : null}
 
-        {/* Points source */}
         {showPoints
           ? sourceSvg.map((p, i) => (
               <circle
@@ -387,7 +356,6 @@ export default function TransformationCanvas({ figure }: Props) {
             ))
           : null}
 
-        {/* Points image */}
         {showPoints
           ? imageSvg.map((p, i) => (
               <circle
@@ -400,13 +368,8 @@ export default function TransformationCanvas({ figure }: Props) {
             ))
           : null}
 
-        {/* Labels source / image */}
-        {showLabels && figure.source.label ? (
-          <Label
-            x={sourceSvg[0]?.x ?? 20}
-            y={(sourceSvg[0]?.y ?? 20) - 10}
-            color={sourceColor}
-          >
+        {showLabels && figure.source.label && sourceSvg[0] ? (
+          <Label x={sourceSvg[0].x} y={sourceSvg[0].y - 10} color={sourceColor}>
             {figure.source.label}
           </Label>
         ) : null}
@@ -417,7 +380,6 @@ export default function TransformationCanvas({ figure }: Props) {
           </Label>
         ) : null}
 
-        {/* Centre */}
         {centerSvg ? (
           <g>
             <circle
@@ -436,7 +398,6 @@ export default function TransformationCanvas({ figure }: Props) {
           </g>
         ) : null}
 
-        {/* Vecteur de translation */}
         {vectorSvg ? (
           <Arrow
             from={vectorSvg.from}
@@ -446,7 +407,6 @@ export default function TransformationCanvas({ figure }: Props) {
           />
         ) : null}
 
-        {/* Info bas de figure */}
         <text
           x={width / 2}
           y={height - 10}

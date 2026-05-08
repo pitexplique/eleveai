@@ -508,16 +508,16 @@ export const microSkills: MicroSkillSource[] = [
      TRANSFORMATIONS
   ========================= */
   {
-    id: "transfo_symetrie_centrale",
-    label: "Utiliser la symétrie centrale",
+    id: "transfo_symetrie_axiale",
+    label: "Réactiver la symétrie axiale",
     notionId: "transformations",
     prerequis: [],
   },
   {
-    id: "transfo_translation",
-    label: "Reconnaître et utiliser une translation",
+    id: "transfo_symetrie_centrale",
+    label: "Utiliser la symétrie centrale",
     notionId: "transformations",
-    prerequis: ["transfo_symetrie_centrale"],
+    prerequis: ["transfo_symetrie_axiale"],
   },
   {
     id: "transfo_rotation",

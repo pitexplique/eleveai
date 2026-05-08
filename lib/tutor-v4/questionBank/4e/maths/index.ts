@@ -20,6 +20,7 @@ import { distributiviteBank } from "./distributivite.bank";
 import { perimetresBank } from "./perimetres.bank";
 import { airesBank } from "./aires.bank";
 import { parallelogrammesBank } from "./parallelogrammes.bank";
+import { transformationsBank } from "./transformations.bank";
 import { pythagoreBank } from "./pythagore.bank";
 import { probabilitesBank } from"./probabilites.bank";
 import { fractionsBank } from"./fractions.bank";
@@ -44,6 +45,7 @@ export const maths4eQuestionBank: TutorBankItemV4[] = [
   ...airesBank,
   ...parallelogrammesBank,
   ...pythagoreBank,
+  ...transformationsBank,
   ...probabilitesBank,
   ...fractionsBank,
   ...operationsRelatifsBank,
