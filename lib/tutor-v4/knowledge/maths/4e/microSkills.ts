@@ -531,7 +531,6 @@ export const microSkills: MicroSkillSource[] = [
     notionId: "transformations",
     prerequis: [
       "transfo_symetrie_centrale",
-      "transfo_translation",
       "transfo_rotation",
     ],
   },

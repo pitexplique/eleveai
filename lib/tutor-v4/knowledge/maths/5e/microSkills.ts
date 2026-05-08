@@ -331,7 +331,7 @@ export const microSkills: MicroSkillSource[] = [
   },
   {
     id: "sym_centrale_proprietes",
-    label: "Utiliser les propriétés de la symétrie centrale",
+    label: "Utiliser les propriétés de la symétrie centrale, dont le point invariant",
     notionId: "symetrie_centrale",
     prerequis: ["sym_centrale_figure"],
   },
