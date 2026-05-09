@@ -334,7 +334,7 @@ export default function CalculRapideDefiClient() {
 
     window.setTimeout(() => {
       goNext();
-    }, 20000);
+    }, 10000);
   }
 
   if (!questions.length) {
