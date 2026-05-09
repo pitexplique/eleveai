@@ -1,6 +1,8 @@
 // lib/tutor-v4/question-banks/maths/4e/fractions.bank.ts
-
-import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
+import type {
+  TutorBankItemV4,
+  FractionCanvasData,
+} from "@/lib/tutor-v4/types";
 
 function randomInt(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -18,10 +20,16 @@ function simplify(n: number, d: number) {
   const g = pgcd(n, d);
   return { n: n / g, d: d / g };
 }
-
 function frac(n: number, d: number) {
   return `${n}/${d}`;
 }
+
+function fractionCanvas(
+  data: Omit<FractionCanvasData, "kind">
+): FractionCanvasData {
+  return { kind: "fraction", ...data };
+}
+
 
 export const fractionsBank: TutorBankItemV4[] = [
   // =========================
@@ -730,5 +738,302 @@ export const fractionsBank: TutorBankItemV4[] = [
           "\n\nConclusion : la fraction ou le nombre obtenu répond à la question.",
       };
     },
+  },
+    /* =========================
+     RENFORT — FRACTION CANVAS 4e
+  ========================= */
+
+  {
+    kind: "template",
+    id: "4e_fraction_egales_canvas_compare_tpl_1",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "fractions",
+    microId: "fraction_egales",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Observe si les deux parties colorées représentent la même proportion.",
+    tags: ["fractions", "egales", "canvas", "compare", "template"],
+    generate: () => {
+      const situations = [
+        { a: [1, 2], b: [2, 4], answer: "oui" },
+        { a: [2, 3], b: [4, 6], answer: "oui" },
+        { a: [3, 4], b: [6, 8], answer: "oui" },
+        { a: [2, 5], b: [1, 2], answer: "non" },
+        { a: [3, 5], b: [2, 3], answer: "non" },
+      ];
+
+      const s = randomChoice(situations);
+
+      return {
+        text: `Les fractions ${s.a[0]}/${s.a[1]} et ${s.b[0]}/${s.b[1]} sont-elles égales ?`,
+        format: "qcm",
+        choices: ["oui", "non"],
+        expected: [s.answer],
+        comparator: "mcq_exact",
+        explanation:
+          "Définition : deux fractions sont égales si elles représentent le même quotient ou la même proportion.\n\n" +
+          "Méthode : on compare les représentations ou on vérifie par multiplication.\n\n" +
+          (s.answer === "oui"
+            ? `Observation : ${s.a[0]}/${s.a[1]} et ${s.b[0]}/${s.b[1]} représentent la même proportion.\n\n`
+            : `Observation : ${s.a[0]}/${s.a[1]} et ${s.b[0]}/${s.b[1]} ne représentent pas la même proportion.\n\n`) +
+          `Conclusion : la réponse est ${s.answer}.`,
+        canvas: fractionCanvas({
+          model: "compare",
+          fractions: [
+            { numerator: s.a[0], denominator: s.a[1], label: `${s.a[0]}/${s.a[1]}` },
+            { numerator: s.b[0], denominator: s.b[1], label: `${s.b[0]}/${s.b[1]}` },
+          ],
+        }),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "4e_fraction_simplifier_canvas_bar_tpl_1",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "fractions",
+    microId: "fraction_simplifier",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Cherche une fraction plus simple qui représente la même partie colorée.",
+    tags: ["fractions", "simplifier", "canvas", "bar", "template"],
+    generate: () => {
+      const situations = [
+        { n: 4, d: 8 },
+        { n: 6, d: 9 },
+        { n: 6, d: 12 },
+        { n: 8, d: 12 },
+        { n: 10, d: 15 },
+      ];
+
+      const s = randomChoice(situations);
+      const simp = simplify(s.n, s.d);
+
+      return {
+        text: `Simplifie la fraction ${s.n}/${s.d}.`,
+        format: "short",
+        expected: [frac(simp.n, simp.d), frac(s.n, s.d)],
+        comparator: "fraction_decimal_equivalent",
+        explanation:
+          "Définition : simplifier une fraction, c’est écrire une fraction égale avec des nombres plus petits.\n\n" +
+          "Méthode : on divise le numérateur et le dénominateur par un même diviseur.\n\n" +
+          `Calcul : ${s.n}/${s.d} = ${simp.n}/${simp.d}.\n\n` +
+          `Conclusion : la forme simplifiée est ${simp.n}/${simp.d}.`,
+        canvas: fractionCanvas({
+          model: "bar",
+          fraction: { numerator: s.n, denominator: s.d, label: `${s.n}/${s.d}` },
+        }),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "4e_fraction_comparer_canvas_compare_tpl_1",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "fractions",
+    microId: "fraction_comparer",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Compare les portions colorées ou utilise le produit en croix.",
+    tags: ["fractions", "comparer", "canvas", "compare", "template"],
+    generate: () => {
+      const situations = [
+        { a: [1, 2], b: [3, 4] },
+        { a: [2, 3], b: [3, 5] },
+        { a: [5, 6], b: [3, 4] },
+        { a: [3, 8], b: [1, 2] },
+      ];
+
+      const s = randomChoice(situations);
+      const va = s.a[0] / s.a[1];
+      const vb = s.b[0] / s.b[1];
+      const sign = va > vb ? ">" : va < vb ? "<" : "=";
+
+      return {
+        text: `Compare ${s.a[0]}/${s.a[1]} et ${s.b[0]}/${s.b[1]}. Réponds par >, < ou =.`,
+        format: "short",
+        expected: [sign],
+        comparator: "contains_keyword",
+        explanation:
+          "Définition : comparer deux fractions, c’est comparer les quotients qu’elles représentent.\n\n" +
+          "Méthode : on peut observer les portions colorées ou utiliser le produit en croix.\n\n" +
+          `Observation : ${s.a[0]}/${s.a[1]} ${sign} ${s.b[0]}/${s.b[1]}.\n\n` +
+          `Conclusion : le signe correct est ${sign}.`,
+        canvas: fractionCanvas({
+          model: "compare",
+          fractions: [
+            { numerator: s.a[0], denominator: s.a[1], label: `${s.a[0]}/${s.a[1]}` },
+            { numerator: s.b[0], denominator: s.b[1], label: `${s.b[0]}/${s.b[1]}` },
+          ],
+        }),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "4e_fraction_addition_canvas_bar_tpl_1",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "fractions",
+    microId: "fraction_addition",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Les dénominateurs sont identiques : additionne les numérateurs.",
+    tags: ["fractions", "addition", "canvas", "bar", "template"],
+    generate: () => {
+      const d = randomChoice([4, 5, 6, 8, 10]);
+      const a = randomInt(1, Math.floor(d / 2));
+      const b = randomInt(1, Math.floor(d / 2));
+      const total = a + b;
+      const simp = simplify(total, d);
+
+      return {
+        text: `Calcule ${a}/${d} + ${b}/${d}.`,
+        format: "short",
+        expected: [frac(simp.n, simp.d), frac(total, d)],
+        comparator: "fraction_decimal_equivalent",
+        explanation:
+          "Définition : pour additionner des fractions de même dénominateur, on additionne les numérateurs.\n\n" +
+          "Méthode : on garde le même dénominateur.\n\n" +
+          `Calcul : ${a}/${d} + ${b}/${d} = ${total}/${d} = ${simp.n}/${simp.d}.\n\n` +
+          `Conclusion : le résultat est ${simp.n}/${simp.d}.`,
+        canvas: fractionCanvas({
+          model: "bar",
+          fraction: { numerator: total, denominator: d, label: `${total}/${d}` },
+        }),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "4e_fraction_quantite_canvas_circle_tpl_1",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "fractions",
+    microId: "fraction_quantite",
+    difficulty: 3,
+    theme: "reunion",
+    hint: "Divise par le dénominateur puis multiplie par le numérateur.",
+    tags: ["fractions", "quantite", "canvas", "circle", "template", "reunion"],
+    generate: () => {
+      const d = randomChoice([3, 4, 5, 6]);
+      const n = randomInt(1, d - 1);
+      const total = d * randomInt(4, 10);
+      const result = (total / d) * n;
+
+      return {
+        text: `Au marché, un panier contient ${total} fruits. ${n}/${d} des fruits sont des mangues. Combien y a-t-il de mangues ?`,
+        format: "short",
+        expected: [String(result)],
+        comparator: "number_equal",
+        explanation:
+          "Définition : calculer une fraction d’une quantité, c’est prendre une partie de cette quantité.\n\n" +
+          "Méthode : on divise par le dénominateur puis on multiplie par le numérateur.\n\n" +
+          `Calcul : ${total} ÷ ${d} = ${total / d}, puis ${total / d} × ${n} = ${result}.\n\n` +
+          `Conclusion : il y a ${result} mangues.`,
+        canvas: fractionCanvas({
+          model: "circle",
+          fraction: { numerator: n, denominator: d, label: `${n}/${d}` },
+        }),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "4e_fraction_rationnel_canvas_grid_tpl_1",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "fractions",
+    microId: "fraction_rationnel",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Un rationnel peut s’écrire comme quotient de deux entiers.",
+    tags: ["fractions", "rationnel", "canvas", "grid", "template"],
+    generate: () => {
+      const situations = [
+        { rows: 2, cols: 5, shaded: 7 },
+        { rows: 3, cols: 4, shaded: 5 },
+        { rows: 4, cols: 4, shaded: 10 },
+        { rows: 2, cols: 6, shaded: 9 },
+      ];
+
+      const s = randomChoice(situations);
+      const total = s.rows * s.cols;
+      const simp = simplify(s.shaded, total);
+
+      return {
+        text: "Écris la partie colorée sous forme de fraction simplifiée.",
+        format: "short",
+        expected: [frac(simp.n, simp.d), frac(s.shaded, total)],
+        comparator: "fraction_decimal_equivalent",
+        explanation:
+          "Définition : une fraction est une écriture d’un nombre rationnel.\n\n" +
+          "Méthode : on compte les cases colorées et les cases totales, puis on simplifie.\n\n" +
+          `Calcul : ${s.shaded}/${total} = ${simp.n}/${simp.d}.\n\n` +
+          `Conclusion : la fraction simplifiée est ${simp.n}/${simp.d}.`,
+        canvas: fractionCanvas({
+          model: "grid",
+          grid: { rows: s.rows, cols: s.cols, shaded: s.shaded },
+        }),
+      };
+    },
+  },
+
+  {
+    kind: "fixed",
+    id: "4e_fraction_piege_parts_inegales_fixed_1",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "fractions",
+    microId: "fraction_egales",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Deux figures ont 2 parts colorées sur 4. Peut-on toujours dire qu’elles représentent la même fraction ?",
+    format: "qcm",
+    choices: ["oui", "non"],
+    expected: ["non"],
+    comparator: "mcq_exact",
+    hint: "Il faut vérifier que les parts sont égales.",
+    explanation:
+      "Définition : une fraction représente des parts égales d’un même tout.\n\n" +
+      "Méthode : avant d’écrire ou de comparer une fraction, on vérifie que le partage est régulier.\n\n" +
+      "Observation : si les parts ne sont pas égales, l’écriture 2/4 n’est pas fiable.\n\n" +
+      "Conclusion : on ne peut pas conclure sans parts égales.",
+    tags: ["fractions", "piege", "parts_inegales", "canvas"],
+    canvas: fractionCanvas({
+      model: "bar",
+      fraction: { numerator: 2, denominator: 4, label: "2/4 ?" },
+      display: { unequalParts: true },
+    }),
+  },
+
+  {
+    kind: "fixed",
+    id: "4e_fraction_addition_erreur_fixed_1",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "fractions",
+    microId: "fraction_addition",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Un élève écrit : 1/2 + 1/3 = 2/5. Explique son erreur.",
+    format: "open",
+    expected: ["dénominateur", "commun", "5/6", "additionne"],
+    comparator: "contains_keyword",
+    hint: "On n’additionne pas les dénominateurs.",
+    explanation:
+      "Définition : pour additionner deux fractions, il faut utiliser un dénominateur commun.\n\n" +
+      "Méthode : on transforme les fractions avant d’additionner.\n\n" +
+      "Calcul : 1/2 = 3/6 et 1/3 = 2/6, donc 1/2 + 1/3 = 5/6.\n\n" +
+      "Conclusion : l’erreur est d’avoir additionné les dénominateurs.",
+    tags: ["fractions", "erreur", "open", "addition"],
   },
 ];

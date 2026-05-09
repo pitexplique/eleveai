@@ -1,4 +1,7 @@
-import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
+import type {
+  TutorBankItemV4,
+  FractionCanvasData,
+} from "@/lib/tutor-v4/types";
 
 function shuffle<T>(arr: T[]): T[] {
   return [...arr].sort(() => Math.random() - 0.5);
@@ -39,6 +42,12 @@ function equivalentFractionAnswers(n: number, d: number): string[] {
       `${n}/${d}`,
     ])
   );
+}
+
+function fractionCanvas(
+  data: Omit<FractionCanvasData, "kind">
+): FractionCanvasData {
+  return { kind: "fraction", ...data };
 }
 
 export const fractionsBank: TutorBankItemV4[] = [
@@ -993,7 +1002,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     difficulty: 4,
     theme: "neutral",
     text: "Explique pourquoi 1/3 est plus grand que 1/4.",
-    format: "short",
+    format: "open",
     expected: ["plus grand", "parts", "quart", "tiers"],
     comparator: "contains_keyword",
     hint: "Quand on partage la même quantité en moins de parts, les parts sont plus grandes.",
@@ -1209,5 +1218,299 @@ export const fractionsBank: TutorBankItemV4[] = [
           ("L’élève additionne les numérateurs et les dénominateurs séparément. Il faut mettre au même dénominateur : 1/2 = 3/6 et 1/3 = 2/6, donc le résultat est 5/6.") +
           "\n\nConclusion : la fraction ou le nombre obtenu est la bonne réponse.",
     tags: ["fractions", "open", "defi", "erreur"],
+  },
+    /* =========================
+     RENFORT — FRACTION CANVAS 5e
+  ========================= */
+
+  {
+    kind: "template",
+    id: "5e_fraction_egales_canvas_compare_tpl_1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "fractions",
+    microId: "fraction_egales",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Observe si la même proportion est colorée.",
+    tags: ["fractions", "fractions_egales", "canvas", "compare", "template"],
+    generate: () => {
+      const situations = [
+        { a: [1, 2], b: [2, 4], answer: "oui" },
+        { a: [2, 3], b: [4, 6], answer: "oui" },
+        { a: [3, 4], b: [6, 8], answer: "oui" },
+        { a: [2, 5], b: [1, 2], answer: "non" },
+        { a: [3, 5], b: [2, 3], answer: "non" },
+      ];
+      const s = randomChoice(situations);
+
+      return {
+        text: `Les fractions ${s.a[0]}/${s.a[1]} et ${s.b[0]}/${s.b[1]} représentent-elles la même quantité ?`,
+        format: "qcm",
+        choices: shuffle(["oui", "non"]),
+        expected: [s.answer],
+        comparator: "mcq_exact",
+        explanation:
+          "Définition : deux fractions sont égales si elles représentent la même quantité.\n\n" +
+          "Méthode : on compare les parties colorées sur les deux représentations.\n\n" +
+          (s.answer === "oui"
+            ? `Observation : ${s.a[0]}/${s.a[1]} et ${s.b[0]}/${s.b[1]} colorent la même proportion du tout.\n\n`
+            : `Observation : ${s.a[0]}/${s.a[1]} et ${s.b[0]}/${s.b[1]} ne colorent pas la même proportion du tout.\n\n`) +
+          `Conclusion : la réponse est ${s.answer}.`,
+        canvas: fractionCanvas({
+          model: "compare",
+          fractions: [
+            { numerator: s.a[0], denominator: s.a[1], label: `${s.a[0]}/${s.a[1]}` },
+            { numerator: s.b[0], denominator: s.b[1], label: `${s.b[0]}/${s.b[1]}` },
+          ],
+        }),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "5e_fraction_simplifier_canvas_bar_tpl_1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "fractions",
+    microId: "fraction_simplifier",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Cherche une fraction plus simple qui représente la même partie colorée.",
+    tags: ["fractions", "simplifier", "canvas", "bar", "template"],
+    generate: () => {
+      const situations = [
+        { n: 2, d: 4 },
+        { n: 3, d: 6 },
+        { n: 4, d: 8 },
+        { n: 6, d: 10 },
+        { n: 6, d: 12 },
+        { n: 8, d: 12 },
+      ];
+      const s = randomChoice(situations);
+      const simp = simplifyFraction(s.n, s.d);
+
+      return {
+        text: `Simplifie la fraction représentée : ${s.n}/${s.d}.`,
+        format: "short",
+        expected: [fractionStr(simp.n, simp.d), `${s.n}/${s.d}`],
+        comparator: "fraction_decimal_equivalent",
+        explanation:
+          "Définition : simplifier une fraction, c’est écrire une fraction égale avec des nombres plus petits.\n\n" +
+          "Méthode : on divise le numérateur et le dénominateur par un même diviseur.\n\n" +
+          `Calcul : ${s.n}/${s.d} = ${simp.n}/${simp.d}.\n\n` +
+          `Conclusion : la forme simplifiée est ${simp.n}/${simp.d}.`,
+        canvas: fractionCanvas({
+          model: "bar",
+          fraction: { numerator: s.n, denominator: s.d, label: `${s.n}/${s.d}` },
+        }),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "5e_fraction_rationnel_canvas_grid_tpl_1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "fractions",
+    microId: "fraction_rationnel",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Un nombre rationnel peut s’écrire comme quotient de deux entiers.",
+    tags: ["fractions", "rationnel", "canvas", "grid", "template"],
+    generate: () => {
+      const situations = [
+        { rows: 2, cols: 5, shaded: 7 },
+        { rows: 3, cols: 4, shaded: 5 },
+        { rows: 4, cols: 4, shaded: 10 },
+        { rows: 2, cols: 6, shaded: 9 },
+      ];
+      const s = randomChoice(situations);
+      const total = s.rows * s.cols;
+      const simp = simplifyFraction(s.shaded, total);
+
+      return {
+        text: "Écris la partie colorée sous forme de fraction simplifiée.",
+        format: "short",
+        expected: [fractionStr(simp.n, simp.d), `${s.shaded}/${total}`],
+        comparator: "fraction_decimal_equivalent",
+        explanation:
+          "Définition : une fraction est une écriture d’un nombre rationnel.\n\n" +
+          "Méthode : on compte les cases colorées et les cases totales, puis on simplifie si possible.\n\n" +
+          `Calcul : ${s.shaded}/${total} = ${simp.n}/${simp.d}.\n\n` +
+          `Conclusion : la fraction simplifiée est ${simp.n}/${simp.d}.`,
+        canvas: fractionCanvas({
+          model: "grid",
+          grid: { rows: s.rows, cols: s.cols, shaded: s.shaded },
+        }),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "5e_fraction_comparer_canvas_compare_tpl_1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "fractions",
+    microId: "fraction_comparer",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Compare les portions colorées.",
+    tags: ["fractions", "comparer", "canvas", "compare", "template"],
+    generate: () => {
+      const situations = [
+        { a: [1, 2], b: [3, 4] },
+        { a: [2, 3], b: [3, 5] },
+        { a: [5, 6], b: [3, 4] },
+        { a: [3, 8], b: [1, 2] },
+      ];
+      const s = randomChoice(situations);
+      const va = s.a[0] / s.a[1];
+      const vb = s.b[0] / s.b[1];
+      const sign = va > vb ? ">" : va < vb ? "<" : "=";
+
+      return {
+        text: `Compare ${s.a[0]}/${s.a[1]} et ${s.b[0]}/${s.b[1]}. Réponds par >, < ou =.`,
+        format: "short",
+        expected: [sign],
+        comparator: "contains_keyword",
+        explanation:
+          "Définition : comparer deux fractions, c’est déterminer laquelle représente la plus grande quantité.\n\n" +
+          "Méthode : on peut observer les portions colorées ou comparer par calcul.\n\n" +
+          `Observation : ${s.a[0]}/${s.a[1]} ${sign} ${s.b[0]}/${s.b[1]}.\n\n` +
+          `Conclusion : le signe correct est ${sign}.`,
+        canvas: fractionCanvas({
+          model: "compare",
+          fractions: [
+            { numerator: s.a[0], denominator: s.a[1], label: `${s.a[0]}/${s.a[1]}` },
+            { numerator: s.b[0], denominator: s.b[1], label: `${s.b[0]}/${s.b[1]}` },
+          ],
+        }),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "5e_fraction_addition_canvas_bar_tpl_1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "fractions",
+    microId: "fraction_addition",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Les dénominateurs sont identiques : additionne les numérateurs.",
+    tags: ["fractions", "addition", "canvas", "bar", "template"],
+    generate: () => {
+      const d = randomChoice([4, 5, 6, 8]);
+      const a = randomChoice([1, 2]);
+      const b = randomChoice([1, 2, 3]);
+      const total = Math.min(a + b, d);
+      const simp = simplifyFraction(total, d);
+
+      return {
+        text: `Calcule ${a}/${d} + ${b}/${d}.`,
+        format: "short",
+        expected: [fractionStr(simp.n, simp.d), `${total}/${d}`],
+        comparator: "fraction_decimal_equivalent",
+        explanation:
+          "Définition : pour additionner des fractions de même dénominateur, on additionne les numérateurs.\n\n" +
+          "Méthode : on garde le même dénominateur.\n\n" +
+          `Calcul : ${a}/${d} + ${b}/${d} = ${total}/${d} = ${simp.n}/${simp.d}.\n\n` +
+          `Conclusion : le résultat est ${simp.n}/${simp.d}.`,
+        canvas: fractionCanvas({
+          model: "bar",
+          fraction: { numerator: total, denominator: d, label: `${total}/${d}` },
+        }),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "5e_fraction_quantite_canvas_circle_tpl_1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "fractions",
+    microId: "fraction_quantite",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Commence par calculer une part.",
+    tags: ["fractions", "quantite", "canvas", "circle", "template"],
+    generate: () => {
+      const d = randomChoice([3, 4, 5, 6]);
+      const n = randomChoice([1, 2, 3]);
+      const base = d * randomChoice([4, 5, 6, 8]);
+      const result = (base / d) * n;
+
+      return {
+        text: `Calcule ${n}/${d} de ${base}.`,
+        format: "short",
+        expected: [String(result)],
+        comparator: "number_equal",
+        explanation:
+          "Définition : calculer une fraction d’une quantité, c’est prendre une partie de cette quantité.\n\n" +
+          "Méthode : on divise par le dénominateur puis on multiplie par le numérateur.\n\n" +
+          `Calcul : ${base} ÷ ${d} = ${base / d}, puis ${base / d} × ${n} = ${result}.\n\n` +
+          `Conclusion : ${n}/${d} de ${base} vaut ${result}.`,
+        canvas: fractionCanvas({
+          model: "circle",
+          fraction: { numerator: n, denominator: d, label: `${n}/${d}` },
+        }),
+      };
+    },
+  },
+
+  {
+    kind: "fixed",
+    id: "5e_fraction_piege_parts_inegales_fixed_1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "fractions",
+    microId: "fraction_egales",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Deux figures ont 2 parts colorées sur 4. Peut-on toujours dire qu’elles représentent 2/4 ?",
+    format: "qcm",
+    choices: ["oui", "non"],
+    expected: ["non"],
+    comparator: "mcq_exact",
+    hint: "Il faut vérifier que les parts sont égales.",
+    explanation:
+      "Définition : une fraction représente des parts égales d’un même tout.\n\n" +
+      "Méthode : avant d’écrire une fraction, on vérifie que le partage est régulier.\n\n" +
+      "Observation : si les parts ne sont pas égales, l’écriture 2/4 n’est pas fiable.\n\n" +
+      "Conclusion : on ne peut pas toujours dire que cela représente 2/4.",
+    tags: ["fractions", "piege", "parts_inegales", "canvas"],
+    canvas: fractionCanvas({
+      model: "bar",
+      fraction: { numerator: 2, denominator: 4, label: "2/4 ?" },
+      display: { unequalParts: true },
+    }),
+  },
+
+  {
+    kind: "fixed",
+    id: "5e_fraction_addition_erreur_fixed_1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "fractions",
+    microId: "fraction_addition",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Un élève écrit : 1/2 + 1/3 = 2/5. Quelle est son erreur ?",
+    format: "open",
+    expected: ["dénominateur", "même dénominateur", "5/6", "additionne"],
+    comparator: "contains_keyword",
+    hint: "On n’additionne pas les dénominateurs entre eux.",
+    explanation:
+      "Définition : pour additionner deux fractions, il faut utiliser un dénominateur commun.\n\n" +
+      "Méthode : on transforme les fractions avant d’additionner.\n\n" +
+      "Calcul : 1/2 = 3/6 et 1/3 = 2/6, donc 1/2 + 1/3 = 5/6.\n\n" +
+      "Conclusion : l’erreur est d’avoir additionné les dénominateurs.",
+    tags: ["fractions", "erreur", "open", "addition"],
   },
 ];
