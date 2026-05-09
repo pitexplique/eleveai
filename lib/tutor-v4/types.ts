@@ -66,12 +66,12 @@ export type TriangleCanvasSideLabel = "AB" | "BC" | "CA";
 
 export type QuadrilatereCanvasPointLabel = "A" | "B" | "C" | "D";
 export type QuadrilatereCanvasSideLabel =
-  | "AB"
-  | "BC"
-  | "CD"
-  | "DA"
-  | "AC"
-  | "BD";
+  | "AB" | "BA"
+  | "BC" | "CB"
+  | "CD" | "DC"
+  | "DA" | "AD"
+  | "AC" | "CA"
+  | "BD" | "DB";
 
 export type FigureLibreCanvasGridCell = [row: number, col: number];
 export type FigureLibreCanvasGridPoint = [row: number, col: number];

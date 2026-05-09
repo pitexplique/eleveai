@@ -1,15 +1,17 @@
 // tutor-v4/components/QuadrilatereCanvas.tsx
 "use client";
 
-import type { CanvasFigure } from "@/lib/tutor-v4/types";
+import type {
+  CanvasFigure,
+  QuadrilatereCanvasPointLabel,
+  QuadrilatereCanvasSideLabel,
+} from "@/lib/tutor-v4/types";
 
 type Props = {
   figure: CanvasFigure;
 };
 
 type Point = { x: number; y: number };
-type CanvasQuadPointLabel = "A" | "B" | "C" | "D";
-type CanvasQuadSideLabel = "AB" | "BC" | "CD" | "DA" | "AC" | "BD";
 
 function mid(a: Point, b: Point): Point {
   return { x: (a.x + b.x) / 2, y: (a.y + b.y) / 2 };
@@ -21,13 +23,8 @@ function norm(vx: number, vy: number) {
 }
 
 function angleSquarePath(vertex: Point, p1: Point, p2: Point, size = 20) {
-  const v1x = p1.x - vertex.x;
-  const v1y = p1.y - vertex.y;
-  const v2x = p2.x - vertex.x;
-  const v2y = p2.y - vertex.y;
-
-  const u1 = norm(v1x, v1y);
-  const u2 = norm(v2x, v2y);
+  const u1 = norm(p1.x - vertex.x, p1.y - vertex.y);
+  const u2 = norm(p2.x - vertex.x, p2.y - vertex.y);
 
   const pA = { x: vertex.x + u1.x * size, y: vertex.y + u1.y * size };
   const pB = { x: pA.x + u2.x * size, y: pA.y + u2.y * size };
@@ -50,7 +47,7 @@ function angleArcPath(vertex: Point, p1: Point, p2: Point, radius = 16) {
 }
 
 function getSidePoints(
-  side: CanvasQuadSideLabel,
+  side: QuadrilatereCanvasSideLabel,
   A: Point,
   B: Point,
   C: Point,
@@ -58,22 +55,33 @@ function getSidePoints(
 ): [Point, Point] {
   switch (side) {
     case "AB":
+    case "BA":
       return [A, B];
+
     case "BC":
+    case "CB":
       return [B, C];
+
     case "CD":
+    case "DC":
       return [C, D];
+
     case "DA":
+    case "AD":
       return [D, A];
+
     case "AC":
+    case "CA":
       return [A, C];
+
     case "BD":
+    case "DB":
       return [B, D];
   }
 }
 
 function getAngleNeighbors(
-  vertexLabel: CanvasQuadPointLabel,
+  vertexLabel: QuadrilatereCanvasPointLabel,
   A: Point,
   B: Point,
   C: Point,
@@ -91,7 +99,7 @@ function getAngleNeighbors(
   }
 }
 
-function labelPosition(label: CanvasQuadPointLabel, p: Point): Point {
+function labelPosition(label: QuadrilatereCanvasPointLabel, p: Point): Point {
   switch (label) {
     case "A":
       return { x: p.x - 18, y: p.y - 10 };
@@ -104,7 +112,10 @@ function labelPosition(label: CanvasQuadPointLabel, p: Point): Point {
   }
 }
 
-function angleLabelPosition(label: CanvasQuadPointLabel, p: Point): Point {
+function angleLabelPosition(
+  label: QuadrilatereCanvasPointLabel,
+  p: Point
+): Point {
   switch (label) {
     case "A":
       return { x: p.x + 12, y: p.y - 10 };
@@ -122,6 +133,7 @@ function getTickSegment(a: Point, b: Point, tickSize = 12, offset = 0) {
   const dx = b.x - a.x;
   const dy = b.y - a.y;
   const n = Math.hypot(dx, dy) || 1;
+
   const nx = -dy / n;
   const ny = dx / n;
 
@@ -176,20 +188,20 @@ function getParallelMarkSegments(a: Point, b: Point, variant: 1 | 2) {
   const cx = m.x + px * offset;
   const cy = m.y + py * offset;
 
-  const p1 = {
-    x: cx - (ux * markLength) / 2 - px * arm,
-    y: cy - (uy * markLength) / 2 - py * arm,
+  return {
+    p1: {
+      x: cx - (ux * markLength) / 2 - px * arm,
+      y: cy - (uy * markLength) / 2 - py * arm,
+    },
+    p2: {
+      x: cx + (ux * markLength) / 2,
+      y: cy + (uy * markLength) / 2,
+    },
+    p3: {
+      x: cx - (ux * markLength) / 2 + px * arm,
+      y: cy - (uy * markLength) / 2 + py * arm,
+    },
   };
-  const p2 = {
-    x: cx + (ux * markLength) / 2,
-    y: cy + (uy * markLength) / 2,
-  };
-  const p3 = {
-    x: cx - (ux * markLength) / 2 + px * arm,
-    y: cy - (uy * markLength) / 2 + py * arm,
-  };
-
-  return { p1, p2, p3 };
 }
 
 export default function QuadrilatereCanvas({ figure }: Props) {
@@ -219,12 +231,12 @@ export default function QuadrilatereCanvas({ figure }: Props) {
   const angleC = figure.angleLabels?.C;
   const angleD = figure.angleLabels?.D;
 
-  const sideAB = figure.sideLabels?.AB;
-  const sideBC = figure.sideLabels?.BC;
-  const sideCD = figure.sideLabels?.CD;
-  const sideDA = figure.sideLabels?.DA;
-  const sideAC = figure.sideLabels?.AC;
-  const sideBD = figure.sideLabels?.BD;
+  const sideAB = figure.sideLabels?.AB ?? figure.sideLabels?.BA;
+  const sideBC = figure.sideLabels?.BC ?? figure.sideLabels?.CB;
+  const sideCD = figure.sideLabels?.CD ?? figure.sideLabels?.DC;
+  const sideDA = figure.sideLabels?.DA ?? figure.sideLabels?.AD;
+  const sideAC = figure.sideLabels?.AC ?? figure.sideLabels?.CA;
+  const sideBD = figure.sideLabels?.BD ?? figure.sideLabels?.DB;
 
   const mAB = mid(A, B);
   const mBC = mid(B, C);
@@ -287,337 +299,46 @@ export default function QuadrilatereCanvas({ figure }: Props) {
 
         {showPoints && (
           <>
-            <circle cx={A.x} cy={A.y} r={4.5} fill="#0f172a" />
-            <circle cx={B.x} cy={B.y} r={4.5} fill="#0f172a" />
-            <circle cx={C.x} cy={C.y} r={4.5} fill="#0f172a" />
-            <circle cx={D.x} cy={D.y} r={4.5} fill="#0f172a" />
+            {[A, B, C, D].map((p, i) => (
+              <circle key={i} cx={p.x} cy={p.y} r={4.5} fill="#0f172a" />
+            ))}
           </>
         )}
 
         {showLabels && (
           <>
-            <text
-              x={posLabelA.x}
-              y={posLabelA.y}
-              fontSize="18"
-              fontWeight="900"
-              fill="#0f172a"
-              stroke="white"
-              strokeWidth="2"
-              paintOrder="stroke"
-            >
-              {labelA}
-            </text>
-            <text
-              x={posLabelB.x}
-              y={posLabelB.y}
-              fontSize="18"
-              fontWeight="900"
-              fill="#0f172a"
-              stroke="white"
-              strokeWidth="2"
-              paintOrder="stroke"
-            >
-              {labelB}
-            </text>
-            <text
-              x={posLabelC.x}
-              y={posLabelC.y}
-              fontSize="18"
-              fontWeight="900"
-              fill="#0f172a"
-              stroke="white"
-              strokeWidth="2"
-              paintOrder="stroke"
-            >
-              {labelC}
-            </text>
-            <text
-              x={posLabelD.x}
-              y={posLabelD.y}
-              fontSize="18"
-              fontWeight="900"
-              fill="#0f172a"
-              stroke="white"
-              strokeWidth="2"
-              paintOrder="stroke"
-            >
-              {labelD}
-            </text>
+            <text x={posLabelA.x} y={posLabelA.y} fontSize="18" fontWeight="900" fill="#0f172a" stroke="white" strokeWidth="2" paintOrder="stroke">{labelA}</text>
+            <text x={posLabelB.x} y={posLabelB.y} fontSize="18" fontWeight="900" fill="#0f172a" stroke="white" strokeWidth="2" paintOrder="stroke">{labelB}</text>
+            <text x={posLabelC.x} y={posLabelC.y} fontSize="18" fontWeight="900" fill="#0f172a" stroke="white" strokeWidth="2" paintOrder="stroke">{labelC}</text>
+            <text x={posLabelD.x} y={posLabelD.y} fontSize="18" fontWeight="900" fill="#0f172a" stroke="white" strokeWidth="2" paintOrder="stroke">{labelD}</text>
           </>
         )}
 
         {showAngles && (
           <>
-            {angleA ? (
-              <g>
-                <rect
-                  x={posAngleA.x - 4}
-                  y={posAngleA.y - 14}
-                  width={34}
-                  height={22}
-                  rx={4}
-                  fill="white"
-                  opacity={0.9}
-                />
-                <text
-                  x={posAngleA.x}
-                  y={posAngleA.y}
-                  fontSize="16"
-                  fill="#7c3aed"
-                  fontWeight="900"
-                  stroke="white"
-                  strokeWidth="2"
-                  paintOrder="stroke"
-                >
-                  {angleA}
-                </text>
-              </g>
-            ) : null}
-
-            {angleB ? (
-              <g>
-                <rect
-                  x={posAngleB.x - 4}
-                  y={posAngleB.y - 14}
-                  width={34}
-                  height={22}
-                  rx={4}
-                  fill="white"
-                  opacity={0.9}
-                />
-                <text
-                  x={posAngleB.x}
-                  y={posAngleB.y}
-                  fontSize="16"
-                  fill="#7c3aed"
-                  fontWeight="900"
-                  stroke="white"
-                  strokeWidth="2"
-                  paintOrder="stroke"
-                >
-                  {angleB}
-                </text>
-              </g>
-            ) : null}
-
-            {angleC ? (
-              <g>
-                <rect
-                  x={posAngleC.x - 4}
-                  y={posAngleC.y - 14}
-                  width={34}
-                  height={22}
-                  rx={4}
-                  fill="white"
-                  opacity={0.9}
-                />
-                <text
-                  x={posAngleC.x}
-                  y={posAngleC.y}
-                  fontSize="16"
-                  fill="#7c3aed"
-                  fontWeight="900"
-                  stroke="white"
-                  strokeWidth="2"
-                  paintOrder="stroke"
-                >
-                  {angleC}
-                </text>
-              </g>
-            ) : null}
-
-            {angleD ? (
-              <g>
-                <rect
-                  x={posAngleD.x - 4}
-                  y={posAngleD.y - 14}
-                  width={34}
-                  height={22}
-                  rx={4}
-                  fill="white"
-                  opacity={0.9}
-                />
-                <text
-                  x={posAngleD.x}
-                  y={posAngleD.y}
-                  fontSize="16"
-                  fill="#7c3aed"
-                  fontWeight="900"
-                  stroke="white"
-                  strokeWidth="2"
-                  paintOrder="stroke"
-                >
-                  {angleD}
-                </text>
-              </g>
-            ) : null}
+            {angleA && (
+              <text x={posAngleA.x} y={posAngleA.y} fontSize="16" fill="#7c3aed" fontWeight="900" stroke="white" strokeWidth="2" paintOrder="stroke">{angleA}</text>
+            )}
+            {angleB && (
+              <text x={posAngleB.x} y={posAngleB.y} fontSize="16" fill="#7c3aed" fontWeight="900" stroke="white" strokeWidth="2" paintOrder="stroke">{angleB}</text>
+            )}
+            {angleC && (
+              <text x={posAngleC.x} y={posAngleC.y} fontSize="16" fill="#7c3aed" fontWeight="900" stroke="white" strokeWidth="2" paintOrder="stroke">{angleC}</text>
+            )}
+            {angleD && (
+              <text x={posAngleD.x} y={posAngleD.y} fontSize="16" fill="#7c3aed" fontWeight="900" stroke="white" strokeWidth="2" paintOrder="stroke">{angleD}</text>
+            )}
           </>
         )}
 
         {showSides && (
           <>
-            {sideAB ? (
-              <g>
-                <rect
-                  x={mAB.x - 22}
-                  y={mAB.y - 12}
-                  width={44}
-                  height={20}
-                  rx={5}
-                  fill="white"
-                  opacity={0.9}
-                />
-                <text
-                  x={mAB.x}
-                  y={mAB.y + 4}
-                  textAnchor="middle"
-                  fontSize="15"
-                  fill="#0369a1"
-                  fontWeight="900"
-                  stroke="white"
-                  strokeWidth="2"
-                  paintOrder="stroke"
-                >
-                  {sideAB}
-                </text>
-              </g>
-            ) : null}
-
-            {sideBC ? (
-              <g>
-                <rect
-                  x={mBC.x - 22}
-                  y={mBC.y - 12}
-                  width={44}
-                  height={20}
-                  rx={5}
-                  fill="white"
-                  opacity={0.9}
-                />
-                <text
-                  x={mBC.x}
-                  y={mBC.y + 4}
-                  textAnchor="middle"
-                  fontSize="15"
-                  fill="#0369a1"
-                  fontWeight="900"
-                  stroke="white"
-                  strokeWidth="2"
-                  paintOrder="stroke"
-                >
-                  {sideBC}
-                </text>
-              </g>
-            ) : null}
-
-            {sideCD ? (
-              <g>
-                <rect
-                  x={mCD.x - 22}
-                  y={mCD.y - 12}
-                  width={44}
-                  height={20}
-                  rx={5}
-                  fill="white"
-                  opacity={0.9}
-                />
-                <text
-                  x={mCD.x}
-                  y={mCD.y + 4}
-                  textAnchor="middle"
-                  fontSize="15"
-                  fill="#0369a1"
-                  fontWeight="900"
-                  stroke="white"
-                  strokeWidth="2"
-                  paintOrder="stroke"
-                >
-                  {sideCD}
-                </text>
-              </g>
-            ) : null}
-
-            {sideDA ? (
-              <g>
-                <rect
-                  x={mDA.x - 22}
-                  y={mDA.y - 12}
-                  width={44}
-                  height={20}
-                  rx={5}
-                  fill="white"
-                  opacity={0.9}
-                />
-                <text
-                  x={mDA.x}
-                  y={mDA.y + 4}
-                  textAnchor="middle"
-                  fontSize="15"
-                  fill="#0369a1"
-                  fontWeight="900"
-                  stroke="white"
-                  strokeWidth="2"
-                  paintOrder="stroke"
-                >
-                  {sideDA}
-                </text>
-              </g>
-            ) : null}
-
-            {showDiagonals && sideAC ? (
-              <g>
-                <rect
-                  x={mAC.x - 22}
-                  y={mAC.y - 12}
-                  width={44}
-                  height={20}
-                  rx={5}
-                  fill="white"
-                  opacity={0.9}
-                />
-                <text
-                  x={mAC.x}
-                  y={mAC.y + 4}
-                  textAnchor="middle"
-                  fontSize="15"
-                  fill="#0369a1"
-                  fontWeight="900"
-                  stroke="white"
-                  strokeWidth="2"
-                  paintOrder="stroke"
-                >
-                  {sideAC}
-                </text>
-              </g>
-            ) : null}
-
-            {showDiagonals && sideBD ? (
-              <g>
-                <rect
-                  x={mBD.x - 22}
-                  y={mBD.y - 12}
-                  width={44}
-                  height={20}
-                  rx={5}
-                  fill="white"
-                  opacity={0.9}
-                />
-                <text
-                  x={mBD.x}
-                  y={mBD.y + 4}
-                  textAnchor="middle"
-                  fontSize="15"
-                  fill="#0369a1"
-                  fontWeight="900"
-                  stroke="white"
-                  strokeWidth="2"
-                  paintOrder="stroke"
-                >
-                  {sideBD}
-                </text>
-              </g>
-            ) : null}
+            {sideAB && <SideLabel point={mAB} label={sideAB} />}
+            {sideBC && <SideLabel point={mBC} label={sideBC} />}
+            {sideCD && <SideLabel point={mCD} label={sideCD} />}
+            {sideDA && <SideLabel point={mDA} label={sideDA} />}
+            {showDiagonals && sideAC && <SideLabel point={mAC} label={sideAC} />}
+            {showDiagonals && sideBD && <SideLabel point={mBD} label={sideBD} />}
           </>
         )}
 
@@ -648,34 +369,13 @@ export default function QuadrilatereCanvas({ figure }: Props) {
           const [p1a, p1b] = getSidePoints(s1, A, B, C, D);
           const [p2a, p2b] = getSidePoints(s2, A, B, C, D);
 
-          const tickCount = idx + 1;
-          const segs1 = getMultipleTickSegments(p1a, p1b, tickCount, 12, 7);
-          const segs2 = getMultipleTickSegments(p2a, p2b, tickCount, 12, 7);
+          const segs1 = getMultipleTickSegments(p1a, p1b, idx + 1);
+          const segs2 = getMultipleTickSegments(p2a, p2b, idx + 1);
 
           return (
-            <g
-              key={`${s1}-${s2}-${idx}`}
-              stroke="#16a34a"
-              strokeWidth={3}
-              strokeLinecap="round"
-            >
-              {segs1.map((seg, i) => (
-                <line
-                  key={`seg1-${idx}-${i}`}
-                  x1={seg.x1}
-                  y1={seg.y1}
-                  x2={seg.x2}
-                  y2={seg.y2}
-                />
-              ))}
-              {segs2.map((seg, i) => (
-                <line
-                  key={`seg2-${idx}-${i}`}
-                  x1={seg.x1}
-                  y1={seg.y1}
-                  x2={seg.x2}
-                  y2={seg.y2}
-                />
+            <g key={`${s1}-${s2}-${idx}`} stroke="#16a34a" strokeWidth={3} strokeLinecap="round">
+              {[...segs1, ...segs2].map((seg, i) => (
+                <line key={i} x1={seg.x1} y1={seg.y1} x2={seg.x2} y2={seg.y2} />
               ))}
             </g>
           );
@@ -684,17 +384,10 @@ export default function QuadrilatereCanvas({ figure }: Props) {
         {equalAngles.map(([v1, v2], idx) => {
           const [vertex1, p1a, p1b] = getAngleNeighbors(v1, A, B, C, D);
           const [vertex2, p2a, p2b] = getAngleNeighbors(v2, A, B, C, D);
-
           const radius = 20 + idx * 6;
 
           return (
-            <g
-              key={`${v1}-${v2}-${idx}`}
-              fill="none"
-              stroke="#f59e0b"
-              strokeWidth={3}
-              strokeLinecap="round"
-            >
+            <g key={`${v1}-${v2}-${idx}`} fill="none" stroke="#f59e0b" strokeWidth={3} strokeLinecap="round">
               <path d={angleArcPath(vertex1, p1a, p1b, radius)} />
               <path d={angleArcPath(vertex2, p2a, p2b, radius)} />
             </g>
@@ -706,29 +399,46 @@ export default function QuadrilatereCanvas({ figure }: Props) {
           const [p2a, p2b] = getSidePoints(s2, A, B, C, D);
 
           const variant = ((idx % 2) + 1) as 1 | 2;
-
           const seg1 = getParallelMarkSegments(p1a, p1b, variant);
           const seg2 = getParallelMarkSegments(p2a, p2b, variant);
 
           return (
-            <g
-              key={`${s1}-${s2}-parallel-${idx}`}
-              fill="none"
-              stroke="#8b5cf6"
-              strokeWidth={3}
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path
-                d={`M ${seg1.p1.x} ${seg1.p1.y} L ${seg1.p2.x} ${seg1.p2.y} L ${seg1.p3.x} ${seg1.p3.y}`}
-              />
-              <path
-                d={`M ${seg2.p1.x} ${seg2.p1.y} L ${seg2.p2.x} ${seg2.p2.y} L ${seg2.p3.x} ${seg2.p3.y}`}
-              />
+            <g key={`${s1}-${s2}-parallel-${idx}`} fill="none" stroke="#8b5cf6" strokeWidth={3} strokeLinecap="round" strokeLinejoin="round">
+              <path d={`M ${seg1.p1.x} ${seg1.p1.y} L ${seg1.p2.x} ${seg1.p2.y} L ${seg1.p3.x} ${seg1.p3.y}`} />
+              <path d={`M ${seg2.p1.x} ${seg2.p1.y} L ${seg2.p2.x} ${seg2.p2.y} L ${seg2.p3.x} ${seg2.p3.y}`} />
             </g>
           );
         })}
       </svg>
     </div>
+  );
+}
+
+function SideLabel({ point, label }: { point: Point; label: string }) {
+  return (
+    <g>
+      <rect
+        x={point.x - 24}
+        y={point.y - 13}
+        width={48}
+        height={22}
+        rx={5}
+        fill="white"
+        opacity={0.9}
+      />
+      <text
+        x={point.x}
+        y={point.y + 4}
+        textAnchor="middle"
+        fontSize="15"
+        fill="#0369a1"
+        fontWeight="900"
+        stroke="white"
+        strokeWidth="2"
+        paintOrder="stroke"
+      >
+        {label}
+      </text>
+    </g>
   );
 }

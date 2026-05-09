@@ -13,6 +13,7 @@ import { anglesBank } from "./angles.bank";
 import { trianglesBank } from "./triangles.bank";
 import { symetrieCentraleBank} from "./symetrie_centrale.bank"
 import { volumesBank } from "./volumes.bank";
+import { airesBank } from "./aires.bank";
 
 
 export const maths5eQuestionBank: TutorBankItemV4[] = [
@@ -26,7 +27,8 @@ export const maths5eQuestionBank: TutorBankItemV4[] = [
   ...anglesBank,
   ...trianglesBank,
   ...symetrieCentraleBank,
-  ...volumesBank
+  ...volumesBank,
+  ...airesBank
 
 ];
 
