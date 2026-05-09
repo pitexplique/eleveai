@@ -93,9 +93,91 @@ export default function LeconDuJourPage() {
   }, [lesson.audio]);
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-orange-50 via-yellow-50 to-emerald-50 px-3 py-4 text-slate-900 sm:px-5 sm:py-6 lg:px-6 lg:py-8">
-      <section className="mx-auto flex min-h-[calc(100vh-2rem)] w-full max-w-3xl items-center">
-        <div className="w-full rounded-[1.5rem] border border-orange-200 bg-white/95 p-4 shadow-xl sm:rounded-[2rem] sm:p-6 lg:p-7">
+    <main className="relative min-h-screen overflow-hidden bg-gradient-to-br from-orange-50 via-yellow-50 to-emerald-50 px-3 py-4 text-slate-900 sm:px-5 sm:py-6 lg:px-6 lg:py-8">
+      {/* SVG MATHS EN FOND */}
+      <div className="pointer-events-none absolute inset-0 opacity-[0.16]">
+        <svg
+          className="h-full w-full"
+          viewBox="0 0 1200 800"
+          preserveAspectRatio="xMidYMid slice"
+          aria-hidden="true"
+        >
+          <defs>
+            <pattern
+              id="mathPattern"
+              width="240"
+              height="180"
+              patternUnits="userSpaceOnUse"
+            >
+              <text x="20" y="40" fontSize="34" fontWeight="900" fill="#fb923c">
+                %
+              </text>
+              <text x="95" y="70" fontSize="28" fontWeight="900" fill="#16a34a">
+                10%
+              </text>
+              <text x="160" y="42" fontSize="30" fontWeight="900" fill="#7c3aed">
+                1/4
+              </text>
+
+              <circle
+                cx="55"
+                cy="125"
+                r="34"
+                fill="none"
+                stroke="#f97316"
+                strokeWidth="5"
+              />
+              <path
+                d="M55 125 L55 91 A34 34 0 0 1 89 125 Z"
+                fill="#fdba74"
+              />
+
+              <line
+                x1="125"
+                y1="130"
+                x2="215"
+                y2="130"
+                stroke="#0f172a"
+                strokeWidth="4"
+                strokeLinecap="round"
+              />
+              <line
+                x1="145"
+                y1="115"
+                x2="145"
+                y2="145"
+                stroke="#0f172a"
+                strokeWidth="3"
+              />
+              <line
+                x1="175"
+                y1="115"
+                x2="175"
+                y2="145"
+                stroke="#0f172a"
+                strokeWidth="3"
+              />
+              <line
+                x1="205"
+                y1="115"
+                x2="205"
+                y2="145"
+                stroke="#0f172a"
+                strokeWidth="3"
+              />
+
+              <text x="125" y="168" fontSize="24" fontWeight="900" fill="#2563eb">
+                × ÷ =
+              </text>
+            </pattern>
+          </defs>
+
+          <rect width="1200" height="800" fill="url(#mathPattern)" />
+        </svg>
+      </div>
+
+      <section className="relative z-10 mx-auto flex min-h-[calc(100vh-2rem)] w-full max-w-3xl items-start pt-2 sm:pt-4 lg:pt-6">
+        <div className="w-full rounded-[1.5rem] border border-orange-200 bg-white/95 p-4 shadow-xl backdrop-blur sm:rounded-[2rem] sm:p-6 lg:p-7">
           {/* HEADER */}
           <div className="mb-5 text-center sm:mb-6">
             <p className="text-xs font-bold uppercase tracking-wide text-orange-600 sm:text-sm">
@@ -159,18 +241,18 @@ export default function LeconDuJourPage() {
             {/* LIENS */}
             <div className="grid gap-3 sm:grid-cols-2">
               <Link
-                href={`/lecon-du-jour/ecrit/pourcentages`}
+                href="/lecon-du-jour/ecrit/pourcentages"
                 className="rounded-2xl bg-orange-500 px-5 py-3 text-center text-sm font-black text-white shadow hover:bg-orange-600 sm:text-base"
               >
                 📖 Voir la leçon écrite
               </Link>
 
-            <Link
-              href={tutorLinks.pourcentages.comprendre}
-              className="rounded-2xl bg-purple-500 px-5 py-3 text-center text-sm font-black text-white shadow hover:bg-purple-600 sm:text-base"
-            >
-              🧠 S’entraîner avec le Coach IA
-            </Link>
+              <Link
+                href={tutorLinks.pourcentages.comprendre}
+                className="rounded-2xl bg-purple-500 px-5 py-3 text-center text-sm font-black text-white shadow hover:bg-purple-600 sm:text-base"
+              >
+                🧠 S’entraîner avec le Coach IA
+              </Link>
             </div>
 
             {/* FOOTER */}
