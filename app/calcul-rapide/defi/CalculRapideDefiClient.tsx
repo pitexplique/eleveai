@@ -324,7 +324,7 @@ export default function CalculRapideDefiClient() {
 
     if (isCorrect) {
       setScore((score) => score + 1);
-      window.setTimeout(goNext, 1200);
+      window.setTimeout(goNext, 600);
       return;
     }
 
