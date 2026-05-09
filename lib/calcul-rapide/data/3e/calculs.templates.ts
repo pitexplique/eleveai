@@ -3,83 +3,166 @@
 import type { CalculRapideItem } from "../../types";
 
 export const calculsTemplates3e: CalculRapideItem[] = [
+  // 🔵 RÉACTIVATION conversions
+
   {
-    id: "3e_template_puissance_001",
+    id: "3e_template_conversion_longueur_001",
     niveau: "3e",
     type: "calcul",
     mode: "template",
-    notionId: "puissances",
-    microId: "puissance_calcul",
+    notionId: "grandeurs_mesures",
+    microId: "conversion_longueur",
     difficulty: 2,
     durationSec: 20,
-    media: { text: "{{a}}² × {{a}}³" },
-    template: "{{a}}² × {{a}}³",
+    media: { text: "{{n}} km = ? m" },
+    template: "{{n}} km = ? m",
     variables: {
-      a: [2, 3, 4, 5],
+      n: [1.8, 2.5, 3.2, 4.7, 6.4],
     },
-    answerRule: "Math.pow(a, 5)",
-    hint: "Même base : additionne les exposants.",
-    explanationTemplate: "{{a}}² × {{a}}³ = {{a}}⁵ = {{answer}}.",
-    tags: ["puissances", "template"],
+    answerRule: "n * 1000",
+    hint: "1 km = 1000 m.",
+    explanationTemplate:
+      "{{n}} × 1000 = {{answer}} m.",
+    tags: ["conversion", "longueur", "reactivation"],
   },
+
   {
-    id: "3e_template_relatif_001",
+    id: "3e_template_conversion_masse_001",
     niveau: "3e",
     type: "calcul",
     mode: "template",
-    notionId: "operations_relatifs",
-    microId: "relatif_calcul",
+    notionId: "grandeurs_mesures",
+    microId: "conversion_masse",
     difficulty: 2,
     durationSec: 20,
-    media: { text: "{{a}} × {{b}}" },
-    template: "{{a}} × {{b}}",
+    media: { text: "{{n}} kg = ? g" },
+    template: "{{n}} kg = ? g",
     variables: {
-      a: [-9, -6, 7],
-      b: [-4, 5, -3],
+      n: [0.25, 0.5, 0.75, 1.2, 2.8],
+    },
+    answerRule: "n * 1000",
+    hint: "1 kg = 1000 g.",
+    explanationTemplate:
+      "{{n}} × 1000 = {{answer}} g.",
+    tags: ["conversion", "masse", "reactivation"],
+  },
+
+  // 🔴 Durées
+
+  {
+    id: "3e_template_conversion_duree_001",
+    niveau: "3e",
+    type: "calcul",
+    mode: "template",
+    notionId: "grandeurs_mesures",
+    microId: "conversion_duree",
+    difficulty: 3,
+    durationSec: 20,
+    media: { text: "{{h}} h {{m}} min = ? min" },
+    template: "{{h}} h {{m}} min = ? min",
+    variables: {
+      h: [1, 2, 3, 4],
+      m: [10, 15, 20, 30, 45],
+    },
+    answerRule: "(h * 60) + m",
+    hint: "Transforme les heures en minutes puis ajoute.",
+    explanationTemplate:
+      "{{h}} h = {{h * 60}} min puis {{h * 60}} + {{m}} = {{answer}} min.",
+    tags: ["duree"],
+  },
+
+  // 🔴 Vitesses
+
+  {
+    id: "3e_template_vitesse_001",
+    niveau: "3e",
+    type: "calcul",
+    mode: "template",
+    notionId: "proportionnalite",
+    microId: "vitesse_moyenne",
+    difficulty: 3,
+    durationSec: 20,
+    media: { text: "{{v}} km/h pendant {{t}} h" },
+    template: "{{v}} km/h pendant {{t}} h",
+    variables: {
+      v: [70, 80, 90, 110, 130],
+      t: [1.5, 2, 2.5, 3],
+    },
+    answerRule: "v * t",
+    hint: "Distance = vitesse × temps.",
+    explanationTemplate:
+      "{{v}} × {{t}} = {{answer}} km.",
+    tags: ["vitesse", "distance"],
+  },
+
+  // 🔴 Aires
+
+  {
+    id: "3e_template_aire_001",
+    niveau: "3e",
+    type: "calcul",
+    mode: "template",
+    notionId: "aires",
+    microId: "aire_rectangle",
+    difficulty: 3,
+    durationSec: 20,
+    media: { text: "Rectangle : {{L}} m × {{l}} m" },
+    template: "Rectangle : {{L}} m × {{l}} m",
+    variables: {
+      L: [10, 12, 15, 18],
+      l: [4, 5, 6, 8],
+    },
+    answerRule: "L * l",
+    hint: "Aire = longueur × largeur.",
+    explanationTemplate:
+      "{{L}} × {{l}} = {{answer}} m².",
+    tags: ["aire"],
+  },
+
+  // 🔴 Volumes
+
+  {
+    id: "3e_template_volume_001",
+    niveau: "3e",
+    type: "calcul",
+    mode: "template",
+    notionId: "volumes",
+    microId: "volume_contenance",
+    difficulty: 3,
+    durationSec: 20,
+    media: { text: "{{n}} L = ? mL" },
+    template: "{{n}} L = ? mL",
+    variables: {
+      n: [0.75, 1.25, 2.4, 3.5, 4.8],
+    },
+    answerRule: "n * 1000",
+    hint: "1 L = 1000 mL.",
+    explanationTemplate:
+      "{{n}} × 1000 = {{answer}} mL.",
+    tags: ["volume", "contenance"],
+  },
+
+  // 🔴 Piège brevet
+
+  {
+    id: "3e_template_piege_aire_001",
+    niveau: "3e",
+    type: "calcul",
+    mode: "template",
+    notionId: "aires",
+    microId: "aire_unites",
+    difficulty: 4,
+    durationSec: 20,
+    media: { text: "{{a}} cm × {{b}} cm = ? cm²" },
+    template: "{{a}} cm × {{b}} cm = ? cm²",
+    variables: {
+      a: [4, 5, 6, 8, 10],
+      b: [3, 4, 5, 6],
     },
     answerRule: "a * b",
-    hint: "Regarde les signes puis multiplie.",
-    explanationTemplate: "{{a}} × {{b}} = {{answer}}.",
-    tags: ["relatifs", "template"],
-  },
-  {
-    id: "3e_template_equation_001",
-    niveau: "3e",
-    type: "calcul",
-    mode: "template",
-    notionId: "equations",
-    microId: "equation_simple",
-    difficulty: 2,
-    durationSec: 20,
-    media: { text: "2x + {{a}} = {{b}}" },
-    template: "2x + {{a}} = {{b}}",
-    variables: {
-      a: [3, 5, 7, 9],
-      b: [11, 15, 19, 23],
-    },
-    answerRule: "(b - a) / 2",
-    hint: "Soustrais puis divise par 2.",
-    explanationTemplate: "2x = {{b}} - {{a}}, donc x = {{answer}}.",
-    tags: ["equations", "template"],
-  },
-  {
-    id: "3e_template_fonction_001",
-    niveau: "3e",
-    type: "calcul",
-    mode: "template",
-    notionId: "fonctions",
-    microId: "image_fonction",
-    difficulty: 2,
-    durationSec: 20,
-    media: { text: "f(x) = 2x + {{a}}. Calcule f({{b}})." },
-    template: "f(x) = 2x + {{a}}. Calcule f({{b}}).",
-    variables: {
-      a: [1, 2, 3, 4],
-      b: [2, 3, 5, 6],
-    },
-    answerRule: "2 * b + a",
-    hint: "Remplace x par la valeur donnée.",
-    explanationTemplate: "f({{b}}) = 2 × {{b}} + {{a}} = {{answer}}.",
-    tags: ["fonctions", "template"],
+    hint: "Attention à l’unité d’aire.",
+    explanationTemplate:
+      "{{a}} × {{b}} = {{answer}} cm².",
+    tags: ["aire", "piege", "brevet"],
   },
 ];
