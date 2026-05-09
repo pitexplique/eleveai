@@ -148,6 +148,57 @@ const supportLinks: Record<string, string[]> = {
   proba_equiprobabilite: ["proba_issues"],
   proba_calculer: ["proba_issues", "proba_equiprobabilite", "fraction_comparer"],
   proba_defis: ["proba_calculer", "proba_equiprobabilite"],
+
+    // =========================
+  // ALGORITHMIQUE
+  // =========================
+  algo_sequence: ["litteral_expression", "relatif_lire"],
+
+  algo_entrees_sorties: [
+    "algo_sequence",
+    "litteral_traduire",
+  ],
+
+  algo_formule_blocs: [
+    "algo_entrees_sorties",
+    "litteral_expression",
+    "litteral_substituer",
+    "relatif_calcul",
+  ],
+
+  algo_expression_valeur: [
+    "algo_formule_blocs",
+    "litteral_substituer",
+    "relatif_calcul",
+    "fraction_quantite",
+  ],
+
+  algo_prevoir_expression: [
+    "algo_expression_valeur",
+    "litteral_reduire",
+    "relatif_calcul",
+  ],
+
+  algo_parametres: [
+    "algo_prevoir_expression",
+    "prop_coeff",
+    "prop_pourcentage",
+  ],
+
+  algo_boucle: [
+    "algo_sequence",
+    "algo_parametres",
+    "relatif_calcul",
+    "prop_table",
+  ],
+
+  algo_defis: [
+    "algo_boucle",
+    "algo_prevoir_expression",
+    "algo_parametres",
+    "litteral_defis",
+    "prop_defis",
+  ],
 };
 
 /**

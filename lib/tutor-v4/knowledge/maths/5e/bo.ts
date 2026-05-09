@@ -37,4 +37,7 @@ export const bo: KnowledgeBoCompetence[] = [
     boId: "BO5D2",
     label: "Probabilités",
   },
+  // knowledge/maths/5e/bo.ts
+  { boId: "BO5I1",
+   label: "Pensée informatique et algorithmique" },
 ];

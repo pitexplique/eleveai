@@ -193,7 +193,10 @@ const supportLinks: Record<string, string[]> = {
     // =========================
   // ALGORITHMIQUE
   // =========================
-  algo_sequence: ["entier_lire_ecrire", "mental_strategies"],
+  // =========================
+  // ALGORITHMIQUE
+  // =========================
+  algo_sequence: ["mental_strategies", "entier_lire_ecrire"],
 
   algo_deplacement: [
     "algo_sequence",

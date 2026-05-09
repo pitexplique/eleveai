@@ -522,4 +522,61 @@ export const microSkills: MicroSkillSource[] = [
     notionId: "probabilites",
     prerequis: ["proba_equiprobabilite", "proba_calculer"],
   },
+  {
+  id: "algo_sequence",
+  label: "Manipuler et séquencer des instructions simples",
+  notionId: "algorithmique",
+  prerequis: [],
+},
+  /* =========================
+     ALGORITHME
+  ========================= */
+{
+  id: "algo_sequence",
+  label: "Manipuler et séquencer des instructions simples",
+  notionId: "algorithmique",
+  prerequis: [],
+},
+{
+  id: "algo_entrees_sorties",
+  label: "Identifier les entrées et sorties d’un programme",
+  notionId: "algorithmique",
+  prerequis: ["algo_sequence"],
+},
+{
+  id: "algo_formule_blocs",
+  label: "Représenter une formule avec des blocs",
+  notionId: "algorithmique",
+  prerequis: ["algo_entrees_sorties", "litteral_expression"],
+},
+{
+  id: "algo_expression_valeur",
+  label: "Calculer la valeur d’une expression informatique",
+  notionId: "algorithmique",
+  prerequis: ["algo_formule_blocs", "litteral_substituer"],
+},
+{
+  id: "algo_prevoir_expression",
+  label: "Prévoir le résultat avant exécution",
+  notionId: "algorithmique",
+  prerequis: ["algo_expression_valeur"],
+},
+{
+  id: "algo_parametres",
+  label: "Analyser un programme simple et modifier ses paramètres",
+  notionId: "algorithmique",
+  prerequis: ["algo_prevoir_expression"],
+},
+{
+  id: "algo_boucle",
+  label: "Utiliser une boucle inconditionnelle simple",
+  notionId: "algorithmique",
+  prerequis: ["algo_sequence", "algo_parametres"],
+},
+{
+  id: "algo_defis",
+  label: "Défis d’algorithmique et programmation",
+  notionId: "algorithmique",
+  prerequis: ["algo_boucle", "algo_prevoir_expression"],
+},
 ];

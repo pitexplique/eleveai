@@ -708,8 +708,12 @@ export type ScratchBlockKind =
   | "set_variable"
   | "change_variable"
   | "if"
+  | "if_else"
   | "ask"
-  | "pen";
+  | "answer"
+  | "operator"
+  | "pen"
+  | "wait";
 
 export type ScratchBlockData = {
   type: ScratchBlockKind;
@@ -718,12 +722,19 @@ export type ScratchBlockData = {
   variable?: string;
   times?: number;
   condition?: string;
+
+  left?: string | number;
+  operator?: "+" | "-" | "×" | "÷" | "<" | ">" | "=";
+  right?: string | number;
+
   children?: ScratchBlockData[];
+  elseChildren?: ScratchBlockData[];
 };
 
 export type ScratchCanvasData = {
   kind: "scratch";
   title?: string;
+  description?: string;
   blocks: ScratchBlockData[];
   display?: {
     showSprite?: boolean;
