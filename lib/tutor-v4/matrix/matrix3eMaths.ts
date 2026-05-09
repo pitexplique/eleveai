@@ -72,7 +72,7 @@ const supportLinks: Record<string, string[]> = {
   fonction_graphique: ["prop_reconnaitre"],
   fonction_affine_lineaire: ["prop_reconnaitre", "prop_quatrieme"],
 
-    // =========================
+  // =========================
   // FONCTIONS AFFINES
   // =========================
   affine_reconnaitre: ["fonction_affine_lineaire"],
@@ -81,7 +81,7 @@ const supportLinks: Record<string, string[]> = {
   affine_calcul_image: ["fonction_image", "equation_resoudre_simple"],
   affine_expression: ["equation_resoudre_simple", "fonction_tableau"],
   affine_graphique: ["fonction_graphique", "affine_coeff_directeur"],
-  affine_problemes: ["proportionnalite_defis", "equation_defis"],
+  affine_problemes: ["prop_defis", "equation_defis"],
   affine_defis: ["fonction_defis", "equation_defis"],
 
   // =========================
@@ -97,6 +97,51 @@ const supportLinks: Record<string, string[]> = {
   // =========================
   proba_calculer: ["rationnel_comparer"],
   proba_deux_epreuves: ["proba_calculer"],
+
+  // =========================
+  // ALGORITHMIQUE
+  // =========================
+  algo_conditions_complexes: [
+    "equation_verifier",
+    "fonction_image",
+    "rationnel_comparer",
+  ],
+
+  algo_variables_boucles: [
+    "algo_conditions_complexes",
+    "litteral_substituer",
+    "rationnel_calculer",
+  ],
+
+  algo_programme_calcul: [
+    "algo_variables_boucles",
+    "litteral_reduire",
+    "litteral_developper",
+    "fonction_tableau",
+  ],
+
+  algo_debug: [
+    "algo_programme_calcul",
+    "equation_verifier",
+    "fonction_image",
+  ],
+
+  algo_generaliser: [
+    "algo_programme_calcul",
+    "equation_probleme",
+    "fonction_affine_lineaire",
+    "affine_expression",
+  ],
+
+  algo_defis: [
+    "algo_conditions_complexes",
+    "algo_variables_boucles",
+    "algo_programme_calcul",
+    "algo_debug",
+    "algo_generaliser",
+    "equation_defis",
+    "fonction_defis",
+  ],
 };
 /**
  * Génération matrice

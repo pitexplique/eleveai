@@ -37,6 +37,8 @@ import { volumesBank } from "./volumes.bank";
 import { probabilitesBank } from "./probabilites.bank";
 import { statistiquesBank } from "./statistiques.bank";
 
+import { algorithmiqueBank } from "./algorithmique.bank";
+
 // =========================
 // AGRÉGATION DES BANKS 3e
 // =========================
@@ -68,6 +70,8 @@ export const maths3eQuestionBank: TutorBankItemV4[] = [
 
   ...probabilitesBank,
   ...statistiquesBank,
+
+  ...algorithmiqueBank
 ];
 
 export function getMaths3eQuestionBank(args?: {
