@@ -12,4 +12,5 @@ export { default as FonctionGraphiqueCanvas } from "./FonctionGraphiqueCanvas";
 export { default as FonctionTableauCanvas } from "./FonctionTableauCanvas";
 export { default as TransformationCanvas } from "./TransformationCanvas";
 export { default as TableauDonneesCanvas } from "./TableauDonneesCanvas";
+export { default as TableauProportionnaliteCanvas } from "./TableauProportionnaliteCanvas";
 export { default as FractionCanvas } from "./FractionCanvas";
