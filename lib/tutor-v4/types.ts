@@ -697,6 +697,41 @@ export type FractionCanvasData = {
   };
 };
 
+// types.ts
+
+export type ScratchBlockKind =
+  | "event"
+  | "move"
+  | "turn"
+  | "repeat"
+  | "say"
+  | "set_variable"
+  | "change_variable"
+  | "if"
+  | "ask"
+  | "pen";
+
+export type ScratchBlockData = {
+  type: ScratchBlockKind;
+  text?: string;
+  value?: string | number;
+  variable?: string;
+  times?: number;
+  condition?: string;
+  children?: ScratchBlockData[];
+};
+
+export type ScratchCanvasData = {
+  kind: "scratch";
+  title?: string;
+  blocks: ScratchBlockData[];
+  display?: {
+    showSprite?: boolean;
+    showStage?: boolean;
+    compact?: boolean;
+  };
+};
+
 export type CanvasFigure =
   | TriangleCanvasData
   | QuadrilatereCanvasData
@@ -713,6 +748,7 @@ export type CanvasFigure =
   | TableauDonneesCanvasData
   | CalculPoseCanvasData
   | FractionCanvasData
+  | ScratchCanvasData
   | TransformationCanvasData;
 
 export type QuestionVariantMeta = {

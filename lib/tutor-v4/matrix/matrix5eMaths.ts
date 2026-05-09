@@ -27,62 +27,76 @@ const supportLinks: Record<string, string[]> = {
   // =========================
   // NOMBRES RELATIFS
   // =========================
-  relatif_comparer: ["relatif_placer"],
-  relatif_defis: ["relatif_opposes"],
+  relatif_signe: ["relatif_lire"],
+  relatif_comparer: ["relatif_signe"],
+  relatif_placer: ["relatif_comparer"],
+  relatif_opposes: ["relatif_signe"],
+  relatif_valeur_absolue: ["relatif_opposes"],
+  relatif_defis: ["relatif_comparer", "relatif_placer", "relatif_valeur_absolue"],
 
   // =========================
   // OPÉRATIONS SUR LES RELATIFS
   // =========================
-  relatif_soustraction: ["relatif_comparer"],
-  relatif_calcul: ["relatif_comparer"],
-  relatif_probleme: ["relatif_placer"],
-  relatif_defis_ops: ["relatif_soustraction"],
+  relatif_addition: ["relatif_lire", "relatif_signe"],
+  relatif_soustraction: ["relatif_addition", "relatif_opposes"],
+  relatif_calcul: ["relatif_addition", "relatif_soustraction"],
+  relatif_probleme: ["relatif_calcul", "relatif_comparer"],
+  relatif_defis_ops: ["relatif_calcul", "relatif_probleme"],
 
   // =========================
-  // FRACTIONS ET NOMBRES RATIONNELS
+  // FRACTIONS
   // =========================
-  fraction_rationnel: ["relatif_lire", "relatif_signe"],
-  fraction_comparer: ["relatif_comparer", "fraction_rationnel"],
-  fraction_produit: ["fraction_comparer"],
-  fraction_quantite: ["fraction_comparer", "fraction_produit"],
-  fraction_inverse: ["fraction_simplifier", "fraction_rationnel"],
+  fraction_simplifier: ["fraction_egales"],
+  fraction_rationnel: ["fraction_egales", "relatif_lire"],
+  fraction_comparer: ["fraction_simplifier", "fraction_rationnel", "relatif_comparer"],
+  fraction_addition: ["fraction_comparer", "fraction_simplifier"],
+  fraction_produit: ["fraction_simplifier", "fraction_comparer"],
+  fraction_quantite: ["fraction_produit", "prop_reconnaitre"],
+  fraction_inverse: ["fraction_rationnel", "fraction_produit"],
   fraction_division: ["fraction_inverse", "fraction_produit"],
-  fraction_oppose: ["relatif_opposes", "fraction_rationnel"],
-  fraction_defis: ["fraction_quantite", "fraction_division", "fraction_oppose"],
+  fraction_oppose: ["fraction_rationnel", "relatif_opposes"],
+  fraction_defis: [
+    "fraction_addition",
+    "fraction_quantite",
+    "fraction_division",
+    "fraction_oppose",
+  ],
 
   // =========================
   // PROPORTIONNALITÉ
   // =========================
-  prop_table: ["fraction_comparer"],
-  prop_quatrieme: ["prop_coeff", "fraction_comparer"],
-  prop_coeff: ["fraction_comparer"],
-  prop_ratio: ["fraction_comparer", "prop_reconnaitre"],
-  prop_pourcentage: ["prop_table", "fraction_comparer"],
+  prop_table: ["prop_reconnaitre", "fraction_comparer"],
+  prop_quatrieme: ["prop_table", "prop_coeff"],
+  prop_coeff: ["prop_table", "fraction_comparer"],
+  prop_ratio: ["prop_reconnaitre", "fraction_comparer"],
+  prop_pourcentage: ["prop_coeff", "fraction_quantite"],
   prop_coeff_mult: ["prop_pourcentage", "prop_coeff"],
-  prop_probleme: ["prop_quatrieme", "fraction_quantite", "relatif_calcul"],
-  prop_defis: ["prop_ratio", "prop_coeff_mult", "prop_pourcentage"],
+  prop_probleme: ["prop_quatrieme", "prop_coeff", "prop_pourcentage"],
+  prop_defis: ["prop_probleme", "prop_ratio", "prop_coeff_mult"],
 
   // =========================
   // CALCUL LITTÉRAL
   // =========================
-  litteral_traduire: ["relatif_lire"],
-  litteral_substituer: ["relatif_calcul"],
-  litteral_reduire: ["litteral_substituer"],
-  litteral_defis: ["litteral_reduire"],
+  litteral_traduire: ["litteral_expression"],
+  litteral_substituer: ["litteral_expression", "relatif_calcul"],
+  litteral_reduire: ["litteral_expression", "litteral_substituer"],
+  litteral_defis: ["litteral_traduire", "litteral_substituer", "litteral_reduire"],
 
   // =========================
   // ANGLES
   // =========================
-  angle_mesurer: ["relatif_lire"],
-  angle_tracer: ["angle_estimer"],
-  angle_defis: ["angle_mesurer"],
+  angle_mesurer: ["angle_lire"],
+  angle_tracer: ["angle_mesurer"],
+  angle_estimer: ["angle_lire", "angle_mesurer"],
+  angle_defis: ["angle_tracer", "angle_estimer"],
 
   // =========================
   // TRIANGLES
   // =========================
-  triangle_construire: ["angle_tracer"],
-  triangle_somme_angles: ["angle_mesurer"],
-  triangle_defis: ["triangle_construire"],
+  triangle_nature: ["triangle_reconnaitre", "angle_lire"],
+  triangle_construire: ["triangle_reconnaitre", "angle_tracer"],
+  triangle_somme_angles: ["triangle_reconnaitre", "angle_mesurer"],
+  triangle_defis: ["triangle_nature", "triangle_construire", "triangle_somme_angles"],
 
   // =========================
   // SYMÉTRIE CENTRALE
@@ -95,17 +109,17 @@ const supportLinks: Record<string, string[]> = {
   // =========================
   // AIRES
   // =========================
-  aire_triangle: ["triangle_reconnaitre"],
-  aire_parallelogramme: ["angle_lire"],
+  aire_triangle: ["aire_comprendre", "triangle_reconnaitre"],
+  aire_parallelogramme: ["aire_comprendre", "angle_lire"],
   aire_composer: ["aire_triangle", "aire_parallelogramme"],
-  aire_defis: ["aire_composer"],
+  aire_defis: ["aire_composer", "aire_comprendre"],
 
   // =========================
   // VOLUMES
   // =========================
-  volume_pave: ["relatif_calcul", "aire_comprendre"],
-  volume_prisme: ["aire_triangle", "aire_comprendre"],
-  volume_cylindre: ["aire_comprendre"],
+  volume_pave: ["volume_comprendre", "relatif_calcul"],
+  volume_prisme: ["volume_comprendre", "aire_comprendre", "aire_triangle"],
+  volume_cylindre: ["volume_comprendre", "aire_comprendre"],
   volume_assemblage: ["volume_pave", "volume_prisme", "volume_cylindre"],
   volume_unites: ["volume_comprendre", "prop_coeff"],
   volume_defis: [
@@ -119,18 +133,21 @@ const supportLinks: Record<string, string[]> = {
   // =========================
   // STATISTIQUES
   // =========================
+  stat_lire_tableau: ["stat_organiser_donnees"],
   stat_lire_graphique: ["stat_lire_tableau"],
-  stat_effectif_frequence: ["fraction_comparer"],
-  stat_moyenne: ["relatif_calcul"],
-  stat_defis: ["stat_moyenne"],
+  stat_effectif_frequence: ["stat_lire_tableau", "fraction_comparer"],
+  stat_representer: ["stat_lire_tableau", "stat_effectif_frequence"],
+  stat_choisir_representation: ["stat_lire_graphique", "stat_representer"],
+  stat_moyenne: ["stat_effectif_frequence", "relatif_calcul"],
+  stat_defis: ["stat_lire_graphique", "stat_choisir_representation", "stat_moyenne"],
 
   // =========================
   // PROBABILITÉS
   // =========================
-  proba_issues: ["stat_lire_tableau"],
+  proba_issues: ["proba_vocabulaire", "stat_lire_tableau"],
   proba_equiprobabilite: ["proba_issues"],
-  proba_calculer: ["fraction_comparer", "stat_effectif_frequence"],
-  proba_defis: ["proba_calculer"],
+  proba_calculer: ["proba_issues", "proba_equiprobabilite", "fraction_comparer"],
+  proba_defis: ["proba_calculer", "proba_equiprobabilite"],
 };
 
 /**

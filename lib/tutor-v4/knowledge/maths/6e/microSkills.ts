@@ -698,6 +698,51 @@ export const microSkills: MicroSkillSource[] = [
       "sym_axes",
     ],
   },
+    /* =========================
+     ALGORITHMIQUE
+  ========================= */
+  {
+    id: "algo_sequence",
+    label: "Comprendre une suite d’instructions",
+    notionId: "algorithmique",
+    prerequis: ["mental_strategies"],
+  },
+  {
+    id: "algo_deplacement",
+    label: "Programmer un déplacement simple",
+    notionId: "algorithmique",
+    prerequis: ["algo_sequence", "longueur_mesurer", "angle_droit"],
+  },
+  {
+    id: "algo_repetition",
+    label: "Utiliser une répétition simple",
+    notionId: "algorithmique",
+    prerequis: ["algo_sequence", "mental_multiplication"],
+  },
+  {
+    id: "algo_lire_programme",
+    label: "Lire et prévoir le résultat d’un programme",
+    notionId: "algorithmique",
+    prerequis: ["algo_sequence", "algo_deplacement", "algo_repetition"],
+  },
+  {
+    id: "algo_figures",
+    label: "Construire une figure avec un programme",
+    notionId: "algorithmique",
+    prerequis: [
+      "algo_deplacement",
+      "algo_repetition",
+      "angle_droit",
+      "triangle_sommets_cotes",
+      "quadrilatere_nommer_vocabulaire",
+    ],
+  },
+  {
+    id: "algo_defis",
+    label: "Défis d’algorithmique et programmation",
+    notionId: "algorithmique",
+    prerequis: ["algo_lire_programme", "algo_figures"],
+  },
 
   /* =========================
      DONNEES

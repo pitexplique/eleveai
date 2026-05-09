@@ -26,6 +26,7 @@ import {
   CalculPoseCanvas ,
   FractionCanvas,
   TableauProportionnaliteCanvas,
+   ScratchCanvas 
 } from "@/lib/tutor-v4/components";
 
 import {
@@ -244,6 +245,9 @@ if (canvas.kind === "tableau_proportionnalite") {
   if (canvas.kind === "fraction") {
     return <FractionCanvas figure={canvas} />;
   }
+  if (canvas.kind === "scratch") {
+  return <ScratchCanvas canvas={canvas} />;
+}
 
   return null;
 }

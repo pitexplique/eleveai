@@ -190,6 +190,44 @@ const supportLinks: Record<string, string[]> = {
     "sym_proprietes",
     "sym_axes",
   ],
+    // =========================
+  // ALGORITHMIQUE
+  // =========================
+  algo_sequence: ["entier_lire_ecrire", "mental_strategies"],
+
+  algo_deplacement: [
+    "algo_sequence",
+    "longueur_mesurer",
+    "angle_droit",
+  ],
+
+  algo_repetition: [
+    "algo_sequence",
+    "mental_multiplication",
+    "mental_addition",
+  ],
+
+  algo_lire_programme: [
+    "algo_sequence",
+    "algo_deplacement",
+    "algo_repetition",
+  ],
+
+  algo_figures: [
+    "algo_deplacement",
+    "algo_repetition",
+    "angle_droit",
+    "angle_tracer",
+    "triangle_sommets_cotes",
+    "quadrilatere_nommer_vocabulaire",
+  ],
+
+  algo_defis: [
+    "algo_lire_programme",
+    "algo_figures",
+    "triangle_type_cotes",
+    "quadrilatere_identifier_nature",
+  ],
 
   // =========================
   // DONNÉES

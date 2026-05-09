@@ -138,4 +138,16 @@ export const notions: NotionSource[] = [
     prerequis: ["donnees"],
     levels: [1, 2],
   },
+
+  // =========================
+  // ALGORITHMIQUE
+  // =========================
+
+  {
+    id: "algorithmique",
+    label: "Algorithmique et programmation",
+    boId: "BO6A1",
+    prerequis: ["calcul_mental"],
+    levels: [1, 2, 3],
+  },
 ];
