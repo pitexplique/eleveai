@@ -4,76 +4,74 @@ import type { CalculRapideItem } from "../../types";
 
 export const problemesTemplates6e: CalculRapideItem[] = [
   {
-    id: "6e_template_partage_letchis_001",
+    id: "6e_template_randonnee_001",
     niveau: "6e",
     type: "probleme",
     mode: "template",
-    notionId: "division",
-    microId: "division_partage",
+    notionId: "grandeurs_mesures",
+    microId: "conversion_longueur",
     difficulty: 2,
     durationSec: 60,
     media: {
-      text: "{{total}} ananas sont partagés entre {{personnes}} enfants. Combien chaque enfant reçoit-il d'ananas ?",
+      text: "Une randonnée mesure {{km}} km. Combien cela fait-il en mètres ?",
     },
     template:
-      "{{total}} d'ananas sont partagés entre {{personnes}} enfants. Combien chaque enfant reçoit-il de d'ananas ?",
+      "Une randonnée mesure {{km}} km. Combien cela fait-il en mètres ?",
     variables: {
-      total: [30, 60, 90, 120],
-      personnes: [2,3,5],
-      nombres: []
+      km: [2, 3.5, 4, 6.2],
     },
-    answerRule: "total / personnes",
-    hint: "C’est une situation de partage.",
+    answerRule: "km * 1000",
+    hint: "1 km = 1000 m.",
     explanationTemplate:
-      "On partage {{total}} en {{personnes}} parts égales : {{total}} ÷ {{personnes}} = {{answer}}.",
-    tags: ["division", "partage", "reunion", "ananas"],
+      "{{km}} × 1000 = {{answer}} m.",
+    tags: ["longueur", "reunion"],
   },
+
   {
-    id: "6e_template_verger_tampon_001",
+    id: "6e_template_jus_fruits_001",
     niveau: "6e",
     type: "probleme",
     mode: "template",
-    notionId: "multiplication",
-    microId: "multiplication_probleme",
+    notionId: "grandeurs_mesures",
+    microId: "conversion_contenance",
     difficulty: 2,
     durationSec: 60,
     media: {
-      text: "Dans un verger au Tampon, il y a {{rangees}} rangées de {{arbres}} arbres. Combien y a-t-il d’arbres en tout ?",
+      text: "Une bouteille contient {{cl}} cL de jus. Quelle quantité cela représente-t-il en litres ?",
     },
     template:
-      "Dans un verger au Tampon, il y a {{rangees}} rangées de {{arbres}} arbres. Combien y a-t-il d’arbres en tout ?",
+      "Une bouteille contient {{cl}} cL de jus. Quelle quantité cela représente-t-il en litres ?",
     variables: {
-      rangees: [6, 8, 9, 12],
-      arbres: [7, 8, 10, 12],
+      cl: [150, 200, 250, 450, 600],
     },
-    answerRule: "rangees * arbres",
-    hint: "Même nombre d’arbres dans chaque rangée : c’est une multiplication.",
+    answerRule: "cl / 100",
+    hint: "100 cL = 1 L.",
     explanationTemplate:
-      "{{rangees}} rangées de {{arbres}} arbres : {{rangees}} × {{arbres}} = {{answer}}.",
-    tags: ["multiplication", "probleme", "reunion"],
+      "{{cl}} ÷ 100 = {{answer}} L.",
+    tags: ["contenance"],
   },
+
   {
-    id: "6e_template_pages_livre_001",
+    id: "6e_template_course_001",
     niveau: "6e",
     type: "probleme",
     mode: "template",
-    notionId: "calcul_mental",
-    microId: "soustraction_probleme",
-    difficulty: 1,
+    notionId: "grandeurs_mesures",
+    microId: "conversion_duree",
+    difficulty: 2,
     durationSec: 60,
     media: {
-      text: "Un livre contient {{total}} pages. Tu en as déjà lu {{lu}}. Combien de pages reste-t-il à lire ?",
+      text: "Une course dure {{h}} heures. Combien cela fait-il en minutes ?",
     },
     template:
-      "Un livre contient {{total}} pages. Tu en as déjà lu {{lu}}. Combien de pages reste-t-il à lire ?",
+      "Une course dure {{h}} heures. Combien cela fait-il en minutes ?",
     variables: {
-      total: [80, 96, 98, 120, 150],
-      lu: [27, 38, 47, 65, 89],
+      h: [1, 2, 3, 4],
     },
-    answerRule: "total - lu",
-    hint: "Il faut enlever les pages déjà lues.",
+    answerRule: "h * 60",
+    hint: "1 heure = 60 minutes.",
     explanationTemplate:
-      "{{total}} - {{lu}} = {{answer}}. Il reste {{answer}} pages à lire.",
-    tags: ["soustraction", "probleme"],
+      "{{h}} × 60 = {{answer}} minutes.",
+    tags: ["duree"],
   },
 ];

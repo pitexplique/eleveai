@@ -4,79 +4,103 @@ import type { CalculRapideItem } from "../../types";
 
 export const problemesTemplates5e: CalculRapideItem[] = [
   {
-    id: "5e_template_temperature_001",
+    id: "5e_template_randonnee_001",
     niveau: "5e",
     type: "probleme",
     mode: "template",
-    notionId: "operations_relatifs",
-    microId: "relatif_addition",
+    notionId: "grandeurs_mesures",
+    microId: "conversion_longueur",
     difficulty: 2,
     durationSec: 60,
     media: {
-      text: "Le matin, il fait {{depart}} °C. La température varie de {{variation}} °C. Quelle est la température finale ?",
+      text: "Une randonnée mesure {{km}} km. Combien cela représente-t-il en mètres ?",
     },
     template:
-      "Le matin, il fait {{depart}} °C. La température varie de {{variation}} °C. Quelle est la température finale ?",
+      "Une randonnée mesure {{km}} km. Combien cela représente-t-il en mètres ?",
     variables: {
-      depart: [-8, -5, -3, 2, 4],
-      variation: [6, 7, 9, -4, -6],
+      km: [2.5, 4, 5.2, 7.5, 9],
     },
-    answerRule: "depart + variation",
-    hint: "Ajoute la variation à la température de départ.",
+    answerRule: "km * 1000",
+    hint: "1 km = 1000 m.",
     explanationTemplate:
-      "{{depart}} + {{variation}} = {{answer}}. La température finale est {{answer}} °C.",
-    tags: ["relatifs", "temperature", "template"],
+      "{{km}} × 1000 = {{answer}} m.",
+    tags: ["longueur", "conversion", "reunion"],
   },
+
   {
-    id: "5e_template_fraction_partage_001",
+    id: "5e_template_bouteille_001",
     niveau: "5e",
     type: "probleme",
     mode: "template",
-    notionId: "fractions",
-    microId: "fraction_produit",
+    notionId: "grandeurs_mesures",
+    microId: "conversion_contenance",
+    difficulty: 2,
+    durationSec: 60,
+    media: {
+      text: "Une bouteille contient {{L}} L de jus. Quelle quantité cela représente-t-il en cL ?",
+    },
+    template:
+      "Une bouteille contient {{L}} L de jus. Quelle quantité cela représente-t-il en cL ?",
+    variables: {
+      L: [1.25, 1.5, 2, 2.5, 3],
+    },
+    answerRule: "L * 100",
+    hint: "1 L = 100 cL.",
+    explanationTemplate:
+      "{{L}} × 100 = {{answer}} cL.",
+    tags: ["contenance"],
+  },
+
+  {
+    id: "5e_template_course_001",
+    niveau: "5e",
+    type: "probleme",
+    mode: "template",
+    notionId: "grandeurs_mesures",
+    microId: "conversion_duree",
     difficulty: 3,
     durationSec: 60,
     media: {
-      text: "On prend {{a}}/{{b}} de {{n}} fruits. Combien de fruits cela représente-t-il en fraction?",
+      text: "Une course dure {{h}} h {{m}} min. Quelle est la durée totale en minutes ?",
     },
     template:
-      "On prend {{a}}/{{b}} de {{n}} fruits. Combien de fruits cela représente-t-il en fractions?",
+      "Une course dure {{h}} h {{m}} min. Quelle est la durée totale en minutes ?",
     variables: {
-      a: [1, 2, 3],
-      b: [2, 3, 4],
-      n: [12, 18, 24, 36, 48],
+      h: [1, 2, 3, 4],
+      m: [10, 15, 20, 30, 45],
     },
-    answerRule: "(a * n) / b",
-    hint: "Calcule d’abord un b-ième de la quantité.",
+    answerRule: "(h * 60) + m",
+    hint: "Transforme les heures en minutes puis ajoute.",
     explanationTemplate:
-      "{{a}}/{{b}} de {{n}}, c’est ({{a}} × {{n}}) ÷ {{b}} = {{answer}}.",
-    tags: ["fractions", "partage", "template"],
+      "{{h}} h = {{h * 60}} min puis {{h * 60}} + {{m}} = {{answer}} min.",
+    tags: ["duree"],
   },
+
   {
-    id: "5e_template_marche_prix_001",
+    id: "5e_template_vitesse_001",
     niveau: "5e",
     type: "probleme",
     mode: "template",
     notionId: "proportionnalite",
-    microId: "proportionnalite_calculer",
-    difficulty: 2,
+    microId: "vitesse_simple",
+    difficulty: 3,
     durationSec: 60,
     media: {
-      text: "Au marché, {{q1}} fruits coûtent {{p1}} €. Combien coûtent {{q2}} fruits ?",
+      text: "Une voiture roule à {{v}} km/h pendant {{t}} heures. Quelle distance parcourt-elle ?",
     },
     template:
-      "Au marché, {{q1}} fruits coûtent {{p1}} €. Combien coûtent {{q2}} fruits ?",
+      "Une voiture roule à {{v}} km/h pendant {{t}} heures. Quelle distance parcourt-elle ?",
     variables: {
-      q1: [2, 3, 4],
-      p1: [6, 9, 12, 16],
-      q2: [5, 6, 8],
+      v: [60, 70, 80, 90, 100],
+      t: [2, 3, 4],
     },
-    answerRule: "(p1 / q1) * q2",
-    hint: "Cherche le prix d’un fruit.",
+    answerRule: "v * t",
+    hint: "Distance = vitesse × temps.",
     explanationTemplate:
-      "Un fruit coûte {{p1}} ÷ {{q1}} €. Donc {{q2}} fruits coûtent {{answer}} €.",
-    tags: ["proportionnalite", "prix", "reunion", "template"],
+      "{{v}} × {{t}} = {{answer}} km.",
+    tags: ["vitesse", "distance"],
   },
+
   {
     id: "5e_template_aire_rectangle_001",
     niveau: "5e",
@@ -84,21 +108,21 @@ export const problemesTemplates5e: CalculRapideItem[] = [
     mode: "template",
     notionId: "aires",
     microId: "aire_rectangle",
-    difficulty: 2,
+    difficulty: 3,
     durationSec: 60,
     media: {
-      text: "Un rectangle mesure {{longueur}} cm de longueur et {{largeur}} cm de largeur. Quelle est son aire ?",
+      text: "Une terrasse mesure {{L}} m de longueur et {{l}} m de largeur. Quelle est son aire ?",
     },
     template:
-      "Un rectangle mesure {{longueur}} cm de longueur et {{largeur}} cm de largeur. Quelle est son aire ?",
+      "Une terrasse mesure {{L}} m de longueur et {{l}} m de largeur. Quelle est son aire ?",
     variables: {
-      longueur: [6, 7, 8, 9, 12],
-      largeur: [3, 4, 5, 6],
+      L: [5, 6, 7, 8, 10],
+      l: [3, 4, 5, 6],
     },
-    answerRule: "longueur * largeur",
-    hint: "Aire du rectangle = longueur × largeur.",
+    answerRule: "L * l",
+    hint: "Aire = longueur × largeur.",
     explanationTemplate:
-      "{{longueur}} × {{largeur}} = {{answer}}. L’aire est {{answer}} cm².",
-    tags: ["aire", "rectangle", "template"],
+      "{{L}} × {{l}} = {{answer}} m².",
+    tags: ["aire", "rectangle"],
   },
 ];

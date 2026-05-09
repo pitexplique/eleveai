@@ -3,46 +3,167 @@
 import type { CalculRapideItem } from "../../types";
 
 export const problemesTemplates4e: CalculRapideItem[] = [
+  // 🔵 RÉACTIVATION conversions
+
   {
-    id: "4e_template_pourcentage_001",
+    id: "4e_template_randonnee_001",
     niveau: "4e",
     type: "probleme",
     mode: "template",
-    notionId: "proportionnalite",
-    microId: "pourcentage",
+    notionId: "grandeurs_mesures",
+    microId: "conversion_longueur",
     difficulty: 2,
     durationSec: 60,
-    media: { text: "{{p}} % de {{n}}" },
-    template: "{{p}} % de {{n}}",
-    variables: {
-      p: [10, 20, 25, 30, 40],
-      n: [100, 120, 200, 250, 300],
+    media: {
+      text: "Une randonnée mesure {{km}} km. Combien cela représente-t-il en mètres ?",
     },
-    answerRule: "(p/100)*n",
-    hint: "Transforme le pourcentage en fraction ou en nombre décimal.",
-    explanationTemplate: "{{p}} % de {{n}} = {{answer}}.",
-    tags: ["pourcentage", "proportionnalite", "template"],
+    template:
+      "Une randonnée mesure {{km}} km. Combien cela représente-t-il en mètres ?",
+    variables: {
+      km: [3.5, 4.2, 5.8, 7.4, 9.1],
+    },
+    answerRule: "km * 1000",
+    hint: "1 km = 1000 m.",
+    explanationTemplate:
+      "{{km}} × 1000 = {{answer}} m.",
+    tags: ["conversion", "longueur", "reunion"],
   },
+
+  {
+    id: "4e_template_volume_001",
+    niveau: "4e",
+    type: "probleme",
+    mode: "template",
+    notionId: "volumes",
+    microId: "volume_contenance",
+    difficulty: 3,
+    durationSec: 60,
+    media: {
+      text: "Une bouteille contient {{L}} L. Quelle quantité cela représente-t-il en mL ?",
+    },
+    template:
+      "Une bouteille contient {{L}} L. Quelle quantité cela représente-t-il en mL ?",
+    variables: {
+      L: [0.75, 1.2, 1.5, 2.25, 3.4],
+    },
+    answerRule: "L * 1000",
+    hint: "1 L = 1000 mL.",
+    explanationTemplate:
+      "{{L}} × 1000 = {{answer}} mL.",
+    tags: ["volume", "contenance"],
+  },
+
+  // 🔴 Durées
+
+  {
+    id: "4e_template_duree_001",
+    niveau: "4e",
+    type: "probleme",
+    mode: "template",
+    notionId: "grandeurs_mesures",
+    microId: "conversion_duree",
+    difficulty: 3,
+    durationSec: 60,
+    media: {
+      text: "Une activité dure {{h}} h {{m}} min. Quelle est la durée totale en minutes ?",
+    },
+    template:
+      "Une activité dure {{h}} h {{m}} min. Quelle est la durée totale en minutes ?",
+    variables: {
+      h: [1, 2, 3, 4],
+      m: [10, 15, 20, 30, 45],
+    },
+    answerRule: "(h * 60) + m",
+    hint: "Transforme les heures en minutes puis ajoute.",
+    explanationTemplate:
+      "{{h}} h = {{h * 60}} min puis {{h * 60}} + {{m}} = {{answer}} min.",
+    tags: ["duree"],
+  },
+
+  // 🔴 Vitesses
+
   {
     id: "4e_template_vitesse_001",
     niveau: "4e",
     type: "probleme",
     mode: "template",
     notionId: "proportionnalite",
-    microId: "vitesse",
-    difficulty: 2,
+    microId: "vitesse_simple",
+    difficulty: 3,
     durationSec: 60,
-    media: { text: "Une distance de {{d}} km est parcourue en {{t}} h. Quelle est la vitesse ?" },
-    template: "Une distance de {{d}} km est parcourue en {{t}} h. Quelle est la vitesse ?",
-    variables: {
-      d: [60, 90, 120, 150],
-      t: [2, 3, 4, 5],
+    media: {
+      text: "Une voiture roule à {{v}} km/h pendant {{t}} h. Quelle distance parcourt-elle ?",
     },
-    answerRule: "d / t",
-    hint: "Vitesse = distance ÷ temps.",
-    explanationTemplate: "{{d}} ÷ {{t}} = {{answer}} km/h.",
-    tags: ["vitesse", "proportionnalite", "template"],
+    template:
+      "Une voiture roule à {{v}} km/h pendant {{t}} h. Quelle distance parcourt-elle ?",
+    variables: {
+      v: [60, 72, 80, 90, 110],
+      t: [2, 3, 4],
+    },
+    answerRule: "v * t",
+    hint: "Distance = vitesse × temps.",
+    explanationTemplate:
+      "{{v}} × {{t}} = {{answer}} km.",
+    tags: ["vitesse", "distance"],
   },
+
+  // 🔴 Aires
+
+  {
+    id: "4e_template_aire_001",
+    niveau: "4e",
+    type: "probleme",
+    mode: "template",
+    notionId: "aires",
+    microId: "aire_rectangle",
+    difficulty: 3,
+    durationSec: 60,
+    media: {
+      text: "Une terrasse mesure {{L}} m sur {{l}} m. Quelle est son aire ?",
+    },
+    template:
+      "Une terrasse mesure {{L}} m sur {{l}} m. Quelle est son aire ?",
+    variables: {
+      L: [8, 10, 12, 15],
+      l: [3, 4, 5, 6],
+    },
+    answerRule: "L * l",
+    hint: "Aire = longueur × largeur.",
+    explanationTemplate:
+      "{{L}} × {{l}} = {{answer}} m².",
+    tags: ["aire", "rectangle"],
+  },
+
+  // 🔴 Piège cognitif
+
+  {
+    id: "4e_template_piege_aire_001",
+    niveau: "4e",
+    type: "probleme",
+    mode: "template",
+    notionId: "aires",
+    microId: "aire_unites",
+    difficulty: 4,
+    durationSec: 60,
+    media: {
+      text: "Un rectangle mesure {{a}} cm sur {{b}} cm. Un élève répond : “l’aire vaut {{r}} cm”. A-t-il raison ?",
+    },
+    template:
+      "Un rectangle mesure {{a}} cm sur {{b}} cm. Un élève répond : “l’aire vaut {{r}} cm”. A-t-il raison ?",
+    variables: {
+      a: [3, 4, 5, 6],
+      b: [2, 3, 4, 5],
+      r: [6, 12, 20, 30],
+    },
+    answerRule: "'non'",
+    hint: "Une aire s’exprime en cm².",
+    explanationTemplate:
+      "Le calcul est correct mais l’unité est fausse : il faut écrire cm².",
+    tags: ["aire", "piege", "unites"],
+  },
+
+  // 🔴 Réactivation Pythagore
+
   {
     id: "4e_template_pythagore_001",
     niveau: "4e",
@@ -50,68 +171,21 @@ export const problemesTemplates4e: CalculRapideItem[] = [
     mode: "template",
     notionId: "pythagore",
     microId: "pythagore_calcul",
-    difficulty: 3,
+    difficulty: 4,
     durationSec: 60,
-    media: { text: "Triangle rectangle avec côtés {{a}} cm et {{b}} cm. Hypoténuse ?" },
-    template: "Triangle rectangle avec côtés {{a}} cm et {{b}} cm. Hypoténuse ?",
+    media: {
+      text: "Dans un triangle rectangle, les côtés de l’angle droit mesurent {{a}} cm et {{b}} cm. Quelle est l’hypoténuse ?",
+    },
+    template:
+      "Dans un triangle rectangle, les côtés de l’angle droit mesurent {{a}} cm et {{b}} cm. Quelle est l’hypoténuse ?",
     variables: {
-      a: [3, 5, 6],
-      b: [6, 8, 12],
+      a: [3, 5, 6, 8],
+      b: [4, 12, 8, 15],
     },
     answerRule: "Math.sqrt(a*a + b*b)",
     hint: "Utilise le théorème de Pythagore.",
-    explanationTemplate: "{{a}}² + {{b}}² = {{answer}}² donc hypoténuse = {{answer}} cm.",
-    tags: ["pythagore", "triangle", "template"],
+    explanationTemplate:
+      "{{a}}² + {{b}}² = {{answer}}² donc hypoténuse = {{answer}} cm.",
+    tags: ["pythagore", "triangle"],
   },
-  {
-    id: "4e_template_equation_001",
-    niveau: "4e",
-    type: "probleme",
-    mode: "template",
-    notionId: "equations",
-    microId: "equation_simple",
-    difficulty: 2,
-    durationSec: 60,
-    media: { text: "Un nombre augmenté de {{a}} donne {{b}}. Quel est ce nombre ?" },
-    template: "Un nombre augmenté de {{a}} donne {{b}}. Quel est ce nombre ?",
-    variables: {
-      a: [5, 7, 9, 12],
-      b: [14, 18, 21, 30],
-    },
-    answerRule: "b - a",
-    hint: "Traduis en équation : x + a = b.",
-    explanationTemplate: "x = {{b}} - {{a}} = {{answer}}.",
-    tags: ["equations", "template"],
-  },
-{
-  id: "4e_template_puissance_produit_001",
-  niveau: "4e",
-  type: "probleme",
-  mode: "template",
-  notionId: "puissances",
-  microId: "puissance_calcul",
-  difficulty: 3,
-  durationSec: 60,
-
-  media: {
-    text: "Simplifie : {{a}}^{{n}} × {{a}}^{{m}}",
-  },
-
-  template: "Simplifie : {{a}}^{{n}} × {{a}}^{{m}}",
-
-  variables: {
-    a: [2, 3, 4, 5],
-    n: [2, 3, 4],
-    m: [2, 3, 4],
-  },
-
-  answerRule: "Math.pow(a, n + m)",
-
-  hint: "Même base → on additionne les exposants.",
-
-  explanationTemplate:
-    "{{a}}^{{n}} × {{a}}^{{m}} = {{a}}^{{n + m}} = {{answer}}.",
-
-  tags: ["puissances", "produit", "template"],
-}
 ];
