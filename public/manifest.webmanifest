@@ -1,8 +1,8 @@
 {
-  "name": "EleveAI - Leçon du jour",
+  "name": "EleveAI - Calcul rapide",
   "short_name": "EleveAI",
-  "description": "Une leçon de maths par jour",
-  "start_url": "/lecon-du-jour",
+  "description": "5 minutes de maths par jour pour progresser",
+  "start_url": "/calcul-rapide",
   "scope": "/",
   "display": "standalone",
   "background_color": "#020617",
