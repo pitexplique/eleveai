@@ -19,6 +19,15 @@ import type { NotionSource } from "@/lib/tutor-v4/knowledge/buildKnowledge";
 
 export const notions: NotionSource[] = [
 
+  {
+  id: "algorithmique",
+  label: "Algorithmique et programmation",
+  boId: "BO3I1",
+  prerequis: ["calcul_litteral"],
+  levels: [1, 2, 3],
+},
+
+
   /* =========================
      NOMBRES
   ========================= */
@@ -198,5 +207,7 @@ export const notions: NotionSource[] = [
     prerequis: [],
     levels: [1, 2, 3],
   },
+
+
 
 ];

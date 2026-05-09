@@ -51,4 +51,5 @@ export const bo: KnowledgeBoCompetence[] = [
     boId: "BO4D2",
     label: "Probabilités",
   },
+  { boId: "BO4I1", label: "Pensée informatique et algorithmique" }
 ];

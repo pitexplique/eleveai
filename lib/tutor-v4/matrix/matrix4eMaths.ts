@@ -325,6 +325,42 @@ const supportLinks: Record<string, string[]> = {
     "proba_convertir",
     "proba_comparer",
   ],
+    // =========================
+  // ALGORITHMIQUE
+  // =========================
+  algo_instructions_conditionnelles: [
+    "algo_conditions",
+    "relatif_comparer",
+  ],
+
+  algo_variable: [
+    "algo_instructions_conditionnelles",
+    "litteral_expression",
+    "relatif_calcul",
+  ],
+
+  algo_programme_objectif: [
+    "algo_variable",
+    "algo_instructions_conditionnelles",
+    "prop_reconnaitre",
+    "equation_reconnaitre",
+  ],
+
+  algo_modifier_programme: [
+    "algo_programme_objectif",
+    "algo_variable",
+    "litteral_reduire",
+  ],
+
+  algo_defis: [
+    "algo_conditions",
+    "algo_instructions_conditionnelles",
+    "algo_variable",
+    "algo_programme_objectif",
+    "algo_modifier_programme",
+    "relatif_probleme",
+    "prop_probleme",
+  ],
 };
 /**
  * Génère automatiquement la matrice.

@@ -822,4 +822,59 @@ export const microSkills: MicroSkillSource[] = [
       "proba_comparer",
     ],
   },
+
+  /* =========================
+   ALGORITHMIQUE
+========================= */
+
+{
+  id: "algo_conditions",
+  label: "Représenter des conditions simples",
+  notionId: "algorithmique",
+  prerequis: [],
+},
+
+{
+  id: "algo_instructions_conditionnelles",
+  label: "Écrire des instructions conditionnelles",
+  notionId: "algorithmique",
+  prerequis: ["algo_conditions"],
+},
+
+{
+  id: "algo_variable",
+  label: "Manipuler une variable informatique",
+  notionId: "algorithmique",
+  prerequis: ["algo_instructions_conditionnelles"],
+},
+
+{
+  id: "algo_programme_objectif",
+  label: "Écrire un programme simple pour répondre à un problème",
+  notionId: "algorithmique",
+  prerequis: [
+    "algo_variable",
+    "algo_instructions_conditionnelles",
+  ],
+},
+
+{
+  id: "algo_modifier_programme",
+  label: "Modifier un programme pour changer ou améliorer son comportement",
+  notionId: "algorithmique",
+  prerequis: ["algo_programme_objectif"],
+},
+
+{
+  id: "algo_defis",
+  label: "Défis d’algorithmique et de programmation",
+  notionId: "algorithmique",
+  prerequis: [
+    "algo_conditions",
+    "algo_instructions_conditionnelles",
+    "algo_variable",
+    "algo_programme_objectif",
+    "algo_modifier_programme",
+  ],
+},
 ];

@@ -870,4 +870,49 @@ export const microSkills: MicroSkillSource[] = [
     notionId: "probabilites",
     prerequis: ["proba_evenement_contraire", "proba_deux_epreuves"],
   },
+    /* =========================
+     ALGORITHMIQUE
+  ========================= */
+  {
+    id: "algo_conditions_complexes",
+    label: "Utiliser des conditions complexes",
+    notionId: "algorithmique",
+    prerequis: ["equation_verifier", "fonction_image"],
+  },
+  {
+    id: "algo_variables_boucles",
+    label: "Utiliser des variables et des boucles",
+    notionId: "algorithmique",
+    prerequis: ["algo_conditions_complexes", "litteral_substituer"],
+  },
+  {
+    id: "algo_programme_calcul",
+    label: "Créer ou analyser un programme de calcul",
+    notionId: "algorithmique",
+    prerequis: ["algo_variables_boucles", "litteral_reduire"],
+  },
+  {
+    id: "algo_debug",
+    label: "Corriger un programme",
+    notionId: "algorithmique",
+    prerequis: ["algo_programme_calcul"],
+  },
+  {
+    id: "algo_generaliser",
+    label: "Généraliser une situation avec des variables",
+    notionId: "algorithmique",
+    prerequis: ["algo_programme_calcul", "equation_probleme", "fonction_affine_lineaire"],
+  },
+  {
+    id: "algo_defis",
+    label: "Défis d’algorithmique et de programmation",
+    notionId: "algorithmique",
+    prerequis: [
+      "algo_conditions_complexes",
+      "algo_variables_boucles",
+      "algo_programme_calcul",
+      "algo_debug",
+      "algo_generaliser",
+    ],
+  },
 ];

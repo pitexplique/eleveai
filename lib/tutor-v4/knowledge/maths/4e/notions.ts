@@ -13,6 +13,17 @@
 import type { NotionSource } from "@/lib/tutor-v4/knowledge/buildKnowledge";
 
 export const notions: NotionSource[] = [
+
+      // =========================
+    // ALGO
+    // =========================
+      {
+    id: "algorithmique",
+    label: "Algorithmique et programmation",
+    boId: "BO4I1",
+    prerequis: ["calcul_litteral", "proportionnalite", "equations"],
+    levels: [1, 2, 3],
+  },
   // =========================
   // NOMBRES
   // =========================
@@ -160,4 +171,6 @@ export const notions: NotionSource[] = [
     prerequis: ["fractions", "statistiques"],
     levels: [1, 2],
   },
+
+
 ];

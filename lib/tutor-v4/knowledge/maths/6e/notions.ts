@@ -3,6 +3,19 @@
 import type { NotionSource } from "@/lib/tutor-v4/knowledge/buildKnowledge";
 
 export const notions: NotionSource[] = [
+
+  
+  // =========================
+  // ALGORITHMIQUE
+  // =========================
+
+{
+  id: "algorithmique",
+  label: "Algorithmique et programmation",
+  boId: "BO6I1",
+  prerequis: ["calcul_mental"],
+  levels: [1, 2, 3],
+},
   {
     id: "nombres_entiers",
     label: "Nombres entiers",
@@ -139,15 +152,4 @@ export const notions: NotionSource[] = [
     levels: [1, 2],
   },
 
-  // =========================
-  // ALGORITHMIQUE
-  // =========================
-
-{
-  id: "algorithmique",
-  label: "Algorithmique et programmation",
-  boId: "BO6I1",
-  prerequis: ["calcul_mental"],
-  levels: [1, 2, 3],
-},
 ];
