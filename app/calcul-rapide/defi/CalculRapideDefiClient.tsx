@@ -269,19 +269,32 @@ export default function CalculRapideDefiClient() {
     setCurrentIndex((index) => index + 1);
   }
 
-  function validateAndNext() {
-    const acceptedAnswers = [
-      ...(currentQuestion.expected ?? []),
-      ...currentQuestion.generatedExpected,
-    ];
+function validateAndNext() {
+  const acceptedAnswers = [
+    ...(currentQuestion.expected ?? []),
+    ...currentQuestion.generatedExpected,
+  ];
 
-    const isCorrect = acceptedAnswers.map(normalize).includes(normalize(answer));
+  const isCorrect = acceptedAnswers.map(normalize).includes(normalize(answer));
 
-    setFeedback(isCorrect);
-    if (isCorrect) setScore((score) => score + 1);
+  setFeedback(isCorrect);
 
+  if (isCorrect) {
+    setScore((score) => score + 1);
+
+    // Bonne réponse : passage rapide
     setTimeout(goNext, 1200);
+    return;
   }
+
+  // Mauvaise réponse : correction visible 20 secondes minimum
+  setPaused(true);
+
+  setTimeout(() => {
+    setPaused(false);
+    goNext();
+  }, 20000);
+}
 
   useEffect(() => {
     if (!started || finished || paused) return;
