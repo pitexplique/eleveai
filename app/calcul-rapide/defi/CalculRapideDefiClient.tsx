@@ -3,7 +3,10 @@
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import type { CalculRapideItem, NiveauCalculRapide } from "@/lib/calcul-rapide/types";
+import type {
+  CalculRapideItem,
+  NiveauCalculRapide,
+} from "@/lib/calcul-rapide/types";
 
 import { weekly6e } from "@/lib/calcul-rapide/data/6e/weekly";
 import { calculsFixed6e } from "@/lib/calcul-rapide/data/6e/calculs.fixed";
@@ -62,7 +65,12 @@ function computeAnswer(rule: string, values: Record<string, unknown>) {
 }
 
 function generateItem(item: CalculRapideItem): GeneratedCalculRapideItem {
-  if (item.mode !== "template" || !item.template || !item.variables || !item.answerRule) {
+  if (
+    item.mode !== "template" ||
+    !item.template ||
+    !item.variables ||
+    !item.answerRule
+  ) {
     return {
       ...item,
       displayText: item.media.text,
@@ -74,7 +82,9 @@ function generateItem(item: CalculRapideItem): GeneratedCalculRapideItem {
   const values: Record<string, unknown> = {};
 
   Object.entries(item.variables).forEach(([key, possibleValues]) => {
-    if (Array.isArray(possibleValues)) values[key] = pickRandom(possibleValues);
+    if (Array.isArray(possibleValues)) {
+      values[key] = pickRandom(possibleValues);
+    }
   });
 
   const answer = computeAnswer(item.answerRule, values);
@@ -89,7 +99,11 @@ function generateItem(item: CalculRapideItem): GeneratedCalculRapideItem {
     media: { ...item.media, text: displayText },
     displayText,
     displayExplanation: explanationWithValues,
-    generatedExpected: [answer, answer.replace(".", ","), answer.replace(",", ".")],
+    generatedExpected: [
+      answer,
+      answer.replace(".", ","),
+      answer.replace(",", "."),
+    ],
   };
 }
 
@@ -152,14 +166,14 @@ function getTodayDay() {
     mercredi: "mercredi",
     jeudi: "jeudi",
     vendredi: "vendredi",
+    samedi: "samedi",
+    dimanche: "dimanche",
     monday: "lundi",
     tuesday: "mardi",
     wednesday: "mercredi",
     thursday: "jeudi",
     friday: "vendredi",
-    samedi: "samedi",
     saturday: "samedi",
-    dimanche: "dimanche",
     sunday: "dimanche",
   };
 
@@ -187,7 +201,8 @@ function getScoreMessage(score: number, total: number) {
   if (ratio >= 0.85) {
     return {
       title: "Excellent 🔥",
-      message: "Tu maîtrises bien les automatismes. Continue avec des défis plus difficiles dans Coach-IA.",
+      message:
+        "Tu maîtrises bien les automatismes. Continue avec des défis plus difficiles dans Coach-IA.",
       color: "text-emerald-300",
     };
   }
@@ -195,14 +210,16 @@ function getScoreMessage(score: number, total: number) {
   if (ratio >= 0.6) {
     return {
       title: "Bon travail 💪",
-      message: "Tu as de bonnes bases, mais quelques notions méritent d’être renforcées dans Coach-IA.",
+      message:
+        "Tu as de bonnes bases, mais quelques notions méritent d’être renforcées dans Coach-IA.",
       color: "text-amber-300",
     };
   }
 
   return {
     title: "Il faut s’entraîner 🧠",
-    message: "Pas grave : l’erreur sert à apprendre. Va t’entraîner dans Coach-IA puis reviens refaire le défi.",
+    message:
+      "Pas grave : l’erreur sert à apprendre. Va t’entraîner dans Coach-IA puis reviens refaire le défi.",
     color: "text-red-300",
   };
 }
@@ -229,6 +246,8 @@ export default function CalculRapideDefiClient() {
   const [finished, setFinished] = useState(false);
   const [feedback, setFeedback] = useState<null | boolean>(null);
   const [showHint, setShowHint] = useState(false);
+  const [lockedCorrection, setLockedCorrection] = useState(false);
+  const [correctionTimeLeft, setCorrectionTimeLeft] = useState(0);
 
   const currentQuestion = questions[currentIndex];
   const [timeLeft, setTimeLeft] = useState(currentQuestion?.durationSec ?? 20);
@@ -242,62 +261,16 @@ export default function CalculRapideDefiClient() {
     setFinished(false);
     setFeedback(null);
     setShowHint(false);
+    setLockedCorrection(false);
+    setCorrectionTimeLeft(0);
   }, [niveau]);
 
   useEffect(() => {
     if (currentQuestion) setTimeLeft(currentQuestion.durationSec);
   }, [currentIndex, currentQuestion]);
 
-  if (!questions.length) {
-    return (
-      <main className="flex min-h-[100svh] items-center justify-center bg-slate-950 px-4 text-center text-white">
-        Aucune session trouvée pour le niveau {niveau}
-      </main>
-    );
-  }
-
-  function goNext() {
-    setAnswer("");
-    setFeedback(null);
-    setShowHint(false);
-
-    if (currentIndex + 1 >= questions.length) {
-      setFinished(true);
-      return;
-    }
-
-    setCurrentIndex((index) => index + 1);
-  }
-
-function validateAndNext() {
-  const acceptedAnswers = [
-    ...(currentQuestion.expected ?? []),
-    ...currentQuestion.generatedExpected,
-  ];
-
-  const isCorrect = acceptedAnswers.map(normalize).includes(normalize(answer));
-
-  setFeedback(isCorrect);
-
-  if (isCorrect) {
-    setScore((score) => score + 1);
-
-    // Bonne réponse : passage rapide
-    setTimeout(goNext, 1200);
-    return;
-  }
-
-  // Mauvaise réponse : correction visible 20 secondes minimum
-  setPaused(true);
-
-  setTimeout(() => {
-    setPaused(false);
-    goNext();
-  }, 20000);
-}
-
   useEffect(() => {
-    if (!started || finished || paused) return;
+    if (!started || finished || paused || lockedCorrection) return;
 
     if (timeLeft <= 0) {
       goNext();
@@ -309,7 +282,68 @@ function validateAndNext() {
     }, 1000);
 
     return () => window.clearTimeout(timer);
-  }, [started, finished, paused, timeLeft]);
+  }, [started, finished, paused, lockedCorrection, timeLeft]);
+
+  useEffect(() => {
+    if (!lockedCorrection || correctionTimeLeft <= 0) return;
+
+    const timer = window.setTimeout(() => {
+      setCorrectionTimeLeft((time) => time - 1);
+    }, 1000);
+
+    return () => window.clearTimeout(timer);
+  }, [lockedCorrection, correctionTimeLeft]);
+
+  function goNext() {
+    setAnswer("");
+    setFeedback(null);
+    setShowHint(false);
+    setLockedCorrection(false);
+    setCorrectionTimeLeft(0);
+    setPaused(false);
+
+    if (currentIndex + 1 >= questions.length) {
+      setFinished(true);
+      return;
+    }
+
+    setCurrentIndex((index) => index + 1);
+  }
+
+  function validateAndNext() {
+    if (feedback !== null || lockedCorrection) return;
+
+    const acceptedAnswers = [
+      ...(currentQuestion.expected ?? []),
+      ...currentQuestion.generatedExpected,
+    ];
+
+    const isCorrect = acceptedAnswers.map(normalize).includes(normalize(answer));
+
+    setFeedback(isCorrect);
+
+    if (isCorrect) {
+      setScore((score) => score + 1);
+      window.setTimeout(goNext, 1200);
+      return;
+    }
+
+    setPaused(true);
+    setLockedCorrection(true);
+    setCorrectionTimeLeft(20);
+
+    window.setTimeout(() => {
+      goNext();
+    }, 20000);
+  }
+
+  if (!questions.length) {
+    return (
+      <main className="flex min-h-[100svh] items-center justify-center bg-slate-950 px-4 text-center text-white">
+        Aucune session trouvée pour le niveau {niveau}
+      </main>
+    );
+  }
 
   if (!started) {
     return (
@@ -403,7 +437,8 @@ function validateAndNext() {
             <button
               type="button"
               onClick={() => setPaused((paused) => !paused)}
-              className="rounded-full bg-yellow-400 px-3 py-2 text-base font-black text-slate-950 sm:px-4 sm:text-lg"
+              disabled={lockedCorrection}
+              className="rounded-full bg-yellow-400 px-3 py-2 text-base font-black text-slate-950 disabled:cursor-not-allowed disabled:opacity-50 sm:px-4 sm:text-lg"
             >
               {paused ? "▶️" : "⏸️"}
             </button>
@@ -429,7 +464,7 @@ function validateAndNext() {
         </div>
 
         <div className="mb-3 flex flex-col items-center gap-1">
-          <div className="text-4xl animate-bounce sm:text-5xl">🦎</div>
+          <div className="animate-bounce text-4xl sm:text-5xl">🦎</div>
 
           <p className="hidden text-lg font-bold text-amber-200 sm:block">
             Besoin d’un coup de pouce ?
@@ -438,7 +473,8 @@ function validateAndNext() {
           <button
             type="button"
             onClick={() => setShowHint((v) => !v)}
-            className="rounded-full bg-amber-300 px-5 py-2 text-base font-black text-slate-950 shadow-lg hover:bg-amber-200 sm:text-lg"
+            disabled={lockedCorrection}
+            className="rounded-full bg-amber-300 px-5 py-2 text-base font-black text-slate-950 shadow-lg hover:bg-amber-200 disabled:cursor-not-allowed disabled:opacity-50 sm:text-lg"
           >
             👉 Obtenir un indice
           </button>
@@ -461,31 +497,42 @@ function validateAndNext() {
             onKeyDown={(event) => {
               if (event.key === "Enter") validateAndNext();
             }}
+            disabled={feedback !== null || lockedCorrection}
             autoFocus
             placeholder="Ta réponse..."
-            className="min-h-[56px] flex-1 rounded-3xl border border-white/20 bg-white px-5 text-2xl font-black text-slate-950 outline-none sm:min-h-[64px] sm:text-3xl"
+            className="min-h-[56px] flex-1 rounded-3xl border border-white/20 bg-white px-5 text-2xl font-black text-slate-950 outline-none disabled:cursor-not-allowed disabled:bg-slate-200 sm:min-h-[64px] sm:text-3xl"
           />
 
           <button
             type="button"
             onClick={validateAndNext}
-            className="rounded-3xl bg-emerald-400 px-7 py-4 text-xl font-black text-slate-950 sm:text-2xl"
+            disabled={feedback !== null || lockedCorrection}
+            className="rounded-3xl bg-emerald-400 px-7 py-4 text-xl font-black text-slate-950 disabled:cursor-not-allowed disabled:opacity-50 sm:text-2xl"
           >
             Valider
           </button>
         </div>
 
         {feedback !== null && (
-          <div className="mt-3 text-lg font-bold sm:text-2xl">
+          <div className="mx-auto mt-4 max-w-4xl rounded-3xl border border-white/15 bg-slate-900/80 p-4 text-lg font-bold sm:text-2xl">
             {feedback ? (
               <span className="text-green-400">✔ Bonne réponse</span>
             ) : (
-              <span className="text-red-400">
-                ❌{" "}
-                {currentQuestion.displayExplanation ??
-                  currentQuestion.explanation ??
-                  "Réponse incorrecte."}
-              </span>
+              <div className="text-left text-red-300">
+                <p className="mb-2 text-center text-2xl font-black">
+                  ❌ Pas encore. Lis bien la correction.
+                </p>
+
+                <p className="whitespace-pre-line text-white">
+                  {currentQuestion.displayExplanation ??
+                    currentQuestion.explanation ??
+                    "Réponse incorrecte."}
+                </p>
+
+                <p className="mt-3 text-center text-sm font-black text-amber-300 sm:text-lg">
+                  Prochaine question dans {correctionTimeLeft}s
+                </p>
+              </div>
             )}
           </div>
         )}
@@ -493,7 +540,12 @@ function validateAndNext() {
         <button
           type="button"
           onClick={goNext}
-          className="mt-3 text-sm font-bold text-white/60 hover:text-white sm:text-lg"
+          disabled={lockedCorrection}
+          className={`mt-3 text-sm font-bold sm:text-lg ${
+            lockedCorrection
+              ? "cursor-not-allowed text-white/25"
+              : "text-white/60 hover:text-white"
+          }`}
         >
           Passer cette question
         </button>
