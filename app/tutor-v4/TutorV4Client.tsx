@@ -26,7 +26,7 @@ import {
   CalculPoseCanvas ,
   FractionCanvas,
   TableauProportionnaliteCanvas,
-   ScratchCanvas 
+  ScratchCanvas 
 } from "@/lib/tutor-v4/components";
 
 import {

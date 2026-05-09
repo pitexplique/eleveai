@@ -23,7 +23,7 @@ const colors: Record<string, string> = {
 function label(block: ScratchBlockData) {
   switch (block.type) {
     case "event":
-      return block.text ?? "quand drapeau vert cliqué";
+    return block.text ?? "🟩 quand drapeau vert cliqué";
     case "move":
       return `avancer de ${block.value}`;
     case "turn":

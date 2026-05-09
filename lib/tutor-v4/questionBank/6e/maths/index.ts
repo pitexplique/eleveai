@@ -23,6 +23,8 @@ import { volumesBank } from "./volumes.bank";
 import { donneesBank } from "./donnees.bank";
 import { probabilitesBank } from "./probabilites.bank";
 
+import { algorithmiqueBank } from "./algorithmique.bank";
+
 export const maths6eQuestionBank: TutorBankItemV4[] = [
   // =========================
   // NOMBRES
@@ -55,6 +57,11 @@ export const maths6eQuestionBank: TutorBankItemV4[] = [
   ...symetrieBank,
   ...volumesBank,
 
+  // =========================
+  // ALGORITHMIQUE
+  // =========================
+  ...algorithmiqueBank,
+  
   // =========================
   // DONNÉES ET PROBABILITÉS
   // =========================
