@@ -24,6 +24,7 @@ import {
   TransformationCanvas,
   TableauDonneesCanvas,
   CalculPoseCanvas ,
+  FractionCanvas,
 } from "@/lib/tutor-v4/components";
 
 import {
@@ -220,20 +221,24 @@ function renderCanvas(canvas?: CanvasFigure | null) {
   }
 
   if (canvas.kind === "fonction_tableau") {
-  return <FonctionTableauCanvas figure={canvas} />;
-}
+    return <FonctionTableauCanvas figure={canvas} />;
+  }
 
   if (canvas.kind === "transformation") {
     return <TransformationCanvas figure={canvas} />;
   }
 
- if (canvas.kind === "tableau_donnees") {
+  if (canvas.kind === "tableau_donnees") {
     return <TableauDonneesCanvas figure={canvas} />;
   }
 
   if (canvas.kind === "calcul_pose") {
-  return <CalculPoseCanvas figure={canvas} />;
-}
+    return <CalculPoseCanvas figure={canvas} />;
+  }
+
+  if (canvas.kind === "fraction") {
+    return <FractionCanvas figure={canvas} />;
+  }
 
   return null;
 }

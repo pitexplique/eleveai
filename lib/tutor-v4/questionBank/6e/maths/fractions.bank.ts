@@ -1,4 +1,7 @@
-import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
+import type {
+  TutorBankItemV4,
+  FractionCanvasData,
+} from "@/lib/tutor-v4/types";
 
 function shuffle<T>(arr: T[]): T[] {
   return [...arr].sort(() => Math.random() - 0.5);
@@ -32,6 +35,12 @@ function decimalComma(value: number, digits?: number) {
   const s =
     typeof digits === "number" ? value.toFixed(digits) : String(value);
   return s.replace(".", ",");
+}
+
+function fractionCanvas(
+  data: Omit<FractionCanvasData, "kind">
+): FractionCanvasData {
+  return { kind: "fraction", ...data };
 }
 
 export const fractionsBank: TutorBankItemV4[] = [
@@ -1434,5 +1443,310 @@ export const fractionsBank: TutorBankItemV4[] = [
           "\n\nConclusion : on garde la réponse obtenue.",
       };
     },
+  },
+    /* =========================
+     RENFORT — CANVAS FRACTIONS + OPEN + PIÈGES
+  ========================= */
+
+  {
+    kind: "template",
+    id: "fraction_representer_canvas_tpl_1_barre",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "fractions",
+    microId: "fraction_representer",
+    difficulty: 1,
+    theme: "neutral",
+    hint: "Compte les parts colorées puis le nombre total de parts.",
+    tags: ["fractions", "representation", "canvas", "template"],
+    generate: () => {
+      const situations = [
+        { n: 1, d: 2 },
+        { n: 1, d: 3 },
+        { n: 2, d: 3 },
+        { n: 3, d: 4 },
+        { n: 2, d: 5 },
+        { n: 4, d: 5 },
+        { n: 5, d: 8 },
+      ];
+      const s = situations[Math.floor(Math.random() * situations.length)];
+
+      return {
+        text: "Quelle fraction est représentée par la partie colorée ?",
+        format: "short",
+        expected: [fractionString(s.n, s.d), fractionStringSpaced(s.n, s.d)],
+        comparator: "fraction_decimal_equivalent",
+        explanation:
+          "Définition : une fraction représente des parts d’un tout partagé en parts égales.\n\n" +
+          "Méthode : on compte les parts colorées puis le nombre total de parts.\n\n" +
+          `Observation : ${s.n} part(s) sont colorées sur ${s.d} parts égales.\n\n` +
+          `Conclusion : la fraction représentée est ${s.n}/${s.d}.`,
+        canvas: fractionCanvas({
+          model: "bar",
+          fraction: { numerator: s.n, denominator: s.d, label: "?" },
+        }),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "fraction_representer_canvas_tpl_2_grille",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "fractions",
+    microId: "fraction_representer",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Compte les cases colorées puis le nombre total de cases.",
+    tags: ["fractions", "representation", "grille", "canvas", "template"],
+    generate: () => {
+      const situations = [
+        { rows: 2, cols: 5, shaded: 3 },
+        { rows: 2, cols: 5, shaded: 6 },
+        { rows: 3, cols: 4, shaded: 5 },
+        { rows: 3, cols: 4, shaded: 9 },
+        { rows: 4, cols: 4, shaded: 8 },
+      ];
+      const s = situations[Math.floor(Math.random() * situations.length)];
+      const total = s.rows * s.cols;
+      const simp = simplifyFraction(s.shaded, total);
+
+      return {
+        text: "Quelle fraction est représentée par la grille colorée ?",
+        format: "short",
+        expected: [
+          fractionString(s.shaded, total),
+          fractionStringSpaced(s.shaded, total),
+          fractionString(simp.n, simp.d),
+          fractionStringSpaced(simp.n, simp.d),
+        ],
+        comparator: "fraction_decimal_equivalent",
+        explanation:
+          "Définition : une fraction peut représenter une partie d’une grille.\n\n" +
+          "Méthode : on compte les cases colorées puis le nombre total de cases.\n\n" +
+          `Observation : ${s.shaded} case(s) sont colorées sur ${total} cases.\n\n` +
+          `Conclusion : la fraction est ${s.shaded}/${total}.`,
+        canvas: fractionCanvas({
+          model: "grid",
+          grid: { rows: s.rows, cols: s.cols, shaded: s.shaded },
+        }),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "fraction_compare_canvas_tpl_1_barres",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "fractions",
+    microId: "fraction_compare",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Compare les longueurs colorées.",
+    tags: ["fractions", "comparaison", "canvas", "template"],
+    generate: () => {
+      const pairs = [
+        [
+          { n: 1, d: 2 },
+          { n: 3, d: 4 },
+        ],
+        [
+          { n: 1, d: 4 },
+          { n: 1, d: 2 },
+        ],
+        [
+          { n: 2, d: 5 },
+          { n: 3, d: 5 },
+        ],
+        [
+          { n: 2, d: 3 },
+          { n: 3, d: 4 },
+        ],
+      ];
+      const [a, b] = pairs[Math.floor(Math.random() * pairs.length)];
+      const good = a.n / a.d > b.n / b.d ? a : b;
+
+      return {
+        text: "En observant les deux barres, quelle fraction est la plus grande ?",
+        format: "short",
+        expected: [fractionString(good.n, good.d), fractionStringSpaced(good.n, good.d)],
+        comparator: "fraction_decimal_equivalent",
+        explanation:
+          "Définition : comparer deux fractions, c’est comparer les quantités qu’elles représentent.\n\n" +
+          "Méthode : on observe les parties colorées.\n\n" +
+          `Observation : ${good.n}/${good.d} représente la plus grande partie colorée.\n\n` +
+          `Conclusion : la fraction la plus grande est ${good.n}/${good.d}.`,
+        canvas: fractionCanvas({
+          model: "compare",
+          fractions: [
+            { numerator: a.n, denominator: a.d, label: `${a.n}/${a.d}` },
+            { numerator: b.n, denominator: b.d, label: `${b.n}/${b.d}` },
+          ],
+        }),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "fraction_equivalence_canvas_tpl_1",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "fractions",
+    microId: "fraction_defis",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Regarde si la même quantité est colorée.",
+    tags: ["fractions", "equivalence", "canvas", "template"],
+    generate: () => {
+      const situations = [
+        { a: { n: 1, d: 2 }, b: { n: 2, d: 4 }, answer: "oui" },
+        { a: { n: 1, d: 3 }, b: { n: 2, d: 6 }, answer: "oui" },
+        { a: { n: 2, d: 5 }, b: { n: 1, d: 2 }, answer: "non" },
+        { a: { n: 3, d: 4 }, b: { n: 2, d: 3 }, answer: "non" },
+      ];
+      const s = situations[Math.floor(Math.random() * situations.length)];
+
+      return {
+        text: `Les fractions ${s.a.n}/${s.a.d} et ${s.b.n}/${s.b.d} représentent-elles la même quantité ?`,
+        format: "qcm",
+        choices: shuffle(["oui", "non"]),
+        expected: [s.answer],
+        comparator: "mcq_exact",
+        explanation:
+          "Définition : deux fractions sont équivalentes si elles représentent la même quantité.\n\n" +
+          "Méthode : on compare les parties colorées.\n\n" +
+          (s.answer === "oui"
+            ? `Observation : ${s.a.n}/${s.a.d} et ${s.b.n}/${s.b.d} représentent la même portion.\n\n`
+            : `Observation : ${s.a.n}/${s.a.d} et ${s.b.n}/${s.b.d} ne représentent pas la même portion.\n\n`) +
+          `Conclusion : la réponse est ${s.answer}.`,
+        canvas: fractionCanvas({
+          model: "compare",
+          fractions: [
+            { numerator: s.a.n, denominator: s.a.d, label: `${s.a.n}/${s.a.d}` },
+            { numerator: s.b.n, denominator: s.b.d, label: `${s.b.n}/${s.b.d}` },
+          ],
+        }),
+      };
+    },
+  },
+
+  {
+    kind: "fixed",
+    id: "fraction_representer_piege_parts_inegales_fixed_1",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "fractions",
+    microId: "fraction_representer",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Peut-on écrire une fraction si les parts du tout ne sont pas égales ?",
+    format: "qcm",
+    choices: ["oui", "non"],
+    expected: ["non"],
+    comparator: "mcq_exact",
+    hint: "Une fraction exige des parts égales.",
+    explanation:
+      "Définition : une fraction représente des parts égales d’un même tout.\n\n" +
+      "Méthode : avant d’écrire une fraction, on vérifie que les parts sont égales.\n\n" +
+      "Observation : si les parts ne sont pas égales, l’écriture fractionnaire n’est pas correcte.\n\n" +
+      "Conclusion : on ne peut pas écrire une fraction fiable avec des parts inégales.",
+    tags: ["fractions", "piege", "parts_inegales", "canvas"],
+    canvas: fractionCanvas({
+      model: "bar",
+      fraction: { numerator: 2, denominator: 4, label: "2/4 ?" },
+      display: { unequalParts: true },
+    }),
+  },
+
+  {
+    kind: "fixed",
+    id: "fraction_compare_piege_denominateur_fixed_1",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "fractions",
+    microId: "fraction_compare",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Un élève affirme que 1/5 est plus grand que 1/3 parce que 5 est plus grand que 3. A-t-il raison ?",
+    format: "qcm",
+    choices: ["oui", "non"],
+    expected: ["non"],
+    comparator: "mcq_exact",
+    hint: "Quand on partage en plus de parts, chaque part est plus petite.",
+    explanation:
+      "Définition : une fraction partage un tout en parts égales.\n\n" +
+      "Méthode : on compare la taille d’une seule part.\n\n" +
+      "Observation : un cinquième est plus petit qu’un tiers, car le tout est partagé en plus de parts.\n\n" +
+      "Conclusion : 1/5 est plus petit que 1/3.",
+    tags: ["fractions", "piege", "comparaison", "denominateur"],
+  },
+
+  {
+    kind: "fixed",
+    id: "fraction_lire_ecrire_open_1",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "fractions",
+    microId: "fraction_lire_ecrire",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Explique ce que représentent le numérateur et le dénominateur dans une fraction.",
+    format: "open",
+    expected: ["numérateur", "dénominateur", "parts", "total", "prises"],
+    comparator: "contains_keyword",
+    hint: "Le haut indique les parts prises, le bas indique les parts au total.",
+    explanation:
+      "Définition : une fraction s’écrit avec un numérateur et un dénominateur.\n\n" +
+      "Méthode : on lit d’abord le nombre de parts prises, puis le nombre total de parts.\n\n" +
+      "Observation : le numérateur indique les parts prises et le dénominateur indique les parts égales au total.\n\n" +
+      "Conclusion : comprendre ces deux nombres permet de lire correctement une fraction.",
+    tags: ["fractions", "open", "vocabulaire", "raisonnement"],
+  },
+
+  {
+    kind: "fixed",
+    id: "fraction_compare_open_1",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "fractions",
+    microId: "fraction_compare",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Explique pourquoi 1/3 est plus grand que 1/5.",
+    format: "open",
+    expected: ["parts", "égales", "plus petites", "tiers", "cinquième"],
+    comparator: "contains_keyword",
+    hint: "Quand on partage en plus de parts, chaque part est plus petite.",
+    explanation:
+      "Définition : une fraction partage un tout en parts égales.\n\n" +
+      "Méthode : on compare la taille d’une part dans chaque partage.\n\n" +
+      "Observation : si on partage un même tout en 5 parts, chaque part est plus petite que si on le partage en 3 parts.\n\n" +
+      "Conclusion : 1/3 est plus grand que 1/5.",
+    tags: ["fractions", "open", "comparaison", "raisonnement"],
+  },
+
+  {
+    kind: "fixed",
+    id: "fraction_equivalence_open_1",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "fractions",
+    microId: "fraction_defis",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Explique pourquoi 2/4 et 1/2 représentent la même quantité.",
+    format: "open",
+    expected: ["même", "quantité", "moitié", "parts", "équivalentes"],
+    comparator: "contains_keyword",
+    hint: "Pense à une barre coupée en 4 parts égales.",
+    explanation:
+      "Définition : deux fractions sont équivalentes si elles représentent la même quantité.\n\n" +
+      "Méthode : on compare les portions du même tout.\n\n" +
+      "Observation : 2 parts sur 4 correspondent à la moitié du tout, comme 1 part sur 2.\n\n" +
+      "Conclusion : 2/4 et 1/2 sont équivalentes.",
+    tags: ["fractions", "open", "equivalence", "raisonnement"],
   },
 ];

@@ -664,6 +664,39 @@ export type CalculPoseCanvasData = {
 
   questionLabel?: string;
 };
+
+export type FractionCanvasData = {
+  kind: "fraction";
+  model?: "bar" | "circle" | "grid" | "compare";
+  fraction?: {
+    numerator: number;
+    denominator: number;
+    label?: string;
+    color?: string;
+  };
+  fractions?: {
+    numerator: number;
+    denominator: number;
+    label?: string;
+    color?: string;
+  }[];
+  grid?: {
+    rows: number;
+    cols: number;
+    shaded: number;
+  };
+  display?: {
+    showLabel?: boolean;
+    showFraction?: boolean;
+    showParts?: boolean;
+    unequalParts?: boolean;
+  };
+  size?: {
+    width?: number;
+    height?: number;
+  };
+};
+
 export type CanvasFigure =
   | TriangleCanvasData
   | QuadrilatereCanvasData
@@ -679,6 +712,7 @@ export type CanvasFigure =
   | FonctionTableauCanvasData
   | TableauDonneesCanvasData
   | CalculPoseCanvasData
+  | FractionCanvasData
   | TransformationCanvasData;
 
 export type QuestionVariantMeta = {
