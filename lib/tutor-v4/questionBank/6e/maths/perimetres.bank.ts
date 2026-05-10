@@ -14,11 +14,11 @@ export const perimetresBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "fixed",
-    id: "perim_comprendre_fixed_1",
+    id: "aire_perimetre_comprendre_fixed_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "perimetres",
-    microId: "perim_comprendre",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_comprendre",
     difficulty: 1,
     theme: "neutral",
     text: "Le périmètre d’une figure correspond…",
@@ -38,15 +38,15 @@ export const perimetresBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Le périmètre correspond à la longueur du contour d’une figure, c’est-à-dire tout son tour.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["perimetres", "comprendre", "qcm"],
+    tags: ["aire_perimetre", "comprendre", "qcm"],
   },
   {
     kind: "fixed",
-    id: "perim_comprendre_fixed_2",
+    id: "aire_perimetre_comprendre_fixed_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "perimetres",
-    microId: "perim_comprendre",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_comprendre",
     difficulty: 1,
     theme: "neutral",
     text: "Quelle unité convient pour mesurer un périmètre ?",
@@ -61,15 +61,15 @@ export const perimetresBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Le périmètre est une longueur. On l’exprime donc avec une unité de longueur, par exemple en centimètres.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["perimetres", "comprendre", "qcm"],
+    tags: ["aire_perimetre", "comprendre", "qcm"],
   },
   {
     kind: "fixed",
-    id: "perim_comprendre_fixed_3",
+    id: "aire_perimetre_comprendre_fixed_3",
     niveau: "6e",
     matiere: "maths",
-    notionId: "perimetres",
-    microId: "perim_comprendre",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_comprendre",
     difficulty: 2,
     theme: "neutral",
     text: "Quelle écriture peut désigner un périmètre ?",
@@ -84,15 +84,15 @@ export const perimetresBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("18 cm désigne une longueur. 18 cm² désigne une aire et 18 cm³ un volume. Un périmètre s’exprime donc ici en cm.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["perimetres", "comprendre", "qcm"],
+    tags: ["aire_perimetre", "comprendre", "qcm"],
   },
   {
     kind: "fixed",
-    id: "perim_comprendre_reunion_1",
+    id: "aire_perimetre_comprendre_reunion_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "perimetres",
-    microId: "perim_comprendre",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_comprendre",
     difficulty: 2,
     theme: "reunion",
     text: "Pour mesurer le tour d’un petit jardin à La Réunion, on parle de…",
@@ -107,15 +107,15 @@ export const perimetresBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Le tour d’un jardin correspond à son contour. On mesure donc son périmètre.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["perimetres", "comprendre", "reunion", "qcm"],
+    tags: ["aire_perimetre", "comprendre", "reunion", "qcm"],
   },
   {
     kind: "fixed",
-    id: "perim_comprendre_confusion_1",
+    id: "aire_perimetre_comprendre_confusion_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "perimetres",
-    microId: "perim_comprendre",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_comprendre",
     difficulty: 3,
     theme: "neutral",
     text: "Un rectangle mesure 5 cm sur 4 cm. Que vaut son périmètre ?",
@@ -130,7 +130,7 @@ export const perimetresBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Le périmètre du rectangle vaut 2 × (5 + 4) = 18 cm. Le calcul 5 × 4 = 20 donne l’aire, pas le périmètre.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["perimetres", "comprendre", "confusion", "qcm"],
+    tags: ["aire_perimetre", "comprendre", "confusion", "qcm"],
   },
 
   // =========================
@@ -138,11 +138,11 @@ export const perimetresBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "fixed",
-    id: "perim_square_fixed_1",
+    id: "aire_perimetre_carre_fixed_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "perimetres",
-    microId: "perim_square",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_carre",
     difficulty: 1,
     theme: "neutral",
     text: "Quel est le périmètre d’un carré de côté 5 cm ?",
@@ -156,15 +156,15 @@ export const perimetresBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Un carré a 4 côtés égaux. Avec un côté de 5 cm, on calcule 4 × 5 = 20 cm.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["perimetres", "carre"],
+    tags: ["aire_perimetre", "carre"],
   },
   {
     kind: "fixed",
-    id: "perim_square_fixed_2",
+    id: "aire_perimetre_carre_fixed_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "perimetres",
-    microId: "perim_square",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_carre",
     difficulty: 1,
     theme: "neutral",
     text: "Un carré a un côté de 7 cm. Quel est son périmètre ?",
@@ -178,15 +178,15 @@ export const perimetresBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Le périmètre d’un carré est égal à 4 fois la longueur d’un côté. Ici, 4 × 7 = 28 cm.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["perimetres", "carre"],
+    tags: ["aire_perimetre", "carre"],
   },
   {
     kind: "fixed",
-    id: "perim_square_qcm_1",
+    id: "aire_perimetre_carre_qcm_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "perimetres",
-    microId: "perim_square",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_carre",
     difficulty: 2,
     theme: "neutral",
     text: "Quel est le périmètre d’un carré de côté 6 cm ?",
@@ -201,15 +201,15 @@ export const perimetresBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Un carré a 4 côtés de 6 cm. Son périmètre vaut donc 6 + 6 + 6 + 6 = 24 cm.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["perimetres", "carre", "qcm"],
+    tags: ["aire_perimetre", "carre", "qcm"],
   },
   {
     kind: "fixed",
-    id: "perim_square_qcm_2",
+    id: "aire_perimetre_carre_qcm_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "perimetres",
-    microId: "perim_square",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_carre",
     difficulty: 2,
     theme: "neutral",
     text: "Choisis la bonne réponse : le périmètre d’un carré de côté 9 cm est...",
@@ -224,15 +224,15 @@ export const perimetresBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Le périmètre d’un carré de côté 9 cm vaut 4 × 9 = 36 cm. 81 correspondrait à l’aire.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["perimetres", "carre", "qcm"],
+    tags: ["aire_perimetre", "carre", "qcm"],
   },
   {
     kind: "fixed",
-    id: "perim_square_canvas_1",
+    id: "aire_perimetre_carre_canvas_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "perimetres",
-    microId: "perim_square",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_carre",
     difficulty: 2,
     theme: "neutral",
     text: "Observe la figure. Quel est le périmètre du carré ABCD ?",
@@ -246,7 +246,7 @@ export const perimetresBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Le côté AB mesure 5 cm et tous les côtés d’un carré sont égaux. Le périmètre vaut donc 4 × 5 = 20 cm.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["perimetres", "carre", "canvas"],
+    tags: ["aire_perimetre", "carre", "canvas"],
     canvas: {
       kind: "quadrilatere",
       points: {
@@ -276,11 +276,11 @@ export const perimetresBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "fixed",
-    id: "perim_rectangle_fixed_1",
+    id: "aire_perimetre_rectangle_fixed_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "perimetres",
-    microId: "perim_rectangle",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_rectangle",
     difficulty: 1,
     theme: "neutral",
     text: "Un rectangle mesure 3 cm sur 7 cm. Quel est son périmètre ?",
@@ -294,15 +294,15 @@ export const perimetresBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Un rectangle a 2 longueurs et 2 largeurs. Ici, 7 + 7 + 3 + 3 = 20 cm.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["perimetres", "rectangle"],
+    tags: ["aire_perimetre", "rectangle"],
   },
   {
     kind: "fixed",
-    id: "perim_rectangle_fixed_2",
+    id: "aire_perimetre_rectangle_fixed_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "perimetres",
-    microId: "perim_rectangle",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_rectangle",
     difficulty: 1,
     theme: "neutral",
     text: "Un rectangle mesure 4 cm de largeur et 8 cm de longueur. Quel est son périmètre ?",
@@ -316,15 +316,15 @@ export const perimetresBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Le périmètre du rectangle vaut 2 × (8 + 4) = 2 × 12 = 24 cm.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["perimetres", "rectangle"],
+    tags: ["aire_perimetre", "rectangle"],
   },
   {
     kind: "fixed",
-    id: "perim_rectangle_qcm_1",
+    id: "aire_perimetre_rectangle_qcm_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "perimetres",
-    microId: "perim_rectangle",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_rectangle",
     difficulty: 2,
     theme: "neutral",
     text: "Un rectangle mesure 5 cm sur 2 cm. Quel est son périmètre ?",
@@ -338,15 +338,15 @@ export const perimetresBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Le périmètre vaut 5 + 5 + 2 + 2 = 14 cm.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["perimetres", "rectangle", "qcm"],
+    tags: ["aire_perimetre", "rectangle", "qcm"],
   },
   {
     kind: "fixed",
-    id: "perim_rectangle_qcm_2",
+    id: "aire_perimetre_rectangle_qcm_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "perimetres",
-    microId: "perim_rectangle",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_rectangle",
     difficulty: 2,
     theme: "neutral",
     text: "Un rectangle mesure 6 cm sur 4 cm. Quel est son périmètre ?",
@@ -360,15 +360,15 @@ export const perimetresBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("On additionne tous les côtés : 6 + 6 + 4 + 4 = 20 cm.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["perimetres", "rectangle", "qcm"],
+    tags: ["aire_perimetre", "rectangle", "qcm"],
   },
   {
     kind: "fixed",
-    id: "perim_rectangle_confusion_1",
+    id: "aire_perimetre_rectangle_confusion_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "perimetres",
-    microId: "perim_rectangle",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_rectangle",
     difficulty: 3,
     theme: "neutral",
     text: "Un rectangle mesure 8 cm sur 3 cm. Quel est son périmètre ?",
@@ -383,15 +383,15 @@ export const perimetresBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Le périmètre vaut 8 + 8 + 3 + 3 = 22 cm. 24 correspond au produit 8 × 3, donc à l’aire.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["perimetres", "rectangle", "confusion", "qcm"],
+    tags: ["aire_perimetre", "rectangle", "confusion", "qcm"],
   },
   {
     kind: "fixed",
-    id: "perim_rectangle_erreur_1",
+    id: "aire_perimetre_rectangle_erreur_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "perimetres",
-    microId: "perim_rectangle",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_rectangle",
     difficulty: 3,
     theme: "neutral",
     text: "Un rectangle mesure 6 cm sur 2 cm. Quel est son périmètre ?",
@@ -406,15 +406,15 @@ export const perimetresBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Le périmètre vaut 2 × (6 + 2) = 16 cm. 8 cm correspond seulement à 6 + 2.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["perimetres", "rectangle", "erreur", "qcm"],
+    tags: ["aire_perimetre", "rectangle", "erreur", "qcm"],
   },
   {
     kind: "fixed",
-    id: "perim_rectangle_canvas_1",
+    id: "aire_perimetre_rectangle_canvas_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "perimetres",
-    microId: "perim_rectangle",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_rectangle",
     difficulty: 2,
     theme: "neutral",
     text: "Observe la figure. Quel est le périmètre du rectangle ABCD ?",
@@ -428,7 +428,7 @@ export const perimetresBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Le rectangle a deux côtés de 6 cm et deux côtés de 3 cm. Son périmètre vaut 6 + 6 + 3 + 3 = 18 cm.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["perimetres", "rectangle", "canvas"],
+    tags: ["aire_perimetre", "rectangle", "canvas"],
     canvas: {
       kind: "quadrilatere",
       points: {
@@ -459,11 +459,11 @@ export const perimetresBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "fixed",
-    id: "perim_figure_fixed_1",
+    id: "aire_perimetre_figure_fixed_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "perimetres",
-    microId: "perim_figure",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_figure",
     difficulty: 3,
     theme: "neutral",
     text: "Une figure a pour côtés 3 cm, 4 cm, 5 cm et 6 cm. Quel est son périmètre ?",
@@ -477,15 +477,15 @@ export const perimetresBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Le périmètre d’une figure se calcule en additionnant toutes les longueurs de son contour : 3 + 4 + 5 + 6 = 18 cm.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["perimetres", "figure"],
+    tags: ["aire_perimetre", "figure"],
   },
   {
     kind: "fixed",
-    id: "perim_figure_qcm_1",
+    id: "aire_perimetre_figure_qcm_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "perimetres",
-    microId: "perim_figure",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_figure",
     difficulty: 3,
     theme: "neutral",
     text: "Une figure a des côtés de 2 cm, 2 cm, 3 cm, 3 cm et 4 cm. Quel est son périmètre ?",
@@ -499,15 +499,15 @@ export const perimetresBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Le périmètre vaut 2 + 2 + 3 + 3 + 4 = 14 cm.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["perimetres", "figure", "qcm"],
+    tags: ["aire_perimetre", "figure", "qcm"],
   },
   {
     kind: "fixed",
-    id: "perim_figure_canvas_1",
+    id: "aire_perimetre_figure_canvas_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "perimetres",
-    microId: "perim_figure",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_figure",
     difficulty: 4,
     theme: "neutral",
     text: "Observe la figure sur quadrillage. Quel est son périmètre en unités ?",
@@ -521,7 +521,7 @@ export const perimetresBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("La figure est un carré de 2 cases sur 2. Son contour extérieur compte 8 unités.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["perimetres", "figure", "canvas"],
+    tags: ["aire_perimetre", "figure", "canvas"],
     canvas: {
       kind: "figure_libre",
       grid: {
@@ -543,11 +543,11 @@ export const perimetresBank: TutorBankItemV4[] = [
   },
   {
     kind: "fixed",
-    id: "perim_figure_canvas_2",
+    id: "aire_perimetre_figure_canvas_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "perimetres",
-    microId: "perim_figure",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_figure",
     difficulty: 5,
     theme: "neutral",
     text: "Observe la figure en L sur quadrillage. Quel est son périmètre en unités ?",
@@ -562,7 +562,7 @@ export const perimetresBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("On suit tout le contour extérieur de la figure en L. On obtient un périmètre total de 10 unités.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["perimetres", "figure", "canvas", "qcm"],
+    tags: ["aire_perimetre", "figure", "canvas", "qcm"],
     canvas: {
       kind: "figure_libre",
       grid: {
@@ -585,11 +585,11 @@ export const perimetresBank: TutorBankItemV4[] = [
   },
   {
     kind: "fixed",
-    id: "perim_figure_canvas_erreur_1",
+    id: "aire_perimetre_figure_canvas_erreur_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "perimetres",
-    microId: "perim_figure",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_figure",
     difficulty: 5,
     theme: "neutral",
     text: "Quel est le périmètre de cette figure ?",
@@ -604,7 +604,7 @@ export const perimetresBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Seul le contour extérieur compte. Les segments internes ne font pas partie du périmètre. Le périmètre de cette figure est 12 unités.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["perimetres", "figure", "canvas", "erreur", "qcm"],
+    tags: ["aire_perimetre", "figure", "canvas", "erreur", "qcm"],
     canvas: {
       kind: "figure_libre",
       grid: {
@@ -631,11 +631,11 @@ export const perimetresBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "fixed",
-    id: "perim_probleme_fixed_1",
+    id: "aire_perimetre_probleme_fixed_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "perimetres",
-    microId: "perim_probleme",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_probleme",
     difficulty: 4,
     theme: "neutral",
     text: "Un jardin rectangulaire mesure 8 m de long et 3 m de large. Quelle longueur de grillage faut-il pour faire tout le tour ?",
@@ -649,15 +649,15 @@ export const perimetresBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Le grillage doit faire tout le tour du jardin. On calcule donc le périmètre : 2 × (8 + 3) = 22 m.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["perimetres", "probleme"],
+    tags: ["aire_perimetre", "probleme"],
   },
   {
     kind: "fixed",
-    id: "perim_probleme_fixed_2",
+    id: "aire_perimetre_probleme_fixed_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "perimetres",
-    microId: "perim_probleme",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_probleme",
     difficulty: 4,
     theme: "reunion",
     text: "À La Réunion, un terrain rectangulaire mesure 10 m sur 4 m. Quel est son périmètre ?",
@@ -670,15 +670,15 @@ export const perimetresBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("On calcule le tour du terrain : 2 × (10 + 4) = 28 m.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["perimetres", "probleme", "reunion"],
+    tags: ["aire_perimetre", "probleme", "reunion"],
   },
   {
     kind: "fixed",
-    id: "perim_probleme_qcm_1",
+    id: "aire_perimetre_probleme_qcm_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "perimetres",
-    microId: "perim_probleme",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_probleme",
     difficulty: 5,
     theme: "neutral",
     text: "Une cour carrée a un côté de 12 m. Quelle longueur de clôture faut-il pour faire le tour ?",
@@ -693,15 +693,15 @@ export const perimetresBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Le tour de la cour correspond au périmètre du carré : 4 × 12 = 48 m.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["perimetres", "probleme", "qcm"],
+    tags: ["aire_perimetre", "probleme", "qcm"],
   },
   {
     kind: "fixed",
-    id: "perim_probleme_qcm_2",
+    id: "aire_perimetre_probleme_qcm_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "perimetres",
-    microId: "perim_probleme",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_probleme",
     difficulty: 5,
     theme: "neutral",
     text: "Un rectangle a une longueur de 9 m et une largeur de 2,5 m. Quel est son périmètre ?",
@@ -716,7 +716,7 @@ export const perimetresBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Le périmètre vaut 2 × (9 + 2,5) = 2 × 11,5 = 23 m.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["perimetres", "probleme", "qcm", "decimaux"],
+    tags: ["aire_perimetre", "probleme", "qcm", "decimal_nombre"],
   },
 
   // =========================
@@ -724,11 +724,11 @@ export const perimetresBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "fixed",
-    id: "perim_defis_fixed_1",
+    id: "aire_perimetre_defis_fixed_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "perimetres",
-    microId: "perim_defis",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_defi",
     difficulty: 4,
     theme: "neutral",
     text: "Pourquoi le périmètre d’une figure ne peut-il pas s’exprimer en cm² ?",
@@ -742,15 +742,15 @@ export const perimetresBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Le périmètre mesure une longueur, donc il s’exprime en cm, m, etc. Les cm² servent à mesurer une aire, c’est-à-dire une surface.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["perimetres", "defi", "raisonnement"],
+    tags: ["aire_perimetre", "defi", "raisonnement"],
   },
   {
     kind: "fixed",
-    id: "perim_defis_fixed_2",
+    id: "aire_perimetre_defis_fixed_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "perimetres",
-    microId: "perim_defis",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_defi",
     difficulty: 4,
     theme: "neutral",
     text: "Explique pourquoi un carré de côté 6 cm a un périmètre plus grand qu’un carré de côté 4 cm.",
@@ -764,15 +764,15 @@ export const perimetresBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Un carré de côté 6 cm a pour périmètre 4 × 6 = 24 cm. Un carré de côté 4 cm a pour périmètre 4 × 4 = 16 cm. Comme 24 est plus grand que 16, son périmètre est plus grand.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["perimetres", "defi", "raisonnement"],
+    tags: ["aire_perimetre", "defi", "raisonnement"],
   },
   {
     kind: "fixed",
-    id: "perim_defis_fixed_3",
+    id: "aire_perimetre_defis_fixed_3",
     niveau: "6e",
     matiere: "maths",
-    notionId: "perimetres",
-    microId: "perim_defis",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_defi",
     difficulty: 4,
     theme: "neutral",
     text: "Un rectangle mesure 7 cm sur 3 cm. Si on augmente seulement la longueur de 1 cm, de combien augmente le périmètre ?",
@@ -786,15 +786,15 @@ export const perimetresBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Le périmètre d’un rectangle vaut 2 × longueur + 2 × largeur. Si la longueur augmente de 1 cm, elle augmente en fait deux côtés. Le périmètre augmente donc de 2 cm.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["perimetres", "defi", "raisonnement"],
+    tags: ["aire_perimetre", "defi", "raisonnement"],
   },
   {
     kind: "fixed",
-    id: "perim_defis_fixed_4",
+    id: "aire_perimetre_defis_fixed_4",
     niveau: "6e",
     matiere: "maths",
-    notionId: "perimetres",
-    microId: "perim_defis",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_defi",
     difficulty: 4,
     theme: "neutral",
     text: "Deux rectangles ont la même aire. Ont-ils forcément le même périmètre ?",
@@ -809,15 +809,15 @@ export const perimetresBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Non. Deux rectangles peuvent avoir la même aire sans avoir le même périmètre. Par exemple, 3 × 4 et 2 × 6 ont tous deux une aire de 12, mais leurs périmètres sont différents.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["perimetres", "defi", "qcm", "raisonnement"],
+    tags: ["aire_perimetre", "defi", "qcm", "raisonnement"],
   },
   {
     kind: "fixed",
-    id: "perim_defis_fixed_5",
+    id: "aire_perimetre_defis_fixed_5",
     niveau: "6e",
     matiere: "maths",
-    notionId: "perimetres",
-    microId: "perim_defis",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_defi",
     difficulty: 4,
     theme: "neutral",
     text: "Un carré a un périmètre de 28 cm. Combien mesure un côté ?",
@@ -831,15 +831,15 @@ export const perimetresBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Le périmètre d’un carré vaut 4 × côté. Donc le côté vaut 28 ÷ 4 = 7 cm.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["perimetres", "defi", "inverse"],
+    tags: ["aire_perimetre", "defi", "inverse"],
   },
   {
     kind: "fixed",
-    id: "perim_defis_fixed_6",
+    id: "aire_perimetre_defis_fixed_6",
     niveau: "6e",
     matiere: "maths",
-    notionId: "perimetres",
-    microId: "perim_defis",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_defi",
     difficulty: 4,
     theme: "neutral",
     text: "Un rectangle a un périmètre de 18 cm. Sa longueur est 6 cm. Quelle est sa largeur ?",
@@ -853,15 +853,15 @@ export const perimetresBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Le périmètre vaut 18 cm. Les deux longueurs valent déjà 6 + 6 = 12 cm. Il reste donc 6 cm pour les deux largeurs, soit 3 cm pour une largeur.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["perimetres", "defi", "inverse"],
+    tags: ["aire_perimetre", "defi", "inverse"],
   },
   {
     kind: "fixed",
-    id: "perim_defis_qcm_1",
+    id: "aire_perimetre_defis_qcm_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "perimetres",
-    microId: "perim_defis",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_defi",
     difficulty: 5,
     theme: "neutral",
     text: "Quel rectangle a le plus grand périmètre ?",
@@ -881,15 +881,15 @@ export const perimetresBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("6 sur 2 donne 2 × (6 + 2) = 16 cm. 5 sur 3 donne 2 × (5 + 3) = 16 cm. 4 sur 4 donne 2 × (4 + 4) = 16 cm. Les trois rectangles ont donc le même périmètre.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["perimetres", "defi", "qcm", "comparaison"],
+    tags: ["aire_perimetre", "defi", "qcm", "comparaison"],
   },
   {
     kind: "fixed",
-    id: "perim_defis_qcm_2",
+    id: "aire_perimetre_defis_qcm_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "perimetres",
-    microId: "perim_defis",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_defi",
     difficulty: 5,
     theme: "neutral",
     text: "Si on double le côté d’un carré, que devient son périmètre ?",
@@ -904,15 +904,15 @@ export const perimetresBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Si le côté est multiplié par 2, alors le périmètre 4 × côté est lui aussi multiplié par 2. Le périmètre double.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["perimetres", "defi", "qcm", "proportionnalite"],
+    tags: ["aire_perimetre", "defi", "qcm", "prop_proportionnalite"],
   },
   {
     kind: "fixed",
-    id: "perim_defis_qcm_3",
+    id: "aire_perimetre_defis_qcm_3",
     niveau: "6e",
     matiere: "maths",
-    notionId: "perimetres",
-    microId: "perim_defis",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_defi",
     difficulty: 5,
     theme: "neutral",
     text: "Deux figures peuvent-elles avoir le même périmètre mais des formes différentes ?",
@@ -927,15 +927,15 @@ export const perimetresBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Oui. Deux figures différentes peuvent avoir le même périmètre. Le périmètre donne seulement la longueur totale du contour, pas la forme exacte.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["perimetres", "defi", "qcm", "raisonnement"],
+    tags: ["aire_perimetre", "defi", "qcm", "raisonnement"],
   },
   {
     kind: "fixed",
-    id: "perim_defis_canvas_1",
+    id: "aire_perimetre_defis_canvas_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "perimetres",
-    microId: "perim_defis",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_defi",
     difficulty: 5,
     theme: "neutral",
     text: "Observe la figure sur quadrillage. Quel est son périmètre en unités ?",
@@ -949,7 +949,7 @@ export const perimetresBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("La figure recouvre 5 cases en forme de L. En suivant uniquement le contour extérieur, on obtient un périmètre de 10 unités.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["perimetres", "defi", "canvas"],
+    tags: ["aire_perimetre", "defi", "canvas"],
     canvas: {
       kind: "figure_libre",
       grid: {
@@ -972,11 +972,11 @@ export const perimetresBank: TutorBankItemV4[] = [
   },
   {
     kind: "fixed",
-    id: "perim_defis_canvas_2",
+    id: "aire_perimetre_defis_canvas_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "perimetres",
-    microId: "perim_defis",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_defi",
     difficulty: 5,
     theme: "neutral",
     text: "Cette figure a-t-elle le même périmètre qu’un carré de côté 3 unités ?",
@@ -991,7 +991,7 @@ export const perimetresBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Un carré de côté 3 a pour périmètre 4 × 3 = 12 unités. En comptant le contour de la figure, on trouve aussi 12 unités. Les deux périmètres sont donc égaux.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["perimetres", "defi", "canvas", "qcm", "comparaison"],
+    tags: ["aire_perimetre", "defi", "canvas", "qcm", "comparaison"],
     canvas: {
       kind: "figure_libre",
       grid: {
@@ -1014,11 +1014,11 @@ export const perimetresBank: TutorBankItemV4[] = [
   },
   {
     kind: "fixed",
-    id: "perim_defis_intervalle_1",
+    id: "aire_perimetre_defis_intervalle_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "perimetres",
-    microId: "perim_defis",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_defi",
     difficulty: 5,
     theme: "neutral",
     text: "Donne un exemple de périmètre compris entre 20 cm et 25 cm.",
@@ -1032,15 +1032,15 @@ export const perimetresBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Un périmètre strictement compris entre 20 cm et 25 cm peut être 21 cm, 22 cm, 23 cm ou 24 cm.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["perimetres", "defi", "raisonnement"],
+    tags: ["aire_perimetre", "defi", "raisonnement"],
   },
   {
     kind: "fixed",
-    id: "perim_defis_reunion_1",
+    id: "aire_perimetre_defis_reunion_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "perimetres",
-    microId: "perim_defis",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_defi",
     difficulty: 5,
     theme: "reunion",
     text: "À La Réunion, deux côtés d’un terrain rectangulaire mesurent 7 m et 5 m. Quel est son périmètre ?",
@@ -1053,7 +1053,7 @@ export const perimetresBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Le périmètre du terrain vaut 2 × (7 + 5) = 24 m.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["perimetres", "defi", "reunion"],
+    tags: ["aire_perimetre", "defi", "reunion"],
   },
 
   // =========================
@@ -1061,15 +1061,15 @@ export const perimetresBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "template",
-    id: "perim_comprendre_tpl_1",
+    id: "aire_perimetre_comprendre_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "perimetres",
-    microId: "perim_comprendre",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_comprendre",
     difficulty: 1,
     theme: "neutral",
     hint: "Le périmètre est une longueur.",
-    tags: ["perimetres", "comprendre", "template"],
+    tags: ["aire_perimetre", "comprendre", "template"],
     generate: () => {
       return {
         text: "Quelle unité est adaptée pour mesurer un périmètre ?",
@@ -1092,15 +1092,15 @@ export const perimetresBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "template",
-    id: "perim_square_tpl_1",
+    id: "aire_perimetre_carre_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "perimetres",
-    microId: "perim_square",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_carre",
     difficulty: 1,
     theme: "neutral",
     hint: "Le carré a 4 côtés égaux.",
-    tags: ["perimetres", "carre", "template"],
+    tags: ["aire_perimetre", "carre", "template"],
     generate: () => {
       const c = [2, 3, 4, 5, 6, 7, 8, 9][Math.floor(Math.random() * 8)];
       const p = c * 4;
@@ -1120,15 +1120,15 @@ export const perimetresBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "perim_square_tpl_2",
+    id: "aire_perimetre_carre_tpl_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "perimetres",
-    microId: "perim_square",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_carre",
     difficulty: 1,
     theme: "neutral",
     hint: "On additionne les 4 côtés.",
-    tags: ["perimetres", "carre", "template"],
+    tags: ["aire_perimetre", "carre", "template"],
     generate: () => {
       const c = [3, 4, 5, 6, 7, 8][Math.floor(Math.random() * 6)];
       const p = c * 4;
@@ -1148,15 +1148,15 @@ export const perimetresBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "perim_square_qcm_tpl_1",
+    id: "aire_perimetre_carre_qcm_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "perimetres",
-    microId: "perim_square",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_carre",
     difficulty: 2,
     theme: "neutral",
     hint: "Le périmètre n’est pas l’aire.",
-    tags: ["perimetres", "carre", "qcm", "template"],
+    tags: ["aire_perimetre", "carre", "qcm", "template"],
     generate: () => {
       const c = [4, 5, 6, 7, 8][Math.floor(Math.random() * 5)];
       const good = c * 4;
@@ -1192,15 +1192,15 @@ export const perimetresBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "template",
-    id: "perim_rectangle_tpl_1",
+    id: "aire_perimetre_rectangle_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "perimetres",
-    microId: "perim_rectangle",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_rectangle",
     difficulty: 1,
     theme: "neutral",
     hint: "Il y a 2 longueurs et 2 largeurs.",
-    tags: ["perimetres", "rectangle", "template"],
+    tags: ["aire_perimetre", "rectangle", "template"],
     generate: () => {
       const l = [3, 4, 5, 6, 7, 8][Math.floor(Math.random() * 6)];
       const w = [2, 3, 4, 5][Math.floor(Math.random() * 4)];
@@ -1221,15 +1221,15 @@ export const perimetresBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "perim_rectangle_tpl_2",
+    id: "aire_perimetre_rectangle_tpl_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "perimetres",
-    microId: "perim_rectangle",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_rectangle",
     difficulty: 1,
     theme: "neutral",
     hint: "Périmètre = 2 × (longueur + largeur).",
-    tags: ["perimetres", "rectangle", "template"],
+    tags: ["aire_perimetre", "rectangle", "template"],
     generate: () => {
       const l = [4, 5, 6, 7, 8, 9][Math.floor(Math.random() * 6)];
       const w = [2, 3, 4, 5][Math.floor(Math.random() * 4)];
@@ -1250,15 +1250,15 @@ export const perimetresBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "perim_rectangle_qcm_tpl_1",
+    id: "aire_perimetre_rectangle_qcm_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "perimetres",
-    microId: "perim_rectangle",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_rectangle",
     difficulty: 2,
     theme: "neutral",
     hint: "Attention : longueur × largeur donne l’aire.",
-    tags: ["perimetres", "rectangle", "qcm", "template"],
+    tags: ["aire_perimetre", "rectangle", "qcm", "template"],
     generate: () => {
       const l = [4, 5, 6, 7, 8][Math.floor(Math.random() * 5)];
       const w = [2, 3, 4, 5][Math.floor(Math.random() * 4)];
@@ -1295,15 +1295,15 @@ export const perimetresBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "template",
-    id: "perim_figure_tpl_1",
+    id: "aire_perimetre_figure_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "perimetres",
-    microId: "perim_figure",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_figure",
     difficulty: 3,
     theme: "neutral",
     hint: "Additionne toutes les longueurs du contour.",
-    tags: ["perimetres", "figure", "template"],
+    tags: ["aire_perimetre", "figure", "template"],
     generate: () => {
       const a = randomInt(2, 6);
       const b = randomInt(2, 6);
@@ -1326,15 +1326,15 @@ export const perimetresBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "perim_figure_canvas_tpl_1",
+    id: "aire_perimetre_figure_canvas_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "perimetres",
-    microId: "perim_figure",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_figure",
     difficulty: 4,
     theme: "neutral",
     hint: "Compte les unités sur le contour extérieur.",
-    tags: ["perimetres", "figure", "canvas", "template"],
+    tags: ["aire_perimetre", "figure", "canvas", "template"],
     generate: () => {
       const shapes = [
         {
@@ -1400,15 +1400,15 @@ export const perimetresBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "template",
-    id: "perim_probleme_tpl_1",
+    id: "aire_perimetre_probleme_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "perimetres",
-    microId: "perim_probleme",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_probleme",
     difficulty: 4,
     theme: "neutral",
     hint: "Pour faire le tour, on calcule le périmètre.",
-    tags: ["perimetres", "probleme", "template"],
+    tags: ["aire_perimetre", "probleme", "template"],
     generate: () => {
       const l = randomInt(5, 12);
       const w = randomInt(2, 6);
@@ -1429,15 +1429,15 @@ export const perimetresBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "perim_probleme_qcm_tpl_1",
+    id: "aire_perimetre_probleme_qcm_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "perimetres",
-    microId: "perim_probleme",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_probleme",
     difficulty: 5,
     theme: "neutral",
     hint: "Le périmètre d’un rectangle vaut 2 × (L + l).",
-    tags: ["perimetres", "probleme", "qcm", "template"],
+    tags: ["aire_perimetre", "probleme", "qcm", "template"],
     generate: () => {
       const lengths = [6, 7, 8, 9];
       const widths = [2.5, 3.5, 4.5];
@@ -1483,15 +1483,15 @@ export const perimetresBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "template",
-    id: "perim_defis_tpl_1",
+    id: "aire_perimetre_defis_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "perimetres",
-    microId: "perim_defis",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_defi",
     difficulty: 5,
     theme: "neutral",
     hint: "Dans un carré, le périmètre vaut 4 × côté.",
-    tags: ["perimetres", "defi", "template", "inverse"],
+    tags: ["aire_perimetre", "defi", "template", "inverse"],
     generate: () => {
       const side = randomInt(3, 9);
       const perim = side * 4;
@@ -1511,15 +1511,15 @@ export const perimetresBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "perim_defis_tpl_2",
+    id: "aire_perimetre_defis_tpl_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "perimetres",
-    microId: "perim_defis",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_defi",
     difficulty: 5,
     theme: "neutral",
     hint: "La longueur compte deux fois dans le périmètre du rectangle.",
-    tags: ["perimetres", "defi", "template", "raisonnement"],
+    tags: ["aire_perimetre", "defi", "template", "raisonnement"],
     generate: () => {
       const l = randomInt(4, 9);
       const w = randomInt(2, 6);
@@ -1541,15 +1541,15 @@ export const perimetresBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "perim_defis_qcm_tpl_1",
+    id: "aire_perimetre_defis_qcm_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "perimetres",
-    microId: "perim_defis",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_defi",
     difficulty: 5,
     theme: "neutral",
     hint: "Même périmètre ne veut pas dire même forme.",
-    tags: ["perimetres", "defi", "qcm", "template", "raisonnement"],
+    tags: ["aire_perimetre", "defi", "qcm", "template", "raisonnement"],
     generate: () => {
       return {
         text: "Deux figures peuvent-elles avoir le même périmètre mais des formes différentes ?",

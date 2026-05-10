@@ -17,7 +17,7 @@ export const trianglesBank: TutorBankItemV4[] = [
     id: "triangle_nommer_fixed_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "triangles",
+    notionId: "triangle_figure",
     microId: "triangle_nommer",
     difficulty: 1,
     theme: "neutral",
@@ -32,7 +32,7 @@ export const trianglesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Un triangle se nomme avec ses trois sommets. Ici, on peut l’appeler triangle ABC.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["triangles", "nommage"],
+    tags: ["triangle_figure", "nommage"],
     canvas: {
       kind: "triangle",
       points: {
@@ -51,7 +51,7 @@ export const trianglesBank: TutorBankItemV4[] = [
     id: "triangle_nommer_fixed_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "triangles",
+    notionId: "triangle_figure",
     microId: "triangle_nommer",
     difficulty: 1,
     theme: "neutral",
@@ -66,7 +66,7 @@ export const trianglesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Pour nommer un triangle, on utilise les lettres de ses trois sommets. Ici, c’est le triangle DEF.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["triangles", "nommage"],
+    tags: ["triangle_figure", "nommage"],
     canvas: {
       kind: "triangle",
       points: {
@@ -90,7 +90,7 @@ export const trianglesBank: TutorBankItemV4[] = [
     id: "triangle_nommer_qcm_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "triangles",
+    notionId: "triangle_figure",
     microId: "triangle_nommer",
     difficulty: 1,
     theme: "neutral",
@@ -106,7 +106,7 @@ export const trianglesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Un triangle se nomme avec ses trois sommets. La bonne réponse est donc triangle ABC.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["triangles", "nommage", "qcm"],
+    tags: ["triangle_figure", "nommage", "qcm"],
     canvas: {
       kind: "triangle",
       points: {
@@ -125,12 +125,12 @@ export const trianglesBank: TutorBankItemV4[] = [
     id: "triangle_nommer_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "triangles",
+    notionId: "triangle_figure",
     microId: "triangle_nommer",
     difficulty: 1,
     theme: "neutral",
     hint: "On nomme un triangle avec les trois sommets.",
-    tags: ["triangles", "nommage", "template"],
+    tags: ["triangle_figure", "nommage", "template"],
     generate: () => {
       const letters = [
         ["A", "B", "C"],
@@ -177,11 +177,11 @@ export const trianglesBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "fixed",
-    id: "triangle_sommets_cotes_fixed_1",
+    id: "triangle_sommet_cote_fixed_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "triangles",
-    microId: "triangle_sommets_cotes",
+    notionId: "triangle_figure",
+    microId: "triangle_sommet_cote",
     difficulty: 1,
     theme: "neutral",
     text: "Observe la figure. Combien de côtés possède un triangle ?",
@@ -195,7 +195,7 @@ export const trianglesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Un triangle est une figure qui possède toujours 3 côtés.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["triangles", "cotes", "canvas"],
+    tags: ["triangle_figure", "cotes", "canvas"],
     canvas: {
       kind: "triangle",
       points: {
@@ -211,11 +211,11 @@ export const trianglesBank: TutorBankItemV4[] = [
   },
   {
     kind: "fixed",
-    id: "triangle_sommets_cotes_fixed_2",
+    id: "triangle_sommet_cote_fixed_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "triangles",
-    microId: "triangle_sommets_cotes",
+    notionId: "triangle_figure",
+    microId: "triangle_sommet_cote",
     difficulty: 1,
     theme: "neutral",
     text: "Observe la figure. Combien de sommets possède ce triangle ?",
@@ -230,7 +230,7 @@ export const trianglesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Les trois sommets du triangle sont les trois points de la figure. Un triangle possède donc 3 sommets.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["triangles", "sommets", "canvas", "qcm"],
+    tags: ["triangle_figure", "sommets", "canvas", "qcm"],
     canvas: {
       kind: "triangle",
       points: {
@@ -252,11 +252,11 @@ export const trianglesBank: TutorBankItemV4[] = [
   },
   {
     kind: "fixed",
-    id: "triangle_sommets_cotes_fixed_3",
+    id: "triangle_sommet_cote_fixed_3",
     niveau: "6e",
     matiere: "maths",
-    notionId: "triangles",
-    microId: "triangle_sommets_cotes",
+    notionId: "triangle_figure",
+    microId: "triangle_sommet_cote",
     difficulty: 2,
     theme: "neutral",
     text: "Sur la figure, quel segment est un côté du triangle ?",
@@ -271,7 +271,7 @@ export const trianglesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Un côté d’un triangle relie deux sommets du triangle. Ici, AB est bien un côté du triangle.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["triangles", "cotes", "canvas", "qcm"],
+    tags: ["triangle_figure", "cotes", "canvas", "qcm"],
     canvas: {
       kind: "triangle",
       points: {
@@ -293,11 +293,11 @@ export const trianglesBank: TutorBankItemV4[] = [
   },
   {
     kind: "fixed",
-    id: "triangle_sommets_cotes_fixed_4",
+    id: "triangle_sommet_cote_fixed_4",
     niveau: "6e",
     matiere: "maths",
-    notionId: "triangles",
-    microId: "triangle_sommets_cotes",
+    notionId: "triangle_figure",
+    microId: "triangle_sommet_cote",
     difficulty: 2,
     theme: "neutral",
     text: "Dans le triangle ABC, quel est le sommet opposé au côté BC ?",
@@ -311,19 +311,19 @@ export const trianglesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Le côté BC relie les sommets B et C. Le sommet opposé à ce côté est donc A.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["triangles", "sommets", "cotes"],
+    tags: ["triangle_figure", "sommets", "cotes"],
   },
   {
     kind: "template",
-    id: "triangle_sommets_cotes_tpl_1",
+    id: "triangle_sommet_cote_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "triangles",
-    microId: "triangle_sommets_cotes",
+    notionId: "triangle_figure",
+    microId: "triangle_sommet_cote",
     difficulty: 2,
     theme: "neutral",
     hint: "Un triangle a toujours 3 sommets et 3 côtés.",
-    tags: ["triangles", "sommets", "cotes", "template"],
+    tags: ["triangle_figure", "sommets", "cotes", "template"],
     generate: () => {
       const choice = shuffle(["sommets", "cotes"])[0];
 
@@ -361,11 +361,11 @@ export const trianglesBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "fixed",
-    id: "triangle_type_cotes_fixed_1",
+    id: "triangle_type_cote_fixed_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "triangles",
-    microId: "triangle_type_cotes",
+    notionId: "triangle_figure",
+    microId: "triangle_type_cote",
     difficulty: 1,
     theme: "neutral",
     text: "Un triangle a deux côtés de même longueur. Quel est son type ?",
@@ -379,15 +379,15 @@ export const trianglesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Un triangle qui possède deux côtés de même longueur est un triangle isocèle.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["triangles", "types", "cotes"],
+    tags: ["triangle_figure", "types", "cotes"],
   },
   {
     kind: "fixed",
-    id: "triangle_type_cotes_fixed_2",
+    id: "triangle_type_cote_fixed_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "triangles",
-    microId: "triangle_type_cotes",
+    notionId: "triangle_figure",
+    microId: "triangle_type_cote",
     difficulty: 1,
     theme: "neutral",
     text: "Un triangle a trois côtés de même longueur. Quel est son type ?",
@@ -401,15 +401,15 @@ export const trianglesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Un triangle qui possède trois côtés de même longueur est un triangle équilatéral.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["triangles", "types", "cotes"],
+    tags: ["triangle_figure", "types", "cotes"],
   },
   {
     kind: "fixed",
-    id: "triangle_type_cotes_canvas_1",
+    id: "triangle_type_cote_canvas_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "triangles",
-    microId: "triangle_type_cotes",
+    notionId: "triangle_figure",
+    microId: "triangle_type_cote",
     difficulty: 2,
     theme: "neutral",
     text: "Observe les codages. Quel est le type de ce triangle selon ses côtés ?",
@@ -424,7 +424,7 @@ export const trianglesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Deux côtés ont le même codage, donc ils sont égaux. Le triangle est donc isocèle.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["triangles", "canvas", "qcm", "cotes"],
+    tags: ["triangle_figure", "canvas", "qcm", "cotes"],
     canvas: {
       kind: "triangle",
       points: {
@@ -443,11 +443,11 @@ export const trianglesBank: TutorBankItemV4[] = [
   },
   {
     kind: "fixed",
-    id: "triangle_type_cotes_qcm_1",
+    id: "triangle_type_cote_qcm_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "triangles",
-    microId: "triangle_type_cotes",
+    notionId: "triangle_figure",
+    microId: "triangle_type_cote",
     difficulty: 2,
     theme: "neutral",
     text: "Quel triangle possède trois côtés égaux ?",
@@ -462,15 +462,15 @@ export const trianglesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Le triangle qui possède trois côtés égaux est le triangle équilatéral.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["triangles", "qcm", "cotes"],
+    tags: ["triangle_figure", "qcm", "cotes"],
   },
   {
     kind: "fixed",
-    id: "triangle_type_cotes_canvas_2",
+    id: "triangle_type_cote_canvas_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "triangles",
-    microId: "triangle_type_cotes",
+    notionId: "triangle_figure",
+    microId: "triangle_type_cote",
     difficulty: 2,
     theme: "neutral",
     text: "Observe les codages. Quel est le type de ce triangle ?",
@@ -485,7 +485,7 @@ export const trianglesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Les trois côtés portent le même codage, donc ils sont tous égaux. Le triangle est équilatéral.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["triangles", "canvas", "qcm", "cotes"],
+    tags: ["triangle_figure", "canvas", "qcm", "cotes"],
     canvas: {
       kind: "triangle",
       points: {
@@ -504,15 +504,15 @@ export const trianglesBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "triangle_type_cotes_tpl_1",
+    id: "triangle_type_cote_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "triangles",
-    microId: "triangle_type_cotes",
+    notionId: "triangle_figure",
+    microId: "triangle_type_cote",
     difficulty: 2,
     theme: "neutral",
     hint: "Deux côtés égaux → isocèle ; trois côtés égaux → équilatéral.",
-    tags: ["triangles", "cotes", "template"],
+    tags: ["triangle_figure", "cotes", "template"],
     generate: () => {
       const type = shuffle(["isocèle", "équilatéral"])[0];
 
@@ -551,11 +551,11 @@ export const trianglesBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "fixed",
-    id: "triangle_type_angles_fixed_1",
+    id: "triangle_type_angle_fixed_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "triangles",
-    microId: "triangle_type_angles",
+    notionId: "triangle_figure",
+    microId: "triangle_type_angle",
     difficulty: 1,
     theme: "neutral",
     text: "Un triangle possède un angle droit. Quel est son type ?",
@@ -569,15 +569,15 @@ export const trianglesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Un triangle qui possède un angle droit est un triangle rectangle.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["triangles", "types", "angles"],
+    tags: ["triangle_figure", "types", "angle_mesure"],
   },
   {
     kind: "fixed",
-    id: "triangle_type_angles_fixed_2",
+    id: "triangle_type_angle_fixed_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "triangles",
-    microId: "triangle_type_angles",
+    notionId: "triangle_figure",
+    microId: "triangle_type_angle",
     difficulty: 1,
     theme: "neutral",
     text: "Un triangle a un angle supérieur à 90°. Quel est son type ?",
@@ -591,15 +591,15 @@ export const trianglesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Quand un triangle possède un angle supérieur à 90°, c’est un triangle obtusangle.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["triangles", "types", "angles"],
+    tags: ["triangle_figure", "types", "angle_mesure"],
   },
   {
     kind: "fixed",
-    id: "triangle_type_angles_qcm_1",
+    id: "triangle_type_angle_qcm_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "triangles",
-    microId: "triangle_type_angles",
+    notionId: "triangle_figure",
+    microId: "triangle_type_angle",
     difficulty: 2,
     theme: "neutral",
     text: "Un triangle a tous ses angles inférieurs à 90°. Quel est son type ?",
@@ -614,15 +614,15 @@ export const trianglesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Quand les trois angles d’un triangle sont inférieurs à 90°, on dit que c’est un triangle aigu.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["triangles", "qcm", "angles"],
+    tags: ["triangle_figure", "qcm", "angle_mesure"],
   },
   {
     kind: "fixed",
-    id: "triangle_type_angles_canvas_1",
+    id: "triangle_type_angle_canvas_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "triangles",
-    microId: "triangle_type_angles",
+    notionId: "triangle_figure",
+    microId: "triangle_type_angle",
     difficulty: 2,
     theme: "neutral",
     text: "Observe le codage. Quel est le type de ce triangle selon ses angles ?",
@@ -637,7 +637,7 @@ export const trianglesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Le petit carré montre qu’il y a un angle droit. Le triangle est donc rectangle.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["triangles", "canvas", "qcm", "angles"],
+    tags: ["triangle_figure", "canvas", "qcm", "angle_mesure"],
     canvas: {
       kind: "triangle",
       points: {
@@ -656,15 +656,15 @@ export const trianglesBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "triangle_type_angles_qcm_tpl_1",
+    id: "triangle_type_angle_qcm_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "triangles",
-    microId: "triangle_type_angles",
+    notionId: "triangle_figure",
+    microId: "triangle_type_angle",
     difficulty: 2,
     theme: "neutral",
     hint: "Regarde si un angle est droit, obtus ou si tous sont aigus.",
-    tags: ["triangles", "template", "qcm", "angles"],
+    tags: ["triangle_figure", "template", "qcm", "angle_mesure"],
     generate: () => {
       const type = shuffle(["aigu", "rectangle", "obtus"])[0];
 
@@ -760,11 +760,11 @@ export const trianglesBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "fixed",
-    id: "triangle_somme_angles_fixed_1",
+    id: "triangle_somme_angle_fixed_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "triangles",
-    microId: "triangle_somme_angles",
+    notionId: "triangle_figure",
+    microId: "triangle_somme_angle",
     difficulty: 1,
     theme: "neutral",
     text: "Quelle est la somme des angles d’un triangle ?",
@@ -778,15 +778,15 @@ export const trianglesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Dans tous les triangles, la somme des trois angles est toujours égale à 180°.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["triangles", "angles"],
+    tags: ["triangle_figure", "angle_mesure"],
   },
   {
     kind: "fixed",
-    id: "triangle_somme_angles_qcm_1",
+    id: "triangle_somme_angle_qcm_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "triangles",
-    microId: "triangle_somme_angles",
+    notionId: "triangle_figure",
+    microId: "triangle_somme_angle",
     difficulty: 1,
     theme: "neutral",
     text: "Dans le triangle ci-dessous, quelle est toujours la somme des angles ?",
@@ -801,7 +801,7 @@ export const trianglesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Quelle que soit la forme du triangle, la somme de ses angles vaut toujours 180°.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["triangles", "angles", "qcm", "canvas"],
+    tags: ["triangle_figure", "angle_mesure", "qcm", "canvas"],
     canvas: {
       kind: "triangle",
       points: {
@@ -823,15 +823,15 @@ export const trianglesBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "triangle_somme_angles_tpl_1",
+    id: "triangle_somme_angle_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "triangles",
-    microId: "triangle_somme_angles",
+    notionId: "triangle_figure",
+    microId: "triangle_somme_angle",
     difficulty: 1,
     theme: "neutral",
     hint: "Dans tous les triangles, la somme vaut 180°.",
-    tags: ["triangles", "template", "angles"],
+    tags: ["triangle_figure", "template", "angle_mesure"],
     generate: () => {
       return {
         text: "Complète : la somme des angles d’un triangle est égale à ...",
@@ -856,7 +856,7 @@ export const trianglesBank: TutorBankItemV4[] = [
     id: "triangle_angle_manquant_fixed_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "triangles",
+    notionId: "triangle_figure",
     microId: "triangle_angle_manquant",
     difficulty: 2,
     theme: "neutral",
@@ -871,14 +871,14 @@ export const trianglesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("La somme des angles d’un triangle vaut 180°. Donc le troisième angle vaut 180 - 60 - 70 = 50°.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["triangles", "angles"],
+    tags: ["triangle_figure", "angle_mesure"],
   },
   {
     kind: "fixed",
     id: "triangle_angle_manquant_canvas_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "triangles",
+    notionId: "triangle_figure",
     microId: "triangle_angle_manquant",
     difficulty: 2,
     theme: "neutral",
@@ -893,7 +893,7 @@ export const trianglesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("On connaît deux angles : 60° et 70°. L’angle manquant vaut donc 180 - 60 - 70 = 50°.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["triangles", "canvas", "angles"],
+    tags: ["triangle_figure", "canvas", "angle_mesure"],
     canvas: {
       kind: "triangle",
       points: {
@@ -918,7 +918,7 @@ export const trianglesBank: TutorBankItemV4[] = [
     id: "triangle_angle_manquant_qcm_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "triangles",
+    notionId: "triangle_figure",
     microId: "triangle_angle_manquant",
     difficulty: 2,
     theme: "neutral",
@@ -934,19 +934,19 @@ export const trianglesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Le troisième angle vaut 180 - 40 - 90 = 50°.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["triangles", "qcm", "angles"],
+    tags: ["triangle_figure", "qcm", "angle_mesure"],
   },
   {
     kind: "template",
     id: "triangle_angle_manquant_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "triangles",
+    notionId: "triangle_figure",
     microId: "triangle_angle_manquant",
     difficulty: 2,
     theme: "neutral",
     hint: "La somme des angles vaut 180°.",
-    tags: ["triangles", "template", "angles"],
+    tags: ["triangle_figure", "template", "angle_mesure"],
     generate: () => {
       const a = randomInt(25, 80);
       const b = randomInt(25, 80);
@@ -985,12 +985,12 @@ export const trianglesBank: TutorBankItemV4[] = [
     id: "triangle_angle_manquant_canvas_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "triangles",
+    notionId: "triangle_figure",
     microId: "triangle_angle_manquant",
     difficulty: 3,
     theme: "neutral",
     hint: "Utilise 180°.",
-    tags: ["triangles", "template", "canvas", "angles"],
+    tags: ["triangle_figure", "template", "canvas", "angle_mesure"],
     generate: () => {
       const a = randomInt(30, 70);
       const b = randomInt(30, 70);
@@ -1069,7 +1069,7 @@ export const trianglesBank: TutorBankItemV4[] = [
     id: "triangle_possible_ou_non_fixed_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "triangles",
+    notionId: "triangle_figure",
     microId: "triangle_possible_ou_non",
     difficulty: 3,
     theme: "neutral",
@@ -1084,14 +1084,14 @@ export const trianglesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Pour construire un triangle, la somme de deux côtés doit être plus grande que le troisième. Ici 2 + 3 = 5, et 5 est plus petit que 6. Ce n’est donc pas possible.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["triangles", "construction"],
+    tags: ["triangle_figure", "construction"],
   },
   {
     kind: "fixed",
     id: "triangle_possible_ou_non_qcm_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "triangles",
+    notionId: "triangle_figure",
     microId: "triangle_possible_ou_non",
     difficulty: 3,
     theme: "neutral",
@@ -1107,14 +1107,14 @@ export const trianglesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("On vérifie : 4 + 5 = 9, et 9 est plus grand que 7. Le triangle est donc possible.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["triangles", "qcm", "construction"],
+    tags: ["triangle_figure", "qcm", "construction"],
   },
   {
     kind: "fixed",
     id: "triangle_possible_ou_non_canvas_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "triangles",
+    notionId: "triangle_figure",
     microId: "triangle_possible_ou_non",
     difficulty: 3,
     theme: "neutral",
@@ -1130,7 +1130,7 @@ export const trianglesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("On vérifie 4 + 5 = 9, et 9 est plus grand que 7. On peut donc construire ce triangle.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["triangles", "canvas", "qcm", "construction"],
+    tags: ["triangle_figure", "canvas", "qcm", "construction"],
     canvas: {
       kind: "triangle",
       points: {
@@ -1155,12 +1155,12 @@ export const trianglesBank: TutorBankItemV4[] = [
     id: "triangle_possible_ou_non_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "triangles",
+    notionId: "triangle_figure",
     microId: "triangle_possible_ou_non",
     difficulty: 3,
     theme: "neutral",
     hint: "La somme de deux côtés doit être plus grande que le troisième.",
-    tags: ["triangles", "template", "construction"],
+    tags: ["triangle_figure", "template", "construction"],
     generate: () => {
       const possibleCases = [
         [4, 5, 7],
@@ -1200,11 +1200,11 @@ export const trianglesBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "fixed",
-    id: "triangle_defis_fixed_1",
+    id: "triangle_defi_fixed_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "triangles",
-    microId: "triangle_defis",
+    notionId: "triangle_figure",
+    microId: "triangle_defi",
     difficulty: 1,
     theme: "neutral",
     text: "Un triangle a deux angles de 40° et 60°. Combien mesure le troisième angle ?",
@@ -1218,15 +1218,15 @@ export const trianglesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Le troisième angle vaut 180 - 40 - 60 = 80°.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["triangles", "defi", "angles"],
+    tags: ["triangle_figure", "defi", "angle_mesure"],
   },
   {
     kind: "fixed",
-    id: "triangle_defis_fixed_2",
+    id: "triangle_defi_fixed_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "triangles",
-    microId: "triangle_defis",
+    notionId: "triangle_figure",
+    microId: "triangle_defi",
     difficulty: 1,
     theme: "neutral",
     text: "Un triangle a deux côtés égaux. Quel est son type ?",
@@ -1240,15 +1240,15 @@ export const trianglesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Un triangle qui a deux côtés égaux est un triangle isocèle.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["triangles", "defi", "types"],
+    tags: ["triangle_figure", "defi", "types"],
   },
   {
     kind: "fixed",
-    id: "triangle_defis_fixed_3",
+    id: "triangle_defi_fixed_3",
     niveau: "6e",
     matiere: "maths",
-    notionId: "triangles",
-    microId: "triangle_defis",
+    notionId: "triangle_figure",
+    microId: "triangle_defi",
     difficulty: 2,
     theme: "neutral",
     text: "Un triangle a pour angles 90°, 45° et 45°. Est-ce possible ?",
@@ -1263,15 +1263,15 @@ export const trianglesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("90 + 45 + 45 = 180. Ce triangle est donc possible.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["triangles", "defi", "qcm", "angles"],
+    tags: ["triangle_figure", "defi", "qcm", "angle_mesure"],
   },
   {
     kind: "fixed",
-    id: "triangle_defis_fixed_4",
+    id: "triangle_defi_fixed_4",
     niveau: "6e",
     matiere: "maths",
-    notionId: "triangles",
-    microId: "triangle_defis",
+    notionId: "triangle_figure",
+    microId: "triangle_defi",
     difficulty: 2,
     theme: "neutral",
     text: "Peut-on construire un triangle avec les longueurs 3 cm, 4 cm et 8 cm ?",
@@ -1286,15 +1286,15 @@ export const trianglesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("3 + 4 = 7, et 7 est plus petit que 8. On ne peut donc pas construire ce triangle.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["triangles", "defi", "construction", "qcm"],
+    tags: ["triangle_figure", "defi", "construction", "qcm"],
   },
   {
     kind: "fixed",
-    id: "triangle_defis_canvas_1",
+    id: "triangle_defi_canvas_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "triangles",
-    microId: "triangle_defis",
+    notionId: "triangle_figure",
+    microId: "triangle_defi",
     difficulty: 2,
     theme: "neutral",
     text: "Observe la figure. Ce triangle est-il rectangle ?",
@@ -1309,7 +1309,7 @@ export const trianglesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Le petit carré rouge indique un angle droit. Le triangle est donc rectangle.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["triangles", "defi", "canvas", "qcm"],
+    tags: ["triangle_figure", "defi", "canvas", "qcm"],
     canvas: {
       kind: "triangle",
       points: {
@@ -1328,11 +1328,11 @@ export const trianglesBank: TutorBankItemV4[] = [
   },
   {
     kind: "fixed",
-    id: "triangle_defis_fixed_5",
+    id: "triangle_defi_fixed_5",
     niveau: "6e",
     matiere: "maths",
-    notionId: "triangles",
-    microId: "triangle_defis",
+    notionId: "triangle_figure",
+    microId: "triangle_defi",
     difficulty: 3,
     theme: "neutral",
     text: "Un triangle a deux angles égaux et un angle de 100°. Combien mesurent les deux autres angles ?",
@@ -1346,15 +1346,15 @@ export const trianglesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Il reste 180 - 100 = 80° pour les deux autres angles. Comme ils sont égaux, chacun mesure 40°.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["triangles", "defi", "raisonnement", "angles"],
+    tags: ["triangle_figure", "defi", "raisonnement", "angle_mesure"],
   },
   {
     kind: "fixed",
-    id: "triangle_defis_fixed_6",
+    id: "triangle_defi_fixed_6",
     niveau: "6e",
     matiere: "maths",
-    notionId: "triangles",
-    microId: "triangle_defis",
+    notionId: "triangle_figure",
+    microId: "triangle_defi",
     difficulty: 3,
     theme: "neutral",
     text: "Peut-on avoir un triangle avec deux angles droits ?",
@@ -1369,15 +1369,15 @@ export const trianglesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Deux angles droits valent déjà 90 + 90 = 180°. Il ne resterait plus rien pour le troisième angle. Ce n’est donc pas possible.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["triangles", "defi", "logique", "qcm"],
+    tags: ["triangle_figure", "defi", "logique", "qcm"],
   },
   {
     kind: "fixed",
-    id: "triangle_defis_canvas_2",
+    id: "triangle_defi_canvas_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "triangles",
-    microId: "triangle_defis",
+    notionId: "triangle_figure",
+    microId: "triangle_defi",
     difficulty: 3,
     theme: "neutral",
     text: "Observe les codages. Ce triangle est-il isocèle ?",
@@ -1392,7 +1392,7 @@ export const trianglesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Deux côtés portent le même codage, donc ils sont égaux. Le triangle est donc isocèle.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["triangles", "defi", "canvas", "qcm", "types"],
+    tags: ["triangle_figure", "defi", "canvas", "qcm", "types"],
     canvas: {
       kind: "triangle",
       points: {
@@ -1411,11 +1411,11 @@ export const trianglesBank: TutorBankItemV4[] = [
   },
   {
     kind: "fixed",
-    id: "triangle_defis_fixed_7",
+    id: "triangle_defi_fixed_7",
     niveau: "6e",
     matiere: "maths",
-    notionId: "triangles",
-    microId: "triangle_defis",
+    notionId: "triangle_figure",
+    microId: "triangle_defi",
     difficulty: 4,
     theme: "neutral",
     text: "Un triangle a un angle droit et deux côtés égaux. Quel est son type précis ?",
@@ -1435,15 +1435,15 @@ export const trianglesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Il possède un angle droit, donc il est rectangle, et deux côtés égaux, donc il est isocèle. C’est donc un triangle rectangle isocèle.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["triangles", "defi", "types", "raisonnement"],
+    tags: ["triangle_figure", "defi", "types", "raisonnement"],
   },
   {
     kind: "fixed",
-    id: "triangle_defis_fixed_8",
+    id: "triangle_defi_fixed_8",
     niveau: "6e",
     matiere: "maths",
-    notionId: "triangles",
-    microId: "triangle_defis",
+    notionId: "triangle_figure",
+    microId: "triangle_defi",
     difficulty: 4,
     theme: "neutral",
     text: "Dans un triangle équilatéral, combien mesure chaque angle ?",
@@ -1457,15 +1457,15 @@ export const trianglesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Dans un triangle équilatéral, les trois angles sont égaux. Comme leur somme vaut 180°, chaque angle mesure 180 ÷ 3 = 60°.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["triangles", "defi", "equilateral", "angles"],
+    tags: ["triangle_figure", "defi", "equilateral", "angle_mesure"],
   },
   {
     kind: "fixed",
-    id: "triangle_defis_canvas_3",
+    id: "triangle_defi_canvas_3",
     niveau: "6e",
     matiere: "maths",
-    notionId: "triangles",
-    microId: "triangle_defis",
+    notionId: "triangle_figure",
+    microId: "triangle_defi",
     difficulty: 4,
     theme: "neutral",
     text: "Observe la figure. Ce triangle est-il équilatéral ?",
@@ -1480,7 +1480,7 @@ export const trianglesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Les trois côtés sont codés égaux. Le triangle est donc équilatéral.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["triangles", "defi", "canvas", "qcm", "equilateral"],
+    tags: ["triangle_figure", "defi", "canvas", "qcm", "equilateral"],
     canvas: {
       kind: "triangle",
       points: {
@@ -1499,11 +1499,11 @@ export const trianglesBank: TutorBankItemV4[] = [
   },
   {
     kind: "fixed",
-    id: "triangle_defis_fixed_9",
+    id: "triangle_defi_fixed_9",
     niveau: "6e",
     matiere: "maths",
-    notionId: "triangles",
-    microId: "triangle_defis",
+    notionId: "triangle_figure",
+    microId: "triangle_defi",
     difficulty: 5,
     theme: "neutral",
     text: "Peut-on avoir un triangle dont un angle mesure 179° ?",
@@ -1518,15 +1518,15 @@ export const trianglesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Oui. Si un angle mesure 179°, les deux autres angles peuvent par exemple mesurer 1° et 0° impossible exactement, mais on peut avoir deux angles très petits dont la somme vaut 1°. Donc en théorie un triangle peut avoir un angle de 179°.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["triangles", "defi", "angles", "qcm"],
+    tags: ["triangle_figure", "defi", "angle_mesure", "qcm"],
   },
   {
     kind: "fixed",
-    id: "triangle_defis_fixed_10",
+    id: "triangle_defi_fixed_10",
     niveau: "6e",
     matiere: "maths",
-    notionId: "triangles",
-    microId: "triangle_defis",
+    notionId: "triangle_figure",
+    microId: "triangle_defi",
     difficulty: 5,
     theme: "neutral",
     text: "Peut-on connaître exactement les longueurs des côtés d’un triangle si on connaît seulement ses trois angles ?",
@@ -1541,15 +1541,15 @@ export const trianglesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Non. Deux triangles peuvent avoir les mêmes angles tout en ayant des tailles différentes. Les angles seuls ne suffisent donc pas à connaître exactement les longueurs.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["triangles", "defi", "logique", "qcm"],
+    tags: ["triangle_figure", "defi", "logique", "qcm"],
   },
   {
     kind: "fixed",
-    id: "triangle_defis_fixed_11",
+    id: "triangle_defi_fixed_11",
     niveau: "6e",
     matiere: "maths",
-    notionId: "triangles",
-    microId: "triangle_defis",
+    notionId: "triangle_figure",
+    microId: "triangle_defi",
     difficulty: 5,
     theme: "neutral",
     text: "Explique pourquoi on ne peut pas construire un triangle ayant deux angles droits.",
@@ -1563,19 +1563,19 @@ export const trianglesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Dans un triangle, la somme des angles vaut 180°. Or deux angles droits font déjà 180°. Il ne resterait donc plus de place pour le troisième angle.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["triangles", "defi", "raisonnement"],
+    tags: ["triangle_figure", "defi", "raisonnement"],
   },
   {
     kind: "template",
-    id: "triangle_defis_tpl_1",
+    id: "triangle_defi_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "triangles",
-    microId: "triangle_defis",
+    notionId: "triangle_figure",
+    microId: "triangle_defi",
     difficulty: 4,
     theme: "neutral",
     hint: "Additionne mentalement les angles et compare à 180°.",
-    tags: ["triangles", "defi", "template", "angles"],
+    tags: ["triangle_figure", "defi", "template", "angle_mesure"],
     generate: () => {
       const triples = [
         [70, 60, 50],
@@ -1601,15 +1601,15 @@ export const trianglesBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "triangle_defis_tpl_2",
+    id: "triangle_defi_tpl_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "triangles",
-    microId: "triangle_defis",
+    notionId: "triangle_figure",
+    microId: "triangle_defi",
     difficulty: 5,
     theme: "neutral",
     hint: "Teste si la somme de deux côtés est plus grande que le troisième.",
-    tags: ["triangles", "defi", "template", "construction"],
+    tags: ["triangle_figure", "defi", "template", "construction"],
     generate: () => {
       const possibleCases = [
         [4, 5, 7],

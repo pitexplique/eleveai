@@ -52,7 +52,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     id: "fraction_lire_ecrire_fixed_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "fractions",
+    notionId: "fraction_nombre",
     microId: "fraction_lire_ecrire",
     difficulty: 1,
     theme: "neutral",
@@ -67,14 +67,14 @@ export const fractionsBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Une fraction s’écrit avec le nombre de parts prises au numérateur et le nombre total de parts au dénominateur. Ici, une part sur 4 se note 1/4.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["fractions", "lecture", "ecriture"],
+    tags: ["fraction_nombre", "lecture", "ecriture"],
   },
   {
     kind: "fixed",
     id: "fraction_lire_ecrire_fixed_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "fractions",
+    notionId: "fraction_nombre",
     microId: "fraction_lire_ecrire",
     difficulty: 1,
     theme: "neutral",
@@ -89,14 +89,14 @@ export const fractionsBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Une part sur 2 parts égales se note 1/2. Cette fraction représente une moitié.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["fractions", "lecture", "moitie"],
+    tags: ["fraction_nombre", "lecture", "moitie"],
   },
   {
     kind: "fixed",
     id: "fraction_lire_ecrire_fixed_3",
     niveau: "6e",
     matiere: "maths",
-    notionId: "fractions",
+    notionId: "fraction_nombre",
     microId: "fraction_lire_ecrire",
     difficulty: 1,
     theme: "neutral",
@@ -111,14 +111,14 @@ export const fractionsBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("3 parts prises sur 5 parts égales se notent 3/5. Le 3 indique les parts prises et le 5 le nombre total de parts.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["fractions", "lecture", "ecriture"],
+    tags: ["fraction_nombre", "lecture", "ecriture"],
   },
   {
     kind: "fixed",
     id: "fraction_lire_ecrire_fixed_4",
     niveau: "6e",
     matiere: "maths",
-    notionId: "fractions",
+    notionId: "fraction_nombre",
     microId: "fraction_lire_ecrire",
     difficulty: 2,
     theme: "neutral",
@@ -133,14 +133,14 @@ export const fractionsBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("2 parts sur 8 se notent 2/8. Cette fraction peut aussi se simplifier en 1/4.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["fractions", "lecture", "ecriture"],
+    tags: ["fraction_nombre", "lecture", "ecriture"],
   },
   {
     kind: "fixed",
     id: "fraction_lire_ecrire_qcm_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "fractions",
+    notionId: "fraction_nombre",
     microId: "fraction_lire_ecrire",
     difficulty: 2,
     theme: "neutral",
@@ -156,14 +156,14 @@ export const fractionsBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Une part sur 5 parts égales se note 1/5. Le 1 représente la part prise et le 5 le total.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["fractions", "lecture", "qcm"],
+    tags: ["fraction_nombre", "lecture", "qcm"],
   },
   {
     kind: "fixed",
     id: "fraction_lire_ecrire_qcm_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "fractions",
+    notionId: "fraction_nombre",
     microId: "fraction_lire_ecrire",
     difficulty: 2,
     theme: "neutral",
@@ -179,14 +179,14 @@ export const fractionsBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("3 parts sur 4 se notent 3/4. Le numérateur est 3 et le dénominateur est 4.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["fractions", "lecture", "qcm"],
+    tags: ["fraction_nombre", "lecture", "qcm"],
   },
   {
     kind: "fixed",
     id: "fraction_lire_ecrire_reunion_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "fractions",
+    notionId: "fraction_nombre",
     microId: "fraction_lire_ecrire",
     difficulty: 2,
     theme: "reunion",
@@ -201,7 +201,7 @@ export const fractionsBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("2 parts mangées sur 8 se notent 2/8. Cette fraction se simplifie en 1/4.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["fractions", "lecture", "reunion"],
+    tags: ["fraction_nombre", "lecture", "reunion"],
   },
 
   // =========================
@@ -212,7 +212,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     id: "fraction_representer_fixed_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "fractions",
+    notionId: "fraction_nombre",
     microId: "fraction_representer",
     difficulty: 1,
     theme: "neutral",
@@ -227,14 +227,14 @@ export const fractionsBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Dans la fraction 3/4, le numérateur 3 indique le nombre de parts à prendre ou à colorier. Il faut donc colorier 3 parts.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["fractions", "representation"],
+    tags: ["fraction_nombre", "representation"],
   },
   {
     kind: "fixed",
     id: "fraction_representer_fixed_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "fractions",
+    notionId: "fraction_nombre",
     microId: "fraction_representer",
     difficulty: 1,
     theme: "neutral",
@@ -249,14 +249,14 @@ export const fractionsBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Dans 2/5, le numérateur vaut 2. Il faut donc colorier 2 parts.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["fractions", "representation"],
+    tags: ["fraction_nombre", "representation"],
   },
   {
     kind: "fixed",
     id: "fraction_representer_fixed_3",
     niveau: "6e",
     matiere: "maths",
-    notionId: "fractions",
+    notionId: "fraction_nombre",
     microId: "fraction_representer",
     difficulty: 2,
     theme: "neutral",
@@ -271,14 +271,14 @@ export const fractionsBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Dans 4/6, le dénominateur 6 indique le nombre total de parts égales. La figure doit donc être partagée en 6 parts.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["fractions", "representation"],
+    tags: ["fraction_nombre", "representation"],
   },
   {
     kind: "fixed",
     id: "fraction_representer_qcm_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "fractions",
+    notionId: "fraction_nombre",
     microId: "fraction_representer",
     difficulty: 2,
     theme: "neutral",
@@ -294,14 +294,14 @@ export const fractionsBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Le dénominateur de 4/6 est 6. Il faut donc 6 parts égales au total.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["fractions", "representation", "qcm"],
+    tags: ["fraction_nombre", "representation", "qcm"],
   },
   {
     kind: "fixed",
     id: "fraction_representer_qcm_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "fractions",
+    notionId: "fraction_nombre",
     microId: "fraction_representer",
     difficulty: 2,
     theme: "neutral",
@@ -317,14 +317,14 @@ export const fractionsBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Dans 5/8, le numérateur vaut 5. Il faut donc colorier 5 parts.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["fractions", "representation", "qcm"],
+    tags: ["fraction_nombre", "representation", "qcm"],
   },
   {
     kind: "fixed",
     id: "fraction_representer_reunion_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "fractions",
+    notionId: "fraction_nombre",
     microId: "fraction_representer",
     difficulty: 2,
     theme: "reunion",
@@ -339,7 +339,7 @@ export const fractionsBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("4/6 signifie que l’on prend 4 parts sur 6 parts égales. Il faut donc prendre 4 parts.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["fractions", "representation", "reunion"],
+    tags: ["fraction_nombre", "representation", "reunion"],
   },
 
   // =========================
@@ -350,7 +350,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     id: "fraction_quantite_fixed_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "fractions",
+    notionId: "fraction_nombre",
     microId: "fraction_quantite",
     difficulty: 2,
     theme: "neutral",
@@ -365,14 +365,14 @@ export const fractionsBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("La moitié signifie partager en 2 parts égales. 10 partagé en 2 donne 5.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["fractions", "quantite", "moitie"],
+    tags: ["fraction_nombre", "quantite", "moitie"],
   },
   {
     kind: "fixed",
     id: "fraction_quantite_fixed_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "fractions",
+    notionId: "fraction_nombre",
     microId: "fraction_quantite",
     difficulty: 2,
     theme: "neutral",
@@ -387,14 +387,14 @@ export const fractionsBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Le quart signifie partager en 4 parts égales. 20 partagé en 4 donne 5.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["fractions", "quantite", "quart"],
+    tags: ["fraction_nombre", "quantite", "quart"],
   },
   {
     kind: "fixed",
     id: "fraction_quantite_fixed_3",
     niveau: "6e",
     matiere: "maths",
-    notionId: "fractions",
+    notionId: "fraction_nombre",
     microId: "fraction_quantite",
     difficulty: 3,
     theme: "neutral",
@@ -409,14 +409,14 @@ export const fractionsBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Le quart de 12 vaut 3. Donc les 3/4 de 12 valent 3 × 3 = 9.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["fractions", "quantite"],
+    tags: ["fraction_nombre", "quantite"],
   },
   {
     kind: "fixed",
     id: "fraction_quantite_fixed_4",
     niveau: "6e",
     matiere: "maths",
-    notionId: "fractions",
+    notionId: "fraction_nombre",
     microId: "fraction_quantite",
     difficulty: 3,
     theme: "neutral",
@@ -431,14 +431,14 @@ export const fractionsBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Le tiers de 15 vaut 5. Donc les 2/3 de 15 valent 2 × 5 = 10.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["fractions", "quantite"],
+    tags: ["fraction_nombre", "quantite"],
   },
   {
     kind: "fixed",
     id: "fraction_quantite_qcm_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "fractions",
+    notionId: "fraction_nombre",
     microId: "fraction_quantite",
     difficulty: 2,
     theme: "neutral",
@@ -454,14 +454,14 @@ export const fractionsBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("La moitié de 14 s’obtient en divisant 14 par 2. On trouve 7.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["fractions", "quantite", "qcm"],
+    tags: ["fraction_nombre", "quantite", "qcm"],
   },
   {
     kind: "fixed",
     id: "fraction_quantite_qcm_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "fractions",
+    notionId: "fraction_nombre",
     microId: "fraction_quantite",
     difficulty: 2,
     theme: "neutral",
@@ -477,14 +477,14 @@ export const fractionsBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Le quart de 16 s’obtient en divisant 16 par 4. On trouve 4.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["fractions", "quantite", "qcm"],
+    tags: ["fraction_nombre", "quantite", "qcm"],
   },
   {
     kind: "fixed",
     id: "fraction_quantite_reunion_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "fractions",
+    notionId: "fraction_nombre",
     microId: "fraction_quantite",
     difficulty: 3,
     theme: "reunion",
@@ -499,7 +499,7 @@ export const fractionsBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("La moitié de 18 vaut 9. Donc 1/2 d’une caisse de 18 mangues représente 9 mangues.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["fractions", "quantite", "reunion"],
+    tags: ["fraction_nombre", "quantite", "reunion"],
   },
 
   // =========================
@@ -510,7 +510,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     id: "fraction_decimal_fixed_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "fractions",
+    notionId: "fraction_nombre",
     microId: "fraction_decimal",
     difficulty: 2,
     theme: "neutral",
@@ -525,14 +525,14 @@ export const fractionsBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("1/2 représente une moitié. En écriture décimale, une moitié vaut 0,5.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["fractions", "decimal"],
+    tags: ["fraction_nombre", "decimal"],
   },
   {
     kind: "fixed",
     id: "fraction_decimal_fixed_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "fractions",
+    notionId: "fraction_nombre",
     microId: "fraction_decimal",
     difficulty: 2,
     theme: "neutral",
@@ -547,14 +547,14 @@ export const fractionsBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("1/4 représente un quart. En écriture décimale, un quart vaut 0,25.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["fractions", "decimal"],
+    tags: ["fraction_nombre", "decimal"],
   },
   {
     kind: "fixed",
     id: "fraction_decimal_fixed_3",
     niveau: "6e",
     matiere: "maths",
-    notionId: "fractions",
+    notionId: "fraction_nombre",
     microId: "fraction_decimal",
     difficulty: 3,
     theme: "neutral",
@@ -569,14 +569,14 @@ export const fractionsBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("1/4 vaut 0,25. Donc 3/4 vaut 3 × 0,25 = 0,75.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["fractions", "decimal"],
+    tags: ["fraction_nombre", "decimal"],
   },
   {
     kind: "fixed",
     id: "fraction_decimal_fixed_4",
     niveau: "6e",
     matiere: "maths",
-    notionId: "fractions",
+    notionId: "fraction_nombre",
     microId: "fraction_decimal",
     difficulty: 2,
     theme: "neutral",
@@ -591,14 +591,14 @@ export const fractionsBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("1/5 représente un cinquième. En écriture décimale, cela vaut 0,2.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["fractions", "decimal"],
+    tags: ["fraction_nombre", "decimal"],
   },
   {
     kind: "fixed",
     id: "fraction_decimal_qcm_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "fractions",
+    notionId: "fraction_nombre",
     microId: "fraction_decimal",
     difficulty: 2,
     theme: "neutral",
@@ -614,14 +614,14 @@ export const fractionsBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("1/2 signifie une moitié. En décimal, une moitié vaut 0,5.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["fractions", "decimal", "qcm"],
+    tags: ["fraction_nombre", "decimal", "qcm"],
   },
   {
     kind: "fixed",
     id: "fraction_decimal_qcm_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "fractions",
+    notionId: "fraction_nombre",
     microId: "fraction_decimal",
     difficulty: 2,
     theme: "neutral",
@@ -637,7 +637,7 @@ export const fractionsBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("1/4 signifie un quart. En décimal, un quart vaut 0,25.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["fractions", "decimal", "qcm"],
+    tags: ["fraction_nombre", "decimal", "qcm"],
   },
 
   // =========================
@@ -645,11 +645,11 @@ export const fractionsBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "fixed",
-    id: "fraction_compare_fixed_1",
+    id: "fraction_comparer_fixed_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "fractions",
-    microId: "fraction_compare",
+    notionId: "fraction_nombre",
+    microId: "fraction_comparer",
     difficulty: 2,
     theme: "neutral",
     text: "Compare 1/4 et 1/2 : laquelle est la plus grande ?",
@@ -663,15 +663,15 @@ export const fractionsBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("1/2 vaut 0,5 et 1/4 vaut 0,25. Comme 0,5 est plus grand que 0,25, la plus grande fraction est 1/2.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["fractions", "comparaison"],
+    tags: ["fraction_nombre", "comparaison"],
   },
   {
     kind: "fixed",
-    id: "fraction_compare_fixed_2",
+    id: "fraction_comparer_fixed_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "fractions",
-    microId: "fraction_compare",
+    notionId: "fraction_nombre",
+    microId: "fraction_comparer",
     difficulty: 2,
     theme: "neutral",
     text: "Compare 3/5 et 1/5 : laquelle est la plus grande ?",
@@ -685,15 +685,15 @@ export const fractionsBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Quand les dénominateurs sont les mêmes, on compare les numérateurs. Comme 3 est plus grand que 1, 3/5 est plus grande que 1/5.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["fractions", "comparaison"],
+    tags: ["fraction_nombre", "comparaison"],
   },
   {
     kind: "fixed",
-    id: "fraction_compare_fixed_3",
+    id: "fraction_comparer_fixed_3",
     niveau: "6e",
     matiere: "maths",
-    notionId: "fractions",
-    microId: "fraction_compare",
+    notionId: "fraction_nombre",
+    microId: "fraction_comparer",
     difficulty: 3,
     theme: "neutral",
     text: "Compare 2/4 et 3/4 : laquelle est la plus grande ?",
@@ -707,15 +707,15 @@ export const fractionsBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Les deux fractions ont le même dénominateur 4. Comme 3 est plus grand que 2, 3/4 est plus grande que 2/4.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["fractions", "comparaison"],
+    tags: ["fraction_nombre", "comparaison"],
   },
   {
     kind: "fixed",
-    id: "fraction_compare_fixed_4",
+    id: "fraction_comparer_fixed_4",
     niveau: "6e",
     matiere: "maths",
-    notionId: "fractions",
-    microId: "fraction_compare",
+    notionId: "fraction_nombre",
+    microId: "fraction_comparer",
     difficulty: 3,
     theme: "neutral",
     text: "Compare 2/3 et 3/4 : laquelle est la plus grande ?",
@@ -729,15 +729,15 @@ export const fractionsBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("2/3 vaut environ 0,67 et 3/4 vaut 0,75. Comme 0,75 est plus grand, 3/4 est la plus grande fraction.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["fractions", "comparaison"],
+    tags: ["fraction_nombre", "comparaison"],
   },
   {
     kind: "fixed",
-    id: "fraction_compare_qcm_1",
+    id: "fraction_comparer_qcm_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "fractions",
-    microId: "fraction_compare",
+    notionId: "fraction_nombre",
+    microId: "fraction_comparer",
     difficulty: 2,
     theme: "neutral",
     text: "Quelle fraction est la plus grande ?",
@@ -752,15 +752,15 @@ export const fractionsBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("2/3 vaut environ 0,67. C’est plus grand que 1/2, 1/3 et 1/6. La plus grande fraction est donc 2/3.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["fractions", "comparaison", "qcm"],
+    tags: ["fraction_nombre", "comparaison", "qcm"],
   },
   {
     kind: "fixed",
-    id: "fraction_compare_qcm_2",
+    id: "fraction_comparer_qcm_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "fractions",
-    microId: "fraction_compare",
+    notionId: "fraction_nombre",
+    microId: "fraction_comparer",
     difficulty: 2,
     theme: "neutral",
     text: "Quelle fraction est la plus petite ?",
@@ -775,7 +775,7 @@ export const fractionsBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("1/2 vaut 0,5, 1/4 vaut 0,25, 3/4 vaut 0,75 et 2/4 vaut aussi 0,5. La plus petite fraction est donc 1/4.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["fractions", "comparaison", "qcm"],
+    tags: ["fraction_nombre", "comparaison", "qcm"],
   },
 
   // =========================
@@ -783,11 +783,11 @@ export const fractionsBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "fixed",
-    id: "fraction_defis_fixed_1",
+    id: "fraction_defi_fixed_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "fractions",
-    microId: "fraction_defis",
+    notionId: "fraction_nombre",
+    microId: "fraction_defi",
     difficulty: 1,
     theme: "neutral",
     text: "Si une pizza est partagée en 8 parts égales et que tu en manges 4, quelle fraction de la pizza as-tu mangée ?",
@@ -801,15 +801,15 @@ export const fractionsBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("4 parts mangées sur 8 parts égales se notent 4/8. Cette fraction correspond aussi à 1/2.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["fractions", "defi"],
+    tags: ["fraction_nombre", "defi"],
   },
   {
     kind: "fixed",
-    id: "fraction_defis_fixed_2",
+    id: "fraction_defi_fixed_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "fractions",
-    microId: "fraction_defis",
+    notionId: "fraction_nombre",
+    microId: "fraction_defi",
     difficulty: 2,
     theme: "neutral",
     text: "Dans une boîte de 12 biscuits, Léa mange 1/3 de la boîte. Combien de biscuits mange-t-elle ?",
@@ -823,15 +823,15 @@ export const fractionsBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Le tiers de 12 vaut 12 ÷ 3 = 4. Léa mange donc 4 biscuits.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["fractions", "defi", "quantite"],
+    tags: ["fraction_nombre", "defi", "quantite"],
   },
   {
     kind: "fixed",
-    id: "fraction_defis_fixed_3",
+    id: "fraction_defi_fixed_3",
     niveau: "6e",
     matiere: "maths",
-    notionId: "fractions",
-    microId: "fraction_defis",
+    notionId: "fraction_nombre",
+    microId: "fraction_defi",
     difficulty: 3,
     theme: "neutral",
     text: "Quelle fraction est équivalente à 2/8 ?",
@@ -846,15 +846,15 @@ export const fractionsBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Si on simplifie 2/8 en divisant le numérateur et le dénominateur par 2, on obtient 1/4. Les deux fractions sont donc équivalentes.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["fractions", "defi", "qcm"],
+    tags: ["fraction_nombre", "defi", "qcm"],
   },
   {
     kind: "fixed",
-    id: "fraction_defis_fixed_4",
+    id: "fraction_defi_fixed_4",
     niveau: "6e",
     matiere: "maths",
-    notionId: "fractions",
-    microId: "fraction_defis",
+    notionId: "fraction_nombre",
+    microId: "fraction_defi",
     difficulty: 3,
     theme: "reunion",
     text: "À La Réunion, une famille partage 24 samoussas. Si 1/4 est mangé, combien de samoussas ont été mangés ?",
@@ -868,15 +868,15 @@ export const fractionsBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Le quart de 24 vaut 24 ÷ 4 = 6. Donc 6 samoussas ont été mangés.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["fractions", "defi", "reunion"],
+    tags: ["fraction_nombre", "defi", "reunion"],
   },
   {
     kind: "fixed",
-    id: "fraction_defis_fixed_5",
+    id: "fraction_defi_fixed_5",
     niveau: "6e",
     matiere: "maths",
-    notionId: "fractions",
-    microId: "fraction_defis",
+    notionId: "fraction_nombre",
+    microId: "fraction_defi",
     difficulty: 4,
     theme: "neutral",
     text: "Tu hésites entre 2/3 et 3/4. Quelle fraction est la plus grande ?",
@@ -890,15 +890,15 @@ export const fractionsBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("2/3 vaut environ 0,67 alors que 3/4 vaut 0,75. Comme 0,75 est plus grand, la plus grande fraction est 3/4.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["fractions", "defi", "comparaison"],
+    tags: ["fraction_nombre", "defi", "comparaison"],
   },
   {
     kind: "fixed",
-    id: "fraction_defis_fixed_6",
+    id: "fraction_defi_fixed_6",
     niveau: "6e",
     matiere: "maths",
-    notionId: "fractions",
-    microId: "fraction_defis",
+    notionId: "fraction_nombre",
+    microId: "fraction_defi",
     difficulty: 5,
     theme: "neutral",
     text: "Explique pourquoi 2/4 et 1/2 représentent la même quantité.",
@@ -912,7 +912,7 @@ export const fractionsBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("2/4 signifie 2 parts sur 4. Si on regroupe ces 4 parts en 2 groupes égaux, 2 parts sur 4 correspondent à 1 part sur 2. Donc 2/4 et 1/2 représentent la même quantité.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["fractions", "defi", "raisonnement"],
+    tags: ["fraction_nombre", "defi", "raisonnement"],
   },
 
   // =========================
@@ -923,12 +923,12 @@ export const fractionsBank: TutorBankItemV4[] = [
     id: "fraction_lire_ecrire_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "fractions",
+    notionId: "fraction_nombre",
     microId: "fraction_lire_ecrire",
     difficulty: 1,
     theme: "neutral",
     hint: "Numérateur = parts prises ; dénominateur = parts totales.",
-    tags: ["fractions", "lecture", "template"],
+    tags: ["fraction_nombre", "lecture", "template"],
     generate: () => {
       const den = [2, 3, 4, 5, 6, 8][Math.floor(Math.random() * 6)];
       const num = 1 + Math.floor(Math.random() * Math.min(den - 1, 3));
@@ -951,12 +951,12 @@ export const fractionsBank: TutorBankItemV4[] = [
     id: "fraction_lire_ecrire_qcm_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "fractions",
+    notionId: "fraction_nombre",
     microId: "fraction_lire_ecrire",
     difficulty: 2,
     theme: "neutral",
     hint: "Le dénominateur correspond au nombre total de parts.",
-    tags: ["fractions", "lecture", "qcm", "template"],
+    tags: ["fraction_nombre", "lecture", "qcm", "template"],
     generate: () => {
       const den = [3, 4, 5, 6, 8][Math.floor(Math.random() * 5)];
       const num = 1 + Math.floor(Math.random() * Math.min(den - 1, 3));
@@ -996,12 +996,12 @@ export const fractionsBank: TutorBankItemV4[] = [
     id: "fraction_representer_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "fractions",
+    notionId: "fraction_nombre",
     microId: "fraction_representer",
     difficulty: 1,
     theme: "neutral",
     hint: "Le numérateur donne le nombre de parts colorées.",
-    tags: ["fractions", "representation", "template"],
+    tags: ["fraction_nombre", "representation", "template"],
     generate: () => {
       const den = [3, 4, 5, 6, 8][Math.floor(Math.random() * 5)];
       const num = 1 + Math.floor(Math.random() * Math.min(den - 1, 4));
@@ -1024,12 +1024,12 @@ export const fractionsBank: TutorBankItemV4[] = [
     id: "fraction_representer_qcm_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "fractions",
+    notionId: "fraction_nombre",
     microId: "fraction_representer",
     difficulty: 2,
     theme: "neutral",
     hint: "Le dénominateur donne le nombre total de parts.",
-    tags: ["fractions", "representation", "qcm", "template"],
+    tags: ["fraction_nombre", "representation", "qcm", "template"],
     generate: () => {
       const den = [4, 5, 6, 8][Math.floor(Math.random() * 4)];
       const num = 1 + Math.floor(Math.random() * Math.min(den - 1, 4));
@@ -1062,12 +1062,12 @@ export const fractionsBank: TutorBankItemV4[] = [
     id: "fraction_quantite_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "fractions",
+    notionId: "fraction_nombre",
     microId: "fraction_quantite",
     difficulty: 2,
     theme: "neutral",
     hint: "Partage la quantité en parts égales.",
-    tags: ["fractions", "quantite", "template"],
+    tags: ["fraction_nombre", "quantite", "template"],
     generate: () => {
       const type = ["moitié", "quart"][Math.floor(Math.random() * 2)];
       const base =
@@ -1097,12 +1097,12 @@ export const fractionsBank: TutorBankItemV4[] = [
     id: "fraction_quantite_tpl_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "fractions",
+    notionId: "fraction_nombre",
     microId: "fraction_quantite",
     difficulty: 3,
     theme: "neutral",
     hint: "Commence par trouver une part.",
-    tags: ["fractions", "quantite", "template"],
+    tags: ["fraction_nombre", "quantite", "template"],
     generate: () => {
       const den = [3, 4, 5][Math.floor(Math.random() * 3)];
       const num = [2, 3][Math.floor(Math.random() * 2)];
@@ -1127,12 +1127,12 @@ export const fractionsBank: TutorBankItemV4[] = [
     id: "fraction_quantite_qcm_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "fractions",
+    notionId: "fraction_nombre",
     microId: "fraction_quantite",
     difficulty: 2,
     theme: "neutral",
     hint: "Moitié = ÷2 ; quart = ÷4.",
-    tags: ["fractions", "quantite", "qcm", "template"],
+    tags: ["fraction_nombre", "quantite", "qcm", "template"],
     generate: () => {
       const base = [8, 12, 16, 20][Math.floor(Math.random() * 4)];
       const type = Math.random() > 0.5 ? "moitié" : "quart";
@@ -1170,12 +1170,12 @@ export const fractionsBank: TutorBankItemV4[] = [
     id: "fraction_decimal_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "fractions",
+    notionId: "fraction_nombre",
     microId: "fraction_decimal",
     difficulty: 2,
     theme: "neutral",
     hint: "Certaines fractions simples ont une écriture décimale connue.",
-    tags: ["fractions", "decimal", "template"],
+    tags: ["fraction_nombre", "decimal", "template"],
     generate: () => {
       const items = [
         { n: 1, d: 2, dec: 0.5 },
@@ -1208,12 +1208,12 @@ export const fractionsBank: TutorBankItemV4[] = [
     id: "fraction_decimal_qcm_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "fractions",
+    notionId: "fraction_nombre",
     microId: "fraction_decimal",
     difficulty: 2,
     theme: "neutral",
     hint: "Une moitié vaut 0,5 ; un quart vaut 0,25.",
-    tags: ["fractions", "decimal", "qcm", "template"],
+    tags: ["fraction_nombre", "decimal", "qcm", "template"],
     generate: () => {
       const items = [
         { frac: "1/2", good: "0,5", distractors: ["0,2", "0,25", "2,0"] },
@@ -1242,15 +1242,15 @@ export const fractionsBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "template",
-    id: "fraction_compare_tpl_1",
+    id: "fraction_comparer_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "fractions",
-    microId: "fraction_compare",
+    notionId: "fraction_nombre",
+    microId: "fraction_comparer",
     difficulty: 2,
     theme: "neutral",
     hint: "Même dénominateur : compare les numérateurs.",
-    tags: ["fractions", "comparaison", "template"],
+    tags: ["fraction_nombre", "comparaison", "template"],
     generate: () => {
       const den = [3, 4, 5, 6, 8, 10][Math.floor(Math.random() * 6)];
       const a = 1 + Math.floor(Math.random() * (den - 2));
@@ -1277,15 +1277,15 @@ export const fractionsBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "fraction_compare_tpl_2",
+    id: "fraction_comparer_tpl_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "fractions",
-    microId: "fraction_compare",
+    notionId: "fraction_nombre",
+    microId: "fraction_comparer",
     difficulty: 3,
     theme: "neutral",
     hint: "Tu peux penser à la valeur décimale.",
-    tags: ["fractions", "comparaison", "template"],
+    tags: ["fraction_nombre", "comparaison", "template"],
     generate: () => {
       const pairs = [
         [{ n: 1, d: 2 }, { n: 3, d: 4 }],
@@ -1324,15 +1324,15 @@ export const fractionsBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "fraction_compare_qcm_tpl_1",
+    id: "fraction_comparer_qcm_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "fractions",
-    microId: "fraction_compare",
+    notionId: "fraction_nombre",
+    microId: "fraction_comparer",
     difficulty: 2,
     theme: "neutral",
     hint: "Quand les dénominateurs sont identiques, le plus grand numérateur donne la plus grande fraction.",
-    tags: ["fractions", "comparaison", "qcm", "template"],
+    tags: ["fraction_nombre", "comparaison", "qcm", "template"],
     generate: () => {
       const den = [4, 5, 6, 8][Math.floor(Math.random() * 4)];
       const nums = [1, 2, 3].filter((n) => n < den);
@@ -1367,15 +1367,15 @@ export const fractionsBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "template",
-    id: "fraction_defis_tpl_1",
+    id: "fraction_defi_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "fractions",
-    microId: "fraction_defis",
+    notionId: "fraction_nombre",
+    microId: "fraction_defi",
     difficulty: 4,
     theme: "neutral",
     hint: "Pense au partage ou à la simplification.",
-    tags: ["fractions", "defi", "template"],
+    tags: ["fraction_nombre", "defi", "template"],
     generate: () => {
       const total = [8, 12, 16, 20, 24][Math.floor(Math.random() * 5)];
       const den = [2, 3, 4][Math.floor(Math.random() * 3)];
@@ -1400,15 +1400,15 @@ export const fractionsBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "fraction_defis_tpl_2",
+    id: "fraction_defi_tpl_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "fractions",
-    microId: "fraction_defis",
+    notionId: "fraction_nombre",
+    microId: "fraction_defi",
     difficulty: 5,
     theme: "neutral",
     hint: "Cherche si les deux fractions représentent la même quantité.",
-    tags: ["fractions", "defi", "template", "qcm"],
+    tags: ["fraction_nombre", "defi", "template", "qcm"],
     generate: () => {
       const items = [
         { a: [2, 4], b: [1, 2], answer: "oui" },
@@ -1453,12 +1453,12 @@ export const fractionsBank: TutorBankItemV4[] = [
     id: "fraction_representer_canvas_tpl_1_barre",
     niveau: "6e",
     matiere: "maths",
-    notionId: "fractions",
+    notionId: "fraction_nombre",
     microId: "fraction_representer",
     difficulty: 1,
     theme: "neutral",
     hint: "Compte les parts colorées puis le nombre total de parts.",
-    tags: ["fractions", "representation", "canvas", "template"],
+    tags: ["fraction_nombre", "representation", "canvas", "template"],
     generate: () => {
       const situations = [
         { n: 1, d: 2 },
@@ -1494,12 +1494,12 @@ export const fractionsBank: TutorBankItemV4[] = [
     id: "fraction_representer_canvas_tpl_2_grille",
     niveau: "6e",
     matiere: "maths",
-    notionId: "fractions",
+    notionId: "fraction_nombre",
     microId: "fraction_representer",
     difficulty: 2,
     theme: "neutral",
     hint: "Compte les cases colorées puis le nombre total de cases.",
-    tags: ["fractions", "representation", "grille", "canvas", "template"],
+    tags: ["fraction_nombre", "representation", "grille", "canvas", "template"],
     generate: () => {
       const situations = [
         { rows: 2, cols: 5, shaded: 3 },
@@ -1537,15 +1537,15 @@ export const fractionsBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "fraction_compare_canvas_tpl_1_barres",
+    id: "fraction_comparer_canvas_tpl_1_barres",
     niveau: "6e",
     matiere: "maths",
-    notionId: "fractions",
-    microId: "fraction_compare",
+    notionId: "fraction_nombre",
+    microId: "fraction_comparer",
     difficulty: 2,
     theme: "neutral",
     hint: "Compare les longueurs colorées.",
-    tags: ["fractions", "comparaison", "canvas", "template"],
+    tags: ["fraction_nombre", "comparaison", "canvas", "template"],
     generate: () => {
       const pairs = [
         [
@@ -1594,12 +1594,12 @@ export const fractionsBank: TutorBankItemV4[] = [
     id: "fraction_equivalence_canvas_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "fractions",
-    microId: "fraction_defis",
+    notionId: "fraction_nombre",
+    microId: "fraction_defi",
     difficulty: 3,
     theme: "neutral",
     hint: "Regarde si la même quantité est colorée.",
-    tags: ["fractions", "equivalence", "canvas", "template"],
+    tags: ["fraction_nombre", "equivalence", "canvas", "template"],
     generate: () => {
       const situations = [
         { a: { n: 1, d: 2 }, b: { n: 2, d: 4 }, answer: "oui" },
@@ -1638,7 +1638,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     id: "fraction_representer_piege_parts_inegales_fixed_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "fractions",
+    notionId: "fraction_nombre",
     microId: "fraction_representer",
     difficulty: 3,
     theme: "neutral",
@@ -1653,7 +1653,7 @@ export const fractionsBank: TutorBankItemV4[] = [
       "Méthode : avant d’écrire une fraction, on vérifie que les parts sont égales.\n\n" +
       "Observation : si les parts ne sont pas égales, l’écriture fractionnaire n’est pas correcte.\n\n" +
       "Conclusion : on ne peut pas écrire une fraction fiable avec des parts inégales.",
-    tags: ["fractions", "piege", "parts_inegales", "canvas"],
+    tags: ["fraction_nombre", "piege", "parts_inegales", "canvas"],
     canvas: fractionCanvas({
       model: "bar",
       fraction: { numerator: 2, denominator: 4, label: "2/4 ?" },
@@ -1663,11 +1663,11 @@ export const fractionsBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "fraction_compare_piege_denominateur_fixed_1",
+    id: "fraction_comparer_piege_denominateur_fixed_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "fractions",
-    microId: "fraction_compare",
+    notionId: "fraction_nombre",
+    microId: "fraction_comparer",
     difficulty: 4,
     theme: "neutral",
     text: "Un élève affirme que 1/5 est plus grand que 1/3 parce que 5 est plus grand que 3. A-t-il raison ?",
@@ -1681,7 +1681,7 @@ export const fractionsBank: TutorBankItemV4[] = [
       "Méthode : on compare la taille d’une seule part.\n\n" +
       "Observation : un cinquième est plus petit qu’un tiers, car le tout est partagé en plus de parts.\n\n" +
       "Conclusion : 1/5 est plus petit que 1/3.",
-    tags: ["fractions", "piege", "comparaison", "denominateur"],
+    tags: ["fraction_nombre", "piege", "comparaison", "denominateur"],
   },
 
   {
@@ -1689,7 +1689,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     id: "fraction_lire_ecrire_open_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "fractions",
+    notionId: "fraction_nombre",
     microId: "fraction_lire_ecrire",
     difficulty: 4,
     theme: "neutral",
@@ -1703,16 +1703,16 @@ export const fractionsBank: TutorBankItemV4[] = [
       "Méthode : on lit d’abord le nombre de parts prises, puis le nombre total de parts.\n\n" +
       "Observation : le numérateur indique les parts prises et le dénominateur indique les parts égales au total.\n\n" +
       "Conclusion : comprendre ces deux nombres permet de lire correctement une fraction.",
-    tags: ["fractions", "open", "vocabulaire", "raisonnement"],
+    tags: ["fraction_nombre", "open", "vocabulaire", "raisonnement"],
   },
 
   {
     kind: "fixed",
-    id: "fraction_compare_open_1",
+    id: "fraction_comparer_open_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "fractions",
-    microId: "fraction_compare",
+    notionId: "fraction_nombre",
+    microId: "fraction_comparer",
     difficulty: 5,
     theme: "neutral",
     text: "Explique pourquoi 1/3 est plus grand que 1/5.",
@@ -1725,7 +1725,7 @@ export const fractionsBank: TutorBankItemV4[] = [
       "Méthode : on compare la taille d’une part dans chaque partage.\n\n" +
       "Observation : si on partage un même tout en 5 parts, chaque part est plus petite que si on le partage en 3 parts.\n\n" +
       "Conclusion : 1/3 est plus grand que 1/5.",
-    tags: ["fractions", "open", "comparaison", "raisonnement"],
+    tags: ["fraction_nombre", "open", "comparaison", "raisonnement"],
   },
 
   {
@@ -1733,8 +1733,8 @@ export const fractionsBank: TutorBankItemV4[] = [
     id: "fraction_equivalence_open_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "fractions",
-    microId: "fraction_defis",
+    notionId: "fraction_nombre",
+    microId: "fraction_defi",
     difficulty: 5,
     theme: "neutral",
     text: "Explique pourquoi 2/4 et 1/2 représentent la même quantité.",
@@ -1747,6 +1747,6 @@ export const fractionsBank: TutorBankItemV4[] = [
       "Méthode : on compare les portions du même tout.\n\n" +
       "Observation : 2 parts sur 4 correspondent à la moitié du tout, comme 1 part sur 2.\n\n" +
       "Conclusion : 2/4 et 1/2 sont équivalentes.",
-    tags: ["fractions", "open", "equivalence", "raisonnement"],
+    tags: ["fraction_nombre", "open", "equivalence", "raisonnement"],
   },
 ];

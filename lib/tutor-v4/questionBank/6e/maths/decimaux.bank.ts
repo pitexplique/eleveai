@@ -17,7 +17,7 @@ export const decimauxBank: TutorBankItemV4[] = [
     id: "decimal_lire_ecrire_fixed_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "decimaux",
+    notionId: "decimal_nombre",
     microId: "decimal_lire_ecrire",
     difficulty: 1,
     theme: "neutral",
@@ -32,14 +32,14 @@ export const decimauxBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("7/10 signifie 7 dixièmes. Un dixième s’écrit 0,1, donc 7 dixièmes s’écrivent 0,7.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["decimaux", "ecriture"],
+    tags: ["decimal_nombre", "ecriture"],
   },
   {
     kind: "fixed",
     id: "decimal_lire_ecrire_fixed_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "decimaux",
+    notionId: "decimal_nombre",
     microId: "decimal_lire_ecrire",
     difficulty: 1,
     theme: "neutral",
@@ -53,14 +53,14 @@ export const decimauxBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("3/10 signifie 3 dixièmes. Cela s’écrit 0,3.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["decimaux", "ecriture"],
+    tags: ["decimal_nombre", "ecriture"],
   },
   {
     kind: "fixed",
     id: "decimal_lire_ecrire_fixed_3",
     niveau: "6e",
     matiere: "maths",
-    notionId: "decimaux",
+    notionId: "decimal_nombre",
     microId: "decimal_lire_ecrire",
     difficulty: 1,
     theme: "neutral",
@@ -74,14 +74,14 @@ export const decimauxBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("9/10 signifie 9 dixièmes. Cela s’écrit 0,9.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["decimaux", "ecriture"],
+    tags: ["decimal_nombre", "ecriture"],
   },
   {
     kind: "fixed",
     id: "decimal_lire_ecrire_fixed_4",
     niveau: "6e",
     matiere: "maths",
-    notionId: "decimaux",
+    notionId: "decimal_nombre",
     microId: "decimal_lire_ecrire",
     difficulty: 2,
     theme: "neutral",
@@ -96,14 +96,14 @@ export const decimauxBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("25/10 signifie 25 dixièmes. 20 dixièmes font 2 unités et il reste 5 dixièmes. Donc cela s’écrit 2,5.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["decimaux", "ecriture"],
+    tags: ["decimal_nombre", "ecriture"],
   },
   {
     kind: "fixed",
     id: "decimal_lire_ecrire_qcm_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "decimaux",
+    notionId: "decimal_nombre",
     microId: "decimal_lire_ecrire",
     difficulty: 2,
     theme: "neutral",
@@ -119,14 +119,14 @@ export const decimauxBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("9/10 signifie 9 dixièmes. L’écriture correcte est 0,9. 0,09 correspondrait à 9 centièmes.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["decimaux", "ecriture", "qcm"],
+    tags: ["decimal_nombre", "ecriture", "qcm"],
   },
   {
     kind: "fixed",
     id: "decimal_lire_ecrire_qcm_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "decimaux",
+    notionId: "decimal_nombre",
     microId: "decimal_lire_ecrire",
     difficulty: 2,
     theme: "neutral",
@@ -142,7 +142,7 @@ export const decimauxBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("15/10 signifie 15 dixièmes. Cela fait 1 unité et 5 dixièmes, donc 1,5.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["decimaux", "ecriture", "qcm"],
+    tags: ["decimal_nombre", "ecriture", "qcm"],
   },
 
   // =========================
@@ -153,7 +153,7 @@ export const decimauxBank: TutorBankItemV4[] = [
     id: "decimal_rang_fixed_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "decimaux",
+    notionId: "decimal_nombre",
     microId: "decimal_rang",
     difficulty: 1,
     theme: "neutral",
@@ -168,14 +168,14 @@ export const decimauxBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Dans 3,4, le chiffre placé juste après la virgule est 4. Il est donc au rang des dixièmes.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["decimaux", "rang"],
+    tags: ["decimal_nombre", "rang"],
   },
   {
     kind: "fixed",
     id: "decimal_rang_fixed_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "decimaux",
+    notionId: "decimal_nombre",
     microId: "decimal_rang",
     difficulty: 1,
     theme: "neutral",
@@ -190,14 +190,14 @@ export const decimauxBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Dans 5,83, le premier chiffre après la virgule est 8 pour les dixièmes, et le deuxième est 3 pour les centièmes.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["decimaux", "rang"],
+    tags: ["decimal_nombre", "rang"],
   },
   {
     kind: "fixed",
     id: "decimal_rang_fixed_3",
     niveau: "6e",
     matiere: "maths",
-    notionId: "decimaux",
+    notionId: "decimal_nombre",
     microId: "decimal_rang",
     difficulty: 2,
     theme: "neutral",
@@ -212,14 +212,14 @@ export const decimauxBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Dans 12,764, le chiffre 7 est juste après la virgule. C’est donc le chiffre des dixièmes.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["decimaux", "rang"],
+    tags: ["decimal_nombre", "rang"],
   },
   {
     kind: "fixed",
     id: "decimal_rang_fixed_4",
     niveau: "6e",
     matiere: "maths",
-    notionId: "decimaux",
+    notionId: "decimal_nombre",
     microId: "decimal_rang",
     difficulty: 2,
     theme: "neutral",
@@ -234,14 +234,14 @@ export const decimauxBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Dans 12,764, les chiffres après la virgule sont 7, 6 et 4. Le troisième, 4, est au rang des millièmes.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["decimaux", "rang"],
+    tags: ["decimal_nombre", "rang"],
   },
   {
     kind: "fixed",
     id: "decimal_rang_qcm_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "decimaux",
+    notionId: "decimal_nombre",
     microId: "decimal_rang",
     difficulty: 2,
     theme: "neutral",
@@ -257,14 +257,14 @@ export const decimauxBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Dans 4,58, le premier chiffre après la virgule est 5. Il est donc au rang des dixièmes.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["decimaux", "rang", "qcm"],
+    tags: ["decimal_nombre", "rang", "qcm"],
   },
   {
     kind: "fixed",
     id: "decimal_rang_qcm_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "decimaux",
+    notionId: "decimal_nombre",
     microId: "decimal_rang",
     difficulty: 3,
     theme: "neutral",
@@ -280,7 +280,7 @@ export const decimauxBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Dans 3,264, le 2 est au rang des dixièmes, le 6 au rang des centièmes et le 4 au rang des millièmes. Le 6 est donc au rang des centièmes.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["decimaux", "rang", "qcm"],
+    tags: ["decimal_nombre", "rang", "qcm"],
   },
 
   // =========================
@@ -291,7 +291,7 @@ export const decimauxBank: TutorBankItemV4[] = [
     id: "decimal_compare_fixed_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "decimaux",
+    notionId: "decimal_nombre",
     microId: "decimal_comparer",
     difficulty: 1,
     theme: "neutral",
@@ -306,14 +306,14 @@ export const decimauxBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("0,7 = 0,70. On compare donc 0,70 et 0,65. Comme 70 centièmes est plus grand que 65 centièmes, la bonne réponse est 0,7.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["decimaux", "comparaison"],
+    tags: ["decimal_nombre", "comparaison"],
   },
   {
     kind: "fixed",
     id: "decimal_compare_fixed_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "decimaux",
+    notionId: "decimal_nombre",
     microId: "decimal_comparer",
     difficulty: 1,
     theme: "neutral",
@@ -328,14 +328,14 @@ export const decimauxBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("0,4 = 0,40. On compare donc 0,40 et 0,09. Comme 9 centièmes est plus petit que 40 centièmes, la bonne réponse est 0,09.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["decimaux", "comparaison"],
+    tags: ["decimal_nombre", "comparaison"],
   },
   {
     kind: "fixed",
     id: "decimal_compare_fixed_3",
     niveau: "6e",
     matiere: "maths",
-    notionId: "decimaux",
+    notionId: "decimal_nombre",
     microId: "decimal_comparer",
     difficulty: 1,
     theme: "neutral",
@@ -350,14 +350,14 @@ export const decimauxBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("0,3 = 0,30. On compare 30 centièmes à 27 centièmes. Comme 30 est plus grand que 27, la bonne réponse est 0,3.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["decimaux", "comparaison"],
+    tags: ["decimal_nombre", "comparaison"],
   },
   {
     kind: "fixed",
     id: "decimal_compare_fixed_4",
     niveau: "6e",
     matiere: "maths",
-    notionId: "decimaux",
+    notionId: "decimal_nombre",
     microId: "decimal_comparer",
     difficulty: 2,
     theme: "neutral",
@@ -372,14 +372,14 @@ export const decimauxBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("0,52 = 0,520. On compare donc 520 millièmes et 507 millièmes. Comme 507 est plus petit que 520, la bonne réponse est 0,507.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["decimaux", "comparaison"],
+    tags: ["decimal_nombre", "comparaison"],
   },
   {
     kind: "fixed",
     id: "decimal_compare_trap_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "decimaux",
+    notionId: "decimal_nombre",
     microId: "decimal_comparer",
     difficulty: 2,
     theme: "neutral",
@@ -394,14 +394,14 @@ export const decimauxBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("0,5 = 0,50. On compare 50 centièmes à 45 centièmes. Comme 50 est plus grand que 45, la bonne réponse est 0,5.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["decimaux", "comparaison", "piege"],
+    tags: ["decimal_nombre", "comparaison", "piege"],
   },
   {
     kind: "fixed",
     id: "decimal_compare_trap_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "decimaux",
+    notionId: "decimal_nombre",
     microId: "decimal_comparer",
     difficulty: 3,
     theme: "neutral",
@@ -416,14 +416,14 @@ export const decimauxBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("0,35 = 0,350. On compare donc 305 millièmes à 350 millièmes. Comme 305 est plus petit que 350, la bonne réponse est 0,305.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["decimaux", "comparaison", "piege"],
+    tags: ["decimal_nombre", "comparaison", "piege"],
   },
   {
     kind: "fixed",
     id: "decimal_compare_qcm_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "decimaux",
+    notionId: "decimal_nombre",
     microId: "decimal_comparer",
     difficulty: 2,
     theme: "neutral",
@@ -439,14 +439,14 @@ export const decimauxBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("0,54 = 54 centièmes. Les autres valent 45 centièmes, 50 centièmes et 49 centièmes. Le plus grand est donc 0,54.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["decimaux", "comparaison", "qcm"],
+    tags: ["decimal_nombre", "comparaison", "qcm"],
   },
   {
     kind: "fixed",
     id: "decimal_compare_qcm_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "decimaux",
+    notionId: "decimal_nombre",
     microId: "decimal_comparer",
     difficulty: 2,
     theme: "neutral",
@@ -462,14 +462,14 @@ export const decimauxBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("0,41 = 0,410, 0,401 = 0,401, 0,39 = 0,390 et 0,4 = 0,400. Le plus grand est donc 0,41.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["decimaux", "comparaison", "qcm"],
+    tags: ["decimal_nombre", "comparaison", "qcm"],
   },
   {
     kind: "fixed",
     id: "decimal_compare_reunion_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "decimaux",
+    notionId: "decimal_nombre",
     microId: "decimal_comparer",
     difficulty: 3,
     theme: "reunion",
@@ -484,7 +484,7 @@ export const decimauxBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("2,5 € = 2,50 €. En comparant 2,50 € et 2,45 €, on voit que 2,50 € est plus grand. Le fruit à 2,5 € coûte donc le plus cher.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["decimaux", "comparaison", "reunion"],
+    tags: ["decimal_nombre", "comparaison", "reunion"],
   },
 
   // =========================
@@ -495,7 +495,7 @@ export const decimauxBank: TutorBankItemV4[] = [
     id: "decimal_add_fixed_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "decimaux",
+    notionId: "decimal_nombre",
     microId: "decimal_additionner",
     difficulty: 2,
     theme: "neutral",
@@ -510,14 +510,14 @@ export const decimauxBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("1,2 + 0,5 = 12 dixièmes + 5 dixièmes = 17 dixièmes, donc 1,7.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["decimaux", "addition"],
+    tags: ["decimal_nombre", "addition"],
   },
   {
     kind: "fixed",
     id: "decimal_add_fixed_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "decimaux",
+    notionId: "decimal_nombre",
     microId: "decimal_additionner",
     difficulty: 2,
     theme: "neutral",
@@ -532,14 +532,14 @@ export const decimauxBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("2,4 + 1,3 = 24 dixièmes + 13 dixièmes = 37 dixièmes, donc 3,7.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["decimaux", "addition"],
+    tags: ["decimal_nombre", "addition"],
   },
   {
     kind: "fixed",
     id: "decimal_add_fixed_3",
     niveau: "6e",
     matiere: "maths",
-    notionId: "decimaux",
+    notionId: "decimal_nombre",
     microId: "decimal_additionner",
     difficulty: 4,
     theme: "neutral",
@@ -554,14 +554,14 @@ export const decimauxBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("On écrit 1,7 sous la forme 1,70. Puis 3,45 + 1,70 = 5,15.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["decimaux", "addition"],
+    tags: ["decimal_nombre", "addition"],
   },
   {
     kind: "fixed",
     id: "decimal_add_fixed_4",
     niveau: "6e",
     matiere: "maths",
-    notionId: "decimaux",
+    notionId: "decimal_nombre",
     microId: "decimal_additionner",
     difficulty: 4,
     theme: "neutral",
@@ -576,14 +576,14 @@ export const decimauxBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("On écrit 2,8 sous la forme 2,80. Puis 0,75 + 2,80 = 3,55.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["decimaux", "addition"],
+    tags: ["decimal_nombre", "addition"],
   },
   {
     kind: "fixed",
     id: "decimal_add_fixed_5",
     niveau: "6e",
     matiere: "maths",
-    notionId: "decimaux",
+    notionId: "decimal_nombre",
     microId: "decimal_additionner",
     difficulty: 2,
     theme: "neutral",
@@ -598,14 +598,14 @@ export const decimauxBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("0,6 + 0,9 = 6 dixièmes + 9 dixièmes = 15 dixièmes, donc 1,5.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["decimaux", "addition"],
+    tags: ["decimal_nombre", "addition"],
   },
   {
     kind: "fixed",
     id: "decimal_add_fixed_6",
     niveau: "6e",
     matiere: "maths",
-    notionId: "decimaux",
+    notionId: "decimal_nombre",
     microId: "decimal_additionner",
     difficulty: 3,
     theme: "neutral",
@@ -619,14 +619,14 @@ export const decimauxBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("On écrit 1,4 = 1,40. Puis 2,35 + 1,40 = 3,75.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["decimaux", "addition"],
+    tags: ["decimal_nombre", "addition"],
   },
   {
     kind: "fixed",
     id: "decimal_add_qcm_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "decimaux",
+    notionId: "decimal_nombre",
     microId: "decimal_additionner",
     difficulty: 2,
     theme: "neutral",
@@ -642,14 +642,14 @@ export const decimauxBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("0,8 + 0,7 = 8 dixièmes + 7 dixièmes = 15 dixièmes, donc 1,5.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["decimaux", "addition", "qcm"],
+    tags: ["decimal_nombre", "addition", "qcm"],
   },
   {
     kind: "fixed",
     id: "decimal_add_challenge_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "decimaux",
+    notionId: "decimal_nombre",
     microId: "decimal_additionner",
     difficulty: 5,
     theme: "neutral",
@@ -664,7 +664,7 @@ export const decimauxBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Si x + 1,5 = 3,2, alors x = 3,2 - 1,5 = 1,7.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["decimaux", "addition", "defi"],
+    tags: ["decimal_nombre", "addition", "defi"],
   },
 
   // =========================
@@ -675,7 +675,7 @@ export const decimauxBank: TutorBankItemV4[] = [
     id: "decimal_multiply_fixed_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "decimaux",
+    notionId: "decimal_nombre",
     microId: "decimal_multiplier",
     difficulty: 3,
     theme: "neutral",
@@ -690,14 +690,14 @@ export const decimauxBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("0,5 est la moitié de 1. Quatre moitiés font 2. Donc 0,5 × 4 = 2.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["decimaux", "multiplication"],
+    tags: ["decimal_nombre", "multiplication"],
   },
   {
     kind: "fixed",
     id: "decimal_multiply_fixed_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "decimaux",
+    notionId: "decimal_nombre",
     microId: "decimal_multiplier",
     difficulty: 3,
     theme: "neutral",
@@ -711,14 +711,14 @@ export const decimauxBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Multiplier par 2 revient à doubler. Le double de 1,5 est 3.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["decimaux", "multiplication"],
+    tags: ["decimal_nombre", "multiplication"],
   },
   {
     kind: "fixed",
     id: "decimal_multiply_fixed_3",
     niveau: "6e",
     matiere: "maths",
-    notionId: "decimaux",
+    notionId: "decimal_nombre",
     microId: "decimal_multiplier",
     difficulty: 4,
     theme: "neutral",
@@ -732,14 +732,14 @@ export const decimauxBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("2,4 × 3 = 2,4 + 2,4 + 2,4 = 7,2.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["decimaux", "multiplication"],
+    tags: ["decimal_nombre", "multiplication"],
   },
   {
     kind: "fixed",
     id: "decimal_multiply_fixed_4",
     niveau: "6e",
     matiere: "maths",
-    notionId: "decimaux",
+    notionId: "decimal_nombre",
     microId: "decimal_multiplier",
     difficulty: 4,
     theme: "neutral",
@@ -754,14 +754,14 @@ export const decimauxBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("0,25 représente un quart. Quatre quarts font 1. Donc 0,25 × 4 = 1.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["decimaux", "multiplication"],
+    tags: ["decimal_nombre", "multiplication"],
   },
   {
     kind: "fixed",
     id: "decimal_multiply_qcm_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "decimaux",
+    notionId: "decimal_nombre",
     microId: "decimal_multiplier",
     difficulty: 3,
     theme: "neutral",
@@ -776,14 +776,14 @@ export const decimauxBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Multiplier par 2 revient à doubler. Le double de 2,5 est 5.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["decimaux", "multiplication", "qcm"],
+    tags: ["decimal_nombre", "multiplication", "qcm"],
   },
   {
     kind: "fixed",
     id: "decimal_multiply_challenge_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "decimaux",
+    notionId: "decimal_nombre",
     microId: "decimal_multiplier",
     difficulty: 5,
     theme: "neutral",
@@ -798,7 +798,7 @@ export const decimauxBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Chaque objet coûte 2,5 €. Pour 6 objets, on calcule 2,5 × 6 = 15. Le total est donc 15 €.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["decimaux", "multiplication", "defi"],
+    tags: ["decimal_nombre", "multiplication", "defi"],
   },
 
   // =========================
@@ -809,7 +809,7 @@ export const decimauxBank: TutorBankItemV4[] = [
     id: "decimal_divide_fixed_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "decimaux",
+    notionId: "decimal_nombre",
     microId: "decimal_diviser_par_entier",
     difficulty: 3,
     theme: "neutral",
@@ -824,14 +824,14 @@ export const decimauxBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("3,6 partagé en 2 parts égales donne 1,8 dans chaque part. Donc 3,6 ÷ 2 = 1,8.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["decimaux", "division"],
+    tags: ["decimal_nombre", "division"],
   },
   {
     kind: "fixed",
     id: "decimal_divide_fixed_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "decimaux",
+    notionId: "decimal_nombre",
     microId: "decimal_diviser_par_entier",
     difficulty: 3,
     theme: "neutral",
@@ -846,14 +846,14 @@ export const decimauxBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("4,8 = 48 dixièmes. 48 dixièmes divisés par 4 donnent 12 dixièmes, soit 1,2.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["decimaux", "division"],
+    tags: ["decimal_nombre", "division"],
   },
   {
     kind: "fixed",
     id: "decimal_divide_fixed_3",
     niveau: "6e",
     matiere: "maths",
-    notionId: "decimaux",
+    notionId: "decimal_nombre",
     microId: "decimal_diviser_par_entier",
     difficulty: 4,
     theme: "neutral",
@@ -868,14 +868,14 @@ export const decimauxBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("56 dixièmes divisés par 4 donnent 14 dixièmes, soit 1,4.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["decimaux", "division"],
+    tags: ["decimal_nombre", "division"],
   },
   {
     kind: "fixed",
     id: "decimal_divide_fixed_4",
     niveau: "6e",
     matiere: "maths",
-    notionId: "decimaux",
+    notionId: "decimal_nombre",
     microId: "decimal_diviser_par_entier",
     difficulty: 4,
     theme: "neutral",
@@ -890,14 +890,14 @@ export const decimauxBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("96 dixièmes divisés par 3 donnent 32 dixièmes, soit 3,2.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["decimaux", "division"],
+    tags: ["decimal_nombre", "division"],
   },
   {
     kind: "fixed",
     id: "decimal_divide_qcm_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "decimaux",
+    notionId: "decimal_nombre",
     microId: "decimal_diviser_par_entier",
     difficulty: 3,
     theme: "neutral",
@@ -913,14 +913,14 @@ export const decimauxBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Partager 2,4 en 2 parts égales donne 1,2 dans chaque part.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["decimaux", "division", "qcm"],
+    tags: ["decimal_nombre", "division", "qcm"],
   },
   {
     kind: "fixed",
     id: "decimal_divide_challenge_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "decimaux",
+    notionId: "decimal_nombre",
     microId: "decimal_diviser_par_entier",
     difficulty: 5,
     theme: "neutral",
@@ -935,7 +935,7 @@ export const decimauxBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Si 7,5 litres sont partagés dans 5 bouteilles, on calcule 7,5 ÷ 5 = 1,5. Chaque bouteille contient donc 1,5 litre.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["decimaux", "division", "defi"],
+    tags: ["decimal_nombre", "division", "defi"],
   },
 
   // =========================
@@ -943,11 +943,11 @@ export const decimauxBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "fixed",
-    id: "decimal_defis_fixed_1",
+    id: "decimal_defi_fixed_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "decimaux",
-    microId: "decimal_defis",
+    notionId: "decimal_nombre",
+    microId: "decimal_defi",
     difficulty: 1,
     theme: "neutral",
     text: "10 % de 60 = ?",
@@ -962,15 +962,15 @@ export const decimauxBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("10 % signifie 10 sur 100, donc 0,1. Ainsi 0,1 × 60 = 6.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["decimaux", "defi", "pourcentage", "calcul"],
+    tags: ["decimal_nombre", "defi", "pourcentage", "calcul"],
   },
   {
     kind: "fixed",
-    id: "decimal_defis_fixed_2",
+    id: "decimal_defi_fixed_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "decimaux",
-    microId: "decimal_defis",
+    notionId: "decimal_nombre",
+    microId: "decimal_defi",
     difficulty: 1,
     theme: "neutral",
     text: "D’où vient le mot « décimal » ?",
@@ -985,15 +985,15 @@ export const decimauxBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Le mot « décimal » vient du latin lié au nombre dix. Notre système d’écriture usuel est un système en base 10.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["decimaux", "defi", "culture", "qcm"],
+    tags: ["decimal_nombre", "defi", "culture", "qcm"],
   },
   {
     kind: "fixed",
-    id: "decimal_defis_fixed_3",
+    id: "decimal_defi_fixed_3",
     niveau: "6e",
     matiere: "maths",
-    notionId: "decimaux",
-    microId: "decimal_defis",
+    notionId: "decimal_nombre",
+    microId: "decimal_defi",
     difficulty: 2,
     theme: "neutral",
     text: "La soustraction de deux nombres entiers peut-elle donner un nombre décimal ?",
@@ -1008,15 +1008,15 @@ export const decimauxBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Quand on soustrait deux nombres entiers, le résultat reste un entier. On n’obtient donc pas de nombre décimal dans ce cas.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["decimaux", "defi", "piege", "qcm"],
+    tags: ["decimal_nombre", "defi", "piege", "qcm"],
   },
   {
     kind: "fixed",
-    id: "decimal_defis_fixed_4",
+    id: "decimal_defi_fixed_4",
     niveau: "6e",
     matiere: "maths",
-    notionId: "decimaux",
-    microId: "decimal_defis",
+    notionId: "decimal_nombre",
+    microId: "decimal_defi",
     difficulty: 2,
     theme: "neutral",
     text: "Comment partager un gâteau en 6 parts parfaitement égales ?",
@@ -1036,15 +1036,15 @@ export const decimauxBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Un cercle mesure 360°. Pour faire 6 parts égales, on partage 360 par 6, ce qui donne 60°. Il faut donc faire des secteurs de 60°.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["decimaux", "defi", "geometrie", "qcm"],
+    tags: ["decimal_nombre", "defi", "geometrie", "qcm"],
   },
   {
     kind: "fixed",
-    id: "decimal_defis_fixed_5",
+    id: "decimal_defi_fixed_5",
     niveau: "6e",
     matiere: "maths",
-    notionId: "decimaux",
-    microId: "decimal_defis",
+    notionId: "decimal_nombre",
+    microId: "decimal_defi",
     difficulty: 3,
     theme: "reunion",
     text: "À La Réunion, un sentier fait 2,5 km. Que représente le 0,5 ?",
@@ -1059,15 +1059,15 @@ export const decimauxBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("0,5 km signifie la moitié d’un kilomètre. Or 1 km = 1000 m, donc 0,5 km = 500 m.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["decimaux", "defi", "reunion", "qcm"],
+    tags: ["decimal_nombre", "defi", "reunion", "qcm"],
   },
   {
     kind: "fixed",
-    id: "decimal_defis_fixed_6",
+    id: "decimal_defi_fixed_6",
     niveau: "6e",
     matiere: "maths",
-    notionId: "decimaux",
-    microId: "decimal_defis",
+    notionId: "decimal_nombre",
+    microId: "decimal_defi",
     difficulty: 3,
     theme: "neutral",
     text: "Un requin nage à 2,75 m/s. Pourquoi utilise-t-on 2,75 et pas 2 ou 3 ?",
@@ -1087,15 +1087,15 @@ export const decimauxBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("2,75 est plus précis que 2 ou 3. Les nombres décimaux servent justement à donner une valeur plus exacte.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["decimaux", "defi", "sens", "qcm"],
+    tags: ["decimal_nombre", "defi", "sens", "qcm"],
   },
   {
     kind: "fixed",
-    id: "decimal_defis_fixed_7",
+    id: "decimal_defi_fixed_7",
     niveau: "6e",
     matiere: "maths",
-    notionId: "decimaux",
-    microId: "decimal_defis",
+    notionId: "decimal_nombre",
+    microId: "decimal_defi",
     difficulty: 4,
     theme: "neutral",
     text: "L’addition est de 20 €. Tu laisses 5 % de pourboire. Combien vaut le pourboire ?",
@@ -1110,15 +1110,15 @@ export const decimauxBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("5 % de 20 €, c’est 0,05 × 20 = 1 €. Le pourboire est donc de 1 €.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["decimaux", "defi", "pourcentage", "qcm"],
+    tags: ["decimal_nombre", "defi", "pourcentage", "qcm"],
   },
   {
     kind: "fixed",
-    id: "decimal_defis_fixed_8",
+    id: "decimal_defi_fixed_8",
     niveau: "6e",
     matiere: "maths",
-    notionId: "decimaux",
-    microId: "decimal_defis",
+    notionId: "decimal_nombre",
+    microId: "decimal_defi",
     difficulty: 4,
     theme: "neutral",
     text: "Dans un cercle, combien mesure chaque part si on le coupe en 6 parts égales ?",
@@ -1133,15 +1133,15 @@ export const decimauxBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Un cercle complet mesure 360°. En le partageant en 6 parts égales, on obtient 360 ÷ 6 = 60°.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["decimaux", "defi", "geometrie", "qcm"],
+    tags: ["decimal_nombre", "defi", "geometrie", "qcm"],
   },
   {
     kind: "fixed",
-    id: "decimal_defis_fixed_9",
+    id: "decimal_defi_fixed_9",
     niveau: "6e",
     matiere: "maths",
-    notionId: "decimaux",
-    microId: "decimal_defis",
+    notionId: "decimal_nombre",
+    microId: "decimal_defi",
     difficulty: 5,
     theme: "neutral",
     text: "Pourquoi le système décimal (base 10) est-il utilisé ?",
@@ -1161,7 +1161,7 @@ export const decimauxBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Le système décimal est pratique car il permet d’écrire les nombres et de faire les calculs simplement avec des regroupements par 10, 100, 1000, etc.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["decimaux", "defi", "raisonnement", "qcm"],
+    tags: ["decimal_nombre", "defi", "raisonnement", "qcm"],
   },
 
   // =========================
@@ -1172,12 +1172,12 @@ export const decimauxBank: TutorBankItemV4[] = [
     id: "decimal_lire_ecrire_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "decimaux",
+    notionId: "decimal_nombre",
     microId: "decimal_lire_ecrire",
     difficulty: 1,
     theme: "neutral",
     hint: "n/10 = n dixièmes.",
-    tags: ["decimaux", "ecriture", "template"],
+    tags: ["decimal_nombre", "ecriture", "template"],
     generate: () => {
       const numerators = [1, 2, 3, 4, 5, 6, 7, 8, 9];
       const n = numerators[Math.floor(Math.random() * numerators.length)];
@@ -1202,12 +1202,12 @@ export const decimauxBank: TutorBankItemV4[] = [
     id: "decimal_lire_ecrire_tpl_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "decimaux",
+    notionId: "decimal_nombre",
     microId: "decimal_lire_ecrire",
     difficulty: 2,
     theme: "neutral",
     hint: "Le numérateur peut être plus grand que 10.",
-    tags: ["decimaux", "ecriture", "template"],
+    tags: ["decimal_nombre", "ecriture", "template"],
     generate: () => {
       const numerators = [12, 15, 18, 24, 27, 35];
       const n = numerators[Math.floor(Math.random() * numerators.length)];
@@ -1232,12 +1232,12 @@ export const decimauxBank: TutorBankItemV4[] = [
     id: "decimal_lire_ecrire_qcm_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "decimaux",
+    notionId: "decimal_nombre",
     microId: "decimal_lire_ecrire",
     difficulty: 2,
     theme: "neutral",
     hint: "Attention aux zéros inutiles.",
-    tags: ["decimaux", "ecriture", "qcm", "template"],
+    tags: ["decimal_nombre", "ecriture", "qcm", "template"],
     generate: () => {
       const numerators = [2, 3, 4, 5, 6, 7, 8, 9];
       const n = numerators[Math.floor(Math.random() * numerators.length)];
@@ -1274,12 +1274,12 @@ export const decimauxBank: TutorBankItemV4[] = [
     id: "decimal_rang_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "decimaux",
+    notionId: "decimal_nombre",
     microId: "decimal_rang",
     difficulty: 1,
     theme: "neutral",
     hint: "Le chiffre des dixièmes est le premier après la virgule.",
-    tags: ["decimaux", "rang", "template"],
+    tags: ["decimal_nombre", "rang", "template"],
     generate: () => {
       const unit = Math.floor(Math.random() * 9) + 1;
       const tenth = Math.floor(Math.random() * 9);
@@ -1303,12 +1303,12 @@ export const decimauxBank: TutorBankItemV4[] = [
     id: "decimal_rang_tpl_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "decimaux",
+    notionId: "decimal_nombre",
     microId: "decimal_rang",
     difficulty: 2,
     theme: "neutral",
     hint: "Le chiffre des centièmes est le deuxième après la virgule.",
-    tags: ["decimaux", "rang", "template"],
+    tags: ["decimal_nombre", "rang", "template"],
     generate: () => {
       const unit = Math.floor(Math.random() * 9) + 1;
       const tenth = Math.floor(Math.random() * 9);
@@ -1337,12 +1337,12 @@ export const decimauxBank: TutorBankItemV4[] = [
     id: "decimal_compare_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "decimaux",
+    notionId: "decimal_nombre",
     microId: "decimal_comparer",
     difficulty: 1,
     theme: "neutral",
     hint: "Compare d’abord les dixièmes, puis les centièmes.",
-    tags: ["decimaux", "comparaison", "template"],
+    tags: ["decimal_nombre", "comparaison", "template"],
     generate: () => {
       let a = Number((Math.random() * 0.8 + 0.1).toFixed(2));
       let b = Number((Math.random() * 0.8 + 0.1).toFixed(2));
@@ -1374,12 +1374,12 @@ export const decimauxBank: TutorBankItemV4[] = [
     id: "decimal_compare_tpl_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "decimaux",
+    notionId: "decimal_nombre",
     microId: "decimal_comparer",
     difficulty: 2,
     theme: "neutral",
     hint: "Le plus petit n’est pas toujours celui qui a le plus de chiffres.",
-    tags: ["decimaux", "comparaison", "template"],
+    tags: ["decimal_nombre", "comparaison", "template"],
     generate: () => {
       let a = Number((Math.random() * 0.9 + 0.05).toFixed(3));
       let b = Number((Math.random() * 0.9 + 0.05).toFixed(3));
@@ -1411,12 +1411,12 @@ export const decimauxBank: TutorBankItemV4[] = [
     id: "decimal_compare_qcm_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "decimaux",
+    notionId: "decimal_nombre",
     microId: "decimal_comparer",
     difficulty: 2,
     theme: "neutral",
     hint: "Si les dixièmes sont identiques, compare les centièmes.",
-    tags: ["decimaux", "comparaison", "qcm", "template"],
+    tags: ["decimal_nombre", "comparaison", "qcm", "template"],
     generate: () => {
       const base = [0.2, 0.3, 0.4, 0.5, 0.6][
         Math.floor(Math.random() * 5)
@@ -1456,12 +1456,12 @@ export const decimauxBank: TutorBankItemV4[] = [
     id: "decimal_add_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "decimaux",
+    notionId: "decimal_nombre",
     microId: "decimal_additionner",
     difficulty: 2,
     theme: "neutral",
     hint: "Aligne les virgules.",
-    tags: ["decimaux", "addition", "template"],
+    tags: ["decimal_nombre", "addition", "template"],
     generate: () => {
       const a = Number((Math.floor(Math.random() * 20) / 10).toFixed(1));
       const b = Number((Math.floor(Math.random() * 20) / 10).toFixed(1));
@@ -1487,12 +1487,12 @@ export const decimauxBank: TutorBankItemV4[] = [
     id: "decimal_add_tpl_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "decimaux",
+    notionId: "decimal_nombre",
     microId: "decimal_additionner",
     difficulty: 3,
     theme: "neutral",
     hint: "Tu peux ajouter des zéros pour aligner.",
-    tags: ["decimaux", "addition", "template"],
+    tags: ["decimal_nombre", "addition", "template"],
     generate: () => {
       const a = Number((Math.random() * 5).toFixed(2));
       const b = Number((Math.random() * 5).toFixed(2));
@@ -1518,12 +1518,12 @@ export const decimauxBank: TutorBankItemV4[] = [
     id: "decimal_add_reunion_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "decimaux",
+    notionId: "decimal_nombre",
     microId: "decimal_additionner",
     difficulty: 4,
     theme: "reunion",
     hint: "Additionne les deux prix.",
-    tags: ["decimaux", "addition", "template", "reunion"],
+    tags: ["decimal_nombre", "addition", "template", "reunion"],
     generate: () => {
       const a = Number((Math.random() * 4 + 1).toFixed(2));
       const b = Number((Math.random() * 4 + 1).toFixed(2));
@@ -1555,12 +1555,12 @@ export const decimauxBank: TutorBankItemV4[] = [
     id: "decimal_multiply_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "decimaux",
+    notionId: "decimal_nombre",
     microId: "decimal_multiplier",
     difficulty: 3,
     theme: "neutral",
     hint: "Vois cela comme une addition répétée.",
-    tags: ["decimaux", "multiplication", "template"],
+    tags: ["decimal_nombre", "multiplication", "template"],
     generate: () => {
       const decimals = [0.5, 1.5, 2.5, 3.5];
       const integers = [2, 3, 4];
@@ -1590,12 +1590,12 @@ export const decimauxBank: TutorBankItemV4[] = [
     id: "decimal_multiply_tpl_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "decimaux",
+    notionId: "decimal_nombre",
     microId: "decimal_multiplier",
     difficulty: 4,
     theme: "neutral",
     hint: "Tu peux décomposer le calcul.",
-    tags: ["decimaux", "multiplication", "template"],
+    tags: ["decimal_nombre", "multiplication", "template"],
     generate: () => {
       const a = [0.25, 0.5, 1.2, 1.5, 2.4][
         Math.floor(Math.random() * 5)
@@ -1621,12 +1621,12 @@ export const decimauxBank: TutorBankItemV4[] = [
     id: "decimal_multiply_reunion_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "decimaux",
+    notionId: "decimal_nombre",
     microId: "decimal_multiplier",
     difficulty: 5,
     theme: "reunion",
     hint: "Multiplie le prix d’un objet par le nombre d’objets.",
-    tags: ["decimaux", "multiplication", "template", "reunion"],
+    tags: ["decimal_nombre", "multiplication", "template", "reunion"],
     generate: () => {
       const price = [1.5, 2.5, 3.5, 4.5][Math.floor(Math.random() * 4)];
       const qty = [3, 4, 5, 6][Math.floor(Math.random() * 4)];
@@ -1660,12 +1660,12 @@ export const decimauxBank: TutorBankItemV4[] = [
     id: "decimal_divide_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "decimaux",
+    notionId: "decimal_nombre",
     microId: "decimal_diviser_par_entier",
     difficulty: 3,
     theme: "neutral",
     hint: "On partage en parts égales.",
-    tags: ["decimaux", "division", "template"],
+    tags: ["decimal_nombre", "division", "template"],
     generate: () => {
       const divisors = [2, 4, 5];
       const divisor = divisors[Math.floor(Math.random() * divisors.length)];
@@ -1694,12 +1694,12 @@ export const decimauxBank: TutorBankItemV4[] = [
     id: "decimal_divide_tpl_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "decimaux",
+    notionId: "decimal_nombre",
     microId: "decimal_diviser_par_entier",
     difficulty: 4,
     theme: "neutral",
     hint: "Cherche combien vaut une part.",
-    tags: ["decimaux", "division", "template"],
+    tags: ["decimal_nombre", "division", "template"],
     generate: () => {
       const divisor = [2, 3, 4, 5][Math.floor(Math.random() * 4)];
       const quotient = [1.2, 1.5, 1.8, 2.4, 2.5, 3.2][
@@ -1729,12 +1729,12 @@ export const decimauxBank: TutorBankItemV4[] = [
     id: "decimal_divide_reunion_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "decimaux",
+    notionId: "decimal_nombre",
     microId: "decimal_diviser_par_entier",
     difficulty: 5,
     theme: "reunion",
     hint: "On partage la quantité totale entre plusieurs personnes.",
-    tags: ["decimaux", "division", "template", "reunion"],
+    tags: ["decimal_nombre", "division", "template", "reunion"],
     generate: () => {
       const divisor = [2, 3, 4, 5][Math.floor(Math.random() * 4)];
       const quotient = [0.8, 1.2, 1.5, 2.4][Math.floor(Math.random() * 4)];

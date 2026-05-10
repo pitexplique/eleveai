@@ -17,7 +17,7 @@ export const volumesBank: TutorBankItemV4[] = [
     id: "volume_unite_fixed_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "volumes",
+    notionId: "volume_solide",
     microId: "volume_unite",
     difficulty: 1,
     theme: "neutral",
@@ -33,14 +33,14 @@ export const volumesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Le volume mesure l’espace occupé par un objet en trois dimensions. On utilise donc des unités cubes, ici cm³.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["volumes", "unite", "qcm"],
+    tags: ["volume_solide", "unite", "qcm"],
   },
   {
     kind: "fixed",
     id: "volume_unite_fixed_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "volumes",
+    notionId: "volume_solide",
     microId: "volume_unite",
     difficulty: 1,
     theme: "neutral",
@@ -56,14 +56,14 @@ export const volumesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Une longueur s’écrit en m, une aire en m², et un volume en m³. L’exposant 3 correspond à trois dimensions.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["volumes", "unite", "qcm"],
+    tags: ["volume_solide", "unite", "qcm"],
   },
   {
     kind: "fixed",
     id: "volume_unite_fixed_3",
     niveau: "6e",
     matiere: "maths",
-    notionId: "volumes",
+    notionId: "volume_solide",
     microId: "volume_unite",
     difficulty: 1,
     theme: "neutral",
@@ -79,14 +79,14 @@ export const volumesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Pour mesurer un volume, on compte combien de petits cubes unités remplissent l’espace. On parle donc d’unités cubes.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["volumes", "unite", "qcm"],
+    tags: ["volume_solide", "unite", "qcm"],
   },
   {
     kind: "fixed",
     id: "volume_unite_qcm_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "volumes",
+    notionId: "volume_solide",
     microId: "volume_unite",
     difficulty: 2,
     theme: "neutral",
@@ -102,14 +102,14 @@ export const volumesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("12 cm correspond à une longueur, 12 cm² à une aire, 12 g à une masse. Seule l’écriture 12 cm³ désigne un volume.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["volumes", "unite", "qcm"],
+    tags: ["volume_solide", "unite", "qcm"],
   },
   {
     kind: "fixed",
     id: "volume_unite_reunion_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "volumes",
+    notionId: "volume_solide",
     microId: "volume_unite",
     difficulty: 2,
     theme: "reunion",
@@ -125,7 +125,7 @@ export const volumesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Un grand bac prend de la place en longueur, largeur et hauteur. On mesure donc son volume en mètres cubes, notés m³.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["volumes", "unite", "reunion", "qcm"],
+    tags: ["volume_solide", "unite", "reunion", "qcm"],
   },
 
   // =========================
@@ -136,7 +136,7 @@ export const volumesBank: TutorBankItemV4[] = [
     id: "volume_compter_fixed_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "volumes",
+    notionId: "volume_solide",
     microId: "volume_compter",
     difficulty: 2,
     theme: "neutral",
@@ -151,14 +151,14 @@ export const volumesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Le volume en cubes unités correspond ici au nombre total de petits cubes. Comme il y en a 6, le volume est 6 cubes unités.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["volumes", "compter"],
+    tags: ["volume_solide", "compter"],
   },
   {
     kind: "fixed",
     id: "volume_compter_fixed_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "volumes",
+    notionId: "volume_solide",
     microId: "volume_compter",
     difficulty: 2,
     theme: "neutral",
@@ -173,14 +173,14 @@ export const volumesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Chaque cube unité compte pour 1 unité de volume. Avec 10 cubes unités, le volume est donc 10.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["volumes", "compter"],
+    tags: ["volume_solide", "compter"],
   },
   {
     kind: "fixed",
     id: "volume_compter_fixed_3",
     niveau: "6e",
     matiere: "maths",
-    notionId: "volumes",
+    notionId: "volume_solide",
     microId: "volume_compter",
     difficulty: 3,
     theme: "neutral",
@@ -195,14 +195,14 @@ export const volumesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Il y a 2 rangées de 4 cubes. Donc le nombre total de cubes est 2 × 4 = 8. Le volume est 8 cubes unités.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["volumes", "compter"],
+    tags: ["volume_solide", "compter"],
   },
   {
     kind: "fixed",
     id: "volume_compter_qcm_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "volumes",
+    notionId: "volume_solide",
     microId: "volume_compter",
     difficulty: 2,
     theme: "neutral",
@@ -218,14 +218,14 @@ export const volumesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Le volume d’un solide construit avec des cubes unités est égal au nombre de cubes. Ici, 12 cubes donnent un volume de 12.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["volumes", "compter", "qcm"],
+    tags: ["volume_solide", "compter", "qcm"],
   },
   {
     kind: "fixed",
     id: "volume_compter_qcm_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "volumes",
+    notionId: "volume_solide",
     microId: "volume_compter",
     difficulty: 3,
     theme: "neutral",
@@ -241,7 +241,7 @@ export const volumesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Chaque couche contient 5 cubes et il y a 3 couches. On calcule donc 3 × 5 = 15. Le volume est 15 cubes unités.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["volumes", "compter", "qcm"],
+    tags: ["volume_solide", "compter", "qcm"],
   },
 
   // =========================
@@ -252,7 +252,7 @@ export const volumesBank: TutorBankItemV4[] = [
     id: "volume_comparer_fixed_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "volumes",
+    notionId: "volume_solide",
     microId: "volume_comparer",
     difficulty: 2,
     theme: "neutral",
@@ -267,14 +267,14 @@ export const volumesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Les deux volumes sont exprimés dans la même unité. Il suffit donc de comparer 8 et 12. Comme 12 est plus grand, 12 cm³ est le plus grand volume.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["volumes", "comparer"],
+    tags: ["volume_solide", "comparer"],
   },
   {
     kind: "fixed",
     id: "volume_comparer_fixed_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "volumes",
+    notionId: "volume_solide",
     microId: "volume_comparer",
     difficulty: 2,
     theme: "neutral",
@@ -289,14 +289,14 @@ export const volumesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Comme les unités sont les mêmes, on compare seulement les nombres. 9 est plus petit que 15, donc 9 cm³ est le plus petit volume.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["volumes", "comparer"],
+    tags: ["volume_solide", "comparer"],
   },
   {
     kind: "fixed",
     id: "volume_comparer_qcm_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "volumes",
+    notionId: "volume_solide",
     microId: "volume_comparer",
     difficulty: 2,
     theme: "neutral",
@@ -312,14 +312,14 @@ export const volumesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Tous les volumes sont en cm³. Le plus grand nombre proposé est 11, donc le plus grand volume est 11 cm³.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["volumes", "comparer", "qcm"],
+    tags: ["volume_solide", "comparer", "qcm"],
   },
   {
     kind: "fixed",
     id: "volume_comparer_qcm_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "volumes",
+    notionId: "volume_solide",
     microId: "volume_comparer",
     difficulty: 3,
     theme: "neutral",
@@ -335,14 +335,14 @@ export const volumesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Le volume dépend ici du nombre de cubes unités. Le solide A contient 14 cubes contre 12 pour B, donc A a le plus grand volume.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["volumes", "comparer", "qcm"],
+    tags: ["volume_solide", "comparer", "qcm"],
   },
   {
     kind: "fixed",
     id: "volume_comparer_reunion_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "volumes",
+    notionId: "volume_solide",
     microId: "volume_comparer",
     difficulty: 3,
     theme: "reunion",
@@ -357,7 +357,7 @@ export const volumesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Comme les deux volumes sont donnés en cm³, on compare 18 et 25. Le plus grand est 25, donc le bac de 25 cm³ contient le plus.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["volumes", "comparer", "reunion"],
+    tags: ["volume_solide", "comparer", "reunion"],
   },
 
   // =========================
@@ -368,7 +368,7 @@ export const volumesBank: TutorBankItemV4[] = [
     id: "volume_assemblage_fixed_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "volumes",
+    notionId: "volume_solide",
     microId: "volume_assemblage",
     difficulty: 3,
     theme: "neutral",
@@ -383,14 +383,14 @@ export const volumesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Quand on assemble deux solides sans enlever de cubes, on additionne leurs volumes. Ici 4 + 3 = 7.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["volumes", "assemblage"],
+    tags: ["volume_solide", "assemblage"],
   },
   {
     kind: "fixed",
     id: "volume_assemblage_fixed_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "volumes",
+    notionId: "volume_solide",
     microId: "volume_assemblage",
     difficulty: 3,
     theme: "neutral",
@@ -405,14 +405,14 @@ export const volumesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Le volume total est la somme des cubes des deux solides : 6 + 5 = 11.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["volumes", "assemblage"],
+    tags: ["volume_solide", "assemblage"],
   },
   {
     kind: "fixed",
     id: "volume_assemblage_qcm_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "volumes",
+    notionId: "volume_solide",
     microId: "volume_assemblage",
     difficulty: 3,
     theme: "neutral",
@@ -428,14 +428,14 @@ export const volumesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Assembler 8 cubes et 4 cubes donne un total de 12 cubes. Le volume total est donc 12.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["volumes", "assemblage", "qcm"],
+    tags: ["volume_solide", "assemblage", "qcm"],
   },
   {
     kind: "fixed",
     id: "volume_assemblage_qcm_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "volumes",
+    notionId: "volume_solide",
     microId: "volume_assemblage",
     difficulty: 4,
     theme: "neutral",
@@ -451,7 +451,7 @@ export const volumesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Couper puis réassembler ne change pas le nombre total de cubes. Comme 4 + 6 = 10, on retrouve un volume de 10.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["volumes", "assemblage", "qcm"],
+    tags: ["volume_solide", "assemblage", "qcm"],
   },
 
   // =========================
@@ -462,7 +462,7 @@ export const volumesBank: TutorBankItemV4[] = [
     id: "volume_lire_fixed_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "volumes",
+    notionId: "volume_solide",
     microId: "volume_lire",
     difficulty: 2,
     theme: "neutral",
@@ -477,14 +477,14 @@ export const volumesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Dans 18 cm³, le nombre 18 indique la quantité de volume. Le volume vaut donc 18 cm³.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["volumes", "lire"],
+    tags: ["volume_solide", "lire"],
   },
   {
     kind: "fixed",
     id: "volume_lire_fixed_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "volumes",
+    notionId: "volume_solide",
     microId: "volume_lire",
     difficulty: 2,
     theme: "neutral",
@@ -499,14 +499,14 @@ export const volumesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Un cube unité de 1 cm³ compte pour 1. Donc un volume de 24 cm³ correspond à 24 cubes unités.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["volumes", "lire"],
+    tags: ["volume_solide", "lire"],
   },
   {
     kind: "fixed",
     id: "volume_lire_qcm_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "volumes",
+    notionId: "volume_solide",
     microId: "volume_lire",
     difficulty: 2,
     theme: "neutral",
@@ -522,14 +522,14 @@ export const volumesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Dans l’écriture 9 m³, le nombre qui donne la valeur du volume est 9.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["volumes", "lire", "qcm"],
+    tags: ["volume_solide", "lire", "qcm"],
   },
   {
     kind: "fixed",
     id: "volume_lire_qcm_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "volumes",
+    notionId: "volume_solide",
     microId: "volume_lire",
     difficulty: 3,
     theme: "neutral",
@@ -545,14 +545,14 @@ export const volumesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Tous les volumes sont donnés dans la même unité. Le plus grand nombre est 14, donc le plus grand volume est 14 cm³.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["volumes", "lire", "qcm"],
+    tags: ["volume_solide", "lire", "qcm"],
   },
   {
     kind: "fixed",
     id: "volume_lire_reunion_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "volumes",
+    notionId: "volume_solide",
     microId: "volume_lire",
     difficulty: 3,
     theme: "reunion",
@@ -567,7 +567,7 @@ export const volumesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Si chaque cube unité vaut 1 cm³, alors 30 cm³ correspond à 30 cubes unités.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["volumes", "lire", "reunion"],
+    tags: ["volume_solide", "lire", "reunion"],
   },
 
   // =========================
@@ -575,11 +575,11 @@ export const volumesBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "fixed",
-    id: "volume_defis_fixed_1",
+    id: "volume_defi_fixed_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "volumes",
-    microId: "volume_defis",
+    notionId: "volume_solide",
+    microId: "volume_defi",
     difficulty: 4,
     theme: "neutral",
     text: "Pourquoi une aire ne peut-elle pas s’exprimer en cm³ ?",
@@ -593,15 +593,15 @@ export const volumesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Une aire mesure une surface, donc une grandeur en 2 dimensions : elle s’exprime en cm². Un volume mesure un espace en 3 dimensions : il s’exprime en cm³.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["volumes", "defi", "raisonnement"],
+    tags: ["volume_solide", "defi", "raisonnement"],
   },
   {
     kind: "fixed",
-    id: "volume_defis_fixed_2",
+    id: "volume_defi_fixed_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "volumes",
-    microId: "volume_defis",
+    notionId: "volume_solide",
+    microId: "volume_defi",
     difficulty: 4,
     theme: "neutral",
     text: "Explique pourquoi un solide de 12 cubes a un volume plus grand qu’un solide de 9 cubes.",
@@ -615,15 +615,15 @@ export const volumesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Le volume correspond ici au nombre de cubes unités. Comme 12 cubes est plus grand que 9 cubes, le solide de 12 cubes a le plus grand volume.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["volumes", "defi", "raisonnement"],
+    tags: ["volume_solide", "defi", "raisonnement"],
   },
   {
     kind: "fixed",
-    id: "volume_defis_fixed_3",
+    id: "volume_defi_fixed_3",
     niveau: "6e",
     matiere: "maths",
-    notionId: "volumes",
-    microId: "volume_defis",
+    notionId: "volume_solide",
+    microId: "volume_defi",
     difficulty: 5,
     theme: "neutral",
     text: "Donne un exemple de volume compris entre 10 cm³ et 15 cm³.",
@@ -637,15 +637,15 @@ export const volumesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Un nombre compris strictement entre 10 et 15 peut être 11, 12, 13 ou 14. Chacun convient comme exemple.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["volumes", "defi", "raisonnement"],
+    tags: ["volume_solide", "defi", "raisonnement"],
   },
   {
     kind: "fixed",
-    id: "volume_defis_reunion_1",
+    id: "volume_defi_reunion_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "volumes",
-    microId: "volume_defis",
+    notionId: "volume_solide",
+    microId: "volume_defi",
     difficulty: 5,
     theme: "reunion",
     text: "À La Réunion, deux bacs de 18 cm³ et 12 cm³ sont réunis. Quel volume total obtient-on ?",
@@ -659,7 +659,7 @@ export const volumesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Quand on réunit deux volumes, on les additionne. Ici 18 + 12 = 30 cm³.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["volumes", "defi", "reunion"],
+    tags: ["volume_solide", "defi", "reunion"],
   },
 
   // =========================
@@ -670,12 +670,12 @@ export const volumesBank: TutorBankItemV4[] = [
     id: "volume_unite_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "volumes",
+    notionId: "volume_solide",
     microId: "volume_unite",
     difficulty: 1,
     theme: "neutral",
     hint: "Un volume se mesure en unités cubes.",
-    tags: ["volumes", "unite", "template"],
+    tags: ["volume_solide", "unite", "template"],
     generate: () => {
       const choices = shuffle(["cm³", "cm²", "cm", "kg"]);
       return {
@@ -698,12 +698,12 @@ export const volumesBank: TutorBankItemV4[] = [
     id: "volume_unite_tpl_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "volumes",
+    notionId: "volume_solide",
     microId: "volume_unite",
     difficulty: 2,
     theme: "neutral",
     hint: "Cherche l’écriture avec l’exposant 3.",
-    tags: ["volumes", "unite", "template"],
+    tags: ["volume_solide", "unite", "template"],
     generate: () => {
       const good = ["m³", "cm³"][Math.floor(Math.random() * 2)];
       const badBase = good.startsWith("m")
@@ -733,12 +733,12 @@ export const volumesBank: TutorBankItemV4[] = [
     id: "volume_compter_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "volumes",
+    notionId: "volume_solide",
     microId: "volume_compter",
     difficulty: 2,
     theme: "neutral",
     hint: "Le volume correspond au nombre de cubes unités.",
-    tags: ["volumes", "compter", "template"],
+    tags: ["volume_solide", "compter", "template"],
     generate: () => {
       const n = randomInt(4, 15);
       return {
@@ -759,12 +759,12 @@ export const volumesBank: TutorBankItemV4[] = [
     id: "volume_compter_tpl_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "volumes",
+    notionId: "volume_solide",
     microId: "volume_compter",
     difficulty: 3,
     theme: "neutral",
     hint: "Multiplie le nombre de couches par le nombre de cubes par couche.",
-    tags: ["volumes", "compter", "template"],
+    tags: ["volume_solide", "compter", "template"],
     generate: () => {
       const a = randomInt(2, 4);
       const b = randomInt(3, 6);
@@ -788,12 +788,12 @@ export const volumesBank: TutorBankItemV4[] = [
     id: "volume_compter_qcm_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "volumes",
+    notionId: "volume_solide",
     microId: "volume_compter",
     difficulty: 3,
     theme: "neutral",
     hint: "Compte ou multiplie les cubes.",
-    tags: ["volumes", "compter", "qcm", "template"],
+    tags: ["volume_solide", "compter", "qcm", "template"],
     generate: () => {
       const a = randomInt(2, 4);
       const b = randomInt(2, 5);
@@ -826,12 +826,12 @@ export const volumesBank: TutorBankItemV4[] = [
     id: "volume_comparer_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "volumes",
+    notionId: "volume_solide",
     microId: "volume_comparer",
     difficulty: 2,
     theme: "neutral",
     hint: "Compare les deux nombres.",
-    tags: ["volumes", "comparer", "template"],
+    tags: ["volume_solide", "comparer", "template"],
     generate: () => {
       const a = randomInt(5, 20);
       let b = randomInt(5, 20);
@@ -856,12 +856,12 @@ export const volumesBank: TutorBankItemV4[] = [
     id: "volume_comparer_qcm_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "volumes",
+    notionId: "volume_solide",
     microId: "volume_comparer",
     difficulty: 3,
     theme: "neutral",
     hint: "Le plus grand nombre correspond au plus grand volume.",
-    tags: ["volumes", "comparer", "qcm", "template"],
+    tags: ["volume_solide", "comparer", "qcm", "template"],
     generate: () => {
       const values = shuffle([
         randomInt(6, 10),
@@ -894,12 +894,12 @@ export const volumesBank: TutorBankItemV4[] = [
     id: "volume_assemblage_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "volumes",
+    notionId: "volume_solide",
     microId: "volume_assemblage",
     difficulty: 3,
     theme: "neutral",
     hint: "Additionne les deux volumes.",
-    tags: ["volumes", "assemblage", "template"],
+    tags: ["volume_solide", "assemblage", "template"],
     generate: () => {
       const a = randomInt(3, 10);
       const b = randomInt(2, 8);
@@ -921,12 +921,12 @@ export const volumesBank: TutorBankItemV4[] = [
     id: "volume_assemblage_qcm_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "volumes",
+    notionId: "volume_solide",
     microId: "volume_assemblage",
     difficulty: 3,
     theme: "neutral",
     hint: "Le volume total est la somme des deux volumes.",
-    tags: ["volumes", "assemblage", "qcm", "template"],
+    tags: ["volume_solide", "assemblage", "qcm", "template"],
     generate: () => {
       const a = randomInt(4, 9);
       const b = randomInt(3, 7);
@@ -959,12 +959,12 @@ export const volumesBank: TutorBankItemV4[] = [
     id: "volume_lire_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "volumes",
+    notionId: "volume_solide",
     microId: "volume_lire",
     difficulty: 2,
     theme: "neutral",
     hint: "Lis le nombre avant l’unité.",
-    tags: ["volumes", "lire", "template"],
+    tags: ["volume_solide", "lire", "template"],
     generate: () => {
       const n = randomInt(5, 30);
       return {
@@ -985,12 +985,12 @@ export const volumesBank: TutorBankItemV4[] = [
     id: "volume_lire_qcm_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "volumes",
+    notionId: "volume_solide",
     microId: "volume_lire",
     difficulty: 3,
     theme: "neutral",
     hint: "Choisis le plus grand nombre si on demande le plus grand volume.",
-    tags: ["volumes", "lire", "qcm", "template"],
+    tags: ["volume_solide", "lire", "qcm", "template"],
     generate: () => {
       const values = shuffle([
         randomInt(6, 10),
@@ -1020,15 +1020,15 @@ export const volumesBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "template",
-    id: "volume_defis_tpl_1",
+    id: "volume_defi_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "volumes",
-    microId: "volume_defis",
+    notionId: "volume_solide",
+    microId: "volume_defi",
     difficulty: 4,
     theme: "neutral",
     hint: "Relie le volume au nombre de cubes.",
-    tags: ["volumes", "defi", "template"],
+    tags: ["volume_solide", "defi", "template"],
     generate: () => {
       const a = randomInt(8, 15);
       const b = randomInt(5, 12);
@@ -1049,15 +1049,15 @@ export const volumesBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "volume_defis_tpl_2",
+    id: "volume_defi_tpl_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "volumes",
-    microId: "volume_defis",
+    notionId: "volume_solide",
+    microId: "volume_defi",
     difficulty: 5,
     theme: "neutral",
     hint: "Choisis un nombre strictement entre les deux bornes.",
-    tags: ["volumes", "defi", "template"],
+    tags: ["volume_solide", "defi", "template"],
     generate: () => {
       const low = randomInt(8, 12);
       const high = low + randomInt(3, 6);

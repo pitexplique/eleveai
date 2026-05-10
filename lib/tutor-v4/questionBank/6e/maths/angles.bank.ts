@@ -13,7 +13,7 @@ export const anglesBank: TutorBankItemV4[] = [
     id: "angle_reconnaitre_fixed_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "angles",
+    notionId: "angle_mesure",
     microId: "angle_reconnaitre",
     difficulty: 1,
     theme: "neutral",
@@ -28,14 +28,14 @@ export const anglesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Un angle est formé par deux demi-droites qui partent du même point. Ce point commun s’appelle le sommet de l’angle.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["angles", "reconnaitre"],
+    tags: ["angle_mesure", "reconnaitre"],
   },
   {
     kind: "fixed",
     id: "angle_reconnaitre_fixed_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "angles",
+    notionId: "angle_mesure",
     microId: "angle_reconnaitre",
     difficulty: 1,
     theme: "neutral",
@@ -50,14 +50,14 @@ export const anglesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Les deux côtés d’un angle partent du même point. Ce point commun s’appelle le sommet.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["angles", "reconnaitre", "vocabulaire"],
+    tags: ["angle_mesure", "reconnaitre", "vocabulaire"],
   },
   {
     kind: "fixed",
     id: "angle_reconnaitre_qcm_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "angles",
+    notionId: "angle_mesure",
     microId: "angle_reconnaitre",
     difficulty: 2,
     theme: "neutral",
@@ -78,14 +78,14 @@ export const anglesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Un angle est formé par deux demi-droites de même origine. Leur point commun est le sommet.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["angles", "reconnaitre", "qcm"],
+    tags: ["angle_mesure", "reconnaitre", "qcm"],
   },
   {
     kind: "fixed",
     id: "angle_reconnaitre_qcm_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "angles",
+    notionId: "angle_mesure",
     microId: "angle_reconnaitre",
     difficulty: 2,
     theme: "neutral",
@@ -101,7 +101,7 @@ export const anglesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Le point commun aux deux côtés d’un angle s’appelle le sommet.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["angles", "reconnaitre", "qcm"],
+    tags: ["angle_mesure", "reconnaitre", "qcm"],
   },
 
   // =========================
@@ -112,7 +112,7 @@ export const anglesBank: TutorBankItemV4[] = [
     id: "angle_droit_fixed_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "angles",
+    notionId: "angle_mesure",
     microId: "angle_droit",
     difficulty: 1,
     theme: "neutral",
@@ -127,14 +127,14 @@ export const anglesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Un angle droit a toujours la même mesure : 90 degrés. On le retrouve par exemple dans les coins d’un carré ou d’un rectangle.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["angles", "angle_droit"],
+    tags: ["angle_mesure", "angle_droit"],
   },
   {
     kind: "fixed",
     id: "angle_droit_fixed_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "angles",
+    notionId: "angle_mesure",
     microId: "angle_droit",
     difficulty: 1,
     theme: "neutral",
@@ -149,14 +149,14 @@ export const anglesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Par définition, un angle droit mesure 90 degrés.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["angles", "angle_droit"],
+    tags: ["angle_mesure", "angle_droit"],
   },
   {
     kind: "fixed",
     id: "angle_droit_fixed_3",
     niveau: "6e",
     matiere: "maths",
-    notionId: "angles",
+    notionId: "angle_mesure",
     microId: "angle_droit",
     difficulty: 1,
     theme: "neutral",
@@ -171,14 +171,14 @@ export const anglesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Un angle droit se reconnaît à sa mesure : 90°.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["angles", "angle_droit"],
+    tags: ["angle_mesure", "angle_droit"],
   },
   {
     kind: "fixed",
     id: "angle_droit_qcm_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "angles",
+    notionId: "angle_mesure",
     microId: "angle_droit",
     difficulty: 2,
     theme: "neutral",
@@ -194,14 +194,14 @@ export const anglesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Parmi les mesures proposées, seule 90° correspond à un angle droit.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["angles", "angle_droit", "qcm"],
+    tags: ["angle_mesure", "angle_droit", "qcm"],
   },
   {
     kind: "fixed",
     id: "angle_droit_qcm_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "angles",
+    notionId: "angle_mesure",
     microId: "angle_droit",
     difficulty: 2,
     theme: "neutral",
@@ -217,14 +217,14 @@ export const anglesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Un angle droit ne mesure ni 60°, ni 120°, ni 150°. Il mesure exactement 90°.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["angles", "angle_droit", "qcm"],
+    tags: ["angle_mesure", "angle_droit", "qcm"],
   },
   {
     kind: "fixed",
     id: "angle_droit_qcm_3",
     niveau: "6e",
     matiere: "maths",
-    notionId: "angles",
+    notionId: "angle_mesure",
     microId: "angle_droit",
     difficulty: 2,
     theme: "neutral",
@@ -240,7 +240,7 @@ export const anglesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Les coins d’un rectangle sont des angles droits. Ils mesurent donc 90°.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["angles", "angle_droit", "qcm"],
+    tags: ["angle_mesure", "angle_droit", "qcm"],
   },
 
   // =========================
@@ -248,11 +248,11 @@ export const anglesBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "fixed",
-    id: "angle_compare_fixed_1",
+    id: "angle_comparer_fixed_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "angles",
-    microId: "angle_compare",
+    notionId: "angle_mesure",
+    microId: "angle_comparer",
     difficulty: 1,
     theme: "neutral",
     text: "Quel angle est le plus grand : 30° ou 80° ?",
@@ -266,15 +266,15 @@ export const anglesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Pour comparer deux angles donnés en degrés, on compare leurs mesures. Comme 80 est plus grand que 30, l’angle de 80° est le plus grand.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["angles", "comparaison"],
+    tags: ["angle_mesure", "comparaison"],
   },
   {
     kind: "fixed",
-    id: "angle_compare_fixed_2",
+    id: "angle_comparer_fixed_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "angles",
-    microId: "angle_compare",
+    notionId: "angle_mesure",
+    microId: "angle_comparer",
     difficulty: 1,
     theme: "neutral",
     text: "Quel angle est le plus petit : 120° ou 70° ?",
@@ -288,15 +288,15 @@ export const anglesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Comme 70 est plus petit que 120, l’angle de 70° est le plus petit.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["angles", "comparaison"],
+    tags: ["angle_mesure", "comparaison"],
   },
   {
     kind: "fixed",
-    id: "angle_compare_fixed_3",
+    id: "angle_comparer_fixed_3",
     niveau: "6e",
     matiere: "maths",
-    notionId: "angles",
-    microId: "angle_compare",
+    notionId: "angle_mesure",
+    microId: "angle_comparer",
     difficulty: 1,
     theme: "neutral",
     text: "Quel angle est le plus grand : 45° ou 95° ?",
@@ -310,15 +310,15 @@ export const anglesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("95° est plus grand que 45°. Donc l’angle de 95° est le plus grand.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["angles", "comparaison"],
+    tags: ["angle_mesure", "comparaison"],
   },
   {
     kind: "fixed",
-    id: "angle_compare_fixed_4",
+    id: "angle_comparer_fixed_4",
     niveau: "6e",
     matiere: "maths",
-    notionId: "angles",
-    microId: "angle_compare",
+    notionId: "angle_mesure",
+    microId: "angle_comparer",
     difficulty: 1,
     theme: "neutral",
     text: "Quel angle est le plus petit : 85° ou 55° ?",
@@ -332,15 +332,15 @@ export const anglesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Comme 55 est plus petit que 85, l’angle de 55° est le plus petit.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["angles", "comparaison"],
+    tags: ["angle_mesure", "comparaison"],
   },
   {
     kind: "fixed",
-    id: "angle_compare_fixed_5",
+    id: "angle_comparer_fixed_5",
     niveau: "6e",
     matiere: "maths",
-    notionId: "angles",
-    microId: "angle_compare",
+    notionId: "angle_mesure",
+    microId: "angle_comparer",
     difficulty: 2,
     theme: "neutral",
     text: "Un angle de 45° est-il plus petit ou plus grand qu’un angle droit ?",
@@ -354,15 +354,15 @@ export const anglesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Un angle droit mesure 90°. Comme 45° est inférieur à 90°, un angle de 45° est plus petit qu’un angle droit.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["angles", "comparaison", "angle_droit"],
+    tags: ["angle_mesure", "comparaison", "angle_droit"],
   },
   {
     kind: "fixed",
-    id: "angle_compare_fixed_6",
+    id: "angle_comparer_fixed_6",
     niveau: "6e",
     matiere: "maths",
-    notionId: "angles",
-    microId: "angle_compare",
+    notionId: "angle_mesure",
+    microId: "angle_comparer",
     difficulty: 2,
     theme: "neutral",
     text: "Un angle de 120° est-il plus petit ou plus grand qu’un angle droit ?",
@@ -376,15 +376,15 @@ export const anglesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Un angle droit mesure 90°. Comme 120° est supérieur à 90°, un angle de 120° est plus grand qu’un angle droit.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["angles", "comparaison", "angle_droit"],
+    tags: ["angle_mesure", "comparaison", "angle_droit"],
   },
   {
     kind: "fixed",
-    id: "angle_compare_qcm_1",
+    id: "angle_comparer_qcm_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "angles",
-    microId: "angle_compare",
+    notionId: "angle_mesure",
+    microId: "angle_comparer",
     difficulty: 2,
     theme: "neutral",
     text: "Quel angle est le plus grand ?",
@@ -399,15 +399,15 @@ export const anglesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Parmi 25°, 65°, 85° et 45°, la plus grande mesure est 85°.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["angles", "comparaison", "qcm"],
+    tags: ["angle_mesure", "comparaison", "qcm"],
   },
   {
     kind: "fixed",
-    id: "angle_compare_qcm_2",
+    id: "angle_comparer_qcm_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "angles",
-    microId: "angle_compare",
+    notionId: "angle_mesure",
+    microId: "angle_comparer",
     difficulty: 2,
     theme: "neutral",
     text: "Quel angle est le plus petit ?",
@@ -422,15 +422,15 @@ export const anglesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Parmi les mesures proposées, 70° est la plus petite.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["angles", "comparaison", "qcm"],
+    tags: ["angle_mesure", "comparaison", "qcm"],
   },
   {
     kind: "fixed",
-    id: "angle_compare_qcm_3",
+    id: "angle_comparer_qcm_3",
     niveau: "6e",
     matiere: "maths",
-    notionId: "angles",
-    microId: "angle_compare",
+    notionId: "angle_mesure",
+    microId: "angle_comparer",
     difficulty: 2,
     theme: "neutral",
     text: "Choisis l’angle le plus grand.",
@@ -445,15 +445,15 @@ export const anglesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("75° est plus grand que 40°, 55° et 65°. C’est donc le plus grand angle.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["angles", "comparaison", "qcm"],
+    tags: ["angle_mesure", "comparaison", "qcm"],
   },
   {
     kind: "fixed",
-    id: "angle_compare_qcm_4",
+    id: "angle_comparer_qcm_4",
     niveau: "6e",
     matiere: "maths",
-    notionId: "angles",
-    microId: "angle_compare",
+    notionId: "angle_mesure",
+    microId: "angle_comparer",
     difficulty: 2,
     theme: "neutral",
     text: "Choisis l’angle le plus petit.",
@@ -468,15 +468,15 @@ export const anglesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("25° est la plus petite des quatre mesures proposées.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["angles", "comparaison", "qcm"],
+    tags: ["angle_mesure", "comparaison", "qcm"],
   },
   {
     kind: "fixed",
-    id: "angle_compare_qcm_5",
+    id: "angle_comparer_qcm_5",
     niveau: "6e",
     matiere: "maths",
-    notionId: "angles",
-    microId: "angle_compare",
+    notionId: "angle_mesure",
+    microId: "angle_comparer",
     difficulty: 2,
     theme: "neutral",
     text: "Un angle de 60° est :",
@@ -496,15 +496,15 @@ export const anglesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Comme 60° est inférieur à 90°, cet angle est plus petit qu’un angle droit.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["angles", "comparaison", "qcm", "angle_droit"],
+    tags: ["angle_mesure", "comparaison", "qcm", "angle_droit"],
   },
   {
     kind: "fixed",
-    id: "angle_compare_qcm_6",
+    id: "angle_comparer_qcm_6",
     niveau: "6e",
     matiere: "maths",
-    notionId: "angles",
-    microId: "angle_compare",
+    notionId: "angle_mesure",
+    microId: "angle_comparer",
     difficulty: 2,
     theme: "neutral",
     text: "Un angle de 100° est :",
@@ -524,7 +524,7 @@ export const anglesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Comme 100° est supérieur à 90°, cet angle est plus grand qu’un angle droit.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["angles", "comparaison", "qcm", "angle_droit"],
+    tags: ["angle_mesure", "comparaison", "qcm", "angle_droit"],
   },
 
   // =========================
@@ -535,7 +535,7 @@ export const anglesBank: TutorBankItemV4[] = [
     id: "angle_mesurer_fixed_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "angles",
+    notionId: "angle_mesure",
     microId: "angle_mesurer",
     difficulty: 1,
     theme: "neutral",
@@ -550,14 +550,14 @@ export const anglesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Pour mesurer un angle, on utilise un rapporteur. Il est gradué en degrés.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["angles", "mesure", "instrument"],
+    tags: ["angle_mesure", "mesure", "instrument"],
   },
   {
     kind: "fixed",
     id: "angle_mesurer_fixed_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "angles",
+    notionId: "angle_mesure",
     microId: "angle_mesurer",
     difficulty: 2,
     theme: "neutral",
@@ -572,14 +572,14 @@ export const anglesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("On mesure les angles en degrés. Le symbole utilisé est °.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["angles", "mesure", "unite"],
+    tags: ["angle_mesure", "mesure", "unite"],
   },
   {
     kind: "fixed",
     id: "angle_mesurer_qcm_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "angles",
+    notionId: "angle_mesure",
     microId: "angle_mesurer",
     difficulty: 2,
     theme: "neutral",
@@ -595,14 +595,14 @@ export const anglesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("L’instrument adapté pour mesurer un angle est le rapporteur.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["angles", "mesure", "qcm"],
+    tags: ["angle_mesure", "mesure", "qcm"],
   },
   {
     kind: "fixed",
     id: "angle_mesurer_qcm_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "angles",
+    notionId: "angle_mesure",
     microId: "angle_mesurer",
     difficulty: 2,
     theme: "neutral",
@@ -618,7 +618,7 @@ export const anglesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Les angles se mesurent en degrés. Les autres unités proposées servent à mesurer autre chose.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["angles", "mesure", "qcm"],
+    tags: ["angle_mesure", "mesure", "qcm"],
   },
 
   // =========================
@@ -629,7 +629,7 @@ export const anglesBank: TutorBankItemV4[] = [
     id: "angle_tracer_fixed_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "angles",
+    notionId: "angle_mesure",
     microId: "angle_tracer",
     difficulty: 2,
     theme: "neutral",
@@ -644,14 +644,14 @@ export const anglesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Pour tracer précisément un angle de 40°, on utilise un rapporteur, car il permet de placer la bonne mesure en degrés.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["angles", "tracer", "instrument"],
+    tags: ["angle_mesure", "tracer", "instrument"],
   },
   {
     kind: "fixed",
     id: "angle_tracer_fixed_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "angles",
+    notionId: "angle_mesure",
     microId: "angle_tracer",
     difficulty: 2,
     theme: "neutral",
@@ -666,14 +666,14 @@ export const anglesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Pour tracer un angle, on commence par placer le sommet, car les deux côtés de l’angle partent de ce point.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["angles", "tracer", "vocabulaire"],
+    tags: ["angle_mesure", "tracer", "vocabulaire"],
   },
   {
     kind: "fixed",
     id: "angle_tracer_qcm_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "angles",
+    notionId: "angle_mesure",
     microId: "angle_tracer",
     difficulty: 2,
     theme: "neutral",
@@ -689,14 +689,14 @@ export const anglesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Le rapporteur est l’instrument adapté pour tracer un angle d’une mesure donnée.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["angles", "tracer", "qcm"],
+    tags: ["angle_mesure", "tracer", "qcm"],
   },
   {
     kind: "fixed",
     id: "angle_tracer_qcm_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "angles",
+    notionId: "angle_mesure",
     microId: "angle_tracer",
     difficulty: 2,
     theme: "neutral",
@@ -717,7 +717,7 @@ export const anglesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("On commence par le sommet, car c’est depuis ce point que l’on trace les deux côtés de l’angle.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["angles", "tracer", "qcm"],
+    tags: ["angle_mesure", "tracer", "qcm"],
   },
 
   // =========================
@@ -725,11 +725,11 @@ export const anglesBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "fixed",
-    id: "angle_defis_fixed_1",
+    id: "angle_defi_fixed_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "angles",
-    microId: "angle_defis",
+    notionId: "angle_mesure",
+    microId: "angle_defi",
     difficulty: 3,
     theme: "neutral",
     text: "Un angle de 90° est-il plus petit, égal ou plus grand qu’un angle droit ?",
@@ -743,15 +743,15 @@ export const anglesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Comme un angle droit mesure exactement 90°, un angle de 90° est égal à un angle droit.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["angles", "defi", "angle_droit"],
+    tags: ["angle_mesure", "defi", "angle_droit"],
   },
   {
     kind: "fixed",
-    id: "angle_defis_fixed_2",
+    id: "angle_defi_fixed_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "angles",
-    microId: "angle_defis",
+    notionId: "angle_mesure",
+    microId: "angle_defi",
     difficulty: 3,
     theme: "neutral",
     text: "Parmi 35°, 90°, 120° et 75°, quel est l’angle le plus proche d’un angle droit ?",
@@ -765,15 +765,15 @@ export const anglesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Un angle droit mesure 90°. Parmi les valeurs proposées, 90° est exactement un angle droit, donc c’est le plus proche.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["angles", "defi", "comparaison"],
+    tags: ["angle_mesure", "defi", "comparaison"],
   },
   {
     kind: "fixed",
-    id: "angle_defis_qcm_1",
+    id: "angle_defi_qcm_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "angles",
-    microId: "angle_defis",
+    notionId: "angle_mesure",
+    microId: "angle_defi",
     difficulty: 4,
     theme: "neutral",
     text: "Quel angle est plus petit qu’un angle droit ?",
@@ -788,15 +788,15 @@ export const anglesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Un angle plus petit qu’un angle droit doit mesurer moins de 90°. Parmi les choix, seul 60° convient.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["angles", "defi", "qcm"],
+    tags: ["angle_mesure", "defi", "qcm"],
   },
   {
     kind: "fixed",
-    id: "angle_defis_qcm_2",
+    id: "angle_defi_qcm_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "angles",
-    microId: "angle_defis",
+    notionId: "angle_mesure",
+    microId: "angle_defi",
     difficulty: 4,
     theme: "neutral",
     text: "Quel angle est plus grand qu’un angle droit ?",
@@ -811,15 +811,15 @@ export const anglesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Un angle plus grand qu’un angle droit mesure plus de 90°. Ici, 100° est le bon choix.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["angles", "defi", "qcm"],
+    tags: ["angle_mesure", "defi", "qcm"],
   },
   {
     kind: "fixed",
-    id: "angle_defis_qcm_3",
+    id: "angle_defi_qcm_3",
     niveau: "6e",
     matiere: "maths",
-    notionId: "angles",
-    microId: "angle_defis",
+    notionId: "angle_mesure",
+    microId: "angle_defi",
     difficulty: 4,
     theme: "reunion",
     text: "Sur une rosace observée à La Réunion, un angle mesure 90°. C’est :",
@@ -839,7 +839,7 @@ export const anglesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Un angle de 90° est exactement un angle droit.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["angles", "defi", "reunion", "qcm"],
+    tags: ["angle_mesure", "defi", "reunion", "qcm"],
   },
 
   // =========================
@@ -850,12 +850,12 @@ export const anglesBank: TutorBankItemV4[] = [
     id: "angle_reconnaitre_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "angles",
+    notionId: "angle_mesure",
     microId: "angle_reconnaitre",
     difficulty: 1,
     theme: "neutral",
     hint: "Un angle a deux côtés et un sommet.",
-    tags: ["angles", "reconnaitre", "template"],
+    tags: ["angle_mesure", "reconnaitre", "template"],
     generate: () => {
       return {
         text: "Combien de demi-droites forment un angle ?",
@@ -876,12 +876,12 @@ export const anglesBank: TutorBankItemV4[] = [
     id: "angle_reconnaitre_qcm_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "angles",
+    notionId: "angle_mesure",
     microId: "angle_reconnaitre",
     difficulty: 2,
     theme: "neutral",
     hint: "Cherche la définition correcte.",
-    tags: ["angles", "reconnaitre", "qcm", "template"],
+    tags: ["angle_mesure", "reconnaitre", "qcm", "template"],
     generate: () => {
       const choices = shuffle([
         "deux demi-droites de même origine",
@@ -914,12 +914,12 @@ export const anglesBank: TutorBankItemV4[] = [
     id: "angle_droit_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "angles",
+    notionId: "angle_mesure",
     microId: "angle_droit",
     difficulty: 1,
     theme: "neutral",
     hint: "Toujours 90°.",
-    tags: ["angles", "angle_droit", "template"],
+    tags: ["angle_mesure", "angle_droit", "template"],
     generate: () => {
       return {
         text: "Combien mesure un angle droit ?",
@@ -940,12 +940,12 @@ export const anglesBank: TutorBankItemV4[] = [
     id: "angle_droit_tpl_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "angles",
+    notionId: "angle_mesure",
     microId: "angle_droit",
     difficulty: 1,
     theme: "neutral",
     hint: "Un angle droit ne change jamais de mesure.",
-    tags: ["angles", "angle_droit", "template"],
+    tags: ["angle_mesure", "angle_droit", "template"],
     generate: () => {
       return {
         text: "Quelle est la mesure d’un angle droit ?",
@@ -966,12 +966,12 @@ export const anglesBank: TutorBankItemV4[] = [
     id: "angle_droit_qcm_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "angles",
+    notionId: "angle_mesure",
     microId: "angle_droit",
     difficulty: 2,
     theme: "neutral",
     hint: "Un angle droit mesure 90°.",
-    tags: ["angles", "angle_droit", "qcm", "template"],
+    tags: ["angle_mesure", "angle_droit", "qcm", "template"],
     generate: () => {
       const choices = shuffle(["90°", "60°", "120°", "180°"]);
       return {
@@ -994,12 +994,12 @@ export const anglesBank: TutorBankItemV4[] = [
     id: "angle_droit_qcm_tpl_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "angles",
+    notionId: "angle_mesure",
     microId: "angle_droit",
     difficulty: 2,
     theme: "neutral",
     hint: "Cherche 90°.",
-    tags: ["angles", "angle_droit", "qcm", "template"],
+    tags: ["angle_mesure", "angle_droit", "qcm", "template"],
     generate: () => {
       const choices = shuffle(["45°", "90°", "135°", "150°"]);
       return {
@@ -1023,15 +1023,15 @@ export const anglesBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "template",
-    id: "angle_compare_tpl_1",
+    id: "angle_comparer_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "angles",
-    microId: "angle_compare",
+    notionId: "angle_mesure",
+    microId: "angle_comparer",
     difficulty: 1,
     theme: "neutral",
     hint: "L’angle le plus grand a la plus grande mesure.",
-    tags: ["angles", "comparaison", "template"],
+    tags: ["angle_mesure", "comparaison", "template"],
     generate: () => {
       const values = [20, 30, 40, 50, 60, 70, 80, 90, 100, 110];
       const a = values[Math.floor(Math.random() * values.length)];
@@ -1059,15 +1059,15 @@ export const anglesBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "angle_compare_tpl_2",
+    id: "angle_comparer_tpl_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "angles",
-    microId: "angle_compare",
+    notionId: "angle_mesure",
+    microId: "angle_comparer",
     difficulty: 1,
     theme: "neutral",
     hint: "L’angle le plus petit a la plus petite mesure.",
-    tags: ["angles", "comparaison", "template"],
+    tags: ["angle_mesure", "comparaison", "template"],
     generate: () => {
       const values = [20, 30, 40, 50, 60, 70, 80, 90, 100, 110];
       const a = values[Math.floor(Math.random() * values.length)];
@@ -1095,15 +1095,15 @@ export const anglesBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "angle_compare_tpl_3",
+    id: "angle_comparer_tpl_3",
     niveau: "6e",
     matiere: "maths",
-    notionId: "angles",
-    microId: "angle_compare",
+    notionId: "angle_mesure",
+    microId: "angle_comparer",
     difficulty: 2,
     theme: "neutral",
     hint: "Compare à 90°.",
-    tags: ["angles", "comparaison", "template", "angle_droit"],
+    tags: ["angle_mesure", "comparaison", "template", "angle_droit"],
     generate: () => {
       const value = [30, 40, 50, 60, 70, 80][Math.floor(Math.random() * 6)];
 
@@ -1122,15 +1122,15 @@ export const anglesBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "angle_compare_tpl_4",
+    id: "angle_comparer_tpl_4",
     niveau: "6e",
     matiere: "maths",
-    notionId: "angles",
-    microId: "angle_compare",
+    notionId: "angle_mesure",
+    microId: "angle_comparer",
     difficulty: 2,
     theme: "neutral",
     hint: "Compare à 90°.",
-    tags: ["angles", "comparaison", "template", "angle_droit"],
+    tags: ["angle_mesure", "comparaison", "template", "angle_droit"],
     generate: () => {
       const value = [100, 110, 120, 130, 140][Math.floor(Math.random() * 5)];
 
@@ -1149,15 +1149,15 @@ export const anglesBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "angle_compare_qcm_tpl_1",
+    id: "angle_comparer_qcm_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "angles",
-    microId: "angle_compare",
+    notionId: "angle_mesure",
+    microId: "angle_comparer",
     difficulty: 2,
     theme: "neutral",
     hint: "Compare toutes les mesures proposées.",
-    tags: ["angles", "comparaison", "qcm", "template"],
+    tags: ["angle_mesure", "comparaison", "qcm", "template"],
     generate: () => {
       const values = [25, 35, 45, 55, 65, 75, 85, 95];
       const all = shuffle(values).slice(0, 4);
@@ -1180,15 +1180,15 @@ export const anglesBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "angle_compare_qcm_tpl_2",
+    id: "angle_comparer_qcm_tpl_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "angles",
-    microId: "angle_compare",
+    notionId: "angle_mesure",
+    microId: "angle_comparer",
     difficulty: 2,
     theme: "neutral",
     hint: "Cherche la plus petite mesure.",
-    tags: ["angles", "comparaison", "qcm", "template"],
+    tags: ["angle_mesure", "comparaison", "qcm", "template"],
     generate: () => {
       const values = [20, 30, 40, 50, 60, 70, 80, 90];
       const all = shuffle(values).slice(0, 4);
@@ -1211,15 +1211,15 @@ export const anglesBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "angle_compare_qcm_tpl_3",
+    id: "angle_comparer_qcm_tpl_3",
     niveau: "6e",
     matiere: "maths",
-    notionId: "angles",
-    microId: "angle_compare",
+    notionId: "angle_mesure",
+    microId: "angle_comparer",
     difficulty: 2,
     theme: "neutral",
     hint: "Tous les angles inférieurs à 90° sont plus petits qu’un angle droit.",
-    tags: ["angles", "comparaison", "qcm", "template", "angle_droit"],
+    tags: ["angle_mesure", "comparaison", "qcm", "template", "angle_droit"],
     generate: () => {
       const value = [35, 45, 55, 65, 75, 85][Math.floor(Math.random() * 6)];
 
@@ -1244,15 +1244,15 @@ export const anglesBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "angle_compare_qcm_tpl_4",
+    id: "angle_comparer_qcm_tpl_4",
     niveau: "6e",
     matiere: "maths",
-    notionId: "angles",
-    microId: "angle_compare",
+    notionId: "angle_mesure",
+    microId: "angle_comparer",
     difficulty: 2,
     theme: "neutral",
     hint: "Tous les angles supérieurs à 90° sont plus grands qu’un angle droit.",
-    tags: ["angles", "comparaison", "qcm", "template", "angle_droit"],
+    tags: ["angle_mesure", "comparaison", "qcm", "template", "angle_droit"],
     generate: () => {
       const value = [95, 105, 115, 125, 135][Math.floor(Math.random() * 5)];
 
@@ -1284,12 +1284,12 @@ export const anglesBank: TutorBankItemV4[] = [
     id: "angle_mesurer_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "angles",
+    notionId: "angle_mesure",
     microId: "angle_mesurer",
     difficulty: 1,
     theme: "neutral",
     hint: "C’est l’instrument utilisé pour lire les degrés.",
-    tags: ["angles", "mesure", "template"],
+    tags: ["angle_mesure", "mesure", "template"],
     generate: () => {
       return {
         text: "Avec quel instrument mesure-t-on un angle ?",
@@ -1310,12 +1310,12 @@ export const anglesBank: TutorBankItemV4[] = [
     id: "angle_mesurer_qcm_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "angles",
+    notionId: "angle_mesure",
     microId: "angle_mesurer",
     difficulty: 2,
     theme: "neutral",
     hint: "Cherche l’instrument gradué en degrés.",
-    tags: ["angles", "mesure", "qcm", "template"],
+    tags: ["angle_mesure", "mesure", "qcm", "template"],
     generate: () => {
       const choices = shuffle([
         "une règle",
@@ -1348,12 +1348,12 @@ export const anglesBank: TutorBankItemV4[] = [
     id: "angle_tracer_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "angles",
+    notionId: "angle_mesure",
     microId: "angle_tracer",
     difficulty: 2,
     theme: "neutral",
     hint: "On utilise l’instrument gradué en degrés.",
-    tags: ["angles", "tracer", "template"],
+    tags: ["angle_mesure", "tracer", "template"],
     generate: () => {
       const value = [30, 40, 50, 60, 70, 80, 100, 120][
         Math.floor(Math.random() * 8)
@@ -1377,12 +1377,12 @@ export const anglesBank: TutorBankItemV4[] = [
     id: "angle_tracer_qcm_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "angles",
+    notionId: "angle_mesure",
     microId: "angle_tracer",
     difficulty: 2,
     theme: "neutral",
     hint: "L’angle part d’un point commun aux deux côtés.",
-    tags: ["angles", "tracer", "qcm", "template"],
+    tags: ["angle_mesure", "tracer", "qcm", "template"],
     generate: () => {
       return {
         text: "Pour tracer un angle, on commence par :",
@@ -1410,15 +1410,15 @@ export const anglesBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "template",
-    id: "angle_defis_tpl_1",
+    id: "angle_defi_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "angles",
-    microId: "angle_defis",
+    notionId: "angle_mesure",
+    microId: "angle_defi",
     difficulty: 3,
     theme: "neutral",
     hint: "Compare à 90°.",
-    tags: ["angles", "defi", "template"],
+    tags: ["angle_mesure", "defi", "template"],
     generate: () => {
       const value = [40, 60, 75, 90, 100, 120][
         Math.floor(Math.random() * 6)
@@ -1449,15 +1449,15 @@ export const anglesBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "angle_defis_qcm_tpl_1",
+    id: "angle_defi_qcm_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "angles",
-    microId: "angle_defis",
+    notionId: "angle_mesure",
+    microId: "angle_defi",
     difficulty: 4,
     theme: "neutral",
     hint: "Cherche la mesure inférieure à 90°.",
-    tags: ["angles", "defi", "qcm", "template"],
+    tags: ["angle_mesure", "defi", "qcm", "template"],
     generate: () => {
       const choices = shuffle(["40°", "90°", "110°", "120°"]);
 

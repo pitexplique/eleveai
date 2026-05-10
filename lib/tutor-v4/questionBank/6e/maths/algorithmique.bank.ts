@@ -40,7 +40,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     id: "6e_algo_sequence_fixed_1_definition",
     niveau: "6e",
     matiere: "maths",
-    notionId: "algorithmique",
+    notionId: "algo_programmation",
     microId: "algo_sequence",
     difficulty: 1,
     theme: "neutral",
@@ -60,7 +60,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
       "Méthode : on lit les instructions de haut en bas.\n\n" +
       "Exécution : chaque instruction est réalisée après la précédente.\n\n" +
       "Conclusion : une suite d’instructions sert à organiser des actions dans un ordre précis.",
-    tags: ["algorithmique", "sequence", "definition", "qcm"],
+    tags: ["algo_programmation", "sequence", "definition", "qcm"],
   },
 
   {
@@ -68,7 +68,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     id: "6e_algo_sequence_fixed_2_ordre",
     niveau: "6e",
     matiere: "maths",
-    notionId: "algorithmique",
+    notionId: "algo_programmation",
     microId: "algo_sequence",
     difficulty: 1,
     theme: "neutral",
@@ -83,7 +83,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
       "Méthode : on exécute les blocs dans l’ordre où ils apparaissent.\n\n" +
       "Exécution : si on tourne avant d’avancer, le déplacement final peut changer.\n\n" +
       "Conclusion : oui, l’ordre des instructions est important.",
-    tags: ["algorithmique", "sequence", "ordre", "qcm"],
+    tags: ["algo_programmation", "sequence", "ordre", "qcm"],
   },
 
   {
@@ -91,7 +91,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     id: "6e_algo_sequence_fixed_3_lire_programme_simple",
     niveau: "6e",
     matiere: "maths",
-    notionId: "algorithmique",
+    notionId: "algo_programmation",
     microId: "algo_sequence",
     difficulty: 2,
     theme: "neutral",
@@ -106,7 +106,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
       "Méthode : on compte les blocs d’action après l’événement de départ.\n\n" +
       "Exécution : le programme avance, tourne, puis dit bonjour : cela fait 3 instructions.\n\n" +
       "Conclusion : 3 instructions sont exécutées.",
-    tags: ["algorithmique", "scratch", "sequence", "canvas", "qcm"],
+    tags: ["algo_programmation", "scratch", "sequence", "canvas", "qcm"],
     canvas: scratchCanvas("Programme Scratch", [
       { type: "event" },
       { type: "move", value: 10 },
@@ -120,12 +120,12 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     id: "6e_algo_sequence_tpl_1_compter_instructions",
     niveau: "6e",
     matiere: "maths",
-    notionId: "algorithmique",
+    notionId: "algo_programmation",
     microId: "algo_sequence",
     difficulty: 2,
     theme: "neutral",
     hint: "Compte les blocs d’action après le départ.",
-    tags: ["algorithmique", "sequence", "scratch", "template", "canvas"],
+    tags: ["algo_programmation", "sequence", "scratch", "template", "canvas"],
     generate: () => {
       const n = randomChoice([2, 3, 4]);
       const blocks = [
@@ -156,12 +156,12 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     id: "6e_algo_sequence_tpl_2_premiere_action",
     niveau: "6e",
     matiere: "maths",
-    notionId: "algorithmique",
+    notionId: "algo_programmation",
     microId: "algo_sequence",
     difficulty: 2,
     theme: "neutral",
     hint: "Lis le premier bloc placé sous le drapeau vert.",
-    tags: ["algorithmique", "sequence", "ordre", "template", "canvas"],
+    tags: ["algo_programmation", "sequence", "ordre", "template", "canvas"],
     generate: () => {
       const first = randomChoice([
         { label: "avancer", block: { type: "move" as const, value: 10 } },
@@ -198,7 +198,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     id: "6e_algo_sequence_open_1_expliquer_ordre",
     niveau: "6e",
     matiere: "maths",
-    notionId: "algorithmique",
+    notionId: "algo_programmation",
     microId: "algo_sequence",
     difficulty: 3,
     theme: "neutral",
@@ -212,7 +212,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
       "Méthode : on exécute les blocs dans l’ordre où ils sont écrits.\n\n" +
       "Exécution : si on inverse deux actions, le résultat peut être différent.\n\n" +
       "Conclusion : l’ordre est important car il peut changer le résultat du programme.",
-    tags: ["algorithmique", "sequence", "open", "raisonnement"],
+    tags: ["algo_programmation", "sequence", "open", "raisonnement"],
   },
 
   {
@@ -220,7 +220,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     id: "6e_algo_sequence_fixed_4_erreur_ordre",
     niveau: "6e",
     matiere: "maths",
-    notionId: "algorithmique",
+    notionId: "algo_programmation",
     microId: "algo_sequence",
     difficulty: 3,
     theme: "neutral",
@@ -235,7 +235,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
       "Méthode : on lit la pile de blocs de haut en bas.\n\n" +
       "Exécution : changer l’ordre des blocs peut changer le déplacement ou le dessin.\n\n" +
       "Conclusion : l’élève a tort.",
-    tags: ["algorithmique", "sequence", "erreur", "qcm"],
+    tags: ["algo_programmation", "sequence", "erreur", "qcm"],
   },
     /* =========================
      ALGO_DEPLACEMENT
@@ -246,7 +246,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     id: "6e_algo_deplacement_fixed_1_avancer",
     niveau: "6e",
     matiere: "maths",
-    notionId: "algorithmique",
+    notionId: "algo_programmation",
     microId: "algo_deplacement",
     difficulty: 1,
     theme: "neutral",
@@ -266,7 +266,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
       "Méthode : on distingue les blocs qui déplacent et les blocs qui tournent.\n\n" +
       "Exécution : “avancer de 10” fait avancer le lutin tout droit.\n\n" +
       "Conclusion : le lutin se déplace tout droit.",
-    tags: ["algorithmique", "deplacement", "scratch", "qcm"],
+    tags: ["algo_programmation", "deplacement", "scratch", "qcm"],
     canvas: scratchCanvas("Déplacement Scratch", [
       { type: "event" },
       { type: "move", value: 10 },
@@ -278,7 +278,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     id: "6e_algo_deplacement_fixed_2_tourner",
     niveau: "6e",
     matiere: "maths",
-    notionId: "algorithmique",
+    notionId: "algo_programmation",
     microId: "algo_deplacement",
     difficulty: 1,
     theme: "neutral",
@@ -298,7 +298,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
       "Méthode : on repère si le bloc contient un angle.\n\n" +
       "Exécution : tourner de 90° change l’orientation du lutin.\n\n" +
       "Conclusion : ce bloc sert à changer de direction.",
-    tags: ["algorithmique", "deplacement", "angle", "scratch", "qcm"],
+    tags: ["algo_programmation", "deplacement", "angle", "scratch", "qcm"],
     canvas: scratchCanvas("Tourner dans Scratch", [
       { type: "event" },
       { type: "turn", value: 90 },
@@ -310,12 +310,12 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     id: "6e_algo_deplacement_tpl_1_distance_totale",
     niveau: "6e",
     matiere: "maths",
-    notionId: "algorithmique",
+    notionId: "algo_programmation",
     microId: "algo_deplacement",
     difficulty: 2,
     theme: "neutral",
     hint: "Additionne uniquement les blocs “avancer”.",
-    tags: ["algorithmique", "deplacement", "distance", "template", "canvas"],
+    tags: ["algo_programmation", "deplacement", "distance", "template", "canvas"],
     generate: () => {
       const a = randomChoice([10, 20, 30, 40]);
       const b = randomChoice([10, 20, 30]);
@@ -346,12 +346,12 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     id: "6e_algo_deplacement_tpl_2_angle_total",
     niveau: "6e",
     matiere: "maths",
-    notionId: "algorithmique",
+    notionId: "algo_programmation",
     microId: "algo_deplacement",
     difficulty: 2,
     theme: "neutral",
     hint: "Additionne les angles des blocs “tourner”.",
-    tags: ["algorithmique", "deplacement", "angle", "template", "canvas"],
+    tags: ["algo_programmation", "deplacement", "angle", "template", "canvas"],
     generate: () => {
       const a = randomChoice([45, 60, 90]);
       const b = randomChoice([45, 90]);
@@ -382,7 +382,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     id: "6e_algo_deplacement_fixed_3_piege_avancer_tourner",
     niveau: "6e",
     matiere: "maths",
-    notionId: "algorithmique",
+    notionId: "algo_programmation",
     microId: "algo_deplacement",
     difficulty: 3,
     theme: "neutral",
@@ -397,7 +397,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
       "Méthode : on identifie si le bloc modifie la position ou l’orientation.\n\n" +
       "Exécution : tourner de 90° change seulement la direction du lutin.\n\n" +
       "Conclusion : l’élève a tort.",
-    tags: ["algorithmique", "deplacement", "erreur", "angle", "qcm"],
+    tags: ["algo_programmation", "deplacement", "erreur", "angle", "qcm"],
   },
 
   {
@@ -405,12 +405,12 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     id: "6e_algo_deplacement_tpl_3_completer_bloc",
     niveau: "6e",
     matiere: "maths",
-    notionId: "algorithmique",
+    notionId: "algo_programmation",
     microId: "algo_deplacement",
     difficulty: 3,
     theme: "neutral",
     hint: "Pour parcourir une distance, on utilise un bloc avancer.",
-    tags: ["algorithmique", "deplacement", "completer", "template", "canvas"],
+    tags: ["algo_programmation", "deplacement", "completer", "template", "canvas"],
     generate: () => {
       const distance = randomChoice([20, 30, 40, 50]);
 
@@ -437,7 +437,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     id: "6e_algo_deplacement_open_1_expliquer_difference",
     niveau: "6e",
     matiere: "maths",
-    notionId: "algorithmique",
+    notionId: "algo_programmation",
     microId: "algo_deplacement",
     difficulty: 4,
     theme: "neutral",
@@ -451,7 +451,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
       "Méthode : on regarde si le bloc parle d’une distance ou d’un angle.\n\n" +
       "Exécution : avancer fait bouger le lutin ; tourner le fait changer de direction.\n\n" +
       "Conclusion : ce sont deux instructions différentes.",
-    tags: ["algorithmique", "deplacement", "open", "raisonnement"],
+    tags: ["algo_programmation", "deplacement", "open", "raisonnement"],
   },
     /* =========================
      ALGO_REPETITION
@@ -462,7 +462,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     id: "6e_algo_repetition_fixed_1_definition",
     niveau: "6e",
     matiere: "maths",
-    notionId: "algorithmique",
+    notionId: "algo_programmation",
     microId: "algo_repetition",
     difficulty: 1,
     theme: "neutral",
@@ -482,7 +482,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
       "Méthode : on repère les blocs placés à l’intérieur de la répétition.\n\n" +
       "Exécution : si un bloc est dans “répéter 4 fois”, il est exécuté 4 fois.\n\n" +
       "Conclusion : ce bloc sert à répéter des instructions.",
-    tags: ["algorithmique", "repetition", "scratch", "qcm"],
+    tags: ["algo_programmation", "repetition", "scratch", "qcm"],
     canvas: scratchCanvas("Boucle Scratch", [
       { type: "event" },
       {
@@ -498,12 +498,12 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     id: "6e_algo_repetition_tpl_1_distance",
     niveau: "6e",
     matiere: "maths",
-    notionId: "algorithmique",
+    notionId: "algo_programmation",
     microId: "algo_repetition",
     difficulty: 2,
     theme: "neutral",
     hint: "Multiplie le nombre de répétitions par la distance avancée.",
-    tags: ["algorithmique", "repetition", "distance", "template", "canvas"],
+    tags: ["algo_programmation", "repetition", "distance", "template", "canvas"],
     generate: () => {
       const times = randomChoice([2, 3, 4, 5, 6]);
       const pas = randomChoice([10, 20, 30]);
@@ -536,12 +536,12 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     id: "6e_algo_repetition_tpl_2_nombre_actions",
     niveau: "6e",
     matiere: "maths",
-    notionId: "algorithmique",
+    notionId: "algo_programmation",
     microId: "algo_repetition",
     difficulty: 2,
     theme: "neutral",
     hint: "Chaque instruction dans la boucle est répétée le même nombre de fois.",
-    tags: ["algorithmique", "repetition", "actions", "template", "canvas"],
+    tags: ["algo_programmation", "repetition", "actions", "template", "canvas"],
     generate: () => {
       const times = randomChoice([2, 3, 4]);
       const actionsParTour = 2;
@@ -577,7 +577,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     id: "6e_algo_repetition_fixed_2_piege_une_fois",
     niveau: "6e",
     matiere: "maths",
-    notionId: "algorithmique",
+    notionId: "algo_programmation",
     microId: "algo_repetition",
     difficulty: 3,
     theme: "neutral",
@@ -592,7 +592,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
       "Méthode : on regarde le nombre écrit dans le bloc “répéter”.\n\n" +
       "Exécution : dans “répéter 5 fois”, le bloc placé dedans est exécuté 5 fois.\n\n" +
       "Conclusion : l’élève a tort.",
-    tags: ["algorithmique", "repetition", "erreur", "qcm"],
+    tags: ["algo_programmation", "repetition", "erreur", "qcm"],
     canvas: scratchCanvas("Piège de boucle", [
       { type: "event" },
       {
@@ -608,13 +608,13 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
   id: "6e_algo_repetition_tpl_3_completer_repetition",
   niveau: "6e",
   matiere: "maths",
-  notionId: "algorithmique",
+  notionId: "algo_programmation",
   microId: "algo_repetition",
   difficulty: 3,
   theme: "neutral",
   hint: "Cherche combien de fois il faut répéter le même déplacement.",
   tags: [
-    "algorithmique",
+    "algo_programmation",
     "repetition",
     "completer",
     "template",
@@ -655,12 +655,12 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     id: "6e_algo_repetition_tpl_4_angle_total",
     niveau: "6e",
     matiere: "maths",
-    notionId: "algorithmique",
+    notionId: "algo_programmation",
     microId: "algo_repetition",
     difficulty: 3,
     theme: "neutral",
     hint: "Multiplie le nombre de répétitions par l’angle tourné à chaque fois.",
-    tags: ["algorithmique", "repetition", "angle", "template", "canvas"],
+    tags: ["algo_programmation", "repetition", "angle", "template", "canvas"],
     generate: () => {
       const times = randomChoice([3, 4, 5, 6]);
       const angle = randomChoice([30, 45, 60, 90]);
@@ -696,7 +696,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     id: "6e_algo_repetition_open_1_expliquer",
     niveau: "6e",
     matiere: "maths",
-    notionId: "algorithmique",
+    notionId: "algo_programmation",
     microId: "algo_repetition",
     difficulty: 4,
     theme: "neutral",
@@ -710,7 +710,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
       "Méthode : on place à l’intérieur de la boucle les blocs à refaire.\n\n" +
       "Exécution : le programme répète ces blocs le nombre de fois indiqué.\n\n" +
       "Conclusion : une boucle rend le programme plus court et plus clair.",
-    tags: ["algorithmique", "repetition", "open", "raisonnement"],
+    tags: ["algo_programmation", "repetition", "open", "raisonnement"],
   },
     /* =========================
      ALGO_LIRE_PROGRAMME
@@ -721,7 +721,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     id: "6e_algo_lire_programme_fixed_1_ordre_execution",
     niveau: "6e",
     matiere: "maths",
-    notionId: "algorithmique",
+    notionId: "algo_programmation",
     microId: "algo_lire_programme",
     difficulty: 2,
     theme: "neutral",
@@ -736,7 +736,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
       "Méthode : on suit les blocs de haut en bas.\n\n" +
       "Exécution : après “avancer de 20”, le bloc suivant est “tourner de 90°”.\n\n" +
       "Conclusion : le lutin tourne de 90°.",
-    tags: ["algorithmique", "lire_programme", "scratch", "canvas", "qcm"],
+    tags: ["algo_programmation", "lire_programme", "scratch", "canvas", "qcm"],
     canvas: scratchCanvas("Lire un programme", [
       { type: "event" },
       { type: "move", value: 20 },
@@ -750,12 +750,12 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     id: "6e_algo_lire_programme_tpl_1_distance_totale",
     niveau: "6e",
     matiere: "maths",
-    notionId: "algorithmique",
+    notionId: "algo_programmation",
     microId: "algo_lire_programme",
     difficulty: 2,
     theme: "neutral",
     hint: "Additionne les blocs avancer, en tenant compte de la boucle.",
-    tags: ["algorithmique", "lire_programme", "distance", "boucle", "template", "canvas"],
+    tags: ["algo_programmation", "lire_programme", "distance", "boucle", "template", "canvas"],
     generate: () => {
       const debut = randomChoice([10, 20, 30]);
       const times = randomChoice([2, 3, 4]);
@@ -790,12 +790,12 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     id: "6e_algo_lire_programme_tpl_2_nombre_blocs_executés",
     niveau: "6e",
     matiere: "maths",
-    notionId: "algorithmique",
+    notionId: "algo_programmation",
     microId: "algo_lire_programme",
     difficulty: 3,
     theme: "neutral",
     hint: "Les blocs dans la boucle comptent plusieurs fois.",
-    tags: ["algorithmique", "lire_programme", "repetition", "template", "canvas"],
+    tags: ["algo_programmation", "lire_programme", "repetition", "template", "canvas"],
     generate: () => {
       const times = randomChoice([2, 3, 4, 5]);
       const total = 1 + times * 2 + 1;
@@ -832,12 +832,12 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     id: "6e_algo_lire_programme_tpl_3_qcm_resultat",
     niveau: "6e",
     matiere: "maths",
-    notionId: "algorithmique",
+    notionId: "algo_programmation",
     microId: "algo_lire_programme",
     difficulty: 3,
     theme: "neutral",
     hint: "Calcule d’abord la distance dans la boucle.",
-    tags: ["algorithmique", "lire_programme", "qcm", "template", "canvas"],
+    tags: ["algo_programmation", "lire_programme", "qcm", "template", "canvas"],
     generate: () => {
       const times = randomChoice([3, 4, 5]);
       const pas = randomChoice([10, 20]);
@@ -876,7 +876,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     id: "6e_algo_lire_programme_fixed_2_piege_boucle",
     niveau: "6e",
     matiere: "maths",
-    notionId: "algorithmique",
+    notionId: "algo_programmation",
     microId: "algo_lire_programme",
     difficulty: 3,
     theme: "neutral",
@@ -891,7 +891,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
       "Méthode : on multiplie la distance par le nombre de répétitions.\n\n" +
       "Exécution : avancer de 10 est répété 4 fois, donc 4 × 10 = 40.\n\n" +
       "Conclusion : l’élève a tort, le lutin avance de 40 pas.",
-    tags: ["algorithmique", "lire_programme", "erreur", "boucle", "qcm"],
+    tags: ["algo_programmation", "lire_programme", "erreur", "boucle", "qcm"],
     canvas: scratchCanvas("Attention à la boucle", [
       { type: "event" },
       {
@@ -907,7 +907,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     id: "6e_algo_lire_programme_open_1_methode",
     niveau: "6e",
     matiere: "maths",
-    notionId: "algorithmique",
+    notionId: "algo_programmation",
     microId: "algo_lire_programme",
     difficulty: 4,
     theme: "neutral",
@@ -921,7 +921,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
       "Méthode : on lit les blocs de haut en bas, puis on répète mentalement les blocs dans la boucle.\n\n" +
       "Exécution : si une boucle répète 4 fois deux blocs, ces deux blocs sont exécutés 4 fois chacun.\n\n" +
       "Conclusion : il faut tenir compte de l’ordre et des répétitions.",
-    tags: ["algorithmique", "lire_programme", "open", "methode"],
+    tags: ["algo_programmation", "lire_programme", "open", "methode"],
   },
     /* =========================
      ALGO_FIGURES
@@ -929,11 +929,11 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "6e_algo_figures_fixed_1_carre",
+    id: "6e_algo_figure_fixed_1_carre",
     niveau: "6e",
     matiere: "maths",
-    notionId: "algorithmique",
-    microId: "algo_figures",
+    notionId: "algo_programmation",
+    microId: "algo_figure",
     difficulty: 2,
     theme: "neutral",
     text: "Ce programme permet de tracer quelle figure ?",
@@ -947,7 +947,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
       "Méthode : on observe le nombre de répétitions et l’angle de rotation.\n\n" +
       "Exécution : le lutin avance puis tourne de 90°, et cela est répété 4 fois.\n\n" +
       "Conclusion : le programme trace un carré.",
-    tags: ["algorithmique", "figures", "carre", "scratch", "canvas"],
+    tags: ["algo_programmation", "figures", "carre", "scratch", "canvas"],
     canvas: scratchCanvas("Tracer un carré", [
       { type: "event" },
       { type: "pen", text: "stylo en position d’écriture" },
@@ -964,11 +964,11 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "6e_algo_figures_fixed_2_rectangle",
+    id: "6e_algo_figure_fixed_2_rectangle",
     niveau: "6e",
     matiere: "maths",
-    notionId: "algorithmique",
-    microId: "algo_figures",
+    notionId: "algo_programmation",
+    microId: "algo_figure",
     difficulty: 2,
     theme: "neutral",
     text: "Ce programme alterne avancer de 80 puis avancer de 40, avec des rotations de 90°. Quelle figure peut-il tracer ?",
@@ -982,7 +982,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
       "Méthode : on lit les déplacements et les rotations.\n\n" +
       "Exécution : le programme alterne deux longueurs et tourne toujours de 90°.\n\n" +
       "Conclusion : il peut tracer un rectangle.",
-    tags: ["algorithmique", "figures", "rectangle", "scratch", "canvas"],
+    tags: ["algo_programmation", "figures", "rectangle", "scratch", "canvas"],
     canvas: scratchCanvas("Tracer un rectangle", [
       { type: "event" },
       { type: "pen", text: "stylo en position d’écriture" },
@@ -999,15 +999,15 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "6e_algo_figures_tpl_1_carre_cote",
+    id: "6e_algo_figure_tpl_1_carre_cote",
     niveau: "6e",
     matiere: "maths",
-    notionId: "algorithmique",
-    microId: "algo_figures",
+    notionId: "algo_programmation",
+    microId: "algo_figure",
     difficulty: 3,
     theme: "neutral",
     hint: "Dans un carré, les 4 côtés ont la même longueur.",
-    tags: ["algorithmique", "figures", "carre", "template", "canvas"],
+    tags: ["algo_programmation", "figures", "carre", "template", "canvas"],
     generate: () => {
       const cote = randomChoice([20, 30, 40, 50, 60]);
 
@@ -1039,15 +1039,15 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "6e_algo_figures_tpl_2_perimetre_carre",
+    id: "6e_algo_figure_tpl_2_perimetre_carre",
     niveau: "6e",
     matiere: "maths",
-    notionId: "algorithmique",
-    microId: "algo_figures",
+    notionId: "algo_programmation",
+    microId: "algo_figure",
     difficulty: 3,
     theme: "neutral",
     hint: "Le périmètre d’un carré vaut 4 × côté.",
-    tags: ["algorithmique", "figures", "carre", "perimetre", "template", "canvas"],
+    tags: ["algo_programmation", "figures", "carre", "perimetre", "template", "canvas"],
     generate: () => {
       const cote = randomChoice([10, 20, 25, 30, 40]);
       const perimetre = 4 * cote;
@@ -1080,15 +1080,15 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "6e_algo_figures_tpl_3_triangle_equilateral",
+    id: "6e_algo_figure_tpl_3_triangle_equilateral",
     niveau: "6e",
     matiere: "maths",
-    notionId: "algorithmique",
-    microId: "algo_figures",
+    notionId: "algo_programmation",
+    microId: "algo_figure",
     difficulty: 4,
     theme: "neutral",
     hint: "Un triangle équilatéral a 3 côtés. Dans ce programme, on répète 3 fois.",
-    tags: ["algorithmique", "figures", "triangle", "template", "canvas"],
+    tags: ["algo_programmation", "figures", "triangle", "template", "canvas"],
     generate: () => {
       const cote = randomChoice([30, 40, 50, 60]);
 
@@ -1121,11 +1121,11 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "6e_algo_figures_fixed_3_piege_carre_angle",
+    id: "6e_algo_figure_fixed_3_piege_carre_angle",
     niveau: "6e",
     matiere: "maths",
-    notionId: "algorithmique",
-    microId: "algo_figures",
+    notionId: "algo_programmation",
+    microId: "algo_figure",
     difficulty: 4,
     theme: "neutral",
     text: "Un élève veut tracer un carré. Il répète 4 fois : avancer de 50 puis tourner de 60°. Son programme est-il correct ?",
@@ -1139,7 +1139,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
       "Méthode : pour tracer un carré avec Scratch, on répète 4 côtés et on tourne de 90°.\n\n" +
       "Exécution : tourner de 60° ne correspond pas à l’angle nécessaire pour fermer un carré.\n\n" +
       "Conclusion : le programme n’est pas correct.",
-    tags: ["algorithmique", "figures", "carre", "erreur", "qcm"],
+    tags: ["algo_programmation", "figures", "carre", "erreur", "qcm"],
     canvas: scratchCanvas("Erreur de carré", [
       { type: "event" },
       { type: "pen", text: "stylo en position d’écriture" },
@@ -1156,11 +1156,11 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "6e_algo_figures_open_1_methode_carre",
+    id: "6e_algo_figure_open_1_methode_carre",
     niveau: "6e",
     matiere: "maths",
-    notionId: "algorithmique",
-    microId: "algo_figures",
+    notionId: "algo_programmation",
+    microId: "algo_figure",
     difficulty: 4,
     theme: "neutral",
     text: "Explique comment programmer le tracé d’un carré dans Scratch.",
@@ -1173,7 +1173,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
       "Méthode : on utilise une boucle pour répéter les mêmes actions.\n\n" +
       "Exécution : on répète 4 fois : avancer, puis tourner de 90°.\n\n" +
       "Conclusion : une bonne méthode est : répéter 4 fois avancer puis tourner de 90°.",
-    tags: ["algorithmique", "figures", "carre", "open", "methode"],
+    tags: ["algo_programmation", "figures", "carre", "open", "methode"],
   },
     /* =========================
      ALGO_DEFIS
@@ -1181,11 +1181,11 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "6e_algo_defis_fixed_1_carre_erreur_repetition",
+    id: "6e_algo_defi_fixed_1_carre_erreur_repetition",
     niveau: "6e",
     matiere: "maths",
-    notionId: "algorithmique",
-    microId: "algo_defis",
+    notionId: "algo_programmation",
+    microId: "algo_defi",
     difficulty: 4,
     theme: "neutral",
     text: "Un élève veut tracer un carré, mais il répète seulement 3 fois : avancer puis tourner de 90°. Son programme est-il correct ?",
@@ -1199,7 +1199,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
       "Méthode : pour tracer un carré, on doit répéter 4 fois le déplacement et la rotation.\n\n" +
       "Exécution : ici, le programme ne répète que 3 fois, donc il trace seulement 3 côtés.\n\n" +
       "Conclusion : le programme n’est pas correct.",
-    tags: ["algorithmique", "defi", "carre", "erreur", "qcm"],
+    tags: ["algo_programmation", "defi", "carre", "erreur", "qcm"],
     canvas: scratchCanvas("Défi : carré incomplet", [
       { type: "event" },
       { type: "pen", text: "stylo en position d’écriture" },
@@ -1216,15 +1216,15 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "6e_algo_defis_tpl_1_perimetre_rectangle",
+    id: "6e_algo_defi_tpl_1_perimetre_rectangle",
     niveau: "6e",
     matiere: "maths",
-    notionId: "algorithmique",
-    microId: "algo_defis",
+    notionId: "algo_programmation",
+    microId: "algo_defi",
     difficulty: 4,
     theme: "neutral",
     hint: "Additionne les 4 déplacements.",
-    tags: ["algorithmique", "defi", "rectangle", "perimetre", "template", "canvas"],
+    tags: ["algo_programmation", "defi", "rectangle", "perimetre", "template", "canvas"],
     generate: () => {
       const longueur = randomChoice([60, 80, 100]);
       const largeur = randomChoice([20, 30, 40]);
@@ -1258,16 +1258,16 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
 
 {
   kind: "template",
-  id: "6e_algo_defis_tpl_2_boucle_optimisee",
+  id: "6e_algo_defi_tpl_2_boucle_optimisee",
   niveau: "6e",
   matiere: "maths",
-  notionId: "algorithmique",
-  microId: "algo_defis",
+  notionId: "algo_programmation",
+  microId: "algo_defi",
   difficulty: 4,
   theme: "neutral",
   hint: "Cherche le nombre de côtés identiques à tracer.",
   tags: [
-    "algorithmique",
+    "algo_programmation",
     "defi",
     "boucle",
     "optimisation",
@@ -1306,15 +1306,15 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "6e_algo_defis_tpl_3_reunion_margouillat",
+    id: "6e_algo_defi_tpl_3_reunion_margouillat",
     niveau: "6e",
     matiere: "maths",
-    notionId: "algorithmique",
-    microId: "algo_defis",
+    notionId: "algo_programmation",
+    microId: "algo_defi",
     difficulty: 5,
     theme: "reunion",
     hint: "Le margouillat répète plusieurs déplacements identiques.",
-    tags: ["algorithmique", "defi", "reunion", "margouillat", "template", "canvas"],
+    tags: ["algo_programmation", "defi", "reunion", "margouillat", "template", "canvas"],
     generate: () => {
       const times = randomChoice([4, 5, 6]);
       const pas = randomChoice([10, 15, 20]);
@@ -1347,11 +1347,11 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "6e_algo_defis_fixed_2_triangle_piege_angle",
+    id: "6e_algo_defi_fixed_2_triangle_piege_angle",
     niveau: "6e",
     matiere: "maths",
-    notionId: "algorithmique",
-    microId: "algo_defis",
+    notionId: "algo_programmation",
+    microId: "algo_defi",
     difficulty: 5,
     theme: "neutral",
     text: "Un programme répète 3 fois : avancer de 50 puis tourner de 90°. Trace-t-il un triangle équilatéral ?",
@@ -1365,7 +1365,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
       "Méthode : pour le tracer avec Scratch, on répète 3 fois et on tourne de 120°.\n\n" +
       "Exécution : ici, la rotation est de 90°, donc ce n’est pas le bon programme.\n\n" +
       "Conclusion : il ne trace pas un triangle équilatéral.",
-    tags: ["algorithmique", "defi", "triangle", "erreur", "angle", "qcm"],
+    tags: ["algo_programmation", "defi", "triangle", "erreur", "angle", "qcm"],
     canvas: scratchCanvas("Défi triangle", [
       { type: "event" },
       { type: "pen", text: "stylo en position d’écriture" },
@@ -1382,11 +1382,11 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "6e_algo_defis_open_1_corriger_programme",
+    id: "6e_algo_defi_open_1_corriger_programme",
     niveau: "6e",
     matiere: "maths",
-    notionId: "algorithmique",
-    microId: "algo_defis",
+    notionId: "algo_programmation",
+    microId: "algo_defi",
     difficulty: 5,
     theme: "neutral",
     text:
@@ -1400,6 +1400,6 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
       "Méthode : on vérifie que la boucle correspond au nombre de côtés.\n\n" +
       "Exécution : si le programme répète seulement 3 fois, il manque un côté.\n\n" +
       "Conclusion : il faut remplacer “répéter 3 fois” par “répéter 4 fois”.",
-    tags: ["algorithmique", "defi", "open", "correction", "carre"],
+    tags: ["algo_programmation", "defi", "open", "correction", "carre"],
   },
 ];

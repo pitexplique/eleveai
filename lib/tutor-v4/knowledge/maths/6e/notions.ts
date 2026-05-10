@@ -10,14 +10,14 @@ export const notions: NotionSource[] = [
   // =========================
 
 {
-  id: "algorithmique",
+  id: "algo_programmation",
   label: "Algorithmique et programmation",
   boId: "BO6I1",
-  prerequis: ["calcul_mental"],
+  prerequis: ["entier_calcul_mental"],
   levels: [1, 2, 3],
 },
   {
-    id: "nombres_entiers",
+    id: "entier_nombre",
     label: "Nombres entiers",
     boId: "BO6N1",
     prerequis: [],
@@ -25,47 +25,47 @@ export const notions: NotionSource[] = [
   },
 
   {
-    id: "decimaux",
+    id: "decimal_nombre",
     label: "Nombres décimaux",
     boId: "BO6N1",
-    prerequis: ["nombres_entiers"],
+    prerequis: ["entier_nombre"],
     levels: [1, 2, 3],
   },
 
   {
-    id: "fractions",
+    id: "fraction_nombre",
     label: "Fractions",
     boId: "BO6N2",
-    prerequis: ["decimaux"],
+    prerequis: ["decimal_nombre"],
     levels: [1, 2, 3],
   },
 
   {
-    id: "pourcentages",
+    id: "pourcentage_nombre",
     label: "Pourcentages",
     boId: "BO6N2",
-    prerequis: ["fractions"],
+    prerequis: ["fraction_nombre"],
     levels: [1, 2, 3],
   },
 
   {
-    id: "proportionnalite",
+    id: "prop_proportionnalite",
     label: "Proportionnalité",
     boId: "BO6N3",
-    prerequis: ["pourcentages"],
+    prerequis: ["pourcentage_nombre"],
     levels: [1, 2, 3],
   },
 
   {
-    id: "calcul_pose",
+    id: "entier_calcul_pose",
     label: "Calcul posé",
     boId: "BO6N4",
-    prerequis: ["nombres_entiers"],
+    prerequis: ["entier_nombre"],
     levels: [1, 2, 3],
   },
 
   {
-    id: "calcul_mental",
+    id: "entier_calcul_mental",
     label: "Calcul mental",
     boId: "BO6N4",
     prerequis: [],
@@ -73,7 +73,7 @@ export const notions: NotionSource[] = [
   },
 
   {
-    id: "longueurs",
+    id: "aire_longueur",
     label: "Longueurs",
     boId: "BO6G1",
     prerequis: [],
@@ -81,31 +81,31 @@ export const notions: NotionSource[] = [
   },
 
   {
-    id: "perimetres",
+    id: "aire_perimetre",
     label: "Périmètres",
     boId: "BO6G1",
-    prerequis: ["longueurs"],
+    prerequis: ["aire_longueur"],
     levels: [1, 2],
   },
 
   {
-    id: "aires",
+    id: "aire_surface",
     label: "Aires",
     boId: "BO6G1",
-    prerequis: ["perimetres"],
+    prerequis: ["aire_perimetre"],
     levels: [1, 2],
   },
 
   {
-    id: "volumes",
+    id: "volume_solide",
     label: "Volumes",
     boId: "BO6G1",
-    prerequis: ["aires"],
+    prerequis: ["aire_surface"],
     levels: [1, 2],
   },
 
   {
-    id: "angles",
+    id: "angle_mesure",
     label: "Angles",
     boId: "BO6G2",
     prerequis: [],
@@ -113,31 +113,31 @@ export const notions: NotionSource[] = [
   },
 
   {
-    id: "triangles",
+    id: "triangle_figure",
     label: "Triangles",
     boId: "BO6G3",
-    prerequis: ["angles"],
+    prerequis: ["angle_mesure"],
     levels: [1, 2, 3],
   },
 
   {
-    id: "quadrilateres",
+    id: "quadrilatere_figure",
     label: "Quadrilatères",
     boId: "BO6G4",
-    prerequis: ["angles"],
+    prerequis: ["angle_mesure"],
     levels: [1, 2, 3],
   },
 
   {
-    id: "symetrie",
+    id: "sym_axiale",
     label: "Symétrie axiale",
     boId: "BO6G4",
-    prerequis: ["angles"],
+    prerequis: ["angle_mesure"],
     levels: [1, 2],
   },
 
   {
-    id: "donnees",
+    id: "stat_donnee",
     label: "Données",
     boId: "BO6D1",
     prerequis: [],
@@ -145,10 +145,10 @@ export const notions: NotionSource[] = [
   },
 
   {
-    id: "probabilites",
+    id: "proba_experience",
     label: "Probabilités",
     boId: "BO6P1",
-    prerequis: ["donnees"],
+    prerequis: ["stat_donnee"],
     levels: [1, 2],
   },
 

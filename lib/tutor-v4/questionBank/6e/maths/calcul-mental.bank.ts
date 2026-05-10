@@ -14,11 +14,11 @@ export const calculMentalBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "fixed",
-    id: "mental_addition_fixed_1",
+    id: "entier_addition_mentale_fixed_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "calcul_mental",
-    microId: "mental_addition",
+    notionId: "entier_calcul_mental",
+    microId: "entier_addition_mentale",
     difficulty: 1,
     theme: "neutral",
     text: "Calcule : 68 + 7",
@@ -32,15 +32,15 @@ export const calculMentalBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("On peut passer par la dizaine : 68 + 2 = 70, puis il reste 5 à ajouter. Donc 68 + 7 = 75.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["calcul_mental", "addition"],
+    tags: ["entier_calcul_mental", "addition"],
   },
   {
     kind: "fixed",
-    id: "mental_addition_fixed_2",
+    id: "entier_addition_mentale_fixed_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "calcul_mental",
-    microId: "mental_addition",
+    notionId: "entier_calcul_mental",
+    microId: "entier_addition_mentale",
     difficulty: 2,
     theme: "neutral",
     text: "Calcule : 134 + 28",
@@ -54,15 +54,15 @@ export const calculMentalBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("On ajoute d’abord 20 : 134 + 20 = 154. Puis on ajoute 8 : 154 + 8 = 162. Donc 134 + 28 = 162.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["calcul_mental", "addition"],
+    tags: ["entier_calcul_mental", "addition"],
   },
   {
     kind: "fixed",
-    id: "mental_addition_fixed_3",
+    id: "entier_addition_mentale_fixed_3",
     niveau: "6e",
     matiere: "maths",
-    notionId: "calcul_mental",
-    microId: "mental_addition",
+    notionId: "entier_calcul_mental",
+    microId: "entier_addition_mentale",
     difficulty: 1,
     theme: "neutral",
     text: "Calcule : 56 + 8",
@@ -76,15 +76,15 @@ export const calculMentalBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("On peut compléter jusqu’à la dizaine : 56 + 4 = 60, puis on ajoute encore 4. Donc 56 + 8 = 64.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["calcul_mental", "addition"],
+    tags: ["entier_calcul_mental", "addition"],
   },
   {
     kind: "fixed",
-    id: "mental_addition_qcm_1",
+    id: "entier_addition_mentale_qcm_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "calcul_mental",
-    microId: "mental_addition",
+    notionId: "entier_calcul_mental",
+    microId: "entier_addition_mentale",
     difficulty: 1,
     theme: "neutral",
     text: "Quel est le résultat de 45 + 8 ?",
@@ -99,7 +99,7 @@ export const calculMentalBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("On peut passer par 50 : 45 + 5 = 50, puis il reste 3 à ajouter. Donc 45 + 8 = 53.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["calcul_mental", "addition", "qcm"],
+    tags: ["entier_calcul_mental", "addition", "qcm"],
   },
 
   // =========================
@@ -107,11 +107,11 @@ export const calculMentalBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "fixed",
-    id: "mental_subtraction_fixed_1",
+    id: "entier_soustraction_mentale_fixed_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "calcul_mental",
-    microId: "mental_subtraction",
+    notionId: "entier_calcul_mental",
+    microId: "entier_soustraction_mentale",
     difficulty: 1,
     theme: "neutral",
     text: "Calcule : 183 - 6",
@@ -125,15 +125,15 @@ export const calculMentalBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("On enlève 3 pour arriver à 180, puis encore 3. Donc 183 - 6 = 177.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["calcul_mental", "soustraction"],
+    tags: ["entier_calcul_mental", "soustraction"],
   },
   {
     kind: "fixed",
-    id: "mental_subtraction_fixed_2",
+    id: "entier_soustraction_mentale_fixed_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "calcul_mental",
-    microId: "mental_subtraction",
+    notionId: "entier_calcul_mental",
+    microId: "entier_soustraction_mentale",
     difficulty: 2,
     theme: "neutral",
     text: "Calcule : 96 - 27",
@@ -147,15 +147,15 @@ export const calculMentalBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("On enlève d’abord 20 : 96 - 20 = 76. Puis on enlève 7 : 76 - 7 = 69. Donc 96 - 27 = 69.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["calcul_mental", "soustraction"],
+    tags: ["entier_calcul_mental", "soustraction"],
   },
   {
     kind: "fixed",
-    id: "mental_subtraction_fixed_3",
+    id: "entier_soustraction_mentale_fixed_3",
     niveau: "6e",
     matiere: "maths",
-    notionId: "calcul_mental",
-    microId: "mental_subtraction",
+    notionId: "entier_calcul_mental",
+    microId: "entier_soustraction_mentale",
     difficulty: 2,
     theme: "neutral",
     text: "Calcule : 121 - 38",
@@ -169,15 +169,15 @@ export const calculMentalBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("On peut enlever 40 au lieu de 38 : 121 - 40 = 81. Comme on a enlevé 2 de trop, on ajoute 2. Donc 121 - 38 = 83.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["calcul_mental", "soustraction"],
+    tags: ["entier_calcul_mental", "soustraction"],
   },
   {
     kind: "fixed",
-    id: "mental_subtraction_qcm_1",
+    id: "entier_soustraction_mentale_qcm_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "calcul_mental",
-    microId: "mental_subtraction",
+    notionId: "entier_calcul_mental",
+    microId: "entier_soustraction_mentale",
     difficulty: 1,
     theme: "neutral",
     text: "Quel est le résultat de 72 - 8 ?",
@@ -192,7 +192,7 @@ export const calculMentalBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("On peut passer par la dizaine : 72 - 2 = 70, puis on enlève encore 6. Donc 72 - 8 = 64.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["calcul_mental", "soustraction", "qcm"],
+    tags: ["entier_calcul_mental", "soustraction", "qcm"],
   },
 
   // =========================
@@ -200,11 +200,11 @@ export const calculMentalBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "fixed",
-    id: "mental_multiplication_fixed_1",
+    id: "entier_multiplication_mentale_fixed_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "calcul_mental",
-    microId: "mental_multiplication",
+    notionId: "entier_calcul_mental",
+    microId: "entier_multiplication_mentale",
     difficulty: 1,
     theme: "neutral",
     text: "Calcule : 8 × 7",
@@ -218,15 +218,15 @@ export const calculMentalBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Dans la table de 8, 8 × 7 = 56. Donc le résultat est 56.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["calcul_mental", "multiplication"],
+    tags: ["entier_calcul_mental", "multiplication"],
   },
   {
     kind: "fixed",
-    id: "mental_multiplication_fixed_2",
+    id: "entier_multiplication_mentale_fixed_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "calcul_mental",
-    microId: "mental_multiplication",
+    notionId: "entier_calcul_mental",
+    microId: "entier_multiplication_mentale",
     difficulty: 2,
     theme: "neutral",
     text: "Calcule : 18 × 5",
@@ -240,15 +240,15 @@ export const calculMentalBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Multiplier par 5 revient à multiplier par 10 puis à prendre la moitié. 18 × 10 = 180, et la moitié de 180 est 90. Donc 18 × 5 = 90.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["calcul_mental", "multiplication"],
+    tags: ["entier_calcul_mental", "multiplication"],
   },
   {
     kind: "fixed",
-    id: "mental_multiplication_fixed_3",
+    id: "entier_multiplication_mentale_fixed_3",
     niveau: "6e",
     matiere: "maths",
-    notionId: "calcul_mental",
-    microId: "mental_multiplication",
+    notionId: "entier_calcul_mental",
+    microId: "entier_multiplication_mentale",
     difficulty: 1,
     theme: "neutral",
     text: "Calcule : 11 × 9",
@@ -262,15 +262,15 @@ export const calculMentalBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("11 × 9 = 99. On peut aussi voir que 10 × 9 = 90 puis ajouter encore 9, ce qui donne 99.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["calcul_mental", "multiplication"],
+    tags: ["entier_calcul_mental", "multiplication"],
   },
   {
     kind: "fixed",
-    id: "mental_multiplication_qcm_1",
+    id: "entier_multiplication_mentale_qcm_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "calcul_mental",
-    microId: "mental_multiplication",
+    notionId: "entier_calcul_mental",
+    microId: "entier_multiplication_mentale",
     difficulty: 1,
     theme: "neutral",
     text: "Quel est le résultat de 6 × 8 ?",
@@ -285,7 +285,7 @@ export const calculMentalBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Dans les tables, 6 × 8 = 48. La bonne réponse est donc 48.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["calcul_mental", "multiplication", "qcm"],
+    tags: ["entier_calcul_mental", "multiplication", "qcm"],
   },
 
   // =========================
@@ -293,11 +293,11 @@ export const calculMentalBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "fixed",
-    id: "mental_division_fixed_1",
+    id: "entier_division_mentale_fixed_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "calcul_mental",
-    microId: "mental_division",
+    notionId: "entier_calcul_mental",
+    microId: "entier_division_mentale",
     difficulty: 1,
     theme: "neutral",
     text: "Calcule : 645 ÷ 10",
@@ -311,15 +311,15 @@ export const calculMentalBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Quand on divise par 10, chaque chiffre prend une place dix fois plus petite. Ainsi 645 ÷ 10 = 64,5.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["calcul_mental", "division"],
+    tags: ["entier_calcul_mental", "division"],
   },
   {
     kind: "fixed",
-    id: "mental_division_fixed_2",
+    id: "entier_division_mentale_fixed_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "calcul_mental",
-    microId: "mental_division",
+    notionId: "entier_calcul_mental",
+    microId: "entier_division_mentale",
     difficulty: 1,
     theme: "neutral",
     text: "Calcule : 63 ÷ 9",
@@ -333,15 +333,15 @@ export const calculMentalBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("On cherche combien de fois 9 est contenu dans 63. Comme 9 × 7 = 63, on a 63 ÷ 9 = 7.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["calcul_mental", "division"],
+    tags: ["entier_calcul_mental", "division"],
   },
   {
     kind: "fixed",
-    id: "mental_division_fixed_3",
+    id: "entier_division_mentale_fixed_3",
     niveau: "6e",
     matiere: "maths",
-    notionId: "calcul_mental",
-    microId: "mental_division",
+    notionId: "entier_calcul_mental",
+    microId: "entier_division_mentale",
     difficulty: 1,
     theme: "neutral",
     text: "Calcule : 56 ÷ 8",
@@ -355,15 +355,15 @@ export const calculMentalBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Comme 8 × 7 = 56, alors 56 ÷ 8 = 7.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["calcul_mental", "division"],
+    tags: ["entier_calcul_mental", "division"],
   },
   {
     kind: "fixed",
-    id: "mental_division_qcm_1",
+    id: "entier_division_mentale_qcm_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "calcul_mental",
-    microId: "mental_division",
+    notionId: "entier_calcul_mental",
+    microId: "entier_division_mentale",
     difficulty: 1,
     theme: "neutral",
     text: "Quel est le résultat de 45 ÷ 5 ?",
@@ -378,7 +378,7 @@ export const calculMentalBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("On cherche le nombre qui multiplié par 5 donne 45. Comme 5 × 9 = 45, alors 45 ÷ 5 = 9.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["calcul_mental", "division", "qcm"],
+    tags: ["entier_calcul_mental", "division", "qcm"],
   },
 
   // =========================
@@ -386,11 +386,11 @@ export const calculMentalBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "fixed",
-    id: "mental_strategies_fixed_1",
+    id: "entier_strategie_mentale_fixed_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "calcul_mental",
-    microId: "mental_strategies",
+    notionId: "entier_calcul_mental",
+    microId: "entier_strategie_mentale",
     difficulty: 1,
     theme: "neutral",
     text: "Donne le quart de 28.",
@@ -404,15 +404,15 @@ export const calculMentalBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Prendre le quart d’un nombre, c’est le diviser par 4. Donc 28 ÷ 4 = 7. Le quart de 28 est 7.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["calcul_mental", "strategie"],
+    tags: ["entier_calcul_mental", "strategie"],
   },
   {
     kind: "fixed",
-    id: "mental_strategies_fixed_2",
+    id: "entier_strategie_mentale_fixed_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "calcul_mental",
-    microId: "mental_strategies",
+    notionId: "entier_calcul_mental",
+    microId: "entier_strategie_mentale",
     difficulty: 1,
     theme: "neutral",
     text: "Donne le double de 70.",
@@ -426,15 +426,15 @@ export const calculMentalBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Le double d’un nombre, c’est ce nombre ajouté à lui-même. Donc 70 + 70 = 140.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["calcul_mental", "strategie"],
+    tags: ["entier_calcul_mental", "strategie"],
   },
   {
     kind: "fixed",
-    id: "mental_strategies_fixed_3",
+    id: "entier_strategie_mentale_fixed_3",
     niveau: "6e",
     matiere: "maths",
-    notionId: "calcul_mental",
-    microId: "mental_strategies",
+    notionId: "entier_calcul_mental",
+    microId: "entier_strategie_mentale",
     difficulty: 1,
     theme: "neutral",
     text: "Calcule : 4,23 × 10",
@@ -448,15 +448,15 @@ export const calculMentalBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Quand on multiplie par 10, chaque chiffre prend une place dix fois plus grande. Ainsi 4,23 × 10 = 42,3.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["calcul_mental", "strategie", "decimaux"],
+    tags: ["entier_calcul_mental", "strategie", "decimal_nombre"],
   },
   {
     kind: "fixed",
-    id: "mental_strategies_qcm_1",
+    id: "entier_strategie_mentale_qcm_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "calcul_mental",
-    microId: "mental_strategies",
+    notionId: "entier_calcul_mental",
+    microId: "entier_strategie_mentale",
     difficulty: 1,
     theme: "neutral",
     text: "Quelle est la moitié de 26 ?",
@@ -471,7 +471,7 @@ export const calculMentalBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("La moitié d’un nombre, c’est ce nombre divisé par 2. Donc 26 ÷ 2 = 13.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["calcul_mental", "strategie", "qcm"],
+    tags: ["entier_calcul_mental", "strategie", "qcm"],
   },
 
   // =========================
@@ -479,11 +479,11 @@ export const calculMentalBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "fixed",
-    id: "mental_defis_fixed_1",
+    id: "entier_calcul_mental_defi_fixed_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "calcul_mental",
-    microId: "mental_defis",
+    notionId: "entier_calcul_mental",
+    microId: "entier_calcul_mental_defi",
     difficulty: 2,
     theme: "neutral",
     text: "À la boulangerie, Léa achète une tarte à 5 €, un jus à 3 € ainsi qu’un gâteau à 26 €. Combien Léa va-t-elle payer en tout ?",
@@ -497,15 +497,15 @@ export const calculMentalBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("On additionne les trois prix : 5 + 3 + 26 = 34. Léa paiera donc 34 €.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["calcul_mental", "probleme"],
+    tags: ["entier_calcul_mental", "probleme"],
   },
   {
     kind: "fixed",
-    id: "mental_defis_fixed_2",
+    id: "entier_calcul_mental_defi_fixed_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "calcul_mental",
-    microId: "mental_defis",
+    notionId: "entier_calcul_mental",
+    microId: "entier_calcul_mental_defi",
     difficulty: 2,
     theme: "neutral",
     text: "Un album contient 87 pages. Tu en as déjà lu 39. Combien de pages te reste-t-il à lire ?",
@@ -519,15 +519,15 @@ export const calculMentalBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Le nombre de pages restantes se calcule par une soustraction : 87 - 39 = 48. Il reste donc 48 pages à lire.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["calcul_mental", "probleme", "soustraction"],
+    tags: ["entier_calcul_mental", "probleme", "soustraction"],
   },
   {
     kind: "fixed",
-    id: "mental_defis_fixed_3",
+    id: "entier_calcul_mental_defi_fixed_3",
     niveau: "6e",
     matiere: "maths",
-    notionId: "calcul_mental",
-    microId: "mental_defis",
+    notionId: "entier_calcul_mental",
+    microId: "entier_calcul_mental_defi",
     difficulty: 2,
     theme: "reunion",
     text: "63 mangues sont partagées entre 9 enfants. Combien chaque enfant reçoit-il de mangues ?",
@@ -541,15 +541,15 @@ export const calculMentalBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("On partage 63 mangues en 9 parts égales. Comme 63 ÷ 9 = 7, chaque enfant reçoit 7 mangues.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["calcul_mental", "probleme", "reunion", "division"],
+    tags: ["entier_calcul_mental", "probleme", "reunion", "division"],
   },
   {
     kind: "fixed",
-    id: "mental_defis_fixed_4",
+    id: "entier_calcul_mental_defi_fixed_4",
     niveau: "6e",
     matiere: "maths",
-    notionId: "calcul_mental",
-    microId: "mental_defis",
+    notionId: "entier_calcul_mental",
+    microId: "entier_calcul_mental_defi",
     difficulty: 3,
     theme: "neutral",
     text: "Un spectacle commence à 15 h 35 et dure 1 heure et 25 minutes. À quelle heure se termine-t-il ?",
@@ -563,15 +563,15 @@ export const calculMentalBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("À 15 h 35, on ajoute 1 heure : on obtient 16 h 35. Puis on ajoute 25 minutes : on arrive à 17 h 00. Le spectacle se termine donc à 17 h.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["calcul_mental", "probleme", "heure"],
+    tags: ["entier_calcul_mental", "probleme", "heure"],
   },
   {
     kind: "fixed",
-    id: "mental_defis_fixed_5",
+    id: "entier_calcul_mental_defi_fixed_5",
     niveau: "6e",
     matiere: "maths",
-    notionId: "calcul_mental",
-    microId: "mental_defis",
+    notionId: "entier_calcul_mental",
+    microId: "entier_calcul_mental_defi",
     difficulty: 2,
     theme: "reunion",
     text: "Dans un jardin à Saint-Pierre, il y a 9 rangées de 7 fleurs. Combien de fleurs y a-t-il en tout ?",
@@ -585,7 +585,7 @@ export const calculMentalBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Il y a 9 rangées de 7 fleurs, donc on calcule 9 × 7 = 63. Il y a 63 fleurs en tout.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["calcul_mental", "probleme", "reunion", "multiplication"],
+    tags: ["entier_calcul_mental", "probleme", "reunion", "multiplication"],
   },
 
   // =========================
@@ -593,15 +593,15 @@ export const calculMentalBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "template",
-    id: "mental_addition_tpl_1",
+    id: "entier_addition_mentale_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "calcul_mental",
-    microId: "mental_addition",
+    notionId: "entier_calcul_mental",
+    microId: "entier_addition_mentale",
     difficulty: 1,
     theme: "neutral",
     hint: "Passe par la dizaine suivante.",
-    tags: ["calcul_mental", "addition", "template"],
+    tags: ["entier_calcul_mental", "addition", "template"],
     generate: () => {
       const a = [26, 37, 48, 59, 67][Math.floor(Math.random() * 5)];
       const b = [4, 5, 6, 7, 8, 9][Math.floor(Math.random() * 6)];
@@ -622,15 +622,15 @@ export const calculMentalBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "mental_addition_tpl_2",
+    id: "entier_addition_mentale_tpl_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "calcul_mental",
-    microId: "mental_addition",
+    notionId: "entier_calcul_mental",
+    microId: "entier_addition_mentale",
     difficulty: 2,
     theme: "neutral",
     hint: "Tu peux ajouter 10 puis corriger.",
-    tags: ["calcul_mental", "addition", "template"],
+    tags: ["entier_calcul_mental", "addition", "template"],
     generate: () => {
       const a = [104, 116, 127, 138][Math.floor(Math.random() * 4)];
       const b = [18, 24, 29][Math.floor(Math.random() * 3)];
@@ -655,15 +655,15 @@ export const calculMentalBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "template",
-    id: "mental_subtraction_tpl_1",
+    id: "entier_soustraction_mentale_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "calcul_mental",
-    microId: "mental_subtraction",
+    notionId: "entier_calcul_mental",
+    microId: "entier_soustraction_mentale",
     difficulty: 1,
     theme: "neutral",
     hint: "Retire d’abord jusqu’à la dizaine.",
-    tags: ["calcul_mental", "soustraction", "template"],
+    tags: ["entier_calcul_mental", "soustraction", "template"],
     generate: () => {
       const a = [73, 84, 95, 106, 117][Math.floor(Math.random() * 5)];
       const b = [6, 7, 8, 9][Math.floor(Math.random() * 4)];
@@ -684,15 +684,15 @@ export const calculMentalBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "mental_subtraction_tpl_2",
+    id: "entier_soustraction_mentale_tpl_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "calcul_mental",
-    microId: "mental_subtraction",
+    notionId: "entier_calcul_mental",
+    microId: "entier_soustraction_mentale",
     difficulty: 2,
     theme: "neutral",
     hint: "Enlève les dizaines puis les unités.",
-    tags: ["calcul_mental", "soustraction", "template"],
+    tags: ["entier_calcul_mental", "soustraction", "template"],
     generate: () => {
       const a = [92, 104, 115, 126][Math.floor(Math.random() * 4)];
       const b = [16, 24, 27][Math.floor(Math.random() * 3)];
@@ -717,15 +717,15 @@ export const calculMentalBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "template",
-    id: "mental_multiplication_tpl_1",
+    id: "entier_multiplication_mentale_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "calcul_mental",
-    microId: "mental_multiplication",
+    notionId: "entier_calcul_mental",
+    microId: "entier_multiplication_mentale",
     difficulty: 1,
     theme: "neutral",
     hint: "Utilise les tables.",
-    tags: ["calcul_mental", "multiplication", "template"],
+    tags: ["entier_calcul_mental", "multiplication", "template"],
     generate: () => {
       const a = [6, 7, 8, 9, 11][Math.floor(Math.random() * 5)];
       const b = [4, 5, 6, 7, 8][Math.floor(Math.random() * 5)];
@@ -746,15 +746,15 @@ export const calculMentalBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "mental_multiplication_tpl_2",
+    id: "entier_multiplication_mentale_tpl_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "calcul_mental",
-    microId: "mental_multiplication",
+    notionId: "entier_calcul_mental",
+    microId: "entier_multiplication_mentale",
     difficulty: 2,
     theme: "neutral",
     hint: "Multiplier par 5, c’est parfois faire ×10 puis ÷2.",
-    tags: ["calcul_mental", "multiplication", "template"],
+    tags: ["entier_calcul_mental", "multiplication", "template"],
     generate: () => {
       const a = [12, 16, 18, 22, 26][Math.floor(Math.random() * 5)];
       const b = 5;
@@ -779,15 +779,15 @@ export const calculMentalBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "template",
-    id: "mental_division_tpl_1",
+    id: "entier_division_mentale_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "calcul_mental",
-    microId: "mental_division",
+    notionId: "entier_calcul_mental",
+    microId: "entier_division_mentale",
     difficulty: 1,
     theme: "neutral",
     hint: "Cherche la table inverse.",
-    tags: ["calcul_mental", "division", "template"],
+    tags: ["entier_calcul_mental", "division", "template"],
     generate: () => {
       const divisor = [2, 3, 4, 5, 6, 7, 8, 9][Math.floor(Math.random() * 8)];
       const quotient = [5, 6, 7, 8, 9, 10][Math.floor(Math.random() * 6)];
@@ -808,15 +808,15 @@ export const calculMentalBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "mental_division_tpl_2",
+    id: "entier_division_mentale_tpl_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "calcul_mental",
-    microId: "mental_division",
+    notionId: "entier_calcul_mental",
+    microId: "entier_division_mentale",
     difficulty: 1,
     theme: "neutral",
     hint: "Avec ÷10, la virgule se déplace.",
-    tags: ["calcul_mental", "division", "template", "decimaux"],
+    tags: ["entier_calcul_mental", "division", "template", "decimal_nombre"],
     generate: () => {
       const values = [145, 236, 384, 645, 812];
       const dividend = values[Math.floor(Math.random() * values.length)];
@@ -843,15 +843,15 @@ export const calculMentalBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "template",
-    id: "mental_strategies_tpl_1",
+    id: "entier_strategie_mentale_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "calcul_mental",
-    microId: "mental_strategies",
+    notionId: "entier_calcul_mental",
+    microId: "entier_strategie_mentale",
     difficulty: 1,
     theme: "neutral",
     hint: "Double ou moitié.",
-    tags: ["calcul_mental", "strategie", "template"],
+    tags: ["entier_calcul_mental", "strategie", "template"],
     generate: () => {
       const type = Math.random() < 0.5 ? "double" : "moitie";
 
@@ -890,15 +890,15 @@ export const calculMentalBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "mental_strategies_tpl_2",
+    id: "entier_strategie_mentale_tpl_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "calcul_mental",
-    microId: "mental_strategies",
+    notionId: "entier_calcul_mental",
+    microId: "entier_strategie_mentale",
     difficulty: 1,
     theme: "neutral",
     hint: "Multiplier ou diviser par 10.",
-    tags: ["calcul_mental", "strategie", "template", "decimaux"],
+    tags: ["entier_calcul_mental", "strategie", "template", "decimal_nombre"],
     generate: () => {
       const type = Math.random() < 0.5 ? "times10" : "divide10";
 
@@ -943,15 +943,15 @@ export const calculMentalBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "template",
-    id: "mental_defis_tpl_1",
+    id: "entier_calcul_mental_defi_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "calcul_mental",
-    microId: "mental_defis",
+    notionId: "entier_calcul_mental",
+    microId: "entier_calcul_mental_defi",
     difficulty: 2,
     theme: "neutral",
     hint: "Additionne les deux prix.",
-    tags: ["calcul_mental", "probleme", "template"],
+    tags: ["entier_calcul_mental", "probleme", "template"],
     generate: () => {
       const a = [2, 3, 4, 5][Math.floor(Math.random() * 4)];
       const b = [11, 14, 17, 19][Math.floor(Math.random() * 4)];
@@ -972,15 +972,15 @@ export const calculMentalBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "mental_defis_tpl_2",
+    id: "entier_calcul_mental_defi_tpl_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "calcul_mental",
-    microId: "mental_defis",
+    notionId: "entier_calcul_mental",
+    microId: "entier_calcul_mental_defi",
     difficulty: 2,
     theme: "reunion",
     hint: "Multiplie le nombre de rangées par le nombre d’arbres.",
-    tags: ["calcul_mental", "probleme", "template", "reunion"],
+    tags: ["entier_calcul_mental", "probleme", "template", "reunion"],
     generate: () => {
       const rows = [5, 6, 7, 9][Math.floor(Math.random() * 4)];
       const perRow = [4, 5, 6, 7][Math.floor(Math.random() * 4)];
@@ -1004,15 +1004,15 @@ export const calculMentalBank: TutorBankItemV4[] = [
 // =========================
 {
   kind: "template",
-  id: "mental_defis_longueurs_tpl_1",
+  id: "entier_calcul_mental_defi_aire_longueur_tpl_1",
   niveau: "6e",
   matiere: "maths",
-  notionId: "calcul_mental",
-  microId: "mental_defis",
+  notionId: "entier_calcul_mental",
+  microId: "entier_calcul_mental_defi",
   difficulty: 2,
   theme: "neutral",
   hint: "Additionne les longueurs.",
-  tags: ["calcul_mental", "probleme", "template", "longueurs"],
+  tags: ["entier_calcul_mental", "probleme", "template", "aire_longueur"],
   generate: () => {
     const a = [12, 15, 18, 20][Math.floor(Math.random() * 4)];
     const b = [5, 7, 9][Math.floor(Math.random() * 3)];
@@ -1033,15 +1033,15 @@ export const calculMentalBank: TutorBankItemV4[] = [
 },
 {
   kind: "template",
-  id: "mental_defis_longueurs_tpl_2",
+  id: "entier_calcul_mental_defi_aire_longueur_tpl_2",
   niveau: "6e",
   matiere: "maths",
-  notionId: "calcul_mental",
-  microId: "mental_defis",
+  notionId: "entier_calcul_mental",
+  microId: "entier_calcul_mental_defi",
   difficulty: 2,
   theme: "cuisine",
   hint: "Soustrais la partie utilisée.",
-  tags: ["calcul_mental", "probleme", "template", "longueurs"],
+  tags: ["entier_calcul_mental", "probleme", "template", "aire_longueur"],
   generate: () => {
     const total = [40, 50, 60][Math.floor(Math.random() * 3)];
     const used = [12, 15, 20][Math.floor(Math.random() * 3)];
@@ -1062,15 +1062,15 @@ export const calculMentalBank: TutorBankItemV4[] = [
 },
 {
   kind: "template",
-  id: "mental_defis_longueurs_tpl_3",
+  id: "entier_calcul_mental_defi_aire_longueur_tpl_3",
   niveau: "6e",
   matiere: "maths",
-  notionId: "calcul_mental",
-  microId: "mental_defis",
+  notionId: "entier_calcul_mental",
+  microId: "entier_calcul_mental_defi",
   difficulty: 3,
   theme: "reunion",
   hint: "Multiplie.",
-  tags: ["calcul_mental", "probleme", "template", "longueurs"],
+  tags: ["entier_calcul_mental", "probleme", "template", "aire_longueur"],
   generate: () => {
     const rows = [4, 5, 6][Math.floor(Math.random() * 3)];
     const length = [7, 8, 9][Math.floor(Math.random() * 3)];
@@ -1091,15 +1091,15 @@ export const calculMentalBank: TutorBankItemV4[] = [
 },
 {
   kind: "template",
-  id: "mental_defis_longueurs_tpl_4",
+  id: "entier_calcul_mental_defi_aire_longueur_tpl_4",
   niveau: "6e",
   matiere: "maths",
-  notionId: "calcul_mental",
-  microId: "mental_defis",
+  notionId: "entier_calcul_mental",
+  microId: "entier_calcul_mental_defi",
   difficulty: 3,
   theme: "sport",
   hint: "Partage.",
-  tags: ["calcul_mental", "probleme", "template", "longueurs"],
+  tags: ["entier_calcul_mental", "probleme", "template", "aire_longueur"],
   generate: () => {
     const total = [24, 30, 36][Math.floor(Math.random() * 3)];
     const parts = [4, 6][Math.floor(Math.random() * 2)];
@@ -1120,15 +1120,15 @@ export const calculMentalBank: TutorBankItemV4[] = [
 },
 {
   kind: "template",
-  id: "mental_defis_longueurs_tpl_5",
+  id: "entier_calcul_mental_defi_aire_longueur_tpl_5",
   niveau: "6e",
   matiere: "maths",
-  notionId: "calcul_mental",
-  microId: "mental_defis",
+  notionId: "entier_calcul_mental",
+  microId: "entier_calcul_mental_defi",
   difficulty: 4,
   theme: "jeux_video",
   hint: "Plusieurs étapes.",
-  tags: ["calcul_mental", "probleme", "template", "longueurs"],
+  tags: ["entier_calcul_mental", "probleme", "template", "aire_longueur"],
   generate: () => {
     const a = [15, 20][Math.floor(Math.random() * 2)];
     const b = [10, 12][Math.floor(Math.random() * 2)];
