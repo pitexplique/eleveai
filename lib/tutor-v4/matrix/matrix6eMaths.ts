@@ -86,28 +86,28 @@ const supportLinks: Record<string, string[]> = {
   // =========================
   // AIRES
   // =========================
-  area_compter: ["perim_figure"],
-  area_rectangle: ["decimal_multiplier", "longueur_mesurer"],
-  area_square: ["decimal_multiplier", "area_rectangle"],
-  area_comparer: ["longueur_comparer", "area_compter"],
-  area_decomposer: ["area_rectangle", "area_square", "perim_figure"],
-  area_problemes: [
+  aire_compter: ["perim_figure"],
+  aire_rectangle: ["decimal_multiplier", "longueur_mesurer"],
+  aire_square: ["decimal_multiplier", "aire_rectangle"],
+  aire_comparer: ["longueur_comparer", "aire_compter"],
+  aire_decomposer: ["aire_rectangle", "aire_square", "perim_figure"],
+  aire_problemes: [
     "longueur_probleme",
     "decimal_multiplier",
     "prop_direct",
-    "area_decomposer",
+    "aire_decomposer",
   ],
-  area_defis: ["area_decomposer", "area_problemes"],
+  aire_defis: ["aire_decomposer", "aire_problemes"],
 
   // =========================
   // VOLUMES
   // =========================
-  volume_unites: ["area_comprendre"],
-  volume_compter: ["area_compter", "volume_unites"],
-  volume_comparer: ["volume_compter", "area_comparer"],
+  volume_unites: ["aire_comprendre"],
+  volume_compter: ["aire_compter", "volume_unites"],
+  volume_comparer: ["volume_compter", "aire_comparer"],
   volume_assemblage: ["volume_compter"],
-  volume_lire: ["data_lire_tableau", "volume_compter"],
-  volume_defis: ["volume_lire", "volume_assemblage", "area_decomposer"],
+  volume_lire: ["donnee_lire_tableau", "volume_compter"],
+  volume_defis: ["volume_lire", "volume_assemblage", "aire_decomposer"],
 
   // =========================
   // ANGLES / TRIANGLES
@@ -233,36 +233,36 @@ const supportLinks: Record<string, string[]> = {
   // =========================
   // DONNÉES
   // =========================
-  data_lire_graphique: ["data_lire_tableau"],
-  data_prelever: ["data_lire_tableau", "data_lire_graphique"],
-  data_comparer: ["data_prelever", "entier_compare"],
-  data_interpreter: [
-    "data_prelever",
-    "data_comparer",
+  donnee_lire_graphique: ["donnee_lire_tableau"],
+  donnee_prelever: ["donnee_lire_tableau", "donnee_lire_graphique"],
+  donnee_comparer: ["donnee_prelever", "entier_compare"],
+  donnee_interpreter: [
+    "donnee_prelever",
+    "donnee_comparer",
     "entier_compare",
   ],
-  data_defis: [
-    "data_lire_tableau",
-    "data_lire_graphique",
-    "data_prelever",
-    "data_comparer",
-    "data_interpreter",
+  donnee_defis: [
+    "donnee_lire_tableau",
+    "donnee_lire_graphique",
+    "donnee_prelever",
+    "donnee_comparer",
+    "donnee_interpreter",
   ],
 
   // =========================
   // PROBABILITÉS
   // =========================
   proba_comparer: ["proba_vocabulaire", "fraction_compare"],
-  proba_issue: ["proba_vocabulaire", "data_lire_tableau"],
+  proba_issue: ["proba_vocabulaire", "donnee_lire_tableau"],
   proba_estimer: [
     "proba_vocabulaire",
     "proba_comparer",
-    "data_interpreter",
+    "donnee_interpreter",
   ],
   proba_lire: [
     "proba_vocabulaire",
     "proba_issue",
-    "data_interpreter",
+    "donnee_interpreter",
   ],
   proba_defis: [
     "proba_vocabulaire",
@@ -270,7 +270,7 @@ const supportLinks: Record<string, string[]> = {
     "proba_issue",
     "proba_estimer",
     "proba_lire",
-    "data_interpreter",
+    "donnee_interpreter",
   ],
 };
 
