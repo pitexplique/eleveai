@@ -33,11 +33,11 @@ export const donneesBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "6e_data_lire_tableau_fixed_1",
+    id: "6e_stat_stat_stat_donnee_lire_tableau_fixed_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "donnees",
-    microId: "donnee_lire_tableau",
+    notionId: "stat_donnee",
+    microId: "stat_donnee_lire_tableau",
     difficulty: 1,
     theme: "neutral",
     text: "Dans le tableau, combien d’élèves ont choisi le football ?",
@@ -50,7 +50,7 @@ export const donneesBank: TutorBankItemV4[] = [
       "Méthode : on cherche la ligne Football, puis on lit la valeur indiquée.\n\n" +
       "Observation : la ligne Football indique 12 élèves.\n\n" +
       "Conclusion : 12 élèves ont choisi le football.",
-    tags: ["donnees", "tableau", "lecture", "canvas"],
+    tags: ["stat_donnee", "tableau", "lecture", "canvas"],
     canvas: tableauDonneesCanvas({
       title: "Activités choisies",
       headers: ["Nombre d’élèves"],
@@ -66,15 +66,15 @@ export const donneesBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "6e_data_lire_tableau_tpl_1",
+    id: "6e_stat_stat_stat_donnee_lire_tableau_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "donnees",
-    microId: "donnee_lire_tableau",
+    notionId: "stat_donnee",
+    microId: "stat_donnee_lire_tableau",
     difficulty: 2,
     theme: "reunion",
     hint: "Repère la bonne ligne dans le tableau.",
-    tags: ["donnees", "tableau", "reunion", "template", "canvas"],
+    tags: ["stat_donnee", "tableau", "reunion", "template", "canvas"],
     generate: () => {
       const fruits = [
         { label: "Mangues", value: randomChoice([8, 10, 12, 15]) },
@@ -111,11 +111,11 @@ export const donneesBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "6e_data_lire_tableau_open_1",
+    id: "6e_stat_stat_stat_donnee_lire_tableau_open_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "donnees",
-    microId: "donnee_lire_tableau",
+    notionId: "stat_donnee",
+    microId: "stat_donnee_lire_tableau",
     difficulty: 3,
     theme: "neutral",
     text: "Explique comment tu fais pour lire correctement une information dans un tableau.",
@@ -128,7 +128,7 @@ export const donneesBank: TutorBankItemV4[] = [
       "Méthode : on lit d’abord le titre, puis on repère la ligne et la colonne utiles.\n\n" +
       "Observation : la valeur cherchée se trouve au croisement de la bonne ligne et de la bonne colonne.\n\n" +
       "Conclusion : pour lire un tableau, il faut repérer précisément ligne, colonne et valeur.",
-    tags: ["donnees", "tableau", "open", "methode"],
+    tags: ["stat_donnee", "tableau", "open", "methode"],
   },
 
   /* =========================
@@ -137,11 +137,11 @@ export const donneesBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "6e_data_lire_graphique_fixed_1",
+    id: "6e_stat_stat_stat_donnee_lire_graphique_fixed_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "donnees",
-    microId: "donnee_lire_graphique",
+    notionId: "stat_donnee",
+    microId: "stat_donnee_lire_graphique",
     difficulty: 1,
     theme: "neutral",
     text: "Sur le graphique, combien d’élèves ont choisi la lecture ?",
@@ -154,7 +154,7 @@ export const donneesBank: TutorBankItemV4[] = [
       "Méthode : on cherche le bâton Lecture, puis on lit sa hauteur.\n\n" +
       "Observation : le bâton Lecture correspond à 9 élèves.\n\n" +
       "Conclusion : 9 élèves ont choisi la lecture.",
-    tags: ["donnees", "graphique", "lecture", "canvas"],
+    tags: ["stat_donnee", "graphique", "lecture", "canvas"],
     canvas: statGraphCanvas({
       graphType: "batons",
       data: [
@@ -168,15 +168,15 @@ export const donneesBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "6e_data_lire_graphique_tpl_1",
+    id: "6e_stat_stat_stat_donnee_lire_graphique_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "donnees",
-    microId: "donnee_lire_graphique",
+    notionId: "stat_donnee",
+    microId: "stat_donnee_lire_graphique",
     difficulty: 2,
     theme: "neutral",
     hint: "Lis la valeur au-dessus du bâton demandé.",
-    tags: ["donnees", "graphique", "template", "canvas"],
+    tags: ["stat_donnee", "graphique", "template", "canvas"],
     generate: () => {
       const data = [
         { label: "Lundi", value: randomChoice([5, 6, 7, 8]) },
@@ -207,11 +207,11 @@ export const donneesBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "6e_data_lire_graphique_open_1",
+    id: "6e_stat_stat_stat_donnee_lire_graphique_open_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "donnees",
-    microId: "donnee_lire_graphique",
+    notionId: "stat_donnee",
+    microId: "stat_donnee_lire_graphique",
     difficulty: 3,
     theme: "neutral",
     text: "Explique pourquoi un graphique peut aider à mieux comprendre des données.",
@@ -224,7 +224,7 @@ export const donneesBank: TutorBankItemV4[] = [
       "Méthode : on observe les hauteurs ou les parts pour comparer rapidement.\n\n" +
       "Observation : on voit plus facilement les valeurs grandes, petites ou proches.\n\n" +
       "Conclusion : un graphique aide à lire et comparer des données.",
-    tags: ["donnees", "graphique", "open", "raisonnement"],
+    tags: ["stat_donnee", "graphique", "open", "raisonnement"],
   },
 
   /* =========================
@@ -233,11 +233,11 @@ export const donneesBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "6e_data_prelever_fixed_1",
+    id: "6e_stat_stat_stat_donnee_prelever_fixed_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "donnees",
-    microId: "donnee_prelever",
+    notionId: "stat_donnee",
+    microId: "stat_donnee_prelever",
     difficulty: 2,
     theme: "neutral",
     text: "Dans le tableau, combien de filles ont choisi la natation ?",
@@ -250,7 +250,7 @@ export const donneesBank: TutorBankItemV4[] = [
       "Méthode : on cherche la bonne ligne et la bonne colonne.\n\n" +
       "Observation : à la ligne Natation et dans la colonne Filles, on lit 6.\n\n" +
       "Conclusion : 6 filles ont choisi la natation.",
-    tags: ["donnees", "prelever", "tableau_double_entree", "canvas"],
+    tags: ["stat_donnee", "prelever", "tableau_double_entree", "canvas"],
     canvas: tableauDonneesCanvas({
       title: "Activités choisies",
       headers: ["Filles", "Garçons"],
@@ -266,15 +266,15 @@ export const donneesBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "6e_data_prelever_tpl_1",
+    id: "6e_stat_stat_stat_donnee_prelever_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "donnees",
-    microId: "donnee_prelever",
+    notionId: "stat_donnee",
+    microId: "stat_donnee_prelever",
     difficulty: 3,
     theme: "reunion",
     hint: "Cherche le croisement entre la bonne ligne et la bonne colonne.",
-    tags: ["donnees", "prelever", "reunion", "tableau_double_entree", "template", "canvas"],
+    tags: ["stat_donnee", "prelever", "reunion", "tableau_double_entree", "template", "canvas"],
     generate: () => {
       const rows = [
         { label: "Saint-Pierre", values: [12, 8] },
@@ -308,11 +308,11 @@ export const donneesBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "6e_data_prelever_open_1",
+    id: "6e_stat_stat_stat_donnee_prelever_open_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "donnees",
-    microId: "donnee_prelever",
+    notionId: "stat_donnee",
+    microId: "stat_donnee_prelever",
     difficulty: 4,
     theme: "neutral",
     text: "Explique pourquoi il faut lire le titre, les lignes et les colonnes avant de répondre à une question sur un tableau.",
@@ -325,7 +325,7 @@ export const donneesBank: TutorBankItemV4[] = [
       "Méthode : le titre indique le sujet, les lignes et colonnes indiquent où chercher.\n\n" +
       "Observation : si on se trompe de ligne ou de colonne, on lit une mauvaise valeur.\n\n" +
       "Conclusion : lire le titre, les lignes et les colonnes permet de répondre avec précision.",
-    tags: ["donnees", "prelever", "open", "verification"],
+    tags: ["stat_donnee", "prelever", "open", "verification"],
   },
 
   /* =========================
@@ -334,11 +334,11 @@ export const donneesBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "6e_data_comparer_fixed_1",
+    id: "6e_stat_stat_stat_donnee_comparer_fixed_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "donnees",
-    microId: "donnee_comparer",
+    notionId: "stat_donnee",
+    microId: "stat_donnee_comparer",
     difficulty: 2,
     theme: "neutral",
     text: "Dans le tableau, quelle activité a été choisie par le plus d’élèves ?",
@@ -352,7 +352,7 @@ export const donneesBank: TutorBankItemV4[] = [
       "Méthode : on compare les effectifs de chaque activité.\n\n" +
       "Calcul : Football = 14, Natation = 10, Danse = 11. Le plus grand nombre est 14.\n\n" +
       "Conclusion : l’activité la plus choisie est le football.",
-    tags: ["donnees", "comparer", "tableau", "canvas"],
+    tags: ["stat_donnee", "comparer", "tableau", "canvas"],
     canvas: tableauDonneesCanvas({
       title: "Activités choisies",
       headers: ["Nombre d’élèves"],
@@ -367,15 +367,15 @@ export const donneesBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "6e_data_comparer_tpl_1",
+    id: "6e_stat_stat_stat_donnee_comparer_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "donnees",
-    microId: "donnee_comparer",
+    notionId: "stat_donnee",
+    microId: "stat_donnee_comparer",
     difficulty: 3,
     theme: "neutral",
     hint: "Cherche la valeur la plus grande.",
-    tags: ["donnees", "comparer", "graphique", "template", "canvas"],
+    tags: ["stat_donnee", "comparer", "graphique", "template", "canvas"],
     generate: () => {
       const data = [
         { label: "A", value: randomChoice([6, 8, 10]) },
@@ -412,11 +412,11 @@ export const donneesBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "6e_data_comparer_open_1",
+    id: "6e_stat_stat_stat_donnee_comparer_open_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "donnees",
-    microId: "donnee_comparer",
+    notionId: "stat_donnee",
+    microId: "stat_donnee_comparer",
     difficulty: 4,
     theme: "neutral",
     text: "Explique comment comparer plusieurs données dans un tableau ou un graphique.",
@@ -429,7 +429,7 @@ export const donneesBank: TutorBankItemV4[] = [
       "Méthode : on repère les valeurs utiles puis on les compare.\n\n" +
       "Observation : on peut chercher la plus grande, la plus petite ou deux valeurs proches.\n\n" +
       "Conclusion : comparer demande de lire précisément les valeurs avant de conclure.",
-    tags: ["donnees", "comparer", "open", "methode"],
+    tags: ["stat_donnee", "comparer", "open", "methode"],
   },
 
   /* =========================
@@ -438,11 +438,11 @@ export const donneesBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "6e_data_interpreter_fixed_1",
+    id: "6e_stat_stat_stat_donnee_interpreter_fixed_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "donnees",
-    microId: "donnee_interpreter",
+    notionId: "stat_donnee",
+    microId: "stat_donnee_interpreter",
     difficulty: 3,
     theme: "neutral",
     text: "Dans ce graphique, quelle conclusion est correcte ?",
@@ -461,7 +461,7 @@ export const donneesBank: TutorBankItemV4[] = [
       "Méthode : on observe le graphique et on repère la valeur la plus grande.\n\n" +
       "Observation : le sport a la valeur la plus élevée.\n\n" +
       "Conclusion : le sport est l’activité la plus choisie.",
-    tags: ["donnees", "interpreter", "graphique", "canvas"],
+    tags: ["stat_donnee", "interpreter", "graphique", "canvas"],
     canvas: statGraphCanvas({
       graphType: "barres",
       data: [
@@ -475,15 +475,15 @@ export const donneesBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "6e_data_interpreter_tpl_1",
+    id: "6e_stat_stat_stat_donnee_interpreter_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "donnees",
-    microId: "donnee_interpreter",
+    notionId: "stat_donnee",
+    microId: "stat_donnee_interpreter",
     difficulty: 4,
     theme: "reunion",
     hint: "Une conclusion doit être justifiée par les données.",
-    tags: ["donnees", "interpreter", "reunion", "template", "canvas"],
+    tags: ["stat_donnee", "interpreter", "reunion", "template", "canvas"],
     generate: () => {
       const data = [
         { label: "Plage", value: randomChoice([10, 12, 14]) },
@@ -525,11 +525,11 @@ export const donneesBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "6e_data_interpreter_open_1",
+    id: "6e_stat_stat_stat_donnee_interpreter_open_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "donnees",
-    microId: "donnee_interpreter",
+    notionId: "stat_donnee",
+    microId: "stat_donnee_interpreter",
     difficulty: 5,
     theme: "neutral",
     text: "Un camarade affirme une conclusion à partir d’un graphique. Que dois-tu vérifier avant d’être d’accord ?",
@@ -542,7 +542,7 @@ export const donneesBank: TutorBankItemV4[] = [
       "Méthode : on lit le titre, les catégories, les valeurs et la légende si elle existe.\n\n" +
       "Observation : une impression visuelle peut être trompeuse si on ne lit pas les valeurs.\n\n" +
       "Conclusion : il faut vérifier les données avant d’accepter une conclusion.",
-    tags: ["donnees", "interpreter", "open", "doute_raisonnable", "verification"],
+    tags: ["stat_donnee", "interpreter", "open", "doute_raisonnable", "verification"],
   },
 
   /* =========================
@@ -551,11 +551,11 @@ export const donneesBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "6e_data_defis_fixed_1",
+    id: "6e_stat_stat_donnee_defi_fixed_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "donnees",
-    microId: "donnee_defis",
+    notionId: "stat_donnee",
+    microId: "stat_donnee_defi",
     difficulty: 4,
     theme: "neutral",
     text: "Un tableau indique : 8 élèves viennent à pied, 12 en bus et 5 en voiture. Combien d’élèves ont répondu au sondage ?",
@@ -568,7 +568,7 @@ export const donneesBank: TutorBankItemV4[] = [
       "Méthode : on additionne les effectifs de toutes les catégories.\n\n" +
       "Calcul : 8 + 12 + 5 = 25.\n\n" +
       "Conclusion : 25 élèves ont répondu au sondage.",
-    tags: ["donnees", "defi", "effectif_total"],
+    tags: ["stat_donnee", "defi", "effectif_total"],
     canvas: tableauDonneesCanvas({
       title: "Transport pour venir au collège",
       headers: ["Nombre d’élèves"],
@@ -583,15 +583,15 @@ export const donneesBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "6e_data_defis_tpl_1",
+    id: "6e_stat_stat_donnee_defi_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "donnees",
-    microId: "donnee_defis",
+    notionId: "stat_donnee",
+    microId: "stat_donnee_defi",
     difficulty: 5,
     theme: "neutral",
     hint: "Commence par lire toutes les valeurs utiles.",
-    tags: ["donnees", "defi", "total", "template", "canvas"],
+    tags: ["stat_donnee", "defi", "total", "template", "canvas"],
     generate: () => {
       const a = randomChoice([6, 8, 10]);
       const b = randomChoice([7, 9, 11]);
@@ -624,11 +624,11 @@ export const donneesBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "6e_data_defis_open_1",
+    id: "6e_stat_stat_donnee_defi_open_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "donnees",
-    microId: "donnee_defis",
+    notionId: "stat_donnee",
+    microId: "stat_donnee_defi",
     difficulty: 5,
     theme: "neutral",
     text: "Explique pourquoi les données doivent être organisées clairement dans un tableau ou un graphique.",
@@ -641,7 +641,7 @@ export const donneesBank: TutorBankItemV4[] = [
       "Méthode : on utilise un tableau ou un graphique pour faciliter la lecture.\n\n" +
       "Observation : une bonne organisation permet de comparer et limite les erreurs.\n\n" +
       "Conclusion : organiser les données aide à comprendre et à raisonner correctement.",
-    tags: ["donnees", "defi", "open", "raisonnement", "langage"],
+    tags: ["stat_donnee", "defi", "open", "raisonnement", "langage"],
   },
     /* =========================
      RENFORT — ERREURS ET RAISONNEMENT
@@ -649,11 +649,11 @@ export const donneesBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "6e_data_lire_tableau_erreur_1",
+    id: "6e_stat_stat_stat_donnee_lire_tableau_erreur_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "donnees",
-    microId: "donnee_lire_tableau",
+    notionId: "stat_donnee",
+    microId: "stat_donnee_lire_tableau",
     difficulty: 3,
     theme: "neutral",
     text: "Un élève répond sans lire le titre du tableau. Pourquoi est-ce risqué ?",
@@ -666,20 +666,20 @@ export const donneesBank: TutorBankItemV4[] = [
       "Méthode : avant de lire une valeur, on lit le titre, les lignes et les colonnes.\n\n" +
       "Observation : sans le titre, on peut mal comprendre ce que représentent les nombres.\n\n" +
       "Conclusion : lire le titre évite les erreurs d’interprétation.",
-    tags: ["donnees", "tableau", "open", "erreur", "langage"],
+    tags: ["stat_donnee", "tableau", "open", "erreur", "langage"],
   },
 
   {
     kind: "template",
-    id: "6e_data_prelever_tpl_2_cellule_surlignee",
+    id: "6e_stat_stat_stat_donnee_prelever_tpl_2_cellule_surlignee",
     niveau: "6e",
     matiere: "maths",
-    notionId: "donnees",
-    microId: "donnee_prelever",
+    notionId: "stat_donnee",
+    microId: "stat_donnee_prelever",
     difficulty: 2,
     theme: "neutral",
     hint: "Lis la cellule surlignée.",
-    tags: ["donnees", "prelever", "cellule", "template", "canvas"],
+    tags: ["stat_donnee", "prelever", "cellule", "template", "canvas"],
     generate: () => {
       const rows = [
         { label: "6A", values: [12, 8] },
@@ -713,11 +713,11 @@ export const donneesBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "6e_data_comparer_erreur_1",
+    id: "6e_stat_stat_stat_donnee_comparer_erreur_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "donnees",
-    microId: "donnee_comparer",
+    notionId: "stat_donnee",
+    microId: "stat_donnee_comparer",
     difficulty: 4,
     theme: "neutral",
     text: "Un élève dit : « 15 est plus petit que 9 parce que le bâton paraît plus bas ». Que doit-il vérifier ?",
@@ -730,20 +730,20 @@ export const donneesBank: TutorBankItemV4[] = [
       "Méthode : on vérifie les nombres indiqués et l’échelle du graphique.\n\n" +
       "Observation : l’impression visuelle peut être trompeuse si on ne lit pas correctement.\n\n" +
       "Conclusion : il faut lire les valeurs avant de comparer.",
-    tags: ["donnees", "comparer", "open", "erreur", "verification"],
+    tags: ["stat_donnee", "comparer", "open", "erreur", "verification"],
   },
 
   {
     kind: "template",
-    id: "6e_data_comparer_tpl_2_difference",
+    id: "6e_stat_stat_stat_donnee_comparer_tpl_2_difference",
     niveau: "6e",
     matiere: "maths",
-    notionId: "donnees",
-    microId: "donnee_comparer",
+    notionId: "stat_donnee",
+    microId: "stat_donnee_comparer",
     difficulty: 3,
     theme: "neutral",
     hint: "Calcule la différence entre les deux valeurs.",
-    tags: ["donnees", "comparer", "difference", "template", "canvas"],
+    tags: ["stat_donnee", "comparer", "difference", "template", "canvas"],
     generate: () => {
       const a = randomChoice([12, 14, 16, 18]);
       const b = randomChoice([5, 7, 9, 10]);
@@ -775,11 +775,11 @@ export const donneesBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "6e_data_interpreter_open_2_conclusion_justifiee",
+    id: "6e_stat_stat_stat_donnee_interpreter_open_2_conclusion_justifiee",
     niveau: "6e",
     matiere: "maths",
-    notionId: "donnees",
-    microId: "donnee_interpreter",
+    notionId: "stat_donnee",
+    microId: "stat_donnee_interpreter",
     difficulty: 5,
     theme: "neutral",
     text: "Explique pourquoi une conclusion doit être justifiée par une donnée du tableau ou du graphique.",
@@ -792,20 +792,20 @@ export const donneesBank: TutorBankItemV4[] = [
       "Méthode : on cite une donnée précise pour justifier la conclusion.\n\n" +
       "Observation : sans valeur, la conclusion peut être une simple impression.\n\n" +
       "Conclusion : une bonne conclusion doit être justifiée par une donnée.",
-    tags: ["donnees", "interpreter", "open", "justification", "raisonnement"],
+    tags: ["stat_donnee", "interpreter", "open", "justification", "raisonnement"],
   },
 
   {
     kind: "template",
-    id: "6e_data_defis_tpl_2_double_entree_total_ligne",
+    id: "6e_stat_stat_donnee_defi_tpl_2_double_entree_total_ligne",
     niveau: "6e",
     matiere: "maths",
-    notionId: "donnees",
-    microId: "donnee_defis",
+    notionId: "stat_donnee",
+    microId: "stat_donnee_defi",
     difficulty: 5,
     theme: "neutral",
     hint: "Additionne les valeurs de la ligne demandée.",
-    tags: ["donnees", "defi", "tableau_double_entree", "total", "template", "canvas"],
+    tags: ["stat_donnee", "defi", "tableau_double_entree", "total", "template", "canvas"],
     generate: () => {
       const rows = [
         { label: "Basket", values: [7, 8] },
@@ -842,11 +842,11 @@ export const donneesBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "6e_data_lire_tableau_open_2_ligne_colonne",
+    id: "6e_stat_stat_stat_donnee_lire_tableau_open_2_ligne_colonne",
     niveau: "6e",
     matiere: "maths",
-    notionId: "donnees",
-    microId: "donnee_lire_tableau",
+    notionId: "stat_donnee",
+    microId: "stat_donnee_lire_tableau",
     difficulty: 4,
     theme: "neutral",
     text: "Explique la différence entre une ligne et une colonne dans un tableau.",
@@ -859,20 +859,20 @@ export const donneesBank: TutorBankItemV4[] = [
       "Méthode : on repère le sens de lecture.\n\n" +
       "Observation : une ligne est horizontale, une colonne est verticale.\n\n" +
       "Conclusion : distinguer ligne et colonne évite de lire la mauvaise donnée.",
-    tags: ["donnees", "tableau", "open", "vocabulaire"],
+    tags: ["stat_donnee", "tableau", "open", "vocabulaire"],
   },
 
   {
     kind: "template",
-    id: "6e_data_lire_tableau_tpl_2_total_colonne",
+    id: "6e_stat_stat_stat_donnee_lire_tableau_tpl_2_total_colonne",
     niveau: "6e",
     matiere: "maths",
-    notionId: "donnees",
-    microId: "donnee_lire_tableau",
+    notionId: "stat_donnee",
+    microId: "stat_donnee_lire_tableau",
     difficulty: 3,
     theme: "neutral",
     hint: "Additionne les valeurs de la colonne.",
-    tags: ["donnees", "tableau", "total", "template", "canvas"],
+    tags: ["stat_donnee", "tableau", "total", "template", "canvas"],
     generate: () => {
       const a = randomChoice([5, 6, 7, 8]);
       const b = randomChoice([9, 10, 11]);
@@ -906,11 +906,11 @@ export const donneesBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "6e_data_lire_graphique_erreur_1",
+    id: "6e_stat_stat_stat_donnee_lire_graphique_erreur_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "donnees",
-    microId: "donnee_lire_graphique",
+    notionId: "stat_donnee",
+    microId: "stat_donnee_lire_graphique",
     difficulty: 4,
     theme: "neutral",
     text: "Un élève regarde seulement le bâton le plus haut sans lire les valeurs. Pourquoi peut-il se tromper ?",
@@ -923,20 +923,20 @@ export const donneesBank: TutorBankItemV4[] = [
       "Méthode : on observe le graphique, mais on lit aussi les valeurs ou l’échelle.\n\n" +
       "Observation : l’impression visuelle peut être trompeuse.\n\n" +
       "Conclusion : il faut vérifier les valeurs avant de conclure.",
-    tags: ["donnees", "graphique", "open", "erreur", "verification"],
+    tags: ["stat_donnee", "graphique", "open", "erreur", "verification"],
   },
 
   {
     kind: "template",
-    id: "6e_data_lire_graphique_tpl_2_plus_petit",
+    id: "6e_stat_stat_stat_donnee_lire_graphique_tpl_2_plus_petit",
     niveau: "6e",
     matiere: "maths",
-    notionId: "donnees",
-    microId: "donnee_lire_graphique",
+    notionId: "stat_donnee",
+    microId: "stat_donnee_lire_graphique",
     difficulty: 3,
     theme: "neutral",
     hint: "Cherche le bâton le plus bas.",
-    tags: ["donnees", "graphique", "minimum", "template", "canvas"],
+    tags: ["stat_donnee", "graphique", "minimum", "template", "canvas"],
     generate: () => {
       const data = [
         { label: "A", value: randomChoice([12, 14, 16]) },
@@ -978,11 +978,11 @@ export const donneesBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "6e_data_prelever_erreur_2_double_entree",
+    id: "6e_stat_stat_stat_donnee_prelever_erreur_2_double_entree",
     niveau: "6e",
     matiere: "maths",
-    notionId: "donnees",
-    microId: "donnee_prelever",
+    notionId: "stat_donnee",
+    microId: "stat_donnee_prelever",
     difficulty: 4,
     theme: "neutral",
     text: "Dans un tableau à deux entrées, un élève lit la bonne ligne mais la mauvaise colonne. Sa réponse peut-elle être correcte ?",
@@ -996,16 +996,16 @@ export const donneesBank: TutorBankItemV4[] = [
       "Méthode : on doit repérer les deux informations.\n\n" +
       "Observation : si la colonne est mauvaise, la valeur lue peut être fausse.\n\n" +
       "Conclusion : il faut vérifier la ligne et la colonne.",
-    tags: ["donnees", "prelever", "tableau_double_entree", "erreur"],
+    tags: ["stat_donnee", "prelever", "tableau_double_entree", "erreur"],
   },
 
   {
     kind: "fixed",
-    id: "6e_data_prelever_open_2_double_entree",
+    id: "6e_stat_stat_stat_donnee_prelever_open_2_double_entree",
     niveau: "6e",
     matiere: "maths",
-    notionId: "donnees",
-    microId: "donnee_prelever",
+    notionId: "stat_donnee",
+    microId: "stat_donnee_prelever",
     difficulty: 4,
     theme: "neutral",
     text: "Décris la méthode pour lire une donnée dans un tableau à deux entrées.",
@@ -1018,20 +1018,20 @@ export const donneesBank: TutorBankItemV4[] = [
       "Méthode : on repère la bonne ligne, puis la bonne colonne.\n\n" +
       "Observation : la donnée cherchée est au croisement des deux.\n\n" +
       "Conclusion : lire un tableau à deux entrées demande de vérifier ligne et colonne.",
-    tags: ["donnees", "prelever", "open", "methode"],
+    tags: ["stat_donnee", "prelever", "open", "methode"],
   },
 
   {
     kind: "template",
-    id: "6e_data_comparer_tpl_3_ecart_graphique",
+    id: "6e_stat_stat_stat_donnee_comparer_tpl_3_ecart_graphique",
     niveau: "6e",
     matiere: "maths",
-    notionId: "donnees",
-    microId: "donnee_comparer",
+    notionId: "stat_donnee",
+    microId: "stat_donnee_comparer",
     difficulty: 4,
     theme: "neutral",
     hint: "L’écart se calcule avec une soustraction.",
-    tags: ["donnees", "comparer", "ecart", "template", "canvas"],
+    tags: ["stat_donnee", "comparer", "ecart", "template", "canvas"],
     generate: () => {
       const a = randomChoice([18, 20, 22]);
       const b = randomChoice([9, 11, 13]);
@@ -1066,11 +1066,11 @@ export const donneesBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "6e_data_interpreter_erreur_1_conclusion_abusive",
+    id: "6e_stat_stat_stat_donnee_interpreter_erreur_1_conclusion_abusive",
     niveau: "6e",
     matiere: "maths",
-    notionId: "donnees",
-    microId: "donnee_interpreter",
+    notionId: "stat_donnee",
+    microId: "stat_donnee_interpreter",
     difficulty: 5,
     theme: "neutral",
     text: "Un graphique montre que 12 élèves préfèrent le sport dans une classe. Un élève conclut : “Tous les élèves du collège préfèrent le sport.” Pourquoi cette conclusion est-elle abusive ?",
@@ -1083,16 +1083,16 @@ export const donneesBank: TutorBankItemV4[] = [
       "Méthode : on vérifie sur quel groupe porte l’enquête.\n\n" +
       "Observation : les données concernent une classe, pas tout le collège.\n\n" +
       "Conclusion : on ne peut pas généraliser à tout le collège.",
-    tags: ["donnees", "interpreter", "open", "conclusion", "raisonnement"],
+    tags: ["stat_donnee", "interpreter", "open", "conclusion", "raisonnement"],
   },
 
   {
     kind: "fixed",
-    id: "6e_data_interpreter_open_3_hypothese",
+    id: "6e_stat_stat_stat_donnee_interpreter_open_3_hypothese",
     niveau: "6e",
     matiere: "maths",
-    notionId: "donnees",
-    microId: "donnee_interpreter",
+    notionId: "stat_donnee",
+    microId: "stat_donnee_interpreter",
     difficulty: 5,
     theme: "neutral",
     text: "À partir d’un tableau de données, explique la différence entre observer une donnée et faire une hypothèse.",
@@ -1105,20 +1105,20 @@ export const donneesBank: TutorBankItemV4[] = [
       "Méthode : une hypothèse est une idée que l’on propose et qu’il faudra vérifier.\n\n" +
       "Observation : une donnée est certaine dans le document, une hypothèse demande une vérification.\n\n" +
       "Conclusion : il faut distinguer ce qui est lu et ce qui est supposé.",
-    tags: ["donnees", "interpreter", "open", "hypothese", "scientifique"],
+    tags: ["stat_donnee", "interpreter", "open", "hypothese", "scientifique"],
   },
 
   {
     kind: "template",
-    id: "6e_data_defis_tpl_3_deux_variables_total_colonne",
+    id: "6e_stat_stat_donnee_defi_tpl_3_deux_variables_total_colonne",
     niveau: "6e",
     matiere: "maths",
-    notionId: "donnees",
-    microId: "donnee_defis",
+    notionId: "stat_donnee",
+    microId: "stat_donnee_defi",
     difficulty: 5,
     theme: "neutral",
     hint: "Additionne les valeurs de la colonne demandée.",
-    tags: ["donnees", "defi", "tableau_double_entree", "total_colonne", "template", "canvas"],
+    tags: ["stat_donnee", "defi", "tableau_double_entree", "total_colonne", "template", "canvas"],
     generate: () => {
       const rows = [
         { label: "6A", values: [6, 8] },
@@ -1156,11 +1156,11 @@ export const donneesBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "6e_data_defis_open_2_demarche_scientifique",
+    id: "6e_stat_stat_donnee_defi_open_2_demarche_scientifique",
     niveau: "6e",
     matiere: "maths",
-    notionId: "donnees",
-    microId: "donnee_defis",
+    notionId: "stat_donnee",
+    microId: "stat_donnee_defi",
     difficulty: 5,
     theme: "neutral",
     text: "Décris une démarche simple pour répondre sérieusement à une question à partir de données.",
@@ -1173,6 +1173,6 @@ export const donneesBank: TutorBankItemV4[] = [
       "Méthode : on lit le document, on repère les valeurs utiles, puis on compare ou on calcule.\n\n" +
       "Observation : on vérifie que la réponse correspond bien à la question.\n\n" +
       "Conclusion : on peut alors formuler une conclusion claire et justifiée.",
-    tags: ["donnees", "defi", "open", "demarche_scientifique"],
+    tags: ["stat_donnee", "defi", "open", "demarche_scientifique"],
   },
 ];

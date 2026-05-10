@@ -14,10 +14,10 @@ export const airesBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "fixed",
-    id: "area_comprendre_fixed_1",
+    id: "aire_comprendre_fixed_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "aires",
+    notionId: "aire_surface",
     microId: "aire_comprendre",
     difficulty: 1,
     theme: "neutral",
@@ -33,14 +33,14 @@ export const airesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("L’aire mesure la surface occupée par une figure, c’est-à-dire tout l’intérieur de la figure.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["aires", "comprendre", "qcm"],
+    tags: ["aire_surface", "comprendre", "qcm"],
   },
   {
     kind: "fixed",
-    id: "area_comprendre_fixed_2",
+    id: "aire_comprendre_fixed_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "aires",
+    notionId: "aire_surface",
     microId: "aire_comprendre",
     difficulty: 1,
     theme: "neutral",
@@ -56,14 +56,14 @@ export const airesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Une aire se mesure avec des unités carrées. Par exemple, on utilise cm² pour mesurer une surface.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["aires", "comprendre", "qcm"],
+    tags: ["aire_surface", "comprendre", "qcm"],
   },
   {
     kind: "fixed",
-    id: "area_comprendre_fixed_3",
+    id: "aire_comprendre_fixed_3",
     niveau: "6e",
     matiere: "maths",
-    notionId: "aires",
+    notionId: "aire_surface",
     microId: "aire_comprendre",
     difficulty: 2,
     theme: "neutral",
@@ -79,14 +79,14 @@ export const airesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("15 cm est une longueur, 15 cm³ un volume, 15 kg une masse. Une aire s’écrit ici 15 cm².") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["aires", "comprendre", "qcm"],
+    tags: ["aire_surface", "comprendre", "qcm"],
   },
   {
     kind: "fixed",
-    id: "area_comprendre_reunion_1",
+    id: "aire_comprendre_reunion_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "aires",
+    notionId: "aire_surface",
     microId: "aire_comprendre",
     difficulty: 2,
     theme: "reunion",
@@ -102,14 +102,14 @@ export const airesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("La surface d’un jardin est une aire. On la mesure donc en mètres carrés, notés m².") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["aires", "comprendre", "reunion", "qcm"],
+    tags: ["aire_surface", "comprendre", "reunion", "qcm"],
   },
   {
     kind: "fixed",
-    id: "area_comprendre_confusion_1",
+    id: "aire_comprendre_confusion_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "aires",
+    notionId: "aire_surface",
     microId: "aire_comprendre",
     difficulty: 3,
     theme: "neutral",
@@ -125,7 +125,7 @@ export const airesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Pour un rectangle de 5 cm sur 4 cm, l’aire vaut 5 × 4 = 20 cm². Le périmètre vaudrait 18 cm.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["aires", "comprendre", "confusion", "qcm"],
+    tags: ["aire_surface", "comprendre", "confusion", "qcm"],
   },
 
   // =========================
@@ -133,10 +133,10 @@ export const airesBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "fixed",
-    id: "area_compter_fixed_1",
+    id: "aire_compter_fixed_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "aires",
+    notionId: "aire_surface",
     microId: "aire_compter",
     difficulty: 1,
     theme: "neutral",
@@ -151,14 +151,14 @@ export const airesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Quand on mesure une aire par comptage, on compte les carreaux unités. Ici, 6 carreaux donnent une aire de 6 unités d’aire.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["aires", "compter"],
+    tags: ["aire_surface", "compter"],
   },
   {
     kind: "fixed",
-    id: "area_compter_fixed_2",
+    id: "aire_compter_fixed_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "aires",
+    notionId: "aire_surface",
     microId: "aire_compter",
     difficulty: 2,
     theme: "neutral",
@@ -173,14 +173,14 @@ export const airesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("L’aire d’une figure mesurée sur quadrillage est le nombre de carreaux unités qu’elle recouvre. Ici, cela fait 12.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["aires", "compter"],
+    tags: ["aire_surface", "compter"],
   },
   {
     kind: "fixed",
-    id: "area_compter_qcm_1",
+    id: "aire_compter_qcm_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "aires",
+    notionId: "aire_surface",
     microId: "aire_compter",
     difficulty: 2,
     theme: "neutral",
@@ -196,14 +196,14 @@ export const airesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Chaque carreau unité compte pour 1 unité d’aire. Avec 9 carreaux, l’aire est donc 9.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["aires", "compter", "qcm"],
+    tags: ["aire_surface", "compter", "qcm"],
   },
   {
     kind: "fixed",
-    id: "area_compter_qcm_2",
+    id: "aire_compter_qcm_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "aires",
+    notionId: "aire_surface",
     microId: "aire_compter",
     difficulty: 3,
     theme: "neutral",
@@ -219,14 +219,14 @@ export const airesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Il y a 3 rangées de 4 carreaux, donc 3 × 4 = 12 carreaux unités. L’aire est 12.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["aires", "compter", "qcm"],
+    tags: ["aire_surface", "compter", "qcm"],
   },
   {
     kind: "fixed",
-    id: "area_compter_canvas_1",
+    id: "aire_compter_canvas_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "aires",
+    notionId: "aire_surface",
     microId: "aire_compter",
     difficulty: 3,
     theme: "neutral",
@@ -241,7 +241,7 @@ export const airesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("La figure recouvre 5 carreaux unités. Son aire vaut donc 5 unités d’aire.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["aires", "compter", "canvas"],
+    tags: ["aire_surface", "compter", "canvas"],
     canvas: {
       kind: "figure_libre",
       grid: {
@@ -263,10 +263,10 @@ export const airesBank: TutorBankItemV4[] = [
   },
   {
     kind: "fixed",
-    id: "area_compter_canvas_2",
+    id: "aire_compter_canvas_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "aires",
+    notionId: "aire_surface",
     microId: "aire_compter",
     difficulty: 4,
     theme: "neutral",
@@ -282,7 +282,7 @@ export const airesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("La figure recouvre 6 carreaux unités. Son aire vaut donc 6 unités d’aire.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["aires", "compter", "canvas", "qcm"],
+    tags: ["aire_surface", "compter", "canvas", "qcm"],
     canvas: {
       kind: "figure_libre",
       grid: {
@@ -309,10 +309,10 @@ export const airesBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "fixed",
-    id: "area_rectangle_fixed_1",
+    id: "aire_rectangle_fixed_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "aires",
+    notionId: "aire_surface",
     microId: "aire_rectangle",
     difficulty: 1,
     theme: "neutral",
@@ -327,14 +327,14 @@ export const airesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("L’aire d’un rectangle se calcule en multipliant la longueur par la largeur : 4 × 3 = 12. L’aire est donc 12 cm².") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["aires", "rectangle"],
+    tags: ["aire_surface", "rectangle"],
   },
   {
     kind: "fixed",
-    id: "area_rectangle_qcm_1",
+    id: "aire_rectangle_qcm_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "aires",
+    notionId: "aire_surface",
     microId: "aire_rectangle",
     difficulty: 2,
     theme: "neutral",
@@ -350,14 +350,14 @@ export const airesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("On applique la formule de l’aire du rectangle : 6 × 4 = 24. L’aire est donc 24 cm².") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["aires", "rectangle", "qcm"],
+    tags: ["aire_surface", "rectangle", "qcm"],
   },
   {
     kind: "fixed",
-    id: "area_rectangle_confusion_1",
+    id: "aire_rectangle_confusion_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "aires",
+    notionId: "aire_surface",
     microId: "aire_rectangle",
     difficulty: 3,
     theme: "neutral",
@@ -373,14 +373,14 @@ export const airesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("L’aire d’un rectangle est longueur × largeur. Ici, 8 × 5 = 40. L’aire est donc 40 cm².") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["aires", "rectangle", "confusion", "qcm"],
+    tags: ["aire_surface", "rectangle", "confusion", "qcm"],
   },
   {
     kind: "fixed",
-    id: "area_rectangle_canvas_1",
+    id: "aire_rectangle_canvas_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "aires",
+    notionId: "aire_surface",
     microId: "aire_rectangle",
     difficulty: 3,
     theme: "neutral",
@@ -395,7 +395,7 @@ export const airesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Le rectangle a une longueur de 6 cm et une largeur de 3 cm. Son aire vaut 6 × 3 = 18 cm².") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["aires", "rectangle", "canvas"],
+    tags: ["aire_surface", "rectangle", "canvas"],
     canvas: {
       kind: "quadrilatere",
       points: {
@@ -426,11 +426,11 @@ export const airesBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "fixed",
-    id: "area_square_fixed_1",
+    id: "aire_carre_fixed_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "aires",
-    microId: "aire_square",
+    notionId: "aire_surface",
+    microId: "aire_carre",
     difficulty: 1,
     theme: "neutral",
     text: "Quelle est l’aire d’un carré de côté 5 cm ?",
@@ -444,15 +444,15 @@ export const airesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Dans un carré, les côtés sont égaux. On calcule donc 5 × 5 = 25. L’aire est 25 cm².") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["aires", "carre"],
+    tags: ["aire_surface", "carre"],
   },
   {
     kind: "fixed",
-    id: "area_square_qcm_1",
+    id: "aire_carre_qcm_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "aires",
-    microId: "aire_square",
+    notionId: "aire_surface",
+    microId: "aire_carre",
     difficulty: 2,
     theme: "neutral",
     text: "Quelle est l’aire d’un carré de côté 7 cm ?",
@@ -467,15 +467,15 @@ export const airesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("L’aire d’un carré de côté 7 cm vaut 7 × 7 = 49. La bonne réponse est 49 cm².") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["aires", "carre", "qcm"],
+    tags: ["aire_surface", "carre", "qcm"],
   },
   {
     kind: "fixed",
-    id: "area_square_confusion_1",
+    id: "aire_carre_confusion_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "aires",
-    microId: "aire_square",
+    notionId: "aire_surface",
+    microId: "aire_carre",
     difficulty: 3,
     theme: "neutral",
     text: "Choisis la bonne réponse : l’aire d’un carré de côté 9 cm est...",
@@ -490,15 +490,15 @@ export const airesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Pour un carré, on calcule côté × côté. Ici 9 × 9 = 81. L’aire est donc 81 cm².") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["aires", "carre", "confusion", "qcm"],
+    tags: ["aire_surface", "carre", "confusion", "qcm"],
   },
   {
     kind: "fixed",
-    id: "area_square_canvas_1",
+    id: "aire_carre_canvas_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "aires",
-    microId: "aire_square",
+    notionId: "aire_surface",
+    microId: "aire_carre",
     difficulty: 3,
     theme: "neutral",
     text: "Observe la figure. Quelle est l’aire du carré ABCD ?",
@@ -512,7 +512,7 @@ export const airesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Le côté du carré mesure 4 cm. Son aire vaut donc 4 × 4 = 16 cm².") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["aires", "carre", "canvas"],
+    tags: ["aire_surface", "carre", "canvas"],
     canvas: {
       kind: "quadrilatere",
       points: {
@@ -542,10 +542,10 @@ export const airesBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "fixed",
-    id: "area_comparer_fixed_1",
+    id: "aire_comparer_fixed_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "aires",
+    notionId: "aire_surface",
     microId: "aire_comparer",
     difficulty: 2,
     theme: "neutral",
@@ -560,14 +560,14 @@ export const airesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Les deux aires sont dans la même unité. On compare donc 12 et 15. Comme 15 est plus grand, 15 cm² est la plus grande aire.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["aires", "comparer"],
+    tags: ["aire_surface", "comparer"],
   },
   {
     kind: "fixed",
-    id: "area_comparer_fixed_2",
+    id: "aire_comparer_fixed_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "aires",
+    notionId: "aire_surface",
     microId: "aire_comparer",
     difficulty: 2,
     theme: "neutral",
@@ -582,14 +582,14 @@ export const airesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Comme les unités sont identiques, il suffit de comparer 20 et 9. La plus petite aire est 9 cm².") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["aires", "comparer"],
+    tags: ["aire_surface", "comparer"],
   },
   {
     kind: "fixed",
-    id: "area_comparer_qcm_1",
+    id: "aire_comparer_qcm_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "aires",
+    notionId: "aire_surface",
     microId: "aire_comparer",
     difficulty: 3,
     theme: "neutral",
@@ -605,14 +605,14 @@ export const airesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("La plus grande des quatre aires proposées est 14 cm². C’est donc la bonne réponse.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["aires", "comparer", "qcm"],
+    tags: ["aire_surface", "comparer", "qcm"],
   },
   {
     kind: "fixed",
-    id: "area_comparer_reunion_1",
+    id: "aire_comparer_reunion_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "aires",
+    notionId: "aire_surface",
     microId: "aire_comparer",
     difficulty: 3,
     theme: "reunion",
@@ -627,14 +627,14 @@ export const airesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("18 m² et 21 m² sont deux aires. Comme 21 est plus grand que 18, le potager de 21 m² est le plus grand.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["aires", "comparer", "reunion"],
+    tags: ["aire_surface", "comparer", "reunion"],
   },
   {
     kind: "fixed",
-    id: "area_comparer_qcm_2",
+    id: "aire_comparer_qcm_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "aires",
+    notionId: "aire_surface",
     microId: "aire_comparer",
     difficulty: 4,
     theme: "neutral",
@@ -650,7 +650,7 @@ export const airesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Les aires valent 9 cm², 16 cm², 25 cm² et 36 cm². La plus grande aire est celle du carré de côté 6 cm.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["aires", "comparer", "qcm", "carre"],
+    tags: ["aire_surface", "comparer", "qcm", "carre"],
   },
 
   // =========================
@@ -658,10 +658,10 @@ export const airesBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "fixed",
-    id: "area_decomposer_fixed_1",
+    id: "aire_decomposer_fixed_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "aires",
+    notionId: "aire_surface",
     microId: "aire_decomposer",
     difficulty: 3,
     theme: "neutral",
@@ -676,14 +676,14 @@ export const airesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Quand une figure est décomposée en deux rectangles sans chevauchement, on additionne les aires : 8 + 5 = 13 cm².") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["aires", "decomposer"],
+    tags: ["aire_surface", "decomposer"],
   },
   {
     kind: "fixed",
-    id: "area_decomposer_fixed_2",
+    id: "aire_decomposer_fixed_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "aires",
+    notionId: "aire_surface",
     microId: "aire_decomposer",
     difficulty: 3,
     theme: "neutral",
@@ -698,14 +698,14 @@ export const airesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("On décompose la figure en deux parties simples : 12 cm² et 9 cm². Leur somme vaut 21 cm².") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["aires", "decomposer"],
+    tags: ["aire_surface", "decomposer"],
   },
   {
     kind: "fixed",
-    id: "area_decomposer_qcm_1",
+    id: "aire_decomposer_qcm_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "aires",
+    notionId: "aire_surface",
     microId: "aire_decomposer",
     difficulty: 4,
     theme: "neutral",
@@ -721,14 +721,14 @@ export const airesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("La figure en L est découpée en deux rectangles. L’aire totale vaut 10 + 6 = 16 cm².") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["aires", "decomposer", "qcm"],
+    tags: ["aire_surface", "decomposer", "qcm"],
   },
   {
     kind: "fixed",
-    id: "area_decomposer_qcm_2",
+    id: "aire_decomposer_qcm_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "aires",
+    notionId: "aire_surface",
     microId: "aire_decomposer",
     difficulty: 4,
     theme: "neutral",
@@ -749,14 +749,14 @@ export const airesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Pour calculer l’aire d’une figure composée, on peut la décomposer en rectangles ou carrés plus simples, puis additionner leurs aires.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["aires", "decomposer", "qcm", "methode"],
+    tags: ["aire_surface", "decomposer", "qcm", "methode"],
   },
   {
     kind: "fixed",
-    id: "area_decomposer_canvas_1",
+    id: "aire_decomposer_canvas_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "aires",
+    notionId: "aire_surface",
     microId: "aire_decomposer",
     difficulty: 4,
     theme: "neutral",
@@ -771,7 +771,7 @@ export const airesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("La figure peut être vue comme un rectangle de 4 unités d’aire et un autre de 2 unités d’aire. L’aire totale vaut 6.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["aires", "decomposer", "canvas"],
+    tags: ["aire_surface", "decomposer", "canvas"],
     canvas: {
       kind: "figure_libre",
       grid: {
@@ -798,11 +798,11 @@ export const airesBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "fixed",
-    id: "area_problemes_fixed_1",
+    id: "aire_probleme_fixed_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "aires",
-    microId: "aire_problemes",
+    notionId: "aire_surface",
+    microId: "aire_probleme",
     difficulty: 4,
     theme: "neutral",
     text: "Un jardin rectangulaire mesure 7 m de long et 3 m de large. Quelle est son aire ?",
@@ -816,15 +816,15 @@ export const airesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Le jardin est un rectangle. Son aire vaut 7 × 3 = 21 m².") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["aires", "problemes"],
+    tags: ["aire_surface", "probleme"],
   },
   {
     kind: "fixed",
-    id: "area_problemes_fixed_2",
+    id: "aire_probleme_fixed_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "aires",
-    microId: "aire_problemes",
+    notionId: "aire_surface",
+    microId: "aire_probleme",
     difficulty: 4,
     theme: "reunion",
     text: "À La Réunion, une parcelle rectangulaire mesure 8 m sur 5 m. Quelle est son aire ?",
@@ -838,15 +838,15 @@ export const airesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Comme la parcelle est rectangulaire, on calcule son aire en faisant 8 × 5 = 40 m².") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["aires", "problemes", "reunion"],
+    tags: ["aire_surface", "probleme", "reunion"],
   },
   {
     kind: "fixed",
-    id: "area_problemes_qcm_1",
+    id: "aire_probleme_qcm_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "aires",
-    microId: "aire_problemes",
+    notionId: "aire_surface",
+    microId: "aire_probleme",
     difficulty: 5,
     theme: "neutral",
     text: "Une pièce rectangulaire mesure 4,5 m sur 2 m. Quelle est son aire ?",
@@ -861,15 +861,15 @@ export const airesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("L’aire d’un rectangle se calcule par longueur × largeur. Ici, 4,5 × 2 = 9. L’aire est donc 9 m².") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["aires", "problemes", "qcm", "decimaux"],
+    tags: ["aire_surface", "probleme", "qcm", "decimal_nombre"],
   },
   {
     kind: "fixed",
-    id: "area_problemes_qcm_2",
+    id: "aire_probleme_qcm_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "aires",
-    microId: "aire_problemes",
+    notionId: "aire_surface",
+    microId: "aire_probleme",
     difficulty: 5,
     theme: "neutral",
     text: "Un rectangle a une largeur de 3 m. Si sa longueur double, que devient son aire ?",
@@ -884,15 +884,15 @@ export const airesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Si la largeur reste la même et que la longueur est multipliée par 2, alors l’aire est aussi multipliée par 2. Elle double.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["aires", "problemes", "qcm", "proportionnalite"],
+    tags: ["aire_surface", "probleme", "qcm", "prop_proportionnalite"],
   },
   {
     kind: "fixed",
-    id: "area_problemes_qcm_3",
+    id: "aire_probleme_qcm_3",
     niveau: "6e",
     matiere: "maths",
-    notionId: "aires",
-    microId: "aire_problemes",
+    notionId: "aire_surface",
+    microId: "aire_probleme",
     difficulty: 5,
     theme: "neutral",
     text: "Une terrasse rectangulaire mesure 2,5 m sur 4 m. Quelle est son aire ?",
@@ -907,7 +907,7 @@ export const airesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("L’aire de la terrasse vaut 2,5 × 4 = 10 m².") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["aires", "problemes", "qcm", "decimaux"],
+    tags: ["aire_surface", "probleme", "qcm", "decimal_nombre"],
   },
 
   // =========================
@@ -915,11 +915,11 @@ export const airesBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "fixed",
-    id: "area_defis_fixed_1",
+    id: "aire_defi_fixed_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "aires",
-    microId: "aire_defis",
+    notionId: "aire_surface",
+    microId: "aire_defi",
     difficulty: 4,
     theme: "neutral",
     text: "Pourquoi une aire ne peut-elle pas s’exprimer en cm³ ?",
@@ -933,15 +933,15 @@ export const airesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Une aire mesure une surface en 2 dimensions, donc elle s’exprime en cm². Le cm³ sert à mesurer un volume en 3 dimensions.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["aires", "defi", "raisonnement"],
+    tags: ["aire_surface", "defi", "raisonnement"],
   },
   {
     kind: "fixed",
-    id: "area_defis_fixed_2",
+    id: "aire_defi_fixed_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "aires",
-    microId: "aire_defis",
+    notionId: "aire_surface",
+    microId: "aire_defi",
     difficulty: 4,
     theme: "neutral",
     text: "Explique pourquoi un carré de côté 6 cm a une aire plus grande qu’un carré de côté 5 cm.",
@@ -955,15 +955,15 @@ export const airesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Un carré de côté 6 cm a une aire de 6 × 6 = 36 cm². Un carré de côté 5 cm a une aire de 5 × 5 = 25 cm². Comme 36 est plus grand que 25, son aire est plus grande.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["aires", "defi", "raisonnement"],
+    tags: ["aire_surface", "defi", "raisonnement"],
   },
   {
     kind: "fixed",
-    id: "area_defis_fixed_3",
+    id: "aire_defi_fixed_3",
     niveau: "6e",
     matiere: "maths",
-    notionId: "aires",
-    microId: "aire_defis",
+    notionId: "aire_surface",
+    microId: "aire_defi",
     difficulty: 4,
     theme: "neutral",
     text: "Deux rectangles peuvent-ils avoir la même aire mais des périmètres différents ?",
@@ -978,15 +978,15 @@ export const airesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Oui. Deux rectangles peuvent avoir la même aire mais des périmètres différents. Par exemple, 3 × 4 et 2 × 6 ont tous deux une aire de 12 cm², mais pas le même périmètre.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["aires", "defi", "qcm", "raisonnement"],
+    tags: ["aire_surface", "defi", "qcm", "raisonnement"],
   },
   {
     kind: "fixed",
-    id: "area_defis_fixed_4",
+    id: "aire_defi_fixed_4",
     niveau: "6e",
     matiere: "maths",
-    notionId: "aires",
-    microId: "aire_defis",
+    notionId: "aire_surface",
+    microId: "aire_defi",
     difficulty: 4,
     theme: "neutral",
     text: "Si on double la longueur d’un rectangle sans changer sa largeur, que devient son aire ?",
@@ -1001,15 +1001,15 @@ export const airesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Si la largeur reste la même et que la longueur est multipliée par 2, alors l’aire est aussi multipliée par 2. Elle double.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["aires", "defi", "qcm", "proportionnalite"],
+    tags: ["aire_surface", "defi", "qcm", "prop_proportionnalite"],
   },
   {
     kind: "fixed",
-    id: "area_defis_fixed_5",
+    id: "aire_defi_fixed_5",
     niveau: "6e",
     matiere: "maths",
-    notionId: "aires",
-    microId: "aire_defis",
+    notionId: "aire_surface",
+    microId: "aire_defi",
     difficulty: 5,
     theme: "neutral",
     text: "Donne un exemple d’aire comprise entre 10 cm² et 15 cm².",
@@ -1023,15 +1023,15 @@ export const airesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Une aire strictement comprise entre 10 cm² et 15 cm² peut être 11 cm², 12 cm², 13 cm² ou 14 cm².") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["aires", "defi", "raisonnement"],
+    tags: ["aire_surface", "defi", "raisonnement"],
   },
   {
     kind: "fixed",
-    id: "area_defis_fixed_6",
+    id: "aire_defi_fixed_6",
     niveau: "6e",
     matiere: "maths",
-    notionId: "aires",
-    microId: "aire_defis",
+    notionId: "aire_surface",
+    microId: "aire_defi",
     difficulty: 5,
     theme: "neutral",
     text: "Un carré a une aire de 36 cm². Combien mesure un côté ?",
@@ -1045,15 +1045,15 @@ export const airesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Comme 6 × 6 = 36, un carré d’aire 36 cm² a un côté de 6 cm.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["aires", "defi", "inverse"],
+    tags: ["aire_surface", "defi", "inverse"],
   },
   {
     kind: "fixed",
-    id: "area_defis_fixed_7",
+    id: "aire_defi_fixed_7",
     niveau: "6e",
     matiere: "maths",
-    notionId: "aires",
-    microId: "aire_defis",
+    notionId: "aire_surface",
+    microId: "aire_defi",
     difficulty: 5,
     theme: "neutral",
     text: "Un rectangle a une aire de 24 cm² et une largeur de 4 cm. Quelle est sa longueur ?",
@@ -1067,15 +1067,15 @@ export const airesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Si l’aire vaut 24 cm² et la largeur 4 cm, alors la longueur vaut 24 ÷ 4 = 6 cm.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["aires", "defi", "inverse"],
+    tags: ["aire_surface", "defi", "inverse"],
   },
   {
     kind: "fixed",
-    id: "area_defis_canvas_1",
+    id: "aire_defi_canvas_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "aires",
-    microId: "aire_defis",
+    notionId: "aire_surface",
+    microId: "aire_defi",
     difficulty: 5,
     theme: "neutral",
     text: "Observe la figure sur quadrillage. Cette figure a-t-elle la même aire qu’un rectangle de 3 unités sur 2 unités ?",
@@ -1090,7 +1090,7 @@ export const airesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Le rectangle de 3 unités sur 2 unités a une aire de 6. La figure sur quadrillage recouvre aussi 6 carreaux unités. Les deux aires sont donc égales.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["aires", "defi", "canvas", "qcm", "comparaison"],
+    tags: ["aire_surface", "defi", "canvas", "qcm", "comparaison"],
     canvas: {
       kind: "figure_libre",
       grid: {
@@ -1113,11 +1113,11 @@ export const airesBank: TutorBankItemV4[] = [
   },
   {
     kind: "fixed",
-    id: "area_defis_reunion_1",
+    id: "aire_defi_reunion_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "aires",
-    microId: "aire_defis",
+    notionId: "aire_surface",
+    microId: "aire_defi",
     difficulty: 5,
     theme: "reunion",
     text: "À La Réunion, deux parcelles de 12 m² et 9 m² sont réunies. Quelle aire totale obtient-on ?",
@@ -1131,7 +1131,7 @@ export const airesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Quand on réunit deux parcelles sans chevauchement, on additionne leurs aires : 12 + 9 = 21 m².") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["aires", "defi", "reunion"],
+    tags: ["aire_surface", "defi", "reunion"],
   },
 
   // =========================
@@ -1139,15 +1139,15 @@ export const airesBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "template",
-    id: "area_comprendre_tpl_1",
+    id: "aire_comprendre_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "aires",
+    notionId: "aire_surface",
     microId: "aire_comprendre",
     difficulty: 1,
     theme: "neutral",
     hint: "Une aire se mesure en unités carrées.",
-    tags: ["aires", "comprendre", "template"],
+    tags: ["aire_surface", "comprendre", "template"],
     generate: () => {
       return {
         text: "Quelle unité est adaptée pour mesurer une aire ?",
@@ -1170,15 +1170,15 @@ export const airesBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "template",
-    id: "area_compter_tpl_1",
+    id: "aire_compter_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "aires",
+    notionId: "aire_surface",
     microId: "aire_compter",
     difficulty: 2,
     theme: "neutral",
     hint: "Compte les carreaux unités.",
-    tags: ["aires", "compter", "template"],
+    tags: ["aire_surface", "compter", "template"],
     generate: () => {
       const n = randomInt(4, 16);
       return {
@@ -1196,15 +1196,15 @@ export const airesBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "area_compter_qcm_tpl_1",
+    id: "aire_compter_qcm_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "aires",
+    notionId: "aire_surface",
     microId: "aire_compter",
     difficulty: 3,
     theme: "neutral",
     hint: "Multiplie les rangées par les carreaux de chaque rangée.",
-    tags: ["aires", "compter", "qcm", "template"],
+    tags: ["aire_surface", "compter", "qcm", "template"],
     generate: () => {
       const a = randomInt(2, 4);
       const b = randomInt(3, 6);
@@ -1235,15 +1235,15 @@ export const airesBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "template",
-    id: "area_rectangle_tpl_1",
+    id: "aire_rectangle_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "aires",
+    notionId: "aire_surface",
     microId: "aire_rectangle",
     difficulty: 2,
     theme: "neutral",
     hint: "Aire = longueur × largeur.",
-    tags: ["aires", "rectangle", "template"],
+    tags: ["aire_surface", "rectangle", "template"],
     generate: () => {
       const l = [3, 4, 5, 6, 7, 8][Math.floor(Math.random() * 6)];
       const w = [2, 3, 4, 5, 6][Math.floor(Math.random() * 5)];
@@ -1264,15 +1264,15 @@ export const airesBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "area_rectangle_qcm_tpl_1",
+    id: "aire_rectangle_qcm_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "aires",
+    notionId: "aire_surface",
     microId: "aire_rectangle",
     difficulty: 3,
     theme: "neutral",
     hint: "Ne confonds pas aire et périmètre.",
-    tags: ["aires", "rectangle", "qcm", "template"],
+    tags: ["aire_surface", "rectangle", "qcm", "template"],
     generate: () => {
       const l = [4, 5, 6, 7, 8][Math.floor(Math.random() * 5)];
       const w = [2, 3, 4, 5][Math.floor(Math.random() * 4)];
@@ -1308,15 +1308,15 @@ export const airesBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "template",
-    id: "area_square_tpl_1",
+    id: "aire_carre_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "aires",
-    microId: "aire_square",
+    notionId: "aire_surface",
+    microId: "aire_carre",
     difficulty: 2,
     theme: "neutral",
     hint: "Aire du carré = côté × côté.",
-    tags: ["aires", "carre", "template"],
+    tags: ["aire_surface", "carre", "template"],
     generate: () => {
       const c = [2, 3, 4, 5, 6, 7, 8, 9][Math.floor(Math.random() * 8)];
       const a = c * c;
@@ -1336,15 +1336,15 @@ export const airesBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "area_square_qcm_tpl_1",
+    id: "aire_carre_qcm_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "aires",
-    microId: "aire_square",
+    notionId: "aire_surface",
+    microId: "aire_carre",
     difficulty: 3,
     theme: "neutral",
     hint: "Pour un carré, on fait côté × côté.",
-    tags: ["aires", "carre", "qcm", "template"],
+    tags: ["aire_surface", "carre", "qcm", "template"],
     generate: () => {
       const c = [3, 4, 5, 6, 7, 8][Math.floor(Math.random() * 6)];
       const good = c * c;
@@ -1377,15 +1377,15 @@ export const airesBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "template",
-    id: "area_comparer_tpl_1",
+    id: "aire_comparer_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "aires",
+    notionId: "aire_surface",
     microId: "aire_comparer",
     difficulty: 2,
     theme: "neutral",
     hint: "Compare les deux nombres.",
-    tags: ["aires", "comparer", "template"],
+    tags: ["aire_surface", "comparer", "template"],
     generate: () => {
       const a = randomInt(8, 20);
       let b = randomInt(8, 20);
@@ -1411,15 +1411,15 @@ export const airesBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "template",
-    id: "area_decomposer_tpl_1",
+    id: "aire_decomposer_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "aires",
+    notionId: "aire_surface",
     microId: "aire_decomposer",
     difficulty: 4,
     theme: "neutral",
     hint: "Découpe la figure en deux rectangles plus simples.",
-    tags: ["aires", "decomposer", "template"],
+    tags: ["aire_surface", "decomposer", "template"],
     generate: () => {
       const a = randomInt(4, 12);
       const b = randomInt(3, 10);
@@ -1440,15 +1440,15 @@ export const airesBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "area_decomposer_qcm_tpl_1",
+    id: "aire_decomposer_qcm_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "aires",
+    notionId: "aire_surface",
     microId: "aire_decomposer",
     difficulty: 4,
     theme: "neutral",
     hint: "On additionne les aires des parties.",
-    tags: ["aires", "decomposer", "qcm", "template"],
+    tags: ["aire_surface", "decomposer", "qcm", "template"],
     generate: () => {
       const a = randomInt(5, 12);
       const b = randomInt(4, 10);
@@ -1479,15 +1479,15 @@ export const airesBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "template",
-    id: "area_problemes_tpl_1",
+    id: "aire_probleme_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "aires",
-    microId: "aire_problemes",
+    notionId: "aire_surface",
+    microId: "aire_probleme",
     difficulty: 4,
     theme: "neutral",
     hint: "Pour un rectangle, on multiplie longueur et largeur.",
-    tags: ["aires", "problemes", "template"],
+    tags: ["aire_surface", "probleme", "template"],
     generate: () => {
       const l = randomInt(3, 9);
       const w = randomInt(2, 6);
@@ -1508,15 +1508,15 @@ export const airesBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "area_problemes_qcm_tpl_1",
+    id: "aire_probleme_qcm_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "aires",
-    microId: "aire_problemes",
+    notionId: "aire_surface",
+    microId: "aire_probleme",
     difficulty: 5,
     theme: "neutral",
     hint: "L’aire = longueur × largeur.",
-    tags: ["aires", "problemes", "qcm", "template"],
+    tags: ["aire_surface", "probleme", "qcm", "template"],
     generate: () => {
       const lengths = [2, 2.5, 3.5, 4.5, 5.5];
       const widths = [2, 3, 4];
@@ -1559,15 +1559,15 @@ export const airesBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "template",
-    id: "area_defis_tpl_1",
+    id: "aire_defi_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "aires",
-    microId: "aire_defis",
+    notionId: "aire_surface",
+    microId: "aire_defi",
     difficulty: 5,
     theme: "neutral",
     hint: "Choisis un nombre strictement entre les deux bornes.",
-    tags: ["aires", "defi", "template"],
+    tags: ["aire_surface", "defi", "template"],
     generate: () => {
       const low = randomInt(8, 12);
       const high = low + randomInt(3, 6);
@@ -1594,15 +1594,15 @@ export const airesBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "area_defis_tpl_2",
+    id: "aire_defi_tpl_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "aires",
-    microId: "aire_defis",
+    notionId: "aire_surface",
+    microId: "aire_defi",
     difficulty: 5,
     theme: "neutral",
     hint: "Cherche le nombre qui multiplié par lui-même donne l’aire.",
-    tags: ["aires", "defi", "template", "inverse"],
+    tags: ["aire_surface", "defi", "template", "inverse"],
     generate: () => {
       const side = randomInt(3, 9);
       const area = side * side;

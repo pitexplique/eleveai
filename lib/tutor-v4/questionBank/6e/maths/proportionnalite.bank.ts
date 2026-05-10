@@ -17,7 +17,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     id: "prop_reconnaitre_fixed_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "proportionnalite",
+    notionId: "prop_proportionnalite",
     microId: "prop_reconnaitre",
     difficulty: 1,
     theme: "neutral",
@@ -32,14 +32,14 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Une situation est proportionnelle quand le prix par objet reste le même. Si 1 cahier coûte toujours le même prix, alors la situation est proportionnelle.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["proportionnalite", "reconnaitre"],
+    tags: ["prop_proportionnalite", "reconnaitre"],
   },
   {
     kind: "fixed",
     id: "prop_reconnaitre_fixed_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "proportionnalite",
+    notionId: "prop_proportionnalite",
     microId: "prop_reconnaitre",
     difficulty: 1,
     theme: "neutral",
@@ -54,14 +54,14 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("On passe de 2 pommes à 4 pommes en multipliant par 2. Le prix passe aussi de 4 € à 8 € en multipliant par 2. La situation est donc proportionnelle.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["proportionnalite", "reconnaitre"],
+    tags: ["prop_proportionnalite", "reconnaitre"],
   },
   {
     kind: "fixed",
     id: "prop_reconnaitre_fixed_3",
     niveau: "6e",
     matiere: "maths",
-    notionId: "proportionnalite",
+    notionId: "prop_proportionnalite",
     microId: "prop_reconnaitre",
     difficulty: 2,
     theme: "neutral",
@@ -76,14 +76,14 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Si la situation était proportionnelle, en passant de 2 billets à 4 billets, le prix devrait passer de 6 € à 12 €. Or ici on obtient 11 €. La situation n’est donc pas proportionnelle.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["proportionnalite", "reconnaitre"],
+    tags: ["prop_proportionnalite", "reconnaitre"],
   },
   {
     kind: "fixed",
     id: "prop_reconnaitre_qcm_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "proportionnalite",
+    notionId: "prop_proportionnalite",
     microId: "prop_reconnaitre",
     difficulty: 2,
     theme: "neutral",
@@ -104,14 +104,14 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Seule la première situation est proportionnelle : quand on passe de 3 à 6 stylos, on multiplie par 2, et le prix passe de 6 € à 12 €, donc il est aussi multiplié par 2.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["proportionnalite", "reconnaitre", "qcm"],
+    tags: ["prop_proportionnalite", "reconnaitre", "qcm"],
   },
   {
     kind: "fixed",
     id: "prop_reconnaitre_qcm_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "proportionnalite",
+    notionId: "prop_proportionnalite",
     microId: "prop_reconnaitre",
     difficulty: 2,
     theme: "reunion",
@@ -132,7 +132,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Dans la première situation, on passe de 2 à 6 mangues en multipliant par 3, et le prix passe de 4 € à 12 € en multipliant aussi par 3. C’est donc une situation proportionnelle.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["proportionnalite", "reconnaitre", "reunion", "qcm"],
+    tags: ["prop_proportionnalite", "reconnaitre", "reunion", "qcm"],
   },
 
   // =========================
@@ -143,7 +143,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     id: "prop_table_fixed_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "proportionnalite",
+    notionId: "prop_proportionnalite",
     microId: "prop_table",
     difficulty: 2,
     theme: "neutral",
@@ -158,14 +158,14 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("On passe de 2 cahiers à 4 cahiers en multipliant par 2. On multiplie donc aussi le prix par 2 : 4 € × 2 = 8 €.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["proportionnalite", "tableau"],
+    tags: ["prop_proportionnalite", "tableau"],
   },
   {
     kind: "fixed",
     id: "prop_table_fixed_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "proportionnalite",
+    notionId: "prop_proportionnalite",
     microId: "prop_table",
     difficulty: 2,
     theme: "neutral",
@@ -180,14 +180,14 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("On passe de 3 stylos à 9 stylos en multipliant par 3. Le prix est donc aussi multiplié par 3 : 6 € × 3 = 18 €.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["proportionnalite", "tableau"],
+    tags: ["prop_proportionnalite", "tableau"],
   },
   {
     kind: "fixed",
     id: "prop_table_fixed_reunion_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "proportionnalite",
+    notionId: "prop_proportionnalite",
     microId: "prop_table",
     difficulty: 2,
     theme: "reunion",
@@ -202,14 +202,14 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("On passe de 3 samoussas à 6 samoussas en multipliant par 2. Le prix passe donc de 6 € à 12 €.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["proportionnalite", "tableau", "reunion"],
+    tags: ["prop_proportionnalite", "tableau", "reunion"],
   },
   {
     kind: "fixed",
     id: "prop_table_fixed_reunion_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "proportionnalite",
+    notionId: "prop_proportionnalite",
     microId: "prop_table",
     difficulty: 2,
     theme: "reunion",
@@ -224,14 +224,14 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("On passe de 2 ananas à 6 ananas en multipliant par 3. Le prix passe donc de 8 € à 24 €.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["proportionnalite", "tableau", "reunion"],
+    tags: ["prop_proportionnalite", "tableau", "reunion"],
   },
   {
     kind: "fixed",
     id: "prop_table_qcm_jeuxvideo_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "proportionnalite",
+    notionId: "prop_proportionnalite",
     microId: "prop_table",
     difficulty: 2,
     theme: "jeux_video",
@@ -247,14 +247,14 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("On passe de 2 potions à 6 potions en multipliant par 3. Le prix passe donc de 10 à 30 pièces.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["proportionnalite", "tableau", "jeux_video", "qcm"],
+    tags: ["prop_proportionnalite", "tableau", "jeux_video", "qcm"],
   },
   {
     kind: "fixed",
     id: "prop_table_qcm_jeuxvideo_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "proportionnalite",
+    notionId: "prop_proportionnalite",
     microId: "prop_table",
     difficulty: 2,
     theme: "jeux_video",
@@ -270,7 +270,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("On passe de 4 coffres à 8 coffres en multipliant par 2. Le prix passe donc de 12 à 24 pièces.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["proportionnalite", "tableau", "jeux_video", "qcm"],
+    tags: ["prop_proportionnalite", "tableau", "jeux_video", "qcm"],
   },
 
   // =========================
@@ -281,7 +281,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     id: "prop_coeff_fixed_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "proportionnalite",
+    notionId: "prop_proportionnalite",
     microId: "prop_coeff",
     difficulty: 2,
     theme: "neutral",
@@ -296,14 +296,14 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Si un cahier coûte 3 €, alors le prix total s’obtient en multipliant le nombre de cahiers par 3. Le coefficient est donc 3.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["proportionnalite", "coefficient"],
+    tags: ["prop_proportionnalite", "coefficient"],
   },
   {
     kind: "fixed",
     id: "prop_coeff_fixed_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "proportionnalite",
+    notionId: "prop_proportionnalite",
     microId: "prop_coeff",
     difficulty: 2,
     theme: "neutral",
@@ -318,14 +318,14 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Si 2 stylos coûtent 8 €, alors 1 stylo coûte 8 ÷ 2 = 4 €. Le coefficient de proportionnalité est donc 4.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["proportionnalite", "coefficient"],
+    tags: ["prop_proportionnalite", "coefficient"],
   },
   {
     kind: "fixed",
     id: "prop_coeff_qcm_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "proportionnalite",
+    notionId: "prop_proportionnalite",
     microId: "prop_coeff",
     difficulty: 2,
     theme: "neutral",
@@ -341,14 +341,14 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("3 objets coûtent 12 €, donc 1 objet coûte 12 ÷ 3 = 4 €. Le coefficient est 4.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["proportionnalite", "coefficient", "qcm"],
+    tags: ["prop_proportionnalite", "coefficient", "qcm"],
   },
   {
     kind: "fixed",
     id: "prop_coeff_qcm_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "proportionnalite",
+    notionId: "prop_proportionnalite",
     microId: "prop_coeff",
     difficulty: 2,
     theme: "reunion",
@@ -364,7 +364,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("5 mangues coûtent 15 €, donc 1 mangue coûte 15 ÷ 5 = 3 €. Le coefficient est 3.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["proportionnalite", "coefficient", "reunion", "qcm"],
+    tags: ["prop_proportionnalite", "coefficient", "reunion", "qcm"],
   },
 
   // =========================
@@ -372,11 +372,11 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "fixed",
-    id: "prop_unit_fixed_1",
+    id: "prop_unite_fixed_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "proportionnalite",
-    microId: "prop_unit",
+    notionId: "prop_proportionnalite",
+    microId: "prop_unite",
     difficulty: 2,
     theme: "neutral",
     text: "3 bonbons coûtent 6 €. Combien coûte 1 bonbon ?",
@@ -390,15 +390,15 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Pour trouver le prix d’un bonbon, on divise 6 € par 3. On obtient 2 €. Un bonbon coûte donc 2 €.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["proportionnalite", "unite"],
+    tags: ["prop_proportionnalite", "unite"],
   },
   {
     kind: "fixed",
-    id: "prop_unit_fixed_2",
+    id: "prop_unite_fixed_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "proportionnalite",
-    microId: "prop_unit",
+    notionId: "prop_proportionnalite",
+    microId: "prop_unite",
     difficulty: 2,
     theme: "neutral",
     text: "5 cahiers coûtent 15 €. Combien coûte 1 cahier ?",
@@ -412,15 +412,15 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("15 € ÷ 5 = 3 €. Un cahier coûte donc 3 €.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["proportionnalite", "unite"],
+    tags: ["prop_proportionnalite", "unite"],
   },
   {
     kind: "fixed",
-    id: "prop_unit_fixed_cuisine_1",
+    id: "prop_unite_fixed_cuisine_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "proportionnalite",
-    microId: "prop_unit",
+    notionId: "prop_proportionnalite",
+    microId: "prop_unite",
     difficulty: 2,
     theme: "cuisine",
     text: "Pour une recette, 4 yaourts coûtent 8 €. Combien coûte 1 yaourt ?",
@@ -434,15 +434,15 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("8 € ÷ 4 = 2 €. Un yaourt coûte donc 2 €.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["proportionnalite", "unite", "cuisine"],
+    tags: ["prop_proportionnalite", "unite", "cuisine"],
   },
   {
     kind: "fixed",
-    id: "prop_unit_fixed_cuisine_2",
+    id: "prop_unite_fixed_cuisine_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "proportionnalite",
-    microId: "prop_unit",
+    notionId: "prop_proportionnalite",
+    microId: "prop_unite",
     difficulty: 2,
     theme: "cuisine",
     text: "Pour cuisiner, 6 œufs coûtent 12 €. Combien coûte 1 œuf ?",
@@ -456,15 +456,15 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("12 € ÷ 6 = 2 €. Un œuf coûte donc 2 €.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["proportionnalite", "unite", "cuisine"],
+    tags: ["prop_proportionnalite", "unite", "cuisine"],
   },
   {
     kind: "fixed",
-    id: "prop_unit_qcm_reunion_1",
+    id: "prop_unite_qcm_reunion_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "proportionnalite",
-    microId: "prop_unit",
+    notionId: "prop_proportionnalite",
+    microId: "prop_unite",
     difficulty: 2,
     theme: "reunion",
     text: "Au marché de Saint-Pierre, 5 mangues coûtent 15 €. Combien coûte 1 mangue ?",
@@ -479,15 +479,15 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("15 € ÷ 5 = 3 €. Une mangue coûte donc 3 €.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["proportionnalite", "unite", "reunion", "qcm"],
+    tags: ["prop_proportionnalite", "unite", "reunion", "qcm"],
   },
   {
     kind: "fixed",
-    id: "prop_unit_qcm_reunion_2",
+    id: "prop_unite_qcm_reunion_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "proportionnalite",
-    microId: "prop_unit",
+    notionId: "prop_proportionnalite",
+    microId: "prop_unite",
     difficulty: 2,
     theme: "reunion",
     text: "Au snack, 4 bouchons coûtent 8 €. Combien coûte 1 bouchon ?",
@@ -502,7 +502,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("8 € ÷ 4 = 2 €. Un bouchon coûte donc 2 €.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["proportionnalite", "unite", "reunion", "qcm"],
+    tags: ["prop_proportionnalite", "unite", "reunion", "qcm"],
   },
 
   // =========================
@@ -513,7 +513,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     id: "prop_direct_fixed_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "proportionnalite",
+    notionId: "prop_proportionnalite",
     microId: "prop_direct",
     difficulty: 2,
     theme: "neutral",
@@ -528,14 +528,14 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("On passe de 4 cahiers à 2 cahiers en divisant par 2. On divise donc aussi le prix par 2 : 8 € ÷ 2 = 4 €.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["proportionnalite", "direct"],
+    tags: ["prop_proportionnalite", "direct"],
   },
   {
     kind: "fixed",
     id: "prop_direct_fixed_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "proportionnalite",
+    notionId: "prop_proportionnalite",
     microId: "prop_direct",
     difficulty: 2,
     theme: "neutral",
@@ -550,14 +550,14 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("4 feutres, c’est la moitié de 8 feutres. Le prix est donc la moitié de 16 €, soit 8 €.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["proportionnalite", "direct"],
+    tags: ["prop_proportionnalite", "direct"],
   },
   {
     kind: "fixed",
     id: "prop_direct_fixed_sport_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "proportionnalite",
+    notionId: "prop_proportionnalite",
     microId: "prop_direct",
     difficulty: 2,
     theme: "sport",
@@ -572,14 +572,14 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("3 bouteilles, c’est la moitié de 6 bouteilles. Le prix est donc la moitié de 12 €, soit 6 €.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["proportionnalite", "direct", "sport"],
+    tags: ["prop_proportionnalite", "direct", "sport"],
   },
   {
     kind: "fixed",
     id: "prop_direct_fixed_sport_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "proportionnalite",
+    notionId: "prop_proportionnalite",
     microId: "prop_direct",
     difficulty: 2,
     theme: "sport",
@@ -594,14 +594,14 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("5 maillots, c’est la moitié de 10 maillots. Le prix est donc la moitié de 50 €, soit 25 €.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["proportionnalite", "direct", "sport"],
+    tags: ["prop_proportionnalite", "direct", "sport"],
   },
   {
     kind: "fixed",
     id: "prop_direct_qcm_cuisine_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "proportionnalite",
+    notionId: "prop_proportionnalite",
     microId: "prop_direct",
     difficulty: 2,
     theme: "cuisine",
@@ -617,14 +617,14 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("4 œufs, c’est la moitié de 8 œufs. Le prix est donc la moitié de 16 €, soit 8 €.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["proportionnalite", "direct", "cuisine", "qcm"],
+    tags: ["prop_proportionnalite", "direct", "cuisine", "qcm"],
   },
   {
     kind: "fixed",
     id: "prop_direct_qcm_cuisine_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "proportionnalite",
+    notionId: "prop_proportionnalite",
     microId: "prop_direct",
     difficulty: 2,
     theme: "cuisine",
@@ -640,7 +640,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("3 citrons, c’est la moitié de 6 citrons. Le prix est donc la moitié de 12 €, soit 6 €.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["proportionnalite", "direct", "cuisine", "qcm"],
+    tags: ["prop_proportionnalite", "direct", "cuisine", "qcm"],
   },
 
   // =========================
@@ -648,11 +648,11 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "fixed",
-    id: "prop_defis_fixed_1",
+    id: "prop_defi_fixed_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "proportionnalite",
-    microId: "prop_defis",
+    notionId: "prop_proportionnalite",
+    microId: "prop_defi",
     difficulty: 3,
     theme: "neutral",
     text: "Si 2 objets coûtent 6 €, combien coûtent 5 objets ?",
@@ -666,15 +666,15 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("2 objets coûtent 6 €, donc 1 objet coûte 3 €. Alors 5 objets coûtent 5 × 3 = 15 €.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["proportionnalite", "defi"],
+    tags: ["prop_proportionnalite", "defi"],
   },
   {
     kind: "fixed",
-    id: "prop_defis_fixed_2",
+    id: "prop_defi_fixed_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "proportionnalite",
-    microId: "prop_defis",
+    notionId: "prop_proportionnalite",
+    microId: "prop_defi",
     difficulty: 4,
     theme: "neutral",
     text: "Explique pourquoi la situation suivante n’est pas proportionnelle : 2 tickets coûtent 4 € et 4 tickets coûtent 10 €.",
@@ -688,15 +688,15 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Si la situation était proportionnelle, en passant de 2 à 4 tickets, on doublerait la quantité, donc le prix devrait passer de 4 € à 8 €. Or ici on obtient 10 €. La situation n’est pas proportionnelle.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["proportionnalite", "defi", "raisonnement"],
+    tags: ["prop_proportionnalite", "defi", "raisonnement"],
   },
   {
     kind: "fixed",
-    id: "prop_defis_fixed_3",
+    id: "prop_defi_fixed_3",
     niveau: "6e",
     matiere: "maths",
-    notionId: "proportionnalite",
-    microId: "prop_defis",
+    notionId: "prop_proportionnalite",
+    microId: "prop_defi",
     difficulty: 4,
     theme: "reunion",
     text: "À La Réunion, 4 samoussas coûtent 8 €. Combien coûtent 7 samoussas ?",
@@ -710,15 +710,15 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("4 samoussas coûtent 8 €, donc 1 samoussa coûte 2 €. Alors 7 samoussas coûtent 7 × 2 = 14 €.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["proportionnalite", "defi", "reunion"],
+    tags: ["prop_proportionnalite", "defi", "reunion"],
   },
   {
     kind: "fixed",
-    id: "prop_defis_qcm_1",
+    id: "prop_defi_qcm_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "proportionnalite",
-    microId: "prop_defis",
+    notionId: "prop_proportionnalite",
+    microId: "prop_defi",
     difficulty: 4,
     theme: "neutral",
     text: "Si 3 cahiers coûtent 9 €, combien coûtent 7 cahiers ?",
@@ -733,7 +733,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("3 cahiers coûtent 9 €, donc 1 cahier coûte 3 €. Alors 7 cahiers coûtent 7 × 3 = 21 €.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["proportionnalite", "defi", "qcm"],
+    tags: ["prop_proportionnalite", "defi", "qcm"],
   },
 
   // =========================
@@ -744,12 +744,12 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     id: "prop_reconnaitre_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "proportionnalite",
+    notionId: "prop_proportionnalite",
     microId: "prop_reconnaitre",
     difficulty: 2,
     theme: "neutral",
     hint: "Regarde si le même coefficient s’applique aux deux lignes.",
-    tags: ["proportionnalite", "reconnaitre", "template"],
+    tags: ["prop_proportionnalite", "reconnaitre", "template"],
     generate: () => {
       const qty = randomChoice([2, 3, 4]);
       const coef = randomChoice([2, 3]);
@@ -779,12 +779,12 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     id: "prop_reconnaitre_qcm_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "proportionnalite",
+    notionId: "prop_proportionnalite",
     microId: "prop_reconnaitre",
     difficulty: 2,
     theme: "neutral",
     hint: "Cherche la situation où le prix suit exactement le même coefficient que la quantité.",
-    tags: ["proportionnalite", "reconnaitre", "qcm", "template"],
+    tags: ["prop_proportionnalite", "reconnaitre", "qcm", "template"],
     generate: () => {
       const good = "2 objets coûtent 6 € et 6 objets coûtent 18 €";
       const choices = shuffle([
@@ -818,12 +818,12 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     id: "prop_table_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "proportionnalite",
+    notionId: "prop_proportionnalite",
     microId: "prop_table",
     difficulty: 2,
     theme: "neutral",
     hint: "Utilise le coefficient multiplicateur.",
-    tags: ["proportionnalite", "tableau", "template"],
+    tags: ["prop_proportionnalite", "tableau", "template"],
     generate: () => {
       const a = randomChoice([2, 3, 4]);
       const coef = randomChoice([2, 3, 4]);
@@ -850,12 +850,12 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     id: "prop_table_tpl_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "proportionnalite",
+    notionId: "prop_proportionnalite",
     microId: "prop_table",
     difficulty: 2,
     theme: "neutral",
     hint: "Repère par combien on multiplie la quantité.",
-    tags: ["proportionnalite", "tableau", "template"],
+    tags: ["prop_proportionnalite", "tableau", "template"],
     generate: () => {
       const qty = randomChoice([2, 3, 5]);
       const coef = randomChoice([2, 3]);
@@ -882,12 +882,12 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     id: "prop_table_qcm_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "proportionnalite",
+    notionId: "prop_proportionnalite",
     microId: "prop_table",
     difficulty: 2,
     theme: "neutral",
     hint: "Multiplie aussi le prix par le même coefficient.",
-    tags: ["proportionnalite", "tableau", "qcm", "template"],
+    tags: ["prop_proportionnalite", "tableau", "qcm", "template"],
     generate: () => {
       const qty = randomChoice([2, 3, 4]);
       const coef = randomChoice([2, 3]);
@@ -926,12 +926,12 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     id: "prop_coeff_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "proportionnalite",
+    notionId: "prop_proportionnalite",
     microId: "prop_coeff",
     difficulty: 2,
     theme: "neutral",
     hint: "Cherche la valeur pour 1 objet.",
-    tags: ["proportionnalite", "coefficient", "template"],
+    tags: ["prop_proportionnalite", "coefficient", "template"],
     generate: () => {
       const qty = randomChoice([2, 3, 4, 5]);
       const unit = randomChoice([2, 3, 4]);
@@ -955,12 +955,12 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     id: "prop_coeff_qcm_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "proportionnalite",
+    notionId: "prop_proportionnalite",
     microId: "prop_coeff",
     difficulty: 2,
     theme: "neutral",
     hint: "Le coefficient est le prix d’un seul objet.",
-    tags: ["proportionnalite", "coefficient", "qcm", "template"],
+    tags: ["prop_proportionnalite", "coefficient", "qcm", "template"],
     generate: () => {
       const qty = randomChoice([2, 3, 4, 5]);
       const unit = randomChoice([2, 3, 4]);
@@ -991,15 +991,15 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "template",
-    id: "prop_unit_tpl_1",
+    id: "prop_unite_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "proportionnalite",
-    microId: "prop_unit",
+    notionId: "prop_proportionnalite",
+    microId: "prop_unite",
     difficulty: 2,
     theme: "neutral",
     hint: "Divise par le nombre d’objets.",
-    tags: ["proportionnalite", "unite", "template"],
+    tags: ["prop_proportionnalite", "unite", "template"],
     generate: () => {
       const qty = randomChoice([2, 3, 4, 5]);
       const unit = randomChoice([2, 3, 4]);
@@ -1020,15 +1020,15 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "prop_unit_tpl_2",
+    id: "prop_unite_tpl_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "proportionnalite",
-    microId: "prop_unit",
+    notionId: "prop_proportionnalite",
+    microId: "prop_unite",
     difficulty: 2,
     theme: "neutral",
     hint: "Passe à l’unité.",
-    tags: ["proportionnalite", "unite", "template"],
+    tags: ["prop_proportionnalite", "unite", "template"],
     generate: () => {
       const qty = randomChoice([2, 4, 5, 6]);
       const unit = randomChoice([1, 2, 3, 4]);
@@ -1049,15 +1049,15 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "prop_unit_qcm_tpl_1",
+    id: "prop_unite_qcm_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "proportionnalite",
-    microId: "prop_unit",
+    notionId: "prop_proportionnalite",
+    microId: "prop_unite",
     difficulty: 2,
     theme: "neutral",
     hint: "Il faut partager le prix total par la quantité.",
-    tags: ["proportionnalite", "unite", "qcm", "template"],
+    tags: ["prop_proportionnalite", "unite", "qcm", "template"],
     generate: () => {
       const qty = randomChoice([2, 3, 4, 5]);
       const unit = randomChoice([2, 3, 4]);
@@ -1093,12 +1093,12 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     id: "prop_direct_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "proportionnalite",
+    notionId: "prop_proportionnalite",
     microId: "prop_direct",
     difficulty: 2,
     theme: "neutral",
     hint: "Si la quantité diminue, le prix diminue dans la même proportion.",
-    tags: ["proportionnalite", "direct", "template"],
+    tags: ["prop_proportionnalite", "direct", "template"],
     generate: () => {
       const qty = randomChoice([4, 6, 8]);
       const unit = randomChoice([2, 3, 4]);
@@ -1125,12 +1125,12 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     id: "prop_direct_tpl_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "proportionnalite",
+    notionId: "prop_proportionnalite",
     microId: "prop_direct",
     difficulty: 2,
     theme: "neutral",
     hint: "Passe à la moitié.",
-    tags: ["proportionnalite", "direct", "template"],
+    tags: ["prop_proportionnalite", "direct", "template"],
     generate: () => {
       const qty = randomChoice([6, 8, 10]);
       const unit = randomChoice([2, 3, 5]);
@@ -1156,12 +1156,12 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     id: "prop_direct_qcm_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "proportionnalite",
+    notionId: "prop_proportionnalite",
     microId: "prop_direct",
     difficulty: 2,
     theme: "sport",
     hint: "Si on divise la quantité par 2, on divise aussi le prix par 2.",
-    tags: ["proportionnalite", "direct", "sport", "qcm", "template"],
+    tags: ["prop_proportionnalite", "direct", "sport", "qcm", "template"],
     generate: () => {
       const qty = randomChoice([4, 6, 8]);
       const unit = randomChoice([2, 3]);
@@ -1196,15 +1196,15 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "template",
-    id: "prop_defis_tpl_1",
+    id: "prop_defi_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "proportionnalite",
-    microId: "prop_defis",
+    notionId: "prop_proportionnalite",
+    microId: "prop_defi",
     difficulty: 4,
     theme: "neutral",
     hint: "Passe d’abord à l’unité.",
-    tags: ["proportionnalite", "defi", "template"],
+    tags: ["prop_proportionnalite", "defi", "template"],
     generate: () => {
       const qty = randomChoice([2, 3, 4]);
       const unit = randomChoice([2, 3, 5]);
@@ -1226,15 +1226,15 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "prop_defis_qcm_tpl_1",
+    id: "prop_defi_qcm_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "proportionnalite",
-    microId: "prop_defis",
+    notionId: "prop_proportionnalite",
+    microId: "prop_defi",
     difficulty: 4,
     theme: "neutral",
     hint: "Cherche le prix d’un objet puis multiplie.",
-    tags: ["proportionnalite", "defi", "qcm", "template"],
+    tags: ["prop_proportionnalite", "defi", "qcm", "template"],
     generate: () => {
       const qty = randomChoice([2, 3, 4]);
       const unit = randomChoice([2, 3, 4]);

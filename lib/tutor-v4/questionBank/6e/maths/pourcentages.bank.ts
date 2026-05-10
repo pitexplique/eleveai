@@ -21,7 +21,7 @@ export const pourcentagesBank: TutorBankItemV4[] = [
     id: "pourcentage_comprendre_fixed_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "pourcentages",
+    notionId: "pourcentage_nombre",
     microId: "pourcentage_comprendre",
     difficulty: 1,
     theme: "neutral",
@@ -36,14 +36,14 @@ export const pourcentagesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("25 % signifie 25 sur 100. Un pourcentage représente toujours une part sur 100.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["pourcentages", "comprendre"],
+    tags: ["pourcentage_nombre", "comprendre"],
   },
   {
     kind: "fixed",
     id: "pourcentage_comprendre_fixed_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "pourcentages",
+    notionId: "pourcentage_nombre",
     microId: "pourcentage_comprendre",
     difficulty: 1,
     theme: "neutral",
@@ -58,14 +58,14 @@ export const pourcentagesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("50 % signifie 50 sur 100. Comme 50/100 = 1/2, cela représente aussi la moitié.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["pourcentages", "comprendre"],
+    tags: ["pourcentage_nombre", "comprendre"],
   },
   {
     kind: "fixed",
     id: "pourcentage_comprendre_fixed_3",
     niveau: "6e",
     matiere: "maths",
-    notionId: "pourcentages",
+    notionId: "pourcentage_nombre",
     microId: "pourcentage_comprendre",
     difficulty: 1,
     theme: "neutral",
@@ -80,14 +80,14 @@ export const pourcentagesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("10 % signifie 10 sur 100. Cela veut dire que l’on prend 10 parts parmi 100.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["pourcentages", "comprendre"],
+    tags: ["pourcentage_nombre", "comprendre"],
   },
   {
     kind: "fixed",
     id: "pourcentage_comprendre_qcm_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "pourcentages",
+    notionId: "pourcentage_nombre",
     microId: "pourcentage_comprendre",
     difficulty: 1,
     theme: "neutral",
@@ -103,14 +103,14 @@ export const pourcentagesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Le symbole % signifie “sur 100”. Un pourcentage exprime donc une part sur 100.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["pourcentages", "comprendre", "qcm"],
+    tags: ["pourcentage_nombre", "comprendre", "qcm"],
   },
   {
     kind: "fixed",
     id: "pourcentage_comprendre_qcm_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "pourcentages",
+    notionId: "pourcentage_nombre",
     microId: "pourcentage_comprendre",
     difficulty: 2,
     theme: "neutral",
@@ -126,14 +126,14 @@ export const pourcentagesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("75 % signifie 75 sur 100. C’est la définition même d’un pourcentage.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["pourcentages", "comprendre", "qcm"],
+    tags: ["pourcentage_nombre", "comprendre", "qcm"],
   },
   {
     kind: "fixed",
     id: "pourcentage_comprendre_reunion_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "pourcentages",
+    notionId: "pourcentage_nombre",
     microId: "pourcentage_comprendre",
     difficulty: 2,
     theme: "reunion",
@@ -148,7 +148,7 @@ export const pourcentagesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("30 % signifie 30 sur 100. Dans une classe de 100 élèves, cela représente donc 30 élèves.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["pourcentages", "comprendre", "reunion"],
+    tags: ["pourcentage_nombre", "comprendre", "reunion"],
   },
 
   // =========================
@@ -159,7 +159,7 @@ export const pourcentagesBank: TutorBankItemV4[] = [
     id: "pourcentage_fraction_fixed_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "pourcentages",
+    notionId: "pourcentage_nombre",
     microId: "pourcentage_fraction",
     difficulty: 1,
     theme: "neutral",
@@ -174,14 +174,14 @@ export const pourcentagesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("25 % signifie 25 sur 100. On l’écrit donc 25/100.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["pourcentages", "fraction"],
+    tags: ["pourcentage_nombre", "fraction"],
   },
   {
     kind: "fixed",
     id: "pourcentage_fraction_fixed_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "pourcentages",
+    notionId: "pourcentage_nombre",
     microId: "pourcentage_fraction",
     difficulty: 1,
     theme: "neutral",
@@ -196,14 +196,14 @@ export const pourcentagesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("50 % signifie 50 sur 100, donc 50/100. Cette fraction se simplifie aussi en 1/2.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["pourcentages", "fraction"],
+    tags: ["pourcentage_nombre", "fraction"],
   },
   {
     kind: "fixed",
     id: "pourcentage_fraction_fixed_3",
     niveau: "6e",
     matiere: "maths",
-    notionId: "pourcentages",
+    notionId: "pourcentage_nombre",
     microId: "pourcentage_fraction",
     difficulty: 2,
     theme: "neutral",
@@ -218,14 +218,14 @@ export const pourcentagesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("10 % signifie 10 sur 100. On peut écrire 10/100, ce qui correspond aussi à 1/10.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["pourcentages", "fraction"],
+    tags: ["pourcentage_nombre", "fraction"],
   },
   {
     kind: "fixed",
     id: "pourcentage_fraction_fixed_4",
     niveau: "6e",
     matiere: "maths",
-    notionId: "pourcentages",
+    notionId: "pourcentage_nombre",
     microId: "pourcentage_fraction",
     difficulty: 2,
     theme: "neutral",
@@ -240,14 +240,14 @@ export const pourcentagesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("75 % signifie 75 sur 100. On peut écrire 75/100, ce qui correspond aussi à 3/4.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["pourcentages", "fraction"],
+    tags: ["pourcentage_nombre", "fraction"],
   },
   {
     kind: "fixed",
     id: "pourcentage_fraction_qcm_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "pourcentages",
+    notionId: "pourcentage_nombre",
     microId: "pourcentage_fraction",
     difficulty: 2,
     theme: "neutral",
@@ -263,14 +263,14 @@ export const pourcentagesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("40 % signifie 40 sur 100. La bonne fraction est donc 40/100.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["pourcentages", "fraction", "qcm"],
+    tags: ["pourcentage_nombre", "fraction", "qcm"],
   },
   {
     kind: "fixed",
     id: "pourcentage_fraction_qcm_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "pourcentages",
+    notionId: "pourcentage_nombre",
     microId: "pourcentage_fraction",
     difficulty: 2,
     theme: "neutral",
@@ -286,7 +286,7 @@ export const pourcentagesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("5 % signifie 5 sur 100. La bonne écriture est donc 5/100.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["pourcentages", "fraction", "qcm"],
+    tags: ["pourcentage_nombre", "fraction", "qcm"],
   },
 
   // =========================
@@ -297,7 +297,7 @@ export const pourcentagesBank: TutorBankItemV4[] = [
     id: "pourcentage_decimal_fixed_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "pourcentages",
+    notionId: "pourcentage_nombre",
     microId: "pourcentage_decimal",
     difficulty: 2,
     theme: "neutral",
@@ -312,14 +312,14 @@ export const pourcentagesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("50 % signifie 50/100. En écriture décimale, cela donne 0,5.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["pourcentages", "decimal"],
+    tags: ["pourcentage_nombre", "decimal"],
   },
   {
     kind: "fixed",
     id: "pourcentage_decimal_fixed_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "pourcentages",
+    notionId: "pourcentage_nombre",
     microId: "pourcentage_decimal",
     difficulty: 2,
     theme: "neutral",
@@ -334,14 +334,14 @@ export const pourcentagesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("25 % signifie 25/100. En écriture décimale, cela donne 0,25.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["pourcentages", "decimal"],
+    tags: ["pourcentage_nombre", "decimal"],
   },
   {
     kind: "fixed",
     id: "pourcentage_decimal_fixed_3",
     niveau: "6e",
     matiere: "maths",
-    notionId: "pourcentages",
+    notionId: "pourcentage_nombre",
     microId: "pourcentage_decimal",
     difficulty: 2,
     theme: "neutral",
@@ -356,14 +356,14 @@ export const pourcentagesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("10 % signifie 10/100. En écriture décimale, cela donne 0,1.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["pourcentages", "decimal"],
+    tags: ["pourcentage_nombre", "decimal"],
   },
   {
     kind: "fixed",
     id: "pourcentage_decimal_fixed_4",
     niveau: "6e",
     matiere: "maths",
-    notionId: "pourcentages",
+    notionId: "pourcentage_nombre",
     microId: "pourcentage_decimal",
     difficulty: 2,
     theme: "neutral",
@@ -378,14 +378,14 @@ export const pourcentagesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("5 % signifie 5/100. En écriture décimale, cela donne 0,05.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["pourcentages", "decimal"],
+    tags: ["pourcentage_nombre", "decimal"],
   },
   {
     kind: "fixed",
     id: "pourcentage_decimal_qcm_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "pourcentages",
+    notionId: "pourcentage_nombre",
     microId: "pourcentage_decimal",
     difficulty: 2,
     theme: "neutral",
@@ -401,14 +401,14 @@ export const pourcentagesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("75 % signifie 75/100. En écriture décimale, cela donne 0,75.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["pourcentages", "decimal", "qcm"],
+    tags: ["pourcentage_nombre", "decimal", "qcm"],
   },
   {
     kind: "fixed",
     id: "pourcentage_decimal_qcm_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "pourcentages",
+    notionId: "pourcentage_nombre",
     microId: "pourcentage_decimal",
     difficulty: 2,
     theme: "neutral",
@@ -424,7 +424,7 @@ export const pourcentagesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("5 % signifie 5/100. En écriture décimale, cela donne 0,05.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["pourcentages", "decimal", "qcm"],
+    tags: ["pourcentage_nombre", "decimal", "qcm"],
   },
 
   // =========================
@@ -435,7 +435,7 @@ export const pourcentagesBank: TutorBankItemV4[] = [
     id: "pourcentage_lire_fixed_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "pourcentages",
+    notionId: "pourcentage_nombre",
     microId: "pourcentage_lire",
     difficulty: 2,
     theme: "neutral",
@@ -450,14 +450,14 @@ export const pourcentagesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Dans un groupe de 100 élèves, 20 % signifie 20 sur 100. Cela représente donc 20 élèves.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["pourcentages", "lecture"],
+    tags: ["pourcentage_nombre", "lecture"],
   },
   {
     kind: "fixed",
     id: "pourcentage_lire_fixed_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "pourcentages",
+    notionId: "pourcentage_nombre",
     microId: "pourcentage_lire",
     difficulty: 2,
     theme: "neutral",
@@ -472,14 +472,14 @@ export const pourcentagesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Sur 100 bonbons, 60 % signifie 60 sur 100. Il y a donc 60 bonbons rouges.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["pourcentages", "lecture"],
+    tags: ["pourcentage_nombre", "lecture"],
   },
   {
     kind: "fixed",
     id: "pourcentage_lire_fixed_3",
     niveau: "6e",
     matiere: "maths",
-    notionId: "pourcentages",
+    notionId: "pourcentage_nombre",
     microId: "pourcentage_lire",
     difficulty: 2,
     theme: "neutral",
@@ -494,14 +494,14 @@ export const pourcentagesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("8 % signifie 8 sur 100. Dans un groupe de 100 personnes, cela représente 8 personnes.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["pourcentages", "lecture"],
+    tags: ["pourcentage_nombre", "lecture"],
   },
   {
     kind: "fixed",
     id: "pourcentage_lire_qcm_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "pourcentages",
+    notionId: "pourcentage_nombre",
     microId: "pourcentage_lire",
     difficulty: 2,
     theme: "neutral",
@@ -517,14 +517,14 @@ export const pourcentagesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("15 % signifie 15 sur 100. Dans un groupe de 100 personnes, cela fait donc 15 personnes.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["pourcentages", "lecture", "qcm"],
+    tags: ["pourcentage_nombre", "lecture", "qcm"],
   },
   {
     kind: "fixed",
     id: "pourcentage_lire_qcm_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "pourcentages",
+    notionId: "pourcentage_nombre",
     microId: "pourcentage_lire",
     difficulty: 3,
     theme: "reunion",
@@ -540,7 +540,7 @@ export const pourcentagesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("35 % signifie 35 sur 100. Sur 100 ananas, cela représente donc 35 ananas vendus.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["pourcentages", "lecture", "reunion", "qcm"],
+    tags: ["pourcentage_nombre", "lecture", "reunion", "qcm"],
   },
 
   // =========================
@@ -551,7 +551,7 @@ export const pourcentagesBank: TutorBankItemV4[] = [
     id: "pourcentage_calcul_simple_fixed_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "pourcentages",
+    notionId: "pourcentage_nombre",
     microId: "pourcentage_calcul_simple",
     difficulty: 2,
     theme: "neutral",
@@ -566,14 +566,14 @@ export const pourcentagesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("10 % de 60, c’est 0,1 × 60 = 6. On peut aussi dire que 10 % est le dixième de 60.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["pourcentages", "calcul"],
+    tags: ["pourcentage_nombre", "calcul"],
   },
   {
     kind: "fixed",
     id: "pourcentage_calcul_simple_fixed_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "pourcentages",
+    notionId: "pourcentage_nombre",
     microId: "pourcentage_calcul_simple",
     difficulty: 2,
     theme: "neutral",
@@ -588,14 +588,14 @@ export const pourcentagesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("50 % signifie la moitié. La moitié de 18 est 9.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["pourcentages", "calcul"],
+    tags: ["pourcentage_nombre", "calcul"],
   },
   {
     kind: "fixed",
     id: "pourcentage_calcul_simple_fixed_3",
     niveau: "6e",
     matiere: "maths",
-    notionId: "pourcentages",
+    notionId: "pourcentage_nombre",
     microId: "pourcentage_calcul_simple",
     difficulty: 3,
     theme: "neutral",
@@ -610,14 +610,14 @@ export const pourcentagesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("25 % correspond à un quart. Le quart de 20 est 5.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["pourcentages", "calcul"],
+    tags: ["pourcentage_nombre", "calcul"],
   },
   {
     kind: "fixed",
     id: "pourcentage_calcul_simple_fixed_4",
     niveau: "6e",
     matiere: "maths",
-    notionId: "pourcentages",
+    notionId: "pourcentage_nombre",
     microId: "pourcentage_calcul_simple",
     difficulty: 3,
     theme: "neutral",
@@ -632,14 +632,14 @@ export const pourcentagesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("10 % signifie un dixième. Le dixième de 40 est 4.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["pourcentages", "calcul"],
+    tags: ["pourcentage_nombre", "calcul"],
   },
   {
     kind: "fixed",
     id: "pourcentage_calcul_simple_qcm_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "pourcentages",
+    notionId: "pourcentage_nombre",
     microId: "pourcentage_calcul_simple",
     difficulty: 2,
     theme: "neutral",
@@ -655,14 +655,14 @@ export const pourcentagesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("10 % de 40, c’est le dixième de 40. Le résultat est 4.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["pourcentages", "calcul", "qcm"],
+    tags: ["pourcentage_nombre", "calcul", "qcm"],
   },
   {
     kind: "fixed",
     id: "pourcentage_calcul_simple_qcm_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "pourcentages",
+    notionId: "pourcentage_nombre",
     microId: "pourcentage_calcul_simple",
     difficulty: 3,
     theme: "reunion",
@@ -678,7 +678,7 @@ export const pourcentagesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("50 % signifie la moitié. La moitié de 20 est 10. Il y a donc 10 adultes.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["pourcentages", "calcul", "reunion", "qcm"],
+    tags: ["pourcentage_nombre", "calcul", "reunion", "qcm"],
   },
 
   // =========================
@@ -686,11 +686,11 @@ export const pourcentagesBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "fixed",
-    id: "pourcentage_defis_fixed_1",
+    id: "pourcentage_defi_fixed_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "pourcentages",
-    microId: "pourcentage_defis",
+    notionId: "pourcentage_nombre",
+    microId: "pourcentage_defi",
     difficulty: 1,
     theme: "neutral",
     text: "Dans une collection de 100 cartes, 8 % sont brillantes. Combien y a-t-il de cartes brillantes ?",
@@ -704,15 +704,15 @@ export const pourcentagesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("8 % signifie 8 sur 100. Dans une collection de 100 cartes, cela représente 8 cartes brillantes.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["pourcentages", "defi"],
+    tags: ["pourcentage_nombre", "defi"],
   },
   {
     kind: "fixed",
-    id: "pourcentage_defis_fixed_2",
+    id: "pourcentage_defi_fixed_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "pourcentages",
-    microId: "pourcentage_defis",
+    notionId: "pourcentage_nombre",
+    microId: "pourcentage_defi",
     difficulty: 2,
     theme: "neutral",
     text: "Le prix d’un article est 20 €. On calcule 5 % de 20 €. Combien vaut ce pourcentage ?",
@@ -726,15 +726,15 @@ export const pourcentagesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("5 % de 20 €, c’est 0,05 × 20 = 1. Ce pourcentage vaut donc 1 €.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["pourcentages", "defi"],
+    tags: ["pourcentage_nombre", "defi"],
   },
   {
     kind: "fixed",
-    id: "pourcentage_defis_fixed_3",
+    id: "pourcentage_defi_fixed_3",
     niveau: "6e",
     matiere: "maths",
-    notionId: "pourcentages",
-    microId: "pourcentage_defis",
+    notionId: "pourcentage_nombre",
+    microId: "pourcentage_defi",
     difficulty: 3,
     theme: "neutral",
     text: "Parmi 100 élèves, 25 % font du basket et 50 % font du football. Quel sport est le plus pratiqué ?",
@@ -748,15 +748,15 @@ export const pourcentagesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("25 % représente 25 élèves sur 100 et 50 % représente 50 élèves sur 100. Comme 50 est plus grand que 25, le football est le plus pratiqué.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["pourcentages", "defi", "comparaison"],
+    tags: ["pourcentage_nombre", "defi", "comparaison"],
   },
   {
     kind: "fixed",
-    id: "pourcentage_defis_fixed_4",
+    id: "pourcentage_defi_fixed_4",
     niveau: "6e",
     matiere: "maths",
-    notionId: "pourcentages",
-    microId: "pourcentage_defis",
+    notionId: "pourcentage_nombre",
+    microId: "pourcentage_defi",
     difficulty: 3,
     theme: "reunion",
     text: "À La Réunion, sur 100 letchis, 40 % sont mûrs. Combien de letchis sont mûrs ?",
@@ -770,15 +770,15 @@ export const pourcentagesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("40 % signifie 40 sur 100. Sur 100 letchis, cela représente donc 40 letchis mûrs.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["pourcentages", "defi", "reunion"],
+    tags: ["pourcentage_nombre", "defi", "reunion"],
   },
   {
     kind: "fixed",
-    id: "pourcentage_defis_fixed_5",
+    id: "pourcentage_defi_fixed_5",
     niveau: "6e",
     matiere: "maths",
-    notionId: "pourcentages",
-    microId: "pourcentage_defis",
+    notionId: "pourcentage_nombre",
+    microId: "pourcentage_defi",
     difficulty: 4,
     theme: "neutral",
     text: "Quel pourcentage représente exactement la moitié d’un groupe ?",
@@ -792,15 +792,15 @@ export const pourcentagesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("La moitié correspond à 1/2. Or 1/2 = 50/100, donc cela représente 50 %.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["pourcentages", "defi", "raisonnement"],
+    tags: ["pourcentage_nombre", "defi", "raisonnement"],
   },
   {
     kind: "fixed",
-    id: "pourcentage_defis_fixed_6",
+    id: "pourcentage_defi_fixed_6",
     niveau: "6e",
     matiere: "maths",
-    notionId: "pourcentages",
-    microId: "pourcentage_defis",
+    notionId: "pourcentage_nombre",
+    microId: "pourcentage_defi",
     difficulty: 5,
     theme: "neutral",
     text: "Explique pourquoi 25 % correspond à 1/4.",
@@ -814,7 +814,7 @@ export const pourcentagesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("25 % signifie 25/100. Si on simplifie cette fraction en divisant par 25, on obtient 1/4. Donc 25 % correspond à 1/4.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["pourcentages", "defi", "raisonnement"],
+    tags: ["pourcentage_nombre", "defi", "raisonnement"],
   },
 
   // =========================
@@ -825,12 +825,12 @@ export const pourcentagesBank: TutorBankItemV4[] = [
     id: "pourcentage_comprendre_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "pourcentages",
+    notionId: "pourcentage_nombre",
     microId: "pourcentage_comprendre",
     difficulty: 1,
     theme: "neutral",
     hint: "Un pourcentage signifie toujours “sur 100”.",
-    tags: ["pourcentages", "comprendre", "template"],
+    tags: ["pourcentage_nombre", "comprendre", "template"],
     generate: () => {
       const p = [5, 10, 20, 25, 30, 40, 50, 75][
         Math.floor(Math.random() * 8)
@@ -854,12 +854,12 @@ export const pourcentagesBank: TutorBankItemV4[] = [
     id: "pourcentage_comprendre_qcm_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "pourcentages",
+    notionId: "pourcentage_nombre",
     microId: "pourcentage_comprendre",
     difficulty: 2,
     theme: "neutral",
     hint: "Le symbole % signifie “sur 100”.",
-    tags: ["pourcentages", "comprendre", "qcm", "template"],
+    tags: ["pourcentage_nombre", "comprendre", "qcm", "template"],
     generate: () => {
       const p = [5, 15, 20, 35, 40, 60][Math.floor(Math.random() * 6)];
       const good = `${p} sur 100`;
@@ -892,12 +892,12 @@ export const pourcentagesBank: TutorBankItemV4[] = [
     id: "pourcentage_fraction_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "pourcentages",
+    notionId: "pourcentage_nombre",
     microId: "pourcentage_fraction",
     difficulty: 1,
     theme: "neutral",
     hint: "Écris le pourcentage sur 100.",
-    tags: ["pourcentages", "fraction", "template"],
+    tags: ["pourcentage_nombre", "fraction", "template"],
     generate: () => {
       const p = [5, 10, 20, 25, 40, 50, 75][Math.floor(Math.random() * 7)];
 
@@ -919,12 +919,12 @@ export const pourcentagesBank: TutorBankItemV4[] = [
     id: "pourcentage_fraction_qcm_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "pourcentages",
+    notionId: "pourcentage_nombre",
     microId: "pourcentage_fraction",
     difficulty: 2,
     theme: "neutral",
     hint: "Le numérateur est le pourcentage, le dénominateur vaut 100.",
-    tags: ["pourcentages", "fraction", "qcm", "template"],
+    tags: ["pourcentage_nombre", "fraction", "qcm", "template"],
     generate: () => {
       const p = [5, 10, 15, 20, 25, 40][Math.floor(Math.random() * 6)];
       const good = `${p}/100`;
@@ -957,12 +957,12 @@ export const pourcentagesBank: TutorBankItemV4[] = [
     id: "pourcentage_decimal_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "pourcentages",
+    notionId: "pourcentage_nombre",
     microId: "pourcentage_decimal",
     difficulty: 2,
     theme: "neutral",
     hint: "Un pourcentage s’écrit en décimal en divisant par 100.",
-    tags: ["pourcentages", "decimal", "template"],
+    tags: ["pourcentage_nombre", "decimal", "template"],
     generate: () => {
       const p = [5, 10, 20, 25, 40, 50, 75][Math.floor(Math.random() * 7)];
       const dec = p / 100;
@@ -985,12 +985,12 @@ export const pourcentagesBank: TutorBankItemV4[] = [
     id: "pourcentage_decimal_qcm_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "pourcentages",
+    notionId: "pourcentage_nombre",
     microId: "pourcentage_decimal",
     difficulty: 2,
     theme: "neutral",
     hint: "Divise par 100.",
-    tags: ["pourcentages", "decimal", "qcm", "template"],
+    tags: ["pourcentage_nombre", "decimal", "qcm", "template"],
     generate: () => {
       const p = [5, 10, 25, 50, 75][Math.floor(Math.random() * 5)];
       const good = percentToDecimalString(p);
@@ -1028,12 +1028,12 @@ export const pourcentagesBank: TutorBankItemV4[] = [
     id: "pourcentage_lire_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "pourcentages",
+    notionId: "pourcentage_nombre",
     microId: "pourcentage_lire",
     difficulty: 2,
     theme: "neutral",
     hint: "Le pourcentage indique combien sur 100.",
-    tags: ["pourcentages", "lecture", "template"],
+    tags: ["pourcentage_nombre", "lecture", "template"],
     generate: () => {
       const p = [5, 10, 15, 20, 25, 30, 40, 50][
         Math.floor(Math.random() * 8)
@@ -1057,12 +1057,12 @@ export const pourcentagesBank: TutorBankItemV4[] = [
     id: "pourcentage_lire_qcm_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "pourcentages",
+    notionId: "pourcentage_nombre",
     microId: "pourcentage_lire",
     difficulty: 2,
     theme: "neutral",
     hint: "Le pourcentage donne directement le nombre sur 100.",
-    tags: ["pourcentages", "lecture", "qcm", "template"],
+    tags: ["pourcentage_nombre", "lecture", "qcm", "template"],
     generate: () => {
       const p = [8, 12, 18, 24, 35, 45][Math.floor(Math.random() * 6)];
 
@@ -1094,12 +1094,12 @@ export const pourcentagesBank: TutorBankItemV4[] = [
     id: "pourcentage_calcul_simple_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "pourcentages",
+    notionId: "pourcentage_nombre",
     microId: "pourcentage_calcul_simple",
     difficulty: 2,
     theme: "neutral",
     hint: "10 % = 1/10 ; 50 % = la moitié ; 25 % = le quart.",
-    tags: ["pourcentages", "calcul", "template"],
+    tags: ["pourcentage_nombre", "calcul", "template"],
     generate: () => {
       const cases = [
         { p: 10, n: 20, r: 2 },
@@ -1135,12 +1135,12 @@ export const pourcentagesBank: TutorBankItemV4[] = [
     id: "pourcentage_calcul_simple_qcm_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "pourcentages",
+    notionId: "pourcentage_nombre",
     microId: "pourcentage_calcul_simple",
     difficulty: 3,
     theme: "neutral",
     hint: "Choisis une méthode simple : moitié, quart, dixième.",
-    tags: ["pourcentages", "calcul", "qcm", "template"],
+    tags: ["pourcentage_nombre", "calcul", "qcm", "template"],
     generate: () => {
       const cases = [
         { p: 10, n: 70, r: 7 },
@@ -1179,15 +1179,15 @@ export const pourcentagesBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "template",
-    id: "pourcentage_defis_tpl_1",
+    id: "pourcentage_defi_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "pourcentages",
-    microId: "pourcentage_defis",
+    notionId: "pourcentage_nombre",
+    microId: "pourcentage_defi",
     difficulty: 4,
     theme: "neutral",
     hint: "Pense à “sur 100” ou à une fraction simple.",
-    tags: ["pourcentages", "defi", "template"],
+    tags: ["pourcentage_nombre", "defi", "template"],
     generate: () => {
       const cases = [
         {
@@ -1231,15 +1231,15 @@ export const pourcentagesBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "pourcentage_defis_qcm_tpl_1",
+    id: "pourcentage_defi_qcm_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "pourcentages",
-    microId: "pourcentage_defis",
+    notionId: "pourcentage_nombre",
+    microId: "pourcentage_defi",
     difficulty: 5,
     theme: "neutral",
     hint: "Compare les pourcentages ou relie-les à des fractions.",
-    tags: ["pourcentages", "defi", "qcm", "template"],
+    tags: ["pourcentage_nombre", "defi", "qcm", "template"],
     generate: () => {
       const cases = [
         {

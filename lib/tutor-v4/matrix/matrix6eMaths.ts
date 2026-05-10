@@ -32,20 +32,20 @@ const supportLinks: Record<string, string[]> = {
   // =========================
   // NOMBRES / DÉCIMAUX
   // =========================
-  decimal_comparer: ["entier_compare", "entier_rang"],
-  decimal_additionner: ["mental_addition", "entier_lire_ecrire"],
-  decimal_multiplier: ["mental_multiplication", "decimal_additionner"],
-  decimal_diviser_par_entier: ["mental_division", "decimal_lire_ecrire"],
+  decimal_comparer: ["entier_comparer", "entier_rang"],
+  decimal_additionner: ["entier_addition_mentale", "entier_lire_ecrire"],
+  decimal_multiplier: ["entier_multiplication_mentale", "decimal_additionner"],
+  decimal_diviser_par_entier: ["entier_division_mentale", "decimal_lire_ecrire"],
 
   // =========================
   // FRACTIONS / POURCENTAGES
   // =========================
   fraction_decimal: ["decimal_comparer", "decimal_lire_ecrire"],
-  fraction_compare: ["decimal_comparer", "fraction_quantite"],
+  fraction_comparer: ["decimal_comparer", "fraction_quantite"],
 
   pourcentage_decimal: ["decimal_multiplier", "fraction_decimal"],
   pourcentage_calcul_simple: [
-    "mental_multiplication",
+    "entier_multiplication_mentale",
     "fraction_quantite",
     "pourcentage_decimal",
   ],
@@ -53,78 +53,78 @@ const supportLinks: Record<string, string[]> = {
   // =========================
   // PROPORTIONNALITÉ
   // =========================
-  prop_table: ["mental_multiplication", "fraction_quantite"],
+  prop_table: ["entier_multiplication_mentale", "fraction_quantite"],
   prop_coeff: ["prop_table", "decimal_multiplier"],
-  prop_unit: ["mental_division", "prop_table"],
-  prop_direct: ["prop_coeff", "prop_unit", "pourcentage_calcul_simple"],
-  prop_defis: ["prop_direct", "fraction_decimal", "decimal_multiplier"],
+  prop_unite: ["entier_division_mentale", "prop_table"],
+  prop_direct: ["prop_coeff", "prop_unite", "pourcentage_calcul_simple"],
+  prop_defi: ["prop_direct", "fraction_decimal", "decimal_multiplier"],
 
   // =========================
   // CALCUL POSÉ / MENTAL
   // =========================
-  pose_verifier: ["mental_strategies", "entier_compare"],
+  entier_calcul_verifier: ["entier_strategie_mentale", "entier_comparer"],
 
-  mental_strategies: [
-    "mental_addition",
-    "mental_subtraction",
-    "mental_multiplication",
-    "mental_division",
+  entier_strategie_mentale: [
+    "entier_addition_mentale",
+    "entier_soustraction_mentale",
+    "entier_multiplication_mentale",
+    "entier_division_mentale",
   ],
 
   // =========================
   // LONGUEURS / PÉRIMÈTRES
   // =========================
-  longueur_convertir: ["decimal_multiplier", "decimal_diviser_par_entier"],
-  longueur_comparer: ["entier_compare", "decimal_comparer"],
-  longueur_probleme: ["entier_compare", "decimal_comparer"],
+  aire_longueur_convertir: ["decimal_multiplier", "decimal_diviser_par_entier"],
+  aire_longueur_comparer: ["entier_comparer", "decimal_comparer"],
+  aire_longueur_probleme: ["entier_comparer", "decimal_comparer"],
 
-  perim_carre: ["mental_multiplication", "longueur_mesurer"],
-  perim_rectangle: ["mental_addition", "mental_multiplication"],
-  perim_figure: ["longueur_comparer", "perim_carre", "perim_rectangle"],
-  perim_probleme: ["longueur_probleme", "perim_figure"],
+  aire_perimetre_carre: ["entier_multiplication_mentale", "aire_longueur_mesurer"],
+  aire_perimetre_rectangle: ["entier_addition_mentale", "entier_multiplication_mentale"],
+  aire_perimetre_figure: ["aire_longueur_comparer", "aire_perimetre_carre", "aire_perimetre_rectangle"],
+  aire_perimetre_probleme: ["aire_longueur_probleme", "aire_perimetre_figure"],
 
   // =========================
   // AIRES
   // =========================
-  aire_compter: ["perim_figure"],
-  aire_rectangle: ["decimal_multiplier", "longueur_mesurer"],
-  aire_square: ["decimal_multiplier", "aire_rectangle"],
-  aire_comparer: ["longueur_comparer", "aire_compter"],
-  aire_decomposer: ["aire_rectangle", "aire_square", "perim_figure"],
-  aire_problemes: [
-    "longueur_probleme",
+  aire_compter: ["aire_perimetre_figure"],
+  aire_rectangle: ["decimal_multiplier", "aire_longueur_mesurer"],
+  aire_carre: ["decimal_multiplier", "aire_rectangle"],
+  aire_comparer: ["aire_longueur_comparer", "aire_compter"],
+  aire_decomposer: ["aire_rectangle", "aire_carre", "aire_perimetre_figure"],
+  aire_probleme: [
+    "aire_longueur_probleme",
     "decimal_multiplier",
     "prop_direct",
     "aire_decomposer",
   ],
-  aire_defis: ["aire_decomposer", "aire_problemes"],
+  aire_defi: ["aire_decomposer", "aire_probleme"],
 
   // =========================
   // VOLUMES
   // =========================
-  volume_unites: ["aire_comprendre"],
-  volume_compter: ["aire_compter", "volume_unites"],
+  volume_unite: ["aire_comprendre"],
+  volume_compter: ["aire_compter", "volume_unite"],
   volume_comparer: ["volume_compter", "aire_comparer"],
   volume_assemblage: ["volume_compter"],
-  volume_lire: ["donnee_lire_tableau", "volume_compter"],
-  volume_defis: ["volume_lire", "volume_assemblage", "aire_decomposer"],
+  volume_lire: ["stat_donnee_lire_tableau", "volume_compter"],
+  volume_defi: ["volume_lire", "volume_assemblage", "aire_decomposer"],
 
   // =========================
   // ANGLES / TRIANGLES
   // =========================
-  angle_compare: ["angle_droit"],
+  angle_comparer: ["angle_droit"],
   angle_mesurer: ["angle_reconnaitre"],
   angle_tracer: ["angle_mesurer"],
 
-  triangle_sommets_cotes: ["triangle_nommer"],
-  triangle_type_cotes: ["triangle_sommets_cotes", "longueur_comparer"],
-  triangle_type_angles: ["angle_droit", "angle_compare"],
-  triangle_somme_angles: ["angle_mesurer", "triangle_type_angles"],
-  triangle_angle_manquant: ["triangle_somme_angles", "mental_addition"],
-  triangle_possible_ou_non: ["longueur_comparer", "triangle_sommets_cotes"],
-  triangle_defis: [
-    "triangle_type_cotes",
-    "triangle_type_angles",
+  triangle_sommet_cote: ["triangle_nommer"],
+  triangle_type_cote: ["triangle_sommet_cote", "aire_longueur_comparer"],
+  triangle_type_angle: ["angle_droit", "angle_comparer"],
+  triangle_somme_angle: ["angle_mesurer", "triangle_type_angle"],
+  triangle_angle_manquant: ["triangle_somme_angle", "entier_addition_mentale"],
+  triangle_possible_ou_non: ["aire_longueur_comparer", "triangle_sommet_cote"],
+  triangle_defi: [
+    "triangle_type_cote",
+    "triangle_type_angle",
     "triangle_angle_manquant",
     "triangle_possible_ou_non",
   ],
@@ -136,30 +136,30 @@ const supportLinks: Record<string, string[]> = {
     "quadrilatere_nommer_vocabulaire",
     "angle_droit",
   ],
-  quadrilatere_lire_proprietes: [
-    "triangle_sommets_cotes",
+  quadrilatere_lire_propriete: [
+    "triangle_sommet_cote",
     "angle_droit",
-    "longueur_comparer",
+    "aire_longueur_comparer",
   ],
-  quadrilatere_lien_proprietes: [
+  quadrilatere_lien_propriete: [
     "quadrilatere_identifier_nature",
-    "quadrilatere_lire_proprietes",
+    "quadrilatere_lire_propriete",
   ],
   quadrilatere_distinguer: [
     "quadrilatere_identifier_nature",
-    "quadrilatere_lien_proprietes",
+    "quadrilatere_lien_propriete",
   ],
   quadrilatere_conclusion: [
-    "quadrilatere_lire_proprietes",
-    "quadrilatere_lien_proprietes",
+    "quadrilatere_lire_propriete",
+    "quadrilatere_lien_propriete",
     "quadrilatere_distinguer",
   ],
   quadrilatere_completer_construire: [
-    "quadrilatere_lire_proprietes",
+    "quadrilatere_lire_propriete",
     "angle_tracer",
-    "longueur_mesurer",
+    "aire_longueur_mesurer",
   ],
-  quadrilatere_defis: [
+  quadrilatere_defi: [
     "quadrilatere_conclusion",
     "quadrilatere_completer_construire",
   ],
@@ -169,43 +169,43 @@ const supportLinks: Record<string, string[]> = {
   // =========================
   sym_reconnaitre: [
     "quadrilatere_identifier_nature",
-    "triangle_sommets_cotes",
+    "triangle_sommet_cote",
   ],
-  sym_point: ["sym_reconnaitre", "longueur_mesurer"],
-  sym_figure: ["sym_point", "triangle_sommets_cotes", "quadrilatere_nommer_vocabulaire"],
-  sym_proprietes: [
+  sym_point: ["sym_reconnaitre", "aire_longueur_mesurer"],
+  sym_figure: ["sym_point", "triangle_sommet_cote", "quadrilatere_nommer_vocabulaire"],
+  sym_propriete: [
     "sym_figure",
-    "longueur_comparer",
-    "angle_compare",
+    "aire_longueur_comparer",
+    "angle_comparer",
   ],
-  sym_axes: [
+  sym_axe: [
     "sym_reconnaitre",
     "quadrilatere_identifier_nature",
-    "triangle_type_cotes",
+    "triangle_type_cote",
   ],
-  sym_defis: [
+  sym_defi: [
     "sym_reconnaitre",
     "sym_point",
     "sym_figure",
-    "sym_proprietes",
-    "sym_axes",
+    "sym_propriete",
+    "sym_axe",
   ],
 
   // =========================
   // ALGORITHMIQUE
   // =========================
-  algo_sequence: ["mental_strategies", "entier_lire_ecrire"],
+  algo_sequence: ["entier_strategie_mentale", "entier_lire_ecrire"],
 
   algo_deplacement: [
     "algo_sequence",
-    "longueur_mesurer",
+    "aire_longueur_mesurer",
     "angle_droit",
   ],
 
   algo_repetition: [
     "algo_sequence",
-    "mental_multiplication",
-    "mental_addition",
+    "entier_multiplication_mentale",
+    "entier_addition_mentale",
   ],
 
   algo_lire_programme: [
@@ -214,63 +214,63 @@ const supportLinks: Record<string, string[]> = {
     "algo_repetition",
   ],
 
-  algo_figures: [
+  algo_figure: [
     "algo_deplacement",
     "algo_repetition",
     "angle_droit",
     "angle_tracer",
-    "triangle_sommets_cotes",
+    "triangle_sommet_cote",
     "quadrilatere_nommer_vocabulaire",
   ],
 
-  algo_defis: [
+  algo_defi: [
     "algo_lire_programme",
-    "algo_figures",
-    "triangle_type_cotes",
+    "algo_figure",
+    "triangle_type_cote",
     "quadrilatere_identifier_nature",
   ],
 
   // =========================
   // DONNÉES
   // =========================
-  donnee_lire_graphique: ["donnee_lire_tableau"],
-  donnee_prelever: ["donnee_lire_tableau", "donnee_lire_graphique"],
-  donnee_comparer: ["donnee_prelever", "entier_compare"],
-  donnee_interpreter: [
-    "donnee_prelever",
-    "donnee_comparer",
-    "entier_compare",
+  stat_donnee_lire_graphique: ["stat_donnee_lire_tableau"],
+  stat_donnee_prelever: ["stat_donnee_lire_tableau", "stat_donnee_lire_graphique"],
+  stat_donnee_comparer: ["stat_donnee_prelever", "entier_comparer"],
+  stat_donnee_interpreter: [
+    "stat_donnee_prelever",
+    "stat_donnee_comparer",
+    "entier_comparer",
   ],
-  donnee_defis: [
-    "donnee_lire_tableau",
-    "donnee_lire_graphique",
-    "donnee_prelever",
-    "donnee_comparer",
-    "donnee_interpreter",
+  stat_donnee_defi: [
+    "stat_donnee_lire_tableau",
+    "stat_donnee_lire_graphique",
+    "stat_donnee_prelever",
+    "stat_donnee_comparer",
+    "stat_donnee_interpreter",
   ],
 
   // =========================
   // PROBABILITÉS
   // =========================
-  proba_comparer: ["proba_vocabulaire", "fraction_compare"],
-  proba_issue: ["proba_vocabulaire", "donnee_lire_tableau"],
+  proba_comparer: ["proba_vocabulaire", "fraction_comparer"],
+  proba_issue: ["proba_vocabulaire", "stat_donnee_lire_tableau"],
   proba_estimer: [
     "proba_vocabulaire",
     "proba_comparer",
-    "donnee_interpreter",
+    "stat_donnee_interpreter",
   ],
   proba_lire: [
     "proba_vocabulaire",
     "proba_issue",
-    "donnee_interpreter",
+    "stat_donnee_interpreter",
   ],
-  proba_defis: [
+  proba_defi: [
     "proba_vocabulaire",
     "proba_comparer",
     "proba_issue",
     "proba_estimer",
     "proba_lire",
-    "donnee_interpreter",
+    "stat_donnee_interpreter",
   ],
 };
 

@@ -29,7 +29,7 @@ export const symetrieBank: TutorBankItemV4[] = [
     id: "6e_sym_reconnaitre_fixed_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "symetrie",
+    notionId: "sym_axiale",
     microId: "sym_reconnaitre",
     difficulty: 1,
     theme: "neutral",
@@ -49,7 +49,7 @@ export const symetrieBank: TutorBankItemV4[] = [
       "Méthode : on repère l’axe de symétrie.\n\n" +
       "Observation : la figure et son image se superposent si on plie selon l’axe.\n\n" +
       "Conclusion : une symétrie axiale fonctionne comme un miroir avec un axe.",
-    tags: ["symetrie", "symetrie_axiale", "definition", "qcm", "canvas"],
+    tags: ["sym_axiale", "symetrie_axiale", "definition", "qcm", "canvas"],
     canvas: transformationCanvas({
       transformation: "symetrie_axiale",
       grid: { rows: 8, cols: 8 },
@@ -78,7 +78,7 @@ export const symetrieBank: TutorBankItemV4[] = [
     id: "6e_sym_reconnaitre_fixed_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "symetrie",
+    notionId: "sym_axiale",
     microId: "sym_reconnaitre",
     difficulty: 1,
     theme: "neutral",
@@ -93,7 +93,7 @@ export const symetrieBank: TutorBankItemV4[] = [
       "Méthode : on cherche la droite qui sert de miroir.\n\n" +
       "Observation : cette droite s’appelle l’axe de symétrie.\n\n" +
       "Conclusion : dans une symétrie axiale, il y a un axe.",
-    tags: ["symetrie", "vocabulaire", "axe", "qcm"],
+    tags: ["sym_axiale", "vocabulaire", "axe", "qcm"],
   },
 
   {
@@ -101,12 +101,12 @@ export const symetrieBank: TutorBankItemV4[] = [
     id: "6e_sym_reconnaitre_tpl_1_axe_vertical",
     niveau: "6e",
     matiere: "maths",
-    notionId: "symetrie",
+    notionId: "sym_axiale",
     microId: "sym_reconnaitre",
     difficulty: 2,
     theme: "neutral",
     hint: "Regarde si l’axe joue le rôle d’un miroir.",
-    tags: ["symetrie", "reconnaitre", "axe_vertical", "template", "canvas"],
+    tags: ["sym_axiale", "reconnaitre", "axe_vertical", "template", "canvas"],
     generate: () => {
       const axisX = randomChoice([4, 5]);
 
@@ -151,12 +151,12 @@ export const symetrieBank: TutorBankItemV4[] = [
     id: "6e_sym_reconnaitre_tpl_2_axe_horizontal",
     niveau: "6e",
     matiere: "maths",
-    notionId: "symetrie",
+    notionId: "sym_axiale",
     microId: "sym_reconnaitre",
     difficulty: 2,
     theme: "neutral",
     hint: "L’axe peut être vertical ou horizontal.",
-    tags: ["symetrie", "reconnaitre", "axe_horizontal", "template", "canvas"],
+    tags: ["sym_axiale", "reconnaitre", "axe_horizontal", "template", "canvas"],
     generate: () => {
       const axisY = randomChoice([4, 5]);
 
@@ -201,12 +201,12 @@ export const symetrieBank: TutorBankItemV4[] = [
     id: "6e_sym_reconnaitre_tpl_3_piege_non",
     niveau: "6e",
     matiere: "maths",
-    notionId: "symetrie",
+    notionId: "sym_axiale",
     microId: "sym_reconnaitre",
     difficulty: 3,
     theme: "neutral",
     hint: "Vérifie tous les sommets, pas seulement la forme générale.",
-    tags: ["symetrie", "reconnaitre", "piege", "template", "canvas"],
+    tags: ["sym_axiale", "reconnaitre", "piege", "template", "canvas"],
     generate: () => ({
       text: "La figure rouge est-elle vraiment l’image de la figure bleue par symétrie axiale ?",
       format: "qcm",
@@ -247,7 +247,7 @@ export const symetrieBank: TutorBankItemV4[] = [
     id: "6e_sym_reconnaitre_open_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "symetrie",
+    notionId: "sym_axiale",
     microId: "sym_reconnaitre",
     difficulty: 3,
     theme: "neutral",
@@ -261,7 +261,7 @@ export const symetrieBank: TutorBankItemV4[] = [
       "Méthode : on imagine que l’on plie la feuille selon l’axe.\n\n" +
       "Observation : les deux parties doivent se superposer, avec des distances égales à l’axe.\n\n" +
       "Conclusion : on reconnaît une symétrie axiale grâce à l’axe, au miroir ou au pliage.",
-    tags: ["symetrie", "open", "vocabulaire", "raisonnement"],
+    tags: ["sym_axiale", "open", "vocabulaire", "raisonnement"],
   },
 
   /* =========================
@@ -273,7 +273,7 @@ export const symetrieBank: TutorBankItemV4[] = [
     id: "6e_sym_point_fixed_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "symetrie",
+    notionId: "sym_axiale",
     microId: "sym_point",
     difficulty: 2,
     theme: "neutral",
@@ -293,7 +293,7 @@ export const symetrieBank: TutorBankItemV4[] = [
       "Méthode : on place le point image de l’autre côté de l’axe.\n\n" +
       "Observation : le point et son image sont à la même distance de l’axe.\n\n" +
       "Conclusion : A' se place de l’autre côté de l’axe, à la même distance.",
-    tags: ["symetrie", "point", "construction", "qcm"],
+    tags: ["sym_axiale", "point", "construction", "qcm"],
   },
 
   {
@@ -301,7 +301,7 @@ export const symetrieBank: TutorBankItemV4[] = [
     id: "6e_sym_point_fixed_2_point_sur_axe",
     niveau: "6e",
     matiere: "maths",
-    notionId: "symetrie",
+    notionId: "sym_axiale",
     microId: "sym_point",
     difficulty: 2,
     theme: "neutral",
@@ -321,7 +321,7 @@ export const symetrieBank: TutorBankItemV4[] = [
       "Méthode : on observe que le point est déjà sur le miroir.\n\n" +
       "Observation : son reflet est exactement au même endroit.\n\n" +
       "Conclusion : si A est sur l’axe, alors A' = A.",
-    tags: ["symetrie", "point", "point_invariant", "qcm"],
+    tags: ["sym_axiale", "point", "point_invariant", "qcm"],
   },
 
   {
@@ -329,12 +329,12 @@ export const symetrieBank: TutorBankItemV4[] = [
     id: "6e_sym_point_tpl_1_distance",
     niveau: "6e",
     matiere: "maths",
-    notionId: "symetrie",
+    notionId: "sym_axiale",
     microId: "sym_point",
     difficulty: 2,
     theme: "neutral",
     hint: "Le point image est à la même distance de l’axe.",
-    tags: ["symetrie", "point", "distance", "template"],
+    tags: ["sym_axiale", "point", "distance", "template"],
     generate: () => {
       const d = randomChoice([1, 2, 3, 4, 5]);
 
@@ -357,12 +357,12 @@ export const symetrieBank: TutorBankItemV4[] = [
     id: "6e_sym_point_tpl_2_position_droite",
     niveau: "6e",
     matiere: "maths",
-    notionId: "symetrie",
+    notionId: "sym_axiale",
     microId: "sym_point",
     difficulty: 3,
     theme: "neutral",
     hint: "On reporte la même distance de l’autre côté.",
-    tags: ["symetrie", "point", "position", "template"],
+    tags: ["sym_axiale", "point", "position", "template"],
     generate: () => {
       const d = randomChoice([2, 3, 4]);
 
@@ -391,7 +391,7 @@ export const symetrieBank: TutorBankItemV4[] = [
     id: "6e_sym_point_erreur_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "symetrie",
+    notionId: "sym_axiale",
     microId: "sym_point",
     difficulty: 3,
     theme: "neutral",
@@ -406,7 +406,7 @@ export const symetrieBank: TutorBankItemV4[] = [
       "Méthode : on vérifie la position et la distance.\n\n" +
       "Observation : même si A' est du bon côté, la distance n’est pas correcte.\n\n" +
       "Conclusion : la construction n’est pas correcte.",
-    tags: ["symetrie", "point", "erreur", "distance"],
+    tags: ["sym_axiale", "point", "erreur", "distance"],
   },
 
   {
@@ -414,7 +414,7 @@ export const symetrieBank: TutorBankItemV4[] = [
     id: "6e_sym_point_open_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "symetrie",
+    notionId: "sym_axiale",
     microId: "sym_point",
     difficulty: 4,
     theme: "neutral",
@@ -428,7 +428,7 @@ export const symetrieBank: TutorBankItemV4[] = [
       "Méthode : on trace la direction perpendiculaire à l’axe passant par le point, puis on reporte la même distance de l’autre côté.\n\n" +
       "Observation : l’axe est au milieu entre le point et son image.\n\n" +
       "Conclusion : A' est correctement construit s’il est de l’autre côté de l’axe, à la même distance.",
-    tags: ["symetrie", "point", "open", "construction", "methode"],
+    tags: ["sym_axiale", "point", "open", "construction", "methode"],
   },
     /* =========================
      SYM_FIGURE
@@ -439,7 +439,7 @@ export const symetrieBank: TutorBankItemV4[] = [
     id: "6e_sym_figure_fixed_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "symetrie",
+    notionId: "sym_axiale",
     microId: "sym_figure",
     difficulty: 2,
     theme: "neutral",
@@ -459,7 +459,7 @@ export const symetrieBank: TutorBankItemV4[] = [
       "Méthode : pour un triangle, on construit l’image de chaque sommet.\n\n" +
       "Observation : on obtient A', B' et C', puis on relie ces points.\n\n" +
       "Conclusion : il faut construire l’image de chacun des sommets.",
-    tags: ["symetrie", "figure", "triangle", "qcm"],
+    tags: ["sym_axiale", "figure", "triangle", "qcm"],
   },
 
   {
@@ -467,12 +467,12 @@ export const symetrieBank: TutorBankItemV4[] = [
     id: "6e_sym_figure_tpl_1_triangle_canvas_oui",
     niveau: "6e",
     matiere: "maths",
-    notionId: "symetrie",
+    notionId: "sym_axiale",
     microId: "sym_figure",
     difficulty: 3,
     theme: "neutral",
     hint: "Vérifie que chaque sommet image est à la même distance de l’axe.",
-    tags: ["symetrie", "figure", "triangle", "template", "canvas"],
+    tags: ["sym_axiale", "figure", "triangle", "template", "canvas"],
     generate: () => ({
       text: "Le triangle rouge est-il bien l’image du triangle bleu par symétrie axiale ?",
       format: "qcm",
@@ -513,12 +513,12 @@ export const symetrieBank: TutorBankItemV4[] = [
     id: "6e_sym_figure_tpl_2_piege_canvas_non",
     niveau: "6e",
     matiere: "maths",
-    notionId: "symetrie",
+    notionId: "sym_axiale",
     microId: "sym_figure",
     difficulty: 4,
     theme: "neutral",
     hint: "Vérifie tous les sommets un par un.",
-    tags: ["symetrie", "figure", "erreur", "template", "canvas"],
+    tags: ["sym_axiale", "figure", "erreur", "template", "canvas"],
     generate: () => ({
       text: "Un élève affirme que la figure rouge est l’image de la figure bleue par symétrie axiale. A-t-il raison ?",
       format: "qcm",
@@ -561,7 +561,7 @@ export const symetrieBank: TutorBankItemV4[] = [
     id: "6e_sym_figure_open_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "symetrie",
+    notionId: "sym_axiale",
     microId: "sym_figure",
     difficulty: 4,
     theme: "neutral",
@@ -575,7 +575,7 @@ export const symetrieBank: TutorBankItemV4[] = [
       "Méthode : on construit A', B' et C' par symétrie axiale.\n\n" +
       "Observation : chaque sommet image est de l’autre côté de l’axe, à la même distance.\n\n" +
       "Conclusion : en reliant A', B' et C', on obtient le triangle image.",
-    tags: ["symetrie", "figure", "open", "construction", "methode"],
+    tags: ["sym_axiale", "figure", "open", "construction", "methode"],
   },
 
   /* =========================
@@ -584,11 +584,11 @@ export const symetrieBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "6e_sym_proprietes_fixed_1",
+    id: "6e_sym_propriete_fixed_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "symetrie",
-    microId: "sym_proprietes",
+    notionId: "sym_axiale",
+    microId: "sym_propriete",
     difficulty: 2,
     theme: "neutral",
     text: "Une symétrie axiale conserve...",
@@ -607,20 +607,20 @@ export const symetrieBank: TutorBankItemV4[] = [
       "Méthode : on compare la figure de départ et son image.\n\n" +
       "Observation : les longueurs, les angles et l’alignement sont conservés.\n\n" +
       "Conclusion : une symétrie axiale conserve les longueurs et les angles.",
-    tags: ["symetrie", "proprietes", "conservation", "qcm"],
+    tags: ["sym_axiale", "proprietes", "conservation", "qcm"],
   },
 
   {
     kind: "template",
-    id: "6e_sym_proprietes_tpl_1_longueur",
+    id: "6e_sym_propriete_tpl_1_longueur",
     niveau: "6e",
     matiere: "maths",
-    notionId: "symetrie",
-    microId: "sym_proprietes",
+    notionId: "sym_axiale",
+    microId: "sym_propriete",
     difficulty: 3,
     theme: "neutral",
     hint: "La symétrie axiale conserve les longueurs.",
-    tags: ["symetrie", "proprietes", "longueur", "template"],
+    tags: ["sym_axiale", "proprietes", "longueur", "template"],
     generate: () => {
       const l = randomChoice([3, 4, 5, 6, 7, 8]);
 
@@ -640,11 +640,11 @@ export const symetrieBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "6e_sym_proprietes_erreur_1",
+    id: "6e_sym_propriete_erreur_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "symetrie",
-    microId: "sym_proprietes",
+    notionId: "sym_axiale",
+    microId: "sym_propriete",
     difficulty: 3,
     theme: "neutral",
     text: "Un élève dit : une symétrie axiale agrandit la figure. A-t-il raison ?",
@@ -658,21 +658,21 @@ export const symetrieBank: TutorBankItemV4[] = [
       "Méthode : on utilise les propriétés de conservation.\n\n" +
       "Observation : les longueurs restent les mêmes.\n\n" +
       "Conclusion : l’élève a tort, la figure n’est pas agrandie.",
-    tags: ["symetrie", "proprietes", "erreur"],
+    tags: ["sym_axiale", "proprietes", "erreur"],
   },
 
   {
     kind: "fixed",
-    id: "6e_sym_proprietes_open_1",
+    id: "6e_sym_propriete_open_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "symetrie",
-    microId: "sym_proprietes",
+    notionId: "sym_axiale",
+    microId: "sym_propriete",
     difficulty: 4,
     theme: "neutral",
     text: "Cite deux éléments conservés par une symétrie axiale.",
     format: "open",
-    expected: ["longueurs", "angles", "alignement", "forme", "taille"],
+    expected: ["aire_longueur", "angle_mesure", "alignement", "forme", "taille"],
     comparator: "contains_keyword",
     hint: "Pense à ce qui ne change pas dans la figure.",
     explanation:
@@ -680,18 +680,18 @@ export const symetrieBank: TutorBankItemV4[] = [
       "Méthode : on compare la figure et son image.\n\n" +
       "Observation : les longueurs, les angles, l’alignement, la forme et la taille sont conservés.\n\n" +
       "Conclusion : on peut citer par exemple les longueurs et les angles.",
-    tags: ["symetrie", "proprietes", "open", "vocabulaire"],
+    tags: ["sym_axiale", "proprietes", "open", "vocabulaire"],
   },  /* =========================
      SYM_AXES
   ========================= */
 
   {
     kind: "fixed",
-    id: "6e_sym_axes_fixed_1",
+    id: "6e_sym_axe_fixed_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "symetrie",
-    microId: "sym_axes",
+    notionId: "sym_axiale",
+    microId: "sym_axe",
     difficulty: 1,
     theme: "neutral",
     text: "Un axe de symétrie est...",
@@ -710,16 +710,16 @@ export const symetrieBank: TutorBankItemV4[] = [
       "Méthode : on imagine que l’on plie la figure selon cette droite.\n\n" +
       "Observation : si les deux parties se superposent exactement, c’est un axe de symétrie.\n\n" +
       "Conclusion : un axe de symétrie partage une figure en deux parties superposables.",
-    tags: ["symetrie", "axes", "definition", "qcm"],
+    tags: ["sym_axiale", "axe", "definition", "qcm"],
   },
 
   {
     kind: "fixed",
-    id: "6e_sym_axes_fixed_2_rectangle",
+    id: "6e_sym_axe_fixed_2_rectangle",
     niveau: "6e",
     matiere: "maths",
-    notionId: "symetrie",
-    microId: "sym_axes",
+    notionId: "sym_axiale",
+    microId: "sym_axe",
     difficulty: 2,
     theme: "neutral",
     text: "Combien d’axes de symétrie possède un rectangle qui n’est pas un carré ?",
@@ -733,16 +733,16 @@ export const symetrieBank: TutorBankItemV4[] = [
       "Méthode : on teste les pliages possibles du rectangle.\n\n" +
       "Observation : un rectangle non carré possède un axe vertical et un axe horizontal.\n\n" +
       "Conclusion : un rectangle non carré possède 2 axes de symétrie.",
-    tags: ["symetrie", "axes", "rectangle", "qcm"],
+    tags: ["sym_axiale", "axe", "rectangle", "qcm"],
   },
 
   {
     kind: "fixed",
-    id: "6e_sym_axes_fixed_3_carre",
+    id: "6e_sym_axe_fixed_3_carre",
     niveau: "6e",
     matiere: "maths",
-    notionId: "symetrie",
-    microId: "sym_axes",
+    notionId: "sym_axiale",
+    microId: "sym_axe",
     difficulty: 2,
     theme: "neutral",
     text: "Combien d’axes de symétrie possède un carré ?",
@@ -756,20 +756,20 @@ export const symetrieBank: TutorBankItemV4[] = [
       "Méthode : on cherche tous les pliages possibles du carré.\n\n" +
       "Observation : le carré possède deux axes passant par les milieux des côtés opposés et deux diagonales.\n\n" +
       "Conclusion : un carré possède 4 axes de symétrie.",
-    tags: ["symetrie", "axes", "carre", "qcm"],
+    tags: ["sym_axiale", "axe", "carre", "qcm"],
   },
 
   {
     kind: "template",
-    id: "6e_sym_axes_tpl_1_figures_classiques",
+    id: "6e_sym_axe_tpl_1_figures_classiques",
     niveau: "6e",
     matiere: "maths",
-    notionId: "symetrie",
-    microId: "sym_axes",
+    notionId: "sym_axiale",
+    microId: "sym_axe",
     difficulty: 3,
     theme: "neutral",
     hint: "Imagine les pliages possibles.",
-    tags: ["symetrie", "axes", "figures_classiques", "template"],
+    tags: ["sym_axiale", "axe", "figures_classiques", "template"],
     generate: () => {
       const situation = randomChoice([
         {
@@ -819,11 +819,11 @@ export const symetrieBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "6e_sym_axes_erreur_1",
+    id: "6e_sym_axe_erreur_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "symetrie",
-    microId: "sym_axes",
+    notionId: "sym_axiale",
+    microId: "sym_axe",
     difficulty: 4,
     theme: "neutral",
     text: "Un élève dit : toutes les diagonales sont des axes de symétrie. A-t-il raison ?",
@@ -837,16 +837,16 @@ export const symetrieBank: TutorBankItemV4[] = [
       "Méthode : on cherche un contre-exemple.\n\n" +
       "Observation : dans un rectangle non carré, les diagonales ne sont pas des axes de symétrie.\n\n" +
       "Conclusion : l’élève a tort, toutes les diagonales ne sont pas des axes de symétrie.",
-    tags: ["symetrie", "axes", "erreur", "raisonnement"],
+    tags: ["sym_axiale", "axe", "erreur", "raisonnement"],
   },
 
   {
     kind: "fixed",
-    id: "6e_sym_axes_open_1",
+    id: "6e_sym_axe_open_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "symetrie",
-    microId: "sym_axes",
+    notionId: "sym_axiale",
+    microId: "sym_axe",
     difficulty: 4,
     theme: "neutral",
     text: "Explique comment vérifier qu’une droite est un axe de symétrie d’une figure.",
@@ -859,7 +859,7 @@ export const symetrieBank: TutorBankItemV4[] = [
       "Méthode : on imagine un pliage selon cette droite.\n\n" +
       "Observation : les points correspondants doivent se superposer et être à la même distance de l’axe.\n\n" +
       "Conclusion : la droite est un axe de symétrie si le pliage superpose exactement les deux parties.",
-    tags: ["symetrie", "axes", "open", "methode"],
+    tags: ["sym_axiale", "axe", "open", "methode"],
   },
 
   /* =========================
@@ -868,11 +868,11 @@ export const symetrieBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "6e_sym_defis_fixed_1_reunion",
+    id: "6e_sym_defi_fixed_1_reunion",
     niveau: "6e",
     matiere: "maths",
-    notionId: "symetrie",
-    microId: "sym_defis",
+    notionId: "sym_axiale",
+    microId: "sym_defi",
     difficulty: 3,
     theme: "reunion",
     text: "Sur un motif de carrelage à La Réunion, une figure bleue est reflétée de l’autre côté d’un axe vertical. Quelle transformation est utilisée ?",
@@ -891,20 +891,20 @@ export const symetrieBank: TutorBankItemV4[] = [
       "Méthode : on repère l’axe vertical et la figure image de l’autre côté.\n\n" +
       "Observation : la figure est reflétée comme dans un miroir.\n\n" +
       "Conclusion : la transformation utilisée est une symétrie axiale.",
-    tags: ["symetrie", "defi", "reunion", "transformation"],
+    tags: ["sym_axiale", "defi", "reunion", "transformation"],
   },
 
   {
     kind: "template",
-    id: "6e_sym_defis_tpl_1_canvas_verification",
+    id: "6e_sym_defi_tpl_1_canvas_verification",
     niveau: "6e",
     matiere: "maths",
-    notionId: "symetrie",
-    microId: "sym_defis",
+    notionId: "sym_axiale",
+    microId: "sym_defi",
     difficulty: 4,
     theme: "neutral",
     hint: "Vérifie les distances à l’axe pour plusieurs sommets.",
-    tags: ["symetrie", "defi", "verification", "canvas", "template"],
+    tags: ["sym_axiale", "defi", "verification", "canvas", "template"],
     generate: () => ({
       text: "Un élève affirme que les deux figures sont symétriques par rapport à l’axe. A-t-il raison ?",
       format: "qcm",
@@ -944,15 +944,15 @@ export const symetrieBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "6e_sym_defis_tpl_2_erreur_canvas",
+    id: "6e_sym_defi_tpl_2_erreur_canvas",
     niveau: "6e",
     matiere: "maths",
-    notionId: "symetrie",
-    microId: "sym_defis",
+    notionId: "sym_axiale",
+    microId: "sym_defi",
     difficulty: 4,
     theme: "neutral",
     hint: "Une figure presque symétrique n’est pas forcément symétrique.",
-    tags: ["symetrie", "defi", "erreur", "canvas", "template"],
+    tags: ["sym_axiale", "defi", "erreur", "canvas", "template"],
     generate: () => ({
       text: "Les deux figures semblent presque symétriques. Peut-on conclure qu’elles sont vraiment symétriques par rapport à l’axe ?",
       format: "qcm",
@@ -990,11 +990,11 @@ export const symetrieBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "6e_sym_defis_open_1_doute_raisonnable",
+    id: "6e_sym_defi_open_1_doute_raisonnable",
     niveau: "6e",
     matiere: "maths",
-    notionId: "symetrie",
-    microId: "sym_defis",
+    notionId: "sym_axiale",
+    microId: "sym_defi",
     difficulty: 5,
     theme: "neutral",
     text: "Un camarade affirme qu’une figure possède un axe de symétrie. Quelles vérifications dois-tu faire avant d’être d’accord ?",
@@ -1007,16 +1007,16 @@ export const symetrieBank: TutorBankItemV4[] = [
       "Méthode : on vérifie plusieurs points ou sommets de la figure.\n\n" +
       "Observation : les points correspondants doivent être à la même distance de l’axe et se superposer par pliage.\n\n" +
       "Conclusion : on peut être d’accord seulement si ces vérifications sont vraies.",
-    tags: ["symetrie", "defi", "open", "verification", "raisonnement"],
+    tags: ["sym_axiale", "defi", "open", "verification", "raisonnement"],
   },
 
   {
     kind: "fixed",
-    id: "6e_sym_defis_open_2_methode",
+    id: "6e_sym_defi_open_2_methode",
     niveau: "6e",
     matiere: "maths",
-    notionId: "symetrie",
-    microId: "sym_defis",
+    notionId: "sym_axiale",
+    microId: "sym_defi",
     difficulty: 5,
     theme: "neutral",
     text: "Explique pourquoi la symétrie axiale aide à apprendre à observer avec précision.",
@@ -1029,7 +1029,7 @@ export const symetrieBank: TutorBankItemV4[] = [
       "Méthode : pour être sûr, il faut observer les points, les distances et le pliage.\n\n" +
       "Observation : une figure presque symétrique peut être fausse si un point est mal placé.\n\n" +
       "Conclusion : la symétrie axiale développe l’observation précise et la vérification.",
-    tags: ["symetrie", "defi", "open", "observation", "raisonnement"],
+    tags: ["sym_axiale", "defi", "open", "observation", "raisonnement"],
   },
     /* =========================
      RENFORT — AXE OBLIQUE
@@ -1040,12 +1040,12 @@ export const symetrieBank: TutorBankItemV4[] = [
     id: "6e_sym_reconnaitre_tpl_4_axe_oblique",
     niveau: "6e",
     matiere: "maths",
-    notionId: "symetrie",
+    notionId: "sym_axiale",
     microId: "sym_reconnaitre",
     difficulty: 4,
     theme: "neutral",
     hint: "Un axe de symétrie peut aussi être oblique.",
-    tags: ["symetrie", "reconnaitre", "axe_oblique", "template", "canvas"],
+    tags: ["sym_axiale", "reconnaitre", "axe_oblique", "template", "canvas"],
     generate: () => ({
       text: "La figure rouge est-elle l’image de la figure bleue par symétrie axiale d’axe oblique ?",
       format: "qcm",
@@ -1091,7 +1091,7 @@ export const symetrieBank: TutorBankItemV4[] = [
     id: "6e_sym_reconnaitre_open_2_axe_oblique",
     niveau: "6e",
     matiere: "maths",
-    notionId: "symetrie",
+    notionId: "sym_axiale",
     microId: "sym_reconnaitre",
     difficulty: 4,
     theme: "neutral",
@@ -1105,7 +1105,7 @@ export const symetrieBank: TutorBankItemV4[] = [
       "Méthode : on ne regarde pas seulement les axes verticaux.\n\n" +
       "Observation : une figure peut se superposer par pliage selon un axe vertical, horizontal ou oblique.\n\n" +
       "Conclusion : un axe de symétrie peut donc être oblique.",
-    tags: ["symetrie", "axe_oblique", "open", "vocabulaire"],
+    tags: ["sym_axiale", "axe_oblique", "open", "vocabulaire"],
   },
 
   /* =========================
@@ -1117,12 +1117,12 @@ export const symetrieBank: TutorBankItemV4[] = [
     id: "6e_sym_point_tpl_3_axe_horizontal",
     niveau: "6e",
     matiere: "maths",
-    notionId: "symetrie",
+    notionId: "sym_axiale",
     microId: "sym_point",
     difficulty: 3,
     theme: "neutral",
     hint: "Avec un axe horizontal, l’image est au-dessus ou au-dessous à la même distance.",
-    tags: ["symetrie", "point", "axe_horizontal", "template"],
+    tags: ["sym_axiale", "point", "axe_horizontal", "template"],
     generate: () => {
       const d = randomChoice([1, 2, 3, 4]);
 
@@ -1151,7 +1151,7 @@ export const symetrieBank: TutorBankItemV4[] = [
     id: "6e_sym_point_erreur_2_perpendiculaire",
     niveau: "6e",
     matiere: "maths",
-    notionId: "symetrie",
+    notionId: "sym_axiale",
     microId: "sym_point",
     difficulty: 4,
     theme: "neutral",
@@ -1166,7 +1166,7 @@ export const symetrieBank: TutorBankItemV4[] = [
       "Méthode : il faut vérifier la distance et la direction.\n\n" +
       "Observation : le segment [AA'] doit être perpendiculaire à l’axe.\n\n" +
       "Conclusion : la construction n’est pas correcte.",
-    tags: ["symetrie", "point", "erreur", "perpendiculaire", "mediatrice"],
+    tags: ["sym_axiale", "point", "erreur", "perpendiculaire", "mediatrice"],
   },
 
   /* =========================
@@ -1178,7 +1178,7 @@ export const symetrieBank: TutorBankItemV4[] = [
     id: "6e_sym_figure_open_2_justifier",
     niveau: "6e",
     matiere: "maths",
-    notionId: "symetrie",
+    notionId: "sym_axiale",
     microId: "sym_figure",
     difficulty: 5,
     theme: "neutral",
@@ -1192,7 +1192,7 @@ export const symetrieBank: TutorBankItemV4[] = [
       "Méthode : on vérifie chaque sommet de la figure.\n\n" +
       "Observation : un seul sommet bien placé ne garantit pas que toute la figure est correcte.\n\n" +
       "Conclusion : il faut vérifier tous les sommets importants.",
-    tags: ["symetrie", "figure", "open", "justification", "verification"],
+    tags: ["sym_axiale", "figure", "open", "justification", "verification"],
   },
 
   {
@@ -1200,12 +1200,12 @@ export const symetrieBank: TutorBankItemV4[] = [
     id: "6e_sym_figure_tpl_3_axe_horizontal_canvas",
     niveau: "6e",
     matiere: "maths",
-    notionId: "symetrie",
+    notionId: "sym_axiale",
     microId: "sym_figure",
     difficulty: 3,
     theme: "neutral",
     hint: "L’axe horizontal sépare la figure de son image.",
-    tags: ["symetrie", "figure", "axe_horizontal", "canvas", "template"],
+    tags: ["sym_axiale", "figure", "axe_horizontal", "canvas", "template"],
     generate: () => ({
       text: "Le triangle rouge est-il l’image du triangle bleu par symétrie axiale d’axe horizontal ?",
       format: "qcm",
@@ -1247,15 +1247,15 @@ export const symetrieBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "6e_sym_proprietes_tpl_2_angle",
+    id: "6e_sym_propriete_tpl_2_angle",
     niveau: "6e",
     matiere: "maths",
-    notionId: "symetrie",
-    microId: "sym_proprietes",
+    notionId: "sym_axiale",
+    microId: "sym_propriete",
     difficulty: 3,
     theme: "neutral",
     hint: "La symétrie axiale conserve les angles.",
-    tags: ["symetrie", "proprietes", "angle", "template"],
+    tags: ["sym_axiale", "proprietes", "angle", "template"],
     generate: () => {
       const angle = randomChoice([30, 45, 60, 75, 90]);
 
@@ -1275,16 +1275,16 @@ export const symetrieBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "6e_sym_proprietes_open_2_pourquoi_conserve",
+    id: "6e_sym_propriete_open_2_pourquoi_conserve",
     niveau: "6e",
     matiere: "maths",
-    notionId: "symetrie",
-    microId: "sym_proprietes",
+    notionId: "sym_axiale",
+    microId: "sym_propriete",
     difficulty: 5,
     theme: "neutral",
     text: "Explique pourquoi une symétrie axiale conserve la forme et la taille d’une figure.",
     format: "open",
-    expected: ["pliage", "superposer", "longueurs", "angles", "taille"],
+    expected: ["pliage", "superposer", "aire_longueur", "angle_mesure", "taille"],
     comparator: "contains_keyword",
     hint: "Imagine que l’on plie la feuille selon l’axe.",
     explanation:
@@ -1292,7 +1292,7 @@ export const symetrieBank: TutorBankItemV4[] = [
       "Méthode : on imagine le pliage selon l’axe.\n\n" +
       "Observation : après pliage, la figure et son image se superposent exactement.\n\n" +
       "Conclusion : la forme et la taille sont conservées.",
-    tags: ["symetrie", "proprietes", "open", "raisonnement"],
+    tags: ["sym_axiale", "proprietes", "open", "raisonnement"],
   },
 
   /* =========================
@@ -1301,11 +1301,11 @@ export const symetrieBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "6e_sym_axes_open_2_pas_impression",
+    id: "6e_sym_axe_open_2_pas_impression",
     niveau: "6e",
     matiere: "maths",
-    notionId: "symetrie",
-    microId: "sym_axes",
+    notionId: "sym_axiale",
+    microId: "sym_axe",
     difficulty: 5,
     theme: "neutral",
     text: "Pourquoi ne suffit-il pas de dire “ça a l’air symétrique” pour affirmer qu’une droite est un axe de symétrie ?",
@@ -1318,20 +1318,20 @@ export const symetrieBank: TutorBankItemV4[] = [
       "Méthode : on vérifie plusieurs points de la figure.\n\n" +
       "Observation : une figure peut sembler symétrique mais avoir un point mal placé.\n\n" +
       "Conclusion : il faut vérifier, pas seulement se fier à l’impression.",
-    tags: ["symetrie", "axes", "open", "doute_raisonnable", "verification"],
+    tags: ["sym_axiale", "axe", "open", "doute_raisonnable", "verification"],
   },
 
   {
     kind: "template",
-    id: "6e_sym_axes_tpl_2_erreur_rectangle_diagonale",
+    id: "6e_sym_axe_tpl_2_erreur_rectangle_diagonale",
     niveau: "6e",
     matiere: "maths",
-    notionId: "symetrie",
-    microId: "sym_axes",
+    notionId: "sym_axiale",
+    microId: "sym_axe",
     difficulty: 4,
     theme: "neutral",
     hint: "Dans un rectangle non carré, les diagonales ne sont pas des axes.",
-    tags: ["symetrie", "axes", "erreur", "template"],
+    tags: ["sym_axiale", "axe", "erreur", "template"],
     generate: () => ({
       text: "Un élève affirme que la diagonale d’un rectangle non carré est un axe de symétrie. A-t-il raison ?",
       format: "qcm",
@@ -1352,15 +1352,15 @@ export const symetrieBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "6e_sym_defis_tpl_3_margouillat",
+    id: "6e_sym_defi_tpl_3_margouillat",
     niveau: "6e",
     matiere: "maths",
-    notionId: "symetrie",
-    microId: "sym_defis",
+    notionId: "sym_axiale",
+    microId: "sym_defi",
     difficulty: 4,
     theme: "reunion",
     hint: "Cherche si l’axe partage le motif en deux parties superposables.",
-    tags: ["symetrie", "defi", "reunion", "motif", "template"],
+    tags: ["sym_axiale", "defi", "reunion", "motif", "template"],
     generate: () => ({
       text: "Sur un logo avec un margouillat stylisé, on trace une droite au milieu du dessin. Que faut-il vérifier pour savoir si cette droite est un axe de symétrie ?",
       format: "open",

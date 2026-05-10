@@ -29,7 +29,7 @@ const supportLinks: Record<string, string[]> = {
   // PUISSANCES
   // =========================
   puissance_dix: ["rationnel_ecritures"],
-  puissance_calculs: ["litteral_reduire"],
+  puissance_calcul: ["litteral_reduire"],
   puissance_ecriture_scientifique: ["rationnel_ecritures"],
 
   // =========================
