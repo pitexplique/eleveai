@@ -67,7 +67,7 @@ export const anglesBank: TutorBankItemV4[] = [
     id: "angle_lire_fixed_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "angles",
+    notionId: "angle_mesure",
     microId: "angle_lire",
     difficulty: 1,
     theme: "neutral",
@@ -80,7 +80,7 @@ export const anglesBank: TutorBankItemV4[] = [
           "Méthode : on identifie le sommet, les côtés ou la mesure, puis on utilise la règle ou le rapporteur.\n\nCalcul : " +
           ("La mesure indiquée sur la figure est 60°. La réponse est donc 60.") +
           "\n\nConclusion : la mesure ou le nom trouvé convient pour cet angle.",
-    tags: ["angles", "lire", "canvas"],
+    tags: ["angle_mesure", "lire", "canvas"],
     canvas: angleCanvas({ angleDeg: 60, showMeasure: true }),
   },
   {
@@ -88,7 +88,7 @@ export const anglesBank: TutorBankItemV4[] = [
     id: "angle_lire_fixed_2",
     niveau: "5e",
     matiere: "maths",
-    notionId: "angles",
+    notionId: "angle_mesure",
     microId: "angle_lire",
     difficulty: 1,
     theme: "neutral",
@@ -102,7 +102,7 @@ export const anglesBank: TutorBankItemV4[] = [
           "Méthode : on identifie le sommet, les côtés ou la mesure, puis on utilise la règle ou le rapporteur.\n\nCalcul : " +
           ("Dans l’angle AOB, la lettre du milieu indique le sommet : c’est O.") +
           "\n\nConclusion : la mesure ou le nom trouvé convient pour cet angle.",
-    tags: ["angles", "lire", "vocabulaire", "qcm"],
+    tags: ["angle_mesure", "lire", "vocabulaire", "qcm"],
     canvas: angleCanvas({ angleDeg: 70, showMeasure: false, placeholder: "?" }),
   },
   {
@@ -110,7 +110,7 @@ export const anglesBank: TutorBankItemV4[] = [
     id: "angle_lire_qcm_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "angles",
+    notionId: "angle_mesure",
     microId: "angle_lire",
     difficulty: 2,
     theme: "neutral",
@@ -124,7 +124,7 @@ export const anglesBank: TutorBankItemV4[] = [
           "Méthode : on identifie le sommet, les côtés ou la mesure, puis on utilise la règle ou le rapporteur.\n\nCalcul : " +
           ("Un angle de 90° est un angle droit.") +
           "\n\nConclusion : la mesure ou le nom trouvé convient pour cet angle.",
-    tags: ["angles", "lire", "angle_droit", "qcm"],
+    tags: ["angle_mesure", "lire", "angle_droit", "qcm"],
     canvas: angleCanvas({ angleDeg: 90, showMeasure: false, showRightAngle: true }),
   },
   {
@@ -132,7 +132,7 @@ export const anglesBank: TutorBankItemV4[] = [
     id: "angle_lire_open_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "angles",
+    notionId: "angle_mesure",
     microId: "angle_lire",
     difficulty: 2,
     theme: "neutral",
@@ -145,19 +145,19 @@ export const anglesBank: TutorBankItemV4[] = [
           "Méthode : on identifie le sommet, les côtés ou la mesure, puis on utilise la règle ou le rapporteur.\n\nCalcul : " +
           ("Le sommet d’un angle est le point où les deux côtés de l’angle se rejoignent.") +
           "\n\nConclusion : la mesure ou le nom trouvé convient pour cet angle.",
-    tags: ["angles", "lire", "open", "vocabulaire"],
+    tags: ["angle_mesure", "lire", "open", "vocabulaire"],
   },
   {
     kind: "template",
     id: "angle_lire_tpl_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "angles",
+    notionId: "angle_mesure",
     microId: "angle_lire",
     difficulty: 2,
     theme: "neutral",
     hint: "Lis la mesure indiquée sur la figure.",
-    tags: ["angles", "lire", "template", "canvas"],
+    tags: ["angle_mesure", "lire", "template", "canvas"],
     generate: () => {
       const a = randomChoice(anglesClassiques);
       return {
@@ -186,7 +186,7 @@ export const anglesBank: TutorBankItemV4[] = [
     id: "angle_mesurer_fixed_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "angles",
+    notionId: "angle_mesure",
     microId: "angle_mesurer",
     difficulty: 2,
     theme: "neutral",
@@ -200,14 +200,14 @@ export const anglesBank: TutorBankItemV4[] = [
           "Méthode : on identifie le sommet, les côtés ou la mesure, puis on utilise la règle ou le rapporteur.\n\nCalcul : " +
           ("On mesure un angle avec un rapporteur.") +
           "\n\nConclusion : la mesure ou le nom trouvé convient pour cet angle.",
-    tags: ["angles", "mesurer", "qcm", "instrument"],
+    tags: ["angle_mesure", "mesurer", "qcm", "instrument"],
   },
   {
     kind: "fixed",
     id: "angle_mesurer_fixed_2",
     niveau: "5e",
     matiere: "maths",
-    notionId: "angles",
+    notionId: "angle_mesure",
     microId: "angle_mesurer",
     difficulty: 2,
     theme: "neutral",
@@ -220,7 +220,7 @@ export const anglesBank: TutorBankItemV4[] = [
           "Méthode : on identifie le sommet, les côtés ou la mesure, puis on utilise la règle ou le rapporteur.\n\nCalcul : " +
           ("L’angle représenté mesure 45°.") +
           "\n\nConclusion : la mesure ou le nom trouvé convient pour cet angle.",
-    tags: ["angles", "mesurer", "canvas"],
+    tags: ["angle_mesure", "mesurer", "canvas"],
     canvas: angleCanvas({ angleDeg: 45, showMeasure: false, placeholder: "?" }),
   },
   {
@@ -228,7 +228,7 @@ export const anglesBank: TutorBankItemV4[] = [
     id: "angle_mesurer_qcm_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "angles",
+    notionId: "angle_mesure",
     microId: "angle_mesurer",
     difficulty: 3,
     theme: "neutral",
@@ -247,14 +247,14 @@ export const anglesBank: TutorBankItemV4[] = [
           "Méthode : on identifie le sommet, les côtés ou la mesure, puis on utilise la règle ou le rapporteur.\n\nCalcul : " +
           ("Si le centre du rapporteur est mal placé, la mesure lue peut être fausse.") +
           "\n\nConclusion : la mesure ou le nom trouvé convient pour cet angle.",
-    tags: ["angles", "mesurer", "rapporteur", "piege", "qcm"],
+    tags: ["angle_mesure", "mesurer", "rapporteur", "piege", "qcm"],
   },
   {
     kind: "fixed",
     id: "angle_mesurer_open_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "angles",
+    notionId: "angle_mesure",
     microId: "angle_mesurer",
     difficulty: 3,
     theme: "neutral",
@@ -268,19 +268,19 @@ export const anglesBank: TutorBankItemV4[] = [
           "Méthode : on identifie le sommet, les côtés ou la mesure, puis on utilise la règle ou le rapporteur.\n\nCalcul : " +
           ("Il faut placer le centre du rapporteur sur le sommet de l’angle, puis aligner le zéro du rapporteur avec un côté de l’angle.") +
           "\n\nConclusion : la mesure ou le nom trouvé convient pour cet angle.",
-    tags: ["angles", "mesurer", "open", "rapporteur"],
+    tags: ["angle_mesure", "mesurer", "open", "rapporteur"],
   },
   {
     kind: "template",
     id: "angle_mesurer_tpl_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "angles",
+    notionId: "angle_mesure",
     microId: "angle_mesurer",
     difficulty: 3,
     theme: "neutral",
     hint: "Compare l’angle à 90° ou lis la valeur attendue.",
-    tags: ["angles", "mesurer", "template", "canvas"],
+    tags: ["angle_mesure", "mesurer", "template", "canvas"],
     generate: () => {
       const a = randomChoice([30, 45, 60, 90, 120, 135]);
       return {
@@ -310,7 +310,7 @@ export const anglesBank: TutorBankItemV4[] = [
     id: "angle_tracer_fixed_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "angles",
+    notionId: "angle_mesure",
     microId: "angle_tracer",
     difficulty: 2,
     theme: "neutral",
@@ -323,7 +323,7 @@ export const anglesBank: TutorBankItemV4[] = [
           "Méthode : on identifie le sommet, les côtés ou la mesure, puis on utilise la règle ou le rapporteur.\n\nCalcul : " +
           ("Pour tracer un angle de 50°, on repère la graduation 50° sur le rapporteur.") +
           "\n\nConclusion : la mesure ou le nom trouvé convient pour cet angle.",
-    tags: ["angles", "tracer", "rapporteur"],
+    tags: ["angle_mesure", "tracer", "rapporteur"],
     canvas: angleCanvas({ angleDeg: 50, showMeasure: true }),
   },
   {
@@ -331,7 +331,7 @@ export const anglesBank: TutorBankItemV4[] = [
     id: "angle_tracer_qcm_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "angles",
+    notionId: "angle_mesure",
     microId: "angle_tracer",
     difficulty: 2,
     theme: "neutral",
@@ -350,14 +350,14 @@ export const anglesBank: TutorBankItemV4[] = [
           "Méthode : on identifie le sommet, les côtés ou la mesure, puis on utilise la règle ou le rapporteur.\n\nCalcul : " +
           ("Pour tracer un angle AOB, on commence par placer le sommet O.") +
           "\n\nConclusion : la mesure ou le nom trouvé convient pour cet angle.",
-    tags: ["angles", "tracer", "qcm", "methode"],
+    tags: ["angle_mesure", "tracer", "qcm", "methode"],
   },
   {
     kind: "fixed",
     id: "angle_tracer_qcm_2",
     niveau: "5e",
     matiere: "maths",
-    notionId: "angles",
+    notionId: "angle_mesure",
     microId: "angle_tracer",
     difficulty: 3,
     theme: "neutral",
@@ -371,7 +371,7 @@ export const anglesBank: TutorBankItemV4[] = [
           "Méthode : on identifie le sommet, les côtés ou la mesure, puis on utilise la règle ou le rapporteur.\n\nCalcul : " +
           ("Un angle de 120° est plus grand que 90° : c’est un angle obtus.") +
           "\n\nConclusion : la mesure ou le nom trouvé convient pour cet angle.",
-    tags: ["angles", "tracer", "obtus", "qcm"],
+    tags: ["angle_mesure", "tracer", "obtus", "qcm"],
     canvas: angleCanvas({ angleDeg: 120, showMeasure: true }),
   },
   {
@@ -379,7 +379,7 @@ export const anglesBank: TutorBankItemV4[] = [
     id: "angle_tracer_open_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "angles",
+    notionId: "angle_mesure",
     microId: "angle_tracer",
     difficulty: 4,
     theme: "neutral",
@@ -393,19 +393,19 @@ export const anglesBank: TutorBankItemV4[] = [
           "Méthode : on identifie le sommet, les côtés ou la mesure, puis on utilise la règle ou le rapporteur.\n\nCalcul : " +
           ("On place le sommet, on trace un premier côté, on place le centre du rapporteur sur le sommet, on repère 70°, puis on trace le second côté.") +
           "\n\nConclusion : la mesure ou le nom trouvé convient pour cet angle.",
-    tags: ["angles", "tracer", "open", "methode"],
+    tags: ["angle_mesure", "tracer", "open", "methode"],
   },
   {
     kind: "template",
     id: "angle_tracer_tpl_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "angles",
+    notionId: "angle_mesure",
     microId: "angle_tracer",
     difficulty: 3,
     theme: "neutral",
     hint: "Un angle se trace en degrés avec le rapporteur.",
-    tags: ["angles", "tracer", "template"],
+    tags: ["angle_mesure", "tracer", "template"],
     generate: () => {
       const a = randomChoice([35, 45, 60, 75, 100, 110, 130]);
       return {
@@ -430,7 +430,7 @@ export const anglesBank: TutorBankItemV4[] = [
     id: "angle_estimer_fixed_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "angles",
+    notionId: "angle_mesure",
     microId: "angle_estimer",
     difficulty: 2,
     theme: "neutral",
@@ -444,7 +444,7 @@ export const anglesBank: TutorBankItemV4[] = [
           "Méthode : on identifie le sommet, les côtés ou la mesure, puis on utilise la règle ou le rapporteur.\n\nCalcul : " +
           ("L’angle représenté mesure environ 50°. Il est donc aigu.") +
           "\n\nConclusion : la mesure ou le nom trouvé convient pour cet angle.",
-    tags: ["angles", "estimer", "aigu", "canvas", "qcm"],
+    tags: ["angle_mesure", "estimer", "aigu", "canvas", "qcm"],
     canvas: angleCanvas({ angleDeg: 50, showMeasure: false, placeholder: "?" }),
   },
   {
@@ -452,7 +452,7 @@ export const anglesBank: TutorBankItemV4[] = [
     id: "angle_estimer_fixed_2",
     niveau: "5e",
     matiere: "maths",
-    notionId: "angles",
+    notionId: "angle_mesure",
     microId: "angle_estimer",
     difficulty: 2,
     theme: "neutral",
@@ -466,7 +466,7 @@ export const anglesBank: TutorBankItemV4[] = [
           "Méthode : on identifie le sommet, les côtés ou la mesure, puis on utilise la règle ou le rapporteur.\n\nCalcul : " +
           ("L’angle représenté mesure environ 120°. Il est donc obtus.") +
           "\n\nConclusion : la mesure ou le nom trouvé convient pour cet angle.",
-    tags: ["angles", "estimer", "obtus", "canvas", "qcm"],
+    tags: ["angle_mesure", "estimer", "obtus", "canvas", "qcm"],
     canvas: angleCanvas({ angleDeg: 120, showMeasure: false, placeholder: "?" }),
   },
   {
@@ -474,7 +474,7 @@ export const anglesBank: TutorBankItemV4[] = [
     id: "angle_estimer_qcm_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "angles",
+    notionId: "angle_mesure",
     microId: "angle_estimer",
     difficulty: 3,
     theme: "neutral",
@@ -488,14 +488,14 @@ export const anglesBank: TutorBankItemV4[] = [
           "Méthode : on identifie le sommet, les côtés ou la mesure, puis on utilise la règle ou le rapporteur.\n\nCalcul : " +
           ("Un angle légèrement plus grand que 90° peut mesurer environ 100°.") +
           "\n\nConclusion : la mesure ou le nom trouvé convient pour cet angle.",
-    tags: ["angles", "estimer", "qcm", "piege"],
+    tags: ["angle_mesure", "estimer", "qcm", "piege"],
   },
   {
     kind: "fixed",
     id: "angle_estimer_open_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "angles",
+    notionId: "angle_mesure",
     microId: "angle_estimer",
     difficulty: 3,
     theme: "neutral",
@@ -509,19 +509,19 @@ export const anglesBank: TutorBankItemV4[] = [
           "Méthode : on identifie le sommet, les côtés ou la mesure, puis on utilise la règle ou le rapporteur.\n\nCalcul : " +
           ("On compare l’angle à 90°. S’il est plus petit que 90°, il est aigu. S’il est plus grand que 90° et plus petit que 180°, il est obtus.") +
           "\n\nConclusion : la mesure ou le nom trouvé convient pour cet angle.",
-    tags: ["angles", "estimer", "open", "raisonnement"],
+    tags: ["angle_mesure", "estimer", "open", "raisonnement"],
   },
   {
     kind: "template",
     id: "angle_estimer_tpl_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "angles",
+    notionId: "angle_mesure",
     microId: "angle_estimer",
     difficulty: 3,
     theme: "neutral",
     hint: "Compare avec l’angle droit de 90°.",
-    tags: ["angles", "estimer", "template", "canvas"],
+    tags: ["angle_mesure", "estimer", "template", "canvas"],
     generate: () => {
       const a = randomChoice([...anglesAigus, 90, ...anglesObtus]);
       const type = angleType(a);
@@ -555,11 +555,11 @@ export const anglesBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "fixed",
-    id: "angle_defis_fixed_1",
+    id: "angle_defi_fixed_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "angles",
-    microId: "angle_defis",
+    notionId: "angle_mesure",
+    microId: "angle_defi",
     difficulty: 4,
     theme: "neutral",
     text: "Un élève dit : « Cet angle est obtus car il est grand ». Explique pourquoi cette justification est insuffisante.",
@@ -572,16 +572,16 @@ export const anglesBank: TutorBankItemV4[] = [
           "Méthode : on identifie le sommet, les côtés ou la mesure, puis on utilise la règle ou le rapporteur.\n\nCalcul : " +
           ("Dire qu’un angle est grand ne suffit pas. Un angle obtus mesure plus de 90° et moins de 180°.") +
           "\n\nConclusion : la mesure ou le nom trouvé convient pour cet angle.",
-    tags: ["angles", "defi", "open", "raisonnement", "piege"],
+    tags: ["angle_mesure", "defi", "open", "raisonnement", "piege"],
     canvas: angleCanvas({ angleDeg: 120, showMeasure: false, placeholder: "?" }),
   },
   {
     kind: "fixed",
-    id: "angle_defis_fixed_2",
+    id: "angle_defi_fixed_2",
     niveau: "5e",
     matiere: "maths",
-    notionId: "angles",
-    microId: "angle_defis",
+    notionId: "angle_mesure",
+    microId: "angle_defi",
     difficulty: 4,
     theme: "sport",
     text: "Un skateur tourne d’environ 90°. Quel type d’angle décrit ce virage ?",
@@ -594,16 +594,16 @@ export const anglesBank: TutorBankItemV4[] = [
           "Méthode : on identifie le sommet, les côtés ou la mesure, puis on utilise la règle ou le rapporteur.\n\nCalcul : " +
           ("Un virage de 90° correspond à un angle droit.") +
           "\n\nConclusion : la mesure ou le nom trouvé convient pour cet angle.",
-    tags: ["angles", "defi", "sport", "angle_droit"],
+    tags: ["angle_mesure", "defi", "sport", "angle_droit"],
     canvas: angleCanvas({ angleDeg: 90, showMeasure: false, showRightAngle: true }),
   },
   {
     kind: "fixed",
-    id: "angle_defis_fixed_3",
+    id: "angle_defi_fixed_3",
     niveau: "5e",
     matiere: "maths",
-    notionId: "angles",
-    microId: "angle_defis",
+    notionId: "angle_mesure",
+    microId: "angle_defi",
     difficulty: 5,
     theme: "reunion",
     text: "Sur une carte de randonnée à La Réunion, deux chemins forment un angle d’environ 120°. Est-ce un angle aigu, droit ou obtus ?",
@@ -616,20 +616,20 @@ export const anglesBank: TutorBankItemV4[] = [
           "Méthode : on identifie le sommet, les côtés ou la mesure, puis on utilise la règle ou le rapporteur.\n\nCalcul : " +
           ("120° est plus grand que 90° et plus petit que 180°. C’est donc un angle obtus.") +
           "\n\nConclusion : la mesure ou le nom trouvé convient pour cet angle.",
-    tags: ["angles", "defi", "reunion", "obtus"],
+    tags: ["angle_mesure", "defi", "reunion", "obtus"],
     canvas: angleCanvas({ angleDeg: 120, showMeasure: true }),
   },
   {
     kind: "template",
-    id: "angle_defis_tpl_1",
+    id: "angle_defi_tpl_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "angles",
-    microId: "angle_defis",
+    notionId: "angle_mesure",
+    microId: "angle_defi",
     difficulty: 5,
     theme: "neutral",
     hint: "Compare l’angle à 90°.",
-    tags: ["angles", "defi", "template", "raisonnement"],
+    tags: ["angle_mesure", "defi", "template", "raisonnement"],
     generate: () => {
       const a = randomChoice([40, 55, 80, 95, 110, 140]);
       const type = angleType(a);
@@ -655,15 +655,15 @@ export const anglesBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "angle_defis_open_tpl_1",
+    id: "angle_defi_open_tpl_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "angles",
-    microId: "angle_defis",
+    notionId: "angle_mesure",
+    microId: "angle_defi",
     difficulty: 5,
     theme: "neutral",
     hint: "Utilise les seuils 90° et 180°.",
-    tags: ["angles", "defi", "open", "template"],
+    tags: ["angle_mesure", "defi", "open", "template"],
     generate: () => {
       const a = randomChoice([35, 60, 110, 135]);
       const type = angleType(a);

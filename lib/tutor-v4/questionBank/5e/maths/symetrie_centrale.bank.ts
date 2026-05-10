@@ -29,7 +29,7 @@ export const symetrieCentraleBank: TutorBankItemV4[] = [
     id: "5e_sym_centrale_reconnaitre_fixed_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "symetrie_centrale",
+    notionId: "sym_centrale",
     microId: "sym_centrale_reconnaitre",
     difficulty: 1,
     theme: "neutral",
@@ -49,7 +49,7 @@ export const symetrieCentraleBank: TutorBankItemV4[] = [
       "Méthode : on repère le centre de symétrie.\n\n" +
       "Calcul : un point, son image et le centre sont alignés, et le centre est au milieu.\n\n" +
       "Conclusion : une symétrie centrale correspond à un demi-tour autour d’un point.",
-    tags: ["symetrie_centrale", "definition", "qcm", "canvas"],
+    tags: ["sym_centrale", "definition", "qcm", "canvas"],
     canvas: transformationCanvas({
       transformation: "symetrie_centrale",
       grid: { rows: 8, cols: 8 },
@@ -78,7 +78,7 @@ export const symetrieCentraleBank: TutorBankItemV4[] = [
     id: "5e_sym_centrale_reconnaitre_fixed_2",
     niveau: "5e",
     matiere: "maths",
-    notionId: "symetrie_centrale",
+    notionId: "sym_centrale",
     microId: "sym_centrale_reconnaitre",
     difficulty: 1,
     theme: "neutral",
@@ -98,7 +98,7 @@ export const symetrieCentraleBank: TutorBankItemV4[] = [
       "Méthode : on vérifie que A, O et A' sont alignés.\n\n" +
       "Calcul : OA = OA'.\n\n" +
       "Conclusion : O est le milieu du segment [AA'].",
-    tags: ["symetrie_centrale", "centre", "milieu", "qcm"],
+    tags: ["sym_centrale", "centre", "milieu", "qcm"],
   },
 
   {
@@ -106,12 +106,12 @@ export const symetrieCentraleBank: TutorBankItemV4[] = [
     id: "5e_sym_centrale_reconnaitre_tpl_1_canvas_oui",
     niveau: "5e",
     matiere: "maths",
-    notionId: "symetrie_centrale",
+    notionId: "sym_centrale",
     microId: "sym_centrale_reconnaitre",
     difficulty: 2,
     theme: "neutral",
     hint: "Regarde si O est le milieu entre chaque point et son image.",
-    tags: ["symetrie_centrale", "reconnaitre", "template", "canvas"],
+    tags: ["sym_centrale", "reconnaitre", "template", "canvas"],
     generate: () => ({
       text: "La figure rouge est-elle l’image de la figure bleue par symétrie centrale de centre O ?",
       format: "qcm",
@@ -152,12 +152,12 @@ export const symetrieCentraleBank: TutorBankItemV4[] = [
     id: "5e_sym_centrale_reconnaitre_tpl_2_piege_non",
     niveau: "5e",
     matiere: "maths",
-    notionId: "symetrie_centrale",
+    notionId: "sym_centrale",
     microId: "sym_centrale_reconnaitre",
     difficulty: 3,
     theme: "neutral",
     hint: "Vérifie tous les points, pas seulement un seul.",
-    tags: ["symetrie_centrale", "reconnaitre", "piege", "template", "canvas"],
+    tags: ["sym_centrale", "reconnaitre", "piege", "template", "canvas"],
     generate: () => ({
       text: "La figure rouge est-elle l’image de la figure bleue par symétrie centrale de centre O ?",
       format: "qcm",
@@ -198,7 +198,7 @@ export const symetrieCentraleBank: TutorBankItemV4[] = [
     id: "5e_sym_centrale_reconnaitre_open_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "symetrie_centrale",
+    notionId: "sym_centrale",
     microId: "sym_centrale_reconnaitre",
     difficulty: 3,
     theme: "neutral",
@@ -212,7 +212,7 @@ export const symetrieCentraleBank: TutorBankItemV4[] = [
       "Méthode : on décrit le mouvement de la figure.\n\n" +
       "Calcul : un demi-tour correspond à 180°.\n\n" +
       "Conclusion : une symétrie centrale est un demi-tour autour d’un centre.",
-    tags: ["symetrie_centrale", "open", "vocabulaire"],
+    tags: ["sym_centrale", "open", "vocabulaire"],
   },
 
   /* =========================
@@ -224,7 +224,7 @@ export const symetrieCentraleBank: TutorBankItemV4[] = [
     id: "5e_sym_centrale_point_fixed_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "symetrie_centrale",
+    notionId: "sym_centrale",
     microId: "sym_centrale_point",
     difficulty: 2,
     theme: "neutral",
@@ -244,7 +244,7 @@ export const symetrieCentraleBank: TutorBankItemV4[] = [
       "Méthode : on trace la droite (AO), puis on place A' de l’autre côté de O.\n\n" +
       "Calcul : OA = OA'.\n\n" +
       "Conclusion : A' est placé sur la droite (AO), avec O milieu de [AA'].",
-    tags: ["symetrie_centrale", "point", "construction", "qcm"],
+    tags: ["sym_centrale", "point", "construction", "qcm"],
   },
 
   {
@@ -252,12 +252,12 @@ export const symetrieCentraleBank: TutorBankItemV4[] = [
     id: "5e_sym_centrale_point_tpl_1_distance",
     niveau: "5e",
     matiere: "maths",
-    notionId: "symetrie_centrale",
+    notionId: "sym_centrale",
     microId: "sym_centrale_point",
     difficulty: 2,
     theme: "neutral",
     hint: "Le centre est au milieu.",
-    tags: ["symetrie_centrale", "point", "distance", "template"],
+    tags: ["sym_centrale", "point", "distance", "template"],
     generate: () => {
       const d = randomChoice([2, 3, 4, 5, 6]);
 
@@ -280,12 +280,12 @@ export const symetrieCentraleBank: TutorBankItemV4[] = [
     id: "5e_sym_centrale_point_tpl_2_coordonnees",
     niveau: "5e",
     matiere: "maths",
-    notionId: "symetrie_centrale",
+    notionId: "sym_centrale",
     microId: "sym_centrale_point",
     difficulty: 3,
     theme: "neutral",
     hint: "O est le milieu entre A et A'.",
-    tags: ["symetrie_centrale", "point", "coordonnees", "template"],
+    tags: ["sym_centrale", "point", "coordonnees", "template"],
     generate: () => {
       const ox = 4;
       const oy = 4;
@@ -319,7 +319,7 @@ export const symetrieCentraleBank: TutorBankItemV4[] = [
     id: "5e_sym_centrale_point_erreur_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "symetrie_centrale",
+    notionId: "sym_centrale",
     microId: "sym_centrale_point",
     difficulty: 3,
     theme: "neutral",
@@ -334,7 +334,7 @@ export const symetrieCentraleBank: TutorBankItemV4[] = [
       "Méthode : il faut vérifier deux conditions : alignement et égalité des distances.\n\n" +
       "Calcul : même si OA = OA', A' doit être sur la droite (AO).\n\n" +
       "Conclusion : la construction n’est pas correcte.",
-    tags: ["symetrie_centrale", "point", "erreur", "alignement"],
+    tags: ["sym_centrale", "point", "erreur", "alignement"],
   },
 
   {
@@ -342,7 +342,7 @@ export const symetrieCentraleBank: TutorBankItemV4[] = [
     id: "5e_sym_centrale_point_open_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "symetrie_centrale",
+    notionId: "sym_centrale",
     microId: "sym_centrale_point",
     difficulty: 4,
     theme: "neutral",
@@ -356,7 +356,7 @@ export const symetrieCentraleBank: TutorBankItemV4[] = [
       "Méthode : on trace la droite (AO), puis on place A' de l’autre côté de O.\n\n" +
       "Calcul : on reporte la distance OA pour avoir OA' = OA.\n\n" +
       "Conclusion : A' est construit lorsque O est le milieu de [AA'].",
-    tags: ["symetrie_centrale", "point", "open", "construction"],
+    tags: ["sym_centrale", "point", "open", "construction"],
   },
 
   /* =========================
@@ -368,7 +368,7 @@ export const symetrieCentraleBank: TutorBankItemV4[] = [
     id: "5e_sym_centrale_figure_fixed_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "symetrie_centrale",
+    notionId: "sym_centrale",
     microId: "sym_centrale_figure",
     difficulty: 2,
     theme: "neutral",
@@ -388,7 +388,7 @@ export const symetrieCentraleBank: TutorBankItemV4[] = [
       "Méthode : pour un triangle, on construit l’image de chaque sommet.\n\n" +
       "Calcul : on construit A', B' et C', puis on relie les points.\n\n" +
       "Conclusion : on construit l’image de chacun des sommets.",
-    tags: ["symetrie_centrale", "figure", "triangle", "qcm"],
+    tags: ["sym_centrale", "figure", "triangle", "qcm"],
   },
 
   {
@@ -396,12 +396,12 @@ export const symetrieCentraleBank: TutorBankItemV4[] = [
     id: "5e_sym_centrale_figure_tpl_1_triangle",
     niveau: "5e",
     matiere: "maths",
-    notionId: "symetrie_centrale",
+    notionId: "sym_centrale",
     microId: "sym_centrale_figure",
     difficulty: 3,
     theme: "neutral",
     hint: "Chaque sommet image doit être en face du sommet de départ par rapport à O.",
-    tags: ["symetrie_centrale", "figure", "triangle", "template", "canvas"],
+    tags: ["sym_centrale", "figure", "triangle", "template", "canvas"],
     generate: () => ({
       text: "La figure rouge est-elle bien l’image du triangle bleu par symétrie centrale de centre O ?",
       format: "qcm",
@@ -442,12 +442,12 @@ export const symetrieCentraleBank: TutorBankItemV4[] = [
     id: "5e_sym_centrale_figure_tpl_2_quadrilatere",
     niveau: "5e",
     matiere: "maths",
-    notionId: "symetrie_centrale",
+    notionId: "sym_centrale",
     microId: "sym_centrale_figure",
     difficulty: 3,
     theme: "neutral",
     hint: "Construis l’image de chaque sommet.",
-    tags: ["symetrie_centrale", "figure", "quadrilatere", "template", "canvas"],
+    tags: ["sym_centrale", "figure", "quadrilatere", "template", "canvas"],
     generate: () => ({
       text: "La figure rouge est l’image du quadrilatère bleu par symétrie centrale. Quel est le centre ?",
       format: "qcm",
@@ -490,7 +490,7 @@ export const symetrieCentraleBank: TutorBankItemV4[] = [
     id: "5e_sym_centrale_figure_erreur_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "symetrie_centrale",
+    notionId: "sym_centrale",
     microId: "sym_centrale_figure",
     difficulty: 4,
     theme: "neutral",
@@ -505,7 +505,7 @@ export const symetrieCentraleBank: TutorBankItemV4[] = [
       "Méthode : pour un triangle, on vérifie A', B' et C'.\n\n" +
       "Calcul : si C' est mal placé, le triangle image est faux.\n\n" +
       "Conclusion : le triangle image n’est pas correct.",
-    tags: ["symetrie_centrale", "figure", "erreur"],
+    tags: ["sym_centrale", "figure", "erreur"],
   },
 
   {
@@ -513,7 +513,7 @@ export const symetrieCentraleBank: TutorBankItemV4[] = [
     id: "5e_sym_centrale_figure_open_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "symetrie_centrale",
+    notionId: "sym_centrale",
     microId: "sym_centrale_figure",
     difficulty: 4,
     theme: "neutral",
@@ -527,14 +527,14 @@ export const symetrieCentraleBank: TutorBankItemV4[] = [
       "Méthode : on construit A', B' et C' par symétrie centrale de centre O.\n\n" +
       "Calcul : O doit être le milieu de [AA'], [BB'] et [CC'].\n\n" +
       "Conclusion : en reliant A', B' et C', on obtient le triangle image.",
-    tags: ["symetrie_centrale", "figure", "open", "construction"],
+    tags: ["sym_centrale", "figure", "open", "construction"],
   },
   {
   kind: "fixed",
   id: "5e_sym_centrale_figure_open_2_justifier_canvas",
   niveau: "5e",
   matiere: "maths",
-  notionId: "symetrie_centrale",
+  notionId: "sym_centrale",
   microId: "sym_centrale_figure",
   difficulty: 4,
   theme: "neutral",
@@ -548,7 +548,7 @@ export const symetrieCentraleBank: TutorBankItemV4[] = [
     "Méthode : on vérifie plusieurs sommets correspondants.\n\n" +
     "Calcul : les sommets de départ, leurs images et le centre O sont alignés, avec des distances égales de part et d’autre de O.\n\n" +
     "Conclusion : la figure rouge est bien l’image de la figure bleue par symétrie centrale.",
-  tags: ["symetrie_centrale", "figure", "open", "justification", "canvas"],
+  tags: ["sym_centrale", "figure", "open", "justification", "canvas"],
   canvas: transformationCanvas({
     transformation: "symetrie_centrale",
     grid: { rows: 8, cols: 8 },
@@ -578,11 +578,11 @@ export const symetrieCentraleBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "5e_sym_centrale_proprietes_fixed_1",
+    id: "5e_sym_centrale_propriete_fixed_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "symetrie_centrale",
-    microId: "sym_centrale_proprietes",
+    notionId: "sym_centrale",
+    microId: "sym_centrale_propriete",
     difficulty: 2,
     theme: "neutral",
     text: "Une symétrie centrale conserve...",
@@ -601,16 +601,16 @@ export const symetrieCentraleBank: TutorBankItemV4[] = [
       "Méthode : on compare la figure et son image.\n\n" +
       "Calcul : les longueurs, les angles, l’alignement et le parallélisme sont conservés.\n\n" +
       "Conclusion : une symétrie centrale conserve les longueurs et les angles.",
-    tags: ["symetrie_centrale", "proprietes", "conservation", "qcm"],
+    tags: ["sym_centrale", "propriete", "conservation", "qcm"],
   },
 
   {
     kind: "fixed",
-    id: "5e_sym_centrale_proprietes_fixed_2_point_invariant",
+    id: "5e_sym_centrale_propriete_fixed_2_point_invariant",
     niveau: "5e",
     matiere: "maths",
-    notionId: "symetrie_centrale",
-    microId: "sym_centrale_proprietes",
+    notionId: "sym_centrale",
+    microId: "sym_centrale_propriete",
     difficulty: 2,
     theme: "neutral",
     text: "Dans une symétrie centrale de centre O, quel point reste invariant ?",
@@ -624,20 +624,20 @@ export const symetrieCentraleBank: TutorBankItemV4[] = [
       "Méthode : dans une symétrie centrale, on observe le centre.\n\n" +
       "Calcul : le centre O est envoyé sur lui-même.\n\n" +
       "Conclusion : le point invariant est le centre O.",
-    tags: ["symetrie_centrale", "proprietes", "point_invariant", "qcm"],
+    tags: ["sym_centrale", "propriete", "point_invariant", "qcm"],
   },
 
   {
     kind: "template",
-    id: "5e_sym_centrale_proprietes_tpl_1_longueur",
+    id: "5e_sym_centrale_propriete_tpl_1_longueur",
     niveau: "5e",
     matiere: "maths",
-    notionId: "symetrie_centrale",
-    microId: "sym_centrale_proprietes",
+    notionId: "sym_centrale",
+    microId: "sym_centrale_propriete",
     difficulty: 3,
     theme: "neutral",
     hint: "La symétrie centrale conserve les longueurs.",
-    tags: ["symetrie_centrale", "proprietes", "longueur", "template"],
+    tags: ["sym_centrale", "propriete", "longueur", "template"],
     generate: () => {
       const l = randomChoice([3, 4, 5, 6, 7, 8]);
 
@@ -657,15 +657,15 @@ export const symetrieCentraleBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "5e_sym_centrale_proprietes_tpl_2_angle",
+    id: "5e_sym_centrale_propriete_tpl_2_angle",
     niveau: "5e",
     matiere: "maths",
-    notionId: "symetrie_centrale",
-    microId: "sym_centrale_proprietes",
+    notionId: "sym_centrale",
+    microId: "sym_centrale_propriete",
     difficulty: 3,
     theme: "neutral",
     hint: "La symétrie centrale conserve les angles.",
-    tags: ["symetrie_centrale", "proprietes", "angle", "template"],
+    tags: ["sym_centrale", "propriete", "angle", "template"],
     generate: () => {
       const angle = randomChoice([35, 45, 60, 75, 90]);
 
@@ -685,11 +685,11 @@ export const symetrieCentraleBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "5e_sym_centrale_proprietes_fixed_3_alignement",
+    id: "5e_sym_centrale_propriete_fixed_3_alignement",
     niveau: "5e",
     matiere: "maths",
-    notionId: "symetrie_centrale",
-    microId: "sym_centrale_proprietes",
+    notionId: "sym_centrale",
+    microId: "sym_centrale_propriete",
     difficulty: 3,
     theme: "neutral",
     text: "Si trois points sont alignés, leurs images par symétrie centrale sont...",
@@ -703,16 +703,16 @@ export const symetrieCentraleBank: TutorBankItemV4[] = [
       "Méthode : on regarde une droite et son image.\n\n" +
       "Calcul : des points alignés restent alignés après la transformation.\n\n" +
       "Conclusion : leurs images sont alignées.",
-    tags: ["symetrie_centrale", "proprietes", "alignement", "qcm"],
+    tags: ["sym_centrale", "propriete", "alignement", "qcm"],
   },
 
   {
     kind: "fixed",
-    id: "5e_sym_centrale_proprietes_erreur_1",
+    id: "5e_sym_centrale_propriete_erreur_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "symetrie_centrale",
-    microId: "sym_centrale_proprietes",
+    notionId: "sym_centrale",
+    microId: "sym_centrale_propriete",
     difficulty: 4,
     theme: "neutral",
     text: "Un élève dit : une symétrie centrale agrandit la figure. A-t-il raison ?",
@@ -726,16 +726,16 @@ export const symetrieCentraleBank: TutorBankItemV4[] = [
       "Méthode : on utilise les propriétés de conservation.\n\n" +
       "Calcul : les longueurs et les angles sont conservés.\n\n" +
       "Conclusion : l’élève a tort, la figure n’est pas agrandie.",
-    tags: ["symetrie_centrale", "proprietes", "erreur"],
+    tags: ["sym_centrale", "propriete", "erreur"],
   },
 
   {
     kind: "fixed",
-    id: "5e_sym_centrale_proprietes_open_1",
+    id: "5e_sym_centrale_propriete_open_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "symetrie_centrale",
-    microId: "sym_centrale_proprietes",
+    notionId: "sym_centrale",
+    microId: "sym_centrale_propriete",
     difficulty: 4,
     theme: "neutral",
     text: "Cite deux propriétés conservées par la symétrie centrale.",
@@ -748,7 +748,7 @@ export const symetrieCentraleBank: TutorBankItemV4[] = [
       "Méthode : on compare la figure de départ et son image.\n\n" +
       "Calcul : elle conserve les longueurs, les angles, l’alignement et le parallélisme.\n\n" +
       "Conclusion : on peut citer par exemple les longueurs et les angles.",
-    tags: ["symetrie_centrale", "proprietes", "open"],
+    tags: ["sym_centrale", "propriete", "open"],
   },
 
   /* =========================
@@ -757,11 +757,11 @@ export const symetrieCentraleBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "5e_sym_centrale_defis_fixed_1",
+    id: "5e_sym_centrale_defi_fixed_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "symetrie_centrale",
-    microId: "sym_centrale_defis",
+    notionId: "sym_centrale",
+    microId: "sym_centrale_defi",
     difficulty: 3,
     theme: "reunion",
     text: "Sur un dessin de margouillat, l’œil gauche est l’image de l’œil droit par symétrie centrale de centre O. Si l’œil droit est à 3 cm de O, à quelle distance de O se trouve l’œil gauche ?",
@@ -774,20 +774,20 @@ export const symetrieCentraleBank: TutorBankItemV4[] = [
       "Méthode : on utilise OA = OA'.\n\n" +
       "Calcul : si l’œil droit est à 3 cm de O, l’œil gauche est aussi à 3 cm de O.\n\n" +
       "Conclusion : l’œil gauche se trouve à 3 cm de O.",
-    tags: ["symetrie_centrale", "defi", "reunion", "distance"],
+    tags: ["sym_centrale", "defi", "reunion", "distance"],
   },
 
   {
     kind: "template",
-    id: "5e_sym_centrale_defis_tpl_1_reunion",
+    id: "5e_sym_centrale_defi_tpl_1_reunion",
     niveau: "5e",
     matiere: "maths",
-    notionId: "symetrie_centrale",
-    microId: "sym_centrale_defis",
+    notionId: "sym_centrale",
+    microId: "sym_centrale_defi",
     difficulty: 3,
     theme: "reunion",
     hint: "Dans une symétrie centrale, les distances au centre sont égales.",
-    tags: ["symetrie_centrale", "defi", "reunion", "template"],
+    tags: ["sym_centrale", "defi", "reunion", "template"],
     generate: () => {
       const d = randomChoice([2, 3, 4, 5, 6]);
 
@@ -807,15 +807,15 @@ export const symetrieCentraleBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "5e_sym_centrale_defis_tpl_2_canvas",
+    id: "5e_sym_centrale_defi_tpl_2_canvas",
     niveau: "5e",
     matiere: "maths",
-    notionId: "symetrie_centrale",
-    microId: "sym_centrale_defis",
+    notionId: "sym_centrale",
+    microId: "sym_centrale_defi",
     difficulty: 4,
     theme: "neutral",
     hint: "Vérifie que le centre O est le milieu entre les figures.",
-    tags: ["symetrie_centrale", "defi", "canvas", "template"],
+    tags: ["sym_centrale", "defi", "canvas", "template"],
     generate: () => ({
       text: "Un élève affirme que les deux figures sont symétriques par rapport à O. A-t-il raison ?",
       format: "qcm",
@@ -855,11 +855,11 @@ export const symetrieCentraleBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "5e_sym_centrale_defis_open_1",
+    id: "5e_sym_centrale_defi_open_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "symetrie_centrale",
-    microId: "sym_centrale_defis",
+    notionId: "sym_centrale",
+    microId: "sym_centrale_defi",
     difficulty: 5,
     theme: "neutral",
     text: "Explique pourquoi une symétrie centrale conserve la forme et la taille d’une figure.",
@@ -872,15 +872,15 @@ export const symetrieCentraleBank: TutorBankItemV4[] = [
       "Méthode : un demi-tour déplace les points sans étirer ni réduire la figure.\n\n" +
       "Calcul : les longueurs et les angles sont conservés.\n\n" +
       "Conclusion : la symétrie centrale conserve donc la forme et la taille.",
-    tags: ["symetrie_centrale", "defi", "open", "raisonnement"],
+    tags: ["sym_centrale", "defi", "open", "raisonnement"],
   },
   {
   kind: "fixed",
-  id: "5e_sym_centrale_defis_open_3_doute_raisonnable",
+  id: "5e_sym_centrale_defi_open_3_doute_raisonnable",
   niveau: "5e",
   matiere: "maths",
-  notionId: "symetrie_centrale",
-  microId: "sym_centrale_defis",
+  notionId: "sym_centrale",
+  microId: "sym_centrale_defi",
   difficulty: 5,
   theme: "neutral",
   text: "Un camarade affirme que deux figures sont symétriques par rapport à O. Quelles vérifications dois-tu faire avant d’être d’accord ?",
@@ -893,7 +893,7 @@ export const symetrieCentraleBank: TutorBankItemV4[] = [
     "Méthode : on vérifie plusieurs sommets correspondants.\n\n" +
     "Calcul : il faut contrôler l’alignement avec O et l’égalité des distances de part et d’autre du centre.\n\n" +
     "Conclusion : on peut être d’accord seulement si ces vérifications sont vraies pour tous les sommets importants.",
-  tags: ["symetrie_centrale", "defi", "open", "verification", "raisonnement"],
+  tags: ["sym_centrale", "defi", "open", "verification", "raisonnement"],
 },
     /* =========================
      RENFORT — RECONNAÎTRE
@@ -904,7 +904,7 @@ export const symetrieCentraleBank: TutorBankItemV4[] = [
     id: "5e_sym_centrale_reconnaitre_erreur_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "symetrie_centrale",
+    notionId: "sym_centrale",
     microId: "sym_centrale_reconnaitre",
     difficulty: 3,
     theme: "neutral",
@@ -919,7 +919,7 @@ export const symetrieCentraleBank: TutorBankItemV4[] = [
       "Méthode : on distingue la symétrie axiale et la symétrie centrale.\n\n" +
       "Calcul : symétrie axiale → axe ; symétrie centrale → centre.\n\n" +
       "Conclusion : l’élève confond symétrie axiale et symétrie centrale.",
-    tags: ["symetrie_centrale", "erreur", "symetrie_axiale", "comparaison"],
+    tags: ["sym_centrale", "erreur", "symetrie_axiale", "comparaison"],
   },
 
 {
@@ -927,7 +927,7 @@ export const symetrieCentraleBank: TutorBankItemV4[] = [
   id: "5e_sym_centrale_reconnaitre_open_2_vocabulaire",
   niveau: "5e",
   matiere: "maths",
-  notionId: "symetrie_centrale",
+  notionId: "sym_centrale",
   microId: "sym_centrale_reconnaitre",
   difficulty: 3,
   theme: "neutral",
@@ -941,7 +941,7 @@ export const symetrieCentraleBank: TutorBankItemV4[] = [
     "Méthode : on identifie l’élément qui permet de construire les images.\n\n" +
     "Calcul : pour chaque point A, son image A' est placée de l’autre côté du centre, avec O milieu de [AA'].\n\n" +
     "Conclusion : on dit qu’elle est définie par un centre car ce point permet de construire toutes les images.",
-  tags: ["symetrie_centrale", "open", "vocabulaire", "raisonnement"],
+  tags: ["sym_centrale", "open", "vocabulaire", "raisonnement"],
 },
   /* =========================
      RENFORT — CONSTRUIRE POINT
@@ -952,12 +952,12 @@ export const symetrieCentraleBank: TutorBankItemV4[] = [
     id: "5e_sym_centrale_point_tpl_3_graduation",
     niveau: "5e",
     matiere: "maths",
-    notionId: "symetrie_centrale",
+    notionId: "sym_centrale",
     microId: "sym_centrale_point",
     difficulty: 3,
     theme: "neutral",
     hint: "O est au milieu : il faut reporter la même distance de l’autre côté.",
-    tags: ["symetrie_centrale", "point", "construction", "template"],
+    tags: ["sym_centrale", "point", "construction", "template"],
     generate: () => {
       const left = randomChoice([2, 3, 4, 5]);
       const right = left;
@@ -987,7 +987,7 @@ export const symetrieCentraleBank: TutorBankItemV4[] = [
     id: "5e_sym_centrale_point_fixed_2_point_centre",
     niveau: "5e",
     matiere: "maths",
-    notionId: "symetrie_centrale",
+    notionId: "sym_centrale",
     microId: "sym_centrale_point",
     difficulty: 2,
     theme: "neutral",
@@ -1002,7 +1002,7 @@ export const symetrieCentraleBank: TutorBankItemV4[] = [
       "Méthode : on regarde ce qui arrive au centre de symétrie.\n\n" +
       "Calcul : le centre O est envoyé sur lui-même.\n\n" +
       "Conclusion : l’image de O est O.",
-    tags: ["symetrie_centrale", "point", "point_invariant", "qcm"],
+    tags: ["sym_centrale", "point", "point_invariant", "qcm"],
   },
 
   /* =========================
@@ -1014,12 +1014,12 @@ export const symetrieCentraleBank: TutorBankItemV4[] = [
     id: "5e_sym_centrale_figure_tpl_3_segment",
     niveau: "5e",
     matiere: "maths",
-    notionId: "symetrie_centrale",
+    notionId: "sym_centrale",
     microId: "sym_centrale_figure",
     difficulty: 2,
     theme: "neutral",
     hint: "L’image d’un segment s’obtient avec les images de ses extrémités.",
-    tags: ["symetrie_centrale", "figure", "segment", "template"],
+    tags: ["sym_centrale", "figure", "segment", "template"],
     generate: () => ({
       text: "Pour construire l’image du segment [AB] par symétrie centrale, que faut-il construire ?",
       format: "qcm",
@@ -1044,12 +1044,12 @@ export const symetrieCentraleBank: TutorBankItemV4[] = [
     id: "5e_sym_centrale_figure_tpl_4_canvas_non",
     niveau: "5e",
     matiere: "maths",
-    notionId: "symetrie_centrale",
+    notionId: "sym_centrale",
     microId: "sym_centrale_figure",
     difficulty: 4,
     theme: "neutral",
     hint: "Vérifie chaque sommet.",
-    tags: ["symetrie_centrale", "figure", "piege", "template", "canvas"],
+    tags: ["sym_centrale", "figure", "piege", "template", "canvas"],
     generate: () => ({
       text: "La figure rouge est-elle correctement construite comme image de la figure bleue par symétrie centrale ?",
       format: "qcm",
@@ -1093,11 +1093,11 @@ export const symetrieCentraleBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "5e_sym_centrale_proprietes_fixed_4_parallelisme",
+    id: "5e_sym_centrale_propriete_fixed_4_parallelisme",
     niveau: "5e",
     matiere: "maths",
-    notionId: "symetrie_centrale",
-    microId: "sym_centrale_proprietes",
+    notionId: "sym_centrale",
+    microId: "sym_centrale_propriete",
     difficulty: 3,
     theme: "neutral",
     text: "Deux droites parallèles restent-elles parallèles après une symétrie centrale ?",
@@ -1111,20 +1111,20 @@ export const symetrieCentraleBank: TutorBankItemV4[] = [
       "Méthode : on utilise la conservation du parallélisme.\n\n" +
       "Calcul : deux droites parallèles ont des images parallèles.\n\n" +
       "Conclusion : oui, elles restent parallèles.",
-    tags: ["symetrie_centrale", "proprietes", "parallelisme", "qcm"],
+    tags: ["sym_centrale", "propriete", "parallelisme", "qcm"],
   },
 
   {
     kind: "template",
-    id: "5e_sym_centrale_proprietes_tpl_3_perimetre",
+    id: "5e_sym_centrale_propriete_tpl_3_perimetre",
     niveau: "5e",
     matiere: "maths",
-    notionId: "symetrie_centrale",
-    microId: "sym_centrale_proprietes",
+    notionId: "sym_centrale",
+    microId: "sym_centrale_propriete",
     difficulty: 3,
     theme: "neutral",
     hint: "La symétrie centrale conserve toutes les longueurs.",
-    tags: ["symetrie_centrale", "proprietes", "perimetre", "template"],
+    tags: ["sym_centrale", "propriete", "perimetre", "template"],
     generate: () => {
       const p = randomChoice([12, 14, 16, 18, 20, 24]);
 
@@ -1144,11 +1144,11 @@ export const symetrieCentraleBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "5e_sym_centrale_proprietes_erreur_2",
+    id: "5e_sym_centrale_propriete_erreur_2",
     niveau: "5e",
     matiere: "maths",
-    notionId: "symetrie_centrale",
-    microId: "sym_centrale_proprietes",
+    notionId: "sym_centrale",
+    microId: "sym_centrale_propriete",
     difficulty: 4,
     theme: "neutral",
     text: "Un élève dit : le centre O se déplace aussi dans une symétrie centrale de centre O. A-t-il raison ?",
@@ -1162,7 +1162,7 @@ export const symetrieCentraleBank: TutorBankItemV4[] = [
       "Méthode : invariant signifie qu’il ne bouge pas.\n\n" +
       "Calcul : l’image de O est O.\n\n" +
       "Conclusion : l’élève a tort, le centre ne se déplace pas.",
-    tags: ["symetrie_centrale", "proprietes", "point_invariant", "erreur"],
+    tags: ["sym_centrale", "propriete", "point_invariant", "erreur"],
   },
 
   /* =========================
@@ -1171,15 +1171,15 @@ export const symetrieCentraleBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "5e_sym_centrale_defis_tpl_3_erreur_eleve",
+    id: "5e_sym_centrale_defi_tpl_3_erreur_eleve",
     niveau: "5e",
     matiere: "maths",
-    notionId: "symetrie_centrale",
-    microId: "sym_centrale_defis",
+    notionId: "sym_centrale",
+    microId: "sym_centrale_defi",
     difficulty: 4,
     theme: "neutral",
     hint: "Une bonne construction respecte l’alignement et l’égalité des distances.",
-    tags: ["symetrie_centrale", "defi", "erreur", "template"],
+    tags: ["sym_centrale", "defi", "erreur", "template"],
     generate: () => {
       const d = randomChoice([3, 4, 5, 6]);
 
@@ -1200,11 +1200,11 @@ export const symetrieCentraleBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "5e_sym_centrale_defis_fixed_2_point_invariant",
+    id: "5e_sym_centrale_defi_fixed_2_point_invariant",
     niveau: "5e",
     matiere: "maths",
-    notionId: "symetrie_centrale",
-    microId: "sym_centrale_defis",
+    notionId: "sym_centrale",
+    microId: "sym_centrale_defi",
     difficulty: 4,
     theme: "neutral",
     text: "Dans une figure, le point O est le centre de symétrie. Explique pourquoi O ne change pas de position.",
@@ -1217,6 +1217,6 @@ export const symetrieCentraleBank: TutorBankItemV4[] = [
       "Méthode : dans une symétrie centrale, on regarde le centre.\n\n" +
       "Calcul : l’image du centre O est O lui-même.\n\n" +
       "Conclusion : O ne change pas de position car c’est le point invariant de la symétrie centrale.",
-    tags: ["symetrie_centrale", "defi", "point_invariant", "open"],
+    tags: ["sym_centrale", "defi", "point_invariant", "open"],
   },
 ];

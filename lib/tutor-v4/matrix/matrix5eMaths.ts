@@ -30,35 +30,35 @@ const supportLinks: Record<string, string[]> = {
   relatif_signe: ["relatif_lire"],
   relatif_comparer: ["relatif_signe"],
   relatif_placer: ["relatif_comparer"],
-  relatif_opposes: ["relatif_signe"],
-  relatif_valeur_absolue: ["relatif_opposes"],
-  relatif_defis: ["relatif_comparer", "relatif_placer", "relatif_valeur_absolue"],
+  relatif_oppose: ["relatif_signe"],
+  relatif_valeur_absolue: ["relatif_oppose"],
+  relatif_defi: ["relatif_comparer", "relatif_placer", "relatif_valeur_absolue"],
 
   // =========================
   // OPÉRATIONS SUR LES RELATIFS
   // =========================
   relatif_addition: ["relatif_lire", "relatif_signe"],
-  relatif_soustraction: ["relatif_addition", "relatif_opposes"],
+  relatif_soustraction: ["relatif_addition", "relatif_oppose"],
   relatif_calcul: ["relatif_addition", "relatif_soustraction"],
   relatif_probleme: ["relatif_calcul", "relatif_comparer"],
-  relatif_defis_ops: ["relatif_calcul", "relatif_probleme"],
+  relatif_operation_defi: ["relatif_calcul", "relatif_probleme"],
 
   // =========================
   // FRACTIONS
   // =========================
-  fraction_simplifier: ["fraction_egales"],
-  fraction_rationnel: ["fraction_egales", "relatif_lire"],
+  fraction_simplifier: ["fraction_egale"],
+  fraction_rationnel: ["fraction_egale", "relatif_lire"],
   fraction_comparer: ["fraction_simplifier", "fraction_rationnel", "relatif_comparer"],
-  fraction_addition: ["fraction_comparer", "fraction_simplifier"],
-  fraction_produit: ["fraction_simplifier", "fraction_comparer"],
-  fraction_quantite: ["fraction_produit", "prop_reconnaitre"],
-  fraction_inverse: ["fraction_rationnel", "fraction_produit"],
-  fraction_division: ["fraction_inverse", "fraction_produit"],
-  fraction_oppose: ["fraction_rationnel", "relatif_opposes"],
-  fraction_defis: [
-    "fraction_addition",
+  fraction_additionner: ["fraction_comparer", "fraction_simplifier"],
+  fraction_multiplier: ["fraction_simplifier", "fraction_comparer"],
+  fraction_quantite: ["fraction_multiplier", "prop_reconnaitre"],
+  fraction_inverse: ["fraction_rationnel", "fraction_multiplier"],
+  fraction_diviser: ["fraction_inverse", "fraction_multiplier"],
+  fraction_oppose: ["fraction_rationnel", "relatif_oppose"],
+  fraction_defi: [
+    "fraction_additionner",
     "fraction_quantite",
-    "fraction_division",
+    "fraction_diviser",
     "fraction_oppose",
   ],
 
@@ -68,19 +68,19 @@ const supportLinks: Record<string, string[]> = {
   prop_table: ["prop_reconnaitre", "fraction_comparer"],
   prop_quatrieme: ["prop_table", "prop_coeff"],
   prop_coeff: ["prop_table", "fraction_comparer"],
-  prop_ratio: ["prop_reconnaitre", "fraction_comparer"],
+  prop_rapport: ["prop_reconnaitre", "fraction_comparer"],
   prop_pourcentage: ["prop_coeff", "fraction_quantite"],
-  prop_coeff_mult: ["prop_pourcentage", "prop_coeff"],
+  prop_coeff_multiplicateur: ["prop_pourcentage", "prop_coeff"],
   prop_probleme: ["prop_quatrieme", "prop_coeff", "prop_pourcentage"],
-  prop_defis: ["prop_probleme", "prop_ratio", "prop_coeff_mult"],
+  prop_defi: ["prop_probleme", "prop_rapport", "prop_coeff_multiplicateur"],
 
   // =========================
   // CALCUL LITTÉRAL
   // =========================
-  litteral_traduire: ["litteral_expression"],
-  litteral_substituer: ["litteral_expression", "relatif_calcul"],
-  litteral_reduire: ["litteral_expression", "litteral_substituer"],
-  litteral_defis: ["litteral_traduire", "litteral_substituer", "litteral_reduire"],
+  litteral_traduire: ["litteral_expression_comprendre"],
+  litteral_substituer: ["litteral_expression_comprendre", "relatif_calcul"],
+  litteral_reduire: ["litteral_expression_comprendre", "litteral_substituer"],
+  litteral_defi: ["litteral_traduire", "litteral_substituer", "litteral_reduire"],
 
   // =========================
   // ANGLES
@@ -88,23 +88,23 @@ const supportLinks: Record<string, string[]> = {
   angle_mesurer: ["angle_lire"],
   angle_tracer: ["angle_mesurer"],
   angle_estimer: ["angle_lire", "angle_mesurer"],
-  angle_defis: ["angle_tracer", "angle_estimer"],
+  angle_defi: ["angle_tracer", "angle_estimer"],
 
   // =========================
   // TRIANGLES
   // =========================
   triangle_nature: ["triangle_reconnaitre", "angle_lire"],
   triangle_construire: ["triangle_reconnaitre", "angle_tracer"],
-  triangle_somme_angles: ["triangle_reconnaitre", "angle_mesurer"],
-  triangle_defis: ["triangle_nature", "triangle_construire", "triangle_somme_angles"],
+  triangle_somme_angle: ["triangle_reconnaitre", "angle_mesurer"],
+  triangle_defi: ["triangle_nature", "triangle_construire", "triangle_somme_angle"],
 
   // =========================
   // SYMÉTRIE CENTRALE
   // =========================
   sym_centrale_point: ["relatif_placer"],
   sym_centrale_figure: ["sym_centrale_point"],
-  sym_centrale_proprietes: ["sym_centrale_figure"],
-  sym_centrale_defis: ["sym_centrale_proprietes"],
+  sym_centrale_propriete: ["sym_centrale_figure"],
+  sym_centrale_defi: ["sym_centrale_propriete"],
 
   // =========================
   // AIRES
@@ -112,7 +112,7 @@ const supportLinks: Record<string, string[]> = {
   aire_triangle: ["aire_comprendre", "triangle_reconnaitre"],
   aire_parallelogramme: ["aire_comprendre", "angle_lire"],
   aire_composer: ["aire_triangle", "aire_parallelogramme"],
-  aire_defis: ["aire_composer", "aire_comprendre"],
+  aire_defi: ["aire_composer", "aire_comprendre"],
 
   // =========================
   // VOLUMES
@@ -121,53 +121,53 @@ const supportLinks: Record<string, string[]> = {
   volume_prisme: ["volume_comprendre", "aire_comprendre", "aire_triangle"],
   volume_cylindre: ["volume_comprendre", "aire_comprendre"],
   volume_assemblage: ["volume_pave", "volume_prisme", "volume_cylindre"],
-  volume_unites: ["volume_comprendre", "prop_coeff"],
-  volume_defis: [
+  volume_unite: ["volume_comprendre", "prop_coeff"],
+  volume_defi: [
     "volume_pave",
     "volume_prisme",
     "volume_cylindre",
     "volume_assemblage",
-    "volume_unites",
+    "volume_unite",
   ],
 
   // =========================
   // STATISTIQUES
   // =========================
-  stat_lire_tableau: ["stat_organiser_donnees"],
+  stat_lire_tableau: ["stat_donnee_organiser"],
   stat_lire_graphique: ["stat_lire_tableau"],
   stat_effectif_frequence: ["stat_lire_tableau", "fraction_comparer"],
   stat_representer: ["stat_lire_tableau", "stat_effectif_frequence"],
-  stat_choisir_representation: ["stat_lire_graphique", "stat_representer"],
+  stat_representation_choisir: ["stat_lire_graphique", "stat_representer"],
   stat_moyenne: ["stat_effectif_frequence", "relatif_calcul"],
-  stat_defis: ["stat_lire_graphique", "stat_choisir_representation", "stat_moyenne"],
+  stat_defi: ["stat_lire_graphique", "stat_representation_choisir", "stat_moyenne"],
 
   // =========================
   // PROBABILITÉS
   // =========================
-  proba_issues: ["proba_vocabulaire", "stat_lire_tableau"],
-  proba_equiprobabilite: ["proba_issues"],
-  proba_calculer: ["proba_issues", "proba_equiprobabilite", "fraction_comparer"],
-  proba_defis: ["proba_calculer", "proba_equiprobabilite"],
+  proba_issue: ["proba_vocabulaire", "stat_lire_tableau"],
+  proba_equiprobabilite: ["proba_issue"],
+  proba_calculer: ["proba_issue", "proba_equiprobabilite", "fraction_comparer"],
+  proba_defi: ["proba_calculer", "proba_equiprobabilite"],
 
     // =========================
   // ALGORITHMIQUE
   // =========================
-  algo_sequence: ["litteral_expression", "relatif_lire"],
+  algo_sequence: ["litteral_expression_comprendre", "relatif_lire"],
 
-  algo_entrees_sorties: [
+  algo_entree_sortie: [
     "algo_sequence",
     "litteral_traduire",
   ],
 
-  algo_formule_blocs: [
-    "algo_entrees_sorties",
-    "litteral_expression",
+  algo_formule_bloc: [
+    "algo_entree_sortie",
+    "litteral_expression_comprendre",
     "litteral_substituer",
     "relatif_calcul",
   ],
 
   algo_expression_valeur: [
-    "algo_formule_blocs",
+    "algo_formule_bloc",
     "litteral_substituer",
     "relatif_calcul",
     "fraction_quantite",
@@ -179,7 +179,7 @@ const supportLinks: Record<string, string[]> = {
     "relatif_calcul",
   ],
 
-  algo_parametres: [
+  algo_parametre: [
     "algo_prevoir_expression",
     "prop_coeff",
     "prop_pourcentage",
@@ -187,17 +187,17 @@ const supportLinks: Record<string, string[]> = {
 
   algo_boucle: [
     "algo_sequence",
-    "algo_parametres",
+    "algo_parametre",
     "relatif_calcul",
     "prop_table",
   ],
 
-  algo_defis: [
+  algo_defi: [
     "algo_boucle",
     "algo_prevoir_expression",
-    "algo_parametres",
-    "litteral_defis",
-    "prop_defis",
+    "algo_parametre",
+    "litteral_defi",
+    "prop_defi",
   ],
 };
 

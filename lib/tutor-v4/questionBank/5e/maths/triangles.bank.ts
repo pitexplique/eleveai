@@ -87,7 +87,7 @@ export const trianglesBank: TutorBankItemV4[] = [
     id: "triangle_reconnaitre_fixed_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "triangles",
+    notionId: "triangle_figure",
     microId: "triangle_reconnaitre",
     difficulty: 1,
     theme: "neutral",
@@ -101,7 +101,7 @@ export const trianglesBank: TutorBankItemV4[] = [
           "Méthode : on utilise les propriétés des triangles, des angles ou des constructions.\n\nCalcul : " +
           ("Un triangle possède 3 côtés, 3 sommets et 3 angles.") +
           "\n\nConclusion : la propriété ou la mesure obtenue convient pour ce triangle.",
-    tags: ["triangles", "reconnaitre", "qcm"],
+    tags: ["triangle_figure", "reconnaitre", "qcm"],
     canvas: triangleCanvas({}),
   },
   {
@@ -109,7 +109,7 @@ export const trianglesBank: TutorBankItemV4[] = [
     id: "triangle_reconnaitre_fixed_2",
     niveau: "5e",
     matiere: "maths",
-    notionId: "triangles",
+    notionId: "triangle_figure",
     microId: "triangle_reconnaitre",
     difficulty: 1,
     theme: "neutral",
@@ -123,7 +123,7 @@ export const trianglesBank: TutorBankItemV4[] = [
           "Méthode : on utilise les propriétés des triangles, des angles ou des constructions.\n\nCalcul : " +
           ("Les sommets du triangle ABC sont les points A, B et C.") +
           "\n\nConclusion : la propriété ou la mesure obtenue convient pour ce triangle.",
-    tags: ["triangles", "sommets", "qcm"],
+    tags: ["triangle_figure", "sommets", "qcm"],
     canvas: triangleCanvas({}),
   },
   {
@@ -131,7 +131,7 @@ export const trianglesBank: TutorBankItemV4[] = [
     id: "triangle_reconnaitre_open_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "triangles",
+    notionId: "triangle_figure",
     microId: "triangle_reconnaitre",
     difficulty: 2,
     theme: "neutral",
@@ -144,7 +144,7 @@ export const trianglesBank: TutorBankItemV4[] = [
           "Méthode : on utilise les propriétés des triangles, des angles ou des constructions.\n\nCalcul : " +
           ("Un triangle est une figure qui possède 3 côtés, 3 sommets et 3 angles.") +
           "\n\nConclusion : la propriété ou la mesure obtenue convient pour ce triangle.",
-    tags: ["triangles", "reconnaitre", "open"],
+    tags: ["triangle_figure", "reconnaitre", "open"],
   },
 
   // =========================
@@ -155,7 +155,7 @@ export const trianglesBank: TutorBankItemV4[] = [
     id: "triangle_nature_fixed_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "triangles",
+    notionId: "triangle_figure",
     microId: "triangle_nature",
     difficulty: 2,
     theme: "neutral",
@@ -169,7 +169,7 @@ export const trianglesBank: TutorBankItemV4[] = [
           "Méthode : on utilise les propriétés des triangles, des angles ou des constructions.\n\nCalcul : " +
           ("Le petit carré rouge indique un angle droit. Le triangle est donc rectangle.") +
           "\n\nConclusion : la propriété ou la mesure obtenue convient pour ce triangle.",
-    tags: ["triangles", "nature", "rectangle", "qcm"],
+    tags: ["triangle_figure", "nature", "rectangle", "qcm"],
     canvas: triangleCanvas({ type: "rectangle" }),
   },
   {
@@ -177,7 +177,7 @@ export const trianglesBank: TutorBankItemV4[] = [
     id: "triangle_nature_fixed_2",
     niveau: "5e",
     matiere: "maths",
-    notionId: "triangles",
+    notionId: "triangle_figure",
     microId: "triangle_nature",
     difficulty: 2,
     theme: "neutral",
@@ -191,7 +191,7 @@ export const trianglesBank: TutorBankItemV4[] = [
           "Méthode : on utilise les propriétés des triangles, des angles ou des constructions.\n\nCalcul : " +
           ("Deux côtés sont codés égaux. Le triangle est donc isocèle.") +
           "\n\nConclusion : la propriété ou la mesure obtenue convient pour ce triangle.",
-    tags: ["triangles", "nature", "isocele", "qcm"],
+    tags: ["triangle_figure", "nature", "isocele", "qcm"],
     canvas: triangleCanvas({ type: "isocele" }),
   },
   {
@@ -199,7 +199,7 @@ export const trianglesBank: TutorBankItemV4[] = [
     id: "triangle_nature_fixed_3",
     niveau: "5e",
     matiere: "maths",
-    notionId: "triangles",
+    notionId: "triangle_figure",
     microId: "triangle_nature",
     difficulty: 3,
     theme: "neutral",
@@ -213,7 +213,7 @@ export const trianglesBank: TutorBankItemV4[] = [
           "Méthode : on utilise les propriétés des triangles, des angles ou des constructions.\n\nCalcul : " +
           ("Un triangle avec trois côtés égaux est un triangle équilatéral.") +
           "\n\nConclusion : la propriété ou la mesure obtenue convient pour ce triangle.",
-    tags: ["triangles", "nature", "equilateral", "qcm"],
+    tags: ["triangle_figure", "nature", "equilateral", "qcm"],
     canvas: triangleCanvas({ type: "equilateral" }),
   },
   {
@@ -221,7 +221,7 @@ export const trianglesBank: TutorBankItemV4[] = [
     id: "triangle_nature_open_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "triangles",
+    notionId: "triangle_figure",
     microId: "triangle_nature",
     difficulty: 3,
     theme: "neutral",
@@ -234,7 +234,7 @@ export const trianglesBank: TutorBankItemV4[] = [
           "Méthode : on utilise les propriétés des triangles, des angles ou des constructions.\n\nCalcul : " +
           ("On reconnaît un triangle rectangle lorsqu’un de ses angles est droit, c’est-à-dire égal à 90°.") +
           "\n\nConclusion : la propriété ou la mesure obtenue convient pour ce triangle.",
-    tags: ["triangles", "nature", "rectangle", "open"],
+    tags: ["triangle_figure", "nature", "rectangle", "open"],
     canvas: triangleCanvas({ type: "rectangle" }),
   },
   {
@@ -242,12 +242,12 @@ export const trianglesBank: TutorBankItemV4[] = [
     id: "triangle_nature_tpl_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "triangles",
+    notionId: "triangle_figure",
     microId: "triangle_nature",
     difficulty: 3,
     theme: "neutral",
     hint: "Observe les codages de la figure.",
-    tags: ["triangles", "nature", "template", "canvas"],
+    tags: ["triangle_figure", "nature", "template", "canvas"],
     generate: () => {
       const type = randomChoice(["rectangle", "isocele", "equilateral"] as const);
       const expected =
@@ -290,7 +290,7 @@ export const trianglesBank: TutorBankItemV4[] = [
     id: "triangle_construire_fixed_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "triangles",
+    notionId: "triangle_figure",
     microId: "triangle_construire",
     difficulty: 2,
     theme: "neutral",
@@ -304,14 +304,14 @@ export const trianglesBank: TutorBankItemV4[] = [
           "Méthode : on utilise les propriétés des triangles, des angles ou des constructions.\n\nCalcul : " +
           ("Pour construire un triangle à partir de trois longueurs, on utilise notamment le compas pour reporter les distances.") +
           "\n\nConclusion : la propriété ou la mesure obtenue convient pour ce triangle.",
-    tags: ["triangles", "construire", "instrument", "qcm"],
+    tags: ["triangle_figure", "construire", "instrument", "qcm"],
   },
   {
     kind: "fixed",
     id: "triangle_construire_fixed_2",
     niveau: "5e",
     matiere: "maths",
-    notionId: "triangles",
+    notionId: "triangle_figure",
     microId: "triangle_construire",
     difficulty: 3,
     theme: "neutral",
@@ -325,14 +325,14 @@ export const trianglesBank: TutorBankItemV4[] = [
           "Méthode : on utilise les propriétés des triangles, des angles ou des constructions.\n\nCalcul : " +
           ("2 + 3 = 5, et 5 est plus petit que 8. On ne peut donc pas construire ce triangle.") +
           "\n\nConclusion : la propriété ou la mesure obtenue convient pour ce triangle.",
-    tags: ["triangles", "construire", "inegalite_triangulaire", "piege"],
+    tags: ["triangle_figure", "construire", "inegalite_triangulaire", "piege"],
   },
   {
     kind: "fixed",
     id: "triangle_construire_fixed_3",
     niveau: "5e",
     matiere: "maths",
-    notionId: "triangles",
+    notionId: "triangle_figure",
     microId: "triangle_construire",
     difficulty: 3,
     theme: "neutral",
@@ -346,14 +346,14 @@ export const trianglesBank: TutorBankItemV4[] = [
           "Méthode : on utilise les propriétés des triangles, des angles ou des constructions.\n\nCalcul : " +
           ("Le plus grand côté est 7 cm. Or 4 + 5 = 9, et 9 > 7. Le triangle est constructible.") +
           "\n\nConclusion : la propriété ou la mesure obtenue convient pour ce triangle.",
-    tags: ["triangles", "construire", "inegalite_triangulaire"],
+    tags: ["triangle_figure", "construire", "inegalite_triangulaire"],
   },
   {
     kind: "fixed",
     id: "triangle_construire_open_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "triangles",
+    notionId: "triangle_figure",
     microId: "triangle_construire",
     difficulty: 4,
     theme: "neutral",
@@ -366,19 +366,19 @@ export const trianglesBank: TutorBankItemV4[] = [
           "Méthode : on utilise les propriétés des triangles, des angles ou des constructions.\n\nCalcul : " +
           ("On ne peut pas le construire car 2 + 3 = 5, et 5 est inférieur à 8. Les deux petits côtés ne peuvent pas rejoindre le grand côté.") +
           "\n\nConclusion : la propriété ou la mesure obtenue convient pour ce triangle.",
-    tags: ["triangles", "construire", "open", "raisonnement"],
+    tags: ["triangle_figure", "construire", "open", "raisonnement"],
   },
   {
     kind: "template",
     id: "triangle_construire_tpl_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "triangles",
+    notionId: "triangle_figure",
     microId: "triangle_construire",
     difficulty: 4,
     theme: "neutral",
     hint: "Le plus grand côté doit être plus petit que la somme des deux autres.",
-    tags: ["triangles", "construire", "template", "inegalite_triangulaire"],
+    tags: ["triangle_figure", "construire", "template", "inegalite_triangulaire"],
     generate: () => {
       const cases = [
         { a: 3, b: 4, c: 5, ok: "oui" },
@@ -410,11 +410,11 @@ export const trianglesBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "fixed",
-    id: "triangle_somme_angles_fixed_1",
+    id: "triangle_somme_angle_fixed_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "triangles",
-    microId: "triangle_somme_angles",
+    notionId: "triangle_figure",
+    microId: "triangle_somme_angle",
     difficulty: 2,
     theme: "neutral",
     text: "Dans un triangle, la somme des trois angles vaut...",
@@ -427,18 +427,18 @@ export const trianglesBank: TutorBankItemV4[] = [
           "Méthode : on utilise les propriétés des triangles, des angles ou des constructions.\n\nCalcul : " +
           ("Dans tout triangle, la somme des mesures des trois angles est égale à 180°.") +
           "\n\nConclusion : la propriété ou la mesure obtenue convient pour ce triangle.",
-    tags: ["triangles", "somme_angles", "qcm"],
+    tags: ["triangle_figure", "somme_angle", "qcm"],
     canvas: triangleCanvas({
       angleLabels: { A: "60°", B: "70°", C: "50°" },
     }),
   },
   {
     kind: "fixed",
-    id: "triangle_somme_angles_fixed_2",
+    id: "triangle_somme_angle_fixed_2",
     niveau: "5e",
     matiere: "maths",
-    notionId: "triangles",
-    microId: "triangle_somme_angles",
+    notionId: "triangle_figure",
+    microId: "triangle_somme_angle",
     difficulty: 3,
     theme: "neutral",
     text: "Dans un triangle, deux angles mesurent 50° et 60°. Combien mesure le troisième angle ?",
@@ -450,18 +450,18 @@ export const trianglesBank: TutorBankItemV4[] = [
           "Méthode : on utilise les propriétés des triangles, des angles ou des constructions.\n\nCalcul : " +
           ("La somme des angles vaut 180°. Donc le troisième angle vaut 180 - 50 - 60 = 70°.") +
           "\n\nConclusion : la propriété ou la mesure obtenue convient pour ce triangle.",
-    tags: ["triangles", "somme_angles", "calcul"],
+    tags: ["triangle_figure", "somme_angle", "calcul"],
     canvas: triangleCanvas({
       angleLabels: { A: "50°", B: "60°", C: "?" },
     }),
   },
   {
     kind: "fixed",
-    id: "triangle_somme_angles_fixed_3",
+    id: "triangle_somme_angle_fixed_3",
     niveau: "5e",
     matiere: "maths",
-    notionId: "triangles",
-    microId: "triangle_somme_angles",
+    notionId: "triangle_figure",
+    microId: "triangle_somme_angle",
     difficulty: 3,
     theme: "neutral",
     text: "Un triangle possède deux angles de 45° et 45°. Le troisième angle mesure...",
@@ -474,7 +474,7 @@ export const trianglesBank: TutorBankItemV4[] = [
           "Méthode : on utilise les propriétés des triangles, des angles ou des constructions.\n\nCalcul : " +
           ("45° + 45° = 90°. Il reste donc 180° - 90° = 90°.") +
           "\n\nConclusion : la propriété ou la mesure obtenue convient pour ce triangle.",
-    tags: ["triangles", "somme_angles", "rectangle", "qcm"],
+    tags: ["triangle_figure", "somme_angle", "rectangle", "qcm"],
     canvas: triangleCanvas({
       type: "rectangle",
       angleLabels: { A: "90°", B: "45°", C: "45°" },
@@ -482,11 +482,11 @@ export const trianglesBank: TutorBankItemV4[] = [
   },
   {
     kind: "fixed",
-    id: "triangle_somme_angles_open_1",
+    id: "triangle_somme_angle_open_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "triangles",
-    microId: "triangle_somme_angles",
+    notionId: "triangle_figure",
+    microId: "triangle_somme_angle",
     difficulty: 4,
     theme: "neutral",
     text: "Explique comment trouver l’angle manquant dans un triangle quand on connaît les deux autres.",
@@ -498,19 +498,19 @@ export const trianglesBank: TutorBankItemV4[] = [
           "Méthode : on utilise les propriétés des triangles, des angles ou des constructions.\n\nCalcul : " +
           ("On additionne les deux angles connus, puis on soustrait cette somme à 180°.") +
           "\n\nConclusion : la propriété ou la mesure obtenue convient pour ce triangle.",
-    tags: ["triangles", "somme_angles", "open", "methode"],
+    tags: ["triangle_figure", "somme_angle", "open", "methode"],
   },
   {
     kind: "template",
-    id: "triangle_somme_angles_tpl_1",
+    id: "triangle_somme_angle_tpl_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "triangles",
-    microId: "triangle_somme_angles",
+    notionId: "triangle_figure",
+    microId: "triangle_somme_angle",
     difficulty: 4,
     theme: "neutral",
     hint: "Utilise la somme des angles : 180°.",
-    tags: ["triangles", "somme_angles", "template", "calcul"],
+    tags: ["triangle_figure", "somme_angle", "template", "calcul"],
     generate: () => {
       const pairs = [
         [40, 60],
@@ -543,11 +543,11 @@ export const trianglesBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "fixed",
-    id: "triangle_defis_fixed_1",
+    id: "triangle_defi_fixed_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "triangles",
-    microId: "triangle_defis",
+    notionId: "triangle_figure",
+    microId: "triangle_defi",
     difficulty: 4,
     theme: "neutral",
     text: "Un élève affirme : « Ce triangle est rectangle car il a un côté horizontal. » Explique son erreur.",
@@ -559,16 +559,16 @@ export const trianglesBank: TutorBankItemV4[] = [
           "Méthode : on utilise les propriétés des triangles, des angles ou des constructions.\n\nCalcul : " +
           ("Un triangle est rectangle s’il possède un angle droit. Avoir un côté horizontal ne suffit pas.") +
           "\n\nConclusion : la propriété ou la mesure obtenue convient pour ce triangle.",
-    tags: ["triangles", "defi", "open", "piege", "rectangle"],
+    tags: ["triangle_figure", "defi", "open", "piege", "rectangle"],
     canvas: triangleCanvas({ type: "quelconque" }),
   },
   {
     kind: "fixed",
-    id: "triangle_defis_fixed_2",
+    id: "triangle_defi_fixed_2",
     niveau: "5e",
     matiere: "maths",
-    notionId: "triangles",
-    microId: "triangle_defis",
+    notionId: "triangle_figure",
+    microId: "triangle_defi",
     difficulty: 5,
     theme: "neutral",
     text: "Un triangle peut-il avoir deux angles droits ?",
@@ -581,15 +581,15 @@ export const trianglesBank: TutorBankItemV4[] = [
           "Méthode : on utilise les propriétés des triangles, des angles ou des constructions.\n\nCalcul : " +
           ("Non. Deux angles droits feraient 90° + 90° = 180°, il ne resterait plus de place pour le troisième angle.") +
           "\n\nConclusion : la propriété ou la mesure obtenue convient pour ce triangle.",
-    tags: ["triangles", "defi", "somme_angles", "piege"],
+    tags: ["triangle_figure", "defi", "somme_angle", "piege"],
   },
   {
     kind: "fixed",
-    id: "triangle_defis_fixed_3",
+    id: "triangle_defi_fixed_3",
     niveau: "5e",
     matiere: "maths",
-    notionId: "triangles",
-    microId: "triangle_defis",
+    notionId: "triangle_figure",
+    microId: "triangle_defi",
     difficulty: 5,
     theme: "reunion",
     text: "Sur un plan de randonnée à La Réunion, trois chemins forment un triangle. Deux angles mesurent 35° et 85°. Quelle est la mesure du troisième angle ?",
@@ -601,22 +601,22 @@ export const trianglesBank: TutorBankItemV4[] = [
           "Méthode : on utilise les propriétés des triangles, des angles ou des constructions.\n\nCalcul : " +
           ("La somme des angles d’un triangle vaut 180°. Le troisième angle mesure 180 - 35 - 85 = 60°.") +
           "\n\nConclusion : la propriété ou la mesure obtenue convient pour ce triangle.",
-    tags: ["triangles", "defi", "reunion", "somme_angles"],
+    tags: ["triangle_figure", "defi", "reunion", "somme_angle"],
     canvas: triangleCanvas({
       angleLabels: { A: "35°", B: "85°", C: "?" },
     }),
   },
   {
     kind: "template",
-    id: "triangle_defis_tpl_1",
+    id: "triangle_defi_tpl_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "triangles",
-    microId: "triangle_defis",
+    notionId: "triangle_figure",
+    microId: "triangle_defi",
     difficulty: 5,
     theme: "neutral",
     hint: "Vérifie si la somme des trois angles vaut 180°.",
-    tags: ["triangles", "defi", "template", "somme_angles", "piege"],
+    tags: ["triangle_figure", "defi", "template", "somme_angle", "piege"],
     generate: () => {
       const cases = [
         { a: 50, b: 60, c: 70, ok: "oui" },

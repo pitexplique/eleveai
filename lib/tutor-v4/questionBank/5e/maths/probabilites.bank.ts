@@ -106,7 +106,7 @@ export const probabilitesBank: TutorBankItemV4[] = [
     id: "proba_vocabulaire_fixed_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "probabilites",
+    notionId: "proba_experience",
     microId: "proba_vocabulaire",
     difficulty: 1,
     theme: "neutral",
@@ -126,14 +126,14 @@ export const probabilitesBank: TutorBankItemV4[] = [
           "Méthode : on compte les issues favorables et les issues possibles, puis on forme le quotient.\n\nCalcul : " +
           ("Une expérience aléatoire est une expérience dont on ne peut pas connaître le résultat à l’avance avec certitude.") +
           "\n\nConclusion : la probabilité obtenue répond à la question.",
-    tags: ["probabilites", "vocabulaire", "qcm"],
+    tags: ["proba_experience", "vocabulaire", "qcm"],
   },
   {
     kind: "fixed",
     id: "proba_vocabulaire_fixed_2",
     niveau: "5e",
     matiere: "maths",
-    notionId: "probabilites",
+    notionId: "proba_experience",
     microId: "proba_vocabulaire",
     difficulty: 1,
     theme: "neutral",
@@ -148,7 +148,7 @@ export const probabilitesBank: TutorBankItemV4[] = [
           "Méthode : on compte les issues favorables et les issues possibles, puis on forme le quotient.\n\nCalcul : " +
           ("Obtenir 4 est un résultat possible du lancer de dé : c’est une issue.") +
           "\n\nConclusion : la probabilité obtenue répond à la question.",
-    tags: ["probabilites", "vocabulaire", "issue", "qcm"],
+    tags: ["proba_experience", "vocabulaire", "issue", "qcm"],
     canvas: deCanvas([4]),
   },
   {
@@ -156,7 +156,7 @@ export const probabilitesBank: TutorBankItemV4[] = [
     id: "proba_vocabulaire_fixed_3",
     niveau: "5e",
     matiere: "maths",
-    notionId: "probabilites",
+    notionId: "proba_experience",
     microId: "proba_vocabulaire",
     difficulty: 2,
     theme: "neutral",
@@ -171,7 +171,7 @@ export const probabilitesBank: TutorBankItemV4[] = [
           "Méthode : on compte les issues favorables et les issues possibles, puis on forme le quotient.\n\nCalcul : " +
           ("Un événement peut regrouper plusieurs issues. Ici, « obtenir un nombre pair » correspond aux issues 2, 4 et 6.") +
           "\n\nConclusion : la probabilité obtenue répond à la question.",
-    tags: ["probabilites", "vocabulaire", "evenement", "qcm"],
+    tags: ["proba_experience", "vocabulaire", "evenement", "qcm"],
     canvas: deCanvas([2, 4, 6]),
   },
   {
@@ -179,7 +179,7 @@ export const probabilitesBank: TutorBankItemV4[] = [
     id: "proba_vocabulaire_open_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "probabilites",
+    notionId: "proba_experience",
     microId: "proba_vocabulaire",
     difficulty: 2,
     theme: "neutral",
@@ -193,14 +193,14 @@ export const probabilitesBank: TutorBankItemV4[] = [
           "Méthode : on compte les issues favorables et les issues possibles, puis on forme le quotient.\n\nCalcul : " +
           ("Une expérience aléatoire est une expérience dont on ne connaît pas le résultat à l’avance.") +
           "\n\nConclusion : la probabilité obtenue répond à la question.",
-    tags: ["probabilites", "vocabulaire", "open"],
+    tags: ["proba_experience", "vocabulaire", "open"],
   },
   {
     kind: "fixed",
     id: "proba_vocabulaire_open_2",
     niveau: "5e",
     matiere: "maths",
-    notionId: "probabilites",
+    notionId: "proba_experience",
     microId: "proba_vocabulaire",
     difficulty: 3,
     theme: "neutral",
@@ -214,7 +214,7 @@ export const probabilitesBank: TutorBankItemV4[] = [
           "Méthode : on compte les issues favorables et les issues possibles, puis on forme le quotient.\n\nCalcul : " +
           ("Une issue est un résultat possible. Un événement est une condition qui peut regrouper une ou plusieurs issues.") +
           "\n\nConclusion : la probabilité obtenue répond à la question.",
-    tags: ["probabilites", "vocabulaire", "open"],
+    tags: ["proba_experience", "vocabulaire", "open"],
   },
 
   // =========================
@@ -222,11 +222,11 @@ export const probabilitesBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "fixed",
-    id: "proba_issues_fixed_1",
+    id: "proba_issue_fixed_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "probabilites",
-    microId: "proba_issues",
+    notionId: "proba_experience",
+    microId: "proba_issue",
     difficulty: 1,
     theme: "neutral",
     text: "Combien y a-t-il d’issues possibles lorsqu’on lance un dé équilibré à 6 faces ?",
@@ -240,16 +240,16 @@ export const probabilitesBank: TutorBankItemV4[] = [
           "Méthode : on compte les issues favorables et les issues possibles, puis on forme le quotient.\n\nCalcul : " +
           ("Les issues possibles sont 1, 2, 3, 4, 5 et 6 : il y en a 6.") +
           "\n\nConclusion : la probabilité obtenue répond à la question.",
-    tags: ["probabilites", "issues", "de", "qcm"],
+    tags: ["proba_experience", "issue", "de", "qcm"],
     canvas: deCanvas(),
   },
   {
     kind: "fixed",
-    id: "proba_issues_fixed_2",
+    id: "proba_issue_fixed_2",
     niveau: "5e",
     matiere: "maths",
-    notionId: "probabilites",
-    microId: "proba_issues",
+    notionId: "proba_experience",
+    microId: "proba_issue",
     difficulty: 2,
     theme: "neutral",
     text: "On lance un dé. Combien y a-t-il d’issues favorables à l’événement « obtenir un nombre pair » ?",
@@ -262,16 +262,16 @@ export const probabilitesBank: TutorBankItemV4[] = [
           "Méthode : on compte les issues favorables et les issues possibles, puis on forme le quotient.\n\nCalcul : " +
           ("Les issues favorables sont 2, 4 et 6. Il y en a donc 3.") +
           "\n\nConclusion : la probabilité obtenue répond à la question.",
-    tags: ["probabilites", "issues", "de", "pair"],
+    tags: ["proba_experience", "issue", "de", "pair"],
     canvas: deCanvas([2, 4, 6]),
   },
   {
     kind: "fixed",
-    id: "proba_issues_fixed_3",
+    id: "proba_issue_fixed_3",
     niveau: "5e",
     matiere: "maths",
-    notionId: "probabilites",
-    microId: "proba_issues",
+    notionId: "proba_experience",
+    microId: "proba_issue",
     difficulty: 2,
     theme: "neutral",
     text: "On tire une bille dans ce sac. Combien y a-t-il de billes au total ?",
@@ -284,7 +284,7 @@ export const probabilitesBank: TutorBankItemV4[] = [
           "Méthode : on compte les issues favorables et les issues possibles, puis on forme le quotient.\n\nCalcul : " +
           ("Le sac contient 3 billes rouges et 2 billes bleues, donc 5 billes au total.") +
           "\n\nConclusion : la probabilité obtenue répond à la question.",
-    tags: ["probabilites", "issues", "billes", "canvas"],
+    tags: ["proba_experience", "issue", "billes", "canvas"],
     canvas: billesCanvas([
       { couleur: couleurs.rouge, label: "R" },
       { couleur: couleurs.rouge, label: "R" },
@@ -295,11 +295,11 @@ export const probabilitesBank: TutorBankItemV4[] = [
   },
   {
     kind: "fixed",
-    id: "proba_issues_qcm_1",
+    id: "proba_issue_qcm_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "probabilites",
-    microId: "proba_issues",
+    notionId: "proba_experience",
+    microId: "proba_issue",
     difficulty: 2,
     theme: "neutral",
     text: "On lance un dé. Quelles sont les issues favorables à « obtenir un nombre strictement supérieur à 4 » ?",
@@ -313,16 +313,16 @@ export const probabilitesBank: TutorBankItemV4[] = [
           "Méthode : on compte les issues favorables et les issues possibles, puis on forme le quotient.\n\nCalcul : " +
           ("Les nombres strictement supérieurs à 4 sur un dé sont 5 et 6.") +
           "\n\nConclusion : la probabilité obtenue répond à la question.",
-    tags: ["probabilites", "issues", "qcm", "piege"],
+    tags: ["proba_experience", "issue", "qcm", "piege"],
     canvas: deCanvas([5, 6]),
   },
   {
     kind: "fixed",
-    id: "proba_issues_open_1",
+    id: "proba_issue_open_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "probabilites",
-    microId: "proba_issues",
+    notionId: "proba_experience",
+    microId: "proba_issue",
     difficulty: 2,
     theme: "neutral",
     text: "On lance un dé équilibré. Explique pourquoi il y a 6 issues possibles.",
@@ -335,20 +335,20 @@ export const probabilitesBank: TutorBankItemV4[] = [
           "Méthode : on compte les issues favorables et les issues possibles, puis on forme le quotient.\n\nCalcul : " +
           ("Les issues possibles sont 1, 2, 3, 4, 5 et 6. Il y a donc 6 issues possibles.") +
           "\n\nConclusion : la probabilité obtenue répond à la question.",
-    tags: ["probabilites", "issues", "open"],
+    tags: ["proba_experience", "issue", "open"],
     canvas: deCanvas(),
   },
   {
     kind: "template",
-    id: "proba_issues_tpl_1",
+    id: "proba_issue_tpl_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "probabilites",
-    microId: "proba_issues",
+    notionId: "proba_experience",
+    microId: "proba_issue",
     difficulty: 2,
     theme: "neutral",
     hint: "Compte tous les objets possibles.",
-    tags: ["probabilites", "issues", "billes", "template"],
+    tags: ["proba_experience", "issue", "billes", "template"],
     generate: () => {
       const rouges = randomInt(2, 5);
       const bleues = randomInt(1, 4);
@@ -385,7 +385,7 @@ export const probabilitesBank: TutorBankItemV4[] = [
     id: "proba_equiprobabilite_fixed_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "probabilites",
+    notionId: "proba_experience",
     microId: "proba_equiprobabilite",
     difficulty: 2,
     theme: "neutral",
@@ -400,7 +400,7 @@ export const probabilitesBank: TutorBankItemV4[] = [
           "Méthode : on compte les issues favorables et les issues possibles, puis on forme le quotient.\n\nCalcul : " +
           ("Oui. Chaque face a la même probabilité d’apparaître : la situation est équiprobable.") +
           "\n\nConclusion : la probabilité obtenue répond à la question.",
-    tags: ["probabilites", "equiprobabilite", "de"],
+    tags: ["proba_experience", "equiprobabilite", "de"],
     canvas: deCanvas(),
   },
   {
@@ -408,7 +408,7 @@ export const probabilitesBank: TutorBankItemV4[] = [
     id: "proba_equiprobabilite_fixed_2",
     niveau: "5e",
     matiere: "maths",
-    notionId: "probabilites",
+    notionId: "proba_experience",
     microId: "proba_equiprobabilite",
     difficulty: 3,
     theme: "neutral",
@@ -423,7 +423,7 @@ export const probabilitesBank: TutorBankItemV4[] = [
           "Méthode : on compte les issues favorables et les issues possibles, puis on forme le quotient.\n\nCalcul : " +
           ("Non. Le secteur rouge a un poids 3, alors que le secteur bleu a un poids 1. Les issues ne sont pas équiprobables.") +
           "\n\nConclusion : la probabilité obtenue répond à la question.",
-    tags: ["probabilites", "equiprobabilite", "roue", "piege"],
+    tags: ["proba_experience", "equiprobabilite", "roue", "piege"],
     canvas: roueCanvas([
       { label: "Rouge", poids: 3, couleur: couleurs.rouge },
       { label: "Bleu", poids: 1, couleur: couleurs.bleu },
@@ -434,7 +434,7 @@ export const probabilitesBank: TutorBankItemV4[] = [
     id: "proba_equiprobabilite_fixed_3",
     niveau: "5e",
     matiere: "maths",
-    notionId: "probabilites",
+    notionId: "proba_experience",
     microId: "proba_equiprobabilite",
     difficulty: 3,
     theme: "neutral",
@@ -449,7 +449,7 @@ export const probabilitesBank: TutorBankItemV4[] = [
           "Méthode : on compte les issues favorables et les issues possibles, puis on forme le quotient.\n\nCalcul : " +
           ("Il y a 4 billes rouges et 2 billes bleues. Les couleurs n’ont donc pas la même probabilité.") +
           "\n\nConclusion : la probabilité obtenue répond à la question.",
-    tags: ["probabilites", "equiprobabilite", "billes", "piege"],
+    tags: ["proba_experience", "equiprobabilite", "billes", "piege"],
     canvas: billesCanvas([
       ...Array.from({ length: 4 }, () => ({ couleur: couleurs.rouge, label: "R" })),
       ...Array.from({ length: 2 }, () => ({ couleur: couleurs.bleu, label: "B" })),
@@ -460,7 +460,7 @@ export const probabilitesBank: TutorBankItemV4[] = [
     id: "proba_equiprobabilite_open_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "probabilites",
+    notionId: "proba_experience",
     microId: "proba_equiprobabilite",
     difficulty: 4,
     theme: "neutral",
@@ -474,7 +474,7 @@ export const probabilitesBank: TutorBankItemV4[] = [
           "Méthode : on compte les issues favorables et les issues possibles, puis on forme le quotient.\n\nCalcul : " +
           ("Le rouge apparaît 3 fois et le bleu 1 fois. Les deux couleurs n’ont pas la même chance d’être obtenues.") +
           "\n\nConclusion : la probabilité obtenue répond à la question.",
-    tags: ["probabilites", "equiprobabilite", "open", "raisonnement"],
+    tags: ["proba_experience", "equiprobabilite", "open", "raisonnement"],
     canvas: roueCanvas([
       { label: "Rouge", poids: 3, couleur: couleurs.rouge },
       { label: "Bleu", poids: 1, couleur: couleurs.bleu },
@@ -485,12 +485,12 @@ export const probabilitesBank: TutorBankItemV4[] = [
     id: "proba_equiprobabilite_tpl_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "probabilites",
+    notionId: "proba_experience",
     microId: "proba_equiprobabilite",
     difficulty: 3,
     theme: "neutral",
     hint: "Regarde si toutes les zones ont le même poids.",
-    tags: ["probabilites", "equiprobabilite", "roue", "template"],
+    tags: ["proba_experience", "equiprobabilite", "roue", "template"],
     generate: () => {
       const equal = randomChoice([true, false]);
 
@@ -531,7 +531,7 @@ export const probabilitesBank: TutorBankItemV4[] = [
     id: "proba_calculer_fixed_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "probabilites",
+    notionId: "proba_experience",
     microId: "proba_calculer",
     difficulty: 2,
     theme: "neutral",
@@ -545,7 +545,7 @@ export const probabilitesBank: TutorBankItemV4[] = [
           "Méthode : on compte les issues favorables et les issues possibles, puis on forme le quotient.\n\nCalcul : " +
           ("Obtenir 3 correspond à une seule issue favorable parmi 6 issues possibles. La probabilité est donc 1/6.") +
           "\n\nConclusion : la probabilité obtenue répond à la question.",
-    tags: ["probabilites", "calcul", "de"],
+    tags: ["proba_experience", "calcul", "de"],
     canvas: deCanvas([3]),
   },
   {
@@ -553,7 +553,7 @@ export const probabilitesBank: TutorBankItemV4[] = [
     id: "proba_calculer_fixed_2",
     niveau: "5e",
     matiere: "maths",
-    notionId: "probabilites",
+    notionId: "proba_experience",
     microId: "proba_calculer",
     difficulty: 2,
     theme: "neutral",
@@ -567,7 +567,7 @@ export const probabilitesBank: TutorBankItemV4[] = [
           "Méthode : on compte les issues favorables et les issues possibles, puis on forme le quotient.\n\nCalcul : " +
           ("Les issues favorables sont 2, 4 et 6 : 3 issues sur 6. Donc la probabilité est 3/6 = 1/2.") +
           "\n\nConclusion : la probabilité obtenue répond à la question.",
-    tags: ["probabilites", "calcul", "de", "pair"],
+    tags: ["proba_experience", "calcul", "de", "pair"],
     canvas: deCanvas([2, 4, 6]),
   },
   {
@@ -575,7 +575,7 @@ export const probabilitesBank: TutorBankItemV4[] = [
     id: "proba_calculer_fixed_3",
     niveau: "5e",
     matiere: "maths",
-    notionId: "probabilites",
+    notionId: "proba_experience",
     microId: "proba_calculer",
     difficulty: 3,
     theme: "neutral",
@@ -589,7 +589,7 @@ export const probabilitesBank: TutorBankItemV4[] = [
           "Méthode : on compte les issues favorables et les issues possibles, puis on forme le quotient.\n\nCalcul : " +
           ("Il y a 3 billes rouges sur 5 billes au total. La probabilité est donc 3/5.") +
           "\n\nConclusion : la probabilité obtenue répond à la question.",
-    tags: ["probabilites", "calcul", "billes"],
+    tags: ["proba_experience", "calcul", "billes"],
     canvas: billesCanvas([
       ...Array.from({ length: 3 }, () => ({ couleur: couleurs.rouge, label: "R" })),
       ...Array.from({ length: 2 }, () => ({ couleur: couleurs.bleu, label: "B" })),
@@ -600,7 +600,7 @@ export const probabilitesBank: TutorBankItemV4[] = [
     id: "proba_calculer_qcm_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "probabilites",
+    notionId: "proba_experience",
     microId: "proba_calculer",
     difficulty: 3,
     theme: "neutral",
@@ -615,7 +615,7 @@ export const probabilitesBank: TutorBankItemV4[] = [
           "Méthode : on compte les issues favorables et les issues possibles, puis on forme le quotient.\n\nCalcul : " +
           ("Les issues favorables sont 5 et 6 : 2 issues sur 6. La probabilité est donc 2/6.") +
           "\n\nConclusion : la probabilité obtenue répond à la question.",
-    tags: ["probabilites", "calcul", "qcm", "piege"],
+    tags: ["proba_experience", "calcul", "qcm", "piege"],
     canvas: deCanvas([5, 6]),
   },
   {
@@ -623,7 +623,7 @@ export const probabilitesBank: TutorBankItemV4[] = [
     id: "proba_calculer_tableau_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "probabilites",
+    notionId: "proba_experience",
     microId: "proba_calculer",
     difficulty: 3,
     theme: "neutral",
@@ -637,7 +637,7 @@ export const probabilitesBank: TutorBankItemV4[] = [
           "Méthode : on compte les issues favorables et les issues possibles, puis on forme le quotient.\n\nCalcul : " +
           ("Il y a 2 billes bleues sur 6 billes au total. La probabilité est donc 2/6 = 1/3.") +
           "\n\nConclusion : la probabilité obtenue répond à la question.",
-    tags: ["probabilites", "calcul", "tableau"],
+    tags: ["proba_experience", "calcul", "tableau"],
     canvas: tableauCanvas(
       ["Couleur", "Rouge", "Bleu", "Vert", "Total"],
       [["Effectif", "3", "2", "1", "6"]],
@@ -652,7 +652,7 @@ export const probabilitesBank: TutorBankItemV4[] = [
     id: "proba_calculer_open_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "probabilites",
+    notionId: "proba_experience",
     microId: "proba_calculer",
     difficulty: 4,
     theme: "neutral",
@@ -666,7 +666,7 @@ export const probabilitesBank: TutorBankItemV4[] = [
           "Méthode : on compte les issues favorables et les issues possibles, puis on forme le quotient.\n\nCalcul : " +
           ("Les nombres pairs sont 2, 4 et 6 : il y a 3 issues favorables sur 6 issues possibles. La probabilité est donc 3/6.") +
           "\n\nConclusion : la probabilité obtenue répond à la question.",
-    tags: ["probabilites", "calcul", "de", "open"],
+    tags: ["proba_experience", "calcul", "de", "open"],
     canvas: deCanvas([2, 4, 6]),
   },
   {
@@ -674,12 +674,12 @@ export const probabilitesBank: TutorBankItemV4[] = [
     id: "proba_calculer_tpl_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "probabilites",
+    notionId: "proba_experience",
     microId: "proba_calculer",
     difficulty: 3,
     theme: "neutral",
     hint: "Probabilité = cas favorables / cas possibles.",
-    tags: ["probabilites", "calcul", "billes", "template"],
+    tags: ["proba_experience", "calcul", "billes", "template"],
     generate: () => {
       const rouges = randomInt(1, 5);
       const bleues = randomInt(1, 5);
@@ -718,12 +718,12 @@ export const probabilitesBank: TutorBankItemV4[] = [
     id: "proba_calculer_tpl_2",
     niveau: "5e",
     matiere: "maths",
-    notionId: "probabilites",
+    notionId: "proba_experience",
     microId: "proba_calculer",
     difficulty: 4,
     theme: "neutral",
     hint: "Compte les faces qui vérifient la condition.",
-    tags: ["probabilites", "calcul", "de", "template", "piege"],
+    tags: ["proba_experience", "calcul", "de", "template", "piege"],
     generate: () => {
 
                       const seuil = randomChoice([2, 3, 4] as const);
@@ -755,11 +755,11 @@ export const probabilitesBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "fixed",
-    id: "proba_defis_fixed_1",
+    id: "proba_defi_fixed_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "probabilites",
-    microId: "proba_defis",
+    notionId: "proba_experience",
+    microId: "proba_defi",
     difficulty: 4,
     theme: "neutral",
     text: "Une probabilité peut-elle être supérieure à 1 ?",
@@ -773,15 +773,15 @@ export const probabilitesBank: TutorBankItemV4[] = [
           "Méthode : on compte les issues favorables et les issues possibles, puis on forme le quotient.\n\nCalcul : " +
           ("Non. Une probabilité est toujours comprise entre 0 et 1.") +
           "\n\nConclusion : la probabilité obtenue répond à la question.",
-    tags: ["probabilites", "defi", "bornes"],
+    tags: ["proba_experience", "defi", "bornes"],
   },
   {
     kind: "fixed",
-    id: "proba_defis_fixed_2",
+    id: "proba_defi_fixed_2",
     niveau: "5e",
     matiere: "maths",
-    notionId: "probabilites",
-    microId: "proba_defis",
+    notionId: "proba_experience",
+    microId: "proba_defi",
     difficulty: 4,
     theme: "neutral",
     text: "Un élève dit : « Sur un dé, obtenir un nombre pair a une probabilité de 2/6 car il y a le mot pair. » Explique son erreur.",
@@ -794,16 +794,16 @@ export const probabilitesBank: TutorBankItemV4[] = [
           "Méthode : on compte les issues favorables et les issues possibles, puis on forme le quotient.\n\nCalcul : " +
           ("Les issues favorables sont 2, 4 et 6 : il y en a 3. La probabilité est donc 3/6, pas 2/6.") +
           "\n\nConclusion : la probabilité obtenue répond à la question.",
-    tags: ["probabilites", "defi", "open", "erreur", "piege"],
+    tags: ["proba_experience", "defi", "open", "erreur", "piege"],
     canvas: deCanvas([2, 4, 6]),
   },
   {
     kind: "fixed",
-    id: "proba_defis_fixed_3",
+    id: "proba_defi_fixed_3",
     niveau: "5e",
     matiere: "maths",
-    notionId: "probabilites",
-    microId: "proba_defis",
+    notionId: "proba_experience",
+    microId: "proba_defi",
     difficulty: 5,
     theme: "reunion",
     text: "Dans un panier de fruits à La Réunion, il y a 4 mangues, 3 ananas et 2 letchis. On prend un fruit au hasard. Quelle est la probabilité de prendre une mangue ?",
@@ -816,7 +816,7 @@ export const probabilitesBank: TutorBankItemV4[] = [
           "Méthode : on compte les issues favorables et les issues possibles, puis on forme le quotient.\n\nCalcul : " +
           ("Il y a 4 mangues sur 9 fruits au total. La probabilité est donc 4/9.") +
           "\n\nConclusion : la probabilité obtenue répond à la question.",
-    tags: ["probabilites", "defi", "reunion", "billes"],
+    tags: ["proba_experience", "defi", "reunion", "billes"],
     canvas: billesCanvas([
       ...Array.from({ length: 4 }, () => ({
         label: "M",
@@ -834,11 +834,11 @@ export const probabilitesBank: TutorBankItemV4[] = [
   },
   {
     kind: "fixed",
-    id: "proba_defis_fixed_4",
+    id: "proba_defi_fixed_4",
     niveau: "5e",
     matiere: "maths",
-    notionId: "probabilites",
-    microId: "proba_defis",
+    notionId: "proba_experience",
+    microId: "proba_defi",
     difficulty: 5,
     theme: "neutral",
     text: "Sur cette roue, quelle issue est la plus probable ?",
@@ -852,7 +852,7 @@ export const probabilitesBank: TutorBankItemV4[] = [
           "Méthode : on compte les issues favorables et les issues possibles, puis on forme le quotient.\n\nCalcul : " +
           ("Le secteur Rouge a le poids le plus grand, donc c’est l’issue la plus probable.") +
           "\n\nConclusion : la probabilité obtenue répond à la question.",
-    tags: ["probabilites", "defi", "roue", "piege"],
+    tags: ["proba_experience", "defi", "roue", "piege"],
     canvas: roueCanvas([
       { label: "Rouge", poids: 3, couleur: couleurs.rouge },
       { label: "Bleu", poids: 1, couleur: couleurs.bleu },
@@ -861,15 +861,15 @@ export const probabilitesBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "proba_defis_tpl_1",
+    id: "proba_defi_tpl_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "probabilites",
-    microId: "proba_defis",
+    notionId: "proba_experience",
+    microId: "proba_defi",
     difficulty: 5,
     theme: "reunion",
     hint: "Compte les cas favorables et les cas possibles.",
-    tags: ["probabilites", "reunion", "defi", "template"],
+    tags: ["proba_experience", "reunion", "defi", "template"],
     generate: () => {
       const mangue = randomInt(2, 5);
       const ananas = randomInt(1, 4);
@@ -910,15 +910,15 @@ export const probabilitesBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "proba_defis_open_tpl_1",
+    id: "proba_defi_open_tpl_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "probabilites",
-    microId: "proba_defis",
+    notionId: "proba_experience",
+    microId: "proba_defi",
     difficulty: 5,
     theme: "neutral",
     hint: "Compare les poids des secteurs.",
-    tags: ["probabilites", "roue", "defi", "open", "template"],
+    tags: ["proba_experience", "roue", "defi", "open", "template"],
     generate: () => {
       return {
         text: "Explique pourquoi Rouge est l’issue la plus probable sur cette roue.",

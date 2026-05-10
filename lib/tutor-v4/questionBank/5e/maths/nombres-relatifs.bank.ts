@@ -27,7 +27,7 @@ export const nombresRelatifsBank: TutorBankItemV4[] = [
     id: "relatif_lire_fixed_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "nombres_relatifs",
+    notionId: "relatif_nombre",
     microId: "relatif_lire",
     difficulty: 1,
     theme: "neutral",
@@ -41,14 +41,14 @@ export const nombresRelatifsBank: TutorBankItemV4[] = [
           "Méthode : on repère le signe, la distance à zéro et la position sur la droite graduée.\n\nCalcul : " +
           ("Un nombre situé au-dessus de zéro est positif. On peut l’écrire +4. Dans beaucoup de cas, 4 et +4 désignent le même nombre.") +
           "\n\nConclusion : le nombre relatif choisi répond à la question.",
-    tags: ["relatifs", "lecture", "positif"],
+    tags: ["relatif", "lecture", "positif"],
   },
   {
     kind: "fixed",
     id: "relatif_lire_fixed_2",
     niveau: "5e",
     matiere: "maths",
-    notionId: "nombres_relatifs",
+    notionId: "relatif_nombre",
     microId: "relatif_lire",
     difficulty: 1,
     theme: "neutral",
@@ -62,14 +62,14 @@ export const nombresRelatifsBank: TutorBankItemV4[] = [
           "Méthode : on repère le signe, la distance à zéro et la position sur la droite graduée.\n\nCalcul : " +
           ("Un nombre situé au-dessous de zéro est négatif. Il s’écrit avec le signe -, donc -7.") +
           "\n\nConclusion : le nombre relatif choisi répond à la question.",
-    tags: ["relatifs", "lecture", "negatif"],
+    tags: ["relatif", "lecture", "negatif"],
   },
   {
     kind: "fixed",
     id: "relatif_lire_fixed_3",
     niveau: "5e",
     matiere: "maths",
-    notionId: "nombres_relatifs",
+    notionId: "relatif_nombre",
     microId: "relatif_lire",
     difficulty: 1,
     theme: "neutral",
@@ -84,14 +84,14 @@ export const nombresRelatifsBank: TutorBankItemV4[] = [
           "Méthode : on repère le signe, la distance à zéro et la position sur la droite graduée.\n\nCalcul : " +
           ("Le signe - indique un nombre négatif. Ici, seul -6 est négatif.") +
           "\n\nConclusion : le nombre relatif choisi répond à la question.",
-    tags: ["relatifs", "lecture", "qcm"],
+    tags: ["relatif", "lecture", "qcm"],
   },
   {
     kind: "fixed",
     id: "relatif_lire_fixed_4",
     niveau: "5e",
     matiere: "maths",
-    notionId: "nombres_relatifs",
+    notionId: "relatif_nombre",
     microId: "relatif_lire",
     difficulty: 2,
     theme: "reunion",
@@ -105,14 +105,14 @@ export const nombresRelatifsBank: TutorBankItemV4[] = [
           "Méthode : on repère le signe, la distance à zéro et la position sur la droite graduée.\n\nCalcul : " +
           ("Une température en dessous de zéro est négative. 3 °C en dessous de zéro s’écrit -3 °C.") +
           "\n\nConclusion : le nombre relatif choisi répond à la question.",
-    tags: ["relatifs", "lecture", "reunion", "temperature"],
+    tags: ["relatif", "lecture", "reunion", "temperature"],
   },
   {
     kind: "fixed",
     id: "relatif_lire_fixed_5",
     niveau: "5e",
     matiere: "maths",
-    notionId: "nombres_relatifs",
+    notionId: "relatif_nombre",
     microId: "relatif_lire",
     difficulty: 2,
     theme: "neutral",
@@ -127,7 +127,7 @@ export const nombresRelatifsBank: TutorBankItemV4[] = [
           "Méthode : on repère le signe, la distance à zéro et la position sur la droite graduée.\n\nCalcul : " +
           ("« Moins huit » signifie que le nombre est négatif. Il s’écrit -8.") +
           "\n\nConclusion : le nombre relatif choisi répond à la question.",
-    tags: ["relatifs", "lecture", "qcm"],
+    tags: ["relatif", "lecture", "qcm"],
   },
 
   // =========================
@@ -138,7 +138,7 @@ export const nombresRelatifsBank: TutorBankItemV4[] = [
     id: "relatif_signe_fixed_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "nombres_relatifs",
+    notionId: "relatif_nombre",
     microId: "relatif_signe",
     difficulty: 1,
     theme: "neutral",
@@ -153,14 +153,14 @@ export const nombresRelatifsBank: TutorBankItemV4[] = [
           "Méthode : on repère le signe, la distance à zéro et la position sur la droite graduée.\n\nCalcul : " +
           ("Le nombre -5 porte le signe -. Il est donc négatif.") +
           "\n\nConclusion : le nombre relatif choisi répond à la question.",
-    tags: ["relatifs", "signe", "qcm"],
+    tags: ["relatif", "signe", "qcm"],
   },
   {
     kind: "fixed",
     id: "relatif_signe_fixed_2",
     niveau: "5e",
     matiere: "maths",
-    notionId: "nombres_relatifs",
+    notionId: "relatif_nombre",
     microId: "relatif_signe",
     difficulty: 1,
     theme: "neutral",
@@ -175,14 +175,14 @@ export const nombresRelatifsBank: TutorBankItemV4[] = [
           "Méthode : on repère le signe, la distance à zéro et la position sur la droite graduée.\n\nCalcul : " +
           ("Le nombre +9 porte le signe +. Il est donc positif.") +
           "\n\nConclusion : le nombre relatif choisi répond à la question.",
-    tags: ["relatifs", "signe", "qcm"],
+    tags: ["relatif", "signe", "qcm"],
   },
   {
     kind: "fixed",
     id: "relatif_signe_fixed_3",
     niveau: "5e",
     matiere: "maths",
-    notionId: "nombres_relatifs",
+    notionId: "relatif_nombre",
     microId: "relatif_signe",
     difficulty: 2,
     theme: "neutral",
@@ -197,14 +197,14 @@ export const nombresRelatifsBank: TutorBankItemV4[] = [
           "Méthode : on repère le signe, la distance à zéro et la position sur la droite graduée.\n\nCalcul : " +
           ("0 n’est ni positif ni négatif. Il sépare les nombres positifs et les nombres négatifs.") +
           "\n\nConclusion : le nombre relatif choisi répond à la question.",
-    tags: ["relatifs", "signe", "zero", "qcm"],
+    tags: ["relatif", "signe", "zero", "qcm"],
   },
   {
     kind: "fixed",
     id: "relatif_signe_fixed_4",
     niveau: "5e",
     matiere: "maths",
-    notionId: "nombres_relatifs",
+    notionId: "relatif_nombre",
     microId: "relatif_signe",
     difficulty: 2,
     theme: "neutral",
@@ -218,7 +218,7 @@ export const nombresRelatifsBank: TutorBankItemV4[] = [
           "Méthode : on repère le signe, la distance à zéro et la position sur la droite graduée.\n\nCalcul : " +
           ("Sur une droite graduée, les nombres situés à gauche de 0 sont négatifs.") +
           "\n\nConclusion : le nombre relatif choisi répond à la question.",
-    tags: ["relatifs", "signe", "droite"],
+    tags: ["relatif", "signe", "droite"],
   },
 
   // =========================
@@ -229,7 +229,7 @@ export const nombresRelatifsBank: TutorBankItemV4[] = [
     id: "relatif_comparer_fixed_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "nombres_relatifs",
+    notionId: "relatif_nombre",
     microId: "relatif_comparer",
     difficulty: 1,
     theme: "neutral",
@@ -243,14 +243,14 @@ export const nombresRelatifsBank: TutorBankItemV4[] = [
           "Méthode : on repère le signe, la distance à zéro et la position sur la droite graduée.\n\nCalcul : " +
           ("Tout nombre positif est plus grand que tout nombre négatif. Donc +3 est plus grand que -2.") +
           "\n\nConclusion : le nombre relatif choisi répond à la question.",
-    tags: ["relatifs", "comparaison"],
+    tags: ["relatif", "comparaison"],
   },
   {
     kind: "fixed",
     id: "relatif_comparer_fixed_2",
     niveau: "5e",
     matiere: "maths",
-    notionId: "nombres_relatifs",
+    notionId: "relatif_nombre",
     microId: "relatif_comparer",
     difficulty: 1,
     theme: "neutral",
@@ -264,14 +264,14 @@ export const nombresRelatifsBank: TutorBankItemV4[] = [
           "Méthode : on repère le signe, la distance à zéro et la position sur la droite graduée.\n\nCalcul : " +
           ("Sur une droite graduée, -5 est à gauche de -1. Donc -5 est plus petit que -1.") +
           "\n\nConclusion : le nombre relatif choisi répond à la question.",
-    tags: ["relatifs", "comparaison"],
+    tags: ["relatif", "comparaison"],
   },
   {
     kind: "fixed",
     id: "relatif_comparer_fixed_3",
     niveau: "5e",
     matiere: "maths",
-    notionId: "nombres_relatifs",
+    notionId: "relatif_nombre",
     microId: "relatif_comparer",
     difficulty: 2,
     theme: "neutral",
@@ -285,14 +285,14 @@ export const nombresRelatifsBank: TutorBankItemV4[] = [
           "Méthode : on repère le signe, la distance à zéro et la position sur la droite graduée.\n\nCalcul : " +
           ("-3 est négatif et +1 est positif. Donc -3 < +1.") +
           "\n\nConclusion : le nombre relatif choisi répond à la question.",
-    tags: ["relatifs", "comparaison", "inegalite"],
+    tags: ["relatif", "comparaison", "inegalite"],
   },
   {
     kind: "fixed",
     id: "relatif_comparer_fixed_4",
     niveau: "5e",
     matiere: "maths",
-    notionId: "nombres_relatifs",
+    notionId: "relatif_nombre",
     microId: "relatif_comparer",
     difficulty: 2,
     theme: "neutral",
@@ -306,14 +306,14 @@ export const nombresRelatifsBank: TutorBankItemV4[] = [
           "Méthode : on repère le signe, la distance à zéro et la position sur la droite graduée.\n\nCalcul : " +
           ("Parmi deux nombres négatifs, le plus proche de 0 est le plus grand. Comme -4 est plus proche de 0 que -7, on a -4 > -7.") +
           "\n\nConclusion : le nombre relatif choisi répond à la question.",
-    tags: ["relatifs", "comparaison", "inegalite"],
+    tags: ["relatif", "comparaison", "inegalite"],
   },
   {
     kind: "fixed",
     id: "relatif_comparer_fixed_5",
     niveau: "5e",
     matiere: "maths",
-    notionId: "nombres_relatifs",
+    notionId: "relatif_nombre",
     microId: "relatif_comparer",
     difficulty: 2,
     theme: "reunion",
@@ -327,14 +327,14 @@ export const nombresRelatifsBank: TutorBankItemV4[] = [
           "Méthode : on repère le signe, la distance à zéro et la position sur la droite graduée.\n\nCalcul : " +
           ("Une température positive est toujours plus grande qu’une température négative. Donc +6 °C est plus grand que -1 °C.") +
           "\n\nConclusion : le nombre relatif choisi répond à la question.",
-    tags: ["relatifs", "comparaison", "reunion", "temperature"],
+    tags: ["relatif", "comparaison", "reunion", "temperature"],
   },
   {
     kind: "fixed",
     id: "relatif_comparer_qcm_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "nombres_relatifs",
+    notionId: "relatif_nombre",
     microId: "relatif_comparer",
     difficulty: 2,
     theme: "neutral",
@@ -349,7 +349,7 @@ export const nombresRelatifsBank: TutorBankItemV4[] = [
           "Méthode : on repère le signe, la distance à zéro et la position sur la droite graduée.\n\nCalcul : " +
           ("Parmi -8, -3, 0 et -1, seul 0 n’est pas négatif. Il est donc le plus grand.") +
           "\n\nConclusion : le nombre relatif choisi répond à la question.",
-    tags: ["relatifs", "comparaison", "qcm"],
+    tags: ["relatif", "comparaison", "qcm"],
   },
 
   // =========================
@@ -360,7 +360,7 @@ export const nombresRelatifsBank: TutorBankItemV4[] = [
     id: "relatif_placer_fixed_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "nombres_relatifs",
+    notionId: "relatif_nombre",
     microId: "relatif_placer",
     difficulty: 2,
     theme: "neutral",
@@ -375,7 +375,7 @@ export const nombresRelatifsBank: TutorBankItemV4[] = [
           "Méthode : on repère le signe, la distance à zéro et la position sur la droite graduée.\n\nCalcul : " +
           ("Sur la droite graduée, le point A est placé au-dessus de -3. Donc A correspond à -3.") +
           "\n\nConclusion : le nombre relatif choisi répond à la question.",
-    tags: ["relatifs", "placement", "qcm", "canvas"],
+    tags: ["relatif", "placement", "qcm", "canvas"],
     canvas: {
       kind: "number_line",
       min: -5,
@@ -401,7 +401,7 @@ export const nombresRelatifsBank: TutorBankItemV4[] = [
     id: "relatif_placer_fixed_2",
     niveau: "5e",
     matiere: "maths",
-    notionId: "nombres_relatifs",
+    notionId: "relatif_nombre",
     microId: "relatif_placer",
     difficulty: 2,
     theme: "neutral",
@@ -415,7 +415,7 @@ export const nombresRelatifsBank: TutorBankItemV4[] = [
           "Méthode : on repère le signe, la distance à zéro et la position sur la droite graduée.\n\nCalcul : " +
           ("Le point B est placé au-dessus de -2. Son abscisse est donc -2.") +
           "\n\nConclusion : le nombre relatif choisi répond à la question.",
-    tags: ["relatifs", "placement", "abscisse", "canvas"],
+    tags: ["relatif", "placement", "abscisse", "canvas"],
     canvas: {
       kind: "number_line",
       min: -4,
@@ -436,7 +436,7 @@ export const nombresRelatifsBank: TutorBankItemV4[] = [
     id: "relatif_placer_fixed_3",
     niveau: "5e",
     matiere: "maths",
-    notionId: "nombres_relatifs",
+    notionId: "relatif_nombre",
     microId: "relatif_placer",
     difficulty: 3,
     theme: "neutral",
@@ -451,7 +451,7 @@ export const nombresRelatifsBank: TutorBankItemV4[] = [
           "Méthode : on repère le signe, la distance à zéro et la position sur la droite graduée.\n\nCalcul : " +
           ("Le point le plus à droite représente le plus grand nombre. Ici, C est le plus à droite.") +
           "\n\nConclusion : le nombre relatif choisi répond à la question.",
-    tags: ["relatifs", "placement", "comparaison", "canvas", "qcm"],
+    tags: ["relatif", "placement", "comparaison", "canvas", "qcm"],
     canvas: {
       kind: "number_line",
       min: -5,
@@ -476,7 +476,7 @@ export const nombresRelatifsBank: TutorBankItemV4[] = [
     id: "relatif_placer_fixed_4",
     niveau: "5e",
     matiere: "maths",
-    notionId: "nombres_relatifs",
+    notionId: "relatif_nombre",
     microId: "relatif_placer",
     difficulty: 3,
     theme: "neutral",
@@ -491,7 +491,7 @@ export const nombresRelatifsBank: TutorBankItemV4[] = [
           "Méthode : on repère le signe, la distance à zéro et la position sur la droite graduée.\n\nCalcul : " +
           ("Sur une droite graduée, le plus petit nombre est celui qui est placé le plus à gauche. Ici, c’est le point D.") +
           "\n\nConclusion : le nombre relatif choisi répond à la question.",
-    tags: ["relatifs", "placement", "comparaison", "canvas", "qcm"],
+    tags: ["relatif", "placement", "comparaison", "canvas", "qcm"],
     canvas: {
       kind: "number_line",
       min: -6,
@@ -518,11 +518,11 @@ export const nombresRelatifsBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "fixed",
-    id: "relatif_opposes_fixed_1",
+    id: "relatif_oppose_fixed_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "nombres_relatifs",
-    microId: "relatif_opposes",
+    notionId: "relatif_nombre",
+    microId: "relatif_oppose",
     difficulty: 1,
     theme: "neutral",
     text: "Quel est l’opposé de +4 ?",
@@ -535,15 +535,15 @@ export const nombresRelatifsBank: TutorBankItemV4[] = [
           "Méthode : on repère le signe, la distance à zéro et la position sur la droite graduée.\n\nCalcul : " +
           ("L’opposé de +4 est le nombre situé à la même distance de 0, mais de l’autre côté. C’est -4.") +
           "\n\nConclusion : le nombre relatif choisi répond à la question.",
-    tags: ["relatifs", "opposes"],
+    tags: ["relatif", "oppose"],
   },
   {
     kind: "fixed",
-    id: "relatif_opposes_fixed_2",
+    id: "relatif_oppose_fixed_2",
     niveau: "5e",
     matiere: "maths",
-    notionId: "nombres_relatifs",
-    microId: "relatif_opposes",
+    notionId: "relatif_nombre",
+    microId: "relatif_oppose",
     difficulty: 1,
     theme: "neutral",
     text: "Quel est l’opposé de -7 ?",
@@ -556,15 +556,15 @@ export const nombresRelatifsBank: TutorBankItemV4[] = [
           "Méthode : on repère le signe, la distance à zéro et la position sur la droite graduée.\n\nCalcul : " +
           ("L’opposé de -7 est +7. Les deux nombres sont symétriques par rapport à 0.") +
           "\n\nConclusion : le nombre relatif choisi répond à la question.",
-    tags: ["relatifs", "opposes"],
+    tags: ["relatif", "oppose"],
   },
   {
     kind: "fixed",
-    id: "relatif_opposes_fixed_3",
+    id: "relatif_oppose_fixed_3",
     niveau: "5e",
     matiere: "maths",
-    notionId: "nombres_relatifs",
-    microId: "relatif_opposes",
+    notionId: "relatif_nombre",
+    microId: "relatif_oppose",
     difficulty: 2,
     theme: "neutral",
     text: "L’opposé de 0 est ...",
@@ -577,15 +577,15 @@ export const nombresRelatifsBank: TutorBankItemV4[] = [
           "Méthode : on repère le signe, la distance à zéro et la position sur la droite graduée.\n\nCalcul : " +
           ("0 est à la fois à gauche et à droite de lui-même. Son opposé est donc 0.") +
           "\n\nConclusion : le nombre relatif choisi répond à la question.",
-    tags: ["relatifs", "opposes", "zero"],
+    tags: ["relatif", "oppose", "zero"],
   },
   {
     kind: "fixed",
-    id: "relatif_opposes_fixed_4",
+    id: "relatif_oppose_fixed_4",
     niveau: "5e",
     matiere: "maths",
-    notionId: "nombres_relatifs",
-    microId: "relatif_opposes",
+    notionId: "relatif_nombre",
+    microId: "relatif_oppose",
     difficulty: 2,
     theme: "neutral",
     text: "Deux nombres opposés ont-ils le même signe ?",
@@ -599,7 +599,7 @@ export const nombresRelatifsBank: TutorBankItemV4[] = [
           "Méthode : on repère le signe, la distance à zéro et la position sur la droite graduée.\n\nCalcul : " +
           ("Deux nombres opposés sont symétriques par rapport à 0. En général, ils n’ont pas le même signe. Le seul cas particulier est 0, qui est son propre opposé.") +
           "\n\nConclusion : le nombre relatif choisi répond à la question.",
-    tags: ["relatifs", "opposes", "qcm"],
+    tags: ["relatif", "oppose", "qcm"],
   },
 
   // =========================
@@ -610,7 +610,7 @@ export const nombresRelatifsBank: TutorBankItemV4[] = [
     id: "relatif_valeur_absolue_fixed_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "nombres_relatifs",
+    notionId: "relatif_nombre",
     microId: "relatif_valeur_absolue",
     difficulty: 2,
     theme: "neutral",
@@ -624,14 +624,14 @@ export const nombresRelatifsBank: TutorBankItemV4[] = [
           "Méthode : on repère le signe, la distance à zéro et la position sur la droite graduée.\n\nCalcul : " +
           ("La valeur absolue de -5 est sa distance à 0. Cette distance vaut 5.") +
           "\n\nConclusion : le nombre relatif choisi répond à la question.",
-    tags: ["relatifs", "valeur_absolue"],
+    tags: ["relatif", "valeur_absolue"],
   },
   {
     kind: "fixed",
     id: "relatif_valeur_absolue_fixed_2",
     niveau: "5e",
     matiere: "maths",
-    notionId: "nombres_relatifs",
+    notionId: "relatif_nombre",
     microId: "relatif_valeur_absolue",
     difficulty: 2,
     theme: "neutral",
@@ -645,14 +645,14 @@ export const nombresRelatifsBank: TutorBankItemV4[] = [
           "Méthode : on repère le signe, la distance à zéro et la position sur la droite graduée.\n\nCalcul : " +
           ("La valeur absolue de +8 est sa distance à 0. Cette distance vaut 8.") +
           "\n\nConclusion : le nombre relatif choisi répond à la question.",
-    tags: ["relatifs", "valeur_absolue"],
+    tags: ["relatif", "valeur_absolue"],
   },
   {
     kind: "fixed",
     id: "relatif_valeur_absolue_fixed_3",
     niveau: "5e",
     matiere: "maths",
-    notionId: "nombres_relatifs",
+    notionId: "relatif_nombre",
     microId: "relatif_valeur_absolue",
     difficulty: 3,
     theme: "neutral",
@@ -667,14 +667,14 @@ export const nombresRelatifsBank: TutorBankItemV4[] = [
           "Méthode : on repère le signe, la distance à zéro et la position sur la droite graduée.\n\nCalcul : " +
           ("-6 et +6 sont opposés. Ils sont à la même distance de 0. Leur valeur absolue est donc la même : 6.") +
           "\n\nConclusion : le nombre relatif choisi répond à la question.",
-    tags: ["relatifs", "valeur_absolue", "qcm"],
+    tags: ["relatif", "valeur_absolue", "qcm"],
   },
   {
     kind: "fixed",
     id: "relatif_valeur_absolue_fixed_4",
     niveau: "5e",
     matiere: "maths",
-    notionId: "nombres_relatifs",
+    notionId: "relatif_nombre",
     microId: "relatif_valeur_absolue",
     difficulty: 3,
     theme: "neutral",
@@ -689,7 +689,7 @@ export const nombresRelatifsBank: TutorBankItemV4[] = [
           "Méthode : on repère le signe, la distance à zéro et la position sur la droite graduée.\n\nCalcul : " +
           ("La valeur absolue mesure seulement la distance à 0. Les nombres -4 et +4 sont tous les deux à distance 4 de 0.") +
           "\n\nConclusion : le nombre relatif choisi répond à la question.",
-    tags: ["relatifs", "valeur_absolue", "qcm"],
+    tags: ["relatif", "valeur_absolue", "qcm"],
   },
 
   // =========================
@@ -697,11 +697,11 @@ export const nombresRelatifsBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "fixed",
-    id: "relatif_defis_fixed_1",
+    id: "relatif_defi_fixed_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "nombres_relatifs",
-    microId: "relatif_defis",
+    notionId: "relatif_nombre",
+    microId: "relatif_defi",
     difficulty: 3,
     theme: "neutral",
     text: "Je suis un nombre négatif. Mon opposé est 6. Qui suis-je ?",
@@ -714,15 +714,15 @@ export const nombresRelatifsBank: TutorBankItemV4[] = [
           "Méthode : on repère le signe, la distance à zéro et la position sur la droite graduée.\n\nCalcul : " +
           ("Le nombre dont l’opposé est 6 est -6. En effet, -6 et +6 sont opposés.") +
           "\n\nConclusion : le nombre relatif choisi répond à la question.",
-    tags: ["relatifs", "defi", "opposes"],
+    tags: ["relatif", "defi", "oppose"],
   },
   {
     kind: "fixed",
-    id: "relatif_defis_fixed_2",
+    id: "relatif_defi_fixed_2",
     niveau: "5e",
     matiere: "maths",
-    notionId: "nombres_relatifs",
-    microId: "relatif_defis",
+    notionId: "relatif_nombre",
+    microId: "relatif_defi",
     difficulty: 4,
     theme: "neutral",
     text: "Trouve un nombre négatif plus grand que -5 et plus petit que -2.",
@@ -735,15 +735,15 @@ export const nombresRelatifsBank: TutorBankItemV4[] = [
           "Méthode : on repère le signe, la distance à zéro et la position sur la droite graduée.\n\nCalcul : " +
           ("Les entiers négatifs strictement compris entre -5 et -2 sont -4 et -3. L’un de ces deux nombres convient.") +
           "\n\nConclusion : le nombre relatif choisi répond à la question.",
-    tags: ["relatifs", "defi", "comparaison", "encadrement"],
+    tags: ["relatif", "defi", "comparaison", "encadrement"],
   },
   {
     kind: "fixed",
-    id: "relatif_defis_fixed_3",
+    id: "relatif_defi_fixed_3",
     niveau: "5e",
     matiere: "maths",
-    notionId: "nombres_relatifs",
-    microId: "relatif_defis",
+    notionId: "relatif_nombre",
+    microId: "relatif_defi",
     difficulty: 4,
     theme: "neutral",
     text: "Sur une droite graduée, A a pour abscisse -4 et B a pour abscisse +1. Quelle est la distance entre A et B ?",
@@ -756,15 +756,15 @@ export const nombresRelatifsBank: TutorBankItemV4[] = [
           "Méthode : on repère le signe, la distance à zéro et la position sur la droite graduée.\n\nCalcul : " +
           ("Pour aller de -4 à 0, il faut 4 unités. Puis de 0 à +1, il faut encore 1 unité. La distance totale est 5.") +
           "\n\nConclusion : le nombre relatif choisi répond à la question.",
-    tags: ["relatifs", "defi", "distance", "droite"],
+    tags: ["relatif", "defi", "distance", "droite"],
   },
   {
     kind: "fixed",
-    id: "relatif_defis_fixed_4",
+    id: "relatif_defi_fixed_4",
     niveau: "5e",
     matiere: "maths",
-    notionId: "nombres_relatifs",
-    microId: "relatif_defis",
+    notionId: "relatif_nombre",
+    microId: "relatif_defi",
     difficulty: 5,
     theme: "neutral",
     text: "Trouve deux nombres différents qui ont la même valeur absolue et dont l’un est plus grand que 0.",
@@ -777,15 +777,15 @@ export const nombresRelatifsBank: TutorBankItemV4[] = [
           "Méthode : on repère le signe, la distance à zéro et la position sur la droite graduée.\n\nCalcul : " +
           ("Deux nombres opposés ont la même valeur absolue. Par exemple -3 et +3 ont tous les deux pour valeur absolue 3.") +
           "\n\nConclusion : le nombre relatif choisi répond à la question.",
-    tags: ["relatifs", "defi", "valeur_absolue", "raisonnement"],
+    tags: ["relatif", "defi", "valeur_absolue", "raisonnement"],
   },
   {
     kind: "fixed",
-    id: "relatif_defis_fixed_5",
+    id: "relatif_defi_fixed_5",
     niveau: "5e",
     matiere: "maths",
-    notionId: "nombres_relatifs",
-    microId: "relatif_defis",
+    notionId: "relatif_nombre",
+    microId: "relatif_defi",
     difficulty: 5,
     theme: "reunion",
     text: "Au lever du jour, la température au sommet est de -2 °C. Elle augmente de 5 degrés dans la matinée puis redescend de 3 degrés le soir. Quelle est la température finale ?",
@@ -798,15 +798,15 @@ export const nombresRelatifsBank: TutorBankItemV4[] = [
           "Méthode : on repère le signe, la distance à zéro et la position sur la droite graduée.\n\nCalcul : " +
           ("On part de -2. Après une hausse de 5 degrés, on obtient 3. Puis on enlève 3 degrés : on revient à 0. La température finale est donc 0 °C.") +
           "\n\nConclusion : le nombre relatif choisi répond à la question.",
-    tags: ["relatifs", "defi", "reunion", "temperature", "raisonnement"],
+    tags: ["relatif", "defi", "reunion", "temperature", "raisonnement"],
   },
   {
     kind: "fixed",
-    id: "relatif_defis_fixed_6",
+    id: "relatif_defi_fixed_6",
     niveau: "5e",
     matiere: "maths",
-    notionId: "nombres_relatifs",
-    microId: "relatif_defis",
+    notionId: "relatif_nombre",
+    microId: "relatif_defi",
     difficulty: 5,
     theme: "neutral",
     text: "Je suis un nombre. Je suis négatif, mon opposé est plus petit que 10, et ma valeur absolue vaut 9. Qui suis-je ?",
@@ -819,7 +819,7 @@ export const nombresRelatifsBank: TutorBankItemV4[] = [
           "Méthode : on repère le signe, la distance à zéro et la position sur la droite graduée.\n\nCalcul : " +
           ("Avoir une valeur absolue de 9 signifie être à distance 9 de 0 : le nombre est donc -9 ou +9. Comme on sait qu’il est négatif, c’est -9. Son opposé est +9, qui est bien plus petit que 10.") +
           "\n\nConclusion : le nombre relatif choisi répond à la question.",
-    tags: ["relatifs", "defi", "valeur_absolue", "opposes", "raisonnement"],
+    tags: ["relatif", "defi", "valeur_absolue", "oppose", "raisonnement"],
   },
 
   // =========================
@@ -830,12 +830,12 @@ export const nombresRelatifsBank: TutorBankItemV4[] = [
     id: "relatif_lire_tpl_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "nombres_relatifs",
+    notionId: "relatif_nombre",
     microId: "relatif_lire",
     difficulty: 1,
     theme: "neutral",
     hint: "Au-dessus de zéro → positif ; au-dessous de zéro → négatif.",
-    tags: ["relatifs", "lecture", "template"],
+    tags: ["relatif", "lecture", "template"],
     generate: () => {
       const n = [1, 2, 3, 4, 5, 6, 7, 8, 9][
         Math.floor(Math.random() * 9)
@@ -869,12 +869,12 @@ export const nombresRelatifsBank: TutorBankItemV4[] = [
     id: "relatif_signe_tpl_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "nombres_relatifs",
+    notionId: "relatif_nombre",
     microId: "relatif_signe",
     difficulty: 1,
     theme: "neutral",
     hint: "Regarde le signe du nombre.",
-    tags: ["relatifs", "signe", "template"],
+    tags: ["relatif", "signe", "template"],
     generate: () => {
       const n = [1, 2, 3, 4, 5, 6, 7, 8, 9][
         Math.floor(Math.random() * 9)
@@ -907,12 +907,12 @@ export const nombresRelatifsBank: TutorBankItemV4[] = [
     id: "relatif_comparer_tpl_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "nombres_relatifs",
+    notionId: "relatif_nombre",
     microId: "relatif_comparer",
     difficulty: 2,
     theme: "neutral",
     hint: "Sur une droite graduée, le plus grand est le plus à droite.",
-    tags: ["relatifs", "comparaison", "template"],
+    tags: ["relatif", "comparaison", "template"],
     generate: () => {
       let a = Math.floor(Math.random() * 13) - 6;
       let b = Math.floor(Math.random() * 13) - 6;
@@ -942,12 +942,12 @@ export const nombresRelatifsBank: TutorBankItemV4[] = [
     id: "relatif_comparer_tpl_2",
     niveau: "5e",
     matiere: "maths",
-    notionId: "nombres_relatifs",
+    notionId: "relatif_nombre",
     microId: "relatif_comparer",
     difficulty: 2,
     theme: "neutral",
     hint: "Parmi deux nombres négatifs, le plus proche de 0 est le plus grand.",
-    tags: ["relatifs", "comparaison", "inegalite", "template"],
+    tags: ["relatif", "comparaison", "inegalite", "template"],
     generate: () => {
       let a = -(Math.floor(Math.random() * 8) + 1);
       let b = -(Math.floor(Math.random() * 8) + 1);
@@ -980,12 +980,12 @@ export const nombresRelatifsBank: TutorBankItemV4[] = [
     id: "relatif_placer_tpl_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "nombres_relatifs",
+    notionId: "relatif_nombre",
     microId: "relatif_placer",
     difficulty: 3,
     theme: "neutral",
     hint: "Lis l’abscisse du point sur la droite graduée.",
-    tags: ["relatifs", "placement", "canvas", "template"],
+    tags: ["relatif", "placement", "canvas", "template"],
     generate: () => {
       const value = Math.floor(Math.random() * 9) - 4;
       const label = ["A", "B", "C"][Math.floor(Math.random() * 3)];
@@ -1023,12 +1023,12 @@ export const nombresRelatifsBank: TutorBankItemV4[] = [
     id: "relatif_placer_tpl_2",
     niveau: "5e",
     matiere: "maths",
-    notionId: "nombres_relatifs",
+    notionId: "relatif_nombre",
     microId: "relatif_placer",
     difficulty: 3,
     theme: "neutral",
     hint: "Le point le plus à droite correspond au plus grand nombre.",
-    tags: ["relatifs", "placement", "comparaison", "canvas", "template"],
+    tags: ["relatif", "placement", "comparaison", "canvas", "template"],
     generate: () => {
       const values = uniqueNumbers([
         Math.floor(Math.random() * 11) - 5,
@@ -1078,15 +1078,15 @@ export const nombresRelatifsBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "template",
-    id: "relatif_opposes_tpl_1",
+    id: "relatif_oppose_tpl_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "nombres_relatifs",
-    microId: "relatif_opposes",
+    notionId: "relatif_nombre",
+    microId: "relatif_oppose",
     difficulty: 2,
     theme: "neutral",
     hint: "L’opposé a la même distance à 0, mais de l’autre côté.",
-    tags: ["relatifs", "opposes", "template"],
+    tags: ["relatif", "oppose", "template"],
     generate: () => {
       const n = Math.floor(Math.random() * 9) + 1;
       const positive = Math.random() < 0.5;
@@ -1114,12 +1114,12 @@ export const nombresRelatifsBank: TutorBankItemV4[] = [
     id: "relatif_valeur_absolue_tpl_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "nombres_relatifs",
+    notionId: "relatif_nombre",
     microId: "relatif_valeur_absolue",
     difficulty: 3,
     theme: "neutral",
     hint: "La valeur absolue est la distance à 0.",
-    tags: ["relatifs", "valeur_absolue", "template"],
+    tags: ["relatif", "valeur_absolue", "template"],
     generate: () => {
       const n = Math.floor(Math.random() * 9) + 1;
       const sign = Math.random() < 0.5 ? -1 : 1;
@@ -1142,12 +1142,12 @@ export const nombresRelatifsBank: TutorBankItemV4[] = [
     id: "relatif_valeur_absolue_tpl_2",
     niveau: "5e",
     matiere: "maths",
-    notionId: "nombres_relatifs",
+    notionId: "relatif_nombre",
     microId: "relatif_valeur_absolue",
     difficulty: 3,
     theme: "neutral",
     hint: "Deux nombres opposés ont la même valeur absolue.",
-    tags: ["relatifs", "valeur_absolue", "qcm", "template"],
+    tags: ["relatif", "valeur_absolue", "qcm", "template"],
     generate: () => {
       const n = Math.floor(Math.random() * 9) + 1;
       const choices = shuffle([
@@ -1176,15 +1176,15 @@ export const nombresRelatifsBank: TutorBankItemV4[] = [
   // =========================
 {
   kind: "template",
-  id: "relatif_defis_tpl_1",
+  id: "relatif_defi_tpl_1",
   niveau: "5e",
   matiere: "maths",
-  notionId: "nombres_relatifs",
-  microId: "relatif_defis",
+  notionId: "relatif_nombre",
+  microId: "relatif_defi",
   difficulty: 4,
   theme: "neutral",
   hint: "Cherche un nombre situé à une certaine distance de 0 et repère sa position.",
-  tags: ["relatifs", "defi", "raisonnement", "distance", "droite_graduee", "template"],
+  tags: ["relatif", "defi", "raisonnement", "distance", "droite_graduee", "template"],
   generate: () => {
     const distance = Math.floor(Math.random() * 5) + 3; // 3 à 7
     const isPositive = Math.random() < 0.5;
@@ -1213,15 +1213,15 @@ export const nombresRelatifsBank: TutorBankItemV4[] = [
 },
   {
     kind: "template",
-    id: "relatif_defis_tpl_2",
+    id: "relatif_defi_tpl_2",
     niveau: "5e",
     matiere: "maths",
-    notionId: "nombres_relatifs",
-    microId: "relatif_defis",
+    notionId: "relatif_nombre",
+    microId: "relatif_defi",
     difficulty: 5,
     theme: "neutral",
     hint: "La distance entre deux points sur la droite se calcule en comptant les unités.",
-    tags: ["relatifs", "defi", "distance", "template"],
+    tags: ["relatif", "defi", "distance", "template"],
     generate: () => {
       let a = Math.floor(Math.random() * 7) - 5;
       let b = Math.floor(Math.random() * 7) + 1;
@@ -1245,15 +1245,15 @@ export const nombresRelatifsBank: TutorBankItemV4[] = [
   },
   {
   kind: "template",
-  id: "relatif_defis_tpl_3",
+  id: "relatif_defi_tpl_3",
   niveau: "5e",
   matiere: "maths",
-  notionId: "nombres_relatifs",
-  microId: "relatif_defis",
+  notionId: "relatif_nombre",
+  microId: "relatif_defi",
   difficulty: 5,
   theme: "neutral",
   hint: "Compare le nombre et son opposé.",
-  tags: ["relatifs", "defi", "opposes", "comparaison", "piege", "template"],
+  tags: ["relatif", "defi", "oppose", "comparaison", "piege", "template"],
   generate: () => {
     const n = Math.floor(Math.random() * 6) + 2; // 2 à 7
     const number = -n;
@@ -1272,15 +1272,15 @@ export const nombresRelatifsBank: TutorBankItemV4[] = [
 },
 {
   kind: "template",
-  id: "relatif_defis_tpl_4",
+  id: "relatif_defi_tpl_4",
   niveau: "5e",
   matiere: "maths",
-  notionId: "nombres_relatifs",
-  microId: "relatif_defis",
+  notionId: "relatif_nombre",
+  microId: "relatif_defi",
   difficulty: 5,
   theme: "neutral",
   hint: "Quand la somme fait 0, les nombres sont opposés.",
-  tags: ["relatifs", "defi", "addition", "opposes", "raisonnement", "template"],
+  tags: ["relatif", "defi", "addition", "oppose", "raisonnement", "template"],
   generate: () => {
     const n = Math.floor(Math.random() * 7) + 2;
     const number = -n;
@@ -1299,15 +1299,15 @@ export const nombresRelatifsBank: TutorBankItemV4[] = [
 },
 {
   kind: "template",
-  id: "relatif_defis_tpl_5",
+  id: "relatif_defi_tpl_5",
   niveau: "5e",
   matiere: "maths",
-  notionId: "nombres_relatifs",
-  microId: "relatif_defis",
+  notionId: "relatif_nombre",
+  microId: "relatif_defi",
   difficulty: 5,
   theme: "neutral",
   hint: "Utilise la distance à 0 et compare avec les bornes.",
-  tags: ["relatifs", "defi", "distance", "encadrement", "raisonnement", "template"],
+  tags: ["relatif", "defi", "distance", "encadrement", "raisonnement", "template"],
   generate: () => {
     const d = Math.floor(Math.random() * 5) + 3; // 3 à 7
     const isPositive = Math.random() < 0.5;
@@ -1342,7 +1342,7 @@ export const nombresRelatifsBank: TutorBankItemV4[] = [
     id: "relatif_lire_open_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "nombres_relatifs",
+    notionId: "relatif_nombre",
     microId: "relatif_lire",
     difficulty: 2,
     theme: "neutral",
@@ -1355,14 +1355,14 @@ export const nombresRelatifsBank: TutorBankItemV4[] = [
           "Méthode : on repère le signe, la distance à zéro et la position sur la droite graduée.\n\nCalcul : " +
           ("Un nombre situé au-dessous de zéro est négatif. Donc 7 au-dessous de zéro s’écrit -7.") +
           "\n\nConclusion : le nombre relatif choisi répond à la question.",
-    tags: ["relatifs", "open", "lecture"],
+    tags: ["relatif", "open", "lecture"],
   },
   {
     kind: "fixed",
     id: "relatif_signe_open_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "nombres_relatifs",
+    notionId: "relatif_nombre",
     microId: "relatif_signe",
     difficulty: 2,
     theme: "neutral",
@@ -1375,14 +1375,14 @@ export const nombresRelatifsBank: TutorBankItemV4[] = [
           "Méthode : on repère le signe, la distance à zéro et la position sur la droite graduée.\n\nCalcul : " +
           ("0 n’est ni positif ni négatif : il sert de frontière entre les nombres positifs et les nombres négatifs.") +
           "\n\nConclusion : le nombre relatif choisi répond à la question.",
-    tags: ["relatifs", "open", "signe", "zero"],
+    tags: ["relatif", "open", "signe", "zero"],
   },
   {
     kind: "fixed",
     id: "relatif_comparer_open_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "nombres_relatifs",
+    notionId: "relatif_nombre",
     microId: "relatif_comparer",
     difficulty: 3,
     theme: "neutral",
@@ -1395,14 +1395,14 @@ export const nombresRelatifsBank: TutorBankItemV4[] = [
           "Méthode : on repère le signe, la distance à zéro et la position sur la droite graduée.\n\nCalcul : " +
           ("Sur une droite graduée, -4 est à droite de -7. Il est aussi plus proche de 0. Donc -4 > -7.") +
           "\n\nConclusion : le nombre relatif choisi répond à la question.",
-    tags: ["relatifs", "open", "comparaison"],
+    tags: ["relatif", "open", "comparaison"],
   },
   {
     kind: "fixed",
     id: "relatif_placer_open_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "nombres_relatifs",
+    notionId: "relatif_nombre",
     microId: "relatif_placer",
     difficulty: 3,
     theme: "neutral",
@@ -1415,15 +1415,15 @@ export const nombresRelatifsBank: TutorBankItemV4[] = [
           "Méthode : on repère le signe, la distance à zéro et la position sur la droite graduée.\n\nCalcul : " +
           ("Pour placer -3, on part de 0 puis on se déplace de 3 unités vers la gauche.") +
           "\n\nConclusion : le nombre relatif choisi répond à la question.",
-    tags: ["relatifs", "open", "placement"],
+    tags: ["relatif", "open", "placement"],
   },
   {
     kind: "fixed",
-    id: "relatif_opposes_open_1",
+    id: "relatif_oppose_open_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "nombres_relatifs",
-    microId: "relatif_opposes",
+    notionId: "relatif_nombre",
+    microId: "relatif_oppose",
     difficulty: 3,
     theme: "neutral",
     text: "Explique pourquoi -6 et +6 sont opposés.",
@@ -1435,14 +1435,14 @@ export const nombresRelatifsBank: TutorBankItemV4[] = [
           "Méthode : on repère le signe, la distance à zéro et la position sur la droite graduée.\n\nCalcul : " +
           ("-6 et +6 sont opposés car ils sont à la même distance de 0, mais de chaque côté de 0.") +
           "\n\nConclusion : le nombre relatif choisi répond à la question.",
-    tags: ["relatifs", "open", "opposes"],
+    tags: ["relatif", "open", "oppose"],
   },
   {
     kind: "fixed",
     id: "relatif_valeur_absolue_open_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "nombres_relatifs",
+    notionId: "relatif_nombre",
     microId: "relatif_valeur_absolue",
     difficulty: 3,
     theme: "neutral",
@@ -1455,15 +1455,15 @@ export const nombresRelatifsBank: TutorBankItemV4[] = [
           "Méthode : on repère le signe, la distance à zéro et la position sur la droite graduée.\n\nCalcul : " +
           ("La valeur absolue de -5 est sa distance à 0. Cette distance vaut 5.") +
           "\n\nConclusion : le nombre relatif choisi répond à la question.",
-    tags: ["relatifs", "open", "valeur_absolue"],
+    tags: ["relatif", "open", "valeur_absolue"],
   },
   {
     kind: "fixed",
-    id: "relatif_defis_open_1",
+    id: "relatif_defi_open_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "nombres_relatifs",
-    microId: "relatif_defis",
+    notionId: "relatif_nombre",
+    microId: "relatif_defi",
     difficulty: 4,
     theme: "neutral",
     text: "Un élève dit : « -8 est plus grand que -3 parce que 8 est plus grand que 3 ». Explique son erreur.",
@@ -1475,6 +1475,6 @@ export const nombresRelatifsBank: TutorBankItemV4[] = [
           "Méthode : on repère le signe, la distance à zéro et la position sur la droite graduée.\n\nCalcul : " +
           ("L’élève compare seulement 8 et 3, mais il oublie les signes. Sur une droite graduée, -3 est plus proche de 0 et se trouve à droite de -8. Donc -3 > -8.") +
           "\n\nConclusion : le nombre relatif choisi répond à la question.",
-    tags: ["relatifs", "open", "defi", "erreur"],
+    tags: ["relatif", "open", "defi", "erreur"],
   },
 ];

@@ -27,6 +27,8 @@ function thalesCanvas(data: {
   labels?: Record<string, string>;
   variant?: "triangle" | "papillon";
   showFormula?: boolean;
+  showParallelMarks?: boolean;
+  highlightParallel?: boolean;
 }) {
   return {
     kind: "thales" as const,
@@ -47,8 +49,8 @@ function thalesCanvas(data: {
       showPoints: true,
       showLabels: true,
       showSideLabels: true,
-      showParallelMarks: true,
-      highlightParallel: true,
+      showParallelMarks: data.showParallelMarks ?? true,
+      highlightParallel: data.highlightParallel ?? true,
       showFormula: data.showFormula ?? true,
     },
   };
@@ -548,6 +550,8 @@ export const thalesBank: TutorBankItemV4[] = [
             AC: `${AC} cm`,
           },
           showFormula: false,
+          showParallelMarks: false,
+          highlightParallel: false,
         }),
       };
     },
@@ -593,6 +597,8 @@ export const thalesBank: TutorBankItemV4[] = [
             AC: `${AC} cm`,
           },
           showFormula: false,
+          showParallelMarks: false,
+          highlightParallel: false,
         }),
       };
     },
@@ -649,6 +655,8 @@ export const thalesBank: TutorBankItemV4[] = [
             AC: `${AC}`,
           },
           showFormula: false,
+          showParallelMarks: false,
+          highlightParallel: false,
         }),
       };
     },
@@ -941,6 +949,8 @@ export const thalesBank: TutorBankItemV4[] = [
             AC: `${AC} cm`,
           },
           showFormula: false,
+          showParallelMarks: false,
+          highlightParallel: false,
         }),
       };
     },
