@@ -78,7 +78,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     id: "prop_reconnaitre_fixed_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "proportionnalite",
+    notionId: "prop_proportionnalite",
     microId: "prop_reconnaitre",
     difficulty: 1,
     theme: "neutral",
@@ -97,14 +97,14 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
           "Méthode : on vérifie si le même coefficient multiplicateur relie les deux grandeurs.\n\nCalcul : " +
           ("6 ÷ 2 = 3 et 12 ÷ 4 = 3. Le coefficient est le même : c’est proportionnel.") +
           "\n\nConclusion : la valeur trouvée respecte la situation de proportionnalité.",
-    tags: ["proportionnalite", "reconnaitre", "qcm"],
+    tags: ["prop_proportionnalite", "reconnaitre", "qcm"],
   },
   {
     kind: "fixed",
     id: "prop_reconnaitre_fixed_2",
     niveau: "4e",
     matiere: "maths",
-    notionId: "proportionnalite",
+    notionId: "prop_proportionnalite",
     microId: "prop_reconnaitre",
     difficulty: 1,
     theme: "neutral",
@@ -123,19 +123,19 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
           "Méthode : on vérifie si le même coefficient multiplicateur relie les deux grandeurs.\n\nCalcul : " +
           ("Dans une situation proportionnelle, on passe d’une grandeur à l’autre par un même coefficient multiplicatif.") +
           "\n\nConclusion : la valeur trouvée respecte la situation de proportionnalité.",
-    tags: ["proportionnalite", "definition"],
+    tags: ["prop_proportionnalite", "definition"],
   },
   {
     kind: "template",
     id: "prop_reconnaitre_tpl_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "proportionnalite",
+    notionId: "prop_proportionnalite",
     microId: "prop_reconnaitre",
     difficulty: 2,
     theme: "neutral",
     hint: "Compare les deux coefficients.",
-    tags: ["proportionnalite", "reconnaitre", "template"],
+    tags: ["prop_proportionnalite", "reconnaitre", "template"],
     generate: () => {
       const a = randomInt(2, 5);
       const k = randomInt(2, 6);
@@ -164,12 +164,12 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     id: "prop_reconnaitre_tpl_2",
     niveau: "4e",
     matiere: "maths",
-    notionId: "proportionnalite",
+    notionId: "prop_proportionnalite",
     microId: "prop_reconnaitre",
     difficulty: 2,
     theme: "reunion",
     hint: "Vérifie si le prix par kg reste le même.",
-    tags: ["proportionnalite", "reunion", "prix", "template"],
+    tags: ["prop_proportionnalite", "reunion", "prix", "template"],
     generate: () => {
       const kg1 = randomInt(2, 4);
       const pricePerKg = randomInt(3, 8);
@@ -198,7 +198,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     id: "prop_reconnaitre_open_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "proportionnalite",
+    notionId: "prop_proportionnalite",
     microId: "prop_reconnaitre",
     difficulty: 3,
     theme: "neutral",
@@ -211,7 +211,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
           "Méthode : on vérifie si le même coefficient multiplicateur relie les deux grandeurs.\n\nCalcul : " +
           ("12 ÷ 3 = 4 et 20 ÷ 5 = 4. Le prix au kg est constant : la situation est proportionnelle.") +
           "\n\nConclusion : la valeur trouvée respecte la situation de proportionnalité.",
-    tags: ["proportionnalite", "open", "justification"],
+    tags: ["prop_proportionnalite", "open", "justification"],
   },
 
   // =========================
@@ -222,7 +222,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     id: "prop_table_fixed_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "proportionnalite",
+    notionId: "prop_proportionnalite",
     microId: "prop_table",
     difficulty: 1,
     theme: "neutral",
@@ -236,19 +236,19 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
           "Méthode : on vérifie si le même coefficient multiplicateur relie les deux grandeurs.\n\nCalcul : " +
           ("Comme 4 est le double de 2, l’image est aussi doublée : 10 × 2 = 20.") +
           "\n\nConclusion : la valeur trouvée respecte la situation de proportionnalité.",
-    tags: ["proportionnalite", "tableau", "qcm"],
+    tags: ["prop_proportionnalite", "tableau", "qcm"],
   },
   {
     kind: "template",
     id: "prop_table_tpl_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "proportionnalite",
+    notionId: "prop_proportionnalite",
     microId: "prop_table",
     difficulty: 2,
     theme: "neutral",
     hint: "Utilise le coefficient multiplicatif.",
-    tags: ["proportionnalite", "tableau", "template", "canvas"],
+    tags: ["prop_proportionnalite", "tableau", "template", "canvas"],
     generate: () => {
       const x1 = randomInt(2, 6);
       const k = randomInt(2, 8);
@@ -283,12 +283,12 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     id: "prop_table_tpl_2",
     niveau: "4e",
     matiere: "maths",
-    notionId: "proportionnalite",
+    notionId: "prop_proportionnalite",
     microId: "prop_table",
     difficulty: 2,
     theme: "neutral",
     hint: "Cherche le passage d’une colonne à l’autre.",
-    tags: ["proportionnalite", "tableau", "template"],
+    tags: ["prop_proportionnalite", "tableau", "template"],
     generate: () => {
       const x1 = randomInt(2, 8);
       const y1 = x1 * randomInt(2, 6);
@@ -313,12 +313,12 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     id: "prop_table_tpl_3",
     niveau: "4e",
     matiere: "maths",
-    notionId: "proportionnalite",
+    notionId: "prop_proportionnalite",
     microId: "prop_table",
     difficulty: 3,
     theme: "neutral",
     hint: "Passe par l’unité ou calcule le coefficient.",
-    tags: ["proportionnalite", "tableau", "template"],
+    tags: ["prop_proportionnalite", "tableau", "template"],
     generate: () => {
       const k = randomInt(2, 9);
       const x1 = randomInt(3, 8);
@@ -347,7 +347,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     id: "prop_coeff_fixed_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "proportionnalite",
+    notionId: "prop_proportionnalite",
     microId: "prop_coeff",
     difficulty: 1,
     theme: "neutral",
@@ -361,19 +361,19 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
           "Méthode : on vérifie si le même coefficient multiplicateur relie les deux grandeurs.\n\nCalcul : " +
           ("20 ÷ 4 = 5. Le coefficient de proportionnalité est 5.") +
           "\n\nConclusion : la valeur trouvée respecte la situation de proportionnalité.",
-    tags: ["proportionnalite", "coefficient"],
+    tags: ["prop_proportionnalite", "coefficient"],
   },
   {
     kind: "template",
     id: "prop_coeff_tpl_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "proportionnalite",
+    notionId: "prop_proportionnalite",
     microId: "prop_coeff",
     difficulty: 2,
     theme: "neutral",
     hint: "Coefficient = deuxième grandeur ÷ première grandeur.",
-    tags: ["proportionnalite", "coefficient", "template"],
+    tags: ["prop_proportionnalite", "coefficient", "template"],
     generate: () => {
       const x = randomInt(2, 9);
       const k = randomInt(2, 9);
@@ -396,12 +396,12 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     id: "prop_coeff_tpl_2",
     niveau: "4e",
     matiere: "maths",
-    notionId: "proportionnalite",
+    notionId: "prop_proportionnalite",
     microId: "prop_coeff",
     difficulty: 2,
     theme: "reunion",
     hint: "Calcule le prix pour 1 kg.",
-    tags: ["proportionnalite", "coefficient", "reunion", "template"],
+    tags: ["prop_proportionnalite", "coefficient", "reunion", "template"],
     generate: () => {
       const kg = randomInt(2, 6);
       const pricePerKg = randomInt(3, 9);
@@ -424,12 +424,12 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     id: "prop_coeff_tpl_3",
     niveau: "4e",
     matiere: "maths",
-    notionId: "proportionnalite",
+    notionId: "prop_proportionnalite",
     microId: "prop_coeff",
     difficulty: 3,
     theme: "neutral",
     hint: "Le coefficient permet de passer de la première ligne à la deuxième.",
-    tags: ["proportionnalite", "coefficient", "template"],
+    tags: ["prop_proportionnalite", "coefficient", "template"],
     generate: () => {
       const distance = randomInt(3, 12);
       const speed = randomInt(4, 10);
@@ -452,7 +452,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     id: "prop_coeff_open_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "proportionnalite",
+    notionId: "prop_proportionnalite",
     microId: "prop_coeff",
     difficulty: 3,
     theme: "neutral",
@@ -465,7 +465,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
           "Méthode : on vérifie si le même coefficient multiplicateur relie les deux grandeurs.\n\nCalcul : " +
           ("On calcule 42 ÷ 6 = 7. Le coefficient est donc 7.") +
           "\n\nConclusion : la valeur trouvée respecte la situation de proportionnalité.",
-    tags: ["proportionnalite", "coefficient", "open"],
+    tags: ["prop_proportionnalite", "coefficient", "open"],
   },
 
   // =========================
@@ -476,7 +476,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     id: "prop_quatrieme_fixed_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "proportionnalite",
+    notionId: "prop_proportionnalite",
     microId: "prop_quatrieme",
     difficulty: 2,
     theme: "neutral",
@@ -490,19 +490,19 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
           "Méthode : on vérifie si le même coefficient multiplicateur relie les deux grandeurs.\n\nCalcul : " +
           ("3 kg coûtent 12 €, donc 1 kg coûte 4 €. Alors 5 kg coûtent 5 × 4 = 20 €.") +
           "\n\nConclusion : la valeur trouvée respecte la situation de proportionnalité.",
-    tags: ["proportionnalite", "quatrieme_proportionnelle"],
+    tags: ["prop_proportionnalite", "quatrieme_proportionnelle"],
   },
   {
     kind: "template",
     id: "prop_quatrieme_tpl_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "proportionnalite",
+    notionId: "prop_proportionnalite",
     microId: "prop_quatrieme",
     difficulty: 2,
     theme: "neutral",
     hint: "Passe par le prix d’une unité.",
-    tags: ["proportionnalite", "quatrieme_proportionnelle", "template"],
+    tags: ["prop_proportionnalite", "quatrieme_proportionnelle", "template"],
     generate: () => {
       const unit = randomInt(2, 8);
       const q1 = randomInt(2, 6);
@@ -527,12 +527,12 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     id: "prop_quatrieme_tpl_2",
     niveau: "4e",
     matiere: "maths",
-    notionId: "proportionnalite",
+    notionId: "prop_proportionnalite",
     microId: "prop_quatrieme",
     difficulty: 3,
     theme: "neutral",
     hint: "Utilise le coefficient de proportionnalité.",
-    tags: ["proportionnalite", "quatrieme_proportionnelle", "template"],
+    tags: ["prop_proportionnalite", "quatrieme_proportionnelle", "template"],
     generate: () => {
       const a = randomChoice([2, 3, 4, 5]);
       const b = randomInt(5, 12);
@@ -556,12 +556,12 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     id: "prop_quatrieme_tpl_3",
     niveau: "4e",
     matiere: "maths",
-    notionId: "proportionnalite",
+    notionId: "prop_proportionnalite",
     microId: "prop_quatrieme",
     difficulty: 3,
     theme: "reunion",
     hint: "Même prix au kg.",
-    tags: ["proportionnalite", "reunion", "quatrieme_proportionnelle", "template", "canvas"],
+    tags: ["prop_proportionnalite", "reunion", "quatrieme_proportionnelle", "template", "canvas"],
     generate: () => {
       const kg1 = randomInt(2, 5);
       const pricePerKg = randomInt(4, 9);
@@ -600,7 +600,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     id: "prop_pourcentage_fixed_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "proportionnalite",
+    notionId: "prop_proportionnalite",
     microId: "prop_pourcentage",
     difficulty: 1,
     theme: "neutral",
@@ -614,14 +614,14 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
           "Méthode : on vérifie si le même coefficient multiplicateur relie les deux grandeurs.\n\nCalcul : " +
           ("25 % = 25/100 = 1/4.") +
           "\n\nConclusion : la valeur trouvée respecte la situation de proportionnalité.",
-    tags: ["proportionnalite", "pourcentage"],
+    tags: ["prop_proportionnalite", "pourcentage"],
   },
   {
     kind: "fixed",
     id: "prop_pourcentage_fixed_2",
     niveau: "4e",
     matiere: "maths",
-    notionId: "proportionnalite",
+    notionId: "prop_proportionnalite",
     microId: "prop_pourcentage",
     difficulty: 2,
     theme: "neutral",
@@ -635,19 +635,19 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
           "Méthode : on vérifie si le même coefficient multiplicateur relie les deux grandeurs.\n\nCalcul : " +
           ("10 % de 80 = 80 ÷ 10 = 8.") +
           "\n\nConclusion : la valeur trouvée respecte la situation de proportionnalité.",
-    tags: ["proportionnalite", "pourcentage", "qcm"],
+    tags: ["prop_proportionnalite", "pourcentage", "qcm"],
   },
   {
     kind: "template",
     id: "prop_pourcentage_tpl_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "proportionnalite",
+    notionId: "prop_proportionnalite",
     microId: "prop_pourcentage",
     difficulty: 2,
     theme: "neutral",
     hint: "p % de N = N × p / 100.",
-    tags: ["proportionnalite", "pourcentage", "template"],
+    tags: ["prop_proportionnalite", "pourcentage", "template"],
     generate: () => {
       const p = randomChoice([10, 20, 25, 50, 75]);
       const n = randomChoice([40, 60, 80, 100, 120, 200]);
@@ -670,12 +670,12 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     id: "prop_pourcentage_tpl_2",
     niveau: "4e",
     matiere: "maths",
-    notionId: "proportionnalite",
+    notionId: "prop_proportionnalite",
     microId: "prop_pourcentage",
     difficulty: 3,
     theme: "neutral",
     hint: "Pourcentage = partie ÷ total × 100.",
-    tags: ["proportionnalite", "pourcentage", "template"],
+    tags: ["prop_proportionnalite", "pourcentage", "template"],
     generate: () => {
       const total = randomChoice([50, 80, 100, 120, 200]);
       const p = randomChoice([10, 20, 25, 40, 50]);
@@ -698,12 +698,12 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     id: "prop_pourcentage_tpl_3",
     niveau: "4e",
     matiere: "maths",
-    notionId: "proportionnalite",
+    notionId: "prop_proportionnalite",
     microId: "prop_pourcentage",
     difficulty: 3,
     theme: "reunion",
     hint: "Calcule la partie correspondant au pourcentage.",
-    tags: ["proportionnalite", "pourcentage", "reunion", "template"],
+    tags: ["prop_proportionnalite", "pourcentage", "reunion", "template"],
     generate: () => {
       const total = randomChoice([100, 200, 300, 400]);
       const p = randomChoice([15, 20, 25, 30]);
@@ -726,12 +726,12 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     id: "prop_pourcentage_tpl_4",
     niveau: "4e",
     matiere: "maths",
-    notionId: "proportionnalite",
+    notionId: "prop_proportionnalite",
     microId: "prop_pourcentage",
     difficulty: 3,
     theme: "neutral",
     hint: "Transforme le pourcentage en fraction sur 100.",
-    tags: ["proportionnalite", "pourcentage", "qcm", "template"],
+    tags: ["prop_proportionnalite", "pourcentage", "qcm", "template"],
     generate: () => {
       const p = randomChoice([5, 10, 20, 25, 50, 75]);
       const correct = `${p}/100`;
@@ -755,11 +755,11 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "fixed",
-    id: "prop_coeff_mult_fixed_1",
+    id: "prop_coeff_multiplicateur_fixed_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "proportionnalite",
-    microId: "prop_coeff_mult",
+    notionId: "prop_proportionnalite",
+    microId: "prop_coeff_multiplicateur",
     difficulty: 2,
     theme: "neutral",
     text: "Une augmentation de 20 % correspond à multiplier par...",
@@ -772,15 +772,15 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
           "Méthode : on vérifie si le même coefficient multiplicateur relie les deux grandeurs.\n\nCalcul : " +
           ("Augmenter de 20 %, c’est passer à 120 %, donc multiplier par 1,2.") +
           "\n\nConclusion : la valeur trouvée respecte la situation de proportionnalité.",
-    tags: ["proportionnalite", "coefficient_multiplicateur"],
+    tags: ["prop_proportionnalite", "coefficient_multiplicateur"],
   },
   {
     kind: "fixed",
-    id: "prop_coeff_mult_fixed_2",
+    id: "prop_coeff_multiplicateur_fixed_2",
     niveau: "4e",
     matiere: "maths",
-    notionId: "proportionnalite",
-    microId: "prop_coeff_mult",
+    notionId: "prop_proportionnalite",
+    microId: "prop_coeff_multiplicateur",
     difficulty: 2,
     theme: "neutral",
     text: "Une réduction de 30 % correspond à multiplier par...",
@@ -793,19 +793,19 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
           "Méthode : on vérifie si le même coefficient multiplicateur relie les deux grandeurs.\n\nCalcul : " +
           ("Réduire de 30 %, c’est garder 70 %, donc multiplier par 0,7.") +
           "\n\nConclusion : la valeur trouvée respecte la situation de proportionnalité.",
-    tags: ["proportionnalite", "coefficient_multiplicateur", "reduction"],
+    tags: ["prop_proportionnalite", "coefficient_multiplicateur", "reduction"],
   },
   {
     kind: "template",
-    id: "prop_coeff_mult_tpl_1",
+    id: "prop_coeff_multiplicateur_tpl_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "proportionnalite",
-    microId: "prop_coeff_mult",
+    notionId: "prop_proportionnalite",
+    microId: "prop_coeff_multiplicateur",
     difficulty: 3,
     theme: "neutral",
     hint: "Augmenter de p %, c’est multiplier par 1 + p/100.",
-    tags: ["proportionnalite", "coefficient_multiplicateur", "augmentation", "template"],
+    tags: ["prop_proportionnalite", "coefficient_multiplicateur", "augmentation", "template"],
     generate: () => {
       const p = randomChoice([5, 10, 15, 20, 25, 30, 40, 50]);
       const coeff = 1 + p / 100;
@@ -824,15 +824,15 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "prop_coeff_mult_tpl_2",
+    id: "prop_coeff_multiplicateur_tpl_2",
     niveau: "4e",
     matiere: "maths",
-    notionId: "proportionnalite",
-    microId: "prop_coeff_mult",
+    notionId: "prop_proportionnalite",
+    microId: "prop_coeff_multiplicateur",
     difficulty: 3,
     theme: "neutral",
     hint: "Diminuer de p %, c’est multiplier par 1 - p/100.",
-    tags: ["proportionnalite", "coefficient_multiplicateur", "reduction", "template"],
+    tags: ["prop_proportionnalite", "coefficient_multiplicateur", "reduction", "template"],
     generate: () => {
       const p = randomChoice([5, 10, 20, 25, 30, 40, 50]);
       const coeff = 1 - p / 100;
@@ -851,15 +851,15 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "prop_coeff_mult_tpl_3",
+    id: "prop_coeff_multiplicateur_tpl_3",
     niveau: "4e",
     matiere: "maths",
-    notionId: "proportionnalite",
-    microId: "prop_coeff_mult",
+    notionId: "prop_proportionnalite",
+    microId: "prop_coeff_multiplicateur",
     difficulty: 4,
     theme: "neutral",
     hint: "Lis le coefficient : 1,15 signifie 115 %.",
-    tags: ["proportionnalite", "coefficient_multiplicateur", "template"],
+    tags: ["prop_proportionnalite", "coefficient_multiplicateur", "template"],
     generate: () => {
       const p = randomChoice([5, 10, 15, 20, 25, 30]);
       const coeff = 1 + p / 100;
@@ -885,7 +885,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     id: "prop_evolution_fixed_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "proportionnalite",
+    notionId: "prop_proportionnalite",
     microId: "prop_evolution",
     difficulty: 2,
     theme: "neutral",
@@ -899,14 +899,14 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
           "Méthode : on vérifie si le même coefficient multiplicateur relie les deux grandeurs.\n\nCalcul : " +
           ("15 % de 100 € vaut 15 €. Le nouveau prix est 100 + 15 = 115 €.") +
           "\n\nConclusion : la valeur trouvée respecte la situation de proportionnalité.",
-    tags: ["proportionnalite", "evolution", "augmentation"],
+    tags: ["prop_proportionnalite", "evolution", "augmentation"],
   },
   {
     kind: "fixed",
     id: "prop_evolution_fixed_2",
     niveau: "4e",
     matiere: "maths",
-    notionId: "proportionnalite",
+    notionId: "prop_proportionnalite",
     microId: "prop_evolution",
     difficulty: 2,
     theme: "neutral",
@@ -920,19 +920,19 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
           "Méthode : on vérifie si le même coefficient multiplicateur relie les deux grandeurs.\n\nCalcul : " +
           ("25 % de 80 € vaut 20 €. Le nouveau prix est 80 - 20 = 60 €.") +
           "\n\nConclusion : la valeur trouvée respecte la situation de proportionnalité.",
-    tags: ["proportionnalite", "evolution", "reduction"],
+    tags: ["prop_proportionnalite", "evolution", "reduction"],
   },
   {
     kind: "template",
     id: "prop_evolution_tpl_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "proportionnalite",
+    notionId: "prop_proportionnalite",
     microId: "prop_evolution",
     difficulty: 3,
     theme: "neutral",
     hint: "Utilise le coefficient multiplicateur.",
-    tags: ["proportionnalite", "evolution", "augmentation", "template"],
+    tags: ["prop_proportionnalite", "evolution", "augmentation", "template"],
     generate: () => {
       const initial = randomChoice([50, 80, 100, 120, 200]);
       const p = randomChoice([10, 20, 25, 30, 50]);
@@ -955,12 +955,12 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     id: "prop_evolution_tpl_2",
     niveau: "4e",
     matiere: "maths",
-    notionId: "proportionnalite",
+    notionId: "prop_proportionnalite",
     microId: "prop_evolution",
     difficulty: 3,
     theme: "neutral",
     hint: "Après une baisse, on multiplie par 1 - p/100.",
-    tags: ["proportionnalite", "evolution", "reduction", "template"],
+    tags: ["prop_proportionnalite", "evolution", "reduction", "template"],
     generate: () => {
       const initial = randomChoice([60, 80, 100, 120, 200]);
       const p = randomChoice([10, 20, 25, 30, 50]);
@@ -983,12 +983,12 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     id: "prop_evolution_tpl_3",
     niveau: "4e",
     matiere: "maths",
-    notionId: "proportionnalite",
+    notionId: "prop_proportionnalite",
     microId: "prop_evolution",
     difficulty: 4,
     theme: "reunion",
     hint: "Calcule d’abord la hausse.",
-    tags: ["proportionnalite", "evolution", "reunion", "template"],
+    tags: ["prop_proportionnalite", "evolution", "reunion", "template"],
     generate: () => {
       const initial = randomChoice([100, 150, 200, 250]);
       const p = randomChoice([10, 20, 30]);
@@ -1011,12 +1011,12 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     id: "prop_evolution_tpl_4",
     niveau: "4e",
     matiere: "maths",
-    notionId: "proportionnalite",
+    notionId: "prop_proportionnalite",
     microId: "prop_evolution",
     difficulty: 4,
     theme: "neutral",
     hint: "Compare le nouveau prix à l’ancien.",
-    tags: ["proportionnalite", "evolution", "template"],
+    tags: ["prop_proportionnalite", "evolution", "template"],
     generate: () => {
       const oldPrice = randomChoice([50, 80, 100, 120, 200]);
       const p = randomChoice([10, 20, 25, 50]);
@@ -1039,7 +1039,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     id: "prop_evolution_open_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "proportionnalite",
+    notionId: "prop_proportionnalite",
     microId: "prop_evolution",
     difficulty: 4,
     theme: "neutral",
@@ -1052,7 +1052,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
           "Méthode : on vérifie si le même coefficient multiplicateur relie les deux grandeurs.\n\nCalcul : " +
           ("Une baisse de 20 % signifie qu’il reste 80 % de la valeur initiale. Or 80 % = 80/100 = 0,8.") +
           "\n\nConclusion : la valeur trouvée respecte la situation de proportionnalité.",
-    tags: ["proportionnalite", "evolution", "open"],
+    tags: ["prop_proportionnalite", "evolution", "open"],
   },
 
   // =========================
@@ -1063,12 +1063,12 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     id: "prop_probleme_tpl_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "proportionnalite",
+    notionId: "prop_proportionnalite",
     microId: "prop_probleme",
     difficulty: 3,
     theme: "reunion",
     hint: "Cherche le prix pour 1 kg.",
-    tags: ["proportionnalite", "probleme", "reunion", "template"],
+    tags: ["prop_proportionnalite", "probleme", "reunion", "template"],
     generate: () => {
       const kg1 = randomInt(2, 5);
       const unit = randomInt(3, 8);
@@ -1093,12 +1093,12 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     id: "prop_probleme_tpl_2",
     niveau: "4e",
     matiere: "maths",
-    notionId: "proportionnalite",
+    notionId: "prop_proportionnalite",
     microId: "prop_probleme",
     difficulty: 4,
     theme: "sport",
     hint: "Si la vitesse est constante, distance et durée sont proportionnelles.",
-    tags: ["proportionnalite", "probleme", "sport", "template"],
+    tags: ["prop_proportionnalite", "probleme", "sport", "template"],
     generate: () => {
       const speed = randomInt(6, 12);
       const time = randomInt(2, 5);
@@ -1121,12 +1121,12 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     id: "prop_probleme_tpl_3",
     niveau: "4e",
     matiere: "maths",
-    notionId: "proportionnalite",
+    notionId: "prop_proportionnalite",
     microId: "prop_probleme",
     difficulty: 4,
     theme: "cuisine",
     hint: "Les quantités d’une recette sont proportionnelles au nombre de personnes.",
-    tags: ["proportionnalite", "probleme", "cuisine", "template"],
+    tags: ["prop_proportionnalite", "probleme", "cuisine", "template"],
     generate: () => {
       const people1 = randomChoice([2, 3, 4]);
       const gramsPerPerson = randomChoice([50, 75, 100, 125]);
@@ -1151,12 +1151,12 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     id: "prop_probleme_tpl_4",
     niveau: "4e",
     matiere: "maths",
-    notionId: "proportionnalite",
+    notionId: "prop_proportionnalite",
     microId: "prop_probleme",
     difficulty: 4,
     theme: "reunion",
     hint: "Utilise le pourcentage.",
-    tags: ["proportionnalite", "probleme", "pourcentage", "reunion", "template"],
+    tags: ["prop_proportionnalite", "probleme", "pourcentage", "reunion", "template"],
     generate: () => {
       const total = randomChoice([100, 200, 300, 500]);
       const p = randomChoice([10, 20, 25, 30, 40]);
@@ -1179,7 +1179,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     id: "prop_probleme_open_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "proportionnalite",
+    notionId: "prop_proportionnalite",
     microId: "prop_probleme",
     difficulty: 4,
     theme: "neutral",
@@ -1192,14 +1192,14 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
           "Méthode : on vérifie si le même coefficient multiplicateur relie les deux grandeurs.\n\nCalcul : " +
           ("Un cahier coûte 12 ÷ 4 = 3 €. Donc 7 cahiers coûtent 7 × 3 = 21 €.") +
           "\n\nConclusion : la valeur trouvée respecte la situation de proportionnalité.",
-    tags: ["proportionnalite", "probleme", "open"],
+    tags: ["prop_proportionnalite", "probleme", "open"],
   },
   {
     kind: "fixed",
     id: "prop_probleme_open_2",
     niveau: "4e",
     matiere: "maths",
-    notionId: "proportionnalite",
+    notionId: "prop_proportionnalite",
     microId: "prop_probleme",
     difficulty: 5,
     theme: "neutral",
@@ -1212,7 +1212,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
           "Méthode : on vérifie si le même coefficient multiplicateur relie les deux grandeurs.\n\nCalcul : " +
           ("Une situation proportionnelle utilise un coefficient multiplicatif constant. Ajouter toujours le même nombre décrit une relation additive, pas proportionnelle.") +
           "\n\nConclusion : la valeur trouvée respecte la situation de proportionnalité.",
-    tags: ["proportionnalite", "probleme", "open", "piege"],
+    tags: ["prop_proportionnalite", "probleme", "open", "piege"],
   },
 
   // =========================
@@ -1220,11 +1220,11 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "fixed",
-    id: "prop_defis_fixed_1",
+    id: "prop_defi_fixed_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "proportionnalite",
-    microId: "prop_defis",
+    notionId: "prop_proportionnalite",
+    microId: "prop_defi",
     difficulty: 4,
     theme: "neutral",
     text: "Un élève dit : « Si 2 → 6, alors 5 → 9 car j’ajoute 3. » A-t-il raison ?",
@@ -1237,15 +1237,15 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
           "Méthode : on vérifie si le même coefficient multiplicateur relie les deux grandeurs.\n\nCalcul : " +
           ("Non. Si 2 → 6, le coefficient est 3. Donc 5 → 15, pas 9.") +
           "\n\nConclusion : la valeur trouvée respecte la situation de proportionnalité.",
-    tags: ["proportionnalite", "defi", "erreur"],
+    tags: ["prop_proportionnalite", "defi", "erreur"],
   },
   {
     kind: "fixed",
-    id: "prop_defis_fixed_2",
+    id: "prop_defi_fixed_2",
     niveau: "4e",
     matiere: "maths",
-    notionId: "proportionnalite",
-    microId: "prop_defis",
+    notionId: "prop_proportionnalite",
+    microId: "prop_defi",
     difficulty: 5,
     theme: "neutral",
     text: "Un prix augmente de 20 %, puis baisse de 20 %. Revient-il au prix initial ?",
@@ -1258,19 +1258,19 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
           "Méthode : on vérifie si le même coefficient multiplicateur relie les deux grandeurs.\n\nCalcul : " +
           ("Non. Par exemple, 100 € augmente de 20 % : 120 €. Puis 120 € baisse de 20 % : 96 €.") +
           "\n\nConclusion : la valeur trouvée respecte la situation de proportionnalité.",
-    tags: ["proportionnalite", "defi", "evolution", "piege"],
+    tags: ["prop_proportionnalite", "defi", "evolution", "piege"],
   },
   {
     kind: "template",
-    id: "prop_defis_tpl_1",
+    id: "prop_defi_tpl_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "proportionnalite",
-    microId: "prop_defis",
+    notionId: "prop_proportionnalite",
+    microId: "prop_defi",
     difficulty: 5,
     theme: "neutral",
     hint: "Teste les coefficients.",
-    tags: ["proportionnalite", "defi", "template"],
+    tags: ["prop_proportionnalite", "defi", "template"],
     generate: () => {
       const x1 = randomInt(2, 5);
       const k = randomInt(2, 6);
@@ -1293,15 +1293,15 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "prop_defis_tpl_2",
+    id: "prop_defi_tpl_2",
     niveau: "4e",
     matiere: "maths",
-    notionId: "proportionnalite",
-    microId: "prop_defis",
+    notionId: "prop_proportionnalite",
+    microId: "prop_defi",
     difficulty: 5,
     theme: "neutral",
     hint: "Une évolution successive se traite avec des coefficients multiplicateurs.",
-    tags: ["proportionnalite", "defi", "evolution", "template"],
+    tags: ["prop_proportionnalite", "defi", "evolution", "template"],
     generate: () => {
       const initial = randomChoice([100, 200, 300]);
       const up = randomChoice([10, 20, 25]);
@@ -1322,15 +1322,15 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "prop_defis_tpl_3",
+    id: "prop_defi_tpl_3",
     niveau: "4e",
     matiere: "maths",
-    notionId: "proportionnalite",
-    microId: "prop_defis",
+    notionId: "prop_proportionnalite",
+    microId: "prop_defi",
     difficulty: 5,
     theme: "reunion",
     hint: "Compare les prix au kg.",
-    tags: ["proportionnalite", "defi", "reunion", "comparaison", "template"],
+    tags: ["prop_proportionnalite", "defi", "reunion", "comparaison", "template"],
     generate: () => {
       const kgA = randomInt(2, 5);
       const unitA = randomInt(4, 8);
@@ -1356,11 +1356,11 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
   },
   {
     kind: "fixed",
-    id: "prop_defis_open_1",
+    id: "prop_defi_open_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "proportionnalite",
-    microId: "prop_defis",
+    notionId: "prop_proportionnalite",
+    microId: "prop_defi",
     difficulty: 5,
     theme: "neutral",
     text: "Explique l’erreur : « augmenter de 30 %, c’est multiplier par 0,3 ».",
@@ -1372,15 +1372,15 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
           "Méthode : on vérifie si le même coefficient multiplicateur relie les deux grandeurs.\n\nCalcul : " +
           ("Augmenter de 30 %, c’est passer à 130 % de la valeur initiale, donc multiplier par 1,3.") +
           "\n\nConclusion : la valeur trouvée respecte la situation de proportionnalité.",
-    tags: ["proportionnalite", "defi", "open", "erreur"],
+    tags: ["prop_proportionnalite", "defi", "open", "erreur"],
   },
   {
     kind: "fixed",
-    id: "prop_defis_open_2",
+    id: "prop_defi_open_2",
     niveau: "4e",
     matiere: "maths",
-    notionId: "proportionnalite",
-    microId: "prop_defis",
+    notionId: "prop_proportionnalite",
+    microId: "prop_defi",
     difficulty: 5,
     theme: "neutral",
     text: "Explique pourquoi une réduction de 25 % ne correspond pas à multiplier par 25.",
@@ -1392,6 +1392,6 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
           "Méthode : on vérifie si le même coefficient multiplicateur relie les deux grandeurs.\n\nCalcul : " +
           ("Une réduction de 25 % signifie qu’il reste 75 % de la valeur initiale. On multiplie donc par 0,75, pas par 25.") +
           "\n\nConclusion : la valeur trouvée respecte la situation de proportionnalité.",
-    tags: ["proportionnalite", "defi", "open", "erreur"],
+    tags: ["prop_proportionnalite", "defi", "open", "erreur"],
   },
 ];

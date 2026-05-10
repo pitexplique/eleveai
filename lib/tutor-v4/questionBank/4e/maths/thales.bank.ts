@@ -36,10 +36,10 @@ export const thalesBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "thales_configuration_fixed_1",
+    id: "thales_theoreme_configuration_fixed_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "thales",
+    notionId: "thales_theoreme",
     microId: "thales_configuration",
     difficulty: 1,
     theme: "neutral",
@@ -59,15 +59,15 @@ export const thalesBank: TutorBankItemV4[] = [
           "Méthode : on repère les triangles en situation de Thalès et on associe les côtés correspondants.\n\nCalcul : " +
           ("En 4e, la configuration classique de Thalès se fait dans un triangle avec une droite parallèle à un côté.") +
           "\n\nConclusion : la longueur ou la relation obtenue respecte la configuration de Thalès.",
-    tags: ["thales", "configuration", "qcm"],
+    tags: ["thales_theoreme_theoreme", "configuration", "qcm"],
   },
 
   {
     kind: "fixed",
-    id: "thales_configuration_fixed_2",
+    id: "thales_theoreme_configuration_fixed_2",
     niveau: "4e",
     matiere: "maths",
-    notionId: "thales",
+    notionId: "thales_theoreme",
     microId: "thales_configuration",
     difficulty: 1,
     theme: "neutral",
@@ -91,20 +91,20 @@ export const thalesBank: TutorBankItemV4[] = [
         highlightParallel: true,
       },
     }),
-    tags: ["thales", "configuration", "canvas"],
+    tags: ["thales_theoreme_theoreme", "configuration", "canvas"],
   },
 
   {
     kind: "template",
-    id: "thales_configuration_tpl_1",
+    id: "thales_theoreme_configuration_tpl_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "thales",
+    notionId: "thales_theoreme",
     microId: "thales_configuration",
     difficulty: 2,
     theme: "neutral",
     hint: "Thalès nécessite une droite parallèle à un côté du triangle.",
-    tags: ["thales", "configuration", "template", "canvas"],
+    tags: ["thales_theoreme_theoreme", "configuration", "template", "canvas"],
     generate: () => {
       const parallel = randomChoice([true, false]);
 
@@ -141,11 +141,11 @@ export const thalesBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "thales_rapports_fixed_1",
+    id: "thales_theoreme_rapport_fixed_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "thales",
-    microId: "thales_rapports",
+    notionId: "thales_theoreme",
+    microId: "thales_rapport",
     difficulty: 2,
     theme: "neutral",
     text: "Dans le triangle ABC, avec M sur [AB], N sur [AC] et (MN) parallèle à (BC), quelle égalité de rapports est correcte ?",
@@ -172,20 +172,20 @@ export const thalesBank: TutorBankItemV4[] = [
         showParallelMarks: true,
       },
     }),
-    tags: ["thales", "rapports", "qcm", "canvas"],
+    tags: ["thales_theoreme_theoreme", "rapport", "qcm", "canvas"],
   },
 
   {
     kind: "template",
-    id: "thales_rapports_tpl_1",
+    id: "thales_theoreme_rapport_tpl_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "thales",
-    microId: "thales_rapports",
+    notionId: "thales_theoreme",
+    microId: "thales_rapport",
     difficulty: 2,
     theme: "neutral",
     hint: "Associe les petites longueurs avec les grandes longueurs correspondantes.",
-    tags: ["thales", "rapports", "template"],
+    tags: ["thales_theoreme_theoreme", "rapport", "template"],
     generate: () => {
       return {
         text: "Dans une configuration de Thalès, complète : AM / AB = ...",
@@ -216,15 +216,15 @@ export const thalesBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "thales_rapports_tpl_2",
+    id: "thales_theoreme_rapport_tpl_2",
     niveau: "4e",
     matiere: "maths",
-    notionId: "thales",
-    microId: "thales_rapports",
+    notionId: "thales_theoreme",
+    microId: "thales_rapport",
     difficulty: 3,
     theme: "neutral",
     hint: "Les rapports doivent comparer petit côté / grand côté sur les deux côtés du triangle.",
-    tags: ["thales", "rapports", "piege", "template"],
+    tags: ["thales_theoreme_theoreme", "rapport", "piege", "template"],
     generate: () => {
       const am = randomInt(2, 6);
       const ab = am * 2;
@@ -269,10 +269,10 @@ export const thalesBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "thales_calculer_longueur_fixed_1",
+    id: "thales_theoreme_calculer_longueur_fixed_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "thales",
+    notionId: "thales_theoreme",
     microId: "thales_calculer_longueur",
     difficulty: 2,
     theme: "neutral",
@@ -301,20 +301,20 @@ export const thalesBank: TutorBankItemV4[] = [
         showParallelMarks: true,
       },
     }),
-    tags: ["thales", "calculer_longueur", "qcm", "canvas"],
+    tags: ["thales_theoreme_theoreme", "calculer_longueur", "qcm", "canvas"],
   },
 
   {
     kind: "template",
-    id: "thales_calculer_longueur_tpl_1",
+    id: "thales_theoreme_calculer_longueur_tpl_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "thales",
+    notionId: "thales_theoreme",
     microId: "thales_calculer_longueur",
     difficulty: 3,
     theme: "neutral",
     hint: "Utilise AM / AB = AN / AC.",
-    tags: ["thales", "calculer_longueur", "template", "canvas"],
+    tags: ["thales_theoreme_theoreme", "calculer_longueur", "template", "canvas"],
     generate: () => {
       const k = randomChoice([2, 3, 4]);
       const am = randomInt(2, 6);
@@ -351,15 +351,15 @@ export const thalesBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "thales_calculer_longueur_tpl_2",
+    id: "thales_theoreme_calculer_longueur_tpl_2",
     niveau: "4e",
     matiere: "maths",
-    notionId: "thales",
+    notionId: "thales_theoreme",
     microId: "thales_calculer_longueur",
     difficulty: 3,
     theme: "neutral",
     hint: "Cette fois, on cherche la petite longueur AM.",
-    tags: ["thales", "calculer_longueur", "template"],
+    tags: ["thales_theoreme_theoreme", "calculer_longueur", "template"],
     generate: () => {
       const k = randomChoice([2, 3, 4]);
       const am = randomInt(2, 6);
@@ -396,15 +396,15 @@ export const thalesBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "thales_calculer_longueur_tpl_3",
+    id: "thales_theoreme_calculer_longueur_tpl_3",
     niveau: "4e",
     matiere: "maths",
-    notionId: "thales",
+    notionId: "thales_theoreme",
     microId: "thales_calculer_longueur",
     difficulty: 4,
     theme: "neutral",
     hint: "Écris l’égalité de rapports, puis fais une quatrième proportionnelle.",
-    tags: ["thales", "calculer_longueur", "quatrieme_proportionnelle"],
+    tags: ["thales_theoreme_theoreme", "calculer_longueur", "quatrieme_proportionnelle"],
     generate: () => {
       const am = randomChoice([3, 4, 5, 6]);
       const ab = randomChoice([9, 12, 15, 18]);
@@ -472,10 +472,10 @@ export const thalesBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "thales_reciproque_verifier_fixed_1",
+    id: "thales_theoreme_reciproque_verifier_fixed_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "thales",
+    notionId: "thales_theoreme",
     microId: "thales_reciproque_verifier",
     difficulty: 3,
     theme: "neutral",
@@ -503,20 +503,20 @@ export const thalesBank: TutorBankItemV4[] = [
         showParallelMarks: false,
       },
     }),
-    tags: ["thales", "reciproque", "verifier"],
+    tags: ["thales_theoreme_theoreme", "reciproque", "verifier"],
   },
 
   {
     kind: "template",
-    id: "thales_reciproque_verifier_tpl_1",
+    id: "thales_theoreme_reciproque_verifier_tpl_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "thales",
+    notionId: "thales_theoreme",
     microId: "thales_reciproque_verifier",
     difficulty: 3,
     theme: "neutral",
     hint: "Compare les deux rapports petit/grand.",
-    tags: ["thales", "reciproque", "verifier", "template"],
+    tags: ["thales_theoreme_theoreme", "reciproque", "verifier", "template"],
     generate: () => {
       const equal = randomChoice([true, false]);
       const k = randomChoice([2, 3, 4]);
@@ -561,10 +561,10 @@ export const thalesBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "thales_reciproque_conclure_fixed_1",
+    id: "thales_theoreme_reciproque_conclure_fixed_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "thales",
+    notionId: "thales_theoreme",
     microId: "thales_reciproque_conclure",
     difficulty: 3,
     theme: "neutral",
@@ -584,20 +584,20 @@ export const thalesBank: TutorBankItemV4[] = [
           "Méthode : on repère les triangles en situation de Thalès et on associe les côtés correspondants.\n\nCalcul : " +
           ("D’après la réciproque du théorème de Thalès, si les rapports sont égaux, alors les droites sont parallèles.") +
           "\n\nConclusion : la longueur ou la relation obtenue respecte la configuration de Thalès.",
-    tags: ["thales", "reciproque", "conclure"],
+    tags: ["thales_theoreme_theoreme", "reciproque", "conclure"],
   },
 
   {
     kind: "template",
-    id: "thales_reciproque_conclure_tpl_1",
+    id: "thales_theoreme_reciproque_conclure_tpl_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "thales",
+    notionId: "thales_theoreme",
     microId: "thales_reciproque_conclure",
     difficulty: 4,
     theme: "neutral",
     hint: "Vérifie d’abord l’égalité des rapports.",
-    tags: ["thales", "reciproque", "conclure", "template"],
+    tags: ["thales_theoreme_theoreme", "reciproque", "conclure", "template"],
     generate: () => {
       const equal = randomChoice([true, false]);
       const k = randomChoice([2, 3]);
@@ -642,10 +642,10 @@ export const thalesBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "thales_rediger_fixed_1",
+    id: "thales_theoreme_rediger_fixed_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "thales",
+    notionId: "thales_theoreme",
     microId: "thales_rediger",
     difficulty: 4,
     theme: "neutral",
@@ -667,15 +667,15 @@ export const thalesBank: TutorBankItemV4[] = [
           "Méthode : on repère les triangles en situation de Thalès et on associe les côtés correspondants.\n\nCalcul : " +
           ("Pour utiliser le théorème de Thalès, on commence par préciser la configuration et les droites parallèles.") +
           "\n\nConclusion : la longueur ou la relation obtenue respecte la configuration de Thalès.",
-    tags: ["thales", "redaction", "qcm"],
+    tags: ["thales_theoreme_theoreme", "redaction", "qcm"],
   },
 
   {
     kind: "fixed",
-    id: "thales_rediger_open_1",
+    id: "thales_theoreme_rediger_open_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "thales",
+    notionId: "thales_theoreme",
     microId: "thales_rediger",
     difficulty: 4,
     theme: "neutral",
@@ -689,20 +689,20 @@ export const thalesBank: TutorBankItemV4[] = [
           "Méthode : on repère les triangles en situation de Thalès et on associe les côtés correspondants.\n\nCalcul : " +
           ("Le théorème de Thalès sert à calculer une longueur quand on sait que les droites sont parallèles. La réciproque sert à démontrer que deux droites sont parallèles à partir de rapports égaux.") +
           "\n\nConclusion : la longueur ou la relation obtenue respecte la configuration de Thalès.",
-    tags: ["thales", "redaction", "open"],
+    tags: ["thales_theoreme_theoreme", "redaction", "open"],
   },
 
   {
     kind: "template",
-    id: "thales_rediger_tpl_1",
+    id: "thales_theoreme_rediger_tpl_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "thales",
+    notionId: "thales_theoreme",
     microId: "thales_rediger",
     difficulty: 4,
     theme: "neutral",
     hint: "Commence par écrire la configuration, puis l’égalité des rapports.",
-    tags: ["thales", "redaction", "template"],
+    tags: ["thales_theoreme_theoreme", "redaction", "template"],
     generate: () => {
       const k = randomChoice([2, 3]);
       const am = randomInt(2, 6);
@@ -743,11 +743,11 @@ export const thalesBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "thales_defis_fixed_1",
+    id: "thales_theoreme_defi_fixed_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "thales",
-    microId: "thales_defis",
+    notionId: "thales_theoreme",
+    microId: "thales_defi",
     difficulty: 5,
     theme: "neutral",
     text: "Un élève dit : « Les longueurs sont dans un triangle, donc je peux toujours utiliser Thalès. » A-t-il raison ?",
@@ -761,20 +761,20 @@ export const thalesBank: TutorBankItemV4[] = [
           "Méthode : on repère les triangles en situation de Thalès et on associe les côtés correspondants.\n\nCalcul : " +
           ("Non. Pour utiliser le théorème de Thalès, il faut une configuration avec des droites parallèles.") +
           "\n\nConclusion : la longueur ou la relation obtenue respecte la configuration de Thalès.",
-    tags: ["thales", "defi", "erreur"],
+    tags: ["thales_theoreme_theoreme", "defi", "erreur"],
   },
 
   {
     kind: "template",
-    id: "thales_defis_tpl_1",
+    id: "thales_theoreme_defi_tpl_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "thales",
-    microId: "thales_defis",
+    notionId: "thales_theoreme",
+    microId: "thales_defi",
     difficulty: 5,
     theme: "reunion",
     hint: "Modélise la situation par une configuration de Thalès.",
-    tags: ["thales", "defi", "reunion", "probleme"],
+    tags: ["thales_theoreme_theoreme", "defi", "reunion", "probleme"],
     generate: () => {
       const k = randomChoice([2, 3, 4]);
       const petit = randomChoice([2, 3, 4, 5]);
@@ -797,15 +797,15 @@ export const thalesBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "thales_defis_tpl_2",
+    id: "thales_theoreme_defi_tpl_2",
     niveau: "4e",
     matiere: "maths",
-    notionId: "thales",
-    microId: "thales_defis",
+    notionId: "thales_theoreme",
+    microId: "thales_defi",
     difficulty: 5,
     theme: "neutral",
     hint: "Compare les rapports avant de conclure.",
-    tags: ["thales", "defi", "reciproque", "piege"],
+    tags: ["thales_theoreme_theoreme", "defi", "reciproque", "piege"],
     generate: () => {
       const equal = randomChoice([true, false]);
       const k = randomChoice([2, 3]);

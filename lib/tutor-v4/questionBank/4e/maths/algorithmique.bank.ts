@@ -30,11 +30,11 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "4e_algo_conditions_fixed_1_definition",
+    id: "4e_algo_condition_fixed_1_definition",
     niveau: "4e",
     matiere: "maths",
-    notionId: "algorithmique",
-    microId: "algo_conditions",
+    notionId: "algo_programmation",
+    microId: "algo_condition",
     difficulty: 1,
     theme: "neutral",
     text: "En algorithmique, une condition sert à...",
@@ -53,7 +53,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
       "Méthode : on lit la comparaison puis on vérifie si elle est vraie.\n\n" +
       "Exécution : par exemple, score > 10 est vrai si score est supérieur à 10.\n\n" +
       "Conclusion : une condition sert à tester une affirmation.",
-    tags: ["algorithmique", "condition", "definition", "qcm"],
+    tags: ["algo_programmation", "condition", "definition", "qcm"],
     canvas: scratchCanvas("Condition simple", [
       { type: "event" },
       {
@@ -66,15 +66,15 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "4e_algo_conditions_tpl_1_comparaison_superieur",
+    id: "4e_algo_condition_tpl_1_comparaison_superieur",
     niveau: "4e",
     matiere: "maths",
-    notionId: "algorithmique",
-    microId: "algo_conditions",
+    notionId: "algo_programmation",
+    microId: "algo_condition",
     difficulty: 1,
     theme: "neutral",
     hint: "Compare la valeur de score avec le nombre donné.",
-    tags: ["algorithmique", "condition", "comparaison", "template", "canvas"],
+    tags: ["algo_programmation", "condition", "comparaison", "template", "canvas"],
     generate: () => {
       const score = randomChoice([8, 10, 12, 15, 18]);
       const seuil = randomChoice([9, 10, 14]);
@@ -107,15 +107,15 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "4e_algo_conditions_tpl_2_comparaison_inferieur",
+    id: "4e_algo_condition_tpl_2_comparaison_inferieur",
     niveau: "4e",
     matiere: "maths",
-    notionId: "algorithmique",
-    microId: "algo_conditions",
+    notionId: "algo_programmation",
+    microId: "algo_condition",
     difficulty: 2,
     theme: "neutral",
     hint: "Vérifie si la valeur est strictement plus petite que la limite.",
-    tags: ["algorithmique", "condition", "inferieur", "template", "canvas"],
+    tags: ["algo_programmation", "condition", "inferieur", "template", "canvas"],
     generate: () => {
       const temperature = randomChoice([18, 22, 25, 29, 31]);
       const limite = randomChoice([20, 25, 30]);
@@ -148,15 +148,15 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "4e_algo_conditions_tpl_3_egalite",
+    id: "4e_algo_condition_tpl_3_egalite",
     niveau: "4e",
     matiere: "maths",
-    notionId: "algorithmique",
-    microId: "algo_conditions",
+    notionId: "algo_programmation",
+    microId: "algo_condition",
     difficulty: 2,
     theme: "neutral",
     hint: "Une égalité est vraie seulement si les deux valeurs sont identiques.",
-    tags: ["algorithmique", "condition", "egalite", "template", "canvas"],
+    tags: ["algo_programmation", "condition", "egalite", "template", "canvas"],
     generate: () => {
       const secret = randomChoice([3, 4, 5, 6]);
       const reponse = randomChoice([3, 4, 5, 6]);
@@ -190,15 +190,15 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "4e_algo_conditions_tpl_4_relatifs",
+    id: "4e_algo_condition_tpl_4_relatif",
     niveau: "4e",
     matiere: "maths",
-    notionId: "algorithmique",
-    microId: "algo_conditions",
+    notionId: "algo_programmation",
+    microId: "algo_condition",
     difficulty: 3,
     theme: "neutral",
     hint: "Attention aux nombres négatifs.",
-    tags: ["algorithmique", "condition", "relatifs", "template", "canvas"],
+    tags: ["algo_programmation", "condition", "relatif", "template", "canvas"],
     generate: () => {
       const x = randomChoice([-5, -2, -1, 0, 3, 6]);
       const seuil = randomChoice([-3, 0, 2]);
@@ -231,11 +231,11 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "4e_algo_conditions_fixed_2_piege_strict",
+    id: "4e_algo_condition_fixed_2_piege_strict",
     niveau: "4e",
     matiere: "maths",
-    notionId: "algorithmique",
-    microId: "algo_conditions",
+    notionId: "algo_programmation",
+    microId: "algo_condition",
     difficulty: 3,
     theme: "neutral",
     text: "La variable score vaut 10. La condition “score > 10” est-elle vraie ?",
@@ -249,7 +249,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
       "Méthode : on vérifie si 10 est plus grand que 10.\n\n" +
       "Exécution : 10 > 10 est faux, car les deux valeurs sont égales.\n\n" +
       "Conclusion : la condition n’est pas vraie.",
-    tags: ["algorithmique", "condition", "strict", "piege", "qcm"],
+    tags: ["algo_programmation", "condition", "strict", "piege", "qcm"],
     canvas: scratchCanvas("Piège du strictement supérieur", [
       { type: "event" },
       { type: "set_variable", variable: "score", value: 10 },
@@ -262,11 +262,11 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
   },
     {
     kind: "fixed",
-    id: "4e_algo_conditions_fixed_3_piege_egalite",
+    id: "4e_algo_condition_fixed_3_piege_egalite",
     niveau: "4e",
     matiere: "maths",
-    notionId: "algorithmique",
-    microId: "algo_conditions",
+    notionId: "algo_programmation",
+    microId: "algo_condition",
     difficulty: 3,
     theme: "neutral",
     text: "La variable x vaut 7. La condition “x = 7” est-elle vraie ?",
@@ -280,7 +280,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
       "Méthode : on compare la valeur de x avec 7.\n\n" +
       "Exécution : x vaut 7, donc x = 7 est vrai.\n\n" +
       "Conclusion : la condition est vraie.",
-    tags: ["algorithmique", "condition", "egalite", "qcm"],
+    tags: ["algo_programmation", "condition", "egalite", "qcm"],
     canvas: scratchCanvas("Condition d’égalité", [
       { type: "event" },
       { type: "set_variable", variable: "x", value: 7 },
@@ -294,15 +294,15 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "4e_algo_conditions_tpl_5_expression",
+    id: "4e_algo_condition_tpl_5_expression",
     niveau: "4e",
     matiere: "maths",
-    notionId: "algorithmique",
-    microId: "algo_conditions",
+    notionId: "algo_programmation",
+    microId: "algo_condition",
     difficulty: 4,
     theme: "neutral",
     hint: "Calcule d’abord l’expression, puis teste la condition.",
-    tags: ["algorithmique", "condition", "expression", "template", "canvas"],
+    tags: ["algo_programmation", "condition", "expression", "template", "canvas"],
     generate: () => {
       const x = randomChoice([2, 3, 4, 5]);
       const a = randomChoice([2, 3, 4]);
@@ -337,11 +337,11 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "4e_algo_conditions_open_1_expliquer",
+    id: "4e_algo_condition_open_1_expliquer",
     niveau: "4e",
     matiere: "maths",
-    notionId: "algorithmique",
-    microId: "algo_conditions",
+    notionId: "algo_programmation",
+    microId: "algo_condition",
     difficulty: 4,
     theme: "neutral",
     text: "Explique ce qu’est une condition dans un programme.",
@@ -354,7 +354,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
       "Méthode : le programme vérifie la condition avant d’exécuter certains blocs.\n\n" +
       "Exécution : dans “si score > 10”, le programme teste si score est supérieur à 10.\n\n" +
       "Conclusion : une condition permet au programme de prendre une décision.",
-    tags: ["algorithmique", "condition", "open", "vocabulaire"],
+    tags: ["algo_programmation", "condition", "open", "vocabulaire"],
   },
 
   /* =========================
@@ -363,11 +363,11 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "4e_algo_instructions_conditionnelles_fixed_1_definition",
+    id: "4e_algo_instruction_conditionnelle_fixed_1_definition",
     niveau: "4e",
     matiere: "maths",
-    notionId: "algorithmique",
-    microId: "algo_instructions_conditionnelles",
+    notionId: "algo_programmation",
+    microId: "algo_instruction_conditionnelle",
     difficulty: 2,
     theme: "neutral",
     text: "Un bloc “si ... alors” permet...",
@@ -386,7 +386,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
       "Méthode : on teste la condition avant d’exécuter les blocs à l’intérieur.\n\n" +
       "Exécution : si la condition est vraie, les blocs sont exécutés ; sinon, ils sont ignorés.\n\n" +
       "Conclusion : un bloc “si” exécute des instructions seulement si la condition est vraie.",
-    tags: ["algorithmique", "conditionnelle", "si", "qcm"],
+    tags: ["algo_programmation", "conditionnelle", "si", "qcm"],
     canvas: scratchCanvas("Instruction conditionnelle", [
       { type: "event" },
       {
@@ -399,15 +399,15 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "4e_algo_instructions_conditionnelles_tpl_1_si_simple",
+    id: "4e_algo_instruction_conditionnelle_tpl_1_si_simple",
     niveau: "4e",
     matiere: "maths",
-    notionId: "algorithmique",
-    microId: "algo_instructions_conditionnelles",
+    notionId: "algo_programmation",
+    microId: "algo_instruction_conditionnelle",
     difficulty: 2,
     theme: "neutral",
     hint: "Le bloc intérieur s’exécute seulement si la condition est vraie.",
-    tags: ["algorithmique", "conditionnelle", "si", "template", "canvas"],
+    tags: ["algo_programmation", "conditionnelle", "si", "template", "canvas"],
     generate: () => {
       const score = randomChoice([6, 9, 11, 15]);
       const seuil = 10;
@@ -439,15 +439,15 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "4e_algo_instructions_conditionnelles_tpl_2_si_sinon",
+    id: "4e_algo_instruction_conditionnelle_tpl_2_si_sinon",
     niveau: "4e",
     matiere: "maths",
-    notionId: "algorithmique",
-    microId: "algo_instructions_conditionnelles",
+    notionId: "algo_programmation",
+    microId: "algo_instruction_conditionnelle",
     difficulty: 3,
     theme: "neutral",
     hint: "Avec si/sinon, une des deux branches est exécutée.",
-    tags: ["algorithmique", "conditionnelle", "si_sinon", "template", "canvas"],
+    tags: ["algo_programmation", "conditionnelle", "si_sinon", "template", "canvas"],
     generate: () => {
       const score = randomChoice([7, 8, 10, 12, 16]);
       const seuil = 10;
@@ -479,11 +479,11 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
   },
     {
     kind: "fixed",
-    id: "4e_algo_conditions_fixed_3_piege_egalite",
+    id: "4e_algo_condition_fixed_3_piege_egalite",
     niveau: "4e",
     matiere: "maths",
-    notionId: "algorithmique",
-    microId: "algo_conditions",
+    notionId: "algo_programmation",
+    microId: "algo_condition",
     difficulty: 3,
     theme: "neutral",
     text: "La variable x vaut 7. La condition “x = 7” est-elle vraie ?",
@@ -497,7 +497,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
       "Méthode : on compare la valeur de x avec 7.\n\n" +
       "Exécution : x vaut 7, donc x = 7 est vrai.\n\n" +
       "Conclusion : la condition est vraie.",
-    tags: ["algorithmique", "condition", "egalite", "qcm"],
+    tags: ["algo_programmation", "condition", "egalite", "qcm"],
     canvas: scratchCanvas("Condition d’égalité", [
       { type: "event" },
       { type: "set_variable", variable: "x", value: 7 },
@@ -511,15 +511,15 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "4e_algo_conditions_tpl_5_expression",
+    id: "4e_algo_condition_tpl_5_expression",
     niveau: "4e",
     matiere: "maths",
-    notionId: "algorithmique",
-    microId: "algo_conditions",
+    notionId: "algo_programmation",
+    microId: "algo_condition",
     difficulty: 4,
     theme: "neutral",
     hint: "Calcule d’abord l’expression, puis teste la condition.",
-    tags: ["algorithmique", "condition", "expression", "template", "canvas"],
+    tags: ["algo_programmation", "condition", "expression", "template", "canvas"],
     generate: () => {
       const x = randomChoice([2, 3, 4, 5]);
       const a = randomChoice([2, 3, 4]);
@@ -554,11 +554,11 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "4e_algo_conditions_open_1_expliquer",
+    id: "4e_algo_condition_open_1_expliquer",
     niveau: "4e",
     matiere: "maths",
-    notionId: "algorithmique",
-    microId: "algo_conditions",
+    notionId: "algo_programmation",
+    microId: "algo_condition",
     difficulty: 4,
     theme: "neutral",
     text: "Explique ce qu’est une condition dans un programme.",
@@ -571,7 +571,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
       "Méthode : le programme vérifie la condition avant d’exécuter certains blocs.\n\n" +
       "Exécution : dans “si score > 10”, le programme teste si score est supérieur à 10.\n\n" +
       "Conclusion : une condition permet au programme de prendre une décision.",
-    tags: ["algorithmique", "condition", "open", "vocabulaire"],
+    tags: ["algo_programmation", "condition", "open", "vocabulaire"],
   },
 
   /* =========================
@@ -580,11 +580,11 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "4e_algo_instructions_conditionnelles_fixed_1_definition",
+    id: "4e_algo_instruction_conditionnelle_fixed_1_definition",
     niveau: "4e",
     matiere: "maths",
-    notionId: "algorithmique",
-    microId: "algo_instructions_conditionnelles",
+    notionId: "algo_programmation",
+    microId: "algo_instruction_conditionnelle",
     difficulty: 2,
     theme: "neutral",
     text: "Un bloc “si ... alors” permet...",
@@ -603,7 +603,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
       "Méthode : on teste la condition avant d’exécuter les blocs à l’intérieur.\n\n" +
       "Exécution : si la condition est vraie, les blocs sont exécutés ; sinon, ils sont ignorés.\n\n" +
       "Conclusion : un bloc “si” exécute des instructions seulement si la condition est vraie.",
-    tags: ["algorithmique", "conditionnelle", "si", "qcm"],
+    tags: ["algo_programmation", "conditionnelle", "si", "qcm"],
     canvas: scratchCanvas("Instruction conditionnelle", [
       { type: "event" },
       {
@@ -616,15 +616,15 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "4e_algo_instructions_conditionnelles_tpl_1_si_simple",
+    id: "4e_algo_instruction_conditionnelle_tpl_1_si_simple",
     niveau: "4e",
     matiere: "maths",
-    notionId: "algorithmique",
-    microId: "algo_instructions_conditionnelles",
+    notionId: "algo_programmation",
+    microId: "algo_instruction_conditionnelle",
     difficulty: 2,
     theme: "neutral",
     hint: "Le bloc intérieur s’exécute seulement si la condition est vraie.",
-    tags: ["algorithmique", "conditionnelle", "si", "template", "canvas"],
+    tags: ["algo_programmation", "conditionnelle", "si", "template", "canvas"],
     generate: () => {
       const score = randomChoice([6, 9, 11, 15]);
       const seuil = 10;
@@ -656,15 +656,15 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "4e_algo_instructions_conditionnelles_tpl_2_si_sinon",
+    id: "4e_algo_instruction_conditionnelle_tpl_2_si_sinon",
     niveau: "4e",
     matiere: "maths",
-    notionId: "algorithmique",
-    microId: "algo_instructions_conditionnelles",
+    notionId: "algo_programmation",
+    microId: "algo_instruction_conditionnelle",
     difficulty: 3,
     theme: "neutral",
     hint: "Avec si/sinon, une des deux branches est exécutée.",
-    tags: ["algorithmique", "conditionnelle", "si_sinon", "template", "canvas"],
+    tags: ["algo_programmation", "conditionnelle", "si_sinon", "template", "canvas"],
     generate: () => {
       const score = randomChoice([7, 8, 10, 12, 16]);
       const seuil = 10;
@@ -696,15 +696,15 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
   },
     {
     kind: "template",
-    id: "4e_algo_instructions_conditionnelles_tpl_3_variable_modifiee",
+    id: "4e_algo_instruction_conditionnelle_tpl_3_variable_modifiee",
     niveau: "4e",
     matiere: "maths",
-    notionId: "algorithmique",
-    microId: "algo_instructions_conditionnelles",
+    notionId: "algo_programmation",
+    microId: "algo_instruction_conditionnelle",
     difficulty: 3,
     theme: "neutral",
     hint: "La variable change seulement dans la branche exécutée.",
-    tags: ["algorithmique", "conditionnelle", "variable", "template", "canvas"],
+    tags: ["algo_programmation", "conditionnelle", "variable", "template", "canvas"],
     generate: () => {
       const score = randomChoice([6, 8, 11, 14]);
       const bonus = randomChoice([2, 5, 10]);
@@ -739,15 +739,15 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "4e_algo_instructions_conditionnelles_tpl_4_si_sinon_variable",
+    id: "4e_algo_instruction_conditionnelle_tpl_4_si_sinon_variable",
     niveau: "4e",
     matiere: "maths",
-    notionId: "algorithmique",
-    microId: "algo_instructions_conditionnelles",
+    notionId: "algo_programmation",
+    microId: "algo_instruction_conditionnelle",
     difficulty: 4,
     theme: "neutral",
     hint: "Avec si/sinon, une seule branche est exécutée.",
-    tags: ["algorithmique", "conditionnelle", "si_sinon", "variable", "template", "canvas"],
+    tags: ["algo_programmation", "conditionnelle", "si_sinon", "variable", "template", "canvas"],
     generate: () => {
       const energie = randomChoice([3, 5, 8, 12]);
       const gain = randomChoice([4, 6]);
@@ -788,11 +788,11 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "4e_algo_instructions_conditionnelles_fixed_2_piege_deux_branches",
+    id: "4e_algo_instruction_conditionnelle_fixed_2_piege_deux_branches",
     niveau: "4e",
     matiere: "maths",
-    notionId: "algorithmique",
-    microId: "algo_instructions_conditionnelles",
+    notionId: "algo_programmation",
+    microId: "algo_instruction_conditionnelle",
     difficulty: 4,
     theme: "neutral",
     text:
@@ -807,7 +807,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
       "Méthode : si la condition est vraie, on exécute la première branche ; sinon, on exécute l’autre.\n\n" +
       "Exécution : les deux branches ne sont pas exécutées ensemble.\n\n" +
       "Conclusion : non, une seule branche est exécutée.",
-    tags: ["algorithmique", "conditionnelle", "si_sinon", "piege", "qcm"],
+    tags: ["algo_programmation", "conditionnelle", "si_sinon", "piege", "qcm"],
     canvas: scratchCanvas("Une seule branche", [
       { type: "event" },
       {
@@ -821,11 +821,11 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "4e_algo_instructions_conditionnelles_open_1_expliquer",
+    id: "4e_algo_instruction_conditionnelle_open_1_expliquer",
     niveau: "4e",
     matiere: "maths",
-    notionId: "algorithmique",
-    microId: "algo_instructions_conditionnelles",
+    notionId: "algo_programmation",
+    microId: "algo_instruction_conditionnelle",
     difficulty: 5,
     theme: "neutral",
     text: "Explique la différence entre un bloc “si” et un bloc “si/sinon”.",
@@ -838,7 +838,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
       "Méthode : on regarde ce qui se passe quand la condition est vraie, puis quand elle est fausse.\n\n" +
       "Exécution : avec “si”, il peut ne rien se passer si la condition est fausse. Avec “si/sinon”, une autre branche est exécutée.\n\n" +
       "Conclusion : le bloc si/sinon permet une décision plus complète.",
-    tags: ["algorithmique", "conditionnelle", "open", "methode"],
+    tags: ["algo_programmation", "conditionnelle", "open", "methode"],
   },
 
   /* =========================
@@ -850,7 +850,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     id: "4e_algo_variable_fixed_1_definition",
     niveau: "4e",
     matiere: "maths",
-    notionId: "algorithmique",
+    notionId: "algo_programmation",
     microId: "algo_variable",
     difficulty: 1,
     theme: "neutral",
@@ -870,7 +870,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
       "Méthode : on repère les blocs “mettre à” et “ajouter à”.\n\n" +
       "Exécution : une variable peut être initialisée puis modifiée.\n\n" +
       "Conclusion : une variable sert à stocker une valeur qui peut changer.",
-    tags: ["algorithmique", "variable", "definition", "qcm"],
+    tags: ["algo_programmation", "variable", "definition", "qcm"],
     canvas: scratchCanvas("Variable score", [
       { type: "event" },
       { type: "set_variable", variable: "score", value: 0 },
@@ -883,12 +883,12 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     id: "4e_algo_variable_tpl_1_initialisation",
     niveau: "4e",
     matiere: "maths",
-    notionId: "algorithmique",
+    notionId: "algo_programmation",
     microId: "algo_variable",
     difficulty: 2,
     theme: "neutral",
     hint: "Le bloc “mettre score à ...” fixe la valeur de départ.",
-    tags: ["algorithmique", "variable", "initialisation", "template", "canvas"],
+    tags: ["algo_programmation", "variable", "initialisation", "template", "canvas"],
     generate: () => {
       const valeur = randomChoice([0, 5, 10, 20]);
 
@@ -914,12 +914,12 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     id: "4e_algo_variable_tpl_2_increment",
     niveau: "4e",
     matiere: "maths",
-    notionId: "algorithmique",
+    notionId: "algo_programmation",
     microId: "algo_variable",
     difficulty: 2,
     theme: "neutral",
     hint: "Le bloc “ajouter à” modifie la valeur actuelle.",
-    tags: ["algorithmique", "variable", "increment", "template", "canvas"],
+    tags: ["algo_programmation", "variable", "increment", "template", "canvas"],
     generate: () => {
       const depart = randomChoice([0, 2, 5, 10]);
       const ajout = randomChoice([1, 3, 4, 7]);
@@ -952,12 +952,12 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     id: "4e_algo_variable_tpl_3_plusieurs_modifications",
     niveau: "4e",
     matiere: "maths",
-    notionId: "algorithmique",
+    notionId: "algo_programmation",
     microId: "algo_variable",
     difficulty: 3,
     theme: "neutral",
     hint: "La variable change plusieurs fois.",
-    tags: ["algorithmique", "variable", "suite", "template", "canvas"],
+    tags: ["algo_programmation", "variable", "suite", "template", "canvas"],
     generate: () => {
       const depart = randomChoice([1, 3, 5]);
       const ajout1 = randomChoice([2, 4, 6]);
@@ -993,12 +993,12 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     id: "4e_algo_variable_tpl_4_variable_negative",
     niveau: "4e",
     matiere: "maths",
-    notionId: "algorithmique",
+    notionId: "algo_programmation",
     microId: "algo_variable",
     difficulty: 3,
     theme: "neutral",
     hint: "Ajouter un nombre négatif revient à soustraire.",
-    tags: ["algorithmique", "variable", "relatifs", "template", "canvas"],
+    tags: ["algo_programmation", "variable", "relatif", "template", "canvas"],
     generate: () => {
       const depart = randomChoice([8, 10, 15]);
       const perte = randomChoice([2, 4, 6]);
@@ -1032,12 +1032,12 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     id: "4e_algo_variable_tpl_5_boucle_variable",
     niveau: "4e",
     matiere: "maths",
-    notionId: "algorithmique",
+    notionId: "algo_programmation",
     microId: "algo_variable",
     difficulty: 4,
     theme: "neutral",
     hint: "La modification est répétée plusieurs fois.",
-    tags: ["algorithmique", "variable", "boucle", "template", "canvas"],
+    tags: ["algo_programmation", "variable", "boucle", "template", "canvas"],
     generate: () => {
       const depart = randomChoice([0, 2, 5]);
       const ajout = randomChoice([1, 2, 3]);
@@ -1082,7 +1082,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     id: "4e_algo_variable_fixed_2_piege_remplacement",
     niveau: "4e",
     matiere: "maths",
-    notionId: "algorithmique",
+    notionId: "algo_programmation",
     microId: "algo_variable",
     difficulty: 4,
     theme: "neutral",
@@ -1098,7 +1098,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
       "Méthode : on oublie l’ancienne valeur et on lit la nouvelle.\n\n" +
       "Exécution : score devient 2.\n\n" +
       "Conclusion : la nouvelle valeur de score est 2.",
-    tags: ["algorithmique", "variable", "piege", "qcm"],
+    tags: ["algo_programmation", "variable", "piege", "qcm"],
     canvas: scratchCanvas("Remplacement de valeur", [
       { type: "event" },
       { type: "set_variable", variable: "score", value: 5 },
@@ -1111,7 +1111,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     id: "4e_algo_variable_open_1_expliquer_difference",
     niveau: "4e",
     matiere: "maths",
-    notionId: "algorithmique",
+    notionId: "algo_programmation",
     microId: "algo_variable",
     difficulty: 5,
     theme: "neutral",
@@ -1126,7 +1126,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
       "Méthode : on regarde si l’ancienne valeur est conservée ou non.\n\n" +
       "Exécution : “mettre score à 5” donne directement 5. “ajouter 5 à score” augmente la valeur actuelle de 5.\n\n" +
       "Conclusion : les deux blocs ont des rôles différents.",
-    tags: ["algorithmique", "variable", "open", "vocabulaire"],
+    tags: ["algo_programmation", "variable", "open", "vocabulaire"],
   },
     /* =========================
      ALGO_PROGRAMME_OBJECTIF
@@ -1137,7 +1137,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     id: "4e_algo_programme_objectif_fixed_1_definition",
     niveau: "4e",
     matiere: "maths",
-    notionId: "algorithmique",
+    notionId: "algo_programmation",
     microId: "algo_programme_objectif",
     difficulty: 2,
     theme: "neutral",
@@ -1157,7 +1157,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
       "Méthode : on choisit les blocs utiles et on les place dans le bon ordre.\n\n" +
       "Exécution : si l’objectif est de tester un score, on utilise une condition.\n\n" +
       "Conclusion : programmer, c’est organiser les blocs pour atteindre un objectif.",
-    tags: ["algorithmique", "objectif", "programme", "qcm"],
+    tags: ["algo_programmation", "objectif", "programme", "qcm"],
     canvas: scratchCanvas("Programme avec objectif", [
       { type: "event" },
       { type: "ask", text: "Quel est ton score ?" },
@@ -1176,12 +1176,12 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     id: "4e_algo_programme_objectif_tpl_1_choisir_condition",
     niveau: "4e",
     matiere: "maths",
-    notionId: "algorithmique",
+    notionId: "algo_programmation",
     microId: "algo_programme_objectif",
     difficulty: 3,
     theme: "neutral",
     hint: "L’objectif est de dire Bravo seulement si le score dépasse le seuil.",
-    tags: ["algorithmique", "objectif", "condition", "template", "canvas"],
+    tags: ["algo_programmation", "objectif", "condition", "template", "canvas"],
     generate: () => {
       const seuil = randomChoice([10, 12, 15]);
 
@@ -1218,12 +1218,12 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     id: "4e_algo_programme_objectif_tpl_2_choisir_programme_calcul",
     niveau: "4e",
     matiere: "maths",
-    notionId: "algorithmique",
+    notionId: "algo_programmation",
     microId: "algo_programme_objectif",
     difficulty: 3,
     theme: "neutral",
     hint: "Le programme doit multiplier puis ajouter.",
-    tags: ["algorithmique", "objectif", "programme_calcul", "template", "canvas"],
+    tags: ["algo_programmation", "objectif", "programme_calcul", "template", "canvas"],
     generate: () => {
       const mult = randomChoice([2, 3, 4]);
       const ajout = randomChoice([5, 7, 10]);
@@ -1260,12 +1260,12 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     id: "4e_algo_programme_objectif_tpl_3_objectif_score",
     niveau: "4e",
     matiere: "maths",
-    notionId: "algorithmique",
+    notionId: "algo_programmation",
     microId: "algo_programme_objectif",
     difficulty: 4,
     theme: "neutral",
     hint: "Le programme doit modifier score seulement si la condition est vraie.",
-    tags: ["algorithmique", "objectif", "score", "condition", "template", "canvas"],
+    tags: ["algo_programmation", "objectif", "score", "condition", "template", "canvas"],
     generate: () => {
       const score = randomChoice([8, 10, 12, 15]);
       const seuil = 10;
@@ -1305,12 +1305,12 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     id: "4e_algo_programme_objectif_tpl_4_objectif_si_sinon",
     niveau: "4e",
     matiere: "maths",
-    notionId: "algorithmique",
+    notionId: "algo_programmation",
     microId: "algo_programme_objectif",
     difficulty: 4,
     theme: "neutral",
     hint: "Avec si/sinon, le programme choisit un message selon la condition.",
-    tags: ["algorithmique", "objectif", "si_sinon", "template", "canvas"],
+    tags: ["algo_programmation", "objectif", "si_sinon", "template", "canvas"],
     generate: () => {
       const note = randomChoice([6, 9, 10, 13, 16]);
       const message = note >= 10 ? "Validé" : "À retravailler";
@@ -1345,7 +1345,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     id: "4e_algo_programme_objectif_fixed_2_piege_objectif",
     niveau: "4e",
     matiere: "maths",
-    notionId: "algorithmique",
+    notionId: "algo_programmation",
     microId: "algo_programme_objectif",
     difficulty: 4,
     theme: "neutral",
@@ -1361,7 +1361,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
       "Méthode : on compare la condition utilisée avec l’objectif demandé.\n\n" +
       "Exécution : l’objectif demande réponse = 5, mais le programme teste réponse > 5.\n\n" +
       "Conclusion : le programme n’est pas correct.",
-    tags: ["algorithmique", "objectif", "erreur", "condition", "qcm"],
+    tags: ["algo_programmation", "objectif", "erreur", "condition", "qcm"],
     canvas: scratchCanvas("Objectif mal traduit", [
       { type: "event" },
       { type: "ask", text: "Devine le nombre" },
@@ -1379,7 +1379,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     id: "4e_algo_programme_objectif_open_1_methode",
     niveau: "4e",
     matiere: "maths",
-    notionId: "algorithmique",
+    notionId: "algo_programmation",
     microId: "algo_programme_objectif",
     difficulty: 5,
     theme: "neutral",
@@ -1393,7 +1393,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
       "Méthode : on identifie les données, les calculs, les conditions et l’ordre des blocs.\n\n" +
       "Exécution : si l’objectif demande un choix, on utilise une condition ; si une valeur change, on utilise une variable.\n\n" +
       "Conclusion : les blocs doivent être choisis selon l’objectif.",
-    tags: ["algorithmique", "objectif", "open", "methode"],
+    tags: ["algo_programmation", "objectif", "open", "methode"],
   },
 
   /* =========================
@@ -1402,15 +1402,15 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "4e_algo_modifier_programme_tpl_1_modifier_seuil",
+    id: "4e_algo_modifier_tpl_1_modifier_seuil",
     niveau: "4e",
     matiere: "maths",
-    notionId: "algorithmique",
-    microId: "algo_modifier_programme",
+    notionId: "algo_programmation",
+    microId: "algo_modifier",
     difficulty: 3,
     theme: "neutral",
     hint: "Modifier un seuil change la condition.",
-    tags: ["algorithmique", "modifier", "seuil", "condition", "template", "canvas"],
+    tags: ["algo_programmation", "modifier", "seuil", "condition", "template", "canvas"],
     generate: () => {
       const score = randomChoice([8, 10, 12, 15]);
       const ancienSeuil = 10;
@@ -1443,15 +1443,15 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "4e_algo_modifier_programme_tpl_2_modifier_bonus",
+    id: "4e_algo_modifier_tpl_2_modifier_bonus",
     niveau: "4e",
     matiere: "maths",
-    notionId: "algorithmique",
-    microId: "algo_modifier_programme",
+    notionId: "algo_programmation",
+    microId: "algo_modifier",
     difficulty: 3,
     theme: "neutral",
     hint: "Utilise le nouveau bonus.",
-    tags: ["algorithmique", "modifier", "bonus", "variable", "template", "canvas"],
+    tags: ["algo_programmation", "modifier", "bonus", "variable", "template", "canvas"],
     generate: () => {
       const score = randomChoice([10, 12, 15]);
       const ancienBonus = randomChoice([2, 3]);
@@ -1479,15 +1479,15 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
   },
     {
     kind: "template",
-    id: "4e_algo_modifier_programme_tpl_3_corriger_condition",
+    id: "4e_algo_modifier_tpl_3_corriger_condition",
     niveau: "4e",
     matiere: "maths",
-    notionId: "algorithmique",
-    microId: "algo_modifier_programme",
+    notionId: "algo_programmation",
+    microId: "algo_modifier",
     difficulty: 4,
     theme: "neutral",
     hint: "L’objectif demande une égalité, pas une comparaison stricte.",
-    tags: ["algorithmique", "modifier", "condition", "debug", "template", "canvas"],
+    tags: ["algo_programmation", "modifier", "condition", "debug", "template", "canvas"],
     generate: () => {
       const secret = randomChoice([4, 5, 6, 7]);
 
@@ -1523,15 +1523,15 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "4e_algo_modifier_programme_tpl_4_changer_objectif",
+    id: "4e_algo_modifier_tpl_4_changer_objectif",
     niveau: "4e",
     matiere: "maths",
-    notionId: "algorithmique",
-    microId: "algo_modifier_programme",
+    notionId: "algo_programmation",
+    microId: "algo_modifier",
     difficulty: 4,
     theme: "neutral",
     hint: "Le nouvel objectif demande de diminuer la variable.",
-    tags: ["algorithmique", "modifier", "objectif", "variable", "template", "canvas"],
+    tags: ["algo_programmation", "modifier", "objectif", "variable", "template", "canvas"],
     generate: () => {
       const energie = randomChoice([12, 15, 20]);
       const perte = randomChoice([3, 5, 7]);
@@ -1561,11 +1561,11 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "4e_algo_modifier_programme_fixed_1_piege_ancien_parametre",
+    id: "4e_algo_modifier_fixed_1_piege_ancien_parametre",
     niveau: "4e",
     matiere: "maths",
-    notionId: "algorithmique",
-    microId: "algo_modifier_programme",
+    notionId: "algo_programmation",
+    microId: "algo_modifier",
     difficulty: 4,
     theme: "neutral",
     text:
@@ -1580,7 +1580,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
       "Méthode : on teste score > 15.\n\n" +
       "Exécution : 12 > 15 est faux.\n\n" +
       "Conclusion : il ne faut pas afficher “Bravo”.",
-    tags: ["algorithmique", "modifier", "condition", "piege", "qcm"],
+    tags: ["algo_programmation", "modifier", "condition", "piege", "qcm"],
     canvas: scratchCanvas("Ancien ou nouveau seuil ?", [
       { type: "event" },
       { type: "set_variable", variable: "score", value: 12 },
@@ -1594,11 +1594,11 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "4e_algo_modifier_programme_open_1_methode",
+    id: "4e_algo_modifier_open_1_methode",
     niveau: "4e",
     matiere: "maths",
-    notionId: "algorithmique",
-    microId: "algo_modifier_programme",
+    notionId: "algo_programmation",
+    microId: "algo_modifier",
     difficulty: 5,
     theme: "neutral",
     text: "Explique comment vérifier qu’un programme modifié respecte bien le nouvel objectif.",
@@ -1611,7 +1611,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
       "Méthode : on choisit une valeur test, on exécute les blocs dans l’ordre, puis on compare au résultat attendu.\n\n" +
       "Exécution : si l’objectif change, il faut utiliser les nouveaux paramètres ou les nouvelles conditions.\n\n" +
       "Conclusion : on valide la modification en testant le comportement obtenu.",
-    tags: ["algorithmique", "modifier", "open", "methode", "debug"],
+    tags: ["algo_programmation", "modifier", "open", "methode", "debug"],
   },
     /* =========================
      ALGO_DEFIS
@@ -1619,15 +1619,15 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "4e_algo_defis_tpl_1_condition_variable_boucle",
+    id: "4e_algo_defi_tpl_1_condition_variable_boucle",
     niveau: "4e",
     matiere: "maths",
-    notionId: "algorithmique",
-    microId: "algo_defis",
+    notionId: "algo_programmation",
+    microId: "algo_defi",
     difficulty: 5,
     theme: "neutral",
     hint: "Commence par calculer la valeur de score après la boucle.",
-    tags: ["algorithmique", "defi", "variable", "boucle", "condition", "template", "canvas"],
+    tags: ["algo_programmation", "defi", "variable", "boucle", "condition", "template", "canvas"],
     generate: () => {
       const depart = randomChoice([0, 2, 5]);
       const ajout = randomChoice([2, 3, 4]);
@@ -1674,15 +1674,15 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "4e_algo_defis_tpl_2_debug_condition",
+    id: "4e_algo_defi_tpl_2_debug_condition",
     niveau: "4e",
     matiere: "maths",
-    notionId: "algorithmique",
-    microId: "algo_defis",
+    notionId: "algo_programmation",
+    microId: "algo_defi",
     difficulty: 5,
     theme: "neutral",
     hint: "Compare l’objectif avec la condition utilisée.",
-    tags: ["algorithmique", "defi", "debug", "condition", "template", "canvas"],
+    tags: ["algo_programmation", "defi", "debug", "condition", "template", "canvas"],
     generate: () => {
       const seuil = randomChoice([10, 12, 15]);
 
@@ -1719,11 +1719,11 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "4e_algo_defis_open_1_synthese",
+    id: "4e_algo_defi_open_1_synthese",
     niveau: "4e",
     matiere: "maths",
-    notionId: "algorithmique",
-    microId: "algo_defis",
+    notionId: "algo_programmation",
+    microId: "algo_defi",
     difficulty: 5,
     theme: "neutral",
     text:
@@ -1737,6 +1737,6 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
       "Méthode : on suit les blocs dans l’ordre : initialisation de la variable, effet de la boucle, puis condition finale.\n\n" +
       "Exécution : on met à jour la variable à chaque étape, puis on teste vrai ou faux.\n\n" +
       "Conclusion : cette méthode évite les erreurs de logique.",
-    tags: ["algorithmique", "defi", "open", "synthese"],
+    tags: ["algo_programmation", "defi", "open", "synthese"],
   },
 ];

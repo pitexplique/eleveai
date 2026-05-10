@@ -41,7 +41,7 @@ export const operationsRelatifsBank: TutorBankItemV4[] = [
     id: "relatif_addition_fixed_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "operations_relatifs",
+    notionId: "relatif_operation",
     microId: "relatif_addition",
     difficulty: 1,
     theme: "neutral",
@@ -52,14 +52,14 @@ export const operationsRelatifsBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "On part de -3 et on avance de 7.",
     explanation: "(-3) + 7 = 4.",
-    tags: ["relatifs", "addition", "qcm"],
+    tags: ["relatif", "addition", "qcm"],
   },
   {
     kind: "fixed",
     id: "relatif_addition_fixed_2",
     niveau: "4e",
     matiere: "maths",
-    notionId: "operations_relatifs",
+    notionId: "relatif_operation",
     microId: "relatif_addition",
     difficulty: 1,
     theme: "neutral",
@@ -70,19 +70,19 @@ export const operationsRelatifsBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Deux pertes s’additionnent.",
     explanation: "(-5) + (-4) = -9.",
-    tags: ["relatifs", "addition", "signe"],
+    tags: ["relatif", "addition", "signe"],
   },
   {
     kind: "template",
     id: "relatif_addition_tpl_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "operations_relatifs",
+    notionId: "relatif_operation",
     microId: "relatif_addition",
     difficulty: 2,
     theme: "neutral",
     hint: "Additionne en tenant compte des signes.",
-    tags: ["relatifs", "addition", "template"],
+    tags: ["relatif", "addition", "template"],
     generate: () => {
       const a = randomInt(-12, 12);
       const b = randomInt(-12, 12);
@@ -102,7 +102,7 @@ export const operationsRelatifsBank: TutorBankItemV4[] = [
     id: "relatif_addition_open_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "operations_relatifs",
+    notionId: "relatif_operation",
     microId: "relatif_addition",
     difficulty: 2,
     theme: "neutral",
@@ -113,7 +113,7 @@ export const operationsRelatifsBank: TutorBankItemV4[] = [
     hint: "Deux nombres négatifs s’additionnent comme deux pertes.",
     explanation:
       "On additionne deux nombres négatifs : les distances à zéro s’additionnent et le résultat reste négatif. Donc (-5) + (-4) = -9.",
-    tags: ["relatifs", "addition", "open"],
+    tags: ["relatif", "addition", "open"],
   },
 
   // =========================
@@ -124,7 +124,7 @@ export const operationsRelatifsBank: TutorBankItemV4[] = [
     id: "relatif_soustraction_fixed_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "operations_relatifs",
+    notionId: "relatif_operation",
     microId: "relatif_soustraction",
     difficulty: 1,
     theme: "neutral",
@@ -135,14 +135,14 @@ export const operationsRelatifsBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "6 - 9 signifie qu’on recule de 9 à partir de 6.",
     explanation: "6 - 9 = -3.",
-    tags: ["relatifs", "soustraction"],
+    tags: ["relatif", "soustraction"],
   },
   {
     kind: "fixed",
     id: "relatif_soustraction_fixed_2",
     niveau: "4e",
     matiere: "maths",
-    notionId: "operations_relatifs",
+    notionId: "relatif_operation",
     microId: "relatif_soustraction",
     difficulty: 2,
     theme: "neutral",
@@ -153,19 +153,19 @@ export const operationsRelatifsBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Soustraire un nombre négatif revient à ajouter son opposé.",
     explanation: "5 - (-3) = 5 + 3 = 8.",
-    tags: ["relatifs", "soustraction", "opposé"],
+    tags: ["relatif", "soustraction", "opposé"],
   },
   {
     kind: "template",
     id: "relatif_soustraction_tpl_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "operations_relatifs",
+    notionId: "relatif_operation",
     microId: "relatif_soustraction",
     difficulty: 2,
     theme: "neutral",
     hint: "Soustraire un nombre revient à ajouter son opposé.",
-    tags: ["relatifs", "soustraction", "template"],
+    tags: ["relatif", "soustraction", "template"],
     generate: () => {
       const a = randomInt(-10, 12);
       const b = randomInt(-10, 12);
@@ -185,7 +185,7 @@ export const operationsRelatifsBank: TutorBankItemV4[] = [
     id: "relatif_soustraction_open_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "operations_relatifs",
+    notionId: "relatif_operation",
     microId: "relatif_soustraction",
     difficulty: 3,
     theme: "neutral",
@@ -196,7 +196,7 @@ export const operationsRelatifsBank: TutorBankItemV4[] = [
     hint: "Transformer la soustraction en addition.",
     explanation:
       "Soustraire -3 revient à ajouter son opposé, donc 5 - (-3) = 5 + 3 = 8.",
-    tags: ["relatifs", "soustraction", "open"],
+    tags: ["relatif", "soustraction", "open"],
   },
 
   // =========================
@@ -207,7 +207,7 @@ export const operationsRelatifsBank: TutorBankItemV4[] = [
     id: "relatif_multiplication_fixed_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "operations_relatifs",
+    notionId: "relatif_operation",
     microId: "relatif_multiplication",
     difficulty: 1,
     theme: "neutral",
@@ -218,14 +218,14 @@ export const operationsRelatifsBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Un négatif multiplié par un positif donne un négatif.",
     explanation: "(-4) × 3 = -12.",
-    tags: ["relatifs", "multiplication", "signe"],
+    tags: ["relatif", "multiplication", "signe"],
   },
   {
     kind: "fixed",
     id: "relatif_multiplication_fixed_2",
     niveau: "4e",
     matiere: "maths",
-    notionId: "operations_relatifs",
+    notionId: "relatif_operation",
     microId: "relatif_multiplication",
     difficulty: 1,
     theme: "neutral",
@@ -236,19 +236,19 @@ export const operationsRelatifsBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Le produit de deux nombres négatifs est positif.",
     explanation: "(-5) × (-2) = 10.",
-    tags: ["relatifs", "multiplication", "deux_negatifs"],
+    tags: ["relatif", "multiplication", "deux_negatifs"],
   },
   {
     kind: "template",
     id: "relatif_multiplication_tpl_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "operations_relatifs",
+    notionId: "relatif_operation",
     microId: "relatif_multiplication",
     difficulty: 2,
     theme: "neutral",
     hint: "Détermine d’abord le signe, puis multiplie les distances à zéro.",
-    tags: ["relatifs", "multiplication", "template"],
+    tags: ["relatif", "multiplication", "template"],
     generate: () => {
       const a = randomChoice([-1, 1]) * randomInt(2, 9);
       const b = randomChoice([-1, 1]) * randomInt(2, 9);
@@ -268,7 +268,7 @@ export const operationsRelatifsBank: TutorBankItemV4[] = [
     id: "relatif_multiplication_open_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "operations_relatifs",
+    notionId: "relatif_operation",
     microId: "relatif_multiplication",
     difficulty: 3,
     theme: "neutral",
@@ -279,7 +279,7 @@ export const operationsRelatifsBank: TutorBankItemV4[] = [
     hint: "Pense à la règle des signes.",
     explanation:
       "D’après la règle des signes, le produit de deux nombres de même signe est positif. Deux nombres négatifs ont le même signe, donc leur produit est positif.",
-    tags: ["relatifs", "multiplication", "open"],
+    tags: ["relatif", "multiplication", "open"],
   },
 
   // =========================
@@ -290,7 +290,7 @@ export const operationsRelatifsBank: TutorBankItemV4[] = [
     id: "relatif_division_fixed_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "operations_relatifs",
+    notionId: "relatif_operation",
     microId: "relatif_division",
     difficulty: 2,
     theme: "neutral",
@@ -301,14 +301,14 @@ export const operationsRelatifsBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Un négatif divisé par un positif donne un négatif.",
     explanation: "(-12) ÷ 3 = -4.",
-    tags: ["relatifs", "division", "signe"],
+    tags: ["relatif", "division", "signe"],
   },
   {
     kind: "fixed",
     id: "relatif_division_fixed_2",
     niveau: "4e",
     matiere: "maths",
-    notionId: "operations_relatifs",
+    notionId: "relatif_operation",
     microId: "relatif_division",
     difficulty: 2,
     theme: "neutral",
@@ -319,19 +319,19 @@ export const operationsRelatifsBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Deux nombres négatifs donnent un quotient positif.",
     explanation: "(-20) ÷ (-5) = 4.",
-    tags: ["relatifs", "division", "deux_negatifs"],
+    tags: ["relatif", "division", "deux_negatifs"],
   },
   {
     kind: "template",
     id: "relatif_division_tpl_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "operations_relatifs",
+    notionId: "relatif_operation",
     microId: "relatif_division",
     difficulty: 3,
     theme: "neutral",
     hint: "Détermine le signe, puis divise les distances à zéro.",
-    tags: ["relatifs", "division", "template"],
+    tags: ["relatif", "division", "template"],
     generate: () => {
       const quotient = randomChoice([-1, 1]) * randomInt(2, 9);
       const divisor = randomChoice([-1, 1]) * randomInt(2, 9);
@@ -351,7 +351,7 @@ export const operationsRelatifsBank: TutorBankItemV4[] = [
     id: "relatif_division_open_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "operations_relatifs",
+    notionId: "relatif_operation",
     microId: "relatif_division",
     difficulty: 3,
     theme: "neutral",
@@ -362,7 +362,7 @@ export const operationsRelatifsBank: TutorBankItemV4[] = [
     hint: "C’est la même règle que pour le produit.",
     explanation:
       "Si les deux nombres ont le même signe, le quotient est positif. S’ils ont des signes différents, le quotient est négatif.",
-    tags: ["relatifs", "division", "open"],
+    tags: ["relatif", "division", "open"],
   },
 
   // =========================
@@ -373,7 +373,7 @@ export const operationsRelatifsBank: TutorBankItemV4[] = [
     id: "relatif_calcul_fixed_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "operations_relatifs",
+    notionId: "relatif_operation",
     microId: "relatif_calcul",
     difficulty: 3,
     theme: "neutral",
@@ -384,19 +384,19 @@ export const operationsRelatifsBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Commence par la multiplication.",
     explanation: "(-3) × 4 + 5 = -12 + 5 = -7.",
-    tags: ["relatifs", "calcul", "priorites"],
+    tags: ["relatif", "calcul", "priorites"],
   },
   {
     kind: "template",
     id: "relatif_calcul_tpl_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "operations_relatifs",
+    notionId: "relatif_operation",
     microId: "relatif_calcul",
     difficulty: 3,
     theme: "neutral",
     hint: "Respecte les priorités opératoires.",
-    tags: ["relatifs", "calcul", "template"],
+    tags: ["relatif", "calcul", "template"],
     generate: () => {
       const a = randomChoice([-1, 1]) * randomInt(2, 8);
       const b = randomInt(2, 6);
@@ -417,12 +417,12 @@ export const operationsRelatifsBank: TutorBankItemV4[] = [
     id: "relatif_calcul_tpl_2",
     niveau: "4e",
     matiere: "maths",
-    notionId: "operations_relatifs",
+    notionId: "relatif_operation",
     microId: "relatif_calcul",
     difficulty: 4,
     theme: "neutral",
     hint: "Commence par les parenthèses, puis multiplication ou division.",
-    tags: ["relatifs", "calcul", "priorites", "template"],
+    tags: ["relatif", "calcul", "priorites", "template"],
     generate: () => {
       const a = randomInt(-8, 8);
       const b = randomInt(-8, 8);
@@ -443,7 +443,7 @@ export const operationsRelatifsBank: TutorBankItemV4[] = [
     id: "relatif_calcul_open_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "operations_relatifs",
+    notionId: "relatif_operation",
     microId: "relatif_calcul",
     difficulty: 4,
     theme: "neutral",
@@ -454,7 +454,7 @@ export const operationsRelatifsBank: TutorBankItemV4[] = [
     hint: "Pense aux priorités opératoires.",
     explanation:
       "La multiplication est prioritaire sur l’addition. On calcule donc d’abord (-3) × 4 = -12, puis -12 + 5 = -7.",
-    tags: ["relatifs", "calcul", "open"],
+    tags: ["relatif", "calcul", "open"],
   },
 
   // =========================
@@ -465,7 +465,7 @@ export const operationsRelatifsBank: TutorBankItemV4[] = [
     id: "relatif_probleme_fixed_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "operations_relatifs",
+    notionId: "relatif_operation",
     microId: "relatif_probleme",
     difficulty: 2,
     theme: "neutral",
@@ -476,19 +476,19 @@ export const operationsRelatifsBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Calcule -2 + 7.",
     explanation: "-2 + 7 = 5. La température finale est 5 °C.",
-    tags: ["relatifs", "probleme", "temperature"],
+    tags: ["relatif", "probleme", "temperature"],
   },
   {
     kind: "template",
     id: "relatif_probleme_tpl_temperature_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "operations_relatifs",
+    notionId: "relatif_operation",
     microId: "relatif_probleme",
     difficulty: 3,
     theme: "neutral",
     hint: "Traduis la situation par une addition de nombres relatifs.",
-    tags: ["relatifs", "probleme", "temperature", "template"],
+    tags: ["relatif", "probleme", "temperature", "template"],
     generate: () => {
       const start = -randomInt(1, 8);
       const change = randomChoice([-1, 1]) * randomInt(2, 10);
@@ -508,12 +508,12 @@ export const operationsRelatifsBank: TutorBankItemV4[] = [
     id: "relatif_probleme_tpl_reunion_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "operations_relatifs",
+    notionId: "relatif_operation",
     microId: "relatif_probleme",
     difficulty: 3,
     theme: "reunion",
     hint: "Une montée est positive, une descente est négative.",
-    tags: ["relatifs", "probleme", "reunion", "altitude"],
+    tags: ["relatif", "probleme", "reunion", "altitude"],
     generate: () => {
       const altitude = randomInt(300, 1200);
       const descent = randomInt(100, 400);
@@ -534,11 +534,11 @@ export const operationsRelatifsBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "fixed",
-    id: "relatif_defis_ops_fixed_1",
+    id: "relatif_operation_defi_fixed_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "operations_relatifs",
-    microId: "relatif_defis_ops",
+    notionId: "relatif_operation",
+    microId: "relatif_operation_defi",
     difficulty: 5,
     theme: "neutral",
     text: "Un élève affirme que (-4) × (-3) = -12. A-t-il raison ?",
@@ -549,19 +549,19 @@ export const operationsRelatifsBank: TutorBankItemV4[] = [
     hint: "Regarde la règle des signes pour deux nombres négatifs.",
     explanation:
       "Non. Le produit de deux nombres négatifs est positif : (-4) × (-3) = 12.",
-    tags: ["relatifs", "defi", "erreur"],
+    tags: ["relatif", "defi", "erreur"],
   },
   {
     kind: "template",
-    id: "relatif_defis_ops_open_1",
+    id: "relatif_operation_defi_open_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "operations_relatifs",
-    microId: "relatif_defis_ops",
+    notionId: "relatif_operation",
+    microId: "relatif_operation_defi",
     difficulty: 5,
     theme: "neutral",
     hint: "Corrige le signe et explique la règle.",
-    tags: ["relatifs", "defi", "open", "erreur"],
+    tags: ["relatif", "defi", "open", "erreur"],
     generate: () => {
       const a = randomInt(2, 9);
       const b = randomInt(2, 9);

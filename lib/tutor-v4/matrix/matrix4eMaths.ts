@@ -37,22 +37,22 @@ const supportLinks: Record<string, string[]> = {
     "relatif_division",
   ],
   relatif_probleme: ["relatif_calcul"],
-  relatif_defis_ops: ["relatif_soustraction", "relatif_multiplication"],
+  relatif_operation_defi: ["relatif_soustraction", "relatif_multiplication"],
 
   // =========================
   // FRACTIONS
   // =========================
-  fraction_simplifier: ["fraction_egales"],
+  fraction_simplifier: ["fraction_egale"],
   fraction_decimal: ["fraction_simplifier"],
-  fraction_rationnel: ["fraction_egales", "fraction_decimal"],
+  fraction_rationnel: ["fraction_egale", "fraction_decimal"],
   fraction_comparer: ["fraction_simplifier", "fraction_decimal"],
-  fraction_addition: ["fraction_comparer", "relatif_addition"],
-  fraction_produit: ["fraction_simplifier"],
-  fraction_quantite: ["fraction_comparer", "fraction_produit"],
+  fraction_additionner: ["fraction_comparer", "relatif_addition"],
+  fraction_multiplier: ["fraction_simplifier"],
+  fraction_quantite: ["fraction_comparer", "fraction_multiplier"],
   fraction_inverse: ["fraction_simplifier", "fraction_rationnel"],
-  fraction_division: ["fraction_inverse", "fraction_produit"],
+  fraction_diviser: ["fraction_inverse", "fraction_multiplier"],
   fraction_oppose: ["fraction_rationnel", "relatif_multiplication"],
-  fraction_defis: ["fraction_quantite", "fraction_division", "fraction_oppose"],
+  fraction_defi: ["fraction_quantite", "fraction_diviser", "fraction_oppose"],
 
   // =========================
   // PROPORTIONNALITÉ
@@ -61,8 +61,8 @@ const supportLinks: Record<string, string[]> = {
   prop_coeff: ["prop_table", "fraction_comparer"],
   prop_quatrieme: ["prop_table", "prop_coeff", "fraction_comparer"],
   prop_pourcentage: ["prop_coeff", "fraction_comparer"],
-  prop_coeff_mult: ["prop_pourcentage", "prop_coeff"],
-  prop_evolution: ["prop_pourcentage", "prop_coeff_mult", "relatif_calcul"],
+  prop_coeff_multiplicateur: ["prop_pourcentage", "prop_coeff"],
+  prop_evolution: ["prop_pourcentage", "prop_coeff_multiplicateur", "relatif_calcul"],
   prop_probleme: [
     "prop_quatrieme",
     "prop_coeff",
@@ -71,70 +71,70 @@ const supportLinks: Record<string, string[]> = {
     "fraction_quantite",
     "relatif_calcul",
   ],
-  prop_defis: ["prop_evolution", "prop_probleme", "prop_coeff_mult"],
+  prop_defi: ["prop_evolution", "prop_probleme", "prop_coeff_multiplicateur"],
 
   // =========================
   // EXPRESSIONS LITTÉRALES
   // =========================
-  expr_litterale_traduire: ["relatif_calcul"],
-  expr_litterale_substituer: ["relatif_calcul"],
-  expr_litterale_reduire: ["expr_litterale_substituer"],
-  expr_litterale_defis: ["expr_litterale_reduire"],
+  litteral_expression_traduire: ["relatif_calcul"],
+  litteral_expression_substituer: ["relatif_calcul"],
+  litteral_expression_reduire: ["litteral_expression_substituer"],
+  litteral_expression_defi: ["litteral_expression_reduire"],
 
   // =========================
   // DISTRIBUTIVITÉ
   // =========================
-  distrib_simple: ["expr_litterale_reduire"],
-  distrib_double: ["distrib_reconnaitre"],
-  distrib_reduire: ["expr_litterale_reduire", "distrib_double"],
-  distrib_reconnaitre: ["expr_litterale_comprendre"],
-  distrib_defis: ["distrib_reduire", "distrib_double"],
+  litteral_distributivite_simple: ["litteral_expression_reduire"],
+  litteral_distributivite_double: ["litteral_distributivite_reconnaitre"],
+  litteral_distributivite_reduire: ["litteral_expression_reduire", "litteral_distributivite_double"],
+  litteral_distributivite_reconnaitre: ["litteral_expression_comprendre"],
+  litteral_distributivite_defi: ["litteral_distributivite_reduire", "litteral_distributivite_double"],
 
   // =========================
   // IDENTITÉS REMARQUABLES
   // =========================
-  ir_lier_distributivite: ["distrib_double", "distrib_reduire"],
-  ir_reconnaitre: ["ir_lier_distributivite", "distrib_reconnaitre"],
-  ir_developper: ["ir_reconnaitre", "ir_lier_distributivite", "distrib_double"],
-  ir_choisir: ["ir_reconnaitre", "ir_developper"],
-  ir_defis: ["ir_choisir", "ir_developper", "distrib_double"],
+  litteral_identite_lier_distributivite: ["litteral_distributivite_double", "litteral_distributivite_reduire"],
+  litteral_identite_reconnaitre: ["litteral_identite_lier_distributivite", "litteral_distributivite_reconnaitre"],
+  litteral_identite_developper: ["litteral_identite_reconnaitre", "litteral_identite_lier_distributivite", "litteral_distributivite_double"],
+  litteral_identite_choisir: ["litteral_identite_reconnaitre", "litteral_identite_developper"],
+  litteral_identite_defi: ["litteral_identite_choisir", "litteral_identite_developper", "litteral_distributivite_double"],
 
 
   // =========================
   // FACTORISATION
   // =========================
-  facteur_commun: ["distrib_simple", "expr_litterale_reduire"],
-  factoriser_simple: ["facteur_commun", "distrib_simple"],
-  factoriser_ir: ["factoriser_simple", "ir_reconnaitre", "ir_developper"],
-  factoriser_verifier: ["factoriser_simple", "distrib_simple"],
-  factorisation_defis: ["factoriser_ir", "factoriser_verifier"],
+  litteral_facteur_commun: ["litteral_distributivite_simple", "litteral_expression_reduire"],
+  litteral_factoriser_simple: ["litteral_facteur_commun", "litteral_distributivite_simple"],
+  litteral_factoriser_identite: ["litteral_factoriser_simple", "litteral_identite_reconnaitre", "litteral_identite_developper"],
+  litteral_factoriser_verifier: ["litteral_factoriser_simple", "litteral_distributivite_simple"],
+  litteral_factorisation_defi: ["litteral_factoriser_identite", "litteral_factoriser_verifier"],
 
   // =========================
   // ÉQUATIONS
   // =========================
-  equation_traduire: ["expr_litterale_traduire"],
-  equation_resoudre_simple: ["expr_litterale_substituer", "relatif_calcul"],
-  equation_resoudre_reduction: ["expr_litterale_reduire"],
-  equation_resoudre_distributivite: ["distrib_simple"],
-  equation_verifier: ["expr_litterale_substituer"],
+  equation_traduire: ["litteral_expression_traduire"],
+  equation_resoudre_simple: ["litteral_expression_substituer", "relatif_calcul"],
+  equation_resoudre_reduction: ["litteral_expression_reduire"],
+  equation_resoudre_distributivite: ["litteral_distributivite_simple"],
+  equation_verifier: ["litteral_expression_substituer"],
   equation_probleme: ["equation_traduire", "relatif_calcul"],
-  equation_defis: ["equation_probleme", "equation_resoudre_distributivite"],
+  equation_defi: ["equation_probleme", "equation_resoudre_distributivite"],
 
 
   // =========================
   // PYTHAGORE
   // =========================
-  pythagore_carres_racines: ["relatif_calcul"],
+  pythagore_carre_racine: ["relatif_calcul"],
   pythagore_reconnaitre: [],
   pythagore_calculer_hypotenuse: [
-    "pythagore_carres_racines",
+    "pythagore_carre_racine",
     "pythagore_reconnaitre",
   ],
   pythagore_calculer_cote: [
-    "pythagore_carres_racines",
+    "pythagore_carre_racine",
     "pythagore_reconnaitre",
   ],
-  pythagore_reciproque_verifier: ["pythagore_carres_racines"],
+  pythagore_reciproque_verifier: ["pythagore_carre_racine"],
   pythagore_reciproque_conclure: [
     "pythagore_reciproque_verifier",
     "pythagore_reconnaitre",
@@ -144,7 +144,7 @@ const supportLinks: Record<string, string[]> = {
     "pythagore_calculer_cote",
     "pythagore_reciproque_conclure",
   ],
-  pythagore_defis: [
+  pythagore_defi: [
     "pythagore_rediger",
     "pythagore_reciproque_conclure",
   ],
@@ -153,20 +153,20 @@ const supportLinks: Record<string, string[]> = {
   // THALÈS
   // =========================
   thales_configuration: ["prop_reconnaitre"],
-  thales_rapports: [
+  thales_rapport: [
     "thales_configuration",
     "prop_table",
     "prop_coeff",
     "fraction_comparer",
   ],
   thales_calculer_longueur: [
-    "thales_rapports",
+    "thales_rapport",
     "prop_quatrieme",
     "prop_coeff",
     "relatif_calcul",
   ],
   thales_reciproque_verifier: [
-    "thales_rapports",
+    "thales_rapport",
     "fraction_comparer",
     "prop_coeff",
   ],
@@ -179,22 +179,22 @@ const supportLinks: Record<string, string[]> = {
     "thales_reciproque_conclure",
     "prop_probleme",
   ],
-  thales_defis: [
+  thales_defi: [
     "thales_rediger",
     "thales_calculer_longueur",
     "thales_reciproque_conclure",
-    "prop_defis",
+    "prop_defi",
   ],
 
   // =========================
   // PARALLÉLOGRAMMES
   // =========================
-  para_proprietes: ["para_reconnaitre"],
-  para_diagonales: ["para_proprietes"],
-  para_montrer: ["para_proprietes", "para_diagonales"],
-  para_aire: ["aire_parallelogramme"],
-  para_probleme: ["para_montrer", "para_aire"],
-  para_defis: ["para_probleme"],
+  quadrilatere_parallelogramme_propriete: ["quadrilatere_parallelogramme_reconnaitre"],
+  quadrilatere_parallelogramme_diagonale: ["quadrilatere_parallelogramme_propriete"],
+  quadrilatere_parallelogramme_montrer: ["quadrilatere_parallelogramme_propriete", "quadrilatere_parallelogramme_diagonale"],
+  quadrilatere_parallelogramme_aire: ["aire_parallelogramme"],
+  quadrilatere_parallelogramme_probleme: ["quadrilatere_parallelogramme_montrer", "quadrilatere_parallelogramme_aire"],
+  quadrilatere_parallelogramme_defi: ["quadrilatere_parallelogramme_probleme"],
 
   // =========================
   // TRANSFORMATIONS
@@ -202,45 +202,45 @@ const supportLinks: Record<string, string[]> = {
   // =========================
   // TRANSFORMATIONS
   // =========================
-    transfo_symetrie_centrale: ["transfo_symetrie_axiale"],
+    sym_centrale: ["sym_axiale"],
 
-    transfo_translation: [
-      "transfo_symetrie_axiale",
-      "transfo_symetrie_centrale",
+    sym_translation: [
+      "sym_axiale",
+      "sym_centrale",
     ],
 
-    transfo_rotation: [
-      "transfo_symetrie_centrale",
+    sym_rotation: [
+      "sym_centrale",
     ],
 
-    transfo_proprietes: [
-      "transfo_symetrie_axiale",
-      "transfo_symetrie_centrale",
-      "transfo_translation",
-      "transfo_rotation",
+    sym_transformation_propriete: [
+      "sym_axiale",
+      "sym_centrale",
+      "sym_translation",
+      "sym_rotation",
     ],
 
-    transfo_defis: [
-      "transfo_symetrie_axiale",
-      "transfo_symetrie_centrale",
-      "transfo_translation",
-      "transfo_rotation",
-      "transfo_proprietes",
+    sym_transformation_defi: [
+      "sym_axiale",
+      "sym_centrale",
+      "sym_translation",
+      "sym_rotation",
+      "sym_transformation_propriete",
     ],
 
   // =========================
   // PÉRIMÈTRES
   // =========================
-  perimetre_rectangle: ["relatif_addition"],
-  perimetre_carre: ["relatif_multiplication"],
-  perimetre_triangle: ["relatif_addition"],
-  perimetre_figure: [
-    "perimetre_rectangle",
-    "perimetre_carre",
-    "perimetre_triangle",
+  aire_perimetre_rectangle: ["relatif_addition"],
+  aire_perimetre_carre: ["relatif_multiplication"],
+  aire_perimetre_triangle: ["relatif_addition"],
+  aire_perimetre_figure: [
+    "aire_perimetre_rectangle",
+    "aire_perimetre_carre",
+    "aire_perimetre_triangle",
   ],
-  perimetre_probleme: ["perimetre_figure"],
-  perimetre_defis: ["perimetre_probleme"],
+  aire_perimetre_probleme: ["aire_perimetre_figure"],
+  aire_perimetre_defi: ["aire_perimetre_probleme"],
 
   // =========================
   // AIRES
@@ -256,7 +256,7 @@ const supportLinks: Record<string, string[]> = {
     "aire_parallelogramme",
   ],
   aire_probleme: ["aire_figure"],
-  aire_defis: ["aire_probleme"],
+  aire_defi: ["aire_probleme"],
 
   // =========================
   // VOLUMES
@@ -282,13 +282,13 @@ const supportLinks: Record<string, string[]> = {
     "relatif_multiplication",
   ],
 
-  volume_unites: ["volume_pave", "volume_prisme", "volume_cylindre"],
+  volume_unite: ["volume_pave", "volume_prisme", "volume_cylindre"],
 
-  volume_defis: [
+  volume_defi: [
     "volume_pave",
     "volume_prisme",
     "volume_cylindre",
-    "volume_unites",
+    "volume_unite",
   ],
 
 // =========================
@@ -300,18 +300,18 @@ const supportLinks: Record<string, string[]> = {
   stat_moyenne: ["stat_effectif", "relatif_calcul"],
   stat_mediane: ["stat_effectif"],
   stat_etendue: ["stat_lire_tableau"],
-  stat_interpretation: ["stat_moyenne", "stat_mediane", "stat_etendue"],
-  stat_probleme: ["stat_interpretation"],
-  stat_defis: ["stat_probleme"],
+  stat_interpreter: ["stat_moyenne", "stat_mediane", "stat_etendue"],
+  stat_probleme: ["stat_interpreter"],
+  stat_defi: ["stat_probleme"],
 
   // =========================
   // PROBABILITÉS
   // =========================
-  proba_issues: ["proba_vocabulaire", "stat_lire_tableau"],
-  proba_evenements: ["proba_vocabulaire", "proba_issues"],
-  proba_equiprobabilite: ["proba_issues"],
+  proba_issue: ["proba_vocabulaire", "stat_lire_tableau"],
+  proba_evenement: ["proba_vocabulaire", "proba_issue"],
+  proba_equiprobabilite: ["proba_issue"],
   proba_calculer_fraction: [
-    "proba_issues",
+    "proba_issue",
     "proba_equiprobabilite",
     "fraction_comparer",
   ],
@@ -320,44 +320,44 @@ const supportLinks: Record<string, string[]> = {
     "proba_calculer_fraction",
     "fraction_comparer",
   ],
-  proba_defis: [
-    "proba_evenements",
+  proba_defi: [
+    "proba_evenement",
     "proba_convertir",
     "proba_comparer",
   ],
   // =========================
   // ALGORITHMIQUE
   // =========================
-  algo_instructions_conditionnelles: [
-    "algo_conditions",
+  algo_instruction_conditionnelle: [
+    "algo_condition",
     "relatif_calcul",
   ],
 
   algo_variable: [
-    "algo_instructions_conditionnelles",
-    "expr_litterale_substituer",
+    "algo_instruction_conditionnelle",
+    "litteral_expression_substituer",
     "relatif_calcul",
   ],
 
   algo_programme_objectif: [
     "algo_variable",
-    "algo_instructions_conditionnelles",
+    "algo_instruction_conditionnelle",
     "prop_reconnaitre",
     "equation_reconnaitre",
   ],
 
-  algo_modifier_programme: [
+  algo_modifier: [
     "algo_programme_objectif",
     "algo_variable",
-    "expr_litterale_reduire",
+    "litteral_expression_reduire",
   ],
 
-  algo_defis: [
-    "algo_conditions",
-    "algo_instructions_conditionnelles",
+  algo_defi: [
+    "algo_condition",
+    "algo_instruction_conditionnelle",
     "algo_variable",
     "algo_programme_objectif",
-    "algo_modifier_programme",
+    "algo_modifier",
     "relatif_probleme",
     "prop_probleme",
   ],

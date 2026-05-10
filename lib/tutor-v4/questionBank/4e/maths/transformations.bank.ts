@@ -26,11 +26,11 @@ export const transformationsBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "4e_transfo_symetrie_axiale_fixed_1",
+    id: "4e_sym_axiale_fixed_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "transformations",
-    microId: "transfo_symetrie_axiale",
+    notionId: "sym_transformation",
+    microId: "sym_axiale",
     difficulty: 1,
     theme: "neutral",
     text: "Quelle transformation utilise un axe comme un miroir ?",
@@ -70,11 +70,11 @@ export const transformationsBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "4e_transfo_symetrie_axiale_tpl_1",
+    id: "4e_sym_axiale_tpl_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "transformations",
-    microId: "transfo_symetrie_axiale",
+    notionId: "sym_transformation",
+    microId: "sym_axiale",
     difficulty: 2,
     theme: "neutral",
     hint: "Dans une symétrie axiale, l’axe est au milieu entre un point et son image.",
@@ -120,11 +120,11 @@ export const transformationsBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "4e_transfo_symetrie_axiale_open_1",
+    id: "4e_sym_axiale_open_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "transformations",
-    microId: "transfo_symetrie_axiale",
+    notionId: "sym_transformation",
+    microId: "sym_axiale",
     difficulty: 3,
     theme: "neutral",
     text: "Explique comment vérifier qu’un point A' est l’image de A par symétrie axiale.",
@@ -146,11 +146,11 @@ export const transformationsBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "4e_transfo_symetrie_centrale_fixed_1",
+    id: "4e_sym_centrale_fixed_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "transformations",
-    microId: "transfo_symetrie_centrale",
+    notionId: "sym_transformation",
+    microId: "sym_centrale",
     difficulty: 1,
     theme: "neutral",
     text: "Une symétrie centrale correspond à...",
@@ -190,11 +190,11 @@ export const transformationsBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "4e_transfo_symetrie_centrale_fixed_2",
+    id: "4e_sym_centrale_fixed_2",
     niveau: "4e",
     matiere: "maths",
-    notionId: "transformations",
-    microId: "transfo_symetrie_centrale",
+    notionId: "sym_transformation",
+    microId: "sym_centrale",
     difficulty: 2,
     theme: "neutral",
     text: "Quelle est la différence principale entre une symétrie axiale et une symétrie centrale ?",
@@ -218,11 +218,11 @@ export const transformationsBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "4e_transfo_symetrie_centrale_tpl_1",
+    id: "4e_sym_centrale_tpl_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "transformations",
-    microId: "transfo_symetrie_centrale",
+    notionId: "sym_transformation",
+    microId: "sym_centrale",
     difficulty: 2,
     theme: "neutral",
     hint: "Le centre est le milieu entre chaque point et son image.",
@@ -264,11 +264,11 @@ export const transformationsBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "4e_transfo_symetrie_centrale_open_1",
+    id: "4e_sym_centrale_open_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "transformations",
-    microId: "transfo_symetrie_centrale",
+    notionId: "sym_transformation",
+    microId: "sym_centrale",
     difficulty: 4,
     theme: "neutral",
     text: "Explique comment vérifier qu’un point A' est bien l’image de A par symétrie centrale de centre O.",
@@ -290,11 +290,11 @@ export const transformationsBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "4e_transfo_translation_fixed_1",
+    id: "4e_sym_translation_fixed_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "transformations",
-    microId: "transfo_translation",
+    notionId: "sym_transformation",
+    microId: "sym_translation",
     difficulty: 1,
     theme: "neutral",
     text: "Une translation est...",
@@ -313,11 +313,11 @@ export const transformationsBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "4e_transfo_translation_tpl_1",
+    id: "4e_sym_translation_tpl_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "transformations",
-    microId: "transfo_translation",
+    notionId: "sym_transformation",
+    microId: "sym_translation",
     difficulty: 2,
     theme: "neutral",
     hint: "Tous les points doivent subir le même déplacement.",
@@ -368,11 +368,11 @@ export const transformationsBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "4e_transfo_translation_open_1",
+    id: "4e_sym_translation_open_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "transformations",
-    microId: "transfo_translation",
+    notionId: "sym_transformation",
+    microId: "sym_translation",
     difficulty: 4,
     theme: "neutral",
     text: "Explique comment reconnaître une translation sur une figure.",
@@ -394,11 +394,11 @@ export const transformationsBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "4e_transfo_rotation_fixed_1",
+    id: "4e_sym_rotation_fixed_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "transformations",
-    microId: "transfo_rotation",
+    notionId: "sym_transformation",
+    microId: "sym_rotation",
     difficulty: 1,
     theme: "neutral",
     text: "Une rotation est définie par...",
@@ -417,11 +417,11 @@ export const transformationsBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "4e_transfo_rotation_tpl_1",
+    id: "4e_sym_rotation_tpl_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "transformations",
-    microId: "transfo_rotation",
+    notionId: "sym_transformation",
+    microId: "sym_rotation",
     difficulty: 2,
     theme: "neutral",
     hint: "La figure tourne autour du centre O.",
@@ -475,11 +475,11 @@ export const transformationsBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "4e_transfo_rotation_open_1",
+    id: "4e_sym_rotation_open_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "transformations",
-    microId: "transfo_rotation",
+    notionId: "sym_transformation",
+    microId: "sym_rotation",
     difficulty: 4,
     theme: "neutral",
     text: "Explique comment reconnaître une rotation sur une figure.",
@@ -501,11 +501,11 @@ export const transformationsBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "4e_transfo_proprietes_fixed_1",
+    id: "4e_sym_transformation_propriete_fixed_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "transformations",
-    microId: "transfo_proprietes",
+    notionId: "sym_transformation",
+    microId: "sym_transformation_propriete",
     difficulty: 2,
     theme: "neutral",
     text: "La symétrie centrale, la translation et la rotation conservent...",
@@ -519,20 +519,20 @@ export const transformationsBank: TutorBankItemV4[] = [
       "Méthode : on compare la figure de départ et la figure image.\n\n" +
       "Calcul : les longueurs, les angles, l’alignement et le parallélisme sont conservés.\n\n" +
       "Conclusion : elles conservent les longueurs et les angles.",
-    tags: ["transformation", "proprietes", "conservation", "qcm"],
+    tags: ["transformation", "propriete", "conservation", "qcm"],
   },
 
   {
     kind: "template",
-    id: "4e_transfo_proprietes_tpl_1",
+    id: "4e_sym_transformation_propriete_tpl_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "transformations",
-    microId: "transfo_proprietes",
+    notionId: "sym_transformation",
+    microId: "sym_transformation_propriete",
     difficulty: 3,
     theme: "neutral",
     hint: "Une transformation de 4e conserve la forme et la taille.",
-    tags: ["transformation", "proprietes", "template"],
+    tags: ["transformation", "propriete", "template"],
     generate: () => {
       const transfo = randomChoice(["translation", "rotation", "symétrie centrale"]);
       const longueur = randomChoice([4, 5, 6, 7, 8]);
@@ -553,11 +553,11 @@ export const transformationsBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "4e_transfo_proprietes_erreur_1",
+    id: "4e_sym_transformation_propriete_erreur_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "transformations",
-    microId: "transfo_proprietes",
+    notionId: "sym_transformation",
+    microId: "sym_transformation_propriete",
     difficulty: 3,
     theme: "neutral",
     text: "Un élève dit : une rotation change la taille de la figure. A-t-il raison ?",
@@ -571,16 +571,16 @@ export const transformationsBank: TutorBankItemV4[] = [
       "Méthode : on vérifie si la taille change.\n\n" +
       "Calcul : les longueurs sont conservées.\n\n" +
       "Conclusion : l’élève a tort, une rotation ne change pas la taille.",
-    tags: ["transformation", "proprietes", "erreur", "rotation"],
+    tags: ["transformation", "propriete", "erreur", "rotation"],
   },
 
   {
     kind: "fixed",
-    id: "4e_transfo_proprietes_open_1",
+    id: "4e_sym_transformation_propriete_open_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "transformations",
-    microId: "transfo_proprietes",
+    notionId: "sym_transformation",
+    microId: "sym_transformation_propriete",
     difficulty: 4,
     theme: "neutral",
     text: "Cite deux propriétés conservées par une symétrie centrale, une translation ou une rotation.",
@@ -593,7 +593,7 @@ export const transformationsBank: TutorBankItemV4[] = [
       "Méthode : on compare la figure initiale et son image.\n\n" +
       "Calcul : les longueurs, les angles, l’alignement et le parallélisme sont conservés.\n\n" +
       "Conclusion : on peut citer par exemple les longueurs et les angles.",
-    tags: ["transformation", "proprietes", "open"],
+    tags: ["transformation", "propriete", "open"],
   },
 
   /* =========================
@@ -602,11 +602,11 @@ export const transformationsBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "4e_transfo_defis_fixed_1",
+    id: "4e_sym_transformation_defi_fixed_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "transformations",
-    microId: "transfo_defis",
+    notionId: "sym_transformation",
+    microId: "sym_transformation_defi",
     difficulty: 3,
     theme: "reunion",
     text: "Sur un plan de Saint-Pierre, un pictogramme est déplacé de 4 carreaux vers la droite et 2 vers le bas, sans tourner. Quelle transformation est utilisée ?",
@@ -625,11 +625,11 @@ export const transformationsBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "4e_transfo_defis_tpl_1",
+    id: "4e_sym_transformation_defi_tpl_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "transformations",
-    microId: "transfo_defis",
+    notionId: "sym_transformation",
+    microId: "sym_transformation_defi",
     difficulty: 4,
     theme: "neutral",
     hint: "Cherche si la figure glisse, tourne ou fait un demi-tour.",
@@ -675,11 +675,11 @@ export const transformationsBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "4e_transfo_defis_open_1",
+    id: "4e_sym_transformation_defi_open_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "transformations",
-    microId: "transfo_defis",
+    notionId: "sym_transformation",
+    microId: "sym_transformation_defi",
     difficulty: 5,
     theme: "neutral",
     text: "Explique la différence entre une symétrie axiale, une symétrie centrale, une translation et une rotation.",
@@ -700,11 +700,11 @@ export const transformationsBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "4e_transfo_symetrie_axiale_erreur_1",
+    id: "4e_sym_axiale_erreur_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "transformations",
-    microId: "transfo_symetrie_axiale",
+    notionId: "sym_transformation",
+    microId: "sym_axiale",
     difficulty: 3,
     theme: "neutral",
     text: "Un élève dit : dans une symétrie axiale, le point A, son image A' et l’axe sont toujours alignés. A-t-il raison ?",
@@ -727,11 +727,11 @@ export const transformationsBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "4e_transfo_symetrie_centrale_erreur_1",
+    id: "4e_sym_centrale_erreur_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "transformations",
-    microId: "transfo_symetrie_centrale",
+    notionId: "sym_transformation",
+    microId: "sym_centrale",
     difficulty: 3,
     theme: "neutral",
     text: "Un élève dit : une symétrie centrale fonctionne comme un miroir avec un axe. A-t-il raison ?",
@@ -750,11 +750,11 @@ export const transformationsBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "4e_transfo_symetrie_centrale_tpl_2_milieu",
+    id: "4e_sym_centrale_tpl_2_milieu",
     niveau: "4e",
     matiere: "maths",
-    notionId: "transformations",
-    microId: "transfo_symetrie_centrale",
+    notionId: "sym_transformation",
+    microId: "sym_centrale",
     difficulty: 3,
     theme: "neutral",
     hint: "Le centre O est le milieu de [AA'].",
@@ -782,11 +782,11 @@ export const transformationsBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "4e_transfo_translation_tpl_2_coordonnees",
+    id: "4e_sym_translation_tpl_2_coordonnees",
     niveau: "4e",
     matiere: "maths",
-    notionId: "transformations",
-    microId: "transfo_translation",
+    notionId: "sym_transformation",
+    microId: "sym_translation",
     difficulty: 3,
     theme: "neutral",
     hint: "Ajoute le même déplacement aux coordonnées du point.",
@@ -819,11 +819,11 @@ export const transformationsBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "4e_transfo_translation_erreur_1",
+    id: "4e_sym_translation_erreur_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "transformations",
-    microId: "transfo_translation",
+    notionId: "sym_transformation",
+    microId: "sym_translation",
     difficulty: 3,
     theme: "neutral",
     text: "Un élève dit : dans une translation, la figure peut tourner un peu. A-t-il raison ?",
@@ -846,11 +846,11 @@ export const transformationsBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "4e_transfo_rotation_fixed_2",
+    id: "4e_sym_rotation_fixed_2",
     niveau: "4e",
     matiere: "maths",
-    notionId: "transformations",
-    microId: "transfo_rotation",
+    notionId: "sym_transformation",
+    microId: "sym_rotation",
     difficulty: 2,
     theme: "neutral",
     text: "Lors d’une rotation de centre O, que devient la distance OA ?",
@@ -874,11 +874,11 @@ export const transformationsBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "4e_transfo_rotation_tpl_2_distance",
+    id: "4e_sym_rotation_tpl_2_distance",
     niveau: "4e",
     matiere: "maths",
-    notionId: "transformations",
-    microId: "transfo_rotation",
+    notionId: "sym_transformation",
+    microId: "sym_rotation",
     difficulty: 3,
     theme: "neutral",
     hint: "Une rotation conserve la distance au centre.",
@@ -906,15 +906,15 @@ export const transformationsBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "4e_transfo_proprietes_tpl_2_angle",
+    id: "4e_sym_transformation_propriete_tpl_2_angle",
     niveau: "4e",
     matiere: "maths",
-    notionId: "transformations",
-    microId: "transfo_proprietes",
+    notionId: "sym_transformation",
+    microId: "sym_transformation_propriete",
     difficulty: 3,
     theme: "neutral",
     hint: "Ces transformations conservent les angles.",
-    tags: ["transformation", "proprietes", "angle", "template"],
+    tags: ["transformation", "propriete", "angle", "template"],
     generate: () => {
       const angle = randomChoice([35, 45, 60, 75, 90]);
       const transfo = randomChoice([
@@ -940,11 +940,11 @@ export const transformationsBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "4e_transfo_proprietes_fixed_2",
+    id: "4e_sym_transformation_propriete_fixed_2",
     niveau: "4e",
     matiere: "maths",
-    notionId: "transformations",
-    microId: "transfo_proprietes",
+    notionId: "sym_transformation",
+    microId: "sym_transformation_propriete",
     difficulty: 3,
     theme: "neutral",
     text: "Une translation transforme un rectangle en...",
@@ -958,7 +958,7 @@ export const transformationsBank: TutorBankItemV4[] = [
       "Méthode : on regarde la nature de la figure.\n\n" +
       "Calcul : un rectangle reste un rectangle, avec les mêmes dimensions.\n\n" +
       "Conclusion : l’image est un rectangle de même taille.",
-    tags: ["transformation", "proprietes", "rectangle", "qcm"],
+    tags: ["transformation", "propriete", "rectangle", "qcm"],
   },
 
   /* =========================
@@ -967,11 +967,11 @@ export const transformationsBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "4e_transfo_defis_tpl_2_reunion_canvas",
+    id: "4e_sym_transformation_defi_tpl_2_reunion_canvas",
     niveau: "4e",
     matiere: "maths",
-    notionId: "transformations",
-    microId: "transfo_defis",
+    notionId: "sym_transformation",
+    microId: "sym_transformation_defi",
     difficulty: 4,
     theme: "reunion",
     hint: "Observe si la figure glisse, tourne, se retourne ou fait un demi-tour.",
@@ -1030,11 +1030,11 @@ export const transformationsBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "4e_transfo_symetrie_axiale_tpl_2_axe_horizontal",
+    id: "4e_sym_axiale_tpl_2_axe_horizontal",
     niveau: "4e",
     matiere: "maths",
-    notionId: "transformations",
-    microId: "transfo_symetrie_axiale",
+    notionId: "sym_transformation",
+    microId: "sym_axiale",
     difficulty: 2,
     theme: "neutral",
     hint: "L’axe horizontal joue le rôle d’un miroir.",
@@ -1084,11 +1084,11 @@ export const transformationsBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "4e_transfo_symetrie_centrale_tpl_3_piege_non",
+    id: "4e_sym_centrale_tpl_3_piege_non",
     niveau: "4e",
     matiere: "maths",
-    notionId: "transformations",
-    microId: "transfo_symetrie_centrale",
+    notionId: "sym_transformation",
+    microId: "sym_centrale",
     difficulty: 4,
     theme: "neutral",
     hint: "Vérifie si O est vraiment le milieu entre chaque point et son image.",
@@ -1136,11 +1136,11 @@ export const transformationsBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "4e_transfo_translation_tpl_3_trouver_deplacement",
+    id: "4e_sym_translation_tpl_3_trouver_deplacement",
     niveau: "4e",
     matiere: "maths",
-    notionId: "transformations",
-    microId: "transfo_translation",
+    notionId: "sym_transformation",
+    microId: "sym_translation",
     difficulty: 3,
     theme: "neutral",
     hint: "Compare un point et son image.",
@@ -1200,11 +1200,11 @@ export const transformationsBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "4e_transfo_rotation_fixed_3_angle_180",
+    id: "4e_sym_rotation_fixed_3_angle_180",
     niveau: "4e",
     matiere: "maths",
-    notionId: "transformations",
-    microId: "transfo_rotation",
+    notionId: "sym_transformation",
+    microId: "sym_rotation",
     difficulty: 2,
     theme: "neutral",
     text: "Une rotation de 180° autour d’un point correspond aussi à...",
@@ -1228,11 +1228,11 @@ export const transformationsBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "4e_transfo_rotation_tpl_3_angle_qcm",
+    id: "4e_sym_rotation_tpl_3_angle_qcm",
     niveau: "4e",
     matiere: "maths",
-    notionId: "transformations",
-    microId: "transfo_rotation",
+    notionId: "sym_transformation",
+    microId: "sym_rotation",
     difficulty: 3,
     theme: "neutral",
     hint: "Observe l’angle de rotation autour de O.",
@@ -1290,11 +1290,11 @@ export const transformationsBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "4e_transfo_proprietes_fixed_3_alignement",
+    id: "4e_sym_transformation_propriete_fixed_3_alignement",
     niveau: "4e",
     matiere: "maths",
-    notionId: "transformations",
-    microId: "transfo_proprietes",
+    notionId: "sym_transformation",
+    microId: "sym_transformation_propriete",
     difficulty: 3,
     theme: "neutral",
     text: "Si trois points sont alignés, leurs images par une translation sont...",
@@ -1313,16 +1313,16 @@ export const transformationsBank: TutorBankItemV4[] = [
       "Méthode : on applique la propriété de conservation.\n\n" +
       "Calcul : l’alignement est conservé par translation.\n\n" +
       "Conclusion : les images de trois points alignés sont alignées.",
-    tags: ["transformation", "proprietes", "alignement"],
+    tags: ["transformation", "propriete", "alignement"],
   },
 
   {
     kind: "fixed",
-    id: "4e_transfo_proprietes_fixed_4_parallelisme",
+    id: "4e_sym_transformation_propriete_fixed_4_parallelisme",
     niveau: "4e",
     matiere: "maths",
-    notionId: "transformations",
-    microId: "transfo_proprietes",
+    notionId: "sym_transformation",
+    microId: "sym_transformation_propriete",
     difficulty: 3,
     theme: "neutral",
     text: "Deux droites parallèles restent parallèles après une rotation.",
@@ -1336,7 +1336,7 @@ export const transformationsBank: TutorBankItemV4[] = [
       "Méthode : on utilise les propriétés conservées par rotation.\n\n" +
       "Calcul : le parallélisme est conservé.\n\n" +
       "Conclusion : l’affirmation est vraie.",
-    tags: ["transformation", "proprietes", "parallelisme", "qcm"],
+    tags: ["transformation", "propriete", "parallelisme", "qcm"],
   },
 
   /* =========================
@@ -1345,11 +1345,11 @@ export const transformationsBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "4e_transfo_defis_fixed_2_successives",
+    id: "4e_sym_transformation_defi_fixed_2_successives",
     niveau: "4e",
     matiere: "maths",
-    notionId: "transformations",
-    microId: "transfo_defis",
+    notionId: "sym_transformation",
+    microId: "sym_transformation_defi",
     difficulty: 5,
     theme: "neutral",
     text: "Une figure subit une translation puis une rotation. Peut-on dire que les longueurs sont conservées après les deux transformations ?",
@@ -1363,6 +1363,6 @@ export const transformationsBank: TutorBankItemV4[] = [
       "Méthode : on applique successivement les propriétés de chaque transformation.\n\n" +
       "Calcul : si la première conserve les longueurs et la deuxième aussi, alors la composition conserve les longueurs.\n\n" +
       "Conclusion : les longueurs sont conservées après les deux transformations.",
-    tags: ["transformation", "defi", "successives", "proprietes"],
+    tags: ["transformation", "defi", "successives", "propriete"],
   },
 ];

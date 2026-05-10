@@ -57,11 +57,11 @@ export const factorisationBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "fixed",
-    id: "facteur_commun_fixed_1",
+    id: "litteral_facteur_commun_fixed_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "factorisation",
-    microId: "facteur_commun",
+    notionId: "litteral_factorisation",
+    microId: "litteral_facteur_commun",
     difficulty: 1,
     theme: "neutral",
     text: "Dans l’expression 3x + 12, quel est le facteur commun ?",
@@ -74,15 +74,15 @@ export const factorisationBank: TutorBankItemV4[] = [
           "Méthode : on cherche un facteur commun ou une forme connue, puis on met ce facteur devant une parenthèse.\n\nCalcul : " +
           ("3x = 3 × x et 12 = 3 × 4. Le facteur commun est donc 3.") +
           "\n\nConclusion : la forme finale est un produit équivalent à l’expression de départ.",
-    tags: ["factorisation", "facteur_commun", "qcm"],
+    tags: ["litteral_factorisation", "litteral_facteur_commun", "qcm"],
   },
   {
     kind: "fixed",
-    id: "facteur_commun_fixed_2",
+    id: "litteral_facteur_commun_fixed_2",
     niveau: "4e",
     matiere: "maths",
-    notionId: "factorisation",
-    microId: "facteur_commun",
+    notionId: "litteral_factorisation",
+    microId: "litteral_facteur_commun",
     difficulty: 1,
     theme: "neutral",
     text: "Dans l’expression 5x + 5y, quel est le facteur commun ?",
@@ -95,19 +95,19 @@ export const factorisationBank: TutorBankItemV4[] = [
           "Méthode : on cherche un facteur commun ou une forme connue, puis on met ce facteur devant une parenthèse.\n\nCalcul : " +
           ("5x = 5 × x et 5y = 5 × y. Le facteur commun est donc 5.") +
           "\n\nConclusion : la forme finale est un produit équivalent à l’expression de départ.",
-    tags: ["factorisation", "facteur_commun"],
+    tags: ["litteral_factorisation", "litteral_facteur_commun"],
   },
   {
     kind: "template",
-    id: "facteur_commun_tpl_1",
+    id: "litteral_facteur_commun_tpl_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "factorisation",
-    microId: "facteur_commun",
+    notionId: "litteral_factorisation",
+    microId: "litteral_facteur_commun",
     difficulty: 1,
     theme: "neutral",
     hint: "Cherche le nombre qui multiplie les deux termes.",
-    tags: ["factorisation", "facteur_commun", "template"],
+    tags: ["litteral_factorisation", "litteral_facteur_commun", "template"],
     generate: () => {
       const a = randomInt(2, 9);
       const b = randomInt(2, 9);
@@ -126,11 +126,11 @@ export const factorisationBank: TutorBankItemV4[] = [
   },
   {
     kind: "fixed",
-    id: "facteur_commun_open_1",
+    id: "litteral_facteur_commun_open_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "factorisation",
-    microId: "facteur_commun",
+    notionId: "litteral_factorisation",
+    microId: "litteral_facteur_commun",
     difficulty: 2,
     theme: "neutral",
     text: "Explique pourquoi 4 est un facteur commun dans 4x + 20.",
@@ -142,7 +142,7 @@ export const factorisationBank: TutorBankItemV4[] = [
           "Méthode : on cherche un facteur commun ou une forme connue, puis on met ce facteur devant une parenthèse.\n\nCalcul : " +
           ("4x = 4 × x et 20 = 4 × 5. Donc 4 est un facteur commun.") +
           "\n\nConclusion : la forme finale est un produit équivalent à l’expression de départ.",
-    tags: ["factorisation", "facteur_commun", "open"],
+    tags: ["litteral_factorisation", "litteral_facteur_commun", "open"],
   },
 
   // =========================
@@ -150,11 +150,11 @@ export const factorisationBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "fixed",
-    id: "factoriser_simple_fixed_1",
+    id: "litteral_factoriser_simple_fixed_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "factorisation",
-    microId: "factoriser_simple",
+    notionId: "litteral_factorisation",
+    microId: "litteral_factoriser_simple",
     difficulty: 2,
     theme: "neutral",
     text: "Factoriser : 3x + 12",
@@ -167,15 +167,15 @@ export const factorisationBank: TutorBankItemV4[] = [
           "Méthode : on cherche un facteur commun ou une forme connue, puis on met ce facteur devant une parenthèse.\n\nCalcul : " +
           ("3x + 12 = 3 × x + 3 × 4 = 3(x + 4).") +
           "\n\nConclusion : la forme finale est un produit équivalent à l’expression de départ.",
-    tags: ["factorisation", "simple", "qcm"],
+    tags: ["litteral_factorisation", "simple", "qcm"],
   },
   {
     kind: "fixed",
-    id: "factoriser_simple_fixed_2",
+    id: "litteral_factoriser_simple_fixed_2",
     niveau: "4e",
     matiere: "maths",
-    notionId: "factorisation",
-    microId: "factoriser_simple",
+    notionId: "litteral_factorisation",
+    microId: "litteral_factoriser_simple",
     difficulty: 2,
     theme: "neutral",
     text: "Factoriser : 5x - 20",
@@ -188,19 +188,19 @@ export const factorisationBank: TutorBankItemV4[] = [
           "Méthode : on cherche un facteur commun ou une forme connue, puis on met ce facteur devant une parenthèse.\n\nCalcul : " +
           ("5x - 20 = 5 × x - 5 × 4 = 5(x - 4).") +
           "\n\nConclusion : la forme finale est un produit équivalent à l’expression de départ.",
-    tags: ["factorisation", "simple", "signe"],
+    tags: ["litteral_factorisation", "simple", "signe"],
   },
   {
     kind: "template",
-    id: "factoriser_simple_tpl_1",
+    id: "litteral_factoriser_simple_tpl_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "factorisation",
-    microId: "factoriser_simple",
+    notionId: "litteral_factorisation",
+    microId: "litteral_factoriser_simple",
     difficulty: 2,
     theme: "neutral",
     hint: "Mets le facteur commun devant la parenthèse.",
-    tags: ["factorisation", "simple", "template"],
+    tags: ["litteral_factorisation", "simple", "template"],
     generate: () => {
       const a = randomInt(2, 9);
       const b = randomInt(1, 9);
@@ -219,15 +219,15 @@ export const factorisationBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "factoriser_simple_tpl_2",
+    id: "litteral_factoriser_simple_tpl_2",
     niveau: "4e",
     matiere: "maths",
-    notionId: "factorisation",
-    microId: "factoriser_simple",
+    notionId: "litteral_factorisation",
+    microId: "litteral_factoriser_simple",
     difficulty: 2,
     theme: "neutral",
     hint: "Attention au signe dans la parenthèse.",
-    tags: ["factorisation", "simple", "soustraction", "template"],
+    tags: ["litteral_factorisation", "simple", "soustraction", "template"],
     generate: () => {
       const a = randomInt(2, 9);
       const b = randomInt(1, 9);
@@ -246,15 +246,15 @@ export const factorisationBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "factoriser_simple_tpl_3",
+    id: "litteral_factoriser_simple_tpl_3",
     niveau: "4e",
     matiere: "maths",
-    notionId: "factorisation",
-    microId: "factoriser_simple",
+    notionId: "litteral_factorisation",
+    microId: "litteral_factoriser_simple",
     difficulty: 3,
     theme: "neutral",
     hint: "x est présent dans les deux termes.",
-    tags: ["factorisation", "x_commun", "template"],
+    tags: ["litteral_factorisation", "x_commun", "template"],
     generate: () => {
       const a = randomInt(2, 9);
 
@@ -272,11 +272,11 @@ export const factorisationBank: TutorBankItemV4[] = [
   },
   {
     kind: "fixed",
-    id: "factoriser_simple_open_1",
+    id: "litteral_factoriser_simple_open_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "factorisation",
-    microId: "factoriser_simple",
+    notionId: "litteral_factorisation",
+    microId: "litteral_factoriser_simple",
     difficulty: 3,
     theme: "neutral",
     text: "Explique pourquoi 6x + 18 = 6(x + 3).",
@@ -288,7 +288,7 @@ export const factorisationBank: TutorBankItemV4[] = [
           "Méthode : on cherche un facteur commun ou une forme connue, puis on met ce facteur devant une parenthèse.\n\nCalcul : " +
           ("6x = 6 × x et 18 = 6 × 3. Donc 6x + 18 = 6(x + 3).") +
           "\n\nConclusion : la forme finale est un produit équivalent à l’expression de départ.",
-    tags: ["factorisation", "simple", "open"],
+    tags: ["litteral_factorisation", "simple", "open"],
   },
 
   // =========================
@@ -296,11 +296,11 @@ export const factorisationBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "fixed",
-    id: "factoriser_ir_fixed_1",
+    id: "litteral_factoriser_identite_fixed_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "factorisation",
-    microId: "factoriser_ir",
+    notionId: "litteral_factorisation",
+    microId: "litteral_factoriser_identite",
     difficulty: 3,
     theme: "neutral",
     text: "Factoriser : x² + 6x + 9",
@@ -313,15 +313,15 @@ export const factorisationBank: TutorBankItemV4[] = [
           "Méthode : on cherche un facteur commun ou une forme connue, puis on met ce facteur devant une parenthèse.\n\nCalcul : " +
           ("x² + 6x + 9 = x² + 2 × x × 3 + 3² = (x + 3)².") +
           "\n\nConclusion : la forme finale est un produit équivalent à l’expression de départ.",
-    tags: ["factorisation", "identite_remarquable", "somme"],
+    tags: ["litteral_factorisation", "identite_remarquable", "somme"],
   },
   {
     kind: "fixed",
-    id: "factoriser_ir_fixed_2",
+    id: "litteral_factoriser_identite_fixed_2",
     niveau: "4e",
     matiere: "maths",
-    notionId: "factorisation",
-    microId: "factoriser_ir",
+    notionId: "litteral_factorisation",
+    microId: "litteral_factoriser_identite",
     difficulty: 3,
     theme: "neutral",
     text: "Factoriser : x² - 8x + 16",
@@ -334,15 +334,15 @@ export const factorisationBank: TutorBankItemV4[] = [
           "Méthode : on cherche un facteur commun ou une forme connue, puis on met ce facteur devant une parenthèse.\n\nCalcul : " +
           ("x² - 8x + 16 = x² - 2 × x × 4 + 4² = (x - 4)².") +
           "\n\nConclusion : la forme finale est un produit équivalent à l’expression de départ.",
-    tags: ["factorisation", "identite_remarquable", "difference"],
+    tags: ["litteral_factorisation", "identite_remarquable", "difference"],
   },
   {
     kind: "fixed",
-    id: "factoriser_ir_fixed_3",
+    id: "litteral_factoriser_identite_fixed_3",
     niveau: "4e",
     matiere: "maths",
-    notionId: "factorisation",
-    microId: "factoriser_ir",
+    notionId: "litteral_factorisation",
+    microId: "litteral_factoriser_identite",
     difficulty: 3,
     theme: "neutral",
     text: "Factoriser : x² - 25",
@@ -355,19 +355,19 @@ export const factorisationBank: TutorBankItemV4[] = [
           "Méthode : on cherche un facteur commun ou une forme connue, puis on met ce facteur devant une parenthèse.\n\nCalcul : " +
           ("x² - 25 = x² - 5² = (x - 5)(x + 5).") +
           "\n\nConclusion : la forme finale est un produit équivalent à l’expression de départ.",
-    tags: ["factorisation", "difference_carres"],
+    tags: ["litteral_factorisation", "difference_carres"],
   },
   {
     kind: "template",
-    id: "factoriser_ir_tpl_somme_1",
+    id: "litteral_factoriser_identite_tpl_somme_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "factorisation",
-    microId: "factoriser_ir",
+    notionId: "litteral_factorisation",
+    microId: "litteral_factoriser_identite",
     difficulty: 4,
     theme: "neutral",
     hint: "Reconnais x² + 2ax + a².",
-    tags: ["factorisation", "identite_remarquable", "template"],
+    tags: ["litteral_factorisation", "identite_remarquable", "template"],
     generate: () => {
       const a = randomInt(2, 9);
       const mid = 2 * a;
@@ -387,15 +387,15 @@ export const factorisationBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "factoriser_ir_tpl_difference_1",
+    id: "litteral_factoriser_identite_tpl_difference_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "factorisation",
-    microId: "factoriser_ir",
+    notionId: "litteral_factorisation",
+    microId: "litteral_factoriser_identite",
     difficulty: 4,
     theme: "neutral",
     hint: "Reconnais x² - 2ax + a².",
-    tags: ["factorisation", "identite_remarquable", "template"],
+    tags: ["litteral_factorisation", "identite_remarquable", "template"],
     generate: () => {
       const a = randomInt(2, 9);
       const mid = 2 * a;
@@ -415,15 +415,15 @@ export const factorisationBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "factoriser_ir_tpl_carres_1",
+    id: "litteral_factoriser_identite_tpl_carres_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "factorisation",
-    microId: "factoriser_ir",
+    notionId: "litteral_factorisation",
+    microId: "litteral_factoriser_identite",
     difficulty: 4,
     theme: "neutral",
     hint: "Reconnais x² - a².",
-    tags: ["factorisation", "difference_carres", "template"],
+    tags: ["litteral_factorisation", "difference_carres", "template"],
     generate: () => {
       const a = randomInt(2, 12);
       const square = a * a;
@@ -451,11 +451,11 @@ export const factorisationBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "fixed",
-    id: "factoriser_verifier_fixed_1",
+    id: "litteral_factoriser_verifier_fixed_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "factorisation",
-    microId: "factoriser_verifier",
+    notionId: "litteral_factorisation",
+    microId: "litteral_factoriser_verifier",
     difficulty: 3,
     theme: "neutral",
     text: "La factorisation 4x + 12 = 4(x + 3) est-elle correcte ?",
@@ -468,15 +468,15 @@ export const factorisationBank: TutorBankItemV4[] = [
           "Méthode : on cherche un facteur commun ou une forme connue, puis on met ce facteur devant une parenthèse.\n\nCalcul : " +
           ("4(x + 3) = 4x + 12. La factorisation est correcte.") +
           "\n\nConclusion : la forme finale est un produit équivalent à l’expression de départ.",
-    tags: ["factorisation", "verifier"],
+    tags: ["litteral_factorisation", "verifier"],
   },
   {
     kind: "fixed",
-    id: "factoriser_verifier_fixed_2",
+    id: "litteral_factoriser_verifier_fixed_2",
     niveau: "4e",
     matiere: "maths",
-    notionId: "factorisation",
-    microId: "factoriser_verifier",
+    notionId: "litteral_factorisation",
+    microId: "litteral_factoriser_verifier",
     difficulty: 3,
     theme: "neutral",
     text: "La factorisation 3x + 15 = 3(x + 15) est-elle correcte ?",
@@ -489,19 +489,19 @@ export const factorisationBank: TutorBankItemV4[] = [
           "Méthode : on cherche un facteur commun ou une forme connue, puis on met ce facteur devant une parenthèse.\n\nCalcul : " +
           ("3(x + 15) = 3x + 45, pas 3x + 15. La bonne factorisation est 3(x + 5).") +
           "\n\nConclusion : la forme finale est un produit équivalent à l’expression de départ.",
-    tags: ["factorisation", "verifier", "erreur"],
+    tags: ["litteral_factorisation", "verifier", "erreur"],
   },
   {
     kind: "template",
-    id: "factoriser_verifier_tpl_1",
+    id: "litteral_factoriser_verifier_tpl_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "factorisation",
-    microId: "factoriser_verifier",
+    notionId: "litteral_factorisation",
+    microId: "litteral_factoriser_verifier",
     difficulty: 3,
     theme: "neutral",
     hint: "Développe la forme factorisée pour comparer.",
-    tags: ["factorisation", "verifier", "template"],
+    tags: ["litteral_factorisation", "verifier", "template"],
     generate: () => {
       const a = randomInt(2, 9);
       const b = randomInt(1, 9);
@@ -526,11 +526,11 @@ export const factorisationBank: TutorBankItemV4[] = [
   },
   {
     kind: "fixed",
-    id: "factoriser_verifier_open_1",
+    id: "litteral_factoriser_verifier_open_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "factorisation",
-    microId: "factoriser_verifier",
+    notionId: "litteral_factorisation",
+    microId: "litteral_factoriser_verifier",
     difficulty: 4,
     theme: "neutral",
     text: "Explique comment vérifier que x² - 25 = (x - 5)(x + 5).",
@@ -542,7 +542,7 @@ export const factorisationBank: TutorBankItemV4[] = [
           "Méthode : on cherche un facteur commun ou une forme connue, puis on met ce facteur devant une parenthèse.\n\nCalcul : " +
           ("On développe : (x - 5)(x + 5) = x² + 5x - 5x - 25 = x² - 25.") +
           "\n\nConclusion : la forme finale est un produit équivalent à l’expression de départ.",
-    tags: ["factorisation", "verifier", "open"],
+    tags: ["litteral_factorisation", "verifier", "open"],
   },
 
   // =========================
@@ -550,11 +550,11 @@ export const factorisationBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "fixed",
-    id: "factorisation_defis_fixed_1",
+    id: "litteral_litteral_factorisation_defi_fixed_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "factorisation",
-    microId: "factorisation_defis",
+    notionId: "litteral_factorisation",
+    microId: "litteral_factorisation_defi",
     difficulty: 4,
     theme: "neutral",
     text: "Un élève écrit : 5x + 20 = 5(x + 20). A-t-il raison ?",
@@ -567,15 +567,15 @@ export const factorisationBank: TutorBankItemV4[] = [
           "Méthode : on cherche un facteur commun ou une forme connue, puis on met ce facteur devant une parenthèse.\n\nCalcul : " +
           ("Non. 5(x + 20) = 5x + 100. La bonne factorisation est 5(x + 4).") +
           "\n\nConclusion : la forme finale est un produit équivalent à l’expression de départ.",
-    tags: ["factorisation", "defi", "erreur"],
+    tags: ["litteral_factorisation", "defi", "erreur"],
   },
   {
     kind: "fixed",
-    id: "factorisation_defis_fixed_2",
+    id: "litteral_litteral_factorisation_defi_fixed_2",
     niveau: "4e",
     matiere: "maths",
-    notionId: "factorisation",
-    microId: "factorisation_defis",
+    notionId: "litteral_factorisation",
+    microId: "litteral_factorisation_defi",
     difficulty: 5,
     theme: "neutral",
     text: "Quelle méthode est la plus adaptée pour factoriser x² - 36 ?",
@@ -593,19 +593,19 @@ export const factorisationBank: TutorBankItemV4[] = [
           "Méthode : on cherche un facteur commun ou une forme connue, puis on met ce facteur devant une parenthèse.\n\nCalcul : " +
           ("x² - 36 = x² - 6² = (x - 6)(x + 6).") +
           "\n\nConclusion : la forme finale est un produit équivalent à l’expression de départ.",
-    tags: ["factorisation", "defi", "choix_methode"],
+    tags: ["litteral_factorisation", "defi", "choix_methode"],
   },
   {
     kind: "template",
-    id: "factorisation_defis_open_erreur_1",
+    id: "litteral_litteral_factorisation_defi_open_erreur_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "factorisation",
-    microId: "factorisation_defis",
+    notionId: "litteral_factorisation",
+    microId: "litteral_factorisation_defi",
     difficulty: 5,
     theme: "neutral",
     hint: "Développe la proposition de l’élève.",
-    tags: ["factorisation", "defi", "open", "erreur", "template"],
+    tags: ["litteral_factorisation", "defi", "open", "erreur", "template"],
     generate: () => {
       const a = randomInt(2, 9);
       const b = randomInt(2, 9);
@@ -624,15 +624,15 @@ export const factorisationBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "factorisation_defis_tpl_reunion_1",
+    id: "litteral_litteral_factorisation_defi_tpl_reunion_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "factorisation",
-    microId: "factorisation_defis",
+    notionId: "litteral_factorisation",
+    microId: "litteral_factorisation_defi",
     difficulty: 5,
     theme: "reunion",
     hint: "Cherche le facteur commun.",
-    tags: ["factorisation", "defi", "reunion", "probleme", "template"],
+    tags: ["litteral_factorisation", "defi", "reunion", "probleme", "template"],
     generate: () => {
       const lots = randomInt(2, 6);
       const extra = randomInt(1, 5);

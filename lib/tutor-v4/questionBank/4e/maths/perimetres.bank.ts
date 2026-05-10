@@ -130,11 +130,11 @@ export const perimetresBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "fixed",
-    id: "perimetre_comprendre_fixed_1",
+    id: "aire_perimetre_comprendre_fixed_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "perimetres",
-    microId: "perimetre_comprendre",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_comprendre",
     difficulty: 1,
     theme: "neutral",
     text: "Le périmètre d’une figure correspond…",
@@ -153,15 +153,15 @@ export const perimetresBank: TutorBankItemV4[] = [
           "Méthode : on repère tous les côtés du contour et on vérifie qu’ils sont dans la même unité.\n\nCalcul : " +
           ("Le périmètre d’une figure est la longueur totale de son contour.") +
           "\n\nConclusion : on obtient la longueur totale du contour.",
-    tags: ["perimetre", "definition"],
+    tags: ["aire_perimetre", "definition"],
   },
   {
     kind: "fixed",
-    id: "perimetre_comprendre_fixed_2",
+    id: "aire_perimetre_comprendre_fixed_2",
     niveau: "4e",
     matiere: "maths",
-    notionId: "perimetres",
-    microId: "perimetre_comprendre",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_comprendre",
     difficulty: 1,
     theme: "neutral",
     text: "Pour calculer un périmètre, on fait surtout…",
@@ -180,7 +180,7 @@ export const perimetresBank: TutorBankItemV4[] = [
           "Méthode : on repère tous les côtés du contour et on vérifie qu’ils sont dans la même unité.\n\nCalcul : " +
           ("Pour calculer un périmètre, on additionne les longueurs qui forment le contour de la figure.") +
           "\n\nConclusion : on obtient la longueur totale du contour.",
-    tags: ["perimetre", "vocabulaire"],
+    tags: ["aire_perimetre", "vocabulaire"],
   },
 
   // =========================
@@ -188,11 +188,11 @@ export const perimetresBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "fixed",
-    id: "perimetre_rectangle_fixed_1",
+    id: "aire_perimetre_rectangle_fixed_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "perimetres",
-    microId: "perimetre_rectangle",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_rectangle",
     difficulty: 1,
     theme: "neutral",
     text: "Calculer le périmètre d’un rectangle de longueur 8 cm et de largeur 3 cm.",
@@ -205,19 +205,19 @@ export const perimetresBank: TutorBankItemV4[] = [
           "Méthode : on repère tous les côtés du contour et on vérifie qu’ils sont dans la même unité.\n\nCalcul : " +
           ("Le périmètre d’un rectangle vaut 2 × (8 + 3) = 2 × 11 = 22.") +
           "\n\nConclusion : on obtient la longueur totale du contour.",
-    tags: ["perimetre", "rectangle"],
+    tags: ["aire_perimetre", "rectangle"],
   },
   {
     kind: "template",
-    id: "perimetre_rectangle_tpl_1",
+    id: "aire_perimetre_rectangle_tpl_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "perimetres",
-    microId: "perimetre_rectangle",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_rectangle",
     difficulty: 2,
     theme: "neutral",
     hint: "Additionne deux longueurs et deux largeurs.",
-    tags: ["perimetre", "rectangle", "template"],
+    tags: ["aire_perimetre", "rectangle", "template"],
     generate: () => {
       const L = randomInt(4, 12);
       const l = randomInt(2, 8);
@@ -237,15 +237,15 @@ export const perimetresBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "perimetre_rectangle_tpl_2",
+    id: "aire_perimetre_rectangle_tpl_2",
     niveau: "4e",
     matiere: "maths",
-    notionId: "perimetres",
-    microId: "perimetre_rectangle",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_rectangle",
     difficulty: 2,
     theme: "neutral",
     hint: "On fait le tour complet du terrain.",
-    tags: ["perimetre", "rectangle", "probleme", "template"],
+    tags: ["aire_perimetre", "rectangle", "probleme", "template"],
     generate: () => {
       const L = randomInt(10, 30);
       const l = randomInt(5, 15);
@@ -269,11 +269,11 @@ export const perimetresBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "fixed",
-    id: "perimetre_carre_fixed_1",
+    id: "aire_perimetre_carre_fixed_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "perimetres",
-    microId: "perimetre_carre",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_carre",
     difficulty: 1,
     theme: "neutral",
     text: "Calculer le périmètre d’un carré de côté 6 cm.",
@@ -285,19 +285,19 @@ export const perimetresBank: TutorBankItemV4[] = [
           "Méthode : on repère tous les côtés du contour et on vérifie qu’ils sont dans la même unité.\n\nCalcul : " +
           ("P = 4 × 6 = 24.") +
           "\n\nConclusion : on obtient la longueur totale du contour.",
-    tags: ["perimetre", "carre"],
+    tags: ["aire_perimetre", "carre"],
   },
   {
     kind: "template",
-    id: "perimetre_carre_tpl_1",
+    id: "aire_perimetre_carre_tpl_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "perimetres",
-    microId: "perimetre_carre",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_carre",
     difficulty: 1,
     theme: "neutral",
     hint: "Multiplie la longueur d’un côté par 4.",
-    tags: ["perimetre", "carre", "template"],
+    tags: ["aire_perimetre", "carre", "template"],
     generate: () => {
       const c = randomInt(2, 15);
       const perimeter = 4 * c;
@@ -320,11 +320,11 @@ export const perimetresBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "fixed",
-    id: "perimetre_triangle_fixed_1",
+    id: "aire_perimetre_triangle_fixed_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "perimetres",
-    microId: "perimetre_triangle",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_triangle",
     difficulty: 1,
     theme: "neutral",
     text: "Calculer le périmètre d’un triangle dont les côtés mesurent 5 cm, 7 cm et 8 cm.",
@@ -336,19 +336,19 @@ export const perimetresBank: TutorBankItemV4[] = [
           "Méthode : on repère tous les côtés du contour et on vérifie qu’ils sont dans la même unité.\n\nCalcul : " +
           ("P = 5 + 7 + 8 = 20.") +
           "\n\nConclusion : on obtient la longueur totale du contour.",
-    tags: ["perimetre", "triangle"],
+    tags: ["aire_perimetre", "triangle"],
   },
   {
     kind: "template",
-    id: "perimetre_triangle_tpl_1",
+    id: "aire_perimetre_triangle_tpl_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "perimetres",
-    microId: "perimetre_triangle",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_triangle",
     difficulty: 2,
     theme: "neutral",
     hint: "Additionne les trois longueurs du triangle.",
-    tags: ["perimetre", "triangle", "canvas", "template"],
+    tags: ["aire_perimetre", "triangle", "canvas", "template"],
     generate: () => {
       const ab = randomInt(4, 10);
       const bc = randomInt(4, 10);
@@ -374,15 +374,15 @@ export const perimetresBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "template",
-    id: "perimetre_figure_tpl_1",
+    id: "aire_perimetre_figure_tpl_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "perimetres",
-    microId: "perimetre_figure",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_figure",
     difficulty: 2,
     theme: "neutral",
     hint: "Compte uniquement le contour extérieur de la figure.",
-    tags: ["perimetre", "figure", "figure_libre", "template"],
+    tags: ["aire_perimetre", "figure", "figure_libre", "template"],
     generate: () => {
       const h = randomInt(2, 4);
       const w = randomInt(3, 5);
@@ -404,15 +404,15 @@ export const perimetresBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "perimetre_figure_tpl_2",
+    id: "aire_perimetre_figure_tpl_2",
     niveau: "4e",
     matiere: "maths",
-    notionId: "perimetres",
-    microId: "perimetre_figure",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_figure",
     difficulty: 3,
     theme: "neutral",
     hint: "Les côtés intérieurs ne comptent pas dans le périmètre.",
-    tags: ["perimetre", "figure_composee", "figure_libre", "template"],
+    tags: ["aire_perimetre", "figure_composee", "figure_libre", "template"],
     generate: () => {
       const a = randomInt(3, 5);
       const b = randomInt(3, 5);
@@ -441,15 +441,15 @@ export const perimetresBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "template",
-    id: "perimetre_probleme_tpl_1",
+    id: "aire_perimetre_probleme_tpl_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "perimetres",
-    microId: "perimetre_probleme",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_probleme",
     difficulty: 3,
     theme: "neutral",
     hint: "Il faut faire le tour complet de la figure.",
-    tags: ["perimetre", "probleme", "template"],
+    tags: ["aire_perimetre", "probleme", "template"],
     generate: () => {
       const side = randomInt(5, 18);
       const perimeter = 4 * side;
@@ -468,15 +468,15 @@ export const perimetresBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "perimetre_probleme_tpl_2",
+    id: "aire_perimetre_probleme_tpl_2",
     niveau: "4e",
     matiere: "maths",
-    notionId: "perimetres",
-    microId: "perimetre_probleme",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_probleme",
     difficulty: 3,
     theme: "neutral",
     hint: "Le périmètre correspond à la somme de tous les côtés.",
-    tags: ["perimetre", "probleme", "template"],
+    tags: ["aire_perimetre", "probleme", "template"],
     generate: () => {
       const x = randomInt(3, 10);
       const y = randomInt(4, 10);
@@ -501,15 +501,15 @@ export const perimetresBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "template",
-    id: "perimetre_defis_tpl_1",
+    id: "aire_perimetre_defi_tpl_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "perimetres",
-    microId: "perimetre_defis",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_defi",
     difficulty: 4,
     theme: "neutral",
     hint: "Deux figures peuvent avoir la même aire sans avoir le même périmètre.",
-    tags: ["perimetre", "defi", "hpi", "template"],
+    tags: ["aire_perimetre", "defi", "hpi", "template"],
     generate: () => {
       const rect1 = rectangleCells(2, 4); // aire 8
       const rect2 = lShapeCells(3, 3, 1, 1); // aire 8
@@ -543,15 +543,15 @@ export const perimetresBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "perimetre_defis_tpl_2",
+    id: "aire_perimetre_defi_tpl_2",
     niveau: "4e",
     matiere: "maths",
-    notionId: "perimetres",
-    microId: "perimetre_defis",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_defi",
     difficulty: 5,
     theme: "neutral",
     hint: "Pense au lien entre dimensions et contour.",
-    tags: ["perimetre", "defi", "hpi", "template"],
+    tags: ["aire_perimetre", "defi", "hpi", "template"],
     generate: () => {
       const L = randomInt(6, 12);
       const l = randomInt(3, 7);
@@ -574,15 +574,15 @@ export const perimetresBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "perimetre_defis_tpl_3",
+    id: "aire_perimetre_defi_tpl_3",
     niveau: "4e",
     matiere: "maths",
-    notionId: "perimetres",
-    microId: "perimetre_defis",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_defi",
     difficulty: 5,
     theme: "neutral",
     hint: "Le contour rouge montre exactement ce qu’il faut compter.",
-    tags: ["perimetre", "defi", "figure_libre", "hpi", "template"],
+    tags: ["aire_perimetre", "defi", "figure_libre", "hpi", "template"],
     generate: () => {
       const cells = randomChoice([
         lShapeCells(4, 4, 1, 2),

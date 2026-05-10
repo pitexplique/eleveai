@@ -62,7 +62,7 @@ export const statistiquesBank: TutorBankItemV4[] = [
     id: "stat_lire_tableau_fixed_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "statistiques",
+    notionId: "stat_statistique",
     microId: "stat_lire_tableau",
     difficulty: 1,
     theme: "neutral",
@@ -82,7 +82,7 @@ export const statistiquesBank: TutorBankItemV4[] = [
           "Méthode : on choisit l’indicateur demandé : effectif, fréquence, moyenne, médiane ou étendue.\n\nCalcul : " +
           ("L’effectif indique combien d’individus correspondent à une valeur ou à une catégorie.") +
           "\n\nConclusion : l’indicateur obtenu résume correctement la série.",
-    tags: ["statistiques", "tableau", "effectif", "definition"],
+    tags: ["stat_statistique", "tableau", "effectif", "definition"],
   },
 
   {
@@ -90,7 +90,7 @@ export const statistiquesBank: TutorBankItemV4[] = [
     id: "stat_lire_tableau_fixed_2",
     niveau: "4e",
     matiere: "maths",
-    notionId: "statistiques",
+    notionId: "stat_statistique",
     microId: "stat_lire_tableau",
     difficulty: 1,
     theme: "neutral",
@@ -110,7 +110,7 @@ export const statistiquesBank: TutorBankItemV4[] = [
           "Méthode : on choisit l’indicateur demandé : effectif, fréquence, moyenne, médiane ou étendue.\n\nCalcul : " +
           ("Le nombre 12 est l’effectif de la catégorie vélo : 12 élèves ont choisi vélo.") +
           "\n\nConclusion : l’indicateur obtenu résume correctement la série.",
-    tags: ["statistiques", "tableau", "lecture"],
+    tags: ["stat_statistique", "tableau", "lecture"],
   },
 
   {
@@ -118,12 +118,12 @@ export const statistiquesBank: TutorBankItemV4[] = [
     id: "stat_lire_tableau_tpl_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "statistiques",
+    notionId: "stat_statistique",
     microId: "stat_lire_tableau",
     difficulty: 1,
     theme: "neutral",
     hint: "Lis directement l’information demandée.",
-    tags: ["statistiques", "tableau", "lecture", "template"],
+    tags: ["stat_statistique", "tableau", "lecture", "template"],
     generate: () => {
       const labels = ["football", "natation", "danse", "basket"];
       const values = labels.map(() => randomInt(6, 24));
@@ -147,12 +147,12 @@ export const statistiquesBank: TutorBankItemV4[] = [
     id: "stat_lire_tableau_tpl_2",
     niveau: "4e",
     matiere: "maths",
-    notionId: "statistiques",
+    notionId: "stat_statistique",
     microId: "stat_lire_tableau",
     difficulty: 2,
     theme: "reunion",
     hint: "Repère la catégorie demandée puis lis son effectif.",
-    tags: ["statistiques", "tableau", "reunion", "template"],
+    tags: ["stat_statistique", "tableau", "reunion", "template"],
     generate: () => {
       const labels = ["Saint-Pierre", "Saint-Leu", "Le Tampon", "Entre-Deux"];
       const values = labels.map(() => randomInt(10, 40));
@@ -176,7 +176,7 @@ export const statistiquesBank: TutorBankItemV4[] = [
     id: "stat_lire_tableau_open_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "statistiques",
+    notionId: "stat_statistique",
     microId: "stat_lire_tableau",
     difficulty: 2,
     theme: "neutral",
@@ -190,7 +190,7 @@ export const statistiquesBank: TutorBankItemV4[] = [
           "Méthode : on choisit l’indicateur demandé : effectif, fréquence, moyenne, médiane ou étendue.\n\nCalcul : " +
           ("Cela signifie que 18 élèves appartiennent à la catégorie « marche », par exemple qu’ils ont choisi cette activité.") +
           "\n\nConclusion : l’indicateur obtenu résume correctement la série.",
-    tags: ["statistiques", "tableau", "open"],
+    tags: ["stat_statistique", "tableau", "open"],
   },
 
   /* =========================
@@ -202,7 +202,7 @@ export const statistiquesBank: TutorBankItemV4[] = [
     id: "stat_lire_graphique_fixed_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "statistiques",
+    notionId: "stat_statistique",
     microId: "stat_lire_graphique",
     difficulty: 1,
     theme: "neutral",
@@ -222,7 +222,7 @@ export const statistiquesBank: TutorBankItemV4[] = [
           "Méthode : on choisit l’indicateur demandé : effectif, fréquence, moyenne, médiane ou étendue.\n\nCalcul : " +
           ("La hauteur d’une barre représente la valeur ou l’effectif associé à une catégorie.") +
           "\n\nConclusion : l’indicateur obtenu résume correctement la série.",
-    tags: ["statistiques", "graphique", "barres"],
+    tags: ["stat_statistique", "graphique", "barres"],
   },
 
   {
@@ -230,12 +230,12 @@ export const statistiquesBank: TutorBankItemV4[] = [
     id: "stat_lire_graphique_tpl_1_barres",
     niveau: "4e",
     matiere: "maths",
-    notionId: "statistiques",
+    notionId: "stat_statistique",
     microId: "stat_lire_graphique",
     difficulty: 2,
     theme: "neutral",
     hint: "Lis la hauteur de la barre demandée.",
-    tags: ["statistiques", "graphique", "barres", "canvas", "template"],
+    tags: ["stat_statistique", "graphique", "barres", "canvas", "template"],
     generate: () => {
       const data = [
         { label: "A", value: randomInt(5, 18) },
@@ -272,12 +272,12 @@ export const statistiquesBank: TutorBankItemV4[] = [
     id: "stat_lire_graphique_tpl_2_batons",
     niveau: "4e",
     matiere: "maths",
-    notionId: "statistiques",
+    notionId: "stat_statistique",
     microId: "stat_lire_graphique",
     difficulty: 2,
     theme: "neutral",
     hint: "Lis la valeur au sommet du bâton.",
-    tags: ["statistiques", "graphique", "batons", "canvas", "template"],
+    tags: ["stat_statistique", "graphique", "batons", "canvas", "template"],
     generate: () => {
       const data = [
         { label: "1", value: randomInt(2, 10) },
@@ -314,12 +314,12 @@ export const statistiquesBank: TutorBankItemV4[] = [
     id: "stat_lire_graphique_tpl_3_max",
     niveau: "4e",
     matiere: "maths",
-    notionId: "statistiques",
+    notionId: "stat_statistique",
     microId: "stat_lire_graphique",
     difficulty: 2,
     theme: "reunion",
     hint: "Cherche la barre la plus haute.",
-    tags: ["statistiques", "graphique", "maximum", "reunion", "canvas"],
+    tags: ["stat_statistique", "graphique", "maximum", "reunion", "canvas"],
     generate: () => {
       const data = [
         { label: "Saint-Pierre", value: randomInt(10, 30) },
@@ -357,7 +357,7 @@ export const statistiquesBank: TutorBankItemV4[] = [
     id: "stat_lire_graphique_open_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "statistiques",
+    notionId: "stat_statistique",
     microId: "stat_lire_graphique",
     difficulty: 3,
     theme: "neutral",
@@ -371,7 +371,7 @@ export const statistiquesBank: TutorBankItemV4[] = [
           "Méthode : on choisit l’indicateur demandé : effectif, fréquence, moyenne, médiane ou étendue.\n\nCalcul : " +
           ("On repère la catégorie demandée, puis on lit la hauteur de sa barre pour obtenir la valeur ou l’effectif.") +
           "\n\nConclusion : l’indicateur obtenu résume correctement la série.",
-    tags: ["statistiques", "graphique", "open"],
+    tags: ["stat_statistique", "graphique", "open"],
   },
     /* =========================
      STAT_EFFECTIF
@@ -382,7 +382,7 @@ export const statistiquesBank: TutorBankItemV4[] = [
     id: "stat_effectif_fixed_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "statistiques",
+    notionId: "stat_statistique",
     microId: "stat_effectif",
     difficulty: 1,
     theme: "neutral",
@@ -396,7 +396,7 @@ export const statistiquesBank: TutorBankItemV4[] = [
           "Méthode : on choisit l’indicateur demandé : effectif, fréquence, moyenne, médiane ou étendue.\n\nCalcul : " +
           ("L’effectif total vaut 14 + 11 = 25.") +
           "\n\nConclusion : l’indicateur obtenu résume correctement la série.",
-    tags: ["statistiques", "effectif", "total"],
+    tags: ["stat_statistique", "effectif", "total"],
   },
 
   {
@@ -404,12 +404,12 @@ export const statistiquesBank: TutorBankItemV4[] = [
     id: "stat_effectif_tpl_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "statistiques",
+    notionId: "stat_statistique",
     microId: "stat_effectif",
     difficulty: 2,
     theme: "neutral",
     hint: "Additionne tous les effectifs.",
-    tags: ["statistiques", "effectif", "template"],
+    tags: ["stat_statistique", "effectif", "template"],
     generate: () => {
       const a = randomInt(5, 18);
       const b = randomInt(5, 18);
@@ -434,12 +434,12 @@ export const statistiquesBank: TutorBankItemV4[] = [
     id: "stat_effectif_tpl_2_graphique",
     niveau: "4e",
     matiere: "maths",
-    notionId: "statistiques",
+    notionId: "stat_statistique",
     microId: "stat_effectif",
     difficulty: 2,
     theme: "neutral",
     hint: "Additionne toutes les valeurs du graphique.",
-    tags: ["statistiques", "effectif", "graphique", "canvas"],
+    tags: ["stat_statistique", "effectif", "graphique", "canvas"],
     generate: () => {
       const data = [
         { label: "A", value: randomInt(4, 12) },
@@ -472,7 +472,7 @@ export const statistiquesBank: TutorBankItemV4[] = [
     id: "stat_effectif_open_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "statistiques",
+    notionId: "stat_statistique",
     microId: "stat_effectif",
     difficulty: 3,
     theme: "neutral",
@@ -485,7 +485,7 @@ export const statistiquesBank: TutorBankItemV4[] = [
           "Méthode : on choisit l’indicateur demandé : effectif, fréquence, moyenne, médiane ou étendue.\n\nCalcul : " +
           ("Pour trouver l’effectif total, on additionne tous les effectifs des catégories.") +
           "\n\nConclusion : l’indicateur obtenu résume correctement la série.",
-    tags: ["statistiques", "effectif", "open"],
+    tags: ["stat_statistique", "effectif", "open"],
   },
 
   /* =========================
@@ -497,7 +497,7 @@ export const statistiquesBank: TutorBankItemV4[] = [
     id: "stat_frequence_fixed_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "statistiques",
+    notionId: "stat_statistique",
     microId: "stat_frequence",
     difficulty: 2,
     theme: "neutral",
@@ -511,7 +511,7 @@ export const statistiquesBank: TutorBankItemV4[] = [
           "Méthode : on choisit l’indicateur demandé : effectif, fréquence, moyenne, médiane ou étendue.\n\nCalcul : " +
           ("La fréquence vaut 10 ÷ 25 = 0,4.") +
           "\n\nConclusion : l’indicateur obtenu résume correctement la série.",
-    tags: ["statistiques", "frequence", "qcm"],
+    tags: ["stat_statistique", "frequence", "qcm"],
   },
 
   {
@@ -519,12 +519,12 @@ export const statistiquesBank: TutorBankItemV4[] = [
     id: "stat_frequence_tpl_1_decimal",
     niveau: "4e",
     matiere: "maths",
-    notionId: "statistiques",
+    notionId: "stat_statistique",
     microId: "stat_frequence",
     difficulty: 3,
     theme: "neutral",
     hint: "Fréquence = effectif de la catégorie ÷ effectif total.",
-    tags: ["statistiques", "frequence", "decimal", "template"],
+    tags: ["stat_statistique", "frequence", "decimal", "template"],
     generate: () => {
       const total = randomChoice([20, 25, 40, 50]);
       const effectif = randomChoice([total / 2, total / 4, total / 5]);
@@ -548,12 +548,12 @@ export const statistiquesBank: TutorBankItemV4[] = [
     id: "stat_frequence_tpl_2_pourcentage",
     niveau: "4e",
     matiere: "maths",
-    notionId: "statistiques",
+    notionId: "stat_statistique",
     microId: "stat_frequence",
     difficulty: 3,
     theme: "neutral",
     hint: "Multiplie la fréquence décimale par 100.",
-    tags: ["statistiques", "frequence", "pourcentage", "template"],
+    tags: ["stat_statistique", "frequence", "pourcentage", "template"],
     generate: () => {
       const total = randomChoice([20, 25, 40, 50]);
       const pourcentage = randomChoice([20, 25, 40, 50]);
@@ -577,12 +577,12 @@ export const statistiquesBank: TutorBankItemV4[] = [
     id: "stat_frequence_tpl_3_graphique",
     niveau: "4e",
     matiere: "maths",
-    notionId: "statistiques",
+    notionId: "stat_statistique",
     microId: "stat_frequence",
     difficulty: 4,
     theme: "neutral",
     hint: "Lis l’effectif de la catégorie puis divise par le total.",
-    tags: ["statistiques", "frequence", "graphique", "canvas"],
+    tags: ["stat_statistique", "frequence", "graphique", "canvas"],
     generate: () => {
       const data = [
         { label: "A", value: 10 },
@@ -616,7 +616,7 @@ export const statistiquesBank: TutorBankItemV4[] = [
     id: "stat_frequence_open_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "statistiques",
+    notionId: "stat_statistique",
     microId: "stat_frequence",
     difficulty: 4,
     theme: "neutral",
@@ -629,7 +629,7 @@ export const statistiquesBank: TutorBankItemV4[] = [
           "Méthode : on choisit l’indicateur demandé : effectif, fréquence, moyenne, médiane ou étendue.\n\nCalcul : " +
           ("On divise l’effectif de la catégorie par l’effectif total.") +
           "\n\nConclusion : l’indicateur obtenu résume correctement la série.",
-    tags: ["statistiques", "frequence", "open"],
+    tags: ["stat_statistique", "frequence", "open"],
   },
 
   /* =========================
@@ -641,7 +641,7 @@ export const statistiquesBank: TutorBankItemV4[] = [
     id: "stat_moyenne_fixed_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "statistiques",
+    notionId: "stat_statistique",
     microId: "stat_moyenne",
     difficulty: 2,
     theme: "neutral",
@@ -655,7 +655,7 @@ export const statistiquesBank: TutorBankItemV4[] = [
           "Méthode : on choisit l’indicateur demandé : effectif, fréquence, moyenne, médiane ou étendue.\n\nCalcul : " +
           ("Moyenne = (8 + 10 + 12) ÷ 3 = 30 ÷ 3 = 10.") +
           "\n\nConclusion : l’indicateur obtenu résume correctement la série.",
-    tags: ["statistiques", "moyenne", "qcm"],
+    tags: ["stat_statistique", "moyenne", "qcm"],
   },
 
   {
@@ -663,7 +663,7 @@ export const statistiquesBank: TutorBankItemV4[] = [
     id: "stat_moyenne_fixed_2_piege",
     niveau: "4e",
     matiere: "maths",
-    notionId: "statistiques",
+    notionId: "stat_statistique",
     microId: "stat_moyenne",
     difficulty: 3,
     theme: "neutral",
@@ -677,7 +677,7 @@ export const statistiquesBank: TutorBankItemV4[] = [
           "Méthode : on choisit l’indicateur demandé : effectif, fréquence, moyenne, médiane ou étendue.\n\nCalcul : " +
           ("La somme est 30, mais il faut diviser par 3. La moyenne vaut 10.") +
           "\n\nConclusion : l’indicateur obtenu résume correctement la série.",
-    tags: ["statistiques", "moyenne", "erreur"],
+    tags: ["stat_statistique", "moyenne", "erreur"],
   },
 
   {
@@ -685,12 +685,12 @@ export const statistiquesBank: TutorBankItemV4[] = [
     id: "stat_moyenne_tpl_1_liste",
     niveau: "4e",
     matiere: "maths",
-    notionId: "statistiques",
+    notionId: "stat_statistique",
     microId: "stat_moyenne",
     difficulty: 3,
     theme: "neutral",
     hint: "Additionne toutes les valeurs puis divise par leur nombre.",
-    tags: ["statistiques", "moyenne", "template"],
+    tags: ["stat_statistique", "moyenne", "template"],
     generate: () => {
       const values = [randomInt(6, 16), randomInt(6, 16), randomInt(6, 16), randomInt(6, 16)];
       const avg = moyenne(values);
@@ -713,12 +713,12 @@ export const statistiquesBank: TutorBankItemV4[] = [
     id: "stat_moyenne_tpl_2_effectifs",
     niveau: "4e",
     matiere: "maths",
-    notionId: "statistiques",
+    notionId: "stat_statistique",
     microId: "stat_moyenne",
     difficulty: 4,
     theme: "neutral",
     hint: "Attention, chaque valeur peut apparaître plusieurs fois.",
-    tags: ["statistiques", "moyenne", "effectifs", "template"],
+    tags: ["stat_statistique", "moyenne", "effectifs", "template"],
     generate: () => {
       const v1 = randomChoice([8, 10, 12]);
       const v2 = v1 + 4;
@@ -745,12 +745,12 @@ export const statistiquesBank: TutorBankItemV4[] = [
     id: "stat_moyenne_tpl_3_retrouver_valeur",
     niveau: "4e",
     matiere: "maths",
-    notionId: "statistiques",
+    notionId: "stat_statistique",
     microId: "stat_moyenne",
     difficulty: 5,
     theme: "neutral",
     hint: "Utilise somme totale = moyenne × nombre de valeurs.",
-    tags: ["statistiques", "moyenne", "valeur_manquante", "template"],
+    tags: ["stat_statistique", "moyenne", "valeur_manquante", "template"],
     generate: () => {
       const a = randomInt(8, 14);
       const b = randomInt(8, 14);
@@ -776,7 +776,7 @@ export const statistiquesBank: TutorBankItemV4[] = [
     id: "stat_moyenne_open_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "statistiques",
+    notionId: "stat_statistique",
     microId: "stat_moyenne",
     difficulty: 4,
     theme: "neutral",
@@ -789,7 +789,7 @@ export const statistiquesBank: TutorBankItemV4[] = [
           "Méthode : on choisit l’indicateur demandé : effectif, fréquence, moyenne, médiane ou étendue.\n\nCalcul : " +
           ("La moyenne est obtenue en additionnant les valeurs puis en divisant par leur nombre. Elle peut donc ne pas apparaître dans la série.") +
           "\n\nConclusion : l’indicateur obtenu résume correctement la série.",
-    tags: ["statistiques", "moyenne", "open"],
+    tags: ["stat_statistique", "moyenne", "open"],
   },
     /* =========================
      STAT_MEDIANE
@@ -800,7 +800,7 @@ export const statistiquesBank: TutorBankItemV4[] = [
     id: "stat_mediane_fixed_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "statistiques",
+    notionId: "stat_statistique",
     microId: "stat_mediane",
     difficulty: 2,
     theme: "neutral",
@@ -814,7 +814,7 @@ export const statistiquesBank: TutorBankItemV4[] = [
           "Méthode : on choisit l’indicateur demandé : effectif, fréquence, moyenne, médiane ou étendue.\n\nCalcul : " +
           ("Il y a 5 valeurs. La valeur centrale est la 3e : 9.") +
           "\n\nConclusion : l’indicateur obtenu résume correctement la série.",
-    tags: ["statistiques", "mediane", "qcm"],
+    tags: ["stat_statistique", "mediane", "qcm"],
   },
 
   {
@@ -822,7 +822,7 @@ export const statistiquesBank: TutorBankItemV4[] = [
     id: "stat_mediane_fixed_2_pair",
     niveau: "4e",
     matiere: "maths",
-    notionId: "statistiques",
+    notionId: "stat_statistique",
     microId: "stat_mediane",
     difficulty: 3,
     theme: "neutral",
@@ -836,7 +836,7 @@ export const statistiquesBank: TutorBankItemV4[] = [
           "Méthode : on choisit l’indicateur demandé : effectif, fréquence, moyenne, médiane ou étendue.\n\nCalcul : " +
           ("Les deux valeurs centrales sont 8 et 10. Médiane = (8 + 10) ÷ 2 = 9.") +
           "\n\nConclusion : l’indicateur obtenu résume correctement la série.",
-    tags: ["statistiques", "mediane", "pair"],
+    tags: ["stat_statistique", "mediane", "pair"],
   },
 
   {
@@ -844,12 +844,12 @@ export const statistiquesBank: TutorBankItemV4[] = [
     id: "stat_mediane_tpl_1_impair",
     niveau: "4e",
     matiere: "maths",
-    notionId: "statistiques",
+    notionId: "stat_statistique",
     microId: "stat_mediane",
     difficulty: 3,
     theme: "neutral",
     hint: "Range la série puis prends la valeur centrale.",
-    tags: ["statistiques", "mediane", "impair", "template"],
+    tags: ["stat_statistique", "mediane", "impair", "template"],
     generate: () => {
       const sorted = [
         randomInt(2, 5),
@@ -879,12 +879,12 @@ export const statistiquesBank: TutorBankItemV4[] = [
     id: "stat_mediane_tpl_2_pair",
     niveau: "4e",
     matiere: "maths",
-    notionId: "statistiques",
+    notionId: "stat_statistique",
     microId: "stat_mediane",
     difficulty: 4,
     theme: "neutral",
     hint: "Avec un nombre pair de valeurs, calcule la moyenne des deux valeurs centrales.",
-    tags: ["statistiques", "mediane", "pair", "template"],
+    tags: ["stat_statistique", "mediane", "pair", "template"],
     generate: () => {
       const sorted = [
         randomInt(2, 5),
@@ -913,7 +913,7 @@ export const statistiquesBank: TutorBankItemV4[] = [
     id: "stat_mediane_open_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "statistiques",
+    notionId: "stat_statistique",
     microId: "stat_mediane",
     difficulty: 4,
     theme: "neutral",
@@ -926,7 +926,7 @@ export const statistiquesBank: TutorBankItemV4[] = [
           "Méthode : on choisit l’indicateur demandé : effectif, fréquence, moyenne, médiane ou étendue.\n\nCalcul : " +
           ("Il faut ranger la série dans l’ordre croissant pour identifier correctement la ou les valeurs centrales.") +
           "\n\nConclusion : l’indicateur obtenu résume correctement la série.",
-    tags: ["statistiques", "mediane", "open"],
+    tags: ["stat_statistique", "mediane", "open"],
   },
 
   /* =========================
@@ -938,7 +938,7 @@ export const statistiquesBank: TutorBankItemV4[] = [
     id: "stat_etendue_fixed_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "statistiques",
+    notionId: "stat_statistique",
     microId: "stat_etendue",
     difficulty: 2,
     theme: "neutral",
@@ -952,7 +952,7 @@ export const statistiquesBank: TutorBankItemV4[] = [
           "Méthode : on choisit l’indicateur demandé : effectif, fréquence, moyenne, médiane ou étendue.\n\nCalcul : " +
           ("Maximum = 15, minimum = 4. Étendue = 15 - 4 = 11.") +
           "\n\nConclusion : l’indicateur obtenu résume correctement la série.",
-    tags: ["statistiques", "etendue", "qcm"],
+    tags: ["stat_statistique", "etendue", "qcm"],
   },
 
   {
@@ -960,12 +960,12 @@ export const statistiquesBank: TutorBankItemV4[] = [
     id: "stat_etendue_tpl_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "statistiques",
+    notionId: "stat_statistique",
     microId: "stat_etendue",
     difficulty: 3,
     theme: "neutral",
     hint: "Repère la plus petite et la plus grande valeur.",
-    tags: ["statistiques", "etendue", "template"],
+    tags: ["stat_statistique", "etendue", "template"],
     generate: () => {
       const min = randomInt(2, 8);
       const max = randomInt(18, 32);
@@ -990,12 +990,12 @@ export const statistiquesBank: TutorBankItemV4[] = [
     id: "stat_etendue_tpl_2_graphique",
     niveau: "4e",
     matiere: "maths",
-    notionId: "statistiques",
+    notionId: "stat_statistique",
     microId: "stat_etendue",
     difficulty: 3,
     theme: "neutral",
     hint: "L’étendue se calcule avec la plus grande et la plus petite valeur.",
-    tags: ["statistiques", "etendue", "graphique", "canvas"],
+    tags: ["stat_statistique", "etendue", "graphique", "canvas"],
     generate: () => {
       const data = [
         { label: "A", value: randomInt(4, 9) },
@@ -1028,7 +1028,7 @@ export const statistiquesBank: TutorBankItemV4[] = [
     id: "stat_etendue_open_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "statistiques",
+    notionId: "stat_statistique",
     microId: "stat_etendue",
     difficulty: 4,
     theme: "neutral",
@@ -1041,7 +1041,7 @@ export const statistiquesBank: TutorBankItemV4[] = [
           "Méthode : on choisit l’indicateur demandé : effectif, fréquence, moyenne, médiane ou étendue.\n\nCalcul : " +
           ("L’étendue mesure l’écart entre la plus grande valeur et la plus petite valeur de la série.") +
           "\n\nConclusion : l’indicateur obtenu résume correctement la série.",
-    tags: ["statistiques", "etendue", "open"],
+    tags: ["stat_statistique", "etendue", "open"],
   },
 
   /* =========================
@@ -1050,11 +1050,11 @@ export const statistiquesBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "stat_interpretation_fixed_1",
+    id: "stat_interpreter_fixed_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "statistiques",
-    microId: "stat_interpretation",
+    notionId: "stat_statistique",
+    microId: "stat_interpreter",
     difficulty: 3,
     theme: "neutral",
     text: "Deux séries ont la même moyenne, mais l’une a une étendue plus grande. Que peut-on dire ?",
@@ -1072,16 +1072,16 @@ export const statistiquesBank: TutorBankItemV4[] = [
           "Méthode : on choisit l’indicateur demandé : effectif, fréquence, moyenne, médiane ou étendue.\n\nCalcul : " +
           ("Une étendue plus grande indique des valeurs plus dispersées.") +
           "\n\nConclusion : l’indicateur obtenu résume correctement la série.",
-    tags: ["statistiques", "interpretation", "etendue"],
+    tags: ["stat_statistique", "interpretation", "etendue"],
   },
 
   {
     kind: "fixed",
-    id: "stat_interpretation_fixed_2",
+    id: "stat_interpreter_fixed_2",
     niveau: "4e",
     matiere: "maths",
-    notionId: "statistiques",
-    microId: "stat_interpretation",
+    notionId: "stat_statistique",
+    microId: "stat_interpreter",
     difficulty: 3,
     theme: "neutral",
     text: "La moyenne d’un groupe est 12. Cela signifie forcément que chaque élève a eu 12 ?",
@@ -1094,20 +1094,20 @@ export const statistiquesBank: TutorBankItemV4[] = [
           "Méthode : on choisit l’indicateur demandé : effectif, fréquence, moyenne, médiane ou étendue.\n\nCalcul : " +
           ("Non. Une moyenne de 12 peut venir de notes différentes, par exemple 10 et 14.") +
           "\n\nConclusion : l’indicateur obtenu résume correctement la série.",
-    tags: ["statistiques", "interpretation", "moyenne", "piege"],
+    tags: ["stat_statistique", "interpretation", "moyenne", "piege"],
   },
 
   {
     kind: "template",
-    id: "stat_interpretation_tpl_1_moyenne_etendue",
+    id: "stat_interpreter_tpl_1_moyenne_etendue",
     niveau: "4e",
     matiere: "maths",
-    notionId: "statistiques",
-    microId: "stat_interpretation",
+    notionId: "stat_statistique",
+    microId: "stat_interpreter",
     difficulty: 4,
     theme: "neutral",
     hint: "Compare surtout l’étendue pour juger la dispersion.",
-    tags: ["statistiques", "interpretation", "template"],
+    tags: ["stat_statistique", "interpretation", "template"],
     generate: () => {
       const moyenneCommune = randomChoice([10, 11, 12, 13]);
       const etendueA = randomChoice([4, 5, 6]);
@@ -1129,11 +1129,11 @@ export const statistiquesBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "stat_interpretation_open_1",
+    id: "stat_interpreter_open_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "statistiques",
-    microId: "stat_interpretation",
+    notionId: "stat_statistique",
+    microId: "stat_interpreter",
     difficulty: 4,
     theme: "neutral",
     text: "Explique la différence entre moyenne, médiane et étendue.",
@@ -1145,7 +1145,7 @@ export const statistiquesBank: TutorBankItemV4[] = [
           "Méthode : on choisit l’indicateur demandé : effectif, fréquence, moyenne, médiane ou étendue.\n\nCalcul : " +
           ("La moyenne est un équilibre calculé, la médiane est la valeur centrale d’une série rangée, et l’étendue est l’écart entre le maximum et le minimum.") +
           "\n\nConclusion : l’indicateur obtenu résume correctement la série.",
-    tags: ["statistiques", "interpretation", "open"],
+    tags: ["stat_statistique", "interpretation", "open"],
   },
 
   /* =========================
@@ -1157,12 +1157,12 @@ export const statistiquesBank: TutorBankItemV4[] = [
     id: "stat_probleme_tpl_1_reunion",
     niveau: "4e",
     matiere: "maths",
-    notionId: "statistiques",
+    notionId: "stat_statistique",
     microId: "stat_probleme",
     difficulty: 4,
     theme: "reunion",
     hint: "Calcule la moyenne des températures.",
-    tags: ["statistiques", "probleme", "reunion", "moyenne"],
+    tags: ["stat_statistique", "probleme", "reunion", "moyenne"],
     generate: () => {
       const values = [
         randomInt(22, 26),
@@ -1190,12 +1190,12 @@ export const statistiquesBank: TutorBankItemV4[] = [
     id: "stat_probleme_tpl_2_graphique",
     niveau: "4e",
     matiere: "maths",
-    notionId: "statistiques",
+    notionId: "stat_statistique",
     microId: "stat_probleme",
     difficulty: 4,
     theme: "neutral",
     hint: "Additionne les effectifs du graphique.",
-    tags: ["statistiques", "probleme", "graphique", "canvas"],
+    tags: ["stat_statistique", "probleme", "graphique", "canvas"],
     generate: () => {
       const data = [
         { label: "Marche", value: randomInt(8, 18) },
@@ -1227,7 +1227,7 @@ export const statistiquesBank: TutorBankItemV4[] = [
     id: "stat_probleme_open_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "statistiques",
+    notionId: "stat_statistique",
     microId: "stat_probleme",
     difficulty: 5,
     theme: "neutral",
@@ -1240,7 +1240,7 @@ export const statistiquesBank: TutorBankItemV4[] = [
           "Méthode : on choisit l’indicateur demandé : effectif, fréquence, moyenne, médiane ou étendue.\n\nCalcul : " +
           ("Les statistiques permettent de résumer et comparer des groupes avec des indicateurs comme la moyenne, la médiane et l’étendue.") +
           "\n\nConclusion : l’indicateur obtenu résume correctement la série.",
-    tags: ["statistiques", "probleme", "open"],
+    tags: ["stat_statistique", "probleme", "open"],
   },
 
   /* =========================
@@ -1249,11 +1249,11 @@ export const statistiquesBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "stat_defis_fixed_1_erreur_moyenne_mediane",
+    id: "stat_defi_fixed_1_erreur_moyenne_mediane",
     niveau: "4e",
     matiere: "maths",
-    notionId: "statistiques",
-    microId: "stat_defis",
+    notionId: "stat_statistique",
+    microId: "stat_defi",
     difficulty: 5,
     theme: "neutral",
     text: "Un élève dit : « La médiane est toujours égale à la moyenne. » A-t-il raison ?",
@@ -1266,20 +1266,20 @@ export const statistiquesBank: TutorBankItemV4[] = [
           "Méthode : on choisit l’indicateur demandé : effectif, fréquence, moyenne, médiane ou étendue.\n\nCalcul : " +
           ("Non. La moyenne utilise toutes les valeurs, alors que la médiane dépend de la position centrale dans la série rangée.") +
           "\n\nConclusion : l’indicateur obtenu résume correctement la série.",
-    tags: ["statistiques", "defi", "erreur"],
+    tags: ["stat_statistique", "defi", "erreur"],
   },
 
   {
     kind: "template",
-    id: "stat_defis_tpl_1_retrouver_valeur",
+    id: "stat_defi_tpl_1_retrouver_valeur",
     niveau: "4e",
     matiere: "maths",
-    notionId: "statistiques",
-    microId: "stat_defis",
+    notionId: "stat_statistique",
+    microId: "stat_defi",
     difficulty: 5,
     theme: "neutral",
     hint: "Somme totale = moyenne × nombre de valeurs.",
-    tags: ["statistiques", "defi", "valeur_manquante"],
+    tags: ["stat_statistique", "defi", "valeur_manquante"],
     generate: () => {
       const a = randomInt(8, 14);
       const b = randomInt(8, 14);
@@ -1302,11 +1302,11 @@ export const statistiquesBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "stat_defis_open_1",
+    id: "stat_defi_open_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "statistiques",
-    microId: "stat_defis",
+    notionId: "stat_statistique",
+    microId: "stat_defi",
     difficulty: 5,
     theme: "neutral",
     text: "Explique pourquoi une valeur extrême peut modifier fortement une moyenne.",
@@ -1318,6 +1318,6 @@ export const statistiquesBank: TutorBankItemV4[] = [
           "Méthode : on choisit l’indicateur demandé : effectif, fréquence, moyenne, médiane ou étendue.\n\nCalcul : " +
           ("Une valeur extrême entre dans le calcul de la somme totale, donc elle peut tirer la moyenne vers le haut ou vers le bas.") +
           "\n\nConclusion : l’indicateur obtenu résume correctement la série.",
-    tags: ["statistiques", "defi", "open"],
+    tags: ["stat_statistique", "defi", "open"],
   },
 ];

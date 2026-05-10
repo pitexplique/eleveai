@@ -37,11 +37,11 @@ export const fractionsBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "fixed",
-    id: "fraction_egales_fixed_1",
+    id: "fraction_egale_fixed_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "fractions",
-    microId: "fraction_egales",
+    notionId: "fraction_nombre",
+    microId: "fraction_egale",
     difficulty: 1,
     theme: "neutral",
     text: "Quelle fraction est égale à 1/2 ?",
@@ -54,19 +54,19 @@ export const fractionsBank: TutorBankItemV4[] = [
           "Méthode : on applique la règle des fractions adaptée : simplifier, comparer, additionner ou multiplier.\n\nCalcul : " +
           ("1/2 = 2/4 car on multiplie 1 et 2 par 2.") +
           "\n\nConclusion : la fraction ou le nombre obtenu répond à la question.",
-    tags: ["fractions", "egales", "qcm"],
+    tags: ["fraction_nombre", "egales", "qcm"],
   },
   {
     kind: "template",
-    id: "fraction_egales_tpl_1",
+    id: "fraction_egale_tpl_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "fractions",
-    microId: "fraction_egales",
+    notionId: "fraction_nombre",
+    microId: "fraction_egale",
     difficulty: 1,
     theme: "neutral",
     hint: "Deux fractions sont égales si on multiplie haut et bas par le même nombre.",
-    tags: ["fractions", "egales", "template"],
+    tags: ["fraction_nombre", "egales", "template"],
     generate: () => {
       const n = randomInt(1, 8);
       const d = randomInt(n + 1, 12);
@@ -98,7 +98,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     id: "fraction_simplifier_fixed_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "fractions",
+    notionId: "fraction_nombre",
     microId: "fraction_simplifier",
     difficulty: 1,
     theme: "neutral",
@@ -112,19 +112,19 @@ export const fractionsBank: TutorBankItemV4[] = [
           "Méthode : on applique la règle des fractions adaptée : simplifier, comparer, additionner ou multiplier.\n\nCalcul : " +
           ("6/8 = 3/4 car on divise 6 et 8 par 2.") +
           "\n\nConclusion : la fraction ou le nombre obtenu répond à la question.",
-    tags: ["fractions", "simplifier"],
+    tags: ["fraction_nombre", "simplifier"],
   },
   {
     kind: "template",
     id: "fraction_simplifier_tpl_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "fractions",
+    notionId: "fraction_nombre",
     microId: "fraction_simplifier",
     difficulty: 2,
     theme: "neutral",
     hint: "Cherche un diviseur commun.",
-    tags: ["fractions", "simplifier", "template"],
+    tags: ["fraction_nombre", "simplifier", "template"],
     generate: () => {
       const n0 = randomInt(1, 8);
       const d0 = randomInt(n0 + 1, 12);
@@ -149,7 +149,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     id: "fraction_simplifier_open_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "fractions",
+    notionId: "fraction_nombre",
     microId: "fraction_simplifier",
     difficulty: 2,
     theme: "neutral",
@@ -162,7 +162,7 @@ export const fractionsBank: TutorBankItemV4[] = [
           "Méthode : on applique la règle des fractions adaptée : simplifier, comparer, additionner ou multiplier.\n\nCalcul : " +
           ("On divise 8 et 12 par 4 : 8/12 = 2/3.") +
           "\n\nConclusion : la fraction ou le nombre obtenu répond à la question.",
-    tags: ["fractions", "simplifier", "open"],
+    tags: ["fraction_nombre", "simplifier", "open"],
   },
 
   // =========================
@@ -173,7 +173,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     id: "fraction_decimal_fixed_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "fractions",
+    notionId: "fraction_nombre",
     microId: "fraction_decimal",
     difficulty: 1,
     theme: "neutral",
@@ -187,19 +187,19 @@ export const fractionsBank: TutorBankItemV4[] = [
           "Méthode : on applique la règle des fractions adaptée : simplifier, comparer, additionner ou multiplier.\n\nCalcul : " +
           ("1/2 = 1 ÷ 2 = 0,5.") +
           "\n\nConclusion : la fraction ou le nombre obtenu répond à la question.",
-    tags: ["fractions", "decimal"],
+    tags: ["fraction_nombre", "decimal"],
   },
   {
     kind: "template",
     id: "fraction_decimal_tpl_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "fractions",
+    notionId: "fraction_nombre",
     microId: "fraction_decimal",
     difficulty: 2,
     theme: "neutral",
     hint: "Calcule le numérateur divisé par le dénominateur.",
-    tags: ["fractions", "decimal", "template"],
+    tags: ["fraction_nombre", "decimal", "template"],
     generate: () => {
       const items = [
         { f: "1/2", d: "0,5" },
@@ -234,7 +234,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     id: "fraction_rationnel_fixed_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "fractions",
+    notionId: "fraction_nombre",
     microId: "fraction_rationnel",
     difficulty: 1,
     theme: "neutral",
@@ -248,14 +248,14 @@ export const fractionsBank: TutorBankItemV4[] = [
           "Méthode : on applique la règle des fractions adaptée : simplifier, comparer, additionner ou multiplier.\n\nCalcul : " +
           ("Un nombre rationnel peut s’écrire a/b avec b différent de 0.") +
           "\n\nConclusion : la fraction ou le nombre obtenu répond à la question.",
-    tags: ["fractions", "rationnel"],
+    tags: ["fraction_nombre", "rationnel"],
   },
   {
     kind: "fixed",
     id: "fraction_rationnel_open_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "fractions",
+    notionId: "fraction_nombre",
     microId: "fraction_rationnel",
     difficulty: 2,
     theme: "neutral",
@@ -268,7 +268,7 @@ export const fractionsBank: TutorBankItemV4[] = [
           "Méthode : on applique la règle des fractions adaptée : simplifier, comparer, additionner ou multiplier.\n\nCalcul : " +
           ("0,5 = 1/2. Comme il peut s’écrire sous forme de fraction, c’est un nombre rationnel.") +
           "\n\nConclusion : la fraction ou le nombre obtenu répond à la question.",
-    tags: ["fractions", "rationnel", "open"],
+    tags: ["fraction_nombre", "rationnel", "open"],
   },
 
   // =========================
@@ -279,7 +279,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     id: "fraction_comparer_fixed_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "fractions",
+    notionId: "fraction_nombre",
     microId: "fraction_comparer",
     difficulty: 2,
     theme: "neutral",
@@ -293,19 +293,19 @@ export const fractionsBank: TutorBankItemV4[] = [
           "Méthode : on applique la règle des fractions adaptée : simplifier, comparer, additionner ou multiplier.\n\nCalcul : " +
           ("1/2 est plus grand que 1/3, 1/4 et 1/5.") +
           "\n\nConclusion : la fraction ou le nombre obtenu répond à la question.",
-    tags: ["fractions", "comparer"],
+    tags: ["fraction_nombre", "comparer"],
   },
   {
     kind: "template",
     id: "fraction_comparer_tpl_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "fractions",
+    notionId: "fraction_nombre",
     microId: "fraction_comparer",
     difficulty: 3,
     theme: "neutral",
     hint: "Mets au même dénominateur ou compare les produits en croix.",
-    tags: ["fractions", "comparer", "template"],
+    tags: ["fraction_nombre", "comparer", "template"],
     generate: () => {
       const a = randomInt(1, 5);
       const b = randomInt(a + 1, 9);
@@ -334,11 +334,11 @@ export const fractionsBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "fixed",
-    id: "fraction_addition_fixed_1",
+    id: "fraction_additionner_fixed_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "fractions",
-    microId: "fraction_addition",
+    notionId: "fraction_nombre",
+    microId: "fraction_additionner",
     difficulty: 2,
     theme: "neutral",
     text: "Calculer 1/4 + 2/4.",
@@ -351,19 +351,19 @@ export const fractionsBank: TutorBankItemV4[] = [
           "Méthode : on applique la règle des fractions adaptée : simplifier, comparer, additionner ou multiplier.\n\nCalcul : " +
           ("1/4 + 2/4 = 3/4.") +
           "\n\nConclusion : la fraction ou le nombre obtenu répond à la question.",
-    tags: ["fractions", "addition"],
+    tags: ["fraction_nombre", "addition"],
   },
   {
     kind: "template",
-    id: "fraction_addition_tpl_1",
+    id: "fraction_additionner_tpl_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "fractions",
-    microId: "fraction_addition",
+    notionId: "fraction_nombre",
+    microId: "fraction_additionner",
     difficulty: 3,
     theme: "neutral",
     hint: "Mets les fractions au même dénominateur.",
-    tags: ["fractions", "addition", "template"],
+    tags: ["fraction_nombre", "addition", "template"],
     generate: () => {
       const d = randomChoice([3, 4, 5, 6, 8, 10]);
       const a = randomInt(1, d - 1);
@@ -384,11 +384,11 @@ export const fractionsBank: TutorBankItemV4[] = [
   },
   {
     kind: "fixed",
-    id: "fraction_addition_open_1",
+    id: "fraction_additionner_open_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "fractions",
-    microId: "fraction_addition",
+    notionId: "fraction_nombre",
+    microId: "fraction_additionner",
     difficulty: 3,
     theme: "neutral",
     text: "Explique pourquoi 1/2 + 1/3 ne vaut pas 2/5.",
@@ -400,7 +400,7 @@ export const fractionsBank: TutorBankItemV4[] = [
           "Méthode : on applique la règle des fractions adaptée : simplifier, comparer, additionner ou multiplier.\n\nCalcul : " +
           ("Il faut mettre au même dénominateur : 1/2 = 3/6 et 1/3 = 2/6, donc 1/2 + 1/3 = 5/6.") +
           "\n\nConclusion : la fraction ou le nombre obtenu répond à la question.",
-    tags: ["fractions", "addition", "erreur", "open"],
+    tags: ["fraction_nombre", "addition", "erreur", "open"],
   },
 
   // =========================
@@ -408,11 +408,11 @@ export const fractionsBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "fixed",
-    id: "fraction_produit_fixed_1",
+    id: "fraction_multiplier_fixed_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "fractions",
-    microId: "fraction_produit",
+    notionId: "fraction_nombre",
+    microId: "fraction_multiplier",
     difficulty: 2,
     theme: "neutral",
     text: "Calculer 2/3 × 3/5.",
@@ -425,19 +425,19 @@ export const fractionsBank: TutorBankItemV4[] = [
           "Méthode : on applique la règle des fractions adaptée : simplifier, comparer, additionner ou multiplier.\n\nCalcul : " +
           ("2/3 × 3/5 = (2×3)/(3×5) = 6/15.") +
           "\n\nConclusion : la fraction ou le nombre obtenu répond à la question.",
-    tags: ["fractions", "produit"],
+    tags: ["fraction_nombre", "produit"],
   },
   {
     kind: "template",
-    id: "fraction_produit_tpl_1",
+    id: "fraction_multiplier_tpl_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "fractions",
-    microId: "fraction_produit",
+    notionId: "fraction_nombre",
+    microId: "fraction_multiplier",
     difficulty: 3,
     theme: "neutral",
     hint: "Multiplie haut avec haut, bas avec bas.",
-    tags: ["fractions", "produit", "template"],
+    tags: ["fraction_nombre", "produit", "template"],
     generate: () => {
       const a = randomInt(1, 5);
       const b = randomInt(2, 8);
@@ -466,7 +466,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     id: "fraction_inverse_fixed_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "fractions",
+    notionId: "fraction_nombre",
     microId: "fraction_inverse",
     difficulty: 2,
     theme: "neutral",
@@ -480,19 +480,19 @@ export const fractionsBank: TutorBankItemV4[] = [
           "Méthode : on applique la règle des fractions adaptée : simplifier, comparer, additionner ou multiplier.\n\nCalcul : " +
           ("L’inverse de 3/5 est 5/3 car 3/5 × 5/3 = 1.") +
           "\n\nConclusion : la fraction ou le nombre obtenu répond à la question.",
-    tags: ["fractions", "inverse"],
+    tags: ["fraction_nombre", "inverse"],
   },
   {
     kind: "template",
     id: "fraction_inverse_tpl_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "fractions",
+    notionId: "fraction_nombre",
     microId: "fraction_inverse",
     difficulty: 2,
     theme: "neutral",
     hint: "Échange le numérateur et le dénominateur.",
-    tags: ["fractions", "inverse", "template"],
+    tags: ["fraction_nombre", "inverse", "template"],
     generate: () => {
       const a = randomInt(2, 9);
       const b = randomInt(2, 9);
@@ -515,11 +515,11 @@ export const fractionsBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "fixed",
-    id: "fraction_division_fixed_1",
+    id: "fraction_diviser_fixed_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "fractions",
-    microId: "fraction_division",
+    notionId: "fraction_nombre",
+    microId: "fraction_diviser",
     difficulty: 3,
     theme: "neutral",
     text: "Diviser par 2/3 revient à multiplier par…",
@@ -532,19 +532,19 @@ export const fractionsBank: TutorBankItemV4[] = [
           "Méthode : on applique la règle des fractions adaptée : simplifier, comparer, additionner ou multiplier.\n\nCalcul : " +
           ("Diviser par 2/3 revient à multiplier par son inverse, donc par 3/2.") +
           "\n\nConclusion : la fraction ou le nombre obtenu répond à la question.",
-    tags: ["fractions", "division"],
+    tags: ["fraction_nombre", "division"],
   },
   {
     kind: "template",
-    id: "fraction_division_tpl_1",
+    id: "fraction_diviser_tpl_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "fractions",
-    microId: "fraction_division",
+    notionId: "fraction_nombre",
+    microId: "fraction_diviser",
     difficulty: 4,
     theme: "neutral",
     hint: "Multiplier par l’inverse de la deuxième fraction.",
-    tags: ["fractions", "division", "template"],
+    tags: ["fraction_nombre", "division", "template"],
     generate: () => {
       const a = randomInt(1, 5);
       const b = randomInt(2, 8);
@@ -566,11 +566,11 @@ export const fractionsBank: TutorBankItemV4[] = [
   },
   {
     kind: "fixed",
-    id: "fraction_division_open_1",
+    id: "fraction_diviser_open_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "fractions",
-    microId: "fraction_division",
+    notionId: "fraction_nombre",
+    microId: "fraction_diviser",
     difficulty: 4,
     theme: "neutral",
     text: "Explique la méthode pour diviser par une fraction.",
@@ -582,7 +582,7 @@ export const fractionsBank: TutorBankItemV4[] = [
           "Méthode : on applique la règle des fractions adaptée : simplifier, comparer, additionner ou multiplier.\n\nCalcul : " +
           ("Pour diviser par une fraction, on multiplie par son inverse.") +
           "\n\nConclusion : la fraction ou le nombre obtenu répond à la question.",
-    tags: ["fractions", "division", "open"],
+    tags: ["fraction_nombre", "division", "open"],
   },
 
   // =========================
@@ -593,7 +593,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     id: "fraction_quantite_fixed_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "fractions",
+    notionId: "fraction_nombre",
     microId: "fraction_quantite",
     difficulty: 2,
     theme: "neutral",
@@ -607,19 +607,19 @@ export const fractionsBank: TutorBankItemV4[] = [
           "Méthode : on applique la règle des fractions adaptée : simplifier, comparer, additionner ou multiplier.\n\nCalcul : " +
           ("3/4 de 20 = 20 × 3/4 = 15.") +
           "\n\nConclusion : la fraction ou le nombre obtenu répond à la question.",
-    tags: ["fractions", "quantite"],
+    tags: ["fraction_nombre", "quantite"],
   },
   {
     kind: "template",
     id: "fraction_quantite_tpl_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "fractions",
+    notionId: "fraction_nombre",
     microId: "fraction_quantite",
     difficulty: 3,
     theme: "reunion",
     hint: "Prends la fraction de la quantité totale.",
-    tags: ["fractions", "quantite", "reunion", "template"],
+    tags: ["fraction_nombre", "quantite", "reunion", "template"],
     generate: () => {
       const den = randomChoice([2, 3, 4, 5]);
       const num = randomInt(1, den - 1);
@@ -647,7 +647,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     id: "fraction_oppose_fixed_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "fractions",
+    notionId: "fraction_nombre",
     microId: "fraction_oppose",
     difficulty: 2,
     theme: "neutral",
@@ -661,19 +661,19 @@ export const fractionsBank: TutorBankItemV4[] = [
           "Méthode : on applique la règle des fractions adaptée : simplifier, comparer, additionner ou multiplier.\n\nCalcul : " +
           ("L’opposé de 3/7 est -3/7.") +
           "\n\nConclusion : la fraction ou le nombre obtenu répond à la question.",
-    tags: ["fractions", "oppose"],
+    tags: ["fraction_nombre", "oppose"],
   },
   {
     kind: "template",
     id: "fraction_oppose_tpl_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "fractions",
+    notionId: "fraction_nombre",
     microId: "fraction_oppose",
     difficulty: 2,
     theme: "neutral",
     hint: "Change seulement le signe.",
-    tags: ["fractions", "oppose", "template"],
+    tags: ["fraction_nombre", "oppose", "template"],
     generate: () => {
       const a = randomInt(1, 9);
       const b = randomInt(2, 10);
@@ -695,11 +695,11 @@ export const fractionsBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "fixed",
-    id: "fraction_defis_fixed_1",
+    id: "fraction_defi_fixed_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "fractions",
-    microId: "fraction_defis",
+    notionId: "fraction_nombre",
+    microId: "fraction_defi",
     difficulty: 5,
     theme: "neutral",
     text: "Un élève affirme que 1/2 + 1/3 = 2/5. A-t-il raison ?",
@@ -712,19 +712,19 @@ export const fractionsBank: TutorBankItemV4[] = [
           "Méthode : on applique la règle des fractions adaptée : simplifier, comparer, additionner ou multiplier.\n\nCalcul : " +
           ("Non. 1/2 + 1/3 = 3/6 + 2/6 = 5/6.") +
           "\n\nConclusion : la fraction ou le nombre obtenu répond à la question.",
-    tags: ["fractions", "defi", "erreur"],
+    tags: ["fraction_nombre", "defi", "erreur"],
   },
   {
     kind: "template",
-    id: "fraction_defis_open_1",
+    id: "fraction_defi_open_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "fractions",
-    microId: "fraction_defis",
+    notionId: "fraction_nombre",
+    microId: "fraction_defi",
     difficulty: 5,
     theme: "neutral",
     hint: "Repère l’erreur classique.",
-    tags: ["fractions", "defi", "open", "erreur"],
+    tags: ["fraction_nombre", "defi", "open", "erreur"],
     generate: () => {
       return {
         text: "Explique pourquoi on ne peut pas additionner directement les dénominateurs dans une addition de fractions.",
@@ -745,15 +745,15 @@ export const fractionsBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "4e_fraction_egales_canvas_compare_tpl_1",
+    id: "4e_fraction_egale_canvas_compare_tpl_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "fractions",
-    microId: "fraction_egales",
+    notionId: "fraction_nombre",
+    microId: "fraction_egale",
     difficulty: 2,
     theme: "neutral",
     hint: "Observe si les deux parties colorées représentent la même proportion.",
-    tags: ["fractions", "egales", "canvas", "compare", "template"],
+    tags: ["fraction_nombre", "egales", "canvas", "compare", "template"],
     generate: () => {
       const situations = [
         { a: [1, 2], b: [2, 4], answer: "oui" },
@@ -794,12 +794,12 @@ export const fractionsBank: TutorBankItemV4[] = [
     id: "4e_fraction_simplifier_canvas_bar_tpl_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "fractions",
+    notionId: "fraction_nombre",
     microId: "fraction_simplifier",
     difficulty: 2,
     theme: "neutral",
     hint: "Cherche une fraction plus simple qui représente la même partie colorée.",
-    tags: ["fractions", "simplifier", "canvas", "bar", "template"],
+    tags: ["fraction_nombre", "simplifier", "canvas", "bar", "template"],
     generate: () => {
       const situations = [
         { n: 4, d: 8 },
@@ -835,12 +835,12 @@ export const fractionsBank: TutorBankItemV4[] = [
     id: "4e_fraction_comparer_canvas_compare_tpl_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "fractions",
+    notionId: "fraction_nombre",
     microId: "fraction_comparer",
     difficulty: 3,
     theme: "neutral",
     hint: "Compare les portions colorées ou utilise le produit en croix.",
-    tags: ["fractions", "comparer", "canvas", "compare", "template"],
+    tags: ["fraction_nombre", "comparer", "canvas", "compare", "template"],
     generate: () => {
       const situations = [
         { a: [1, 2], b: [3, 4] },
@@ -877,15 +877,15 @@ export const fractionsBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "4e_fraction_addition_canvas_bar_tpl_1",
+    id: "4e_fraction_additionner_canvas_bar_tpl_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "fractions",
-    microId: "fraction_addition",
+    notionId: "fraction_nombre",
+    microId: "fraction_additionner",
     difficulty: 2,
     theme: "neutral",
     hint: "Les dénominateurs sont identiques : additionne les numérateurs.",
-    tags: ["fractions", "addition", "canvas", "bar", "template"],
+    tags: ["fraction_nombre", "addition", "canvas", "bar", "template"],
     generate: () => {
       const d = randomChoice([4, 5, 6, 8, 10]);
       const a = randomInt(1, Math.floor(d / 2));
@@ -916,12 +916,12 @@ export const fractionsBank: TutorBankItemV4[] = [
     id: "4e_fraction_quantite_canvas_circle_tpl_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "fractions",
+    notionId: "fraction_nombre",
     microId: "fraction_quantite",
     difficulty: 3,
     theme: "reunion",
     hint: "Divise par le dénominateur puis multiplie par le numérateur.",
-    tags: ["fractions", "quantite", "canvas", "circle", "template", "reunion"],
+    tags: ["fraction_nombre", "quantite", "canvas", "circle", "template", "reunion"],
     generate: () => {
       const d = randomChoice([3, 4, 5, 6]);
       const n = randomInt(1, d - 1);
@@ -951,12 +951,12 @@ export const fractionsBank: TutorBankItemV4[] = [
     id: "4e_fraction_rationnel_canvas_grid_tpl_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "fractions",
+    notionId: "fraction_nombre",
     microId: "fraction_rationnel",
     difficulty: 2,
     theme: "neutral",
     hint: "Un rationnel peut s’écrire comme quotient de deux entiers.",
-    tags: ["fractions", "rationnel", "canvas", "grid", "template"],
+    tags: ["fraction_nombre", "rationnel", "canvas", "grid", "template"],
     generate: () => {
       const situations = [
         { rows: 2, cols: 5, shaded: 7 },
@@ -992,8 +992,8 @@ export const fractionsBank: TutorBankItemV4[] = [
     id: "4e_fraction_piege_parts_inegales_fixed_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "fractions",
-    microId: "fraction_egales",
+    notionId: "fraction_nombre",
+    microId: "fraction_egale",
     difficulty: 3,
     theme: "neutral",
     text: "Deux figures ont 2 parts colorées sur 4. Peut-on toujours dire qu’elles représentent la même fraction ?",
@@ -1007,7 +1007,7 @@ export const fractionsBank: TutorBankItemV4[] = [
       "Méthode : avant d’écrire ou de comparer une fraction, on vérifie que le partage est régulier.\n\n" +
       "Observation : si les parts ne sont pas égales, l’écriture 2/4 n’est pas fiable.\n\n" +
       "Conclusion : on ne peut pas conclure sans parts égales.",
-    tags: ["fractions", "piege", "parts_inegales", "canvas"],
+    tags: ["fraction_nombre", "piege", "parts_inegales", "canvas"],
     canvas: fractionCanvas({
       model: "bar",
       fraction: { numerator: 2, denominator: 4, label: "2/4 ?" },
@@ -1017,11 +1017,11 @@ export const fractionsBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "4e_fraction_addition_erreur_fixed_1",
+    id: "4e_fraction_additionner_erreur_fixed_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "fractions",
-    microId: "fraction_addition",
+    notionId: "fraction_nombre",
+    microId: "fraction_additionner",
     difficulty: 4,
     theme: "neutral",
     text: "Un élève écrit : 1/2 + 1/3 = 2/5. Explique son erreur.",
@@ -1034,6 +1034,6 @@ export const fractionsBank: TutorBankItemV4[] = [
       "Méthode : on transforme les fractions avant d’additionner.\n\n" +
       "Calcul : 1/2 = 3/6 et 1/3 = 2/6, donc 1/2 + 1/3 = 5/6.\n\n" +
       "Conclusion : l’erreur est d’avoir additionné les dénominateurs.",
-    tags: ["fractions", "erreur", "open", "addition"],
+    tags: ["fraction_nombre", "erreur", "open", "addition"],
   },
 ];
