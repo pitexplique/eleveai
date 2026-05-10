@@ -65,7 +65,7 @@ export const microSkills: MicroSkillSource[] = [
     prerequis: ["puissance_dix"],
   },
   {
-    id: "puissance_calculs",
+    id: "puissance_calcul",
     label: "Effectuer des calculs avec les puissances",
     notionId: "puissances",
     prerequis: ["puissance_calculer", "puissance_dix"],
@@ -74,7 +74,7 @@ export const microSkills: MicroSkillSource[] = [
     id: "puissance_defis",
     label: "Défis sur les puissances",
     notionId: "puissances",
-    prerequis: ["puissance_calculs", "puissance_ecriture_scientifique"],
+    prerequis: ["puissance_calcul", "puissance_ecriture_scientifique"],
   },
 
   /* =========================
@@ -87,7 +87,7 @@ export const microSkills: MicroSkillSource[] = [
     prerequis: ["puissance_calculer"],
   },
   {
-    id: "racine_carres_parfaits",
+    id: "racine_carre_parfait",
     label: "Reconnaître les carrés parfaits",
     notionId: "racine_carree",
     prerequis: ["racine_comprendre"],
@@ -96,13 +96,13 @@ export const microSkills: MicroSkillSource[] = [
     id: "racine_calculer",
     label: "Calculer une racine carrée simple",
     notionId: "racine_carree",
-    prerequis: ["racine_carres_parfaits"],
+    prerequis: ["racine_carre_parfait"],
   },
   {
     id: "racine_encadrer",
     label: "Encadrer une racine carrée",
     notionId: "racine_carree",
-    prerequis: ["racine_carres_parfaits"],
+    prerequis: ["racine_carre_parfait"],
   },
   {
     id: "racine_defis",
@@ -387,7 +387,7 @@ export const microSkills: MicroSkillSource[] = [
   },
 
   {
-    id: "affine_problemes",
+    id: "affine_probleme",
     label: "Résoudre un problème avec une fonction affine",
     notionId: "affine",
     prerequis: [
@@ -400,7 +400,7 @@ export const microSkills: MicroSkillSource[] = [
     id: "affine_defis",
     label: "Défis sur les fonctions affines",
     notionId: "affine",
-    prerequis: ["affine_problemes"],
+    prerequis: ["affine_probleme"],
   },
 
   /* =========================
@@ -755,7 +755,7 @@ export const microSkills: MicroSkillSource[] = [
     prerequis: ["transfo_homothetie_rapport"],
   },
   {
-    id: "volume_unites",
+    id: "volume_unite",
     label: "Convertir et utiliser les unités de volume",
     notionId: "volumes",
     prerequis: ["volume_comprendre"],
@@ -769,7 +769,7 @@ export const microSkills: MicroSkillSource[] = [
       "volume_prisme",
       "volume_cylindre",
       "volume_boule",
-      "volume_unites",
+      "volume_unite",
     ],
   },
 
@@ -835,7 +835,7 @@ export const microSkills: MicroSkillSource[] = [
     prerequis: [],
   },
   {
-    id: "proba_issues",
+    id: "proba_issue",
     label: "Déterminer les issues d’une expérience aléatoire",
     notionId: "probabilites",
     prerequis: ["proba_vocabulaire"],
@@ -844,7 +844,7 @@ export const microSkills: MicroSkillSource[] = [
     id: "proba_evenement",
     label: "Décrire un événement",
     notionId: "probabilites",
-    prerequis: ["proba_issues"],
+    prerequis: ["proba_issue"],
   },
   {
     id: "proba_calculer",

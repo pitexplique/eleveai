@@ -81,7 +81,7 @@ const supportLinks: Record<string, string[]> = {
   affine_calcul_image: ["fonction_image", "equation_resoudre_simple"],
   affine_expression: ["equation_resoudre_simple", "fonction_tableau"],
   affine_graphique: ["fonction_graphique", "affine_coeff_directeur"],
-  affine_problemes: ["prop_defis", "equation_defis"],
+  affine_probleme: ["prop_defis", "equation_defis"],
   affine_defis: ["fonction_defis", "equation_defis"],
 
   // =========================
