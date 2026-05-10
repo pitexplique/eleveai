@@ -44,11 +44,11 @@ export const nombresRationnelsBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "3e_rationnel_reconnaitre_fixed_1",
+    id: "3e_fraction_rationnel_reconnaitre_fixed_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "nombres_rationnels",
-    microId: "rationnel_reconnaitre",
+    notionId: "fraction_rationnel",
+    microId: "fraction_rationnel_reconnaitre",
     difficulty: 1,
     theme: "neutral",
     text: "Un nombre rationnel est un nombre qui peut s’écrire sous la forme…",
@@ -63,16 +63,16 @@ export const nombresRationnelsBank: TutorBankItemV4[] = [
       `Calcul : on effectue les transformations ou les opérations nécessaires étape par étape. ` +
       ("Un nombre rationnel est un nombre qui peut s’écrire sous la forme a/b, où a et b sont des entiers et b est non nul.") +
       `\n\nConclusion : le résultat obtenu donne la réponse attendue sous forme exacte ou simplifiée.`,
-    tags: ["rationnel", "definition", "qcm"],
+    tags: ["fraction_rationnel", "definition", "qcm"],
   },
 
   {
     kind: "fixed",
-    id: "3e_rationnel_reconnaitre_fixed_2",
+    id: "3e_fraction_rationnel_reconnaitre_fixed_2",
     niveau: "3e",
     matiere: "maths",
-    notionId: "nombres_rationnels",
-    microId: "rationnel_reconnaitre",
+    notionId: "fraction_rationnel",
+    microId: "fraction_rationnel_reconnaitre",
     difficulty: 1,
     theme: "neutral",
     text: "Le nombre 3/4 est-il un nombre rationnel ?",
@@ -87,16 +87,16 @@ export const nombresRationnelsBank: TutorBankItemV4[] = [
       `Calcul : on effectue les transformations ou les opérations nécessaires étape par étape. ` +
       ("Oui. 3/4 est une écriture fractionnaire avec un dénominateur non nul. C’est donc un nombre rationnel.") +
       `\n\nConclusion : le résultat obtenu donne la réponse attendue sous forme exacte ou simplifiée.`,
-    tags: ["rationnel", "fraction", "qcm"],
+    tags: ["fraction_rationnel", "fraction", "qcm"],
   },
 
   {
     kind: "fixed",
-    id: "3e_rationnel_reconnaitre_fixed_3",
+    id: "3e_fraction_rationnel_reconnaitre_fixed_3",
     niveau: "3e",
     matiere: "maths",
-    notionId: "nombres_rationnels",
-    microId: "rationnel_reconnaitre",
+    notionId: "fraction_rationnel",
+    microId: "fraction_rationnel_reconnaitre",
     difficulty: 2,
     theme: "neutral",
     text: "Le nombre -2,5 est-il rationnel ?",
@@ -111,16 +111,16 @@ export const nombresRationnelsBank: TutorBankItemV4[] = [
       `Calcul : on effectue les transformations ou les opérations nécessaires étape par étape. ` +
       ("Oui. -2,5 = -25/10 = -5/2. Il peut s’écrire sous forme fractionnaire, donc c’est un nombre rationnel.") +
       `\n\nConclusion : le résultat obtenu donne la réponse attendue sous forme exacte ou simplifiée.`,
-    tags: ["rationnel", "decimal", "negatif", "qcm"],
+    tags: ["fraction_rationnel", "decimal", "negatif", "qcm"],
   },
 
   {
     kind: "fixed",
-    id: "3e_rationnel_reconnaitre_open_1",
+    id: "3e_fraction_rationnel_reconnaitre_open_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "nombres_rationnels",
-    microId: "rationnel_reconnaitre",
+    notionId: "fraction_rationnel",
+    microId: "fraction_rationnel_reconnaitre",
     difficulty: 3,
     theme: "neutral",
     text: "Explique pourquoi 0,75 est un nombre rationnel.",
@@ -134,20 +134,20 @@ export const nombresRationnelsBank: TutorBankItemV4[] = [
       `Calcul : on effectue les transformations ou les opérations nécessaires étape par étape. ` +
       ("0,75 est rationnel car 0,75 = 75/100 = 3/4. Il peut donc s’écrire sous forme d’une fraction.") +
       `\n\nConclusion : le résultat obtenu donne la réponse attendue sous forme exacte ou simplifiée.`,
-    tags: ["rationnel", "open", "raisonnement"],
+    tags: ["fraction_rationnel", "open", "raisonnement"],
   },
 
   {
     kind: "template",
-    id: "3e_rationnel_reconnaitre_tpl_1",
+    id: "3e_fraction_rationnel_reconnaitre_tpl_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "nombres_rationnels",
-    microId: "rationnel_reconnaitre",
+    notionId: "fraction_rationnel",
+    microId: "fraction_rationnel_reconnaitre",
     difficulty: 2,
     theme: "neutral",
     hint: "Un entier peut toujours s’écrire sur 1.",
-    tags: ["rationnel", "entier", "template", "qcm"],
+    tags: ["fraction_rationnel", "entier", "template", "qcm"],
     generate: () => {
       const n = randomInt(-12, 12);
 
@@ -168,15 +168,15 @@ export const nombresRationnelsBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "3e_rationnel_reconnaitre_tpl_2",
+    id: "3e_fraction_rationnel_reconnaitre_tpl_2",
     niveau: "3e",
     matiere: "maths",
-    notionId: "nombres_rationnels",
-    microId: "rationnel_reconnaitre",
+    notionId: "fraction_rationnel",
+    microId: "fraction_rationnel_reconnaitre",
     difficulty: 2,
     theme: "neutral",
     hint: "Un décimal fini peut s’écrire avec un dénominateur 10, 100, 1000...",
-    tags: ["rationnel", "decimal", "template", "qcm"],
+    tags: ["fraction_rationnel", "decimal", "template", "qcm"],
     generate: () => {
       const decimals = [
         { text: "0,2", frac: "2/10" },
@@ -207,11 +207,11 @@ export const nombresRationnelsBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "3e_rationnel_ecritures_fixed_1",
+    id: "3e_fraction_rationnel_ecriture_fixed_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "nombres_rationnels",
-    microId: "rationnel_ecritures",
+    notionId: "fraction_rationnel",
+    microId: "fraction_rationnel_ecriture",
     difficulty: 1,
     theme: "neutral",
     text: "Quelle est l’écriture décimale de 1/2 ?",
@@ -226,16 +226,16 @@ export const nombresRationnelsBank: TutorBankItemV4[] = [
       `Calcul : on effectue les transformations ou les opérations nécessaires étape par étape. ` +
       ("1/2 = 1 ÷ 2 = 0,5.") +
       `\n\nConclusion : le résultat obtenu donne la réponse attendue sous forme exacte ou simplifiée.`,
-    tags: ["rationnel", "ecritures", "decimal", "qcm"],
+    tags: ["fraction_rationnel", "ecritures", "decimal", "qcm"],
   },
 
   {
     kind: "fixed",
-    id: "3e_rationnel_ecritures_fixed_2",
+    id: "3e_fraction_rationnel_ecriture_fixed_2",
     niveau: "3e",
     matiere: "maths",
-    notionId: "nombres_rationnels",
-    microId: "rationnel_ecritures",
+    notionId: "fraction_rationnel",
+    microId: "fraction_rationnel_ecriture",
     difficulty: 2,
     theme: "neutral",
     text: "Quelle fraction est égale à 0,25 ?",
@@ -250,16 +250,16 @@ export const nombresRationnelsBank: TutorBankItemV4[] = [
       `Calcul : on effectue les transformations ou les opérations nécessaires étape par étape. ` +
       ("0,25 = 25/100. En simplifiant par 25, on obtient 1/4.") +
       `\n\nConclusion : le résultat obtenu donne la réponse attendue sous forme exacte ou simplifiée.`,
-    tags: ["rationnel", "ecritures", "simplification", "qcm"],
+    tags: ["fraction_rationnel", "ecritures", "simplification", "qcm"],
   },
 
   {
     kind: "fixed",
-    id: "3e_rationnel_ecritures_fixed_3",
+    id: "3e_fraction_rationnel_ecriture_fixed_3",
     niveau: "3e",
     matiere: "maths",
-    notionId: "nombres_rationnels",
-    microId: "rationnel_ecritures",
+    notionId: "fraction_rationnel",
+    microId: "fraction_rationnel_ecriture",
     difficulty: 2,
     theme: "neutral",
     text: "Donne l’écriture décimale de 3/4.",
@@ -273,16 +273,16 @@ export const nombresRationnelsBank: TutorBankItemV4[] = [
       `Calcul : on effectue les transformations ou les opérations nécessaires étape par étape. ` +
       ("3/4 = 3 ÷ 4 = 0,75.") +
       `\n\nConclusion : le résultat obtenu donne la réponse attendue sous forme exacte ou simplifiée.`,
-    tags: ["rationnel", "decimal", "short"],
+    tags: ["fraction_rationnel", "decimal", "short"],
   },
 
   {
     kind: "fixed",
-    id: "3e_rationnel_ecritures_open_1",
+    id: "3e_fraction_rationnel_ecriture_open_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "nombres_rationnels",
-    microId: "rationnel_ecritures",
+    notionId: "fraction_rationnel",
+    microId: "fraction_rationnel_ecriture",
     difficulty: 3,
     theme: "neutral",
     text: "Explique pourquoi 0,4 = 2/5.",
@@ -296,20 +296,20 @@ export const nombresRationnelsBank: TutorBankItemV4[] = [
       `Calcul : on effectue les transformations ou les opérations nécessaires étape par étape. ` +
       ("0,4 = 4/10. En simplifiant par 2, on obtient 2/5.") +
       `\n\nConclusion : le résultat obtenu donne la réponse attendue sous forme exacte ou simplifiée.`,
-    tags: ["rationnel", "open", "ecritures"],
+    tags: ["fraction_rationnel", "open", "ecritures"],
   },
 
   {
     kind: "template",
-    id: "3e_rationnel_ecritures_tpl_1",
+    id: "3e_fraction_rationnel_ecriture_tpl_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "nombres_rationnels",
-    microId: "rationnel_ecritures",
+    notionId: "fraction_rationnel",
+    microId: "fraction_rationnel_ecriture",
     difficulty: 2,
     theme: "neutral",
     hint: "Divise le numérateur par le dénominateur.",
-    tags: ["rationnel", "decimal", "template", "short"],
+    tags: ["fraction_rationnel", "decimal", "template", "short"],
     generate: () => {
       const items = [
         { frac: "1/4", dec: "0,25" },
@@ -337,15 +337,15 @@ export const nombresRationnelsBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "3e_rationnel_ecritures_tpl_2",
+    id: "3e_fraction_rationnel_ecriture_tpl_2",
     niveau: "3e",
     matiere: "maths",
-    notionId: "nombres_rationnels",
-    microId: "rationnel_ecritures",
+    notionId: "fraction_rationnel",
+    microId: "fraction_rationnel_ecriture",
     difficulty: 3,
     theme: "neutral",
     hint: "Écris d’abord le décimal sur 10 ou sur 100.",
-    tags: ["rationnel", "fraction", "template", "qcm"],
+    tags: ["fraction_rationnel", "fraction", "template", "qcm"],
     generate: () => {
       const items = [
         { dec: "0,5", frac: "1/2", wrongs: ["5/1", "5/100", "2/1"] },
@@ -376,11 +376,11 @@ export const nombresRationnelsBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "3e_rationnel_comparer_fixed_1",
+    id: "3e_fraction_rationnel_comparer_fixed_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "nombres_rationnels",
-    microId: "rationnel_comparer",
+    notionId: "fraction_rationnel",
+    microId: "fraction_rationnel_comparer",
     difficulty: 2,
     theme: "neutral",
     text: "Quel nombre est le plus grand : 2/3 ou 1/3 ?",
@@ -395,16 +395,16 @@ export const nombresRationnelsBank: TutorBankItemV4[] = [
       `Calcul : on effectue les transformations ou les opérations nécessaires étape par étape. ` +
       ("Les deux fractions ont le même dénominateur. On compare donc les numérateurs : 2 > 1, donc 2/3 est plus grand.") +
       `\n\nConclusion : le résultat obtenu donne la réponse attendue sous forme exacte ou simplifiée.`,
-    tags: ["rationnel", "comparer", "qcm"],
+    tags: ["fraction_rationnel", "comparer", "qcm"],
   },
 
   {
     kind: "fixed",
-    id: "3e_rationnel_comparer_fixed_2",
+    id: "3e_fraction_rationnel_comparer_fixed_2",
     niveau: "3e",
     matiere: "maths",
-    notionId: "nombres_rationnels",
-    microId: "rationnel_comparer",
+    notionId: "fraction_rationnel",
+    microId: "fraction_rationnel_comparer",
     difficulty: 2,
     theme: "neutral",
     text: "Quel nombre est le plus petit : -1/2 ou 1/3 ?",
@@ -419,16 +419,16 @@ export const nombresRationnelsBank: TutorBankItemV4[] = [
       `Calcul : on effectue les transformations ou les opérations nécessaires étape par étape. ` +
       ("-1/2 est négatif alors que 1/3 est positif. Donc -1/2 est le plus petit.") +
       `\n\nConclusion : le résultat obtenu donne la réponse attendue sous forme exacte ou simplifiée.`,
-    tags: ["rationnel", "comparer", "negatif", "qcm"],
+    tags: ["fraction_rationnel", "comparer", "negatif", "qcm"],
   },
 
   {
     kind: "fixed",
-    id: "3e_rationnel_comparer_fixed_3",
+    id: "3e_fraction_rationnel_comparer_fixed_3",
     niveau: "3e",
     matiere: "maths",
-    notionId: "nombres_rationnels",
-    microId: "rationnel_comparer",
+    notionId: "fraction_rationnel",
+    microId: "fraction_rationnel_comparer",
     difficulty: 3,
     theme: "neutral",
     text: "Comparer 3/4 et 2/3. Quel est le plus grand ?",
@@ -443,16 +443,16 @@ export const nombresRationnelsBank: TutorBankItemV4[] = [
       `Calcul : on effectue les transformations ou les opérations nécessaires étape par étape. ` +
       ("On compare 3/4 et 2/3 par produits en croix : 3 × 3 = 9 et 2 × 4 = 8. Comme 9 > 8, 3/4 > 2/3.") +
       `\n\nConclusion : le résultat obtenu donne la réponse attendue sous forme exacte ou simplifiée.`,
-    tags: ["rationnel", "comparer", "produits_croix", "qcm"],
+    tags: ["fraction_rationnel", "comparer", "produits_croix", "qcm"],
   },
 
   {
     kind: "fixed",
-    id: "3e_rationnel_comparer_open_1",
+    id: "3e_fraction_rationnel_comparer_open_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "nombres_rationnels",
-    microId: "rationnel_comparer",
+    notionId: "fraction_rationnel",
+    microId: "fraction_rationnel_comparer",
     difficulty: 4,
     theme: "neutral",
     text: "Explique pourquoi -3/4 est plus petit que -1/2.",
@@ -466,20 +466,20 @@ export const nombresRationnelsBank: TutorBankItemV4[] = [
       `Calcul : on effectue les transformations ou les opérations nécessaires étape par étape. ` +
       ("-3/4 = -0,75 et -1/2 = -0,5. Sur une droite graduée, -0,75 est plus à gauche que -0,5, donc -3/4 est plus petit.") +
       `\n\nConclusion : le résultat obtenu donne la réponse attendue sous forme exacte ou simplifiée.`,
-    tags: ["rationnel", "comparer", "open", "negatif"],
+    tags: ["fraction_rationnel", "comparer", "open", "negatif"],
   },
 
   {
     kind: "template",
-    id: "3e_rationnel_comparer_tpl_1",
+    id: "3e_fraction_rationnel_comparer_tpl_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "nombres_rationnels",
-    microId: "rationnel_comparer",
+    notionId: "fraction_rationnel",
+    microId: "fraction_rationnel_comparer",
     difficulty: 3,
     theme: "neutral",
     hint: "Compare avec les produits en croix.",
-    tags: ["rationnel", "comparer", "template", "qcm"],
+    tags: ["fraction_rationnel", "comparer", "template", "qcm"],
     generate: () => {
       const a = randomInt(1, 8);
       const b = randomInt(2, 9);
@@ -513,15 +513,15 @@ export const nombresRationnelsBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "3e_rationnel_comparer_tpl_2",
+    id: "3e_fraction_rationnel_comparer_tpl_2",
     niveau: "3e",
     matiere: "maths",
-    notionId: "nombres_rationnels",
-    microId: "rationnel_comparer",
+    notionId: "fraction_rationnel",
+    microId: "fraction_rationnel_comparer",
     difficulty: 3,
     theme: "reunion",
     hint: "Compare les fractions de trajet.",
-    tags: ["rationnel", "comparer", "reunion", "template", "qcm"],
+    tags: ["fraction_rationnel", "comparer", "reunion", "template", "qcm"],
     generate: () => {
       const items = [
         { a: "2/3", b: "3/4", correct: "3/4" },
@@ -551,11 +551,11 @@ export const nombresRationnelsBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "3e_rationnel_calculer_fixed_1",
+    id: "3e_fraction_rationnel_calculer_fixed_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "nombres_rationnels",
-    microId: "rationnel_calculer",
+    notionId: "fraction_rationnel",
+    microId: "fraction_rationnel_calculer",
     difficulty: 2,
     theme: "neutral",
     text: "Calculer : 1/3 + 2/3",
@@ -569,16 +569,16 @@ export const nombresRationnelsBank: TutorBankItemV4[] = [
       `Calcul : on effectue les transformations ou les opérations nécessaires étape par étape. ` +
       ("1/3 + 2/3 = 3/3 = 1.") +
       `\n\nConclusion : le résultat obtenu donne la réponse attendue sous forme exacte ou simplifiée.`,
-    tags: ["rationnel", "calcul", "addition"],
+    tags: ["fraction_rationnel", "calcul", "addition"],
   },
 
   {
     kind: "fixed",
-    id: "3e_rationnel_calculer_fixed_2",
+    id: "3e_fraction_rationnel_calculer_fixed_2",
     niveau: "3e",
     matiere: "maths",
-    notionId: "nombres_rationnels",
-    microId: "rationnel_calculer",
+    notionId: "fraction_rationnel",
+    microId: "fraction_rationnel_calculer",
     difficulty: 2,
     theme: "neutral",
     text: "Calculer : 3/4 × 2/5",
@@ -593,16 +593,16 @@ export const nombresRationnelsBank: TutorBankItemV4[] = [
       `Calcul : on effectue les transformations ou les opérations nécessaires étape par étape. ` +
       ("3/4 × 2/5 = (3 × 2)/(4 × 5) = 6/20. On peut simplifier ensuite en 3/10.") +
       `\n\nConclusion : le résultat obtenu donne la réponse attendue sous forme exacte ou simplifiée.`,
-    tags: ["rationnel", "calcul", "produit", "qcm"],
+    tags: ["fraction_rationnel", "calcul", "produit", "qcm"],
   },
 
   {
     kind: "fixed",
-    id: "3e_rationnel_calculer_fixed_3",
+    id: "3e_fraction_rationnel_calculer_fixed_3",
     niveau: "3e",
     matiere: "maths",
-    notionId: "nombres_rationnels",
-    microId: "rationnel_calculer",
+    notionId: "fraction_rationnel",
+    microId: "fraction_rationnel_calculer",
     difficulty: 3,
     theme: "neutral",
     text: "Calculer : 1/2 + 1/4",
@@ -616,16 +616,16 @@ export const nombresRationnelsBank: TutorBankItemV4[] = [
       `Calcul : on effectue les transformations ou les opérations nécessaires étape par étape. ` +
       ("1/2 = 2/4. Donc 1/2 + 1/4 = 2/4 + 1/4 = 3/4.") +
       `\n\nConclusion : le résultat obtenu donne la réponse attendue sous forme exacte ou simplifiée.`,
-    tags: ["rationnel", "calcul", "addition", "denominateur"],
+    tags: ["fraction_rationnel", "calcul", "addition", "denominateur"],
   },
 
   {
     kind: "fixed",
-    id: "3e_rationnel_calculer_erreur_1",
+    id: "3e_fraction_rationnel_calculer_erreur_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "nombres_rationnels",
-    microId: "rationnel_calculer",
+    notionId: "fraction_rationnel",
+    microId: "fraction_rationnel_calculer",
     difficulty: 3,
     theme: "neutral",
     text: "Un élève écrit : 1/2 + 1/3 = 2/5. A-t-il raison ?",
@@ -640,16 +640,16 @@ export const nombresRationnelsBank: TutorBankItemV4[] = [
       `Calcul : on effectue les transformations ou les opérations nécessaires étape par étape. ` +
       ("Non. Il faut mettre au même dénominateur : 1/2 = 3/6 et 1/3 = 2/6. Donc 1/2 + 1/3 = 5/6.") +
       `\n\nConclusion : le résultat obtenu donne la réponse attendue sous forme exacte ou simplifiée.`,
-    tags: ["rationnel", "calcul", "erreur", "qcm"],
+    tags: ["fraction_rationnel", "calcul", "erreur", "qcm"],
   },
 
   {
     kind: "fixed",
-    id: "3e_rationnel_calculer_open_1",
+    id: "3e_fraction_rationnel_calculer_open_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "nombres_rationnels",
-    microId: "rationnel_calculer",
+    notionId: "fraction_rationnel",
+    microId: "fraction_rationnel_calculer",
     difficulty: 4,
     theme: "neutral",
     text: "Explique pourquoi 2/3 × 3/5 = 2/5.",
@@ -663,20 +663,20 @@ export const nombresRationnelsBank: TutorBankItemV4[] = [
       `Calcul : on effectue les transformations ou les opérations nécessaires étape par étape. ` +
       ("On calcule 2/3 × 3/5 = 6/15. En simplifiant par 3, on obtient 2/5.") +
       `\n\nConclusion : le résultat obtenu donne la réponse attendue sous forme exacte ou simplifiée.`,
-    tags: ["rationnel", "calcul", "open", "produit"],
+    tags: ["fraction_rationnel", "calcul", "open", "produit"],
   },
 
   {
     kind: "template",
-    id: "3e_rationnel_calculer_tpl_1",
+    id: "3e_fraction_rationnel_calculer_tpl_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "nombres_rationnels",
-    microId: "rationnel_calculer",
+    notionId: "fraction_rationnel",
+    microId: "fraction_rationnel_calculer",
     difficulty: 2,
     theme: "neutral",
     hint: "Les dénominateurs sont identiques.",
-    tags: ["rationnel", "calcul", "addition", "template"],
+    tags: ["fraction_rationnel", "calcul", "addition", "template"],
     generate: () => {
       const den = randomChoice([5, 6, 7, 8, 9]);
       const a = randomInt(1, den - 2);
@@ -703,15 +703,15 @@ export const nombresRationnelsBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "3e_rationnel_calculer_tpl_2",
+    id: "3e_fraction_rationnel_calculer_tpl_2",
     niveau: "3e",
     matiere: "maths",
-    notionId: "nombres_rationnels",
-    microId: "rationnel_calculer",
+    notionId: "fraction_rationnel",
+    microId: "fraction_rationnel_calculer",
     difficulty: 3,
     theme: "neutral",
     hint: "Multiplie les numérateurs et les dénominateurs.",
-    tags: ["rationnel", "calcul", "produit", "template"],
+    tags: ["fraction_rationnel", "calcul", "produit", "template"],
     generate: () => {
       const a = randomInt(1, 6);
       const b = randomInt(2, 8);
@@ -741,15 +741,15 @@ export const nombresRationnelsBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "3e_rationnel_calculer_tpl_3",
+    id: "3e_fraction_rationnel_calculer_tpl_3",
     niveau: "3e",
     matiere: "maths",
-    notionId: "nombres_rationnels",
-    microId: "rationnel_calculer",
+    notionId: "fraction_rationnel",
+    microId: "fraction_rationnel_calculer",
     difficulty: 4,
     theme: "neutral",
     hint: "Commence par simplifier ou convertir si nécessaire.",
-    tags: ["rationnel", "calcul", "probleme", "template"],
+    tags: ["fraction_rationnel", "calcul", "probleme", "template"],
     generate: () => {
       const a = randomChoice([
         { text: "0,5", frac: "1/2" },
@@ -788,11 +788,11 @@ export const nombresRationnelsBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "3e_rationnel_defis_fixed_1",
+    id: "3e_fraction_rationnel_defi_fixed_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "nombres_rationnels",
-    microId: "rationnel_defis",
+    notionId: "fraction_rationnel",
+    microId: "fraction_rationnel_defi",
     difficulty: 4,
     theme: "neutral",
     text: "Trouve un nombre rationnel strictement compris entre 1/2 et 3/4.",
@@ -806,16 +806,16 @@ export const nombresRationnelsBank: TutorBankItemV4[] = [
       `Calcul : on effectue les transformations ou les opérations nécessaires étape par étape. ` +
       ("1/2 = 0,5 et 3/4 = 0,75. Par exemple 0,6, 5/8 ou 2/3 conviennent.") +
       `\n\nConclusion : le résultat obtenu donne la réponse attendue sous forme exacte ou simplifiée.`,
-    tags: ["rationnel", "defi", "encadrement"],
+    tags: ["fraction_rationnel", "defi", "encadrement"],
   },
 
   {
     kind: "fixed",
-    id: "3e_rationnel_defis_fixed_2",
+    id: "3e_fraction_rationnel_defi_fixed_2",
     niveau: "3e",
     matiere: "maths",
-    notionId: "nombres_rationnels",
-    microId: "rationnel_defis",
+    notionId: "fraction_rationnel",
+    microId: "fraction_rationnel_defi",
     difficulty: 5,
     theme: "neutral",
     text: "Un élève affirme : « Entre deux nombres rationnels, il n’y a aucun autre nombre rationnel. » A-t-il raison ?",
@@ -830,16 +830,16 @@ export const nombresRationnelsBank: TutorBankItemV4[] = [
       `Calcul : on effectue les transformations ou les opérations nécessaires étape par étape. ` +
       ("Non. Entre deux rationnels, on peut toujours trouver un autre rationnel. Par exemple entre 1/2 et 3/4, il y a 2/3.") +
       `\n\nConclusion : le résultat obtenu donne la réponse attendue sous forme exacte ou simplifiée.`,
-    tags: ["rationnel", "defi", "densite", "qcm"],
+    tags: ["fraction_rationnel", "defi", "densite", "qcm"],
   },
 
   {
     kind: "fixed",
-    id: "3e_rationnel_defis_open_1",
+    id: "3e_fraction_rationnel_defi_open_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "nombres_rationnels",
-    microId: "rationnel_defis",
+    notionId: "fraction_rationnel",
+    microId: "fraction_rationnel_defi",
     difficulty: 5,
     theme: "neutral",
     text: "Explique pourquoi tout nombre décimal fini est rationnel.",
@@ -853,20 +853,20 @@ export const nombresRationnelsBank: TutorBankItemV4[] = [
       `Calcul : on effectue les transformations ou les opérations nécessaires étape par étape. ` +
       ("Tout nombre décimal fini peut s’écrire sous forme d’une fraction dont le dénominateur est 10, 100, 1000, etc. Il est donc rationnel.") +
       `\n\nConclusion : le résultat obtenu donne la réponse attendue sous forme exacte ou simplifiée.`,
-    tags: ["rationnel", "defi", "open", "raisonnement"],
+    tags: ["fraction_rationnel", "defi", "open", "raisonnement"],
   },
 
   {
     kind: "template",
-    id: "3e_rationnel_defis_tpl_1",
+    id: "3e_fraction_rationnel_defi_tpl_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "nombres_rationnels",
-    microId: "rationnel_defis",
+    notionId: "fraction_rationnel",
+    microId: "fraction_rationnel_defi",
     difficulty: 4,
     theme: "neutral",
     hint: "Compare les deux rationnels en écriture décimale.",
-    tags: ["rationnel", "defi", "template", "qcm"],
+    tags: ["fraction_rationnel", "defi", "template", "qcm"],
     generate: () => {
       const items = [
         {
@@ -911,15 +911,15 @@ export const nombresRationnelsBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "3e_rationnel_defis_tpl_2",
+    id: "3e_fraction_rationnel_defi_tpl_2",
     niveau: "3e",
     matiere: "maths",
-    notionId: "nombres_rationnels",
-    microId: "rationnel_defis",
+    notionId: "fraction_rationnel",
+    microId: "fraction_rationnel_defi",
     difficulty: 5,
     theme: "reunion",
     hint: "Calcule la part consommée puis compare.",
-    tags: ["rationnel", "defi", "reunion", "probleme", "template"],
+    tags: ["fraction_rationnel", "defi", "reunion", "probleme", "template"],
     generate: () => {
       const total = randomChoice([24, 30, 36, 48]);
       const part1 = randomChoice([1, 2, 3]);

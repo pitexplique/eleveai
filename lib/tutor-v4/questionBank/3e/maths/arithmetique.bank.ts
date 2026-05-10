@@ -38,11 +38,11 @@ export const arithmetiqueBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "3e_arith_multiple_diviseur_fixed_1",
+    id: "3e_entier_multiple_diviseur_fixed_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "arithmetique",
-    microId: "arith_multiple_diviseur",
+    notionId: "entier_arithmetique",
+    microId: "entier_multiple_diviseur",
     difficulty: 1,
     theme: "neutral",
     text: "12 est-il un multiple de 3 ?",
@@ -56,16 +56,16 @@ export const arithmetiqueBank: TutorBankItemV4[] = [
       `Calcul : on utilise les données de la question pour justifier la réponse. ` +
       ("Oui, car 12 = 3 × 4.") +
       `\n\nConclusion : la réponse est donc celle indiquée, avec une justification arithmétique.`,
-    tags: ["arithmetique", "multiple", "diviseur"],
+    tags: ["entier_arithmetique", "multiple", "diviseur"],
   },
 
   {
     kind: "fixed",
-    id: "3e_arith_multiple_diviseur_fixed_2",
+    id: "3e_entier_multiple_diviseur_fixed_2",
     niveau: "3e",
     matiere: "maths",
-    notionId: "arithmetique",
-    microId: "arith_multiple_diviseur",
+    notionId: "entier_arithmetique",
+    microId: "entier_multiple_diviseur",
     difficulty: 1,
     theme: "neutral",
     text: "5 est-il un diviseur de 35 ?",
@@ -79,16 +79,16 @@ export const arithmetiqueBank: TutorBankItemV4[] = [
       `Calcul : on utilise les données de la question pour justifier la réponse. ` +
       ("Oui, car 35 = 5 × 7.") +
       `\n\nConclusion : la réponse est donc celle indiquée, avec une justification arithmétique.`,
-    tags: ["arithmetique", "diviseur", "qcm"],
+    tags: ["entier_arithmetique", "diviseur", "qcm"],
   },
 
   {
     kind: "fixed",
-    id: "3e_arith_multiple_diviseur_fixed_3",
+    id: "3e_entier_multiple_diviseur_fixed_3",
     niveau: "3e",
     matiere: "maths",
-    notionId: "arithmetique",
-    microId: "arith_multiple_diviseur",
+    notionId: "entier_arithmetique",
+    microId: "entier_multiple_diviseur",
     difficulty: 2,
     theme: "neutral",
     text: "Quel nombre est un diviseur de 42 ?",
@@ -102,16 +102,16 @@ export const arithmetiqueBank: TutorBankItemV4[] = [
       `Calcul : on utilise les données de la question pour justifier la réponse. ` +
       ("6 est un diviseur de 42 car 42 = 6 × 7.") +
       `\n\nConclusion : la réponse est donc celle indiquée, avec une justification arithmétique.`,
-    tags: ["arithmetique", "diviseur", "qcm"],
+    tags: ["entier_arithmetique", "diviseur", "qcm"],
   },
 
   {
     kind: "fixed",
-    id: "3e_arith_multiple_diviseur_open_1",
+    id: "3e_entier_multiple_diviseur_open_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "arithmetique",
-    microId: "arith_multiple_diviseur",
+    notionId: "entier_arithmetique",
+    microId: "entier_multiple_diviseur",
     difficulty: 3,
     theme: "neutral",
     text: "Explique pourquoi 8 est un diviseur de 56.",
@@ -124,20 +124,20 @@ export const arithmetiqueBank: TutorBankItemV4[] = [
       `Calcul : on utilise les données de la question pour justifier la réponse. ` +
       ("8 est un diviseur de 56 car 56 = 8 × 7.") +
       `\n\nConclusion : la réponse est donc celle indiquée, avec une justification arithmétique.`,
-    tags: ["arithmetique", "diviseur", "open"],
+    tags: ["entier_arithmetique", "diviseur", "open"],
   },
 
   {
     kind: "template",
-    id: "3e_arith_multiple_diviseur_tpl_1",
+    id: "3e_entier_multiple_diviseur_tpl_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "arithmetique",
-    microId: "arith_multiple_diviseur",
+    notionId: "entier_arithmetique",
+    microId: "entier_multiple_diviseur",
     difficulty: 2,
     theme: "neutral",
     hint: "Un multiple s’obtient en multipliant par un entier.",
-    tags: ["arithmetique", "multiple", "template"],
+    tags: ["entier_arithmetique", "multiple", "template"],
     generate: () => {
       const d = randomInt(2, 12);
       const k = randomInt(3, 12);
@@ -160,15 +160,15 @@ export const arithmetiqueBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "3e_arith_multiple_diviseur_tpl_2",
+    id: "3e_entier_multiple_diviseur_tpl_2",
     niveau: "3e",
     matiere: "maths",
-    notionId: "arithmetique",
-    microId: "arith_multiple_diviseur",
+    notionId: "entier_arithmetique",
+    microId: "entier_multiple_diviseur",
     difficulty: 2,
     theme: "neutral",
     hint: "On vérifie si la division tombe juste.",
-    tags: ["arithmetique", "diviseur", "template"],
+    tags: ["entier_arithmetique", "diviseur", "template"],
     generate: () => {
       const d = randomInt(2, 12);
       const k = randomInt(3, 10);
@@ -198,11 +198,11 @@ export const arithmetiqueBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "3e_arith_criteres_fixed_1",
+    id: "3e_entier_critere_divisibilite_fixed_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "arithmetique",
-    microId: "arith_criteres",
+    notionId: "entier_arithmetique",
+    microId: "entier_critere_divisibilite",
     difficulty: 1,
     theme: "neutral",
     text: "Un nombre divisible par 2 est…",
@@ -221,16 +221,16 @@ export const arithmetiqueBank: TutorBankItemV4[] = [
       `Calcul : on utilise les données de la question pour justifier la réponse. ` +
       ("Un nombre divisible par 2 est un nombre pair.") +
       `\n\nConclusion : la réponse est donc celle indiquée, avec une justification arithmétique.`,
-    tags: ["arithmetique", "criteres", "divisibilite"],
+    tags: ["entier_arithmetique", "criteres", "divisibilite"],
   },
 
   {
     kind: "fixed",
-    id: "3e_arith_criteres_fixed_2",
+    id: "3e_entier_critere_divisibilite_fixed_2",
     niveau: "3e",
     matiere: "maths",
-    notionId: "arithmetique",
-    microId: "arith_criteres",
+    notionId: "entier_arithmetique",
+    microId: "entier_critere_divisibilite",
     difficulty: 2,
     theme: "neutral",
     text: "Le nombre 135 est divisible par…",
@@ -244,16 +244,16 @@ export const arithmetiqueBank: TutorBankItemV4[] = [
       `Calcul : on utilise les données de la question pour justifier la réponse. ` +
       ("1 + 3 + 5 = 9, et 9 est divisible par 3. Donc 135 est divisible par 3.") +
       `\n\nConclusion : la réponse est donc celle indiquée, avec une justification arithmétique.`,
-    tags: ["arithmetique", "criteres", "qcm"],
+    tags: ["entier_arithmetique", "criteres", "qcm"],
   },
 
   {
     kind: "fixed",
-    id: "3e_arith_criteres_fixed_3",
+    id: "3e_entier_critere_divisibilite_fixed_3",
     niveau: "3e",
     matiere: "maths",
-    notionId: "arithmetique",
-    microId: "arith_criteres",
+    notionId: "entier_arithmetique",
+    microId: "entier_critere_divisibilite",
     difficulty: 2,
     theme: "neutral",
     text: "Le nombre 250 est divisible par…",
@@ -267,20 +267,20 @@ export const arithmetiqueBank: TutorBankItemV4[] = [
       `Calcul : on utilise les données de la question pour justifier la réponse. ` +
       ("250 finit par 0, donc il est divisible par 5.") +
       `\n\nConclusion : la réponse est donc celle indiquée, avec une justification arithmétique.`,
-    tags: ["arithmetique", "criteres", "qcm"],
+    tags: ["entier_arithmetique", "criteres", "qcm"],
   },
 
   {
     kind: "template",
-    id: "3e_arith_criteres_tpl_1",
+    id: "3e_entier_critere_divisibilite_tpl_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "arithmetique",
-    microId: "arith_criteres",
+    notionId: "entier_arithmetique",
+    microId: "entier_critere_divisibilite",
     difficulty: 2,
     theme: "neutral",
     hint: "Un nombre divisible par 5 finit par 0 ou 5.",
-    tags: ["arithmetique", "criteres", "template"],
+    tags: ["entier_arithmetique", "criteres", "template"],
     generate: () => {
       const n = randomChoice([45, 60, 75, 100, 125, 230, 345, 500]);
 
@@ -301,15 +301,15 @@ export const arithmetiqueBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "3e_arith_criteres_tpl_2",
+    id: "3e_entier_critere_divisibilite_tpl_2",
     niveau: "3e",
     matiere: "maths",
-    notionId: "arithmetique",
-    microId: "arith_criteres",
+    notionId: "entier_arithmetique",
+    microId: "entier_critere_divisibilite",
     difficulty: 3,
     theme: "neutral",
     hint: "Pour 3 ou 9, additionne les chiffres.",
-    tags: ["arithmetique", "criteres", "template"],
+    tags: ["entier_arithmetique", "criteres", "template"],
     generate: () => {
       const n = randomChoice([123, 126, 135, 144, 207, 234, 315, 702]);
       const sum = String(n)
@@ -338,11 +338,11 @@ export const arithmetiqueBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "3e_arith_criteres_open_1",
+    id: "3e_entier_critere_divisibilite_open_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "arithmetique",
-    microId: "arith_criteres",
+    notionId: "entier_arithmetique",
+    microId: "entier_critere_divisibilite",
     difficulty: 3,
     theme: "neutral",
     text: "Explique pourquoi 738 est divisible par 3.",
@@ -355,7 +355,7 @@ export const arithmetiqueBank: TutorBankItemV4[] = [
       `Calcul : on utilise les données de la question pour justifier la réponse. ` +
       ("7 + 3 + 8 = 18, et 18 est divisible par 3. Donc 738 est divisible par 3.") +
       `\n\nConclusion : la réponse est donc celle indiquée, avec une justification arithmétique.`,
-    tags: ["arithmetique", "criteres", "open"],
+    tags: ["entier_arithmetique", "criteres", "open"],
   },
 
   /* =========================
@@ -364,11 +364,11 @@ export const arithmetiqueBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "3e_arith_nombre_premier_fixed_1",
+    id: "3e_entier_nombre_premier_fixed_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "arithmetique",
-    microId: "arith_nombre_premier",
+    notionId: "entier_arithmetique",
+    microId: "entier_nombre_premier",
     difficulty: 1,
     theme: "neutral",
     text: "Un nombre premier possède exactement…",
@@ -387,16 +387,16 @@ export const arithmetiqueBank: TutorBankItemV4[] = [
       `Calcul : on utilise les données de la question pour justifier la réponse. ` +
       ("Un nombre premier possède exactement deux diviseurs : 1 et lui-même.") +
       `\n\nConclusion : la réponse est donc celle indiquée, avec une justification arithmétique.`,
-    tags: ["arithmetique", "nombre_premier", "definition"],
+    tags: ["entier_arithmetique", "nombre_premier", "definition"],
   },
 
   {
     kind: "fixed",
-    id: "3e_arith_nombre_premier_fixed_2",
+    id: "3e_entier_nombre_premier_fixed_2",
     niveau: "3e",
     matiere: "maths",
-    notionId: "arithmetique",
-    microId: "arith_nombre_premier",
+    notionId: "entier_arithmetique",
+    microId: "entier_nombre_premier",
     difficulty: 2,
     theme: "neutral",
     text: "Quel nombre est premier ?",
@@ -410,16 +410,16 @@ export const arithmetiqueBank: TutorBankItemV4[] = [
       `Calcul : on utilise les données de la question pour justifier la réponse. ` +
       ("17 est premier car ses seuls diviseurs sont 1 et 17.") +
       `\n\nConclusion : la réponse est donc celle indiquée, avec une justification arithmétique.`,
-    tags: ["arithmetique", "nombre_premier", "qcm"],
+    tags: ["entier_arithmetique", "nombre_premier", "qcm"],
   },
 
   {
     kind: "fixed",
-    id: "3e_arith_nombre_premier_erreur_1",
+    id: "3e_entier_nombre_premier_erreur_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "arithmetique",
-    microId: "arith_nombre_premier",
+    notionId: "entier_arithmetique",
+    microId: "entier_nombre_premier",
     difficulty: 3,
     theme: "neutral",
     text: "Un élève dit : « 1 est un nombre premier. » A-t-il raison ?",
@@ -433,20 +433,20 @@ export const arithmetiqueBank: TutorBankItemV4[] = [
       `Calcul : on utilise les données de la question pour justifier la réponse. ` +
       ("Non. 1 n’a qu’un seul diviseur : lui-même. Donc 1 n’est pas un nombre premier.") +
       `\n\nConclusion : la réponse est donc celle indiquée, avec une justification arithmétique.`,
-    tags: ["arithmetique", "nombre_premier", "erreur"],
+    tags: ["entier_arithmetique", "nombre_premier", "erreur"],
   },
 
   {
     kind: "template",
-    id: "3e_arith_nombre_premier_tpl_1",
+    id: "3e_entier_nombre_premier_tpl_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "arithmetique",
-    microId: "arith_nombre_premier",
+    notionId: "entier_arithmetique",
+    microId: "entier_nombre_premier",
     difficulty: 2,
     theme: "neutral",
     hint: "Teste les petits diviseurs possibles.",
-    tags: ["arithmetique", "nombre_premier", "template"],
+    tags: ["entier_arithmetique", "nombre_premier", "template"],
     generate: () => {
       const n = randomChoice([...primes, ...composites]);
       const prime = isPrime(n);
@@ -470,15 +470,15 @@ export const arithmetiqueBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "3e_arith_nombre_premier_tpl_2",
+    id: "3e_entier_nombre_premier_tpl_2",
     niveau: "3e",
     matiere: "maths",
-    notionId: "arithmetique",
-    microId: "arith_nombre_premier",
+    notionId: "entier_arithmetique",
+    microId: "entier_nombre_premier",
     difficulty: 3,
     theme: "neutral",
     hint: "Cherche le seul nombre qui n’a que deux diviseurs.",
-    tags: ["arithmetique", "nombre_premier", "template", "qcm"],
+    tags: ["entier_arithmetique", "nombre_premier", "template", "qcm"],
     generate: () => {
       const good = randomChoice(primes.filter((n) => n >= 11));
       const wrongs = shuffle(composites).slice(0, 3).map(String);
@@ -500,11 +500,11 @@ export const arithmetiqueBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "3e_arith_nombre_premier_open_1",
+    id: "3e_entier_nombre_premier_open_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "arithmetique",
-    microId: "arith_nombre_premier",
+    notionId: "entier_arithmetique",
+    microId: "entier_nombre_premier",
     difficulty: 4,
     theme: "neutral",
     text: "Explique pourquoi 21 n’est pas un nombre premier.",
@@ -517,7 +517,7 @@ export const arithmetiqueBank: TutorBankItemV4[] = [
       `Calcul : on utilise les données de la question pour justifier la réponse. ` +
       ("21 n’est pas premier car 21 = 3 × 7. Il a donc d’autres diviseurs que 1 et 21.") +
       `\n\nConclusion : la réponse est donc celle indiquée, avec une justification arithmétique.`,
-    tags: ["arithmetique", "nombre_premier", "open"],
+    tags: ["entier_arithmetique", "nombre_premier", "open"],
   },
     /* =========================
      ARITH_DECOMPOSER
@@ -525,11 +525,11 @@ export const arithmetiqueBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "3e_arith_decomposer_fixed_1",
+    id: "3e_entier_decomposer_facteur_fixed_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "arithmetique",
-    microId: "arith_decomposer",
+    notionId: "entier_arithmetique",
+    microId: "entier_decomposer_facteur",
     difficulty: 2,
     theme: "neutral",
     text: "Décomposer 12 en produit de facteurs premiers.",
@@ -543,16 +543,16 @@ export const arithmetiqueBank: TutorBankItemV4[] = [
       `Calcul : on utilise les données de la question pour justifier la réponse. ` +
       ("12 = 2 × 2 × 3 = 2² × 3.") +
       `\n\nConclusion : la réponse est donc celle indiquée, avec une justification arithmétique.`,
-    tags: ["arithmetique", "decomposition", "facteurs_premiers"],
+    tags: ["entier_arithmetique", "decomposition", "facteurs_premiers"],
   },
 
   {
     kind: "fixed",
-    id: "3e_arith_decomposer_fixed_2",
+    id: "3e_entier_decomposer_facteur_fixed_2",
     niveau: "3e",
     matiere: "maths",
-    notionId: "arithmetique",
-    microId: "arith_decomposer",
+    notionId: "entier_arithmetique",
+    microId: "entier_decomposer_facteur",
     difficulty: 3,
     theme: "neutral",
     text: "Décomposer 45 en produit de facteurs premiers.",
@@ -565,20 +565,20 @@ export const arithmetiqueBank: TutorBankItemV4[] = [
       `Calcul : on utilise les données de la question pour justifier la réponse. ` +
       ("45 = 9 × 5 = 3² × 5.") +
       `\n\nConclusion : la réponse est donc celle indiquée, avec une justification arithmétique.`,
-    tags: ["arithmetique", "decomposition"],
+    tags: ["entier_arithmetique", "decomposition"],
   },
 
   {
     kind: "template",
-    id: "3e_arith_decomposer_tpl_1",
+    id: "3e_entier_decomposer_facteur_tpl_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "arithmetique",
-    microId: "arith_decomposer",
+    notionId: "entier_arithmetique",
+    microId: "entier_decomposer_facteur",
     difficulty: 3,
     theme: "neutral",
     hint: "Décompose progressivement avec des facteurs premiers.",
-    tags: ["arithmetique", "decomposition", "template"],
+    tags: ["entier_arithmetique", "decomposition", "template"],
     generate: () => {
       const items = [
         { n: 18, expected: ["2×3^2", "2 × 3^2", "2×3²", "2 × 3²"], exp: "18 = 2 × 9 = 2 × 3²." },
@@ -609,11 +609,11 @@ export const arithmetiqueBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "3e_arith_pgcd_ppcm_fixed_1",
+    id: "3e_entier_pgcd_ppcm_fixed_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "arithmetique",
-    microId: "arith_pgcd_ppcm",
+    notionId: "entier_arithmetique",
+    microId: "entier_pgcd_ppcm",
     difficulty: 3,
     theme: "neutral",
     text: "Quel est le plus grand diviseur commun de 12 et 18 ?",
@@ -627,16 +627,16 @@ export const arithmetiqueBank: TutorBankItemV4[] = [
       `Calcul : on utilise les données de la question pour justifier la réponse. ` +
       ("Les diviseurs communs de 12 et 18 sont 1, 2, 3 et 6. Le plus grand est 6.") +
       `\n\nConclusion : la réponse est donc celle indiquée, avec une justification arithmétique.`,
-    tags: ["arithmetique", "pgcd", "qcm"],
+    tags: ["entier_arithmetique", "pgcd", "qcm"],
   },
 
   {
     kind: "fixed",
-    id: "3e_arith_pgcd_ppcm_fixed_2",
+    id: "3e_entier_pgcd_ppcm_fixed_2",
     niveau: "3e",
     matiere: "maths",
-    notionId: "arithmetique",
-    microId: "arith_pgcd_ppcm",
+    notionId: "entier_arithmetique",
+    microId: "entier_pgcd_ppcm",
     difficulty: 3,
     theme: "neutral",
     text: "On veut faire des sachets identiques avec 24 bonbons et 36 biscuits, sans reste. Quel est le plus grand nombre de sachets possible ?",
@@ -649,20 +649,20 @@ export const arithmetiqueBank: TutorBankItemV4[] = [
       `Calcul : on utilise les données de la question pour justifier la réponse. ` +
       ("Le plus grand diviseur commun de 24 et 36 est 12. On peut donc faire 12 sachets identiques.") +
       `\n\nConclusion : la réponse est donc celle indiquée, avec une justification arithmétique.`,
-    tags: ["arithmetique", "pgcd", "probleme"],
+    tags: ["entier_arithmetique", "pgcd", "probleme"],
   },
 
   {
     kind: "template",
-    id: "3e_arith_pgcd_ppcm_tpl_1",
+    id: "3e_entier_pgcd_ppcm_tpl_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "arithmetique",
-    microId: "arith_pgcd_ppcm",
+    notionId: "entier_arithmetique",
+    microId: "entier_pgcd_ppcm",
     difficulty: 3,
     theme: "neutral",
     hint: "Cherche le plus grand diviseur commun.",
-    tags: ["arithmetique", "pgcd", "template"],
+    tags: ["entier_arithmetique", "pgcd", "template"],
     generate: () => {
       const d = randomChoice([3, 4, 5, 6, 8, 10, 12]);
       const a = d * randomInt(2, 5);
@@ -684,15 +684,15 @@ export const arithmetiqueBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "3e_arith_pgcd_ppcm_tpl_2",
+    id: "3e_entier_pgcd_ppcm_tpl_2",
     niveau: "3e",
     matiere: "maths",
-    notionId: "arithmetique",
-    microId: "arith_pgcd_ppcm",
+    notionId: "entier_arithmetique",
+    microId: "entier_pgcd_ppcm",
     difficulty: 4,
     theme: "reunion",
     hint: "Le nombre de lots doit diviser les deux quantités.",
-    tags: ["arithmetique", "pgcd", "reunion", "probleme", "template"],
+    tags: ["entier_arithmetique", "pgcd", "reunion", "probleme", "template"],
     generate: () => {
       const d = randomChoice([6, 8, 10, 12]);
       const mangues = d * randomChoice([3, 4, 5]);
@@ -718,11 +718,11 @@ export const arithmetiqueBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "3e_arith_defis_fixed_1",
+    id: "3e_entier_arithmetique_defi_fixed_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "arithmetique",
-    microId: "arith_defis",
+    notionId: "entier_arithmetique",
+    microId: "entier_arithmetique_defi",
     difficulty: 4,
     theme: "neutral",
     text: "Un élève dit : « 2 × 15 est une décomposition en facteurs premiers de 30. » A-t-il raison ?",
@@ -736,16 +736,16 @@ export const arithmetiqueBank: TutorBankItemV4[] = [
       `Calcul : on utilise les données de la question pour justifier la réponse. ` +
       ("Non. 15 n’est pas premier. La décomposition en facteurs premiers est 30 = 2 × 3 × 5.") +
       `\n\nConclusion : la réponse est donc celle indiquée, avec une justification arithmétique.`,
-    tags: ["arithmetique", "defi", "erreur"],
+    tags: ["entier_arithmetique", "defi", "erreur"],
   },
 
   {
     kind: "fixed",
-    id: "3e_arith_defis_open_1",
+    id: "3e_entier_arithmetique_defi_open_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "arithmetique",
-    microId: "arith_defis",
+    notionId: "entier_arithmetique",
+    microId: "entier_arithmetique_defi",
     difficulty: 5,
     theme: "neutral",
     text: "Explique pourquoi un nombre pair supérieur à 2 n’est pas premier.",
@@ -758,20 +758,20 @@ export const arithmetiqueBank: TutorBankItemV4[] = [
       `Calcul : on utilise les données de la question pour justifier la réponse. ` +
       ("Un nombre pair supérieur à 2 est divisible par 2 et par lui-même. Il a donc plus de deux diviseurs, donc il n’est pas premier.") +
       `\n\nConclusion : la réponse est donc celle indiquée, avec une justification arithmétique.`,
-    tags: ["arithmetique", "defi", "open"],
+    tags: ["entier_arithmetique", "defi", "open"],
   },
 
   {
     kind: "template",
-    id: "3e_arith_defis_tpl_1",
+    id: "3e_entier_arithmetique_defi_tpl_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "arithmetique",
-    microId: "arith_defis",
+    notionId: "entier_arithmetique",
+    microId: "entier_arithmetique_defi",
     difficulty: 5,
     theme: "neutral",
     hint: "Il faut que chaque groupe soit identique et qu’il ne reste rien.",
-    tags: ["arithmetique", "defi", "pgcd", "template"],
+    tags: ["entier_arithmetique", "defi", "pgcd", "template"],
     generate: () => {
       const d = randomChoice([4, 6, 8, 9, 12]);
       const a = d * randomChoice([5, 6, 7]);
@@ -793,15 +793,15 @@ export const arithmetiqueBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "3e_arith_defis_tpl_2",
+    id: "3e_entier_arithmetique_defi_tpl_2",
     niveau: "3e",
     matiere: "maths",
-    notionId: "arithmetique",
-    microId: "arith_defis",
+    notionId: "entier_arithmetique",
+    microId: "entier_arithmetique_defi",
     difficulty: 5,
     theme: "neutral",
     hint: "Un nombre premier n’a que deux diviseurs.",
-    tags: ["arithmetique", "defi", "nombre_premier", "template"],
+    tags: ["entier_arithmetique", "defi", "nombre_premier", "template"],
     generate: () => {
       const n = randomChoice([31, 37, 41, 43, 47]);
       return {

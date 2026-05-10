@@ -116,10 +116,10 @@ export const affineBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "3e_affine_reconnaitre_fixed_1",
+    id: "3e_affine_fonction_reconnaitre_fixed_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "affine",
+    notionId: "affine_fonction",
     microId: "affine_reconnaitre",
     difficulty: 1,
     theme: "neutral",
@@ -134,15 +134,15 @@ export const affineBank: TutorBankItemV4[] = [
       "Méthode : on cherche une expression avec x multiplié par un nombre, puis éventuellement un nombre ajouté ou soustrait.\n\n" +
       "Calcul : f(x) = 3x + 2 est bien de la forme ax + b, avec a = 3 et b = 2.\n\n" +
       "Conclusion : f(x) = 3x + 2 est une fonction affine.",
-    tags: ["affine", "reconnaitre", "qcm"],
+    tags: ["affine_fonction", "reconnaitre", "qcm"],
   },
 
   {
     kind: "fixed",
-    id: "3e_affine_reconnaitre_fixed_2",
+    id: "3e_affine_fonction_reconnaitre_fixed_2",
     niveau: "3e",
     matiere: "maths",
-    notionId: "affine",
+    notionId: "affine_fonction",
     microId: "affine_reconnaitre",
     difficulty: 1,
     theme: "neutral",
@@ -157,20 +157,20 @@ export const affineBank: TutorBankItemV4[] = [
       "Méthode : on compare avec une fonction linéaire f(x) = ax.\n\n" +
       "Calcul : f(x) = ax peut s’écrire f(x) = ax + 0, donc b = 0.\n\n" +
       "Conclusion : une fonction linéaire est un cas particulier de fonction affine.",
-    tags: ["affine", "lineaire", "reconnaitre"],
+    tags: ["affine_fonction", "lineaire", "reconnaitre"],
   },
 
   {
     kind: "template",
-    id: "3e_affine_reconnaitre_tpl_1",
+    id: "3e_affine_fonction_reconnaitre_tpl_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "affine",
+    notionId: "affine_fonction",
     microId: "affine_reconnaitre",
     difficulty: 1,
     theme: "neutral",
     hint: "Cherche une expression de la forme ax + b.",
-    tags: ["affine", "reconnaitre", "template"],
+    tags: ["affine_fonction", "reconnaitre", "template"],
     generate: () => {
       const a = randomInt(2, 6);
       const b = randomInt(1, 9);
@@ -197,15 +197,15 @@ export const affineBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "3e_affine_reconnaitre_tpl_2_lineaire",
+    id: "3e_affine_fonction_reconnaitre_tpl_2_lineaire",
     niveau: "3e",
     matiere: "maths",
-    notionId: "affine",
+    notionId: "affine_fonction",
     microId: "affine_reconnaitre",
     difficulty: 2,
     theme: "neutral",
     hint: "Une fonction linéaire est une fonction affine avec b = 0.",
-    tags: ["affine", "lineaire", "template"],
+    tags: ["affine_fonction", "lineaire", "template"],
     generate: () => {
       const a = randomChoice([2, 3, 4, 5, -2, -3]);
       const expression = `f(x) = ${a}x`;
@@ -233,15 +233,15 @@ export const affineBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "3e_affine_reconnaitre_tpl_3_tableau",
+    id: "3e_affine_fonction_reconnaitre_tpl_3_tableau",
     niveau: "3e",
     matiere: "maths",
-    notionId: "affine",
+    notionId: "affine_fonction",
     microId: "affine_reconnaitre",
     difficulty: 3,
     theme: "neutral",
     hint: "Dans une fonction affine, quand x augmente de 1, f(x) augmente toujours du même nombre.",
-    tags: ["affine", "tableau", "variation_constante", "template", "canvas"],
+    tags: ["affine_fonction", "tableau", "variation_constante", "template", "canvas"],
     generate: () => {
       const a = randomChoice([2, 3, 4, -1, -2]);
       const b = randomInt(-3, 4);
@@ -271,10 +271,10 @@ export const affineBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "3e_affine_reconnaitre_erreur_1",
+    id: "3e_affine_fonction_reconnaitre_erreur_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "affine",
+    notionId: "affine_fonction",
     microId: "affine_reconnaitre",
     difficulty: 3,
     theme: "neutral",
@@ -289,15 +289,15 @@ export const affineBank: TutorBankItemV4[] = [
       "Méthode : on vérifie si l’expression contient x au premier degré seulement.\n\n" +
       "Calcul : dans f(x) = x² + 2, il y a x², donc ce n’est pas de la forme ax + b.\n\n" +
       "Conclusion : l’élève a tort ; f(x) = x² + 2 n’est pas une fonction affine.",
-    tags: ["affine", "erreur", "carre"],
+    tags: ["affine_fonction", "erreur", "carre"],
   },
 
   {
     kind: "fixed",
-    id: "3e_affine_reconnaitre_open_1",
+    id: "3e_affine_fonction_reconnaitre_open_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "affine",
+    notionId: "affine_fonction",
     microId: "affine_reconnaitre",
     difficulty: 3,
     theme: "neutral",
@@ -311,7 +311,7 @@ export const affineBank: TutorBankItemV4[] = [
       "Méthode : on peut la reconnaître par sa formule ou par sa représentation graphique.\n\n" +
       "Calcul : par exemple, f(x) = 2x + 3 est affine, et son graphique est une droite.\n\n" +
       "Conclusion : une fonction affine se reconnaît par la forme ax + b ou par une droite sur un graphique.",
-    tags: ["affine", "reconnaitre", "open"],
+    tags: ["affine_fonction", "reconnaitre", "open"],
   },
     /* =========================
      AFFINE_COEFF_DIRECTEUR
@@ -319,10 +319,10 @@ export const affineBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "3e_affine_coeff_fixed_1",
+    id: "3e_affine_fonction_coeff_fixed_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "affine",
+    notionId: "affine_fonction",
     microId: "affine_coeff_directeur",
     difficulty: 2,
     theme: "neutral",
@@ -337,15 +337,15 @@ export const affineBank: TutorBankItemV4[] = [
       "Méthode : on repère le nombre qui multiplie x.\n\n" +
       "Calcul : dans f(x) = 4x + 7, le nombre qui multiplie x est 4.\n\n" +
       "Conclusion : le coefficient directeur est 4.",
-    tags: ["affine", "coefficient_directeur", "qcm"],
+    tags: ["affine_fonction", "coefficient_directeur", "qcm"],
   },
 
   {
     kind: "fixed",
-    id: "3e_affine_coeff_fixed_2",
+    id: "3e_affine_fonction_coeff_fixed_2",
     niveau: "3e",
     matiere: "maths",
-    notionId: "affine",
+    notionId: "affine_fonction",
     microId: "affine_coeff_directeur",
     difficulty: 2,
     theme: "neutral",
@@ -360,20 +360,20 @@ export const affineBank: TutorBankItemV4[] = [
       "Méthode : on repère le coefficient placé devant x, avec son signe.\n\n" +
       "Calcul : dans f(x) = -3x + 2, le coefficient devant x est -3.\n\n" +
       "Conclusion : le coefficient directeur est -3.",
-    tags: ["affine", "coefficient_directeur", "signe", "qcm"],
+    tags: ["affine_fonction", "coefficient_directeur", "signe", "qcm"],
   },
 
   {
     kind: "template",
-    id: "3e_affine_coeff_tpl_1_formule",
+    id: "3e_affine_fonction_coeff_tpl_1_formule",
     niveau: "3e",
     matiere: "maths",
-    notionId: "affine",
+    notionId: "affine_fonction",
     microId: "affine_coeff_directeur",
     difficulty: 2,
     theme: "neutral",
     hint: "Le coefficient directeur est le nombre devant x.",
-    tags: ["affine", "coefficient_directeur", "formule", "template"],
+    tags: ["affine_fonction", "coefficient_directeur", "formule", "template"],
     generate: () => {
       const a = randomChoice([-5, -4, -3, -2, 2, 3, 4, 5]);
       const b = randomInt(-6, 8);
@@ -396,15 +396,15 @@ export const affineBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "3e_affine_coeff_tpl_2_tableau",
+    id: "3e_affine_fonction_coeff_tpl_2_tableau",
     niveau: "3e",
     matiere: "maths",
-    notionId: "affine",
+    notionId: "affine_fonction",
     microId: "affine_coeff_directeur",
     difficulty: 3,
     theme: "neutral",
     hint: "Quand x augmente de 1, regarde de combien f(x) augmente.",
-    tags: ["affine", "coefficient_directeur", "tableau", "template", "canvas"],
+    tags: ["affine_fonction", "coefficient_directeur", "tableau", "template", "canvas"],
     generate: () => {
       const a = randomChoice([-3, -2, -1, 2, 3, 4]);
       const b = randomInt(-3, 5);
@@ -433,15 +433,15 @@ export const affineBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "3e_affine_coeff_tpl_3_deux_points",
+    id: "3e_affine_fonction_coeff_tpl_3_deux_points",
     niveau: "3e",
     matiere: "maths",
-    notionId: "affine",
+    notionId: "affine_fonction",
     microId: "affine_coeff_directeur",
     difficulty: 4,
     theme: "neutral",
     hint: "Utilise variation de y ÷ variation de x.",
-    tags: ["affine", "coefficient_directeur", "deux_points", "template", "graphique"],
+    tags: ["affine_fonction", "coefficient_directeur", "deux_points", "template", "graphique"],
     generate: () => {
       const a = randomChoice([-3, -2, 2, 3]);
       const b = randomInt(-2, 4);
@@ -472,15 +472,15 @@ export const affineBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "3e_affine_coeff_tpl_4_graphique",
+    id: "3e_affine_fonction_coeff_tpl_4_graphique",
     niveau: "3e",
     matiere: "maths",
-    notionId: "affine",
+    notionId: "affine_fonction",
     microId: "affine_coeff_directeur",
     difficulty: 3,
     theme: "neutral",
     hint: "Observe si la droite monte ou descend, puis regarde la variation régulière.",
-    tags: ["affine", "coefficient_directeur", "graphique", "canvas", "template"],
+    tags: ["affine_fonction", "coefficient_directeur", "graphique", "canvas", "template"],
     generate: () => {
       const a = randomChoice([-2, -1, 1, 2, 3]);
       const b = randomInt(-2, 2);
@@ -509,10 +509,10 @@ export const affineBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "3e_affine_coeff_erreur_1",
+    id: "3e_affine_fonction_coeff_erreur_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "affine",
+    notionId: "affine_fonction",
     microId: "affine_coeff_directeur",
     difficulty: 3,
     theme: "neutral",
@@ -527,15 +527,15 @@ export const affineBank: TutorBankItemV4[] = [
       "Méthode : on distingue le nombre qui multiplie x et le nombre ajouté.\n\n" +
       "Calcul : dans f(x) = 2x + 5, le nombre devant x est 2, tandis que 5 est l’ordonnée à l’origine.\n\n" +
       "Conclusion : l’élève a tort ; le coefficient directeur est 2.",
-    tags: ["affine", "coefficient_directeur", "erreur"],
+    tags: ["affine_fonction", "coefficient_directeur", "erreur"],
   },
 
   {
     kind: "fixed",
-    id: "3e_affine_coeff_open_1",
+    id: "3e_affine_fonction_coeff_open_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "affine",
+    notionId: "affine_fonction",
     microId: "affine_coeff_directeur",
     difficulty: 4,
     theme: "neutral",
@@ -549,7 +549,7 @@ export const affineBank: TutorBankItemV4[] = [
       "Méthode : on l’interprète comme la variation de f(x) lorsque x augmente de 1.\n\n" +
       "Calcul : si a = 3, alors quand x augmente de 1, f(x) augmente de 3.\n\n" +
       "Conclusion : le coefficient directeur mesure la pente ou la variation régulière de la fonction affine.",
-    tags: ["affine", "coefficient_directeur", "open"],
+    tags: ["affine_fonction", "coefficient_directeur", "open"],
   },
   
     /* =========================
@@ -558,10 +558,10 @@ export const affineBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "3e_affine_ordonnee_fixed_1",
+    id: "3e_affine_fonction_ordonnee_fixed_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "affine",
+    notionId: "affine_fonction",
     microId: "affine_ordonnee_origine",
     difficulty: 2,
     theme: "neutral",
@@ -576,15 +576,15 @@ export const affineBank: TutorBankItemV4[] = [
       "Méthode : on repère le nombre ajouté après le terme en x.\n\n" +
       "Calcul : dans f(x) = 3x + 5, le nombre b vaut 5.\n\n" +
       "Conclusion : l’ordonnée à l’origine est 5.",
-    tags: ["affine", "ordonnee_origine", "qcm"],
+    tags: ["affine_fonction", "ordonnee_origine", "qcm"],
   },
 
   {
     kind: "fixed",
-    id: "3e_affine_ordonnee_fixed_2",
+    id: "3e_affine_fonction_ordonnee_fixed_2",
     niveau: "3e",
     matiere: "maths",
-    notionId: "affine",
+    notionId: "affine_fonction",
     microId: "affine_ordonnee_origine",
     difficulty: 2,
     theme: "neutral",
@@ -599,20 +599,20 @@ export const affineBank: TutorBankItemV4[] = [
       "Méthode : on repère le nombre qui ne multiplie pas x, avec son signe.\n\n" +
       "Calcul : dans f(x) = -2x - 4, on a b = -4.\n\n" +
       "Conclusion : l’ordonnée à l’origine est -4.",
-    tags: ["affine", "ordonnee_origine", "signe", "qcm"],
+    tags: ["affine_fonction", "ordonnee_origine", "signe", "qcm"],
   },
 
   {
     kind: "template",
-    id: "3e_affine_ordonnee_tpl_1_formule",
+    id: "3e_affine_fonction_ordonnee_tpl_1_formule",
     niveau: "3e",
     matiere: "maths",
-    notionId: "affine",
+    notionId: "affine_fonction",
     microId: "affine_ordonnee_origine",
     difficulty: 2,
     theme: "neutral",
     hint: "Cherche le nombre b dans f(x) = ax + b.",
-    tags: ["affine", "ordonnee_origine", "formule", "template"],
+    tags: ["affine_fonction", "ordonnee_origine", "formule", "template"],
     generate: () => {
       const a = randomChoice([-4, -3, -2, 2, 3, 4, 5]);
       const b = randomInt(-6, 8);
@@ -635,15 +635,15 @@ export const affineBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "3e_affine_ordonnee_tpl_2_valeur_en_zero",
+    id: "3e_affine_fonction_ordonnee_tpl_2_valeur_en_zero",
     niveau: "3e",
     matiere: "maths",
-    notionId: "affine",
+    notionId: "affine_fonction",
     microId: "affine_ordonnee_origine",
     difficulty: 3,
     theme: "neutral",
     hint: "L’ordonnée à l’origine est f(0).",
-    tags: ["affine", "ordonnee_origine", "f0", "template"],
+    tags: ["affine_fonction", "ordonnee_origine", "f0", "template"],
     generate: () => {
       const a = randomChoice([-3, -2, 2, 3, 4]);
       const b = randomInt(-5, 7);
@@ -664,15 +664,15 @@ export const affineBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "3e_affine_ordonnee_tpl_3_graphique",
+    id: "3e_affine_fonction_ordonnee_tpl_3_graphique",
     niveau: "3e",
     matiere: "maths",
-    notionId: "affine",
+    notionId: "affine_fonction",
     microId: "affine_ordonnee_origine",
     difficulty: 3,
     theme: "neutral",
     hint: "Regarde où la droite coupe l’axe vertical.",
-    tags: ["affine", "ordonnee_origine", "graphique", "canvas", "template"],
+    tags: ["affine_fonction", "ordonnee_origine", "graphique", "canvas", "template"],
     generate: () => {
       const a = randomChoice([-2, -1, 1, 2, 3]);
       const b = randomInt(-4, 4);
@@ -701,15 +701,15 @@ export const affineBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "3e_affine_ordonnee_tpl_4_tableau",
+    id: "3e_affine_fonction_ordonnee_tpl_4_tableau",
     niveau: "3e",
     matiere: "maths",
-    notionId: "affine",
+    notionId: "affine_fonction",
     microId: "affine_ordonnee_origine",
     difficulty: 3,
     theme: "neutral",
     hint: "Cherche la colonne où x = 0.",
-    tags: ["affine", "ordonnee_origine", "tableau", "canvas", "template"],
+    tags: ["affine_fonction", "ordonnee_origine", "tableau", "canvas", "template"],
     generate: () => {
       const a = randomChoice([-3, -2, 2, 3]);
       const b = randomInt(-5, 6);
@@ -740,10 +740,10 @@ export const affineBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "3e_affine_ordonnee_erreur_1",
+    id: "3e_affine_fonction_ordonnee_erreur_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "affine",
+    notionId: "affine_fonction",
     microId: "affine_ordonnee_origine",
     difficulty: 3,
     theme: "neutral",
@@ -758,15 +758,15 @@ export const affineBank: TutorBankItemV4[] = [
       "Méthode : on distingue le coefficient de x et le nombre constant.\n\n" +
       "Calcul : dans f(x) = 6x - 2, le coefficient directeur est 6 et l’ordonnée à l’origine est -2.\n\n" +
       "Conclusion : l’élève a tort ; l’ordonnée à l’origine est -2.",
-    tags: ["affine", "ordonnee_origine", "erreur"],
+    tags: ["affine_fonction", "ordonnee_origine", "erreur"],
   },
 
   {
     kind: "fixed",
-    id: "3e_affine_ordonnee_open_1",
+    id: "3e_affine_fonction_ordonnee_open_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "affine",
+    notionId: "affine_fonction",
     microId: "affine_ordonnee_origine",
     difficulty: 4,
     theme: "neutral",
@@ -780,7 +780,7 @@ export const affineBank: TutorBankItemV4[] = [
       "Méthode : dans une formule f(x) = ax + b, c’est b ; sur un graphique, c’est le point où la droite coupe l’axe des ordonnées.\n\n" +
       "Calcul : par exemple, pour f(x) = 2x + 5, on a f(0) = 5.\n\n" +
       "Conclusion : l’ordonnée à l’origine correspond à la valeur de départ de la fonction.",
-    tags: ["affine", "ordonnee_origine", "open"],
+    tags: ["affine_fonction", "ordonnee_origine", "open"],
   },
     /* =========================
      AFFINE_CALCUL_IMAGE
@@ -788,10 +788,10 @@ export const affineBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "3e_affine_image_fixed_1",
+    id: "3e_affine_fonction_image_fixed_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "affine",
+    notionId: "affine_fonction",
     microId: "affine_calcul_image",
     difficulty: 2,
     theme: "neutral",
@@ -805,15 +805,15 @@ export const affineBank: TutorBankItemV4[] = [
       "Méthode : on remplace x par 4 dans l’expression de la fonction.\n\n" +
       "Calcul : f(4) = 2 × 4 + 3 = 8 + 3 = 11.\n\n" +
       "Conclusion : l’image de 4 est 11.",
-    tags: ["affine", "image", "calcul"],
+    tags: ["affine_fonction", "image", "calcul"],
   },
 
   {
     kind: "fixed",
-    id: "3e_affine_image_fixed_2_negatif",
+    id: "3e_affine_fonction_image_fixed_2_negatif",
     niveau: "3e",
     matiere: "maths",
-    notionId: "affine",
+    notionId: "affine_fonction",
     microId: "affine_calcul_image",
     difficulty: 3,
     theme: "neutral",
@@ -827,20 +827,20 @@ export const affineBank: TutorBankItemV4[] = [
       "Méthode : on remplace x par 2 dans f(x) = -3x + 5.\n\n" +
       "Calcul : f(2) = -3 × 2 + 5 = -6 + 5 = -1.\n\n" +
       "Conclusion : l’image de 2 est -1.",
-    tags: ["affine", "image", "signe", "calcul"],
+    tags: ["affine_fonction", "image", "signe", "calcul"],
   },
 
   {
     kind: "template",
-    id: "3e_affine_image_tpl_1",
+    id: "3e_affine_fonction_image_tpl_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "affine",
+    notionId: "affine_fonction",
     microId: "affine_calcul_image",
     difficulty: 2,
     theme: "neutral",
     hint: "Remplace x par la valeur donnée.",
-    tags: ["affine", "image", "template"],
+    tags: ["affine_fonction", "image", "template"],
     generate: () => {
       const a = randomChoice([2, 3, 4, 5]);
       const b = randomInt(1, 8);
@@ -871,15 +871,15 @@ export const affineBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "3e_affine_image_tpl_2_negatif",
+    id: "3e_affine_fonction_image_tpl_2_negatif",
     niveau: "3e",
     matiere: "maths",
-    notionId: "affine",
+    notionId: "affine_fonction",
     microId: "affine_calcul_image",
     difficulty: 3,
     theme: "neutral",
     hint: "Attention aux signes dans le calcul.",
-    tags: ["affine", "image", "signe", "template"],
+    tags: ["affine_fonction", "image", "signe", "template"],
     generate: () => {
       const a = randomChoice([-5, -4, -3, -2]);
       const b = randomInt(-3, 8);
@@ -912,15 +912,15 @@ export const affineBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "3e_affine_image_tpl_3_tableau",
+    id: "3e_affine_fonction_image_tpl_3_tableau",
     niveau: "3e",
     matiere: "maths",
-    notionId: "affine",
+    notionId: "affine_fonction",
     microId: "affine_calcul_image",
     difficulty: 2,
     theme: "neutral",
     hint: "Lis ou calcule la valeur de f(x).",
-    tags: ["affine", "image", "tableau", "canvas", "template"],
+    tags: ["affine_fonction", "image", "tableau", "canvas", "template"],
     generate: () => {
       const a = randomChoice([2, 3, -1, -2]);
       const b = randomInt(-2, 5);
@@ -951,15 +951,15 @@ export const affineBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "3e_affine_image_tpl_4_reunion",
+    id: "3e_affine_fonction_image_tpl_4_reunion",
     niveau: "3e",
     matiere: "maths",
-    notionId: "affine",
+    notionId: "affine_fonction",
     microId: "affine_calcul_image",
     difficulty: 3,
     theme: "reunion",
     hint: "Traduis la situation par f(x) = ax + b, puis calcule l’image.",
-    tags: ["affine", "image", "probleme", "reunion", "template"],
+    tags: ["affine_fonction", "image", "probleme", "reunion", "template"],
     generate: () => {
       const prixKm = randomChoice([2, 3, 4]);
       const depart = randomChoice([5, 6, 8]);
@@ -990,10 +990,10 @@ export const affineBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "3e_affine_image_erreur_1",
+    id: "3e_affine_fonction_image_erreur_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "affine",
+    notionId: "affine_fonction",
     microId: "affine_calcul_image",
     difficulty: 3,
     theme: "neutral",
@@ -1008,15 +1008,15 @@ export const affineBank: TutorBankItemV4[] = [
       "Méthode : pour calculer f(3), on remplace x par 3 dans toute l’expression.\n\n" +
       "Calcul : f(3) = 2 × 3 + 5 = 6 + 5 = 11.\n\n" +
       "Conclusion : l’élève a tort ; f(3) = 11.",
-    tags: ["affine", "image", "erreur"],
+    tags: ["affine_fonction", "image", "erreur"],
   },
 
   {
     kind: "fixed",
-    id: "3e_affine_image_open_1",
+    id: "3e_affine_fonction_image_open_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "affine",
+    notionId: "affine_fonction",
     microId: "affine_calcul_image",
     difficulty: 3,
     theme: "neutral",
@@ -1030,7 +1030,7 @@ export const affineBank: TutorBankItemV4[] = [
       "Méthode : dans f(x) = ax + b, on remplace x par le nombre donné.\n\n" +
       "Calcul : par exemple, si f(x) = 2x + 3, alors f(4) = 2 × 4 + 3 = 11.\n\n" +
       "Conclusion : calculer une image revient à remplacer x puis à effectuer le calcul.",
-    tags: ["affine", "image", "open", "methode"],
+    tags: ["affine_fonction", "image", "open", "methode"],
   },
     /* =========================
      AFFINE_EXPRESSION
@@ -1038,10 +1038,10 @@ export const affineBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "3e_affine_expression_fixed_1",
+    id: "3e_affine_fonction_expression_fixed_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "affine",
+    notionId: "affine_fonction",
     microId: "affine_expression",
     difficulty: 3,
     theme: "neutral",
@@ -1056,15 +1056,15 @@ export const affineBank: TutorBankItemV4[] = [
       "Méthode : on place le coefficient directeur devant x, puis on ajoute l’ordonnée à l’origine.\n\n" +
       "Calcul : ici a = 2 et b = 5, donc f(x) = 2x + 5.\n\n" +
       "Conclusion : l’expression est f(x) = 2x + 5.",
-    tags: ["affine", "expression", "qcm"],
+    tags: ["affine_fonction", "expression", "qcm"],
   },
 
   {
     kind: "fixed",
-    id: "3e_affine_expression_fixed_2_signe",
+    id: "3e_affine_fonction_expression_fixed_2_signe",
     niveau: "3e",
     matiere: "maths",
-    notionId: "affine",
+    notionId: "affine_fonction",
     microId: "affine_expression",
     difficulty: 3,
     theme: "neutral",
@@ -1079,20 +1079,20 @@ export const affineBank: TutorBankItemV4[] = [
       "Méthode : on remplace a par -3 et b par 4.\n\n" +
       "Calcul : f(x) = -3x + 4.\n\n" +
       "Conclusion : l’expression est f(x) = -3x + 4.",
-    tags: ["affine", "expression", "signe", "qcm"],
+    tags: ["affine_fonction", "expression", "signe", "qcm"],
   },
 
   {
     kind: "template",
-    id: "3e_affine_expression_tpl_1_ab",
+    id: "3e_affine_fonction_expression_tpl_1_ab",
     niveau: "3e",
     matiere: "maths",
-    notionId: "affine",
+    notionId: "affine_fonction",
     microId: "affine_expression",
     difficulty: 3,
     theme: "neutral",
     hint: "Utilise directement f(x) = ax + b.",
-    tags: ["affine", "expression", "template"],
+    tags: ["affine_fonction", "expression", "template"],
     generate: () => {
       const a = randomChoice([-4, -3, -2, 2, 3, 4, 5]);
       const b = randomInt(-6, 8);
@@ -1119,15 +1119,15 @@ export const affineBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "3e_affine_expression_tpl_2_tableau",
+    id: "3e_affine_fonction_expression_tpl_2_tableau",
     niveau: "3e",
     matiere: "maths",
-    notionId: "affine",
+    notionId: "affine_fonction",
     microId: "affine_expression",
     difficulty: 4,
     theme: "neutral",
     hint: "Repère f(0), puis la variation quand x augmente de 1.",
-    tags: ["affine", "expression", "tableau", "canvas", "template"],
+    tags: ["affine_fonction", "expression", "tableau", "canvas", "template"],
     generate: () => {
       const a = randomChoice([-3, -2, 2, 3, 4]);
       const b = randomInt(-4, 6);
@@ -1162,15 +1162,15 @@ export const affineBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "3e_affine_expression_tpl_3_deux_points",
+    id: "3e_affine_fonction_expression_tpl_3_deux_points",
     niveau: "3e",
     matiere: "maths",
-    notionId: "affine",
+    notionId: "affine_fonction",
     microId: "affine_expression",
     difficulty: 5,
     theme: "neutral",
     hint: "Calcule d’abord le coefficient directeur, puis utilise un point pour trouver b.",
-    tags: ["affine", "expression", "deux_points", "template", "canvas"],
+    tags: ["affine_fonction", "expression", "deux_points", "template", "canvas"],
     generate: () => {
       const a = randomChoice([-3, -2, 2, 3]);
       const b = randomInt(-3, 4);
@@ -1207,15 +1207,15 @@ export const affineBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "3e_affine_expression_tpl_4_probleme",
+    id: "3e_affine_fonction_expression_tpl_4_probleme",
     niveau: "3e",
     matiere: "maths",
-    notionId: "affine",
+    notionId: "affine_fonction",
     microId: "affine_expression",
     difficulty: 4,
     theme: "reunion",
     hint: "Le prix fixe donne b, le prix par unité donne a.",
-    tags: ["affine", "expression", "probleme", "reunion", "template"],
+    tags: ["affine_fonction", "expression", "probleme", "reunion", "template"],
     generate: () => {
       const a = randomChoice([2, 3, 4, 5]);
       const b = randomChoice([5, 6, 8, 10]);
@@ -1242,10 +1242,10 @@ export const affineBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "3e_affine_expression_erreur_1",
+    id: "3e_affine_fonction_expression_erreur_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "affine",
+    notionId: "affine_fonction",
     microId: "affine_expression",
     difficulty: 4,
     theme: "neutral",
@@ -1260,15 +1260,15 @@ export const affineBank: TutorBankItemV4[] = [
       "Méthode : on place a devant x et b comme nombre ajouté.\n\n" +
       "Calcul : si a = 3 et b = 7, alors f(x) = 3x + 7.\n\n" +
       "Conclusion : l’élève a inversé a et b.",
-    tags: ["affine", "expression", "erreur"],
+    tags: ["affine_fonction", "expression", "erreur"],
   },
 
   {
     kind: "fixed",
-    id: "3e_affine_expression_open_1",
+    id: "3e_affine_fonction_expression_open_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "affine",
+    notionId: "affine_fonction",
     microId: "affine_expression",
     difficulty: 4,
     theme: "neutral",
@@ -1282,7 +1282,7 @@ export const affineBank: TutorBankItemV4[] = [
       "Méthode : dans un tableau, on lit f(0) pour trouver b, puis on regarde de combien f(x) varie quand x augmente de 1 pour trouver a.\n\n" +
       "Calcul : si f(0) = 5 et si f(x) augmente de 2 quand x augmente de 1, alors b = 5 et a = 2.\n\n" +
       "Conclusion : l’expression est alors f(x) = 2x + 5.",
-    tags: ["affine", "expression", "open", "methode"],
+    tags: ["affine_fonction", "expression", "open", "methode"],
   },
     /* =========================
      AFFINE_GRAPHIQUE
@@ -1290,10 +1290,10 @@ export const affineBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "3e_affine_graphique_fixed_1",
+    id: "3e_affine_fonction_graphique_fixed_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "affine",
+    notionId: "affine_fonction",
     microId: "affine_graphique",
     difficulty: 2,
     theme: "neutral",
@@ -1313,20 +1313,20 @@ export const affineBank: TutorBankItemV4[] = [
       "Méthode : sur un graphique, on regarde où la droite coupe l’axe vertical.\n\n" +
       "Calcul : ce point correspond à f(0).\n\n" +
       "Conclusion : le point d’intersection avec l’axe vertical donne l’ordonnée à l’origine.",
-    tags: ["affine", "graphique", "ordonnee_origine", "qcm"],
+    tags: ["affine_fonction", "graphique", "ordonnee_origine", "qcm"],
   },
 
   {
     kind: "template",
-    id: "3e_affine_graphique_tpl_1_image",
+    id: "3e_affine_fonction_graphique_tpl_1_image",
     niveau: "3e",
     matiere: "maths",
-    notionId: "affine",
+    notionId: "affine_fonction",
     microId: "affine_graphique",
     difficulty: 2,
     theme: "neutral",
     hint: "Repère x, monte jusqu’à la droite, puis lis y.",
-    tags: ["affine", "graphique", "image", "canvas", "template"],
+    tags: ["affine_fonction", "graphique", "image", "canvas", "template"],
     generate: () => {
       const a = randomChoice([1, 2, -1, -2]);
       const b = randomInt(-2, 3);
@@ -1357,15 +1357,15 @@ export const affineBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "3e_affine_graphique_tpl_2_ordonnee",
+    id: "3e_affine_fonction_graphique_tpl_2_ordonnee",
     niveau: "3e",
     matiere: "maths",
-    notionId: "affine",
+    notionId: "affine_fonction",
     microId: "affine_graphique",
     difficulty: 3,
     theme: "neutral",
     hint: "Regarde où la droite coupe l’axe des ordonnées.",
-    tags: ["affine", "graphique", "ordonnee_origine", "canvas", "template"],
+    tags: ["affine_fonction", "graphique", "ordonnee_origine", "canvas", "template"],
     generate: () => {
       const a = randomChoice([-2, -1, 1, 2, 3]);
       const b = randomInt(-4, 4);
@@ -1394,15 +1394,15 @@ export const affineBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "3e_affine_graphique_tpl_3_coeff",
+    id: "3e_affine_fonction_graphique_tpl_3_coeff",
     niveau: "3e",
     matiere: "maths",
-    notionId: "affine",
+    notionId: "affine_fonction",
     microId: "affine_graphique",
     difficulty: 3,
     theme: "neutral",
     hint: "Regarde de combien y varie quand x augmente de 1.",
-    tags: ["affine", "graphique", "coefficient_directeur", "canvas", "template"],
+    tags: ["affine_fonction", "graphique", "coefficient_directeur", "canvas", "template"],
     generate: () => {
       const a = randomChoice([-2, -1, 1, 2, 3]);
       const b = randomInt(-2, 2);
@@ -1431,15 +1431,15 @@ export const affineBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "3e_affine_graphique_tpl_4_expression",
+    id: "3e_affine_fonction_graphique_tpl_4_expression",
     niveau: "3e",
     matiere: "maths",
-    notionId: "affine",
+    notionId: "affine_fonction",
     microId: "affine_graphique",
     difficulty: 4,
     theme: "neutral",
     hint: "Lis d’abord b sur l’axe vertical, puis la pente.",
-    tags: ["affine", "graphique", "expression", "canvas", "template"],
+    tags: ["affine_fonction", "graphique", "expression", "canvas", "template"],
     generate: () => {
       const a = randomChoice([-2, -1, 1, 2, 3]);
       const b = randomInt(-3, 3);
@@ -1473,15 +1473,15 @@ export const affineBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "3e_affine_graphique_tpl_5_sens_variation",
+    id: "3e_affine_fonction_graphique_tpl_5_sens_variation",
     niveau: "3e",
     matiere: "maths",
-    notionId: "affine",
+    notionId: "affine_fonction",
     microId: "affine_graphique",
     difficulty: 3,
     theme: "neutral",
     hint: "Si la droite monte, le coefficient directeur est positif. Si elle descend, il est négatif.",
-    tags: ["affine", "graphique", "variation", "canvas", "template"],
+    tags: ["affine_fonction", "graphique", "variation", "canvas", "template"],
     generate: () => {
       const a = randomChoice([-3, -2, 2, 3]);
       const b = randomInt(-2, 2);
@@ -1509,10 +1509,10 @@ export const affineBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "3e_affine_graphique_erreur_1",
+    id: "3e_affine_fonction_graphique_erreur_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "affine",
+    notionId: "affine_fonction",
     microId: "affine_graphique",
     difficulty: 4,
     theme: "neutral",
@@ -1527,15 +1527,15 @@ export const affineBank: TutorBankItemV4[] = [
       "Méthode : on observe le sens de la droite quand x augmente.\n\n" +
       "Calcul : si la droite descend quand on va vers la droite, alors les valeurs de f(x) diminuent.\n\n" +
       "Conclusion : le coefficient directeur est négatif, donc l’élève a tort.",
-    tags: ["affine", "graphique", "erreur", "variation"],
+    tags: ["affine_fonction", "graphique", "erreur", "variation"],
   },
 
   {
     kind: "fixed",
-    id: "3e_affine_graphique_open_1",
+    id: "3e_affine_fonction_graphique_open_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "affine",
+    notionId: "affine_fonction",
     microId: "affine_graphique",
     difficulty: 4,
     theme: "neutral",
@@ -1549,7 +1549,7 @@ export const affineBank: TutorBankItemV4[] = [
       "Méthode : on lit b au point où la droite coupe l’axe vertical, puis on détermine a avec la pente de la droite.\n\n" +
       "Calcul : si la droite coupe l’axe vertical en 3 et monte de 2 quand x augmente de 1, alors b = 3 et a = 2.\n\n" +
       "Conclusion : l’expression est f(x) = 2x + 3.",
-    tags: ["affine", "graphique", "open", "expression"],
+    tags: ["affine_fonction", "graphique", "open", "expression"],
   },
     /* =========================
      AFFINE_PROBLEMES
@@ -1557,11 +1557,11 @@ export const affineBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "3e_affine_problemes_fixed_1",
+    id: "3e_affine_fonction_probleme_fixed_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "affine",
-    microId: "affine_problemes",
+    notionId: "affine_fonction",
+    microId: "affine_probleme",
     difficulty: 2,
     theme: "reunion",
     text: "Un taxi à Saint-Pierre facture 4 € de prise en charge puis 2 € par kilomètre. Quelle fonction modélise le prix payé ?",
@@ -1580,20 +1580,20 @@ export const affineBank: TutorBankItemV4[] = [
       "Méthode : le coefficient de x correspond au prix par kilomètre et le nombre ajouté correspond au prix fixe.\n\n" +
       "Calcul : ici, le prix est 2 € par kilomètre avec 4 € de départ.\n\n" +
       "Conclusion : la fonction est f(x) = 2x + 4.",
-    tags: ["affine", "probleme", "reunion", "taxi"],
+    tags: ["affine_fonction", "probleme", "reunion", "taxi"],
   },
 
   {
     kind: "template",
-    id: "3e_affine_problemes_tpl_1",
+    id: "3e_affine_fonction_probleme_tpl_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "affine",
-    microId: "affine_problemes",
+    notionId: "affine_fonction",
+    microId: "affine_probleme",
     difficulty: 2,
     theme: "reunion",
     hint: "On remplace x par la valeur donnée.",
-    tags: ["affine", "probleme", "calcul_image", "template"],
+    tags: ["affine_fonction", "probleme", "calcul_image", "template"],
     generate: () => {
       const a = randomChoice([2, 3, 4]);
       const b = randomChoice([5, 8, 10]);
@@ -1624,15 +1624,15 @@ export const affineBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "3e_affine_problemes_tpl_2_expression",
+    id: "3e_affine_fonction_probleme_tpl_2_expression",
     niveau: "3e",
     matiere: "maths",
-    notionId: "affine",
-    microId: "affine_problemes",
+    notionId: "affine_fonction",
+    microId: "affine_probleme",
     difficulty: 3,
     theme: "sport",
     hint: "Le coefficient correspond au gain à chaque étape.",
-    tags: ["affine", "probleme", "expression", "template"],
+    tags: ["affine_fonction", "probleme", "expression", "template"],
     generate: () => {
       const a = randomChoice([3, 4, 5]);
       const b = randomChoice([10, 15, 20]);
@@ -1661,15 +1661,15 @@ export const affineBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "3e_affine_problemes_tpl_3_comparaison",
+    id: "3e_affine_fonction_probleme_tpl_3_comparaison",
     niveau: "3e",
     matiere: "maths",
-    notionId: "affine",
-    microId: "affine_problemes",
+    notionId: "affine_fonction",
+    microId: "affine_probleme",
     difficulty: 4,
     theme: "reunion",
     hint: "Calcule les deux prix pour la même valeur de x.",
-    tags: ["affine", "probleme", "comparaison", "template"],
+    tags: ["affine_fonction", "probleme", "comparaison", "template"],
     generate: () => {
       const a1 = randomChoice([2, 3]);
       const b1 = randomChoice([8, 10]);
@@ -1712,15 +1712,15 @@ export const affineBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "3e_affine_problemes_tpl_4_antecedent",
+    id: "3e_affine_fonction_probleme_tpl_4_antecedent",
     niveau: "3e",
     matiere: "maths",
-    notionId: "affine",
-    microId: "affine_problemes",
+    notionId: "affine_fonction",
+    microId: "affine_probleme",
     difficulty: 4,
     theme: "neutral",
     hint: "Cherche la valeur de x qui donne le résultat demandé.",
-    tags: ["affine", "probleme", "antecedent", "template"],
+    tags: ["affine_fonction", "probleme", "antecedent", "template"],
     generate: () => {
       const a = randomChoice([2, 3, 4]);
       const b = randomChoice([5, 6, 8]);
@@ -1743,11 +1743,11 @@ export const affineBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "3e_affine_problemes_erreur_1",
+    id: "3e_affine_fonction_probleme_erreur_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "affine",
-    microId: "affine_problemes",
+    notionId: "affine_fonction",
+    microId: "affine_probleme",
     difficulty: 4,
     theme: "neutral",
     text: "Un élève dit : « Dans f(x)=3x+5, le nombre 5 est le coefficient directeur. » A-t-il raison ?",
@@ -1761,16 +1761,16 @@ export const affineBank: TutorBankItemV4[] = [
       "Méthode : on identifie le nombre placé devant x.\n\n" +
       "Calcul : ici, le coefficient directeur est 3 et l’ordonnée à l’origine est 5.\n\n" +
       "Conclusion : l’élève se trompe.",
-    tags: ["affine", "probleme", "erreur"],
+    tags: ["affine_fonction", "probleme", "erreur"],
   },
 
   {
     kind: "fixed",
-    id: "3e_affine_problemes_open_1",
+    id: "3e_affine_fonction_probleme_open_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "affine",
-    microId: "affine_problemes",
+    notionId: "affine_fonction",
+    microId: "affine_probleme",
     difficulty: 5,
     theme: "neutral",
     text: "Explique pourquoi une fonction affine peut modéliser une situation réelle.",
@@ -1783,7 +1783,7 @@ export const affineBank: TutorBankItemV4[] = [
       "Méthode : on distingue une partie fixe et une partie qui varie toujours de la même façon.\n\n" +
       "Calcul : par exemple, un taxi facture un prix de départ puis un prix par kilomètre.\n\n" +
       "Conclusion : les fonctions affines permettent de représenter de nombreuses situations de la vie réelle.",
-    tags: ["affine", "probleme", "open", "modelisation"],
+    tags: ["affine_fonction", "probleme", "open", "modelisation"],
   },
     /* =========================
      AFFINE_DEFIS
@@ -1791,11 +1791,11 @@ export const affineBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "3e_affine_defis_fixed_1",
+    id: "3e_affine_fonction_defi_fixed_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "affine",
-    microId: "affine_defis",
+    notionId: "affine_fonction",
+    microId: "affine_defi",
     difficulty: 4,
     theme: "neutral",
     text: "Deux fonctions sont définies par f(x) = 2x + 5 et g(x) = 4x + 1. Pour x = 2, laquelle donne la plus grande image ?",
@@ -1809,20 +1809,20 @@ export const affineBank: TutorBankItemV4[] = [
       "Méthode : on calcule f(2), puis g(2).\n\n" +
       "Calcul : f(2) = 2 × 2 + 5 = 9. Et g(2) = 4 × 2 + 1 = 9.\n\n" +
       "Conclusion : les deux fonctions donnent la même image pour x = 2.",
-    tags: ["affine", "defi", "comparaison"],
+    tags: ["affine_fonction", "defi", "comparaison"],
   },
 
   {
     kind: "template",
-    id: "3e_affine_defis_tpl_1_comparaison",
+    id: "3e_affine_fonction_defi_tpl_1_comparaison",
     niveau: "3e",
     matiere: "maths",
-    notionId: "affine",
-    microId: "affine_defis",
+    notionId: "affine_fonction",
+    microId: "affine_defi",
     difficulty: 4,
     theme: "reunion",
     hint: "Calcule les deux tarifs pour la même durée.",
-    tags: ["affine", "defi", "comparaison", "reunion", "template"],
+    tags: ["affine_fonction", "defi", "comparaison", "reunion", "template"],
     generate: () => {
       const x = randomChoice([2, 3, 4, 5]);
 
@@ -1858,15 +1858,15 @@ export const affineBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "3e_affine_defis_tpl_2_intersection",
+    id: "3e_affine_fonction_defi_tpl_2_intersection",
     niveau: "3e",
     matiere: "maths",
-    notionId: "affine",
-    microId: "affine_defis",
+    notionId: "affine_fonction",
+    microId: "affine_defi",
     difficulty: 5,
     theme: "neutral",
     hint: "Cherche la valeur de x pour laquelle les deux fonctions ont la même image.",
-    tags: ["affine", "defi", "intersection", "equation", "template"],
+    tags: ["affine_fonction", "defi", "intersection", "equation", "template"],
     generate: () => {
       const x = randomChoice([1, 2, 3, 4]);
       const a1 = randomChoice([2, 3, 4]);
@@ -1895,15 +1895,15 @@ export const affineBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "3e_affine_defis_tpl_3_retrouver_b",
+    id: "3e_affine_fonction_defi_tpl_3_retrouver_b",
     niveau: "3e",
     matiere: "maths",
-    notionId: "affine",
-    microId: "affine_defis",
+    notionId: "affine_fonction",
+    microId: "affine_defi",
     difficulty: 5,
     theme: "neutral",
     hint: "Utilise le point donné : f(x) = y.",
-    tags: ["affine", "defi", "ordonnee_origine", "template"],
+    tags: ["affine_fonction", "defi", "ordonnee_origine", "template"],
     generate: () => {
       const a = randomChoice([-3, -2, 2, 3, 4]);
       const b = randomInt(-5, 6);
@@ -1926,15 +1926,15 @@ export const affineBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "3e_affine_defis_tpl_4_graphique_synthese",
+    id: "3e_affine_fonction_defi_tpl_4_graphique_synthese",
     niveau: "3e",
     matiere: "maths",
-    notionId: "affine",
-    microId: "affine_defis",
+    notionId: "affine_fonction",
+    microId: "affine_defi",
     difficulty: 5,
     theme: "neutral",
     hint: "Lis l’ordonnée à l’origine et le coefficient directeur.",
-    tags: ["affine", "defi", "graphique", "expression", "canvas", "template"],
+    tags: ["affine_fonction", "defi", "graphique", "expression", "canvas", "template"],
     generate: () => {
       const a = randomChoice([-2, -1, 1, 2, 3]);
       const b = randomInt(-3, 3);
@@ -1968,11 +1968,11 @@ export const affineBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "3e_affine_defis_erreur_1",
+    id: "3e_affine_fonction_defi_erreur_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "affine",
-    microId: "affine_defis",
+    notionId: "affine_fonction",
+    microId: "affine_defi",
     difficulty: 4,
     theme: "neutral",
     text: "Un élève dit : « Si deux fonctions affines ont le même coefficient directeur, alors leurs droites se coupent forcément. » A-t-il raison ?",
@@ -1986,16 +1986,16 @@ export const affineBank: TutorBankItemV4[] = [
       "Méthode : on compare les pentes des deux droites.\n\n" +
       "Calcul : si deux droites ont le même coefficient directeur, elles ont la même pente.\n\n" +
       "Conclusion : elles sont parallèles ou confondues ; elles ne se coupent pas forcément.",
-    tags: ["affine", "defi", "erreur", "droites"],
+    tags: ["affine_fonction", "defi", "erreur", "droites"],
   },
 
   {
     kind: "fixed",
-    id: "3e_affine_defis_erreur_2",
+    id: "3e_affine_fonction_defi_erreur_2",
     niveau: "3e",
     matiere: "maths",
-    notionId: "affine",
-    microId: "affine_defis",
+    notionId: "affine_fonction",
+    microId: "affine_defi",
     difficulty: 4,
     theme: "neutral",
     text: "Un élève affirme : « Si f(x) = 3x + 2, alors f(x + 1) = f(x) + 1. » A-t-il raison ?",
@@ -2009,16 +2009,16 @@ export const affineBank: TutorBankItemV4[] = [
       "Méthode : on utilise le coefficient directeur.\n\n" +
       "Calcul : ici a = 3. Donc quand x augmente de 1, f(x) augmente de 3, pas de 1.\n\n" +
       "Conclusion : l’élève a tort.",
-    tags: ["affine", "defi", "erreur", "variation"],
+    tags: ["affine_fonction", "defi", "erreur", "variation"],
   },
 
   {
     kind: "fixed",
-    id: "3e_affine_defis_open_1",
+    id: "3e_affine_fonction_defi_open_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "affine",
-    microId: "affine_defis",
+    notionId: "affine_fonction",
+    microId: "affine_defi",
     difficulty: 5,
     theme: "neutral",
     text: "Explique comment comparer deux fonctions affines dans une situation de tarifs.",
@@ -2031,16 +2031,16 @@ export const affineBank: TutorBankItemV4[] = [
       "Méthode : dans une situation de tarifs, on choisit la même quantité ou la même durée pour les deux offres.\n\n" +
       "Calcul : on calcule f(x) et g(x), puis on compare les deux résultats.\n\n" +
       "Conclusion : l’offre la moins chère est celle qui donne la plus petite image pour cette valeur de x.",
-    tags: ["affine", "defi", "open", "comparaison"],
+    tags: ["affine_fonction", "defi", "open", "comparaison"],
   },
 
   {
     kind: "fixed",
-    id: "3e_affine_defis_open_2",
+    id: "3e_affine_fonction_defi_open_2",
     niveau: "3e",
     matiere: "maths",
-    notionId: "affine",
-    microId: "affine_defis",
+    notionId: "affine_fonction",
+    microId: "affine_defi",
     difficulty: 5,
     theme: "neutral",
     text: "Explique la différence entre coefficient directeur et ordonnée à l’origine.",
@@ -2053,6 +2053,6 @@ export const affineBank: TutorBankItemV4[] = [
       "Méthode : on interprète a comme la variation régulière, et b comme la valeur quand x = 0.\n\n" +
       "Calcul : dans f(x) = 2x + 5, le coefficient directeur est 2 et l’ordonnée à l’origine est 5.\n\n" +
       "Conclusion : le coefficient directeur indique la pente, tandis que l’ordonnée à l’origine indique la valeur de départ.",
-    tags: ["affine", "defi", "open", "synthese"],
+    tags: ["affine_fonction", "defi", "open", "synthese"],
   },
 ];

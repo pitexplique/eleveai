@@ -36,11 +36,11 @@ export const perimetresBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "3e_perimetre_comprendre_tpl_1_contour",
+    id: "3e_aire_perimetre_comprendre_tpl_1_contour",
     niveau: "3e",
     matiere: "maths",
-    notionId: "perimetres",
-    microId: "perimetre_comprendre",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_comprendre",
     difficulty: 1,
     theme: "neutral",
     hint: "Le périmètre mesure le contour d’une figure.",
@@ -65,11 +65,11 @@ export const perimetresBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "3e_perimetre_comprendre_tpl_2_unite",
+    id: "3e_aire_perimetre_comprendre_tpl_2_unite",
     niveau: "3e",
     matiere: "maths",
-    notionId: "perimetres",
-    microId: "perimetre_comprendre",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_comprendre",
     difficulty: 1,
     theme: "neutral",
     hint: "Un périmètre est une longueur.",
@@ -94,11 +94,11 @@ export const perimetresBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "3e_perimetre_comprendre_piege_1",
+    id: "3e_aire_perimetre_comprendre_piege_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "perimetres",
-    microId: "perimetre_comprendre",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_comprendre",
     difficulty: 2,
     theme: "neutral",
     text: "Un élève dit : « Le périmètre mesure la surface d’une figure. » A-t-il raison ?",
@@ -117,11 +117,11 @@ export const perimetresBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "3e_perimetre_comprendre_open_1",
+    id: "3e_aire_perimetre_comprendre_open_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "perimetres",
-    microId: "perimetre_comprendre",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_comprendre",
     difficulty: 2,
     theme: "neutral",
     text: "Explique avec tes mots ce qu’est le périmètre d’une figure.",
@@ -142,11 +142,11 @@ export const perimetresBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "3e_perimetre_polygone_tpl_1_rectangle",
+    id: "3e_aire_perimetre_polygone_tpl_1_rectangle",
     niveau: "3e",
     matiere: "maths",
-    notionId: "perimetres",
-    microId: "perimetre_polygone",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_polygone",
     difficulty: 2,
     theme: "neutral",
     hint: "Périmètre du rectangle = 2 × (longueur + largeur).",
@@ -172,11 +172,11 @@ export const perimetresBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "3e_perimetre_polygone_tpl_2_triangle",
+    id: "3e_aire_perimetre_polygone_tpl_2_triangle",
     niveau: "3e",
     matiere: "maths",
-    notionId: "perimetres",
-    microId: "perimetre_polygone",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_polygone",
     difficulty: 2,
     theme: "neutral",
     hint: "Additionne les trois côtés.",
@@ -203,11 +203,11 @@ export const perimetresBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "3e_perimetre_polygone_tpl_3_carre",
+    id: "3e_aire_perimetre_polygone_tpl_3_carre",
     niveau: "3e",
     matiere: "maths",
-    notionId: "perimetres",
-    microId: "perimetre_polygone",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_polygone",
     difficulty: 2,
     theme: "neutral",
     hint: "Un carré a quatre côtés de même longueur.",
@@ -232,11 +232,11 @@ export const perimetresBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "3e_perimetre_polygone_tpl_4_polygone",
+    id: "3e_aire_perimetre_polygone_tpl_4_polygone",
     niveau: "3e",
     matiere: "maths",
-    notionId: "perimetres",
-    microId: "perimetre_polygone",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_polygone",
     difficulty: 3,
     theme: "neutral",
     hint: "Additionne toutes les longueurs du contour.",
@@ -267,11 +267,11 @@ export const perimetresBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "3e_perimetre_polygone_tpl_5_retrouver_cote_carre",
+    id: "3e_aire_perimetre_polygone_tpl_5_retrouver_cote_carre",
     niveau: "3e",
     matiere: "maths",
-    notionId: "perimetres",
-    microId: "perimetre_polygone",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_polygone",
     difficulty: 3,
     theme: "neutral",
     hint: "Dans un carré, périmètre = 4 × côté.",
@@ -296,11 +296,11 @@ export const perimetresBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "3e_perimetre_polygone_tpl_6_reunion",
+    id: "3e_aire_perimetre_polygone_tpl_6_reunion",
     niveau: "3e",
     matiere: "maths",
-    notionId: "perimetres",
-    microId: "perimetre_polygone",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_polygone",
     difficulty: 3,
     theme: "reunion",
     hint: "Pour clôturer, on cherche le périmètre.",
@@ -328,11 +328,11 @@ export const perimetresBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "3e_perimetre_polygone_piege_1",
+    id: "3e_aire_perimetre_polygone_piege_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "perimetres",
-    microId: "perimetre_polygone",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_polygone",
     difficulty: 3,
     theme: "neutral",
     text: "Un élève calcule le périmètre d’un rectangle de 8 cm sur 5 cm ainsi : 8 × 5 = 40. A-t-il raison ?",
@@ -351,11 +351,11 @@ export const perimetresBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "3e_perimetre_polygone_open_1",
+    id: "3e_aire_perimetre_polygone_open_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "perimetres",
-    microId: "perimetre_polygone",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_polygone",
     difficulty: 3,
     theme: "neutral",
     text: "Explique comment calculer le périmètre d’un polygone.",
@@ -376,11 +376,11 @@ export const perimetresBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "3e_perimetre_cercle_tpl_1_rayon_exact",
+    id: "3e_aire_perimetre_cercle_tpl_1_rayon_exact",
     niveau: "3e",
     matiere: "maths",
-    notionId: "perimetres",
-    microId: "perimetre_cercle",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_cercle",
     difficulty: 2,
     theme: "neutral",
     hint: "Longueur d’un cercle = 2πr.",
@@ -410,11 +410,11 @@ export const perimetresBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "3e_perimetre_cercle_tpl_2_diametre_exact",
+    id: "3e_aire_perimetre_cercle_tpl_2_diametre_exact",
     niveau: "3e",
     matiere: "maths",
-    notionId: "perimetres",
-    microId: "perimetre_cercle",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_cercle",
     difficulty: 2,
     theme: "neutral",
     hint: "Avec le diamètre, la formule est πd.",
@@ -439,11 +439,11 @@ export const perimetresBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "3e_perimetre_cercle_tpl_3_approx",
+    id: "3e_aire_perimetre_cercle_tpl_3_approx",
     niveau: "3e",
     matiere: "maths",
-    notionId: "perimetres",
-    microId: "perimetre_cercle",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_cercle",
     difficulty: 3,
     theme: "neutral",
     hint: "Utilise 2πr avec π ≈ 3,14.",
@@ -468,11 +468,11 @@ export const perimetresBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "3e_perimetre_cercle_tpl_4_reunion",
+    id: "3e_aire_perimetre_cercle_tpl_4_reunion",
     niveau: "3e",
     matiere: "maths",
-    notionId: "perimetres",
-    microId: "perimetre_cercle",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_cercle",
     difficulty: 3,
     theme: "reunion",
     hint: "Un tour de rond-point correspond à la longueur d’un cercle.",
@@ -504,11 +504,11 @@ export const perimetresBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "3e_perimetre_cercle_piege_1",
+    id: "3e_aire_perimetre_cercle_piege_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "perimetres",
-    microId: "perimetre_cercle",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_cercle",
     difficulty: 3,
     theme: "neutral",
     text: "Un élève utilise la formule πr² pour calculer la longueur d’un cercle. A-t-il raison ?",
@@ -527,11 +527,11 @@ export const perimetresBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "3e_perimetre_cercle_piege_2",
+    id: "3e_aire_perimetre_cercle_piege_2",
     niveau: "3e",
     matiere: "maths",
-    notionId: "perimetres",
-    microId: "perimetre_cercle",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_cercle",
     difficulty: 3,
     theme: "neutral",
     text: "Un cercle a un diamètre de 12 cm. Un élève calcule 2π × 12. A-t-il utilisé correctement la donnée ?",
@@ -550,11 +550,11 @@ export const perimetresBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "3e_perimetre_cercle_open_1",
+    id: "3e_aire_perimetre_cercle_open_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "perimetres",
-    microId: "perimetre_cercle",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_cercle",
     difficulty: 4,
     theme: "neutral",
     text: "Explique la différence entre la longueur d’un cercle et l’aire d’un disque.",
@@ -575,11 +575,11 @@ export const perimetresBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "3e_perimetre_figure_composee_tpl_1_rectangle_demi_cercle",
+    id: "3e_aire_perimetre_figure_composee_tpl_1_rectangle_demi_cercle",
     niveau: "3e",
     matiere: "maths",
-    notionId: "perimetres",
-    microId: "perimetre_figure_composee",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_figure_composee",
     difficulty: 4,
     theme: "neutral",
     hint: "Attention : le diamètre du demi-cercle n’est pas forcément à compter s’il est collé au rectangle.",
@@ -615,11 +615,11 @@ export const perimetresBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "3e_perimetre_figure_composee_tpl_2_polygone_et_arc",
+    id: "3e_aire_perimetre_figure_composee_tpl_2_polygone_et_arc",
     niveau: "3e",
     matiere: "maths",
-    notionId: "perimetres",
-    microId: "perimetre_figure_composee",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_figure_composee",
     difficulty: 4,
     theme: "neutral",
     hint: "Additionne les segments du contour et la longueur de l’arc.",
@@ -655,11 +655,11 @@ export const perimetresBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "3e_perimetre_figure_composee_tpl_3_retrait_rectangle",
+    id: "3e_aire_perimetre_figure_composee_tpl_3_retrait_rectangle",
     niveau: "3e",
     matiere: "maths",
-    notionId: "perimetres",
-    microId: "perimetre_figure_composee",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_figure_composee",
     difficulty: 4,
     theme: "neutral",
     hint: "Un trou ou une découpe peut ajouter du contour.",
@@ -693,11 +693,11 @@ export const perimetresBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "3e_perimetre_figure_composee_tpl_4_reunion",
+    id: "3e_aire_perimetre_figure_composee_tpl_4_reunion",
     niveau: "3e",
     matiere: "maths",
-    notionId: "perimetres",
-    microId: "perimetre_figure_composee",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_figure_composee",
     difficulty: 4,
     theme: "reunion",
     hint: "Pour une clôture, on cherche uniquement le contour extérieur.",
@@ -735,11 +735,11 @@ export const perimetresBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "3e_perimetre_figure_composee_piege_1",
+    id: "3e_aire_perimetre_figure_composee_piege_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "perimetres",
-    microId: "perimetre_figure_composee",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_figure_composee",
     difficulty: 4,
     theme: "neutral",
     text:
@@ -759,11 +759,11 @@ export const perimetresBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "3e_perimetre_figure_composee_piege_2",
+    id: "3e_aire_perimetre_figure_composee_piege_2",
     niveau: "3e",
     matiere: "maths",
-    notionId: "perimetres",
-    microId: "perimetre_figure_composee",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_figure_composee",
     difficulty: 4,
     theme: "neutral",
     text:
@@ -783,11 +783,11 @@ export const perimetresBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "3e_perimetre_figure_composee_open_1",
+    id: "3e_aire_perimetre_figure_composee_open_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "perimetres",
-    microId: "perimetre_figure_composee",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_figure_composee",
     difficulty: 5,
     theme: "neutral",
     text:
@@ -809,11 +809,11 @@ export const perimetresBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "3e_perimetre_defis_fixed_1",
+    id: "3e_aire_perimetre_defi_fixed_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "perimetres",
-    microId: "perimetre_defis",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_defi",
     difficulty: 4,
     theme: "neutral",
     text: "Deux figures ont la même aire. Ont-elles forcément le même périmètre ?",
@@ -832,11 +832,11 @@ export const perimetresBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "3e_perimetre_defis_tpl_1_carre_depuis_aire",
+    id: "3e_aire_perimetre_defi_tpl_1_carre_depuis_aire",
     niveau: "3e",
     matiere: "maths",
-    notionId: "perimetres",
-    microId: "perimetre_defis",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_defi",
     difficulty: 4,
     theme: "neutral",
     hint: "Retrouve d’abord le côté du carré.",
@@ -862,11 +862,11 @@ export const perimetresBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "3e_perimetre_defis_tpl_2_rectangle_depuis_perimetre",
+    id: "3e_aire_perimetre_defi_tpl_2_rectangle_depuis_perimetre",
     niveau: "3e",
     matiere: "maths",
-    notionId: "perimetres",
-    microId: "perimetre_defis",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_defi",
     difficulty: 4,
     theme: "neutral",
     hint: "Pour un rectangle, demi-périmètre = longueur + largeur.",
@@ -892,11 +892,11 @@ export const perimetresBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "3e_perimetre_defis_tpl_3_cercle_depuis_demi_tour",
+    id: "3e_aire_perimetre_defi_tpl_3_cercle_depuis_demi_tour",
     niveau: "3e",
     matiere: "maths",
-    notionId: "perimetres",
-    microId: "perimetre_defis",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_defi",
     difficulty: 5,
     theme: "neutral",
     hint: "Un demi-cercle mesure la moitié du périmètre du cercle.",
@@ -921,11 +921,11 @@ export const perimetresBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "3e_perimetre_defis_tpl_4_reunion",
+    id: "3e_aire_perimetre_defi_tpl_4_reunion",
     niveau: "3e",
     matiere: "maths",
-    notionId: "perimetres",
-    microId: "perimetre_defis",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_defi",
     difficulty: 5,
     theme: "reunion",
     hint: "La clôture correspond au contour extérieur.",
@@ -955,11 +955,11 @@ export const perimetresBank: TutorBankItemV4[] = [
 
   {
   kind: "template",
-  id: "3e_perimetre_defis_tpl_5_expression_litterale",
+  id: "3e_aire_perimetre_defi_tpl_5_expression_litterale",
   niveau: "3e",
   matiere: "maths",
-  notionId: "perimetres",
-  microId: "perimetre_defis",
+  notionId: "aire_perimetre",
+  microId: "aire_perimetre_defi",
   difficulty: 5,
   theme: "neutral",
   hint: "Additionne toutes les longueurs du contour puis réduis.",
@@ -992,11 +992,11 @@ export const perimetresBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "3e_perimetre_defis_open_1",
+    id: "3e_aire_perimetre_defi_open_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "perimetres",
-    microId: "perimetre_defis",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_defi",
     difficulty: 5,
     theme: "neutral",
     text: "Explique pourquoi deux figures peuvent avoir la même aire mais des périmètres différents.",

@@ -20,10 +20,10 @@ import type { NotionSource } from "@/lib/tutor-v4/knowledge/buildKnowledge";
 export const notions: NotionSource[] = [
 
   {
-  id: "algorithmique",
+  id: "algo_programmation",
   label: "Algorithmique et programmation",
   boId: "BO3I1",
-  prerequis: ["calcul_litteral"],
+  prerequis: ["litteral_calcul"],
   levels: [1, 2, 3],
 },
 
@@ -33,7 +33,7 @@ export const notions: NotionSource[] = [
   ========================= */
 
   {
-    id: "nombres_rationnels",
+    id: "fraction_rationnel",
     label: "Nombres rationnels",
     boId: "BO3N1",
     prerequis: [],
@@ -41,34 +41,34 @@ export const notions: NotionSource[] = [
   },
 
   {
-    id: "puissances",
+    id: "entier_puissance",
     label: "Puissances",
     boId: "BO3N1",
-    prerequis: ["nombres_rationnels"],
+    prerequis: ["fraction_rationnel"],
     levels: [1, 2, 3],
   },
 
   {
-    id: "racine_carree",
+    id: "entier_racine_carree",
     label: "Racine carrée",
     boId: "BO3N1",
-    prerequis: ["nombres_rationnels"],
+    prerequis: ["fraction_rationnel"],
     levels: [1, 2, 3],
   },
 
   {
-    id: "arithmetique",
+    id: "entier_arithmetique",
     label: "Multiples et diviseurs",
     boId: "BO3N2",
-    prerequis: ["nombres_rationnels"],
+    prerequis: ["fraction_rationnel"],
     levels: [1, 2, 3],
   },
 
   {
-    id: "proportionnalite",
+    id: "prop_proportionnalite",
     label: "Proportionnalité",
     boId: "BO3P1",
-    prerequis: ["nombres_rationnels"],
+    prerequis: ["fraction_rationnel"],
     levels: [1, 2, 3],
   },
 
@@ -77,7 +77,7 @@ export const notions: NotionSource[] = [
   ========================= */
 
   {
-    id: "calcul_litteral",
+    id: "litteral_calcul",
     label: "Calcul littéral",
     boId: "BO3A1",
     prerequis: [],
@@ -85,26 +85,26 @@ export const notions: NotionSource[] = [
   },
 
   {
-    id: "equations",
+    id: "equation_resolution",
     label: "Équations",
     boId: "BO3A1",
-    prerequis: ["calcul_litteral"],
+    prerequis: ["litteral_calcul"],
     levels: [1, 2, 3],
   },
 
   {
-    id: "fonctions",
+    id: "fonction_generalite",
     label: "Fonctions",
     boId: "BO3F1",
-    prerequis: ["proportionnalite"],
+    prerequis: ["prop_proportionnalite"],
     levels: [1, 2, 3],
   },
 
   {
-    id: "affine",
+    id: "affine_fonction",
     label: "Fonctions affines",
     boId: "BO3F1",
-    prerequis: ["fonctions", "equations"],
+    prerequis: ["fonction_generalite", "equation_resolution"],
     levels: [1, 2, 3],
   },
 
@@ -113,7 +113,7 @@ export const notions: NotionSource[] = [
   ========================= */
 
   {
-    id: "triangles",
+    id: "triangle_figure",
     label: "Triangles",
     boId: "BO3G1",
     prerequis: [],
@@ -121,39 +121,39 @@ export const notions: NotionSource[] = [
   },
 
   {
-    id: "pythagore",
+    id: "pythagore_theoreme",
     label: "Théorème de Pythagore",
     boId: "BO3G1",
-    prerequis: ["triangles"],
+    prerequis: ["triangle_figure"],
     levels: [1, 2, 3],
   },
 
   {
-    id: "thales",
+    id: "thales_theoreme",
     label: "Théorème de Thalès",
     boId: "BO3G1",
-    prerequis: ["triangles", "proportionnalite"],
+    prerequis: ["triangle_figure", "prop_proportionnalite"],
     levels: [1, 2, 3],
   },
 
   {
-    id: "trigonometrie",
+    id: "trigo_trigonometrie",
     label: "Trigonométrie",
     boId: "BO3G1",
-    prerequis: ["triangles", "pythagore"],
+    prerequis: ["triangle_figure", "pythagore_theoreme"],
     levels: [1, 2, 3],
   },
 
   {
-    id: "transformations",
+    id: "sym_transformation",
     label: "Transformations (dont homothéties)",
     boId: "BO3G1",
-    prerequis: ["triangles"],
+    prerequis: ["triangle_figure"],
     levels: [1, 2],
   },
 
   {
-    id: "geometrie_espace",
+    id: "volume_geometrie_espace",
     label: "Géométrie dans l’espace",
     boId: "BO3G2",
     prerequis: [],
@@ -165,7 +165,7 @@ export const notions: NotionSource[] = [
   ========================= */
 
   {
-    id: "perimetres",
+    id: "aire_perimetre",
     label: "Périmètres",
     boId: "BO3M1",
     prerequis: [],
@@ -173,7 +173,7 @@ export const notions: NotionSource[] = [
   },
 
   {
-    id: "aires",
+    id: "aire_surface",
     label: "Aires",
     boId: "BO3M1",
     prerequis: [],
@@ -181,10 +181,10 @@ export const notions: NotionSource[] = [
   },
 
   {
-    id: "volumes",
+    id: "volume_solide",
     label: "Volumes",
     boId: "BO3M1",
-    prerequis: ["aires"],
+    prerequis: ["aire_surface"],
     levels: [1, 2],
   },
 
@@ -193,7 +193,7 @@ export const notions: NotionSource[] = [
   ========================= */
 
   {
-    id: "statistiques",
+    id: "stat_statistique",
     label: "Statistiques",
     boId: "BO3D1",
     prerequis: [],
@@ -201,7 +201,7 @@ export const notions: NotionSource[] = [
   },
 
   {
-    id: "probabilites",
+    id: "proba_experience",
     label: "Probabilités",
     boId: "BO3D2",
     prerequis: [],

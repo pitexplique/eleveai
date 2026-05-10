@@ -30,11 +30,11 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "3e_algo_conditions_fixed_1_si_sinon",
+    id: "3e_algo_condition_fixed_1_si_sinon",
     niveau: "3e",
     matiere: "maths",
-    notionId: "algorithmique",
-    microId: "algo_conditions_complexes",
+    notionId: "algo_programmation",
+    microId: "algo_condition_complexe",
     difficulty: 2,
     theme: "neutral",
     text:
@@ -54,7 +54,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
       "Méthode : si la condition est vraie, le premier bloc s’exécute ; sinon, le second.\n\n" +
       "Exécution : quand la condition est fausse, le programme utilise le bloc “sinon”.\n\n" +
       "Conclusion : le bloc sinon est exécuté.",
-    tags: ["algorithmique", "condition", "if_else", "scratch"],
+    tags: ["algo_programmation", "condition", "if_else", "scratch"],
     canvas: scratchCanvas("Condition si / sinon", [
       { type: "event" },
       {
@@ -68,15 +68,15 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "3e_algo_conditions_tpl_2_message",
+    id: "3e_algo_condition_tpl_2_message",
     niveau: "3e",
     matiere: "maths",
-    notionId: "algorithmique",
-    microId: "algo_conditions_complexes",
+    notionId: "algo_programmation",
+    microId: "algo_condition_complexe",
     difficulty: 3,
     theme: "neutral",
     hint: "Teste la condition avant de choisir le message.",
-    tags: ["algorithmique", "condition", "template", "canvas"],
+    tags: ["algo_programmation", "condition", "template", "canvas"],
     generate: () => {
       const seuil = randomChoice([10, 12, 15]);
       const score = randomChoice([8, 10, 12, 14, 16]);
@@ -120,15 +120,15 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "3e_algo_variables_tpl_1_boucle",
+    id: "3e_algo_variable_tpl_1_boucle",
     niveau: "3e",
     matiere: "maths",
-    notionId: "algorithmique",
-    microId: "algo_variables_boucles",
+    notionId: "algo_programmation",
+    microId: "algo_variable_boucle",
     difficulty: 3,
     theme: "neutral",
     hint: "La variable augmente à chaque répétition.",
-    tags: ["algorithmique", "variable", "boucle", "template", "canvas"],
+    tags: ["algo_programmation", "variable", "boucle", "template", "canvas"],
     generate: () => {
       const depart = randomChoice([0, 2, 5]);
       const ajout = randomChoice([2, 3, 4]);
@@ -178,12 +178,12 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     id: "3e_algo_programme_tpl_1_calcul",
     niveau: "3e",
     matiere: "maths",
-    notionId: "algorithmique",
+    notionId: "algo_programmation",
     microId: "algo_programme_calcul",
     difficulty: 4,
     theme: "neutral",
     hint: "Suis les blocs dans l’ordre.",
-    tags: ["algorithmique", "programme_calcul", "template", "canvas"],
+    tags: ["algo_programmation", "programme_calcul", "template", "canvas"],
     generate: () => {
       const x = randomChoice([2, 3, 4, 5]);
 
@@ -227,11 +227,11 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "3e_algo_debug_fixed_1_erreur_condition",
+    id: "3e_algo_corriger_fixed_1_erreur_condition",
     niveau: "3e",
     matiere: "maths",
-    notionId: "algorithmique",
-    microId: "algo_debug",
+    notionId: "algo_programmation",
+    microId: "algo_corriger",
     difficulty: 4,
     theme: "neutral",
     text:
@@ -251,7 +251,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
       "Méthode : on compare l’énoncé et le test utilisé.\n\n" +
       "Exécution : avec “score > 10”, le score 10 ne fonctionne pas.\n\n" +
       "Conclusion : le score 10 est refusé.",
-    tags: ["algorithmique", "debug", "condition", "scratch"],
+    tags: ["algo_programmation", "correction", "condition", "scratch"],
     canvas: scratchCanvas("Corriger une condition", [
       { type: "event" },
       {
@@ -272,12 +272,12 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     id: "3e_algo_generaliser_tpl_1_expression",
     niveau: "3e",
     matiere: "maths",
-    notionId: "algorithmique",
+    notionId: "algo_programmation",
     microId: "algo_generaliser",
     difficulty: 5,
     theme: "neutral",
     hint: "Traduis les blocs sous forme littérale.",
-    tags: ["algorithmique", "generaliser", "expression", "template", "canvas"],
+    tags: ["algo_programmation", "generaliser", "expression", "template", "canvas"],
     generate: () => {
       const ajout = randomChoice([2, 3, 5]);
       const mult = randomChoice([2, 4]);
@@ -325,11 +325,11 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "3e_algo_defis_open_1_methode",
+    id: "3e_algo_defi_open_1_methode",
     niveau: "3e",
     matiere: "maths",
-    notionId: "algorithmique",
-    microId: "algo_defis",
+    notionId: "algo_programmation",
+    microId: "algo_defi",
     difficulty: 5,
     theme: "neutral",
     text:
@@ -343,19 +343,19 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
       "Méthode : on suit les blocs dans l’ordre : valeur initiale, effet des boucles, puis test des conditions.\n\n" +
       "Exécution : on met à jour les variables après chaque instruction.\n\n" +
       "Conclusion : cette méthode permet de comprendre le résultat du programme.",
-    tags: ["algorithmique", "defi", "open", "scratch"],
+    tags: ["algo_programmation", "defi", "open", "scratch"],
   },
     {
     kind: "template",
-    id: "3e_algo_conditions_tpl_3_double_test",
+    id: "3e_algo_condition_tpl_3_double_test",
     niveau: "3e",
     matiere: "maths",
-    notionId: "algorithmique",
-    microId: "algo_conditions_complexes",
+    notionId: "algo_programmation",
+    microId: "algo_condition_complexe",
     difficulty: 3,
     theme: "neutral",
     hint: "Il faut suivre le premier test, puis éventuellement le second.",
-    tags: ["algorithmique", "condition", "if_else", "double_test", "template", "canvas"],
+    tags: ["algo_programmation", "condition", "if_else", "double_test", "template", "canvas"],
     generate: () => {
       const x = randomChoice([-4, -1, 0, 3, 7]);
 
@@ -397,15 +397,15 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "3e_algo_conditions_tpl_4_intervalle",
+    id: "3e_algo_condition_tpl_4_intervalle",
     niveau: "3e",
     matiere: "maths",
-    notionId: "algorithmique",
-    microId: "algo_conditions_complexes",
+    notionId: "algo_programmation",
+    microId: "algo_condition_complexe",
     difficulty: 4,
     theme: "neutral",
     hint: "Le nombre doit vérifier les deux conditions de l’intervalle.",
-    tags: ["algorithmique", "condition", "intervalle", "template", "canvas"],
+    tags: ["algo_programmation", "condition", "intervalle", "template", "canvas"],
     generate: () => {
       const x = randomChoice([3, 5, 8, 10, 13, 15]);
       const min = 5;
@@ -440,11 +440,11 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "3e_algo_conditions_fixed_2_piege_strict_large",
+    id: "3e_algo_condition_fixed_2_piege_strict_large",
     niveau: "3e",
     matiere: "maths",
-    notionId: "algorithmique",
-    microId: "algo_conditions_complexes",
+    notionId: "algo_programmation",
+    microId: "algo_condition_complexe",
     difficulty: 4,
     theme: "neutral",
     text:
@@ -459,7 +459,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
       "Méthode : on compare l’objectif avec la condition utilisée.\n\n" +
       "Exécution : avec x > 0 et x < 10, les valeurs 0 et 10 sont refusées.\n\n" +
       "Conclusion : ce n’est pas correct.",
-    tags: ["algorithmique", "condition", "intervalle", "piege", "qcm"],
+    tags: ["algo_programmation", "condition", "intervalle", "piege", "qcm"],
     canvas: scratchCanvas("Bornes exclues", [
       { type: "event" },
       {
@@ -472,15 +472,15 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
   },
     {
     kind: "template",
-    id: "3e_algo_variables_tpl_2_boucle_condition",
+    id: "3e_algo_variable_tpl_2_boucle_condition",
     niveau: "3e",
     matiere: "maths",
-    notionId: "algorithmique",
-    microId: "algo_variables_boucles",
+    notionId: "algo_programmation",
+    microId: "algo_variable_boucle",
     difficulty: 4,
     theme: "neutral",
     hint: "Calcule d’abord la valeur finale de score, puis teste la condition.",
-    tags: ["algorithmique", "variable", "boucle", "condition", "template", "canvas"],
+    tags: ["algo_programmation", "variable", "boucle", "condition", "template", "canvas"],
     generate: () => {
       const depart = randomChoice([0, 3, 5]);
       const ajout = randomChoice([2, 4, 5]);
@@ -527,15 +527,15 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "3e_algo_variables_tpl_3_compteur",
+    id: "3e_algo_variable_tpl_3_compteur",
     niveau: "3e",
     matiere: "maths",
-    notionId: "algorithmique",
-    microId: "algo_variables_boucles",
+    notionId: "algo_programmation",
+    microId: "algo_variable_boucle",
     difficulty: 3,
     theme: "neutral",
     hint: "Le compteur augmente de 1 à chaque répétition.",
-    tags: ["algorithmique", "variable", "compteur", "boucle", "template", "canvas"],
+    tags: ["algo_programmation", "variable", "compteur", "boucle", "template", "canvas"],
     generate: () => {
       const fois = randomChoice([4, 5, 6, 8]);
 
@@ -569,15 +569,15 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "3e_algo_variables_tpl_4_suite_arithmetique",
+    id: "3e_algo_variable_tpl_4_suite_arithmetique",
     niveau: "3e",
     matiere: "maths",
-    notionId: "algorithmique",
-    microId: "algo_variables_boucles",
+    notionId: "algo_programmation",
+    microId: "algo_variable_boucle",
     difficulty: 4,
     theme: "neutral",
     hint: "La variable augmente toujours de la même quantité.",
-    tags: ["algorithmique", "variable", "boucle", "suite", "template", "canvas"],
+    tags: ["algo_programmation", "variable", "boucle", "suite", "template", "canvas"],
     generate: () => {
       const u0 = randomChoice([2, 5, 10]);
       const r = randomChoice([3, 4, 6]);
@@ -612,11 +612,11 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
   },
     {
     kind: "fixed",
-    id: "3e_algo_variables_fixed_1_piege_mettre_ajouter",
+    id: "3e_algo_variable_fixed_1_piege_mettre_ajouter",
     niveau: "3e",
     matiere: "maths",
-    notionId: "algorithmique",
-    microId: "algo_variables_boucles",
+    notionId: "algo_programmation",
+    microId: "algo_variable_boucle",
     difficulty: 4,
     theme: "neutral",
     text:
@@ -631,7 +631,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
       "Méthode : “mettre score à 5” remplace complètement l’ancienne valeur.\n\n" +
       "Exécution : même si score valait 12, il devient 5.\n\n" +
       "Conclusion : la valeur finale est 5.",
-    tags: ["algorithmique", "variable", "piege", "mettre", "ajouter"],
+    tags: ["algo_programmation", "variable", "piege", "mettre", "ajouter"],
     canvas: scratchCanvas("Mettre ou ajouter ?", [
       { type: "event" },
       { type: "set_variable", variable: "score", value: 12 },
@@ -642,11 +642,11 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "3e_algo_variables_open_1_expliquer",
+    id: "3e_algo_variable_open_1_expliquer",
     niveau: "3e",
     matiere: "maths",
-    notionId: "algorithmique",
-    microId: "algo_variables_boucles",
+    notionId: "algo_programmation",
+    microId: "algo_variable_boucle",
     difficulty: 5,
     theme: "neutral",
     text:
@@ -660,7 +660,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
       "Méthode : on note la valeur de départ, puis on applique la modification à chaque répétition.\n\n" +
       "Exécution : si on ajoute 3 pendant 4 répétitions, la variable augmente de 12.\n\n" +
       "Conclusion : suivre une variable demande de respecter l’ordre des blocs.",
-    tags: ["algorithmique", "variable", "boucle", "open", "methode"],
+    tags: ["algo_programmation", "variable", "boucle", "open", "methode"],
   },
 
   /* =========================
@@ -672,12 +672,12 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     id: "3e_algo_programme_tpl_2_expression_litterale",
     niveau: "3e",
     matiere: "maths",
-    notionId: "algorithmique",
+    notionId: "algo_programmation",
     microId: "algo_programme_calcul",
     difficulty: 4,
     theme: "neutral",
     hint: "Traduis chaque étape avec x.",
-    tags: ["algorithmique", "programme_calcul", "expression_litterale", "template", "canvas"],
+    tags: ["algo_programmation", "programme_calcul", "expression_litterale", "template", "canvas"],
     generate: () => {
       const a = randomChoice([2, 3, 4]);
       const b = randomChoice([5, 7, 10]);
@@ -716,12 +716,12 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     id: "3e_algo_programme_tpl_3_retrouver_nombre",
     niveau: "3e",
     matiere: "maths",
-    notionId: "algorithmique",
+    notionId: "algo_programmation",
     microId: "algo_programme_calcul",
     difficulty: 5,
     theme: "neutral",
     hint: "Tu peux résoudre l’équation associée.",
-    tags: ["algorithmique", "programme_calcul", "equation", "template", "canvas"],
+    tags: ["algo_programmation", "programme_calcul", "equation", "template", "canvas"],
     generate: () => {
       const a = randomChoice([2, 3, 4]);
       const b = randomChoice([5, 7, 10]);
@@ -756,12 +756,12 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     id: "3e_algo_programme_tpl_4_parentheses",
     niveau: "3e",
     matiere: "maths",
-    notionId: "algorithmique",
+    notionId: "algo_programmation",
     microId: "algo_programme_calcul",
     difficulty: 4,
     theme: "neutral",
     hint: "Si on ajoute d’abord puis on multiplie, il faut des parenthèses.",
-    tags: ["algorithmique", "programme_calcul", "parentheses", "template", "canvas"],
+    tags: ["algo_programmation", "programme_calcul", "parentheses", "template", "canvas"],
     generate: () => {
       const a = randomChoice([2, 3, 4]);
       const b = randomChoice([3, 5, 6]);
@@ -800,7 +800,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     id: "3e_algo_programme_fixed_1_piege_ordre",
     niveau: "3e",
     matiere: "maths",
-    notionId: "algorithmique",
+    notionId: "algo_programmation",
     microId: "algo_programme_calcul",
     difficulty: 4,
     theme: "neutral",
@@ -816,7 +816,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
       "Méthode : on regarde quelle opération est effectuée en premier.\n\n" +
       "Exécution : on ajoute d’abord 4, puis on multiplie par 3 : cela donne 3(x + 4).\n\n" +
       "Conclusion : l’élève a tort.",
-    tags: ["algorithmique", "programme_calcul", "piege", "parentheses", "qcm"],
+    tags: ["algo_programmation", "programme_calcul", "piege", "parentheses", "qcm"],
     canvas: scratchCanvas("Piège d’ordre", [
       { type: "event" },
       { type: "ask", text: "Choisis un nombre" },
@@ -832,15 +832,15 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "3e_algo_debug_tpl_2_erreur_expression",
+    id: "3e_algo_corriger_tpl_2_erreur_expression",
     niveau: "3e",
     matiere: "maths",
-    notionId: "algorithmique",
-    microId: "algo_debug",
+    notionId: "algo_programmation",
+    microId: "algo_corriger",
     difficulty: 5,
     theme: "neutral",
     hint: "Compare l’objectif et l’expression utilisée.",
-    tags: ["algorithmique", "debug", "expression", "template", "canvas"],
+    tags: ["algo_programmation", "correction", "expression", "template", "canvas"],
     generate: () => {
       const a = randomChoice([2, 3, 4]);
       const b = randomChoice([5, 6, 8]);
@@ -874,15 +874,15 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "3e_algo_debug_tpl_3_erreur_boucle",
+    id: "3e_algo_corriger_tpl_3_erreur_boucle",
     niveau: "3e",
     matiere: "maths",
-    notionId: "algorithmique",
-    microId: "algo_debug",
+    notionId: "algo_programmation",
+    microId: "algo_corriger",
     difficulty: 5,
     theme: "neutral",
     hint: "Vérifie combien de fois la modification est répétée.",
-    tags: ["algorithmique", "debug", "boucle", "variable", "template", "canvas"],
+    tags: ["algo_programmation", "correction", "boucle", "variable", "template", "canvas"],
     generate: () => {
       const objectif = randomChoice([12, 15, 20]);
       const ajout = randomChoice([3, 5]);
@@ -921,15 +921,15 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
 
 {
   kind: "template",
-  id: "3e_algo_defis_tpl_1_prediction_complete",
+  id: "3e_algo_defi_tpl_1_prediction_complete",
   niveau: "3e",
   matiere: "maths",
-  notionId: "algorithmique",
-  microId: "algo_defis",
+  notionId: "algo_programmation",
+  microId: "algo_defi",
   difficulty: 5,
   theme: "neutral",
   hint: "Suis le programme ligne par ligne.",
-  tags: ["algorithmique", "defi", "synthese", "variables", "conditions", "boucles", "canvas"],
+  tags: ["algo_programmation", "defi", "synthese", "variable", "condition", "boucle", "canvas"],
   generate: () => {
     const start = randomChoice([2, 4, 5]);
     const add = randomChoice([2, 3, 4]);
@@ -982,11 +982,11 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
 
 {
   kind: "fixed",
-  id: "3e_algo_defis_open_1_expliquer_bug",
+  id: "3e_algo_defi_open_1_expliquer_bug",
   niveau: "3e",
   matiere: "maths",
-  notionId: "algorithmique",
-  microId: "algo_defis",
+  notionId: "algo_programmation",
+  microId: "algo_defi",
   difficulty: 5,
   theme: "neutral",
   text:
@@ -1000,16 +1000,16 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     "Méthode : on vérifie les variables, les conditions, les répétitions et l’ordre des blocs.\n\n" +
     "Exécution : on peut suivre les valeurs étape par étape pour repérer l’erreur.\n\n" +
     "Conclusion : un bon débogage consiste à tester méthodiquement chaque partie du programme.",
-  tags: ["algorithmique", "debug", "open", "defi", "methode"],
+  tags: ["algo_programmation", "correction", "open", "defi", "methode"],
 },
 
 {
   kind: "fixed",
-  id: "3e_algo_defis_fixed_1_brevet_style",
+  id: "3e_algo_defi_fixed_1_brevet_style",
   niveau: "3e",
   matiere: "maths",
-  notionId: "algorithmique",
-  microId: "algo_defis",
+  notionId: "algo_programmation",
+  microId: "algo_defi",
   difficulty: 5,
   theme: "neutral",
   text:
@@ -1029,6 +1029,6 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     "Méthode : on l’utilise quand plusieurs actions identiques doivent être exécutées.\n\n" +
     "Exécution : cela rend les programmes plus courts et plus faciles à modifier.\n\n" +
     "Conclusion : les boucles évitent de recopier plusieurs fois les mêmes blocs.",
-  tags: ["algorithmique", "brevet", "boucle", "defi", "qcm"],
+  tags: ["algo_programmation", "brevet", "boucle", "defi", "qcm"],
 },
 ];
