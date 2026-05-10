@@ -123,11 +123,11 @@ export const distributiviteBank: TutorBankItemV4[] = [
   // =========================
     {
     kind: "fixed",
-    id: "distrib_simple_fixed_1",
+    id: "litteral_distributivite_simple_fixed_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "distributivite",
-    microId: "distrib_simple",
+    notionId: "litteral_distributivite",
+    microId: "litteral_distributivite_simple",
     difficulty: 1,
     theme: "neutral",
     text: "Quelle égalité est correcte ?",
@@ -140,19 +140,19 @@ export const distributiviteBank: TutorBankItemV4[] = [
           "Méthode : on distribue le facteur devant la parenthèse à chaque terme, puis on réduit si nécessaire.\n\nCalcul : " +
           ("3(x + 4) = 3×x + 3×4 = 3x + 12.") +
           "\n\nConclusion : l’expression obtenue est développée ou réduite correctement.",
-    tags: ["distributivite", "simple", "qcm"],
+    tags: ["litteral_distributivite", "simple", "qcm"],
   },
   {
     kind: "template",
-    id: "distrib_simple_tpl_formel_1",
+    id: "litteral_distributivite_simple_tpl_formel_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "distributivite",
-    microId: "distrib_simple",
+    notionId: "litteral_distributivite",
+    microId: "litteral_distributivite_simple",
     difficulty: 1,
     theme: "neutral",
     hint: "Le nombre devant la parenthèse multiplie chaque terme.",
-    tags: ["distributivite", "simple", "formel", "template"],
+    tags: ["litteral_distributivite", "simple", "formel", "template"],
     generate: () => {
       const a = randomInt(2, 8);
       const b = randomInt(1, 9);
@@ -172,15 +172,15 @@ export const distributiviteBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "distrib_simple_tpl_formel_2",
+    id: "litteral_distributivite_simple_tpl_formel_2",
     niveau: "4e",
     matiere: "maths",
-    notionId: "distributivite",
-    microId: "distrib_simple",
+    notionId: "litteral_distributivite",
+    microId: "litteral_distributivite_simple",
     difficulty: 1,
     theme: "neutral",
     hint: "Distribue le coefficient à chaque terme de la parenthèse.",
-    tags: ["distributivite", "simple", "soustraction", "template"],
+    tags: ["litteral_distributivite", "simple", "soustraction", "template"],
     generate: () => {
       const a = randomInt(2, 8);
       const b = randomInt(1, 9);
@@ -200,15 +200,15 @@ export const distributiviteBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "distrib_simple_tpl_signe_1",
+    id: "litteral_distributivite_simple_tpl_signe_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "distributivite",
-    microId: "distrib_simple",
+    notionId: "litteral_distributivite",
+    microId: "litteral_distributivite_simple",
     difficulty: 2,
     theme: "neutral",
     hint: "Un signe négatif devant la parenthèse se distribue aussi.",
-    tags: ["distributivite", "simple", "signe", "template"],
+    tags: ["litteral_distributivite", "simple", "signe", "template"],
     generate: () => {
       const a = randomInt(2, 6);
       const b = randomInt(1, 8);
@@ -227,11 +227,11 @@ export const distributiviteBank: TutorBankItemV4[] = [
   },
     {
     kind: "fixed",
-    id: "distrib_simple_open_1",
+    id: "litteral_distributivite_simple_open_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "distributivite",
-    microId: "distrib_simple",
+    notionId: "litteral_distributivite",
+    microId: "litteral_distributivite_simple",
     difficulty: 2,
     theme: "neutral",
     text: "Explique pourquoi 4(x + 3) donne 4x + 12.",
@@ -243,19 +243,19 @@ export const distributiviteBank: TutorBankItemV4[] = [
           "Méthode : on distribue le facteur devant la parenthèse à chaque terme, puis on réduit si nécessaire.\n\nCalcul : " +
           ("4 multiplie les deux termes de la parenthèse : 4×x et 4×3. Donc 4(x + 3) = 4x + 12.") +
           "\n\nConclusion : l’expression obtenue est développée ou réduite correctement.",
-    tags: ["distributivite", "simple", "open"],
+    tags: ["litteral_distributivite", "simple", "open"],
   },
   {
     kind: "template",
-    id: "distrib_simple_tpl_nature_1",
+    id: "litteral_distributivite_simple_tpl_nature_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "distributivite",
-    microId: "distrib_simple",
+    notionId: "litteral_distributivite",
+    microId: "litteral_distributivite_simple",
     difficulty: 2,
     theme: "neutral",
     hint: "Le nombre de rangées multiplie ce qu’il y a dans chaque rangée.",
-    tags: ["distributivite", "nature", "template"],
+    tags: ["litteral_distributivite", "nature", "template"],
     generate: () => {
       const rows = randomInt(2, 6);
       const extra = randomInt(1, 5);
@@ -274,15 +274,15 @@ export const distributiviteBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "distrib_simple_tpl_maison_1",
+    id: "litteral_distributivite_simple_tpl_maison_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "distributivite",
-    microId: "distrib_simple",
+    notionId: "litteral_distributivite",
+    microId: "litteral_distributivite_simple",
     difficulty: 2,
     theme: "neutral",
     hint: "Chaque pièce a la même longueur.",
-    tags: ["distributivite", "maison", "template"],
+    tags: ["litteral_distributivite", "maison", "template"],
     generate: () => {
       const pieces = randomInt(2, 5);
       const extra = randomInt(1, 4);
@@ -301,15 +301,15 @@ export const distributiviteBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "distrib_simple_tpl_achat_1",
+    id: "litteral_distributivite_simple_tpl_achat_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "distributivite",
-    microId: "distrib_simple",
+    notionId: "litteral_distributivite",
+    microId: "litteral_distributivite_simple",
     difficulty: 2,
     theme: "neutral",
     hint: "Il y a plusieurs lots identiques.",
-    tags: ["distributivite", "achat", "template"],
+    tags: ["litteral_distributivite", "achat", "template"],
     generate: () => {
       const lots = randomInt(2, 6);
       const bonus = randomInt(1, 5);
@@ -332,11 +332,11 @@ export const distributiviteBank: TutorBankItemV4[] = [
   // =========================
     {
     kind: "fixed",
-    id: "distrib_double_fixed_1",
+    id: "litteral_distributivite_double_fixed_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "distributivite",
-    microId: "distrib_double",
+    notionId: "litteral_distributivite",
+    microId: "litteral_distributivite_double",
     difficulty: 3,
     theme: "neutral",
     text: "Dans (x + 2)(x + 5), combien de produits doit-on effectuer avant de réduire ?",
@@ -349,19 +349,19 @@ export const distributiviteBank: TutorBankItemV4[] = [
           "Méthode : on distribue le facteur devant la parenthèse à chaque terme, puis on réduit si nécessaire.\n\nCalcul : " +
           ("On effectue 4 produits : x×x, x×5, 2×x et 2×5.") +
           "\n\nConclusion : l’expression obtenue est développée ou réduite correctement.",
-    tags: ["distributivite", "double", "qcm"],
+    tags: ["litteral_distributivite", "double", "qcm"],
   },
   {
     kind: "template",
-    id: "distrib_double_tpl_formel_1",
+    id: "litteral_distributivite_double_tpl_formel_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "distributivite",
-    microId: "distrib_double",
+    notionId: "litteral_distributivite",
+    microId: "litteral_distributivite_double",
     difficulty: 3,
     theme: "neutral",
     hint: "Chaque terme de la première parenthèse multiplie chaque terme de la seconde.",
-    tags: ["distributivite", "double", "template"],
+    tags: ["litteral_distributivite", "double", "template"],
     generate: () => {
       const b = randomInt(1, 5);
       const c = randomInt(1, 5);
@@ -387,15 +387,15 @@ export const distributiviteBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "distrib_double_tpl_formel_2",
+    id: "litteral_distributivite_double_tpl_formel_2",
     niveau: "4e",
     matiere: "maths",
-    notionId: "distributivite",
-    microId: "distrib_double",
+    notionId: "litteral_distributivite",
+    microId: "litteral_distributivite_double",
     difficulty: 3,
     theme: "neutral",
     hint: "Fais les quatre produits.",
-    tags: ["distributivite", "double", "template"],
+    tags: ["litteral_distributivite", "double", "template"],
     generate: () => {
       const b = randomInt(1, 4);
       const c = randomInt(1, 4);
@@ -425,11 +425,11 @@ export const distributiviteBank: TutorBankItemV4[] = [
   },
     {
     kind: "fixed",
-    id: "distrib_double_open_1",
+    id: "litteral_distributivite_double_open_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "distributivite",
-    microId: "distrib_double",
+    notionId: "litteral_distributivite",
+    microId: "litteral_distributivite_double",
     difficulty: 4,
     theme: "neutral",
     text: "Explique pourquoi (x + 2)(x + 3) donne x² + 5x + 6.",
@@ -441,7 +441,7 @@ export const distributiviteBank: TutorBankItemV4[] = [
           "Méthode : on distribue le facteur devant la parenthèse à chaque terme, puis on réduit si nécessaire.\n\nCalcul : " +
           ("(x + 2)(x + 3) = x×x + x×3 + 2×x + 2×3 = x² + 3x + 2x + 6 = x² + 5x + 6.") +
           "\n\nConclusion : l’expression obtenue est développée ou réduite correctement.",
-    tags: ["distributivite", "double", "open"],
+    tags: ["litteral_distributivite", "double", "open"],
   },
 
   // =========================
@@ -449,11 +449,11 @@ export const distributiviteBank: TutorBankItemV4[] = [
   // =========================
     {
     kind: "fixed",
-    id: "distrib_reduire_fixed_1",
+    id: "litteral_litteral_distributivite_reduire_fixed_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "distributivite",
-    microId: "distrib_reduire",
+    notionId: "litteral_distributivite",
+    microId: "litteral_distributivite_reduire",
     difficulty: 2,
     theme: "neutral",
     text: "Quelle est la forme réduite de 2x + 5 + 3x ?",
@@ -466,19 +466,19 @@ export const distributiviteBank: TutorBankItemV4[] = [
           "Méthode : on distribue le facteur devant la parenthèse à chaque terme, puis on réduit si nécessaire.\n\nCalcul : " +
           ("2x + 3x = 5x, donc 2x + 5 + 3x = 5x + 5.") +
           "\n\nConclusion : l’expression obtenue est développée ou réduite correctement.",
-    tags: ["distributivite", "reduire", "qcm"],
+    tags: ["litteral_distributivite", "reduire", "qcm"],
   },
   {
     kind: "template",
-    id: "distrib_reduire_tpl_formel_1",
+    id: "litteral_litteral_distributivite_reduire_tpl_formel_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "distributivite",
-    microId: "distrib_reduire",
+    notionId: "litteral_distributivite",
+    microId: "litteral_distributivite_reduire",
     difficulty: 2,
     theme: "neutral",
     hint: "Développe d’abord puis regroupe les termes semblables.",
-    tags: ["distributivite", "reduire", "template"],
+    tags: ["litteral_distributivite", "reduire", "template"],
     generate: () => {
       const a = randomInt(2, 6);
       const b = randomInt(1, 6);
@@ -500,15 +500,15 @@ export const distributiviteBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "distrib_reduire_tpl_formel_2",
+    id: "litteral_litteral_distributivite_reduire_tpl_formel_2",
     niveau: "4e",
     matiere: "maths",
-    notionId: "distributivite",
-    microId: "distrib_reduire",
+    notionId: "litteral_distributivite",
+    microId: "litteral_distributivite_reduire",
     difficulty: 3,
     theme: "neutral",
     hint: "Développe puis réduis les termes en x et les constantes.",
-    tags: ["distributivite", "reduire", "template"],
+    tags: ["litteral_distributivite", "reduire", "template"],
     generate: () => {
       const a = randomInt(2, 5);
       const b = randomInt(1, 5);
@@ -531,11 +531,11 @@ export const distributiviteBank: TutorBankItemV4[] = [
   },
     {
     kind: "fixed",
-    id: "distrib_reduire_open_1",
+    id: "litteral_litteral_distributivite_reduire_open_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "distributivite",
-    microId: "distrib_reduire",
+    notionId: "litteral_distributivite",
+    microId: "litteral_distributivite_reduire",
     difficulty: 3,
     theme: "neutral",
     text: "Explique comment réduire 2x + 7 + 3x.",
@@ -547,19 +547,19 @@ export const distributiviteBank: TutorBankItemV4[] = [
           "Méthode : on distribue le facteur devant la parenthèse à chaque terme, puis on réduit si nécessaire.\n\nCalcul : " +
           ("On regroupe les termes en x : 2x + 3x = 5x. Le 7 reste une constante. Donc 2x + 7 + 3x = 5x + 7.") +
           "\n\nConclusion : l’expression obtenue est développée ou réduite correctement.",
-    tags: ["distributivite", "reduire", "open"],
+    tags: ["litteral_distributivite", "reduire", "open"],
   },
   {
     kind: "template",
-    id: "distrib_reduire_tpl_batiment_1",
+    id: "litteral_litteral_distributivite_reduire_tpl_batiment_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "distributivite",
-    microId: "distrib_reduire",
+    notionId: "litteral_distributivite",
+    microId: "litteral_distributivite_reduire",
     difficulty: 3,
     theme: "neutral",
     hint: "Calcule la longueur répétée puis ajoute le reste.",
-    tags: ["distributivite", "batiment", "template"],
+    tags: ["litteral_distributivite", "batiment", "template"],
     generate: () => {
       const sections = randomInt(2, 5);
       const extra = randomInt(1, 4);
@@ -585,11 +585,11 @@ export const distributiviteBank: TutorBankItemV4[] = [
   // =========================
     {
     kind: "fixed",
-    id: "distrib_reconnaitre_fixed_1",
+    id: "litteral_litteral_distributivite_reconnaitre_fixed_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "distributivite",
-    microId: "distrib_reconnaitre",
+    notionId: "litteral_distributivite",
+    microId: "litteral_distributivite_reconnaitre",
     difficulty: 1,
     theme: "neutral",
     text: "Quelle expression contient une distributivité à effectuer ?",
@@ -602,19 +602,19 @@ export const distributiviteBank: TutorBankItemV4[] = [
           "Méthode : on distribue le facteur devant la parenthèse à chaque terme, puis on réduit si nécessaire.\n\nCalcul : " +
           ("2(x + 7) contient un nombre qui multiplie une parenthèse : il faut distribuer.") +
           "\n\nConclusion : l’expression obtenue est développée ou réduite correctement.",
-    tags: ["distributivite", "reconnaitre", "qcm"],
+    tags: ["litteral_distributivite", "reconnaitre", "qcm"],
   },
   {
     kind: "template",
-    id: "distrib_reconnaitre_tpl_1",
+    id: "litteral_litteral_distributivite_reconnaitre_tpl_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "distributivite",
-    microId: "distrib_reconnaitre",
+    notionId: "litteral_distributivite",
+    microId: "litteral_distributivite_reconnaitre",
     difficulty: 1,
     theme: "neutral",
     hint: "Cherche l’écriture avec une parenthèse précédée d’un coefficient.",
-    tags: ["distributivite", "reconnaitre", "template"],
+    tags: ["litteral_distributivite", "reconnaitre", "template"],
     generate: () => {
       const a = randomInt(2, 8);
       const b = randomInt(1, 9);
@@ -647,15 +647,15 @@ export const distributiviteBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "distrib_reconnaitre_tpl_2",
+    id: "litteral_litteral_distributivite_reconnaitre_tpl_2",
     niveau: "4e",
     matiere: "maths",
-    notionId: "distributivite",
-    microId: "distrib_reconnaitre",
+    notionId: "litteral_distributivite",
+    microId: "litteral_distributivite_reconnaitre",
     difficulty: 2,
     theme: "neutral",
     hint: "Une expression développée ne contient plus de parenthèses à distribuer.",
-    tags: ["distributivite", "reconnaitre", "template"],
+    tags: ["litteral_distributivite", "reconnaitre", "template"],
     generate: () => {
       const a = randomInt(2, 6);
       const b = randomInt(1, 8);
@@ -686,11 +686,11 @@ export const distributiviteBank: TutorBankItemV4[] = [
   },
     {
     kind: "fixed",
-    id: "distrib_reconnaitre_open_1",
+    id: "litteral_litteral_distributivite_reconnaitre_open_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "distributivite",
-    microId: "distrib_reconnaitre",
+    notionId: "litteral_distributivite",
+    microId: "litteral_distributivite_reconnaitre",
     difficulty: 2,
     theme: "neutral",
     text: "Explique pourquoi 3(x + 2) n’est pas encore une expression développée.",
@@ -702,7 +702,7 @@ export const distributiviteBank: TutorBankItemV4[] = [
           "Méthode : on distribue le facteur devant la parenthèse à chaque terme, puis on réduit si nécessaire.\n\nCalcul : " +
           ("3(x + 2) contient encore une parenthèse précédée d’un coefficient. Il faut développer : 3(x + 2) = 3x + 6.") +
           "\n\nConclusion : l’expression obtenue est développée ou réduite correctement.",
-    tags: ["distributivite", "reconnaitre", "open"],
+    tags: ["litteral_distributivite", "reconnaitre", "open"],
   },
 
   // =========================
@@ -710,15 +710,15 @@ export const distributiviteBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "template",
-    id: "distrib_defis_tpl_justification_1",
+    id: "litteral_distributivite_defi_tpl_justification_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "distributivite",
-    microId: "distrib_defis",
+    notionId: "litteral_distributivite",
+    microId: "litteral_distributivite_defi",
     difficulty: 4,
     theme: "neutral",
     hint: "Explique que le coefficient multiplie tous les termes de la parenthèse.",
-    tags: ["distributivite", "defi", "justification", "template"],
+    tags: ["litteral_distributivite", "defi", "justification", "template"],
     generate: () => {
       const a = randomInt(2, 6);
       const b = randomInt(1, 6);
@@ -743,15 +743,15 @@ export const distributiviteBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "distrib_defis_tpl_erreur_1",
+    id: "litteral_distributivite_defi_tpl_erreur_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "distributivite",
-    microId: "distrib_defis",
+    notionId: "litteral_distributivite",
+    microId: "litteral_distributivite_defi",
     difficulty: 4,
     theme: "neutral",
     hint: "Le coefficient devant la parenthèse ne multiplie pas seulement la lettre.",
-    tags: ["distributivite", "defi", "erreur", "template"],
+    tags: ["litteral_distributivite", "defi", "erreur", "template"],
     generate: () => {
       const a = randomInt(2, 6);
       const b = randomInt(1, 6);
@@ -771,15 +771,15 @@ export const distributiviteBank: TutorBankItemV4[] = [
   },
     {
     kind: "template",
-    id: "distrib_defis_open_erreur_1",
+    id: "litteral_distributivite_defi_open_erreur_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "distributivite",
-    microId: "distrib_defis",
+    notionId: "litteral_distributivite",
+    microId: "litteral_distributivite_defi",
     difficulty: 5,
     theme: "neutral",
     hint: "Cherche quel terme n’a pas été multiplié.",
-    tags: ["distributivite", "defi", "erreur", "open", "template"],
+    tags: ["litteral_distributivite", "defi", "erreur", "open", "template"],
     generate: () => {
       const a = randomInt(2, 6);
       const b = randomInt(1, 6);
@@ -798,15 +798,15 @@ export const distributiviteBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "distrib_defis_tpl_maison_1",
+    id: "litteral_distributivite_defi_tpl_maison_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "distributivite",
-    microId: "distrib_defis",
+    notionId: "litteral_distributivite",
+    microId: "litteral_distributivite_defi",
     difficulty: 5,
     theme: "neutral",
     hint: "Développe chaque partie du plan puis additionne.",
-    tags: ["distributivite", "defi", "maison", "template"],
+    tags: ["litteral_distributivite", "defi", "maison", "template"],
     generate: () => {
       const a = randomInt(2, 4);
       const b = randomInt(1, 4);
@@ -829,15 +829,15 @@ export const distributiviteBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "distrib_defis_tpl_nature_1",
+    id: "litteral_distributivite_defi_tpl_nature_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "distributivite",
-    microId: "distrib_defis",
+    notionId: "litteral_distributivite",
+    microId: "litteral_distributivite_defi",
     difficulty: 5,
     theme: "neutral",
     hint: "Chaque groupe contient une même expression.",
-    tags: ["distributivite", "defi", "nature", "template"],
+    tags: ["litteral_distributivite", "defi", "nature", "template"],
     generate: () => {
       const groupes = randomInt(2, 5);
       const arbres = randomInt(1, 5);

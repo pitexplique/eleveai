@@ -49,11 +49,11 @@ export const identitesRemarquablesBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "fixed",
-    id: "ir_lier_distributivite_fixed_1",
+    id: "litteral_identite_lier_litteral_distributivite_fixed_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "identites_remarquables",
-    microId: "ir_lier_distributivite",
+    notionId: "litteral_identite_remarquable",
+    microId: "litteral_identite_lier_distributivite",
     difficulty: 1,
     theme: "neutral",
     text: "Pourquoi peut-on écrire (x + 3)² = (x + 3)(x + 3) ?",
@@ -71,15 +71,15 @@ export const identitesRemarquablesBank: TutorBankItemV4[] = [
           "Méthode : on reconnaît la forme (a + b)², (a - b)² ou (a + b)(a - b).\n\nCalcul : " +
           ("(x + 3)² signifie (x + 3) multiplié par lui-même, donc (x + 3)(x + 3).") +
           "\n\nConclusion : la formule donne directement l’expression correcte.",
-    tags: ["identites_remarquables", "double_distributivite", "sens"],
+    tags: ["litteral_identite_remarquable", "double_distributivite", "sens"],
   },
   {
     kind: "fixed",
-    id: "ir_lier_distributivite_fixed_2",
+    id: "litteral_identite_lier_litteral_distributivite_fixed_2",
     niveau: "4e",
     matiere: "maths",
-    notionId: "identites_remarquables",
-    microId: "ir_lier_distributivite",
+    notionId: "litteral_identite_remarquable",
+    microId: "litteral_identite_lier_distributivite",
     difficulty: 2,
     theme: "neutral",
     text: "Développer par double distributivité : (x + 2)(x + 2)",
@@ -97,19 +97,19 @@ export const identitesRemarquablesBank: TutorBankItemV4[] = [
           "Méthode : on reconnaît la forme (a + b)², (a - b)² ou (a + b)(a - b).\n\nCalcul : " +
           ("(x + 2)(x + 2) = x² + 2x + 2x + 4 = x² + 4x + 4.") +
           "\n\nConclusion : la formule donne directement l’expression correcte.",
-    tags: ["identites_remarquables", "double_distributivite"],
+    tags: ["litteral_identite_remarquable", "double_distributivite"],
   },
   {
     kind: "template",
-    id: "ir_lier_distributivite_tpl_1",
+    id: "litteral_identite_lier_litteral_distributivite_tpl_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "identites_remarquables",
-    microId: "ir_lier_distributivite",
+    notionId: "litteral_identite_remarquable",
+    microId: "litteral_identite_lier_distributivite",
     difficulty: 2,
     theme: "neutral",
     hint: "Remplace le carré par un produit de deux parenthèses identiques.",
-    tags: ["identites_remarquables", "double_distributivite", "template"],
+    tags: ["litteral_identite_remarquable", "double_distributivite", "template"],
     generate: () => {
       const a = randomInt(1, 8);
 
@@ -133,15 +133,15 @@ export const identitesRemarquablesBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "ir_lier_distributivite_tpl_2",
+    id: "litteral_identite_lier_litteral_distributivite_tpl_2",
     niveau: "4e",
     matiere: "maths",
-    notionId: "identites_remarquables",
-    microId: "ir_lier_distributivite",
+    notionId: "litteral_identite_remarquable",
+    microId: "litteral_identite_lier_distributivite",
     difficulty: 3,
     theme: "neutral",
     hint: "Développe avec les 4 produits, puis réduis.",
-    tags: ["identites_remarquables", "double_distributivite", "template"],
+    tags: ["litteral_identite_remarquable", "double_distributivite", "template"],
     generate: () => {
       const a = randomInt(1, 6);
       const mid = 2 * a;
@@ -166,11 +166,11 @@ export const identitesRemarquablesBank: TutorBankItemV4[] = [
   },
   {
     kind: "fixed",
-    id: "ir_lier_distributivite_open_1",
+    id: "litteral_identite_lier_litteral_distributivite_open_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "identites_remarquables",
-    microId: "ir_lier_distributivite",
+    notionId: "litteral_identite_remarquable",
+    microId: "litteral_identite_lier_distributivite",
     difficulty: 3,
     theme: "neutral",
     text: "Explique pourquoi (x + 4)² donne x² + 8x + 16 en passant par la double distributivité.",
@@ -182,7 +182,7 @@ export const identitesRemarquablesBank: TutorBankItemV4[] = [
           "Méthode : on reconnaît la forme (a + b)², (a - b)² ou (a + b)(a - b).\n\nCalcul : " +
           ("(x + 4)² = (x + 4)(x + 4) = x² + 4x + 4x + 16 = x² + 8x + 16.") +
           "\n\nConclusion : la formule donne directement l’expression correcte.",
-    tags: ["identites_remarquables", "open", "justification"],
+    tags: ["litteral_identite_remarquable", "open", "justification"],
   },
 
   // =========================
@@ -190,11 +190,11 @@ export const identitesRemarquablesBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "fixed",
-    id: "ir_reconnaitre_fixed_1",
+    id: "litteral_identite_reconnaitre_fixed_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "identites_remarquables",
-    microId: "ir_reconnaitre",
+    notionId: "litteral_identite_remarquable",
+    microId: "litteral_identite_reconnaitre",
     difficulty: 2,
     theme: "neutral",
     text: "Quelle expression est de la forme (a + b)² ?",
@@ -207,15 +207,15 @@ export const identitesRemarquablesBank: TutorBankItemV4[] = [
           "Méthode : on reconnaît la forme (a + b)², (a - b)² ou (a + b)(a - b).\n\nCalcul : " +
           ("(x + 5)² est bien de la forme (a + b)².") +
           "\n\nConclusion : la formule donne directement l’expression correcte.",
-    tags: ["identites_remarquables", "reconnaitre"],
+    tags: ["litteral_identite_remarquable", "reconnaitre"],
   },
   {
     kind: "fixed",
-    id: "ir_reconnaitre_fixed_2",
+    id: "litteral_identite_reconnaitre_fixed_2",
     niveau: "4e",
     matiere: "maths",
-    notionId: "identites_remarquables",
-    microId: "ir_reconnaitre",
+    notionId: "litteral_identite_remarquable",
+    microId: "litteral_identite_reconnaitre",
     difficulty: 2,
     theme: "neutral",
     text: "Quelle expression correspond à une différence de deux carrés ?",
@@ -228,19 +228,19 @@ export const identitesRemarquablesBank: TutorBankItemV4[] = [
           "Méthode : on reconnaît la forme (a + b)², (a - b)² ou (a + b)(a - b).\n\nCalcul : " +
           ("(x - 3)(x + 3) correspond à la forme (a - b)(a + b), qui donne a² - b².") +
           "\n\nConclusion : la formule donne directement l’expression correcte.",
-    tags: ["identites_remarquables", "difference_carres"],
+    tags: ["litteral_identite_remarquable", "difference_carres"],
   },
   {
     kind: "template",
-    id: "ir_reconnaitre_tpl_1",
+    id: "litteral_identite_reconnaitre_tpl_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "identites_remarquables",
-    microId: "ir_reconnaitre",
+    notionId: "litteral_identite_remarquable",
+    microId: "litteral_identite_reconnaitre",
     difficulty: 2,
     theme: "neutral",
     hint: "Regarde la structure : carré d’une somme, carré d’une différence ou produit somme-différence.",
-    tags: ["identites_remarquables", "reconnaitre", "template"],
+    tags: ["litteral_identite_remarquable", "reconnaitre", "template"],
     generate: () => {
       const a = randomInt(2, 9);
       const mode = randomChoice(["somme", "difference", "carres"]);
@@ -288,11 +288,11 @@ export const identitesRemarquablesBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "fixed",
-    id: "ir_developper_fixed_1",
+    id: "litteral_identite_developper_fixed_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "identites_remarquables",
-    microId: "ir_developper",
+    notionId: "litteral_identite_remarquable",
+    microId: "litteral_identite_developper",
     difficulty: 2,
     theme: "neutral",
     text: "Développer : (x + 3)²",
@@ -310,15 +310,15 @@ export const identitesRemarquablesBank: TutorBankItemV4[] = [
           "Méthode : on reconnaît la forme (a + b)², (a - b)² ou (a + b)(a - b).\n\nCalcul : " +
           ("(x + 3)² = (x + 3)(x + 3) = x² + 6x + 9.") +
           "\n\nConclusion : la formule donne directement l’expression correcte.",
-    tags: ["identites_remarquables", "developper"],
+    tags: ["litteral_identite_remarquable", "developper"],
   },
   {
     kind: "fixed",
-    id: "ir_developper_fixed_2",
+    id: "litteral_identite_developper_fixed_2",
     niveau: "4e",
     matiere: "maths",
-    notionId: "identites_remarquables",
-    microId: "ir_developper",
+    notionId: "litteral_identite_remarquable",
+    microId: "litteral_identite_developper",
     difficulty: 2,
     theme: "neutral",
     text: "Développer : (x - 4)²",
@@ -336,15 +336,15 @@ export const identitesRemarquablesBank: TutorBankItemV4[] = [
           "Méthode : on reconnaît la forme (a + b)², (a - b)² ou (a + b)(a - b).\n\nCalcul : " +
           ("(x - 4)² = (x - 4)(x - 4) = x² - 4x - 4x + 16 = x² - 8x + 16.") +
           "\n\nConclusion : la formule donne directement l’expression correcte.",
-    tags: ["identites_remarquables", "developper", "signe"],
+    tags: ["litteral_identite_remarquable", "developper", "signe"],
   },
   {
     kind: "fixed",
-    id: "ir_developper_fixed_3",
+    id: "litteral_identite_developper_fixed_3",
     niveau: "4e",
     matiere: "maths",
-    notionId: "identites_remarquables",
-    microId: "ir_developper",
+    notionId: "litteral_identite_remarquable",
+    microId: "litteral_identite_developper",
     difficulty: 2,
     theme: "neutral",
     text: "Développer : (x - 5)(x + 5)",
@@ -362,19 +362,19 @@ export const identitesRemarquablesBank: TutorBankItemV4[] = [
           "Méthode : on reconnaît la forme (a + b)², (a - b)² ou (a + b)(a - b).\n\nCalcul : " +
           ("(x - 5)(x + 5) = x² - 25.") +
           "\n\nConclusion : la formule donne directement l’expression correcte.",
-    tags: ["identites_remarquables", "difference_carres"],
+    tags: ["litteral_identite_remarquable", "difference_carres"],
   },
   {
     kind: "template",
-    id: "ir_developper_tpl_somme_1",
+    id: "litteral_identite_developper_tpl_somme_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "identites_remarquables",
-    microId: "ir_developper",
+    notionId: "litteral_identite_remarquable",
+    microId: "litteral_identite_developper",
     difficulty: 3,
     theme: "neutral",
     hint: "Passe par (x + a)(x + a), puis réduis.",
-    tags: ["identites_remarquables", "developper", "somme", "template"],
+    tags: ["litteral_identite_remarquable", "developper", "somme", "template"],
     generate: () => {
       const a = randomInt(1, 9);
       const mid = 2 * a;
@@ -399,15 +399,15 @@ export const identitesRemarquablesBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "ir_developper_tpl_difference_1",
+    id: "litteral_identite_developper_tpl_difference_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "identites_remarquables",
-    microId: "ir_developper",
+    notionId: "litteral_identite_remarquable",
+    microId: "litteral_identite_developper",
     difficulty: 3,
     theme: "neutral",
     hint: "Attention au signe du terme du milieu.",
-    tags: ["identites_remarquables", "developper", "difference", "template"],
+    tags: ["litteral_identite_remarquable", "developper", "difference", "template"],
     generate: () => {
       const a = randomInt(1, 9);
       const mid = 2 * a;
@@ -432,15 +432,15 @@ export const identitesRemarquablesBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "ir_developper_tpl_carres_1",
+    id: "litteral_identite_developper_tpl_carres_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "identites_remarquables",
-    microId: "ir_developper",
+    notionId: "litteral_identite_remarquable",
+    microId: "litteral_identite_developper",
     difficulty: 3,
     theme: "neutral",
     hint: "Les termes en x s’annulent.",
-    tags: ["identites_remarquables", "difference_carres", "template"],
+    tags: ["litteral_identite_remarquable", "difference_carres", "template"],
     generate: () => {
       const a = randomInt(1, 12);
       const last = a * a;
@@ -468,11 +468,11 @@ export const identitesRemarquablesBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "fixed",
-    id: "ir_choisir_fixed_1",
+    id: "litteral_identite_choisir_fixed_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "identites_remarquables",
-    microId: "ir_choisir",
+    notionId: "litteral_identite_remarquable",
+    microId: "litteral_identite_choisir",
     difficulty: 3,
     theme: "neutral",
     text: "Pour développer (x + 7)², quelle méthode est la plus adaptée ?",
@@ -490,19 +490,19 @@ export const identitesRemarquablesBank: TutorBankItemV4[] = [
           "Méthode : on reconnaît la forme (a + b)², (a - b)² ou (a + b)(a - b).\n\nCalcul : " +
           ("La méthode correcte est de passer par (x + 7)(x + 7), puis de développer.") +
           "\n\nConclusion : la formule donne directement l’expression correcte.",
-    tags: ["identites_remarquables", "choisir"],
+    tags: ["litteral_identite_remarquable", "choisir"],
   },
   {
     kind: "template",
-    id: "ir_choisir_tpl_1",
+    id: "litteral_identite_choisir_tpl_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "identites_remarquables",
-    microId: "ir_choisir",
+    notionId: "litteral_identite_remarquable",
+    microId: "litteral_identite_choisir",
     difficulty: 3,
     theme: "neutral",
     hint: "Identifie d’abord la structure de l’expression.",
-    tags: ["identites_remarquables", "choisir", "template"],
+    tags: ["litteral_identite_remarquable", "choisir", "template"],
     generate: () => {
       const a = randomInt(2, 9);
       const mode = randomChoice(["somme", "difference", "carres", "classique"]);
@@ -552,11 +552,11 @@ export const identitesRemarquablesBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "fixed",
-    id: "ir_defis_fixed_1",
+    id: "litteral_identite_defi_fixed_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "identites_remarquables",
-    microId: "ir_defis",
+    notionId: "litteral_identite_remarquable",
+    microId: "litteral_identite_defi",
     difficulty: 4,
     theme: "neutral",
     text: "Un élève écrit : (x + 5)² = x² + 25. A-t-il raison ?",
@@ -569,15 +569,15 @@ export const identitesRemarquablesBank: TutorBankItemV4[] = [
           "Méthode : on reconnaît la forme (a + b)², (a - b)² ou (a + b)(a - b).\n\nCalcul : " +
           ("Non. (x + 5)² = (x + 5)(x + 5) = x² + 10x + 25. Il manque 10x.") +
           "\n\nConclusion : la formule donne directement l’expression correcte.",
-    tags: ["identites_remarquables", "erreur", "defi"],
+    tags: ["litteral_identite_remarquable", "erreur", "defi"],
   },
   {
     kind: "fixed",
-    id: "ir_defis_fixed_2",
+    id: "litteral_identite_defi_fixed_2",
     niveau: "4e",
     matiere: "maths",
-    notionId: "identites_remarquables",
-    microId: "ir_defis",
+    notionId: "litteral_identite_remarquable",
+    microId: "litteral_identite_defi",
     difficulty: 4,
     theme: "neutral",
     text: "Un élève écrit : (x - 4)² = x² - 16. A-t-il raison ?",
@@ -590,19 +590,19 @@ export const identitesRemarquablesBank: TutorBankItemV4[] = [
           "Méthode : on reconnaît la forme (a + b)², (a - b)² ou (a + b)(a - b).\n\nCalcul : " +
           ("Non. (x - 4)² = x² - 8x + 16. En revanche, (x - 4)(x + 4) = x² - 16.") +
           "\n\nConclusion : la formule donne directement l’expression correcte.",
-    tags: ["identites_remarquables", "erreur", "defi"],
+    tags: ["litteral_identite_remarquable", "erreur", "defi"],
   },
   {
     kind: "template",
-    id: "ir_defis_open_erreur_1",
+    id: "litteral_identite_defi_open_erreur_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "identites_remarquables",
-    microId: "ir_defis",
+    notionId: "litteral_identite_remarquable",
+    microId: "litteral_identite_defi",
     difficulty: 5,
     theme: "neutral",
     hint: "Développe en écrivant le carré comme un produit de deux parenthèses.",
-    tags: ["identites_remarquables", "open", "erreur", "template"],
+    tags: ["litteral_identite_remarquable", "open", "erreur", "template"],
     generate: () => {
       const a = randomInt(2, 9);
       const mid = 2 * a;
@@ -622,15 +622,15 @@ export const identitesRemarquablesBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "ir_defis_tpl_comparaison_1",
+    id: "litteral_identite_defi_tpl_comparaison_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "identites_remarquables",
-    microId: "ir_defis",
+    notionId: "litteral_identite_remarquable",
+    microId: "litteral_identite_defi",
     difficulty: 5,
     theme: "neutral",
     hint: "Compare les deux formes : carré d’une différence et produit somme-différence.",
-    tags: ["identites_remarquables", "defi", "comparaison", "template"],
+    tags: ["litteral_identite_remarquable", "defi", "comparaison", "template"],
     generate: () => {
       const a = randomInt(2, 9);
       const square = a * a;

@@ -205,11 +205,11 @@ export const pythagoreBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "fixed",
-    id: "pythagore_carres_racines_fixed_1",
+    id: "pythagore_theoreme_carre_racine_fixed_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "pythagore",
-    microId: "pythagore_carres_racines",
+    notionId: "pythagore_theoreme",
+    microId: "pythagore_carre_racine",
     difficulty: 1,
     theme: "neutral",
     text: "Combien vaut 5² ?",
@@ -222,15 +222,15 @@ export const pythagoreBank: TutorBankItemV4[] = [
           "Méthode : on commence par vérifier que le triangle est rectangle et par repérer l’hypoténuse.\n\nCalcul : " +
           ("5² = 5 × 5 = 25.") +
           "\n\nConclusion : la longueur ou l’affirmation obtenue respecte le triangle rectangle.",
-    tags: ["pythagore", "carre", "qcm"],
+    tags: ["pythagore_theoreme_theoreme", "carre", "qcm"],
   },
   {
     kind: "fixed",
-    id: "pythagore_carres_racines_fixed_2",
+    id: "pythagore_theoreme_carre_racine_fixed_2",
     niveau: "4e",
     matiere: "maths",
-    notionId: "pythagore",
-    microId: "pythagore_carres_racines",
+    notionId: "pythagore_theoreme",
+    microId: "pythagore_carre_racine",
     difficulty: 1,
     theme: "neutral",
     text: "Combien vaut √49 ?",
@@ -243,15 +243,15 @@ export const pythagoreBank: TutorBankItemV4[] = [
           "Méthode : on commence par vérifier que le triangle est rectangle et par repérer l’hypoténuse.\n\nCalcul : " +
           ("Comme 7² = 49, alors √49 = 7.") +
           "\n\nConclusion : la longueur ou l’affirmation obtenue respecte le triangle rectangle.",
-    tags: ["pythagore", "racine", "qcm"],
+    tags: ["pythagore_theoreme_theoreme", "racine", "qcm"],
   },
   {
     kind: "fixed",
-    id: "pythagore_carres_racines_fixed_3",
+    id: "pythagore_theoreme_carre_racine_fixed_3",
     niveau: "4e",
     matiere: "maths",
-    notionId: "pythagore",
-    microId: "pythagore_carres_racines",
+    notionId: "pythagore_theoreme",
+    microId: "pythagore_carre_racine",
     difficulty: 1,
     theme: "neutral",
     text: "Combien vaut 3² ?",
@@ -264,15 +264,15 @@ export const pythagoreBank: TutorBankItemV4[] = [
           "Méthode : on commence par vérifier que le triangle est rectangle et par repérer l’hypoténuse.\n\nCalcul : " +
           ("3² = 3 × 3 = 9.") +
           "\n\nConclusion : la longueur ou l’affirmation obtenue respecte le triangle rectangle.",
-    tags: ["pythagore", "carre", "piege"],
+    tags: ["pythagore_theoreme_theoreme", "carre", "piege"],
   },
   {
     kind: "fixed",
-    id: "pythagore_carres_racines_fixed_4",
+    id: "pythagore_theoreme_carre_racine_fixed_4",
     niveau: "4e",
     matiere: "maths",
-    notionId: "pythagore",
-    microId: "pythagore_carres_racines",
+    notionId: "pythagore_theoreme",
+    microId: "pythagore_carre_racine",
     difficulty: 1,
     theme: "neutral",
     text: "Combien vaut √36 ?",
@@ -285,20 +285,20 @@ export const pythagoreBank: TutorBankItemV4[] = [
           "Méthode : on commence par vérifier que le triangle est rectangle et par repérer l’hypoténuse.\n\nCalcul : " +
           ("Comme 6² = 36, alors √36 = 6.") +
           "\n\nConclusion : la longueur ou l’affirmation obtenue respecte le triangle rectangle.",
-    tags: ["pythagore", "racine"],
+    tags: ["pythagore_theoreme_theoreme", "racine"],
   },
 
  {
   kind: "template",
-  id: "pythagore_carres_racines_tpl_2",
+  id: "pythagore_theoreme_carre_racine_tpl_2",
   niveau: "4e",
   matiere: "maths",
-  notionId: "pythagore",
-  microId: "pythagore_carres_racines",
+  notionId: "pythagore_theoreme",
+  microId: "pythagore_carre_racine",
   difficulty: 1,
   theme: "neutral",
   hint: "Cherche le nombre positif dont le carré donne ce résultat.",
-  tags: ["pythagore", "racine", "template"],
+  tags: ["pythagore_theoreme_theoreme", "racine", "template"],
   generate: () => {
     const { n, square } = randomChoice(knownSquares);
     return {
@@ -315,15 +315,15 @@ export const pythagoreBank: TutorBankItemV4[] = [
 },
   {
     kind: "template",
-    id: "pythagore_carres_racines_tpl_3",
+    id: "pythagore_theoreme_carre_racine_tpl_3",
     niveau: "4e",
     matiere: "maths",
-    notionId: "pythagore",
-    microId: "pythagore_carres_racines",
+    notionId: "pythagore_theoreme",
+    microId: "pythagore_carre_racine",
     difficulty: 2,
     theme: "neutral",
     hint: "Calcule chaque carré, puis additionne.",
-    tags: ["pythagore", "carre", "somme", "template"],
+    tags: ["pythagore_theoreme_theoreme", "carre", "somme", "template"],
     generate: () => {
       const a = randomInt(2, 12);
       const b = randomInt(2, 12);
@@ -343,15 +343,15 @@ export const pythagoreBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "pythagore_carres_racines_tpl_4",
+    id: "pythagore_theoreme_carre_racine_tpl_4",
     niveau: "4e",
     matiere: "maths",
-    notionId: "pythagore",
-    microId: "pythagore_carres_racines",
+    notionId: "pythagore_theoreme",
+    microId: "pythagore_carre_racine",
     difficulty: 2,
     theme: "neutral",
     hint: "Distingue bien carré et racine carrée.",
-    tags: ["pythagore", "carre", "racine", "qcm", "template"],
+    tags: ["pythagore_theoreme_theoreme", "carre", "racine", "qcm", "template"],
     generate: () => {
       const { n, square } = randomChoice(knownSquares);
       const mode = randomChoice(["carre", "racine"]);
@@ -375,11 +375,11 @@ export const pythagoreBank: TutorBankItemV4[] = [
   },
     {
     kind: "fixed",
-    id: "pythagore_carres_racines_open_1",
+    id: "pythagore_theoreme_carre_racine_open_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "pythagore",
-    microId: "pythagore_carres_racines",
+    notionId: "pythagore_theoreme",
+    microId: "pythagore_carre_racine",
     difficulty: 2,
     theme: "neutral",
     text: "Explique pourquoi 3² ne vaut pas 6.",
@@ -391,7 +391,7 @@ export const pythagoreBank: TutorBankItemV4[] = [
           "Méthode : on commence par vérifier que le triangle est rectangle et par repérer l’hypoténuse.\n\nCalcul : " +
           ("3² signifie 3 × 3, donc 3² = 9. Ce n’est pas 3 × 2.") +
           "\n\nConclusion : la longueur ou l’affirmation obtenue respecte le triangle rectangle.",
-    tags: ["pythagore", "carre", "open", "piege"],
+    tags: ["pythagore_theoreme_theoreme", "carre", "open", "piege"],
   },
 
   // =========================
@@ -399,10 +399,10 @@ export const pythagoreBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "fixed",
-    id: "pythagore_reconnaitre_fixed_1",
+    id: "pythagore_theoreme_reconnaitre_fixed_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "pythagore",
+    notionId: "pythagore_theoreme",
     microId: "pythagore_reconnaitre",
     difficulty: 1,
     theme: "neutral",
@@ -422,14 +422,14 @@ export const pythagoreBank: TutorBankItemV4[] = [
           "Méthode : on commence par vérifier que le triangle est rectangle et par repérer l’hypoténuse.\n\nCalcul : " +
           ("Le théorème de Pythagore s’applique dans un triangle rectangle.") +
           "\n\nConclusion : la longueur ou l’affirmation obtenue respecte le triangle rectangle.",
-    tags: ["pythagore", "reconnaitre"],
+    tags: ["pythagore_theoreme_theoreme", "reconnaitre"],
   },
   {
     kind: "fixed",
-    id: "pythagore_reconnaitre_fixed_2",
+    id: "pythagore_theoreme_reconnaitre_fixed_2",
     niveau: "4e",
     matiere: "maths",
-    notionId: "pythagore",
+    notionId: "pythagore_theoreme",
     microId: "pythagore_reconnaitre",
     difficulty: 1,
     theme: "neutral",
@@ -449,14 +449,14 @@ export const pythagoreBank: TutorBankItemV4[] = [
           "Méthode : on commence par vérifier que le triangle est rectangle et par repérer l’hypoténuse.\n\nCalcul : " +
           ("Dans un triangle rectangle, l’hypoténuse est le côté opposé à l’angle droit.") +
           "\n\nConclusion : la longueur ou l’affirmation obtenue respecte le triangle rectangle.",
-    tags: ["pythagore", "hypotenuse"],
+    tags: ["pythagore_theoreme_theoreme", "hypotenuse"],
   },
   {
     kind: "fixed",
-    id: "pythagore_reconnaitre_fixed_3",
+    id: "pythagore_theoreme_reconnaitre_fixed_3",
     niveau: "4e",
     matiere: "maths",
-    notionId: "pythagore",
+    notionId: "pythagore_theoreme",
     microId: "pythagore_reconnaitre",
     difficulty: 2,
     theme: "neutral",
@@ -471,19 +471,19 @@ export const pythagoreBank: TutorBankItemV4[] = [
           "Méthode : on commence par vérifier que le triangle est rectangle et par repérer l’hypoténuse.\n\nCalcul : " +
           ("Non. On parle d’hypoténuse seulement dans un triangle rectangle.") +
           "\n\nConclusion : la longueur ou l’affirmation obtenue respecte le triangle rectangle.",
-    tags: ["pythagore", "hypotenuse", "piege"],
+    tags: ["pythagore_theoreme_theoreme", "hypotenuse", "piege"],
   },
   {
     kind: "template",
-    id: "pythagore_reconnaitre_tpl_1",
+    id: "pythagore_theoreme_reconnaitre_tpl_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "pythagore",
+    notionId: "pythagore_theoreme",
     microId: "pythagore_reconnaitre",
     difficulty: 2,
     theme: "neutral",
     hint: "L’hypoténuse est le côté opposé à l’angle droit.",
-    tags: ["pythagore", "hypotenuse", "canvas", "template"],
+    tags: ["pythagore_theoreme_theoreme", "hypotenuse", "canvas", "template"],
 generate: () => {
   const labels = randomChoice(triangleNames);
   const hyp = hypotenuseSide();
@@ -511,15 +511,15 @@ generate: () => {
   },
   {
     kind: "template",
-    id: "pythagore_reconnaitre_tpl_2",
+    id: "pythagore_theoreme_reconnaitre_tpl_2",
     niveau: "4e",
     matiere: "maths",
-    notionId: "pythagore",
+    notionId: "pythagore_theoreme",
     microId: "pythagore_reconnaitre",
     difficulty: 2,
     theme: "neutral",
     hint: "Cherche si le triangle est codé rectangle.",
-    tags: ["pythagore", "triangle_rectangle", "canvas", "template"],
+    tags: ["pythagore_theoreme_theoreme", "triangle_rectangle", "canvas", "template"],
     generate: () => {
       const isRight = randomChoice([true, false]);
       const labels = randomChoice(triangleNames);
@@ -544,10 +544,10 @@ generate: () => {
   },
     {
     kind: "fixed",
-    id: "pythagore_reconnaitre_open_1",
+    id: "pythagore_theoreme_reconnaitre_open_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "pythagore",
+    notionId: "pythagore_theoreme",
     microId: "pythagore_reconnaitre",
     difficulty: 2,
     theme: "neutral",
@@ -561,7 +561,7 @@ generate: () => {
           "Méthode : on commence par vérifier que le triangle est rectangle et par repérer l’hypoténuse.\n\nCalcul : " +
           ("On utilise directement le théorème de Pythagore seulement dans un triangle rectangle.") +
           "\n\nConclusion : la longueur ou l’affirmation obtenue respecte le triangle rectangle.",
-    tags: ["pythagore", "reconnaitre", "open"],
+    tags: ["pythagore_theoreme_theoreme", "reconnaitre", "open"],
   },
 
   // =========================
@@ -569,10 +569,10 @@ generate: () => {
   // =========================
   {
     kind: "fixed",
-    id: "pythagore_calculer_hypotenuse_fixed_1",
+    id: "pythagore_theoreme_calculer_hypotenuse_fixed_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "pythagore",
+    notionId: "pythagore_theoreme",
     microId: "pythagore_calculer_hypotenuse",
     difficulty: 2,
     theme: "neutral",
@@ -586,14 +586,14 @@ generate: () => {
           "Méthode : on commence par vérifier que le triangle est rectangle et par repérer l’hypoténuse.\n\nCalcul : " +
           ("c² = 3² + 4² = 25, donc c = √25 = 5.") +
           "\n\nConclusion : la longueur ou l’affirmation obtenue respecte le triangle rectangle.",
-    tags: ["pythagore", "hypotenuse", "triplet"],
+    tags: ["pythagore_theoreme_theoreme", "hypotenuse", "triplet"],
   },
   {
     kind: "fixed",
-    id: "pythagore_calculer_hypotenuse_fixed_2",
+    id: "pythagore_theoreme_calculer_hypotenuse_fixed_2",
     niveau: "4e",
     matiere: "maths",
-    notionId: "pythagore",
+    notionId: "pythagore_theoreme",
     microId: "pythagore_calculer_hypotenuse",
     difficulty: 2,
     theme: "neutral",
@@ -607,19 +607,19 @@ generate: () => {
           "Méthode : on commence par vérifier que le triangle est rectangle et par repérer l’hypoténuse.\n\nCalcul : " +
           ("c² = 6² + 8² = 100, donc c = √100 = 10.") +
           "\n\nConclusion : la longueur ou l’affirmation obtenue respecte le triangle rectangle.",
-    tags: ["pythagore", "hypotenuse", "triplet"],
+    tags: ["pythagore_theoreme_theoreme", "hypotenuse", "triplet"],
   },
   {
     kind: "template",
-    id: "pythagore_calculer_hypotenuse_tpl_1",
+    id: "pythagore_theoreme_calculer_hypotenuse_tpl_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "pythagore",
+    notionId: "pythagore_theoreme",
     microId: "pythagore_calculer_hypotenuse",
     difficulty: 2,
     theme: "neutral",
     hint: "Additionne les carrés des deux côtés de l’angle droit.",
-    tags: ["pythagore", "hypotenuse", "triplet", "template"],
+    tags: ["pythagore_theoreme_theoreme", "hypotenuse", "triplet", "template"],
     generate: () => {
       const { a, b, c } = randomChoice(pythagoreanTriples);
       const labels = randomChoice(triangleNames);
@@ -648,15 +648,15 @@ generate: () => {
   },
   {
     kind: "template",
-    id: "pythagore_calculer_hypotenuse_tpl_2",
+    id: "pythagore_theoreme_calculer_hypotenuse_tpl_2",
     niveau: "4e",
     matiere: "maths",
-    notionId: "pythagore",
+    notionId: "pythagore_theoreme",
     microId: "pythagore_calculer_hypotenuse",
     difficulty: 3,
     theme: "neutral",
     hint: "On cherche l’hypoténuse : on additionne les carrés.",
-    tags: ["pythagore", "hypotenuse", "qcm", "template"],
+    tags: ["pythagore_theoreme_theoreme", "hypotenuse", "qcm", "template"],
     generate: () => {
       const { a, b, c } = randomChoice(pythagoreanTriples);
       return {
@@ -676,15 +676,15 @@ generate: () => {
   },
     {
     kind: "template",
-    id: "pythagore_calculer_hypotenuse_open_1",
+    id: "pythagore_theoreme_calculer_hypotenuse_open_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "pythagore",
+    notionId: "pythagore_theoreme",
     microId: "pythagore_calculer_hypotenuse",
     difficulty: 3,
     theme: "neutral",
     hint: "Quand on cherche l’hypoténuse, on additionne les carrés des deux côtés de l’angle droit.",
-    tags: ["pythagore", "hypotenuse", "open", "template"],
+    tags: ["pythagore_theoreme_theoreme", "hypotenuse", "open", "template"],
     generate: () => {
       const { a, b, c } = randomChoice(pythagoreanTriples);
 
@@ -706,10 +706,10 @@ generate: () => {
   // =========================
   {
     kind: "fixed",
-    id: "pythagore_calculer_cote_fixed_1",
+    id: "pythagore_theoreme_calculer_cote_fixed_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "pythagore",
+    notionId: "pythagore_theoreme",
     microId: "pythagore_calculer_cote",
     difficulty: 2,
     theme: "neutral",
@@ -723,14 +723,14 @@ generate: () => {
           "Méthode : on commence par vérifier que le triangle est rectangle et par repérer l’hypoténuse.\n\nCalcul : " +
           ("L’autre côté vérifie b² = 5² - 3² = 25 - 9 = 16, donc b = 4.") +
           "\n\nConclusion : la longueur ou l’affirmation obtenue respecte le triangle rectangle.",
-    tags: ["pythagore", "cote", "triplet"],
+    tags: ["pythagore_theoreme_theoreme", "cote", "triplet"],
   },
   {
     kind: "fixed",
-    id: "pythagore_calculer_cote_fixed_2",
+    id: "pythagore_theoreme_calculer_cote_fixed_2",
     niveau: "4e",
     matiere: "maths",
-    notionId: "pythagore",
+    notionId: "pythagore_theoreme",
     microId: "pythagore_calculer_cote",
     difficulty: 2,
     theme: "neutral",
@@ -744,19 +744,19 @@ generate: () => {
           "Méthode : on commence par vérifier que le triangle est rectangle et par repérer l’hypoténuse.\n\nCalcul : " +
           ("L’autre côté vérifie b² = 10² - 6² = 100 - 36 = 64, donc b = 8.") +
           "\n\nConclusion : la longueur ou l’affirmation obtenue respecte le triangle rectangle.",
-    tags: ["pythagore", "cote", "triplet"],
+    tags: ["pythagore_theoreme_theoreme", "cote", "triplet"],
   },
   {
     kind: "template",
-    id: "pythagore_calculer_cote_tpl_1",
+    id: "pythagore_theoreme_calculer_cote_tpl_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "pythagore",
+    notionId: "pythagore_theoreme",
     microId: "pythagore_calculer_cote",
     difficulty: 3,
     theme: "neutral",
     hint: "On cherche un côté de l’angle droit : on soustrait les carrés.",
-    tags: ["pythagore", "cote", "triplet", "template"],
+    tags: ["pythagore_theoreme_theoreme", "cote", "triplet", "template"],
     generate: () => {
       const triple = randomChoice(pythagoreanTriples);
       const knownLeg = randomChoice([triple.a, triple.b]);
@@ -789,15 +789,15 @@ generate: () => {
   },
   {
     kind: "template",
-    id: "pythagore_calculer_cote_tpl_2",
+    id: "pythagore_theoreme_calculer_cote_tpl_2",
     niveau: "4e",
     matiere: "maths",
-    notionId: "pythagore",
+    notionId: "pythagore_theoreme",
     microId: "pythagore_calculer_cote",
     difficulty: 3,
     theme: "neutral",
     hint: "Attention : pour un côté de l’angle droit, on ne fait pas une addition.",
-    tags: ["pythagore", "cote", "piege", "qcm", "template"],
+    tags: ["pythagore_theoreme_theoreme", "cote", "piege", "qcm", "template"],
     generate: () => {
       const triple = randomChoice(pythagoreanTriples);
       const knownLeg = triple.a;
@@ -820,15 +820,15 @@ generate: () => {
   },
     {
     kind: "template",
-    id: "pythagore_calculer_cote_open_1",
+    id: "pythagore_theoreme_calculer_cote_open_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "pythagore",
+    notionId: "pythagore_theoreme",
     microId: "pythagore_calculer_cote",
     difficulty: 4,
     theme: "neutral",
     hint: "Quand on cherche un côté de l’angle droit, on soustrait les carrés.",
-    tags: ["pythagore", "cote", "open", "template"],
+    tags: ["pythagore_theoreme_theoreme", "cote", "open", "template"],
     generate: () => {
       const triple = randomChoice(pythagoreanTriples);
       const knownLeg = triple.a;
@@ -857,10 +857,10 @@ generate: () => {
   // =========================
   {
     kind: "fixed",
-    id: "pythagore_reciproque_verifier_fixed_1",
+    id: "pythagore_theoreme_reciproque_verifier_fixed_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "pythagore",
+    notionId: "pythagore_theoreme",
     microId: "pythagore_reciproque_verifier",
     difficulty: 2,
     theme: "neutral",
@@ -874,14 +874,14 @@ generate: () => {
           "Méthode : on commence par vérifier que le triangle est rectangle et par repérer l’hypoténuse.\n\nCalcul : " +
           ("3² + 4² = 9 + 16 = 25 et 5² = 25. L’égalité est vraie.") +
           "\n\nConclusion : la longueur ou l’affirmation obtenue respecte le triangle rectangle.",
-    tags: ["pythagore", "reciproque", "verifier"],
+    tags: ["pythagore_theoreme_theoreme", "reciproque", "verifier"],
   },
   {
     kind: "fixed",
-    id: "pythagore_reciproque_verifier_fixed_2",
+    id: "pythagore_theoreme_reciproque_verifier_fixed_2",
     niveau: "4e",
     matiere: "maths",
-    notionId: "pythagore",
+    notionId: "pythagore_theoreme",
     microId: "pythagore_reciproque_verifier",
     difficulty: 2,
     theme: "neutral",
@@ -895,14 +895,14 @@ generate: () => {
           "Méthode : on commence par vérifier que le triangle est rectangle et par repérer l’hypoténuse.\n\nCalcul : " +
           ("5² + 12² = 25 + 144 = 169 et 13² = 169. L’égalité est vraie.") +
           "\n\nConclusion : la longueur ou l’affirmation obtenue respecte le triangle rectangle.",
-    tags: ["pythagore", "reciproque", "verifier"],
+    tags: ["pythagore_theoreme_theoreme", "reciproque", "verifier"],
   },
   {
     kind: "fixed",
-    id: "pythagore_reciproque_verifier_fixed_3",
+    id: "pythagore_theoreme_reciproque_verifier_fixed_3",
     niveau: "4e",
     matiere: "maths",
-    notionId: "pythagore",
+    notionId: "pythagore_theoreme",
     microId: "pythagore_reciproque_verifier",
     difficulty: 2,
     theme: "neutral",
@@ -916,19 +916,19 @@ generate: () => {
           "Méthode : on commence par vérifier que le triangle est rectangle et par repérer l’hypoténuse.\n\nCalcul : " +
           ("4² + 5² = 16 + 25 = 41 alors que 6² = 36. L’égalité est fausse.") +
           "\n\nConclusion : la longueur ou l’affirmation obtenue respecte le triangle rectangle.",
-    tags: ["pythagore", "reciproque", "faux_triplet"],
+    tags: ["pythagore_theoreme_theoreme", "reciproque", "faux_triplet"],
   },
   {
     kind: "template",
-    id: "pythagore_reciproque_verifier_tpl_1",
+    id: "pythagore_theoreme_reciproque_verifier_tpl_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "pythagore",
+    notionId: "pythagore_theoreme",
     microId: "pythagore_reciproque_verifier",
     difficulty: 3,
     theme: "neutral",
     hint: "Compare la somme des carrés des deux plus petits côtés avec le carré du plus grand.",
-    tags: ["pythagore", "reciproque", "template"],
+    tags: ["pythagore_theoreme_theoreme", "reciproque", "template"],
     generate: () => {
       const isTrue = randomChoice([true, false]);
       const triple = isTrue
@@ -955,15 +955,15 @@ generate: () => {
   },
     {
     kind: "template",
-    id: "pythagore_reciproque_verifier_open_1",
+    id: "pythagore_theoreme_reciproque_verifier_open_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "pythagore",
+    notionId: "pythagore_theoreme",
     microId: "pythagore_reciproque_verifier",
     difficulty: 3,
     theme: "neutral",
     hint: "Compare la somme des carrés des deux plus petits côtés avec le carré du plus grand.",
-    tags: ["pythagore", "reciproque", "verifier", "open", "template"],
+    tags: ["pythagore_theoreme_theoreme", "reciproque", "verifier", "open", "template"],
     generate: () => {
       const triple = randomChoice(pythagoreanTriples);
       const left = triple.a * triple.a + triple.b * triple.b;
@@ -992,10 +992,10 @@ generate: () => {
   // =========================
   {
     kind: "fixed",
-    id: "pythagore_reciproque_conclure_fixed_1",
+    id: "pythagore_theoreme_reciproque_conclure_fixed_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "pythagore",
+    notionId: "pythagore_theoreme",
     microId: "pythagore_reciproque_conclure",
     difficulty: 3,
     theme: "neutral",
@@ -1009,14 +1009,14 @@ generate: () => {
           "Méthode : on commence par vérifier que le triangle est rectangle et par repérer l’hypoténuse.\n\nCalcul : " +
           ("Si AB² + AC² = BC², alors BC est l’hypoténuse et le triangle est rectangle en A.") +
           "\n\nConclusion : la longueur ou l’affirmation obtenue respecte le triangle rectangle.",
-    tags: ["pythagore", "reciproque", "conclure"],
+    tags: ["pythagore_theoreme_theoreme", "reciproque", "conclure"],
   },
   {
     kind: "fixed",
-    id: "pythagore_reciproque_conclure_fixed_2",
+    id: "pythagore_theoreme_reciproque_conclure_fixed_2",
     niveau: "4e",
     matiere: "maths",
-    notionId: "pythagore",
+    notionId: "pythagore_theoreme",
     microId: "pythagore_reciproque_conclure",
     difficulty: 3,
     theme: "neutral",
@@ -1030,19 +1030,19 @@ generate: () => {
           "Méthode : on commence par vérifier que le triangle est rectangle et par repérer l’hypoténuse.\n\nCalcul : " +
           ("Si l’égalité de Pythagore n’est pas vraie, alors le triangle n’est pas rectangle.") +
           "\n\nConclusion : la longueur ou l’affirmation obtenue respecte le triangle rectangle.",
-    tags: ["pythagore", "reciproque", "conclure"],
+    tags: ["pythagore_theoreme_theoreme", "reciproque", "conclure"],
   },
   {
     kind: "template",
-    id: "pythagore_reciproque_conclure_tpl_1",
+    id: "pythagore_theoreme_reciproque_conclure_tpl_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "pythagore",
+    notionId: "pythagore_theoreme",
     microId: "pythagore_reciproque_conclure",
     difficulty: 3,
     theme: "neutral",
     hint: "Teste l’égalité avec le plus grand côté.",
-    tags: ["pythagore", "reciproque", "conclure", "template"],
+    tags: ["pythagore_theoreme_theoreme", "reciproque", "conclure", "template"],
     generate: () => {
       const isRight = randomChoice([true, false]);
       const triple = isRight
@@ -1079,15 +1079,15 @@ generate: () => {
   },
   {
     kind: "template",
-    id: "pythagore_reciproque_conclure_tpl_2",
+    id: "pythagore_theoreme_reciproque_conclure_tpl_2",
     niveau: "4e",
     matiere: "maths",
-    notionId: "pythagore",
+    notionId: "pythagore_theoreme",
     microId: "pythagore_reciproque_conclure",
     difficulty: 4,
     theme: "neutral",
     hint: "Le sommet de l’angle droit est opposé au plus grand côté.",
-    tags: ["pythagore", "reciproque", "sommet", "template"],
+    tags: ["pythagore_theoreme_theoreme", "reciproque", "sommet", "template"],
     generate: () => {
       const triple = randomChoice(pythagoreanTriples);
       const labels = randomChoice(triangleNames);
@@ -1115,15 +1115,15 @@ generate: () => {
   },
   {
     kind: "template",
-    id: "pythagore_reciproque_conclure_open_1",
+    id: "pythagore_theoreme_reciproque_conclure_open_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "pythagore",
+    notionId: "pythagore_theoreme",
     microId: "pythagore_reciproque_conclure",
     difficulty: 4,
     theme: "neutral",
     hint: "Le triangle est rectangle si l’égalité de Pythagore est vraie.",
-    tags: ["pythagore", "reciproque", "conclure", "open", "template"],
+    tags: ["pythagore_theoreme_theoreme", "reciproque", "conclure", "open", "template"],
     generate: () => {
       const triple = randomChoice(pythagoreanTriples);
 
@@ -1149,10 +1149,10 @@ generate: () => {
   // =========================
   {
     kind: "fixed",
-    id: "pythagore_rediger_fixed_1",
+    id: "pythagore_theoreme_rediger_fixed_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "pythagore",
+    notionId: "pythagore_theoreme",
     microId: "pythagore_rediger",
     difficulty: 3,
     theme: "neutral",
@@ -1174,14 +1174,14 @@ generate: () => {
           "Méthode : on commence par vérifier que le triangle est rectangle et par repérer l’hypoténuse.\n\nCalcul : " +
           ("Pour utiliser le théorème de Pythagore, on commence par indiquer que le triangle est rectangle.") +
           "\n\nConclusion : la longueur ou l’affirmation obtenue respecte le triangle rectangle.",
-    tags: ["pythagore", "redaction"],
+    tags: ["pythagore_theoreme_theoreme", "redaction"],
   },
   {
     kind: "fixed",
-    id: "pythagore_rediger_fixed_2",
+    id: "pythagore_theoreme_rediger_fixed_2",
     niveau: "4e",
     matiere: "maths",
-    notionId: "pythagore",
+    notionId: "pythagore_theoreme",
     microId: "pythagore_rediger",
     difficulty: 3,
     theme: "neutral",
@@ -1203,19 +1203,19 @@ generate: () => {
           "Méthode : on commence par vérifier que le triangle est rectangle et par repérer l’hypoténuse.\n\nCalcul : " +
           ("Pour la réciproque, on compare la somme des carrés des deux plus petits côtés avec le carré du plus grand côté.") +
           "\n\nConclusion : la longueur ou l’affirmation obtenue respecte le triangle rectangle.",
-    tags: ["pythagore", "reciproque", "redaction"],
+    tags: ["pythagore_theoreme_theoreme", "reciproque", "redaction"],
   },
   {
     kind: "template",
-    id: "pythagore_rediger_tpl_1",
+    id: "pythagore_theoreme_rediger_tpl_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "pythagore",
+    notionId: "pythagore_theoreme",
     microId: "pythagore_rediger",
     difficulty: 4,
     theme: "neutral",
     hint: "On cherche l’hypoténuse, donc on additionne les carrés.",
-    tags: ["pythagore", "redaction", "template"],
+    tags: ["pythagore_theoreme_theoreme", "redaction", "template"],
     generate: () => {
       const { a, b, c } = randomChoice(pythagoreanTriples);
 
@@ -1239,15 +1239,15 @@ generate: () => {
   },
   {
     kind: "template",
-    id: "pythagore_rediger_tpl_2",
+    id: "pythagore_theoreme_rediger_tpl_2",
     niveau: "4e",
     matiere: "maths",
-    notionId: "pythagore",
+    notionId: "pythagore_theoreme",
     microId: "pythagore_rediger",
     difficulty: 4,
     theme: "neutral",
     hint: "Pour la réciproque, on ne suppose pas que le triangle est rectangle : on vérifie.",
-    tags: ["pythagore", "reciproque", "redaction", "template"],
+    tags: ["pythagore_theoreme_theoreme", "reciproque", "redaction", "template"],
     generate: () => {
       const { a, b, c } = randomChoice(pythagoreanTriples);
 
@@ -1271,10 +1271,10 @@ generate: () => {
   },
   {
     kind: "fixed",
-    id: "pythagore_rediger_open_1",
+    id: "pythagore_theoreme_rediger_open_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "pythagore",
+    notionId: "pythagore_theoreme",
     microId: "pythagore_rediger",
     difficulty: 4,
     theme: "neutral",
@@ -1288,18 +1288,18 @@ generate: () => {
           "Méthode : on commence par vérifier que le triangle est rectangle et par repérer l’hypoténuse.\n\nCalcul : " +
           ("Le théorème de Pythagore sert à calculer une longueur dans un triangle déjà rectangle. La réciproque sert à vérifier si un triangle est rectangle à partir de ses trois longueurs.") +
           "\n\nConclusion : la longueur ou l’affirmation obtenue respecte le triangle rectangle.",
-    tags: ["pythagore", "redaction", "reciproque", "open"],
+    tags: ["pythagore_theoreme_theoreme", "redaction", "reciproque", "open"],
   },
   // =========================
   // DÉFIS
   // =========================
   {
     kind: "fixed",
-    id: "pythagore_defis_fixed_1",
+    id: "pythagore_theoreme_defi_fixed_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "pythagore",
-    microId: "pythagore_defis",
+    notionId: "pythagore_theoreme",
+    microId: "pythagore_defi",
     difficulty: 5,
     theme: "neutral",
     text: "On connaît trois longueurs d’un triangle et on veut savoir s’il est rectangle. On utilise plutôt…",
@@ -1318,15 +1318,15 @@ generate: () => {
           "Méthode : on commence par vérifier que le triangle est rectangle et par repérer l’hypoténuse.\n\nCalcul : " +
           ("Quand on connaît trois longueurs et qu’on veut savoir si le triangle est rectangle, on utilise la réciproque.") +
           "\n\nConclusion : la longueur ou l’affirmation obtenue respecte le triangle rectangle.",
-    tags: ["pythagore", "defi", "reciproque"],
+    tags: ["pythagore_theoreme_theoreme", "defi", "reciproque"],
   },
   {
     kind: "fixed",
-    id: "pythagore_defis_fixed_2",
+    id: "pythagore_theoreme_defi_fixed_2",
     niveau: "4e",
     matiere: "maths",
-    notionId: "pythagore",
-    microId: "pythagore_defis",
+    notionId: "pythagore_theoreme",
+    microId: "pythagore_defi",
     difficulty: 5,
     theme: "neutral",
     text: "Un élève dit : « J’ai trois longueurs, donc j’utilise directement le théorème de Pythagore. » A-t-il raison ?",
@@ -1340,19 +1340,19 @@ generate: () => {
           "Méthode : on commence par vérifier que le triangle est rectangle et par repérer l’hypoténuse.\n\nCalcul : " +
           ("Non. Avec trois longueurs, on utilise la réciproque pour vérifier si le triangle est rectangle.") +
           "\n\nConclusion : la longueur ou l’affirmation obtenue respecte le triangle rectangle.",
-    tags: ["pythagore", "defi", "piege"],
+    tags: ["pythagore_theoreme_theoreme", "defi", "piege"],
   },
   {
     kind: "template",
-    id: "pythagore_defis_tpl_1",
+    id: "pythagore_theoreme_defi_tpl_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "pythagore",
-    microId: "pythagore_defis",
+    notionId: "pythagore_theoreme",
+    microId: "pythagore_defi",
     difficulty: 5,
     theme: "reunion",
     hint: "Modélise la situation par un triangle rectangle.",
-    tags: ["pythagore", "defi", "probleme", "reunion", "template"],
+    tags: ["pythagore_theoreme_theoreme", "defi", "probleme", "reunion", "template"],
     generate: () => {
       const { a, b, c } = randomChoice(pythagoreanTriples);
 
@@ -1372,15 +1372,15 @@ generate: () => {
   },
   {
     kind: "template",
-    id: "pythagore_defis_tpl_2",
+    id: "pythagore_theoreme_defi_tpl_2",
     niveau: "4e",
     matiere: "maths",
-    notionId: "pythagore",
-    microId: "pythagore_defis",
+    notionId: "pythagore_theoreme",
+    microId: "pythagore_defi",
     difficulty: 5,
     theme: "neutral",
     hint: "Teste les deux triangles avec la réciproque.",
-    tags: ["pythagore", "defi", "hpi", "template"],
+    tags: ["pythagore_theoreme_theoreme", "defi", "hpi", "template"],
     generate: () => {
       const good = randomChoice(pythagoreanTriples);
       const bad = randomChoice(falseTriples);
@@ -1406,15 +1406,15 @@ generate: () => {
   },
     {
     kind: "template",
-    id: "pythagore_defis_open_1",
+    id: "pythagore_theoreme_defi_open_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "pythagore",
-    microId: "pythagore_defis",
+    notionId: "pythagore_theoreme",
+    microId: "pythagore_defi",
     difficulty: 5,
     theme: "neutral",
     hint: "Commence par repérer si on calcule une longueur ou si on vérifie que le triangle est rectangle.",
-    tags: ["pythagore", "defi", "open", "raisonnement", "template"],
+    tags: ["pythagore_theoreme_theoreme", "defi", "open", "raisonnement", "template"],
     generate: () => {
       const triple = randomChoice(pythagoreanTriples);
 

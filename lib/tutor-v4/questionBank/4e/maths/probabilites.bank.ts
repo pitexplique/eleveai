@@ -124,7 +124,7 @@ export const probabilitesBank: TutorBankItemV4[] = [
     id: "proba_vocabulaire_fixed_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "probabilites",
+    notionId: "proba_experience",
     microId: "proba_vocabulaire",
     difficulty: 1,
     theme: "neutral",
@@ -144,14 +144,14 @@ export const probabilitesBank: TutorBankItemV4[] = [
           "Méthode : on compare les cas favorables à tous les cas possibles dans l’expérience aléatoire.\n\nCalcul : " +
           ("Une expérience aléatoire est une expérience dont on ne peut pas prévoir avec certitude le résultat.") +
           "\n\nConclusion : la probabilité obtenue correspond à l’événement demandé.",
-    tags: ["probabilites", "vocabulaire"],
+    tags: ["proba_experience", "vocabulaire"],
   },
   {
     kind: "fixed",
     id: "proba_vocabulaire_fixed_2",
     niveau: "4e",
     matiere: "maths",
-    notionId: "probabilites",
+    notionId: "proba_experience",
     microId: "proba_vocabulaire",
     difficulty: 1,
     theme: "neutral",
@@ -165,7 +165,7 @@ export const probabilitesBank: TutorBankItemV4[] = [
           "Méthode : on compare les cas favorables à tous les cas possibles dans l’expérience aléatoire.\n\nCalcul : " +
           ("Obtenir 4 est un résultat possible du lancer de dé : c’est une issue.") +
           "\n\nConclusion : la probabilité obtenue correspond à l’événement demandé.",
-    tags: ["probabilites", "issue"],
+    tags: ["proba_experience", "issue"],
     canvas: deCanvas([4]),
   },
     {
@@ -173,7 +173,7 @@ export const probabilitesBank: TutorBankItemV4[] = [
     id: "proba_vocabulaire_open_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "probabilites",
+    notionId: "proba_experience",
     microId: "proba_vocabulaire",
     difficulty: 2,
     theme: "neutral",
@@ -187,7 +187,7 @@ export const probabilitesBank: TutorBankItemV4[] = [
           "Méthode : on compare les cas favorables à tous les cas possibles dans l’expérience aléatoire.\n\nCalcul : " +
           ("Une expérience aléatoire est une expérience dont on ne connaît pas le résultat à l’avance.") +
           "\n\nConclusion : la probabilité obtenue correspond à l’événement demandé.",
-    tags: ["probabilites", "vocabulaire", "open"],
+    tags: ["proba_experience", "vocabulaire", "open"],
   },
 
   // =========================
@@ -195,11 +195,11 @@ export const probabilitesBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "fixed",
-    id: "proba_issues_fixed_1",
+    id: "proba_issue_fixed_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "probabilites",
-    microId: "proba_issues",
+    notionId: "proba_experience",
+    microId: "proba_issue",
     difficulty: 1,
     theme: "neutral",
     text: "Combien y a-t-il d’issues possibles lorsqu’on lance un dé équilibré à 6 faces ?",
@@ -212,20 +212,20 @@ export const probabilitesBank: TutorBankItemV4[] = [
           "Méthode : on compare les cas favorables à tous les cas possibles dans l’expérience aléatoire.\n\nCalcul : " +
           ("Les issues possibles sont 1, 2, 3, 4, 5 et 6 : il y en a 6.") +
           "\n\nConclusion : la probabilité obtenue correspond à l’événement demandé.",
-    tags: ["probabilites", "issues", "de"],
+    tags: ["proba_experience", "issue", "de"],
     canvas: deCanvas(),
   },
   {
     kind: "template",
-    id: "proba_issues_tpl_1",
+    id: "proba_issue_tpl_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "probabilites",
-    microId: "proba_issues",
+    notionId: "proba_experience",
+    microId: "proba_issue",
     difficulty: 1,
     theme: "neutral",
     hint: "Compte tous les résultats possibles.",
-    tags: ["probabilites", "issues", "billes", "template"],
+    tags: ["proba_experience", "issue", "billes", "template"],
     generate: () => {
       const rouges = randomInt(2, 5);
       const bleues = randomInt(1, 4);
@@ -251,11 +251,11 @@ export const probabilitesBank: TutorBankItemV4[] = [
   },
     {
     kind: "fixed",
-    id: "proba_issues_open_1",
+    id: "proba_issue_open_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "probabilites",
-    microId: "proba_issues",
+    notionId: "proba_experience",
+    microId: "proba_issue",
     difficulty: 2,
     theme: "neutral",
     text: "On lance un dé équilibré. Explique pourquoi il y a 6 issues possibles.",
@@ -268,7 +268,7 @@ export const probabilitesBank: TutorBankItemV4[] = [
           "Méthode : on compare les cas favorables à tous les cas possibles dans l’expérience aléatoire.\n\nCalcul : " +
           ("Les issues possibles sont 1, 2, 3, 4, 5 et 6. Il y a donc 6 issues.") +
           "\n\nConclusion : la probabilité obtenue correspond à l’événement demandé.",
-    tags: ["probabilites", "issues", "open"],
+    tags: ["proba_experience", "issue", "open"],
     canvas: deCanvas(),
   },
 
@@ -277,11 +277,11 @@ export const probabilitesBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "fixed",
-    id: "proba_evenements_fixed_1",
+    id: "proba_evenement_fixed_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "probabilites",
-    microId: "proba_evenements",
+    notionId: "proba_experience",
+    microId: "proba_evenement",
     difficulty: 1,
     theme: "neutral",
     text: "Lorsqu’on lance un dé à 6 faces, l’événement « obtenir un nombre inférieur à 7 » est...",
@@ -294,16 +294,16 @@ export const probabilitesBank: TutorBankItemV4[] = [
           "Méthode : on compare les cas favorables à tous les cas possibles dans l’expérience aléatoire.\n\nCalcul : " +
           ("Les issues 1, 2, 3, 4, 5 et 6 sont toutes inférieures à 7 : l’événement est certain.") +
           "\n\nConclusion : la probabilité obtenue correspond à l’événement demandé.",
-    tags: ["probabilites", "certain"],
+    tags: ["proba_experience", "certain"],
     canvas: deCanvas([1, 2, 3, 4, 5, 6]),
   },
   {
     kind: "fixed",
-    id: "proba_evenements_fixed_2",
+    id: "proba_evenement_fixed_2",
     niveau: "4e",
     matiere: "maths",
-    notionId: "probabilites",
-    microId: "proba_evenements",
+    notionId: "proba_experience",
+    microId: "proba_evenement",
     difficulty: 1,
     theme: "neutral",
     text: "Lorsqu’on lance un dé à 6 faces, l’événement « obtenir 8 » est...",
@@ -316,20 +316,20 @@ export const probabilitesBank: TutorBankItemV4[] = [
           "Méthode : on compare les cas favorables à tous les cas possibles dans l’expérience aléatoire.\n\nCalcul : " +
           ("La face 8 n’existe pas sur un dé à 6 faces : l’événement est impossible.") +
           "\n\nConclusion : la probabilité obtenue correspond à l’événement demandé.",
-    tags: ["probabilites", "impossible"],
+    tags: ["proba_experience", "impossible"],
     canvas: deCanvas(),
   },
   {
     kind: "template",
-    id: "proba_evenements_tpl_1",
+    id: "proba_evenement_tpl_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "probabilites",
-    microId: "proba_evenements",
+    notionId: "proba_experience",
+    microId: "proba_evenement",
     difficulty: 2,
     theme: "neutral",
     hint: "Un événement contraire contient toutes les issues qui ne réalisent pas l’événement.",
-    tags: ["probabilites", "contraire", "template"],
+    tags: ["proba_experience", "contraire", "template"],
     generate: () => {
       const mode = randomChoice(["pair", "impair"]);
       const favorables = mode === "pair" ? [2, 4, 6] : [1, 3, 5];
@@ -355,11 +355,11 @@ export const probabilitesBank: TutorBankItemV4[] = [
   },
     {
     kind: "fixed",
-    id: "proba_evenements_open_1",
+    id: "proba_evenement_open_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "probabilites",
-    microId: "proba_evenements",
+    notionId: "proba_experience",
+    microId: "proba_evenement",
     difficulty: 2,
     theme: "neutral",
     text: "Explique pourquoi l’événement « obtenir 8 » est impossible lorsqu’on lance un dé à 6 faces.",
@@ -372,7 +372,7 @@ export const probabilitesBank: TutorBankItemV4[] = [
           "Méthode : on compare les cas favorables à tous les cas possibles dans l’expérience aléatoire.\n\nCalcul : " +
           ("Un dé à 6 faces possède les faces 1, 2, 3, 4, 5 et 6. Il n’a pas de face 8, donc l’événement est impossible.") +
           "\n\nConclusion : la probabilité obtenue correspond à l’événement demandé.",
-    tags: ["probabilites", "evenement", "impossible", "open"],
+    tags: ["proba_experience", "evenement", "impossible", "open"],
     canvas: deCanvas(),
   },
 
@@ -384,7 +384,7 @@ export const probabilitesBank: TutorBankItemV4[] = [
     id: "proba_equiprobabilite_fixed_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "probabilites",
+    notionId: "proba_experience",
     microId: "proba_equiprobabilite",
     difficulty: 2,
     theme: "neutral",
@@ -398,7 +398,7 @@ export const probabilitesBank: TutorBankItemV4[] = [
           "Méthode : on compare les cas favorables à tous les cas possibles dans l’expérience aléatoire.\n\nCalcul : " +
           ("Oui. Chaque face a la même probabilité d’apparaître : la situation est équiprobable.") +
           "\n\nConclusion : la probabilité obtenue correspond à l’événement demandé.",
-    tags: ["probabilites", "equiprobabilite", "de"],
+    tags: ["proba_experience", "equiprobabilite", "de"],
     canvas: deCanvas(),
   },
   {
@@ -406,12 +406,12 @@ export const probabilitesBank: TutorBankItemV4[] = [
     id: "proba_equiprobabilite_tpl_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "probabilites",
+    notionId: "proba_experience",
     microId: "proba_equiprobabilite",
     difficulty: 2,
     theme: "neutral",
     hint: "Regarde si toutes les zones ont le même poids.",
-    tags: ["probabilites", "roue", "equiprobabilite", "template"],
+    tags: ["proba_experience", "roue", "equiprobabilite", "template"],
     generate: () => {
       const equal = randomChoice([true, false]);
 
@@ -453,7 +453,7 @@ export const probabilitesBank: TutorBankItemV4[] = [
     id: "proba_calculer_fraction_fixed_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "probabilites",
+    notionId: "proba_experience",
     microId: "proba_calculer_fraction",
     difficulty: 2,
     theme: "neutral",
@@ -467,7 +467,7 @@ export const probabilitesBank: TutorBankItemV4[] = [
           "Méthode : on compare les cas favorables à tous les cas possibles dans l’expérience aléatoire.\n\nCalcul : " +
           ("Il y a 3 issues favorables sur 6 issues possibles, donc la probabilité est 3/6.") +
           "\n\nConclusion : la probabilité obtenue correspond à l’événement demandé.",
-    tags: ["probabilites", "fraction", "de"],
+    tags: ["proba_experience", "fraction", "de"],
     canvas: deCanvas([2, 4, 6]),
   },
   {
@@ -475,12 +475,12 @@ export const probabilitesBank: TutorBankItemV4[] = [
     id: "proba_calculer_fraction_tpl_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "probabilites",
+    notionId: "proba_experience",
     microId: "proba_calculer_fraction",
     difficulty: 2,
     theme: "neutral",
     hint: "Probabilité = nombre de cas favorables / nombre de cas possibles.",
-    tags: ["probabilites", "billes", "fraction", "template"],
+    tags: ["proba_experience", "billes", "fraction", "template"],
     generate: () => {
       const rouges = randomInt(1, 5);
       const bleues = randomInt(1, 5);
@@ -515,12 +515,12 @@ export const probabilitesBank: TutorBankItemV4[] = [
     id: "proba_calculer_fraction_tpl_2",
     niveau: "4e",
     matiere: "maths",
-    notionId: "probabilites",
+    notionId: "proba_experience",
     microId: "proba_calculer_fraction",
     difficulty: 3,
     theme: "neutral",
     hint: "Additionne les poids des secteurs favorables, puis divise par le poids total.",
-    tags: ["probabilites", "roue", "fraction", "template"],
+    tags: ["proba_experience", "roue", "fraction", "template"],
     generate: () => {
       const poidsRouge = randomChoice([1, 2, 3]);
       const poidsBleu = randomChoice([1, 2]);
@@ -555,7 +555,7 @@ export const probabilitesBank: TutorBankItemV4[] = [
     id: "proba_calculer_fraction_open_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "probabilites",
+    notionId: "proba_experience",
     microId: "proba_calculer_fraction",
     difficulty: 3,
     theme: "neutral",
@@ -569,7 +569,7 @@ export const probabilitesBank: TutorBankItemV4[] = [
           "Méthode : on compare les cas favorables à tous les cas possibles dans l’expérience aléatoire.\n\nCalcul : " +
           ("Les nombres pairs sont 2, 4 et 6 : il y a 3 issues favorables sur 6 issues possibles. La probabilité est donc 3/6.") +
           "\n\nConclusion : la probabilité obtenue correspond à l’événement demandé.",
-    tags: ["probabilites", "fraction", "de", "open"],
+    tags: ["proba_experience", "fraction", "de", "open"],
     canvas: deCanvas([2, 4, 6]),
   },
 
@@ -581,7 +581,7 @@ export const probabilitesBank: TutorBankItemV4[] = [
     id: "proba_convertir_fixed_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "probabilites",
+    notionId: "proba_experience",
     microId: "proba_convertir",
     difficulty: 2,
     theme: "neutral",
@@ -595,19 +595,19 @@ export const probabilitesBank: TutorBankItemV4[] = [
           "Méthode : on compare les cas favorables à tous les cas possibles dans l’expérience aléatoire.\n\nCalcul : " +
           ("1/2 = 0,5 = 50 %.") +
           "\n\nConclusion : la probabilité obtenue correspond à l’événement demandé.",
-    tags: ["probabilites", "pourcentage"],
+    tags: ["proba_experience", "pourcentage"],
   },
   {
     kind: "template",
     id: "proba_convertir_tpl_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "probabilites",
+    notionId: "proba_experience",
     microId: "proba_convertir",
     difficulty: 3,
     theme: "neutral",
     hint: "Pour passer d’un décimal à un pourcentage, on multiplie par 100.",
-    tags: ["probabilites", "pourcentage", "template"],
+    tags: ["proba_experience", "pourcentage", "template"],
     generate: () => {
       const values = [
         { f: "1/2", p: "50 %" },
@@ -636,7 +636,7 @@ export const probabilitesBank: TutorBankItemV4[] = [
     id: "proba_convertir_open_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "probabilites",
+    notionId: "proba_experience",
     microId: "proba_convertir",
     difficulty: 3,
     theme: "neutral",
@@ -650,7 +650,7 @@ export const probabilitesBank: TutorBankItemV4[] = [
           "Méthode : on compare les cas favorables à tous les cas possibles dans l’expérience aléatoire.\n\nCalcul : " +
           ("1/2 = 0,5. Pour passer en pourcentage, on multiplie par 100 : 0,5 = 50 %.") +
           "\n\nConclusion : la probabilité obtenue correspond à l’événement demandé.",
-    tags: ["probabilites", "conversion", "pourcentage", "open"],
+    tags: ["proba_experience", "conversion", "pourcentage", "open"],
   },
 
   // =========================
@@ -661,7 +661,7 @@ export const probabilitesBank: TutorBankItemV4[] = [
     id: "proba_comparer_fixed_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "probabilites",
+    notionId: "proba_experience",
     microId: "proba_comparer",
     difficulty: 2,
     theme: "neutral",
@@ -675,19 +675,19 @@ export const probabilitesBank: TutorBankItemV4[] = [
           "Méthode : on compare les cas favorables à tous les cas possibles dans l’expérience aléatoire.\n\nCalcul : " +
           ("1/2 est plus grand que 1/4, 1/6 et 1/10.") +
           "\n\nConclusion : la probabilité obtenue correspond à l’événement demandé.",
-    tags: ["probabilites", "comparer", "fractions"],
+    tags: ["proba_experience", "comparer", "fraction_nombre"],
   },
   {
     kind: "template",
     id: "proba_comparer_tpl_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "probabilites",
+    notionId: "proba_experience",
     microId: "proba_comparer",
     difficulty: 3,
     theme: "neutral",
     hint: "Compare les fractions ou transforme-les en pourcentages.",
-    tags: ["probabilites", "comparer", "tableau", "template"],
+    tags: ["proba_experience", "comparer", "tableau", "template"],
     generate: () => {
       const lignes = [
         ["Rouge", "3", "6", "3/6"],
@@ -714,7 +714,7 @@ export const probabilitesBank: TutorBankItemV4[] = [
     id: "proba_comparer_open_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "probabilites",
+    notionId: "proba_experience",
     microId: "proba_comparer",
     difficulty: 3,
     theme: "neutral",
@@ -728,7 +728,7 @@ export const probabilitesBank: TutorBankItemV4[] = [
           "Méthode : on compare les cas favorables à tous les cas possibles dans l’expérience aléatoire.\n\nCalcul : " +
           ("1/2 représente une moitié, alors que 1/4 représente un quart. Une moitié est plus grande qu’un quart.") +
           "\n\nConclusion : la probabilité obtenue correspond à l’événement demandé.",
-    tags: ["probabilites", "comparer", "fractions", "open"],
+    tags: ["proba_experience", "comparer", "fraction_nombre", "open"],
   },
 
   // =========================
@@ -736,11 +736,11 @@ export const probabilitesBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "fixed",
-    id: "proba_defis_fixed_1",
+    id: "proba_defi_fixed_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "probabilites",
-    microId: "proba_defis",
+    notionId: "proba_experience",
+    microId: "proba_defi",
     difficulty: 5,
     theme: "neutral",
     text: "Une probabilité peut-elle être supérieure à 1 ?",
@@ -753,19 +753,19 @@ export const probabilitesBank: TutorBankItemV4[] = [
           "Méthode : on compare les cas favorables à tous les cas possibles dans l’expérience aléatoire.\n\nCalcul : " +
           ("Non. Une probabilité est toujours comprise entre 0 et 1.") +
           "\n\nConclusion : la probabilité obtenue correspond à l’événement demandé.",
-    tags: ["probabilites", "defi", "bornes"],
+    tags: ["proba_experience", "defi", "bornes"],
   },
   {
     kind: "template",
-    id: "proba_defis_tpl_1",
+    id: "proba_defi_tpl_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "probabilites",
-    microId: "proba_defis",
+    notionId: "proba_experience",
+    microId: "proba_defi",
     difficulty: 5,
     theme: "reunion",
     hint: "Compte les cas favorables et les cas possibles.",
-    tags: ["probabilites", "reunion", "defi", "template"],
+    tags: ["proba_experience", "reunion", "defi", "template"],
     generate: () => {
       const mangue = randomInt(2, 5);
       const ananas = randomInt(1, 4);
@@ -799,15 +799,15 @@ export const probabilitesBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "proba_defis_tpl_2",
+    id: "proba_defi_tpl_2",
     niveau: "4e",
     matiere: "maths",
-    notionId: "probabilites",
-    microId: "proba_defis",
+    notionId: "proba_experience",
+    microId: "proba_defi",
     difficulty: 5,
     theme: "neutral",
     hint: "Attention : une roue non équilibrée ne donne pas forcément les mêmes probabilités.",
-    tags: ["probabilites", "roue", "defi", "piege"],
+    tags: ["proba_experience", "roue", "defi", "piege"],
     generate: () => {
       return {
         text: "Sur cette roue, quelle issue est la plus probable ?",
@@ -829,15 +829,15 @@ export const probabilitesBank: TutorBankItemV4[] = [
   },
     {
     kind: "template",
-    id: "proba_defis_open_1",
+    id: "proba_defi_open_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "probabilites",
-    microId: "proba_defis",
+    notionId: "proba_experience",
+    microId: "proba_defi",
     difficulty: 5,
     theme: "neutral",
     hint: "Compare les poids des secteurs.",
-    tags: ["probabilites", "roue", "defi", "open", "template"],
+    tags: ["proba_experience", "roue", "defi", "open", "template"],
     generate: () => {
       return {
         text: "Explique pourquoi Rouge est l’issue la plus probable sur cette roue.",

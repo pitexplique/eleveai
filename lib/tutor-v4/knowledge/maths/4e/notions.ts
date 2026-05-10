@@ -18,27 +18,27 @@ export const notions: NotionSource[] = [
     // ALGO
     // =========================
       {
-    id: "algorithmique",
+    id: "algo_programmation",
     label: "Algorithmique et programmation",
     boId: "BO4I1",
-    prerequis: ["expressions_litterales", "proportionnalite", "equations"],
+    prerequis: ["litteral_expression", "prop_proportionnalite", "equation_resolution"],
     levels: [1, 2, 3],
   },
   // =========================
   // NOMBRES
   // =========================
   {
-    id: "operations_relatifs",
+    id: "relatif_operation",
     label: "Opérations sur les nombres relatifs",
     boId: "BO4N1",
     prerequis: [],
     levels: [1, 2, 3],
   },
   {
-    id: "fractions",
+    id: "fraction_nombre",
     label: "Fractions et nombres rationnels",
     boId: "BO4N2",
-    prerequis: ["operations_relatifs"],
+    prerequis: ["relatif_operation"],
     levels: [1, 2, 3],
   },
 
@@ -46,10 +46,10 @@ export const notions: NotionSource[] = [
   // PROPORTIONNALITÉ
   // =========================
   {
-    id: "proportionnalite",
+    id: "prop_proportionnalite",
     label: "Proportionnalité",
     boId: "BO4P1",
-    prerequis: ["fractions"],
+    prerequis: ["fraction_nombre"],
     levels: [1, 2, 3],
   },
 
@@ -57,38 +57,38 @@ export const notions: NotionSource[] = [
   // ALGÈBRE
   // =========================
   {
-    id: "expressions_litterales",
+    id: "litteral_expression",
     label: "Expressions littérales",
     boId: "BO4A1",
-    prerequis: ["operations_relatifs"],
+    prerequis: ["relatif_operation"],
     levels: [1, 2, 3],
   },
   {
-    id: "distributivite",
+    id: "litteral_distributivite",
     label: "Distributivité",
     boId: "BO4A1",
-    prerequis: ["expressions_litterales"],
+    prerequis: ["litteral_expression"],
     levels: [1, 2, 3],
   },
   {
-    id: "identites_remarquables",
+    id: "litteral_identite_remarquable",
     label: "Identités remarquables",
     boId: "BO4A1",
-    prerequis: ["distributivite"],
+    prerequis: ["litteral_distributivite"],
     levels: [1, 2, 3],
   },
   {
-    id: "factorisation",
+    id: "litteral_factorisation",
     label: "Factorisation",
     boId: "BO4A1",
-    prerequis: ["distributivite", "identites_remarquables"],
+    prerequis: ["litteral_distributivite", "litteral_identite_remarquable"],
     levels: [1, 2, 3],
   },
   {
-    id: "equations",
+    id: "equation_resolution",
     label: "Équations",
     boId: "BO4A1",
-    prerequis: ["expressions_litterales", "distributivite"],
+    prerequis: ["litteral_expression", "litteral_distributivite"],
     levels: [1, 2, 3],
   },
 
@@ -97,28 +97,28 @@ export const notions: NotionSource[] = [
   // =========================
 
   {
-    id: "pythagore",
+    id: "pythagore_theoreme",
     label: "Pythagore et sa réciproque",
     boId: "BO4G1",
     prerequis: [],
     levels: [1, 2, 3],
   },
   {
-    id: "thales",
+    id: "thales_theoreme",
     label: "Thalès et sa réciproque",
     boId: "BO4G1",
-    prerequis: ["proportionnalite"],
+    prerequis: ["prop_proportionnalite"],
     levels: [1, 2, 3],
   },
   {
-    id: "parallelogrammes",
+    id: "quadrilatere_parallelogramme",
     label: "Parallélogrammes",
     boId: "BO4G1",
     prerequis: [],
     levels: [1, 2, 3],
   },
   {
-    id: "transformations",
+    id: "sym_transformation",
     label: "Transformations (symétrie, translation, rotation)",
     boId: "BO4G1",
     prerequis: [],
@@ -129,17 +129,17 @@ export const notions: NotionSource[] = [
   // GRANDEURS ET MESURES
   // =========================
   {
-    id: "perimetres",
+    id: "aire_perimetre",
     label: "Périmètres",
     boId: "BO4M1",
     prerequis: [],
     levels: [1, 2, 3],
   },
   {
-    id: "aires",
+    id: "aire_surface",
     label: "Aires",
     boId: "BO4M1",
-    prerequis: ["perimetres"],
+    prerequis: ["aire_perimetre"],
     levels: [1, 2, 3],
   },
 
@@ -147,10 +147,10 @@ export const notions: NotionSource[] = [
   // GÉOMÉTRIE DANS L’ESPACE
   // =========================
   {
-    id: "volumes",
+    id: "volume_solide",
     label: "Volumes",
     boId: "BO4G2",
-    prerequis: ["aires"],
+    prerequis: ["aire_surface"],
     levels: [1, 2],
   },
 
@@ -158,17 +158,17 @@ export const notions: NotionSource[] = [
   // DONNÉES
   // =========================
   {
-    id: "statistiques",
+    id: "stat_statistique",
     label: "Statistiques",
     boId: "BO4D1",
     prerequis: [],
     levels: [1, 2],
   },
   {
-    id: "probabilites",
+    id: "proba_experience",
     label: "Probabilités",
     boId: "BO4D2",
-    prerequis: ["fractions", "statistiques"],
+    prerequis: ["fraction_nombre", "stat_statistique"],
     levels: [1, 2],
   },
 
