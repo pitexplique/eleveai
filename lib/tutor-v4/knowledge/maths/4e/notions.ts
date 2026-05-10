@@ -21,7 +21,7 @@ export const notions: NotionSource[] = [
     id: "algorithmique",
     label: "Algorithmique et programmation",
     boId: "BO4I1",
-    prerequis: ["calcul_litteral", "proportionnalite", "equations"],
+    prerequis: ["expressions_litterales", "proportionnalite", "equations"],
     levels: [1, 2, 3],
   },
   // =========================

@@ -325,17 +325,17 @@ const supportLinks: Record<string, string[]> = {
     "proba_convertir",
     "proba_comparer",
   ],
-    // =========================
+  // =========================
   // ALGORITHMIQUE
   // =========================
   algo_instructions_conditionnelles: [
     "algo_conditions",
-    "relatif_comparer",
+    "relatif_calcul",
   ],
 
   algo_variable: [
     "algo_instructions_conditionnelles",
-    "litteral_expression",
+    "expr_litterale_substituer",
     "relatif_calcul",
   ],
 
@@ -349,7 +349,7 @@ const supportLinks: Record<string, string[]> = {
   algo_modifier_programme: [
     "algo_programme_objectif",
     "algo_variable",
-    "litteral_reduire",
+    "expr_litterale_reduire",
   ],
 
   algo_defis: [

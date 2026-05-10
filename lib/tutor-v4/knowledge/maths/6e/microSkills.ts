@@ -264,7 +264,7 @@ export const microSkills: MicroSkillSource[] = [
     prerequis: [],
   },
   {
-    id: "mental_subtraction",
+    id: "mental_soustraction",
     label: "Soustraction mentale",
     notionId: "calcul_mental",
     prerequis: ["mental_addition"],
@@ -287,7 +287,7 @@ export const microSkills: MicroSkillSource[] = [
     notionId: "calcul_mental",
     prerequis: [
       "mental_addition",
-      "mental_subtraction",
+      "mental_soustraction",
       "mental_multiplication",
       "mental_division",
     ],
@@ -349,7 +349,7 @@ export const microSkills: MicroSkillSource[] = [
     prerequis: ["longueur_mesurer"],
   },
   {
-    id: "perim_square",
+    id: "perim_carre",
     label: "Calculer le périmètre d’un carré",
     notionId: "perimetres",
     prerequis: ["perim_comprendre"],
@@ -364,7 +364,7 @@ export const microSkills: MicroSkillSource[] = [
     id: "perim_figure",
     label: "Calculer le périmètre d’une figure",
     notionId: "perimetres",
-    prerequis: ["perim_square", "perim_rectangle"],
+    prerequis: ["perim_carre", "perim_rectangle"],
   },
   {
     id: "perim_probleme",
@@ -383,74 +383,74 @@ export const microSkills: MicroSkillSource[] = [
      AIRES
   ========================= */
   {
-    id: "area_comprendre",
+    id: "aire_comprendre",
     label: "Comprendre l’aire",
     notionId: "aires",
     prerequis: ["perim_comprendre"],
   },
   {
-    id: "area_compter",
+    id: "aire_compter",
     label: "Calculer une aire par comptage",
     notionId: "aires",
-    prerequis: ["area_comprendre"],
+    prerequis: ["aire_comprendre"],
   },
   {
-    id: "area_rectangle",
+    id: "aire_rectangle",
     label: "Calculer l’aire d’un rectangle",
     notionId: "aires",
-    prerequis: ["area_compter", "perim_rectangle"],
+    prerequis: ["aire_compter", "perim_rectangle"],
   },
   {
-    id: "area_square",
+    id: "aire_square",
     label: "Calculer l’aire d’un carré",
     notionId: "aires",
-    prerequis: ["area_compter", "perim_square"],
+    prerequis: ["aire_compter", "perim_carre"],
   },
   {
-    id: "area_comparer",
+    id: "aire_comparer",
     label: "Comparer des aires",
     notionId: "aires",
-    prerequis: ["area_rectangle", "area_square"],
+    prerequis: ["aire_rectangle", "aire_square"],
   },
   {
-    id: "area_decomposer",
+    id: "aire_decomposer",
     label: "Décomposer une figure pour calculer son aire",
     notionId: "aires",
-    prerequis: ["area_rectangle", "area_square", "area_comparer"],
+    prerequis: ["aire_rectangle", "aire_square", "aire_comparer"],
   },
   {
-    id: "area_problemes",
+    id: "aire_problemes",
     label: "Résoudre des problèmes d’aires",
     notionId: "aires",
     prerequis: [
-      "area_rectangle",
-      "area_square",
-      "area_decomposer",
+      "aire_rectangle",
+      "aire_square",
+      "aire_decomposer",
       "decimal_multiplier",
       "prop_reconnaitre",
     ],
   },
   {
-    id: "area_defis",
+    id: "aire_defis",
     label: "Défis sur les aires",
     notionId: "aires",
-    prerequis: ["area_comparer", "area_decomposer", "area_problemes"],
+    prerequis: ["aire_comparer", "aire_decomposer", "aire_problemes"],
   },
 
   /* =========================
      VOLUMES
   ========================= */
   {
-    id: "volume_unite",
+    id: "volume_unites",
     label: "Comprendre l’unité de volume",
     notionId: "volumes",
-    prerequis: ["area_comprendre"],
+    prerequis: ["aire_comprendre"],
   },
   {
     id: "volume_compter",
     label: "Compter des volumes",
     notionId: "volumes",
-    prerequis: ["volume_unite", "area_compter"],
+    prerequis: ["volume_unites", "aire_compter"],
   },
   {
     id: "volume_comparer",

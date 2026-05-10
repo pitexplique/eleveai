@@ -78,9 +78,9 @@ const supportLinks: Record<string, string[]> = {
   longueur_comparer: ["entier_compare", "decimal_comparer"],
   longueur_probleme: ["entier_compare", "decimal_comparer"],
 
-  perim_square: ["mental_multiplication", "longueur_mesurer"],
+  perim_carre: ["mental_multiplication", "longueur_mesurer"],
   perim_rectangle: ["mental_addition", "mental_multiplication"],
-  perim_figure: ["longueur_comparer", "perim_square", "perim_rectangle"],
+  perim_figure: ["longueur_comparer", "perim_carre", "perim_rectangle"],
   perim_probleme: ["longueur_probleme", "perim_figure"],
 
   // =========================
@@ -102,8 +102,8 @@ const supportLinks: Record<string, string[]> = {
   // =========================
   // VOLUMES
   // =========================
-  volume_unite: ["area_comprendre"],
-  volume_compter: ["area_compter", "volume_unite"],
+  volume_unites: ["area_comprendre"],
+  volume_compter: ["area_compter", "volume_unites"],
   volume_comparer: ["volume_compter", "area_comparer"],
   volume_assemblage: ["volume_compter"],
   volume_lire: ["data_lire_tableau", "volume_compter"],
@@ -190,9 +190,7 @@ const supportLinks: Record<string, string[]> = {
     "sym_proprietes",
     "sym_axes",
   ],
-    // =========================
-  // ALGORITHMIQUE
-  // =========================
+
   // =========================
   // ALGORITHMIQUE
   // =========================

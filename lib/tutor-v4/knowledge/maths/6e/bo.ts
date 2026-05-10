@@ -16,6 +16,5 @@ export const bo: KnowledgeBoCompetence[] = [
   { boId: "BO6D1", label: "Données" },
   { boId: "BO6P1", label: "Probabilités" },
 
-// bo6eMaths.ts
-{ boId: "BO6I1", label: "Initiation à la pensée informatique" },
+  { boId: "BO6I1", label: "Initiation à la pensée informatique" },
 ];

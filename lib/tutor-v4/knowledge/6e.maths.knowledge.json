@@ -121,7 +121,7 @@
       "prerequis": [],
       "microTargets": [
         "mental_addition",
-        "mental_subtraction",
+        "mental_soustraction",
         "mental_multiplication",
         "mental_division",
         "mental_strategies",
@@ -168,12 +168,12 @@
       "boId": "BO6G1",
       "prerequis": ["perimetres"],
       "microTargets": [
-        "area_comprendre",
-        "area_rectangle",
-        "area_square",
-        "area_compter",
-        "area_comparer",
-        "area_defis"
+        "aire_comprendre",
+        "aire_rectangle",
+        "aire_square",
+        "aire_compter",
+        "aire_comparer",
+        "aire_defis"
       ],
       "levels": [1, 2]
     },

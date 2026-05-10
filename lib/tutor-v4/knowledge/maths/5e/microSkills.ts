@@ -75,7 +75,7 @@ export const microSkills: MicroSkillSource[] = [
     prerequis: ["relatif_calcul"],
   },
   {
-    id: "relatif_defis_ops",
+    id: "relatif_defis_operations",
     label: "Défis sur les opérations avec les relatifs",
     notionId: "operations_relatifs",
     prerequis: ["relatif_probleme"],
@@ -522,12 +522,6 @@ export const microSkills: MicroSkillSource[] = [
     notionId: "probabilites",
     prerequis: ["proba_equiprobabilite", "proba_calculer"],
   },
-  {
-  id: "algo_sequence",
-  label: "Manipuler et séquencer des instructions simples",
-  notionId: "algorithmique",
-  prerequis: [],
-},
   /* =========================
      ALGORITHME
   ========================= */
