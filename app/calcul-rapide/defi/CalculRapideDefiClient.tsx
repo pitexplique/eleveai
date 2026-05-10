@@ -330,11 +330,11 @@ export default function CalculRapideDefiClient() {
 
     setPaused(true);
     setLockedCorrection(true);
-    setCorrectionTimeLeft(20);
+    setCorrectionTimeLeft(5);
 
     window.setTimeout(() => {
       goNext();
-    }, 10000);
+    }, 5000);
   }
 
   if (!questions.length) {
