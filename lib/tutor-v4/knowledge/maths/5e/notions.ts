@@ -6,10 +6,10 @@ export const notions: NotionSource[] = [
   // ALGORITHME
   // =========================
 {
-  id: "algorithmique",
+  id: "algo_programmation",
   label: "Algorithmique et programmation",
   boId: "BO5I1",
-  prerequis: ["calcul_litteral", "proportionnalite"],
+  prerequis: ["litteral_calcul", "prop_proportionnalite"],
   levels: [1, 2, 3],
 },
 
@@ -17,21 +17,21 @@ export const notions: NotionSource[] = [
   // NOMBRES
   // =========================
   {
-    id: "nombres_relatifs",
+    id: "relatif_nombre",
     label: "Nombres relatifs",
     boId: "BO5N1",
     prerequis: [],
     levels: [1, 2, 3],
   },
   {
-    id: "operations_relatifs",
+    id: "relatif_operation",
     label: "Opérations sur les nombres relatifs",
     boId: "BO5N1",
-    prerequis: ["nombres_relatifs"],
+    prerequis: ["relatif_nombre"],
     levels: [1, 2, 3],
   },
   {
-    id: "fractions",
+    id: "fraction_nombre",
     label: "Fractions et nombres rationnels",
     boId: "BO5N2",
     prerequis: [],
@@ -42,10 +42,10 @@ export const notions: NotionSource[] = [
   // PROPORTIONNALITÉ
   // =========================
   {
-    id: "proportionnalite",
+    id: "prop_proportionnalite",
     label: "Proportionnalité",
     boId: "BO5P1",
-    prerequis: ["fractions"],
+    prerequis: ["fraction_nombre"],
     levels: [1, 2, 3],
   },
 
@@ -53,10 +53,10 @@ export const notions: NotionSource[] = [
   // ALGÈBRE
   // =========================
   {
-    id: "calcul_litteral",
+    id: "litteral_calcul",
     label: "Calcul littéral",
     boId: "BO5A1",
-    prerequis: ["operations_relatifs"],
+    prerequis: ["relatif_operation"],
     levels: [1, 2, 3],
   },
 
@@ -64,24 +64,24 @@ export const notions: NotionSource[] = [
   // GÉOMÉTRIE PLANE
   // =========================
   {
-    id: "angles",
+    id: "angle_mesure",
     label: "Angles",
     boId: "BO5G1",
     prerequis: [],
     levels: [1, 2],
   },
   {
-    id: "triangles",
+    id: "triangle_figure",
     label: "Triangles",
     boId: "BO5G1",
-    prerequis: ["angles"],
+    prerequis: ["angle_mesure"],
     levels: [1, 2, 3],
   },
   {
-    id: "symetrie_centrale",
+    id: "sym_centrale",
     label: "Symétrie centrale",
     boId: "BO5G1",
-    prerequis: ["angles"],
+    prerequis: ["angle_mesure"],
     levels: [1, 2],
   },
 
@@ -89,10 +89,10 @@ export const notions: NotionSource[] = [
   // GRANDEURS ET MESURES
   // =========================
   {
-    id: "aires",
+    id: "aire_surface",
     label: "Aires",
     boId: "BO5M1",
-    prerequis: ["triangles"],
+    prerequis: ["triangle_figure"],
     levels: [1, 2],
   },
 
@@ -100,10 +100,10 @@ export const notions: NotionSource[] = [
   // GÉOMÉTRIE DANS L’ESPACE
   // =========================
   {
-    id: "volumes",
+    id: "volume_solide",
     label: "Volumes",
     boId: "BO5G2",
-    prerequis: ["aires"],
+    prerequis: ["aire_surface"],
     levels: [1, 2],
   },
 
@@ -111,17 +111,17 @@ export const notions: NotionSource[] = [
   // DONNÉES
   // =========================
   {
-    id: "statistiques",
+    id: "stat_statistique",
     label: "Statistiques",
     boId: "BO5D1",
     prerequis: [],
     levels: [1, 2],
   },
   {
-    id: "probabilites",
+    id: "proba_experience",
     label: "Probabilités",
     boId: "BO5D2",
-    prerequis: ["statistiques"],
+    prerequis: ["stat_statistique"],
     levels: [1, 2],
   },
 

@@ -206,7 +206,7 @@ export const airesBank: TutorBankItemV4[] = [
     id: "5e_aire_comprendre_fixed_1_definition",
     niveau: "5e",
     matiere: "maths",
-    notionId: "aires",
+    notionId: "aire_surface",
     microId: "aire_comprendre",
     difficulty: 1,
     theme: "neutral",
@@ -226,7 +226,7 @@ export const airesBank: TutorBankItemV4[] = [
       "Méthode : on distingue l’intérieur de la figure et son contour.\n\n" +
       "Observation : le contour correspond au périmètre, l’intérieur correspond à l’aire.\n\n" +
       "Conclusion : l’aire mesure la surface occupée par la figure.",
-    tags: ["aires", "definition", "qcm"],
+    tags: ["aire_surface", "definition", "qcm"],
   },
 
   {
@@ -234,7 +234,7 @@ export const airesBank: TutorBankItemV4[] = [
     id: "5e_aire_comprendre_fixed_2_perimetre_piege",
     niveau: "5e",
     matiere: "maths",
-    notionId: "aires",
+    notionId: "aire_surface",
     microId: "aire_comprendre",
     difficulty: 1,
     theme: "neutral",
@@ -249,7 +249,7 @@ export const airesBank: TutorBankItemV4[] = [
       "Méthode : on identifie si l’on parle de l’intérieur ou du contour.\n\n" +
       "Observation : la longueur du tour correspond au périmètre.\n\n" +
       "Conclusion : l’élève a tort, l’aire n’est pas la longueur du tour.",
-    tags: ["aires", "perimetre", "piege", "qcm"],
+    tags: ["aire_surface", "perimetre", "piege", "qcm"],
   },
 
   {
@@ -257,12 +257,12 @@ export const airesBank: TutorBankItemV4[] = [
     id: "5e_aire_comprendre_tpl_1_compter_cases",
     niveau: "5e",
     matiere: "maths",
-    notionId: "aires",
+    notionId: "aire_surface",
     microId: "aire_comprendre",
     difficulty: 1,
     theme: "neutral",
     hint: "Chaque case remplie vaut 1 unité d’aire.",
-    tags: ["aires", "comptage", "figure_libre", "canvas", "template"],
+    tags: ["aire_surface", "comptage", "figure_libre", "canvas", "template"],
     generate: () => {
       const rows = randomChoice([2, 3, 4]);
       const cols = randomChoice([3, 4, 5]);
@@ -294,12 +294,12 @@ export const airesBank: TutorBankItemV4[] = [
     id: "5e_aire_comprendre_tpl_2_rectangle_grille",
     niveau: "5e",
     matiere: "maths",
-    notionId: "aires",
+    notionId: "aire_surface",
     microId: "aire_comprendre",
     difficulty: 2,
     theme: "neutral",
     hint: "Compte les cases colorées ou fais lignes × colonnes.",
-    tags: ["aires", "rectangle", "comptage", "canvas", "template"],
+    tags: ["aire_surface", "rectangle", "comptage", "canvas", "template"],
     generate: () => {
       const rows = randomChoice([2, 3, 4, 5]);
       const cols = randomChoice([3, 4, 5, 6]);
@@ -330,12 +330,12 @@ export const airesBank: TutorBankItemV4[] = [
     id: "5e_aire_comprendre_tpl_3_figure_non_rectangle",
     niveau: "5e",
     matiere: "maths",
-    notionId: "aires",
+    notionId: "aire_surface",
     microId: "aire_comprendre",
     difficulty: 2,
     theme: "neutral",
     hint: "Compte uniquement les cases colorées.",
-    tags: ["aires", "figure_composee", "comptage", "canvas", "template"],
+    tags: ["aire_surface", "figure_composee", "comptage", "canvas", "template"],
     generate: () => {
       const situations = [
         {
@@ -407,12 +407,12 @@ export const airesBank: TutorBankItemV4[] = [
     id: "5e_aire_comprendre_tpl_4_unite_aire",
     niveau: "5e",
     matiere: "maths",
-    notionId: "aires",
+    notionId: "aire_surface",
     microId: "aire_comprendre",
     difficulty: 2,
     theme: "neutral",
     hint: "L’aire s’exprime avec une unité au carré.",
-    tags: ["aires", "unites", "qcm", "template"],
+    tags: ["aire_surface", "unite", "qcm", "template"],
     generate: () => {
       const unit = randomChoice(["cm", "m", "km"]);
       const good = `${unit}²`;
@@ -437,7 +437,7 @@ export const airesBank: TutorBankItemV4[] = [
     id: "5e_aire_comprendre_open_1_distinguer_aire_perimetre",
     niveau: "5e",
     matiere: "maths",
-    notionId: "aires",
+    notionId: "aire_surface",
     microId: "aire_comprendre",
     difficulty: 3,
     theme: "neutral",
@@ -451,7 +451,7 @@ export const airesBank: TutorBankItemV4[] = [
       "Méthode : on se demande si l’on remplit la figure ou si l’on fait le tour.\n\n" +
       "Observation : remplir correspond à l’aire ; faire le tour correspond au périmètre.\n\n" +
       "Conclusion : aire et périmètre sont deux grandeurs différentes.",
-    tags: ["aires", "open", "perimetre", "vocabulaire"],
+    tags: ["aire_surface", "open", "perimetre", "vocabulaire"],
   },
 
   {
@@ -459,7 +459,7 @@ export const airesBank: TutorBankItemV4[] = [
     id: "5e_aire_comprendre_open_2_unite_carree",
     niveau: "5e",
     matiere: "maths",
-    notionId: "aires",
+    notionId: "aire_surface",
     microId: "aire_comprendre",
     difficulty: 3,
     theme: "neutral",
@@ -473,7 +473,7 @@ export const airesBank: TutorBankItemV4[] = [
       "Méthode : on peut mesurer une surface avec des carrés unités.\n\n" +
       "Observation : un carré de 1 cm sur 1 cm a une aire de 1 cm².\n\n" +
       "Conclusion : on utilise des unités au carré comme cm² ou m² pour exprimer une aire.",
-    tags: ["aires", "open", "unites", "raisonnement"],
+    tags: ["aire_surface", "open", "unite", "raisonnement"],
   },
 
   /* =========================
@@ -485,7 +485,7 @@ export const airesBank: TutorBankItemV4[] = [
     id: "5e_aire_triangle_fixed_1_formule",
     niveau: "5e",
     matiere: "maths",
-    notionId: "aires",
+    notionId: "aire_surface",
     microId: "aire_triangle",
     difficulty: 1,
     theme: "neutral",
@@ -505,7 +505,7 @@ export const airesBank: TutorBankItemV4[] = [
       "Méthode : on multiplie la base par la hauteur, puis on divise par 2.\n\n" +
       "Formule : aire = base × hauteur ÷ 2.\n\n" +
       "Conclusion : la bonne formule est base × hauteur ÷ 2.",
-    tags: ["aires", "triangle", "formule", "qcm"],
+    tags: ["aire_surface", "triangle", "formule", "qcm"],
   },
 
   {
@@ -513,12 +513,12 @@ export const airesBank: TutorBankItemV4[] = [
     id: "5e_aire_triangle_tpl_1_calcul_direct",
     niveau: "5e",
     matiere: "maths",
-    notionId: "aires",
+    notionId: "aire_surface",
     microId: "aire_triangle",
     difficulty: 2,
     theme: "neutral",
     hint: "Utilise base × hauteur ÷ 2.",
-    tags: ["aires", "triangle", "calcul", "template", "canvas"],
+    tags: ["aire_surface", "triangle", "calcul", "template", "canvas"],
     generate: () => {
       const base = randomChoice([4, 5, 6, 8, 10, 12]);
       const hauteur = randomChoice([3, 4, 5, 6, 7]);
@@ -544,12 +544,12 @@ export const airesBank: TutorBankItemV4[] = [
     id: "5e_aire_triangle_tpl_2_triangle_rectangle",
     niveau: "5e",
     matiere: "maths",
-    notionId: "aires",
+    notionId: "aire_surface",
     microId: "aire_triangle",
     difficulty: 2,
     theme: "neutral",
     hint: "Dans un triangle rectangle, les deux côtés perpendiculaires peuvent servir de base et hauteur.",
-    tags: ["aires", "triangle_rectangle", "calcul", "template", "canvas"],
+    tags: ["aire_surface", "triangle_rectangle", "calcul", "template", "canvas"],
     generate: () => {
       const base = randomChoice([6, 8, 10, 12]);
       const hauteur = randomChoice([3, 4, 5, 6]);
@@ -575,12 +575,12 @@ export const airesBank: TutorBankItemV4[] = [
     id: "5e_aire_triangle_tpl_3_qcm_calcul",
     niveau: "5e",
     matiere: "maths",
-    notionId: "aires",
+    notionId: "aire_surface",
     microId: "aire_triangle",
     difficulty: 2,
     theme: "neutral",
     hint: "Attention : il faut diviser par 2.",
-    tags: ["aires", "triangle", "qcm", "piege", "template"],
+    tags: ["aire_surface", "triangle", "qcm", "piege", "template"],
     generate: () => {
       const base = randomChoice([4, 6, 8, 10, 12]);
       const hauteur = randomChoice([3, 4, 5, 6]);
@@ -613,12 +613,12 @@ export const airesBank: TutorBankItemV4[] = [
     id: "5e_aire_triangle_tpl_4_retrouver_hauteur",
     niveau: "5e",
     matiere: "maths",
-    notionId: "aires",
+    notionId: "aire_surface",
     microId: "aire_triangle",
     difficulty: 3,
     theme: "neutral",
     hint: "Si aire = base × hauteur ÷ 2, alors hauteur = aire × 2 ÷ base.",
-    tags: ["aires", "triangle", "hauteur", "inverse", "template", "canvas"],
+    tags: ["aire_surface", "triangle", "hauteur", "inverse", "template", "canvas"],
     generate: () => {
       const base = randomChoice([4, 5, 6, 8, 10]);
       const hauteur = randomChoice([3, 4, 5, 6, 7]);
@@ -644,12 +644,12 @@ export const airesBank: TutorBankItemV4[] = [
     id: "5e_aire_triangle_tpl_5_retrouver_base",
     niveau: "5e",
     matiere: "maths",
-    notionId: "aires",
+    notionId: "aire_surface",
     microId: "aire_triangle",
     difficulty: 3,
     theme: "neutral",
     hint: "Si aire = base × hauteur ÷ 2, alors base = aire × 2 ÷ hauteur.",
-    tags: ["aires", "triangle", "base", "inverse", "template", "canvas"],
+    tags: ["aire_surface", "triangle", "base", "inverse", "template", "canvas"],
     generate: () => {
       const base = randomChoice([4, 6, 8, 10, 12]);
       const hauteur = randomChoice([3, 4, 5, 6]);
@@ -675,7 +675,7 @@ export const airesBank: TutorBankItemV4[] = [
     id: "5e_aire_triangle_fixed_2_erreur_oubli_diviser",
     niveau: "5e",
     matiere: "maths",
-    notionId: "aires",
+    notionId: "aire_surface",
     microId: "aire_triangle",
     difficulty: 3,
     theme: "neutral",
@@ -690,7 +690,7 @@ export const airesBank: TutorBankItemV4[] = [
       "Méthode : on vérifie si l’élève a bien divisé par 2.\n\n" +
       "Calcul : 8 × 5 = 40, puis 40 ÷ 2 = 20.\n\n" +
       "Conclusion : l’élève a oublié de diviser par 2. La bonne aire est 20 cm².",
-    tags: ["aires", "triangle", "erreur", "qcm"],
+    tags: ["aire_surface", "triangle", "erreur", "qcm"],
     canvas: triangleAireCanvas("8 cm"),
   },
 
@@ -699,7 +699,7 @@ export const airesBank: TutorBankItemV4[] = [
     id: "5e_aire_triangle_open_1_methode",
     niveau: "5e",
     matiere: "maths",
-    notionId: "aires",
+    notionId: "aire_surface",
     microId: "aire_triangle",
     difficulty: 4,
     theme: "neutral",
@@ -713,7 +713,7 @@ export const airesBank: TutorBankItemV4[] = [
       "Méthode : on multiplie la base par la hauteur, puis on divise le résultat par 2.\n\n" +
       "Observation : cette division par 2 vient du fait qu’un triangle est la moitié d’un parallélogramme de même base et de même hauteur.\n\n" +
       "Conclusion : aire = base × hauteur ÷ 2.",
-    tags: ["aires", "triangle", "open", "methode"],
+    tags: ["aire_surface", "triangle", "open", "methode"],
   },
 
   {
@@ -721,7 +721,7 @@ export const airesBank: TutorBankItemV4[] = [
     id: "5e_aire_triangle_open_2_hauteur_associee",
     niveau: "5e",
     matiere: "maths",
-    notionId: "aires",
+    notionId: "aire_surface",
     microId: "aire_triangle",
     difficulty: 4,
     theme: "neutral",
@@ -735,7 +735,7 @@ export const airesBank: TutorBankItemV4[] = [
       "Méthode : quand on choisit une base, il faut utiliser la hauteur qui tombe perpendiculairement sur cette base.\n\n" +
       "Observation : utiliser une hauteur qui ne correspond pas à la base donne un calcul faux.\n\n" +
       "Conclusion : dans la formule, la base et la hauteur doivent être associées.",
-    tags: ["aires", "triangle", "open", "hauteur", "raisonnement"],
+    tags: ["aire_surface", "triangle", "open", "hauteur", "raisonnement"],
   },
   /* =========================
      AIRE_PARALLELOGRAMME
@@ -746,7 +746,7 @@ export const airesBank: TutorBankItemV4[] = [
     id: "5e_aire_parallelogramme_fixed_1_formule",
     niveau: "5e",
     matiere: "maths",
-    notionId: "aires",
+    notionId: "aire_surface",
     microId: "aire_parallelogramme",
     difficulty: 1,
     theme: "neutral",
@@ -766,7 +766,7 @@ export const airesBank: TutorBankItemV4[] = [
       "Méthode : on multiplie directement la base par la hauteur.\n\n" +
       "Formule : aire = base × hauteur.\n\n" +
       "Conclusion : la bonne formule est base × hauteur.",
-    tags: ["aires", "parallelogramme", "formule"],
+    tags: ["aire_surface", "parallelogramme", "formule"],
   },
 
   {
@@ -774,12 +774,12 @@ export const airesBank: TutorBankItemV4[] = [
     id: "5e_aire_parallelogramme_tpl_1_calcul_direct",
     niveau: "5e",
     matiere: "maths",
-    notionId: "aires",
+    notionId: "aire_surface",
     microId: "aire_parallelogramme",
     difficulty: 2,
     theme: "neutral",
     hint: "Utilise base × hauteur.",
-    tags: ["aires", "parallelogramme", "calcul", "template", "canvas"],
+    tags: ["aire_surface", "parallelogramme", "calcul", "template", "canvas"],
     generate: () => {
       const base = randomChoice([5, 6, 8, 10, 12]);
       const hauteur = randomChoice([3, 4, 5, 6, 7]);
@@ -805,12 +805,12 @@ export const airesBank: TutorBankItemV4[] = [
   id: "5e_aire_parallelogramme_tpl_2_qcm",
   niveau: "5e",
   matiere: "maths",
-  notionId: "aires",
+  notionId: "aire_surface",
   microId: "aire_parallelogramme",
   difficulty: 2,
   theme: "neutral",
   hint: "Attention : on ne divise pas par 2.",
-  tags: ["aires", "parallelogramme", "qcm", "piege", "template"],
+  tags: ["aire_surface", "parallelogramme", "qcm", "piege", "template"],
   generate: () => {
     const base = randomChoice([4, 6, 8, 10]);
     const hauteur = randomChoice([3, 4, 5, 6]);
@@ -849,12 +849,12 @@ export const airesBank: TutorBankItemV4[] = [
     id: "5e_aire_parallelogramme_tpl_3_retrouver_hauteur",
     niveau: "5e",
     matiere: "maths",
-    notionId: "aires",
+    notionId: "aire_surface",
     microId: "aire_parallelogramme",
     difficulty: 3,
     theme: "neutral",
     hint: "hauteur = aire ÷ base.",
-    tags: ["aires", "parallelogramme", "hauteur", "template", "canvas"],
+    tags: ["aire_surface", "parallelogramme", "hauteur", "template", "canvas"],
     generate: () => {
       const base = randomChoice([4, 5, 6, 8, 10]);
       const hauteur = randomChoice([3, 4, 5, 6]);
@@ -880,12 +880,12 @@ export const airesBank: TutorBankItemV4[] = [
     id: "5e_aire_parallelogramme_tpl_4_retrouver_base",
     niveau: "5e",
     matiere: "maths",
-    notionId: "aires",
+    notionId: "aire_surface",
     microId: "aire_parallelogramme",
     difficulty: 3,
     theme: "neutral",
     hint: "base = aire ÷ hauteur.",
-    tags: ["aires", "parallelogramme", "base", "template", "canvas"],
+    tags: ["aire_surface", "parallelogramme", "base", "template", "canvas"],
     generate: () => {
       const base = randomChoice([5, 6, 8, 10, 12]);
       const hauteur = randomChoice([3, 4, 5, 6]);
@@ -911,7 +911,7 @@ export const airesBank: TutorBankItemV4[] = [
     id: "5e_aire_parallelogramme_fixed_2_erreur_triangle",
     niveau: "5e",
     matiere: "maths",
-    notionId: "aires",
+    notionId: "aire_surface",
     microId: "aire_parallelogramme",
     difficulty: 3,
     theme: "neutral",
@@ -926,7 +926,7 @@ export const airesBank: TutorBankItemV4[] = [
       "Méthode : on vérifie si l’élève a utilisé la bonne formule.\n\n" +
       "Calcul : 8 × 5 = 40.\n\n" +
       "Conclusion : l’élève a divisé par 2 par erreur. La bonne aire est 40 cm².",
-    tags: ["aires", "parallelogramme", "erreur"],
+    tags: ["aire_surface", "parallelogramme", "erreur"],
     canvas: parallelogrammeAireCanvas("8 cm", "5 cm"),
   },
 
@@ -935,7 +935,7 @@ export const airesBank: TutorBankItemV4[] = [
     id: "5e_aire_parallelogramme_open_1_methode",
     niveau: "5e",
     matiere: "maths",
-    notionId: "aires",
+    notionId: "aire_surface",
     microId: "aire_parallelogramme",
     difficulty: 4,
     theme: "neutral",
@@ -949,7 +949,7 @@ export const airesBank: TutorBankItemV4[] = [
       "Méthode : on multiplie la base par la hauteur associée.\n\n" +
       "Observation : il ne faut pas utiliser un côté oblique à la place de la hauteur.\n\n" +
       "Conclusion : aire = base × hauteur.",
-    tags: ["aires", "parallelogramme", "open", "methode"],
+    tags: ["aire_surface", "parallelogramme", "open", "methode"],
   },
 
   {
@@ -957,7 +957,7 @@ export const airesBank: TutorBankItemV4[] = [
     id: "5e_aire_parallelogramme_open_2_hauteur_associee",
     niveau: "5e",
     matiere: "maths",
-    notionId: "aires",
+    notionId: "aire_surface",
     microId: "aire_parallelogramme",
     difficulty: 4,
     theme: "neutral",
@@ -971,7 +971,7 @@ export const airesBank: TutorBankItemV4[] = [
       "Méthode : quand on choisit une base, on doit prendre la hauteur correspondante.\n\n" +
       "Observation : un côté oblique n’est généralement pas une hauteur.\n\n" +
       "Conclusion : la hauteur doit être perpendiculaire à la base choisie.",
-    tags: ["aires", "parallelogramme", "raisonnement", "open"],
+    tags: ["aire_surface", "parallelogramme", "raisonnement", "open"],
   },
   /* =========================
      AIRE_COMPOSER
@@ -982,7 +982,7 @@ export const airesBank: TutorBankItemV4[] = [
     id: "5e_aire_composer_fixed_1_definition",
     niveau: "5e",
     matiere: "maths",
-    notionId: "aires",
+    notionId: "aire_surface",
     microId: "aire_composer",
     difficulty: 1,
     theme: "neutral",
@@ -1002,7 +1002,7 @@ export const airesBank: TutorBankItemV4[] = [
       "Méthode : on découpe la figure en formes connues puis on calcule chaque aire.\n\n" +
       "Observation : on additionne ensuite les aires obtenues.\n\n" +
       "Conclusion : il faut découper la figure en figures simples.",
-    tags: ["aires", "composees", "definition"],
+    tags: ["aire_surface", "composees", "definition"],
   },
 
   {
@@ -1010,12 +1010,12 @@ export const airesBank: TutorBankItemV4[] = [
     id: "5e_aire_composer_tpl_1_deux_rectangles",
     niveau: "5e",
     matiere: "maths",
-    notionId: "aires",
+    notionId: "aire_surface",
     microId: "aire_composer",
     difficulty: 2,
     theme: "neutral",
     hint: "Calcule séparément les deux rectangles puis additionne.",
-    tags: ["aires", "composees", "rectangles", "template", "canvas"],
+    tags: ["aire_surface", "composees", "rectangles", "template", "canvas"],
     generate: () => {
       const l1 = randomChoice([4, 5, 6, 8]);
       const h1 = randomChoice([2, 3, 4]);
@@ -1063,12 +1063,12 @@ export const airesBank: TutorBankItemV4[] = [
     id: "5e_aire_composer_tpl_2_rectangle_triangle",
     niveau: "5e",
     matiere: "maths",
-    notionId: "aires",
+    notionId: "aire_surface",
     microId: "aire_composer",
     difficulty: 3,
     theme: "neutral",
     hint: "Calcule l’aire du rectangle puis celle du triangle.",
-    tags: ["aires", "composees", "triangle", "template"],
+    tags: ["aire_surface", "composees", "triangle", "template"],
     generate: () => {
       const longueur = randomChoice([6, 8, 10]);
       const largeur = randomChoice([3, 4, 5]);
@@ -1105,12 +1105,12 @@ export const airesBank: TutorBankItemV4[] = [
     id: "5e_aire_composer_tpl_3_qcm_piege",
     niveau: "5e",
     matiere: "maths",
-    notionId: "aires",
+    notionId: "aire_surface",
     microId: "aire_composer",
     difficulty: 3,
     theme: "neutral",
     hint: "Attention à ne pas additionner les longueurs à la place des aires.",
-    tags: ["aires", "composees", "piege", "qcm", "template"],
+    tags: ["aire_surface", "composees", "piege", "qcm", "template"],
     generate: () => {
       const a1 = randomChoice([12, 15, 18]);
       const a2 = randomChoice([6, 8, 10]);
@@ -1144,12 +1144,12 @@ export const airesBank: TutorBankItemV4[] = [
   id: "5e_aire_composer_tpl_4_quadrillage",
   niveau: "5e",
   matiere: "maths",
-  notionId: "aires",
+  notionId: "aire_surface",
   microId: "aire_composer",
   difficulty: 3,
   theme: "neutral",
   hint: "Compte les carreaux de la figure.",
-  tags: ["aires", "composees", "quadrillage", "canvas", "template"],
+  tags: ["aire_surface", "composees", "quadrillage", "canvas", "template"],
   generate: () => {
     type GridCell = [number, number];
 
@@ -1214,7 +1214,7 @@ export const airesBank: TutorBankItemV4[] = [
     id: "5e_aire_composer_fixed_2_erreur_perimetre",
     niveau: "5e",
     matiere: "maths",
-    notionId: "aires",
+    notionId: "aire_surface",
     microId: "aire_composer",
     difficulty: 4,
     theme: "neutral",
@@ -1230,7 +1230,7 @@ export const airesBank: TutorBankItemV4[] = [
       "Méthode : pour calculer une aire, on utilise des formules d’aires.\n\n" +
       "Observation : additionner les côtés donne un périmètre.\n\n" +
       "Conclusion : l’élève a confondu aire et périmètre.",
-    tags: ["aires", "composees", "erreur", "perimetre"],
+    tags: ["aire_surface", "composees", "erreur", "perimetre"],
   },
 
   {
@@ -1238,7 +1238,7 @@ export const airesBank: TutorBankItemV4[] = [
     id: "5e_aire_composer_open_1_methode",
     niveau: "5e",
     matiere: "maths",
-    notionId: "aires",
+    notionId: "aire_surface",
     microId: "aire_composer",
     difficulty: 4,
     theme: "neutral",
@@ -1253,7 +1253,7 @@ export const airesBank: TutorBankItemV4[] = [
       "Méthode : on découpe la figure puis on calcule chaque aire.\n\n" +
       "Observation : on additionne ensuite les résultats.\n\n" +
       "Conclusion : on obtient ainsi l’aire totale.",
-    tags: ["aires", "composees", "open", "methode"],
+    tags: ["aire_surface", "composees", "open", "methode"],
   },
 
   {
@@ -1261,12 +1261,12 @@ export const airesBank: TutorBankItemV4[] = [
     id: "5e_aire_composer_tpl_5_reunion_jardin",
     niveau: "5e",
     matiere: "maths",
-    notionId: "aires",
+    notionId: "aire_surface",
     microId: "aire_composer",
     difficulty: 4,
     theme: "reunion",
     hint: "Additionne les aires des différentes zones.",
-    tags: ["aires", "composees", "reunion", "template"],
+    tags: ["aire_surface", "composees", "reunion", "template"],
     generate: () => {
       const jardin1 = randomChoice([12, 15, 18]);
       const jardin2 = randomChoice([8, 10, 14]);
@@ -1297,11 +1297,11 @@ export const airesBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "5e_aire_defis_fixed_1_unites",
+    id: "5e_aire_defi_fixed_1_unite",
     niveau: "5e",
     matiere: "maths",
-    notionId: "aires",
-    microId: "aire_defis",
+    notionId: "aire_surface",
+    microId: "aire_defi",
     difficulty: 3,
     theme: "neutral",
     text: "Quelle unité utilise-t-on pour exprimer une aire ?",
@@ -1315,20 +1315,20 @@ export const airesBank: TutorBankItemV4[] = [
       "Méthode : on utilise des unités au carré.\n\n" +
       "Observation : cm² signifie centimètre carré.\n\n" +
       "Conclusion : l’unité correcte est cm².",
-    tags: ["aires", "unites", "defi"],
+    tags: ["aire_surface", "unite", "defi"],
   },
 
   {
     kind: "template",
-    id: "5e_aire_defis_tpl_1_comparaison_figures",
+    id: "5e_aire_defi_tpl_1_comparaison_figures",
     niveau: "5e",
     matiere: "maths",
-    notionId: "aires",
-    microId: "aire_defis",
+    notionId: "aire_surface",
+    microId: "aire_defi",
     difficulty: 4,
     theme: "neutral",
     hint: "Calcule les deux aires avant de comparer.",
-    tags: ["aires", "comparaison", "defi", "template"],
+    tags: ["aire_surface", "comparaison", "defi", "template"],
     generate: () => {
       const l1 = randomChoice([6, 8, 10]);
       const h1 = randomChoice([3, 4, 5]);
@@ -1368,15 +1368,15 @@ export const airesBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "5e_aire_defis_tpl_2_rectangle_manquant",
+    id: "5e_aire_defi_tpl_2_rectangle_manquant",
     niveau: "5e",
     matiere: "maths",
-    notionId: "aires",
-    microId: "aire_defis",
+    notionId: "aire_surface",
+    microId: "aire_defi",
     difficulty: 4,
     theme: "neutral",
     hint: "longueur = aire ÷ largeur.",
-    tags: ["aires", "rectangle", "defi", "template"],
+    tags: ["aire_surface", "rectangle", "defi", "template"],
     generate: () => {
       const largeur = randomChoice([2, 3, 4, 5]);
       const longueur = randomChoice([6, 8, 10, 12]);
@@ -1401,15 +1401,15 @@ export const airesBank: TutorBankItemV4[] = [
 
 {
   kind: "template",
-  id: "5e_aire_defis_tpl_3_triangle_piege",
+  id: "5e_aire_defi_tpl_3_triangle_piege",
   niveau: "5e",
   matiere: "maths",
-  notionId: "aires",
-  microId: "aire_defis",
+  notionId: "aire_surface",
+  microId: "aire_defi",
   difficulty: 5,
   theme: "neutral",
   hint: "Attention : il faut utiliser la hauteur et non le côté oblique.",
-  tags: ["aires", "triangle", "piege", "defi", "template", "canvas"],
+  tags: ["aire_surface", "triangle", "piege", "defi", "template", "canvas"],
 
   generate: () => {
     const base = randomChoice([6, 8, 10]);
@@ -1452,15 +1452,15 @@ export const airesBank: TutorBankItemV4[] = [
 
 {
   kind: "template",
-  id: "5e_aire_defis_tpl_4_quadrillage_complexe",
+  id: "5e_aire_defi_tpl_4_quadrillage_complexe",
   niveau: "5e",
   matiere: "maths",
-  notionId: "aires",
-  microId: "aire_defis",
+  notionId: "aire_surface",
+  microId: "aire_defi",
   difficulty: 5,
   theme: "neutral",
   hint: "Compte soigneusement tous les carreaux.",
-  tags: ["aires", "quadrillage", "defi", "canvas", "template"],
+  tags: ["aire_surface", "quadrillage", "defi", "canvas", "template"],
   generate: () => {
     type GridCell = [number, number];
 
@@ -1517,11 +1517,11 @@ export const airesBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "5e_aire_defis_fixed_2_confusion_perimetre",
+    id: "5e_aire_defi_fixed_2_confusion_perimetre",
     niveau: "5e",
     matiere: "maths",
-    notionId: "aires",
-    microId: "aire_defis",
+    notionId: "aire_surface",
+    microId: "aire_defi",
     difficulty: 5,
     theme: "neutral",
     text:
@@ -1536,16 +1536,16 @@ export const airesBank: TutorBankItemV4[] = [
       "Méthode : deux figures peuvent avoir le même contour sans avoir la même surface.\n\n" +
       "Observation : un rectangle long et fin n’a pas la même aire qu’un rectangle plus carré.\n\n" +
       "Conclusion : deux rectangles peuvent avoir le même périmètre mais des aires différentes.",
-    tags: ["aires", "perimetre", "erreur", "defi"],
+    tags: ["aire_surface", "perimetre", "erreur", "defi"],
   },
 
   {
     kind: "fixed",
-    id: "5e_aire_defis_open_1_difference_aire_perimetre",
+    id: "5e_aire_defi_open_1_difference_aire_perimetre",
     niveau: "5e",
     matiere: "maths",
-    notionId: "aires",
-    microId: "aire_defis",
+    notionId: "aire_surface",
+    microId: "aire_defi",
     difficulty: 5,
     theme: "neutral",
     text:
@@ -1559,20 +1559,20 @@ export const airesBank: TutorBankItemV4[] = [
       "Définition : le périmètre mesure le contour d’une figure.\n\n" +
       "Observation : on n’utilise pas les mêmes unités.\n\n" +
       "Conclusion : aire et périmètre sont deux notions différentes.",
-    tags: ["aires", "perimetre", "open", "defi"],
+    tags: ["aire_surface", "perimetre", "open", "defi"],
   },
 
   {
     kind: "template",
-    id: "5e_aire_defis_tpl_5_reunion_champ_canne",
+    id: "5e_aire_defi_tpl_5_reunion_champ_canne",
     niveau: "5e",
     matiere: "maths",
-    notionId: "aires",
-    microId: "aire_defis",
+    notionId: "aire_surface",
+    microId: "aire_defi",
     difficulty: 5,
     theme: "reunion",
     hint: "Calcule l’aire du champ.",
-    tags: ["aires", "reunion", "defi", "template"],
+    tags: ["aire_surface", "reunion", "defi", "template"],
     generate: () => {
       const longueur = randomChoice([20, 25, 30]);
       const largeur = randomChoice([8, 10, 12]);
@@ -1597,11 +1597,11 @@ export const airesBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "5e_aire_defis_fixed_3_figure_plus_grande",
+    id: "5e_aire_defi_fixed_3_figure_plus_grande",
     niveau: "5e",
     matiere: "maths",
-    notionId: "aires",
-    microId: "aire_defis",
+    notionId: "aire_surface",
+    microId: "aire_defi",
     difficulty: 5,
     theme: "neutral",
     text:
@@ -1616,6 +1616,6 @@ export const airesBank: TutorBankItemV4[] = [
       "Méthode : on utilise des calculs ou un quadrillage.\n\n" +
       "Observation : une figure peut sembler plus grande sans l’être réellement.\n\n" +
       "Conclusion : il faut vérifier avec un calcul.",
-    tags: ["aires", "raisonnement", "defi"],
+    tags: ["aire_surface", "raisonnement", "defi"],
   },
 ];

@@ -2,199 +2,1109 @@
   "id": "5e-maths",
   "classe": "5e",
   "matiere": "maths",
-
   "bo_competences": [
-    { "boId": "BO5N1", "label": "Nombres relatifs et calculs" },
-    { "boId": "BO5N2", "label": "Fractions et nombres rationnels" },
-    { "boId": "BO5P1", "label": "Proportionnalité" },
-    { "boId": "BO5A1", "label": "Calcul littéral et algébrique" },
-    { "boId": "BO5G1", "label": "Géométrie plane" },
-    { "boId": "BO5G2", "label": "Géométrie dans l’espace" },
-    { "boId": "BO5M1", "label": "Grandeurs et mesures" },
-    { "boId": "BO5D1", "label": "Statistiques" },
-    { "boId": "BO5D2", "label": "Probabilités" }
+    {
+      "boId": "BO5N1",
+      "label": "Nombres relatifs et calculs"
+    },
+    {
+      "boId": "BO5N2",
+      "label": "Fractions et nombres rationnels"
+    },
+    {
+      "boId": "BO5P1",
+      "label": "Proportionnalité"
+    },
+    {
+      "boId": "BO5A1",
+      "label": "Calcul littéral et algébrique"
+    },
+    {
+      "boId": "BO5G1",
+      "label": "Géométrie plane"
+    },
+    {
+      "boId": "BO5G2",
+      "label": "Géométrie dans l’espace"
+    },
+    {
+      "boId": "BO5M1",
+      "label": "Grandeurs et mesures"
+    },
+    {
+      "boId": "BO5D1",
+      "label": "Statistiques"
+    },
+    {
+      "boId": "BO5D2",
+      "label": "Probabilités"
+    },
+    {
+      "boId": "BO5I1",
+      "label": "Pensée informatique et algorithmique"
+    }
   ],
-
   "notions": [
     {
-      "id": "nombres_relatifs",
+      "id": "algo_programmation",
+      "label": "Algorithmique et programmation",
+      "boId": "BO5I1",
+      "prerequis": [
+        "litteral_calcul",
+        "prop_proportionnalite"
+      ],
+      "levels": [
+        1,
+        2,
+        3
+      ],
+      "microTargets": [
+        "algo_sequence",
+        "algo_entree_sortie",
+        "algo_test_condition",
+        "algo_formule_bloc",
+        "algo_expression_valeur",
+        "algo_prevoir_expression",
+        "algo_parametre",
+        "algo_boucle",
+        "algo_defi"
+      ]
+    },
+    {
+      "id": "relatif_nombre",
       "label": "Nombres relatifs",
       "boId": "BO5N1",
       "prerequis": [],
-      "levels": [1, 2, 3],
+      "levels": [
+        1,
+        2,
+        3
+      ],
       "microTargets": [
         "relatif_lire",
         "relatif_signe",
         "relatif_comparer",
         "relatif_placer",
-        "relatif_opposes",
+        "relatif_oppose",
         "relatif_valeur_absolue",
-        "relatif_defis"
+        "relatif_defi"
       ]
     },
     {
-      "id": "operations_relatifs",
+      "id": "relatif_operation",
       "label": "Opérations sur les nombres relatifs",
       "boId": "BO5N1",
-      "prerequis": ["nombres_relatifs"],
-      "levels": [1, 2, 3],
+      "prerequis": [
+        "relatif_nombre"
+      ],
+      "levels": [
+        1,
+        2,
+        3
+      ],
       "microTargets": [
         "relatif_addition",
         "relatif_soustraction",
         "relatif_calcul",
         "relatif_probleme",
-        "relatif_defis_ops"
+        "relatif_operation_defi"
       ]
     },
     {
-      "id": "fractions",
+      "id": "fraction_nombre",
       "label": "Fractions et nombres rationnels",
       "boId": "BO5N2",
-      "prerequis": ["nombres_relatifs"],
-      "levels": [1, 2, 3],
+      "prerequis": [],
+      "levels": [
+        1,
+        2,
+        3
+      ],
       "microTargets": [
-        "fraction_egales",
+        "fraction_egale",
         "fraction_simplifier",
         "fraction_rationnel",
         "fraction_comparer",
-        "fraction_addition",
-        "fraction_produit",
+        "fraction_additionner",
+        "fraction_multiplier",
         "fraction_quantite",
         "fraction_inverse",
-        "fraction_division",
+        "fraction_diviser",
         "fraction_oppose",
-        "fraction_defis"
+        "fraction_defi"
       ]
     },
     {
-      "id": "proportionnalite",
+      "id": "prop_proportionnalite",
       "label": "Proportionnalité",
       "boId": "BO5P1",
-      "prerequis": ["fractions"],
-      "levels": [1, 2, 3],
+      "prerequis": [
+        "fraction_nombre"
+      ],
+      "levels": [
+        1,
+        2,
+        3
+      ],
       "microTargets": [
         "prop_reconnaitre",
         "prop_table",
         "prop_quatrieme",
         "prop_coeff",
-        "prop_ratio",
+        "prop_rapport",
         "prop_pourcentage",
-        "prop_coeff_mult",
+        "prop_coeff_multiplicateur",
         "prop_probleme",
-        "prop_defis"
+        "prop_defi"
       ]
     },
     {
-      "id": "calcul_litteral",
+      "id": "litteral_calcul",
       "label": "Calcul littéral",
       "boId": "BO5A1",
-      "prerequis": ["operations_relatifs"],
-      "levels": [1, 2, 3],
+      "prerequis": [
+        "relatif_operation"
+      ],
+      "levels": [
+        1,
+        2,
+        3
+      ],
       "microTargets": [
-        "litteral_expression",
+        "litteral_expression_comprendre",
         "litteral_traduire",
         "litteral_substituer",
         "litteral_reduire",
-        "litteral_defis"
+        "litteral_defi"
       ]
     },
     {
-      "id": "angles",
+      "id": "angle_mesure",
       "label": "Angles",
       "boId": "BO5G1",
       "prerequis": [],
-      "levels": [1, 2],
+      "levels": [
+        1,
+        2
+      ],
       "microTargets": [
         "angle_lire",
         "angle_mesurer",
         "angle_tracer",
         "angle_estimer",
-        "angle_defis_5e"
+        "angle_defi"
       ]
     },
     {
-      "id": "triangles",
+      "id": "triangle_figure",
       "label": "Triangles",
       "boId": "BO5G1",
-      "prerequis": ["angles"],
-      "levels": [1, 2, 3],
+      "prerequis": [
+        "angle_mesure"
+      ],
+      "levels": [
+        1,
+        2,
+        3
+      ],
       "microTargets": [
         "triangle_reconnaitre",
         "triangle_nature",
         "triangle_construire",
-        "triangle_somme_angles_5e",
-        "triangle_defis_5e"
+        "triangle_somme_angle",
+        "triangle_defi"
       ]
     },
     {
-      "id": "symetrie_centrale",
+      "id": "sym_centrale",
       "label": "Symétrie centrale",
       "boId": "BO5G1",
-      "prerequis": ["angles"],
-      "levels": [1, 2],
+      "prerequis": [
+        "angle_mesure"
+      ],
+      "levels": [
+        1,
+        2
+      ],
       "microTargets": [
         "sym_centrale_reconnaitre",
         "sym_centrale_point",
         "sym_centrale_figure",
-        "sym_centrale_proprietes",
-        "sym_centrale_defis"
+        "sym_centrale_propriete",
+        "sym_centrale_defi"
       ]
     },
     {
-      "id": "aires",
+      "id": "aire_surface",
       "label": "Aires",
       "boId": "BO5M1",
-      "prerequis": ["triangles"],
-      "levels": [1, 2],
+      "prerequis": [
+        "triangle_figure"
+      ],
+      "levels": [
+        1,
+        2
+      ],
       "microTargets": [
-        "aire_comprendre_5e",
+        "aire_comprendre",
         "aire_triangle",
         "aire_parallelogramme",
         "aire_composer",
-        "aire_defis_5e"
+        "aire_defi"
       ]
     },
     {
-      "id": "volumes",
+      "id": "volume_solide",
       "label": "Volumes",
       "boId": "BO5G2",
-      "prerequis": ["aires"],
-      "levels": [1, 2],
+      "prerequis": [
+        "aire_surface"
+      ],
+      "levels": [
+        1,
+        2
+      ],
       "microTargets": [
-        "volume_comprendre_5e",
+        "volume_comprendre",
         "volume_pave",
         "volume_prisme",
-        "volume_unites",
-        "volume_defis_5e"
+        "volume_cylindre",
+        "volume_assemblage",
+        "volume_unite",
+        "volume_defi"
       ]
     },
     {
-      "id": "statistiques",
+      "id": "stat_statistique",
       "label": "Statistiques",
       "boId": "BO5D1",
       "prerequis": [],
-      "levels": [1, 2],
+      "levels": [
+        1,
+        2
+      ],
       "microTargets": [
-        "stat_lire_tableau_5e",
-        "stat_lire_graphique_5e",
+        "stat_donnee_organiser",
+        "stat_lire_tableau",
+        "stat_lire_graphique",
         "stat_effectif_frequence",
+        "stat_representer",
+        "stat_representation_choisir",
         "stat_moyenne",
-        "stat_defis_5e"
+        "stat_defi"
       ]
     },
     {
-      "id": "probabilites",
+      "id": "proba_experience",
       "label": "Probabilités",
       "boId": "BO5D2",
-      "prerequis": ["statistiques"],
-      "levels": [1, 2],
+      "prerequis": [
+        "stat_statistique"
+      ],
+      "levels": [
+        1,
+        2
+      ],
       "microTargets": [
         "proba_vocabulaire",
-        "proba_issues",
+        "proba_issue",
         "proba_equiprobabilite",
         "proba_calculer",
-        "proba_defis"
+        "proba_defi"
       ]
     }
-  ]
+  ],
+  "microSkills": [
+    {
+      "id": "relatif_lire",
+      "label": "Lire et écrire un nombre relatif",
+      "notionId": "relatif_nombre",
+      "prerequis": [],
+      "boId": "BO5N1"
+    },
+    {
+      "id": "relatif_signe",
+      "label": "Identifier le signe d’un nombre relatif",
+      "notionId": "relatif_nombre",
+      "prerequis": [
+        "relatif_lire"
+      ],
+      "boId": "BO5N1"
+    },
+    {
+      "id": "relatif_comparer",
+      "label": "Comparer des nombres relatifs",
+      "notionId": "relatif_nombre",
+      "prerequis": [
+        "relatif_lire",
+        "relatif_signe"
+      ],
+      "boId": "BO5N1"
+    },
+    {
+      "id": "relatif_placer",
+      "label": "Placer des nombres relatifs sur une droite",
+      "notionId": "relatif_nombre",
+      "prerequis": [
+        "relatif_lire",
+        "relatif_comparer"
+      ],
+      "boId": "BO5N1"
+    },
+    {
+      "id": "relatif_oppose",
+      "label": "Déterminer l’opposé d’un nombre relatif",
+      "notionId": "relatif_nombre",
+      "prerequis": [
+        "relatif_signe"
+      ],
+      "boId": "BO5N1"
+    },
+    {
+      "id": "relatif_valeur_absolue",
+      "label": "Déterminer la valeur absolue d’un nombre relatif",
+      "notionId": "relatif_nombre",
+      "prerequis": [
+        "relatif_oppose"
+      ],
+      "boId": "BO5N1"
+    },
+    {
+      "id": "relatif_defi",
+      "label": "Défis sur les nombres relatifs",
+      "notionId": "relatif_nombre",
+      "prerequis": [
+        "relatif_comparer",
+        "relatif_valeur_absolue"
+      ],
+      "boId": "BO5N1"
+    },
+    {
+      "id": "relatif_addition",
+      "label": "Additionner des nombres relatifs",
+      "notionId": "relatif_operation",
+      "prerequis": [
+        "relatif_lire",
+        "relatif_signe"
+      ],
+      "boId": "BO5N1"
+    },
+    {
+      "id": "relatif_soustraction",
+      "label": "Soustraire des nombres relatifs",
+      "notionId": "relatif_operation",
+      "prerequis": [
+        "relatif_addition"
+      ],
+      "boId": "BO5N1"
+    },
+    {
+      "id": "relatif_calcul",
+      "label": "Effectuer des calculs avec des nombres relatifs",
+      "notionId": "relatif_operation",
+      "prerequis": [
+        "relatif_addition",
+        "relatif_soustraction"
+      ],
+      "boId": "BO5N1"
+    },
+    {
+      "id": "relatif_probleme",
+      "label": "Résoudre un problème avec des nombres relatifs",
+      "notionId": "relatif_operation",
+      "prerequis": [
+        "relatif_calcul"
+      ],
+      "boId": "BO5N1"
+    },
+    {
+      "id": "relatif_operation_defi",
+      "label": "Défis sur les opérations avec les relatifs",
+      "notionId": "relatif_operation",
+      "prerequis": [
+        "relatif_probleme"
+      ],
+      "boId": "BO5N1"
+    },
+    {
+      "id": "fraction_egale",
+      "label": "Reconnaître des fractions égales",
+      "notionId": "fraction_nombre",
+      "prerequis": [],
+      "boId": "BO5N2"
+    },
+    {
+      "id": "fraction_simplifier",
+      "label": "Simplifier une fraction",
+      "notionId": "fraction_nombre",
+      "prerequis": [
+        "fraction_egale"
+      ],
+      "boId": "BO5N2"
+    },
+    {
+      "id": "fraction_rationnel",
+      "label": "Reconnaître un nombre rationnel et ses écritures",
+      "notionId": "fraction_nombre",
+      "prerequis": [
+        "fraction_egale"
+      ],
+      "boId": "BO5N2"
+    },
+    {
+      "id": "fraction_comparer",
+      "label": "Comparer des fractions",
+      "notionId": "fraction_nombre",
+      "prerequis": [
+        "fraction_simplifier"
+      ],
+      "boId": "BO5N2"
+    },
+    {
+      "id": "fraction_additionner",
+      "label": "Additionner ou soustraire des fractions simples",
+      "notionId": "fraction_nombre",
+      "prerequis": [
+        "fraction_comparer"
+      ],
+      "boId": "BO5N2"
+    },
+    {
+      "id": "fraction_multiplier",
+      "label": "Multiplier des fractions",
+      "notionId": "fraction_nombre",
+      "prerequis": [
+        "fraction_simplifier"
+      ],
+      "boId": "BO5N2"
+    },
+    {
+      "id": "fraction_quantite",
+      "label": "Calculer la fraction d’un nombre, d’une quantité ou d’une fraction",
+      "notionId": "fraction_nombre",
+      "prerequis": [
+        "fraction_comparer",
+        "fraction_multiplier"
+      ],
+      "boId": "BO5N2"
+    },
+    {
+      "id": "fraction_inverse",
+      "label": "Déterminer l’inverse d’un nombre rationnel ou d’une fraction",
+      "notionId": "fraction_nombre",
+      "prerequis": [
+        "fraction_rationnel",
+        "fraction_multiplier"
+      ],
+      "boId": "BO5N2"
+    },
+    {
+      "id": "fraction_diviser",
+      "label": "Diviser des fractions",
+      "notionId": "fraction_nombre",
+      "prerequis": [
+        "fraction_inverse",
+        "fraction_multiplier"
+      ],
+      "boId": "BO5N2"
+    },
+    {
+      "id": "fraction_oppose",
+      "label": "Exprimer l’opposé d’un nombre rationnel",
+      "notionId": "fraction_nombre",
+      "prerequis": [
+        "fraction_rationnel"
+      ],
+      "boId": "BO5N2"
+    },
+    {
+      "id": "fraction_defi",
+      "label": "Défis sur les fractions et les nombres rationnels",
+      "notionId": "fraction_nombre",
+      "prerequis": [
+        "fraction_additionner",
+        "fraction_quantite",
+        "fraction_diviser",
+        "fraction_oppose"
+      ],
+      "boId": "BO5N2"
+    },
+    {
+      "id": "prop_reconnaitre",
+      "label": "Reconnaître une situation de proportionnalité ou de non-proportionnalité",
+      "notionId": "prop_proportionnalite",
+      "prerequis": [],
+      "boId": "BO5P1"
+    },
+    {
+      "id": "prop_table",
+      "label": "Compléter et utiliser un tableau de proportionnalité",
+      "notionId": "prop_proportionnalite",
+      "prerequis": [
+        "prop_reconnaitre"
+      ],
+      "boId": "BO5P1"
+    },
+    {
+      "id": "prop_quatrieme",
+      "label": "Calculer une quatrième proportionnelle",
+      "notionId": "prop_proportionnalite",
+      "prerequis": [
+        "prop_table"
+      ],
+      "boId": "BO5P1"
+    },
+    {
+      "id": "prop_coeff",
+      "label": "Utiliser un coefficient de proportionnalité ou un passage à l’unité",
+      "notionId": "prop_proportionnalite",
+      "prerequis": [
+        "prop_table"
+      ],
+      "boId": "BO5P1"
+    },
+    {
+      "id": "prop_rapport",
+      "label": "Exprimer et utiliser un ratio simple",
+      "notionId": "prop_proportionnalite",
+      "prerequis": [
+        "prop_reconnaitre"
+      ],
+      "boId": "BO5P1"
+    },
+    {
+      "id": "prop_pourcentage",
+      "label": "Calculer et interpréter un pourcentage simple",
+      "notionId": "prop_proportionnalite",
+      "prerequis": [
+        "prop_coeff"
+      ],
+      "boId": "BO5P1"
+    },
+    {
+      "id": "prop_coeff_multiplicateur",
+      "label": "Utiliser un coefficient multiplicateur simple",
+      "notionId": "prop_proportionnalite",
+      "prerequis": [
+        "prop_pourcentage"
+      ],
+      "boId": "BO5P1"
+    },
+    {
+      "id": "prop_probleme",
+      "label": "Résoudre un problème de proportionnalité",
+      "notionId": "prop_proportionnalite",
+      "prerequis": [
+        "prop_quatrieme",
+        "prop_coeff",
+        "prop_pourcentage"
+      ],
+      "boId": "BO5P1"
+    },
+    {
+      "id": "prop_defi",
+      "label": "Défis sur la proportionnalité, les ratios et les pourcentages",
+      "notionId": "prop_proportionnalite",
+      "prerequis": [
+        "prop_rapport",
+        "prop_probleme",
+        "prop_coeff_multiplicateur"
+      ],
+      "boId": "BO5P1"
+    },
+    {
+      "id": "litteral_expression_comprendre",
+      "label": "Comprendre une expression littérale simple",
+      "notionId": "litteral_calcul",
+      "prerequis": [],
+      "boId": "BO5A1"
+    },
+    {
+      "id": "litteral_traduire",
+      "label": "Traduire une phrase ou une situation en expression littérale",
+      "notionId": "litteral_calcul",
+      "prerequis": [
+        "litteral_expression_comprendre"
+      ],
+      "boId": "BO5A1"
+    },
+    {
+      "id": "litteral_substituer",
+      "label": "Calculer la valeur d’une expression littérale pour une valeur donnée",
+      "notionId": "litteral_calcul",
+      "prerequis": [
+        "litteral_expression_comprendre"
+      ],
+      "boId": "BO5A1"
+    },
+    {
+      "id": "litteral_reduire",
+      "label": "Réduire une expression littérale simple",
+      "notionId": "litteral_calcul",
+      "prerequis": [
+        "litteral_expression_comprendre"
+      ],
+      "boId": "BO5A1"
+    },
+    {
+      "id": "litteral_defi",
+      "label": "Défis sur le calcul littéral",
+      "notionId": "litteral_calcul",
+      "prerequis": [
+        "litteral_traduire",
+        "litteral_substituer",
+        "litteral_reduire"
+      ],
+      "boId": "BO5A1"
+    },
+    {
+      "id": "angle_lire",
+      "label": "Lire un angle",
+      "notionId": "angle_mesure",
+      "prerequis": [],
+      "boId": "BO5G1"
+    },
+    {
+      "id": "angle_mesurer",
+      "label": "Mesurer un angle",
+      "notionId": "angle_mesure",
+      "prerequis": [
+        "angle_lire"
+      ],
+      "boId": "BO5G1"
+    },
+    {
+      "id": "angle_tracer",
+      "label": "Tracer un angle",
+      "notionId": "angle_mesure",
+      "prerequis": [
+        "angle_mesurer"
+      ],
+      "boId": "BO5G1"
+    },
+    {
+      "id": "angle_estimer",
+      "label": "Estimer la mesure d’un angle",
+      "notionId": "angle_mesure",
+      "prerequis": [
+        "angle_lire"
+      ],
+      "boId": "BO5G1"
+    },
+    {
+      "id": "angle_defi",
+      "label": "Défis sur les angles",
+      "notionId": "angle_mesure",
+      "prerequis": [
+        "angle_tracer",
+        "angle_estimer"
+      ],
+      "boId": "BO5G1"
+    },
+    {
+      "id": "triangle_reconnaitre",
+      "label": "Reconnaître un triangle",
+      "notionId": "triangle_figure",
+      "prerequis": [],
+      "boId": "BO5G1"
+    },
+    {
+      "id": "triangle_nature",
+      "label": "Reconnaître la nature d’un triangle",
+      "notionId": "triangle_figure",
+      "prerequis": [
+        "triangle_reconnaitre"
+      ],
+      "boId": "BO5G1"
+    },
+    {
+      "id": "triangle_construire",
+      "label": "Construire un triangle",
+      "notionId": "triangle_figure",
+      "prerequis": [
+        "triangle_reconnaitre",
+        "angle_tracer"
+      ],
+      "boId": "BO5G1"
+    },
+    {
+      "id": "triangle_somme_angle",
+      "label": "Utiliser la somme des angles d’un triangle",
+      "notionId": "triangle_figure",
+      "prerequis": [
+        "triangle_reconnaitre",
+        "angle_mesurer"
+      ],
+      "boId": "BO5G1"
+    },
+    {
+      "id": "triangle_defi",
+      "label": "Défis sur les triangles",
+      "notionId": "triangle_figure",
+      "prerequis": [
+        "triangle_nature",
+        "triangle_construire",
+        "triangle_somme_angle"
+      ],
+      "boId": "BO5G1"
+    },
+    {
+      "id": "sym_centrale_reconnaitre",
+      "label": "Reconnaître une symétrie centrale",
+      "notionId": "sym_centrale",
+      "prerequis": [],
+      "boId": "BO5G1"
+    },
+    {
+      "id": "sym_centrale_point",
+      "label": "Construire l’image d’un point par symétrie centrale",
+      "notionId": "sym_centrale",
+      "prerequis": [
+        "sym_centrale_reconnaitre"
+      ],
+      "boId": "BO5G1"
+    },
+    {
+      "id": "sym_centrale_figure",
+      "label": "Construire l’image d’une figure par symétrie centrale",
+      "notionId": "sym_centrale",
+      "prerequis": [
+        "sym_centrale_point"
+      ],
+      "boId": "BO5G1"
+    },
+    {
+      "id": "sym_centrale_propriete",
+      "label": "Utiliser les propriétés de la symétrie centrale, dont le point invariant",
+      "notionId": "sym_centrale",
+      "prerequis": [
+        "sym_centrale_figure"
+      ],
+      "boId": "BO5G1"
+    },
+    {
+      "id": "sym_centrale_defi",
+      "label": "Défis sur la symétrie centrale",
+      "notionId": "sym_centrale",
+      "prerequis": [
+        "sym_centrale_propriete"
+      ],
+      "boId": "BO5G1"
+    },
+    {
+      "id": "aire_comprendre",
+      "label": "Comprendre ce qu’est une aire",
+      "notionId": "aire_surface",
+      "prerequis": [],
+      "boId": "BO5M1"
+    },
+    {
+      "id": "aire_triangle",
+      "label": "Calculer l’aire d’un triangle",
+      "notionId": "aire_surface",
+      "prerequis": [
+        "aire_comprendre"
+      ],
+      "boId": "BO5M1"
+    },
+    {
+      "id": "aire_parallelogramme",
+      "label": "Calculer l’aire d’un parallélogramme",
+      "notionId": "aire_surface",
+      "prerequis": [
+        "aire_comprendre"
+      ],
+      "boId": "BO5M1"
+    },
+    {
+      "id": "aire_composer",
+      "label": "Calculer l’aire d’une figure composée",
+      "notionId": "aire_surface",
+      "prerequis": [
+        "aire_triangle",
+        "aire_parallelogramme"
+      ],
+      "boId": "BO5M1"
+    },
+    {
+      "id": "aire_defi",
+      "label": "Défis sur les aires",
+      "notionId": "aire_surface",
+      "prerequis": [
+        "aire_composer"
+      ],
+      "boId": "BO5M1"
+    },
+    {
+      "id": "volume_comprendre",
+      "label": "Comprendre ce qu’est un volume",
+      "notionId": "volume_solide",
+      "prerequis": [],
+      "boId": "BO5G2"
+    },
+    {
+      "id": "volume_pave",
+      "label": "Calculer le volume d’un pavé droit",
+      "notionId": "volume_solide",
+      "prerequis": [
+        "volume_comprendre"
+      ],
+      "boId": "BO5G2"
+    },
+    {
+      "id": "volume_prisme",
+      "label": "Calculer le volume d’un prisme droit",
+      "notionId": "volume_solide",
+      "prerequis": [
+        "volume_comprendre",
+        "aire_comprendre"
+      ],
+      "boId": "BO5G2"
+    },
+    {
+      "id": "volume_cylindre",
+      "label": "Calculer le volume d’un cylindre",
+      "notionId": "volume_solide",
+      "prerequis": [
+        "volume_comprendre",
+        "aire_comprendre"
+      ],
+      "boId": "BO5G2"
+    },
+    {
+      "id": "volume_assemblage",
+      "label": "Calculer le volume d’un assemblage de solides",
+      "notionId": "volume_solide",
+      "prerequis": [
+        "volume_pave",
+        "volume_prisme",
+        "volume_cylindre"
+      ],
+      "boId": "BO5G2"
+    },
+    {
+      "id": "volume_unite",
+      "label": "Convertir et utiliser les unités de volume",
+      "notionId": "volume_solide",
+      "prerequis": [
+        "volume_comprendre"
+      ],
+      "boId": "BO5G2"
+    },
+    {
+      "id": "volume_defi",
+      "label": "Résoudre des problèmes et défis sur les volumes",
+      "notionId": "volume_solide",
+      "prerequis": [
+        "volume_pave",
+        "volume_prisme",
+        "volume_cylindre",
+        "volume_unite"
+      ],
+      "boId": "BO5G2"
+    },
+    {
+      "id": "stat_donnee_organiser",
+      "label": "Recueillir et organiser des données",
+      "notionId": "stat_statistique",
+      "prerequis": [],
+      "boId": "BO5D1"
+    },
+    {
+      "id": "stat_lire_tableau",
+      "label": "Lire et interpréter un tableau statistique",
+      "notionId": "stat_statistique",
+      "prerequis": [
+        "stat_donnee_organiser"
+      ],
+      "boId": "BO5D1"
+    },
+    {
+      "id": "stat_lire_graphique",
+      "label": "Lire et interpréter un diagramme ou un graphique",
+      "notionId": "stat_statistique",
+      "prerequis": [
+        "stat_lire_tableau"
+      ],
+      "boId": "BO5D1"
+    },
+    {
+      "id": "stat_effectif_frequence",
+      "label": "Calculer un effectif ou une fréquence",
+      "notionId": "stat_statistique",
+      "prerequis": [
+        "stat_lire_tableau"
+      ],
+      "boId": "BO5D1"
+    },
+    {
+      "id": "stat_representer",
+      "label": "Représenter des données par un tableau, un diagramme ou un graphique",
+      "notionId": "stat_statistique",
+      "prerequis": [
+        "stat_lire_tableau",
+        "stat_effectif_frequence"
+      ],
+      "boId": "BO5D1"
+    },
+    {
+      "id": "stat_representation_choisir",
+      "label": "Choisir une représentation adaptée",
+      "notionId": "stat_statistique",
+      "prerequis": [
+        "stat_lire_graphique",
+        "stat_representer"
+      ],
+      "boId": "BO5D1"
+    },
+    {
+      "id": "stat_moyenne",
+      "label": "Calculer et interpréter une moyenne simple",
+      "notionId": "stat_statistique",
+      "prerequis": [
+        "stat_effectif_frequence"
+      ],
+      "boId": "BO5D1"
+    },
+    {
+      "id": "stat_defi",
+      "label": "Défis sur les statistiques",
+      "notionId": "stat_statistique",
+      "prerequis": [
+        "stat_lire_graphique",
+        "stat_representation_choisir",
+        "stat_moyenne"
+      ],
+      "boId": "BO5D1"
+    },
+    {
+      "id": "proba_vocabulaire",
+      "label": "Comprendre le vocabulaire des probabilités",
+      "notionId": "proba_experience",
+      "prerequis": [],
+      "boId": "BO5D2"
+    },
+    {
+      "id": "proba_issue",
+      "label": "Déterminer les issues d’une expérience aléatoire simple",
+      "notionId": "proba_experience",
+      "prerequis": [
+        "proba_vocabulaire"
+      ],
+      "boId": "BO5D2"
+    },
+    {
+      "id": "proba_equiprobabilite",
+      "label": "Reconnaître une situation d’équiprobabilité",
+      "notionId": "proba_experience",
+      "prerequis": [
+        "proba_issue"
+      ],
+      "boId": "BO5D2"
+    },
+    {
+      "id": "proba_calculer",
+      "label": "Calculer une probabilité simple",
+      "notionId": "proba_experience",
+      "prerequis": [
+        "proba_issue",
+        "fraction_comparer"
+      ],
+      "boId": "BO5D2"
+    },
+    {
+      "id": "proba_defi",
+      "label": "Défis sur les probabilités",
+      "notionId": "proba_experience",
+      "prerequis": [
+        "proba_equiprobabilite",
+        "proba_calculer"
+      ],
+      "boId": "BO5D2"
+    },
+    {
+      "id": "algo_sequence",
+      "label": "Manipuler et séquencer des instructions simples",
+      "notionId": "algo_programmation",
+      "prerequis": [],
+      "boId": "BO5I1"
+    },
+    {
+      "id": "algo_entree_sortie",
+      "label": "Identifier les entrées et sorties d’un programme",
+      "notionId": "algo_programmation",
+      "prerequis": [
+        "algo_sequence"
+      ],
+      "boId": "BO5I1"
+    },
+    {
+      "id": "algo_test_condition",
+      "label": "Utiliser des tests et conditions simples",
+      "notionId": "algo_programmation",
+      "prerequis": [
+        "algo_sequence"
+      ],
+      "boId": "BO5I1"
+    },
+    {
+      "id": "algo_formule_bloc",
+      "label": "Représenter une formule avec des blocs",
+      "notionId": "algo_programmation",
+      "prerequis": [
+        "algo_entree_sortie",
+        "litteral_expression_comprendre"
+      ],
+      "boId": "BO5I1"
+    },
+    {
+      "id": "algo_expression_valeur",
+      "label": "Calculer la valeur d’une expression informatique",
+      "notionId": "algo_programmation",
+      "prerequis": [
+        "algo_formule_bloc",
+        "litteral_substituer"
+      ],
+      "boId": "BO5I1"
+    },
+    {
+      "id": "algo_prevoir_expression",
+      "label": "Prévoir le résultat avant exécution",
+      "notionId": "algo_programmation",
+      "prerequis": [
+        "algo_expression_valeur"
+      ],
+      "boId": "BO5I1"
+    },
+    {
+      "id": "algo_parametre",
+      "label": "Analyser un programme simple et modifier ses paramètres",
+      "notionId": "algo_programmation",
+      "prerequis": [
+        "algo_prevoir_expression"
+      ],
+      "boId": "BO5I1"
+    },
+    {
+      "id": "algo_boucle",
+      "label": "Utiliser une boucle inconditionnelle simple",
+      "notionId": "algo_programmation",
+      "prerequis": [
+        "algo_sequence",
+        "algo_parametre"
+      ],
+      "boId": "BO5I1"
+    },
+    {
+      "id": "algo_defi",
+      "label": "Défis d’algorithmique et programmation",
+      "notionId": "algo_programmation",
+      "prerequis": [
+        "algo_boucle",
+        "algo_prevoir_expression"
+      ],
+      "boId": "BO5I1"
+    }
+  ],
+  "microGraph": []
 }

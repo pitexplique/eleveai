@@ -29,7 +29,7 @@ export const operationsRelatifsBank: TutorBankItemV4[] = [
     id: "relatif_addition_fixed_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "operations_relatifs",
+    notionId: "relatif_operation",
     microId: "relatif_addition",
     difficulty: 1,
     theme: "neutral",
@@ -42,14 +42,14 @@ export const operationsRelatifsBank: TutorBankItemV4[] = [
           "Méthode : on applique la règle des signes, puis on calcule les distances à zéro.\n\nCalcul : " +
           ("3 + 2 = 5.") +
           "\n\nConclusion : le résultat obtenu est la bonne réponse.",
-    tags: ["relatifs", "addition"],
+    tags: ["relatif", "addition"],
   },
   {
     kind: "fixed",
     id: "relatif_addition_fixed_2",
     niveau: "5e",
     matiere: "maths",
-    notionId: "operations_relatifs",
+    notionId: "relatif_operation",
     microId: "relatif_addition",
     difficulty: 1,
     theme: "neutral",
@@ -62,14 +62,14 @@ export const operationsRelatifsBank: TutorBankItemV4[] = [
           "Méthode : on applique la règle des signes, puis on calcule les distances à zéro.\n\nCalcul : " +
           ("-4 + (-3) = -7.") +
           "\n\nConclusion : le résultat obtenu est la bonne réponse.",
-    tags: ["relatifs", "addition"],
+    tags: ["relatif", "addition"],
   },
   {
     kind: "fixed",
     id: "relatif_addition_fixed_3",
     niveau: "5e",
     matiere: "maths",
-    notionId: "operations_relatifs",
+    notionId: "relatif_operation",
     microId: "relatif_addition",
     difficulty: 2,
     theme: "neutral",
@@ -82,14 +82,14 @@ export const operationsRelatifsBank: TutorBankItemV4[] = [
           "Méthode : on applique la règle des signes, puis on calcule les distances à zéro.\n\nCalcul : " +
           ("-5 + 2 = -3 car 5 - 2 = 3 et le résultat garde le signe du nombre qui a la plus grande distance à 0.") +
           "\n\nConclusion : le résultat obtenu est la bonne réponse.",
-    tags: ["relatifs", "addition"],
+    tags: ["relatif", "addition"],
   },
   {
     kind: "fixed",
     id: "relatif_addition_fixed_4",
     niveau: "5e",
     matiere: "maths",
-    notionId: "operations_relatifs",
+    notionId: "relatif_operation",
     microId: "relatif_addition",
     difficulty: 2,
     theme: "neutral",
@@ -102,14 +102,14 @@ export const operationsRelatifsBank: TutorBankItemV4[] = [
           "Méthode : on applique la règle des signes, puis on calcule les distances à zéro.\n\nCalcul : " +
           ("7 + (-10) = -3.") +
           "\n\nConclusion : le résultat obtenu est la bonne réponse.",
-    tags: ["relatifs", "addition"],
+    tags: ["relatif", "addition"],
   },
   {
     kind: "fixed",
     id: "relatif_addition_fixed_5",
     niveau: "5e",
     matiere: "maths",
-    notionId: "operations_relatifs",
+    notionId: "relatif_operation",
     microId: "relatif_addition",
     difficulty: 2,
     theme: "neutral",
@@ -122,14 +122,14 @@ export const operationsRelatifsBank: TutorBankItemV4[] = [
           "Méthode : on applique la règle des signes, puis on calcule les distances à zéro.\n\nCalcul : " +
           ("+(+2) + (-2) = 2 + (-2) = 0.") +
           "\n\nConclusion : le résultat obtenu est la bonne réponse.",
-    tags: ["relatifs", "addition", "parentheses"],
+    tags: ["relatif", "addition", "parentheses"],
   },
   {
     kind: "fixed",
     id: "relatif_addition_qcm_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "operations_relatifs",
+    notionId: "relatif_operation",
     microId: "relatif_addition",
     difficulty: 2,
     theme: "neutral",
@@ -143,19 +143,19 @@ export const operationsRelatifsBank: TutorBankItemV4[] = [
           "Méthode : on applique la règle des signes, puis on calcule les distances à zéro.\n\nCalcul : " +
           ("-6 + 9 = 3.") +
           "\n\nConclusion : le résultat obtenu est la bonne réponse.",
-    tags: ["relatifs", "addition", "qcm"],
+    tags: ["relatif", "addition", "qcm"],
   },
   {
     kind: "template",
     id: "relatif_addition_tpl_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "operations_relatifs",
+    notionId: "relatif_operation",
     microId: "relatif_addition",
     difficulty: 2,
     theme: "neutral",
     hint: "Regarde si les deux termes ont le même signe ou non.",
-    tags: ["relatifs", "addition", "template"],
+    tags: ["relatif", "addition", "template"],
     generate: () => {
       const a = randomChoice([-9, -8, -7, -6, -5, -4, -3, 2, 3, 4, 5, 6, 7, 8, 9]);
       const b = randomChoice([-9, -8, -7, -6, -5, -4, -3, 2, 3, 4, 5, 6, 7, 8, 9]);
@@ -182,7 +182,7 @@ export const operationsRelatifsBank: TutorBankItemV4[] = [
     id: "relatif_soustraction_fixed_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "operations_relatifs",
+    notionId: "relatif_operation",
     microId: "relatif_soustraction",
     difficulty: 1,
     theme: "neutral",
@@ -195,14 +195,14 @@ export const operationsRelatifsBank: TutorBankItemV4[] = [
           "Méthode : on applique la règle des signes, puis on calcule les distances à zéro.\n\nCalcul : " +
           ("5 - 2 = 3.") +
           "\n\nConclusion : le résultat obtenu est la bonne réponse.",
-    tags: ["relatifs", "soustraction"],
+    tags: ["relatif", "soustraction"],
   },
   {
     kind: "fixed",
     id: "relatif_soustraction_fixed_2",
     niveau: "5e",
     matiere: "maths",
-    notionId: "operations_relatifs",
+    notionId: "relatif_operation",
     microId: "relatif_soustraction",
     difficulty: 2,
     theme: "neutral",
@@ -215,14 +215,14 @@ export const operationsRelatifsBank: TutorBankItemV4[] = [
           "Méthode : on applique la règle des signes, puis on calcule les distances à zéro.\n\nCalcul : " +
           ("-2 - 3 = -2 + (-3) = -5.") +
           "\n\nConclusion : le résultat obtenu est la bonne réponse.",
-    tags: ["relatifs", "soustraction", "sans_parentheses"],
+    tags: ["relatif", "soustraction", "sans_parentheses"],
   },
   {
     kind: "fixed",
     id: "relatif_soustraction_fixed_3",
     niveau: "5e",
     matiere: "maths",
-    notionId: "operations_relatifs",
+    notionId: "relatif_operation",
     microId: "relatif_soustraction",
     difficulty: 2,
     theme: "neutral",
@@ -235,14 +235,14 @@ export const operationsRelatifsBank: TutorBankItemV4[] = [
           "Méthode : on applique la règle des signes, puis on calcule les distances à zéro.\n\nCalcul : " +
           ("4 - (-3) = 4 + 3 = 7.") +
           "\n\nConclusion : le résultat obtenu est la bonne réponse.",
-    tags: ["relatifs", "soustraction", "regle_signes"],
+    tags: ["relatif", "soustraction", "regle_signes"],
   },
   {
     kind: "fixed",
     id: "relatif_soustraction_fixed_4",
     niveau: "5e",
     matiere: "maths",
-    notionId: "operations_relatifs",
+    notionId: "relatif_operation",
     microId: "relatif_soustraction",
     difficulty: 2,
     theme: "neutral",
@@ -255,14 +255,14 @@ export const operationsRelatifsBank: TutorBankItemV4[] = [
           "Méthode : on applique la règle des signes, puis on calcule les distances à zéro.\n\nCalcul : " +
           ("-5 - (-2) = -5 + 2 = -3.") +
           "\n\nConclusion : le résultat obtenu est la bonne réponse.",
-    tags: ["relatifs", "soustraction", "regle_signes"],
+    tags: ["relatif", "soustraction", "regle_signes"],
   },
   {
     kind: "fixed",
     id: "relatif_soustraction_fixed_5",
     niveau: "5e",
     matiere: "maths",
-    notionId: "operations_relatifs",
+    notionId: "relatif_operation",
     microId: "relatif_soustraction",
     difficulty: 3,
     theme: "neutral",
@@ -275,14 +275,14 @@ export const operationsRelatifsBank: TutorBankItemV4[] = [
           "Méthode : on applique la règle des signes, puis on calcule les distances à zéro.\n\nCalcul : " +
           ("+(+2) - (-2) = 2 + 2 = 4.") +
           "\n\nConclusion : le résultat obtenu est la bonne réponse.",
-    tags: ["relatifs", "soustraction", "parentheses", "regle_signes"],
+    tags: ["relatif", "soustraction", "parentheses", "regle_signes"],
   },
   {
     kind: "fixed",
     id: "relatif_soustraction_fixed_6",
     niveau: "5e",
     matiere: "maths",
-    notionId: "operations_relatifs",
+    notionId: "relatif_operation",
     microId: "relatif_soustraction",
     difficulty: 3,
     theme: "neutral",
@@ -295,14 +295,14 @@ export const operationsRelatifsBank: TutorBankItemV4[] = [
           "Méthode : on applique la règle des signes, puis on calcule les distances à zéro.\n\nCalcul : " +
           ("-(-2) = +2.") +
           "\n\nConclusion : le résultat obtenu est la bonne réponse.",
-    tags: ["relatifs", "soustraction", "parentheses", "regle_signes"],
+    tags: ["relatif", "soustraction", "parentheses", "regle_signes"],
   },
   {
     kind: "fixed",
     id: "relatif_soustraction_qcm_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "operations_relatifs",
+    notionId: "relatif_operation",
     microId: "relatif_soustraction",
     difficulty: 3,
     theme: "neutral",
@@ -316,19 +316,19 @@ export const operationsRelatifsBank: TutorBankItemV4[] = [
           "Méthode : on applique la règle des signes, puis on calcule les distances à zéro.\n\nCalcul : " +
           ("-7 - (-4) = -7 + 4 = -3.") +
           "\n\nConclusion : le résultat obtenu est la bonne réponse.",
-    tags: ["relatifs", "soustraction", "qcm"],
+    tags: ["relatif", "soustraction", "qcm"],
   },
   {
     kind: "template",
     id: "relatif_soustraction_tpl_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "operations_relatifs",
+    notionId: "relatif_operation",
     microId: "relatif_soustraction",
     difficulty: 3,
     theme: "neutral",
     hint: "Remplace la soustraction par une addition de l’opposé.",
-    tags: ["relatifs", "soustraction", "template"],
+    tags: ["relatif", "soustraction", "template"],
     generate: () => {
       const a = randomChoice([-9, -8, -7, -6, -5, -4, -3, 2, 3, 4, 5, 6, 7, 8, 9]);
       const b = randomChoice([-6, -5, -4, -3, -2, 2, 3, 4, 5, 6]);
@@ -355,7 +355,7 @@ export const operationsRelatifsBank: TutorBankItemV4[] = [
     id: "relatif_calcul_fixed_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "operations_relatifs",
+    notionId: "relatif_operation",
     microId: "relatif_calcul",
     difficulty: 3,
     theme: "neutral",
@@ -368,14 +368,14 @@ export const operationsRelatifsBank: TutorBankItemV4[] = [
           "Méthode : on applique la règle des signes, puis on calcule les distances à zéro.\n\nCalcul : " +
           ("-2 + 5 = 3 puis 3 - 3 = 0.") +
           "\n\nConclusion : le résultat obtenu est la bonne réponse.",
-    tags: ["relatifs", "calcul"],
+    tags: ["relatif", "calcul"],
   },
   {
     kind: "fixed",
     id: "relatif_calcul_fixed_2",
     niveau: "5e",
     matiere: "maths",
-    notionId: "operations_relatifs",
+    notionId: "relatif_operation",
     microId: "relatif_calcul",
     difficulty: 3,
     theme: "neutral",
@@ -388,14 +388,14 @@ export const operationsRelatifsBank: TutorBankItemV4[] = [
           "Méthode : on applique la règle des signes, puis on calcule les distances à zéro.\n\nCalcul : " +
           ("-4 - 3 = -7 puis -7 + 10 = 3.") +
           "\n\nConclusion : le résultat obtenu est la bonne réponse.",
-    tags: ["relatifs", "calcul", "sans_parentheses"],
+    tags: ["relatif", "calcul", "sans_parentheses"],
   },
   {
     kind: "fixed",
     id: "relatif_calcul_fixed_3",
     niveau: "5e",
     matiere: "maths",
-    notionId: "operations_relatifs",
+    notionId: "relatif_operation",
     microId: "relatif_calcul",
     difficulty: 4,
     theme: "neutral",
@@ -408,14 +408,14 @@ export const operationsRelatifsBank: TutorBankItemV4[] = [
           "Méthode : on applique la règle des signes, puis on calcule les distances à zéro.\n\nCalcul : " +
           ("+(+2) + (-3) - (-4) = 2 - 3 + 4 = -1 + 4 = 3.") +
           "\n\nConclusion : le résultat obtenu est la bonne réponse.",
-    tags: ["relatifs", "calcul", "parentheses", "regle_signes"],
+    tags: ["relatif", "calcul", "parentheses", "regle_signes"],
   },
   {
     kind: "fixed",
     id: "relatif_calcul_qcm_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "operations_relatifs",
+    notionId: "relatif_operation",
     microId: "relatif_calcul",
     difficulty: 4,
     theme: "neutral",
@@ -429,19 +429,19 @@ export const operationsRelatifsBank: TutorBankItemV4[] = [
           "Méthode : on applique la règle des signes, puis on calcule les distances à zéro.\n\nCalcul : " +
           ("-6 - (-2) + 1 = -6 + 2 + 1 = -4 + 1 = -3.") +
           "\n\nConclusion : le résultat obtenu est la bonne réponse.",
-    tags: ["relatifs", "calcul", "qcm"],
+    tags: ["relatif", "calcul", "qcm"],
   },
   {
     kind: "template",
     id: "relatif_calcul_tpl_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "operations_relatifs",
+    notionId: "relatif_operation",
     microId: "relatif_calcul",
     difficulty: 4,
     theme: "neutral",
     hint: "Simplifie d’abord les écritures avec parenthèses, puis calcule.",
-    tags: ["relatifs", "calcul", "template"],
+    tags: ["relatif", "calcul", "template"],
     generate: () => {
       const a = randomChoice([-8, -6, -4, -3, 2, 3, 4, 5, 6]);
       const b = randomChoice([-6, -4, -3, -2, 2, 3, 4, 5]);
@@ -469,7 +469,7 @@ export const operationsRelatifsBank: TutorBankItemV4[] = [
     id: "relatif_probleme_fixed_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "operations_relatifs",
+    notionId: "relatif_operation",
     microId: "relatif_probleme",
     difficulty: 3,
     theme: "neutral",
@@ -482,14 +482,14 @@ export const operationsRelatifsBank: TutorBankItemV4[] = [
           "Méthode : on applique la règle des signes, puis on calcule les distances à zéro.\n\nCalcul : " +
           ("-2 - 3 = -5. La nouvelle température est donc -5 °C.") +
           "\n\nConclusion : le résultat obtenu est la bonne réponse.",
-    tags: ["relatifs", "probleme", "temperature"],
+    tags: ["relatif", "probleme", "temperature"],
   },
   {
     kind: "fixed",
     id: "relatif_probleme_fixed_2",
     niveau: "5e",
     matiere: "maths",
-    notionId: "operations_relatifs",
+    notionId: "relatif_operation",
     microId: "relatif_probleme",
     difficulty: 3,
     theme: "sport",
@@ -502,14 +502,14 @@ export const operationsRelatifsBank: TutorBankItemV4[] = [
           "Méthode : on applique la règle des signes, puis on calcule les distances à zéro.\n\nCalcul : " +
           ("-4 + 7 = 3. La variation totale est de +3 points.") +
           "\n\nConclusion : le résultat obtenu est la bonne réponse.",
-    tags: ["relatifs", "probleme", "sport"],
+    tags: ["relatif", "probleme", "sport"],
   },
   {
     kind: "fixed",
     id: "relatif_probleme_fixed_3",
     niveau: "5e",
     matiere: "maths",
-    notionId: "operations_relatifs",
+    notionId: "relatif_operation",
     microId: "relatif_probleme",
     difficulty: 4,
     theme: "reunion",
@@ -522,14 +522,14 @@ export const operationsRelatifsBank: TutorBankItemV4[] = [
           "Méthode : on applique la règle des signes, puis on calcule les distances à zéro.\n\nCalcul : " +
           ("-6 + 2 - 5 = -4 - 5 = -9. Le plongeur est à -9 m.") +
           "\n\nConclusion : le résultat obtenu est la bonne réponse.",
-    tags: ["relatifs", "probleme", "reunion"],
+    tags: ["relatif", "probleme", "reunion"],
   },
   {
     kind: "fixed",
     id: "relatif_probleme_qcm_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "operations_relatifs",
+    notionId: "relatif_operation",
     microId: "relatif_probleme",
     difficulty: 4,
     theme: "neutral",
@@ -543,7 +543,7 @@ export const operationsRelatifsBank: TutorBankItemV4[] = [
           "Méthode : on applique la règle des signes, puis on calcule les distances à zéro.\n\nCalcul : " +
           ("-8 + 5 = -3. Le nouveau solde est de -3 €.") +
           "\n\nConclusion : le résultat obtenu est la bonne réponse.",
-    tags: ["relatifs", "probleme", "qcm"],
+    tags: ["relatif", "probleme", "qcm"],
   },
 
   // =========================
@@ -551,11 +551,11 @@ export const operationsRelatifsBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "fixed",
-    id: "relatif_defis_ops_fixed_1",
+    id: "relatif_operation_defi_fixed_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "operations_relatifs",
-    microId: "relatif_defis_ops",
+    notionId: "relatif_operation",
+    microId: "relatif_operation_defi",
     difficulty: 4,
     theme: "neutral",
     text: "Explique pourquoi -2 - 3 donne un résultat négatif.",
@@ -567,15 +567,15 @@ export const operationsRelatifsBank: TutorBankItemV4[] = [
           "Méthode : on applique la règle des signes, puis on calcule les distances à zéro.\n\nCalcul : " +
           ("À partir de -2, soustraire 3 revient à reculer de 3 unités vers la gauche. On arrive à -5, qui est négatif.") +
           "\n\nConclusion : le résultat obtenu est la bonne réponse.",
-    tags: ["relatifs", "defi", "raisonnement", "sans_parentheses"],
+    tags: ["relatif", "defi", "raisonnement", "sans_parentheses"],
   },
   {
     kind: "fixed",
-    id: "relatif_defis_ops_fixed_2",
+    id: "relatif_operation_defi_fixed_2",
     niveau: "5e",
     matiere: "maths",
-    notionId: "operations_relatifs",
-    microId: "relatif_defis_ops",
+    notionId: "relatif_operation",
+    microId: "relatif_operation_defi",
     difficulty: 4,
     theme: "neutral",
     text: "Calcule : -(+3) - (-5)",
@@ -587,15 +587,15 @@ export const operationsRelatifsBank: TutorBankItemV4[] = [
           "Méthode : on applique la règle des signes, puis on calcule les distances à zéro.\n\nCalcul : " +
           ("-(+3) = -3 et -(-5) = +5, donc -3 + 5 = 2.") +
           "\n\nConclusion : le résultat obtenu est la bonne réponse.",
-    tags: ["relatifs", "defi", "parentheses", "regle_signes"],
+    tags: ["relatif", "defi", "parentheses", "regle_signes"],
   },
   {
     kind: "fixed",
-    id: "relatif_defis_ops_qcm_1",
+    id: "relatif_operation_defi_qcm_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "operations_relatifs",
-    microId: "relatif_defis_ops",
+    notionId: "relatif_operation",
+    microId: "relatif_operation_defi",
     difficulty: 4,
     theme: "neutral",
     text: "Quel calcul donne 4 ?",
@@ -608,19 +608,19 @@ export const operationsRelatifsBank: TutorBankItemV4[] = [
           "Méthode : on applique la règle des signes, puis on calcule les distances à zéro.\n\nCalcul : " +
           ("-2 - (-6) = -2 + 6 = 4.") +
           "\n\nConclusion : le résultat obtenu est la bonne réponse.",
-    tags: ["relatifs", "defi", "qcm"],
+    tags: ["relatif", "defi", "qcm"],
   },
   {
     kind: "template",
-    id: "relatif_defis_ops_tpl_1",
+    id: "relatif_operation_defi_tpl_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "operations_relatifs",
-    microId: "relatif_defis_ops",
+    notionId: "relatif_operation",
+    microId: "relatif_operation_defi",
     difficulty: 5,
     theme: "neutral",
     hint: "Transforme d’abord les doubles signes, puis calcule.",
-    tags: ["relatifs", "defi", "template"],
+    tags: ["relatif", "defi", "template"],
     generate: () => {
       const a = randomChoice([-6, -5, -4, -3, 2, 3, 4, 5, 6]);
       const b = randomChoice([-5, -4, -3, -2, 2, 3, 4, 5]);
@@ -646,7 +646,7 @@ export const operationsRelatifsBank: TutorBankItemV4[] = [
     id: "relatif_addition_open_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "operations_relatifs",
+    notionId: "relatif_operation",
     microId: "relatif_addition",
     difficulty: 3,
     theme: "neutral",
@@ -659,14 +659,14 @@ export const operationsRelatifsBank: TutorBankItemV4[] = [
           "Méthode : on applique la règle des signes, puis on calcule les distances à zéro.\n\nCalcul : " +
           ("On part de -5 et on avance de 2 unités vers la droite : on arrive à -3.") +
           "\n\nConclusion : le résultat obtenu est la bonne réponse.",
-    tags: ["relatifs", "open", "addition"],
+    tags: ["relatif", "open", "addition"],
   },
   {
     kind: "fixed",
     id: "relatif_soustraction_open_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "operations_relatifs",
+    notionId: "relatif_operation",
     microId: "relatif_soustraction",
     difficulty: 3,
     theme: "neutral",
@@ -679,14 +679,14 @@ export const operationsRelatifsBank: TutorBankItemV4[] = [
           "Méthode : on applique la règle des signes, puis on calcule les distances à zéro.\n\nCalcul : " +
           ("Soustraire -3 revient à ajouter +3. Donc 4 - (-3) = 4 + 3 = 7.") +
           "\n\nConclusion : le résultat obtenu est la bonne réponse.",
-    tags: ["relatifs", "open", "soustraction"],
+    tags: ["relatif", "open", "soustraction"],
   },
   {
     kind: "fixed",
     id: "relatif_calcul_open_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "operations_relatifs",
+    notionId: "relatif_operation",
     microId: "relatif_calcul",
     difficulty: 4,
     theme: "neutral",
@@ -699,14 +699,14 @@ export const operationsRelatifsBank: TutorBankItemV4[] = [
           "Méthode : on applique la règle des signes, puis on calcule les distances à zéro.\n\nCalcul : " +
           ("-6 - (-2) + 1 = -6 + 2 + 1 = -4 + 1 = -3.") +
           "\n\nConclusion : le résultat obtenu est la bonne réponse.",
-    tags: ["relatifs", "open", "calcul"],
+    tags: ["relatif", "open", "calcul"],
   },
   {
     kind: "fixed",
     id: "relatif_probleme_open_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "operations_relatifs",
+    notionId: "relatif_operation",
     microId: "relatif_probleme",
     difficulty: 4,
     theme: "reunion",
@@ -719,15 +719,15 @@ export const operationsRelatifsBank: TutorBankItemV4[] = [
           "Méthode : on applique la règle des signes, puis on calcule les distances à zéro.\n\nCalcul : " +
           ("On calcule -6 + 2 - 5. Le plongeur remonte à -4 m, puis redescend à -9 m.") +
           "\n\nConclusion : le résultat obtenu est la bonne réponse.",
-    tags: ["relatifs", "open", "probleme", "reunion"],
+    tags: ["relatif", "open", "probleme", "reunion"],
   },
   {
     kind: "fixed",
-    id: "relatif_defis_ops_open_1",
+    id: "relatif_operation_defi_open_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "operations_relatifs",
-    microId: "relatif_defis_ops",
+    notionId: "relatif_operation",
+    microId: "relatif_operation_defi",
     difficulty: 4,
     theme: "neutral",
     text: "Un élève écrit : -7 - (-4) = -11. Explique son erreur.",
@@ -739,6 +739,6 @@ export const operationsRelatifsBank: TutorBankItemV4[] = [
           "Méthode : on applique la règle des signes, puis on calcule les distances à zéro.\n\nCalcul : " +
           ("L’élève a traité -(-4) comme -4. Or soustraire -4 revient à ajouter 4 : -7 - (-4) = -7 + 4 = -3.") +
           "\n\nConclusion : le résultat obtenu est la bonne réponse.",
-    tags: ["relatifs", "open", "defi", "erreur"],
+    tags: ["relatif", "open", "defi", "erreur"],
   },
 ];

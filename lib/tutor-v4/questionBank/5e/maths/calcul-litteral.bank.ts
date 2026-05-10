@@ -23,11 +23,11 @@ export const calculLitteralBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "fixed",
-    id: "litteral_expression_fixed_1",
+    id: "litteral_expression_comprendre_fixed_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "calcul_litteral",
-    microId: "litteral_expression",
+    notionId: "litteral_calcul",
+    microId: "litteral_expression_comprendre",
     difficulty: 1,
     theme: "neutral",
     text: "Dans l’expression 3x + 2, quelle lettre représente un nombre ?",
@@ -40,15 +40,15 @@ export const calculLitteralBank: TutorBankItemV4[] = [
           "Méthode : on remplace la lettre par la valeur donnée ou on simplifie l’écriture.\n\nCalcul : " +
           ("Dans 3x + 2, la lettre x représente un nombre.") +
           "\n\nConclusion : l’expression obtenue répond à la question.",
-    tags: ["calcul_litteral", "expression"],
+    tags: ["litteral_calcul", "expression"],
   },
   {
     kind: "fixed",
-    id: "litteral_expression_fixed_2",
+    id: "litteral_expression_comprendre_fixed_2",
     niveau: "5e",
     matiere: "maths",
-    notionId: "calcul_litteral",
-    microId: "litteral_expression",
+    notionId: "litteral_calcul",
+    microId: "litteral_expression_comprendre",
     difficulty: 1,
     theme: "neutral",
     text: "Dans l’écriture 5a, que signifie le 5 ?",
@@ -61,15 +61,15 @@ export const calculLitteralBank: TutorBankItemV4[] = [
           "Méthode : on remplace la lettre par la valeur donnée ou on simplifie l’écriture.\n\nCalcul : " +
           ("Dans 5a, le 5 est le coefficient : il signifie que l’on multiplie a par 5.") +
           "\n\nConclusion : l’expression obtenue répond à la question.",
-    tags: ["calcul_litteral", "expression"],
+    tags: ["litteral_calcul", "expression"],
   },
   {
     kind: "fixed",
-    id: "litteral_expression_fixed_3",
+    id: "litteral_expression_comprendre_fixed_3",
     niveau: "5e",
     matiere: "maths",
-    notionId: "calcul_litteral",
-    microId: "litteral_expression",
+    notionId: "litteral_calcul",
+    microId: "litteral_expression_comprendre",
     difficulty: 1,
     theme: "neutral",
     text: "L’écriture 2x signifie-t-elle 2 + x ou 2 × x ?",
@@ -82,15 +82,15 @@ export const calculLitteralBank: TutorBankItemV4[] = [
           "Méthode : on remplace la lettre par la valeur donnée ou on simplifie l’écriture.\n\nCalcul : " +
           ("2x signifie 2 × x, c’est-à-dire 2 multiplié par x.") +
           "\n\nConclusion : l’expression obtenue répond à la question.",
-    tags: ["calcul_litteral", "expression"],
+    tags: ["litteral_calcul", "expression"],
   },
   {
     kind: "fixed",
-    id: "litteral_expression_qcm_1",
+    id: "litteral_expression_comprendre_qcm_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "calcul_litteral",
-    microId: "litteral_expression",
+    notionId: "litteral_calcul",
+    microId: "litteral_expression_comprendre",
     difficulty: 2,
     theme: "neutral",
     text: "Quelle écriture est une expression littérale ?",
@@ -104,15 +104,15 @@ export const calculLitteralBank: TutorBankItemV4[] = [
           "Méthode : on remplace la lettre par la valeur donnée ou on simplifie l’écriture.\n\nCalcul : " +
           ("4x - 1 contient la lettre x : c’est une expression littérale.") +
           "\n\nConclusion : l’expression obtenue répond à la question.",
-    tags: ["calcul_litteral", "expression", "qcm"],
+    tags: ["litteral_calcul", "expression", "qcm"],
   },
   {
     kind: "fixed",
-    id: "litteral_expression_qcm_2",
+    id: "litteral_expression_comprendre_qcm_2",
     niveau: "5e",
     matiere: "maths",
-    notionId: "calcul_litteral",
-    microId: "litteral_expression",
+    notionId: "litteral_calcul",
+    microId: "litteral_expression_comprendre",
     difficulty: 2,
     theme: "neutral",
     text: "Dans l’expression 2x + 5, quel est le terme constant ?",
@@ -126,19 +126,19 @@ export const calculLitteralBank: TutorBankItemV4[] = [
           "Méthode : on remplace la lettre par la valeur donnée ou on simplifie l’écriture.\n\nCalcul : " +
           ("Dans 2x + 5, le terme constant est 5 car il ne contient pas de lettre.") +
           "\n\nConclusion : l’expression obtenue répond à la question.",
-    tags: ["calcul_litteral", "expression", "qcm"],
+    tags: ["litteral_calcul", "expression", "qcm"],
   },
   {
     kind: "template",
-    id: "litteral_expression_tpl_1",
+    id: "litteral_expression_comprendre_tpl_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "calcul_litteral",
-    microId: "litteral_expression",
+    notionId: "litteral_calcul",
+    microId: "litteral_expression_comprendre",
     difficulty: 2,
     theme: "neutral",
     hint: "Le coefficient est le nombre placé devant la lettre.",
-    tags: ["calcul_litteral", "expression", "template"],
+    tags: ["litteral_calcul", "expression", "template"],
     generate: () => {
       const coef = randomChoice([2, 3, 4, 5, 6, 7, 8, 9]);
       return {
@@ -162,7 +162,7 @@ export const calculLitteralBank: TutorBankItemV4[] = [
     id: "litteral_traduire_fixed_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "calcul_litteral",
+    notionId: "litteral_calcul",
     microId: "litteral_traduire",
     difficulty: 1,
     theme: "neutral",
@@ -176,14 +176,14 @@ export const calculLitteralBank: TutorBankItemV4[] = [
           "Méthode : on remplace la lettre par la valeur donnée ou on simplifie l’écriture.\n\nCalcul : " +
           ("« un nombre x augmenté de 3 » se traduit par x + 3.") +
           "\n\nConclusion : l’expression obtenue répond à la question.",
-    tags: ["calcul_litteral", "traduire"],
+    tags: ["litteral_calcul", "traduire"],
   },
   {
     kind: "fixed",
     id: "litteral_traduire_fixed_2",
     niveau: "5e",
     matiere: "maths",
-    notionId: "calcul_litteral",
+    notionId: "litteral_calcul",
     microId: "litteral_traduire",
     difficulty: 1,
     theme: "neutral",
@@ -197,14 +197,14 @@ export const calculLitteralBank: TutorBankItemV4[] = [
           "Méthode : on remplace la lettre par la valeur donnée ou on simplifie l’écriture.\n\nCalcul : " +
           ("Le double de x se traduit par 2x.") +
           "\n\nConclusion : l’expression obtenue répond à la question.",
-    tags: ["calcul_litteral", "traduire"],
+    tags: ["litteral_calcul", "traduire"],
   },
   {
     kind: "fixed",
     id: "litteral_traduire_fixed_3",
     niveau: "5e",
     matiere: "maths",
-    notionId: "calcul_litteral",
+    notionId: "litteral_calcul",
     microId: "litteral_traduire",
     difficulty: 2,
     theme: "neutral",
@@ -218,14 +218,14 @@ export const calculLitteralBank: TutorBankItemV4[] = [
           "Méthode : on remplace la lettre par la valeur donnée ou on simplifie l’écriture.\n\nCalcul : " +
           ("« 5 de plus que y » se traduit par y + 5.") +
           "\n\nConclusion : l’expression obtenue répond à la question.",
-    tags: ["calcul_litteral", "traduire"],
+    tags: ["litteral_calcul", "traduire"],
   },
   {
     kind: "fixed",
     id: "litteral_traduire_fixed_4",
     niveau: "5e",
     matiere: "maths",
-    notionId: "calcul_litteral",
+    notionId: "litteral_calcul",
     microId: "litteral_traduire",
     difficulty: 2,
     theme: "neutral",
@@ -239,14 +239,14 @@ export const calculLitteralBank: TutorBankItemV4[] = [
           "Méthode : on remplace la lettre par la valeur donnée ou on simplifie l’écriture.\n\nCalcul : " +
           ("« le triple d’un nombre n diminué de 4 » se traduit par 3n - 4.") +
           "\n\nConclusion : l’expression obtenue répond à la question.",
-    tags: ["calcul_litteral", "traduire"],
+    tags: ["litteral_calcul", "traduire"],
   },
   {
     kind: "fixed",
     id: "litteral_traduire_qcm_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "calcul_litteral",
+    notionId: "litteral_calcul",
     microId: "litteral_traduire",
     difficulty: 2,
     theme: "neutral",
@@ -261,19 +261,19 @@ export const calculLitteralBank: TutorBankItemV4[] = [
           "Méthode : on remplace la lettre par la valeur donnée ou on simplifie l’écriture.\n\nCalcul : " +
           ("Le quart de x se note x/4.") +
           "\n\nConclusion : l’expression obtenue répond à la question.",
-    tags: ["calcul_litteral", "traduire", "qcm"],
+    tags: ["litteral_calcul", "traduire", "qcm"],
   },
   {
     kind: "template",
     id: "litteral_traduire_tpl_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "calcul_litteral",
+    notionId: "litteral_calcul",
     microId: "litteral_traduire",
     difficulty: 2,
     theme: "neutral",
     hint: "Repère les mots : double, triple, augmenté de, diminué de.",
-    tags: ["calcul_litteral", "traduire", "template"],
+    tags: ["litteral_calcul", "traduire", "template"],
     generate: () => {
       const n = randomChoice([2, 3, 4, 5, 6, 7, 8]);
       const op = randomChoice(["augmente", "diminue"]);
@@ -310,7 +310,7 @@ export const calculLitteralBank: TutorBankItemV4[] = [
     id: "litteral_substituer_fixed_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "calcul_litteral",
+    notionId: "litteral_calcul",
     microId: "litteral_substituer",
     difficulty: 1,
     theme: "neutral",
@@ -324,14 +324,14 @@ export const calculLitteralBank: TutorBankItemV4[] = [
           "Méthode : on remplace la lettre par la valeur donnée ou on simplifie l’écriture.\n\nCalcul : " +
           ("Si x = 5, alors x + 3 = 5 + 3 = 8.") +
           "\n\nConclusion : l’expression obtenue répond à la question.",
-    tags: ["calcul_litteral", "substituer"],
+    tags: ["litteral_calcul", "substituer"],
   },
   {
     kind: "fixed",
     id: "litteral_substituer_fixed_2",
     niveau: "5e",
     matiere: "maths",
-    notionId: "calcul_litteral",
+    notionId: "litteral_calcul",
     microId: "litteral_substituer",
     difficulty: 1,
     theme: "neutral",
@@ -345,14 +345,14 @@ export const calculLitteralBank: TutorBankItemV4[] = [
           "Méthode : on remplace la lettre par la valeur donnée ou on simplifie l’écriture.\n\nCalcul : " +
           ("Si x = 4, alors 2x = 2 × 4 = 8.") +
           "\n\nConclusion : l’expression obtenue répond à la question.",
-    tags: ["calcul_litteral", "substituer"],
+    tags: ["litteral_calcul", "substituer"],
   },
   {
     kind: "fixed",
     id: "litteral_substituer_fixed_3",
     niveau: "5e",
     matiere: "maths",
-    notionId: "calcul_litteral",
+    notionId: "litteral_calcul",
     microId: "litteral_substituer",
     difficulty: 2,
     theme: "neutral",
@@ -366,14 +366,14 @@ export const calculLitteralBank: TutorBankItemV4[] = [
           "Méthode : on remplace la lettre par la valeur donnée ou on simplifie l’écriture.\n\nCalcul : " +
           ("Si x = 6, alors 3x - 2 = 3 × 6 - 2 = 18 - 2 = 16.") +
           "\n\nConclusion : l’expression obtenue répond à la question.",
-    tags: ["calcul_litteral", "substituer"],
+    tags: ["litteral_calcul", "substituer"],
   },
   {
     kind: "fixed",
     id: "litteral_substituer_fixed_4",
     niveau: "5e",
     matiere: "maths",
-    notionId: "calcul_litteral",
+    notionId: "litteral_calcul",
     microId: "litteral_substituer",
     difficulty: 3,
     theme: "neutral",
@@ -387,14 +387,14 @@ export const calculLitteralBank: TutorBankItemV4[] = [
           "Méthode : on remplace la lettre par la valeur donnée ou on simplifie l’écriture.\n\nCalcul : " +
           ("Si x = -3, alors 2x + 5 = 2 × (-3) + 5 = -6 + 5 = -1.") +
           "\n\nConclusion : l’expression obtenue répond à la question.",
-    tags: ["calcul_litteral", "substituer", "relatifs"],
+    tags: ["litteral_calcul", "substituer", "relatif"],
   },
   {
     kind: "fixed",
     id: "litteral_substituer_qcm_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "calcul_litteral",
+    notionId: "litteral_calcul",
     microId: "litteral_substituer",
     difficulty: 2,
     theme: "neutral",
@@ -409,19 +409,19 @@ export const calculLitteralBank: TutorBankItemV4[] = [
           "Méthode : on remplace la lettre par la valeur donnée ou on simplifie l’écriture.\n\nCalcul : " +
           ("Si y = 10, alors y - 4 = 10 - 4 = 6.") +
           "\n\nConclusion : l’expression obtenue répond à la question.",
-    tags: ["calcul_litteral", "substituer", "qcm"],
+    tags: ["litteral_calcul", "substituer", "qcm"],
   },
   {
     kind: "template",
     id: "litteral_substituer_tpl_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "calcul_litteral",
+    notionId: "litteral_calcul",
     microId: "litteral_substituer",
     difficulty: 3,
     theme: "neutral",
     hint: "Remplace la lettre par la valeur donnée puis calcule.",
-    tags: ["calcul_litteral", "substituer", "template"],
+    tags: ["litteral_calcul", "substituer", "template"],
     generate: () => {
       const a = randomChoice([2, 3, 4, 5, 6]);
       const b = randomChoice([1, 2, 3, 4, 5]);
@@ -449,7 +449,7 @@ export const calculLitteralBank: TutorBankItemV4[] = [
     id: "litteral_reduire_fixed_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "calcul_litteral",
+    notionId: "litteral_calcul",
     microId: "litteral_reduire",
     difficulty: 2,
     theme: "neutral",
@@ -463,14 +463,14 @@ export const calculLitteralBank: TutorBankItemV4[] = [
           "Méthode : on remplace la lettre par la valeur donnée ou on simplifie l’écriture.\n\nCalcul : " +
           ("x + x = 2x.") +
           "\n\nConclusion : l’expression obtenue répond à la question.",
-    tags: ["calcul_litteral", "reduire"],
+    tags: ["litteral_calcul", "reduire"],
   },
   {
     kind: "fixed",
     id: "litteral_reduire_fixed_2",
     niveau: "5e",
     matiere: "maths",
-    notionId: "calcul_litteral",
+    notionId: "litteral_calcul",
     microId: "litteral_reduire",
     difficulty: 2,
     theme: "neutral",
@@ -484,14 +484,14 @@ export const calculLitteralBank: TutorBankItemV4[] = [
           "Méthode : on remplace la lettre par la valeur donnée ou on simplifie l’écriture.\n\nCalcul : " +
           ("3x + 2x = 5x.") +
           "\n\nConclusion : l’expression obtenue répond à la question.",
-    tags: ["calcul_litteral", "reduire"],
+    tags: ["litteral_calcul", "reduire"],
   },
   {
     kind: "fixed",
     id: "litteral_reduire_fixed_3",
     niveau: "5e",
     matiere: "maths",
-    notionId: "calcul_litteral",
+    notionId: "litteral_calcul",
     microId: "litteral_reduire",
     difficulty: 2,
     theme: "neutral",
@@ -505,14 +505,14 @@ export const calculLitteralBank: TutorBankItemV4[] = [
           "Méthode : on remplace la lettre par la valeur donnée ou on simplifie l’écriture.\n\nCalcul : " +
           ("4x - x = 4x - 1x = 3x.") +
           "\n\nConclusion : l’expression obtenue répond à la question.",
-    tags: ["calcul_litteral", "reduire"],
+    tags: ["litteral_calcul", "reduire"],
   },
   {
     kind: "fixed",
     id: "litteral_reduire_fixed_4",
     niveau: "5e",
     matiere: "maths",
-    notionId: "calcul_litteral",
+    notionId: "litteral_calcul",
     microId: "litteral_reduire",
     difficulty: 3,
     theme: "neutral",
@@ -526,14 +526,14 @@ export const calculLitteralBank: TutorBankItemV4[] = [
           "Méthode : on remplace la lettre par la valeur donnée ou on simplifie l’écriture.\n\nCalcul : " +
           ("x + x + 3 = 2x + 3.") +
           "\n\nConclusion : l’expression obtenue répond à la question.",
-    tags: ["calcul_litteral", "reduire"],
+    tags: ["litteral_calcul", "reduire"],
   },
   {
     kind: "fixed",
     id: "litteral_reduire_fixed_5",
     niveau: "5e",
     matiere: "maths",
-    notionId: "calcul_litteral",
+    notionId: "litteral_calcul",
     microId: "litteral_reduire",
     difficulty: 3,
     theme: "neutral",
@@ -547,14 +547,14 @@ export const calculLitteralBank: TutorBankItemV4[] = [
           "Méthode : on remplace la lettre par la valeur donnée ou on simplifie l’écriture.\n\nCalcul : " +
           ("x × x = x².") +
           "\n\nConclusion : l’expression obtenue répond à la question.",
-    tags: ["calcul_litteral", "reduire"],
+    tags: ["litteral_calcul", "reduire"],
   },
   {
     kind: "fixed",
     id: "litteral_reduire_qcm_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "calcul_litteral",
+    notionId: "litteral_calcul",
     microId: "litteral_reduire",
     difficulty: 3,
     theme: "neutral",
@@ -569,19 +569,19 @@ export const calculLitteralBank: TutorBankItemV4[] = [
           "Méthode : on remplace la lettre par la valeur donnée ou on simplifie l’écriture.\n\nCalcul : " +
           ("2x + 5x = 7x.") +
           "\n\nConclusion : l’expression obtenue répond à la question.",
-    tags: ["calcul_litteral", "reduire", "qcm"],
+    tags: ["litteral_calcul", "reduire", "qcm"],
   },
   {
     kind: "template",
     id: "litteral_reduire_tpl_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "calcul_litteral",
+    notionId: "litteral_calcul",
     microId: "litteral_reduire",
     difficulty: 3,
     theme: "neutral",
     hint: "Additionne ou soustrais les coefficients des termes semblables.",
-    tags: ["calcul_litteral", "reduire", "template"],
+    tags: ["litteral_calcul", "reduire", "template"],
     generate: () => {
       const a = randomChoice([2, 3, 4, 5, 6]);
       const b = randomChoice([1, 2, 3, 4, 5]);
@@ -609,11 +609,11 @@ export const calculLitteralBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "fixed",
-    id: "litteral_defis_fixed_1",
+    id: "litteral_defi_fixed_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "calcul_litteral",
-    microId: "litteral_defis",
+    notionId: "litteral_calcul",
+    microId: "litteral_defi",
     difficulty: 4,
     theme: "neutral",
     text: "Explique pourquoi 3x + 2x peut se réduire en 5x.",
@@ -626,15 +626,15 @@ export const calculLitteralBank: TutorBankItemV4[] = [
           "Méthode : on remplace la lettre par la valeur donnée ou on simplifie l’écriture.\n\nCalcul : " +
           ("3x et 2x sont des termes semblables car ils contiennent la même lettre x. On peut donc additionner leurs coefficients : 3 + 2 = 5, d’où 5x.") +
           "\n\nConclusion : l’expression obtenue répond à la question.",
-    tags: ["calcul_litteral", "defi", "raisonnement"],
+    tags: ["litteral_calcul", "defi", "raisonnement"],
   },
   {
     kind: "fixed",
-    id: "litteral_defis_fixed_2",
+    id: "litteral_defi_fixed_2",
     niveau: "5e",
     matiere: "maths",
-    notionId: "calcul_litteral",
-    microId: "litteral_defis",
+    notionId: "litteral_calcul",
+    microId: "litteral_defi",
     difficulty: 4,
     theme: "neutral",
     text: "On note x l’âge de Léa. Écris puis calcule l’expression qui représente l’âge de Léa dans 5 ans si Léa a actuellement 12 ans.",
@@ -647,15 +647,15 @@ export const calculLitteralBank: TutorBankItemV4[] = [
           "Méthode : on remplace la lettre par la valeur donnée ou on simplifie l’écriture.\n\nCalcul : " +
           ("L’expression est x + 5. Si x = 12, alors x + 5 = 17.") +
           "\n\nConclusion : l’expression obtenue répond à la question.",
-    tags: ["calcul_litteral", "defi", "probleme"],
+    tags: ["litteral_calcul", "defi", "probleme"],
   },
   {
     kind: "fixed",
-    id: "litteral_defis_fixed_3",
+    id: "litteral_defi_fixed_3",
     niveau: "5e",
     matiere: "maths",
-    notionId: "calcul_litteral",
-    microId: "litteral_defis",
+    notionId: "litteral_calcul",
+    microId: "litteral_defi",
     difficulty: 4,
     theme: "neutral",
     text: "Réduis puis calcule pour x = 3 : 2x + x + 4",
@@ -668,15 +668,15 @@ export const calculLitteralBank: TutorBankItemV4[] = [
           "Méthode : on remplace la lettre par la valeur donnée ou on simplifie l’écriture.\n\nCalcul : " +
           ("2x + x + 4 = 3x + 4. Pour x = 3, on obtient 3 × 3 + 4 = 13.") +
           "\n\nConclusion : l’expression obtenue répond à la question.",
-    tags: ["calcul_litteral", "defi", "reduire", "substituer"],
+    tags: ["litteral_calcul", "defi", "reduire", "substituer"],
   },
   {
     kind: "fixed",
-    id: "litteral_defis_fixed_4",
+    id: "litteral_defi_fixed_4",
     niveau: "5e",
     matiere: "maths",
-    notionId: "calcul_litteral",
-    microId: "litteral_defis",
+    notionId: "litteral_calcul",
+    microId: "litteral_defi",
     difficulty: 4,
     theme: "neutral",
     text: "Explique pourquoi 3x + 2 ne peut pas se réduire en 5x.",
@@ -689,15 +689,15 @@ export const calculLitteralBank: TutorBankItemV4[] = [
           "Méthode : on remplace la lettre par la valeur donnée ou on simplifie l’écriture.\n\nCalcul : " +
           ("3x et 2 ne sont pas des termes semblables. 3x dépend de x alors que 2 est un terme constant. On ne peut donc pas écrire 3x + 2 = 5x.") +
           "\n\nConclusion : l’expression obtenue répond à la question.",
-    tags: ["calcul_litteral", "defi", "piege", "raisonnement"],
+    tags: ["litteral_calcul", "defi", "piege", "raisonnement"],
   },
   {
     kind: "fixed",
-    id: "litteral_defis_fixed_5",
+    id: "litteral_defi_fixed_5",
     niveau: "5e",
     matiere: "maths",
-    notionId: "calcul_litteral",
-    microId: "litteral_defis",
+    notionId: "litteral_calcul",
+    microId: "litteral_defi",
     difficulty: 4,
     theme: "neutral",
     text: "Un rectangle a pour longueur x + 3 et pour largeur 2. Écris l’expression de son périmètre puis calcule-la pour x = 5.",
@@ -710,15 +710,15 @@ export const calculLitteralBank: TutorBankItemV4[] = [
           "Méthode : on remplace la lettre par la valeur donnée ou on simplifie l’écriture.\n\nCalcul : " +
           ("Le périmètre vaut 2(x + 3) + 2×2. Pour x = 5, on obtient 2×8 + 4 = 16 + 4 = 20.") +
           "\n\nConclusion : l’expression obtenue répond à la question.",
-    tags: ["calcul_litteral", "defi", "probleme", "geometrie"],
+    tags: ["litteral_calcul", "defi", "probleme", "geometrie"],
   },
   {
     kind: "fixed",
-    id: "litteral_defis_fixed_6",
+    id: "litteral_defi_fixed_6",
     niveau: "5e",
     matiere: "maths",
-    notionId: "calcul_litteral",
-    microId: "litteral_defis",
+    notionId: "litteral_calcul",
+    microId: "litteral_defi",
     difficulty: 4,
     theme: "neutral",
     text: "Calcule pour x = -2 : 3x + x + 5",
@@ -731,15 +731,15 @@ export const calculLitteralBank: TutorBankItemV4[] = [
           "Méthode : on remplace la lettre par la valeur donnée ou on simplifie l’écriture.\n\nCalcul : " +
           ("3x + x + 5 = 4x + 5. Pour x = -2, on obtient 4×(-2) + 5 = -8 + 5 = -3.") +
           "\n\nConclusion : l’expression obtenue répond à la question.",
-    tags: ["calcul_litteral", "defi", "relatifs", "substituer", "reduire"],
+    tags: ["litteral_calcul", "defi", "relatif", "substituer", "reduire"],
   },
   {
     kind: "fixed",
-    id: "litteral_defis_qcm_1",
+    id: "litteral_defi_qcm_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "calcul_litteral",
-    microId: "litteral_defis",
+    notionId: "litteral_calcul",
+    microId: "litteral_defi",
     difficulty: 4,
     theme: "neutral",
     text: "Quelle expression représente « le double d’un nombre x augmenté de 7 » ?",
@@ -753,15 +753,15 @@ export const calculLitteralBank: TutorBankItemV4[] = [
           "Méthode : on remplace la lettre par la valeur donnée ou on simplifie l’écriture.\n\nCalcul : " +
           ("Le double de x est 2x, puis augmenté de 7 donne 2x + 7.") +
           "\n\nConclusion : l’expression obtenue répond à la question.",
-    tags: ["calcul_litteral", "defi", "qcm"],
+    tags: ["litteral_calcul", "defi", "qcm"],
   },
   {
     kind: "fixed",
-    id: "litteral_defis_qcm_2",
+    id: "litteral_defi_qcm_2",
     niveau: "5e",
     matiere: "maths",
-    notionId: "calcul_litteral",
-    microId: "litteral_defis",
+    notionId: "litteral_calcul",
+    microId: "litteral_defi",
     difficulty: 4,
     theme: "neutral",
     text: "Quelle réduction est correcte ?",
@@ -775,15 +775,15 @@ export const calculLitteralBank: TutorBankItemV4[] = [
           "Méthode : on remplace la lettre par la valeur donnée ou on simplifie l’écriture.\n\nCalcul : " +
           ("4x + x = 4x + 1x = 5x. Les autres propositions confondent termes en x et termes constants, ou additionnent mal les coefficients.") +
           "\n\nConclusion : l’expression obtenue répond à la question.",
-    tags: ["calcul_litteral", "defi", "qcm", "piege"],
+    tags: ["litteral_calcul", "defi", "qcm", "piege"],
   },
   {
     kind: "fixed",
-    id: "litteral_defis_qcm_3",
+    id: "litteral_defi_qcm_3",
     niveau: "5e",
     matiere: "maths",
-    notionId: "calcul_litteral",
-    microId: "litteral_defis",
+    notionId: "litteral_calcul",
+    microId: "litteral_defi",
     difficulty: 5,
     theme: "neutral",
     text: "On sait que x = 4. Quelle est la valeur de 2x + x + 3 ?",
@@ -797,19 +797,19 @@ export const calculLitteralBank: TutorBankItemV4[] = [
           "Méthode : on remplace la lettre par la valeur donnée ou on simplifie l’écriture.\n\nCalcul : " +
           ("2x + x + 3 = 3x + 3. Pour x = 4, cela donne 3×4 + 3 = 12 + 3 = 15.") +
           "\n\nConclusion : l’expression obtenue répond à la question.",
-    tags: ["calcul_litteral", "defi", "qcm", "substituer"],
+    tags: ["litteral_calcul", "defi", "qcm", "substituer"],
   },
   {
     kind: "template",
-    id: "litteral_defis_tpl_1",
+    id: "litteral_defi_tpl_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "calcul_litteral",
-    microId: "litteral_defis",
+    notionId: "litteral_calcul",
+    microId: "litteral_defi",
     difficulty: 5,
     theme: "neutral",
     hint: "Réduis d’abord, puis remplace la lettre par la valeur donnée.",
-    tags: ["calcul_litteral", "defi", "template"],
+    tags: ["litteral_calcul", "defi", "template"],
     generate: () => {
       const a = randomChoice([2, 3, 4, 5]);
       const b = randomChoice([1, 2, 3, 4]);
@@ -832,15 +832,15 @@ export const calculLitteralBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "litteral_defis_tpl_2",
+    id: "litteral_defi_tpl_2",
     niveau: "5e",
     matiere: "maths",
-    notionId: "calcul_litteral",
-    microId: "litteral_defis",
+    notionId: "litteral_calcul",
+    microId: "litteral_defi",
     difficulty: 5,
     theme: "neutral",
     hint: "Fais attention : on ne peut réduire que les termes semblables.",
-    tags: ["calcul_litteral", "defi", "template", "piege"],
+    tags: ["litteral_calcul", "defi", "template", "piege"],
     generate: () => {
       const a = randomChoice([2, 3, 4, 5]);
       const b = randomChoice([1, 2, 3, 4, 5]);
@@ -859,15 +859,15 @@ export const calculLitteralBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "litteral_defis_tpl_3",
+    id: "litteral_defi_tpl_3",
     niveau: "5e",
     matiere: "maths",
-    notionId: "calcul_litteral",
-    microId: "litteral_defis",
+    notionId: "litteral_calcul",
+    microId: "litteral_defi",
     difficulty: 5,
     theme: "neutral",
     hint: "Traduis d’abord la phrase, puis calcule.",
-    tags: ["calcul_litteral", "defi", "template", "traduire", "substituer"],
+    tags: ["litteral_calcul", "defi", "template", "traduire", "substituer"],
     generate: () => {
       const add = randomChoice([3, 4, 5, 6, 7]);
       const x = randomChoice([2, 3, 4, 5, 6]);
@@ -890,11 +890,11 @@ export const calculLitteralBank: TutorBankItemV4[] = [
   ========================= */
   {
     kind: "fixed",
-    id: "litteral_expression_open_1",
+    id: "litteral_expression_comprendre_open_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "calcul_litteral",
-    microId: "litteral_expression",
+    notionId: "litteral_calcul",
+    microId: "litteral_expression_comprendre",
     difficulty: 2,
     theme: "neutral",
     text: "Explique avec tes mots ce que signifie l’écriture 4x.",
@@ -906,14 +906,14 @@ export const calculLitteralBank: TutorBankItemV4[] = [
           "Méthode : on remplace la lettre par la valeur donnée ou on simplifie l’écriture.\n\nCalcul : " +
           ("4x signifie 4 × x : on multiplie le nombre représenté par x par 4.") +
           "\n\nConclusion : l’expression obtenue répond à la question.",
-    tags: ["calcul_litteral", "open", "expression"],
+    tags: ["litteral_calcul", "open", "expression"],
   },
   {
     kind: "fixed",
     id: "litteral_traduire_open_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "calcul_litteral",
+    notionId: "litteral_calcul",
     microId: "litteral_traduire",
     difficulty: 3,
     theme: "neutral",
@@ -926,14 +926,14 @@ export const calculLitteralBank: TutorBankItemV4[] = [
           "Méthode : on remplace la lettre par la valeur donnée ou on simplifie l’écriture.\n\nCalcul : " +
           ("Le double de x est 2x. Ensuite on augmente ce résultat de 5, donc on obtient 2x + 5.") +
           "\n\nConclusion : l’expression obtenue répond à la question.",
-    tags: ["calcul_litteral", "open", "traduire", "piege"],
+    tags: ["litteral_calcul", "open", "traduire", "piege"],
   },
   {
     kind: "fixed",
     id: "litteral_substituer_open_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "calcul_litteral",
+    notionId: "litteral_calcul",
     microId: "litteral_substituer",
     difficulty: 3,
     theme: "neutral",
@@ -946,14 +946,14 @@ export const calculLitteralBank: TutorBankItemV4[] = [
           "Méthode : on remplace la lettre par la valeur donnée ou on simplifie l’écriture.\n\nCalcul : " +
           ("On remplace x par 4 : 3x + 2 = 3 × 4 + 2 = 12 + 2 = 14.") +
           "\n\nConclusion : l’expression obtenue répond à la question.",
-    tags: ["calcul_litteral", "open", "substituer"],
+    tags: ["litteral_calcul", "open", "substituer"],
   },
   {
     kind: "fixed",
     id: "litteral_reduire_open_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "calcul_litteral",
+    notionId: "litteral_calcul",
     microId: "litteral_reduire",
     difficulty: 3,
     theme: "neutral",
@@ -966,14 +966,14 @@ export const calculLitteralBank: TutorBankItemV4[] = [
           "Méthode : on remplace la lettre par la valeur donnée ou on simplifie l’écriture.\n\nCalcul : " +
           ("3x et 2x sont des termes semblables. On additionne les coefficients : 3 + 2 = 5, donc 3x + 2x = 5x.") +
           "\n\nConclusion : l’expression obtenue répond à la question.",
-    tags: ["calcul_litteral", "open", "reduire"],
+    tags: ["litteral_calcul", "open", "reduire"],
   },
   {
     kind: "fixed",
     id: "litteral_reduire_open_2",
     niveau: "5e",
     matiere: "maths",
-    notionId: "calcul_litteral",
+    notionId: "litteral_calcul",
     microId: "litteral_reduire",
     difficulty: 4,
     theme: "neutral",
@@ -986,15 +986,15 @@ export const calculLitteralBank: TutorBankItemV4[] = [
           "Méthode : on remplace la lettre par la valeur donnée ou on simplifie l’écriture.\n\nCalcul : " +
           ("3x est un terme avec la lettre x, alors que 2 est un terme constant. Ce ne sont pas des termes semblables, donc on ne peut pas écrire 3x + 2 = 5x.") +
           "\n\nConclusion : l’expression obtenue répond à la question.",
-    tags: ["calcul_litteral", "open", "reduire", "piege"],
+    tags: ["litteral_calcul", "open", "reduire", "piege"],
   },
   {
     kind: "fixed",
-    id: "litteral_defis_open_1",
+    id: "litteral_defi_open_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "calcul_litteral",
-    microId: "litteral_defis",
+    notionId: "litteral_calcul",
+    microId: "litteral_defi",
     difficulty: 4,
     theme: "neutral",
     text: "Un élève écrit : 2x + 3x = 5x². Explique son erreur.",
@@ -1006,6 +1006,6 @@ export const calculLitteralBank: TutorBankItemV4[] = [
           "Méthode : on remplace la lettre par la valeur donnée ou on simplifie l’écriture.\n\nCalcul : " +
           ("L’élève confond addition et multiplication. Dans 2x + 3x, on additionne seulement les coefficients : 2 + 3 = 5. Donc 2x + 3x = 5x, pas 5x².") +
           "\n\nConclusion : l’expression obtenue répond à la question.",
-    tags: ["calcul_litteral", "open", "defi", "erreur"],
+    tags: ["litteral_calcul", "open", "defi", "erreur"],
   },
 ];

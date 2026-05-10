@@ -22,7 +22,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     id: "prop_reconnaitre_fixed_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "proportionnalite",
+    notionId: "prop_proportionnalite",
     microId: "prop_reconnaitre",
     difficulty: 1,
     theme: "neutral",
@@ -36,14 +36,14 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
           "Méthode : on utilise le coefficient de proportionnalité, un tableau ou un produit en croix.\n\nCalcul : " +
           ("On passe de 3 à 6 cahiers en multipliant par 2. Le prix passe aussi de 9 € à 18 € en multipliant par 2. La situation est donc proportionnelle.") +
           "\n\nConclusion : la valeur obtenue respecte la proportionnalité.",
-    tags: ["proportionnalite", "reconnaitre"],
+    tags: ["prop_proportionnalite", "reconnaitre"],
   },
   {
     kind: "fixed",
     id: "prop_reconnaitre_fixed_2",
     niveau: "5e",
     matiere: "maths",
-    notionId: "proportionnalite",
+    notionId: "prop_proportionnalite",
     microId: "prop_reconnaitre",
     difficulty: 1,
     theme: "neutral",
@@ -57,14 +57,14 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
           "Méthode : on utilise le coefficient de proportionnalité, un tableau ou un produit en croix.\n\nCalcul : " +
           ("On passe de 4 à 8 billets en multipliant par 2. Si la situation était proportionnelle, le prix devrait passer de 10 € à 20 €. Or on obtient 21 €. La situation n’est donc pas proportionnelle.") +
           "\n\nConclusion : la valeur obtenue respecte la proportionnalité.",
-    tags: ["proportionnalite", "reconnaitre"],
+    tags: ["prop_proportionnalite", "reconnaitre"],
   },
   {
     kind: "fixed",
     id: "prop_reconnaitre_fixed_3",
     niveau: "5e",
     matiere: "maths",
-    notionId: "proportionnalite",
+    notionId: "prop_proportionnalite",
     microId: "prop_reconnaitre",
     difficulty: 2,
     theme: "reunion",
@@ -78,14 +78,14 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
           "Méthode : on utilise le coefficient de proportionnalité, un tableau ou un produit en croix.\n\nCalcul : " +
           ("2 ananas coûtent 6 €, donc 1 ananas coûte 3 €. 5 ananas coûtent 15 €, donc 1 ananas coûte aussi 3 €. Le prix unitaire reste constant : la situation est proportionnelle.") +
           "\n\nConclusion : la valeur obtenue respecte la proportionnalité.",
-    tags: ["proportionnalite", "reconnaitre", "reunion"],
+    tags: ["prop_proportionnalite", "reconnaitre", "reunion"],
   },
   {
     kind: "fixed",
     id: "prop_reconnaitre_qcm_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "proportionnalite",
+    notionId: "prop_proportionnalite",
     microId: "prop_reconnaitre",
     difficulty: 2,
     theme: "neutral",
@@ -105,14 +105,14 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
           "Méthode : on utilise le coefficient de proportionnalité, un tableau ou un produit en croix.\n\nCalcul : " +
           ("Dans la bonne réponse, on passe de 2 à 6 stylos en multipliant par 3, et le prix passe de 4 € à 12 € en multipliant aussi par 3.") +
           "\n\nConclusion : la valeur obtenue respecte la proportionnalité.",
-    tags: ["proportionnalite", "reconnaitre", "qcm"],
+    tags: ["prop_proportionnalite", "reconnaitre", "qcm"],
   },
   {
     kind: "fixed",
     id: "prop_reconnaitre_qcm_2",
     niveau: "5e",
     matiere: "maths",
-    notionId: "proportionnalite",
+    notionId: "prop_proportionnalite",
     microId: "prop_reconnaitre",
     difficulty: 2,
     theme: "neutral",
@@ -132,7 +132,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
           "Méthode : on utilise le coefficient de proportionnalité, un tableau ou un produit en croix.\n\nCalcul : " +
           ("Dans la bonne réponse, on passe de 1 à 4 en multipliant par 4, et les points passent de 2 à 8 en multipliant aussi par 4.") +
           "\n\nConclusion : la valeur obtenue respecte la proportionnalité.",
-    tags: ["proportionnalite", "reconnaitre", "qcm", "neutral"],
+    tags: ["prop_proportionnalite", "reconnaitre", "qcm", "neutral"],
   },
 
   // =========================
@@ -143,7 +143,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     id: "prop_table_fixed_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "proportionnalite",
+    notionId: "prop_proportionnalite",
     microId: "prop_table",
     difficulty: 2,
     theme: "neutral",
@@ -157,14 +157,14 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
           "Méthode : on utilise le coefficient de proportionnalité, un tableau ou un produit en croix.\n\nCalcul : " +
           ("On passe de 3 à 9 cahiers en multipliant par 3. Le prix est donc multiplié par 3 : 12 × 3 = 36 €.") +
           "\n\nConclusion : la valeur obtenue respecte la proportionnalité.",
-    tags: ["proportionnalite", "tableau"],
+    tags: ["prop_proportionnalite", "tableau"],
   },
   {
     kind: "fixed",
     id: "prop_table_fixed_2",
     niveau: "5e",
     matiere: "maths",
-    notionId: "proportionnalite",
+    notionId: "prop_proportionnalite",
     microId: "prop_table",
     difficulty: 2,
     theme: "neutral",
@@ -178,14 +178,14 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
           "Méthode : on utilise le coefficient de proportionnalité, un tableau ou un produit en croix.\n\nCalcul : " +
           ("4 stylos, c’est la moitié de 8 stylos. Le prix est donc la moitié de 20 €, soit 10 €.") +
           "\n\nConclusion : la valeur obtenue respecte la proportionnalité.",
-    tags: ["proportionnalite", "tableau"],
+    tags: ["prop_proportionnalite", "tableau"],
   },
   {
     kind: "fixed",
     id: "prop_table_fixed_3",
     niveau: "5e",
     matiere: "maths",
-    notionId: "proportionnalite",
+    notionId: "prop_proportionnalite",
     microId: "prop_table",
     difficulty: 2,
     theme: "reunion",
@@ -199,14 +199,14 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
           "Méthode : on utilise le coefficient de proportionnalité, un tableau ou un produit en croix.\n\nCalcul : " +
           ("4 samoussas coûtent 8 €, donc 1 samoussa coûte 2 €. Alors 10 samoussas coûtent 10 × 2 = 20 €.") +
           "\n\nConclusion : la valeur obtenue respecte la proportionnalité.",
-    tags: ["proportionnalite", "tableau", "reunion"],
+    tags: ["prop_proportionnalite", "tableau", "reunion"],
   },
   {
     kind: "fixed",
     id: "prop_table_qcm_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "proportionnalite",
+    notionId: "prop_proportionnalite",
     microId: "prop_table",
     difficulty: 2,
     theme: "sport",
@@ -221,14 +221,14 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
           "Méthode : on utilise le coefficient de proportionnalité, un tableau ou un produit en croix.\n\nCalcul : " +
           ("On passe de 5 à 15 bouteilles en multipliant par 3. Le prix passe donc de 15 € à 45 €.") +
           "\n\nConclusion : la valeur obtenue respecte la proportionnalité.",
-    tags: ["proportionnalite", "tableau", "sport", "qcm"],
+    tags: ["prop_proportionnalite", "tableau", "sport", "qcm"],
   },
   {
     kind: "fixed",
     id: "prop_table_qcm_2",
     niveau: "5e",
     matiere: "maths",
-    notionId: "proportionnalite",
+    notionId: "prop_proportionnalite",
     microId: "prop_table",
     difficulty: 2,
     theme: "cuisine",
@@ -243,7 +243,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
           "Méthode : on utilise le coefficient de proportionnalité, un tableau ou un produit en croix.\n\nCalcul : " +
           ("3 œufs, c’est la moitié de 6 œufs. Le prix est donc la moitié de 12 €, soit 6 €.") +
           "\n\nConclusion : la valeur obtenue respecte la proportionnalité.",
-    tags: ["proportionnalite", "tableau", "cuisine", "qcm"],
+    tags: ["prop_proportionnalite", "tableau", "cuisine", "qcm"],
   },
 
   // =========================
@@ -254,7 +254,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     id: "prop_quatrieme_fixed_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "proportionnalite",
+    notionId: "prop_proportionnalite",
     microId: "prop_quatrieme",
     difficulty: 2,
     theme: "neutral",
@@ -268,14 +268,14 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
           "Méthode : on utilise le coefficient de proportionnalité, un tableau ou un produit en croix.\n\nCalcul : " +
           ("4 objets coûtent 12 €, donc 1 objet coûte 3 €. Alors 7 objets coûtent 7 × 3 = 21 €.") +
           "\n\nConclusion : la valeur obtenue respecte la proportionnalité.",
-    tags: ["proportionnalite", "quatrieme_proportionnelle"],
+    tags: ["prop_proportionnalite", "quatrieme_proportionnelle"],
   },
   {
     kind: "fixed",
     id: "prop_quatrieme_fixed_2",
     niveau: "5e",
     matiere: "maths",
-    notionId: "proportionnalite",
+    notionId: "prop_proportionnalite",
     microId: "prop_quatrieme",
     difficulty: 2,
     theme: "neutral",
@@ -289,14 +289,14 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
           "Méthode : on utilise le coefficient de proportionnalité, un tableau ou un produit en croix.\n\nCalcul : " +
           ("3 kg coûtent 9 €, donc 1 kg coûte 3 €. Alors 11 kg coûtent 11 × 3 = 33 €.") +
           "\n\nConclusion : la valeur obtenue respecte la proportionnalité.",
-    tags: ["proportionnalite", "quatrieme_proportionnelle"],
+    tags: ["prop_proportionnalite", "quatrieme_proportionnelle"],
   },
   {
     kind: "fixed",
     id: "prop_quatrieme_qcm_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "proportionnalite",
+    notionId: "prop_proportionnalite",
     microId: "prop_quatrieme",
     difficulty: 3,
     theme: "reunion",
@@ -311,7 +311,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
           "Méthode : on utilise le coefficient de proportionnalité, un tableau ou un produit en croix.\n\nCalcul : " +
           ("5 mangues coûtent 15 €, donc 1 mangue coûte 3 €. Alors 9 mangues coûtent 27 €.") +
           "\n\nConclusion : la valeur obtenue respecte la proportionnalité.",
-    tags: ["proportionnalite", "quatrieme_proportionnelle", "qcm", "reunion"],
+    tags: ["prop_proportionnalite", "quatrieme_proportionnelle", "qcm", "reunion"],
   },
 
   // =========================
@@ -322,7 +322,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     id: "prop_coeff_fixed_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "proportionnalite",
+    notionId: "prop_proportionnalite",
     microId: "prop_coeff",
     difficulty: 2,
     theme: "neutral",
@@ -336,14 +336,14 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
           "Méthode : on utilise le coefficient de proportionnalité, un tableau ou un produit en croix.\n\nCalcul : " +
           ("4 stylos coûtent 20 €, donc 1 stylo coûte 20 ÷ 4 = 5 €. Le coefficient de proportionnalité est 5.") +
           "\n\nConclusion : la valeur obtenue respecte la proportionnalité.",
-    tags: ["proportionnalite", "coefficient"],
+    tags: ["prop_proportionnalite", "coefficient"],
   },
   {
     kind: "fixed",
     id: "prop_coeff_fixed_2",
     niveau: "5e",
     matiere: "maths",
-    notionId: "proportionnalite",
+    notionId: "prop_proportionnalite",
     microId: "prop_coeff",
     difficulty: 2,
     theme: "neutral",
@@ -357,14 +357,14 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
           "Méthode : on utilise le coefficient de proportionnalité, un tableau ou un produit en croix.\n\nCalcul : " +
           ("Chaque ticket coûte 3 €. Pour obtenir le prix total, on multiplie le nombre de tickets par 3. Le coefficient est donc 3.") +
           "\n\nConclusion : la valeur obtenue respecte la proportionnalité.",
-    tags: ["proportionnalite", "coefficient"],
+    tags: ["prop_proportionnalite", "coefficient"],
   },
   {
     kind: "fixed",
     id: "prop_coeff_qcm_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "proportionnalite",
+    notionId: "prop_proportionnalite",
     microId: "prop_coeff",
     difficulty: 2,
     theme: "neutral",
@@ -379,7 +379,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
           "Méthode : on utilise le coefficient de proportionnalité, un tableau ou un produit en croix.\n\nCalcul : " +
           ("24 ÷ 8 = 3. Le coefficient de proportionnalité est 3.") +
           "\n\nConclusion : la valeur obtenue respecte la proportionnalité.",
-    tags: ["proportionnalite", "coefficient", "qcm", "neutral"],
+    tags: ["prop_proportionnalite", "coefficient", "qcm", "neutral"],
   },
 
   // =========================
@@ -387,11 +387,11 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "fixed",
-    id: "prop_ratio_fixed_1",
+    id: "prop_rapport_fixed_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "proportionnalite",
-    microId: "prop_ratio",
+    notionId: "prop_proportionnalite",
+    microId: "prop_rapport",
     difficulty: 2,
     theme: "cuisine",
     text: "Dans un mélange, il y a 2 doses de sirop pour 3 doses d’eau. Quel est le ratio sirop:eau ?",
@@ -404,15 +404,15 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
           "Méthode : on utilise le coefficient de proportionnalité, un tableau ou un produit en croix.\n\nCalcul : " +
           ("Le mélange contient 2 doses de sirop et 3 doses d’eau. Le ratio sirop:eau est donc 2:3.") +
           "\n\nConclusion : la valeur obtenue respecte la proportionnalité.",
-    tags: ["proportionnalite", "ratio", "cuisine"],
+    tags: ["prop_proportionnalite", "ratio", "cuisine"],
   },
   {
     kind: "fixed",
-    id: "prop_ratio_fixed_2",
+    id: "prop_rapport_fixed_2",
     niveau: "5e",
     matiere: "maths",
-    notionId: "proportionnalite",
-    microId: "prop_ratio",
+    notionId: "prop_proportionnalite",
+    microId: "prop_rapport",
     difficulty: 2,
     theme: "sport",
     text: "Dans une équipe, il y a 4 filles et 6 garçons. Quel est le ratio filles:garçons ?",
@@ -425,15 +425,15 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
           "Méthode : on utilise le coefficient de proportionnalité, un tableau ou un produit en croix.\n\nCalcul : " +
           ("Il y a 4 filles pour 6 garçons. Le ratio filles:garçons est donc 4:6.") +
           "\n\nConclusion : la valeur obtenue respecte la proportionnalité.",
-    tags: ["proportionnalite", "ratio", "sport"],
+    tags: ["prop_proportionnalite", "ratio", "sport"],
   },
   {
     kind: "fixed",
-    id: "prop_ratio_qcm_1",
+    id: "prop_rapport_qcm_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "proportionnalite",
-    microId: "prop_ratio",
+    notionId: "prop_proportionnalite",
+    microId: "prop_rapport",
     difficulty: 3,
     theme: "reunion",
     text: "Pour faire un jus, on mélange 1 dose de sirop avec 4 doses d’eau. Si on utilise 3 doses de sirop, combien faut-il de doses d’eau ?",
@@ -447,7 +447,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
           "Méthode : on utilise le coefficient de proportionnalité, un tableau ou un produit en croix.\n\nCalcul : " +
           ("Le ratio est 1 dose de sirop pour 4 doses d’eau. Avec 3 doses de sirop, il faut 3 × 4 = 12 doses d’eau.") +
           "\n\nConclusion : la valeur obtenue respecte la proportionnalité.",
-    tags: ["proportionnalite", "ratio", "qcm", "reunion"],
+    tags: ["prop_proportionnalite", "ratio", "qcm", "reunion"],
   },
 
   // =========================
@@ -458,7 +458,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     id: "prop_pourcentage_fixed_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "proportionnalite",
+    notionId: "prop_proportionnalite",
     microId: "prop_pourcentage",
     difficulty: 2,
     theme: "neutral",
@@ -472,14 +472,14 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
           "Méthode : on utilise le coefficient de proportionnalité, un tableau ou un produit en croix.\n\nCalcul : " +
           ("20 % de 50 = 0,2 × 50 = 10.") +
           "\n\nConclusion : la valeur obtenue respecte la proportionnalité.",
-    tags: ["proportionnalite", "pourcentage"],
+    tags: ["prop_proportionnalite", "pourcentage"],
   },
   {
     kind: "fixed",
     id: "prop_pourcentage_fixed_2",
     niveau: "5e",
     matiere: "maths",
-    notionId: "proportionnalite",
+    notionId: "prop_proportionnalite",
     microId: "prop_pourcentage",
     difficulty: 2,
     theme: "neutral",
@@ -493,14 +493,14 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
           "Méthode : on utilise le coefficient de proportionnalité, un tableau ou un produit en croix.\n\nCalcul : " +
           ("25 % correspond à un quart. Un quart de 80 vaut 20.") +
           "\n\nConclusion : la valeur obtenue respecte la proportionnalité.",
-    tags: ["proportionnalite", "pourcentage"],
+    tags: ["prop_proportionnalite", "pourcentage"],
   },
   {
     kind: "fixed",
     id: "prop_pourcentage_fixed_3",
     niveau: "5e",
     matiere: "maths",
-    notionId: "proportionnalite",
+    notionId: "prop_proportionnalite",
     microId: "prop_pourcentage",
     difficulty: 3,
     theme: "neutral",
@@ -514,14 +514,14 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
           "Méthode : on utilise le coefficient de proportionnalité, un tableau ou un produit en croix.\n\nCalcul : " +
           ("30 % de 200 = 0,3 × 200 = 60. Cela représente 60 élèves.") +
           "\n\nConclusion : la valeur obtenue respecte la proportionnalité.",
-    tags: ["proportionnalite", "pourcentage", "neutral"],
+    tags: ["prop_proportionnalite", "pourcentage", "neutral"],
   },
   {
     kind: "fixed",
     id: "prop_pourcentage_qcm_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "proportionnalite",
+    notionId: "prop_proportionnalite",
     microId: "prop_pourcentage",
     difficulty: 3,
     theme: "neutral",
@@ -536,7 +536,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
           "Méthode : on utilise le coefficient de proportionnalité, un tableau ou un produit en croix.\n\nCalcul : " +
           ("10 % de 40 € = 4 €. La réduction est donc de 4 €.") +
           "\n\nConclusion : la valeur obtenue respecte la proportionnalité.",
-    tags: ["proportionnalite", "pourcentage", "qcm", "soldes"],
+    tags: ["prop_proportionnalite", "pourcentage", "qcm", "soldes"],
   },
 
   // =========================
@@ -544,11 +544,11 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "fixed",
-    id: "prop_coeff_mult_fixed_1",
+    id: "prop_coeff_multiplicateur_fixed_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "proportionnalite",
-    microId: "prop_coeff_mult",
+    notionId: "prop_proportionnalite",
+    microId: "prop_coeff_multiplicateur",
     difficulty: 3,
     theme: "neutral",
     text: "Une hausse de 20 % correspond à quel coefficient multiplicateur ?",
@@ -561,15 +561,15 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
           "Méthode : on utilise le coefficient de proportionnalité, un tableau ou un produit en croix.\n\nCalcul : " +
           ("Une hausse de 20 % signifie qu’on garde 100 % puis on ajoute 20 %, soit 120 % = 1,2. Le coefficient multiplicateur est donc 1,2.") +
           "\n\nConclusion : la valeur obtenue respecte la proportionnalité.",
-    tags: ["proportionnalite", "coefficient_multiplicateur"],
+    tags: ["prop_proportionnalite", "coefficient_multiplicateur"],
   },
   {
     kind: "fixed",
-    id: "prop_coeff_mult_fixed_2",
+    id: "prop_coeff_multiplicateur_fixed_2",
     niveau: "5e",
     matiere: "maths",
-    notionId: "proportionnalite",
-    microId: "prop_coeff_mult",
+    notionId: "prop_proportionnalite",
+    microId: "prop_coeff_multiplicateur",
     difficulty: 3,
     theme: "neutral",
     text: "Une réduction de 15 % correspond à quel coefficient multiplicateur ?",
@@ -582,15 +582,15 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
           "Méthode : on utilise le coefficient de proportionnalité, un tableau ou un produit en croix.\n\nCalcul : " +
           ("Après une réduction de 15 %, il reste 85 % du prix initial, soit 0,85. Le coefficient multiplicateur est donc 0,85.") +
           "\n\nConclusion : la valeur obtenue respecte la proportionnalité.",
-    tags: ["proportionnalite", "coefficient_multiplicateur"],
+    tags: ["prop_proportionnalite", "coefficient_multiplicateur"],
   },
   {
     kind: "fixed",
-    id: "prop_coeff_mult_qcm_1",
+    id: "prop_coeff_multiplicateur_qcm_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "proportionnalite",
-    microId: "prop_coeff_mult",
+    notionId: "prop_proportionnalite",
+    microId: "prop_coeff_multiplicateur",
     difficulty: 3,
     theme: "neutral",
     text: "Quel coefficient multiplicateur correspond à une hausse de 5 % ?",
@@ -604,7 +604,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
           "Méthode : on utilise le coefficient de proportionnalité, un tableau ou un produit en croix.\n\nCalcul : " +
           ("100 % + 5 % = 105 %, soit 1,05. Le coefficient multiplicateur est 1,05.") +
           "\n\nConclusion : la valeur obtenue respecte la proportionnalité.",
-    tags: ["proportionnalite", "coefficient_multiplicateur", "qcm", "soldes"],
+    tags: ["prop_proportionnalite", "coefficient_multiplicateur", "qcm", "soldes"],
   },
 
   // =========================
@@ -615,7 +615,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     id: "prop_probleme_fixed_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "proportionnalite",
+    notionId: "prop_proportionnalite",
     microId: "prop_probleme",
     difficulty: 3,
     theme: "cuisine",
@@ -629,14 +629,14 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
           "Méthode : on utilise le coefficient de proportionnalité, un tableau ou un produit en croix.\n\nCalcul : " +
           ("Pour 4 personnes, il faut 300 g. Donc pour 1 personne, il faut 300 ÷ 4 = 75 g. Pour 10 personnes, il faut 75 × 10 = 750 g.") +
           "\n\nConclusion : la valeur obtenue respecte la proportionnalité.",
-    tags: ["proportionnalite", "probleme", "cuisine"],
+    tags: ["prop_proportionnalite", "probleme", "cuisine"],
   },
   {
     kind: "fixed",
     id: "prop_probleme_fixed_2",
     niveau: "5e",
     matiere: "maths",
-    notionId: "proportionnalite",
+    notionId: "prop_proportionnalite",
     microId: "prop_probleme",
     difficulty: 3,
     theme: "reunion",
@@ -650,14 +650,14 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
           "Méthode : on utilise le coefficient de proportionnalité, un tableau ou un produit en croix.\n\nCalcul : " +
           ("3 kg coûtent 7,50 €, donc 1 kg coûte 2,50 €. Alors 8 kg coûtent 8 × 2,50 = 20 €.") +
           "\n\nConclusion : la valeur obtenue respecte la proportionnalité.",
-    tags: ["proportionnalite", "probleme", "reunion"],
+    tags: ["prop_proportionnalite", "probleme", "reunion"],
   },
   {
     kind: "fixed",
     id: "prop_probleme_qcm_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "proportionnalite",
+    notionId: "prop_proportionnalite",
     microId: "prop_probleme",
     difficulty: 3,
     theme: "sport",
@@ -672,14 +672,14 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
           "Méthode : on utilise le coefficient de proportionnalité, un tableau ou un produit en croix.\n\nCalcul : " +
           ("18 points en 6 matchs, cela fait 3 points par match. En 15 matchs, l’équipe marquerait 15 × 3 = 45 points.") +
           "\n\nConclusion : la valeur obtenue respecte la proportionnalité.",
-    tags: ["proportionnalite", "probleme", "sport", "qcm"],
+    tags: ["prop_proportionnalite", "probleme", "sport", "qcm"],
   },
   {
     kind: "fixed",
     id: "prop_probleme_qcm_2",
     niveau: "5e",
     matiere: "maths",
-    notionId: "proportionnalite",
+    notionId: "prop_proportionnalite",
     microId: "prop_probleme",
     difficulty: 4,
     theme: "neutral",
@@ -694,7 +694,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
           "Méthode : on utilise le coefficient de proportionnalité, un tableau ou un produit en croix.\n\nCalcul : " +
           ("20 % de 60 € = 12 €. Le nouveau prix est donc 60 € - 12 € = 48 €.") +
           "\n\nConclusion : la valeur obtenue respecte la proportionnalité.",
-    tags: ["proportionnalite", "probleme", "pourcentage", "qcm", "soldes"],
+    tags: ["prop_proportionnalite", "probleme", "pourcentage", "qcm", "soldes"],
   },
 
   // =========================
@@ -702,11 +702,11 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "fixed",
-    id: "prop_defis_fixed_1",
+    id: "prop_defi_fixed_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "proportionnalite",
-    microId: "prop_defis",
+    notionId: "prop_proportionnalite",
+    microId: "prop_defi",
     difficulty: 4,
     theme: "cuisine",
     text: "Une boisson est préparée avec un ratio sirop:eau de 2:5. Si on utilise 8 verres de sirop, combien faut-il de verres d’eau ?",
@@ -719,15 +719,15 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
           "Méthode : on utilise le coefficient de proportionnalité, un tableau ou un produit en croix.\n\nCalcul : " +
           ("Le ratio est 2:5. Si on passe de 2 verres de sirop à 8 verres, on multiplie par 4. Il faut donc 5 × 4 = 20 verres d’eau.") +
           "\n\nConclusion : la valeur obtenue respecte la proportionnalité.",
-    tags: ["proportionnalite", "defi", "ratio", "cuisine"],
+    tags: ["prop_proportionnalite", "defi", "ratio", "cuisine"],
   },
   {
     kind: "fixed",
-    id: "prop_defis_fixed_2",
+    id: "prop_defi_fixed_2",
     niveau: "5e",
     matiere: "maths",
-    notionId: "proportionnalite",
-    microId: "prop_defis",
+    notionId: "prop_proportionnalite",
+    microId: "prop_defi",
     difficulty: 4,
     theme: "neutral",
     text: "Un prix augmente de 20 %. Il valait 50 €. Quel est le nouveau prix ?",
@@ -740,15 +740,15 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
           "Méthode : on utilise le coefficient de proportionnalité, un tableau ou un produit en croix.\n\nCalcul : " +
           ("Une hausse de 20 % correspond au coefficient multiplicateur 1,2. On calcule donc 50 × 1,2 = 60 €.") +
           "\n\nConclusion : la valeur obtenue respecte la proportionnalité.",
-    tags: ["proportionnalite", "defi", "coefficient_multiplicateur", "neutral"],
+    tags: ["prop_proportionnalite", "defi", "coefficient_multiplicateur", "neutral"],
   },
   {
     kind: "fixed",
-    id: "prop_defis_fixed_3",
+    id: "prop_defi_fixed_3",
     niveau: "5e",
     matiere: "maths",
-    notionId: "proportionnalite",
-    microId: "prop_defis",
+    notionId: "prop_proportionnalite",
+    microId: "prop_defi",
     difficulty: 4,
     theme: "neutral",
     text: "Explique pourquoi la situation suivante n’est pas proportionnelle : 5 tickets coûtent 12 € et 10 tickets coûtent 25 €.",
@@ -761,15 +761,15 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
           "Méthode : on utilise le coefficient de proportionnalité, un tableau ou un produit en croix.\n\nCalcul : " +
           ("Quand on passe de 5 à 10 tickets, on double la quantité. Si la situation était proportionnelle, le prix devrait passer de 12 € à 24 €. Or ici il passe à 25 €. Ce n’est donc pas une situation proportionnelle.") +
           "\n\nConclusion : la valeur obtenue respecte la proportionnalité.",
-    tags: ["proportionnalite", "defi", "raisonnement"],
+    tags: ["prop_proportionnalite", "defi", "raisonnement"],
   },
   {
     kind: "fixed",
-    id: "prop_defis_qcm_1",
+    id: "prop_defi_qcm_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "proportionnalite",
-    microId: "prop_defis",
+    notionId: "prop_proportionnalite",
+    microId: "prop_defi",
     difficulty: 4,
     theme: "reunion",
     text: "À La Réunion, 6 bouchons coûtent 9 €. Combien coûtent 14 bouchons ?",
@@ -783,7 +783,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
           "Méthode : on utilise le coefficient de proportionnalité, un tableau ou un produit en croix.\n\nCalcul : " +
           ("6 bouchons coûtent 9 €, donc 1 bouchon coûte 1,5 €. Alors 14 bouchons coûtent 14 × 1,5 = 21 €.") +
           "\n\nConclusion : la valeur obtenue respecte la proportionnalité.",
-    tags: ["proportionnalite", "defi", "qcm", "reunion"],
+    tags: ["prop_proportionnalite", "defi", "qcm", "reunion"],
   },
 
   // =========================
@@ -794,12 +794,12 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     id: "prop_reconnaitre_tpl_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "proportionnalite",
+    notionId: "prop_proportionnalite",
     microId: "prop_reconnaitre",
     difficulty: 2,
     theme: "neutral",
     hint: "Vérifie si le même coefficient transforme les deux grandeurs.",
-    tags: ["proportionnalite", "reconnaitre", "template"],
+    tags: ["prop_proportionnalite", "reconnaitre", "template"],
     generate: () => {
       const qty = randomChoice([2, 3, 4, 5]);
       const coef = randomChoice([2, 3]);
@@ -832,12 +832,12 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     id: "prop_table_tpl_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "proportionnalite",
+    notionId: "prop_proportionnalite",
     microId: "prop_table",
     difficulty: 2,
     theme: "neutral",
     hint: "Passe par le coefficient ou par l’unité.",
-    tags: ["proportionnalite", "tableau", "template"],
+    tags: ["prop_proportionnalite", "tableau", "template"],
     generate: () => {
       const qty = randomChoice([2, 3, 4, 5]);
       const unit = randomChoice([2, 3, 4, 5]);
@@ -861,12 +861,12 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     id: "prop_table_qcm_tpl_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "proportionnalite",
+    notionId: "prop_proportionnalite",
     microId: "prop_table",
     difficulty: 2,
     theme: "neutral",
     hint: "Cherche par combien la quantité est multipliée ou divisée.",
-    tags: ["proportionnalite", "tableau", "qcm", "template"],
+    tags: ["prop_proportionnalite", "tableau", "qcm", "template"],
     generate: () => {
       const qty = randomChoice([4, 6, 8]);
       const unit = randomChoice([2, 3, 4]);
@@ -902,12 +902,12 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     id: "prop_quatrieme_tpl_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "proportionnalite",
+    notionId: "prop_proportionnalite",
     microId: "prop_quatrieme",
     difficulty: 3,
     theme: "neutral",
     hint: "Calcule d’abord la valeur pour 1 unité.",
-    tags: ["proportionnalite", "quatrieme_proportionnelle", "template"],
+    tags: ["prop_proportionnalite", "quatrieme_proportionnelle", "template"],
     generate: () => {
       const qty = randomChoice([2, 3, 4, 5]);
       const unit = randomChoice([2, 3, 4]);
@@ -935,12 +935,12 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     id: "prop_coeff_tpl_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "proportionnalite",
+    notionId: "prop_proportionnalite",
     microId: "prop_coeff",
     difficulty: 2,
     theme: "neutral",
     hint: "Le coefficient est la valeur pour 1 unité.",
-    tags: ["proportionnalite", "coefficient", "template"],
+    tags: ["prop_proportionnalite", "coefficient", "template"],
     generate: () => {
       const qty = randomChoice([2, 3, 4, 5, 6]);
       const unit = randomChoice([2, 3, 4, 5]);
@@ -964,15 +964,15 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "template",
-    id: "prop_ratio_tpl_1",
+    id: "prop_rapport_tpl_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "proportionnalite",
-    microId: "prop_ratio",
+    notionId: "prop_proportionnalite",
+    microId: "prop_rapport",
     difficulty: 3,
     theme: "cuisine",
     hint: "Le ratio doit rester le même.",
-    tags: ["proportionnalite", "ratio", "template"],
+    tags: ["prop_proportionnalite", "ratio", "template"],
     generate: () => {
       const a = randomChoice([1, 2, 3]);
       const b = randomChoice([2, 3, 4, 5]);
@@ -1001,12 +1001,12 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     id: "prop_pourcentage_tpl_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "proportionnalite",
+    notionId: "prop_proportionnalite",
     microId: "prop_pourcentage",
     difficulty: 3,
     theme: "neutral",
     hint: "Un pourcentage, c’est une fraction sur 100.",
-    tags: ["proportionnalite", "pourcentage", "template"],
+    tags: ["prop_proportionnalite", "pourcentage", "template"],
     generate: () => {
       const base = randomChoice([40, 50, 80, 100, 120, 200]);
       const percent = randomChoice([10, 20, 25, 30, 50]);
@@ -1029,12 +1029,12 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     id: "prop_pourcentage_qcm_tpl_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "proportionnalite",
+    notionId: "prop_proportionnalite",
     microId: "prop_pourcentage",
     difficulty: 3,
     theme: "neutral",
     hint: "Calcule d’abord le pourcentage demandé.",
-    tags: ["proportionnalite", "pourcentage", "qcm", "template"],
+    tags: ["prop_proportionnalite", "pourcentage", "qcm", "template"],
     generate: () => {
       const base = randomChoice([20, 40, 60, 80, 100]);
       const percent = randomChoice([10, 20, 25]);
@@ -1064,15 +1064,15 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "template",
-    id: "prop_coeff_mult_tpl_1",
+    id: "prop_coeff_multiplicateur_tpl_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "proportionnalite",
-    microId: "prop_coeff_mult",
+    notionId: "prop_proportionnalite",
+    microId: "prop_coeff_multiplicateur",
     difficulty: 3,
     theme: "neutral",
     hint: "Pour une hausse, on ajoute au 1 ; pour une baisse, on enlève au 1.",
-    tags: ["proportionnalite", "coefficient_multiplicateur", "template"],
+    tags: ["prop_proportionnalite", "coefficient_multiplicateur", "template"],
     generate: () => {
       const percent = randomChoice([5, 10, 20, 25]);
       const isIncrease = Math.random() > 0.5;
@@ -1105,12 +1105,12 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     id: "prop_probleme_tpl_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "proportionnalite",
+    notionId: "prop_proportionnalite",
     microId: "prop_probleme",
     difficulty: 4,
     theme: "cuisine",
     hint: "Passe par l’unité.",
-    tags: ["proportionnalite", "probleme", "template"],
+    tags: ["prop_proportionnalite", "probleme", "template"],
     generate: () => {
       const persons = randomChoice([2, 4, 5]);
       const gramsPerPerson = randomChoice([50, 75, 100]);
@@ -1135,15 +1135,15 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "template",
-    id: "prop_defis_tpl_1",
+    id: "prop_defi_tpl_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "proportionnalite",
-    microId: "prop_defis",
+    notionId: "prop_proportionnalite",
+    microId: "prop_defi",
     difficulty: 4,
     theme: "neutral",
     hint: "Utilise le coefficient multiplicateur.",
-    tags: ["proportionnalite", "defi", "template"],
+    tags: ["prop_proportionnalite", "defi", "template"],
     generate: () => {
       const base = randomChoice([20, 30, 40, 50, 60]);
       const percent = randomChoice([10, 20, 25]);
@@ -1169,7 +1169,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     id: "prop_reconnaitre_open_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "proportionnalite",
+    notionId: "prop_proportionnalite",
     microId: "prop_reconnaitre",
     difficulty: 3,
     theme: "neutral",
@@ -1182,14 +1182,14 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
           "Méthode : on utilise le coefficient de proportionnalité, un tableau ou un produit en croix.\n\nCalcul : " +
           ("On passe de 3 à 6 cahiers en multipliant par 2, et de 9 € à 18 € en multipliant aussi par 2. La situation est proportionnelle.") +
           "\n\nConclusion : la valeur obtenue respecte la proportionnalité.",
-    tags: ["proportionnalite", "open", "reconnaitre"],
+    tags: ["prop_proportionnalite", "open", "reconnaitre"],
   },
   {
     kind: "fixed",
     id: "prop_table_open_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "proportionnalite",
+    notionId: "prop_proportionnalite",
     microId: "prop_table",
     difficulty: 3,
     theme: "neutral",
@@ -1202,14 +1202,14 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
           "Méthode : on utilise le coefficient de proportionnalité, un tableau ou un produit en croix.\n\nCalcul : " +
           ("On passe de 3 à 9 cahiers en multipliant par 3. Le prix est donc aussi multiplié par 3 : 12 × 3 = 36 €.") +
           "\n\nConclusion : la valeur obtenue respecte la proportionnalité.",
-    tags: ["proportionnalite", "open", "tableau"],
+    tags: ["prop_proportionnalite", "open", "tableau"],
   },
   {
     kind: "fixed",
     id: "prop_quatrieme_open_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "proportionnalite",
+    notionId: "prop_proportionnalite",
     microId: "prop_quatrieme",
     difficulty: 3,
     theme: "neutral",
@@ -1222,14 +1222,14 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
           "Méthode : on utilise le coefficient de proportionnalité, un tableau ou un produit en croix.\n\nCalcul : " +
           ("4 objets coûtent 12 €, donc 1 objet coûte 3 €. Alors 7 objets coûtent 7 × 3 = 21 €.") +
           "\n\nConclusion : la valeur obtenue respecte la proportionnalité.",
-    tags: ["proportionnalite", "open", "quatrieme_proportionnelle"],
+    tags: ["prop_proportionnalite", "open", "quatrieme_proportionnelle"],
   },
   {
     kind: "fixed",
     id: "prop_coeff_open_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "proportionnalite",
+    notionId: "prop_proportionnalite",
     microId: "prop_coeff",
     difficulty: 3,
     theme: "neutral",
@@ -1242,15 +1242,15 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
           "Méthode : on utilise le coefficient de proportionnalité, un tableau ou un produit en croix.\n\nCalcul : " +
           ("On divise 20 par 4 : 20 ÷ 4 = 5. Le coefficient de proportionnalité est 5.") +
           "\n\nConclusion : la valeur obtenue respecte la proportionnalité.",
-    tags: ["proportionnalite", "open", "coefficient"],
+    tags: ["prop_proportionnalite", "open", "coefficient"],
   },
   {
     kind: "fixed",
-    id: "prop_ratio_open_1",
+    id: "prop_rapport_open_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "proportionnalite",
-    microId: "prop_ratio",
+    notionId: "prop_proportionnalite",
+    microId: "prop_rapport",
     difficulty: 3,
     theme: "cuisine",
     text: "Explique pourquoi avec un ratio sirop:eau de 2:5, 8 verres de sirop nécessitent 20 verres d’eau.",
@@ -1262,14 +1262,14 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
           "Méthode : on utilise le coefficient de proportionnalité, un tableau ou un produit en croix.\n\nCalcul : " +
           ("Le ratio est 2:5. On passe de 2 à 8 en multipliant par 4, donc on multiplie aussi 5 par 4 : il faut 20 verres d’eau.") +
           "\n\nConclusion : la valeur obtenue respecte la proportionnalité.",
-    tags: ["proportionnalite", "open", "ratio"],
+    tags: ["prop_proportionnalite", "open", "ratio"],
   },
   {
     kind: "fixed",
     id: "prop_pourcentage_open_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "proportionnalite",
+    notionId: "prop_proportionnalite",
     microId: "prop_pourcentage",
     difficulty: 3,
     theme: "neutral",
@@ -1282,15 +1282,15 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
           "Méthode : on utilise le coefficient de proportionnalité, un tableau ou un produit en croix.\n\nCalcul : " +
           ("25 % correspond à un quart. Un quart de 80 vaut 20, donc 25 % de 80 = 20.") +
           "\n\nConclusion : la valeur obtenue respecte la proportionnalité.",
-    tags: ["proportionnalite", "open", "pourcentage"],
+    tags: ["prop_proportionnalite", "open", "pourcentage"],
   },
   {
     kind: "fixed",
-    id: "prop_coeff_mult_open_1",
+    id: "prop_coeff_multiplicateur_open_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "proportionnalite",
-    microId: "prop_coeff_mult",
+    notionId: "prop_proportionnalite",
+    microId: "prop_coeff_multiplicateur",
     difficulty: 4,
     theme: "neutral",
     text: "Explique pourquoi une réduction de 15 % correspond à multiplier par 0,85.",
@@ -1302,15 +1302,15 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
           "Méthode : on utilise le coefficient de proportionnalité, un tableau ou un produit en croix.\n\nCalcul : " +
           ("Une réduction de 15 % signifie qu’il reste 85 % de la valeur initiale. Or 85 % = 85/100 = 0,85.") +
           "\n\nConclusion : la valeur obtenue respecte la proportionnalité.",
-    tags: ["proportionnalite", "open", "coefficient_multiplicateur"],
+    tags: ["prop_proportionnalite", "open", "coefficient_multiplicateur"],
   },
   {
     kind: "fixed",
-    id: "prop_defis_open_1",
+    id: "prop_defi_open_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "proportionnalite",
-    microId: "prop_defis",
+    notionId: "prop_proportionnalite",
+    microId: "prop_defi",
     difficulty: 4,
     theme: "neutral",
     text: "Un élève dit : « Si 5 tickets coûtent 12 €, alors 10 tickets coûtent 25 € parce qu’on ajoute 13 ». Explique son erreur.",
@@ -1322,6 +1322,6 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
           "Méthode : on utilise le coefficient de proportionnalité, un tableau ou un produit en croix.\n\nCalcul : " +
           ("L’élève raisonne par addition. En proportionnalité, on utilise une multiplication. Si 5 tickets coûtent 12 €, alors 10 tickets devraient coûter 24 €, pas 25 €.") +
           "\n\nConclusion : la valeur obtenue respecte la proportionnalité.",
-    tags: ["proportionnalite", "open", "defi", "erreur"],
+    tags: ["prop_proportionnalite", "open", "defi", "erreur"],
   },
 ];

@@ -56,11 +56,11 @@ export const statistiquesBank: TutorBankItemV4[] = [
   ========================= */
   {
     kind: "fixed",
-    id: "stat_organiser_donnees_fixed_1",
+    id: "stat_donnee_organiser_fixed_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "statistiques",
-    microId: "stat_organiser_donnees",
+    notionId: "stat_statistique",
+    microId: "stat_donnee_organiser",
     difficulty: 1,
     theme: "neutral",
     text: "On interroge des élèves sur leur sport préféré. Quelle information doit-on compter pour faire un tableau statistique ?",
@@ -79,15 +79,15 @@ export const statistiquesBank: TutorBankItemV4[] = [
           "Méthode : on lit le tableau ou le graphique, puis on calcule l’indicateur demandé.\n\nCalcul : " +
           ("Pour faire un tableau statistique, on compte l’effectif de chaque catégorie.") +
           "\n\nConclusion : l’indicateur obtenu résume correctement les données.",
-    tags: ["statistiques", "organiser", "qcm"],
+    tags: ["stat_statistique", "organiser", "qcm"],
   },
   {
     kind: "fixed",
-    id: "stat_organiser_donnees_open_1",
+    id: "stat_donnee_organiser_open_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "statistiques",
-    microId: "stat_organiser_donnees",
+    notionId: "stat_statistique",
+    microId: "stat_donnee_organiser",
     difficulty: 2,
     theme: "neutral",
     text: "Explique pourquoi il faut organiser les données avant de les représenter.",
@@ -100,7 +100,7 @@ export const statistiquesBank: TutorBankItemV4[] = [
           "Méthode : on lit le tableau ou le graphique, puis on calcule l’indicateur demandé.\n\nCalcul : " +
           ("On organise les données pour les classer et compter les effectifs. Ensuite, on peut construire un tableau ou un graphique.") +
           "\n\nConclusion : l’indicateur obtenu résume correctement les données.",
-    tags: ["statistiques", "organiser", "open"],
+    tags: ["stat_statistique", "organiser", "open"],
   },
 
   /* =========================
@@ -111,7 +111,7 @@ export const statistiquesBank: TutorBankItemV4[] = [
     id: "stat_lire_tableau_fixed_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "statistiques",
+    notionId: "stat_statistique",
     microId: "stat_lire_tableau",
     difficulty: 1,
     theme: "neutral",
@@ -124,14 +124,14 @@ export const statistiquesBank: TutorBankItemV4[] = [
           "Méthode : on lit le tableau ou le graphique, puis on calcule l’indicateur demandé.\n\nCalcul : " +
           ("L’effectif du basket est 6.") +
           "\n\nConclusion : l’indicateur obtenu résume correctement les données.",
-    tags: ["statistiques", "tableau", "lecture"],
+    tags: ["stat_statistique", "tableau", "lecture"],
   },
   {
     kind: "fixed",
     id: "stat_lire_tableau_fixed_2",
     niveau: "5e",
     matiere: "maths",
-    notionId: "statistiques",
+    notionId: "stat_statistique",
     microId: "stat_lire_tableau",
     difficulty: 2,
     theme: "neutral",
@@ -144,19 +144,19 @@ export const statistiquesBank: TutorBankItemV4[] = [
           "Méthode : on lit le tableau ou le graphique, puis on calcule l’indicateur demandé.\n\nCalcul : " +
           ("L’effectif total est 8 + 6 + 4 = 18.") +
           "\n\nConclusion : l’indicateur obtenu résume correctement les données.",
-    tags: ["statistiques", "tableau", "effectif_total"],
+    tags: ["stat_statistique", "tableau", "effectif_total"],
   },
   {
     kind: "template",
     id: "stat_lire_tableau_tpl_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "statistiques",
+    notionId: "stat_statistique",
     microId: "stat_lire_tableau",
     difficulty: 2,
     theme: "neutral",
     hint: "Additionne tous les effectifs.",
-    tags: ["statistiques", "tableau", "template"],
+    tags: ["stat_statistique", "tableau", "template"],
     generate: () => {
       const a = randomInt(4, 12);
       const b = randomInt(4, 12);
@@ -184,7 +184,7 @@ export const statistiquesBank: TutorBankItemV4[] = [
     id: "stat_lire_graphique_fixed_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "statistiques",
+    notionId: "stat_statistique",
     microId: "stat_lire_graphique",
     difficulty: 2,
     theme: "neutral",
@@ -199,7 +199,7 @@ export const statistiquesBank: TutorBankItemV4[] = [
           "Méthode : on lit le tableau ou le graphique, puis on calcule l’indicateur demandé.\n\nCalcul : " +
           ("La barre la plus haute est celle du foot : c’est l’activité la plus choisie.") +
           "\n\nConclusion : l’indicateur obtenu résume correctement les données.",
-    tags: ["statistiques", "graphique", "canvas", "qcm"],
+    tags: ["stat_statistique", "graphique", "canvas", "qcm"],
     canvas: statGraphCanvas({
       graphType: "barres",
       data: [
@@ -216,7 +216,7 @@ export const statistiquesBank: TutorBankItemV4[] = [
     id: "stat_lire_graphique_open_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "statistiques",
+    notionId: "stat_statistique",
     microId: "stat_lire_graphique",
     difficulty: 3,
     theme: "neutral",
@@ -230,19 +230,19 @@ export const statistiquesBank: TutorBankItemV4[] = [
           "Méthode : on lit le tableau ou le graphique, puis on calcule l’indicateur demandé.\n\nCalcul : " +
           ("La catégorie la plus fréquente est celle dont la barre est la plus haute, car elle a le plus grand effectif.") +
           "\n\nConclusion : l’indicateur obtenu résume correctement les données.",
-    tags: ["statistiques", "graphique", "open"],
+    tags: ["stat_statistique", "graphique", "open"],
   },
   {
     kind: "template",
     id: "stat_lire_graphique_tpl_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "statistiques",
+    notionId: "stat_statistique",
     microId: "stat_lire_graphique",
     difficulty: 2,
     theme: "neutral",
     hint: "Repère la plus grande valeur.",
-    tags: ["statistiques", "graphique", "canvas", "template"],
+    tags: ["stat_statistique", "graphique", "canvas", "template"],
     generate: () => {
       const labels = ["A", "B", "C", "D"];
       const values = shuffle([randomInt(4, 7), randomInt(8, 10), randomInt(11, 14), randomInt(15, 18)]);
@@ -276,7 +276,7 @@ export const statistiquesBank: TutorBankItemV4[] = [
     id: "stat_effectif_frequence_fixed_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "statistiques",
+    notionId: "stat_statistique",
     microId: "stat_effectif_frequence",
     difficulty: 2,
     theme: "neutral",
@@ -290,14 +290,14 @@ export const statistiquesBank: TutorBankItemV4[] = [
           "Méthode : on lit le tableau ou le graphique, puis on calcule l’indicateur demandé.\n\nCalcul : " +
           ("La fréquence est 10 ÷ 25 = 0,4, soit 40 %.") +
           "\n\nConclusion : l’indicateur obtenu résume correctement les données.",
-    tags: ["statistiques", "frequence"],
+    tags: ["stat_statistique", "frequence"],
   },
   {
     kind: "fixed",
     id: "stat_effectif_frequence_qcm_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "statistiques",
+    notionId: "stat_statistique",
     microId: "stat_effectif_frequence",
     difficulty: 2,
     theme: "neutral",
@@ -312,19 +312,19 @@ export const statistiquesBank: TutorBankItemV4[] = [
           "Méthode : on lit le tableau ou le graphique, puis on calcule l’indicateur demandé.\n\nCalcul : " +
           ("La fréquence est 5 ÷ 20 = 0,25.") +
           "\n\nConclusion : l’indicateur obtenu résume correctement les données.",
-    tags: ["statistiques", "frequence", "qcm"],
+    tags: ["stat_statistique", "frequence", "qcm"],
   },
   {
     kind: "template",
     id: "stat_effectif_frequence_tpl_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "statistiques",
+    notionId: "stat_statistique",
     microId: "stat_effectif_frequence",
     difficulty: 3,
     theme: "neutral",
     hint: "Fréquence = effectif ÷ total.",
-    tags: ["statistiques", "frequence", "template"],
+    tags: ["stat_statistique", "frequence", "template"],
     generate: () => {
       const total = randomChoice([20, 25, 30, 40, 50]);
       const effectif = randomChoice([5, 10, 15, 20]);
@@ -347,7 +347,7 @@ export const statistiquesBank: TutorBankItemV4[] = [
     id: "stat_effectif_frequence_open_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "statistiques",
+    notionId: "stat_statistique",
     microId: "stat_effectif_frequence",
     difficulty: 3,
     theme: "neutral",
@@ -361,7 +361,7 @@ export const statistiquesBank: TutorBankItemV4[] = [
           "Méthode : on lit le tableau ou le graphique, puis on calcule l’indicateur demandé.\n\nCalcul : " +
           ("Pour calculer une fréquence, on divise l’effectif de la catégorie par l’effectif total.") +
           "\n\nConclusion : l’indicateur obtenu résume correctement les données.",
-    tags: ["statistiques", "frequence", "open"],
+    tags: ["stat_statistique", "frequence", "open"],
   },
 
   /* =========================
@@ -372,7 +372,7 @@ export const statistiquesBank: TutorBankItemV4[] = [
     id: "stat_representer_fixed_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "statistiques",
+    notionId: "stat_statistique",
     microId: "stat_representer",
     difficulty: 2,
     theme: "neutral",
@@ -392,19 +392,19 @@ export const statistiquesBank: TutorBankItemV4[] = [
           "Méthode : on lit le tableau ou le graphique, puis on calcule l’indicateur demandé.\n\nCalcul : " +
           ("Un diagramme en barres est adapté pour comparer les effectifs de plusieurs catégories.") +
           "\n\nConclusion : l’indicateur obtenu résume correctement les données.",
-    tags: ["statistiques", "representation", "qcm"],
+    tags: ["stat_statistique", "representation", "qcm"],
   },
   {
     kind: "template",
     id: "stat_representer_tpl_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "statistiques",
+    notionId: "stat_statistique",
     microId: "stat_representer",
     difficulty: 3,
     theme: "neutral",
     hint: "Regarde si les hauteurs correspondent bien aux effectifs.",
-    tags: ["statistiques", "representation", "canvas", "template"],
+    tags: ["stat_statistique", "representation", "canvas", "template"],
     generate: () => {
       const data = [
         { label: "A", value: randomInt(4, 10) },
@@ -435,7 +435,7 @@ export const statistiquesBank: TutorBankItemV4[] = [
     id: "stat_representer_open_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "statistiques",
+    notionId: "stat_statistique",
     microId: "stat_representer",
     difficulty: 3,
     theme: "neutral",
@@ -449,7 +449,7 @@ export const statistiquesBank: TutorBankItemV4[] = [
           "Méthode : on lit le tableau ou le graphique, puis on calcule l’indicateur demandé.\n\nCalcul : " +
           ("La hauteur des barres représente les effectifs. On peut donc comparer rapidement les catégories.") +
           "\n\nConclusion : l’indicateur obtenu résume correctement les données.",
-    tags: ["statistiques", "representation", "open"],
+    tags: ["stat_statistique", "representation", "open"],
   },
 
   /* =========================
@@ -457,11 +457,11 @@ export const statistiquesBank: TutorBankItemV4[] = [
   ========================= */
   {
     kind: "fixed",
-    id: "stat_choisir_representation_fixed_1",
+    id: "stat_representation_choisir_fixed_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "statistiques",
-    microId: "stat_choisir_representation",
+    notionId: "stat_statistique",
+    microId: "stat_representation_choisir",
     difficulty: 2,
     theme: "neutral",
     text: "Pour montrer la répartition d’un total en plusieurs parties, quelle représentation peut-on choisir ?",
@@ -480,15 +480,15 @@ export const statistiquesBank: TutorBankItemV4[] = [
           "Méthode : on lit le tableau ou le graphique, puis on calcule l’indicateur demandé.\n\nCalcul : " +
           ("Un diagramme circulaire permet de visualiser la répartition d’un total en plusieurs parties.") +
           "\n\nConclusion : l’indicateur obtenu résume correctement les données.",
-    tags: ["statistiques", "representation", "camembert", "qcm"],
+    tags: ["stat_statistique", "representation", "camembert", "qcm"],
   },
   {
     kind: "fixed",
-    id: "stat_choisir_representation_open_1",
+    id: "stat_representation_choisir_open_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "statistiques",
-    microId: "stat_choisir_representation",
+    notionId: "stat_statistique",
+    microId: "stat_representation_choisir",
     difficulty: 3,
     theme: "neutral",
     text: "Explique la différence entre un tableau statistique et un diagramme en barres.",
@@ -501,7 +501,7 @@ export const statistiquesBank: TutorBankItemV4[] = [
           "Méthode : on lit le tableau ou le graphique, puis on calcule l’indicateur demandé.\n\nCalcul : " +
           ("Un tableau présente les données sous forme de lignes et de colonnes. Un diagramme en barres permet de visualiser et comparer les effectifs.") +
           "\n\nConclusion : l’indicateur obtenu résume correctement les données.",
-    tags: ["statistiques", "representation", "open"],
+    tags: ["stat_statistique", "representation", "open"],
   },
 
   /* =========================
@@ -512,7 +512,7 @@ export const statistiquesBank: TutorBankItemV4[] = [
     id: "stat_moyenne_fixed_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "statistiques",
+    notionId: "stat_statistique",
     microId: "stat_moyenne",
     difficulty: 2,
     theme: "neutral",
@@ -526,14 +526,14 @@ export const statistiquesBank: TutorBankItemV4[] = [
           "Méthode : on lit le tableau ou le graphique, puis on calcule l’indicateur demandé.\n\nCalcul : " +
           ("Moyenne = (10 + 12 + 14) ÷ 3 = 36 ÷ 3 = 12.") +
           "\n\nConclusion : l’indicateur obtenu résume correctement les données.",
-    tags: ["statistiques", "moyenne"],
+    tags: ["stat_statistique", "moyenne"],
   },
   {
     kind: "fixed",
     id: "stat_moyenne_qcm_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "statistiques",
+    notionId: "stat_statistique",
     microId: "stat_moyenne",
     difficulty: 3,
     theme: "neutral",
@@ -548,19 +548,19 @@ export const statistiquesBank: TutorBankItemV4[] = [
           "Méthode : on lit le tableau ou le graphique, puis on calcule l’indicateur demandé.\n\nCalcul : " +
           ("8 + 10 + 12 + 14 = 44. Puis 44 ÷ 4 = 11.") +
           "\n\nConclusion : l’indicateur obtenu résume correctement les données.",
-    tags: ["statistiques", "moyenne", "qcm"],
+    tags: ["stat_statistique", "moyenne", "qcm"],
   },
   {
     kind: "template",
     id: "stat_moyenne_tpl_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "statistiques",
+    notionId: "stat_statistique",
     microId: "stat_moyenne",
     difficulty: 3,
     theme: "neutral",
     hint: "Somme des valeurs ÷ nombre de valeurs.",
-    tags: ["statistiques", "moyenne", "template"],
+    tags: ["stat_statistique", "moyenne", "template"],
     generate: () => {
       const a = randomChoice([6, 8, 10, 12]);
       const b = randomChoice([10, 12, 14]);
@@ -584,7 +584,7 @@ export const statistiquesBank: TutorBankItemV4[] = [
     id: "stat_moyenne_open_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "statistiques",
+    notionId: "stat_statistique",
     microId: "stat_moyenne",
     difficulty: 3,
     theme: "neutral",
@@ -598,7 +598,7 @@ export const statistiquesBank: TutorBankItemV4[] = [
           "Méthode : on lit le tableau ou le graphique, puis on calcule l’indicateur demandé.\n\nCalcul : " +
           ("On additionne les trois valeurs : 10 + 12 + 14 = 36. Puis on divise par 3 : 36 ÷ 3 = 12.") +
           "\n\nConclusion : l’indicateur obtenu résume correctement les données.",
-    tags: ["statistiques", "moyenne", "open"],
+    tags: ["stat_statistique", "moyenne", "open"],
   },
 
   /* =========================
@@ -606,11 +606,11 @@ export const statistiquesBank: TutorBankItemV4[] = [
   ========================= */
   {
     kind: "fixed",
-    id: "stat_defis_fixed_1",
+    id: "stat_defi_fixed_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "statistiques",
-    microId: "stat_defis",
+    notionId: "stat_statistique",
+    microId: "stat_defi",
     difficulty: 4,
     theme: "reunion",
     text: "À La Réunion, une classe relève le nombre de déchets ramassés : plastique 12, verre 8, papier 10. Quel est l’effectif total ?",
@@ -623,7 +623,7 @@ export const statistiquesBank: TutorBankItemV4[] = [
           "Méthode : on lit le tableau ou le graphique, puis on calcule l’indicateur demandé.\n\nCalcul : " +
           ("L’effectif total est 12 + 8 + 10 = 30.") +
           "\n\nConclusion : l’indicateur obtenu résume correctement les données.",
-    tags: ["statistiques", "defi", "reunion"],
+    tags: ["stat_statistique", "defi", "reunion"],
     canvas: statGraphCanvas({
       graphType: "barres",
       data: [
@@ -635,11 +635,11 @@ export const statistiquesBank: TutorBankItemV4[] = [
   },
   {
     kind: "fixed",
-    id: "stat_defis_fixed_2",
+    id: "stat_defi_fixed_2",
     niveau: "5e",
     matiere: "maths",
-    notionId: "statistiques",
-    microId: "stat_defis",
+    notionId: "stat_statistique",
+    microId: "stat_defi",
     difficulty: 4,
     theme: "neutral",
     text: "Un élève dit : « La moyenne de 10, 12 et 14 est 36 ». Explique son erreur.",
@@ -652,19 +652,19 @@ export const statistiquesBank: TutorBankItemV4[] = [
           "Méthode : on lit le tableau ou le graphique, puis on calcule l’indicateur demandé.\n\nCalcul : " +
           ("L’élève a seulement additionné les valeurs. Il faut ensuite diviser par le nombre de valeurs : 36 ÷ 3 = 12.") +
           "\n\nConclusion : l’indicateur obtenu résume correctement les données.",
-    tags: ["statistiques", "defi", "open", "erreur"],
+    tags: ["stat_statistique", "defi", "open", "erreur"],
   },
   {
     kind: "template",
-    id: "stat_defis_tpl_1",
+    id: "stat_defi_tpl_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "statistiques",
-    microId: "stat_defis",
+    notionId: "stat_statistique",
+    microId: "stat_defi",
     difficulty: 5,
     theme: "reunion",
     hint: "Calcule d’abord le total, puis la fréquence.",
-    tags: ["statistiques", "defi", "reunion", "template"],
+    tags: ["stat_statistique", "defi", "reunion", "template"],
     generate: () => {
       const mangues = randomInt(5, 12);
       const ananas = randomInt(5, 12);

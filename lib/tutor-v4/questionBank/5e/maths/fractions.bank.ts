@@ -56,11 +56,11 @@ export const fractionsBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "fixed",
-    id: "fraction_egales_fixed_1",
+    id: "fraction_egale_fixed_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "fractions",
-    microId: "fraction_egales",
+    notionId: "fraction_nombre",
+    microId: "fraction_egale",
     difficulty: 1,
     theme: "neutral",
     text: "1/2 et 2/4 représentent-ils la même quantité ?",
@@ -73,15 +73,15 @@ export const fractionsBank: TutorBankItemV4[] = [
           "Méthode : on applique la règle adaptée : lire, simplifier, comparer ou calculer avec les fractions.\n\nCalcul : " +
           ("1/2 = 2/4 car on a multiplié le numérateur et le dénominateur de 1/2 par 2.") +
           "\n\nConclusion : la fraction ou le nombre obtenu est la bonne réponse.",
-    tags: ["fractions", "fractions_egales"],
+    tags: ["fraction_nombre", "fraction_nombre_egales"],
   },
   {
     kind: "fixed",
-    id: "fraction_egales_fixed_2",
+    id: "fraction_egale_fixed_2",
     niveau: "5e",
     matiere: "maths",
-    notionId: "fractions",
-    microId: "fraction_egales",
+    notionId: "fraction_nombre",
+    microId: "fraction_egale",
     difficulty: 1,
     theme: "neutral",
     text: "3/5 et 6/10 sont-elles égales ?",
@@ -94,15 +94,15 @@ export const fractionsBank: TutorBankItemV4[] = [
           "Méthode : on applique la règle adaptée : lire, simplifier, comparer ou calculer avec les fractions.\n\nCalcul : " +
           ("3/5 = 6/10 car on a multiplié 3 et 5 par 2.") +
           "\n\nConclusion : la fraction ou le nombre obtenu est la bonne réponse.",
-    tags: ["fractions", "fractions_egales"],
+    tags: ["fraction_nombre", "fraction_nombre_egales"],
   },
   {
     kind: "fixed",
-    id: "fraction_egales_fixed_3",
+    id: "fraction_egale_fixed_3",
     niveau: "5e",
     matiere: "maths",
-    notionId: "fractions",
-    microId: "fraction_egales",
+    notionId: "fraction_nombre",
+    microId: "fraction_egale",
     difficulty: 2,
     theme: "neutral",
     text: "2/3 et 4/5 sont-elles égales ?",
@@ -115,15 +115,15 @@ export const fractionsBank: TutorBankItemV4[] = [
           "Méthode : on applique la règle adaptée : lire, simplifier, comparer ou calculer avec les fractions.\n\nCalcul : " +
           ("2/3 ne devient pas 4/5 en multipliant le numérateur et le dénominateur par un même nombre. Ces fractions ne sont donc pas égales.") +
           "\n\nConclusion : la fraction ou le nombre obtenu est la bonne réponse.",
-    tags: ["fractions", "fractions_egales"],
+    tags: ["fraction_nombre", "fraction_nombre_egales"],
   },
   {
     kind: "fixed",
-    id: "fraction_egales_qcm_1",
+    id: "fraction_egale_qcm_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "fractions",
-    microId: "fraction_egales",
+    notionId: "fraction_nombre",
+    microId: "fraction_egale",
     difficulty: 2,
     theme: "neutral",
     text: "Quelle fraction est égale à 3/4 ?",
@@ -137,19 +137,19 @@ export const fractionsBank: TutorBankItemV4[] = [
           "Méthode : on applique la règle adaptée : lire, simplifier, comparer ou calculer avec les fractions.\n\nCalcul : " +
           ("3/4 = 6/8 car 3 × 2 = 6 et 4 × 2 = 8.") +
           "\n\nConclusion : la fraction ou le nombre obtenu est la bonne réponse.",
-    tags: ["fractions", "fractions_egales", "qcm"],
+    tags: ["fraction_nombre", "fraction_nombre_egales", "qcm"],
   },
   {
     kind: "template",
-    id: "fraction_egales_tpl_1",
+    id: "fraction_egale_tpl_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "fractions",
-    microId: "fraction_egales",
+    notionId: "fraction_nombre",
+    microId: "fraction_egale",
     difficulty: 2,
     theme: "neutral",
     hint: "On peut multiplier le numérateur et le dénominateur par le même nombre.",
-    tags: ["fractions", "fractions_egales", "template"],
+    tags: ["fraction_nombre", "fraction_nombre_egales", "template"],
     generate: () => {
       const n = randomChoice([1, 2, 3, 4, 5]);
       const d = randomChoice([2, 3, 4, 5, 6]);
@@ -181,7 +181,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     id: "fraction_simplifier_fixed_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "fractions",
+    notionId: "fraction_nombre",
     microId: "fraction_simplifier",
     difficulty: 1,
     theme: "neutral",
@@ -195,14 +195,14 @@ export const fractionsBank: TutorBankItemV4[] = [
           "Méthode : on applique la règle adaptée : lire, simplifier, comparer ou calculer avec les fractions.\n\nCalcul : " +
           ("6 et 8 sont divisibles par 2. On obtient 6/8 = 3/4.") +
           "\n\nConclusion : la fraction ou le nombre obtenu est la bonne réponse.",
-    tags: ["fractions", "simplifier"],
+    tags: ["fraction_nombre", "simplifier"],
   },
   {
     kind: "fixed",
     id: "fraction_simplifier_fixed_2",
     niveau: "5e",
     matiere: "maths",
-    notionId: "fractions",
+    notionId: "fraction_nombre",
     microId: "fraction_simplifier",
     difficulty: 1,
     theme: "neutral",
@@ -216,14 +216,14 @@ export const fractionsBank: TutorBankItemV4[] = [
           "Méthode : on applique la règle adaptée : lire, simplifier, comparer ou calculer avec les fractions.\n\nCalcul : " +
           ("9 et 12 sont divisibles par 3. Donc 9/12 = 3/4.") +
           "\n\nConclusion : la fraction ou le nombre obtenu est la bonne réponse.",
-    tags: ["fractions", "simplifier"],
+    tags: ["fraction_nombre", "simplifier"],
   },
   {
     kind: "fixed",
     id: "fraction_simplifier_qcm_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "fractions",
+    notionId: "fraction_nombre",
     microId: "fraction_simplifier",
     difficulty: 2,
     theme: "neutral",
@@ -238,19 +238,19 @@ export const fractionsBank: TutorBankItemV4[] = [
           "Méthode : on applique la règle adaptée : lire, simplifier, comparer ou calculer avec les fractions.\n\nCalcul : " +
           ("15/20 = 3/4 car on divise 15 et 20 par 5.") +
           "\n\nConclusion : la fraction ou le nombre obtenu est la bonne réponse.",
-    tags: ["fractions", "simplifier", "qcm"],
+    tags: ["fraction_nombre", "simplifier", "qcm"],
   },
   {
     kind: "template",
     id: "fraction_simplifier_tpl_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "fractions",
+    notionId: "fraction_nombre",
     microId: "fraction_simplifier",
     difficulty: 2,
     theme: "neutral",
     hint: "Cherche le plus grand diviseur commun.",
-    tags: ["fractions", "simplifier", "template"],
+    tags: ["fraction_nombre", "simplifier", "template"],
     generate: () => {
       const a = randomChoice([1, 2, 3, 4, 5, 6]);
       const b = randomChoice([2, 3, 4, 5, 6, 7]);
@@ -280,7 +280,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     id: "fraction_rationnel_fixed_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "fractions",
+    notionId: "fraction_nombre",
     microId: "fraction_rationnel",
     difficulty: 1,
     theme: "neutral",
@@ -294,14 +294,14 @@ export const fractionsBank: TutorBankItemV4[] = [
           "Méthode : on applique la règle adaptée : lire, simplifier, comparer ou calculer avec les fractions.\n\nCalcul : " +
           ("3/5 est un quotient de deux entiers. C’est donc un nombre rationnel.") +
           "\n\nConclusion : la fraction ou le nombre obtenu est la bonne réponse.",
-    tags: ["fractions", "rationnel"],
+    tags: ["fraction_nombre", "rationnel"],
   },
   {
     kind: "fixed",
     id: "fraction_rationnel_fixed_2",
     niveau: "5e",
     matiere: "maths",
-    notionId: "fractions",
+    notionId: "fraction_nombre",
     microId: "fraction_rationnel",
     difficulty: 2,
     theme: "neutral",
@@ -315,14 +315,14 @@ export const fractionsBank: TutorBankItemV4[] = [
           "Méthode : on applique la règle adaptée : lire, simplifier, comparer ou calculer avec les fractions.\n\nCalcul : " +
           ("Le nombre 'moins deux tiers' s’écrit -2/3.") +
           "\n\nConclusion : la fraction ou le nombre obtenu est la bonne réponse.",
-    tags: ["fractions", "rationnel"],
+    tags: ["fraction_nombre", "rationnel"],
   },
   {
     kind: "fixed",
     id: "fraction_rationnel_qcm_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "fractions",
+    notionId: "fraction_nombre",
     microId: "fraction_rationnel",
     difficulty: 2,
     theme: "neutral",
@@ -337,7 +337,7 @@ export const fractionsBank: TutorBankItemV4[] = [
           "Méthode : on applique la règle adaptée : lire, simplifier, comparer ou calculer avec les fractions.\n\nCalcul : " +
           ("7/4 est le quotient de deux entiers. C’est un nombre rationnel.") +
           "\n\nConclusion : la fraction ou le nombre obtenu est la bonne réponse.",
-    tags: ["fractions", "rationnel", "qcm"],
+    tags: ["fraction_nombre", "rationnel", "qcm"],
   },
 
   // =========================
@@ -348,7 +348,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     id: "fraction_comparer_fixed_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "fractions",
+    notionId: "fraction_nombre",
     microId: "fraction_comparer",
     difficulty: 2,
     theme: "neutral",
@@ -362,14 +362,14 @@ export const fractionsBank: TutorBankItemV4[] = [
           "Méthode : on applique la règle adaptée : lire, simplifier, comparer ou calculer avec les fractions.\n\nCalcul : " +
           ("1/2 = 2/4, donc 3/4 est plus grand que 1/2.") +
           "\n\nConclusion : la fraction ou le nombre obtenu est la bonne réponse.",
-    tags: ["fractions", "comparer"],
+    tags: ["fraction_nombre", "comparer"],
   },
   {
     kind: "fixed",
     id: "fraction_comparer_fixed_2",
     niveau: "5e",
     matiere: "maths",
-    notionId: "fractions",
+    notionId: "fraction_nombre",
     microId: "fraction_comparer",
     difficulty: 2,
     theme: "neutral",
@@ -383,14 +383,14 @@ export const fractionsBank: TutorBankItemV4[] = [
           "Méthode : on applique la règle adaptée : lire, simplifier, comparer ou calculer avec les fractions.\n\nCalcul : " +
           ("2/3 et 3/5 : 2 × 5 = 10 et 3 × 3 = 9, donc 2/3 > 3/5.") +
           "\n\nConclusion : la fraction ou le nombre obtenu est la bonne réponse.",
-    tags: ["fractions", "comparer"],
+    tags: ["fraction_nombre", "comparer"],
   },
   {
     kind: "fixed",
     id: "fraction_comparer_qcm_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "fractions",
+    notionId: "fraction_nombre",
     microId: "fraction_comparer",
     difficulty: 3,
     theme: "neutral",
@@ -405,19 +405,19 @@ export const fractionsBank: TutorBankItemV4[] = [
           "Méthode : on applique la règle adaptée : lire, simplifier, comparer ou calculer avec les fractions.\n\nCalcul : " +
           ("2/3 ≈ 0,67 ; 3/4 = 0,75 ; 5/6 ≈ 0,83 ; 7/8 = 0,875. La plus petite est 2/3.") +
           "\n\nConclusion : la fraction ou le nombre obtenu est la bonne réponse.",
-    tags: ["fractions", "comparer", "qcm"],
+    tags: ["fraction_nombre", "comparer", "qcm"],
   },
   {
     kind: "template",
     id: "fraction_comparer_tpl_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "fractions",
+    notionId: "fraction_nombre",
     microId: "fraction_comparer",
     difficulty: 3,
     theme: "neutral",
     hint: "Compare par produit en croix ou en mettant au même dénominateur.",
-    tags: ["fractions", "comparer", "template"],
+    tags: ["fraction_nombre", "comparer", "template"],
     generate: () => {
       const a = randomChoice([
         [1, 2],
@@ -458,11 +458,11 @@ export const fractionsBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "fixed",
-    id: "fraction_addition_fixed_1",
+    id: "fraction_additionner_fixed_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "fractions",
-    microId: "fraction_addition",
+    notionId: "fraction_nombre",
+    microId: "fraction_additionner",
     difficulty: 2,
     theme: "neutral",
     text: "Calcule 1/4 + 2/4.",
@@ -475,15 +475,15 @@ export const fractionsBank: TutorBankItemV4[] = [
           "Méthode : on applique la règle adaptée : lire, simplifier, comparer ou calculer avec les fractions.\n\nCalcul : " +
           ("1/4 + 2/4 = 3/4.") +
           "\n\nConclusion : la fraction ou le nombre obtenu est la bonne réponse.",
-    tags: ["fractions", "addition"],
+    tags: ["fraction_nombre", "addition"],
   },
   {
     kind: "fixed",
-    id: "fraction_addition_fixed_2",
+    id: "fraction_additionner_fixed_2",
     niveau: "5e",
     matiere: "maths",
-    notionId: "fractions",
-    microId: "fraction_addition",
+    notionId: "fraction_nombre",
+    microId: "fraction_additionner",
     difficulty: 2,
     theme: "neutral",
     text: "Calcule 3/5 - 1/5.",
@@ -496,15 +496,15 @@ export const fractionsBank: TutorBankItemV4[] = [
           "Méthode : on applique la règle adaptée : lire, simplifier, comparer ou calculer avec les fractions.\n\nCalcul : " +
           ("3/5 - 1/5 = 2/5.") +
           "\n\nConclusion : la fraction ou le nombre obtenu est la bonne réponse.",
-    tags: ["fractions", "addition", "soustraction"],
+    tags: ["fraction_nombre", "addition", "soustraction"],
   },
   {
     kind: "fixed",
-    id: "fraction_addition_fixed_3",
+    id: "fraction_additionner_fixed_3",
     niveau: "5e",
     matiere: "maths",
-    notionId: "fractions",
-    microId: "fraction_addition",
+    notionId: "fraction_nombre",
+    microId: "fraction_additionner",
     difficulty: 3,
     theme: "neutral",
     text: "Calcule 1/2 + 1/3.",
@@ -517,15 +517,15 @@ export const fractionsBank: TutorBankItemV4[] = [
           "Méthode : on applique la règle adaptée : lire, simplifier, comparer ou calculer avec les fractions.\n\nCalcul : " +
           ("1/2 = 3/6 et 1/3 = 2/6, donc 1/2 + 1/3 = 5/6.") +
           "\n\nConclusion : la fraction ou le nombre obtenu est la bonne réponse.",
-    tags: ["fractions", "addition"],
+    tags: ["fraction_nombre", "addition"],
   },
   {
     kind: "fixed",
-    id: "fraction_addition_qcm_1",
+    id: "fraction_additionner_qcm_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "fractions",
-    microId: "fraction_addition",
+    notionId: "fraction_nombre",
+    microId: "fraction_additionner",
     difficulty: 3,
     theme: "reunion",
     text: "À La Réunion, Inès mange 1/4 d’un gâteau le matin puis 1/2 du même gâteau à midi. Quelle quantité a-t-elle mangée en tout ?",
@@ -539,19 +539,19 @@ export const fractionsBank: TutorBankItemV4[] = [
           "Méthode : on applique la règle adaptée : lire, simplifier, comparer ou calculer avec les fractions.\n\nCalcul : " +
           ("1/2 = 2/4. Donc 1/4 + 2/4 = 3/4.") +
           "\n\nConclusion : la fraction ou le nombre obtenu est la bonne réponse.",
-    tags: ["fractions", "addition", "qcm", "reunion"],
+    tags: ["fraction_nombre", "addition", "qcm", "reunion"],
   },
   {
     kind: "template",
-    id: "fraction_addition_tpl_1",
+    id: "fraction_additionner_tpl_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "fractions",
-    microId: "fraction_addition",
+    notionId: "fraction_nombre",
+    microId: "fraction_additionner",
     difficulty: 3,
     theme: "neutral",
     hint: "Commence par mettre les fractions au même dénominateur.",
-    tags: ["fractions", "addition", "template"],
+    tags: ["fraction_nombre", "addition", "template"],
     generate: () => {
       const pairs = [
         [1, 2, 1, 3],
@@ -580,11 +580,11 @@ export const fractionsBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "fixed",
-    id: "fraction_produit_fixed_1",
+    id: "fraction_multiplier_fixed_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "fractions",
-    microId: "fraction_produit",
+    notionId: "fraction_nombre",
+    microId: "fraction_multiplier",
     difficulty: 2,
     theme: "neutral",
     text: "Calcule 2/3 × 3/4.",
@@ -597,15 +597,15 @@ export const fractionsBank: TutorBankItemV4[] = [
           "Méthode : on applique la règle adaptée : lire, simplifier, comparer ou calculer avec les fractions.\n\nCalcul : " +
           ("2/3 × 3/4 = 6/12 = 1/2.") +
           "\n\nConclusion : la fraction ou le nombre obtenu est la bonne réponse.",
-    tags: ["fractions", "produit"],
+    tags: ["fraction_nombre", "produit"],
   },
   {
     kind: "fixed",
-    id: "fraction_produit_fixed_2",
+    id: "fraction_multiplier_fixed_2",
     niveau: "5e",
     matiere: "maths",
-    notionId: "fractions",
-    microId: "fraction_produit",
+    notionId: "fraction_nombre",
+    microId: "fraction_multiplier",
     difficulty: 2,
     theme: "neutral",
     text: "Calcule 5/6 × 2/5.",
@@ -618,15 +618,15 @@ export const fractionsBank: TutorBankItemV4[] = [
           "Méthode : on applique la règle adaptée : lire, simplifier, comparer ou calculer avec les fractions.\n\nCalcul : " +
           ("5/6 × 2/5 = 10/30 = 1/3.") +
           "\n\nConclusion : la fraction ou le nombre obtenu est la bonne réponse.",
-    tags: ["fractions", "produit"],
+    tags: ["fraction_nombre", "produit"],
   },
   {
     kind: "fixed",
-    id: "fraction_produit_qcm_1",
+    id: "fraction_multiplier_qcm_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "fractions",
-    microId: "fraction_produit",
+    notionId: "fraction_nombre",
+    microId: "fraction_multiplier",
     difficulty: 3,
     theme: "neutral",
     text: "Quel est le résultat de 3/4 × 2/3 ?",
@@ -640,19 +640,19 @@ export const fractionsBank: TutorBankItemV4[] = [
           "Méthode : on applique la règle adaptée : lire, simplifier, comparer ou calculer avec les fractions.\n\nCalcul : " +
           ("3/4 × 2/3 = 6/12 = 1/2.") +
           "\n\nConclusion : la fraction ou le nombre obtenu est la bonne réponse.",
-    tags: ["fractions", "produit", "qcm"],
+    tags: ["fraction_nombre", "produit", "qcm"],
   },
   {
     kind: "template",
-    id: "fraction_produit_tpl_1",
+    id: "fraction_multiplier_tpl_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "fractions",
-    microId: "fraction_produit",
+    notionId: "fraction_nombre",
+    microId: "fraction_multiplier",
     difficulty: 3,
     theme: "neutral",
     hint: "Multiplie en haut et en bas, puis simplifie.",
-    tags: ["fractions", "produit", "template"],
+    tags: ["fraction_nombre", "produit", "template"],
     generate: () => {
       const pairs = [
         [1, 2, 2, 3],
@@ -685,7 +685,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     id: "fraction_quantite_fixed_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "fractions",
+    notionId: "fraction_nombre",
     microId: "fraction_quantite",
     difficulty: 2,
     theme: "neutral",
@@ -699,14 +699,14 @@ export const fractionsBank: TutorBankItemV4[] = [
           "Méthode : on applique la règle adaptée : lire, simplifier, comparer ou calculer avec les fractions.\n\nCalcul : " +
           ("3/4 de 20 = 20 × 3/4 = 15.") +
           "\n\nConclusion : la fraction ou le nombre obtenu est la bonne réponse.",
-    tags: ["fractions", "quantite"],
+    tags: ["fraction_nombre", "quantite"],
   },
   {
     kind: "fixed",
     id: "fraction_quantite_fixed_2",
     niveau: "5e",
     matiere: "maths",
-    notionId: "fractions",
+    notionId: "fraction_nombre",
     microId: "fraction_quantite",
     difficulty: 3,
     theme: "neutral",
@@ -720,14 +720,14 @@ export const fractionsBank: TutorBankItemV4[] = [
           "Méthode : on applique la règle adaptée : lire, simplifier, comparer ou calculer avec les fractions.\n\nCalcul : " +
           ("1/5 de 30 vaut 6, donc 2/5 de 30 vaut 12.") +
           "\n\nConclusion : la fraction ou le nombre obtenu est la bonne réponse.",
-    tags: ["fractions", "quantite"],
+    tags: ["fraction_nombre", "quantite"],
   },
   {
     kind: "fixed",
     id: "fraction_quantite_fixed_3",
     niveau: "5e",
     matiere: "maths",
-    notionId: "fractions",
+    notionId: "fraction_nombre",
     microId: "fraction_quantite",
     difficulty: 3,
     theme: "cuisine",
@@ -741,19 +741,19 @@ export const fractionsBank: TutorBankItemV4[] = [
           "Méthode : on applique la règle adaptée : lire, simplifier, comparer ou calculer avec les fractions.\n\nCalcul : " +
           ("1/4 de 28 vaut 7, donc 3/4 de 28 vaut 21.") +
           "\n\nConclusion : la fraction ou le nombre obtenu est la bonne réponse.",
-    tags: ["fractions", "quantite", "cuisine"],
+    tags: ["fraction_nombre", "quantite", "cuisine"],
   },
   {
     kind: "template",
     id: "fraction_quantite_tpl_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "fractions",
+    notionId: "fraction_nombre",
     microId: "fraction_quantite",
     difficulty: 3,
     theme: "neutral",
     hint: "Commence par partager la quantité en parts égales.",
-    tags: ["fractions", "quantite", "template"],
+    tags: ["fraction_nombre", "quantite", "template"],
     generate: () => {
       const d = randomChoice([2, 3, 4, 5, 6]);
       const n = randomChoice([1, 2, 3, 4]);
@@ -782,7 +782,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     id: "fraction_inverse_fixed_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "fractions",
+    notionId: "fraction_nombre",
     microId: "fraction_inverse",
     difficulty: 2,
     theme: "neutral",
@@ -796,14 +796,14 @@ export const fractionsBank: TutorBankItemV4[] = [
           "Méthode : on applique la règle adaptée : lire, simplifier, comparer ou calculer avec les fractions.\n\nCalcul : " +
           ("L’inverse de 2/3 est 3/2.") +
           "\n\nConclusion : la fraction ou le nombre obtenu est la bonne réponse.",
-    tags: ["fractions", "inverse"],
+    tags: ["fraction_nombre", "inverse"],
   },
   {
     kind: "fixed",
     id: "fraction_inverse_fixed_2",
     niveau: "5e",
     matiere: "maths",
-    notionId: "fractions",
+    notionId: "fraction_nombre",
     microId: "fraction_inverse",
     difficulty: 2,
     theme: "neutral",
@@ -817,14 +817,14 @@ export const fractionsBank: TutorBankItemV4[] = [
           "Méthode : on applique la règle adaptée : lire, simplifier, comparer ou calculer avec les fractions.\n\nCalcul : " +
           ("L’inverse de -5/7 est -7/5.") +
           "\n\nConclusion : la fraction ou le nombre obtenu est la bonne réponse.",
-    tags: ["fractions", "inverse"],
+    tags: ["fraction_nombre", "inverse"],
   },
   {
     kind: "fixed",
     id: "fraction_inverse_qcm_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "fractions",
+    notionId: "fraction_nombre",
     microId: "fraction_inverse",
     difficulty: 3,
     theme: "neutral",
@@ -839,7 +839,7 @@ export const fractionsBank: TutorBankItemV4[] = [
           "Méthode : on applique la règle adaptée : lire, simplifier, comparer ou calculer avec les fractions.\n\nCalcul : " +
           ("L’inverse de 4/9 est 9/4.") +
           "\n\nConclusion : la fraction ou le nombre obtenu est la bonne réponse.",
-    tags: ["fractions", "inverse", "qcm"],
+    tags: ["fraction_nombre", "inverse", "qcm"],
   },
 
   // =========================
@@ -847,11 +847,11 @@ export const fractionsBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "fixed",
-    id: "fraction_division_fixed_1",
+    id: "fraction_diviser_fixed_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "fractions",
-    microId: "fraction_division",
+    notionId: "fraction_nombre",
+    microId: "fraction_diviser",
     difficulty: 3,
     theme: "neutral",
     text: "Calcule 2/3 ÷ 4/5.",
@@ -864,15 +864,15 @@ export const fractionsBank: TutorBankItemV4[] = [
           "Méthode : on applique la règle adaptée : lire, simplifier, comparer ou calculer avec les fractions.\n\nCalcul : " +
           ("2/3 ÷ 4/5 = 2/3 × 5/4 = 10/12 = 5/6.") +
           "\n\nConclusion : la fraction ou le nombre obtenu est la bonne réponse.",
-    tags: ["fractions", "division"],
+    tags: ["fraction_nombre", "division"],
   },
   {
     kind: "fixed",
-    id: "fraction_division_fixed_2",
+    id: "fraction_diviser_fixed_2",
     niveau: "5e",
     matiere: "maths",
-    notionId: "fractions",
-    microId: "fraction_division",
+    notionId: "fraction_nombre",
+    microId: "fraction_diviser",
     difficulty: 3,
     theme: "neutral",
     text: "Calcule 3/4 ÷ 2/3.",
@@ -885,15 +885,15 @@ export const fractionsBank: TutorBankItemV4[] = [
           "Méthode : on applique la règle adaptée : lire, simplifier, comparer ou calculer avec les fractions.\n\nCalcul : " +
           ("3/4 ÷ 2/3 = 3/4 × 3/2 = 9/8.") +
           "\n\nConclusion : la fraction ou le nombre obtenu est la bonne réponse.",
-    tags: ["fractions", "division"],
+    tags: ["fraction_nombre", "division"],
   },
   {
     kind: "fixed",
-    id: "fraction_division_qcm_1",
+    id: "fraction_diviser_qcm_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "fractions",
-    microId: "fraction_division",
+    notionId: "fraction_nombre",
+    microId: "fraction_diviser",
     difficulty: 3,
     theme: "neutral",
     text: "Quel est le résultat de 5/6 ÷ 5/3 ?",
@@ -907,19 +907,19 @@ export const fractionsBank: TutorBankItemV4[] = [
           "Méthode : on applique la règle adaptée : lire, simplifier, comparer ou calculer avec les fractions.\n\nCalcul : " +
           ("5/6 ÷ 5/3 = 5/6 × 3/5 = 15/30 = 1/2.") +
           "\n\nConclusion : la fraction ou le nombre obtenu est la bonne réponse.",
-    tags: ["fractions", "division", "qcm"],
+    tags: ["fraction_nombre", "division", "qcm"],
   },
   {
     kind: "template",
-    id: "fraction_division_tpl_1",
+    id: "fraction_diviser_tpl_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "fractions",
-    microId: "fraction_division",
+    notionId: "fraction_nombre",
+    microId: "fraction_diviser",
     difficulty: 4,
     theme: "neutral",
     hint: "Inverse la deuxième fraction puis multiplie.",
-    tags: ["fractions", "division", "template"],
+    tags: ["fraction_nombre", "division", "template"],
     generate: () => {
       const pairs = [
         [2, 3, 4, 5],
@@ -951,7 +951,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     id: "fraction_oppose_fixed_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "fractions",
+    notionId: "fraction_nombre",
     microId: "fraction_oppose",
     difficulty: 1,
     theme: "neutral",
@@ -965,14 +965,14 @@ export const fractionsBank: TutorBankItemV4[] = [
           "Méthode : on applique la règle adaptée : lire, simplifier, comparer ou calculer avec les fractions.\n\nCalcul : " +
           ("L’opposé de 3/5 est -3/5.") +
           "\n\nConclusion : la fraction ou le nombre obtenu est la bonne réponse.",
-    tags: ["fractions", "oppose"],
+    tags: ["fraction_nombre", "oppose"],
   },
   {
     kind: "fixed",
     id: "fraction_oppose_fixed_2",
     niveau: "5e",
     matiere: "maths",
-    notionId: "fractions",
+    notionId: "fraction_nombre",
     microId: "fraction_oppose",
     difficulty: 2,
     theme: "neutral",
@@ -986,7 +986,7 @@ export const fractionsBank: TutorBankItemV4[] = [
           "Méthode : on applique la règle adaptée : lire, simplifier, comparer ou calculer avec les fractions.\n\nCalcul : " +
           ("L’opposé de -7/9 est 7/9.") +
           "\n\nConclusion : la fraction ou le nombre obtenu est la bonne réponse.",
-    tags: ["fractions", "oppose"],
+    tags: ["fraction_nombre", "oppose"],
   },
 
   // =========================
@@ -994,11 +994,11 @@ export const fractionsBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "fixed",
-    id: "fraction_defis_fixed_1",
+    id: "fraction_defi_fixed_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "fractions",
-    microId: "fraction_defis",
+    notionId: "fraction_nombre",
+    microId: "fraction_defi",
     difficulty: 4,
     theme: "neutral",
     text: "Explique pourquoi 1/3 est plus grand que 1/4.",
@@ -1011,15 +1011,15 @@ export const fractionsBank: TutorBankItemV4[] = [
           "Méthode : on applique la règle adaptée : lire, simplifier, comparer ou calculer avec les fractions.\n\nCalcul : " +
           ("Si on partage une même quantité en 3 parts égales, chaque part est plus grande que si on la partage en 4 parts égales. Donc 1/3 > 1/4.") +
           "\n\nConclusion : la fraction ou le nombre obtenu est la bonne réponse.",
-    tags: ["fractions", "defi", "raisonnement"],
+    tags: ["fraction_nombre", "defi", "raisonnement"],
   },
   {
     kind: "fixed",
-    id: "fraction_defis_fixed_2",
+    id: "fraction_defi_fixed_2",
     niveau: "5e",
     matiere: "maths",
-    notionId: "fractions",
-    microId: "fraction_defis",
+    notionId: "fraction_nombre",
+    microId: "fraction_defi",
     difficulty: 4,
     theme: "cuisine",
     text: "Une recette utilise 2/3 d’un litre de lait. Léa ne veut préparer que la moitié de la recette. Quelle quantité de lait doit-elle utiliser ?",
@@ -1032,15 +1032,15 @@ export const fractionsBank: TutorBankItemV4[] = [
           "Méthode : on applique la règle adaptée : lire, simplifier, comparer ou calculer avec les fractions.\n\nCalcul : " +
           ("La moitié de 2/3 vaut 2/3 × 1/2 = 2/6 = 1/3. Il faut donc 1/3 de litre de lait.") +
           "\n\nConclusion : la fraction ou le nombre obtenu est la bonne réponse.",
-    tags: ["fractions", "defi", "cuisine"],
+    tags: ["fraction_nombre", "defi", "cuisine"],
   },
   {
     kind: "fixed",
-    id: "fraction_defis_qcm_1",
+    id: "fraction_defi_qcm_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "fractions",
-    microId: "fraction_defis",
+    notionId: "fraction_nombre",
+    microId: "fraction_defi",
     difficulty: 4,
     theme: "reunion",
     text: "À La Réunion, Enzo mange 3/4 d’un gâteau le midi puis 1/6 du même gâteau le soir. Quelle quantité a-t-il mangée en tout ?",
@@ -1054,18 +1054,18 @@ export const fractionsBank: TutorBankItemV4[] = [
           "Méthode : on applique la règle adaptée : lire, simplifier, comparer ou calculer avec les fractions.\n\nCalcul : " +
           ("3/4 = 9/12 et 1/6 = 2/12. Donc 9/12 + 2/12 = 11/12.") +
           "\n\nConclusion : la fraction ou le nombre obtenu est la bonne réponse.",
-    tags: ["fractions", "defi", "qcm", "reunion"],
+    tags: ["fraction_nombre", "defi", "qcm", "reunion"],
   },
     /* =========================
      QUESTIONS OUVERTES — FRACTIONS
   ========================= */
   {
     kind: "fixed",
-    id: "fraction_egales_open_1",
+    id: "fraction_egale_open_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "fractions",
-    microId: "fraction_egales",
+    notionId: "fraction_nombre",
+    microId: "fraction_egale",
     difficulty: 2,
     theme: "neutral",
     text: "Explique pourquoi 1/2 et 2/4 représentent la même quantité.",
@@ -1077,14 +1077,14 @@ export const fractionsBank: TutorBankItemV4[] = [
           "Méthode : on applique la règle adaptée : lire, simplifier, comparer ou calculer avec les fractions.\n\nCalcul : " +
           ("1/2 = 2/4 car on multiplie le numérateur et le dénominateur par 2.") +
           "\n\nConclusion : la fraction ou le nombre obtenu est la bonne réponse.",
-    tags: ["fractions", "open", "fractions_egales"],
+    tags: ["fraction_nombre", "open", "fraction_nombre_egales"],
   },
   {
     kind: "fixed",
     id: "fraction_simplifier_open_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "fractions",
+    notionId: "fraction_nombre",
     microId: "fraction_simplifier",
     difficulty: 2,
     theme: "neutral",
@@ -1097,14 +1097,14 @@ export const fractionsBank: TutorBankItemV4[] = [
           "Méthode : on applique la règle adaptée : lire, simplifier, comparer ou calculer avec les fractions.\n\nCalcul : " +
           ("12 et 18 sont divisibles par 6. Donc 12/18 = 2/3.") +
           "\n\nConclusion : la fraction ou le nombre obtenu est la bonne réponse.",
-    tags: ["fractions", "open", "simplifier"],
+    tags: ["fraction_nombre", "open", "simplifier"],
   },
   {
     kind: "fixed",
     id: "fraction_comparer_open_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "fractions",
+    notionId: "fraction_nombre",
     microId: "fraction_comparer",
     difficulty: 3,
     theme: "neutral",
@@ -1117,15 +1117,15 @@ export const fractionsBank: TutorBankItemV4[] = [
           "Méthode : on applique la règle adaptée : lire, simplifier, comparer ou calculer avec les fractions.\n\nCalcul : " +
           ("On compare 2 × 5 = 10 et 3 × 3 = 9. Comme 10 > 9, alors 2/3 > 3/5.") +
           "\n\nConclusion : la fraction ou le nombre obtenu est la bonne réponse.",
-    tags: ["fractions", "open", "comparer"],
+    tags: ["fraction_nombre", "open", "comparer"],
   },
   {
     kind: "fixed",
-    id: "fraction_addition_open_1",
+    id: "fraction_additionner_open_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "fractions",
-    microId: "fraction_addition",
+    notionId: "fraction_nombre",
+    microId: "fraction_additionner",
     difficulty: 3,
     theme: "neutral",
     text: "Explique pourquoi 1/2 + 1/3 = 5/6.",
@@ -1137,15 +1137,15 @@ export const fractionsBank: TutorBankItemV4[] = [
           "Méthode : on applique la règle adaptée : lire, simplifier, comparer ou calculer avec les fractions.\n\nCalcul : " +
           ("1/2 = 3/6 et 1/3 = 2/6. Donc 1/2 + 1/3 = 3/6 + 2/6 = 5/6.") +
           "\n\nConclusion : la fraction ou le nombre obtenu est la bonne réponse.",
-    tags: ["fractions", "open", "addition"],
+    tags: ["fraction_nombre", "open", "addition"],
   },
   {
     kind: "fixed",
-    id: "fraction_produit_open_1",
+    id: "fraction_multiplier_open_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "fractions",
-    microId: "fraction_produit",
+    notionId: "fraction_nombre",
+    microId: "fraction_multiplier",
     difficulty: 3,
     theme: "neutral",
     text: "Explique comment calculer 2/3 × 3/4.",
@@ -1157,14 +1157,14 @@ export const fractionsBank: TutorBankItemV4[] = [
           "Méthode : on applique la règle adaptée : lire, simplifier, comparer ou calculer avec les fractions.\n\nCalcul : " +
           ("2/3 × 3/4 = 6/12, puis on simplifie : 6/12 = 1/2.") +
           "\n\nConclusion : la fraction ou le nombre obtenu est la bonne réponse.",
-    tags: ["fractions", "open", "produit"],
+    tags: ["fraction_nombre", "open", "produit"],
   },
   {
     kind: "fixed",
     id: "fraction_quantite_open_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "fractions",
+    notionId: "fraction_nombre",
     microId: "fraction_quantite",
     difficulty: 3,
     theme: "neutral",
@@ -1177,14 +1177,14 @@ export const fractionsBank: TutorBankItemV4[] = [
           "Méthode : on applique la règle adaptée : lire, simplifier, comparer ou calculer avec les fractions.\n\nCalcul : " +
           ("1/4 de 20 vaut 5, donc 3/4 de 20 vaut 3 × 5 = 15.") +
           "\n\nConclusion : la fraction ou le nombre obtenu est la bonne réponse.",
-    tags: ["fractions", "open", "quantite"],
+    tags: ["fraction_nombre", "open", "quantite"],
   },
   {
     kind: "fixed",
     id: "fraction_oppose_open_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "fractions",
+    notionId: "fraction_nombre",
     microId: "fraction_oppose",
     difficulty: 2,
     theme: "neutral",
@@ -1197,15 +1197,15 @@ export const fractionsBank: TutorBankItemV4[] = [
           "Méthode : on applique la règle adaptée : lire, simplifier, comparer ou calculer avec les fractions.\n\nCalcul : " +
           ("L’opposé de 3/5 est -3/5. Les deux nombres ont des signes contraires et leur somme vaut 0.") +
           "\n\nConclusion : la fraction ou le nombre obtenu est la bonne réponse.",
-    tags: ["fractions", "open", "oppose"],
+    tags: ["fraction_nombre", "open", "oppose"],
   },
   {
     kind: "fixed",
-    id: "fraction_defis_open_1",
+    id: "fraction_defi_open_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "fractions",
-    microId: "fraction_defis",
+    notionId: "fraction_nombre",
+    microId: "fraction_defi",
     difficulty: 4,
     theme: "neutral",
     text: "Un élève écrit : 1/2 + 1/3 = 2/5. Explique son erreur.",
@@ -1217,7 +1217,7 @@ export const fractionsBank: TutorBankItemV4[] = [
           "Méthode : on applique la règle adaptée : lire, simplifier, comparer ou calculer avec les fractions.\n\nCalcul : " +
           ("L’élève additionne les numérateurs et les dénominateurs séparément. Il faut mettre au même dénominateur : 1/2 = 3/6 et 1/3 = 2/6, donc le résultat est 5/6.") +
           "\n\nConclusion : la fraction ou le nombre obtenu est la bonne réponse.",
-    tags: ["fractions", "open", "defi", "erreur"],
+    tags: ["fraction_nombre", "open", "defi", "erreur"],
   },
     /* =========================
      RENFORT — FRACTION CANVAS 5e
@@ -1225,15 +1225,15 @@ export const fractionsBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "5e_fraction_egales_canvas_compare_tpl_1",
+    id: "5e_fraction_egale_canvas_compare_tpl_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "fractions",
-    microId: "fraction_egales",
+    notionId: "fraction_nombre",
+    microId: "fraction_egale",
     difficulty: 2,
     theme: "neutral",
     hint: "Observe si la même proportion est colorée.",
-    tags: ["fractions", "fractions_egales", "canvas", "compare", "template"],
+    tags: ["fraction_nombre", "fraction_nombre_egales", "canvas", "compare", "template"],
     generate: () => {
       const situations = [
         { a: [1, 2], b: [2, 4], answer: "oui" },
@@ -1273,12 +1273,12 @@ export const fractionsBank: TutorBankItemV4[] = [
     id: "5e_fraction_simplifier_canvas_bar_tpl_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "fractions",
+    notionId: "fraction_nombre",
     microId: "fraction_simplifier",
     difficulty: 2,
     theme: "neutral",
     hint: "Cherche une fraction plus simple qui représente la même partie colorée.",
-    tags: ["fractions", "simplifier", "canvas", "bar", "template"],
+    tags: ["fraction_nombre", "simplifier", "canvas", "bar", "template"],
     generate: () => {
       const situations = [
         { n: 2, d: 4 },
@@ -1314,12 +1314,12 @@ export const fractionsBank: TutorBankItemV4[] = [
     id: "5e_fraction_rationnel_canvas_grid_tpl_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "fractions",
+    notionId: "fraction_nombre",
     microId: "fraction_rationnel",
     difficulty: 2,
     theme: "neutral",
     hint: "Un nombre rationnel peut s’écrire comme quotient de deux entiers.",
-    tags: ["fractions", "rationnel", "canvas", "grid", "template"],
+    tags: ["fraction_nombre", "rationnel", "canvas", "grid", "template"],
     generate: () => {
       const situations = [
         { rows: 2, cols: 5, shaded: 7 },
@@ -1354,12 +1354,12 @@ export const fractionsBank: TutorBankItemV4[] = [
     id: "5e_fraction_comparer_canvas_compare_tpl_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "fractions",
+    notionId: "fraction_nombre",
     microId: "fraction_comparer",
     difficulty: 3,
     theme: "neutral",
     hint: "Compare les portions colorées.",
-    tags: ["fractions", "comparer", "canvas", "compare", "template"],
+    tags: ["fraction_nombre", "comparer", "canvas", "compare", "template"],
     generate: () => {
       const situations = [
         { a: [1, 2], b: [3, 4] },
@@ -1395,15 +1395,15 @@ export const fractionsBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "5e_fraction_addition_canvas_bar_tpl_1",
+    id: "5e_fraction_additionner_canvas_bar_tpl_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "fractions",
-    microId: "fraction_addition",
+    notionId: "fraction_nombre",
+    microId: "fraction_additionner",
     difficulty: 2,
     theme: "neutral",
     hint: "Les dénominateurs sont identiques : additionne les numérateurs.",
-    tags: ["fractions", "addition", "canvas", "bar", "template"],
+    tags: ["fraction_nombre", "addition", "canvas", "bar", "template"],
     generate: () => {
       const d = randomChoice([4, 5, 6, 8]);
       const a = randomChoice([1, 2]);
@@ -1434,12 +1434,12 @@ export const fractionsBank: TutorBankItemV4[] = [
     id: "5e_fraction_quantite_canvas_circle_tpl_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "fractions",
+    notionId: "fraction_nombre",
     microId: "fraction_quantite",
     difficulty: 3,
     theme: "neutral",
     hint: "Commence par calculer une part.",
-    tags: ["fractions", "quantite", "canvas", "circle", "template"],
+    tags: ["fraction_nombre", "quantite", "canvas", "circle", "template"],
     generate: () => {
       const d = randomChoice([3, 4, 5, 6]);
       const n = randomChoice([1, 2, 3]);
@@ -1469,8 +1469,8 @@ export const fractionsBank: TutorBankItemV4[] = [
     id: "5e_fraction_piege_parts_inegales_fixed_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "fractions",
-    microId: "fraction_egales",
+    notionId: "fraction_nombre",
+    microId: "fraction_egale",
     difficulty: 3,
     theme: "neutral",
     text: "Deux figures ont 2 parts colorées sur 4. Peut-on toujours dire qu’elles représentent 2/4 ?",
@@ -1484,7 +1484,7 @@ export const fractionsBank: TutorBankItemV4[] = [
       "Méthode : avant d’écrire une fraction, on vérifie que le partage est régulier.\n\n" +
       "Observation : si les parts ne sont pas égales, l’écriture 2/4 n’est pas fiable.\n\n" +
       "Conclusion : on ne peut pas toujours dire que cela représente 2/4.",
-    tags: ["fractions", "piege", "parts_inegales", "canvas"],
+    tags: ["fraction_nombre", "piege", "parts_inegales", "canvas"],
     canvas: fractionCanvas({
       model: "bar",
       fraction: { numerator: 2, denominator: 4, label: "2/4 ?" },
@@ -1494,11 +1494,11 @@ export const fractionsBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "5e_fraction_addition_erreur_fixed_1",
+    id: "5e_fraction_additionner_erreur_fixed_1",
     niveau: "5e",
     matiere: "maths",
-    notionId: "fractions",
-    microId: "fraction_addition",
+    notionId: "fraction_nombre",
+    microId: "fraction_additionner",
     difficulty: 4,
     theme: "neutral",
     text: "Un élève écrit : 1/2 + 1/3 = 2/5. Quelle est son erreur ?",
@@ -1511,6 +1511,6 @@ export const fractionsBank: TutorBankItemV4[] = [
       "Méthode : on transforme les fractions avant d’additionner.\n\n" +
       "Calcul : 1/2 = 3/6 et 1/3 = 2/6, donc 1/2 + 1/3 = 5/6.\n\n" +
       "Conclusion : l’erreur est d’avoir additionné les dénominateurs.",
-    tags: ["fractions", "erreur", "open", "addition"],
+    tags: ["fraction_nombre", "erreur", "open", "addition"],
   },
 ];
