@@ -68,7 +68,7 @@ export const statistiquesBank: TutorBankItemV4[] = [
     id: "3e_stat_lire_tableau_fixed_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "statistiques",
+    notionId: "stat_statistique",
     microId: "stat_lire_tableau",
     difficulty: 1,
     theme: "neutral",
@@ -88,7 +88,7 @@ export const statistiquesBank: TutorBankItemV4[] = [
       "Méthode : dans un tableau, on repère la catégorie demandée puis on lit le nombre associé.\n\n" +
       "Calcul : ici, il n’y a pas de calcul ; il faut reconnaître le sens du mot effectif.\n\n" +
       "Conclusion : l’effectif indique combien d’éléments appartiennent à une catégorie.",
-    tags: ["statistiques", "tableau", "effectif", "definition", "qcm"],
+    tags: ["stat_statistique", "tableau", "effectif", "definition", "qcm"],
   },
 
   {
@@ -96,7 +96,7 @@ export const statistiquesBank: TutorBankItemV4[] = [
     id: "3e_stat_lire_tableau_fixed_2",
     niveau: "3e",
     matiere: "maths",
-    notionId: "statistiques",
+    notionId: "stat_statistique",
     microId: "stat_lire_tableau",
     difficulty: 1,
     theme: "neutral",
@@ -116,7 +116,7 @@ export const statistiquesBank: TutorBankItemV4[] = [
       "Méthode : on lit la catégorie, puis l’effectif placé en face.\n\n" +
       "Calcul : la catégorie est « marche » et l’effectif indiqué est 18.\n\n" +
       "Conclusion : cela signifie que 18 élèves ont choisi marche.",
-    tags: ["statistiques", "tableau", "lecture", "effectif"],
+    tags: ["stat_statistique", "tableau", "lecture", "effectif"],
   },
 
   {
@@ -124,12 +124,12 @@ export const statistiquesBank: TutorBankItemV4[] = [
     id: "3e_stat_lire_tableau_tpl_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "statistiques",
+    notionId: "stat_statistique",
     microId: "stat_lire_tableau",
     difficulty: 1,
     theme: "neutral",
     hint: "Lis directement la valeur associée à la catégorie demandée.",
-    tags: ["statistiques", "tableau", "lecture", "template"],
+    tags: ["stat_statistique", "tableau", "lecture", "template"],
     generate: () => {
       const labels = ["football", "natation", "danse", "basket"];
       const values = labels.map(() => randomInt(6, 28));
@@ -154,12 +154,12 @@ export const statistiquesBank: TutorBankItemV4[] = [
     id: "3e_stat_lire_tableau_tpl_2_reunion",
     niveau: "3e",
     matiere: "maths",
-    notionId: "statistiques",
+    notionId: "stat_statistique",
     microId: "stat_lire_tableau",
     difficulty: 2,
     theme: "reunion",
     hint: "Repère la commune demandée, puis lis son effectif.",
-    tags: ["statistiques", "tableau", "lecture", "reunion", "template"],
+    tags: ["stat_statistique", "tableau", "lecture", "reunion", "template"],
     generate: () => {
       const labels = ["Saint-Pierre", "Saint-Leu", "Le Tampon", "Entre-Deux"];
       const values = labels.map(() => randomInt(10, 45));
@@ -184,12 +184,12 @@ export const statistiquesBank: TutorBankItemV4[] = [
     id: "3e_stat_lire_tableau_tpl_3_total",
     niveau: "3e",
     matiere: "maths",
-    notionId: "statistiques",
+    notionId: "stat_statistique",
     microId: "stat_lire_tableau",
     difficulty: 2,
     theme: "neutral",
     hint: "Pour obtenir le total, additionne tous les effectifs.",
-    tags: ["statistiques", "tableau", "effectif_total", "template"],
+    tags: ["stat_statistique", "tableau", "effectif_total", "template"],
     generate: () => {
       const a = randomInt(5, 20);
       const b = randomInt(5, 20);
@@ -215,7 +215,7 @@ export const statistiquesBank: TutorBankItemV4[] = [
     id: "3e_stat_lire_tableau_open_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "statistiques",
+    notionId: "stat_statistique",
     microId: "stat_lire_tableau",
     difficulty: 2,
     theme: "neutral",
@@ -229,7 +229,7 @@ export const statistiquesBank: TutorBankItemV4[] = [
       "Méthode : on lit la catégorie, puis le nombre placé en face.\n\n" +
       "Calcul : ici, la catégorie est « vélo » et l’effectif est 12.\n\n" +
       "Conclusion : cela signifie que 12 élèves sont dans la catégorie vélo.",
-    tags: ["statistiques", "tableau", "open", "effectif"],
+    tags: ["stat_statistique", "tableau", "open", "effectif"],
   },
     /* =========================
      STAT_LIRE_GRAPHIQUE
@@ -240,7 +240,7 @@ export const statistiquesBank: TutorBankItemV4[] = [
     id: "3e_stat_lire_graphique_fixed_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "statistiques",
+    notionId: "stat_statistique",
     microId: "stat_lire_graphique",
     difficulty: 1,
     theme: "neutral",
@@ -260,7 +260,7 @@ export const statistiquesBank: TutorBankItemV4[] = [
       "Méthode : on repère la catégorie, puis on lit la hauteur de sa barre.\n\n" +
       "Calcul : ici, il n’y a pas de calcul ; il faut comprendre le rôle de la barre.\n\n" +
       "Conclusion : la hauteur d’une barre représente la valeur ou l’effectif de la catégorie.",
-    tags: ["statistiques", "graphique", "barres", "qcm"],
+    tags: ["stat_statistique", "graphique", "barres", "qcm"],
   },
 
   {
@@ -268,12 +268,12 @@ export const statistiquesBank: TutorBankItemV4[] = [
     id: "3e_stat_lire_graphique_tpl_1_barres",
     niveau: "3e",
     matiere: "maths",
-    notionId: "statistiques",
+    notionId: "stat_statistique",
     microId: "stat_lire_graphique",
     difficulty: 2,
     theme: "neutral",
     hint: "Lis la valeur écrite au-dessus de la barre demandée.",
-    tags: ["statistiques", "graphique", "barres", "canvas", "template"],
+    tags: ["stat_statistique", "graphique", "barres", "canvas", "template"],
     generate: () => {
       const data = [
         { label: "A", value: randomInt(5, 18) },
@@ -311,12 +311,12 @@ export const statistiquesBank: TutorBankItemV4[] = [
     id: "3e_stat_lire_graphique_tpl_2_batons",
     niveau: "3e",
     matiere: "maths",
-    notionId: "statistiques",
+    notionId: "stat_statistique",
     microId: "stat_lire_graphique",
     difficulty: 2,
     theme: "neutral",
     hint: "Lis la valeur au sommet du bâton.",
-    tags: ["statistiques", "graphique", "batons", "canvas", "template"],
+    tags: ["stat_statistique", "graphique", "batons", "canvas", "template"],
     generate: () => {
       const data = [
         { label: "1", value: randomInt(2, 10) },
@@ -354,12 +354,12 @@ export const statistiquesBank: TutorBankItemV4[] = [
     id: "3e_stat_lire_graphique_tpl_3_max",
     niveau: "3e",
     matiere: "maths",
-    notionId: "statistiques",
+    notionId: "stat_statistique",
     microId: "stat_lire_graphique",
     difficulty: 2,
     theme: "reunion",
     hint: "Cherche la barre la plus haute.",
-    tags: ["statistiques", "graphique", "maximum", "reunion", "canvas"],
+    tags: ["stat_statistique", "graphique", "maximum", "reunion", "canvas"],
     generate: () => {
       const data = [
         { label: "Saint-Pierre", value: randomInt(10, 30) },
@@ -399,12 +399,12 @@ export const statistiquesBank: TutorBankItemV4[] = [
     id: "3e_stat_lire_graphique_tpl_4_min",
     niveau: "3e",
     matiere: "maths",
-    notionId: "statistiques",
+    notionId: "stat_statistique",
     microId: "stat_lire_graphique",
     difficulty: 2,
     theme: "neutral",
     hint: "Cherche la barre la plus basse.",
-    tags: ["statistiques", "graphique", "minimum", "canvas", "template"],
+    tags: ["stat_statistique", "graphique", "minimum", "canvas", "template"],
     generate: () => {
       const data = [
         { label: "A", value: randomInt(5, 25) },
@@ -445,12 +445,12 @@ export const statistiquesBank: TutorBankItemV4[] = [
     id: "3e_stat_lire_graphique_tpl_5_camembert",
     niveau: "3e",
     matiere: "maths",
-    notionId: "statistiques",
+    notionId: "stat_statistique",
     microId: "stat_lire_graphique",
     difficulty: 3,
     theme: "neutral",
     hint: "Dans un camembert, la plus grande part correspond à la plus grande valeur.",
-    tags: ["statistiques", "graphique", "camembert", "canvas", "template"],
+    tags: ["stat_statistique", "graphique", "camembert", "canvas", "template"],
     generate: () => {
       const data = [
         { label: "A", value: randomInt(8, 18) },
@@ -490,7 +490,7 @@ export const statistiquesBank: TutorBankItemV4[] = [
     id: "3e_stat_lire_graphique_open_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "statistiques",
+    notionId: "stat_statistique",
     microId: "stat_lire_graphique",
     difficulty: 3,
     theme: "neutral",
@@ -504,7 +504,7 @@ export const statistiquesBank: TutorBankItemV4[] = [
       "Méthode : on repère la catégorie demandée, puis on lit la hauteur de sa barre.\n\n" +
       "Calcul : la hauteur donne directement la valeur ou l’effectif associé.\n\n" +
       "Conclusion : pour lire un diagramme en barres, on associe chaque catégorie à la hauteur de sa barre.",
-    tags: ["statistiques", "graphique", "open"],
+    tags: ["stat_statistique", "graphique", "open"],
   },
     /* =========================
      STAT_EFFECTIF_FREQUENCE
@@ -515,7 +515,7 @@ export const statistiquesBank: TutorBankItemV4[] = [
     id: "3e_stat_effectif_frequence_fixed_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "statistiques",
+    notionId: "stat_statistique",
     microId: "stat_effectif_frequence",
     difficulty: 1,
     theme: "neutral",
@@ -530,7 +530,7 @@ export const statistiquesBank: TutorBankItemV4[] = [
       "Méthode : on additionne les effectifs de toutes les catégories.\n\n" +
       "Calcul : 14 + 11 = 25.\n\n" +
       "Conclusion : l’effectif total est 25.",
-    tags: ["statistiques", "effectif", "total", "qcm"],
+    tags: ["stat_statistique", "effectif", "total", "qcm"],
   },
 
   {
@@ -538,7 +538,7 @@ export const statistiquesBank: TutorBankItemV4[] = [
     id: "3e_stat_effectif_frequence_fixed_2",
     niveau: "3e",
     matiere: "maths",
-    notionId: "statistiques",
+    notionId: "stat_statistique",
     microId: "stat_effectif_frequence",
     difficulty: 2,
     theme: "neutral",
@@ -553,7 +553,7 @@ export const statistiquesBank: TutorBankItemV4[] = [
       "Méthode : on divise l’effectif de la catégorie par l’effectif total.\n\n" +
       "Calcul : 10 ÷ 25 = 0,4.\n\n" +
       "Conclusion : la fréquence est 0,4.",
-    tags: ["statistiques", "frequence", "decimal", "qcm"],
+    tags: ["stat_statistique", "frequence", "decimal", "qcm"],
   },
 
   {
@@ -561,12 +561,12 @@ export const statistiquesBank: TutorBankItemV4[] = [
     id: "3e_stat_effectif_frequence_tpl_1_total",
     niveau: "3e",
     matiere: "maths",
-    notionId: "statistiques",
+    notionId: "stat_statistique",
     microId: "stat_effectif_frequence",
     difficulty: 2,
     theme: "neutral",
     hint: "Additionne tous les effectifs.",
-    tags: ["statistiques", "effectif", "total", "template"],
+    tags: ["stat_statistique", "effectif", "total", "template"],
     generate: () => {
       const a = randomInt(5, 20);
       const b = randomInt(5, 20);
@@ -592,12 +592,12 @@ export const statistiquesBank: TutorBankItemV4[] = [
     id: "3e_stat_effectif_frequence_tpl_2_total_graphique",
     niveau: "3e",
     matiere: "maths",
-    notionId: "statistiques",
+    notionId: "stat_statistique",
     microId: "stat_effectif_frequence",
     difficulty: 2,
     theme: "neutral",
     hint: "Additionne toutes les valeurs du graphique.",
-    tags: ["statistiques", "effectif", "graphique", "canvas", "template"],
+    tags: ["stat_statistique", "effectif", "graphique", "canvas", "template"],
     generate: () => {
       const data = [
         { label: "A", value: randomInt(4, 12) },
@@ -634,12 +634,12 @@ export const statistiquesBank: TutorBankItemV4[] = [
     id: "3e_stat_effectif_frequence_tpl_3_decimal",
     niveau: "3e",
     matiere: "maths",
-    notionId: "statistiques",
+    notionId: "stat_statistique",
     microId: "stat_effectif_frequence",
     difficulty: 3,
     theme: "neutral",
     hint: "Fréquence = effectif ÷ effectif total.",
-    tags: ["statistiques", "frequence", "decimal", "template"],
+    tags: ["stat_statistique", "frequence", "decimal", "template"],
     generate: () => {
       const total = randomChoice([20, 25, 40, 50]);
       const effectif = randomChoice([total / 2, total / 4, total / 5]);
@@ -664,12 +664,12 @@ export const statistiquesBank: TutorBankItemV4[] = [
     id: "3e_stat_effectif_frequence_tpl_4_pourcentage",
     niveau: "3e",
     matiere: "maths",
-    notionId: "statistiques",
+    notionId: "stat_statistique",
     microId: "stat_effectif_frequence",
     difficulty: 3,
     theme: "neutral",
     hint: "Calcule la fréquence, puis transforme-la en pourcentage.",
-    tags: ["statistiques", "frequence", "pourcentage", "template"],
+    tags: ["stat_statistique", "frequence", "pourcentage", "template"],
     generate: () => {
       const total = randomChoice([20, 25, 40, 50]);
       const pourcentage = randomChoice([20, 25, 40, 50]);
@@ -694,12 +694,12 @@ export const statistiquesBank: TutorBankItemV4[] = [
     id: "3e_stat_effectif_frequence_tpl_5_graphique",
     niveau: "3e",
     matiere: "maths",
-    notionId: "statistiques",
+    notionId: "stat_statistique",
     microId: "stat_effectif_frequence",
     difficulty: 4,
     theme: "neutral",
     hint: "Lis l’effectif de la catégorie, puis divise par le total.",
-    tags: ["statistiques", "frequence", "graphique", "canvas", "template"],
+    tags: ["stat_statistique", "frequence", "graphique", "canvas", "template"],
     generate: () => {
       const data = [
         { label: "A", value: 10 },
@@ -738,7 +738,7 @@ export const statistiquesBank: TutorBankItemV4[] = [
     id: "3e_stat_effectif_frequence_erreur_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "statistiques",
+    notionId: "stat_statistique",
     microId: "stat_effectif_frequence",
     difficulty: 3,
     theme: "neutral",
@@ -753,7 +753,7 @@ export const statistiquesBank: TutorBankItemV4[] = [
       "Méthode : on divise l’effectif de la catégorie par l’effectif total.\n\n" +
       "Calcul : 12 ÷ 30 = 0,4.\n\n" +
       "Conclusion : l’élève a tort ; la fréquence est 0,4.",
-    tags: ["statistiques", "frequence", "erreur"],
+    tags: ["stat_statistique", "frequence", "erreur"],
   },
 
   {
@@ -761,7 +761,7 @@ export const statistiquesBank: TutorBankItemV4[] = [
     id: "3e_stat_effectif_frequence_open_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "statistiques",
+    notionId: "stat_statistique",
     microId: "stat_effectif_frequence",
     difficulty: 3,
     theme: "neutral",
@@ -775,7 +775,7 @@ export const statistiquesBank: TutorBankItemV4[] = [
       "Méthode : on divise l’effectif de la catégorie par l’effectif total.\n\n" +
       "Calcul : par exemple, si 10 élèves sur 25 font du sport, la fréquence est 10 ÷ 25 = 0,4.\n\n" +
       "Conclusion : calculer une fréquence revient à comparer une partie au total.",
-    tags: ["statistiques", "frequence", "open", "methode"],
+    tags: ["stat_statistique", "frequence", "open", "methode"],
   },
     /* =========================
      STAT_MOYENNE
@@ -786,7 +786,7 @@ export const statistiquesBank: TutorBankItemV4[] = [
     id: "3e_stat_moyenne_fixed_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "statistiques",
+    notionId: "stat_statistique",
     microId: "stat_moyenne",
     difficulty: 2,
     theme: "neutral",
@@ -801,7 +801,7 @@ export const statistiquesBank: TutorBankItemV4[] = [
       "Méthode : on additionne toutes les valeurs, puis on divise par le nombre de valeurs.\n\n" +
       "Calcul : (8 + 10 + 12) ÷ 3 = 30 ÷ 3 = 10.\n\n" +
       "Conclusion : la moyenne est 10.",
-    tags: ["statistiques", "moyenne", "qcm"],
+    tags: ["stat_statistique", "moyenne", "qcm"],
   },
 
   {
@@ -809,7 +809,7 @@ export const statistiquesBank: TutorBankItemV4[] = [
     id: "3e_stat_moyenne_fixed_2_erreur",
     niveau: "3e",
     matiere: "maths",
-    notionId: "statistiques",
+    notionId: "stat_statistique",
     microId: "stat_moyenne",
     difficulty: 3,
     theme: "neutral",
@@ -824,7 +824,7 @@ export const statistiquesBank: TutorBankItemV4[] = [
       "Méthode : il faut additionner les valeurs puis diviser par le nombre de valeurs.\n\n" +
       "Calcul : 5 + 10 + 15 = 30, puis 30 ÷ 3 = 10.\n\n" +
       "Conclusion : l’élève a tort ; la moyenne est 10.",
-    tags: ["statistiques", "moyenne", "erreur"],
+    tags: ["stat_statistique", "moyenne", "erreur"],
   },
 
   {
@@ -832,12 +832,12 @@ export const statistiquesBank: TutorBankItemV4[] = [
     id: "3e_stat_moyenne_tpl_1_liste",
     niveau: "3e",
     matiere: "maths",
-    notionId: "statistiques",
+    notionId: "stat_statistique",
     microId: "stat_moyenne",
     difficulty: 2,
     theme: "neutral",
     hint: "Additionne toutes les valeurs puis divise par leur nombre.",
-    tags: ["statistiques", "moyenne", "template"],
+    tags: ["stat_statistique", "moyenne", "template"],
     generate: () => {
       const values = [
         randomInt(6, 16),
@@ -866,12 +866,12 @@ export const statistiquesBank: TutorBankItemV4[] = [
     id: "3e_stat_moyenne_tpl_2_notes",
     niveau: "3e",
     matiere: "maths",
-    notionId: "statistiques",
+    notionId: "stat_statistique",
     microId: "stat_moyenne",
     difficulty: 2,
     theme: "neutral",
     hint: "La moyenne d’un élève se calcule comme une moyenne de nombres.",
-    tags: ["statistiques", "moyenne", "notes", "template"],
+    tags: ["stat_statistique", "moyenne", "notes", "template"],
     generate: () => {
       const a = randomInt(6, 18);
       const b = randomInt(6, 18);
@@ -897,12 +897,12 @@ export const statistiquesBank: TutorBankItemV4[] = [
     id: "3e_stat_moyenne_tpl_3_effectifs",
     niveau: "3e",
     matiere: "maths",
-    notionId: "statistiques",
+    notionId: "stat_statistique",
     microId: "stat_moyenne",
     difficulty: 4,
     theme: "neutral",
     hint: "Attention : chaque valeur peut apparaître plusieurs fois.",
-    tags: ["statistiques", "moyenne", "effectifs", "template"],
+    tags: ["stat_statistique", "moyenne", "effectifs", "template"],
     generate: () => {
       const v1 = randomChoice([8, 10, 12]);
       const v2 = v1 + 4;
@@ -930,12 +930,12 @@ export const statistiquesBank: TutorBankItemV4[] = [
     id: "3e_stat_moyenne_tpl_4_graphique",
     niveau: "3e",
     matiere: "maths",
-    notionId: "statistiques",
+    notionId: "stat_statistique",
     microId: "stat_moyenne",
     difficulty: 3,
     theme: "neutral",
     hint: "Lis les valeurs du graphique, puis calcule leur moyenne.",
-    tags: ["statistiques", "moyenne", "graphique", "canvas", "template"],
+    tags: ["stat_statistique", "moyenne", "graphique", "canvas", "template"],
     generate: () => {
       const data = [
         { label: "A", value: randomInt(5, 18) },
@@ -973,12 +973,12 @@ export const statistiquesBank: TutorBankItemV4[] = [
     id: "3e_stat_moyenne_tpl_5_valeur_manquante",
     niveau: "3e",
     matiere: "maths",
-    notionId: "statistiques",
+    notionId: "stat_statistique",
     microId: "stat_moyenne",
     difficulty: 5,
     theme: "neutral",
     hint: "Utilise : somme totale = moyenne × nombre de valeurs.",
-    tags: ["statistiques", "moyenne", "valeur_manquante", "template"],
+    tags: ["stat_statistique", "moyenne", "valeur_manquante", "template"],
     generate: () => {
       const a = randomInt(8, 14);
       const b = randomInt(8, 14);
@@ -1005,7 +1005,7 @@ export const statistiquesBank: TutorBankItemV4[] = [
     id: "3e_stat_moyenne_open_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "statistiques",
+    notionId: "stat_statistique",
     microId: "stat_moyenne",
     difficulty: 3,
     theme: "neutral",
@@ -1019,7 +1019,7 @@ export const statistiquesBank: TutorBankItemV4[] = [
       "Méthode : on additionne toutes les valeurs, puis on divise par le nombre de valeurs.\n\n" +
       "Calcul : par exemple, pour 8 ; 10 ; 12, on calcule (8 + 10 + 12) ÷ 3 = 10.\n\n" +
       "Conclusion : calculer une moyenne revient à répartir équitablement la somme des valeurs.",
-    tags: ["statistiques", "moyenne", "open", "methode"],
+    tags: ["stat_statistique", "moyenne", "open", "methode"],
   },
 
   {
@@ -1027,7 +1027,7 @@ export const statistiquesBank: TutorBankItemV4[] = [
     id: "3e_stat_moyenne_open_2_interpretation",
     niveau: "3e",
     matiere: "maths",
-    notionId: "statistiques",
+    notionId: "stat_statistique",
     microId: "stat_moyenne",
     difficulty: 4,
     theme: "neutral",
@@ -1041,7 +1041,7 @@ export const statistiquesBank: TutorBankItemV4[] = [
       "Méthode : on additionne toutes les valeurs puis on divise par leur nombre.\n\n" +
       "Calcul : par exemple, la moyenne de 10 et 11 est 10,5, même si 10,5 n’apparaît pas dans la série.\n\n" +
       "Conclusion : la moyenne peut ne pas être une valeur observée.",
-    tags: ["statistiques", "moyenne", "open", "interpretation"],
+    tags: ["stat_statistique", "moyenne", "open", "interpretation"],
   },
     /* =========================
      STAT_MEDIANE
@@ -1052,7 +1052,7 @@ export const statistiquesBank: TutorBankItemV4[] = [
     id: "3e_stat_mediane_fixed_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "statistiques",
+    notionId: "stat_statistique",
     microId: "stat_mediane",
     difficulty: 2,
     theme: "neutral",
@@ -1067,7 +1067,7 @@ export const statistiquesBank: TutorBankItemV4[] = [
       "Méthode : comme la série est déjà rangée et contient 5 valeurs, on prend la valeur centrale.\n\n" +
       "Calcul : la valeur centrale est la 3e valeur : 9.\n\n" +
       "Conclusion : la médiane est 9.",
-    tags: ["statistiques", "mediane", "qcm"],
+    tags: ["stat_statistique", "mediane", "qcm"],
   },
 
   {
@@ -1075,7 +1075,7 @@ export const statistiquesBank: TutorBankItemV4[] = [
     id: "3e_stat_mediane_fixed_2_pair",
     niveau: "3e",
     matiere: "maths",
-    notionId: "statistiques",
+    notionId: "stat_statistique",
     microId: "stat_mediane",
     difficulty: 3,
     theme: "neutral",
@@ -1090,7 +1090,7 @@ export const statistiquesBank: TutorBankItemV4[] = [
       "Méthode : on repère les deux valeurs centrales de la série rangée.\n\n" +
       "Calcul : les deux valeurs centrales sont 8 et 10. Médiane = (8 + 10) ÷ 2 = 9.\n\n" +
       "Conclusion : la médiane est 9.",
-    tags: ["statistiques", "mediane", "pair", "qcm"],
+    tags: ["stat_statistique", "mediane", "pair", "qcm"],
   },
 
   {
@@ -1098,12 +1098,12 @@ export const statistiquesBank: TutorBankItemV4[] = [
     id: "3e_stat_mediane_tpl_1_impair",
     niveau: "3e",
     matiere: "maths",
-    notionId: "statistiques",
+    notionId: "stat_statistique",
     microId: "stat_mediane",
     difficulty: 3,
     theme: "neutral",
     hint: "Range la série puis prends la valeur centrale.",
-    tags: ["statistiques", "mediane", "impair", "template"],
+    tags: ["stat_statistique", "mediane", "impair", "template"],
     generate: () => {
       const sorted = [
         randomInt(2, 5),
@@ -1134,12 +1134,12 @@ export const statistiquesBank: TutorBankItemV4[] = [
     id: "3e_stat_mediane_tpl_2_pair",
     niveau: "3e",
     matiere: "maths",
-    notionId: "statistiques",
+    notionId: "stat_statistique",
     microId: "stat_mediane",
     difficulty: 4,
     theme: "neutral",
     hint: "Avec un nombre pair de valeurs, calcule la moyenne des deux valeurs centrales.",
-    tags: ["statistiques", "mediane", "pair", "template"],
+    tags: ["stat_statistique", "mediane", "pair", "template"],
     generate: () => {
       const sorted = [
         randomInt(2, 5),
@@ -1169,12 +1169,12 @@ export const statistiquesBank: TutorBankItemV4[] = [
     id: "3e_stat_mediane_tpl_3_reunion",
     niveau: "3e",
     matiere: "maths",
-    notionId: "statistiques",
+    notionId: "stat_statistique",
     microId: "stat_mediane",
     difficulty: 3,
     theme: "reunion",
     hint: "Range les durées dans l’ordre croissant.",
-    tags: ["statistiques", "mediane", "reunion", "template"],
+    tags: ["stat_statistique", "mediane", "reunion", "template"],
     generate: () => {
       const sorted = [
         randomInt(15, 20),
@@ -1205,12 +1205,12 @@ export const statistiquesBank: TutorBankItemV4[] = [
     id: "3e_stat_mediane_tpl_4_avec_effectifs",
     niveau: "3e",
     matiere: "maths",
-    notionId: "statistiques",
+    notionId: "stat_statistique",
     microId: "stat_mediane",
     difficulty: 5,
     theme: "neutral",
     hint: "Reconstitue mentalement la série avec les effectifs.",
-    tags: ["statistiques", "mediane", "effectifs", "template"],
+    tags: ["stat_statistique", "mediane", "effectifs", "template"],
     generate: () => {
       const v1 = randomChoice([6, 7, 8]);
       const v2 = v1 + 2;
@@ -1245,7 +1245,7 @@ export const statistiquesBank: TutorBankItemV4[] = [
     id: "3e_stat_mediane_erreur_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "statistiques",
+    notionId: "stat_statistique",
     microId: "stat_mediane",
     difficulty: 3,
     theme: "neutral",
@@ -1260,7 +1260,7 @@ export const statistiquesBank: TutorBankItemV4[] = [
       "Méthode : même si la réponse est correcte, il faut ranger la série pour justifier.\n\n" +
       "Calcul : la série rangée est 4 ; 7 ; 9 ; 12 ; 15. La valeur centrale est 9.\n\n" +
       "Conclusion : la réponse est correcte, mais la méthode n’est pas complète.",
-    tags: ["statistiques", "mediane", "erreur", "methode"],
+    tags: ["stat_statistique", "mediane", "erreur", "methode"],
   },
 
   {
@@ -1268,7 +1268,7 @@ export const statistiquesBank: TutorBankItemV4[] = [
     id: "3e_stat_mediane_open_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "statistiques",
+    notionId: "stat_statistique",
     microId: "stat_mediane",
     difficulty: 4,
     theme: "neutral",
@@ -1282,7 +1282,7 @@ export const statistiquesBank: TutorBankItemV4[] = [
       "Méthode : on doit ranger les valeurs dans l’ordre croissant pour connaître leur position.\n\n" +
       "Calcul : sans rangement, on risque de choisir une valeur qui n’est pas réellement au centre.\n\n" +
       "Conclusion : ranger la série est indispensable pour déterminer correctement la médiane.",
-    tags: ["statistiques", "mediane", "open"],
+    tags: ["stat_statistique", "mediane", "open"],
   }
 
 ]

@@ -25,7 +25,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
   id: "3e_prop_reconnaitre_fixed_1",
   niveau: "3e",
   matiere: "maths",
-  notionId: "proportionnalite",
+  notionId: "prop_proportionnalite",
   microId: "prop_reconnaitre",
   difficulty: 1,
   theme: "neutral",
@@ -45,7 +45,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     `Calcul : on remplace les valeurs de l’énoncé dans la formule puis on calcule. ` +
     ("Dans une situation proportionnelle, on multiplie toujours par le même nombre.") +
     `\n\nConclusion : on obtient la valeur demandée avec l’unité ou le pourcentage adapté.`,
-  tags: ["proportionnalite", "reconnaitre"]
+  tags: ["prop_proportionnalite", "reconnaitre"]
 },
 
 {
@@ -53,12 +53,12 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
   id: "3e_prop_reconnaitre_tpl_1",
   niveau: "3e",
   matiere: "maths",
-  notionId: "proportionnalite",
+  notionId: "prop_proportionnalite",
   microId: "prop_reconnaitre",
   difficulty: 2,
   theme: "neutral",
   hint: "Regarde si le rapport est constant.",
-  tags: ["proportionnalite", "tableau", "template"],
+  tags: ["prop_proportionnalite", "tableau", "template"],
   generate: () => {
     const a = randomInt(2, 6);
     const b = randomInt(3, 8);
@@ -94,7 +94,7 @@ Est-ce proportionnel ?`,
   id: "3e_prop_table_fixed_1",
   niveau: "3e",
   matiere: "maths",
-  notionId: "proportionnalite",
+  notionId: "prop_proportionnalite",
   microId: "prop_table",
   difficulty: 2,
   theme: "neutral",
@@ -108,7 +108,7 @@ Est-ce proportionnel ?`,
     `Calcul : on remplace les valeurs de l’énoncé dans la formule puis on calcule. ` +
     ("Coefficient = 3 donc 4 × 3 = 12.") +
     `\n\nConclusion : on obtient la valeur demandée avec l’unité ou le pourcentage adapté.`,
-  tags: ["proportionnalite", "tableau"]
+  tags: ["prop_proportionnalite", "tableau"]
 },
 
 {
@@ -116,12 +116,12 @@ Est-ce proportionnel ?`,
   id: "3e_prop_table_tpl_1",
   niveau: "3e",
   matiere: "maths",
-  notionId: "proportionnalite",
+  notionId: "prop_proportionnalite",
   microId: "prop_table",
   difficulty: 2,
   theme: "neutral",
   hint: "Trouve le coefficient multiplicateur.",
-  tags: ["proportionnalite", "tableau", "template"],
+  tags: ["prop_proportionnalite", "tableau", "template"],
   generate: () => {
     const k = randomInt(2, 10);
     const x = randomInt(2, 10);
@@ -154,7 +154,7 @@ ${x2} → ?`,
   id: "3e_prop_quatrieme_fixed_1",
   niveau: "3e",
   matiere: "maths",
-  notionId: "proportionnalite",
+  notionId: "prop_proportionnalite",
   microId: "prop_quatrieme",
   difficulty: 2,
   theme: "neutral",
@@ -168,7 +168,7 @@ ${x2} → ?`,
     `Calcul : on remplace les valeurs de l’énoncé dans la formule puis on calcule. ` +
     ("x = (3 × 20) / 5 = 12.") +
     `\n\nConclusion : on obtient la valeur demandée avec l’unité ou le pourcentage adapté.`,
-  tags: ["proportionnalite", "quatrieme"]
+  tags: ["prop_proportionnalite", "quatrieme"]
 },
 
 {
@@ -176,12 +176,12 @@ ${x2} → ?`,
   id: "3e_prop_quatrieme_tpl_1",
   niveau: "3e",
   matiere: "maths",
-  notionId: "proportionnalite",
+  notionId: "prop_proportionnalite",
   microId: "prop_quatrieme",
   difficulty: 3,
   theme: "neutral",
   hint: "Utilise le produit en croix.",
-  tags: ["proportionnalite", "quatrieme", "template"],
+  tags: ["prop_proportionnalite", "quatrieme", "template"],
   generate: () => {
     const a = randomInt(2, 8);
     const b = randomInt(3, 10);
@@ -211,7 +211,7 @@ ${x2} → ?`,
   id: "3e_prop_pourcentage_fixed_1",
   niveau: "3e",
   matiere: "maths",
-  notionId: "proportionnalite",
+  notionId: "prop_proportionnalite",
   microId: "prop_pourcentage",
   difficulty: 2,
   theme: "neutral",
@@ -225,7 +225,7 @@ ${x2} → ?`,
     `Calcul : on remplace les valeurs de l’énoncé dans la formule puis on calcule. ` +
     ("20% de 150 = 0,2 × 150 = 30.") +
     `\n\nConclusion : on obtient la valeur demandée avec l’unité ou le pourcentage adapté.`,
-  tags: ["proportionnalite", "pourcentage"],
+  tags: ["prop_proportionnalite", "pourcentage"],
 },
 
 {
@@ -233,7 +233,7 @@ ${x2} → ?`,
   id: "3e_prop_pourcentage_fixed_2",
   niveau: "3e",
   matiere: "maths",
-  notionId: "proportionnalite",
+  notionId: "prop_proportionnalite",
   microId: "prop_pourcentage",
   difficulty: 2,
   theme: "neutral",
@@ -248,7 +248,7 @@ ${x2} → ?`,
     `Calcul : on remplace les valeurs de l’énoncé dans la formule puis on calcule. ` +
     ("12 / 25 = 0,48, donc cela représente 48%.") +
     `\n\nConclusion : on obtient la valeur demandée avec l’unité ou le pourcentage adapté.`,
-  tags: ["proportionnalite", "pourcentage", "qcm"],
+  tags: ["prop_proportionnalite", "pourcentage", "qcm"],
 },
 
 {
@@ -256,12 +256,12 @@ ${x2} → ?`,
   id: "3e_prop_pourcentage_tpl_1",
   niveau: "3e",
   matiere: "maths",
-  notionId: "proportionnalite",
+  notionId: "prop_proportionnalite",
   microId: "prop_pourcentage",
   difficulty: 2,
   theme: "neutral",
   hint: "p% de N = p/100 × N.",
-  tags: ["proportionnalite", "pourcentage", "template"],
+  tags: ["prop_proportionnalite", "pourcentage", "template"],
   generate: () => {
     const p = randomChoice([10, 20, 25, 30, 40, 50]);
     const n = randomChoice([80, 100, 120, 150, 200, 240]);
@@ -286,12 +286,12 @@ ${x2} → ?`,
   id: "3e_prop_pourcentage_tpl_2",
   niveau: "3e",
   matiere: "maths",
-  notionId: "proportionnalite",
+  notionId: "prop_proportionnalite",
   microId: "prop_pourcentage",
   difficulty: 3,
   theme: "reunion",
   hint: "Calcule partie / total × 100.",
-  tags: ["proportionnalite", "pourcentage", "reunion", "template"],
+  tags: ["prop_proportionnalite", "pourcentage", "reunion", "template"],
   generate: () => {
     const total = randomChoice([20, 25, 40, 50, 80]);
     const part = randomChoice([5, 10, 15, 20]);
@@ -316,7 +316,7 @@ ${x2} → ?`,
   id: "3e_prop_pourcentage_erreur_1",
   niveau: "3e",
   matiere: "maths",
-  notionId: "proportionnalite",
+  notionId: "prop_proportionnalite",
   microId: "prop_pourcentage",
   difficulty: 3,
   theme: "neutral",
@@ -331,7 +331,7 @@ ${x2} → ?`,
     `Calcul : on remplace les valeurs de l’énoncé dans la formule puis on calcule. ` +
     ("Non. 30% de 200 = 0,3 × 200 = 60.") +
     `\n\nConclusion : on obtient la valeur demandée avec l’unité ou le pourcentage adapté.`,
-  tags: ["proportionnalite", "pourcentage", "erreur"],
+  tags: ["prop_proportionnalite", "pourcentage", "erreur"],
 },
 
 /* =========================
@@ -343,7 +343,7 @@ ${x2} → ?`,
   id: "3e_prop_evolution_fixed_1",
   niveau: "3e",
   matiere: "maths",
-  notionId: "proportionnalite",
+  notionId: "prop_proportionnalite",
   microId: "prop_evolution",
   difficulty: 3,
   theme: "neutral",
@@ -357,7 +357,7 @@ ${x2} → ?`,
     `Calcul : on remplace les valeurs de l’énoncé dans la formule puis on calcule. ` +
     ("80 × 1,25 = 100. Le nouveau prix est 100 €.") +
     `\n\nConclusion : on obtient la valeur demandée avec l’unité ou le pourcentage adapté.`,
-  tags: ["proportionnalite", "evolution", "augmentation"],
+  tags: ["prop_proportionnalite", "evolution", "augmentation"],
 },
 
 {
@@ -365,7 +365,7 @@ ${x2} → ?`,
   id: "3e_prop_evolution_fixed_2",
   niveau: "3e",
   matiere: "maths",
-  notionId: "proportionnalite",
+  notionId: "prop_proportionnalite",
   microId: "prop_evolution",
   difficulty: 3,
   theme: "neutral",
@@ -380,7 +380,7 @@ ${x2} → ?`,
     `Calcul : on remplace les valeurs de l’énoncé dans la formule puis on calcule. ` +
     ("120 × 0,9 = 108. Le nouveau prix est 108 €.") +
     `\n\nConclusion : on obtient la valeur demandée avec l’unité ou le pourcentage adapté.`,
-  tags: ["proportionnalite", "evolution", "diminution", "qcm"],
+  tags: ["prop_proportionnalite", "evolution", "diminution", "qcm"],
 },
 
 {
@@ -388,12 +388,12 @@ ${x2} → ?`,
   id: "3e_prop_evolution_tpl_1",
   niveau: "3e",
   matiere: "maths",
-  notionId: "proportionnalite",
+  notionId: "prop_proportionnalite",
   microId: "prop_evolution",
   difficulty: 3,
   theme: "neutral",
   hint: "Augmenter de p%, c’est multiplier par 1 + p/100.",
-  tags: ["proportionnalite", "evolution", "augmentation", "template"],
+  tags: ["prop_proportionnalite", "evolution", "augmentation", "template"],
   generate: () => {
     const prix = randomChoice([40, 50, 80, 100, 120, 200]);
     const taux = randomChoice([10, 20, 25, 50]);
@@ -418,12 +418,12 @@ ${x2} → ?`,
   id: "3e_prop_evolution_tpl_2",
   niveau: "3e",
   matiere: "maths",
-  notionId: "proportionnalite",
+  notionId: "prop_proportionnalite",
   microId: "prop_evolution",
   difficulty: 3,
   theme: "neutral",
   hint: "Diminuer de p%, c’est multiplier par 1 - p/100.",
-  tags: ["proportionnalite", "evolution", "diminution", "template"],
+  tags: ["prop_proportionnalite", "evolution", "diminution", "template"],
   generate: () => {
     const prix = randomChoice([50, 80, 100, 120, 150, 200]);
     const taux = randomChoice([10, 20, 25, 40, 50]);
@@ -448,7 +448,7 @@ ${x2} → ?`,
   id: "3e_prop_evolution_open_1",
   niveau: "3e",
   matiere: "maths",
-  notionId: "proportionnalite",
+  notionId: "prop_proportionnalite",
   microId: "prop_evolution",
   difficulty: 4,
   theme: "neutral",
@@ -463,7 +463,7 @@ ${x2} → ?`,
     `Calcul : on remplace les valeurs de l’énoncé dans la formule puis on calcule. ` +
     ("Ajouter 20 est une quantité fixe. Augmenter de 20% dépend de la valeur de départ : on ajoute 20/100 de cette valeur.") +
     `\n\nConclusion : on obtient la valeur demandée avec l’unité ou le pourcentage adapté.`,
-  tags: ["proportionnalite", "evolution", "open", "raisonnement"],
+  tags: ["prop_proportionnalite", "evolution", "open", "raisonnement"],
 },
 
 /* =========================
@@ -475,7 +475,7 @@ ${x2} → ?`,
   id: "3e_prop_vitesse_fixed_1",
   niveau: "3e",
   matiere: "maths",
-  notionId: "proportionnalite",
+  notionId: "prop_proportionnalite",
   microId: "prop_vitesse_debit",
   difficulty: 2,
   theme: "neutral",
@@ -489,7 +489,7 @@ ${x2} → ?`,
     `Calcul : on remplace les valeurs de l’énoncé dans la formule puis on calcule. ` +
     ("Vitesse moyenne = 180 ÷ 3 = 60 km/h.") +
     `\n\nConclusion : on obtient la valeur demandée avec l’unité ou le pourcentage adapté.`,
-  tags: ["proportionnalite", "vitesse"],
+  tags: ["prop_proportionnalite", "vitesse"],
 },
 
 {
@@ -497,7 +497,7 @@ ${x2} → ?`,
   id: "3e_prop_debit_fixed_1",
   niveau: "3e",
   matiere: "maths",
-  notionId: "proportionnalite",
+  notionId: "prop_proportionnalite",
   microId: "prop_vitesse_debit",
   difficulty: 3,
   theme: "neutral",
@@ -512,7 +512,7 @@ ${x2} → ?`,
     `Calcul : on remplace les valeurs de l’énoncé dans la formule puis on calcule. ` +
     ("Débit = 24 ÷ 4 = 6 L/min.") +
     `\n\nConclusion : on obtient la valeur demandée avec l’unité ou le pourcentage adapté.`,
-  tags: ["proportionnalite", "debit", "qcm"],
+  tags: ["prop_proportionnalite", "debit", "qcm"],
 },
 
 {
@@ -520,12 +520,12 @@ ${x2} → ?`,
   id: "3e_prop_vitesse_tpl_1",
   niveau: "3e",
   matiere: "maths",
-  notionId: "proportionnalite",
+  notionId: "prop_proportionnalite",
   microId: "prop_vitesse_debit",
   difficulty: 3,
   theme: "neutral",
   hint: "Vitesse = distance / temps.",
-  tags: ["proportionnalite", "vitesse", "template"],
+  tags: ["prop_proportionnalite", "vitesse", "template"],
   generate: () => {
     const vitesse = randomChoice([40, 50, 60, 70, 80, 90]);
     const temps = randomChoice([2, 3, 4, 5]);
@@ -550,12 +550,12 @@ ${x2} → ?`,
   id: "3e_prop_debit_tpl_1",
   niveau: "3e",
   matiere: "maths",
-  notionId: "proportionnalite",
+  notionId: "prop_proportionnalite",
   microId: "prop_vitesse_debit",
   difficulty: 3,
   theme: "reunion",
   hint: "Débit = volume / temps.",
-  tags: ["proportionnalite", "debit", "reunion", "template"],
+  tags: ["prop_proportionnalite", "debit", "reunion", "template"],
   generate: () => {
     const debit = randomChoice([5, 6, 8, 10, 12]);
     const temps = randomChoice([3, 4, 5, 6]);
@@ -580,12 +580,12 @@ ${x2} → ?`,
   id: "3e_prop_densite_tpl_1",
   niveau: "3e",
   matiere: "maths",
-  notionId: "proportionnalite",
+  notionId: "prop_proportionnalite",
   microId: "prop_vitesse_debit",
   difficulty: 4,
   theme: "neutral",
   hint: "Densité = nombre / surface.",
-  tags: ["proportionnalite", "densite", "template"],
+  tags: ["prop_proportionnalite", "densite", "template"],
   generate: () => {
     const densite = randomChoice([20, 25, 30, 40]);
     const surface = randomChoice([2, 3, 4, 5]);
@@ -611,11 +611,11 @@ ${x2} → ?`,
 
 {
   kind: "fixed",
-  id: "3e_prop_defis_fixed_1",
+  id: "3e_prop_defi_fixed_1",
   niveau: "3e",
   matiere: "maths",
-  notionId: "proportionnalite",
-  microId: "prop_defis",
+  notionId: "prop_proportionnalite",
+  microId: "prop_defi",
   difficulty: 4,
   theme: "neutral",
   text: "Un prix augmente de 20%, puis diminue de 20%. Revient-il au prix de départ ?",
@@ -630,16 +630,16 @@ ${x2} → ?`,
     `Calcul : on remplace les valeurs de l’énoncé dans la formule puis on calcule. ` +
     ("Non. Si le prix vaut 100 €, après +20% il vaut 120 €. Puis -20% de 120 €, cela donne 96 €. On ne revient pas au prix de départ.") +
     `\n\nConclusion : on obtient la valeur demandée avec l’unité ou le pourcentage adapté.`,
-  tags: ["proportionnalite", "defi", "evolution", "erreur"],
+  tags: ["prop_proportionnalite", "defi", "evolution", "erreur"],
 },
 
 {
   kind: "fixed",
-  id: "3e_prop_defis_open_1",
+  id: "3e_prop_defi_open_1",
   niveau: "3e",
   matiere: "maths",
-  notionId: "proportionnalite",
-  microId: "prop_defis",
+  notionId: "prop_proportionnalite",
+  microId: "prop_defi",
   difficulty: 5,
   theme: "neutral",
   text: "Explique pourquoi la vitesse moyenne est une situation de proportionnalité lorsque la vitesse est constante.",
@@ -653,20 +653,20 @@ ${x2} → ?`,
     `Calcul : on remplace les valeurs de l’énoncé dans la formule puis on calcule. ` +
     ("Lorsque la vitesse est constante, la distance parcourue est proportionnelle au temps : distance = vitesse × temps. Le coefficient de proportionnalité est la vitesse.") +
     `\n\nConclusion : on obtient la valeur demandée avec l’unité ou le pourcentage adapté.`,
-  tags: ["proportionnalite", "defi", "vitesse", "open"],
+  tags: ["prop_proportionnalite", "defi", "vitesse", "open"],
 },
 
 {
   kind: "template",
-  id: "3e_prop_defis_tpl_1",
+  id: "3e_prop_defi_tpl_1",
   niveau: "3e",
   matiere: "maths",
-  notionId: "proportionnalite",
-  microId: "prop_defis",
+  notionId: "prop_proportionnalite",
+  microId: "prop_defi",
   difficulty: 4,
   theme: "neutral",
   hint: "Applique les deux coefficients multiplicateurs dans l’ordre.",
-  tags: ["proportionnalite", "defi", "evolution", "template"],
+  tags: ["prop_proportionnalite", "defi", "evolution", "template"],
   generate: () => {
     const prix = randomChoice([100, 150, 200]);
     const hausse = randomChoice([10, 20, 25]);
@@ -690,15 +690,15 @@ ${x2} → ?`,
 
 {
   kind: "template",
-  id: "3e_prop_defis_tpl_2",
+  id: "3e_prop_defi_tpl_2",
   niveau: "3e",
   matiere: "maths",
-  notionId: "proportionnalite",
-  microId: "prop_defis",
+  notionId: "prop_proportionnalite",
+  microId: "prop_defi",
   difficulty: 5,
   theme: "reunion",
   hint: "Combine vitesse et proportionnalité.",
-  tags: ["proportionnalite", "defi", "vitesse", "reunion", "template"],
+  tags: ["prop_proportionnalite", "defi", "vitesse", "reunion", "template"],
   generate: () => {
     const vitesse = randomChoice([40, 50, 60]);
     const temps = randomChoice([2, 3]);
@@ -720,11 +720,11 @@ ${x2} → ?`,
 
 {
   kind: "fixed",
-  id: "3e_prop_defis_open_2",
+  id: "3e_prop_defi_open_2",
   niveau: "3e",
   matiere: "maths",
-  notionId: "proportionnalite",
-  microId: "prop_defis",
+  notionId: "prop_proportionnalite",
+  microId: "prop_defi",
   difficulty: 5,
   theme: "neutral",
   text: "Explique pourquoi une augmentation de 10% suivie d’une augmentation de 20% ne correspond pas à une augmentation de 30%.",
@@ -738,6 +738,6 @@ ${x2} → ?`,
     `Calcul : on remplace les valeurs de l’énoncé dans la formule puis on calcule. ` +
     ("Une hausse de 10% correspond à ×1,1 et une hausse de 20% à ×1,2. Au total, on multiplie par 1,1 × 1,2 = 1,32, soit une hausse de 32%, pas 30%.") +
     `\n\nConclusion : on obtient la valeur demandée avec l’unité ou le pourcentage adapté.`,
-  tags: ["proportionnalite", "defi", "evolution", "open"],
+  tags: ["prop_proportionnalite", "defi", "evolution", "open"],
 },
 ];

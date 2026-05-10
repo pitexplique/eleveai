@@ -52,11 +52,11 @@ export const racineCarreeBank: TutorBankItemV4[] = [
 
 {
   kind: "fixed",
-  id: "3e_racine_comprendre_fixed_1",
+  id: "3e_entier_racine_comprendre_fixed_1",
   niveau: "3e",
   matiere: "maths",
-  notionId: "racine_carree",
-  microId: "racine_comprendre",
+  notionId: "entier_racine_carree",
+  microId: "entier_racine_comprendre",
   difficulty: 1,
   theme: "neutral",
   text: "Que représente √9 ?",
@@ -70,16 +70,16 @@ export const racineCarreeBank: TutorBankItemV4[] = [
   "Méthode : pour trouver √9, on cherche le nombre positif dont le carré vaut 9.\n\n" +
   "Calcul : 3² = 9.\n\n" +
   "Conclusion : √9 = 3.",
-  tags: ["racine", "definition"],
+  tags: ["entier_racine", "definition"],
 },
 
 {
   kind: "fixed",
-  id: "3e_racine_comprendre_fixed_2",
+  id: "3e_entier_racine_comprendre_fixed_2",
   niveau: "3e",
   matiere: "maths",
-  notionId: "racine_carree",
-  microId: "racine_comprendre",
+  notionId: "entier_racine_carree",
+  microId: "entier_racine_comprendre",
   difficulty: 1,
   theme: "neutral",
   text: "√16 correspond à…",
@@ -93,16 +93,16 @@ export const racineCarreeBank: TutorBankItemV4[] = [
   "Méthode : on cherche le nombre positif dont le carré vaut 16.\n\n" +
   "Calcul : 4² = 16 et (-4)² = 16, mais √16 désigne la valeur positive.\n\n" +
   "Conclusion : √16 = 4.",
-  tags: ["racine", "positif", "qcm"],
+  tags: ["entier_racine", "positif", "qcm"],
 },
 
 {
   kind: "fixed",
-  id: "3e_racine_comprendre_fixed_3",
+  id: "3e_entier_racine_comprendre_fixed_3",
   niveau: "3e",
   matiere: "maths",
-  notionId: "racine_carree",
-  microId: "racine_comprendre",
+  notionId: "entier_racine_carree",
+  microId: "entier_racine_comprendre",
   difficulty: 2,
   theme: "neutral",
   text: "Un élève dit : √25 = 25 ÷ 2. A-t-il raison ?",
@@ -116,20 +116,20 @@ export const racineCarreeBank: TutorBankItemV4[] = [
   "Méthode : pour calculer √25, on cherche le nombre positif dont le carré vaut 25.\n\n" +
   "Calcul : 5² = 25, alors que 25 ÷ 2 = 12,5.\n\n" +
   "Conclusion : √25 = 5. L’élève a tort.",
-  tags: ["racine", "erreur"],
+  tags: ["entier_racine", "erreur"],
 },
 
 {
   kind: "template",
-  id: "3e_racine_comprendre_tpl_1",
+  id: "3e_entier_racine_comprendre_tpl_1",
   niveau: "3e",
   matiere: "maths",
-  notionId: "racine_carree",
-  microId: "racine_comprendre",
+  notionId: "entier_racine_carree",
+  microId: "entier_racine_comprendre",
   difficulty: 2,
   theme: "neutral",
   hint: "On cherche le nombre dont le carré donne le résultat.",
-  tags: ["racine", "template"],
+  tags: ["entier_racine", "template"],
   generate: () => {
     const n = randomChoice([4, 9, 16, 25, 36, 49]);
     const r = Math.sqrt(n);
@@ -157,8 +157,8 @@ export const racineCarreeBank: TutorBankItemV4[] = [
   id: "3e_racine_parfaits_fixed_1",
   niveau: "3e",
   matiere: "maths",
-  notionId: "racine_carree",
-  microId: "racine_carre_parfait",
+  notionId: "entier_racine_carree",
+  microId: "entier_racine_carre_parfait",
   difficulty: 1,
   theme: "neutral",
   text: "Quel est un carré parfait ?",
@@ -172,7 +172,7 @@ export const racineCarreeBank: TutorBankItemV4[] = [
   "Méthode : on cherche parmi les réponses un nombre de la forme n².\n\n" +
   "Calcul : 36 = 6².\n\n" +
   "Conclusion : 36 est un carré parfait.",
-  tags: ["racine", "carre_parfait"],
+  tags: ["entier_racine", "carre_parfait"],
 },
 
 {
@@ -180,8 +180,8 @@ export const racineCarreeBank: TutorBankItemV4[] = [
   id: "3e_racine_parfaits_fixed_2",
   niveau: "3e",
   matiere: "maths",
-  notionId: "racine_carree",
-  microId: "racine_carre_parfait",
+  notionId: "entier_racine_carree",
+  microId: "entier_racine_carre_parfait",
   difficulty: 2,
   theme: "neutral",
   text: "Quel nombre a pour racine carrée 7 ?",
@@ -195,7 +195,7 @@ export const racineCarreeBank: TutorBankItemV4[] = [
   "Méthode : on calcule le carré de 7.\n\n" +
   "Calcul : 7² = 49.\n\n" +
   "Conclusion : le nombre qui a pour racine carrée 7 est 49.",
-  tags: ["racine", "carre_parfait"],
+  tags: ["entier_racine", "carre_parfait"],
 },
 
 {
@@ -203,12 +203,12 @@ export const racineCarreeBank: TutorBankItemV4[] = [
   id: "3e_racine_parfaits_tpl_1",
   niveau: "3e",
   matiere: "maths",
-  notionId: "racine_carree",
-  microId: "racine_carre_parfait",
+  notionId: "entier_racine_carree",
+  microId: "entier_racine_carre_parfait",
   difficulty: 2,
   theme: "neutral",
   hint: "Calcule le carré.",
-  tags: ["racine", "template"],
+  tags: ["entier_racine", "template"],
   generate: () => {
     const n = randomChoice([2, 3, 4, 5, 6, 7, 8]);
     const square = n * n;
@@ -232,12 +232,12 @@ export const racineCarreeBank: TutorBankItemV4[] = [
   id: "3e_racine_parfaits_tpl_2",
   niveau: "3e",
   matiere: "maths",
-  notionId: "racine_carree",
-  microId: "racine_carre_parfait",
+  notionId: "entier_racine_carree",
+  microId: "entier_racine_carre_parfait",
   difficulty: 3,
   theme: "neutral",
   hint: "Teste les carrés connus.",
-  tags: ["racine", "template"],
+  tags: ["entier_racine", "template"],
   generate: () => {
     const n = randomChoice([12, 16, 18, 20, 25, 27, 30, 36, 40, 49, 60 ,64 ,81 ,90 ,100 ,110,121,144,169]);
     const correct = Math.sqrt(n);
@@ -267,11 +267,11 @@ export const racineCarreeBank: TutorBankItemV4[] = [
 
 {
   kind: "fixed",
-  id: "3e_racine_calculer_fixed_1",
+  id: "3e_entier_racine_calculer_fixed_1",
   niveau: "3e",
   matiere: "maths",
-  notionId: "racine_carree",
-  microId: "racine_calculer",
+  notionId: "entier_racine_carree",
+  microId: "entier_racine_calculer",
   difficulty: 2,
   theme: "neutral",
   text: "Calculer √64.",
@@ -284,16 +284,16 @@ export const racineCarreeBank: TutorBankItemV4[] = [
     "Méthode : pour calculer √64, on cherche le nombre positif dont le carré vaut 64.\n\n" +
     "Calcul : 8² = 64.\n\n" +
     "Conclusion : √64 = 8.",
-  tags: ["racine", "calcul"],
+  tags: ["entier_racine", "calcul"],
 },
 
 {
   kind: "fixed",
-  id: "3e_racine_calculer_fixed_2",
+  id: "3e_entier_racine_calculer_fixed_2",
   niveau: "3e",
   matiere: "maths",
-  notionId: "racine_carree",
-  microId: "racine_calculer",
+  notionId: "entier_racine_carree",
+  microId: "entier_racine_calculer",
   difficulty: 2,
   theme: "neutral",
   text: "Calculer √81.",
@@ -307,16 +307,16 @@ export const racineCarreeBank: TutorBankItemV4[] = [
     "Méthode : on cherche quel nombre a pour carré 81.\n\n" +
     "Calcul : 9² = 81.\n\n" +
     "Conclusion : √81 = 9.",
-  tags: ["racine", "calcul", "qcm"],
+  tags: ["entier_racine", "calcul", "qcm"],
 },
 
 {
   kind: "fixed",
-  id: "3e_racine_calculer_erreur_1",
+  id: "3e_entier_racine_calculer_erreur_1",
   niveau: "3e",
   matiere: "maths",
-  notionId: "racine_carree",
-  microId: "racine_calculer",
+  notionId: "entier_racine_carree",
+  microId: "entier_racine_calculer",
   difficulty: 3,
   theme: "neutral",
   text: "Un élève écrit : √100 = 50. A-t-il raison ?",
@@ -326,20 +326,20 @@ export const racineCarreeBank: TutorBankItemV4[] = [
   comparator: "mcq_exact",
   hint: "La racine carrée n’est pas la moitié.",
   explanation: "Non. √100 = 10 car 10² = 100.",
-  tags: ["racine", "calcul", "erreur"],
+  tags: ["entier_racine", "calcul", "erreur"],
 },
 
 {
   kind: "template",
-  id: "3e_racine_calculer_tpl_1",
+  id: "3e_entier_racine_calculer_tpl_1",
   niveau: "3e",
   matiere: "maths",
-  notionId: "racine_carree",
-  microId: "racine_calculer",
+  notionId: "entier_racine_carree",
+  microId: "entier_racine_calculer",
   difficulty: 2,
   theme: "neutral",
   hint: "Utilise les carrés parfaits.",
-  tags: ["racine", "calcul", "template"],
+  tags: ["entier_racine", "calcul", "template"],
   generate: () => {
     const r = randomChoice([2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
     const n = r * r;
@@ -360,15 +360,15 @@ export const racineCarreeBank: TutorBankItemV4[] = [
 
 {
   kind: "template",
-  id: "3e_racine_calculer_tpl_2",
+  id: "3e_entier_racine_calculer_tpl_2",
   niveau: "3e",
   matiere: "maths",
-  notionId: "racine_carree",
-  microId: "racine_calculer",
+  notionId: "entier_racine_carree",
+  microId: "entier_racine_calculer",
   difficulty: 3,
   theme: "neutral",
   hint: "Calcule chaque racine séparément.",
-  tags: ["racine", "calcul", "somme", "template"],
+  tags: ["entier_racine", "calcul", "somme", "template"],
   generate: () => {
     const a = randomChoice([4, 9, 16, 25, 36]);
     const b = randomChoice([4, 9, 16, 25, 36]);
@@ -390,11 +390,11 @@ export const racineCarreeBank: TutorBankItemV4[] = [
 
 {
   kind: "fixed",
-  id: "3e_racine_calculer_open_1",
+  id: "3e_entier_racine_calculer_open_1",
   niveau: "3e",
   matiere: "maths",
-  notionId: "racine_carree",
-  microId: "racine_calculer",
+  notionId: "entier_racine_carree",
+  microId: "entier_racine_calculer",
   difficulty: 4,
   theme: "neutral",
   text: "Explique pourquoi √49 = 7 et non -7.",
@@ -407,7 +407,7 @@ export const racineCarreeBank: TutorBankItemV4[] = [
     "Méthode : on cherche le nombre positif dont le carré vaut 49.\n\n" +
     "Calcul : 7² = 49 et (-7)² = 49, mais √49 désigne uniquement la valeur positive.\n\n" +
     "Conclusion : √49 = 7 et non -7.",
-  tags: ["racine", "calcul", "open", "signe"],
+  tags: ["entier_racine", "calcul", "open", "signe"],
 },
 
 /* =========================
@@ -416,11 +416,11 @@ export const racineCarreeBank: TutorBankItemV4[] = [
 
 {
   kind: "fixed",
-  id: "3e_racine_encadrer_fixed_1",
+  id: "3e_entier_racine_encadrer_fixed_1",
   niveau: "3e",
   matiere: "maths",
-  notionId: "racine_carree",
-  microId: "racine_encadrer",
+  notionId: "entier_racine_carree",
+  microId: "entier_racine_encadrer",
   difficulty: 3,
   theme: "neutral",
   text: "Entre quels entiers consécutifs se trouve √20 ?",
@@ -433,16 +433,16 @@ export const racineCarreeBank: TutorBankItemV4[] = [
     "Méthode : on compare 20 avec les carrés parfaits les plus proches.\n\n" +
     "Calcul : 4² = 16 et 5² = 25. Comme 16 < 20 < 25, alors 4 < √20 < 5.\n\n" +
     "Conclusion : √20 est compris entre 4 et 5.",
-    tags: ["racine", "encadrer", "qcm"],
+    tags: ["entier_racine", "encadrer", "qcm"],
 },
 
 {
   kind: "fixed",
-  id: "3e_racine_encadrer_fixed_2",
+  id: "3e_entier_racine_encadrer_fixed_2",
   niveau: "3e",
   matiere: "maths",
-  notionId: "racine_carree",
-  microId: "racine_encadrer",
+  notionId: "entier_racine_carree",
+  microId: "entier_racine_encadrer",
   difficulty: 3,
   theme: "neutral",
   text: "Compléter : 7 < √60 < ...",
@@ -455,20 +455,20 @@ explanation:
   "Méthode : on compare 60 avec les carrés de 7 et de 8.\n\n" +
   "Calcul : 7² = 49 et 8² = 64. Comme 49 < 60 < 64, alors 7 < √60 < 8.\n\n" +
   "Conclusion : le nombre manquant est 8.",
-  tags: ["racine", "encadrer", "short"],
+  tags: ["entier_racine", "encadrer", "short"],
 },
 
 {
   kind: "template",
-  id: "3e_racine_encadrer_tpl_1",
+  id: "3e_entier_racine_encadrer_tpl_1",
   niveau: "3e",
   matiere: "maths",
-  notionId: "racine_carree",
-  microId: "racine_encadrer",
+  notionId: "entier_racine_carree",
+  microId: "entier_racine_encadrer",
   difficulty: 3,
   theme: "neutral",
   hint: "Cherche les deux carrés parfaits qui encadrent le nombre.",
-  tags: ["racine", "encadrer", "template", "qcm"],
+  tags: ["entier_racine", "encadrer", "template", "qcm"],
   generate: () => {
     const a = randomInt(3, 10);
     const n = randomInt(a * a + 1, (a + 1) * (a + 1) - 1);
@@ -495,15 +495,15 @@ explanation:
 
 {
   kind: "template",
-  id: "3e_racine_encadrer_tpl_2",
+  id: "3e_entier_racine_encadrer_tpl_2",
   niveau: "3e",
   matiere: "maths",
-  notionId: "racine_carree",
-  microId: "racine_encadrer",
+  notionId: "entier_racine_carree",
+  microId: "entier_racine_encadrer",
   difficulty: 4,
   theme: "neutral",
   hint: "Utilise les carrés parfaits connus.",
-  tags: ["racine", "encadrer", "template", "short"],
+  tags: ["entier_racine", "encadrer", "template", "short"],
   generate: () => {
     const a = randomInt(4, 12);
     const n = randomInt(a * a + 1, (a + 1) * (a + 1) - 1);
@@ -524,11 +524,11 @@ explanation:
 
 {
   kind: "fixed",
-  id: "3e_racine_encadrer_open_1",
+  id: "3e_entier_racine_encadrer_open_1",
   niveau: "3e",
   matiere: "maths",
-  notionId: "racine_carree",
-  microId: "racine_encadrer",
+  notionId: "entier_racine_carree",
+  microId: "entier_racine_encadrer",
   difficulty: 4,
   theme: "neutral",
   text: "Explique pourquoi 6 < √40 < 7.",
@@ -538,7 +538,7 @@ explanation:
   hint: "Compare 40 avec 36 et 49.",
   explanation:
     "6² = 36 et 7² = 49. Comme 36 < 40 < 49, alors 6 < √40 < 7.",
-  tags: ["racine", "encadrer", "open", "raisonnement"],
+  tags: ["entier_racine", "encadrer", "open", "raisonnement"],
 },
 
 /* =========================
@@ -547,11 +547,11 @@ explanation:
 
 {
   kind: "fixed",
-  id: "3e_racine_defis_fixed_1",
+  id: "3e_entier_racine_defi_fixed_1",
   niveau: "3e",
   matiere: "maths",
-  notionId: "racine_carree",
-  microId: "racine_defis",
+  notionId: "entier_racine_carree",
+  microId: "entier_racine_defi",
   difficulty: 4,
   theme: "neutral",
   text: "Un élève affirme : √(9 + 16) = √9 + √16. A-t-il raison ?",
@@ -565,16 +565,16 @@ explanation:
     "Méthode : on calcule séparément les deux membres de l’égalité.\n\n" +
     "Calcul : √(9 + 16) = √25 = 5, alors que √9 + √16 = 3 + 4 = 7.\n\n" +
     "Conclusion : l’élève a tort.",
-    tags: ["racine", "defi", "erreur", "qcm"],
+    tags: ["entier_racine", "defi", "erreur", "qcm"],
 },
 
 {
   kind: "fixed",
-  id: "3e_racine_defis_fixed_2",
+  id: "3e_entier_racine_defi_fixed_2",
   niveau: "3e",
   matiere: "maths",
-  notionId: "racine_carree",
-  microId: "racine_defis",
+  notionId: "entier_racine_carree",
+  microId: "entier_racine_defi",
   difficulty: 4,
   theme: "neutral",
   text: "Dans un triangle rectangle, les côtés de l’angle droit mesurent 6 cm et 8 cm. Quelle est la longueur de l’hypoténuse ?",
@@ -586,20 +586,20 @@ explanation:
     "Méthode : on additionne les carrés des deux côtés de l’angle droit, puis on prend la racine carrée.\n\n" +
     "Calcul : h² = 6² + 8² = 36 + 64 = 100. Donc h = √100 = 10.\n\n" +
     "Conclusion : l’hypoténuse mesure 10 cm.",
-    tags: ["racine", "defi", "pythagore"],
+    tags: ["entier_racine", "defi", "pythagore_theoreme"],
 },
 
 {
   kind: "template",
-  id: "3e_racine_defis_tpl_1",
+  id: "3e_entier_racine_defi_tpl_1",
   niveau: "3e",
   matiere: "maths",
-  notionId: "racine_carree",
-  microId: "racine_defis",
+  notionId: "entier_racine_carree",
+  microId: "entier_racine_defi",
   difficulty: 4,
   theme: "neutral",
   hint: "Attention : la racine d’une somme n’est pas la somme des racines.",
-  tags: ["racine", "defi", "erreur", "template"],
+  tags: ["entier_racine", "defi", "erreur", "template"],
   generate: () => {
     const a = randomChoice([4, 9, 16, 25]);
     const b = randomChoice([4, 9, 16, 25]);
@@ -622,15 +622,15 @@ explanation:
 
 {
   kind: "template",
-  id: "3e_racine_defis_tpl_2",
+  id: "3e_entier_racine_defi_tpl_2",
   niveau: "3e",
   matiere: "maths",
-  notionId: "racine_carree",
-  microId: "racine_defis",
+  notionId: "entier_racine_carree",
+  microId: "entier_racine_defi",
   difficulty: 5,
   theme: "neutral",
   hint: "Utilise Pythagore puis une racine carrée.",
-  tags: ["racine", "defi", "pythagore", "template"],
+  tags: ["entier_racine", "defi", "pythagore_theoreme", "template"],
   generate: () => {
     const triples = [
       { a: 3, b: 4, h: 5 },
@@ -656,11 +656,11 @@ explanation:
 
 {
   kind: "fixed",
-  id: "3e_racine_defis_open_1",
+  id: "3e_entier_racine_defi_open_1",
   niveau: "3e",
   matiere: "maths",
-  notionId: "racine_carree",
-  microId: "racine_defis",
+  notionId: "entier_racine_carree",
+  microId: "entier_racine_defi",
   difficulty: 5,
   theme: "neutral",
   text: "Explique pourquoi la racine carrée est utile dans le théorème de Pythagore.",
@@ -673,6 +673,6 @@ explanation:
   "Méthode : pour retrouver la longueur elle-même, on utilise la racine carrée.\n\n" +
   "Calcul : si h² = 100, alors h = √100 = 10.\n\n" +
   "Conclusion : la racine carrée est utile pour passer du carré d’une longueur à la longueur.",
-  tags: ["racine", "defi", "open", "pythagore", "raisonnement"],
+  tags: ["entier_racine", "defi", "open", "pythagore_theoreme", "raisonnement"],
 },
 ];

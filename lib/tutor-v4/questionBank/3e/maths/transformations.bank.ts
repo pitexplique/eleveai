@@ -33,11 +33,11 @@ export const transformationsBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "3e_transfo_reactivation_fixed_1",
+    id: "3e_sym_transformation_reactivation_fixed_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "transformations",
-    microId: "transfo_symetrie_translation_rotation",
+    notionId: "sym_transformation",
+    microId: "sym_symetrie_translation_rotation",
     difficulty: 1,
     theme: "neutral",
     text: "Quelle transformation retourne une figure comme dans un miroir ?",
@@ -86,11 +86,11 @@ export const transformationsBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "3e_transfo_reactivation_fixed_2",
+    id: "3e_sym_transformation_reactivation_fixed_2",
     niveau: "3e",
     matiere: "maths",
-    notionId: "transformations",
-    microId: "transfo_symetrie_translation_rotation",
+    notionId: "sym_transformation",
+    microId: "sym_symetrie_translation_rotation",
     difficulty: 1,
     theme: "neutral",
     text: "Quelle transformation fait glisser une figure sans la tourner ni la déformer ?",
@@ -139,11 +139,11 @@ export const transformationsBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "3e_transfo_reactivation_fixed_3",
+    id: "3e_sym_transformation_reactivation_fixed_3",
     niveau: "3e",
     matiere: "maths",
-    notionId: "transformations",
-    microId: "transfo_symetrie_translation_rotation",
+    notionId: "sym_transformation",
+    microId: "sym_symetrie_translation_rotation",
     difficulty: 2,
     theme: "neutral",
     text: "Quelle transformation tourne une figure autour d’un point ?",
@@ -192,11 +192,11 @@ export const transformationsBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "3e_transfo_reactivation_tpl_1_translation",
+    id: "3e_sym_transformation_reactivation_tpl_1_translation",
     niveau: "3e",
     matiere: "maths",
-    notionId: "transformations",
-    microId: "transfo_symetrie_translation_rotation",
+    notionId: "sym_transformation",
+    microId: "sym_symetrie_translation_rotation",
     difficulty: 2,
     theme: "neutral",
     hint: "Dans une translation, tous les points se déplacent de la même façon.",
@@ -252,11 +252,11 @@ export const transformationsBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "3e_transfo_reactivation_tpl_2_symetrie_axiale",
+    id: "3e_sym_transformation_reactivation_tpl_2_symetrie_axiale",
     niveau: "3e",
     matiere: "maths",
-    notionId: "transformations",
-    microId: "transfo_symetrie_translation_rotation",
+    notionId: "sym_transformation",
+    microId: "sym_symetrie_translation_rotation",
     difficulty: 2,
     theme: "neutral",
     hint: "Les deux figures sont de part et d’autre d’un axe.",
@@ -311,11 +311,11 @@ export const transformationsBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "3e_transfo_reactivation_tpl_3_symetrie_centrale",
+    id: "3e_sym_transformation_reactivation_tpl_3_symetrie_centrale",
     niveau: "3e",
     matiere: "maths",
-    notionId: "transformations",
-    microId: "transfo_symetrie_translation_rotation",
+    notionId: "sym_transformation",
+    microId: "sym_symetrie_translation_rotation",
     difficulty: 2,
     theme: "neutral",
     hint: "Le centre est le milieu entre un point et son image.",
@@ -367,11 +367,11 @@ export const transformationsBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "3e_transfo_reactivation_open_1",
+    id: "3e_sym_transformation_reactivation_open_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "transformations",
-    microId: "transfo_symetrie_translation_rotation",
+    notionId: "sym_transformation",
+    microId: "sym_symetrie_translation_rotation",
     difficulty: 3,
     theme: "neutral",
     text: "Explique en une phrase la différence entre une translation et une rotation.",
@@ -392,11 +392,11 @@ export const transformationsBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "3e_transfo_homothetie_reconnaitre_fixed_1",
+    id: "3e_sym_homothetie_reconnaitre_fixed_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "transformations",
-    microId: "transfo_homothetie_reconnaitre",
+    notionId: "sym_transformation",
+    microId: "sym_homothetie_reconnaitre",
     difficulty: 1,
     theme: "neutral",
     text: "Une homothétie permet principalement d’obtenir une figure...",
@@ -445,11 +445,11 @@ export const transformationsBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "3e_transfo_homothetie_reconnaitre_fixed_2",
+    id: "3e_sym_homothetie_reconnaitre_fixed_2",
     niveau: "3e",
     matiere: "maths",
-    notionId: "transformations",
-    microId: "transfo_homothetie_reconnaitre",
+    notionId: "sym_transformation",
+    microId: "sym_homothetie_reconnaitre",
     difficulty: 2,
     theme: "neutral",
     text: "Dans une homothétie de centre O, les points A, O et A' sont...",
@@ -473,11 +473,11 @@ export const transformationsBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "3e_transfo_homothetie_reconnaitre_fixed_3",
+    id: "3e_sym_homothetie_reconnaitre_fixed_3",
     niveau: "3e",
     matiere: "maths",
-    notionId: "transformations",
-    microId: "transfo_homothetie_reconnaitre",
+    notionId: "sym_transformation",
+    microId: "sym_homothetie_reconnaitre",
     difficulty: 2,
     theme: "neutral",
     text: "Si une homothétie a pour rapport 3, alors la figure image est...",
@@ -501,11 +501,11 @@ export const transformationsBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "3e_transfo_homothetie_reconnaitre_tpl_1_agrandissement",
+    id: "3e_sym_homothetie_reconnaitre_tpl_1_agrandissement",
     niveau: "3e",
     matiere: "maths",
-    notionId: "transformations",
-    microId: "transfo_homothetie_reconnaitre",
+    notionId: "sym_transformation",
+    microId: "sym_homothetie_reconnaitre",
     difficulty: 2,
     theme: "neutral",
     hint: "Regarde si la figure rouge est une version agrandie de la figure bleue depuis le centre O.",
@@ -560,11 +560,11 @@ export const transformationsBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "3e_transfo_homothetie_reconnaitre_tpl_2_reduction",
+    id: "3e_sym_homothetie_reconnaitre_tpl_2_reduction",
     niveau: "3e",
     matiere: "maths",
-    notionId: "transformations",
-    microId: "transfo_homothetie_reconnaitre",
+    notionId: "sym_transformation",
+    microId: "sym_homothetie_reconnaitre",
     difficulty: 3,
     theme: "neutral",
     hint: "Une réduction est aussi une homothétie.",
@@ -620,11 +620,11 @@ export const transformationsBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "3e_transfo_homothetie_reconnaitre_tpl_3_rapport_type",
+    id: "3e_sym_homothetie_reconnaitre_tpl_3_rapport_type",
     niveau: "3e",
     matiere: "maths",
-    notionId: "transformations",
-    microId: "transfo_homothetie_reconnaitre",
+    notionId: "sym_transformation",
+    microId: "sym_homothetie_reconnaitre",
     difficulty: 3,
     theme: "neutral",
     hint: "Compare le rapport à 1.",
@@ -660,11 +660,11 @@ export const transformationsBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "3e_transfo_homothetie_reconnaitre_open_1",
+    id: "3e_sym_homothetie_reconnaitre_open_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "transformations",
-    microId: "transfo_homothetie_reconnaitre",
+    notionId: "sym_transformation",
+    microId: "sym_homothetie_reconnaitre",
     difficulty: 4,
     theme: "neutral",
     text: "Explique en une phrase comment reconnaître une homothétie sur une figure.",
@@ -685,11 +685,11 @@ export const transformationsBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "3e_transfo_homothetie_construire_fixed_1",
+    id: "3e_sym_homothetie_construire_fixed_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "transformations",
-    microId: "transfo_homothetie_construire",
+    notionId: "sym_transformation",
+    microId: "sym_homothetie_construire",
     difficulty: 2,
     theme: "neutral",
     text: "Pour construire l’image A' d’un point A par homothétie de centre O, on commence par...",
@@ -713,11 +713,11 @@ export const transformationsBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "3e_transfo_homothetie_construire_fixed_2",
+    id: "3e_sym_homothetie_construire_fixed_2",
     niveau: "3e",
     matiere: "maths",
-    notionId: "transformations",
-    microId: "transfo_homothetie_construire",
+    notionId: "sym_transformation",
+    microId: "sym_homothetie_construire",
     difficulty: 2,
     theme: "neutral",
     text: "Par une homothétie de centre O et de rapport 2, si OA = 3 cm, alors OA' vaut...",
@@ -736,11 +736,11 @@ export const transformationsBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "3e_transfo_homothetie_construire_fixed_3",
+    id: "3e_sym_homothetie_construire_fixed_3",
     niveau: "3e",
     matiere: "maths",
-    notionId: "transformations",
-    microId: "transfo_homothetie_construire",
+    notionId: "sym_transformation",
+    microId: "sym_homothetie_construire",
     difficulty: 3,
     theme: "neutral",
     text: "Par une homothétie de centre O et de rapport 1/2, si OA = 8 cm, alors OA' vaut...",
@@ -759,11 +759,11 @@ export const transformationsBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "3e_transfo_homothetie_construire_tpl_1_placer_point_agrandissement",
+    id: "3e_sym_homothetie_construire_tpl_1_placer_point_agrandissement",
     niveau: "3e",
     matiere: "maths",
-    notionId: "transformations",
-    microId: "transfo_homothetie_construire",
+    notionId: "sym_transformation",
+    microId: "sym_homothetie_construire",
     difficulty: 3,
     theme: "neutral",
     hint: "Utilise OA' = k × OA.",
@@ -789,11 +789,11 @@ export const transformationsBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "3e_transfo_homothetie_construire_tpl_2_placer_point_reduction",
+    id: "3e_sym_homothetie_construire_tpl_2_placer_point_reduction",
     niveau: "3e",
     matiere: "maths",
-    notionId: "transformations",
-    microId: "transfo_homothetie_construire",
+    notionId: "sym_transformation",
+    microId: "sym_homothetie_construire",
     difficulty: 3,
     theme: "neutral",
     hint: "Un rapport 1/2 divise la distance par 2.",
@@ -820,11 +820,11 @@ export const transformationsBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "3e_transfo_homothetie_construire_tpl_3_image_triangle",
+    id: "3e_sym_homothetie_construire_tpl_3_image_triangle",
     niveau: "3e",
     matiere: "maths",
-    notionId: "transformations",
-    microId: "transfo_homothetie_construire",
+    notionId: "sym_transformation",
+    microId: "sym_homothetie_construire",
     difficulty: 3,
     theme: "neutral",
     hint: "Chaque sommet image est aligné avec le centre O et son sommet de départ.",
@@ -874,11 +874,11 @@ export const transformationsBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "3e_transfo_homothetie_construire_tpl_4_erreur_alignement",
+    id: "3e_sym_homothetie_construire_tpl_4_erreur_alignement",
     niveau: "3e",
     matiere: "maths",
-    notionId: "transformations",
-    microId: "transfo_homothetie_construire",
+    notionId: "sym_transformation",
+    microId: "sym_homothetie_construire",
     difficulty: 4,
     theme: "neutral",
     hint: "Vérifie l’alignement avec le centre O.",
@@ -901,11 +901,11 @@ export const transformationsBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "3e_transfo_homothetie_construire_open_1",
+    id: "3e_sym_homothetie_construire_open_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "transformations",
-    microId: "transfo_homothetie_construire",
+    notionId: "sym_transformation",
+    microId: "sym_homothetie_construire",
     difficulty: 4,
     theme: "neutral",
     text: "Décris les étapes pour construire l’image d’un triangle par homothétie de centre O et de rapport k.",
@@ -926,11 +926,11 @@ export const transformationsBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "3e_transfo_homothetie_rapport_fixed_1",
+    id: "3e_sym_homothetie_rapport_fixed_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "transformations",
-    microId: "transfo_homothetie_rapport",
+    notionId: "sym_transformation",
+    microId: "sym_homothetie_rapport",
     difficulty: 2,
     theme: "neutral",
     text: "Par une homothétie de centre O, on a OA = 4 cm et OA' = 12 cm. Quel est le rapport k ?",
@@ -949,11 +949,11 @@ export const transformationsBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "3e_transfo_homothetie_rapport_fixed_2",
+    id: "3e_sym_homothetie_rapport_fixed_2",
     niveau: "3e",
     matiere: "maths",
-    notionId: "transformations",
-    microId: "transfo_homothetie_rapport",
+    notionId: "sym_transformation",
+    microId: "sym_homothetie_rapport",
     difficulty: 2,
     theme: "neutral",
     text: "Par une homothétie de centre O, on a OA = 10 cm et OA' = 5 cm. Quel est le rapport k ?",
@@ -972,11 +972,11 @@ export const transformationsBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "3e_transfo_homothetie_rapport_fixed_3",
+    id: "3e_sym_homothetie_rapport_fixed_3",
     niveau: "3e",
     matiere: "maths",
-    notionId: "transformations",
-    microId: "transfo_homothetie_rapport",
+    notionId: "sym_transformation",
+    microId: "sym_homothetie_rapport",
     difficulty: 3,
     theme: "neutral",
     text: "Si une homothétie a pour rapport k = 4, une longueur de 7 cm devient...",
@@ -995,11 +995,11 @@ export const transformationsBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "3e_transfo_homothetie_rapport_tpl_1_trouver_k_entier",
+    id: "3e_sym_homothetie_rapport_tpl_1_trouver_k_entier",
     niveau: "3e",
     matiere: "maths",
-    notionId: "transformations",
-    microId: "transfo_homothetie_rapport",
+    notionId: "sym_transformation",
+    microId: "sym_homothetie_rapport",
     difficulty: 2,
     theme: "neutral",
     hint: "Utilise k = OA' ÷ OA.",
@@ -1025,11 +1025,11 @@ export const transformationsBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "3e_transfo_homothetie_rapport_tpl_2_trouver_k_fraction",
+    id: "3e_sym_homothetie_rapport_tpl_2_trouver_k_fraction",
     niveau: "3e",
     matiere: "maths",
-    notionId: "transformations",
-    microId: "transfo_homothetie_rapport",
+    notionId: "sym_transformation",
+    microId: "sym_homothetie_rapport",
     difficulty: 3,
     theme: "neutral",
     hint: "Le rapport est OA' ÷ OA.",
@@ -1066,11 +1066,11 @@ export const transformationsBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "3e_transfo_homothetie_rapport_tpl_3_calculer_longueur_image",
+    id: "3e_sym_homothetie_rapport_tpl_3_calculer_longueur_image",
     niveau: "3e",
     matiere: "maths",
-    notionId: "transformations",
-    microId: "transfo_homothetie_rapport",
+    notionId: "sym_transformation",
+    microId: "sym_homothetie_rapport",
     difficulty: 3,
     theme: "neutral",
     hint: "Multiplie la longueur de départ par le rapport.",
@@ -1096,11 +1096,11 @@ export const transformationsBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "3e_transfo_homothetie_rapport_tpl_4_calculer_longueur_depart",
+    id: "3e_sym_homothetie_rapport_tpl_4_calculer_longueur_depart",
     niveau: "3e",
     matiere: "maths",
-    notionId: "transformations",
-    microId: "transfo_homothetie_rapport",
+    notionId: "sym_transformation",
+    microId: "sym_homothetie_rapport",
     difficulty: 4,
     theme: "neutral",
     hint: "Pour retrouver la longueur de départ, divise par le rapport.",
@@ -1126,11 +1126,11 @@ export const transformationsBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "3e_transfo_homothetie_rapport_tpl_5_canvas_rapport",
+    id: "3e_sym_homothetie_rapport_tpl_5_canvas_rapport",
     niveau: "3e",
     matiere: "maths",
-    notionId: "transformations",
-    microId: "transfo_homothetie_rapport",
+    notionId: "sym_transformation",
+    microId: "sym_homothetie_rapport",
     difficulty: 3,
     theme: "neutral",
     hint: "Compare une distance au centre avant et après transformation.",
@@ -1180,11 +1180,11 @@ export const transformationsBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "3e_transfo_homothetie_rapport_erreur_1",
+    id: "3e_sym_homothetie_rapport_erreur_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "transformations",
-    microId: "transfo_homothetie_rapport",
+    notionId: "sym_transformation",
+    microId: "sym_homothetie_rapport",
     difficulty: 4,
     theme: "neutral",
     text: "Un élève dit : si OA = 3 cm et OA' = 9 cm, alors le rapport est 9 + 3 = 12. A-t-il raison ?",
@@ -1203,11 +1203,11 @@ export const transformationsBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "3e_transfo_homothetie_rapport_open_1",
+    id: "3e_sym_homothetie_rapport_open_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "transformations",
-    microId: "transfo_homothetie_rapport",
+    notionId: "sym_transformation",
+    microId: "sym_homothetie_rapport",
     difficulty: 4,
     theme: "neutral",
     text: "Explique comment calculer le rapport d’une homothétie quand on connaît OA et OA'.",
@@ -1228,11 +1228,11 @@ export const transformationsBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "3e_transfo_effets_fixed_1",
+    id: "3e_sym_transformation_effet_fixed_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "transformations",
-    microId: "transfo_effets",
+    notionId: "sym_transformation",
+    microId: "sym_transformation_effet",
     difficulty: 2,
     theme: "neutral",
     text: "Une translation conserve...",
@@ -1256,11 +1256,11 @@ export const transformationsBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "3e_transfo_effets_fixed_2",
+    id: "3e_sym_transformation_effet_fixed_2",
     niveau: "3e",
     matiere: "maths",
-    notionId: "transformations",
-    microId: "transfo_effets",
+    notionId: "sym_transformation",
+    microId: "sym_transformation_effet",
     difficulty: 2,
     theme: "neutral",
     text: "Une rotation conserve...",
@@ -1284,11 +1284,11 @@ export const transformationsBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "3e_transfo_effets_fixed_3",
+    id: "3e_sym_transformation_effet_fixed_3",
     niveau: "3e",
     matiere: "maths",
-    notionId: "transformations",
-    microId: "transfo_effets",
+    notionId: "sym_transformation",
+    microId: "sym_transformation_effet",
     difficulty: 2,
     theme: "neutral",
     text: "Une symétrie axiale conserve...",
@@ -1312,11 +1312,11 @@ export const transformationsBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "3e_transfo_effets_fixed_4",
+    id: "3e_sym_transformation_effet_fixed_4",
     niveau: "3e",
     matiere: "maths",
-    notionId: "transformations",
-    microId: "transfo_effets",
+    notionId: "sym_transformation",
+    microId: "sym_transformation_effet",
     difficulty: 3,
     theme: "neutral",
     text: "Une homothétie de rapport 3 multiplie les longueurs par...",
@@ -1335,11 +1335,11 @@ export const transformationsBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "3e_transfo_effets_fixed_5",
+    id: "3e_sym_transformation_effet_fixed_5",
     niveau: "3e",
     matiere: "maths",
-    notionId: "transformations",
-    microId: "transfo_effets",
+    notionId: "sym_transformation",
+    microId: "sym_transformation_effet",
     difficulty: 3,
     theme: "neutral",
     text: "Une homothétie de rapport 3 multiplie les aires par...",
@@ -1358,11 +1358,11 @@ export const transformationsBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "3e_transfo_effets_fixed_6",
+    id: "3e_sym_transformation_effet_fixed_6",
     niveau: "3e",
     matiere: "maths",
-    notionId: "transformations",
-    microId: "transfo_effets",
+    notionId: "sym_transformation",
+    microId: "sym_transformation_effet",
     difficulty: 4,
     theme: "neutral",
     text: "Une homothétie de rapport 2 multiplie les volumes par...",
@@ -1381,11 +1381,11 @@ export const transformationsBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "3e_transfo_effets_tpl_1_longueur_homothetie",
+    id: "3e_sym_transformation_effet_tpl_1_longueur_homothetie",
     niveau: "3e",
     matiere: "maths",
-    notionId: "transformations",
-    microId: "transfo_effets",
+    notionId: "sym_transformation",
+    microId: "sym_transformation_effet",
     difficulty: 3,
     theme: "neutral",
     hint: "Une homothétie de rapport k multiplie les longueurs par k.",
@@ -1411,11 +1411,11 @@ export const transformationsBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "3e_transfo_effets_tpl_2_aire_homothetie",
+    id: "3e_sym_transformation_effet_tpl_2_aire_homothetie",
     niveau: "3e",
     matiere: "maths",
-    notionId: "transformations",
-    microId: "transfo_effets",
+    notionId: "sym_transformation",
+    microId: "sym_transformation_effet",
     difficulty: 4,
     theme: "neutral",
     hint: "Une homothétie de rapport k multiplie les aires par k².",
@@ -1441,11 +1441,11 @@ export const transformationsBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "3e_transfo_effets_tpl_3_volume_homothetie",
+    id: "3e_sym_transformation_effet_tpl_3_volume_homothetie",
     niveau: "3e",
     matiere: "maths",
-    notionId: "transformations",
-    microId: "transfo_effets",
+    notionId: "sym_transformation",
+    microId: "sym_transformation_effet",
     difficulty: 4,
     theme: "neutral",
     hint: "Une homothétie de rapport k multiplie les volumes par k³.",
@@ -1471,11 +1471,11 @@ export const transformationsBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "3e_transfo_effets_tpl_4_reduction_aire",
+    id: "3e_sym_transformation_effet_tpl_4_reduction_aire",
     niveau: "3e",
     matiere: "maths",
-    notionId: "transformations",
-    microId: "transfo_effets",
+    notionId: "sym_transformation",
+    microId: "sym_transformation_effet",
     difficulty: 4,
     theme: "neutral",
     hint: "Avec un rapport 1/2, les aires sont multipliées par 1/4.",
@@ -1500,11 +1500,11 @@ export const transformationsBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "3e_transfo_effets_tpl_5_reduction_volume",
+    id: "3e_sym_transformation_effet_tpl_5_reduction_volume",
     niveau: "3e",
     matiere: "maths",
-    notionId: "transformations",
-    microId: "transfo_effets",
+    notionId: "sym_transformation",
+    microId: "sym_transformation_effet",
     difficulty: 5,
     theme: "neutral",
     hint: "Avec un rapport 1/2, les volumes sont multipliés par 1/8.",
@@ -1529,11 +1529,11 @@ export const transformationsBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "3e_transfo_effets_erreur_1",
+    id: "3e_sym_transformation_effet_erreur_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "transformations",
-    microId: "transfo_effets",
+    notionId: "sym_transformation",
+    microId: "sym_transformation_effet",
     difficulty: 4,
     theme: "neutral",
     text: "Un élève dit : une homothétie de rapport 3 multiplie les aires par 3. A-t-il raison ?",
@@ -1552,11 +1552,11 @@ export const transformationsBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "3e_transfo_effets_erreur_2",
+    id: "3e_sym_transformation_effet_erreur_2",
     niveau: "3e",
     matiere: "maths",
-    notionId: "transformations",
-    microId: "transfo_effets",
+    notionId: "sym_transformation",
+    microId: "sym_transformation_effet",
     difficulty: 5,
     theme: "neutral",
     text: "Un élève dit : une homothétie de rapport 2 multiplie les volumes par 4. A-t-il raison ?",
@@ -1575,11 +1575,11 @@ export const transformationsBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "3e_transfo_effets_open_1",
+    id: "3e_sym_transformation_effet_open_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "transformations",
-    microId: "transfo_effets",
+    notionId: "sym_transformation",
+    microId: "sym_transformation_effet",
     difficulty: 4,
     theme: "neutral",
     text: "Explique la différence entre l’effet d’une homothétie sur les longueurs, les aires et les volumes.",
@@ -1600,11 +1600,11 @@ export const transformationsBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "3e_transfo_defis_fixed_1",
+    id: "3e_sym_transformation_defi_fixed_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "transformations",
-    microId: "transfo_defis",
+    notionId: "sym_transformation",
+    microId: "sym_transformation_defi",
     difficulty: 3,
     theme: "reunion",
     text: "À La Réunion, un logo de club est agrandi par homothétie de rapport 2. Une longueur du logo mesure 6 cm au départ. Quelle sera sa longueur sur le logo agrandi ?",
@@ -1622,11 +1622,11 @@ export const transformationsBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "3e_transfo_defis_tpl_1_affiche_club",
+    id: "3e_sym_transformation_defi_tpl_1_affiche_club",
     niveau: "3e",
     matiere: "maths",
-    notionId: "transformations",
-    microId: "transfo_defis",
+    notionId: "sym_transformation",
+    microId: "sym_transformation_defi",
     difficulty: 3,
     theme: "reunion",
     hint: "Un agrandissement de rapport k multiplie les longueurs par k.",
@@ -1652,11 +1652,11 @@ export const transformationsBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "3e_transfo_defis_tpl_2_plan_reduction",
+    id: "3e_sym_transformation_defi_tpl_2_plan_reduction",
     niveau: "3e",
     matiere: "maths",
-    notionId: "transformations",
-    microId: "transfo_defis",
+    notionId: "sym_transformation",
+    microId: "sym_transformation_defi",
     difficulty: 3,
     theme: "neutral",
     hint: "Une réduction de rapport 1/2 divise les longueurs par 2.",
@@ -1681,11 +1681,11 @@ export const transformationsBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "3e_transfo_defis_tpl_3_surface_logo",
+    id: "3e_sym_transformation_defi_tpl_3_surface_logo",
     niveau: "3e",
     matiere: "maths",
-    notionId: "transformations",
-    microId: "transfo_defis",
+    notionId: "sym_transformation",
+    microId: "sym_transformation_defi",
     difficulty: 4,
     theme: "reunion",
     hint: "Les aires sont multipliées par k².",
@@ -1711,11 +1711,11 @@ export const transformationsBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "3e_transfo_defis_tpl_4_maquette_volume",
+    id: "3e_sym_transformation_defi_tpl_4_maquette_volume",
     niveau: "3e",
     matiere: "maths",
-    notionId: "transformations",
-    microId: "transfo_defis",
+    notionId: "sym_transformation",
+    microId: "sym_transformation_defi",
     difficulty: 5,
     theme: "neutral",
     hint: "Les volumes sont multipliés par k³.",
@@ -1741,11 +1741,11 @@ export const transformationsBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "3e_transfo_defis_tpl_5_choisir_effet",
+    id: "3e_sym_transformation_defi_tpl_5_choisir_effet",
     niveau: "3e",
     matiere: "maths",
-    notionId: "transformations",
-    microId: "transfo_defis",
+    notionId: "sym_transformation",
+    microId: "sym_transformation_defi",
     difficulty: 4,
     theme: "neutral",
     hint: "Longueur : k ; aire : k² ; volume : k³.",
@@ -1788,11 +1788,11 @@ export const transformationsBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "3e_transfo_defis_open_1",
+    id: "3e_sym_transformation_defi_open_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "transformations",
-    microId: "transfo_defis",
+    notionId: "sym_transformation",
+    microId: "sym_transformation_defi",
     difficulty: 5,
     theme: "neutral",
     text: "Une figure est agrandie par homothétie de rapport 3. Explique pourquoi son aire n’est pas seulement multipliée par 3.",
@@ -1810,11 +1810,11 @@ export const transformationsBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "3e_transfo_defis_open_2",
+    id: "3e_sym_transformation_defi_open_2",
     niveau: "3e",
     matiere: "maths",
-    notionId: "transformations",
-    microId: "transfo_defis",
+    notionId: "sym_transformation",
+    microId: "sym_transformation_defi",
     difficulty: 5,
     theme: "neutral",
     text: "Explique pourquoi une translation, une rotation et une symétrie conservent les longueurs, alors qu’une homothétie peut les modifier.",

@@ -89,7 +89,7 @@ export const trigonometrieBank: TutorBankItemV4[] = [
     id: "3e_trigo_triangle_rectangle_fixed_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "trigonometrie",
+    notionId: "trigo_trigonometrie",
     microId: "trigo_triangle_rectangle",
     difficulty: 1,
     theme: "neutral",
@@ -105,7 +105,7 @@ export const trigonometrieBank: TutorBankItemV4[] = [
       "Calcul : ici, il n’y a pas de calcul : il faut identifier le bon côté.\n\n" +
       "Conclusion : le côté opposé à l’angle droit s’appelle l’hypoténuse.",
     canvas: triangleTrigoCanvas(),
-    tags: ["trigonometrie", "triangle_rectangle", "hypotenuse", "qcm", "canvas"],
+    tags: ["trigo_trigonometrie", "triangle_rectangle", "hypotenuse", "qcm", "canvas"],
   },
 
   {
@@ -113,7 +113,7 @@ export const trigonometrieBank: TutorBankItemV4[] = [
     id: "3e_trigo_triangle_rectangle_fixed_2",
     niveau: "3e",
     matiere: "maths",
-    notionId: "trigonometrie",
+    notionId: "trigo_trigonometrie",
     microId: "trigo_triangle_rectangle",
     difficulty: 2,
     theme: "neutral",
@@ -129,7 +129,7 @@ export const trigonometrieBank: TutorBankItemV4[] = [
       "Calcul : dans ce triangle, le côté en face de l’angle B est AC.\n\n" +
       "Conclusion : par rapport à l’angle B, le côté opposé est AC.",
     canvas: triangleTrigoCanvas({ angleAt: "B" }),
-    tags: ["trigonometrie", "oppose", "triangle_rectangle", "qcm", "canvas"],
+    tags: ["trigo_trigonometrie", "oppose", "triangle_rectangle", "qcm", "canvas"],
   },
 
   {
@@ -137,12 +137,12 @@ export const trigonometrieBank: TutorBankItemV4[] = [
     id: "3e_trigo_triangle_rectangle_tpl_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "trigonometrie",
+    notionId: "trigo_trigonometrie",
     microId: "trigo_triangle_rectangle",
     difficulty: 2,
     theme: "neutral",
     hint: "Repère l’angle étudié, puis classe les côtés.",
-    tags: ["trigonometrie", "cotes", "template", "canvas"],
+    tags: ["trigo_trigonometrie", "cotes", "template", "canvas"],
     generate: () => {
       const angleAt = randomChoice<"B" | "C">(["B", "C"]);
 
@@ -187,7 +187,7 @@ export const trigonometrieBank: TutorBankItemV4[] = [
     id: "3e_trigo_triangle_rectangle_open_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "trigonometrie",
+    notionId: "trigo_trigonometrie",
     microId: "trigo_triangle_rectangle",
     difficulty: 3,
     theme: "neutral",
@@ -201,7 +201,7 @@ export const trigonometrieBank: TutorBankItemV4[] = [
       "Méthode : on choisit d’abord l’angle étudié, puis on regarde les côtés autour de cet angle.\n\n" +
       "Calcul : dans un même triangle rectangle, si on change d’angle, le côté opposé et le côté adjacent peuvent s’inverser.\n\n" +
       "Conclusion : il faut toujours préciser l’angle avant de choisir sinus, cosinus ou tangente.",
-    tags: ["trigonometrie", "open", "raisonnement"],
+    tags: ["trigo_trigonometrie", "open", "raisonnement"],
   },
 
   /* =========================
@@ -213,7 +213,7 @@ export const trigonometrieBank: TutorBankItemV4[] = [
     id: "3e_trigo_cosinus_fixed_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "trigonometrie",
+    notionId: "trigo_trigonometrie",
     microId: "trigo_cosinus",
     difficulty: 2,
     theme: "neutral",
@@ -234,7 +234,7 @@ export const trigonometrieBank: TutorBankItemV4[] = [
       "Calcul : cos(angle) = adjacent / hypoténuse.\n\n" +
       "Conclusion : la bonne formule est cos(angle) = adjacent / hypoténuse.",
     canvas: triangleTrigoCanvas({ angleAt: "B" }),
-    tags: ["trigonometrie", "cosinus", "formule", "qcm", "canvas"],
+    tags: ["trigo_trigonometrie", "cosinus", "formule", "qcm", "canvas"],
   },
 
   {
@@ -242,12 +242,12 @@ export const trigonometrieBank: TutorBankItemV4[] = [
     id: "3e_trigo_cosinus_tpl_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "trigonometrie",
+    notionId: "trigo_trigonometrie",
     microId: "trigo_cosinus",
     difficulty: 3,
     theme: "neutral",
     hint: "Cosinus = adjacent ÷ hypoténuse.",
-    tags: ["trigonometrie", "cosinus", "template", "longueur"],
+    tags: ["trigo_trigonometrie", "cosinus", "template", "longueur"],
     generate: () => {
       const data = randomChoice([
         { angle: 60, hyp: 10, adj: 5 },
@@ -283,7 +283,7 @@ export const trigonometrieBank: TutorBankItemV4[] = [
     id: "3e_trigo_sinus_fixed_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "trigonometrie",
+    notionId: "trigo_trigonometrie",
     microId: "trigo_sinus",
     difficulty: 2,
     theme: "neutral",
@@ -304,7 +304,7 @@ export const trigonometrieBank: TutorBankItemV4[] = [
       "Calcul : sin(angle) = opposé / hypoténuse.\n\n" +
       "Conclusion : la bonne formule est sin(angle) = opposé / hypoténuse.",
     canvas: triangleTrigoCanvas({ angleAt: "B" }),
-    tags: ["trigonometrie", "sinus", "formule", "qcm", "canvas"],
+    tags: ["trigo_trigonometrie", "sinus", "formule", "qcm", "canvas"],
   },
 
   {
@@ -312,12 +312,12 @@ export const trigonometrieBank: TutorBankItemV4[] = [
     id: "3e_trigo_sinus_tpl_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "trigonometrie",
+    notionId: "trigo_trigonometrie",
     microId: "trigo_sinus",
     difficulty: 3,
     theme: "neutral",
     hint: "Sinus = opposé ÷ hypoténuse.",
-    tags: ["trigonometrie", "sinus", "template", "longueur"],
+    tags: ["trigo_trigonometrie", "sinus", "template", "longueur"],
     generate: () => {
       const angle = randomChoice([30, 45, 60]);
       const hyp = randomChoice([8, 10, 12, 15]);
@@ -351,7 +351,7 @@ export const trigonometrieBank: TutorBankItemV4[] = [
     id: "3e_trigo_tangente_fixed_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "trigonometrie",
+    notionId: "trigo_trigonometrie",
     microId: "trigo_tangente",
     difficulty: 2,
     theme: "neutral",
@@ -372,7 +372,7 @@ export const trigonometrieBank: TutorBankItemV4[] = [
       "Calcul : tan(angle) = opposé / adjacent.\n\n" +
       "Conclusion : la bonne formule est tan(angle) = opposé / adjacent.",
     canvas: triangleTrigoCanvas({ angleAt: "B" }),
-    tags: ["trigonometrie", "tangente", "formule", "qcm", "canvas"],
+    tags: ["trigo_trigonometrie", "tangente", "formule", "qcm", "canvas"],
   },
 
   {
@@ -380,12 +380,12 @@ export const trigonometrieBank: TutorBankItemV4[] = [
     id: "3e_trigo_tangente_tpl_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "trigonometrie",
+    notionId: "trigo_trigonometrie",
     microId: "trigo_tangente",
     difficulty: 3,
     theme: "neutral",
     hint: "Tangente = opposé ÷ adjacent.",
-    tags: ["trigonometrie", "tangente", "template", "longueur"],
+    tags: ["trigo_trigonometrie", "tangente", "template", "longueur"],
     generate: () => {
       const angle = randomChoice([30, 35, 40, 45, 50]);
       const adjacent = randomChoice([5, 6, 8, 10, 12]);
@@ -419,12 +419,12 @@ export const trigonometrieBank: TutorBankItemV4[] = [
     id: "3e_trigo_calculer_longueur_tpl_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "trigonometrie",
+    notionId: "trigo_trigonometrie",
     microId: "trigo_calculer_longueur",
     difficulty: 3,
     theme: "neutral",
     hint: "Commence par repérer les côtés connus et le côté cherché.",
-    tags: ["trigonometrie", "calcul_longueur", "template", "canvas"],
+    tags: ["trigo_trigonometrie", "calcul_longueur", "template", "canvas"],
     generate: () => {
       const cases = [
         {
@@ -485,7 +485,7 @@ export const trigonometrieBank: TutorBankItemV4[] = [
     id: "3e_trigo_calculer_longueur_open_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "trigonometrie",
+    notionId: "trigo_trigonometrie",
     microId: "trigo_calculer_longueur",
     difficulty: 4,
     theme: "neutral",
@@ -499,7 +499,7 @@ export const trigonometrieBank: TutorBankItemV4[] = [
       "Méthode : avant de choisir sinus, cosinus ou tangente, on repère l’hypoténuse, le côté opposé et le côté adjacent.\n\n" +
       "Calcul : sinus et cosinus utilisent l’hypoténuse, alors que tangente ne l’utilise pas.\n\n" +
       "Conclusion : identifier l’hypoténuse évite de choisir une mauvaise formule.",
-    tags: ["trigonometrie", "calcul_longueur", "open", "raisonnement"],
+    tags: ["trigo_trigonometrie", "calcul_longueur", "open", "raisonnement"],
   },
 
   /* =========================
@@ -511,12 +511,12 @@ export const trigonometrieBank: TutorBankItemV4[] = [
     id: "3e_trigo_calculer_angle_tpl_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "trigonometrie",
+    notionId: "trigo_trigonometrie",
     microId: "trigo_calculer_angle",
     difficulty: 4,
     theme: "neutral",
     hint: "Pour calculer un angle, on utilise cos⁻¹, sin⁻¹ ou tan⁻¹ à la calculatrice.",
-    tags: ["trigonometrie", "calcul_angle", "template", "canvas"],
+    tags: ["trigo_trigonometrie", "calcul_angle", "template", "canvas"],
     generate: () => {
       const data = randomChoice([
         {
@@ -568,7 +568,7 @@ export const trigonometrieBank: TutorBankItemV4[] = [
     id: "3e_trigo_calculer_angle_open_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "trigonometrie",
+    notionId: "trigo_trigonometrie",
     microId: "trigo_calculer_angle",
     difficulty: 4,
     theme: "neutral",
@@ -582,7 +582,7 @@ export const trigonometrieBank: TutorBankItemV4[] = [
       "Méthode : quand on connaît un rapport de longueurs mais pas l’angle, on utilise la fonction inverse adaptée.\n\n" +
       "Calcul : si cos(angle) = 0,5, alors angle = cos⁻¹(0,5) = 60°.\n\n" +
       "Conclusion : les fonctions inverses permettent de retrouver un angle à partir d’un rapport de longueurs.",
-    tags: ["trigonometrie", "angle", "open", "calculatrice"],
+    tags: ["trigo_trigonometrie", "angle", "open", "calculatrice"],
   },
 
   /* =========================
@@ -591,15 +591,15 @@ export const trigonometrieBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "3e_trigo_choisir_ratio_tpl_1",
+    id: "3e_trigo_choisir_rapport_tpl_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "trigonometrie",
-    microId: "trigo_choisir_ratio",
+    notionId: "trigo_trigonometrie",
+    microId: "trigo_choisir_rapport",
     difficulty: 4,
     theme: "neutral",
     hint: "Regarde quels côtés sont connus ou cherchés.",
-    tags: ["trigonometrie", "choisir_ratio", "template", "qcm"],
+    tags: ["trigo_trigonometrie", "choisir_ratio", "template", "qcm"],
     generate: () => {
       const item = randomChoice([
         {
@@ -636,11 +636,11 @@ export const trigonometrieBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "3e_trigo_choisir_ratio_open_1",
+    id: "3e_trigo_choisir_rapport_open_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "trigonometrie",
-    microId: "trigo_choisir_ratio",
+    notionId: "trigo_trigonometrie",
+    microId: "trigo_choisir_rapport",
     difficulty: 4,
     theme: "neutral",
     text: "Donne une méthode simple pour choisir entre sinus, cosinus et tangente.",
@@ -653,7 +653,7 @@ export const trigonometrieBank: TutorBankItemV4[] = [
       "Méthode : on identifie l’angle étudié, puis les côtés opposé, adjacent et hypoténuse.\n\n" +
       "Calcul : si on utilise opposé/hypoténuse, c’est sinus ; adjacent/hypoténuse, c’est cosinus ; opposé/adjacent, c’est tangente.\n\n" +
       "Conclusion : choisir le bon ratio revient à repérer les deux côtés utiles.",
-    tags: ["trigonometrie", "choisir_ratio", "open", "methode"],
+    tags: ["trigo_trigonometrie", "choisir_ratio", "open", "methode"],
   },
 
   /* =========================
@@ -662,15 +662,15 @@ export const trigonometrieBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "3e_trigo_defis_tpl_1",
+    id: "3e_trigo_defi_tpl_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "trigonometrie",
-    microId: "trigo_defis",
+    notionId: "trigo_trigonometrie",
+    microId: "trigo_defi",
     difficulty: 5,
     theme: "reunion",
     hint: "Modélise la situation par un triangle rectangle.",
-    tags: ["trigonometrie", "defi", "reunion", "template"],
+    tags: ["trigo_trigonometrie", "defi", "reunion", "template"],
     generate: () => {
       const angle = randomChoice([30, 35, 40]);
       const distance = randomChoice([20, 30, 40, 50]);
@@ -692,11 +692,11 @@ export const trigonometrieBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "3e_trigo_defis_fixed_1",
+    id: "3e_trigo_defi_fixed_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "trigonometrie",
-    microId: "trigo_defis",
+    notionId: "trigo_trigonometrie",
+    microId: "trigo_defi",
     difficulty: 5,
     theme: "neutral",
     text: "Un élève dit : « Dans un triangle rectangle, je peux toujours utiliser cosinus, peu importe les côtés donnés. » A-t-il raison ?",
@@ -710,16 +710,16 @@ export const trigonometrieBank: TutorBankItemV4[] = [
       "Méthode : on doit choisir le ratio qui correspond aux côtés connus et au côté cherché.\n\n" +
       "Calcul : cosinus utilise adjacent/hypoténuse, sinus utilise opposé/hypoténuse, tangente utilise opposé/adjacent.\n\n" +
       "Conclusion : l’élève a tort : on ne peut pas toujours utiliser le cosinus.",
-    tags: ["trigonometrie", "defi", "erreur", "qcm"],
+    tags: ["trigo_trigonometrie", "defi", "erreur", "qcm"],
   },
 
   {
     kind: "fixed",
-    id: "3e_trigo_defis_open_1",
+    id: "3e_trigo_defi_open_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "trigonometrie",
-    microId: "trigo_defis",
+    notionId: "trigo_trigonometrie",
+    microId: "trigo_defi",
     difficulty: 5,
     theme: "neutral",
     text: "Explique pourquoi la trigonométrie est utile quand Pythagore ne suffit pas.",
@@ -732,6 +732,6 @@ export const trigonometrieBank: TutorBankItemV4[] = [
       "Méthode : quand un angle intervient dans le problème, on utilise la trigonométrie.\n\n" +
       "Calcul : sinus, cosinus et tangente permettent de relier un angle aigu avec deux côtés du triangle rectangle.\n\n" +
       "Conclusion : la trigonométrie est utile pour calculer des longueurs ou des angles quand un angle est connu ou recherché.",
-    tags: ["trigonometrie", "defi", "open", "raisonnement"],
+    tags: ["trigo_trigonometrie", "defi", "open", "raisonnement"],
   },
 ];

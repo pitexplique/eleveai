@@ -50,7 +50,28 @@
   ],
   "notions": [
     {
-      "id": "nombres_rationnels",
+      "id": "algo_programmation",
+      "label": "Algorithmique et programmation",
+      "boId": "BO3I1",
+      "prerequis": [
+        "litteral_calcul"
+      ],
+      "levels": [
+        1,
+        2,
+        3
+      ],
+      "microTargets": [
+        "algo_condition_complexe",
+        "algo_variable_boucle",
+        "algo_programme_calcul",
+        "algo_corriger",
+        "algo_generaliser",
+        "algo_defi"
+      ]
+    },
+    {
+      "id": "fraction_rationnel",
       "label": "Nombres rationnels",
       "boId": "BO3N1",
       "prerequis": [],
@@ -60,19 +81,19 @@
         3
       ],
       "microTargets": [
-        "rationnel_reconnaitre",
-        "rationnel_ecritures",
-        "rationnel_comparer",
-        "rationnel_calculer",
-        "rationnel_defis"
+        "fraction_rationnel_reconnaitre",
+        "fraction_rationnel_ecriture",
+        "fraction_rationnel_comparer",
+        "fraction_rationnel_calculer",
+        "fraction_rationnel_defi"
       ]
     },
     {
-      "id": "puissances",
+      "id": "entier_puissance",
       "label": "Puissances",
       "boId": "BO3N1",
       "prerequis": [
-        "nombres_rationnels"
+        "fraction_rationnel"
       ],
       "levels": [
         1,
@@ -80,20 +101,20 @@
         3
       ],
       "microTargets": [
-        "puissance_comprendre",
-        "puissance_calculer",
-        "puissance_dix",
-        "puissance_ecriture_scientifique",
-        "puissance_calculs",
-        "puissance_defis"
+        "entier_puissance_comprendre",
+        "entier_puissance_calculer",
+        "entier_puissance_dix",
+        "entier_puissance_ecriture_scientifique",
+        "entier_puissance_calcul",
+        "entier_puissance_defi"
       ]
     },
     {
-      "id": "racine_carree",
+      "id": "entier_racine_carree",
       "label": "Racine carrée",
       "boId": "BO3N1",
       "prerequis": [
-        "nombres_rationnels"
+        "fraction_rationnel"
       ],
       "levels": [
         1,
@@ -101,19 +122,19 @@
         3
       ],
       "microTargets": [
-        "racine_comprendre",
-        "racine_carres_parfaits",
-        "racine_calculer",
-        "racine_encadrer",
-        "racine_defis"
+        "entier_racine_comprendre",
+        "entier_racine_carre_parfait",
+        "entier_racine_calculer",
+        "entier_racine_encadrer",
+        "entier_racine_defi"
       ]
     },
     {
-      "id": "arithmetique",
+      "id": "entier_arithmetique",
       "label": "Multiples et diviseurs",
       "boId": "BO3N2",
       "prerequis": [
-        "nombres_rationnels"
+        "fraction_rationnel"
       ],
       "levels": [
         1,
@@ -121,20 +142,20 @@
         3
       ],
       "microTargets": [
-        "arith_multiple_diviseur",
-        "arith_criteres",
-        "arith_nombre_premier",
-        "arith_decomposer",
-        "arith_pgcd_ppcm",
-        "arith_defis"
+        "entier_multiple_diviseur",
+        "entier_critere_divisibilite",
+        "entier_nombre_premier",
+        "entier_decomposer_facteur",
+        "entier_pgcd_ppcm",
+        "entier_arithmetique_defi"
       ]
     },
     {
-      "id": "proportionnalite",
+      "id": "prop_proportionnalite",
       "label": "Proportionnalité",
       "boId": "BO3P1",
       "prerequis": [
-        "nombres_rationnels"
+        "fraction_rationnel"
       ],
       "levels": [
         1,
@@ -148,11 +169,11 @@
         "prop_pourcentage",
         "prop_evolution",
         "prop_vitesse_debit",
-        "prop_defis"
+        "prop_defi"
       ]
     },
     {
-      "id": "calcul_litteral",
+      "id": "litteral_calcul",
       "label": "Calcul littéral",
       "boId": "BO3A1",
       "prerequis": [],
@@ -167,16 +188,16 @@
         "litteral_reduire",
         "litteral_developper",
         "litteral_factoriser",
-        "litteral_identites",
-        "litteral_defis"
+        "litteral_identite",
+        "litteral_defi"
       ]
     },
     {
-      "id": "equations",
+      "id": "equation_resolution",
       "label": "Équations",
       "boId": "BO3A1",
       "prerequis": [
-        "calcul_litteral"
+        "litteral_calcul"
       ],
       "levels": [
         1,
@@ -190,15 +211,15 @@
         "equation_produit_nul",
         "equation_verifier",
         "equation_probleme",
-        "equation_defis"
+        "equation_defi"
       ]
     },
     {
-      "id": "fonctions",
+      "id": "fonction_generalite",
       "label": "Fonctions",
       "boId": "BO3F1",
       "prerequis": [
-        "proportionnalite"
+        "prop_proportionnalite"
       ],
       "levels": [
         1,
@@ -212,11 +233,35 @@
         "fonction_tableau",
         "fonction_graphique",
         "fonction_affine_lineaire",
-        "fonction_defis"
+        "fonction_defi"
       ]
     },
     {
-      "id": "triangles",
+      "id": "affine_fonction",
+      "label": "Fonctions affines",
+      "boId": "BO3F1",
+      "prerequis": [
+        "fonction_generalite",
+        "equation_resolution"
+      ],
+      "levels": [
+        1,
+        2,
+        3
+      ],
+      "microTargets": [
+        "affine_reconnaitre",
+        "affine_coeff_directeur",
+        "affine_ordonnee_origine",
+        "affine_calcul_image",
+        "affine_expression",
+        "affine_graphique",
+        "affine_probleme",
+        "affine_defi"
+      ]
+    },
+    {
+      "id": "triangle_figure",
       "label": "Triangles",
       "boId": "BO3G1",
       "prerequis": [],
@@ -227,18 +272,18 @@
       ],
       "microTargets": [
         "triangle_reconnaitre",
-        "triangle_angles",
+        "triangle_angle",
         "triangle_inegalite",
         "triangle_construire",
-        "triangle_defis"
+        "triangle_defi"
       ]
     },
     {
-      "id": "pythagore",
+      "id": "pythagore_theoreme",
       "label": "Théorème de Pythagore",
       "boId": "BO3G1",
       "prerequis": [
-        "triangles"
+        "triangle_figure"
       ],
       "levels": [
         1,
@@ -251,16 +296,16 @@
         "pythagore_calculer_cote",
         "pythagore_reciproque",
         "pythagore_rediger",
-        "pythagore_defis"
+        "pythagore_defi"
       ]
     },
     {
-      "id": "thales",
+      "id": "thales_theoreme",
       "label": "Théorème de Thalès",
       "boId": "BO3G1",
       "prerequis": [
-        "triangles",
-        "proportionnalite"
+        "triangle_figure",
+        "prop_proportionnalite"
       ],
       "levels": [
         1,
@@ -269,20 +314,20 @@
       ],
       "microTargets": [
         "thales_configuration",
-        "thales_rapports",
+        "thales_rapport",
         "thales_calculer_longueur",
         "thales_reciproque",
         "thales_rediger",
-        "thales_defis"
+        "thales_defi"
       ]
     },
     {
-      "id": "trigonometrie",
+      "id": "trigo_trigonometrie",
       "label": "Trigonométrie",
       "boId": "BO3G1",
       "prerequis": [
-        "triangles",
-        "pythagore"
+        "triangle_figure",
+        "pythagore_theoreme"
       ],
       "levels": [
         1,
@@ -296,32 +341,32 @@
         "trigo_tangente",
         "trigo_calculer_longueur",
         "trigo_calculer_angle",
-        "trigo_choisir_ratio",
-        "trigo_defis"
+        "trigo_choisir_rapport",
+        "trigo_defi"
       ]
     },
     {
-      "id": "transformations",
+      "id": "sym_transformation",
       "label": "Transformations (dont homothéties)",
       "boId": "BO3G1",
       "prerequis": [
-        "triangles"
+        "triangle_figure"
       ],
       "levels": [
         1,
         2
       ],
       "microTargets": [
-        "transfo_symetrie_translation_rotation",
-        "transfo_homothetie_reconnaitre",
-        "transfo_homothetie_construire",
-        "transfo_homothetie_rapport",
-        "transfo_effets",
-        "transfo_defis"
+        "sym_symetrie_translation_rotation",
+        "sym_homothetie_reconnaitre",
+        "sym_homothetie_construire",
+        "sym_homothetie_rapport",
+        "sym_transformation_effet",
+        "sym_transformation_defi"
       ]
     },
     {
-      "id": "geometrie_espace",
+      "id": "volume_geometrie_espace",
       "label": "Géométrie dans l’espace",
       "boId": "BO3G2",
       "prerequis": [],
@@ -330,14 +375,14 @@
         2
       ],
       "microTargets": [
-        "espace_solides_reconnaitre",
-        "espace_sections",
-        "espace_representation",
-        "espace_defis"
+        "volume_solide_reconnaitre",
+        "volume_section",
+        "volume_representation",
+        "volume_geometrie_espace_defi"
       ]
     },
     {
-      "id": "perimetres",
+      "id": "aire_perimetre",
       "label": "Périmètres",
       "boId": "BO3M1",
       "prerequis": [],
@@ -346,15 +391,15 @@
         2
       ],
       "microTargets": [
-        "perimetre_comprendre",
-        "perimetre_polygone",
-        "perimetre_cercle",
-        "perimetre_figure_composee",
-        "perimetre_defis"
+        "aire_perimetre_comprendre",
+        "aire_perimetre_polygone",
+        "aire_perimetre_cercle",
+        "aire_perimetre_figure_composee",
+        "aire_perimetre_defi"
       ]
     },
     {
-      "id": "aires",
+      "id": "aire_surface",
       "label": "Aires",
       "boId": "BO3M1",
       "prerequis": [],
@@ -368,15 +413,15 @@
         "aire_disque",
         "aire_figure_composee",
         "aire_agrandissement_reduction",
-        "aire_defis"
+        "aire_defi"
       ]
     },
     {
-      "id": "volumes",
+      "id": "volume_solide",
       "label": "Volumes",
       "boId": "BO3M1",
       "prerequis": [
-        "aires"
+        "aire_surface"
       ],
       "levels": [
         1,
@@ -389,12 +434,12 @@
         "volume_cylindre",
         "volume_boule",
         "volume_agrandissement_reduction",
-        "volume_unites",
-        "volume_defis"
+        "volume_unite",
+        "volume_defi"
       ]
     },
     {
-      "id": "statistiques",
+      "id": "stat_statistique",
       "label": "Statistiques",
       "boId": "BO3D1",
       "prerequis": [],
@@ -410,11 +455,11 @@
         "stat_mediane",
         "stat_etendue",
         "stat_interpreter",
-        "stat_defis"
+        "stat_defi"
       ]
     },
     {
-      "id": "probabilites",
+      "id": "proba_experience",
       "label": "Probabilités",
       "boId": "BO3D2",
       "prerequis": [],
@@ -425,222 +470,223 @@
       ],
       "microTargets": [
         "proba_vocabulaire",
-        "proba_issues",
+        "proba_issue",
+        "proba_equiprobabilite",
         "proba_evenement",
         "proba_calculer",
         "proba_evenement_contraire",
-        "proba_deux_epreuves",
-        "proba_defis"
+        "proba_deux_epreuve",
+        "proba_defi"
       ]
     }
   ],
   "microSkills": [
     {
-      "id": "rationnel_reconnaitre",
+      "id": "fraction_rationnel_reconnaitre",
       "label": "Reconnaître un nombre rationnel",
-      "notionId": "nombres_rationnels",
+      "notionId": "fraction_rationnel",
       "prerequis": [],
       "boId": "BO3N1"
     },
     {
-      "id": "rationnel_ecritures",
+      "id": "fraction_rationnel_ecriture",
       "label": "Passer d’une écriture fractionnaire à une écriture décimale",
-      "notionId": "nombres_rationnels",
+      "notionId": "fraction_rationnel",
       "prerequis": [
-        "rationnel_reconnaitre"
+        "fraction_rationnel_reconnaitre"
       ],
       "boId": "BO3N1"
     },
     {
-      "id": "rationnel_comparer",
+      "id": "fraction_rationnel_comparer",
       "label": "Comparer des nombres rationnels",
-      "notionId": "nombres_rationnels",
+      "notionId": "fraction_rationnel",
       "prerequis": [
-        "rationnel_ecritures"
+        "fraction_rationnel_ecriture"
       ],
       "boId": "BO3N1"
     },
     {
-      "id": "rationnel_calculer",
+      "id": "fraction_rationnel_calculer",
       "label": "Calculer avec des nombres rationnels",
-      "notionId": "nombres_rationnels",
+      "notionId": "fraction_rationnel",
       "prerequis": [
-        "rationnel_comparer"
+        "fraction_rationnel_comparer"
       ],
       "boId": "BO3N1"
     },
     {
-      "id": "rationnel_defis",
+      "id": "fraction_rationnel_defi",
       "label": "Défis sur les nombres rationnels",
-      "notionId": "nombres_rationnels",
+      "notionId": "fraction_rationnel",
       "prerequis": [
-        "rationnel_calculer"
+        "fraction_rationnel_calculer"
       ],
       "boId": "BO3N1"
     },
     {
-      "id": "puissance_comprendre",
+      "id": "entier_puissance_comprendre",
       "label": "Comprendre l’écriture d’une puissance",
-      "notionId": "puissances",
+      "notionId": "entier_puissance",
       "prerequis": [],
       "boId": "BO3N1"
     },
     {
-      "id": "puissance_calculer",
+      "id": "entier_puissance_calculer",
       "label": "Calculer une puissance simple",
-      "notionId": "puissances",
+      "notionId": "entier_puissance",
       "prerequis": [
-        "puissance_comprendre"
+        "entier_puissance_comprendre"
       ],
       "boId": "BO3N1"
     },
     {
-      "id": "puissance_dix",
+      "id": "entier_puissance_dix",
       "label": "Utiliser les puissances de 10",
-      "notionId": "puissances",
+      "notionId": "entier_puissance",
       "prerequis": [
-        "puissance_calculer"
+        "entier_puissance_calculer"
       ],
       "boId": "BO3N1"
     },
     {
-      "id": "puissance_ecriture_scientifique",
+      "id": "entier_puissance_ecriture_scientifique",
       "label": "Utiliser l’écriture scientifique",
-      "notionId": "puissances",
+      "notionId": "entier_puissance",
       "prerequis": [
-        "puissance_dix"
+        "entier_puissance_dix"
       ],
       "boId": "BO3N1"
     },
     {
-      "id": "puissance_calculs",
+      "id": "entier_puissance_calcul",
       "label": "Effectuer des calculs avec les puissances",
-      "notionId": "puissances",
+      "notionId": "entier_puissance",
       "prerequis": [
-        "puissance_calculer",
-        "puissance_dix"
+        "entier_puissance_calculer",
+        "entier_puissance_dix"
       ],
       "boId": "BO3N1"
     },
     {
-      "id": "puissance_defis",
+      "id": "entier_puissance_defi",
       "label": "Défis sur les puissances",
-      "notionId": "puissances",
+      "notionId": "entier_puissance",
       "prerequis": [
-        "puissance_calculs",
-        "puissance_ecriture_scientifique"
+        "entier_puissance_calcul",
+        "entier_puissance_ecriture_scientifique"
       ],
       "boId": "BO3N1"
     },
     {
-      "id": "racine_comprendre",
+      "id": "entier_racine_comprendre",
       "label": "Comprendre la notion de racine carrée",
-      "notionId": "racine_carree",
+      "notionId": "entier_racine_carree",
       "prerequis": [
-        "puissance_calculer"
+        "entier_puissance_calculer"
       ],
       "boId": "BO3N1"
     },
     {
-      "id": "racine_carres_parfaits",
+      "id": "entier_racine_carre_parfait",
       "label": "Reconnaître les carrés parfaits",
-      "notionId": "racine_carree",
+      "notionId": "entier_racine_carree",
       "prerequis": [
-        "racine_comprendre"
+        "entier_racine_comprendre"
       ],
       "boId": "BO3N1"
     },
     {
-      "id": "racine_calculer",
+      "id": "entier_racine_calculer",
       "label": "Calculer une racine carrée simple",
-      "notionId": "racine_carree",
+      "notionId": "entier_racine_carree",
       "prerequis": [
-        "racine_carres_parfaits"
+        "entier_racine_carre_parfait"
       ],
       "boId": "BO3N1"
     },
     {
-      "id": "racine_encadrer",
+      "id": "entier_racine_encadrer",
       "label": "Encadrer une racine carrée",
-      "notionId": "racine_carree",
+      "notionId": "entier_racine_carree",
       "prerequis": [
-        "racine_carres_parfaits"
+        "entier_racine_carre_parfait"
       ],
       "boId": "BO3N1"
     },
     {
-      "id": "racine_defis",
+      "id": "entier_racine_defi",
       "label": "Défis sur les racines carrées",
-      "notionId": "racine_carree",
+      "notionId": "entier_racine_carree",
       "prerequis": [
-        "racine_calculer",
-        "racine_encadrer"
+        "entier_racine_calculer",
+        "entier_racine_encadrer"
       ],
       "boId": "BO3N1"
     },
     {
-      "id": "arith_multiple_diviseur",
+      "id": "entier_multiple_diviseur",
       "label": "Reconnaître un multiple et un diviseur",
-      "notionId": "arithmetique",
+      "notionId": "entier_arithmetique",
       "prerequis": [],
       "boId": "BO3N2"
     },
     {
-      "id": "arith_criteres",
+      "id": "entier_critere_divisibilite",
       "label": "Utiliser les critères de divisibilité",
-      "notionId": "arithmetique",
+      "notionId": "entier_arithmetique",
       "prerequis": [
-        "arith_multiple_diviseur"
+        "entier_multiple_diviseur"
       ],
       "boId": "BO3N2"
     },
     {
-      "id": "arith_nombre_premier",
+      "id": "entier_nombre_premier",
       "label": "Reconnaître un nombre premier",
-      "notionId": "arithmetique",
+      "notionId": "entier_arithmetique",
       "prerequis": [
-        "arith_criteres"
+        "entier_critere_divisibilite"
       ],
       "boId": "BO3N2"
     },
     {
-      "id": "arith_decomposer",
+      "id": "entier_decomposer_facteur",
       "label": "Décomposer un entier en produit de facteurs premiers",
-      "notionId": "arithmetique",
+      "notionId": "entier_arithmetique",
       "prerequis": [
-        "arith_nombre_premier"
+        "entier_nombre_premier"
       ],
       "boId": "BO3N2"
     },
     {
-      "id": "arith_pgcd_ppcm",
+      "id": "entier_pgcd_ppcm",
       "label": "Utiliser une décomposition pour résoudre un problème de divisibilité",
-      "notionId": "arithmetique",
+      "notionId": "entier_arithmetique",
       "prerequis": [
-        "arith_decomposer"
+        "entier_decomposer_facteur"
       ],
       "boId": "BO3N2"
     },
     {
-      "id": "arith_defis",
+      "id": "entier_arithmetique_defi",
       "label": "Défis sur l’arithmétique",
-      "notionId": "arithmetique",
+      "notionId": "entier_arithmetique",
       "prerequis": [
-        "arith_pgcd_ppcm"
+        "entier_pgcd_ppcm"
       ],
       "boId": "BO3N2"
     },
     {
       "id": "prop_reconnaitre",
       "label": "Reconnaître une situation de proportionnalité ou de non-proportionnalité",
-      "notionId": "proportionnalite",
+      "notionId": "prop_proportionnalite",
       "prerequis": [],
       "boId": "BO3P1"
     },
     {
       "id": "prop_table",
       "label": "Utiliser un tableau de proportionnalité",
-      "notionId": "proportionnalite",
+      "notionId": "prop_proportionnalite",
       "prerequis": [
         "prop_reconnaitre"
       ],
@@ -649,7 +695,7 @@
     {
       "id": "prop_quatrieme",
       "label": "Calculer une quatrième proportionnelle",
-      "notionId": "proportionnalite",
+      "notionId": "prop_proportionnalite",
       "prerequis": [
         "prop_table"
       ],
@@ -658,7 +704,7 @@
     {
       "id": "prop_pourcentage",
       "label": "Calculer et interpréter un pourcentage",
-      "notionId": "proportionnalite",
+      "notionId": "prop_proportionnalite",
       "prerequis": [
         "prop_quatrieme"
       ],
@@ -667,7 +713,7 @@
     {
       "id": "prop_evolution",
       "label": "Interpréter une augmentation ou une diminution en pourcentage",
-      "notionId": "proportionnalite",
+      "notionId": "prop_proportionnalite",
       "prerequis": [
         "prop_pourcentage"
       ],
@@ -676,16 +722,16 @@
     {
       "id": "prop_vitesse_debit",
       "label": "Résoudre un problème de vitesse, débit ou densité",
-      "notionId": "proportionnalite",
+      "notionId": "prop_proportionnalite",
       "prerequis": [
         "prop_quatrieme"
       ],
       "boId": "BO3P1"
     },
     {
-      "id": "prop_defis",
+      "id": "prop_defi",
       "label": "Défis sur la proportionnalité",
-      "notionId": "proportionnalite",
+      "notionId": "prop_proportionnalite",
       "prerequis": [
         "prop_evolution",
         "prop_vitesse_debit"
@@ -695,14 +741,14 @@
     {
       "id": "litteral_comprendre",
       "label": "Comprendre une expression littérale",
-      "notionId": "calcul_litteral",
+      "notionId": "litteral_calcul",
       "prerequis": [],
       "boId": "BO3A1"
     },
     {
       "id": "litteral_substituer",
       "label": "Calculer la valeur d’une expression littérale",
-      "notionId": "calcul_litteral",
+      "notionId": "litteral_calcul",
       "prerequis": [
         "litteral_comprendre"
       ],
@@ -711,7 +757,7 @@
     {
       "id": "litteral_reduire",
       "label": "Réduire une expression littérale",
-      "notionId": "calcul_litteral",
+      "notionId": "litteral_calcul",
       "prerequis": [
         "litteral_comprendre"
       ],
@@ -720,7 +766,7 @@
     {
       "id": "litteral_developper",
       "label": "Développer une expression",
-      "notionId": "calcul_litteral",
+      "notionId": "litteral_calcul",
       "prerequis": [
         "litteral_reduire"
       ],
@@ -729,16 +775,16 @@
     {
       "id": "litteral_factoriser",
       "label": "Factoriser une expression",
-      "notionId": "calcul_litteral",
+      "notionId": "litteral_calcul",
       "prerequis": [
         "litteral_developper"
       ],
       "boId": "BO3A1"
     },
     {
-      "id": "litteral_identites",
+      "id": "litteral_identite",
       "label": "Utiliser les identités remarquables",
-      "notionId": "calcul_litteral",
+      "notionId": "litteral_calcul",
       "prerequis": [
         "litteral_developper",
         "litteral_factoriser"
@@ -746,25 +792,25 @@
       "boId": "BO3A1"
     },
     {
-      "id": "litteral_defis",
+      "id": "litteral_defi",
       "label": "Défis sur le calcul littéral",
-      "notionId": "calcul_litteral",
+      "notionId": "litteral_calcul",
       "prerequis": [
-        "litteral_identites"
+        "litteral_identite"
       ],
       "boId": "BO3A1"
     },
     {
       "id": "equation_reconnaitre",
       "label": "Reconnaître une équation",
-      "notionId": "equations",
+      "notionId": "equation_resolution",
       "prerequis": [],
       "boId": "BO3A1"
     },
     {
       "id": "equation_resoudre_simple",
       "label": "Résoudre une équation du premier degré simple",
-      "notionId": "equations",
+      "notionId": "equation_resolution",
       "prerequis": [
         "equation_reconnaitre"
       ],
@@ -773,7 +819,7 @@
     {
       "id": "equation_resoudre_developper",
       "label": "Résoudre une équation avec développement ou réduction",
-      "notionId": "equations",
+      "notionId": "equation_resolution",
       "prerequis": [
         "equation_resoudre_simple",
         "litteral_developper"
@@ -783,7 +829,7 @@
     {
       "id": "equation_produit_nul",
       "label": "Résoudre une équation produit nul",
-      "notionId": "equations",
+      "notionId": "equation_resolution",
       "prerequis": [
         "litteral_factoriser"
       ],
@@ -792,7 +838,7 @@
     {
       "id": "equation_verifier",
       "label": "Vérifier une solution d’équation",
-      "notionId": "equations",
+      "notionId": "equation_resolution",
       "prerequis": [
         "equation_resoudre_simple",
         "litteral_substituer"
@@ -802,7 +848,7 @@
     {
       "id": "equation_probleme",
       "label": "Résoudre un problème à l’aide d’une équation",
-      "notionId": "equations",
+      "notionId": "equation_resolution",
       "prerequis": [
         "equation_resoudre_developper",
         "equation_verifier"
@@ -810,9 +856,9 @@
       "boId": "BO3A1"
     },
     {
-      "id": "equation_defis",
+      "id": "equation_defi",
       "label": "Défis sur les équations",
-      "notionId": "equations",
+      "notionId": "equation_resolution",
       "prerequis": [
         "equation_probleme",
         "equation_produit_nul"
@@ -822,14 +868,14 @@
     {
       "id": "fonction_vocabulaire",
       "label": "Comprendre le vocabulaire des fonctions",
-      "notionId": "fonctions",
+      "notionId": "fonction_generalite",
       "prerequis": [],
       "boId": "BO3F1"
     },
     {
       "id": "fonction_image",
       "label": "Calculer ou lire une image",
-      "notionId": "fonctions",
+      "notionId": "fonction_generalite",
       "prerequis": [
         "fonction_vocabulaire"
       ],
@@ -838,7 +884,7 @@
     {
       "id": "fonction_antecedent",
       "label": "Déterminer ou lire un antécédent",
-      "notionId": "fonctions",
+      "notionId": "fonction_generalite",
       "prerequis": [
         "fonction_image"
       ],
@@ -847,7 +893,7 @@
     {
       "id": "fonction_tableau",
       "label": "Utiliser un tableau de valeurs",
-      "notionId": "fonctions",
+      "notionId": "fonction_generalite",
       "prerequis": [
         "fonction_image"
       ],
@@ -856,7 +902,7 @@
     {
       "id": "fonction_graphique",
       "label": "Lire et interpréter la représentation graphique d’une fonction",
-      "notionId": "fonctions",
+      "notionId": "fonction_generalite",
       "prerequis": [
         "fonction_image",
         "fonction_antecedent"
@@ -866,7 +912,7 @@
     {
       "id": "fonction_affine_lineaire",
       "label": "Reconnaître et utiliser une fonction linéaire ou affine",
-      "notionId": "fonctions",
+      "notionId": "fonction_generalite",
       "prerequis": [
         "fonction_graphique",
         "prop_reconnaitre"
@@ -874,25 +920,100 @@
       "boId": "BO3F1"
     },
     {
-      "id": "fonction_defis",
+      "id": "fonction_defi",
       "label": "Défis sur les fonctions",
-      "notionId": "fonctions",
+      "notionId": "fonction_generalite",
       "prerequis": [
         "fonction_affine_lineaire"
       ],
       "boId": "BO3F1"
     },
     {
+      "id": "affine_reconnaitre",
+      "label": "Reconnaître une fonction affine ou linéaire",
+      "notionId": "affine_fonction",
+      "prerequis": [
+        "fonction_affine_lineaire"
+      ],
+      "boId": "BO3F1"
+    },
+    {
+      "id": "affine_coeff_directeur",
+      "label": "Comprendre et déterminer le coefficient directeur",
+      "notionId": "affine_fonction",
+      "prerequis": [
+        "affine_reconnaitre"
+      ],
+      "boId": "BO3F1"
+    },
+    {
+      "id": "affine_ordonnee_origine",
+      "label": "Comprendre et déterminer l’ordonnée à l’origine",
+      "notionId": "affine_fonction",
+      "prerequis": [
+        "affine_reconnaitre"
+      ],
+      "boId": "BO3F1"
+    },
+    {
+      "id": "affine_calcul_image",
+      "label": "Calculer une image avec une fonction affine",
+      "notionId": "affine_fonction",
+      "prerequis": [
+        "affine_coeff_directeur",
+        "affine_ordonnee_origine"
+      ],
+      "boId": "BO3F1"
+    },
+    {
+      "id": "affine_expression",
+      "label": "Déterminer l’expression d’une fonction affine",
+      "notionId": "affine_fonction",
+      "prerequis": [
+        "affine_coeff_directeur",
+        "affine_ordonnee_origine"
+      ],
+      "boId": "BO3F1"
+    },
+    {
+      "id": "affine_graphique",
+      "label": "Lire et interpréter graphiquement une fonction affine",
+      "notionId": "affine_fonction",
+      "prerequis": [
+        "affine_expression"
+      ],
+      "boId": "BO3F1"
+    },
+    {
+      "id": "affine_probleme",
+      "label": "Résoudre un problème avec une fonction affine",
+      "notionId": "affine_fonction",
+      "prerequis": [
+        "affine_calcul_image",
+        "affine_graphique"
+      ],
+      "boId": "BO3F1"
+    },
+    {
+      "id": "affine_defi",
+      "label": "Défis sur les fonctions affines",
+      "notionId": "affine_fonction",
+      "prerequis": [
+        "affine_probleme"
+      ],
+      "boId": "BO3F1"
+    },
+    {
       "id": "triangle_reconnaitre",
       "label": "Reconnaître les triangles usuels",
-      "notionId": "triangles",
+      "notionId": "triangle_figure",
       "prerequis": [],
       "boId": "BO3G1"
     },
     {
-      "id": "triangle_angles",
+      "id": "triangle_angle",
       "label": "Utiliser la somme des angles d’un triangle",
-      "notionId": "triangles",
+      "notionId": "triangle_figure",
       "prerequis": [
         "triangle_reconnaitre"
       ],
@@ -901,7 +1022,7 @@
     {
       "id": "triangle_inegalite",
       "label": "Utiliser l’inégalité triangulaire",
-      "notionId": "triangles",
+      "notionId": "triangle_figure",
       "prerequis": [
         "triangle_reconnaitre"
       ],
@@ -910,17 +1031,17 @@
     {
       "id": "triangle_construire",
       "label": "Construire ou analyser un triangle à partir de données",
-      "notionId": "triangles",
+      "notionId": "triangle_figure",
       "prerequis": [
-        "triangle_angles",
+        "triangle_angle",
         "triangle_inegalite"
       ],
       "boId": "BO3G1"
     },
     {
-      "id": "triangle_defis",
+      "id": "triangle_defi",
       "label": "Défis sur les triangles",
-      "notionId": "triangles",
+      "notionId": "triangle_figure",
       "prerequis": [
         "triangle_construire"
       ],
@@ -929,7 +1050,7 @@
     {
       "id": "pythagore_reconnaitre",
       "label": "Reconnaître un triangle rectangle et son hypoténuse",
-      "notionId": "pythagore",
+      "notionId": "pythagore_theoreme",
       "prerequis": [
         "triangle_reconnaitre"
       ],
@@ -938,27 +1059,27 @@
     {
       "id": "pythagore_calculer_hypotenuse",
       "label": "Calculer l’hypoténuse avec le théorème de Pythagore",
-      "notionId": "pythagore",
+      "notionId": "pythagore_theoreme",
       "prerequis": [
         "pythagore_reconnaitre",
-        "racine_calculer"
+        "entier_racine_calculer"
       ],
       "boId": "BO3G1"
     },
     {
       "id": "pythagore_calculer_cote",
       "label": "Calculer un côté de l’angle droit",
-      "notionId": "pythagore",
+      "notionId": "pythagore_theoreme",
       "prerequis": [
         "pythagore_reconnaitre",
-        "racine_calculer"
+        "entier_racine_calculer"
       ],
       "boId": "BO3G1"
     },
     {
       "id": "pythagore_reciproque",
       "label": "Utiliser la réciproque du théorème de Pythagore",
-      "notionId": "pythagore",
+      "notionId": "pythagore_theoreme",
       "prerequis": [
         "pythagore_reconnaitre"
       ],
@@ -967,7 +1088,7 @@
     {
       "id": "pythagore_rediger",
       "label": "Rédiger une justification avec Pythagore",
-      "notionId": "pythagore",
+      "notionId": "pythagore_theoreme",
       "prerequis": [
         "pythagore_calculer_hypotenuse",
         "pythagore_calculer_cote",
@@ -976,9 +1097,9 @@
       "boId": "BO3G1"
     },
     {
-      "id": "pythagore_defis",
+      "id": "pythagore_defi",
       "label": "Défis sur Pythagore",
-      "notionId": "pythagore",
+      "notionId": "pythagore_theoreme",
       "prerequis": [
         "pythagore_rediger"
       ],
@@ -987,16 +1108,16 @@
     {
       "id": "thales_configuration",
       "label": "Reconnaître une configuration de Thalès",
-      "notionId": "thales",
+      "notionId": "thales_theoreme",
       "prerequis": [
         "triangle_reconnaitre"
       ],
       "boId": "BO3G1"
     },
     {
-      "id": "thales_rapports",
+      "id": "thales_rapport",
       "label": "Écrire les rapports de longueurs",
-      "notionId": "thales",
+      "notionId": "thales_theoreme",
       "prerequis": [
         "thales_configuration",
         "prop_quatrieme"
@@ -1006,25 +1127,25 @@
     {
       "id": "thales_calculer_longueur",
       "label": "Calculer une longueur avec le théorème de Thalès",
-      "notionId": "thales",
+      "notionId": "thales_theoreme",
       "prerequis": [
-        "thales_rapports"
+        "thales_rapport"
       ],
       "boId": "BO3G1"
     },
     {
       "id": "thales_reciproque",
       "label": "Utiliser la réciproque du théorème de Thalès",
-      "notionId": "thales",
+      "notionId": "thales_theoreme",
       "prerequis": [
-        "thales_rapports"
+        "thales_rapport"
       ],
       "boId": "BO3G1"
     },
     {
       "id": "thales_rediger",
       "label": "Rédiger une justification avec Thalès",
-      "notionId": "thales",
+      "notionId": "thales_theoreme",
       "prerequis": [
         "thales_calculer_longueur",
         "thales_reciproque"
@@ -1032,9 +1153,9 @@
       "boId": "BO3G1"
     },
     {
-      "id": "thales_defis",
+      "id": "thales_defi",
       "label": "Défis sur Thalès",
-      "notionId": "thales",
+      "notionId": "thales_theoreme",
       "prerequis": [
         "thales_rediger"
       ],
@@ -1043,7 +1164,7 @@
     {
       "id": "trigo_triangle_rectangle",
       "label": "Identifier les côtés dans un triangle rectangle",
-      "notionId": "trigonometrie",
+      "notionId": "trigo_trigonometrie",
       "prerequis": [
         "pythagore_reconnaitre"
       ],
@@ -1052,7 +1173,7 @@
     {
       "id": "trigo_cosinus",
       "label": "Utiliser le cosinus dans un triangle rectangle",
-      "notionId": "trigonometrie",
+      "notionId": "trigo_trigonometrie",
       "prerequis": [
         "trigo_triangle_rectangle"
       ],
@@ -1061,7 +1182,7 @@
     {
       "id": "trigo_sinus",
       "label": "Utiliser le sinus dans un triangle rectangle",
-      "notionId": "trigonometrie",
+      "notionId": "trigo_trigonometrie",
       "prerequis": [
         "trigo_triangle_rectangle"
       ],
@@ -1070,7 +1191,7 @@
     {
       "id": "trigo_tangente",
       "label": "Utiliser la tangente dans un triangle rectangle",
-      "notionId": "trigonometrie",
+      "notionId": "trigo_trigonometrie",
       "prerequis": [
         "trigo_triangle_rectangle"
       ],
@@ -1079,7 +1200,7 @@
     {
       "id": "trigo_calculer_longueur",
       "label": "Calculer une longueur avec la trigonométrie",
-      "notionId": "trigonometrie",
+      "notionId": "trigo_trigonometrie",
       "prerequis": [
         "trigo_cosinus",
         "trigo_sinus",
@@ -1090,7 +1211,7 @@
     {
       "id": "trigo_calculer_angle",
       "label": "Calculer un angle avec la trigonométrie",
-      "notionId": "trigonometrie",
+      "notionId": "trigo_trigonometrie",
       "prerequis": [
         "trigo_cosinus",
         "trigo_sinus",
@@ -1099,9 +1220,9 @@
       "boId": "BO3G1"
     },
     {
-      "id": "trigo_choisir_ratio",
+      "id": "trigo_choisir_rapport",
       "label": "Choisir entre sinus, cosinus et tangente",
-      "notionId": "trigonometrie",
+      "notionId": "trigo_trigonometrie",
       "prerequis": [
         "trigo_calculer_longueur",
         "trigo_calculer_angle"
@@ -1109,158 +1230,158 @@
       "boId": "BO3G1"
     },
     {
-      "id": "trigo_defis",
+      "id": "trigo_defi",
       "label": "Défis sur la trigonométrie",
-      "notionId": "trigonometrie",
+      "notionId": "trigo_trigonometrie",
       "prerequis": [
-        "trigo_choisir_ratio"
+        "trigo_choisir_rapport"
       ],
       "boId": "BO3G1"
     },
     {
-      "id": "transfo_symetrie_translation_rotation",
+      "id": "sym_symetrie_translation_rotation",
       "label": "Réactiver symétrie, translation et rotation",
-      "notionId": "transformations",
+      "notionId": "sym_transformation",
       "prerequis": [
         "triangle_reconnaitre"
       ],
       "boId": "BO3G1"
     },
     {
-      "id": "transfo_homothetie_reconnaitre",
+      "id": "sym_homothetie_reconnaitre",
       "label": "Reconnaître une homothétie",
-      "notionId": "transformations",
+      "notionId": "sym_transformation",
       "prerequis": [
-        "transfo_symetrie_translation_rotation"
+        "sym_symetrie_translation_rotation"
       ],
       "boId": "BO3G1"
     },
     {
-      "id": "transfo_homothetie_construire",
+      "id": "sym_homothetie_construire",
       "label": "Construire l’image d’une figure par homothétie",
-      "notionId": "transformations",
+      "notionId": "sym_transformation",
       "prerequis": [
-        "transfo_homothetie_reconnaitre"
+        "sym_homothetie_reconnaitre"
       ],
       "boId": "BO3G1"
     },
     {
-      "id": "transfo_homothetie_rapport",
+      "id": "sym_homothetie_rapport",
       "label": "Utiliser le rapport d’une homothétie",
-      "notionId": "transformations",
+      "notionId": "sym_transformation",
       "prerequis": [
-        "transfo_homothetie_construire"
+        "sym_homothetie_construire"
       ],
       "boId": "BO3G1"
     },
     {
-      "id": "transfo_effets",
+      "id": "sym_transformation_effet",
       "label": "Utiliser les effets d’une transformation sur longueurs, angles et aires",
-      "notionId": "transformations",
+      "notionId": "sym_transformation",
       "prerequis": [
-        "transfo_homothetie_rapport"
+        "sym_homothetie_rapport"
       ],
       "boId": "BO3G1"
     },
     {
-      "id": "transfo_defis",
+      "id": "sym_transformation_defi",
       "label": "Défis sur les transformations",
-      "notionId": "transformations",
+      "notionId": "sym_transformation",
       "prerequis": [
-        "transfo_effets"
+        "sym_transformation_effet"
       ],
       "boId": "BO3G1"
     },
     {
-      "id": "espace_solides_reconnaitre",
+      "id": "volume_solide_reconnaitre",
       "label": "Reconnaître les solides usuels",
-      "notionId": "geometrie_espace",
+      "notionId": "volume_geometrie_espace",
       "prerequis": [],
       "boId": "BO3G2"
     },
     {
-      "id": "espace_sections",
+      "id": "volume_section",
       "label": "Comprendre une section de solide",
-      "notionId": "geometrie_espace",
+      "notionId": "volume_geometrie_espace",
       "prerequis": [
-        "espace_solides_reconnaitre"
+        "volume_solide_reconnaitre"
       ],
       "boId": "BO3G2"
     },
     {
-      "id": "espace_representation",
+      "id": "volume_representation",
       "label": "Interpréter une représentation en perspective",
-      "notionId": "geometrie_espace",
+      "notionId": "volume_geometrie_espace",
       "prerequis": [
-        "espace_solides_reconnaitre"
+        "volume_solide_reconnaitre"
       ],
       "boId": "BO3G2"
     },
     {
-      "id": "espace_defis",
+      "id": "volume_geometrie_espace_defi",
       "label": "Défis sur la géométrie dans l’espace",
-      "notionId": "geometrie_espace",
+      "notionId": "volume_geometrie_espace",
       "prerequis": [
-        "espace_sections",
-        "espace_representation"
+        "volume_section",
+        "volume_representation"
       ],
       "boId": "BO3G2"
     },
     {
-      "id": "perimetre_comprendre",
+      "id": "aire_perimetre_comprendre",
       "label": "Comprendre ce qu’est un périmètre",
-      "notionId": "perimetres",
+      "notionId": "aire_perimetre",
       "prerequis": [],
       "boId": "BO3M1"
     },
     {
-      "id": "perimetre_polygone",
+      "id": "aire_perimetre_polygone",
       "label": "Calculer le périmètre d’un polygone",
-      "notionId": "perimetres",
+      "notionId": "aire_perimetre",
       "prerequis": [
-        "perimetre_comprendre"
+        "aire_perimetre_comprendre"
       ],
       "boId": "BO3M1"
     },
     {
-      "id": "perimetre_cercle",
+      "id": "aire_perimetre_cercle",
       "label": "Calculer la longueur d’un cercle",
-      "notionId": "perimetres",
+      "notionId": "aire_perimetre",
       "prerequis": [
-        "perimetre_comprendre"
+        "aire_perimetre_comprendre"
       ],
       "boId": "BO3M1"
     },
     {
-      "id": "perimetre_figure_composee",
+      "id": "aire_perimetre_figure_composee",
       "label": "Calculer le périmètre d’une figure composée",
-      "notionId": "perimetres",
+      "notionId": "aire_perimetre",
       "prerequis": [
-        "perimetre_polygone",
-        "perimetre_cercle"
+        "aire_perimetre_polygone",
+        "aire_perimetre_cercle"
       ],
       "boId": "BO3M1"
     },
     {
-      "id": "perimetre_defis",
+      "id": "aire_perimetre_defi",
       "label": "Défis sur les périmètres",
-      "notionId": "perimetres",
+      "notionId": "aire_perimetre",
       "prerequis": [
-        "perimetre_figure_composee"
+        "aire_perimetre_figure_composee"
       ],
       "boId": "BO3M1"
     },
     {
       "id": "aire_comprendre",
       "label": "Comprendre ce qu’est une aire",
-      "notionId": "aires",
+      "notionId": "aire_surface",
       "prerequis": [],
       "boId": "BO3M1"
     },
     {
       "id": "aire_triangle",
       "label": "Calculer l’aire d’un triangle",
-      "notionId": "aires",
+      "notionId": "aire_surface",
       "prerequis": [
         "aire_comprendre",
         "triangle_reconnaitre"
@@ -1270,7 +1391,7 @@
     {
       "id": "aire_disque",
       "label": "Calculer l’aire d’un disque",
-      "notionId": "aires",
+      "notionId": "aire_surface",
       "prerequis": [
         "aire_comprendre"
       ],
@@ -1279,7 +1400,7 @@
     {
       "id": "aire_figure_composee",
       "label": "Calculer l’aire d’une figure composée",
-      "notionId": "aires",
+      "notionId": "aire_surface",
       "prerequis": [
         "aire_triangle",
         "aire_disque"
@@ -1289,16 +1410,16 @@
     {
       "id": "aire_agrandissement_reduction",
       "label": "Comprendre l’effet d’un agrandissement ou d’une réduction sur les aires",
-      "notionId": "aires",
+      "notionId": "aire_surface",
       "prerequis": [
-        "transfo_homothetie_rapport"
+        "sym_homothetie_rapport"
       ],
       "boId": "BO3M1"
     },
     {
-      "id": "aire_defis",
+      "id": "aire_defi",
       "label": "Défis sur les aires",
-      "notionId": "aires",
+      "notionId": "aire_surface",
       "prerequis": [
         "aire_figure_composee",
         "aire_agrandissement_reduction"
@@ -1308,14 +1429,14 @@
     {
       "id": "volume_comprendre",
       "label": "Comprendre ce qu’est un volume",
-      "notionId": "volumes",
+      "notionId": "volume_solide",
       "prerequis": [],
       "boId": "BO3M1"
     },
     {
       "id": "volume_pave",
       "label": "Calculer le volume d’un pavé droit",
-      "notionId": "volumes",
+      "notionId": "volume_solide",
       "prerequis": [
         "volume_comprendre"
       ],
@@ -1324,7 +1445,7 @@
     {
       "id": "volume_prisme",
       "label": "Calculer le volume d’un prisme droit",
-      "notionId": "volumes",
+      "notionId": "volume_solide",
       "prerequis": [
         "volume_comprendre",
         "aire_triangle"
@@ -1334,7 +1455,7 @@
     {
       "id": "volume_cylindre",
       "label": "Calculer le volume d’un cylindre",
-      "notionId": "volumes",
+      "notionId": "volume_solide",
       "prerequis": [
         "volume_comprendre",
         "aire_disque"
@@ -1344,7 +1465,7 @@
     {
       "id": "volume_boule",
       "label": "Calculer le volume d’une boule",
-      "notionId": "volumes",
+      "notionId": "volume_solide",
       "prerequis": [
         "volume_cylindre"
       ],
@@ -1353,45 +1474,45 @@
     {
       "id": "volume_agrandissement_reduction",
       "label": "Comprendre l’effet d’un agrandissement ou d’une réduction sur les volumes",
-      "notionId": "volumes",
+      "notionId": "volume_solide",
       "prerequis": [
-        "transfo_homothetie_rapport"
+        "sym_homothetie_rapport"
       ],
       "boId": "BO3M1"
     },
     {
-      "id": "volume_unites",
+      "id": "volume_unite",
       "label": "Convertir et utiliser les unités de volume",
-      "notionId": "volumes",
+      "notionId": "volume_solide",
       "prerequis": [
         "volume_comprendre"
       ],
       "boId": "BO3M1"
     },
     {
-      "id": "volume_defis",
+      "id": "volume_defi",
       "label": "Défis sur les volumes",
-      "notionId": "volumes",
+      "notionId": "volume_solide",
       "prerequis": [
         "volume_pave",
         "volume_prisme",
         "volume_cylindre",
         "volume_boule",
-        "volume_unites"
+        "volume_unite"
       ],
       "boId": "BO3M1"
     },
     {
       "id": "stat_lire_tableau",
       "label": "Lire un tableau statistique",
-      "notionId": "statistiques",
+      "notionId": "stat_statistique",
       "prerequis": [],
       "boId": "BO3D1"
     },
     {
       "id": "stat_lire_graphique",
       "label": "Lire un graphique statistique",
-      "notionId": "statistiques",
+      "notionId": "stat_statistique",
       "prerequis": [
         "stat_lire_tableau"
       ],
@@ -1400,7 +1521,7 @@
     {
       "id": "stat_effectif_frequence",
       "label": "Déterminer un effectif et une fréquence",
-      "notionId": "statistiques",
+      "notionId": "stat_statistique",
       "prerequis": [
         "stat_lire_tableau"
       ],
@@ -1409,7 +1530,7 @@
     {
       "id": "stat_moyenne",
       "label": "Calculer une moyenne",
-      "notionId": "statistiques",
+      "notionId": "stat_statistique",
       "prerequis": [
         "stat_effectif_frequence"
       ],
@@ -1418,7 +1539,7 @@
     {
       "id": "stat_mediane",
       "label": "Déterminer une médiane",
-      "notionId": "statistiques",
+      "notionId": "stat_statistique",
       "prerequis": [
         "stat_effectif_frequence"
       ],
@@ -1427,7 +1548,7 @@
     {
       "id": "stat_etendue",
       "label": "Calculer l’étendue d’une série statistique",
-      "notionId": "statistiques",
+      "notionId": "stat_statistique",
       "prerequis": [
         "stat_lire_tableau"
       ],
@@ -1436,7 +1557,7 @@
     {
       "id": "stat_interpreter",
       "label": "Interpréter des indicateurs statistiques",
-      "notionId": "statistiques",
+      "notionId": "stat_statistique",
       "prerequis": [
         "stat_moyenne",
         "stat_mediane",
@@ -1445,9 +1566,9 @@
       "boId": "BO3D1"
     },
     {
-      "id": "stat_defis",
+      "id": "stat_defi",
       "label": "Défis sur les statistiques",
-      "notionId": "statistiques",
+      "notionId": "stat_statistique",
       "prerequis": [
         "stat_interpreter"
       ],
@@ -1456,65 +1577,137 @@
     {
       "id": "proba_vocabulaire",
       "label": "Comprendre le vocabulaire des probabilités",
-      "notionId": "probabilites",
+      "notionId": "proba_experience",
       "prerequis": [],
       "boId": "BO3D2"
     },
     {
-      "id": "proba_issues",
+      "id": "proba_issue",
       "label": "Déterminer les issues d’une expérience aléatoire",
-      "notionId": "probabilites",
+      "notionId": "proba_experience",
       "prerequis": [
         "proba_vocabulaire"
       ],
       "boId": "BO3D2"
     },
     {
+      "id": "proba_equiprobabilite",
+      "label": "Reconnaître une situation d’équiprobabilité",
+      "notionId": "proba_experience",
+      "prerequis": [
+        "proba_issue"
+      ],
+      "boId": "BO3D2"
+    },
+    {
       "id": "proba_evenement",
       "label": "Décrire un événement",
-      "notionId": "probabilites",
+      "notionId": "proba_experience",
       "prerequis": [
-        "proba_issues"
+        "proba_issue"
       ],
       "boId": "BO3D2"
     },
     {
       "id": "proba_calculer",
       "label": "Calculer une probabilité simple",
-      "notionId": "probabilites",
+      "notionId": "proba_experience",
       "prerequis": [
         "proba_evenement",
-        "rationnel_comparer"
+        "fraction_rationnel_comparer"
       ],
       "boId": "BO3D2"
     },
     {
       "id": "proba_evenement_contraire",
       "label": "Utiliser l’événement contraire",
-      "notionId": "probabilites",
+      "notionId": "proba_experience",
       "prerequis": [
         "proba_calculer"
       ],
       "boId": "BO3D2"
     },
     {
-      "id": "proba_deux_epreuves",
+      "id": "proba_deux_epreuve",
       "label": "Étudier une expérience à deux épreuves simples",
-      "notionId": "probabilites",
+      "notionId": "proba_experience",
       "prerequis": [
         "proba_calculer"
       ],
       "boId": "BO3D2"
     },
     {
-      "id": "proba_defis",
+      "id": "proba_defi",
       "label": "Défis sur les probabilités",
-      "notionId": "probabilites",
+      "notionId": "proba_experience",
       "prerequis": [
         "proba_evenement_contraire",
-        "proba_deux_epreuves"
+        "proba_deux_epreuve"
       ],
       "boId": "BO3D2"
+    },
+    {
+      "id": "algo_condition_complexe",
+      "label": "Utiliser des conditions complexes",
+      "notionId": "algo_programmation",
+      "prerequis": [
+        "equation_verifier",
+        "fonction_image"
+      ],
+      "boId": "BO3I1"
+    },
+    {
+      "id": "algo_variable_boucle",
+      "label": "Utiliser des variables et des boucles",
+      "notionId": "algo_programmation",
+      "prerequis": [
+        "algo_condition_complexe",
+        "litteral_substituer"
+      ],
+      "boId": "BO3I1"
+    },
+    {
+      "id": "algo_programme_calcul",
+      "label": "Créer ou analyser un programme de calcul",
+      "notionId": "algo_programmation",
+      "prerequis": [
+        "algo_variable_boucle",
+        "litteral_reduire"
+      ],
+      "boId": "BO3I1"
+    },
+    {
+      "id": "algo_corriger",
+      "label": "Corriger un programme",
+      "notionId": "algo_programmation",
+      "prerequis": [
+        "algo_programme_calcul"
+      ],
+      "boId": "BO3I1"
+    },
+    {
+      "id": "algo_generaliser",
+      "label": "Généraliser une situation avec des variables",
+      "notionId": "algo_programmation",
+      "prerequis": [
+        "algo_programme_calcul",
+        "equation_probleme",
+        "fonction_affine_lineaire"
+      ],
+      "boId": "BO3I1"
+    },
+    {
+      "id": "algo_defi",
+      "label": "Défis d’algorithmique et de programmation",
+      "notionId": "algo_programmation",
+      "prerequis": [
+        "algo_condition_complexe",
+        "algo_variable_boucle",
+        "algo_programme_calcul",
+        "algo_corriger",
+        "algo_generaliser"
+      ],
+      "boId": "BO3I1"
     }
   ],
   "microGraph": []

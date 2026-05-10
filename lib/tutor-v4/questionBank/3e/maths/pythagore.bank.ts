@@ -131,10 +131,10 @@ export const pythagore3eBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "fixed",
-    id: "pythagore_reconnaitre_fixed_1",
+    id: "pythagore_theoreme_reconnaitre_fixed_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "pythagore",
+    notionId: "pythagore_theoreme",
     microId: "pythagore_reconnaitre",
     difficulty: 1,
     theme: "neutral",
@@ -155,14 +155,14 @@ export const pythagore3eBank: TutorBankItemV4[] = [
       `Calcul : on compare ou on calcule les carrés des longueurs indiquées. ` +
       ("Le théorème de Pythagore s’utilise directement seulement dans un triangle rectangle. Il permet de relier les longueurs des deux côtés de l’angle droit et de l’hypoténuse.") +
       `\n\nConclusion : on peut alors donner la longueur cherchée ou conclure sur le triangle.`,
-    tags: ["pythagore", "reconnaitre", "qcm"],
+    tags: ["pythagore_theoreme", "reconnaitre", "qcm"],
   },
   {
     kind: "fixed",
-    id: "pythagore_reconnaitre_fixed_2",
+    id: "pythagore_theoreme_reconnaitre_fixed_2",
     niveau: "3e",
     matiere: "maths",
-    notionId: "pythagore",
+    notionId: "pythagore_theoreme",
     microId: "pythagore_reconnaitre",
     difficulty: 1,
     theme: "neutral",
@@ -183,19 +183,19 @@ export const pythagore3eBank: TutorBankItemV4[] = [
       `Calcul : on compare ou on calcule les carrés des longueurs indiquées. ` +
       ("Dans un triangle rectangle, l’hypoténuse est le côté opposé à l’angle droit. C’est aussi le plus long côté du triangle rectangle.") +
       `\n\nConclusion : on peut alors donner la longueur cherchée ou conclure sur le triangle.`,
-    tags: ["pythagore", "hypotenuse", "qcm"],
+    tags: ["pythagore_theoreme", "hypotenuse", "qcm"],
   },
   {
     kind: "template",
-    id: "pythagore_reconnaitre_tpl_1",
+    id: "pythagore_theoreme_reconnaitre_tpl_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "pythagore",
+    notionId: "pythagore_theoreme",
     microId: "pythagore_reconnaitre",
     difficulty: 2,
     theme: "neutral",
     hint: "L’hypoténuse est toujours le côté opposé à l’angle droit.",
-    tags: ["pythagore", "hypotenuse", "canvas", "template"],
+    tags: ["pythagore_theoreme", "hypotenuse", "canvas", "template"],
     generate: () => {
       const labels = randomChoice(triangleNames);
       const hyp = hypotenuseSide();
@@ -224,10 +224,10 @@ export const pythagore3eBank: TutorBankItemV4[] = [
   },
   {
     kind: "fixed",
-    id: "pythagore_reconnaitre_open_1",
+    id: "pythagore_theoreme_reconnaitre_open_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "pythagore",
+    notionId: "pythagore_theoreme",
     microId: "pythagore_reconnaitre",
     difficulty: 2,
     theme: "neutral",
@@ -242,7 +242,7 @@ export const pythagore3eBank: TutorBankItemV4[] = [
       `Calcul : on compare ou on calcule les carrés des longueurs indiquées. ` +
       ("On ne peut pas utiliser directement le théorème de Pythagore dans n’importe quel triangle, car ce théorème s’applique seulement dans un triangle rectangle. Il faut donc d’abord savoir ou prouver que le triangle est rectangle.") +
       `\n\nConclusion : on peut alors donner la longueur cherchée ou conclure sur le triangle.`,
-    tags: ["pythagore", "reconnaitre", "open"],
+    tags: ["pythagore_theoreme", "reconnaitre", "open"],
   },
 
   // =========================
@@ -250,10 +250,10 @@ export const pythagore3eBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "fixed",
-    id: "pythagore_calculer_hypotenuse_fixed_1",
+    id: "pythagore_theoreme_calculer_hypotenuse_fixed_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "pythagore",
+    notionId: "pythagore_theoreme",
     microId: "pythagore_calculer_hypotenuse",
     difficulty: 2,
     theme: "neutral",
@@ -269,19 +269,19 @@ export const pythagore3eBank: TutorBankItemV4[] = [
       `Calcul : on compare ou on calcule les carrés des longueurs indiquées. ` +
       ("Dans un triangle rectangle, le carré de l’hypoténuse est égal à la somme des carrés des deux côtés de l’angle droit. On calcule : 3² + 4² = 9 + 16 = 25. Donc l’hypoténuse mesure √25 = 5 cm.") +
       `\n\nConclusion : on peut alors donner la longueur cherchée ou conclure sur le triangle.`,
-    tags: ["pythagore", "hypotenuse", "triplet"],
+    tags: ["pythagore_theoreme", "hypotenuse", "triplet"],
   },
   {
     kind: "template",
-    id: "pythagore_calculer_hypotenuse_tpl_1",
+    id: "pythagore_theoreme_calculer_hypotenuse_tpl_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "pythagore",
+    notionId: "pythagore_theoreme",
     microId: "pythagore_calculer_hypotenuse",
     difficulty: 2,
     theme: "neutral",
     hint: "On cherche l’hypoténuse : on additionne les carrés.",
-    tags: ["pythagore", "hypotenuse", "template", "canvas"],
+    tags: ["pythagore_theoreme", "hypotenuse", "template", "canvas"],
     generate: () => {
       const { a, b, c } = randomChoice(pythagoreanTriples);
       const labels = randomChoice(triangleNames);
@@ -311,15 +311,15 @@ export const pythagore3eBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "pythagore_calculer_hypotenuse_tpl_2",
+    id: "pythagore_theoreme_calculer_hypotenuse_tpl_2",
     niveau: "3e",
     matiere: "maths",
-    notionId: "pythagore",
+    notionId: "pythagore_theoreme",
     microId: "pythagore_calculer_hypotenuse",
     difficulty: 3,
     theme: "neutral",
     hint: "Écris d’abord l’égalité de Pythagore, puis calcule la racine carrée.",
-    tags: ["pythagore", "hypotenuse", "qcm", "template"],
+    tags: ["pythagore_theoreme", "hypotenuse", "qcm", "template"],
     generate: () => {
       const { a, b, c } = randomChoice(pythagoreanTriples);
 
@@ -341,15 +341,15 @@ export const pythagore3eBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "pythagore_calculer_hypotenuse_open_1",
+    id: "pythagore_theoreme_calculer_hypotenuse_open_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "pythagore",
+    notionId: "pythagore_theoreme",
     microId: "pythagore_calculer_hypotenuse",
     difficulty: 3,
     theme: "neutral",
     hint: "Ta réponse doit expliquer pourquoi on additionne les carrés.",
-    tags: ["pythagore", "hypotenuse", "open", "redaction"],
+    tags: ["pythagore_theoreme", "hypotenuse", "open", "redaction"],
     generate: () => {
       const { a, b, c } = randomChoice(pythagoreanTriples);
 
@@ -374,10 +374,10 @@ export const pythagore3eBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "fixed",
-    id: "pythagore_calculer_cote_fixed_1",
+    id: "pythagore_theoreme_calculer_cote_fixed_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "pythagore",
+    notionId: "pythagore_theoreme",
     microId: "pythagore_calculer_cote",
     difficulty: 2,
     theme: "neutral",
@@ -393,19 +393,19 @@ export const pythagore3eBank: TutorBankItemV4[] = [
       `Calcul : on compare ou on calcule les carrés des longueurs indiquées. ` +
       ("On connaît l’hypoténuse et un côté de l’angle droit. On calcule donc la différence des carrés : 5² - 3² = 25 - 9 = 16. La longueur cherchée vaut √16 = 4 cm.") +
       `\n\nConclusion : on peut alors donner la longueur cherchée ou conclure sur le triangle.`,
-    tags: ["pythagore", "cote", "triplet"],
+    tags: ["pythagore_theoreme", "cote", "triplet"],
   },
   {
     kind: "template",
-    id: "pythagore_calculer_cote_tpl_1",
+    id: "pythagore_theoreme_calculer_cote_tpl_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "pythagore",
+    notionId: "pythagore_theoreme",
     microId: "pythagore_calculer_cote",
     difficulty: 3,
     theme: "neutral",
     hint: "Repère d’abord l’hypoténuse, puis soustrais les carrés.",
-    tags: ["pythagore", "cote", "template", "canvas"],
+    tags: ["pythagore_theoreme", "cote", "template", "canvas"],
     generate: () => {
       const triple = randomChoice(pythagoreanTriples);
       const knownLeg = randomChoice([triple.a, triple.b]);
@@ -439,15 +439,15 @@ export const pythagore3eBank: TutorBankItemV4[] = [
   },
     {
     kind: "template",
-    id: "pythagore_calculer_cote_tpl_2",
+    id: "pythagore_theoreme_calculer_cote_tpl_2",
     niveau: "3e",
     matiere: "maths",
-    notionId: "pythagore",
+    notionId: "pythagore_theoreme",
     microId: "pythagore_calculer_cote",
     difficulty: 3,
     theme: "neutral",
     hint: "Attention : pour un côté de l’angle droit, on ne fait pas une addition.",
-    tags: ["pythagore", "cote", "piege", "qcm"],
+    tags: ["pythagore_theoreme", "cote", "piege", "qcm"],
     generate: () => {
       const triple = randomChoice(pythagoreanTriples);
       const knownLeg = triple.a;
@@ -471,15 +471,15 @@ export const pythagore3eBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "pythagore_calculer_cote_open_1",
+    id: "pythagore_theoreme_calculer_cote_open_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "pythagore",
+    notionId: "pythagore_theoreme",
     microId: "pythagore_calculer_cote",
     difficulty: 4,
     theme: "neutral",
     hint: "Explique pourquoi il faut soustraire les carrés.",
-    tags: ["pythagore", "cote", "open", "redaction"],
+    tags: ["pythagore_theoreme", "cote", "open", "redaction"],
     generate: () => {
       const triple = randomChoice(pythagoreanTriples);
       const knownLeg = triple.a;
@@ -508,10 +508,10 @@ export const pythagore3eBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "fixed",
-    id: "pythagore_reciproque_fixed_1",
+    id: "pythagore_theoreme_reciproque_fixed_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "pythagore",
+    notionId: "pythagore_theoreme",
     microId: "pythagore_reciproque",
     difficulty: 2,
     theme: "neutral",
@@ -532,19 +532,19 @@ export const pythagore3eBank: TutorBankItemV4[] = [
       `Calcul : on compare ou on calcule les carrés des longueurs indiquées. ` +
       ("Quand on connaît les trois longueurs d’un triangle et qu’on veut savoir s’il est rectangle, on utilise la réciproque du théorème de Pythagore. Le théorème direct sert plutôt à calculer une longueur dans un triangle déjà rectangle.") +
       `\n\nConclusion : on peut alors donner la longueur cherchée ou conclure sur le triangle.`,
-    tags: ["pythagore", "reciproque", "qcm"],
+    tags: ["pythagore_theoreme", "reciproque", "qcm"],
   },
   {
     kind: "template",
-    id: "pythagore_reciproque_tpl_1",
+    id: "pythagore_theoreme_reciproque_tpl_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "pythagore",
+    notionId: "pythagore_theoreme",
     microId: "pythagore_reciproque",
     difficulty: 3,
     theme: "neutral",
     hint: "Repère le plus grand côté, puis compare la somme des carrés des deux autres côtés avec son carré.",
-    tags: ["pythagore", "reciproque", "template"],
+    tags: ["pythagore_theoreme", "reciproque", "template"],
     generate: () => {
       const isRight = randomChoice([true, false]);
       const triple = isRight
@@ -573,15 +573,15 @@ export const pythagore3eBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "pythagore_reciproque_tpl_2",
+    id: "pythagore_theoreme_reciproque_tpl_2",
     niveau: "3e",
     matiere: "maths",
-    notionId: "pythagore",
+    notionId: "pythagore_theoreme",
     microId: "pythagore_reciproque",
     difficulty: 4,
     theme: "neutral",
     hint: "L’angle droit serait situé en face du plus grand côté.",
-    tags: ["pythagore", "reciproque", "canvas"],
+    tags: ["pythagore_theoreme", "reciproque", "canvas"],
     generate: () => {
       const triple = randomChoice(pythagoreanTriples);
       const labels = randomChoice(triangleNames);
@@ -610,15 +610,15 @@ export const pythagore3eBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "pythagore_reciproque_open_1",
+    id: "pythagore_theoreme_reciproque_open_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "pythagore",
+    notionId: "pythagore_theoreme",
     microId: "pythagore_reciproque",
     difficulty: 4,
     theme: "neutral",
     hint: "Ta réponse doit contenir la comparaison des carrés et une conclusion.",
-    tags: ["pythagore", "reciproque", "open", "redaction"],
+    tags: ["pythagore_theoreme", "reciproque", "open", "redaction"],
     generate: () => {
       const triple = randomChoice(pythagoreanTriples);
       const left = triple.a * triple.a + triple.b * triple.b;
@@ -644,10 +644,10 @@ export const pythagore3eBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "fixed",
-    id: "pythagore_rediger_fixed_1",
+    id: "pythagore_theoreme_rediger_fixed_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "pythagore",
+    notionId: "pythagore_theoreme",
     microId: "pythagore_rediger",
     difficulty: 3,
     theme: "neutral",
@@ -668,14 +668,14 @@ export const pythagore3eBank: TutorBankItemV4[] = [
       `Calcul : on compare ou on calcule les carrés des longueurs indiquées. ` +
       ("Pour utiliser le théorème de Pythagore direct, il faut d’abord indiquer que le triangle est rectangle. Une rédaction correcte commence donc par une phrase du type : « Dans le triangle ABC rectangle en A, d’après le théorème de Pythagore… »") +
       `\n\nConclusion : on peut alors donner la longueur cherchée ou conclure sur le triangle.`,
-    tags: ["pythagore", "redaction", "qcm"],
+    tags: ["pythagore_theoreme", "redaction", "qcm"],
   },
   {
     kind: "fixed",
-    id: "pythagore_rediger_fixed_2",
+    id: "pythagore_theoreme_rediger_fixed_2",
     niveau: "3e",
     matiere: "maths",
-    notionId: "pythagore",
+    notionId: "pythagore_theoreme",
     microId: "pythagore_rediger",
     difficulty: 3,
     theme: "neutral",
@@ -698,14 +698,14 @@ export const pythagore3eBank: TutorBankItemV4[] = [
       `Calcul : on compare ou on calcule les carrés des longueurs indiquées. ` +
       ("Pour utiliser la réciproque du théorème de Pythagore, on ne suppose pas que le triangle est rectangle. On compare la somme des carrés des deux plus petits côtés avec le carré du plus grand côté, puis on conclut.") +
       `\n\nConclusion : on peut alors donner la longueur cherchée ou conclure sur le triangle.`,
-    tags: ["pythagore", "redaction", "reciproque"],
+    tags: ["pythagore_theoreme", "redaction", "reciproque"],
   },
   {
     kind: "fixed",
-    id: "pythagore_rediger_open_1",
+    id: "pythagore_theoreme_rediger_open_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "pythagore",
+    notionId: "pythagore_theoreme",
     microId: "pythagore_rediger",
     difficulty: 4,
     theme: "neutral",
@@ -720,7 +720,7 @@ export const pythagore3eBank: TutorBankItemV4[] = [
       `Calcul : on compare ou on calcule les carrés des longueurs indiquées. ` +
       ("Le théorème de Pythagore sert à calculer une longueur dans un triangle dont on sait déjà qu’il est rectangle. La réciproque sert à montrer qu’un triangle est rectangle à partir de ses trois longueurs.") +
       `\n\nConclusion : on peut alors donner la longueur cherchée ou conclure sur le triangle.`,
-    tags: ["pythagore", "redaction", "open"],
+    tags: ["pythagore_theoreme", "redaction", "open"],
   },
 
   // =========================
@@ -728,15 +728,15 @@ export const pythagore3eBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "template",
-    id: "pythagore_defis_tpl_1",
+    id: "pythagore_theoreme_defi_tpl_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "pythagore",
-    microId: "pythagore_defis",
+    notionId: "pythagore_theoreme",
+    microId: "pythagore_defi",
     difficulty: 5,
     theme: "reunion",
     hint: "Modélise la situation par un triangle rectangle.",
-    tags: ["pythagore", "defi", "probleme", "reunion"],
+    tags: ["pythagore_theoreme", "defi", "probleme", "reunion"],
     generate: () => {
       const { a, b, c } = randomChoice(pythagoreanTriples);
 
@@ -757,15 +757,15 @@ export const pythagore3eBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "pythagore_defis_tpl_2",
+    id: "pythagore_theoreme_defi_tpl_2",
     niveau: "3e",
     matiere: "maths",
-    notionId: "pythagore",
-    microId: "pythagore_defis",
+    notionId: "pythagore_theoreme",
+    microId: "pythagore_defi",
     difficulty: 5,
     theme: "neutral",
     hint: "Il faut choisir entre calculer une longueur et vérifier si un triangle est rectangle.",
-    tags: ["pythagore", "defi", "choix_methode"],
+    tags: ["pythagore_theoreme", "defi", "choix_methode"],
     generate: () => {
       const triple = randomChoice(pythagoreanTriples);
 
@@ -786,15 +786,15 @@ export const pythagore3eBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "pythagore_defis_open_1",
+    id: "pythagore_theoreme_defi_open_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "pythagore",
-    microId: "pythagore_defis",
+    notionId: "pythagore_theoreme",
+    microId: "pythagore_defi",
     difficulty: 5,
     theme: "neutral",
     hint: "Commence par repérer le plus grand côté, puis vérifie l’égalité de Pythagore.",
-    tags: ["pythagore", "defi", "open", "brevet"],
+    tags: ["pythagore_theoreme", "defi", "open", "brevet"],
     generate: () => {
       const isRight = randomChoice([true, false]);
       const triple = isRight

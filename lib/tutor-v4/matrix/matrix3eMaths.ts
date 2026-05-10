@@ -22,40 +22,40 @@ const supportLinks: Record<string, string[]> = {
   // =========================
   // RATIONNELS
   // =========================
-  rationnel_comparer: ["prop_reconnaitre"],
-  rationnel_calculer: ["litteral_substituer"],
+  fraction_rationnel_comparer: ["prop_reconnaitre"],
+  fraction_rationnel_calculer: ["litteral_substituer"],
 
   // =========================
   // PUISSANCES
   // =========================
-  puissance_dix: ["rationnel_ecritures"],
-  puissance_calculs: ["litteral_reduire"],
-  puissance_ecriture_scientifique: ["rationnel_ecritures"],
+  entier_puissance_dix: ["fraction_rationnel_ecriture"],
+  entier_puissance_calcul: ["litteral_reduire"],
+  entier_puissance_ecriture_scientifique: ["fraction_rationnel_ecriture"],
 
   // =========================
   // RACINES
   // =========================
-  racine_comprendre: ["puissance_comprendre"],
-  racine_calculer: ["puissance_calculer"],
-  racine_encadrer: ["rationnel_comparer"],
+  entier_racine_comprendre: ["entier_puissance_comprendre"],
+  entier_racine_calculer: ["entier_puissance_calculer"],
+  entier_racine_encadrer: ["fraction_rationnel_comparer"],
 
   // =========================
   // TRIANGLES
   // =========================
-  triangle_construire: ["triangle_angles", "triangle_inegalite"],
+  triangle_construire: ["triangle_angle", "triangle_inegalite"],
 
   // =========================
   // PYTHAGORE
   // =========================
   pythagore_reconnaitre: ["triangle_reconnaitre"],
-  pythagore_calculer_hypotenuse: ["racine_calculer"],
-  pythagore_calculer_cote: ["racine_calculer"],
+  pythagore_calculer_hypotenuse: ["entier_racine_calculer"],
+  pythagore_calculer_cote: ["entier_racine_calculer"],
   pythagore_reciproque: ["triangle_inegalite"],
 
   // =========================
   // THALÈS
   // =========================
-  thales_rapports: ["prop_quatrieme"],
+  thales_rapport: ["prop_quatrieme"],
   thales_calculer_longueur: ["prop_quatrieme"],
   thales_reciproque: ["prop_reconnaitre"],
 
@@ -81,8 +81,8 @@ const supportLinks: Record<string, string[]> = {
   affine_calcul_image: ["fonction_image", "equation_resoudre_simple"],
   affine_expression: ["equation_resoudre_simple", "fonction_tableau"],
   affine_graphique: ["fonction_graphique", "affine_coeff_directeur"],
-  affine_probleme: ["prop_defis", "equation_defis"],
-  affine_defis: ["fonction_defis", "equation_defis"],
+  affine_probleme: ["prop_defi", "equation_defi"],
+  affine_defi: ["fonction_defi", "equation_defi"],
 
   // =========================
   // GRANDEURS
@@ -95,32 +95,32 @@ const supportLinks: Record<string, string[]> = {
   // =========================
   // PROBAS
   // =========================
-  proba_calculer: ["rationnel_comparer"],
-  proba_deux_epreuves: ["proba_calculer"],
+  proba_calculer: ["fraction_rationnel_comparer"],
+  proba_deux_epreuve: ["proba_calculer"],
 
   // =========================
   // ALGORITHMIQUE
   // =========================
-  algo_conditions_complexes: [
+  algo_condition_complexe: [
     "equation_verifier",
     "fonction_image",
-    "rationnel_comparer",
+    "fraction_rationnel_comparer",
   ],
 
-  algo_variables_boucles: [
-    "algo_conditions_complexes",
+  algo_variable_boucle: [
+    "algo_condition_complexe",
     "litteral_substituer",
-    "rationnel_calculer",
+    "fraction_rationnel_calculer",
   ],
 
   algo_programme_calcul: [
-    "algo_variables_boucles",
+    "algo_variable_boucle",
     "litteral_reduire",
     "litteral_developper",
     "fonction_tableau",
   ],
 
-  algo_debug: [
+  algo_corriger: [
     "algo_programme_calcul",
     "equation_verifier",
     "fonction_image",
@@ -133,14 +133,14 @@ const supportLinks: Record<string, string[]> = {
     "affine_expression",
   ],
 
-  algo_defis: [
-    "algo_conditions_complexes",
-    "algo_variables_boucles",
+  algo_defi: [
+    "algo_condition_complexe",
+    "algo_variable_boucle",
     "algo_programme_calcul",
-    "algo_debug",
+    "algo_corriger",
     "algo_generaliser",
-    "equation_defis",
-    "fonction_defis",
+    "equation_defi",
+    "fonction_defi",
   ],
 };
 /**

@@ -21,11 +21,11 @@ export const puissancesBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "3e_puissance_comprendre_fixed_1",
+    id: "3e_entier_puissance_comprendre_fixed_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "puissances",
-    microId: "puissance_comprendre",
+    notionId: "entier_puissance",
+    microId: "entier_puissance_comprendre",
     difficulty: 1,
     theme: "neutral",
     text: "Que signifie 3² ?",
@@ -39,16 +39,16 @@ export const puissancesBank: TutorBankItemV4[] = [
       `Calcul : on applique la règle choisie, puis on simplifie l’écriture si nécessaire. ` +
       ("3² = 3 × 3.") +
       `\n\nConclusion : l’écriture obtenue est la réponse attendue.`,
-    tags: ["puissance", "definition"],
+    tags: ["entier_puissance", "definition"],
   },
 
   {
     kind: "fixed",
-    id: "3e_puissance_comprendre_fixed_2",
+    id: "3e_entier_puissance_comprendre_fixed_2",
     niveau: "3e",
     matiere: "maths",
-    notionId: "puissances",
-    microId: "puissance_comprendre",
+    notionId: "entier_puissance",
+    microId: "entier_puissance_comprendre",
     difficulty: 1,
     theme: "neutral",
     text: "Que signifie 2³ ?",
@@ -65,11 +65,11 @@ export const puissancesBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "3e_puissance_comprendre_open_1",
+    id: "3e_entier_puissance_comprendre_open_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "puissances",
-    microId: "puissance_comprendre",
+    notionId: "entier_puissance",
+    microId: "entier_puissance_comprendre",
     difficulty: 2,
     theme: "neutral",
     text: "Explique ce que signifie 5⁴.",
@@ -87,11 +87,11 @@ export const puissancesBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "3e_puissance_comprendre_tpl_1",
+    id: "3e_entier_puissance_comprendre_tpl_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "puissances",
-    microId: "puissance_comprendre",
+    notionId: "entier_puissance",
+    microId: "entier_puissance_comprendre",
     difficulty: 1,
     theme: "neutral",
     hint: "Écris la multiplication correspondante.",
@@ -121,11 +121,11 @@ export const puissancesBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "3e_puissance_calculer_fixed_1",
+    id: "3e_entier_puissance_calculer_fixed_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "puissances",
-    microId: "puissance_calculer",
+    notionId: "entier_puissance",
+    microId: "entier_puissance_calculer",
     difficulty: 1,
     theme: "neutral",
     text: "Calculer 2³",
@@ -142,11 +142,11 @@ export const puissancesBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "3e_puissance_calculer_fixed_2",
+    id: "3e_entier_puissance_calculer_fixed_2",
     niveau: "3e",
     matiere: "maths",
-    notionId: "puissances",
-    microId: "puissance_calculer",
+    notionId: "entier_puissance",
+    microId: "entier_puissance_calculer",
     difficulty: 2,
     theme: "neutral",
     text: "Calculer 5²",
@@ -162,11 +162,11 @@ export const puissancesBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "3e_puissance_calculer_fixed_3",
+    id: "3e_entier_puissance_calculer_fixed_3",
     niveau: "3e",
     matiere: "maths",
-    notionId: "puissances",
-    microId: "puissance_calculer",
+    notionId: "entier_puissance",
+    microId: "entier_puissance_calculer",
     difficulty: 2,
     theme: "neutral",
     text: "Calculer (-2)³",
@@ -184,11 +184,11 @@ export const puissancesBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "3e_puissance_calculer_erreur_1",
+    id: "3e_entier_puissance_calculer_erreur_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "puissances",
-    microId: "puissance_calculer",
+    notionId: "entier_puissance",
+    microId: "entier_puissance_calculer",
     difficulty: 3,
     theme: "neutral",
     text: "Un élève dit : (-2)² = -4. A-t-il raison ?",
@@ -205,11 +205,11 @@ export const puissancesBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "3e_puissance_calculer_tpl_1",
+    id: "3e_entier_puissance_calculer_tpl_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "puissances",
-    microId: "puissance_calculer",
+    notionId: "entier_puissance",
+    microId: "entier_puissance_calculer",
     difficulty: 2,
     theme: "neutral",
     hint: "Multiplie le nombre par lui-même plusieurs fois.",
@@ -239,11 +239,11 @@ export const puissancesBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "3e_puissance_calculs_fixed_1",
+    id: "3e_entier_entier_puissance_calcul_fixed_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "puissances",
-    microId: "puissance_calcul",
+    notionId: "entier_puissance",
+    microId: "entier_puissance_calcul",
     difficulty: 3,
     theme: "neutral",
     text: "Calculer : 2² × 2³",
@@ -261,11 +261,11 @@ export const puissancesBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "3e_puissance_calculs_fixed_2",
+    id: "3e_entier_entier_puissance_calcul_fixed_2",
     niveau: "3e",
     matiere: "maths",
-    notionId: "puissances",
-    microId: "puissance_calcul",
+    notionId: "entier_puissance",
+    microId: "entier_puissance_calcul",
     difficulty: 3,
     theme: "neutral",
     text: "Calculer : 3⁴ ÷ 3²",
@@ -282,11 +282,11 @@ export const puissancesBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "3e_puissance_calculs_erreur_1",
+    id: "3e_entier_entier_puissance_calcul_erreur_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "puissances",
-    microId: "puissance_calcul",
+    notionId: "entier_puissance",
+    microId: "entier_puissance_calcul",
     difficulty: 4,
     theme: "neutral",
     text: "Un élève écrit : 2² × 2³ = 4⁵. A-t-il raison ?",
@@ -304,11 +304,11 @@ export const puissancesBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "3e_puissance_calculs_tpl_1",
+    id: "3e_entier_entier_puissance_calcul_tpl_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "puissances",
-    microId: "puissance_calcul",
+    notionId: "entier_puissance",
+    microId: "entier_puissance_calcul",
     difficulty: 3,
     theme: "neutral",
     hint: "Même base → addition ou soustraction des exposants.",
@@ -336,11 +336,11 @@ export const puissancesBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "3e_puissance_dix_fixed_1",
+    id: "3e_entier_puissance_dix_fixed_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "puissances",
-    microId: "puissance_dix",
+    notionId: "entier_puissance",
+    microId: "entier_puissance_dix",
     difficulty: 1,
     theme: "neutral",
     text: "Calculer 10³.",
@@ -354,16 +354,16 @@ export const puissancesBank: TutorBankItemV4[] = [
       `Calcul : on applique la règle choisie, puis on simplifie l’écriture si nécessaire. ` +
       ("10³ = 10 × 10 × 10 = 1 000.") +
       `\n\nConclusion : l’écriture obtenue est la réponse attendue.`,
-    tags: ["puissance", "puissance_de_10", "qcm"],
+    tags: ["entier_puissance", "entier_puissance_dix", "qcm"],
   },
 
   {
     kind: "fixed",
-    id: "3e_puissance_dix_fixed_2",
+    id: "3e_entier_puissance_dix_fixed_2",
     niveau: "3e",
     matiere: "maths",
-    notionId: "puissances",
-    microId: "puissance_dix",
+    notionId: "entier_puissance",
+    microId: "entier_puissance_dix",
     difficulty: 2,
     theme: "neutral",
     text: "Calculer 10⁻².",
@@ -377,20 +377,20 @@ export const puissancesBank: TutorBankItemV4[] = [
       `Calcul : on applique la règle choisie, puis on simplifie l’écriture si nécessaire. ` +
       ("10⁻² = 1 / 100 = 0,01.") +
       `\n\nConclusion : l’écriture obtenue est la réponse attendue.`,
-    tags: ["puissance", "puissance_de_10", "exposant_negatif", "qcm"],
+    tags: ["entier_puissance", "entier_puissance_dix", "exposant_negatif", "qcm"],
   },
 
   {
     kind: "template",
-    id: "3e_puissance_dix_tpl_1",
+    id: "3e_entier_puissance_dix_tpl_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "puissances",
-    microId: "puissance_dix",
+    notionId: "entier_puissance",
+    microId: "entier_puissance_dix",
     difficulty: 2,
     theme: "neutral",
     hint: "10ⁿ est un 1 suivi de n zéros si n est positif.",
-    tags: ["puissance", "puissance_de_10", "template"],
+    tags: ["entier_puissance", "entier_puissance_dix", "template"],
     generate: () => {
       const exp = randomInt(2, 6);
       const value = 10 ** exp;
@@ -411,15 +411,15 @@ export const puissancesBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "3e_puissance_dix_tpl_2",
+    id: "3e_entier_puissance_dix_tpl_2",
     niveau: "3e",
     matiere: "maths",
-    notionId: "puissances",
-    microId: "puissance_dix",
+    notionId: "entier_puissance",
+    microId: "entier_puissance_dix",
     difficulty: 3,
     theme: "neutral",
     hint: "10⁻ⁿ = 1 / 10ⁿ.",
-    tags: ["puissance", "puissance_de_10", "exposant_negatif", "template"],
+    tags: ["entier_puissance", "entier_puissance_dix", "exposant_negatif", "template"],
     generate: () => {
       const exp = randomChoice([1, 2, 3, 4]);
       const value = 1 / 10 ** exp;
@@ -448,8 +448,8 @@ export const puissancesBank: TutorBankItemV4[] = [
     id: "3e_puissance_scientifique_fixed_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "puissances",
-    microId: "puissance_ecriture_scientifique",
+    notionId: "entier_puissance",
+    microId: "entier_puissance_ecriture_scientifique",
     difficulty: 2,
     theme: "neutral",
     text: "Quelle écriture scientifique correspond à 5 600 ?",
@@ -464,7 +464,7 @@ export const puissancesBank: TutorBankItemV4[] = [
       `Calcul : on applique la règle choisie, puis on simplifie l’écriture si nécessaire. ` +
       ("En écriture scientifique, le nombre devant la puissance de 10 doit être compris entre 1 et 10. Donc 5 600 = 5,6 × 10³.") +
       `\n\nConclusion : l’écriture obtenue est la réponse attendue.`,
-    tags: ["puissance", "ecriture_scientifique", "qcm"],
+    tags: ["entier_puissance", "ecriture_scientifique", "qcm"],
   },
 
   {
@@ -472,8 +472,8 @@ export const puissancesBank: TutorBankItemV4[] = [
     id: "3e_puissance_scientifique_fixed_2",
     niveau: "3e",
     matiere: "maths",
-    notionId: "puissances",
-    microId: "puissance_ecriture_scientifique",
+    notionId: "entier_puissance",
+    microId: "entier_puissance_ecriture_scientifique",
     difficulty: 3,
     theme: "neutral",
     text: "Quelle écriture décimale correspond à 3,2 × 10⁴ ?",
@@ -487,7 +487,7 @@ export const puissancesBank: TutorBankItemV4[] = [
       `Calcul : on applique la règle choisie, puis on simplifie l’écriture si nécessaire. ` +
       ("3,2 × 10⁴ = 3,2 × 10 000 = 32 000.") +
       `\n\nConclusion : l’écriture obtenue est la réponse attendue.`,
-    tags: ["puissance", "ecriture_scientifique", "qcm"],
+    tags: ["entier_puissance", "ecriture_scientifique", "qcm"],
   },
 
   {
@@ -495,8 +495,8 @@ export const puissancesBank: TutorBankItemV4[] = [
     id: "3e_puissance_scientifique_open_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "puissances",
-    microId: "puissance_ecriture_scientifique",
+    notionId: "entier_puissance",
+    microId: "entier_puissance_ecriture_scientifique",
     difficulty: 4,
     theme: "neutral",
     text: "Explique pourquoi 42 × 10³ n’est pas une écriture scientifique.",
@@ -510,7 +510,7 @@ export const puissancesBank: TutorBankItemV4[] = [
       `Calcul : on applique la règle choisie, puis on simplifie l’écriture si nécessaire. ` +
       ("42 × 10³ n’est pas une écriture scientifique car 42 n’est pas compris entre 1 et 10. On écrirait plutôt 4,2 × 10⁴.") +
       `\n\nConclusion : l’écriture obtenue est la réponse attendue.`,
-    tags: ["puissance", "ecriture_scientifique", "open", "raisonnement"],
+    tags: ["entier_puissance", "ecriture_scientifique", "open", "raisonnement"],
   },
 
   {
@@ -518,12 +518,12 @@ export const puissancesBank: TutorBankItemV4[] = [
     id: "3e_puissance_scientifique_tpl_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "puissances",
-    microId: "puissance_ecriture_scientifique",
+    notionId: "entier_puissance",
+    microId: "entier_puissance_ecriture_scientifique",
     difficulty: 3,
     theme: "neutral",
     hint: "Place la virgule après le premier chiffre non nul.",
-    tags: ["puissance", "ecriture_scientifique", "template"],
+    tags: ["entier_puissance", "ecriture_scientifique", "template"],
     generate: () => {
       const mantisse = randomChoice([1.2, 2.5, 3.4, 4.8, 6.7, 8.9]);
       const exp = randomInt(3, 6);
@@ -549,12 +549,12 @@ export const puissancesBank: TutorBankItemV4[] = [
     id: "3e_puissance_scientifique_tpl_2",
     niveau: "3e",
     matiere: "maths",
-    notionId: "puissances",
-    microId: "puissance_ecriture_scientifique",
+    notionId: "entier_puissance",
+    microId: "entier_puissance_ecriture_scientifique",
     difficulty: 3,
     theme: "neutral",
     hint: "Multiplier par une puissance de 10 déplace la virgule.",
-    tags: ["puissance", "ecriture_scientifique", "template"],
+    tags: ["entier_puissance", "ecriture_scientifique", "template"],
     generate: () => {
       const mantisse = randomChoice([1.5, 2.4, 3.6, 5.2, 7.8]);
       const exp = randomInt(2, 5);
@@ -581,11 +581,11 @@ export const puissancesBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "3e_puissance_defis_fixed_1",
+    id: "3e_entier_puissance_defi_fixed_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "puissances",
-    microId: "puissance_defis",
+    notionId: "entier_puissance",
+    microId: "entier_puissance_defi",
     difficulty: 4,
     theme: "neutral",
     text: "Un élève écrit : 10³ + 10² = 10⁵. A-t-il raison ?",
@@ -600,16 +600,16 @@ export const puissancesBank: TutorBankItemV4[] = [
       `Calcul : on applique la règle choisie, puis on simplifie l’écriture si nécessaire. ` +
       ("Non. 10³ + 10² = 1 000 + 100 = 1 100. On ne peut pas additionner les exposants dans une somme.") +
       `\n\nConclusion : l’écriture obtenue est la réponse attendue.`,
-    tags: ["puissance", "defi", "erreur", "qcm"],
+    tags: ["entier_puissance", "defi", "erreur", "qcm"],
   },
 
   {
     kind: "fixed",
-    id: "3e_puissance_defis_fixed_2",
+    id: "3e_entier_puissance_defi_fixed_2",
     niveau: "3e",
     matiere: "maths",
-    notionId: "puissances",
-    microId: "puissance_defis",
+    notionId: "entier_puissance",
+    microId: "entier_puissance_defi",
     difficulty: 4,
     theme: "neutral",
     text: "Un élève écrit : 2³ × 3³ = 6³. A-t-il raison ?",
@@ -624,16 +624,16 @@ export const puissancesBank: TutorBankItemV4[] = [
       `Calcul : on applique la règle choisie, puis on simplifie l’écriture si nécessaire. ` +
       ("Oui. 2³ × 3³ = (2 × 3)³ = 6³.") +
       `\n\nConclusion : l’écriture obtenue est la réponse attendue.`,
-    tags: ["puissance", "defi", "calcul", "qcm"],
+    tags: ["entier_puissance", "defi", "calcul", "qcm"],
   },
 
   {
     kind: "fixed",
-    id: "3e_puissance_defis_open_1",
+    id: "3e_entier_puissance_defi_open_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "puissances",
-    microId: "puissance_defis",
+    notionId: "entier_puissance",
+    microId: "entier_puissance_defi",
     difficulty: 5,
     theme: "neutral",
     text: "Explique pourquoi 2³ × 2⁴ = 2⁷, mais 2³ + 2⁴ n’est pas égal à 2⁷.",
@@ -647,20 +647,20 @@ export const puissancesBank: TutorBankItemV4[] = [
       `Calcul : on applique la règle choisie, puis on simplifie l’écriture si nécessaire. ` +
       ("Dans un produit de puissances de même base, on additionne les exposants : 2³ × 2⁴ = 2⁷. Mais pour une somme, cette règle ne s’applique pas : 2³ + 2⁴ = 8 + 16 = 24.") +
       `\n\nConclusion : l’écriture obtenue est la réponse attendue.`,
-    tags: ["puissance", "defi", "open", "raisonnement"],
+    tags: ["entier_puissance", "defi", "open", "raisonnement"],
   },
 
   {
     kind: "template",
-    id: "3e_puissance_defis_tpl_1",
+    id: "3e_entier_puissance_defi_tpl_1",
     niveau: "3e",
     matiere: "maths",
-    notionId: "puissances",
-    microId: "puissance_defis",
+    notionId: "entier_puissance",
+    microId: "entier_puissance_defi",
     difficulty: 4,
     theme: "neutral",
     hint: "Attention : même base et multiplication → on additionne les exposants.",
-    tags: ["puissance", "defi", "template"],
+    tags: ["entier_puissance", "defi", "template"],
     generate: () => {
       const base = randomChoice([2, 3, 5]);
       const a = randomInt(2, 5);
@@ -682,15 +682,15 @@ export const puissancesBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "3e_puissance_defis_tpl_2",
+    id: "3e_entier_puissance_defi_tpl_2",
     niveau: "3e",
     matiere: "maths",
-    notionId: "puissances",
-    microId: "puissance_defis",
+    notionId: "entier_puissance",
+    microId: "entier_puissance_defi",
     difficulty: 5,
     theme: "reunion",
     hint: "Utilise une écriture scientifique pour manipuler les grands nombres.",
-    tags: ["puissance", "defi", "reunion", "ecriture_scientifique", "template"],
+    tags: ["entier_puissance", "defi", "reunion", "ecriture_scientifique", "template"],
     generate: () => {
       const distance = randomChoice([
         { value: "384 000", sci: "3,84 × 10^5", context: "la distance approximative Terre-Lune en km" },
