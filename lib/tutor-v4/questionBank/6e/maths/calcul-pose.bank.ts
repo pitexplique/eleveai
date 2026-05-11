@@ -255,51 +255,58 @@ export const calculPoseBank: TutorBankItemV4[] = [
     },
   },
 
-  {
-    kind: "template",
-    id: "6e_entier_soustraction_posee_tpl_2_avec_retenue",
-    niveau: "6e",
-    matiere: "maths",
-    notionId: "entier_calcul_pose",
-    microId: "entier_soustraction_posee",
-    difficulty: 3,
-    theme: "neutral",
-    hint: "Si le chiffre du haut est trop petit, il faut utiliser une retenue.",
-    tags: ["entier_calcul_pose", "soustraction", "retenue", "template", "canvas"],
-    generate: () => {
+{
+  kind: "template",
+  id: "6e_entier_soustraction_posee_tpl_2_avec_retenue",
+  niveau: "6e",
+  matiere: "maths",
+  notionId: "entier_calcul_pose",
+  microId: "entier_soustraction_posee",
+  difficulty: 3,
+  theme: "neutral",
+  hint: "Si le chiffre du haut est trop petit, il faut utiliser une retenue.",
+  tags: ["entier_calcul_pose", "soustraction", "retenue", "template", "canvas"],
+  generate: () => {
     const pairs: [number, number][] = [
-    [704, 268],
-    [632, 458],
-    [905, 376],
-    [821, 547],
+      [704, 268],
+      [632, 458],
+      [905, 376],
+      [821, 547],
     ];
 
     const pair = randomChoice(pairs);
 
     const a = pair[0];
     const b = pair[1];
-      const result = a - b;
+    const result = a - b;
 
-      return {
-        text: `Calcule : ${a} - ${b}.`,
-        format: "short",
-        expected: [String(result)],
-        comparator: "number_equal",
-        explanation:
-          "Définition : dans une soustraction posée, une retenue est nécessaire quand on ne peut pas soustraire directement dans une colonne.\n\n" +
-          "Méthode : on échange une dizaine ou une centaine pour pouvoir continuer.\n\n" +
-          `Calcul : ${a} - ${b} = ${result}.\n\n` +
-          `Conclusion : le résultat est ${result}.`,
-        canvas: calculPoseCanvas({
-          operation: "soustraction",
-          title: "Soustraction avec retenue",
-          numbers: [String(a), String(b)],
-          result: String(result),
-          questionLabel: "Attention aux retenues.",
-        }),
-      };
-    },
+    return {
+      text: `Calcule : ${a} - ${b}.`,
+      format: "short",
+      expected: [String(result)],
+      comparator: "number_equal",
+      explanation:
+        "Définition : dans une soustraction posée, une retenue est nécessaire quand on ne peut pas soustraire directement dans une colonne.\n\n" +
+        "Méthode : on échange une dizaine ou une centaine pour pouvoir continuer.\n\n" +
+        `Calcul : ${a} - ${b} = ${result}.\n\n` +
+        `Conclusion : le résultat est ${result}.`,
+
+      canvas: calculPoseCanvas({
+        operation: "soustraction",
+        title: "Soustraction avec retenue",
+        numbers: [String(a), String(b)],
+        result: String(result),
+
+        display: {
+          showResult: false,
+          showRetenues: false,
+        },
+
+        questionLabel: "Attention aux retenues.",
+      }),
+    };
   },
+},
 
   {
     kind: "fixed",
@@ -357,6 +364,11 @@ export const calculPoseBank: TutorBankItemV4[] = [
       title: "Multiplication posée",
       numbers: ["124", "3"],
       result: "372",
+
+       display: {
+          showResult: false,
+          showRetenues: false,
+        },
     }),
   },
 
@@ -391,6 +403,11 @@ export const calculPoseBank: TutorBankItemV4[] = [
           title: "Multiplication par un chiffre",
           numbers: [String(a), String(b)],
           result: String(result),
+
+           display: {
+          showResult: false,
+          showRetenues: false,
+        },
         }),
       };
     },
@@ -428,6 +445,10 @@ export const calculPoseBank: TutorBankItemV4[] = [
           numbers: [String(a), String(b)],
           result: String(result),
           questionLabel: "Pense aux retenues.",
+           display: {
+          showResult: false,
+          showRetenues: false,
+        },
         }),
       };
     },
@@ -459,6 +480,10 @@ export const calculPoseBank: TutorBankItemV4[] = [
       numbers: ["126", "4"],
       result: "504",
       questionLabel: "La retenue doit être reportée.",
+       display: {
+          showResult: false,
+          showRetenues: false,
+        },
     }),
   },
 
@@ -502,6 +527,10 @@ export const calculPoseBank: TutorBankItemV4[] = [
         quotient: "7",
         reste: "2",
       },
+       display: {
+          showResult: false,
+          showRetenues: false,
+        },
     }),
   },
 
@@ -541,6 +570,10 @@ export const calculPoseBank: TutorBankItemV4[] = [
             quotient: String(quotient),
             reste: "0",
           },
+           display: {
+          showResult: false,
+          showRetenues: false,
+        },
         }),
       };
     },
@@ -583,6 +616,10 @@ export const calculPoseBank: TutorBankItemV4[] = [
             quotient: String(quotient),
             reste: String(reste),
           },
+           display: {
+          showResult: false,
+          showRetenues: false,
+        },
         }),
       };
     },
@@ -650,6 +687,10 @@ export const calculPoseBank: TutorBankItemV4[] = [
         quotient: "7",
         reste: "2",
       },
+       display: {
+          showResult: false,
+          showRetenues: false,
+        },
     }),
   },
 
@@ -690,6 +731,10 @@ export const calculPoseBank: TutorBankItemV4[] = [
           title: "Vérification",
           numbers: [String(a), String(b)],
           result: String(result),
+           display: {
+          showResult: false,
+          showRetenues: false,
+        },
         }),
       };
     },
@@ -746,6 +791,10 @@ export const calculPoseBank: TutorBankItemV4[] = [
       title: "Problème — marché",
       numbers: ["126", "248"],
       result: "374",
+       display: {
+          showResult: false,
+          showRetenues: false,
+        },
     }),
   },
 
@@ -786,6 +835,10 @@ export const calculPoseBank: TutorBankItemV4[] = [
             quotient: String(quotient),
             reste: String(reste),
           },
+           display: {
+          showResult: false,
+          showRetenues: false,
+        },
         }),
       };
     },
@@ -872,6 +925,10 @@ export const calculPoseBank: TutorBankItemV4[] = [
           numbers: [String(a), String(b)],
           result: String(correct),
           questionLabel: "Compare le résultat annoncé au résultat correct.",
+           display: {
+          showResult: false,
+          showRetenues: false,
+        },
         }),
       };
     },
@@ -936,6 +993,10 @@ export const calculPoseBank: TutorBankItemV4[] = [
           title: "Soustraction vérifiée par addition",
           numbers: [String(a), String(b)],
           result: String(result),
+           display: {
+          showResult: false,
+          showRetenues: false,
+        },
         }),
       };
     },
@@ -1024,6 +1085,10 @@ export const calculPoseBank: TutorBankItemV4[] = [
         reste: "7",
       },
       questionLabel: "Le reste doit être inférieur au diviseur.",
+       display: {
+          showResult: false,
+          showRetenues: false,
+        },
     }),
   },
 
@@ -1070,6 +1135,10 @@ export const calculPoseBank: TutorBankItemV4[] = [
             quotient: String(quotient),
             reste: String(reste),
           },
+           display: {
+          showResult: false,
+          showRetenues: false,
+        },
         }),
       };
     },
@@ -1230,6 +1299,10 @@ export const calculPoseBank: TutorBankItemV4[] = [
           numbers: [String(a).replace(".", ","), String(b).replace(".", ",")],
           result: String(result).replace(".", ","),
           questionLabel: "Avec les décimaux, on aligne les virgules.",
+           display: {
+          showResult: false,
+          showRetenues: false,
+        },
         }),
       };
     },
@@ -1340,6 +1413,10 @@ export const calculPoseBank: TutorBankItemV4[] = [
           title: "Problème — marché",
           numbers: [String(sacs), String(fruits)],
           result: String(total),
+           display: {
+          showResult: false,
+          showRetenues: false,
+        },
         }),
       };
     },
@@ -1409,7 +1486,11 @@ export const calculPoseBank: TutorBankItemV4[] = [
             diviseur: String(groupes),
             quotient: String(quotient),
             reste: String(reste),
-          },
+                 },
+                  display: {
+          showResult: false,
+          showRetenues: false,
+        },
         }),
       };
     },
