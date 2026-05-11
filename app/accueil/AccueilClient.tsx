@@ -82,7 +82,7 @@ export default function AccueilPage() {
     mt-[30vh]
     grid grid-cols-2
     gap-3 px-4
-    sm:mt-[64vh]
+    sm:mt-[50vh]
     sm:flex sm:max-w-6xl sm:flex-wrap sm:justify-center sm:gap-6
   "
 >
