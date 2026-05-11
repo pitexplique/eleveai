@@ -8,6 +8,7 @@ const HEADER_HEIGHT = 72;
 
 const cards = [
   { href: "/coach-maths-ia", image: "/images/cards/coach.png" },
+  { href: "/parcours", image: "/images/cards/parcours.png" },
   { href: "/calcul-rapide", image: "/images/cards/calcul-rapide.png" },
   { href: "/lecon-du-jour", image: "/images/cards/lecondujour.png" },
   { href: "/probleme-du-jour", image: "/images/cards/probleme-du-jour.png" },
