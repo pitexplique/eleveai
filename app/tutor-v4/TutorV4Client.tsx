@@ -27,7 +27,7 @@ import {
   FractionCanvas,
   TableauProportionnaliteCanvas,
   ScratchCanvas 
-} from "@/lib/tutor-v4/components";
+} from "@/lib/canvas";
 
 import {
   getNotionMicroMap,
