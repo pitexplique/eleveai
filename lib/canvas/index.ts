@@ -1,0 +1,19 @@
+export { default as CanvasRenderer } from "./CanvasRenderer";
+
+export { default as AngleCanvas } from "./AngleCanvas";
+export { default as CalculPoseCanvas } from "./CalculPoseCanvas";
+export { default as TriangleCanvas } from "./TriangleCanvas";
+export { default as QuadrilatereCanvas } from "./QuadrilatereCanvas";
+export { default as FigureLibreCanvas } from "./FigureLibreCanvas";
+export { default as DroiteGradueeCanvas } from "./DroiteGradueeCanvas";
+export { default as ThalesCanvas } from "./ThalesCanvas";
+export { default as Solide3DCanvas } from "./Solide3DCanvas";
+export { default as StatGraphCanvas } from "./StatGraphCanvas";
+export { default as CanvasProbabilites } from "./ProbabilitesCanvas";
+export { default as FonctionGraphiqueCanvas } from "./FonctionGraphiqueCanvas";
+export { default as FonctionTableauCanvas } from "./FonctionTableauCanvas";
+export { default as TransformationCanvas } from "./TransformationCanvas";
+export { default as TableauDonneesCanvas } from "./TableauDonneesCanvas";
+export { default as TableauProportionnaliteCanvas } from "./TableauProportionnaliteCanvas";
+export { default as FractionCanvas } from "./FractionCanvas";
+export { default as ScratchCanvas } from "./ScratchCanvas";

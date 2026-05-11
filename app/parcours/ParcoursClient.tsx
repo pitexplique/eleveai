@@ -3,20 +3,22 @@
 import Link from "next/link";
 import { useMemo, useState } from "react";
 
+import { CanvasRenderer } from "@/lib/canvas";
+
 import type {
   ParcoursAnswer,
   ParcoursClasse,
   ParcoursQuestion,
   ParcoursNotionScore,
-} from "@/lib/tutor-v4/parcours/types";
+} from "@/lib/parcours/types";
 
-import { getClasseNotions } from "@/lib/tutor-v4/parcours/getClasseNotions";
-import { getDefiQuestionForNotion } from "@/lib/tutor-v4/parcours/getDefiQuestionForNotion";
+import { getClasseNotions } from "@/lib/parcours/getClasseNotions";
+import { getDefiQuestionForNotion } from "@/lib/parcours/getDefiQuestionForNotion";
 import {
   getStatusLabel,
   isCorrectAnswer,
   scoreParcours,
-} from "@/lib/tutor-v4/parcours/scoreParcours";
+} from "@/lib/parcours/scoreParcours";
 
 const classes: ParcoursClasse[] = ["6e", "5e", "4e", "3e"];
 
@@ -196,6 +198,11 @@ export default function ParcoursClient() {
                 <p className="whitespace-pre-line text-base font-semibold">
                   {q.question.text}
                 </p>
+                  {q.question.canvas ? (
+                    <div className="mt-4 overflow-x-auto rounded-2xl bg-slate-50 p-3">
+                      <CanvasRenderer figure={q.question.canvas} />
+                    </div>
+                  ) : null}
 
                 {q.question.format === "qcm" && q.question.choices ? (
                   <div className="mt-4 grid gap-2">
@@ -251,9 +258,11 @@ export default function ParcoursClient() {
                   className="rounded-2xl border border-slate-700 bg-slate-800 p-4"
                 >
                   <div className="font-black">{score.notionLabel}</div>
+
                   <div className="mt-1 text-sm text-slate-300">
                     Score : {score.score} / {score.maxScore}
                   </div>
+
                   <div className="mt-2 text-lg font-black">
                     {getStatusLabel(score.status)}
                   </div>

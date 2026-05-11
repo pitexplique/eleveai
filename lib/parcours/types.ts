@@ -1,4 +1,9 @@
-import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
+import type {
+  QuestionFormat,
+  ComparatorName,
+} from "@/lib/tutor-v4/types";
+
+import type { CanvasFigure } from "@/lib/tutor-v4/types_canvas";
 
 export type ParcoursClasse = "6e" | "5e" | "4e" | "3e";
 
@@ -12,11 +17,15 @@ export type ParcoursNotion = {
   levels?: number[];
 };
 
-export type ParcoursQuestionItem = TutorBankItemV4 & {
+export type ParcoursQuestionItem = {
   text: string;
-  format: "short" | "qcm" | "open";
+  format: QuestionFormat;
   expected: string[];
   choices?: string[];
+  comparator?: ComparatorName;
+  hint?: string;
+  explanation?: string;
+  canvas?: CanvasFigure;
 };
 
 export type ParcoursQuestion = {
