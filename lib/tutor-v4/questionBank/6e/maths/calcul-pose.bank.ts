@@ -94,6 +94,10 @@ export const calculPoseBank: TutorBankItemV4[] = [
           title: "Addition posée",
           numbers: [String(a), String(b)],
           result: String(result),
+          display: {
+          showResult: false,
+          showRetenues: false,
+        },
         }),
       };
     },
@@ -131,7 +135,9 @@ export const calculPoseBank: TutorBankItemV4[] = [
           numbers: [String(a), String(b)],
           result: String(result),
           retenues: ["", "1", "1"],
-          display: { showRetenues: true },
+          display: { 
+            showRetenues: true
+           },
         }),
       };
     },
@@ -202,6 +208,10 @@ export const calculPoseBank: TutorBankItemV4[] = [
       title: "Soustraction posée",
       numbers: ["584", "231"],
       result: "353",
+      display: {
+      showResult: false,
+      showRetenues: false,
+  },
     }),
   },
 
@@ -236,6 +246,10 @@ export const calculPoseBank: TutorBankItemV4[] = [
           title: "Soustraction posée",
           numbers: [String(a), String(b)],
           result: String(result),
+          display: {
+          showResult: false,
+          showRetenues: false,
+          },
         }),
       };
     },
