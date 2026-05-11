@@ -1,150 +1,294 @@
 "use client";
 
+import Link from "next/link";
 import { useMemo, useState } from "react";
-import { useRouter } from "next/navigation";
 
-const classes = ["6e", "5e", "4e", "3e"] as const;
+import type {
+  ParcoursAnswer,
+  ParcoursClasse,
+  ParcoursQuestion,
+  ParcoursNotionScore,
+} from "@/lib/tutor-v4/parcours/types";
 
-const competences = [
-  {
-    nom: "Décimaux",
-    notionId: "decimaux",
-    niveau: "Bien avancé",
-    couleur: "bg-green-500",
-    etoiles: "⭐⭐⭐",
-  },
-  {
-    nom: "Fractions",
-    notionId: "fractions",
-    niveau: "En progression",
-    couleur: "bg-yellow-500",
-    etoiles: "⭐⭐",
-  },
-  {
-    nom: "Proportionnalité",
-    notionId: "proportionnalite",
-    niveau: "À renforcer",
-    couleur: "bg-red-500",
-    etoiles: "⭐",
-  },
-  {
-    nom: "Aires et périmètres",
-    notionId: "aires",
-    niveau: "Bientôt",
-    couleur: "bg-slate-500",
-    etoiles: "🔒",
-    disabled: true,
-  },
-];
+import { getClasseNotions } from "@/lib/tutor-v4/parcours/getClasseNotions";
+import { getDefiQuestionForNotion } from "@/lib/tutor-v4/parcours/getDefiQuestionForNotion";
+import {
+  getStatusLabel,
+  isCorrectAnswer,
+  scoreParcours,
+} from "@/lib/tutor-v4/parcours/scoreParcours";
+
+const classes: ParcoursClasse[] = ["6e", "5e", "4e", "3e"];
 
 export default function ParcoursClient() {
-  const router = useRouter();
-  const [classe, setClasse] = useState<(typeof classes)[number]>("6e");
+  const [classe, setClasse] = useState<ParcoursClasse>("6e");
+  const [started, setStarted] = useState(false);
+  const [questions, setQuestions] = useState<ParcoursQuestion[]>([]);
+  const [answers, setAnswers] = useState<Record<string, string>>({});
+  const [submitted, setSubmitted] = useState(false);
 
-  const visibleCompetences = useMemo(() => competences, []);
+  const notions = useMemo(() => getClasseNotions(classe), [classe]);
 
-  function startParcours(notionId: string, disabled?: boolean) {
-    if (disabled) return;
+  const scores = useMemo<ParcoursNotionScore[]>(() => {
+    if (!submitted) return [];
 
-    router.push(
-      `/tutor-v4?classe=${classe}&matiere=maths&notion=${notionId}`
+    const parcoursAnswers: ParcoursAnswer[] = questions.map((q) => {
+      const userAnswer = answers[q.notionId] ?? "";
+      const expected = q.question.expected ?? [];
+
+      return {
+        notionId: q.notionId,
+        userAnswer,
+        expected,
+        isCorrect: isCorrectAnswer(userAnswer, expected),
+      };
+    });
+
+    return questions.map((q) =>
+      scoreParcours({
+        notionId: q.notionId,
+        notionLabel: q.notionLabel,
+        answers: parcoursAnswers,
+      })
     );
+  }, [answers, questions, submitted]);
+
+  function startParcours() {
+    const generatedQuestions = notions
+      .map((notion) =>
+        getDefiQuestionForNotion({
+          classe,
+          notionId: notion.id,
+        })
+      )
+      .filter((q): q is ParcoursQuestion => q !== null);
+
+    setQuestions(generatedQuestions);
+    setAnswers({});
+    setSubmitted(false);
+    setStarted(true);
+  }
+
+  function resetParcours() {
+    setStarted(false);
+    setQuestions([]);
+    setAnswers({});
+    setSubmitted(false);
+  }
+
+  function handleAnswer(notionId: string, value: string) {
+    setAnswers((prev) => ({
+      ...prev,
+      [notionId]: value,
+    }));
   }
 
   return (
-    <main className="min-h-screen bg-slate-950 px-4 py-8 text-white sm:px-6 sm:py-10">
+    <main className="min-h-screen bg-slate-950 px-4 py-8 text-white">
       <section className="mx-auto max-w-5xl">
-        <div className="rounded-3xl border border-violet-500/30 bg-slate-900/80 p-5 shadow-xl sm:p-8">
-          <p className="mb-3 text-sm font-semibold uppercase tracking-wide text-violet-300">
-            Parcours maths
+        <div className="mb-8 rounded-3xl border border-violet-500/30 bg-slate-900/80 p-6 shadow-2xl">
+          <p className="mb-2 text-sm font-bold uppercase tracking-wide text-violet-300">
+            EleveAI · Parcours
           </p>
 
-          <h1 className="mb-4 text-3xl font-black text-violet-300 sm:text-4xl">
-            Parcours EleveAI
+          <h1 className="text-3xl font-black md:text-4xl">
+            Diagnostic rapide par notions
           </h1>
 
-          <p className="mb-6 max-w-3xl text-base text-slate-200 sm:text-lg">
-            Choisis ta classe, puis une notion. EleveAI te guide ensuite vers
-            les exercices adaptés pour progresser étape par étape.
+          <p className="mt-3 max-w-3xl text-sm text-slate-300 md:text-base">
+            Choisis ta classe. EleveAI propose un défi niveau ⭐⭐⭐ par notion,
+            puis affiche un bilan clair : 🟢 maîtrisé, 🟡 à revoir, 🔴 fragile.
           </p>
 
-          <div className="mb-8">
-            <h2 className="mb-3 text-lg font-bold text-violet-200">
-              Choisis ta classe
-            </h2>
-
-            <div className="grid grid-cols-4 gap-2 sm:flex sm:gap-3">
-              {classes.map((c) => (
-                <button
-                  key={c}
-                  type="button"
-                  onClick={() => setClasse(c)}
-                  className={[
-                    "rounded-2xl px-4 py-3 text-lg font-black transition",
-                    classe === c
-                      ? "bg-violet-500 text-white shadow-lg shadow-violet-500/30"
-                      : "bg-slate-800 text-slate-200 hover:bg-slate-700",
-                  ].join(" ")}
-                >
-                  {c}
-                </button>
-              ))}
-            </div>
+          <div className="mt-6 flex flex-wrap gap-3">
+            {classes.map((c) => (
+              <button
+                key={c}
+                type="button"
+                onClick={() => {
+                  setClasse(c);
+                  resetParcours();
+                }}
+                className={[
+                  "rounded-2xl px-5 py-3 text-sm font-black transition",
+                  classe === c
+                    ? "bg-violet-400 text-slate-950"
+                    : "bg-slate-800 text-white hover:bg-slate-700",
+                ].join(" ")}
+              >
+                {c}
+              </button>
+            ))}
           </div>
 
-          <div className="mb-8">
-            <h2 className="mb-3 text-lg font-bold text-violet-200">
-              Choisis une notion
-            </h2>
+          <div className="mt-6 flex flex-wrap gap-3">
+            <button
+              type="button"
+              onClick={startParcours}
+              className="rounded-2xl bg-emerald-400 px-5 py-3 text-sm font-black text-slate-950 hover:bg-emerald-300"
+            >
+              Démarrer le parcours
+            </button>
 
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-              {visibleCompetences.map((competence) => (
-                <button
-                  key={competence.notionId}
-                  type="button"
-                  disabled={competence.disabled}
-                  onClick={() =>
-                    startParcours(competence.notionId, competence.disabled)
-                  }
-                  className={[
-                    "rounded-2xl border border-white/10 bg-slate-800 p-5 text-left transition",
-                    competence.disabled
-                      ? "cursor-not-allowed opacity-60"
-                      : "cursor-pointer hover:-translate-y-1 hover:bg-slate-700 hover:shadow-lg",
-                  ].join(" ")}
-                >
-                  <div
-                    className={`mb-4 h-3 w-16 rounded-full ${competence.couleur}`}
-                  />
-
-                  <h3 className="text-lg font-bold">{competence.nom}</h3>
-
-                  <p className="mt-2 text-sm text-slate-300">
-                    {competence.niveau}
-                  </p>
-
-                  <p className="mt-3 text-xl">{competence.etoiles}</p>
-
-                  {!competence.disabled && (
-                    <p className="mt-4 text-sm font-bold text-violet-300">
-                      Commencer →
-                    </p>
-                  )}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          <div className="rounded-2xl bg-violet-950/50 p-5 text-slate-100">
-            <h2 className="mb-2 text-xl font-semibold text-violet-200">
-              Objectif du parcours
-            </h2>
-            <p>
-              Identifier les points forts, repérer les compétences à renforcer,
-              proposer des exercices adaptés et garder une trace des progrès.
-            </p>
+            <Link
+              href="/accueil"
+              className="rounded-2xl bg-slate-800 px-5 py-3 text-sm font-black text-white hover:bg-slate-700"
+            >
+              Retour accueil
+            </Link>
           </div>
         </div>
+
+        {!started && (
+          <div className="rounded-3xl border border-slate-700 bg-slate-900 p-6">
+            <h2 className="mb-3 text-xl font-black">
+              Notions prévues en {classe}
+            </h2>
+
+            <div className="grid gap-3 md:grid-cols-2">
+              {notions.map((notion) => (
+                <div
+                  key={notion.id}
+                  className="rounded-2xl border border-slate-700 bg-slate-800 p-4"
+                >
+                  <div className="font-black text-white">{notion.label}</div>
+                  <div className="mt-1 text-xs text-slate-400">
+                    {notion.id}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {started && questions.length === 0 && (
+          <div className="rounded-3xl border border-red-500/40 bg-red-950/40 p-6">
+            <h2 className="text-xl font-black text-red-200">
+              Aucun défi trouvé
+            </h2>
+            <p className="mt-2 text-sm text-red-100">
+              Il faut au moins une question de difficulté 3 dans les
+              question-banks pour cette classe.
+            </p>
+          </div>
+        )}
+
+        {started && questions.length > 0 && !submitted && (
+          <div className="space-y-4">
+            {questions.map((q, index) => (
+              <article
+                key={`${q.notionId}-${index}`}
+                className="rounded-3xl border border-slate-700 bg-white p-5 text-slate-950 shadow-xl"
+              >
+                <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
+                  <div>
+                    <p className="text-xs font-black uppercase tracking-wide text-violet-700">
+                      Notion {index + 1} / {questions.length}
+                    </p>
+                    <h2 className="text-xl font-black">{q.notionLabel}</h2>
+                  </div>
+
+                  <span className="rounded-full bg-amber-100 px-3 py-1 text-xs font-black text-amber-800">
+                    ⭐⭐⭐
+                  </span>
+                </div>
+
+                <p className="whitespace-pre-line text-base font-semibold">
+                  {q.question.text}
+                </p>
+
+                {q.question.format === "qcm" && q.question.choices ? (
+                  <div className="mt-4 grid gap-2">
+                    {q.question.choices.map((choice) => (
+                      <button
+                        key={choice}
+                        type="button"
+                        onClick={() => handleAnswer(q.notionId, choice)}
+                        className={[
+                          "rounded-2xl border px-4 py-3 text-left text-sm font-bold transition",
+                          answers[q.notionId] === choice
+                            ? "border-violet-500 bg-violet-100 text-violet-900"
+                            : "border-slate-200 bg-slate-50 hover:bg-slate-100",
+                        ].join(" ")}
+                      >
+                        {choice}
+                      </button>
+                    ))}
+                  </div>
+                ) : (
+                  <input
+                    value={answers[q.notionId] ?? ""}
+                    onChange={(e) =>
+                      handleAnswer(q.notionId, e.target.value)
+                    }
+                    placeholder="Ta réponse..."
+                    className="mt-4 w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-sm font-bold outline-none focus:border-violet-500 focus:ring-2 focus:ring-violet-200"
+                  />
+                )}
+              </article>
+            ))}
+
+            <div className="sticky bottom-4 rounded-3xl border border-violet-400/40 bg-slate-900/95 p-4 shadow-2xl backdrop-blur">
+              <button
+                type="button"
+                onClick={() => setSubmitted(true)}
+                className="w-full rounded-2xl bg-violet-400 px-5 py-4 text-base font-black text-slate-950 hover:bg-violet-300"
+              >
+                Voir mon bilan
+              </button>
+            </div>
+          </div>
+        )}
+
+        {submitted && (
+          <div className="rounded-3xl border border-emerald-500/30 bg-slate-900 p-6 shadow-2xl">
+            <h2 className="text-2xl font-black">Bilan du parcours</h2>
+
+            <div className="mt-5 grid gap-3 md:grid-cols-2">
+              {scores.map((score) => (
+                <div
+                  key={score.notionId}
+                  className="rounded-2xl border border-slate-700 bg-slate-800 p-4"
+                >
+                  <div className="font-black">{score.notionLabel}</div>
+                  <div className="mt-1 text-sm text-slate-300">
+                    Score : {score.score} / {score.maxScore}
+                  </div>
+                  <div className="mt-2 text-lg font-black">
+                    {getStatusLabel(score.status)}
+                  </div>
+
+                  {score.status !== "maitrise" && (
+                    <Link
+                      href={`/tutor-v4?classe=${classe}&matiere=maths&notion=${score.notionId}`}
+                      className="mt-3 inline-block rounded-xl bg-slate-700 px-3 py-2 text-xs font-black text-white hover:bg-slate-600"
+                    >
+                      Retravailler cette notion
+                    </Link>
+                  )}
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-6 flex flex-wrap gap-3">
+              <button
+                type="button"
+                onClick={startParcours}
+                className="rounded-2xl bg-emerald-400 px-5 py-3 text-sm font-black text-slate-950 hover:bg-emerald-300"
+              >
+                Refaire un parcours
+              </button>
+
+              <button
+                type="button"
+                onClick={resetParcours}
+                className="rounded-2xl bg-slate-800 px-5 py-3 text-sm font-black text-white hover:bg-slate-700"
+              >
+                Changer de classe
+              </button>
+            </div>
+          </div>
+        )}
       </section>
     </main>
   );
