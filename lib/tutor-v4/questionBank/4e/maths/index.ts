@@ -31,6 +31,7 @@ import { proportionnaliteBank} from "./proportionnalite.bank"
 import { volumesBank } from "./volumes.bank";
 import { thalesBank } from "./thales.bank";
 import { statistiquesBank} from "./statistiques.bank"
+import { algorithmiqueBank } from "./algorithmique.bank";
 
 
 // =========================
@@ -54,7 +55,8 @@ export const maths4eQuestionBank: TutorBankItemV4[] = [
   ...proportionnaliteBank,
   ...volumesBank,
   ...thalesBank,
-  ...statistiquesBank
+  ...statistiquesBank,
+  ...algorithmiqueBank
   
 ];
 
