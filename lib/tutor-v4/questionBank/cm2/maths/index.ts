@@ -1,9 +1,11 @@
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
+
 import { proportionnaliteBank } from "./proportionnalite.bank";
+import { algebreBank } from "./algebre.bank";
 
 export const mathsCm2QuestionBank: TutorBankItemV4[] = [
   ...proportionnaliteBank,
-
+  ...algebreBank,
 ];
 
 export function getMathCm2QuestionBank(args?: {

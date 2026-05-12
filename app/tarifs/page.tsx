@@ -5,17 +5,17 @@ import TarifsClient from "./TarifsClient";
 const url = "https://eleveai.fr/tarifs";
 
 export const metadata: Metadata = {
-  title: "Tarifs EleveAI — Des formules claires et sans surprise",
+  title: "Tarifs EleveAI — Formules mensuelle et annuelle",
   description:
-    "Tarifs EleveAI : offres simples (découverte, abonnement, établissement), cadre anti-triche, quotas clairs et usage responsable.",
+    "Tarifs EleveAI : choisissez une formule mensuelle ou annuelle, ajoutez plusieurs enfants et profitez des exercices guidés avec suivi des progrès.",
   alternates: { canonical: url },
   robots: { index: true, follow: true },
   openGraph: {
     type: "website",
     url,
-    title: "Tarifs EleveAI — Des formules claires et sans surprise",
+    title: "Tarifs EleveAI — Formules mensuelle et annuelle",
     description:
-      "Découvrez les tarifs EleveAI : une IA éducative encadrée, avec quotas clairs, pensée pour élèves, parents, professeurs et établissements.",
+      "Découvrez les tarifs EleveAI : formules mensuelle et annuelle, accès maths, exercices guidés et suivi personnalisé des progrès.",
     siteName: "EleveAI",
     locale: "fr_FR",
     images: [
@@ -29,9 +29,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Tarifs EleveAI — Des formules claires et sans surprise",
+    title: "Tarifs EleveAI — Formules mensuelle et annuelle",
     description:
-      "Tarifs EleveAI : offres simples, plafonds clairs, IA éducative anti-triche pour élèves, parents, professeurs et établissements.",
+      "Tarifs EleveAI : formules mensuelle et annuelle, ajout d’enfants, exercices guidés et suivi personnalisé.",
     images: ["/preview.jpg"],
   },
 };
