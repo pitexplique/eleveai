@@ -84,13 +84,49 @@ const supportLinks: Record<string, string[]> = {
   affine_probleme: ["prop_defi", "equation_defi"],
   affine_defi: ["fonction_defi", "equation_defi"],
 
-  // =========================
+   // =========================
   // GRANDEURS
   // =========================
   aire_triangle: ["triangle_reconnaitre"],
   volume_prisme: ["aire_triangle"],
   volume_cylindre: ["aire_disque"],
   volume_boule: ["volume_cylindre"],
+
+  // =========================
+  // SECTIONS PLANES DE SOLIDES
+  // =========================
+  section_reconnaitre: [
+    "volume_representation",
+  ],
+
+  section_pave_cube: [
+    "volume_representation",
+    "volume_pave",
+  ],
+
+  section_cylindre: [
+    "volume_representation",
+    "volume_cylindre",
+    "aire_disque",
+  ],
+
+  section_cone_pyramide: [
+    "volume_representation",
+    "sym_homothetie_reconnaitre",
+    "sym_homothetie_rapport",
+  ],
+
+  section_calculer_longueur: [
+    "pythagore_calculer_cote",
+    "volume_representation",
+  ],
+
+  section_defi: [
+    "section_cylindre",
+    "section_cone_pyramide",
+    "pythagore_defi",
+    "volume_geometrie_espace_defi",
+  ],
 
   // =========================
   // PROBAS

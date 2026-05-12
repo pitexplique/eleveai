@@ -232,6 +232,53 @@ export type Solide3DCanvasData = {
   cubes?: CubeCell3D[];
 };
 
+export type SectionSolideKind =
+  | "cube"
+  | "pave_droit"
+  | "cylindre"
+  | "cone"
+  | "pyramide";
+
+export type SectionSolideType =
+  | "parallele_base"
+  | "parallele_face"
+  | "parallele_axe"
+  | "diagonale"
+  | "horizontale"
+  | "verticale";
+
+export type SectionSolideCanvasData = {
+  kind: "section_solide";
+  solide: SectionSolideKind;
+  section: SectionSolideType;
+
+  size?: {
+    width?: number;
+    height?: number;
+  };
+
+  labels?: {
+    titre?: string;
+    section?: string;
+    solide?: string;
+    plan?: string;
+  };
+
+  display?: {
+    showLabels?: boolean;
+    showSectionName?: boolean;
+    showPlane?: boolean;
+  };
+
+  colors?: {
+    bodyFill?: string;
+    bodyStroke?: string;
+    sectionFill?: string;
+    sectionStroke?: string;
+    labelFill?: string;
+  };
+};
+
 export type TableauProportionnaliteCell = {
   row: number;
   col: number;
@@ -569,6 +616,7 @@ export type CanvasFigure =
   | TableauProportionnaliteCanvasData
   | NumberLineCanvasData
   | Solide3DCanvasData
+  | SectionSolideCanvasData
   | ThalesCanvasData
   | StatGraphCanvasData
   | AngleCanvasData

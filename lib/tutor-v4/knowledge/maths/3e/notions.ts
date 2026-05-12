@@ -159,6 +159,13 @@ export const notions: NotionSource[] = [
     prerequis: [],
     levels: [1, 2],
   },
+    {
+    id: "sections_solides",
+    label: "Sections planes de solides",
+    boId: "BO3G2",
+    prerequis: ["volume_geometrie_espace"],
+    levels: [2, 3],
+  },
 
   /* =========================
      GRANDEURS ET MESURES

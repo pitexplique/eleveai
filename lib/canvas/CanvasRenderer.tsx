@@ -20,6 +20,7 @@ import CalculPoseCanvas from "./CalculPoseCanvas";
 import FractionCanvas from "./FractionCanvas";
 import TableauProportionnaliteCanvas from "./TableauProportionnaliteCanvas";
 import ScratchCanvas from "./ScratchCanvas";
+import SectionSolideCanvas from "./SectionSolideCanvas";
 
 type Props = {
   figure?: CanvasFigure | null;
@@ -46,6 +47,9 @@ export default function CanvasRenderer({ figure }: Props) {
 
     case "solide_3d":
       return <Solide3DCanvas figure={figure} />;
+
+    case "section_solide":
+    return <SectionSolideCanvas figure={figure} />;
 
     case "stat_graph":
       return <StatGraphCanvas figure={figure} />;

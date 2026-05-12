@@ -640,6 +640,45 @@ export const microSkills: MicroSkillSource[] = [
     notionId: "volume_geometrie_espace",
     prerequis: ["volume_section", "volume_representation"],
   },
+  /* =========================
+   SECTIONS PLANES DE SOLIDES
+========================= */
+{
+  id: "section_reconnaitre",
+  label: "Comprendre ce qu’est une section plane",
+  notionId: "sections_solides",
+  prerequis: ["volume_solide_reconnaitre"],
+},
+{
+  id: "section_pave_cube",
+  label: "Identifier une section d’un cube ou d’un pavé droit",
+  notionId: "sections_solides",
+  prerequis: ["section_reconnaitre"],
+},
+{
+  id: "section_cylindre",
+  label: "Identifier une section d’un cylindre",
+  notionId: "sections_solides",
+  prerequis: ["section_reconnaitre"],
+},
+{
+  id: "section_cone_pyramide",
+  label: "Identifier une section d’un cône ou d’une pyramide",
+  notionId: "sections_solides",
+  prerequis: ["section_reconnaitre"],
+},
+{
+  id: "section_calculer_longueur",
+  label: "Calculer une longueur dans une section plane",
+  notionId: "sections_solides",
+  prerequis: ["section_pave_cube", "pythagore_calculer_hypotenuse"],
+},
+{
+  id: "section_defi",
+  label: "Défis sur les sections planes de solides",
+  notionId: "sections_solides",
+  prerequis: ["section_calculer_longueur"],
+},
 
   /* =========================
      PÉRIMÈTRES

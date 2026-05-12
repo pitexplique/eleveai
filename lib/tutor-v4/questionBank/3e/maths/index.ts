@@ -33,6 +33,7 @@ import { transformationsBank } from "./transformations.bank";
 import { airesBank } from "./aires.bank";
 import { perimetresBank } from "./perimetres.bank";
 import { volumesBank } from "./volumes.bank";
+import { sectionsSolidesBank } from "./sections_solides.bank";
 
 import { probabilitesBank } from "./probabilites.bank";
 import { statistiquesBank } from "./statistiques.bank";
@@ -67,6 +68,7 @@ export const maths3eQuestionBank: TutorBankItemV4[] = [
   ...airesBank,
   ...perimetresBank,
   ...volumesBank,
+  ...sectionsSolidesBank,
 
   ...probabilitesBank,
   ...statistiquesBank,

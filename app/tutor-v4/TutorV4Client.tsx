@@ -26,7 +26,8 @@ import {
   CalculPoseCanvas ,
   FractionCanvas,
   TableauProportionnaliteCanvas,
-  ScratchCanvas 
+  ScratchCanvas,
+  SectionSolideCanvas 
 } from "@/lib/canvas";
 
 import {
@@ -247,7 +248,12 @@ if (canvas.kind === "tableau_proportionnalite") {
   }
   if (canvas.kind === "scratch") {
   return <ScratchCanvas canvas={canvas} />;
+ }
+
+ if (canvas.kind === "section_solide") {
+  return <SectionSolideCanvas figure={canvas} />;
 }
+ 
 
   return null;
 }

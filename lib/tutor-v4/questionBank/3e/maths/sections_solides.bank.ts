@@ -1,0 +1,1160 @@
+// lib/tutor-v4/question-banks/maths/3e/sections_solides.bank.ts
+
+import type {
+  TutorBankItemV4,
+  SectionSolideCanvasData,
+} from "@/lib/tutor-v4/types";
+
+function randomInt(min: number, max: number) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+function randomChoice<T>(arr: readonly T[]): T {
+  return arr[Math.floor(Math.random() * arr.length)];
+}
+
+function shuffle<T>(arr: T[]): T[] {
+  return [...arr].sort(() => Math.random() - 0.5);
+}
+
+function makeChoices(correct: string, wrongs: string[]) {
+  return shuffle([correct, ...wrongs]).slice(0, 4);
+}
+
+function formatNumber(n: number) {
+  return Number.isInteger(n)
+    ? String(n)
+    : String(Math.round(n * 100) / 100).replace(".", ",");
+}
+
+function sectionSolideCanvas(
+  data: Omit<SectionSolideCanvasData, "kind">
+): SectionSolideCanvasData {
+  return {
+    kind: "section_solide",
+    ...data,
+  };
+}
+
+export const sectionsSolidesBank: TutorBankItemV4[] = [
+  /* =========================
+     SECTION_RECONNAITRE
+  ========================= */
+
+{
+  kind: "fixed",
+  id: "3e_section_reconnaitre_fixed_1",
+  niveau: "3e",
+  matiere: "maths",
+  notionId: "sections_solides",
+  microId: "section_reconnaitre",
+  difficulty: 1,
+  theme: "neutral",
+  text: "Que signifie faire une section plane d’un solide ?",
+  format: "qcm",
+  choices: [
+    "Couper le solide par un plan",
+    "Calculer le volume du solide",
+    "Déplier le solide pour obtenir un patron",
+    "Mesurer toutes les arêtes du solide",
+  ],
+  expected: ["Couper le solide par un plan"],
+  comparator: "mcq_exact",
+  hint: "Une section correspond à une coupe.",
+  explanation:
+    "Définition : une section plane est la figure obtenue lorsqu’un plan coupe un solide.\n\n" +
+    "Méthode : on imagine que l’on tranche le solide avec une surface plane.\n\n" +
+    "Observation : la figure obtenue dépend du solide et de la position du plan.\n\n" +
+    "Conclusion : faire une section plane, c’est couper un solide par un plan.",
+  canvas: sectionSolideCanvas({
+    solide: "pave_droit",
+    section: "parallele_face",
+    labels: {
+      titre: "Un plan coupe un solide",
+      section: "figure obtenue",
+    },
+    display: {
+      showLabels: true,
+      showSectionName: true,
+      showPlane: true,
+    },
+  }),
+  tags: ["section", "solide", "definition", "qcm", "canvas"],
+},
+
+{
+  kind: "fixed",
+  id: "3e_section_reconnaitre_open_1",
+  niveau: "3e",
+  matiere: "maths",
+  notionId: "sections_solides",
+  microId: "section_reconnaitre",
+  difficulty: 2,
+  theme: "neutral",
+  text: "Explique avec tes mots ce qu’est une section plane d’un solide.",
+  format: "open",
+  expected: ["couper", "plan", "solide", "figure"],
+  comparator: "contains_keyword",
+  hint: "Imagine que l’on tranche un solide avec une surface plate.",
+  explanation:
+    "Définition : une section plane est une figure obtenue quand un plan coupe un solide.\n\n" +
+    "Méthode : on imagine une coupe nette réalisée par une surface plane.\n\n" +
+    "Observation : la coupe obtenue est une figure plane.\n\n" +
+    "Conclusion : une section plane est donc une figure plane obtenue par découpe d’un solide.",
+  canvas: sectionSolideCanvas({
+    solide: "cube",
+    section: "parallele_face",
+    labels: {
+      titre: "Exemple de section plane",
+      section: "carré",
+    },
+    display: {
+      showLabels: true,
+      showSectionName: true,
+      showPlane: true,
+    },
+  }),
+  tags: ["section", "solide", "open", "definition", "canvas"],
+},
+
+{
+  kind: "fixed",
+  id: "3e_section_reconnaitre_fixed_2",
+  niveau: "3e",
+  matiere: "maths",
+  notionId: "sections_solides",
+  microId: "section_reconnaitre",
+  difficulty: 2,
+  theme: "neutral",
+  text: "Une section plane est toujours :",
+  format: "qcm",
+  choices: [
+    "une figure plane",
+    "un solide",
+    "un volume",
+    "un patron",
+  ],
+  expected: ["une figure plane"],
+  comparator: "mcq_exact",
+  hint: "Le mot important est « plane ».",
+  explanation:
+    "Définition : une section plane est la trace d’un plan qui coupe un solide.\n\n" +
+    "Méthode : on distingue le solide en 3D et la figure obtenue par la coupe.\n\n" +
+    "Observation : la coupe appartient à un plan, donc elle est plane.\n\n" +
+    "Conclusion : une section plane est toujours une figure plane.",
+  canvas: sectionSolideCanvas({
+    solide: "cylindre",
+    section: "parallele_base",
+    labels: {
+      titre: "La coupe donne une figure plane",
+      section: "disque",
+    },
+    display: {
+      showLabels: true,
+      showSectionName: true,
+      showPlane: true,
+    },
+  }),
+  tags: ["section", "solide", "figure_plane", "qcm", "canvas"],
+},
+
+  {
+    kind: "template",
+    id: "3e_section_reconnaitre_tpl_1",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "sections_solides",
+    microId: "section_reconnaitre",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Une section est une figure obtenue par une coupe.",
+    tags: ["section", "solide", "template", "canvas"],
+    generate: () => {
+      const solide = randomChoice([
+        {
+          solide: "cylindre" as const,
+          titre: "Section d’un cylindre",
+          section: "parallele_base" as const,
+          reponse: "un disque",
+        },
+        {
+          solide: "pave_droit" as const,
+          titre: "Section d’un pavé droit",
+          section: "parallele_face" as const,
+          reponse: "un rectangle",
+        },
+        {
+          solide: "cone" as const,
+          titre: "Section d’un cône",
+          section: "parallele_base" as const,
+          reponse: "un disque",
+        },
+      ]);
+
+      return {
+        text: "La zone orange représente une section plane. Que représente-t-elle ?",
+        format: "qcm",
+        choices: makeChoices(solide.reponse, [
+          "un volume",
+          "un patron",
+          "une arête",
+          "un sommet",
+        ]),
+        expected: [solide.reponse],
+        comparator: "mcq_exact",
+        explanation:
+          "Définition : une section plane est une figure obtenue par la coupe d’un solide par un plan.\n\n" +
+          "Méthode : on observe la figure orange qui représente la coupe.\n\n" +
+          `Observation : ici, la section obtenue est ${solide.reponse}.\n\n` +
+          `Conclusion : la section plane représentée est ${solide.reponse}.`,
+        canvas: sectionSolideCanvas({
+          solide: solide.solide,
+          section: solide.section,
+          labels: {
+            titre: solide.titre,
+            section: solide.reponse.replace("un ", "").replace("une ", ""),
+          },
+          display: {
+            showLabels: true,
+            showSectionName: true,
+            showPlane: true,
+          },
+        }),
+      };
+    },
+  },
+
+  /* =========================
+     SECTION_PAVE_CUBE
+  ========================= */
+
+  {
+    kind: "fixed",
+    id: "3e_section_pave_cube_fixed_1",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "sections_solides",
+    microId: "section_pave_cube",
+    difficulty: 2,
+    theme: "neutral",
+    text: "La section d’un pavé droit par un plan parallèle à une face est :",
+    format: "qcm",
+    choices: ["un rectangle", "un cercle", "un triangle", "une boule"],
+    expected: ["un rectangle"],
+    comparator: "mcq_exact",
+    hint: "Le plan est parallèle à une face du pavé droit.",
+    explanation:
+      "Définition : une section plane est la figure obtenue quand un plan coupe un solide.\n\n" +
+      "Méthode : si le plan est parallèle à une face, la section a la même forme que cette face.\n\n" +
+      "Observation : les faces d’un pavé droit sont des rectangles.\n\n" +
+      "Conclusion : la section est donc un rectangle.",
+    canvas: sectionSolideCanvas({
+      solide: "pave_droit",
+      section: "parallele_face",
+      labels: {
+        titre: "Pavé droit coupé parallèlement à une face",
+        section: "rectangle",
+      },
+      display: {
+        showLabels: true,
+        showSectionName: true,
+        showPlane: true,
+      },
+    }),
+    tags: ["section", "pave_droit", "rectangle", "qcm", "canvas"],
+  },
+
+  {
+    kind: "fixed",
+    id: "3e_section_pave_cube_fixed_2",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "sections_solides",
+    microId: "section_pave_cube",
+    difficulty: 2,
+    theme: "neutral",
+    text: "La section d’un cube par un plan parallèle à une face est :",
+    format: "qcm",
+    choices: ["un carré", "un disque", "un triangle", "une sphère"],
+    expected: ["un carré"],
+    comparator: "mcq_exact",
+    hint: "Toutes les faces d’un cube sont des carrés.",
+    explanation:
+      "Définition : une section plane est une coupe d’un solide par un plan.\n\n" +
+      "Méthode : si le plan est parallèle à une face, la section a la même forme que cette face.\n\n" +
+      "Observation : les faces d’un cube sont des carrés.\n\n" +
+      "Conclusion : la section est donc un carré.",
+    canvas: sectionSolideCanvas({
+      solide: "cube",
+      section: "parallele_face",
+      labels: {
+        titre: "Cube coupé parallèlement à une face",
+        section: "carré",
+      },
+      display: {
+        showLabels: true,
+        showSectionName: true,
+        showPlane: true,
+      },
+    }),
+    tags: ["section", "cube", "carre", "qcm", "canvas"],
+  },
+
+  {
+    kind: "fixed",
+    id: "3e_section_pave_cube_open_1",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "sections_solides",
+    microId: "section_pave_cube",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Explique pourquoi la section d’un pavé droit par un plan parallèle à une face est un rectangle.",
+    format: "open",
+    expected: ["plan", "parallèle", "face", "rectangle"],
+    comparator: "contains_keyword",
+    hint: "Compare la section avec la face à laquelle le plan est parallèle.",
+    explanation:
+      "Définition : une section plane est la figure obtenue par une coupe d’un solide.\n\n" +
+      "Méthode : si le plan de coupe est parallèle à une face, la section a la même forme que cette face.\n\n" +
+      "Observation : une face d’un pavé droit est un rectangle.\n\n" +
+      "Conclusion : la section obtenue est donc un rectangle.",
+    tags: ["section", "pave_droit", "open", "justification"],
+  },
+
+  {
+    kind: "template",
+    id: "3e_section_pave_cube_tpl_1",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "sections_solides",
+    microId: "section_pave_cube",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Regarde si le plan coupe le solide parallèlement à une face ou en diagonale.",
+    tags: ["section", "cube", "pave_droit", "template", "canvas"],
+    generate: () => {
+      const isCube = Math.random() < 0.5;
+      const isDiagonal = Math.random() < 0.5;
+
+      const solide = isCube ? "cube" : "pave_droit";
+      const section = isDiagonal ? "diagonale" : "parallele_face";
+      const expected = isCube && !isDiagonal ? "un carré" : "un rectangle";
+
+      return {
+        text: `On coupe un ${isCube ? "cube" : "pavé droit"} par le plan représenté en orange. Quelle est la forme de la section ?`,
+        format: "qcm",
+        choices: makeChoices(expected, [
+          "un disque",
+          "un triangle",
+          "une pyramide",
+          "une boule",
+        ]),
+        expected: [expected],
+        comparator: "mcq_exact",
+        explanation:
+          "Définition : une section plane est la figure obtenue par la coupe d’un solide.\n\n" +
+          "Méthode : on observe la forme du plan de coupe dans le solide.\n\n" +
+          `Observation : ici, la section est ${expected}.\n\n` +
+          `Conclusion : la bonne réponse est ${expected}.`,
+        canvas: sectionSolideCanvas({
+          solide,
+          section,
+          labels: {
+            titre: isCube ? "Section d’un cube" : "Section d’un pavé droit",
+            section: expected.replace("un ", ""),
+          },
+          display: {
+            showLabels: true,
+            showSectionName: true,
+            showPlane: true,
+          },
+        }),
+      };
+    },
+  },
+
+{
+  kind: "fixed",
+  id: "3e_section_pave_cube_piege_1",
+  niveau: "3e",
+  matiere: "maths",
+  notionId: "sections_solides",
+  microId: "section_pave_cube",
+  difficulty: 3,
+  theme: "neutral",
+  text: "Un élève dit : « Une section d’un pavé droit est toujours un triangle. » A-t-il raison ?",
+  format: "qcm",
+  choices: ["oui", "non"],
+  expected: ["non"],
+  comparator: "mcq_exact",
+  hint: "Pense à une coupe parallèle à une face.",
+  explanation:
+    "Définition : une section plane dépend du solide et de l’orientation du plan de coupe.\n\n" +
+    "Méthode : on cherche un contre-exemple.\n\n" +
+    "Observation : un pavé droit coupé par un plan parallèle à une face donne un rectangle.\n\n" +
+    "Conclusion : l’élève a tort, une section d’un pavé droit n’est pas toujours un triangle.",
+  canvas: sectionSolideCanvas({
+    solide: "pave_droit",
+    section: "parallele_face",
+    labels: {
+      titre: "Contre-exemple : coupe parallèle à une face",
+      section: "rectangle",
+    },
+    display: {
+      showLabels: true,
+      showSectionName: true,
+      showPlane: true,
+    },
+  }),
+  tags: ["section", "pave_droit", "piege", "qcm", "canvas"],
+},
+
+  /* =========================
+     SECTION_CYLINDRE
+  ========================= */
+
+  {
+    kind: "fixed",
+    id: "3e_section_cylindre_fixed_1",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "sections_solides",
+    microId: "section_cylindre",
+    difficulty: 2,
+    theme: "neutral",
+    text: "La section d’un cylindre par un plan parallèle à sa base est :",
+    format: "qcm",
+    choices: ["un disque", "un rectangle", "un triangle", "un carré"],
+    expected: ["un disque"],
+    comparator: "mcq_exact",
+    hint: "La base d’un cylindre est un disque.",
+    explanation:
+      "Définition : une section plane est la figure obtenue quand un plan coupe un solide.\n\n" +
+      "Méthode : si le plan est parallèle à la base, la section a la même forme que la base.\n\n" +
+      "Observation : la base d’un cylindre est un disque.\n\n" +
+      "Conclusion : la section est donc un disque.",
+    canvas: sectionSolideCanvas({
+      solide: "cylindre",
+      section: "parallele_base",
+      labels: {
+        titre: "Cylindre coupé parallèlement à sa base",
+        section: "disque",
+      },
+      display: {
+        showLabels: true,
+        showSectionName: true,
+        showPlane: true,
+      },
+    }),
+    tags: ["section", "cylindre", "disque", "qcm", "canvas"],
+  },
+
+  {
+    kind: "fixed",
+    id: "3e_section_cylindre_fixed_2",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "sections_solides",
+    microId: "section_cylindre",
+    difficulty: 3,
+    theme: "neutral",
+    text: "La section d’un cylindre par un plan parallèle à son axe peut être :",
+    format: "qcm",
+    choices: ["un rectangle", "un disque", "une sphère", "un segment seulement"],
+    expected: ["un rectangle"],
+    comparator: "mcq_exact",
+    hint: "Imagine une coupe verticale du cylindre.",
+    explanation:
+      "Définition : la forme d’une section dépend de l’orientation du plan de coupe.\n\n" +
+      "Méthode : on distingue une coupe parallèle à la base et une coupe parallèle à l’axe.\n\n" +
+      "Observation : une coupe parallèle à l’axe d’un cylindre donne une forme rectangulaire.\n\n" +
+      "Conclusion : la section peut être un rectangle.",
+    canvas: sectionSolideCanvas({
+      solide: "cylindre",
+      section: "parallele_axe",
+      labels: {
+        titre: "Cylindre coupé parallèlement à son axe",
+        section: "rectangle",
+      },
+      display: {
+        showLabels: true,
+        showSectionName: true,
+        showPlane: true,
+      },
+    }),
+    tags: ["section", "cylindre", "rectangle", "axe", "qcm", "canvas"],
+  },
+
+  {
+    kind: "fixed",
+    id: "3e_section_cylindre_open_1",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "sections_solides",
+    microId: "section_cylindre",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Explique pourquoi la section d’un cylindre par un plan parallèle à sa base est un disque.",
+    format: "open",
+    expected: ["cylindre", "base", "parallèle", "disque"],
+    comparator: "contains_keyword",
+    hint: "Le plan est parallèle à la base du cylindre.",
+    explanation:
+      "Définition : une section plane est obtenue par la coupe d’un solide avec un plan.\n\n" +
+      "Méthode : quand le plan est parallèle à la base, la section a la même forme que la base.\n\n" +
+      "Observation : la base d’un cylindre est un disque.\n\n" +
+      "Conclusion : la section est donc un disque.",
+    tags: ["section", "cylindre", "open", "justification"],
+  },
+
+  {
+    kind: "template",
+    id: "3e_section_cylindre_tpl_1",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "sections_solides",
+    microId: "section_cylindre",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Une coupe horizontale donne un disque ; une coupe verticale donne un rectangle.",
+    tags: ["section", "cylindre", "template", "canvas"],
+    generate: () => {
+      const horizontal = Math.random() < 0.5;
+
+      return {
+        text: horizontal
+          ? "On coupe un cylindre par un plan parallèle à sa base. Quelle est la forme de la section ?"
+          : "On coupe un cylindre par un plan parallèle à son axe. Quelle est la forme de la section ?",
+        format: "qcm",
+        choices: horizontal
+          ? makeChoices("un disque", ["un rectangle", "un triangle", "un cube"])
+          : makeChoices("un rectangle", ["un disque", "une boule", "un triangle"]),
+        expected: [horizontal ? "un disque" : "un rectangle"],
+        comparator: "mcq_exact",
+        explanation:
+          "Définition : une section plane est une figure obtenue en coupant un solide par un plan.\n\n" +
+          "Méthode : on repère l’orientation du plan de coupe.\n\n" +
+          (horizontal
+            ? "Observation : le plan est parallèle à la base du cylindre, donc la section a la forme de la base : un disque.\n\n"
+            : "Observation : le plan est parallèle à l’axe du cylindre, donc la section peut être un rectangle.\n\n") +
+          `Conclusion : la section est ${horizontal ? "un disque" : "un rectangle"}.`,
+        canvas: sectionSolideCanvas({
+          solide: "cylindre",
+          section: horizontal ? "parallele_base" : "parallele_axe",
+          labels: {
+            titre: horizontal
+              ? "Coupe parallèle à la base"
+              : "Coupe parallèle à l’axe",
+            section: horizontal ? "disque" : "rectangle",
+          },
+          display: {
+            showLabels: true,
+            showSectionName: true,
+            showPlane: true,
+          },
+        }),
+      };
+    },
+  },
+
+{
+  kind: "fixed",
+  id: "3e_section_cylindre_piege_1",
+  niveau: "3e",
+  matiere: "maths",
+  notionId: "sections_solides",
+  microId: "section_cylindre",
+  difficulty: 3,
+  theme: "neutral",
+  text: "Un élève dit : « Toute section d’un cylindre est un disque. » A-t-il raison ?",
+  format: "qcm",
+  choices: ["oui", "non"],
+  expected: ["non"],
+  comparator: "mcq_exact",
+  hint: "Pense à une coupe verticale.",
+  explanation:
+    "Définition : une section dépend de l’orientation du plan de coupe.\n\n" +
+    "Méthode : on cherche un contre-exemple.\n\n" +
+    "Observation : un cylindre coupé par un plan parallèle à son axe peut donner un rectangle.\n\n" +
+    "Conclusion : l’élève a tort, une section d’un cylindre n’est pas toujours un disque.",
+  canvas: sectionSolideCanvas({
+    solide: "cylindre",
+    section: "parallele_axe",
+    labels: {
+      titre: "Contre-exemple : coupe parallèle à l’axe",
+      section: "rectangle",
+    },
+    display: {
+      showLabels: true,
+      showSectionName: true,
+      showPlane: true,
+    },
+  }),
+  tags: ["section", "cylindre", "piege", "qcm", "canvas"],
+},
+
+  /* =========================
+     SECTION_CONE_PYRAMIDE
+  ========================= */
+
+  {
+    kind: "fixed",
+    id: "3e_section_cone_pyramide_fixed_1",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "sections_solides",
+    microId: "section_cone_pyramide",
+    difficulty: 3,
+    theme: "neutral",
+    text: "La section d’un cône par un plan parallèle à sa base est :",
+    format: "qcm",
+    choices: ["un disque", "un rectangle", "un carré", "une sphère"],
+    expected: ["un disque"],
+    comparator: "mcq_exact",
+    hint: "La base d’un cône est un disque.",
+    explanation:
+      "Définition : une section plane est une figure obtenue par une coupe du solide.\n\n" +
+      "Méthode : si le plan est parallèle à la base, la section a la même forme que la base.\n\n" +
+      "Observation : la base d’un cône est un disque.\n\n" +
+      "Conclusion : la section est donc un disque.",
+    canvas: sectionSolideCanvas({
+      solide: "cone",
+      section: "parallele_base",
+      labels: {
+        titre: "Cône coupé parallèlement à sa base",
+        section: "disque",
+      },
+      display: {
+        showLabels: true,
+        showSectionName: true,
+        showPlane: true,
+      },
+    }),
+    tags: ["section", "cone", "disque", "qcm", "canvas"],
+  },
+
+  {
+    kind: "fixed",
+    id: "3e_section_cone_pyramide_fixed_2",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "sections_solides",
+    microId: "section_cone_pyramide",
+    difficulty: 3,
+    theme: "neutral",
+    text: "La section d’une pyramide par un plan parallèle à sa base est :",
+    format: "qcm",
+    choices: [
+      "une réduction de la base",
+      "toujours un cercle",
+      "toujours un rectangle",
+      "une boule",
+    ],
+    expected: ["une réduction de la base"],
+    comparator: "mcq_exact",
+    hint: "Le plan est parallèle à la base de la pyramide.",
+    explanation:
+      "Définition : une section plane est la figure obtenue par une coupe.\n\n" +
+      "Méthode : dans une pyramide, une coupe parallèle à la base donne une figure de même forme que la base.\n\n" +
+      "Observation : cette figure est plus petite que la base.\n\n" +
+      "Conclusion : la section est une réduction de la base.",
+    canvas: sectionSolideCanvas({
+      solide: "pyramide",
+      section: "parallele_base",
+      labels: {
+        titre: "Pyramide coupée parallèlement à sa base",
+        section: "réduction de la base",
+      },
+      display: {
+        showLabels: true,
+        showSectionName: true,
+        showPlane: true,
+      },
+    }),
+    tags: ["section", "pyramide", "reduction", "qcm", "canvas"],
+  },
+
+  {
+    kind: "fixed",
+    id: "3e_section_cone_pyramide_fixed_3",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "sections_solides",
+    microId: "section_cone_pyramide",
+    difficulty: 3,
+    theme: "neutral",
+    text: "La section d’un cône par un plan passant par son sommet et son axe peut être :",
+    format: "qcm",
+    choices: ["un triangle", "un disque", "un carré", "un pavé droit"],
+    expected: ["un triangle"],
+    comparator: "mcq_exact",
+    hint: "Imagine une coupe verticale qui passe par le sommet du cône.",
+    explanation:
+      "Définition : une section plane dépend de la position du plan de coupe.\n\n" +
+      "Méthode : on imagine une coupe verticale du cône passant par son sommet.\n\n" +
+      "Observation : cette coupe fait apparaître une figure triangulaire.\n\n" +
+      "Conclusion : la section peut être un triangle.",
+    canvas: sectionSolideCanvas({
+      solide: "cone",
+      section: "verticale",
+      labels: {
+        titre: "Cône coupé verticalement",
+        section: "triangle",
+      },
+      display: {
+        showLabels: true,
+        showSectionName: true,
+        showPlane: true,
+      },
+    }),
+    tags: ["section", "cone", "triangle", "qcm", "canvas"],
+  },
+
+  {
+    kind: "fixed",
+    id: "3e_section_cone_pyramide_open_1",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "sections_solides",
+    microId: "section_cone_pyramide",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Explique pourquoi la section d’une pyramide par un plan parallèle à sa base est une réduction de la base.",
+    format: "open",
+    expected: ["pyramide", "plan", "parallèle", "base", "réduction"],
+    comparator: "contains_keyword",
+    hint: "La section garde la forme de la base, mais elle est plus petite.",
+    explanation:
+      "Définition : une section plane est obtenue quand un plan coupe un solide.\n\n" +
+      "Méthode : dans une pyramide, un plan parallèle à la base coupe les arêtes latérales de manière proportionnelle.\n\n" +
+      "Observation : la figure obtenue a la même forme que la base, mais avec des dimensions plus petites.\n\n" +
+      "Conclusion : la section est donc une réduction de la base.",
+    tags: ["section", "pyramide", "open", "reduction"],
+  },
+
+  {
+    kind: "template",
+    id: "3e_section_cone_pyramide_tpl_1",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "sections_solides",
+    microId: "section_cone_pyramide",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Pour un cône ou une pyramide, une coupe parallèle à la base garde la forme de la base.",
+    tags: ["section", "cone", "pyramide", "template", "canvas"],
+    generate: () => {
+      const isCone = Math.random() < 0.5;
+
+      return {
+        text: isCone
+          ? "On coupe un cône par un plan parallèle à sa base. Quelle est la forme de la section ?"
+          : "On coupe une pyramide par un plan parallèle à sa base. Que peut-on dire de la section ?",
+        format: "qcm",
+        choices: isCone
+          ? makeChoices("un disque", ["un rectangle", "une boule", "un carré"])
+          : makeChoices("une réduction de la base", [
+              "un disque",
+              "une sphère",
+              "un cylindre",
+            ]),
+        expected: [isCone ? "un disque" : "une réduction de la base"],
+        comparator: "mcq_exact",
+        explanation:
+          "Définition : une section plane est obtenue par la coupe d’un solide avec un plan.\n\n" +
+          "Méthode : si le plan est parallèle à la base, la section garde la forme de la base.\n\n" +
+          (isCone
+            ? "Observation : la base du cône est un disque, donc la section est un disque.\n\n"
+            : "Observation : la section d’une pyramide parallèle à la base est une figure de même forme, mais plus petite.\n\n") +
+          `Conclusion : la bonne réponse est ${
+            isCone ? "un disque" : "une réduction de la base"
+          }.`,
+        canvas: sectionSolideCanvas({
+          solide: isCone ? "cone" : "pyramide",
+          section: "parallele_base",
+          labels: {
+            titre: isCone
+              ? "Cône coupé parallèlement à sa base"
+              : "Pyramide coupée parallèlement à sa base",
+            section: isCone ? "disque" : "réduction de la base",
+          },
+          display: {
+            showLabels: true,
+            showSectionName: true,
+            showPlane: true,
+          },
+        }),
+      };
+    },
+  },
+
+  /* =========================
+     SECTION_CALCULER_LONGUEUR
+  ========================= */
+
+  {
+    kind: "template",
+    id: "3e_section_calculer_longueur_tpl_1_rectangle",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "sections_solides",
+    microId: "section_calculer_longueur",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "La diagonale du rectangle se calcule avec le théorème de Pythagore.",
+    tags: ["section", "pave_droit", "pythagore", "template", "calcul"],
+    generate: () => {
+      const longueur = randomChoice([6, 8, 10, 12]);
+      const largeur = randomChoice([8, 10, 12, 16]);
+      const d2 = longueur * longueur + largeur * largeur;
+      const diagonale = Math.sqrt(d2);
+      const rounded = Math.round(diagonale * 100) / 100;
+
+      return {
+        text:
+          `On coupe un pavé droit par un plan qui forme un rectangle de longueur ${longueur} cm ` +
+          `et de largeur ${largeur} cm. Calculer la diagonale de cette section, arrondie au centième.`,
+        format: "short",
+        expected: [String(rounded), formatNumber(rounded)],
+        comparator: "number_equal",
+        explanation:
+          "Définition : une section plane peut faire apparaître une figure plane à l’intérieur d’un solide.\n\n" +
+          "Méthode : ici, la section est un rectangle. Pour calculer sa diagonale, on utilise le théorème de Pythagore.\n\n" +
+          `Calcul : d² = ${longueur}² + ${largeur}² = ${longueur * longueur} + ${largeur * largeur} = ${d2}. Donc d ≈ ${formatNumber(rounded)} cm.\n\n` +
+          `Conclusion : la diagonale de la section mesure environ ${formatNumber(rounded)} cm.`,
+        canvas: sectionSolideCanvas({
+          solide: "pave_droit",
+          section: "diagonale",
+          labels: {
+            titre: "Section rectangulaire d’un pavé droit",
+            section: "rectangle",
+          },
+          display: {
+            showLabels: true,
+            showSectionName: true,
+            showPlane: true,
+          },
+        }),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "3e_section_calculer_longueur_tpl_2_exact",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "sections_solides",
+    microId: "section_calculer_longueur",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Cherche un triangle rectangle dans la section.",
+    tags: ["section", "pythagore", "template", "short"],
+    generate: () => {
+      const triples = [
+        [3, 4, 5],
+        [5, 12, 13],
+        [6, 8, 10],
+        [8, 15, 17],
+      ] as const;
+
+      const [a, b, c] = randomChoice(triples);
+
+      return {
+        text:
+          `Dans une section rectangulaire, on connaît deux côtés perpendiculaires : ${a} cm et ${b} cm. ` +
+          "Quelle est la longueur de la diagonale ?",
+        format: "short",
+        expected: [String(c)],
+        comparator: "number_equal",
+        explanation:
+          "Définition : dans un rectangle, la diagonale forme un triangle rectangle avec deux côtés du rectangle.\n\n" +
+          "Méthode : on utilise le théorème de Pythagore.\n\n" +
+          `Calcul : d² = ${a}² + ${b}² = ${a * a} + ${b * b} = ${c * c}, donc d = ${c} cm.\n\n` +
+          `Conclusion : la diagonale mesure ${c} cm.`,
+        canvas: sectionSolideCanvas({
+          solide: "pave_droit",
+          section: "diagonale",
+          labels: {
+            titre: "Calcul dans une section",
+            section: "rectangle",
+          },
+          display: {
+            showLabels: true,
+            showSectionName: true,
+            showPlane: true,
+          },
+        }),
+      };
+    },
+  },
+
+{
+  kind: "fixed",
+  id: "3e_section_calculer_longueur_open_1",
+  niveau: "3e",
+  matiere: "maths",
+  notionId: "sections_solides",
+  microId: "section_calculer_longueur",
+  difficulty: 4,
+  theme: "neutral",
+  text: "Explique la méthode pour calculer une diagonale dans une section rectangulaire.",
+  format: "open",
+  expected: ["rectangle", "triangle", "pythagore", "diagonale"],
+  comparator: "contains_keyword",
+  hint: "La diagonale du rectangle crée un triangle rectangle.",
+  explanation:
+    "Définition : une section rectangulaire est une figure plane en forme de rectangle.\n\n" +
+    "Méthode : la diagonale d’un rectangle forme deux triangles rectangles.\n\n" +
+    "Calcul : on peut appliquer le théorème de Pythagore avec les deux côtés perpendiculaires.\n\n" +
+    "Conclusion : la diagonale se calcule grâce au théorème de Pythagore.",
+  canvas: sectionSolideCanvas({
+    solide: "pave_droit",
+    section: "diagonale",
+    labels: {
+      titre: "La diagonale apparaît dans la section",
+      section: "rectangle",
+    },
+    display: {
+      showLabels: true,
+      showSectionName: true,
+      showPlane: true,
+    },
+  }),
+  tags: ["section", "pythagore", "open", "methode", "canvas"],
+},
+
+{
+  kind: "fixed",
+  id: "3e_section_calculer_longueur_piege_1",
+  niveau: "3e",
+  matiere: "maths",
+  notionId: "sections_solides",
+  microId: "section_calculer_longueur",
+  difficulty: 4,
+  theme: "neutral",
+  text: "Dans une section rectangulaire de côtés 6 cm et 8 cm, un élève dit que la diagonale vaut 6 + 8 = 14 cm. A-t-il raison ?",
+  format: "qcm",
+  choices: ["oui", "non"],
+  expected: ["non"],
+  comparator: "mcq_exact",
+  hint: "La diagonale ne se calcule pas en additionnant les deux côtés.",
+  explanation:
+    "Définition : la diagonale d’un rectangle forme un triangle rectangle avec deux côtés du rectangle.\n\n" +
+    "Méthode : on doit utiliser le théorème de Pythagore, pas une addition.\n\n" +
+    "Calcul : d² = 6² + 8² = 36 + 64 = 100, donc d = 10 cm.\n\n" +
+    "Conclusion : l’élève a tort. La diagonale mesure 10 cm, pas 14 cm.",
+  canvas: sectionSolideCanvas({
+    solide: "pave_droit",
+    section: "diagonale",
+    labels: {
+      titre: "Erreur fréquente : la diagonale",
+      section: "rectangle",
+    },
+    display: {
+      showLabels: true,
+      showSectionName: true,
+      showPlane: true,
+    },
+  }),
+  tags: ["section", "pythagore", "piege", "qcm", "canvas"],
+},
+
+  /* =========================
+     SECTION_DEFI
+  ========================= */
+
+  {
+    kind: "fixed",
+    id: "3e_section_defi_fixed_1",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "sections_solides",
+    microId: "section_defi",
+    difficulty: 5,
+    theme: "reunion",
+    text:
+      "À La Réunion, on modélise un réservoir cylindrique vertical. On le coupe horizontalement, parallèlement à sa base. Quelle est la forme de la section obtenue ? Justifie brièvement.",
+    format: "open",
+    expected: ["disque", "base", "parallèle"],
+    comparator: "contains_keyword",
+    hint: "La coupe est parallèle à la base du cylindre.",
+    explanation:
+      "Définition : une section plane est la figure obtenue lorsqu’un plan coupe un solide.\n\n" +
+      "Méthode : pour un cylindre, une coupe parallèle à la base donne une figure de même forme que la base.\n\n" +
+      "Observation : la base d’un cylindre est un disque.\n\n" +
+      "Conclusion : la section obtenue est donc un disque.",
+    canvas: sectionSolideCanvas({
+      solide: "cylindre",
+      section: "parallele_base",
+      labels: {
+        titre: "Réservoir cylindrique",
+        section: "disque",
+      },
+      display: {
+        showLabels: true,
+        showSectionName: true,
+        showPlane: true,
+      },
+    }),
+    tags: ["section", "cylindre", "reunion", "defi", "open", "canvas"],
+  },
+
+  {
+    kind: "fixed",
+    id: "3e_section_defi_fixed_2",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "sections_solides",
+    microId: "section_defi",
+    difficulty: 5,
+    theme: "neutral",
+    text:
+      "Une pyramide est coupée par un plan parallèle à sa base carrée. Décris la section obtenue et explique pourquoi.",
+    format: "open",
+    expected: ["carré", "parallèle", "base", "réduction"],
+    comparator: "contains_keyword",
+    hint: "La section garde la forme de la base.",
+    explanation:
+      "Définition : une section plane est obtenue par la coupe d’un solide avec un plan.\n\n" +
+      "Méthode : dans une pyramide, une coupe parallèle à la base donne une figure de même forme que la base.\n\n" +
+      "Observation : la base est un carré, donc la section est aussi un carré plus petit.\n\n" +
+      "Conclusion : la section est une réduction de la base carrée.",
+    canvas: sectionSolideCanvas({
+      solide: "pyramide",
+      section: "parallele_base",
+      labels: {
+        titre: "Pyramide à base carrée",
+        section: "réduction de la base",
+      },
+      display: {
+        showLabels: true,
+        showSectionName: true,
+        showPlane: true,
+      },
+    }),
+    tags: ["section", "pyramide", "defi", "open", "canvas"],
+  },
+
+  {
+    kind: "template",
+    id: "3e_section_defi_tpl_1_reunion",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "sections_solides",
+    microId: "section_defi",
+    difficulty: 5,
+    theme: "reunion",
+    hint: "Identifie d’abord le solide, puis l’orientation de la coupe.",
+    tags: ["section", "defi", "reunion", "template", "open", "canvas"],
+    generate: () => {
+      const situations = [
+        {
+          solide: "cylindre" as const,
+          section: "parallele_base" as const,
+          contexte:
+            "Une citerne d’eau cylindrique est coupée horizontalement pour faire un schéma.",
+          expected: "disque",
+          keywords: ["cylindre", "base", "parallèle", "disque"],
+          titre: "Citerne cylindrique",
+        },
+        {
+          solide: "pave_droit" as const,
+          section: "parallele_face" as const,
+          contexte:
+            "Une boîte rectangulaire de matériel scolaire est coupée parallèlement à une de ses faces.",
+          expected: "rectangle",
+          keywords: ["pavé", "face", "parallèle", "rectangle"],
+          titre: "Boîte rectangulaire",
+        },
+        {
+          solide: "cone" as const,
+          section: "parallele_base" as const,
+          contexte:
+            "Une maquette de volcan en forme de cône est coupée par un plan parallèle à sa base.",
+          expected: "disque",
+          keywords: ["cône", "base", "parallèle", "disque"],
+          titre: "Maquette de volcan",
+        },
+      ];
+
+      const s = randomChoice(situations);
+
+      return {
+        text:
+          `${s.contexte} Quelle est la forme de la section obtenue ? Justifie brièvement.`,
+        format: "open",
+        expected: s.keywords,
+        comparator: "contains_keyword",
+        explanation:
+          "Définition : une section plane est la figure obtenue lorsqu’un plan coupe un solide.\n\n" +
+          "Méthode : on identifie le solide et l’orientation du plan de coupe.\n\n" +
+          `Observation : ici, la coupe donne une section en forme de ${s.expected}.\n\n` +
+          `Conclusion : la section obtenue est donc un ${s.expected}.`,
+        canvas: sectionSolideCanvas({
+          solide: s.solide,
+          section: s.section,
+          labels: {
+            titre: s.titre,
+            section: s.expected,
+          },
+          display: {
+            showLabels: true,
+            showSectionName: true,
+            showPlane: true,
+          },
+        }),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "3e_section_defi_tpl_2_calcul",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "sections_solides",
+    microId: "section_defi",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "La section est un rectangle : utilise Pythagore pour trouver sa diagonale.",
+    tags: ["section", "defi", "pythagore", "template", "short", "canvas"],
+    generate: () => {
+      const triples = [
+        [7, 24, 25],
+        [9, 12, 15],
+        [10, 24, 26],
+        [12, 16, 20],
+      ] as const;
+
+      const [a, b, c] = randomChoice(triples);
+
+      return {
+        text:
+          `Une section plane d’un pavé droit est un rectangle de côtés ${a} cm et ${b} cm. ` +
+          "Quelle est la longueur de sa diagonale ?",
+        format: "short",
+        expected: [String(c)],
+        comparator: "number_equal",
+        explanation:
+          "Définition : une section plane peut être une figure plane dans laquelle on effectue des calculs.\n\n" +
+          "Méthode : dans un rectangle, la diagonale forme un triangle rectangle avec les deux côtés.\n\n" +
+          `Calcul : d² = ${a}² + ${b}² = ${a * a} + ${b * b} = ${c * c}, donc d = ${c} cm.\n\n` +
+          `Conclusion : la diagonale mesure ${c} cm.`,
+        canvas: sectionSolideCanvas({
+          solide: "pave_droit",
+          section: "diagonale",
+          labels: {
+            titre: "Défi : section rectangulaire",
+            section: "rectangle",
+          },
+          display: {
+            showLabels: true,
+            showSectionName: true,
+            showPlane: true,
+          },
+        }),
+      };
+    },
+  },
+];
