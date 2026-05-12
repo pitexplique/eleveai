@@ -10,14 +10,6 @@ function randomChoice<T>(items: T[]): T {
   return items[Math.floor(Math.random() * items.length)];
 }
 
-function shuffle<T>(items: T[]): T[] {
-  return [...items].sort(() => Math.random() - 0.5);
-}
-
-function makeChoices(correct: string, wrongs: string[]) {
-  return shuffle([correct, ...wrongs]).slice(0, 4);
-}
-
 function exp(
   definition: string,
   methode: string,
@@ -25,6 +17,50 @@ function exp(
   conclusion: string
 ) {
   return `Définition : ${definition}\n\nMéthode : ${methode}\n\nCalcul : ${calcul}\n\nConclusion : ${conclusion}`;
+}
+
+function algebreCanvas(data: {
+  theme?:
+    | "margouillat"
+    | "pomme"
+    | "eau"
+    | "dechet"
+    | "surf"
+    | "jeu_video"
+    | "tresor"
+    | "pieces"
+    | "requin"
+    | "pi";
+  titre?: string;
+  groupesCaches?: number;
+  objetsVisibles?: number;
+  symbole?: string;
+  expression?: string;
+  phrase?: string;
+  display?: {
+    showConcret?: boolean;
+    showExpression?: boolean;
+    showPhrase?: boolean;
+    showLabels?: boolean;
+  };
+}) {
+  return {
+    kind: "algebre" as const,
+    theme: data.theme ?? "margouillat",
+    titre: data.titre,
+    groupesCaches: data.groupesCaches ?? 0,
+    objetsVisibles: data.objetsVisibles ?? 0,
+    symbole: data.symbole ?? "x",
+    expression: data.expression,
+    phrase: data.phrase,
+    display: {
+      showConcret: true,
+      showExpression: true,
+      showPhrase: true,
+      showLabels: true,
+      ...(data.display ?? {}),
+    },
+  };
 }
 
 export const algebreBank: TutorBankItemV4[] = [
@@ -215,6 +251,68 @@ export const algebreBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    kind: "template",
+    id: "cm2_algebre_completer_egalite_tpl_3_multiplication",
+    niveau: "cm2",
+    matiere: "maths",
+    notionId: "algebre",
+    microId: "algebre_completer_egalite",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Utilise l’opération inverse de la multiplication : la division.",
+    tags: ["cm2", "algebre", "egalite", "multiplication", "template"],
+    generate: () => {
+      const missing = randomInt(3, 12);
+      const mult = randomChoice([2, 3, 4, 5, 6]);
+      const total = missing * mult;
+
+      return {
+        text: `Complète : ? × ${mult} = ${total}`,
+        format: "short",
+        expected: [`${missing}`],
+        comparator: "number_equal",
+        explanation: exp(
+          "Compléter une égalité, c’est trouver le nombre qui rend l’égalité vraie.",
+          "On utilise l’opération inverse de la multiplication : la division.",
+          `${total} ÷ ${mult} = ${missing}.`,
+          `Le nombre manquant est ${missing}.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "cm2_algebre_completer_egalite_tpl_4_soustraction",
+    niveau: "cm2",
+    matiere: "maths",
+    notionId: "algebre",
+    microId: "algebre_completer_egalite",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Attention : dans ? - a = b, le nombre manquant est plus grand que b.",
+    tags: ["cm2", "algebre", "egalite", "soustraction", "piege", "template"],
+    generate: () => {
+      const sub = randomInt(4, 15);
+      const result = randomInt(8, 25);
+      const missing = result + sub;
+
+      return {
+        text: `Complète : ? - ${sub} = ${result}`,
+        format: "short",
+        expected: [`${missing}`],
+        comparator: "number_equal",
+        explanation: exp(
+          "Compléter une égalité, c’est trouver le nombre qui rend l’égalité vraie.",
+          "On cherche le nombre de départ avant la soustraction.",
+          `${result} + ${sub} = ${missing}.`,
+          `Le nombre manquant est ${missing}.`
+        ),
+      };
+    },
+  },
+
   // ============================================================
   // ALGEBRE_NOMBRE_INCONNU
   // ============================================================
@@ -239,7 +337,17 @@ export const algebreBank: TutorBankItemV4[] = [
       "20 - 9 = 11.",
       "Le nombre cherché est 11."
     ),
-    tags: ["cm2", "algebre", "nombre_inconnu"],
+    canvas: algebreCanvas({
+      theme: "pi",
+      titre: "Nommer ce qu’on ne connaît pas",
+      groupesCaches: 1,
+      objetsVisibles: 0,
+      symbole: "x",
+      expression: "x + 9 = 20",
+      phrase:
+        "Quand on ne connaît pas un nombre, on peut lui donner un nom : ici, on l’appelle x.",
+    }),
+    tags: ["cm2", "algebre", "nombre_inconnu", "canvas"],
   },
 
   {
@@ -252,7 +360,7 @@ export const algebreBank: TutorBankItemV4[] = [
     difficulty: 2,
     theme: "neutral",
     hint: "Quand on ajoute, l’opération inverse est soustraire.",
-    tags: ["cm2", "algebre", "nombre_inconnu", "template"],
+    tags: ["cm2", "algebre", "nombre_inconnu", "template", "canvas"],
     generate: () => {
       const n = randomInt(8, 30);
       const add = randomInt(4, 15);
@@ -269,6 +377,16 @@ export const algebreBank: TutorBankItemV4[] = [
           `${total} - ${add} = ${n}.`,
           `Le nombre cherché est ${n}.`
         ),
+        canvas: algebreCanvas({
+          theme: "pi",
+          titre: "Un nombre inconnu",
+          groupesCaches: 1,
+          objetsVisibles: add,
+          symbole: "x",
+          expression: `x + ${add} = ${total}`,
+          phrase:
+            "Le nombre inconnu est appelé x. L’expression décrit la situation avant de calculer.",
+        }),
       };
     },
   },
@@ -283,7 +401,7 @@ export const algebreBank: TutorBankItemV4[] = [
     difficulty: 3,
     theme: "neutral",
     hint: "Quand on multiplie, l’opération inverse est diviser.",
-    tags: ["cm2", "algebre", "nombre_inconnu", "template"],
+    tags: ["cm2", "algebre", "nombre_inconnu", "template", "canvas"],
     generate: () => {
       const n = randomInt(3, 12);
       const mult = randomChoice([2, 3, 4, 5]);
@@ -300,6 +418,16 @@ export const algebreBank: TutorBankItemV4[] = [
           `${total} ÷ ${mult} = ${n}.`,
           `Le nombre cherché est ${n}.`
         ),
+        canvas: algebreCanvas({
+          theme: "pieces",
+          titre: "Même quantité répétée",
+          groupesCaches: mult,
+          objetsVisibles: 0,
+          symbole: "x",
+          expression: `${mult}x = ${total}`,
+          phrase:
+            "Chaque bocal contient le même nombre inconnu de pièces. On appelle ce nombre x.",
+        }),
       };
     },
   },
@@ -341,7 +469,7 @@ export const algebreBank: TutorBankItemV4[] = [
     difficulty: 3,
     theme: "reunion",
     hint: "Représente le total avec une grande barre, puis enlève la partie connue.",
-    tags: ["cm2", "algebre", "schema_barre", "reunion", "template"],
+    tags: ["cm2", "algebre", "schema_barre", "reunion", "template", "canvas"],
     generate: () => {
       const part1 = randomInt(12, 28);
       const part2 = randomInt(8, 20);
@@ -358,6 +486,19 @@ export const algebreBank: TutorBankItemV4[] = [
           `${total} - ${part1} = ${part2}.`,
           `Le deuxième panier contient ${part2} fruits.`
         ),
+        canvas: algebreCanvas({
+          theme: "pomme",
+          titre: "Total et partie inconnue",
+          groupesCaches: 1,
+          objetsVisibles: part1 <= 8 ? part1 : 3,
+          symbole: "x",
+          expression: `${part1} + x = ${total}`,
+          phrase:
+            "Le deuxième panier est inconnu. On peut l’appeler x pour représenter la situation.",
+          display: {
+            showLabels: true,
+          },
+        }),
       };
     },
   },
@@ -372,7 +513,7 @@ export const algebreBank: TutorBankItemV4[] = [
     difficulty: 4,
     theme: "neutral",
     hint: "Le total est partagé en parts égales. Cherche la valeur d’une part.",
-    tags: ["cm2", "algebre", "schema_barre", "partage", "template"],
+    tags: ["cm2", "algebre", "schema_barre", "partage", "template", "canvas"],
     generate: () => {
       const parts = randomChoice([3, 4, 5]);
       const value = randomInt(6, 15);
@@ -389,6 +530,16 @@ export const algebreBank: TutorBankItemV4[] = [
           `${total} ÷ ${parts} = ${value}.`,
           `Chaque morceau mesure ${value} cm.`
         ),
+        canvas: algebreCanvas({
+          theme: "pi",
+          titre: "Parts égales",
+          groupesCaches: parts,
+          objetsVisibles: 0,
+          symbole: "x",
+          expression: `${parts}x = ${total}`,
+          phrase:
+            "Chaque part a la même longueur inconnue. On appelle cette longueur x.",
+        }),
       };
     },
   },
@@ -466,7 +617,12 @@ export const algebreBank: TutorBankItemV4[] = [
     generate: () => {
       const start = randomChoice([2, 3, 4]);
       const factor = randomChoice([2, 3]);
-      const terms = [start, start * factor, start * factor ** 2, start * factor ** 3];
+      const terms = [
+        start,
+        start * factor,
+        start * factor ** 2,
+        start * factor ** 3,
+      ];
       const next = start * factor ** 4;
 
       return {
@@ -521,7 +677,7 @@ export const algebreBank: TutorBankItemV4[] = [
     difficulty: 3,
     theme: "neutral",
     hint: "Applique la règle à la valeur d’entrée.",
-    tags: ["cm2", "algebre", "relation", "machine", "template"],
+    tags: ["cm2", "algebre", "relation", "machine", "template", "canvas"],
     generate: () => {
       const mult = randomChoice([2, 3, 4, 5]);
       const input = randomInt(3, 12);
@@ -538,6 +694,16 @@ export const algebreBank: TutorBankItemV4[] = [
           `${input} × ${mult} = ${output}.`,
           `Le nombre qui sort est ${output}.`
         ),
+        canvas: algebreCanvas({
+          theme: "jeu_video",
+          titre: "Une règle de jeu",
+          groupesCaches: mult,
+          objetsVisibles: 0,
+          symbole: String(input),
+          expression: `${input} × ${mult} = ${output}`,
+          phrase:
+            "La règle transforme le nombre d’entrée pour obtenir le nombre de sortie.",
+        }),
       };
     },
   },
@@ -552,7 +718,7 @@ export const algebreBank: TutorBankItemV4[] = [
     difficulty: 4,
     theme: "neutral",
     hint: "La règle contient deux étapes : multiplier puis ajouter.",
-    tags: ["cm2", "algebre", "relation", "machine", "template"],
+    tags: ["cm2", "algebre", "relation", "machine", "template", "canvas"],
     generate: () => {
       const mult = randomChoice([2, 3, 4]);
       const add = randomInt(2, 9);
@@ -570,8 +736,229 @@ export const algebreBank: TutorBankItemV4[] = [
           `${input} × ${mult} = ${input * mult}, puis ${input * mult} + ${add} = ${output}.`,
           `Le nombre qui sort est ${output}.`
         ),
+        canvas: algebreCanvas({
+          theme: "jeu_video",
+          titre: "Deux étapes",
+          groupesCaches: mult,
+          objetsVisibles: add,
+          symbole: String(input),
+          expression: `${mult} × ${input} + ${add} = ${output}`,
+          phrase:
+            "Une expression peut décrire plusieurs actions dans le bon ordre.",
+        }),
       };
     },
+  },
+
+  // ============================================================
+  // ALGEBRE_MODELISER
+  // ============================================================
+
+  {
+    kind: "fixed",
+    id: "cm2_algebre_modeliser_margouillat_fixed_1",
+    niveau: "cm2",
+    matiere: "maths",
+    notionId: "algebre",
+    microId: "algebre_nombre_inconnu",
+    difficulty: 2,
+    theme: "reunion",
+    text: "Chaque feuille cache le même nombre de margouillats. On appelle ce nombre x. Que représentent 2 feuilles ?",
+    format: "qcm",
+    choices: ["2x", "x + 2", "x²", "2"],
+    expected: ["2x"],
+    comparator: "mcq_exact",
+    hint: "Deux feuilles identiques, c’est x + x.",
+    explanation: exp(
+      "Une lettre peut représenter une quantité inconnue.",
+      "Chaque feuille cache x margouillats, donc deux feuilles représentent x + x.",
+      "x + x = 2x.",
+      "Deux feuilles représentent 2x margouillats."
+    ),
+    canvas: algebreCanvas({
+      theme: "margouillat",
+      titre: "Du concret vers l’algèbre",
+      groupesCaches: 2,
+      objetsVisibles: 0,
+      symbole: "x",
+      expression: "x + x = 2x",
+      phrase:
+        "Chaque feuille cache le même nombre de margouillats. On appelle ce nombre x.",
+    }),
+    tags: ["cm2", "algebre", "modelisation", "margouillat", "canvas"],
+  },
+
+  {
+    kind: "fixed",
+    id: "cm2_algebre_modeliser_margouillat_fixed_2",
+    niveau: "cm2",
+    matiere: "maths",
+    notionId: "algebre",
+    microId: "algebre_nombre_inconnu",
+    difficulty: 3,
+    theme: "reunion",
+    text: "Chaque feuille cache x margouillats. Il y a 3 feuilles et 2 margouillats visibles. Quelle expression modélise la situation ?",
+    format: "qcm",
+    choices: ["3x + 2", "x + 5", "3 + 2x", "5x"],
+    expected: ["3x + 2"],
+    comparator: "mcq_exact",
+    hint: "Il y a 3 groupes inconnus et 2 objets visibles.",
+    explanation: exp(
+      "Modéliser, c’est traduire une situation par une écriture mathématique.",
+      "Chaque feuille représente x margouillats. Trois feuilles représentent 3x. On ajoute les 2 margouillats visibles.",
+      "3x + 2.",
+      "L’expression qui modélise la situation est 3x + 2."
+    ),
+    canvas: algebreCanvas({
+      theme: "margouillat",
+      titre: "Modéliser une situation",
+      groupesCaches: 3,
+      objetsVisibles: 2,
+      symbole: "x",
+      expression: "3x + 2",
+      phrase:
+        "Trois feuilles cachent le même nombre de margouillats, et deux margouillats sont visibles.",
+    }),
+    tags: ["cm2", "algebre", "modelisation", "margouillat", "canvas"],
+  },
+
+  {
+    kind: "fixed",
+    id: "cm2_algebre_modeliser_eau_fixed_1",
+    niveau: "cm2",
+    matiere: "maths",
+    notionId: "algebre",
+    microId: "algebre_relation",
+    difficulty: 3,
+    theme: "reunion",
+    text: "Chaque réservoir contient x litres d’eau. Il y a 4 réservoirs. Quelle expression modélise la quantité totale d’eau ?",
+    format: "qcm",
+    choices: ["4x", "x + 4", "4 + x", "x ÷ 4"],
+    expected: ["4x"],
+    comparator: "mcq_exact",
+    hint: "Il y a 4 fois la même quantité inconnue.",
+    explanation: exp(
+      "Une lettre peut représenter une quantité inconnue.",
+      "Chaque réservoir contient x litres. Quatre réservoirs contiennent donc 4 fois x.",
+      "x + x + x + x = 4x.",
+      "La quantité totale est modélisée par 4x."
+    ),
+    canvas: algebreCanvas({
+      theme: "eau",
+      titre: "Quantité d’eau inconnue",
+      groupesCaches: 4,
+      objetsVisibles: 0,
+      symbole: "x",
+      expression: "4x",
+      phrase:
+        "Chaque réservoir contient la même quantité d’eau inconnue. On l’appelle x.",
+    }),
+    tags: ["cm2", "algebre", "eau", "modelisation", "canvas"],
+  },
+
+  {
+    kind: "fixed",
+    id: "cm2_algebre_modeliser_dechet_fixed_1",
+    niveau: "cm2",
+    matiere: "maths",
+    notionId: "algebre",
+    microId: "algebre_relation",
+    difficulty: 3,
+    theme: "reunion",
+    text: "Une classe a déjà ramassé x déchets sur la plage. Elle en ramasse encore 15. Quelle expression modélise le total ?",
+    format: "qcm",
+    choices: ["x + 15", "15x", "x - 15", "15 - x"],
+    expected: ["x + 15"],
+    comparator: "mcq_exact",
+    hint: "On ajoute 15 déchets au nombre déjà ramassé.",
+    explanation: exp(
+      "Une expression peut décrire une situation même quand on ne connaît pas tout.",
+      "On ne connaît pas le nombre déjà ramassé : on l’appelle x. Puis on ajoute 15.",
+      "x + 15.",
+      "Le total est modélisé par x + 15."
+    ),
+    canvas: algebreCanvas({
+      theme: "dechet",
+      titre: "Ramassage sur la plage",
+      groupesCaches: 1,
+      objetsVisibles: 15,
+      symbole: "x",
+      expression: "x + 15",
+      phrase:
+        "x représente les déchets déjà ramassés. Les 15 autres déchets sont connus.",
+      display: {
+        showLabels: true,
+      },
+    }),
+    tags: ["cm2", "algebre", "dechet", "ecologie", "canvas"],
+  },
+
+  {
+    kind: "fixed",
+    id: "cm2_algebre_modeliser_tresor_fixed_1",
+    niveau: "cm2",
+    matiere: "maths",
+    notionId: "algebre",
+    microId: "algebre_relation",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Chaque coffre contient x diamants. Il y a 3 coffres et 4 diamants visibles. Quelle expression modélise le total ?",
+    format: "qcm",
+    choices: ["3x + 4", "x + 7", "4x + 3", "12x"],
+    expected: ["3x + 4"],
+    comparator: "mcq_exact",
+    hint: "Trois coffres identiques donnent 3x, puis on ajoute 4 diamants visibles.",
+    explanation: exp(
+      "Modéliser, c’est traduire une histoire avec une écriture mathématique.",
+      "Chaque coffre contient x diamants. Trois coffres représentent 3x. On ajoute les 4 diamants visibles.",
+      "3x + 4.",
+      "L’expression correcte est 3x + 4."
+    ),
+    canvas: algebreCanvas({
+      theme: "tresor",
+      titre: "Le trésor inconnu",
+      groupesCaches: 3,
+      objetsVisibles: 4,
+      symbole: "x",
+      expression: "3x + 4",
+      phrase:
+        "Chaque coffre contient le même trésor inconnu. On appelle ce nombre x.",
+    }),
+    tags: ["cm2", "algebre", "tresor", "modelisation", "canvas"],
+  },
+
+  {
+    kind: "fixed",
+    id: "cm2_algebre_modeliser_requin_fixed_1",
+    niveau: "cm2",
+    matiere: "maths",
+    notionId: "algebre",
+    microId: "algebre_relation",
+    difficulty: 3,
+    theme: "reunion",
+    text: "Chaque zone du récif contient x requins observés. Il y a 2 zones et 1 requin visible. Quelle expression modélise la situation ?",
+    format: "qcm",
+    choices: ["2x + 1", "x + 3", "2 + x", "3x"],
+    expected: ["2x + 1"],
+    comparator: "mcq_exact",
+    hint: "Deux zones inconnues donnent 2x, puis on ajoute 1 requin visible.",
+    explanation: exp(
+      "Une expression algébrique peut modéliser une situation réelle.",
+      "Chaque zone contient x requins observés. Deux zones représentent 2x. On ajoute 1 requin visible.",
+      "2x + 1.",
+      "L’expression correcte est 2x + 1."
+    ),
+    canvas: algebreCanvas({
+      theme: "requin",
+      titre: "Observation marine",
+      groupesCaches: 2,
+      objetsVisibles: 1,
+      symbole: "x",
+      expression: "2x + 1",
+      phrase:
+        "Chaque zone du récif contient le même nombre inconnu de requins observés.",
+    }),
+    tags: ["cm2", "algebre", "requin", "modelisation", "canvas"],
   },
 
   // ============================================================
@@ -598,7 +985,17 @@ export const algebreBank: TutorBankItemV4[] = [
       "36 ÷ 4 = 9.",
       "Le nombre cherché est 9."
     ),
-    tags: ["cm2", "algebre", "defi", "nombre_inconnu"],
+    canvas: algebreCanvas({
+      theme: "pi",
+      titre: "Défi : retrouver x",
+      groupesCaches: 4,
+      objetsVisibles: 0,
+      symbole: "x",
+      expression: "4x = 36",
+      phrase:
+        "Il y a 4 fois la même quantité inconnue. Pour retrouver x, on divise par 4.",
+    }),
+    tags: ["cm2", "algebre", "defi", "nombre_inconnu", "canvas"],
   },
 
   {
@@ -611,7 +1008,7 @@ export const algebreBank: TutorBankItemV4[] = [
     difficulty: 4,
     theme: "neutral",
     hint: "Traduis la phrase en calcul, puis utilise une opération inverse.",
-    tags: ["cm2", "algebre", "defi", "template"],
+    tags: ["cm2", "algebre", "defi", "template", "canvas"],
     generate: () => {
       const n = randomInt(5, 15);
       const mult = randomChoice([2, 3, 4, 5]);
@@ -629,6 +1026,16 @@ export const algebreBank: TutorBankItemV4[] = [
           `${result} - ${add} = ${n * mult}, puis ${n * mult} ÷ ${mult} = ${n}.`,
           `Le nombre cherché est ${n}.`
         ),
+        canvas: algebreCanvas({
+          theme: "pi",
+          titre: "Remonter les opérations",
+          groupesCaches: mult,
+          objetsVisibles: add,
+          symbole: "x",
+          expression: `${mult}x + ${add} = ${result}`,
+          phrase:
+            "L’expression décrit le programme de calcul. Pour retrouver x, on fait les opérations inverses.",
+        }),
       };
     },
   },
@@ -643,7 +1050,7 @@ export const algebreBank: TutorBankItemV4[] = [
     difficulty: 5,
     theme: "reunion",
     hint: "Cherche d’abord la règle, puis applique-la.",
-    tags: ["cm2", "algebre", "defi", "reunion", "template"],
+    tags: ["cm2", "algebre", "defi", "reunion", "template", "canvas"],
     generate: () => {
       const price = randomChoice([3, 4, 5]);
       const fee = randomChoice([2, 3, 4]);
@@ -661,6 +1068,16 @@ export const algebreBank: TutorBankItemV4[] = [
           `${total} - ${fee} = ${qty * price}, puis ${qty * price} ÷ ${price} = ${qty}.`,
           `La famille a acheté ${qty} jus.`
         ),
+        canvas: algebreCanvas({
+          theme: "eau",
+          titre: "Modéliser un achat",
+          groupesCaches: qty,
+          objetsVisibles: fee,
+          symbole: `${price}€`,
+          expression: `${price}x + ${fee} = ${total}`,
+          phrase:
+            "x représente le nombre de jus. Le prix total se modélise avant de retrouver la quantité.",
+        }),
       };
     },
   },
