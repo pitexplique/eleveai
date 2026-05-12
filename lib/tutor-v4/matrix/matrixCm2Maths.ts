@@ -4,8 +4,11 @@ import type { SkillMatrix, MatrixValue } from "@/lib/tutor-v4/types";
 import { microSkills } from "@/lib/tutor-v4/knowledge/maths/cm2/microSkills";
 
 /**
- * Progression étoilée CM2 : les niveaux 1 → 5 sont portés par les difficultés
- * des questions ; la matrice garde les dépendances entre micro-compétences.
+ * Progression étoilée CM2 :
+ * - les niveaux 1 → 5 sont portés par les difficultés des questions ;
+ * - la matrice garde les dépendances entre micro-compétences ;
+ * - les liens directs viennent des prerequis déclarés dans microSkills.ts ;
+ * - les supportLinks ajoutent des aides transversales utiles.
  */
 export const microSkillIndexCm2Maths = microSkills.map((micro) => micro.id);
 
@@ -13,23 +16,329 @@ const directParents: Record<string, string[]> = Object.fromEntries(
   microSkills.map((micro) => [micro.id, micro.prerequis])
 );
 
+/**
+ * Liens de soutien transversaux.
+ *
+ * Valeur 2 : prérequis direct, déjà géré par directParents.
+ * Valeur 1 : compétence d’appui utile mais non obligatoire.
+ */
 const supportLinks: Record<string, string[]> = {
-  comparer_nombres: ["decomposer_nombres"],
-  decimal_comparer: ["comparer_nombres"],
-  resoudre_probleme: ["calculer_mentalement", "decomposer_nombres"],
-  completer_egalite: ["addition_posee", "soustraction_posee"],
-  nombre_inconnu_simple: ["resoudre_probleme"],
-  interpreter_donnees: ["comparer_nombres"],
-  comparer_probabilites: ["interpreter_donnees"],
-  calculer_perimetre: ["addition_posee"],
-  calculer_aire_rectangle: ["multiplication_posee"],
-  reconnaitre_proportionnalite: ["lire_tableau"],
-  completer_tableau: ["multiplication_posee", "division_posee"],
-  calculer_quatrieme: ["division_posee"],
-  utiliser_pourcentage_simple: ["fraction_representer"],
-  utiliser_echelle: ["convertir_longueurs"],
-  coder_deplacement: ["verifier_alignement"],
-  repetition_simple: ["calculer_mentalement"],
+  // ============================================================
+  // NOMBRES ENTIERS
+  // ============================================================
+
+  entier_comparer: ["entier_decomposer"],
+  entier_arrondir: ["entier_decomposer"],
+  entier_multiple: ["multiplication_table"],
+  entier_defi: ["calcul_mental"],
+
+  // ============================================================
+  // SUITES
+  // ============================================================
+
+  suite_continuer: ["calcul_mental"],
+  suite_regle: ["entier_comparer", "calcul_mental"],
+  suite_croissante_decroissante: ["entier_comparer"],
+  suite_defi: ["suite_continuer", "calcul_mental"],
+
+  // ============================================================
+  // MULTIPLICATION
+  // ============================================================
+
+  multiplication_mental: ["entier_decomposer"],
+  multiplication_posee: ["calcul_addition_posee"],
+  multiplication_puissance_dix: ["entier_decomposer"],
+  multiplication_probleme: ["probleme_choisir_operation"],
+  multiplication_defi: ["probleme_une_etape"],
+
+  // ============================================================
+  // DIVISION
+  // ============================================================
+
+  division_sens: ["multiplication_table"],
+  division_lien_multiplication: ["multiplication_table"],
+  division_posee: ["multiplication_posee"],
+  division_reste: ["division_sens"],
+  division_probleme: ["probleme_choisir_operation"],
+  division_defi: ["probleme_une_etape"],
+
+  // ============================================================
+  // FRACTIONS
+  // ============================================================
+
+  fraction_lire: ["division_sens"],
+  fraction_representer: ["division_sens"],
+  fraction_droite: ["reperage_quadrillage"],
+  fraction_comparer: ["entier_comparer"],
+  fraction_equivalente: ["multiplication_table", "division_lien_multiplication"],
+  fraction_decimale: ["multiplication_puissance_dix"],
+  fraction_defi: ["probleme_une_etape"],
+
+  // ============================================================
+  // NOMBRES DÉCIMAUX
+  // ============================================================
+
+  decimal_lire: ["fraction_decimale"],
+  decimal_fraction: ["fraction_decimale"],
+  decimal_valeur_chiffre: ["entier_decomposer"],
+  decimal_comparer: ["entier_comparer"],
+  decimal_ordonner: ["decimal_comparer"],
+  decimal_droite: ["reperage_quadrillage"],
+  decimal_arrondir: ["decimal_valeur_chiffre"],
+  decimal_defi: ["probleme_une_etape"],
+
+  // ============================================================
+  // CALCUL
+  // ============================================================
+
+  calcul_addition_posee: ["entier_decomposer"],
+  calcul_soustraction_posee: ["entier_decomposer"],
+  calcul_decimal_addition: ["decimal_valeur_chiffre"],
+  calcul_decimal_soustraction: ["decimal_valeur_chiffre"],
+  calcul_priorite: ["multiplication_table"],
+  calcul_defi: ["probleme_choisir_operation"],
+
+  // ============================================================
+  // PROBLÈMES
+  // ============================================================
+
+  probleme_choisir_operation: [
+    "calcul_mental",
+    "multiplication_table",
+    "division_sens",
+  ],
+  probleme_une_etape: [
+    "calcul_addition_posee",
+    "calcul_soustraction_posee",
+    "multiplication_mental",
+    "division_sens",
+  ],
+  probleme_plusieurs_etapes: ["probleme_une_etape", "calcul_priorite"],
+  probleme_rediger: ["probleme_choisir_operation"],
+  probleme_defi: ["probleme_plusieurs_etapes"],
+
+  // ============================================================
+  // ALGÈBRE
+  // ============================================================
+
+  algebre_egalite: ["calcul_mental"],
+  algebre_completer_egalite: [
+    "calcul_addition_posee",
+    "calcul_soustraction_posee",
+  ],
+  algebre_nombre_inconnu: [
+    "algebre_completer_egalite",
+    "probleme_choisir_operation",
+  ],
+  algebre_schema_barre: [
+    "probleme_une_etape",
+    "fraction_representer",
+  ],
+  algebre_motif: [
+    "suite_regle",
+    "calcul_mental",
+  ],
+  algebre_relation: [
+    "algebre_egalite",
+    "algebre_motif",
+    "prop_reconnaitre",
+  ],
+  algebre_defi: [
+    "algebre_nombre_inconnu",
+    "algebre_schema_barre",
+    "algebre_relation",
+    "probleme_plusieurs_etapes",
+  ],
+
+  // ============================================================
+  // PROPORTIONNALITÉ
+  // ============================================================
+
+  prop_reconnaitre: ["tableau_lire", "multiplication_table"],
+  prop_tableau: ["tableau_completer", "multiplication_mental"],
+  prop_coefficient: ["division_sens", "multiplication_mental"],
+  prop_quatrieme: ["division_posee", "multiplication_posee"],
+  prop_probleme: ["probleme_une_etape", "tableau_lire"],
+  prop_defi: ["probleme_plusieurs_etapes", "algebre_relation"],
+
+  // ============================================================
+  // POURCENTAGES
+  // ============================================================
+
+  pourcentage_comprendre: ["fraction_representer"],
+  pourcentage_fraction_decimal: ["decimal_fraction", "fraction_decimale"],
+  pourcentage_calculer: ["division_sens", "multiplication_mental"],
+  pourcentage_probleme: ["probleme_une_etape", "prop_tableau"],
+  pourcentage_defi: ["probleme_plusieurs_etapes"],
+
+  // ============================================================
+  // ÉCHELLES
+  // ============================================================
+
+  echelle_comprendre: ["prop_reconnaitre", "longueur_convertir"],
+  echelle_distance_reelle: ["prop_quatrieme", "longueur_convertir"],
+  echelle_distance_plan: ["prop_quatrieme", "longueur_convertir"],
+  echelle_defi: ["probleme_plusieurs_etapes"],
+
+  // ============================================================
+  // LONGUEURS
+  // ============================================================
+
+  longueur_comparer: ["decimal_comparer"],
+  longueur_convertir: ["multiplication_puissance_dix", "decimal_valeur_chiffre"],
+  longueur_estimer: ["decimal_comparer"],
+  longueur_defi: ["probleme_une_etape"],
+
+  // ============================================================
+  // MASSES
+  // ============================================================
+
+  masse_comparer: ["decimal_comparer"],
+  masse_convertir: ["multiplication_puissance_dix", "decimal_valeur_chiffre"],
+  masse_estimer: ["decimal_comparer"],
+  masse_defi: ["probleme_une_etape"],
+
+  // ============================================================
+  // CONTENANCES
+  // ============================================================
+
+  contenance_comparer: ["decimal_comparer"],
+  contenance_convertir: [
+    "multiplication_puissance_dix",
+    "decimal_valeur_chiffre",
+  ],
+  contenance_estimer: ["decimal_comparer"],
+  contenance_defi: ["probleme_une_etape"],
+
+  // ============================================================
+  // DURÉES
+  // ============================================================
+
+  duree_lire: ["entier_lire"],
+  duree_convertir: ["multiplication_table"],
+  duree_calculer: ["calcul_addition_posee", "calcul_soustraction_posee"],
+  duree_probleme: ["probleme_choisir_operation"],
+  duree_defi: ["probleme_plusieurs_etapes"],
+
+  // ============================================================
+  // PÉRIMÈTRES
+  // ============================================================
+
+  perimetre_comprendre: ["longueur_comparer"],
+  perimetre_triangle: ["calcul_addition_posee", "figure_triangle"],
+  perimetre_quadrilatere: ["calcul_addition_posee", "figure_quadrilatere"],
+  perimetre_polygone: ["calcul_addition_posee"],
+  perimetre_defi: ["probleme_une_etape"],
+
+  // ============================================================
+  // AIRES
+  // ============================================================
+
+  aire_comprendre: ["longueur_comparer"],
+  aire_carre_rectangle: ["multiplication_table", "figure_quadrilatere"],
+  aire_triangle_rectangle: ["aire_carre_rectangle", "division_sens"],
+  aire_composer: ["calcul_addition_posee", "calcul_soustraction_posee"],
+  aire_defi: ["probleme_une_etape"],
+
+  // ============================================================
+  // ANGLES
+  // ============================================================
+
+  angle_reconnaitre: ["droite_reconnaitre"],
+  angle_droit: ["droite_perpendiculaire"],
+  angle_type: ["angle_droit"],
+  angle_mesurer: ["entier_lire"],
+  angle_defi: ["figure_triangle", "figure_quadrilatere"],
+
+  // ============================================================
+  // REPÉRAGE
+  // ============================================================
+
+  reperage_quadrillage: ["entier_lire"],
+  reperage_coordonnees: ["entier_comparer"],
+  reperage_placer_point: ["reperage_coordonnees"],
+  reperage_deplacement: ["algo_instruction"],
+  reperage_defi: ["algo_deplacement"],
+
+  // ============================================================
+  // DROITES
+  // ============================================================
+
+  droite_reconnaitre: ["reperage_quadrillage"],
+  droite_parallele: ["droite_reconnaitre"],
+  droite_perpendiculaire: ["droite_reconnaitre", "angle_droit"],
+  droite_tracer: ["droite_parallele", "droite_perpendiculaire"],
+  droite_defi: ["figure_construire"],
+
+  // ============================================================
+  // SYMÉTRIE
+  // ============================================================
+
+  symetrie_axe: ["droite_reconnaitre"],
+  symetrie_completer: ["reperage_quadrillage"],
+  symetrie_construire: ["droite_perpendiculaire", "reperage_quadrillage"],
+  symetrie_propriete: ["symetrie_construire"],
+  symetrie_defi: ["figure_construire"],
+
+  // ============================================================
+  // FIGURES PLANES
+  // ============================================================
+
+  figure_triangle: ["droite_reconnaitre", "angle_reconnaitre"],
+  figure_quadrilatere: ["droite_parallele", "droite_perpendiculaire"],
+  figure_cercle: ["droite_reconnaitre"],
+  figure_propriete: ["angle_type"],
+  figure_construire: ["droite_tracer", "angle_mesurer"],
+  figure_defi: ["perimetre_triangle", "perimetre_quadrilatere"],
+
+  // ============================================================
+  // SOLIDES
+  // ============================================================
+
+  solide_reconnaitre: ["figure_triangle", "figure_quadrilatere"],
+  solide_sommet_arete_face: ["solide_reconnaitre"],
+  solide_face: ["figure_triangle", "figure_quadrilatere"],
+  solide_patron: ["solide_face"],
+  solide_defi: ["solide_sommet_arete_face"],
+
+  // ============================================================
+  // TABLEAUX
+  // ============================================================
+
+  tableau_lire: ["entier_lire"],
+  tableau_completer: ["calcul_mental"],
+  tableau_interpreter: ["entier_comparer"],
+  tableau_defi: ["probleme_une_etape"],
+
+  // ============================================================
+  // GRAPHIQUES
+  // ============================================================
+
+  graphique_lire: ["tableau_lire"],
+  graphique_completer: ["tableau_completer"],
+  graphique_interpreter: ["tableau_interpreter"],
+  graphique_defi: ["probleme_une_etape"],
+
+  // ============================================================
+  // PROBABILITÉS
+  // ============================================================
+
+  probabilite_vocabulaire: ["tableau_lire"],
+  probabilite_hasard: ["probabilite_vocabulaire"],
+  probabilite_comparer: ["entier_comparer", "fraction_representer"],
+  probabilite_roue_de_sac: ["probabilite_comparer"],
+  probabilite_defi: ["probleme_une_etape"],
+
+  // ============================================================
+  // ALGORITHMIQUE
+  // ============================================================
+
+  algo_instruction: ["reperage_quadrillage"],
+  algo_logique: ["suite_regle", "algebre_motif"],
+  algo_deplacement: ["reperage_deplacement"],
+  algo_programme: ["algo_instruction", "algo_deplacement"],
+  algo_repetition: ["multiplication_table", "suite_regle"],
+  algo_defi: ["algo_programme", "probleme_une_etape"],
 };
 
 function buildMatrix(
@@ -51,6 +360,7 @@ function buildMatrix(
     for (const parentId of parentIds) {
       const parentIndex = indexMap.get(parentId);
       if (parentIndex === undefined) continue;
+
       matrix[childIndex][parentIndex] = 2;
       matrix[parentIndex][childIndex] = -2;
     }
@@ -63,6 +373,7 @@ function buildMatrix(
     for (const supportId of supportIds) {
       const supportIndex = indexMap.get(supportId);
       if (supportIndex === undefined) continue;
+
       if (matrix[childIndex][supportIndex] === 0) {
         matrix[childIndex][supportIndex] = 1;
         matrix[supportIndex][childIndex] = -1;

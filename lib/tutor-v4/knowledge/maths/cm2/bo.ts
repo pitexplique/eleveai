@@ -3,13 +3,24 @@
 
 import type { KnowledgeBoCompetence } from "@/lib/tutor-v4/types";
 
+// knowledge/maths/cm2/bo.ts
+
 export const bo: KnowledgeBoCompetence[] = [
-  { boId: "BOCM2N", label: "Nombres, calcul et problèmes" },
-  { boId: "BOCM2A", label: "Algèbre" },
-  { boId: "BOCM2D", label: "Organisation et gestion de données" },
-  { boId: "BOCM2P", label: "Probabilités" },
-  { boId: "BOCM2G", label: "Géométrie" },
-  { boId: "BOCM2M", label: "Grandeurs et mesures" },
-  { boId: "BOCM2R", label: "Proportionnalité" },
-  { boId: "BOCM2I", label: "Pensée informatique" },
+  { boId: "BOCM2N1", label: "Nombres entiers" },
+  { boId: "BOCM2N2", label: "Calculs et résolution de problèmes" },
+  { boId: "BOCM2N3", label: "Fractions et nombres décimaux" },
+
+  { boId: "BOCM2A1", label: "Algèbre" },
+
+  { boId: "BOCM2P1", label: "Proportionnalité" },
+
+  { boId: "BOCM2M1", label: "Grandeurs et mesures" },
+
+  { boId: "BOCM2G1", label: "Géométrie plane" },
+  { boId: "BOCM2G2", label: "Géométrie dans l’espace" },
+
+  { boId: "BOCM2D1", label: "Données" },
+  { boId: "BOCM2D2", label: "Probabilités" },
+
+  { boId: "BOCM2I1", label: "Pensée informatique" },
 ];

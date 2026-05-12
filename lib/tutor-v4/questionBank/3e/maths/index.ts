@@ -30,6 +30,7 @@ import { thalesBank } from "./thales.bank";
 
 import { transformationsBank } from "./transformations.bank";
 
+import { geometrieEspaceBank } from "./geometrie-espace.bank";
 import { airesBank } from "./aires.bank";
 import { perimetresBank } from "./perimetres.bank";
 import { volumesBank } from "./volumes.bank";
@@ -65,6 +66,7 @@ export const maths3eQuestionBank: TutorBankItemV4[] = [
 
   ...transformationsBank,
 
+  ...geometrieEspaceBank,
   ...airesBank,
   ...perimetresBank,
   ...volumesBank,

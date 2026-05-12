@@ -3,51 +3,234 @@
 import type { NotionSource } from "@/lib/tutor-v4/knowledge/buildKnowledge";
 
 export const notions: NotionSource[] = [
-  { id: "nombres_entiers", label: "Nombres entiers", boId: "BOCM2N", prerequis: [], levels: [1, 2, 3] },
-  { id: "fractions", label: "Fractions", boId: "BOCM2N", prerequis: ["nombres_entiers"], levels: [1, 2, 3] },
-  { id: "nombres_decimaux", label: "Nombres décimaux", boId: "BOCM2N", prerequis: ["fractions"], levels: [1, 2, 3] },
-  { id: "calcul_mental", label: "Calcul mental", boId: "BOCM2N", prerequis: ["nombres_entiers"], levels: [1, 2, 3] },
-  { id: "calcul_pose", label: "Calcul posé", boId: "BOCM2N", prerequis: ["calcul_mental"], levels: [1, 2, 3] },
-  { id: "problemes_arithmetiques", label: "Problèmes arithmétiques", boId: "BOCM2N", prerequis: ["calcul_pose", "nombres_decimaux"], levels: [1, 2, 3] },
+  // ============================================================
+  // NOMBRES, CALCULS ET PROBLÈMES
+  // ============================================================
 
-  { id: "egalites", label: "Égalités", boId: "BOCM2A", prerequis: ["calcul_mental"], levels: [1, 2] },
-  { id: "schemas_barres", label: "Schémas en barres", boId: "BOCM2A", prerequis: ["egalites"], levels: [1, 2, 3] },
-  { id: "motifs_evolutifs", label: "Motifs évolutifs", boId: "BOCM2A", prerequis: ["egalites"], levels: [1, 2, 3] },
-  { id: "nombres_inconnus", label: "Nombres inconnus", boId: "BOCM2A", prerequis: ["schemas_barres"], levels: [1, 2, 3] },
+  {
+    id: "nombre_entier",
+    label: "Nombres entiers",
+    boId: "BOCM2N1",
+    prerequis: [],
+    levels: [1, 2, 3],
+  },
+  {
+    id: "suite",
+    label: "Suites de nombres",
+    boId: "BOCM2N1",
+    prerequis: ["nombre_entier"],
+    levels: [1, 2],
+  },
+  {
+    id: "multiplication",
+    label: "Multiplication",
+    boId: "BOCM2N2",
+    prerequis: ["nombre_entier"],
+    levels: [1, 2, 3],
+  },
+  {
+    id: "division",
+    label: "Division",
+    boId: "BOCM2N2",
+    prerequis: ["multiplication"],
+    levels: [1, 2, 3],
+  },
+  {
+    id: "fraction",
+    label: "Fractions",
+    boId: "BOCM2N3",
+    prerequis: ["division"],
+    levels: [1, 2, 3],
+  },
+  {
+    id: "nombre_decimal",
+    label: "Nombres décimaux",
+    boId: "BOCM2N3",
+    prerequis: ["fraction"],
+    levels: [1, 2, 3],
+  },
+  {
+    id: "calcul",
+    label: "Calculs",
+    boId: "BOCM2N2",
+    prerequis: ["nombre_entier", "nombre_decimal"],
+    levels: [1, 2, 3],
+  },
+  {
+    id: "probleme",
+    label: "Problèmes",
+    boId: "BOCM2N2",
+    prerequis: ["calcul"],
+    levels: [1, 2, 3],
+  },
 
-  { id: "tableaux", label: "Tableaux", boId: "BOCM2D", prerequis: [], levels: [1, 2] },
-  { id: "graphiques", label: "Graphiques", boId: "BOCM2D", prerequis: ["tableaux"], levels: [1, 2] },
-  { id: "diagrammes", label: "Diagrammes", boId: "BOCM2D", prerequis: ["tableaux"], levels: [1, 2] },
+  // ============================================================
+  // ALGÈBRE
+  // ============================================================
 
-  { id: "hasard", label: "Hasard", boId: "BOCM2P", prerequis: ["tableaux"], levels: [1, 2] },
-  { id: "probabilites_simples", label: "Probabilités simples", boId: "BOCM2P", prerequis: ["hasard"], levels: [1, 2] },
+  {
+    id: "algebre",
+    label: "Algèbre",
+    boId: "BOCM2A1",
+    prerequis: ["calcul", "probleme"],
+    levels: [1, 2, 3],
+  },
 
-  { id: "alignement", label: "Alignement", boId: "BOCM2G", prerequis: [], levels: [1, 2] },
-  { id: "angles", label: "Angles", boId: "BOCM2G", prerequis: ["alignement"], levels: [1, 2] },
-  { id: "triangles", label: "Triangles", boId: "BOCM2G", prerequis: ["angles"], levels: [1, 2] },
-  { id: "quadrilateres", label: "Quadrilatères", boId: "BOCM2G", prerequis: ["angles"], levels: [1, 2] },
-  { id: "cercle", label: "Cercle", boId: "BOCM2G", prerequis: ["alignement"], levels: [1, 2] },
-  { id: "symetrie", label: "Symétrie", boId: "BOCM2G", prerequis: ["alignement"], levels: [1, 2] },
-  { id: "solides", label: "Solides", boId: "BOCM2G", prerequis: ["quadrilateres"], levels: [1, 2] },
-  { id: "reperage_espace", label: "Repérage dans l’espace", boId: "BOCM2G", prerequis: ["alignement"], levels: [1, 2] },
+  // ============================================================
+  // PROPORTIONNALITÉ
+  // ============================================================
 
-  { id: "longueurs", label: "Longueurs", boId: "BOCM2M", prerequis: [], levels: [1, 2] },
-  { id: "masses", label: "Masses", boId: "BOCM2M", prerequis: [], levels: [1, 2] },
-  { id: "contenances", label: "Contenances", boId: "BOCM2M", prerequis: [], levels: [1, 2] },
-  { id: "durees", label: "Durées", boId: "BOCM2M", prerequis: [], levels: [1, 2] },
-  { id: "perimetres", label: "Périmètres", boId: "BOCM2M", prerequis: ["longueurs"], levels: [1, 2, 3] },
-  { id: "aires", label: "Aires", boId: "BOCM2M", prerequis: ["longueurs"], levels: [1, 2, 3] },
-  { id: "volumes", label: "Volumes", boId: "BOCM2M", prerequis: ["contenances"], levels: [1, 2] },
+  {
+    id: "proportionnalite",
+    label: "Proportionnalité",
+    boId: "BOCM2P1",
+    prerequis: ["multiplication", "division"],
+    levels: [1, 2, 3],
+  },
+  {
+    id: "pourcentage",
+    label: "Pourcentages simples",
+    boId: "BOCM2P1",
+    prerequis: ["fraction", "proportionnalite"],
+    levels: [1, 2],
+  },
+  {
+    id: "echelle",
+    label: "Échelles simples",
+    boId: "BOCM2P1",
+    prerequis: ["proportionnalite", "longueur"],
+    levels: [2, 3],
+  },
 
-  { id: "proportionnalite_reconnaitre", label: "Reconnaître la proportionnalité", boId: "BOCM2R", prerequis: ["nombres_entiers"], levels: [1, 2] },
-  { id: "tableaux_proportionnalite", label: "Tableaux de proportionnalité", boId: "BOCM2R", prerequis: ["proportionnalite_reconnaitre"], levels: [1, 2, 3] },
-  { id: "quatrieme_proportionnelle", label: "Quatrième proportionnelle", boId: "BOCM2R", prerequis: ["tableaux_proportionnalite"], levels: [2, 3] },
-  { id: "pourcentages_simples", label: "Pourcentages simples", boId: "BOCM2R", prerequis: ["fractions", "tableaux_proportionnalite"], levels: [1, 2] },
-  { id: "echelles_simples", label: "Échelles simples", boId: "BOCM2R", prerequis: ["tableaux_proportionnalite", "longueurs"], levels: [2, 3] },
-  { id: "defis_proportionnalite", label: "Défis de proportionnalité", boId: "BOCM2R", prerequis: ["quatrieme_proportionnelle", "pourcentages_simples", "echelles_simples"], levels: [3, 4, 5] },
+  // ============================================================
+  // GRANDEURS ET MESURES
+  // ============================================================
 
-  { id: "suites_instructions", label: "Suites d’instructions", boId: "BOCM2I", prerequis: [], levels: [1, 2] },
-  { id: "logique", label: "Logique", boId: "BOCM2I", prerequis: ["suites_instructions"], levels: [1, 2] },
-  { id: "deplacements_quadrillage", label: "Déplacements sur quadrillage", boId: "BOCM2I", prerequis: ["suites_instructions", "reperage_espace"], levels: [1, 2] },
-  { id: "programmation_simple", label: "Programmation simple", boId: "BOCM2I", prerequis: ["logique", "deplacements_quadrillage"], levels: [1, 2, 3] },
+  {
+    id: "longueur",
+    label: "Longueurs",
+    boId: "BOCM2M1",
+    prerequis: ["nombre_decimal"],
+    levels: [1, 2],
+  },
+  {
+    id: "masse",
+    label: "Masses",
+    boId: "BOCM2M1",
+    prerequis: ["nombre_decimal"],
+    levels: [1, 2],
+  },
+  {
+    id: "contenance",
+    label: "Contenances",
+    boId: "BOCM2M1",
+    prerequis: ["nombre_decimal"],
+    levels: [1, 2],
+  },
+  {
+    id: "duree",
+    label: "Durées",
+    boId: "BOCM2M1",
+    prerequis: ["nombre_entier"],
+    levels: [1, 2],
+  },
+  {
+    id: "perimetre",
+    label: "Périmètres",
+    boId: "BOCM2M1",
+    prerequis: ["longueur"],
+    levels: [1, 2, 3],
+  },
+  {
+    id: "aire",
+    label: "Aires",
+    boId: "BOCM2M1",
+    prerequis: ["longueur", "multiplication"],
+    levels: [1, 2, 3],
+  },
+  {
+    id: "angle",
+    label: "Angles",
+    boId: "BOCM2M1",
+    prerequis: ["droite"],
+    levels: [1, 2],
+  },
+
+  // ============================================================
+  // ESPACE ET GÉOMÉTRIE
+  // ============================================================
+
+  {
+    id: "reperage",
+    label: "Repérage",
+    boId: "BOCM2G1",
+    prerequis: ["nombre_entier"],
+    levels: [1, 2],
+  },
+  {
+    id: "droite",
+    label: "Droites",
+    boId: "BOCM2G1",
+    prerequis: ["reperage"],
+    levels: [1, 2],
+  },
+  {
+    id: "symetrie",
+    label: "Symétrie",
+    boId: "BOCM2G1",
+    prerequis: ["droite"],
+    levels: [1, 2],
+  },
+  {
+    id: "figure_plane",
+    label: "Figures planes",
+    boId: "BOCM2G1",
+    prerequis: ["droite", "angle"],
+    levels: [1, 2, 3],
+  },
+  {
+    id: "solide",
+    label: "Solides",
+    boId: "BOCM2G2",
+    prerequis: ["figure_plane"],
+    levels: [1, 2],
+  },
+
+  // ============================================================
+  // DONNÉES ET PROBABILITÉS
+  // ============================================================
+
+  {
+    id: "tableau",
+    label: "Tableaux",
+    boId: "BOCM2D1",
+    prerequis: ["nombre_entier"],
+    levels: [1, 2],
+  },
+  {
+    id: "graphique",
+    label: "Graphiques et diagrammes",
+    boId: "BOCM2D1",
+    prerequis: ["tableau"],
+    levels: [1, 2],
+  },
+  {
+    id: "probabilite",
+    label: "Probabilités simples",
+    boId: "BOCM2D2",
+    prerequis: ["tableau"],
+    levels: [1, 2],
+  },
+
+  // ============================================================
+  // PENSÉE INFORMATIQUE ET ALGORITHMIQUE
+  // ============================================================
+
+  {
+    id: "algorithmique",
+    label: "Algorithmique",
+    boId: "BOCM2I1",
+    prerequis: ["reperage"],
+    levels: [1, 2, 3],
+  },
 ];
