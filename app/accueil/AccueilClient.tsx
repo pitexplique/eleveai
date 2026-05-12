@@ -7,11 +7,11 @@ import { useEffect, useState } from "react";
 const HEADER_HEIGHT = 72;
 
 const cards = [
-  { href: "/coach-maths-ia", image: "/images/cards/coach.png" },
-  { href: "/parcours", image: "/images/cards/parcours.png" },
-  { href: "/calcul-rapide", image: "/images/cards/calcul-rapide.png" },
-  { href: "/lecon-du-jour", image: "/images/cards/lecondujour.png" },
-  { href: "/probleme-du-jour", image: "/images/cards/probleme-du-jour.png" },
+  { href: "/coach-maths-ia", image: "/images/cards/coach.webp" },
+  { href: "/parcours", image: "/images/cards/parcours.webp" },
+  { href: "/calcul-rapide", image: "/images/cards/calcul-rapide.webp1" },
+  { href: "/lecon-du-jour", image: "/images/cards/lecondujour.webp" },
+  { href: "/probleme-du-jour", image: "/images/cards/probleme-du-jour.webp" },
 ];
 
 export default function AccueilPage() {
@@ -39,8 +39,8 @@ export default function AccueilPage() {
   }, []);
 
   const backgroundImage = isMobile
-    ? "/images/accueil-eleveai-reunion-mobile.png"
-    : "/images/accueil-eleveai-reunion.png";
+    ? "/images/accueil-eleveai-reunion-mobile.webp"
+    : "/images/accueil-eleveai-reunion.webp";
 
   return (
     <main className="relative min-h-[120vh] overflow-hidden">
