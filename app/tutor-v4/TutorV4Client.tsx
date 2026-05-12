@@ -23,11 +23,12 @@ import {
   FonctionTableauCanvas,
   TransformationCanvas,
   TableauDonneesCanvas,
-  CalculPoseCanvas ,
+  CalculPoseCanvas,
   FractionCanvas,
   TableauProportionnaliteCanvas,
   ScratchCanvas,
-  SectionSolideCanvas 
+  SectionSolideCanvas,
+  AlgebreCanvas,
 } from "@/lib/canvas";
 
 import {
@@ -253,6 +254,10 @@ if (canvas.kind === "tableau_proportionnalite") {
  if (canvas.kind === "section_solide") {
   return <SectionSolideCanvas figure={canvas} />;
 }
+
+  if (canvas.kind === "algebre") {
+    return <AlgebreCanvas figure={canvas} />;
+  }
  
 
   return null;

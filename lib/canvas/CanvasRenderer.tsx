@@ -21,6 +21,7 @@ import FractionCanvas from "./FractionCanvas";
 import TableauProportionnaliteCanvas from "./TableauProportionnaliteCanvas";
 import ScratchCanvas from "./ScratchCanvas";
 import SectionSolideCanvas from "./SectionSolideCanvas";
+import AlgebreCanvas from "./AlgebreCanvas";
 
 type Props = {
   figure?: CanvasFigure | null;
@@ -49,7 +50,7 @@ export default function CanvasRenderer({ figure }: Props) {
       return <Solide3DCanvas figure={figure} />;
 
     case "section_solide":
-    return <SectionSolideCanvas figure={figure} />;
+      return <SectionSolideCanvas figure={figure} />;
 
     case "stat_graph":
       return <StatGraphCanvas figure={figure} />;
@@ -83,6 +84,9 @@ export default function CanvasRenderer({ figure }: Props) {
 
     case "scratch":
       return <ScratchCanvas canvas={figure} />;
+
+    case "algebre":
+      return <AlgebreCanvas figure={figure} />;
 
     default:
       return null;

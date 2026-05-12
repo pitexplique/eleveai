@@ -608,6 +608,33 @@ export type ScratchCanvasData = {
   };
 };
 
+export type AlgebreCanvasData = {
+  kind: "algebre";
+  theme?:
+    | "margouillat"
+    | "pomme"
+    | "eau"
+    | "dechet"
+    | "surf"
+    | "jeu_video"
+    | "tresor"
+    | "pieces"
+    | "requin"
+    | "pi";
+  titre?: string;
+  groupesCaches?: number;
+  objetsVisibles?: number;
+  symbole?: string;
+  expression?: string;
+  phrase?: string;
+  display?: {
+    showConcret?: boolean;
+    showExpression?: boolean;
+    showPhrase?: boolean;
+    showLabels?: boolean;
+  };
+};
+
 export type CanvasFigure =
   | TriangleCanvasData
   | QuadrilatereCanvasData
@@ -626,4 +653,5 @@ export type CanvasFigure =
   | CalculPoseCanvasData
   | FractionCanvasData
   | ScratchCanvasData
+  | AlgebreCanvasData
   | TransformationCanvasData;
