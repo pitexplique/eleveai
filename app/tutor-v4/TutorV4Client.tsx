@@ -288,6 +288,7 @@ const initialMicroIdRef = useRef<string | null>(null);
 const lastUrlSelectionRef = useRef<string>("");
 
 const questionTopRef = useRef<HTMLDivElement | null>(null);
+const hasForcedTopScrollRef = useRef(false);
 
 function scrollToQuestions() {
   window.setTimeout(() => {
@@ -297,7 +298,29 @@ function scrollToQuestions() {
     });
   }, 80);
 }
+function forceScrollTopOnArrival() {
+  window.scrollTo({
+    top: 0,
+    left: 0,
+    behavior: "auto",
+  });
 
+  window.requestAnimationFrame(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "auto",
+    });
+  });
+
+  window.setTimeout(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "auto",
+    });
+  }, 120);
+}
   const notionOptions = useMemo(() => getNotionOptions(classe), [classe]);
   const notionMicroMap = useMemo(() => getNotionMicroMap(classe), [classe]);
 
@@ -386,6 +409,14 @@ useEffect(() => {
   hasInitializedFromUrl.current = true;
   setUrlInitDone(true);
 }, [searchParams]);
+
+useEffect(() => {
+  if (!urlInitDone) return;
+  if (hasForcedTopScrollRef.current) return;
+
+  hasForcedTopScrollRef.current = true;
+  forceScrollTopOnArrival();
+}, [urlInitDone]);
 
 useEffect(() => {
   if (!urlInitDone) return;
