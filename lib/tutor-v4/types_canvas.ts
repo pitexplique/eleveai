@@ -635,6 +635,34 @@ export type AlgebreCanvasData = {
   };
 };
 
+export type SuiteCanvasTheme =
+  | "nombre"
+  | "margouillat"
+  | "pieces"
+  | "eau"
+  | "dechet"
+  | "jeu_video"
+  | "surf"
+  | "requin"
+  | "pi";
+
+export type SuiteCanvasData = {
+  kind: "suite";
+  theme?: SuiteCanvasTheme;
+  titre?: string;
+  terms: Array<number | string>;
+  missingIndex?: number;
+  arrows?: string[];
+  rule?: string;
+  phrase?: string;
+  display?: {
+    showIcons?: boolean;
+    showArrows?: boolean;
+    showRule?: boolean;
+    showLabels?: boolean;
+  };
+};
+
 export type CanvasFigure =
   | TriangleCanvasData
   | QuadrilatereCanvasData
@@ -654,4 +682,5 @@ export type CanvasFigure =
   | FractionCanvasData
   | ScratchCanvasData
   | AlgebreCanvasData
-  | TransformationCanvasData;
+  | TransformationCanvasData
+  | SuiteCanvasData;

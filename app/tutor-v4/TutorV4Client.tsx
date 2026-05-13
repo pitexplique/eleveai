@@ -29,6 +29,7 @@ import {
   ScratchCanvas,
   SectionSolideCanvas,
   AlgebreCanvas,
+  SuiteCanvas,
 } from "@/lib/canvas";
 
 import {
@@ -257,6 +258,10 @@ if (canvas.kind === "tableau_proportionnalite") {
 
   if (canvas.kind === "algebre") {
     return <AlgebreCanvas figure={canvas} />;
+  }
+
+  if (canvas.kind === "suite") {
+    return <SuiteCanvas figure={canvas} />;
   }
  
 

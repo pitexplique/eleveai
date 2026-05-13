@@ -8,12 +8,14 @@ import type {
 
 import { getClasseNotions } from "./getClasseNotions";
 
+import { mathsCm2QuestionBank } from "@/lib/tutor-v4/questionBank/cm2/maths";
 import { maths6eQuestionBank } from "@/lib/tutor-v4/questionBank/6e/maths";
 import { maths5eQuestionBank } from "@/lib/tutor-v4/questionBank/5e/maths";
 import { maths4eQuestionBank } from "@/lib/tutor-v4/questionBank/4e/maths";
 import { maths3eQuestionBank } from "@/lib/tutor-v4/questionBank/3e/maths";
 
 function getQuestionBank(classe: ParcoursClasse): TutorBankItemV4[] {
+    if (classe === "cm2") return mathsCm2QuestionBank;
   if (classe === "6e") return maths6eQuestionBank;
   if (classe === "5e") return maths5eQuestionBank;
   if (classe === "4e") return maths4eQuestionBank;

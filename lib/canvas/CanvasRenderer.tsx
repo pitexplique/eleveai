@@ -22,6 +22,7 @@ import TableauProportionnaliteCanvas from "./TableauProportionnaliteCanvas";
 import ScratchCanvas from "./ScratchCanvas";
 import SectionSolideCanvas from "./SectionSolideCanvas";
 import AlgebreCanvas from "./AlgebreCanvas";
+import SuiteCanvas from "./SuiteCanvas";
 
 type Props = {
   figure?: CanvasFigure | null;
@@ -87,6 +88,9 @@ export default function CanvasRenderer({ figure }: Props) {
 
     case "algebre":
       return <AlgebreCanvas figure={figure} />;
+
+    case "suite":
+      return <SuiteCanvas figure={figure} />;
 
     default:
       return null;

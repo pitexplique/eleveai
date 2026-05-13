@@ -2,14 +2,14 @@ import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 
 import { proportionnaliteBank } from "./proportionnalite.bank";
 import { algebreBank } from "./algebre.bank";
-import { nombresEntiersBank } from "./nombres-entiers.bank";
 import { nombresDecimauxBank } from "./nombres-decimaux.bank";
+import { suitesBank } from "./suites.bank";
 
 export const mathsCm2QuestionBank: TutorBankItemV4[] = [
-  ...nombresEntiersBank,
   ...proportionnaliteBank,
   ...algebreBank,
-  ...nombresDecimauxBank
+  ...nombresDecimauxBank,
+  ...suitesBank,
 ];
 
 export function getMathCm2QuestionBank(args?: {
