@@ -9,6 +9,7 @@ import { divisionBank } from "./division.bank";
 import { nombresEntiersBank } from "./nombres-entiers.bank";
 import { fractionsBank } from "./fractions.bank";
 import { algorithmiqueBank } from "./algorithmique.bank";
+import { calculBank } from "./calcul.bank";
 
 export const mathsCm2QuestionBank: TutorBankItemV4[] = [
   ...proportionnaliteBank,
@@ -20,6 +21,7 @@ export const mathsCm2QuestionBank: TutorBankItemV4[] = [
   ...nombresEntiersBank,
   ...fractionsBank,
   ...algorithmiqueBank,
+  ...calculBank,
 ];
 
 export function getMathCm2QuestionBank(args?: {
