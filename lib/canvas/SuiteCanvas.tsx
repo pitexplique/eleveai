@@ -1,6 +1,6 @@
 "use client";
 
-import type { CanvasFigure, SuiteCanvasData } from "@/lib/tutor-v4/types";
+import type { CanvasFigure, SuiteCanvasData } from "@/lib/tutor-v4/types_canvas";
 
 type Props = {
   figure: CanvasFigure;
