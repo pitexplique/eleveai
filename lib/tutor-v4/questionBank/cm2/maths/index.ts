@@ -5,6 +5,7 @@ import { algebreBank } from "./algebre.bank";
 import { nombresDecimauxBank } from "./nombres-decimaux.bank";
 import { suitesBank } from "./suites.bank";
 import { multiplicationBank } from "./multiplication.bank"
+import { divisionBank } from "./division.bank"
 
 export const mathsCm2QuestionBank: TutorBankItemV4[] = [
   ...proportionnaliteBank,
@@ -12,6 +13,7 @@ export const mathsCm2QuestionBank: TutorBankItemV4[] = [
   ...nombresDecimauxBank,
   ...suitesBank,
   ...multiplicationBank,
+  ...divisionBank,
 ];
 
 export function getMathCm2QuestionBank(args?: {
