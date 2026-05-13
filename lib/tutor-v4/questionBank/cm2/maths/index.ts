@@ -4,10 +4,11 @@ import { proportionnaliteBank } from "./proportionnalite.bank";
 import { algebreBank } from "./algebre.bank";
 import { nombresDecimauxBank } from "./nombres-decimaux.bank";
 import { suitesBank } from "./suites.bank";
-import { multiplicationBank } from "./multiplication.bank"
-import { divisionBank } from "./division.bank"
-import { nombresEntiersBank } from "./nombres-entiers.bank"
-import { fractionsBank } from "./fractions.bank"
+import { multiplicationBank } from "./multiplication.bank";
+import { divisionBank } from "./division.bank";
+import { nombresEntiersBank } from "./nombres-entiers.bank";
+import { fractionsBank } from "./fractions.bank";
+import { algorithmiqueBank } from "./algorithmique.bank";
 
 export const mathsCm2QuestionBank: TutorBankItemV4[] = [
   ...proportionnaliteBank,
@@ -17,7 +18,8 @@ export const mathsCm2QuestionBank: TutorBankItemV4[] = [
   ...multiplicationBank,
   ...divisionBank,
   ...nombresEntiersBank,
-  ...fractionsBank
+  ...fractionsBank,
+  ...algorithmiqueBank,
 ];
 
 export function getMathCm2QuestionBank(args?: {
