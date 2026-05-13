@@ -4,12 +4,14 @@ import { proportionnaliteBank } from "./proportionnalite.bank";
 import { algebreBank } from "./algebre.bank";
 import { nombresDecimauxBank } from "./nombres-decimaux.bank";
 import { suitesBank } from "./suites.bank";
+import { multiplicationBank } from "./multiplication.bank"
 
 export const mathsCm2QuestionBank: TutorBankItemV4[] = [
   ...proportionnaliteBank,
   ...algebreBank,
   ...nombresDecimauxBank,
   ...suitesBank,
+  ...multiplicationBank,
 ];
 
 export function getMathCm2QuestionBank(args?: {
