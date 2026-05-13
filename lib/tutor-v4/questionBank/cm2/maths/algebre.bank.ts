@@ -893,39 +893,41 @@ export const algebreBank: TutorBankItemV4[] = [
     tags: ["cm2", "algebre", "dechet", "ecologie", "canvas"],
   },
 
-  {
-    kind: "fixed",
-    id: "cm2_algebre_modeliser_tresor_fixed_1",
-    niveau: "cm2",
-    matiere: "maths",
-    notionId: "algebre",
-    microId: "algebre_relation",
-    difficulty: 3,
-    theme: "neutral",
-    text: "Chaque coffre contient x diamants. Il y a 3 coffres et 4 diamants visibles. Quelle expression modélise le total ?",
-    format: "qcm",
-    choices: ["3x + 4", "x + 7", "4x + 3", "12x"],
-    expected: ["3x + 4"],
-    comparator: "mcq_exact",
-    hint: "Trois coffres identiques donnent 3x, puis on ajoute 4 diamants visibles.",
-    explanation: exp(
-      "Modéliser, c’est traduire une histoire avec une écriture mathématique.",
-      "Chaque coffre contient x diamants. Trois coffres représentent 3x. On ajoute les 4 diamants visibles.",
-      "3x + 4.",
-      "L’expression correcte est 3x + 4."
-    ),
-    canvas: algebreCanvas({
-      theme: "tresor",
-      titre: "Le trésor inconnu",
-      groupesCaches: 3,
-      objetsVisibles: 4,
-      symbole: "x",
-      expression: "3x + 4",
-      phrase:
-        "Chaque coffre contient le même trésor inconnu. On appelle ce nombre x.",
-    }),
-    tags: ["cm2", "algebre", "tresor", "modelisation", "canvas"],
-  },
+{
+  kind: "fixed",
+  id: "cm2_algebre_modeliser_tresor_fixed_1",
+  niveau: "cm2",
+  matiere: "maths",
+  notionId: "algebre",
+  microId: "algebre_relation",
+  difficulty: 3,
+  theme: "neutral",
+  text:
+    "Il y a 3 coffres. Chaque coffre contient x diamants. Il y a aussi 4 diamants visibles. Quelle expression modélise le nombre total de diamants ?",
+  format: "qcm",
+  choices: ["3x + 4", "x + 7", "4x + 3", "12x"],
+  expected: ["3x + 4"],
+  comparator: "mcq_exact",
+  hint:
+    "Chaque coffre contient x diamants. Avec 3 coffres, cela fait 3x. Puis on ajoute les 4 diamants visibles.",
+  explanation: exp(
+    "Modéliser, c’est traduire une situation avec une écriture mathématique.",
+    "Chaque coffre contient x diamants. Comme il y a 3 coffres, cela représente 3x. On ajoute ensuite les 4 diamants visibles.",
+    "3x + 4.",
+    "L’expression correcte est donc 3x + 4."
+  ),
+  canvas: algebreCanvas({
+    theme: "tresor",
+    titre: "Le trésor inconnu",
+    groupesCaches: 3,
+    objetsVisibles: 4,
+    symbole: "x",
+    expression: "3x + 4",
+    phrase:
+      "Chaque coffre contient le même nombre de diamants. On appelle ce nombre x.",
+  }),
+  tags: ["cm2", "algebre", "tresor", "modelisation", "relation", "canvas"],
+},
 
   {
     kind: "fixed",
