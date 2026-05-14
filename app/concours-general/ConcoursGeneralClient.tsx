@@ -304,10 +304,12 @@ export default function ConcoursGeneralClient() {
             Des maths pas comme les autres
           </h1>
 
-          <p className="mt-4 max-w-3xl text-sm leading-relaxed text-slate-300 md:text-base">
-            20 défis par semaine pour apprendre à chercher, raisonner, tester,
-            expliquer et rédiger. Niveau cible : 3e. Accessible progressivement
-            aux élèves curieux dès la 6e.
+          <p className="mt-4 max-w-4xl text-sm leading-relaxed text-slate-300 md:text-base">
+            20 défis par semaine pour apprendre à chercher, visualiser, raisonner,
+            tester et expliquer. Les questions sont inspirées de l’esprit des grands
+            concours internationaux : Singapour, Royaume-Uni, Australie et olympiades
+            junior. Niveau cible : 3e, accessible progressivement aux élèves curieux
+            dès la 6e.
           </p>
 
           <div className="mt-6 flex flex-wrap gap-3">
