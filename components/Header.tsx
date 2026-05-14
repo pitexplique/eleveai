@@ -16,6 +16,7 @@ import {
   LogOut,
   Flame,
   Puzzle,
+  Trophy,
 } from "lucide-react";
 import { useEleve } from "@/context/EleveContext";
 
@@ -55,8 +56,9 @@ export default function Header() {
   const eleveLabel = eleve?.nom || eleve?.code_eleve || "Élève";
 
   return (
-    <header className="sticky top-0 z-50 border-b border-white/10 bg-slate-950/80 backdrop-blur-xl">
+    <header className="sticky top-0 z-50 border-b border-white/10 bg-slate-950/85 backdrop-blur-xl">
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3">
+        {/* LOGO */}
         <Link href="/accueil" className="flex items-center gap-3">
           <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-gradient-to-br from-emerald-300 via-cyan-300 to-amber-300 text-slate-950 shadow-lg">
             <Sparkles className="h-5 w-5" />
@@ -72,6 +74,7 @@ export default function Header() {
           </div>
         </Link>
 
+        {/* DESKTOP */}
         <div className="hidden items-center gap-2 lg:flex">
           <Link
             href="/accueil"
@@ -107,7 +110,7 @@ export default function Header() {
             className={linkClass(isActive(pathname, "/probleme-du-jour"))}
           >
             <Puzzle className="h-4 w-4 text-pink-300" />
-            Problème du jour
+            Problème
           </Link>
 
           <Link
@@ -115,7 +118,7 @@ export default function Header() {
             className={linkClass(isActive(pathname, "/coach-maths-ia"))}
           >
             <Brain className="h-4 w-4 text-orange-300" />
-            Coach Maths
+            Coach
           </Link>
 
           <Link
@@ -127,6 +130,19 @@ export default function Header() {
           </Link>
 
           <Link
+            href="/concours-general"
+            className={`relative ${linkClass(
+              isActive(pathname, "/concours-general")
+            )}`}
+          >
+            <Trophy className="h-4 w-4 text-amber-300" />
+            Concours général
+            <span className="absolute -right-2 -top-2 rounded-full bg-amber-400 px-1.5 text-[10px] font-black text-slate-950">
+              new
+            </span>
+          </Link>
+
+          <Link
             href="/optimiseur"
             className={linkClass(isActive(pathname, "/optimiseur"))}
           >
@@ -134,6 +150,7 @@ export default function Header() {
             Valéria
           </Link>
 
+          {/* AUTH */}
           {eleve ? (
             <div className="ml-2 flex items-center gap-2">
               <Link
@@ -145,6 +162,7 @@ export default function Header() {
               </Link>
 
               <button
+                type="button"
                 onClick={logoutEleve}
                 className="inline-flex items-center gap-2 rounded-full bg-red-500 px-3.5 py-2 text-sm font-bold text-white hover:bg-red-600"
               >
@@ -163,17 +181,37 @@ export default function Header() {
           )}
         </div>
 
+        {/* MOBILE BUTTON */}
         <button
+          type="button"
           onClick={() => setMobileOpen((v) => !v)}
           className="rounded-full border border-white/15 bg-white/10 p-2 text-white lg:hidden"
+          aria-label="Ouvrir le menu"
         >
           {mobileOpen ? <X /> : <Menu />}
         </button>
       </nav>
 
+      {/* MOBILE MENU */}
       {mobileOpen && (
         <div className="border-t border-white/10 bg-slate-950 px-4 py-4 lg:hidden">
           <div className="grid gap-2">
+            <Link
+              href="/accueil"
+              className={mobileLinkClass(isActive(pathname, "/accueil"))}
+            >
+              <Home className="h-4 w-4 text-cyan-300" />
+              Accueil
+            </Link>
+
+            <Link
+              href="/concours-general"
+              className="flex items-center justify-center gap-3 rounded-2xl bg-gradient-to-r from-amber-300 to-orange-400 px-4 py-4 font-black text-slate-950 shadow-lg"
+            >
+              <Trophy className="h-5 w-5" />
+              Concours général 🏆
+            </Link>
+
             <Link
               href="/lecon-du-jour"
               className="flex items-center justify-center gap-3 rounded-2xl bg-orange-500 px-4 py-4 font-black text-white shadow-lg"
@@ -205,7 +243,7 @@ export default function Header() {
               className={mobileLinkClass(isActive(pathname, "/coach-maths-ia"))}
             >
               <Brain className="h-4 w-4 text-orange-300" />
-              Coach maths
+              Coach Maths IA
             </Link>
 
             <Link
@@ -223,6 +261,35 @@ export default function Header() {
               <BadgeCheck className="h-4 w-4 text-amber-300" />
               Valéria
             </Link>
+
+            {eleve ? (
+              <div className="mt-3 grid gap-2 border-t border-white/10 pt-3">
+                <Link
+                  href="/parcours"
+                  className="flex items-center justify-center gap-2 rounded-2xl bg-emerald-400 px-4 py-3 font-black text-slate-950"
+                >
+                  <GraduationCap className="h-4 w-4" />
+                  {eleveLabel}
+                </Link>
+
+                <button
+                  type="button"
+                  onClick={logoutEleve}
+                  className="flex items-center justify-center gap-2 rounded-2xl bg-red-500 px-4 py-3 font-black text-white"
+                >
+                  <LogOut className="h-4 w-4" />
+                  Déconnexion
+                </button>
+              </div>
+            ) : (
+              <Link
+                href="/auth/signin-eleve"
+                className="mt-3 flex items-center justify-center gap-2 rounded-2xl bg-emerald-400 px-4 py-3 font-black text-slate-950"
+              >
+                <GraduationCap className="h-4 w-4" />
+                Connexion élève
+              </Link>
+            )}
           </div>
         </div>
       )}
