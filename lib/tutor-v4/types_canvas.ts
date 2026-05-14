@@ -175,7 +175,9 @@ export type SolideKind =
   | "pave_droit"
   | "prisme"
   | "cylindre"
+  | "cone"
   | "boule"
+  | "pyramide"
   | "assemblage_cubes";
 
 export type CubeCell3D = {

@@ -1,89 +1,5 @@
 // tutor-v4/components/Solide3DCanvas.tsx
 
-/**
- * ============================================
- * 🎯 SOLIDE 3D CANVAS — Tutor V4
- * ============================================
- *
- * Ce composant permet d'afficher des solides en 3D
- * pour les exercices de volume en 6e / 5e.
- *
- * ✔ Solides supportés :
- * - cube
- * - pavé droit
- * - prisme droit
- * - cylindre
- * - assemblage de cubes (unités de volume)
- *
- * ✔ Objectifs pédagogiques :
- * - visualiser la base (aire de base)
- * - visualiser la hauteur
- * - comprendre la formule :
- *      V = aire de base × hauteur
- * - compter des cubes unités (volume discret)
- *
- * ✔ Points forts :
- * - base colorée automatiquement
- * - hauteur mise en évidence (rouge)
- * - labels dynamiques (L, l, h, r...)
- * - affichage formule optionnel
- * - support mobile (SVG responsive)
- *
- * ============================================
- * 🧪 EXEMPLE D’UTILISATION (QuestionBank)
- * ============================================
- *
- * canvas: {
- *   kind: "solide_3d",
- *   solide: "pave_droit",
- *
- *   dimensions: {
- *     longueur: 8,
- *     largeur: 3,
- *     hauteur: 5,
- *   },
- *
- *   labels: {
- *     longueur: "8 cm",
- *     largeur: "3 cm",
- *     hauteur: "5 cm",
- *     aireBase: "24 cm²",
- *   },
- *
- *   highlight: {
- *     base: true,
- *     hauteur: true,
- *   },
- *
- *   display: {
- *     showLabels: true,
- *     showDimensions: true,
- *     showFormulaHint: true,
- *   },
- * }
- *
- * 👉 Variante assemblage de cubes :
- *
- * canvas: {
- *   kind: "solide_3d",
- *   solide: "assemblage_cubes",
- *
- *   cubes: [
- *     { x: 0, y: 0, z: 0 },
- *     { x: 1, y: 0, z: 0 },
- *     { x: 0, y: 1, z: 0 },
- *     { x: 1, y: 1, z: 0 },
- *     { x: 0, y: 0, z: 1 },
- *   ],
- *
- *   display: {
- *     showLabels: true,
- *   },
- * }
- *
- * ============================================
- */
-
 "use client";
 
 import type { ReactNode } from "react";
@@ -95,7 +11,6 @@ import type {
 type Props = {
   figure: CanvasFigure;
 };
-
 
 type Point = {
   x: number;
@@ -144,7 +59,7 @@ function Label({
   y: number;
   children: ReactNode;
   color?: string;
-})   {
+}) {
   return (
     <text
       x={x}
@@ -190,6 +105,7 @@ function DimensionLine({
       />
       <circle cx={from.x} cy={from.y} r={3.2} fill={color} />
       <circle cx={to.x} cy={to.y} r={3.2} fill={color} />
+
       {label ? (
         <Label x={m.x + labelOffset.x} y={m.y + labelOffset.y} color={color}>
           {label}
@@ -241,7 +157,6 @@ function drawPaveOrCube({
 
   return (
     <>
-      {/* face arrière */}
       <polygon
         points={polygon([backA, backB, backC, backD])}
         fill={colors.bodyFill}
@@ -250,7 +165,6 @@ function drawPaveOrCube({
         opacity={0.78}
       />
 
-      {/* face gauche */}
       <polygon
         points={polygon([frontA, backA, backD, frontD])}
         fill={colors.bodyFill}
@@ -259,7 +173,6 @@ function drawPaveOrCube({
         opacity={0.88}
       />
 
-      {/* face droite */}
       <polygon
         points={polygon([frontB, backB, backC, frontC])}
         fill={colors.bodyFill}
@@ -268,7 +181,6 @@ function drawPaveOrCube({
         opacity={0.95}
       />
 
-      {/* base */}
       <polygon
         points={polygon([frontD, frontC, backC, backD])}
         fill={highlightBase ? colors.baseFill : colors.bodyFill}
@@ -277,7 +189,6 @@ function drawPaveOrCube({
         opacity={highlightBase ? 0.95 : 0.85}
       />
 
-      {/* face avant */}
       <polygon
         points={polygon([frontA, frontB, frontC, frontD])}
         fill={colors.bodyFill}
@@ -286,9 +197,9 @@ function drawPaveOrCube({
         opacity={0.55}
       />
 
-      {/* arêtes visibles */}
       {[frontA, frontB, frontC, frontD].map((p, i) => {
         const q = [backA, backB, backC, backD][i];
+
         return (
           <line
             key={`edge-${i}`}
@@ -302,7 +213,7 @@ function drawPaveOrCube({
         );
       })}
 
-      {showDimensions && (
+      {showDimensions ? (
         <>
           {isCube ? (
             <>
@@ -350,7 +261,7 @@ function drawPaveOrCube({
             </>
           )}
         </>
-      )}
+      ) : null}
 
       {showLabels && highlightBase ? (
         <Label
@@ -403,7 +314,6 @@ function drawPrisme({
 
   return (
     <>
-      {/* faces latérales */}
       <polygon
         points={polygon([A, B, B2, A2])}
         fill={colors.bodyFill}
@@ -426,7 +336,6 @@ function drawPrisme({
         opacity={0.68}
       />
 
-      {/* base triangulaire avant */}
       <polygon
         points={polygon([A, B, C])}
         fill={highlightBase ? colors.baseFill : colors.bodyFill}
@@ -434,7 +343,6 @@ function drawPrisme({
         strokeWidth={highlightBase ? 3.2 : 2.6}
       />
 
-      {/* base arrière */}
       <polygon
         points={polygon([A2, B2, C2])}
         fill={colors.bodyFill}
@@ -497,7 +405,6 @@ function drawCylindre({
 
   return (
     <>
-      {/* corps */}
       <path
         d={`
           M ${cx - rx} ${topY}
@@ -512,7 +419,6 @@ function drawCylindre({
         opacity={0.78}
       />
 
-      {/* base inférieure coloriée */}
       <ellipse
         cx={cx}
         cy={bottomY}
@@ -523,7 +429,6 @@ function drawCylindre({
         strokeWidth={highlightBase ? 3.2 : 2.6}
       />
 
-      {/* ellipse supérieure */}
       <ellipse
         cx={cx}
         cy={topY}
@@ -535,7 +440,6 @@ function drawCylindre({
         opacity={0.9}
       />
 
-      {/* rayon */}
       {showDimensions ? (
         <>
           <DimensionLine
@@ -570,6 +474,100 @@ function drawCylindre({
   );
 }
 
+function drawCone({
+  data,
+  colors,
+}: {
+  data: Solide3DCanvasData;
+  colors: typeof DEFAULT_COLORS;
+}) {
+  const highlightBase = data.highlight?.base ?? true;
+  const highlightHeight = data.highlight?.hauteur ?? false;
+
+  const showLabels = data.display?.showLabels ?? true;
+  const showDimensions = data.display?.showDimensions ?? true;
+  const showFormulaHint = data.display?.showFormulaHint ?? false;
+
+  const cx = 170;
+  const baseY = 190;
+  const top = { x: 170, y: 54 };
+  const rx = 78;
+  const ry = 25;
+
+  const rayon = data.labels?.rayon ?? `${data.dimensions?.rayon ?? "r"} cm`;
+  const hauteur =
+    data.labels?.hauteur ?? `${data.dimensions?.hauteur ?? "h"} cm`;
+  const aireBase = data.labels?.aireBase ?? "base";
+
+  return (
+    <>
+      <path
+        d={`
+          M ${top.x} ${top.y}
+          L ${cx - rx} ${baseY}
+          A ${rx} ${ry} 0 0 0 ${cx + rx} ${baseY}
+          Z
+        `}
+        fill={colors.bodyFill}
+        stroke={colors.bodyStroke}
+        strokeWidth={2.8}
+        opacity={0.82}
+      />
+
+      <ellipse
+        cx={cx}
+        cy={baseY}
+        rx={rx}
+        ry={ry}
+        fill={highlightBase ? colors.baseFill : colors.bodyFill}
+        stroke={highlightBase ? colors.baseStroke : colors.bodyStroke}
+        strokeWidth={highlightBase ? 3.2 : 2.6}
+        opacity={0.95}
+      />
+
+      {showDimensions ? (
+        <>
+          <DimensionLine
+            from={top}
+            to={{ x: cx, y: baseY }}
+            label={hauteur}
+            color={highlightHeight ? colors.heightStroke : "#0369a1"}
+            labelOffset={{ x: 25, y: 0 }}
+          />
+
+          <DimensionLine
+            from={{ x: cx, y: baseY }}
+            to={{ x: cx + rx, y: baseY }}
+            label={rayon}
+            color="#0369a1"
+            labelOffset={{ x: 0, y: -12 }}
+          />
+        </>
+      ) : null}
+
+      <circle cx={cx} cy={baseY} r={3.5} fill="#0f172a" opacity={0.85} />
+
+      {showLabels && highlightBase ? (
+        <Label x={cx} y={baseY + 8} color={colors.baseStroke}>
+          {aireBase}
+        </Label>
+      ) : null}
+
+      {showLabels ? (
+        <Label x={top.x} y={top.y - 10} color={colors.bodyStroke}>
+          cône
+        </Label>
+      ) : null}
+
+      {showFormulaHint ? (
+        <Label x={170} y={232} color="#16a34a">
+          V = aire de base × hauteur ÷ 3
+        </Label>
+      ) : null}
+    </>
+  );
+}
+
 function drawBoule({
   data,
   colors,
@@ -591,7 +589,6 @@ function drawBoule({
 
   return (
     <>
-      {/* boule */}
       <circle
         cx={cx}
         cy={cy}
@@ -602,7 +599,6 @@ function drawBoule({
         opacity={0.9}
       />
 
-      {/* effet 3D : ellipse centrale */}
       <ellipse
         cx={cx}
         cy={cy}
@@ -614,7 +610,6 @@ function drawBoule({
         opacity={0.45}
       />
 
-      {/* ombre légère */}
       <ellipse
         cx={cx + 8}
         cy={cy + 18}
@@ -624,7 +619,6 @@ function drawBoule({
         opacity={0.45}
       />
 
-      {/* rayon */}
       {showDimensions ? (
         <>
           <DimensionLine
@@ -645,7 +639,6 @@ function drawBoule({
         </>
       ) : null}
 
-      {/* centre */}
       <circle cx={cx} cy={cy} r={4} fill="#0f172a" />
 
       {showLabels ? (
@@ -657,6 +650,120 @@ function drawBoule({
       {showFormulaHint ? (
         <Label x={170} y={232} color="#16a34a">
           V = (4/3)πr³
+        </Label>
+      ) : null}
+    </>
+  );
+}
+
+function drawPyramide({
+  data,
+  colors,
+}: {
+  data: Solide3DCanvasData;
+  colors: typeof DEFAULT_COLORS;
+}) {
+  const highlightBase = data.highlight?.base ?? true;
+  const highlightHeight = data.highlight?.hauteur ?? false;
+
+  const showLabels = data.display?.showLabels ?? true;
+  const showDimensions = data.display?.showDimensions ?? true;
+  const showFormulaHint = data.display?.showFormulaHint ?? false;
+
+  const A = { x: 88, y: 188 };
+  const B = { x: 222, y: 188 };
+  const C = { x: 268, y: 146 };
+  const D = { x: 132, y: 146 };
+
+  const S = { x: 176, y: 58 };
+  const O = { x: 178, y: 166 };
+
+  const hauteur =
+    data.labels?.hauteur ?? `${data.dimensions?.hauteur ?? "h"} cm`;
+
+  const baseLabel = data.labels?.aireBase ?? "base";
+
+  return (
+    <>
+      <polygon
+        points={polygon([A, B, C, D])}
+        fill={highlightBase ? colors.baseFill : colors.bodyFill}
+        stroke={highlightBase ? colors.baseStroke : colors.bodyStroke}
+        strokeWidth={highlightBase ? 3.2 : 2.6}
+        opacity={0.9}
+      />
+
+      <polygon
+        points={polygon([S, A, B])}
+        fill={colors.bodyFill}
+        stroke={colors.bodyStroke}
+        strokeWidth={2.5}
+        opacity={0.82}
+      />
+
+      <polygon
+        points={polygon([S, B, C])}
+        fill="#bfdbfe"
+        stroke={colors.bodyStroke}
+        strokeWidth={2.5}
+        opacity={0.76}
+      />
+
+      <polygon
+        points={polygon([S, C, D])}
+        fill="#dbeafe"
+        stroke={colors.bodyStroke}
+        strokeWidth={2.5}
+        opacity={0.62}
+      />
+
+      <polygon
+        points={polygon([S, D, A])}
+        fill="#e0f2fe"
+        stroke={colors.bodyStroke}
+        strokeWidth={2.5}
+        opacity={0.68}
+      />
+
+      {[A, B, C, D].map((p, i) => (
+        <line
+          key={`pyramide-edge-${i}`}
+          x1={S.x}
+          y1={S.y}
+          x2={p.x}
+          y2={p.y}
+          stroke={colors.bodyStroke}
+          strokeWidth={2.5}
+        />
+      ))}
+
+      {showDimensions ? (
+        <DimensionLine
+          from={S}
+          to={O}
+          label={hauteur}
+          color={highlightHeight ? colors.heightStroke : "#0369a1"}
+          labelOffset={{ x: 24, y: 0 }}
+        />
+      ) : null}
+
+      <circle cx={O.x} cy={O.y} r={3.5} fill="#0f172a" opacity={0.8} />
+
+      {showLabels && highlightBase ? (
+        <Label x={176} y={174} color={colors.baseStroke}>
+          {baseLabel}
+        </Label>
+      ) : null}
+
+      {showLabels ? (
+        <Label x={S.x} y={S.y - 10} color={colors.bodyStroke}>
+          pyramide
+        </Label>
+      ) : null}
+
+      {showFormulaHint ? (
+        <Label x={170} y={232} color="#16a34a">
+          V = aire de base × hauteur ÷ 3
         </Label>
       ) : null}
     </>
@@ -817,49 +924,63 @@ export default function Solide3DCanvas({ figure }: Props) {
           fill="white"
         />
 
-        {figure.solide === "cube"
-          ? drawPaveOrCube({
-              isCube: true,
-              data: figure,
-              colors,
-            })
-          : null}
+        {figure.solide === "cube" ? (
+          drawPaveOrCube({
+            isCube: true,
+            data: figure,
+            colors,
+          })
+        ) : null}
 
-        {figure.solide === "pave_droit"
-          ? drawPaveOrCube({
-              isCube: false,
-              data: figure,
-              colors,
-            })
-          : null}
+        {figure.solide === "pave_droit" ? (
+          drawPaveOrCube({
+            isCube: false,
+            data: figure,
+            colors,
+          })
+        ) : null}
 
-        {figure.solide === "prisme"
-          ? drawPrisme({
-              data: figure,
-              colors,
-            })
-          : null}
+        {figure.solide === "prisme" ? (
+          drawPrisme({
+            data: figure,
+            colors,
+          })
+        ) : null}
 
-        {figure.solide === "cylindre"
-          ? drawCylindre({
-              data: figure,
-              colors,
-            })
-          : null}
+        {figure.solide === "cylindre" ? (
+          drawCylindre({
+            data: figure,
+            colors,
+          })
+        ) : null}
 
-        {figure.solide === "boule"
-          ? drawBoule({
-              data: figure,
-              colors,
-            })
-          : null}
+        {figure.solide === "cone" ? (
+          drawCone({
+            data: figure,
+            colors,
+          })
+        ) : null}
 
-        {figure.solide === "assemblage_cubes"
-          ? drawAssemblageCubes({
-              data: figure,
-              colors,
-            })
-          : null}
+        {figure.solide === "boule" ? (
+          drawBoule({
+            data: figure,
+            colors,
+          })
+        ) : null}
+
+        {figure.solide === "pyramide" ? (
+          drawPyramide({
+            data: figure,
+            colors,
+          })
+        ) : null}
+
+        {figure.solide === "assemblage_cubes" ? (
+          drawAssemblageCubes({
+            data: figure,
+            colors,
+          })
+        ) : null}
       </svg>
     </div>
   );
