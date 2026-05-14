@@ -719,6 +719,240 @@ export type DureeCanvasData = {
   };
 };
 
+// ============================================================
+// REPÉRAGE SUR QUADRILLAGE
+// ============================================================
+
+export type ReperageDirection =
+  | "haut"
+  | "bas"
+  | "gauche"
+  | "droite";
+
+export type ReperagePoint = {
+  x: number;
+  y: number;
+  label?: string;
+
+  /**
+   * Couleur du point.
+   * Exemple : "#ef4444"
+   */
+  color?: string;
+};
+
+export type ReperageStep = {
+  direction: ReperageDirection;
+  count: number;
+
+  /**
+   * Couleur spécifique de cette flèche ou étape.
+   * Si absent, on utilise la couleur globale du chemin.
+   */
+  color?: string;
+};
+
+export type ReperageCanvasData = {
+  kind: "reperage";
+
+  grid?: {
+    rows: number;
+    cols: number;
+
+    /**
+     * Labels personnalisés des colonnes.
+     * Exemple : ["0", "1", "2", "3", "4"]
+     */
+    xLabels?: string[];
+
+    /**
+     * Labels personnalisés des lignes.
+     * Exemple : ["0", "1", "2", "3", "4"]
+     */
+    yLabels?: string[];
+  };
+
+  /**
+   * Points déjà affichés sur le quadrillage.
+   * Exemple : A(3 ; 2)
+   */
+  points?: ReperagePoint[];
+
+  /**
+   * Chemin de déplacement à partir d’un point.
+   * Exemple : partir de A, aller 2 cases à droite puis 1 case en haut.
+   */
+  path?: {
+    start: ReperagePoint;
+    steps: ReperageStep[];
+    showArrows?: boolean;
+
+    /**
+     * Couleur globale du chemin.
+     */
+    color?: string;
+  };
+
+  /**
+   * Point cible à trouver ou à placer.
+   */
+  target?: {
+    x: number;
+    y: number;
+    label?: string;
+
+    /**
+     * Si true, le point peut être masqué ou remplacé par un ?
+     * utile pour les questions “où arrive-t-on ?”
+     */
+    hidden?: boolean;
+
+    /**
+     * Couleur du point cible.
+     */
+    color?: string;
+  };
+
+  colors?: {
+    background?: string;
+    grid?: string;
+
+    /**
+     * Axe horizontal.
+     */
+    axisX?: string;
+
+    /**
+     * Axe vertical.
+     */
+    axisY?: string;
+
+    point?: string;
+    target?: string;
+    path?: string;
+    text?: string;
+  };
+
+  display?: {
+    showGrid?: boolean;
+    showAxes?: boolean;
+    showCoordinates?: boolean;
+    showPointLabels?: boolean;
+    showTarget?: boolean;
+  };
+
+  size?: {
+    width?: number;
+    height?: number;
+  };
+};
+
+// ============================================================
+// DROITES CANVAS
+// ============================================================
+
+export type DroitesCanvasPoint = {
+  x: number;
+  y: number;
+  label?: string;
+  color?: string;
+  highlight?: boolean;
+};
+
+export type DroitesCanvasLineType = "droite" | "segment" | "demi_droite";
+
+export type DroitesCanvasLine = {
+  id: string;
+  type: DroitesCanvasLineType;
+
+  from: {
+    x: number;
+    y: number;
+  };
+
+  to: {
+    x: number;
+    y: number;
+  };
+
+  label?: string;
+  color?: string;
+
+  strokeWidth?: number;
+  dashed?: boolean;
+
+  display?: {
+    showLabel?: boolean;
+    showArrows?: boolean;
+    extend?: boolean;
+  };
+};
+
+export type DroitesCanvasData = {
+  kind: "droites";
+
+  size?: {
+    width?: number;
+    height?: number;
+  };
+
+  grid?: {
+    show?: boolean;
+    rows?: number;
+    cols?: number;
+    step?: number;
+  };
+
+  lines: DroitesCanvasLine[];
+
+  points?: DroitesCanvasPoint[];
+
+  intersections?: Array<{
+    x: number;
+    y: number;
+    label?: string;
+    color?: string;
+    highlight?: boolean;
+  }>;
+
+  markers?: {
+    rightAngles?: Array<{
+      x: number;
+      y: number;
+      lineA: string;
+      lineB: string;
+      size?: number;
+      color?: string;
+    }>;
+
+    parallels?: Array<{
+      lineA: string;
+      lineB: string;
+      color?: string;
+      markCount?: 1 | 2;
+    }>;
+  };
+
+  display?: {
+    showGrid?: boolean;
+    showLabels?: boolean;
+    showPoints?: boolean;
+    showIntersections?: boolean;
+    showRightAngleMarkers?: boolean;
+    showParallelMarkers?: boolean;
+  };
+
+  colors?: {
+    background?: string;
+    grid?: string;
+    text?: string;
+    point?: string;
+    intersection?: string;
+    rightAngle?: string;
+    parallel?: string;
+  };
+};
+
 export type CanvasFigure =
   | TriangleCanvasData
   | QuadrilatereCanvasData
@@ -740,4 +974,6 @@ export type CanvasFigure =
   | AlgebreCanvasData
   | TransformationCanvasData
   | SuiteCanvasData
-  | DureeCanvasData;
+  | DureeCanvasData
+  | ReperageCanvasData
+  | DroitesCanvasData;

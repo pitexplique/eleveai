@@ -24,6 +24,8 @@ import SectionSolideCanvas from "./SectionSolideCanvas";
 import AlgebreCanvas from "./AlgebreCanvas";
 import SuiteCanvas from "./SuiteCanvas";
 import DureeCanvas from "./DureeCanvas";
+import ReperageCanvas from "./ReperageCanvas";
+import DroitesCanvas from "./DroitesCanvas";
 
 type Props = {
   figure?: CanvasFigure | null;
@@ -95,7 +97,12 @@ export default function CanvasRenderer({ figure }: Props) {
 
     case "duree":
       return <DureeCanvas figure={figure} />;
-      
+    
+    case "reperage":
+      return <ReperageCanvas figure={figure} />;
+
+    case "droites":
+      return <DroitesCanvas figure={figure} />;
 
     default:
       return null;

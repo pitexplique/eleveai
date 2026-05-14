@@ -21,3 +21,7 @@ export { default as ScratchCanvas } from "./ScratchCanvas";
 export { default as AlgebreCanvas } from "./AlgebreCanvas";
 export { default as SuiteCanvas } from "./SuiteCanvas";
 export { default as DureeCanvas } from "./DureeCanvas";
+export { default as ReperageCanvas } from "./ReperageCanvas";
+export { default as DroitesCanvas } from "./DroitesCanvas";
+
+

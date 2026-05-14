@@ -48,7 +48,9 @@ export type {
   ScratchBlockData,
   ScratchCanvasData,
   CanvasFigure,
-  DureeCanvasData
+  DureeCanvasData,
+  ReperageCanvasData,
+  DroitesCanvasData
 } from "./types_canvas";
 
 import type { CanvasFigure } from "./types_canvas";

@@ -31,6 +31,8 @@ import {
   AlgebreCanvas,
   SuiteCanvas,
   DureeCanvas,
+  ReperageCanvas,
+  DroitesCanvas
 } from "@/lib/canvas";
 
 import {
@@ -267,6 +269,14 @@ if (canvas.kind === "tableau_proportionnalite") {
  
   if (canvas.kind === "duree") {
     return <DureeCanvas figure={canvas} />;
+}
+
+if (canvas.kind === "reperage") {
+  return <ReperageCanvas figure={canvas} />;
+}
+
+if (canvas.kind === "droites") {
+  return <DroitesCanvas figure={canvas} />;
 }
   return null;
 }
