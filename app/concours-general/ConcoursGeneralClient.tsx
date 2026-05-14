@@ -49,7 +49,7 @@ function accessibleLabel(niveau: ConcoursGeneralNiveau) {
 
 function ConcoursBackgroundSvg() {
   return (
-    <div className="pointer-events-none absolute inset-0 overflow-hidden opacity-35">
+    <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden opacity-90">
       <svg
         className="h-full w-full"
         viewBox="0 0 1200 900"
@@ -213,7 +213,9 @@ export default function ConcoursGeneralClient() {
 
   const [activeItemId, setActiveItemId] = useState<string | null>(null);
   const [answers, setAnswers] = useState<Record<string, string>>({});
-  const [validated, setValidated] = useState<Record<string, ConcoursGeneralAnswer>>({});
+  const [validated, setValidated] = useState<
+    Record<string, ConcoursGeneralAnswer>
+  >({});
   const [visibleHints, setVisibleHints] = useState<Record<string, number>>({});
 
   const allItems = useMemo(() => {
@@ -289,10 +291,11 @@ export default function ConcoursGeneralClient() {
   const visibleItemsForLevel = allItems.filter(canDisplayForSelectedLevel);
 
   return (
-    <main className="min-h-screen bg-slate-950 px-4 py-8 text-white">
+<main className="relative min-h-screen overflow-hidden bg-gradient-to-br from-slate-900 via-slate-950 to-amber-950/40 px-4 py-8 text-white">
       <ConcoursBackgroundSvg />
-      <section className="mx-auto max-w-6xl">
-        <div className="mb-8 rounded-3xl border border-amber-400/30 bg-gradient-to-br from-slate-900 via-slate-900 to-amber-950/40 p-6 shadow-2xl">
+
+      <section className="relative z-10 mx-auto max-w-6xl">
+        <div className="relative mb-8 overflow-hidden rounded-3xl border border-amber-400/30 bg-gradient-to-br from-slate-900/90 via-slate-900/85 to-amber-950/40 p-6 shadow-2xl backdrop-blur-sm">
           <p className="mb-2 text-sm font-black uppercase tracking-wide text-amber-300">
             EleveAI · Préparation Concours général des collèges
           </p>
@@ -302,9 +305,9 @@ export default function ConcoursGeneralClient() {
           </h1>
 
           <p className="mt-4 max-w-3xl text-sm leading-relaxed text-slate-300 md:text-base">
-            20 défis par semaine pour apprendre à chercher, raisonner,
-            tester, expliquer et rédiger. Niveau cible : 3e. Accessible
-            progressivement aux élèves curieux dès la 6e.
+            20 défis par semaine pour apprendre à chercher, raisonner, tester,
+            expliquer et rédiger. Niveau cible : 3e. Accessible progressivement
+            aux élèves curieux dès la 6e.
           </p>
 
           <div className="mt-6 flex flex-wrap gap-3">
@@ -370,7 +373,7 @@ export default function ConcoursGeneralClient() {
               return (
                 <div
                   key={block.id}
-                  className="rounded-3xl border border-slate-800 bg-slate-900 p-4 shadow-xl"
+                  className="rounded-3xl border border-slate-800 bg-slate-900/90 p-4 shadow-xl backdrop-blur-sm"
                 >
                   <h2 className="text-lg font-black text-amber-200">
                     {block.title}
@@ -399,7 +402,7 @@ export default function ConcoursGeneralClient() {
                             active
                               ? "border-amber-300 bg-amber-300 text-slate-950"
                               : visible
-                                ? "border-slate-700 bg-slate-950 text-slate-100 hover:border-amber-300"
+                                ? "border-slate-700 bg-slate-950/95 text-slate-100 hover:border-amber-300"
                                 : "cursor-not-allowed border-slate-800 bg-slate-950/40 text-slate-600",
                           ].join(" ")}
                         >
@@ -450,13 +453,13 @@ export default function ConcoursGeneralClient() {
             <button
               type="button"
               onClick={resetSession}
-              className="w-full rounded-2xl border border-slate-700 bg-slate-900 px-4 py-3 text-sm font-black text-slate-200 hover:border-amber-300"
+              className="w-full rounded-2xl border border-slate-700 bg-slate-900/90 px-4 py-3 text-sm font-black text-slate-200 backdrop-blur-sm hover:border-amber-300"
             >
               Recommencer la session
             </button>
           </aside>
 
-          <section className="rounded-3xl border border-slate-800 bg-slate-900 p-5 shadow-2xl">
+          <section className="rounded-3xl border border-slate-800 bg-slate-900/90 p-5 shadow-2xl backdrop-blur-sm">
             {activeItem ? (
               <>
                 <div className="flex flex-wrap items-start justify-between gap-3">
@@ -480,7 +483,7 @@ export default function ConcoursGeneralClient() {
                   </div>
                 </div>
 
-                <div className="mt-6 rounded-2xl border border-slate-700 bg-slate-950 p-5">
+                <div className="mt-6 rounded-2xl border border-slate-700 bg-slate-950/95 p-5">
                   <p className="whitespace-pre-line text-base leading-relaxed text-slate-100">
                     {activeItem.statement}
                   </p>
@@ -506,7 +509,7 @@ export default function ConcoursGeneralClient() {
                             "rounded-2xl border px-4 py-3 text-left font-bold transition",
                             selected
                               ? "border-amber-300 bg-amber-300 text-slate-950"
-                              : "border-slate-700 bg-slate-950 text-slate-100 hover:border-amber-300",
+                              : "border-slate-700 bg-slate-950/95 text-slate-100 hover:border-amber-300",
                           ].join(" ")}
                         >
                           {choice}
@@ -521,7 +524,7 @@ export default function ConcoursGeneralClient() {
                       handleAnswerChange(activeItem.id, event.target.value)
                     }
                     placeholder="Écris ta réponse ici..."
-                    className="mt-5 min-h-28 w-full rounded-2xl border border-slate-700 bg-slate-950 p-4 text-white outline-none focus:border-amber-300"
+                    className="mt-5 min-h-28 w-full rounded-2xl border border-slate-700 bg-slate-950/95 p-4 text-white outline-none focus:border-amber-300"
                   />
                 )}
 
@@ -569,7 +572,7 @@ export default function ConcoursGeneralClient() {
                 ) : null}
 
                 {validated[activeItem.id] ? (
-                  <div className="mt-6 rounded-3xl border border-slate-700 bg-slate-950 p-5">
+                  <div className="mt-6 rounded-3xl border border-slate-700 bg-slate-950/95 p-5">
                     <p
                       className={[
                         "text-lg font-black",
