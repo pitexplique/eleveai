@@ -47,6 +47,164 @@ function accessibleLabel(niveau: ConcoursGeneralNiveau) {
   return `Accessible dès la ${niveau}`;
 }
 
+function ConcoursBackgroundSvg() {
+  return (
+    <div className="pointer-events-none absolute inset-0 overflow-hidden opacity-35">
+      <svg
+        className="h-full w-full"
+        viewBox="0 0 1200 900"
+        preserveAspectRatio="none"
+        aria-hidden="true"
+      >
+        <defs>
+          <radialGradient id="goldGlow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stopColor="#facc15" stopOpacity="0.55" />
+            <stop offset="100%" stopColor="#facc15" stopOpacity="0" />
+          </radialGradient>
+
+          <linearGradient id="mathLine" x1="0" x2="1" y1="0" y2="1">
+            <stop offset="0%" stopColor="#fbbf24" stopOpacity="0.55" />
+            <stop offset="50%" stopColor="#8b5cf6" stopOpacity="0.35" />
+            <stop offset="100%" stopColor="#22c55e" stopOpacity="0.35" />
+          </linearGradient>
+        </defs>
+
+        {/* grands halos */}
+        <circle cx="120" cy="120" r="180" fill="url(#goldGlow)" />
+        <circle cx="1080" cy="180" r="220" fill="url(#goldGlow)" />
+        <circle cx="940" cy="760" r="260" fill="#7c3aed" opacity="0.12" />
+        <circle cx="160" cy="720" r="220" fill="#22c55e" opacity="0.10" />
+
+        {/* courbes mathématiques */}
+        <path
+          d="M-50,610 C180,420 300,760 520,560 C720,380 850,620 1250,360"
+          fill="none"
+          stroke="url(#mathLine)"
+          strokeWidth="4"
+          strokeLinecap="round"
+          opacity="0.55"
+        />
+
+        <path
+          d="M-30,250 C180,120 310,360 510,220 C720,70 880,250 1230,120"
+          fill="none"
+          stroke="#38bdf8"
+          strokeWidth="2"
+          strokeLinecap="round"
+          opacity="0.22"
+        />
+
+        {/* trophée stylisé */}
+        <g transform="translate(940 85)" opacity="0.18">
+          <path
+            d="M55 20 H145 V70 C145 105 122 130 100 138 C78 130 55 105 55 70 Z"
+            fill="#fbbf24"
+          />
+          <path
+            d="M55 35 H25 C25 70 42 88 60 92"
+            fill="none"
+            stroke="#fbbf24"
+            strokeWidth="12"
+            strokeLinecap="round"
+          />
+          <path
+            d="M145 35 H175 C175 70 158 88 140 92"
+            fill="none"
+            stroke="#fbbf24"
+            strokeWidth="12"
+            strokeLinecap="round"
+          />
+          <rect x="85" y="138" width="30" height="45" rx="8" fill="#fbbf24" />
+          <rect x="60" y="180" width="80" height="18" rx="8" fill="#fbbf24" />
+        </g>
+
+        {/* symboles discrets */}
+        <text
+          x="70"
+          y="190"
+          fill="#fbbf24"
+          opacity="0.18"
+          fontSize="72"
+          fontWeight="900"
+        >
+          π
+        </text>
+
+        <text
+          x="1010"
+          y="690"
+          fill="#fbbf24"
+          opacity="0.16"
+          fontSize="64"
+          fontWeight="900"
+        >
+          x²
+        </text>
+
+        <text
+          x="170"
+          y="820"
+          fill="#38bdf8"
+          opacity="0.14"
+          fontSize="58"
+          fontWeight="900"
+        >
+          ∑
+        </text>
+
+        {/* formes géométriques */}
+        <polygon
+          points="230,150 280,240 180,240"
+          fill="none"
+          stroke="#fbbf24"
+          strokeWidth="3"
+          opacity="0.22"
+        />
+
+        <rect
+          x="760"
+          y="640"
+          width="90"
+          height="90"
+          rx="20"
+          fill="none"
+          stroke="#22c55e"
+          strokeWidth="3"
+          opacity="0.18"
+          transform="rotate(14 805 685)"
+        />
+
+        <circle
+          cx="370"
+          cy="650"
+          r="55"
+          fill="none"
+          stroke="#38bdf8"
+          strokeWidth="3"
+          opacity="0.18"
+        />
+
+        {/* étoiles */}
+        {[
+          [180, 360],
+          [330, 100],
+          [690, 160],
+          [1070, 390],
+          [580, 780],
+          [880, 500],
+        ].map(([x, y], index) => (
+          <g key={index} transform={`translate(${x} ${y})`} opacity="0.28">
+            <path
+              d="M0 -18 L5 -5 L18 0 L5 5 L0 18 L-5 5 L-18 0 L-5 -5 Z"
+              fill="#fbbf24"
+            />
+          </g>
+        ))}
+      </svg>
+    </div>
+  );
+}
+
 export default function ConcoursGeneralClient() {
   const week = concoursGeneralSemaine01;
 
@@ -132,6 +290,7 @@ export default function ConcoursGeneralClient() {
 
   return (
     <main className="min-h-screen bg-slate-950 px-4 py-8 text-white">
+      <ConcoursBackgroundSvg />
       <section className="mx-auto max-w-6xl">
         <div className="mb-8 rounded-3xl border border-amber-400/30 bg-gradient-to-br from-slate-900 via-slate-900 to-amber-950/40 p-6 shadow-2xl">
           <p className="mb-2 text-sm font-black uppercase tracking-wide text-amber-300">
