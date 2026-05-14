@@ -295,78 +295,60 @@ export default function ConcoursGeneralClient() {
       <ConcoursBackgroundSvg />
 
       <section className="relative z-10 mx-auto max-w-6xl">
-        <div className="relative mb-8 overflow-hidden rounded-3xl border border-amber-400/30 bg-gradient-to-br from-slate-900/90 via-slate-900/85 to-amber-950/40 p-6 shadow-2xl backdrop-blur-sm">
-          <p className="mb-2 text-sm font-black uppercase tracking-wide text-amber-300">
-            EleveAI · Préparation Concours général des collèges
-          </p>
+<div className="relative mb-8 overflow-hidden rounded-3xl border border-amber-400/30 bg-gradient-to-br from-slate-900/90 via-slate-900/85 to-amber-950/40 p-6 shadow-2xl backdrop-blur-sm">
+  <p className="mb-2 text-sm font-black uppercase tracking-wide text-amber-300">
+    EleveAI · Préparation Concours général des collèges
+  </p>
 
-          <h1 className="text-3xl font-black md:text-5xl">
-            Des maths pas comme les autres
-          </h1>
+  <h1 className="text-3xl font-black md:text-5xl">
+    Des maths pas comme les autres
+  </h1>
 
-          <p className="mt-4 max-w-4xl text-sm leading-relaxed text-slate-300 md:text-base">
-            20 défis par semaine pour apprendre à chercher, visualiser, raisonner,
-            tester et expliquer. Les questions sont inspirées de l’esprit des grands
-            concours internationaux : Singapour, Royaume-Uni, Australie et olympiades
-            junior. Niveau cible : 3e, accessible progressivement aux élèves curieux
-            dès la 6e.
-          </p>
+  <p className="mt-4 max-w-4xl text-sm leading-relaxed text-slate-300 md:text-base">
+    20 défis par semaine pour apprendre à chercher, visualiser, raisonner,
+    tester et expliquer. Les questions sont inspirées de l’esprit des grands
+    concours internationaux : Singapour, Royaume-Uni, Australie et olympiades
+    junior. Niveau cible : 3e, accessible progressivement aux élèves curieux
+    dès la 6e.
+  </p>
 
-          <div className="mt-6 flex flex-wrap gap-3">
-            {niveaux.map((niveau) => (
-              <button
-                key={niveau}
-                type="button"
-                onClick={() => setSelectedNiveau(niveau)}
-                className={[
-                  "rounded-full px-4 py-2 text-sm font-black transition",
-                  selectedNiveau === niveau
-                    ? "bg-amber-300 text-slate-950"
-                    : "border border-slate-700 bg-slate-900 text-slate-200 hover:border-amber-300",
-                ].join(" ")}
-              >
-                Je suis en {niveau}
-              </button>
-            ))}
-          </div>
+  <div className="mt-5 flex flex-wrap gap-2">
+    <span className="rounded-full border border-amber-300/40 bg-amber-300/10 px-3 py-1 text-xs font-black text-amber-200">
+      🇸🇬 Singapour · Ingéniosité
+    </span>
 
-          <div className="mt-6 grid gap-3 md:grid-cols-4">
-            <div className="rounded-2xl border border-slate-700 bg-slate-900/80 p-4">
-              <p className="text-xs font-bold uppercase text-slate-400">
-                Semaine
-              </p>
-              <p className="mt-1 text-xl font-black">1</p>
-            </div>
+    <span className="rounded-full border border-sky-300/40 bg-sky-300/10 px-3 py-1 text-xs font-black text-sky-200">
+      🇬🇧 UKMT · QCM intelligents
+    </span>
 
-            <div className="rounded-2xl border border-slate-700 bg-slate-900/80 p-4">
-              <p className="text-xs font-bold uppercase text-slate-400">
-                Défis disponibles
-              </p>
-              <p className="mt-1 text-xl font-black">
-                {visibleItemsForLevel.length} / {allItems.length}
-              </p>
-            </div>
+    <span className="rounded-full border border-emerald-300/40 bg-emerald-300/10 px-3 py-1 text-xs font-black text-emerald-200">
+      🇦🇺 Australie · Progression
+    </span>
 
-            <div className="rounded-2xl border border-slate-700 bg-slate-900/80 p-4">
-              <p className="text-xs font-bold uppercase text-slate-400">
-                Durée conseillée
-              </p>
-              <p className="mt-1 text-xl font-black">
-                {week.durationMinutes} min
-              </p>
-            </div>
+    <span className="rounded-full border border-violet-300/40 bg-violet-300/10 px-3 py-1 text-xs font-black text-violet-200">
+      🧠 Olympiades junior · Raisonnement
+    </span>
+  </div>
 
-            <div className="rounded-2xl border border-slate-700 bg-slate-900/80 p-4">
-              <p className="text-xs font-bold uppercase text-slate-400">
-                Score
-              </p>
-              <p className="mt-1 text-xl font-black">
-                {score} / {maxScore}
-              </p>
-            </div>
-          </div>
-        </div>
+  <div className="mt-6 flex flex-wrap gap-3">
+    {niveaux.map((niveau) => (
+      <button
+        key={niveau}
+        type="button"
+        onClick={() => setSelectedNiveau(niveau)}
+        className={[
+          "rounded-full px-4 py-2 text-sm font-black transition",
+          selectedNiveau === niveau
+            ? "bg-amber-300 text-slate-950"
+            : "border border-slate-700 bg-slate-900 text-slate-200 hover:border-amber-300",
+        ].join(" ")}
+      >
+        Je suis en {niveau}
+      </button>
+    ))}
+  </div>
 
+</div>
         <div className="grid gap-6 lg:grid-cols-[340px_1fr]">
           <aside className="space-y-4">
             {week.blocks.map((block) => {
