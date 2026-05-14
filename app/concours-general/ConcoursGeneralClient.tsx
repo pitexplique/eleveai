@@ -2,7 +2,7 @@
 
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { concoursGeneralSemaine01 } from "@/lib/concours-general/weeks/semaine-01";
 import { getConcoursGeneralItemsByIds } from "@/lib/concours-general";
 import type {
@@ -69,13 +69,11 @@ function ConcoursBackgroundSvg() {
           </linearGradient>
         </defs>
 
-        {/* grands halos */}
         <circle cx="120" cy="120" r="180" fill="url(#goldGlow)" />
         <circle cx="1080" cy="180" r="220" fill="url(#goldGlow)" />
         <circle cx="940" cy="760" r="260" fill="#7c3aed" opacity="0.12" />
         <circle cx="160" cy="720" r="220" fill="#22c55e" opacity="0.10" />
 
-        {/* courbes mathématiques */}
         <path
           d="M-50,610 C180,420 300,760 520,560 C720,380 850,620 1250,360"
           fill="none"
@@ -94,7 +92,6 @@ function ConcoursBackgroundSvg() {
           opacity="0.22"
         />
 
-        {/* trophée stylisé */}
         <g transform="translate(940 85)" opacity="0.18">
           <path
             d="M55 20 H145 V70 C145 105 122 130 100 138 C78 130 55 105 55 70 Z"
@@ -118,7 +115,6 @@ function ConcoursBackgroundSvg() {
           <rect x="60" y="180" width="80" height="18" rx="8" fill="#fbbf24" />
         </g>
 
-        {/* symboles discrets */}
         <text
           x="70"
           y="190"
@@ -152,7 +148,6 @@ function ConcoursBackgroundSvg() {
           ∑
         </text>
 
-        {/* formes géométriques */}
         <polygon
           points="230,150 280,240 180,240"
           fill="none"
@@ -184,7 +179,6 @@ function ConcoursBackgroundSvg() {
           opacity="0.18"
         />
 
-        {/* étoiles */}
         {[
           [180, 360],
           [330, 100],
@@ -224,8 +218,14 @@ export default function ConcoursGeneralClient() {
     );
   }, [week.blocks]);
 
+  useEffect(() => {
+    if (!activeItemId && allItems.length > 0) {
+      setActiveItemId(allItems[0].id);
+    }
+  }, [activeItemId, allItems]);
+
   const activeItem =
-    allItems.find((item) => item.id === activeItemId) ?? allItems[0] ?? null;
+    allItems.find((item) => item.id === activeItemId) ?? null;
 
   const score = Object.values(validated).reduce(
     (sum, answer) => sum + answer.score,
@@ -291,64 +291,64 @@ export default function ConcoursGeneralClient() {
   const visibleItemsForLevel = allItems.filter(canDisplayForSelectedLevel);
 
   return (
-<main className="relative min-h-screen overflow-hidden bg-gradient-to-br from-slate-900 via-slate-950 to-amber-950/40 px-4 py-8 text-white">
+    <main className="relative min-h-screen overflow-hidden bg-gradient-to-br from-slate-900 via-slate-950 to-amber-950/40 px-4 py-8 text-white">
       <ConcoursBackgroundSvg />
 
       <section className="relative z-10 mx-auto max-w-6xl">
-<div className="relative mb-8 overflow-hidden rounded-3xl border border-amber-400/30 bg-gradient-to-br from-slate-900/90 via-slate-900/85 to-amber-950/40 p-6 shadow-2xl backdrop-blur-sm">
-  <p className="mb-2 text-sm font-black uppercase tracking-wide text-amber-300">
-    EleveAI · Préparation Concours général des collèges
-  </p>
+        <div className="relative mb-8 overflow-hidden rounded-3xl border border-amber-400/30 bg-gradient-to-br from-slate-900/90 via-slate-900/85 to-amber-950/40 p-6 shadow-2xl backdrop-blur-sm">
+          <p className="mb-2 text-sm font-black uppercase tracking-wide text-amber-300">
+            EleveAI · Préparation Concours général des collèges
+          </p>
 
-  <h1 className="text-3xl font-black md:text-5xl">
-    Des maths pas comme les autres
-  </h1>
+          <h1 className="text-3xl font-black md:text-5xl">
+            Des maths pas comme les autres
+          </h1>
 
-  <p className="mt-4 max-w-4xl text-sm leading-relaxed text-slate-300 md:text-base">
-    20 défis par semaine pour apprendre à chercher, visualiser, raisonner,
-    tester et expliquer. Les questions sont inspirées de l’esprit des grands
-    concours internationaux : Singapour, Royaume-Uni, Australie et olympiades
-    junior. Niveau cible : 3e, accessible progressivement aux élèves curieux
-    dès la 6e.
-  </p>
+          <p className="mt-4 max-w-4xl text-sm leading-relaxed text-slate-300 md:text-base">
+            20 défis par semaine pour apprendre à chercher, visualiser,
+            raisonner, tester et expliquer. Les questions sont inspirées de
+            l’esprit des grands concours internationaux : Singapour,
+            Royaume-Uni, Australie et olympiades junior. Niveau cible : 3e,
+            accessible progressivement aux élèves curieux dès la 6e.
+          </p>
 
-  <div className="mt-5 flex flex-wrap gap-2">
-    <span className="rounded-full border border-amber-300/40 bg-amber-300/10 px-3 py-1 text-xs font-black text-amber-200">
-      🇸🇬 Singapour · Ingéniosité
-    </span>
+          <div className="mt-5 flex flex-wrap gap-2">
+            <span className="rounded-full border border-amber-300/40 bg-amber-300/10 px-3 py-1 text-xs font-black text-amber-200">
+              🇸🇬 Singapour · Ingéniosité
+            </span>
 
-    <span className="rounded-full border border-sky-300/40 bg-sky-300/10 px-3 py-1 text-xs font-black text-sky-200">
-      🇬🇧 UKMT · QCM intelligents
-    </span>
+            <span className="rounded-full border border-sky-300/40 bg-sky-300/10 px-3 py-1 text-xs font-black text-sky-200">
+              🇬🇧 UKMT · QCM intelligents
+            </span>
 
-    <span className="rounded-full border border-emerald-300/40 bg-emerald-300/10 px-3 py-1 text-xs font-black text-emerald-200">
-      🇦🇺 Australie · Progression
-    </span>
+            <span className="rounded-full border border-emerald-300/40 bg-emerald-300/10 px-3 py-1 text-xs font-black text-emerald-200">
+              🇦🇺 Australie · Progression
+            </span>
 
-    <span className="rounded-full border border-violet-300/40 bg-violet-300/10 px-3 py-1 text-xs font-black text-violet-200">
-      🧠 Olympiades junior · Raisonnement
-    </span>
-  </div>
+            <span className="rounded-full border border-violet-300/40 bg-violet-300/10 px-3 py-1 text-xs font-black text-violet-200">
+              🧠 Olympiades junior · Raisonnement
+            </span>
+          </div>
 
-  <div className="mt-6 flex flex-wrap gap-3">
-    {niveaux.map((niveau) => (
-      <button
-        key={niveau}
-        type="button"
-        onClick={() => setSelectedNiveau(niveau)}
-        className={[
-          "rounded-full px-4 py-2 text-sm font-black transition",
-          selectedNiveau === niveau
-            ? "bg-amber-300 text-slate-950"
-            : "border border-slate-700 bg-slate-900 text-slate-200 hover:border-amber-300",
-        ].join(" ")}
-      >
-        Je suis en {niveau}
-      </button>
-    ))}
-  </div>
+          <div className="mt-6 flex flex-wrap gap-3">
+            {niveaux.map((niveau) => (
+              <button
+                key={niveau}
+                type="button"
+                onClick={() => setSelectedNiveau(niveau)}
+                className={[
+                  "rounded-full px-4 py-2 text-sm font-black transition",
+                  selectedNiveau === niveau
+                    ? "bg-amber-300 text-slate-950"
+                    : "border border-slate-700 bg-slate-900 text-slate-200 hover:border-amber-300",
+                ].join(" ")}
+              >
+                Je suis en {niveau}
+              </button>
+            ))}
+          </div>
+        </div>
 
-</div>
         <div className="grid gap-6 lg:grid-cols-[340px_1fr]">
           <aside className="space-y-4">
             {week.blocks.map((block) => {
@@ -380,7 +380,9 @@ export default function ConcoursGeneralClient() {
                           key={item.id}
                           type="button"
                           disabled={!visible}
-                          onClick={() => setActiveItemId(item.id)}
+                          onClick={() => {
+                            setActiveItemId(item.id);
+                          }}
                           className={[
                             "w-full rounded-2xl border p-3 text-left transition",
                             active
