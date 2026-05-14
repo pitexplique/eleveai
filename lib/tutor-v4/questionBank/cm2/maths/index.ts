@@ -19,6 +19,7 @@ import { dureesBank } from "./durees.bank";
 import { anglesBank } from "./angles.bank";
 import { reperageBank } from "./reperage.bank";
 import { droitesBank } from "./droites.bank";
+import { figuresPlanesBank } from "./figures-planes.bank";
 
 export const mathsCm2QuestionBank: TutorBankItemV4[] = [
   ...proportionnaliteBank,
@@ -40,6 +41,7 @@ export const mathsCm2QuestionBank: TutorBankItemV4[] = [
   ...anglesBank,
   ...reperageBank,
   ...droitesBank,
+  ...figuresPlanesBank,
 ];
 
 export function getMathCm2QuestionBank(args?: {
