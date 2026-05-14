@@ -12,6 +12,7 @@ const cards = [
   { href: "/calcul-rapide", image: "/images/cards/calcul-rapide.webp" },
   { href: "/lecon-du-jour", image: "/images/cards/lecondujour.webp" },
   { href: "/probleme-du-jour", image: "/images/cards/probleme-du-jour.webp" },
+   { href: "/concours-general", image: "/images/cards/concours-general.webp" },
 ];
 
 export default function AccueilPage() {
