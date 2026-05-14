@@ -1,11 +1,13 @@
+// app/sitemap.ts
+
 import type { MetadataRoute } from "next";
 
 const BASE_URL = "https://eleveai.fr";
 
 const u = (path: string) => `${BASE_URL}${path}`;
 
-const LASTMOD_HOME = new Date("2026-05-07");
-const LASTMOD_CORE = new Date("2026-05-07");
+const LASTMOD_HOME = new Date("2026-05-14");
+const LASTMOD_CORE = new Date("2026-05-14");
 const LASTMOD_LEGAL = new Date("2026-02-18");
 
 type RouteConfig = {
@@ -44,42 +46,51 @@ const ROUTES: RouteConfig[] = [
     lastMod: LASTMOD_CORE,
   },
   {
-    path: "/coach-maths-ia",
+    path: "/probleme-du-jour",
     priority: 0.95,
-    changeFrequency: "weekly",
+    changeFrequency: "daily",
     lastMod: LASTMOD_CORE,
   },
   {
-    path: "/tutor-v4",
-    priority: 0.9,
-    changeFrequency: "weekly",
-    lastMod: LASTMOD_CORE,
-  },
-    {
-    path: "/probleme-du-jour",
-    priority: 0.9,
+    path: "/coach-maths-ia",
+    priority: 0.95,
     changeFrequency: "daily",
     lastMod: LASTMOD_CORE,
   },
   {
     path: "/parcours",
+    priority: 0.9,
+    changeFrequency: "daily",
+    lastMod: LASTMOD_CORE,
+  },
+  {
+    path: "/tutor-v4",
     priority: 0.85,
     changeFrequency: "weekly",
     lastMod: LASTMOD_CORE,
   },
 
+  // CONCOURS GÉNÉRAL DES COLLÈGES
   {
-  path: "/auth/signin-eleve",
-  priority: 0.85,
-  changeFrequency: "monthly",
-  lastMod: LASTMOD_CORE,
+    path: "/concours-general",
+    priority: 0.95,
+    changeFrequency: "weekly",
+    lastMod: LASTMOD_CORE,
   },
 
-  // VALÉRIA
+  // VALÉRIA / ESPACE PROF
   {
     path: "/optimiseur",
     priority: 0.9,
     changeFrequency: "weekly",
+    lastMod: LASTMOD_CORE,
+  },
+
+  // AUTH ÉLÈVE
+  {
+    path: "/auth/signin-eleve",
+    priority: 0.5,
+    changeFrequency: "monthly",
     lastMod: LASTMOD_CORE,
   },
 
