@@ -2,6 +2,7 @@
 
 "use client";
 
+import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { concoursGeneralSemaine01 } from "@/lib/concours-general/weeks/semaine-01";
 import { getConcoursGeneralItemsByIds } from "@/lib/concours-general";
@@ -45,6 +46,33 @@ function stars(count: 3 | 4 | 5) {
 
 function accessibleLabel(niveau: ConcoursGeneralNiveau) {
   return `Accessible dès la ${niveau}`;
+}
+
+function getDurationMinutesForLevel(niveau: ConcoursGeneralNiveau) {
+  const durations: Record<ConcoursGeneralNiveau, number> = {
+    "6e": 25,
+    "5e": 35,
+    "4e": 50,
+    "3e": 75,
+  };
+
+  return durations[niveau];
+}
+
+function formatTime(seconds: number) {
+  const safeSeconds = Math.max(0, seconds);
+  const h = Math.floor(safeSeconds / 3600);
+  const m = Math.floor((safeSeconds % 3600) / 60);
+  const s = safeSeconds % 60;
+
+  if (h > 0) {
+    return `${h}h ${String(m).padStart(2, "0")}min ${String(s).padStart(
+      2,
+      "0"
+    )}s`;
+  }
+
+  return `${String(m).padStart(2, "0")}min ${String(s).padStart(2, "0")}s`;
 }
 
 function ConcoursBackgroundSvg() {
@@ -205,12 +233,17 @@ export default function ConcoursGeneralClient() {
   const [selectedNiveau, setSelectedNiveau] =
     useState<ConcoursGeneralNiveau>("6e");
 
-  const [activeItemId, setActiveItemId] = useState<string | null>(null);
+  const durationMinutes = getDurationMinutesForLevel(selectedNiveau);
+  const maxDurationSeconds = durationMinutes * 60;
+
+  const [started, setStarted] = useState(false);
+  const [questions, setQuestions] = useState<ConcoursGeneralItem[]>([]);
   const [answers, setAnswers] = useState<Record<string, string>>({});
-  const [validated, setValidated] = useState<
-    Record<string, ConcoursGeneralAnswer>
-  >({});
+  const [submitted, setSubmitted] = useState(false);
   const [visibleHints, setVisibleHints] = useState<Record<string, number>>({});
+
+  const [timeLeft, setTimeLeft] = useState(maxDurationSeconds);
+  const [timerStarted, setTimerStarted] = useState(false);
 
   const allItems = useMemo(() => {
     return week.blocks.flatMap((block) =>
@@ -218,41 +251,89 @@ export default function ConcoursGeneralClient() {
     );
   }, [week.blocks]);
 
+  const visibleItemsForLevel = useMemo(() => {
+    const order: Record<ConcoursGeneralNiveau, number> = {
+      "6e": 1,
+      "5e": 2,
+      "4e": 3,
+      "3e": 4,
+    };
+
+    return allItems.filter((item) => {
+      return order[item.accessibleFrom] <= order[selectedNiveau];
+    });
+  }, [allItems, selectedNiveau]);
+
   useEffect(() => {
-    if (!activeItemId && allItems.length > 0) {
-      setActiveItemId(allItems[0].id);
+    if (!timerStarted || submitted || !started) return;
+
+    if (timeLeft <= 0) {
+      setSubmitted(true);
+      setTimerStarted(false);
+      return;
     }
-  }, [activeItemId, allItems]);
 
-  const activeItem =
-    allItems.find((item) => item.id === activeItemId) ?? null;
+    const interval = window.setInterval(() => {
+      setTimeLeft((prev) => Math.max(0, prev - 1));
+    }, 1000);
 
-  const score = Object.values(validated).reduce(
-    (sum, answer) => sum + answer.score,
-    0
-  );
+    return () => window.clearInterval(interval);
+  }, [timerStarted, submitted, started, timeLeft]);
 
-  const maxScore = allItems.length;
+  const results: ConcoursGeneralAnswer[] = useMemo(() => {
+    if (!submitted) return [];
 
-  function handleAnswerChange(itemId: string, value: string) {
-    setAnswers((prev) => ({
-      ...prev,
-      [itemId]: value,
-    }));
-  }
+    return questions.map((item) => {
+      const answer = answers[item.id] ?? "";
+      const correct = isAnswerCorrect(item, answer);
 
-  function validateItem(item: ConcoursGeneralItem) {
-    const answer = answers[item.id] ?? "";
-    const correct = isAnswerCorrect(item, answer);
-
-    setValidated((prev) => ({
-      ...prev,
-      [item.id]: {
+      return {
         itemId: item.id,
         answer,
         isCorrect: correct,
         score: correct ? 1 : 0,
-      },
+      };
+    });
+  }, [answers, questions, submitted]);
+
+  const score = results.reduce((sum, result) => sum + result.score, 0);
+  const maxScore = questions.length;
+
+  function startConcours() {
+    setQuestions(visibleItemsForLevel);
+    setAnswers({});
+    setVisibleHints({});
+    setSubmitted(false);
+    setStarted(true);
+    setTimeLeft(maxDurationSeconds);
+    setTimerStarted(true);
+  }
+
+  function resetConcours() {
+    setStarted(false);
+    setQuestions([]);
+    setAnswers({});
+    setVisibleHints({});
+    setSubmitted(false);
+    setTimeLeft(maxDurationSeconds);
+    setTimerStarted(false);
+  }
+
+  function changeLevel(niveau: ConcoursGeneralNiveau) {
+    setSelectedNiveau(niveau);
+    setStarted(false);
+    setQuestions([]);
+    setAnswers({});
+    setVisibleHints({});
+    setSubmitted(false);
+    setTimeLeft(getDurationMinutesForLevel(niveau) * 60);
+    setTimerStarted(false);
+  }
+
+  function handleAnswer(itemId: string, value: string) {
+    setAnswers((prev) => ({
+      ...prev,
+      [itemId]: value,
     }));
   }
 
@@ -263,38 +344,20 @@ export default function ConcoursGeneralClient() {
     }));
   }
 
-  function resetSession() {
-    setAnswers({});
-    setValidated({});
-    setVisibleHints({});
-    setActiveItemId(allItems[0]?.id ?? null);
+  function getResultForItem(itemId: string) {
+    return results.find((result) => result.itemId === itemId);
   }
 
-  function getItemStatus(item: ConcoursGeneralItem) {
-    const result = validated[item.id];
-
-    if (!result) return "À faire";
-    return result.isCorrect ? "Réussi" : "À retravailler";
+  function submitConcours() {
+    setSubmitted(true);
+    setTimerStarted(false);
   }
-
-  function canDisplayForSelectedLevel(item: ConcoursGeneralItem) {
-    const order: Record<ConcoursGeneralNiveau, number> = {
-      "6e": 1,
-      "5e": 2,
-      "4e": 3,
-      "3e": 4,
-    };
-
-    return order[item.accessibleFrom] <= order[selectedNiveau];
-  }
-
-  const visibleItemsForLevel = allItems.filter(canDisplayForSelectedLevel);
 
   return (
     <main className="relative min-h-screen overflow-hidden bg-gradient-to-br from-slate-900 via-slate-950 to-amber-950/40 px-4 py-8 text-white">
       <ConcoursBackgroundSvg />
 
-      <section className="relative z-10 mx-auto max-w-6xl">
+      <section className="relative z-10 mx-auto max-w-5xl">
         <div className="relative mb-8 overflow-hidden rounded-3xl border border-amber-400/30 bg-gradient-to-br from-slate-900/90 via-slate-900/85 to-amber-950/40 p-6 shadow-2xl backdrop-blur-sm">
           <p className="mb-2 text-sm font-black uppercase tracking-wide text-amber-300">
             EleveAI · Préparation Concours général des collèges
@@ -335,272 +398,411 @@ export default function ConcoursGeneralClient() {
               <button
                 key={niveau}
                 type="button"
-                onClick={() => setSelectedNiveau(niveau)}
+                onClick={() => changeLevel(niveau)}
                 className={[
-                  "rounded-full px-4 py-2 text-sm font-black transition",
+                  "rounded-2xl px-5 py-3 text-sm font-black transition",
                   selectedNiveau === niveau
                     ? "bg-amber-300 text-slate-950"
-                    : "border border-slate-700 bg-slate-900 text-slate-200 hover:border-amber-300",
+                    : "bg-slate-800 text-white hover:bg-slate-700",
                 ].join(" ")}
               >
-                Je suis en {niveau}
+                {niveau}
               </button>
             ))}
           </div>
-        </div>
 
-        <div className="grid gap-6 lg:grid-cols-[340px_1fr]">
-          <aside className="space-y-4">
-            {week.blocks.map((block) => {
-              const items = getConcoursGeneralItemsByIds(block.itemIds);
+          <div className="mt-6 grid gap-3 md:grid-cols-3">
+            <div className="rounded-2xl border border-slate-700 bg-slate-900/80 p-4">
+              <p className="text-xs font-bold uppercase text-slate-400">
+                Durée maximale
+              </p>
+              <p className="mt-1 text-xl font-black text-white">
+                {durationMinutes} min
+              </p>
+            </div>
 
-              return (
-                <div
-                  key={block.id}
-                  className="rounded-3xl border border-slate-800 bg-slate-900/90 p-4 shadow-xl backdrop-blur-sm"
-                >
-                  <h2 className="text-lg font-black text-amber-200">
-                    {block.title}
-                  </h2>
+            <div className="rounded-2xl border border-amber-400/40 bg-amber-300/10 p-4">
+              <p className="text-xs font-bold uppercase text-amber-200">
+                Temps restant
+              </p>
+              <p
+                className={[
+                  "mt-1 text-xl font-black",
+                  timeLeft <= 300 ? "text-red-300" : "text-amber-200",
+                ].join(" ")}
+              >
+                ⏱️ {formatTime(timeLeft)}
+              </p>
+            </div>
 
-                  {block.description ? (
-                    <p className="mt-1 text-xs text-slate-400">
-                      {block.description}
-                    </p>
-                  ) : null}
+            <div className="rounded-2xl border border-slate-700 bg-slate-900/80 p-4">
+              <p className="text-xs font-bold uppercase text-slate-400">
+                Défis
+              </p>
+              <p className="mt-1 text-xl font-black text-white">
+                {started ? questions.length : visibleItemsForLevel.length}
+              </p>
+            </div>
+          </div>
 
-                  <div className="mt-4 space-y-2">
-                    {items.map((item) => {
-                      const visible = canDisplayForSelectedLevel(item);
-                      const active = activeItem?.id === item.id;
-                      const status = getItemStatus(item);
-
-                      return (
-                        <button
-                          key={item.id}
-                          type="button"
-                          disabled={!visible}
-                          onClick={() => {
-                            setActiveItemId(item.id);
-                          }}
-                          className={[
-                            "w-full rounded-2xl border p-3 text-left transition",
-                            active
-                              ? "border-amber-300 bg-amber-300 text-slate-950"
-                              : visible
-                                ? "border-slate-700 bg-slate-950/95 text-slate-100 hover:border-amber-300"
-                                : "cursor-not-allowed border-slate-800 bg-slate-950/40 text-slate-600",
-                          ].join(" ")}
-                        >
-                          <div className="flex items-center justify-between gap-2">
-                            <span className="text-sm font-black">
-                              {item.title}
-                            </span>
-                            <span className="text-xs">
-                              {stars(item.difficulty)}
-                            </span>
-                          </div>
-
-                          <div className="mt-2 flex flex-wrap gap-2 text-[11px] font-bold">
-                            <span
-                              className={[
-                                "rounded-full px-2 py-1",
-                                active
-                                  ? "bg-slate-950/10"
-                                  : "bg-slate-800 text-slate-300",
-                              ].join(" ")}
-                            >
-                              {accessibleLabel(item.accessibleFrom)}
-                            </span>
-
-                            <span
-                              className={[
-                                "rounded-full px-2 py-1",
-                                active
-                                  ? "bg-slate-950/10"
-                                  : status === "Réussi"
-                                    ? "bg-emerald-500/20 text-emerald-300"
-                                    : status === "À retravailler"
-                                      ? "bg-rose-500/20 text-rose-300"
-                                      : "bg-slate-800 text-slate-300",
-                              ].join(" ")}
-                            >
-                              {status}
-                            </span>
-                          </div>
-                        </button>
-                      );
-                    })}
-                  </div>
-                </div>
-              );
-            })}
-
+          <div className="mt-6 flex flex-wrap gap-3">
             <button
               type="button"
-              onClick={resetSession}
-              className="w-full rounded-2xl border border-slate-700 bg-slate-900/90 px-4 py-3 text-sm font-black text-slate-200 backdrop-blur-sm hover:border-amber-300"
+              onClick={startConcours}
+              className="rounded-2xl bg-emerald-400 px-5 py-3 text-sm font-black text-slate-950 hover:bg-emerald-300"
             >
-              Recommencer la session
+              Démarrer l’entraînement
             </button>
-          </aside>
 
-          <section className="rounded-3xl border border-slate-800 bg-slate-900/90 p-5 shadow-2xl backdrop-blur-sm">
-            {activeItem ? (
-              <>
-                <div className="flex flex-wrap items-start justify-between gap-3">
+            <Link
+              href="/accueil"
+              className="rounded-2xl bg-slate-800 px-5 py-3 text-sm font-black text-white hover:bg-slate-700"
+            >
+              Retour accueil
+            </Link>
+          </div>
+        </div>
+
+        {!started && (
+          <div className="rounded-3xl border border-slate-700 bg-slate-900/90 p-6 shadow-2xl backdrop-blur-sm">
+            <h2 className="mb-3 text-xl font-black">
+              Défis disponibles pour {selectedNiveau}
+            </h2>
+
+            <p className="mb-5 text-sm text-slate-300">
+              Les défis sont classés par blocs. Certains sont accessibles dès la
+              6e, d’autres demandent plutôt un niveau 4e ou 3e.
+            </p>
+
+            <div className="grid gap-3 md:grid-cols-2">
+              {visibleItemsForLevel.map((item) => (
+                <div
+                  key={item.id}
+                  className="rounded-2xl border border-slate-700 bg-slate-800/90 p-4"
+                >
+                  <div className="flex items-start justify-between gap-3">
+                    <div>
+                      <div className="font-black text-white">{item.title}</div>
+                      <div className="mt-1 text-xs font-bold text-slate-400">
+                        {item.theme.replaceAll("_", " ")}
+                      </div>
+                    </div>
+
+                    <span className="rounded-full bg-amber-300 px-3 py-1 text-xs font-black text-slate-950">
+                      {stars(item.difficulty)}
+                    </span>
+                  </div>
+
+                  <div className="mt-3 text-xs font-bold text-amber-200">
+                    {accessibleLabel(item.accessibleFrom)}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {started && questions.length === 0 && (
+          <div className="rounded-3xl border border-red-500/40 bg-red-950/40 p-6">
+            <h2 className="text-xl font-black text-red-200">
+              Aucun défi trouvé
+            </h2>
+            <p className="mt-2 text-sm text-red-100">
+              Il faut ajouter des questions dans la bank Concours général.
+            </p>
+          </div>
+        )}
+
+        {started && questions.length > 0 && (
+          <div className="space-y-4">
+            {!submitted && (
+              <div className="sticky top-20 z-20 rounded-3xl border border-amber-400/40 bg-slate-900/95 p-4 shadow-2xl backdrop-blur">
+                <div className="flex flex-wrap items-center justify-between gap-3">
                   <div>
                     <p className="text-xs font-black uppercase tracking-wide text-amber-300">
-                      {activeItem.theme.replaceAll("_", " ")}
+                      Entraînement en cours
+                    </p>
+                    <p
+                      className={[
+                        "text-xl font-black",
+                        timeLeft <= 300 ? "text-red-300" : "text-amber-200",
+                      ].join(" ")}
+                    >
+                      ⏱️ {formatTime(timeLeft)}
+                    </p>
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={submitConcours}
+                    className="rounded-2xl bg-amber-300 px-5 py-3 text-sm font-black text-slate-950 hover:bg-amber-200"
+                  >
+                    Voir mon bilan
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {submitted && (
+              <div className="rounded-3xl border border-emerald-500/30 bg-slate-900/90 p-6 shadow-2xl backdrop-blur-sm">
+                <h2 className="text-2xl font-black">
+                  Bilan de l’entraînement
+                </h2>
+
+                {timeLeft <= 0 ? (
+                  <p className="mt-3 rounded-2xl border border-red-400/40 bg-red-500/10 p-3 text-sm font-black text-red-200">
+                    ⏰ Temps écoulé : le bilan a été affiché automatiquement.
+                  </p>
+                ) : null}
+
+                <p className="mt-3 text-lg font-black text-emerald-300">
+                  Score : {score} / {maxScore}
+                </p>
+
+                <p className="mt-2 text-sm text-slate-300">
+                  L’objectif n’est pas seulement d’avoir juste : c’est
+                  d’apprendre à chercher, visualiser et expliquer.
+                </p>
+
+                <div className="mt-5 grid gap-3 md:grid-cols-2">
+                  {questions.map((item, index) => {
+                    const result = getResultForItem(item.id);
+
+                    return (
+                      <div
+                        key={item.id}
+                        className="rounded-2xl border border-slate-700 bg-slate-800/90 p-4"
+                      >
+                        <div className="text-xs font-black uppercase tracking-wide text-amber-300">
+                          Défi {index + 1}
+                        </div>
+
+                        <div className="mt-1 font-black">{item.title}</div>
+
+                        <div
+                          className={[
+                            "mt-2 text-sm font-black",
+                            result?.isCorrect
+                              ? "text-emerald-300"
+                              : "text-red-300",
+                          ].join(" ")}
+                        >
+                          {result?.isCorrect
+                            ? "✅ Réussi"
+                            : "🔎 À retravailler"}
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+
+            {questions.map((item, index) => {
+              const userAnswer = answers[item.id] ?? "";
+              const result = getResultForItem(item.id);
+              const expected = item.expected ?? [];
+              const correct = result?.isCorrect ?? false;
+
+              return (
+                <article
+                  key={item.id}
+                  className="rounded-3xl border border-slate-700 bg-white p-5 text-slate-950 shadow-xl"
+                >
+                  <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
+                    <div>
+                      <p className="text-xs font-black uppercase tracking-wide text-amber-700">
+                        Défi {index + 1} / {questions.length}
+                      </p>
+
+                      <h2 className="text-xl font-black">{item.title}</h2>
+
+                      <p className="mt-1 text-xs font-bold text-slate-500">
+                        {item.theme.replaceAll("_", " ")} ·{" "}
+                        {accessibleLabel(item.accessibleFrom)}
+                      </p>
+                    </div>
+
+                    <span className="rounded-full bg-amber-100 px-3 py-1 text-xs font-black text-amber-800">
+                      {stars(item.difficulty)}
+                    </span>
+                  </div>
+
+                  <div className="rounded-2xl bg-slate-50 p-4">
+                    <p className="whitespace-pre-line text-base font-semibold">
+                      {item.statement}
                     </p>
 
-                    <h2 className="mt-1 text-2xl font-black">
-                      {activeItem.title}
-                    </h2>
+                    <p className="mt-4 text-base font-black">
+                      {item.question}
+                    </p>
                   </div>
 
-                  <div className="flex flex-wrap gap-2 text-xs font-black">
-                    <span className="rounded-full bg-amber-300 px-3 py-1 text-slate-950">
-                      {stars(activeItem.difficulty)}
-                    </span>
-                    <span className="rounded-full bg-slate-800 px-3 py-1 text-slate-200">
-                      {accessibleLabel(activeItem.accessibleFrom)}
-                    </span>
-                  </div>
-                </div>
-
-                <div className="mt-6 rounded-2xl border border-slate-700 bg-slate-950/95 p-5">
-                  <p className="whitespace-pre-line text-base leading-relaxed text-slate-100">
-                    {activeItem.statement}
-                  </p>
-
-                  <p className="mt-5 text-lg font-black text-white">
-                    {activeItem.question}
-                  </p>
-                </div>
-
-                {activeItem.format === "qcm" && activeItem.choices ? (
-                  <div className="mt-5 grid gap-3 md:grid-cols-2">
-                    {activeItem.choices.map((choice) => {
-                      const selected = answers[activeItem.id] === choice;
-
-                      return (
+                  {item.format === "qcm" && item.choices ? (
+                    <div className="mt-4 grid gap-2">
+                      {item.choices.map((choice) => (
                         <button
                           key={choice}
                           type="button"
-                          onClick={() =>
-                            handleAnswerChange(activeItem.id, choice)
-                          }
+                          disabled={submitted}
+                          onClick={() => handleAnswer(item.id, choice)}
                           className={[
-                            "rounded-2xl border px-4 py-3 text-left font-bold transition",
-                            selected
-                              ? "border-amber-300 bg-amber-300 text-slate-950"
-                              : "border-slate-700 bg-slate-950/95 text-slate-100 hover:border-amber-300",
+                            "rounded-2xl border px-4 py-3 text-left text-sm font-bold transition",
+                            answers[item.id] === choice
+                              ? "border-amber-500 bg-amber-100 text-amber-900"
+                              : "border-slate-200 bg-slate-50 hover:bg-slate-100",
+                            submitted ? "cursor-not-allowed opacity-80" : "",
                           ].join(" ")}
                         >
                           {choice}
                         </button>
-                      );
-                    })}
-                  </div>
-                ) : (
-                  <textarea
-                    value={answers[activeItem.id] ?? ""}
-                    onChange={(event) =>
-                      handleAnswerChange(activeItem.id, event.target.value)
-                    }
-                    placeholder="Écris ta réponse ici..."
-                    className="mt-5 min-h-28 w-full rounded-2xl border border-slate-700 bg-slate-950/95 p-4 text-white outline-none focus:border-amber-300"
-                  />
-                )}
+                      ))}
+                    </div>
+                  ) : (
+                    <textarea
+                      value={answers[item.id] ?? ""}
+                      disabled={submitted}
+                      onChange={(event) =>
+                        handleAnswer(item.id, event.target.value)
+                      }
+                      placeholder="Ta réponse..."
+                      className="mt-4 min-h-28 w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-sm font-bold outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-200 disabled:cursor-not-allowed disabled:bg-slate-100"
+                    />
+                  )}
 
-                <div className="mt-5 flex flex-wrap gap-3">
-                  <button
-                    type="button"
-                    onClick={() => validateItem(activeItem)}
-                    className="rounded-2xl bg-emerald-400 px-5 py-3 text-sm font-black text-slate-950 hover:bg-emerald-300"
-                  >
-                    Valider ma réponse
-                  </button>
+                  {!submitted ? (
+                    <div className="mt-4">
+                      <button
+                        type="button"
+                        onClick={() => showNextHint(item.id)}
+                        className="rounded-2xl border border-amber-300 bg-amber-50 px-4 py-2 text-sm font-black text-amber-800 hover:bg-amber-100"
+                      >
+                        Demander un indice
+                      </button>
 
-                  <button
-                    type="button"
-                    onClick={() => showNextHint(activeItem.id)}
-                    className="rounded-2xl border border-amber-300 px-5 py-3 text-sm font-black text-amber-200 hover:bg-amber-300 hover:text-slate-950"
-                  >
-                    Demander un indice
-                  </button>
-                </div>
+                      {(visibleHints[item.id] ?? 0) > 0 ? (
+                        <div className="mt-3 space-y-2">
+                          {(visibleHints[item.id] ?? 0) >= 1 ? (
+                            <div className="rounded-2xl border border-blue-200 bg-blue-50 p-3 text-sm font-semibold text-blue-800">
+                              <strong>Indice 1 — Comprendre :</strong>{" "}
+                              {item.hint1}
+                            </div>
+                          ) : null}
 
-                {(visibleHints[activeItem.id] ?? 0) > 0 ? (
-                  <div className="mt-5 space-y-3">
-                    {(visibleHints[activeItem.id] ?? 0) >= 1 ? (
-                      <div className="rounded-2xl border border-blue-400/30 bg-blue-500/10 p-4 text-sm text-blue-100">
-                        <strong>Indice 1 — Comprendre :</strong>{" "}
-                        {activeItem.hint1}
-                      </div>
-                    ) : null}
+                          {(visibleHints[item.id] ?? 0) >= 2 ? (
+                            <div className="rounded-2xl border border-violet-200 bg-violet-50 p-3 text-sm font-semibold text-violet-800">
+                              <strong>Indice 2 — Méthode :</strong>{" "}
+                              {item.hint2}
+                            </div>
+                          ) : null}
 
-                    {(visibleHints[activeItem.id] ?? 0) >= 2 ? (
-                      <div className="rounded-2xl border border-violet-400/30 bg-violet-500/10 p-4 text-sm text-violet-100">
-                        <strong>Indice 2 — Choisir une méthode :</strong>{" "}
-                        {activeItem.hint2}
-                      </div>
-                    ) : null}
+                          {(visibleHints[item.id] ?? 0) >= 3 ? (
+                            <div className="rounded-2xl border border-amber-200 bg-amber-50 p-3 text-sm font-semibold text-amber-800">
+                              <strong>Indice 3 — Avancer :</strong>{" "}
+                              {item.hint3}
+                            </div>
+                          ) : null}
+                        </div>
+                      ) : null}
+                    </div>
+                  ) : null}
 
-                    {(visibleHints[activeItem.id] ?? 0) >= 3 ? (
-                      <div className="rounded-2xl border border-amber-400/30 bg-amber-500/10 p-4 text-sm text-amber-100">
-                        <strong>Indice 3 — Avancer :</strong>{" "}
-                        {activeItem.hint3}
-                      </div>
-                    ) : null}
-                  </div>
-                ) : null}
-
-                {validated[activeItem.id] ? (
-                  <div className="mt-6 rounded-3xl border border-slate-700 bg-slate-950/95 p-5">
-                    <p
+                  {submitted ? (
+                    <div
                       className={[
-                        "text-lg font-black",
-                        validated[activeItem.id].isCorrect
-                          ? "text-emerald-300"
-                          : "text-rose-300",
+                        "mt-4 rounded-2xl border p-4",
+                        correct
+                          ? "border-emerald-200 bg-emerald-50"
+                          : "border-red-200 bg-red-50",
                       ].join(" ")}
                     >
-                      {validated[activeItem.id].isCorrect
-                        ? "Bonne réponse ✅"
-                        : "Réponse à retravailler 🔎"}
-                    </p>
-
-                    <div className="mt-4 rounded-2xl bg-slate-900 p-4">
-                      <p className="text-sm font-black text-amber-200">
-                        Correction
+                      <p
+                        className={[
+                          "text-sm font-black",
+                          correct ? "text-emerald-700" : "text-red-700",
+                        ].join(" ")}
+                      >
+                        {correct
+                          ? "✅ Bonne réponse"
+                          : "❌ Réponse à corriger"}
                       </p>
-                      <p className="mt-2 whitespace-pre-line text-sm leading-relaxed text-slate-200">
-                        {activeItem.correction}
-                      </p>
-                    </div>
 
-                    {activeItem.redactionAttendue ? (
-                      <div className="mt-4 rounded-2xl bg-slate-900 p-4">
-                        <p className="text-sm font-black text-sky-200">
-                          Rédaction attendue
+                      <p className="mt-2 text-sm font-bold text-slate-700">
+                        Ta réponse : {userAnswer || "Aucune réponse"}
+                      </p>
+
+                      <p className="mt-1 text-sm font-bold text-emerald-700">
+                        Réponse attendue :{" "}
+                        {expected.length > 0
+                          ? expected.join(" ou ")
+                          : "Non disponible"}
+                      </p>
+
+                      <div className="mt-3 rounded-2xl bg-white p-4">
+                        <p className="text-sm font-black text-amber-700">
+                          Correction
                         </p>
-                        <p className="mt-2 whitespace-pre-line text-sm leading-relaxed text-slate-200">
-                          {activeItem.redactionAttendue}
+
+                        <p className="mt-2 whitespace-pre-line text-sm leading-relaxed text-slate-700">
+                          {item.correction}
                         </p>
                       </div>
-                    ) : null}
-                  </div>
-                ) : null}
-              </>
+
+                      {item.redactionAttendue ? (
+                        <div className="mt-3 rounded-2xl bg-white p-4">
+                          <p className="text-sm font-black text-sky-700">
+                            Rédaction attendue
+                          </p>
+
+                          <p className="mt-2 whitespace-pre-line text-sm leading-relaxed text-slate-700">
+                            {item.redactionAttendue}
+                          </p>
+                        </div>
+                      ) : null}
+                    </div>
+                  ) : null}
+                </article>
+              );
+            })}
+
+            {!submitted ? (
+              <div className="sticky bottom-4 rounded-3xl border border-amber-400/40 bg-slate-900/95 p-4 shadow-2xl backdrop-blur">
+                <button
+                  type="button"
+                  onClick={submitConcours}
+                  className="w-full rounded-2xl bg-amber-300 px-5 py-4 text-base font-black text-slate-950 hover:bg-amber-200"
+                >
+                  Voir mon bilan
+                </button>
+              </div>
             ) : (
-              <p className="text-slate-300">
-                Aucun défi disponible pour le moment.
-              </p>
+              <div className="mt-6 flex flex-wrap gap-3">
+                <button
+                  type="button"
+                  onClick={startConcours}
+                  className="rounded-2xl bg-emerald-400 px-5 py-3 text-sm font-black text-slate-950 hover:bg-emerald-300"
+                >
+                  Refaire l’entraînement
+                </button>
+
+                <button
+                  type="button"
+                  onClick={resetConcours}
+                  className="rounded-2xl bg-slate-800 px-5 py-3 text-sm font-black text-white hover:bg-slate-700"
+                >
+                  Changer de niveau
+                </button>
+
+                <Link
+                  href="/accueil"
+                  className="rounded-2xl bg-slate-800 px-5 py-3 text-sm font-black text-white hover:bg-slate-700"
+                >
+                  Retour accueil
+                </Link>
+              </div>
             )}
-          </section>
-        </div>
+          </div>
+        )}
       </section>
     </main>
   );
