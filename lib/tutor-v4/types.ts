@@ -50,7 +50,10 @@ export type {
   CanvasFigure,
   DureeCanvasData,
   ReperageCanvasData,
-  DroitesCanvasData
+  DroitesCanvasData,
+  CercleCanvasData,
+  CercleCanvasPoint,
+  CercleCanvasPointLabel,
 } from "./types_canvas";
 
 import type { CanvasFigure } from "./types_canvas";

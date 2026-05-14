@@ -953,6 +953,104 @@ export type DroitesCanvasData = {
   };
 };
 
+// ============================================================
+// CERCLE CANVAS
+// ============================================================
+
+export type CercleCanvasPointLabel =
+  | "O"
+  | "A"
+  | "B"
+  | "C"
+  | "D"
+  | "E"
+  | "F"
+  | string;
+
+export type CercleCanvasPoint = {
+  id: CercleCanvasPointLabel;
+  x: number;
+  y: number;
+  label?: string;
+  color?: string;
+  highlight?: boolean;
+};
+
+export type CercleCanvasSegmentKind =
+  | "rayon"
+  | "diametre"
+  | "corde"
+  | "segment";
+
+export type CercleCanvasSegment = {
+  id: string;
+  kind: CercleCanvasSegmentKind;
+  from: CercleCanvasPointLabel;
+  to: CercleCanvasPointLabel;
+  label?: string;
+  color?: string;
+  dashed?: boolean;
+  highlight?: boolean;
+};
+
+export type CercleCanvasArc = {
+  id: string;
+  startAngle: number; // en degrés
+  endAngle: number;   // en degrés
+  label?: string;
+  color?: string;
+  highlight?: boolean;
+};
+
+export type CercleCanvasData = {
+  kind: "cercle";
+
+  size?: {
+    width?: number;
+    height?: number;
+  };
+
+  circle?: {
+    cx?: number;
+    cy?: number;
+    r?: number;
+    label?: string;
+    showDisk?: boolean;
+    showCircle?: boolean;
+  };
+
+  points?: CercleCanvasPoint[];
+
+  segments?: CercleCanvasSegment[];
+
+  arcs?: CercleCanvasArc[];
+
+  display?: {
+    showLabels?: boolean;
+    showPoints?: boolean;
+    showCenter?: boolean;
+    showRadius?: boolean;
+    showDiameter?: boolean;
+    showChord?: boolean;
+    showArc?: boolean;
+    showDisk?: boolean;
+  };
+
+  colors?: {
+    background?: string;
+    circle?: string;
+    disk?: string;
+    center?: string;
+    radius?: string;
+    diameter?: string;
+    chord?: string;
+    arc?: string;
+    point?: string;
+    text?: string;
+    highlight?: string;
+  };
+};
+
 export type CanvasFigure =
   | TriangleCanvasData
   | QuadrilatereCanvasData
@@ -976,4 +1074,5 @@ export type CanvasFigure =
   | SuiteCanvasData
   | DureeCanvasData
   | ReperageCanvasData
-  | DroitesCanvasData;
+  | DroitesCanvasData
+  | CercleCanvasData;

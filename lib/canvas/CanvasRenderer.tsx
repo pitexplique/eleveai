@@ -26,6 +26,7 @@ import SuiteCanvas from "./SuiteCanvas";
 import DureeCanvas from "./DureeCanvas";
 import ReperageCanvas from "./ReperageCanvas";
 import DroitesCanvas from "./DroitesCanvas";
+import CercleCanvas from "./CercleCanvas";
 
 type Props = {
   figure?: CanvasFigure | null;
@@ -104,6 +105,8 @@ export default function CanvasRenderer({ figure }: Props) {
     case "droites":
       return <DroitesCanvas figure={figure} />;
 
+    case "cercle":
+      return <CercleCanvas figure={figure} />;
     default:
       return null;
   }
