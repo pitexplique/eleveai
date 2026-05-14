@@ -23,6 +23,7 @@ import ScratchCanvas from "./ScratchCanvas";
 import SectionSolideCanvas from "./SectionSolideCanvas";
 import AlgebreCanvas from "./AlgebreCanvas";
 import SuiteCanvas from "./SuiteCanvas";
+import DureeCanvas from "./DureeCanvas";
 
 type Props = {
   figure?: CanvasFigure | null;
@@ -91,6 +92,10 @@ export default function CanvasRenderer({ figure }: Props) {
 
     case "suite":
       return <SuiteCanvas figure={figure} />;
+
+    case "duree":
+      return <DureeCanvas figure={figure} />;
+      
 
     default:
       return null;

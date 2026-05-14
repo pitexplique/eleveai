@@ -48,6 +48,7 @@ export type {
   ScratchBlockData,
   ScratchCanvasData,
   CanvasFigure,
+  DureeCanvasData
 } from "./types_canvas";
 
 import type { CanvasFigure } from "./types_canvas";

@@ -30,6 +30,7 @@ import {
   SectionSolideCanvas,
   AlgebreCanvas,
   SuiteCanvas,
+  DureeCanvas,
 } from "@/lib/canvas";
 
 import {
@@ -264,7 +265,9 @@ if (canvas.kind === "tableau_proportionnalite") {
     return <SuiteCanvas figure={canvas} />;
   }
  
-
+  if (canvas.kind === "duree") {
+    return <DureeCanvas figure={canvas} />;
+}
   return null;
 }
 

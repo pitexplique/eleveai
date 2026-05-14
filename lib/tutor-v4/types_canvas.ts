@@ -662,6 +662,62 @@ export type SuiteCanvasData = {
     showLabels?: boolean;
   };
 };
+export type DureeTime = {
+  hour: number;
+  minute: number;
+  label?: string;
+};
+
+export type DureeCanvasData = {
+  kind: "duree";
+
+  variant: "horloge" | "double_horloge" | "digital" | "frise";
+
+  title?: string;
+
+  time?: DureeTime;
+
+  start?: DureeTime;
+  end?: DureeTime;
+
+  digital?: {
+    text: string;
+    label?: string;
+  };
+
+  frise?: {
+    startLabel: string;
+    endLabel: string;
+    steps: {
+      label: string;
+      minutes: number;
+      color?: string;
+    }[];
+  };
+
+  display?: {
+    showNumbers?: boolean;
+    showMinuteTicks?: boolean;
+    showDigital?: boolean;
+    showLabels?: boolean;
+  };
+
+  colors?: {
+    face?: string;
+    bezel?: string;
+    hourHand?: string;
+    minuteHand?: string;
+    secondHand?: string;
+    accent?: string;
+    strap?: string;
+    text?: string;
+  };
+
+  size?: {
+    width?: number;
+    height?: number;
+  };
+};
 
 export type CanvasFigure =
   | TriangleCanvasData
@@ -683,4 +739,5 @@ export type CanvasFigure =
   | ScratchCanvasData
   | AlgebreCanvasData
   | TransformationCanvasData
-  | SuiteCanvasData;
+  | SuiteCanvasData
+  | DureeCanvasData;

@@ -20,3 +20,4 @@ export { default as FractionCanvas } from "./FractionCanvas";
 export { default as ScratchCanvas } from "./ScratchCanvas";
 export { default as AlgebreCanvas } from "./AlgebreCanvas";
 export { default as SuiteCanvas } from "./SuiteCanvas";
+export { default as DureeCanvas } from "./DureeCanvas";

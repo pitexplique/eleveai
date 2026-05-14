@@ -15,6 +15,8 @@ import { pourcentagesBank } from "./pourcentages.bank";
 import { longueursBank } from "./longueurs.bank";
 import { perimetresBank } from "./perimetres.bank";
 import { airesBank } from "./aires.bank";
+import { dureesBank } from "./durees.bank";
+import { anglesBank } from "./angles.bank";
 
 export const mathsCm2QuestionBank: TutorBankItemV4[] = [
   ...proportionnaliteBank,
@@ -32,6 +34,8 @@ export const mathsCm2QuestionBank: TutorBankItemV4[] = [
   ...longueursBank,
   ...perimetresBank,
   ...airesBank,
+  ...dureesBank,
+  ...anglesBank,
 ];
 
 export function getMathCm2QuestionBank(args?: {
