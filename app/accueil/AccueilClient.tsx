@@ -2,9 +2,6 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
-
-const HEADER_HEIGHT = 72;
 
 const cards = [
   {
@@ -40,7 +37,11 @@ const cards = [
 ];
 
 const classes = [
-
+  {
+    label: "CM1",
+    href: "/coach-maths-ia?classe=cm1",
+    description: "Consolider les bases et prendre confiance.",
+  },
   {
     label: "CM2",
     href: "/coach-maths-ia?classe=cm2",
@@ -114,251 +115,210 @@ const besoins = [
 ];
 
 export default function AccueilPage() {
-  const [offset, setOffset] = useState(0);
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setOffset(window.scrollY);
-    };
-
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-
-    checkMobile();
-
-    window.addEventListener("resize", checkMobile);
-    window.addEventListener("scroll", handleScroll, {
-      passive: true,
-    });
-
-    return () => {
-      window.removeEventListener("resize", checkMobile);
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
-
-  const backgroundImage = isMobile
-    ? "/images/accueil-eleveai-reunion-mobile.webp"
-    : "/images/accueil-eleveai-reunion.webp";
-
-return (
-  <main className="relative min-h-screen overflow-hidden text-white">
-    {/* FOND BLEU DE SECOURS — sous le header */}
-    <div
-      className="fixed bottom-0 left-0 right-0 z-0 bg-[#0b74a5]"
-      style={{
-        top: `${HEADER_HEIGHT}px`,
-      }}
-    />
-
-    {/* FOND D'ÉCRAN FIXE */}
-    <div
-      className="fixed bottom-0 left-0 right-0 z-0"
-      style={{
-        top: `${HEADER_HEIGHT}px`,
-      }}
-    >
-      <Image
-        src={backgroundImage}
-        alt="EleveAI Réunion"
-        fill
-        priority
-        sizes="100vw"
-        className="object-cover object-center sm:object-top"
-      />
-
-      {/* Overlay général léger */}
-      <div className="absolute inset-0 bg-black/10" />
-
-      {/* Dégradé doux pour garder le bleu / océan */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#0b74a5]/5 to-[#0b74a5]/35" />
-    </div>
-
-    {/* HERO AVEC CARDS */}
-    <section
-      className="relative z-10 flex justify-center"
-      style={{
-        minHeight: `calc(100vh - ${HEADER_HEIGHT}px)`,
-      }}
-    >
-      <div
-        className="
-          mt-[58vh]
-          grid grid-cols-2
-          gap-3 px-4 pb-10
-          sm:mt-[64vh]
-          sm:flex sm:max-w-6xl sm:flex-wrap sm:justify-center sm:gap-6
-          lg:mt-[66vh]
-        "
-      >
-        {cards.map((card) => (
-          <Link
-            key={card.href}
-            href={card.href}
-            aria-label={card.label}
+  return (
+    <main className="min-h-screen bg-[#062A4F] text-white">
+      {/* HERO IMAGE */}
+      <section className="bg-gradient-to-b from-[#061B33] via-[#073B63] to-[#0B4F7A] px-3 pt-4 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl">
+          <div
             className="
-              group relative
-              h-[92px] w-[176px]
-              overflow-hidden rounded-3xl
-              border border-white/40
-              bg-white/10
-              shadow-xl transition-all duration-300
-              hover:-translate-y-2 hover:scale-[1.05]
-              hover:shadow-[0_0_30px_rgba(255,255,255,0.35)]
-              focus:outline-none focus:ring-4 focus:ring-white/70
-              sm:h-[115px] sm:w-[220px]
+              relative h-[42vh] min-h-[260px]
+              overflow-hidden rounded-[2rem]
+              border border-white/10 shadow-2xl
+              sm:h-[48vh] sm:min-h-[340px]
+              lg:h-[52vh] lg:min-h-[420px]
             "
           >
             <Image
-              src={card.image}
-              alt={card.label}
+              src="/images/accueil-eleveai-reunion.webp"
+              alt="EleveAI - Un vrai parcours d’apprentissage"
               fill
-              sizes="(max-width: 640px) 176px, 220px"
-              className="
-                object-cover
-                transition-transform duration-500
-                group-hover:scale-[1.05]
-              "
+              priority
+              sizes="100vw"
+              className="object-cover object-center"
             />
 
-            <div
-              className="
-                pointer-events-none absolute -left-20 top-0
-                h-full w-16 rotate-12 bg-white/30 blur-md
-                transition-transform duration-700
-                group-hover:translate-x-[300px]
-              "
-            />
-          </Link>
-        ))}
-      </div>
-    </section>
-
-    {/* CONTENU SUR FOND VISIBLE */}
-    <section className="relative z-20 px-4 py-10">
-      <div className="mx-auto max-w-6xl">
-        {/* ACCROCHE */}
-        <div className="mb-8 rounded-3xl border border-white/20 bg-slate-950/65 p-6 shadow-2xl backdrop-blur-md">
-          <p className="mb-2 text-sm font-black uppercase tracking-[0.25em] text-cyan-300">
-            EleveAI · Apprendre autrement
-          </p>
-
-          <h1 className="text-3xl font-black leading-tight md:text-5xl">
-            Choisis ta classe, travaille une compétence, progresse à ton
-            rythme.
-          </h1>
-
-          <p className="mt-4 max-w-3xl text-base text-slate-200 md:text-lg">
-            EleveAI aide les élèves à s’entraîner en mathématiques avec des
-            parcours, des défis, du calcul rapide, des leçons courtes et un
-            coach par compétences.
-          </p>
+            <div className="absolute inset-0 bg-gradient-to-b from-black/5 via-transparent to-[#061B33]/20" />
+          </div>
         </div>
+      </section>
 
-        {/* CHOIX DE CLASSE */}
-        <div className="mb-10 rounded-3xl border border-white/15 bg-slate-950/55 p-5 shadow-2xl backdrop-blur-md">
-          <div className="mb-4 flex items-end justify-between gap-4">
-            <div>
-              <p className="text-sm font-black uppercase tracking-[0.25em] text-emerald-300">
-                Compétences
+      {/* CARDS PRINCIPALES */}
+      <section className="relative z-10 bg-gradient-to-b from-[#0B4F7A] via-[#0A6B9A] to-[#062A4F] px-4 pb-10 pt-6">
+        <div className="mx-auto max-w-6xl">
+          <div
+            className="
+              rounded-[2rem] border border-white/15
+              bg-white/[0.08] p-4 shadow-2xl backdrop-blur-md
+            "
+          >
+            <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
+              {cards.map((card) => (
+                <Link
+                  key={card.href}
+                  href={card.href}
+                  aria-label={card.label}
+                  className="
+                    group relative h-[92px]
+                    overflow-hidden rounded-3xl
+                    border border-white/25
+                    bg-white/10 shadow-xl
+                    transition-all duration-300
+                    hover:-translate-y-2 hover:scale-[1.03]
+                    hover:shadow-[0_0_30px_rgba(255,255,255,0.25)]
+                    focus:outline-none focus:ring-4 focus:ring-white/70
+                    sm:h-[105px]
+                  "
+                >
+                  <Image
+                    src={card.image}
+                    alt={card.label}
+                    fill
+                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 180px"
+                    className="
+                      object-cover
+                      transition-transform duration-500
+                      group-hover:scale-[1.05]
+                    "
+                  />
+
+                  <div
+                    className="
+                      pointer-events-none absolute -left-20 top-0
+                      h-full w-16 rotate-12 bg-white/30 blur-md
+                      transition-transform duration-700
+                      group-hover:translate-x-[300px]
+                    "
+                  />
+                </Link>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CONTENU */}
+      <section className="relative z-20 bg-gradient-to-b from-[#062A4F] via-[#0B74A5] to-[#041B33] px-4 py-10">
+        <div className="mx-auto max-w-6xl">
+          {/* ACCROCHE */}
+          <div className="mb-8 rounded-3xl border border-white/20 bg-[#041B33]/70 p-6 shadow-2xl backdrop-blur-md">
+            <p className="mb-2 text-sm font-black uppercase tracking-[0.25em] text-cyan-300">
+              EleveAI · Apprendre autrement
+            </p>
+
+            <h1 className="text-3xl font-black leading-tight md:text-5xl">
+              Un vrai parcours d’apprentissage du CM1 à la 3e.
+            </h1>
+
+            <p className="mt-4 max-w-3xl text-base text-slate-200 md:text-lg">
+              EleveAI aide les élèves à s’entraîner en mathématiques avec des
+              parcours, des défis, du calcul rapide, des leçons courtes et un
+              coach par compétences.
+            </p>
+          </div>
+
+          {/* CHOIX DE CLASSE */}
+          <div className="mb-10 rounded-3xl border border-white/15 bg-[#041B33]/65 p-5 shadow-2xl backdrop-blur-md">
+            <div className="mb-4 flex items-end justify-between gap-4">
+              <div>
+                <p className="text-sm font-black uppercase tracking-[0.25em] text-emerald-300">
+                  Compétences
+                </p>
+
+                <h2 className="mt-1 text-2xl font-black md:text-3xl">
+                  Je choisis ma classe
+                </h2>
+              </div>
+
+              <Link
+                href="/coach-maths-ia"
+                className="hidden rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm font-bold text-white transition hover:bg-white/20 md:inline-flex"
+              >
+                Voir toutes les compétences
+              </Link>
+            </div>
+
+            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+              {classes.map((classe) => (
+                <Link
+                  key={classe.label}
+                  href={classe.href}
+                  className="
+                    group rounded-3xl border border-white/15
+                    bg-white/[0.10] p-5 shadow-xl
+                    transition-all duration-300
+                    hover:-translate-y-1 hover:border-emerald-300/70 hover:bg-white/[0.16]
+                  "
+                >
+                  <div className="flex items-start justify-between gap-4">
+                    <div>
+                      <div className="text-4xl font-black text-white">
+                        {classe.label}
+                      </div>
+
+                      <p className="mt-2 text-sm leading-relaxed text-slate-200">
+                        {classe.description}
+                      </p>
+                    </div>
+
+                    <div className="rounded-full bg-emerald-400 px-3 py-1 text-sm font-black text-[#041B33] transition group-hover:scale-110">
+                      Go
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+
+          {/* COMMENCER SELON LE BESOIN */}
+          <div className="rounded-3xl border border-white/15 bg-[#041B33]/65 p-5 shadow-2xl backdrop-blur-md">
+            <div className="mb-4">
+              <p className="text-sm font-black uppercase tracking-[0.25em] text-yellow-300">
+                Démarrage rapide
               </p>
 
               <h2 className="mt-1 text-2xl font-black md:text-3xl">
-                Je choisis ma classe
+                Je commence selon mon besoin
               </h2>
             </div>
 
-            <Link
-              href="/coach-maths-ia"
-              className="hidden rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm font-bold text-white transition hover:bg-white/20 md:inline-flex"
-            >
-              Voir toutes les compétences
-            </Link>
-          </div>
-
-          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-            {classes.map((classe) => (
-              <Link
-                key={classe.label}
-                href={classe.href}
-                className="
-                  group rounded-3xl border border-white/15
-                  bg-white/[0.10] p-5 shadow-xl
-                  transition-all duration-300
-                  hover:-translate-y-1 hover:border-emerald-300/70 hover:bg-white/[0.16]
-                "
-              >
-                <div className="flex items-start justify-between gap-4">
-                  <div>
-                    <div className="text-4xl font-black text-white">
-                      {classe.label}
-                    </div>
-
-                    <p className="mt-2 text-sm leading-relaxed text-slate-200">
-                      {classe.description}
-                    </p>
-                  </div>
-
-                  <div className="rounded-full bg-emerald-400 px-3 py-1 text-sm font-black text-slate-950 transition group-hover:scale-110">
-                    Go
-                  </div>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </div>
-
-        {/* COMMENCER SELON LE BESOIN */}
-        <div className="rounded-3xl border border-white/15 bg-slate-950/55 p-5 shadow-2xl backdrop-blur-md">
-          <div className="mb-4">
-            <p className="text-sm font-black uppercase tracking-[0.25em] text-yellow-300">
-              Démarrage rapide
-            </p>
-
-            <h2 className="mt-1 text-2xl font-black md:text-3xl">
-              Je commence selon mon besoin
-            </h2>
-          </div>
-
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {besoins.map((besoin) => (
-              <Link
-                key={besoin.href}
-                href={besoin.href}
-                className="
-                  group overflow-hidden rounded-3xl border border-white/15
-                  bg-slate-950/65 shadow-xl backdrop-blur-md
-                  transition-all duration-300
-                  hover:-translate-y-1 hover:border-white/40
-                "
-              >
-                <div
-                  className={`bg-gradient-to-br ${besoin.color} p-5 text-slate-950`}
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {besoins.map((besoin) => (
+                <Link
+                  key={besoin.href}
+                  href={besoin.href}
+                  className="
+                    group overflow-hidden rounded-3xl border border-white/15
+                    bg-[#041B33]/75 shadow-xl backdrop-blur-md
+                    transition-all duration-300
+                    hover:-translate-y-1 hover:border-white/40
+                  "
                 >
-                  <div className="text-3xl">{besoin.icon}</div>
+                  <div
+                    className={`bg-gradient-to-br ${besoin.color} p-5 text-slate-950`}
+                  >
+                    <div className="text-3xl">{besoin.icon}</div>
 
-                  <h3 className="mt-3 text-xl font-black">
-                    {besoin.title}
-                  </h3>
-                </div>
+                    <h3 className="mt-3 text-xl font-black">
+                      {besoin.title}
+                    </h3>
+                  </div>
 
-                <div className="flex items-center justify-between p-5">
-                  <span className="text-sm font-bold text-slate-100">
-                    {besoin.action}
-                  </span>
+                  <div className="flex items-center justify-between p-5">
+                    <span className="text-sm font-bold text-slate-100">
+                      {besoin.action}
+                    </span>
 
-                  <span className="rounded-full bg-white px-3 py-1 text-sm font-black text-slate-950 transition group-hover:translate-x-1">
-                    →
-                  </span>
-                </div>
-              </Link>
-            ))}
+                    <span className="rounded-full bg-white px-3 py-1 text-sm font-black text-[#041B33] transition group-hover:translate-x-1">
+                      →
+                    </span>
+                  </div>
+                </Link>
+              ))}
+            </div>
           </div>
         </div>
-      </div>
-    </section>
-  </main>
-);
+      </section>
+    </main>
+  );
 }
