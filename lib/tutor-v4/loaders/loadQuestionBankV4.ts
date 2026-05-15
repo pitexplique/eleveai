@@ -12,7 +12,7 @@ export async function loadQuestionBankV4(
 ): Promise<TutorBankItemV4[]> {
 
     if (classe === "cm1" && matiere === "maths") {
-    return mathsCm2QuestionBank;
+    return mathsCm1QuestionBank;
   }
 
   if (classe === "cm2" && matiere === "maths") {
