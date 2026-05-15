@@ -24,11 +24,18 @@ export const notions: NotionSource[] = [
     prerequis: ["nombre_entier"],
     levels: [1, 2],
   },
+{
+    id: "tables_multiplication",
+    label: "Tables de multiplication",
+    boId: "BOCM1N2",
+    prerequis: ["nombre_entier"],
+    levels: [1, 2, 3],
+  },
   {
     id: "multiplication",
     label: "Multiplication",
     boId: "BOCM1N2",
-    prerequis: ["nombre_entier"],
+    prerequis: ["tables_multiplication"],
     levels: [1, 2, 3],
   },
   {

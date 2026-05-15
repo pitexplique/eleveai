@@ -76,6 +76,17 @@ export const microSkills: MicroSkillSource[] = [
     prerequis: ["suite_regle"],
   },
 
+    // ============================================================
+  // TABLES DE MULTIPLICATION
+  // ============================================================
+
+  {
+    id: "multiplication_table",
+    label: "Connaître les tables de multiplication",
+    notionId: "tables_multiplication",
+    prerequis: ["entier_lire"],
+  },
+
   // ============================================================
   // MULTIPLICATION
   // ============================================================

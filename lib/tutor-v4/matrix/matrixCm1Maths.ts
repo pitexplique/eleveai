@@ -41,6 +41,12 @@ const supportLinks: Record<string, string[]> = {
   suite_croissante_decroissante: ["entier_comparer"],
   suite_defi: ["suite_continuer", "calcul_mental"],
 
+    // ============================================================
+  // TABLES DE MULTIPLICATION
+  // ============================================================
+
+  multiplication_table: ["entier_decomposer", "calcul_mental"],
+  
   // ============================================================
   // MULTIPLICATION
   // ============================================================
