@@ -42,25 +42,39 @@ export default function Header() {
   const linkClass = (active: boolean) =>
     `inline-flex items-center gap-2 rounded-full px-3.5 py-2 text-sm font-semibold transition ${
       active
-        ? "bg-white text-slate-950 shadow-lg"
+        ? "bg-white text-[#041B33] shadow-lg"
         : "text-white/90 hover:bg-white/15 hover:text-white"
     }`;
 
   const mobileLinkClass = (active: boolean) =>
     `flex items-center gap-3 rounded-2xl px-4 py-3 text-sm font-semibold transition ${
       active
-        ? "bg-white text-slate-950"
+        ? "bg-white text-[#041B33]"
         : "bg-white/10 text-white hover:bg-white/15"
     }`;
 
   const eleveLabel = eleve?.nom || eleve?.code_eleve || "Élève";
 
   return (
-    <header className="sticky top-0 z-50 border-b border-white/10 bg-slate-950/85 backdrop-blur-xl">
+    <header
+      className="
+        sticky top-0 z-50
+        border-b border-cyan-300/20
+        bg-gradient-to-r from-[#041B33]/95 via-[#062A4F]/95 to-[#073B63]/95
+        shadow-[0_8px_30px_rgba(0,0,0,0.25)]
+        backdrop-blur-xl
+      "
+    >
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3">
         {/* LOGO */}
         <Link href="/accueil" className="flex items-center gap-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-gradient-to-br from-emerald-300 via-cyan-300 to-amber-300 text-slate-950 shadow-lg">
+          <div
+            className="
+              flex h-10 w-10 items-center justify-center rounded-2xl
+              bg-gradient-to-br from-cyan-200 via-emerald-300 to-amber-300
+              text-[#041B33] shadow-lg
+            "
+          >
             <Sparkles className="h-5 w-5" />
           </div>
 
@@ -68,7 +82,7 @@ export default function Header() {
             <span className="text-lg font-extrabold tracking-tight text-white">
               Eleve<span className="text-emerald-300">AI</span>
             </span>
-            <span className="hidden text-xs text-white/70 sm:block">
+            <span className="hidden text-xs text-cyan-100/75 sm:block">
               Comprendre • S’entraîner • Réussir
             </span>
           </div>
@@ -83,7 +97,7 @@ export default function Header() {
             <Home className="h-4 w-4 text-cyan-300" />
             Accueil
           </Link>
-    
+
           <Link
             href="/coach-maths-ia"
             className={linkClass(isActive(pathname, "/coach-maths-ia"))}
@@ -116,14 +130,15 @@ export default function Header() {
           >
             <Trophy className="h-4 w-4 text-amber-300" />
             Concours général
-            <span className="absolute -right-2 -top-2 rounded-full bg-amber-400 px-1.5 text-[10px] font-black text-slate-950">
+            <span className="absolute -right-2 -top-2 rounded-full bg-amber-400 px-1.5 text-[10px] font-black text-[#041B33]">
               new
             </span>
           </Link>
 
           <Link
             href="/lecon-du-jour"
-            className={`relative ${linkClass(isActive(pathname, "/lecon-du-jour")
+            className={`relative ${linkClass(
+              isActive(pathname, "/lecon-du-jour")
             )}`}
           >
             <Flame className="h-4 w-4 text-orange-300" />
@@ -133,7 +148,6 @@ export default function Header() {
             </span>
           </Link>
 
-
           <Link
             href="/probleme-du-jour"
             className={linkClass(isActive(pathname, "/probleme-du-jour"))}
@@ -141,7 +155,6 @@ export default function Header() {
             <Puzzle className="h-4 w-4 text-pink-300" />
             Problème
           </Link>
-
 
           <Link
             href="/optimiseur"
@@ -156,7 +169,12 @@ export default function Header() {
             <div className="ml-2 flex items-center gap-2">
               <Link
                 href="/parcours"
-                className="inline-flex items-center gap-2 rounded-full bg-emerald-400 px-4 py-2 text-sm font-black text-slate-950 shadow-lg hover:bg-emerald-300"
+                className="
+                  inline-flex items-center gap-2 rounded-full
+                  bg-gradient-to-r from-emerald-300 to-cyan-300
+                  px-4 py-2 text-sm font-black text-[#041B33]
+                  shadow-lg hover:brightness-110
+                "
               >
                 <GraduationCap className="h-4 w-4" />
                 {eleveLabel}
@@ -165,7 +183,11 @@ export default function Header() {
               <button
                 type="button"
                 onClick={logoutEleve}
-                className="inline-flex items-center gap-2 rounded-full bg-red-500 px-3.5 py-2 text-sm font-bold text-white hover:bg-red-600"
+                className="
+                  inline-flex items-center gap-2 rounded-full
+                  bg-red-500 px-3.5 py-2 text-sm font-bold text-white
+                  hover:bg-red-600
+                "
               >
                 <LogOut className="h-4 w-4" />
                 Déconnexion
@@ -174,7 +196,12 @@ export default function Header() {
           ) : (
             <Link
               href="/auth/signin-eleve"
-              className="ml-2 inline-flex items-center gap-2 rounded-full bg-emerald-400 px-4 py-2 text-sm font-black text-slate-950 hover:bg-emerald-300"
+              className="
+                ml-2 inline-flex items-center gap-2 rounded-full
+                bg-gradient-to-r from-emerald-300 to-cyan-300
+                px-4 py-2 text-sm font-black text-[#041B33]
+                shadow-lg hover:brightness-110
+              "
             >
               <GraduationCap className="h-4 w-4" />
               Connexion élève
@@ -186,7 +213,11 @@ export default function Header() {
         <button
           type="button"
           onClick={() => setMobileOpen((v) => !v)}
-          className="rounded-full border border-white/15 bg-white/10 p-2 text-white lg:hidden"
+          className="
+            rounded-full border border-cyan-200/20
+            bg-white/10 p-2 text-white
+            shadow-lg lg:hidden
+          "
           aria-label="Ouvrir le menu"
         >
           {mobileOpen ? <X /> : <Menu />}
@@ -195,7 +226,13 @@ export default function Header() {
 
       {/* MOBILE MENU */}
       {mobileOpen && (
-        <div className="border-t border-white/10 bg-slate-950 px-4 py-4 lg:hidden">
+        <div
+          className="
+            border-t border-cyan-300/20
+            bg-gradient-to-b from-[#062A4F] to-[#041B33]
+            px-4 py-4 lg:hidden
+          "
+        >
           <div className="grid gap-2">
             <Link
               href="/accueil"
@@ -212,7 +249,6 @@ export default function Header() {
               <Brain className="h-4 w-4 text-orange-300" />
               Coach Maths IA
             </Link>
-
 
             <Link
               href="/parcours"
@@ -232,7 +268,11 @@ export default function Header() {
 
             <Link
               href="/concours-general"
-              className="flex items-center justify-center gap-3 rounded-2xl bg-gradient-to-r from-amber-300 to-orange-400 px-4 py-4 font-black text-slate-950 shadow-lg"
+              className="
+                flex items-center justify-center gap-3 rounded-2xl
+                bg-gradient-to-r from-amber-300 to-orange-400
+                px-4 py-4 font-black text-[#041B33] shadow-lg
+              "
             >
               <Trophy className="h-5 w-5" />
               Concours général 🏆
@@ -240,7 +280,10 @@ export default function Header() {
 
             <Link
               href="/lecon-du-jour"
-              className="flex items-center justify-center gap-3 rounded-2xl bg-orange-500 px-4 py-4 font-black text-white shadow-lg"
+              className="
+                flex items-center justify-center gap-3 rounded-2xl
+                bg-orange-500 px-4 py-4 font-black text-white shadow-lg
+              "
             >
               <Flame className="h-5 w-5" />
               Leçon du jour 🔥
@@ -255,6 +298,7 @@ export default function Header() {
               <Puzzle className="h-4 w-4 text-pink-300" />
               Problème du jour
             </Link>
+
             <Link
               href="/optimiseur"
               className={mobileLinkClass(isActive(pathname, "/optimiseur"))}
@@ -264,10 +308,14 @@ export default function Header() {
             </Link>
 
             {eleve ? (
-              <div className="mt-3 grid gap-2 border-t border-white/10 pt-3">
+              <div className="mt-3 grid gap-2 border-t border-cyan-300/20 pt-3">
                 <Link
                   href="/parcours"
-                  className="flex items-center justify-center gap-2 rounded-2xl bg-emerald-400 px-4 py-3 font-black text-slate-950"
+                  className="
+                    flex items-center justify-center gap-2 rounded-2xl
+                    bg-gradient-to-r from-emerald-300 to-cyan-300
+                    px-4 py-3 font-black text-[#041B33]
+                  "
                 >
                   <GraduationCap className="h-4 w-4" />
                   {eleveLabel}
@@ -276,7 +324,10 @@ export default function Header() {
                 <button
                   type="button"
                   onClick={logoutEleve}
-                  className="flex items-center justify-center gap-2 rounded-2xl bg-red-500 px-4 py-3 font-black text-white"
+                  className="
+                    flex items-center justify-center gap-2 rounded-2xl
+                    bg-red-500 px-4 py-3 font-black text-white
+                  "
                 >
                   <LogOut className="h-4 w-4" />
                   Déconnexion
@@ -285,7 +336,11 @@ export default function Header() {
             ) : (
               <Link
                 href="/auth/signin-eleve"
-                className="mt-3 flex items-center justify-center gap-2 rounded-2xl bg-emerald-400 px-4 py-3 font-black text-slate-950"
+                className="
+                  mt-3 flex items-center justify-center gap-2 rounded-2xl
+                  bg-gradient-to-r from-emerald-300 to-cyan-300
+                  px-4 py-3 font-black text-[#041B33]
+                "
               >
                 <GraduationCap className="h-4 w-4" />
                 Connexion élève
