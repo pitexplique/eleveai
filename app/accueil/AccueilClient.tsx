@@ -211,9 +211,9 @@ export default function AccueilPage() {
             </h1>
 
             <p className="mt-4 max-w-3xl text-base text-slate-200 md:text-lg">
-              EleveAI aide les élèves à s’entraîner en mathématiques avec des
+              EleveAI aide les élèves à progresser en mathématiques avec des
               parcours, des défis, du calcul rapide, des leçons courtes, un coach
-              par compétences et une préparation au Concours général des collèges.
+              par compétences et des entraînements au Concours général des collèges.
             </p>
           </div>
 
