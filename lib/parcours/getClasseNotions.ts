@@ -3,6 +3,7 @@ import type {
   ParcoursNotion,
 } from "./types";
 
+import { buildKnowledgeCm1Maths } from "@/lib/tutor-v4/knowledge/maths/cm1/buildKnowledgeCm1";
 import { buildKnowledgeCm2Maths } from "@/lib/tutor-v4/knowledge/maths/cm2/buildKnowledgeCm2";
 import { buildKnowledge6eMaths } from "@/lib/tutor-v4/knowledge/maths/6e/buildKnowledge6e";
 import { buildKnowledge5eMaths } from "@/lib/tutor-v4/knowledge/maths/5e/buildKnowledge5e";
@@ -13,7 +14,11 @@ export function getClasseNotions(
   classe: ParcoursClasse
 ): ParcoursNotion[] {
 
-    if (classe === "cm2") {
+  if (classe === "cm1") {
+    return buildKnowledgeCm1Maths().notions;
+  }
+
+  if (classe === "cm2") {
     return buildKnowledgeCm2Maths().notions;
   }
   if (classe === "6e") {

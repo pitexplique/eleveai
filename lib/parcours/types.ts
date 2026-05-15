@@ -5,7 +5,7 @@ import type {
 
 import type { CanvasFigure } from "@/lib/tutor-v4/types_canvas";
 
-export type ParcoursClasse = "cm2" |"6e" | "5e" | "4e" | "3e";
+export type ParcoursClasse = "cm1" |"cm2" |"6e" | "5e" | "4e" | "3e";
 
 export type ParcoursStatus = "maitrise" | "a_revoir" | "fragile";
 
