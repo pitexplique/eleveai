@@ -1,3 +1,4 @@
+import { matrixCm1Maths } from "@/lib/tutor-v4/matrix/matrixCm1Maths";
 import { matrixCm2Maths } from "@/lib/tutor-v4/matrix/matrixCm2Maths";
 import { matrix6eMaths } from "@/lib/tutor-v4/matrix/matrix6eMaths";
 import { matrix5eMaths } from "@/lib/tutor-v4/matrix/matrix5eMaths";
@@ -10,6 +11,11 @@ export async function loadMatrixV4(
   classe: string,
   matiere: string
 ): Promise<SkillMatrix> {
+
+  if (classe === "cm1" && matiere === "maths") {
+    return matrixCm1Maths;
+  }
+
   if (classe === "cm2" && matiere === "maths") {
     return matrixCm2Maths;
   }

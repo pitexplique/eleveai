@@ -1,3 +1,4 @@
+import { mathsCm1QuestionBank } from "@/lib/tutor-v4/questionBank/cm1/maths";
 import { mathsCm2QuestionBank } from "@/lib/tutor-v4/questionBank/cm2/maths";
 import { maths6eQuestionBank } from "@/lib/tutor-v4/questionBank/6e/maths";
 import { maths5eQuestionBank } from "@/lib/tutor-v4/questionBank/5e/maths";
@@ -9,6 +10,11 @@ export async function loadQuestionBankV4(
   classe: string,
   matiere: string
 ): Promise<TutorBankItemV4[]> {
+
+    if (classe === "cm1" && matiere === "maths") {
+    return mathsCm2QuestionBank;
+  }
+
   if (classe === "cm2" && matiere === "maths") {
     return mathsCm2QuestionBank;
   }
