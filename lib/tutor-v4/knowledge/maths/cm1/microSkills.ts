@@ -1,4 +1,5 @@
 // Micro-compétences de mathématiques pour la classe de CM1.
+// Référence : programme officiel cycle 3, BO n°16 du 17 avril 2025.
 
 // lib/tutor-v4/knowledge/maths/cm1/microSkills.ts
 
@@ -133,7 +134,7 @@ export const microSkills: MicroSkillSource[] = [
     prerequis: ["division_sens"],
   },
   {
-    id: "division_posee_simple",
+    id: "division_posee",
     label: "Poser une division simple",
     notionId: "division",
     prerequis: ["division_lien_multiplication"],
@@ -142,7 +143,7 @@ export const microSkills: MicroSkillSource[] = [
     id: "division_reste",
     label: "Interpréter le reste d’une division",
     notionId: "division",
-    prerequis: ["division_posee_simple"],
+    prerequis: ["division_posee"],
   },
   {
     id: "division_probleme",
@@ -154,7 +155,7 @@ export const microSkills: MicroSkillSource[] = [
     id: "division_defi",
     label: "Résoudre un défi de division",
     notionId: "division",
-    prerequis: ["division_posee_simple"],
+    prerequis: ["division_posee"],
   },
 
   // ============================================================
@@ -198,6 +199,12 @@ export const microSkills: MicroSkillSource[] = [
     prerequis: ["fraction_representer"],
   },
   {
+    id: "fraction_equivalente",
+    label: "Reconnaître des fractions équivalentes simples",
+    notionId: "fraction",
+    prerequis: ["fraction_representer"],
+  },
+  {
     id: "fraction_decimale",
     label: "Reconnaître une fraction décimale",
     notionId: "fraction",
@@ -215,16 +222,16 @@ export const microSkills: MicroSkillSource[] = [
   // ============================================================
 
   {
-    id: "decimal_fraction",
-    label: "Relier fraction décimale et nombre décimal",
+    id: "decimal_lire",
+    label: "Lire et écrire un nombre décimal",
     notionId: "nombre_decimal",
     prerequis: ["fraction_decimale"],
   },
   {
-    id: "decimal_lire",
-    label: "Lire et écrire un nombre décimal",
+    id: "decimal_fraction",
+    label: "Relier fraction décimale et nombre décimal",
     notionId: "nombre_decimal",
-    prerequis: ["decimal_fraction"],
+    prerequis: ["fraction_decimale"],
   },
   {
     id: "decimal_valeur_chiffre",
@@ -249,6 +256,12 @@ export const microSkills: MicroSkillSource[] = [
     label: "Placer un nombre décimal sur une droite graduée",
     notionId: "nombre_decimal",
     prerequis: ["decimal_lire"],
+  },
+  {
+    id: "decimal_arrondir",
+    label: "Arrondir un nombre décimal simple",
+    notionId: "nombre_decimal",
+    prerequis: ["decimal_comparer"],
   },
   {
     id: "decimal_defi",
@@ -298,7 +311,7 @@ export const microSkills: MicroSkillSource[] = [
     prerequis: ["decimal_lire", "calcul_soustraction_posee"],
   },
   {
-    id: "calcul_priorite_simple",
+    id: "calcul_priorite",
     label: "Utiliser des priorités opératoires simples",
     notionId: "calcul",
     prerequis: ["calcul_mental"],
@@ -307,7 +320,7 @@ export const microSkills: MicroSkillSource[] = [
     id: "calcul_defi",
     label: "Résoudre un défi de calcul",
     notionId: "calcul",
-    prerequis: ["calcul_mental", "calcul_priorite_simple"],
+    prerequis: ["calcul_mental", "calcul_priorite"],
   },
 
   // ============================================================
@@ -386,6 +399,12 @@ export const microSkills: MicroSkillSource[] = [
     prerequis: ["suite_regle"],
   },
   {
+    id: "algebre_relation",
+    label: "Décrire une relation entre deux quantités",
+    notionId: "algebre",
+    prerequis: ["algebre_egalite", "algebre_motif"],
+  },
+  {
     id: "algebre_defi",
     label: "Résoudre un défi d’algèbre",
     notionId: "algebre",
@@ -415,10 +434,16 @@ export const microSkills: MicroSkillSource[] = [
     prerequis: ["prop_reconnaitre"],
   },
   {
-    id: "prop_tableau_simple",
+    id: "prop_tableau",
     label: "Compléter un tableau simple de proportionnalité",
     notionId: "proportionnalite",
     prerequis: ["prop_fois_plus"],
+  },
+  {
+    id: "prop_coefficient",
+    label: "Utiliser un coefficient de proportionnalité simple",
+    notionId: "proportionnalite",
+    prerequis: ["prop_tableau"],
   },
   {
     id: "prop_probleme",

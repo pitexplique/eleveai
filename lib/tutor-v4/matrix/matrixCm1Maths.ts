@@ -57,7 +57,7 @@ const supportLinks: Record<string, string[]> = {
 
   division_sens: ["multiplication_table"],
   division_lien_multiplication: ["multiplication_table"],
-  division_posee_simple: ["multiplication_posee"],
+  division_posee: ["multiplication_posee"],
   division_reste: ["division_sens"],
   division_probleme: ["probleme_choisir_operation"],
   division_defi: ["probleme_une_etape"],
@@ -72,6 +72,7 @@ const supportLinks: Record<string, string[]> = {
   fraction_superieure_1: ["fraction_unite", "entier_lire"],
   fraction_droite: ["reperage_quadrillage"],
   fraction_comparer: ["entier_comparer", "fraction_representer"],
+  fraction_equivalente: ["multiplication_table", "division_lien_multiplication"],
   fraction_decimale: ["multiplication_puissance_dix"],
   fraction_defi: ["probleme_une_etape", "fraction_representer"],
 
@@ -79,12 +80,13 @@ const supportLinks: Record<string, string[]> = {
   // NOMBRES DÉCIMAUX
   // ============================================================
 
-  decimal_fraction: ["fraction_decimale"],
   decimal_lire: ["fraction_decimale"],
+  decimal_fraction: ["fraction_decimale"],
   decimal_valeur_chiffre: ["entier_decomposer"],
   decimal_comparer: ["entier_comparer"],
   decimal_ordonner: ["decimal_comparer"],
   decimal_droite: ["reperage_quadrillage"],
+  decimal_arrondir: ["decimal_valeur_chiffre"],
   decimal_defi: ["probleme_une_etape"],
 
   // ============================================================
@@ -97,7 +99,7 @@ const supportLinks: Record<string, string[]> = {
   calcul_multiplication_posee: ["multiplication_posee"],
   calcul_decimal_addition: ["decimal_valeur_chiffre"],
   calcul_decimal_soustraction: ["decimal_valeur_chiffre"],
-  calcul_priorite_simple: ["multiplication_table"],
+  calcul_priorite: ["multiplication_table"],
   calcul_defi: ["probleme_choisir_operation"],
 
   // ============================================================
@@ -117,7 +119,7 @@ const supportLinks: Record<string, string[]> = {
   ],
   probleme_plusieurs_etapes: [
     "probleme_une_etape",
-    "calcul_priorite_simple",
+    "calcul_priorite",
   ],
   probleme_rediger: ["probleme_choisir_operation"],
   probleme_verifier: ["calcul_mental", "probleme_une_etape"],
@@ -144,9 +146,15 @@ const supportLinks: Record<string, string[]> = {
     "suite_regle",
     "calcul_mental",
   ],
+  algebre_relation: [
+    "algebre_egalite",
+    "algebre_motif",
+    "prop_reconnaitre",
+  ],
   algebre_defi: [
     "algebre_nombre_inconnu",
     "algebre_schema_barre",
+    "algebre_relation",
     "probleme_plusieurs_etapes",
   ],
 
@@ -157,9 +165,10 @@ const supportLinks: Record<string, string[]> = {
   prop_reconnaitre: ["tableau_lire", "multiplication_table"],
   prop_fois_plus: ["multiplication_mental", "prop_reconnaitre"],
   prop_fois_moins: ["division_sens", "prop_reconnaitre"],
-  prop_tableau_simple: ["tableau_completer", "multiplication_mental"],
+  prop_tableau: ["tableau_completer", "multiplication_mental"],
+  prop_coefficient: ["division_sens", "multiplication_mental"],
   prop_probleme: ["probleme_une_etape", "tableau_lire"],
-  prop_defi: ["probleme_plusieurs_etapes", "prop_tableau_simple"],
+  prop_defi: ["probleme_plusieurs_etapes", "prop_tableau"],
 
   // ============================================================
   // LONGUEURS

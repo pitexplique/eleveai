@@ -1,4 +1,5 @@
 // Notions de mathématiques pour la classe de CM1.
+// Référence : programme officiel cycle 3, BO n°16 du 17 avril 2025.
 
 // lib/tutor-v4/knowledge/maths/cm1/notions.ts
 
