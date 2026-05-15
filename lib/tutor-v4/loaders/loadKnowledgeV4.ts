@@ -13,7 +13,7 @@ export async function loadKnowledgeV4(
 ): Promise<KnowledgePack> {
 
   if (classe === "cm1" && matiere === "maths") {
-    return loadKnowledgeCm2Maths() as KnowledgePack;
+    return loadKnowledgeCm1Maths() as KnowledgePack;
   }
     if (classe === "cm2" && matiere === "maths") {
     return loadKnowledgeCm2Maths() as KnowledgePack;

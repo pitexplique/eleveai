@@ -324,6 +324,9 @@ export default function TutorV4Page() {
   const hasInitializedFromUrl = useRef(false);
   const hasStartedFromUrl = useRef(false);
 const initialMicroIdRef = useRef<string | null>(null);
+const initialUrlClasseRef = useRef<Classe | null>(null);
+const initialUrlNotionRef = useRef<string | null>(null);
+const hasPreservedInitialUrlNotionRef = useRef(false);
 const lastUrlSelectionRef = useRef<string>("");
 
 const questionTopRef = useRef<HTMLDivElement | null>(null);
@@ -440,6 +443,9 @@ useEffect(() => {
   const initialNotion =
     urlNotion && options.includes(urlNotion) ? urlNotion : options[0] ?? "";
 
+  initialUrlClasseRef.current = urlClasse;
+  initialUrlNotionRef.current = urlNotion;
+
   setClasse(urlClasse);
   setMatiere(urlMatiere);
   setNotion(initialNotion);
@@ -461,10 +467,26 @@ useEffect(() => {
   if (!urlInitDone) return;
   if (!notionOptions.length) return;
 
+  const initialUrlNotion = initialUrlNotionRef.current;
+  const shouldPreserveInitialUrlNotion =
+    initialUrlClasseRef.current === classe &&
+    initialUrlNotion !== null &&
+    notionOptions.includes(initialUrlNotion) &&
+    !hasPreservedInitialUrlNotionRef.current;
+
+  if (shouldPreserveInitialUrlNotion) {
+    if (notion !== initialUrlNotion) {
+      setNotion(initialUrlNotion);
+      return;
+    }
+
+    hasPreservedInitialUrlNotionRef.current = true;
+  }
+
   if (!notion || !notionOptions.includes(notion)) {
     setNotion(notionOptions[0]);
   }
-}, [urlInitDone, notion, notionOptions]);
+}, [classe, urlInitDone, notion, notionOptions]);
 
 useEffect(() => {
   if (!urlInitDone) return;
