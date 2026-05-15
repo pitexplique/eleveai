@@ -8,7 +8,6 @@ import { multiplicationBank } from "./multiplication.bank";
 import { divisionBank } from "./division.bank";
 import { nombresEntiersBank } from "./nombres-entiers.bank";
 import { fractionsBank } from "./fractions.bank";
-import { algorithmiqueBank } from "./algorithmique.bank";
 import { calculBank } from "./calcul.bank";
 import { problemeBank } from "./probleme.bank";
 import { pourcentagesBank } from "./pourcentages.bank";
@@ -19,13 +18,15 @@ import { dureesBank } from "./durees.bank";
 import { anglesBank } from "./angles.bank";
 import { reperageBank } from "./reperage.bank";
 import { droitesBank } from "./droites.bank";
-
-import { tableauxBank} from "./tableaux.bank"
-import { graphiquesBank} from "./graphiques.bank"
-
+import { tableauxBank } from "./tableaux.bank";
+import { graphiquesBank } from "./graphiques.bank";
+import { probabilitesBank } from "./probabilites.bank";
 import { figuresPlanesBank } from "./figures-planes.bank";
 import { symetrieBank } from "./symetrie.bank";
 import { solidesBank } from "./solides.bank";
+import { algorithmiqueBank } from "./algorithmique.bank";
+
+
 
 export const mathsCm2QuestionBank: TutorBankItemV4[] = [
   ...proportionnaliteBank,
@@ -49,6 +50,7 @@ export const mathsCm2QuestionBank: TutorBankItemV4[] = [
   ...droitesBank,
   ...tableauxBank,
   ...graphiquesBank,
+  ...probabilitesBank,
 
   ...figuresPlanesBank,
   ...symetrieBank,
