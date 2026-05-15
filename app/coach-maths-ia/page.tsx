@@ -12,9 +12,10 @@ import {
 } from "@/lib/tutor-v4/catalog";
 
 //const CLASSES: Classe[] = ["cm2", "6e", "5e", "4e", "3e"];
-const CLASSES: Classe[] = ["cm2", "6e", "5e", "4e", "3e"];
+const CLASSES: Classe[] = ["cm1", "cm2", "6e", "5e", "4e", "3e"];
 
 function getClasseTitle(classe: Classe) {
+    if (classe === "cm1") return "Maths CM1";
   if (classe === "cm2") return "Maths CM2";
   if (classe === "6e") return "Maths 6e";
   if (classe === "5e") return "Maths 5e";

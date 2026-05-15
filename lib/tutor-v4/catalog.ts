@@ -1,3 +1,4 @@
+import { buildKnowledgeCm1Maths } from "@/lib/tutor-v4/knowledge/maths/cm1/buildKnowledgeCm1";
 import { buildKnowledgeCm2Maths } from "@/lib/tutor-v4/knowledge/maths/cm2/buildKnowledgeCm2";
 import { buildKnowledge6eMaths } from "@/lib/tutor-v4/knowledge/maths/6e/buildKnowledge6e";
 import { buildKnowledge5eMaths } from "@/lib/tutor-v4/knowledge/maths/5e/buildKnowledge5e";
@@ -8,7 +9,7 @@ import { buildKnowledge3eMaths } from "@/lib/tutor-v4/knowledge/maths/3e/buildKn
 // TYPES
 // =========================
 
-export type Classe = "cm2" |"6e" | "5e" | "4e" | "3e";
+export type Classe = "cm1" |"cm2" |"6e" | "5e" | "4e" | "3e";
 
 // =========================
 // KNOWLEDGE PAR CLASSE
@@ -16,6 +17,8 @@ export type Classe = "cm2" |"6e" | "5e" | "4e" | "3e";
 
 function getKnowledge(classe: Classe) {
   switch (classe) {
+    case "cm1":
+      return buildKnowledgeCm1Maths();
     case "cm2":
       return buildKnowledgeCm2Maths();
     case "6e":

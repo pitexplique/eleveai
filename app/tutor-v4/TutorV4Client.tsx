@@ -298,6 +298,7 @@ if (canvas.kind === "echelle") {
 
 function normalizeClasse(value: string | null): Classe {
   if (
+    value === "cm1" ||
     value === "cm2" ||
     value === "6e" ||
     value === "5e" ||
