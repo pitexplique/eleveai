@@ -1094,6 +1094,85 @@ export type MasseCanvasData = {
   };
 };
 
+// ============================================================
+// CONTENANCES
+// ============================================================
+
+export type ContenanceCanvasObject = {
+  label: string;
+  icon?: string;
+  contenance?: string;
+  millilitres?: number;
+};
+
+export type ContenanceCanvasData = {
+  kind: "contenance";
+
+  variant: "objets" | "conversion" | "estimation" | "comparaison";
+
+  objets?: ContenanceCanvasObject[];
+
+  gauche?: ContenanceCanvasObject;
+  droite?: ContenanceCanvasObject;
+
+  from?: string;
+  to?: string;
+
+  objet?: ContenanceCanvasObject;
+  choix?: string[];
+
+  display?: {
+    showContenances?: boolean;
+    showLabels?: boolean;
+    showComparison?: boolean;
+  };
+
+  questionLabel?: string;
+
+  size?: {
+    width?: number;
+    height?: number;
+  };
+};
+
+// ============================================================
+// ÉCHELLES
+// ============================================================
+
+export type EchelleCanvasData = {
+  kind: "echelle";
+
+  variant: "correspondance" | "distance_reelle" | "distance_plan";
+
+  title?: string;
+
+  echelleLabel?: string;
+
+  planLabel?: string;
+  reelLabel?: string;
+
+  planDistance?: string;
+  reelDistance?: string;
+
+  points?: {
+    start?: string;
+    end?: string;
+  };
+
+  display?: {
+    showEchelle?: boolean;
+    showLabels?: boolean;
+    showQuestion?: boolean;
+  };
+
+  questionLabel?: string;
+
+  size?: {
+    width?: number;
+    height?: number;
+  };
+};
+
 export type CanvasFigure =
   | TriangleCanvasData
   | QuadrilatereCanvasData
@@ -1119,4 +1198,6 @@ export type CanvasFigure =
   | ReperageCanvasData
   | DroitesCanvasData
   | CercleCanvasData
-  | MasseCanvasData;
+  | MasseCanvasData
+  | ContenanceCanvasData
+  | EchelleCanvasData;

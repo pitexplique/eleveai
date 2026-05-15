@@ -27,6 +27,8 @@ import { solidesBank } from "./solides.bank";
 import { algorithmiqueBank } from "./algorithmique.bank";
 import { massesBank} from "./masses.bank"
 
+import { contenancesBank} from "./contenance.bank"
+
 export const mathsCm2QuestionBank: TutorBankItemV4[] = [
   ...proportionnaliteBank,
   ...algebreBank,
@@ -56,6 +58,7 @@ export const mathsCm2QuestionBank: TutorBankItemV4[] = [
   ...solidesBank,
 
   ...massesBank,
+  ...contenancesBank
 ];
 
 export function getMathCm2QuestionBank(args?: {

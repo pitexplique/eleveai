@@ -28,6 +28,8 @@ import ReperageCanvas from "./ReperageCanvas";
 import DroitesCanvas from "./DroitesCanvas";
 import CercleCanvas from "./CercleCanvas";
 import MasseCanvas from "./MasseCanvas";
+import ContenanceCanvas from "./ContenanceCanvas";
+import EchelleCanvas from "./EchelleCanvas";
 
 type Props = {
   figure?: CanvasFigure | null;
@@ -112,6 +114,11 @@ export default function CanvasRenderer({ figure }: Props) {
     case "masse":
       return <MasseCanvas figure={figure} />;
 
+    case "contenance":
+      return <ContenanceCanvas figure={figure} />;
+
+    case "echelle":
+      return <EchelleCanvas figure={figure} />;
     default:
       return null;
   }

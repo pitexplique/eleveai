@@ -33,7 +33,9 @@ import {
   DureeCanvas,
   ReperageCanvas,
   DroitesCanvas,
-  MasseCanvas
+  MasseCanvas,
+  ContenanceCanvas,
+  EchelleCanvas,
 } from "@/lib/canvas";
 
 import {
@@ -282,6 +284,14 @@ if (canvas.kind === "droites") {
 
 if (canvas.kind === "masse") {
   return <MasseCanvas figure={canvas} />;
+}
+
+if (canvas.kind === "contenance") {
+  return <ContenanceCanvas figure={canvas} />;
+}
+
+if (canvas.kind === "echelle") {
+  return <EchelleCanvas figure={canvas} />;
 }
   return null;
 }
