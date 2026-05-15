@@ -196,13 +196,13 @@ export const microSkills: MicroSkillSource[] = [
     id: "division_sens",
     label: "Comprendre le sens de la division",
     notionId: "division",
-    prerequis: ["multiplication_table"],
+    prerequis: ["tables_melangees"],
   },
   {
     id: "division_lien_multiplication",
     label: "Associer multiplication et division",
     notionId: "division",
-    prerequis: ["division_sens"],
+    prerequis: ["division_sens", "tables_trous"],
   },
   {
     id: "division_posee",
@@ -490,7 +490,7 @@ export const microSkills: MicroSkillSource[] = [
     id: "prop_reconnaitre",
     label: "Reconnaître une situation de proportionnalité",
     notionId: "proportionnalite",
-    prerequis: ["multiplication_table"],
+    prerequis: ["tables_melangees"],
   },
   {
     id: "prop_fois_plus",
@@ -712,7 +712,7 @@ export const microSkills: MicroSkillSource[] = [
     id: "aire_carre_rectangle",
     label: "Calculer l’aire d’un carré ou d’un rectangle",
     notionId: "aire",
-    prerequis: ["aire_comprendre", "multiplication_table"],
+    prerequis: ["aire_comprendre", "tables_melangees"],
   },
   {
     id: "aire_composer",

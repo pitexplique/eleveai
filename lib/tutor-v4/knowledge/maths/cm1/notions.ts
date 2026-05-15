@@ -24,7 +24,7 @@ export const notions: NotionSource[] = [
     prerequis: ["nombre_entier"],
     levels: [1, 2],
   },
-{
+  {
     id: "tables_multiplication",
     label: "Tables de multiplication",
     boId: "BOCM1N2",
@@ -63,7 +63,7 @@ export const notions: NotionSource[] = [
     id: "calcul",
     label: "Calculs",
     boId: "BOCM1N2",
-    prerequis: ["nombre_entier", "nombre_decimal"],
+    prerequis: ["nombre_entier", "nombre_decimal", "multiplication"],
     levels: [1, 2, 3],
   },
   {

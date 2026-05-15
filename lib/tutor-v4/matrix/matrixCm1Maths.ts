@@ -85,7 +85,7 @@ const supportLinks: Record<string, string[]> = {
 
   division_sens: ["tables_melangees"],
   division_lien_multiplication: ["tables_melangees", "tables_trous"],
-  division_posee_simple: ["multiplication_posee"],
+  division_posee: ["multiplication_posee"],
   division_reste: ["division_sens"],
   division_probleme: ["probleme_choisir_operation"],
   division_defi: ["probleme_une_etape"],
@@ -126,7 +126,7 @@ const supportLinks: Record<string, string[]> = {
   calcul_multiplication_posee: ["multiplication_posee"],
   calcul_decimal_addition: ["decimal_valeur_chiffre"],
   calcul_decimal_soustraction: ["decimal_valeur_chiffre"],
-  calcul_priorite_simple: ["tables_melangees"],
+  calcul_priorite: ["tables_melangees"],
   calcul_defi: ["probleme_choisir_operation"],
 
   // ============================================================
@@ -146,7 +146,7 @@ const supportLinks: Record<string, string[]> = {
   ],
   probleme_plusieurs_etapes: [
     "probleme_une_etape",
-    "calcul_priorite_simple",
+    "calcul_priorite",
   ],
   probleme_rediger: ["probleme_choisir_operation"],
   probleme_verifier: ["calcul_mental", "probleme_une_etape"],
@@ -186,9 +186,9 @@ const supportLinks: Record<string, string[]> = {
   prop_reconnaitre: ["tableau_lire", "tables_melangees"],
   prop_fois_plus: ["multiplication_mental", "prop_reconnaitre"],
   prop_fois_moins: ["division_sens", "prop_reconnaitre"],
-  prop_tableau_simple: ["tableau_completer", "multiplication_mental"],
+  prop_tableau: ["tableau_completer", "multiplication_mental"],
   prop_probleme: ["probleme_une_etape", "tableau_lire"],
-  prop_defi: ["probleme_plusieurs_etapes", "prop_tableau_simple"],
+  prop_defi: ["probleme_plusieurs_etapes", "prop_tableau"],
 
   // ============================================================
   // LONGUEURS
