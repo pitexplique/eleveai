@@ -40,11 +40,7 @@ const cards = [
 ];
 
 const classes = [
-  {
-    label: "CM1",
-    href: "/coach-maths-ia?classe=cm1",
-    description: "Confiance, nombres, calculs et problèmes.",
-  },
+
   {
     label: "CM2",
     href: "/coach-maths-ia?classe=cm2",
