@@ -2,9 +2,11 @@
 
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 
+import { nombresEntiersBank } from "./nombres-entiers.bank";
 import { suitesBank } from "./suites.bank";
 
 export const mathsCm1QuestionBank: TutorBankItemV4[] = [
+  ...nombresEntiersBank,
   ...suitesBank,
 ];
 
