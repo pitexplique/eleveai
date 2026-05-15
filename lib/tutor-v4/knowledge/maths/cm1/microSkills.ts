@@ -76,15 +76,81 @@ export const microSkills: MicroSkillSource[] = [
     prerequis: ["suite_regle"],
   },
 
-    // ============================================================
+  // ============================================================
   // TABLES DE MULTIPLICATION
   // ============================================================
 
   {
-    id: "multiplication_table",
-    label: "Connaître les tables de multiplication",
+    id: "table_2",
+    label: "Connaître la table de 2",
     notionId: "tables_multiplication",
     prerequis: ["entier_lire"],
+  },
+  {
+    id: "table_3",
+    label: "Connaître la table de 3",
+    notionId: "tables_multiplication",
+    prerequis: ["table_2"],
+  },
+  {
+    id: "table_4",
+    label: "Connaître la table de 4",
+    notionId: "tables_multiplication",
+    prerequis: ["table_2"],
+  },
+  {
+    id: "table_5",
+    label: "Connaître la table de 5",
+    notionId: "tables_multiplication",
+    prerequis: ["table_2"],
+  },
+  {
+    id: "table_6",
+    label: "Connaître la table de 6",
+    notionId: "tables_multiplication",
+    prerequis: ["table_2", "table_3"],
+  },
+  {
+    id: "table_7",
+    label: "Connaître la table de 7",
+    notionId: "tables_multiplication",
+    prerequis: ["table_2", "table_5"],
+  },
+  {
+    id: "table_8",
+    label: "Connaître la table de 8",
+    notionId: "tables_multiplication",
+    prerequis: ["table_4"],
+  },
+  {
+    id: "table_9",
+    label: "Connaître la table de 9",
+    notionId: "tables_multiplication",
+    prerequis: ["table_3"],
+  },
+  {
+    id: "table_10",
+    label: "Connaître la table de 10",
+    notionId: "tables_multiplication",
+    prerequis: ["table_5"],
+  },
+  {
+    id: "tables_melangees",
+    label: "Réviser les tables mélangées",
+    notionId: "tables_multiplication",
+    prerequis: ["table_6", "table_7", "table_8", "table_9", "table_10"],
+  },
+  {
+    id: "tables_trous",
+    label: "Retrouver un facteur manquant",
+    notionId: "tables_multiplication",
+    prerequis: ["tables_melangees"],
+  },
+  {
+    id: "tables_defi",
+    label: "Résoudre un défi sur les tables",
+    notionId: "tables_multiplication",
+    prerequis: ["tables_trous"],
   },
 
   // ============================================================
@@ -92,28 +158,22 @@ export const microSkills: MicroSkillSource[] = [
   // ============================================================
 
   {
-    id: "multiplication_table",
-    label: "Connaître les tables de multiplication",
-    notionId: "multiplication",
-    prerequis: ["entier_lire"],
-  },
-  {
     id: "multiplication_mental",
     label: "Multiplier mentalement",
     notionId: "multiplication",
-    prerequis: ["multiplication_table"],
+    prerequis: ["tables_melangees"],
   },
   {
     id: "multiplication_posee",
     label: "Poser une multiplication simple",
     notionId: "multiplication",
-    prerequis: ["multiplication_table"],
+    prerequis: ["tables_melangees"],
   },
   {
     id: "multiplication_puissance_dix",
     label: "Multiplier par 10, 100 ou 1 000",
     notionId: "multiplication",
-    prerequis: ["multiplication_table"],
+    prerequis: ["table_10"],
   },
   {
     id: "multiplication_probleme",
@@ -125,7 +185,7 @@ export const microSkills: MicroSkillSource[] = [
     id: "multiplication_defi",
     label: "Résoudre un défi de multiplication",
     notionId: "multiplication",
-    prerequis: ["multiplication_posee"],
+    prerequis: ["multiplication_posee", "multiplication_probleme"],
   },
 
   // ============================================================

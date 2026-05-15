@@ -29,7 +29,7 @@ const supportLinks: Record<string, string[]> = {
 
   entier_comparer: ["entier_decomposer"],
   entier_arrondir: ["entier_decomposer"],
-  entier_multiple: ["multiplication_table"],
+  entier_multiple: ["table_2", "table_5", "table_10"],
   entier_defi: ["calcul_mental"],
 
   // ============================================================
@@ -41,29 +41,51 @@ const supportLinks: Record<string, string[]> = {
   suite_croissante_decroissante: ["entier_comparer"],
   suite_defi: ["suite_continuer", "calcul_mental"],
 
-    // ============================================================
+  // ============================================================
   // TABLES DE MULTIPLICATION
   // ============================================================
 
-  multiplication_table: ["entier_decomposer", "calcul_mental"],
-  
+  table_2: ["entier_decomposer", "calcul_mental"],
+  table_3: ["suite_continuer", "calcul_mental"],
+  table_4: ["table_2"],
+  table_5: ["table_10", "calcul_mental"],
+  table_6: ["table_3", "table_2"],
+  table_7: ["table_5", "table_2"],
+  table_8: ["table_4", "table_2"],
+  table_9: ["table_10", "table_3"],
+  table_10: ["multiplication_puissance_dix", "entier_decomposer"],
+
+  tables_melangees: [
+    "table_2",
+    "table_3",
+    "table_4",
+    "table_5",
+    "table_6",
+    "table_7",
+    "table_8",
+    "table_9",
+    "table_10",
+  ],
+  tables_trous: ["tables_melangees", "division_sens"],
+  tables_defi: ["tables_trous", "probleme_une_etape"],
+
   // ============================================================
   // MULTIPLICATION
   // ============================================================
 
-  multiplication_mental: ["entier_decomposer"],
-  multiplication_posee: ["calcul_addition_posee"],
-  multiplication_puissance_dix: ["entier_decomposer"],
-  multiplication_probleme: ["probleme_choisir_operation"],
-  multiplication_defi: ["probleme_une_etape"],
+  multiplication_mental: ["entier_decomposer", "tables_melangees"],
+  multiplication_posee: ["calcul_addition_posee", "tables_melangees"],
+  multiplication_puissance_dix: ["entier_decomposer", "table_10"],
+  multiplication_probleme: ["probleme_choisir_operation", "tables_melangees"],
+  multiplication_defi: ["probleme_une_etape", "multiplication_probleme"],
 
   // ============================================================
   // DIVISION
   // ============================================================
 
-  division_sens: ["multiplication_table"],
-  division_lien_multiplication: ["multiplication_table"],
-  division_posee: ["multiplication_posee"],
+  division_sens: ["tables_melangees"],
+  division_lien_multiplication: ["tables_melangees", "tables_trous"],
+  division_posee_simple: ["multiplication_posee"],
   division_reste: ["division_sens"],
   division_probleme: ["probleme_choisir_operation"],
   division_defi: ["probleme_une_etape"],
@@ -78,34 +100,33 @@ const supportLinks: Record<string, string[]> = {
   fraction_superieure_1: ["fraction_unite", "entier_lire"],
   fraction_droite: ["reperage_quadrillage"],
   fraction_comparer: ["entier_comparer", "fraction_representer"],
-  fraction_equivalente: ["multiplication_table", "division_lien_multiplication"],
-  fraction_decimale: ["multiplication_puissance_dix"],
+  fraction_equivalente: ["tables_melangees", "division_lien_multiplication"],
+  fraction_decimale: ["multiplication_puissance_dix", "table_10"],
   fraction_defi: ["probleme_une_etape", "fraction_representer"],
 
   // ============================================================
   // NOMBRES DÉCIMAUX
   // ============================================================
 
-  decimal_lire: ["fraction_decimale"],
   decimal_fraction: ["fraction_decimale"],
+  decimal_lire: ["fraction_decimale"],
   decimal_valeur_chiffre: ["entier_decomposer"],
   decimal_comparer: ["entier_comparer"],
   decimal_ordonner: ["decimal_comparer"],
   decimal_droite: ["reperage_quadrillage"],
-  decimal_arrondir: ["decimal_valeur_chiffre"],
   decimal_defi: ["probleme_une_etape"],
 
   // ============================================================
   // CALCUL
   // ============================================================
 
-  calcul_mental: ["entier_decomposer", "multiplication_table"],
+  calcul_mental: ["entier_decomposer", "tables_melangees"],
   calcul_addition_posee: ["entier_decomposer"],
   calcul_soustraction_posee: ["entier_decomposer"],
   calcul_multiplication_posee: ["multiplication_posee"],
   calcul_decimal_addition: ["decimal_valeur_chiffre"],
   calcul_decimal_soustraction: ["decimal_valeur_chiffre"],
-  calcul_priorite: ["multiplication_table"],
+  calcul_priorite_simple: ["tables_melangees"],
   calcul_defi: ["probleme_choisir_operation"],
 
   // ============================================================
@@ -114,7 +135,7 @@ const supportLinks: Record<string, string[]> = {
 
   probleme_choisir_operation: [
     "calcul_mental",
-    "multiplication_table",
+    "tables_melangees",
     "division_sens",
   ],
   probleme_une_etape: [
@@ -125,7 +146,7 @@ const supportLinks: Record<string, string[]> = {
   ],
   probleme_plusieurs_etapes: [
     "probleme_une_etape",
-    "calcul_priorite",
+    "calcul_priorite_simple",
   ],
   probleme_rediger: ["probleme_choisir_operation"],
   probleme_verifier: ["calcul_mental", "probleme_une_etape"],
@@ -152,15 +173,9 @@ const supportLinks: Record<string, string[]> = {
     "suite_regle",
     "calcul_mental",
   ],
-  algebre_relation: [
-    "algebre_egalite",
-    "algebre_motif",
-    "prop_reconnaitre",
-  ],
   algebre_defi: [
     "algebre_nombre_inconnu",
     "algebre_schema_barre",
-    "algebre_relation",
     "probleme_plusieurs_etapes",
   ],
 
@@ -168,13 +183,12 @@ const supportLinks: Record<string, string[]> = {
   // PROPORTIONNALITÉ
   // ============================================================
 
-  prop_reconnaitre: ["tableau_lire", "multiplication_table"],
+  prop_reconnaitre: ["tableau_lire", "tables_melangees"],
   prop_fois_plus: ["multiplication_mental", "prop_reconnaitre"],
   prop_fois_moins: ["division_sens", "prop_reconnaitre"],
-  prop_tableau: ["tableau_completer", "multiplication_mental"],
-  prop_coefficient: ["division_sens", "multiplication_mental"],
+  prop_tableau_simple: ["tableau_completer", "multiplication_mental"],
   prop_probleme: ["probleme_une_etape", "tableau_lire"],
-  prop_defi: ["probleme_plusieurs_etapes", "prop_tableau"],
+  prop_defi: ["probleme_plusieurs_etapes", "prop_tableau_simple"],
 
   // ============================================================
   // LONGUEURS
@@ -218,7 +232,7 @@ const supportLinks: Record<string, string[]> = {
   // ============================================================
 
   duree_lire: ["entier_lire"],
-  duree_convertir: ["multiplication_table"],
+  duree_convertir: ["table_6", "table_10"],
   duree_calculer: ["calcul_addition_posee", "calcul_soustraction_posee"],
   duree_probleme: ["probleme_choisir_operation"],
   duree_defi: ["probleme_plusieurs_etapes"],
@@ -242,7 +256,7 @@ const supportLinks: Record<string, string[]> = {
 
   aire_comprendre: ["longueur_comparer"],
   aire_unite: ["aire_comprendre"],
-  aire_carre_rectangle: ["multiplication_table", "figure_quadrilatere"],
+  aire_carre_rectangle: ["tables_melangees", "figure_quadrilatere"],
   aire_composer: [
     "calcul_addition_posee",
     "calcul_soustraction_posee",
@@ -349,7 +363,7 @@ const supportLinks: Record<string, string[]> = {
   algo_logique: ["suite_regle", "algebre_motif"],
   algo_deplacement: ["reperage_deplacement"],
   algo_programme: ["algo_instruction", "algo_deplacement"],
-  algo_repetition: ["multiplication_table", "suite_regle"],
+  algo_repetition: ["tables_melangees", "suite_regle"],
   algo_defi: ["algo_programme", "probleme_une_etape"],
 };
 
