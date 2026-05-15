@@ -20,6 +20,9 @@ import { anglesBank } from "./angles.bank";
 import { reperageBank } from "./reperage.bank";
 import { droitesBank } from "./droites.bank";
 
+import { tableauxBank} from "./tableaux.bank"
+import { graphiquesBank} from "./graphiques.bank"
+
 import { figuresPlanesBank } from "./figures-planes.bank";
 import { symetrieBank } from "./symetrie.bank";
 import { solidesBank } from "./solides.bank";
@@ -44,6 +47,8 @@ export const mathsCm2QuestionBank: TutorBankItemV4[] = [
   ...anglesBank,
   ...reperageBank,
   ...droitesBank,
+  ...tableauxBank,
+  ...graphiquesBank,
 
   ...figuresPlanesBank,
   ...symetrieBank,
