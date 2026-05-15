@@ -27,6 +27,7 @@ import DureeCanvas from "./DureeCanvas";
 import ReperageCanvas from "./ReperageCanvas";
 import DroitesCanvas from "./DroitesCanvas";
 import CercleCanvas from "./CercleCanvas";
+import MasseCanvas from "./MasseCanvas";
 
 type Props = {
   figure?: CanvasFigure | null;
@@ -98,7 +99,7 @@ export default function CanvasRenderer({ figure }: Props) {
 
     case "duree":
       return <DureeCanvas figure={figure} />;
-    
+
     case "reperage":
       return <ReperageCanvas figure={figure} />;
 
@@ -107,6 +108,10 @@ export default function CanvasRenderer({ figure }: Props) {
 
     case "cercle":
       return <CercleCanvas figure={figure} />;
+
+    case "masse":
+      return <MasseCanvas figure={figure} />;
+
     default:
       return null;
   }

@@ -25,8 +25,7 @@ import { figuresPlanesBank } from "./figures-planes.bank";
 import { symetrieBank } from "./symetrie.bank";
 import { solidesBank } from "./solides.bank";
 import { algorithmiqueBank } from "./algorithmique.bank";
-
-
+import { massesBank} from "./masses.bank"
 
 export const mathsCm2QuestionBank: TutorBankItemV4[] = [
   ...proportionnaliteBank,
@@ -55,6 +54,8 @@ export const mathsCm2QuestionBank: TutorBankItemV4[] = [
   ...figuresPlanesBank,
   ...symetrieBank,
   ...solidesBank,
+
+  ...massesBank,
 ];
 
 export function getMathCm2QuestionBank(args?: {

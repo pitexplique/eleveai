@@ -54,6 +54,8 @@ export type {
   CercleCanvasData,
   CercleCanvasPoint,
   CercleCanvasPointLabel,
+  MasseCanvasObject,
+  MasseCanvasData,
 } from "./types_canvas";
 
 import type { CanvasFigure } from "./types_canvas";

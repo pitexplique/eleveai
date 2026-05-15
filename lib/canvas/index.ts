@@ -24,4 +24,5 @@ export { default as DureeCanvas } from "./DureeCanvas";
 export { default as ReperageCanvas } from "./ReperageCanvas";
 export { default as DroitesCanvas } from "./DroitesCanvas";
 export { default as CercleCanvas } from "./CercleCanvas";
+export { default as MasseCanvas } from "./MasseCanvas";
 

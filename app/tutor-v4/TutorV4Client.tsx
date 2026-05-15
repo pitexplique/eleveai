@@ -32,7 +32,8 @@ import {
   SuiteCanvas,
   DureeCanvas,
   ReperageCanvas,
-  DroitesCanvas
+  DroitesCanvas,
+  MasseCanvas
 } from "@/lib/canvas";
 
 import {
@@ -277,6 +278,10 @@ if (canvas.kind === "reperage") {
 
 if (canvas.kind === "droites") {
   return <DroitesCanvas figure={canvas} />;
+}
+
+if (canvas.kind === "masse") {
+  return <MasseCanvas figure={canvas} />;
 }
   return null;
 }

@@ -1053,6 +1053,47 @@ export type CercleCanvasData = {
   };
 };
 
+// ============================================================
+// MASSES
+// ============================================================
+
+export type MasseCanvasObject = {
+  label: string;
+  icon?: string;
+  masse?: string;
+  grammes?: number;
+};
+
+export type MasseCanvasData = {
+  kind: "masse";
+
+  variant: "objets" | "balance" | "conversion" | "estimation";
+
+  objets?: MasseCanvasObject[];
+
+  gauche?: MasseCanvasObject;
+  droite?: MasseCanvasObject;
+
+  from?: string;
+  to?: string;
+
+  objet?: MasseCanvasObject;
+  choix?: string[];
+
+  display?: {
+    showMasses?: boolean;
+    showLabels?: boolean;
+    showComparison?: boolean;
+  };
+
+  questionLabel?: string;
+
+  size?: {
+    width?: number;
+    height?: number;
+  };
+};
+
 export type CanvasFigure =
   | TriangleCanvasData
   | QuadrilatereCanvasData
@@ -1077,4 +1118,5 @@ export type CanvasFigure =
   | DureeCanvasData
   | ReperageCanvasData
   | DroitesCanvasData
-  | CercleCanvasData;
+  | CercleCanvasData
+  | MasseCanvasData;
