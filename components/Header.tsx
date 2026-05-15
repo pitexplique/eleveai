@@ -83,36 +83,7 @@ export default function Header() {
             <Home className="h-4 w-4 text-cyan-300" />
             Accueil
           </Link>
-
-          <Link
-            href="/lecon-du-jour"
-            className={`relative ${linkClass(
-              isActive(pathname, "/lecon-du-jour")
-            )}`}
-          >
-            <Flame className="h-4 w-4 text-orange-300" />
-            Leçon du jour
-            <span className="absolute -right-2 -top-2 rounded-full bg-red-500 px-1.5 text-[10px] text-white">
-              🔥
-            </span>
-          </Link>
-
-          <Link
-            href="/calcul-rapide"
-            className={linkClass(isActive(pathname, "/calcul-rapide"))}
-          >
-            <Target className="h-4 w-4 text-green-300" />
-            Calcul rapide
-          </Link>
-
-          <Link
-            href="/probleme-du-jour"
-            className={linkClass(isActive(pathname, "/probleme-du-jour"))}
-          >
-            <Puzzle className="h-4 w-4 text-pink-300" />
-            Problème
-          </Link>
-
+    
           <Link
             href="/coach-maths-ia"
             className={linkClass(isActive(pathname, "/coach-maths-ia"))}
@@ -130,6 +101,14 @@ export default function Header() {
           </Link>
 
           <Link
+            href="/calcul-rapide"
+            className={linkClass(isActive(pathname, "/calcul-rapide"))}
+          >
+            <Target className="h-4 w-4 text-green-300" />
+            Calcul rapide
+          </Link>
+
+          <Link
             href="/concours-general"
             className={`relative ${linkClass(
               isActive(pathname, "/concours-general")
@@ -141,6 +120,28 @@ export default function Header() {
               new
             </span>
           </Link>
+
+          <Link
+            href="/lecon-du-jour"
+            className={`relative ${linkClass(isActive(pathname, "/lecon-du-jour")
+            )}`}
+          >
+            <Flame className="h-4 w-4 text-orange-300" />
+            Leçon du jour
+            <span className="absolute -right-2 -top-2 rounded-full bg-red-500 px-1.5 text-[10px] text-white">
+              🔥
+            </span>
+          </Link>
+
+
+          <Link
+            href="/probleme-du-jour"
+            className={linkClass(isActive(pathname, "/probleme-du-jour"))}
+          >
+            <Puzzle className="h-4 w-4 text-pink-300" />
+            Problème
+          </Link>
+
 
           <Link
             href="/optimiseur"
@@ -205,6 +206,31 @@ export default function Header() {
             </Link>
 
             <Link
+              href="/coach-maths-ia"
+              className={mobileLinkClass(isActive(pathname, "/coach-maths-ia"))}
+            >
+              <Brain className="h-4 w-4 text-orange-300" />
+              Coach Maths IA
+            </Link>
+
+
+            <Link
+              href="/parcours"
+              className={mobileLinkClass(isActive(pathname, "/parcours"))}
+            >
+              <Route className="h-4 w-4 text-purple-300" />
+              Parcours
+            </Link>
+
+            <Link
+              href="/calcul-rapide"
+              className={mobileLinkClass(isActive(pathname, "/calcul-rapide"))}
+            >
+              <Target className="h-4 w-4 text-green-300" />
+              Calcul rapide
+            </Link>
+
+            <Link
               href="/concours-general"
               className="flex items-center justify-center gap-3 rounded-2xl bg-gradient-to-r from-amber-300 to-orange-400 px-4 py-4 font-black text-slate-950 shadow-lg"
             >
@@ -221,14 +247,6 @@ export default function Header() {
             </Link>
 
             <Link
-              href="/calcul-rapide"
-              className={mobileLinkClass(isActive(pathname, "/calcul-rapide"))}
-            >
-              <Target className="h-4 w-4 text-green-300" />
-              Calcul rapide
-            </Link>
-
-            <Link
               href="/probleme-du-jour"
               className={mobileLinkClass(
                 isActive(pathname, "/probleme-du-jour")
@@ -237,23 +255,6 @@ export default function Header() {
               <Puzzle className="h-4 w-4 text-pink-300" />
               Problème du jour
             </Link>
-
-            <Link
-              href="/coach-maths-ia"
-              className={mobileLinkClass(isActive(pathname, "/coach-maths-ia"))}
-            >
-              <Brain className="h-4 w-4 text-orange-300" />
-              Coach Maths IA
-            </Link>
-
-            <Link
-              href="/parcours"
-              className={mobileLinkClass(isActive(pathname, "/parcours"))}
-            >
-              <Route className="h-4 w-4 text-purple-300" />
-              Parcours
-            </Link>
-
             <Link
               href="/optimiseur"
               className={mobileLinkClass(isActive(pathname, "/optimiseur"))}
