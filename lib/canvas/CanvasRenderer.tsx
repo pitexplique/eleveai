@@ -32,6 +32,7 @@ import ContenanceCanvas from "./ContenanceCanvas";
 import EchelleCanvas from "./EchelleCanvas";
 import SchemaBarreCanvas from "./SchemaBarreCanvas";
 
+
 type Props = {
   figure?: CanvasFigure | null;
 };
@@ -123,6 +124,9 @@ export default function CanvasRenderer({ figure }: Props) {
 
     case "schema_barre":
       return <SchemaBarreCanvas  figure={figure} />;      
+
+    case "number_line":
+    return <DroiteGradueeCanvas figure={figure} />;
 
     default:
       return null;

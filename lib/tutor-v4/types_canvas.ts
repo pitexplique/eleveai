@@ -1224,6 +1224,39 @@ export type SchemaBarreCanvasData = {
   };
 };
 
+// ============================================================
+// Droite graduée / Number line
+// ============================================================
+
+export type DroiteGradueePoint = {
+  value: number;
+  label?: string;
+  color?: string;
+};
+
+export type DroiteGradueeCanvasData = {
+  kind: "number_line";
+
+  min?: number;
+  max?: number;
+  step?: number;
+
+  points?: DroiteGradueePoint[];
+
+  display?: {
+    showTicks?: boolean;
+    showValues?: boolean;
+    showPoints?: boolean;
+    showPointLabels?: boolean;
+    showZero?: boolean;
+  };
+
+  size?: {
+    width?: number;
+    height?: number;
+  };
+};
+
 export type CanvasFigure =
   | TriangleCanvasData
   | QuadrilatereCanvasData
@@ -1252,4 +1285,5 @@ export type CanvasFigure =
   | MasseCanvasData
   | ContenanceCanvasData
   | SchemaBarreCanvasData
+  | DroiteGradueeCanvasData
   | EchelleCanvasData;

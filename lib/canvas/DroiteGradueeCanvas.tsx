@@ -30,6 +30,20 @@ function valueToX(
   return leftPad + ((value - min) / (max - min)) * usableWidth;
 }
 
+function formatTick(value: number) {
+  const rounded = Math.round(value * 100) / 100;
+
+  if (Number.isInteger(rounded)) {
+    return String(rounded);
+  }
+
+  return rounded
+    .toFixed(3)
+    .replace(/0+$/, "")
+    .replace(/\.$/, "")
+    .replace(".", ",");
+}
+
 export default function DroiteGradueeCanvas({ figure }: Props) {
   if (figure.kind !== "number_line") return null;
 
@@ -56,7 +70,7 @@ export default function DroiteGradueeCanvas({ figure }: Props) {
   const safeStep = step > 0 ? step : 1;
 
   for (let v = min; v <= max + 1e-9; v += safeStep) {
-    ticks.push(Number(v.toFixed(10)));
+    ticks.push(Math.round(v * 1000000) / 1000000);
   }
 
   const axisStartX = valueToX(min, min, max, leftPad, rightPad, width);
@@ -80,17 +94,23 @@ export default function DroiteGradueeCanvas({ figure }: Props) {
           strokeLinecap="round"
         />
 
-        {/* Flèches */}
+        {/* Flèche droite */}
         <path
-          d={`M ${axisEndX - 10} ${axisY - 6} L ${axisEndX} ${axisY} L ${axisEndX - 10} ${axisY + 6}`}
+          d={`M ${axisEndX - 10} ${axisY - 6} L ${axisEndX} ${axisY} L ${
+            axisEndX - 10
+          } ${axisY + 6}`}
           fill="none"
           stroke="#0f172a"
           strokeWidth={2.4}
           strokeLinecap="round"
           strokeLinejoin="round"
         />
+
+        {/* Flèche gauche */}
         <path
-          d={`M ${axisStartX + 10} ${axisY - 6} L ${axisStartX} ${axisY} L ${axisStartX + 10} ${axisY + 6}`}
+          d={`M ${axisStartX + 10} ${axisY - 6} L ${axisStartX} ${axisY} L ${
+            axisStartX + 10
+          } ${axisY + 6}`}
           fill="none"
           stroke="#0f172a"
           strokeWidth={2.4}
@@ -117,7 +137,8 @@ export default function DroiteGradueeCanvas({ figure }: Props) {
                   strokeWidth={2}
                   strokeLinecap="round"
                 />
-                {showValues && (
+
+                {showValues ? (
                   <text
                     x={x}
                     y={axisY + 26}
@@ -129,9 +150,9 @@ export default function DroiteGradueeCanvas({ figure }: Props) {
                     strokeWidth="2"
                     paintOrder="stroke"
                   >
-                    {Number.isInteger(tick) ? String(tick) : String(tick).replace(".", ",")}
+                    {formatTick(tick)}
                   </text>
-                )}
+                ) : null}
               </g>
             );
           })}
@@ -145,7 +166,6 @@ export default function DroiteGradueeCanvas({ figure }: Props) {
 
             return (
               <g key={`point-${index}-${pt.label ?? pt.value}`}>
-                {/* segment vertical */}
                 <line
                   x1={x}
                   y1={axisY}
@@ -156,15 +176,8 @@ export default function DroiteGradueeCanvas({ figure }: Props) {
                   strokeLinecap="round"
                 />
 
-                {/* point */}
-                <circle
-                  cx={x}
-                  cy={axisY - 24}
-                  r={5}
-                  fill={pointColor}
-                />
+                <circle cx={x} cy={axisY - 24} r={5} fill={pointColor} />
 
-                {/* label du point */}
                 {showPointLabels && pt.label ? (
                   <>
                     <rect

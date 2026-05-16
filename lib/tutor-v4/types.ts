@@ -59,7 +59,8 @@ export type {
   ContenanceCanvasData,
   ContenanceCanvasObject,
   EchelleCanvasData,
-  SchemaBarreCanvasData
+  SchemaBarreCanvasData,
+  DroiteGradueeCanvasData
 } from "./types_canvas";
 
 import type { CanvasFigure } from "./types_canvas";
