@@ -3126,8 +3126,8 @@ export const calculBank: TutorBankItemV4[] = [
       const cases: [string, string, string][] = [
         ["2,4", "1,3", "3,7"],
         ["3,2", "2,5", "5,7"],
-        ["1,75", "2,4", "4,15"],
-        ["4,6", "1,25", "5,85"],
+        ["1,75", "2,40", "4,15"],
+        ["4,60", "1,25", "5,85"],
       ];
 
       const [a, b, result] = randomChoice(cases);
@@ -3235,8 +3235,8 @@ export const calculBank: TutorBankItemV4[] = [
     ],
     generate: () => {
       const cases: [string, string, string][] = [
-        ["2,4", "1,35", "3,75"],
-        ["3,6", "2,25", "5,85"],
+        ["2,40", "1,35", "3,75"],
+        ["3,60", "2,25", "5,85"],
         ["1,75", "2,5", "4,25"],
         ["4,8", "1,15", "5,95"],
       ];
