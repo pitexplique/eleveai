@@ -30,6 +30,7 @@ import CercleCanvas from "./CercleCanvas";
 import MasseCanvas from "./MasseCanvas";
 import ContenanceCanvas from "./ContenanceCanvas";
 import EchelleCanvas from "./EchelleCanvas";
+import SchemaBarreCanvas from "./SchemaBarreCanvas";
 
 type Props = {
   figure?: CanvasFigure | null;
@@ -119,6 +120,10 @@ export default function CanvasRenderer({ figure }: Props) {
 
     case "echelle":
       return <EchelleCanvas figure={figure} />;
+
+    case "schema_barre":
+      return <SchemaBarreCanvas  figure={figure} />;      
+
     default:
       return null;
   }

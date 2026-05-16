@@ -157,6 +157,7 @@ export type StatGraphKind = "barres" | "batons" | "camembert";
 export type StatGraphCanvasData = {
   kind: "stat_graph";
   graphType: StatGraphKind;
+  title?: string;
   size?: { width?: number; height?: number };
   data: {
     label: string;
@@ -1173,6 +1174,56 @@ export type EchelleCanvasData = {
   };
 };
 
+// ============================================================
+// SchemaBarreCanvas
+// ============================================================
+
+export type SchemaBarrePart = {
+  label: string;
+  value?: string;
+  unknown?: boolean;
+  color?: string;
+};
+
+export type SchemaBarreCanvasData = {
+  kind: "schema_barre";
+
+  title?: string;
+
+  /**
+   * Valeur totale affichée au-dessus de la barre.
+   * Exemple : "48", "total", "?"
+   */
+  total?: string;
+
+  /**
+   * Parties de la barre.
+   * Exemple :
+   * [
+   *   { label: "Déjà", value: "18" },
+   *   { label: "Manque", unknown: true }
+   * ]
+   */
+  parts: SchemaBarrePart[];
+
+  /**
+   * Phrase courte affichée sous le schéma.
+   */
+  questionLabel?: string;
+
+  display?: {
+    showTotal?: boolean;
+    showPartLabels?: boolean;
+    showValues?: boolean;
+    showQuestion?: boolean;
+  };
+
+  size?: {
+    width?: number;
+    height?: number;
+  };
+};
+
 export type CanvasFigure =
   | TriangleCanvasData
   | QuadrilatereCanvasData
@@ -1200,4 +1251,5 @@ export type CanvasFigure =
   | CercleCanvasData
   | MasseCanvasData
   | ContenanceCanvasData
+  | SchemaBarreCanvasData
   | EchelleCanvasData;

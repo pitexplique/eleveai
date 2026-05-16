@@ -15,3 +15,4 @@ export { default as TableauDonneesCanvas } from "./TableauDonneesCanvas";
 export { default as TableauProportionnaliteCanvas } from "./TableauProportionnaliteCanvas";
 export { default as FractionCanvas } from "./FractionCanvas";
 export { default as ScratchCanvas } from "./ScratchCanvas";
+export { default as SchemaBarreCanvas } from "../../canvas/SchemaBarreCanvas";

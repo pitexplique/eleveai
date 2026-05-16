@@ -27,4 +27,5 @@ export { default as CercleCanvas } from "./CercleCanvas";
 export { default as MasseCanvas } from "./MasseCanvas";
 export { default as ContenanceCanvas } from "./ContenanceCanvas";
 export { default as EchelleCanvas } from "./EchelleCanvas";
+export { default as SchemaBarreCanvas } from "./SchemaBarreCanvas";
 

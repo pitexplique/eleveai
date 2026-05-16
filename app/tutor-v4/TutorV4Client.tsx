@@ -36,6 +36,7 @@ import {
   MasseCanvas,
   ContenanceCanvas,
   EchelleCanvas,
+  SchemaBarreCanvas
 } from "@/lib/canvas";
 
 import {
@@ -293,6 +294,11 @@ if (canvas.kind === "contenance") {
 if (canvas.kind === "echelle") {
   return <EchelleCanvas figure={canvas} />;
 }
+
+if (canvas.kind === "schema_barre") {
+  return <SchemaBarreCanvas figure={canvas} />;
+}
+
   return null;
 }
 

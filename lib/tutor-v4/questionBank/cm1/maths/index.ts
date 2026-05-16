@@ -11,6 +11,7 @@ import { fractionsBank } from "./fractions.bank";
 import { decimauxBank } from "./decimaux.bank";
 import { calculBank } from "./calcul.bank";
 import { problemesBank } from "./problemes.bank"
+import { algebreBank } from "./algebre.bank"
 
 export const mathsCm1QuestionBank: TutorBankItemV4[] = [
   ...nombresEntiersBank,
@@ -22,6 +23,7 @@ export const mathsCm1QuestionBank: TutorBankItemV4[] = [
   ...decimauxBank,
   ...calculBank,
   ...problemesBank,
+  ...algebreBank
 ];
 
 export function getMathCm1QuestionBank(args?: {

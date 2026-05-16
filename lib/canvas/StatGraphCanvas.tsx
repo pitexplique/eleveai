@@ -47,6 +47,12 @@ export default function StatGraphCanvas({ figure }: Props) {
 
   return (
     <div className="mx-auto w-full max-w-[340px] rounded-xl border border-slate-200 bg-white p-2 shadow-sm">
+      {figure.title ? (
+        <p className="mb-2 text-center text-sm font-bold text-slate-800">
+          {figure.title}
+        </p>
+      ) : null}
+
       <svg
         viewBox={`0 0 ${width} ${height}`}
         className="block h-auto w-full"
