@@ -13,7 +13,8 @@ import { calculBank } from "./calcul.bank";
 import { problemesBank } from "./problemes.bank"
 import { algebreBank } from "./algebre.bank"
 import { proportionnaliteBank } from "./proportionnalite.bank";
-
+import { longueurBank } from "./longueur.bank"
+ 
 export const mathsCm1QuestionBank: TutorBankItemV4[] = [
   ...nombresEntiersBank,
   ...suitesBank,
@@ -25,7 +26,8 @@ export const mathsCm1QuestionBank: TutorBankItemV4[] = [
   ...calculBank,
   ...problemesBank,
   ...algebreBank,
-  ...proportionnaliteBank
+  ...proportionnaliteBank,
+  ...longueurBank
 ];
 
 export function getMathCm1QuestionBank(args?: {
