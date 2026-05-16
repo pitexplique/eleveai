@@ -4,14 +4,18 @@ import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 
 import { nombresEntiersBank } from "./nombres-entiers.bank";
 import { suitesBank } from "./suites.bank";
-import { multiplicationBank } from "./multiplication.bank";
 import { MultiplicationTablesBank } from "./multiplication-table.bank";
+import { multiplicationBank } from "./multiplication.bank";
+import { divisionBank } from "./division.bank";
+import { fractionsBank } from "./fractions.bank";
 
 export const mathsCm1QuestionBank: TutorBankItemV4[] = [
   ...nombresEntiersBank,
   ...suitesBank,
-  ...multiplicationBank,
   ...MultiplicationTablesBank,
+  ...multiplicationBank,
+  ...divisionBank,
+  ...fractionsBank,
 ];
 
 export function getMathCm1QuestionBank(args?: {
