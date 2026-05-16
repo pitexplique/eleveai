@@ -10,6 +10,7 @@ import { divisionBank } from "./division.bank";
 import { fractionsBank } from "./fractions.bank";
 import { decimauxBank } from "./decimaux.bank";
 import { calculBank } from "./calcul.bank";
+import { problemesBank } from "./problemes.bank"
 
 export const mathsCm1QuestionBank: TutorBankItemV4[] = [
   ...nombresEntiersBank,
@@ -20,6 +21,7 @@ export const mathsCm1QuestionBank: TutorBankItemV4[] = [
   ...fractionsBank,
   ...decimauxBank,
   ...calculBank,
+  ...problemesBank,
 ];
 
 export function getMathCm1QuestionBank(args?: {
