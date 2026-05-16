@@ -8,6 +8,7 @@ import { MultiplicationTablesBank } from "./multiplication-table.bank";
 import { multiplicationBank } from "./multiplication.bank";
 import { divisionBank } from "./division.bank";
 import { fractionsBank } from "./fractions.bank";
+import { decimauxBank } from "./decimaux.bank";
 
 export const mathsCm1QuestionBank: TutorBankItemV4[] = [
   ...nombresEntiersBank,
@@ -16,6 +17,7 @@ export const mathsCm1QuestionBank: TutorBankItemV4[] = [
   ...multiplicationBank,
   ...divisionBank,
   ...fractionsBank,
+  ...decimauxBank,
 ];
 
 export function getMathCm1QuestionBank(args?: {
