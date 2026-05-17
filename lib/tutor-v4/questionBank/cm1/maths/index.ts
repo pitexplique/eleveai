@@ -15,9 +15,11 @@ import { algebreBank } from "./algebre.bank";
 import { proportionnaliteBank } from "./proportionnalite.bank";
 import { longueurBank } from "./longueur.bank";
 import { masseBank } from "./masse.bank";
-import { contenanceBank} from "./contenance.bank";
+import { contenanceBank } from "./contenance.bank";
 import { dureesBank } from "./durees.bank";
- 
+import { perimetresBank } from "./perimetres.bank"; 
+import { airesBank } from "./aires.bank";
+
 export const mathsCm1QuestionBank: TutorBankItemV4[] = [
   ...nombresEntiersBank,
   ...suitesBank,
@@ -34,6 +36,8 @@ export const mathsCm1QuestionBank: TutorBankItemV4[] = [
   ...masseBank,
   ...contenanceBank,
   ...dureesBank,
+  ...perimetresBank,
+  ...airesBank,
 ];
 
 export function getMathCm1QuestionBank(args?: {
