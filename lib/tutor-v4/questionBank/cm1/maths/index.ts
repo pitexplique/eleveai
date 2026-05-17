@@ -19,6 +19,7 @@ import { contenanceBank } from "./contenance.bank";
 import { dureesBank } from "./durees.bank";
 import { perimetresBank } from "./perimetres.bank"; 
 import { airesBank } from "./aires.bank";
+import { anglesBank } from "./angles.bank";
 
 export const mathsCm1QuestionBank: TutorBankItemV4[] = [
   ...nombresEntiersBank,
@@ -38,6 +39,7 @@ export const mathsCm1QuestionBank: TutorBankItemV4[] = [
   ...dureesBank,
   ...perimetresBank,
   ...airesBank,
+  ...anglesBank,
 ];
 
 export function getMathCm1QuestionBank(args?: {
