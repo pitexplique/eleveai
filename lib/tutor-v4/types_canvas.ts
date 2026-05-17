@@ -1257,6 +1257,8 @@ export type DroiteGradueeCanvasData = {
   };
 };
 
+
+
 export type CanvasFigure =
   | TriangleCanvasData
   | QuadrilatereCanvasData

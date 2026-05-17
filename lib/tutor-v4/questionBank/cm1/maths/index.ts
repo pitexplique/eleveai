@@ -10,10 +10,13 @@ import { divisionBank } from "./division.bank";
 import { fractionsBank } from "./fractions.bank";
 import { decimauxBank } from "./decimaux.bank";
 import { calculBank } from "./calcul.bank";
-import { problemesBank } from "./problemes.bank"
-import { algebreBank } from "./algebre.bank"
+import { problemesBank } from "./problemes.bank";
+import { algebreBank } from "./algebre.bank";
 import { proportionnaliteBank } from "./proportionnalite.bank";
-import { longueurBank } from "./longueur.bank"
+import { longueurBank } from "./longueur.bank";
+import { masseBank } from "./masse.bank";
+import { contenanceBank} from "./contenance.bank";
+import { dureesBank } from "./durees.bank";
  
 export const mathsCm1QuestionBank: TutorBankItemV4[] = [
   ...nombresEntiersBank,
@@ -27,7 +30,10 @@ export const mathsCm1QuestionBank: TutorBankItemV4[] = [
   ...problemesBank,
   ...algebreBank,
   ...proportionnaliteBank,
-  ...longueurBank
+  ...longueurBank,
+  ...masseBank,
+  ...contenanceBank,
+  ...dureesBank,
 ];
 
 export function getMathCm1QuestionBank(args?: {
