@@ -20,6 +20,8 @@ import { dureesBank } from "./durees.bank";
 import { perimetresBank } from "./perimetres.bank"; 
 import { airesBank } from "./aires.bank";
 import { anglesBank } from "./angles.bank";
+import { reperageBank } from "./reperage.bank";
+import { droitesBank } from "./droites.bank";
 
 export const mathsCm1QuestionBank: TutorBankItemV4[] = [
   ...nombresEntiersBank,
@@ -40,6 +42,8 @@ export const mathsCm1QuestionBank: TutorBankItemV4[] = [
   ...perimetresBank,
   ...airesBank,
   ...anglesBank,
+  ...reperageBank,
+  ...droitesBank,
 ];
 
 export function getMathCm1QuestionBank(args?: {
