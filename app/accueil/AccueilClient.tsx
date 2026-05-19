@@ -1,5 +1,6 @@
 "use client";
 
+import { useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -115,6 +116,29 @@ const besoins = [
 ];
 
 export default function AccueilPage() {
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  async function toggleAudio() {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    if (isPlaying) {
+      audio.pause();
+      audio.currentTime = 0;
+      setIsPlaying(false);
+      return;
+    }
+
+    try {
+      audio.currentTime = 0;
+      await audio.play();
+      setIsPlaying(true);
+    } catch {
+      setIsPlaying(false);
+    }
+  }
+
   return (
     <main className="min-h-screen bg-[#062A4F] text-white">
       {/* HERO IMAGE */}
@@ -139,6 +163,37 @@ export default function AccueilPage() {
             />
 
             <div className="absolute inset-0 bg-gradient-to-b from-black/5 via-transparent to-[#061B33]/20" />
+
+            <audio
+              ref={audioRef}
+              src="/audio/accueil/presentation.mp3"
+              preload="none"
+              onEnded={() => setIsPlaying(false)}
+              onPause={() => setIsPlaying(false)}
+              onPlay={() => setIsPlaying(true)}
+            />
+
+            <button
+              type="button"
+              onClick={toggleAudio}
+              aria-label="Écouter le message de bord EleveAI"
+              className="
+                absolute right-4 top-4 z-20
+                flex items-center gap-2
+                rounded-full border border-white/40
+                bg-white/90 px-4 py-2
+                text-sm font-black text-[#041B33]
+                shadow-2xl backdrop-blur-md
+                transition-all duration-300
+                hover:scale-105 hover:bg-white
+                focus:outline-none focus:ring-4 focus:ring-cyan-300/80
+              "
+            >
+              <span className="text-lg">{isPlaying ? "⏹️" : "🔊"}</span>
+              <span className="hidden sm:inline">
+                {isPlaying ? "Stop" : "Message de bord"}
+              </span>
+            </button>
           </div>
         </div>
       </section>
