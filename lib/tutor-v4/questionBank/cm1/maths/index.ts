@@ -17,13 +17,15 @@ import { longueurBank } from "./longueur.bank";
 import { masseBank } from "./masse.bank";
 import { contenanceBank } from "./contenance.bank";
 import { dureesBank } from "./durees.bank";
-import { perimetresBank } from "./perimetres.bank"; 
+import { perimetresBank } from "./perimetres.bank";
 import { airesBank } from "./aires.bank";
 import { anglesBank } from "./angles.bank";
 import { reperageBank } from "./reperage.bank";
 import { droitesBank } from "./droites.bank";
+
 import { tableauxBank } from "./tableaux.bank";
 import { graphiquesBank } from "./graphiques.bank";
+import { probabilitesBank } from "./probabilites.bank";
 
 export const mathsCm1QuestionBank: TutorBankItemV4[] = [
   ...nombresEntiersBank,
@@ -46,8 +48,10 @@ export const mathsCm1QuestionBank: TutorBankItemV4[] = [
   ...anglesBank,
   ...reperageBank,
   ...droitesBank,
+
   ...tableauxBank,
   ...graphiquesBank,
+  ...probabilitesBank,
 ];
 
 export function getMathCm1QuestionBank(args?: {
