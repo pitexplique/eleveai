@@ -164,67 +164,6 @@ export default function AccueilPage() {
 
             <div className="absolute inset-0 bg-gradient-to-b from-black/5 via-transparent to-[#061B33]/20" />
 
-            {/* AUDIO */}
-            <audio
-              ref={audioRef}
-              src="/audio/accueil/presentation.mp3"
-              preload="none"
-              onEnded={() => setIsPlaying(false)}
-              onPause={() => setIsPlaying(false)}
-              onPlay={() => setIsPlaying(true)}
-            />
-
-            {/* BOUTON SON + CHIP ÉLÈVES */}
-            <div className="absolute right-4 top-4 z-20 flex flex-col items-end gap-2">
-              <button
-                type="button"
-                onClick={toggleAudio}
-                aria-label="Écouter le message de bord EleveAI"
-                className="
-                  flex items-center gap-2
-                  rounded-full border border-white/40
-                  bg-white/90 px-4 py-2
-                  text-sm font-black text-[#041B33]
-                  shadow-2xl backdrop-blur-md
-                  transition-all duration-300
-                  hover:scale-105 hover:bg-white
-                  focus:outline-none focus:ring-4 focus:ring-cyan-300/80
-                "
-              >
-                <span className="text-lg">{isPlaying ? "⏹️" : "🔊"}</span>
-                <span className="hidden sm:inline">
-                  {isPlaying ? "Stop" : "Message de bord"}
-                </span>
-              </button>
-
-              <div
-                className="
-                  flex items-center gap-2
-                  rounded-full border border-white/35
-                  bg-white/85 px-3 py-1.5
-                  text-xs font-black text-[#041B33]
-                  shadow-xl backdrop-blur-md
-                "
-              >
-                <div className="flex -space-x-2">
-                  <div className="flex h-7 w-7 items-center justify-center rounded-full border-2 border-white bg-pink-400 text-sm text-white shadow">
-                    👧
-                  </div>
-                  <div className="flex h-7 w-7 items-center justify-center rounded-full border-2 border-white bg-fuchsia-500 text-sm text-white shadow">
-                    👧
-                  </div>
-                  <div className="flex h-7 w-7 items-center justify-center rounded-full border-2 border-white bg-rose-500 text-sm text-white shadow">
-                    👧
-                  </div>
-                </div>
-
-                <span className="hidden sm:inline">
-                  Imaginé par 3 filles de 6e
-                </span>
-
-                <span className="sm:hidden">3 filles de 6e</span>
-              </div>
-            </div>
           </div>
         </div>
       </section>
