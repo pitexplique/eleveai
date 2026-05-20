@@ -3,7 +3,9 @@
 import type { CalculRapideItem } from "../../types";
 
 export const problemesTemplates4e: CalculRapideItem[] = [
-  // 🔵 RÉACTIVATION conversions
+  // ============================================================
+  // SEMAINE MESURES
+  // ============================================================
 
   {
     id: "4e_template_randonnee_001",
@@ -24,8 +26,7 @@ export const problemesTemplates4e: CalculRapideItem[] = [
     },
     answerRule: "km * 1000",
     hint: "1 km = 1000 m.",
-    explanationTemplate:
-      "{{km}} × 1000 = {{answer}} m.",
+    explanationTemplate: "{{km}} × 1000 = {{answer}} m.",
     tags: ["conversion", "longueur", "reunion"],
   },
 
@@ -48,12 +49,9 @@ export const problemesTemplates4e: CalculRapideItem[] = [
     },
     answerRule: "L * 1000",
     hint: "1 L = 1000 mL.",
-    explanationTemplate:
-      "{{L}} × 1000 = {{answer}} mL.",
+    explanationTemplate: "{{L}} × 1000 = {{answer}} mL.",
     tags: ["volume", "contenance"],
   },
-
-  // 🔴 Durées
 
   {
     id: "4e_template_duree_001",
@@ -76,11 +74,9 @@ export const problemesTemplates4e: CalculRapideItem[] = [
     answerRule: "(h * 60) + m",
     hint: "Transforme les heures en minutes puis ajoute.",
     explanationTemplate:
-      "{{h}} h = {{h * 60}} min puis {{h * 60}} + {{m}} = {{answer}} min.",
+      "On transforme les heures en minutes puis on ajoute les minutes : résultat = {{answer}} min.",
     tags: ["duree"],
   },
-
-  // 🔴 Vitesses
 
   {
     id: "4e_template_vitesse_001",
@@ -102,12 +98,9 @@ export const problemesTemplates4e: CalculRapideItem[] = [
     },
     answerRule: "v * t",
     hint: "Distance = vitesse × temps.",
-    explanationTemplate:
-      "{{v}} × {{t}} = {{answer}} km.",
+    explanationTemplate: "{{v}} × {{t}} = {{answer}} km.",
     tags: ["vitesse", "distance"],
   },
-
-  // 🔴 Aires
 
   {
     id: "4e_template_aire_001",
@@ -129,12 +122,9 @@ export const problemesTemplates4e: CalculRapideItem[] = [
     },
     answerRule: "L * l",
     hint: "Aire = longueur × largeur.",
-    explanationTemplate:
-      "{{L}} × {{l}} = {{answer}} m².",
+    explanationTemplate: "{{L}} × {{l}} = {{answer}} m².",
     tags: ["aire", "rectangle"],
   },
-
-  // 🔴 Piège cognitif
 
   {
     id: "4e_template_piege_aire_001",
@@ -162,8 +152,6 @@ export const problemesTemplates4e: CalculRapideItem[] = [
     tags: ["aire", "piege", "unites"],
   },
 
-  // 🔴 Réactivation Pythagore
-
   {
     id: "4e_template_pythagore_001",
     niveau: "4e",
@@ -185,7 +173,137 @@ export const problemesTemplates4e: CalculRapideItem[] = [
     answerRule: "Math.sqrt(a*a + b*b)",
     hint: "Utilise le théorème de Pythagore.",
     explanationTemplate:
-      "{{a}}² + {{b}}² = {{answer}}² donc hypoténuse = {{answer}} cm.",
+      "On utilise Pythagore : hypoténuse = {{answer}} cm.",
     tags: ["pythagore", "triangle"],
+  },
+
+  // ============================================================
+  // SEMAINE 19 - CALCUL LITTÉRAL EXPRESS
+  // ============================================================
+
+  {
+    id: "4e_template_litteral_prix_001",
+    niveau: "4e",
+    type: "probleme",
+    mode: "template",
+    notionId: "expressions_litterales",
+    microId: "litteral_substitution",
+    difficulty: 3,
+    durationSec: 60,
+    media: {
+      text: "Un objet coûte {{x}} €. On en achète {{a}} et on ajoute {{b}} € de frais. Quel est le prix total ?",
+    },
+    template:
+      "Un objet coûte {{x}} €. On en achète {{a}} et on ajoute {{b}} € de frais. Quel est le prix total ?",
+    variables: {
+      x: [2, 3, 4, 5],
+      a: [2, 3, 4, 5],
+      b: [1, 2, 5, 7],
+    },
+    answerRule: "a * x + b",
+    hint: "Le prix total est a × x + b.",
+    explanationTemplate:
+      "{{a}} × {{x}} + {{b}} = {{answer}} €.",
+    tags: ["calcul_litteral", "prix", "substitution"],
+  },
+
+  {
+    id: "4e_template_litteral_abonnement_001",
+    niveau: "4e",
+    type: "probleme",
+    mode: "template",
+    notionId: "expressions_litterales",
+    microId: "litteral_substitution",
+    difficulty: 3,
+    durationSec: 60,
+    media: {
+      text: "Un abonnement coûte {{b}} €, puis {{p}} € par séance. Pour {{x}} séances, combien paie-t-on ?",
+    },
+    template:
+      "Un abonnement coûte {{b}} €, puis {{p}} € par séance. Pour {{x}} séances, combien paie-t-on ?",
+    variables: {
+      b: [5, 8, 10],
+      p: [2, 3, 4],
+      x: [3, 4, 5, 6],
+    },
+    answerRule: "b + p * x",
+    hint: "Prix total = abonnement + prix par séance × nombre de séances.",
+    explanationTemplate:
+      "{{b}} + {{p}} × {{x}} = {{answer}} €.",
+    tags: ["calcul_litteral", "prix", "substitution"],
+  },
+
+  {
+    id: "4e_template_litteral_developper_sacs_001",
+    niveau: "4e",
+    type: "probleme",
+    mode: "template",
+    notionId: "distributivite",
+    microId: "distributivite_developper",
+    difficulty: 3,
+    durationSec: 60,
+    media: {
+      text: "On a {{k}} sacs contenant chacun x billes et {{a}} billes en plus. Développe l’expression {{k}}(x + {{a}}).",
+    },
+    template:
+      "On a {{k}} sacs contenant chacun x billes et {{a}} billes en plus. Développe l’expression {{k}}(x + {{a}}).",
+    variables: {
+      k: [2, 3, 4, 5],
+      a: [2, 3, 4, 5],
+    },
+    answerRule: "k + 'x+' + (k * a)",
+    hint: "Distribue le nombre devant la parenthèse.",
+    explanationTemplate:
+      "{{k}}(x + {{a}}) = {{answer}}.",
+    tags: ["calcul_litteral", "developper"],
+  },
+
+  {
+    id: "4e_template_litteral_factoriser_prix_001",
+    niveau: "4e",
+    type: "probleme",
+    mode: "template",
+    notionId: "factorisation",
+    microId: "factorisation_facteur_commun",
+    difficulty: 3,
+    durationSec: 60,
+    media: {
+      text: "Factorise : {{k}}x + {{n}}.",
+    },
+    template: "Factorise : {{k}}x + {{n}}.",
+    variables: {
+      k: [2, 3, 4, 5, 6],
+      n: [4, 6, 8, 10, 12],
+    },
+    answerRule: "k + '(x+' + (n / k) + ')'",
+    hint: "Mets le facteur commun devant la parenthèse.",
+    explanationTemplate:
+      "On met {{k}} en facteur : {{answer}}.",
+    tags: ["calcul_litteral", "factoriser"],
+  },
+
+  {
+    id: "4e_template_equation_simple_001",
+    niveau: "4e",
+    type: "probleme",
+    mode: "template",
+    notionId: "equations",
+    microId: "equation_simple",
+    difficulty: 3,
+    durationSec: 60,
+    media: {
+      text: "Un nombre augmenté de {{a}} donne {{b}}. Quel est ce nombre ?",
+    },
+    template:
+      "Un nombre augmenté de {{a}} donne {{b}}. Quel est ce nombre ?",
+    variables: {
+      a: [2, 3, 5, 7, 9],
+      b: [10, 12, 15, 18, 20],
+    },
+    answerRule: "b - a",
+    hint: "On cherche x tel que x + a = b.",
+    explanationTemplate:
+      "x = {{b}} - {{a}} = {{answer}}.",
+    tags: ["equation", "calcul_mental"],
   },
 ];

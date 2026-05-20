@@ -3,7 +3,9 @@
 import type { CalculRapideItem } from "../../types";
 
 export const calculsTemplates4e: CalculRapideItem[] = [
-  // 🔵 RÉACTIVATION conversions
+  // ============================================================
+  // SEMAINE MESURES
+  // ============================================================
 
   {
     id: "4e_template_conversion_longueur_001",
@@ -21,8 +23,7 @@ export const calculsTemplates4e: CalculRapideItem[] = [
     },
     answerRule: "n * 1000",
     hint: "1 km = 1000 m.",
-    explanationTemplate:
-      "{{n}} × 1000 = {{answer}} m.",
+    explanationTemplate: "{{n}} × 1000 = {{answer}} m.",
     tags: ["conversion", "longueur", "reactivation"],
   },
 
@@ -42,12 +43,29 @@ export const calculsTemplates4e: CalculRapideItem[] = [
     },
     answerRule: "n * 1000",
     hint: "1 kg = 1000 g.",
-    explanationTemplate:
-      "{{n}} × 1000 = {{answer}} g.",
+    explanationTemplate: "{{n}} × 1000 = {{answer}} g.",
     tags: ["conversion", "masse", "reactivation"],
   },
 
-  // 🔴 Durées
+  {
+    id: "4e_template_conversion_contenance_001",
+    niveau: "4e",
+    type: "calcul",
+    mode: "template",
+    notionId: "grandeurs_mesures",
+    microId: "conversion_contenance",
+    difficulty: 2,
+    durationSec: 20,
+    media: { text: "{{n}} L = ? mL" },
+    template: "{{n}} L = ? mL",
+    variables: {
+      n: [0.75, 1.2, 1.5, 2.25, 3.4],
+    },
+    answerRule: "n * 1000",
+    hint: "1 L = 1000 mL.",
+    explanationTemplate: "{{n}} × 1000 = {{answer}} mL.",
+    tags: ["conversion", "contenance", "volume"],
+  },
 
   {
     id: "4e_template_conversion_duree_001",
@@ -67,11 +85,9 @@ export const calculsTemplates4e: CalculRapideItem[] = [
     answerRule: "(h * 60) + m",
     hint: "Transforme les heures en minutes puis ajoute.",
     explanationTemplate:
-      "{{h}} h = {{h * 60}} min puis {{h * 60}} + {{m}} = {{answer}} min.",
+      "On transforme les heures en minutes puis on ajoute les minutes : résultat = {{answer}} min.",
     tags: ["duree"],
   },
-
-  // 🔴 Vitesses
 
   {
     id: "4e_template_vitesse_001",
@@ -90,12 +106,9 @@ export const calculsTemplates4e: CalculRapideItem[] = [
     },
     answerRule: "v * t",
     hint: "Distance = vitesse × temps.",
-    explanationTemplate:
-      "{{v}} × {{t}} = {{answer}} km.",
+    explanationTemplate: "{{v}} × {{t}} = {{answer}} km.",
     tags: ["vitesse", "distance"],
   },
-
-  // 🔴 Aires
 
   {
     id: "4e_template_aire_rectangle_001",
@@ -114,12 +127,9 @@ export const calculsTemplates4e: CalculRapideItem[] = [
     },
     answerRule: "L * l",
     hint: "Aire = longueur × largeur.",
-    explanationTemplate:
-      "{{L}} × {{l}} = {{answer}} m².",
+    explanationTemplate: "{{L}} × {{l}} = {{answer}} m².",
     tags: ["aire"],
   },
-
-  // 🔴 Volumes
 
   {
     id: "4e_template_volume_001",
@@ -137,12 +147,9 @@ export const calculsTemplates4e: CalculRapideItem[] = [
     },
     answerRule: "n * 1000",
     hint: "1 L = 1000 mL.",
-    explanationTemplate:
-      "{{n}} × 1000 = {{answer}} mL.",
+    explanationTemplate: "{{n}} × 1000 = {{answer}} mL.",
     tags: ["volume", "contenance"],
   },
-
-  // 🔴 Piège cognitif unités
 
   {
     id: "4e_template_piege_aire_001",
@@ -161,8 +168,142 @@ export const calculsTemplates4e: CalculRapideItem[] = [
     },
     answerRule: "a * b",
     hint: "Une aire s’exprime en cm².",
-    explanationTemplate:
-      "{{a}} × {{b}} = {{answer}} cm².",
+    explanationTemplate: "{{a}} × {{b}} = {{answer}} cm².",
     tags: ["aire", "piege", "unites"],
+  },
+
+  // ============================================================
+  // SEMAINE 19 - CALCUL LITTÉRAL EXPRESS
+  // ============================================================
+
+  {
+    id: "4e_template_litteral_reduire_001",
+    niveau: "4e",
+    type: "calcul",
+    mode: "template",
+    notionId: "expressions_litterales",
+    microId: "litteral_reduire",
+    difficulty: 2,
+    durationSec: 20,
+    media: { text: "{{a}}x + {{b}}x = ?" },
+    template: "{{a}}x + {{b}}x = ?",
+    variables: {
+      a: [2, 3, 4, 5, 7],
+      b: [1, 2, 3, 4, 6],
+    },
+    answerRule: "(a + b) + 'x'",
+    hint: "Additionne les coefficients devant x.",
+    explanationTemplate: "{{a}}x + {{b}}x = {{answer}}.",
+    tags: ["calcul_litteral", "reduire"],
+  },
+
+  {
+    id: "4e_template_litteral_reduire_soustraction_001",
+    niveau: "4e",
+    type: "calcul",
+    mode: "template",
+    notionId: "expressions_litterales",
+    microId: "litteral_reduire",
+    difficulty: 2,
+    durationSec: 20,
+    media: { text: "{{a}}x - {{b}}x = ?" },
+    template: "{{a}}x - {{b}}x = ?",
+    variables: {
+      a: [6, 7, 8, 9, 10],
+      b: [1, 2, 3, 4, 5],
+    },
+    answerRule: "(a - b) + 'x'",
+    hint: "Soustrais les coefficients devant x.",
+    explanationTemplate: "{{a}}x - {{b}}x = {{answer}}.",
+    tags: ["calcul_litteral", "reduire"],
+  },
+
+  {
+    id: "4e_template_litteral_substitution_001",
+    niveau: "4e",
+    type: "calcul",
+    mode: "template",
+    notionId: "expressions_litterales",
+    microId: "litteral_substitution",
+    difficulty: 2,
+    durationSec: 20,
+    media: { text: "Si x = {{x}}, alors {{a}}x + {{b}} = ?" },
+    template: "Si x = {{x}}, alors {{a}}x + {{b}} = ?",
+    variables: {
+      x: [2, 3, 4, 5],
+      a: [2, 3, 4, 5],
+      b: [1, 2, 5, 7],
+    },
+    answerRule: "a * x + b",
+    hint: "Remplace x par sa valeur.",
+    explanationTemplate:
+      "{{a}} × {{x}} + {{b}} = {{answer}}.",
+    tags: ["calcul_litteral", "substitution"],
+  },
+
+  {
+    id: "4e_template_litteral_developper_001",
+    niveau: "4e",
+    type: "calcul",
+    mode: "template",
+    notionId: "distributivite",
+    microId: "distributivite_developper",
+    difficulty: 3,
+    durationSec: 20,
+    media: { text: "{{k}}(x + {{a}}) = ?" },
+    template: "{{k}}(x + {{a}}) = ?",
+    variables: {
+      k: [2, 3, 4, 5],
+      a: [1, 2, 3, 4, 5],
+    },
+    answerRule: "k + 'x+' + (k * a)",
+    hint: "Distribue le nombre devant la parenthèse.",
+    explanationTemplate:
+      "{{k}}(x + {{a}}) = {{answer}}.",
+    tags: ["calcul_litteral", "developper", "distributivite"],
+  },
+
+  {
+    id: "4e_template_litteral_factoriser_001",
+    niveau: "4e",
+    type: "calcul",
+    mode: "template",
+    notionId: "factorisation",
+    microId: "factorisation_facteur_commun",
+    difficulty: 3,
+    durationSec: 20,
+    media: { text: "Factorise : {{k}}x + {{n}}" },
+    template: "Factorise : {{k}}x + {{n}}",
+    variables: {
+      k: [2, 3, 4, 5, 6],
+      n: [4, 6, 8, 10, 12],
+    },
+    answerRule: "k + '(x+' + (n / k) + ')'",
+    hint: "Cherche le facteur commun.",
+    explanationTemplate:
+      "On met {{k}} en facteur : {{answer}}.",
+    tags: ["calcul_litteral", "factoriser"],
+  },
+
+  {
+    id: "4e_template_equation_simple_001",
+    niveau: "4e",
+    type: "calcul",
+    mode: "template",
+    notionId: "equations",
+    microId: "equation_simple",
+    difficulty: 3,
+    durationSec: 20,
+    media: { text: "x + {{a}} = {{b}}. x = ?" },
+    template: "x + {{a}} = {{b}}. x = ?",
+    variables: {
+      a: [2, 3, 4, 5, 7],
+      b: [8, 10, 12, 15, 20],
+    },
+    answerRule: "b - a",
+    hint: "Cherche le nombre qui complète l’égalité.",
+    explanationTemplate:
+      "x = {{b}} - {{a}} = {{answer}}.",
+    tags: ["equation", "calcul_mental"],
   },
 ];

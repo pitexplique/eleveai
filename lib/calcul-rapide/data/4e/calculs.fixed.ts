@@ -3,7 +3,9 @@
 import type { CalculRapideItem } from "../../types";
 
 export const calculsFixed4e: CalculRapideItem[] = [
-  // 🔵 RÉACTIVATION 5e/6e
+  // ============================================================
+  // SEMAINE MESURES - RÉACTIVATION 5e/6e
+  // ============================================================
 
   {
     id: "4e_calcul_conversion_longueur_001",
@@ -37,8 +39,6 @@ export const calculsFixed4e: CalculRapideItem[] = [
     tags: ["conversion", "masse", "reactivation"],
   },
 
-  // 🔴 4e : vitesses et durées
-
   {
     id: "4e_calcul_vitesse_001",
     niveau: "4e",
@@ -71,8 +71,6 @@ export const calculsFixed4e: CalculRapideItem[] = [
     tags: ["vitesse", "distance"],
   },
 
-  // 🔴 Durées
-
   {
     id: "4e_calcul_duree_001",
     niveau: "4e",
@@ -88,8 +86,6 @@ export const calculsFixed4e: CalculRapideItem[] = [
     explanation: "120 + 45 = 165 min.",
     tags: ["duree"],
   },
-
-  // 🔴 Aires et volumes
 
   {
     id: "4e_calcul_aire_001",
@@ -123,8 +119,6 @@ export const calculsFixed4e: CalculRapideItem[] = [
     tags: ["volume", "contenance"],
   },
 
-  // 🔴 Piège cognitif 4e
-
   {
     id: "4e_calcul_piege_aire_001",
     niveau: "4e",
@@ -139,5 +133,105 @@ export const calculsFixed4e: CalculRapideItem[] = [
     hint: "Une aire s’exprime en cm².",
     explanation: "5 × 4 = 20 cm².",
     tags: ["aire", "piege", "unites"],
+  },
+
+  // ============================================================
+  // SEMAINE 19 - CALCUL LITTÉRAL EXPRESS
+  // ============================================================
+
+  {
+    id: "4e_calcul_litteral_reduire_001",
+    niveau: "4e",
+    type: "calcul",
+    mode: "fixed",
+    notionId: "expressions_litterales",
+    microId: "litteral_reduire",
+    difficulty: 2,
+    durationSec: 20,
+    media: { text: "3x + 2x = ?" },
+    expected: ["5x", "5 x"],
+    hint: "On additionne les coefficients devant x.",
+    explanation: "3x + 2x = 5x.",
+    tags: ["calcul_litteral", "reduire"],
+  },
+
+  {
+    id: "4e_calcul_litteral_reduire_002",
+    niveau: "4e",
+    type: "calcul",
+    mode: "fixed",
+    notionId: "expressions_litterales",
+    microId: "litteral_reduire",
+    difficulty: 2,
+    durationSec: 20,
+    media: { text: "7a - 4a = ?" },
+    expected: ["3a", "3 a"],
+    hint: "On soustrait les coefficients devant a.",
+    explanation: "7a - 4a = 3a.",
+    tags: ["calcul_litteral", "reduire"],
+  },
+
+  {
+    id: "4e_calcul_litteral_substitution_001",
+    niveau: "4e",
+    type: "calcul",
+    mode: "fixed",
+    notionId: "expressions_litterales",
+    microId: "litteral_substitution",
+    difficulty: 2,
+    durationSec: 20,
+    media: { text: "Si x = 3, alors 2x + 5 = ?" },
+    expected: ["11"],
+    hint: "Remplace x par 3.",
+    explanation: "2x + 5 = 2 × 3 + 5 = 11.",
+    tags: ["calcul_litteral", "substitution"],
+  },
+
+  {
+    id: "4e_calcul_litteral_developper_001",
+    niveau: "4e",
+    type: "calcul",
+    mode: "fixed",
+    notionId: "distributivite",
+    microId: "distributivite_developper",
+    difficulty: 3,
+    durationSec: 20,
+    media: { text: "3(x + 4) = ?" },
+    expected: ["3x+12", "3x + 12"],
+    hint: "Distribue 3 sur x puis sur 4.",
+    explanation: "3(x + 4) = 3x + 12.",
+    tags: ["calcul_litteral", "developper", "distributivite"],
+  },
+
+  {
+    id: "4e_calcul_litteral_factoriser_001",
+    niveau: "4e",
+    type: "calcul",
+    mode: "fixed",
+    notionId: "factorisation",
+    microId: "factorisation_facteur_commun",
+    difficulty: 3,
+    durationSec: 20,
+    media: { text: "Factorise : 5x + 10" },
+    expected: ["5(x+2)", "5(x + 2)"],
+    hint: "Cherche le facteur commun : 5.",
+    explanation: "5x + 10 = 5(x + 2).",
+    tags: ["calcul_litteral", "factoriser"],
+  },
+
+  {
+    id: "4e_calcul_equation_simple_001",
+    niveau: "4e",
+    type: "calcul",
+    mode: "fixed",
+    notionId: "equations",
+    microId: "equation_simple",
+    difficulty: 3,
+    durationSec: 20,
+    media: { text: "x + 7 = 12. x = ?" },
+    expected: ["5"],
+    hint: "Cherche le nombre qui, ajouté à 7, donne 12.",
+    explanation: "x + 7 = 12 donc x = 5.",
+    tags: ["equation", "calcul_mental"],
   },
 ];

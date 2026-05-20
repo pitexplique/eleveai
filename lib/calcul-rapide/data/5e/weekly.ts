@@ -100,7 +100,6 @@ export const weekly5e: CalculRapideWeek[] = [
         ],
       },
 
-      // 🔵 SAMEDI : MÉLANGE DE LA SEMAINE
       {
         id: "5e_2026_S18_samedi",
         niveau: "5e",
@@ -119,7 +118,6 @@ export const weekly5e: CalculRapideWeek[] = [
         ],
       },
 
-      // 🔴 DIMANCHE : FINAL DE LA SEMAINE
       {
         id: "5e_2026_S18_dimanche",
         niveau: "5e",
@@ -135,6 +133,145 @@ export const weekly5e: CalculRapideWeek[] = [
           "5e_template_vitesse_001",
           "5e_probleme_vitesse_001",
           "5e_probleme_aire_chambre_001",
+        ],
+      },
+    ],
+  },
+
+  // ============================================================
+  // SEMAINE 19 - NOMBRES RELATIFS
+  // ============================================================
+
+  {
+    id: "5e_2026_S19",
+    niveau: "5e",
+    week: "2026-S19",
+    title: "Calcul rapide 5e - Nombres relatifs express",
+    themeDominant: "Comparer, additionner et soustraire des nombres relatifs",
+    sessions: [
+      {
+        id: "5e_2026_S19_lundi",
+        niveau: "5e",
+        day: "lundi",
+        title: "Défi du lundi",
+        theme: "Comparer des relatifs",
+        durationTotalSec: 300,
+        itemIds: [
+          "5e_calcul_relatif_comparer_001",
+          "5e_calcul_relatif_comparer_002",
+          "5e_template_relatif_comparer_001",
+          "5e_template_relatif_comparer_001",
+          "5e_template_relatif_distance_zero_001",
+          "5e_probleme_relatif_ecart_temperature_001",
+          "5e_template_relatif_ecart_001",
+        ],
+      },
+
+      {
+        id: "5e_2026_S19_mardi",
+        niveau: "5e",
+        day: "mardi",
+        title: "Défi du mardi",
+        theme: "Additionner des relatifs",
+        durationTotalSec: 300,
+        itemIds: [
+          "5e_calcul_relatif_addition_001",
+          "5e_calcul_relatif_addition_002",
+          "5e_template_relatif_addition_001",
+          "5e_template_relatif_addition_001",
+          "5e_template_relatif_comparer_001",
+          "5e_probleme_relatif_score_001",
+          "5e_template_relatif_score_001",
+        ],
+      },
+
+      {
+        id: "5e_2026_S19_mercredi",
+        niveau: "5e",
+        day: "mercredi",
+        title: "Défi du mercredi",
+        theme: "Soustraire des relatifs",
+        durationTotalSec: 300,
+        itemIds: [
+          "5e_calcul_relatif_soustraction_001",
+          "5e_calcul_relatif_soustraction_002",
+          "5e_template_relatif_soustraction_001",
+          "5e_template_relatif_soustraction_001",
+          "5e_template_relatif_addition_001",
+          "5e_probleme_relatif_plongee_001",
+          "5e_template_relatif_plongee_001",
+        ],
+      },
+
+      {
+        id: "5e_2026_S19_jeudi",
+        niveau: "5e",
+        day: "jeudi",
+        title: "Défi du jeudi",
+        theme: "Opposé et distance à zéro",
+        durationTotalSec: 300,
+        itemIds: [
+          "5e_calcul_relatif_oppose_001",
+          "5e_template_relatif_oppose_001",
+          "5e_template_relatif_oppose_001",
+          "5e_calcul_relatif_distance_zero_001",
+          "5e_template_relatif_distance_zero_001",
+          "5e_probleme_relatif_ecart_temperature_001",
+          "5e_template_relatif_ecart_001",
+        ],
+      },
+
+      {
+        id: "5e_2026_S19_vendredi",
+        niveau: "5e",
+        day: "vendredi",
+        title: "Défi du vendredi",
+        theme: "Températures et situations",
+        durationTotalSec: 300,
+        itemIds: [
+          "5e_calcul_relatif_addition_001",
+          "5e_template_relatif_addition_001",
+          "5e_template_relatif_soustraction_001",
+          "5e_template_relatif_distance_zero_001",
+          "5e_template_relatif_comparer_001",
+          "5e_probleme_relatif_temperature_001",
+          "5e_template_relatif_temperature_001",
+        ],
+      },
+
+      {
+        id: "5e_2026_S19_samedi",
+        niveau: "5e",
+        day: "samedi",
+        title: "Défi du samedi",
+        theme: "Mix relatifs",
+        durationTotalSec: 300,
+        itemIds: [
+          "5e_template_relatif_comparer_001",
+          "5e_template_relatif_addition_001",
+          "5e_template_relatif_soustraction_001",
+          "5e_template_relatif_oppose_001",
+          "5e_template_relatif_distance_zero_001",
+          "5e_probleme_relatif_score_001",
+          "5e_template_relatif_plongee_001",
+        ],
+      },
+
+      {
+        id: "5e_2026_S19_dimanche",
+        niveau: "5e",
+        day: "dimanche",
+        title: "Final du dimanche 🏆",
+        theme: "Challenge global relatifs",
+        durationTotalSec: 300,
+        itemIds: [
+          "5e_template_relatif_comparer_001",
+          "5e_template_relatif_addition_001",
+          "5e_template_relatif_soustraction_001",
+          "5e_template_relatif_oppose_001",
+          "5e_template_relatif_distance_zero_001",
+          "5e_probleme_relatif_temperature_001",
+          "5e_template_relatif_ecart_001",
         ],
       },
     ],

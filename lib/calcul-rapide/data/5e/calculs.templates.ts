@@ -3,6 +3,10 @@
 import type { CalculRapideItem } from "../../types";
 
 export const calculsTemplates5e: CalculRapideItem[] = [
+  // ============================================================
+  // SEMAINE MESURES
+  // ============================================================
+
   {
     id: "5e_template_conversion_longueur_001",
     niveau: "5e",
@@ -19,8 +23,7 @@ export const calculsTemplates5e: CalculRapideItem[] = [
     },
     answerRule: "n * 1000",
     hint: "1 km = 1000 m.",
-    explanationTemplate:
-      "{{n}} × 1000 = {{answer}} m.",
+    explanationTemplate: "{{n}} × 1000 = {{answer}} m.",
     tags: ["longueur", "conversion"],
   },
 
@@ -40,8 +43,7 @@ export const calculsTemplates5e: CalculRapideItem[] = [
     },
     answerRule: "n / 1000",
     hint: "1 kg = 1000 g.",
-    explanationTemplate:
-      "{{n}} ÷ 1000 = {{answer}} kg.",
+    explanationTemplate: "{{n}} ÷ 1000 = {{answer}} kg.",
     tags: ["masse"],
   },
 
@@ -61,8 +63,7 @@ export const calculsTemplates5e: CalculRapideItem[] = [
     },
     answerRule: "n * 100",
     hint: "1 L = 100 cL.",
-    explanationTemplate:
-      "{{n}} × 100 = {{answer}} cL.",
+    explanationTemplate: "{{n}} × 100 = {{answer}} cL.",
     tags: ["contenance"],
   },
 
@@ -84,7 +85,7 @@ export const calculsTemplates5e: CalculRapideItem[] = [
     answerRule: "(h * 60) + m",
     hint: "Transforme les heures en minutes puis ajoute.",
     explanationTemplate:
-      "{{h}} h = {{h}} × 60 = {{h * 60}} min puis {{h * 60}} + {{m}} = {{answer}} min.",
+      "On transforme les heures en minutes, puis on ajoute les minutes : résultat = {{answer}} min.",
     tags: ["duree"],
   },
 
@@ -105,8 +106,7 @@ export const calculsTemplates5e: CalculRapideItem[] = [
     },
     answerRule: "v * t",
     hint: "Distance = vitesse × temps.",
-    explanationTemplate:
-      "{{v}} × {{t}} = {{answer}} km.",
+    explanationTemplate: "{{v}} × {{t}} = {{answer}} km.",
     tags: ["vitesse", "distance"],
   },
 
@@ -127,8 +127,114 @@ export const calculsTemplates5e: CalculRapideItem[] = [
     },
     answerRule: "L * l",
     hint: "Aire = longueur × largeur.",
-    explanationTemplate:
-      "{{L}} × {{l}} = {{answer}} m².",
+    explanationTemplate: "{{L}} × {{l}} = {{answer}} m².",
     tags: ["aire"],
+  },
+
+  // ============================================================
+  // SEMAINE RELATIFS
+  // ============================================================
+
+  {
+    id: "5e_template_relatif_comparer_001",
+    niveau: "5e",
+    type: "calcul",
+    mode: "template",
+    notionId: "nombres_relatifs",
+    microId: "relatifs_comparer",
+    difficulty: 2,
+    durationSec: 20,
+    media: { text: "Quel nombre est le plus grand : {{a}} ou {{b}} ?" },
+    template: "Quel nombre est le plus grand : {{a}} ou {{b}} ?",
+    variables: {
+      a: [-9, -7, -5, -3, -1],
+      b: [-8, -4, -2, 0, 2],
+    },
+    answerRule: "Math.max(a, b)",
+    hint: "Sur une droite graduée, le plus grand est le plus à droite.",
+    explanationTemplate: "Le plus grand nombre est {{answer}}.",
+    tags: ["relatifs", "comparer"],
+  },
+
+  {
+    id: "5e_template_relatif_addition_001",
+    niveau: "5e",
+    type: "calcul",
+    mode: "template",
+    notionId: "operations_relatifs",
+    microId: "relatifs_additionner",
+    difficulty: 2,
+    durationSec: 20,
+    media: { text: "{{a}} + ({{b}}) = ?" },
+    template: "{{a}} + ({{b}}) = ?",
+    variables: {
+      a: [-8, -5, -3, 2, 4, 7],
+      b: [-6, -4, -2, 3, 5, 8],
+    },
+    answerRule: "a + b",
+    hint: "Additionne en tenant compte des signes.",
+    explanationTemplate: "{{a}} + ({{b}}) = {{answer}}.",
+    tags: ["relatifs", "addition"],
+  },
+
+  {
+    id: "5e_template_relatif_soustraction_001",
+    niveau: "5e",
+    type: "calcul",
+    mode: "template",
+    notionId: "operations_relatifs",
+    microId: "relatifs_soustraire",
+    difficulty: 3,
+    durationSec: 20,
+    media: { text: "{{a}} - ({{b}}) = ?" },
+    template: "{{a}} - ({{b}}) = ?",
+    variables: {
+      a: [-6, -3, 0, 4, 7, 10],
+      b: [-5, -2, 1, 3, 6],
+    },
+    answerRule: "a - b",
+    hint: "Soustraire un nombre, c’est ajouter son opposé.",
+    explanationTemplate: "{{a}} - ({{b}}) = {{answer}}.",
+    tags: ["relatifs", "soustraction"],
+  },
+
+  {
+    id: "5e_template_relatif_oppose_001",
+    niveau: "5e",
+    type: "calcul",
+    mode: "template",
+    notionId: "nombres_relatifs",
+    microId: "relatifs_oppose",
+    difficulty: 2,
+    durationSec: 20,
+    media: { text: "Quel est l’opposé de {{n}} ?" },
+    template: "Quel est l’opposé de {{n}} ?",
+    variables: {
+      n: [-12, -8, -5, -1, 3, 7, 10],
+    },
+    answerRule: "-n",
+    hint: "L’opposé a le signe contraire.",
+    explanationTemplate: "L’opposé de {{n}} est {{answer}}.",
+    tags: ["relatifs", "oppose"],
+  },
+
+  {
+    id: "5e_template_relatif_distance_zero_001",
+    niveau: "5e",
+    type: "calcul",
+    mode: "template",
+    notionId: "nombres_relatifs",
+    microId: "relatifs_distance_zero",
+    difficulty: 2,
+    durationSec: 20,
+    media: { text: "Distance à zéro de {{n}} ?" },
+    template: "Distance à zéro de {{n}} ?",
+    variables: {
+      n: [-15, -12, -9, -4, 3, 8, 11],
+    },
+    answerRule: "Math.abs(n)",
+    hint: "La distance à zéro est toujours positive.",
+    explanationTemplate: "La distance à zéro de {{n}} est {{answer}}.",
+    tags: ["relatifs", "distance_zero"],
   },
 ];

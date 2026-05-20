@@ -3,7 +3,9 @@
 import type { CalculRapideItem } from "../../types";
 
 export const problemesFixed4e: CalculRapideItem[] = [
-  // 🔵 RÉACTIVATION conversions
+  // ============================================================
+  // SEMAINE MESURES
+  // ============================================================
 
   {
     id: "4e_probleme_randonnee_001",
@@ -19,8 +21,7 @@ export const problemesFixed4e: CalculRapideItem[] = [
     },
     expected: ["8500"],
     hint: "1 km = 1000 m.",
-    explanation:
-      "8,5 × 1000 = 8500 m.",
+    explanation: "8,5 × 1000 = 8500 m.",
     tags: ["conversion", "longueur", "reunion"],
   },
 
@@ -38,12 +39,9 @@ export const problemesFixed4e: CalculRapideItem[] = [
     },
     expected: ["2,25", "2.25", "2,25 L", "2.25 L"],
     hint: "Transforme tout dans la même unité.",
-    explanation:
-      "750 mL = 0,75 L. Donc 1,5 + 0,75 = 2,25 L.",
+    explanation: "750 mL = 0,75 L. Donc 1,5 + 0,75 = 2,25 L.",
     tags: ["volume", "contenance"],
   },
-
-  // 🔴 Vitesses
 
   {
     id: "4e_probleme_vitesse_001",
@@ -59,8 +57,7 @@ export const problemesFixed4e: CalculRapideItem[] = [
     },
     expected: ["180", "180 km"],
     hint: "2 h 30 = 2,5 h.",
-    explanation:
-      "72 × 2,5 = 180 km.",
+    explanation: "72 × 2,5 = 180 km.",
     tags: ["vitesse", "distance"],
   },
 
@@ -78,12 +75,9 @@ export const problemesFixed4e: CalculRapideItem[] = [
     },
     expected: ["9", "9 km/h", "9km/h"],
     hint: "Vitesse = distance ÷ temps.",
-    explanation:
-      "18 ÷ 2 = 9 km/h.",
+    explanation: "18 ÷ 2 = 9 km/h.",
     tags: ["vitesse", "sport"],
   },
-
-  // 🔴 Aires
 
   {
     id: "4e_probleme_aire_001",
@@ -99,12 +93,9 @@ export const problemesFixed4e: CalculRapideItem[] = [
     },
     expected: ["60", "60 m²", "60 m2"],
     hint: "Aire = longueur × largeur.",
-    explanation:
-      "12 × 5 = 60 m².",
+    explanation: "12 × 5 = 60 m².",
     tags: ["aire", "rectangle"],
   },
-
-  // 🔴 Piège cognitif
 
   {
     id: "4e_probleme_piege_aire_001",
@@ -125,8 +116,6 @@ export const problemesFixed4e: CalculRapideItem[] = [
     tags: ["aire", "piege", "unites"],
   },
 
-  // 🔴 Réactivation Pythagore
-
   {
     id: "4e_probleme_pythagore_001",
     niveau: "4e",
@@ -144,5 +133,99 @@ export const problemesFixed4e: CalculRapideItem[] = [
     explanation:
       "6² + 8² = 36 + 64 = 100 donc l’hypoténuse mesure √100 = 10 cm.",
     tags: ["pythagore", "triangle-rectangle"],
+  },
+
+  // ============================================================
+  // SEMAINE 19 - CALCUL LITTÉRAL EXPRESS
+  // ============================================================
+
+  {
+    id: "4e_probleme_litteral_prix_001",
+    niveau: "4e",
+    type: "probleme",
+    mode: "fixed",
+    notionId: "expressions_litterales",
+    microId: "litteral_substitution",
+    difficulty: 3,
+    durationSec: 60,
+    media: {
+      text: "Un cahier coûte x euros. On achète 3 cahiers et un stylo à 2 €. Si x = 4, quel est le prix total ?",
+    },
+    expected: ["14", "14€", "14 €"],
+    hint: "Le prix total est 3x + 2.",
+    explanation: "3x + 2 = 3 × 4 + 2 = 14 €.",
+    tags: ["calcul_litteral", "prix", "substitution"],
+  },
+
+  {
+    id: "4e_probleme_litteral_abonnement_001",
+    niveau: "4e",
+    type: "probleme",
+    mode: "fixed",
+    notionId: "expressions_litterales",
+    microId: "litteral_substitution",
+    difficulty: 3,
+    durationSec: 60,
+    media: {
+      text: "Un abonnement coûte 5 €, puis 3 € par séance. Si on fait 4 séances, combien paie-t-on ?",
+    },
+    expected: ["17", "17€", "17 €"],
+    hint: "Le prix est 5 + 3x.",
+    explanation: "Pour 4 séances : 5 + 3 × 4 = 17 €.",
+    tags: ["calcul_litteral", "prix", "substitution"],
+  },
+
+  {
+    id: "4e_probleme_litteral_sacs_001",
+    niveau: "4e",
+    type: "probleme",
+    mode: "fixed",
+    notionId: "distributivite",
+    microId: "distributivite_developper",
+    difficulty: 3,
+    durationSec: 60,
+    media: {
+      text: "On a 4 sacs contenant chacun x billes et 3 billes en plus. Quelle expression développée représente le total ?",
+    },
+    expected: ["4x+12", "4x + 12"],
+    hint: "Il y a 4 fois (x + 3).",
+    explanation: "4(x + 3) = 4x + 12.",
+    tags: ["calcul_litteral", "developper"],
+  },
+
+  {
+    id: "4e_probleme_litteral_factoriser_001",
+    niveau: "4e",
+    type: "probleme",
+    mode: "fixed",
+    notionId: "factorisation",
+    microId: "factorisation_facteur_commun",
+    difficulty: 3,
+    durationSec: 60,
+    media: {
+      text: "Factorise le prix total : 6x + 12.",
+    },
+    expected: ["6(x+2)", "6(x + 2)"],
+    hint: "Le facteur commun est 6.",
+    explanation: "6x + 12 = 6(x + 2).",
+    tags: ["calcul_litteral", "factoriser"],
+  },
+
+  {
+    id: "4e_probleme_equation_simple_001",
+    niveau: "4e",
+    type: "probleme",
+    mode: "fixed",
+    notionId: "equations",
+    microId: "equation_simple",
+    difficulty: 3,
+    durationSec: 60,
+    media: {
+      text: "Un nombre augmenté de 9 donne 20. Quel est ce nombre ?",
+    },
+    expected: ["11"],
+    hint: "On cherche x tel que x + 9 = 20.",
+    explanation: "x + 9 = 20 donc x = 11.",
+    tags: ["equation", "calcul_mental"],
   },
 ];

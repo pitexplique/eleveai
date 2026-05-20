@@ -3,189 +3,96 @@
 import type { CalculRapideItem } from "../../types";
 
 export const problemesTemplates3e: CalculRapideItem[] = [
-  // 🔵 RÉACTIVATION conversions
-
   {
-    id: "3e_template_randonnee_001",
+    id: "3e_template_probleme_puissance_doublement_001",
     niveau: "3e",
     type: "probleme",
     mode: "template",
-    notionId: "grandeurs_mesures",
-    microId: "conversion_longueur",
+    notionId: "puissances",
+    microId: "puissance_calculer",
+    difficulty: 3,
+    durationSec: 60,
+    media: {
+      text: "Une quantité double {{n}} fois. Par quel nombre est-elle multipliée ?",
+    },
+    template:
+      "Une quantité double {{n}} fois. Par quel nombre est-elle multipliée ?",
+    variables: {
+      n: [2, 3, 4, 5, 6],
+    },
+    answerRule: "Math.pow(2, n)",
+    hint: "Doubler n fois revient à calculer 2^n.",
+    explanationTemplate: "2^{{n}} = {{answer}}.",
+    tags: ["puissances", "doublement"],
+  },
+
+  {
+    id: "3e_template_probleme_scientifique_001",
+    niveau: "3e",
+    type: "probleme",
+    mode: "template",
+    notionId: "puissances",
+    microId: "ecriture_scientifique",
+    difficulty: 3,
+    durationSec: 60,
+    media: {
+      text: "Une distance vaut {{a}} × 10^{{n}} m. Écris cette distance en mètres.",
+    },
+    template:
+      "Une distance vaut {{a}} × 10^{{n}} m. Écris cette distance en mètres.",
+    variables: {
+      a: [2, 3, 4, 5, 7, 9],
+      n: [2, 3, 4, 5, 6],
+    },
+    answerRule: "a * Math.pow(10, n)",
+    hint: "Multiplie par la puissance de 10.",
+    explanationTemplate: "{{a}} × 10^{{n}} = {{answer}}.",
+    tags: ["puissances", "ecriture_scientifique"],
+  },
+
+  {
+    id: "3e_template_probleme_racine_carre_001",
+    niveau: "3e",
+    type: "probleme",
+    mode: "template",
+    notionId: "racines_carrees",
+    microId: "racine_carree_simple",
     difficulty: 2,
     durationSec: 60,
     media: {
-      text: "Une randonnée mesure {{km}} km. Combien cela représente-t-il en mètres ?",
+      text: "L’aire d’un carré est {{n}} cm². Quelle est la longueur de son côté ?",
     },
     template:
-      "Une randonnée mesure {{km}} km. Combien cela représente-t-il en mètres ?",
+      "L’aire d’un carré est {{n}} cm². Quelle est la longueur de son côté ?",
     variables: {
-      km: [5.2, 7.5, 8.4, 10.8, 12.5],
+      n: [4, 9, 16, 25, 36, 49, 64, 81, 100, 121, 144],
     },
-    answerRule: "km * 1000",
-    hint: "1 km = 1000 m.",
-    explanationTemplate:
-      "{{km}} × 1000 = {{answer}} m.",
-    tags: ["conversion", "longueur", "reactivation"],
-  },
-
-  // 🔴 Vitesses
-
-  {
-    id: "3e_template_vitesse_001",
-    niveau: "3e",
-    type: "probleme",
-    mode: "template",
-    notionId: "proportionnalite",
-    microId: "vitesse_moyenne",
-    difficulty: 3,
-    durationSec: 60,
-    media: {
-      text: "Une voiture roule à {{v}} km/h pendant {{t}} h. Quelle distance parcourt-elle ?",
-    },
-    template:
-      "Une voiture roule à {{v}} km/h pendant {{t}} h. Quelle distance parcourt-elle ?",
-    variables: {
-      v: [70, 80, 90, 110, 130],
-      t: [1.5, 2, 2.5, 3],
-    },
-    answerRule: "v * t",
-    hint: "Distance = vitesse × temps.",
-    explanationTemplate:
-      "{{v}} × {{t}} = {{answer}} km.",
-    tags: ["vitesse", "distance"],
+    answerRule: "Math.sqrt(n)",
+    hint: "Le côté est la racine carrée de l’aire.",
+    explanationTemplate: "√{{n}} = {{answer}}.",
+    tags: ["racine_carree", "aire"],
   },
 
   {
-    id: "3e_template_vitesse_moyenne_001",
-    niveau: "3e",
-    type: "probleme",
-    mode: "template",
-    notionId: "proportionnalite",
-    microId: "vitesse_moyenne",
-    difficulty: 3,
-    durationSec: 60,
-    media: {
-      text: "Une distance de {{d}} km est parcourue en {{t}} h. Quelle est la vitesse moyenne ?",
-    },
-    template:
-      "Une distance de {{d}} km est parcourue en {{t}} h. Quelle est la vitesse moyenne ?",
-    variables: {
-      d: [120, 180, 240, 300, 360],
-      t: [2, 3, 4, 5],
-    },
-    answerRule: "d / t",
-    hint: "Vitesse = distance ÷ temps.",
-    explanationTemplate:
-      "{{d}} ÷ {{t}} = {{answer}} km/h.",
-    tags: ["vitesse", "moyenne"],
-  },
-
-  // 🔴 Aires
-
-  {
-    id: "3e_template_aire_001",
-    niveau: "3e",
-    type: "probleme",
-    mode: "template",
-    notionId: "aires",
-    microId: "aire_rectangle",
-    difficulty: 3,
-    durationSec: 60,
-    media: {
-      text: "Une terrasse mesure {{L}} m sur {{l}} m. Quelle est son aire ?",
-    },
-    template:
-      "Une terrasse mesure {{L}} m sur {{l}} m. Quelle est son aire ?",
-    variables: {
-      L: [12, 15, 18, 20],
-      l: [4, 5, 6, 8],
-    },
-    answerRule: "L * l",
-    hint: "Aire = longueur × largeur.",
-    explanationTemplate:
-      "{{L}} × {{l}} = {{answer}} m².",
-    tags: ["aire", "rectangle"],
-  },
-
-  // 🔴 Volumes
-
-  {
-    id: "3e_template_volume_001",
-    niveau: "3e",
-    type: "probleme",
-    mode: "template",
-    notionId: "volumes",
-    microId: "volume_contenance",
-    difficulty: 3,
-    durationSec: 60,
-    media: {
-      text: "Une bouteille contient {{L}} L. Quelle quantité cela représente-t-il en mL ?",
-    },
-    template:
-      "Une bouteille contient {{L}} L. Quelle quantité cela représente-t-il en mL ?",
-    variables: {
-      L: [1.25, 2.4, 3.5, 4.2, 5.8],
-    },
-    answerRule: "L * 1000",
-    hint: "1 L = 1000 mL.",
-    explanationTemplate:
-      "{{L}} × 1000 = {{answer}} mL.",
-    tags: ["volume", "contenance"],
-  },
-
-  // 🔴 Piège brevet
-
-  {
-    id: "3e_template_piege_aire_001",
-    niveau: "3e",
-    type: "probleme",
-    mode: "template",
-    notionId: "aires",
-    microId: "aire_unites",
-    difficulty: 4,
-    durationSec: 60,
-    media: {
-      text: "Un élève écrit : “l’aire d’un rectangle de {{a}} cm sur {{b}} cm vaut {{r}} cm”. A-t-il raison ?",
-    },
-    template:
-      "Un élève écrit : “l’aire d’un rectangle de {{a}} cm sur {{b}} cm vaut {{r}} cm”. A-t-il raison ?",
-    variables: {
-      a: [4, 5, 6, 8],
-      b: [3, 4, 5, 6],
-      r: [12, 20, 30, 48],
-    },
-    answerRule: "'non'",
-    hint: "Attention à l’unité d’aire.",
-    explanationTemplate:
-      "Le calcul est correct mais l’unité correcte est cm².",
-    tags: ["aire", "piege", "brevet"],
-  },
-
-  // 🔴 Réactivation Pythagore
-
-  {
-    id: "3e_template_pythagore_001",
+    id: "3e_template_probleme_pythagore_racine_001",
     niveau: "3e",
     type: "probleme",
     mode: "template",
     notionId: "pythagore",
-    microId: "pythagore_calcul",
+    microId: "pythagore_racine",
     difficulty: 4,
     durationSec: 60,
     media: {
-      text: "Dans un triangle rectangle, les côtés de l’angle droit mesurent {{a}} cm et {{b}} cm. Quelle est l’hypoténuse ?",
+      text: "Dans un triangle rectangle, on obtient c² = {{n}}. Quelle est la longueur c ?",
     },
     template:
-      "Dans un triangle rectangle, les côtés de l’angle droit mesurent {{a}} cm et {{b}} cm. Quelle est l’hypoténuse ?",
+      "Dans un triangle rectangle, on obtient c² = {{n}}. Quelle est la longueur c ?",
     variables: {
-      a: [5, 6, 8, 9],
-      b: [12, 8, 15, 12],
+      n: [25, 36, 49, 64, 81, 100, 121, 144, 169],
     },
-    answerRule: "Math.sqrt(a*a + b*b)",
-    hint: "Utilise le théorème de Pythagore.",
-    explanationTemplate:
-      "{{a}}² + {{b}}² = {{answer}}² donc hypoténuse = {{answer}} cm.",
-    tags: ["pythagore", "triangle", "brevet"],
+    answerRule: "Math.sqrt(n)",
+    hint: "Cherche la racine carrée de ce nombre.",
+    explanationTemplate: "c = √{{n}} = {{answer}}.",
+    tags: ["pythagore", "racine_carree"],
   },
 ];

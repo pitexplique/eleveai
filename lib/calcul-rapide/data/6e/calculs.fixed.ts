@@ -3,6 +3,10 @@
 import type { CalculRapideItem } from "../../types";
 
 export const calculsFixed6e: CalculRapideItem[] = [
+  // ============================================================
+  // SEMAINE MESURES
+  // ============================================================
+
   {
     id: "6e_calcul_longueur_001",
     niveau: "6e",
@@ -17,8 +21,7 @@ export const calculsFixed6e: CalculRapideItem[] = [
     },
     expected: ["350"],
     hint: "1 m = 100 cm.",
-    explanation:
-      "3,5 m = 3,5 × 100 = 350 cm.",
+    explanation: "3,5 m = 3,5 × 100 = 350 cm.",
     tags: ["longueur", "conversion"],
   },
 
@@ -36,8 +39,7 @@ export const calculsFixed6e: CalculRapideItem[] = [
     },
     expected: ["2400"],
     hint: "1 kg = 1000 g.",
-    explanation:
-      "2,4 kg = 2,4 × 1000 = 2400 g.",
+    explanation: "2,4 kg = 2,4 × 1000 = 2400 g.",
     tags: ["masse", "conversion"],
   },
 
@@ -55,8 +57,7 @@ export const calculsFixed6e: CalculRapideItem[] = [
     },
     expected: ["4,5", "4.5"],
     hint: "100 cL = 1 L.",
-    explanation:
-      "450 cL = 450 ÷ 100 = 4,5 L.",
+    explanation: "450 cL = 450 ÷ 100 = 4,5 L.",
     tags: ["contenance"],
   },
 
@@ -74,8 +75,7 @@ export const calculsFixed6e: CalculRapideItem[] = [
     },
     expected: ["150"],
     hint: "1 h = 60 min.",
-    explanation:
-      "2 h = 120 min puis 120 + 30 = 150 min.",
+    explanation: "2 h = 120 min puis 120 + 30 = 150 min.",
     tags: ["duree"],
   },
 
@@ -93,8 +93,7 @@ export const calculsFixed6e: CalculRapideItem[] = [
     },
     expected: ["40", "40 m²", "40 m2"],
     hint: "Aire = longueur × largeur.",
-    explanation:
-      "8 × 5 = 40 m².",
+    explanation: "8 × 5 = 40 m².",
     tags: ["aire", "rectangle"],
   },
 
@@ -112,8 +111,335 @@ export const calculsFixed6e: CalculRapideItem[] = [
     },
     expected: ["1500"],
     hint: "1 L = 1000 mL.",
-    explanation:
-      "1,5 × 1000 = 1500 mL.",
+    explanation: "1,5 × 1000 = 1500 mL.",
     tags: ["volume", "contenance"],
+  },
+
+  // ============================================================
+  // SEMAINE FRACTIONS
+  // ============================================================
+
+  {
+    id: "6e_calcul_fraction_moitie_001",
+    niveau: "6e",
+    type: "calcul",
+    mode: "fixed",
+    notionId: "fractions",
+    microId: "fraction_quantite",
+    difficulty: 1,
+    durationSec: 20,
+    media: {
+      text: "La moitié de 48",
+    },
+    expected: ["24"],
+    hint: "La moitié, c’est diviser par 2.",
+    explanation: "48 ÷ 2 = 24.",
+    tags: ["fraction", "moitie"],
+  },
+
+  {
+    id: "6e_calcul_fraction_quart_001",
+    niveau: "6e",
+    type: "calcul",
+    mode: "fixed",
+    notionId: "fractions",
+    microId: "fraction_quantite",
+    difficulty: 1,
+    durationSec: 20,
+    media: {
+      text: "Le quart de 80",
+    },
+    expected: ["20"],
+    hint: "Le quart, c’est diviser par 4.",
+    explanation: "80 ÷ 4 = 20.",
+    tags: ["fraction", "quart"],
+  },
+
+  {
+    id: "6e_calcul_fraction_dixieme_001",
+    niveau: "6e",
+    type: "calcul",
+    mode: "fixed",
+    notionId: "fractions",
+    microId: "fraction_quantite",
+    difficulty: 1,
+    durationSec: 20,
+    media: {
+      text: "Le dixième de 250",
+    },
+    expected: ["25"],
+    hint: "Le dixième, c’est diviser par 10.",
+    explanation: "250 ÷ 10 = 25.",
+    tags: ["fraction", "dixieme"],
+  },
+
+  {
+    id: "6e_calcul_fraction_trois_quarts_001",
+    niveau: "6e",
+    type: "calcul",
+    mode: "fixed",
+    notionId: "fractions",
+    microId: "fraction_quantite",
+    difficulty: 2,
+    durationSec: 20,
+    media: {
+      text: "Les 3/4 de 100",
+    },
+    expected: ["75"],
+    hint: "Calcule d’abord 1/4, puis multiplie par 3.",
+    explanation: "1/4 de 100 = 25, donc 3/4 de 100 = 3 × 25 = 75.",
+    tags: ["fraction", "trois_quarts"],
+  },
+
+  {
+    id: "6e_calcul_fraction_decimal_001",
+    niveau: "6e",
+    type: "calcul",
+    mode: "fixed",
+    notionId: "fractions",
+    microId: "fraction_decimal",
+    difficulty: 2,
+    durationSec: 20,
+    media: {
+      text: "1/4 = ? en écriture décimale",
+    },
+    expected: ["0,25", "0.25"],
+    hint: "1/4, c’est la moitié de 1/2.",
+    explanation: "1/4 = 0,25.",
+    tags: ["fraction", "decimal"],
+  },
+
+  {
+    id: "6e_calcul_fraction_pourcentage_001",
+    niveau: "6e",
+    type: "calcul",
+    mode: "fixed",
+    notionId: "fractions",
+    microId: "fraction_pourcentage",
+    difficulty: 2,
+    durationSec: 20,
+    media: {
+      text: "1/2 = ? %",
+    },
+    expected: ["50", "50%"],
+    hint: "La moitié correspond à 50 %.",
+    explanation: "1/2 = 0,5 = 50 %.",
+    tags: ["fraction", "pourcentage"],
+  },
+
+  {
+    id: "6e_calcul_fraction_comparer_001",
+    niveau: "6e",
+    type: "calcul",
+    mode: "fixed",
+    notionId: "fractions",
+    microId: "fraction_comparer",
+    difficulty: 2,
+    durationSec: 20,
+    media: {
+      text: "Quelle est la plus grande fraction : 1/2 ou 1/3 ?",
+    },
+    expected: ["1/2"],
+    hint: "Quand on partage en moins de parts, chaque part est plus grande.",
+    explanation: "1/2 est plus grand que 1/3.",
+    tags: ["fraction", "comparer"],
+  },
+
+  {
+    id: "6e_calcul_fraction_decimal_demi_001",
+    niveau: "6e",
+    type: "calcul",
+    mode: "fixed",
+    notionId: "fractions",
+    microId: "fraction_decimal",
+    difficulty: 2,
+    durationSec: 20,
+    media: {
+      text: "1/2 = ? en écriture décimale",
+    },
+    expected: ["0,5", "0.5"],
+    hint: "La moitié de 1, c’est 0,5.",
+    explanation: "1/2 = 0,5.",
+    tags: ["fraction", "decimal"],
+  },
+
+  {
+    id: "6e_calcul_fraction_decimal_quart_001",
+    niveau: "6e",
+    type: "calcul",
+    mode: "fixed",
+    notionId: "fractions",
+    microId: "fraction_decimal",
+    difficulty: 2,
+    durationSec: 20,
+    media: {
+      text: "1/4 = ? en écriture décimale",
+    },
+    expected: ["0,25", "0.25"],
+    hint: "1/4, c’est la moitié de 1/2.",
+    explanation: "1/4 = 0,25.",
+    tags: ["fraction", "decimal"],
+  },
+
+  {
+    id: "6e_calcul_fraction_decimal_trois_quarts_001",
+    niveau: "6e",
+    type: "calcul",
+    mode: "fixed",
+    notionId: "fractions",
+    microId: "fraction_decimal",
+    difficulty: 2,
+    durationSec: 20,
+    media: {
+      text: "3/4 = ? en écriture décimale",
+    },
+    expected: ["0,75", "0.75"],
+    hint: "3/4 = 3 fois 1/4.",
+    explanation: "3/4 = 0,75.",
+    tags: ["fraction", "decimal"],
+  },
+
+  {
+    id: "6e_calcul_fraction_decimal_dixieme_001",
+    niveau: "6e",
+    type: "calcul",
+    mode: "fixed",
+    notionId: "fractions",
+    microId: "fraction_decimal",
+    difficulty: 1,
+    durationSec: 20,
+    media: {
+      text: "1/10 = ? en écriture décimale",
+    },
+    expected: ["0,1", "0.1"],
+    hint: "Un dixième s’écrit 0,1.",
+    explanation: "1/10 = 0,1.",
+    tags: ["fraction", "decimal"],
+  },
+
+  {
+    id: "6e_calcul_fraction_pourcentage_demi_001",
+    niveau: "6e",
+    type: "calcul",
+    mode: "fixed",
+    notionId: "fractions",
+    microId: "fraction_pourcentage",
+    difficulty: 2,
+    durationSec: 20,
+    media: {
+      text: "1/2 = ? %",
+    },
+    expected: ["50", "50%"],
+    hint: "La moitié correspond à 50 %.",
+    explanation: "1/2 = 50 %.",
+    tags: ["fraction", "pourcentage"],
+  },
+
+  {
+    id: "6e_calcul_fraction_pourcentage_quart_001",
+    niveau: "6e",
+    type: "calcul",
+    mode: "fixed",
+    notionId: "fractions",
+    microId: "fraction_pourcentage",
+    difficulty: 2,
+    durationSec: 20,
+    media: {
+      text: "1/4 = ? %",
+    },
+    expected: ["25", "25%"],
+    hint: "Un quart correspond à 25 %.",
+    explanation: "1/4 = 25 %.",
+    tags: ["fraction", "pourcentage"],
+  },
+
+  {
+    id: "6e_calcul_fraction_pourcentage_trois_quarts_001",
+    niveau: "6e",
+    type: "calcul",
+    mode: "fixed",
+    notionId: "fractions",
+    microId: "fraction_pourcentage",
+    difficulty: 2,
+    durationSec: 20,
+    media: {
+      text: "3/4 = ? %",
+    },
+    expected: ["75", "75%"],
+    hint: "3/4, c’est 3 fois 25 %.",
+    explanation: "3/4 = 75 %.",
+    tags: ["fraction", "pourcentage"],
+  },
+
+  {
+    id: "6e_calcul_fraction_pourcentage_dixieme_001",
+    niveau: "6e",
+    type: "calcul",
+    mode: "fixed",
+    notionId: "fractions",
+    microId: "fraction_pourcentage",
+    difficulty: 1,
+    durationSec: 20,
+    media: {
+      text: "1/10 = ? %",
+    },
+    expected: ["10", "10%"],
+    hint: "Un dixième correspond à 10 %.",
+    explanation: "1/10 = 10 %.",
+    tags: ["fraction", "pourcentage"],
+  },
+
+  {
+    id: "6e_calcul_fraction_comparer_002",
+    niveau: "6e",
+    type: "calcul",
+    mode: "fixed",
+    notionId: "fractions",
+    microId: "fraction_comparer",
+    difficulty: 2,
+    durationSec: 20,
+    media: {
+      text: "Quelle est la plus grande fraction : 3/4 ou 1/2 ?",
+    },
+    expected: ["3/4"],
+    hint: "3/4 est plus grand que la moitié.",
+    explanation: "3/4 est plus grand que 1/2.",
+    tags: ["fraction", "comparer"],
+  },
+
+  {
+    id: "6e_calcul_fraction_comparer_003",
+    niveau: "6e",
+    type: "calcul",
+    mode: "fixed",
+    notionId: "fractions",
+    microId: "fraction_comparer",
+    difficulty: 2,
+    durationSec: 20,
+    media: {
+      text: "Quelle est la plus grande fraction : 2/3 ou 1/3 ?",
+    },
+    expected: ["2/3"],
+    hint: "Les deux fractions ont le même dénominateur.",
+    explanation: "2/3 est plus grand que 1/3.",
+    tags: ["fraction", "comparer"],
+  },
+
+  {
+    id: "6e_calcul_fraction_comparer_004",
+    niveau: "6e",
+    type: "calcul",
+    mode: "fixed",
+    notionId: "fractions",
+    microId: "fraction_comparer",
+    difficulty: 2,
+    durationSec: 20,
+    media: {
+      text: "Quelle est la plus grande fraction : 5/10 ou 1/2 ?",
+    },
+    expected: ["5/10", "1/2"],
+    hint: "Ces deux fractions représentent la même quantité.",
+    explanation: "5/10 = 1/2. Les deux réponses sont acceptées.",
+    tags: ["fraction", "comparer", "egalite"],
   },
 ];

@@ -3,6 +3,10 @@
 import type { CalculRapideItem } from "../../types";
 
 export const calculsFixed5e: CalculRapideItem[] = [
+  // ============================================================
+  // SEMAINE MESURES
+  // ============================================================
+
   {
     id: "5e_calcul_longueur_001",
     niveau: "5e",
@@ -17,8 +21,7 @@ export const calculsFixed5e: CalculRapideItem[] = [
     },
     expected: ["4500"],
     hint: "1 km = 1000 m.",
-    explanation:
-      "4,5 × 1000 = 4500 m.",
+    explanation: "4,5 × 1000 = 4500 m.",
     tags: ["longueur", "conversion"],
   },
 
@@ -36,8 +39,7 @@ export const calculsFixed5e: CalculRapideItem[] = [
     },
     expected: ["0,75", "0.75"],
     hint: "1 kg = 1000 g.",
-    explanation:
-      "750 ÷ 1000 = 0,75 kg.",
+    explanation: "750 ÷ 1000 = 0,75 kg.",
     tags: ["masse"],
   },
 
@@ -55,8 +57,7 @@ export const calculsFixed5e: CalculRapideItem[] = [
     },
     expected: ["250"],
     hint: "1 L = 100 cL.",
-    explanation:
-      "2,5 × 100 = 250 cL.",
+    explanation: "2,5 × 100 = 250 cL.",
     tags: ["contenance"],
   },
 
@@ -74,8 +75,7 @@ export const calculsFixed5e: CalculRapideItem[] = [
     },
     expected: ["135"],
     hint: "2 h = 120 min.",
-    explanation:
-      "2 h = 120 min puis 120 + 15 = 135 min.",
+    explanation: "2 h = 120 min puis 120 + 15 = 135 min.",
     tags: ["duree"],
   },
 
@@ -93,8 +93,7 @@ export const calculsFixed5e: CalculRapideItem[] = [
     },
     expected: ["160", "160 km"],
     hint: "Distance = vitesse × temps.",
-    explanation:
-      "80 × 2 = 160 km.",
+    explanation: "80 × 2 = 160 km.",
     tags: ["vitesse", "distance"],
   },
 
@@ -112,8 +111,7 @@ export const calculsFixed5e: CalculRapideItem[] = [
     },
     expected: ["42", "42 m²", "42 m2"],
     hint: "Aire = longueur × largeur.",
-    explanation:
-      "7 × 6 = 42 m².",
+    explanation: "7 × 6 = 42 m².",
     tags: ["aire"],
   },
 
@@ -131,8 +129,155 @@ export const calculsFixed5e: CalculRapideItem[] = [
     },
     expected: ["750"],
     hint: "1 L = 1000 mL.",
-    explanation:
-      "0,75 × 1000 = 750 mL.",
+    explanation: "0,75 × 1000 = 750 mL.",
     tags: ["volume", "contenance"],
+  },
+
+  // ============================================================
+  // SEMAINE RELATIFS
+  // ============================================================
+
+  {
+    id: "5e_calcul_relatif_comparer_001",
+    niveau: "5e",
+    type: "calcul",
+    mode: "fixed",
+    notionId: "nombres_relatifs",
+    microId: "relatifs_comparer",
+    difficulty: 2,
+    durationSec: 20,
+    media: {
+      text: "Quel nombre est le plus grand : -3 ou 2 ?",
+    },
+    expected: ["2"],
+    hint: "Un nombre positif est plus grand qu’un nombre négatif.",
+    explanation: "2 est positif, -3 est négatif. Donc 2 est le plus grand.",
+    tags: ["relatifs", "comparer"],
+  },
+
+  {
+    id: "5e_calcul_relatif_comparer_002",
+    niveau: "5e",
+    type: "calcul",
+    mode: "fixed",
+    notionId: "nombres_relatifs",
+    microId: "relatifs_comparer",
+    difficulty: 2,
+    durationSec: 20,
+    media: {
+      text: "Quel nombre est le plus grand : -7 ou -2 ?",
+    },
+    expected: ["-2"],
+    hint: "Entre deux nombres négatifs, le plus grand est le plus proche de 0.",
+    explanation: "-2 est plus proche de 0 que -7. Donc -2 est le plus grand.",
+    tags: ["relatifs", "comparer"],
+  },
+
+  {
+    id: "5e_calcul_relatif_addition_001",
+    niveau: "5e",
+    type: "calcul",
+    mode: "fixed",
+    notionId: "operations_relatifs",
+    microId: "relatifs_additionner",
+    difficulty: 2,
+    durationSec: 20,
+    media: {
+      text: "-4 + 9 = ?",
+    },
+    expected: ["5"],
+    hint: "Tu pars de -4 et tu avances de 9.",
+    explanation: "-4 + 9 = 5.",
+    tags: ["relatifs", "addition"],
+  },
+
+  {
+    id: "5e_calcul_relatif_addition_002",
+    niveau: "5e",
+    type: "calcul",
+    mode: "fixed",
+    notionId: "operations_relatifs",
+    microId: "relatifs_additionner",
+    difficulty: 2,
+    durationSec: 20,
+    media: {
+      text: "-6 + (-3) = ?",
+    },
+    expected: ["-9"],
+    hint: "Deux pertes s’additionnent.",
+    explanation: "-6 + (-3) = -9.",
+    tags: ["relatifs", "addition"],
+  },
+
+  {
+    id: "5e_calcul_relatif_soustraction_001",
+    niveau: "5e",
+    type: "calcul",
+    mode: "fixed",
+    notionId: "operations_relatifs",
+    microId: "relatifs_soustraire",
+    difficulty: 3,
+    durationSec: 20,
+    media: {
+      text: "5 - 8 = ?",
+    },
+    expected: ["-3"],
+    hint: "Si tu enlèves plus que ce que tu as, tu passes sous 0.",
+    explanation: "5 - 8 = -3.",
+    tags: ["relatifs", "soustraction"],
+  },
+
+  {
+    id: "5e_calcul_relatif_soustraction_002",
+    niveau: "5e",
+    type: "calcul",
+    mode: "fixed",
+    notionId: "operations_relatifs",
+    microId: "relatifs_soustraire",
+    difficulty: 3,
+    durationSec: 20,
+    media: {
+      text: "4 - (-6) = ?",
+    },
+    expected: ["10"],
+    hint: "Soustraire un négatif revient à ajouter.",
+    explanation: "4 - (-6) = 4 + 6 = 10.",
+    tags: ["relatifs", "soustraction"],
+  },
+
+  {
+    id: "5e_calcul_relatif_oppose_001",
+    niveau: "5e",
+    type: "calcul",
+    mode: "fixed",
+    notionId: "nombres_relatifs",
+    microId: "relatifs_oppose",
+    difficulty: 2,
+    durationSec: 20,
+    media: {
+      text: "Quel est l’opposé de -8 ?",
+    },
+    expected: ["8"],
+    hint: "L’opposé a le signe contraire.",
+    explanation: "L’opposé de -8 est 8.",
+    tags: ["relatifs", "oppose"],
+  },
+
+  {
+    id: "5e_calcul_relatif_distance_zero_001",
+    niveau: "5e",
+    type: "calcul",
+    mode: "fixed",
+    notionId: "nombres_relatifs",
+    microId: "relatifs_distance_zero",
+    difficulty: 2,
+    durationSec: 20,
+    media: {
+      text: "Quelle est la distance à zéro de -12 ?",
+    },
+    expected: ["12"],
+    hint: "La distance à zéro est toujours positive.",
+    explanation: "La distance à zéro de -12 est 12.",
+    tags: ["relatifs", "distance_zero"],
   },
 ];
