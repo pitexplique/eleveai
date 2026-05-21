@@ -22,7 +22,7 @@ export const problemesTemplates4e: CalculRapideItem[] = [
     template:
       "Une randonnée mesure {{km}} km. Combien cela représente-t-il en mètres ?",
     variables: {
-      km: [3.5, 4.2, 5.8, 7.4, 9.1],
+      km: [2.8, 4.6, 6.3, 8.5, 10.4],
     },
     answerRule: "km * 1000",
     hint: "1 km = 1000 m.",
@@ -45,7 +45,7 @@ export const problemesTemplates4e: CalculRapideItem[] = [
     template:
       "Une bouteille contient {{L}} L. Quelle quantité cela représente-t-il en mL ?",
     variables: {
-      L: [0.75, 1.2, 1.5, 2.25, 3.4],
+      L: [0.5, 1.25, 1.8, 2.4, 3.75],
     },
     answerRule: "L * 1000",
     hint: "1 L = 1000 mL.",
@@ -68,8 +68,8 @@ export const problemesTemplates4e: CalculRapideItem[] = [
     template:
       "Une activité dure {{h}} h {{m}} min. Quelle est la durée totale en minutes ?",
     variables: {
-      h: [1, 2, 3, 4],
-      m: [10, 15, 20, 30, 45],
+      h: [1, 2, 3, 5],
+      m: [5, 25, 35, 40, 50],
     },
     answerRule: "(h * 60) + m",
     hint: "Transforme les heures en minutes puis ajoute.",
@@ -93,7 +93,7 @@ export const problemesTemplates4e: CalculRapideItem[] = [
     template:
       "Une voiture roule à {{v}} km/h pendant {{t}} h. Quelle distance parcourt-elle ?",
     variables: {
-      v: [60, 72, 80, 90, 110],
+      v: [55, 68, 75, 95, 105],
       t: [2, 3, 4],
     },
     answerRule: "v * t",
@@ -117,8 +117,8 @@ export const problemesTemplates4e: CalculRapideItem[] = [
     template:
       "Une terrasse mesure {{L}} m sur {{l}} m. Quelle est son aire ?",
     variables: {
-      L: [8, 10, 12, 15],
-      l: [3, 4, 5, 6],
+      L: [7, 9, 11, 14, 16],
+      l: [3, 4, 5],
     },
     answerRule: "L * l",
     hint: "Aire = longueur × largeur.",
@@ -141,14 +141,14 @@ export const problemesTemplates4e: CalculRapideItem[] = [
     template:
       "Un rectangle mesure {{a}} cm sur {{b}} cm. Un élève répond : “l’aire vaut {{r}} cm”. A-t-il raison ?",
     variables: {
-      a: [3, 4, 5, 6],
-      b: [2, 3, 4, 5],
-      r: [6, 12, 20, 30],
+      a: [7, 8, 9, 10],
+      b: [3, 4, 5, 6],
+      r: [21, 32, 45, 60],
     },
     answerRule: "'non'",
-    hint: "Une aire s’exprime en cm².",
+    hint: "Une aire s’exprime en cm², pas en cm.",
     explanationTemplate:
-      "Le calcul est correct mais l’unité est fausse : il faut écrire cm².",
+      "Même si le calcul numérique peut sembler correct, l’unité est fausse : une aire s’exprime en cm².",
     tags: ["aire", "piege", "unites"],
   },
 
@@ -167,8 +167,8 @@ export const problemesTemplates4e: CalculRapideItem[] = [
     template:
       "Dans un triangle rectangle, les côtés de l’angle droit mesurent {{a}} cm et {{b}} cm. Quelle est l’hypoténuse ?",
     variables: {
-      a: [3, 5, 6, 8],
-      b: [4, 12, 8, 15],
+      a: [5, 9, 16],
+      b: [12],
     },
     answerRule: "Math.sqrt(a*a + b*b)",
     hint: "Utilise le théorème de Pythagore.",
@@ -196,9 +196,9 @@ export const problemesTemplates4e: CalculRapideItem[] = [
     template:
       "Un objet coûte {{x}} €. On en achète {{a}} et on ajoute {{b}} € de frais. Quel est le prix total ?",
     variables: {
-      x: [2, 3, 4, 5],
-      a: [2, 3, 4, 5],
-      b: [1, 2, 5, 7],
+      x: [3, 4, 6, 7],
+      a: [2, 3, 4],
+      b: [2, 5, 8],
     },
     answerRule: "a * x + b",
     hint: "Le prix total est a × x + b.",
@@ -222,9 +222,9 @@ export const problemesTemplates4e: CalculRapideItem[] = [
     template:
       "Un abonnement coûte {{b}} €, puis {{p}} € par séance. Pour {{x}} séances, combien paie-t-on ?",
     variables: {
-      b: [5, 8, 10],
-      p: [2, 3, 4],
-      x: [3, 4, 5, 6],
+      b: [6, 9, 12],
+      p: [3, 5, 7],
+      x: [2, 4, 6],
     },
     answerRule: "b + p * x",
     hint: "Prix total = abonnement + prix par séance × nombre de séances.",
@@ -248,8 +248,8 @@ export const problemesTemplates4e: CalculRapideItem[] = [
     template:
       "On a {{k}} sacs contenant chacun x billes et {{a}} billes en plus. Développe l’expression {{k}}(x + {{a}}).",
     variables: {
-      k: [2, 3, 4, 5],
-      a: [2, 3, 4, 5],
+      k: [3, 4, 6, 7],
+      a: [2, 5, 6, 8],
     },
     answerRule: "k + 'x+' + (k * a)",
     hint: "Distribue le nombre devant la parenthèse.",
@@ -272,8 +272,8 @@ export const problemesTemplates4e: CalculRapideItem[] = [
     },
     template: "Factorise : {{k}}x + {{n}}.",
     variables: {
-      k: [2, 3, 4, 5, 6],
-      n: [4, 6, 8, 10, 12],
+      k: [2, 3, 4, 6],
+      n: [12, 24, 36, 48],
     },
     answerRule: "k + '(x+' + (n / k) + ')'",
     hint: "Mets le facteur commun devant la parenthèse.",
@@ -297,8 +297,8 @@ export const problemesTemplates4e: CalculRapideItem[] = [
     template:
       "Un nombre augmenté de {{a}} donne {{b}}. Quel est ce nombre ?",
     variables: {
-      a: [2, 3, 5, 7, 9],
-      b: [10, 12, 15, 18, 20],
+      a: [4, 6, 8, 11],
+      b: [19, 23, 31, 42],
     },
     answerRule: "b - a",
     hint: "On cherche x tel que x + a = b.",

@@ -1,309 +1,176 @@
-// lib/calcul-rapide/data/4e/calculs.templates.ts
+// lib/calcul-rapide/data/6e/problemes.templates.ts
 
 import type { CalculRapideItem } from "../../types";
 
-export const calculsTemplates4e: CalculRapideItem[] = [
+export const problemesTemplates6e: CalculRapideItem[] = [
   // ============================================================
   // SEMAINE MESURES
   // ============================================================
 
   {
-    id: "4e_template_conversion_longueur_001",
-    niveau: "4e",
-    type: "calcul",
+    id: "6e_template_randonnee_001",
+    niveau: "6e",
+    type: "probleme",
     mode: "template",
     notionId: "grandeurs_mesures",
     microId: "conversion_longueur",
     difficulty: 2,
-    durationSec: 20,
-    media: { text: "{{n}} km = ? m" },
-    template: "{{n}} km = ? m",
-    variables: {
-      n: [1.2, 2.5, 3.6, 4.8, 7.4],
+    durationSec: 60,
+    media: {
+      text: "Une randonnée mesure {{km}} km. Combien cela fait-il en mètres ?",
     },
-    answerRule: "n * 1000",
+    template: "Une randonnée mesure {{km}} km. Combien cela fait-il en mètres ?",
+    variables: {
+      km: [1.8, 2.6, 4.5, 5.7, 8.2],
+    },
+    answerRule: "km * 1000",
     hint: "1 km = 1000 m.",
-    explanationTemplate: "{{n}} × 1000 = {{answer}} m.",
-    tags: ["conversion", "longueur", "reactivation"],
+    explanationTemplate: "{{km}} × 1000 = {{answer}} m.",
+    tags: ["longueur", "reunion"],
   },
 
   {
-    id: "4e_template_conversion_masse_001",
-    niveau: "4e",
-    type: "calcul",
-    mode: "template",
-    notionId: "grandeurs_mesures",
-    microId: "conversion_masse",
-    difficulty: 2,
-    durationSec: 20,
-    media: { text: "{{n}} kg = ? g" },
-    template: "{{n}} kg = ? g",
-    variables: {
-      n: [0.5, 0.75, 1.2, 2.4, 3.8],
-    },
-    answerRule: "n * 1000",
-    hint: "1 kg = 1000 g.",
-    explanationTemplate: "{{n}} × 1000 = {{answer}} g.",
-    tags: ["conversion", "masse", "reactivation"],
-  },
-
-  {
-    id: "4e_template_conversion_contenance_001",
-    niveau: "4e",
-    type: "calcul",
+    id: "6e_template_jus_fruits_001",
+    niveau: "6e",
+    type: "probleme",
     mode: "template",
     notionId: "grandeurs_mesures",
     microId: "conversion_contenance",
     difficulty: 2,
-    durationSec: 20,
-    media: { text: "{{n}} L = ? mL" },
-    template: "{{n}} L = ? mL",
-    variables: {
-      n: [0.75, 1.2, 1.5, 2.25, 3.4],
+    durationSec: 60,
+    media: {
+      text: "Une bouteille contient {{cl}} cL de jus. Quelle quantité cela représente-t-il en litres ?",
     },
-    answerRule: "n * 1000",
-    hint: "1 L = 1000 mL.",
-    explanationTemplate: "{{n}} × 1000 = {{answer}} mL.",
-    tags: ["conversion", "contenance", "volume"],
+    template:
+      "Une bouteille contient {{cl}} cL de jus. Quelle quantité cela représente-t-il en litres ?",
+    variables: {
+      cl: [120, 180, 240, 350, 750],
+    },
+    answerRule: "cl / 100",
+    hint: "100 cL = 1 L.",
+    explanationTemplate: "{{cl}} ÷ 100 = {{answer}} L.",
+    tags: ["contenance"],
   },
 
   {
-    id: "4e_template_conversion_duree_001",
-    niveau: "4e",
-    type: "calcul",
+    id: "6e_template_course_001",
+    niveau: "6e",
+    type: "probleme",
     mode: "template",
     notionId: "grandeurs_mesures",
     microId: "conversion_duree",
-    difficulty: 3,
-    durationSec: 20,
-    media: { text: "{{h}} h {{m}} min = ? min" },
-    template: "{{h}} h {{m}} min = ? min",
-    variables: {
-      h: [1, 2, 3, 4],
-      m: [10, 15, 20, 30, 45],
+    difficulty: 2,
+    durationSec: 60,
+    media: {
+      text: "Une course dure {{h}} heures. Combien cela fait-il en minutes ?",
     },
-    answerRule: "(h * 60) + m",
-    hint: "Transforme les heures en minutes puis ajoute.",
-    explanationTemplate:
-      "On transforme les heures en minutes puis on ajoute les minutes : résultat = {{answer}} min.",
+    template: "Une course dure {{h}} heures. Combien cela fait-il en minutes ?",
+    variables: {
+      h: [2, 3, 5, 6],
+    },
+    answerRule: "h * 60",
+    hint: "1 heure = 60 minutes.",
+    explanationTemplate: "{{h}} × 60 = {{answer}} minutes.",
     tags: ["duree"],
   },
 
-  {
-    id: "4e_template_vitesse_001",
-    niveau: "4e",
-    type: "calcul",
-    mode: "template",
-    notionId: "proportionnalite",
-    microId: "vitesse_simple",
-    difficulty: 3,
-    durationSec: 20,
-    media: { text: "{{v}} km/h pendant {{t}} h" },
-    template: "{{v}} km/h pendant {{t}} h",
-    variables: {
-      v: [60, 72, 80, 90, 110],
-      t: [2, 3, 4],
-    },
-    answerRule: "v * t",
-    hint: "Distance = vitesse × temps.",
-    explanationTemplate: "{{v}} × {{t}} = {{answer}} km.",
-    tags: ["vitesse", "distance"],
-  },
-
-  {
-    id: "4e_template_aire_rectangle_001",
-    niveau: "4e",
-    type: "calcul",
-    mode: "template",
-    notionId: "aires",
-    microId: "aire_rectangle",
-    difficulty: 3,
-    durationSec: 20,
-    media: { text: "Rectangle : {{L}} m × {{l}} m" },
-    template: "Rectangle : {{L}} m × {{l}} m",
-    variables: {
-      L: [8, 10, 12, 15],
-      l: [3, 4, 5, 6],
-    },
-    answerRule: "L * l",
-    hint: "Aire = longueur × largeur.",
-    explanationTemplate: "{{L}} × {{l}} = {{answer}} m².",
-    tags: ["aire"],
-  },
-
-  {
-    id: "4e_template_volume_001",
-    niveau: "4e",
-    type: "calcul",
-    mode: "template",
-    notionId: "volumes",
-    microId: "volume_contenance",
-    difficulty: 3,
-    durationSec: 20,
-    media: { text: "{{n}} L = ? mL" },
-    template: "{{n}} L = ? mL",
-    variables: {
-      n: [0.75, 1.2, 1.5, 2.25, 3.4],
-    },
-    answerRule: "n * 1000",
-    hint: "1 L = 1000 mL.",
-    explanationTemplate: "{{n}} × 1000 = {{answer}} mL.",
-    tags: ["volume", "contenance"],
-  },
-
-  {
-    id: "4e_template_piege_aire_001",
-    niveau: "4e",
-    type: "calcul",
-    mode: "template",
-    notionId: "aires",
-    microId: "aire_unites",
-    difficulty: 4,
-    durationSec: 20,
-    media: { text: "{{a}} cm × {{b}} cm = ? cm²" },
-    template: "{{a}} cm × {{b}} cm = ? cm²",
-    variables: {
-      a: [3, 4, 5, 6, 8],
-      b: [2, 3, 4, 5],
-    },
-    answerRule: "a * b",
-    hint: "Une aire s’exprime en cm².",
-    explanationTemplate: "{{a}} × {{b}} = {{answer}} cm².",
-    tags: ["aire", "piege", "unites"],
-  },
-
   // ============================================================
-  // SEMAINE 19 - CALCUL LITTÉRAL EXPRESS
+  // SEMAINE FRACTIONS
   // ============================================================
 
   {
-    id: "4e_template_litteral_reduire_001",
-    niveau: "4e",
-    type: "calcul",
+    id: "6e_template_fraction_randonnee_001",
+    niveau: "6e",
+    type: "probleme",
     mode: "template",
-    notionId: "expressions_litterales",
-    microId: "litteral_reduire",
+    notionId: "fractions",
+    microId: "fraction_quantite",
     difficulty: 2,
-    durationSec: 20,
-    media: { text: "{{a}}x + {{b}}x = ?" },
-    template: "{{a}}x + {{b}}x = ?",
-    variables: {
-      a: [2, 3, 4, 5, 7],
-      b: [1, 2, 3, 4, 6],
+    durationSec: 60,
+    media: {
+      text: "Une randonnée mesure {{n}} km. La famille parcourt la moitié. Combien de kilomètres a-t-elle parcourus ?",
     },
-    answerRule: "(a + b) + 'x'",
-    hint: "Additionne les coefficients devant x.",
-    explanationTemplate: "{{a}}x + {{b}}x = {{answer}}.",
-    tags: ["calcul_litteral", "reduire"],
+    template:
+      "Une randonnée mesure {{n}} km. La famille parcourt la moitié. Combien de kilomètres a-t-elle parcourus ?",
+    variables: {
+      n: [6, 8, 14, 18, 24],
+    },
+    answerRule: "n / 2",
+    hint: "La moitié, c’est diviser par 2.",
+    explanationTemplate:
+      "La moitié de {{n}}, c’est {{n}} ÷ 2 = {{answer}} km.",
+    tags: ["fraction", "reunion", "longueur"],
   },
 
   {
-    id: "4e_template_litteral_reduire_soustraction_001",
-    niveau: "4e",
-    type: "calcul",
+    id: "6e_template_fraction_jus_001",
+    niveau: "6e",
+    type: "probleme",
     mode: "template",
-    notionId: "expressions_litterales",
-    microId: "litteral_reduire",
+    notionId: "fractions",
+    microId: "fraction_quantite",
     difficulty: 2,
-    durationSec: 20,
-    media: { text: "{{a}}x - {{b}}x = ?" },
-    template: "{{a}}x - {{b}}x = ?",
-    variables: {
-      a: [6, 7, 8, 9, 10],
-      b: [1, 2, 3, 4, 5],
+    durationSec: 60,
+    media: {
+      text: "Une bouteille contient {{n}} cL de jus. On boit le quart. Combien de cL a-t-on bus ?",
     },
-    answerRule: "(a - b) + 'x'",
-    hint: "Soustrais les coefficients devant x.",
-    explanationTemplate: "{{a}}x - {{b}}x = {{answer}}.",
-    tags: ["calcul_litteral", "reduire"],
+    template:
+      "Une bouteille contient {{n}} cL de jus. On boit le quart. Combien de cL a-t-on bus ?",
+    variables: {
+      n: [80, 120, 160, 200, 240],
+    },
+    answerRule: "n / 4",
+    hint: "Le quart, c’est diviser par 4.",
+    explanationTemplate:
+      "Le quart de {{n}} cL, c’est {{n}} ÷ 4 = {{answer}} cL.",
+    tags: ["fraction", "contenance"],
   },
 
   {
-    id: "4e_template_litteral_substitution_001",
-    niveau: "4e",
-    type: "calcul",
+    id: "6e_template_fraction_marche_001",
+    niveau: "6e",
+    type: "probleme",
     mode: "template",
-    notionId: "expressions_litterales",
-    microId: "litteral_substitution",
+    notionId: "fractions",
+    microId: "fraction_quantite",
     difficulty: 2,
-    durationSec: 20,
-    media: { text: "Si x = {{x}}, alors {{a}}x + {{b}} = ?" },
-    template: "Si x = {{x}}, alors {{a}}x + {{b}} = ?",
-    variables: {
-      x: [2, 3, 4, 5],
-      a: [2, 3, 4, 5],
-      b: [1, 2, 5, 7],
+    durationSec: 60,
+    media: {
+      text: "Au marché, un panier contient {{n}} fruits. On en vend les 3/4. Combien de fruits sont vendus ?",
     },
-    answerRule: "a * x + b",
-    hint: "Remplace x par sa valeur.",
+    template:
+      "Au marché, un panier contient {{n}} fruits. On en vend les 3/4. Combien de fruits sont vendus ?",
+    variables: {
+      n: [32, 48, 72, 96, 144],
+    },
+    answerRule: "n * 3 / 4",
+    hint: "Calcule d’abord le quart, puis multiplie par 3.",
     explanationTemplate:
-      "{{a}} × {{x}} + {{b}} = {{answer}}.",
-    tags: ["calcul_litteral", "substitution"],
+      "Les 3/4 de {{n}}, c’est {{n}} × 3 ÷ 4 = {{answer}} fruits.",
+    tags: ["fraction", "reunion"],
   },
 
   {
-    id: "4e_template_litteral_developper_001",
-    niveau: "4e",
-    type: "calcul",
+    id: "6e_template_fraction_course_001",
+    niveau: "6e",
+    type: "probleme",
     mode: "template",
-    notionId: "distributivite",
-    microId: "distributivite_developper",
-    difficulty: 3,
-    durationSec: 20,
-    media: { text: "{{k}}(x + {{a}}) = ?" },
-    template: "{{k}}(x + {{a}}) = ?",
-    variables: {
-      k: [2, 3, 4, 5],
-      a: [1, 2, 3, 4, 5],
+    notionId: "fractions",
+    microId: "fraction_quantite",
+    difficulty: 2,
+    durationSec: 60,
+    media: {
+      text: "Une course fait {{n}} km. Jade a parcouru 1/10 du trajet. Combien de kilomètres a-t-elle parcourus ?",
     },
-    answerRule: "k + 'x+' + (k * a)",
-    hint: "Distribue le nombre devant la parenthèse.",
-    explanationTemplate:
-      "{{k}}(x + {{a}}) = {{answer}}.",
-    tags: ["calcul_litteral", "developper", "distributivite"],
-  },
-
-  {
-    id: "4e_template_litteral_factoriser_001",
-    niveau: "4e",
-    type: "calcul",
-    mode: "template",
-    notionId: "factorisation",
-    microId: "factorisation_facteur_commun",
-    difficulty: 3,
-    durationSec: 20,
-    media: { text: "Factorise : {{k}}x + {{n}}" },
-    template: "Factorise : {{k}}x + {{n}}",
+    template:
+      "Une course fait {{n}} km. Jade a parcouru 1/10 du trajet. Combien de kilomètres a-t-elle parcourus ?",
     variables: {
-      k: [2, 3, 4, 5, 6],
-      n: [4, 6, 8, 10, 12],
+      n: [20, 40, 60, 90, 120],
     },
-    answerRule: "k + '(x+' + (n / k) + ')'",
-    hint: "Cherche le facteur commun.",
+    answerRule: "n / 10",
+    hint: "1/10, c’est diviser par 10.",
     explanationTemplate:
-      "On met {{k}} en facteur : {{answer}}.",
-    tags: ["calcul_litteral", "factoriser"],
-  },
-
-  {
-    id: "4e_template_equation_simple_001",
-    niveau: "4e",
-    type: "calcul",
-    mode: "template",
-    notionId: "equations",
-    microId: "equation_simple",
-    difficulty: 3,
-    durationSec: 20,
-    media: { text: "x + {{a}} = {{b}}. x = ?" },
-    template: "x + {{a}} = {{b}}. x = ?",
-    variables: {
-      a: [2, 3, 4, 5, 7],
-      b: [8, 10, 12, 15, 20],
-    },
-    answerRule: "b - a",
-    hint: "Cherche le nombre qui complète l’égalité.",
-    explanationTemplate:
-      "x = {{b}} - {{a}} = {{answer}}.",
-    tags: ["equation", "calcul_mental"],
+      "1/10 de {{n}}, c’est {{n}} ÷ 10 = {{answer}} km.",
+    tags: ["fraction", "sport"],
   },
 ];
