@@ -1,174 +1,171 @@
-// lib/concours-general/banks/proportionnalite-grandeurs.bank.ts
+// lib/concours-general/banks/nombres-logique.bank.ts
 
 import type { ConcoursGeneralItem } from "../types";
 
-export const proportionnaliteGrandeursBank: ConcoursGeneralItem[] = [
+export const nombresLogiqueBank: ConcoursGeneralItem[] = [
   {
-    id: "cg_prop_001_pourcentage_inverse",
-    niveauCible: "3e",
-    accessibleFrom: "4e",
-    theme: "proportionnalite_grandeurs",
-    difficulty: 4,
-
-    title: "Le prix avant réduction",
-
-    statement:
-      "Un vélo est vendu 360 € après une réduction de 20 %.",
-
-    question:
-      "Quel était le prix du vélo avant la réduction ?",
-
-    format: "short",
-    expected: ["450"],
-
-    notionIds: ["proportionnalite", "pourcentages"],
-    microIds: ["prop_pourcentage", "prop_evolution"],
-
-    hint1: "Après une réduction de 20 %, il reste 80 % du prix initial.",
-    hint2: "360 € représente donc 80 % du prix initial.",
-    hint3: "Calcule 360 ÷ 0,8.",
-
-    correction:
-      "Après une réduction de 20 %, le prix payé représente 80 % du prix initial. On cherche donc le nombre dont 80 % vaut 360. On calcule 360 ÷ 0,8 = 450. Le prix initial était donc 450 €.",
-
-    redactionAttendue:
-      "Le prix final représente 80 % du prix initial. Donc 0,8 × prix initial = 360. Ainsi prix initial = 360 ÷ 0,8 = 450. Le vélo coûtait 450 € avant réduction.",
-
-    tags: ["concours_general", "pourcentage", "raisonnement_inverse"],
-  },
-
-  {
-    id: "cg_prop_002_sentier_volcan",
-    niveauCible: "3e",
-    accessibleFrom: "5e",
-    theme: "proportionnalite_grandeurs",
-    difficulty: 5,
-
-    title: "Le sentier du volcan",
-
-    statement:
-      "Deux sentiers permettent de rejoindre un point d’observation. Le premier mesure 3,6 km. Le second est 25 % plus long. Un groupe marche à une vitesse moyenne de 4,5 km/h.",
-
-    question:
-      "Combien de minutes supplémentaires faut-il pour prendre le second sentier ?",
-
-    format: "multi_step",
-    expected: ["12"],
-
-    notionIds: ["proportionnalite", "vitesse", "pourcentages"],
-    microIds: ["prop_pourcentage", "vitesse_duree_distance"],
-
-    hint1: "Commence par calculer la longueur supplémentaire.",
-    hint2: "25 % de 3,6 km, c’est un quart de 3,6 km.",
-    hint3: "Utilise temps = distance ÷ vitesse, puis convertis en minutes.",
-
-    correction:
-      "Le second sentier est plus long de 25 % de 3,6 km. Or 25 % de 3,6 km = 0,9 km. Il faut donc parcourir 0,9 km de plus. À 4,5 km/h, le temps supplémentaire vaut 0,9 ÷ 4,5 = 0,2 h. Comme 0,2 h = 12 minutes, il faut 12 minutes supplémentaires.",
-
-    redactionAttendue:
-      "La distance supplémentaire est 25 % de 3,6 km, soit 0,9 km. Le temps pour parcourir 0,9 km à 4,5 km/h vaut 0,9 ÷ 4,5 = 0,2 h. Or 0,2 h = 12 minutes. Il faut donc 12 minutes supplémentaires.",
-
-    tags: ["concours_general", "reunion", "vitesse", "pourcentage"],
-  },
-
-  {
-    id: "cg_prop_003_tarifs_velo",
-    niveauCible: "3e",
-    accessibleFrom: "4e",
-    theme: "proportionnalite_grandeurs",
-    difficulty: 4,
-
-    title: "Deux tarifs de location",
-
-    statement:
-      "Pour louer un vélo, le tarif A coûte 5 € au départ puis 2 € par heure. Le tarif B coûte 3 € par heure sans frais de départ.",
-
-    question:
-      "Pour combien d’heures les deux tarifs coûtent-ils le même prix ?",
-
-    format: "short",
-    expected: ["5"],
-
-    notionIds: ["fonctions", "equations", "proportionnalite"],
-    microIds: ["fonction_affine", "equation_simple"],
-
-    hint1: "Exprime chaque tarif en fonction du nombre d’heures x.",
-    hint2: "Tarif A : 5 + 2x. Tarif B : 3x.",
-    hint3: "Résous 5 + 2x = 3x.",
-
-    correction:
-      "Si x est le nombre d’heures, le tarif A vaut 5 + 2x et le tarif B vaut 3x. On cherche quand les deux tarifs sont égaux : 5 + 2x = 3x. Donc 5 = x. Les deux tarifs coûtent le même prix pour 5 heures.",
-
-    redactionAttendue:
-      "On note x le nombre d’heures. Le tarif A vaut 5 + 2x et le tarif B vaut 3x. On résout 5 + 2x = 3x, donc x = 5. Les deux tarifs sont égaux pour 5 heures.",
-
-    tags: ["concours_general", "tarifs", "fonction", "equation"],
-  },
-
-  {
-    id: "cg_prop_004_recette",
+    id: "cg_num_001_poignees_main",
     niveauCible: "3e",
     accessibleFrom: "6e",
-    theme: "proportionnalite_grandeurs",
+    theme: "nombres_logique",
     difficulty: 3,
 
-    title: "La recette doublée puis partagée",
+    title: "Les poignées de main",
 
     statement:
-      "Une recette pour 4 personnes utilise 300 g de riz. On veut préparer la recette pour 10 personnes.",
+      "Dans un groupe de 12 élèves, chaque élève serre la main de tous les autres une seule fois.",
 
-    question: "Quelle masse de riz faut-il prévoir ?",
+    question: "Combien y a-t-il de poignées de main au total ?",
 
     format: "short",
-    expected: ["750"],
+    expected: ["66"],
 
-    notionIds: ["proportionnalite"],
-    microIds: ["prop_table", "prop_coeff"],
+    notionIds: ["nombres_entiers", "organisation"],
+    microIds: ["calculer", "raisonner"],
 
-    hint1: "Cherche la quantité de riz pour 1 personne.",
-    hint2: "300 ÷ 4 = 75.",
-    hint3: "Pour 10 personnes, calcule 75 × 10.",
+    hint1: "Chaque élève serre la main de 11 autres élèves.",
+    hint2: "Le calcul 12 × 11 compte chaque poignée deux fois.",
+    hint3: "Il faut donc diviser par 2.",
 
     correction:
-      "Pour 4 personnes, il faut 300 g de riz. Pour 1 personne, il faut 300 ÷ 4 = 75 g. Pour 10 personnes, il faut donc 75 × 10 = 750 g.",
+      "Chaque élève serre la main de 11 autres élèves. On pourrait donc calculer 12 × 11 = 132. Mais chaque poignée est comptée deux fois : une fois pour chaque élève concerné. On divise donc par 2 : 132 ÷ 2 = 66. Il y a 66 poignées de main.",
 
     redactionAttendue:
-      "La quantité est proportionnelle au nombre de personnes. Pour 1 personne, il faut 300 ÷ 4 = 75 g. Pour 10 personnes, il faut 75 × 10 = 750 g.",
+      "Il y a 12 élèves. Chacun serre la main de 11 autres élèves, ce qui donne 12 × 11 = 132 comptages. Chaque poignée étant comptée deux fois, il y a 132 ÷ 2 = 66 poignées de main.",
 
-    tags: ["concours_general", "accessible_6e", "proportionnalite", "vie_quotidienne"],
+    tags: ["concours_general", "accessible_6e", "denombrement", "raisonnement"],
   },
 
   {
-    id: "cg_prop_005_echelle_carte",
+    id: "cg_num_002_bordure_carree",
     niveauCible: "3e",
-    accessibleFrom: "5e",
-    theme: "proportionnalite_grandeurs",
-    difficulty: 4,
+    accessibleFrom: "6e",
+    theme: "nombres_logique",
+    difficulty: 3,
 
-    title: "La carte de randonnée",
+    title: "La bordure du carré",
 
     statement:
-      "Sur une carte, 1 cm représente 250 m dans la réalité. Deux points sont séparés de 6,4 cm sur la carte.",
+      "Un grand carré est formé de 64 petits carrés identiques. On colorie uniquement les petits carrés du bord.",
 
-    question:
-      "Quelle est la distance réelle entre ces deux points, en mètres ?",
+    question: "Combien de petits carrés sont coloriés ?",
 
     format: "short",
-    expected: ["1600"],
+    expected: ["28"],
 
-    notionIds: ["proportionnalite", "grandeurs"],
-    microIds: ["echelle", "conversion"],
+    notionIds: ["aires", "nombres_entiers"],
+    microIds: ["aire_composer", "calculer"],
 
-    hint1: "Chaque centimètre représente 250 m.",
-    hint2: "Il faut calculer 6,4 × 250.",
-    hint3: "6,4 × 250 = 1600.",
+    hint1: "64 petits carrés forment un carré de 8 par 8.",
+    hint2: "Les carrés non coloriés sont ceux du centre.",
+    hint3: "Le centre forme un carré de 6 par 6.",
 
     correction:
-      "Sur la carte, 1 cm représente 250 m. Pour 6,4 cm, la distance réelle vaut 6,4 × 250 = 1600 m. Les deux points sont donc séparés de 1600 m dans la réalité.",
+      "Le grand carré contient 64 petits carrés, donc il mesure 8 petits carrés sur 8. Les carrés non coloriés sont ceux du centre : ils forment un carré de 6 sur 6, donc 36 petits carrés. Les carrés coloriés sont donc 64 - 36 = 28.",
 
     redactionAttendue:
-      "La distance réelle est proportionnelle à la distance sur la carte. Comme 1 cm représente 250 m, 6,4 cm représentent 6,4 × 250 = 1600 m.",
+      "Le carré est un carré de 8 × 8. L’intérieur non colorié est un carré de 6 × 6, soit 36 petits carrés. La bordure contient donc 64 - 36 = 28 petits carrés.",
 
-    tags: ["concours_general", "echelle", "proportionnalite", "randonnée"],
+    tags: ["concours_general", "accessible_6e", "quadrillage", "aire"],
+  },
+
+  {
+    id: "cg_num_003_nombre_reste",
+    niveauCible: "3e",
+    accessibleFrom: "5e",
+    theme: "nombres_logique",
+    difficulty: 4,
+
+    title: "Le reste caché",
+
+    statement:
+      "Un nombre entier positif laisse un reste de 4 lorsqu’on le divise par 5. Il laisse aussi un reste de 4 lorsqu’on le divise par 7. Ce nombre est compris entre 100 et 150.",
+
+    question: "Quel est ce nombre ?",
+
+    format: "short",
+    expected: ["109"],
+
+    notionIds: ["divisibilite", "multiples"],
+    microIds: ["reconnaitre_multiple", "raisonner"],
+
+    hint1: "Si on enlève 4 au nombre, il devient divisible par 5 et par 7.",
+    hint2: "Cherche un multiple commun de 5 et 7.",
+    hint3: "Le multiple de 35 entre 96 et 146 est 105.",
+
+    correction:
+      "Le nombre laisse le même reste 4 quand on le divise par 5 et par 7. Donc si on enlève 4, le nombre obtenu est divisible par 5 et par 7. Il est donc multiple de 35. Comme le nombre est entre 100 et 150, le nombre diminué de 4 est entre 96 et 146. Le multiple de 35 dans cet intervalle est 105. Le nombre cherché est donc 105 + 4 = 109.",
+
+    redactionAttendue:
+      "Si on retire 4 au nombre, on obtient un multiple commun de 5 et de 7. Le multiple commun est donc un multiple de 35. Entre 96 et 146, on trouve 105. Le nombre vaut donc 105 + 4 = 109.",
+
+    tags: ["concours_general", "reste", "multiples", "raisonnement"],
+  },
+
+  {
+    id: "cg_num_004_qcm_reste",
+    niveauCible: "3e",
+    accessibleFrom: "4e",
+    theme: "nombres_logique",
+    difficulty: 4,
+
+    title: "Un reste bien caché",
+
+    statement:
+      "Un nombre entier positif n laisse un reste de 4 lorsqu’on le divise par 6.",
+
+    question: "Parmi les nombres suivants, lequel peut être égal à 5n + 3 ?",
+
+    format: "qcm",
+    choices: ["47", "51", "53", "57", "61"],
+    expected: ["53"],
+
+    notionIds: ["arithmetique", "calcul_litteral"],
+    microIds: ["reste_division", "expression_litterale"],
+
+    hint1: "Écris n sous la forme 6k + 4.",
+    hint2: "Calcule 5(6k + 4) + 3.",
+    hint3: "Tu obtiens 30k + 23.",
+
+    correction:
+      "Comme n laisse un reste de 4 lorsqu’on le divise par 6, on peut écrire n = 6k + 4. Alors 5n + 3 = 5(6k + 4) + 3 = 30k + 20 + 3 = 30k + 23. Le nombre 5n + 3 doit donc être de la forme 30k + 23. Or 53 = 30 × 1 + 23. La bonne réponse est 53.",
+
+    redactionAttendue:
+      "On écrit n = 6k + 4. Alors 5n + 3 = 30k + 23. Parmi les choix proposés, 53 convient.",
+
+    tags: ["concours_general", "qcm", "singapour_style", "reste"],
+  },
+
+  {
+    id: "cg_num_005_suite_logique",
+    niveauCible: "3e",
+    accessibleFrom: "6e",
+    theme: "nombres_logique",
+    difficulty: 3,
+
+    title: "La suite qui accélère",
+
+    statement: "On observe la suite suivante : 5 ; 9 ; 14 ; 20 ; 27 ; ...",
+
+    question: "Quel est le nombre suivant ?",
+
+    format: "qcm",
+    choices: ["33", "34", "35", "36"],
+    expected: ["35"],
+
+    notionIds: ["nombres_entiers", "suites_logiques"],
+    microIds: ["observer_regularite", "raisonner"],
+
+    hint1: "Observe les écarts entre deux nombres successifs.",
+    hint2: "Les écarts sont 4, puis 5, puis 6, puis 7.",
+    hint3: "Le prochain écart est donc 8.",
+
+    correction:
+      "On calcule les écarts : 9 - 5 = 4, 14 - 9 = 5, 20 - 14 = 6, 27 - 20 = 7. Les écarts augmentent de 1 à chaque fois. Le prochain écart est donc 8. Le nombre suivant est 27 + 8 = 35.",
+
+    redactionAttendue:
+      "Les écarts sont 4, 5, 6, 7. Le prochain écart est 8, donc le nombre suivant est 27 + 8 = 35.",
+
+    tags: ["concours_general", "accessible_6e", "suite", "logique"],
   },
 ];
