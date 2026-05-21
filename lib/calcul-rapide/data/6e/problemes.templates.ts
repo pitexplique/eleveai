@@ -21,7 +21,7 @@ export const problemesTemplates6e: CalculRapideItem[] = [
     },
     template: "Une randonnée mesure {{km}} km. Combien cela fait-il en mètres ?",
     variables: {
-      km: [2, 3.5, 4, 6.2],
+      km: [1.8, 2.6, 4.5, 5.7, 8.2],
     },
     answerRule: "km * 1000",
     hint: "1 km = 1000 m.",
@@ -44,7 +44,7 @@ export const problemesTemplates6e: CalculRapideItem[] = [
     template:
       "Une bouteille contient {{cl}} cL de jus. Quelle quantité cela représente-t-il en litres ?",
     variables: {
-      cl: [150, 200, 250, 450, 600],
+      cl: [120, 180, 240, 350, 750],
     },
     answerRule: "cl / 100",
     hint: "100 cL = 1 L.",
@@ -66,7 +66,7 @@ export const problemesTemplates6e: CalculRapideItem[] = [
     },
     template: "Une course dure {{h}} heures. Combien cela fait-il en minutes ?",
     variables: {
-      h: [1, 2, 3, 4],
+      h: [2, 3, 5, 6],
     },
     answerRule: "h * 60",
     hint: "1 heure = 60 minutes.",
@@ -93,7 +93,7 @@ export const problemesTemplates6e: CalculRapideItem[] = [
     template:
       "Une randonnée mesure {{n}} km. La famille parcourt la moitié. Combien de kilomètres a-t-elle parcourus ?",
     variables: {
-      n: [4, 6, 8, 10, 12],
+      n: [6, 8, 14, 18, 24],
     },
     answerRule: "n / 2",
     hint: "La moitié, c’est diviser par 2.",
@@ -117,7 +117,7 @@ export const problemesTemplates6e: CalculRapideItem[] = [
     template:
       "Une bouteille contient {{n}} cL de jus. On boit le quart. Combien de cL a-t-on bus ?",
     variables: {
-      n: [40, 60, 80, 100, 120],
+      n: [80, 120, 160, 200, 240],
     },
     answerRule: "n / 4",
     hint: "Le quart, c’est diviser par 4.",
@@ -141,7 +141,7 @@ export const problemesTemplates6e: CalculRapideItem[] = [
     template:
       "Au marché, un panier contient {{n}} fruits. On en vend les 3/4. Combien de fruits sont vendus ?",
     variables: {
-      n: [20, 40, 60, 80, 100],
+      n: [32, 48, 72, 96, 144],
     },
     answerRule: "n * 3 / 4",
     hint: "Calcule d’abord le quart, puis multiplie par 3.",
@@ -165,7 +165,7 @@ export const problemesTemplates6e: CalculRapideItem[] = [
     template:
       "Une course fait {{n}} km. Jade a parcouru 1/10 du trajet. Combien de kilomètres a-t-elle parcourus ?",
     variables: {
-      n: [10, 20, 30, 50, 80],
+      n: [20, 40, 60, 90, 120],
     },
     answerRule: "n / 10",
     hint: "1/10, c’est diviser par 10.",

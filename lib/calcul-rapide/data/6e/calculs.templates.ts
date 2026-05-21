@@ -19,7 +19,7 @@ export const calculsTemplates6e: CalculRapideItem[] = [
     media: { text: "{{n}} m = ? cm" },
     template: "{{n}} m = ? cm",
     variables: {
-      n: [2, 3, 4.5, 7, 12],
+      n: [1.5, 2.5, 3.2, 6, 8.4, 9.7],
     },
     answerRule: "n * 100",
     hint: "1 m = 100 cm.",
@@ -39,7 +39,7 @@ export const calculsTemplates6e: CalculRapideItem[] = [
     media: { text: "{{n}} kg = ? g" },
     template: "{{n}} kg = ? g",
     variables: {
-      n: [1.5, 2, 3.4, 5, 7],
+      n: [0.5, 1.2, 2.5, 4.8, 6.3, 8],
     },
     answerRule: "n * 1000",
     hint: "1 kg = 1000 g.",
@@ -59,7 +59,7 @@ export const calculsTemplates6e: CalculRapideItem[] = [
     media: { text: "{{n}} cL = ? L" },
     template: "{{n}} cL = ? L",
     variables: {
-      n: [150, 250, 300, 450, 600],
+      n: [120, 180, 240, 375, 520, 750],
     },
     answerRule: "n / 100",
     hint: "100 cL = 1 L.",
@@ -79,7 +79,7 @@ export const calculsTemplates6e: CalculRapideItem[] = [
     media: { text: "{{h}} h = ? min" },
     template: "{{h}} h = ? min",
     variables: {
-      h: [1, 2, 3, 4],
+      h: [2, 3, 5, 6],
     },
     answerRule: "h * 60",
     hint: "1 h = 60 min.",
@@ -103,7 +103,7 @@ export const calculsTemplates6e: CalculRapideItem[] = [
     media: { text: "La moitié de {{n}}" },
     template: "La moitié de {{n}}",
     variables: {
-      n: [20, 36, 40, 48, 60, 80, 100],
+      n: [24, 42, 56, 70, 84, 96, 120],
     },
     answerRule: "n / 2",
     hint: "La moitié, c’est diviser par 2.",
@@ -123,7 +123,7 @@ export const calculsTemplates6e: CalculRapideItem[] = [
     media: { text: "Le quart de {{n}}" },
     template: "Le quart de {{n}}",
     variables: {
-      n: [20, 40, 60, 80, 100, 120],
+      n: [32, 48, 72, 96, 144, 200],
     },
     answerRule: "n / 4",
     hint: "Le quart, c’est diviser par 4.",
@@ -143,7 +143,7 @@ export const calculsTemplates6e: CalculRapideItem[] = [
     media: { text: "Le dixième de {{n}}" },
     template: "Le dixième de {{n}}",
     variables: {
-      n: [50, 80, 100, 120, 250, 300],
+      n: [70, 90, 160, 240, 450, 800],
     },
     answerRule: "n / 10",
     hint: "Le dixième, c’est diviser par 10.",
@@ -163,7 +163,7 @@ export const calculsTemplates6e: CalculRapideItem[] = [
     media: { text: "Les 3/4 de {{n}}" },
     template: "Les 3/4 de {{n}}",
     variables: {
-      n: [20, 40, 60, 80, 100, 120],
+      n: [32, 48, 72, 96, 144, 200],
     },
     answerRule: "n * 3 / 4",
     hint: "Calcule d’abord le quart, puis multiplie par 3.",

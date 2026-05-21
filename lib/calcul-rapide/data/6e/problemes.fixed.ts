@@ -17,11 +17,11 @@ export const problemesFixed6e: CalculRapideItem[] = [
     difficulty: 2,
     durationSec: 60,
     media: {
-      text: "Un sentier mesure 2,4 km. Combien cela fait-il en mètres ?",
+      text: "Un sentier mesure 3,7 km. Combien cela fait-il en mètres ?",
     },
-    expected: ["2400"],
+    expected: ["3700"],
     hint: "1 km = 1000 m.",
-    explanation: "2,4 × 1000 = 2400 m.",
+    explanation: "3,7 × 1000 = 3700 m.",
     tags: ["longueur", "conversion"],
   },
 
@@ -35,11 +35,11 @@ export const problemesFixed6e: CalculRapideItem[] = [
     difficulty: 2,
     durationSec: 60,
     media: {
-      text: "Une bouteille contient 1,5 L. Combien faut-il de bouteilles pour obtenir 6 L ?",
+      text: "Une bouteille contient 2 L. Combien faut-il de bouteilles pour obtenir 10 L ?",
     },
-    expected: ["4"],
-    hint: "Cherche combien de fois 1,5 est contenu dans 6.",
-    explanation: "6 ÷ 1,5 = 4. Il faut 4 bouteilles.",
+    expected: ["5"],
+    hint: "Cherche combien de fois 2 est contenu dans 10.",
+    explanation: "10 ÷ 2 = 5. Il faut 5 bouteilles.",
     tags: ["contenance"],
   },
 
@@ -53,11 +53,11 @@ export const problemesFixed6e: CalculRapideItem[] = [
     difficulty: 2,
     durationSec: 60,
     media: {
-      text: "Une chambre mesure 4 m sur 3 m. Quelle est son aire ?",
+      text: "Une chambre mesure 5 m sur 4 m. Quelle est son aire ?",
     },
-    expected: ["12", "12 m²", "12 m2"],
+    expected: ["20", "20 m²", "20 m2"],
     hint: "Aire = longueur × largeur.",
-    explanation: "4 × 3 = 12 m².",
+    explanation: "5 × 4 = 20 m².",
     tags: ["aire"],
   },
 
@@ -71,11 +71,11 @@ export const problemesFixed6e: CalculRapideItem[] = [
     difficulty: 2,
     durationSec: 60,
     media: {
-      text: "Un pêcheur vend 3 kg de poisson. Quelle est cette masse en grammes ?",
+      text: "Un pêcheur vend 4,5 kg de poisson. Quelle est cette masse en grammes ?",
     },
-    expected: ["3000"],
+    expected: ["4500"],
     hint: "1 kg = 1000 g.",
-    explanation: "3 × 1000 = 3000 g.",
+    explanation: "4,5 × 1000 = 4500 g.",
     tags: ["masse", "reunion"],
   },
 
@@ -93,11 +93,11 @@ export const problemesFixed6e: CalculRapideItem[] = [
     difficulty: 2,
     durationSec: 60,
     media: {
-      text: "Au marché, un sac contient 24 letchis. On en mange 1/3. Combien de letchis sont mangés ?",
+      text: "Au marché, un sac contient 36 letchis. On en mange 1/3. Combien de letchis sont mangés ?",
     },
-    expected: ["8"],
+    expected: ["12"],
     hint: "1/3, c’est diviser par 3.",
-    explanation: "24 ÷ 3 = 8. On mange 8 letchis.",
+    explanation: "36 ÷ 3 = 12. On mange 12 letchis.",
     tags: ["fraction", "reunion"],
   },
 
@@ -111,11 +111,11 @@ export const problemesFixed6e: CalculRapideItem[] = [
     difficulty: 2,
     durationSec: 60,
     media: {
-      text: "Une bouteille contient 1 L d’eau. Lina boit 1/4 de la bouteille. Combien de cL boit-elle ?",
+      text: "Une bouteille contient 2 L d’eau. Lina boit 1/4 de la bouteille. Combien de cL boit-elle ?",
     },
-    expected: ["25", "25 cL", "25cl"],
-    hint: "1 L = 100 cL, puis calcule le quart.",
-    explanation: "1 L = 100 cL. Le quart de 100 cL est 25 cL.",
+    expected: ["50", "50 cL", "50cl"],
+    hint: "2 L = 200 cL, puis calcule le quart.",
+    explanation: "2 L = 200 cL. Le quart de 200 cL est 50 cL.",
     tags: ["fraction", "contenance"],
   },
 
@@ -129,11 +129,11 @@ export const problemesFixed6e: CalculRapideItem[] = [
     difficulty: 2,
     durationSec: 60,
     media: {
-      text: "Une randonnée mesure 12 km. La famille a parcouru les 3/4 du trajet. Combien de kilomètres a-t-elle parcourus ?",
+      text: "Une randonnée mesure 16 km. La famille a parcouru les 3/4 du trajet. Combien de kilomètres a-t-elle parcourus ?",
     },
-    expected: ["9", "9 km"],
-    hint: "Calcule d’abord 1/4 de 12.",
-    explanation: "1/4 de 12 = 3, donc 3/4 de 12 = 9 km.",
+    expected: ["12", "12 km"],
+    hint: "Calcule d’abord 1/4 de 16.",
+    explanation: "1/4 de 16 = 4, donc 3/4 de 16 = 12 km.",
     tags: ["fraction", "reunion", "longueur"],
   },
 
@@ -147,11 +147,11 @@ export const problemesFixed6e: CalculRapideItem[] = [
     difficulty: 2,
     durationSec: 60,
     media: {
-      text: "Maya mange 1/2 d’un gâteau. Noé mange 1/4 du même gâteau. Qui a mangé le plus ?",
+      text: "Maya mange 1/3 d’un gâteau. Noé mange 1/2 du même gâteau. Qui a mangé le plus ?",
     },
-    expected: ["Maya", "maya"],
-    hint: "Compare 1/2 et 1/4.",
-    explanation: "1/2 est plus grand que 1/4. Maya a mangé le plus.",
+    expected: ["Noé", "noé", "Noe", "noe"],
+    hint: "Compare 1/3 et 1/2.",
+    explanation: "1/2 est plus grand que 1/3. Noé a mangé le plus.",
     tags: ["fraction", "comparer"],
   },
 ];
