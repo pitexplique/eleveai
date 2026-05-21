@@ -1,3 +1,5 @@
+// lib/probleme-du-jour/probleme.fixed.ts
+
 import type { ProblemeDuJour } from "./types";
 
 export const problemesFixed: ProblemeDuJour[] = [
@@ -126,46 +128,46 @@ export const problemesFixed: ProblemeDuJour[] = [
     ],
   },
 
-  {
-    id: "mangues_reunion_001",
-    title: "Les mangues du marché",
-    theme: "Marché de La Réunion",
-    statement:
-      "Au marché de Saint-Paul, un vendeur avait 80 mangues. Il a vendu 50 % de son stock le matin.",
-    question: "Combien de mangues a-t-il vendues ?",
-    expectedAnswer: "40",
-    explanation:
-      "50 %, c’est la moitié. La moitié de 80 est 40. Le vendeur a donc vendu 40 mangues.",
-    directions: [
-      {
-        id: "schema",
-        label: "Faire un schéma",
-        type: "guided",
-        content:
-          "Dessine une barre représentant 80 mangues puis partage-la en 2 parties égales.",
-      },
-      {
-        id: "calcul",
-        label: "Chercher le calcul",
-        type: "guided",
-        content:
-          "50 % signifie la moitié. Quelle opération permet de trouver la moitié de 80 ?",
-      },
-      {
-        id: "questionnement",
-        label: "Répondre étape par étape",
-        type: "guided",
-        content:
-          "1. Que signifie 50 % ?\n2. Quelle est la moitié de 80 ?\n3. Combien de mangues ont été vendues ?",
-      },
-      {
-        id: "open",
-        label: "Expliquer avec mes mots",
-        type: "open",
-        content: "Explique comment tu as trouvé rapidement la réponse.",
-      },
-    ],
-  },
+ {
+  id: "mangues_reunion_001",
+  title: "Les mangues du marché",
+  theme: "Marché de La Réunion",
+  statement:
+    "Au marché de Saint-Paul, un vendeur avait 80 mangues. Il a vendu 25 % de son stock le matin.",
+  question: "Combien de mangues a-t-il vendues ?",
+  expectedAnswer: "20",
+  explanation:
+    "25 %, c’est un quart. Le quart de 80 est 20. Le vendeur a donc vendu 20 mangues.",
+  directions: [
+    {
+      id: "schema",
+      label: "Faire un schéma",
+      type: "guided",
+      content:
+        "Dessine une barre représentant 80 mangues puis partage-la en 4 parts égales.",
+    },
+    {
+      id: "calcul",
+      label: "Chercher le calcul",
+      type: "guided",
+      content:
+        "25 % signifie un quart. Quelle opération permet de trouver le quart de 80 ?",
+    },
+    {
+      id: "questionnement",
+      label: "Répondre étape par étape",
+      type: "guided",
+      content:
+        "1. Que signifie 25 % ?\n2. Quelle est le quart de 80 ?\n3. Combien de mangues ont été vendues ?",
+    },
+    {
+      id: "open",
+      label: "Expliquer avec mes mots",
+      type: "open",
+      content: "Explique comment tu as trouvé rapidement la réponse.",
+    },
+  ],
+},
 
   {
     id: "plage_reunion_001",
@@ -292,6 +294,56 @@ export const problemesFixed: ProblemeDuJour[] = [
         type: "open",
         content:
           "Explique pourquoi les produits locaux sont importants à La Réunion.",
+      },
+    ],
+  },
+
+  {
+    id: "sortie_scolaire_absents_001",
+    title: "La sortie scolaire",
+    theme: "Pourcentages & vie de classe",
+    statement:
+      "Pour une sortie scolaire, 48 élèves étaient inscrits. Le jour de la sortie, 25 % des élèves sont absents.",
+    question:
+      "Combien d’élèves participent finalement à la sortie ?",
+    expectedAnswer: "36",
+    explanation:
+      "25 %, c’est un quart. Le quart de 48 est 12, donc 12 élèves sont absents. Mais la question demande combien d’élèves participent. Il faut donc enlever les absents au total : 48 - 12 = 36. Finalement, 36 élèves participent à la sortie.",
+    directions: [
+      {
+        id: "schema",
+        label: "Faire un schéma",
+        type: "guided",
+        content:
+          "Imagine une barre qui représente les 48 élèves inscrits. Coupe-la en 4 parts égales. Une part représente les 25 % d’élèves absents.",
+      },
+      {
+        id: "calcul",
+        label: "Chercher le calcul",
+        type: "guided",
+        content:
+          "Étape 1 : calcule 25 % de 48, donc 48 ÷ 4.\nÉtape 2 : enlève ce résultat au total : 48 - ...",
+      },
+      {
+        id: "questionnement",
+        label: "Répondre étape par étape",
+        type: "guided",
+        content:
+          "1. Que signifie 25 % ?\n2. Combien vaut le quart de 48 ?\n3. Ce nombre représente-t-il les absents ou les présents ?\n4. Combien d’élèves participent finalement ?",
+      },
+      {
+        id: "indice",
+        label: "Demander un indice",
+        type: "hint",
+        content:
+          "Attention : 25 % donne le nombre d’absents. La question demande le nombre d’élèves présents à la sortie.",
+      },
+      {
+        id: "open",
+        label: "Expliquer avec mes mots",
+        type: "open",
+        content:
+          "Explique ta méthode avec une phrase complète. Tu peux commencer par : « J’ai d’abord calculé les absents, puis... »",
       },
     ],
   },

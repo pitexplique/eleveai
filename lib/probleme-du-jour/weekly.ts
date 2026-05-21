@@ -1,3 +1,5 @@
+// lib/probleme-du-jour/weekly.ts
+
 export const problemeDuJourWeekly = {
   id: "probleme-semaine-1",
 
@@ -31,12 +33,12 @@ export const problemeDuJourWeekly = {
 
     {
       day: 6,
-      problemId: "pourcentage_reduction_001",
+      problemId: "ananas_reunion_001",
     },
 
     {
       day: 7,
-      problemId: "eau_reunion_001",
+      problemId: "sortie_scolaire_absents_001",
     },
   ],
 };
