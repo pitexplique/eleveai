@@ -1,171 +1,170 @@
-// lib/concours-general/banks/nombres-logique.bank.ts
+// lib/concours-general/banks/proportionnalite-grandeurs.bank.ts
 
 import type { ConcoursGeneralItem } from "../types";
 
-export const nombresLogiqueBank: ConcoursGeneralItem[] = [
+export const proportionnaliteGrandeursBank: ConcoursGeneralItem[] = [
   {
-    id: "cg_num_001_poignees_main",
+    id: "cg_prop_001_prix_kg",
     niveauCible: "3e",
     accessibleFrom: "6e",
-    theme: "nombres_logique",
+    theme: "proportionnalite_grandeurs",
     difficulty: 3,
 
-    title: "Les poignées de main",
+    title: "Prix au kilo",
 
     statement:
-      "Dans un groupe de 12 élèves, chaque élève serre la main de tous les autres une seule fois.",
+      "Au marché, 3 kg de mangues coûtent 12 €.",
 
-    question: "Combien y a-t-il de poignées de main au total ?",
+    question: "Combien coûtent 5 kg de mangues au même prix au kilo ?",
 
     format: "short",
-    expected: ["66"],
+    expected: ["20", "20€", "20 €"],
 
-    notionIds: ["nombres_entiers", "organisation"],
-    microIds: ["calculer", "raisonner"],
+    notionIds: ["proportionnalite"],
+    microIds: ["prop_coeff", "prop_probleme"],
 
-    hint1: "Chaque élève serre la main de 11 autres élèves.",
-    hint2: "Le calcul 12 × 11 compte chaque poignée deux fois.",
-    hint3: "Il faut donc diviser par 2.",
+    hint1: "Cherche le prix de 1 kg.",
+    hint2: "3 kg coûtent 12 €, donc 1 kg coûte 4 €.",
+    hint3: "Calcule le prix de 5 kg.",
 
     correction:
-      "Chaque élève serre la main de 11 autres élèves. On pourrait donc calculer 12 × 11 = 132. Mais chaque poignée est comptée deux fois : une fois pour chaque élève concerné. On divise donc par 2 : 132 ÷ 2 = 66. Il y a 66 poignées de main.",
+      "Si 3 kg coûtent 12 €, alors 1 kg coûte 12 ÷ 3 = 4 €. Donc 5 kg coûtent 5 × 4 = 20 €.",
 
     redactionAttendue:
-      "Il y a 12 élèves. Chacun serre la main de 11 autres élèves, ce qui donne 12 × 11 = 132 comptages. Chaque poignée étant comptée deux fois, il y a 132 ÷ 2 = 66 poignées de main.",
+      "Le prix d’un kilogramme est 12 ÷ 3 = 4 €. Pour 5 kg, on paie 5 × 4 = 20 €.",
 
-    tags: ["concours_general", "accessible_6e", "denombrement", "raisonnement"],
+    tags: ["concours_general", "proportionnalite", "prix", "reunion"],
   },
 
   {
-    id: "cg_num_002_bordure_carree",
+    id: "cg_prop_002_recette",
     niveauCible: "3e",
     accessibleFrom: "6e",
-    theme: "nombres_logique",
+    theme: "proportionnalite_grandeurs",
     difficulty: 3,
 
-    title: "La bordure du carré",
+    title: "La recette agrandie",
 
     statement:
-      "Un grand carré est formé de 64 petits carrés identiques. On colorie uniquement les petits carrés du bord.",
+      "Pour faire un jus, on utilise 4 citrons pour 6 verres.",
 
-    question: "Combien de petits carrés sont coloriés ?",
+    question: "Combien faut-il de citrons pour 15 verres ?",
 
     format: "short",
-    expected: ["28"],
+    expected: ["10"],
 
-    notionIds: ["aires", "nombres_entiers"],
-    microIds: ["aire_composer", "calculer"],
+    notionIds: ["proportionnalite"],
+    microIds: ["prop_table", "prop_coeff"],
 
-    hint1: "64 petits carrés forment un carré de 8 par 8.",
-    hint2: "Les carrés non coloriés sont ceux du centre.",
-    hint3: "Le centre forme un carré de 6 par 6.",
+    hint1: "On cherche un coefficient pour passer de 6 à 15.",
+    hint2: "15 est 2,5 fois plus grand que 6.",
+    hint3: "Multiplie aussi 4 par 2,5.",
 
     correction:
-      "Le grand carré contient 64 petits carrés, donc il mesure 8 petits carrés sur 8. Les carrés non coloriés sont ceux du centre : ils forment un carré de 6 sur 6, donc 36 petits carrés. Les carrés coloriés sont donc 64 - 36 = 28.",
+      "Pour passer de 6 verres à 15 verres, on multiplie par 2,5. On multiplie donc aussi 4 citrons par 2,5 : 4 × 2,5 = 10.",
 
     redactionAttendue:
-      "Le carré est un carré de 8 × 8. L’intérieur non colorié est un carré de 6 × 6, soit 36 petits carrés. La bordure contient donc 64 - 36 = 28 petits carrés.",
+      "Les quantités sont proportionnelles. Comme 15 = 6 × 2,5, il faut 4 × 2,5 = 10 citrons.",
 
-    tags: ["concours_general", "accessible_6e", "quadrillage", "aire"],
+    tags: ["concours_general", "proportionnalite", "recette"],
   },
 
   {
-    id: "cg_num_003_nombre_reste",
+    id: "cg_prop_003_pourcentage",
     niveauCible: "3e",
-    accessibleFrom: "5e",
-    theme: "nombres_logique",
-    difficulty: 4,
+    accessibleFrom: "6e",
+    theme: "proportionnalite_grandeurs",
+    difficulty: 3,
 
-    title: "Le reste caché",
+    title: "Réduction",
 
     statement:
-      "Un nombre entier positif laisse un reste de 4 lorsqu’on le divise par 5. Il laisse aussi un reste de 4 lorsqu’on le divise par 7. Ce nombre est compris entre 100 et 150.",
+      "Un sac coûte 80 €. Il bénéficie d’une réduction de 25 %.",
 
-    question: "Quel est ce nombre ?",
+    question: "Quel est le nouveau prix ?",
 
     format: "short",
-    expected: ["109"],
+    expected: ["60", "60€", "60 €"],
 
-    notionIds: ["divisibilite", "multiples"],
-    microIds: ["reconnaitre_multiple", "raisonner"],
+    notionIds: ["pourcentages"],
+    microIds: ["pourcentage_quantite"],
 
-    hint1: "Si on enlève 4 au nombre, il devient divisible par 5 et par 7.",
-    hint2: "Cherche un multiple commun de 5 et 7.",
-    hint3: "Le multiple de 35 entre 96 et 146 est 105.",
+    hint1: "25 %, c’est un quart.",
+    hint2: "Le quart de 80 vaut 20.",
+    hint3: "On enlève 20 € au prix initial.",
 
     correction:
-      "Le nombre laisse le même reste 4 quand on le divise par 5 et par 7. Donc si on enlève 4, le nombre obtenu est divisible par 5 et par 7. Il est donc multiple de 35. Comme le nombre est entre 100 et 150, le nombre diminué de 4 est entre 96 et 146. Le multiple de 35 dans cet intervalle est 105. Le nombre cherché est donc 105 + 4 = 109.",
+      "25 %, c’est un quart. Le quart de 80 € vaut 20 €. Le nouveau prix est donc 80 - 20 = 60 €.",
 
     redactionAttendue:
-      "Si on retire 4 au nombre, on obtient un multiple commun de 5 et de 7. Le multiple commun est donc un multiple de 35. Entre 96 et 146, on trouve 105. Le nombre vaut donc 105 + 4 = 109.",
+      "25 % de 80 € vaut 20 €. Après réduction, le prix est 80 - 20 = 60 €.",
 
-    tags: ["concours_general", "reste", "multiples", "raisonnement"],
+    tags: ["concours_general", "pourcentage", "reduction"],
   },
 
   {
-    id: "cg_num_004_qcm_reste",
+    id: "cg_prop_004_vitesse",
     niveauCible: "3e",
     accessibleFrom: "4e",
-    theme: "nombres_logique",
+    theme: "proportionnalite_grandeurs",
     difficulty: 4,
 
-    title: "Un reste bien caché",
+    title: "Distance parcourue",
 
     statement:
-      "Un nombre entier positif n laisse un reste de 4 lorsqu’on le divise par 6.",
+      "Une voiture roule à 72 km/h pendant 2 h 30.",
 
-    question: "Parmi les nombres suivants, lequel peut être égal à 5n + 3 ?",
+    question: "Quelle distance parcourt-elle ?",
 
-    format: "qcm",
-    choices: ["47", "51", "53", "57", "61"],
-    expected: ["53"],
+    format: "short",
+    expected: ["180", "180 km"],
 
-    notionIds: ["arithmetique", "calcul_litteral"],
-    microIds: ["reste_division", "expression_litterale"],
+    notionIds: ["proportionnalite", "vitesse"],
+    microIds: ["vitesse_simple"],
 
-    hint1: "Écris n sous la forme 6k + 4.",
-    hint2: "Calcule 5(6k + 4) + 3.",
-    hint3: "Tu obtiens 30k + 23.",
+    hint1: "2 h 30 = 2,5 h.",
+    hint2: "Distance = vitesse × temps.",
+    hint3: "72 × 2,5 = 180.",
 
     correction:
-      "Comme n laisse un reste de 4 lorsqu’on le divise par 6, on peut écrire n = 6k + 4. Alors 5n + 3 = 5(6k + 4) + 3 = 30k + 20 + 3 = 30k + 23. Le nombre 5n + 3 doit donc être de la forme 30k + 23. Or 53 = 30 × 1 + 23. La bonne réponse est 53.",
+      "2 h 30 correspond à 2,5 h. La distance vaut donc 72 × 2,5 = 180 km.",
 
     redactionAttendue:
-      "On écrit n = 6k + 4. Alors 5n + 3 = 30k + 23. Parmi les choix proposés, 53 convient.",
+      "La distance est égale à vitesse × temps. Donc 72 × 2,5 = 180 km.",
 
-    tags: ["concours_general", "qcm", "singapour_style", "reste"],
+    tags: ["concours_general", "vitesse", "distance"],
   },
 
   {
-    id: "cg_num_005_suite_logique",
+    id: "cg_prop_005_echelle",
     niveauCible: "3e",
-    accessibleFrom: "6e",
-    theme: "nombres_logique",
-    difficulty: 3,
+    accessibleFrom: "5e",
+    theme: "proportionnalite_grandeurs",
+    difficulty: 4,
 
-    title: "La suite qui accélère",
+    title: "Plan de collège",
 
-    statement: "On observe la suite suivante : 5 ; 9 ; 14 ; 20 ; 27 ; ...",
+    statement:
+      "Sur un plan, 1 cm représente 4 m dans la réalité. Un couloir mesure 7 cm sur le plan.",
 
-    question: "Quel est le nombre suivant ?",
+    question: "Quelle est sa longueur réelle ?",
 
-    format: "qcm",
-    choices: ["33", "34", "35", "36"],
-    expected: ["35"],
+    format: "short",
+    expected: ["28", "28 m"],
 
-    notionIds: ["nombres_entiers", "suites_logiques"],
-    microIds: ["observer_regularite", "raisonner"],
+    notionIds: ["proportionnalite", "echelle"],
+    microIds: ["echelle_distance_reelle"],
 
-    hint1: "Observe les écarts entre deux nombres successifs.",
-    hint2: "Les écarts sont 4, puis 5, puis 6, puis 7.",
-    hint3: "Le prochain écart est donc 8.",
+    hint1: "1 cm représente 4 m.",
+    hint2: "7 cm représentent 7 fois plus.",
+    hint3: "7 × 4 = 28.",
 
     correction:
-      "On calcule les écarts : 9 - 5 = 4, 14 - 9 = 5, 20 - 14 = 6, 27 - 20 = 7. Les écarts augmentent de 1 à chaque fois. Le prochain écart est donc 8. Le nombre suivant est 27 + 8 = 35.",
+      "Sur le plan, 1 cm représente 4 m. Donc 7 cm représentent 7 × 4 = 28 m.",
 
     redactionAttendue:
-      "Les écarts sont 4, 5, 6, 7. Le prochain écart est 8, donc le nombre suivant est 27 + 8 = 35.",
+      "La longueur réelle vaut 7 × 4 = 28 m.",
 
-    tags: ["concours_general", "accessible_6e", "suite", "logique"],
+    tags: ["concours_general", "echelle", "proportionnalite"],
   },
 ];

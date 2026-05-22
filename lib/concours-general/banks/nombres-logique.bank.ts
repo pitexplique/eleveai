@@ -13,25 +13,25 @@ export const nombresLogiqueBank: ConcoursGeneralItem[] = [
     title: "Les poignées de main",
 
     statement:
-      "Dans un groupe de 10 élèves, chaque élève serre la main de tous les autres une seule fois.",
+      "Dans un groupe de 12 élèves, chaque élève serre la main de tous les autres une seule fois.",
 
     question: "Combien y a-t-il de poignées de main au total ?",
 
     format: "short",
-    expected: ["45"],
+    expected: ["66"],
 
     notionIds: ["nombres_entiers", "organisation"],
     microIds: ["calculer", "raisonner"],
 
-    hint1: "Chaque élève serre la main de 9 autres élèves.",
-    hint2: "Le calcul 10 × 9 compte chaque poignée deux fois.",
+    hint1: "Chaque élève serre la main de 11 autres élèves.",
+    hint2: "Le calcul 12 × 11 compte chaque poignée deux fois.",
     hint3: "Il faut donc diviser par 2.",
 
     correction:
-      "Chaque élève serre la main de 9 autres élèves. On pourrait donc calculer 10 × 9 = 90. Mais chaque poignée est comptée deux fois : une fois pour chaque élève concerné. On divise donc par 2 : 90 ÷ 2 = 45. Il y a 45 poignées de main.",
+      "Chaque élève serre la main de 11 autres élèves. Le calcul 12 × 11 = 132 compte chaque poignée deux fois. On divise donc par 2 : 132 ÷ 2 = 66.",
 
     redactionAttendue:
-      "Il y a 10 élèves. Chacun serre la main de 9 autres élèves, ce qui donne 10 × 9 = 90 comptages. Chaque poignée étant comptée deux fois, il y a 90 ÷ 2 = 45 poignées de main.",
+      "Il y a 12 élèves. Chacun serre la main de 11 autres élèves, soit 12 × 11 = 132 comptages. Chaque poignée étant comptée deux fois, il y a 66 poignées de main.",
 
     tags: ["concours_general", "accessible_6e", "denombrement", "raisonnement"],
   },
@@ -46,25 +46,25 @@ export const nombresLogiqueBank: ConcoursGeneralItem[] = [
     title: "La bordure du carré",
 
     statement:
-      "Un grand carré est formé de 49 petits carrés identiques. On colorie uniquement les petits carrés du bord.",
+      "Un grand carré est formé de 64 petits carrés identiques. On colorie uniquement les petits carrés du bord.",
 
     question: "Combien de petits carrés sont coloriés ?",
 
     format: "short",
-    expected: ["24"],
+    expected: ["28"],
 
     notionIds: ["aires", "nombres_entiers"],
     microIds: ["aire_composer", "calculer"],
 
-    hint1: "49 petits carrés forment un carré de 7 par 7.",
+    hint1: "64 petits carrés forment un carré de 8 par 8.",
     hint2: "Les carrés non coloriés sont ceux du centre.",
-    hint3: "Le centre forme un carré de 5 par 5.",
+    hint3: "Le centre forme un carré de 6 par 6.",
 
     correction:
-      "Le grand carré contient 49 petits carrés, donc il mesure 7 petits carrés sur 7. Les carrés non coloriés sont ceux du centre : ils forment un carré de 5 sur 5, donc 25 petits carrés. Les carrés coloriés sont donc 49 - 25 = 24.",
+      "Le grand carré mesure 8 petits carrés sur 8. L’intérieur non colorié mesure 6 sur 6, soit 36 petits carrés. La bordure contient donc 64 - 36 = 28 petits carrés.",
 
     redactionAttendue:
-      "Le carré est un carré de 7 × 7. L’intérieur non colorié est un carré de 5 × 5, soit 25 petits carrés. La bordure contient donc 49 - 25 = 24 petits carrés.",
+      "Le carré est un carré de 8 × 8. L’intérieur non colorié est un carré de 6 × 6, soit 36 petits carrés. La bordure contient donc 64 - 36 = 28 petits carrés.",
 
     tags: ["concours_general", "accessible_6e", "quadrillage", "aire"],
   },
@@ -79,25 +79,25 @@ export const nombresLogiqueBank: ConcoursGeneralItem[] = [
     title: "Le reste caché",
 
     statement:
-      "Un nombre entier positif laisse un reste de 3 lorsqu’on le divise par 5. Il laisse aussi un reste de 3 lorsqu’on le divise par 7. Ce nombre est compris entre 80 et 120.",
+      "Un nombre entier positif laisse un reste de 4 lorsqu’on le divise par 5. Il laisse aussi un reste de 4 lorsqu’on le divise par 7. Ce nombre est compris entre 100 et 150.",
 
     question: "Quel est ce nombre ?",
 
     format: "short",
-    expected: ["108"],
+    expected: ["109"],
 
     notionIds: ["divisibilite", "multiples"],
     microIds: ["reconnaitre_multiple", "raisonner"],
 
-    hint1: "Si on enlève 3 au nombre, il devient divisible par 5 et par 7.",
+    hint1: "Si on enlève 4 au nombre, il devient divisible par 5 et par 7.",
     hint2: "Cherche un multiple commun de 5 et 7.",
-    hint3: "Le multiple de 35 entre 77 et 117 est 105.",
+    hint3: "Le multiple de 35 entre 96 et 146 est 105.",
 
     correction:
-      "Le nombre laisse le même reste 3 quand on le divise par 5 et par 7. Donc si on enlève 3, le nombre obtenu est divisible par 5 et par 7. Il est donc multiple de 35. Comme le nombre est entre 80 et 120, le nombre diminué de 3 est entre 77 et 117. Le multiple de 35 dans cet intervalle est 105. Le nombre cherché est donc 105 + 3 = 108.",
+      "Si on enlève 4 au nombre, il devient divisible par 5 et par 7. Il est donc multiple de 35. Entre 96 et 146, le multiple de 35 est 105. Le nombre cherché vaut donc 105 + 4 = 109.",
 
     redactionAttendue:
-      "Si on retire 3 au nombre, on obtient un multiple commun de 5 et de 7. Le multiple commun est donc un multiple de 35. Entre 77 et 117, on trouve 105. Le nombre vaut donc 105 + 3 = 108.",
+      "Si on retire 4 au nombre, on obtient un multiple commun de 5 et de 7, donc un multiple de 35. Entre 96 et 146, on trouve 105. Le nombre vaut donc 109.",
 
     tags: ["concours_general", "reste", "multiples", "raisonnement"],
   },
@@ -112,28 +112,28 @@ export const nombresLogiqueBank: ConcoursGeneralItem[] = [
     title: "Un reste bien caché",
 
     statement:
-      "Un nombre entier positif n laisse un reste de 3 lorsqu’on le divise par 5.",
+      "Un nombre entier positif n laisse un reste de 4 lorsqu’on le divise par 6.",
 
-    question: "Parmi les nombres suivants, lequel peut être égal à 4n + 2 ?",
+    question: "Parmi les nombres suivants, lequel peut être égal à 5n + 3 ?",
 
     format: "qcm",
-    choices: ["39", "42", "44", "47", "50"],
-    expected: ["44"],
+    choices: ["47", "51", "53", "57", "61"],
+    expected: ["53"],
 
     notionIds: ["arithmetique", "calcul_litteral"],
     microIds: ["reste_division", "expression_litterale"],
 
-    hint1: "Écris n sous la forme 5k + 3.",
-    hint2: "Calcule 4(5k + 3) + 2.",
-    hint3: "Tu obtiens 20k + 14.",
+    hint1: "Écris n sous la forme 6k + 4.",
+    hint2: "Calcule 5(6k + 4) + 3.",
+    hint3: "Tu obtiens 30k + 23.",
 
     correction:
-      "Comme n laisse un reste de 3 lorsqu’on le divise par 5, on peut écrire n = 5k + 3. Alors 4n + 2 = 4(5k + 3) + 2 = 20k + 12 + 2 = 20k + 14. Le nombre 4n + 2 doit donc laisser un reste de 14 dans la division par 20. Or 44 = 20 × 2 + 4 ? Attention, 44 ne convient pas. Il faut un nombre de la forme 20k + 14, par exemple 54. La bonne réponse doit donc être 54.",
+      "Comme n laisse un reste de 4 dans la division par 6, on écrit n = 6k + 4. Alors 5n + 3 = 5(6k + 4) + 3 = 30k + 23. Parmi les choix, 53 = 30 × 1 + 23. La bonne réponse est 53.",
 
     redactionAttendue:
-      "On écrit n = 5k + 3. Alors 4n + 2 = 20k + 14. Parmi les choix proposés, il faut choisir un nombre de la forme 20k + 14.",
+      "On écrit n = 6k + 4. Alors 5n + 3 = 30k + 23. Parmi les choix proposés, 53 convient.",
 
-    tags: ["concours_general", "qcm", "singapour_style", "reste"],
+    tags: ["concours_general", "qcm", "reste", "calcul_litteral"],
   },
 
   {
@@ -145,13 +145,13 @@ export const nombresLogiqueBank: ConcoursGeneralItem[] = [
 
     title: "La suite qui accélère",
 
-    statement: "On observe la suite suivante : 4 ; 8 ; 13 ; 19 ; 26 ; ...",
+    statement: "On observe la suite suivante : 5 ; 9 ; 14 ; 20 ; 27 ; ...",
 
     question: "Quel est le nombre suivant ?",
 
     format: "qcm",
-    choices: ["32", "33", "34", "35"],
-    expected: ["34"],
+    choices: ["33", "34", "35", "36"],
+    expected: ["35"],
 
     notionIds: ["nombres_entiers", "suites_logiques"],
     microIds: ["observer_regularite", "raisonner"],
@@ -161,10 +161,10 @@ export const nombresLogiqueBank: ConcoursGeneralItem[] = [
     hint3: "Le prochain écart est donc 8.",
 
     correction:
-      "On calcule les écarts : 8 - 4 = 4, 13 - 8 = 5, 19 - 13 = 6, 26 - 19 = 7. Les écarts augmentent de 1 à chaque fois. Le prochain écart est donc 8. Le nombre suivant est 26 + 8 = 34.",
+      "Les écarts sont : 9 - 5 = 4, 14 - 9 = 5, 20 - 14 = 6, 27 - 20 = 7. Le prochain écart est 8. Le nombre suivant est donc 27 + 8 = 35.",
 
     redactionAttendue:
-      "Les écarts sont 4, 5, 6, 7. Le prochain écart est 8, donc le nombre suivant est 26 + 8 = 34.",
+      "Les écarts sont 4, 5, 6, 7. Le prochain écart est 8, donc le nombre suivant est 35.",
 
     tags: ["concours_general", "accessible_6e", "suite", "logique"],
   },

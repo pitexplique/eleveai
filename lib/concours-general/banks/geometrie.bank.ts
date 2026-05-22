@@ -13,26 +13,25 @@ export const geometrieBank: ConcoursGeneralItem[] = [
     title: "Aire ou périmètre ?",
 
     statement:
-      "Un carré a une aire de 81 cm². Un élève affirme : « Son périmètre est 81 cm. »",
+      "Un carré a une aire de 121 cm². Un élève affirme : « Son périmètre est 121 cm. »",
 
-    question:
-      "A-t-il raison ? Donne le périmètre correct.",
+    question: "A-t-il raison ? Donne le périmètre correct.",
 
     format: "short",
-    expected: ["36"],
+    expected: ["44"],
 
     notionIds: ["aires", "perimetres"],
     microIds: ["aire_carre", "perimetre_carre"],
 
-    hint1: "Si l’aire vaut 81 cm², cherche d’abord la longueur du côté.",
-    hint2: "Quel nombre multiplié par lui-même donne 81 ?",
-    hint3: "Le côté vaut 9 cm, donc le périmètre vaut 4 × 9.",
+    hint1: "Si l’aire vaut 121 cm², cherche d’abord la longueur du côté.",
+    hint2: "Quel nombre multiplié par lui-même donne 121 ?",
+    hint3: "Le côté vaut 11 cm, donc le périmètre vaut 4 × 11.",
 
     correction:
-      "L’élève confond aire et périmètre. Si l’aire du carré vaut 81 cm², alors côté × côté = 81. Le côté mesure donc 9 cm. Le périmètre vaut 4 × 9 = 36 cm. Le périmètre correct est 36 cm.",
+      "L’élève confond aire et périmètre. Si l’aire du carré vaut 121 cm², alors côté × côté = 121. Le côté mesure donc 11 cm. Le périmètre vaut 4 × 11 = 44 cm.",
 
     redactionAttendue:
-      "L’aire du carré vaut côté × côté. Comme 9 × 9 = 81, le côté mesure 9 cm. Le périmètre vaut donc 4 × 9 = 36 cm. L’élève a tort.",
+      "L’aire du carré vaut côté × côté. Comme 11 × 11 = 121, le côté mesure 11 cm. Le périmètre vaut donc 4 × 11 = 44 cm. L’élève a tort.",
 
     tags: ["concours_general", "accessible_6e", "aire", "perimetre", "erreur"],
   },
@@ -47,26 +46,25 @@ export const geometrieBank: ConcoursGeneralItem[] = [
     title: "Le triangle du sentier",
 
     statement:
-      "Sur une carte, un sentier forme un triangle ABC rectangle en A. On connaît AB = 500 m et AC = 1200 m.",
+      "Sur une carte, un sentier forme un triangle ABC rectangle en A. On connaît AB = 700 m et AC = 2400 m.",
 
-    question:
-      "Quelle est la longueur directe BC ?",
+    question: "Quelle est la longueur directe BC ?",
 
     format: "short",
-    expected: ["1300"],
+    expected: ["2500"],
 
     notionIds: ["pythagore"],
     microIds: ["pythagore_calculer_hypotenuse"],
 
     hint1: "BC est l’hypoténuse du triangle rectangle.",
     hint2: "Utilise le théorème de Pythagore.",
-    hint3: "BC² = 500² + 1200².",
+    hint3: "BC² = 700² + 2400².",
 
     correction:
-      "Le triangle ABC est rectangle en A, donc BC est l’hypoténuse. D’après le théorème de Pythagore : BC² = AB² + AC² = 500² + 1200² = 250 000 + 1 440 000 = 1 690 000. Donc BC = 1300 m.",
+      "Le triangle ABC est rectangle en A, donc BC est l’hypoténuse. D’après le théorème de Pythagore : BC² = AB² + AC² = 700² + 2400² = 490 000 + 5 760 000 = 6 250 000. Donc BC = 2500 m.",
 
     redactionAttendue:
-      "Dans le triangle ABC rectangle en A, d’après le théorème de Pythagore, BC² = AB² + AC². Donc BC² = 500² + 1200² = 1 690 000, d’où BC = 1300 m.",
+      "Dans le triangle ABC rectangle en A, d’après le théorème de Pythagore, BC² = AB² + AC². Donc BC² = 700² + 2400² = 6 250 000, d’où BC = 2500 m.",
 
     tags: ["concours_general", "pythagore", "reunion", "geometrie"],
   },
@@ -81,26 +79,25 @@ export const geometrieBank: ConcoursGeneralItem[] = [
     title: "Le carré agrandi",
 
     statement:
-      "Un carré a un périmètre de 40 cm. On construit un second carré dont l’aire est 4 fois plus grande.",
+      "Un carré a un périmètre de 56 cm. On construit un second carré dont l’aire est 4 fois plus grande.",
 
-    question:
-      "Quel est le périmètre du second carré ?",
+    question: "Quel est le périmètre du second carré ?",
 
     format: "short",
-    expected: ["80"],
+    expected: ["112"],
 
     notionIds: ["aires", "perimetres", "agrandissement_reduction"],
     microIds: ["aire_carre", "perimetre_carre", "effet_agrandissement"],
 
     hint1: "Commence par trouver le côté du premier carré.",
-    hint2: "Le côté du premier carré vaut 40 ÷ 4.",
+    hint2: "Le côté du premier carré vaut 56 ÷ 4.",
     hint3: "Si l’aire est multipliée par 4, le côté est multiplié par 2.",
 
     correction:
-      "Le premier carré a un périmètre de 40 cm, donc son côté vaut 40 ÷ 4 = 10 cm. Son aire vaut 10 × 10 = 100 cm². Le second carré a une aire 4 fois plus grande : 100 × 4 = 400 cm². Son côté vaut donc 20 cm, car 20 × 20 = 400. Son périmètre vaut 4 × 20 = 80 cm.",
+      "Le premier carré a un périmètre de 56 cm, donc son côté vaut 56 ÷ 4 = 14 cm. Son aire vaut 14 × 14 = 196 cm². Le second carré a une aire 4 fois plus grande : 196 × 4 = 784 cm². Son côté vaut donc 28 cm. Son périmètre vaut 4 × 28 = 112 cm.",
 
     redactionAttendue:
-      "Le côté du premier carré vaut 10 cm. Son aire vaut 100 cm². L’aire du second carré vaut 400 cm², donc son côté vaut 20 cm. Son périmètre vaut 4 × 20 = 80 cm.",
+      "Le côté du premier carré vaut 14 cm. Son aire vaut 196 cm². L’aire du second carré vaut 784 cm², donc son côté vaut 28 cm. Son périmètre vaut 112 cm.",
 
     tags: ["concours_general", "aire", "perimetre", "agrandissement"],
   },
@@ -115,13 +112,12 @@ export const geometrieBank: ConcoursGeneralItem[] = [
     title: "Le bassin d’eau",
 
     statement:
-      "Un collège installe un bassin de récupération d’eau de pluie en forme de pavé droit. Ses dimensions sont : longueur 5 m, largeur 3 m, hauteur 1,4 m. On sait que 1 m³ = 1000 L.",
+      "Un collège installe un bassin de récupération d’eau de pluie en forme de pavé droit. Ses dimensions sont : longueur 6 m, largeur 2,5 m, hauteur 1,2 m. On sait que 1 m³ = 1000 L.",
 
-    question:
-      "Combien de litres d’eau le bassin peut-il contenir ?",
+    question: "Combien de litres d’eau le bassin peut-il contenir ?",
 
     format: "short",
-    expected: ["21000"],
+    expected: ["18000"],
 
     notionIds: ["volumes", "conversions"],
     microIds: ["volume_pave", "volume_unites"],
@@ -131,10 +127,10 @@ export const geometrieBank: ConcoursGeneralItem[] = [
     hint3: "Convertis ensuite les m³ en litres.",
 
     correction:
-      "Le volume du bassin vaut 5 × 3 × 1,4 = 21 m³. Comme 1 m³ = 1000 L, alors 21 m³ = 21 000 L. Le bassin peut contenir 21 000 litres d’eau.",
+      "Le volume du bassin vaut 6 × 2,5 × 1,2 = 18 m³. Comme 1 m³ = 1000 L, alors 18 m³ = 18 000 L.",
 
     redactionAttendue:
-      "Le bassin est un pavé droit. Son volume vaut 5 × 3 × 1,4 = 21 m³. Comme 1 m³ correspond à 1000 L, le bassin contient 21 × 1000 = 21 000 L.",
+      "Le bassin est un pavé droit. Son volume vaut 6 × 2,5 × 1,2 = 18 m³. Comme 1 m³ correspond à 1000 L, le bassin contient 18 000 L.",
 
     tags: ["concours_general", "volume", "eau", "reunion", "environnement"],
   },
@@ -149,26 +145,25 @@ export const geometrieBank: ConcoursGeneralItem[] = [
     title: "La longueur manquante",
 
     statement:
-      "Dans le triangle ABC, les points M et N sont placés respectivement sur [AB] et [AC]. Les droites (MN) et (BC) sont parallèles. On sait que AM = 6 cm, AB = 15 cm et AC = 35 cm.",
+      "Dans le triangle ABC, les points M et N sont placés respectivement sur [AB] et [AC]. Les droites (MN) et (BC) sont parallèles. On sait que AM = 8 cm, AB = 20 cm et AC = 45 cm.",
 
-    question:
-      "Calculer AN.",
+    question: "Calculer AN.",
 
     format: "short",
-    expected: ["14"],
+    expected: ["18"],
 
     notionIds: ["thales", "proportionnalite"],
     microIds: ["thales_calculer_longueur", "prop_quatrieme"],
 
     hint1: "Les droites (MN) et (BC) sont parallèles.",
     hint2: "Utilise le théorème de Thalès : AM / AB = AN / AC.",
-    hint3: "6 / 15 = AN / 35.",
+    hint3: "8 / 20 = AN / 45.",
 
     correction:
-      "Comme les droites (MN) et (BC) sont parallèles, on peut appliquer le théorème de Thalès. On écrit AM / AB = AN / AC. Donc 6 / 15 = AN / 35. Par produit en croix, 15 × AN = 6 × 35 = 210. Donc AN = 210 ÷ 15 = 14 cm.",
+      "Comme les droites (MN) et (BC) sont parallèles, on applique le théorème de Thalès. AM / AB = AN / AC. Donc 8 / 20 = AN / 45. Par produit en croix, AN = 8 × 45 ÷ 20 = 18 cm.",
 
     redactionAttendue:
-      "Les droites (MN) et (BC) sont parallèles. D’après le théorème de Thalès, AM / AB = AN / AC. Donc 6 / 15 = AN / 35. Ainsi AN = 14 cm.",
+      "Les droites (MN) et (BC) sont parallèles. D’après le théorème de Thalès, AM / AB = AN / AC. Donc 8 / 20 = AN / 45. Ainsi AN = 18 cm.",
 
     tags: ["concours_general", "thales", "geometrie", "niveau_3e"],
   },

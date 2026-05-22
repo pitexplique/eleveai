@@ -1,175 +1,172 @@
-// lib/concours-general/banks/geometrie.bank.ts
+// lib/concours-general/banks/maths-sciences-donnees.bank.ts
 
 import type { ConcoursGeneralItem } from "../types";
 
-export const geometrieBank: ConcoursGeneralItem[] = [
+export const mathsSciencesDonneesBank: ConcoursGeneralItem[] = [
   {
-    id: "cg_geo_001_aire_perimetre",
+    id: "cg_msd_001_moyenne_notes",
     niveauCible: "3e",
-    accessibleFrom: "6e",
-    theme: "geometrie",
+    accessibleFrom: "5e",
+    theme: "maths_sciences_donnees",
     difficulty: 3,
 
-    title: "Aire ou périmètre ?",
+    title: "La moyenne de sciences",
 
     statement:
-      "Un carré a une aire de 121 cm². Un élève affirme : « Son périmètre est 121 cm. »",
+      "Lors de quatre évaluations de sciences, Lina a obtenu les notes suivantes : 12 ; 15 ; 14 ; 11.",
 
-    question:
-      "A-t-il raison ? Donne le périmètre correct.",
+    question: "Quelle est sa moyenne ?",
 
     format: "short",
-    expected: ["44"],
+    expected: ["13"],
 
-    notionIds: ["aires", "perimetres"],
-    microIds: ["aire_carre", "perimetre_carre"],
+    notionIds: ["statistiques"],
+    microIds: ["stat_moyenne"],
 
-    hint1: "Si l’aire vaut 121 cm², cherche d’abord la longueur du côté.",
-    hint2: "Quel nombre multiplié par lui-même donne 121 ?",
-    hint3: "Le côté vaut 11 cm, donc le périmètre vaut 4 × 11.",
+    hint1: "Pour calculer une moyenne, on additionne les valeurs.",
+    hint2: "Puis on divise par le nombre de valeurs.",
+    hint3: "12 + 15 + 14 + 11 = 52, puis 52 ÷ 4.",
 
     correction:
-      "L’élève confond aire et périmètre. Si l’aire du carré vaut 121 cm², alors côté × côté = 121. Le côté mesure donc 11 cm. Le périmètre vaut 4 × 11 = 44 cm. Le périmètre correct est 44 cm.",
+      "On additionne les quatre notes : 12 + 15 + 14 + 11 = 52. Il y a 4 notes, donc la moyenne vaut 52 ÷ 4 = 13.",
 
     redactionAttendue:
-      "L’aire du carré vaut côté × côté. Comme 11 × 11 = 121, le côté mesure 11 cm. Le périmètre vaut donc 4 × 11 = 44 cm. L’élève a tort.",
+      "La moyenne vaut (12 + 15 + 14 + 11) ÷ 4 = 52 ÷ 4 = 13.",
 
-    tags: ["concours_general", "accessible_6e", "aire", "perimetre", "erreur"],
+    tags: ["concours_general", "statistiques", "moyenne", "sciences"],
   },
 
   {
-    id: "cg_geo_002_triangle_sentier",
+    id: "cg_msd_002_tableau_effectifs",
     niveauCible: "3e",
-    accessibleFrom: "4e",
-    theme: "geometrie",
-    difficulty: 4,
+    accessibleFrom: "6e",
+    theme: "maths_sciences_donnees",
+    difficulty: 3,
 
-    title: "Le triangle du sentier",
+    title: "Les arbres plantés",
 
     statement:
-      "Sur une carte, un sentier forme un triangle ABC rectangle en A. On connaît AB = 700 m et AC = 2400 m.",
+      "Dans un projet écologique, des élèves plantent 18 filaos, 12 flamboyants et 20 palmiers.",
 
-    question:
-      "Quelle est la longueur directe BC ?",
+    question: "Combien d’arbres ont-ils plantés au total ?",
 
     format: "short",
-    expected: ["2500"],
+    expected: ["50"],
 
-    notionIds: ["pythagore"],
-    microIds: ["pythagore_calculer_hypotenuse"],
+    notionIds: ["statistiques", "nombres_entiers"],
+    microIds: ["stat_lire_tableau", "calculer"],
 
-    hint1: "BC est l’hypoténuse du triangle rectangle.",
-    hint2: "Utilise le théorème de Pythagore.",
-    hint3: "BC² = 700² + 2400².",
+    hint1: "Il faut additionner toutes les quantités.",
+    hint2: "Calcule 18 + 12 + 20.",
+    hint3: "18 + 12 = 30, puis 30 + 20.",
 
     correction:
-      "Le triangle ABC est rectangle en A, donc BC est l’hypoténuse. D’après le théorème de Pythagore : BC² = AB² + AC² = 700² + 2400² = 490 000 + 5 760 000 = 6 250 000. Donc BC = 2500 m.",
+      "Les élèves ont planté 18 + 12 + 20 = 50 arbres au total.",
 
     redactionAttendue:
-      "Dans le triangle ABC rectangle en A, d’après le théorème de Pythagore, BC² = AB² + AC². Donc BC² = 700² + 2400² = 6 250 000, d’où BC = 2500 m.",
+      "On additionne les trois catégories : 18 + 12 + 20 = 50. Ils ont planté 50 arbres.",
 
-    tags: ["concours_general", "pythagore", "reunion", "geometrie"],
+    tags: ["concours_general", "donnees", "ecologie", "reunion"],
   },
 
   {
-    id: "cg_geo_003_carre_aire_x4",
+    id: "cg_msd_003_frequence_pourcentage",
     niveauCible: "3e",
     accessibleFrom: "5e",
-    theme: "geometrie",
+    theme: "maths_sciences_donnees",
     difficulty: 4,
 
-    title: "Le carré agrandi",
+    title: "Tri des déchets",
 
     statement:
-      "Un carré a un périmètre de 56 cm. On construit un second carré dont l’aire est 4 fois plus grande.",
+      "Lors d’une opération de nettoyage, 80 déchets sont ramassés. Parmi eux, 24 sont des bouteilles en plastique.",
 
     question:
-      "Quel est le périmètre du second carré ?",
+      "Quel pourcentage des déchets ramassés sont des bouteilles en plastique ?",
 
     format: "short",
-    expected: ["112"],
+    expected: ["30", "30%"],
 
-    notionIds: ["aires", "perimetres", "agrandissement_reduction"],
-    microIds: ["aire_carre", "perimetre_carre", "effet_agrandissement"],
+    notionIds: ["statistiques", "pourcentages"],
+    microIds: ["stat_frequence", "pourcentage_proportion"],
 
-    hint1: "Commence par trouver le côté du premier carré.",
-    hint2: "Le côté du premier carré vaut 56 ÷ 4.",
-    hint3: "Si l’aire est multipliée par 4, le côté est multiplié par 2.",
+    hint1: "On cherche la proportion 24 sur 80.",
+    hint2: "Pour passer de 80 à 100, on multiplie par 1,25.",
+    hint3: "24 × 1,25 = 30.",
 
     correction:
-      "Le premier carré a un périmètre de 56 cm, donc son côté vaut 56 ÷ 4 = 14 cm. Son aire vaut 14 × 14 = 196 cm². Le second carré a une aire 4 fois plus grande : 196 × 4 = 784 cm². Son côté vaut donc 28 cm, car 28 × 28 = 784. Son périmètre vaut 4 × 28 = 112 cm.",
+      "Il y a 24 bouteilles sur 80 déchets. Pour exprimer cette proportion en pourcentage : 24 ÷ 80 = 0,3. Donc 0,3 = 30 %. Les bouteilles représentent 30 % des déchets.",
 
     redactionAttendue:
-      "Le côté du premier carré vaut 14 cm. Son aire vaut 196 cm². L’aire du second carré vaut 784 cm², donc son côté vaut 28 cm. Son périmètre vaut 4 × 28 = 112 cm.",
+      "La proportion est 24 ÷ 80 = 0,3, soit 30 %. Les bouteilles en plastique représentent 30 % des déchets.",
 
-    tags: ["concours_general", "aire", "perimetre", "agrandissement"],
+    tags: ["concours_general", "pourcentage", "frequence", "ecologie"],
   },
 
   {
-    id: "cg_geo_004_volume_bassin",
+    id: "cg_msd_004_graphique_temperature",
     niveauCible: "3e",
     accessibleFrom: "5e",
-    theme: "geometrie",
-    difficulty: 4,
+    theme: "maths_sciences_donnees",
+    difficulty: 3,
 
-    title: "Le bassin d’eau",
+    title: "Températures du matin",
 
     statement:
-      "Un collège installe un bassin de récupération d’eau de pluie en forme de pavé droit. Ses dimensions sont : longueur 6 m, largeur 2,5 m, hauteur 1,2 m. On sait que 1 m³ = 1000 L.",
+      "Pendant cinq jours, on relève les températures suivantes à 7 h : 22 °C ; 24 °C ; 23 °C ; 25 °C ; 26 °C.",
 
-    question:
-      "Combien de litres d’eau le bassin peut-il contenir ?",
+    question: "Quelle est l’étendue de cette série de températures ?",
 
     format: "short",
-    expected: ["18000"],
+    expected: ["4", "4°C", "4 °C"],
 
-    notionIds: ["volumes", "conversions"],
-    microIds: ["volume_pave", "volume_unites"],
+    notionIds: ["statistiques"],
+    microIds: ["stat_etendue"],
 
-    hint1: "Calcule d’abord le volume en m³.",
-    hint2: "Volume = longueur × largeur × hauteur.",
-    hint3: "Convertis ensuite les m³ en litres.",
+    hint1: "L’étendue est la différence entre la plus grande et la plus petite valeur.",
+    hint2: "La plus grande température est 26 °C.",
+    hint3: "La plus petite température est 22 °C.",
 
     correction:
-      "Le volume du bassin vaut 6 × 2,5 × 1,2 = 18 m³. Comme 1 m³ = 1000 L, alors 18 m³ = 18 000 L. Le bassin peut contenir 18 000 litres d’eau.",
+      "L’étendue est la différence entre la valeur maximale et la valeur minimale. Ici, 26 - 22 = 4. L’étendue est donc 4 °C.",
 
     redactionAttendue:
-      "Le bassin est un pavé droit. Son volume vaut 6 × 2,5 × 1,2 = 18 m³. Comme 1 m³ correspond à 1000 L, le bassin contient 18 × 1000 = 18 000 L.",
+      "La température maximale est 26 °C et la minimale est 22 °C. L’étendue vaut donc 26 - 22 = 4 °C.",
 
-    tags: ["concours_general", "volume", "eau", "reunion", "environnement"],
+    tags: ["concours_general", "statistiques", "temperature", "sciences"],
   },
 
   {
-    id: "cg_geo_005_thales_simple",
+    id: "cg_msd_005_probabilite_de",
     niveauCible: "3e",
-    accessibleFrom: "3e",
-    theme: "geometrie",
-    difficulty: 5,
+    accessibleFrom: "5e",
+    theme: "maths_sciences_donnees",
+    difficulty: 3,
 
-    title: "La longueur manquante",
+    title: "Le dé équilibré",
 
     statement:
-      "Dans le triangle ABC, les points M et N sont placés respectivement sur [AB] et [AC]. Les droites (MN) et (BC) sont parallèles. On sait que AM = 8 cm, AB = 20 cm et AC = 45 cm.",
+      "On lance un dé équilibré à 6 faces numérotées de 1 à 6.",
 
     question:
-      "Calculer AN.",
+      "Quelle est la probabilité d’obtenir un nombre pair ?",
 
     format: "short",
-    expected: ["18"],
+    expected: ["1/2", "0,5", "0.5", "50%"],
 
-    notionIds: ["thales", "proportionnalite"],
-    microIds: ["thales_calculer_longueur", "prop_quatrieme"],
+    notionIds: ["probabilites"],
+    microIds: ["proba_evenement_simple"],
 
-    hint1: "Les droites (MN) et (BC) sont parallèles.",
-    hint2: "Utilise le théorème de Thalès : AM / AB = AN / AC.",
-    hint3: "8 / 20 = AN / 45.",
+    hint1: "Les nombres pairs sur un dé sont 2, 4 et 6.",
+    hint2: "Il y a 3 issues favorables sur 6 issues possibles.",
+    hint3: "3/6 se simplifie en 1/2.",
 
     correction:
-      "Comme les droites (MN) et (BC) sont parallèles, on peut appliquer le théorème de Thalès. On écrit AM / AB = AN / AC. Donc 8 / 20 = AN / 45. Par produit en croix, 20 × AN = 8 × 45 = 360. Donc AN = 360 ÷ 20 = 18 cm.",
+      "Les nombres pairs possibles sont 2, 4 et 6. Il y a donc 3 issues favorables sur 6 issues possibles. La probabilité vaut 3/6 = 1/2, soit 0,5 ou 50 %.",
 
     redactionAttendue:
-      "Les droites (MN) et (BC) sont parallèles. D’après le théorème de Thalès, AM / AB = AN / AC. Donc 8 / 20 = AN / 45. Ainsi AN = 18 cm.",
+      "Il y a 3 nombres pairs sur 6 faces. La probabilité est donc 3/6 = 1/2.",
 
-    tags: ["concours_general", "thales", "geometrie", "niveau_3e"],
+    tags: ["concours_general", "probabilites", "de"],
   },
 ];
