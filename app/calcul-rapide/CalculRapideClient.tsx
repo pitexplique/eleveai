@@ -35,7 +35,7 @@ export default function CalculRapideClient() {
             </h1>
 
             <p className="mx-auto mt-3 max-w-2xl text-base font-medium text-white/95 drop-shadow sm:text-lg md:text-xl lg:text-2xl">
-              Semaine de 20 mai 20216 : 5 minutes pour entraîner ton cerveau, gagner en vitesse et
+              Semaine de 22 mai 2016 : 5 minutes pour entraîner ton cerveau, gagner en vitesse et
               progresser en maths.
             </p>
 

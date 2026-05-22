@@ -251,7 +251,7 @@ export const calculsTemplates4e: CalculRapideItem[] = [
     microId: "equation_simple",
     difficulty: 3,
     durationSec: 20,
-    media: { text: "x + {{a}} = {{b}}. x = ?" },
+    media: { text: "x + {{a}} = {{b}}./n x = ?" },
     template: "x + {{a}} = {{b}}. x = ?",
     variables: {
       a: [4, 6, 8, 9, 12],

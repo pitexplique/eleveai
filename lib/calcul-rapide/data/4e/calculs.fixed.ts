@@ -228,7 +228,7 @@ export const calculsFixed4e: CalculRapideItem[] = [
     microId: "equation_simple",
     difficulty: 3,
     durationSec: 20,
-    media: { text: "x + 9 = 15. x = ?" },
+    media: { text: "x + 9 = 15 alors x = ?" },
     expected: ["6"],
     hint: "Cherche le nombre qui, ajouté à 9, donne 15.",
     explanation: "x + 9 = 15 donc x = 6.",
