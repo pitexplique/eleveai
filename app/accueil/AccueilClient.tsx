@@ -236,7 +236,7 @@ export default function AccueilPage() {
     </div>
 
     <span className="hidden sm:inline">
-      Imaginé par 3 filles de 6e
+      6°C College dimitile
     </span>
 
     <span className="sm:hidden">
