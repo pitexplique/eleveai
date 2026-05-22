@@ -27,6 +27,7 @@ import { tableauxBank } from "./tableaux.bank";
 import { graphiquesBank } from "./graphiques.bank";
 import { probabilitesBank } from "./probabilites.bank";
 import { symetrieBank } from "./symetrie.bank";
+import { figuresPlanesBank } from "../../cm2/maths/figures-planes.bank";
 
 export const mathsCm1QuestionBank: TutorBankItemV4[] = [
   ...nombresEntiersBank,
@@ -54,6 +55,7 @@ export const mathsCm1QuestionBank: TutorBankItemV4[] = [
   ...graphiquesBank,
   ...probabilitesBank,
   ...symetrieBank,
+  ...figuresPlanesBank
 ];
 
 export function getMathCm1QuestionBank(args?: {
