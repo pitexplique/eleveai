@@ -88,7 +88,7 @@ function triangleRectangleCanvas(): TriangleCanvasData {
       C: "C",
     },
     marks: {
-      rightAnglesAt: ["A"],
+      rightAngleAt: "A",
     },
     display: {
       showLabels: true,
@@ -112,7 +112,7 @@ function triangleIsoceleCanvas(): TriangleCanvasData {
       C: "C",
     },
     marks: {
-      equalSides: ["AB", "AC"],
+      equalSides: [["AB", "BC"]],
     },
     display: {
       showLabels: true,
@@ -136,7 +136,10 @@ function triangleEquilateralCanvas(): TriangleCanvasData {
       C: "C",
     },
     marks: {
-      equalSides: ["AB", "BC", "CA"],
+      equalSides: [
+        ["AB", "BC"],
+        ["BC", "CA"],
+      ],
     },
     display: {
       showLabels: true,
@@ -193,7 +196,11 @@ function carreCanvas(): QuadrilatereCanvasData {
     },
     marks: {
       rightAnglesAt: ["A", "B", "C", "D"],
-      equalSides: ["AB", "BC", "CD", "DA"],
+      equalSides: [
+        ["AB", "BC"],
+        ["BC", "CD"],
+        ["CD", "DA"],
+      ],
       parallelSides: [
         ["AB", "CD"],
         ["AD", "BC"],
@@ -223,7 +230,11 @@ function losangeCanvas(): QuadrilatereCanvasData {
       D: "D",
     },
     marks: {
-      equalSides: ["AB", "BC", "CD", "DA"],
+      equalSides: [
+        ["AB", "BC"],
+        ["BC", "CD"],
+        ["CD", "DA"],
+      ],
       parallelSides: [
         ["AB", "CD"],
         ["AD", "BC"],
