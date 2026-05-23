@@ -17,6 +17,7 @@ import {
   Flame,
   Puzzle,
   Trophy,
+  Languages,
 } from "lucide-react";
 import { useEleve } from "@/context/EleveContext";
 
@@ -133,6 +134,14 @@ export default function Header() {
             <span className="absolute -right-2 -top-2 rounded-full bg-amber-400 px-1.5 text-[10px] font-black text-[#041B33]">
               new
             </span>
+          </Link>
+
+          <Link
+            href="/english-maths"
+            className={linkClass(isActive(pathname, "/english-maths"))}
+          >
+            <Languages className="h-4 w-4 text-blue-300" />
+            English 🇬🇧
           </Link>
 
           <Link
@@ -276,6 +285,14 @@ export default function Header() {
             >
               <Trophy className="h-5 w-5" />
               Concours général 🏆
+            </Link>
+
+            <Link
+              href="/english-maths"
+              className={mobileLinkClass(isActive(pathname, "/english-maths"))}
+            >
+              <Languages className="h-4 w-4 text-blue-300" />
+              English Maths 🇬🇧
             </Link>
 
             <Link
