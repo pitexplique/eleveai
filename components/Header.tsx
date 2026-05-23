@@ -140,9 +140,10 @@ export default function Header() {
             href="/english-maths"
             className={linkClass(isActive(pathname, "/english-maths"))}
           >
-            <Languages className="h-4 w-4 text-blue-300" />
-            English 🇬🇧
+            <span className="text-base leading-none">🇬🇧</span>
+            English · Maths
           </Link>
+
 
           <Link
             href="/lecon-du-jour"
@@ -284,16 +285,20 @@ export default function Header() {
               "
             >
               <Trophy className="h-5 w-5" />
-              Concours général 🏆
+                Concours général 🏆
             </Link>
 
             <Link
               href="/english-maths"
-              className={mobileLinkClass(isActive(pathname, "/english-maths"))}
+              className="
+                flex items-center justify-center gap-3 rounded-2xl
+                bg-gradient-to-r from-blue-700 via-slate-50 to-red-500
+                px-4 py-4 font-black text-[#041B33] shadow-lg
+              "
             >
-              <Languages className="h-4 w-4 text-blue-300" />
-              English Maths 🇬🇧
-            </Link>
+              <span className="text-xl leading-none">🇬🇧</span>
+              English Maths
+</Link>
 
             <Link
               href="/lecon-du-jour"
