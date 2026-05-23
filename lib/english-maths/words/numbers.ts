@@ -1,0 +1,61 @@
+// lib/english-maths/words/numbers.ts
+
+import type { EnglishMathsWord } from "../types";
+
+export const englishMathsNumbersWords: EnglishMathsWord[] = [
+  {
+    id: "numbers_number",
+    category: "numbers",
+    english: "number",
+    french: "nombre",
+    image: "🔢",
+    audioWordSrc: "/audio/english-maths/numbers/number.mp3",
+    audioSentenceSrc: "/audio/english-maths/numbers/number-sentence.mp3",
+    sentenceEn: "This is a number.",
+    sentenceFr: "Ceci est un nombre.",
+  },
+  {
+    id: "numbers_one",
+    category: "numbers",
+    english: "one",
+    french: "un",
+    image: "1️⃣",
+    audioWordSrc: "/audio/english-maths/numbers/one.mp3",
+    audioSentenceSrc: "/audio/english-maths/numbers/one-sentence.mp3",
+    sentenceEn: "One is a number.",
+    sentenceFr: "Un est un nombre.",
+  },
+  {
+    id: "numbers_two",
+    category: "numbers",
+    english: "two",
+    french: "deux",
+    image: "2️⃣",
+    audioWordSrc: "/audio/english-maths/numbers/two.mp3",
+    audioSentenceSrc: "/audio/english-maths/numbers/two-sentence.mp3",
+    sentenceEn: "Two is a number.",
+    sentenceFr: "Deux est un nombre.",
+  },
+  {
+    id: "numbers_ten",
+    category: "numbers",
+    english: "ten",
+    french: "dix",
+    image: "🔟",
+    audioWordSrc: "/audio/english-maths/numbers/ten.mp3",
+    audioSentenceSrc: "/audio/english-maths/numbers/ten-sentence.mp3",
+    sentenceEn: "Ten is a number.",
+    sentenceFr: "Dix est un nombre.",
+  },
+  {
+    id: "numbers_half",
+    category: "numbers",
+    english: "half",
+    french: "moitié",
+    image: "½",
+    audioWordSrc: "/audio/english-maths/numbers/half.mp3",
+    audioSentenceSrc: "/audio/english-maths/numbers/half-sentence.mp3",
+    sentenceEn: "One half is half of one.",
+    sentenceFr: "Un demi est la moitié de un.",
+  },
+];

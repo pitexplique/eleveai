@@ -1,0 +1,61 @@
+// lib/english-maths/words/operations.ts
+
+import type { EnglishMathsWord } from "../types";
+
+export const englishMathsOperationsWords: EnglishMathsWord[] = [
+  {
+    id: "operations_plus",
+    category: "operations",
+    english: "plus",
+    french: "plus",
+    image: "➕",
+    audioWordSrc: "/audio/english-maths/operations/plus.mp3",
+    audioSentenceSrc: "/audio/english-maths/operations/plus-sentence.mp3",
+    sentenceEn: "Two plus one equals three.",
+    sentenceFr: "Deux plus un égale trois.",
+  },
+  {
+    id: "operations_minus",
+    category: "operations",
+    english: "minus",
+    french: "moins",
+    image: "➖",
+    audioWordSrc: "/audio/english-maths/operations/minus.mp3",
+    audioSentenceSrc: "/audio/english-maths/operations/minus-sentence.mp3",
+    sentenceEn: "Three minus one equals two.",
+    sentenceFr: "Trois moins un égale deux.",
+  },
+  {
+    id: "operations_equal",
+    category: "operations",
+    english: "equal",
+    french: "égal",
+    image: "=",
+    audioWordSrc: "/audio/english-maths/operations/equal.mp3",
+    audioSentenceSrc: "/audio/english-maths/operations/equal-sentence.mp3",
+    sentenceEn: "Two plus two is equal to four.",
+    sentenceFr: "Deux plus deux est égal à quatre.",
+  },
+  {
+    id: "operations_greater_than",
+    category: "operations",
+    english: "greater than",
+    french: "plus grand que",
+    image: ">",
+    audioWordSrc: "/audio/english-maths/operations/greater-than.mp3",
+    audioSentenceSrc: "/audio/english-maths/operations/greater-than-sentence.mp3",
+    sentenceEn: "Five is greater than three.",
+    sentenceFr: "Cinq est plus grand que trois.",
+  },
+  {
+    id: "operations_less_than",
+    category: "operations",
+    english: "less than",
+    french: "plus petit que",
+    image: "<",
+    audioWordSrc: "/audio/english-maths/operations/less-than.mp3",
+    audioSentenceSrc: "/audio/english-maths/operations/less-than-sentence.mp3",
+    sentenceEn: "Two is less than four.",
+    sentenceFr: "Deux est plus petit que quatre.",
+  },
+];

@@ -35,6 +35,11 @@ const cards = [
     image: "/images/cards/concours-general.webp",
     label: "Concours général",
   },
+  {
+    href: "/english-maths",
+    image: "/images/cards/english-maths.webp",
+    label: "English Maths",
+  },
 ];
 
 const classes = [
@@ -98,6 +103,13 @@ const besoins = [
     action: "Écouter la leçon",
     icon: "🎧",
     color: "from-orange-400 to-amber-500",
+  },
+  {
+    title: "Je veux apprendre les maths en anglais",
+    href: "/english-maths",
+    action: "Lancer English Maths",
+    icon: "🇬🇧",
+    color: "from-blue-600 via-white to-red-500",
   },
   {
     title: "Je veux chercher un problème",
@@ -164,7 +176,6 @@ export default function AccueilPage() {
 
             <div className="absolute inset-0 bg-gradient-to-b from-black/5 via-transparent to-[#061B33]/20" />
 
-            {/* AUDIO */}
             <audio
               ref={audioRef}
               src="/audio/accueil/presentation.mp3"
@@ -174,76 +185,69 @@ export default function AccueilPage() {
               onPlay={() => setIsPlaying(true)}
             />
 
-        {/* BOUTON SON + CHIP ÉLÈVES ALIGNÉS */}
-        {/* BOUTON SON + CHIP ÉLÈVES ALIGNÉS MOBILE + DESKTOP */}
-{/* BOUTON SON + CHIP ÉLÈVES RESPONSIVE */}
-<div
-  className="
-    absolute right-3 top-3 z-20
-    flex items-center justify-end gap-2
-    sm:right-4 sm:top-4
-    md:flex-col md:items-end
-  "
->
-  {/* BOUTON SON */}
-  <button
-    type="button"
-    onClick={toggleAudio}
-    aria-label="Écouter le message de bord EleveAI"
-    title="Écouter le message de bord"
-    className="
-      flex items-center justify-center gap-2
-      rounded-full border border-white/40
-      bg-white/90 px-3 py-1.5
-      text-[#041B33]
-      shadow-2xl backdrop-blur-md
-      transition-all duration-300
-      hover:scale-105 hover:bg-white
-      focus:outline-none focus:ring-4 focus:ring-cyan-300/80
-      sm:px-4 sm:py-2
-    "
-  >
-    <span className="text-lg">{isPlaying ? "⏹️" : "🔊"}</span>
+            <div
+              className="
+                absolute right-3 top-3 z-20
+                flex items-center justify-end gap-2
+                sm:right-4 sm:top-4
+                md:flex-col md:items-end
+              "
+            >
+              <button
+                type="button"
+                onClick={toggleAudio}
+                aria-label="Écouter le message de bord EleveAI"
+                title="Écouter le message de bord"
+                className="
+                  flex items-center justify-center gap-2
+                  rounded-full border border-white/40
+                  bg-white/90 px-3 py-1.5
+                  text-[#041B33]
+                  shadow-2xl backdrop-blur-md
+                  transition-all duration-300
+                  hover:scale-105 hover:bg-white
+                  focus:outline-none focus:ring-4 focus:ring-cyan-300/80
+                  sm:px-4 sm:py-2
+                "
+              >
+                <span className="text-lg">{isPlaying ? "⏹️" : "🔊"}</span>
 
-    <span className="hidden sm:inline text-sm font-black">
-      {isPlaying ? "Stop" : "Message de bord"}
-    </span>
-  </button>
+                <span className="hidden text-sm font-black sm:inline">
+                  {isPlaying ? "Stop" : "Message de bord"}
+                </span>
+              </button>
 
-  {/* CHIP ÉLÈVES */}
-  <div
-    className="
-      flex items-center gap-2
-      rounded-full border border-white/35
-      bg-white/85 px-2.5 py-1.5
-      text-[11px] font-black text-[#041B33]
-      shadow-xl backdrop-blur-md
-      sm:px-3 sm:py-2 sm:text-xs
-    "
-  >
-    <div className="flex -space-x-2">
-      <div className="flex h-6 w-6 items-center justify-center rounded-full border-2 border-white bg-pink-400 text-xs text-white shadow sm:h-7 sm:w-7 sm:text-sm">
-        👧
-      </div>
+              <div
+                className="
+                  flex items-center gap-2
+                  rounded-full border border-white/35
+                  bg-white/85 px-2.5 py-1.5
+                  text-[11px] font-black text-[#041B33]
+                  shadow-xl backdrop-blur-md
+                  sm:px-3 sm:py-2 sm:text-xs
+                "
+              >
+                <div className="flex -space-x-2">
+                  <div className="flex h-6 w-6 items-center justify-center rounded-full border-2 border-white bg-pink-400 text-xs text-white shadow sm:h-7 sm:w-7 sm:text-sm">
+                    👧
+                  </div>
 
-      <div className="flex h-6 w-6 items-center justify-center rounded-full border-2 border-white bg-fuchsia-500 text-xs text-white shadow sm:h-7 sm:w-7 sm:text-sm">
-        👧
-      </div>
+                  <div className="flex h-6 w-6 items-center justify-center rounded-full border-2 border-white bg-fuchsia-500 text-xs text-white shadow sm:h-7 sm:w-7 sm:text-sm">
+                    👧
+                  </div>
 
-      <div className="flex h-6 w-6 items-center justify-center rounded-full border-2 border-white bg-rose-500 text-xs text-white shadow sm:h-7 sm:w-7 sm:text-sm">
-        👧
-      </div>
-    </div>
+                  <div className="flex h-6 w-6 items-center justify-center rounded-full border-2 border-white bg-rose-500 text-xs text-white shadow sm:h-7 sm:w-7 sm:text-sm">
+                    👧
+                  </div>
+                </div>
 
-    <span className="hidden sm:inline">
-      6°C College dimitile
-    </span>
+                <span className="hidden sm:inline">
+                  6°C Collège Dimitile - Entre-Deux - île de La Réunion
+                </span>
 
-    <span className="sm:hidden">
-      6°C
-    </span>
-  </div>
-</div>
+                <span className="sm:hidden">6°C</span>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -257,7 +261,7 @@ export default function AccueilPage() {
               bg-white/[0.08] p-4 shadow-2xl backdrop-blur-md
             "
           >
-            <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
+            <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7">
               {cards.map((card) => (
                 <Link
                   key={card.href}
@@ -279,7 +283,7 @@ export default function AccueilPage() {
                     src={card.image}
                     alt={card.label}
                     fill
-                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 180px"
+                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 160px"
                     className="
                       object-cover
                       transition-transform duration-500
@@ -318,7 +322,8 @@ export default function AccueilPage() {
             <p className="mt-4 max-w-3xl text-base text-slate-200 md:text-lg">
               EleveAI aide les élèves à progresser en mathématiques avec des
               parcours, des défis, du calcul rapide, des leçons courtes, un coach
-              par compétences et des entraînements au Concours général des collèges.
+              par compétences, English Maths et des entraînements au Concours
+              général des collèges.
             </p>
           </div>
 
@@ -387,7 +392,7 @@ export default function AccueilPage() {
               </h2>
             </div>
 
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
               {besoins.map((besoin) => (
                 <Link
                   key={besoin.href}
