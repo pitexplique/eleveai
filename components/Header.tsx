@@ -17,7 +17,6 @@ import {
   Flame,
   Puzzle,
   Trophy,
-  Languages,
 } from "lucide-react";
 import { useEleve } from "@/context/EleveContext";
 
@@ -100,6 +99,19 @@ export default function Header() {
           </Link>
 
           <Link
+            href="/coach-bac-spe"
+            className={`relative ${linkClass(
+              isActive(pathname, "/coach-bac-spe")
+            )}`}
+          >
+            <GraduationCap className="h-4 w-4 text-violet-300" />
+            Bac Spé
+            <span className="absolute -right-2 -top-2 rounded-full bg-violet-400 px-1.5 text-[10px] font-black text-white">
+              16 juin
+            </span>
+          </Link>
+
+          <Link
             href="/coach-maths-ia"
             className={linkClass(isActive(pathname, "/coach-maths-ia"))}
           >
@@ -135,6 +147,7 @@ export default function Header() {
               new
             </span>
           </Link>
+
           <Link
             href="/english-maths"
             className={[
@@ -154,7 +167,6 @@ export default function Header() {
               5 mots / jours
             </span>
           </Link>
-
 
           <Link
             href="/lecon-du-jour"
@@ -264,6 +276,18 @@ export default function Header() {
             </Link>
 
             <Link
+              href="/coach-bac-spe"
+              className="
+                flex items-center justify-center gap-3 rounded-2xl
+                bg-gradient-to-r from-blue-600 to-violet-700
+                px-4 py-4 font-black text-white shadow-lg
+              "
+            >
+              <GraduationCap className="h-5 w-5" />
+              Bac Spé Maths · 16 juin
+            </Link>
+
+            <Link
               href="/coach-maths-ia"
               className={mobileLinkClass(isActive(pathname, "/coach-maths-ia"))}
             >
@@ -296,7 +320,7 @@ export default function Header() {
               "
             >
               <Trophy className="h-5 w-5" />
-                Concours général 🏆
+              Concours général 🏆
             </Link>
 
             <Link
@@ -309,7 +333,7 @@ export default function Header() {
             >
               <span className="text-xl leading-none">🇬🇧</span>
               English Maths
-</Link>
+            </Link>
 
             <Link
               href="/lecon-du-jour"
@@ -329,7 +353,7 @@ export default function Header() {
               )}
             >
               <Puzzle className="h-4 w-4 text-pink-300" />
-              Problème du jour
+              Défis du jour
             </Link>
 
             <Link

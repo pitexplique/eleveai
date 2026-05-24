@@ -6,6 +6,11 @@ import Link from "next/link";
 
 const cards = [
   {
+    href: "/coach-bac-spe",
+    image: "/images/cards/coach-bac-spe.png",
+    label: "Coach Bac Spé Maths",
+  },
+  {
     href: "/coach-maths-ia",
     image: "/images/cards/coach.webp",
     label: "Coach Maths IA",
@@ -28,7 +33,7 @@ const cards = [
   {
     href: "/defis-du-jour",
     image: "/images/cards/defis-du-jour.webp",
-    label: "Defis du jour",
+    label: "Défis du jour",
   },
   {
     href: "/concours-general",
@@ -124,6 +129,13 @@ const besoins = [
     action: "S’entraîner",
     icon: "🏆",
     color: "from-yellow-400 to-orange-500",
+  },
+    {
+    title: "Je prépare le bac spé maths",
+    href: "/coach-bac-spe",
+    action: "Lancer le sprint 16 juin",
+    icon: "🎓",
+    color: "from-blue-600 to-violet-700",
   },
 ];
 
@@ -261,14 +273,14 @@ export default function AccueilPage() {
               bg-white/[0.08] p-4 shadow-2xl backdrop-blur-md
             "
           >
-            <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7">
+            <div className="flex flex-wrap justify-center gap-3">
               {cards.map((card) => (
                 <Link
                   key={card.href}
                   href={card.href}
                   aria-label={card.label}
                   className="
-                    group relative h-[92px]
+                    group relative h-[115px] w-[220px]
                     overflow-hidden rounded-3xl
                     border border-white/25
                     bg-white/10 shadow-xl
@@ -276,7 +288,6 @@ export default function AccueilPage() {
                     hover:-translate-y-2 hover:scale-[1.03]
                     hover:shadow-[0_0_30px_rgba(255,255,255,0.25)]
                     focus:outline-none focus:ring-4 focus:ring-white/70
-                    sm:h-[105px]
                   "
                 >
                   <Image
@@ -316,7 +327,7 @@ export default function AccueilPage() {
             </p>
 
             <h1 className="text-3xl font-black leading-tight md:text-5xl">
-              Un vrai parcours d’apprentissage du CM1 à la 3e.
+              Un vrai parcours d’apprentissage du CM1 à la 3e + Bac Spe Maths
             </h1>
 
             <p className="mt-4 max-w-3xl text-base text-slate-200 md:text-lg">
