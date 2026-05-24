@@ -46,7 +46,7 @@ const ROUTES: RouteConfig[] = [
     lastMod: LASTMOD_CORE,
   },
   {
-    path: "/probleme-du-jour",
+    path: "/defis-du-jour",
     priority: 0.95,
     changeFrequency: "daily",
     lastMod: LASTMOD_CORE,
@@ -67,6 +67,12 @@ const ROUTES: RouteConfig[] = [
     path: "/tutor-v4",
     priority: 0.85,
     changeFrequency: "weekly",
+    lastMod: LASTMOD_CORE,
+  },
+    {
+    path: "/english-maths",
+    priority: 1.0,
+    changeFrequency: "daily",
     lastMod: LASTMOD_CORE,
   },
 
