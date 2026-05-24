@@ -125,13 +125,6 @@ const besoins = [
     icon: "🏆",
     color: "from-yellow-400 to-orange-500",
   },
-  {
-  title: "Je veux apprendre les maths en anglais",
-  href: "/english-maths",
-  action: "Lancer English Maths",
-  icon: "🇬🇧",
-  color: "from-blue-600 via-white to-red-500",
-},
 ];
 
 export default function AccueilPage() {

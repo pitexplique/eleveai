@@ -86,21 +86,100 @@ export default function ParcoursClient() {
   }
 
 return (
-  <main className="min-h-screen bg-slate-950 px-4 py-8 text-white">
-    <section className="mx-auto max-w-5xl">
-      <div className="mb-8 rounded-3xl border border-violet-500/30 bg-slate-900/80 p-6 shadow-2xl">
-        <p className="mb-2 text-sm font-bold uppercase tracking-wide text-violet-300">
-          EleveAI · Parcours
-        </p>
+  <main className="relative min-h-screen overflow-hidden bg-[#F0FDF4] px-4 py-8 text-slate-950">
+    {/* FOND LUMINEUX */}
+    <div className="pointer-events-none absolute inset-0 overflow-hidden">
+      <svg
+        className="absolute inset-0 h-full w-full opacity-95"
+        viewBox="0 0 1440 900"
+        preserveAspectRatio="xMidYMid slice"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <defs>
+          <radialGradient id="centerGlow" cx="50%" cy="38%" r="60%">
+            <stop offset="0%" stopColor="#FFFFFF" stopOpacity="0.95" />
+            <stop offset="100%" stopColor="#FFFFFF" stopOpacity="0" />
+          </radialGradient>
 
-        <h1 className="text-3xl font-black md:text-4xl">
-          Diagnostic rapide par notions
+          <radialGradient id="g1" cx="18%" cy="18%" r="60%">
+            <stop offset="0%" stopColor="#6EE7B7" stopOpacity="1" />
+            <stop offset="100%" stopColor="#6EE7B7" stopOpacity="0" />
+          </radialGradient>
+
+          <radialGradient id="g2" cx="82%" cy="15%" r="55%">
+            <stop offset="0%" stopColor="#7DD3FC" stopOpacity="1" />
+            <stop offset="100%" stopColor="#7DD3FC" stopOpacity="0" />
+          </radialGradient>
+
+          <radialGradient id="g3" cx="50%" cy="88%" r="55%">
+            <stop offset="0%" stopColor="#FDE047" stopOpacity="1" />
+            <stop offset="100%" stopColor="#FDE047" stopOpacity="0" />
+          </radialGradient>
+
+          <linearGradient id="wave" x1="0" x2="1">
+            <stop offset="0%" stopColor="#F0FDF4" />
+            <stop offset="50%" stopColor="#E0F2FE" />
+            <stop offset="100%" stopColor="#FEFCE8" />
+          </linearGradient>
+        </defs>
+
+        <rect width="1440" height="900" fill="url(#wave)" />
+        <rect width="1440" height="900" fill="url(#centerGlow)" />
+        <rect width="1440" height="900" fill="url(#g1)" />
+        <rect width="1440" height="900" fill="url(#g2)" />
+        <rect width="1440" height="900" fill="url(#g3)" />
+
+        <circle cx="180" cy="170" r="60" fill="#34D399" opacity="0.35" />
+        <circle cx="1240" cy="180" r="80" fill="#38BDF8" opacity="0.35" />
+        <circle cx="1120" cy="720" r="70" fill="#FACC15" opacity="0.35" />
+        <circle cx="260" cy="720" r="85" fill="#A78BFA" opacity="0.25" />
+
+        <path
+          d="M0 700 C220 620 340 760 560 690 C780 620 930 720 1140 660 C1280 620 1370 640 1440 610 V900 H0 Z"
+          fill="#FFFFFF"
+          opacity="0.75"
+        />
+
+        <text x="150" y="485" fontSize="54" opacity="0.2">
+          ⭐
+        </text>
+        <text x="1180" y="520" fontSize="64" opacity="0.2">
+          🏆
+        </text>
+        <text x="720" y="765" fontSize="58" opacity="0.2">
+          🚀
+        </text>
+        <text x="1030" y="355" fontSize="52" opacity="0.16">
+          🧭
+        </text>
+        <text x="340" y="620" fontSize="52" opacity="0.16">
+          🗺️
+        </text>
+      </svg>
+    </div>
+
+    <section className="relative z-10 mx-auto max-w-5xl">
+      <div className="mb-8 overflow-hidden rounded-[2rem] border border-white/70 bg-white/80 p-6 shadow-2xl backdrop-blur-xl">
+        <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-emerald-100 px-4 py-2 text-xs font-black uppercase tracking-wide text-emerald-800 ring-1 ring-emerald-200">
+          <span>🚀</span>
+          <span>EleveAI · Parcours</span>
+        </div>
+
+        <h1 className="text-3xl font-black leading-tight text-slate-950 md:text-5xl">
+          Ton voyage mathématique
         </h1>
 
-        <p className="mt-3 max-w-3xl text-sm text-slate-300 md:text-base">
-          Choisis ta classe. EleveAI propose un défi niveau ⭐⭐⭐ par notion,
-          puis affiche un bilan clair : 🟢 maîtrisé, 🟡 à revoir, 🔴 fragile.
+        <p className="mt-3 max-w-3xl text-base font-semibold leading-relaxed text-slate-700 md:text-lg">
+          Choisis ta classe. EleveAI te propose un défi ⭐⭐⭐ par notion,
+          puis affiche une carte claire de tes forces : 🟢 maîtrisé, 🟡 à revoir,
+          🔴 fragile.
         </p>
+
+        <div className="mt-6 rounded-3xl bg-gradient-to-r from-emerald-100 via-sky-100 to-yellow-100 p-4 ring-1 ring-white/80">
+          <p className="text-sm font-black text-slate-800">
+            🎯 Objectif : savoir exactement quelles notions tu maîtrises et lesquelles retravailler.
+          </p>
+        </div>
 
         <div className="mt-6 flex flex-wrap gap-3">
           {classes.map((c) => (
@@ -112,10 +191,10 @@ return (
                 resetParcours();
               }}
               className={[
-                "rounded-2xl px-5 py-3 text-sm font-black transition",
+                "rounded-2xl px-5 py-3 text-sm font-black shadow-sm transition hover:-translate-y-0.5",
                 classe === c
-                  ? "bg-violet-400 text-slate-950"
-                  : "bg-slate-800 text-white hover:bg-slate-700",
+                  ? "bg-slate-950 text-white ring-4 ring-yellow-300"
+                  : "bg-white text-slate-800 ring-1 ring-slate-200 hover:bg-emerald-50",
               ].join(" ")}
             >
               {c}
@@ -127,14 +206,14 @@ return (
           <button
             type="button"
             onClick={startParcours}
-            className="rounded-2xl bg-emerald-400 px-5 py-3 text-sm font-black text-slate-950 hover:bg-emerald-300"
+            className="rounded-2xl bg-gradient-to-r from-emerald-400 to-sky-400 px-6 py-3 text-sm font-black text-slate-950 shadow-lg transition hover:-translate-y-0.5 hover:shadow-xl"
           >
-            Démarrer le parcours
+            🚀 Démarrer le parcours
           </button>
 
           <Link
             href="/accueil"
-            className="rounded-2xl bg-slate-800 px-5 py-3 text-sm font-black text-white hover:bg-slate-700"
+            className="rounded-2xl bg-white px-6 py-3 text-sm font-black text-slate-800 shadow-sm ring-1 ring-slate-200 transition hover:-translate-y-0.5 hover:bg-slate-50"
           >
             Retour accueil
           </Link>
@@ -142,20 +221,34 @@ return (
       </div>
 
       {!started && (
-        <div className="rounded-3xl border border-slate-700 bg-slate-900 p-6">
-          <h2 className="mb-3 text-xl font-black">
-            Notions prévues en {classe}
+        <div className="rounded-[2rem] border border-white/70 bg-white/80 p-6 shadow-xl backdrop-blur-xl">
+          <h2 className="mb-3 text-2xl font-black text-slate-950">
+            🗺️ Notions prévues en {classe}
           </h2>
 
+          <p className="mb-5 text-sm font-semibold text-slate-600">
+            Chaque carte correspondra à un défi dans ton parcours.
+          </p>
+
           <div className="grid gap-3 md:grid-cols-2">
-            {notions.map((notion) => (
+            {notions.map((notion, index) => (
               <div
                 key={notion.id}
-                className="rounded-2xl border border-slate-700 bg-slate-800 p-4"
+                className="rounded-3xl border border-white bg-gradient-to-br from-white to-emerald-50 p-4 shadow-md ring-1 ring-emerald-100"
               >
-                <div className="font-black text-white">{notion.label}</div>
-                <div className="mt-1 text-xs text-slate-400">
-                  {notion.id}
+                <div className="flex items-center gap-3">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-emerald-100 text-lg font-black text-emerald-800">
+                    {index + 1}
+                  </div>
+
+                  <div>
+                    <div className="font-black text-slate-950">
+                      {notion.label}
+                    </div>
+                    <div className="mt-1 text-xs font-bold text-slate-500">
+                      {notion.id}
+                    </div>
+                  </div>
                 </div>
               </div>
             ))}
@@ -164,11 +257,11 @@ return (
       )}
 
       {started && questions.length === 0 && (
-        <div className="rounded-3xl border border-red-500/40 bg-red-950/40 p-6">
-          <h2 className="text-xl font-black text-red-200">
+        <div className="rounded-[2rem] border border-red-200 bg-white/85 p-6 shadow-xl backdrop-blur-xl">
+          <h2 className="text-xl font-black text-red-700">
             Aucun défi trouvé
           </h2>
-          <p className="mt-2 text-sm text-red-100">
+          <p className="mt-2 text-sm font-semibold text-red-700">
             Il faut au moins une question de difficulté 3 dans les
             question-banks pour cette classe.
           </p>
@@ -176,20 +269,28 @@ return (
       )}
 
       {started && questions.length > 0 && (
-        <div className="space-y-4">
+        <div className="space-y-5">
           {submitted && (
-            <div className="rounded-3xl border border-emerald-500/30 bg-slate-900 p-6 shadow-2xl">
-              <h2 className="text-2xl font-black">Bilan du parcours</h2>
+            <div className="rounded-[2rem] border border-white/70 bg-white/85 p-6 shadow-2xl backdrop-blur-xl">
+              <h2 className="text-3xl font-black text-slate-950">
+                🏆 Bilan du parcours
+              </h2>
+
+              <p className="mt-2 text-sm font-semibold text-slate-600">
+                Voici ta carte de progression. Les notions fragiles peuvent être retravaillées directement.
+              </p>
 
               <div className="mt-5 grid gap-3 md:grid-cols-2">
                 {scores.map((score) => (
                   <div
                     key={score.notionId}
-                    className="rounded-2xl border border-slate-700 bg-slate-800 p-4"
+                    className="rounded-3xl border border-white bg-gradient-to-br from-white to-sky-50 p-4 shadow-md ring-1 ring-sky-100"
                   >
-                    <div className="font-black">{score.notionLabel}</div>
+                    <div className="font-black text-slate-950">
+                      {score.notionLabel}
+                    </div>
 
-                    <div className="mt-1 text-sm text-slate-300">
+                    <div className="mt-1 text-sm font-bold text-slate-600">
                       Score : {score.score} / {score.maxScore}
                     </div>
 
@@ -200,7 +301,7 @@ return (
                     {score.status !== "maitrise" && (
                       <Link
                         href={`/tutor-v4?classe=${classe}&matiere=maths&notion=${score.notionId}`}
-                        className="mt-3 inline-block rounded-xl bg-slate-700 px-3 py-2 text-xs font-black text-white hover:bg-slate-600"
+                        className="mt-3 inline-block rounded-xl bg-slate-950 px-3 py-2 text-xs font-black text-white hover:bg-slate-800"
                       >
                         Retravailler cette notion
                       </Link>
@@ -219,27 +320,27 @@ return (
             return (
               <article
                 key={`${q.notionId}-${index}`}
-                className="rounded-3xl border border-slate-700 bg-white p-5 text-slate-950 shadow-xl"
+                className="rounded-[2rem] border border-white bg-white/90 p-5 text-slate-950 shadow-xl ring-1 ring-white/80 backdrop-blur"
               >
                 <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
                   <div>
-                    <p className="text-xs font-black uppercase tracking-wide text-violet-700">
-                      Notion {index + 1} / {questions.length}
+                    <p className="text-xs font-black uppercase tracking-wide text-emerald-700">
+                      Étape {index + 1} / {questions.length}
                     </p>
-                    <h2 className="text-xl font-black">{q.notionLabel}</h2>
+                    <h2 className="text-2xl font-black">{q.notionLabel}</h2>
                   </div>
 
-                  <span className="rounded-full bg-amber-100 px-3 py-1 text-xs font-black text-amber-800">
-                    ⭐⭐⭐
+                  <span className="rounded-full bg-amber-100 px-4 py-2 text-xs font-black text-amber-800 ring-1 ring-amber-200">
+                    ⭐⭐⭐ défi
                   </span>
                 </div>
 
-                <p className="whitespace-pre-line text-base font-semibold">
+                <p className="whitespace-pre-line text-base font-semibold leading-relaxed">
                   {q.question.text}
                 </p>
 
                 {q.question.canvas ? (
-                  <div className="mt-4 overflow-x-auto rounded-2xl bg-slate-50 p-3">
+                  <div className="mt-4 overflow-x-auto rounded-3xl bg-slate-50 p-3 ring-1 ring-slate-100">
                     <CanvasRenderer figure={q.question.canvas} />
                   </div>
                 ) : null}
@@ -255,8 +356,8 @@ return (
                         className={[
                           "rounded-2xl border px-4 py-3 text-left text-sm font-bold transition",
                           answers[q.notionId] === choice
-                            ? "border-violet-500 bg-violet-100 text-violet-900"
-                            : "border-slate-200 bg-slate-50 hover:bg-slate-100",
+                            ? "border-emerald-500 bg-emerald-100 text-emerald-900"
+                            : "border-slate-200 bg-white hover:bg-emerald-50",
                           submitted ? "cursor-not-allowed opacity-80" : "",
                         ].join(" ")}
                       >
@@ -270,7 +371,7 @@ return (
                     disabled={submitted}
                     onChange={(e) => handleAnswer(q.notionId, e.target.value)}
                     placeholder="Ta réponse..."
-                    className="mt-4 w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-sm font-bold outline-none focus:border-violet-500 focus:ring-2 focus:ring-violet-200 disabled:cursor-not-allowed disabled:bg-slate-100"
+                    className="mt-4 w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-sm font-bold outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 disabled:cursor-not-allowed disabled:bg-slate-100"
                   />
                 )}
 
@@ -315,13 +416,13 @@ return (
           })}
 
           {!submitted ? (
-            <div className="sticky bottom-4 rounded-3xl border border-violet-400/40 bg-slate-900/95 p-4 shadow-2xl backdrop-blur">
+            <div className="sticky bottom-4 rounded-[2rem] border border-white/70 bg-white/90 p-4 shadow-2xl backdrop-blur-xl">
               <button
                 type="button"
                 onClick={() => setSubmitted(true)}
-                className="w-full rounded-2xl bg-violet-400 px-5 py-4 text-base font-black text-slate-950 hover:bg-violet-300"
+                className="w-full rounded-2xl bg-gradient-to-r from-emerald-400 to-sky-400 px-5 py-4 text-base font-black text-slate-950 shadow-lg hover:from-emerald-300 hover:to-sky-300"
               >
-                Voir mon bilan
+                🏁 Voir ma carte de progression
               </button>
             </div>
           ) : (
@@ -329,7 +430,7 @@ return (
               <button
                 type="button"
                 onClick={startParcours}
-                className="rounded-2xl bg-emerald-400 px-5 py-3 text-sm font-black text-slate-950 hover:bg-emerald-300"
+                className="rounded-2xl bg-gradient-to-r from-emerald-400 to-sky-400 px-5 py-3 text-sm font-black text-slate-950 shadow-lg hover:from-emerald-300 hover:to-sky-300"
               >
                 Refaire un parcours
               </button>
@@ -337,7 +438,7 @@ return (
               <button
                 type="button"
                 onClick={resetParcours}
-                className="rounded-2xl bg-slate-800 px-5 py-3 text-sm font-black text-white hover:bg-slate-700"
+                className="rounded-2xl bg-white px-5 py-3 text-sm font-black text-slate-800 shadow-sm ring-1 ring-slate-200 hover:bg-slate-50"
               >
                 Changer de classe
               </button>
