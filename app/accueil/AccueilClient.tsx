@@ -26,9 +26,9 @@ const cards = [
     label: "Leçon du jour",
   },
   {
-    href: "/probleme-du-jour",
-    image: "/images/cards/probleme-du-jour.webp",
-    label: "Problème du jour",
+    href: "/defis-du-jour",
+    image: "/images/cards/defis-du-jour.webp",
+    label: "Defis du jour",
   },
   {
     href: "/concours-general",
@@ -111,13 +111,13 @@ const besoins = [
     icon: "🇬🇧",
     color: "from-blue-600 via-white to-red-500",
   },
-  {
-    title: "Je veux chercher un problème",
-    href: "/probleme-du-jour",
-    action: "Voir le problème",
-    icon: "🎯",
-    color: "from-pink-500 to-rose-600",
-  },
+    {
+      title: "Je relève le défi du jour",
+      href: "/defis-du-jour",
+      action: "Commencer le défi",
+      icon: "🎯",
+      color: "from-pink-500 to-rose-600",
+    },
   {
     title: "Je veux un challenge avancé",
     href: "/concours-general",

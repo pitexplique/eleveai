@@ -170,8 +170,8 @@ export default function Header() {
           </Link>
 
           <Link
-            href="/probleme-du-jour"
-            className={linkClass(isActive(pathname, "/probleme-du-jour"))}
+            href="/defis-du-jour"
+            className={linkClass(isActive(pathname, "/defis-du-jour"))}
           >
             <Puzzle className="h-4 w-4 text-pink-300" />
             Problème
@@ -323,9 +323,9 @@ export default function Header() {
             </Link>
 
             <Link
-              href="/probleme-du-jour"
+              href="/defis-du-jour"
               className={mobileLinkClass(
-                isActive(pathname, "/probleme-du-jour")
+                isActive(pathname, "/defis-du-jour")
               )}
             >
               <Puzzle className="h-4 w-4 text-pink-300" />

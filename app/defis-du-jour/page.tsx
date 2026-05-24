@@ -2,8 +2,8 @@
 
 import { useMemo, useState } from "react";
 import Link from "next/link";
-import { problemesFixed } from "@/lib/probleme-du-jour/problemes.fixed";
-import { problemeDuJourWeekly } from "@/lib/probleme-du-jour/weekly";
+import { problemesFixed } from "@/lib/defis-du-jour/problemes.fixed";
+import { problemeDuJourWeekly } from "@/lib/defis-du-jour/weekly";
 import { addScore } from "@/lib/score/scoreClient";
 
 export default function ProblemeDuJourPage() {
