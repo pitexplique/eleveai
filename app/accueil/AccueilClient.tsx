@@ -7,7 +7,7 @@ import Link from "next/link";
 const cards = [
   {
     href: "/coach-bac-spe",
-    image: "/images/cards/coach-bac-spe.png",
+    image: "/images/cards/coach-bac-spe.webp",
     label: "Coach Bac Spé Maths",
   },
   {
