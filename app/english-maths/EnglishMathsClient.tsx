@@ -9,6 +9,7 @@ import {
   englishMathsWords,
   getEnglishMathsWordsByIds,
   getTodayEnglishMathsDay,
+  getYesterdayEnglishMathsDay,
   type EnglishMathsNiveau,
 } from "@/lib/english-maths";
 
@@ -30,9 +31,17 @@ export default function EnglishMathsClient() {
   const niveau: EnglishMathsNiveau = "6e";
 
   const [mode, setMode] = useState<"words" | "quiz" | "result">("words");
+  const [viewMode, setViewMode] = useState<"today" | "yesterday">("today");
   const [answers, setAnswers] = useState<Record<string, string>>({});
 
-  const day = useMemo(() => getTodayEnglishMathsDay(niveau), [niveau]);
+  const todayDay = useMemo(() => getTodayEnglishMathsDay(niveau), [niveau]);
+
+  const yesterdayDay = useMemo(
+    () => getYesterdayEnglishMathsDay(niveau),
+    [niveau]
+  );
+
+  const day = viewMode === "yesterday" ? yesterdayDay : todayDay;
 
   const wordsOfDay = useMemo(() => {
     if (!day) return [];
@@ -49,6 +58,18 @@ export default function EnglishMathsClient() {
 
   const answeredCount = Object.keys(answers).length;
   const canShowScore = answeredCount >= questions.length && questions.length > 0;
+
+  function selectToday() {
+    setViewMode("today");
+    setMode("words");
+    setAnswers({});
+  }
+
+  function selectYesterday() {
+    setViewMode("yesterday");
+    setMode("words");
+    setAnswers({});
+  }
 
   function goToQuiz() {
     setAnswers({});
@@ -102,12 +123,42 @@ export default function EnglishMathsClient() {
                   {day.dayLabel} · {day.week}
                 </div>
 
-                <h2 className="text-2xl font-black">{day.title}</h2>
+                <h2 className="text-2xl font-black">
+                  {viewMode === "yesterday" ? "Révision d’hier" : day.title}
+                </h2>
               </div>
 
               <div className="rounded-full bg-sky-100 px-4 py-2 text-sm font-black text-sky-900">
                 {day.theme}
               </div>
+            </div>
+
+            <div className="mb-5 flex flex-wrap gap-2">
+              <button
+                type="button"
+                onClick={selectToday}
+                className={[
+                  "rounded-full px-4 py-2 text-sm font-black shadow transition",
+                  viewMode === "today"
+                    ? "bg-emerald-500 text-slate-950"
+                    : "bg-slate-100 text-slate-700 hover:bg-slate-200",
+                ].join(" ")}
+              >
+                Mots du jour
+              </button>
+
+              <button
+                type="button"
+                onClick={selectYesterday}
+                className={[
+                  "rounded-full px-4 py-2 text-sm font-black shadow transition",
+                  viewMode === "yesterday"
+                    ? "bg-sky-600 text-white"
+                    : "bg-slate-100 text-slate-700 hover:bg-slate-200",
+                ].join(" ")}
+              >
+                Revoir les mots d’hier
+              </button>
             </div>
 
             {mode === "words" ? (

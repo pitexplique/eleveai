@@ -33,6 +33,27 @@ export function getTodayEnglishMathsDay(niveau: EnglishMathsNiveau) {
   );
 }
 
+export function getEnglishMathsDayByIndex(
+  niveau: EnglishMathsNiveau,
+  dayIndex: number
+) {
+  const days = getEnglishMathsDaysByNiveau(niveau);
+
+  return days.find((day) => day.dayIndex === dayIndex) ?? null;
+}
+
+export function getYesterdayEnglishMathsDay(niveau: EnglishMathsNiveau) {
+  const currentJsDay = new Date().getDay();
+
+  // JS : dimanche = 0, lundi = 1...
+  const todayIndex = currentJsDay === 0 ? 7 : currentJsDay;
+
+  // Si on est lundi, hier = dimanche
+  const yesterdayIndex = todayIndex === 1 ? 7 : todayIndex - 1;
+
+  return getEnglishMathsDayByIndex(niveau, yesterdayIndex);
+}
+
 export { englishMathsWords, englishMathsDays };
 
 export type {
