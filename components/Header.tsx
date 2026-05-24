@@ -135,13 +135,24 @@ export default function Header() {
               new
             </span>
           </Link>
-
           <Link
             href="/english-maths"
-            className={linkClass(isActive(pathname, "/english-maths"))}
+            className={[
+              "relative flex items-center justify-center gap-2 rounded-2xl",
+              "bg-gradient-to-r from-blue-700 via-white to-red-500",
+              "px-3 py-2 text-xs font-black text-[#041B33]",
+              "shadow-lg transition hover:scale-[1.03] hover:shadow-xl",
+              isActive(pathname, "/english-maths")
+                ? "ring-2 ring-white/80"
+                : "ring-1 ring-white/20",
+            ].join(" ")}
           >
-            <span className="text-base leading-none">🇬🇧</span>
-            English · Maths
+            <span className="text-lg leading-none">🇬🇧</span>
+            <span className="leading-tight">
+              English
+              <br />
+              5 mots / jours
+            </span>
           </Link>
 
 
