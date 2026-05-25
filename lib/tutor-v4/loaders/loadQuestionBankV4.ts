@@ -4,6 +4,7 @@ import { maths6eQuestionBank } from "@/lib/tutor-v4/questionBank/6e/maths";
 import { maths5eQuestionBank } from "@/lib/tutor-v4/questionBank/5e/maths";
 import { maths4eQuestionBank } from "@/lib/tutor-v4/questionBank/4e/maths";
 import { maths3eQuestionBank } from "@/lib/tutor-v4/questionBank/3e/maths";
+import { mathsTerminaleSpeQuestionBank } from "@/lib/tutor-v4/questionBank/terminale-spe/maths";
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 
 export async function loadQuestionBankV4(
@@ -33,6 +34,10 @@ export async function loadQuestionBankV4(
 
   if (classe === "3e" && matiere === "maths") {
     return maths3eQuestionBank;
+  }
+
+  if (classe === "Terminale-spe" && matiere === "maths") {
+    return mathsTerminaleSpeQuestionBank;
   }
 
   throw new Error(`QuestionBank V4 introuvable pour ${classe}/${matiere}`);

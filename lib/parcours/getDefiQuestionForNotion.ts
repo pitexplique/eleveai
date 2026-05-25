@@ -14,6 +14,7 @@ import { maths6eQuestionBank } from "@/lib/tutor-v4/questionBank/6e/maths";
 import { maths5eQuestionBank } from "@/lib/tutor-v4/questionBank/5e/maths";
 import { maths4eQuestionBank } from "@/lib/tutor-v4/questionBank/4e/maths";
 import { maths3eQuestionBank } from "@/lib/tutor-v4/questionBank/3e/maths";
+import { mathsTerminaleSpeQuestionBank } from "@/lib/tutor-v4/questionBank/terminale-spe/maths";
 
 function getQuestionBank(classe: ParcoursClasse): TutorBankItemV4[] {
   if (classe === "cm1") return mathsCm1QuestionBank;

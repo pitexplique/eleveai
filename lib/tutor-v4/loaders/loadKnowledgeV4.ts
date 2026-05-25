@@ -5,6 +5,8 @@ import { loadKnowledge6eMaths } from "@/lib/tutor-v4/knowledge/loaders/loadKnowl
 import { loadKnowledge5eMaths } from "@/lib/tutor-v4/knowledge/loaders/loadKnowledge5eMaths";
 import { loadKnowledge4eMaths } from "@/lib/tutor-v4/knowledge/loaders/loadKnowledge4eMaths";
 import { loadKnowledge3eMaths } from "@/lib/tutor-v4/knowledge/loaders/loadKnowledge3eMaths";
+import { loadKnowledgeTerminaleSpeMaths} from "@/lib/tutor-v4/knowledge/loaders/loadKnowledgeTerminaleSpeMaths"
+
 import type { KnowledgePack } from "@/lib/tutor-v4/types";
 
 export async function loadKnowledgeV4(
@@ -32,6 +34,9 @@ export async function loadKnowledgeV4(
 
   if (classe === "3e" && matiere === "maths") {
     return loadKnowledge3eMaths() as KnowledgePack;
+  }
+    if (classe === "terminale-spe" && matiere === "maths") {
+    return loadKnowledgeTerminaleSpeMaths() as KnowledgePack;
   }
 
   throw new Error(`Knowledge V4 introuvable pour ${classe}/${matiere}`);

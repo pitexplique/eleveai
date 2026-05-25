@@ -309,7 +309,8 @@ function normalizeClasse(value: string | null): Classe {
     value === "6e" ||
     value === "5e" ||
     value === "4e" ||
-    value === "3e"
+    value === "4e" ||
+    value === "terminale-spe"
   ) {
     return value;
   }

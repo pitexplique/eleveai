@@ -12,7 +12,7 @@ import {
 } from "@/lib/tutor-v4/catalog";
 
 //const CLASSES: Classe[] = ["cm2", "6e", "5e", "4e", "3e"];
-const CLASSES: Classe[] = ["cm1", "cm2", "6e", "5e", "4e", "3e"];
+const CLASSES: Classe[] = ["cm1", "cm2", "6e", "5e", "4e", "3e", "terminale-spe"];
 
 function getClasseTitle(classe: Classe) {
     if (classe === "cm1") return "Maths CM1";
@@ -20,6 +20,7 @@ function getClasseTitle(classe: Classe) {
   if (classe === "6e") return "Maths 6e";
   if (classe === "5e") return "Maths 5e";
   if (classe === "4e") return "Maths 4e";
+  if (classe === "terminale-spe") return "Term Spe";
   return "Maths 3e";
 }
 
@@ -28,11 +29,15 @@ function getClasseBadgeColor(item: Classe, active: boolean) {
     return "border-slate-200 bg-white text-orange-500 hover:bg-orange-50";
   }
 
- // if (item === "cm2") return "border-emerald-500 bg-emerald-500 text-white";
+  if (item === "cm1") return "border-lime-500 bg-lime-500 text-white";
+  if (item === "cm2") return "border-lime-500 bg-lime-500 text-white";
   if (item === "6e") return "border-lime-500 bg-lime-500 text-white";
   if (item === "5e") return "border-sky-500 bg-sky-500 text-white";
   if (item === "4e") return "border-sky-500 bg-sky-500 text-white";
   if (item === "3e") return "border-sky-500 bg-sky-500 text-white";
+   if (item === "terminale-spe") return "border-sky-500 bg-sky-500 text-white";
+
+
   return "border-violet-500 bg-violet-500 text-white";
 }
 

@@ -4,12 +4,13 @@ import { buildKnowledge6eMaths } from "@/lib/tutor-v4/knowledge/maths/6e/buildKn
 import { buildKnowledge5eMaths } from "@/lib/tutor-v4/knowledge/maths/5e/buildKnowledge5e";
 import { buildKnowledge4eMaths } from "@/lib/tutor-v4/knowledge/maths/4e/buildKnowledge4e";
 import { buildKnowledge3eMaths } from "@/lib/tutor-v4/knowledge/maths/3e/buildKnowledge3e";
+import { buildKnowledgeTerminaleSpeMaths } from "@/lib/tutor-v4/knowledge/maths/terminale-spe/buildKnowledgeTerminaleSpe"  
 
 // =========================
 // TYPES
 // =========================
 
-export type Classe = "cm1" |"cm2" |"6e" | "5e" | "4e" | "3e";
+export type Classe = "cm1" |"cm2" |"6e" | "5e" | "4e" | "3e" | "terminale-spe";
 
 // =========================
 // KNOWLEDGE PAR CLASSE
@@ -27,8 +28,11 @@ function getKnowledge(classe: Classe) {
       return buildKnowledge5eMaths();
     case "4e":
       return buildKnowledge4eMaths();
-          case "3e":
+    case "3e":
       return buildKnowledge3eMaths();
+    case "terminale-spe":
+      return buildKnowledgeTerminaleSpeMaths();
+      
     default:
       return buildKnowledge6eMaths();
   }

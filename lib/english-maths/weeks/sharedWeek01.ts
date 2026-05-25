@@ -13,8 +13,8 @@ const baseDays: BaseEnglishMathsDay[] = [
     wordIds: [
       "numbers_number",
       "numbers_ten",
-      "numbers_thousand",
       "numbers_hundred",
+      "numbers_thousand",
       "operations_equal",
     ],
   },
