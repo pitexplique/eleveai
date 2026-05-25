@@ -12,9 +12,9 @@ const baseDays: BaseEnglishMathsDay[] = [
     theme: "numbers",
     wordIds: [
       "numbers_number",
-      "numbers_one",
-      "numbers_two",
       "numbers_ten",
+      "number_thousand",
+      "numbers_hundred",
       "operations_equal",
     ],
   },
