@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
+
 import type {
   CalculRapideItem,
   NiveauCalculRapide,
@@ -32,6 +33,12 @@ import { calculsTemplates3e } from "@/lib/calcul-rapide/data/3e/calculs.template
 import { problemesFixed3e } from "@/lib/calcul-rapide/data/3e/problemes.fixed";
 import { problemesTemplates3e } from "@/lib/calcul-rapide/data/3e/problemes.templates";
 
+import { weeklyTerminaleSpe } from "@/lib/calcul-rapide/data/terminale-spe/weekly";
+import { calculsFixedTerminaleSpe } from "@/lib/calcul-rapide/data/terminale-spe/calculs.fixed";
+import { calculsTemplatesTerminaleSpe } from "@/lib/calcul-rapide/data/terminale-spe/calculs.templates";
+import { problemesFixedTerminaleSpe } from "@/lib/calcul-rapide/data/terminale-spe/problemes.fixed";
+import { problemesTemplatesTerminaleSpe } from "@/lib/calcul-rapide/data/terminale-spe/problemes.templates";
+
 type GeneratedCalculRapideItem = CalculRapideItem & {
   displayText: string;
   displayExplanation?: string;
@@ -58,6 +65,7 @@ function replaceTemplate(text: string, values: Record<string, unknown>) {
 function computeAnswer(rule: string, values: Record<string, unknown>) {
   const keys = Object.keys(values);
   const args = keys.map((key) => Number(values[key]));
+
   const fn = new Function(...keys, `return ${rule};`);
   const result = fn(...args);
 
@@ -140,6 +148,18 @@ function getDataByNiveau(niveau: NiveauCalculRapide) {
         ...calculsTemplates3e,
         ...problemesFixed3e,
         ...problemesTemplates3e,
+      ],
+    };
+  }
+
+  if (niveau === "terminale-spe") {
+    return {
+      weeks: weeklyTerminaleSpe,
+      items: [
+        ...calculsFixedTerminaleSpe,
+        ...calculsTemplatesTerminaleSpe,
+        ...problemesFixedTerminaleSpe,
+        ...problemesTemplatesTerminaleSpe,
       ],
     };
   }
@@ -232,7 +252,8 @@ export default function CalculRapideDefiClient() {
     niveauParam === "5e" ||
     niveauParam === "6e" ||
     niveauParam === "4e" ||
-    niveauParam === "3e"
+    niveauParam === "3e" ||
+    niveauParam === "terminale-spe"
       ? niveauParam
       : "6e";
 
@@ -266,7 +287,9 @@ export default function CalculRapideDefiClient() {
   }, [niveau]);
 
   useEffect(() => {
-    if (currentQuestion) setTimeLeft(currentQuestion.durationSec);
+    if (currentQuestion) {
+      setTimeLeft(currentQuestion.durationSec);
+    }
   }, [currentIndex, currentQuestion]);
 
   useEffect(() => {
@@ -311,6 +334,7 @@ export default function CalculRapideDefiClient() {
   }
 
   function validateAndNext() {
+    if (!currentQuestion) return;
     if (feedback !== null || lockedCorrection) return;
 
     const acceptedAnswers = [
@@ -341,6 +365,14 @@ export default function CalculRapideDefiClient() {
     return (
       <main className="flex min-h-[100svh] items-center justify-center bg-slate-950 px-4 text-center text-white">
         Aucune session trouvée pour le niveau {niveau}
+      </main>
+    );
+  }
+
+  if (!currentQuestion) {
+    return (
+      <main className="flex min-h-[100svh] items-center justify-center bg-slate-950 px-4 text-center text-white">
+        Question introuvable.
       </main>
     );
   }
@@ -456,11 +488,7 @@ export default function CalculRapideDefiClient() {
         </div>
 
         <div className="mb-3 inline-flex rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-sm font-bold uppercase tracking-widest text-white/75 sm:text-base">
-          {currentQuestion.type === "calcul"
-            ? "Calcul"
-            : currentQuestion.type === "boss"
-              ? "Boss 🔥"
-              : "Problème"}
+          {currentQuestion.type === "calcul" ? "Calcul" : "Problème"}
         </div>
 
         <div className="mb-3 flex flex-col items-center gap-1">

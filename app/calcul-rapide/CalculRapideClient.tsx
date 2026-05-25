@@ -5,7 +5,7 @@ import { useState } from "react";
 import Link from "next/link";
 import type { NiveauCalculRapide } from "@/lib/calcul-rapide";
 
-const niveaux: NiveauCalculRapide[] = ["6e", "5e", "4e", "3e"];
+const niveaux: NiveauCalculRapide[] = ["6e", "5e", "4e", "3e", "terminale-spe"];
 
 export default function CalculRapideClient() {
   const [niveau, setNiveau] = useState<NiveauCalculRapide>("6e");

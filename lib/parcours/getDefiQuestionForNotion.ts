@@ -23,6 +23,7 @@ function getQuestionBank(classe: ParcoursClasse): TutorBankItemV4[] {
   if (classe === "5e") return maths5eQuestionBank;
   if (classe === "4e") return maths4eQuestionBank;
   if (classe === "3e") return maths3eQuestionBank;
+  if (classe === "terminale-spe") return mathsTerminaleSpeQuestionBank;
 
   return [];
 }

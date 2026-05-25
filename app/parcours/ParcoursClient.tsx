@@ -20,7 +20,7 @@ import {
   scoreParcours,
 } from "@/lib/parcours/scoreParcours";
 
-const classes: ParcoursClasse[] = ["cm1","cm2","6e", "5e", "4e", "3e"];
+const classes: ParcoursClasse[] = ["cm1","cm2","6e", "5e", "4e", "3e", "terminale-spe"];
 
 export default function ParcoursClient() {
   const [classe, setClasse] = useState<ParcoursClasse>("6e");
