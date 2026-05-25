@@ -36,7 +36,7 @@ export async function loadMatrixV4(
   if (classe === "3e" && matiere === "maths") {
     return matrix3eMaths;
   }
-    if (classe === "Terminale-spe" && matiere === "maths") {
+    if (classe === "terminale-spe" && matiere === "maths") {
     return matrixTerminaleSpeMaths;
   }
 
