@@ -4,6 +4,45 @@ import { useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
+const actualites = [
+  {
+    tag: "À la une",
+    title: "Sprint Bac Spé Maths",
+    description:
+      "Suites, fonctions, probabilités et automatismes pour préparer l’épreuve.",
+    href: "/coach-bac-spe",
+    action: "Réviser maintenant",
+    colorText: "text-violet-700",
+  },
+  {
+  tag: "Calcul rapide",
+  title: "7 questions en 5 minutes",
+  description:
+    "Un entraînement express pour renforcer les automatismes de calcul et gagner en confiance.",
+  href: "/calcul-rapide",
+  action: "Commencer",
+  colorText: "text-lime-700",
+},
+{
+  tag: "Aujourd’hui",
+  title: "Leçon audio : fractions égales",
+  description:
+    "Comprendre pourquoi 1/2, 2/4 et 5/10 représentent la même quantité.",
+  href: "/lecon-du-jour",
+  action: "Écouter la leçon",
+  colorText: "text-orange-600",
+},
+  {
+    tag: "Défi",
+    title: "Le défi du jour",
+    description:
+      "Hydro Tanika : une réserve d’énergie pour La Réunion",
+    href: "/defis-du-jour",
+    action: "Commencer",
+    colorText: "text-rose-600",
+  },
+];
+
 const cards = [
   {
     href: "/coach-bac-spe",
@@ -116,13 +155,13 @@ const besoins = [
     icon: "🇬🇧",
     color: "from-blue-600 via-white to-red-500",
   },
-    {
-      title: "Je relève le défi du jour",
-      href: "/defis-du-jour",
-      action: "Commencer le défi",
-      icon: "🎯",
-      color: "from-pink-500 to-rose-600",
-    },
+  {
+    title: "Je relève le défi du jour",
+    href: "/defis-du-jour",
+    action: "Commencer le défi",
+    icon: "🎯",
+    color: "from-pink-500 to-rose-600",
+  },
   {
     title: "Je veux un challenge avancé",
     href: "/concours-general",
@@ -130,7 +169,7 @@ const besoins = [
     icon: "🏆",
     color: "from-yellow-400 to-orange-500",
   },
-    {
+  {
     title: "Je prépare le bac spé maths",
     href: "/coach-bac-spe",
     action: "Lancer le sprint 16 juin",
@@ -239,26 +278,66 @@ export default function AccueilPage() {
                   sm:px-3 sm:py-2 sm:text-xs
                 "
               >
- {/*                <div className="flex -space-x-2">
-                  <div className="flex h-6 w-6 items-center justify-center rounded-full border-2 border-white bg-pink-400 text-xs text-white shadow sm:h-7 sm:w-7 sm:text-sm">
-                    👧
-                  </div>
-
-                  <div className="flex h-6 w-6 items-center justify-center rounded-full border-2 border-white bg-fuchsia-500 text-xs text-white shadow sm:h-7 sm:w-7 sm:text-sm">
-                    👧
-                  </div>
-
-                  <div className="flex h-6 w-6 items-center justify-center rounded-full border-2 border-white bg-rose-500 text-xs text-white shadow sm:h-7 sm:w-7 sm:text-sm">
-                    👧
-                  </div>
-                </div>
-
-                <span className="hidden sm:inline">
-                  6°C Collège Dimitile - Entre-Deux - île de La Réunion
-                </span>
-
-                <span className="sm:hidden">6°C</span>*/}
+                {/* Zone volontairement conservée pour futur chip élèves */}
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* JOURNAL ELEVEAI */}
+      <section className="relative z-10 bg-gradient-to-b from-[#0B4F7A] via-[#0A6B9A] to-[#0B4F7A] px-4 pt-5">
+        <div className="mx-auto max-w-6xl">
+          <div className="rounded-[2rem] border border-white/15 bg-white/[0.10] p-4 shadow-2xl backdrop-blur-md">
+            <div className="mb-4 flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
+              <div>
+                <p className="text-xs font-black uppercase tracking-[0.25em] text-yellow-300">
+                  Journal EleveAI
+                </p>
+
+                <h2 className="mt-1 text-2xl font-black text-white md:text-3xl">
+                  Aujourd’hui sur EleveAI
+                </h2>
+              </div>
+
+              <span className="w-fit rounded-full bg-yellow-300 px-4 py-2 text-xs font-black text-[#041B33] shadow-lg">
+                ✨ Nouveau
+              </span>
+            </div>
+
+            <div className="grid gap-3 md:grid-cols-3">
+              {actualites.map((actualite) => (
+                <Link
+                  key={actualite.href}
+                  href={actualite.href}
+                  className="
+                    group rounded-3xl border border-white/15
+                    bg-white/90 p-4 text-[#041B33] shadow-xl
+                    transition hover:-translate-y-1 hover:bg-white
+                    focus:outline-none focus:ring-4 focus:ring-white/70
+                  "
+                >
+                  <p
+                    className={`text-xs font-black uppercase tracking-[0.18em] ${actualite.colorText}`}
+                  >
+                    {actualite.tag}
+                  </p>
+
+                  <h3 className="mt-2 text-xl font-black">
+                    {actualite.title}
+                  </h3>
+
+                  <p className="mt-2 text-sm font-semibold text-slate-700">
+                    {actualite.description}
+                  </p>
+
+                  <div
+                    className={`mt-3 text-sm font-black ${actualite.colorText}`}
+                  >
+                    {actualite.action} →
+                  </div>
+                </Link>
+              ))}
             </div>
           </div>
         </div>
@@ -332,9 +411,9 @@ export default function AccueilPage() {
 
             <p className="mt-4 max-w-3xl text-base text-slate-200 md:text-lg">
               EleveAI aide les élèves à progresser en mathématiques avec des
-              parcours, des défis, du calcul rapide, des leçons courtes, un coach
-              par compétences, English Maths et des entraînements au Concours
-              général des collèges.
+              parcours, des défis, du calcul rapide, des leçons courtes, un
+              coach par compétences, English Maths et des entraînements au
+              Concours général des collèges.
             </p>
           </div>
 
