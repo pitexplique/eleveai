@@ -18,8 +18,7 @@ export type Classe = "cm1" |"cm2" |"6e" | "5e" | "4e" | "3e" | "terminale-spe";
 
 function getKnowledge(classe: Classe) {
   switch (classe) {
-    case "cm1":
-      return buildKnowledgeCm1Maths();
+    case "cm1":      return buildKnowledgeCm1Maths();
     case "cm2":
       return buildKnowledgeCm2Maths();
     case "6e":
@@ -30,6 +29,7 @@ function getKnowledge(classe: Classe) {
       return buildKnowledge4eMaths();
     case "3e":
       return buildKnowledge3eMaths();
+
     case "terminale-spe":
       return buildKnowledgeTerminaleSpeMaths();
       

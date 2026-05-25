@@ -36,7 +36,7 @@ export async function loadQuestionBankV4(
     return maths3eQuestionBank;
   }
 
-  if (classe === "Terminale-spe" && matiere === "maths") {
+  if (classe === "terminale-spe" && matiere === "maths") {
     return mathsTerminaleSpeQuestionBank;
   }
 
