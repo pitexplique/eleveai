@@ -1,44 +1,44 @@
-// lib/probleme-du-jour/weekly.ts
+// lib/defis-du-jour/weekly.ts
 
 export const problemeDuJourWeekly = {
-  id: "probleme-semaine-1",
+  id: "hydro-tanika-semaine-1",
 
-  title: "Problème du jour — Semaine 1",
+  title: "Défis du jour — Hydro Tanika à La Réunion",
 
   days: [
     {
       day: 1,
-      problemId: "pourcentage_reduction_001",
+      problemId: "hydro_tanika_energie_001",
     },
 
     {
       day: 2,
-      problemId: "eau_reunion_001",
+      problemId: "hydro_tanika_kwh_foyers_001",
     },
 
     {
       day: 3,
-      problemId: "bus_scolaire_001",
+      problemId: "hydro_tanika_volume_heure_001",
     },
 
     {
       day: 4,
-      problemId: "mangues_reunion_001",
+      problemId: "hydro_tanika_volume_minute_001",
     },
 
     {
       day: 5,
-      problemId: "plage_reunion_001",
+      problemId: "hydro_tanika_surface_bassin_001",
     },
 
     {
       day: 6,
-      problemId: "ananas_reunion_001",
+      problemId: "hydro_tanika_comparaison_ville_001",
     },
 
     {
       day: 7,
-      problemId: "sortie_scolaire_absents_001",
+      problemId: "hydro_tanika_synthese_001",
     },
   ],
 };

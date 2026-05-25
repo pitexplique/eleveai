@@ -16,4 +16,10 @@ export type ProblemeDuJour = {
   expectedAnswer: string;
   explanation: string;
   directions: ProblemeDirection[];
+
+  // optionnel : utile pour Hydro Tanika
+  image?: string;
+
+  // optionnel : progression sur la semaine
+  level?: 1 | 2 | 3 | 4 | 5;
 };

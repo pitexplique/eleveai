@@ -4,20 +4,21 @@ import { useMemo, useState } from "react";
 import Link from "next/link";
 import { problemesFixed } from "@/lib/defis-du-jour/problemes.fixed";
 import { problemeDuJourWeekly } from "@/lib/defis-du-jour/weekly";
-import { addScore } from "@/lib/score/scoreClient";
 
-export default function ProblemeDuJourPage() {
-  const probleme = useMemo(() => {
+export default function DefisDuJourPage() {
+  const defi = useMemo(() => {
     const today = new Date().getDay();
 
+    // getDay() :
+    // dimanche = 0, lundi = 1, mardi = 2, ...
     const mapping: Record<number, number> = {
-      1: 0,
-      2: 1,
-      3: 2,
-      4: 3,
-      5: 4,
-      6: 6,
-      7: 6,
+      0: 6, // dimanche
+      1: 0, // lundi
+      2: 1, // mardi
+      3: 2, // mercredi
+      4: 3, // jeudi
+      5: 4, // vendredi
+      6: 5, // samedi
     };
 
     const index = mapping[today] ?? 0;
@@ -34,50 +35,32 @@ export default function ProblemeDuJourPage() {
   );
   const [answer, setAnswer] = useState("");
   const [showCorrection, setShowCorrection] = useState(false);
-  const [pointsGagnes, setPointsGagnes] = useState<number | null>(null);
-  const [scoreAdded, setScoreAdded] = useState(false);
 
-  const selectedDirection = probleme.directions.find(
+  const selectedDirection = defi.directions.find(
     (d) => d.id === selectedDirectionId
   );
 
   function normalize(value: string) {
-    return value.trim().replace(",", ".").toLowerCase();
+    return value
+      .trim()
+      .replace(",", ".")
+      .replace(/\s+/g, " ")
+      .toLowerCase();
   }
 
   const normalizedAnswer = normalize(answer);
 
   const isCorrect =
-    normalizedAnswer === normalize(probleme.expectedAnswer) ||
-    normalizedAnswer.includes(normalize(probleme.expectedAnswer));
+    normalizedAnswer === normalize(defi.expectedAnswer) ||
+    normalizedAnswer.includes(normalize(defi.expectedAnswer));
+
+  function resetAnswer() {
+    setAnswer("");
+    setShowCorrection(false);
+  }
 
   function handleVerify() {
     setShowCorrection(true);
-
-    if (scoreAdded || !selectedDirection) return;
-
-    if (selectedDirection.type === "open") {
-      addScore({
-        module: "probleme-du-jour",
-        points: 5,
-        reason: "explication claire",
-      });
-
-      setPointsGagnes(5);
-      setScoreAdded(true);
-      return;
-    }
-
-    if (isCorrect) {
-      addScore({
-        module: "probleme-du-jour",
-        points: 5,
-        reason: "bonne réponse",
-      });
-
-      setPointsGagnes(5);
-      setScoreAdded(true);
-    }
   }
 
   return (
@@ -87,39 +70,53 @@ export default function ProblemeDuJourPage() {
         backgroundImage: "url('/images/reunion.png')",
       }}
     >
-      <div className="absolute inset-0 bg-slate-950/55" />
+      <div className="absolute inset-0 bg-slate-950/60" />
 
       <section className="relative z-10 mx-auto max-w-3xl space-y-5">
         <div className="text-xs text-slate-300">
           <Link href="/accueil" className="hover:text-emerald-300">
             Accueil
           </Link>{" "}
-          / Problème du jour
+          / Défis du jour
         </div>
 
-        <header className="rounded-3xl border border-emerald-500/30 bg-slate-900/70 p-4 shadow-2xl backdrop-blur-sm">
-          <p className="mb-1 text-[11px] font-bold uppercase tracking-wide text-emerald-300">
-            Problème du jour · {probleme.theme}
-          </p>
+        <header className="overflow-hidden rounded-3xl border border-emerald-500/30 bg-slate-900/75 shadow-2xl backdrop-blur-sm">
+          <div className="p-4">
+            <p className="mb-1 text-[11px] font-bold uppercase tracking-wide text-emerald-300">
+              Défi du jour · {defi.theme}
+            </p>
 
-          <h1 className="text-xl font-black text-white">{probleme.title}</h1>
+            <h1 className="text-xl font-black text-white sm:text-2xl">
+              {defi.title}
+            </h1>
+          </div>
 
-          <p className="mt-3 text-sm leading-relaxed text-slate-100">
-            {probleme.statement}
-          </p>
+          <div className="border-y border-white/10 bg-slate-950/40">
+            <img
+              src="/images/defis-du-jour/hydro-tanika.webp"
+              alt="Projet Hydro Tanika à La Réunion : bassin en altitude et océan"
+              className="h-auto w-full object-cover"
+            />
+          </div>
 
-          <p className="mt-3 rounded-2xl bg-emerald-400/10 p-3 text-base font-bold text-emerald-200">
-            {probleme.question}
-          </p>
+          <div className="space-y-3 p-4">
+            <p className="text-sm leading-relaxed text-slate-100 sm:text-base">
+              {defi.statement}
+            </p>
+
+            <p className="rounded-2xl bg-emerald-400/10 p-3 text-base font-bold leading-relaxed text-emerald-200">
+              {defi.question}
+            </p>
+          </div>
         </header>
 
-        <section className="rounded-3xl border border-slate-700 bg-slate-900/70 p-4 backdrop-blur-sm">
+        <section className="rounded-3xl border border-slate-700 bg-slate-900/75 p-4 backdrop-blur-sm">
           <h2 className="mb-3 text-base font-black text-white">
             Choisis ton chemin 🧭
           </h2>
 
           <div className="grid gap-2 sm:grid-cols-2">
-            {probleme.directions.map((direction) => {
+            {defi.directions.map((direction) => {
               const active = selectedDirectionId === direction.id;
 
               return (
@@ -128,10 +125,7 @@ export default function ProblemeDuJourPage() {
                   type="button"
                   onClick={() => {
                     setSelectedDirectionId(direction.id);
-                    setAnswer("");
-                    setShowCorrection(false);
-                    setPointsGagnes(null);
-                    setScoreAdded(false);
+                    resetAnswer();
                   }}
                   className={`rounded-2xl border p-3 text-left text-sm font-bold transition ${
                     active
@@ -147,12 +141,12 @@ export default function ProblemeDuJourPage() {
         </section>
 
         {selectedDirection ? (
-          <section className="rounded-3xl border border-slate-700 bg-slate-900/70 p-4 backdrop-blur-sm">
+          <section className="rounded-3xl border border-slate-700 bg-slate-900/75 p-4 backdrop-blur-sm">
             <p className="text-sm font-black text-emerald-300">
               {selectedDirection.label}
             </p>
 
-            <p className="mt-2 text-sm leading-relaxed text-slate-100">
+            <p className="mt-2 whitespace-pre-line text-sm leading-relaxed text-slate-100">
               {selectedDirection.content}
             </p>
 
@@ -167,11 +161,9 @@ export default function ProblemeDuJourPage() {
                   onChange={(e) => {
                     setAnswer(e.target.value);
                     setShowCorrection(false);
-                    setPointsGagnes(null);
-                    setScoreAdded(false);
                   }}
                   placeholder="Explique comment tu as réfléchi..."
-                  className="min-h-20 w-full rounded-2xl border border-slate-700 bg-slate-950/90 p-3 text-sm text-white outline-none focus:border-emerald-400"
+                  className="min-h-24 w-full rounded-2xl border border-slate-700 bg-slate-950/90 p-3 text-sm text-white outline-none placeholder:text-slate-500 focus:border-emerald-400"
                 />
               ) : (
                 <input
@@ -179,11 +171,9 @@ export default function ProblemeDuJourPage() {
                   onChange={(e) => {
                     setAnswer(e.target.value);
                     setShowCorrection(false);
-                    setPointsGagnes(null);
-                    setScoreAdded(false);
                   }}
-                  placeholder="Cherche étape par étape..."
-                  className="w-full rounded-2xl border border-slate-700 bg-slate-950/90 p-3 text-sm text-white outline-none focus:border-emerald-400"
+                  placeholder="Écris ta réponse..."
+                  className="w-full rounded-2xl border border-slate-700 bg-slate-950/90 p-3 text-sm text-white outline-none placeholder:text-slate-500 focus:border-emerald-400"
                 />
               )}
 
@@ -191,9 +181,9 @@ export default function ProblemeDuJourPage() {
                 type="button"
                 onClick={handleVerify}
                 disabled={!answer.trim()}
-                className="rounded-2xl bg-emerald-400 px-5 py-2.5 text-sm font-black text-slate-950 hover:bg-emerald-300 disabled:cursor-not-allowed disabled:opacity-50"
+                className="rounded-2xl bg-emerald-400 px-5 py-2.5 text-sm font-black text-slate-950 transition hover:bg-emerald-300 disabled:cursor-not-allowed disabled:opacity-50"
               >
-                Vérifier
+                Voir la correction
               </button>
             </div>
           </section>
@@ -204,17 +194,17 @@ export default function ProblemeDuJourPage() {
             {selectedDirection?.type !== "open" ? (
               <p className="text-base font-black text-emerald-300">
                 {isCorrect
-                  ? `✅ Bonne réponse ! +${pointsGagnes ?? 0} points`
-                  : "🦎 Tu es sur la bonne piste."}
+                  ? "✅ Bonne réponse !"
+                  : "🦎 Tu es sur la bonne piste. Regarde la correction."}
               </p>
             ) : (
               <p className="text-base font-black text-emerald-300">
-                🦎 Merci pour ton explication. +{pointsGagnes ?? 0} points
+                🦎 Merci pour ton explication.
               </p>
             )}
 
-            <p className="mt-2 text-sm leading-relaxed text-slate-100">
-              {probleme.explanation}
+            <p className="mt-2 whitespace-pre-line text-sm leading-relaxed text-slate-100">
+              {defi.explanation}
             </p>
           </section>
         ) : null}
