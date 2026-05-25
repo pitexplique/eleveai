@@ -37,7 +37,7 @@ export function getClasseNotions(
   if (classe === "3e") {
     return buildKnowledge3eMaths().notions;
   }
-    if (classe === "terminal-spe") {
+    if (classe === "terminale-spe") {
     return buildKnowledgeTerminaleSpeMaths().notions;
   }
 
