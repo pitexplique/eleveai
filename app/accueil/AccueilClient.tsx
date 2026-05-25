@@ -239,7 +239,7 @@ export default function AccueilPage() {
                   sm:px-3 sm:py-2 sm:text-xs
                 "
               >
-                <div className="flex -space-x-2">
+ {/*                <div className="flex -space-x-2">
                   <div className="flex h-6 w-6 items-center justify-center rounded-full border-2 border-white bg-pink-400 text-xs text-white shadow sm:h-7 sm:w-7 sm:text-sm">
                     👧
                   </div>
@@ -257,7 +257,7 @@ export default function AccueilPage() {
                   6°C Collège Dimitile - Entre-Deux - île de La Réunion
                 </span>
 
-                <span className="sm:hidden">6°C</span>
+                <span className="sm:hidden">6°C</span>*/}
               </div>
             </div>
           </div>
