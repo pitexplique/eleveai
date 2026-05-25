@@ -338,7 +338,7 @@ export type AnswerTutorV4Response = {
    TYPES V4 POUR LA BANQUE DE QUESTIONS
    ========================================================= */
 
-export type SchoolLevel = "cm1" |"cm2" | "6e" | "5e" | "4e" | "3e "|"terminale-spe";
+export type SchoolLevel = "cm1" |"cm2" | "6e" | "5e" | "4e" | "3e"|"terminale-spe";
 export type SubjectCode = "maths";
 
 export type TutorGeneratedQuestionV4 = {
