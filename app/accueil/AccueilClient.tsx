@@ -15,31 +15,31 @@ const actualites = [
     colorText: "text-violet-700",
   },
   {
-  tag: "Calcul rapide",
-  title: "7 questions en 5 minutes",
-  description:
-    "Un entraînement express pour renforcer les automatismes de calcul et gagner en confiance.",
-  href: "/calcul-rapide",
-  action: "Commencer",
-  colorText: "text-lime-700",
-},
-{
-  tag: "Aujourd’hui",
-  title: "Leçon audio : fractions égales",
-  description:
-    "Comprendre pourquoi 1/2, 2/4 et 5/10 représentent la même quantité.",
-  href: "/lecon-du-jour",
-  action: "Écouter la leçon",
-  colorText: "text-orange-600",
-},
-  {
-    tag: "Défi",
-    title: "Le défi du jour",
+    tag: "Défis du jour",
+    title: "Hydro Tanika : une réserve d’énergie pour La Réunion",
     description:
-      "Hydro Tanika : une réserve d’énergie pour La Réunion",
+      "Un défi pour comprendre comment l’eau peut servir à stocker de l’énergie et aider La Réunion dans sa transition énergétique.",
     href: "/defis-du-jour",
-    action: "Commencer",
+    action: "Découvrir le défi",
     colorText: "text-rose-600",
+  },
+  {
+    tag: "Calcul rapide",
+    title: "7 questions en 5 minutes",
+    description:
+      "Un entraînement express pour renforcer les automatismes de calcul et gagner en confiance.",
+    href: "/calcul-rapide",
+    action: "Commencer",
+    colorText: "text-lime-700",
+  },
+  {
+    tag: "English Maths",
+    title: "Apprendre les maths en anglais",
+    description:
+      "Découvrir le vocabulaire des mathématiques en anglais avec des activités simples et progressives.",
+    href: "/english-maths",
+    action: "Découvrir",
+    colorText: "text-blue-700",
   },
 ];
 
@@ -278,7 +278,7 @@ export default function AccueilPage() {
                   sm:px-3 sm:py-2 sm:text-xs
                 "
               >
-                {/* Zone volontairement conservée pour futur chip élèves */}
+                {/* Zone conservée pour futur chip élèves */}
               </div>
             </div>
           </div>
@@ -301,11 +301,11 @@ export default function AccueilPage() {
               </div>
 
               <span className="w-fit rounded-full bg-yellow-300 px-4 py-2 text-xs font-black text-[#041B33] shadow-lg">
-                ✨ Nouveau
+                ✨ Actualité
               </span>
             </div>
 
-            <div className="grid gap-3 md:grid-cols-3">
+            <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
               {actualites.map((actualite) => (
                 <Link
                   key={actualite.href}
@@ -406,7 +406,7 @@ export default function AccueilPage() {
             </p>
 
             <h1 className="text-3xl font-black leading-tight md:text-5xl">
-              Un vrai parcours d’apprentissage du CM1 à la 3e + Bac Spe Maths
+              Un vrai parcours d’apprentissage du CM1 à la 3e + Bac Spé Maths
             </h1>
 
             <p className="mt-4 max-w-3xl text-base text-slate-200 md:text-lg">
