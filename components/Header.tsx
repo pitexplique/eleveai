@@ -46,12 +46,19 @@ export default function Header() {
         : "text-white/90 hover:bg-white/15 hover:text-white"
     }`;
 
-  const mobileLinkClass = (active: boolean) =>
-    `flex items-center gap-3 rounded-2xl px-4 py-3 text-sm font-semibold transition ${
-      active
-        ? "bg-white text-[#041B33]"
-        : "bg-white/10 text-white hover:bg-white/15"
-    }`;
+  const mobileCardClass = (
+    active: boolean,
+    gradient: string,
+    textColor = "text-white"
+  ) =>
+    [
+      "flex items-center justify-center gap-3 rounded-2xl",
+      "px-4 py-4 text-sm font-black shadow-lg transition",
+      "hover:scale-[1.015] active:scale-[0.99]",
+      gradient,
+      textColor,
+      active ? "ring-2 ring-white/80" : "ring-1 ring-white/15",
+    ].join(" ");
 
   const eleveLabel = eleve?.nom || eleve?.code_eleve || "Élève";
 
@@ -269,19 +276,21 @@ export default function Header() {
           <div className="grid gap-2">
             <Link
               href="/accueil"
-              className={mobileLinkClass(isActive(pathname, "/accueil"))}
+              className={mobileCardClass(
+                isActive(pathname, "/accueil"),
+                "bg-gradient-to-r from-cyan-500 to-blue-600"
+              )}
             >
-              <Home className="h-4 w-4 text-cyan-300" />
+              <Home className="h-5 w-5" />
               Accueil
             </Link>
 
             <Link
               href="/coach-bac-spe"
-              className="
-                flex items-center justify-center gap-3 rounded-2xl
-                bg-gradient-to-r from-blue-600 to-violet-700
-                px-4 py-4 font-black text-white shadow-lg
-              "
+              className={mobileCardClass(
+                isActive(pathname, "/coach-bac-spe"),
+                "bg-gradient-to-r from-blue-600 to-violet-700"
+              )}
             >
               <GraduationCap className="h-5 w-5" />
               Bac Spé Maths · 16 juin
@@ -289,35 +298,44 @@ export default function Header() {
 
             <Link
               href="/coach-maths-ia"
-              className={mobileLinkClass(isActive(pathname, "/coach-maths-ia"))}
+              className={mobileCardClass(
+                isActive(pathname, "/coach-maths-ia"),
+                "bg-gradient-to-r from-orange-400 to-red-500"
+              )}
             >
-              <Brain className="h-4 w-4 text-orange-300" />
+              <Brain className="h-5 w-5" />
               Coach Maths IA
             </Link>
 
             <Link
               href="/parcours"
-              className={mobileLinkClass(isActive(pathname, "/parcours"))}
+              className={mobileCardClass(
+                isActive(pathname, "/parcours"),
+                "bg-gradient-to-r from-purple-500 to-fuchsia-600"
+              )}
             >
-              <Route className="h-4 w-4 text-purple-300" />
+              <Route className="h-5 w-5" />
               Parcours
             </Link>
 
             <Link
               href="/calcul-rapide"
-              className={mobileLinkClass(isActive(pathname, "/calcul-rapide"))}
+              className={mobileCardClass(
+                isActive(pathname, "/calcul-rapide"),
+                "bg-gradient-to-r from-emerald-400 to-green-600"
+              )}
             >
-              <Target className="h-4 w-4 text-green-300" />
+              <Target className="h-5 w-5" />
               Calcul rapide
             </Link>
 
             <Link
               href="/concours-general"
-              className="
-                flex items-center justify-center gap-3 rounded-2xl
-                bg-gradient-to-r from-amber-300 to-orange-400
-                px-4 py-4 font-black text-[#041B33] shadow-lg
-              "
+              className={mobileCardClass(
+                isActive(pathname, "/concours-general"),
+                "bg-gradient-to-r from-amber-300 to-orange-400",
+                "text-[#041B33]"
+              )}
             >
               <Trophy className="h-5 w-5" />
               Concours général 🏆
@@ -325,11 +343,11 @@ export default function Header() {
 
             <Link
               href="/english-maths"
-              className="
-                flex items-center justify-center gap-3 rounded-2xl
-                bg-gradient-to-r from-blue-700 via-slate-50 to-red-500
-                px-4 py-4 font-black text-[#041B33] shadow-lg
-              "
+              className={mobileCardClass(
+                isActive(pathname, "/english-maths"),
+                "bg-gradient-to-r from-blue-700 via-slate-50 to-red-500",
+                "text-[#041B33]"
+              )}
             >
               <span className="text-xl leading-none">🇬🇧</span>
               English Maths
@@ -337,10 +355,10 @@ export default function Header() {
 
             <Link
               href="/lecon-du-jour"
-              className="
-                flex items-center justify-center gap-3 rounded-2xl
-                bg-orange-500 px-4 py-4 font-black text-white shadow-lg
-              "
+              className={mobileCardClass(
+                isActive(pathname, "/lecon-du-jour"),
+                "bg-gradient-to-r from-orange-500 to-red-600"
+              )}
             >
               <Flame className="h-5 w-5" />
               Leçon du jour 🔥
@@ -348,19 +366,24 @@ export default function Header() {
 
             <Link
               href="/defis-du-jour"
-              className={mobileLinkClass(
-                isActive(pathname, "/defis-du-jour")
+              className={mobileCardClass(
+                isActive(pathname, "/defis-du-jour"),
+                "bg-gradient-to-r from-pink-500 to-rose-600"
               )}
             >
-              <Puzzle className="h-4 w-4 text-pink-300" />
+              <Puzzle className="h-5 w-5" />
               Défis 974
             </Link>
 
             <Link
               href="/optimiseur"
-              className={mobileLinkClass(isActive(pathname, "/optimiseur"))}
+              className={mobileCardClass(
+                isActive(pathname, "/optimiseur"),
+                "bg-gradient-to-r from-amber-400 to-yellow-500",
+                "text-[#041B33]"
+              )}
             >
-              <BadgeCheck className="h-4 w-4 text-amber-300" />
+              <BadgeCheck className="h-5 w-5" />
               Valéria
             </Link>
 
@@ -368,13 +391,13 @@ export default function Header() {
               <div className="mt-3 grid gap-2 border-t border-cyan-300/20 pt-3">
                 <Link
                   href="/parcours"
-                  className="
-                    flex items-center justify-center gap-2 rounded-2xl
-                    bg-gradient-to-r from-emerald-300 to-cyan-300
-                    px-4 py-3 font-black text-[#041B33]
-                  "
+                  className={mobileCardClass(
+                    isActive(pathname, "/parcours"),
+                    "bg-gradient-to-r from-emerald-300 to-cyan-300",
+                    "text-[#041B33]"
+                  )}
                 >
-                  <GraduationCap className="h-4 w-4" />
+                  <GraduationCap className="h-5 w-5" />
                   {eleveLabel}
                 </Link>
 
@@ -382,24 +405,27 @@ export default function Header() {
                   type="button"
                   onClick={logoutEleve}
                   className="
-                    flex items-center justify-center gap-2 rounded-2xl
-                    bg-red-500 px-4 py-3 font-black text-white
+                    flex items-center justify-center gap-3 rounded-2xl
+                    bg-gradient-to-r from-red-500 to-red-700
+                    px-4 py-4 text-sm font-black text-white shadow-lg
+                    transition hover:scale-[1.015] active:scale-[0.99]
+                    ring-1 ring-white/15
                   "
                 >
-                  <LogOut className="h-4 w-4" />
+                  <LogOut className="h-5 w-5" />
                   Déconnexion
                 </button>
               </div>
             ) : (
               <Link
                 href="/auth/signin-eleve"
-                className="
-                  mt-3 flex items-center justify-center gap-2 rounded-2xl
-                  bg-gradient-to-r from-emerald-300 to-cyan-300
-                  px-4 py-3 font-black text-[#041B33]
-                "
+                className={mobileCardClass(
+                  isActive(pathname, "/auth/signin-eleve"),
+                  "mt-3 bg-gradient-to-r from-emerald-300 to-cyan-300",
+                  "text-[#041B33]"
+                )}
               >
-                <GraduationCap className="h-4 w-4" />
+                <GraduationCap className="h-5 w-5" />
                 Connexion élève
               </Link>
             )}
