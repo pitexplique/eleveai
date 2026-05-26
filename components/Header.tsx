@@ -186,7 +186,7 @@ export default function Header() {
             className={linkClass(isActive(pathname, "/defis-du-jour"))}
           >
             <Puzzle className="h-4 w-4 text-pink-300" />
-            Défis
+            Défis 974
           </Link>
 
           <Link
@@ -353,7 +353,7 @@ export default function Header() {
               )}
             >
               <Puzzle className="h-4 w-4 text-pink-300" />
-              Défis du jour
+              Défis 974
             </Link>
 
             <Link
