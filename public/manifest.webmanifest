@@ -1,8 +1,8 @@
 {
-  "name": "EleveAI - Calcul rapide",
+  "name": "EleveAI",
   "short_name": "EleveAI",
-  "description": "5 minutes de maths par jour pour progresser",
-  "start_url": "/calcul-rapide",
+  "description": "Les maths : un jeu, un enjeu, un avenir",
+  "start_url": "/accueil",
   "scope": "/",
   "display": "standalone",
   "background_color": "#020617",
@@ -21,5 +21,8 @@
       "type": "image/png",
       "purpose": "any maskable"
     }
-  ]
+  ],
+  "categories": ["education"],
+  "lang": "fr-FR",
+  "dir": "ltr"
 }
