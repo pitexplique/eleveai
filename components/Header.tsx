@@ -142,7 +142,7 @@ export default function Header() {
             </span>
           </Link>
 
-                    <Link
+          <Link
             href="/coach-bac-spe"
             className={`relative ${linkClass(
               isActive(pathname, "/coach-bac-spe")
@@ -208,13 +208,14 @@ export default function Header() {
           {eleve ? (
             <div className="ml-2 flex items-center gap-2">
               <Link
-                href="/parcours"
+                href="/dashboard-eleve"
                 className="
                   inline-flex items-center gap-2 rounded-full
                   bg-gradient-to-r from-emerald-300 to-cyan-300
                   px-4 py-2 text-sm font-black text-[#041B33]
                   shadow-lg hover:brightness-110
                 "
+                title="Voir mon tableau de bord"
               >
                 <GraduationCap className="h-4 w-4" />
                 {eleveLabel}
@@ -390,12 +391,13 @@ export default function Header() {
             {eleve ? (
               <div className="mt-3 grid gap-2 border-t border-cyan-300/20 pt-3">
                 <Link
-                  href="/parcours"
+                  href="/dashboard-eleve"
                   className={mobileCardClass(
-                    isActive(pathname, "/parcours"),
+                    isActive(pathname, "/dashboard-eleve"),
                     "bg-gradient-to-r from-emerald-300 to-cyan-300",
                     "text-[#041B33]"
                   )}
+                  title="Voir mon tableau de bord"
                 >
                   <GraduationCap className="h-5 w-5" />
                   {eleveLabel}
