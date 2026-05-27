@@ -106,19 +106,6 @@ export default function Header() {
           </Link>
 
           <Link
-            href="/coach-bac-spe"
-            className={`relative ${linkClass(
-              isActive(pathname, "/coach-bac-spe")
-            )}`}
-          >
-            <GraduationCap className="h-4 w-4 text-violet-300" />
-            Bac Spé
-            <span className="absolute -right-2 -top-2 rounded-full bg-violet-400 px-1.5 text-[10px] font-black text-white">
-              16 juin
-            </span>
-          </Link>
-
-          <Link
             href="/coach-maths-ia"
             className={linkClass(isActive(pathname, "/coach-maths-ia"))}
           >
@@ -152,6 +139,19 @@ export default function Header() {
             Concours général
             <span className="absolute -right-2 -top-2 rounded-full bg-amber-400 px-1.5 text-[10px] font-black text-[#041B33]">
               new
+            </span>
+          </Link>
+
+                    <Link
+            href="/coach-bac-spe"
+            className={`relative ${linkClass(
+              isActive(pathname, "/coach-bac-spe")
+            )}`}
+          >
+            <GraduationCap className="h-4 w-4 text-violet-300" />
+            Bac Spé
+            <span className="absolute -right-2 -top-2 rounded-full bg-violet-400 px-1.5 text-[10px] font-black text-white">
+              16 juin
             </span>
           </Link>
 
