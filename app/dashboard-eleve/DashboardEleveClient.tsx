@@ -30,6 +30,25 @@ type ResultatParcours = {
   created_at: string;
 };
 
+type ResultatCalculRapide = {
+  id: string;
+  code_etablissement: string;
+  code_utilisateur: string;
+  nom: string | null;
+  classe: string | null;
+  niveau: string | null;
+  matiere: string;
+  session_id: string | null;
+  titre_session: string | null;
+  theme: string | null;
+  score: number;
+  total: number;
+  pourcentage: number | null;
+  temps_total_sec: number | null;
+  details: unknown;
+  created_at: string;
+};
+
 function formatDate(value: string) {
   return new Intl.DateTimeFormat("fr-FR", {
     day: "2-digit",
@@ -40,8 +59,23 @@ function formatDate(value: string) {
   }).format(new Date(value));
 }
 
+function getPct(score: number, total: number) {
+  if (!total || total <= 0) return 0;
+  return Math.round((Number(score) / Number(total)) * 100);
+}
+
+function getBest<T extends { score: number; total: number }>(items: T[]) {
+  if (items.length === 0) return null;
+
+  return [...items].sort((a, b) => {
+    const pa = a.total > 0 ? Number(a.score) / Number(a.total) : 0;
+    const pb = b.total > 0 ? Number(b.score) / Number(b.total) : 0;
+    return pb - pa;
+  })[0];
+}
+
 export default function DashboardEleveClient() {
-  const supabase = createClient();
+  const supabase = useMemo(() => createClient(), []);
 
   const eleveContext = useEleve() as unknown as {
     eleve?: EleveSession | null;
@@ -53,7 +87,12 @@ export default function DashboardEleveClient() {
     eleveContext.eleve ?? eleveContext.currentUser ?? eleveContext.user ?? null;
 
   const [loading, setLoading] = useState(true);
-  const [resultats, setResultats] = useState<ResultatParcours[]>([]);
+  const [resultatsParcours, setResultatsParcours] = useState<ResultatParcours[]>(
+    []
+  );
+  const [resultatsCalculRapide, setResultatsCalculRapide] = useState<
+    ResultatCalculRapide[]
+  >([]);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const codeEtablissement = eleve?.code_etablissement?.trim() ?? "";
@@ -70,40 +109,55 @@ export default function DashboardEleveClient() {
         return;
       }
 
-      const { data, error } = await supabase
-        .from("resultats_parcours")
-        .select(
-          "id, code_etablissement, code_utilisateur, nom, classe, niveau, matiere, score, total, pourcentage, details, created_at"
-        )
-        .eq("code_etablissement", codeEtablissement)
-        .eq("code_utilisateur", codeUtilisateur)
-        .order("created_at", { ascending: false });
+      const [parcoursResponse, calculRapideResponse] = await Promise.all([
+        supabase
+          .from("resultats_parcours")
+          .select(
+            "id, code_etablissement, code_utilisateur, nom, classe, niveau, matiere, score, total, pourcentage, details, created_at"
+          )
+          .eq("code_etablissement", codeEtablissement)
+          .eq("code_utilisateur", codeUtilisateur)
+          .order("created_at", { ascending: false }),
 
-      if (error) {
-        console.error(error);
-        setErrorMessage("Impossible de charger tes résultats.");
+        supabase
+          .from("resultats_calcul_rapide")
+          .select(
+            "id, code_etablissement, code_utilisateur, nom, classe, niveau, matiere, session_id, titre_session, theme, score, total, pourcentage, temps_total_sec, details, created_at"
+          )
+          .eq("code_etablissement", codeEtablissement)
+          .eq("code_utilisateur", codeUtilisateur)
+          .order("created_at", { ascending: false }),
+      ]);
+
+      if (parcoursResponse.error || calculRapideResponse.error) {
+        console.error(parcoursResponse.error ?? calculRapideResponse.error);
+        setErrorMessage("Impossible de charger tous tes résultats.");
         setLoading(false);
         return;
       }
 
-      setResultats((data ?? []) as ResultatParcours[]);
+      setResultatsParcours((parcoursResponse.data ?? []) as ResultatParcours[]);
+      setResultatsCalculRapide(
+        (calculRapideResponse.data ?? []) as ResultatCalculRapide[]
+      );
+
       setLoading(false);
     }
 
     loadResultats();
   }, [codeEtablissement, codeUtilisateur, supabase]);
 
-  const dernierResultat = resultats[0] ?? null;
+  const dernierParcours = resultatsParcours[0] ?? null;
+  const meilleurParcours = useMemo(
+    () => getBest(resultatsParcours),
+    [resultatsParcours]
+  );
 
-  const meilleurResultat = useMemo(() => {
-    if (resultats.length === 0) return null;
-
-    return [...resultats].sort((a, b) => {
-      const pa = a.total > 0 ? a.score / a.total : 0;
-      const pb = b.total > 0 ? b.score / b.total : 0;
-      return pb - pa;
-    })[0];
-  }, [resultats]);
+  const dernierCalculRapide = resultatsCalculRapide[0] ?? null;
+  const meilleurCalculRapide = useMemo(
+    () => getBest(resultatsCalculRapide),
+    [resultatsCalculRapide]
+  );
 
   if (!eleve) {
     return (
@@ -128,7 +182,7 @@ export default function DashboardEleveClient() {
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-emerald-50 via-sky-50 to-yellow-50 px-4 py-8 text-slate-950">
-      <section className="mx-auto max-w-5xl">
+      <section className="mx-auto max-w-6xl">
         <div className="rounded-[2rem] border border-white/70 bg-white/85 p-6 shadow-2xl backdrop-blur-xl">
           <div className="inline-flex rounded-full bg-emerald-100 px-4 py-2 text-xs font-black uppercase tracking-wide text-emerald-800">
             Tableau de bord élève
@@ -148,156 +202,254 @@ export default function DashboardEleveClient() {
           </div>
         </div>
 
-        <div className="mt-6 grid gap-4 md:grid-cols-3">
-          <div className="rounded-[2rem] bg-white p-5 shadow-xl ring-1 ring-emerald-100">
-            <p className="text-sm font-black uppercase text-emerald-700">
-              Dernier score
-            </p>
-
-            <p className="mt-3 text-3xl font-black">
-              {dernierResultat
-                ? `${dernierResultat.score} / ${dernierResultat.total}`
-                : "—"}
-            </p>
-
-            {dernierResultat ? (
-              <p className="mt-2 text-sm font-bold text-slate-500">
-                {formatDate(dernierResultat.created_at)}
-              </p>
-            ) : null}
+        {loading ? (
+          <div className="mt-6 rounded-3xl bg-white p-6 font-black text-slate-700 shadow-xl">
+            Chargement de tes résultats...
           </div>
+        ) : errorMessage ? (
+          <div className="mt-6 rounded-3xl bg-red-50 p-6 font-black text-red-700 shadow-xl">
+            {errorMessage}
+          </div>
+        ) : (
+          <>
+            <div className="mt-6 grid gap-4 md:grid-cols-4">
+              <div className="rounded-[2rem] bg-white p-5 shadow-xl ring-1 ring-emerald-100">
+                <p className="text-sm font-black uppercase text-emerald-700">
+                  Dernier parcours
+                </p>
 
-          <div className="rounded-[2rem] bg-white p-5 shadow-xl ring-1 ring-sky-100">
-            <p className="text-sm font-black uppercase text-sky-700">
-              Meilleur score
-            </p>
+                <p className="mt-3 text-3xl font-black">
+                  {dernierParcours
+                    ? `${dernierParcours.score} / ${dernierParcours.total}`
+                    : "—"}
+                </p>
 
-            <p className="mt-3 text-3xl font-black">
-              {meilleurResultat
-                ? `${meilleurResultat.score} / ${meilleurResultat.total}`
-                : "—"}
-            </p>
+                {dernierParcours ? (
+                  <p className="mt-2 text-sm font-bold text-slate-500">
+                    {formatDate(dernierParcours.created_at)}
+                  </p>
+                ) : null}
+              </div>
 
-            {meilleurResultat ? (
-              <p className="mt-2 text-sm font-bold text-slate-500">
-                {Math.round(
-                  (meilleurResultat.score / meilleurResultat.total) * 100
+              <div className="rounded-[2rem] bg-white p-5 shadow-xl ring-1 ring-sky-100">
+                <p className="text-sm font-black uppercase text-sky-700">
+                  Meilleur parcours
+                </p>
+
+                <p className="mt-3 text-3xl font-black">
+                  {meilleurParcours
+                    ? `${meilleurParcours.score} / ${meilleurParcours.total}`
+                    : "—"}
+                </p>
+
+                {meilleurParcours ? (
+                  <p className="mt-2 text-sm font-bold text-slate-500">
+                    {getPct(meilleurParcours.score, meilleurParcours.total)} %
+                    de réussite
+                  </p>
+                ) : null}
+              </div>
+
+              <div className="rounded-[2rem] bg-white p-5 shadow-xl ring-1 ring-amber-100">
+                <p className="text-sm font-black uppercase text-amber-700">
+                  Dernier calcul rapide
+                </p>
+
+                <p className="mt-3 text-3xl font-black">
+                  {dernierCalculRapide
+                    ? `${dernierCalculRapide.score} / ${dernierCalculRapide.total}`
+                    : "—"}
+                </p>
+
+                {dernierCalculRapide ? (
+                  <p className="mt-2 text-sm font-bold text-slate-500">
+                    {formatDate(dernierCalculRapide.created_at)}
+                  </p>
+                ) : null}
+              </div>
+
+              <div className="rounded-[2rem] bg-white p-5 shadow-xl ring-1 ring-yellow-100">
+                <p className="text-sm font-black uppercase text-yellow-700">
+                  Activités enregistrées
+                </p>
+
+                <p className="mt-3 text-3xl font-black">
+                  {resultatsParcours.length + resultatsCalculRapide.length}
+                </p>
+
+                <p className="mt-2 text-sm font-bold text-slate-500">
+                  Parcours + calcul rapide
+                </p>
+              </div>
+            </div>
+
+            <div className="mt-6 grid gap-6 lg:grid-cols-2">
+              <div className="rounded-[2rem] bg-white p-6 shadow-xl ring-1 ring-slate-100">
+                <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
+                  <div>
+                    <h2 className="text-2xl font-black">Parcours maths</h2>
+                    <p className="mt-1 text-sm font-semibold text-slate-600">
+                      Historique des parcours enregistrés.
+                    </p>
+                  </div>
+
+                  <Link
+                    href="/parcours"
+                    className="rounded-2xl bg-emerald-600 px-5 py-3 text-sm font-black text-white shadow-lg hover:bg-emerald-500"
+                  >
+                    Refaire un parcours
+                  </Link>
+                </div>
+
+                {resultatsParcours.length === 0 ? (
+                  <div className="rounded-2xl bg-amber-50 p-4 font-bold text-amber-800">
+                    Aucun parcours enregistré pour le moment.
+                  </div>
+                ) : (
+                  <div className="overflow-x-auto">
+                    <table className="w-full min-w-[560px] border-collapse text-left text-sm">
+                      <thead>
+                        <tr className="border-b border-slate-200 bg-slate-50 text-slate-600">
+                          <th className="px-4 py-3 font-black">Date</th>
+                          <th className="px-4 py-3 font-black">Classe</th>
+                          <th className="px-4 py-3 font-black">Score</th>
+                          <th className="px-4 py-3 font-black">Réussite</th>
+                        </tr>
+                      </thead>
+
+                      <tbody>
+                        {resultatsParcours.map((r) => {
+                          const pct = getPct(r.score, r.total);
+
+                          return (
+                            <tr
+                              key={r.id}
+                              className="border-b border-slate-100 hover:bg-emerald-50/60"
+                            >
+                              <td className="px-4 py-3 font-bold text-slate-700">
+                                {formatDate(r.created_at)}
+                              </td>
+
+                              <td className="px-4 py-3 font-bold">
+                                {r.classe ?? r.niveau ?? "—"}
+                              </td>
+
+                              <td className="px-4 py-3 font-black">
+                                {r.score} / {r.total}
+                              </td>
+
+                              <td className="px-4 py-3">
+                                <span className="rounded-full bg-emerald-100 px-3 py-1 font-black text-emerald-800">
+                                  {pct} %
+                                </span>
+                              </td>
+                            </tr>
+                          );
+                        })}
+                      </tbody>
+                    </table>
+                  </div>
                 )}
-                % de réussite
-              </p>
-            ) : null}
-          </div>
+              </div>
 
-          <div className="rounded-[2rem] bg-white p-5 shadow-xl ring-1 ring-yellow-100">
-            <p className="text-sm font-black uppercase text-yellow-700">
-              Tentatives
-            </p>
+              <div className="rounded-[2rem] bg-white p-6 shadow-xl ring-1 ring-slate-100">
+                <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
+                  <div>
+                    <h2 className="text-2xl font-black">Calcul rapide</h2>
+                    <p className="mt-1 text-sm font-semibold text-slate-600">
+                      Historique des défis de calcul rapide enregistrés.
+                    </p>
+                  </div>
 
-            <p className="mt-3 text-3xl font-black">{resultats.length}</p>
+                  <Link
+                    href="/calcul-rapide"
+                    className="rounded-2xl bg-slate-950 px-5 py-3 text-sm font-black text-white shadow-lg hover:bg-slate-800"
+                  >
+                    Refaire un calcul rapide
+                  </Link>
+                </div>
 
-            <p className="mt-2 text-sm font-bold text-slate-500">
-              Parcours enregistrés
-            </p>
-          </div>
-        </div>
+                {resultatsCalculRapide.length === 0 ? (
+                  <div className="rounded-2xl bg-amber-50 p-4 font-bold text-amber-800">
+                    Aucun calcul rapide enregistré pour le moment.
+                  </div>
+                ) : (
+                  <div className="overflow-x-auto">
+                    <table className="w-full min-w-[680px] border-collapse text-left text-sm">
+                      <thead>
+                        <tr className="border-b border-slate-200 bg-slate-50 text-slate-600">
+                          <th className="px-4 py-3 font-black">Date</th>
+                          <th className="px-4 py-3 font-black">Niveau</th>
+                          <th className="px-4 py-3 font-black">Session</th>
+                          <th className="px-4 py-3 font-black">Score</th>
+                          <th className="px-4 py-3 font-black">Réussite</th>
+                        </tr>
+                      </thead>
 
-        <div className="mt-6 rounded-[2rem] bg-white p-6 shadow-xl ring-1 ring-slate-100">
-          <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
-            <div>
-              <h2 className="text-2xl font-black">Parcours maths</h2>
-              <p className="mt-1 text-sm font-semibold text-slate-600">
-                Historique des tentatives enregistrées.
-              </p>
+                      <tbody>
+                        {resultatsCalculRapide.map((r) => {
+                          const pct = getPct(r.score, r.total);
+
+                          return (
+                            <tr
+                              key={r.id}
+                              className="border-b border-slate-100 hover:bg-sky-50/70"
+                            >
+                              <td className="px-4 py-3 font-bold text-slate-700">
+                                {formatDate(r.created_at)}
+                              </td>
+
+                              <td className="px-4 py-3 font-bold">
+                                {r.niveau ?? r.classe ?? "—"}
+                              </td>
+
+                              <td className="px-4 py-3 font-bold">
+                                {r.titre_session ?? r.theme ?? "Défi"}
+                              </td>
+
+                              <td className="px-4 py-3 font-black">
+                                {r.score} / {r.total}
+                              </td>
+
+                              <td className="px-4 py-3">
+                                <span className="rounded-full bg-sky-100 px-3 py-1 font-black text-sky-800">
+                                  {pct} %
+                                </span>
+                              </td>
+                            </tr>
+                          );
+                        })}
+                      </tbody>
+                    </table>
+                  </div>
+                )}
+              </div>
             </div>
 
-            <Link
-              href="/parcours"
-              className="rounded-2xl bg-emerald-600 px-5 py-3 text-sm font-black text-white shadow-lg hover:bg-emerald-500"
-            >
-              Refaire un parcours
-            </Link>
-          </div>
+            <div className="mt-6 flex flex-wrap gap-3">
+              <Link
+                href="/accueil"
+                className="rounded-2xl bg-white px-5 py-3 text-sm font-black text-slate-800 shadow-sm ring-1 ring-slate-200 hover:bg-slate-50"
+              >
+                Retour accueil
+              </Link>
 
-          {loading ? (
-            <p className="rounded-2xl bg-slate-50 p-4 font-bold text-slate-600">
-              Chargement des résultats...
-            </p>
-          ) : errorMessage ? (
-            <p className="rounded-2xl bg-red-50 p-4 font-bold text-red-700">
-              {errorMessage}
-            </p>
-          ) : resultats.length === 0 ? (
-            <div className="rounded-2xl bg-amber-50 p-4 font-bold text-amber-800">
-              Aucun parcours enregistré pour le moment.
+              <Link
+                href="/parcours"
+                className="rounded-2xl bg-emerald-600 px-5 py-3 text-sm font-black text-white shadow-lg hover:bg-emerald-500"
+              >
+                Parcours
+              </Link>
+
+              <Link
+                href="/calcul-rapide"
+                className="rounded-2xl bg-slate-950 px-5 py-3 text-sm font-black text-white shadow-lg hover:bg-slate-800"
+              >
+                Calcul rapide
+              </Link>
             </div>
-          ) : (
-            <div className="overflow-x-auto">
-              <table className="w-full min-w-[680px] border-collapse text-left text-sm">
-                <thead>
-                  <tr className="border-b border-slate-200 bg-slate-50 text-slate-600">
-                    <th className="px-4 py-3 font-black">Date</th>
-                    <th className="px-4 py-3 font-black">Classe</th>
-                    <th className="px-4 py-3 font-black">Score</th>
-                    <th className="px-4 py-3 font-black">Réussite</th>
-                    <th className="px-4 py-3 font-black">Matière</th>
-                  </tr>
-                </thead>
-
-                <tbody>
-                  {resultats.map((r) => {
-                    const pct =
-                      r.total > 0 ? Math.round((r.score / r.total) * 100) : 0;
-
-                    return (
-                      <tr
-                        key={r.id}
-                        className="border-b border-slate-100 hover:bg-emerald-50/60"
-                      >
-                        <td className="px-4 py-3 font-bold text-slate-700">
-                          {formatDate(r.created_at)}
-                        </td>
-
-                        <td className="px-4 py-3 font-bold">
-                          {r.classe ?? r.niveau ?? "—"}
-                        </td>
-
-                        <td className="px-4 py-3 font-black">
-                          {r.score} / {r.total}
-                        </td>
-
-                        <td className="px-4 py-3">
-                          <span className="rounded-full bg-emerald-100 px-3 py-1 font-black text-emerald-800">
-                            {pct} %
-                          </span>
-                        </td>
-
-                        <td className="px-4 py-3 font-bold">
-                          {r.matiere ?? "maths"}
-                        </td>
-                      </tr>
-                    );
-                  })}
-                </tbody>
-              </table>
-            </div>
-          )}
-        </div>
-
-        <div className="mt-6 flex flex-wrap gap-3">
-          <Link
-            href="/accueil"
-            className="rounded-2xl bg-white px-5 py-3 text-sm font-black text-slate-800 shadow-sm ring-1 ring-slate-200 hover:bg-slate-50"
-          >
-            Retour accueil
-          </Link>
-
-          <Link
-            href="/calcul-rapide"
-            className="rounded-2xl bg-slate-950 px-5 py-3 text-sm font-black text-white shadow-lg hover:bg-slate-800"
-          >
-            Calcul rapide
-          </Link>
-        </div>
+          </>
+        )}
       </section>
     </main>
   );

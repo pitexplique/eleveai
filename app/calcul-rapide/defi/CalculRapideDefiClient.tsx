@@ -4,6 +4,9 @@ import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
 
+import { createClient } from "@/lib/supabase/client";
+import { useEleve } from "@/context/EleveContext";
+
 import type {
   CalculRapideItem,
   NiveauCalculRapide,
@@ -43,6 +46,30 @@ type GeneratedCalculRapideItem = CalculRapideItem & {
   displayText: string;
   displayExplanation?: string;
   generatedExpected: string[];
+};
+
+type EleveSession = {
+  acces_id?: string | null;
+  code_etablissement?: string | null;
+  code_eleve?: string | null;
+  code_utilisateur?: string | null;
+  nom?: string | null;
+  type_utilisateur?: string | null;
+};
+
+type ReponseCalculRapide = {
+  itemId: string;
+  type: string;
+  text: string;
+  userAnswer: string;
+  expected: string[];
+  isCorrect: boolean;
+  status: "answered" | "timeout" | "skipped";
+  notionId?: string | null;
+  microId?: string | null;
+  theme?: string | null;
+  difficulty?: number | null;
+  durationSec?: number | null;
 };
 
 function normalize(value: string) {
@@ -197,7 +224,7 @@ function getTodayDay() {
     sunday: "dimanche",
   };
 
-  return map[todayRaw];
+  return map[todayRaw] ?? "lundi";
 }
 
 function buildSession(niveau: NiveauCalculRapide): GeneratedCalculRapideItem[] {
@@ -215,8 +242,26 @@ function buildSession(niveau: NiveauCalculRapide): GeneratedCalculRapideItem[] {
     .map(generateItem);
 }
 
+function getSessionMeta(niveau: NiveauCalculRapide) {
+  const { weeks } = getDataByNiveau(niveau);
+  const day = getTodayDay();
+
+  const week = weeks[0];
+  const session = week?.sessions.find((session) => session.day === day);
+
+  return {
+    weekId: week?.id ?? null,
+    week: week?.week ?? null,
+    day: session?.day ?? day ?? null,
+    sessionId: session?.id ?? null,
+    titreSession: session?.title ?? "Défi calcul rapide",
+    theme: session?.theme ?? week?.themeDominant ?? null,
+    durationTotalSec: session?.durationTotalSec ?? null,
+  };
+}
+
 function getScoreMessage(score: number, total: number) {
-  const ratio = score / total;
+  const ratio = total > 0 ? score / total : 0;
 
   if (ratio >= 0.85) {
     return {
@@ -245,6 +290,17 @@ function getScoreMessage(score: number, total: number) {
 }
 
 export default function CalculRapideDefiClient() {
+  const supabase = createClient();
+
+  const eleveContext = useEleve() as unknown as {
+    eleve?: EleveSession | null;
+    currentUser?: EleveSession | null;
+    user?: EleveSession | null;
+  };
+
+  const eleve =
+    eleveContext.eleve ?? eleveContext.currentUser ?? eleveContext.user ?? null;
+
   const searchParams = useSearchParams();
   const niveauParam = searchParams.get("niveau");
 
@@ -265,13 +321,22 @@ export default function CalculRapideDefiClient() {
   const [answer, setAnswer] = useState("");
   const [score, setScore] = useState(0);
   const [finished, setFinished] = useState(false);
-  const [feedback, setFeedback] = useState<null | boolean>(null);
+  const [feedback, setFeedback] = useState<boolean | null>(null);
   const [showHint, setShowHint] = useState(false);
   const [lockedCorrection, setLockedCorrection] = useState(false);
   const [correctionTimeLeft, setCorrectionTimeLeft] = useState(0);
 
-  const currentQuestion = questions[currentIndex];
-  const [timeLeft, setTimeLeft] = useState(currentQuestion?.durationSec ?? 20);
+  const [answerHistory, setAnswerHistory] = useState<ReponseCalculRapide[]>([]);
+  const [saving, setSaving] = useState(false);
+  const [saveMessage, setSaveMessage] = useState<string | null>(null);
+  const [hasSaved, setHasSaved] = useState(false);
+
+  const currentQuestion = questions[currentIndex] ?? null;
+
+  const [timeLeft, setTimeLeft] = useState(currentQuestion?.durationSec ?? 30);
+
+  const scoreMessage = getScoreMessage(score, questions.length);
+  const sessionMeta = getSessionMeta(niveau);
 
   useEffect(() => {
     setStarted(false);
@@ -284,18 +349,31 @@ export default function CalculRapideDefiClient() {
     setShowHint(false);
     setLockedCorrection(false);
     setCorrectionTimeLeft(0);
+    setAnswerHistory([]);
+    setSaving(false);
+    setSaveMessage(null);
+    setHasSaved(false);
   }, [niveau]);
 
   useEffect(() => {
-    if (currentQuestion) {
-      setTimeLeft(currentQuestion.durationSec);
-    }
+    setTimeLeft(currentQuestion?.durationSec ?? 30);
+    setAnswer("");
+    setFeedback(null);
+    setShowHint(false);
+    setLockedCorrection(false);
+    setCorrectionTimeLeft(0);
   }, [currentIndex, currentQuestion]);
 
   useEffect(() => {
-    if (!started || finished || paused || lockedCorrection) return;
+    if (!started || finished || paused || lockedCorrection || feedback !== null) {
+      return;
+    }
 
     if (timeLeft <= 0) {
+      if (currentQuestion) {
+        recordAnswer(currentQuestion, "", false, "timeout");
+      }
+
       goNext();
       return;
     }
@@ -305,28 +383,82 @@ export default function CalculRapideDefiClient() {
     }, 1000);
 
     return () => window.clearTimeout(timer);
-  }, [started, finished, paused, lockedCorrection, timeLeft]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [
+    started,
+    finished,
+    paused,
+    lockedCorrection,
+    feedback,
+    timeLeft,
+    currentQuestion,
+  ]);
 
   useEffect(() => {
     if (!lockedCorrection || correctionTimeLeft <= 0) return;
 
     const timer = window.setTimeout(() => {
-      setCorrectionTimeLeft((time) => time - 1);
+      setCorrectionTimeLeft((time) => Math.max(0, time - 1));
     }, 1000);
 
     return () => window.clearTimeout(timer);
   }, [lockedCorrection, correctionTimeLeft]);
 
-  function goNext() {
+  function startDefi() {
+    setStarted(true);
+    setPaused(false);
+    setCurrentIndex(0);
     setAnswer("");
+    setScore(0);
+    setFinished(false);
     setFeedback(null);
     setShowHint(false);
     setLockedCorrection(false);
     setCorrectionTimeLeft(0);
-    setPaused(false);
+    setAnswerHistory([]);
+    setSaving(false);
+    setSaveMessage(null);
+    setHasSaved(false);
+  }
 
-    if (currentIndex + 1 >= questions.length) {
+  function restartDefi() {
+    startDefi();
+  }
+
+  function recordAnswer(
+    question: GeneratedCalculRapideItem,
+    userAnswer: string,
+    isCorrect: boolean,
+    status: "answered" | "timeout" | "skipped"
+  ) {
+    setAnswerHistory((prev) => [
+      ...prev,
+      {
+        itemId: question.id,
+        type: String(question.type),
+        text: question.displayText,
+        userAnswer,
+        expected: [...(question.expected ?? []), ...question.generatedExpected],
+        isCorrect,
+        status,
+        notionId: question.notionId ?? null,
+        microId: question.microId ?? null,
+        difficulty: question.difficulty ?? null,
+        durationSec: question.durationSec ?? null,
+      },
+    ]);
+  }
+
+  function goNext() {
+    setFeedback(null);
+    setShowHint(false);
+    setLockedCorrection(false);
+    setCorrectionTimeLeft(0);
+    setAnswer("");
+
+    if (currentIndex >= questions.length - 1) {
       setFinished(true);
+      setStarted(false);
       return;
     }
 
@@ -344,239 +476,497 @@ export default function CalculRapideDefiClient() {
 
     const isCorrect = acceptedAnswers.map(normalize).includes(normalize(answer));
 
-    setFeedback(isCorrect);
+    recordAnswer(currentQuestion, answer, isCorrect, "answered");
 
     if (isCorrect) {
-      setScore((score) => score + 1);
-      window.setTimeout(goNext, 600);
-      return;
+      setScore((value) => value + 1);
     }
 
-    setPaused(true);
+    setFeedback(isCorrect);
     setLockedCorrection(true);
-    setCorrectionTimeLeft(5);
+    setCorrectionTimeLeft(2);
 
     window.setTimeout(() => {
       goNext();
-    }, 5000);
+    }, 1800);
   }
 
-  if (!questions.length) {
-    return (
-      <main className="flex min-h-[100svh] items-center justify-center bg-slate-950 px-4 text-center text-white">
-        Aucune session trouvée pour le niveau {niveau}
-      </main>
-    );
+  function skipQuestion() {
+    if (!currentQuestion) return;
+    if (lockedCorrection) return;
+
+    recordAnswer(currentQuestion, answer, false, "skipped");
+    goNext();
   }
 
-  if (!currentQuestion) {
-    return (
-      <main className="flex min-h-[100svh] items-center justify-center bg-slate-950 px-4 text-center text-white">
-        Question introuvable.
-      </main>
-    );
+  async function enregistrerResultatCalculRapide() {
+    setSaveMessage(null);
+
+    if (!eleve) {
+      setSaveMessage("Tu dois être connecté pour enregistrer ton score.");
+      return;
+    }
+
+    if (!finished) {
+      setSaveMessage("Termine d’abord le défi.");
+      return;
+    }
+
+    if (hasSaved) {
+      setSaveMessage("Score déjà enregistré ✅");
+      return;
+    }
+
+    const codeEtablissement = eleve.code_etablissement?.trim() ?? "";
+    const codeUtilisateur =
+      eleve.code_eleve?.trim() ?? eleve.code_utilisateur?.trim() ?? "";
+
+    if (!codeEtablissement || !codeUtilisateur) {
+      setSaveMessage("Impossible d’identifier ton compte élève.");
+      return;
+    }
+
+    setSaving(true);
+
+    const { error } = await supabase.from("resultats_calcul_rapide").insert({
+      code_etablissement: codeEtablissement,
+      code_utilisateur: codeUtilisateur,
+      nom: eleve.nom ?? null,
+
+      classe: niveau,
+      niveau,
+      matiere: "maths",
+
+      session_id: sessionMeta.sessionId,
+      titre_session: sessionMeta.titreSession,
+      theme: sessionMeta.theme,
+
+      score,
+      total: questions.length,
+
+      temps_total_sec: sessionMeta.durationTotalSec,
+
+      details: {
+        niveau,
+        session: sessionMeta,
+        score,
+        total: questions.length,
+        pourcentage:
+          questions.length > 0
+            ? Math.round((score / questions.length) * 100)
+            : 0,
+        answers: answerHistory,
+        savedAt: new Date().toISOString(),
+      },
+    });
+
+    setSaving(false);
+
+    if (error) {
+      console.error(error);
+      setSaveMessage("Erreur : le score n’a pas été enregistré.");
+      return;
+    }
+
+    setHasSaved(true);
+    setSaveMessage("Score enregistré ✅ Tu peux le retrouver dans ton dashboard.");
   }
 
-  if (!started) {
+  if (questions.length === 0) {
     return (
-      <main className="flex min-h-[100svh] items-center justify-center bg-slate-950 px-4 py-4 text-white">
-        <section className="w-full max-w-4xl rounded-3xl border border-white/15 bg-white/10 p-6 text-center shadow-2xl backdrop-blur sm:p-8">
-          <div className="mx-auto mb-4 inline-flex rounded-full bg-emerald-400 px-5 py-2 text-sm font-black text-slate-950 sm:text-base">
-            Niveau {niveau}
-          </div>
+      <main className="min-h-screen bg-slate-950 px-4 py-10 text-white">
+        <section className="mx-auto max-w-3xl rounded-3xl bg-white/10 p-6 shadow-xl ring-1 ring-white/10">
+          <h1 className="text-3xl font-black">Calcul rapide</h1>
 
-          <h1 className="text-4xl font-black sm:text-5xl md:text-6xl">
-            Défi calcul rapide
-          </h1>
-
-          <p className="mt-4 text-lg text-white/80 sm:text-2xl">
-            ⚡ Calculs + 🧠 Défis
+          <p className="mt-4 font-bold text-red-200">
+            Aucun défi disponible aujourd’hui pour le niveau {niveau}.
           </p>
 
-          <button
-            type="button"
-            onClick={() => setStarted(true)}
-            className="mt-8 rounded-full bg-emerald-400 px-9 py-4 text-xl font-black text-slate-950 sm:text-2xl"
-          >
-            🚀 Démarrer
-          </button>
+          <div className="mt-6 flex flex-wrap gap-3">
+            <Link
+              href="/calcul-rapide"
+              className="rounded-full bg-white px-5 py-3 font-black text-slate-950"
+            >
+              Changer de niveau
+            </Link>
+
+            <Link
+              href="/accueil"
+              className="rounded-full bg-slate-800 px-5 py-3 font-black text-white"
+            >
+              Retour accueil
+            </Link>
+          </div>
         </section>
       </main>
     );
   }
 
   if (finished) {
-    const bilan = getScoreMessage(score, questions.length);
+    const pct =
+      questions.length > 0 ? Math.round((score / questions.length) * 100) : 0;
 
     return (
-      <main className="flex min-h-[100svh] items-center justify-center bg-slate-950 px-4 py-4 text-white">
-        <section className="w-full max-w-4xl rounded-3xl border border-white/15 bg-white/10 p-6 text-center shadow-2xl backdrop-blur sm:p-8">
-          <h1 className="text-4xl font-black sm:text-5xl md:text-6xl">
-            Bravo 🎉
-          </h1>
+      <main className="min-h-screen bg-gradient-to-br from-slate-950 via-[#062A4F] to-slate-950 px-4 py-8 text-white">
+        <section className="mx-auto max-w-5xl text-center">
+          <div className="rounded-[2rem] border border-white/15 bg-white/10 p-6 shadow-2xl backdrop-blur-xl sm:p-8">
+            <div className="mx-auto mb-4 inline-flex rounded-full bg-emerald-300 px-5 py-2 text-sm font-black text-slate-950">
+              Calcul rapide · {niveau}
+            </div>
 
-          <p className="mt-4 text-3xl font-black text-emerald-300 sm:text-4xl">
-            Score : {score} / {questions.length}
-          </p>
+            <h1 className="text-4xl font-black sm:text-6xl">
+              Défi terminé 🏁
+            </h1>
 
-          <div className="mx-auto mt-5 max-w-3xl rounded-3xl border border-white/15 bg-slate-900/80 p-4 sm:p-5">
-            <p className={`text-2xl font-black sm:text-3xl ${bilan.color}`}>
-              {bilan.title}
+            <p className="mt-5 text-5xl font-black text-emerald-300 sm:text-7xl">
+              {score} / {questions.length}
             </p>
 
-            <p className="mt-3 text-base font-bold text-white/85 sm:text-xl">
-              {bilan.message}
+            <p className="mt-2 text-xl font-black text-white/80">
+              Réussite : {pct} %
             </p>
-          </div>
 
-          <div className="mt-6 flex flex-col justify-center gap-3 sm:flex-row">
-            <Link
-              href="/calcul-rapide"
-              className="rounded-full bg-white px-8 py-4 text-xl font-black text-slate-950"
-            >
-              Retour
-            </Link>
+            <div className="mx-auto mt-5 max-w-3xl rounded-3xl border border-white/15 bg-slate-900/80 p-4 sm:p-5">
+              <h2 className={`text-2xl font-black ${scoreMessage.color}`}>
+                {scoreMessage.title}
+              </h2>
 
-            <Link
-              href={`/coach-maths-ia?classe=${niveau}`}
-              className="rounded-full bg-amber-300 px-8 py-4 text-xl font-black text-slate-950"
-            >
-              S’entraîner dans Coach-IA
-            </Link>
+              <p className="mt-2 text-base font-bold text-white/80">
+                {scoreMessage.message}
+              </p>
+            </div>
 
-            <button
-              type="button"
-              onClick={() => window.location.reload()}
-              className="rounded-full bg-emerald-400 px-8 py-4 text-xl font-black text-slate-950"
-            >
-              Recommencer
-            </button>
+            <div className="mx-auto mt-5 max-w-3xl rounded-3xl border border-white/15 bg-white/10 p-4 sm:p-5">
+              {eleve ? (
+                <>
+                  <p className="text-sm font-bold text-white/80 sm:text-base">
+                    Connecté : {eleve.nom ?? "Élève"} ·{" "}
+                    {eleve.code_etablissement ?? ""} ·{" "}
+                    {eleve.code_eleve ?? eleve.code_utilisateur ?? ""}
+                  </p>
+
+                  <button
+                    type="button"
+                    onClick={enregistrerResultatCalculRapide}
+                    disabled={saving || hasSaved}
+                    className="mt-4 rounded-full bg-emerald-400 px-8 py-4 text-lg font-black text-slate-950 shadow-lg hover:bg-emerald-300 disabled:cursor-not-allowed disabled:opacity-60 sm:text-xl"
+                  >
+                    {saving
+                      ? "Enregistrement..."
+                      : hasSaved
+                        ? "✅ Score enregistré"
+                        : "✅ Enregistrer mon score"}
+                  </button>
+                </>
+              ) : (
+                <>
+                  <p className="text-sm font-bold text-amber-200 sm:text-base">
+                    Tu peux faire le défi librement, mais il faut être connecté
+                    pour enregistrer ton score.
+                  </p>
+
+                  <Link
+                    href="/auth/signin-eleve"
+                    className="mt-4 inline-flex rounded-full bg-amber-300 px-8 py-4 text-lg font-black text-slate-950 shadow-lg hover:bg-amber-200 sm:text-xl"
+                  >
+                    Se connecter pour enregistrer
+                  </Link>
+                </>
+              )}
+
+              {saveMessage ? (
+                <p className="mt-4 rounded-2xl bg-slate-950/70 px-4 py-3 text-sm font-black text-white">
+                  {saveMessage}
+                </p>
+              ) : null}
+            </div>
+
+            <div className="mt-7 flex flex-wrap justify-center gap-3">
+              <button
+                type="button"
+                onClick={restartDefi}
+                className="rounded-full bg-white px-7 py-4 text-base font-black text-slate-950 shadow-lg hover:bg-slate-100"
+              >
+                Refaire le défi
+              </button>
+
+              <Link
+                href="/dashboard-eleve"
+                className="rounded-full bg-emerald-500 px-7 py-4 text-base font-black text-white shadow-lg hover:bg-emerald-400"
+              >
+                Mon dashboard
+              </Link>
+
+              <Link
+                href="/calcul-rapide"
+                className="rounded-full bg-slate-800 px-7 py-4 text-base font-black text-white shadow-lg hover:bg-slate-700"
+              >
+                Changer de niveau
+              </Link>
+
+              <Link
+                href="/accueil"
+                className="rounded-full bg-white/10 px-7 py-4 text-base font-black text-white ring-1 ring-white/15 hover:bg-white/15"
+              >
+                Accueil
+              </Link>
+            </div>
           </div>
         </section>
       </main>
     );
   }
 
-  return (
-    <main className="flex min-h-[100svh] items-center justify-center bg-slate-950 px-3 py-3 text-white sm:px-6">
-      <section className="w-full max-w-6xl rounded-[1.75rem] border border-white/15 bg-white/10 p-4 text-center shadow-2xl backdrop-blur sm:p-6">
-        <div className="mb-4 flex items-center justify-between gap-2 sm:mb-5">
-          <div className="rounded-full bg-white/10 px-3 py-2 text-sm font-black sm:px-5 sm:text-xl">
-            Question {currentIndex + 1} / {questions.length}
-          </div>
-
-          <div className="flex gap-2 sm:gap-3">
-            <button
-              type="button"
-              onClick={() => setPaused((paused) => !paused)}
-              disabled={lockedCorrection}
-              className="rounded-full bg-yellow-400 px-3 py-2 text-base font-black text-slate-950 disabled:cursor-not-allowed disabled:opacity-50 sm:px-4 sm:text-lg"
-            >
-              {paused ? "▶️" : "⏸️"}
-            </button>
-
-            <div
-              className={`rounded-full px-4 py-2 text-xl font-black sm:px-6 sm:text-3xl ${
-                timeLeft <= 5
-                  ? "bg-red-500 text-white"
-                  : "bg-emerald-400 text-slate-950"
-              }`}
-            >
-              ⏱️ {timeLeft}s
+  if (!started || !currentQuestion) {
+    return (
+      <main className="min-h-screen bg-gradient-to-br from-slate-950 via-[#062A4F] to-slate-950 px-4 py-8 text-white">
+        <section className="mx-auto max-w-5xl">
+          <div className="rounded-[2rem] border border-white/15 bg-white/10 p-6 shadow-2xl backdrop-blur-xl sm:p-8">
+            <div className="inline-flex rounded-full bg-emerald-300 px-5 py-2 text-sm font-black text-slate-950">
+              Calcul rapide · {niveau}
             </div>
-          </div>
-        </div>
 
-        <div className="mb-3 inline-flex rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-sm font-bold uppercase tracking-widest text-white/75 sm:text-base">
-          {currentQuestion.type === "calcul" ? "Calcul" : "Problème"}
-        </div>
+            <h1 className="mt-5 text-4xl font-black sm:text-6xl">
+              Défi du jour ⚡
+            </h1>
 
-        <div className="mb-3 flex flex-col items-center gap-1">
-          <div className="animate-bounce text-4xl sm:text-5xl">🦎</div>
+            <p className="mt-4 max-w-3xl text-lg font-bold text-white/80">
+              7 questions courtes pour travailler les automatismes. Réponds
+              vite, mais garde le contrôle.
+            </p>
 
-          <p className="hidden text-lg font-bold text-amber-200 sm:block">
-            Besoin d’un coup de pouce ?
-          </p>
-
-          <button
-            type="button"
-            onClick={() => setShowHint((v) => !v)}
-            disabled={lockedCorrection}
-            className="rounded-full bg-amber-300 px-5 py-2 text-base font-black text-slate-950 shadow-lg hover:bg-amber-200 disabled:cursor-not-allowed disabled:opacity-50 sm:text-lg"
-          >
-            👉 Obtenir un indice
-          </button>
-        </div>
-
-        {showHint && (
-          <div className="mx-auto mb-3 mt-2 max-w-3xl rounded-2xl border border-amber-300/40 bg-amber-100 px-4 py-3 text-base font-bold text-slate-900 sm:text-lg">
-            {currentQuestion.hint}
-          </div>
-        )}
-
-        <h1 className="mx-auto flex min-h-[110px] max-w-5xl items-center justify-center text-3xl font-black leading-tight sm:min-h-[130px] sm:text-5xl md:text-6xl">
-          {currentQuestion.displayText}
-        </h1>
-
-        <div className="mx-auto mt-5 flex max-w-3xl flex-col gap-3 sm:flex-row">
-          <input
-            value={answer}
-            onChange={(event) => setAnswer(event.target.value)}
-            onKeyDown={(event) => {
-              if (event.key === "Enter") validateAndNext();
-            }}
-            disabled={feedback !== null || lockedCorrection}
-            autoFocus
-            placeholder="Ta réponse..."
-            className="min-h-[56px] flex-1 rounded-3xl border border-white/20 bg-white px-5 text-2xl font-black text-slate-950 outline-none disabled:cursor-not-allowed disabled:bg-slate-200 sm:min-h-[64px] sm:text-3xl"
-          />
-
-          <button
-            type="button"
-            onClick={validateAndNext}
-            disabled={feedback !== null || lockedCorrection}
-            className="rounded-3xl bg-emerald-400 px-7 py-4 text-xl font-black text-slate-950 disabled:cursor-not-allowed disabled:opacity-50 sm:text-2xl"
-          >
-            Valider
-          </button>
-        </div>
-
-        {feedback !== null && (
-          <div className="mx-auto mt-4 max-w-4xl rounded-3xl border border-white/15 bg-slate-900/80 p-4 text-lg font-bold sm:text-2xl">
-            {feedback ? (
-              <span className="text-green-400">✔ Bonne réponse</span>
+            {eleve ? (
+              <div className="mt-5 rounded-3xl border border-emerald-300/30 bg-emerald-300/10 p-4 text-sm font-black text-emerald-100">
+                Connecté : {eleve.nom ?? "Élève"} ·{" "}
+                {eleve.code_etablissement ?? ""} ·{" "}
+                {eleve.code_eleve ?? eleve.code_utilisateur ?? ""}
+              </div>
             ) : (
-              <div className="text-left text-red-300">
-                <p className="mb-2 text-center text-2xl font-black">
-                  ❌ Pas encore. Lis bien la correction.
-                </p>
-
-                <p className="whitespace-pre-line text-white">
-                  {currentQuestion.displayExplanation ??
-                    currentQuestion.explanation ??
-                    "Réponse incorrecte."}
-                </p>
-
-                <p className="mt-3 text-center text-sm font-black text-amber-300 sm:text-lg">
-                  Prochaine question dans {correctionTimeLeft}s
-                </p>
+              <div className="mt-5 rounded-3xl border border-amber-300/30 bg-amber-300/10 p-4 text-sm font-black text-amber-100">
+                Tu peux jouer sans connexion. Il faudra être connecté pour
+                enregistrer ton score.
               </div>
             )}
-          </div>
-        )}
 
-        <button
-          type="button"
-          onClick={goNext}
-          disabled={lockedCorrection}
-          className={`mt-3 text-sm font-bold sm:text-lg ${
-            lockedCorrection
-              ? "cursor-not-allowed text-white/25"
-              : "text-white/60 hover:text-white"
-          }`}
-        >
-          Passer cette question
-        </button>
+            <div className="mt-6 grid gap-4 sm:grid-cols-3">
+              <div className="rounded-3xl bg-white/10 p-4 ring-1 ring-white/10">
+                <p className="text-sm font-black text-white/60">Questions</p>
+                <p className="mt-2 text-3xl font-black">{questions.length}</p>
+              </div>
+
+              <div className="rounded-3xl bg-white/10 p-4 ring-1 ring-white/10">
+                <p className="text-sm font-black text-white/60">Niveau</p>
+                <p className="mt-2 text-3xl font-black">{niveau}</p>
+              </div>
+
+              <div className="rounded-3xl bg-white/10 p-4 ring-1 ring-white/10">
+                <p className="text-sm font-black text-white/60">Session</p>
+                <p className="mt-2 text-xl font-black">
+                  {sessionMeta.titreSession}
+                </p>
+              </div>
+            </div>
+
+            <div className="mt-7 flex flex-wrap gap-3">
+              <button
+                type="button"
+                onClick={startDefi}
+                className="rounded-full bg-emerald-400 px-8 py-4 text-lg font-black text-slate-950 shadow-lg hover:bg-emerald-300"
+              >
+                🚀 Commencer
+              </button>
+
+              <Link
+                href="/calcul-rapide"
+                className="rounded-full bg-white px-8 py-4 text-lg font-black text-slate-950 shadow-lg hover:bg-slate-100"
+              >
+                Changer de niveau
+              </Link>
+
+              <Link
+                href="/accueil"
+                className="rounded-full bg-white/10 px-8 py-4 text-lg font-black text-white ring-1 ring-white/15 hover:bg-white/15"
+              >
+                Accueil
+              </Link>
+            </div>
+          </div>
+        </section>
+      </main>
+    );
+  }
+
+  const acceptedAnswers = [
+    ...(currentQuestion.expected ?? []),
+    ...currentQuestion.generatedExpected,
+  ];
+
+  return (
+    <main className="min-h-screen bg-gradient-to-br from-slate-950 via-[#062A4F] to-slate-950 px-4 py-8 text-white">
+      <section className="mx-auto max-w-5xl">
+        <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
+          <Link
+            href="/calcul-rapide"
+            className="rounded-full bg-white/10 px-5 py-3 text-sm font-black text-white ring-1 ring-white/15 hover:bg-white/15"
+          >
+            ← Retour
+          </Link>
+
+          <button
+            type="button"
+            onClick={() => setPaused((value) => !value)}
+            className="rounded-full bg-white px-5 py-3 text-sm font-black text-slate-950"
+          >
+            {paused ? "Reprendre" : "Pause"}
+          </button>
+        </div>
+
+        <div className="rounded-[2rem] border border-white/15 bg-white/10 p-5 shadow-2xl backdrop-blur-xl sm:p-7">
+          <div className="flex flex-wrap items-center justify-between gap-4">
+            <div>
+              <p className="text-sm font-black uppercase tracking-wide text-emerald-300">
+                Question {currentIndex + 1} / {questions.length}
+              </p>
+
+              <h1 className="mt-1 text-2xl font-black sm:text-4xl">
+                Calcul rapide · {niveau}
+              </h1>
+            </div>
+
+            <div className="rounded-3xl bg-slate-950/70 px-5 py-3 text-center ring-1 ring-white/10">
+              <p className="text-xs font-black text-white/60">Temps</p>
+              <p
+                className={[
+                  "text-4xl font-black",
+                  timeLeft <= 5 ? "text-red-300" : "text-emerald-300",
+                ].join(" ")}
+              >
+                {timeLeft}s
+              </p>
+            </div>
+          </div>
+
+          <div className="mt-5 h-3 overflow-hidden rounded-full bg-white/10">
+            <div
+              className="h-full rounded-full bg-emerald-400 transition-all"
+              style={{
+                width: `${
+                  questions.length > 0
+                    ? ((currentIndex + 1) / questions.length) * 100
+                    : 0
+                }%`,
+              }}
+            />
+          </div>
+
+          <div className="mt-6 rounded-[2rem] bg-white p-6 text-slate-950 shadow-xl">
+            <div className="mb-3 flex flex-wrap items-center gap-2">
+              <span className="rounded-full bg-emerald-100 px-3 py-1 text-xs font-black text-emerald-800">
+                {currentQuestion.type}
+              </span>
+
+              {currentQuestion.difficulty ? (
+                <span className="rounded-full bg-amber-100 px-3 py-1 text-xs font-black text-amber-800">
+                  {"⭐".repeat(currentQuestion.difficulty)}
+                </span>
+              ) : null}
+            </div>
+
+            <p className="whitespace-pre-line text-2xl font-black leading-relaxed sm:text-4xl">
+              {currentQuestion.displayText}
+            </p>
+
+            <div className="mt-6">
+              <input
+                value={answer}
+                disabled={paused || lockedCorrection}
+                onChange={(event) => setAnswer(event.target.value)}
+                onKeyDown={(event) => {
+                  if (event.key === "Enter") {
+                    validateAndNext();
+                  }
+                }}
+                placeholder="Ta réponse..."
+                className="w-full rounded-3xl border-2 border-slate-200 bg-slate-50 px-5 py-4 text-2xl font-black outline-none focus:border-emerald-400 focus:ring-4 focus:ring-emerald-100 disabled:cursor-not-allowed disabled:opacity-60"
+                autoFocus
+              />
+            </div>
+
+            {showHint && currentQuestion.hint ? (
+              <div className="mt-4 rounded-2xl bg-amber-50 p-4 text-sm font-bold text-amber-900 ring-1 ring-amber-100">
+                💡 Indice : {currentQuestion.hint}
+              </div>
+            ) : null}
+
+            {feedback !== null ? (
+              <div
+                className={[
+                  "mt-4 rounded-2xl p-4 text-sm font-black",
+                  feedback
+                    ? "bg-emerald-50 text-emerald-800 ring-1 ring-emerald-100"
+                    : "bg-red-50 text-red-800 ring-1 ring-red-100",
+                ].join(" ")}
+              >
+                {feedback ? "✅ Bonne réponse" : "❌ Réponse à corriger"}
+
+                {!feedback ? (
+                  <div className="mt-2 font-bold text-slate-700">
+                    Réponse attendue : {acceptedAnswers.join(" ou ")}
+                  </div>
+                ) : null}
+
+                {currentQuestion.displayExplanation ? (
+                  <div className="mt-2 font-semibold text-slate-700">
+                    {currentQuestion.displayExplanation}
+                  </div>
+                ) : null}
+              </div>
+            ) : null}
+          </div>
+
+          <div className="mt-5 flex flex-wrap items-center justify-between gap-3">
+            <div className="rounded-full bg-white/10 px-5 py-3 text-sm font-black text-white ring-1 ring-white/15">
+              Score : {score} / {questions.length}
+            </div>
+
+            <div className="flex flex-wrap gap-3">
+              {currentQuestion.hint ? (
+                <button
+                  type="button"
+                  onClick={() => setShowHint((value) => !value)}
+                  disabled={paused || lockedCorrection}
+                  className="rounded-full bg-amber-300 px-5 py-3 text-sm font-black text-slate-950 disabled:cursor-not-allowed disabled:opacity-60"
+                >
+                  💡 Indice
+                </button>
+              ) : null}
+
+              <button
+                type="button"
+                onClick={skipQuestion}
+                disabled={paused || lockedCorrection}
+                className="rounded-full bg-white/10 px-5 py-3 text-sm font-black text-white ring-1 ring-white/15 hover:bg-white/15 disabled:cursor-not-allowed disabled:opacity-60"
+              >
+                Passer
+              </button>
+
+              <button
+                type="button"
+                onClick={validateAndNext}
+                disabled={paused || lockedCorrection}
+                className="rounded-full bg-emerald-400 px-7 py-3 text-sm font-black text-slate-950 shadow-lg hover:bg-emerald-300 disabled:cursor-not-allowed disabled:opacity-60"
+              >
+                Valider
+              </button>
+            </div>
+          </div>
+
+          {lockedCorrection ? (
+            <p className="mt-4 text-center text-sm font-bold text-white/70">
+              Correction affichée... question suivante dans quelques secondes.
+            </p>
+          ) : null}
+        </div>
       </section>
     </main>
   );
