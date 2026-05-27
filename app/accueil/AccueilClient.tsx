@@ -32,15 +32,15 @@ const actualites = [
     action: "Commencer",
     colorText: "text-lime-700",
   },
-  {
-    tag: "English Maths",
-    title: "Apprendre les maths en anglais",
-    description:
-      "Découvrir le vocabulaire des mathématiques en anglais avec des activités simples et progressives.",
-    href: "/english-maths",
-    action: "Découvrir",
-    colorText: "text-blue-700",
-  },
+{
+  tag: "English Maths",
+  title: "Les maths en anglais, petit à petit",
+  description:
+    "5 mots par jour pour apprendre le vocabulaire des maths en anglais : point, vertex, angle, fraction...",
+  href: "/english-maths",
+  action: "Découvrir",
+  colorText: "text-blue-700",
+},
 ];
 
 const cards = [
