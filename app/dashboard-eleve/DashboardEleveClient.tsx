@@ -49,6 +49,34 @@ type ResultatCalculRapide = {
   created_at: string;
 };
 
+type ResultatDefiJour = {
+  id: string;
+  code_etablissement: string;
+  code_utilisateur: string;
+  nom: string | null;
+
+  classe: string | null;
+  niveau: string | null;
+  matiere: string;
+
+  defi_id: string;
+  titre_defi: string;
+  theme: string | null;
+  direction_id: string | null;
+  direction_label: string | null;
+  direction_type: string | null;
+
+  score: number;
+  total: number;
+  pourcentage: number | null;
+
+  reponse_eleve: string | null;
+  reponse_attendue: string | null;
+  details: unknown;
+
+  created_at: string;
+};
+
 function formatDate(value: string) {
   return new Intl.DateTimeFormat("fr-FR", {
     day: "2-digit",
@@ -87,12 +115,19 @@ export default function DashboardEleveClient() {
     eleveContext.eleve ?? eleveContext.currentUser ?? eleveContext.user ?? null;
 
   const [loading, setLoading] = useState(true);
+
   const [resultatsParcours, setResultatsParcours] = useState<ResultatParcours[]>(
     []
   );
+
   const [resultatsCalculRapide, setResultatsCalculRapide] = useState<
     ResultatCalculRapide[]
   >([]);
+
+  const [resultatsDefisJour, setResultatsDefisJour] = useState<
+    ResultatDefiJour[]
+  >([]);
+
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const codeEtablissement = eleve?.code_etablissement?.trim() ?? "";
@@ -109,36 +144,60 @@ export default function DashboardEleveClient() {
         return;
       }
 
-      const [parcoursResponse, calculRapideResponse] = await Promise.all([
-        supabase
-          .from("resultats_parcours")
-          .select(
-            "id, code_etablissement, code_utilisateur, nom, classe, niveau, matiere, score, total, pourcentage, details, created_at"
-          )
-          .eq("code_etablissement", codeEtablissement)
-          .eq("code_utilisateur", codeUtilisateur)
-          .order("created_at", { ascending: false }),
+      const [parcoursResponse, calculRapideResponse, defisJourResponse] =
+        await Promise.all([
+          supabase
+            .from("resultats_parcours")
+            .select(
+              "id, code_etablissement, code_utilisateur, nom, classe, niveau, matiere, score, total, pourcentage, details, created_at"
+            )
+            .eq("code_etablissement", codeEtablissement)
+            .eq("code_utilisateur", codeUtilisateur)
+            .order("created_at", { ascending: false }),
 
-        supabase
-          .from("resultats_calcul_rapide")
-          .select(
-            "id, code_etablissement, code_utilisateur, nom, classe, niveau, matiere, session_id, titre_session, theme, score, total, pourcentage, temps_total_sec, details, created_at"
-          )
-          .eq("code_etablissement", codeEtablissement)
-          .eq("code_utilisateur", codeUtilisateur)
-          .order("created_at", { ascending: false }),
-      ]);
+          supabase
+            .from("resultats_calcul_rapide")
+            .select(
+              "id, code_etablissement, code_utilisateur, nom, classe, niveau, matiere, session_id, titre_session, theme, score, total, pourcentage, temps_total_sec, details, created_at"
+            )
+            .eq("code_etablissement", codeEtablissement)
+            .eq("code_utilisateur", codeUtilisateur)
+            .order("created_at", { ascending: false }),
 
-      if (parcoursResponse.error || calculRapideResponse.error) {
-        console.error(parcoursResponse.error ?? calculRapideResponse.error);
+          supabase
+            .from("resultats_defis_jour")
+            .select(
+              "id, code_etablissement, code_utilisateur, nom, classe, niveau, matiere, defi_id, titre_defi, theme, direction_id, direction_label, direction_type, score, total, pourcentage, reponse_eleve, reponse_attendue, details, created_at"
+            )
+            .eq("code_etablissement", codeEtablissement)
+            .eq("code_utilisateur", codeUtilisateur)
+            .order("created_at", { ascending: false }),
+        ]);
+
+      if (
+        parcoursResponse.error ||
+        calculRapideResponse.error ||
+        defisJourResponse.error
+      ) {
+        console.error(
+          parcoursResponse.error ??
+            calculRapideResponse.error ??
+            defisJourResponse.error
+        );
+
         setErrorMessage("Impossible de charger tous tes résultats.");
         setLoading(false);
         return;
       }
 
       setResultatsParcours((parcoursResponse.data ?? []) as ResultatParcours[]);
+
       setResultatsCalculRapide(
         (calculRapideResponse.data ?? []) as ResultatCalculRapide[]
+      );
+
+      setResultatsDefisJour(
+        (defisJourResponse.data ?? []) as ResultatDefiJour[]
       );
 
       setLoading(false);
@@ -158,6 +217,17 @@ export default function DashboardEleveClient() {
     () => getBest(resultatsCalculRapide),
     [resultatsCalculRapide]
   );
+
+  const dernierDefiJour = resultatsDefisJour[0] ?? null;
+  const meilleurDefiJour = useMemo(
+    () => getBest(resultatsDefisJour),
+    [resultatsDefisJour]
+  );
+
+  const totalActivites =
+    resultatsParcours.length +
+    resultatsCalculRapide.length +
+    resultatsDefisJour.length;
 
   if (!eleve) {
     return (
@@ -182,7 +252,7 @@ export default function DashboardEleveClient() {
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-emerald-50 via-sky-50 to-yellow-50 px-4 py-8 text-slate-950">
-      <section className="mx-auto max-w-6xl">
+      <section className="mx-auto max-w-7xl">
         <div className="rounded-[2rem] border border-white/70 bg-white/85 p-6 shadow-2xl backdrop-blur-xl">
           <div className="inline-flex rounded-full bg-emerald-100 px-4 py-2 text-xs font-black uppercase tracking-wide text-emerald-800">
             Tableau de bord élève
@@ -212,7 +282,7 @@ export default function DashboardEleveClient() {
           </div>
         ) : (
           <>
-            <div className="mt-6 grid gap-4 md:grid-cols-4">
+            <div className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-6">
               <div className="rounded-[2rem] bg-white p-5 shadow-xl ring-1 ring-emerald-100">
                 <p className="text-sm font-black uppercase text-emerald-700">
                   Dernier parcours
@@ -252,7 +322,7 @@ export default function DashboardEleveClient() {
 
               <div className="rounded-[2rem] bg-white p-5 shadow-xl ring-1 ring-amber-100">
                 <p className="text-sm font-black uppercase text-amber-700">
-                  Dernier calcul rapide
+                  Dernier calcul
                 </p>
 
                 <p className="mt-3 text-3xl font-black">
@@ -270,20 +340,58 @@ export default function DashboardEleveClient() {
 
               <div className="rounded-[2rem] bg-white p-5 shadow-xl ring-1 ring-yellow-100">
                 <p className="text-sm font-black uppercase text-yellow-700">
-                  Activités enregistrées
+                  Meilleur calcul
                 </p>
 
                 <p className="mt-3 text-3xl font-black">
-                  {resultatsParcours.length + resultatsCalculRapide.length}
+                  {meilleurCalculRapide
+                    ? `${meilleurCalculRapide.score} / ${meilleurCalculRapide.total}`
+                    : "—"}
                 </p>
 
+                {meilleurCalculRapide ? (
+                  <p className="mt-2 text-sm font-bold text-slate-500">
+                    {getPct(
+                      meilleurCalculRapide.score,
+                      meilleurCalculRapide.total
+                    )}{" "}
+                    % de réussite
+                  </p>
+                ) : null}
+              </div>
+
+              <div className="rounded-[2rem] bg-white p-5 shadow-xl ring-1 ring-orange-100">
+                <p className="text-sm font-black uppercase text-orange-700">
+                  Dernier défi
+                </p>
+
+                <p className="mt-3 text-3xl font-black">
+                  {dernierDefiJour
+                    ? `${dernierDefiJour.score} / ${dernierDefiJour.total}`
+                    : "—"}
+                </p>
+
+                {dernierDefiJour ? (
+                  <p className="mt-2 text-sm font-bold text-slate-500">
+                    {formatDate(dernierDefiJour.created_at)}
+                  </p>
+                ) : null}
+              </div>
+
+              <div className="rounded-[2rem] bg-white p-5 shadow-xl ring-1 ring-purple-100">
+                <p className="text-sm font-black uppercase text-purple-700">
+                  Activités
+                </p>
+
+                <p className="mt-3 text-3xl font-black">{totalActivites}</p>
+
                 <p className="mt-2 text-sm font-bold text-slate-500">
-                  Parcours + calcul rapide
+                  Parcours + calcul + défis
                 </p>
               </div>
             </div>
 
-            <div className="mt-6 grid gap-6 lg:grid-cols-2">
+            <div className="mt-6 grid gap-6 xl:grid-cols-2">
               <div className="rounded-[2rem] bg-white p-6 shadow-xl ring-1 ring-slate-100">
                 <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
                   <div>
@@ -424,6 +532,84 @@ export default function DashboardEleveClient() {
                   </div>
                 )}
               </div>
+
+              <div className="rounded-[2rem] bg-white p-6 shadow-xl ring-1 ring-slate-100 xl:col-span-2">
+                <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
+                  <div>
+                    <h2 className="text-2xl font-black">Défis du jour</h2>
+                    <p className="mt-1 text-sm font-semibold text-slate-600">
+                      Historique des défis enregistrés.
+                    </p>
+                  </div>
+
+                  <Link
+                    href="/defis-jour"
+                    className="rounded-2xl bg-orange-500 px-5 py-3 text-sm font-black text-white shadow-lg hover:bg-orange-400"
+                  >
+                    Refaire un défi
+                  </Link>
+                </div>
+
+                {resultatsDefisJour.length === 0 ? (
+                  <div className="rounded-2xl bg-amber-50 p-4 font-bold text-amber-800">
+                    Aucun défi du jour enregistré pour le moment.
+                  </div>
+                ) : (
+                  <div className="overflow-x-auto">
+                    <table className="w-full min-w-[760px] border-collapse text-left text-sm">
+                      <thead>
+                        <tr className="border-b border-slate-200 bg-slate-50 text-slate-600">
+                          <th className="px-4 py-3 font-black">Date</th>
+                          <th className="px-4 py-3 font-black">Défi</th>
+                          <th className="px-4 py-3 font-black">Thème</th>
+                          <th className="px-4 py-3 font-black">Chemin</th>
+                          <th className="px-4 py-3 font-black">Score</th>
+                          <th className="px-4 py-3 font-black">Réussite</th>
+                        </tr>
+                      </thead>
+
+                      <tbody>
+                        {resultatsDefisJour.map((r) => {
+                          const pct = getPct(r.score, r.total);
+
+                          return (
+                            <tr
+                              key={r.id}
+                              className="border-b border-slate-100 hover:bg-orange-50/70"
+                            >
+                              <td className="px-4 py-3 font-bold text-slate-700">
+                                {formatDate(r.created_at)}
+                              </td>
+
+                              <td className="px-4 py-3 font-bold">
+                                {r.titre_defi ?? "Défi"}
+                              </td>
+
+                              <td className="px-4 py-3 font-bold">
+                                {r.theme ?? "—"}
+                              </td>
+
+                              <td className="px-4 py-3 font-bold">
+                                {r.direction_label ?? r.direction_type ?? "—"}
+                              </td>
+
+                              <td className="px-4 py-3 font-black">
+                                {r.score} / {r.total}
+                              </td>
+
+                              <td className="px-4 py-3">
+                                <span className="rounded-full bg-orange-100 px-3 py-1 font-black text-orange-800">
+                                  {pct} %
+                                </span>
+                              </td>
+                            </tr>
+                          );
+                        })}
+                      </tbody>
+                    </table>
+                  </div>
+                )}
+              </div>
             </div>
 
             <div className="mt-6 flex flex-wrap gap-3">
@@ -446,6 +632,13 @@ export default function DashboardEleveClient() {
                 className="rounded-2xl bg-slate-950 px-5 py-3 text-sm font-black text-white shadow-lg hover:bg-slate-800"
               >
                 Calcul rapide
+              </Link>
+
+              <Link
+                href="/defis-jour"
+                className="rounded-2xl bg-orange-500 px-5 py-3 text-sm font-black text-white shadow-lg hover:bg-orange-400"
+              >
+                Défi du jour
               </Link>
             </div>
           </>
