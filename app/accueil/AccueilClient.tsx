@@ -45,11 +45,6 @@ const actualites = [
 
 const cards = [
   {
-    href: "/coach-bac-spe",
-    image: "/images/cards/coach-bac-spe.webp",
-    label: "Coach Bac Spé Maths",
-  },
-  {
     href: "/coach-maths-ia",
     image: "/images/cards/coach.webp",
     label: "Coach Maths IA",
@@ -78,6 +73,11 @@ const cards = [
     href: "/concours-general",
     image: "/images/cards/concours-general.webp",
     label: "Concours général",
+  },
+    {
+    href: "/coach-bac-spe",
+    image: "/images/cards/coach-bac-spe.webp",
+    label: "Coach Bac Spé Maths",
   },
   {
     href: "/english-maths",
