@@ -2,12 +2,13 @@
 
 const elevesRemercies = [
   "Elena",
+  "Emma",
   "Adele",
   "Maelle",
   "Simon",
   "Kaela",
   "Arthur",
-  "Tamara"
+  "Tamara",
 ];
 
 export default function RemerciementsBar() {
