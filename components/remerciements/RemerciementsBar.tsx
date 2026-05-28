@@ -1,11 +1,11 @@
 // components/remerciements/RemerciementsBar.tsx
 
 const elevesRemercies = [
-  "Prénom 1",
-  "Prénom 2",
-  "Prénom 3",
-  "Prénom 4",
-  "Prénom 5",
+  "Elena",
+  "Adele",
+  "Maelle",
+  "Simon",
+  "Kaela",
 ];
 
 export default function RemerciementsBar() {
