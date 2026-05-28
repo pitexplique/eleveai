@@ -250,13 +250,11 @@ export default function EnglishMathsClient() {
           </p>
 
           <h1 className="text-3xl font-black md:text-5xl">
-            English Maths
+            English Maths Challenge
           </h1>
 
           <p className="mt-3 max-w-2xl text-base font-semibold text-white/85">
-            Prépare le concours English Maths avec une progression simple.
-            Les étapes se débloquent progressivement : le jour actuel et les
-            jours précédents restent accessibles.
+            Le challenge de la semaine : des mots, de l’audio et un mini-défi chaque jour.
           </p>
         </section>
 
