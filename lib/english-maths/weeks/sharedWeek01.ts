@@ -7,9 +7,9 @@ type BaseEnglishMathsDay = Omit<EnglishMathsDay, "id" | "niveau" | "week">;
 const baseDays: BaseEnglishMathsDay[] = [
   {
     dayIndex: 1,
-    dayLabel: "lundi",
-    title: "Numbers 1",
-    theme: "numbers",
+    dayLabel: "J-5",
+    title: "Découvrir les premiers mots",
+    theme: "Challenge de la semaine",
     wordIds: [
       "numbers_number",
       "numbers_ten",
@@ -20,9 +20,9 @@ const baseDays: BaseEnglishMathsDay[] = [
   },
   {
     dayIndex: 2,
-    dayLabel: "mardi",
-    title: "Operations 1",
-    theme: "operations",
+    dayLabel: "J-4",
+    title: "Comprendre les opérations",
+    theme: "Challenge de la semaine",
     wordIds: [
       "operations_plus",
       "operations_minus",
@@ -33,9 +33,9 @@ const baseDays: BaseEnglishMathsDay[] = [
   },
   {
     dayIndex: 3,
-    dayLabel: "mercredi",
-    title: "Shapes 1",
-    theme: "geometry",
+    dayLabel: "J-3",
+    title: "Géométrie : formes simples",
+    theme: "Challenge de la semaine",
     wordIds: [
       "geometry_point",
       "geometry_line",
@@ -46,9 +46,9 @@ const baseDays: BaseEnglishMathsDay[] = [
   },
   {
     dayIndex: 4,
-    dayLabel: "jeudi",
-    title: "Shapes 2",
-    theme: "geometry",
+    dayLabel: "J-2",
+    title: "Géométrie : vocabulaire utile",
+    theme: "Challenge de la semaine",
     wordIds: [
       "geometry_angle",
       "geometry_side",
@@ -59,9 +59,9 @@ const baseDays: BaseEnglishMathsDay[] = [
   },
   {
     dayIndex: 5,
-    dayLabel: "vendredi",
-    title: "Review 1",
-    theme: "review",
+    dayLabel: "J-1",
+    title: "Révision finale du challenge",
+    theme: "Dernière révision",
     wordIds: [
       "numbers_half",
       "geometry_circle",
@@ -72,9 +72,9 @@ const baseDays: BaseEnglishMathsDay[] = [
   },
   {
     dayIndex: 6,
-    dayLabel: "samedi",
-    title: "Weekend revision",
-    theme: "review",
+    dayLabel: "Jour J",
+    title: "English Maths Challenge",
+    theme: "Challenge final",
     wordIds: [
       "operations_plus",
       "operations_minus",
@@ -85,9 +85,9 @@ const baseDays: BaseEnglishMathsDay[] = [
   },
   {
     dayIndex: 7,
-    dayLabel: "dimanche",
-    title: "Mini challenge",
-    theme: "challenge",
+    dayLabel: "Bonus",
+    title: "Révision bonus du week-end",
+    theme: "Bonus",
     wordIds: [
       "numbers_number",
       "numbers_half",

@@ -1,32 +1,31 @@
-// app/manifeste/metadata.ts (optionnel) -> NON, plus simple: directement dans app/manifeste/page.tsx via export
-// ✅ Next.js App Router : mets ça en haut de app/manifeste/page.tsx (au-dessus du composant)
+// app/qui-sommes-nous/metadata.ts
 
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Manifeste EleveAI — Une IA pour apprendre, pas pour tricher",
+  title: "Qui sommes-nous ? — EleveAI",
   description:
-    "Le manifeste EleveAI : une IA utile et rassurante, pensée pour faire apprendre (questions, essais, correction), sans encourager la triche. Cadre clair pour élèves, professeurs et parents.",
+    "Découvrez EleveAI, une plateforme éducative née à La Réunion pour aider les élèves à progresser grâce à plusieurs portes d’entrée et une cartographie de leur évolution.",
   alternates: {
-    canonical: "https://eleveai.fr/manifeste",
+    canonical: "https://eleveai.fr/qui-sommes-nous",
   },
   robots: {
     index: true,
     follow: true,
   },
   openGraph: {
-    type: "article",
-    url: "https://eleveai.fr/manifeste",
-    title: "Manifeste EleveAI — Une IA pour apprendre, pas pour tricher",
+    type: "website",
+    url: "https://eleveai.fr/qui-sommes-nous",
+    title: "Qui sommes-nous ? — EleveAI",
     description:
-      "Une IA éducative : guider, faire essayer, corriger et expliquer. Pas produire du devoir prêt à rendre.",
+      "EleveAI : un outil pour tous avec plusieurs portes d’entrée et une cartographie de l’évolution des élèves.",
     siteName: "EleveAI",
     locale: "fr_FR",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Manifeste EleveAI — Une IA pour apprendre, pas pour tricher",
+    title: "Qui sommes-nous ? — EleveAI",
     description:
-      "EleveAI : une IA qui fait apprendre (questions → essais → correction), dans un cadre anti-triche pour les élèves.",
+      "EleveAI accompagne les élèves avec des activités courtes, motivantes et un suivi clair de leur progression.",
   },
 };

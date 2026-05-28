@@ -9,11 +9,11 @@ import {
   englishMathsWords,
   getEnglishMathsWordsByIds,
   getTodayEnglishMathsDay,
-  getYesterdayEnglishMathsDay,
   type EnglishMathsNiveau,
 } from "@/lib/english-maths";
 
 import { generateEnglishMathsQuestions } from "@/lib/english-maths/generateQuestions";
+import { makeEnglishMathsWeek01 } from "@/lib/english-maths/weeks/sharedWeek01";
 
 function playAudio(src?: string) {
   if (!src) return;
@@ -25,23 +25,156 @@ function playAudio(src?: string) {
   });
 }
 
+function EnglishMathsBackground() {
+  return (
+    <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+      <svg
+        className="h-full w-full"
+        viewBox="0 0 1600 900"
+        preserveAspectRatio="xMidYMid slice"
+        aria-hidden="true"
+      >
+        <defs>
+          <linearGradient id="english-bg" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stopColor="#075985" />
+            <stop offset="42%" stopColor="#0f766e" />
+            <stop offset="100%" stopColor="#172554" />
+          </linearGradient>
+
+          <radialGradient id="glow-cyan" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stopColor="#67e8f9" stopOpacity="0.95" />
+            <stop offset="100%" stopColor="#67e8f9" stopOpacity="0" />
+          </radialGradient>
+
+          <radialGradient id="glow-green" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stopColor="#86efac" stopOpacity="0.75" />
+            <stop offset="100%" stopColor="#86efac" stopOpacity="0" />
+          </radialGradient>
+
+          <radialGradient id="glow-blue" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stopColor="#93c5fd" stopOpacity="0.75" />
+            <stop offset="100%" stopColor="#93c5fd" stopOpacity="0" />
+          </radialGradient>
+
+          <filter id="soft-blur">
+            <feGaussianBlur stdDeviation="18" />
+          </filter>
+        </defs>
+
+        <rect width="1600" height="900" fill="url(#english-bg)" />
+
+        <circle
+          cx="250"
+          cy="170"
+          r="310"
+          fill="url(#glow-cyan)"
+          filter="url(#soft-blur)"
+        />
+        <circle
+          cx="1280"
+          cy="170"
+          r="320"
+          fill="url(#glow-green)"
+          filter="url(#soft-blur)"
+        />
+        <circle
+          cx="780"
+          cy="760"
+          r="360"
+          fill="url(#glow-blue)"
+          filter="url(#soft-blur)"
+        />
+
+        <g opacity="0.11" stroke="white" strokeWidth="1">
+          {Array.from({ length: 17 }).map((_, i) => (
+            <line
+              key={`v-${i}`}
+              x1={i * 100}
+              y1="0"
+              x2={i * 100}
+              y2="900"
+            />
+          ))}
+
+          {Array.from({ length: 10 }).map((_, i) => (
+            <line
+              key={`h-${i}`}
+              x1="0"
+              y1={i * 100}
+              x2="1600"
+              y2={i * 100}
+            />
+          ))}
+        </g>
+
+        <g
+          opacity="0.16"
+          fill="none"
+          stroke="white"
+          strokeWidth="2"
+          strokeLinecap="round"
+        >
+          <circle cx="185" cy="610" r="54" />
+          <circle cx="1385" cy="610" r="78" />
+          <path d="M 1120 360 L 1180 460 L 1060 460 Z" />
+          <path d="M 420 330 L 510 330 L 510 420 L 420 420 Z" />
+        </g>
+
+        <g opacity="0.16" fill="white" fontFamily="Arial" fontWeight="900">
+          <text x="125" y="250" fontSize="54">
+            +
+          </text>
+          <text x="1380" y="290" fontSize="54">
+            =
+          </text>
+          <text x="1030" y="165" fontSize="42">
+            x
+          </text>
+          <text x="520" y="735" fontSize="46">
+            %
+          </text>
+          <text x="1185" y="755" fontSize="38">
+            triangle
+          </text>
+          <text x="250" y="760" fontSize="34">
+            number
+          </text>
+          <text x="760" y="250" fontSize="38">
+            English Maths
+          </text>
+        </g>
+
+        <rect
+          width="1600"
+          height="900"
+          fill="black"
+          opacity="0.18"
+        />
+      </svg>
+    </div>
+  );
+}
+
 export default function EnglishMathsClient() {
   // V1 : routine commune pour tous.
   // On garde techniquement "6e" pour récupérer la semaine commune.
   const niveau: EnglishMathsNiveau = "6e";
 
   const [mode, setMode] = useState<"words" | "quiz" | "result">("words");
-  const [viewMode, setViewMode] = useState<"today" | "yesterday">("today");
+  const [selectedDayId, setSelectedDayId] = useState<string | null>(null);
   const [answers, setAnswers] = useState<Record<string, string>>({});
+
+  const weekDays = useMemo(() => makeEnglishMathsWeek01(niveau), [niveau]);
 
   const todayDay = useMemo(() => getTodayEnglishMathsDay(niveau), [niveau]);
 
-  const yesterdayDay = useMemo(
-    () => getYesterdayEnglishMathsDay(niveau),
-    [niveau]
-  );
+  const day = useMemo(() => {
+    if (selectedDayId) {
+      return weekDays.find((item) => item.id === selectedDayId) ?? weekDays[0];
+    }
 
-  const day = viewMode === "yesterday" ? yesterdayDay : todayDay;
+    return todayDay ?? weekDays[0];
+  }, [selectedDayId, todayDay, weekDays]);
 
   const wordsOfDay = useMemo(() => {
     if (!day) return [];
@@ -59,14 +192,8 @@ export default function EnglishMathsClient() {
   const answeredCount = Object.keys(answers).length;
   const canShowScore = answeredCount >= questions.length && questions.length > 0;
 
-  function selectToday() {
-    setViewMode("today");
-    setMode("words");
-    setAnswers({});
-  }
-
-  function selectYesterday() {
-    setViewMode("yesterday");
+  function selectDay(dayId: string) {
+    setSelectedDayId(dayId);
     setMode("words");
     setAnswers({});
   }
@@ -87,36 +214,101 @@ export default function EnglishMathsClient() {
   }
 
   return (
-    <main className="min-h-screen bg-slate-950 px-4 py-8 text-white">
+    <main className="relative min-h-screen overflow-hidden px-4 py-6 text-white sm:py-8">
+      <EnglishMathsBackground />
+
       <div className="mx-auto max-w-5xl">
-        <div className="mb-6 flex items-center justify-between gap-3">
+        <div className="mb-5 flex items-center justify-between gap-3">
           <Link
             href="/accueil"
-            className="rounded-full border border-white/20 px-4 py-2 text-sm font-bold text-white/80 hover:bg-white/10"
+            className="rounded-full border border-white/30 bg-white/10 px-4 py-2 text-sm font-bold text-white shadow-lg backdrop-blur hover:bg-white/20"
           >
             ← Accueil
           </Link>
 
-          <div className="rounded-full bg-emerald-400/15 px-4 py-2 text-sm font-black text-emerald-200 ring-1 ring-emerald-300/30">
-            5 mots par jour
+          <div className="rounded-full bg-white/15 px-4 py-2 text-sm font-black text-white ring-1 ring-white/25 backdrop-blur">
+            Concours CDI
           </div>
         </div>
 
-        <section className="mb-6 rounded-3xl border border-white/10 bg-white/10 p-5 shadow-2xl backdrop-blur">
-          <p className="mb-2 text-sm font-black uppercase tracking-[0.25em] text-sky-200">
+        <section className="mb-5 rounded-[2rem] border border-white/20 bg-white/15 p-5 shadow-2xl backdrop-blur-xl sm:p-6">
+          <p className="mb-2 text-sm font-black uppercase tracking-[0.25em] text-cyan-100">
             EleveAI
           </p>
 
-          <h1 className="text-3xl font-black md:text-5xl">English Maths</h1>
+          <h1 className="text-3xl font-black md:text-5xl">
+            English Maths
+          </h1>
 
-          <p className="mt-3 max-w-2xl text-base font-semibold text-white/75">
-            Chaque jour : 5 mots de maths en anglais, l&apos;audio, une phrase
-            simple, puis un mini-défi.
+          <p className="mt-3 max-w-2xl text-base font-semibold text-white/85">
+            Prépare le concours English Maths avec une progression simple :
+            J-5, J-4, J-3, J-2, J-1, puis Jour J.
           </p>
         </section>
 
+        <section className="mb-5 rounded-[2rem] border border-white/20 bg-white/15 p-4 shadow-2xl backdrop-blur-xl">
+          <div className="mb-3 flex items-center justify-between gap-3">
+            <div>
+              <div className="text-xs font-black uppercase tracking-[0.22em] text-white/70">
+                Choisir une étape
+              </div>
+              <div className="mt-1 text-sm font-semibold text-white/80">
+                Clique sur une carte pour charger les mots.
+              </div>
+            </div>
+
+            <div className="hidden rounded-full bg-white/15 px-3 py-1.5 text-xs font-black text-white ring-1 ring-white/20 sm:block">
+              {day?.dayLabel ?? "J-5"}
+            </div>
+          </div>
+
+          <div className="grid gap-2 sm:grid-cols-3 lg:grid-cols-7">
+            {weekDays.map((item) => {
+              const active = day?.id === item.id;
+
+              return (
+                <button
+                  key={item.id}
+                  type="button"
+                  onClick={() => selectDay(item.id)}
+                  className={[
+                    "group min-h-[92px] rounded-2xl border px-3 py-3 text-left shadow-lg transition",
+                    active
+                      ? "border-white bg-white text-slate-950"
+                      : "border-white/15 bg-white/12 text-white hover:bg-white/20",
+                  ].join(" ")}
+                >
+                  <div
+                    className={[
+                      "mb-2 inline-flex rounded-full px-2.5 py-1 text-xs font-black",
+                      active
+                        ? "bg-emerald-500 text-slate-950"
+                        : "bg-white/15 text-white",
+                    ].join(" ")}
+                  >
+                    {item.dayLabel}
+                  </div>
+
+                  <div className="line-clamp-2 text-xs font-black leading-snug sm:text-[13px]">
+                    {item.title}
+                  </div>
+
+                  <div
+                    className={[
+                      "mt-1 line-clamp-1 text-[11px] font-bold",
+                      active ? "text-slate-600" : "text-white/65",
+                    ].join(" ")}
+                  >
+                    {item.theme}
+                  </div>
+                </button>
+              );
+            })}
+          </div>
+        </section>
+
         {day ? (
-          <section className="mb-6 rounded-3xl border border-white/10 bg-white p-5 text-slate-950 shadow-2xl">
+          <section className="mb-6 rounded-[2rem] border border-white/20 bg-white p-4 text-slate-950 shadow-2xl sm:p-5">
             <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
               <div>
                 <div className="text-xs font-black uppercase tracking-[0.2em] text-slate-500">
@@ -124,66 +316,38 @@ export default function EnglishMathsClient() {
                 </div>
 
                 <h2 className="text-2xl font-black">
-                  {viewMode === "yesterday" ? "Révision d’hier" : day.title}
+                  {day.title}
                 </h2>
               </div>
 
-              <div className="rounded-full bg-sky-100 px-4 py-2 text-sm font-black text-sky-900">
+              <div className="rounded-full bg-cyan-100 px-4 py-2 text-sm font-black text-cyan-950">
                 {day.theme}
               </div>
             </div>
 
-            <div className="mb-5 flex flex-wrap gap-2">
-              <button
-                type="button"
-                onClick={selectToday}
-                className={[
-                  "rounded-full px-4 py-2 text-sm font-black shadow transition",
-                  viewMode === "today"
-                    ? "bg-emerald-500 text-slate-950"
-                    : "bg-slate-100 text-slate-700 hover:bg-slate-200",
-                ].join(" ")}
-              >
-                Mots du jour
-              </button>
-
-              <button
-                type="button"
-                onClick={selectYesterday}
-                className={[
-                  "rounded-full px-4 py-2 text-sm font-black shadow transition",
-                  viewMode === "yesterday"
-                    ? "bg-sky-600 text-white"
-                    : "bg-slate-100 text-slate-700 hover:bg-slate-200",
-                ].join(" ")}
-              >
-                Revoir les mots d’hier
-              </button>
-            </div>
-
             {mode === "words" ? (
               <>
-                <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+                <div className="mx-auto grid max-w-4xl gap-3 sm:grid-cols-2 lg:grid-cols-5">
                   {wordsOfDay.map((word) => (
                     <article
                       key={word.id}
-                      className="rounded-3xl border border-slate-200 bg-slate-50 p-4 text-center shadow-sm"
+                      className="rounded-2xl border border-slate-200 bg-slate-50 p-3 text-center shadow-sm"
                     >
-                      <div className="mb-3 text-5xl">{word.image}</div>
+                      <div className="mb-2 text-4xl">{word.image}</div>
 
-                      <div className="text-2xl font-black text-slate-950">
+                      <div className="text-lg font-black text-slate-950">
                         {word.english}
                       </div>
 
-                      <div className="mt-1 text-sm font-bold text-slate-500">
+                      <div className="mt-1 text-xs font-bold text-slate-500">
                         {word.french}
                       </div>
 
-                      <div className="mt-4 flex justify-center gap-2">
+                      <div className="mt-3 flex justify-center gap-1.5">
                         <button
                           type="button"
                           onClick={() => playAudio(word.audioWordSrc)}
-                          className="rounded-full bg-sky-600 px-3 py-2 text-xs font-black text-white"
+                          className="rounded-full bg-sky-600 px-2.5 py-1.5 text-[11px] font-black text-white"
                         >
                           🔊 mot
                         </button>
@@ -191,13 +355,13 @@ export default function EnglishMathsClient() {
                         <button
                           type="button"
                           onClick={() => playAudio(word.audioSentenceSrc)}
-                          className="rounded-full bg-emerald-600 px-3 py-2 text-xs font-black text-white"
+                          className="rounded-full bg-emerald-600 px-2.5 py-1.5 text-[11px] font-black text-white"
                         >
                           🔊 phrase
                         </button>
                       </div>
 
-                      <p className="mt-3 text-xs font-semibold text-slate-600">
+                      <p className="mt-2 line-clamp-3 text-[11px] font-semibold leading-snug text-slate-600">
                         {word.sentenceEn}
                       </p>
                     </article>
