@@ -144,12 +144,7 @@ function EnglishMathsBackground() {
           </text>
         </g>
 
-        <rect
-          width="1600"
-          height="900"
-          fill="black"
-          opacity="0.18"
-        />
+        <rect width="1600" height="900" fill="black" opacity="0.18" />
       </svg>
     </div>
   );
@@ -168,13 +163,28 @@ export default function EnglishMathsClient() {
 
   const todayDay = useMemo(() => getTodayEnglishMathsDay(niveau), [niveau]);
 
+  const currentUnlockedIndex = todayDay?.dayIndex ?? 1;
+
+  const visibleWeekDays = useMemo(() => {
+    return weekDays.filter((item) => item.dayIndex <= currentUnlockedIndex);
+  }, [weekDays, currentUnlockedIndex]);
+
   const day = useMemo(() => {
     if (selectedDayId) {
-      return weekDays.find((item) => item.id === selectedDayId) ?? weekDays[0];
+      return (
+        visibleWeekDays.find((item) => item.id === selectedDayId) ??
+        todayDay ??
+        visibleWeekDays[visibleWeekDays.length - 1] ??
+        weekDays[0]
+      );
     }
 
-    return todayDay ?? weekDays[0];
-  }, [selectedDayId, todayDay, weekDays]);
+    return (
+      todayDay ??
+      visibleWeekDays[visibleWeekDays.length - 1] ??
+      weekDays[0]
+    );
+  }, [selectedDayId, todayDay, visibleWeekDays, weekDays]);
 
   const wordsOfDay = useMemo(() => {
     if (!day) return [];
@@ -193,6 +203,9 @@ export default function EnglishMathsClient() {
   const canShowScore = answeredCount >= questions.length && questions.length > 0;
 
   function selectDay(dayId: string) {
+    const unlockedDay = visibleWeekDays.find((item) => item.id === dayId);
+    if (!unlockedDay) return;
+
     setSelectedDayId(dayId);
     setMode("words");
     setAnswers({});
@@ -241,8 +254,9 @@ export default function EnglishMathsClient() {
           </h1>
 
           <p className="mt-3 max-w-2xl text-base font-semibold text-white/85">
-            Prépare le concours English Maths avec une progression simple :
-            J-5, J-4, J-3, J-2, J-1, puis Jour J.
+            Prépare le concours English Maths avec une progression simple.
+            Les étapes se débloquent progressivement : le jour actuel et les
+            jours précédents restent accessibles.
           </p>
         </section>
 
@@ -250,8 +264,9 @@ export default function EnglishMathsClient() {
           <div className="mb-3 flex items-center justify-between gap-3">
             <div>
               <div className="text-xs font-black uppercase tracking-[0.22em] text-white/70">
-                Choisir une étape
+                Étapes disponibles
               </div>
+
               <div className="mt-1 text-sm font-semibold text-white/80">
                 Clique sur une carte pour charger les mots.
               </div>
@@ -262,8 +277,8 @@ export default function EnglishMathsClient() {
             </div>
           </div>
 
-          <div className="grid gap-2 sm:grid-cols-3 lg:grid-cols-7">
-            {weekDays.map((item) => {
+          <div className="grid gap-2 sm:grid-cols-3 lg:grid-cols-6">
+            {visibleWeekDays.map((item) => {
               const active = day?.id === item.id;
 
               return (
@@ -305,6 +320,12 @@ export default function EnglishMathsClient() {
               );
             })}
           </div>
+
+          {visibleWeekDays.length < weekDays.length ? (
+            <div className="mt-3 rounded-2xl border border-white/15 bg-white/10 px-4 py-3 text-xs font-bold text-white/75">
+              Les prochaines étapes seront affichées plus tard.
+            </div>
+          ) : null}
         </section>
 
         {day ? (
