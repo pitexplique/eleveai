@@ -7,6 +7,7 @@ import { Analytics } from "@vercel/analytics/react";
 import DevBanner from "@/components/DevBanner";
 import Header from "@/components/Header";
 import { EleveProvider } from "@/context/EleveContext";
+import RemerciementsBar from "@/components/remerciements/RemerciementsBar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -158,7 +159,10 @@ export default function RootLayout({
         <EleveProvider>
           <DevBanner />
           <Header />
+
           {children}
+
+          <RemerciementsBar />
         </EleveProvider>
 
         <script
