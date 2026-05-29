@@ -6,24 +6,26 @@ import Link from "next/link";
  
 // ─── Data ────────────────────────────────────────────────────────────────────
  
-const actualites = [
+const uneJournal = {
+  tag: "Défi du jour",
+  date: "Cette semaine",
+  title: "Le Piton de la Fournaise en chiffres",
+  description:
+    "Altitude, coulées de lave, volume émis, gaz volcaniques… 7 défis maths inspirés du volcan le plus actif de France.",
+  href: "/defis-du-jour",
+  image: "/images/defis-du-jour/piton-fournaise.webp",
+  action: "Relever le défi",
+};
+ 
+const secondaires = [
   {
-    tag: "À la une",
-    title: "Sprint Bac Spé Maths",
+    tag: "Bac Spé Maths",
+    title: "Sprint 16 juin",
     description:
       "Suites, fonctions, probabilités et automatismes pour préparer l'épreuve.",
     href: "/coach-bac-spe",
     action: "Réviser maintenant",
     accent: "#7C3AED",
-  },
-  {
-    tag: "Défis du jour",
-    title: "Hydro Tanika",
-    description:
-      "Un défi pour comprendre comment l'eau peut servir à stocker de l'énergie à La Réunion.",
-    href: "/defis-du-jour",
-    action: "Découvrir le défi",
-    accent: "#E11D48",
   },
   {
     tag: "Calcul rapide",
@@ -38,7 +40,7 @@ const actualites = [
     tag: "English Maths",
     title: "5 mots par jour",
     description:
-      "Apprendre le vocabulaire des maths en anglais : point, vertex, angle, fraction…",
+      "Point, vertex, angle, fraction… le vocabulaire des maths en anglais.",
     href: "/english-maths",
     action: "Découvrir",
     accent: "#1D4ED8",
@@ -114,14 +116,14 @@ const classes = [
 ];
  
 const cards = [
-  { href: "/coach-maths-ia",  image: "/images/cards/coach.webp",         label: "Coach Maths IA" },
-  { href: "/parcours",        image: "/images/cards/parcours.webp",       label: "Parcours" },
-  { href: "/calcul-rapide",   image: "/images/cards/calcul-rapide.webp",  label: "Calcul rapide" },
-  { href: "/lecon-du-jour",   image: "/images/cards/lecondujour.webp",    label: "Leçon du jour" },
-  { href: "/defis-du-jour",   image: "/images/cards/defis-du-jour.webp",  label: "Défis du jour" },
-  { href: "/concours-general",image: "/images/cards/concours-general.webp",label: "Concours général" },
-  { href: "/coach-bac-spe",   image: "/images/cards/coach-bac-spe.webp",  label: "Coach Bac Spé Maths" },
-  { href: "/english-maths",   image: "/images/cards/english-maths.webp",  label: "English Maths" },
+  { href: "/coach-maths-ia",   image: "/images/cards/coach.webp",          label: "Coach Maths IA" },
+  { href: "/parcours",         image: "/images/cards/parcours.webp",        label: "Parcours" },
+  { href: "/calcul-rapide",    image: "/images/cards/calcul-rapide.webp",   label: "Calcul rapide" },
+  { href: "/lecon-du-jour",    image: "/images/cards/lecondujour.webp",     label: "Leçon du jour" },
+  { href: "/defis-du-jour",    image: "/images/cards/defis-du-jour.webp",   label: "Défis du jour" },
+  { href: "/concours-general", image: "/images/cards/concours-general.webp",label: "Concours général" },
+  { href: "/coach-bac-spe",    image: "/images/cards/coach-bac-spe.webp",   label: "Coach Bac Spé Maths" },
+  { href: "/english-maths",    image: "/images/cards/english-maths.webp",   label: "English Maths" },
 ];
  
 // ─── Component ───────────────────────────────────────────────────────────────
@@ -154,8 +156,6 @@ export default function AccueilPage() {
       {/* ── 1. HERO ─────────────────────────────────────────────────────── */}
       <section className="relative bg-gradient-to-b from-[#041B33] to-[#062A4F] px-4 pt-5 pb-0 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
- 
-          {/* Image hero — l'image porte déjà tout le message visuel */}
           <div className="relative h-[42vh] min-h-[260px] overflow-hidden rounded-[2rem] border border-white/10 shadow-2xl sm:h-[48vh] sm:min-h-[340px] lg:h-[52vh] lg:min-h-[420px]">
             <Image
               src="/images/accueil-eleveai-reunion.webp"
@@ -165,8 +165,6 @@ export default function AccueilPage() {
               sizes="100vw"
               className="object-cover object-center"
             />
- 
-            {/* Bouton audio uniquement */}
             <div className="absolute right-3 top-3 z-20 sm:right-4 sm:top-4">
               <audio
                 ref={audioRef}
@@ -192,16 +190,11 @@ export default function AccueilPage() {
         </div>
       </section>
  
-      {/* H1 masqué visuellement — pour le SEO, l'image porte le message */}
       <h1 className="sr-only">
         EleveAI – Un vrai parcours d'apprentissage du CM1 à la 3e + Bac Spé Maths
       </h1>
  
       {/* ── 2. DÉMARRAGE RAPIDE ─────────────────────────────────────────── */}
-      {/*
-          Placé juste après le hero : c'est la première question que se pose
-          l'élève — "par où je commence ?"
-      */}
       <section className="bg-gradient-to-b from-[#062A4F] to-[#0B4F7A] px-4 py-8 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-6xl">
           <div className="mb-5">
@@ -212,7 +205,6 @@ export default function AccueilPage() {
               Je commence selon mon besoin
             </h2>
           </div>
- 
           <div className="grid gap-3 grid-cols-2 sm:grid-cols-4">
             {besoins.map((besoin) => (
               <Link
@@ -220,12 +212,10 @@ export default function AccueilPage() {
                 href={besoin.href}
                 className="group overflow-hidden rounded-2xl border border-white/10 bg-[#041B33]/60 shadow-lg backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-white/30 hover:shadow-2xl focus:outline-none focus:ring-4 focus:ring-white/40"
               >
-                {/* Bande colorée */}
                 <div className={`bg-gradient-to-br ${besoin.color} px-4 py-4 text-slate-950`}>
                   <span className="text-2xl">{besoin.icon}</span>
                   <p className="mt-2 text-sm font-black leading-tight">{besoin.title}</p>
                 </div>
-                {/* Action */}
                 <div className="flex items-center justify-between px-4 py-3">
                   <span className="text-xs font-bold text-slate-300">{besoin.action}</span>
                   <span className="text-sm font-black text-white transition-transform group-hover:translate-x-1">→</span>
@@ -236,46 +226,140 @@ export default function AccueilPage() {
         </div>
       </section>
  
-      {/* ── 3. JOURNAL / ACTUALITÉS ──────────────────────────────────────── */}
-      <section className="bg-gradient-to-b from-[#0B4F7A] to-[#0A6B9A] px-4 py-8 sm:px-6 lg:px-8">
+      {/* ── 3. JOURNAL — UNE DE PRESSE ──────────────────────────────────── */}
+      <section className="bg-gradient-to-b from-[#0B4F7A] to-[#0A3F60] px-4 py-8 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-6xl">
-          <div className="mb-5 flex items-center justify-between">
+ 
+          {/* En-tête journal */}
+          <div className="mb-1 flex items-center justify-between border-b border-white/20 pb-3">
             <div>
-              <p className="text-xs font-black uppercase tracking-[0.25em] text-yellow-300">
+              <p className="text-[10px] font-black uppercase tracking-[0.3em] text-yellow-300">
                 Journal EleveAI
               </p>
-              <h2 className="mt-1 text-2xl font-black md:text-3xl">
+              <h2 className="mt-0.5 font-black text-2xl md:text-3xl tracking-tight">
                 Aujourd'hui sur EleveAI
               </h2>
             </div>
-            <span className="rounded-full bg-yellow-300 px-4 py-1.5 text-xs font-black text-[#041B33] shadow">
-              ✨ Actualité
-            </span>
+            <time className="hidden text-[11px] font-bold text-slate-400 sm:block">
+              {new Date().toLocaleDateString("fr-FR", {
+                weekday: "long",
+                day: "numeric",
+                month: "long",
+                year: "numeric",
+              })}
+            </time>
           </div>
  
-          <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
-            {actualites.map((a) => (
-              <Link
-                key={a.href}
-                href={a.href}
-                className="group rounded-2xl border border-white/10 bg-white/90 p-4 text-[#041B33] shadow-lg transition-all hover:-translate-y-1 hover:bg-white hover:shadow-2xl focus:outline-none focus:ring-4 focus:ring-white/50"
-              >
-                <p className="text-[10px] font-black uppercase tracking-[0.2em]" style={{ color: a.accent }}>
-                  {a.tag}
+          {/* Ligne de filet décorative */}
+          <div className="mb-5 flex gap-1">
+            <div className="h-[3px] w-16 bg-yellow-300 rounded-full" />
+            <div className="h-[3px] flex-1 bg-white/10 rounded-full" />
+          </div>
+ 
+          {/* Grille journal : grande UNE à gauche + brèves à droite */}
+          <div className="grid grid-cols-1 gap-4 lg:grid-cols-[1fr_320px]">
+ 
+            {/* Article principal — la photo du Piton */}
+            <Link
+              href={uneJournal.href}
+              className="group relative overflow-hidden rounded-2xl border border-white/10 shadow-2xl transition-all hover:border-orange-400/50 hover:shadow-orange-900/40 hover:shadow-2xl focus:outline-none focus:ring-4 focus:ring-orange-400/50"
+            >
+              {/* Photo pleine hauteur */}
+              <div className="relative h-[300px] sm:h-[380px] lg:h-full lg:min-h-[400px] w-full">
+                <Image
+                  src={uneJournal.image}
+                  alt={uneJournal.title}
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 65vw"
+                  className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                  priority
+                />
+                {/* Dégradé bas */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
+ 
+                {/* Contenu texte sur la photo */}
+                <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-6">
+                  {/* Tag + date */}
+                  <div className="mb-3 flex items-center gap-2">
+                    <span className="rounded-full bg-orange-500 px-3 py-1 text-[10px] font-black uppercase tracking-[0.2em] text-white">
+                      {uneJournal.tag}
+                    </span>
+                    <span className="text-[10px] font-bold text-white/60 uppercase tracking-widest">
+                      {uneJournal.date}
+                    </span>
+                  </div>
+ 
+                  {/* Titre façon manchette */}
+                  <h3 className="text-xl font-black leading-tight text-white sm:text-2xl lg:text-3xl">
+                    {uneJournal.title}
+                  </h3>
+ 
+                  {/* Chapô */}
+                  <p className="mt-2 text-sm leading-relaxed text-white/80 max-w-xl">
+                    {uneJournal.description}
+                  </p>
+ 
+                  {/* CTA */}
+                  <div className="mt-4 inline-flex items-center gap-2 rounded-full bg-orange-500 px-5 py-2.5 text-sm font-black text-white shadow-lg transition-all group-hover:bg-orange-400 group-hover:gap-3">
+                    {uneJournal.action}
+                    <span className="transition-transform group-hover:translate-x-1">→</span>
+                  </div>
+                </div>
+              </div>
+            </Link>
+ 
+            {/* Colonne brèves */}
+            <div className="flex flex-col gap-3">
+ 
+              {/* Bandeau chiffre du jour */}
+              <div className="rounded-2xl border border-orange-500/30 bg-orange-500/10 px-4 py-3">
+                <p className="text-[10px] font-black uppercase tracking-[0.25em] text-orange-300">
+                  Chiffre du jour
                 </p>
-                <h3 className="mt-2 text-base font-black leading-snug">{a.title}</h3>
-                <p className="mt-1.5 text-xs font-semibold leading-relaxed text-slate-600">{a.description}</p>
-                <p className="mt-3 text-xs font-black" style={{ color: a.accent }}>
-                  {a.action} →
+                <p className="mt-1 text-3xl font-black text-white">2 632 m</p>
+                <p className="text-xs font-semibold text-slate-300">
+                  L'altitude du Piton de la Fournaise, l'un des volcans les plus actifs du monde.
                 </p>
-              </Link>
-            ))}
+              </div>
+ 
+              {/* Brèves secondaires */}
+              {secondaires.map((s) => (
+                <Link
+                  key={s.href}
+                  href={s.href}
+                  className="group rounded-2xl border border-white/10 bg-white/90 p-4 text-[#041B33] shadow-lg transition-all hover:-translate-y-0.5 hover:bg-white hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-white/50"
+                >
+                  {/* Filet coloré + tag */}
+                  <div className="flex items-center gap-2 mb-2">
+                    <div
+                      className="h-3 w-1 rounded-full"
+                      style={{ backgroundColor: s.accent }}
+                    />
+                    <p
+                      className="text-[10px] font-black uppercase tracking-[0.2em]"
+                      style={{ color: s.accent }}
+                    >
+                      {s.tag}
+                    </p>
+                  </div>
+                  <h3 className="text-base font-black leading-snug text-[#041B33]">
+                    {s.title}
+                  </h3>
+                  <p className="mt-1 text-xs font-semibold leading-relaxed text-slate-600">
+                    {s.description}
+                  </p>
+                  <p className="mt-3 text-xs font-black" style={{ color: s.accent }}>
+                    {s.action} →
+                  </p>
+                </Link>
+              ))}
+            </div>
           </div>
         </div>
       </section>
  
       {/* ── 4. CHOIX DE CLASSE ───────────────────────────────────────────── */}
-      <section className="bg-gradient-to-b from-[#0A6B9A] to-[#062A4F] px-4 py-8 sm:px-6 lg:px-8">
+      <section className="bg-gradient-to-b from-[#0A3F60] to-[#062A4F] px-4 py-8 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-6xl">
           <div className="mb-5 flex items-end justify-between gap-4">
             <div>
@@ -293,7 +377,6 @@ export default function AccueilPage() {
               Voir toutes les compétences
             </Link>
           </div>
- 
           <div className="grid gap-3 grid-cols-2 sm:grid-cols-3 lg:grid-cols-6">
             {classes.map((c) => (
               <Link
@@ -314,11 +397,7 @@ export default function AccueilPage() {
         </div>
       </section>
  
-      {/* ── 5. DÉCOUVRIR TOUS LES MODULES (cards images) ─────────────────── */}
-      {/*
-          Placée en dernier : ce sont les entrées "découverte"
-          pour ceux qui veulent explorer sans intention précise.
-      */}
+      {/* ── 5. TOUS LES MODULES ──────────────────────────────────────────── */}
       <section className="bg-gradient-to-b from-[#062A4F] to-[#041B33] px-4 py-8 pb-16 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-6xl">
           <div className="mb-5">
@@ -329,7 +408,6 @@ export default function AccueilPage() {
               Tous les espaces
             </h2>
           </div>
- 
           <div className="flex flex-wrap justify-center gap-3">
             {cards.map((card) => (
               <Link
@@ -345,7 +423,6 @@ export default function AccueilPage() {
                   sizes="220px"
                   className="object-cover transition-transform duration-500 group-hover:scale-[1.06]"
                 />
-                {/* Shimmer */}
                 <div className="pointer-events-none absolute -left-20 top-0 h-full w-16 rotate-12 bg-white/25 blur-md transition-transform duration-700 group-hover:translate-x-[300px]" />
               </Link>
             ))}
