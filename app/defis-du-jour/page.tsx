@@ -227,7 +227,7 @@ export default function DefisDuJourPage() {
 
           <div className="border-y border-white/10 bg-slate-950/40">
             <img
-              src={defi.image ?? "/images/defis-du-jour/hydro-tanika.webp"}
+              src={defi.image ?? "/images/defis-du-jour/piton-fournaise.webp"}
               alt={defi.title}
               className="h-auto w-full object-cover"
             />

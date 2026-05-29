@@ -1,345 +1,325 @@
+/* lib/defis-jour/problemes.fixed.ts */
 import type { ProblemeDuJour } from "./types";
-
+ 
 export const problemesFixed: ProblemeDuJour[] = [
   {
-    id: "hydro_tanika_energie_001",
-    title: "Hydro Tanika : une réserve d’énergie pour La Réunion",
-    theme: "Énergie & puissance",
+    id: "piton_fournaise_altitude_001",
+    title: "Piton de la Fournaise : le toit de La Réunion volcanique",
+    theme: "Mesures & altitude",
+    image: "/images/defis-du-jour/piton-fournaise.webp",
+    level: 1,
     statement:
-      "À La Réunion, le projet Hydro Tanika prévoit une station capable de fournir une puissance de 50 MW pendant 8 heures. Pour comprendre ce que cela représente, on utilise la relation : énergie = puissance × durée.",
+      "Le Piton de la Fournaise culmine à 2 632 mètres d'altitude. Le cratère Dolomieu, situé au sommet, a une profondeur d'environ 120 mètres. Un randonneur part du Pas de Bellecombe à 2 311 mètres d'altitude pour rejoindre le sommet.",
     question:
-      "Quelle quantité d’énergie la station peut-elle fournir en 8 heures ? Donne ta réponse en MWh.",
-    expectedAnswer: "400 MWh",
+      "Quelle différence d'altitude le randonneur doit-il gravir pour atteindre le sommet ? Donne ta réponse en mètres.",
+    expectedAnswer: "321",
     explanation:
-      "On utilise la formule : énergie = puissance × durée. La puissance est de 50 MW et la durée est de 8 h. Donc 50 × 8 = 400. La station peut fournir 400 MWh d’énergie.",
+      "On calcule la différence d'altitude : 2 632 − 2 311 = 321 mètres. Le randonneur doit monter 321 mètres de dénivelé positif pour atteindre le sommet du Piton de la Fournaise.",
     directions: [
+      {
+        id: "soustraction",
+        label: "Utiliser la soustraction",
+        type: "guided",
+        content:
+          "La différence d'altitude se calcule en soustrayant l'altitude de départ de l'altitude d'arrivée.\nAltitude sommet : 2 632 m. Altitude départ : 2 311 m.",
+      },
+      {
+        id: "calcul",
+        label: "Faire le calcul",
+        type: "guided",
+        content:
+          "Calcule : 2 632 − 2 311.\nLa réponse doit être donnée en mètres.",
+      },
+      {
+        id: "indice",
+        label: "Demander un indice",
+        type: "hint",
+        content:
+          "Commence par soustraire les unités : 2 − 1 = 1. Puis les dizaines : 3 − 1 = 2. Puis les centaines et milliers.",
+      },
+      {
+        id: "open",
+        label: "Expliquer avec mes mots",
+        type: "open",
+        content:
+          "Explique pourquoi on fait une soustraction pour trouver le dénivelé. Tu peux commencer par : « Pour savoir combien de mètres on monte, on doit... »",
+      },
+    ],
+  },
+ 
+  {
+    id: "piton_fournaise_lave_debit_001",
+    title: "Piton de la Fournaise : la coulée de lave",
+    theme: "Débit & proportionnalité",
+    image: "/images/defis-du-jour/piton-fournaise.webp",
+    level: 2,
+    statement:
+      "Lors d'une éruption du Piton de la Fournaise, une coulée de lave peut avancer à environ 30 mètres par heure sur terrain plat. Une coulée part du cratère et se dirige vers la mer, distante de 6 kilomètres.",
+    question:
+      "En supposant que la coulée avance à vitesse constante, combien d'heures lui faudrait-il pour atteindre la mer ? Donne ta réponse en heures.",
+    expectedAnswer: "200",
+    explanation:
+      "On commence par convertir la distance : 6 km = 6 000 m. Ensuite on divise par la vitesse : 6 000 ÷ 30 = 200. Il faudrait environ 200 heures à la coulée pour atteindre la mer à cette vitesse.",
+    directions: [
+      {
+        id: "conversion",
+        label: "Convertir les kilomètres",
+        type: "guided",
+        content:
+          "Commence par convertir 6 km en mètres.\nRappel : 1 km = 1 000 m.",
+      },
+      {
+        id: "division",
+        label: "Calculer le temps",
+        type: "guided",
+        content:
+          "Temps = Distance ÷ Vitesse.\nDistance = 6 000 m. Vitesse = 30 m/h.",
+      },
+      {
+        id: "indice",
+        label: "Demander un indice",
+        type: "hint",
+        content:
+          "6 000 ÷ 30 = 6 000 ÷ 3 ÷ 10. Commence par 6 000 ÷ 3.",
+      },
+      {
+        id: "open",
+        label: "Expliquer avec mes mots",
+        type: "open",
+        content:
+          "Explique pourquoi on divise la distance par la vitesse pour trouver un temps.",
+      },
+    ],
+  },
+ 
+  {
+    id: "piton_fournaise_volume_lave_001",
+    title: "Piton de la Fournaise : volume de lave émis",
+    theme: "Volume & estimation",
+    image: "/images/defis-du-jour/piton-fournaise.webp",
+    level: 3,
+    statement:
+      "Lors de l'éruption de 2007, l'une des plus importantes de l'histoire récente du Piton de la Fournaise, environ 210 millions de mètres cubes de lave ont été émis en 25 jours.",
+    question:
+      "Quel volume moyen de lave était émis chaque jour ? Donne ta réponse en millions de m³ par jour. Arrondi à l'unité près.",
+    expectedAnswer: "8",
+    explanation:
+      "On divise le volume total par le nombre de jours : 210 ÷ 25 = 8,4. Arrondi à l'unité près, cela fait environ 8 millions de m³ par jour. C'est un débit colossal qui explique la rapidité avec laquelle la coulée a atteint la mer en quelques jours seulement.",
+    directions: [
+      {
+        id: "division",
+        label: "Diviser le volume total",
+        type: "guided",
+        content:
+          "Pour trouver le volume moyen par jour, on divise le volume total par le nombre de jours.\n210 millions ÷ 25 = ?",
+      },
+      {
+        id: "calcul_etape",
+        label: "Calculer étape par étape",
+        type: "guided",
+        content:
+          "Essaie : 210 ÷ 25.\nAstuce : 25 × 8 = 200 et 25 × 9 = 225. Lequel est le plus proche de 210 ?",
+      },
+      {
+        id: "indice",
+        label: "Demander un indice",
+        type: "hint",
+        content:
+          "210 ÷ 25 est entre 8 et 9. Calcule 25 × 8 = 200 et 25 × 8,4 = 210.",
+      },
+      {
+        id: "open",
+        label: "Expliquer avec mes mots",
+        type: "open",
+        content:
+          "Explique comment on trouve une moyenne à partir d'un total et d'un nombre de jours.",
+      },
+    ],
+  },
+ 
+  {
+    id: "piton_fournaise_epaisseur_001",
+    title: "Piton de la Fournaise : la lave recouvre la côte",
+    theme: "Calcul d'épaisseur & grandeurs",
+    image: "/images/defis-du-jour/piton-fournaise.webp",
+    level: 3,
+    statement:
+      "En 2007, la lave a recouvert une surface d'environ 3 km² de côte avant de se jeter dans l'océan Indien. Si le volume émis était de 210 millions de m³ et que la lave s'est répartie uniformément sur cette surface, on peut estimer son épaisseur moyenne.\n\nRappel : Volume = Surface × Épaisseur. On doit d'abord convertir 3 km² en m².",
+    question:
+      "Quelle serait l'épaisseur moyenne de la couche de lave sur cette zone ? Donne ta réponse en mètres. Arrondi à l'unité près.",
+    expectedAnswer: "70",
+    explanation:
+      "On convertit d'abord : 3 km² = 3 × 1 000 000 = 3 000 000 m². Ensuite on utilise la formule : Épaisseur = Volume ÷ Surface = 210 000 000 ÷ 3 000 000 = 70. La couche de lave aurait une épaisseur moyenne d'environ 70 mètres, ce qui est considérable !",
+    directions: [
+      {
+        id: "conversion_surface",
+        label: "Convertir km² en m²",
+        type: "guided",
+        content:
+          "Commence par convertir 3 km² en m².\nRappel : 1 km = 1 000 m, donc 1 km² = 1 000 × 1 000 = 1 000 000 m².",
+      },
       {
         id: "formule",
         label: "Utiliser la formule",
         type: "guided",
         content:
-          "La formule est : énergie = puissance × durée.\nRemplace la puissance par 50 MW et la durée par 8 h.",
+          "Formule : Épaisseur = Volume ÷ Surface.\nVolume = 210 000 000 m³. Surface = 3 000 000 m².",
+      },
+      {
+        id: "indice",
+        label: "Demander un indice",
+        type: "hint",
+        content:
+          "210 000 000 ÷ 3 000 000 = 210 ÷ 3 = 70.",
+      },
+      {
+        id: "open",
+        label: "Expliquer avec mes mots",
+        type: "open",
+        content:
+          "Explique pourquoi on divise le volume par la surface pour trouver une épaisseur.",
+      },
+    ],
+  },
+ 
+  {
+    id: "piton_fournaise_eruptions_001",
+    title: "Piton de la Fournaise : un volcan très actif",
+    theme: "Statistiques & fréquence",
+    image: "/images/defis-du-jour/piton-fournaise.webp",
+    level: 4,
+    statement:
+      "Le Piton de la Fournaise est l'un des volcans les plus actifs au monde. Entre 1998 et 2023, il a connu environ 75 éruptions en 25 ans.",
+    question:
+      "Calcule la fréquence moyenne d'éruptions par année entre 1998 et 2023. Donne ta réponse sous forme décimale arrondie au dixième.",
+    expectedAnswer: "3",
+    explanation:
+      "On divise le nombre total d'éruptions par le nombre d'années : 75 ÷ 25 = 3. Le Piton de la Fournaise a eu en moyenne 3 éruptions par année sur cette période. C'est pour cela qu'il est surnommé « le volcan qui crache du feu ».",
+    directions: [
+      {
+        id: "frequence",
+        label: "Comprendre la fréquence",
+        type: "guided",
+        content:
+          "La fréquence par année = nombre total d'éruptions ÷ nombre d'années.\n75 éruptions ÷ 25 ans = ?",
       },
       {
         id: "calcul",
         label: "Faire le calcul",
         type: "guided",
         content:
-          "Calcule : 50 × 8.\nAttention à l’unité : MW × h donne des MWh.",
+          "Calcule : 75 ÷ 25.\nTu peux simplifier en divisant numérateur et dénominateur par 25.",
       },
       {
         id: "indice",
         label: "Demander un indice",
         type: "hint",
         content:
-          "Commence par multiplier 50 par 8. La réponse doit être exprimée en MWh.",
+          "25 × 3 = 75. Quelle est donc la valeur de 75 ÷ 25 ?",
       },
       {
         id: "open",
         label: "Expliquer avec mes mots",
         type: "open",
         content:
-          "Explique pourquoi on multiplie la puissance par la durée. Tu peux commencer par : « La station fournit 50 MW pendant chaque heure, donc... »",
+          "Explique ce que représente une fréquence d'éruptions. Tu peux commencer par : « Cela signifie qu'en moyenne... »",
       },
     ],
   },
-
+ 
   {
-    id: "hydro_tanika_kwh_foyers_001",
-    title: "Hydro Tanika : combien de foyers alimentés ?",
-    theme: "Conversions & ordre de grandeur",
+    id: "piton_fournaise_co2_001",
+    title: "Piton de la Fournaise : les gaz volcaniques",
+    theme: "Proportionnalité & pourcentages",
+    image: "/images/defis-du-jour/piton-fournaise.webp",
+    level: 4,
     statement:
-      "La station Hydro Tanika pourrait fournir 400 MWh d’énergie. Pour comparer avec la vie quotidienne, on estime qu’un foyer consomme environ 10 kWh par jour.",
+      "Lors d'une éruption, les gaz émis par le Piton de la Fournaise contiennent environ 70 % de vapeur d'eau, 15 % de dioxyde de carbone (CO₂) et 15 % d'autres gaz. En une journée d'éruption intense, la quantité totale de gaz émis est estimée à 200 000 tonnes.",
     question:
-      "Environ combien de foyers pourraient être alimentés pendant une journée avec 400 MWh ?",
-    expectedAnswer: "40000",
+      "Quelle quantité de CO₂ est émise ce jour-là ? Donne ta réponse en tonnes.",
+    expectedAnswer: "30000",
     explanation:
-      "On commence par convertir : 400 MWh = 400 000 kWh, car 1 MWh = 1 000 kWh. Un foyer consomme environ 10 kWh par jour. On calcule donc 400 000 ÷ 10 = 40 000. Hydro Tanika pourrait fournir l’équivalent d’environ 40 000 foyers pendant une journée.",
+      "On cherche 15 % de 200 000 tonnes. On calcule : 200 000 × 15 ÷ 100 = 200 000 × 0,15 = 30 000 tonnes de CO₂ sont émises ce jour-là.",
     directions: [
       {
-        id: "conversion",
-        label: "Convertir les MWh en kWh",
+        id: "pourcentage",
+        label: "Calculer un pourcentage",
         type: "guided",
         content:
-          "Commence par convertir 400 MWh en kWh.\nRappel : 1 MWh = 1 000 kWh.",
-      },
-      {
-        id: "division",
-        label: "Chercher le nombre de foyers",
-        type: "guided",
-        content:
-          "Une fois l’énergie convertie en kWh, divise par la consommation d’un foyer pendant une journée : 10 kWh.",
-      },
-      {
-        id: "questionnement",
-        label: "Répondre étape par étape",
-        type: "guided",
-        content:
-          "1. Combien de kWh représentent 400 MWh ?\n2. Combien consomme environ un foyer en une journée ?\n3. Quelle division faut-il faire ?\n4. Que représente le résultat ?",
-      },
-      {
-        id: "indice",
-        label: "Demander un indice",
-        type: "hint",
-        content:
-          "400 MWh, c’est 400 000 kWh. Il reste à diviser par 10.",
-      },
-      {
-        id: "open",
-        label: "Expliquer avec mes mots",
-        type: "open",
-        content:
-          "Explique pourquoi ce calcul permet d’estimer le nombre de foyers alimentés. Tu peux parler de conversion et d’ordre de grandeur.",
-      },
-    ],
-  },
-
-  {
-    id: "hydro_tanika_volume_heure_001",
-    title: "Hydro Tanika : l’eau du bassin",
-    theme: "Volume & division",
-    statement:
-      "Le projet Hydro Tanika prévoit un bassin pouvant contenir environ 800 000 m³ d’eau. Imaginons que cette eau soit utilisée de manière régulière pendant 8 heures de production.",
-    question:
-      "Quel volume moyen d’eau serait utilisé chaque heure ? Donne ta réponse en m³ par heure.",
-    expectedAnswer: "100000",
-    explanation:
-      "Le bassin contient 800 000 m³. Si ce volume est réparti sur 8 heures, on calcule 800 000 ÷ 8 = 100 000. Le volume moyen utilisé serait donc de 100 000 m³ par heure.",
-    directions: [
-      {
-        id: "situation",
-        label: "Comprendre la situation",
-        type: "guided",
-        content:
-          "On répartit le volume total d’eau sur 8 heures. Il faut donc faire une division.",
+          "Pour trouver 15 % de 200 000 : multiplie 200 000 par 15 puis divise par 100.",
       },
       {
         id: "calcul",
         label: "Faire le calcul",
         type: "guided",
         content:
-          "Calcule : 800 000 ÷ 8.\nLa réponse doit être en m³ par heure.",
-      },
-      {
-        id: "ordre_grandeur",
-        label: "Vérifier l’ordre de grandeur",
-        type: "guided",
-        content:
-          "Vérifie ton résultat : si on utilise 100 000 m³ pendant 8 heures, on obtient bien 800 000 m³.",
+          "200 000 × 15 = 3 000 000. Puis 3 000 000 ÷ 100 = 30 000 tonnes.",
       },
       {
         id: "indice",
         label: "Demander un indice",
         type: "hint",
         content:
-          "Comme 8 × 100 000 = 800 000, le volume moyen par heure est proche de 100 000 m³.",
+          "10 % de 200 000 = 20 000. Et 5 % = 10 000. Donc 15 % = 20 000 + 10 000.",
       },
       {
         id: "open",
         label: "Expliquer avec mes mots",
         type: "open",
         content:
-          "Explique pourquoi on divise 800 000 par 8. Tu peux commencer par : « Comme l’eau est répartie sur 8 heures... »",
+          "Explique pourquoi calculer un pourcentage revient à multiplier par un nombre décimal. Tu peux donner un exemple simple.",
       },
     ],
   },
-
+ 
   {
-    id: "hydro_tanika_volume_minute_001",
-    title: "Hydro Tanika : un débit impressionnant",
-    theme: "Débit & conversion de durée",
-    statement:
-      "Dans le défi précédent, on a estimé que la station pourrait utiliser en moyenne 100 000 m³ d’eau par heure. Une heure contient 60 minutes.",
-    question:
-      "Quel volume moyen d’eau cela représente-t-il par minute ? Arrondis à l’unité près.",
-    expectedAnswer: "1667",
-    explanation:
-      "On sait qu’une heure contient 60 minutes. On calcule donc 100 000 ÷ 60 ≈ 1 666,7. Arrondi à l’unité près, cela fait environ 1 667 m³ par minute.",
-    directions: [
-      {
-        id: "conversion_temps",
-        label: "Passer de l’heure à la minute",
-        type: "guided",
-        content:
-          "On connaît le volume par heure. Pour trouver le volume par minute, il faut diviser par 60.",
-      },
-      {
-        id: "calcul",
-        label: "Faire la division",
-        type: "guided",
-        content:
-          "Calcule : 100 000 ÷ 60.\nLe résultat n’est pas entier, donc on arrondit à l’unité près.",
-      },
-      {
-        id: "sens",
-        label: "Donner du sens au résultat",
-        type: "guided",
-        content:
-          "Le résultat représente le volume d’eau moyen qui passerait en une seule minute.",
-      },
-      {
-        id: "indice",
-        label: "Demander un indice",
-        type: "hint",
-        content:
-          "100 000 ÷ 60 est un peu plus grand que 1 600, car 60 × 1 600 = 96 000.",
-      },
-      {
-        id: "open",
-        label: "Expliquer avec mes mots",
-        type: "open",
-        content:
-          "Explique pourquoi le volume par minute est beaucoup plus petit que le volume par heure.",
-      },
-    ],
-  },
-
-  {
-    id: "hydro_tanika_surface_bassin_001",
-    title: "Hydro Tanika : quelle taille pour le bassin ?",
-    theme: "Aires & hectares",
-    statement:
-      "Le bassin du projet Hydro Tanika occuperait une surface d’environ 13 hectares. On rappelle que 1 hectare = 10 000 m².",
-    question:
-      "Quelle surface cela représente-t-il en m² ?",
-    expectedAnswer: "130000",
-    explanation:
-      "On sait que 1 hectare = 10 000 m². Donc 13 hectares = 13 × 10 000 = 130 000 m². Le bassin occuperait environ 130 000 m².",
-    directions: [
-      {
-        id: "conversion",
-        label: "Utiliser la conversion",
-        type: "guided",
-        content:
-          "Rappel : 1 hectare = 10 000 m².\nIl faut donc multiplier le nombre d’hectares par 10 000.",
-      },
-      {
-        id: "calcul",
-        label: "Faire le calcul",
-        type: "guided",
-        content:
-          "Calcule : 13 × 10 000.\nLa réponse doit être donnée en m².",
-      },
-      {
-        id: "comparaison",
-        label: "Imaginer la taille",
-        type: "guided",
-        content:
-          "Pour te représenter la surface, pense qu’un terrain de football mesure environ 7 000 m². Le bassin ferait donc beaucoup plus qu’un seul terrain.",
-      },
-      {
-        id: "indice",
-        label: "Demander un indice",
-        type: "hint",
-        content:
-          "13 hectares, c’est 13 fois 10 000 m².",
-      },
-      {
-        id: "open",
-        label: "Expliquer avec mes mots",
-        type: "open",
-        content:
-          "Explique pourquoi l’hectare est une unité utile pour parler de grandes surfaces.",
-      },
-    ],
-  },
-
-  {
-    id: "hydro_tanika_comparaison_ville_001",
-    title: "Hydro Tanika : une ville pendant une journée ?",
-    theme: "Comparaison & estimation",
-    statement:
-      "On estime qu’Hydro Tanika pourrait fournir environ 400 000 kWh d’énergie. Un foyer consomme environ 10 kWh par jour. Imaginons une ville de 25 000 foyers.",
-    question:
-      "L’énergie fournie serait-elle suffisante pour alimenter cette ville pendant une journée ? Réponds oui ou non, puis justifie.",
-    expectedAnswer: "oui",
-    explanation:
-      "Une ville de 25 000 foyers consomme environ 25 000 × 10 = 250 000 kWh par jour. Hydro Tanika peut fournir environ 400 000 kWh. Comme 400 000 est supérieur à 250 000, l’énergie serait suffisante pour alimenter cette ville pendant une journée.",
-    directions: [
-      {
-        id: "besoin_ville",
-        label: "Calculer le besoin de la ville",
-        type: "guided",
-        content:
-          "Chaque foyer consomme environ 10 kWh par jour. Pour 25 000 foyers, calcule : 25 000 × 10.",
-      },
-      {
-        id: "comparaison",
-        label: "Comparer deux quantités",
-        type: "guided",
-        content:
-          "Compare l’énergie disponible, 400 000 kWh, avec le besoin de la ville.",
-      },
-      {
-        id: "phrase",
-        label: "Rédiger la justification",
-        type: "guided",
-        content:
-          "Ta réponse doit contenir une comparaison : 400 000 kWh est supérieur ou inférieur à 250 000 kWh.",
-      },
-      {
-        id: "indice",
-        label: "Demander un indice",
-        type: "hint",
-        content:
-          "La ville aurait besoin d’environ 250 000 kWh. Hydro Tanika pourrait fournir 400 000 kWh.",
-      },
-      {
-        id: "open",
-        label: "Expliquer avec mes mots",
-        type: "open",
-        content:
-          "Explique pourquoi une estimation suffit ici. Tu peux utiliser les mots : environ, supérieur, suffisant.",
-      },
-    ],
-  },
-
-  {
-    id: "hydro_tanika_synthese_001",
-    title: "Hydro Tanika : raconter les nombres clés",
+    id: "piton_fournaise_synthese_001",
+    title: "Piton de la Fournaise : raconter les chiffres du volcan",
     theme: "Synthèse & argumentation",
+    image: "/images/defis-du-jour/piton-fournaise.webp",
+    level: 5,
     statement:
-      "Cette semaine, tu as étudié plusieurs nombres du projet Hydro Tanika : 50 MW de puissance, 8 heures de production, 400 MWh d’énergie, 800 000 m³ d’eau et un bassin d’environ 13 hectares.",
+      "Cette semaine, tu as travaillé avec des données réelles sur le Piton de la Fournaise : son altitude de 2 632 m, des coulées de lave à 30 m/h, 210 millions de m³ de lave en 2007, une épaisseur de 70 m de lave sur la côte, 3 éruptions par an en moyenne et 30 000 tonnes de CO₂ par jour lors d'une éruption.",
     question:
-      "Écris une courte explication pour montrer en quoi Hydro Tanika pourrait aider La Réunion à stocker et restituer de l’énergie.",
+      "Écris une courte présentation du Piton de la Fournaise en utilisant au moins 3 de ces données chiffrées. Montre pourquoi c'est un volcan exceptionnel.",
     expectedAnswer: "explication",
     explanation:
-      "Une bonne réponse doit expliquer que la station utilise l’eau comme une réserve d’énergie. Quand il y a de l’énergie disponible, l’eau peut être pompée vers un bassin en altitude. Quand on a besoin d’électricité, l’eau redescend et permet de produire de l’énergie. Les nombres clés montrent l’ampleur du projet : 50 MW pendant 8 heures, soit 400 MWh, avec un bassin de 800 000 m³.",
+      "Une bonne réponse utilise au moins 3 données de la semaine et explique leur signification. Par exemple : le Piton de la Fournaise culmine à 2 632 m et connaît en moyenne 3 éruptions par an. En 2007, il a émis 210 millions de m³ de lave en seulement 25 jours, formant une couche de 70 mètres sur la côte. Ces chiffres montrent à la fois la puissance du volcan et son activité exceptionnelle.",
     directions: [
       {
         id: "mots_cles",
         label: "Utiliser les mots clés",
         type: "guided",
         content:
-          "Essaie d’utiliser les mots : eau, bassin, altitude, énergie, électricité, La Réunion.",
+          "Essaie d'utiliser les mots : altitude, éruption, lave, coulée, gaz, La Réunion, exceptionnel.",
       },
       {
         id: "nombres_cles",
-        label: "Réutiliser les nombres importants",
+        label: "Choisir les nombres importants",
         type: "guided",
         content:
-          "Tu peux citer quelques nombres : 50 MW, 8 heures, 400 MWh, 800 000 m³.",
+          "Choisis au moins 3 nombres parmi : 2 632 m, 30 m/h, 210 millions de m³, 70 m, 3 éruptions/an, 30 000 tonnes.",
       },
       {
         id: "structure",
         label: "Structurer ma réponse",
         type: "guided",
         content:
-          "Tu peux écrire ta réponse en 3 phrases :\n1. Le principe du projet.\n2. Les nombres importants.\n3. Pourquoi cela peut être utile.",
+          "Écris en 3 phrases :\n1. Présente le volcan (altitude, localisation).\n2. Décris une éruption avec des chiffres.\n3. Explique pourquoi c'est exceptionnel.",
       },
       {
         id: "indice",
         label: "Demander un indice",
         type: "hint",
         content:
-          "Pense à une batterie : Hydro Tanika ne crée pas seulement de l’énergie, il aide surtout à la stocker puis à la restituer quand on en a besoin.",
+          "Compare les données du Piton de la Fournaise avec des éléments de la vie quotidienne pour que le lecteur comprenne l'ampleur du phénomène.",
       },
       {
         id: "open",
         label: "Expliquer avec mes mots",
         type: "open",
         content:
-          "Rédige une explication claire, comme si tu devais expliquer le projet à un camarade de 6e.",
+          "Rédige comme si tu expliquais à un élève de 6e qui n'a jamais entendu parler du Piton de la Fournaise.",
       },
     ],
   },

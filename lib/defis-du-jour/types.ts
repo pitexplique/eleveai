@@ -1,3 +1,4 @@
+/* lib/defis-jour/types.ts */
 export type ProblemeDirectionType = "guided" | "hint" | "open";
 
 export type ProblemeDirection = {
