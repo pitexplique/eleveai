@@ -59,7 +59,9 @@ export function getDefiQuestionForNotion(args: {
   const candidates = bank.filter(
     (item) =>
       item.notionId === args.notionId &&
-      item.difficulty === 3
+      item.difficulty >= 2 &&
+      item.difficulty <= 3 &&
+      item.format !== "open"
   );
 
   if (candidates.length === 0) return null;

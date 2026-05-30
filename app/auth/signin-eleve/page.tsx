@@ -309,8 +309,13 @@ export default function SignInElevePage() {
                 <input
                   type={showPassword ? "text" : "password"}
                   value={motDePasse}
-                  onChange={(e) => setMotDePasse(e.target.value)}
-                  placeholder="Ex : coco banane"
+                  onChange={(e) => setMotDePasse(e.target.value.toUpperCase())}
+                  placeholder="Ex : GRANDRAID"
+                  autoCapitalize="characters"
+                  autoCorrect="off"
+                  autoComplete="off"
+                  spellCheck={false}
+                  style={{ textTransform: "uppercase" }}
                   className="w-full rounded-2xl border border-slate-300 bg-white px-4 py-4 pr-12 text-base font-bold outline-none focus:border-emerald-500 focus:ring-4 focus:ring-emerald-100"
                 />
                 <button
