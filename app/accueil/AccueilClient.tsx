@@ -19,6 +19,15 @@ const uneJournal = {
  
 const secondaires = [
   {
+    tag: "🎯 Brevet dans 30 jours",
+    title: "Sprint Brevet Maths",
+    description:
+      "Fractions, Pythagore, probabilités, équations… 30 jours pour tout réviser et arriver serein(e) au brevet.",
+    href: "/coach-brevet",
+    action: "Commencer le sprint",
+    accent: "#059669",
+  },
+  {
     tag: "Bac Spé Maths",
     title: "Sprint 16 juin",
     description:
@@ -98,6 +107,13 @@ const besoins = [
     color: "from-yellow-400 to-orange-500",
   },
   {
+    title: "Je prépare le brevet",
+    href: "/coach-brevet",
+    action: "Sprint 30 jours",
+    icon: "📚",
+    color: "from-emerald-400 to-teal-600",
+  },
+  {
     title: "Je prépare le bac spé maths",
     href: "/coach-bac-spe",
     action: "Sprint 16 juin",
@@ -122,6 +138,7 @@ const cards = [
   { href: "/lecon-du-jour",    image: "/images/cards/lecondujour.webp",     label: "Leçon du jour" },
   { href: "/defis-du-jour",    image: "/images/cards/defis-du-jour.webp",   label: "Défis du jour" },
   { href: "/concours-general", image: "/images/cards/concours-general.webp",label: "Concours général" },
+  { href: "/coach-brevet",     image: "/images/cards/coach-bac-spe.webp",   label: "Coach Brevet Maths" },
   { href: "/coach-bac-spe",    image: "/images/cards/coach-bac-spe.webp",   label: "Coach Bac Spé Maths" },
   { href: "/english-maths",    image: "/images/cards/english-maths.webp",   label: "English Maths" },
 ];

@@ -11,12 +11,12 @@ import {
   Menu,
   X,
   Home,
-  BadgeCheck,
   GraduationCap,
   LogOut,
   Flame,
   Puzzle,
   Trophy,
+  BookOpen,
 } from "lucide-react";
 import { useEleve } from "@/context/EleveContext";
 
@@ -143,6 +143,19 @@ export default function Header() {
           </Link>
 
           <Link
+            href="/coach-brevet"
+            className={`relative ${linkClass(
+              isActive(pathname, "/coach-brevet")
+            )}`}
+          >
+            <BookOpen className="h-4 w-4 text-emerald-300" />
+            Brevet
+            <span className="absolute -right-2 -top-2 rounded-full bg-emerald-400 px-1.5 text-[10px] font-black text-[#041B33]">
+              J−30
+            </span>
+          </Link>
+
+          <Link
             href="/coach-bac-spe"
             className={`relative ${linkClass(
               isActive(pathname, "/coach-bac-spe")
@@ -194,14 +207,6 @@ export default function Header() {
           >
             <Puzzle className="h-4 w-4 text-pink-300" />
             Défis 974
-          </Link>
-
-          <Link
-            href="/optimiseur"
-            className={linkClass(isActive(pathname, "/optimiseur"))}
-          >
-            <BadgeCheck className="h-4 w-4 text-amber-300" />
-            Valéria
           </Link>
 
           {/* AUTH */}
@@ -284,6 +289,18 @@ export default function Header() {
             >
               <Home className="h-5 w-5" />
               Accueil
+            </Link>
+
+            <Link
+              href="/coach-brevet"
+              className={mobileCardClass(
+                isActive(pathname, "/coach-brevet"),
+                "bg-gradient-to-r from-emerald-400 to-teal-500",
+                "text-[#041B33]"
+              )}
+            >
+              <BookOpen className="h-5 w-5" />
+              Brevet Maths · J−30
             </Link>
 
             <Link
@@ -374,18 +391,6 @@ export default function Header() {
             >
               <Puzzle className="h-5 w-5" />
               Défis 974
-            </Link>
-
-            <Link
-              href="/optimiseur"
-              className={mobileCardClass(
-                isActive(pathname, "/optimiseur"),
-                "bg-gradient-to-r from-amber-400 to-yellow-500",
-                "text-[#041B33]"
-              )}
-            >
-              <BadgeCheck className="h-5 w-5" />
-              Valéria
             </Link>
 
             {eleve ? (
