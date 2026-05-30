@@ -410,6 +410,393 @@ EleveAI propose un **Coach Bac Spé** structuré sur 21 jours avec des automatis
 👉 [Commencer le sprint Bac Spé](/coach-bac-spe)
 `,
   },
+
+  // ─── 4 NOUVEAUX ARTICLES PRIORITAIRES ───────────────────────────────────────
+
+  {
+    slug: "brevet-maths-2026-la-reunion",
+    title: "Brevet maths 2026 à La Réunion — tout ce qu'il faut savoir",
+    description:
+      "Programme, notions clés, calendrier, conseils de révision et ressources pour préparer le brevet de maths 2026 à La Réunion.",
+    date: "2026-05-31",
+    tags: ["brevet", "maths", "2026", "La Réunion", "3e", "révisions", "collège"],
+    audience: "parents",
+    niveau: "3e",
+    matiere: "Maths",
+    resumeIA: [
+      "Public : élèves de 3e et parents à La Réunion.",
+      "Informations pratiques sur le brevet maths 2026.",
+      "Programme, conseils de révision, ressources EleveAI.",
+    ],
+    content: `
+# Brevet maths 2026 à La Réunion — tout ce qu'il faut savoir
+
+Le brevet des collèges approche. Voici tout ce que les élèves de 3e et leurs parents doivent savoir pour aborder l'épreuve de maths dans les meilleures conditions.
+
+## Quand a lieu l'épreuve ?
+
+Le brevet des collèges 2026 se déroule en juin. L'épreuve de mathématiques dure **2 heures**, avec calculatrice autorisée pour la deuxième partie.
+
+À La Réunion, les dates sont alignées sur le calendrier national — consultez le site de votre académie pour les horaires exacts.
+
+## Comment est notée l'épreuve ?
+
+L'épreuve de maths est notée sur **100 points** :
+
+- **Partie 1** (sans calculatrice, ~30 min) : automatismes, calculs rapides, QCM
+- **Partie 2** (avec calculatrice, ~1h30) : exercices de géométrie, algèbre, statistiques, problème
+
+Le coefficient de maths est **élevé** — c'est une des épreuves les plus importantes du brevet.
+
+## Ce que le programme évalue
+
+### Nombres et calculs
+- Fractions, puissances, racines carrées, nombres relatifs
+- Notation scientifique
+- Calculs avec les pourcentages
+
+### Algèbre
+- Développement, factorisation, identités remarquables (a²−b², (a+b)²)
+- Équations du 1er degré, systèmes d'équations
+- Inéquations
+
+### Géométrie
+- **Théorème de Pythagore** et sa réciproque
+- **Théorème de Thalès** : calculer une longueur inconnue
+- **Trigonométrie** : sin, cos, tan dans un triangle rectangle
+- Transformations (symétries, translations, rotations)
+- Volumes : cylindre, cône, sphère, pyramide
+
+### Fonctions
+- Fonctions affines : lecture graphique, pente, ordonnée à l'origine
+- Tableau de valeurs, représentation graphique
+
+### Statistiques et probabilités
+- Moyenne, médiane, étendue
+- Probabilités : événements, complémentaire, arbre
+- Lecture de tableaux et diagrammes
+
+## Les pièges les plus fréquents
+
+1. **Oublier les unités** dans les calculs de volume (cm³, pas cm)
+2. **Additionner les dénominateurs** des fractions (1/2 + 1/3 ≠ 2/5)
+3. **Ne pas vérifier** si un triangle est bien rectangle avant d'appliquer Pythagore
+4. **Confondre image et antécédent** d'une fonction
+5. **Inverser le sens de l'inégalité** en divisant par un nombre négatif
+
+## Plan de révision sur 30 jours
+
+Le brevet approche ? Voici comment organiser les 30 derniers jours :
+
+- **Semaines 1–2** : Algèbre et calcul numérique (fractions, équations, puissances)
+- **Semaine 3** : Géométrie (Pythagore, Thalès, trigonométrie, volumes)
+- **Semaine 4** : Fonctions, pourcentages, statistiques et probabilités
+- **Semaines 5–6** : Révisions générales + sujets complets chronométrés
+
+## Ressources pour réviser
+
+EleveAI propose un **Coach Brevet** structuré sur 30 jours, spécialement conçu pour les élèves de 3e :
+
+- Automatismes quotidiens (fractions, puissances, équations…)
+- Problèmes guidés pas à pas
+- Sujets express chronométrés pour simuler les conditions du brevet
+- Bilan de notions pour identifier les points faibles
+
+👉 [Commencer le sprint Brevet EleveAI](/coach-brevet)
+👉 [Faire un bilan de mes notions](/parcours)
+`,
+  },
+
+  {
+    slug: "aider-enfant-maths-college-sans-etre-prof",
+    title: "Comment aider son enfant en maths au collège sans être prof",
+    description:
+      "Vous voulez aider votre enfant en maths mais vous ne savez pas comment ? Voici des conseils concrets, adaptés aux parents, pour accompagner sans stresser.",
+    date: "2026-05-31",
+    tags: ["parents", "collège", "maths", "aide", "soutien scolaire", "révisions"],
+    audience: "parents",
+    niveau: "Collège",
+    matiere: "Maths",
+    resumeIA: [
+      "Public : parents d'élèves de collège.",
+      "Conseils pratiques pour accompagner sans remplacer le prof.",
+      "Ressources EleveAI pour un suivi autonome.",
+    ],
+    content: `
+# Comment aider son enfant en maths au collège sans être prof
+
+Votre enfant rentre avec des notes en maths qui inquiètent. Vous voulez l'aider, mais vous ne vous souvenez plus de Pythagore ni des équations du 1er degré. Pas de panique — voici comment être utile sans avoir un bac +5 en maths.
+
+## Ce que vous pouvez faire sans rien connaître aux maths
+
+### 1. Créer un cadre de travail régulier
+
+La régularité est **plus importante que la durée**. 20 minutes chaque soir valent mieux qu'une longue session de 3 heures le week-end.
+
+Installez votre enfant dans un endroit calme, sans téléphone, avec son matériel. Votre rôle : être présent, pas expert.
+
+### 2. Poser des questions plutôt qu'expliquer
+
+Même si vous ne connaissez pas la réponse, vous pouvez demander :
+
+- "Tu peux m'expliquer ce que tu fais ?"
+- "Pourquoi tu fais ça à cette étape ?"
+- "Tu es sûr(e) ? Comment tu vérifies ?"
+
+Expliquer à voix haute force l'élève à comprendre vraiment — c'est une des méthodes les plus efficaces en pédagogie.
+
+### 3. Vérifier le travail sans corriger
+
+Comparez les résultats de votre enfant avec le corrigé du professeur. Si une réponse est différente, demandez : "Tu vois où ça diverge ?" Ne corrigez pas vous-même — laissez-le trouver.
+
+### 4. Repérer les notions fragiles
+
+Si votre enfant fait toujours des erreurs sur le même type d'exercice (fractions, équations, Pythagore…), c'est une notion fragile. Notez-la pour qu'il la retravaille en priorité.
+
+## Ce que vous ne devez pas faire
+
+- **Faire les devoirs à sa place** — ça n'apprend rien et ça crée une dépendance
+- **S'énerver** — les maths génèrent déjà de l'anxiété chez beaucoup d'élèves
+- **Comparer** avec un frère, une sœur ou un ami
+
+## Et si vous ne comprenez vraiment rien ?
+
+C'est tout à fait normal. Les programmes ont évolué. Dans ce cas, le mieux est de donner à votre enfant un **outil autonome** qu'il peut utiliser seul :
+
+- Un outil qui lui explique les notions à son rythme
+- Qui lui pose des questions pour qu'il cherche avant de voir la solution
+- Qui garde une trace de ses progrès pour que vous puissiez suivre
+
+C'est exactement ce que propose EleveAI.
+
+## Suivre la progression de votre enfant avec EleveAI
+
+Quand votre enfant est connecté à EleveAI avec son code élève, tous ses résultats sont enregistrés :
+
+- Notions maîtrisées 🟢, à revoir 🟡, fragiles 🔴
+- Scores en calcul rapide, parcours, défis du jour
+- Progression visible dans un tableau de bord
+
+Vous n'avez pas besoin d'être prof pour voir si votre enfant progresse.
+
+👉 [Espace parents EleveAI](/espace-parents)
+👉 [Connexion élève](/auth/signin-eleve)
+`,
+  },
+
+  {
+    slug: "calcul-mental-5-minutes-par-jour",
+    title: "Calcul mental : pourquoi s'entraîner 5 minutes par jour suffit",
+    description:
+      "Tables de multiplication, fractions, divisions… Le calcul mental s'améliore avec des entraînements courts et réguliers. Voici la méthode et les exercices pour progresser.",
+    date: "2026-05-31",
+    tags: ["calcul mental", "automatismes", "collège", "maths", "méthode", "régularité"],
+    audience: "eleves",
+    niveau: "CM1 → 3e",
+    matiere: "Maths",
+    resumeIA: [
+      "Public : élèves du primaire et collège, parents.",
+      "Méthode : entraînement court et régulier plus efficace que les longues sessions.",
+      "Lien vers le module Calcul rapide d'EleveAI.",
+    ],
+    content: `
+# Calcul mental : pourquoi s'entraîner 5 minutes par jour suffit
+
+Le calcul mental n'est pas un don. C'est une compétence qui s'entraîne — et la bonne nouvelle, c'est qu'il ne faut pas des heures pour progresser.
+
+## Pourquoi le calcul mental est important
+
+Le calcul mental, ce ne sont pas seulement les tables de multiplication. C'est la capacité à **faire des calculs rapidement et sans erreur**, ce qui aide pour :
+
+- Gagner du temps sur les examens
+- Détecter les erreurs dans ses résultats ("ce résultat semble trop grand")
+- Comprendre les fractions, les pourcentages, les proportions
+- Suivre les explications du professeur sans décrocher
+
+Un élève qui doit compter sur les doigts pour faire 7×8 passe trop de temps sur les calculs de base et n'a plus assez d'énergie mentale pour le raisonnement.
+
+## La méthode des 5 minutes par jour
+
+Des études en sciences cognitives montrent que l'apprentissage par **petites sessions répétées** est bien plus efficace qu'une longue session occasionnelle.
+
+Pour le calcul mental, ça veut dire :
+
+✅ **5 minutes chaque jour** > 1 heure le dimanche
+
+Pourquoi ? Parce que le cerveau consolide les automatismes pendant la nuit. Chaque session courte renforce ce qui a été appris la veille.
+
+## Ce qu'il faut travailler selon le niveau
+
+### CM1 – CM2
+- Tables de multiplication (2 à 9, puis 10 à 12)
+- Additions et soustractions jusqu'à 100
+- Doubles et moitiés
+
+### 6e – 5e
+- Tables de multiplication solides
+- Calculs avec les décimaux (3,5 × 4, 12 ÷ 0,4…)
+- Fractions simples (1/2, 1/4, 3/4)
+
+### 4e – 3e
+- Fractions : addition, multiplication, simplification
+- Puissances de 10
+- Pourcentages courants (10 %, 25 %, 50 %)
+- Priorités opératoires
+
+## Les erreurs classiques à éviter
+
+1. **Réviser uniquement les tables faciles** (2, 5, 10) — travaillez les 7, 8, 9
+2. **S'entraîner irrégulièrement** — mieux vaut 3 min/jour que 30 min/semaine
+3. **Calculer trop lentement** — le but est l'automatisme, pas la réflexion
+
+## S'entraîner avec EleveAI
+
+EleveAI propose un module **Calcul rapide** : 7 questions en 5 minutes, avec un chronomètre. Les scores sont enregistrés pour suivre les progrès session par session.
+
+C'est exactement le format idéal pour une session d'entraînement quotidienne.
+
+👉 [Commencer le calcul rapide](/calcul-rapide)
+`,
+  },
+
+  {
+    slug: "pythagore-thales-trigo-brevet",
+    title: "Thalès, Pythagore, trigonométrie — les 3 théorèmes du brevet expliqués",
+    description:
+      "Ces 3 théorèmes tombent presque toujours au brevet de maths. Voici comment les reconnaître, les appliquer et ne plus les confondre.",
+    date: "2026-05-31",
+    tags: ["Pythagore", "Thalès", "trigonométrie", "brevet", "3e", "géométrie", "maths"],
+    audience: "eleves",
+    niveau: "3e",
+    matiere: "Maths",
+    resumeIA: [
+      "Public : élèves de 3e préparant le brevet.",
+      "Les 3 théorèmes de géométrie incontournables du brevet.",
+      "Méthode claire + exemples + liens vers EleveAI.",
+    ],
+    content: `
+# Thalès, Pythagore, trigonométrie — les 3 théorèmes du brevet expliqués
+
+Ces trois théorèmes apparaissent dans **presque tous les sujets de brevet**. Si tu les maîtrises vraiment, tu gagnes facilement 20 à 30 points sur l'épreuve de géométrie.
+
+---
+
+## 1. Le théorème de Pythagore
+
+### Ce que ça dit
+
+Dans un triangle **rectangle**, le carré de l'hypoténuse est égal à la somme des carrés des deux autres côtés.
+
+$$c^2 = a^2 + b^2$$
+
+où **c est l'hypoténuse** (le côté en face de l'angle droit).
+
+### Comment l'utiliser
+
+**Calculer l'hypoténuse** :
+- Triangle rectangle en A, avec AB = 3 cm et AC = 4 cm
+- BC² = AB² + AC² = 9 + 16 = 25
+- **BC = 5 cm**
+
+**Calculer un côté de l'angle droit** :
+- Hypoténuse BC = 13 cm, côté AB = 5 cm
+- AC² = BC² − AB² = 169 − 25 = 144
+- **AC = 12 cm**
+
+### La réciproque (piège fréquent au brevet)
+
+Si c² = a² + b², alors le triangle est rectangle.
+
+> Un triangle a des côtés 8, 15 et 17. Est-il rectangle ?
+> 17² = 289 et 8² + 15² = 64 + 225 = 289 ✅ → Il est rectangle.
+
+### Erreurs à éviter
+- Appliquer Pythagore sur un triangle qui n'est **pas** rectangle
+- Oublier de prendre la racine carrée à la fin
+
+---
+
+## 2. Le théorème de Thalès
+
+### Ce que ça dit
+
+Si deux droites parallèles coupent deux sécantes, elles découpent des segments **proportionnels**.
+
+### Comment l'utiliser
+
+Dans un triangle ABC, si D est sur AB et E est sur AC avec DE ∥ BC :
+
+$$\frac{AD}{AB} = \frac{AE}{AC} = \frac{DE}{BC}$$
+
+**Exemple** :
+- AD = 3, DB = 2, DE = 4,5 et on cherche BC
+- AB = AD + DB = 5
+- AD/AB = DE/BC → 3/5 = 4,5/BC → **BC = 7,5 cm**
+
+### Reconnaître quand utiliser Thalès
+
+Thalès s'utilise quand :
+- Il y a deux droites **parallèles** mentionnées dans l'énoncé
+- On cherche une longueur inconnue dans une figure avec des triangles emboîtés
+
+### Erreurs à éviter
+- Oublier de vérifier que les droites sont bien parallèles
+- Mélanger les rapports (AD/DB ≠ AD/AB)
+
+---
+
+## 3. La trigonométrie
+
+### Ce que ça dit
+
+Dans un triangle rectangle, les rapports entre les côtés et les angles sont constants.
+
+Pour un angle aigu α dans un triangle rectangle :
+
+$$\cos(α) = \frac{\text{côté adjacent}}{\text{hypoténuse}}$$
+
+$$\sin(α) = \frac{\text{côté opposé}}{\text{hypoténuse}}$$
+
+$$\tan(α) = \frac{\text{côté opposé}}{\text{côté adjacent}}$$
+
+### Le moyen mnémotechnique : **SOH CAH TOA**
+- **S**in = **O**pposé / **H**ypoténuse
+- **C**os = **A**djacent / **H**ypoténuse
+- **T**an = **O**pposé / **A**djacent
+
+### Exemple
+
+Triangle rectangle en A, hypoténuse BC = 10 cm, angle en B = 35°.
+
+Cherche AB (côté adjacent à B) :
+$$\cos(35°) = \frac{AB}{BC} → AB = 10 × \cos(35°) ≈ 10 × 0{,}819 ≈ 8{,}19 \text{ cm}$$
+
+### Erreurs à éviter
+- Confondre côté adjacent et côté opposé selon l'angle choisi
+- Utiliser sin au lieu de cos (ou inversement)
+- Oublier de mettre la calculatrice en mode degrés
+
+---
+
+## Comment les reconnaître dans un sujet de brevet
+
+| Situation | Théorème à utiliser |
+|---|---|
+| Triangle rectangle, on cherche une longueur | **Pythagore** |
+| Triangle avec droites parallèles, on cherche une longueur | **Thalès** |
+| Triangle rectangle, on connaît un angle et on cherche un côté | **Trigonométrie** |
+| On veut vérifier si un triangle est rectangle | **Réciproque de Pythagore** |
+
+---
+
+## Entraîne-toi sur ces notions
+
+EleveAI propose des exercices sur Pythagore, Thalès et la trigonométrie dans le Coach Brevet et le Coach Maths IA.
+
+👉 [Coach Brevet — Sprint 30 jours](/coach-brevet)
+👉 [Coach Maths IA — Géométrie 3e](/coach-maths-ia?classe=3e)
+`,
+  },
 ];
 
 export function getAllBlogPosts(): BlogPost[] {
