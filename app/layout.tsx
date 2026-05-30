@@ -6,6 +6,7 @@ import "katex/dist/katex.min.css";
 import { Analytics } from "@vercel/analytics/react";
 import DevBanner from "@/components/DevBanner";
 import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 import { EleveProvider } from "@/context/EleveContext";
 import RemerciementsBar from "@/components/remerciements/RemerciementsBar";
 
@@ -160,6 +161,7 @@ export default function RootLayout({
 
           {children}
 
+          <Footer />
           <RemerciementsBar />
         </EleveProvider>
 

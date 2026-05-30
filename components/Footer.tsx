@@ -1,189 +1,155 @@
 // components/Footer.tsx
 import Link from "next/link";
 
+const outils = [
+  { label: "Coach Maths IA",   href: "/coach-maths-ia" },
+  { label: "Parcours",         href: "/parcours" },
+  { label: "Coach Brevet",     href: "/coach-brevet" },
+  { label: "Coach Bac Spé",    href: "/coach-bac-spe" },
+  { label: "Calcul rapide",    href: "/calcul-rapide" },
+  { label: "English Maths",    href: "/english-maths" },
+  { label: "Défis du jour",    href: "/defis-du-jour" },
+  { label: "Concours général", href: "/concours-general" },
+];
+
+const espaces = [
+  { label: "Espace élèves",  href: "/espace-eleves" },
+  { label: "Espace parents", href: "/espace-parents" },
+  { label: "Espace profs",   href: "/espace-profs" },
+  { label: "Connexion élève / prof", href: "/auth/signin-eleve" },
+];
+
+const infos = [
+  { label: "Pourquoi EleveAI",  href: "/pourquoi-eleveai" },
+  { label: "Qui sommes-nous",   href: "/qui-sommes-nous" },
+  { label: "Blog",              href: "/blog" },
+  { label: "FAQ",               href: "/faq" },
+  { label: "Contact",           href: "/contact" },
+];
+
+const legal = [
+  { label: "Mentions légales",        href: "/mentions-legales" },
+  { label: "Politique de confidentialité", href: "/politique-confidentialite" },
+  { label: "CGU",                     href: "/cgu" },
+];
+
 export default function Footer() {
   return (
-    <footer className="mt-12 border-t border-slate-800 bg-slate-950">
-      <div className="mx-auto max-w-6xl px-4 py-8 sm:py-10">
-        {/* Bandeau "pilotage" ultra simple */}
-        <div className="mb-8 rounded-2xl border border-slate-800 bg-slate-900/30 px-4 py-4 sm:px-6 sm:py-5">
-          <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-            <p className="text-sm text-slate-200">
-              <span className="font-semibold text-emerald-200">Valeria</span>{" "}
-              structure vos usages IA : objectifs mesurables, indicateurs, itérations.
-            </p>
-            <div className="flex flex-wrap gap-2">
-              <Link
-                href="/optimiseur"
-                className="rounded-xl border border-emerald-400/60 bg-emerald-400/10 px-3 py-2 text-xs font-semibold text-emerald-100 hover:bg-emerald-400/20"
-              >
-                🎯 Optimiseur Valeria
-              </Link>
-              <Link
-                href="/contact"
-                className="rounded-xl border border-amber-400/70 bg-amber-400/10 px-3 py-2 text-xs font-semibold text-amber-200 hover:bg-amber-400/20"
-              >
-                📩 Contact
-              </Link>
-            </div>
-          </div>
-        </div>
+    <footer className="border-t border-slate-800 bg-[#041B33]">
+      <div className="mx-auto max-w-6xl px-4 py-10 sm:py-12">
 
-        {/* Grille principale (simple, business, comme la sidebar) */}
+        {/* GRILLE PRINCIPALE */}
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-          {/* Marque / Pitch + "Valeria inside" */}
-          <div className="space-y-3">
-            <div className="flex items-center gap-2">
-              <div className="relative">
-                <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-emerald-500 text-slate-900 font-extrabold">
-                  EA
-                </div>
 
-                {/* ✅ label discret "Valeria inside" */}
-                <span className="absolute -top-2 -right-2 rounded-full border border-slate-800 bg-slate-950 px-2 py-0.5 text-[10px] font-semibold text-slate-300">
-                  Valeria inside
-                </span>
+          {/* MARQUE */}
+          <div className="space-y-4">
+            <div className="flex items-center gap-3">
+              <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-gradient-to-br from-cyan-200 via-emerald-300 to-amber-300 text-[#041B33] font-extrabold text-sm shadow">
+                EA
               </div>
-
               <div className="flex flex-col leading-tight">
-                <span className="text-sm font-semibold text-slate-50">EleveAI</span>
+                <span className="text-base font-extrabold text-white">
+                  Eleve<span className="text-emerald-300">AI</span>
+                </span>
                 <span className="text-xs text-slate-400">
-                  IA encadrée • Pilotage • Amélioration continue
+                  Comprendre · S&apos;entraîner · Réussir
                 </span>
               </div>
             </div>
 
-            <p className="text-xs text-slate-400 leading-relaxed">
-              Une IA pédagogique structurée par des critères mesurables, des traces et des itérations
-              — pour aider sans remplacer.
+            <p className="text-xs leading-relaxed text-slate-400">
+              Plusieurs portes pour apprendre les maths et suivre la progression
+              des élèves. Du CM1 au Bac, conçu à La Réunion.
             </p>
 
-            <div className="pt-1 flex flex-wrap gap-2">
-              <Link
-                href="/profs"
-                className="inline-flex items-center gap-2 rounded-xl border border-slate-800 bg-slate-900/40 px-3 py-2 text-xs font-semibold text-slate-200 hover:bg-slate-900"
-              >
-                🎓 Éducation →
-              </Link>
-              <Link
-                href="/valeria-consulting"
-                className="inline-flex items-center gap-2 rounded-xl border border-slate-800 bg-slate-900/40 px-3 py-2 text-xs font-semibold text-slate-200 hover:bg-slate-900"
-              >
-                🏢 Entreprises →
-              </Link>
-            </div>
+            <Link
+              href="/contact"
+              className="inline-flex rounded-2xl border border-emerald-400/40 bg-emerald-400/10 px-4 py-2 text-xs font-semibold text-emerald-200 hover:bg-emerald-400/20 transition"
+            >
+              📩 Nous contacter
+            </Link>
           </div>
 
-          {/* Éducation (essentiel) */}
+          {/* OUTILS */}
           <div>
-            <h3 className="text-sm font-semibold text-slate-100 mb-3">Éducation</h3>
-            <ul className="space-y-1.5 text-sm">
-              <li>
-                <Link href="/espace-profs" className="text-slate-300 hover:text-sky-300">
-                  Espace Profs
-                </Link>
-              </li>
-              <li>
-                <Link href="/atelier-IA" className="text-slate-300 hover:text-sky-300">
-                  Atelier-IA
-                </Link>
-              </li>
-              <li>
-                <Link href="/espace-eleves" className="text-slate-300 hover:text-sky-300">
-                  Espace Élèves
-                </Link>
-              </li>
-              <li>
-                <Link href="/espace-parents" className="text-slate-300 hover:text-sky-300">
-                  Espace Parents
-                </Link>
-              </li>
+            <h3 className="mb-3 text-sm font-black text-slate-100">Outils</h3>
+            <ul className="space-y-2">
+              {outils.map((l) => (
+                <li key={l.href}>
+                  <Link href={l.href} className="text-sm text-slate-400 hover:text-emerald-300 transition">
+                    {l.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* ESPACES */}
+          <div>
+            <h3 className="mb-3 text-sm font-black text-slate-100">Espaces</h3>
+            <ul className="space-y-2">
+              {espaces.map((l) => (
+                <li key={l.href}>
+                  <Link href={l.href} className="text-sm text-slate-400 hover:text-sky-300 transition">
+                    {l.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
 
-            <div className="mt-4 rounded-2xl border border-slate-800 bg-slate-900/25 p-3">
-              <p className="text-[11px] leading-relaxed text-slate-400">
-                <span className="text-slate-200 font-semibold">Objectif :</span>{" "}
-                des ressources claires, mesurables et réutilisables.
-              </p>
-            </div>
+            <h3 className="mb-3 mt-6 text-sm font-black text-slate-100">Infos</h3>
+            <ul className="space-y-2">
+              {infos.map((l) => (
+                <li key={l.href}>
+                  <Link href={l.href} className="text-sm text-slate-400 hover:text-sky-300 transition">
+                    {l.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
 
-          {/* Entreprises (essentiel) */}
+          {/* CLASSES + LÉGAL */}
           <div>
-            <h3 className="text-sm font-semibold text-slate-100 mb-3">Entreprises</h3>
-            <ul className="space-y-1.5 text-sm">
-              <li>
-                <Link href="/valeria-consulting" className="text-slate-300 hover:text-sky-300">
-                  Valeria Consulting
-                </Link>
-              </li>
-              <li>
-                <Link href="/optimiseur" className="text-slate-300 hover:text-emerald-200">
-                  Optimisation de prompts (score)
-                </Link>
-              </li>
-              <li>
-                <Link href="/contact" className="text-slate-300 hover:text-sky-300">
-                  Audit / devis
-                </Link>
-              </li>
+            <h3 className="mb-3 text-sm font-black text-slate-100">Par classe</h3>
+            <ul className="space-y-2">
+              {["CM1", "CM2", "6e", "5e", "4e", "3e", "Terminale Spé"].map((c) => (
+                <li key={c}>
+                  <Link
+                    href={`/coach-maths-ia?classe=${c.toLowerCase().replace(" ", "-")}`}
+                    className="text-sm text-slate-400 hover:text-amber-300 transition"
+                  >
+                    Maths {c}
+                  </Link>
+                </li>
+              ))}
             </ul>
 
-            <div className="mt-4 rounded-2xl border border-slate-800 bg-slate-900/25 p-3">
-              <p className="text-[11px] leading-relaxed text-slate-400">
-                <span className="text-slate-200 font-semibold">Approche :</span>{" "}
-                indicateurs, conformité, amélioration continue (pilotage).
-              </p>
-            </div>
-          </div>
-
-          {/* Essentiels (minimal légal) */}
-          <div>
-            <h3 className="text-sm font-semibold text-slate-100 mb-3">Essentiels</h3>
-            <ul className="space-y-1.5 text-sm">
-              <li>
-                <Link href="/tarifs" className="text-slate-300 hover:text-sky-300">
-                  Tarifs
-                </Link>
-              </li>
-              <li>
-                <Link href="/contact" className="text-slate-300 hover:text-sky-300">
-                  Contact
-                </Link>
-              </li>
-              <li>
-                <Link href="/mentions-legales" className="text-slate-300 hover:text-sky-300">
-                  Mentions légales
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/politique-confidentialite"
-                  className="text-slate-300 hover:text-sky-300"
-                >
-                  Confidentialité
-                </Link>
-              </li>
+            <h3 className="mb-3 mt-6 text-sm font-black text-slate-100">Légal</h3>
+            <ul className="space-y-2">
+              {legal.map((l) => (
+                <li key={l.href}>
+                  <Link href={l.href} className="text-xs text-slate-500 hover:text-slate-300 transition">
+                    {l.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
         </div>
 
-        {/* Bas de page minimal */}
-        <div className="mt-8 flex flex-col gap-2 border-t border-slate-800 pt-4 text-xs text-slate-500 sm:flex-row sm:items-center sm:justify-between">
-          <p>© {new Date().getFullYear()} EleveAI.</p>
-
-          <div className="flex flex-wrap gap-x-3 gap-y-1 text-[11px] text-slate-500">
-            <span>Conçu à La Réunion.</span>
-            <span className="hidden sm:inline">•</span>
-            <Link href="/tarifs" className="hover:text-slate-200">
-              Tarifs
-            </Link>
-            <span className="hidden sm:inline">•</span>
-            <Link href="/contact" className="hover:text-slate-200">
-              Contact
-            </Link>
+        {/* BAS DE PAGE */}
+        <div className="mt-10 flex flex-col gap-2 border-t border-slate-800 pt-5 text-xs text-slate-500 sm:flex-row sm:items-center sm:justify-between">
+          <p>© {new Date().getFullYear()} EleveAI — Tous droits réservés.</p>
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-[11px]">
+            <span>🏝️ Conçu à La Réunion</span>
+            <span className="hidden sm:inline text-slate-700">•</span>
+            <Link href="/mentions-legales" className="hover:text-slate-300 transition">Mentions légales</Link>
+            <span className="hidden sm:inline text-slate-700">•</span>
+            <Link href="/politique-confidentialite" className="hover:text-slate-300 transition">Confidentialité</Link>
           </div>
         </div>
+
       </div>
     </footer>
   );
