@@ -1,456 +1,144 @@
-// app/blog/page.tsx
 "use client";
 
 import Link from "next/link";
-import { useMemo, useState } from "react";
-import { getAllBlogPosts, type Audience, type BlogPost } from "@/data/blogPosts";
+import { getAllBlogPosts, type BlogPost } from "@/data/blogPosts";
 
-/** 🔥 Tes 10 phrases clés (SEO) -> liens internes */
-const TOP_QUERIES: Array<{
-  label: string;
-  sub?: string;
-  href: string;
-  intent?: "profs" | "eleves" | "parents" | "college";
-}> = [
-  {
-    label: "Prompt pédagogique",
-    sub: "Comprendre la règle d’or EleveAI",
-    href: "/blog/pourquoi-le-bon-prompt-change-tout",
-    intent: "profs",
-  },
-  {
-    label: "Prompts pour profs",
-    sub: "Créer des supports, séances, évaluations",
-    href: "/espace-profs",
-    intent: "profs",
-  },
-  {
-    label: "Prompts pour élèves",
-    sub: "Réviser, s’entraîner, progresser",
-    href: "/espace-eleves",
-    intent: "eleves",
-  },
-  {
-    label: "Prompts pour parents",
-    sub: "Aider à la maison sans tricher",
-    href: "/blog/parents-aider-enfant-college-avec-ia",
-    intent: "parents",
-  },
-  {
-    label: "IA au collège",
-    sub: "Un cadre simple et rassurant",
-    href: "/blog/ia-etablissement-cadre-clair",
-    intent: "college",
-  },
-  {
-    label: "Devoirs IA-friendly",
-    sub: "Autoriser sous conditions + traces",
-    href: "/blog/ia-etablissement-cadre-clair",
-    intent: "college",
-  },
-  {
-    label: "Document IA-friendly",
-    sub: "Courriers, consignes, infos aux familles",
-    href: "/blog/rediger-document-ia-friendly",
-    intent: "profs",
-  },
-  {
-    label: "DYS & documents scolaires",
-    sub: "Rendre les infos plus lisibles",
-    href: "/blog/parents-dys-documents-administratifs-scolaires",
-    intent: "parents",
-  },
-  {
-    label: "Réviser le brevet avec l’IA",
-    sub: "Méthode guidée, sans triche",
-    href: "/blog/reviser-brevet-maths-avec-eleveai-sans-tricher",
-    intent: "eleves",
-  },
-  {
-    label: "Évaluer avec l’IA (sans triche)",
-    sub: "Variantes, critères, remédiation",
-    href: "/blog/evaluer-eleves-avec-ia-sans-tricher",
-    intent: "profs",
-  },
-];
+const AUDIENCE_LABELS: Record<string, string> = {
+  eleves: "Élèves",
+  profs: "Professeurs",
+  parents: "Parents",
+  admin: "Administration",
+};
 
-function formatDateFR(iso: string) {
-  try {
-    const d = new Date(iso);
-    return d.toLocaleDateString("fr-FR", {
-      year: "numeric",
-      month: "short",
-      day: "2-digit",
-    });
-  } catch {
-    return iso;
-  }
-}
+const AUDIENCE_COLORS: Record<string, string> = {
+  eleves: "bg-emerald-100 text-emerald-800",
+  profs: "bg-blue-100 text-blue-800",
+  parents: "bg-amber-100 text-amber-800",
+  admin: "bg-slate-100 text-slate-700",
+};
 
-function badgeAudience(a: Audience) {
-  switch (a) {
-    case "eleves":
-      return {
-        label: "Élèves",
-        cls: "bg-emerald-50 text-emerald-800 border-emerald-200",
-      };
-    case "profs":
-      return { label: "Profs", cls: "bg-sky-50 text-sky-800 border-sky-200" };
-    case "parents":
-      return {
-        label: "Parents",
-        cls: "bg-amber-50 text-amber-800 border-amber-200",
-      };
-    case "admin":
-      return {
-        label: "Établissement",
-        cls: "bg-slate-50 text-slate-800 border-slate-200",
-      };
-  }
-}
-
-function intentChip(intent?: string) {
-  if (!intent) return "border-slate-200 text-slate-700 bg-white";
-  if (intent === "profs") return "border-sky-200 text-sky-800 bg-sky-50";
-  if (intent === "eleves")
-    return "border-emerald-200 text-emerald-800 bg-emerald-50";
-  if (intent === "parents")
-    return "border-amber-200 text-amber-800 bg-amber-50";
-  return "border-slate-200 text-slate-700 bg-slate-50";
-}
-
-function shortTags(tags: string[], max = 3) {
-  return tags.slice(0, max);
-}
-
-function Section({
-  title,
-  subtitle,
-  items,
-}: {
-  title: string;
-  subtitle: string;
-  items: BlogPost[];
-}) {
-  const list = items.slice(0, 6);
-  if (list.length === 0) return null;
-
-  return (
-    <section className="space-y-4">
-      <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-2">
-        <div>
-          <h2 className="text-xl font-extrabold text-slate-900">{title}</h2>
-          <p className="text-sm text-slate-600">{subtitle}</p>
-        </div>
-      </div>
-
-      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-        {list.map((p) => (
-          <Link
-            key={p.slug}
-            href={`/blog/${p.slug}`}
-            className="rounded-2xl border border-slate-200 bg-white p-5 hover:bg-slate-50 transition shadow-sm"
-          >
-            <div className="flex items-center gap-2">
-              <span className="text-[11px] text-slate-500">
-                {formatDateFR(p.date)}
-              </span>
-              {p.niveau && (
-                <span className="text-[11px] text-slate-500">• {p.niveau}</span>
-              )}
-            </div>
-
-            <h3 className="mt-2 text-base font-bold text-slate-900 leading-snug">
-              {p.title}
-            </h3>
-            <p className="mt-2 text-sm text-slate-600 line-clamp-3">
-              {p.description}
-            </p>
-
-            <div className="mt-4 flex flex-wrap gap-2">
-              {shortTags(p.tags, 3).map((t) => (
-                <span
-                  key={t}
-                  className="rounded-full border border-slate-200 bg-white px-3 py-1 text-[11px] text-slate-700"
-                >
-                  #{t}
-                </span>
-              ))}
-            </div>
-
-            <div className="mt-5 text-sm font-semibold text-emerald-700">
-              Lire <span aria-hidden>→</span>
-            </div>
-          </Link>
-        ))}
-      </div>
-    </section>
-  );
+function formatDate(iso: string) {
+  return new Date(iso).toLocaleDateString("fr-FR", {
+    day: "2-digit",
+    month: "long",
+    year: "numeric",
+  });
 }
 
 export default function BlogPage() {
-  const all = useMemo(() => {
-    const posts = getAllBlogPosts();
-    return [...posts].sort((a, b) =>
-      a.date < b.date ? 1 : a.date > b.date ? -1 : 0
-    );
-  }, []);
-
-  const [filter, setFilter] = useState<Audience | "tous">("tous");
-  const [q, setQ] = useState("");
-
-  const filtered = useMemo(() => {
-    const qq = q.trim().toLowerCase();
-    return all.filter((p) => {
-      const okAud = filter === "tous" ? true : p.audience === filter;
-      const okQ =
-        !qq ||
-        p.title.toLowerCase().includes(qq) ||
-        p.description.toLowerCase().includes(qq) ||
-        p.tags.join(" ").toLowerCase().includes(qq) ||
-        (p.niveau ?? "").toLowerCase().includes(qq) ||
-        (p.matiere ?? "").toLowerCase().includes(qq);
-      return okAud && okQ;
-    });
-  }, [all, filter, q]);
-
-  const featured = useMemo(() => filtered[0] ?? null, [filtered]);
-
-  const byAudience = useMemo(() => {
-    const bucket: Record<Audience, BlogPost[]> = {
-      eleves: [],
-      profs: [],
-      parents: [],
-      admin: [],
-    };
-    for (const p of filtered) bucket[p.audience].push(p);
-    return bucket;
-  }, [filtered]);
+  const posts = getAllBlogPosts();
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-slate-50 via-white to-slate-50 text-slate-900">
-      {/* HEADER */}
-      <div className="border-b border-slate-200 bg-white/80 backdrop-blur">
-        <div className="mx-auto max-w-6xl px-4 py-6">
-          <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-            <div className="space-y-2">
-              <p className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-1 text-[11px] font-semibold text-slate-700">
-                📰 Blog EleveAI · Prompts & cadre IA
-              </p>
-              <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-900">
-                Trouver le bon prompt (sans triche)
-              </h1>
-              <p className="text-sm text-slate-600 max-w-2xl">
-                Une “Une” éditoriale orientée recherche : prompt pédagogique,
-                prompts profs, prompts élèves, IA au collège…
-              </p>
-            </div>
+    <main className="relative min-h-screen overflow-hidden text-slate-950">
 
-            <div className="flex flex-col sm:items-end gap-2">
-              <div className="flex flex-wrap gap-2">
-                {(
-                  [
-                    ["tous", "Tous"],
-                    ["eleves", "Élèves"],
-                    ["profs", "Profs"],
-                    ["parents", "Parents"],
-                    ["admin", "Établissement"],
-                  ] as const
-                ).map(([k, label]) => {
-                  const active = filter === (k as any);
-                  return (
-                    <button
-                      key={k}
-                      type="button"
-                      onClick={() => setFilter(k as any)}
-                      className={`rounded-full px-3 py-1 text-[11px] font-semibold border transition ${
-                        active
-                          ? "border-emerald-500 bg-emerald-50 text-emerald-800"
-                          : "border-slate-200 bg-white text-slate-700 hover:bg-slate-50"
-                      }`}
-                    >
-                      {label}
-                    </button>
-                  );
-                })}
-              </div>
-
-              <input
-                value={q}
-                onChange={(e) => setQ(e.target.value)}
-                placeholder="Rechercher dans les articles (brevet, DYS, anti-triche…)…"
-                className="w-full sm:w-[340px] rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 outline-none placeholder:text-slate-400 focus:border-emerald-500"
-              />
-            </div>
-          </div>
-        </div>
+      {/* FOND SVG */}
+      <div className="pointer-events-none absolute inset-0 -z-10">
+        <svg className="h-full w-full" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice">
+          <defs>
+            <linearGradient id="blog-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#F0FDF4" />
+              <stop offset="50%" stopColor="#EFF6FF" />
+              <stop offset="100%" stopColor="#FFFBEB" />
+            </linearGradient>
+            <radialGradient id="blog-g1" cx="15%" cy="20%" r="50%">
+              <stop offset="0%" stopColor="#86EFAC" stopOpacity="0.55" />
+              <stop offset="100%" stopColor="#86EFAC" stopOpacity="0" />
+            </radialGradient>
+            <radialGradient id="blog-g2" cx="85%" cy="15%" r="50%">
+              <stop offset="0%" stopColor="#93C5FD" stopOpacity="0.5" />
+              <stop offset="100%" stopColor="#93C5FD" stopOpacity="0" />
+            </radialGradient>
+            <filter id="blog-blur"><feGaussianBlur stdDeviation="25" /></filter>
+          </defs>
+          <rect width="1440" height="900" fill="url(#blog-bg)" />
+          <rect width="1440" height="900" fill="url(#blog-g1)" />
+          <rect width="1440" height="900" fill="url(#blog-g2)" />
+          <circle cx="150" cy="160" r="120" fill="#4ADE80" opacity="0.15" filter="url(#blog-blur)" />
+          <circle cx="1300" cy="150" r="140" fill="#60A5FA" opacity="0.15" filter="url(#blog-blur)" />
+          <path d="M0 780 C360 730 720 780 1080 750 C1260 735 1380 750 1440 740 L1440 900 L0 900 Z"
+            fill="white" opacity="0.5" />
+        </svg>
       </div>
 
-      <div className="mx-auto max-w-6xl px-4 py-8 space-y-10">
-        {/* TOP QUERIES (SEO) */}
-        <section className="rounded-3xl border border-slate-200 bg-white p-6 sm:p-8 shadow-sm">
-          <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3">
-            <div>
-              <h2 className="text-lg sm:text-xl font-extrabold text-slate-900">
-                Recherches fréquentes
-              </h2>
-              <p className="text-sm text-slate-600 mt-1">
-                10 expressions clés (SEO). Cliquer = page utile tout de suite.
-              </p>
-            </div>
-            {/* ✅ BOUTON SUPPRIMÉ */}
-          </div>
+      <div className="mx-auto max-w-4xl px-4 py-10">
 
-          <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
-            {TOP_QUERIES.map((it) => (
-              <Link
-                key={it.label}
-                href={it.href}
-                className="group rounded-2xl border border-slate-200 bg-white p-4 hover:bg-slate-50 transition shadow-sm"
-              >
-                <div className="flex items-center justify-between gap-2">
-                  <span
-                    className={`rounded-full border px-2.5 py-0.5 text-[10px] font-semibold ${intentChip(
-                      it.intent
-                    )}`}
-                  >
-                    {it.intent === "college" ? "collège" : it.intent}
-                  </span>
-                  <span className="text-slate-400 group-hover:text-emerald-700 text-sm">
-                    →
-                  </span>
+        {/* HEADER */}
+        <section className="mb-10 rounded-[2rem] border border-white/80 bg-white/75 p-6 shadow-2xl backdrop-blur-xl">
+          <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-emerald-100 px-4 py-2 text-xs font-black uppercase tracking-wide text-emerald-800">
+            📝 EleveAI · Blog
+          </div>
+          <h1 className="text-3xl font-black text-slate-950 sm:text-4xl">
+            Maths, méthodes et progression
+          </h1>
+          <p className="mt-3 text-base font-semibold text-slate-600">
+            Conseils concrets pour progresser en maths, préparer le brevet ou le bac, et comprendre les notions clés.
+          </p>
+        </section>
+
+        {/* ARTICLES */}
+        <div className="space-y-5">
+          {posts.map((post: BlogPost) => (
+            <Link
+              key={post.slug}
+              href={`/blog/${post.slug}`}
+              className="group block overflow-hidden rounded-[1.5rem] border border-white/70 bg-white/85 shadow-lg backdrop-blur transition hover:-translate-y-0.5 hover:shadow-xl"
+            >
+              <div className="p-5 sm:p-6">
+                <div className="mb-3 flex flex-wrap items-center gap-2">
+                  {post.audience && (
+                    <span className={`rounded-full px-3 py-1 text-xs font-black ${AUDIENCE_COLORS[post.audience] ?? "bg-slate-100 text-slate-700"}`}>
+                      {AUDIENCE_LABELS[post.audience] ?? post.audience}
+                    </span>
+                  )}
+                  {post.niveau && (
+                    <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-bold text-slate-600">
+                      {post.niveau}
+                    </span>
+                  )}
+                  <span className="text-xs text-slate-400">{formatDate(post.date)}</span>
                 </div>
-                <p className="mt-2 text-sm font-extrabold text-slate-900 leading-snug">
-                  {it.label}
+
+                <h2 className="text-xl font-black text-slate-950 group-hover:text-emerald-700 transition">
+                  {post.title}
+                </h2>
+
+                <p className="mt-2 text-sm font-semibold leading-relaxed text-slate-600">
+                  {post.description}
                 </p>
-                {it.sub && (
-                  <p className="mt-1 text-xs text-slate-600 line-clamp-2">
-                    {it.sub}
-                  </p>
-                )}
-              </Link>
-            ))}
+
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {post.tags.slice(0, 4).map((tag) => (
+                    <span key={tag} className="rounded-full bg-slate-50 border border-slate-200 px-2.5 py-0.5 text-xs text-slate-600">
+                      #{tag}
+                    </span>
+                  ))}
+                </div>
+
+                <p className="mt-4 text-sm font-black text-emerald-700 transition group-hover:translate-x-1">
+                  Lire l&apos;article →
+                </p>
+              </div>
+            </Link>
+          ))}
+        </div>
+
+        {/* CTA */}
+        <section className="mt-10 rounded-[2rem] border border-white/70 bg-white/75 p-6 text-center shadow-xl backdrop-blur">
+          <p className="text-lg font-black text-slate-950">Prêt à t&apos;entraîner ?</p>
+          <p className="mt-1 text-sm font-semibold text-slate-600">
+            Utilise les outils EleveAI pour mettre en pratique ce que tu viens de lire.
+          </p>
+          <div className="mt-4 flex flex-wrap justify-center gap-3">
+            <Link href="/parcours" className="rounded-2xl bg-emerald-500 px-5 py-3 text-sm font-black text-white shadow hover:bg-emerald-400">
+              🛤️ Mon parcours de notions
+            </Link>
+            <Link href="/coach-brevet" className="rounded-2xl bg-white px-5 py-3 text-sm font-black text-slate-800 ring-1 ring-slate-200 hover:bg-slate-50">
+              📚 Coach Brevet
+            </Link>
           </div>
         </section>
 
-        {/* UNE + DERNIERS */}
-        {featured && (
-          <section className="grid gap-6 lg:grid-cols-12">
-            <Link
-              href={`/blog/${featured.slug}`}
-              className="lg:col-span-8 rounded-3xl border border-slate-200 bg-white p-6 sm:p-8 hover:border-emerald-300 transition shadow-sm"
-            >
-              <div className="flex flex-wrap items-center gap-2">
-                <span className="rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 text-[11px] font-bold text-emerald-800">
-                  À la Une
-                </span>
-                <span
-                  className={`rounded-full border px-3 py-1 text-[11px] font-semibold ${
-                    badgeAudience(featured.audience).cls
-                  }`}
-                >
-                  {badgeAudience(featured.audience).label}
-                </span>
-                <span className="text-[11px] text-slate-500">
-                  {formatDateFR(featured.date)}
-                </span>
-                {featured.niveau && (
-                  <span className="text-[11px] text-slate-500">
-                    • {featured.niveau}
-                  </span>
-                )}
-                {featured.matiere && (
-                  <span className="text-[11px] text-slate-500">
-                    • {featured.matiere}
-                  </span>
-                )}
-              </div>
-
-              <h2 className="mt-4 text-2xl sm:text-3xl font-extrabold leading-tight text-slate-900">
-                {featured.title}
-              </h2>
-              <p className="mt-3 text-sm sm:text-base text-slate-600 leading-relaxed">
-                {featured.description}
-              </p>
-
-              <div className="mt-5 flex flex-wrap gap-2">
-                {featured.tags.slice(0, 5).map((t) => (
-                  <span
-                    key={t}
-                    className="rounded-full border border-slate-200 bg-white px-3 py-1 text-[11px] text-slate-700"
-                  >
-                    #{t}
-                  </span>
-                ))}
-              </div>
-
-              <div className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-emerald-700">
-                Lire l’article <span aria-hidden>→</span>
-              </div>
-            </Link>
-
-            <div className="lg:col-span-4 space-y-3">
-              <div className="flex items-center justify-between">
-                <h3 className="text-sm font-bold text-slate-700">
-                  Dernières publications
-                </h3>
-              </div>
-
-              <div className="space-y-2">
-                {filtered.slice(0, 5).map((p) => (
-                  <Link
-                    key={p.slug}
-                    href={`/blog/${p.slug}`}
-                    className="block rounded-2xl border border-slate-200 bg-white p-4 hover:bg-slate-50 transition shadow-sm"
-                  >
-                    <div className="flex items-center gap-2">
-                      <span
-                        className={`rounded-full border px-2.5 py-0.5 text-[10px] font-semibold ${
-                          badgeAudience(p.audience).cls
-                        }`}
-                      >
-                        {badgeAudience(p.audience).label}
-                      </span>
-                      <span className="text-[10px] text-slate-500">
-                        {formatDateFR(p.date)}
-                      </span>
-                    </div>
-                    <p className="mt-2 text-sm font-semibold text-slate-900 leading-snug">
-                      {p.title}
-                    </p>
-                    <p className="mt-1 text-xs text-slate-600 line-clamp-2">
-                      {p.description}
-                    </p>
-                  </Link>
-                ))}
-              </div>
-            </div>
-          </section>
-        )}
-
-        {/* SECTIONS */}
-        <Section
-          title="🎒 Élèves"
-          subtitle="Réviser, comprendre, progresser — sans tricher."
-          items={byAudience.eleves}
-        />
-        <Section
-          title="🧑‍🏫 Profs"
-          subtitle="Prompts, méthodes, documents IA-friendly, cadre & anti-triche."
-          items={byAudience.profs}
-        />
-        <Section
-          title="👨‍👩‍👧 Parents"
-          subtitle="Accompagner à la maison, DYS-friendly, devoirs sans conflits."
-          items={byAudience.parents}
-        />
-        <Section
-          title="🏫 Établissement"
-          subtitle="Cadre IA, gouvernance, usages responsables."
-          items={byAudience.admin}
-        />
       </div>
     </main>
   );
 }
-
