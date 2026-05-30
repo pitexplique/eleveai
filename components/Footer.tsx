@@ -13,6 +13,7 @@ const outils = [
 ];
 
 const espaces = [
+  { label: "Établissements scolaires", href: "/espace-ecoles" },
   { label: "Espace élèves",  href: "/espace-eleves" },
   { label: "Espace parents", href: "/espace-parents" },
   { label: "Espace profs",   href: "/espace-profs" },
