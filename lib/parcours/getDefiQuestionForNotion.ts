@@ -44,9 +44,12 @@ function materializeQuestion(
   return item as ParcoursQuestionItem;
 }
 
+export type ParcoursDifficulteMode = "revision" | "defi";
+
 export function getDefiQuestionForNotion(args: {
   classe: ParcoursClasse;
   notionId: string;
+  mode?: ParcoursDifficulteMode;
 }): ParcoursQuestion | null {
   const notions = getClasseNotions(args.classe);
 
@@ -56,12 +59,15 @@ export function getDefiQuestionForNotion(args: {
 
   const bank = getQuestionBank(args.classe);
 
+  const minDiff = args.mode === "defi" ? 3 : 1;
+  const maxDiff = args.mode === "defi" ? 5 : 3;
+
   const candidates = bank.filter(
     (item) =>
       item.notionId === args.notionId &&
-      item.difficulty >= 2 &&
-      item.difficulty <= 3 &&
-      item.format !== "open"
+      item.difficulty >= minDiff &&
+      item.difficulty <= maxDiff &&
+      (item.kind === "template" || item.format !== "open")
   );
 
   if (candidates.length === 0) return null;

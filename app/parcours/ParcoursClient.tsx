@@ -23,6 +23,8 @@ import {
   scoreParcours,
 } from "@/lib/parcours/scoreParcours";
 
+import type { ParcoursDifficulteMode } from "@/lib/parcours/getDefiQuestionForNotion";
+
 const classes: ParcoursClasse[] = [
   "cm1",
   "cm2",
@@ -98,6 +100,7 @@ export default function ParcoursClient() {
 
   const [classe, setClasse] = useState<ParcoursClasse>("6e");
   const [questionCount, setQuestionCount] = useState<QuestionCount>(10);
+  const [difficulteMode, setDifficulteMode] = useState<ParcoursDifficulteMode>("revision");
 
   const [started, setStarted] = useState(false);
   const [questions, setQuestions] = useState<ParcoursQuestion[]>([]);
@@ -152,6 +155,7 @@ export default function ParcoursClient() {
         getDefiQuestionForNotion({
           classe,
           notionId: notion.id,
+          mode: difficulteMode,
         })
       )
       .filter((q): q is ParcoursQuestion => q !== null);
@@ -341,8 +345,8 @@ export default function ParcoursClient() {
           </h1>
 
           <p className="mt-3 max-w-3xl text-base font-semibold leading-relaxed text-slate-700 md:text-lg">
-            Choisis ta classe puis choisis ta distance : 5, 10, 15 ou 20
-            questions. EleveAI affiche ensuite une carte claire de tes forces :
+            Choisis ta classe, le nombre de questions et ton niveau.
+            EleveAI affiche ensuite une carte claire de tes forces :
             🟢 maîtrisé, 🟡 à revoir, 🔴 fragile.
           </p>
 
@@ -395,7 +399,7 @@ export default function ParcoursClient() {
 
           <div className="mt-6">
             <p className="mb-3 text-sm font-black uppercase tracking-wide text-slate-700">
-              2. Choisis ta distance
+              2. Combien de questions ?
             </p>
 
             <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
@@ -428,6 +432,47 @@ export default function ParcoursClient() {
                   </div>
                 </button>
               ))}
+            </div>
+          </div>
+
+          <div className="mt-6">
+            <p className="mb-3 text-sm font-black uppercase tracking-wide text-slate-700">
+              3. Choisis ton niveau
+            </p>
+            <div className="grid gap-3 sm:grid-cols-2">
+              <button
+                type="button"
+                onClick={() => { setDifficulteMode("revision"); resetParcours(); }}
+                className={[
+                  "rounded-3xl border p-4 text-left shadow-sm transition hover:-translate-y-0.5",
+                  difficulteMode === "revision"
+                    ? "border-slate-950 bg-slate-950 text-white ring-4 ring-yellow-300"
+                    : "border-white bg-white/90 text-slate-900 ring-1 ring-slate-200 hover:bg-emerald-50",
+                ].join(" ")}
+              >
+                <div className="text-3xl">⭐⭐⭐</div>
+                <div className="mt-2 text-lg font-black">Révision</div>
+                <div className={["mt-1 text-sm font-bold", difficulteMode === "revision" ? "text-slate-200" : "text-slate-600"].join(" ")}>
+                  Difficultés 1 → 3 · Pour consolider
+                </div>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => { setDifficulteMode("defi"); resetParcours(); }}
+                className={[
+                  "rounded-3xl border p-4 text-left shadow-sm transition hover:-translate-y-0.5",
+                  difficulteMode === "defi"
+                    ? "border-slate-950 bg-slate-950 text-white ring-4 ring-yellow-300"
+                    : "border-white bg-white/90 text-slate-900 ring-1 ring-slate-200 hover:bg-emerald-50",
+                ].join(" ")}
+              >
+                <div className="text-3xl">⭐⭐⭐⭐⭐</div>
+                <div className="mt-2 text-lg font-black">Défi</div>
+                <div className={["mt-1 text-sm font-bold", difficulteMode === "defi" ? "text-slate-200" : "text-slate-600"].join(" ")}>
+                  Difficultés 3 → 5 · Pour se dépasser
+                </div>
+              </button>
             </div>
           </div>
 
@@ -524,7 +569,7 @@ export default function ParcoursClient() {
                   </p>
 
                   <p className="mt-1 text-sm font-black text-slate-700">
-                    Distance choisie : {questions.length} question
+                    Nombre de questions : {questions.length} question
                     {questions.length > 1 ? "s" : ""}
                   </p>
 
