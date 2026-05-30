@@ -5,9 +5,9 @@ import TarifsClient from "./TarifsClient";
 const url = "https://eleveai.fr/tarifs";
 
 export const metadata: Metadata = {
-  title: "Tarifs EleveAI — Formules mensuelle et annuelle",
+  title: "Tarifs EleveAI — Pilote gratuit, établissements, familles",
   description:
-    "Tarifs EleveAI : choisissez une formule mensuelle ou annuelle, ajoutez plusieurs enfants et profitez des exercices guidés avec suivi des progrès.",
+    "Accès pilote gratuit 4 semaines pour les collèges et lycées. Offre établissement sur devis. Abonnement famille bientôt disponible.",
   alternates: { canonical: url },
   robots: { index: true, follow: true },
   openGraph: {

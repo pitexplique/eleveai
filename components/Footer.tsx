@@ -23,6 +23,7 @@ const espaces = [
 const infos = [
   { label: "Pourquoi EleveAI",  href: "/pourquoi-eleveai" },
   { label: "Qui sommes-nous",   href: "/qui-sommes-nous" },
+  { label: "Tarifs",            href: "/tarifs" },
   { label: "Blog",              href: "/blog" },
   { label: "FAQ",               href: "/faq" },
   { label: "Contact",           href: "/contact" },

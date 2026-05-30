@@ -1,303 +1,251 @@
-// app/tarifs/TarifsClient.tsx
 "use client";
 
 import Link from "next/link";
-import { useMemo, useState } from "react";
 
-const STRIPE_CHECKOUT_URL = process.env.NEXT_PUBLIC_STRIPE_CHECKOUT_URL;
+const offres = [
+  {
+    nom: "Accès Pilote",
+    badge: "Gratuit · 4 semaines",
+    badgeColor: "bg-emerald-100 text-emerald-800",
+    prix: "Gratuit",
+    soustitre: "Pour tester avec une classe",
+    description: "Accès complet pour une classe pendant 4 semaines. Idéal pour évaluer EleveAI avant de s'engager.",
+    inclus: [
+      "Jusqu'à 35 élèves",
+      "Tous les outils débloqués",
+      "Dashboard professeur inclus",
+      "Accompagnement par l'équipe",
+      "Sans engagement",
+    ],
+    cta: "Demander le pilote",
+    ctaHref: "/contact",
+    ctaColor: "bg-emerald-500 hover:bg-emerald-400 text-white",
+    highlight: false,
+  },
+  {
+    nom: "Établissement",
+    badge: "⭐ Recommandé",
+    badgeColor: "bg-blue-100 text-blue-800",
+    prix: "Sur devis",
+    soustitre: "Pour un ou plusieurs niveaux",
+    description: "Accès annuel pour tout ou partie de l'établissement. Tarif adapté au nombre de classes et d'élèves.",
+    inclus: [
+      "Nombre de classes à définir",
+      "Codes élèves et profs créés par nos soins",
+      "Dashboard principal inclus",
+      "Suivi notion par notion",
+      "Support dédié",
+      "Formation initiale incluse",
+    ],
+    cta: "Demander un devis",
+    ctaHref: "/contact",
+    ctaColor: "bg-blue-600 hover:bg-blue-500 text-white",
+    highlight: true,
+  },
+  {
+    nom: "Famille",
+    badge: "Bientôt disponible",
+    badgeColor: "bg-amber-100 text-amber-800",
+    prix: "~7 €/mois",
+    soustitre: "Pour un élève individuel",
+    description: "Un accès personnel pour votre enfant, sans passer par l'établissement. En cours de préparation.",
+    inclus: [
+      "1 élève",
+      "Tous les outils",
+      "Dashboard élève",
+      "Sans contrat d'établissement",
+      "Résiliation libre",
+    ],
+    cta: "Être notifié à l'ouverture",
+    ctaHref: "/contact",
+    ctaColor: "bg-amber-400 hover:bg-amber-300 text-slate-950",
+    highlight: false,
+  },
+];
 
-const BASE_MONTHLY_PRICE = 9.95;
-const BASE_YEARLY_MONTHLY_PRICE = 6.59;
-const BASE_YEARLY_TOTAL = 79;
-const EXTRA_CHILD_MONTHLY = 2;
-const MAX_CHILDREN = 6;
-
-function formatEuro(value: number) {
-  return new Intl.NumberFormat("fr-FR", {
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2,
-  }).format(value);
-}
-
-function checkoutHref(plan: "mensuel" | "annuel", children: number) {
-  if (!STRIPE_CHECKOUT_URL) return "#";
-
-  const separator = STRIPE_CHECKOUT_URL.includes("?") ? "&" : "?";
-  const params = new URLSearchParams({
-    plan,
-    enfants: String(children),
-  });
-
-  return `${STRIPE_CHECKOUT_URL}${separator}${params.toString()}`;
-}
+const faq = [
+  {
+    q: "Les élèves doivent-ils payer ?",
+    a: "Non. Les élèves accèdent à EleveAI avec un code fourni par leur établissement. Aucun paiement n'est demandé aux élèves ni aux familles dans le cadre scolaire.",
+  },
+  {
+    q: "Comment fonctionne le pilote gratuit ?",
+    a: "Nous créons les codes pour une classe (jusqu'à 35 élèves) et vous accompagnons pendant 4 semaines. Si vous êtes satisfait, on discute d'un accès annuel. Aucun engagement.",
+  },
+  {
+    q: "Quel est le tarif pour un collège complet ?",
+    a: "Le tarif dépend du nombre de classes et d'élèves. Contactez-nous pour une proposition adaptée à votre établissement.",
+  },
+  {
+    q: "Y a-t-il un contrat à signer ?",
+    a: "Pour l'accès établissement, oui — un contrat simple qui précise les conditions d'accès, la protection des données et la durée. Conforme au RGPD.",
+  },
+  {
+    q: "Quand sera disponible l'abonnement famille ?",
+    a: "L'accès famille individuel est en cours de préparation. Laissez votre contact via le formulaire pour être parmi les premiers informés.",
+  },
+];
 
 export default function TarifsClient() {
-  const [children, setChildren] = useState(1);
-  const [selectedPlan, setSelectedPlan] = useState<"mensuel" | "annuel">(
-    "mensuel"
-  );
-
-  const stripeOk =
-    typeof STRIPE_CHECKOUT_URL === "string" &&
-    STRIPE_CHECKOUT_URL.trim().length > 0;
-
-  const prices = useMemo(() => {
-    const extraChildren = Math.max(0, children - 1);
-    const extraMonthly = extraChildren * EXTRA_CHILD_MONTHLY;
-
-    return {
-      monthly: BASE_MONTHLY_PRICE + extraMonthly,
-      yearlyMonthly: BASE_YEARLY_MONTHLY_PRICE + extraMonthly,
-      yearlyTotal: BASE_YEARLY_TOTAL + extraMonthly * 12,
-    };
-  }, [children]);
-
   return (
-    <main className="min-h-screen bg-[#eefdfb] text-[#092457]">
-      <section className="bg-[#4dbd00] text-white shadow-sm">
-        <div className="mx-auto flex max-w-6xl flex-col gap-5 px-4 py-4 sm:px-6">
-          <div className="flex flex-wrap items-center justify-between gap-4">
-            <Link
-              href="/"
-              className="inline-flex items-center rounded-md bg-white px-3 py-1 text-2xl font-black tracking-tight text-[#f6bd00] shadow-sm"
-              aria-label="Retour à l’accueil EleveAI"
+    <main className="relative min-h-screen overflow-hidden text-slate-950">
+
+      {/* FOND SVG */}
+      <div className="pointer-events-none absolute inset-0 -z-10">
+        <svg className="h-full w-full" viewBox="0 0 1440 1100" preserveAspectRatio="xMidYMid slice">
+          <defs>
+            <linearGradient id="tar-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#F0FDF4" />
+              <stop offset="50%" stopColor="#EFF6FF" />
+              <stop offset="100%" stopColor="#FFFBEB" />
+            </linearGradient>
+            <radialGradient id="tar-g1" cx="10%" cy="15%" r="50%">
+              <stop offset="0%" stopColor="#86EFAC" stopOpacity="0.55" />
+              <stop offset="100%" stopColor="#86EFAC" stopOpacity="0" />
+            </radialGradient>
+            <radialGradient id="tar-g2" cx="90%" cy="15%" r="50%">
+              <stop offset="0%" stopColor="#93C5FD" stopOpacity="0.55" />
+              <stop offset="100%" stopColor="#93C5FD" stopOpacity="0" />
+            </radialGradient>
+            <radialGradient id="tar-g3" cx="50%" cy="90%" r="55%">
+              <stop offset="0%" stopColor="#FDE68A" stopOpacity="0.5" />
+              <stop offset="100%" stopColor="#FDE68A" stopOpacity="0" />
+            </radialGradient>
+            <filter id="tar-blur"><feGaussianBlur stdDeviation="28" /></filter>
+          </defs>
+          <rect width="1440" height="1100" fill="url(#tar-bg)" />
+          <rect width="1440" height="1100" fill="url(#tar-g1)" />
+          <rect width="1440" height="1100" fill="url(#tar-g2)" />
+          <rect width="1440" height="1100" fill="url(#tar-g3)" />
+          <circle cx="130" cy="170" r="140" fill="#4ADE80" opacity="0.18" filter="url(#tar-blur)" />
+          <circle cx="1310" cy="160" r="160" fill="#60A5FA" opacity="0.18" filter="url(#tar-blur)" />
+          <circle cx="720" cy="950" r="200" fill="#FCD34D" opacity="0.14" filter="url(#tar-blur)" />
+          <path d="M0 950 C360 900 720 950 1080 920 C1260 905 1380 920 1440 910 L1440 1100 L0 1100 Z"
+            fill="white" opacity="0.55" />
+        </svg>
+      </div>
+
+      <div className="mx-auto max-w-5xl px-4 py-10 space-y-12">
+
+        {/* HERO */}
+        <section className="rounded-[2rem] border border-white/80 bg-white/80 p-8 shadow-2xl backdrop-blur-xl text-center">
+          <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-emerald-100 px-4 py-2 text-xs font-black uppercase tracking-wide text-emerald-800 ring-1 ring-emerald-200">
+            💰 EleveAI · Tarifs
+          </div>
+          <h1 className="text-3xl font-black leading-tight text-slate-950 sm:text-5xl">
+            Simple, transparent, sans surprise
+          </h1>
+          <p className="mt-4 mx-auto max-w-2xl text-base font-semibold leading-relaxed text-slate-600">
+            EleveAI est en phase pilote. L&apos;accès est gratuit pour les premières classes
+            partenaires. L&apos;offre famille individuelle arrive bientôt.
+          </p>
+        </section>
+
+        {/* OFFRES */}
+        <section className="grid gap-6 md:grid-cols-3">
+          {offres.map((o) => (
+            <div
+              key={o.nom}
+              className={`relative flex flex-col rounded-[2rem] border bg-white/85 p-6 shadow-xl backdrop-blur transition hover:-translate-y-1 ${
+                o.highlight
+                  ? "border-blue-300 ring-4 ring-blue-100"
+                  : "border-white/70"
+              }`}
             >
-              <span className="text-[#06a9df]">E</span>LEVE<span className="text-[#00a651]">AI</span>
-            </Link>
+              {o.highlight && (
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-blue-600 px-4 py-1 text-xs font-black text-white shadow">
+                  ⭐ Recommandé
+                </div>
+              )}
 
-            <div className="hidden flex-1 items-center justify-center md:flex">
-              <div className="flex w-full max-w-xl items-center rounded-full bg-white/95 px-4 py-2 text-sm text-slate-500 shadow-inner">
-                <span className="mr-2 text-lg text-[#4dbd00]">⌕</span>
-                Recherchez un niveau, une notion ou une compétence
-                <span className="ml-auto text-xl text-slate-300">›</span>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-2">
-              <Link
-                href="/auth/login"
-                className="rounded-md bg-[#0799d8] px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-[#008bc8]"
-              >
-                Connexion
-              </Link>
-              <Link
-                href="/auth/signup"
-                className="rounded-md bg-[#dff7d9] px-4 py-2 text-sm font-semibold text-[#0783b7] hover:bg-white"
-              >
-                S’inscrire
-              </Link>
-            </div>
-          </div>
-
-          <nav className="flex flex-wrap justify-center gap-6 text-lg font-serif sm:text-2xl">
-            <Link href="/tutor" className="hover:text-[#fff0a8]">
-              Maths
-            </Link>
-            <Link href="/defis" className="hover:text-[#fff0a8]">
-              Récompenses
-            </Link>
-            <Link href="/dashboard" className="hover:text-[#fff0a8]">
-              Suivi des progrès
-            </Link>
-            <Link href="/pourquoi-nos-tarifs-sont-justes" className="hover:text-[#fff0a8]">
-              Les avantages d’EleveAI
-            </Link>
-          </nav>
-        </div>
-      </section>
-
-      <section className="border-b border-slate-200 bg-white">
-        <div className="mx-auto flex max-w-4xl flex-wrap items-center justify-center gap-3 px-4 py-5 text-sm sm:text-base">
-          <div className="flex items-center gap-3 text-[#00a6d6]">
-            <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#00a6d6] font-semibold text-white">
-              1
-            </span>
-            <span>Devenir membre</span>
-          </div>
-          <div className="hidden h-px w-16 bg-slate-300 sm:block" />
-          <div className="flex items-center gap-3 text-[#ff9f16]">
-            <span className="flex h-8 w-8 items-center justify-center rounded-full border border-[#ff9f16] font-semibold">
-              2
-            </span>
-            <span>Configurer votre compte</span>
-          </div>
-          <div className="hidden h-px w-16 bg-slate-300 sm:block" />
-          <div className="flex items-center gap-3 text-[#00a6b8]">
-            <span className="flex h-8 w-8 items-center justify-center rounded-full border border-[#00a6b8] font-semibold">
-              3
-            </span>
-            <span>Bienvenue sur EleveAI</span>
-          </div>
-        </div>
-      </section>
-
-      <section className="mx-auto max-w-5xl px-4 py-10 sm:px-6">
-        <div className="space-y-8">
-          <div>
-            <h1 className="text-2xl font-medium text-[#08265c]">
-              Nombre d’enfants
-            </h1>
-            <div className="mt-4 flex flex-wrap items-center gap-3">
-              <div className="inline-flex overflow-hidden rounded-md border border-slate-300 bg-white text-sm shadow-sm">
-                <button
-                  type="button"
-                  onClick={() => setChildren((value) => Math.max(1, value - 1))}
-                  className="h-11 w-12 text-lg text-slate-600 hover:bg-slate-50 disabled:text-slate-300"
-                  disabled={children === 1}
-                  aria-label="Retirer un enfant"
-                >
-                  -
-                </button>
-                <span className="flex h-11 w-16 items-center justify-center border-x border-slate-300 bg-white">
-                  {children}
+              <div className="mb-4">
+                <span className={`rounded-full px-3 py-1 text-xs font-black ${o.badgeColor}`}>
+                  {o.badge}
                 </span>
-                <button
-                  type="button"
-                  onClick={() =>
-                    setChildren((value) => Math.min(MAX_CHILDREN, value + 1))
-                  }
-                  className="h-11 w-12 text-lg text-slate-600 hover:bg-slate-50 disabled:text-slate-300"
-                  disabled={children === MAX_CHILDREN}
-                  aria-label="Ajouter un enfant"
-                >
-                  +
-                </button>
               </div>
-              <p className="text-sm text-slate-500">
-                Seulement {EXTRA_CHILD_MONTHLY} €/mois pour chaque enfant supplémentaire
+
+              <h2 className="text-xl font-black text-slate-950">{o.nom}</h2>
+              <p className="mt-1 text-3xl font-black text-blue-700">{o.prix}</p>
+              <p className="mt-1 text-sm font-bold text-slate-500">{o.soustitre}</p>
+              <p className="mt-3 text-sm font-semibold leading-relaxed text-slate-600">
+                {o.description}
               </p>
-            </div>
-          </div>
 
-          <div>
-            <h2 className="text-2xl font-medium text-[#08265c]">
-              Choisissez une formule
-            </h2>
-
-            <div className="mt-5 grid overflow-hidden rounded-md bg-gradient-to-r from-[#c8f6dc] to-[#b9eeea] p-5 shadow-sm lg:grid-cols-[1fr_1fr_1.15fr] lg:gap-5">
-              <article className="mb-5 overflow-hidden rounded-md bg-white shadow-[0_2px_8px_rgba(0,0,0,0.28)] ring-2 ring-[#22b8bd] lg:mb-0">
-                <div className="flex items-center gap-3 bg-[#27b4bb] px-6 py-5 text-white">
-                  <span className="text-4xl" aria-hidden="true">
-                    🎒
-                  </span>
-                  <h3 className="font-serif text-2xl font-semibold">Mensuelle</h3>
-                </div>
-
-                <div className="space-y-7 px-8 py-8 text-center">
-                  <p className="text-sm text-[#00aebc]">✧ Formule la plus flexible</p>
-                  <p className="text-4xl font-semibold tracking-wide text-black">
-                    {formatEuro(prices.monthly)} €
-                    <span className="ml-1 text-base font-semibold">/mois</span>
-                  </p>
-
-                  <button
-                    type="button"
-                    onClick={() => setSelectedPlan("mensuel")}
-                    className="inline-flex w-full items-center justify-center rounded-md bg-[#25b6bd] px-5 py-3 text-sm font-semibold text-white hover:bg-[#17a6ad]"
-                  >
-                    <span className="mr-3 text-xl">✓</span>
-                    {selectedPlan === "mensuel" ? "Formule choisie" : "Choisir"}
-                  </button>
-                </div>
-              </article>
-
-              <article className="relative mb-5 overflow-hidden rounded-md bg-white shadow-sm lg:mb-0">
-                <div className="absolute right-[-36px] top-5 rotate-45 bg-[#ffd31a] px-10 py-1 text-xs font-semibold text-[#5b4c00]">
-                  Bon plan
-                </div>
-                <div className="flex items-center gap-3 bg-[#6865c9] px-6 py-5 text-white">
-                  <span className="text-4xl" aria-hidden="true">
-                    📐
-                  </span>
-                  <h3 className="font-serif text-2xl font-semibold">Annuelle</h3>
-                </div>
-
-                <div className="space-y-4 px-8 py-8 text-center">
-                  <div className="text-sm text-[#655fd6]">
-                    <p>⚙ Formule la plus économique</p>
-                    <p className="text-xs text-slate-500">Économisez 40 €/an</p>
-                  </div>
-                  <p className="text-4xl font-semibold tracking-wide text-black">
-                    {formatEuro(prices.yearlyMonthly)} €
-                    <span className="ml-1 text-base font-semibold">/mois</span>
-                  </p>
-                  <p className="text-xs text-slate-500">
-                    {formatEuro(prices.yearlyTotal)} €/facturés en une seule fois
-                  </p>
-
-                  <button
-                    type="button"
-                    onClick={() => setSelectedPlan("annuel")}
-                    className="inline-flex w-full items-center justify-center rounded-md border border-[#655fd6] bg-white px-5 py-3 text-sm font-semibold text-[#655fd6] hover:bg-[#f3f2ff]"
-                  >
-                    {selectedPlan === "annuel" ? "Formule choisie" : "Choisir"}
-                  </button>
-                </div>
-              </article>
-
-              <aside className="flex flex-col justify-center px-3 py-3 lg:px-5">
-                <h3 className="text-2xl font-medium text-[#08265c]">Inclus avec EleveAI</h3>
-                <ul className="mt-5 space-y-5 text-sm text-[#08265c]">
-                  <li className="flex gap-3">
-                    <span className="text-xl text-[#00a6d6]">△</span>
-                    <span>Maths du CM2 à la 3e</span>
+              <ul className="mt-5 flex-1 space-y-2">
+                {o.inclus.map((item) => (
+                  <li key={item} className="flex items-start gap-2 text-sm font-semibold text-slate-700">
+                    <span className="mt-0.5 text-emerald-500">✓</span>
+                    {item}
                   </li>
-                  <li className="flex gap-3">
-                    <span className="text-xl text-[#00a6d6]">∞</span>
-                    <span>Accès à tous les niveaux, sans limite de progression</span>
-                  </li>
-                  <li className="flex gap-3">
-                    <span className="text-xl text-[#00a6d6]">▣</span>
-                    <span>Exercices interactifs, guidés et auto-corrigés</span>
-                  </li>
-                  <li className="flex gap-3">
-                    <span className="text-xl text-[#00a6d6]">▥</span>
-                    <span>Suivi personnalisé en temps réel</span>
-                  </li>
-                </ul>
-              </aside>
-            </div>
-          </div>
+                ))}
+              </ul>
 
-          <div className="rounded-md border border-slate-300 bg-white px-6 py-5 shadow-sm">
-            <p className="text-sm text-slate-700">
-              <span className="mr-2 text-[#ff9f16]">☏</span>
-              Vous avez des questions ? Consultez notre{" "}
-              <Link href="/faq/faq-tarifs" className="font-semibold underline underline-offset-4">
-                FAQ
-              </Link>{" "}
-              ou{" "}
-              <Link href="/contact" className="font-semibold underline underline-offset-4">
-                contactez-nous
-              </Link>
-              .
-            </p>
-          </div>
-
-          <div className="flex flex-col items-center justify-between gap-4 text-center sm:flex-row sm:text-left">
-            <p className="text-xs text-slate-500">
-              Le renouvellement est automatique. Vous pouvez résilier à tout moment en ligne.
-            </p>
-
-            {stripeOk ? (
               <Link
-                href={checkoutHref(selectedPlan, children)}
-                prefetch={false}
-                className="inline-flex rounded-md bg-[#25b6bd] px-8 py-3 text-sm font-semibold text-white shadow-sm hover:bg-[#17a6ad]"
+                href={o.ctaHref}
+                className={`mt-6 block rounded-2xl px-5 py-3 text-center text-sm font-black shadow transition ${o.ctaColor}`}
               >
-                Continuer
+                {o.cta}
               </Link>
-            ) : (
-              <Link
-                href="/auth/signup"
-                className="inline-flex rounded-md bg-[#25b6bd] px-8 py-3 text-sm font-semibold text-white shadow-sm hover:bg-[#17a6ad]"
+            </div>
+          ))}
+        </section>
+
+        {/* PHASE PILOTE */}
+        <section className="rounded-[2rem] border border-emerald-200 bg-white/80 p-8 shadow-xl backdrop-blur text-center">
+          <p className="text-3xl">🚀</p>
+          <h2 className="mt-2 text-2xl font-black text-slate-950">
+            Pourquoi c&apos;est gratuit au départ ?
+          </h2>
+          <p className="mt-3 font-semibold text-slate-600 max-w-2xl mx-auto">
+            EleveAI est développé par un enseignant de La Réunion. La phase pilote permet
+            de valider que la plateforme répond aux vrais besoins du terrain avant de
+            fixer un tarif définitif. Vos retours comptent autant que les résultats de vos élèves.
+          </p>
+          <Link
+            href="/contact"
+            className="mt-6 inline-flex rounded-2xl bg-emerald-500 px-8 py-4 text-base font-black text-white shadow-lg hover:bg-emerald-400 transition"
+          >
+            📩 Rejoindre le pilote gratuit
+          </Link>
+        </section>
+
+        {/* FAQ */}
+        <section>
+          <h2 className="mb-6 text-2xl font-black text-slate-950 text-center">
+            Questions sur les tarifs
+          </h2>
+          <div className="space-y-3">
+            {faq.map((f) => (
+              <details
+                key={f.q}
+                className="rounded-[1.5rem] border border-white/80 bg-white/80 px-6 py-4 shadow-md backdrop-blur"
               >
-                Continuer
-              </Link>
-            )}
+                <summary className="cursor-pointer font-black text-slate-950">
+                  {f.q}
+                </summary>
+                <p className="mt-3 text-sm font-semibold leading-relaxed text-slate-600">
+                  {f.a}
+                </p>
+              </details>
+            ))}
           </div>
-        </div>
-      </section>
+        </section>
+
+        {/* CTA FINAL */}
+        <section className="rounded-[2rem] bg-blue-600 p-8 shadow-2xl text-center text-white">
+          <h2 className="text-2xl font-black">Une question sur les tarifs ?</h2>
+          <p className="mt-2 font-semibold text-blue-100">
+            Réponse sous 24h · Pas de commercial · Juste une conversation.
+          </p>
+          <Link
+            href="/contact"
+            className="mt-5 inline-flex rounded-2xl bg-white px-8 py-4 text-base font-black text-blue-700 shadow hover:bg-blue-50 transition"
+          >
+            📩 Nous écrire
+          </Link>
+        </section>
+
+      </div>
     </main>
   );
 }

@@ -46,6 +46,7 @@ const ROUTES: RouteConfig[] = [
   // ── INSTITUTIONNEL ─────────────────────────────────────────────────────────
   { path: "/pourquoi-eleveai",  priority: 0.75, changeFrequency: "monthly", lastMod: LASTMOD_CORE },
   { path: "/qui-sommes-nous",   priority: 0.7,  changeFrequency: "monthly", lastMod: LASTMOD_CORE },
+  { path: "/tarifs",            priority: 0.7,  changeFrequency: "monthly", lastMod: LASTMOD_CORE },
   { path: "/contact",           priority: 0.65, changeFrequency: "monthly", lastMod: LASTMOD_CORE },
 
   // ── BLOG INDEX ─────────────────────────────────────────────────────────────
