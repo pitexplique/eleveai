@@ -220,7 +220,7 @@ export default function AccueilPage() {
       </section>
 
       <h1 className="sr-only">
-        EleveAI – Un vrai parcours d&apos;apprentissage du CM1 à la 3e + Bac Spé Maths
+        EleveAI – Plusieurs portes pour apprendre les maths et suivre la progression des élèves. Du CM1 au Bac, à La Réunion.
       </h1>
 
       {/* ── 2. DÉMARRAGE RAPIDE ─────────────────────────────────────────── */}

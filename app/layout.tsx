@@ -43,30 +43,28 @@ export const metadata: Metadata = {
   },
 
   title: {
-    default: "EleveAI — Mathématiques, automatismes et raisonnement",
+    default: "EleveAI — Plusieurs portes pour apprendre les maths",
     template: "%s — EleveAI",
   },
 
   description:
-    "EleveAI aide les élèves à progresser en mathématiques grâce au calcul rapide, aux parcours guidés, à la leçon du jour et à des entraînements courts centrés sur les automatismes et le raisonnement.",
+    "EleveAI : un espace avec plusieurs portes d'entrée pour apprendre les maths et suivre la progression des élèves. Coach Maths IA, Parcours, Brevet, Calcul rapide, English Maths — du CM1 au Bac, à La Réunion.",
 
   keywords: [
     "EleveAI",
     "mathématiques",
-    "calcul rapide",
-    "automatismes",
-    "raisonnement scientifique",
     "coach maths",
-    "leçon du jour",
-    "parcours de progression",
+    "parcours progression",
+    "brevet des collèges",
+    "bac spé maths",
+    "calcul rapide",
     "révision maths",
+    "suivi élèves",
     "collège",
-    "6e",
-    "5e",
-    "4e",
-    "3e",
+    "6e", "5e", "4e", "3e",
     "brevet 2026",
     "La Réunion",
+    "english maths",
   ],
 
   alternates: {
@@ -74,9 +72,9 @@ export const metadata: Metadata = {
   },
 
   openGraph: {
-    title: "EleveAI — Apprendre, raisonner, progresser",
+    title: "EleveAI — Plusieurs portes pour apprendre les maths",
     description:
-      "Calcul rapide, leçon du jour, coach maths et parcours guidés : EleveAI accompagne les élèves pour consolider leurs bases et développer leur raisonnement.",
+      "Coach Maths IA, Parcours, Brevet, Calcul rapide, English Maths : EleveAI accompagne les élèves du CM1 au Bac avec un suivi de progression.",
     url: CANONICAL,
     type: "website",
     siteName: "EleveAI",

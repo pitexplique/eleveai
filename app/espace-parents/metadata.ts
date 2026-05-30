@@ -2,29 +2,23 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Espace parents — Accompagner son enfant avec l’IA | EleveAI",
+  title: "Espace parents | EleveAI — Suivre la progression de votre enfant",
   description:
-    "Espace parents EleveAI : accompagner son enfant avec l’IA sans faire à sa place. Cadre clair, prompts guidés, anti-triche et confiance.",
-  alternates: {
-    canonical: "https://eleveai.fr/espace-parents",
-  },
-  robots: {
-    index: true,
-    follow: true,
-  },
+    "EleveAI accompagne votre enfant en maths : Coach IA, Parcours, Brevet des collèges, Calcul rapide, English Maths. Résultats enregistrés, progression visible.",
+  alternates: { canonical: "https://eleveai.fr/espace-parents" },
+  robots: { index: true, follow: true },
   openGraph: {
     type: "website",
     url: "https://eleveai.fr/espace-parents",
-    title: "Espace parents — Accompagner son enfant avec l’IA",
-    description:
-      "Aider son enfant à apprendre avec l’IA : comprendre, réviser, progresser — sans tricher.",
     siteName: "EleveAI",
-    locale: "fr_FR",
+    title: "Espace parents | EleveAI",
+    description:
+      "Suivez la progression de votre enfant en maths : parcours de notions, scores enregistrés, outils adaptés du CM1 au Bac.",
   },
   twitter: {
-    card: "summary_large_image",
-    title: "Espace parents — EleveAI",
+    card: "summary",
+    title: "Espace parents | EleveAI",
     description:
-      "Un cadre simple pour aider son enfant avec l’IA, sans conflits ni triche.",
+      "Coach Maths IA, Brevet, Calcul rapide — suivez la progression de votre enfant.",
   },
 };

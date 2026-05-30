@@ -1,689 +1,244 @@
-// app/espace-parents/EspaceParentsClient.tsx
 "use client";
 
 import Link from "next/link";
-import { useMemo, useState, useCallback, useEffect, useRef } from "react";
-import { PresetCarousel } from "@/components/PresetCarousel";
-import { createClient } from "@/lib/supabase/client";
 
-import {
-  CLASSES,
-  MATIERES,
-  type ClasseValue,
-  type MatiereValue,
-} from "@/lib/constants/scolaire";
-import {
-  METHODES,
-  DEFAULT_METHODE,
-  type MethodePedagogique,
-  getMethodePromptBlock,
-} from "@/lib/pedagogie/methodes";
+const outils = [
+  {
+    emoji: "📊",
+    title: "Tableau de bord élève",
+    description: "Votre enfant peut consulter tous ses résultats enregistrés : parcours, calcul rapide, défis et English Maths.",
+    href: "/dashboard-eleve",
+    color: "from-emerald-400 to-teal-500",
+  },
+  {
+    emoji: "🛤️",
+    title: "Parcours de notions",
+    description: "Un bilan clair des notions maîtrisées, à revoir ou fragiles. Idéal pour cibler les révisions.",
+    href: "/parcours",
+    color: "from-violet-500 to-indigo-600",
+  },
+  {
+    emoji: "📚",
+    title: "Coach Brevet",
+    description: "Sprint 30 jours pour préparer le brevet des collèges. Automatismes, problèmes guidés et sujets express.",
+    href: "/coach-brevet",
+    color: "from-emerald-500 to-cyan-600",
+  },
+  {
+    emoji: "🧠",
+    title: "Coach Maths IA",
+    description: "Un entraînement adapté, notion par notion, du CM1 à la Terminale. L'élève progresse à son rythme.",
+    href: "/coach-maths-ia",
+    color: "from-orange-400 to-red-500",
+  },
+  {
+    emoji: "⚡",
+    title: "Calcul rapide",
+    description: "7 questions en 5 minutes pour renforcer les automatismes. Résultats enregistrés si l'élève est connecté.",
+    href: "/calcul-rapide",
+    color: "from-lime-400 to-green-600",
+  },
+  {
+    emoji: "🇬🇧",
+    title: "English Maths",
+    description: "Vocabulaire mathématique en anglais — 5 mots par jour avec audio et mini-défi.",
+    href: "/english-maths",
+    color: "from-sky-500 to-blue-600",
+  },
+];
 
-import {
-  PARENTS_PRESETS,
-  PARENTS_PRESET_ITEMS,
-  type Maitrise,
-  type ParentsPresetKey,
-  isParentsPresetKey,
-} from "@/data/parentsPresets";
-
-/* ----------------------------------------
-   UI HELPERS
----------------------------------------- */
-
-function FieldLabel({
-  title,
-  hint,
-  required,
-}: {
-  title: string;
-  hint?: string;
-  required?: boolean;
-}) {
-  return (
-    <div className="space-y-0.5">
-      <p className="text-xs font-semibold text-slate-700">
-        {title}
-        {required ? <span className="ml-1 text-rose-600">*</span> : null}
-      </p>
-      {hint ? (
-        <p className="text-[11px] text-slate-500 leading-tight">{hint}</p>
-      ) : null}
-    </div>
-  );
-}
-
-function Tag({
-  label,
-  onClick,
-  disabled,
-  variant = "default",
-}: {
-  label: string;
-  onClick: () => void;
-  disabled?: boolean;
-  variant?: "default" | "dark" | "green" | "purple" | "orange";
-}) {
-  const base =
-    "inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-xs font-semibold transition border";
-  const styles: Record<typeof variant, string> = {
-    default: "bg-white text-slate-700 border-slate-200 hover:bg-slate-50",
-    dark: "bg-slate-900 text-white border-slate-900 hover:bg-slate-800",
-    green: "bg-emerald-600 text-white border-emerald-600 hover:bg-emerald-700",
-    purple: "bg-indigo-600 text-white border-indigo-600 hover:bg-indigo-700",
-    orange: "bg-orange-500 text-white border-orange-500 hover:bg-orange-600",
-  };
-
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      disabled={disabled}
-      className={[
-        base,
-        styles[variant],
-        disabled ? "opacity-50 cursor-not-allowed hover:bg-inherit" : "",
-      ].join(" ")}
-    >
-      {label}
-    </button>
-  );
-}
-
-function CollerDansTags({
-  prompt,
-  onCopy,
-}: {
-  prompt: string;
-  onCopy: () => Promise<void>;
-}) {
-  const encoded = useMemo(() => encodeURIComponent(prompt || ""), [prompt]);
-  const disabled = !prompt;
-
-  async function openEleveAI() {
-    if (!prompt) return;
-    await onCopy();
-    window.open("/tchat", "_blank");
-  }
-
-  function openChatGPT() {
-    if (!prompt) return;
-    window.open(`https://chat.openai.com/?q=${encoded}`, "_blank");
-  }
-
-  function openMistral() {
-    if (!prompt) return;
-    window.open("https://chat.mistral.ai/", "_blank");
-  }
-
-  function openGemini() {
-    if (!prompt) return;
-    window.open(`https://gemini.google.com/app?q=${encoded}`, "_blank");
-  }
-
-  function openClaude() {
-    if (!prompt) return;
-    window.open("https://claude.ai/new", "_blank");
-  }
-
-  function openPerplexity() {
-    if (!prompt) return;
-    window.open("https://www.perplexity.ai/", "_blank");
-  }
-
-  return (
-    <div className="space-y-2">
-      <p className="text-sm font-semibold text-slate-700">Coller dans :</p>
-      <div className="flex flex-wrap gap-2">
-        <Tag
-          label="⬛ ChatGPT"
-          onClick={openChatGPT}
-          disabled={disabled}
-          variant="dark"
-        />
-        <Tag
-          label="🟩 Perplexity"
-          onClick={openPerplexity}
-          disabled={disabled}
-          variant="green"
-        />
-        <Tag
-          label="🚀 Tchat EleveAI"
-          onClick={openEleveAI}
-          disabled={disabled}
-          variant="green"
-        />
-      </div>
-      <p className="text-[11px] text-slate-500">
-        Astuce : clique sur “🚀 Tchat EleveAI” → le prompt est copié et /tchat
-        s’ouvre dans un nouvel onglet.
-      </p>
-    </div>
-  );
-}
-
-/* ----------------------------------------
-   PAGE PARENTS
----------------------------------------- */
+const rassurances = [
+  {
+    emoji: "🔐",
+    title: "Accès sécurisé par code",
+    text: "Votre enfant se connecte avec un code établissement et un code élève fourni par l'école. Aucun email ni mot de passe personnel.",
+  },
+  {
+    emoji: "📈",
+    title: "Progression visible",
+    text: "Tous les scores sont enregistrés dans un tableau de bord. Vous pouvez suivre les progrès notion par notion.",
+  },
+  {
+    emoji: "🎯",
+    title: "Centré sur l'apprentissage",
+    text: "EleveAI ne donne pas les réponses directement. L'élève cherche, comprend, puis vérifie. Pas de triche possible.",
+  },
+  {
+    emoji: "🏝️",
+    title: "Ancré à La Réunion",
+    text: "Les défis et exemples sont inspirés du contexte local : Piton de la Fournaise, Grand Raid, biodiversité de l'île.",
+  },
+];
 
 export default function EspaceParentsClient() {
-  const supabase = useMemo(() => createClient(), []);
-
-  // ✅ Auth state (pour afficher le bloc connexion)
-  const [authLoading, setAuthLoading] = useState(true);
-  const [userEmail, setUserEmail] = useState<string | null>(null);
-  const isLoggedIn = !!userEmail;
-
-  // ✅ ref haut de page
-  const topRef = useRef<HTMLDivElement | null>(null);
-
-  // ✅ Garantit "retour en haut" au montage de la page (comme tes autres pages)
-  useEffect(() => {
-    // si AppShell a un conteneur scroll, ça ne gêne pas : au pire ça ne fera rien de mauvais
-    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
-  }, []);
-
-  useEffect(() => {
-    let mounted = true;
-
-    async function init() {
-      const { data } = await supabase.auth.getUser();
-      if (!mounted) return;
-      setUserEmail(data.user?.email ?? null);
-      setAuthLoading(false);
-    }
-
-    init();
-
-    const { data: sub } = supabase.auth.onAuthStateChange((_event, session) => {
-      setUserEmail(session?.user?.email ?? null);
-      setAuthLoading(false);
-    });
-
-    return () => {
-      mounted = false;
-      sub.subscription.unsubscribe();
-    };
-  }, [supabase]);
-
-  const [prenom, setPrenom] = useState("");
-
-  // ✅ alignés sur tes constantes
-  const [classe, setClasse] = useState<ClasseValue>("college");
-  const [matiere, setMatiere] = useState<MatiereValue>("maths");
-
-  const [objectif, setObjectif] = useState(
-    "Lui redonner confiance et l’aider à comprendre le cours sur : les fractions et la cuisine",
-  );
-
-  // ✅ Méthode pédagogique
-  const [methode, setMethode] = useState<MethodePedagogique>(DEFAULT_METHODE);
-
-  // Profil enfant
-  const [maitrise, setMaitrise] = useState<Maitrise>("besoin");
-  const [hasDys, setHasDys] = useState(false);
-  const [dysTypes, setDysTypes] = useState<string[]>([]);
-  const [hyperactif, setHyperactif] = useState(false);
-
-  const [generatedPrompt, setGeneratedPrompt] = useState("");
-  const [copied, setCopied] = useState(false);
-
-  const toggleDysType = (type: string) => {
-    setDysTypes((prev) =>
-      prev.includes(type) ? prev.filter((t) => t !== type) : [...prev, type],
-    );
-  };
-
-  const appliquerPreset = (key: ParentsPresetKey) => {
-    const preset = PARENTS_PRESETS[key];
-    const v = preset.valeurs;
-
-    if (v.classe !== undefined) setClasse(v.classe);
-    if (v.matiere !== undefined) setMatiere(v.matiere);
-    if (v.objectif !== undefined) setObjectif(v.objectif);
-    if (v.maitrise !== undefined) setMaitrise(v.maitrise);
-    if (v.methode !== undefined) setMethode(v.methode);
-
-    if (v.hasDys !== undefined) {
-      setHasDys(v.hasDys);
-      if (!v.hasDys) setDysTypes([]);
-    }
-    if (v.dysTypes !== undefined) setDysTypes(v.dysTypes);
-    if (v.hyperactif !== undefined) setHyperactif(v.hyperactif);
-  };
-
-  const handleGenerate = useCallback(() => {
-    const nomEleve = prenom.trim() || "mon enfant";
-
-    let maitrisePhrase = "";
-    if (maitrise === "besoin") {
-      maitrisePhrase = `${nomEleve} a plutôt besoin d’aide en ce moment : certaines bases ne sont pas complètement installées et la confiance est fragile.`;
-    } else if (maitrise === "satisfaisant") {
-      maitrisePhrase = `${nomEleve} a un niveau globalement satisfaisant : il/elle réussit beaucoup de choses mais a besoin d’être rassuré·e et de consolider certaines notions.`;
-    } else {
-      maitrisePhrase = `${nomEleve} est plutôt à l’aise / expert et a besoin d’être stimulé·e, d’aller un peu plus loin sans perdre le plaisir d’apprendre.`;
-    }
-
-    const methodeBlock = getMethodePromptBlock(methode);
-
-    const base = `Tu es une IA pédagogique bienveillante qui s’adresse à ${nomEleve}, élève en classe de ${classe}, en ${matiere}, dans le système scolaire français.
-
-${maitrisePhrase}
-
-${methodeBlock}Ta mission :
-- aider ${nomEleve} à COMPRENDRE et à S’ENTRAÎNER,
-- sans jamais faire les exercices à sa place,
-- en respectant les programmes officiels,
-- en expliquant avec des mots simples et des exemples concrets.
-
-Objectif principal demandé par le parent : ${objectif}`;
-
-    let besoinsBloc = "";
-
-    if (hasDys || hyperactif) {
-      const listeDys =
-        hasDys && dysTypes.length > 0
-          ? `Profil DYS indiqué par le parent : ${dysTypes.join(", ")}.`
-          : hasDys
-          ? `Profil DYS indiqué par le parent (type non précisé).`
-          : "";
-
-      const hyperactifTexte = hyperactif
-        ? `Le parent signale aussi un profil hyperactif / TDAH : prévois des activités courtes, très guidées, avec des changements réguliers de rythme.`
-        : "";
-
-      besoinsBloc = `
-
-Prise en compte des besoins spécifiques :
-- Présentation très aérée, phrases courtes.
-- Tu évites les gros blocs de texte.
-- Tu relis les consignes en les reformulant avec des mots simples.
-- Tu fais souvent des petites pauses ("On récapitule en une phrase ?").
-${listeDys ? `- ${listeDys}` : ""}${hyperactifTexte ? `\n- ${hyperactifTexte}` : ""}`;
-    }
-
-    const suite = `
-
-Règles importantes :
-- Tu poses d’abord quelques questions simples pour vérifier ce que ${nomEleve} sait déjà.
-- Tu donnes ensuite une seule nouvelle difficulté à la fois.
-- Quand ${nomEleve} se trompe, tu expliques calmement l’erreur et proposes un exemple similaire.
-- Tu termines chaque échange par un petit récapitulatif et une question :
-  "Peux-tu me réexpliquer avec tes mots ce que tu as retenu ?"
-- Tu refuses de donner directement la solution complète d’un devoir maison ou d’une évaluation à venir. À la place, tu guides pas à pas.`;
-
-    setGeneratedPrompt(base + besoinsBloc + suite);
-    setCopied(false);
-
-    // ✅ Optionnel mais utile : remonte visuellement en haut après génération
-    requestAnimationFrame(() => {
-      topRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
-    });
-  }, [
-    prenom,
-    classe,
-    matiere,
-    objectif,
-    maitrise,
-    hasDys,
-    dysTypes,
-    hyperactif,
-    methode,
-  ]);
-
-  const handleCopy = useCallback(async () => {
-    if (!generatedPrompt) return;
-    try {
-      await navigator.clipboard.writeText(generatedPrompt);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 1500);
-    } catch {
-      alert("Copie impossible automatiquement. Sélectionnez le texte à la main.");
-    }
-  }, [generatedPrompt]);
-
   return (
-    <main ref={topRef} className="min-h-screen bg-gradient-to-b from-sky-50 via-white to-emerald-50">
-      <div className="w-full max-w-[1400px] mx-auto px-3 sm:px-5 lg:px-6 pt-0 pb-6 lg:pb-10" >
+    <main className="relative min-h-screen overflow-hidden text-slate-950">
+
+      {/* ── FOND SVG JOYEUX ─────────────────────────────────────────── */}
+      <div className="pointer-events-none absolute inset-0 -z-10">
+        <svg
+          className="h-full w-full"
+          viewBox="0 0 1440 1000"
+          preserveAspectRatio="xMidYMid slice"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <defs>
+            <linearGradient id="ep-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#F0FDF4" />
+              <stop offset="50%" stopColor="#EFF6FF" />
+              <stop offset="100%" stopColor="#FFFBEB" />
+            </linearGradient>
+            <radialGradient id="ep-g1" cx="10%" cy="20%" r="50%">
+              <stop offset="0%" stopColor="#86EFAC" stopOpacity="0.65" />
+              <stop offset="100%" stopColor="#86EFAC" stopOpacity="0" />
+            </radialGradient>
+            <radialGradient id="ep-g2" cx="88%" cy="18%" r="50%">
+              <stop offset="0%" stopColor="#BAE6FD" stopOpacity="0.6" />
+              <stop offset="100%" stopColor="#BAE6FD" stopOpacity="0" />
+            </radialGradient>
+            <radialGradient id="ep-g3" cx="50%" cy="88%" r="55%">
+              <stop offset="0%" stopColor="#FDE68A" stopOpacity="0.55" />
+              <stop offset="100%" stopColor="#FDE68A" stopOpacity="0" />
+            </radialGradient>
+            <filter id="ep-blur"><feGaussianBlur stdDeviation="28" /></filter>
+          </defs>
+
+          <rect width="1440" height="1000" fill="url(#ep-bg)" />
+          <rect width="1440" height="1000" fill="url(#ep-g1)" />
+          <rect width="1440" height="1000" fill="url(#ep-g2)" />
+          <rect width="1440" height="1000" fill="url(#ep-g3)" />
+
+          <circle cx="140" cy="160" r="130" fill="#4ADE80" opacity="0.18" filter="url(#ep-blur)" />
+          <circle cx="1300" cy="150" r="150" fill="#38BDF8" opacity="0.18" filter="url(#ep-blur)" />
+          <circle cx="720" cy="840" r="190" fill="#FCD34D" opacity="0.14" filter="url(#ep-blur)" />
+          <circle cx="300" cy="680" r="100" fill="#C084FC" opacity="0.16" filter="url(#ep-blur)" />
+          <circle cx="1150" cy="620" r="120" fill="#F9A8D4" opacity="0.15" filter="url(#ep-blur)" />
+
+          {/* Étoiles décoratives */}
+          <polygon points="1380,70 1390,100 1420,100 1396,118 1405,148 1380,130 1355,148 1364,118 1340,100 1370,100"
+            fill="#FDE68A" opacity="0.5" />
+          <polygon points="70,580 80,610 110,610 86,628 95,658 70,640 45,658 54,628 30,610 60,610"
+            fill="#86EFAC" opacity="0.45" />
+          <circle cx="60" cy="320" r="14" fill="#93C5FD" opacity="0.55" />
+          <circle cx="1390" cy="400" r="16" fill="#F9A8D4" opacity="0.55" />
+          <rect x="1220" y="490" width="26" height="26" rx="6" fill="#86EFAC" opacity="0.4" transform="rotate(20,1233,503)" />
+
+          <g opacity="0.1" fill="#1E40AF" fontFamily="serif" fontSize="50" fontWeight="900">
+            <text x="110" y="270">+</text>
+            <text x="1310" y="290">÷</text>
+            <text x="640" y="940">×</text>
+            <text x="1080" y="200">π</text>
+          </g>
+
+          <path d="M0 870 C240 820 480 870 720 840 C960 810 1200 860 1440 830 L1440 1000 L0 1000 Z"
+            fill="white" opacity="0.55" />
+        </svg>
+      </div>
+
+      {/* ── CONTENU ─────────────────────────────────────────────────── */}
+      <div className="mx-auto max-w-5xl px-4 py-10">
+
         {/* HERO */}
-        <section className="mb-10 rounded-3xl bg-white/80 p-6 shadow-sm ring-1 ring-sky-100 lg:p-8">
-          <div className="flex flex-wrap items-start justify-between gap-4">
-            <div className="space-y-4">
-              <p className="inline-flex items-center rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-emerald-700 ring-1 ring-emerald-100">
-                Espace parents · Accompagnement serein
-              </p>
-              <h1 className="text-3xl font-bold tracking-tight text-slate-900 lg:text-4xl">
-                Générateur de prompts parents – EleveAI
-              </h1>
-              <p className="max-w-2xl text-sm sm:text-base text-slate-700">
-                EleveAI est pensé pour{" "}
-                <span className="font-semibold">
-                  soutenir votre enfant, pas le remplacer
-                </span>
-                . Cette page vous aide à formuler des messages clairs et
-                sécurisés pour que l’IA l’accompagne avec bienveillance et dans
-                le respect de l’école.
-              </p>
-            </div>
+        <section className="mb-10 rounded-[2rem] border border-white/80 bg-white/75 p-6 shadow-2xl backdrop-blur-xl sm:p-8">
+          <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-sky-100 px-4 py-2 text-xs font-black uppercase tracking-wide text-sky-800 ring-1 ring-sky-200">
+            👨‍👩‍👧 EleveAI · Espace parents
+          </div>
 
-            <div className="max-w-xs rounded-2xl border border-sky-100 bg-sky-50 px-4 py-3 text-xs text-sky-900 shadow-inner">
-              <p className="mb-1 font-semibold">Notre promesse :</p>
-              <ul className="space-y-1">
-                <li>• Respect des programmes officiels.</li>
-                <li>• Pas de triche, pas de “copié-collé”.</li>
-                <li>• Priorité à la confiance et à l’autonomie.</li>
-              </ul>
-            </div>
+          <h1 className="text-3xl font-black leading-tight text-slate-950 sm:text-5xl">
+            Accompagner votre enfant avec EleveAI
+          </h1>
+
+          <p className="mt-4 max-w-2xl text-base font-semibold leading-relaxed text-slate-700">
+            EleveAI est une plateforme de soutien en maths pour les collégiens et lycéens.
+            Votre enfant s&apos;entraîne à son rythme, enregistre ses scores et suit sa progression
+            notion par notion — du CM1 au Bac Spé.
+          </p>
+
+          <div className="mt-6 flex flex-wrap gap-3">
+            <Link
+              href="/auth/signin-eleve"
+              className="rounded-2xl bg-emerald-500 px-6 py-3 text-sm font-black text-white shadow-lg hover:bg-emerald-400"
+            >
+              🔐 Connexion élève
+            </Link>
+            <Link
+              href="/contact"
+              className="rounded-2xl bg-white px-6 py-3 text-sm font-black text-slate-800 shadow-sm ring-1 ring-slate-200 hover:bg-slate-50"
+            >
+              📩 Nous contacter
+            </Link>
           </div>
         </section>
 
-        {/* 1️⃣ VOUS QUI CONNAISSEZ VOTRE ENFANT */}
-        <section className="mb-8 rounded-3xl bg-white p-6 shadow-md ring-1 ring-slate-100 lg:p-8">
-          <div className="mb-4 space-y-2">
-            <h2 className="text-base font-semibold text-slate-900">
-              Vous qui connaissez votre enfant 💛
-            </h2>
-            <p className="text-xs sm:text-sm text-slate-600">
-              Décrivez brièvement son profil : l’IA adaptera la façon d’expliquer
-              et le rythme.
-            </p>
-          </div>
-
-          <div className="space-y-5">
-            {/* Niveau de maîtrise */}
-            <div className="space-y-1.5">
-              <p className="text-xs font-medium text-slate-700">
-                Comment décririez-vous son niveau dans cette matière ?
-              </p>
-              <div className="flex flex-wrap gap-2">
-                <button
-                  type="button"
-                  onClick={() => setMaitrise("besoin")}
-                  className={`rounded-full px-3 py-1.5 text-xs font-medium transition ${
-                    maitrise === "besoin"
-                      ? "bg-rose-100 text-rose-900 ring-1 ring-rose-300"
-                      : "bg-white text-slate-700 ring-1 ring-slate-200"
-                  }`}
-                >
-                  A besoin d’aide
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setMaitrise("satisfaisant")}
-                  className={`rounded-full px-3 py-1.5 text-xs font-medium transition ${
-                    maitrise === "satisfaisant"
-                      ? "bg-amber-100 text-amber-900 ring-1 ring-amber-300"
-                      : "bg-white text-slate-700 ring-1 ring-slate-200"
-                  }`}
-                >
-                  Satisfaisant
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setMaitrise("expert")}
-                  className={`rounded-full px-3 py-1.5 text-xs font-medium transition ${
-                    maitrise === "expert"
-                      ? "bg-emerald-100 text-emerald-900 ring-1 ring-emerald-300"
-                      : "bg-white text-slate-700 ring-1 ring-slate-200"
-                  }`}
-                >
-                  Très à l’aise / expert
-                </button>
-              </div>
-            </div>
-
-            {/* Profil DYS & hyperactif */}
-            <div className="grid gap-4 sm:grid-cols-[2fr,1fr]">
-              <div className="space-y-2">
-                <div className="flex items-center gap-2">
-                  <input
-                    id="hasDys"
-                    type="checkbox"
-                    checked={hasDys}
-                    onChange={(e) => setHasDys(e.target.checked)}
-                    className="h-4 w-4"
-                  />
-                  <label
-                    htmlFor="hasDys"
-                    className="text-xs sm:text-sm text-slate-700"
-                  >
-                    Profil <strong>DYS</strong>
-                  </label>
-                </div>
-
-                {hasDys && (
-                  <div className="mt-1 grid grid-cols-2 gap-2 text-xs text-slate-700 sm:text-[13px]">
-                    {[
-                      "Dyslexie",
-                      "Dysorthographie",
-                      "Dyscalculie",
-                      "Dyspraxie",
-                      "Dysphasie",
-                      "Autre DYS",
-                    ].map((type) => (
-                      <label
-                        key={type}
-                        className="inline-flex items-center gap-1.5 rounded-lg bg-slate-50 px-2 py-1.5 ring-1 ring-slate-200"
-                      >
-                        <input
-                          type="checkbox"
-                          className="h-3.5 w-3.5"
-                          checked={dysTypes.includes(type)}
-                          onChange={() => toggleDysType(type)}
-                        />
-                        <span>{type}</span>
-                      </label>
-                    ))}
-                  </div>
-                )}
-              </div>
-
-              <div className="space-y-2">
-                <div className="flex items-center gap-2">
-                  <input
-                    id="hyperactif"
-                    type="checkbox"
-                    checked={hyperactif}
-                    onChange={(e) => setHyperactif(e.target.checked)}
-                    className="h-4 w-4"
-                  />
-                  <label
-                    htmlFor="hyperactif"
-                    className="text-xs sm:text-sm text-slate-700"
-                  >
-                    Profil <strong>hyperactif / TDAH</strong>
-                  </label>
-                </div>
-                <p className="text-[11px] text-slate-500">
-                  Activités plus courtes, rythmées, très guidées.
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* 2️⃣ PRESETS – CARROUSEL */}
-        <PresetCarousel
-          title="Choisir un modèle rapide (facultatif)"
-          subtitle="Partir d’un exemple proche de votre situation, puis ajuster."
-          items={PARENTS_PRESET_ITEMS}
-          onSelect={(id) => {
-            if (isParentsPresetKey(id)) appliquerPreset(id);
-          }}
-        />
-
-        {/* 3️⃣ FORMULAIRE PRINCIPAL + GÉNÉRATION */}
-        <section className="mt-6 rounded-3xl bg-white p-6 shadow-md ring-1 ring-slate-100 lg:p-8">
-          <header className="mb-6 space-y-2">
-            <p className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-100 text-xs font-semibold text-indigo-800">
-              👨‍👩‍👧‍👦 Espace parents · Accompagnement scolaire encadré
-            </p>
-
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0047B6]">
-              Aider votre enfant à apprendre avec l’IA (sans tricher)
-            </h2>
-
-            <p className="text-sm sm:text-base text-slate-700 max-w-2xl">
-              Indiquez la situation de votre enfant (niveau, difficulté,
-              objectif). EleveAI génère un <b>prompt clair et encadré</b> pour
-              l’aider à comprendre, réviser ou s’entraîner, dans le respect du
-              cadre scolaire.
-            </p>
-
-            {!authLoading && !isLoggedIn && (
-              <div className="pt-3">
-                <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
-                  <p className="text-sm font-semibold text-slate-900">
-                    Sauvegarder vos presets parents
-                  </p>
-                  <p className="mt-1 text-xs text-slate-600">
-                    Connectez-vous pour sauvegarder vos réglages, les retrouver
-                    plus tard et accéder à votre historique.
-                  </p>
-
-                  <div className="mt-3 flex flex-wrap gap-2">
-                    <Link
-                      href="/auth/signin"
-                      className="inline-flex items-center gap-2 rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm font-semibold text-slate-800 hover:bg-slate-100"
-                    >
-                      Connexion
-                    </Link>
-                    <Link
-                      href="/auth/signup"
-                      className="inline-flex items-center gap-2 rounded-xl border border-emerald-500/40 bg-emerald-500/10 px-3 py-2 text-sm font-semibold text-emerald-800 hover:bg-emerald-500/15"
-                    >
-                      Inscription
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            )}
-          </header>
-
-          <div className="space-y-5">
-            <div className="grid gap-4 sm:grid-cols-2">
-              <div className="space-y-2">
-                <FieldLabel title="Prénom (facultatif)" hint="Ex : Léa, Yanis…" />
-                <input
-                  type="text"
-                  value={prenom}
-                  onChange={(e) => setPrenom(e.target.value)}
-                  className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-900 shadow-inner focus:border-emerald-400 focus:outline-none focus:ring-2 focus:ring-emerald-100"
-                  placeholder="Ex : Léa, Yanis…"
-                />
-              </div>
-
-              <div className="space-y-2">
-                <FieldLabel title="Classe" required />
-                <select
-                  value={classe}
-                  onChange={(e) => setClasse(e.target.value as ClasseValue)}
-                  className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-900 shadow-inner focus:border-emerald-400 focus:outline-none focus:ring-2 focus:ring-emerald-100"
-                >
-                  {CLASSES.map((c) => (
-                    <option key={c.value} value={c.value}>
-                      {c.label}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            </div>
-
-            <div className="grid gap-4 sm:grid-cols-2">
-              <div className="space-y-2">
-                <FieldLabel title="Matière" required />
-                <select
-                  value={matiere}
-                  onChange={(e) => setMatiere(e.target.value as MatiereValue)}
-                  className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-900 shadow-inner focus:border-emerald-400 focus:outline-none focus:ring-2 focus:ring-emerald-100"
-                >
-                  {MATIERES.map((m) => (
-                    <option
-                      key={`${m.label}-${m.value}`}
-                      value={m.value}
-                      disabled={!!m.disabled}
-                    >
-                      {m.label}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              <div className="space-y-2">
-                <FieldLabel
-                  title="Méthode (facultatif)"
-                  hint="Le style d’accompagnement (rythme, guidage…)."
-                />
-                <select
-                  value={methode}
-                  onChange={(e) =>
-                    setMethode(e.target.value as MethodePedagogique)
-                  }
-                  className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-900 shadow-inner focus:border-emerald-400 focus:outline-none focus:ring-2 focus:ring-emerald-100"
-                >
-                  {METHODES.map((m) => (
-                    <option key={m.id} value={m.id}>
-                      {m.label}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            </div>
-
-            <div className="grid gap-4 sm:grid-cols-2">
-              <div className="space-y-2 sm:col-span-2">
-                <FieldLabel
-                  title="Objectif"
-                  required
-                  hint="Écrivez simplement, comme à un enseignant."
-                />
-                <textarea
-                  value={objectif}
-                  onChange={(e) => setObjectif(e.target.value)}
-                  className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-900 shadow-inner focus:border-emerald-400 focus:outline-none focus:ring-2 focus:ring-emerald-100"
-                  rows={3}
-                  placeholder="Ex : réviser un contrôle, reprendre les bases, retrouver confiance…"
-                />
-              </div>
-            </div>
-
-            <div className="flex flex-wrap items-center gap-3 pt-1">
-              <button
-                type="button"
-                onClick={handleGenerate}
-                className="inline-flex items-center justify-center rounded-full bg-emerald-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-emerald-700 active:scale-[0.99]"
+        {/* CE QUI RASSURE */}
+        <section className="mb-10">
+          <p className="mb-4 text-xs font-black uppercase tracking-[0.25em] text-slate-500">
+            Ce que vous devez savoir
+          </p>
+          <div className="grid gap-4 sm:grid-cols-2">
+            {rassurances.map((r) => (
+              <div
+                key={r.title}
+                className="rounded-[1.5rem] border border-white/80 bg-white/80 p-5 shadow-md backdrop-blur"
               >
-                Générer le prompt
-              </button>
-
-              <button
-                type="button"
-                onClick={handleCopy}
-                disabled={!generatedPrompt}
-                className="inline-flex items-center justify-center rounded-full border border-slate-200 bg-slate-50 px-4 py-2 text-xs font-semibold text-slate-700 shadow-sm transition hover:bg-slate-100 disabled:opacity-50"
-              >
-                {copied ? "✅ Copié" : "📋 Copier"}
-              </button>
-            </div>
-
-            <div className="mt-6 space-y-3">
-              <h3 className="text-sm font-semibold text-slate-900">
-                Prompt généré
-              </h3>
-
-              <CollerDansTags prompt={generatedPrompt} onCopy={handleCopy} />
-
-              <textarea
-                readOnly
-                value={generatedPrompt}
-                className="w-full min-h-[240px] rounded-2xl border border-slate-200 bg-slate-50 px-3 py-2 text-xs font-mono text-slate-900 shadow-inner"
-                placeholder="Remplissez le formulaire puis cliquez sur « Générer le prompt »."
-              />
-            </div>
+                <div className="mb-2 text-3xl">{r.emoji}</div>
+                <h2 className="text-base font-black text-slate-950">{r.title}</h2>
+                <p className="mt-1 text-sm font-semibold leading-relaxed text-slate-600">{r.text}</p>
+              </div>
+            ))}
           </div>
         </section>
+
+        {/* OUTILS */}
+        <section className="mb-10">
+          <p className="mb-4 text-xs font-black uppercase tracking-[0.25em] text-slate-500">
+            Les outils disponibles
+          </p>
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {outils.map((o) => (
+              <Link
+                key={o.href}
+                href={o.href}
+                className="group overflow-hidden rounded-[1.5rem] border border-white/70 bg-white/80 shadow-md backdrop-blur transition hover:-translate-y-1 hover:shadow-xl"
+              >
+                <div className={`bg-gradient-to-br ${o.color} px-5 py-4`}>
+                  <span className="text-3xl">{o.emoji}</span>
+                </div>
+                <div className="p-4">
+                  <h3 className="font-black text-slate-950">{o.title}</h3>
+                  <p className="mt-1 text-xs font-semibold leading-relaxed text-slate-600">
+                    {o.description}
+                  </p>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </section>
+
+        {/* OFFRE ÉTABLISSEMENT */}
+        <section className="rounded-[2rem] border border-emerald-200 bg-white/80 p-6 shadow-xl backdrop-blur text-center">
+          <p className="text-2xl font-black text-slate-950">Votre collège utilise EleveAI ?</p>
+          <p className="mt-2 font-semibold text-slate-600 max-w-xl mx-auto">
+            Si votre enfant a reçu un code élève de son établissement, il peut se connecter directement
+            et accéder à tous les outils gratuitement.
+          </p>
+          <div className="mt-5 flex flex-wrap justify-center gap-3">
+            <Link
+              href="/auth/signin-eleve"
+              className="rounded-2xl bg-emerald-500 px-6 py-3 text-sm font-black text-white shadow-lg hover:bg-emerald-400"
+            >
+              Se connecter avec un code élève
+            </Link>
+            <Link
+              href="/faq/faq-parents"
+              className="rounded-2xl bg-white px-6 py-3 text-sm font-black text-slate-800 ring-1 ring-slate-200 hover:bg-slate-50"
+            >
+              FAQ Parents
+            </Link>
+          </div>
+        </section>
+
       </div>
     </main>
   );
 }
-

@@ -1,29 +1,24 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Espace professeurs | EleveAI",
+  title: "Espace professeurs | EleveAI — Suivre vos élèves en maths",
   description:
-    "Générateur de prompts pédagogiques pour enseignants : séances, exercices, évaluations, corrections et fiches méthode, prêts à coller dans Word.",
-  alternates: {
-    canonical: "https://eleveai.fr/espace-profs",
-  },
-  robots: {
-    index: true,
-    follow: true,
-  },
+    "EleveAI dans votre classe : codes élèves, suivi des résultats, parcours de notions, Brevet, Bac Spé, Calcul rapide et English Maths. Demandez un accès pilote.",
+  alternates: { canonical: "https://eleveai.fr/espace-profs" },
+  robots: { index: true, follow: true },
   openGraph: {
     type: "website",
     url: "https://eleveai.fr/espace-profs",
     siteName: "EleveAI",
     title: "Espace professeurs | EleveAI",
     description:
-      "Crée des prompts pédagogiques structurés pour générer séances, évaluations et ressources Word-friendly.",
+      "Donnez à vos élèves un accès EleveAI et suivez leur progression notion par notion.",
   },
   twitter: {
     card: "summary",
     title: "Espace professeurs | EleveAI",
     description:
-      "Prompts pédagogiques prêts à coller pour enseignants : séances, exercices, évaluations.",
+      "Coach Maths IA, Brevet, suivi de classe — EleveAI dans votre établissement.",
   },
 };
 

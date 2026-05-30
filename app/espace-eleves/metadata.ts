@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Espace élèves | EleveAI",
+  title: "Espace élèves | EleveAI — Coach maths, Brevet, Parcours",
   description:
-    "Un coach IA pour apprendre sans tricher : crée ton prompt d’aide pour comprendre un cours, réviser ou préparer un contrôle.",
+    "Ton espace EleveAI : Coach Maths IA, Parcours, Calcul rapide, Brevet des collèges, Bac Spé, English Maths et Défis du jour. Connecte-toi et suis ta progression.",
   alternates: {
     canonical: "https://eleveai.fr/espace-eleves",
   },
@@ -17,12 +17,12 @@ export const metadata: Metadata = {
     siteName: "EleveAI",
     title: "Espace élèves | EleveAI",
     description:
-      "Crée un prompt clair pour comprendre, réviser et progresser avec l’IA, sans tricher.",
+      "Coach Maths IA, Parcours, Brevet, Calcul rapide, English Maths — tous tes outils au même endroit.",
   },
   twitter: {
     card: "summary",
     title: "Espace élèves | EleveAI",
     description:
-      "Ton coach IA pour comprendre un cours, réviser et préparer un contrôle.",
+      "Ton coach maths personnel. Progresse notion par notion, du CM1 au Bac.",
   },
 };

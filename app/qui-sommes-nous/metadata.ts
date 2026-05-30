@@ -3,9 +3,9 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Qui sommes-nous ? — EleveAI",
+  title: "Qui sommes-nous ? — EleveAI, plusieurs portes pour apprendre les maths",
   description:
-    "Découvrez EleveAI, une plateforme éducative née à La Réunion pour aider les élèves à progresser grâce à plusieurs portes d’entrée et une cartographie de leur évolution.",
+    "EleveAI est un espace pédagogique né à La Réunion : plusieurs portes d’entrée pour apprendre les maths et un suivi réel de la progression des élèves, du CM1 au Bac.",
   alternates: {
     canonical: "https://eleveai.fr/qui-sommes-nous",
   },

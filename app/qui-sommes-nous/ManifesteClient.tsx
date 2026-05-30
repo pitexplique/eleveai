@@ -7,51 +7,51 @@ const EMAIL = "contact@eleveai.fr";
 
 const principes = [
   {
-    title: "L’élève doit essayer",
-    text: "EleveAI questionne avant d’expliquer. L’élève doit réfléchir, proposer une réponse, puis améliorer.",
+    title: "Plusieurs portes d’entrée",
+    text: "Coach Maths, Parcours, Brevet, Calcul rapide, English Maths, Défis… Chaque élève choisit ce qui lui convient le mieux.",
   },
   {
-    title: "L’erreur est utile",
-    text: "Se tromper fait partie de l’apprentissage. EleveAI aide à comprendre l’erreur et à recommencer.",
+    title: "Suivi réel de la progression",
+    text: "Les scores sont enregistrés notion par notion. L’élève voit ses progrès, le professeur aussi.",
   },
   {
-    title: "Anti-triche par design",
-    text: "EleveAI n’a pas pour objectif de produire un devoir prêt à rendre, mais d’aider à apprendre réellement.",
+    title: "L’élève cherche, comprend, vérifie",
+    text: "EleveAI pose des questions avant de corriger. L’élève réfléchit, se trompe, recommence — c’est comme ça qu’on apprend.",
   },
   {
     title: "Le professeur garde la main",
-    text: "L’IA accompagne, mais elle ne remplace ni le professeur, ni le cours, ni l’exigence scolaire.",
+    text: "EleveAI accompagne, mais ne remplace ni le cours, ni l’exigence scolaire, ni le professeur.",
   },
   {
-    title: "Clarté et accessibilité",
-    text: "Les activités doivent rester lisibles, progressives, rassurantes et adaptées aux élèves.",
+    title: "Ancré à La Réunion",
+    text: "Les défis et exemples sont inspirés du territoire : Piton de la Fournaise, Grand Raid, biodiversité de l’île.",
   },
   {
-    title: "Sobriété et crédibilité",
-    text: "Pas de gadget inutile : EleveAI cherche d’abord l’efficacité pédagogique.",
+    title: "Simple et efficace",
+    text: "Pas de gadget inutile. Des outils lisibles, progressifs et adaptés aux niveaux du CM1 au Bac.",
   },
 ];
 
 const faqItems = [
   {
-    question: "EleveAI remplace-t-elle les enseignants ?",
-    answer:
-      "Non. EleveAI est conçue comme un outil d’accompagnement. Le professeur reste la référence pédagogique. L’IA aide à questionner, structurer et comprendre, jamais à se substituer à l’enseignement.",
-  },
-  {
-    question: "EleveAI permet-elle de tricher ?",
-    answer:
-      "Non. EleveAI est pensée anti-triche par design : pas de production prête à rendre, pas de réponses clés sans raisonnement. L’élève doit essayer, réfléchir et corriger.",
-  },
-  {
     question: "À qui s’adresse EleveAI ?",
     answer:
-      "EleveAI s’adresse aux élèves, aux enseignants et aux familles qui souhaitent utiliser l’IA de manière responsable, encadrée et compatible avec les exigences scolaires.",
+      "EleveAI s’adresse aux élèves du CM1 au Bac, à leurs enseignants et à leurs familles. La plateforme est pensée pour les collèges et lycées qui veulent un outil de suivi simple et efficace.",
+  },
+  {
+    question: "Comment un élève accède-t-il à EleveAI ?",
+    answer:
+      "L’élève reçoit un code établissement et un code élève de son professeur. Il se connecte en quelques secondes et accède à tous les outils. Les résultats sont enregistrés automatiquement.",
+  },
+  {
+    question: "EleveAI remplace-t-elle les enseignants ?",
+    answer:
+      "Non. EleveAI est un outil d’accompagnement. Le professeur reste la référence pédagogique. EleveAI aide l’élève à s’entraîner, à réviser et à suivre sa progression entre les cours.",
   },
   {
     question: "EleveAI est-elle adaptée au cadre scolaire français ?",
     answer:
-      "Oui. EleveAI est conçue par un enseignant en activité, en lien avec le terrain, les programmes et les contraintes réelles de l’école française.",
+      "Oui. EleveAI est conçue par un enseignant en activité à La Réunion, en lien avec les programmes officiels et les contraintes réelles du terrain.",
   },
 ];
 
@@ -87,35 +87,31 @@ export default function ManifesteClient() {
           {/* Header */}
           <header className="space-y-5">
             <p className="inline-flex items-center rounded-full border border-emerald-500/40 bg-emerald-500/10 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-emerald-300">
-              EleveAI · Manifeste pédagogique · IA responsable
+              EleveAI · Qui sommes-nous
             </p>
 
             <h1 className="text-3xl font-black tracking-tight text-slate-50 sm:text-5xl">
-              Une IA pour apprendre, pas pour tricher
+              Plusieurs portes pour apprendre les maths
             </h1>
 
             <p className="max-w-2xl text-base leading-8 text-slate-300 sm:text-lg">
-              EleveAI est construit sur une idée simple :{" "}
+              EleveAI est un espace pédagogique conçu par un enseignant de La Réunion.{" "}
               <span className="font-semibold text-slate-50">
-                l’IA est utile si elle fait réfléchir.
+                Chaque élève entre par la porte qui lui correspond
               </span>{" "}
-              Elle doit guider l’élève, aider les professeurs, rassurer les
-              familles et respecter le rôle de l’école.
+              — et progresse à son rythme, avec un suivi réel de ses résultats.
             </p>
 
             {/* À retenir */}
             <div className="rounded-2xl border border-emerald-500/40 bg-slate-900/70 p-4 sm:p-5">
               <p className="text-sm font-semibold text-emerald-300">
-                À retenir
+                En résumé
               </p>
-
               <ul className="mt-3 space-y-2 text-sm leading-6 text-slate-200">
-                <li>• EleveAI guide, ne fait pas à la place.</li>
-                <li>
-                  • L’élève doit essayer, se tromper, comprendre et recommencer.
-                </li>
-                <li>• Le professeur reste la référence pédagogique.</li>
-                <li>• L’usage de l’IA doit rester transparent et responsable.</li>
+                <li>• Plusieurs outils : Coach Maths, Parcours, Brevet, Calcul rapide, English Maths…</li>
+                <li>• Résultats enregistrés et visibles dans le tableau de bord élève.</li>
+                <li>• Ancré à La Réunion — contexte local, exemples du territoire.</li>
+                <li>• Pensé pour les collèges et lycées qui veulent un suivi simple.</li>
               </ul>
             </div>
           </header>
