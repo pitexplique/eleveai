@@ -1,4 +1,4 @@
-// app/contact/ContactClient.tsx
+﻿// app/contact/ContactClient.tsx
 "use client";
 
 import Link from "next/link";
@@ -6,28 +6,26 @@ import { useMemo, useState, useEffect } from "react";
 
 const EMAIL_RECEIVER = "contact@eleveai.fr";
 
-// WhatsApp (Réunion) — attention : numéro personnel, éviter le “trop visible”
+// WhatsApp (Réunion) — attention : numéro personnel, éviter le "trop visible"
 const WHATSAPP_DISPLAY = "+262 06 92 74 29 58";
 const WHATSAPP_COPY = "+262692742958";
 const WHATSAPP_WA_ME = `https://wa.me/${WHATSAPP_COPY.replace("+", "")}`;
 
-// Communauté
-const COMMUNITY_URL = "/communaute";
+const ESPACE_ECOLES_URL = "/espace-ecoles";
 
 type Role =
+  | "Direction / Établissement"
+  | "Professeur"
   | "Parent"
   | "Élève"
-  | "Enseignant"
-  | "Direction/Établissement"
-  | "Partenaire"
   | "Autre";
 
 type Topic =
-  | "Question"
+  | "Demande pilote établissement"
+  | "Question sur EleveAI"
   | "Bug"
-  | "Idée d’amélioration"
-  | "Demande démo"
-  | "Partenariat"
+  | "Idée d'amélioration"
+  | "Partenariat / Rectorat"
   | "Autre";
 
 type Priority = "Normal" | "Important" | "Urgent";
@@ -37,8 +35,8 @@ export default function ContactClient() {
   const [copiedWhatsapp, setCopiedWhatsapp] = useState(false);
 
   // Formulaire
-  const [role, setRole] = useState<Role>("Parent");
-  const [topic, setTopic] = useState<Topic>("Question");
+  const [role, setRole] = useState<Role>("Direction / Établissement");
+  const [topic, setTopic] = useState<Topic>("Demande pilote établissement");
   const [priority, setPriority] = useState<Priority>("Normal");
 
   const [name, setName] = useState("");
@@ -54,7 +52,7 @@ export default function ContactClient() {
   const [sentErr, setSentErr] = useState<string | null>(null);
 
   useEffect(() => {
-    // garde une trace de la page d’origine (utile en admin)
+    // garde une trace de la page d'origine (utile en admin)
     try {
       setSource(window.location.pathname || "contact");
     } catch {
@@ -139,11 +137,11 @@ export default function ContactClient() {
       });
 
       const data = await res.json().catch(() => ({}));
-      if (!res.ok) throw new Error(data?.error || "Erreur lors de l’envoi.");
+      if (!res.ok) throw new Error(data?.error || "Erreur lors de l'envoi.");
 
       setSentOk("Message envoyé ✅ Merci !");
-      setRole("Parent");
-      setTopic("Question");
+      setRole("Direction / Établissement");
+      setTopic("Demande pilote établissement");
       setPriority("Normal");
       setName("");
       setOrg("");
@@ -152,7 +150,7 @@ export default function ContactClient() {
       setHp("");
       // source on garde
     } catch (e: any) {
-      setSentErr(e?.message || "Erreur lors de l’envoi.");
+      setSentErr(e?.message || "Erreur lors de l'envoi.");
     } finally {
       setSending(false);
     }
@@ -168,10 +166,10 @@ export default function ContactClient() {
               📩 Contact EleveAI
             </span>
             <span className="inline-flex items-center gap-2 rounded-full border border-slate-800 bg-slate-900/60 px-3 py-1 font-semibold text-slate-200">
-              🧠 IA encadrée
+              🏫 Pilote établissements
             </span>
             <span className="inline-flex items-center gap-2 rounded-full border border-slate-800 bg-slate-900/60 px-3 py-1 font-semibold text-slate-200">
-              🌿 Sobriété numérique
+              🏝️ La Réunion
             </span>
           </div>
 
@@ -179,31 +177,26 @@ export default function ContactClient() {
             <div className="space-y-3">
               <h1 className="text-3xl sm:text-4xl font-extrabold leading-tight">
                 Nous contacter
-                <span className="block text-emerald-300">Une question ? Un bug ? Une idée ?</span>
+                <span className="block text-emerald-300">Pilote, question, partenariat…</span>
               </h1>
 
               <p className="text-sm sm:text-base text-slate-300 max-w-2xl leading-relaxed">
-                Parents, enseignants, établissements, partenaires : cette page sert à poser une question,
-                signaler un problème, proposer une amélioration ou discuter d’une collaboration.
-              </p>
-
-              <p className="text-xs text-slate-400 max-w-2xl leading-relaxed">
-                Rappel : EleveAI accompagne la réflexion et le travail pédagogique. L’IA n’est jamais utilisée
-                “à la place” de l’élève ou de l’enseignant.
+                Vous êtes un collège ou un lycée intéressé par EleveAI ? Un parent avec une question ?
+                Un professeur qui veut tester la plateforme avec sa classe ? Écrivez-nous.
               </p>
 
               <div className="flex flex-wrap gap-2 pt-2">
                 <Link
-                  href={COMMUNITY_URL}
-                  className="inline-flex items-center gap-2 rounded-lg border border-slate-800 bg-slate-900 px-4 py-2 text-sm font-semibold hover:bg-slate-800"
+                  href={ESPACE_ECOLES_URL}
+                  className="inline-flex items-center gap-2 rounded-lg border border-emerald-500/40 bg-emerald-900/20 px-4 py-2 text-sm font-semibold text-emerald-200 hover:bg-emerald-900/30"
                 >
-                  💬 Aller sur la communauté
+                  🏫 Offre établissements
                 </Link>
                 <Link
                   href="/accueil"
                   className="inline-flex items-center gap-2 rounded-lg border border-slate-800 bg-slate-900 px-4 py-2 text-sm font-semibold hover:bg-slate-800"
                 >
-                  ← Retour à l’accueil
+                  ← Retour à l'accueil
                 </Link>
               </div>
             </div>
@@ -213,7 +206,7 @@ export default function ContactClient() {
               <div className="rounded-2xl border border-emerald-500/25 bg-emerald-900/10 p-4">
                 <p className="text-sm font-semibold text-emerald-100">🔒 Règle simple</p>
                 <p className="mt-1 text-xs text-emerald-50/90 leading-relaxed">
-                  Pour toute demande liée aux élèves : pas d’échanges directs en privé.
+                  Pour toute demande liée aux élèves : pas d'échanges directs en privé.
                   On passe par le cadre (enseignant / parent / établissement).
                 </p>
               </div>
@@ -221,7 +214,7 @@ export default function ContactClient() {
               <div className="rounded-2xl border border-slate-800 bg-slate-900/40 p-4">
                 <p className="text-sm font-semibold text-slate-100">🌿 Sobriété numérique</p>
                 <p className="mt-1 text-xs text-slate-300 leading-relaxed">
-                  Si tu nous écris : donne le contexte et l’objectif. Un message précis → moins d’allers-retours.
+                  Si tu nous écris : donne le contexte et l'objectif. Un message précis → moins d'allers-retours.
                 </p>
               </div>
             </div>
@@ -236,7 +229,7 @@ export default function ContactClient() {
           <div className="flex flex-col gap-1">
             <h2 className="text-lg sm:text-xl font-bold text-slate-100">Envoyer un message</h2>
             <p className="text-xs text-slate-400">
-              Astuce : “Contexte → objectif → ce que tu as déjà essayé → ce que tu attends”.
+              Astuce : "Contexte → objectif → ce que tu as déjà essayé → ce que tu attends".
             </p>
           </div>
 
@@ -248,11 +241,10 @@ export default function ContactClient() {
                 onChange={(e) => setRole(e.target.value as Role)}
                 className="w-full rounded-xl border border-slate-700 bg-slate-950/40 px-3 py-2 text-sm text-slate-100"
               >
+                <option>Direction / Établissement</option>
+                <option>Professeur</option>
                 <option>Parent</option>
                 <option>Élève</option>
-                <option>Enseignant</option>
-                <option>Direction/Établissement</option>
-                <option>Partenaire</option>
                 <option>Autre</option>
               </select>
             </div>
@@ -264,11 +256,11 @@ export default function ContactClient() {
                 onChange={(e) => setTopic(e.target.value as Topic)}
                 className="w-full rounded-xl border border-slate-700 bg-slate-950/40 px-3 py-2 text-sm text-slate-100"
               >
-                <option>Question</option>
+                <option>Demande pilote établissement</option>
+                <option>Question sur EleveAI</option>
                 <option>Bug</option>
-                <option>Idée d’amélioration</option>
-                <option>Demande démo</option>
-                <option>Partenariat</option>
+                <option>Idée d'amélioration</option>
+                <option>Partenariat / Rectorat</option>
                 <option>Autre</option>
               </select>
             </div>
@@ -285,7 +277,7 @@ export default function ContactClient() {
                 <option>Urgent</option>
               </select>
               <p className="text-[11px] text-slate-500">
-                “Urgent” = bug bloquant / établissement / démo imminente.
+                "Urgent" = bug bloquant / établissement / démo imminente.
               </p>
             </div>
 
@@ -308,7 +300,7 @@ export default function ContactClient() {
                 value={org}
                 onChange={(e) => setOrg(e.target.value)}
                 className="w-full rounded-xl border border-slate-700 bg-slate-950/40 px-3 py-2 text-sm text-slate-100 placeholder:text-slate-500"
-                placeholder="Nom de l’établissement / organisation"
+                placeholder="Nom de l'établissement / organisation"
               />
             </div>
 
@@ -324,7 +316,7 @@ export default function ContactClient() {
                 autoComplete="email"
               />
               <p className="text-[11px] text-slate-500">
-                Si tu laisses vide, on répondra via la communauté si c’est pertinent.
+                Si tu laisses vide, on répondra via la communauté si c'est pertinent.
               </p>
             </div>
 
@@ -373,7 +365,7 @@ export default function ContactClient() {
           </div>
 
           <p className="text-xs text-slate-500">
-            Merci de ne pas envoyer d’informations personnelles sensibles.{" "}
+            Merci de ne pas envoyer d'informations personnelles sensibles.{" "}
             <span className="text-slate-400">
               WhatsApp : réservé aux parents, enseignants, partenaires (pas de communication directe avec les élèves).
             </span>
@@ -400,7 +392,7 @@ export default function ContactClient() {
               </button>
             </div>
             <p className="text-[11px] text-slate-500">
-              Préféré pour les demandes “établissement” (pilote, partenariat, démo).
+              Préféré pour les demandes "établissement" (pilote, partenariat, démo).
             </p>
           </div>
 
@@ -452,10 +444,11 @@ export default function ContactClient() {
             href="/accueil"
             className="inline-flex items-center gap-2 rounded-lg border border-slate-800 bg-slate-900 px-4 py-2 text-sm font-semibold hover:bg-slate-800"
           >
-            ← Retour à l’accueil EleveAI
+            ← Retour à l'accueil EleveAI
           </Link>
         </div>
       </div>
     </main>
   );
 }
+
