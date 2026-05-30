@@ -46,15 +46,15 @@ const offres = [
     nom: "Famille",
     badge: "Bientôt disponible",
     badgeColor: "bg-amber-100 text-amber-800",
-    prix: "~7 €/mois",
-    soustitre: "Pour un élève individuel",
+    prix: "2,90 €/mois",
+    soustitre: "ou 25 € / an — soit 2,08 €/mois",
     description: "Un accès personnel pour votre enfant, sans passer par l'établissement. En cours de préparation.",
     inclus: [
       "1 élève",
-      "Tous les outils",
-      "Dashboard élève",
+      "Tous les outils débloqués",
+      "Dashboard élève avec suivi",
       "Sans contrat d'établissement",
-      "Résiliation libre",
+      "Résiliation libre à tout moment",
     ],
     cta: "Être notifié à l'ouverture",
     ctaHref: "/contact",
@@ -81,8 +81,8 @@ const faq = [
     a: "Pour l'accès établissement, oui — un contrat simple qui précise les conditions d'accès, la protection des données et la durée. Conforme au RGPD.",
   },
   {
-    q: "Quand sera disponible l'abonnement famille ?",
-    a: "L'accès famille individuel est en cours de préparation. Laissez votre contact via le formulaire pour être parmi les premiers informés.",
+    q: "Quel est le tarif famille exact ?",
+    a: "2,90 € par mois ou 25 € par an (soit 2,08 €/mois). L'abonnement famille est en cours de préparation. Laissez votre contact pour être parmi les premiers informés au lancement.",
   },
 ];
 
