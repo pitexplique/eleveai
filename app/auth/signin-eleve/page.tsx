@@ -3,7 +3,7 @@
 import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
-import { GraduationCap } from "lucide-react";
+import { GraduationCap, Eye, EyeOff } from "lucide-react";
 import { useEleve } from "@/context/EleveContext";
 
 export default function SignInElevePage() {
@@ -15,6 +15,7 @@ export default function SignInElevePage() {
   const [codeEleve, setCodeEleve] = useState("");
   const [motDePasse, setMotDePasse] = useState("");
 
+  const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [feedback, setFeedback] = useState<string | null>(null);
@@ -300,13 +301,23 @@ export default function SignInElevePage() {
               <label className="mb-1 block text-sm font-black text-slate-700">
                 Mot de passe
               </label>
-              <input
-                type="password"
-                value={motDePasse}
-                onChange={(e) => setMotDePasse(e.target.value)}
-                placeholder="Ex : coco banane"
-                className="w-full rounded-2xl border border-slate-300 bg-white px-4 py-4 text-base font-bold outline-none focus:border-emerald-500 focus:ring-4 focus:ring-emerald-100"
-              />
+              <div className="relative">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  value={motDePasse}
+                  onChange={(e) => setMotDePasse(e.target.value)}
+                  placeholder="Ex : coco banane"
+                  className="w-full rounded-2xl border border-slate-300 bg-white px-4 py-4 pr-12 text-base font-bold outline-none focus:border-emerald-500 focus:ring-4 focus:ring-emerald-100"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword((v) => !v)}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700"
+                  aria-label={showPassword ? "Cacher le mot de passe" : "Voir le mot de passe"}
+                >
+                  {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
+                </button>
+              </div>
             </div>
 
             <button

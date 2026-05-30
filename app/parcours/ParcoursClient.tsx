@@ -2,7 +2,7 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 
 import { CanvasRenderer } from "@/lib/canvas";
 import { createClient } from "@/lib/supabase/client";
@@ -93,6 +93,8 @@ export default function ParcoursClient() {
 
   const eleve =
     eleveContext.eleve ?? eleveContext.currentUser ?? eleveContext.user ?? null;
+
+  const bilanRef = useRef<HTMLDivElement>(null);
 
   const [classe, setClasse] = useState<ParcoursClasse>("6e");
   const [questionCount, setQuestionCount] = useState<QuestionCount>(10);
@@ -502,7 +504,7 @@ export default function ParcoursClient() {
         {started && questions.length > 0 && (
           <div className="space-y-5">
             {submitted && (
-              <div className="rounded-[2rem] border border-white/70 bg-white/85 p-6 shadow-2xl backdrop-blur-xl">
+              <div ref={bilanRef} className="rounded-[2rem] border border-white/70 bg-white/85 p-6 shadow-2xl backdrop-blur-xl">
                 <h2 className="text-3xl font-black text-slate-950">
                   🏆 Bilan du parcours
                 </h2>
@@ -712,10 +714,15 @@ export default function ParcoursClient() {
               <div className="sticky bottom-4 rounded-[2rem] border border-white/70 bg-white/90 p-4 shadow-2xl backdrop-blur-xl">
                 <button
                   type="button"
-                  onClick={() => setSubmitted(true)}
+                  onClick={() => {
+                    setSubmitted(true);
+                    setTimeout(() => {
+                      bilanRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+                    }, 50);
+                  }}
                   className="w-full rounded-2xl bg-gradient-to-r from-emerald-400 to-sky-400 px-5 py-4 text-base font-black text-slate-950 shadow-lg hover:from-emerald-300 hover:to-sky-300"
                 >
-                  🏁 Voir ma carte de progression
+                  🏁 Valider
                 </button>
               </div>
             ) : (
