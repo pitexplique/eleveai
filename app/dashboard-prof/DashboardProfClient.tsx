@@ -86,7 +86,7 @@ function getAveragePct(items: Array<{ score: number; total: number }>) {
 
 function isProfAllowed(user: UserSession | null) {
   const t = user?.type_utilisateur;
-  return t === "prof" || t === "boss" || t === "vie_scolaire" || t === "aesh";
+  return t === "prof" || t === "principal" || t === "boss";
 }
 
 function PctBadge({ pct }: { pct: number | null }) {
@@ -236,33 +236,33 @@ export default function DashboardProfClient() {
   }
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-slate-950 via-[#062A4F] to-slate-950 px-4 py-8 text-white">
+    <main className="min-h-screen bg-gradient-to-br from-blue-50 via-sky-50 to-indigo-50 px-4 py-8 text-slate-950">
       <section className="mx-auto max-w-7xl space-y-6">
 
         {/* HEADER */}
-        <div className="rounded-[2rem] border border-white/15 bg-white/10 p-6 shadow-2xl backdrop-blur-xl">
+        <div className="rounded-[2rem] border border-white/70 bg-white/85 p-6 shadow-2xl backdrop-blur-xl">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div>
-              <div className="inline-flex rounded-full bg-blue-400 px-4 py-2 text-xs font-black uppercase tracking-wide text-slate-950">
-                Dashboard professeur
+              <div className="inline-flex rounded-full bg-blue-100 px-4 py-2 text-xs font-black uppercase tracking-wide text-blue-800 ring-1 ring-blue-200">
+                {user.type_utilisateur === "principal" ? "Dashboard Principal" : "Dashboard Professeur"}
               </div>
-              <h1 className="mt-3 text-3xl font-black md:text-4xl">
-                {codeEtablissement}
-              </h1>
-              <p className="mt-1 font-semibold text-white/70">
+              <h1 className="mt-4 text-3xl font-black md:text-5xl">
                 Bonjour {user.nom ?? "professeur"} 👋
+              </h1>
+              <p className="mt-2 font-semibold text-slate-600">
+                Établissement : <span className="font-black text-slate-950">{codeEtablissement}</span>
               </p>
             </div>
             <div className="flex flex-wrap gap-2">
               {[
-                { href: "/parcours", label: "🛤️ Parcours", color: "bg-violet-400" },
-                { href: "/calcul-rapide", label: "⚡ Calcul", color: "bg-lime-400" },
-                { href: "/defis-du-jour", label: "🎯 Défis", color: "bg-orange-400" },
-                { href: "/english-maths", label: "🇬🇧 English", color: "bg-sky-400" },
-                { href: "/coach-maths-ia", label: "🧠 Coach", color: "bg-indigo-400" },
+                { href: "/parcours", label: "🛤️ Parcours", color: "bg-violet-100 text-violet-900 ring-1 ring-violet-200" },
+                { href: "/calcul-rapide", label: "⚡ Calcul", color: "bg-lime-100 text-lime-900 ring-1 ring-lime-200" },
+                { href: "/defis-du-jour", label: "🎯 Défis", color: "bg-orange-100 text-orange-900 ring-1 ring-orange-200" },
+                { href: "/english-maths", label: "🇬🇧 English", color: "bg-sky-100 text-sky-900 ring-1 ring-sky-200" },
+                { href: "/coach-maths-ia", label: "🧠 Coach", color: "bg-indigo-100 text-indigo-900 ring-1 ring-indigo-200" },
               ].map((l) => (
                 <Link key={l.href} href={l.href}
-                  className={`rounded-2xl ${l.color} px-4 py-2 text-sm font-black text-slate-950 shadow hover:brightness-110`}>
+                  className={`rounded-2xl ${l.color} px-4 py-2 text-sm font-black shadow-sm hover:brightness-95 transition`}>
                   {l.label}
                 </Link>
               ))}
@@ -271,9 +271,9 @@ export default function DashboardProfClient() {
         </div>
 
         {loading ? (
-          <div className="rounded-3xl bg-white/10 p-6 font-black text-white">Chargement…</div>
+          <div className="rounded-3xl bg-white p-6 font-black text-slate-700 shadow-xl">Chargement des données…</div>
         ) : errorMessage ? (
-          <div className="rounded-3xl bg-red-500/20 p-6 font-black text-red-100 ring-1 ring-red-400/30">{errorMessage}</div>
+          <div className="rounded-3xl bg-red-50 p-6 font-black text-red-700 ring-1 ring-red-200">{errorMessage}</div>
         ) : (
           <>
             {/* STATS GLOBALES */}

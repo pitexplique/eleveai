@@ -76,7 +76,12 @@ export default function SignInElevePage() {
       });
 
       setFeedback("Connexion réussie. Redirection…");
-      router.push("/dashboard-eleve");
+      const type = data.type_utilisateur;
+      if (type === "prof" || type === "principal" || type === "boss") {
+        router.push("/dashboard-prof");
+      } else {
+        router.push("/dashboard-eleve");
+      }
     } catch (err) {
       console.error(err);
       setErrorMsg("Erreur inattendue. Réessaie.");

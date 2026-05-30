@@ -62,6 +62,16 @@ export default function Header() {
 
   const eleveLabel = eleve?.nom || eleve?.code_eleve || "Élève";
 
+  const typeUtilisateur = eleve?.type_utilisateur ?? null;
+  const isProf = typeUtilisateur === "prof";
+  const isPrincipal = typeUtilisateur === "principal" || typeUtilisateur === "boss";
+  const isStaff = isProf || isPrincipal;
+  const dashboardHref = isStaff ? "/dashboard-prof" : "/dashboard-eleve";
+  const dashboardLabel = isPrincipal ? "Principal" : isProf ? "Prof" : eleveLabel;
+  const dashboardColor = isStaff
+    ? "bg-gradient-to-r from-blue-300 to-indigo-300"
+    : "bg-gradient-to-r from-emerald-300 to-cyan-300";
+
   return (
     <header
       className="
@@ -213,44 +223,29 @@ export default function Header() {
           {eleve ? (
             <div className="ml-2 flex items-center gap-2">
               <Link
-                href="/dashboard-eleve"
-                className="
-                  inline-flex items-center gap-2 rounded-full
-                  bg-gradient-to-r from-emerald-300 to-cyan-300
-                  px-4 py-2 text-sm font-black text-[#041B33]
-                  shadow-lg hover:brightness-110
-                "
-                title="Voir mon tableau de bord"
+                href={dashboardHref}
+                className={`inline-flex items-center gap-2 rounded-full ${dashboardColor} px-4 py-2 text-sm font-black text-[#041B33] shadow-lg hover:brightness-110`}
+                title="Mon tableau de bord"
               >
                 <GraduationCap className="h-4 w-4" />
-                {eleveLabel}
+                {dashboardLabel}
               </Link>
 
               <button
                 type="button"
                 onClick={logoutEleve}
-                className="
-                  inline-flex items-center gap-2 rounded-full
-                  bg-red-500 px-3.5 py-2 text-sm font-bold text-white
-                  hover:bg-red-600
-                "
+                className="inline-flex items-center gap-2 rounded-full bg-red-500 px-3.5 py-2 text-sm font-bold text-white hover:bg-red-600"
               >
                 <LogOut className="h-4 w-4" />
-                Déconnexion
               </button>
             </div>
           ) : (
             <Link
               href="/auth/signin-eleve"
-              className="
-                ml-2 inline-flex items-center gap-2 rounded-full
-                bg-gradient-to-r from-emerald-300 to-cyan-300
-                px-4 py-2 text-sm font-black text-[#041B33]
-                shadow-lg hover:brightness-110
-              "
+              className="ml-2 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-emerald-300 to-cyan-300 px-4 py-2 text-sm font-black text-[#041B33] shadow-lg hover:brightness-110"
             >
               <GraduationCap className="h-4 w-4" />
-              Connexion élève
+              Connexion
             </Link>
           )}
         </div>
@@ -396,28 +391,23 @@ export default function Header() {
             {eleve ? (
               <div className="mt-3 grid gap-2 border-t border-cyan-300/20 pt-3">
                 <Link
-                  href="/dashboard-eleve"
+                  href={dashboardHref}
                   className={mobileCardClass(
-                    isActive(pathname, "/dashboard-eleve"),
-                    "bg-gradient-to-r from-emerald-300 to-cyan-300",
+                    isActive(pathname, dashboardHref),
+                    isProf
+                      ? "bg-gradient-to-r from-blue-300 to-indigo-300"
+                      : "bg-gradient-to-r from-emerald-300 to-cyan-300",
                     "text-[#041B33]"
                   )}
-                  title="Voir mon tableau de bord"
                 >
                   <GraduationCap className="h-5 w-5" />
-                  {eleveLabel}
+                  {isProf ? `Dashboard ${dashboardLabel}` : `Mon espace · ${dashboardLabel}`}
                 </Link>
 
                 <button
                   type="button"
                   onClick={logoutEleve}
-                  className="
-                    flex items-center justify-center gap-3 rounded-2xl
-                    bg-gradient-to-r from-red-500 to-red-700
-                    px-4 py-4 text-sm font-black text-white shadow-lg
-                    transition hover:scale-[1.015] active:scale-[0.99]
-                    ring-1 ring-white/15
-                  "
+                  className="flex items-center justify-center gap-3 rounded-2xl bg-gradient-to-r from-red-500 to-red-700 px-4 py-4 text-sm font-black text-white shadow-lg transition hover:scale-[1.015] active:scale-[0.99] ring-1 ring-white/15"
                 >
                   <LogOut className="h-5 w-5" />
                   Déconnexion
@@ -433,7 +423,7 @@ export default function Header() {
                 )}
               >
                 <GraduationCap className="h-5 w-5" />
-                Connexion élève
+                Connexion élève / prof
               </Link>
             )}
           </div>
