@@ -66,7 +66,7 @@ export default function Header() {
   const isProf = typeUtilisateur === "prof";
   const isPrincipal = typeUtilisateur === "principal" || typeUtilisateur === "boss";
   const isStaff = isProf || isPrincipal;
-  const dashboardHref = isStaff ? "/dashboard-prof" : "/dashboard-eleve";
+  const dashboardHref = isPrincipal ? "/dashboard-principal" : isProf ? "/dashboard-prof" : "/dashboard-eleve";
   const dashboardLabel = isPrincipal ? "Principal" : isProf ? "Prof" : eleveLabel;
   const dashboardColor = isStaff
     ? "bg-gradient-to-r from-blue-300 to-indigo-300"

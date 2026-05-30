@@ -77,7 +77,9 @@ export default function SignInElevePage() {
 
       setFeedback("Connexion réussie. Redirection…");
       const type = data.type_utilisateur;
-      if (type === "prof" || type === "principal" || type === "boss") {
+      if (type === "principal" || type === "boss") {
+        router.push("/dashboard-principal");
+      } else if (type === "prof") {
         router.push("/dashboard-prof");
       } else {
         router.push("/dashboard-eleve");
