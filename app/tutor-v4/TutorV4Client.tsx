@@ -9,6 +9,19 @@ import {
   type ReactNode,
 } from "react";
 
+import Link from "next/link";
+import { createClient } from "@/lib/supabase/client";
+import { useEleve } from "@/context/EleveContext";
+
+type EleveSession = {
+  acces_id?: string | null;
+  code_etablissement?: string | null;
+  code_eleve?: string | null;
+  code_utilisateur?: string | null;
+  nom?: string | null;
+  type_utilisateur?: string | null;
+};
+
 import {
   TriangleCanvas,
   QuadrilatereCanvas,
@@ -320,7 +333,14 @@ function normalizeClasse(value: string | null): Classe {
 
 export default function TutorV4Page() {
   const searchParams = useSearchParams();
-  const router = useRouter(); // ✅ ICI
+  const router = useRouter();
+
+  const supabase = createClient();
+  const eleveContext = useEleve() as unknown as { eleve?: EleveSession | null };
+  const eleve = eleveContext.eleve ?? null;
+
+  const [saving, setSaving] = useState(false);
+  const [saveMessage, setSaveMessage] = useState<string | null>(null);
 
   const [classe, setClasse] = useState<Classe>("6e");
   const [matiere, setMatiere] = useState("maths");
@@ -993,6 +1013,67 @@ function handleInputKeyDown(
     void jumpToMicro(microId);
   }
 
+  async function enregistrerSeance() {
+    setSaveMessage(null);
+
+    if (!eleve) {
+      setSaveMessage("Tu dois être connecté pour enregistrer ta séance.");
+      return;
+    }
+
+    if (nbTentatives === 0) {
+      setSaveMessage("Fais au moins une question avant d'enregistrer.");
+      return;
+    }
+
+    const codeEtablissement = eleve.code_etablissement?.trim() ?? "";
+    const codeUtilisateur = eleve.code_eleve?.trim() ?? eleve.code_utilisateur?.trim() ?? "";
+
+    if (!codeEtablissement || !codeUtilisateur) {
+      setSaveMessage("Impossible d'identifier ton compte élève.");
+      return;
+    }
+
+    setSaving(true);
+
+    const scoreSur20 = possiblePoints > 0
+      ? parseFloat(((earnedPoints / possiblePoints) * 20).toFixed(1))
+      : 0;
+
+    const { error } = await supabase.from("resultats_tutor").insert({
+      code_etablissement: codeEtablissement,
+      code_utilisateur: codeUtilisateur,
+      nom: eleve.nom ?? null,
+      classe,
+      matiere,
+      notion_id: notion,
+      mode,
+      score_sur_20: scoreSur20,
+      earned_points: earnedPoints,
+      possible_points: possiblePoints,
+      bonnes_reponses: bonnesReponses,
+      nb_tentatives: nbTentatives,
+      temps_sec: elapsedSeconds,
+      details: {
+        notionLabel: notionLabel(notion, classe),
+        microStatuses,
+        microScores,
+        badges: visibleProgress.unlockedStars,
+        savedAt: new Date().toISOString(),
+      },
+    });
+
+    setSaving(false);
+
+    if (error) {
+      console.error(error);
+      setSaveMessage("Erreur : la séance n'a pas été enregistrée.");
+      return;
+    }
+
+    setSaveMessage("Séance enregistrée ✅");
+  }
+
  return (
   <main className="min-h-screen bg-[#f3f4f6] px-2 py-3 sm:px-4 sm:py-6">
     <div className="mx-auto max-w-7xl">
@@ -1093,13 +1174,44 @@ function handleInputKeyDown(
                 <HeroStat title="Temps" value={formatDuration(elapsedSeconds)} icon="⏱️" />
               </div>
 
-              <button
-                onClick={() => void startSession()}
-                disabled={busy || wrongAnswerPanelOpen || !notion}
-                className="rounded-2xl bg-slate-900 px-6 py-3 text-sm font-black text-white shadow hover:bg-slate-800 disabled:opacity-50"
-              >
-                {busy ? "Chargement..." : "Démarrer une mission"}
-              </button>
+              <div className="flex flex-col gap-2">
+                <button
+                  onClick={() => void startSession()}
+                  disabled={busy || wrongAnswerPanelOpen || !notion}
+                  className="rounded-2xl bg-slate-900 px-6 py-3 text-sm font-black text-white shadow hover:bg-slate-800 disabled:opacity-50"
+                >
+                  {busy ? "Chargement..." : "Démarrer une mission"}
+                </button>
+
+                {nbTentatives > 0 && (
+                  eleve ? (
+                    <button
+                      type="button"
+                      onClick={() => void enregistrerSeance()}
+                      disabled={saving}
+                      className="rounded-2xl bg-emerald-500 px-6 py-3 text-sm font-black text-white shadow hover:bg-emerald-400 disabled:opacity-60"
+                    >
+                      {saving ? "Enregistrement..." : "✅ Enregistrer ma séance"}
+                    </button>
+                  ) : (
+                    <Link
+                      href="/auth/signin-eleve"
+                      className="rounded-2xl bg-amber-500 px-6 py-3 text-center text-sm font-black text-white shadow hover:bg-amber-400"
+                    >
+                      Se connecter pour enregistrer
+                    </Link>
+                  )
+                )}
+
+                {saveMessage && (
+                  <p className={[
+                    "rounded-2xl px-4 py-2 text-sm font-black text-center",
+                    saveMessage.includes("✅") ? "bg-emerald-100 text-emerald-800" : "bg-red-100 text-red-800",
+                  ].join(" ")}>
+                    {saveMessage}
+                  </p>
+                )}
+              </div>
             </div>
           </header>
 

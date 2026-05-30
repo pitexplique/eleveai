@@ -49,6 +49,24 @@ type ResultatCalculRapide = {
   created_at: string;
 };
 
+type ResultatTutor = {
+  id: string;
+  code_etablissement: string;
+  code_utilisateur: string;
+  nom: string | null;
+  classe: string;
+  matiere: string;
+  notion_id: string;
+  mode: string | null;
+  score_sur_20: number | null;
+  earned_points: number;
+  possible_points: number;
+  bonnes_reponses: number;
+  nb_tentatives: number;
+  temps_sec: number | null;
+  created_at: string;
+};
+
 type ResultatEnglishMaths = {
   id: string;
   code_etablissement: string;
@@ -143,6 +161,7 @@ export default function DashboardEleveClient() {
   >([]);
 
   const [resultatsEnglish, setResultatsEnglish] = useState<ResultatEnglishMaths[]>([]);
+  const [resultatsTutor, setResultatsTutor] = useState<ResultatTutor[]>([]);
 
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
@@ -160,7 +179,7 @@ export default function DashboardEleveClient() {
         return;
       }
 
-      const [parcoursResponse, calculRapideResponse, defisJourResponse, englishResponse] =
+      const [parcoursResponse, calculRapideResponse, defisJourResponse, englishResponse, tutorResponse] =
         await Promise.all([
           supabase
             .from("resultats_parcours")
@@ -195,19 +214,28 @@ export default function DashboardEleveClient() {
             .eq("code_etablissement", codeEtablissement)
             .eq("code_utilisateur", codeUtilisateur)
             .order("created_at", { ascending: false }),
+
+          supabase
+            .from("resultats_tutor")
+            .select("id, code_etablissement, code_utilisateur, nom, classe, matiere, notion_id, mode, score_sur_20, earned_points, possible_points, bonnes_reponses, nb_tentatives, temps_sec, created_at")
+            .eq("code_etablissement", codeEtablissement)
+            .eq("code_utilisateur", codeUtilisateur)
+            .order("created_at", { ascending: false }),
         ]);
 
       if (
         parcoursResponse.error ||
         calculRapideResponse.error ||
         defisJourResponse.error ||
-        englishResponse.error
+        englishResponse.error ||
+        tutorResponse.error
       ) {
         console.error(
           parcoursResponse.error ??
             calculRapideResponse.error ??
             defisJourResponse.error ??
-            englishResponse.error
+            englishResponse.error ??
+            tutorResponse.error
         );
 
         setErrorMessage("Impossible de charger tous tes résultats.");
@@ -227,6 +255,10 @@ export default function DashboardEleveClient() {
 
       setResultatsEnglish(
         (englishResponse.data ?? []) as ResultatEnglishMaths[]
+      );
+
+      setResultatsTutor(
+        (tutorResponse.data ?? []) as ResultatTutor[]
       );
 
       setLoading(false);
@@ -256,11 +288,18 @@ export default function DashboardEleveClient() {
   const dernierEnglish = resultatsEnglish[0] ?? null;
   const meilleurEnglish = useMemo(() => getBest(resultatsEnglish), [resultatsEnglish]);
 
+  const dernierTutor = resultatsTutor[0] ?? null;
+  const meilleurTutor = useMemo(
+    () => resultatsTutor.length === 0 ? null : [...resultatsTutor].sort((a, b) => (b.score_sur_20 ?? 0) - (a.score_sur_20 ?? 0))[0],
+    [resultatsTutor]
+  );
+
   const totalActivites =
     resultatsParcours.length +
     resultatsCalculRapide.length +
     resultatsDefisJour.length +
-    resultatsEnglish.length;
+    resultatsEnglish.length +
+    resultatsTutor.length;
 
   if (!eleve) {
     return (
@@ -407,6 +446,20 @@ export default function DashboardEleveClient() {
                 {dernierDefiJour ? (
                   <p className="mt-2 text-sm font-bold text-slate-500">
                     {formatDate(dernierDefiJour.created_at)}
+                  </p>
+                ) : null}
+              </div>
+
+              <div className="rounded-[2rem] bg-white p-5 shadow-xl ring-1 ring-indigo-100">
+                <p className="text-sm font-black uppercase text-indigo-700">
+                  Dernier Coach
+                </p>
+                <p className="mt-3 text-3xl font-black">
+                  {dernierTutor ? `${dernierTutor.score_sur_20 ?? "—"}/20` : "—"}
+                </p>
+                {dernierTutor ? (
+                  <p className="mt-2 text-sm font-bold text-slate-500">
+                    {dernierTutor.notion_id} · {dernierTutor.classe}
                   </p>
                 ) : null}
               </div>
@@ -662,6 +715,71 @@ export default function DashboardEleveClient() {
               <div className="rounded-[2rem] bg-white p-6 shadow-xl ring-1 ring-slate-100 xl:col-span-2">
                 <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
                   <div>
+                    <h2 className="text-2xl font-black">Coach Maths IA</h2>
+                    <p className="mt-1 text-sm font-semibold text-slate-600">
+                      Historique des séances d&apos;entraînement.
+                    </p>
+                  </div>
+                  <Link
+                    href="/coach-maths-ia"
+                    className="rounded-2xl bg-indigo-600 px-5 py-3 text-sm font-black text-white shadow-lg hover:bg-indigo-500"
+                  >
+                    Reprendre l&apos;entraînement
+                  </Link>
+                </div>
+
+                {resultatsTutor.length === 0 ? (
+                  <div className="rounded-2xl bg-amber-50 p-4 font-bold text-amber-800">
+                    Aucune séance Coach enregistrée pour le moment.
+                  </div>
+                ) : (
+                  <div className="overflow-x-auto">
+                    <table className="w-full min-w-[640px] border-collapse text-left text-sm">
+                      <thead>
+                        <tr className="border-b border-slate-200 bg-slate-50 text-slate-600">
+                          <th className="px-4 py-3 font-black">Date</th>
+                          <th className="px-4 py-3 font-black">Classe</th>
+                          <th className="px-4 py-3 font-black">Notion</th>
+                          <th className="px-4 py-3 font-black">Mode</th>
+                          <th className="px-4 py-3 font-black">Score</th>
+                          <th className="px-4 py-3 font-black">Réussites</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {resultatsTutor.map((r) => (
+                          <tr key={r.id} className="border-b border-slate-100 hover:bg-indigo-50/60">
+                            <td className="px-4 py-3 font-bold text-slate-700">
+                              {formatDate(r.created_at)}
+                            </td>
+                            <td className="px-4 py-3 font-bold">{r.classe}</td>
+                            <td className="px-4 py-3 font-bold">{r.notion_id}</td>
+                            <td className="px-4 py-3 font-bold capitalize">{r.mode ?? "—"}</td>
+                            <td className="px-4 py-3 font-black">
+                              {r.score_sur_20 ?? "—"}/20
+                            </td>
+                            <td className="px-4 py-3">
+                              <span className={[
+                                "rounded-full px-3 py-1 font-black",
+                                (r.score_sur_20 ?? 0) >= 14
+                                  ? "bg-emerald-100 text-emerald-800"
+                                  : (r.score_sur_20 ?? 0) >= 10
+                                    ? "bg-amber-100 text-amber-800"
+                                    : "bg-red-100 text-red-800",
+                              ].join(" ")}>
+                                {r.bonnes_reponses}/{r.nb_tentatives}
+                              </span>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                )}
+              </div>
+
+              <div className="rounded-[2rem] bg-white p-6 shadow-xl ring-1 ring-slate-100 xl:col-span-2">
+                <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
+                  <div>
                     <h2 className="text-2xl font-black">English Maths</h2>
                     <p className="mt-1 text-sm font-semibold text-slate-600">
                       Historique des mini-défis English Maths.
@@ -756,6 +874,13 @@ export default function DashboardEleveClient() {
                 className="rounded-2xl bg-orange-500 px-5 py-3 text-sm font-black text-white shadow-lg hover:bg-orange-400"
               >
                 Défi du jour
+              </Link>
+
+              <Link
+                href="/coach-maths-ia"
+                className="rounded-2xl bg-indigo-600 px-5 py-3 text-sm font-black text-white shadow-lg hover:bg-indigo-500"
+              >
+                Coach Maths IA
               </Link>
 
               <Link
