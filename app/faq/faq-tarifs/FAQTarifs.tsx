@@ -2,45 +2,36 @@
 
 import Script from "next/script";
 import Link from "next/link";
-import { QUOTAS } from "@/lib/constants/quotas";
 
 export default function FAQTarifs() {
   const faq = [
     {
-      q: "Quelle différence entre version gratuite et abonnement ?",
-      a: `La version gratuite sert à découvrir EleveAI : ${QUOTAS.EMAIL_FREE_DAILY} essais par jour (compte connecté) et pas d’historique. L’abonnement débloque l’historique complet (tous vos presets) et un accès régulier pour un usage scolaire normal.`,
+      q: “EleveAI est-il gratuit ?”,
+      a: “EleveAI est actuellement en phase pilote. L’accès est fourni gratuitement aux élèves des établissements partenaires via un code établissement et un code élève. Aucun paiement n’est demandé aux élèves.”,
     },
     {
-      q: "C’est quoi un “essai” / une “utilisation” ?",
-      a: "Une utilisation correspond à un prompt (ta demande) + une réponse IA. C’est l’unité simple pour compter l’usage.",
+      q: “Comment un élève accède-t-il à EleveAI ?”,
+      a: “L’élève reçoit un code établissement et un code élève de la part de son professeur ou de l’établissement. Il se connecte sur /auth/signin-eleve et accède immédiatement à tous les outils : Coach Maths IA, Parcours, Calcul rapide, English Maths, Défis du jour, Brevet et Bac Spé.”,
     },
     {
-      q: `En gratuit, j’ai bien ${QUOTAS.EMAIL_FREE_DAILY} essais par jour ?`,
-      a: `Oui, pour un compte connecté en version gratuite : ${QUOTAS.EMAIL_FREE_DAILY} essais par jour. L’objectif est de pouvoir tester la méthode (comprendre → s’entraîner → vérifier) sans usage intensif.`,
+      q: “Les résultats des élèves sont-ils enregistrés ?”,
+      a: “Oui. Dès qu’un élève est connecté, il peut enregistrer ses scores dans Parcours, Calcul rapide, Défis du jour et English Maths. Tout l’historique est visible dans son tableau de bord personnel.”,
     },
     {
-      q: "En gratuit, mes presets sont-ils enregistrés ?",
-      a: "Non. En version gratuite, les presets ne sont pas enregistrés dans l’historique : c’est une utilisation de découverte. Pour conserver et retrouver tout votre travail, il faut l’abonnement.",
+      q: “Existe-t-il une offre pour les établissements ?”,
+      a: “Oui. EleveAI propose une offre pilote pour les collèges et lycées : accès pour une ou plusieurs classes, codes élèves générés par l’établissement, suivi des résultats. Contactez-nous pour un devis.”,
     },
     {
-      q: "Que veut dire “historique complet” dans l’abonnement ?",
-      a: "Historique complet = accès à tous vos presets enregistrés, sans limite de durée : vous pouvez les retrouver, les relancer, les améliorer et les réutiliser dans le temps.",
+      q: “Un élève peut-il utiliser EleveAI sans être connecté ?”,
+      a: “Oui, la plupart des outils sont accessibles sans connexion. Mais pour enregistrer les scores et accéder au tableau de bord personnel, la connexion avec un code élève est nécessaire.”,
     },
     {
-      q: "L’abonnement est-il “illimité” ?",
-      a: "L’abonnement donne un accès complet pour un usage scolaire normal. Pour éviter les abus et garantir la stabilité du service, un plafond technique peut exister, sans gêner un usage pédagogique classique.",
+      q: “Y aura-t-il un abonnement individuel à l’avenir ?”,
+      a: “Un accès individuel payant pour les familles est prévu. Il permettra à un élève de s’inscrire sans passer par un établissement. Les modalités seront communiquées prochainement.”,
     },
     {
-      q: "Je peux résilier quand je veux ?",
-      a: "Oui. L’abonnement est résiliable à tout moment (paiement sécurisé via Stripe).",
-    },
-    {
-      q: "Le sponsoring change quoi ?",
-      a: "Le sponsoring est un soutien volontaire au projet. Il n’est pas nécessaire pour utiliser EleveAI : l’abonnement suffit pour l’accès complet.",
-    },
-    {
-      q: "Existe-t-il une offre pour les établissements ?",
-      a: "Oui : une offre pilote (sur devis) pour tester EleveAI dans un cadre établissement, avec charte, gouvernance et ajustements selon vos contraintes.",
+      q: “Les données des élèves sont-elles protégées ?”,
+      a: “Oui. EleveAI ne collecte que le strict nécessaire : code établissement, code élève, nom et résultats. Aucune donnée personnelle sensible n’est stockée. Consultez notre politique de confidentialité pour le détail.”,
     },
   ];
 

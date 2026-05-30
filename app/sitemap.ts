@@ -6,8 +6,8 @@ const BASE_URL = "https://eleveai.fr";
 
 const u = (path: string) => `${BASE_URL}${path}`;
 
-const LASTMOD_HOME = new Date("2026-05-14");
-const LASTMOD_CORE = new Date("2026-05-14");
+const LASTMOD_HOME = new Date("2026-05-30");
+const LASTMOD_CORE = new Date("2026-05-30");
 const LASTMOD_LEGAL = new Date("2026-02-18");
 
 type RouteConfig = {
@@ -84,19 +84,25 @@ const ROUTES: RouteConfig[] = [
     lastMod: LASTMOD_CORE,
   },
 
-  // VALÉRIA / ESPACE PROF
+  // SPRINT BREVET
   {
-    path: "/optimiseur",
-    priority: 0.9,
-    changeFrequency: "weekly",
+    path: "/coach-brevet",
+    priority: 1.0,
+    changeFrequency: "daily",
     lastMod: LASTMOD_CORE,
   },
 
-  // AUTH ÉLÈVE
+  // AUTH & DASHBOARD ÉLÈVE
   {
     path: "/auth/signin-eleve",
-    priority: 0.5,
+    priority: 0.8,
     changeFrequency: "monthly",
+    lastMod: LASTMOD_CORE,
+  },
+  {
+    path: "/dashboard-eleve",
+    priority: 0.7,
+    changeFrequency: "weekly",
     lastMod: LASTMOD_CORE,
   },
 
@@ -116,6 +122,30 @@ const ROUTES: RouteConfig[] = [
   {
     path: "/faq",
     priority: 0.6,
+    changeFrequency: "monthly",
+    lastMod: LASTMOD_CORE,
+  },
+  {
+    path: "/faq/faq-professeurs",
+    priority: 0.55,
+    changeFrequency: "monthly",
+    lastMod: LASTMOD_CORE,
+  },
+  {
+    path: "/faq/faq-parents",
+    priority: 0.55,
+    changeFrequency: "monthly",
+    lastMod: LASTMOD_CORE,
+  },
+  {
+    path: "/faq/faq-administration",
+    priority: 0.55,
+    changeFrequency: "monthly",
+    lastMod: LASTMOD_CORE,
+  },
+  {
+    path: "/faq/faq-tarifs",
+    priority: 0.5,
     changeFrequency: "monthly",
     lastMod: LASTMOD_CORE,
   },
