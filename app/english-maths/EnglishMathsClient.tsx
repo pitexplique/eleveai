@@ -14,6 +14,17 @@ import {
 
 import { generateEnglishMathsQuestions } from "@/lib/english-maths/generateQuestions";
 import { makeEnglishMathsWeek01 } from "@/lib/english-maths/weeks/sharedWeek01";
+import { createClient } from "@/lib/supabase/client";
+import { useEleve } from "@/context/EleveContext";
+
+type EleveSession = {
+  acces_id?: string | null;
+  code_etablissement?: string | null;
+  code_eleve?: string | null;
+  code_utilisateur?: string | null;
+  nom?: string | null;
+  type_utilisateur?: string | null;
+};
 
 function playAudio(src?: string) {
   if (!src) return;
@@ -151,13 +162,17 @@ function EnglishMathsBackground() {
 }
 
 export default function EnglishMathsClient() {
-  // V1 : routine commune pour tous.
-  // On garde techniquement "6e" pour récupérer la semaine commune.
   const niveau: EnglishMathsNiveau = "6e";
+
+  const supabase = createClient();
+  const eleveContext = useEleve() as unknown as { eleve?: EleveSession | null };
+  const eleve = eleveContext.eleve ?? null;
 
   const [mode, setMode] = useState<"words" | "quiz" | "result">("words");
   const [selectedDayId, setSelectedDayId] = useState<string | null>(null);
   const [answers, setAnswers] = useState<Record<string, string>>({});
+  const [saving, setSaving] = useState(false);
+  const [saveMessage, setSaveMessage] = useState<string | null>(null);
 
   const weekDays = useMemo(() => makeEnglishMathsWeek01(niveau), [niveau]);
 
@@ -224,6 +239,60 @@ export default function EnglishMathsClient() {
   function restartQuiz() {
     setAnswers({});
     setMode("quiz");
+    setSaveMessage(null);
+  }
+
+  async function enregistrerScore() {
+    setSaveMessage(null);
+
+    if (!eleve) {
+      setSaveMessage("Tu dois être connecté pour enregistrer ta note.");
+      return;
+    }
+
+    const codeEtablissement = eleve.code_etablissement?.trim() ?? "";
+    const codeUtilisateur = eleve.code_eleve?.trim() ?? eleve.code_utilisateur?.trim() ?? "";
+
+    if (!codeEtablissement || !codeUtilisateur) {
+      setSaveMessage("Impossible d'identifier ton compte élève.");
+      return;
+    }
+
+    setSaving(true);
+
+    const { error } = await supabase.from("resultats_english_maths").insert({
+      code_etablissement: codeEtablissement,
+      code_utilisateur: codeUtilisateur,
+      nom: eleve.nom ?? null,
+      niveau,
+      jour: day?.dayIndex ?? null,
+      theme: day?.theme ?? null,
+      score,
+      total: questions.length,
+      details: {
+        dayId: day?.id,
+        dayLabel: day?.dayLabel,
+        title: day?.title,
+        questions: questions.map((q) => ({
+          id: q.id,
+          question: q.question,
+          expected: q.expected,
+          answer: answers[q.id] ?? "",
+          correct: answers[q.id] === q.expected,
+        })),
+        savedAt: new Date().toISOString(),
+      },
+    });
+
+    setSaving(false);
+
+    if (error) {
+      console.error(error);
+      setSaveMessage("Erreur : la note n'a pas été enregistrée.");
+      return;
+    }
+
+    setSaveMessage("Note enregistrée ✅");
   }
 
   return (
@@ -540,6 +609,24 @@ export default function EnglishMathsClient() {
                 </div>
 
                 <div className="mt-5 flex flex-wrap justify-center gap-3">
+                  {eleve ? (
+                    <button
+                      type="button"
+                      onClick={enregistrerScore}
+                      disabled={saving}
+                      className="rounded-2xl bg-sky-600 px-5 py-3 text-sm font-black text-white shadow-lg hover:bg-sky-500 disabled:cursor-not-allowed disabled:opacity-60"
+                    >
+                      {saving ? "Enregistrement..." : "✅ Enregistrer ma note"}
+                    </button>
+                  ) : (
+                    <Link
+                      href="/auth/signin-eleve"
+                      className="rounded-2xl bg-amber-500 px-5 py-3 text-sm font-black text-white shadow-lg hover:bg-amber-400"
+                    >
+                      Se connecter pour enregistrer
+                    </Link>
+                  )}
+
                   <button
                     type="button"
                     onClick={restartWords}
@@ -556,6 +643,17 @@ export default function EnglishMathsClient() {
                     Refaire le mini-défi
                   </button>
                 </div>
+
+                {saveMessage && (
+                  <p className={[
+                    "mt-4 rounded-2xl px-4 py-3 text-sm font-black",
+                    saveMessage.includes("✅")
+                      ? "bg-emerald-100 text-emerald-800"
+                      : "bg-red-100 text-red-800",
+                  ].join(" ")}>
+                    {saveMessage}
+                  </p>
+                )}
               </div>
             ) : null}
           </section>

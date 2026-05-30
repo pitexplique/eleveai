@@ -49,6 +49,20 @@ type ResultatCalculRapide = {
   created_at: string;
 };
 
+type ResultatEnglishMaths = {
+  id: string;
+  code_etablissement: string;
+  code_utilisateur: string;
+  nom: string | null;
+  niveau: string | null;
+  jour: number | null;
+  theme: string | null;
+  score: number;
+  total: number;
+  pourcentage: number | null;
+  created_at: string;
+};
+
 type ResultatDefiJour = {
   id: string;
   code_etablissement: string;
@@ -128,6 +142,8 @@ export default function DashboardEleveClient() {
     ResultatDefiJour[]
   >([]);
 
+  const [resultatsEnglish, setResultatsEnglish] = useState<ResultatEnglishMaths[]>([]);
+
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const codeEtablissement = eleve?.code_etablissement?.trim() ?? "";
@@ -144,7 +160,7 @@ export default function DashboardEleveClient() {
         return;
       }
 
-      const [parcoursResponse, calculRapideResponse, defisJourResponse] =
+      const [parcoursResponse, calculRapideResponse, defisJourResponse, englishResponse] =
         await Promise.all([
           supabase
             .from("resultats_parcours")
@@ -172,17 +188,26 @@ export default function DashboardEleveClient() {
             .eq("code_etablissement", codeEtablissement)
             .eq("code_utilisateur", codeUtilisateur)
             .order("created_at", { ascending: false }),
+
+          supabase
+            .from("resultats_english_maths")
+            .select("id, code_etablissement, code_utilisateur, nom, niveau, jour, theme, score, total, pourcentage, created_at")
+            .eq("code_etablissement", codeEtablissement)
+            .eq("code_utilisateur", codeUtilisateur)
+            .order("created_at", { ascending: false }),
         ]);
 
       if (
         parcoursResponse.error ||
         calculRapideResponse.error ||
-        defisJourResponse.error
+        defisJourResponse.error ||
+        englishResponse.error
       ) {
         console.error(
           parcoursResponse.error ??
             calculRapideResponse.error ??
-            defisJourResponse.error
+            defisJourResponse.error ??
+            englishResponse.error
         );
 
         setErrorMessage("Impossible de charger tous tes résultats.");
@@ -198,6 +223,10 @@ export default function DashboardEleveClient() {
 
       setResultatsDefisJour(
         (defisJourResponse.data ?? []) as ResultatDefiJour[]
+      );
+
+      setResultatsEnglish(
+        (englishResponse.data ?? []) as ResultatEnglishMaths[]
       );
 
       setLoading(false);
@@ -224,10 +253,14 @@ export default function DashboardEleveClient() {
     [resultatsDefisJour]
   );
 
+  const dernierEnglish = resultatsEnglish[0] ?? null;
+  const meilleurEnglish = useMemo(() => getBest(resultatsEnglish), [resultatsEnglish]);
+
   const totalActivites =
     resultatsParcours.length +
     resultatsCalculRapide.length +
-    resultatsDefisJour.length;
+    resultatsDefisJour.length +
+    resultatsEnglish.length;
 
   if (!eleve) {
     return (
@@ -378,6 +411,20 @@ export default function DashboardEleveClient() {
                 ) : null}
               </div>
 
+              <div className="rounded-[2rem] bg-white p-5 shadow-xl ring-1 ring-cyan-100">
+                <p className="text-sm font-black uppercase text-cyan-700">
+                  Dernier English
+                </p>
+                <p className="mt-3 text-3xl font-black">
+                  {dernierEnglish ? `${dernierEnglish.score} / ${dernierEnglish.total}` : "—"}
+                </p>
+                {dernierEnglish ? (
+                  <p className="mt-2 text-sm font-bold text-slate-500">
+                    {dernierEnglish.theme ?? `Jour ${dernierEnglish.jour}`}
+                  </p>
+                ) : null}
+              </div>
+
               <div className="rounded-[2rem] bg-white p-5 shadow-xl ring-1 ring-purple-100">
                 <p className="text-sm font-black uppercase text-purple-700">
                   Activités
@@ -386,7 +433,7 @@ export default function DashboardEleveClient() {
                 <p className="mt-3 text-3xl font-black">{totalActivites}</p>
 
                 <p className="mt-2 text-sm font-bold text-slate-500">
-                  Parcours + calcul + défis
+                  Parcours + calcul + défis + English
                 </p>
               </div>
             </div>
@@ -543,7 +590,7 @@ export default function DashboardEleveClient() {
                   </div>
 
                   <Link
-                    href="/defis-jour"
+                    href="/defis-du-jour"
                     className="rounded-2xl bg-orange-500 px-5 py-3 text-sm font-black text-white shadow-lg hover:bg-orange-400"
                   >
                     Refaire un défi
@@ -612,6 +659,76 @@ export default function DashboardEleveClient() {
               </div>
             </div>
 
+              <div className="rounded-[2rem] bg-white p-6 shadow-xl ring-1 ring-slate-100 xl:col-span-2">
+                <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
+                  <div>
+                    <h2 className="text-2xl font-black">English Maths</h2>
+                    <p className="mt-1 text-sm font-semibold text-slate-600">
+                      Historique des mini-défis English Maths.
+                    </p>
+                  </div>
+                  <Link
+                    href="/english-maths"
+                    className="rounded-2xl bg-sky-600 px-5 py-3 text-sm font-black text-white shadow-lg hover:bg-sky-500"
+                  >
+                    Refaire un défi English
+                  </Link>
+                </div>
+
+                {resultatsEnglish.length === 0 ? (
+                  <div className="rounded-2xl bg-amber-50 p-4 font-bold text-amber-800">
+                    Aucun défi English enregistré pour le moment.
+                  </div>
+                ) : (
+                  <div className="overflow-x-auto">
+                    <table className="w-full min-w-[560px] border-collapse text-left text-sm">
+                      <thead>
+                        <tr className="border-b border-slate-200 bg-slate-50 text-slate-600">
+                          <th className="px-4 py-3 font-black">Date</th>
+                          <th className="px-4 py-3 font-black">Jour</th>
+                          <th className="px-4 py-3 font-black">Thème</th>
+                          <th className="px-4 py-3 font-black">Score</th>
+                          <th className="px-4 py-3 font-black">Réussite</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {resultatsEnglish.map((r) => {
+                          const pct = getPct(r.score, r.total);
+                          return (
+                            <tr key={r.id} className="border-b border-slate-100 hover:bg-cyan-50/60">
+                              <td className="px-4 py-3 font-bold text-slate-700">
+                                {formatDate(r.created_at)}
+                              </td>
+                              <td className="px-4 py-3 font-bold">
+                                {r.jour ? `Jour ${r.jour}` : "—"}
+                              </td>
+                              <td className="px-4 py-3 font-bold">
+                                {r.theme ?? "—"}
+                              </td>
+                              <td className="px-4 py-3 font-black">
+                                {r.score} / {r.total}
+                              </td>
+                              <td className="px-4 py-3">
+                                <span className={[
+                                  "rounded-full px-3 py-1 font-black",
+                                  pct >= 80
+                                    ? "bg-emerald-100 text-emerald-800"
+                                    : pct >= 50
+                                      ? "bg-amber-100 text-amber-800"
+                                      : "bg-red-100 text-red-800",
+                                ].join(" ")}>
+                                  {pct} %
+                                </span>
+                              </td>
+                            </tr>
+                          );
+                        })}
+                      </tbody>
+                    </table>
+                  </div>
+                )}
+              </div>
+
             <div className="mt-6 flex flex-wrap gap-3">
               <Link
                 href="/accueil"
@@ -635,10 +752,17 @@ export default function DashboardEleveClient() {
               </Link>
 
               <Link
-                href="/defis-jour"
+                href="/defis-du-jour"
                 className="rounded-2xl bg-orange-500 px-5 py-3 text-sm font-black text-white shadow-lg hover:bg-orange-400"
               >
                 Défi du jour
+              </Link>
+
+              <Link
+                href="/english-maths"
+                className="rounded-2xl bg-sky-600 px-5 py-3 text-sm font-black text-white shadow-lg hover:bg-sky-500"
+              >
+                English Maths
               </Link>
             </div>
           </>

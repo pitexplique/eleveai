@@ -76,10 +76,7 @@ export default function SignInElevePage() {
       });
 
       setFeedback("Connexion réussie. Redirection…");
-      router.push("/accueil");
-
-      setFeedback("Connexion réussie. Redirection…");
-      router.push("/parcours");
+      router.push("/dashboard-eleve");
     } catch (err) {
       console.error(err);
       setErrorMsg("Erreur inattendue. Réessaie.");
