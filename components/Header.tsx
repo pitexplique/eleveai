@@ -22,7 +22,7 @@ import { useEleve } from "@/context/EleveContext";
 
 function isActive(pathname: string, href: string) {
   if (href === "/") return pathname === "/";
-  return pathname === href || pathname.startsWith(href + "/");
+  return pathname === href || pathname.startsWith(`${href}/`);
 }
 
 export default function Header() {
@@ -65,34 +65,24 @@ export default function Header() {
 
   const typeUtilisateur = eleve?.type_utilisateur ?? null;
   const isProf = typeUtilisateur === "prof";
-  const isPrincipal = typeUtilisateur === "principal" || typeUtilisateur === "boss";
+  const isPrincipal =
+    typeUtilisateur === "principal" || typeUtilisateur === "boss";
   const isStaff = isProf || isPrincipal;
-  const dashboardHref = isPrincipal ? "/dashboard-principal" : isProf ? "/dashboard-prof" : "/dashboard-eleve";
+  const dashboardHref = isPrincipal
+    ? "/dashboard-principal"
+    : isProf
+      ? "/dashboard-prof"
+      : "/dashboard-eleve";
   const dashboardLabel = isPrincipal ? "Principal" : isProf ? "Prof" : eleveLabel;
   const dashboardColor = isStaff
     ? "bg-gradient-to-r from-blue-300 to-indigo-300"
     : "bg-gradient-to-r from-emerald-300 to-cyan-300";
 
   return (
-    <header
-      className="
-        sticky top-0 z-50
-        border-b border-cyan-300/20
-        bg-gradient-to-r from-[#041B33]/95 via-[#062A4F]/95 to-[#073B63]/95
-        shadow-[0_8px_30px_rgba(0,0,0,0.25)]
-        backdrop-blur-xl
-      "
-    >
+    <header className="sticky top-0 z-50 border-b border-cyan-300/20 bg-gradient-to-r from-[#041B33]/95 via-[#062A4F]/95 to-[#073B63]/95 shadow-[0_8px_30px_rgba(0,0,0,0.25)] backdrop-blur-xl">
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3">
-        {/* LOGO */}
         <Link href="/accueil" className="flex items-center gap-3">
-          <div
-            className="
-              flex h-10 w-10 items-center justify-center rounded-2xl
-              bg-gradient-to-br from-cyan-200 via-emerald-300 to-amber-300
-              text-[#041B33] shadow-lg
-            "
-          >
+          <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-gradient-to-br from-cyan-200 via-emerald-300 to-amber-300 text-[#041B33] shadow-lg">
             <Sparkles className="h-5 w-5" />
           </div>
 
@@ -106,7 +96,6 @@ export default function Header() {
           </div>
         </Link>
 
-        {/* DESKTOP */}
         <div className="hidden items-center gap-2 lg:flex">
           <Link
             href="/accueil"
@@ -119,7 +108,7 @@ export default function Header() {
           <div className="relative">
             <button
               type="button"
-              onClick={() => setCoachOpen((v) => !v)}
+              onClick={() => setCoachOpen((value) => !value)}
               onBlur={() => setTimeout(() => setCoachOpen(false), 150)}
               className={linkClass(isActive(pathname, "/coach-ia"))}
             >
@@ -127,6 +116,7 @@ export default function Header() {
               Coach
               <span className="ml-0.5 text-xs opacity-60">▾</span>
             </button>
+
             {coachOpen && (
               <div className="absolute left-0 top-full z-50 mt-1 w-44 rounded-xl border border-white/10 bg-[#041B33] shadow-xl">
                 <Link
@@ -134,14 +124,14 @@ export default function Header() {
                   onClick={() => setCoachOpen(false)}
                   className="flex items-center gap-2 rounded-t-xl px-4 py-3 text-sm font-semibold text-white hover:bg-white/10"
                 >
-                  🧠 Maths
+                  Maths
                 </Link>
                 <Link
                   href="/coach-ia/francais"
                   onClick={() => setCoachOpen(false)}
                   className="flex items-center gap-2 rounded-b-xl px-4 py-3 text-sm font-semibold text-white hover:bg-white/10"
                 >
-                  📖 Français
+                  Français
                 </Link>
               </div>
             )}
@@ -178,9 +168,7 @@ export default function Header() {
 
           <Link
             href="/coach-brevet"
-            className={`relative ${linkClass(
-              isActive(pathname, "/coach-brevet")
-            )}`}
+            className={`relative ${linkClass(isActive(pathname, "/coach-brevet"))}`}
           >
             <BookOpen className="h-4 w-4 text-emerald-300" />
             Brevet
@@ -214,11 +202,11 @@ export default function Header() {
                 : "ring-1 ring-white/20",
             ].join(" ")}
           >
-            <span className="text-lg leading-none">🇬🇧</span>
+            <span className="text-lg leading-none">GB</span>
             <span className="leading-tight">
               English
               <br />
-              5 mots / jours
+              5 mots / jour
             </span>
           </Link>
 
@@ -231,7 +219,7 @@ export default function Header() {
             <Flame className="h-4 w-4 text-orange-300" />
             Leçon du jour
             <span className="absolute -right-2 -top-2 rounded-full bg-red-500 px-1.5 text-[10px] text-white">
-              🔥
+              feu
             </span>
           </Link>
 
@@ -243,7 +231,6 @@ export default function Header() {
             Défis 974
           </Link>
 
-          {/* AUTH */}
           {eleve ? (
             <div className="ml-2 flex items-center gap-2">
               <Link
@@ -274,30 +261,18 @@ export default function Header() {
           )}
         </div>
 
-        {/* MOBILE BUTTON */}
         <button
           type="button"
-          onClick={() => setMobileOpen((v) => !v)}
-          className="
-            rounded-full border border-cyan-200/20
-            bg-white/10 p-2 text-white
-            shadow-lg lg:hidden
-          "
+          onClick={() => setMobileOpen((value) => !value)}
+          className="rounded-full border border-cyan-200/20 bg-white/10 p-2 text-white shadow-lg lg:hidden"
           aria-label="Ouvrir le menu"
         >
           {mobileOpen ? <X /> : <Menu />}
         </button>
       </nav>
 
-      {/* MOBILE MENU */}
       {mobileOpen && (
-        <div
-          className="
-            border-t border-cyan-300/20
-            bg-gradient-to-b from-[#062A4F] to-[#041B33]
-            px-4 py-4 lg:hidden
-          "
-        >
+        <div className="border-t border-cyan-300/20 bg-gradient-to-b from-[#062A4F] to-[#041B33] px-4 py-4 lg:hidden">
           <div className="grid gap-2">
             <Link
               href="/accueil"
@@ -386,7 +361,7 @@ export default function Header() {
               )}
             >
               <Trophy className="h-5 w-5" />
-              Concours général 🏆
+              Concours général
             </Link>
 
             <Link
@@ -397,7 +372,7 @@ export default function Header() {
                 "text-[#041B33]"
               )}
             >
-              <span className="text-xl leading-none">🇬🇧</span>
+              <span className="text-xl leading-none">GB</span>
               English Maths
             </Link>
 
@@ -409,7 +384,7 @@ export default function Header() {
               )}
             >
               <Flame className="h-5 w-5" />
-              Leçon du jour 🔥
+              Leçon du jour
             </Link>
 
             <Link
@@ -436,7 +411,9 @@ export default function Header() {
                   )}
                 >
                   <GraduationCap className="h-5 w-5" />
-                  {isProf ? `Dashboard ${dashboardLabel}` : `Mon espace · ${dashboardLabel}`}
+                  {isProf
+                    ? `Dashboard ${dashboardLabel}`
+                    : `Mon espace · ${dashboardLabel}`}
                 </Link>
 
                 <button

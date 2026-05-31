@@ -1,31 +1,35 @@
-// app/page.tsx
+// app/accueil/page.tsx
 import type { Metadata } from "next";
 import AccueilClient from "./AccueilClient";
 
 export const metadata: Metadata = {
-  title: "EleveAI • Leçon du jour 📘",
+  title: "EleveAI - Maths, français et anglais",
   description:
-    "📘 Une leçon de maths par jour. Installe EleveAI sur ton téléphone et progresse en 5 minutes par jour. Accès rapide, entraînement efficace, progression garantie.",
+    "EleveAI aide les élèves à progresser en maths, en français et en anglais avec le Coach IA, les parcours, les leçons et les entraînements courts.",
   keywords: [
     "maths collège",
+    "français cycle 2",
+    "english maths",
+    "anglais A1 A2 B1 B2",
     "leçon du jour",
     "révision maths",
-    "application maths",
+    "révision français",
+    "application éducative",
     "eleveai",
     "entraînement quotidien",
   ],
   openGraph: {
-    title: "EleveAI • 1 leçon par jour",
+    title: "EleveAI - Maths, français et anglais",
     description:
-      "Progresse en maths avec une leçon par jour. Installe EleveAI comme une app sur ton téléphone 📱",
+      "Progresse en maths, en français et en anglais avec EleveAI : Coach IA, parcours guidés, leçons et entraînements courts.",
     url: "https://eleveai.fr",
     siteName: "EleveAI",
     images: [
       {
-        url: "/images/accueil-eleveai-reunion.png",
-        width: 1200,
-        height: 630,
-        alt: "EleveAI - Maths Réunion",
+        url: "/images/accueil-eleveai-reunion.webp",
+        width: 1680,
+        height: 945,
+        alt: "EleveAI - Maths, français et anglais",
       },
     ],
     locale: "fr_FR",
@@ -36,4 +40,3 @@ export const metadata: Metadata = {
 export default function Page() {
   return <AccueilClient />;
 }
-

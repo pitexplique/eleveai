@@ -2,24 +2,23 @@
 import type { Metadata } from "next";
 
 const SITE_URL = "https://eleveai.fr";
+const HERO_IMAGE = "/images/accueil-eleveai-reunion.webp";
 
 export const metadata: Metadata = {
-  title:
-    "EleveAI — Coach Maths IA, calcul rapide et parcours de progression",
+  title: "EleveAI - Coach IA maths, français et anglais",
 
   description:
-    "EleveAI aide les collégiens à progresser en mathématiques avec le Coach Maths IA, le calcul rapide, les parcours guidés, les défis et la leçon du jour.",
+    "EleveAI aide les élèves à progresser en maths, en français et en anglais avec le Coach IA, le calcul rapide, les parcours guidés, les défis et la leçon du jour.",
 
   alternates: {
     canonical: `${SITE_URL}/accueil`,
   },
 
   openGraph: {
-    title:
-      "EleveAI — Apprendre les maths autrement",
+    title: "EleveAI - Maths, français et anglais",
 
     description:
-      "Calcul rapide, Coach Maths IA, parcours guidés et leçon du jour : une plateforme conçue pour développer les automatismes, la compréhension et la progression des élèves.",
+      "Coach IA, parcours guidés, leçons et entraînements courts : une plateforme conçue pour développer les automatismes, la compréhension et la progression en maths, français et anglais.",
 
     url: `${SITE_URL}/accueil`,
     type: "website",
@@ -28,10 +27,10 @@ export const metadata: Metadata = {
 
     images: [
       {
-        url: "/images/accueil-eleveai-reunion.png",
-        width: 1200,
-        height: 630,
-        alt: "EleveAI — plateforme pédagogique de mathématiques",
+        url: HERO_IMAGE,
+        width: 1680,
+        height: 945,
+        alt: "EleveAI - Maths, français et anglais",
       },
     ],
   },
@@ -39,32 +38,40 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
 
-    title:
-      "EleveAI — Coach Maths IA et calcul rapide",
+    title: "EleveAI - Coach IA maths, français et anglais",
 
     description:
-      "Une plateforme pédagogique moderne pour progresser en mathématiques grâce aux automatismes, aux défis et aux parcours personnalisés.",
+      "Une plateforme pédagogique moderne pour progresser en maths, en français et en anglais grâce aux parcours, aux défis et aux entraînements personnalisés.",
 
-    images: ["/images/accueil-eleveai-reunion.png"],
+    images: [HERO_IMAGE],
   },
 
   keywords: [
     "EleveAI",
     "mathématiques",
+    "français cycle 2",
+    "english maths",
+    "anglais A1 A2 B1 B2",
+    "coach IA",
     "coach maths IA",
+    "coach français IA",
     "calcul rapide",
     "leçon du jour",
     "parcours maths",
+    "parcours français",
     "automatismes",
     "raisonnement",
     "défis mathématiques",
     "révision collège",
     "entraînement maths",
+    "entraînement français",
+    "CP",
+    "CE1",
+    "CE2",
     "6e",
     "5e",
     "4e",
     "3e",
-    "maths collège",
     "plateforme éducative",
     "IA éducation",
     "La Réunion",

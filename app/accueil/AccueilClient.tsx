@@ -196,14 +196,20 @@ export default function AccueilPage() {
       <section className="relative bg-gradient-to-b from-[#041B33] to-[#062A4F] px-4 pt-5 pb-0 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <div className="relative h-[42vh] min-h-[260px] overflow-hidden rounded-[2rem] border border-white/10 shadow-2xl sm:h-[48vh] sm:min-h-[340px] lg:h-[52vh] lg:min-h-[420px]">
-            <Image
-              src="/images/accueil-eleveai-reunion.webp"
-              alt="EleveAI – Les maths : un jeu, un enjeu, un avenir. Du CM1 à la Terminale Spé Maths."
-              fill
-              priority
-              sizes="100vw"
-              className="object-cover object-center"
-            />
+            <picture>
+              <source
+                media="(max-width: 640px)"
+                srcSet="/images/accueil-eleveai-reunion-mobile.webp"
+              />
+              <Image
+                src="/images/accueil-eleveai-reunion.webp"
+                alt="EleveAI - Maths, francais et anglais. CP a Terminale, avec niveaux A1 A2 B1 B2 pour l'anglais."
+                fill
+                priority
+                sizes="100vw"
+                className="object-cover object-center"
+              />
+            </picture>
             <div className="absolute right-3 top-3 z-20 sm:right-4 sm:top-4">
               <audio
                 ref={audioRef}

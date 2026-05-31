@@ -10,6 +10,7 @@ import { matrix3eMaths } from "@/lib/tutor-v4/matrix/matrix3eMaths";
 import { matrixTerminaleSpeMaths } from "@/lib/tutor-v4/matrix/matrixTerminaleSpeMaths";
 import { matrixCpFrancais } from "@/lib/tutor-v4/matrix/matrixCpFrancais";
 import { matrixCe1Francais } from "@/lib/tutor-v4/matrix/matrixCe1Francais";
+import { matrixCe2Francais } from "@/lib/tutor-v4/matrix/matrixCe2Francais";
 
 import type { SkillMatrix } from "@/lib/tutor-v4/types";
 
@@ -59,6 +60,7 @@ export async function loadMatrixV4(
 
   if (classe === "cp"  && matiere === "francais") return matrixCpFrancais;
   if (classe === "ce1" && matiere === "francais") return matrixCe1Francais;
+  if (classe === "ce2" && matiere === "francais") return matrixCe2Francais;
 
   throw new Error(`Matrix V4 introuvable pour ${classe}/${matiere}`);
 }
