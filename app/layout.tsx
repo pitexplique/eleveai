@@ -146,7 +146,13 @@ export default function RootLayout({
       "@context": "https://schema.org",
       "@type": "Person",
       name: "Frédéric Lacoste",
-      jobTitle: "Fondateur d’EleveAI",
+      jobTitle: "Enseignant de mathématiques — Fondateur d’EleveAI",
+      description: "Enseignant au Collège du Dimitile à La Réunion. DESS de mathématiques appliquées, spécialiste de la théorie du plus proche voisin.",
+      worksFor: {
+        "@type": "EducationalOrganization",
+        name: "Collège du Dimitile",
+        address: { "@type": "PostalAddress", addressRegion: "La Réunion", addressCountry: "FR" },
+      },
     },
   ];
 

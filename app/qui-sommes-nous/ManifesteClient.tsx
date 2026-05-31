@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Link from "next/link";
 import { useState } from "react";
@@ -7,24 +7,24 @@ const EMAIL = "contact@eleveai.fr";
 
 const principes = [
   {
-    title: "Plusieurs portes d’entrée",
+    title: "Plusieurs portes d'entrée",
     text: "Coach Maths, Parcours, Brevet, Calcul rapide, English Maths, Défis… Chaque élève choisit ce qui lui convient le mieux.",
   },
   {
     title: "Suivi réel de la progression",
-    text: "Les scores sont enregistrés notion par notion. L’élève voit ses progrès, le professeur aussi.",
+    text: "Les scores sont enregistrés notion par notion. L'élève voit ses progrès, le professeur aussi.",
   },
   {
-    title: "L’élève cherche, comprend, vérifie",
-    text: "EleveAI pose des questions avant de corriger. L’élève réfléchit, se trompe, recommence — c’est comme ça qu’on apprend.",
+    title: "L'élève cherche, comprend, vérifie",
+    text: "EleveAI pose des questions avant de corriger. L'élève réfléchit, se trompe, recommence — c'est comme ça qu'on apprend.",
   },
   {
     title: "Le professeur garde la main",
-    text: "EleveAI accompagne, mais ne remplace ni le cours, ni l’exigence scolaire, ni le professeur.",
+    text: "EleveAI accompagne, mais ne remplace ni le cours, ni l'exigence scolaire, ni le professeur.",
   },
   {
     title: "Ancré à La Réunion",
-    text: "Les défis et exemples sont inspirés du territoire : Piton de la Fournaise, Grand Raid, biodiversité de l’île.",
+    text: "Les défis et exemples sont inspirés du territoire : Piton de la Fournaise, Grand Raid, biodiversité de l'île.",
   },
   {
     title: "Simple et efficace",
@@ -34,19 +34,19 @@ const principes = [
 
 const faqItems = [
   {
-    question: "À qui s’adresse EleveAI ?",
+    question: "À qui s'adresse EleveAI ?",
     answer:
-      "EleveAI s’adresse aux élèves du CM1 au Bac, à leurs enseignants et à leurs familles. La plateforme est pensée pour les collèges et lycées qui veulent un outil de suivi simple et efficace.",
+      "EleveAI s'adresse aux élèves du CM1 au Bac, à leurs enseignants et à leurs familles. La plateforme est pensée pour les collèges et lycées qui veulent un outil de suivi simple et efficace.",
   },
   {
     question: "Comment un élève accède-t-il à EleveAI ?",
     answer:
-      "L’élève reçoit un code établissement et un code élève de son professeur. Il se connecte en quelques secondes et accède à tous les outils. Les résultats sont enregistrés automatiquement.",
+      "L'élève reçoit un code établissement et un code élève de son professeur. Il se connecte en quelques secondes et accède à tous les outils. Les résultats sont enregistrés automatiquement.",
   },
   {
     question: "EleveAI remplace-t-elle les enseignants ?",
     answer:
-      "Non. EleveAI est un outil d’accompagnement. Le professeur reste la référence pédagogique. EleveAI aide l’élève à s’entraîner, à réviser et à suivre sa progression entre les cours.",
+      "Non. EleveAI est un outil d'accompagnement. Le professeur reste la référence pédagogique. EleveAI aide l'élève à s'entraîner, à réviser et à suivre sa progression entre les cours.",
   },
   {
     question: "EleveAI est-elle adaptée au cadre scolaire français ?",
@@ -64,7 +64,7 @@ export default function ManifesteClient() {
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch (e) {
-      console.error("Impossible de copier l’email", e);
+      console.error("Impossible de copier l'email", e);
     }
   };
 
@@ -128,23 +128,23 @@ export default function ManifesteClient() {
 
           <div className="mt-4 space-y-4 text-sm leading-7 text-slate-200">
             <p>
-              Les élèves utilisent déjà l’intelligence artificielle. Sans cadre,
+              Les élèves utilisent déjà l'intelligence artificielle. Sans cadre,
               cela peut conduire à copier une réponse sans comprendre, à perdre
-              la méthode ou à contourner l’effort nécessaire.
+              la méthode ou à contourner l'effort nécessaire.
             </p>
 
             <p>
-              EleveAI est conçu pour faire l’inverse : poser des questions,
-              faire essayer, corriger, expliquer et aider l’élève à progresser
+              EleveAI est conçu pour faire l'inverse : poser des questions,
+              faire essayer, corriger, expliquer et aider l'élève à progresser
               réellement.
             </p>
           </div>
 
           <ul className="mt-4 space-y-2 text-sm leading-6 text-slate-200">
             <li>• apprendre par questions et essais ;</li>
-            <li>• renforcer l’autonomie et la confiance ;</li>
+            <li>• renforcer l'autonomie et la confiance ;</li>
             <li>• faire gagner du temps aux enseignants ;</li>
-            <li>• rassurer les familles et l’institution.</li>
+            <li>• rassurer les familles et l'institution.</li>
           </ul>
         </div>
 
@@ -179,14 +179,14 @@ export default function ManifesteClient() {
 
           <div className="mt-4 space-y-4 text-sm leading-7 text-slate-200">
             <p>
-              Interdire totalement l’IA ne suffit pas. Les élèves y auront accès
-              d’une manière ou d’une autre. Le vrai enjeu est donc d’apprendre à
-              l’utiliser correctement.
+              Interdire totalement l'IA ne suffit pas. Les élèves y auront accès
+              d'une manière ou d'une autre. Le vrai enjeu est donc d'apprendre à
+              l'utiliser correctement.
             </p>
 
             <p>
-              EleveAI propose un cadre : l’élève ne reçoit pas simplement une
-              réponse finale. Il doit s’engager dans une démarche, comprendre les
+              EleveAI propose un cadre : l'élève ne reçoit pas simplement une
+              réponse finale. Il doit s'engager dans une démarche, comprendre les
               étapes, identifier ses erreurs et progresser.
             </p>
           </div>
@@ -200,24 +200,38 @@ export default function ManifesteClient() {
 
           <div className="mt-4 space-y-4 text-sm leading-7 text-slate-200">
             <p>
-              Je m’appelle{" "}
+              Je m&apos;appelle{" "}
               <span className="font-semibold text-slate-50">
                 Frédéric Lacoste
               </span>
-              , enseignant de mathématiques à La Réunion, ancien statisticien,
-              développeur autodidacte et initiateur du projet{" "}
-              <span className="font-semibold text-slate-50">EleveAI</span>.
+              , enseignant de mathématiques au{" "}
+              <span className="font-semibold text-slate-50">Collège du Dimitile</span>{" "}
+              à La Réunion.
             </p>
 
             <p>
-              Ce “nous” représente une intention : construire une IA au service
-              réel des élèves, des enseignants et des familles, en lien avec le
-              terrain.
+              Titulaire d&apos;un{" "}
+              <span className="font-semibold text-slate-50">
+                DESS de mathématiques appliquées
+              </span>
+              , je suis spécialiste de la{" "}
+              <span className="font-semibold text-slate-50">
+                théorie du plus proche voisin
+              </span>{" "}
+              — un algorithme d&apos;optimisation et de classification au cœur de
+              nombreuses applications de l&apos;intelligence artificielle moderne.
             </p>
 
             <p>
-              EleveAI avance progressivement avec les retours des élèves, des
-              professeurs, des familles et des usages réels en classe.
+              C&apos;est cette double expertise — terrain pédagogique et fondements
+              mathématiques de l&apos;IA — qui est au cœur d&apos;EleveAI. Pas un produit
+              fabriqué loin des élèves, mais une plateforme construite depuis la
+              salle de classe, avec les vraies difficultés du terrain réunionnais.
+            </p>
+
+            <p>
+              EleveAI avance progressivement avec les retours des élèves de
+              DIMITILE, des professeurs et des familles.
             </p>
           </div>
         </div>
@@ -229,14 +243,14 @@ export default function ManifesteClient() {
           </h2>
 
           <p className="mt-4 text-lg font-bold leading-8 text-slate-50">
-            Un outil pour tous, avec plusieurs portes d’entrée et une
+            Un outil pour tous, avec plusieurs portes d'entrée et une
             cartographie de leur évolution.
           </p>
 
           <p className="mt-4 text-sm leading-7 text-slate-200">
             Chaque élève peut progresser par un chemin différent : défi, calcul
             rapide, coach, parcours, leçon courte, évaluation ou activité
-            contextualisée. L’important est de rendre les progrès visibles et de
+            contextualisée. L'important est de rendre les progrès visibles et de
             mieux repérer les notions à retravailler.
           </p>
         </div>
@@ -250,7 +264,7 @@ export default function ManifesteClient() {
 
             <p className="text-sm leading-7 text-slate-300">
               EleveAI repose sur des principes simples : questionner, faire
-              essayer, corriger, expliquer, renforcer. L’IA aide, elle ne
+              essayer, corriger, expliquer, renforcer. L'IA aide, elle ne
               remplace pas.
             </p>
           </div>
@@ -277,7 +291,7 @@ export default function ManifesteClient() {
                 type="button"
                 onClick={handleCopy}
                 className="inline-flex items-center rounded-xl border border-slate-700 bg-slate-900/80 px-3 py-2 text-sm font-medium text-slate-200 transition hover:bg-slate-800"
-                aria-label="Copier l’adresse email"
+                aria-label="Copier l'adresse email"
               >
                 {copied ? "✔ Copié" : "Copier"}
               </button>
