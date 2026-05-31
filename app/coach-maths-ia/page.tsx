@@ -12,10 +12,13 @@ import {
 } from "@/lib/tutor-v4/catalog";
 
 //const CLASSES: Classe[] = ["cm2", "6e", "5e", "4e", "3e"];
-const CLASSES: Classe[] = ["cm1", "cm2", "6e", "5e", "4e", "3e", "terminale-spe"];
+const CLASSES: Classe[] = ["cp", "ce1", "ce2", "cm1", "cm2", "6e", "5e", "4e", "3e", "terminale-spe"];
 
 function getClasseTitle(classe: Classe) {
-    if (classe === "cm1") return "Maths CM1";
+  if (classe === "cp") return "Maths CP";
+  if (classe === "ce1") return "Maths CE1";
+  if (classe === "ce2") return "Maths CE2";
+  if (classe === "cm1") return "Maths CM1";
   if (classe === "cm2") return "Maths CM2";
   if (classe === "6e") return "Maths 6e";
   if (classe === "5e") return "Maths 5e";
@@ -29,6 +32,9 @@ function getClasseBadgeColor(item: Classe, active: boolean) {
     return "border-slate-200 bg-white text-orange-500 hover:bg-orange-50";
   }
 
+  if (item === "cp") return "border-lime-500 bg-lime-500 text-white";
+  if (item === "ce1") return "border-lime-500 bg-lime-500 text-white";
+  if (item === "ce2") return "border-lime-500 bg-lime-500 text-white";
   if (item === "cm1") return "border-lime-500 bg-lime-500 text-white";
   if (item === "cm2") return "border-lime-500 bg-lime-500 text-white";
   if (item === "6e") return "border-lime-500 bg-lime-500 text-white";

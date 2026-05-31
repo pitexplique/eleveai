@@ -1,4 +1,7 @@
 import { buildKnowledgeCm1Maths } from "@/lib/tutor-v4/knowledge/maths/cm1/buildKnowledgeCm1";
+import { buildKnowledgeCpMaths } from "@/lib/tutor-v4/knowledge/maths/cp/buildKnowledgeCp";
+import { buildKnowledgeCe1Maths } from "@/lib/tutor-v4/knowledge/maths/ce1/buildKnowledgeCe1";
+import { buildKnowledgeCe2Maths } from "@/lib/tutor-v4/knowledge/maths/ce2/buildKnowledgeCe2";
 import { buildKnowledgeCm2Maths } from "@/lib/tutor-v4/knowledge/maths/cm2/buildKnowledgeCm2";
 import { buildKnowledge6eMaths } from "@/lib/tutor-v4/knowledge/maths/6e/buildKnowledge6e";
 import { buildKnowledge5eMaths } from "@/lib/tutor-v4/knowledge/maths/5e/buildKnowledge5e";
@@ -10,7 +13,17 @@ import { buildKnowledgeTerminaleSpeMaths } from "@/lib/tutor-v4/knowledge/maths/
 // TYPES
 // =========================
 
-export type Classe = "cm1" |"cm2" |"6e" | "5e" | "4e" | "3e" | "terminale-spe";
+export type Classe =
+  | "cp"
+  | "ce1"
+  | "ce2"
+  | "cm1"
+  | "cm2"
+  | "6e"
+  | "5e"
+  | "4e"
+  | "3e"
+  | "terminale-spe";
 
 // =========================
 // KNOWLEDGE PAR CLASSE
@@ -18,6 +31,12 @@ export type Classe = "cm1" |"cm2" |"6e" | "5e" | "4e" | "3e" | "terminale-spe";
 
 function getKnowledge(classe: Classe) {
   switch (classe) {
+    case "cp":
+      return buildKnowledgeCpMaths();
+    case "ce1":
+      return buildKnowledgeCe1Maths();
+    case "ce2":
+      return buildKnowledgeCe2Maths();
     case "cm1":      return buildKnowledgeCm1Maths();
     case "cm2":
       return buildKnowledgeCm2Maths();

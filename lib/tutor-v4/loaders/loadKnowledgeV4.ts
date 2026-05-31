@@ -1,4 +1,7 @@
 
+import { loadKnowledgeCpMaths } from "@/lib/tutor-v4/knowledge/loaders/loadKnowledgeCpMaths";
+import { loadKnowledgeCe1Maths } from "@/lib/tutor-v4/knowledge/loaders/loadKnowledgeCe1Maths";
+import { loadKnowledgeCe2Maths } from "@/lib/tutor-v4/knowledge/loaders/loadKnowledgeCe2Maths";
 import { loadKnowledgeCm1Maths } from "@/lib/tutor-v4/knowledge/loaders/loadKnowledgeCm1Maths";
 import { loadKnowledgeCm2Maths } from "@/lib/tutor-v4/knowledge/loaders/loadKnowledgeCm2Maths";
 import { loadKnowledge6eMaths } from "@/lib/tutor-v4/knowledge/loaders/loadKnowledge6eMaths";
@@ -13,6 +16,18 @@ export async function loadKnowledgeV4(
   classe: string,
   matiere: string
 ): Promise<KnowledgePack> {
+
+  if (classe === "cp" && matiere === "maths") {
+    return loadKnowledgeCpMaths() as KnowledgePack;
+  }
+
+  if (classe === "ce1" && matiere === "maths") {
+    return loadKnowledgeCe1Maths() as KnowledgePack;
+  }
+
+  if (classe === "ce2" && matiere === "maths") {
+    return loadKnowledgeCe2Maths() as KnowledgePack;
+  }
 
   if (classe === "cm1" && matiere === "maths") {
     return loadKnowledgeCm1Maths() as KnowledgePack;
