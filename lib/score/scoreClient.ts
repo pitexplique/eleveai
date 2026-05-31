@@ -2,7 +2,7 @@ export type ScoreModule =
   | "probleme-du-jour"
   | "calcul-rapide"
   | "lecon-du-jour"
-  | "coach-maths-ia"
+  | "coach-ia"
   | "parcours";
 
 export type ScoreEvent = {

@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useParams } from "next/navigation";
 import {
   getNotionOptions,
   getNotionMicroMap,
@@ -9,177 +9,144 @@ import {
   getDomaineMap,
   notionLabel,
   type Classe,
+  type Matiere,
 } from "@/lib/tutor-v4/catalog";
 
-//const CLASSES: Classe[] = ["cm2", "6e", "5e", "4e", "3e"];
 const CLASSES: Classe[] = ["cp", "ce1", "ce2", "cm1", "cm2", "6e", "5e", "4e", "3e", "terminale-spe"];
 
-function getClasseTitle(classe: Classe) {
-  if (classe === "cp") return "Maths CP";
-  if (classe === "ce1") return "Maths CE1";
-  if (classe === "ce2") return "Maths CE2";
-  if (classe === "cm1") return "Maths CM1";
-  if (classe === "cm2") return "Maths CM2";
-  if (classe === "6e") return "Maths 6e";
-  if (classe === "5e") return "Maths 5e";
-  if (classe === "4e") return "Maths 4e";
-  if (classe === "terminale-spe") return "Term Spe";
-  return "Maths 3e";
+function getMatiereTitle(matiere: string, classe: Classe) {
+  const classeLabel: Record<Classe, string> = {
+    cp: "CP",
+    ce1: "CE1",
+    ce2: "CE2",
+    cm1: "CM1",
+    cm2: "CM2",
+    "6e": "6e",
+    "5e": "5e",
+    "4e": "4e",
+    "3e": "3e",
+    "terminale-spe": "Term Spe",
+  };
+  const matiereLabel: Record<string, string> = {
+    maths: "Maths",
+    francais: "Français",
+  };
+  return `${matiereLabel[matiere] ?? matiere} ${classeLabel[classe] ?? classe}`;
+}
+
+function getMatiereColor(matiere: string) {
+  switch (matiere) {
+    case "maths":    return "text-orange-500";
+    case "francais": return "text-sky-600";
+    default:         return "text-slate-700";
+  }
 }
 
 function getClasseBadgeColor(item: Classe, active: boolean) {
   if (!active) {
     return "border-slate-200 bg-white text-orange-500 hover:bg-orange-50";
   }
-
-  if (item === "cp") return "border-lime-500 bg-lime-500 text-white";
-  if (item === "ce1") return "border-lime-500 bg-lime-500 text-white";
-  if (item === "ce2") return "border-lime-500 bg-lime-500 text-white";
-  if (item === "cm1") return "border-lime-500 bg-lime-500 text-white";
-  if (item === "cm2") return "border-lime-500 bg-lime-500 text-white";
-  if (item === "6e") return "border-lime-500 bg-lime-500 text-white";
-  if (item === "5e") return "border-sky-500 bg-sky-500 text-white";
-  if (item === "4e") return "border-sky-500 bg-sky-500 text-white";
-  if (item === "3e") return "border-sky-500 bg-sky-500 text-white";
-   if (item === "terminale-spe") return "border-sky-500 bg-sky-500 text-white";
-
-
+  if (["cp", "ce1", "ce2", "cm1", "cm2", "6e"].includes(item))
+    return "border-lime-500 bg-lime-500 text-white";
+  if (["5e", "4e", "3e", "terminale-spe"].includes(item))
+    return "border-sky-500 bg-sky-500 text-white";
   return "border-violet-500 bg-violet-500 text-white";
 }
 
 function getMicroButtonStyle(microId: string) {
-  if (microId.includes("defis")) {
-    return "text-orange-700 hover:bg-orange-50";
-  }
-
+  if (microId.includes("defis")) return "text-orange-700 hover:bg-orange-50";
   return "text-green-800 hover:bg-green-50";
 }
 
 function getDomaineAccent(domaineId: string) {
-  if (domaineId.includes("N") || domaineId.includes("P")) {
-    return {
-      title: "text-green-700",
-      pill: "bg-green-100 text-green-800",
-    };
-  }
-
-  if (domaineId.includes("G")) {
-    return {
-      title: "text-sky-700",
-      pill: "bg-sky-100 text-sky-800",
-    };
-  }
-
-  if (domaineId.includes("M")) {
-    return {
-      title: "text-orange-600",
-      pill: "bg-orange-100 text-orange-700",
-    };
-  }
-
-  if (domaineId.includes("D")) {
-    return {
-      title: "text-violet-700",
-      pill: "bg-violet-100 text-violet-800",
-    };
-  }
-
-  return {
-    title: "text-slate-700",
-    pill: "bg-slate-100 text-slate-800",
-  };
+  if (domaineId.includes("N") || domaineId.includes("P"))
+    return { title: "text-green-700", pill: "bg-green-100 text-green-800" };
+  if (domaineId.includes("G"))
+    return { title: "text-sky-700", pill: "bg-sky-100 text-sky-800" };
+  if (domaineId.includes("M"))
+    return { title: "text-orange-600", pill: "bg-orange-100 text-orange-700" };
+  if (domaineId.includes("D"))
+    return { title: "text-violet-700", pill: "bg-violet-100 text-violet-800" };
+  return { title: "text-slate-700", pill: "bg-slate-100 text-slate-800" };
 }
 
-export default function CoachMathsIA() {
+export default function CoachIA() {
   const router = useRouter();
-  const [classe, setClasse] = useState<Classe>("6e");
+  const params = useParams();
+  const matiere = ((params?.matiere as string) ?? "maths") as Matiere;
 
-  const notionOptions = getNotionOptions(classe);
-  const notionMicroMap = getNotionMicroMap(classe);
-  const microLabels = getMicroLabelMap(classe);
+  const defaultClasse: Classe = matiere === "francais" ? "cp" : "6e";
+  const [classe, setClasse] = useState<Classe>(defaultClasse);
 
-  const domaines = useMemo(() => {
-    return getDomaineMap(classe);
-  }, [classe]);
+  const notionOptions = getNotionOptions(classe, matiere);
+  const notionMicroMap = getNotionMicroMap(classe, matiere);
+  const microLabels = getMicroLabelMap(classe, matiere);
+
+  const domaines = useMemo(() => getDomaineMap(classe, matiere), [classe, matiere]);
 
   const totalNotions = notionOptions.length;
-
   const totalMicros = notionOptions.reduce((sum, notionId) => {
-    const micros = notionMicroMap[notionId] ?? [];
-    return sum + micros.length;
+    return sum + (notionMicroMap[notionId]?.length ?? 0);
   }, 0);
 
   function handleClick(notionId: string, microId: string) {
     router.push(
-      `/tutor-v4?classe=${encodeURIComponent(
-        classe
-      )}&matiere=maths&notion=${encodeURIComponent(
-        notionId
-      )}&microId=${encodeURIComponent(microId)}`
+      `/tutor-v4?classe=${encodeURIComponent(classe)}&matiere=${encodeURIComponent(matiere)}&notion=${encodeURIComponent(notionId)}&microId=${encodeURIComponent(microId)}`
     );
   }
 
   return (
     <main className="min-h-screen bg-[#f5f8ef] text-slate-800">
       <div className="flex min-h-screen">
+        {/* Sidebar classes */}
         <aside className="sticky top-0 hidden h-screen w-24 shrink-0 border-r border-slate-200 bg-white md:flex md:flex-col md:items-center md:gap-3 md:py-6">
           <div className="mb-2 flex h-12 w-12 items-center justify-center rounded-full bg-cyan-500 text-lg font-bold text-white">
             IA
           </div>
-
-          {CLASSES.map((item) => {
-            const active = classe === item;
-
-            return (
-              <button
-                key={item}
-                type="button"
-                onClick={() => setClasse(item)}
-                className={[
-                  "flex h-14 w-14 items-center justify-center rounded-full border text-lg font-bold transition",
-                  getClasseBadgeColor(item, active),
-                ].join(" ")}
-              >
-                {item}
-              </button>
-            );
-          })}
+          {CLASSES.map((item) => (
+            <button
+              key={item}
+              type="button"
+              onClick={() => setClasse(item)}
+              className={[
+                "flex h-14 w-14 items-center justify-center rounded-full border text-lg font-bold transition",
+                getClasseBadgeColor(item, classe === item),
+              ].join(" ")}
+            >
+              {item}
+            </button>
+          ))}
         </aside>
 
         <section className="w-full px-4 py-5 sm:px-6 lg:px-8">
           <header className="mb-6 border-b border-slate-200 pb-5">
+            {/* Classes mobiles */}
             <div className="mb-4 flex flex-wrap gap-2 md:hidden">
-              {CLASSES.map((item) => {
-                const active = classe === item;
-
-                return (
-                  <button
-                    key={item}
-                    type="button"
-                    onClick={() => setClasse(item)}
-                    className={[
-                      "rounded-full border px-4 py-2 text-sm font-bold transition",
-                      getClasseBadgeColor(item, active),
-                    ].join(" ")}
-                  >
-                    {item}
-                  </button>
-                );
-              })}
+              {CLASSES.map((item) => (
+                <button
+                  key={item}
+                  type="button"
+                  onClick={() => setClasse(item)}
+                  className={[
+                    "rounded-full border px-4 py-2 text-sm font-bold transition",
+                    getClasseBadgeColor(item, classe === item),
+                  ].join(" ")}
+                >
+                  {item}
+                </button>
+              ))}
             </div>
 
             <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
               <div>
                 <p className="text-sm font-semibold uppercase tracking-wide text-slate-500">
-                  Coach Maths IA
+                  Coach IA
                 </p>
-
-                <h1 className="mt-1 text-4xl font-bold tracking-tight text-orange-500 sm:text-5xl">
-                  {getClasseTitle(classe)}
+                <h1 className={["mt-1 text-4xl font-bold tracking-tight sm:text-5xl", getMatiereColor(matiere)].join(" ")}>
+                  {getMatiereTitle(matiere, classe)}
                 </h1>
-
                 <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-600 sm:text-base">
-                  Choisis une compétence, puis une micro-compétence pour t’entraîner.
+                  Choisis une compétence, puis une micro-compétence pour t&apos;entraîner.
                 </p>
               </div>
 
@@ -187,7 +154,6 @@ export default function CoachMathsIA() {
                 <span className="rounded-full border border-orange-300 bg-white px-4 py-2 text-sm font-semibold text-orange-600">
                   {totalNotions} notions
                 </span>
-
                 <span className="rounded-full border border-green-300 bg-white px-4 py-2 text-sm font-semibold text-green-700">
                   {totalMicros} micro-compétences
                 </span>
@@ -198,14 +164,7 @@ export default function CoachMathsIA() {
           <div className="columns-1 gap-8 lg:columns-2 2xl:columns-3">
             {domaines.map((domaine) => {
               const notionsAvecMicros = domaine.notions
-                .map((notionId) => {
-                  const micros = notionMicroMap[notionId] ?? [];
-
-                  return {
-                    notionId,
-                    micros,
-                  };
-                })
+                .map((notionId) => ({ notionId, micros: notionMicroMap[notionId] ?? [] }))
                 .filter((item) => item.micros.length > 0);
 
               if (notionsAvecMicros.length === 0) return null;
@@ -221,13 +180,7 @@ export default function CoachMathsIA() {
                     <h2 className={["text-xl font-bold", accent.title].join(" ")}>
                       {domaine.label}
                     </h2>
-
-                    <span
-                      className={[
-                        "rounded-full px-3 py-1 text-xs font-bold",
-                        accent.pill,
-                      ].join(" ")}
-                    >
+                    <span className={["rounded-full px-3 py-1 text-xs font-bold", accent.pill].join(" ")}>
                       {notionsAvecMicros.length}
                     </span>
                   </div>
@@ -236,9 +189,8 @@ export default function CoachMathsIA() {
                     {notionsAvecMicros.map(({ notionId, micros }) => (
                       <article key={notionId}>
                         <h3 className="mb-2 text-base font-bold text-slate-800">
-                          {notionLabel(notionId, classe)}
+                          {notionLabel(notionId, classe, matiere)}
                         </h3>
-
                         <ol className="space-y-1">
                           {micros.map((microId, index) => (
                             <li key={microId}>
@@ -253,11 +205,9 @@ export default function CoachMathsIA() {
                                 <span className="w-6 shrink-0 font-semibold text-slate-500">
                                   {index + 1}
                                 </span>
-
                                 <span className="underline-offset-2 group-hover:underline">
                                   {microLabels[microId] || microId}
                                 </span>
-
                                 {microId.includes("defis") && (
                                   <span className="ml-1 rounded-full bg-orange-100 px-2 py-0.5 text-xs font-bold text-orange-600">
                                     défi

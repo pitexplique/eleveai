@@ -28,6 +28,7 @@ function isActive(pathname: string, href: string) {
 export default function Header() {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [coachOpen, setCoachOpen] = useState(false);
   const { eleve, logout } = useEleve();
 
   useEffect(() => {
@@ -115,13 +116,36 @@ export default function Header() {
             Accueil
           </Link>
 
-          <Link
-            href="/coach-maths-ia"
-            className={linkClass(isActive(pathname, "/coach-maths-ia"))}
-          >
-            <Brain className="h-4 w-4 text-orange-300" />
-            Coach
-          </Link>
+          <div className="relative">
+            <button
+              type="button"
+              onClick={() => setCoachOpen((v) => !v)}
+              onBlur={() => setTimeout(() => setCoachOpen(false), 150)}
+              className={linkClass(isActive(pathname, "/coach-ia"))}
+            >
+              <Brain className="h-4 w-4 text-orange-300" />
+              Coach
+              <span className="ml-0.5 text-xs opacity-60">▾</span>
+            </button>
+            {coachOpen && (
+              <div className="absolute left-0 top-full z-50 mt-1 w-44 rounded-xl border border-white/10 bg-[#041B33] shadow-xl">
+                <Link
+                  href="/coach-ia/maths"
+                  onClick={() => setCoachOpen(false)}
+                  className="flex items-center gap-2 rounded-t-xl px-4 py-3 text-sm font-semibold text-white hover:bg-white/10"
+                >
+                  🧠 Maths
+                </Link>
+                <Link
+                  href="/coach-ia/francais"
+                  onClick={() => setCoachOpen(false)}
+                  className="flex items-center gap-2 rounded-b-xl px-4 py-3 text-sm font-semibold text-white hover:bg-white/10"
+                >
+                  📖 Français
+                </Link>
+              </div>
+            )}
+          </div>
 
           <Link
             href="/parcours"
@@ -310,14 +334,25 @@ export default function Header() {
             </Link>
 
             <Link
-              href="/coach-maths-ia"
+              href="/coach-ia/maths"
               className={mobileCardClass(
-                isActive(pathname, "/coach-maths-ia"),
+                isActive(pathname, "/coach-ia/maths"),
                 "bg-gradient-to-r from-orange-400 to-red-500"
               )}
             >
               <Brain className="h-5 w-5" />
               Coach Maths IA
+            </Link>
+
+            <Link
+              href="/coach-ia/francais"
+              className={mobileCardClass(
+                isActive(pathname, "/coach-ia/francais"),
+                "bg-gradient-to-r from-sky-500 to-indigo-600"
+              )}
+            >
+              <BookOpen className="h-5 w-5" />
+              Coach Français IA
             </Link>
 
             <Link

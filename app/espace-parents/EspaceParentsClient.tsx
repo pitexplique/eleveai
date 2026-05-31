@@ -28,7 +28,7 @@ const outils = [
     emoji: "🧠",
     title: "Coach Maths IA",
     description: "Un entraînement adapté, notion par notion, du CM1 à la Terminale. L'élève progresse à son rythme.",
-    href: "/coach-maths-ia",
+    href: "/coach-ia/maths",
     color: "from-orange-400 to-red-500",
   },
   {

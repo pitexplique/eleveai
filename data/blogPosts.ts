@@ -200,7 +200,7 @@ Quand tu résous une équation, **remplace** x par ta réponse dans l'équation 
 
 ## Entraîne-toi sur ces notions avec EleveAI
 
-👉 [Coach Maths IA — Choisir une notion](/coach-maths-ia)
+👉 [Coach Maths IA — Choisir une notion](/coach-ia/maths)
 👉 [Parcours — Bilan de mes notions](/parcours)
 `,
   },
@@ -794,7 +794,7 @@ $$\cos(35°) = \frac{AB}{BC} → AB = 10 × \cos(35°) ≈ 10 × 0{,}819 ≈ 8{,
 EleveAI propose des exercices sur Pythagore, Thalès et la trigonométrie dans le Coach Brevet et le Coach Maths IA.
 
 👉 [Coach Brevet — Sprint 30 jours](/coach-brevet)
-👉 [Coach Maths IA — Géométrie 3e](/coach-maths-ia?classe=3e)
+👉 [Coach Maths IA — Géométrie 3e](/coach-ia/maths?classe=3e)
 `,
   },
 ];

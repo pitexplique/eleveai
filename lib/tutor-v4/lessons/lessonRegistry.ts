@@ -1,5 +1,7 @@
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 
+import { getFrancaisCpQuestionBank } from "@/lib/tutor-v4/questionBank/cp/francais";
+import { getFrancaisCe1QuestionBank } from "@/lib/tutor-v4/questionBank/ce1/francais";
 import { getMathCpQuestionBank } from "@/lib/tutor-v4/questionBank/cp/maths";
 import { getMathCe1QuestionBank } from "@/lib/tutor-v4/questionBank/ce1/maths";
 import { getMathCe2QuestionBank } from "@/lib/tutor-v4/questionBank/ce2/maths";
@@ -22,14 +24,22 @@ export function getLessonBank(args: {
   notionId: string;
   microId?: string | null;
 }): TutorBankItemV4[] {
-  if (args.matiere !== "maths") {
-    return [];
-  }
-
   const bankArgs: GetQuestionBankArgs = {
     notionId: args.notionId,
     microId: args.microId,
   };
+
+  if (args.matiere === "francais") {
+    switch (args.classe) {
+      case "cp":  return getFrancaisCpQuestionBank(bankArgs);
+      case "ce1": return getFrancaisCe1QuestionBank(bankArgs);
+      default:    return [];
+    }
+  }
+
+  if (args.matiere !== "maths") {
+    return [];
+  }
 
   switch (args.classe) {
     case "cp":

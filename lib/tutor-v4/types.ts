@@ -349,7 +349,7 @@ export type SchoolLevel =
   | "4e"
   | "3e"
   | "terminale-spe";
-export type SubjectCode = "maths";
+export type SubjectCode = "maths" | "francais";
 
 export type TutorGeneratedQuestionV4 = {
   text: string;

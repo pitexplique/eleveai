@@ -438,7 +438,7 @@ export default function CalculRapideDefiClient() {
             </Link>
 
             <Link
-              href={`/coach-maths-ia?classe=${niveau}`}
+              href={`/coach-ia/maths?classe=${niveau}`}
               className="rounded-full bg-amber-300 px-8 py-4 text-xl font-black text-slate-950"
             >
               S’entraîner dans Coach-IA

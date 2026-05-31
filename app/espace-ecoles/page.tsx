@@ -44,7 +44,7 @@ const etapes = [
 ];
 
 const outils = [
-  { emoji: "🧠", title: "Coach Maths IA", text: "Entraînement notion par notion, du CM1 à la Terminale. Missions progressives, score, badges.", href: "/coach-maths-ia" },
+  { emoji: "🧠", title: "Coach Maths IA", text: "Entraînement notion par notion, du CM1 à la Terminale. Missions progressives, score, badges.", href: "/coach-ia/maths" },
   { emoji: "🛤️", title: "Parcours de notions", text: "Bilan 🟢🟡🔴 des notions maîtrisées, à revoir ou fragiles. Idéal avant un contrôle.", href: "/parcours" },
   { emoji: "📚", title: "Coach Brevet", text: "Sprint 30 jours pour le brevet des collèges. Automatismes, problèmes guidés, sujets express.", href: "/coach-brevet" },
   { emoji: "⚡", title: "Calcul rapide", text: "7 questions en 5 minutes. Sessions chronométrées pour muscler les automatismes.", href: "/calcul-rapide" },

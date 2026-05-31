@@ -7,7 +7,9 @@ import { buildKnowledge6eMaths } from "@/lib/tutor-v4/knowledge/maths/6e/buildKn
 import { buildKnowledge5eMaths } from "@/lib/tutor-v4/knowledge/maths/5e/buildKnowledge5e";
 import { buildKnowledge4eMaths } from "@/lib/tutor-v4/knowledge/maths/4e/buildKnowledge4e";
 import { buildKnowledge3eMaths } from "@/lib/tutor-v4/knowledge/maths/3e/buildKnowledge3e";
-import { buildKnowledgeTerminaleSpeMaths } from "@/lib/tutor-v4/knowledge/maths/terminale-spe/buildKnowledgeTerminaleSpe"  
+import { buildKnowledgeTerminaleSpeMaths } from "@/lib/tutor-v4/knowledge/maths/terminale-spe/buildKnowledgeTerminaleSpe";
+import { buildKnowledgeCpFrancais } from "@/lib/tutor-v4/knowledge/francais/cp/buildKnowledgeCpFrancais";
+import { buildKnowledgeCe1Francais } from "@/lib/tutor-v4/knowledge/francais/ce1/buildKnowledgeCe1Francais";
 
 // =========================
 // TYPES
@@ -25,11 +27,23 @@ export type Classe =
   | "3e"
   | "terminale-spe";
 
-// =========================
-// KNOWLEDGE PAR CLASSE
-// =========================""
+export type Matiere = "maths" | "francais";
 
-function getKnowledge(classe: Classe) {
+// =========================
+// KNOWLEDGE PAR CLASSE + MATIERE
+// =========================
+
+function getKnowledge(classe: Classe, matiere: Matiere = "maths") {
+  // Français
+  if (matiere === "francais") {
+    switch (classe) {
+      case "cp":  return buildKnowledgeCpFrancais();
+      case "ce1": return buildKnowledgeCe1Francais();
+      default:    return buildKnowledgeCe1Francais(); // fallback
+    }
+  }
+
+  // Maths (défaut)
   switch (classe) {
     case "cp":
       return buildKnowledgeCpMaths();
@@ -37,7 +51,8 @@ function getKnowledge(classe: Classe) {
       return buildKnowledgeCe1Maths();
     case "ce2":
       return buildKnowledgeCe2Maths();
-    case "cm1":      return buildKnowledgeCm1Maths();
+    case "cm1":
+      return buildKnowledgeCm1Maths();
     case "cm2":
       return buildKnowledgeCm2Maths();
     case "6e":
@@ -48,10 +63,8 @@ function getKnowledge(classe: Classe) {
       return buildKnowledge4eMaths();
     case "3e":
       return buildKnowledge3eMaths();
-
     case "terminale-spe":
       return buildKnowledgeTerminaleSpeMaths();
-      
     default:
       return buildKnowledge6eMaths();
   }
@@ -61,8 +74,8 @@ function getKnowledge(classe: Classe) {
 // NOTIONS
 // =========================
 
-export function getNotionOptions(classe: Classe): string[] {
-  const knowledge = getKnowledge(classe);
+export function getNotionOptions(classe: Classe, matiere: Matiere = "maths"): string[] {
+  const knowledge = getKnowledge(classe, matiere);
   return knowledge.notions.map((n) => n.id);
 }
 
@@ -70,8 +83,8 @@ export function getNotionOptions(classe: Classe): string[] {
 // MAP NOTION -> MICROS
 // =========================
 
-export function getNotionMicroMap(classe: Classe): Record<string, string[]> {
-  const knowledge = getKnowledge(classe);
+export function getNotionMicroMap(classe: Classe, matiere: Matiere = "maths"): Record<string, string[]> {
+  const knowledge = getKnowledge(classe, matiere);
 
   return Object.fromEntries(
     knowledge.notions.map((notion) => [
@@ -87,16 +100,16 @@ export function getNotionMicroMap(classe: Classe): Record<string, string[]> {
 // LABELS
 // =========================
 
-export function getNotionLabelMap(classe: Classe): Record<string, string> {
-  const knowledge = getKnowledge(classe);
+export function getNotionLabelMap(classe: Classe, matiere: Matiere = "maths"): Record<string, string> {
+  const knowledge = getKnowledge(classe, matiere);
 
   return Object.fromEntries(
     knowledge.notions.map((notion) => [notion.id, notion.label])
   );
 }
 
-export function getMicroLabelMap(classe: Classe): Record<string, string> {
-  const knowledge = getKnowledge(classe);
+export function getMicroLabelMap(classe: Classe, matiere: Matiere = "maths"): Record<string, string> {
+  const knowledge = getKnowledge(classe, matiere);
 
   return Object.fromEntries(
     knowledge.microSkills.map((micro) => [micro.id, micro.label])
@@ -107,13 +120,13 @@ export function getMicroLabelMap(classe: Classe): Record<string, string> {
 // HELPERS
 // =========================
 
-export function notionLabel(notionId: string, classe: Classe): string {
-  const map = getNotionLabelMap(classe);
+export function notionLabel(notionId: string, classe: Classe, matiere: Matiere = "maths"): string {
+  const map = getNotionLabelMap(classe, matiere);
   return map[notionId] ?? notionId;
 }
 
-export function microLabel(microId: string, classe: Classe): string {
-  const map = getMicroLabelMap(classe);
+export function microLabel(microId: string, classe: Classe, matiere: Matiere = "maths"): string {
+  const map = getMicroLabelMap(classe, matiere);
   return map[microId] ?? microId;
 }
 
@@ -121,8 +134,8 @@ export function microLabel(microId: string, classe: Classe): string {
 // DOMAINES BO -> NOTIONS
 // =========================
 
-export function getDomaineMap(classe: Classe) {
-  const knowledge = getKnowledge(classe);
+export function getDomaineMap(classe: Classe, matiere: Matiere = "maths") {
+  const knowledge = getKnowledge(classe, matiere);
 
   const domaines = knowledge.bo_competences.map((bo) => {
     const notions = knowledge.notions

@@ -8,6 +8,8 @@ import { maths5eQuestionBank } from "@/lib/tutor-v4/questionBank/5e/maths";
 import { maths4eQuestionBank } from "@/lib/tutor-v4/questionBank/4e/maths";
 import { maths3eQuestionBank } from "@/lib/tutor-v4/questionBank/3e/maths";
 import { mathsTerminaleSpeQuestionBank } from "@/lib/tutor-v4/questionBank/terminale-spe/maths";
+import { francaisCpQuestionBank } from "@/lib/tutor-v4/questionBank/cp/francais";
+import { francaisCe1QuestionBank } from "@/lib/tutor-v4/questionBank/ce1/francais";
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 
 export async function loadQuestionBankV4(
@@ -54,6 +56,9 @@ export async function loadQuestionBankV4(
   if (classe === "terminale-spe" && matiere === "maths") {
     return mathsTerminaleSpeQuestionBank;
   }
+
+  if (classe === "cp"  && matiere === "francais") return francaisCpQuestionBank;
+  if (classe === "ce1" && matiere === "francais") return francaisCe1QuestionBank;
 
   throw new Error(`QuestionBank V4 introuvable pour ${classe}/${matiere}`);
 }

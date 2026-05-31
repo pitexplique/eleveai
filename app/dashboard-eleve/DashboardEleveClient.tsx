@@ -721,7 +721,7 @@ export default function DashboardEleveClient() {
                     </p>
                   </div>
                   <Link
-                    href="/coach-maths-ia"
+                    href="/coach-ia/maths"
                     className="rounded-2xl bg-indigo-600 px-5 py-3 text-sm font-black text-white shadow-lg hover:bg-indigo-500"
                   >
                     Reprendre l&apos;entraînement
@@ -877,7 +877,7 @@ export default function DashboardEleveClient() {
               </Link>
 
               <Link
-                href="/coach-maths-ia"
+                href="/coach-ia/maths"
                 className="rounded-2xl bg-indigo-600 px-5 py-3 text-sm font-black text-white shadow-lg hover:bg-indigo-500"
               >
                 Coach Maths IA

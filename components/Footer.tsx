@@ -2,7 +2,8 @@
 import Link from "next/link";
 
 const outils = [
-  { label: "Coach Maths IA",   href: "/coach-maths-ia" },
+  { label: "Coach Maths IA",    href: "/coach-ia/maths" },
+  { label: "Coach Français IA", href: "/coach-ia/francais" },
   { label: "Parcours",         href: "/parcours" },
   { label: "Coach Brevet",     href: "/coach-brevet" },
   { label: "Coach Bac Spé",    href: "/coach-bac-spe" },
@@ -118,7 +119,7 @@ export default function Footer() {
               {["CM1", "CM2", "6e", "5e", "4e", "3e", "Terminale Spé"].map((c) => (
                 <li key={c}>
                   <Link
-                    href={`/coach-maths-ia?classe=${c.toLowerCase().replace(" ", "-")}`}
+                    href={`/coach-ia/maths?classe=${c.toLowerCase().replace(" ", "-")}`}
                     className="text-sm text-slate-400 hover:text-amber-300 transition"
                   >
                     Maths {c}

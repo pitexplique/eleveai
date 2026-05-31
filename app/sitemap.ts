@@ -26,7 +26,8 @@ const ROUTES: RouteConfig[] = [
   // ── OUTILS ÉLÈVES ──────────────────────────────────────────────────────────
   { path: "/coach-brevet",    priority: 1.0,  changeFrequency: "daily",  lastMod: LASTMOD_CORE },
   { path: "/coach-bac-spe",   priority: 1.0,  changeFrequency: "daily",  lastMod: LASTMOD_CORE },
-  { path: "/coach-maths-ia",  priority: 0.95, changeFrequency: "daily",  lastMod: LASTMOD_CORE },
+  { path: "/coach-ia/maths",    priority: 0.95, changeFrequency: "daily",  lastMod: LASTMOD_CORE },
+  { path: "/coach-ia/francais", priority: 0.95, changeFrequency: "daily",  lastMod: LASTMOD_CORE },
   { path: "/parcours",        priority: 0.95, changeFrequency: "daily",  lastMod: LASTMOD_CORE },
   { path: "/calcul-rapide",   priority: 0.95, changeFrequency: "daily",  lastMod: LASTMOD_CORE },
   { path: "/english-maths",   priority: 0.9,  changeFrequency: "daily",  lastMod: LASTMOD_CORE },

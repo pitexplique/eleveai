@@ -1104,7 +1104,7 @@ function handleInputKeyDown(
           <section className="space-y-3">
             <div className="grid gap-3 sm:grid-cols-[1fr_180px]">
               <button
-                onClick={() => router.push("/coach-maths-ia")}
+                onClick={() => router.push("/coach-ia/maths")}
                 className="flex w-full items-center justify-center rounded-2xl bg-orange-500 px-4 py-3 text-sm font-black text-white shadow hover:bg-orange-600"
               >
                 ← Retour Coach

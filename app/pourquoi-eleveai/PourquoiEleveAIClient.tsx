@@ -15,7 +15,7 @@ const portes = [
     emoji: "🧠",
     title: "Coach Maths IA",
     text: "Un entraînement notion par notion, du CM1 à la Terminale. Missions progressives, score, badges.",
-    href: "/coach-maths-ia",
+    href: "/coach-ia/maths",
     color: "from-orange-400 to-red-500",
   },
   {

@@ -15,7 +15,7 @@ const outils = [
     emoji: "🧠",
     title: "Coach Maths IA",
     description: "Travaille une notion précise, notion par notion, avec des missions adaptées à ton niveau.",
-    href: "/coach-maths-ia",
+    href: "/coach-ia/maths",
     color: "from-orange-400 to-red-500",
     badge: null,
   },
@@ -78,12 +78,12 @@ const outils = [
 ];
 
 const classes = [
-  { label: "CM1", href: "/coach-maths-ia?classe=cm1" },
-  { label: "CM2", href: "/coach-maths-ia?classe=cm2" },
-  { label: "6e",  href: "/coach-maths-ia?classe=6e" },
-  { label: "5e",  href: "/coach-maths-ia?classe=5e" },
-  { label: "4e",  href: "/coach-maths-ia?classe=4e" },
-  { label: "3e",  href: "/coach-maths-ia?classe=3e" },
+  { label: "CM1", href: "/coach-ia/maths?classe=cm1" },
+  { label: "CM2", href: "/coach-ia/maths?classe=cm2" },
+  { label: "6e",  href: "/coach-ia/maths?classe=6e" },
+  { label: "5e",  href: "/coach-ia/maths?classe=5e" },
+  { label: "4e",  href: "/coach-ia/maths?classe=4e" },
+  { label: "3e",  href: "/coach-ia/maths?classe=3e" },
 ];
 
 export default function EspaceElevesClient() {

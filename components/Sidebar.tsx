@@ -203,7 +203,7 @@ export default function Sidebar({
       },
       {
         kind: "link",
-        href: "/coach-maths-ia",
+        href: "/coach-ia/maths",
         label: "Coach Maths IA",
         description: "Saphir s'adapte à ton niveau",
         icon: <Brain className="h-4 w-4 text-purple-300" />,

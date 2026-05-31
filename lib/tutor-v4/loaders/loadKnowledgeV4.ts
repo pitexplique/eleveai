@@ -8,7 +8,9 @@ import { loadKnowledge6eMaths } from "@/lib/tutor-v4/knowledge/loaders/loadKnowl
 import { loadKnowledge5eMaths } from "@/lib/tutor-v4/knowledge/loaders/loadKnowledge5eMaths";
 import { loadKnowledge4eMaths } from "@/lib/tutor-v4/knowledge/loaders/loadKnowledge4eMaths";
 import { loadKnowledge3eMaths } from "@/lib/tutor-v4/knowledge/loaders/loadKnowledge3eMaths";
-import { loadKnowledgeTerminaleSpeMaths} from "@/lib/tutor-v4/knowledge/loaders/loadKnowledgeTerminaleSpeMaths"
+import { loadKnowledgeTerminaleSpeMaths} from "@/lib/tutor-v4/knowledge/loaders/loadKnowledgeTerminaleSpeMaths";
+import { loadKnowledgeCpFrancais } from "@/lib/tutor-v4/knowledge/loaders/loadKnowledgeCpFrancais";
+import { loadKnowledgeCe1Francais } from "@/lib/tutor-v4/knowledge/loaders/loadKnowledgeCe1Francais";
 
 import type { KnowledgePack } from "@/lib/tutor-v4/types";
 
@@ -53,6 +55,9 @@ export async function loadKnowledgeV4(
     if (classe === "terminale-spe" && matiere === "maths") {
     return loadKnowledgeTerminaleSpeMaths() as KnowledgePack;
   }
+
+  if (classe === "cp"  && matiere === "francais") return loadKnowledgeCpFrancais()  as KnowledgePack;
+  if (classe === "ce1" && matiere === "francais") return loadKnowledgeCe1Francais() as KnowledgePack;
 
   throw new Error(`Knowledge V4 introuvable pour ${classe}/${matiere}`);
 }

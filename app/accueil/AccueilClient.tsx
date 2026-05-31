@@ -84,11 +84,18 @@ const besoins = [
     color: "from-violet-500 to-indigo-600",
   },
   {
-    title: "Je veux travailler une compétence",
-    href: "/coach-maths-ia",
+    title: "Je veux travailler une compétence maths",
+    href: "/coach-ia/maths",
     action: "Coach Maths IA",
     icon: "🧠",
     color: "from-cyan-500 to-blue-600",
+  },
+  {
+    title: "Je veux travailler le français",
+    href: "/coach-ia/francais",
+    action: "Coach Français IA",
+    icon: "📖",
+    color: "from-sky-500 to-indigo-500",
   },
   {
     title: "Je veux aller vite",
@@ -135,16 +142,19 @@ const besoins = [
 ];
 
 const classes = [
-  { label: "CM1", href: "/coach-maths-ia?classe=cm1", description: "Consolider les bases et prendre confiance." },
-  { label: "CM2", href: "/coach-maths-ia?classe=cm2", description: "Préparer l'entrée au collège." },
-  { label: "6e",  href: "/coach-maths-ia?classe=6e",  description: "Décimaux, fractions, géométrie, grandeurs." },
-  { label: "5e",  href: "/coach-maths-ia?classe=5e",  description: "Relatifs, fractions, proportionnalité, angles." },
-  { label: "4e",  href: "/coach-maths-ia?classe=4e",  description: "Calcul littéral, Pythagore, Thalès, stats." },
-  { label: "3e",  href: "/coach-maths-ia?classe=3e",  description: "Brevet, fonctions, volumes, probabilités." },
+  { label: "CP",  href: "/coach-ia/francais", description: "Phonologie, lecture, écriture — premiers pas." },
+  { label: "CE1", href: "/coach-ia/francais", description: "Fluence, grammaire, conjugaison, vocabulaire." },
+  { label: "CM1", href: "/coach-ia/maths?classe=cm1", description: "Consolider les bases et prendre confiance." },
+  { label: "CM2", href: "/coach-ia/maths?classe=cm2", description: "Préparer l'entrée au collège." },
+  { label: "6e",  href: "/coach-ia/maths?classe=6e",  description: "Décimaux, fractions, géométrie, grandeurs." },
+  { label: "5e",  href: "/coach-ia/maths?classe=5e",  description: "Relatifs, fractions, proportionnalité, angles." },
+  { label: "4e",  href: "/coach-ia/maths?classe=4e",  description: "Calcul littéral, Pythagore, Thalès, stats." },
+  { label: "3e",  href: "/coach-ia/maths?classe=3e",  description: "Brevet, fonctions, volumes, probabilités." },
 ];
 
 const cards = [
-  { href: "/coach-maths-ia",   image: "/images/cards/coach.webp",           label: "Coach Maths IA" },
+  { href: "/coach-ia/maths",    image: "/images/cards/coach.webp",           label: "Coach Maths IA" },
+  { href: "/coach-ia/francais", image: "/images/cards/coach.webp",           label: "Coach Français IA" },
   { href: "/parcours",         image: "/images/cards/parcours.webp",         label: "Parcours" },
   { href: "/calcul-rapide",    image: "/images/cards/calcul-rapide.webp",    label: "Calcul rapide" },
   { href: "/lecon-du-jour",    image: "/images/cards/lecondujour.webp",      label: "Leçon du jour" },
@@ -392,7 +402,7 @@ export default function AccueilPage() {
               </h2>
             </div>
             <Link
-              href="/coach-maths-ia"
+              href="/coach-ia/maths"
               className="hidden rounded-full border border-white/20 bg-white/10 px-4 py-2 text-xs font-bold text-white transition hover:bg-white/20 md:inline-flex"
             >
               Voir toutes les compétences
