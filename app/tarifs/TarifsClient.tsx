@@ -46,8 +46,8 @@ const offres = [
     nom: "Famille",
     badge: "Bientôt disponible",
     badgeColor: "bg-amber-100 text-amber-800",
-    prix: "2,90 €/mois",
-    soustitre: "ou 25 € / an — soit 2,08 €/mois",
+    prix: "4,90 €/mois",
+    soustitre: "ou 39 € / an — soit 3,25 €/mois",
     description: "Un accès personnel pour votre enfant, sans passer par l'établissement. En cours de préparation.",
     inclus: [
       "1 élève",
@@ -82,7 +82,7 @@ const faq = [
   },
   {
     q: "Quel est le tarif famille exact ?",
-    a: "2,90 € par mois ou 25 € par an (soit 2,08 €/mois). L'abonnement famille est en cours de préparation. Laissez votre contact pour être parmi les premiers informés au lancement.",
+    a: "4,90 € par mois ou 39 € par an (soit 3,25 €/mois — 2 mois offerts). L'abonnement famille est en cours de préparation. Laissez votre contact pour être parmi les premiers informés au lancement.",
   },
 ];
 
