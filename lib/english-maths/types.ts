@@ -8,9 +8,12 @@ export type EnglishMathsNiveau =
   | "4e"
   | "3e";
 
+export type EnglishMathsLanguageLevel = "A1" | "A2" | "B1" | "B2";
+
 export type EnglishMathsCategory =
   | "numbers"
   | "operations"
+  | "verbs"
   | "geometry"
   | "fractions"
   | "measures"
@@ -21,6 +24,7 @@ export type EnglishMathsCategory =
 export type EnglishMathsWord = {
   id: string;
   category: EnglishMathsCategory;
+  languageLevel?: EnglishMathsLanguageLevel;
 
   english: string;
   french: string;
@@ -37,6 +41,7 @@ export type EnglishMathsWord = {
 export type EnglishMathsDay = {
   id: string;
   niveau: EnglishMathsNiveau;
+  languageLevel?: EnglishMathsLanguageLevel;
 
   week: string;
   dayIndex: number;

@@ -58,6 +58,7 @@ export { englishMathsWords, englishMathsDays };
 
 export type {
   EnglishMathsDay,
+  EnglishMathsLanguageLevel,
   EnglishMathsNiveau,
   EnglishMathsQuestion,
   EnglishMathsWord,

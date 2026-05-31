@@ -7,13 +7,14 @@ import Link from "next/link";
 
 import {
   englishMathsWords,
+  getEnglishMathsDaysByNiveau,
   getEnglishMathsWordsByIds,
   getTodayEnglishMathsDay,
   type EnglishMathsNiveau,
+  type EnglishMathsLanguageLevel,
 } from "@/lib/english-maths";
 
 import { generateEnglishMathsQuestions } from "@/lib/english-maths/generateQuestions";
-import { makeEnglishMathsWeek01 } from "@/lib/english-maths/weeks/sharedWeek01";
 import { createClient } from "@/lib/supabase/client";
 import { useEleve } from "@/context/EleveContext";
 
@@ -25,6 +26,15 @@ type EleveSession = {
   nom?: string | null;
   type_utilisateur?: string | null;
 };
+
+const niveaux: EnglishMathsNiveau[] = ["cm1", "cm2", "6e", "5e", "4e", "3e"];
+const languageLevels: EnglishMathsLanguageLevel[] = ["A1", "A2", "B1", "B2"];
+
+function niveauLabel(niveau: EnglishMathsNiveau) {
+  if (niveau === "cm1") return "CM1";
+  if (niveau === "cm2") return "CM2";
+  return niveau;
+}
 
 function playAudio(src?: string) {
   if (!src) return;
@@ -162,23 +172,40 @@ function EnglishMathsBackground() {
 }
 
 export default function EnglishMathsClient() {
-  const niveau: EnglishMathsNiveau = "6e";
-
   const supabase = createClient();
   const eleveContext = useEleve() as unknown as { eleve?: EleveSession | null };
   const eleve = eleveContext.eleve ?? null;
 
+  const [niveau, setNiveau] = useState<EnglishMathsNiveau>("6e");
+  const [selectedWeek, setSelectedWeek] = useState<string>("verbs-A1");
   const [mode, setMode] = useState<"words" | "quiz" | "result">("words");
   const [selectedDayId, setSelectedDayId] = useState<string | null>(null);
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [saving, setSaving] = useState(false);
   const [saveMessage, setSaveMessage] = useState<string | null>(null);
 
-  const weekDays = useMemo(() => makeEnglishMathsWeek01(niveau), [niveau]);
+  const allDaysForNiveau = useMemo(
+    () => getEnglishMathsDaysByNiveau(niveau),
+    [niveau]
+  );
+
+  const availableWeeks = useMemo(() => {
+    return Array.from(new Set(allDaysForNiveau.map((item) => item.week)));
+  }, [allDaysForNiveau]);
+
+  const activeWeek = availableWeeks.includes(selectedWeek)
+    ? selectedWeek
+    : availableWeeks[availableWeeks.length - 1] ?? "2026-S01";
+
+  const weekDays = useMemo(
+    () => allDaysForNiveau.filter((item) => item.week === activeWeek),
+    [activeWeek, allDaysForNiveau]
+  );
 
   const todayDay = useMemo(() => getTodayEnglishMathsDay(niveau), [niveau]);
 
-  const currentUnlockedIndex = todayDay?.dayIndex ?? 1;
+  const currentUnlockedIndex =
+    todayDay?.week === activeWeek ? todayDay.dayIndex : weekDays.length;
 
   const visibleWeekDays = useMemo(() => {
     return weekDays.filter((item) => item.dayIndex <= currentUnlockedIndex);
@@ -188,18 +215,17 @@ export default function EnglishMathsClient() {
     if (selectedDayId) {
       return (
         visibleWeekDays.find((item) => item.id === selectedDayId) ??
-        todayDay ??
         visibleWeekDays[visibleWeekDays.length - 1] ??
         weekDays[0]
       );
     }
 
-    return (
-      todayDay ??
-      visibleWeekDays[visibleWeekDays.length - 1] ??
-      weekDays[0]
-    );
-  }, [selectedDayId, todayDay, visibleWeekDays, weekDays]);
+    if (todayDay?.week === activeWeek) {
+      return todayDay;
+    }
+
+    return visibleWeekDays[visibleWeekDays.length - 1] ?? weekDays[0];
+  }, [activeWeek, selectedDayId, todayDay, visibleWeekDays, weekDays]);
 
   const wordsOfDay = useMemo(() => {
     if (!day) return [];
@@ -224,6 +250,26 @@ export default function EnglishMathsClient() {
     setSelectedDayId(dayId);
     setMode("words");
     setAnswers({});
+  }
+
+  function selectNiveau(nextNiveau: EnglishMathsNiveau) {
+    setNiveau(nextNiveau);
+    setSelectedDayId(null);
+    setMode("words");
+    setAnswers({});
+    setSaveMessage(null);
+  }
+
+  function selectWeek(week: string) {
+    setSelectedWeek(week);
+    setSelectedDayId(null);
+    setMode("words");
+    setAnswers({});
+    setSaveMessage(null);
+  }
+
+  function selectLanguageLevel(level: EnglishMathsLanguageLevel) {
+    selectWeek(`verbs-${level}`);
   }
 
   function goToQuiz() {
@@ -272,6 +318,7 @@ export default function EnglishMathsClient() {
       details: {
         dayId: day?.id,
         dayLabel: day?.dayLabel,
+        languageLevel: day?.languageLevel ?? null,
         title: day?.title,
         questions: questions.map((q) => ({
           id: q.id,
@@ -325,6 +372,63 @@ export default function EnglishMathsClient() {
           <p className="mt-3 max-w-2xl text-base font-semibold text-white/85">
             Le challenge de la semaine : des mots, de l’audio et un mini-défi chaque jour.
           </p>
+          <div className="mt-5 grid gap-4 lg:grid-cols-[1fr_auto] lg:items-end">
+            <div>
+              <div className="mb-2 text-xs font-black uppercase tracking-[0.2em] text-cyan-100">
+                Niveau
+              </div>
+
+              <div className="flex flex-wrap gap-2">
+                {niveaux.map((item) => {
+                  const active = niveau === item;
+
+                  return (
+                    <button
+                      key={item}
+                      type="button"
+                      onClick={() => selectNiveau(item)}
+                      className={[
+                        "rounded-full px-4 py-2 text-sm font-black ring-1 transition",
+                        active
+                          ? "bg-white text-slate-950 ring-white"
+                          : "bg-white/10 text-white ring-white/20 hover:bg-white/20",
+                      ].join(" ")}
+                    >
+                      {niveauLabel(item)}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
+            <div>
+              <div className="mb-2 text-xs font-black uppercase tracking-[0.2em] text-cyan-100">
+                Niveau de langue
+              </div>
+
+              <div className="flex flex-wrap gap-2">
+                {languageLevels.map((level) => {
+                  const active = activeWeek === `verbs-${level}`;
+
+                  return (
+                    <button
+                      key={level}
+                      type="button"
+                      onClick={() => selectLanguageLevel(level)}
+                      className={[
+                        "rounded-full px-4 py-2 text-sm font-black ring-1 transition",
+                        active
+                          ? "bg-emerald-300 text-slate-950 ring-emerald-200"
+                        : "bg-white/10 text-white ring-white/20 hover:bg-white/20",
+                      ].join(" ")}
+                    >
+                      {level}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
         </section>
 
         <section className="mb-5 rounded-[2rem] border border-white/20 bg-white/15 p-4 shadow-2xl backdrop-blur-xl">
