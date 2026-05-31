@@ -58,6 +58,7 @@ import {
   notionLabel,
   microLabel,
   type Classe,
+  type Matiere,
 } from "@/lib/tutor-v4/catalog";
 
 import type {
@@ -148,6 +149,7 @@ function simpleEncouragement(args: {
   points?: number;
   mode: TutorMode;
   classe: Classe;
+  matiere: Matiere;
 }) {
   // ❌ plus de message par défaut
   if (args.ok === undefined || !args.microId) {
@@ -156,15 +158,15 @@ function simpleEncouragement(args: {
 
   // ✅ succès → court et impactant
   if (args.ok) {
-    return `✅ ${microLabel(args.microId, args.classe)}${
+    return `✅ ${microLabel(args.microId, args.classe, args.matiere)}${
       args.points ? ` +${args.points}` : ""
     }`;
   }
 
   // ⚠️ erreur → simple
   return args.mode === "coaching"
-    ? `⚠️ ${microLabel(args.microId, args.classe)} (indice)`
-    : `⚠️ ${microLabel(args.microId, args.classe)}`;
+    ? `⚠️ ${microLabel(args.microId, args.classe, args.matiere)} (indice)`
+    : `⚠️ ${microLabel(args.microId, args.classe, args.matiere)}`;
 }
 
 function visibleProgressText(text: string) {
@@ -334,6 +336,10 @@ function normalizeClasse(value: string | null): Classe {
   return "6e";
 }
 
+function normalizeMatiere(value: string | null): Matiere {
+  return value === "francais" ? "francais" : "maths";
+}
+
 export default function TutorV4Page() {
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -346,7 +352,7 @@ export default function TutorV4Page() {
   const [saveMessage, setSaveMessage] = useState<string | null>(null);
 
   const [classe, setClasse] = useState<Classe>("6e");
-  const [matiere, setMatiere] = useState("maths");
+  const [matiere, setMatiere] = useState<Matiere>("maths");
   const [notion, setNotion] = useState("");
   const [urlInitDone, setUrlInitDone] = useState(false);
   const [showLesson, setShowLesson] = useState(false);
@@ -393,8 +399,14 @@ function forceScrollTopOnArrival() {
     });
   }, 120);
 }
-  const notionOptions = useMemo(() => getNotionOptions(classe), [classe]);
-  const notionMicroMap = useMemo(() => getNotionMicroMap(classe), [classe]);
+  const notionOptions = useMemo(
+    () => getNotionOptions(classe, matiere),
+    [classe, matiere]
+  );
+  const notionMicroMap = useMemo(
+    () => getNotionMicroMap(classe, matiere),
+    [classe, matiere]
+  );
 
   const [sessionId, setSessionId] = useState<string | null>(null);
   const [pair, setPair] = useState<TutorQuestionPair | null>(null);
@@ -458,18 +470,18 @@ function forceScrollTopOnArrival() {
   });
 
   function isValidNotionId(value: string, currentClasse: Classe): boolean {
-    return getNotionOptions(currentClasse).includes(value);
+    return getNotionOptions(currentClasse, matiere).includes(value);
   }
 
 useEffect(() => {
   if (hasInitializedFromUrl.current) return;
 
   const urlClasse = normalizeClasse(searchParams.get("classe"));
-  const urlMatiere = searchParams.get("matiere") ?? "maths";
+  const urlMatiere = normalizeMatiere(searchParams.get("matiere"));
   const urlNotion = searchParams.get("notion");
   const urlMicroId = searchParams.get("microId");
 
-  const options = getNotionOptions(urlClasse);
+  const options = getNotionOptions(urlClasse, urlMatiere);
   const initialNotion =
     urlNotion && options.includes(urlNotion) ? urlNotion : options[0] ?? "";
 
@@ -570,8 +582,10 @@ useEffect(() => {
     matiere,
     notionId: notion,
     microId: activeMicroId,
-    notionLabel: notionLabel(notion, classe),
-    microLabel: activeMicroId ? microLabel(activeMicroId, classe) : undefined,
+    notionLabel: notionLabel(notion, classe, matiere),
+    microLabel: activeMicroId
+      ? microLabel(activeMicroId, classe, matiere)
+      : undefined,
   });
 }, [classe, matiere, notion, activeMicroId]);
 
@@ -853,7 +867,7 @@ function continueAfterExplanation() {
       setBusy(true);
 
       const currentMicro = currentQuestion.microId;
-      const currentMicroLabel = microLabel(currentMicro, classe);
+      const currentMicroLabel = microLabel(currentMicro, classe, matiere);
       const pointsForQuestion = starPoints(currentQuestion.meta.starLevel);
       const currentExplanation = currentQuestion.explanation?.trim();
       const hasExplanation =
@@ -1058,7 +1072,7 @@ function handleInputKeyDown(
       nb_tentatives: nbTentatives,
       temps_sec: elapsedSeconds,
       details: {
-        notionLabel: notionLabel(notion, classe),
+        notionLabel: notionLabel(notion, classe, matiere),
         microStatuses,
         microScores,
         badges: visibleProgress.unlockedStars,
@@ -1104,7 +1118,7 @@ function handleInputKeyDown(
           <section className="space-y-3">
             <div className="grid gap-3 sm:grid-cols-[1fr_180px]">
               <button
-                onClick={() => router.push("/coach-ia/maths")}
+                onClick={() => router.push(`/coach-ia/${matiere}`)}
                 className="flex w-full items-center justify-center rounded-2xl bg-orange-500 px-4 py-3 text-sm font-black text-white shadow hover:bg-orange-600"
               >
                 ← Retour Coach
@@ -1136,7 +1150,7 @@ function handleInputKeyDown(
               >
                 {notionOptions.map((notionId) => (
                   <option key={notionId} value={notionId}>
-                    {notionLabel(notionId, classe)}
+                    {notionLabel(notionId, classe, matiere)}
                   </option>
                 ))}
               </select>
@@ -1152,7 +1166,7 @@ function handleInputKeyDown(
                   </div>
 
                   <h1 className="text-2xl font-black tracking-tight sm:text-3xl">
-                    Tutor Maths V4
+                    Tutor {matiere === "francais" ? "Français" : "Maths"} V4
                   </h1>
 
                   <p className="text-sm text-white/90">
@@ -1244,6 +1258,7 @@ function handleInputKeyDown(
                   points: lastResult.points,
                   mode,
                   classe,
+                  matiere,
                 })}
               </div>
 
@@ -1295,7 +1310,7 @@ function handleInputKeyDown(
                 <p className="text-sm text-slate-500">
                   Compétence active :{" "}
                   <span className="font-semibold">
-                    {microLabel(pair.microId, classe)}
+                    {microLabel(pair.microId, classe, matiere)}
                   </span>
                 </p>
               </div>
@@ -1330,7 +1345,7 @@ function handleInputKeyDown(
                           ? "Réponse rédigée"
                           : "Réponse courte"}
                       </Tag>
-                      <Tag>{microLabel(option.microId, classe)}</Tag>
+                      <Tag>{microLabel(option.microId, classe, matiere)}</Tag>
                       <Tag>{starPoints(option.meta.starLevel)} pts</Tag>
                       {option.canvas ? <Tag>Figure</Tag> : null}
                     </div>
@@ -1360,7 +1375,7 @@ function handleInputKeyDown(
                   <p className="text-sm text-slate-500">
                     Compétence :{" "}
                     <span className="font-semibold">
-                      {microLabel(currentQuestion.microId, classe)}
+                      {microLabel(currentQuestion.microId, classe, matiere)}
                     </span>
                   </p>
                 </div>
@@ -1379,7 +1394,7 @@ function handleInputKeyDown(
                 <>
                   <div className="mb-4 rounded-2xl bg-gradient-to-r from-violet-100 to-fuchsia-100 px-4 py-3 text-sm font-bold text-violet-900">
                     Compétence travaillée :{" "}
-                    {microLabel(currentQuestion.microId, classe)}
+                    {microLabel(currentQuestion.microId, classe, matiere)}
                   </div>
 
                   <div className="mb-4 rounded-2xl border border-slate-200 bg-white p-4 text-base text-slate-900">
@@ -1509,7 +1524,7 @@ function handleInputKeyDown(
             </div>
           </SidebarCard>
 
-          <SidebarCard title={`Micro-compétences : ${notionLabel(notion, classe)}`}>
+          <SidebarCard title={`Micro-compétences : ${notionLabel(notion, classe, matiere)}`}>
             <div className="mb-3 text-xs text-slate-500">
               Clique sur une micro-compétence pour t’entraîner dessus.
             </div>
@@ -1537,7 +1552,7 @@ function handleInputKeyDown(
                   >
                     <div className="mb-2 flex items-start justify-between gap-3">
                       <div className="text-sm font-semibold leading-5">
-                        {microLabel(microId, classe)}
+                        {microLabel(microId, classe, matiere)}
                       </div>
 
                       <span className="rounded-full bg-white/80 px-2 py-1 text-[11px] font-bold shadow-sm">
