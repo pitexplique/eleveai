@@ -92,4 +92,25 @@ export const problemesFixed3e: CalculRapideItem[] = [
     explanation: "7 × 10⁵ = 700000 m.",
     tags: ["puissances", "distance"],
   },
+  // ============================================================
+  // SEMAINE 20 - EQUATIONS ET FONCTIONS AFFINES
+  // ============================================================
+
+  {
+    id: "3e_probleme_fonction_tarif_001",
+    niveau: "3e",
+    type: "probleme",
+    mode: "fixed",
+    notionId: "fonctions",
+    microId: "fonction_affine_tarif",
+    difficulty: 3,
+    durationSec: 60,
+    media: {
+      text: "Un taxi coute 4 euros au depart puis 2 euros par km. Quel prix pour 7 km ?",
+    },
+    expected: ["18", "18 euros"],
+    hint: "Calcule 4 + 2 x 7.",
+    explanation: "4 + 2 x 7 = 18 euros.",
+    tags: ["fonction", "affine", "tarif"],
+  },
 ];

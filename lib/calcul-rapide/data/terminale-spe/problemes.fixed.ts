@@ -92,4 +92,25 @@ export const problemesFixedTerminaleSpe: CalculRapideItem[] = [
     explanation: "Si f'(x)<0 sur un intervalle, alors f est décroissante sur cet intervalle.",
     tags: ["variations", "derivee", "bac"],
   },
+  // ============================================================
+  // SEMAINE 23 - AUTOMATISMES BAC
+  // ============================================================
+
+  {
+    id: "terminale_spe_probleme_automatisme_proba_001",
+    niveau: "terminale-spe",
+    type: "probleme",
+    mode: "fixed",
+    notionId: "probabilites",
+    microId: "complementaire",
+    difficulty: 2,
+    durationSec: 60,
+    media: {
+      text: "Un evenement a une probabilite de 0,37. Quelle est la probabilite de l'evenement contraire ?",
+    },
+    expected: ["0,63", "0.63"],
+    hint: "Le total vaut 1.",
+    explanation: "1 - 0,37 = 0,63.",
+    tags: ["probabilites", "complementaire", "bac"],
+  },
 ];

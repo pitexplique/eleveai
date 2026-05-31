@@ -171,4 +171,49 @@ export const calculsTemplates6e: CalculRapideItem[] = [
       "Les 3/4 de {{n}}, c’est {{n}} × 3 ÷ 4 = {{answer}}.",
     tags: ["fraction", "trois_quarts"],
   },
+  // ============================================================
+  // SEMAINE 20 - DECIMAUX EXPRESS
+  // ============================================================
+
+  {
+    id: "6e_template_decimal_addition_001",
+    niveau: "6e",
+    type: "calcul",
+    mode: "template",
+    notionId: "nombres_decimaux",
+    microId: "addition_decimaux",
+    difficulty: 2,
+    durationSec: 20,
+    media: { text: "{{a}} + {{b}} = ?" },
+    template: "{{a}} + {{b}} = ?",
+    variables: {
+      a: [1.2, 2.4, 3.5, 4.6, 5.8],
+      b: [0.8, 1.6, 2.5, 3.4, 4.2],
+    },
+    answerRule: "a + b",
+    hint: "Aligne bien les virgules.",
+    explanationTemplate: "{{a}} + {{b}} = {{answer}}.",
+    tags: ["decimaux", "addition"],
+  },
+
+  {
+    id: "6e_template_decimal_multiplier_10_100_001",
+    niveau: "6e",
+    type: "calcul",
+    mode: "template",
+    notionId: "nombres_decimaux",
+    microId: "multiplier_par_10_100",
+    difficulty: 2,
+    durationSec: 20,
+    media: { text: "{{n}} x {{k}} = ?" },
+    template: "{{n}} x {{k}} = ?",
+    variables: {
+      n: [1.25, 2.5, 3.75, 4.8, 6.04],
+      k: [10, 100],
+    },
+    answerRule: "n * k",
+    hint: "Multiplier par 10 ou 100 decale la virgule vers la droite.",
+    explanationTemplate: "{{n}} x {{k}} = {{answer}}.",
+    tags: ["decimaux", "multiplier"],
+  },
 ];

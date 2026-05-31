@@ -262,4 +262,47 @@ export const calculsTemplates4e: CalculRapideItem[] = [
     explanationTemplate: "x = {{b}} - {{a}} = {{answer}}.",
     tags: ["equation", "calcul_mental"],
   },
+  // ============================================================
+  // SEMAINE 20 - PYTHAGORE ET GEOMETRIE
+  // ============================================================
+
+  {
+    id: "4e_template_carre_simple_001",
+    niveau: "4e",
+    type: "calcul",
+    mode: "template",
+    notionId: "pythagore",
+    microId: "carres_utiles",
+    difficulty: 2,
+    durationSec: 20,
+    media: { text: "{{n}} au carre = ?" },
+    template: "{{n}} au carre = ?",
+    variables: {
+      n: [3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+    },
+    answerRule: "n * n",
+    hint: "Un carre, c'est le nombre multiplie par lui-meme.",
+    explanationTemplate: "{{n}} x {{n}} = {{answer}}.",
+    tags: ["pythagore", "carre"],
+  },
+
+  {
+    id: "4e_template_pythagore_hypotenuse_001",
+    niveau: "4e",
+    type: "calcul",
+    mode: "template",
+    notionId: "pythagore",
+    microId: "hypotenuse",
+    difficulty: 3,
+    durationSec: 20,
+    media: { text: "Triangle rectangle obtenu en multipliant 3-4-5 par {{k}}. Hypotenuse ?" },
+    template: "Triangle rectangle obtenu en multipliant 3-4-5 par {{k}}. Hypotenuse ?",
+    variables: {
+      k: [1, 2, 3, 4],
+    },
+    answerRule: "k * 5",
+    hint: "Utilise les carres des deux cotes de l'angle droit.",
+    explanationTemplate: "L'hypotenuse vaut {{answer}}.",
+    tags: ["pythagore", "hypotenuse"],
+  },
 ];

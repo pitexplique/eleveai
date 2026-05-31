@@ -200,4 +200,49 @@ export const calculsTemplatesTerminaleSpe: CalculRapideItem[] = [
     explanationTemplate: "P(A∩B) = {{pa}} × {{pb}} = {{answer}}.",
     tags: ["probabilites", "independance"],
   },
+  // ============================================================
+  // SEMAINE 23 - AUTOMATISMES BAC
+  // ============================================================
+
+  {
+    id: "terminale_spe_template_automatisme_derivee_001",
+    niveau: "terminale-spe",
+    type: "calcul",
+    mode: "template",
+    notionId: "derivees",
+    microId: "derivee_polynome",
+    difficulty: 3,
+    durationSec: 20,
+    media: { text: "Derivee de {{a}}x^2 + {{b}}x ?" },
+    template: "Derivee de {{a}}x^2 + {{b}}x ?",
+    variables: {
+      a: [1, 2, 3, 4],
+      b: [2, 3, 5, 7],
+    },
+    answerRule: "(2 * a) + 'x+' + b",
+    hint: "La derivee de ax^2 est 2ax.",
+    explanationTemplate: "La derivee est {{answer}}.",
+    tags: ["derivee", "automatisme", "bac"],
+  },
+
+  {
+    id: "terminale_spe_template_automatisme_suite_geo_001",
+    niveau: "terminale-spe",
+    type: "calcul",
+    mode: "template",
+    notionId: "suites",
+    microId: "suite_geometrique",
+    difficulty: 3,
+    durationSec: 20,
+    media: { text: "u0 = {{u}}. Coefficient {{q}} applique deux fois. Que vaut u2 ?" },
+    template: "u0 = {{u}}. Coefficient {{q}} applique deux fois. Que vaut u2 ?",
+    variables: {
+      u: [40, 80, 100, 200],
+      q: [1.25, 1.5, 2],
+    },
+    answerRule: "u * q * q",
+    hint: "Multiplie par le coefficient deux fois.",
+    explanationTemplate: "u2 = {{u}} x {{q}} x {{q}} = {{answer}}.",
+    tags: ["suites", "geometrique", "bac"],
+  },
 ];

@@ -280,4 +280,39 @@ export const calculsFixed5e: CalculRapideItem[] = [
     explanation: "La distance à zéro de -12 est 12.",
     tags: ["relatifs", "distance_zero"],
   },
+  // ============================================================
+  // SEMAINE 20 - FRACTIONS ET PROPORTIONS
+  // ============================================================
+
+  {
+    id: "5e_calcul_fraction_simplifier_001",
+    niveau: "5e",
+    type: "calcul",
+    mode: "fixed",
+    notionId: "fractions",
+    microId: "simplifier_fraction",
+    difficulty: 3,
+    durationSec: 20,
+    media: { text: "Simplifie 18/24." },
+    expected: ["3/4"],
+    hint: "18 et 24 sont divisibles par 6.",
+    explanation: "18/24 = 3/4.",
+    tags: ["fractions", "simplifier"],
+  },
+
+  {
+    id: "5e_calcul_proportion_001",
+    niveau: "5e",
+    type: "calcul",
+    mode: "fixed",
+    notionId: "proportionnalite",
+    microId: "coefficient",
+    difficulty: 3,
+    durationSec: 20,
+    media: { text: "4 cahiers coutent 6 euros. Combien coutent 10 cahiers ?" },
+    expected: ["15", "15 euros"],
+    hint: "10 cahiers, c'est 2,5 fois 4 cahiers.",
+    explanation: "6 x 2,5 = 15 euros.",
+    tags: ["proportionnalite", "prix"],
+  },
 ];

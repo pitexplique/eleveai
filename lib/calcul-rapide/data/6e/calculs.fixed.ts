@@ -442,4 +442,39 @@ export const calculsFixed6e: CalculRapideItem[] = [
     explanation: "4/8 = 1/2. Les deux réponses sont acceptées.",
     tags: ["fraction", "comparer", "egalite"],
   },
+  // ============================================================
+  // SEMAINE 20 - DECIMAUX EXPRESS
+  // ============================================================
+
+  {
+    id: "6e_calcul_decimal_addition_001",
+    niveau: "6e",
+    type: "calcul",
+    mode: "fixed",
+    notionId: "nombres_decimaux",
+    microId: "addition_decimaux",
+    difficulty: 2,
+    durationSec: 20,
+    media: { text: "3,4 + 2,6 = ?" },
+    expected: ["6", "6,0", "6.0"],
+    hint: "Aligne les parties entieres et les dixiemes.",
+    explanation: "3,4 + 2,6 = 6.",
+    tags: ["decimaux", "addition"],
+  },
+
+  {
+    id: "6e_calcul_decimal_multiplication_10_001",
+    niveau: "6e",
+    type: "calcul",
+    mode: "fixed",
+    notionId: "nombres_decimaux",
+    microId: "multiplier_par_10",
+    difficulty: 2,
+    durationSec: 20,
+    media: { text: "4,7 x 10 = ?" },
+    expected: ["47"],
+    hint: "Multiplier par 10 decale la virgule d'un rang vers la droite.",
+    explanation: "4,7 x 10 = 47.",
+    tags: ["decimaux", "multiplier"],
+  },
 ];

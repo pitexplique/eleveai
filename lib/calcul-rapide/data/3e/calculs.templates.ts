@@ -145,4 +145,50 @@ export const calculsTemplates3e: CalculRapideItem[] = [
     explanationTemplate: "10^{{a}} × 10^{{b}} = 10^{{answer}}.",
     tags: ["puissances", "regles"],
   },
+  // ============================================================
+  // SEMAINE 20 - EQUATIONS ET FONCTIONS AFFINES
+  // ============================================================
+
+  {
+    id: "3e_template_equation_ax_b_001",
+    niveau: "3e",
+    type: "calcul",
+    mode: "template",
+    notionId: "equations",
+    microId: "equation_premier_degre",
+    difficulty: 3,
+    durationSec: 20,
+    media: { text: "{{a}}x = {{p}}. x = ?" },
+    template: "{{a}}x = {{p}}. x = ?",
+    variables: {
+      a: [2, 3, 6],
+      p: [12, 18, 24, 30],
+    },
+    answerRule: "p / a",
+    hint: "Divise par le nombre devant x.",
+    explanationTemplate: "x = {{p}} / {{a}} = {{answer}}.",
+    tags: ["equation", "calcul_mental"],
+  },
+
+  {
+    id: "3e_template_fonction_affine_image_001",
+    niveau: "3e",
+    type: "calcul",
+    mode: "template",
+    notionId: "fonctions",
+    microId: "image_affine",
+    difficulty: 3,
+    durationSec: 20,
+    media: { text: "f(x) = {{a}}x + {{b}}. Que vaut f({{x}}) ?" },
+    template: "f(x) = {{a}}x + {{b}}. Que vaut f({{x}}) ?",
+    variables: {
+      a: [2, 3, 4, 5],
+      b: [-5, -2, 1, 3],
+      x: [2, 3, 4, 5],
+    },
+    answerRule: "a * x + b",
+    hint: "Remplace x par la valeur donnee.",
+    explanationTemplate: "f({{x}}) = {{answer}}.",
+    tags: ["fonction", "affine"],
+  },
 ];

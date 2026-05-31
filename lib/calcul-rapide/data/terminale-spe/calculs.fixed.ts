@@ -180,4 +180,39 @@ export const calculsFixedTerminaleSpe: CalculRapideItem[] = [
     explanation: "Si f'(x) > 0 sur un intervalle, alors f est croissante sur cet intervalle.",
     tags: ["variations", "derivee", "bac"],
   },
+  // ============================================================
+  // SEMAINE 23 - AUTOMATISMES BAC
+  // ============================================================
+
+  {
+    id: "terminale_spe_calcul_automatisme_derivee_001",
+    niveau: "terminale-spe",
+    type: "calcul",
+    mode: "fixed",
+    notionId: "derivees",
+    microId: "derivee_polynome",
+    difficulty: 3,
+    durationSec: 20,
+    media: { text: "Derivee de x^2 + 5x ?" },
+    expected: ["2x+5", "2x + 5"],
+    hint: "Derive chaque terme.",
+    explanation: "La derivee de x^2 est 2x et celle de 5x est 5.",
+    tags: ["derivee", "automatisme", "bac"],
+  },
+
+  {
+    id: "terminale_spe_calcul_automatisme_suite_geo_001",
+    niveau: "terminale-spe",
+    type: "calcul",
+    mode: "fixed",
+    notionId: "suites",
+    microId: "suite_geometrique",
+    difficulty: 3,
+    durationSec: 20,
+    media: { text: "u0 = 80. Chaque terme est multiplie par 1,25. Que vaut u2 ?" },
+    expected: ["125"],
+    hint: "Applique deux fois le coefficient multiplicateur.",
+    explanation: "u2 = 80 x 1,25 x 1,25 = 125.",
+    tags: ["suites", "geometrique", "bac"],
+  },
 ];

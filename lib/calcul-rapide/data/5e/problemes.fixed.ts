@@ -172,4 +172,25 @@ export const problemesFixed5e: CalculRapideItem[] = [
     explanation: "De -3 à 0 il y a 3 degrés, puis de 0 à 4 il y a 4 degrés. L’écart est 7 °C.",
     tags: ["relatifs", "temperature", "ecart"],
   },
+  // ============================================================
+  // SEMAINE 20 - FRACTIONS ET PROPORTIONS
+  // ============================================================
+
+  {
+    id: "5e_probleme_fraction_classe_001",
+    niveau: "5e",
+    type: "probleme",
+    mode: "fixed",
+    notionId: "fractions",
+    microId: "fraction_quantite",
+    difficulty: 3,
+    durationSec: 60,
+    media: {
+      text: "Dans une classe de 30 eleves, les 2/5 sont inscrits au club de sport. Combien d'eleves cela fait-il ?",
+    },
+    expected: ["12"],
+    hint: "Calcule 2/5 de 30.",
+    explanation: "30 / 5 = 6, puis 6 x 2 = 12.",
+    tags: ["fractions", "quantite"],
+  },
 ];

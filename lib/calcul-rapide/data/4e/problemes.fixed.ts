@@ -228,4 +228,25 @@ export const problemesFixed4e: CalculRapideItem[] = [
     explanation: "x + 13 = 31 donc x = 18.",
     tags: ["equation", "calcul_mental"],
   },
+  // ============================================================
+  // SEMAINE 20 - PYTHAGORE ET GEOMETRIE
+  // ============================================================
+
+  {
+    id: "4e_probleme_pythagore_echelle_001",
+    niveau: "4e",
+    type: "probleme",
+    mode: "fixed",
+    notionId: "pythagore",
+    microId: "hypotenuse",
+    difficulty: 3,
+    durationSec: 60,
+    media: {
+      text: "Une echelle forme un triangle rectangle avec le mur : 6 m au sol et 8 m de haut. Quelle est la longueur de l'echelle ?",
+    },
+    expected: ["10", "10 m"],
+    hint: "C'est le meme calcul que pour un triangle 6-8-10.",
+    explanation: "6 au carre + 8 au carre = 100, donc l'echelle mesure 10 m.",
+    tags: ["pythagore", "probleme"],
+  },
 ];

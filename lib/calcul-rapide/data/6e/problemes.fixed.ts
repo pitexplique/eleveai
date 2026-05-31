@@ -154,4 +154,25 @@ export const problemesFixed6e: CalculRapideItem[] = [
     explanation: "1/2 est plus grand que 1/3. Noé a mangé le plus.",
     tags: ["fraction", "comparer"],
   },
+  // ============================================================
+  // SEMAINE 20 - DECIMAUX EXPRESS
+  // ============================================================
+
+  {
+    id: "6e_probleme_decimal_monnaie_001",
+    niveau: "6e",
+    type: "probleme",
+    mode: "fixed",
+    notionId: "nombres_decimaux",
+    microId: "addition_decimaux",
+    difficulty: 2,
+    durationSec: 60,
+    media: {
+      text: "Lina achete un cahier a 2,40 euros et un stylo a 1,60 euro. Combien paie-t-elle ?",
+    },
+    expected: ["4", "4 euros", "4 euro", "4,00"],
+    hint: "Additionne les deux prix.",
+    explanation: "2,40 + 1,60 = 4 euros.",
+    tags: ["decimaux", "monnaie"],
+  },
 ];

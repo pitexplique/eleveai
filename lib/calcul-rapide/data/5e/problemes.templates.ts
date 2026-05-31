@@ -222,4 +222,32 @@ export const problemesTemplates5e: CalculRapideItem[] = [
     explanationTemplate: "L’écart entre {{a}} et {{b}} est {{answer}} °C.",
     tags: ["relatifs", "temperature", "ecart"],
   },
+  // ============================================================
+  // SEMAINE 20 - FRACTIONS ET PROPORTIONS
+  // ============================================================
+
+  {
+    id: "5e_template_probleme_fraction_classe_001",
+    niveau: "5e",
+    type: "probleme",
+    mode: "template",
+    notionId: "fractions",
+    microId: "fraction_quantite",
+    difficulty: 3,
+    durationSec: 60,
+    media: {
+      text: "Dans un groupe de {{n}} personnes, les {{num}}/{{den}} participent a une activite. Combien de personnes participent ?",
+    },
+    template:
+      "Dans un groupe de {{n}} personnes, les {{num}}/{{den}} participent a une activite. Combien de personnes participent ?",
+    variables: {
+      n: [60, 120, 180],
+      num: [2, 3],
+      den: [4, 5, 6],
+    },
+    answerRule: "n * num / den",
+    hint: "Calcule la fraction de la quantite.",
+    explanationTemplate: "{{num}}/{{den}} de {{n}} = {{answer}}.",
+    tags: ["fractions", "quantite"],
+  },
 ];

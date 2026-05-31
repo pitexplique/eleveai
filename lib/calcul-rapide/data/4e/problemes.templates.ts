@@ -306,4 +306,30 @@ export const problemesTemplates4e: CalculRapideItem[] = [
       "x = {{b}} - {{a}} = {{answer}}.",
     tags: ["equation", "calcul_mental"],
   },
+  // ============================================================
+  // SEMAINE 20 - PYTHAGORE ET GEOMETRIE
+  // ============================================================
+
+  {
+    id: "4e_template_probleme_pythagore_echelle_001",
+    niveau: "4e",
+    type: "probleme",
+    mode: "template",
+    notionId: "pythagore",
+    microId: "hypotenuse",
+    difficulty: 3,
+    durationSec: 60,
+    media: {
+      text: "Une situation reprend le triangle 3-4-5 multiplie par {{k}}. Quelle est l'hypotenuse ?",
+    },
+    template:
+      "Une situation reprend le triangle 3-4-5 multiplie par {{k}}. Quelle est l'hypotenuse ?",
+    variables: {
+      k: [1, 2, 3, 4, 5],
+    },
+    answerRule: "k * 5",
+    hint: "Dans un triangle 3-4-5, l'hypotenuse est 5. Multiplie tout par le meme nombre.",
+    explanationTemplate: "L'hypotenuse vaut 5 x {{k}} = {{answer}}.",
+    tags: ["pythagore", "probleme"],
+  },
 ];

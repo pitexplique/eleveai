@@ -173,4 +173,31 @@ export const problemesTemplates6e: CalculRapideItem[] = [
       "1/10 de {{n}}, c’est {{n}} ÷ 10 = {{answer}} km.",
     tags: ["fraction", "sport"],
   },
+  // ============================================================
+  // SEMAINE 20 - DECIMAUX EXPRESS
+  // ============================================================
+
+  {
+    id: "6e_template_decimal_monnaie_001",
+    niveau: "6e",
+    type: "probleme",
+    mode: "template",
+    notionId: "nombres_decimaux",
+    microId: "addition_decimaux",
+    difficulty: 2,
+    durationSec: 60,
+    media: {
+      text: "Un article coute {{a}} euros et un autre coute {{b}} euros. Quel est le total ?",
+    },
+    template:
+      "Un article coute {{a}} euros et un autre coute {{b}} euros. Quel est le total ?",
+    variables: {
+      a: [1.5, 2.4, 3.25, 4.75, 6.8],
+      b: [0.5, 1.6, 2.75, 3.25, 4.2],
+    },
+    answerRule: "a + b",
+    hint: "Additionne les deux prix.",
+    explanationTemplate: "{{a}} + {{b}} = {{answer}} euros.",
+    tags: ["decimaux", "monnaie"],
+  },
 ];

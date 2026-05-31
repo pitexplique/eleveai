@@ -237,4 +237,51 @@ export const calculsTemplates5e: CalculRapideItem[] = [
     explanationTemplate: "La distance à zéro de {{n}} est {{answer}}.",
     tags: ["relatifs", "distance_zero"],
   },
+  // ============================================================
+  // SEMAINE 20 - FRACTIONS ET PROPORTIONS
+  // ============================================================
+
+  {
+    id: "5e_template_fraction_quantite_001",
+    niveau: "5e",
+    type: "calcul",
+    mode: "template",
+    notionId: "fractions",
+    microId: "fraction_quantite",
+    difficulty: 3,
+    durationSec: 20,
+    media: { text: "{{num}}/{{den}} de {{n}} = ?" },
+    template: "{{num}}/{{den}} de {{n}} = ?",
+    variables: {
+      num: [2, 3],
+      den: [4, 5, 6],
+      n: [60, 120, 180],
+    },
+    answerRule: "n * num / den",
+    hint: "Divise par le denominateur, puis multiplie par le numerateur.",
+    explanationTemplate: "{{num}}/{{den}} de {{n}} = {{answer}}.",
+    tags: ["fractions", "quantite"],
+  },
+
+  {
+    id: "5e_template_proportion_prix_001",
+    niveau: "5e",
+    type: "calcul",
+    mode: "template",
+    notionId: "proportionnalite",
+    microId: "prix_unitaire",
+    difficulty: 3,
+    durationSec: 20,
+    media: { text: "{{a}} objets coutent {{p}} euros. Combien coutent {{b}} objets ?" },
+    template: "{{a}} objets coutent {{p}} euros. Combien coutent {{b}} objets ?",
+    variables: {
+      a: [2, 3, 4, 5],
+      p: [6, 9, 12, 15],
+      b: [6, 8, 10, 12],
+    },
+    answerRule: "p / a * b",
+    hint: "Trouve le prix d'un objet, puis multiplie.",
+    explanationTemplate: "Un objet coute {{p}} / {{a}}, donc {{b}} objets coutent {{answer}} euros.",
+    tags: ["proportionnalite", "prix"],
+  },
 ];

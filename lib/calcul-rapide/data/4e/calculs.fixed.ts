@@ -234,4 +234,39 @@ export const calculsFixed4e: CalculRapideItem[] = [
     explanation: "x + 9 = 15 donc x = 6.",
     tags: ["equation", "calcul_mental"],
   },
+  // ============================================================
+  // SEMAINE 20 - PYTHAGORE ET GEOMETRIE
+  // ============================================================
+
+  {
+    id: "4e_calcul_carre_simple_001",
+    niveau: "4e",
+    type: "calcul",
+    mode: "fixed",
+    notionId: "pythagore",
+    microId: "carres_utiles",
+    difficulty: 2,
+    durationSec: 20,
+    media: { text: "9 au carre = ?" },
+    expected: ["81"],
+    hint: "9 au carre signifie 9 x 9.",
+    explanation: "9 x 9 = 81.",
+    tags: ["pythagore", "carre"],
+  },
+
+  {
+    id: "4e_calcul_pythagore_hypotenuse_001",
+    niveau: "4e",
+    type: "calcul",
+    mode: "fixed",
+    notionId: "pythagore",
+    microId: "hypotenuse",
+    difficulty: 3,
+    durationSec: 20,
+    media: { text: "Triangle rectangle : cotes 6 et 8. Hypotenuse ?" },
+    expected: ["10"],
+    hint: "6-8-10 est un triplet de Pythagore.",
+    explanation: "6 au carre + 8 au carre = 36 + 64 = 100, donc l'hypotenuse vaut 10.",
+    tags: ["pythagore", "hypotenuse"],
+  },
 ];

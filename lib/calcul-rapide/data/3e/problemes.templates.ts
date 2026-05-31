@@ -95,4 +95,32 @@ export const problemesTemplates3e: CalculRapideItem[] = [
     explanationTemplate: "c = √{{n}} = {{answer}}.",
     tags: ["pythagore", "racine_carree"],
   },
+  // ============================================================
+  // SEMAINE 20 - EQUATIONS ET FONCTIONS AFFINES
+  // ============================================================
+
+  {
+    id: "3e_template_probleme_fonction_tarif_001",
+    niveau: "3e",
+    type: "probleme",
+    mode: "template",
+    notionId: "fonctions",
+    microId: "fonction_affine_tarif",
+    difficulty: 3,
+    durationSec: 60,
+    media: {
+      text: "Un abonnement coute {{f}} euros puis {{p}} euros par entree. Quel prix pour {{n}} entrees ?",
+    },
+    template:
+      "Un abonnement coute {{f}} euros puis {{p}} euros par entree. Quel prix pour {{n}} entrees ?",
+    variables: {
+      f: [3, 5, 8, 10],
+      p: [2, 3, 4, 5],
+      n: [4, 5, 6, 8],
+    },
+    answerRule: "f + p * n",
+    hint: "Calcule la partie fixe puis ajoute le prix des entrees.",
+    explanationTemplate: "{{f}} + {{p}} x {{n}} = {{answer}}.",
+    tags: ["fonction", "affine", "tarif"],
+  },
 ];

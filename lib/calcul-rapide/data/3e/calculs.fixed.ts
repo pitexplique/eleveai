@@ -130,4 +130,39 @@ export const calculsFixed3e: CalculRapideItem[] = [
     explanation: "10² × 10³ = 10⁵.",
     tags: ["puissances", "regles"],
   },
+  // ============================================================
+  // SEMAINE 20 - EQUATIONS ET FONCTIONS AFFINES
+  // ============================================================
+
+  {
+    id: "3e_calcul_equation_simple_001",
+    niveau: "3e",
+    type: "calcul",
+    mode: "fixed",
+    notionId: "equations",
+    microId: "equation_premier_degre",
+    difficulty: 3,
+    durationSec: 20,
+    media: { text: "2x + 5 = 17. x = ?" },
+    expected: ["6"],
+    hint: "Enleve 5, puis divise par 2.",
+    explanation: "2x = 12, donc x = 6.",
+    tags: ["equation", "calcul_mental"],
+  },
+
+  {
+    id: "3e_calcul_fonction_affine_image_001",
+    niveau: "3e",
+    type: "calcul",
+    mode: "fixed",
+    notionId: "fonctions",
+    microId: "image_affine",
+    difficulty: 3,
+    durationSec: 20,
+    media: { text: "f(x) = 3x - 2. Que vaut f(4) ?" },
+    expected: ["10"],
+    hint: "Remplace x par 4.",
+    explanation: "f(4) = 3 x 4 - 2 = 10.",
+    tags: ["fonction", "affine"],
+  },
 ];

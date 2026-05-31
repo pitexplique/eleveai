@@ -122,4 +122,30 @@ export const problemesTemplatesTerminaleSpe: CalculRapideItem[] = [
     explanationTemplate: "Aire = {{a}} × {{h}} = {{answer}}.",
     tags: ["integrales", "aire", "bac"],
   },
+  // ============================================================
+  // SEMAINE 23 - AUTOMATISMES BAC
+  // ============================================================
+
+  {
+    id: "terminale_spe_template_probleme_automatisme_proba_001",
+    niveau: "terminale-spe",
+    type: "probleme",
+    mode: "template",
+    notionId: "probabilites",
+    microId: "complementaire",
+    difficulty: 2,
+    durationSec: 60,
+    media: {
+      text: "Une probabilite vaut {{p}}. Quelle est la probabilite contraire ?",
+    },
+    template:
+      "Une probabilite vaut {{p}}. Quelle est la probabilite contraire ?",
+    variables: {
+      p: [0.12, 0.25, 0.37, 0.42, 0.68],
+    },
+    answerRule: "1 - p",
+    hint: "La probabilite contraire complete jusqu'a 1.",
+    explanationTemplate: "La probabilite contraire vaut 1 - {{p}} = {{answer}}.",
+    tags: ["probabilites", "complementaire", "bac"],
+  },
 ];
