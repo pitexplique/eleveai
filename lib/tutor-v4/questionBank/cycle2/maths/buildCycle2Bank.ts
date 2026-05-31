@@ -508,5 +508,11 @@ export function buildCycle2QuestionBank(
   return microSkills.flatMap((micro) => [
     makeTemplate(level, micro, 0),
     makeTemplate(level, micro, 1),
+    {
+      ...makeTemplate(level, micro, 1),
+      id: `${level}_${micro.id}_tpl_3_defi`,
+      difficulty: 3,
+      tags: [level, micro.notionId, micro.id, "cycle2", "template", "defi"],
+    },
   ]);
 }

@@ -3,6 +3,9 @@ import type {
   ParcoursNotion,
 } from "./types";
 
+import { buildKnowledgeCpMaths } from "@/lib/tutor-v4/knowledge/maths/cp/buildKnowledgeCp";
+import { buildKnowledgeCe1Maths } from "@/lib/tutor-v4/knowledge/maths/ce1/buildKnowledgeCe1";
+import { buildKnowledgeCe2Maths } from "@/lib/tutor-v4/knowledge/maths/ce2/buildKnowledgeCe2";
 import { buildKnowledgeCm1Maths } from "@/lib/tutor-v4/knowledge/maths/cm1/buildKnowledgeCm1";
 import { buildKnowledgeCm2Maths } from "@/lib/tutor-v4/knowledge/maths/cm2/buildKnowledgeCm2";
 import { buildKnowledge6eMaths } from "@/lib/tutor-v4/knowledge/maths/6e/buildKnowledge6e";
@@ -14,6 +17,18 @@ import { buildKnowledgeTerminaleSpeMaths} from "@/lib/tutor-v4/knowledge/maths/t
 export function getClasseNotions(
   classe: ParcoursClasse
 ): ParcoursNotion[] {
+
+  if (classe === "cp") {
+    return buildKnowledgeCpMaths().notions;
+  }
+
+  if (classe === "ce1") {
+    return buildKnowledgeCe1Maths().notions;
+  }
+
+  if (classe === "ce2") {
+    return buildKnowledgeCe2Maths().notions;
+  }
 
   if (classe === "cm1") {
     return buildKnowledgeCm1Maths().notions;

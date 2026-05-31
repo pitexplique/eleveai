@@ -317,6 +317,9 @@ if (canvas.kind === "schema_barre") {
 
 function normalizeClasse(value: string | null): Classe {
   if (
+    value === "cp" ||
+    value === "ce1" ||
+    value === "ce2" ||
     value === "cm1" ||
     value === "cm2" ||
     value === "6e" ||

@@ -26,6 +26,9 @@ import {
 import type { ParcoursDifficulteMode } from "@/lib/parcours/getDefiQuestionForNotion";
 
 const classes: ParcoursClasse[] = [
+  "cp",
+  "ce1",
+  "ce2",
   "cm1",
   "cm2",
   "6e",
