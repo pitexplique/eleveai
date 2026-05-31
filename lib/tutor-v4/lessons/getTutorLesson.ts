@@ -13,6 +13,7 @@ export function getTutorLesson(args: {
     classe: args.classe,
     matiere: args.matiere,
     notionId: args.notionId,
+    microId: args.microId,
   });
 
   return buildLessonFromBank({

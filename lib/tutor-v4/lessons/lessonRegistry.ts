@@ -1,11 +1,15 @@
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 
+import { getMathCpQuestionBank } from "@/lib/tutor-v4/questionBank/cp/maths";
+import { getMathCe1QuestionBank } from "@/lib/tutor-v4/questionBank/ce1/maths";
+import { getMathCe2QuestionBank } from "@/lib/tutor-v4/questionBank/ce2/maths";
 import { getMathCm1QuestionBank } from "@/lib/tutor-v4/questionBank/cm1/maths";
 import { getMathCm2QuestionBank } from "@/lib/tutor-v4/questionBank/cm2/maths";
 import { getMaths6eQuestionBank } from "@/lib/tutor-v4/questionBank/6e/maths";
 import { getMaths5eQuestionBank } from "@/lib/tutor-v4/questionBank/5e/maths";
 import { getMaths4eQuestionBank } from "@/lib/tutor-v4/questionBank/4e/maths";
 import { getMaths3eQuestionBank } from "@/lib/tutor-v4/questionBank/3e/maths";
+import { getMathTerminaleSpeQuestionBank } from "@/lib/tutor-v4/questionBank/terminale-spe/maths";
 
 type GetQuestionBankArgs = {
   notionId: string;
@@ -28,11 +32,19 @@ export function getLessonBank(args: {
   };
 
   switch (args.classe) {
+    case "cp":
+      return getMathCpQuestionBank(bankArgs);
+
+    case "ce1":
+      return getMathCe1QuestionBank(bankArgs);
+
+    case "ce2":
+      return getMathCe2QuestionBank(bankArgs);
 
     case "cm1":
       return getMathCm1QuestionBank(bankArgs);
-    
-      case "cm2":
+
+    case "cm2":
       return getMathCm2QuestionBank(bankArgs);
 
     case "6e":
@@ -46,6 +58,9 @@ export function getLessonBank(args: {
 
     case "3e":
       return getMaths3eQuestionBank(bankArgs);
+
+    case "terminale-spe":
+      return getMathTerminaleSpeQuestionBank(bankArgs);
 
     default:
       return [];
