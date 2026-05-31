@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useRouter, useParams } from "next/navigation";
 import {
   getNotionOptions,
@@ -13,6 +13,11 @@ import {
 } from "@/lib/tutor-v4/catalog";
 
 const CLASSES: Classe[] = ["cp", "ce1", "ce2", "cm1", "cm2", "6e", "5e", "4e", "3e", "terminale-spe"];
+const FRANCAIS_READY_CLASSES: Classe[] = ["cp", "ce1"];
+
+function getClassesForMatiere(matiere: Matiere): Classe[] {
+  return matiere === "francais" ? FRANCAIS_READY_CLASSES : CLASSES;
+}
 
 function getMatiereTitle(matiere: string, classe: Classe) {
   const classeLabel: Record<Classe, string> = {
@@ -77,6 +82,13 @@ export default function CoachIA() {
 
   const defaultClasse: Classe = matiere === "francais" ? "cp" : "6e";
   const [classe, setClasse] = useState<Classe>(defaultClasse);
+  const classes = useMemo(() => getClassesForMatiere(matiere), [matiere]);
+
+  useEffect(() => {
+    if (!classes.includes(classe)) {
+      setClasse(classes[0] ?? defaultClasse);
+    }
+  }, [classe, classes, defaultClasse]);
 
   const notionOptions = getNotionOptions(classe, matiere);
   const notionMicroMap = getNotionMicroMap(classe, matiere);
@@ -103,7 +115,7 @@ export default function CoachIA() {
           <div className="mb-2 flex h-12 w-12 items-center justify-center rounded-full bg-cyan-500 text-lg font-bold text-white">
             IA
           </div>
-          {CLASSES.map((item) => (
+          {classes.map((item) => (
             <button
               key={item}
               type="button"
@@ -122,7 +134,7 @@ export default function CoachIA() {
           <header className="mb-6 border-b border-slate-200 pb-5">
             {/* Classes mobiles */}
             <div className="mb-4 flex flex-wrap gap-2 md:hidden">
-              {CLASSES.map((item) => (
+              {classes.map((item) => (
                 <button
                   key={item}
                   type="button"
@@ -157,6 +169,11 @@ export default function CoachIA() {
                 <span className="rounded-full border border-green-300 bg-white px-4 py-2 text-sm font-semibold text-green-700">
                   {totalMicros} micro-compétences
                 </span>
+                {matiere === "francais" ? (
+                  <span className="rounded-full border border-sky-200 bg-sky-50 px-4 py-2 text-sm font-semibold text-sky-700">
+                    CP et CE1 ouverts
+                  </span>
+                ) : null}
               </div>
             </div>
           </header>
