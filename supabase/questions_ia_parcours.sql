@@ -8,9 +8,7 @@ create table if not exists public.questions_ia_parcours (
   source text not null default 'parcours_correction_chat'::text,
   matiere text not null default 'maths'::text,
   classe text null,
-  notion_id text null,
   notion_label text null,
-  question_index integer null,
   question_text text not null,
   student_answer text null,
   expected_answer text null,
@@ -33,12 +31,6 @@ create table if not exists public.questions_ia_parcours (
   )
 );
 
-alter table public.questions_ia_parcours
-  add column if not exists notion_id text null;
-
-alter table public.questions_ia_parcours
-  add column if not exists question_index integer null;
-
 create index if not exists questions_ia_parcours_etab_user_created_idx
   on public.questions_ia_parcours using btree
   (code_etablissement, code_utilisateur, created_at desc);
@@ -50,7 +42,3 @@ create index if not exists questions_ia_parcours_etab_created_idx
 create index if not exists questions_ia_parcours_acces_created_idx
   on public.questions_ia_parcours using btree
   (acces_id, created_at desc);
-
-create index if not exists questions_ia_parcours_notion_created_idx
-  on public.questions_ia_parcours using btree
-  (classe, notion_id, created_at desc);

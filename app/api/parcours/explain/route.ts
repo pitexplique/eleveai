@@ -53,6 +53,13 @@ export async function POST(req: Request) {
         ? body.questionIndex
         : null;
     const questionText = clean(body.questionText, 1200);
+    const loggedQuestionText = [
+      questionIndex ? `Question ${questionIndex}` : null,
+      notionId ? `Notion id : ${notionId}` : null,
+      questionText,
+    ]
+      .filter(Boolean)
+      .join("\n");
     const studentAnswer = clean(body.studentAnswer, 300) || "Aucune reponse";
     const expectedAnswer = clean(body.expectedAnswer, 300) || "Non disponible";
     const explanation = clean(body.explanation, 1200);
@@ -156,10 +163,8 @@ export async function POST(req: Request) {
         source: "parcours_correction_chat",
         matiere: "maths",
         classe: classe || null,
-        notion_id: notionId || null,
         notion_label: notionLabel || null,
-        question_index: questionIndex,
-        question_text: questionText,
+        question_text: loggedQuestionText,
         student_answer: studentAnswer,
         expected_answer: expectedAnswer,
         explanation: explanation || null,
