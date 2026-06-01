@@ -7,7 +7,7 @@ import type {
 } from "@/lib/tutor-v4/types";
 import type { MicroSkillSource } from "@/lib/tutor-v4/knowledge/buildKnowledge";
 
-type Cycle3PrimaryLevel = Extract<SchoolLevel, "cm1" | "cm2">;
+type Cycle3PrimaryLevel = Extract<SchoolLevel, "cm1" | "cm2" | "6e">;
 
 type Generated = TutorGeneratedQuestionV4 & {
   format: QuestionFormat;
