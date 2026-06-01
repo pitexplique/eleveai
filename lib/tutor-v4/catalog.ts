@@ -13,6 +13,10 @@ import { buildKnowledgeCe1Francais } from "@/lib/tutor-v4/knowledge/francais/ce1
 import { buildKnowledgeCe2Francais } from "@/lib/tutor-v4/knowledge/francais/ce2/buildKnowledgeCe2Francais";
 import { buildKnowledgeCm1Francais } from "@/lib/tutor-v4/knowledge/francais/cm1/buildKnowledgeCm1Francais";
 import { buildKnowledgeCm2Francais } from "@/lib/tutor-v4/knowledge/francais/cm2/buildKnowledgeCm2Francais";
+import { buildKnowledge6eFrancais } from "@/lib/tutor-v4/knowledge/francais/6e/buildKnowledge6eFrancais";
+import { buildKnowledge5eFrancais } from "@/lib/tutor-v4/knowledge/francais/5e/buildKnowledge5eFrancais";
+import { buildKnowledge4eFrancais } from "@/lib/tutor-v4/knowledge/francais/4e/buildKnowledge4eFrancais";
+import { buildKnowledge3eFrancais } from "@/lib/tutor-v4/knowledge/francais/3e/buildKnowledge3eFrancais";
 
 // =========================
 // TYPES
@@ -45,6 +49,10 @@ function getKnowledge(classe: Classe, matiere: Matiere = "maths") {
       case "ce2": return buildKnowledgeCe2Francais();
       case "cm1": return buildKnowledgeCm1Francais();
       case "cm2": return buildKnowledgeCm2Francais();
+      case "6e": return buildKnowledge6eFrancais();
+      case "5e": return buildKnowledge5eFrancais();
+      case "4e": return buildKnowledge4eFrancais();
+      case "3e": return buildKnowledge3eFrancais();
       default:    return buildKnowledgeCe1Francais(); // fallback
     }
   }

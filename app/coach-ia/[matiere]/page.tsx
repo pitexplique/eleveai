@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { useRouter, useParams } from "next/navigation";
+import { useRouter, useParams, useSearchParams } from "next/navigation";
 import {
   getNotionOptions,
   getNotionMicroMap,
@@ -13,10 +13,14 @@ import {
 } from "@/lib/tutor-v4/catalog";
 
 const CLASSES: Classe[] = ["cp", "ce1", "ce2", "cm1", "cm2", "6e", "5e", "4e", "3e", "terminale-spe"];
-const FRANCAIS_READY_CLASSES: Classe[] = ["cp", "ce1", "ce2", "cm1", "cm2"];
+const FRANCAIS_READY_CLASSES: Classe[] = ["cp", "ce1", "ce2", "cm1", "cm2", "6e", "5e", "4e", "3e"];
 
 function getClassesForMatiere(matiere: Matiere): Classe[] {
   return matiere === "francais" ? FRANCAIS_READY_CLASSES : CLASSES;
+}
+
+function normalizeClasse(value: string | null, classes: Classe[], fallback: Classe): Classe {
+  return classes.includes(value as Classe) ? (value as Classe) : fallback;
 }
 
 function getMatiereTitle(matiere: string, classe: Classe) {
@@ -78,17 +82,18 @@ function getDomaineAccent(domaineId: string) {
 export default function CoachIA() {
   const router = useRouter();
   const params = useParams();
+  const searchParams = useSearchParams();
   const matiere = ((params?.matiere as string) ?? "maths") as Matiere;
 
   const defaultClasse: Classe = matiere === "francais" ? "cp" : "6e";
-  const [classe, setClasse] = useState<Classe>(defaultClasse);
   const classes = useMemo(() => getClassesForMatiere(matiere), [matiere]);
+  const [classe, setClasse] = useState<Classe>(() =>
+    normalizeClasse(searchParams.get("classe"), classes, defaultClasse)
+  );
 
   useEffect(() => {
-    if (!classes.includes(classe)) {
-      setClasse(classes[0] ?? defaultClasse);
-    }
-  }, [classe, classes, defaultClasse]);
+    setClasse(normalizeClasse(searchParams.get("classe"), classes, defaultClasse));
+  }, [searchParams, classes, defaultClasse]);
 
   const notionOptions = getNotionOptions(classe, matiere);
   const notionMicroMap = getNotionMicroMap(classe, matiere);
@@ -171,7 +176,7 @@ export default function CoachIA() {
                 </span>
                 {matiere === "francais" ? (
                   <span className="rounded-full border border-sky-200 bg-sky-50 px-4 py-2 text-sm font-semibold text-sky-700">
-                    CP, CE1, CE2, CM1 et CM2 ouverts
+                    CP a 3e ouverts
                   </span>
                 ) : null}
               </div>

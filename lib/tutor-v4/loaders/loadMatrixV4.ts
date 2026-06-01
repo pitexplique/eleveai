@@ -13,6 +13,10 @@ import { matrixCe1Francais } from "@/lib/tutor-v4/matrix/matrixCe1Francais";
 import { matrixCe2Francais } from "@/lib/tutor-v4/matrix/matrixCe2Francais";
 import { matrixCm1Francais } from "@/lib/tutor-v4/matrix/matrixCm1Francais";
 import { matrixCm2Francais } from "@/lib/tutor-v4/matrix/matrixCm2Francais";
+import { matrix6eFrancais } from "@/lib/tutor-v4/matrix/matrix6eFrancais";
+import { matrix5eFrancais } from "@/lib/tutor-v4/matrix/matrix5eFrancais";
+import { matrix4eFrancais } from "@/lib/tutor-v4/matrix/matrix4eFrancais";
+import { matrix3eFrancais } from "@/lib/tutor-v4/matrix/matrix3eFrancais";
 
 import type { SkillMatrix } from "@/lib/tutor-v4/types";
 
@@ -65,6 +69,10 @@ export async function loadMatrixV4(
   if (classe === "ce2" && matiere === "francais") return matrixCe2Francais;
   if (classe === "cm1" && matiere === "francais") return matrixCm1Francais;
   if (classe === "cm2" && matiere === "francais") return matrixCm2Francais;
+  if (classe === "6e" && matiere === "francais") return matrix6eFrancais;
+  if (classe === "5e" && matiere === "francais") return matrix5eFrancais;
+  if (classe === "4e" && matiere === "francais") return matrix4eFrancais;
+  if (classe === "3e" && matiere === "francais") return matrix3eFrancais;
 
   throw new Error(`Matrix V4 introuvable pour ${classe}/${matiere}`);
 }

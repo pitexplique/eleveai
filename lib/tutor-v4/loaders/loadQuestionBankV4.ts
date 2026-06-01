@@ -13,6 +13,10 @@ import { francaisCe1QuestionBank } from "@/lib/tutor-v4/questionBank/ce1/francai
 import { francaisCe2QuestionBank } from "@/lib/tutor-v4/questionBank/ce2/francais";
 import { francaisCm1QuestionBank } from "@/lib/tutor-v4/questionBank/cm1/francais";
 import { francaisCm2QuestionBank } from "@/lib/tutor-v4/questionBank/cm2/francais";
+import { francais6eQuestionBank } from "@/lib/tutor-v4/questionBank/6e/francais";
+import { francais5eQuestionBank } from "@/lib/tutor-v4/questionBank/5e/francais";
+import { francais4eQuestionBank } from "@/lib/tutor-v4/questionBank/4e/francais";
+import { francais3eQuestionBank } from "@/lib/tutor-v4/questionBank/3e/francais";
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 
 export async function loadQuestionBankV4(
@@ -65,6 +69,10 @@ export async function loadQuestionBankV4(
   if (classe === "ce2" && matiere === "francais") return francaisCe2QuestionBank;
   if (classe === "cm1" && matiere === "francais") return francaisCm1QuestionBank;
   if (classe === "cm2" && matiere === "francais") return francaisCm2QuestionBank;
+  if (classe === "6e" && matiere === "francais") return francais6eQuestionBank;
+  if (classe === "5e" && matiere === "francais") return francais5eQuestionBank;
+  if (classe === "4e" && matiere === "francais") return francais4eQuestionBank;
+  if (classe === "3e" && matiere === "francais") return francais3eQuestionBank;
 
   throw new Error(`QuestionBank V4 introuvable pour ${classe}/${matiere}`);
 }

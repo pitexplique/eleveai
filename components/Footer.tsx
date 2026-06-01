@@ -2,52 +2,73 @@
 import Link from "next/link";
 
 const outils = [
-  { label: "Coach Maths IA",    href: "/coach-ia/maths" },
-  { label: "Coach Français IA", href: "/coach-ia/francais" },
-  { label: "Parcours",         href: "/parcours" },
-  { label: "Coach Brevet",     href: "/coach-brevet" },
-  { label: "Coach Bac Spé",    href: "/coach-bac-spe" },
-  { label: "Calcul rapide",    href: "/calcul-rapide" },
-  { label: "English Maths",    href: "/english-maths" },
-  { label: "Défis du jour",    href: "/defis-du-jour" },
-  { label: "Concours général", href: "/concours-general" },
+  { label: "Coach Maths IA", href: "/coach-ia/maths" },
+  { label: "Coach Francais IA", href: "/coach-ia/francais" },
+  { label: "Parcours", href: "/parcours" },
+  { label: "Coach Brevet", href: "/coach-brevet" },
+  { label: "Coach Bac Spe", href: "/coach-bac-spe" },
+  { label: "Calcul rapide", href: "/calcul-rapide" },
+  { label: "English Maths", href: "/english-maths" },
+  { label: "Defis du jour", href: "/defis-du-jour" },
+  { label: "Concours general", href: "/concours-general" },
 ];
 
 const espaces = [
-  { label: "Établissements scolaires", href: "/espace-ecoles" },
-  { label: "Espace élèves",  href: "/espace-eleves" },
+  { label: "Etablissements scolaires", href: "/espace-ecoles" },
+  { label: "Espace eleves", href: "/espace-eleves" },
   { label: "Espace parents", href: "/espace-parents" },
-  { label: "Espace profs",   href: "/espace-profs" },
-  { label: "Connexion élève / prof", href: "/auth/signin-eleve" },
+  { label: "Espace profs", href: "/espace-profs" },
+  { label: "Connexion eleve / prof", href: "/auth/signin-eleve" },
 ];
 
 const infos = [
-  { label: "Pourquoi EleveAI",  href: "/pourquoi-eleveai" },
-  { label: "Qui sommes-nous",   href: "/qui-sommes-nous" },
-  { label: "Tarifs",            href: "/tarifs" },
-  { label: "Blog",              href: "/blog" },
-  { label: "FAQ",               href: "/faq" },
-  { label: "Contact",           href: "/contact" },
+  { label: "Pourquoi EleveAI", href: "/pourquoi-eleveai" },
+  { label: "Qui sommes-nous", href: "/qui-sommes-nous" },
+  { label: "Tarifs", href: "/tarifs" },
+  { label: "Blog", href: "/blog" },
+  { label: "FAQ", href: "/faq" },
+  { label: "Contact", href: "/contact" },
 ];
 
 const legal = [
-  { label: "Mentions légales",        href: "/mentions-legales" },
-  { label: "Politique de confidentialité", href: "/politique-confidentialite" },
-  { label: "CGU",                     href: "/cgu" },
+  { label: "Mentions legales", href: "/mentions-legales" },
+  { label: "Politique de confidentialite", href: "/politique-confidentialite" },
+  { label: "CGU", href: "/cgu" },
+];
+
+const mathsClasses = [
+  { label: "CP", slug: "cp" },
+  { label: "CE1", slug: "ce1" },
+  { label: "CE2", slug: "ce2" },
+  { label: "CM1", slug: "cm1" },
+  { label: "CM2", slug: "cm2" },
+  { label: "6e", slug: "6e" },
+  { label: "5e", slug: "5e" },
+  { label: "4e", slug: "4e" },
+  { label: "3e", slug: "3e" },
+  { label: "Terminale Spe", slug: "terminale-spe" },
+];
+
+const francaisClasses = [
+  { label: "CP", slug: "cp" },
+  { label: "CE1", slug: "ce1" },
+  { label: "CE2", slug: "ce2" },
+  { label: "CM1", slug: "cm1" },
+  { label: "CM2", slug: "cm2" },
+  { label: "6e", slug: "6e" },
+  { label: "5e", slug: "5e" },
+  { label: "4e", slug: "4e" },
+  { label: "3e", slug: "3e" },
 ];
 
 export default function Footer() {
   return (
     <footer className="border-t border-slate-800 bg-[#041B33]">
       <div className="mx-auto max-w-6xl px-4 py-10 sm:py-12">
-
-        {/* GRILLE PRINCIPALE */}
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-
-          {/* MARQUE */}
-          <div className="space-y-4">
+        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-5">
+          <div className="space-y-4 lg:col-span-1">
             <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-gradient-to-br from-cyan-200 via-emerald-300 to-amber-300 text-[#041B33] font-extrabold text-sm shadow">
+              <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-gradient-to-br from-cyan-200 via-emerald-300 to-amber-300 text-sm font-extrabold text-[#041B33] shadow">
                 EA
               </div>
               <div className="flex flex-col leading-tight">
@@ -55,31 +76,30 @@ export default function Footer() {
                   Eleve<span className="text-emerald-300">AI</span>
                 </span>
                 <span className="text-xs text-slate-400">
-                  Comprendre · S&apos;entraîner · Réussir
+                  Comprendre · S&apos;entrainer · Reussir
                 </span>
               </div>
             </div>
 
             <p className="text-xs leading-relaxed text-slate-400">
-              Plusieurs portes pour apprendre les maths et suivre la progression
-              des élèves. Du CM1 au Bac, conçu à La Réunion.
+              Maths, francais et anglais pour s&apos;entrainer avec un coach IA.
+              De l&apos;ecole au lycee, concu a La Reunion.
             </p>
 
             <Link
               href="/contact"
-              className="inline-flex rounded-2xl border border-emerald-400/40 bg-emerald-400/10 px-4 py-2 text-xs font-semibold text-emerald-200 hover:bg-emerald-400/20 transition"
+              className="inline-flex rounded-2xl border border-emerald-400/40 bg-emerald-400/10 px-4 py-2 text-xs font-semibold text-emerald-200 transition hover:bg-emerald-400/20"
             >
-              📩 Nous contacter
+              Nous contacter
             </Link>
           </div>
 
-          {/* OUTILS */}
           <div>
             <h3 className="mb-3 text-sm font-black text-slate-100">Outils</h3>
             <ul className="space-y-2">
               {outils.map((l) => (
                 <li key={l.href}>
-                  <Link href={l.href} className="text-sm text-slate-400 hover:text-emerald-300 transition">
+                  <Link href={l.href} className="text-sm text-slate-400 transition hover:text-emerald-300">
                     {l.label}
                   </Link>
                 </li>
@@ -87,13 +107,12 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* ESPACES */}
           <div>
             <h3 className="mb-3 text-sm font-black text-slate-100">Espaces</h3>
             <ul className="space-y-2">
               {espaces.map((l) => (
                 <li key={l.href}>
-                  <Link href={l.href} className="text-sm text-slate-400 hover:text-sky-300 transition">
+                  <Link href={l.href} className="text-sm text-slate-400 transition hover:text-sky-300">
                     {l.label}
                   </Link>
                 </li>
@@ -104,7 +123,7 @@ export default function Footer() {
             <ul className="space-y-2">
               {infos.map((l) => (
                 <li key={l.href}>
-                  <Link href={l.href} className="text-sm text-slate-400 hover:text-sky-300 transition">
+                  <Link href={l.href} className="text-sm text-slate-400 transition hover:text-sky-300">
                     {l.label}
                   </Link>
                 </li>
@@ -112,27 +131,42 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* CLASSES + LÉGAL */}
           <div>
-            <h3 className="mb-3 text-sm font-black text-slate-100">Par classe</h3>
-            <ul className="space-y-2">
-              {["CM1", "CM2", "6e", "5e", "4e", "3e", "Terminale Spé"].map((c) => (
-                <li key={c}>
+            <h3 className="mb-3 text-sm font-black text-slate-100">Maths</h3>
+            <ul className="grid grid-cols-2 gap-x-3 gap-y-2 sm:grid-cols-1">
+              {mathsClasses.map((c) => (
+                <li key={c.slug}>
                   <Link
-                    href={`/coach-ia/maths?classe=${c.toLowerCase().replace(" ", "-")}`}
-                    className="text-sm text-slate-400 hover:text-amber-300 transition"
+                    href={`/coach-ia/maths?classe=${c.slug}`}
+                    className="text-sm text-slate-400 transition hover:text-amber-300"
                   >
-                    Maths {c}
+                    Maths {c.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h3 className="mb-3 text-sm font-black text-slate-100">Francais</h3>
+            <ul className="grid grid-cols-2 gap-x-3 gap-y-2 sm:grid-cols-1">
+              {francaisClasses.map((c) => (
+                <li key={c.slug}>
+                  <Link
+                    href={`/coach-ia/francais?classe=${c.slug}`}
+                    className="text-sm text-slate-400 transition hover:text-sky-300"
+                  >
+                    Francais {c.label}
                   </Link>
                 </li>
               ))}
             </ul>
 
-            <h3 className="mb-3 mt-6 text-sm font-black text-slate-100">Légal</h3>
+            <h3 className="mb-3 mt-6 text-sm font-black text-slate-100">Legal</h3>
             <ul className="space-y-2">
               {legal.map((l) => (
                 <li key={l.href}>
-                  <Link href={l.href} className="text-xs text-slate-500 hover:text-slate-300 transition">
+                  <Link href={l.href} className="text-xs text-slate-500 transition hover:text-slate-300">
                     {l.label}
                   </Link>
                 </li>
@@ -141,18 +175,20 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* BAS DE PAGE */}
         <div className="mt-10 flex flex-col gap-2 border-t border-slate-800 pt-5 text-xs text-slate-500 sm:flex-row sm:items-center sm:justify-between">
-          <p>© {new Date().getFullYear()} EleveAI — Tous droits réservés.</p>
+          <p>© {new Date().getFullYear()} EleveAI - Tous droits reserves.</p>
           <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-[11px]">
-            <span>🏝️ Conçu à La Réunion</span>
-            <span className="hidden sm:inline text-slate-700">•</span>
-            <Link href="/mentions-legales" className="hover:text-slate-300 transition">Mentions légales</Link>
-            <span className="hidden sm:inline text-slate-700">•</span>
-            <Link href="/politique-confidentialite" className="hover:text-slate-300 transition">Confidentialité</Link>
+            <span>Concu a La Reunion</span>
+            <span className="hidden text-slate-700 sm:inline">•</span>
+            <Link href="/mentions-legales" className="transition hover:text-slate-300">
+              Mentions legales
+            </Link>
+            <span className="hidden text-slate-700 sm:inline">•</span>
+            <Link href="/politique-confidentialite" className="transition hover:text-slate-300">
+              Confidentialite
+            </Link>
           </div>
         </div>
-
       </div>
     </footer>
   );

@@ -7,9 +7,11 @@ const BASE_URL = "https://eleveai.fr";
 
 const u = (path: string) => `${BASE_URL}${path}`;
 
-const LASTMOD_HOME = new Date("2026-05-31");
-const LASTMOD_CORE = new Date("2026-05-31");
+const LASTMOD_HOME = new Date("2026-06-01");
+const LASTMOD_CORE = new Date("2026-06-01");
 const LASTMOD_LEGAL = new Date("2026-02-18");
+const MATHS_CLASSES = ["cp", "ce1", "ce2", "cm1", "cm2", "6e", "5e", "4e", "3e", "terminale-spe"];
+const FRANCAIS_CLASSES = ["cp", "ce1", "ce2", "cm1", "cm2", "6e", "5e", "4e", "3e"];
 
 type RouteConfig = {
   path: string;
@@ -66,9 +68,24 @@ const ROUTES: RouteConfig[] = [
   { path: "/cgu",                        priority: 0.3, changeFrequency: "yearly", lastMod: LASTMOD_LEGAL },
 ];
 
+const coachRoutes: RouteConfig[] = [
+  ...MATHS_CLASSES.map((classe) => ({
+    path: `/coach-ia/maths?classe=${classe}`,
+    priority: classe === "terminale-spe" ? 0.85 : 0.9,
+    changeFrequency: "daily" as const,
+    lastMod: LASTMOD_CORE,
+  })),
+  ...FRANCAIS_CLASSES.map((classe) => ({
+    path: `/coach-ia/francais?classe=${classe}`,
+    priority: 0.9,
+    changeFrequency: "daily" as const,
+    lastMod: LASTMOD_CORE,
+  })),
+];
+
 export default function sitemap(): MetadataRoute.Sitemap {
   // Routes statiques
-  const staticRoutes = ROUTES.map((route) => ({
+  const staticRoutes = [...ROUTES, ...coachRoutes].map((route) => ({
     url: u(route.path),
     lastModified: route.lastMod ?? LASTMOD_CORE,
     changeFrequency: route.changeFrequency,

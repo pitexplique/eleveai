@@ -14,6 +14,10 @@ import { loadKnowledgeCe1Francais } from "@/lib/tutor-v4/knowledge/loaders/loadK
 import { loadKnowledgeCe2Francais } from "@/lib/tutor-v4/knowledge/loaders/loadKnowledgeCe2Francais";
 import { loadKnowledgeCm1Francais } from "@/lib/tutor-v4/knowledge/loaders/loadKnowledgeCm1Francais";
 import { loadKnowledgeCm2Francais } from "@/lib/tutor-v4/knowledge/loaders/loadKnowledgeCm2Francais";
+import { loadKnowledge6eFrancais } from "@/lib/tutor-v4/knowledge/loaders/loadKnowledge6eFrancais";
+import { loadKnowledge5eFrancais } from "@/lib/tutor-v4/knowledge/loaders/loadKnowledge5eFrancais";
+import { loadKnowledge4eFrancais } from "@/lib/tutor-v4/knowledge/loaders/loadKnowledge4eFrancais";
+import { loadKnowledge3eFrancais } from "@/lib/tutor-v4/knowledge/loaders/loadKnowledge3eFrancais";
 
 import type { KnowledgePack } from "@/lib/tutor-v4/types";
 
@@ -64,6 +68,10 @@ export async function loadKnowledgeV4(
   if (classe === "ce2" && matiere === "francais") return loadKnowledgeCe2Francais() as KnowledgePack;
   if (classe === "cm1" && matiere === "francais") return loadKnowledgeCm1Francais() as KnowledgePack;
   if (classe === "cm2" && matiere === "francais") return loadKnowledgeCm2Francais() as KnowledgePack;
+  if (classe === "6e" && matiere === "francais") return loadKnowledge6eFrancais() as KnowledgePack;
+  if (classe === "5e" && matiere === "francais") return loadKnowledge5eFrancais() as KnowledgePack;
+  if (classe === "4e" && matiere === "francais") return loadKnowledge4eFrancais() as KnowledgePack;
+  if (classe === "3e" && matiere === "francais") return loadKnowledge3eFrancais() as KnowledgePack;
 
   throw new Error(`Knowledge V4 introuvable pour ${classe}/${matiere}`);
 }
