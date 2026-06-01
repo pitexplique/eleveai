@@ -76,6 +76,11 @@ type EleveSession = {
   type_utilisateur?: string | null;
 };
 
+type ParcoursChatMessage = {
+  role: "student" | "coach";
+  text: string;
+};
+
 function shuffleArray<T>(array: T[]): T[] {
   const copy = [...array];
 
@@ -98,6 +103,10 @@ export default function ParcoursClient() {
 
   const eleve =
     eleveContext.eleve ?? eleveContext.currentUser ?? eleveContext.user ?? null;
+  const codeEtablissement = eleve?.code_etablissement?.trim() ?? "";
+  const codeUtilisateur =
+    eleve?.code_eleve?.trim() ?? eleve?.code_utilisateur?.trim() ?? "";
+  const canAskCorrectionQuestion = Boolean(codeEtablissement && codeUtilisateur);
 
   const bilanRef = useRef<HTMLDivElement>(null);
 
@@ -109,6 +118,12 @@ export default function ParcoursClient() {
   const [questions, setQuestions] = useState<ParcoursQuestion[]>([]);
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [submitted, setSubmitted] = useState(false);
+  const [chatOpen, setChatOpen] = useState(false);
+  const [chatQuestion, setChatQuestion] = useState("");
+  const [chatMessages, setChatMessages] = useState<ParcoursChatMessage[]>([]);
+  const [chatQuestionContext, setChatQuestionContext] =
+    useState<ParcoursQuestion | null>(null);
+  const [chatLoading, setChatLoading] = useState(false);
 
   const [saving, setSaving] = useState(false);
   const [saveMessage, setSaveMessage] = useState<string | null>(null);
@@ -171,6 +186,7 @@ export default function ParcoursClient() {
     setQuestions(selectedQuestions);
     setAnswers({});
     setSubmitted(false);
+    resetCorrectionChat();
     setStarted(true);
     setSaveMessage(null);
   }
@@ -180,6 +196,7 @@ export default function ParcoursClient() {
     setQuestions([]);
     setAnswers({});
     setSubmitted(false);
+    resetCorrectionChat();
     setSaveMessage(null);
   }
 
@@ -188,6 +205,92 @@ export default function ParcoursClient() {
       ...prev,
       [notionId]: value,
     }));
+  }
+
+  function resetCorrectionChat() {
+    setChatOpen(false);
+    setChatQuestion("");
+    setChatMessages([]);
+    setChatQuestionContext(null);
+    setChatLoading(false);
+  }
+
+  function openCorrectionChat(question: ParcoursQuestion) {
+    setChatQuestionContext(question);
+    setChatOpen(true);
+  }
+
+  function buildLocalCoachAnswer(
+    question: ParcoursQuestion,
+    studentQuestion: string
+  ) {
+    const userAnswer = answers[question.notionId] ?? "Aucune réponse";
+    const expected = question.question.expected?.join(" ou ") ?? "Non disponible";
+    const explanation =
+      question.question.explanation ??
+      "Regarde la réponse attendue et compare-la à ta réponse.";
+
+    return [
+      `Je reprends cette correction plus simplement.`,
+      `Dans la notion "${question.notionLabel}", la réponse attendue est : ${expected}.`,
+      `Ta réponse était : ${userAnswer}.`,
+      `L'idée importante : ${explanation.split("\n")[0]}`,
+      `Pour ta question "${studentQuestion}", essaie de repérer dans l'énoncé l'information qui mène directement à la bonne réponse.`,
+    ].join("\n\n");
+  }
+
+  async function sendChatQuestion() {
+    const trimmed = chatQuestion.trim();
+    if (!trimmed || !chatQuestionContext) return;
+    if (!canAskCorrectionQuestion) {
+      setChatOpen(true);
+      return;
+    }
+
+    const currentContext = chatQuestionContext;
+
+    setChatMessages((prev) => [...prev, { role: "student", text: trimmed }]);
+    setChatQuestion("");
+    setChatLoading(true);
+
+    try {
+      const response = await fetch("/api/parcours/explain", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          codeEtablissement,
+          codeUtilisateur,
+          classe,
+          notionLabel: currentContext.notionLabel,
+          questionText: currentContext.question.text,
+          studentAnswer: answers[currentContext.notionId] ?? "",
+          expectedAnswer: currentContext.question.expected?.join(" ou ") ?? "",
+          explanation: currentContext.question.explanation ?? "",
+          studentQuestion: trimmed,
+        }),
+      });
+
+      const data = (await response.json().catch(() => ({}))) as {
+        answer?: string;
+        error?: string;
+      };
+
+      if (!response.ok || !data.answer) {
+        throw new Error(data.error ?? "Reponse indisponible.");
+      }
+
+      setChatMessages((prev) => [
+        ...prev,
+        { role: "coach", text: data.answer ?? "" },
+      ]);
+    } catch {
+      setChatMessages((prev) => [
+        ...prev,
+        { role: "coach", text: buildLocalCoachAnswer(currentContext, trimmed) },
+      ]);
+    } finally {
+      setChatLoading(false);
+    }
   }
 
   async function enregistrerResultatParcours() {
@@ -752,6 +855,14 @@ export default function ParcoursClient() {
                           {q.question.explanation}
                         </p>
                       ) : null}
+
+                      <button
+                        type="button"
+                        onClick={() => openCorrectionChat(q)}
+                        className="mt-4 rounded-xl bg-slate-950 px-4 py-2 text-xs font-black text-white shadow-sm hover:bg-slate-800"
+                      >
+                        Poser une question sur cette correction
+                      </button>
                     </div>
                   ) : null}
                 </article>
@@ -795,6 +906,130 @@ export default function ParcoursClient() {
           </div>
         )}
       </section>
+
+      {submitted ? (
+      <CorrectionChatBox
+          open={chatOpen}
+          messages={chatMessages}
+          question={chatQuestion}
+          loading={chatLoading}
+          context={chatQuestionContext}
+          canAsk={canAskCorrectionQuestion}
+          onOpen={() => setChatOpen(true)}
+          onClose={() => setChatOpen(false)}
+          onQuestionChange={setChatQuestion}
+          onSend={sendChatQuestion}
+        />
+      ) : null}
     </main>
+  );
+}
+
+function CorrectionChatBox({
+  open,
+  messages,
+  question,
+  loading,
+  context,
+  canAsk,
+  onOpen,
+  onClose,
+  onQuestionChange,
+  onSend,
+}: {
+  open: boolean;
+  messages: ParcoursChatMessage[];
+  question: string;
+  loading: boolean;
+  context: ParcoursQuestion | null;
+  canAsk: boolean;
+  onOpen: () => void;
+  onClose: () => void;
+  onQuestionChange: (value: string) => void;
+  onSend: () => void;
+}) {
+  if (!open) {
+    return (
+      <button
+        type="button"
+        onClick={onOpen}
+        className="fixed bottom-5 right-5 z-50 rounded-full bg-slate-950 px-5 py-4 text-sm font-black text-white shadow-2xl ring-1 ring-white/20 hover:bg-slate-800"
+      >
+        {canAsk ? "Poser une question" : "Connectez-vous pour dialoguer"}
+      </button>
+    );
+  }
+
+  return (
+    <aside className="fixed bottom-4 right-4 z-50 flex max-h-[78vh] w-[calc(100vw-2rem)] max-w-sm flex-col overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-2xl">
+      <div className="flex items-start justify-between gap-3 border-b border-slate-200 bg-slate-950 px-4 py-3 text-white">
+        <div>
+          <div className="text-sm font-black">Question sur la correction</div>
+          <div className="mt-1 text-xs text-slate-300">
+            {context?.notionLabel ?? "Choisis une correction"}
+          </div>
+        </div>
+        <button
+          type="button"
+          onClick={onClose}
+          className="rounded-full bg-white/10 px-3 py-1 text-xs font-black hover:bg-white/20"
+        >
+          Fermer
+        </button>
+      </div>
+
+      <div className="min-h-0 flex-1 space-y-3 overflow-y-auto bg-slate-50 p-4">
+        {messages.length === 0 ? (
+          canAsk ? (
+            <div className="rounded-2xl border border-sky-100 bg-sky-50 p-3 text-sm font-semibold text-sky-900">
+              Pose ta question sur l'explication ou sur la bonne réponse. Le coach
+              utilise le contexte de cette correction.
+            </div>
+          ) : (
+            <div className="rounded-2xl border border-amber-200 bg-amber-50 p-3 text-sm font-semibold text-amber-900">
+              Posez une question : connectez-vous pour dialoguer.
+            </div>
+          )
+        ) : (
+          messages.map((message, index) => (
+            <div
+              key={`${message.role}-${index}`}
+              className={[
+                "whitespace-pre-line rounded-2xl px-3 py-2 text-sm leading-6",
+                message.role === "student"
+                  ? "ml-8 bg-emerald-100 font-semibold text-emerald-950"
+                  : "mr-8 bg-white text-slate-800 shadow-sm ring-1 ring-slate-200",
+              ].join(" ")}
+            >
+              {message.text}
+            </div>
+          ))
+        )}
+        {loading ? (
+          <div className="mr-8 rounded-2xl bg-white px-3 py-2 text-sm font-semibold text-slate-500 shadow-sm ring-1 ring-slate-200">
+            Le coach réfléchit...
+          </div>
+        ) : null}
+      </div>
+
+      <div className="border-t border-slate-200 bg-white p-3">
+        <textarea
+          value={question}
+          onChange={(event) => onQuestionChange(event.target.value)}
+          placeholder="Ex : Pourquoi ma réponse est fausse ?"
+          rows={3}
+          disabled={!context || loading || !canAsk}
+          className="w-full resize-none rounded-2xl border border-slate-300 px-3 py-2 text-sm font-semibold outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100 disabled:bg-slate-100"
+        />
+        <button
+          type="button"
+          onClick={onSend}
+          disabled={!context || !question.trim() || loading || !canAsk}
+          className="mt-2 w-full rounded-2xl bg-emerald-500 px-4 py-3 text-sm font-black text-slate-950 shadow-sm hover:bg-emerald-400 disabled:cursor-not-allowed disabled:opacity-50"
+        >
+          {loading ? "Envoi..." : "Envoyer"}
+        </button>
+      </div>
+    </aside>
   );
 }
