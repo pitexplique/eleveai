@@ -177,6 +177,7 @@ export default function AccueilPage() {
     "Bonjour, je suis le coach EleveAI. Pose-moi une question courte sur tes revisions."
   );
   const [chatLoading, setChatLoading] = useState(false);
+  const [chatOpen, setChatOpen] = useState(true);
 
   const codeEtablissement = eleve?.code_etablissement?.trim() ?? "";
   const codeUtilisateur = eleve?.code_eleve?.trim() ?? "";
@@ -519,10 +520,13 @@ export default function AccueilPage() {
       </section>
 
       <AccueilCoachBox
+        open={chatOpen}
         canAsk={canAskAccueilQuestion}
         question={chatQuestion}
         answer={chatAnswer}
         loading={chatLoading}
+        onOpen={() => setChatOpen(true)}
+        onClose={() => setChatOpen(false)}
         onQuestionChange={setChatQuestion}
         onSend={sendAccueilQuestion}
       />
@@ -532,30 +536,58 @@ export default function AccueilPage() {
 }
 
 function AccueilCoachBox({
+  open,
   canAsk,
   question,
   answer,
   loading,
+  onOpen,
+  onClose,
   onQuestionChange,
   onSend,
 }: {
+  open: boolean;
   canAsk: boolean;
   question: string;
   answer: string;
   loading: boolean;
+  onOpen: () => void;
+  onClose: () => void;
   onQuestionChange: (value: string) => void;
   onSend: (event: FormEvent<HTMLFormElement>) => void;
 }) {
+  if (!open) {
+    return (
+      <button
+        type="button"
+        onClick={onOpen}
+        className="fixed bottom-4 right-4 z-50 rounded-full bg-gradient-to-r from-cyan-500 via-emerald-500 to-orange-400 px-4 py-3 text-xs font-black text-white shadow-2xl ring-2 ring-white/70 hover:scale-105 sm:px-5 sm:text-sm"
+      >
+        Coach IA
+      </button>
+    );
+  }
+
   return (
     <aside className="fixed bottom-4 right-4 z-50 flex h-[300px] w-[150px] flex-col overflow-hidden rounded-3xl border border-cyan-200 bg-white text-slate-950 shadow-2xl sm:h-[600px] sm:w-[300px]">
-      <div className="bg-gradient-to-br from-cyan-500 via-emerald-500 to-orange-400 px-3 py-3 text-white sm:px-5 sm:py-5">
-        <div className="text-xs font-black leading-4 sm:text-lg sm:leading-6">
-          Coach EleveAI
+      <div className="flex items-start justify-between gap-2 bg-gradient-to-br from-cyan-500 via-emerald-500 to-orange-400 px-3 py-3 text-white sm:px-5 sm:py-5">
+        <div>
+          <div className="text-xs font-black leading-4 sm:text-lg sm:leading-6">
+            Coach EleveAI
+          </div>
+          <div className="mt-1 hidden text-xs font-bold text-white/85 sm:block">
+            Dialoguer pour comprendre
+          </div>
         </div>
-        <div className="mt-1 hidden text-xs font-bold text-white/85 sm:block">
-          Dialoguer pour comprendre
+        <button
+          type="button"
+          onClick={onClose}
+          aria-label="Fermer le coach"
+          className="rounded-full bg-white/20 px-2 py-1 text-[10px] font-black text-white hover:bg-white/30 sm:px-3 sm:text-xs"
+        >
+          Fermer
+        </button>
         </div>
-      </div>
 
       <div className="min-h-0 flex-1 overflow-y-auto bg-gradient-to-b from-cyan-50 via-white to-orange-50 p-3 sm:p-4">
         {canAsk ? (
