@@ -13,7 +13,7 @@ import {
 } from "@/lib/tutor-v4/catalog";
 
 const CLASSES: Classe[] = ["cp", "ce1", "ce2", "cm1", "cm2", "6e", "5e", "4e", "3e", "terminale-spe"];
-const FRANCAIS_READY_CLASSES: Classe[] = ["cp", "ce1"];
+const FRANCAIS_READY_CLASSES: Classe[] = ["cp", "ce1", "cm1"];
 
 function getClassesForMatiere(matiere: Matiere): Classe[] {
   return matiere === "francais" ? FRANCAIS_READY_CLASSES : CLASSES;
@@ -171,7 +171,7 @@ export default function CoachIA() {
                 </span>
                 {matiere === "francais" ? (
                   <span className="rounded-full border border-sky-200 bg-sky-50 px-4 py-2 text-sm font-semibold text-sky-700">
-                    CP et CE1 ouverts
+                    CP, CE1 et CM1 ouverts
                   </span>
                 ) : null}
               </div>
