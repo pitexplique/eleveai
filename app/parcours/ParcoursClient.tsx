@@ -2,7 +2,7 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 import { CanvasRenderer } from "@/lib/canvas";
 import { createClient } from "@/lib/supabase/client";
@@ -166,6 +166,13 @@ export default function ParcoursClient() {
     if (totalMaxScore <= 0) return 0;
     return Math.round((totalScore / totalMaxScore) * 100);
   }, [totalScore, totalMaxScore]);
+
+  useEffect(() => {
+    if (!submitted || !canAskCorrectionQuestion) return;
+
+    setChatOpen(true);
+    setChatQuestionContext((current) => current ?? questions[0] ?? null);
+  }, [submitted, canAskCorrectionQuestion, questions]);
 
   function startParcours() {
     const allQuestions = notions
@@ -875,6 +882,8 @@ export default function ParcoursClient() {
                   type="button"
                   onClick={() => {
                     setSubmitted(true);
+                    setChatOpen(true);
+                    setChatQuestionContext(questions[0] ?? null);
                     setTimeout(() => {
                       bilanRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
                     }, 50);
@@ -975,15 +984,7 @@ function CorrectionChatBox({
       );
     }
 
-    return (
-      <button
-        type="button"
-        onClick={onOpen}
-        className="fixed bottom-5 right-5 z-50 rounded-full bg-slate-950 px-5 py-4 text-sm font-black text-white shadow-2xl ring-1 ring-white/20 hover:bg-slate-800"
-      >
-        Poser une question
-      </button>
-    );
+    return null;
   }
 
   return (
@@ -1044,13 +1045,13 @@ function CorrectionChatBox({
           onChange={(event) => onQuestionChange(event.target.value)}
           placeholder="Ex : Pourquoi ma réponse est fausse ?"
           rows={3}
-          disabled={!context || loading || !canAsk}
+          disabled={loading || !canAsk}
           className="w-full resize-none rounded-2xl border border-slate-300 px-3 py-2 text-sm font-semibold outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100 disabled:bg-slate-100"
         />
         <button
           type="button"
           onClick={onSend}
-          disabled={!context || !question.trim() || loading || !canAsk}
+          disabled={!question.trim() || loading || !canAsk}
           className="mt-2 w-full rounded-2xl bg-emerald-500 px-4 py-3 text-sm font-black text-slate-950 shadow-sm hover:bg-emerald-400 disabled:cursor-not-allowed disabled:opacity-50"
         >
           {loading ? "Envoi..." : "Envoyer"}
