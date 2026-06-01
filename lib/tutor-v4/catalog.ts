@@ -12,6 +12,7 @@ import { buildKnowledgeCpFrancais } from "@/lib/tutor-v4/knowledge/francais/cp/b
 import { buildKnowledgeCe1Francais } from "@/lib/tutor-v4/knowledge/francais/ce1/buildKnowledgeCe1Francais";
 import { buildKnowledgeCe2Francais } from "@/lib/tutor-v4/knowledge/francais/ce2/buildKnowledgeCe2Francais";
 import { buildKnowledgeCm1Francais } from "@/lib/tutor-v4/knowledge/francais/cm1/buildKnowledgeCm1Francais";
+import { buildKnowledgeCm2Francais } from "@/lib/tutor-v4/knowledge/francais/cm2/buildKnowledgeCm2Francais";
 
 // =========================
 // TYPES
@@ -43,6 +44,7 @@ function getKnowledge(classe: Classe, matiere: Matiere = "maths") {
       case "ce1": return buildKnowledgeCe1Francais();
       case "ce2": return buildKnowledgeCe2Francais();
       case "cm1": return buildKnowledgeCm1Francais();
+      case "cm2": return buildKnowledgeCm2Francais();
       default:    return buildKnowledgeCe1Francais(); // fallback
     }
   }

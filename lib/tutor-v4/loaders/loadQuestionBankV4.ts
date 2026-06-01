@@ -12,6 +12,7 @@ import { francaisCpQuestionBank } from "@/lib/tutor-v4/questionBank/cp/francais"
 import { francaisCe1QuestionBank } from "@/lib/tutor-v4/questionBank/ce1/francais";
 import { francaisCe2QuestionBank } from "@/lib/tutor-v4/questionBank/ce2/francais";
 import { francaisCm1QuestionBank } from "@/lib/tutor-v4/questionBank/cm1/francais";
+import { francaisCm2QuestionBank } from "@/lib/tutor-v4/questionBank/cm2/francais";
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 
 export async function loadQuestionBankV4(
@@ -63,6 +64,7 @@ export async function loadQuestionBankV4(
   if (classe === "ce1" && matiere === "francais") return francaisCe1QuestionBank;
   if (classe === "ce2" && matiere === "francais") return francaisCe2QuestionBank;
   if (classe === "cm1" && matiere === "francais") return francaisCm1QuestionBank;
+  if (classe === "cm2" && matiere === "francais") return francaisCm2QuestionBank;
 
   throw new Error(`QuestionBank V4 introuvable pour ${classe}/${matiere}`);
 }

@@ -13,6 +13,7 @@ import { loadKnowledgeCpFrancais } from "@/lib/tutor-v4/knowledge/loaders/loadKn
 import { loadKnowledgeCe1Francais } from "@/lib/tutor-v4/knowledge/loaders/loadKnowledgeCe1Francais";
 import { loadKnowledgeCe2Francais } from "@/lib/tutor-v4/knowledge/loaders/loadKnowledgeCe2Francais";
 import { loadKnowledgeCm1Francais } from "@/lib/tutor-v4/knowledge/loaders/loadKnowledgeCm1Francais";
+import { loadKnowledgeCm2Francais } from "@/lib/tutor-v4/knowledge/loaders/loadKnowledgeCm2Francais";
 
 import type { KnowledgePack } from "@/lib/tutor-v4/types";
 
@@ -62,6 +63,7 @@ export async function loadKnowledgeV4(
   if (classe === "ce1" && matiere === "francais") return loadKnowledgeCe1Francais() as KnowledgePack;
   if (classe === "ce2" && matiere === "francais") return loadKnowledgeCe2Francais() as KnowledgePack;
   if (classe === "cm1" && matiere === "francais") return loadKnowledgeCm1Francais() as KnowledgePack;
+  if (classe === "cm2" && matiere === "francais") return loadKnowledgeCm2Francais() as KnowledgePack;
 
   throw new Error(`Knowledge V4 introuvable pour ${classe}/${matiere}`);
 }

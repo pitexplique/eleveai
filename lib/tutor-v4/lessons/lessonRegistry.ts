@@ -4,6 +4,7 @@ import { getFrancaisCpQuestionBank } from "@/lib/tutor-v4/questionBank/cp/franca
 import { getFrancaisCe1QuestionBank } from "@/lib/tutor-v4/questionBank/ce1/francais";
 import { getFrancaisCe2QuestionBank } from "@/lib/tutor-v4/questionBank/ce2/francais";
 import { getFrancaisCm1QuestionBank } from "@/lib/tutor-v4/questionBank/cm1/francais";
+import { getFrancaisCm2QuestionBank } from "@/lib/tutor-v4/questionBank/cm2/francais";
 import { getMathCpQuestionBank } from "@/lib/tutor-v4/questionBank/cp/maths";
 import { getMathCe1QuestionBank } from "@/lib/tutor-v4/questionBank/ce1/maths";
 import { getMathCe2QuestionBank } from "@/lib/tutor-v4/questionBank/ce2/maths";
@@ -37,6 +38,7 @@ export function getLessonBank(args: {
       case "ce1": return getFrancaisCe1QuestionBank(bankArgs);
       case "ce2": return getFrancaisCe2QuestionBank(bankArgs);
       case "cm1": return getFrancaisCm1QuestionBank(bankArgs);
+      case "cm2": return getFrancaisCm2QuestionBank(bankArgs);
       default:    return [];
     }
   }
