@@ -255,6 +255,8 @@ export default function ParcoursClient() {
     }
 
     const currentContext = chatQuestionContext;
+    const currentQuestionIndex =
+      questions.findIndex((question) => question === currentContext) + 1;
 
     setChatMessages((prev) => [...prev, { role: "student", text: trimmed }]);
     setChatQuestion("");
@@ -268,7 +270,9 @@ export default function ParcoursClient() {
           codeEtablissement,
           codeUtilisateur,
           classe,
+          notionId: currentContext.notionId,
           notionLabel: currentContext.notionLabel,
+          questionIndex: currentQuestionIndex > 0 ? currentQuestionIndex : null,
           questionText: currentContext.question.text,
           studentAnswer: answers[currentContext.notionId] ?? "",
           expectedAnswer: currentContext.question.expected?.join(" ou ") ?? "",

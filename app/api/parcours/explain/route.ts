@@ -6,13 +6,17 @@ type ExplainBody = {
   codeEtablissement?: string;
   codeUtilisateur?: string;
   classe?: string;
+  notionId?: string;
   notionLabel?: string;
+  questionIndex?: number;
   questionText?: string;
   studentAnswer?: string;
   expectedAnswer?: string;
   explanation?: string;
   studentQuestion?: string;
 };
+
+const OPENAI_MODEL = "gpt-4.1-mini";
 
 function clean(value: unknown, maxLength: number) {
   return typeof value === "string" ? value.trim().slice(0, maxLength) : "";
@@ -40,7 +44,14 @@ export async function POST(req: Request) {
     const codeEtablissement = clean(body.codeEtablissement, 80);
     const codeUtilisateur = clean(body.codeUtilisateur, 80);
     const classe = clean(body.classe, 30);
+    const notionId = clean(body.notionId, 120);
     const notionLabel = clean(body.notionLabel, 120);
+    const questionIndex =
+      typeof body.questionIndex === "number" &&
+      Number.isInteger(body.questionIndex) &&
+      body.questionIndex > 0
+        ? body.questionIndex
+        : null;
     const questionText = clean(body.questionText, 1200);
     const studentAnswer = clean(body.studentAnswer, 300) || "Aucune reponse";
     const expectedAnswer = clean(body.expectedAnswer, 300) || "Non disponible";
@@ -85,7 +96,7 @@ export async function POST(req: Request) {
     }
 
     const completion = await openai.chat.completions.create({
-      model: "gpt-4.1-mini",
+      model: OPENAI_MODEL,
       temperature: 0.2,
       max_tokens: 220,
       messages: [
@@ -123,6 +134,9 @@ export async function POST(req: Request) {
     });
 
     const answer = completion.choices[0]?.message?.content?.trim();
+    const inputTokens = completion.usage?.prompt_tokens ?? null;
+    const outputTokens = completion.usage?.completion_tokens ?? null;
+    const totalTokens = completion.usage?.total_tokens ?? null;
 
     if (!answer) {
       return NextResponse.json(
@@ -131,7 +145,44 @@ export async function POST(req: Request) {
       );
     }
 
-    return NextResponse.json({ answer });
+    const { error: logError } = await supabaseAdmin
+      .from("questions_ia_parcours")
+      .insert({
+        acces_id: eleve.id,
+        code_etablissement: codeEtablissement,
+        code_utilisateur: codeUtilisateur,
+        nom: eleve.nom ?? null,
+        type_utilisateur: eleve.type_utilisateur,
+        source: "parcours_correction_chat",
+        matiere: "maths",
+        classe: classe || null,
+        notion_id: notionId || null,
+        notion_label: notionLabel || null,
+        question_index: questionIndex,
+        question_text: questionText,
+        student_answer: studentAnswer,
+        expected_answer: expectedAnswer,
+        explanation: explanation || null,
+        student_question: studentQuestion,
+        coach_answer: answer,
+        model: OPENAI_MODEL,
+        input_tokens: inputTokens,
+        output_tokens: outputTokens,
+        total_tokens: totalTokens,
+      });
+
+    if (logError) {
+      console.error("Erreur log questions_ia_parcours :", logError);
+    }
+
+    return NextResponse.json({
+      answer,
+      usage: {
+        inputTokens,
+        outputTokens,
+        totalTokens,
+      },
+    });
   } catch (error) {
     console.error("Erreur /api/parcours/explain :", error);
     return NextResponse.json(
