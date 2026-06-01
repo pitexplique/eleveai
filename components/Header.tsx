@@ -105,7 +105,10 @@ export default function Header() {
             Accueil
           </Link>
 
-          <div className="relative">
+          <div
+            className="relative flex items-center"
+            onMouseLeave={() => setCoachOpen(false)}
+          >
             <button
               type="button"
               onClick={() => setCoachOpen((value) => !value)}
