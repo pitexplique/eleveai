@@ -107,21 +107,30 @@ export default function Header() {
 
           <div
             className="relative flex items-center"
+            onMouseEnter={() => setCoachOpen(true)}
             onMouseLeave={() => setCoachOpen(false)}
           >
-            <button
-              type="button"
-              onClick={() => setCoachOpen((value) => !value)}
-              onBlur={() => setTimeout(() => setCoachOpen(false), 150)}
+            <Link
+              href="/coach-ia/maths"
+              onClick={() => setCoachOpen(false)}
               className={linkClass(isActive(pathname, "/coach-ia"))}
             >
               <Brain className="h-4 w-4 text-orange-300" />
-              Coach
-              <span className="ml-0.5 text-xs opacity-60">▾</span>
+              Coach IA
+            </Link>
+
+            <button
+              type="button"
+              onClick={() => setCoachOpen((value) => !value)}
+              onMouseEnter={() => setCoachOpen(true)}
+              aria-label="Choisir la matiere du coach IA"
+              className="ml-1 inline-flex h-9 w-9 items-center justify-center rounded-full text-sm font-black text-white/90 transition hover:bg-white/15 hover:text-white"
+            >
+              v
             </button>
 
             {coachOpen && (
-              <div className="absolute left-0 top-full z-50 mt-1 w-44 rounded-xl border border-white/10 bg-[#041B33] shadow-xl">
+              <div className="absolute left-0 top-full z-[80] w-52 rounded-xl border border-white/10 bg-[#041B33] shadow-xl">
                 <Link
                   href="/coach-ia/maths"
                   onClick={() => setCoachOpen(false)}
