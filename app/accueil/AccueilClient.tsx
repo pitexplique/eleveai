@@ -1,8 +1,9 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { FormEvent, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useEleve } from "@/context/EleveContext";
 
 // ─── Data ────────────────────────────────────────────────────────────────────
 
@@ -169,7 +170,17 @@ const cards = [
 
 export default function AccueilPage() {
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const { eleve } = useEleve();
   const [isPlaying, setIsPlaying] = useState(false);
+  const [chatQuestion, setChatQuestion] = useState("");
+  const [chatAnswer, setChatAnswer] = useState(
+    "Bonjour, je suis le coach EleveAI. Pose-moi une question courte sur tes revisions."
+  );
+  const [chatLoading, setChatLoading] = useState(false);
+
+  const codeEtablissement = eleve?.code_etablissement?.trim() ?? "";
+  const codeUtilisateur = eleve?.code_eleve?.trim() ?? "";
+  const canAskAccueilQuestion = Boolean(codeEtablissement && codeUtilisateur);
 
   async function toggleAudio() {
     const audio = audioRef.current;
@@ -186,6 +197,46 @@ export default function AccueilPage() {
       setIsPlaying(true);
     } catch {
       setIsPlaying(false);
+    }
+  }
+
+  async function sendAccueilQuestion(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    const trimmed = chatQuestion.trim();
+    if (!trimmed || !canAskAccueilQuestion) return;
+
+    setChatLoading(true);
+    setChatAnswer("Je reflechis...");
+
+    try {
+      const response = await fetch("/api/accueil/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          codeEtablissement,
+          codeUtilisateur,
+          studentQuestion: trimmed,
+        }),
+      });
+
+      const data = (await response.json().catch(() => ({}))) as {
+        answer?: string;
+        error?: string;
+      };
+
+      if (!response.ok || !data.answer) {
+        throw new Error(data.error ?? "Reponse indisponible.");
+      }
+
+      setChatAnswer(data.answer);
+      setChatQuestion("");
+    } catch {
+      setChatAnswer(
+        "Je n'arrive pas a repondre pour le moment. Essaie depuis Parcours apres une correction."
+      );
+    } finally {
+      setChatLoading(false);
     }
   }
 
@@ -467,6 +518,85 @@ export default function AccueilPage() {
         </div>
       </section>
 
+      <AccueilCoachBox
+        canAsk={canAskAccueilQuestion}
+        question={chatQuestion}
+        answer={chatAnswer}
+        loading={chatLoading}
+        onQuestionChange={setChatQuestion}
+        onSend={sendAccueilQuestion}
+      />
+
     </main>
+  );
+}
+
+function AccueilCoachBox({
+  canAsk,
+  question,
+  answer,
+  loading,
+  onQuestionChange,
+  onSend,
+}: {
+  canAsk: boolean;
+  question: string;
+  answer: string;
+  loading: boolean;
+  onQuestionChange: (value: string) => void;
+  onSend: (event: FormEvent<HTMLFormElement>) => void;
+}) {
+  return (
+    <aside className="fixed bottom-4 right-4 z-50 flex h-[300px] w-[150px] flex-col overflow-hidden rounded-3xl border border-cyan-200 bg-white text-slate-950 shadow-2xl sm:h-[600px] sm:w-[300px]">
+      <div className="bg-gradient-to-br from-cyan-500 via-emerald-500 to-orange-400 px-3 py-3 text-white sm:px-5 sm:py-5">
+        <div className="text-xs font-black leading-4 sm:text-lg sm:leading-6">
+          Coach EleveAI
+        </div>
+        <div className="mt-1 hidden text-xs font-bold text-white/85 sm:block">
+          Dialoguer pour comprendre
+        </div>
+      </div>
+
+      <div className="min-h-0 flex-1 overflow-y-auto bg-gradient-to-b from-cyan-50 via-white to-orange-50 p-3 sm:p-4">
+        {canAsk ? (
+          <div className="rounded-2xl bg-white px-3 py-2 text-[11px] font-bold leading-5 text-slate-800 shadow-sm ring-1 ring-cyan-100 sm:text-sm sm:leading-6">
+            {answer}
+          </div>
+        ) : (
+          <div className="flex h-full items-center text-center">
+            <p className="text-xs font-black leading-5 text-slate-800 sm:text-base sm:leading-7">
+              Posez une question : connectez-vous pour dialoguer avec le coach.
+            </p>
+          </div>
+        )}
+      </div>
+
+      {canAsk ? (
+        <form onSubmit={onSend} className="border-t border-cyan-100 bg-white p-2 sm:p-3">
+          <textarea
+            value={question}
+            onChange={(event) => onQuestionChange(event.target.value)}
+            placeholder="Ta question..."
+            rows={2}
+            disabled={loading}
+            className="h-14 w-full resize-none rounded-2xl border border-slate-300 px-2 py-2 text-[11px] font-semibold outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100 disabled:bg-slate-100 sm:h-24 sm:px-3 sm:text-sm"
+          />
+          <button
+            type="submit"
+            disabled={!question.trim() || loading}
+            className="mt-2 w-full rounded-2xl bg-gradient-to-r from-cyan-500 to-emerald-500 px-3 py-2 text-[11px] font-black text-white shadow-sm hover:from-cyan-400 hover:to-emerald-400 disabled:cursor-not-allowed disabled:opacity-50 sm:px-4 sm:py-3 sm:text-sm"
+          >
+            {loading ? "Envoi..." : "Envoyer"}
+          </button>
+        </form>
+      ) : (
+        <Link
+          href="/auth/signin-eleve"
+          className="m-2 rounded-2xl bg-gradient-to-r from-cyan-500 to-emerald-500 px-3 py-2 text-center text-[11px] font-black text-white shadow-sm hover:from-cyan-400 hover:to-emerald-400 sm:m-4 sm:px-4 sm:py-3 sm:text-sm"
+        >
+          Connexion
+        </Link>
+      )}
+    </aside>
   );
 }
