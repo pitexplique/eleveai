@@ -951,18 +951,23 @@ function CorrectionChatBox({
   if (!open) {
     if (!canAsk) {
       return (
-        <aside className="fixed bottom-4 right-4 z-50 flex h-[300px] w-[150px] flex-col overflow-hidden rounded-3xl border border-amber-200 bg-white shadow-2xl">
-          <div className="bg-slate-950 px-3 py-3 text-white">
-            <div className="text-xs font-black leading-4">Question au coach</div>
+        <aside className="fixed bottom-4 right-4 z-50 flex h-[300px] w-[150px] flex-col overflow-hidden rounded-3xl border border-cyan-200 bg-white shadow-2xl sm:h-[600px] sm:w-[300px]">
+          <div className="bg-gradient-to-br from-cyan-500 via-emerald-500 to-orange-400 px-3 py-3 text-white sm:px-5 sm:py-5">
+            <div className="text-xs font-black leading-4 sm:text-lg sm:leading-6">
+              Question au coach
+            </div>
+            <div className="mt-1 hidden text-xs font-bold text-white/85 sm:block">
+              EleveAI Reunion
+            </div>
           </div>
-          <div className="flex flex-1 items-center bg-amber-50 px-3 text-center">
-            <p className="text-xs font-black leading-5 text-amber-900">
-              Posez une question : connectez-vous pour dialoguer.
+          <div className="flex flex-1 items-center bg-gradient-to-b from-cyan-50 via-white to-orange-50 px-3 text-center sm:px-6">
+            <p className="text-xs font-black leading-5 text-slate-800 sm:text-base sm:leading-7">
+              Posez une question : connectez-vous pour dialoguer avec le coach.
             </p>
           </div>
           <Link
             href="/auth/signin-eleve"
-            className="m-2 rounded-2xl bg-amber-500 px-3 py-2 text-center text-[11px] font-black text-white shadow-sm hover:bg-amber-400"
+            className="m-2 rounded-2xl bg-gradient-to-r from-cyan-500 to-emerald-500 px-3 py-2 text-center text-[11px] font-black text-white shadow-sm hover:from-cyan-400 hover:to-emerald-400 sm:m-4 sm:px-4 sm:py-3 sm:text-sm"
           >
             Connexion
           </Link>
@@ -983,7 +988,7 @@ function CorrectionChatBox({
 
   return (
     <aside className="fixed bottom-4 right-4 z-50 flex max-h-[78vh] w-[calc(100vw-2rem)] max-w-sm flex-col overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-2xl">
-      <div className="flex items-start justify-between gap-3 border-b border-slate-200 bg-slate-950 px-4 py-3 text-white">
+      <div className="flex items-start justify-between gap-3 border-b border-cyan-100 bg-gradient-to-r from-cyan-500 via-emerald-500 to-orange-400 px-4 py-3 text-white">
         <div>
           <div className="text-sm font-black">Question sur la correction</div>
           <div className="mt-1 text-xs text-slate-300">
@@ -993,7 +998,7 @@ function CorrectionChatBox({
         <button
           type="button"
           onClick={onClose}
-          className="rounded-full bg-white/10 px-3 py-1 text-xs font-black hover:bg-white/20"
+          className="rounded-full bg-white/20 px-3 py-1 text-xs font-black hover:bg-white/30"
         >
           Fermer
         </button>
