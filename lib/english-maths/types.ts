@@ -1,14 +1,7 @@
 // lib/english-maths/types.ts
 
-export type EnglishMathsNiveau =
-  | "cm1"
-  | "cm2"
-  | "6e"
-  | "5e"
-  | "4e"
-  | "3e";
-
 export type EnglishMathsLanguageLevel = "A1" | "A2" | "B1" | "B2";
+export type EnglishMathsNiveau = EnglishMathsLanguageLevel;
 
 export type EnglishMathsCategory =
   | "numbers"

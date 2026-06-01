@@ -9,9 +9,7 @@ import {
   englishMathsWords,
   getEnglishMathsDaysByNiveau,
   getEnglishMathsWordsByIds,
-  getTodayEnglishMathsDay,
   type EnglishMathsNiveau,
-  type EnglishMathsLanguageLevel,
 } from "@/lib/english-maths";
 
 import { generateEnglishMathsQuestions } from "@/lib/english-maths/generateQuestions";
@@ -27,14 +25,8 @@ type EleveSession = {
   type_utilisateur?: string | null;
 };
 
-const niveaux: EnglishMathsNiveau[] = ["cm1", "cm2", "6e", "5e", "4e", "3e"];
-const languageLevels: EnglishMathsLanguageLevel[] = ["A1", "A2", "B1", "B2"];
-
-function niveauLabel(niveau: EnglishMathsNiveau) {
-  if (niveau === "cm1") return "CM1";
-  if (niveau === "cm2") return "CM2";
-  return niveau;
-}
+const niveaux: EnglishMathsNiveau[] = ["A1", "A2", "B1", "B2"];
+const currentUnlockedDayIndex = 1;
 
 function playAudio(src?: string) {
   if (!src) return;
@@ -176,7 +168,7 @@ export default function EnglishMathsClient() {
   const eleveContext = useEleve() as unknown as { eleve?: EleveSession | null };
   const eleve = eleveContext.eleve ?? null;
 
-  const [niveau, setNiveau] = useState<EnglishMathsNiveau>("6e");
+  const [niveau, setNiveau] = useState<EnglishMathsNiveau>("A1");
   const [selectedWeek, setSelectedWeek] = useState<string>("verbs-A1");
   const [mode, setMode] = useState<"words" | "quiz" | "result">("words");
   const [selectedDayId, setSelectedDayId] = useState<string | null>(null);
@@ -202,14 +194,9 @@ export default function EnglishMathsClient() {
     [activeWeek, allDaysForNiveau]
   );
 
-  const todayDay = useMemo(() => getTodayEnglishMathsDay(niveau), [niveau]);
-
-  const currentUnlockedIndex =
-    todayDay?.week === activeWeek ? todayDay.dayIndex : weekDays.length;
-
   const visibleWeekDays = useMemo(() => {
-    return weekDays.filter((item) => item.dayIndex <= currentUnlockedIndex);
-  }, [weekDays, currentUnlockedIndex]);
+    return weekDays.filter((item) => item.dayIndex <= currentUnlockedDayIndex);
+  }, [weekDays]);
 
   const day = useMemo(() => {
     if (selectedDayId) {
@@ -220,12 +207,8 @@ export default function EnglishMathsClient() {
       );
     }
 
-    if (todayDay?.week === activeWeek) {
-      return todayDay;
-    }
-
     return visibleWeekDays[visibleWeekDays.length - 1] ?? weekDays[0];
-  }, [activeWeek, selectedDayId, todayDay, visibleWeekDays, weekDays]);
+  }, [selectedDayId, visibleWeekDays, weekDays]);
 
   const wordsOfDay = useMemo(() => {
     if (!day) return [];
@@ -254,6 +237,7 @@ export default function EnglishMathsClient() {
 
   function selectNiveau(nextNiveau: EnglishMathsNiveau) {
     setNiveau(nextNiveau);
+    setSelectedWeek(`verbs-${nextNiveau}`);
     setSelectedDayId(null);
     setMode("words");
     setAnswers({});
@@ -266,10 +250,6 @@ export default function EnglishMathsClient() {
     setMode("words");
     setAnswers({});
     setSaveMessage(null);
-  }
-
-  function selectLanguageLevel(level: EnglishMathsLanguageLevel) {
-    selectWeek(`verbs-${level}`);
   }
 
   function goToQuiz() {
@@ -372,10 +352,10 @@ export default function EnglishMathsClient() {
           <p className="mt-3 max-w-2xl text-base font-semibold text-white/85">
             Le challenge de la semaine : des mots, de l’audio et un mini-défi chaque jour.
           </p>
-          <div className="mt-5 grid gap-4 lg:grid-cols-[1fr_auto] lg:items-end">
+          <div className="mt-5">
             <div>
               <div className="mb-2 text-xs font-black uppercase tracking-[0.2em] text-cyan-100">
-                Niveau
+                Niveau de langue
               </div>
 
               <div className="flex flex-wrap gap-2">
@@ -394,35 +374,7 @@ export default function EnglishMathsClient() {
                           : "bg-white/10 text-white ring-white/20 hover:bg-white/20",
                       ].join(" ")}
                     >
-                      {niveauLabel(item)}
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
-
-            <div>
-              <div className="mb-2 text-xs font-black uppercase tracking-[0.2em] text-cyan-100">
-                Niveau de langue
-              </div>
-
-              <div className="flex flex-wrap gap-2">
-                {languageLevels.map((level) => {
-                  const active = activeWeek === `verbs-${level}`;
-
-                  return (
-                    <button
-                      key={level}
-                      type="button"
-                      onClick={() => selectLanguageLevel(level)}
-                      className={[
-                        "rounded-full px-4 py-2 text-sm font-black ring-1 transition",
-                        active
-                          ? "bg-emerald-300 text-slate-950 ring-emerald-200"
-                        : "bg-white/10 text-white ring-white/20 hover:bg-white/20",
-                      ].join(" ")}
-                    >
-                      {level}
+                      {item}
                     </button>
                   );
                 })}
@@ -449,18 +401,22 @@ export default function EnglishMathsClient() {
           </div>
 
           <div className="grid gap-2 sm:grid-cols-3 lg:grid-cols-6">
-            {visibleWeekDays.map((item) => {
+            {weekDays.map((item) => {
               const active = day?.id === item.id;
+              const unlocked = item.dayIndex <= currentUnlockedDayIndex;
 
               return (
                 <button
                   key={item.id}
                   type="button"
                   onClick={() => selectDay(item.id)}
+                  disabled={!unlocked}
                   className={[
                     "group min-h-[92px] rounded-2xl border px-3 py-3 text-left shadow-lg transition",
                     active
                       ? "border-white bg-white text-slate-950"
+                      : !unlocked
+                        ? "cursor-not-allowed border-white/10 bg-white/5 text-white/45"
                       : "border-white/15 bg-white/12 text-white hover:bg-white/20",
                   ].join(" ")}
                 >
@@ -469,6 +425,8 @@ export default function EnglishMathsClient() {
                       "mb-2 inline-flex rounded-full px-2.5 py-1 text-xs font-black",
                       active
                         ? "bg-emerald-500 text-slate-950"
+                        : !unlocked
+                          ? "bg-white/10 text-white/45"
                         : "bg-white/15 text-white",
                     ].join(" ")}
                   >
@@ -482,10 +440,14 @@ export default function EnglishMathsClient() {
                   <div
                     className={[
                       "mt-1 line-clamp-1 text-[11px] font-bold",
-                      active ? "text-slate-600" : "text-white/65",
+                      active
+                        ? "text-slate-600"
+                        : unlocked
+                          ? "text-white/65"
+                          : "text-white/40",
                     ].join(" ")}
                   >
-                    {item.theme}
+                    {unlocked ? item.theme : "Bloque"}
                   </div>
                 </button>
               );
@@ -494,7 +456,7 @@ export default function EnglishMathsClient() {
 
           {visibleWeekDays.length < weekDays.length ? (
             <div className="mt-3 rounded-2xl border border-white/15 bg-white/10 px-4 py-3 text-xs font-bold text-white/75">
-              Les prochaines étapes seront affichées plus tard.
+              Mardi, mercredi, jeudi et les jours suivants sont bloques pour l'instant.
             </div>
           ) : null}
         </section>

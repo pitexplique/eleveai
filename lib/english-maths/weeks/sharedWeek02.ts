@@ -41,16 +41,15 @@ const languageLevelWordIds: Record<EnglishMathsLanguageLevel, string[]> = {
 
 const dayLabels = ["J-5", "J-4", "J-3", "J-2", "J-1", "Jour J", "Bonus"];
 
-function makeVerbWeekForLanguageLevel(
-  niveau: EnglishMathsNiveau,
+export function makeVerbWeekForLanguageLevel(
   languageLevel: EnglishMathsLanguageLevel
 ): EnglishMathsDay[] {
   const wordIds = languageLevelWordIds[languageLevel];
   const week = `verbs-${languageLevel}`;
 
   return dayLabels.map((dayLabel, index) => ({
-    id: `${niveau}_${week}_day${index + 1}`,
-    niveau,
+    id: `${languageLevel}_${week}_day${index + 1}`,
+    niveau: languageLevel,
     languageLevel,
     week,
     dayIndex: index + 1,
@@ -70,10 +69,5 @@ function makeVerbWeekForLanguageLevel(
 export function makeEnglishMathsWeek02(
   niveau: EnglishMathsNiveau
 ): EnglishMathsDay[] {
-  return [
-    ...makeVerbWeekForLanguageLevel(niveau, "A1"),
-    ...makeVerbWeekForLanguageLevel(niveau, "A2"),
-    ...makeVerbWeekForLanguageLevel(niveau, "B1"),
-    ...makeVerbWeekForLanguageLevel(niveau, "B2"),
-  ];
+  return makeVerbWeekForLanguageLevel(niveau);
 }
