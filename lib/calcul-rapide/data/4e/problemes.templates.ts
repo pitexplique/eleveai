@@ -332,4 +332,73 @@ export const problemesTemplates4e: CalculRapideItem[] = [
     explanationTemplate: "L'hypotenuse vaut 5 x {{k}} = {{answer}}.",
     tags: ["pythagore", "probleme"],
   },
+  {
+    id: "4e_template_equation_budget_001",
+    niveau: "4e",
+    type: "probleme",
+    mode: "template",
+    notionId: "equations",
+    microId: "equation_simple",
+    difficulty: 3,
+    durationSec: 60,
+    media: {
+      text: "Apres une depense de {{a}} euros, il reste {{b}} euros. Combien y avait-il au depart ?",
+    },
+    template:
+      "Apres une depense de {{a}} euros, il reste {{b}} euros. Combien y avait-il au depart ?",
+    variables: {
+      a: [12, 18, 25, 40],
+      b: [20, 35, 50, 80],
+    },
+    answerRule: "a + b",
+    hint: "Montant de depart = depense + reste.",
+    explanationTemplate: "{{a}} + {{b}} = {{answer}} euros.",
+    tags: ["equation", "budget", "quotidien"],
+  },
+  {
+    id: "4e_template_litteral_forfait_001",
+    niveau: "4e",
+    type: "probleme",
+    mode: "template",
+    notionId: "expressions_litterales",
+    microId: "litteral_substitution",
+    difficulty: 3,
+    durationSec: 60,
+    media: {
+      text: "Un forfait coute {{f}} euros puis {{p}} euros par mois. Pour {{m}} mois, total ?",
+    },
+    template:
+      "Un forfait coute {{f}} euros puis {{p}} euros par mois. Pour {{m}} mois, total ?",
+    variables: {
+      f: [5, 10, 15],
+      p: [8, 12, 20],
+      m: [2, 3, 6],
+    },
+    answerRule: "f + p * m",
+    hint: "Total = forfait + prix par mois x nombre de mois.",
+    explanationTemplate: "{{f}} + {{p}} x {{m}} = {{answer}} euros.",
+    tags: ["calcul_litteral", "forfait", "quotidien"],
+  },
+  {
+    id: "4e_template_pythagore_trajet_001",
+    niveau: "4e",
+    type: "probleme",
+    mode: "template",
+    notionId: "pythagore",
+    microId: "hypotenuse",
+    difficulty: 3,
+    durationSec: 60,
+    media: {
+      text: "Deux rues perpendiculaires mesurent {{k}} x 30 m et {{k}} x 40 m. Le raccourci en diagonale mesure ?",
+    },
+    template:
+      "Deux rues perpendiculaires mesurent {{k}} x 30 m et {{k}} x 40 m. Le raccourci en diagonale mesure ?",
+    variables: {
+      k: [1, 2, 3, 4],
+    },
+    answerRule: "k * 50",
+    hint: "Le triangle 30-40-50 est un triangle rectangle agrandi.",
+    explanationTemplate: "Le raccourci vaut {{k}} x 50 = {{answer}} m.",
+    tags: ["pythagore", "trajet", "quotidien"],
+  },
 ];

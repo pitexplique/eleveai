@@ -200,4 +200,49 @@ export const problemesTemplates6e: CalculRapideItem[] = [
     explanationTemplate: "{{a}} + {{b}} = {{answer}} euros.",
     tags: ["decimaux", "monnaie"],
   },
+  {
+    id: "6e_template_decimal_monnaie_rendu_001",
+    niveau: "6e",
+    type: "probleme",
+    mode: "template",
+    notionId: "nombres_decimaux",
+    microId: "soustraction_decimaux",
+    difficulty: 2,
+    durationSec: 60,
+    media: {
+      text: "Tu paies {{prix}} euros avec {{billet}} euros. Combien doit-on te rendre ?",
+    },
+    template:
+      "Tu paies {{prix}} euros avec {{billet}} euros. Combien doit-on te rendre ?",
+    variables: {
+      prix: [2.5, 3.75, 4.2, 6.5, 8.25],
+      billet: [10],
+    },
+    answerRule: "billet - prix",
+    hint: "Soustrais le prix au montant donne.",
+    explanationTemplate: "{{billet}} - {{prix}} = {{answer}} euros.",
+    tags: ["decimaux", "monnaie", "quotidien"],
+  },
+  {
+    id: "6e_template_fraction_partage_pique_nique_001",
+    niveau: "6e",
+    type: "probleme",
+    mode: "template",
+    notionId: "fractions",
+    microId: "fraction_quantite",
+    difficulty: 2,
+    durationSec: 60,
+    media: {
+      text: "Pour un pique-nique, il y a {{n}} samoussas. On en mange la moitie. Combien sont manges ?",
+    },
+    template:
+      "Pour un pique-nique, il y a {{n}} samoussas. On en mange la moitie. Combien sont manges ?",
+    variables: {
+      n: [12, 18, 24, 36, 48],
+    },
+    answerRule: "n / 2",
+    hint: "La moitie, c'est diviser par 2.",
+    explanationTemplate: "{{n}} / 2 = {{answer}} samoussas.",
+    tags: ["fraction", "reunion", "quotidien"],
+  },
 ];

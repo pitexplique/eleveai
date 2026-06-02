@@ -46,7 +46,7 @@ export const weekly4e: CalculRapideWeek[] = [
           "4e_template_litteral_reduire_001",
           "4e_template_equation_simple_001",
           "4e_probleme_litteral_abonnement_001",
-          "4e_template_litteral_abonnement_001",
+          "4e_template_litteral_forfait_001",
         ],
       },
 
@@ -100,7 +100,7 @@ export const weekly4e: CalculRapideWeek[] = [
           "4e_template_litteral_substitution_001",
           "4e_template_litteral_reduire_001",
           "4e_probleme_equation_simple_001",
-          "4e_template_litteral_abonnement_001",
+          "4e_template_equation_budget_001",
         ],
       },
 
@@ -166,7 +166,7 @@ export const weekly4e: CalculRapideWeek[] = [
           "4e_calcul_pythagore_hypotenuse_001",
           "4e_template_pythagore_hypotenuse_001",
           "4e_probleme_pythagore_echelle_001",
-          "4e_template_probleme_pythagore_echelle_001",
+          "4e_template_pythagore_trajet_001",
         ],
       },
       {

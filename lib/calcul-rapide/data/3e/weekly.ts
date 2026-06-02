@@ -24,7 +24,7 @@ export const weekly3e: CalculRapideWeek[] = [
           "3e_template_puissance_cube_001",
           "3e_calcul_puissance_signe_002",
           "3e_probleme_puissance_bacteries_001",
-          "3e_template_probleme_puissance_doublement_001",
+          "3e_template_probleme_puissance_partage_001",
         ],
       },
 
@@ -162,7 +162,7 @@ export const weekly3e: CalculRapideWeek[] = [
           "3e_calcul_fonction_affine_image_001",
           "3e_template_fonction_affine_image_001",
           "3e_probleme_fonction_tarif_001",
-          "3e_template_probleme_fonction_tarif_001",
+          "3e_template_probleme_fonction_forfait_001",
         ],
       },
       {
@@ -179,7 +179,7 @@ export const weekly3e: CalculRapideWeek[] = [
           "3e_calcul_equation_simple_001",
           "3e_template_equation_ax_b_001",
           "3e_probleme_fonction_tarif_001",
-          "3e_template_probleme_fonction_tarif_001",
+          "3e_template_probleme_equation_budget_001",
         ],
       },
       {
