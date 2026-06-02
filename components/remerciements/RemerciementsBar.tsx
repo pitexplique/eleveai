@@ -4,6 +4,7 @@ const elevesRemercies = [
   "Zelie",
   "Elena",
   "Emma",
+  "Éléna",
   "Adele",
   "Maëlle",
   "Arthur",
