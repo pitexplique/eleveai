@@ -1,15 +1,16 @@
 // components/remerciements/RemerciementsBar.tsx
 
 const elevesRemercies = [
+  "Zelie",
   "Elena",
   "Emma",
   "Adele",
-  "Maelle",
-  "Simon",
-  "Kaela",
+  "Maëlle",
   "Arthur",
+  "Ben",
+  "Enzo",
+  "Kaela",
   "Tamara",
-  "Zelie",
   "Gaëtan"
 ];
 

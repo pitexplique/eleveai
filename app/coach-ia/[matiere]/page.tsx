@@ -35,7 +35,7 @@ function getMatiereTitle(matiere: string, classe: Classe) {
     "4e": "4e",
     "3e": "3e",
     "terminale-spe": "Term Spe",
-    adulte: "Maths du quotidien",
+    adulte: "Calculs du quotidien",
   };
   const matiereLabel: Record<string, string> = {
     maths: "Maths",
