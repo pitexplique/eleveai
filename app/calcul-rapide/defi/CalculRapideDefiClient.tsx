@@ -54,6 +54,12 @@ import { calculsTemplatesTerminaleSpe } from "@/lib/calcul-rapide/data/terminale
 import { problemesFixedTerminaleSpe } from "@/lib/calcul-rapide/data/terminale-spe/problemes.fixed";
 import { problemesTemplatesTerminaleSpe } from "@/lib/calcul-rapide/data/terminale-spe/problemes.templates";
 
+import { weeklyAdulte } from "@/lib/calcul-rapide/data/adulte/weekly";
+import { calculsFixedAdulte } from "@/lib/calcul-rapide/data/adulte/calculs.fixed";
+import { calculsTemplatesAdulte } from "@/lib/calcul-rapide/data/adulte/calculs.templates";
+import { problemesFixedAdulte } from "@/lib/calcul-rapide/data/adulte/problemes.fixed";
+import { problemesTemplatesAdulte } from "@/lib/calcul-rapide/data/adulte/problemes.templates";
+
 type GeneratedCalculRapideItem = CalculRapideItem & {
   displayText: string;
   displayExplanation?: string;
@@ -227,6 +233,18 @@ function getDataByNiveau(niveau: NiveauCalculRapide) {
     };
   }
 
+  if (niveau === "adulte") {
+    return {
+      weeks: weeklyAdulte,
+      items: [
+        ...calculsFixedAdulte,
+        ...calculsTemplatesAdulte,
+        ...problemesFixedAdulte,
+        ...problemesTemplatesAdulte,
+      ],
+    };
+  }
+
   return {
     weeks: weekly6e,
     items: [
@@ -347,7 +365,8 @@ export default function CalculRapideDefiClient() {
     niveauParam === "6e" ||
     niveauParam === "4e" ||
     niveauParam === "3e" ||
-    niveauParam === "terminale-spe"
+    niveauParam === "terminale-spe" ||
+    niveauParam === "adulte"
       ? niveauParam
       : "6e";
 

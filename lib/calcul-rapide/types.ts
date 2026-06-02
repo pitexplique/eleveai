@@ -7,7 +7,8 @@ export type NiveauCalculRapide =
   | "5e"
   | "4e"
   | "3e"
-  | "terminale-spe";
+  | "terminale-spe"
+  | "adulte";
 
 export type CalculRapideItemType = "calcul" | "probleme" | "boss";
 export type CalculRapideMode = "fixed" | "template";
