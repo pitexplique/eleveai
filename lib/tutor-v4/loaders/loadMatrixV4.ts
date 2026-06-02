@@ -8,6 +8,7 @@ import { matrix5eMaths } from "@/lib/tutor-v4/matrix/matrix5eMaths";
 import { matrix4eMaths } from "@/lib/tutor-v4/matrix/matrix4eMaths";
 import { matrix3eMaths } from "@/lib/tutor-v4/matrix/matrix3eMaths";
 import { matrixTerminaleSpeMaths } from "@/lib/tutor-v4/matrix/matrixTerminaleSpeMaths";
+import { matrixAdulteMaths } from "@/lib/tutor-v4/matrix/matrixAdulteMaths";
 import { matrixCpFrancais } from "@/lib/tutor-v4/matrix/matrixCpFrancais";
 import { matrixCe1Francais } from "@/lib/tutor-v4/matrix/matrixCe1Francais";
 import { matrixCe2Francais } from "@/lib/tutor-v4/matrix/matrixCe2Francais";
@@ -62,6 +63,10 @@ export async function loadMatrixV4(
   }
     if (classe === "terminale-spe" && matiere === "maths") {
     return matrixTerminaleSpeMaths;
+  }
+
+  if (classe === "adulte" && matiere === "maths") {
+    return matrixAdulteMaths;
   }
 
   if (classe === "cp"  && matiere === "francais") return matrixCpFrancais;

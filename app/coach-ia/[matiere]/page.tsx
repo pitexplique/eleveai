@@ -12,7 +12,7 @@ import {
   type Matiere,
 } from "@/lib/tutor-v4/catalog";
 
-const CLASSES: Classe[] = ["cp", "ce1", "ce2", "cm1", "cm2", "6e", "5e", "4e", "3e", "terminale-spe"];
+const CLASSES: Classe[] = ["cp", "ce1", "ce2", "cm1", "cm2", "6e", "5e", "4e", "3e", "terminale-spe", "adulte"];
 const FRANCAIS_READY_CLASSES: Classe[] = ["cp", "ce1", "ce2", "cm1", "cm2", "6e", "5e", "4e", "3e"];
 
 function getClassesForMatiere(matiere: Matiere): Classe[] {
@@ -35,6 +35,7 @@ function getMatiereTitle(matiere: string, classe: Classe) {
     "4e": "4e",
     "3e": "3e",
     "terminale-spe": "Term Spe",
+    adulte: "Maths du quotidien",
   };
   const matiereLabel: Record<string, string> = {
     maths: "Maths",
@@ -59,6 +60,7 @@ function getClasseBadgeColor(item: Classe, active: boolean) {
     return "border-lime-500 bg-lime-500 text-white";
   if (["5e", "4e", "3e", "terminale-spe"].includes(item))
     return "border-sky-500 bg-sky-500 text-white";
+  if (item === "adulte") return "border-violet-500 bg-violet-500 text-white";
   return "border-violet-500 bg-violet-500 text-white";
 }
 

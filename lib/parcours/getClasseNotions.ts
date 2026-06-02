@@ -13,6 +13,7 @@ import { buildKnowledge5eMaths } from "@/lib/tutor-v4/knowledge/maths/5e/buildKn
 import { buildKnowledge4eMaths } from "@/lib/tutor-v4/knowledge/maths/4e/buildKnowledge4e";
 import { buildKnowledge3eMaths } from "@/lib/tutor-v4/knowledge/maths/3e/buildKnowledge3e";
 import { buildKnowledgeTerminaleSpeMaths} from "@/lib/tutor-v4/knowledge/maths/terminale-spe/buildKnowledgeTerminaleSpe";
+import { buildKnowledgeAdulteMaths } from "@/lib/tutor-v4/knowledge/maths/adulte/buildKnowledgeAdulte";
 
 export function getClasseNotions(
   classe: ParcoursClasse
@@ -54,6 +55,10 @@ export function getClasseNotions(
   }
     if (classe === "terminale-spe") {
     return buildKnowledgeTerminaleSpeMaths().notions;
+  }
+
+  if (classe === "adulte") {
+    return buildKnowledgeAdulteMaths().notions;
   }
 
   return [];

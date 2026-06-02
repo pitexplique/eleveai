@@ -15,7 +15,8 @@ export type ParcoursClasse =
   | "5e"
   | "4e"
   | "3e"
-  | "terminale-spe";
+  | "terminale-spe"
+  | "adulte";
 
 export type ParcoursStatus = "maitrise" | "a_revoir" | "fragile";
 

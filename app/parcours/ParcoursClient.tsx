@@ -36,7 +36,22 @@ const classes: ParcoursClasse[] = [
   "4e",
   "3e",
   "terminale-spe",
+  "adulte",
 ];
+
+const classeLabels: Record<ParcoursClasse, string> = {
+  cp: "CP",
+  ce1: "CE1",
+  ce2: "CE2",
+  cm1: "CM1",
+  cm2: "CM2",
+  "6e": "6e",
+  "5e": "5e",
+  "4e": "4e",
+  "3e": "3e",
+  "terminale-spe": "Terminale spé",
+  adulte: "Maths du quotidien",
+};
 
 const questionCountOptions = [
   {
@@ -462,7 +477,7 @@ export default function ParcoursClient() {
           </h1>
 
           <p className="mt-3 max-w-3xl text-base font-semibold leading-relaxed text-slate-700 md:text-lg">
-            Choisis ta classe, le nombre de questions et ton niveau.
+            Choisis ton parcours, le nombre de questions et ton niveau.
             EleveAI affiche ensuite une carte claire de tes forces :
             🟢 maîtrisé, 🟡 à revoir, 🔴 fragile.
           </p>
@@ -489,7 +504,7 @@ export default function ParcoursClient() {
 
           <div className="mt-6">
             <p className="mb-3 text-sm font-black uppercase tracking-wide text-slate-700">
-              1. Choisis ta classe
+              1. Choisis ton parcours
             </p>
 
             <div className="flex flex-wrap gap-3">
@@ -508,7 +523,7 @@ export default function ParcoursClient() {
                       : "bg-white text-slate-800 ring-1 ring-slate-200 hover:bg-emerald-50",
                   ].join(" ")}
                 >
-                  {c}
+                  {classeLabels[c]}
                 </button>
               ))}
             </div>

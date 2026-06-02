@@ -9,6 +9,7 @@ import { loadKnowledge5eMaths } from "@/lib/tutor-v4/knowledge/loaders/loadKnowl
 import { loadKnowledge4eMaths } from "@/lib/tutor-v4/knowledge/loaders/loadKnowledge4eMaths";
 import { loadKnowledge3eMaths } from "@/lib/tutor-v4/knowledge/loaders/loadKnowledge3eMaths";
 import { loadKnowledgeTerminaleSpeMaths} from "@/lib/tutor-v4/knowledge/loaders/loadKnowledgeTerminaleSpeMaths";
+import { loadKnowledgeAdulteMaths } from "@/lib/tutor-v4/knowledge/loaders/loadKnowledgeAdulteMaths";
 import { loadKnowledgeCpFrancais } from "@/lib/tutor-v4/knowledge/loaders/loadKnowledgeCpFrancais";
 import { loadKnowledgeCe1Francais } from "@/lib/tutor-v4/knowledge/loaders/loadKnowledgeCe1Francais";
 import { loadKnowledgeCe2Francais } from "@/lib/tutor-v4/knowledge/loaders/loadKnowledgeCe2Francais";
@@ -61,6 +62,10 @@ export async function loadKnowledgeV4(
   }
     if (classe === "terminale-spe" && matiere === "maths") {
     return loadKnowledgeTerminaleSpeMaths() as KnowledgePack;
+  }
+
+  if (classe === "adulte" && matiere === "maths") {
+    return loadKnowledgeAdulteMaths() as KnowledgePack;
   }
 
   if (classe === "cp"  && matiere === "francais") return loadKnowledgeCpFrancais()  as KnowledgePack;

@@ -348,7 +348,8 @@ export type SchoolLevel =
   | "5e"
   | "4e"
   | "3e"
-  | "terminale-spe";
+  | "terminale-spe"
+  | "adulte";
 export type SubjectCode = "maths" | "francais";
 
 export type TutorGeneratedQuestionV4 = {

@@ -8,6 +8,7 @@ import { buildKnowledge5eMaths } from "@/lib/tutor-v4/knowledge/maths/5e/buildKn
 import { buildKnowledge4eMaths } from "@/lib/tutor-v4/knowledge/maths/4e/buildKnowledge4e";
 import { buildKnowledge3eMaths } from "@/lib/tutor-v4/knowledge/maths/3e/buildKnowledge3e";
 import { buildKnowledgeTerminaleSpeMaths } from "@/lib/tutor-v4/knowledge/maths/terminale-spe/buildKnowledgeTerminaleSpe";
+import { buildKnowledgeAdulteMaths } from "@/lib/tutor-v4/knowledge/maths/adulte/buildKnowledgeAdulte";
 import { buildKnowledgeCpFrancais } from "@/lib/tutor-v4/knowledge/francais/cp/buildKnowledgeCpFrancais";
 import { buildKnowledgeCe1Francais } from "@/lib/tutor-v4/knowledge/francais/ce1/buildKnowledgeCe1Francais";
 import { buildKnowledgeCe2Francais } from "@/lib/tutor-v4/knowledge/francais/ce2/buildKnowledgeCe2Francais";
@@ -32,7 +33,8 @@ export type Classe =
   | "5e"
   | "4e"
   | "3e"
-  | "terminale-spe";
+  | "terminale-spe"
+  | "adulte";
 
 export type Matiere = "maths" | "francais";
 
@@ -79,6 +81,8 @@ function getKnowledge(classe: Classe, matiere: Matiere = "maths") {
       return buildKnowledge3eMaths();
     case "terminale-spe":
       return buildKnowledgeTerminaleSpeMaths();
+    case "adulte":
+      return buildKnowledgeAdulteMaths();
     default:
       return buildKnowledge6eMaths();
   }
