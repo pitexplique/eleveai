@@ -24,7 +24,7 @@ const niveauLabels: Record<NiveauCalculRapide, string> = {
   "4e": "4e",
   "3e": "3e",
   "terminale-spe": "Terminale spé",
-  adulte: "Maths du quotidien",
+  adulte: "Calculs du quotidien",
 };
 
 export default function CalculRapideClient() {
