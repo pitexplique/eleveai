@@ -12,6 +12,18 @@ import type {
   NiveauCalculRapide,
 } from "@/lib/calcul-rapide/types";
 
+import { weeklyCM1 } from "@/lib/calcul-rapide/data/cm1/weekly";
+import { calculsFixedCM1 } from "@/lib/calcul-rapide/data/cm1/calculs.fixed";
+import { calculsTemplatesCM1 } from "@/lib/calcul-rapide/data/cm1/calculs.templates";
+import { problemesFixedCM1 } from "@/lib/calcul-rapide/data/cm1/problemes.fixed";
+import { problemesTemplatesCM1 } from "@/lib/calcul-rapide/data/cm1/problemes.templates";
+
+import { weeklyCM2 } from "@/lib/calcul-rapide/data/cm2/weekly";
+import { calculsFixedCM2 } from "@/lib/calcul-rapide/data/cm2/calculs.fixed";
+import { calculsTemplatesCM2 } from "@/lib/calcul-rapide/data/cm2/calculs.templates";
+import { problemesFixedCM2 } from "@/lib/calcul-rapide/data/cm2/problemes.fixed";
+import { problemesTemplatesCM2 } from "@/lib/calcul-rapide/data/cm2/problemes.templates";
+
 import { weekly6e } from "@/lib/calcul-rapide/data/6e/weekly";
 import { calculsFixed6e } from "@/lib/calcul-rapide/data/6e/calculs.fixed";
 import { calculsTemplates6e } from "@/lib/calcul-rapide/data/6e/calculs.templates";
@@ -143,6 +155,30 @@ function generateItem(item: CalculRapideItem): GeneratedCalculRapideItem {
 }
 
 function getDataByNiveau(niveau: NiveauCalculRapide) {
+  if (niveau === "CM1") {
+    return {
+      weeks: weeklyCM1,
+      items: [
+        ...calculsFixedCM1,
+        ...calculsTemplatesCM1,
+        ...problemesFixedCM1,
+        ...problemesTemplatesCM1,
+      ],
+    };
+  }
+
+  if (niveau === "CM2") {
+    return {
+      weeks: weeklyCM2,
+      items: [
+        ...calculsFixedCM2,
+        ...calculsTemplatesCM2,
+        ...problemesFixedCM2,
+        ...problemesTemplatesCM2,
+      ],
+    };
+  }
+
   if (niveau === "5e") {
     return {
       weeks: weekly5e,
@@ -305,6 +341,8 @@ export default function CalculRapideDefiClient() {
   const niveauParam = searchParams.get("niveau");
 
   const niveau: NiveauCalculRapide =
+    niveauParam === "CM1" ||
+    niveauParam === "CM2" ||
     niveauParam === "5e" ||
     niveauParam === "6e" ||
     niveauParam === "4e" ||
@@ -731,8 +769,8 @@ export default function CalculRapideDefiClient() {
             </h1>
 
             <p className="mt-4 max-w-3xl text-lg font-bold text-white/80">
-              7 questions courtes pour travailler les automatismes. Réponds
-              vite, mais garde le contrôle.
+              {questions.length} questions courtes pour travailler les automatismes. Réponds vite,
+              mais garde le contrôle.
             </p>
 
             {eleve ? (
@@ -963,7 +1001,7 @@ export default function CalculRapideDefiClient() {
 
           {lockedCorrection ? (
             <p className="mt-4 text-center text-sm font-bold text-white/70">
-              Correction affichée... question suivante dans quelques secondes.
+              Correction affichée... question suivante dans {correctionTimeLeft || 1}s.
             </p>
           ) : null}
         </div>

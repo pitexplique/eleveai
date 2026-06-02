@@ -5,7 +5,25 @@ import { useState } from "react";
 import Link from "next/link";
 import type { NiveauCalculRapide } from "@/lib/calcul-rapide";
 
-const niveaux: NiveauCalculRapide[] = ["6e", "5e", "4e", "3e", "terminale-spe"];
+const niveaux: NiveauCalculRapide[] = [
+  "CM1",
+  "CM2",
+  "6e",
+  "5e",
+  "4e",
+  "3e",
+  "terminale-spe",
+];
+
+const niveauLabels: Record<NiveauCalculRapide, string> = {
+  CM1: "CM1",
+  CM2: "CM2",
+  "6e": "6e",
+  "5e": "5e",
+  "4e": "4e",
+  "3e": "3e",
+  "terminale-spe": "Terminale spé",
+};
 
 export default function CalculRapideClient() {
   const [niveau, setNiveau] = useState<NiveauCalculRapide>("6e");
@@ -35,8 +53,8 @@ export default function CalculRapideClient() {
             </h1>
 
             <p className="mx-auto mt-3 max-w-2xl text-base font-medium text-white/95 drop-shadow sm:text-lg md:text-xl lg:text-2xl">
-              Semaine de 22 mai 2016 : 5 minutes pour entraîner ton cerveau, gagner en vitesse et
-              progresser en maths.
+              Chaque jour, 5 minutes pour entraîner ton cerveau, gagner en vitesse et progresser en
+              maths.
             </p>
 
             <div className="mx-auto mt-5 grid max-w-3xl grid-cols-3 gap-2 sm:mt-6 sm:gap-4">
@@ -52,7 +70,7 @@ export default function CalculRapideClient() {
 
               <div className="rounded-2xl border border-white/20 bg-white/10 p-3 shadow-xl backdrop-blur-xl sm:rounded-3xl sm:p-5">
                 <div className="text-2xl sm:text-3xl">⚡</div>
-                <p className="mt-1 text-sm font-bold sm:text-lg">5 calculs</p>
+                <p className="mt-1 text-sm font-bold sm:text-lg">Calculs</p>
                 <p className="hidden text-sm text-white/75 sm:block">
                   automatismes
                 </p>
@@ -60,7 +78,7 @@ export default function CalculRapideClient() {
 
               <div className="rounded-2xl border border-white/20 bg-white/10 p-3 shadow-xl backdrop-blur-xl sm:rounded-3xl sm:p-5">
                 <div className="text-2xl sm:text-3xl">🎯</div>
-                <p className="mt-1 text-sm font-bold sm:text-lg">2 défis</p>
+                <p className="mt-1 text-sm font-bold sm:text-lg">Défis</p>
                 <p className="hidden text-sm text-white/75 sm:block">
                   problèmes courts
                 </p>
@@ -84,7 +102,7 @@ export default function CalculRapideClient() {
                         : "bg-white/15 text-white hover:bg-white/25"
                     }`}
                   >
-                    {n}
+                    {niveauLabels[n]}
                   </button>
                 ))}
               </div>

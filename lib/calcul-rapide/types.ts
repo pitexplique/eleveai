@@ -1,6 +1,13 @@
 // lib/calcul-rapide/types.ts
 
-export type NiveauCalculRapide = "6e" | "5e" | "4e" | "3e"| "terminale-spe";
+export type NiveauCalculRapide =
+  | "CM1"
+  | "CM2"
+  | "6e"
+  | "5e"
+  | "4e"
+  | "3e"
+  | "terminale-spe";
 
 export type CalculRapideItemType = "calcul" | "probleme" | "boss";
 export type CalculRapideMode = "fixed" | "template";

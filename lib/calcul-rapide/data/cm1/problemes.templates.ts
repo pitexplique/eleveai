@@ -1,0 +1,61 @@
+import type { CalculRapideItem } from "../../types";
+
+export const problemesTemplatesCM1: CalculRapideItem[] = [
+  {
+    id: "cm1_template_probleme_monnaie_001",
+    niveau: "CM1",
+    type: "probleme",
+    mode: "template",
+    notionId: "mesures",
+    microId: "monnaie_addition",
+    difficulty: 2,
+    durationSec: 60,
+    media: {
+      text: "Un cahier coûte {{a}} euros et un stylo coûte {{b}} euros. Quel est le total ?",
+    },
+    template:
+      "Un cahier coûte {{a}} euros et un stylo coûte {{b}} euros. Quel est le total ?",
+    variables: { a: [2, 3, 4, 5], b: [1, 2, 3] },
+    answerRule: "a + b",
+    hint: "Additionne les deux prix.",
+    explanationTemplate: "{{a}} + {{b}} = {{answer}} euros.",
+    tags: ["monnaie", "addition"],
+  },
+  {
+    id: "cm1_template_probleme_longueur_001",
+    niveau: "CM1",
+    type: "probleme",
+    mode: "template",
+    notionId: "mesures",
+    microId: "conversion_longueur",
+    difficulty: 2,
+    durationSec: 60,
+    media: { text: "Une règle mesure {{m}} m. Combien cela fait-il en cm ?" },
+    template: "Une règle mesure {{m}} m. Combien cela fait-il en cm ?",
+    variables: { m: [2, 3, 4, 5, 8] },
+    answerRule: "m * 100",
+    hint: "1 m = 100 cm.",
+    explanationTemplate: "{{m}} x 100 = {{answer}} cm.",
+    tags: ["longueur", "conversion"],
+  },
+  {
+    id: "cm1_template_probleme_partage_001",
+    niveau: "CM1",
+    type: "probleme",
+    mode: "template",
+    notionId: "problemes",
+    microId: "partage_equitable",
+    difficulty: 2,
+    durationSec: 60,
+    media: {
+      text: "{{n}} cartes sont partagées entre {{p}} joueurs. Combien chaque joueur reçoit-il ?",
+    },
+    template:
+      "{{n}} cartes sont partagées entre {{p}} joueurs. Combien chaque joueur reçoit-il ?",
+    variables: { n: [24, 36, 48, 60, 72], p: [2, 3, 4, 6] },
+    answerRule: "n / p",
+    hint: "C'est une division.",
+    explanationTemplate: "{{n}} ÷ {{p}} = {{answer}} cartes.",
+    tags: ["division", "partage"],
+  },
+];
