@@ -276,19 +276,81 @@ export default function Header() {
           )}
         </div>
 
-        <button
-          type="button"
-          onClick={() => setMobileOpen((value) => !value)}
-          className="rounded-full border border-cyan-200/20 bg-white/10 p-2 text-white shadow-lg lg:hidden"
-          aria-label="Ouvrir le menu"
-        >
-          {mobileOpen ? <X /> : <Menu />}
-        </button>
+        <div className="flex items-center gap-2 lg:hidden">
+          {eleve ? (
+            <button
+              type="button"
+              onClick={logoutEleve}
+              className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-red-500 text-white shadow-lg"
+              aria-label="Deconnexion"
+            >
+              <LogOut className="h-4 w-4" />
+            </button>
+          ) : (
+            <Link
+              href="/auth/signin?mode=eleve"
+              className="inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-emerald-300 to-cyan-300 px-3 py-2 text-xs font-black text-[#041B33] shadow-lg"
+            >
+              <GraduationCap className="h-4 w-4" />
+              Connexion
+            </Link>
+          )}
+
+          <button
+            type="button"
+            onClick={() => setMobileOpen((value) => !value)}
+            className="rounded-full border border-cyan-200/20 bg-white/10 p-2 text-white shadow-lg"
+            aria-label="Ouvrir le menu"
+          >
+            {mobileOpen ? <X /> : <Menu />}
+          </button>
+        </div>
       </nav>
 
       {mobileOpen && (
         <div className="border-t border-cyan-300/20 bg-gradient-to-b from-[#062A4F] to-[#041B33] px-4 py-4 lg:hidden">
           <div className="grid gap-2">
+            {eleve ? (
+              <div className="mb-3 grid gap-2 border-b border-cyan-300/20 pb-3">
+                <Link
+                  href={dashboardHref}
+                  className={mobileCardClass(
+                    isActive(pathname, dashboardHref),
+                    isStaff
+                      ? "bg-gradient-to-r from-blue-300 to-indigo-300"
+                      : "bg-gradient-to-r from-emerald-300 to-cyan-300",
+                    "text-[#041B33]"
+                  )}
+                >
+                  <GraduationCap className="h-5 w-5" />
+                  {isStaff
+                    ? `Dashboard ${dashboardLabel}`
+                    : `Mon espace - ${dashboardLabel}`}
+                </Link>
+
+                <button
+                  type="button"
+                  onClick={logoutEleve}
+                  className="flex items-center justify-center gap-3 rounded-2xl bg-gradient-to-r from-red-500 to-red-700 px-4 py-4 text-sm font-black text-white shadow-lg transition hover:scale-[1.015] active:scale-[0.99] ring-1 ring-white/15"
+                >
+                  <LogOut className="h-5 w-5" />
+                  Deconnexion
+                </button>
+              </div>
+            ) : (
+              <Link
+                href="/auth/signin?mode=eleve"
+                className={mobileCardClass(
+                  isActive(pathname, "/auth/signin"),
+                  "mb-3 bg-gradient-to-r from-emerald-300 to-cyan-300",
+                  "text-[#041B33]"
+                )}
+              >
+                <GraduationCap className="h-5 w-5" />
+                Connexion / inscription
+              </Link>
+            )}
+
             <Link
               href="/accueil"
               className={mobileCardClass(
@@ -414,7 +476,7 @@ export default function Header() {
             </Link>
 
             {eleve ? (
-              <div className="mt-3 grid gap-2 border-t border-cyan-300/20 pt-3">
+              <div className="hidden">
                 <Link
                   href={dashboardHref}
                   className={mobileCardClass(
@@ -445,7 +507,7 @@ export default function Header() {
                 href="/auth/signin?mode=eleve"
                 className={mobileCardClass(
                   isActive(pathname, "/auth/signin"),
-                  "mt-3 bg-gradient-to-r from-emerald-300 to-cyan-300",
+                  "hidden mt-3 bg-gradient-to-r from-emerald-300 to-cyan-300",
                   "text-[#041B33]"
                 )}
               >
