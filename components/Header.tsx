@@ -277,16 +277,7 @@ export default function Header() {
         </div>
 
         <div className="flex items-center gap-2 lg:hidden">
-          {eleve ? (
-            <button
-              type="button"
-              onClick={logoutEleve}
-              className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-red-500 text-white shadow-lg"
-              aria-label="Deconnexion"
-            >
-              <LogOut className="h-4 w-4" />
-            </button>
-          ) : (
+          {!eleve && (
             <Link
               href="/auth/signin?mode=eleve"
               className="inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-emerald-300 to-cyan-300 px-3 py-2 text-xs font-black text-[#041B33] shadow-lg"
@@ -327,15 +318,6 @@ export default function Header() {
                     ? `Dashboard ${dashboardLabel}`
                     : `Mon espace - ${dashboardLabel}`}
                 </Link>
-
-                <button
-                  type="button"
-                  onClick={logoutEleve}
-                  className="flex items-center justify-center gap-3 rounded-2xl bg-gradient-to-r from-red-500 to-red-700 px-4 py-4 text-sm font-black text-white shadow-lg transition hover:scale-[1.015] active:scale-[0.99] ring-1 ring-white/15"
-                >
-                  <LogOut className="h-5 w-5" />
-                  Deconnexion
-                </button>
               </div>
             ) : (
               <Link
@@ -475,45 +457,15 @@ export default function Header() {
               Défis 974
             </Link>
 
-            {eleve ? (
-              <div className="hidden">
-                <Link
-                  href={dashboardHref}
-                  className={mobileCardClass(
-                    isActive(pathname, dashboardHref),
-                    isProf
-                      ? "bg-gradient-to-r from-blue-300 to-indigo-300"
-                      : "bg-gradient-to-r from-emerald-300 to-cyan-300",
-                    "text-[#041B33]"
-                  )}
-                >
-                  <GraduationCap className="h-5 w-5" />
-                  {isProf
-                    ? `Dashboard ${dashboardLabel}`
-                    : `Mon espace · ${dashboardLabel}`}
-                </Link>
-
-                <button
-                  type="button"
-                  onClick={logoutEleve}
-                  className="flex items-center justify-center gap-3 rounded-2xl bg-gradient-to-r from-red-500 to-red-700 px-4 py-4 text-sm font-black text-white shadow-lg transition hover:scale-[1.015] active:scale-[0.99] ring-1 ring-white/15"
-                >
-                  <LogOut className="h-5 w-5" />
-                  Déconnexion
-                </button>
-              </div>
-            ) : (
-              <Link
-                href="/auth/signin?mode=eleve"
-                className={mobileCardClass(
-                  isActive(pathname, "/auth/signin"),
-                  "hidden mt-3 bg-gradient-to-r from-emerald-300 to-cyan-300",
-                  "text-[#041B33]"
-                )}
+            {eleve && (
+              <button
+                type="button"
+                onClick={logoutEleve}
+                className="mt-3 flex items-center justify-center gap-3 rounded-2xl border border-red-300/30 bg-red-500/15 px-4 py-4 text-sm font-black text-red-100 shadow-lg transition hover:bg-red-500/25 active:scale-[0.99]"
               >
-                <GraduationCap className="h-5 w-5" />
-                Connexion / inscription
-              </Link>
+                <LogOut className="h-5 w-5" />
+                Deconnexion
+              </button>
             )}
           </div>
         </div>
