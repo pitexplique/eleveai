@@ -5,12 +5,14 @@ import { FormEvent, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
+import { useEleve } from "@/context/EleveContext";
 
 type Step = "form" | "code" | "success";
 type UserEmailType = "prof" | "eleve" | "parent" | "perso" | "admin";
 
 const RESEND_COOLDOWN_SECONDS = 30;
-const ADMIN_EMAIL = "academienumerique@gmail.com";
+const ADMIN_EMAIL = "eleveai@gmail.com";
+const INDEPENDENT_ETABLISSEMENT_CODE = "INDEPENDANT";
 
 const PROFILE_OPTIONS: { value: Exclude<UserEmailType, "admin">; label: string }[] = [
   { value: "prof", label: "Professeur" },
@@ -19,8 +21,17 @@ const PROFILE_OPTIONS: { value: Exclude<UserEmailType, "admin">; label: string }
   { value: "perso", label: "Adulte / personnel" },
 ];
 
+type UserEmailProfile = {
+  id: string;
+  auth_user_id: string;
+  email: string;
+  nom: string | null;
+  type_utilisateur: string | null;
+};
+
 export default function SignUpPage() {
   const router = useRouter();
+  const { login } = useEleve();
   const supabase = useMemo(() => createClient(), []);
 
   const [step, setStep] = useState<Step>("form");
@@ -48,6 +59,28 @@ export default function SignUpPage() {
   const normalizeEmail = (v: string) => v.trim().toLowerCase();
   const getSignupType = (emailToUse: string): UserEmailType =>
     emailToUse === ADMIN_EMAIL ? "admin" : typeUtilisateur;
+  const getEmailUserCode = (profile: UserEmailProfile) =>
+    `EMAIL-${profile.id}`;
+
+  const routeEmailProfile = (profile: UserEmailProfile) => {
+    const type = profile.type_utilisateur ?? "perso";
+
+    login({
+      acces_id: profile.id,
+      code_etablissement: INDEPENDENT_ETABLISSEMENT_CODE,
+      code_eleve: getEmailUserCode(profile),
+      nom: profile.nom ?? profile.email,
+      type_utilisateur: type,
+    });
+
+    if (type === "admin") {
+      router.push("/dashboard");
+    } else if (type === "prof") {
+      router.push("/dashboard-prof");
+    } else {
+      router.push("/dashboard-eleve");
+    }
+  };
 
   const resetMessages = () => {
     setErrorMsg(null);
@@ -75,6 +108,18 @@ export default function SignUpPage() {
     }, 1000);
     return () => clearInterval(t);
   }, [cooldown]);
+
+  useEffect(() => {
+    const type = new URLSearchParams(window.location.search).get("type");
+    if (
+      type === "prof" ||
+      type === "parent" ||
+      type === "eleve" ||
+      type === "perso"
+    ) {
+      setTypeUtilisateur(type);
+    }
+  }, []);
 
   const logSupabaseError = (label: string, err: any) => {
     console.error(label, {
@@ -229,7 +274,7 @@ export default function SignUpPage() {
       } else {
         const authUser = userData.user;
 
-        const { error: upsertError } = await supabase
+        const { data: profile, error: upsertError } = await supabase
           .from("users_email")
           .upsert(
             {
@@ -241,20 +286,24 @@ export default function SignUpPage() {
               accepte_newsletter: accepteNewsletter,
             },
             { onConflict: "email" }
-          );
+          )
+          .select("id, auth_user_id, email, nom, type_utilisateur")
+          .single();
 
         if (upsertError) {
           logSupabaseError("Upsert users_email error:", upsertError);
-          // non bloquant
+          setErrorMsg("Compte créé, mais profil incomplet. Merci de réessayer la connexion.");
+          return;
         }
+
+        setFeedback("Compte créé. Bienvenue sur EleveAI !");
+        setStep("success");
+
+        setTimeout(() => {
+          routeEmailProfile(profile as UserEmailProfile);
+        }, 900);
+        return;
       }
-
-      setFeedback("Compte créé. Bienvenue sur EleveAI !");
-      setStep("success");
-
-      setTimeout(() => {
-        router.push("/dashboard");
-      }, 900);
     } catch (err: any) {
       console.error("Unexpected verify error:", err);
       setErrorMsg(

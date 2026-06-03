@@ -8,6 +8,15 @@ import { createClient } from "@/lib/supabase/client";
 import { useEleve } from "@/context/EleveContext";
 
 const RESEND_COOLDOWN_SECONDS = 30;
+const INDEPENDENT_ETABLISSEMENT_CODE = "INDEPENDANT";
+
+type UserEmailProfile = {
+  id: string;
+  auth_user_id: string;
+  email: string;
+  nom: string | null;
+  type_utilisateur: string | null;
+};
 
 export default function SignInPage() {
   const router = useRouter();
@@ -65,6 +74,29 @@ export default function SignInPage() {
   }, [cooldown]);
 
   const normalizeEmail = (v: string) => v.trim().toLowerCase();
+
+  const getEmailUserCode = (profile: UserEmailProfile) =>
+    `EMAIL-${profile.id}`;
+
+  const routeEmailProfile = (profile: UserEmailProfile) => {
+    const type = profile.type_utilisateur ?? "perso";
+
+    login({
+      acces_id: profile.id,
+      code_etablissement: INDEPENDENT_ETABLISSEMENT_CODE,
+      code_eleve: getEmailUserCode(profile),
+      nom: profile.nom ?? profile.email,
+      type_utilisateur: type,
+    });
+
+    if (type === "admin") {
+      router.push("/dashboard");
+    } else if (type === "prof") {
+      router.push("/dashboard-prof");
+    } else {
+      router.push("/dashboard-eleve");
+    }
+  };
 
   const resetEmailFlow = () => {
     setEmailSent(false);
@@ -211,8 +243,21 @@ export default function SignInPage() {
         return;
       }
 
+      const authUser = data.session.user;
+      const { data: profile, error: profileError } = await supabase
+        .from("users_email")
+        .select("id, auth_user_id, email, nom, type_utilisateur")
+        .eq("auth_user_id", authUser.id)
+        .maybeSingle();
+
+      if (profileError || !profile) {
+        logSupabaseError("users_email lookup error:", profileError);
+        setErrorMsg("Profil introuvable. Merci de créer un compte.");
+        return;
+      }
+
       setFeedback("Connexion réussie. Redirection…");
-      router.push("/accueil");
+      routeEmailProfile(profile as UserEmailProfile);
     } catch (err: any) {
       console.error("Unexpected OTP verify error:", err);
       setErrorMsg(err?.message || "Erreur inattendue. Réessayez.");
@@ -363,10 +408,10 @@ export default function SignInPage() {
                 <p className="text-xs text-slate-500">
                   Pas encore de compte ?{" "}
                   <Link
-                    href="/auth/signup"
+                    href="/auth/signup?type=eleve"
                     className="text-emerald-600 font-semibold"
                   >
-                    Inscription
+                    Créer un compte élève, parent ou adulte
                   </Link>
                 </p>
               </form>

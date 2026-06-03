@@ -168,6 +168,7 @@ export default function DashboardEleveClient() {
   const codeEtablissement = eleve?.code_etablissement?.trim() ?? "";
   const codeUtilisateur =
     eleve?.code_eleve?.trim() ?? eleve?.code_utilisateur?.trim() ?? "";
+  const isIndependentAccount = codeEtablissement === "INDEPENDANT";
 
   useEffect(() => {
     async function loadResultats() {
@@ -312,7 +313,7 @@ export default function DashboardEleveClient() {
           </p>
 
           <Link
-            href="/auth/signin-eleve"
+            href="/auth/signin?mode=eleve"
             className="mt-5 inline-flex rounded-2xl bg-emerald-600 px-5 py-3 font-black text-white"
           >
             Se connecter
@@ -339,8 +340,9 @@ export default function DashboardEleveClient() {
           </p>
 
           <div className="mt-5 rounded-3xl bg-slate-50 p-4 text-sm font-black text-slate-700 ring-1 ring-slate-200">
-            Code établissement : {codeEtablissement} · Code élève :{" "}
-            {codeUtilisateur}
+            {isIndependentAccount
+              ? "Compte indépendant"
+              : `Code établissement : ${codeEtablissement} · Code élève : ${codeUtilisateur}`}
           </div>
         </div>
 

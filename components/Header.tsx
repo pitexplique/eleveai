@@ -19,6 +19,7 @@ import {
   BookOpen,
 } from "lucide-react";
 import { useEleve } from "@/context/EleveContext";
+import { createClient } from "@/lib/supabase/client";
 
 function isActive(pathname: string, href: string) {
   if (href === "/") return pathname === "/";
@@ -30,12 +31,14 @@ export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [coachOpen, setCoachOpen] = useState(false);
   const { eleve, logout } = useEleve();
+  const supabase = createClient();
 
   useEffect(() => {
     setMobileOpen(false);
   }, [pathname]);
 
-  function logoutEleve() {
+  async function logoutEleve() {
+    await supabase.auth.signOut();
     logout();
     window.location.href = "/accueil";
   }
