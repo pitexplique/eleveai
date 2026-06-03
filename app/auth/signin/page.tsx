@@ -2,6 +2,7 @@
 "use client";
 
 import { FormEvent, useEffect, useMemo, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
@@ -576,72 +577,111 @@ export default function SignInPage() {
         </div>
 
         {/* COLONNE DROITE */}
-<div className="relative hidden w-full overflow-hidden bg-slate-900 md:block md:w-1/2">
-  <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_#22c55e33,_transparent_60%),radial-gradient(circle_at_bottom,_#0f172a,_#020617)]" />
-  <div className="absolute inset-0 bg-slate-900/60" />
+        <div className="relative hidden w-full overflow-hidden bg-[#041B33] text-white md:block md:w-1/2">
+          <div className="absolute inset-0 bg-gradient-to-b from-[#041B33] via-[#062A4F] to-[#041B33]" />
 
-  <div className="relative z-10 flex h-full flex-col justify-start pt-14 px-10 pb-20 text-slate-50">
-    <h2 className="max-w-xl text-3xl font-bold leading-tight">
-      S’entraîner avec plusieurs portes d’entrée
-    </h2>
+          <div className="relative z-10 flex h-full flex-col justify-start px-10 py-10 lg:px-14">
+            <div className="mb-6">
+              <p className="text-xs font-black uppercase tracking-[0.25em] text-yellow-300">
+                Pourquoi EleveAI
+              </p>
+              <h2 className="mt-1 text-3xl font-black leading-tight">
+                Un coach simple pour progresser sans se perdre
+              </h2>
+              <p className="mt-3 text-sm font-semibold leading-relaxed text-slate-200">
+                Pour les parents, c'est une facon simple de voir que l'enfant
+                s'entraine regulierement et avance avec un cadre clair.
+              </p>
 
-    <p className="mt-4 max-w-xl text-sm leading-relaxed text-slate-200">
-      EleveAI permet de progresser selon son besoin du moment : reprendre une
-      notion, suivre un parcours, s’entraîner en calcul rapide, réviser une
-      leçon du jour, travailler l’anglais des maths ou relever un défi.
-    </p>
+              <div className="mt-5 grid grid-cols-3 gap-3">
+                {[
+                  {
+                    title: "Guidage clair",
+                    text: "L'eleve sait quoi faire maintenant.",
+                  },
+                  {
+                    title: "Rituels courts",
+                    text: "Des sessions utiles meme en 10 minutes.",
+                  },
+                  {
+                    title: "Suivi lisible",
+                    text: "Les espaces retrouvent le bon parcours.",
+                  },
+                ].map((benefit) => (
+                  <div
+                    key={benefit.title}
+                    className="rounded-2xl border border-white/10 bg-white/[0.08] p-4 shadow-lg"
+                  >
+                    <p className="text-sm font-black leading-tight text-white">
+                      {benefit.title}
+                    </p>
+                    <p className="mt-2 text-xs font-semibold leading-relaxed text-slate-300">
+                      {benefit.text}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
 
-    {/* 1 — ENSEIGNANTS */}
-    <div className="mt-8 max-w-xl rounded-xl border border-slate-700/70 bg-slate-950/30 p-5 backdrop-blur">
-      <div className="text-xs font-semibold uppercase tracking-wide text-slate-300">
-        Des parcours pour avancer
-      </div>
+            <div className="mb-4">
+              <p className="text-xs font-black uppercase tracking-[0.25em] text-slate-400">
+                Modules
+              </p>
+              <h3 className="mt-1 text-2xl font-black leading-tight">
+                Tous les espaces EleveAI
+              </h3>
+            </div>
 
-      <p className="mt-3 text-sm leading-relaxed text-slate-100">
-        Les parcours guident l’élève étape par étape. Le coach permet de
-        comprendre une notion, poser une question ou reprendre une méthode. Les
-        activités peuvent être abordées en base, standard ou défi, selon le
-        niveau et l’objectif.
-      </p>
-
-      <p className="mt-3 text-xs text-slate-300">
-        Un entraînement progressif, pensé depuis une pratique de terrain.
-      </p>
-    </div>
-
-    {/* 2 — PARENTS */}
-    <div className="mt-6 max-w-xl rounded-xl border border-slate-700/50 bg-slate-950/20 p-5">
-      <div className="text-xs font-semibold uppercase tracking-wide text-slate-300">
-        Des entraînements courts et réguliers
-      </div>
-
-      <p className="mt-3 text-sm leading-relaxed text-slate-200">
-        Calcul rapide, Leçon du jour, Défis 974 et English Maths donnent des
-        rendez-vous simples pour s’exercer souvent, sans se perdre dans une
-        longue séance.
-      </p>
-    </div>
-
-    {/* 3 — ÉLÈVES */}
-    <div className="mt-6 max-w-xl rounded-xl border border-slate-700/50 bg-slate-950/20 p-5">
-      <div className="text-xs font-semibold uppercase tracking-wide text-slate-300">
-        Plusieurs façons de travailler
-      </div>
-
-      <p className="mt-3 text-sm leading-relaxed text-slate-200">
-        L’élève peut réviser une notion, refaire une méthode, s’entraîner sur
-        des automatismes, préparer une évaluation ou avancer à son rythme dans
-        un parcours adapté.
-      </p>
-
-      <p className="mt-2 text-sm leading-relaxed text-slate-200">
-        Les entrées sont simples : choisir un objectif, travailler quelques
-        minutes, puis recommencer régulièrement pour progresser.
-      </p>
-    </div>
-  </div>
-</div>
-
+            <div className="flex flex-wrap justify-center gap-3">
+                {[
+                  {
+                    image: "/images/cards/coach.webp",
+                    label: "Coach Maths IA",
+                  },
+                  {
+                    image: "/images/cards/parcours.webp",
+                    label: "Parcours",
+                  },
+                  {
+                    image: "/images/cards/calcul-rapide.webp",
+                    label: "Calcul rapide",
+                  },
+                  {
+                    image: "/images/cards/lecondujour.webp",
+                    label: "Lecon du jour",
+                  },
+                  {
+                    image: "/images/cards/defis-du-jour.webp",
+                    label: "Defis du jour",
+                  },
+                  {
+                    image: "/images/cards/english-maths.webp",
+                    label: "English Maths",
+                  },
+                ].map((card) => (
+                  <div
+                    key={card.label}
+                    className="group relative h-[118px] w-[220px] overflow-hidden rounded-2xl border border-white/20 bg-white/10 shadow-lg transition-all duration-300 hover:-translate-y-1 hover:scale-[1.02] hover:shadow-[0_0_30px_rgba(255,255,255,0.18)]"
+                  >
+                    <Image
+                      src={card.image}
+                      alt=""
+                      fill
+                      sizes="220px"
+                      className="object-cover transition-transform duration-500 group-hover:scale-[1.06]"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent opacity-90" />
+                    <div className="pointer-events-none absolute -left-20 top-0 h-full w-16 rotate-12 bg-white/25 blur-md transition-transform duration-700 group-hover:translate-x-[300px]" />
+                    <div className="absolute bottom-0 left-0 right-0 p-3">
+                      <p className="text-sm font-black leading-tight text-white">
+                        {card.label}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+            </div>
+          </div>
+        </div>
 
 
       </div>
