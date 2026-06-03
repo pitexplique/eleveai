@@ -17,7 +17,7 @@ type Profil = {
   updated_at: string | null;
 };
 
-const ADMIN_EMAIL = "eleveai@gmail.com";
+const ADMIN_EMAIL = "eleveai974@gmail.com";
 const PUBLIC_TYPES = ["prof", "eleve", "parent", "perso"] as const;
 
 export default function ComptePage() {

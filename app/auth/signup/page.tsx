@@ -11,7 +11,7 @@ type Step = "form" | "code" | "success";
 type UserEmailType = "prof" | "eleve" | "parent" | "perso" | "admin";
 
 const RESEND_COOLDOWN_SECONDS = 30;
-const ADMIN_EMAIL = "eleveai@gmail.com";
+const ADMIN_EMAIL = "eleveai974@gmail.com";
 const INDEPENDENT_ETABLISSEMENT_CODE = "INDEPENDANT";
 
 const PROFILE_OPTIONS: { value: Exclude<UserEmailType, "admin">; label: string }[] = [
