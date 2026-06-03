@@ -130,6 +130,11 @@ export default function SignUpPage() {
     });
   };
 
+  const isRateLimitError = (err: any) =>
+    err?.status === 429 ||
+    err?.code === "over_email_send_rate_limit" ||
+    String(err?.message || "").toLowerCase().includes("rate limit");
+
   // ✅ check serveur : est-ce que l'email existe déjà dans la table applicative ?
   const checkEmailExists = async (emailToUse: string): Promise<boolean> => {
     const res = await fetch("/api/auth/check-email", {
@@ -186,7 +191,7 @@ export default function SignUpPage() {
 
       // ✅ Envoi OTP (création autorisée)
       // ⚠️ pas de emailRedirectTo tant que /auth/callback n’existe pas
-      const { error: otpError } = await supabase.auth.signInWithOtp({
+      const signupPayload = {
         email: emailToUse,
         options: {
           shouldCreateUser: true,
@@ -197,14 +202,24 @@ export default function SignUpPage() {
             accepte_newsletter: accepteNewsletter,
           },
         },
-      });
+      } as const;
+
+      let { error: otpError } = await supabase.auth.signInWithOtp(signupPayload);
+
+      if (otpError && !isRateLimitError(otpError)) {
+        const retry = await supabase.auth.signInWithOtp({
+          email: emailToUse,
+          options: { shouldCreateUser: false },
+        });
+        otpError = retry.error;
+      }
 
       if (otpError) {
         logSupabaseError("OTP send error:", otpError);
         setErrorMsg(
-          process.env.NODE_ENV === "development"
-            ? `Erreur Supabase: ${otpError.message}`
-            : "Impossible d'envoyer le code. Merci de réessayer."
+          isRateLimitError(otpError)
+            ? "Trop de codes demandés en peu de temps. Attendez quelques minutes avant de réessayer."
+            : `Impossible d'envoyer le code. Détail : ${otpError.message}`
         );
         return;
       }
@@ -470,7 +485,7 @@ export default function SignUpPage() {
                         <span>
                           J’accepte les{" "}
                           <Link
-                            href="/cgv"
+                            href="/cgu"
                             className="text-emerald-600 underline"
                           >
                             conditions générales de vente
