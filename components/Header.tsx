@@ -264,11 +264,11 @@ export default function Header() {
             </div>
           ) : (
             <Link
-              href="/auth/signin-eleve"
+              href="/auth/signin?mode=eleve"
               className="ml-2 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-emerald-300 to-cyan-300 px-4 py-2 text-sm font-black text-[#041B33] shadow-lg hover:brightness-110"
             >
               <GraduationCap className="h-4 w-4" />
-              Connexion
+              Connexion / inscription
             </Link>
           )}
         </div>
@@ -439,15 +439,15 @@ export default function Header() {
               </div>
             ) : (
               <Link
-                href="/auth/signin-eleve"
+                href="/auth/signin?mode=eleve"
                 className={mobileCardClass(
-                  isActive(pathname, "/auth/signin-eleve"),
+                  isActive(pathname, "/auth/signin"),
                   "mt-3 bg-gradient-to-r from-emerald-300 to-cyan-300",
                   "text-[#041B33]"
                 )}
               >
                 <GraduationCap className="h-5 w-5" />
-                Connexion élève / prof
+                Connexion / inscription
               </Link>
             )}
           </div>

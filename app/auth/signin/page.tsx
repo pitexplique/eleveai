@@ -5,11 +5,13 @@ import { FormEvent, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
+import { useEleve } from "@/context/EleveContext";
 
 const RESEND_COOLDOWN_SECONDS = 30;
 
 export default function SignInPage() {
   const router = useRouter();
+  const { login } = useEleve();
   const supabase = useMemo(() => createClient(), []);
 
   // ---------------------------
@@ -37,6 +39,7 @@ export default function SignInPage() {
   // ---------------------------
   const [codeEtablissement, setCodeEtablissement] = useState("");
   const [codeUtilisateur, setCodeUtilisateur] = useState("");
+  const [motDePasse, setMotDePasse] = useState("");
   const [loadingEtab, setLoadingEtab] = useState(false);
   const [feedbackEtab, setFeedbackEtab] = useState<string | null>(null);
   const [errorEtab, setErrorEtab] = useState<string | null>(null);
@@ -228,8 +231,9 @@ export default function SignInPage() {
 
     const ce = normalizeCode(codeEtablissement);
     const cu = normalizeCode(codeUtilisateur);
+    const mdp = motDePasse.trim();
 
-    if (!ce || !cu) {
+    if (!ce || !cu || !mdp) {
       setErrorEtab("Merci de renseigner le code établissement et le code utilisateur.");
       return;
     }
@@ -238,7 +242,7 @@ export default function SignInPage() {
     try {
       const { data, error } = await supabase
         .from("acces_etablissement")
-        .select("id, code_etablissement, code_utilisateur, type_utilisateur, nom, actif")
+        .select("id, code_etablissement, code_utilisateur, mot_de_passe, type_utilisateur, nom, actif")
         .eq("code_etablissement", ce)
         .eq("code_utilisateur", cu)
         .eq("actif", true)
@@ -262,9 +266,27 @@ export default function SignInPage() {
       setFeedbackEtab("Connexion établissement validée. Redirection…");
 
       // V1 : on passe les codes en querystring (en attendant la “vraie session” élève)
-      router.push(
-        `/espace-eleves?code_etablissement=${encodeURIComponent(ce)}&code_utilisateur=${encodeURIComponent(cu)}`
-      );
+      if (data.mot_de_passe !== mdp) {
+        setErrorEtab("Mot de passe incorrect.");
+        return;
+      }
+
+      login({
+        acces_id: data.id,
+        code_etablissement: data.code_etablissement,
+        code_eleve: data.code_utilisateur,
+        nom: data.nom,
+        type_utilisateur: data.type_utilisateur,
+      });
+
+      const type = data.type_utilisateur;
+      if (type === "principal" || type === "boss") {
+        router.push("/dashboard-principal");
+      } else if (type === "prof") {
+        router.push("/dashboard-prof");
+      } else {
+        router.push("/dashboard-eleve");
+      }
     } catch (err: any) {
       console.error("Unexpected etablissement login error:", err);
       setErrorEtab(err?.message || "Erreur inattendue. Réessayez.");
@@ -452,6 +474,24 @@ export default function SignInPage() {
                     />
                   </div>
 
+                  <div className="space-y-1.5">
+                    <label className="text-sm font-medium text-slate-800">
+                      Mot de passe
+                    </label>
+                    <input
+                      type="password"
+                      value={motDePasse}
+                      onChange={(e) => setMotDePasse(e.target.value.toUpperCase())}
+                      placeholder="Ex: GRANDRAID"
+                      disabled={loadingEtab}
+                      autoCapitalize="characters"
+                      autoCorrect="off"
+                      autoComplete="off"
+                      spellCheck={false}
+                      className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-sm uppercase outline-none focus:border-emerald-500 focus:ring focus:ring-emerald-500/50 disabled:cursor-not-allowed disabled:bg-slate-100"
+                    />
+                  </div>
+
                   <button
                     type="submit"
                     disabled={loadingEtab}
@@ -491,71 +531,67 @@ export default function SignInPage() {
         </div>
 
         {/* COLONNE DROITE */}
-{/* COLONNE DROITE */}
-{/* COLONNE DROITE */}
 <div className="relative hidden w-full overflow-hidden bg-slate-900 md:block md:w-1/2">
   <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_#22c55e33,_transparent_60%),radial-gradient(circle_at_bottom,_#0f172a,_#020617)]" />
   <div className="absolute inset-0 bg-slate-900/60" />
 
   <div className="relative z-10 flex h-full flex-col justify-start pt-14 px-10 pb-20 text-slate-50">
     <h2 className="max-w-xl text-3xl font-bold leading-tight">
-      Apprendre avec l’IA, en confiance
+      S’entraîner avec plusieurs portes d’entrée
     </h2>
 
     <p className="mt-4 max-w-xl text-sm leading-relaxed text-slate-200">
-      EleveAI est conçu comme un outil pédagogique encadré.
-      L’IA aide à comprendre, à s’entraîner et à progresser —
-      <span className="font-semibold"> jamais à faire à la place.</span>
+      EleveAI permet de progresser selon son besoin du moment : reprendre une
+      notion, suivre un parcours, s’entraîner en calcul rapide, réviser une
+      leçon du jour, travailler l’anglais des maths ou relever un défi.
     </p>
 
     {/* 1 — ENSEIGNANTS */}
     <div className="mt-8 max-w-xl rounded-xl border border-slate-700/70 bg-slate-950/30 p-5 backdrop-blur">
       <div className="text-xs font-semibold uppercase tracking-wide text-slate-300">
-        Regard d’enseignant
+        Des parcours pour avancer
       </div>
 
       <p className="mt-3 text-sm leading-relaxed text-slate-100">
-        EleveAI est né d’une pratique de terrain.
-        Il aide à formuler de meilleures consignes,
-        différencier les activités (base / standard / défi)
-        et accompagner des élèves aux profils variés,
-        notamment DYS, sans alourdir la préparation.
+        Les parcours guident l’élève étape par étape. Le coach permet de
+        comprendre une notion, poser une question ou reprendre une méthode. Les
+        activités peuvent être abordées en base, standard ou défi, selon le
+        niveau et l’objectif.
       </p>
 
       <p className="mt-3 text-xs text-slate-300">
-        Frédéric Lacoste — Professeur de mathématiques, La Réunion
+        Un entraînement progressif, pensé depuis une pratique de terrain.
       </p>
     </div>
 
     {/* 2 — PARENTS */}
     <div className="mt-6 max-w-xl rounded-xl border border-slate-700/50 bg-slate-950/20 p-5">
       <div className="text-xs font-semibold uppercase tracking-wide text-slate-300">
-        Côté parents
+        Des entraînements courts et réguliers
       </div>
 
       <p className="mt-3 text-sm leading-relaxed text-slate-200">
-        EleveAI pose un cadre clair et rassurant :
-        l’IA est autorisée pour apprendre, s’entraîner et comprendre,
-        mais l’élève doit toujours produire une réponse personnelle.
+        Calcul rapide, Leçon du jour, Défis 974 et English Maths donnent des
+        rendez-vous simples pour s’exercer souvent, sans se perdre dans une
+        longue séance.
       </p>
     </div>
 
     {/* 3 — ÉLÈVES */}
     <div className="mt-6 max-w-xl rounded-xl border border-slate-700/50 bg-slate-950/20 p-5">
       <div className="text-xs font-semibold uppercase tracking-wide text-slate-300">
-        Côté élèves
+        Plusieurs façons de travailler
       </div>
 
       <p className="mt-3 text-sm leading-relaxed text-slate-200">
-        L’espace élèves permet de réviser, poser des questions
-        et progresser à son rythme, avec des aides graduées
-        et des explications adaptées à chacun.
+        L’élève peut réviser une notion, refaire une méthode, s’entraîner sur
+        des automatismes, préparer une évaluation ou avancer à son rythme dans
+        un parcours adapté.
       </p>
 
       <p className="mt-2 text-sm leading-relaxed text-slate-200">
-        L’Atelier-IA est un espace guidé pour explorer,
-        réfléchir et chercher des pistes de solutions,
-        en utilisant l’IA comme un outil d’accompagnement.
+        Les entrées sont simples : choisir un objectif, travailler quelques
+        minutes, puis recommencer régulièrement pour progresser.
       </p>
     </div>
   </div>
