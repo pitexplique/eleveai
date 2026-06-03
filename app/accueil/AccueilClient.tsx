@@ -623,10 +623,10 @@ function AccueilCoachBox({
         </form>
       ) : (
         <Link
-          href="/auth/signin-eleve"
+          href="/auth/signin?mode=eleve"
           className="m-2 rounded-2xl bg-gradient-to-r from-cyan-500 to-emerald-500 px-3 py-2 text-center text-[11px] font-black text-white shadow-sm hover:from-cyan-400 hover:to-emerald-400 sm:m-4 sm:px-4 sm:py-3 sm:text-sm"
         >
-          Connexion
+          Connexion / inscription
         </Link>
       )}
     </aside>
