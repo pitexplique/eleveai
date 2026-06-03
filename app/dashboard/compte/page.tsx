@@ -17,7 +17,8 @@ type Profil = {
   updated_at: string | null;
 };
 
-const TYPES = ["prof", "eleve", "parent", "admin"] as const;
+const ADMIN_EMAIL = "academienumerique@gmail.com";
+const PUBLIC_TYPES = ["prof", "eleve", "parent", "perso"] as const;
 
 export default function ComptePage() {
   const supabase = useMemo(() => createClient(), []);
@@ -76,6 +77,10 @@ export default function ComptePage() {
 
   async function saveType(type: string) {
     if (!profil) return;
+    if (type === "admin" && profil.email.toLowerCase() !== ADMIN_EMAIL) {
+      setErrorMsg("Ce type utilisateur est réservé.");
+      return;
+    }
     setSaving(true);
     setErrorMsg(null);
 
@@ -125,7 +130,12 @@ export default function ComptePage() {
                 <div className="rounded-xl border border-slate-800 bg-slate-950/40 p-4">
                   <p className="text-xs text-slate-400">Type utilisateur</p>
                   <div className="mt-2 flex flex-wrap gap-2">
-                    {TYPES.map((t) => {
+                    {[
+                      ...PUBLIC_TYPES,
+                      ...(profil.email.toLowerCase() === ADMIN_EMAIL
+                        ? (["admin"] as const)
+                        : []),
+                    ].map((t) => {
                       const active = profil.type_utilisateur === t;
                       return (
                         <button

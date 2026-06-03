@@ -7,8 +7,17 @@ import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 
 type Step = "form" | "code" | "success";
+type UserEmailType = "prof" | "eleve" | "parent" | "perso" | "admin";
 
 const RESEND_COOLDOWN_SECONDS = 30;
+const ADMIN_EMAIL = "academienumerique@gmail.com";
+
+const PROFILE_OPTIONS: { value: Exclude<UserEmailType, "admin">; label: string }[] = [
+  { value: "prof", label: "Professeur" },
+  { value: "parent", label: "Parent" },
+  { value: "eleve", label: "Élève" },
+  { value: "perso", label: "Adulte / personnel" },
+];
 
 export default function SignUpPage() {
   const router = useRouter();
@@ -18,6 +27,8 @@ export default function SignUpPage() {
 
   const [nom, setNom] = useState("");
   const [email, setEmail] = useState("");
+  const [typeUtilisateur, setTypeUtilisateur] =
+    useState<Exclude<UserEmailType, "admin">>("perso");
 
   const [accepteCGV, setAccepteCGV] = useState(false);
   const [accepteNewsletter, setAccepteNewsletter] = useState(false);
@@ -35,6 +46,8 @@ export default function SignUpPage() {
   const [cooldown, setCooldown] = useState<number>(0);
 
   const normalizeEmail = (v: string) => v.trim().toLowerCase();
+  const getSignupType = (emailToUse: string): UserEmailType =>
+    emailToUse === ADMIN_EMAIL ? "admin" : typeUtilisateur;
 
   const resetMessages = () => {
     setErrorMsg(null);
@@ -45,6 +58,7 @@ export default function SignUpPage() {
     setStep("form");
     setNom("");
     setEmail("");
+    setTypeUtilisateur("perso");
     setAccepteCGV(false);
     setAccepteNewsletter(false);
     setCode("");
@@ -133,6 +147,7 @@ export default function SignUpPage() {
           shouldCreateUser: true,
           data: {
             nom: nomToUse,
+            type_utilisateur: getSignupType(emailToUse),
             accepte_cgv: accepteCGV,
             accepte_newsletter: accepteNewsletter,
           },
@@ -221,6 +236,7 @@ export default function SignUpPage() {
               auth_user_id: authUser.id,
               email: authUser.email ?? emailToUse,
               nom: nom.trim(),
+              type_utilisateur: getSignupType(emailToUse),
               accepte_cgv: accepteCGV,
               accepte_newsletter: accepteNewsletter,
             },
@@ -364,6 +380,34 @@ export default function SignUpPage() {
                         className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-sm outline-none focus:border-emerald-500 focus:ring focus:ring-emerald-500/40 disabled:bg-slate-100"
                       />
                     </div>
+
+                    {normalizeEmail(email) !== ADMIN_EMAIL && (
+                      <div className="space-y-2">
+                        <label className="text-sm font-medium text-slate-800">
+                          Je suis
+                        </label>
+                        <div className="grid grid-cols-2 gap-2">
+                          {PROFILE_OPTIONS.map((option) => {
+                            const active = typeUtilisateur === option.value;
+                            return (
+                              <button
+                                key={option.value}
+                                type="button"
+                                onClick={() => setTypeUtilisateur(option.value)}
+                                disabled={loading}
+                                className={`rounded-lg border px-3 py-2 text-left text-xs font-semibold transition disabled:cursor-not-allowed disabled:opacity-60 ${
+                                  active
+                                    ? "border-emerald-500 bg-emerald-50 text-emerald-800"
+                                    : "border-slate-300 bg-white text-slate-700 hover:border-emerald-300"
+                                }`}
+                              >
+                                {option.label}
+                              </button>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    )}
 
                     <div className="space-y-2 pt-1">
                       <label className="flex items-start gap-2 text-xs text-slate-700">
