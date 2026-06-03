@@ -155,7 +155,6 @@ const classes = [
 
 const cards = [
   { href: "/coach-ia/maths",    image: "/images/cards/coach.webp",           label: "Coach Maths IA" },
-  { href: "/coach-ia/francais", image: "/images/cards/coach.webp",           label: "Coach Français IA" },
   { href: "/parcours",         image: "/images/cards/parcours.webp",         label: "Parcours" },
   { href: "/calcul-rapide",    image: "/images/cards/calcul-rapide.webp",    label: "Calcul rapide" },
   { href: "/lecon-du-jour",    image: "/images/cards/lecondujour.webp",      label: "Leçon du jour" },
