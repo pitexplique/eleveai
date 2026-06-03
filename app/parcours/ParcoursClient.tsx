@@ -990,7 +990,7 @@ function CorrectionChatBox({
           </div>
           <div className="flex flex-1 items-center bg-gradient-to-b from-cyan-50 via-white to-orange-50 px-3 text-center sm:px-6">
             <p className="text-xs font-black leading-5 text-slate-800 sm:text-base sm:leading-7">
-              Posez une question : connectez-vous pour dialoguer avec le coach.
+              Posez une question : connectez-vous / inscrivez-vous pour dialoguer avec le coach.
             </p>
           </div>
           <Link

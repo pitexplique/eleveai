@@ -597,7 +597,7 @@ function AccueilCoachBox({
         ) : (
           <div className="flex h-full items-center text-center">
             <p className="text-xs font-black leading-5 text-slate-800 sm:text-base sm:leading-7">
-              Posez une question : connectez-vous pour dialoguer avec le coach.
+              Posez une question : connectez-vous / inscrivez-vous pour dialoguer avec le coach.
             </p>
           </div>
         )}
