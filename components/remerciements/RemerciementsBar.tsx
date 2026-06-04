@@ -10,7 +10,7 @@ const elevesRemercies = [
   "Arthur",
   "Ben",
   "Enzo",
-  "Kaela",
+  "Keïla",
   "Tamara",
   "Gaëtan"
 ];
