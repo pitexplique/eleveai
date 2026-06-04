@@ -4,7 +4,7 @@ import { startTutorSessionV4 } from "@/lib/tutor-v4/tutorEngineV4";
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const { classe, matiere, notion, microId } = body;
+    const { classe, matiere, notion, microId, displayMode } = body;
 
     if (
       typeof classe !== "string" ||
@@ -22,6 +22,10 @@ export async function POST(req: NextRequest) {
       matiere,
       notion,
       microId: typeof microId === "string" ? microId : undefined,
+      displayMode:
+        displayMode === "simple" || displayMode === "complete"
+          ? displayMode
+          : undefined,
     });
 
     return NextResponse.json(result);

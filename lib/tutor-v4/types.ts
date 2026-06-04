@@ -262,6 +262,7 @@ export type TutorSessionV4 = {
   updatedAt: number;
   classe: string;
   matiere: string;
+  displayMode?: "simple" | "complete";
   mode: TutorMode;
   notionFocus: string;
   microFocus: string;
@@ -292,6 +293,7 @@ export type StartTutorV4Input = {
   matiere: string;
   notion: string;
   microId?: string;
+  displayMode?: "simple" | "complete";
 };
 
 export type StartTutorV4Response = {

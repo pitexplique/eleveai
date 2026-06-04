@@ -75,11 +75,13 @@ import type {
 
 import { getTutorLesson } from "@/lib/tutor-v4/lessons/getTutorLesson";
 import { LessonPanel } from "@/lib/tutor-v4/lessons/components/LessonPanel";
+import TutorSimpleView from "./TutorSimpleView";
 
 import { useRouter, useSearchParams } from "next/navigation";
 
 type StartResponse = StartTutorV4Response;
 type AnswerResponse = AnswerTutorV4Response;
+type TutorDisplayMode = "simple" | "complete";
 
 type JumpResponse = {
   pair: TutorQuestionPair;
@@ -341,6 +343,34 @@ function normalizeMatiere(value: string | null): Matiere {
   return value === "francais" ? "francais" : "maths";
 }
 
+function isPrimaryClasse(value: Classe) {
+  return ["cp", "ce1", "ce2", "cm1", "cm2"].includes(value);
+}
+
+function normalizeDisplayMode(value: string | null): TutorDisplayMode | null {
+  return value === "simple" || value === "complete" ? value : null;
+}
+
+function defaultDisplayModeForClasse(value: Classe): TutorDisplayMode {
+  return isPrimaryClasse(value) ? "simple" : "complete";
+}
+
+function selectSimpleOption(pair: TutorQuestionPair): TutorQuestionOption {
+  const options = [pair.optionA, pair.optionB];
+
+  return options.sort((a, b) => {
+    const distanceA = Math.abs(a.meta.starLevel - pair.recommendedStar);
+    const distanceB = Math.abs(b.meta.starLevel - pair.recommendedStar);
+
+    if (distanceA !== distanceB) return distanceA - distanceB;
+    if (a.meta.starLevel !== b.meta.starLevel) {
+      return a.meta.starLevel - b.meta.starLevel;
+    }
+
+    return a.text.length - b.text.length;
+  })[0];
+}
+
 export default function TutorV4Page() {
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -357,6 +387,7 @@ export default function TutorV4Page() {
   const [notion, setNotion] = useState("");
   const [urlInitDone, setUrlInitDone] = useState(false);
   const [showLesson, setShowLesson] = useState(false);
+  const [displayMode, setDisplayMode] = useState<TutorDisplayMode>("complete");
 
   const hasInitializedFromUrl = useRef(false);
   const hasStartedFromUrl = useRef(false);
@@ -368,6 +399,7 @@ const lastUrlSelectionRef = useRef<string>("");
 
 const questionTopRef = useRef<HTMLDivElement | null>(null);
 const hasForcedTopScrollRef = useRef(false);
+const autoActivatedPairRef = useRef<string | null>(null);
 
 function scrollToQuestions() {
   window.setTimeout(() => {
@@ -481,6 +513,7 @@ useEffect(() => {
   const urlMatiere = normalizeMatiere(searchParams.get("matiere"));
   const urlNotion = searchParams.get("notion");
   const urlMicroId = searchParams.get("microId");
+  const urlDisplayMode = normalizeDisplayMode(searchParams.get("display"));
 
   const options = getNotionOptions(urlClasse, urlMatiere);
   const initialNotion =
@@ -492,6 +525,7 @@ useEffect(() => {
   setClasse(urlClasse);
   setMatiere(urlMatiere);
   setNotion(initialNotion);
+  setDisplayMode(urlDisplayMode ?? defaultDisplayModeForClasse(urlClasse));
 
   initialMicroIdRef.current = urlMicroId;
   hasInitializedFromUrl.current = true;
@@ -575,7 +609,7 @@ useEffect(() => {
     return notionMicroMap[notion] ?? [];
   }, [notion, notionMicroMap]);
 
-  const currentLesson = useMemo(() => {
+const currentLesson = useMemo(() => {
   if (!notion) return null;
 
   return getTutorLesson({
@@ -589,6 +623,15 @@ useEffect(() => {
       : undefined,
   });
 }, [classe, matiere, notion, activeMicroId]);
+
+useEffect(() => {
+  if (displayMode !== "simple") return;
+  if (!sessionId || !pair || currentQuestion || busy || wrongAnswerPanelOpen) return;
+  if (autoActivatedPairRef.current === pair.pairId) return;
+
+  autoActivatedPairRef.current = pair.pairId;
+  void activateQuestion(sessionId, selectSimpleOption(pair));
+}, [displayMode, sessionId, pair, currentQuestion, busy, wrongAnswerPanelOpen]);
 
   function resetMicroStatusesForNotion(notionId: string) {
     const micros = notionMicroMap[notionId] ?? [];
@@ -734,6 +777,7 @@ function continueAfterExplanation() {
           matiere,
           notion,
           microId: targetMicroId,
+          displayMode,
         }),
       });
 
@@ -1092,6 +1136,63 @@ function handleInputKeyDown(
     setSaveMessage("Séance enregistrée ✅");
   }
 
+  const lessonModal =
+    showLesson && currentLesson ? (
+      <div className="fixed inset-0 z-[60] overflow-y-auto bg-black/60 px-3 py-6">
+        <div className="mx-auto max-w-2xl">
+          <LessonPanel lesson={currentLesson} onClose={() => setShowLesson(false)} />
+        </div>
+      </div>
+    ) : null;
+
+  if (displayMode === "simple") {
+    return (
+      <>
+        <TutorSimpleView
+          classe={classe}
+          matiere={matiere}
+          notionLabel={notion ? notionLabel(notion, classe, matiere) : "Entraînement"}
+          microLabel={
+            currentQuestion
+              ? microLabel(currentQuestion.microId, classe, matiere)
+              : activeMicroId
+              ? microLabel(activeMicroId, classe, matiere)
+              : undefined
+          }
+          currentQuestion={currentQuestion}
+          answer={answer}
+          setAnswer={setAnswer}
+          busy={busy}
+          feedback={feedback}
+          wrongAnswerPanelOpen={wrongAnswerPanelOpen}
+          wrongAnswerPanel={
+            currentQuestion ? (
+              <WrongAnswerPanel
+                question={currentQuestion}
+                userAnswer={lastSubmittedAnswer}
+                explanation={explanationText}
+                onContinue={continueAfterExplanation}
+              />
+            ) : null
+          }
+          score={scoreSeanceSur20}
+          elapsedTime={formatDuration(elapsedSeconds)}
+          questionsDone={nbTentatives}
+          currentStar={recommendedStar}
+          renderCanvas={(question) => renderCanvas(question.canvas)}
+          onBackCoach={() => router.push(`/coach-ia/${matiere}`)}
+          onSwitchToComplete={() => setDisplayMode("complete")}
+          onStart={() => void startSession(activeMicroId ?? undefined)}
+          onSubmit={() => void submitAnswer()}
+          onQcmClick={(choice) => void handleQcmClick(choice)}
+          onInputKeyDown={handleInputKeyDown}
+          onShowLesson={() => setShowLesson(true)}
+        />
+        {lessonModal}
+      </>
+    );
+  }
+
  return (
   <main className="min-h-screen bg-[#f3f4f6] px-2 py-3 sm:px-4 sm:py-6">
     <div className="mx-auto max-w-7xl">
@@ -1117,7 +1218,7 @@ function handleInputKeyDown(
       <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_340px]">
         <div className="space-y-4">
           <section className="space-y-3">
-            <div className="grid gap-3 sm:grid-cols-[1fr_180px]">
+            <div className="grid gap-3 sm:grid-cols-[1fr_180px_180px]">
               <button
                 onClick={() => router.push(`/coach-ia/${matiere}`)}
                 className="flex w-full items-center justify-center rounded-2xl bg-orange-500 px-4 py-3 text-sm font-black text-white shadow hover:bg-orange-600"
@@ -1128,6 +1229,14 @@ function handleInputKeyDown(
               <div className="rounded-2xl border border-slate-200 bg-white px-4 py-3 text-center text-sm font-black text-slate-800 shadow-sm">
                 Classe : {classe}
               </div>
+
+              <button
+                type="button"
+                onClick={() => setDisplayMode("simple")}
+                className="rounded-2xl border border-slate-200 bg-white px-4 py-3 text-center text-sm font-black text-slate-800 shadow-sm hover:bg-slate-50"
+              >
+                Mode simple
+              </button>
             </div>
 
             <div className="rounded-2xl border border-slate-200 bg-white p-3 shadow-sm">

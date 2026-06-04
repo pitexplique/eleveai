@@ -309,6 +309,7 @@ function tryBuildPair(args: {
   microId: string;
   recommendedStar: StarLevel;
   recentQuestionIds: string[];
+  preferExactStar?: boolean;
 }): TutorQuestionPair | null {
   try {
     return buildQuestionPair(args);
@@ -330,6 +331,7 @@ function findNextAvailableMicroInNotion(args: {
   masteryByMicro: Record<string, number>;
   recommendedStar: StarLevel;
   recentQuestionIds: string[];
+  preferExactStar?: boolean;
 }): { micro: KnowledgeMicroSkill; pair: TutorQuestionPair } | null {
   const {
     knowledge,
@@ -340,6 +342,7 @@ function findNextAvailableMicroInNotion(args: {
     masteryByMicro,
     recommendedStar,
     recentQuestionIds,
+    preferExactStar,
   } = args;
 
   const candidates: KnowledgeMicroSkill[] = [];
@@ -371,6 +374,7 @@ function findNextAvailableMicroInNotion(args: {
       microId: micro.id,
       recommendedStar,
       recentQuestionIds,
+      preferExactStar,
     });
 
     if (pair) {
@@ -411,7 +415,8 @@ export async function startTutorSessionV4(
     throw new Error("Aucune micro-compétence trouvée.");
   }
 
-  const recommendedDifficulty: DifficultyLevel = 2;
+  const isSimpleMode = input.displayMode === "simple";
+  const recommendedDifficulty: DifficultyLevel = isSimpleMode ? 1 : 2;
   const recommendedStar: StarLevel = recommendedDifficulty;
 
   let pair = tryBuildPair({
@@ -420,6 +425,7 @@ export async function startTutorSessionV4(
     microId: firstMicro.id,
     recommendedStar,
     recentQuestionIds: [],
+    preferExactStar: isSimpleMode,
   });
 
   let actualMicro = firstMicro;
@@ -434,6 +440,7 @@ export async function startTutorSessionV4(
       masteryByMicro: mastery.micro,
       recommendedStar,
       recentQuestionIds: [],
+      preferExactStar: isSimpleMode,
     });
 
     if (!fallback) {
@@ -457,6 +464,7 @@ export async function startTutorSessionV4(
 
     classe: input.classe,
     matiere: input.matiere,
+    displayMode: input.displayMode,
     mode: "evaluation",
 
     notionFocus: notion.id,
@@ -566,12 +574,15 @@ export async function jumpToMicroV4(
     );
   }
 
+  const isSimpleMode = session.displayMode === "simple";
+
   let pair = tryBuildPair({
     bank,
     notionId: session.notionFocus,
     microId: targetMicro.id,
     recommendedStar: session.recommendedStar,
     recentQuestionIds: session.recentQuestionIds,
+    preferExactStar: isSimpleMode,
   });
 
   if (!pair) {
@@ -584,6 +595,7 @@ export async function jumpToMicroV4(
       masteryByMicro: session.masteryByMicro,
       recommendedStar: session.recommendedStar,
       recentQuestionIds: session.recentQuestionIds,
+      preferExactStar: isSimpleMode,
     });
 
     if (!fallback) {
@@ -762,8 +774,15 @@ export async function answerTutorV4(
     consecutiveErrors: session.consecutiveErrors,
   });
 
-  session.recommendedStar = starUpdate.nextStar;
-  session.recommendedDifficulty = starUpdate.nextDifficulty;
+  const isSimpleMode = session.displayMode === "simple";
+  const simpleNextStar = result.ok
+    ? (Math.min(5, session.recommendedStar + 1) as StarLevel)
+    : session.consecutiveErrors >= 2
+    ? (Math.max(1, session.recommendedStar - 1) as StarLevel)
+    : session.recommendedStar;
+
+  session.recommendedStar = isSimpleMode ? simpleNextStar : starUpdate.nextStar;
+  session.recommendedDifficulty = session.recommendedStar;
 
   updateLearnerProfile({
     profile: session.learnerProfile,
@@ -840,6 +859,7 @@ export async function answerTutorV4(
       microId: session.microFocus,
       recommendedStar: session.recommendedStar,
       recentQuestionIds: session.recentQuestionIds,
+      preferExactStar: isSimpleMode,
     });
   }
 
@@ -853,6 +873,7 @@ export async function answerTutorV4(
       masteryByMicro: session.masteryByMicro,
       recommendedStar: session.recommendedStar,
       recentQuestionIds: session.recentQuestionIds,
+      preferExactStar: isSimpleMode,
     });
 
     if (fallback) {

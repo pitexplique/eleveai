@@ -178,8 +178,9 @@ export function buildQuestionPair(args: {
   microId: string;
   recommendedStar: StarLevel;
   recentQuestionIds?: string[];
+  preferExactStar?: boolean;
 }): TutorQuestionPair {
-  const { bank, notionId, microId, recommendedStar, recentQuestionIds = [] } =
+  const { bank, notionId, microId, recommendedStar, recentQuestionIds = [], preferExactStar = false } =
     args;
 
   const allForMicro = bank.filter(
@@ -203,7 +204,17 @@ export function buildQuestionPair(args: {
     return Math.abs(star - recommendedStar) <= 1;
   });
 
-  const source = nearLevel.length >= 2 ? nearLevel : usable;
+  const exactLevel = usable.filter((item) => {
+    const star = difficultyToStar(item.difficulty);
+    return star === recommendedStar;
+  });
+
+  const source =
+    preferExactStar && exactLevel.length >= 2
+      ? exactLevel
+      : nearLevel.length >= 2
+      ? nearLevel
+      : usable;
 
   const firstItem = pickRandom(source);
   const optionA = toTutorQuestionOption(firstItem);

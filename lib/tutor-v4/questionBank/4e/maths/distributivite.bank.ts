@@ -117,6 +117,34 @@ function randomChoice<T>(arr: T[]): T {
   return arr[Math.floor(Math.random() * arr.length)];
 }
 
+function formatLinearExpression(coeff: number, constante: number, spaced = false) {
+  const xPart = coeff === 0 ? "" : coeff === 1 ? "x" : coeff === -1 ? "-x" : `${coeff}x`;
+
+  if (constante === 0) return xPart || "0";
+  if (!xPart) return `${constante}`;
+
+  const sign = constante > 0 ? "+" : "-";
+  const separator = spaced ? ` ${sign} ` : sign;
+  return `${xPart}${separator}${Math.abs(constante)}`;
+}
+
+function formatQuadraticExpression(linear: number, constante: number, power: "²" | "^2", spaced = false) {
+  let expression = `x${power}`;
+
+  if (linear !== 0) {
+    const sign = linear > 0 ? "+" : "-";
+    const coeff = Math.abs(linear) === 1 ? "" : `${Math.abs(linear)}`;
+    expression += spaced ? ` ${sign} ${coeff}x` : `${sign}${coeff}x`;
+  }
+
+  if (constante !== 0) {
+    const sign = constante > 0 ? "+" : "-";
+    expression += spaced ? ` ${sign} ${Math.abs(constante)}` : `${sign}${Math.abs(constante)}`;
+  }
+
+  return expression;
+}
+
 export const distributiviteBank: TutorBankItemV4[] = [
   // =========================
   // DISTRIB_SIMPLE
@@ -578,6 +606,441 @@ export const distributiviteBank: TutorBankItemV4[] = [
           "\n\nConclusion : l’expression obtenue est développée ou réduite correctement.",
       };
     },
+  },
+
+  // =========================
+  // DISTRIB_REDUIRE (exercices supplémentaires progressifs)
+  // =========================
+  {
+    kind: "template",
+    id: "litteral_distributivite_reduire_tpl_deux_parentheses_1",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "litteral_distributivite",
+    microId: "litteral_distributivite_reduire",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Développe chaque parenthèse, puis regroupe les termes en x et les constantes.",
+    tags: ["litteral_distributivite", "reduire", "template"],
+    generate: () => {
+      const a = randomInt(2, 5);
+      const b = randomInt(1, 5);
+      const c = randomInt(2, 5);
+      const d = randomInt(1, 5);
+      const coeff = a + c;
+      const constante = a * b + c * d;
+
+      return {
+        text: `Développer puis réduire : ${a}(x + ${b}) + ${c}(x + ${d})`,
+        format: "short",
+        expected: [`${coeff}x+${constante}`, `${coeff}x + ${constante}`],
+        comparator: "contains_keyword",
+        explanation: "Définition : la distributivité permet de transformer un produit en somme.\n\n" +
+          "Méthode : développe chaque parenthèse puis regroupe les termes semblables.\n\nCalcul : " +
+          `${a}(x + ${b}) + ${c}(x + ${d}) = ${a}x + ${a * b} + ${c}x + ${c * d} = ${coeff}x + ${constante}.` +
+          "\n\nConclusion : l'expression réduite est obtenue en regroupant les termes de même nature.",
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "litteral_distributivite_reduire_tpl_soustraction_1",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "litteral_distributivite",
+    microId: "litteral_distributivite_reduire",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Attention au signe négatif devant la deuxième parenthèse : il se distribue à chaque terme.",
+    tags: ["litteral_distributivite", "reduire", "soustraction", "template"],
+    generate: () => {
+      const a = randomInt(3, 6);
+      const b = randomInt(1, 5);
+      const c = randomInt(2, 5);
+      const d = randomInt(1, 5);
+      const coeff = a - c;
+      const constante = a * b - c * d;
+      const reduced = formatLinearExpression(coeff, constante);
+      const reducedSpaced = formatLinearExpression(coeff, constante, true);
+
+      return {
+        text: `Développer puis réduire : ${a}(x + ${b}) - ${c}(x + ${d})`,
+        format: "short",
+        expected: [reduced, reducedSpaced],
+        comparator: "contains_keyword",
+        explanation: "Définition : la distributivité permet de transformer un produit en somme.\n\n" +
+          "Méthode : distribue le signe négatif aussi.\n\nCalcul : " +
+          `${a}(x + ${b}) - ${c}(x + ${d}) = ${a}x + ${a * b} - ${c}x - ${c * d} = ${reducedSpaced}.` +
+          "\n\nConclusion : attention, le signe moins se distribue à tous les termes de la parenthèse.",
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "litteral_distributivite_reduire_tpl_negatif_1",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "litteral_distributivite",
+    microId: "litteral_distributivite_reduire",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Le coefficient négatif multiplie chaque terme de la parenthèse.",
+    tags: ["litteral_distributivite", "reduire", "negatif", "template"],
+    generate: () => {
+      const a = randomInt(2, 5);
+      const b = randomInt(1, 5);
+      const c = randomInt(1, 6);
+      const coeff = -a + c;
+      const constante = -(a * b);
+      const reduced = formatLinearExpression(coeff, constante);
+      const reducedSpaced = formatLinearExpression(coeff, constante, true);
+
+      return {
+        text: `Développer puis réduire : -${a}(x + ${b}) + ${c}x`,
+        format: "short",
+        expected: [reduced, reducedSpaced],
+        comparator: "contains_keyword",
+        explanation: "Définition : la distributivité permet de transformer un produit en somme.\n\n" +
+          `Méthode : -${a} multiplie x et ${b}.\n\nCalcul : ` +
+          `-${a}(x + ${b}) + ${c}x = -${a}x - ${a * b} + ${c}x = ${reducedSpaced}.` +
+          "\n\nConclusion : regrouper les termes en x puis les constantes.",
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "litteral_distributivite_reduire_tpl_trois_termes_1",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "litteral_distributivite",
+    microId: "litteral_distributivite_reduire",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Développe les deux parenthèses séparément, puis regroupe tout.",
+    tags: ["litteral_distributivite", "reduire", "complexe", "template"],
+    generate: () => {
+      const a = randomInt(2, 4);
+      const b = randomInt(1, 4);
+      const c = randomInt(2, 4);
+      const d = randomInt(1, 4);
+      const e = randomInt(1, 6);
+      const coeff = a + c;
+      const constante = a * b + c * d + e;
+
+      return {
+        text: `Développer puis réduire : ${a}(x + ${b}) + ${c}(x + ${d}) + ${e}`,
+        format: "short",
+        expected: [`${coeff}x+${constante}`, `${coeff}x + ${constante}`],
+        comparator: "contains_keyword",
+        explanation: "Méthode : développe chaque parenthèse, puis regroupe les x et les constantes.\n\nCalcul : " +
+          `${a}(x + ${b}) + ${c}(x + ${d}) + ${e} = ${a}x + ${a * b} + ${c}x + ${c * d} + ${e} = ${coeff}x + ${constante}.`,
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "litteral_distributivite_reduire_tpl_mixte_1",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "litteral_distributivite",
+    microId: "litteral_distributivite_reduire",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Développe, puis regroupe les x d'un côté et les nombres de l'autre.",
+    tags: ["litteral_distributivite", "reduire", "mixte", "template"],
+    generate: () => {
+      const a = randomInt(2, 5);
+      const b = randomInt(1, 5);
+      const c = randomInt(2, 5);
+      const d = randomInt(1, 5);
+      const coeff = a - c;
+      const constante = a * b - c * d;
+      const reduced = formatLinearExpression(coeff, constante);
+      const reducedSpaced = formatLinearExpression(coeff, constante, true);
+
+      return {
+        text: `Développer puis réduire : ${a}(x + ${b}) - ${c}(x + ${d})`,
+        format: "short",
+        expected: [reduced, reducedSpaced],
+        comparator: "contains_keyword",
+        explanation: "Méthode : distribue le signe moins à tous les termes de la deuxième parenthèse.\n\nCalcul : " +
+          `${a}(x + ${b}) - ${c}(x + ${d}) = ${a}x + ${a * b} - ${c}x - ${c * d} = ${reducedSpaced}.`,
+      };
+    },
+  },
+
+  // =========================
+  // DISTRIB_FACTORISATION (via distributivité inverse)
+  // =========================
+  {
+    kind: "fixed",
+    id: "litteral_distributivite_facto_fixed_1",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "litteral_distributivite",
+    microId: "litteral_distributivite_factorisation",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Quelle est la forme factorisée de 4x + 12 ?",
+    format: "qcm",
+    choices: ["4(x + 3)", "4(x + 12)", "2(2x + 6)", "4x(1 + 3)"],
+    expected: ["4(x + 3)"],
+    comparator: "mcq_exact",
+    hint: "Cherche le plus grand facteur commun à 4x et 12.",
+    explanation: "Définition : factoriser, c'est écrire une somme sous la forme d'un produit.\n\n" +
+      "Méthode : on repère le facteur commun (ici 4), puis on le met en facteur.\n\nCalcul : " +
+      "4x + 12 = 4 × x + 4 × 3 = 4(x + 3)." +
+      "\n\nConclusion : vérifier en développant 4(x + 3) = 4x + 12.",
+    tags: ["litteral_distributivite", "factorisation", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "litteral_distributivite_facto_tpl_simple_1",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "litteral_distributivite",
+    microId: "litteral_distributivite_factorisation",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Cherche le facteur commun aux deux termes.",
+    tags: ["litteral_distributivite", "factorisation", "template"],
+    generate: () => {
+      const a = randomInt(2, 7);
+      const b = randomInt(2, 8);
+      const ax = a;
+      const ab = a * b;
+
+      return {
+        text: `Factoriser : ${ax}x + ${ab}`,
+        format: "short",
+        expected: [`${a}(x+${b})`, `${a}(x + ${b})`],
+        comparator: "contains_keyword",
+        explanation: `Méthode : le facteur commun à ${ax}x et ${ab} est ${a}.\n\nCalcul : ` +
+          `${ax}x + ${ab} = ${a} × x + ${a} × ${b} = ${a}(x + ${b}).`,
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "litteral_distributivite_facto_tpl_simple_2",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "litteral_distributivite",
+    microId: "litteral_distributivite_factorisation",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Identifie le facteur commun, puis divise chaque terme par lui.",
+    tags: ["litteral_distributivite", "factorisation", "soustraction", "template"],
+    generate: () => {
+      const a = randomInt(2, 7);
+      const b = randomInt(2, 8);
+
+      return {
+        text: `Factoriser : ${a}x - ${a * b}`,
+        format: "short",
+        expected: [`${a}(x-${b})`, `${a}(x - ${b})`],
+        comparator: "contains_keyword",
+        explanation: `Méthode : le facteur commun à ${a}x et ${a * b} est ${a}.\n\nCalcul : ` +
+          `${a}x - ${a * b} = ${a}(x - ${b}).`,
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "litteral_distributivite_facto_tpl_coeff_1",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "litteral_distributivite",
+    microId: "litteral_distributivite_factorisation",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Le facteur commun peut être une lettre ou un nombre selon l'expression.",
+    tags: ["litteral_distributivite", "factorisation", "coeff", "template"],
+    generate: () => {
+      const a = randomInt(2, 6);
+      const b = randomInt(2, 6);
+      const c = randomInt(2, 5);
+
+      return {
+        text: `Factoriser : ${a * b}x + ${a * c}`,
+        format: "short",
+        expected: [`${a}(${b}x+${c})`, `${a}(${b}x + ${c})`],
+        comparator: "contains_keyword",
+        explanation: `Méthode : repère le facteur commun entre ${a * b}x et ${a * c}.\n\nCalcul : ` +
+          `${a * b}x + ${a * c} = ${a}(${b}x + ${c}).`,
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "litteral_distributivite_facto_tpl_verif_1",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "litteral_distributivite",
+    microId: "litteral_distributivite_factorisation",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Factorise puis vérifie en développant.",
+    tags: ["litteral_distributivite", "factorisation", "verification", "template"],
+    generate: () => {
+      const a = randomInt(3, 7);
+      const b = randomInt(1, 6);
+
+      return {
+        text: `Factoriser ${a}x + ${a * b}, puis vérifier en développant.`,
+        format: "short",
+        expected: [`${a}(x+${b})`, `${a}(x + ${b})`],
+        comparator: "contains_keyword",
+        explanation: "Calcul : " +
+          `${a}x + ${a * b} = ${a}(x + ${b}). Vérification : ${a}(x + ${b}) = ${a}x + ${a * b}. ✓`,
+      };
+    },
+  },
+
+  // =========================
+  // DISTRIB_DOUBLE (exercices supplémentaires progressifs)
+  // =========================
+  {
+    kind: "template",
+    id: "litteral_distributivite_double_tpl_formel_3",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "litteral_distributivite",
+    microId: "litteral_distributivite_double",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Fais les quatre produits, attention aux signes.",
+    tags: ["litteral_distributivite", "double", "template"],
+    generate: () => {
+      const b = randomInt(1, 5);
+      const c = randomInt(1, 5);
+      const prod = b * c;
+
+      return {
+        text: `Développer : (x - ${b})(x - ${c})`,
+        format: "short",
+        expected: [
+          `x²-${b + c}x+${prod}`,
+          `x^2-${b + c}x+${prod}`,
+          `x² - ${b + c}x + ${prod}`,
+          `x^2 - ${b + c}x + ${prod}`,
+        ],
+        comparator: "contains_keyword",
+        explanation: "Méthode : on distribue chaque terme de la première parenthèse à chaque terme de la seconde.\n\nCalcul : " +
+          `(x - ${b})(x - ${c}) = x² - ${c}x - ${b}x + ${prod} = x² - ${b + c}x + ${prod}.`,
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "litteral_distributivite_double_tpl_formel_4",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "litteral_distributivite",
+    microId: "litteral_distributivite_double",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Développe puis regroupe les termes semblables.",
+    tags: ["litteral_distributivite", "double", "template"],
+    generate: () => {
+      const b = randomInt(2, 6);
+      const c = randomInt(2, 6);
+      const sum = b - c;
+      const constant = -b * c;
+
+      return {
+        text: `Développer et réduire : (x + ${b})(x - ${c})`,
+        format: "short",
+        expected: [
+          formatQuadraticExpression(sum, constant, "²"),
+          formatQuadraticExpression(sum, constant, "^2"),
+          formatQuadraticExpression(sum, constant, "²", true),
+          formatQuadraticExpression(sum, constant, "^2", true),
+        ],
+        comparator: "contains_keyword",
+        explanation: "Méthode : 4 produits.\n\nCalcul : " +
+          `(x + ${b})(x - ${c}) = x² - ${c}x + ${b}x - ${b * c} = ${formatQuadraticExpression(sum, constant, "²", true)}.`,
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "litteral_distributivite_double_tpl_coeff_1",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "litteral_distributivite",
+    microId: "litteral_distributivite_double",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Le premier terme n'est pas x mais un multiple de x.",
+    tags: ["litteral_distributivite", "double", "coeff", "template"],
+    generate: () => {
+      const a = randomInt(2, 3);
+      const b = randomInt(1, 4);
+      const c = randomInt(1, 4);
+
+      return {
+        text: `Développer et réduire : (${a}x + ${b})(x + ${c})`,
+        format: "short",
+        expected: [
+          `${a}x²+${a * c + b}x+${b * c}`,
+          `${a}x^2+${a * c + b}x+${b * c}`,
+          `${a}x² + ${a * c + b}x + ${b * c}`,
+        ],
+        comparator: "contains_keyword",
+        explanation: "Méthode : développe les 4 produits.\n\nCalcul : " +
+          `(${a}x + ${b})(x + ${c}) = ${a}x² + ${a * c}x + ${b}x + ${b * c} = ${a}x² + ${a * c + b}x + ${b * c}.`,
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "litteral_distributivite_double_tpl_purecoeff_1",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "litteral_distributivite",
+    microId: "litteral_distributivite_double",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Développe puis regroupe le terme en x² et les termes en x.",
+    tags: ["litteral_distributivite", "double", "template"],
+    generate: () => {
+      const a = randomInt(1, 3);
+      const b = randomInt(1, 4);
+      const c = randomInt(1, 3);
+      const d = randomInt(1, 4);
+
+      return {
+        text: `Développer et réduire : (${a}x + ${b})(${c}x + ${d})`,
+        format: "short",
+        expected: [
+          `${a * c}x²+${a * d + b * c}x+${b * d}`,
+          `${a * c}x^2+${a * d + b * c}x+${b * d}`,
+          `${a * c}x² + ${a * d + b * c}x + ${b * d}`,
+        ],
+        comparator: "contains_keyword",
+        explanation: "Méthode : 4 produits.\n\nCalcul : " +
+          `(${a}x + ${b})(${c}x + ${d}) = ${a * c}x² + ${a * d}x + ${b * c}x + ${b * d} = ${a * c}x² + ${a * d + b * c}x + ${b * d}.`,
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "litteral_distributivite_double_open_2",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "litteral_distributivite",
+    microId: "litteral_distributivite_double",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Développer et réduire : (x + 3)² (Rappel : (x + 3)² = (x + 3)(x + 3))",
+    format: "short",
+    expected: ["x²+6x+9", "x^2+6x+9", "x² + 6x + 9"],
+    comparator: "contains_keyword",
+    hint: "Écris (x + 3)(x + 3) et applique la double distributivité.",
+    explanation: "Méthode : (x + 3)(x + 3) = x² + 3x + 3x + 9 = x² + 6x + 9." +
+      "\n\nConclusion : c'est une identité remarquable (a + b)² = a² + 2ab + b².",
+    tags: ["litteral_distributivite", "double", "carre", "identite"],
   },
 
   // =========================
