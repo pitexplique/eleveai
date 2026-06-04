@@ -109,12 +109,8 @@ export default function CoachIA() {
   }, 0);
 
   function handleClick(notionId: string, microId: string) {
-    const display = ["cp", "ce1", "ce2", "cm1", "cm2"].includes(classe)
-      ? "simple"
-      : "complete";
-
     router.push(
-      `/tutor-v4?classe=${encodeURIComponent(classe)}&matiere=${encodeURIComponent(matiere)}&notion=${encodeURIComponent(notionId)}&microId=${encodeURIComponent(microId)}&display=${display}`
+      `/tutor-v4?classe=${encodeURIComponent(classe)}&matiere=${encodeURIComponent(matiere)}&notion=${encodeURIComponent(notionId)}&microId=${encodeURIComponent(microId)}&display=simple`
     );
   }
 

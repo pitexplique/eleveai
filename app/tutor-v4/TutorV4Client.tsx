@@ -352,7 +352,7 @@ function normalizeDisplayMode(value: string | null): TutorDisplayMode | null {
 }
 
 function defaultDisplayModeForClasse(value: Classe): TutorDisplayMode {
-  return isPrimaryClasse(value) ? "simple" : "complete";
+  return "simple";
 }
 
 function selectSimpleOption(pair: TutorQuestionPair): TutorQuestionOption {
@@ -387,7 +387,7 @@ export default function TutorV4Page() {
   const [notion, setNotion] = useState("");
   const [urlInitDone, setUrlInitDone] = useState(false);
   const [showLesson, setShowLesson] = useState(false);
-  const [displayMode, setDisplayMode] = useState<TutorDisplayMode>("complete");
+  const [displayMode, setDisplayMode] = useState<TutorDisplayMode>("simple");
 
   const hasInitializedFromUrl = useRef(false);
   const hasStartedFromUrl = useRef(false);
