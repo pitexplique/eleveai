@@ -25,7 +25,6 @@ type EleveSession = {
   type_utilisateur?: string | null;
 };
 
-const niveaux: EnglishMathsNiveau[] = ["A1", "A2", "B1", "B2"];
 const currentUnlockedDayIndex = 1;
 
 function playAudio(src?: string) {
@@ -168,47 +167,21 @@ export default function EnglishMathsClient() {
   const eleveContext = useEleve() as unknown as { eleve?: EleveSession | null };
   const eleve = eleveContext.eleve ?? null;
 
-  const [niveau, setNiveau] = useState<EnglishMathsNiveau>("A1");
-  const [selectedWeek, setSelectedWeek] = useState<string>("verbs-A1");
+  const niveau: EnglishMathsNiveau = "A1";
   const [mode, setMode] = useState<"words" | "quiz" | "result">("words");
-  const [selectedDayId, setSelectedDayId] = useState<string | null>(null);
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [saving, setSaving] = useState(false);
   const [saveMessage, setSaveMessage] = useState<string | null>(null);
 
-  const allDaysForNiveau = useMemo(
-    () => getEnglishMathsDaysByNiveau(niveau),
-    [niveau]
-  );
-
-  const availableWeeks = useMemo(() => {
-    return Array.from(new Set(allDaysForNiveau.map((item) => item.week)));
-  }, [allDaysForNiveau]);
-
-  const activeWeek = availableWeeks.includes(selectedWeek)
-    ? selectedWeek
-    : availableWeeks[availableWeeks.length - 1] ?? "2026-S01";
-
-  const weekDays = useMemo(
-    () => allDaysForNiveau.filter((item) => item.week === activeWeek),
-    [activeWeek, allDaysForNiveau]
-  );
+  const weekDays = useMemo(() => getEnglishMathsDaysByNiveau(niveau), []);
 
   const visibleWeekDays = useMemo(() => {
     return weekDays.filter((item) => item.dayIndex <= currentUnlockedDayIndex);
   }, [weekDays]);
 
   const day = useMemo(() => {
-    if (selectedDayId) {
-      return (
-        visibleWeekDays.find((item) => item.id === selectedDayId) ??
-        visibleWeekDays[visibleWeekDays.length - 1] ??
-        weekDays[0]
-      );
-    }
-
     return visibleWeekDays[visibleWeekDays.length - 1] ?? weekDays[0];
-  }, [selectedDayId, visibleWeekDays, weekDays]);
+  }, [visibleWeekDays, weekDays]);
 
   const wordsOfDay = useMemo(() => {
     if (!day) return [];
@@ -225,32 +198,6 @@ export default function EnglishMathsClient() {
 
   const answeredCount = Object.keys(answers).length;
   const canShowScore = answeredCount >= questions.length && questions.length > 0;
-
-  function selectDay(dayId: string) {
-    const unlockedDay = visibleWeekDays.find((item) => item.id === dayId);
-    if (!unlockedDay) return;
-
-    setSelectedDayId(dayId);
-    setMode("words");
-    setAnswers({});
-  }
-
-  function selectNiveau(nextNiveau: EnglishMathsNiveau) {
-    setNiveau(nextNiveau);
-    setSelectedWeek(`verbs-${nextNiveau}`);
-    setSelectedDayId(null);
-    setMode("words");
-    setAnswers({});
-    setSaveMessage(null);
-  }
-
-  function selectWeek(week: string) {
-    setSelectedWeek(week);
-    setSelectedDayId(null);
-    setMode("words");
-    setAnswers({});
-    setSaveMessage(null);
-  }
 
   function goToQuiz() {
     setAnswers({});
@@ -352,113 +299,6 @@ export default function EnglishMathsClient() {
           <p className="mt-3 max-w-2xl text-base font-semibold text-white/85">
             Le challenge de la semaine : des mots, de l’audio et un mini-défi chaque jour.
           </p>
-          <div className="mt-5">
-            <div>
-              <div className="mb-2 text-xs font-black uppercase tracking-[0.2em] text-cyan-100">
-                Niveau de langue
-              </div>
-
-              <div className="flex flex-wrap gap-2">
-                {niveaux.map((item) => {
-                  const active = niveau === item;
-
-                  return (
-                    <button
-                      key={item}
-                      type="button"
-                      onClick={() => selectNiveau(item)}
-                      className={[
-                        "rounded-full px-4 py-2 text-sm font-black ring-1 transition",
-                        active
-                          ? "bg-white text-slate-950 ring-white"
-                          : "bg-white/10 text-white ring-white/20 hover:bg-white/20",
-                      ].join(" ")}
-                    >
-                      {item}
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section className="mb-5 rounded-[2rem] border border-white/20 bg-white/15 p-4 shadow-2xl backdrop-blur-xl">
-          <div className="mb-3 flex items-center justify-between gap-3">
-            <div>
-              <div className="text-xs font-black uppercase tracking-[0.22em] text-white/70">
-                Étapes disponibles
-              </div>
-
-              <div className="mt-1 text-sm font-semibold text-white/80">
-                Clique sur une carte pour charger les mots.
-              </div>
-            </div>
-
-            <div className="hidden rounded-full bg-white/15 px-3 py-1.5 text-xs font-black text-white ring-1 ring-white/20 sm:block">
-              {day?.dayLabel ?? "J-5"}
-            </div>
-          </div>
-
-          <div className="grid gap-2 sm:grid-cols-3 lg:grid-cols-6">
-            {weekDays.map((item) => {
-              const active = day?.id === item.id;
-              const unlocked = item.dayIndex <= currentUnlockedDayIndex;
-
-              return (
-                <button
-                  key={item.id}
-                  type="button"
-                  onClick={() => selectDay(item.id)}
-                  disabled={!unlocked}
-                  className={[
-                    "group min-h-[92px] rounded-2xl border px-3 py-3 text-left shadow-lg transition",
-                    active
-                      ? "border-white bg-white text-slate-950"
-                      : !unlocked
-                        ? "cursor-not-allowed border-white/10 bg-white/5 text-white/45"
-                      : "border-white/15 bg-white/12 text-white hover:bg-white/20",
-                  ].join(" ")}
-                >
-                  <div
-                    className={[
-                      "mb-2 inline-flex rounded-full px-2.5 py-1 text-xs font-black",
-                      active
-                        ? "bg-emerald-500 text-slate-950"
-                        : !unlocked
-                          ? "bg-white/10 text-white/45"
-                        : "bg-white/15 text-white",
-                    ].join(" ")}
-                  >
-                    {item.dayLabel}
-                  </div>
-
-                  <div className="line-clamp-2 text-xs font-black leading-snug sm:text-[13px]">
-                    {item.title}
-                  </div>
-
-                  <div
-                    className={[
-                      "mt-1 line-clamp-1 text-[11px] font-bold",
-                      active
-                        ? "text-slate-600"
-                        : unlocked
-                          ? "text-white/65"
-                          : "text-white/40",
-                    ].join(" ")}
-                  >
-                    {unlocked ? item.theme : "Bloque"}
-                  </div>
-                </button>
-              );
-            })}
-          </div>
-
-          {visibleWeekDays.length < weekDays.length ? (
-            <div className="mt-3 rounded-2xl border border-white/15 bg-white/10 px-4 py-3 text-xs font-bold text-white/75">
-              Mardi, mercredi, jeudi et les jours suivants sont bloques pour l'instant.
-            </div>
-          ) : null}
         </section>
 
         {day ? (
@@ -466,16 +306,12 @@ export default function EnglishMathsClient() {
             <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
               <div>
                 <div className="text-xs font-black uppercase tracking-[0.2em] text-slate-500">
-                  {day.dayLabel} · {day.week}
+                  {day.dayLabel}
                 </div>
 
                 <h2 className="text-2xl font-black">
-                  {day.title}
+                  Mots du jour
                 </h2>
-              </div>
-
-              <div className="rounded-full bg-cyan-100 px-4 py-2 text-sm font-black text-cyan-950">
-                {day.theme}
               </div>
             </div>
 
