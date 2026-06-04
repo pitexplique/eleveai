@@ -107,6 +107,31 @@ function shuffleArray<T>(array: T[]): T[] {
   return copy;
 }
 
+function humanizeId(value?: string | null) {
+  return value
+    ? value.replace(/[_-]/g, " ").replace(/\s+/g, " ").trim()
+    : "";
+}
+
+function getLearningVideoHref(
+  question: ParcoursQuestion,
+  classe: ParcoursClasse
+) {
+  const query = [
+    "cours maths",
+    classe,
+    question.notionLabel,
+    humanizeId(question.notionId),
+    "explication video",
+  ]
+    .filter(Boolean)
+    .join(" ");
+
+  return `https://www.youtube.com/results?search_query=${encodeURIComponent(
+    query
+  )}`;
+}
+
 export default function ParcoursClient() {
   const supabase = createClient();
 
@@ -784,6 +809,7 @@ export default function ParcoursClient() {
               const userAnswer = answers[q.notionId] ?? "";
               const expected = q.question.expected ?? [];
               const correct = isCorrectAnswer(userAnswer, expected);
+              const learningVideoHref = getLearningVideoHref(q, classe);
 
               return (
                 <article
@@ -806,6 +832,28 @@ export default function ParcoursClient() {
                   <p className="whitespace-pre-line text-base font-semibold leading-relaxed">
                     {q.question.text}
                   </p>
+
+                  <div className="mt-4 rounded-3xl border border-sky-100 bg-sky-50 p-4 text-slate-900">
+                    <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                      <div>
+                        <p className="text-sm font-black text-sky-900">
+                          Tu ne comprends pas la notion ?
+                        </p>
+                        <p className="mt-1 text-sm font-bold text-slate-700">
+                          Regarde une video d'explication avant de repondre.
+                        </p>
+                      </div>
+
+                      <a
+                        href={learningVideoHref}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex shrink-0 items-center justify-center rounded-full bg-sky-600 px-5 py-3 text-sm font-black text-white shadow-lg hover:bg-sky-500"
+                      >
+                        Regarder la video
+                      </a>
+                    </div>
+                  </div>
 
                   {q.question.canvas ? (
                     <div className="mt-4 overflow-x-auto rounded-3xl bg-slate-50 p-3 ring-1 ring-slate-100">
