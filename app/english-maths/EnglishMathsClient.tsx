@@ -26,6 +26,7 @@ type EleveSession = {
 };
 
 const currentUnlockedDayIndex = 1;
+const niveaux: EnglishMathsNiveau[] = ["A1", "A2", "B1", "B2"];
 
 function playAudio(src?: string) {
   if (!src) return;
@@ -167,13 +168,16 @@ export default function EnglishMathsClient() {
   const eleveContext = useEleve() as unknown as { eleve?: EleveSession | null };
   const eleve = eleveContext.eleve ?? null;
 
-  const niveau: EnglishMathsNiveau = "A1";
+  const [niveau, setNiveau] = useState<EnglishMathsNiveau>("A1");
   const [mode, setMode] = useState<"words" | "quiz" | "result">("words");
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [saving, setSaving] = useState(false);
   const [saveMessage, setSaveMessage] = useState<string | null>(null);
 
-  const weekDays = useMemo(() => getEnglishMathsDaysByNiveau(niveau), []);
+  const weekDays = useMemo(
+    () => getEnglishMathsDaysByNiveau(niveau),
+    [niveau]
+  );
 
   const visibleWeekDays = useMemo(() => {
     return weekDays.filter((item) => item.dayIndex <= currentUnlockedDayIndex);
@@ -198,6 +202,13 @@ export default function EnglishMathsClient() {
 
   const answeredCount = Object.keys(answers).length;
   const canShowScore = answeredCount >= questions.length && questions.length > 0;
+
+  function selectNiveau(nextNiveau: EnglishMathsNiveau) {
+    setNiveau(nextNiveau);
+    setMode("words");
+    setAnswers({});
+    setSaveMessage(null);
+  }
 
   function goToQuiz() {
     setAnswers({});
@@ -299,6 +310,28 @@ export default function EnglishMathsClient() {
           <p className="mt-3 max-w-2xl text-base font-semibold text-white/85">
             Le challenge de la semaine : des mots, de l’audio et un mini-défi chaque jour.
           </p>
+
+          <div className="mt-5 flex flex-wrap gap-2">
+            {niveaux.map((item) => {
+              const active = niveau === item;
+
+              return (
+                <button
+                  key={item}
+                  type="button"
+                  onClick={() => selectNiveau(item)}
+                  className={[
+                    "rounded-full px-4 py-2 text-sm font-black ring-1 transition",
+                    active
+                      ? "bg-white text-slate-950 ring-white"
+                      : "bg-white/10 text-white ring-white/20 hover:bg-white/20",
+                  ].join(" ")}
+                >
+                  {item}
+                </button>
+              );
+            })}
+          </div>
         </section>
 
         {day ? (
