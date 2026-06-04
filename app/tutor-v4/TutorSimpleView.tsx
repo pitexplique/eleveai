@@ -38,6 +38,43 @@ function matiereLabel(matiere: Matiere) {
   return matiere === "francais" ? "Français" : "Maths";
 }
 
+function humanizeId(value?: string | null) {
+  return value
+    ? value.replace(/[_-]/g, " ").replace(/\s+/g, " ").trim()
+    : "";
+}
+
+function getLearningVideoHref({
+  classe,
+  matiere,
+  notionLabel,
+  microLabel,
+  currentQuestion,
+}: {
+  classe: Classe;
+  matiere: Matiere;
+  notionLabel: string;
+  microLabel?: string;
+  currentQuestion: TutorQuestionOption;
+}) {
+  const query = [
+    "cours",
+    matiereLabel(matiere),
+    classLabel(classe),
+    notionLabel,
+    microLabel,
+    humanizeId(currentQuestion.notionId),
+    humanizeId(currentQuestion.microId),
+    "explication video",
+  ]
+    .filter(Boolean)
+    .join(" ");
+
+  return `https://www.youtube.com/results?search_query=${encodeURIComponent(
+    query
+  )}`;
+}
+
 export default function TutorSimpleView({
   classe,
   matiere,
@@ -117,6 +154,34 @@ export default function TutorSimpleView({
                 <p className="mb-6 text-xl leading-8 text-slate-950">
                   {currentQuestion.text}
                 </p>
+
+                <div className="mb-6 rounded-2xl border border-sky-100 bg-sky-50 p-4 text-slate-900">
+                  <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                    <div>
+                      <p className="text-sm font-black text-sky-900">
+                        Tu ne comprends pas la notion ?
+                      </p>
+                      <p className="mt-1 text-sm font-bold text-slate-700">
+                        Regarde une video d'explication avant de repondre.
+                      </p>
+                    </div>
+
+                    <a
+                      href={getLearningVideoHref({
+                        classe,
+                        matiere,
+                        notionLabel,
+                        microLabel,
+                        currentQuestion,
+                      })}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex shrink-0 items-center justify-center rounded-full bg-sky-600 px-5 py-3 text-sm font-black text-white shadow-sm hover:bg-sky-500"
+                    >
+                      Regarder la video
+                    </a>
+                  </div>
+                </div>
 
                 {currentQuestion.canvas ? (
                   <div className="mb-6 overflow-x-auto rounded-xl bg-slate-50 p-3">
