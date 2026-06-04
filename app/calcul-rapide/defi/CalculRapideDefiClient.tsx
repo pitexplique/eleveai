@@ -6,6 +6,7 @@ import { useSearchParams } from "next/navigation";
 
 import { createClient } from "@/lib/supabase/client";
 import { useEleve } from "@/context/EleveContext";
+import { buildLearningVideoHref } from "@/lib/videoSearch";
 
 import type {
   CalculRapideItem,
@@ -341,33 +342,6 @@ function getScoreMessage(score: number, total: number) {
       "Pas grave : l’erreur sert à apprendre. Va t’entraîner dans Coach-IA puis reviens refaire le défi.",
     color: "text-red-300",
   };
-}
-
-function humanizeId(value?: string | null) {
-  return value
-    ? value.replace(/[_-]/g, " ").replace(/\s+/g, " ").trim()
-    : "";
-}
-
-function getLearningVideoHref(
-  question: GeneratedCalculRapideItem,
-  niveau: NiveauCalculRapide
-) {
-  const notion = humanizeId(question.notionId);
-  const micro = humanizeId(question.microId);
-  const query = [
-    "cours maths",
-    niveau,
-    notion,
-    micro,
-    "explication video",
-  ]
-    .filter(Boolean)
-    .join(" ");
-
-  return `https://www.youtube.com/results?search_query=${encodeURIComponent(
-    query
-  )}`;
 }
 
 export default function CalculRapideDefiClient() {
@@ -884,7 +858,14 @@ export default function CalculRapideDefiClient() {
     ...(currentQuestion.expected ?? []),
     ...currentQuestion.generatedExpected,
   ];
-  const learningVideoHref = getLearningVideoHref(currentQuestion, niveau);
+  const learningVideoHref = buildLearningVideoHref({
+    matiere: "maths",
+    niveau,
+    notionId: currentQuestion.notionId,
+    microId: currentQuestion.microId,
+    questionText: currentQuestion.displayText,
+    type: String(currentQuestion.type),
+  });
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-slate-950 via-[#062A4F] to-slate-950 px-4 py-8 text-white">

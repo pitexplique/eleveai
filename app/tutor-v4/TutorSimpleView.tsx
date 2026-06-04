@@ -3,6 +3,7 @@
 import type { KeyboardEvent, ReactNode } from "react";
 import type { Classe, Matiere } from "@/lib/tutor-v4/catalog";
 import type { TutorQuestionOption } from "@/lib/tutor-v4/types";
+import { buildLearningVideoHref } from "@/lib/videoSearch";
 
 type TutorSimpleViewProps = {
   classe: Classe;
@@ -36,43 +37,6 @@ function classLabel(classe: Classe) {
 
 function matiereLabel(matiere: Matiere) {
   return matiere === "francais" ? "Français" : "Maths";
-}
-
-function humanizeId(value?: string | null) {
-  return value
-    ? value.replace(/[_-]/g, " ").replace(/\s+/g, " ").trim()
-    : "";
-}
-
-function getLearningVideoHref({
-  classe,
-  matiere,
-  notionLabel,
-  microLabel,
-  currentQuestion,
-}: {
-  classe: Classe;
-  matiere: Matiere;
-  notionLabel: string;
-  microLabel?: string;
-  currentQuestion: TutorQuestionOption;
-}) {
-  const query = [
-    "cours",
-    matiereLabel(matiere),
-    classLabel(classe),
-    notionLabel,
-    microLabel,
-    humanizeId(currentQuestion.notionId),
-    humanizeId(currentQuestion.microId),
-    "explication video",
-  ]
-    .filter(Boolean)
-    .join(" ");
-
-  return `https://www.youtube.com/results?search_query=${encodeURIComponent(
-    query
-  )}`;
 }
 
 export default function TutorSimpleView({
@@ -167,12 +131,15 @@ export default function TutorSimpleView({
                     </div>
 
                     <a
-                      href={getLearningVideoHref({
-                        classe,
-                        matiere,
+                      href={buildLearningVideoHref({
+                        matiere: matiereLabel(matiere),
+                        niveau: classLabel(classe),
                         notionLabel,
                         microLabel,
-                        currentQuestion,
+                        notionId: currentQuestion.notionId,
+                        microId: currentQuestion.microId,
+                        questionText: currentQuestion.text,
+                        type: currentQuestion.format,
                       })}
                       target="_blank"
                       rel="noopener noreferrer"

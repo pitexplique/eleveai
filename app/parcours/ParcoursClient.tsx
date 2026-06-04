@@ -7,6 +7,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { CanvasRenderer } from "@/lib/canvas";
 import { createClient } from "@/lib/supabase/client";
 import { useEleve } from "@/context/EleveContext";
+import { buildLearningVideoHref } from "@/lib/videoSearch";
 
 import type {
   ParcoursAnswer,
@@ -105,31 +106,6 @@ function shuffleArray<T>(array: T[]): T[] {
   }
 
   return copy;
-}
-
-function humanizeId(value?: string | null) {
-  return value
-    ? value.replace(/[_-]/g, " ").replace(/\s+/g, " ").trim()
-    : "";
-}
-
-function getLearningVideoHref(
-  question: ParcoursQuestion,
-  classe: ParcoursClasse
-) {
-  const query = [
-    "cours maths",
-    classe,
-    question.notionLabel,
-    humanizeId(question.notionId),
-    "explication video",
-  ]
-    .filter(Boolean)
-    .join(" ");
-
-  return `https://www.youtube.com/results?search_query=${encodeURIComponent(
-    query
-  )}`;
 }
 
 export default function ParcoursClient() {
@@ -809,7 +785,14 @@ export default function ParcoursClient() {
               const userAnswer = answers[q.notionId] ?? "";
               const expected = q.question.expected ?? [];
               const correct = isCorrectAnswer(userAnswer, expected);
-              const learningVideoHref = getLearningVideoHref(q, classe);
+              const learningVideoHref = buildLearningVideoHref({
+                matiere: "maths",
+                niveau: classe,
+                notionLabel: q.notionLabel,
+                notionId: q.notionId,
+                questionText: q.question.text,
+                type: q.question.format,
+              });
 
               return (
                 <article
