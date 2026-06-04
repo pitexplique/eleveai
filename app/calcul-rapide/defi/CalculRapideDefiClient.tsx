@@ -343,6 +343,33 @@ function getScoreMessage(score: number, total: number) {
   };
 }
 
+function humanizeId(value?: string | null) {
+  return value
+    ? value.replace(/[_-]/g, " ").replace(/\s+/g, " ").trim()
+    : "";
+}
+
+function getLearningVideoHref(
+  question: GeneratedCalculRapideItem,
+  niveau: NiveauCalculRapide
+) {
+  const notion = humanizeId(question.notionId);
+  const micro = humanizeId(question.microId);
+  const query = [
+    "cours maths",
+    niveau,
+    notion,
+    micro,
+    "explication video",
+  ]
+    .filter(Boolean)
+    .join(" ");
+
+  return `https://www.youtube.com/results?search_query=${encodeURIComponent(
+    query
+  )}`;
+}
+
 export default function CalculRapideDefiClient() {
   const supabase = createClient();
 
@@ -857,6 +884,7 @@ export default function CalculRapideDefiClient() {
     ...(currentQuestion.expected ?? []),
     ...currentQuestion.generatedExpected,
   ];
+  const learningVideoHref = getLearningVideoHref(currentQuestion, niveau);
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-slate-950 via-[#062A4F] to-slate-950 px-4 py-8 text-white">
@@ -932,6 +960,30 @@ export default function CalculRapideDefiClient() {
             <p className="whitespace-pre-line text-2xl font-black leading-relaxed sm:text-4xl">
               {currentQuestion.displayText}
             </p>
+
+            <div className="mt-5 rounded-3xl border border-sky-100 bg-sky-50 p-4 text-slate-900">
+              <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                <div>
+                  <p className="text-sm font-black text-sky-900">
+                    Tu ne comprends pas la notion ?
+                  </p>
+                  <p className="mt-1 text-sm font-bold text-slate-700">
+                    Regarde une video d'explication avant de repondre, puis
+                    reviens au defi.
+                  </p>
+                </div>
+
+                <a
+                  href={learningVideoHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => setPaused(true)}
+                  className="inline-flex shrink-0 items-center justify-center rounded-full bg-sky-600 px-5 py-3 text-sm font-black text-white shadow-lg hover:bg-sky-500"
+                >
+                  Regarder la video
+                </a>
+              </div>
+            </div>
 
             <div className="mt-6">
               <input
