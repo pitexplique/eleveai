@@ -357,7 +357,7 @@ export default function AccueilPage() {
         EleveAI – Plusieurs portes pour apprendre les maths et suivre la progression des élèves. Du CM1 au Bac, à La Réunion.
       </h1>
 
-      {isCmPrimary ? renderModulesSection() : null}
+      {renderModulesSection()}
 
       {/* ── 2. DÉMARRAGE RAPIDE ─────────────────────────────────────────── */}
       <section className="bg-gradient-to-b from-[#062A4F] to-[#0B4F7A] px-4 py-8 sm:px-6 lg:px-8">
@@ -555,7 +555,7 @@ export default function AccueilPage() {
       </section>
 
       {/* ── 5. TOUS LES MODULES ──────────────────────────────────────────── */}
-      <section className={`${isCmPrimary ? "hidden" : ""} bg-gradient-to-b from-[#062A4F] to-[#041B33] px-4 py-8 pb-16 sm:px-6 lg:px-8`}>
+      <section className="hidden bg-gradient-to-b from-[#062A4F] to-[#041B33] px-4 py-8 pb-16 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-6xl">
           <div className="mb-5">
             <p className="text-xs font-black uppercase tracking-[0.25em] text-slate-400">
