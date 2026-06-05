@@ -65,6 +65,7 @@ export default function Header() {
     ].join(" ");
 
   const eleveLabel = eleve?.nom || eleve?.code_eleve || "Élève";
+  const eleveClasse = eleve?.classe?.toUpperCase() ?? null;
 
   const typeUtilisateur = eleve?.type_utilisateur ?? null;
   const isProf = typeUtilisateur === "prof";
@@ -76,7 +77,13 @@ export default function Header() {
     : isProf
       ? "/dashboard-prof"
       : "/dashboard-eleve";
-  const dashboardLabel = isPrincipal ? "Principal" : isProf ? "Prof" : eleveLabel;
+  const dashboardLabel = isPrincipal
+    ? "Principal"
+    : isProf
+      ? "Prof"
+      : eleveClasse
+        ? `${eleveLabel} · ${eleveClasse}`
+        : eleveLabel;
   const dashboardColor = isStaff
     ? "bg-gradient-to-r from-blue-300 to-indigo-300"
     : "bg-gradient-to-r from-emerald-300 to-cyan-300";

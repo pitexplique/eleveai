@@ -21,6 +21,7 @@ type AccesEtablissement = {
   code_utilisateur: string;
   type_utilisateur: string;
   nom: string | null;
+  classe: string | null;
   actif: boolean;
   created_at: string;
 };
@@ -129,7 +130,7 @@ export default function DashboardProfClient() {
 
       const [elevesRes, parcoursRes, calculRes, defisRes, englishRes, tutorRes] = await Promise.all([
         supabase.from("acces_etablissement")
-          .select("id, code_etablissement, code_utilisateur, type_utilisateur, nom, actif, created_at")
+          .select("id, code_etablissement, code_utilisateur, type_utilisateur, nom, classe, actif, created_at")
           .eq("code_etablissement", codeEtablissement)
           .eq("type_utilisateur", "eleve")
           .order("nom", { ascending: true }),

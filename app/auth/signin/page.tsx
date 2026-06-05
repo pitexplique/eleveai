@@ -6,7 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
-import { useEleve } from "@/context/EleveContext";
+import { inferClasseFromCode, useEleve } from "@/context/EleveContext";
 
 const RESEND_COOLDOWN_SECONDS = 30;
 const INDEPENDENT_ETABLISSEMENT_CODE = "INDEPENDANT";
@@ -288,7 +288,7 @@ export default function SignInPage() {
     try {
       const { data, error } = await supabase
         .from("acces_etablissement")
-        .select("id, code_etablissement, code_utilisateur, mot_de_passe, type_utilisateur, nom, actif")
+        .select("id, code_etablissement, code_utilisateur, mot_de_passe, type_utilisateur, nom, actif, classe")
         .eq("code_etablissement", ce)
         .eq("code_utilisateur", cu)
         .eq("actif", true)
@@ -323,6 +323,10 @@ export default function SignInPage() {
         code_eleve: data.code_utilisateur,
         nom: data.nom,
         type_utilisateur: data.type_utilisateur,
+        classe: data.classe ?? inferClasseFromCode(
+          data.code_utilisateur,
+          data.code_etablissement
+        ),
       });
 
       const type = data.type_utilisateur;

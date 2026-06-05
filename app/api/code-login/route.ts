@@ -15,7 +15,7 @@ export async function POST(req: Request) {
 
   const { data, error } = await supabaseAdmin
     .from("acces_etablissement")
-    .select("id, type_utilisateur, nom")
+    .select("id, type_utilisateur, nom, classe")
     .eq("code_etablissement", codeEtablissement.trim())
     .eq("code_utilisateur", codeUtilisateur.trim())
     .eq("actif", true)
@@ -35,6 +35,7 @@ export async function POST(req: Request) {
       utilisateurCodeId: data.id,
       role: data.type_utilisateur,
       nom: data.nom,
+      classe: data.classe,
     },
   });
 }
