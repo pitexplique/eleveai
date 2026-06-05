@@ -4,7 +4,7 @@ import EnglishMathsClient from "./EnglishMathsClient";
 
 export const metadata = {
   title: "English Maths - EleveAI",
-  description: "5 mots de maths en anglais par jour.",
+  description: "La semaine des verbes en anglais pour progresser en maths.",
 };
 
 export default function EnglishMathsPage() {

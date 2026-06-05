@@ -42,7 +42,7 @@ const portes = [
   {
     emoji: "🇬🇧",
     title: "English Maths",
-    text: "5 mots de vocabulaire mathématique en anglais par jour, avec audio et mini-défi.",
+    text: "La semaine des verbes en anglais, avec audio et mini-défi.",
     href: "/english-maths",
     color: "from-sky-500 to-blue-600",
   },

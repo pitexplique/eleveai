@@ -7,7 +7,7 @@ type BaseEnglishMathsDay = Omit<EnglishMathsDay, "id" | "niveau" | "week">;
 const baseDays: BaseEnglishMathsDay[] = [
   {
     dayIndex: 1,
-    dayLabel: "J-5",
+    dayLabel: "Semaine English Maths",
     title: "Découvrir les premiers mots",
     theme: "Challenge de la semaine",
     wordIds: [
@@ -20,7 +20,7 @@ const baseDays: BaseEnglishMathsDay[] = [
   },
   {
     dayIndex: 2,
-    dayLabel: "J-4",
+    dayLabel: "Semaine English Maths",
     title: "Comprendre les opérations",
     theme: "Challenge de la semaine",
     wordIds: [
@@ -33,7 +33,7 @@ const baseDays: BaseEnglishMathsDay[] = [
   },
   {
     dayIndex: 3,
-    dayLabel: "J-3",
+    dayLabel: "Semaine English Maths",
     title: "Géométrie : formes simples",
     theme: "Challenge de la semaine",
     wordIds: [
@@ -46,7 +46,7 @@ const baseDays: BaseEnglishMathsDay[] = [
   },
   {
     dayIndex: 4,
-    dayLabel: "J-2",
+    dayLabel: "Semaine English Maths",
     title: "Géométrie : vocabulaire utile",
     theme: "Challenge de la semaine",
     wordIds: [
@@ -59,7 +59,7 @@ const baseDays: BaseEnglishMathsDay[] = [
   },
   {
     dayIndex: 5,
-    dayLabel: "J-1",
+    dayLabel: "Semaine English Maths",
     title: "Révision finale du challenge",
     theme: "Dernière révision",
     wordIds: [
@@ -73,7 +73,7 @@ const baseDays: BaseEnglishMathsDay[] = [
   {
     dayIndex: 6,
     dayLabel: "Jour J",
-    title: "English Maths Challenge",
+    title: "Défi English Maths",
     theme: "Challenge final",
     wordIds: [
       "operations_plus",

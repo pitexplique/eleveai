@@ -60,11 +60,11 @@ const secondaires = [
   },
   {
     tag: "English Maths",
-    title: "5 mots par jour",
+    title: "Semaine des verbes",
     description:
-      "Point, vertex, angle, fraction… le vocabulaire des maths en anglais.",
+      "Écoute, répète et utilise les verbes utiles en maths.",
     href: "/english-maths",
-    action: "Découvrir",
+    action: "Commencer",
     accent: "#1D4ED8",
   },
 ];
@@ -113,7 +113,7 @@ const besoins = [
     color: "from-orange-400 to-amber-500",
   },
   {
-    title: "Maths en anglais",
+    title: "Semaine des verbes",
     href: "/english-maths",
     action: "English Maths",
     icon: "🇬🇧",
@@ -321,7 +321,7 @@ export default function AccueilPage() {
               />
               <Image
                 src="/images/accueil-eleveai-reunion.webp"
-                alt="EleveAI - Maths, francais et anglais. CP a Terminale, avec niveaux A1 A2 B1 B2 pour l'anglais."
+                alt="EleveAI - Maths, francais et anglais. CP a Terminale, avec English Maths."
                 fill
                 priority
                 sizes="100vw"

@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     "maths collège",
     "français cycle 2",
     "english maths",
-    "anglais A1 A2 B1 B2",
+    "verbes anglais maths",
     "leçon du jour",
     "révision maths",
     "révision français",

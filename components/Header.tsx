@@ -228,7 +228,7 @@ export default function Header() {
             <span className="leading-tight">
               English
               <br />
-              5 mots / jour
+              Verbes
             </span>
           </Link>
 

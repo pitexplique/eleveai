@@ -39,7 +39,15 @@ const languageLevelWordIds: Record<EnglishMathsLanguageLevel, string[]> = {
   ],
 };
 
-const dayLabels = ["J-5", "J-4", "J-3", "J-2", "J-1", "Jour J", "Bonus"];
+const dayLabels = [
+  "Semaine des verbes",
+  "Verbes utiles",
+  "Verbes utiles",
+  "Verbes utiles",
+  "Verbes utiles",
+  "Défi des verbes",
+  "Révision des verbes",
+];
 
 export function makeVerbWeekForLanguageLevel(
   languageLevel: EnglishMathsLanguageLevel
@@ -56,12 +64,12 @@ export function makeVerbWeekForLanguageLevel(
     dayLabel,
     title:
       index === 5
-        ? `English Maths Verbs Challenge ${languageLevel}`
-        : `Math verbs ${languageLevel}`,
+        ? "Défi des verbes English Maths"
+        : "La semaine des verbes",
     theme:
       index === 6
-        ? "Revision bonus"
-        : `Niveau de langue ${languageLevel}`,
+        ? "Révision des verbes"
+        : "Verbes utiles en maths",
     wordIds,
   }));
 }

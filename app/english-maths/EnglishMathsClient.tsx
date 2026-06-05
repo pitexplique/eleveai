@@ -26,7 +26,6 @@ type EleveSession = {
 };
 
 const currentUnlockedDayIndex = 1;
-const niveaux: EnglishMathsNiveau[] = ["A1", "A2", "B1", "B2"];
 
 function playAudio(src?: string) {
   if (!src) return;
@@ -168,7 +167,7 @@ export default function EnglishMathsClient() {
   const eleveContext = useEleve() as unknown as { eleve?: EleveSession | null };
   const eleve = eleveContext.eleve ?? null;
 
-  const [niveau, setNiveau] = useState<EnglishMathsNiveau>("A1");
+  const niveau: EnglishMathsNiveau = "A1";
   const [mode, setMode] = useState<"words" | "quiz" | "result">("words");
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [saving, setSaving] = useState(false);
@@ -202,13 +201,6 @@ export default function EnglishMathsClient() {
 
   const answeredCount = Object.keys(answers).length;
   const canShowScore = answeredCount >= questions.length && questions.length > 0;
-
-  function selectNiveau(nextNiveau: EnglishMathsNiveau) {
-    setNiveau(nextNiveau);
-    setMode("words");
-    setAnswers({});
-    setSaveMessage(null);
-  }
 
   function goToQuiz() {
     setAnswers({});
@@ -304,33 +296,15 @@ export default function EnglishMathsClient() {
           </p>
 
           <h1 className="text-3xl font-black md:text-5xl">
-            English Maths Challenge
+            English Maths
           </h1>
 
           <p className="mt-3 max-w-2xl text-base font-semibold text-white/85">
-            Le challenge de la semaine : des mots, de l’audio et un mini-défi chaque jour.
+            C'est la semaine des verbes : écoute, répète et utilise les verbes utiles en maths.
           </p>
 
-          <div className="mt-5 flex flex-wrap gap-2">
-            {niveaux.map((item) => {
-              const active = niveau === item;
-
-              return (
-                <button
-                  key={item}
-                  type="button"
-                  onClick={() => selectNiveau(item)}
-                  className={[
-                    "rounded-full px-4 py-2 text-sm font-black ring-1 transition",
-                    active
-                      ? "bg-white text-slate-950 ring-white"
-                      : "bg-white/10 text-white ring-white/20 hover:bg-white/20",
-                  ].join(" ")}
-                >
-                  {item}
-                </button>
-              );
-            })}
+          <div className="mt-5 inline-flex rounded-full bg-white px-4 py-2 text-sm font-black text-slate-950 shadow-lg">
+            Semaine des verbes
           </div>
         </section>
 
@@ -339,11 +313,11 @@ export default function EnglishMathsClient() {
             <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
               <div>
                 <div className="text-xs font-black uppercase tracking-[0.2em] text-slate-500">
-                  {day.dayLabel}
+                  Semaine des verbes
                 </div>
 
                 <h2 className="text-2xl font-black">
-                  Mots du jour
+                  Les verbes de la semaine
                 </h2>
               </div>
             </div>
@@ -398,7 +372,7 @@ export default function EnglishMathsClient() {
                     disabled={wordsOfDay.length === 0}
                     className="rounded-2xl bg-slate-950 px-6 py-4 text-base font-black text-white shadow-xl hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-50"
                   >
-                    Je suis prêt pour le mini-défi →
+                    Je suis prêt pour le défi des verbes →
                   </button>
                 </div>
               </>
@@ -489,7 +463,7 @@ export default function EnglishMathsClient() {
                     onClick={restartWords}
                     className="rounded-2xl bg-slate-100 px-5 py-3 text-sm font-black text-slate-800 shadow hover:bg-slate-200"
                   >
-                    Revoir les mots
+                    Revoir les verbes
                   </button>
 
                   <button
@@ -567,7 +541,7 @@ export default function EnglishMathsClient() {
                     onClick={restartWords}
                     className="rounded-2xl bg-white px-5 py-3 text-sm font-black text-slate-950 shadow"
                   >
-                    Revoir les mots
+                    Revoir les verbes
                   </button>
 
                   <button
