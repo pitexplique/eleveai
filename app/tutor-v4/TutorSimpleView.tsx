@@ -1,6 +1,7 @@
 "use client";
 
 import type { KeyboardEvent, ReactNode } from "react";
+import { Video } from "lucide-react";
 import type { Classe, Matiere } from "@/lib/tutor-v4/catalog";
 import type { TutorQuestionOption } from "@/lib/tutor-v4/types";
 import { buildLearningVideoHref } from "@/lib/videoSearch";
@@ -64,6 +65,19 @@ export default function TutorSimpleView({
   onInputKeyDown,
   onShowLesson,
 }: TutorSimpleViewProps) {
+  const learningVideoHref = currentQuestion
+    ? buildLearningVideoHref({
+        matiere: matiereLabel(matiere),
+        niveau: classLabel(classe),
+        notionLabel,
+        microLabel,
+        notionId: currentQuestion.notionId,
+        microId: currentQuestion.microId,
+        questionText: currentQuestion.text,
+        type: currentQuestion.format,
+      })
+    : null;
+
   return (
     <main className="min-h-screen bg-gradient-to-b from-sky-100 via-cyan-50 to-emerald-100 px-3 py-4 text-slate-950 sm:px-5">
       <div className="mx-auto max-w-6xl">
@@ -92,7 +106,7 @@ export default function TutorSimpleView({
 
         <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_120px]">
           <section className="min-h-[520px] rounded-2xl bg-white px-5 py-6 shadow-sm ring-1 ring-slate-200 sm:px-8 lg:px-12">
-            <div className="mb-5 flex justify-center">
+            <div className="mb-5 flex justify-center gap-2">
               <button
                 type="button"
                 onClick={onShowLesson}
@@ -100,6 +114,19 @@ export default function TutorSimpleView({
               >
                 J'apprends !
               </button>
+
+              {learningVideoHref ? (
+                <a
+                  href={learningVideoHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title="Regarder une video d'explication"
+                  aria-label="Regarder une video d'explication"
+                  className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-sky-600 text-white shadow-sm hover:bg-sky-500"
+                >
+                  <Video aria-hidden="true" size={18} strokeWidth={2.5} />
+                </a>
+              ) : null}
             </div>
 
             {wrongAnswerPanelOpen ? (
@@ -118,37 +145,6 @@ export default function TutorSimpleView({
                 <p className="mb-6 text-xl leading-8 text-slate-950">
                   {currentQuestion.text}
                 </p>
-
-                <div className="mb-6 rounded-2xl border border-sky-100 bg-sky-50 p-4 text-slate-900">
-                  <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                    <div>
-                      <p className="text-sm font-black text-sky-900">
-                        Tu ne comprends pas la notion ?
-                      </p>
-                      <p className="mt-1 text-sm font-bold text-slate-700">
-                        Regarde une video d'explication avant de repondre.
-                      </p>
-                    </div>
-
-                    <a
-                      href={buildLearningVideoHref({
-                        matiere: matiereLabel(matiere),
-                        niveau: classLabel(classe),
-                        notionLabel,
-                        microLabel,
-                        notionId: currentQuestion.notionId,
-                        microId: currentQuestion.microId,
-                        questionText: currentQuestion.text,
-                        type: currentQuestion.format,
-                      })}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex shrink-0 items-center justify-center rounded-full bg-sky-600 px-5 py-3 text-sm font-black text-white shadow-sm hover:bg-sky-500"
-                    >
-                      Regarder la video
-                    </a>
-                  </div>
-                </div>
 
                 {currentQuestion.canvas ? (
                   <div className="mb-6 overflow-x-auto rounded-xl bg-slate-50 p-3">
