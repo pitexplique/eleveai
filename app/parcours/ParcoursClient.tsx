@@ -474,7 +474,7 @@ export default function ParcoursClient() {
           </div>
 
           <h1 className="text-3xl font-black leading-tight text-slate-950 md:text-5xl">
-            Ton voyage mathématique
+            Ton voyage mathématiques
           </h1>
 
           <p className="mt-3 max-w-3xl text-base font-semibold leading-relaxed text-slate-700 md:text-lg">
