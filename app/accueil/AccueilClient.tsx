@@ -181,6 +181,73 @@ export default function AccueilPage() {
   const codeEtablissement = eleve?.code_etablissement?.trim() ?? "";
   const codeUtilisateur = eleve?.code_eleve?.trim() ?? "";
   const canAskAccueilQuestion = Boolean(codeEtablissement && codeUtilisateur);
+  const eleveClasse = eleve?.classe?.toLowerCase() ?? null;
+  const isCmPrimary = eleveClasse === "cm1" || eleveClasse === "cm2";
+
+  const visibleBesoins = isCmPrimary
+    ? besoins.filter(
+        (besoin) =>
+          !["/coach-brevet", "/coach-bac-spe", "/concours-general"].includes(
+            besoin.href
+          )
+      )
+    : besoins;
+
+  const visibleClasses = isCmPrimary
+    ? classes.filter((classeItem) => classeItem.label.toLowerCase() === eleveClasse)
+    : classes;
+
+  const visibleCards = isCmPrimary
+    ? cards.filter(
+        (card) =>
+          !["/concours-general", "/coach-brevet", "/coach-bac-spe"].includes(
+            card.href
+          )
+      )
+    : cards;
+
+  function getAccueilCardHref(href: string) {
+    if (!isCmPrimary) return href;
+    if (href === "/coach-ia/maths") return `/coach-ia/maths?classe=${eleveClasse}`;
+    if (href === "/coach-ia/francais") return `/coach-ia/francais?classe=${eleveClasse}`;
+    return href;
+  }
+
+  function renderModulesSection() {
+    return (
+      <section className="bg-gradient-to-b from-[#062A4F] to-[#041B33] px-4 py-8 pb-16 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-6xl">
+          <div className="mb-5">
+            <p className="text-xs font-black uppercase tracking-[0.25em] text-slate-400">
+              Modules
+            </p>
+            <h2 className="mt-1 text-2xl font-black md:text-3xl">
+              Tous les espaces
+            </h2>
+          </div>
+          <div className="flex flex-wrap justify-center gap-3">
+            {visibleCards.map((card) => (
+              <Link
+                key={card.href}
+                href={getAccueilCardHref(card.href)}
+                aria-label={card.label}
+                className="group relative h-[115px] w-[220px] overflow-hidden rounded-2xl border border-white/20 bg-white/10 shadow-lg transition-all duration-300 hover:-translate-y-2 hover:scale-[1.03] hover:shadow-[0_0_30px_rgba(255,255,255,0.2)] focus:outline-none focus:ring-4 focus:ring-white/50"
+              >
+                <Image
+                  src={card.image}
+                  alt={card.label}
+                  fill
+                  sizes="220px"
+                  className="object-cover transition-transform duration-500 group-hover:scale-[1.06]"
+                />
+                <div className="pointer-events-none absolute -left-20 top-0 h-full w-16 rotate-12 bg-white/25 blur-md transition-transform duration-700 group-hover:translate-x-[300px]" />
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   async function toggleAudio() {
     const audio = audioRef.current;
@@ -290,6 +357,8 @@ export default function AccueilPage() {
         EleveAI – Plusieurs portes pour apprendre les maths et suivre la progression des élèves. Du CM1 au Bac, à La Réunion.
       </h1>
 
+      {isCmPrimary ? renderModulesSection() : null}
+
       {/* ── 2. DÉMARRAGE RAPIDE ─────────────────────────────────────────── */}
       <section className="bg-gradient-to-b from-[#062A4F] to-[#0B4F7A] px-4 py-8 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-6xl">
@@ -302,7 +371,7 @@ export default function AccueilPage() {
             </h2>
           </div>
           <div className="grid gap-3 grid-cols-2 sm:grid-cols-4">
-            {besoins.map((besoin) => (
+            {visibleBesoins.map((besoin) => (
               <Link
                 key={besoin.href}
                 href={besoin.href}
@@ -466,7 +535,7 @@ export default function AccueilPage() {
             </Link>
           </div>
           <div className="grid gap-3 grid-cols-2 sm:grid-cols-3 lg:grid-cols-6">
-            {classes.map((c) => (
+            {visibleClasses.map((c) => (
               <Link
                 key={c.label}
                 href={c.href}
@@ -486,7 +555,7 @@ export default function AccueilPage() {
       </section>
 
       {/* ── 5. TOUS LES MODULES ──────────────────────────────────────────── */}
-      <section className="bg-gradient-to-b from-[#062A4F] to-[#041B33] px-4 py-8 pb-16 sm:px-6 lg:px-8">
+      <section className={`${isCmPrimary ? "hidden" : ""} bg-gradient-to-b from-[#062A4F] to-[#041B33] px-4 py-8 pb-16 sm:px-6 lg:px-8`}>
         <div className="mx-auto max-w-6xl">
           <div className="mb-5">
             <p className="text-xs font-black uppercase tracking-[0.25em] text-slate-400">
