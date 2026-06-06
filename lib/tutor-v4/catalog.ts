@@ -44,7 +44,7 @@ export type Classe =
   | "b1"
   | "b2";
 
-export type Matiere = "maths" | "francais" | "english";
+export type Matiere = "maths" | "francais" | "english-maths";
 export type NiveauEnglish = "a1" | "a2" | "b1" | "b2";
 
 // =========================
@@ -69,7 +69,7 @@ function getKnowledge(classe: Classe, matiere: Matiere = "maths") {
   }
 
   // English
-  if (matiere === "english") {
+  if (matiere === "english-maths") {
     switch (classe) {
       case "a1": return buildKnowledgeA1English();
       case "a2": return buildKnowledgeA2English();

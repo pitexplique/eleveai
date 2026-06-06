@@ -29,10 +29,10 @@ const ROUTES: RouteConfig[] = [
   // ── OUTILS ÉLÈVES ──────────────────────────────────────────────────────────
   { path: "/coach-brevet",    priority: 1.0,  changeFrequency: "daily",  lastMod: LASTMOD_CORE },
   { path: "/coach-bac-spe",   priority: 1.0,  changeFrequency: "daily",  lastMod: LASTMOD_CORE },
-  { path: "/coach-ia/english",  priority: 0.95, changeFrequency: "daily",  lastMod: LASTMOD_CORE },
+  { path: "/coach-ia/english-maths",  priority: 0.95, changeFrequency: "daily",  lastMod: LASTMOD_CORE },
   { path: "/coach-ia/maths",    priority: 0.95, changeFrequency: "daily",  lastMod: LASTMOD_CORE },
   { path: "/coach-ia/francais", priority: 0.95, changeFrequency: "daily",  lastMod: LASTMOD_CORE },
-  { path: "/parcours-english",  priority: 0.9,  changeFrequency: "daily",  lastMod: LASTMOD_CORE },
+  { path: "/parcours-english-maths",  priority: 0.9,  changeFrequency: "daily",  lastMod: LASTMOD_CORE },
   { path: "/parcours",          priority: 0.95, changeFrequency: "daily",  lastMod: LASTMOD_CORE },
   { path: "/calcul-rapide",   priority: 0.95, changeFrequency: "daily",  lastMod: LASTMOD_CORE },
   { path: "/english-maths",   priority: 0.9,  changeFrequency: "daily",  lastMod: LASTMOD_CORE },
@@ -73,7 +73,7 @@ const ROUTES: RouteConfig[] = [
 
 const coachRoutes: RouteConfig[] = [
   ...ENGLISH_NIVEAUX.map((niveau) => ({
-    path: `/coach-ia/english?niveau=${niveau}`,
+    path: `/coach-ia/english-maths?niveau=${niveau}`,
     priority: 0.9,
     changeFrequency: "daily" as const,
     lastMod: LASTMOD_CORE,

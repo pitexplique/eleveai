@@ -7,7 +7,7 @@ export function buildKnowledgeB2English() {
   return buildKnowledge({
     id: "b2-english",
     classe: "b2",
-    matiere: "english",
+    matiere: "english-maths",
     bo,
     notions,
     microSkills,

@@ -83,10 +83,10 @@ export async function loadMatrixV4(
   if (classe === "4e" && matiere === "francais") return matrix4eFrancais;
   if (classe === "3e" && matiere === "francais") return matrix3eFrancais;
 
-  if (classe === "a1" && matiere === "english") return matrixA1English;
-  if (classe === "a2" && matiere === "english") return matrixA2English;
-  if (classe === "b1" && matiere === "english") return matrixB1English;
-  if (classe === "b2" && matiere === "english") return matrixB2English;
+  if (classe === "a1" && matiere === "english-maths") return matrixA1English;
+  if (classe === "a2" && matiere === "english-maths") return matrixA2English;
+  if (classe === "b1" && matiere === "english-maths") return matrixB1English;
+  if (classe === "b2" && matiere === "english-maths") return matrixB2English;
 
   throw new Error(`Matrix V4 introuvable pour ${classe}/${matiere}`);
 }

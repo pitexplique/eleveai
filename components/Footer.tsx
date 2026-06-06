@@ -2,10 +2,10 @@
 import Link from "next/link";
 
 const outils = [
-  { label: "Coach English IA", href: "/coach-ia/english" },
+  { label: "Coach English IA", href: "/coach-ia/english-maths" },
   { label: "Coach Maths IA", href: "/coach-ia/maths" },
   { label: "Coach Francais IA", href: "/coach-ia/francais" },
-  { label: "Parcours English", href: "/parcours-english" },
+  { label: "Parcours English", href: "/parcours-english-maths" },
   { label: "Parcours", href: "/parcours" },
   { label: "Coach Brevet", href: "/coach-brevet" },
   { label: "Coach Bac Spe", href: "/coach-bac-spe" },
@@ -155,7 +155,7 @@ export default function Footer() {
               ))}
               <li>
                 <Link
-                  href="/parcours-english"
+                  href="/parcours-english-maths"
                   className="text-sm text-slate-400 transition hover:text-sky-300"
                 >
                   Parcours English

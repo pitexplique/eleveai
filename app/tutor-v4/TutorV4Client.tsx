@@ -345,7 +345,7 @@ function normalizeClasse(value: string | null): Classe {
 
 function normalizeMatiere(value: string | null): Matiere {
   if (value === "francais") return "francais";
-  if (value === "english")  return "english";
+  if (value === "english-maths") return "english-maths";
   return "maths";
 }
 

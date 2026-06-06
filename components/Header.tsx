@@ -143,7 +143,7 @@ export default function Header() {
             {coachOpen && (
               <div className="absolute left-0 top-full z-[80] w-52 rounded-xl border border-white/10 bg-[#041B33] shadow-xl">
                 <Link
-                  href="/coach-ia/english"
+                  href="/coach-ia/english-maths"
                   onClick={() => setCoachOpen(false)}
                   className="flex items-center gap-2 rounded-t-xl px-4 py-3 text-sm font-semibold text-white hover:bg-white/10"
                 >
@@ -176,7 +176,7 @@ export default function Header() {
               href="/parcours"
               onClick={() => setParcoursOpen(false)}
               className={linkClass(
-                isActive(pathname, "/parcours") || isActive(pathname, "/parcours-english")
+                isActive(pathname, "/parcours") || isActive(pathname, "/parcours-english-maths")
               )}
             >
               <Route className="h-4 w-4 text-purple-300" />
@@ -196,7 +196,7 @@ export default function Header() {
             {parcoursOpen && (
               <div className="absolute left-0 top-full z-[80] w-52 rounded-xl border border-white/10 bg-[#041B33] shadow-xl">
                 <Link
-                  href="/parcours-english"
+                  href="/parcours-english-maths"
                   onClick={() => setParcoursOpen(false)}
                   className="flex items-center gap-2 rounded-t-xl px-4 py-3 text-sm font-semibold text-white hover:bg-white/10"
                 >
@@ -421,9 +421,9 @@ export default function Header() {
             </Link>
 
             <Link
-              href="/coach-ia/english"
+              href="/coach-ia/english-maths"
               className={mobileCardClass(
-                isActive(pathname, "/coach-ia/english"),
+                isActive(pathname, "/coach-ia/english-maths"),
                 "bg-gradient-to-r from-blue-700 to-sky-500"
               )}
             >
@@ -454,9 +454,9 @@ export default function Header() {
             </Link>
 
             <Link
-              href="/parcours-english"
+              href="/parcours-english-maths"
               className={mobileCardClass(
-                isActive(pathname, "/parcours-english"),
+                isActive(pathname, "/parcours-english-maths"),
                 "bg-gradient-to-r from-sky-400 to-blue-600"
               )}
             >

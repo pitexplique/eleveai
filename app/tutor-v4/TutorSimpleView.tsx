@@ -37,7 +37,9 @@ function classLabel(classe: Classe) {
 }
 
 function matiereLabel(matiere: Matiere) {
-  return matiere === "francais" ? "Français" : "Maths";
+  if (matiere === "francais") return "Français";
+  if (matiere === "english-maths") return "English Maths";
+  return "Maths";
 }
 
 export default function TutorSimpleView({

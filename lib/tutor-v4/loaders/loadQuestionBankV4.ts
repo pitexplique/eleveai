@@ -83,10 +83,10 @@ export async function loadQuestionBankV4(
   if (classe === "4e" && matiere === "francais") return francais4eQuestionBank;
   if (classe === "3e" && matiere === "francais") return francais3eQuestionBank;
 
-  if (classe === "a1" && matiere === "english") return englishA1QuestionBank;
-  if (classe === "a2" && matiere === "english") return englishA2QuestionBank;
-  if (classe === "b1" && matiere === "english") return englishB1QuestionBank;
-  if (classe === "b2" && matiere === "english") return englishB2QuestionBank;
+  if (classe === "a1" && matiere === "english-maths") return englishA1QuestionBank;
+  if (classe === "a2" && matiere === "english-maths") return englishA2QuestionBank;
+  if (classe === "b1" && matiere === "english-maths") return englishB1QuestionBank;
+  if (classe === "b2" && matiere === "english-maths") return englishB2QuestionBank;
 
   throw new Error(`QuestionBank V4 introuvable pour ${classe}/${matiere}`);
 }

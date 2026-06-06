@@ -362,7 +362,7 @@ export default function ParcoursEnglishClient() {
             New parcours
           </button>
           <Link
-            href={`/coach-ia/english?niveau=${niveau}`}
+            href={`/coach-ia/english-maths?niveau=${niveau}`}
             className="rounded-2xl bg-slate-950 px-5 py-3 text-sm font-black text-white hover:bg-slate-800 transition"
           >
             Train with Coach →

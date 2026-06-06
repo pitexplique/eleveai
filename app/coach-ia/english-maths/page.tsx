@@ -61,10 +61,10 @@ function CoachEnglishInner() {
     setNiveau(normalizeNiveau(searchParams.get("niveau")));
   }, [searchParams]);
 
-  const notionOptions = getNotionOptions(niveau, "english");
-  const notionMicroMap = getNotionMicroMap(niveau, "english");
-  const microLabels = getMicroLabelMap(niveau, "english");
-  const domaines = useMemo(() => getDomaineMap(niveau, "english"), [niveau]);
+  const notionOptions = getNotionOptions(niveau, "english-maths");
+  const notionMicroMap = getNotionMicroMap(niveau, "english-maths");
+  const microLabels = getMicroLabelMap(niveau, "english-maths");
+  const domaines = useMemo(() => getDomaineMap(niveau, "english-maths"), [niveau]);
 
   const totalNotions = notionOptions.length;
   const totalMicros = notionOptions.reduce(
@@ -178,7 +178,7 @@ function CoachEnglishInner() {
                     {notionsAvecMicros.map(({ notionId, micros }) => (
                       <article key={notionId}>
                         <h3 className="mb-2 text-base font-bold text-slate-800">
-                          {notionLabel(notionId, niveau, "english")}
+                          {notionLabel(notionId, niveau, "english-maths")}
                         </h3>
                         <ol className="space-y-1">
                           {micros.map((microId, index) => (

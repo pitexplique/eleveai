@@ -82,10 +82,10 @@ export async function loadKnowledgeV4(
   if (classe === "4e" && matiere === "francais") return loadKnowledge4eFrancais() as KnowledgePack;
   if (classe === "3e" && matiere === "francais") return loadKnowledge3eFrancais() as KnowledgePack;
 
-  if (classe === "a1" && matiere === "english") return loadKnowledgeA1English() as KnowledgePack;
-  if (classe === "a2" && matiere === "english") return loadKnowledgeA2English() as KnowledgePack;
-  if (classe === "b1" && matiere === "english") return loadKnowledgeB1English() as KnowledgePack;
-  if (classe === "b2" && matiere === "english") return loadKnowledgeB2English() as KnowledgePack;
+  if (classe === "a1" && matiere === "english-maths") return loadKnowledgeA1English() as KnowledgePack;
+  if (classe === "a2" && matiere === "english-maths") return loadKnowledgeA2English() as KnowledgePack;
+  if (classe === "b1" && matiere === "english-maths") return loadKnowledgeB1English() as KnowledgePack;
+  if (classe === "b2" && matiere === "english-maths") return loadKnowledgeB2English() as KnowledgePack;
 
   throw new Error(`Knowledge V4 introuvable pour ${classe}/${matiere}`);
 }

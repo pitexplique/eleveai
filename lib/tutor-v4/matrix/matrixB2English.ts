@@ -5,7 +5,7 @@ import { buildMatrixFromMicroSkills } from "./buildMatrixFromMicroSkills";
 export const matrixB2English: SkillMatrix = {
   id: "b2_english_matrix_v4",
   classe: "b2",
-  matiere: "english",
+  matiere: "english-maths",
   microSkillIndex: microSkills.map((micro) => micro.id),
   matrix: buildMatrixFromMicroSkills(microSkills),
 };
