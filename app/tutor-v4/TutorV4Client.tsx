@@ -455,6 +455,20 @@ function forceScrollTopOnArrival() {
   const [selectedOptionId, setSelectedOptionId] = useState<string | null>(null);
   const [currentQuestion, setCurrentQuestion] =
     useState<TutorQuestionOption | null>(null);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const [audioPlaying, setAudioPlaying] = useState(false);
+
+  function playQuestionAudio(src: string) {
+    if (audioRef.current) {
+      audioRef.current.pause();
+    }
+    const audio = new Audio(src);
+    audioRef.current = audio;
+    setAudioPlaying(true);
+    audio.play().catch(() => setAudioPlaying(false));
+    audio.onended = () => setAudioPlaying(false);
+    audio.onerror = () => setAudioPlaying(false);
+  }
 
   const [answer, setAnswer] = useState("");
   const [feedback, setFeedback] = useState("");
@@ -545,6 +559,14 @@ useEffect(() => {
   hasForcedTopScrollRef.current = true;
   forceScrollTopOnArrival();
 }, [urlInitDone]);
+
+// Auto-play audio when a new question with audioSrc appears
+useEffect(() => {
+  if (currentQuestion?.audioSrc) {
+    playQuestionAudio(currentQuestion.audioSrc);
+  }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+}, [currentQuestion?.id]);
 
 useEffect(() => {
   if (!urlInitDone) return;
@@ -1516,6 +1538,23 @@ function handleInputKeyDown(
                   <div className="mb-4 rounded-2xl border border-slate-200 bg-white p-4 text-base text-slate-900">
                     {currentQuestion.text}
                   </div>
+
+                  {currentQuestion.audioSrc ? (
+                    <div className="mb-4 flex justify-center">
+                      <button
+                        type="button"
+                        onClick={() => playQuestionAudio(currentQuestion.audioSrc!)}
+                        className={[
+                          "flex items-center gap-2 rounded-2xl px-5 py-3 text-sm font-black transition",
+                          audioPlaying
+                            ? "bg-sky-100 text-sky-700 animate-pulse"
+                            : "bg-sky-600 text-white hover:bg-sky-500",
+                        ].join(" ")}
+                      >
+                        {audioPlaying ? "🔊 En cours..." : "🔊 Écouter"}
+                      </button>
+                    </div>
+                  ) : null}
 
                   {currentQuestion.canvas ? (
                     <div className="mb-5 overflow-x-auto rounded-2xl bg-slate-50 p-3">
