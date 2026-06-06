@@ -30,6 +30,7 @@ export default function Header() {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [coachOpen, setCoachOpen] = useState(false);
+  const [parcoursOpen, setParcoursOpen] = useState(false);
   const { eleve, logout } = useEleve();
   const supabase = createClient();
 
@@ -166,21 +167,51 @@ export default function Header() {
             )}
           </div>
 
-          <Link
-            href="/parcours-english"
-            className={linkClass(isActive(pathname, "/parcours-english"))}
+          <div
+            className="relative flex items-center"
+            onMouseEnter={() => setParcoursOpen(true)}
+            onMouseLeave={() => setParcoursOpen(false)}
           >
-            <Route className="h-4 w-4 text-sky-300" />
-            Parcours English
-          </Link>
+            <Link
+              href="/parcours"
+              onClick={() => setParcoursOpen(false)}
+              className={linkClass(
+                isActive(pathname, "/parcours") || isActive(pathname, "/parcours-english")
+              )}
+            >
+              <Route className="h-4 w-4 text-purple-300" />
+              Parcours
+            </Link>
 
-          <Link
-            href="/parcours"
-            className={linkClass(isActive(pathname, "/parcours"))}
-          >
-            <Route className="h-4 w-4 text-purple-300" />
-            Parcours
-          </Link>
+            <button
+              type="button"
+              onClick={() => setParcoursOpen((v) => !v)}
+              onMouseEnter={() => setParcoursOpen(true)}
+              aria-label="Choisir le parcours"
+              className="ml-1 inline-flex h-9 w-9 items-center justify-center rounded-full text-sm font-black text-white/90 transition hover:bg-white/15 hover:text-white"
+            >
+              v
+            </button>
+
+            {parcoursOpen && (
+              <div className="absolute left-0 top-full z-[80] w-52 rounded-xl border border-white/10 bg-[#041B33] shadow-xl">
+                <Link
+                  href="/parcours-english"
+                  onClick={() => setParcoursOpen(false)}
+                  className="flex items-center gap-2 rounded-t-xl px-4 py-3 text-sm font-semibold text-white hover:bg-white/10"
+                >
+                  <span className="text-base leading-none">🇬🇧</span> English
+                </Link>
+                <Link
+                  href="/parcours"
+                  onClick={() => setParcoursOpen(false)}
+                  className="flex items-center gap-2 rounded-b-xl px-4 py-3 text-sm font-semibold text-white hover:bg-white/10"
+                >
+                  <span className="text-base leading-none">📐</span> Maths
+                </Link>
+              </div>
+            )}
+          </div>
 
           <Link
             href="/calcul-rapide"
@@ -430,7 +461,7 @@ export default function Header() {
               )}
             >
               <Route className="h-5 w-5" />
-              Parcours English
+              Parcours 🇬🇧 English
             </Link>
 
             <Link
@@ -441,7 +472,7 @@ export default function Header() {
               )}
             >
               <Route className="h-5 w-5" />
-              Parcours
+              Parcours 📐 Maths
             </Link>
 
             <Link
