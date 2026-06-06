@@ -1,0 +1,70 @@
+import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
+
+const WORDS = [
+  { slug: "zero",  en: "zero",  fr: "zéro",  audio: "/audio/english-maths/digits/zero.mp3" },
+  { slug: "one",   en: "one",   fr: "un",    audio: "/audio/english-maths/digits/one.mp3" },
+  { slug: "two",   en: "two",   fr: "deux",  audio: "/audio/english-maths/digits/two.mp3" },
+  { slug: "three", en: "three", fr: "trois", audio: "/audio/english-maths/digits/three.mp3" },
+  { slug: "four",  en: "four",  fr: "quatre", audio: "/audio/english-maths/digits/four.mp3" },
+  { slug: "five",  en: "five",  fr: "cinq",  audio: "/audio/english-maths/digits/five.mp3" },
+  { slug: "six",   en: "six",   fr: "six",   audio: "/audio/english-maths/digits/six.mp3" },
+  { slug: "seven", en: "seven", fr: "sept",  audio: "/audio/english-maths/digits/seven.mp3" },
+  { slug: "eight", en: "eight", fr: "huit",  audio: "/audio/english-maths/digits/eight.mp3" },
+  { slug: "nine",  en: "nine",  fr: "neuf",  audio: "/audio/english-maths/digits/nine.mp3" },
+  { slug: "ten",   en: "ten",   fr: "dix",   audio: "/audio/english-maths/digits/ten.mp3" },
+] as const;
+
+function dFr(exclude: string) { return WORDS.filter(w => w.fr !== exclude).map(w => w.fr).slice(0, 3); }
+function dEn(exclude: string) { return WORDS.filter(w => w.en !== exclude).map(w => w.en).slice(0, 3); }
+
+export const digitsA1Bank: TutorBankItemV4[] = WORDS.flatMap((word) => [
+  {
+    kind: "fixed" as const,
+    id: `en_a1_digits_en_to_fr_${word.slug}`,
+    niveau: "a1" as const,
+    matiere: "english-maths" as const,
+    notionId: "en_a1_digits",
+    microId: "en_a1_digits_en_to_fr",
+    difficulty: 1 as const,
+    text: `What does "${word.en}" mean in French?`,
+    format: "qcm" as const,
+    choices: [word.fr, ...dFr(word.fr)],
+    expected: [word.fr],
+    comparator: "mcq_exact" as const,
+    hint: `It's a digit from 0 to 10.`,
+    explanation: `"${word.en}" means "${word.fr}" in French.`,
+  },
+  {
+    kind: "fixed" as const,
+    id: `en_a1_digits_fr_to_en_${word.slug}`,
+    niveau: "a1" as const,
+    matiere: "english-maths" as const,
+    notionId: "en_a1_digits",
+    microId: "en_a1_digits_fr_to_en",
+    difficulty: 2 as const,
+    text: `How do you say "${word.fr}" in English?`,
+    format: "qcm" as const,
+    choices: [word.en, ...dEn(word.en)],
+    expected: [word.en],
+    comparator: "mcq_exact" as const,
+    hint: `It starts with "${word.en[0].toUpperCase()}".`,
+    explanation: `"${word.fr}" is "${word.en}" in English.`,
+  },
+  {
+    kind: "fixed" as const,
+    id: `en_a1_digits_listen_${word.slug}`,
+    niveau: "a1" as const,
+    matiere: "english-maths" as const,
+    notionId: "en_a1_digits",
+    microId: "en_a1_digits_listen",
+    difficulty: 2 as const,
+    text: `Listen and choose the correct digit.`,
+    format: "qcm" as const,
+    choices: [word.en, ...dEn(word.en)],
+    expected: [word.en],
+    comparator: "mcq_exact" as const,
+    audioSrc: word.audio,
+    hint: `Listen carefully to the pronunciation.`,
+    explanation: `The digit you heard is "${word.en}" (${word.fr}).`,
+  },
+]);

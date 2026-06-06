@@ -1,25 +1,24 @@
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 
 const WORDS = [
-  { slug: "plus",       en: "plus",       fr: "plus",       audio: "/audio/english-maths/operations/plus.mp3" },
-  { slug: "minus",      en: "minus",      fr: "moins",      audio: "/audio/english-maths/operations/minus.mp3" },
-  { slug: "times",      en: "times",      fr: "fois",       audio: "/audio/english-maths/operations/times.mp3" },
-  { slug: "divided-by", en: "divided by", fr: "divisé par", audio: "/audio/english-maths/operations/divided-by.mp3" },
-  { slug: "equals",     en: "equals",     fr: "égale",      audio: "/audio/english-maths/operations/equals.mp3" },
-  { slug: "result",     en: "result",     fr: "résultat",   audio: "/audio/english-maths/operations/result.mp3" },
+  { slug: "greater-than", en: "greater than", fr: "supérieur à", audio: "/audio/english-maths/operations/greater-than.mp3" },
+  { slug: "less-than",    en: "less than",    fr: "inférieur à", audio: "/audio/english-maths/operations/less-than.mp3" },
+  { slug: "equal-to",     en: "equal to",     fr: "égal à",      audio: "/audio/english-maths/comparisons/equal-to.mp3" },
+  { slug: "odd",          en: "odd",          fr: "impair",      audio: "/audio/english-maths/comparisons/odd.mp3" },
+  { slug: "even",         en: "even",         fr: "pair",        audio: "/audio/english-maths/comparisons/even.mp3" },
 ] as const;
 
 function dFr(exclude: string) { return WORDS.filter(w => w.fr !== exclude).map(w => w.fr).slice(0, 3); }
 function dEn(exclude: string) { return WORDS.filter(w => w.en !== exclude).map(w => w.en).slice(0, 3); }
 
-export const operationsA1Bank: TutorBankItemV4[] = WORDS.flatMap((word) => [
+export const comparisonsA1Bank: TutorBankItemV4[] = WORDS.flatMap((word) => [
   {
     kind: "fixed" as const,
-    id: `en_a1_operations_en_to_fr_${word.slug}`,
+    id: `en_a1_comparisons_en_to_fr_${word.slug}`,
     niveau: "a1" as const,
     matiere: "english-maths" as const,
-    notionId: "en_a1_operations",
-    microId: "en_a1_operations_en_to_fr",
+    notionId: "en_a1_comparisons",
+    microId: "en_a1_comparisons_en_to_fr",
     difficulty: 1 as const,
     text: `What does "${word.en}" mean in French?`,
     format: "qcm" as const,
@@ -31,11 +30,11 @@ export const operationsA1Bank: TutorBankItemV4[] = WORDS.flatMap((word) => [
   },
   {
     kind: "fixed" as const,
-    id: `en_a1_operations_fr_to_en_${word.slug}`,
+    id: `en_a1_comparisons_fr_to_en_${word.slug}`,
     niveau: "a1" as const,
     matiere: "english-maths" as const,
-    notionId: "en_a1_operations",
-    microId: "en_a1_operations_fr_to_en",
+    notionId: "en_a1_comparisons",
+    microId: "en_a1_comparisons_fr_to_en",
     difficulty: 2 as const,
     text: `How do you say "${word.fr}" in English?`,
     format: "qcm" as const,
@@ -47,11 +46,11 @@ export const operationsA1Bank: TutorBankItemV4[] = WORDS.flatMap((word) => [
   },
   {
     kind: "fixed" as const,
-    id: `en_a1_operations_listen_${word.slug}`,
+    id: `en_a1_comparisons_listen_${word.slug}`,
     niveau: "a1" as const,
     matiere: "english-maths" as const,
-    notionId: "en_a1_operations",
-    microId: "en_a1_operations_listen",
+    notionId: "en_a1_comparisons",
+    microId: "en_a1_comparisons_listen",
     difficulty: 2 as const,
     text: `Listen and choose the correct word.`,
     format: "qcm" as const,

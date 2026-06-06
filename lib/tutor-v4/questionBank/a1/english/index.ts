@@ -1,13 +1,17 @@
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 
+import { digitsA1Bank } from "./digits.bank";
 import { numbersA1Bank } from "./numbers.bank";
 import { operationsA1Bank } from "./operations.bank";
+import { comparisonsA1Bank } from "./comparisons.bank";
 import { geometryA1Bank } from "./geometry.bank";
 import { verbsA1Bank } from "./verbs.bank";
 
 export const englishA1QuestionBank: TutorBankItemV4[] = [
+  ...digitsA1Bank,
   ...numbersA1Bank,
   ...operationsA1Bank,
+  ...comparisonsA1Bank,
   ...geometryA1Bank,
   ...verbsA1Bank,
 ];

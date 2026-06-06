@@ -1,19 +1,17 @@
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 
 const WORDS = [
-  { slug: "number",   en: "number",   fr: "nombre",  audio: "/audio/english-maths/numbers/number.mp3",   audioSentence: "/audio/english-maths/numbers/number-sentence.mp3" },
-  { slug: "ten",      en: "ten",      fr: "dix",     audio: "/audio/english-maths/numbers/ten.mp3",      audioSentence: "/audio/english-maths/numbers/ten-sentence.mp3" },
-  { slug: "hundred",  en: "hundred",  fr: "cent",    audio: "/audio/english-maths/numbers/hundred.mp3",  audioSentence: "/audio/english-maths/numbers/hundred-sentence.mp3" },
-  { slug: "thousand", en: "thousand", fr: "mille",   audio: "/audio/english-maths/numbers/thousand.mp3", audioSentence: "/audio/english-maths/numbers/thousand-sentence.mp3" },
-  { slug: "half",     en: "half",     fr: "moitié",  audio: "/audio/english-maths/numbers/half.mp3",     audioSentence: "/audio/english-maths/numbers/half-sentence.mp3" },
+  { slug: "twenty",   en: "twenty",   fr: "vingt",     audio: "/audio/english-maths/numbers/twenty.mp3" },
+  { slug: "thirty",   en: "thirty",   fr: "trente",    audio: "/audio/english-maths/numbers/thirty.mp3" },
+  { slug: "forty",    en: "forty",    fr: "quarante",  audio: "/audio/english-maths/numbers/forty.mp3" },
+  { slug: "fifty",    en: "fifty",    fr: "cinquante", audio: "/audio/english-maths/numbers/fifty.mp3" },
+  { slug: "hundred",  en: "hundred",  fr: "cent",      audio: "/audio/english-maths/numbers/hundred.mp3" },
+  { slug: "thousand", en: "thousand", fr: "mille",     audio: "/audio/english-maths/numbers/thousand.mp3" },
+  { slug: "million",  en: "million",  fr: "million",   audio: "/audio/english-maths/numbers/million.mp3" },
 ] as const;
 
-function distractorsFr(exclude: string): string[] {
-  return WORDS.filter((w) => w.fr !== exclude).map((w) => w.fr).slice(0, 3);
-}
-function distractorsEn(exclude: string): string[] {
-  return WORDS.filter((w) => w.en !== exclude).map((w) => w.en).slice(0, 3);
-}
+function dFr(exclude: string) { return WORDS.filter(w => w.fr !== exclude).map(w => w.fr).slice(0, 3); }
+function dEn(exclude: string) { return WORDS.filter(w => w.en !== exclude).map(w => w.en).slice(0, 3); }
 
 export const numbersA1Bank: TutorBankItemV4[] = WORDS.flatMap((word) => [
   {
@@ -26,12 +24,11 @@ export const numbersA1Bank: TutorBankItemV4[] = WORDS.flatMap((word) => [
     difficulty: 1 as const,
     text: `What does "${word.en}" mean in French?`,
     format: "qcm" as const,
-    choices: [word.fr, ...distractorsFr(word.fr)],
+    choices: [word.fr, ...dFr(word.fr)],
     expected: [word.fr],
     comparator: "mcq_exact" as const,
-    hint: `Think about numbers in maths class.`,
+    hint: `Think about the meaning.`,
     explanation: `"${word.en}" means "${word.fr}" in French.`,
-    tags: ["numbers", "en_to_fr"],
   },
   {
     kind: "fixed" as const,
@@ -43,12 +40,11 @@ export const numbersA1Bank: TutorBankItemV4[] = WORDS.flatMap((word) => [
     difficulty: 2 as const,
     text: `How do you say "${word.fr}" in English?`,
     format: "qcm" as const,
-    choices: [word.en, ...distractorsEn(word.en)],
+    choices: [word.en, ...dEn(word.en)],
     expected: [word.en],
     comparator: "mcq_exact" as const,
-    hint: `It starts with the letter "${word.en[0].toUpperCase()}".`,
-    explanation: `"${word.fr}" translates to "${word.en}" in English.`,
-    tags: ["numbers", "fr_to_en"],
+    hint: `It starts with "${word.en[0].toUpperCase()}".`,
+    explanation: `"${word.fr}" is "${word.en}" in English.`,
   },
   {
     kind: "fixed" as const,
@@ -60,12 +56,11 @@ export const numbersA1Bank: TutorBankItemV4[] = WORDS.flatMap((word) => [
     difficulty: 2 as const,
     text: `Listen and choose the correct word.`,
     format: "qcm" as const,
-    choices: [word.en, ...distractorsEn(word.en)],
+    choices: [word.en, ...dEn(word.en)],
     expected: [word.en],
     comparator: "mcq_exact" as const,
     audioSrc: word.audio,
-    hint: `Listen carefully to the pronunciation.`,
+    hint: `Listen carefully.`,
     explanation: `The word you heard is "${word.en}" (${word.fr}).`,
-    tags: ["numbers", "listen"],
   },
 ]);
