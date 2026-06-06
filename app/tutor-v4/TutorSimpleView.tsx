@@ -146,6 +146,22 @@ export default function TutorSimpleView({
                   {currentQuestion.text}
                 </p>
 
+                {currentQuestion.audioSrc ? (
+                  <div className="mb-6 rounded-2xl border border-sky-200 bg-sky-50 p-4">
+                    <p className="mb-2 text-center text-xs font-bold uppercase tracking-wide text-sky-600">
+                      🔊 Écoute et réponds
+                    </p>
+                    {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
+                    <audio
+                      key={currentQuestion.audioSrc}
+                      controls
+                      autoPlay
+                      src={currentQuestion.audioSrc}
+                      className="w-full rounded-xl"
+                    />
+                  </div>
+                ) : null}
+
                 {currentQuestion.canvas ? (
                   <div className="mb-6 overflow-x-auto rounded-xl bg-slate-50 p-3">
                     {renderCanvas(currentQuestion)}

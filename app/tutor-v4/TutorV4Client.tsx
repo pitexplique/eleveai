@@ -455,20 +455,6 @@ function forceScrollTopOnArrival() {
   const [selectedOptionId, setSelectedOptionId] = useState<string | null>(null);
   const [currentQuestion, setCurrentQuestion] =
     useState<TutorQuestionOption | null>(null);
-  const audioRef = useRef<HTMLAudioElement | null>(null);
-  const [audioPlaying, setAudioPlaying] = useState(false);
-
-  function playQuestionAudio(src: string) {
-    if (audioRef.current) {
-      audioRef.current.pause();
-    }
-    const audio = new Audio(src);
-    audioRef.current = audio;
-    setAudioPlaying(true);
-    audio.play().catch(() => setAudioPlaying(false));
-    audio.onended = () => setAudioPlaying(false);
-    audio.onerror = () => setAudioPlaying(false);
-  }
 
   const [answer, setAnswer] = useState("");
   const [feedback, setFeedback] = useState("");
@@ -560,13 +546,6 @@ useEffect(() => {
   forceScrollTopOnArrival();
 }, [urlInitDone]);
 
-// Auto-play audio when a new question with audioSrc appears
-useEffect(() => {
-  if (currentQuestion?.audioSrc) {
-    playQuestionAudio(currentQuestion.audioSrc);
-  }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-}, [currentQuestion?.id]);
 
 useEffect(() => {
   if (!urlInitDone) return;
@@ -1497,6 +1476,21 @@ function handleInputKeyDown(
                     <p className="text-base leading-6 text-slate-900">
                       {option.text}
                     </p>
+
+                    {option.audioSrc ? (
+                      <div
+                        className="mt-3"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
+                        <audio
+                          key={option.audioSrc}
+                          controls
+                          src={option.audioSrc}
+                          className="w-full rounded-xl"
+                        />
+                      </div>
+                    ) : null}
                   </button>
                 ))}
               </div>
@@ -1540,19 +1534,18 @@ function handleInputKeyDown(
                   </div>
 
                   {currentQuestion.audioSrc ? (
-                    <div className="mb-4 flex justify-center">
-                      <button
-                        type="button"
-                        onClick={() => playQuestionAudio(currentQuestion.audioSrc!)}
-                        className={[
-                          "flex items-center gap-2 rounded-2xl px-5 py-3 text-sm font-black transition",
-                          audioPlaying
-                            ? "bg-sky-100 text-sky-700 animate-pulse"
-                            : "bg-sky-600 text-white hover:bg-sky-500",
-                        ].join(" ")}
-                      >
-                        {audioPlaying ? "🔊 En cours..." : "🔊 Écouter"}
-                      </button>
+                    <div className="mb-5 rounded-2xl border border-sky-200 bg-sky-50 p-4">
+                      <p className="mb-2 text-center text-xs font-bold uppercase tracking-wide text-sky-600">
+                        🔊 Écoute et réponds
+                      </p>
+                      {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
+                      <audio
+                        key={currentQuestion.audioSrc}
+                        controls
+                        autoPlay
+                        src={currentQuestion.audioSrc}
+                        className="w-full rounded-xl"
+                      />
                     </div>
                   ) : null}
 
