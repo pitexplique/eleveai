@@ -123,7 +123,7 @@ export default function AccueilPage() {
   const codeUtilisateur = eleve?.code_eleve?.trim() ?? "";
   const canAskAccueilQuestion = Boolean(codeEtablissement && codeUtilisateur);
   const eleveClasse = eleve?.classe?.toLowerCase() ?? null;
-  const prenom = eleve?.prenom ?? null;
+  const prenom = eleve?.nom ?? null;
   const isCmPrimary = eleveClasse === "cm1" || eleveClasse === "cm2";
 
   const visibleModules = isCmPrimary
