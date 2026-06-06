@@ -74,7 +74,7 @@ function CoachEnglishInner() {
 
   function handleClick(notionId: string, microId: string) {
     router.push(
-      `/tutor-v4?classe=${encodeURIComponent(niveau)}&matiere=english&notion=${encodeURIComponent(notionId)}&microId=${encodeURIComponent(microId)}&display=simple`
+      `/tutor-v4?classe=${encodeURIComponent(niveau)}&matiere=english-maths&notion=${encodeURIComponent(notionId)}&microId=${encodeURIComponent(microId)}&display=simple`
     );
   }
 
