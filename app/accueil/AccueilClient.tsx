@@ -33,7 +33,7 @@ const CHIPS: Chip[] = [
     items: [
       { icon: "🧠", label: "Coach Maths IA",   href: "/coach-ia/maths",    desc: "Toutes notions, CP → Terminale" },
       { icon: "🛤️", label: "Parcours Maths",   href: "/parcours",          desc: "Bilan de compétences personnalisé" },
-      { icon: "📚", label: "Coach Brevet",      href: "/coach-brevet",      desc: "Sprint J−30" },
+      { icon: "📚", label: "Coach Brevet",      href: "/coach-brevet",      desc: "Sprint J−30, toutes les notions" },
       { icon: "🎓", label: "Coach Bac Spé",     href: "/coach-bac-spe",     desc: "Suites, fonctions, proba" },
       { icon: "⚡", label: "Calcul rapide",     href: "/calcul-rapide",     desc: "5 min d'automatismes" },
       { icon: "🏆", label: "Concours général",  href: "/concours-general",  desc: "Problèmes avancés" },
@@ -54,20 +54,10 @@ const CHIPS: Chip[] = [
     icon: "🇬🇧", label: "Anglais", cm: true,
     color: "hover:border-blue-400/60 hover:bg-blue-500/20",
     items: [
-      { icon: "🇬🇧", label: "Coach English Maths", href: "/coach-ia/english-maths", desc: "A1 → B2, vocabulaire maths" },
-      { icon: "🛤️", label: "Parcours English",      href: "/parcours-english-maths", desc: "Bilan de niveau avec audio" },
+      { icon: "🇬🇧", label: "Coach English Maths", href: "/coach-ia/english-maths", desc: "A1 → B2, vocabulaire maths en anglais" },
+      { icon: "🛤️", label: "Parcours English",      href: "/parcours-english-maths", desc: "Bilan de niveau CECRL avec audio" },
       { icon: "📋", label: "English Maths",          href: "/english-maths",          desc: "Accueil & présentation" },
     ],
-  },
-  {
-    type: "link",
-    icon: "⚡", label: "5 min de calcul", href: "/calcul-rapide",
-    color: "hover:border-lime-400/60 hover:bg-lime-500/20", cm: true,
-  },
-  {
-    type: "link",
-    icon: "🎯", label: "Relever un défi", href: "/defis-du-jour",
-    color: "hover:border-orange-400/60 hover:bg-orange-500/20", cm: true,
   },
 ];
 
@@ -139,7 +129,7 @@ function ChipDropdown({
       </button>
 
       {open && (
-        <div className="absolute left-1/2 top-full z-50 mt-2 w-64 -translate-x-1/2 overflow-hidden rounded-2xl border border-white/15 bg-[#041B33]/95 shadow-2xl backdrop-blur-xl">
+        <div className="absolute left-1/2 top-full z-[200] mt-2 w-64 -translate-x-1/2 overflow-hidden rounded-2xl border border-white/15 bg-[#041B33]/95 shadow-2xl backdrop-blur-xl">
           {items.map((item, i) => (
             <Link
               key={item.href}
@@ -291,10 +281,10 @@ export default function AccueilPage() {
       <h1 className="sr-only">EleveAI – Coach IA maths, français et anglais. Du CP au Bac.</h1>
 
       {/* ── HERO — ChatGPT style ──────────────────────────────────────────── */}
-      <section className="relative flex min-h-[52vh] flex-col items-center justify-center overflow-hidden px-4 py-16 text-center sm:px-6 lg:px-8">
+      <section className="relative flex min-h-[52vh] flex-col items-center justify-center px-4 py-16 text-center sm:px-6 lg:px-8">
 
         {/* Background — image floue + gradient fort */}
-        <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 z-0 overflow-hidden">
           <Image
             src="/images/accueil-eleveai-reunion.webp"
             alt=""
