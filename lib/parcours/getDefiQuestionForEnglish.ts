@@ -27,6 +27,7 @@ function toQuestionItem(item: TutorBankItemV4): ParcoursQuestionItem | null {
     comparator: item.comparator,
     hint: item.hint,
     explanation: item.explanation,
+    audioSrc: item.audioSrc,
   };
 }
 

@@ -248,6 +248,21 @@ export default function ParcoursEnglishClient() {
 
                   <p className="mb-4 text-base font-bold text-slate-800">{q.question.text}</p>
 
+                  {q.question.audioSrc ? (
+                    <div className="mb-4 rounded-2xl border border-sky-200 bg-sky-50 p-3">
+                      <p className="mb-2 text-center text-xs font-bold uppercase tracking-wide text-sky-600">
+                        🔊 Listen
+                      </p>
+                      {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
+                      <audio
+                        key={q.question.audioSrc}
+                        controls
+                        src={q.question.audioSrc}
+                        className="w-full rounded-xl"
+                      />
+                    </div>
+                  ) : null}
+
                   {choices.length > 0 ? (
                     <div className="grid gap-2 sm:grid-cols-2">
                       {choices.map((choice) => {

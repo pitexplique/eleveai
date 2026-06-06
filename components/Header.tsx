@@ -167,6 +167,14 @@ export default function Header() {
           </div>
 
           <Link
+            href="/parcours-english"
+            className={linkClass(isActive(pathname, "/parcours-english"))}
+          >
+            <Route className="h-4 w-4 text-sky-300" />
+            Parcours English
+          </Link>
+
+          <Link
             href="/parcours"
             className={linkClass(isActive(pathname, "/parcours"))}
           >
@@ -412,6 +420,17 @@ export default function Header() {
             >
               <BookOpen className="h-5 w-5" />
               Coach Français IA
+            </Link>
+
+            <Link
+              href="/parcours-english"
+              className={mobileCardClass(
+                isActive(pathname, "/parcours-english"),
+                "bg-gradient-to-r from-sky-400 to-blue-600"
+              )}
+            >
+              <Route className="h-5 w-5" />
+              Parcours English
             </Link>
 
             <Link

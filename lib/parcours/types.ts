@@ -39,6 +39,7 @@ export type ParcoursQuestionItem = {
   hint?: string;
   explanation?: string;
   canvas?: CanvasFigure;
+  audioSrc?: string;
 };
 
 export type ParcoursQuestion = {
