@@ -2,8 +2,10 @@
 import Link from "next/link";
 
 const outils = [
+  { label: "Coach English IA", href: "/coach-ia/english" },
   { label: "Coach Maths IA", href: "/coach-ia/maths" },
   { label: "Coach Francais IA", href: "/coach-ia/francais" },
+  { label: "Parcours English", href: "/parcours-english" },
   { label: "Parcours", href: "/parcours" },
   { label: "Coach Brevet", href: "/coach-brevet" },
   { label: "Coach Bac Spe", href: "/coach-bac-spe" },
@@ -34,6 +36,13 @@ const legal = [
   { label: "Mentions legales", href: "/mentions-legales" },
   { label: "Politique de confidentialite", href: "/politique-confidentialite" },
   { label: "CGU", href: "/cgu" },
+];
+
+const englishNiveaux = [
+  { label: "A1", slug: "a1" },
+  { label: "A2", slug: "a2" },
+  { label: "B1", slug: "b1" },
+  { label: "B2", slug: "b2" },
 ];
 
 const mathsClasses = [
@@ -132,6 +141,28 @@ export default function Footer() {
           </div>
 
           <div>
+            <h3 className="mb-3 text-sm font-black text-slate-100">English</h3>
+            <ul className="space-y-2 mb-6">
+              {englishNiveaux.map((n) => (
+                <li key={n.slug}>
+                  <Link
+                    href={`/coach-ia/english?niveau=${n.slug}`}
+                    className="text-sm text-slate-400 transition hover:text-sky-300"
+                  >
+                    English {n.label}
+                  </Link>
+                </li>
+              ))}
+              <li>
+                <Link
+                  href="/parcours-english"
+                  className="text-sm text-slate-400 transition hover:text-sky-300"
+                >
+                  Parcours English
+                </Link>
+              </li>
+            </ul>
+
             <h3 className="mb-3 text-sm font-black text-slate-100">Maths</h3>
             <ul className="grid grid-cols-2 gap-x-3 gap-y-2 sm:grid-cols-1">
               {mathsClasses.map((c) => (

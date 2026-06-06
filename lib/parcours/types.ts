@@ -18,6 +18,8 @@ export type ParcoursClasse =
   | "terminale-spe"
   | "adulte";
 
+export type ParcoursNiveauEnglish = "a1" | "a2" | "b1" | "b2";
+
 export type ParcoursStatus = "maitrise" | "a_revoir" | "fragile";
 
 export type ParcoursNotion = {

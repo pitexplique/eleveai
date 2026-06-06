@@ -351,8 +351,12 @@ export type SchoolLevel =
   | "4e"
   | "3e"
   | "terminale-spe"
-  | "adulte";
-export type SubjectCode = "maths" | "francais";
+  | "adulte"
+  | "a1"
+  | "a2"
+  | "b1"
+  | "b2";
+export type SubjectCode = "maths" | "francais" | "english";
 
 export type TutorGeneratedQuestionV4 = {
   text: string;
@@ -382,6 +386,7 @@ export type TutorBankItemFixedV4 = {
   explanation?: string;
   tags?: string[];
   canvas?: CanvasFigure;
+  audioSrc?: string;
 };
 
 export type TutorBankItemTemplateV4 = {

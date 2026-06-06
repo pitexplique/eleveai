@@ -10,6 +10,10 @@ import { buildKnowledge3eMaths } from "@/lib/tutor-v4/knowledge/maths/3e/buildKn
 import { buildKnowledgeTerminaleSpeMaths } from "@/lib/tutor-v4/knowledge/maths/terminale-spe/buildKnowledgeTerminaleSpe";
 import { buildKnowledgeAdulteMaths } from "@/lib/tutor-v4/knowledge/maths/adulte/buildKnowledgeAdulte";
 import { buildKnowledgeCpFrancais } from "@/lib/tutor-v4/knowledge/francais/cp/buildKnowledgeCpFrancais";
+import { buildKnowledgeA1English } from "@/lib/tutor-v4/knowledge/english/a1/buildKnowledgeA1English";
+import { buildKnowledgeA2English } from "@/lib/tutor-v4/knowledge/english/a2/buildKnowledgeA2English";
+import { buildKnowledgeB1English } from "@/lib/tutor-v4/knowledge/english/b1/buildKnowledgeB1English";
+import { buildKnowledgeB2English } from "@/lib/tutor-v4/knowledge/english/b2/buildKnowledgeB2English";
 import { buildKnowledgeCe1Francais } from "@/lib/tutor-v4/knowledge/francais/ce1/buildKnowledgeCe1Francais";
 import { buildKnowledgeCe2Francais } from "@/lib/tutor-v4/knowledge/francais/ce2/buildKnowledgeCe2Francais";
 import { buildKnowledgeCm1Francais } from "@/lib/tutor-v4/knowledge/francais/cm1/buildKnowledgeCm1Francais";
@@ -34,9 +38,14 @@ export type Classe =
   | "4e"
   | "3e"
   | "terminale-spe"
-  | "adulte";
+  | "adulte"
+  | "a1"
+  | "a2"
+  | "b1"
+  | "b2";
 
-export type Matiere = "maths" | "francais";
+export type Matiere = "maths" | "francais" | "english";
+export type NiveauEnglish = "a1" | "a2" | "b1" | "b2";
 
 // =========================
 // KNOWLEDGE PAR CLASSE + MATIERE
@@ -56,6 +65,17 @@ function getKnowledge(classe: Classe, matiere: Matiere = "maths") {
       case "4e": return buildKnowledge4eFrancais();
       case "3e": return buildKnowledge3eFrancais();
       default:    return buildKnowledgeCe1Francais(); // fallback
+    }
+  }
+
+  // English
+  if (matiere === "english") {
+    switch (classe) {
+      case "a1": return buildKnowledgeA1English();
+      case "a2": return buildKnowledgeA2English();
+      case "b1": return buildKnowledgeB1English();
+      case "b2": return buildKnowledgeB2English();
+      default:   return buildKnowledgeA1English();
     }
   }
 

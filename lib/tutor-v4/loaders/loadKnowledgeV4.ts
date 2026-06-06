@@ -11,6 +11,10 @@ import { loadKnowledge3eMaths } from "@/lib/tutor-v4/knowledge/loaders/loadKnowl
 import { loadKnowledgeTerminaleSpeMaths} from "@/lib/tutor-v4/knowledge/loaders/loadKnowledgeTerminaleSpeMaths";
 import { loadKnowledgeAdulteMaths } from "@/lib/tutor-v4/knowledge/loaders/loadKnowledgeAdulteMaths";
 import { loadKnowledgeCpFrancais } from "@/lib/tutor-v4/knowledge/loaders/loadKnowledgeCpFrancais";
+import { loadKnowledgeA1English } from "@/lib/tutor-v4/knowledge/loaders/loadKnowledgeA1English";
+import { loadKnowledgeA2English } from "@/lib/tutor-v4/knowledge/loaders/loadKnowledgeA2English";
+import { loadKnowledgeB1English } from "@/lib/tutor-v4/knowledge/loaders/loadKnowledgeB1English";
+import { loadKnowledgeB2English } from "@/lib/tutor-v4/knowledge/loaders/loadKnowledgeB2English";
 import { loadKnowledgeCe1Francais } from "@/lib/tutor-v4/knowledge/loaders/loadKnowledgeCe1Francais";
 import { loadKnowledgeCe2Francais } from "@/lib/tutor-v4/knowledge/loaders/loadKnowledgeCe2Francais";
 import { loadKnowledgeCm1Francais } from "@/lib/tutor-v4/knowledge/loaders/loadKnowledgeCm1Francais";
@@ -77,6 +81,11 @@ export async function loadKnowledgeV4(
   if (classe === "5e" && matiere === "francais") return loadKnowledge5eFrancais() as KnowledgePack;
   if (classe === "4e" && matiere === "francais") return loadKnowledge4eFrancais() as KnowledgePack;
   if (classe === "3e" && matiere === "francais") return loadKnowledge3eFrancais() as KnowledgePack;
+
+  if (classe === "a1" && matiere === "english") return loadKnowledgeA1English() as KnowledgePack;
+  if (classe === "a2" && matiere === "english") return loadKnowledgeA2English() as KnowledgePack;
+  if (classe === "b1" && matiere === "english") return loadKnowledgeB1English() as KnowledgePack;
+  if (classe === "b2" && matiere === "english") return loadKnowledgeB2English() as KnowledgePack;
 
   throw new Error(`Knowledge V4 introuvable pour ${classe}/${matiere}`);
 }

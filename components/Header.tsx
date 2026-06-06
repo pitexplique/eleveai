@@ -142,9 +142,16 @@ export default function Header() {
             {coachOpen && (
               <div className="absolute left-0 top-full z-[80] w-52 rounded-xl border border-white/10 bg-[#041B33] shadow-xl">
                 <Link
-                  href="/coach-ia/maths"
+                  href="/coach-ia/english"
                   onClick={() => setCoachOpen(false)}
                   className="flex items-center gap-2 rounded-t-xl px-4 py-3 text-sm font-semibold text-white hover:bg-white/10"
+                >
+                  <span className="text-base leading-none">🇬🇧</span> English
+                </Link>
+                <Link
+                  href="/coach-ia/maths"
+                  onClick={() => setCoachOpen(false)}
+                  className="flex items-center gap-2 px-4 py-3 text-sm font-semibold text-white hover:bg-white/10"
                 >
                   Maths
                 </Link>
@@ -372,6 +379,17 @@ export default function Header() {
             >
               <GraduationCap className="h-5 w-5" />
               Bac Spé Maths · 16 juin
+            </Link>
+
+            <Link
+              href="/coach-ia/english"
+              className={mobileCardClass(
+                isActive(pathname, "/coach-ia/english"),
+                "bg-gradient-to-r from-blue-700 to-sky-500"
+              )}
+            >
+              <span className="text-xl leading-none">🇬🇧</span>
+              Coach English IA
             </Link>
 
             <Link

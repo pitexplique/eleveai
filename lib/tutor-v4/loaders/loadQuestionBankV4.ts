@@ -18,6 +18,10 @@ import { francais6eQuestionBank } from "@/lib/tutor-v4/questionBank/6e/francais"
 import { francais5eQuestionBank } from "@/lib/tutor-v4/questionBank/5e/francais";
 import { francais4eQuestionBank } from "@/lib/tutor-v4/questionBank/4e/francais";
 import { francais3eQuestionBank } from "@/lib/tutor-v4/questionBank/3e/francais";
+import { englishA1QuestionBank } from "@/lib/tutor-v4/questionBank/a1/english";
+import { englishA2QuestionBank } from "@/lib/tutor-v4/questionBank/a2/english";
+import { englishB1QuestionBank } from "@/lib/tutor-v4/questionBank/b1/english";
+import { englishB2QuestionBank } from "@/lib/tutor-v4/questionBank/b2/english";
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 
 export async function loadQuestionBankV4(
@@ -78,6 +82,11 @@ export async function loadQuestionBankV4(
   if (classe === "5e" && matiere === "francais") return francais5eQuestionBank;
   if (classe === "4e" && matiere === "francais") return francais4eQuestionBank;
   if (classe === "3e" && matiere === "francais") return francais3eQuestionBank;
+
+  if (classe === "a1" && matiere === "english") return englishA1QuestionBank;
+  if (classe === "a2" && matiere === "english") return englishA2QuestionBank;
+  if (classe === "b1" && matiere === "english") return englishB1QuestionBank;
+  if (classe === "b2" && matiere === "english") return englishB2QuestionBank;
 
   throw new Error(`QuestionBank V4 introuvable pour ${classe}/${matiere}`);
 }
