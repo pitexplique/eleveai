@@ -1,8 +1,9 @@
 "use client";
 
-import { FormEvent, useRef, useState } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { ChevronDown } from "lucide-react";
 import { useEleve } from "@/context/EleveContext";
 
 // ─── Constants ───────────────────────────────────────────────────────────────
@@ -18,15 +19,56 @@ const jours = joursAvantBrevet();
 
 // ─── Chips "Que veux-tu faire ?" ─────────────────────────────────────────────
 
-const CHIPS = [
-  { icon: "🧠", label: "Travailler les maths",    href: "/coach-ia/maths",    color: "hover:border-cyan-400/60 hover:bg-cyan-500/20",     cm: true  },
-  { icon: "📖", label: "Travailler le français",  href: "/coach-ia/francais", color: "hover:border-sky-400/60 hover:bg-sky-500/20",      cm: true  },
-  { icon: "⚡", label: "5 min de calcul rapide",  href: "/calcul-rapide",     color: "hover:border-lime-400/60 hover:bg-lime-500/20",    cm: true  },
-  { icon: "🎯", label: "Relever un défi",         href: "/defis-du-jour",     color: "hover:border-orange-400/60 hover:bg-orange-500/20", cm: true  },
-  { icon: "📊", label: "Tester mon niveau",       href: "/parcours",          color: "hover:border-violet-400/60 hover:bg-violet-500/20", cm: true  },
-  { icon: "🇬🇧", label: "English Maths",          href: "/english-maths",     color: "hover:border-blue-400/60 hover:bg-blue-500/20",    cm: true  },
-  { icon: "📚", label: "Sprint Brevet",           href: "/coach-brevet",      color: "hover:border-emerald-400/60 hover:bg-emerald-500/20", cm: false },
-  { icon: "🎓", label: "Préparer le bac spé",    href: "/coach-bac-spe",     color: "hover:border-indigo-400/60 hover:bg-indigo-500/20", cm: false },
+type ChipItem = { icon: string; label: string; href: string; desc: string };
+
+type Chip =
+  | { type: "link";     icon: string; label: string; href: string; color: string; cm: boolean }
+  | { type: "dropdown"; icon: string; label: string; color: string; cm: boolean; items: ChipItem[] };
+
+const CHIPS: Chip[] = [
+  {
+    type: "dropdown",
+    icon: "🧠", label: "Maths", cm: true,
+    color: "hover:border-cyan-400/60 hover:bg-cyan-500/20",
+    items: [
+      { icon: "🧠", label: "Coach Maths IA",   href: "/coach-ia/maths",    desc: "Toutes notions, CP → Terminale" },
+      { icon: "🛤️", label: "Parcours Maths",   href: "/parcours",          desc: "Bilan de compétences personnalisé" },
+      { icon: "📚", label: "Coach Brevet",      href: "/coach-brevet",      desc: "Sprint J−30" },
+      { icon: "🎓", label: "Coach Bac Spé",     href: "/coach-bac-spe",     desc: "Suites, fonctions, proba" },
+      { icon: "⚡", label: "Calcul rapide",     href: "/calcul-rapide",     desc: "5 min d'automatismes" },
+      { icon: "🏆", label: "Concours général",  href: "/concours-general",  desc: "Problèmes avancés" },
+      { icon: "🎯", label: "Défis du jour",     href: "/defis-du-jour",     desc: "Maths contextualisés 974" },
+    ],
+  },
+  {
+    type: "dropdown",
+    icon: "📖", label: "Français", cm: true,
+    color: "hover:border-sky-400/60 hover:bg-sky-500/20",
+    items: [
+      { icon: "📖", label: "Coach Français IA", href: "/coach-ia/francais", desc: "Grammaire, conjugaison, vocabulaire" },
+      { icon: "🎧", label: "Leçon du jour",      href: "/lecon-du-jour",     desc: "Écoute et comprends en 10 min" },
+    ],
+  },
+  {
+    type: "dropdown",
+    icon: "🇬🇧", label: "Anglais", cm: true,
+    color: "hover:border-blue-400/60 hover:bg-blue-500/20",
+    items: [
+      { icon: "🇬🇧", label: "Coach English Maths", href: "/coach-ia/english-maths", desc: "A1 → B2, vocabulaire maths" },
+      { icon: "🛤️", label: "Parcours English",      href: "/parcours-english-maths", desc: "Bilan de niveau avec audio" },
+      { icon: "📋", label: "English Maths",          href: "/english-maths",          desc: "Accueil & présentation" },
+    ],
+  },
+  {
+    type: "link",
+    icon: "⚡", label: "5 min de calcul", href: "/calcul-rapide",
+    color: "hover:border-lime-400/60 hover:bg-lime-500/20", cm: true,
+  },
+  {
+    type: "link",
+    icon: "🎯", label: "Relever un défi", href: "/defis-du-jour",
+    color: "hover:border-orange-400/60 hover:bg-orange-500/20", cm: true,
+  },
 ];
 
 // ─── Netflix rows ─────────────────────────────────────────────────────────────
@@ -61,6 +103,65 @@ const CLASSES = [
   { label: "4e",  href: "/coach-ia/maths?classe=4e",  desc: "Pythagore, Thalès" },
   { label: "3e",  href: "/coach-ia/maths?classe=3e",  desc: "Brevet, fonctions" },
 ];
+
+// ─── ChipDropdown ─────────────────────────────────────────────────────────────
+
+function ChipDropdown({
+  icon, label, color, items,
+}: {
+  icon: string; label: string; color: string; items: ChipItem[];
+}) {
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function handle(e: MouseEvent) {
+      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
+    }
+    document.addEventListener("mousedown", handle);
+    return () => document.removeEventListener("mousedown", handle);
+  }, []);
+
+  return (
+    <div ref={ref} className="relative">
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        className={[
+          "flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2.5 text-sm font-bold text-white backdrop-blur-sm transition-all duration-200 hover:scale-[1.04] hover:border-white/40",
+          color,
+          open ? "border-white/40 bg-white/20 scale-[1.04]" : "",
+        ].join(" ")}
+      >
+        <span className="text-base">{icon}</span>
+        {label}
+        <ChevronDown className={`h-3.5 w-3.5 transition-transform duration-200 ${open ? "rotate-180" : ""}`} />
+      </button>
+
+      {open && (
+        <div className="absolute left-1/2 top-full z-50 mt-2 w-64 -translate-x-1/2 overflow-hidden rounded-2xl border border-white/15 bg-[#041B33]/95 shadow-2xl backdrop-blur-xl">
+          {items.map((item, i) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              onClick={() => setOpen(false)}
+              className={[
+                "flex items-start gap-3 px-4 py-3 transition hover:bg-white/10",
+                i < items.length - 1 ? "border-b border-white/5" : "",
+              ].join(" ")}
+            >
+              <span className="mt-0.5 text-lg leading-none">{item.icon}</span>
+              <div>
+                <p className="text-sm font-bold text-white">{item.label}</p>
+                <p className="text-xs text-white/50">{item.desc}</p>
+              </div>
+            </Link>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
 
 // ─── Sub-components ───────────────────────────────────────────────────────────
 
@@ -130,7 +231,13 @@ export default function AccueilPage() {
     ? MODULES.filter(m => !["/concours-general", "/coach-brevet", "/coach-bac-spe"].includes(m.href))
     : MODULES;
 
-  const visibleChips = isCmPrimary ? CHIPS.filter(c => c.cm) : CHIPS;
+  const visibleChips = isCmPrimary
+    ? CHIPS.filter(c => c.cm).map(c =>
+        c.type === "dropdown"
+          ? { ...c, items: c.items.filter(i => !["/coach-brevet", "/coach-bac-spe", "/concours-general"].includes(i.href)) }
+          : c
+      )
+    : CHIPS;
 
   function getHref(href: string) {
     if (!isCmPrimary) return href;
@@ -230,19 +337,29 @@ export default function AccueilPage() {
 
           {/* Chips */}
           <div className="flex flex-wrap justify-center gap-2 sm:gap-3">
-            {visibleChips.map((chip) => (
-              <Link
-                key={chip.href}
-                href={getHref(chip.href)}
-                className={[
-                  "flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2.5 text-sm font-bold text-white backdrop-blur-sm transition-all duration-200 hover:scale-[1.04] hover:border-white/40",
-                  chip.color,
-                ].join(" ")}
-              >
-                <span className="text-base">{chip.icon}</span>
-                {chip.label}
-              </Link>
-            ))}
+            {visibleChips.map((chip) =>
+              chip.type === "dropdown" ? (
+                <ChipDropdown
+                  key={chip.label}
+                  icon={chip.icon}
+                  label={chip.label}
+                  color={chip.color}
+                  items={chip.items}
+                />
+              ) : (
+                <Link
+                  key={chip.href}
+                  href={getHref(chip.href)}
+                  className={[
+                    "flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2.5 text-sm font-bold text-white backdrop-blur-sm transition-all duration-200 hover:scale-[1.04] hover:border-white/40",
+                    chip.color,
+                  ].join(" ")}
+                >
+                  <span className="text-base">{chip.icon}</span>
+                  {chip.label}
+                </Link>
+              )
+            )}
           </div>
 
           {/* Message de bord button */}
