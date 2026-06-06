@@ -331,7 +331,11 @@ function normalizeClasse(value: string | null): Classe {
     value === "4e" ||
     value === "3e" ||
     value === "terminale-spe" ||
-    value === "adulte"
+    value === "adulte" ||
+    value === "a1" ||
+    value === "a2" ||
+    value === "b1" ||
+    value === "b2"
   ) {
     return value;
   }
@@ -340,7 +344,9 @@ function normalizeClasse(value: string | null): Classe {
 }
 
 function normalizeMatiere(value: string | null): Matiere {
-  return value === "francais" ? "francais" : "maths";
+  if (value === "francais") return "francais";
+  if (value === "english")  return "english";
+  return "maths";
 }
 
 function isPrimaryClasse(value: Classe) {
