@@ -140,6 +140,7 @@ export type TutorQuestionOption = {
   hint?: string;
   explanation?: string;
   canvas?: CanvasFigure;
+  audioSrc?: string;
   meta: QuestionVariantMeta;
 };
 

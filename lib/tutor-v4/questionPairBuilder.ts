@@ -24,6 +24,7 @@ function materializeBankItem(item: TutorBankItemV4): {
   hint?: string;
   explanation?: string;
   canvas?: CanvasFigure;
+  audioSrc?: string;
   difficulty: number;
 } {
   if (item.kind === "fixed") {
@@ -39,6 +40,7 @@ function materializeBankItem(item: TutorBankItemV4): {
       hint: item.hint,
       explanation: item.explanation,
       canvas: item.canvas,
+      audioSrc: item.audioSrc,
       difficulty: item.difficulty,
     };
   }
@@ -144,6 +146,7 @@ function toTutorQuestionOption(item: TutorBankItemV4): TutorQuestionOption {
     hint: q.hint,
     explanation: q.explanation,
     canvas: q.canvas,
+    audioSrc: q.audioSrc,
     meta: {
       familyId: inferFamilyId(item),
       theme: inferTheme(q.text),
