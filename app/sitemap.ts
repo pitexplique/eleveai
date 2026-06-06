@@ -7,8 +7,8 @@ const BASE_URL = "https://eleveai.fr";
 
 const u = (path: string) => `${BASE_URL}${path}`;
 
-const LASTMOD_HOME = new Date("2026-06-01");
-const LASTMOD_CORE = new Date("2026-06-01");
+const LASTMOD_HOME = new Date("2026-06-06");
+const LASTMOD_CORE = new Date("2026-06-06");
 const LASTMOD_LEGAL = new Date("2026-02-18");
 const MATHS_CLASSES = ["cp", "ce1", "ce2", "cm1", "cm2", "6e", "5e", "4e", "3e", "terminale-spe"];
 const FRANCAIS_CLASSES = ["cp", "ce1", "ce2", "cm1", "cm2", "6e", "5e", "4e", "3e"];

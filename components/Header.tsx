@@ -2,35 +2,169 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import React, { useEffect, useState } from "react";
-import {
-  Sparkles,
-  Target,
-  Brain,
-  Route,
-  Menu,
-  X,
-  Home,
-  GraduationCap,
-  LogOut,
-  Flame,
-  Puzzle,
-  Trophy,
-  BookOpen,
-} from "lucide-react";
+import React, { useEffect, useRef, useState } from "react";
+import { Sparkles, Menu, X, GraduationCap, LogOut, ChevronDown } from "lucide-react";
 import { useEleve } from "@/context/EleveContext";
 import { createClient } from "@/lib/supabase/client";
+
+// ─── Nav structure ────────────────────────────────────────────────────────────
+
+const NAV_MATHS = [
+  { href: "/coach-ia/maths",   icon: "🧠", label: "Coach Maths IA",    desc: "Toutes notions, CP → Terminale" },
+  { href: "/coach-brevet",     icon: "📚", label: "Coach Brevet",       desc: "Sprint J−30, toutes les notions" },
+  { href: "/coach-bac-spe",    icon: "🎓", label: "Coach Bac Spé",      desc: "Suites, fonctions, proba" },
+  { href: "/calcul-rapide",    icon: "⚡", label: "Calcul rapide",      desc: "5 min d'automatismes" },
+  { href: "/concours-general", icon: "🏆", label: "Concours général",   desc: "Problèmes avancés" },
+  { href: "/defis-du-jour",    icon: "🎯", label: "Défis du jour",      desc: "Maths contextualisés 974" },
+];
+
+const NAV_FRANCAIS = [
+  { href: "/coach-ia/francais", icon: "📖", label: "Coach Français IA", desc: "Grammaire, conjugaison, vocabulaire" },
+  { href: "/lecon-du-jour",     icon: "🎧", label: "Leçon du jour",     desc: "Écoute et comprends en 10 min" },
+];
+
+const NAV_ANGLAIS = [
+  { href: "/coach-ia/english-maths", icon: "🇬🇧", label: "Coach English Maths", desc: "A1 → B2, vocabulaire maths en anglais" },
+  { href: "/english-maths",          icon: "📋", label: "English Maths",         desc: "Accueil & présentation" },
+  { href: "/parcours-english-maths", icon: "🎧", label: "Parcours English",      desc: "Défi du jour avec audio" },
+];
+
+const NAV_PARCOURS = [
+  { href: "/parcours",               icon: "🛤️", label: "Parcours Maths",   desc: "Bilan de compétences personnalisé" },
+  { href: "/parcours-english-maths", icon: "🇬🇧", label: "Parcours English", desc: "Niveau CECRL avec audio" },
+];
+
+type NavItem = { href: string; icon: string; label: string; desc: string };
+
+// ─── Helpers ─────────────────────────────────────────────────────────────────
 
 function isActive(pathname: string, href: string) {
   if (href === "/") return pathname === "/";
   return pathname === href || pathname.startsWith(`${href}/`);
 }
 
+function anyActive(pathname: string, items: NavItem[]) {
+  return items.some((item) => isActive(pathname, item.href));
+}
+
+// ─── Desktop Dropdown ─────────────────────────────────────────────────────────
+
+function NavDropdown({
+  label,
+  items,
+  active,
+  accent,
+}: {
+  label: string;
+  items: NavItem[];
+  active: boolean;
+  accent: string;
+}) {
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  // Close on click outside
+  useEffect(() => {
+    function handle(e: MouseEvent) {
+      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
+    }
+    document.addEventListener("mousedown", handle);
+    return () => document.removeEventListener("mousedown", handle);
+  }, []);
+
+  return (
+    <div
+      ref={ref}
+      className="relative"
+      onMouseEnter={() => setOpen(true)}
+      onMouseLeave={() => setOpen(false)}
+    >
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        className={[
+          "inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-semibold transition",
+          active
+            ? "bg-white text-[#041B33] shadow-lg"
+            : "text-white/90 hover:bg-white/15 hover:text-white",
+        ].join(" ")}
+      >
+        {label}
+        <ChevronDown
+          className={`h-3.5 w-3.5 transition-transform duration-200 ${open ? "rotate-180" : ""}`}
+        />
+      </button>
+
+      {open && (
+        <div className="absolute left-0 top-full z-[80] mt-1 w-64 overflow-hidden rounded-2xl border border-white/10 bg-[#041B33] shadow-2xl">
+          {items.map((item, i) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              onClick={() => setOpen(false)}
+              className={[
+                "flex items-start gap-3 px-4 py-3 transition hover:bg-white/10",
+                i === 0 ? "rounded-t-2xl" : "",
+                i === items.length - 1 ? "rounded-b-2xl" : "border-b border-white/5",
+              ].join(" ")}
+            >
+              <span className="mt-0.5 text-lg leading-none">{item.icon}</span>
+              <div>
+                <p className="text-sm font-bold text-white">{item.label}</p>
+                <p className="text-xs text-white/50">{item.desc}</p>
+              </div>
+            </Link>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ─── Mobile section ───────────────────────────────────────────────────────────
+
+function MobileSection({
+  title,
+  accent,
+  items,
+  pathname,
+}: {
+  title: string;
+  accent: string;
+  items: NavItem[];
+  pathname: string;
+}) {
+  return (
+    <div>
+      <p className={`mb-2 text-[10px] font-black uppercase tracking-[0.2em] ${accent}`}>
+        {title}
+      </p>
+      <div className="grid grid-cols-2 gap-2">
+        {items.map((item) => (
+          <Link
+            key={item.href}
+            href={item.href}
+            className={[
+              "flex items-center gap-2 rounded-xl border px-3 py-3 text-sm font-bold text-white transition hover:bg-white/15",
+              isActive(pathname, item.href)
+                ? "border-white/40 bg-white/15"
+                : "border-white/10 bg-white/5",
+            ].join(" ")}
+          >
+            <span className="text-base">{item.icon}</span>
+            <span className="leading-tight">{item.label}</span>
+          </Link>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// ─── Main Header ──────────────────────────────────────────────────────────────
+
 export default function Header() {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [coachOpen, setCoachOpen] = useState(false);
-  const [parcoursOpen, setParcoursOpen] = useState(false);
   const { eleve, logout } = useEleve();
   const supabase = createClient();
 
@@ -44,34 +178,11 @@ export default function Header() {
     window.location.href = "/accueil";
   }
 
-  const linkClass = (active: boolean) =>
-    `inline-flex items-center gap-2 rounded-full px-3.5 py-2 text-sm font-semibold transition ${
-      active
-        ? "bg-white text-[#041B33] shadow-lg"
-        : "text-white/90 hover:bg-white/15 hover:text-white"
-    }`;
-
-  const mobileCardClass = (
-    active: boolean,
-    gradient: string,
-    textColor = "text-white"
-  ) =>
-    [
-      "flex items-center justify-center gap-3 rounded-2xl",
-      "px-4 py-4 text-sm font-black shadow-lg transition",
-      "hover:scale-[1.015] active:scale-[0.99]",
-      gradient,
-      textColor,
-      active ? "ring-2 ring-white/80" : "ring-1 ring-white/15",
-    ].join(" ");
-
   const eleveLabel = eleve?.nom || eleve?.code_eleve || "Élève";
   const eleveClasse = eleve?.classe?.toUpperCase() ?? null;
-
   const typeUtilisateur = eleve?.type_utilisateur ?? null;
   const isProf = typeUtilisateur === "prof";
-  const isPrincipal =
-    typeUtilisateur === "principal" || typeUtilisateur === "boss";
+  const isPrincipal = typeUtilisateur === "principal" || typeUtilisateur === "boss";
   const isStaff = isProf || isPrincipal;
   const dashboardHref = isPrincipal
     ? "/dashboard-principal"
@@ -89,231 +200,81 @@ export default function Header() {
     ? "bg-gradient-to-r from-blue-300 to-indigo-300"
     : "bg-gradient-to-r from-emerald-300 to-cyan-300";
 
+  const linkBase = (active: boolean) =>
+    `inline-flex items-center gap-1.5 rounded-full px-3.5 py-2 text-sm font-semibold transition ${
+      active
+        ? "bg-white text-[#041B33] shadow-lg"
+        : "text-white/90 hover:bg-white/15 hover:text-white"
+    }`;
+
   return (
     <header className="sticky top-0 z-50 border-b border-cyan-300/20 bg-gradient-to-r from-[#041B33]/95 via-[#062A4F]/95 to-[#073B63]/95 shadow-[0_8px_30px_rgba(0,0,0,0.25)] backdrop-blur-xl">
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3">
+
+        {/* Logo */}
         <Link href="/accueil" className="flex items-center gap-3">
           <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-gradient-to-br from-cyan-200 via-emerald-300 to-amber-300 text-[#041B33] shadow-lg">
             <Sparkles className="h-5 w-5" />
           </div>
-
           <div className="flex flex-col leading-tight">
             <span className="text-lg font-extrabold tracking-tight text-white">
               Eleve<span className="text-emerald-300">AI</span>
             </span>
             <span className="hidden text-xs text-cyan-100/75 sm:block">
-              Comprendre • S’entraîner • Réussir
+              Comprendre · S&apos;entraîner · Réussir
             </span>
           </div>
         </Link>
 
-        <div className="hidden items-center gap-2 lg:flex">
-          <Link
-            href="/accueil"
-            className={linkClass(isActive(pathname, "/accueil"))}
-          >
-            <Home className="h-4 w-4 text-cyan-300" />
+        {/* Desktop nav */}
+        <div className="hidden items-center gap-1 lg:flex">
+
+          <Link href="/accueil" className={linkBase(isActive(pathname, "/accueil"))}>
             Accueil
           </Link>
 
-          <div
-            className="relative flex items-center"
-            onMouseEnter={() => setCoachOpen(true)}
-            onMouseLeave={() => setCoachOpen(false)}
-          >
-            <Link
-              href="/coach-ia/maths"
-              onClick={() => setCoachOpen(false)}
-              className={linkClass(isActive(pathname, "/coach-ia"))}
-            >
-              <Brain className="h-4 w-4 text-orange-300" />
-              Coach IA
-            </Link>
+          <NavDropdown
+            label="Maths"
+            items={NAV_MATHS}
+            active={anyActive(pathname, NAV_MATHS)}
+            accent="text-orange-300"
+          />
 
-            <button
-              type="button"
-              onClick={() => setCoachOpen((value) => !value)}
-              onMouseEnter={() => setCoachOpen(true)}
-              aria-label="Choisir la matiere du coach IA"
-              className="ml-1 inline-flex h-9 w-9 items-center justify-center rounded-full text-sm font-black text-white/90 transition hover:bg-white/15 hover:text-white"
-            >
-              v
-            </button>
+          <NavDropdown
+            label="Français"
+            items={NAV_FRANCAIS}
+            active={anyActive(pathname, NAV_FRANCAIS)}
+            accent="text-sky-300"
+          />
 
-            {coachOpen && (
-              <div className="absolute left-0 top-full z-[80] w-52 rounded-xl border border-white/10 bg-[#041B33] shadow-xl">
-                <Link
-                  href="/coach-ia/english-maths"
-                  onClick={() => setCoachOpen(false)}
-                  className="flex items-center gap-2 rounded-t-xl px-4 py-3 text-sm font-semibold text-white hover:bg-white/10"
-                >
-                  <span className="text-base leading-none">🇬🇧</span> English
-                </Link>
-                <Link
-                  href="/coach-ia/maths"
-                  onClick={() => setCoachOpen(false)}
-                  className="flex items-center gap-2 px-4 py-3 text-sm font-semibold text-white hover:bg-white/10"
-                >
-                  Maths
-                </Link>
-                <Link
-                  href="/coach-ia/francais"
-                  onClick={() => setCoachOpen(false)}
-                  className="flex items-center gap-2 rounded-b-xl px-4 py-3 text-sm font-semibold text-white hover:bg-white/10"
-                >
-                  Français
-                </Link>
-              </div>
-            )}
-          </div>
+          <NavDropdown
+            label="Anglais"
+            items={NAV_ANGLAIS}
+            active={anyActive(pathname, NAV_ANGLAIS)}
+            accent="text-blue-300"
+          />
 
-          <div
-            className="relative flex items-center"
-            onMouseEnter={() => setParcoursOpen(true)}
-            onMouseLeave={() => setParcoursOpen(false)}
-          >
-            <Link
-              href="/parcours"
-              onClick={() => setParcoursOpen(false)}
-              className={linkClass(
-                isActive(pathname, "/parcours") || isActive(pathname, "/parcours-english-maths")
-              )}
-            >
-              <Route className="h-4 w-4 text-purple-300" />
-              Parcours
-            </Link>
+          <NavDropdown
+            label="Parcours"
+            items={NAV_PARCOURS}
+            active={anyActive(pathname, NAV_PARCOURS)}
+            accent="text-violet-300"
+          />
 
-            <button
-              type="button"
-              onClick={() => setParcoursOpen((v) => !v)}
-              onMouseEnter={() => setParcoursOpen(true)}
-              aria-label="Choisir le parcours"
-              className="ml-1 inline-flex h-9 w-9 items-center justify-center rounded-full text-sm font-black text-white/90 transition hover:bg-white/15 hover:text-white"
-            >
-              v
-            </button>
-
-            {parcoursOpen && (
-              <div className="absolute left-0 top-full z-[80] w-52 rounded-xl border border-white/10 bg-[#041B33] shadow-xl">
-                <Link
-                  href="/parcours-english-maths"
-                  onClick={() => setParcoursOpen(false)}
-                  className="flex items-center gap-2 rounded-t-xl px-4 py-3 text-sm font-semibold text-white hover:bg-white/10"
-                >
-                  <span className="text-base leading-none">🇬🇧</span> English
-                </Link>
-                <Link
-                  href="/parcours"
-                  onClick={() => setParcoursOpen(false)}
-                  className="flex items-center gap-2 rounded-b-xl px-4 py-3 text-sm font-semibold text-white hover:bg-white/10"
-                >
-                  <span className="text-base leading-none">📐</span> Maths
-                </Link>
-              </div>
-            )}
-          </div>
-
-          <Link
-            href="/calcul-rapide"
-            className={linkClass(isActive(pathname, "/calcul-rapide"))}
-          >
-            <Target className="h-4 w-4 text-green-300" />
-            Calcul rapide
-          </Link>
-
-          <Link
-            href="/concours-general"
-            className={`relative ${linkClass(
-              isActive(pathname, "/concours-general")
-            )}`}
-          >
-            <Trophy className="h-4 w-4 text-amber-300" />
-            Concours général
-            <span className="absolute -right-2 -top-2 rounded-full bg-amber-400 px-1.5 text-[10px] font-black text-[#041B33]">
-              new
-            </span>
-          </Link>
-
-          <Link
-            href="/coach-brevet"
-            className={`relative ${linkClass(isActive(pathname, "/coach-brevet"))}`}
-          >
-            <BookOpen className="h-4 w-4 text-emerald-300" />
-            Brevet
-            <span className="absolute -right-2 -top-2 rounded-full bg-emerald-400 px-1.5 text-[10px] font-black text-[#041B33]">
-              J−30
-            </span>
-          </Link>
-
-          <Link
-            href="/coach-bac-spe"
-            className={`relative ${linkClass(
-              isActive(pathname, "/coach-bac-spe")
-            )}`}
-          >
-            <GraduationCap className="h-4 w-4 text-violet-300" />
-            Bac Spé
-            <span className="absolute -right-2 -top-2 rounded-full bg-violet-400 px-1.5 text-[10px] font-black text-white">
-              16 juin
-            </span>
-          </Link>
-
-          <Link
-            href="/english-maths"
-            className={[
-              "relative flex items-center justify-center gap-2 rounded-2xl",
-              "bg-gradient-to-r from-blue-700 via-white to-red-500",
-              "px-3 py-2 text-xs font-black text-[#041B33]",
-              "shadow-lg transition hover:scale-[1.03] hover:shadow-xl",
-              isActive(pathname, "/english-maths")
-                ? "ring-2 ring-white/80"
-                : "ring-1 ring-white/20",
-            ].join(" ")}
-          >
-            <span className="text-lg leading-none">GB</span>
-            <span className="leading-tight">
-              English
-              <br />
-              Verbes
-            </span>
-          </Link>
-
-          <Link
-            href="/lecon-du-jour"
-            className={`relative ${linkClass(
-              isActive(pathname, "/lecon-du-jour")
-            )}`}
-          >
-            <Flame className="h-4 w-4 text-orange-300" />
-            Leçon du jour
-            <span className="absolute -right-2 -top-2 rounded-full bg-red-500 px-1.5 text-[10px] text-white">
-              feu
-            </span>
-          </Link>
-
-          <Link
-            href="/defis-du-jour"
-            className={linkClass(isActive(pathname, "/defis-du-jour"))}
-          >
-            <Puzzle className="h-4 w-4 text-pink-300" />
-            Défis 974
-          </Link>
-
+          {/* Auth */}
           {eleve ? (
-            <div className="ml-2 flex items-center gap-2">
+            <div className="ml-3 flex items-center gap-2">
               <Link
                 href={dashboardHref}
                 className={`inline-flex items-center gap-2 rounded-full ${dashboardColor} px-4 py-2 text-sm font-black text-[#041B33] shadow-lg hover:brightness-110`}
-                title="Mon tableau de bord"
               >
                 <GraduationCap className="h-4 w-4" />
                 {dashboardLabel}
               </Link>
-
               <button
                 type="button"
                 onClick={logoutEleve}
-                className="inline-flex items-center gap-2 rounded-full bg-red-500 px-3.5 py-2 text-sm font-bold text-white hover:bg-red-600"
+                className="inline-flex items-center gap-1.5 rounded-full bg-red-500/20 border border-red-400/30 px-3 py-2 text-sm font-bold text-red-300 hover:bg-red-500/30 transition"
               >
                 <LogOut className="h-4 w-4" />
               </button>
@@ -321,7 +282,7 @@ export default function Header() {
           ) : (
             <Link
               href="/auth/signin?mode=eleve"
-              className="ml-2 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-emerald-300 to-cyan-300 px-4 py-2 text-sm font-black text-[#041B33] shadow-lg hover:brightness-110"
+              className="ml-3 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-emerald-300 to-cyan-300 px-4 py-2 text-sm font-black text-[#041B33] shadow-lg hover:brightness-110 transition"
             >
               <GraduationCap className="h-4 w-4" />
               Connexion / inscription
@@ -329,6 +290,7 @@ export default function Header() {
           )}
         </div>
 
+        {/* Mobile — bouton hamburger */}
         <div className="flex items-center gap-2 lg:hidden">
           {!eleve && (
             <Link
@@ -339,10 +301,9 @@ export default function Header() {
               Connexion
             </Link>
           )}
-
           <button
             type="button"
-            onClick={() => setMobileOpen((value) => !value)}
+            onClick={() => setMobileOpen((v) => !v)}
             className="rounded-full border border-cyan-200/20 bg-white/10 p-2 text-white shadow-lg"
             aria-label="Ouvrir le menu"
           >
@@ -351,197 +312,41 @@ export default function Header() {
         </div>
       </nav>
 
+      {/* Mobile menu */}
       {mobileOpen && (
-        <div className="border-t border-cyan-300/20 bg-gradient-to-b from-[#062A4F] to-[#041B33] px-4 py-4 lg:hidden">
-          <div className="grid gap-2">
+        <div className="border-t border-cyan-300/20 bg-gradient-to-b from-[#062A4F] to-[#041B33] px-4 pb-6 pt-4 lg:hidden">
+          <div className="space-y-5">
+
+            {/* Auth mobile */}
             {eleve ? (
-              <div className="mb-3 grid gap-2 border-b border-cyan-300/20 pb-3">
-                <Link
-                  href={dashboardHref}
-                  className={mobileCardClass(
-                    isActive(pathname, dashboardHref),
-                    isStaff
-                      ? "bg-gradient-to-r from-blue-300 to-indigo-300"
-                      : "bg-gradient-to-r from-emerald-300 to-cyan-300",
-                    "text-[#041B33]"
-                  )}
-                >
-                  <GraduationCap className="h-5 w-5" />
-                  {isStaff
-                    ? `Dashboard ${dashboardLabel}`
-                    : `Mon espace - ${dashboardLabel}`}
+              <div className="flex items-center justify-between gap-3 rounded-2xl border border-white/10 bg-white/5 px-4 py-3">
+                <Link href={dashboardHref} className="flex items-center gap-2 text-sm font-black text-white">
+                  <GraduationCap className="h-4 w-4 text-emerald-300" />
+                  {dashboardLabel}
                 </Link>
+                <button
+                  type="button"
+                  onClick={logoutEleve}
+                  className="rounded-full bg-red-500/20 p-2 text-red-300 hover:bg-red-500/30"
+                >
+                  <LogOut className="h-4 w-4" />
+                </button>
               </div>
             ) : (
               <Link
                 href="/auth/signin?mode=eleve"
-                className={mobileCardClass(
-                  isActive(pathname, "/auth/signin"),
-                  "mb-3 bg-gradient-to-r from-emerald-300 to-cyan-300",
-                  "text-[#041B33]"
-                )}
+                className="flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-emerald-300 to-cyan-300 px-4 py-3 text-sm font-black text-[#041B33] shadow"
               >
-                <GraduationCap className="h-5 w-5" />
+                <GraduationCap className="h-4 w-4" />
                 Connexion / inscription
               </Link>
             )}
 
-            <Link
-              href="/accueil"
-              className={mobileCardClass(
-                isActive(pathname, "/accueil"),
-                "bg-gradient-to-r from-cyan-500 to-blue-600"
-              )}
-            >
-              <Home className="h-5 w-5" />
-              Accueil
-            </Link>
+            <MobileSection title="Maths"    accent="text-orange-300" items={NAV_MATHS}    pathname={pathname} />
+            <MobileSection title="Français" accent="text-sky-300"    items={NAV_FRANCAIS} pathname={pathname} />
+            <MobileSection title="Anglais"  accent="text-blue-300"   items={NAV_ANGLAIS}  pathname={pathname} />
+            <MobileSection title="Parcours" accent="text-violet-300" items={NAV_PARCOURS} pathname={pathname} />
 
-            <Link
-              href="/coach-brevet"
-              className={mobileCardClass(
-                isActive(pathname, "/coach-brevet"),
-                "bg-gradient-to-r from-emerald-400 to-teal-500",
-                "text-[#041B33]"
-              )}
-            >
-              <BookOpen className="h-5 w-5" />
-              Brevet Maths · J−30
-            </Link>
-
-            <Link
-              href="/coach-bac-spe"
-              className={mobileCardClass(
-                isActive(pathname, "/coach-bac-spe"),
-                "bg-gradient-to-r from-blue-600 to-violet-700"
-              )}
-            >
-              <GraduationCap className="h-5 w-5" />
-              Bac Spé Maths · 16 juin
-            </Link>
-
-            <Link
-              href="/coach-ia/english-maths"
-              className={mobileCardClass(
-                isActive(pathname, "/coach-ia/english-maths"),
-                "bg-gradient-to-r from-blue-700 to-sky-500"
-              )}
-            >
-              <span className="text-xl leading-none">🇬🇧</span>
-              Coach English IA
-            </Link>
-
-            <Link
-              href="/coach-ia/maths"
-              className={mobileCardClass(
-                isActive(pathname, "/coach-ia/maths"),
-                "bg-gradient-to-r from-orange-400 to-red-500"
-              )}
-            >
-              <Brain className="h-5 w-5" />
-              Coach Maths IA
-            </Link>
-
-            <Link
-              href="/coach-ia/francais"
-              className={mobileCardClass(
-                isActive(pathname, "/coach-ia/francais"),
-                "bg-gradient-to-r from-sky-500 to-indigo-600"
-              )}
-            >
-              <BookOpen className="h-5 w-5" />
-              Coach Français IA
-            </Link>
-
-            <Link
-              href="/parcours-english-maths"
-              className={mobileCardClass(
-                isActive(pathname, "/parcours-english-maths"),
-                "bg-gradient-to-r from-sky-400 to-blue-600"
-              )}
-            >
-              <Route className="h-5 w-5" />
-              Parcours 🇬🇧 English
-            </Link>
-
-            <Link
-              href="/parcours"
-              className={mobileCardClass(
-                isActive(pathname, "/parcours"),
-                "bg-gradient-to-r from-purple-500 to-fuchsia-600"
-              )}
-            >
-              <Route className="h-5 w-5" />
-              Parcours 📐 Maths
-            </Link>
-
-            <Link
-              href="/calcul-rapide"
-              className={mobileCardClass(
-                isActive(pathname, "/calcul-rapide"),
-                "bg-gradient-to-r from-emerald-400 to-green-600"
-              )}
-            >
-              <Target className="h-5 w-5" />
-              Calcul rapide
-            </Link>
-
-            <Link
-              href="/concours-general"
-              className={mobileCardClass(
-                isActive(pathname, "/concours-general"),
-                "bg-gradient-to-r from-amber-300 to-orange-400",
-                "text-[#041B33]"
-              )}
-            >
-              <Trophy className="h-5 w-5" />
-              Concours général
-            </Link>
-
-            <Link
-              href="/english-maths"
-              className={mobileCardClass(
-                isActive(pathname, "/english-maths"),
-                "bg-gradient-to-r from-blue-700 via-slate-50 to-red-500",
-                "text-[#041B33]"
-              )}
-            >
-              <span className="text-xl leading-none">GB</span>
-              English Maths
-            </Link>
-
-            <Link
-              href="/lecon-du-jour"
-              className={mobileCardClass(
-                isActive(pathname, "/lecon-du-jour"),
-                "bg-gradient-to-r from-orange-500 to-red-600"
-              )}
-            >
-              <Flame className="h-5 w-5" />
-              Leçon du jour
-            </Link>
-
-            <Link
-              href="/defis-du-jour"
-              className={mobileCardClass(
-                isActive(pathname, "/defis-du-jour"),
-                "bg-gradient-to-r from-pink-500 to-rose-600"
-              )}
-            >
-              <Puzzle className="h-5 w-5" />
-              Défis 974
-            </Link>
-
-            {eleve && (
-              <button
-                type="button"
-                onClick={logoutEleve}
-                className="mt-3 flex items-center justify-center gap-3 rounded-2xl border border-red-300/30 bg-red-500/15 px-4 py-4 text-sm font-black text-red-100 shadow-lg transition hover:bg-red-500/25 active:scale-[0.99]"
-              >
-                <LogOut className="h-5 w-5" />
-                Deconnexion
-              </button>
-            )}
           </div>
         </div>
       )}
