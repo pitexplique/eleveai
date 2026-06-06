@@ -11,6 +11,7 @@ import { createClient } from "@/lib/supabase/client";
 
 const NAV_MATHS = [
   { href: "/coach-ia/maths",   icon: "🧠", label: "Coach Maths IA",    desc: "Toutes notions, CP → Terminale" },
+  { href: "/parcours",         icon: "🛤️", label: "Parcours Maths",    desc: "Bilan de compétences personnalisé" },
   { href: "/coach-brevet",     icon: "📚", label: "Coach Brevet",       desc: "Sprint J−30, toutes les notions" },
   { href: "/coach-bac-spe",    icon: "🎓", label: "Coach Bac Spé",      desc: "Suites, fonctions, proba" },
   { href: "/calcul-rapide",    icon: "⚡", label: "Calcul rapide",      desc: "5 min d'automatismes" },
@@ -25,8 +26,8 @@ const NAV_FRANCAIS = [
 
 const NAV_ANGLAIS = [
   { href: "/coach-ia/english-maths", icon: "🇬🇧", label: "Coach English Maths", desc: "A1 → B2, vocabulaire maths en anglais" },
+  { href: "/parcours-english-maths", icon: "🛤️", label: "Parcours English",     desc: "Bilan de niveau CECRL avec audio" },
   { href: "/english-maths",          icon: "📋", label: "English Maths",         desc: "Accueil & présentation" },
-  { href: "/parcours-english-maths", icon: "🎧", label: "Parcours English",      desc: "Défi du jour avec audio" },
 ];
 
 const NAV_PARCOURS = [
@@ -254,12 +255,6 @@ export default function Header() {
             accent="text-blue-300"
           />
 
-          <NavDropdown
-            label="Parcours"
-            items={NAV_PARCOURS}
-            active={anyActive(pathname, NAV_PARCOURS)}
-            accent="text-violet-300"
-          />
 
           {/* Auth */}
           {eleve ? (
@@ -345,7 +340,6 @@ export default function Header() {
             <MobileSection title="Maths"    accent="text-orange-300" items={NAV_MATHS}    pathname={pathname} />
             <MobileSection title="Français" accent="text-sky-300"    items={NAV_FRANCAIS} pathname={pathname} />
             <MobileSection title="Anglais"  accent="text-blue-300"   items={NAV_ANGLAIS}  pathname={pathname} />
-            <MobileSection title="Parcours" accent="text-violet-300" items={NAV_PARCOURS} pathname={pathname} />
 
           </div>
         </div>

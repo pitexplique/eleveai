@@ -7,8 +7,8 @@ const offres = [
     nom: "Famille",
     badge: "Élève solo",
     badgeColor: "bg-violet-100 text-violet-800",
-    prix: "4,90 €",
-    soustitre: "par mois · ou 39 € / an (2 mois offerts)",
+    prix: "4,99 €",
+    soustitre: "par mois · ou 49 € / an (2 mois offerts)",
     description: "Un accès complet pour votre enfant, sans passer par l'établissement. Disponible dès maintenant.",
     inclus: [
       "1 élève, tous les outils débloqués",
@@ -18,7 +18,7 @@ const offres = [
       "Dashboard de progression",
       "Résiliation libre à tout moment",
     ],
-    cta: "Commencer — 4,90 €/mois",
+    cta: "Commencer — 4,99 €/mois",
     ctaHref: "/contact",
     ctaColor: "bg-violet-600 hover:bg-violet-500 text-white",
     highlight: false,
@@ -28,7 +28,7 @@ const offres = [
     nom: "Classe",
     badge: "⭐ Le plus populaire",
     badgeColor: "bg-blue-100 text-blue-800",
-    prix: "150 €",
+    prix: "199 €",
     soustitre: "par an · jusqu'à 35 élèves",
     description: "Un accès annuel pour toute une classe. Idéal pour un enseignant qui veut intégrer EleveAI dans ses cours.",
     inclus: [
@@ -50,7 +50,7 @@ const offres = [
     badge: "Multi-classes",
     badgeColor: "bg-emerald-100 text-emerald-800",
     prix: "Sur devis",
-    soustitre: "à partir de 400 € / an",
+    soustitre: "à partir de 599 € / an",
     description: "Accès pour plusieurs classes ou un établissement complet. Tarif dégressif selon le nombre d'élèves.",
     inclus: [
       "Nombre de classes illimité",
@@ -72,7 +72,7 @@ const comparatif = [
   { outil: "Kwyk",       prix: "6 € / élève / mois",   soit: "72 € / an / élève" },
   { outil: "Mathia",     prix: "8 € / élève / mois",   soit: "96 € / an / élève" },
   { outil: "Lumni Pro",  prix: "5,99 € / mois",        soit: "72 € / an" },
-  { outil: "EleveAI 🟢", prix: "4,90 € / mois",        soit: "39 € / an — soit 5× moins cher" },
+  { outil: "EleveAI 🟢", prix: "4,99 € / mois",        soit: "49 € / an — soit 4× moins cher" },
 ];
 
 const valeur = [
