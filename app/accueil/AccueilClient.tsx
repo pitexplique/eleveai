@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEleve } from "@/context/EleveContext";
 
-// ─── Data ────────────────────────────────────────────────────────────────────
+// ─── Constants ───────────────────────────────────────────────────────────────
 
 const BREVET_DATE = new Date("2026-06-27T08:00:00");
 
@@ -16,156 +16,97 @@ function joursAvantBrevet() {
 
 const jours = joursAvantBrevet();
 
-const uneJournal = {
-  tag: "🎯 Sprint Brevet",
-  date: `J−${jours} avant le brevet`,
-  title: `${jours} jours pour décrocher ton brevet`,
-  description:
-    "Fractions, Pythagore, probabilités, équations, Thalès… EleveAI t'accompagne notion par notion jusqu'au jour J. Automatismes, problèmes guidés et sujets express.",
-  href: "/coach-brevet",
-  image: "/images/defis-du-jour/piton-fournaise.webp",
-  action: "Commencer le sprint",
-  ctaColor: "bg-emerald-500 group-hover:bg-emerald-400",
-  borderHover: "hover:border-emerald-400/50 hover:shadow-emerald-900/40",
-  tagColor: "bg-emerald-500",
-};
+// ─── Chips "Que veux-tu faire ?" ─────────────────────────────────────────────
 
-const secondaires = [
-  {
-    tag: "Défis du jour",
-    title: "Le Piton de la Fournaise en chiffres",
-    description:
-      "Altitude, coulées de lave, volume émis… 7 défis maths inspirés du volcan le plus actif de France.",
-    href: "/defis-du-jour",
-    action: "Relever le défi",
-    accent: "#EA580C",
-  },
-  {
-    tag: "Bac Spé Maths",
-    title: "Sprint 16 juin",
-    description:
-      "Suites, fonctions, probabilités et automatismes pour préparer l'épreuve.",
-    href: "/coach-bac-spe",
-    action: "Réviser maintenant",
-    accent: "#7C3AED",
-  },
-  {
-    tag: "Calcul rapide",
-    title: "7 questions en 5 min",
-    description:
-      "Un entraînement express pour renforcer les automatismes de calcul.",
-    href: "/calcul-rapide",
-    action: "Commencer",
-    accent: "#65A30D",
-  },
-  {
-    tag: "English Maths",
-    title: "Semaine des verbes",
-    description:
-      "Écoute, répète et utilise les verbes utiles en maths.",
-    href: "/english-maths",
-    action: "Commencer",
-    accent: "#1D4ED8",
-  },
+const CHIPS = [
+  { icon: "🧠", label: "Travailler les maths",    href: "/coach-ia/maths",    color: "hover:border-cyan-400/60 hover:bg-cyan-500/20",     cm: true  },
+  { icon: "📖", label: "Travailler le français",  href: "/coach-ia/francais", color: "hover:border-sky-400/60 hover:bg-sky-500/20",      cm: true  },
+  { icon: "⚡", label: "5 min de calcul rapide",  href: "/calcul-rapide",     color: "hover:border-lime-400/60 hover:bg-lime-500/20",    cm: true  },
+  { icon: "🎯", label: "Relever un défi",         href: "/defis-du-jour",     color: "hover:border-orange-400/60 hover:bg-orange-500/20", cm: true  },
+  { icon: "📊", label: "Tester mon niveau",       href: "/parcours",          color: "hover:border-violet-400/60 hover:bg-violet-500/20", cm: true  },
+  { icon: "🇬🇧", label: "English Maths",          href: "/english-maths",     color: "hover:border-blue-400/60 hover:bg-blue-500/20",    cm: true  },
+  { icon: "📚", label: "Sprint Brevet",           href: "/coach-brevet",      color: "hover:border-emerald-400/60 hover:bg-emerald-500/20", cm: false },
+  { icon: "🎓", label: "Préparer le bac spé",    href: "/coach-bac-spe",     color: "hover:border-indigo-400/60 hover:bg-indigo-500/20", cm: false },
 ];
 
-const besoins = [
-  {
-    title: "Je prépare le brevet",
-    href: "/coach-brevet",
-    action: "Sprint 30 jours",
-    icon: "📚",
-    color: "from-emerald-400 to-teal-600",
-  },
-  {
-    title: "Je veux faire un bilan",
-    href: "/parcours",
-    action: "Lancer Parcours",
-    icon: "🛤️",
-    color: "from-violet-500 to-indigo-600",
-  },
-  {
-    title: "Je veux travailler une compétence maths",
-    href: "/coach-ia/maths",
-    action: "Coach Maths IA",
-    icon: "🧠",
-    color: "from-cyan-500 to-blue-600",
-  },
-  {
-    title: "Je veux travailler le français",
-    href: "/coach-ia/francais",
-    action: "Coach Français IA",
-    icon: "📖",
-    color: "from-sky-500 to-indigo-500",
-  },
-  {
-    title: "Je veux aller vite",
-    href: "/calcul-rapide",
-    action: "Calcul rapide",
-    icon: "⚡",
-    color: "from-lime-500 to-green-600",
-  },
-  {
-    title: "Je veux réviser doucement",
-    href: "/lecon-du-jour",
-    action: "Écouter la leçon",
-    icon: "🎧",
-    color: "from-orange-400 to-amber-500",
-  },
-  {
-    title: "Semaine des verbes",
-    href: "/english-maths",
-    action: "English Maths",
-    icon: "🇬🇧",
-    color: "from-blue-700 to-blue-500",
-  },
-  {
-    title: "Je relève le défi du jour",
-    href: "/defis-du-jour",
-    action: "Commencer le défi",
-    icon: "🎯",
-    color: "from-pink-500 to-rose-600",
-  },
-  {
-    title: "Je veux un challenge avancé",
-    href: "/concours-general",
-    action: "S'entraîner",
-    icon: "🏆",
-    color: "from-yellow-400 to-orange-500",
-  },
-  {
-    title: "Je prépare le bac spé maths",
-    href: "/coach-bac-spe",
-    action: "Sprint 16 juin",
-    icon: "🎓",
-    color: "from-blue-600 to-violet-700",
-  },
+// ─── Netflix rows ─────────────────────────────────────────────────────────────
+
+const MODULES = [
+  { href: "/coach-ia/maths",    image: "/images/cards/coach.webp",           label: "Coach Maths IA",     emoji: "🧠" },
+  { href: "/parcours",          image: "/images/cards/parcours.webp",         label: "Parcours",           emoji: "🛤️" },
+  { href: "/calcul-rapide",     image: "/images/cards/calcul-rapide.webp",    label: "Calcul rapide",      emoji: "⚡" },
+  { href: "/lecon-du-jour",     image: "/images/cards/lecondujour.webp",      label: "Leçon du jour",      emoji: "🎧" },
+  { href: "/defis-du-jour",     image: "/images/cards/defis-du-jour.webp",    label: "Défis du jour",      emoji: "🎯" },
+  { href: "/concours-general",  image: "/images/cards/concours-general.webp", label: "Concours général",   emoji: "🏆" },
+  { href: "/coach-brevet",      image: "/images/cards/coach-brevet.webp",     label: "Coach Brevet",       emoji: "📚" },
+  { href: "/coach-bac-spe",     image: "/images/cards/coach-bac-spe.webp",    label: "Coach Bac Spé",      emoji: "🎓" },
+  { href: "/english-maths",     image: "/images/cards/english-maths.webp",    label: "English Maths",      emoji: "🇬🇧" },
+  { href: "/coach-ia/francais", image: "/images/cards/coach.webp",            label: "Coach Français",     emoji: "📖" },
 ];
 
-const classes = [
-  { label: "CP",  href: "/coach-ia/francais", description: "Phonologie, lecture, écriture — premiers pas." },
-  { label: "CE1", href: "/coach-ia/francais", description: "Fluence, grammaire, conjugaison, vocabulaire." },
-  { label: "CM1", href: "/coach-ia/maths?classe=cm1", description: "Consolider les bases et prendre confiance." },
-  { label: "CM2", href: "/coach-ia/maths?classe=cm2", description: "Préparer l'entrée au collège." },
-  { label: "6e",  href: "/coach-ia/maths?classe=6e",  description: "Décimaux, fractions, géométrie, grandeurs." },
-  { label: "5e",  href: "/coach-ia/maths?classe=5e",  description: "Relatifs, fractions, proportionnalité, angles." },
-  { label: "4e",  href: "/coach-ia/maths?classe=4e",  description: "Calcul littéral, Pythagore, Thalès, stats." },
-  { label: "3e",  href: "/coach-ia/maths?classe=3e",  description: "Brevet, fonctions, volumes, probabilités." },
+const ENGLISH_ROWS = [
+  { label: "A1 — Nombres & opérations", href: "/coach-ia/english-maths?niveau=a1", badge: "A1", color: "bg-lime-500" },
+  { label: "A2 — Verbes d'opérations",  href: "/coach-ia/english-maths?niveau=a2", badge: "A2", color: "bg-sky-500" },
+  { label: "B1 — Raisonnement",         href: "/coach-ia/english-maths?niveau=b1", badge: "B1", color: "bg-violet-500" },
+  { label: "B2 — Vocabulaire avancé",   href: "/coach-ia/english-maths?niveau=b2", badge: "B2", color: "bg-rose-500" },
 ];
 
-const cards = [
-  { href: "/coach-ia/maths",    image: "/images/cards/coach.webp",           label: "Coach Maths IA" },
-  { href: "/parcours",         image: "/images/cards/parcours.webp",         label: "Parcours" },
-  { href: "/calcul-rapide",    image: "/images/cards/calcul-rapide.webp",    label: "Calcul rapide" },
-  { href: "/lecon-du-jour",    image: "/images/cards/lecondujour.webp",      label: "Leçon du jour" },
-  { href: "/defis-du-jour",    image: "/images/cards/defis-du-jour.webp",    label: "Défis du jour" },
-  { href: "/concours-general", image: "/images/cards/concours-general.webp", label: "Concours général" },
-  { href: "/coach-brevet",     image: "/images/cards/coach-brevet.webp",      label: "Coach Brevet Maths" },
-  { href: "/coach-bac-spe",    image: "/images/cards/coach-bac-spe.webp",    label: "Coach Bac Spé Maths" },
-  { href: "/english-maths",    image: "/images/cards/english-maths.webp",    label: "English Maths" },
+const CLASSES = [
+  { label: "CP",  href: "/coach-ia/francais",       desc: "Lecture, phonologie" },
+  { label: "CE1", href: "/coach-ia/francais",        desc: "Fluence, conjugaison" },
+  { label: "CM1", href: "/coach-ia/maths?classe=cm1", desc: "Bases solides" },
+  { label: "CM2", href: "/coach-ia/maths?classe=cm2", desc: "Vers le collège" },
+  { label: "6e",  href: "/coach-ia/maths?classe=6e",  desc: "Fractions, géo" },
+  { label: "5e",  href: "/coach-ia/maths?classe=5e",  desc: "Relatifs, stats" },
+  { label: "4e",  href: "/coach-ia/maths?classe=4e",  desc: "Pythagore, Thalès" },
+  { label: "3e",  href: "/coach-ia/maths?classe=3e",  desc: "Brevet, fonctions" },
 ];
 
-// ─── Component ───────────────────────────────────────────────────────────────
+// ─── Sub-components ───────────────────────────────────────────────────────────
+
+function NetflixRow({
+  title,
+  children,
+}: {
+  title: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <div className="mb-10">
+      <h2 className="mb-3 px-4 text-lg font-black text-white sm:px-6 lg:px-8 lg:text-xl">
+        {title}
+      </h2>
+      <div className="flex gap-3 overflow-x-auto px-4 pb-3 sm:px-6 lg:px-8 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+        {children}
+      </div>
+    </div>
+  );
+}
+
+function ModuleCard({ href, image, label }: { href: string; image: string; label: string }) {
+  return (
+    <Link
+      href={href}
+      className="group relative h-[110px] w-[190px] shrink-0 overflow-hidden rounded-xl border border-white/10 bg-white/5 shadow-lg transition-all duration-300 hover:-translate-y-1 hover:scale-[1.04] hover:border-white/30 hover:shadow-[0_0_24px_rgba(255,255,255,0.15)] focus:outline-none"
+    >
+      <Image
+        src={image}
+        alt={label}
+        fill
+        sizes="190px"
+        className="object-cover transition-transform duration-500 group-hover:scale-[1.08]"
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+      <span className="absolute bottom-2 left-3 right-3 text-xs font-black text-white drop-shadow-sm">
+        {label}
+      </span>
+      {/* Shimmer */}
+      <div className="pointer-events-none absolute -left-20 top-0 h-full w-12 rotate-12 bg-white/20 blur-md transition-transform duration-700 group-hover:translate-x-[400px]" />
+    </Link>
+  );
+}
+
+// ─── Main component ───────────────────────────────────────────────────────────
 
 export default function AccueilPage() {
   const audioRef = useRef<HTMLAudioElement | null>(null);
@@ -173,420 +114,283 @@ export default function AccueilPage() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [chatQuestion, setChatQuestion] = useState("");
   const [chatAnswer, setChatAnswer] = useState(
-    "Bonjour, je suis le coach EleveAI. Pose-moi une question courte sur tes revisions."
+    "Bonjour, je suis le coach EleveAI. Pose-moi une question courte sur tes révisions."
   );
   const [chatLoading, setChatLoading] = useState(false);
-  const [chatOpen, setChatOpen] = useState(true);
+  const [chatOpen, setChatOpen] = useState(false);
 
   const codeEtablissement = eleve?.code_etablissement?.trim() ?? "";
   const codeUtilisateur = eleve?.code_eleve?.trim() ?? "";
   const canAskAccueilQuestion = Boolean(codeEtablissement && codeUtilisateur);
   const eleveClasse = eleve?.classe?.toLowerCase() ?? null;
+  const prenom = eleve?.prenom ?? null;
   const isCmPrimary = eleveClasse === "cm1" || eleveClasse === "cm2";
 
-  const visibleBesoins = isCmPrimary
-    ? besoins.filter(
-        (besoin) =>
-          !["/coach-brevet", "/coach-bac-spe", "/concours-general"].includes(
-            besoin.href
-          )
-      )
-    : besoins;
+  const visibleModules = isCmPrimary
+    ? MODULES.filter(m => !["/concours-general", "/coach-brevet", "/coach-bac-spe"].includes(m.href))
+    : MODULES;
 
-  const visibleClasses = isCmPrimary
-    ? classes.filter((classeItem) => classeItem.label.toLowerCase() === eleveClasse)
-    : classes;
+  const visibleChips = isCmPrimary ? CHIPS.filter(c => c.cm) : CHIPS;
 
-  const visibleCards = isCmPrimary
-    ? cards.filter(
-        (card) =>
-          !["/concours-general", "/coach-brevet", "/coach-bac-spe"].includes(
-            card.href
-          )
-      )
-    : cards;
-
-  function getAccueilCardHref(href: string) {
+  function getHref(href: string) {
     if (!isCmPrimary) return href;
-    if (href === "/coach-ia/maths") return `/coach-ia/maths?classe=${eleveClasse}`;
+    if (href === "/coach-ia/maths")    return `/coach-ia/maths?classe=${eleveClasse}`;
     if (href === "/coach-ia/francais") return `/coach-ia/francais?classe=${eleveClasse}`;
     return href;
-  }
-
-  function renderModulesSection() {
-    return (
-      <section className="bg-gradient-to-b from-[#062A4F] to-[#041B33] px-4 py-8 pb-16 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-6xl">
-          <div className="mb-5">
-            <p className="text-xs font-black uppercase tracking-[0.25em] text-slate-400">
-              Modules
-            </p>
-            <h2 className="mt-1 text-2xl font-black md:text-3xl">
-              Tous les espaces
-            </h2>
-          </div>
-          <div className="flex flex-wrap justify-center gap-3">
-            {visibleCards.map((card) => (
-              <Link
-                key={card.href}
-                href={getAccueilCardHref(card.href)}
-                aria-label={card.label}
-                className="group relative h-[115px] w-[220px] overflow-hidden rounded-2xl border border-white/20 bg-white/10 shadow-lg transition-all duration-300 hover:-translate-y-2 hover:scale-[1.03] hover:shadow-[0_0_30px_rgba(255,255,255,0.2)] focus:outline-none focus:ring-4 focus:ring-white/50"
-              >
-                <Image
-                  src={card.image}
-                  alt={card.label}
-                  fill
-                  sizes="220px"
-                  className="object-cover transition-transform duration-500 group-hover:scale-[1.06]"
-                />
-                <div className="pointer-events-none absolute -left-20 top-0 h-full w-16 rotate-12 bg-white/25 blur-md transition-transform duration-700 group-hover:translate-x-[300px]" />
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-    );
   }
 
   async function toggleAudio() {
     const audio = audioRef.current;
     if (!audio) return;
-    if (isPlaying) {
-      audio.pause();
-      audio.currentTime = 0;
-      setIsPlaying(false);
-      return;
-    }
-    try {
-      audio.currentTime = 0;
-      await audio.play();
-      setIsPlaying(true);
-    } catch {
-      setIsPlaying(false);
-    }
+    if (isPlaying) { audio.pause(); audio.currentTime = 0; return; }
+    try { audio.currentTime = 0; await audio.play(); }
+    catch { /* ignore */ }
   }
 
   async function sendAccueilQuestion(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-
     const trimmed = chatQuestion.trim();
     if (!trimmed || !canAskAccueilQuestion) return;
-
     setChatLoading(true);
-    setChatAnswer("Je reflechis...");
-
+    setChatAnswer("Je réfléchis…");
     try {
-      const response = await fetch("/api/accueil/chat", {
+      const res = await fetch("/api/accueil/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          codeEtablissement,
-          codeUtilisateur,
-          studentQuestion: trimmed,
-        }),
+        body: JSON.stringify({ codeEtablissement, codeUtilisateur, studentQuestion: trimmed }),
       });
-
-      const data = (await response.json().catch(() => ({}))) as {
-        answer?: string;
-        error?: string;
-      };
-
-      if (!response.ok || !data.answer) {
-        throw new Error(data.error ?? "Reponse indisponible.");
-      }
-
+      const data = (await res.json().catch(() => ({}))) as { answer?: string; error?: string };
+      if (!res.ok || !data.answer) throw new Error(data.error ?? "Réponse indisponible.");
       setChatAnswer(data.answer);
       setChatQuestion("");
     } catch {
-      setChatAnswer(
-        "Je n'arrive pas a repondre pour le moment. Essaie depuis Parcours apres une correction."
-      );
+      setChatAnswer("Je n'arrive pas à répondre pour le moment. Essaie depuis Parcours après une correction.");
     } finally {
       setChatLoading(false);
     }
   }
 
+  // ── Greeting ────────────────────────────────────────────────────────────────
+  function getGreeting() {
+    const h = new Date().getHours();
+    if (h < 12) return "Bonjour";
+    if (h < 18) return "Bon après-midi";
+    return "Bonsoir";
+  }
+
   return (
     <main className="min-h-screen bg-[#041B33] text-white">
 
-      {/* ── 1. HERO ─────────────────────────────────────────────────────── */}
-      <section className="relative bg-gradient-to-b from-[#041B33] to-[#062A4F] px-4 pt-5 pb-0 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-7xl">
-          <div className="relative h-[42vh] min-h-[260px] overflow-hidden rounded-[2rem] border border-white/10 shadow-2xl sm:h-[48vh] sm:min-h-[340px] lg:h-[52vh] lg:min-h-[420px]">
-            <picture>
-              <source
-                media="(max-width: 640px)"
-                srcSet="/images/accueil-eleveai-reunion-mobile.webp"
-              />
+      <h1 className="sr-only">EleveAI – Coach IA maths, français et anglais. Du CP au Bac.</h1>
+
+      {/* ── HERO — ChatGPT style ──────────────────────────────────────────── */}
+      <section className="relative flex min-h-[52vh] flex-col items-center justify-center overflow-hidden px-4 py-16 text-center sm:px-6 lg:px-8">
+
+        {/* Background — image floue + gradient fort */}
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/images/accueil-eleveai-reunion.webp"
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover object-center opacity-20 blur-sm"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#041B33]/60 via-[#041B33]/50 to-[#041B33]" />
+        </div>
+
+        {/* Audio */}
+        <audio
+          ref={audioRef}
+          src="/audio/accueil/presentation.mp3"
+          preload="none"
+          onEnded={() => setIsPlaying(false)}
+          onPause={() => setIsPlaying(false)}
+          onPlay={() => setIsPlaying(true)}
+        />
+
+        {/* Content */}
+        <div className="relative z-10 mx-auto max-w-3xl">
+
+          {/* Motivational pill */}
+          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-orange-500/40 bg-orange-500/15 px-4 py-1.5 text-sm font-bold text-orange-300">
+            <span className="h-2 w-2 animate-pulse rounded-full bg-orange-400" />
+            🔥 T&apos;as 5 min ? Lance-toi !
+          </div>
+
+          {/* Greeting */}
+          <p className="mb-2 text-lg font-semibold text-white/60">
+            {getGreeting()}{prenom ? `, ${prenom}` : ""} 👋
+          </p>
+
+          {/* Main question — ChatGPT style */}
+          <h2 className="mb-8 text-3xl font-black leading-tight text-white sm:text-4xl lg:text-5xl">
+            Que veux-tu travailler<br className="hidden sm:block" /> aujourd&apos;hui ?
+          </h2>
+
+          {/* Chips */}
+          <div className="flex flex-wrap justify-center gap-2 sm:gap-3">
+            {visibleChips.map((chip) => (
+              <Link
+                key={chip.href}
+                href={getHref(chip.href)}
+                className={[
+                  "flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2.5 text-sm font-bold text-white backdrop-blur-sm transition-all duration-200 hover:scale-[1.04] hover:border-white/40",
+                  chip.color,
+                ].join(" ")}
+              >
+                <span className="text-base">{chip.icon}</span>
+                {chip.label}
+              </Link>
+            ))}
+          </div>
+
+          {/* Message de bord button */}
+          <button
+            type="button"
+            onClick={toggleAudio}
+            className="mt-8 flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-xs font-bold text-white/70 backdrop-blur-sm transition hover:bg-white/20 hover:text-white mx-auto"
+          >
+            <span>{isPlaying ? "⏹️" : "🔊"}</span>
+            {isPlaying ? "Arrêter" : "Message de bord"}
+          </button>
+        </div>
+      </section>
+
+      {/* ── FEATURED — Banner contextuel selon niveau ────────────────────── */}
+      <section className="px-4 py-6 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-6xl">
+          {eleveClasse === "3e" || eleveClasse === "4e" ? (
+            /* Brevet — pour les 3e (et 4e qui s'y préparent) */
+            <Link
+              href="/coach-brevet"
+              className="group relative block h-[240px] overflow-hidden rounded-2xl shadow-2xl sm:h-[300px] lg:h-[340px]"
+            >
               <Image
-                src="/images/accueil-eleveai-reunion.webp"
-                alt="EleveAI - Maths, francais et anglais. CP a Terminale, avec English Maths."
+                src="/images/defis-du-jour/piton-fournaise.webp"
+                alt="Sprint Brevet"
                 fill
-                priority
-                sizes="100vw"
-                className="object-cover object-center"
+                sizes="(max-width: 1200px) 100vw, 1200px"
+                className="object-cover object-center transition-transform duration-700 group-hover:scale-[1.03]"
               />
-            </picture>
-            <div className="absolute right-3 top-3 z-20 sm:right-4 sm:top-4">
-              <audio
-                ref={audioRef}
-                src="/audio/accueil/presentation.mp3"
-                preload="none"
-                onEnded={() => setIsPlaying(false)}
-                onPause={() => setIsPlaying(false)}
-                onPlay={() => setIsPlaying(true)}
-              />
-              <button
-                type="button"
-                onClick={toggleAudio}
-                aria-label="Écouter le message de bord EleveAI"
-                className="flex items-center gap-2 rounded-full border border-white/40 bg-white/90 px-3 py-1.5 text-[#041B33] shadow-2xl backdrop-blur-md transition-all hover:scale-105 hover:bg-white focus:outline-none focus:ring-4 focus:ring-cyan-300/80 sm:px-4 sm:py-2"
-              >
-                <span className="text-lg">{isPlaying ? "⏹️" : "🔊"}</span>
-                <span className="hidden text-sm font-black sm:inline">
-                  {isPlaying ? "Stop" : "Message de bord"}
+              <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/50 to-transparent" />
+              <div className="absolute bottom-0 left-0 p-6 sm:p-8 lg:p-10">
+                <span className="mb-3 inline-block rounded-full bg-emerald-500 px-3 py-1 text-[11px] font-black uppercase tracking-[0.2em] text-white">
+                  🎯 Sprint Brevet · J−{jours}
                 </span>
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <h1 className="sr-only">
-        EleveAI – Plusieurs portes pour apprendre les maths et suivre la progression des élèves. Du CM1 au Bac, à La Réunion.
-      </h1>
-
-      {renderModulesSection()}
-
-      {/* ── 2. DÉMARRAGE RAPIDE ─────────────────────────────────────────── */}
-      <section className="bg-gradient-to-b from-[#062A4F] to-[#0B4F7A] px-4 py-8 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-6xl">
-          <div className="mb-5">
-            <p className="text-xs font-black uppercase tracking-[0.25em] text-yellow-300">
-              Démarrage rapide
-            </p>
-            <h2 className="mt-1 text-2xl font-black md:text-3xl">
-              Je commence selon mon besoin
-            </h2>
-          </div>
-          <div className="grid gap-3 grid-cols-2 sm:grid-cols-4">
-            {visibleBesoins.map((besoin) => (
-              <Link
-                key={besoin.href}
-                href={besoin.href}
-                className="group overflow-hidden rounded-2xl border border-white/10 bg-[#041B33]/60 shadow-lg backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-white/30 hover:shadow-2xl focus:outline-none focus:ring-4 focus:ring-white/40"
-              >
-                <div className={`bg-gradient-to-br ${besoin.color} px-4 py-4 text-slate-950`}>
-                  <span className="text-2xl">{besoin.icon}</span>
-                  <p className="mt-2 text-sm font-black leading-tight">{besoin.title}</p>
-                </div>
-                <div className="flex items-center justify-between px-4 py-3">
-                  <span className="text-xs font-bold text-slate-300">{besoin.action}</span>
-                  <span className="text-sm font-black text-white transition-transform group-hover:translate-x-1">→</span>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── 3. JOURNAL — UNE DE PRESSE ──────────────────────────────────── */}
-      <section className="bg-gradient-to-b from-[#0B4F7A] to-[#0A3F60] px-4 py-8 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-6xl">
-
-          {/* En-tête journal */}
-          <div className="mb-1 flex items-center justify-between border-b border-white/20 pb-3">
-            <div>
-              <p className="text-[10px] font-black uppercase tracking-[0.3em] text-yellow-300">
-                Journal EleveAI
-              </p>
-              <h2 className="mt-0.5 font-black text-2xl md:text-3xl tracking-tight">
-                Aujourd&apos;hui sur EleveAI
-              </h2>
-            </div>
-            <time className="hidden text-[11px] font-bold text-slate-400 sm:block">
-              {new Date().toLocaleDateString("fr-FR", {
-                weekday: "long",
-                day: "numeric",
-                month: "long",
-                year: "numeric",
-              })}
-            </time>
-          </div>
-
-          {/* Ligne de filet décorative */}
-          <div className="mb-5 flex gap-1">
-            <div className="h-[3px] w-16 bg-emerald-400 rounded-full" />
-            <div className="h-[3px] flex-1 bg-white/10 rounded-full" />
-          </div>
-
-          {/* Grille journal : grande UNE à gauche + brèves à droite */}
-          <div className="grid grid-cols-1 gap-4 lg:grid-cols-[1fr_320px]">
-
-            {/* Article principal — Brevet */}
-            <Link
-              href={uneJournal.href}
-              className={`group relative overflow-hidden rounded-2xl border border-white/10 shadow-2xl transition-all ${uneJournal.borderHover} hover:shadow-2xl focus:outline-none focus:ring-4 focus:ring-emerald-400/50`}
-            >
-              <div className="relative h-[300px] sm:h-[380px] lg:h-full lg:min-h-[400px] w-full">
-                <Image
-                  src={uneJournal.image}
-                  alt={uneJournal.title}
-                  fill
-                  sizes="(max-width: 1024px) 100vw, 65vw"
-                  className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
-                  priority
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
-
-                <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-6">
-                  <div className="mb-3 flex items-center gap-2">
-                    <span className={`rounded-full ${uneJournal.tagColor} px-3 py-1 text-[10px] font-black uppercase tracking-[0.2em] text-white`}>
-                      {uneJournal.tag}
-                    </span>
-                    <span className="text-[10px] font-bold text-white/60 uppercase tracking-widest">
-                      {uneJournal.date}
-                    </span>
-                  </div>
-
-                  <h3 className="text-xl font-black leading-tight text-white sm:text-2xl lg:text-3xl">
-                    {uneJournal.title}
-                  </h3>
-
-                  <p className="mt-2 text-sm leading-relaxed text-white/80 max-w-xl">
-                    {uneJournal.description}
-                  </p>
-
-                  <div className={`mt-4 inline-flex items-center gap-2 rounded-full ${uneJournal.ctaColor} px-5 py-2.5 text-sm font-black text-white shadow-lg transition-all group-hover:gap-3`}>
-                    {uneJournal.action}
-                    <span className="transition-transform group-hover:translate-x-1">→</span>
-                  </div>
+                <h3 className="text-2xl font-black leading-tight text-white sm:text-3xl lg:text-4xl">
+                  {jours} jours pour décrocher ton brevet
+                </h3>
+                <p className="mt-2 max-w-lg text-sm text-white/75 sm:text-base">
+                  Fractions, Pythagore, probabilités, équations, Thalès… notion par notion jusqu&apos;au jour J.
+                </p>
+                <div className="mt-4 inline-flex items-center gap-2 rounded-full bg-emerald-500 px-5 py-2.5 text-sm font-black text-white transition-all group-hover:bg-emerald-400 group-hover:gap-3">
+                  Commencer le sprint <span className="transition-transform group-hover:translate-x-1">→</span>
                 </div>
               </div>
-            </Link>
-
-            {/* Colonne brèves */}
-            <div className="flex flex-col gap-3">
-
-              {/* Bandeau compte à rebours brevet */}
-              <div className="rounded-2xl border border-emerald-500/30 bg-emerald-500/10 px-4 py-3">
-                <p className="text-[10px] font-black uppercase tracking-[0.25em] text-emerald-300">
-                  Compte à rebours
-                </p>
-                <p className="mt-1 text-3xl font-black text-white">J−{jours}</p>
-                <p className="text-xs font-semibold text-slate-300">
-                  Jours restants avant le brevet des collèges. Chaque jour compte !
-                </p>
+              <div className="absolute right-6 top-6 rounded-xl border border-white/20 bg-black/60 px-4 py-2 text-center backdrop-blur-sm">
+                <p className="text-[10px] font-bold uppercase tracking-wider text-white/60">Compte à rebours</p>
+                <p className="text-3xl font-black text-white">J−{jours}</p>
               </div>
-
-              {/* Brèves secondaires */}
-              {secondaires.map((s) => (
-                <Link
-                  key={s.href}
-                  href={s.href}
-                  className="group rounded-2xl border border-white/10 bg-white/90 p-4 text-[#041B33] shadow-lg transition-all hover:-translate-y-0.5 hover:bg-white hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-white/50"
-                >
-                  <div className="flex items-center gap-2 mb-2">
-                    <div
-                      className="h-3 w-1 rounded-full"
-                      style={{ backgroundColor: s.accent }}
-                    />
-                    <p
-                      className="text-[10px] font-black uppercase tracking-[0.2em]"
-                      style={{ color: s.accent }}
-                    >
-                      {s.tag}
-                    </p>
-                  </div>
-                  <h3 className="text-base font-black leading-snug text-[#041B33]">
-                    {s.title}
-                  </h3>
-                  <p className="mt-1 text-xs font-semibold leading-relaxed text-slate-600">
-                    {s.description}
-                  </p>
-                  <p className="mt-3 text-xs font-black" style={{ color: s.accent }}>
-                    {s.action} →
-                  </p>
-                </Link>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── 4. CHOIX DE CLASSE ───────────────────────────────────────────── */}
-      <section className="bg-gradient-to-b from-[#0A3F60] to-[#062A4F] px-4 py-8 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-6xl">
-          <div className="mb-5 flex items-end justify-between gap-4">
-            <div>
-              <p className="text-xs font-black uppercase tracking-[0.25em] text-emerald-300">
-                Compétences
-              </p>
-              <h2 className="mt-1 text-2xl font-black md:text-3xl">
-                Je choisis ma classe
-              </h2>
-            </div>
-            <Link
-              href="/coach-ia/maths"
-              className="hidden rounded-full border border-white/20 bg-white/10 px-4 py-2 text-xs font-bold text-white transition hover:bg-white/20 md:inline-flex"
-            >
-              Voir toutes les compétences
             </Link>
-          </div>
-          <div className="grid gap-3 grid-cols-2 sm:grid-cols-3 lg:grid-cols-6">
-            {visibleClasses.map((c) => (
-              <Link
-                key={c.label}
-                href={c.href}
-                className="group rounded-2xl border border-white/10 bg-white/[0.08] p-4 shadow-lg transition-all hover:-translate-y-1 hover:border-emerald-300/60 hover:bg-white/[0.14] focus:outline-none focus:ring-4 focus:ring-emerald-300/50"
-              >
-                <div className="flex items-start justify-between">
-                  <span className="text-3xl font-black">{c.label}</span>
-                  <span className="rounded-full bg-emerald-400 px-2 py-0.5 text-xs font-black text-[#041B33] transition group-hover:scale-110">
-                    Go
-                  </span>
+          ) : (
+            /* Défi du jour — pour tous les autres niveaux */
+            <Link
+              href="/defis-du-jour"
+              className="group relative block h-[240px] overflow-hidden rounded-2xl shadow-2xl sm:h-[300px] lg:h-[340px]"
+            >
+              <Image
+                src="/images/defis-du-jour/piton-fournaise.webp"
+                alt="Défi du jour"
+                fill
+                sizes="(max-width: 1200px) 100vw, 1200px"
+                className="object-cover object-center transition-transform duration-700 group-hover:scale-[1.03]"
+              />
+              <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/40 to-transparent" />
+              <div className="absolute bottom-0 left-0 p-6 sm:p-8 lg:p-10">
+                <span className="mb-3 inline-block rounded-full bg-orange-500 px-3 py-1 text-[11px] font-black uppercase tracking-[0.2em] text-white">
+                  🎯 Défi du jour
+                </span>
+                <h3 className="text-2xl font-black leading-tight text-white sm:text-3xl lg:text-4xl">
+                  Le Piton de la Fournaise en chiffres
+                </h3>
+                <p className="mt-2 max-w-lg text-sm text-white/75 sm:text-base">
+                  Altitude, coulées de lave, volume émis… 7 défis maths inspirés du volcan le plus actif de France.
+                </p>
+                <div className="mt-4 inline-flex items-center gap-2 rounded-full bg-orange-500 px-5 py-2.5 text-sm font-black text-white transition-all group-hover:bg-orange-400 group-hover:gap-3">
+                  Relever le défi <span className="transition-transform group-hover:translate-x-1">→</span>
                 </div>
-                <p className="mt-2 text-xs leading-relaxed text-slate-300">{c.description}</p>
-              </Link>
-            ))}
-          </div>
+              </div>
+              <div className="absolute right-6 top-6 rounded-xl border border-white/20 bg-black/60 px-4 py-2 text-center backdrop-blur-sm">
+                <p className="text-[10px] font-bold uppercase tracking-wider text-white/60">Aujourd&apos;hui</p>
+                <p className="text-2xl font-black text-white">🌋</p>
+                <p className="text-[10px] font-bold text-white/60">7 défis</p>
+              </div>
+            </Link>
+          )}
         </div>
       </section>
 
-      {/* ── 5. TOUS LES MODULES ──────────────────────────────────────────── */}
-      <section className="hidden bg-gradient-to-b from-[#062A4F] to-[#041B33] px-4 py-8 pb-16 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-6xl">
-          <div className="mb-5">
-            <p className="text-xs font-black uppercase tracking-[0.25em] text-slate-400">
-              Modules
-            </p>
-            <h2 className="mt-1 text-2xl font-black md:text-3xl">
-              Tous les espaces
-            </h2>
-          </div>
-          <div className="flex flex-wrap justify-center gap-3">
-            {cards.map((card) => (
-              <Link
-                key={card.href}
-                href={card.href}
-                aria-label={card.label}
-                className="group relative h-[115px] w-[220px] overflow-hidden rounded-2xl border border-white/20 bg-white/10 shadow-lg transition-all duration-300 hover:-translate-y-2 hover:scale-[1.03] hover:shadow-[0_0_30px_rgba(255,255,255,0.2)] focus:outline-none focus:ring-4 focus:ring-white/50"
-              >
-                <Image
-                  src={card.image}
-                  alt={card.label}
-                  fill
-                  sizes="220px"
-                  className="object-cover transition-transform duration-500 group-hover:scale-[1.06]"
-                />
-                <div className="pointer-events-none absolute -left-20 top-0 h-full w-16 rotate-12 bg-white/25 blur-md transition-transform duration-700 group-hover:translate-x-[300px]" />
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* ── NETFLIX ROWS ─────────────────────────────────────────────────── */}
+      <div className="mx-auto max-w-[1400px] pt-4 pb-16">
 
+        {/* Row 1 — Tous les espaces */}
+        <NetflixRow title="🎓 Tous les espaces">
+          {visibleModules.map((m) => (
+            <ModuleCard key={m.href} href={getHref(m.href)} image={m.image} label={m.label} />
+          ))}
+        </NetflixRow>
+
+        {/* Row 2 — Ma classe */}
+        <NetflixRow title="📚 Choisis ta classe">
+          {CLASSES.filter(c => {
+            if (!isCmPrimary) return true;
+            return c.label.toLowerCase() === eleveClasse;
+          }).map((c) => (
+            <Link
+              key={c.label}
+              href={getHref(c.href)}
+              className="group flex h-[110px] w-[140px] shrink-0 flex-col justify-between rounded-xl border border-white/10 bg-white/[0.06] p-4 transition-all hover:-translate-y-1 hover:border-emerald-400/50 hover:bg-white/[0.12] focus:outline-none"
+            >
+              <div className="flex items-start justify-between">
+                <span className="text-3xl font-black text-white">{c.label}</span>
+                <span className="rounded-full bg-emerald-400 px-2 py-0.5 text-[11px] font-black text-[#041B33] transition group-hover:scale-110">
+                  Go
+                </span>
+              </div>
+              <p className="text-[11px] leading-tight text-slate-400">{c.desc}</p>
+            </Link>
+          ))}
+        </NetflixRow>
+
+        {/* Row 3 — English Maths */}
+        <NetflixRow title="🇬🇧 English Maths — Niveaux">
+          {ENGLISH_ROWS.map((r) => (
+            <Link
+              key={r.href}
+              href={r.href}
+              className="group flex h-[110px] w-[220px] shrink-0 flex-col justify-between overflow-hidden rounded-xl border border-white/10 bg-[#0a2a4a] p-4 transition-all hover:-translate-y-1 hover:border-sky-400/50 hover:bg-[#0e3259] focus:outline-none"
+            >
+              <span className={`inline-flex w-fit rounded-full px-3 py-1 text-sm font-black text-white ${r.color}`}>
+                {r.badge}
+              </span>
+              <p className="text-sm font-bold text-white/90">{r.label}</p>
+              <p className="text-[11px] font-bold text-sky-400">Commencer →</p>
+            </Link>
+          ))}
+          <Link
+            href="/parcours-english-maths"
+            className="group flex h-[110px] w-[220px] shrink-0 flex-col justify-between overflow-hidden rounded-xl border border-white/10 bg-[#0a2a4a] p-4 transition-all hover:-translate-y-1 hover:border-sky-400/50 focus:outline-none"
+          >
+            <span className="text-2xl">🎧</span>
+            <p className="text-sm font-bold text-white/90">Parcours English</p>
+            <p className="text-[11px] font-bold text-sky-400">Défi du jour →</p>
+          </Link>
+        </NetflixRow>
+
+      </div>
+
+      {/* ── COACH FLOTTANT ────────────────────────────────────────────────── */}
       <AccueilCoachBox
         open={chatOpen}
         canAsk={canAskAccueilQuestion}
@@ -603,99 +407,85 @@ export default function AccueilPage() {
   );
 }
 
+// ─── Coach Box ────────────────────────────────────────────────────────────────
+
 function AccueilCoachBox({
-  open,
-  canAsk,
-  question,
-  answer,
-  loading,
-  onOpen,
-  onClose,
-  onQuestionChange,
-  onSend,
+  open, canAsk, question, answer, loading,
+  onOpen, onClose, onQuestionChange, onSend,
 }: {
-  open: boolean;
-  canAsk: boolean;
-  question: string;
-  answer: string;
-  loading: boolean;
-  onOpen: () => void;
-  onClose: () => void;
-  onQuestionChange: (value: string) => void;
-  onSend: (event: FormEvent<HTMLFormElement>) => void;
+  open: boolean; canAsk: boolean; question: string; answer: string;
+  loading: boolean; onOpen: () => void; onClose: () => void;
+  onQuestionChange: (v: string) => void; onSend: (e: FormEvent<HTMLFormElement>) => void;
 }) {
   if (!open) {
     return (
       <button
         type="button"
         onClick={onOpen}
-        className="fixed bottom-4 right-4 z-50 rounded-full bg-gradient-to-r from-cyan-500 via-emerald-500 to-orange-400 px-4 py-3 text-xs font-black text-white shadow-2xl ring-2 ring-white/70 hover:scale-105 sm:px-5 sm:text-sm"
+        className="fixed bottom-5 right-5 z-50 flex items-center gap-2 rounded-full bg-gradient-to-r from-cyan-500 via-emerald-500 to-orange-400 px-5 py-3 text-sm font-black text-white shadow-2xl ring-2 ring-white/50 transition hover:scale-105"
       >
-        Coach IA
+        🤖 <span className="hidden sm:inline">Coach IA</span>
       </button>
     );
   }
 
   return (
-    <aside className="fixed bottom-4 right-4 z-50 flex h-[300px] w-[150px] flex-col overflow-hidden rounded-3xl border border-cyan-200 bg-white text-slate-950 shadow-2xl sm:h-[600px] sm:w-[300px]">
-      <div className="flex items-start justify-between gap-2 bg-gradient-to-br from-cyan-500 via-emerald-500 to-orange-400 px-3 py-3 text-white sm:px-5 sm:py-5">
+    <aside className="fixed bottom-5 right-5 z-50 flex h-[340px] w-[300px] flex-col overflow-hidden rounded-3xl border border-cyan-200/30 bg-[#05213f] text-white shadow-2xl sm:h-[480px] sm:w-[340px]">
+      <div className="flex items-center justify-between bg-gradient-to-br from-cyan-500 via-emerald-500 to-orange-400 px-5 py-4">
         <div>
-          <div className="text-xs font-black leading-4 sm:text-lg sm:leading-6">
-            Coach EleveAI
-          </div>
-          <div className="mt-1 hidden text-xs font-bold text-white/85 sm:block">
-            Dialoguer pour comprendre
-          </div>
+          <p className="font-black text-white">🤖 Coach EleveAI</p>
+          <p className="text-[11px] font-bold text-white/80">Pose ta question</p>
         </div>
         <button
           type="button"
           onClick={onClose}
-          aria-label="Fermer le coach"
-          className="rounded-full bg-white/20 px-2 py-1 text-[10px] font-black text-white hover:bg-white/30 sm:px-3 sm:text-xs"
+          className="rounded-full bg-white/20 px-3 py-1 text-xs font-black text-white hover:bg-white/30"
         >
-          Fermer
+          ✕
         </button>
-        </div>
+      </div>
 
-      <div className="min-h-0 flex-1 overflow-y-auto bg-gradient-to-b from-cyan-50 via-white to-orange-50 p-3 sm:p-4">
+      <div className="min-h-0 flex-1 overflow-y-auto p-4">
         {canAsk ? (
-          <div className="rounded-2xl bg-white px-3 py-2 text-[11px] font-bold leading-5 text-slate-800 shadow-sm ring-1 ring-cyan-100 sm:text-sm sm:leading-6">
+          <div className="rounded-2xl bg-white/10 px-4 py-3 text-sm font-semibold leading-relaxed text-white/90">
             {answer}
           </div>
         ) : (
           <div className="flex h-full items-center text-center">
-            <p className="text-xs font-black leading-5 text-slate-800 sm:text-base sm:leading-7">
-              Posez une question : connectez-vous / inscrivez-vous pour dialoguer avec le coach.
+            <p className="text-sm font-semibold leading-relaxed text-white/70">
+              Connecte-toi pour dialoguer avec le coach IA.
             </p>
           </div>
         )}
       </div>
 
       {canAsk ? (
-        <form onSubmit={onSend} className="border-t border-cyan-100 bg-white p-2 sm:p-3">
+        <form onSubmit={onSend} className="border-t border-white/10 p-3">
           <textarea
             value={question}
-            onChange={(event) => onQuestionChange(event.target.value)}
-            placeholder="Ta question..."
+            onChange={(e) => onQuestionChange(e.target.value)}
+            placeholder="Ta question…"
             rows={2}
             disabled={loading}
-            className="h-14 w-full resize-none rounded-2xl border border-slate-300 px-2 py-2 text-[11px] font-semibold outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100 disabled:bg-slate-100 sm:h-24 sm:px-3 sm:text-sm"
+            className="h-16 w-full resize-none rounded-xl border border-white/20 bg-white/10 px-3 py-2 text-sm font-semibold text-white placeholder-white/40 outline-none focus:border-emerald-400 focus:ring-2 focus:ring-emerald-400/30 disabled:opacity-50"
           />
           <button
             type="submit"
             disabled={!question.trim() || loading}
-            className="mt-2 w-full rounded-2xl bg-gradient-to-r from-cyan-500 to-emerald-500 px-3 py-2 text-[11px] font-black text-white shadow-sm hover:from-cyan-400 hover:to-emerald-400 disabled:cursor-not-allowed disabled:opacity-50 sm:px-4 sm:py-3 sm:text-sm"
+            className="mt-2 w-full rounded-xl bg-gradient-to-r from-cyan-500 to-emerald-500 py-2.5 text-sm font-black text-white transition hover:from-cyan-400 hover:to-emerald-400 disabled:cursor-not-allowed disabled:opacity-40"
           >
-            {loading ? "Envoi..." : "Envoyer"}
+            {loading ? "Envoi…" : "Envoyer"}
           </button>
         </form>
       ) : (
-        <Link
-          href="/auth/signin?mode=eleve"
-          className="m-2 rounded-2xl bg-gradient-to-r from-cyan-500 to-emerald-500 px-3 py-2 text-center text-[11px] font-black text-white shadow-sm hover:from-cyan-400 hover:to-emerald-400 sm:m-4 sm:px-4 sm:py-3 sm:text-sm"
-        >
-          Connexion / inscription
-        </Link>
+        <div className="p-3">
+          <Link
+            href="/auth/signin?mode=eleve"
+            className="block rounded-xl bg-gradient-to-r from-cyan-500 to-emerald-500 py-3 text-center text-sm font-black text-white transition hover:from-cyan-400 hover:to-emerald-400"
+          >
+            Connexion / inscription
+          </Link>
+        </div>
       )}
     </aside>
   );
