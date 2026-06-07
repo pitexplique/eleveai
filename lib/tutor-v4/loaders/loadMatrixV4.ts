@@ -23,6 +23,7 @@ import { matrixA1English } from "@/lib/tutor-v4/matrix/matrixA1English";
 import { matrixA2English } from "@/lib/tutor-v4/matrix/matrixA2English";
 import { matrixB1English } from "@/lib/tutor-v4/matrix/matrixB1English";
 import { matrixB2English } from "@/lib/tutor-v4/matrix/matrixB2English";
+import { matrixEco4e } from "@/lib/tutor-v4/matrix/matrixEco4e";
 import type { SkillMatrix } from "@/lib/tutor-v4/types";
 
 export async function loadMatrixV4(
@@ -87,6 +88,8 @@ export async function loadMatrixV4(
   if (classe === "a2" && matiere === "english-maths") return matrixA2English;
   if (classe === "b1" && matiere === "english-maths") return matrixB1English;
   if (classe === "b2" && matiere === "english-maths") return matrixB2English;
+
+  if (classe === "4e" && matiere === "economie") return matrixEco4e;
 
   throw new Error(`Matrix V4 introuvable pour ${classe}/${matiere}`);
 }
