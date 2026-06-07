@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ChevronDown } from "lucide-react";
 import { useEleve } from "@/context/EleveContext";
+import GoogleFollowChip from "@/components/GoogleFollowChip";
 
 // ─── Constants ───────────────────────────────────────────────────────────────
 
@@ -452,6 +453,11 @@ export default function AccueilPage() {
           )}
         </div>
       </section>
+
+      {/* ── GOOGLE FOLLOW ────────────────────────────────────────────────── */}
+      <div className="flex justify-center py-8">
+        <GoogleFollowChip />
+      </div>
 
       {/* ── COACH FLOTTANT ────────────────────────────────────────────────── */}
       <AccueilCoachBox

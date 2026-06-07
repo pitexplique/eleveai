@@ -17,6 +17,7 @@ import {
   type BlogPost,
   type Audience,
 } from "@/data/blogPosts";
+import GoogleFollowChip from "@/components/GoogleFollowChip";
 
 const SITE_URL = "https://eleveai.fr";
 const DEFAULT_OG_IMAGE = `${SITE_URL}/preview.jpg`;
@@ -212,6 +213,11 @@ export default async function BlogPostPage({ params }: PageProps) {
               </ul>
             </nav>
           )}
+
+          {/* Google Follow */}
+          <div className="flex justify-center mb-8">
+            <GoogleFollowChip />
+          </div>
 
           {/* Contenu */}
           <article
