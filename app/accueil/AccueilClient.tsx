@@ -45,8 +45,9 @@ const CHIPS: Chip[] = [
     icon: "📖", label: "Français", cm: true,
     color: "hover:border-sky-400/60 hover:bg-sky-500/20",
     items: [
-      { icon: "📖", label: "Coach Français IA", href: "/coach-ia/francais", desc: "Grammaire, conjugaison, vocabulaire" },
-      { icon: "🎧", label: "Leçon du jour",      href: "/lecon-du-jour",     desc: "Écoute et comprends en 10 min" },
+      { icon: "📖", label: "Coach Français IA", href: "/coach-ia/francais",  desc: "Grammaire, conjugaison, vocabulaire" },
+      { icon: "🛤️", label: "Parcours Français", href: "/parcours-francais",  desc: "Bilan de compétences français" },
+      { icon: "🎧", label: "Leçon du jour",      href: "/lecon-du-jour",      desc: "Écoute et comprends en 10 min" },
     ],
   },
   {
@@ -352,89 +353,6 @@ export default function AccueilPage() {
             )}
           </div>
 
-          {/* Message de bord button */}
-          <button
-            type="button"
-            onClick={toggleAudio}
-            className="mt-8 flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-xs font-bold text-white/70 backdrop-blur-sm transition hover:bg-white/20 hover:text-white mx-auto"
-          >
-            <span>{isPlaying ? "⏹️" : "🔊"}</span>
-            {isPlaying ? "Arrêter" : "Message de bord"}
-          </button>
-        </div>
-      </section>
-
-      {/* ── FEATURED — Banner contextuel selon niveau ────────────────────── */}
-      <section className="px-4 py-6 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-6xl">
-          {eleveClasse === "3e" || eleveClasse === "4e" ? (
-            /* Brevet — pour les 3e (et 4e qui s'y préparent) */
-            <Link
-              href="/coach-brevet"
-              className="group relative block h-[240px] overflow-hidden rounded-2xl shadow-2xl sm:h-[300px] lg:h-[340px]"
-            >
-              <Image
-                src="/images/defis-du-jour/piton-fournaise.webp"
-                alt="Sprint Brevet"
-                fill
-                sizes="(max-width: 1200px) 100vw, 1200px"
-                className="object-cover object-center transition-transform duration-700 group-hover:scale-[1.03]"
-              />
-              <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/50 to-transparent" />
-              <div className="absolute bottom-0 left-0 p-6 sm:p-8 lg:p-10">
-                <span className="mb-3 inline-block rounded-full bg-emerald-500 px-3 py-1 text-[11px] font-black uppercase tracking-[0.2em] text-white">
-                  🎯 Sprint Brevet · J−{jours}
-                </span>
-                <h3 className="text-2xl font-black leading-tight text-white sm:text-3xl lg:text-4xl">
-                  {jours} jours pour décrocher ton brevet
-                </h3>
-                <p className="mt-2 max-w-lg text-sm text-white/75 sm:text-base">
-                  Fractions, Pythagore, probabilités, équations, Thalès… notion par notion jusqu&apos;au jour J.
-                </p>
-                <div className="mt-4 inline-flex items-center gap-2 rounded-full bg-emerald-500 px-5 py-2.5 text-sm font-black text-white transition-all group-hover:bg-emerald-400 group-hover:gap-3">
-                  Commencer le sprint <span className="transition-transform group-hover:translate-x-1">→</span>
-                </div>
-              </div>
-              <div className="absolute right-6 top-6 rounded-xl border border-white/20 bg-black/60 px-4 py-2 text-center backdrop-blur-sm">
-                <p className="text-[10px] font-bold uppercase tracking-wider text-white/60">Compte à rebours</p>
-                <p className="text-3xl font-black text-white">J−{jours}</p>
-              </div>
-            </Link>
-          ) : (
-            /* Défi du jour — pour tous les autres niveaux */
-            <Link
-              href="/defis-du-jour"
-              className="group relative block h-[240px] overflow-hidden rounded-2xl shadow-2xl sm:h-[300px] lg:h-[340px]"
-            >
-              <Image
-                src="/images/defis-du-jour/piton-fournaise.webp"
-                alt="Défi du jour"
-                fill
-                sizes="(max-width: 1200px) 100vw, 1200px"
-                className="object-cover object-center transition-transform duration-700 group-hover:scale-[1.03]"
-              />
-              <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/40 to-transparent" />
-              <div className="absolute bottom-0 left-0 p-6 sm:p-8 lg:p-10">
-                <span className="mb-3 inline-block rounded-full bg-orange-500 px-3 py-1 text-[11px] font-black uppercase tracking-[0.2em] text-white">
-                  🎯 Défi du jour
-                </span>
-                <h3 className="text-2xl font-black leading-tight text-white sm:text-3xl lg:text-4xl">
-                  Le Piton de la Fournaise en chiffres
-                </h3>
-                <p className="mt-2 max-w-lg text-sm text-white/75 sm:text-base">
-                  Altitude, coulées de lave, volume émis… 7 défis maths inspirés du volcan le plus actif de France.
-                </p>
-                <div className="mt-4 inline-flex items-center gap-2 rounded-full bg-orange-500 px-5 py-2.5 text-sm font-black text-white transition-all group-hover:bg-orange-400 group-hover:gap-3">
-                  Relever le défi <span className="transition-transform group-hover:translate-x-1">→</span>
-                </div>
-              </div>
-              <div className="absolute right-6 top-6 rounded-xl border border-white/20 bg-black/60 px-4 py-2 text-center backdrop-blur-sm">
-                <p className="text-[10px] font-bold uppercase tracking-wider text-white/60">Aujourd&apos;hui</p>
-                <p className="text-2xl font-black text-white">🌋</p>
-                <p className="text-[10px] font-bold text-white/60">7 défis</p>
-              </div>
-            </Link>
-          )}
         </div>
       </section>
 
@@ -496,6 +414,44 @@ export default function AccueilPage() {
         </NetflixRow>
 
       </div>
+
+      {/* ── FEATURED — Banner contextuel selon niveau ────────────────────── */}
+      <section className="px-4 py-6 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-6xl">
+          {eleveClasse === "3e" || eleveClasse === "4e" ? (
+            <Link href="/coach-brevet" className="group relative block h-[240px] overflow-hidden rounded-2xl shadow-2xl sm:h-[300px] lg:h-[340px]">
+              <Image src="/images/defis-du-jour/piton-fournaise.webp" alt="Sprint Brevet" fill sizes="(max-width: 1200px) 100vw, 1200px" className="object-cover object-center transition-transform duration-700 group-hover:scale-[1.03]" />
+              <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/50 to-transparent" />
+              <div className="absolute bottom-0 left-0 p-6 sm:p-8 lg:p-10">
+                <span className="mb-3 inline-block rounded-full bg-emerald-500 px-3 py-1 text-[11px] font-black uppercase tracking-[0.2em] text-white">🎯 Sprint Brevet · J−{jours}</span>
+                <h3 className="text-2xl font-black leading-tight text-white sm:text-3xl lg:text-4xl">{jours} jours pour décrocher ton brevet</h3>
+                <p className="mt-2 max-w-lg text-sm text-white/75 sm:text-base">Fractions, Pythagore, probabilités, équations, Thalès… notion par notion jusqu&apos;au jour J.</p>
+                <div className="mt-4 inline-flex items-center gap-2 rounded-full bg-emerald-500 px-5 py-2.5 text-sm font-black text-white transition-all group-hover:bg-emerald-400 group-hover:gap-3">Commencer le sprint <span className="transition-transform group-hover:translate-x-1">→</span></div>
+              </div>
+              <div className="absolute right-6 top-6 rounded-xl border border-white/20 bg-black/60 px-4 py-2 text-center backdrop-blur-sm">
+                <p className="text-[10px] font-bold uppercase tracking-wider text-white/60">Compte à rebours</p>
+                <p className="text-3xl font-black text-white">J−{jours}</p>
+              </div>
+            </Link>
+          ) : (
+            <Link href="/defis-du-jour" className="group relative block h-[240px] overflow-hidden rounded-2xl shadow-2xl sm:h-[300px] lg:h-[340px]">
+              <Image src="/images/defis-du-jour/piton-fournaise.webp" alt="Défi du jour" fill sizes="(max-width: 1200px) 100vw, 1200px" className="object-cover object-center transition-transform duration-700 group-hover:scale-[1.03]" />
+              <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/40 to-transparent" />
+              <div className="absolute bottom-0 left-0 p-6 sm:p-8 lg:p-10">
+                <span className="mb-3 inline-block rounded-full bg-orange-500 px-3 py-1 text-[11px] font-black uppercase tracking-[0.2em] text-white">🎯 Défi du jour</span>
+                <h3 className="text-2xl font-black leading-tight text-white sm:text-3xl lg:text-4xl">Le Piton de la Fournaise en chiffres</h3>
+                <p className="mt-2 max-w-lg text-sm text-white/75 sm:text-base">Altitude, coulées de lave, volume émis… 7 défis maths inspirés du volcan le plus actif de France.</p>
+                <div className="mt-4 inline-flex items-center gap-2 rounded-full bg-orange-500 px-5 py-2.5 text-sm font-black text-white transition-all group-hover:bg-orange-400 group-hover:gap-3">Relever le défi <span className="transition-transform group-hover:translate-x-1">→</span></div>
+              </div>
+              <div className="absolute right-6 top-6 rounded-xl border border-white/20 bg-black/60 px-4 py-2 text-center backdrop-blur-sm">
+                <p className="text-[10px] font-bold uppercase tracking-wider text-white/60">Aujourd&apos;hui</p>
+                <p className="text-2xl font-black text-white">🌋</p>
+                <p className="text-[10px] font-bold text-white/60">7 défis</p>
+              </div>
+            </Link>
+          )}
+        </div>
+      </section>
 
       {/* ── COACH FLOTTANT ────────────────────────────────────────────────── */}
       <AccueilCoachBox

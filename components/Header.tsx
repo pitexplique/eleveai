@@ -20,8 +20,9 @@ const NAV_MATHS = [
 ];
 
 const NAV_FRANCAIS = [
-  { href: "/coach-ia/francais", icon: "📖", label: "Coach Français IA", desc: "Grammaire, conjugaison, vocabulaire" },
-  { href: "/lecon-du-jour",     icon: "🎧", label: "Leçon du jour",     desc: "Écoute et comprends en 10 min" },
+  { href: "/coach-ia/francais",  icon: "📖", label: "Coach Français IA", desc: "Grammaire, conjugaison, vocabulaire" },
+  { href: "/parcours-francais",  icon: "🛤️", label: "Parcours Français", desc: "Bilan de compétences français" },
+  { href: "/lecon-du-jour",      icon: "🎧", label: "Leçon du jour",     desc: "Écoute et comprends en 10 min" },
 ];
 
 const NAV_ANGLAIS = [
