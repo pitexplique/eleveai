@@ -166,6 +166,50 @@ function ProgressiveChips({
   );
 }
 
+// ─── Nouveautés ticker ───────────────────────────────────────────────────────
+
+const NOUVEAUTES = [
+  { icon: "🇬🇧", text: "Coach English Maths — A1 à B2" },
+  { icon: "🌍", text: "Géographie & Voyage (4 niveaux)" },
+  { icon: "🏠", text: "Vie Quotidienne en anglais" },
+  { icon: "🎧", text: "Parcours English avec audio" },
+  { icon: "🗺️", text: "Pays, capitales & continents" },
+  { icon: "📊", text: "Géopolitique & statistiques B2" },
+  { icon: "🌿", text: "Environnement & biodiversité B1" },
+];
+
+function NouveautesTicker() {
+  const items = [...NOUVEAUTES, ...NOUVEAUTES]; // double pour boucle seamless
+  return (
+    <div className="w-full overflow-hidden border-y border-white/10 bg-white/[0.04] py-3">
+      <div className="flex items-center gap-1">
+        {/* Label fixe */}
+        <span className="shrink-0 px-4 text-xs font-black uppercase tracking-widest text-emerald-400">
+          🆕 Nouveautés
+        </span>
+        <div className="relative flex-1 overflow-hidden">
+          {/* Fondu gauche */}
+          <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-8 bg-gradient-to-r from-[#041B33] to-transparent" />
+          {/* Fondu droite */}
+          <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-8 bg-gradient-to-l from-[#041B33] to-transparent" />
+          <div className="animate-ticker flex gap-0">
+            {items.map((item, i) => (
+              <span
+                key={i}
+                className="flex shrink-0 items-center gap-2 px-6 text-sm font-semibold text-white/70"
+              >
+                <span>{item.icon}</span>
+                <span>{item.text}</span>
+                <span className="text-white/20">•</span>
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 // ─── Sub-components ───────────────────────────────────────────────────────────
 
 function NetflixRow({
@@ -338,6 +382,9 @@ export default function AccueilPage() {
 
         </div>
       </section>
+
+      {/* ── NOUVEAUTÉS TICKER ────────────────────────────────────────────── */}
+      <NouveautesTicker />
 
       {/* ── NETFLIX ROWS ─────────────────────────────────────────────────── */}
       <div className="mx-auto max-w-[1400px] pt-4 pb-16">
