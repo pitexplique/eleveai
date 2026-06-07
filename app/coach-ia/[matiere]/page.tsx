@@ -14,9 +14,12 @@ import {
 
 const CLASSES: Classe[] = ["cp", "ce1", "ce2", "cm1", "cm2", "6e", "5e", "4e", "3e", "terminale-spe", "adulte"];
 const FRANCAIS_READY_CLASSES: Classe[] = ["cp", "ce1", "ce2", "cm1", "cm2", "6e", "5e", "4e", "3e"];
+const ECONOMIE_CLASSES: Classe[] = ["4e"];
 
 function getClassesForMatiere(matiere: Matiere): Classe[] {
-  return matiere === "francais" ? FRANCAIS_READY_CLASSES : CLASSES;
+  if (matiere === "francais") return FRANCAIS_READY_CLASSES;
+  if (matiere === "economie") return ECONOMIE_CLASSES;
+  return CLASSES;
 }
 
 function normalizeClasse(value: string | null, classes: Classe[], fallback: Classe): Classe {
@@ -44,6 +47,7 @@ function getMatiereTitle(matiere: string, classe: Classe) {
   const matiereLabel: Record<string, string> = {
     maths: "Maths",
     francais: "Français",
+    economie: "Économie",
   };
   return `${matiereLabel[matiere] ?? matiere} ${classeLabel[classe] ?? classe}`;
 }
@@ -52,6 +56,7 @@ function getMatiereColor(matiere: string) {
   switch (matiere) {
     case "maths":    return "text-orange-500";
     case "francais": return "text-sky-600";
+    case "economie": return "text-amber-600";
     default:         return "text-slate-700";
   }
 }
@@ -74,6 +79,15 @@ function getMicroButtonStyle(microId: string) {
 }
 
 function getDomaineAccent(domaineId: string) {
+  // Économie
+  if (domaineId === "ECO_4E_ENTREPRISE") return { title: "text-amber-700",   pill: "bg-amber-100 text-amber-800"   };
+  if (domaineId === "ECO_4E_MARCHE")     return { title: "text-emerald-700", pill: "bg-emerald-100 text-emerald-800"};
+  if (domaineId === "ECO_4E_TRAVAIL")    return { title: "text-sky-700",     pill: "bg-sky-100 text-sky-800"       };
+  if (domaineId === "ECO_4E_MONNAIE")    return { title: "text-blue-700",    pill: "bg-blue-100 text-blue-800"     };
+  if (domaineId === "ECO_4E_BUDGET")     return { title: "text-violet-700",  pill: "bg-violet-100 text-violet-800" };
+  if (domaineId === "ECO_4E_FISCALITE")  return { title: "text-rose-700",    pill: "bg-rose-100 text-rose-800"     };
+  if (domaineId === "ECO_4E_ELECTIONS")  return { title: "text-orange-700",  pill: "bg-orange-100 text-orange-800" };
+  // Maths
   if (domaineId.includes("N") || domaineId.includes("P"))
     return { title: "text-green-700", pill: "bg-green-100 text-green-800" };
   if (domaineId.includes("G"))
@@ -91,7 +105,7 @@ export default function CoachIA() {
   const searchParams = useSearchParams();
   const matiere = ((params?.matiere as string) ?? "maths") as Matiere;
 
-  const defaultClasse: Classe = matiere === "francais" ? "cp" : "6e";
+  const defaultClasse: Classe = matiere === "francais" ? "cp" : matiere === "economie" ? "4e" : "6e";
   const classes = useMemo(() => getClassesForMatiere(matiere), [matiere]);
   const [classe, setClasse] = useState<Classe>(() =>
     normalizeClasse(searchParams.get("classe"), classes, defaultClasse)
