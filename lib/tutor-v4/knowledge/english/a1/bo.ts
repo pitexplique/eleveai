@@ -7,6 +7,10 @@ export const bo: KnowledgeBoCompetence[] = [
   { boId: "ENGL_A1_COMPARISONS", label: "Comparisons" },
   { boId: "ENGL_A1_SHAPES",      label: "Shapes" },
   { boId: "ENGL_A1_VERBS",             label: "Math Verbs A1" },
-  { boId: "ENGL_A1_SPORTS",            label: "Sports A1" },
+  { boId: "ENGL_A1_SPORTS",             label: "Sports A1" },
   { boId: "ENGL_A1_SPORT_MEASUREMENTS", label: "Sport Measurements A1" },
+  { boId: "ENGL_A1_SCIENCE_LIVING",  label: "Science — Living World A1" },
+  { boId: "ENGL_A1_SCIENCE_EARTH",   label: "Science — Earth A1" },
+  { boId: "ENGL_A1_MONEY",           label: "Économie - Gestion — Money A1" },
+  { boId: "ENGL_A1_FAMILY_BUDGET",   label: "Économie - Gestion — Family Budget A1" },
 ];

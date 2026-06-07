@@ -40,4 +40,24 @@ export const microSkills: MicroSkillSource[] = [
   { id: "en_a1_sport_measurements_en_to_fr", label: "Recognize measurement EN → FR",   notionId: "en_a1_sport_measurements", prerequis: ["en_a1_sports_en_to_fr"] },
   { id: "en_a1_sport_measurements_fr_to_en", label: "Provide measurement FR → EN",     notionId: "en_a1_sport_measurements", prerequis: ["en_a1_sport_measurements_en_to_fr"] },
   { id: "en_a1_sport_measurements_listen",   label: "Listen and identify measurement", notionId: "en_a1_sport_measurements", prerequis: ["en_a1_sport_measurements_en_to_fr"] },
+
+  // ── Science — Living World ───────────────────────────────────────────────────
+  { id: "en_a1_science_living_en_to_fr", label: "Recognize living world term EN → FR",   notionId: "en_a1_science_living", prerequis: [] },
+  { id: "en_a1_science_living_fr_to_en", label: "Provide living world term FR → EN",     notionId: "en_a1_science_living", prerequis: ["en_a1_science_living_en_to_fr"] },
+  { id: "en_a1_science_living_listen",   label: "Listen and identify living world term", notionId: "en_a1_science_living", prerequis: ["en_a1_science_living_en_to_fr"] },
+
+  // ── Science — Earth ──────────────────────────────────────────────────────────
+  { id: "en_a1_science_earth_en_to_fr", label: "Recognize Earth science term EN → FR",   notionId: "en_a1_science_earth", prerequis: [] },
+  { id: "en_a1_science_earth_fr_to_en", label: "Provide Earth science term FR → EN",     notionId: "en_a1_science_earth", prerequis: ["en_a1_science_earth_en_to_fr"] },
+  { id: "en_a1_science_earth_listen",   label: "Listen and identify Earth science term", notionId: "en_a1_science_earth", prerequis: ["en_a1_science_earth_en_to_fr"] },
+
+  // ── Économie - Gestion — Money ───────────────────────────────────────────────
+  { id: "en_a1_money_en_to_fr", label: "Recognize money term EN → FR",   notionId: "en_a1_money", prerequis: [] },
+  { id: "en_a1_money_fr_to_en", label: "Provide money term FR → EN",     notionId: "en_a1_money", prerequis: ["en_a1_money_en_to_fr"] },
+  { id: "en_a1_money_listen",   label: "Listen and identify money term", notionId: "en_a1_money", prerequis: ["en_a1_money_en_to_fr"] },
+
+  // ── Économie - Gestion — Family Budget ──────────────────────────────────────
+  { id: "en_a1_family_budget_en_to_fr", label: "Recognize budget term EN → FR",   notionId: "en_a1_family_budget", prerequis: ["en_a1_money_en_to_fr"] },
+  { id: "en_a1_family_budget_fr_to_en", label: "Provide budget term FR → EN",     notionId: "en_a1_family_budget", prerequis: ["en_a1_family_budget_en_to_fr"] },
+  { id: "en_a1_family_budget_listen",   label: "Listen and identify budget term", notionId: "en_a1_family_budget", prerequis: ["en_a1_family_budget_en_to_fr"] },
 ];

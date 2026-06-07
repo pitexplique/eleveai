@@ -8,6 +8,10 @@ import { geometryA1Bank } from "./geometry.bank";
 import { verbsA1Bank } from "./verbs.bank";
 import { sportsA1Bank } from "./sports.bank";
 import { sportMeasurementsA1Bank } from "./sport_measurements.bank";
+import { scienceLivingA1Bank } from "./science_living.bank";
+import { scienceEarthA1Bank } from "./science_earth.bank";
+import { moneyA1Bank } from "./money.bank";
+import { familyBudgetA1Bank } from "./family_budget.bank";
 
 export const englishA1QuestionBank: TutorBankItemV4[] = [
   ...digitsA1Bank,
@@ -18,6 +22,10 @@ export const englishA1QuestionBank: TutorBankItemV4[] = [
   ...verbsA1Bank,
   ...sportsA1Bank,
   ...sportMeasurementsA1Bank,
+  ...scienceLivingA1Bank,
+  ...scienceEarthA1Bank,
+  ...moneyA1Bank,
+  ...familyBudgetA1Bank,
 ];
 
 export function getEnglishA1QuestionBank(args?: {
