@@ -1,6 +1,24 @@
 // app/tutor-v4/questionpairbuilder
 import { randomUUID } from "crypto";
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
+
+/**
+ * Mélange les choix QCM de façon déterministe (seed basé sur l'id de la question)
+ * afin que la bonne réponse ne soit jamais systématiquement en première position.
+ */
+function shuffleChoices(choices: string[], id: string): string[] {
+  // Seed numérique simple depuis les charCodes de l'id
+  let seed = 0;
+  for (let i = 0; i < id.length; i++) seed = (seed * 31 + id.charCodeAt(i)) >>> 0;
+
+  const arr = [...choices];
+  for (let i = arr.length - 1; i > 0; i--) {
+    seed = (seed * 1664525 + 1013904223) >>> 0;
+    const j = seed % (i + 1);
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
 import type {
   CanvasFigure,
   ComparatorName,
@@ -34,7 +52,7 @@ function materializeBankItem(item: TutorBankItemV4): {
       microId: item.microId,
       text: item.text,
       format: item.format,
-      choices: item.choices,
+      choices: item.choices ? shuffleChoices(item.choices as string[], item.id) : undefined,
       expected: item.expected,
       comparator: item.comparator,
       hint: item.hint,
@@ -46,14 +64,15 @@ function materializeBankItem(item: TutorBankItemV4): {
   }
 
   const generated = item.generate();
+  const generatedId = `${item.id}_${Date.now()}_${Math.floor(Math.random() * 10000)}`;
 
   return {
-    id: `${item.id}_${Date.now()}_${Math.floor(Math.random() * 10000)}`,
+    id: generatedId,
     notionId: item.notionId,
     microId: item.microId,
     text: generated.text,
     format: generated.format ?? "short",
-    choices: generated.choices,
+    choices: generated.choices ? shuffleChoices(generated.choices, generatedId) : undefined,
     expected: generated.expected,
     comparator: generated.comparator,
     hint: item.hint,
