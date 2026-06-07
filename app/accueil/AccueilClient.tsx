@@ -358,15 +358,15 @@ export default function AccueilPage() {
       {/* ── NETFLIX ROWS ─────────────────────────────────────────────────── */}
       <div className="mx-auto max-w-[1400px] pt-4 pb-16">
 
-        {/* Row 1 — Tous les espaces */}
-        <NetflixRow title="🎓 Tous les espaces">
+        {/* Row 1 — Outils */}
+        <NetflixRow title={prenom ? `🔥 Nos coups de cœur pour toi, ${prenom}` : "🔥 Nos coups de cœur pour toi"}>
           {visibleModules.map((m) => (
             <ModuleCard key={m.href} href={getHref(m.href)} image={m.image} label={m.label} />
           ))}
         </NetflixRow>
 
         {/* Row 2 — Ma classe */}
-        <NetflixRow title="📚 Choisis ta classe">
+        <NetflixRow title="🎯 Lance-toi par niveau">
           {CLASSES.filter(c => {
             if (!isCmPrimary) return true;
             return c.label.toLowerCase() === eleveClasse;
@@ -388,7 +388,7 @@ export default function AccueilPage() {
         </NetflixRow>
 
         {/* Row 3 — English Maths */}
-        <NetflixRow title="🇬🇧 English Maths — Niveaux">
+        <NetflixRow title="🇬🇧 Parle maths en anglais — choisis ton niveau">
           {ENGLISH_ROWS.map((r) => (
             <Link
               key={r.href}
