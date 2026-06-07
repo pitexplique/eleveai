@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { Suspense, useMemo, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import {
   getNotionOptions,
@@ -41,7 +41,15 @@ const RUBRIQUE_COLORS: Record<string, { bg: string; border: string; title: strin
 
 const DEFAULT_COLORS = { bg: "bg-slate-50", border: "border-slate-200", title: "text-slate-700", pill: "bg-slate-100 text-slate-800" };
 
-export default function CoachEconomie() {
+export default function CoachEconomiePage() {
+  return (
+    <Suspense fallback={<div className="flex min-h-screen items-center justify-center bg-[#f9f6f0] text-amber-700 font-bold">Chargement…</div>}>
+      <CoachEconomie />
+    </Suspense>
+  );
+}
+
+function CoachEconomie() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [classe, setClasse] = useState<Classe>(
