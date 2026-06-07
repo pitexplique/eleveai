@@ -335,7 +335,10 @@ function normalizeClasse(value: string | null): Classe {
     value === "a1" ||
     value === "a2" ||
     value === "b1" ||
-    value === "b2"
+    value === "b2" ||
+    value === "eco-decouverte" ||
+    value === "eco-college" ||
+    value === "eco-lycee"
   ) {
     return value;
   }

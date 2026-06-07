@@ -15,7 +15,7 @@ export const fiscalite4eBank: TutorBankItemV4[] = CONCEPTS.flatMap((c) => [
   {
     kind: "fixed" as const,
     id: `eco_4e_fiscalite_def_${c.slug}`,
-    niveau: "4e" as const,
+    niveau: "eco-college" as const,
     matiere: "economie" as const,
     notionId: "eco_4e_fiscalite",
     microId: "eco_4e_fiscalite_def",
@@ -31,7 +31,7 @@ export const fiscalite4eBank: TutorBankItemV4[] = CONCEPTS.flatMap((c) => [
   {
     kind: "fixed" as const,
     id: `eco_4e_fiscalite_term_${c.slug}`,
-    niveau: "4e" as const,
+    niveau: "eco-college" as const,
     matiere: "economie" as const,
     notionId: "eco_4e_fiscalite",
     microId: "eco_4e_fiscalite_def",

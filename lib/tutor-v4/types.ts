@@ -356,7 +356,10 @@ export type SchoolLevel =
   | "a1"
   | "a2"
   | "b1"
-  | "b2";
+  | "b2"
+  | "eco-decouverte"
+  | "eco-college"
+  | "eco-lycee";
 export type SubjectCode = "maths" | "francais" | "english-maths" | "economie";
 
 export type TutorGeneratedQuestionV4 = {

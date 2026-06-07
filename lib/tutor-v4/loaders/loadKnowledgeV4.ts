@@ -88,7 +88,7 @@ export async function loadKnowledgeV4(
   if (classe === "b1" && matiere === "english-maths") return loadKnowledgeB1English() as KnowledgePack;
   if (classe === "b2" && matiere === "english-maths") return loadKnowledgeB2English() as KnowledgePack;
 
-  if (classe === "4e" && matiere === "economie") return loadKnowledgeEco4e() as KnowledgePack;
+  if (classe === "eco-college" && matiere === "economie") return loadKnowledgeEco4e() as KnowledgePack;
 
   throw new Error(`Knowledge V4 introuvable pour ${classe}/${matiere}`);
 }

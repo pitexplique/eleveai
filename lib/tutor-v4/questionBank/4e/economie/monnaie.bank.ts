@@ -15,7 +15,7 @@ export const monnaie4eBank: TutorBankItemV4[] = CONCEPTS.flatMap((c) => [
   {
     kind: "fixed" as const,
     id: `eco_4e_monnaie_def_${c.slug}`,
-    niveau: "4e" as const,
+    niveau: "eco-college" as const,
     matiere: "economie" as const,
     notionId: "eco_4e_monnaie",
     microId: "eco_4e_monnaie_def",
@@ -31,7 +31,7 @@ export const monnaie4eBank: TutorBankItemV4[] = CONCEPTS.flatMap((c) => [
   {
     kind: "fixed" as const,
     id: `eco_4e_monnaie_term_${c.slug}`,
-    niveau: "4e" as const,
+    niveau: "eco-college" as const,
     matiere: "economie" as const,
     notionId: "eco_4e_monnaie",
     microId: "eco_4e_monnaie_def",

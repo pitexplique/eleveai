@@ -32,8 +32,10 @@ const NAV_ANGLAIS = [
 ];
 
 const NAV_ECONOMIE = [
-  { href: "/coach-ia/economie",  icon: "💰", label: "Coach Économie IA",  desc: "Entreprise, marché, travail, fiscalité" },
-  { href: "/coach-ia/economie?classe=4e", icon: "🗳️", label: "Élections & économie", desc: "Budget, dette, programmes politiques" },
+  { href: "/coach-ia/economie",                          icon: "💰", label: "Coach Économie IA",    desc: "Entreprise, marché, travail, fiscalité"  },
+  { href: "/coach-ia/economie?classe=eco-decouverte",    icon: "🌱", label: "Découverte",            desc: "Budget famille, argent, épargne"         },
+  { href: "/coach-ia/economie?classe=eco-college",       icon: "🏫", label: "Collège",               desc: "Entreprise, marché, fiscalité, élections" },
+  { href: "/coach-ia/economie?classe=eco-lycee",         icon: "🎓", label: "Lycée",                 desc: "Macro-économie, politiques publiques"    },
 ];
 
 const NAV_PARCOURS = [

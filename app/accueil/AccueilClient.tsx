@@ -66,8 +66,9 @@ const CHIPS: Chip[] = [
     icon: "💰", label: "Économie", cm: false,
     color: "hover:border-amber-400/60 hover:bg-amber-500/20",
     items: [
-      { icon: "💰", label: "Coach Économie",          href: "/coach-ia/economie",              desc: "Entreprise, marché, travail, fiscalité" },
-      { icon: "🗳️", label: "Élections & économie",   href: "/coach-ia/economie?classe=4e",    desc: "Budget, dette, programmes politiques" },
+      { icon: "💰", label: "Coach Économie",          href: "/coach-ia/economie",                         desc: "Entreprise, marché, travail, fiscalité"  },
+      { icon: "🏫", label: "Niveau Collège",          href: "/coach-ia/economie?classe=eco-college",      desc: "4e/3e — fiscalité, élections, marché"   },
+      { icon: "🎓", label: "Niveau Lycée",            href: "/coach-ia/economie?classe=eco-lycee",        desc: "Macro-économie, politiques publiques"   },
     ],
   },
 ];

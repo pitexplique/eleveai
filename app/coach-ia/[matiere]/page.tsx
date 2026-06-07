@@ -14,7 +14,7 @@ import {
 
 const CLASSES: Classe[] = ["cp", "ce1", "ce2", "cm1", "cm2", "6e", "5e", "4e", "3e", "terminale-spe", "adulte"];
 const FRANCAIS_READY_CLASSES: Classe[] = ["cp", "ce1", "ce2", "cm1", "cm2", "6e", "5e", "4e", "3e"];
-const ECONOMIE_CLASSES: Classe[] = ["4e"];
+const ECONOMIE_CLASSES: Classe[] = ["eco-decouverte", "eco-college", "eco-lycee"];
 
 function getClassesForMatiere(matiere: Matiere): Classe[] {
   if (matiere === "francais") return FRANCAIS_READY_CLASSES;
@@ -43,6 +43,9 @@ function getMatiereTitle(matiere: string, classe: Classe) {
     a2: "A2",
     b1: "B1",
     b2: "B2",
+    "eco-decouverte": "Déco.",
+    "eco-college":    "Collège",
+    "eco-lycee":      "Lycée",
   };
   const matiereLabel: Record<string, string> = {
     maths: "Maths",
@@ -70,6 +73,9 @@ function getClasseBadgeColor(item: Classe, active: boolean) {
   if (["5e", "4e", "3e", "terminale-spe"].includes(item))
     return "border-sky-500 bg-sky-500 text-white";
   if (item === "adulte") return "border-violet-500 bg-violet-500 text-white";
+  if (item === "eco-decouverte") return "border-lime-500 bg-lime-500 text-white";
+  if (item === "eco-college")    return "border-amber-500 bg-amber-500 text-white";
+  if (item === "eco-lycee")      return "border-orange-500 bg-orange-500 text-white";
   return "border-violet-500 bg-violet-500 text-white";
 }
 
@@ -105,7 +111,7 @@ export default function CoachIA() {
   const searchParams = useSearchParams();
   const matiere = ((params?.matiere as string) ?? "maths") as Matiere;
 
-  const defaultClasse: Classe = matiere === "francais" ? "cp" : matiere === "economie" ? "4e" : "6e";
+  const defaultClasse: Classe = matiere === "francais" ? "cp" : matiere === "economie" ? "eco-college" : "6e";
   const classes = useMemo(() => getClassesForMatiere(matiere), [matiere]);
   const [classe, setClasse] = useState<Classe>(() =>
     normalizeClasse(searchParams.get("classe"), classes, defaultClasse)

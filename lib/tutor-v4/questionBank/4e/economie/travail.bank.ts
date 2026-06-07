@@ -17,7 +17,7 @@ export const travail4eBank: TutorBankItemV4[] = CONCEPTS.flatMap((c) => [
   {
     kind: "fixed" as const,
     id: `eco_4e_travail_def_${c.slug}`,
-    niveau: "4e" as const,
+    niveau: "eco-college" as const,
     matiere: "economie" as const,
     notionId: "eco_4e_travail",
     microId: "eco_4e_travail_def",
@@ -33,7 +33,7 @@ export const travail4eBank: TutorBankItemV4[] = CONCEPTS.flatMap((c) => [
   {
     kind: "fixed" as const,
     id: `eco_4e_travail_term_${c.slug}`,
-    niveau: "4e" as const,
+    niveau: "eco-college" as const,
     matiere: "economie" as const,
     notionId: "eco_4e_travail",
     microId: "eco_4e_travail_def",

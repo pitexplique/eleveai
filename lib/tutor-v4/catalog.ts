@@ -43,9 +43,13 @@ export type Classe =
   | "a1"
   | "a2"
   | "b1"
-  | "b2";
+  | "b2"
+  | "eco-decouverte"
+  | "eco-college"
+  | "eco-lycee";
 
 export type Matiere = "maths" | "francais" | "english-maths" | "economie";
+export type NiveauEconomie = "eco-decouverte" | "eco-college" | "eco-lycee";
 export type NiveauEnglish = "a1" | "a2" | "b1" | "b2";
 
 // =========================
@@ -72,8 +76,8 @@ function getKnowledge(classe: Classe, matiere: Matiere = "maths") {
   // Économie
   if (matiere === "economie") {
     switch (classe) {
-      case "4e": return buildKnowledgeEco4e();
-      default:   return buildKnowledgeEco4e();
+      case "eco-college": return buildKnowledgeEco4e();
+      default:            return buildKnowledgeEco4e();
     }
   }
 

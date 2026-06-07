@@ -5,8 +5,8 @@ import { microSkills } from "./microSkills";
 
 export function buildKnowledgeEco4e() {
   return buildKnowledge({
-    id: "4e-economie",
-    classe: "4e",
+    id: "eco-college-economie",
+    classe: "eco-college",
     matiere: "economie",
     bo,
     notions,

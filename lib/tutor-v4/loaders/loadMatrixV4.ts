@@ -89,7 +89,7 @@ export async function loadMatrixV4(
   if (classe === "b1" && matiere === "english-maths") return matrixB1English;
   if (classe === "b2" && matiere === "english-maths") return matrixB2English;
 
-  if (classe === "4e" && matiere === "economie") return matrixEco4e;
+  if (classe === "eco-college" && matiere === "economie") return matrixEco4e;
 
   throw new Error(`Matrix V4 introuvable pour ${classe}/${matiere}`);
 }
