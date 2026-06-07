@@ -17,12 +17,12 @@ const NAV_MATHS = [
   { href: "/calcul-rapide",    icon: "⚡", label: "Calcul rapide",      desc: "5 min d'automatismes" },
   { href: "/concours-general", icon: "🏆", label: "Concours général",   desc: "Problèmes avancés" },
   { href: "/defis-du-jour",    icon: "🎯", label: "Défis du jour",      desc: "Maths contextualisés 974" },
+  { href: "/lecon-du-jour",    icon: "🎧", label: "Leçon du jour",      desc: "Fractions, pourcentages, probas en audio" },
 ];
 
 const NAV_FRANCAIS = [
   { href: "/coach-ia/francais",  icon: "📖", label: "Coach Français IA", desc: "Grammaire, conjugaison, vocabulaire" },
   { href: "/parcours-francais",  icon: "🛤️", label: "Parcours Français", desc: "Bilan de compétences français" },
-  { href: "/lecon-du-jour",      icon: "🎧", label: "Leçon du jour",     desc: "Écoute et comprends en 10 min" },
 ];
 
 const NAV_ANGLAIS = [

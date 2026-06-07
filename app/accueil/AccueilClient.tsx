@@ -38,6 +38,7 @@ const CHIPS: Chip[] = [
       { icon: "⚡", label: "Calcul rapide",     href: "/calcul-rapide",     desc: "5 min d'automatismes" },
       { icon: "🏆", label: "Concours général",  href: "/concours-general",  desc: "Problèmes avancés" },
       { icon: "🎯", label: "Défis du jour",     href: "/defis-du-jour",     desc: "Maths contextualisés 974" },
+      { icon: "🎧", label: "Leçon du jour",     href: "/lecon-du-jour",     desc: "Fractions, pourcentages, probas en audio" },
     ],
   },
   {
@@ -47,7 +48,6 @@ const CHIPS: Chip[] = [
     items: [
       { icon: "📖", label: "Coach Français IA", href: "/coach-ia/francais",  desc: "Grammaire, conjugaison, vocabulaire" },
       { icon: "🛤️", label: "Parcours Français", href: "/parcours-francais",  desc: "Bilan de compétences français" },
-      { icon: "🎧", label: "Leçon du jour",      href: "/lecon-du-jour",      desc: "Écoute et comprends en 10 min" },
     ],
   },
   {
