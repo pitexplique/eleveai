@@ -5,6 +5,7 @@ import { FormEvent, useEffect, useMemo, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { Eye, EyeOff } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 import { inferClasseFromCode, useEleve } from "@/context/EleveContext";
 
@@ -50,6 +51,7 @@ export default function SignInPage() {
   const [codeEtablissement, setCodeEtablissement] = useState("");
   const [codeUtilisateur, setCodeUtilisateur] = useState("");
   const [motDePasse, setMotDePasse] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [loadingEtab, setLoadingEtab] = useState(false);
   const [feedbackEtab, setFeedbackEtab] = useState<string | null>(null);
   const [errorEtab, setErrorEtab] = useState<string | null>(null);
@@ -528,18 +530,29 @@ export default function SignInPage() {
                     <label className="text-sm font-medium text-slate-800">
                       Mot de passe
                     </label>
-                    <input
-                      type="password"
-                      value={motDePasse}
-                      onChange={(e) => setMotDePasse(e.target.value.toUpperCase())}
-                      placeholder="Ex: GRANDRAID"
-                      disabled={loadingEtab}
-                      autoCapitalize="characters"
-                      autoCorrect="off"
-                      autoComplete="off"
-                      spellCheck={false}
-                      className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-sm uppercase outline-none focus:border-emerald-500 focus:ring focus:ring-emerald-500/50 disabled:cursor-not-allowed disabled:bg-slate-100"
-                    />
+                    <div className="relative">
+                      <input
+                        type={showPassword ? "text" : "password"}
+                        value={motDePasse}
+                        onChange={(e) => setMotDePasse(e.target.value.toUpperCase())}
+                        placeholder="Ex: GRANDRAID"
+                        disabled={loadingEtab}
+                        autoCapitalize="characters"
+                        autoCorrect="off"
+                        autoComplete="off"
+                        spellCheck={false}
+                        className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 pr-10 text-sm uppercase outline-none focus:border-emerald-500 focus:ring focus:ring-emerald-500/50 disabled:cursor-not-allowed disabled:bg-slate-100"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => setShowPassword((v) => !v)}
+                        className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700 transition"
+                        tabIndex={-1}
+                        aria-label={showPassword ? "Masquer le mot de passe" : "Afficher le mot de passe"}
+                      >
+                        {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                      </button>
+                    </div>
                   </div>
 
                   <button
