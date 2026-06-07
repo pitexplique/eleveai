@@ -98,7 +98,7 @@ const CLASSES = [
 
 // ─── Progressive chips ────────────────────────────────────────────────────────
 
-type ChipStep = "question" | "subjects" | string; // string = subject label
+type ChipStep = "subjects" | string; // string = subject label
 
 function ProgressiveChips({
   chips,
@@ -107,75 +107,70 @@ function ProgressiveChips({
   chips: Chip[];
   getHref: (href: string) => string;
 }) {
-  const [step, setStep] = useState<ChipStep>("question");
+  const [step, setStep] = useState<ChipStep>("subjects");
 
   const activeChip = chips.find((c) => c.label === step);
   const subItems = activeChip?.type === "dropdown" ? activeChip.items : [];
 
   return (
-    <div className="flex flex-col items-center gap-4">
+    <div className="flex flex-col items-center gap-5">
 
-      {/* Étape 0 — chip "Que veux-tu travailler ?" */}
-      {step === "question" && (
-        <button
-          type="button"
-          onClick={() => setStep("subjects")}
-          className="animate-fade-in flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-6 py-3 text-base font-bold text-white backdrop-blur-sm transition-all duration-200 hover:scale-[1.04] hover:border-white/60 hover:bg-white/20"
-        >
-          💡 Que veux-tu travailler aujourd&apos;hui ?
-        </button>
-      )}
-
-      {/* Étape 1 — Maths | Français | Anglais */}
+      {/* Étape 1 — Maths | Français | Anglais (affiché par défaut) */}
       {step === "subjects" && (
-        <div className="animate-fade-in flex flex-wrap justify-center gap-3">
-          {chips.map((chip) => (
-            <button
-              key={chip.label}
-              type="button"
-              onClick={() => setStep(chip.label)}
-              className={[
-                "flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-5 py-2.5 text-sm font-bold text-white backdrop-blur-sm transition-all duration-200 hover:scale-[1.04] hover:border-white/40",
-                chip.color,
-              ].join(" ")}
-            >
-              <span className="text-base">{chip.icon}</span>
-              {chip.label}
-            </button>
-          ))}
+        <div className="animate-fade-in flex flex-col items-center gap-4">
+          {/* Question au-dessus des chips */}
+          <p className="text-lg font-bold text-white/70">
+            Que veux-tu travailler aujourd&apos;hui ?
+          </p>
+          <div className="flex flex-wrap justify-center gap-4">
+            {chips.map((chip) => (
+              <button
+                key={chip.label}
+                type="button"
+                onClick={() => setStep(chip.label)}
+                className={[
+                  "flex items-center gap-3 rounded-2xl border border-white/20 bg-white/10 px-7 py-4 text-xl font-black text-white backdrop-blur-sm transition-all duration-200 hover:scale-[1.06] hover:border-white/50 hover:bg-white/20",
+                  chip.color,
+                ].join(" ")}
+              >
+                <span className="text-3xl">{chip.icon}</span>
+                {chip.label}
+              </button>
+            ))}
+          </div>
         </div>
       )}
 
       {/* Étape 2 — sous-chips de la matière choisie */}
-      {step !== "question" && step !== "subjects" && (
-        <div className="animate-fade-in w-full max-w-lg">
-          {/* Bouton retour */}
-          <div className="mb-3 flex items-center justify-center gap-2">
+      {step !== "subjects" && (
+        <div className="animate-fade-in w-full max-w-xl">
+          {/* Retour + titre matière */}
+          <div className="mb-4 flex items-center justify-center gap-3">
             <button
               type="button"
               onClick={() => setStep("subjects")}
-              className="flex items-center gap-1.5 rounded-full border border-white/15 bg-white/5 px-3 py-1.5 text-xs font-bold text-white/70 transition hover:bg-white/10 hover:text-white"
+              className="flex items-center gap-1.5 rounded-full border border-white/15 bg-white/5 px-4 py-2 text-sm font-bold text-white/70 transition hover:bg-white/10 hover:text-white"
             >
-              <ArrowLeft className="h-3 w-3" />
+              <ArrowLeft className="h-4 w-4" />
               Retour
             </button>
-            <span className="text-sm font-black text-white">
+            <span className="text-lg font-black text-white">
               {activeChip?.icon} {activeChip?.label}
             </span>
           </div>
 
-          {/* Sub-chips en grille */}
-          <div className="flex flex-wrap justify-center gap-2">
+          {/* Sub-chips */}
+          <div className="flex flex-wrap justify-center gap-3">
             {subItems.map((item) => (
               <Link
                 key={item.href}
                 href={getHref(item.href)}
-                className="flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm font-semibold text-white backdrop-blur-sm transition-all duration-200 hover:scale-[1.03] hover:border-white/50 hover:bg-white/20"
+                className="flex items-center gap-3 rounded-2xl border border-white/20 bg-white/10 px-5 py-3 text-base font-semibold text-white backdrop-blur-sm transition-all duration-200 hover:scale-[1.04] hover:border-white/50 hover:bg-white/20"
               >
-                <span className="text-sm">{item.icon}</span>
+                <span className="text-xl">{item.icon}</span>
                 <div className="text-left">
-                  <p className="text-sm font-bold leading-tight">{item.label}</p>
-                  <p className="text-[10px] text-white/50 leading-tight">{item.desc}</p>
+                  <p className="text-base font-bold leading-tight">{item.label}</p>
+                  <p className="text-xs text-white/50 leading-tight">{item.desc}</p>
                 </div>
               </Link>
             ))}
