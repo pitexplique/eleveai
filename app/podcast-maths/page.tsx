@@ -295,7 +295,7 @@ export default function LeconDuJourPage() {
             </p>
 
             <h1 className="mt-3 text-2xl font-black sm:text-3xl lg:text-4xl">
-              Lecon du jour
+              Podcast-Maths
             </h1>
 
             <p className="mt-2 text-sm text-slate-600 sm:text-base">
