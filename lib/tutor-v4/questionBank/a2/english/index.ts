@@ -3,12 +3,18 @@ import { verbsA2Bank } from "./verbs.bank";
 import { expressionsA2Bank } from "./expressions.bank";
 import { fractionsA2Bank } from "./fractions.bank";
 import { geometryA2Bank } from "./geometry.bank";
+import { sportVerbsA2Bank } from "./sport_verbs.bank";
+import { sportStatsA2Bank } from "./sport_stats.bank";
+import { sportPhysicsA2Bank } from "./sport_physics.bank";
 
 export const englishA2QuestionBank: TutorBankItemV4[] = [
   ...verbsA2Bank,
   ...expressionsA2Bank,
   ...fractionsA2Bank,
   ...geometryA2Bank,
+  ...sportVerbsA2Bank,
+  ...sportStatsA2Bank,
+  ...sportPhysicsA2Bank,
 ];
 
 export function getEnglishA2QuestionBank(args?: {

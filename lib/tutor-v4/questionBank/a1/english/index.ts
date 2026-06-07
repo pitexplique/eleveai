@@ -6,6 +6,8 @@ import { operationsA1Bank } from "./operations.bank";
 import { comparisonsA1Bank } from "./comparisons.bank";
 import { geometryA1Bank } from "./geometry.bank";
 import { verbsA1Bank } from "./verbs.bank";
+import { sportsA1Bank } from "./sports.bank";
+import { sportMeasurementsA1Bank } from "./sport_measurements.bank";
 
 export const englishA1QuestionBank: TutorBankItemV4[] = [
   ...digitsA1Bank,
@@ -14,6 +16,8 @@ export const englishA1QuestionBank: TutorBankItemV4[] = [
   ...comparisonsA1Bank,
   ...geometryA1Bank,
   ...verbsA1Bank,
+  ...sportsA1Bank,
+  ...sportMeasurementsA1Bank,
 ];
 
 export function getEnglishA1QuestionBank(args?: {

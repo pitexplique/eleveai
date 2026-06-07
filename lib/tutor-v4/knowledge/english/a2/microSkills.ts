@@ -20,4 +20,19 @@ export const microSkills: MicroSkillSource[] = [
   { id: "en_a2_geometry_en_to_fr", label: "Translate geometry term EN → FR",    notionId: "en_a2_geometry", prerequis: [] },
   { id: "en_a2_geometry_fr_to_en", label: "Translate geometry term FR → EN",    notionId: "en_a2_geometry", prerequis: ["en_a2_geometry_en_to_fr"] },
   { id: "en_a2_geometry_listen",   label: "Listen and identify geometry term",   notionId: "en_a2_geometry", prerequis: ["en_a2_geometry_en_to_fr"] },
+
+  // ── Sport Verbs ───────────────────────────────────────────────────────────────
+  { id: "en_a2_sport_verbs_en_to_fr", label: "Translate sport verb EN → FR",    notionId: "en_a2_sport_verbs", prerequis: [] },
+  { id: "en_a2_sport_verbs_fr_to_en", label: "Translate sport verb FR → EN",    notionId: "en_a2_sport_verbs", prerequis: ["en_a2_sport_verbs_en_to_fr"] },
+  { id: "en_a2_sport_verbs_listen",   label: "Listen and identify sport verb",   notionId: "en_a2_sport_verbs", prerequis: ["en_a2_sport_verbs_en_to_fr"] },
+
+  // ── Sport Stats ───────────────────────────────────────────────────────────────
+  { id: "en_a2_sport_stats_en_to_fr", label: "Translate sport stats term EN → FR",    notionId: "en_a2_sport_stats", prerequis: ["en_a2_sport_verbs_en_to_fr"] },
+  { id: "en_a2_sport_stats_fr_to_en", label: "Translate sport stats term FR → EN",    notionId: "en_a2_sport_stats", prerequis: ["en_a2_sport_stats_en_to_fr"] },
+  { id: "en_a2_sport_stats_listen",   label: "Listen and identify sport stats term",   notionId: "en_a2_sport_stats", prerequis: ["en_a2_sport_stats_en_to_fr"] },
+
+  // ── Sport Physics ─────────────────────────────────────────────────────────────
+  { id: "en_a2_sport_physics_en_to_fr", label: "Translate sport physics term EN → FR",    notionId: "en_a2_sport_physics", prerequis: [] },
+  { id: "en_a2_sport_physics_fr_to_en", label: "Translate sport physics term FR → EN",    notionId: "en_a2_sport_physics", prerequis: ["en_a2_sport_physics_en_to_fr"] },
+  { id: "en_a2_sport_physics_listen",   label: "Listen and identify sport physics term",   notionId: "en_a2_sport_physics", prerequis: ["en_a2_sport_physics_en_to_fr"] },
 ];

@@ -13,7 +13,10 @@
  *
  * Groupes disponibles : digits, numbers, operations, comparisons, geometry,
  *   verbs/a1, verbs/a2, verbs/b1, verbs/b2,
- *   expressions/a2, algebra/b1
+ *   expressions/a2, algebra/b1, fractions/a2, geometry/a2,
+ *   statistics/b1, reasoning/b1, proof/b2, analysis/b2,
+ *   sports/a1, sport_measurements/a1,
+ *   sport_verbs/a2, sport_stats/a2, sport_physics/a2
  */
 
 import fs from "fs";
@@ -219,6 +222,66 @@ const AUDIO_ENTRIES = [
   { file: "analysis/b2/series.mp3",      text: "series" },
   { file: "analysis/b2/continuous.mp3",  text: "continuous" },
   { file: "analysis/b2/convergent.mp3",  text: "convergent" },
+
+  // ── A1 SPORTS ────────────────────────────────────────────────────────────
+  { file: "sports/a1/football.mp3",    text: "football" },
+  { file: "sports/a1/basketball.mp3",  text: "basketball" },
+  { file: "sports/a1/athletics.mp3",   text: "athletics" },
+  { file: "sports/a1/swimming.mp3",    text: "swimming" },
+  { file: "sports/a1/cycling.mp3",     text: "cycling" },
+  { file: "sports/a1/tennis.mp3",      text: "tennis" },
+  { file: "sports/a1/rugby.mp3",       text: "rugby" },
+  { file: "sports/a1/surfing.mp3",     text: "surfing" },
+  { file: "sports/a1/running.mp3",     text: "running" },
+  { file: "sports/a1/volleyball.mp3",  text: "volleyball" },
+
+  // ── A1 SPORT MEASUREMENTS ────────────────────────────────────────────────
+  { file: "sport_measurements/a1/metre.mp3",      text: "metre" },
+  { file: "sport_measurements/a1/kilometre.mp3",  text: "kilometre" },
+  { file: "sport_measurements/a1/second.mp3",     text: "second" },
+  { file: "sport_measurements/a1/minute.mp3",     text: "minute" },
+  { file: "sport_measurements/a1/hour.mp3",       text: "hour" },
+  { file: "sport_measurements/a1/kilogram.mp3",   text: "kilogram" },
+  { file: "sport_measurements/a1/centimetre.mp3", text: "centimetre" },
+  { file: "sport_measurements/a1/lap.mp3",        text: "lap" },
+
+  // ── A2 SPORT VERBS ───────────────────────────────────────────────────────
+  { file: "sport_verbs/a2/run.mp3",     text: "run" },
+  { file: "sport_verbs/a2/jump.mp3",    text: "jump" },
+  { file: "sport_verbs/a2/throw.mp3",   text: "throw" },
+  { file: "sport_verbs/a2/catch.mp3",   text: "catch" },
+  { file: "sport_verbs/a2/kick.mp3",    text: "kick" },
+  { file: "sport_verbs/a2/score.mp3",   text: "score" },
+  { file: "sport_verbs/a2/win.mp3",     text: "win" },
+  { file: "sport_verbs/a2/lose.mp3",    text: "lose" },
+  { file: "sport_verbs/a2/train.mp3",   text: "train" },
+  { file: "sport_verbs/a2/sprint.mp3",  text: "sprint" },
+  { file: "sport_verbs/a2/measure.mp3", text: "measure" },
+  { file: "sport_verbs/a2/record.mp3",  text: "record" },
+
+  // ── A2 SPORT STATS ───────────────────────────────────────────────────────
+  { file: "sport_stats/a2/score.mp3",      text: "score" },
+  { file: "sport_stats/a2/goal.mp3",       text: "goal" },
+  { file: "sport_stats/a2/point.mp3",      text: "point" },
+  { file: "sport_stats/a2/record.mp3",     text: "record" },
+  { file: "sport_stats/a2/average.mp3",    text: "average" },
+  { file: "sport_stats/a2/ranking.mp3",    text: "ranking" },
+  { file: "sport_stats/a2/percentage.mp3", text: "percentage" },
+  { file: "sport_stats/a2/total.mp3",      text: "total" },
+  { file: "sport_stats/a2/result.mp3",     text: "result" },
+  { file: "sport_stats/a2/champion.mp3",   text: "champion" },
+
+  // ── A2 SPORT PHYSICS ─────────────────────────────────────────────────────
+  { file: "sport_physics/a2/speed.mp3",        text: "speed" },
+  { file: "sport_physics/a2/distance.mp3",     text: "distance" },
+  { file: "sport_physics/a2/time.mp3",         text: "time" },
+  { file: "sport_physics/a2/weight.mp3",       text: "weight" },
+  { file: "sport_physics/a2/height.mp3",       text: "height" },
+  { file: "sport_physics/a2/acceleration.mp3", text: "acceleration" },
+  { file: "sport_physics/a2/force.mp3",        text: "force" },
+  { file: "sport_physics/a2/velocity.mp3",     text: "velocity" },
+  { file: "sport_physics/a2/energy.mp3",       text: "energy" },
+  { file: "sport_physics/a2/power.mp3",        text: "power" },
 ];
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────

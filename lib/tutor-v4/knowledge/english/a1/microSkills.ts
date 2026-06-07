@@ -30,4 +30,14 @@ export const microSkills: MicroSkillSource[] = [
   { id: "en_a1_verbs_en_to_fr", label: "Recognize math verb EN → FR", notionId: "en_a1_verbs", prerequis: ["en_a1_operations_en_to_fr"] },
   { id: "en_a1_verbs_fr_to_en", label: "Provide math verb FR → EN",   notionId: "en_a1_verbs", prerequis: ["en_a1_verbs_en_to_fr"] },
   { id: "en_a1_verbs_listen",   label: "Listen and identify math verb", notionId: "en_a1_verbs", prerequis: ["en_a1_verbs_en_to_fr"] },
+
+  // ── Sports ──────────────────────────────────────────────────────────────────
+  { id: "en_a1_sports_en_to_fr", label: "Recognize sport EN → FR",     notionId: "en_a1_sports", prerequis: [] },
+  { id: "en_a1_sports_fr_to_en", label: "Provide sport FR → EN",       notionId: "en_a1_sports", prerequis: ["en_a1_sports_en_to_fr"] },
+  { id: "en_a1_sports_listen",   label: "Listen and identify sport",    notionId: "en_a1_sports", prerequis: ["en_a1_sports_en_to_fr"] },
+
+  // ── Sport Measurements ──────────────────────────────────────────────────────
+  { id: "en_a1_sport_measurements_en_to_fr", label: "Recognize measurement EN → FR",   notionId: "en_a1_sport_measurements", prerequis: ["en_a1_sports_en_to_fr"] },
+  { id: "en_a1_sport_measurements_fr_to_en", label: "Provide measurement FR → EN",     notionId: "en_a1_sport_measurements", prerequis: ["en_a1_sport_measurements_en_to_fr"] },
+  { id: "en_a1_sport_measurements_listen",   label: "Listen and identify measurement", notionId: "en_a1_sport_measurements", prerequis: ["en_a1_sport_measurements_en_to_fr"] },
 ];
