@@ -11,6 +11,9 @@ import { sciencePhysicsB2Bank } from "./science_physics.bank";
 import { macroeconomicsB2Bank } from "./macroeconomics.bank";
 import { businessB2Bank } from "./business.bank";
 import { ecoStatisticsB2Bank } from "./eco_statistics.bank";
+import { geopoliticsB2Bank } from "./geopolitics.bank";
+import { climateScienceB2Bank } from "./climate_science.bank";
+import { geoStatisticsB2Bank } from "./geo_statistics.bank";
 
 export const englishB2QuestionBank: TutorBankItemV4[] = [
   ...verbsB2Bank,
@@ -25,6 +28,9 @@ export const englishB2QuestionBank: TutorBankItemV4[] = [
   ...macroeconomicsB2Bank,
   ...businessB2Bank,
   ...ecoStatisticsB2Bank,
+  ...geopoliticsB2Bank,
+  ...climateScienceB2Bank,
+  ...geoStatisticsB2Bank,
 ];
 
 export function getEnglishB2QuestionBank(args?: {

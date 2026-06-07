@@ -14,4 +14,7 @@ export const bo: KnowledgeBoCompetence[] = [
   { boId: "ENGL_B1_ECONOMY",            label: "Économie - Gestion — Economy B1"            },
   { boId: "ENGL_B1_FINANCE",            label: "Économie - Gestion — Finance B1"            },
   { boId: "ENGL_B1_FAMILY_MANAGEMENT",  label: "Économie - Gestion — Family Management B1"  },
+  { boId: "ENGL_B1_PHYSICAL_GEOGRAPHY", label: "Géographie - Voyage — Physical Geography B1" },
+  { boId: "ENGL_B1_TRAVEL_CULTURE",     label: "Géographie - Voyage — Travel & Culture B1"  },
+  { boId: "ENGL_B1_ENVIRONMENT",        label: "Géographie - Voyage — Environment B1"        },
 ];

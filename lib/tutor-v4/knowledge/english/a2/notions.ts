@@ -92,4 +92,25 @@ export const notions: NotionSource[] = [
     prerequis: ["en_a2_economy_basics"],
     levels: [2, 3],
   },
+  {
+    id: "en_a2_travel",
+    label: "Géographie - Voyage — Travel A2",
+    boId: "ENGL_A2_TRAVEL",
+    prerequis: [],
+    levels: [1, 2, 3],
+  },
+  {
+    id: "en_a2_geography",
+    label: "Géographie - Voyage — Geography A2",
+    boId: "ENGL_A2_GEOGRAPHY",
+    prerequis: ["en_a2_travel"],
+    levels: [2, 3],
+  },
+  {
+    id: "en_a2_directions",
+    label: "Géographie - Voyage — Directions A2",
+    boId: "ENGL_A2_DIRECTIONS",
+    prerequis: ["en_a2_travel"],
+    levels: [1, 2, 3],
+  },
 ];

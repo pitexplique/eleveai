@@ -12,6 +12,9 @@ import { sciencePhysicsA2Bank } from "./science_physics.bank";
 import { economyBasicsA2Bank } from "./economy_basics.bank";
 import { familyFinanceA2Bank } from "./family_finance.bank";
 import { percentagesEcoA2Bank } from "./percentages_eco.bank";
+import { travelA2Bank } from "./travel.bank";
+import { geographyA2Bank } from "./geography.bank";
+import { directionsA2Bank } from "./directions.bank";
 
 export const englishA2QuestionBank: TutorBankItemV4[] = [
   ...verbsA2Bank,
@@ -27,6 +30,9 @@ export const englishA2QuestionBank: TutorBankItemV4[] = [
   ...economyBasicsA2Bank,
   ...familyFinanceA2Bank,
   ...percentagesEcoA2Bank,
+  ...travelA2Bank,
+  ...geographyA2Bank,
+  ...directionsA2Bank,
 ];
 
 export function getEnglishA2QuestionBank(args?: {

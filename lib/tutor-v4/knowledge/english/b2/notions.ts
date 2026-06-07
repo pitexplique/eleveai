@@ -85,4 +85,25 @@ export const notions: NotionSource[] = [
     prerequis: ["en_b2_macroeconomics"],
     levels: [3, 4],
   },
+  {
+    id: "en_b2_geopolitics",
+    label: "Géographie - Voyage — Geopolitics B2",
+    boId: "ENGL_B2_GEOPOLITICS",
+    prerequis: [],
+    levels: [3, 4],
+  },
+  {
+    id: "en_b2_climate_science",
+    label: "Géographie - Voyage — Climate Science B2",
+    boId: "ENGL_B2_CLIMATE_SCIENCE",
+    prerequis: ["en_b2_geopolitics"],
+    levels: [3, 4],
+  },
+  {
+    id: "en_b2_geo_statistics",
+    label: "Géographie - Voyage — Geo Statistics B2",
+    boId: "ENGL_B2_GEO_STATISTICS",
+    prerequis: ["en_b2_geopolitics"],
+    levels: [3, 4],
+  },
 ];

@@ -14,4 +14,7 @@ export const bo: KnowledgeBoCompetence[] = [
   { boId: "ENGL_A2_ECONOMY_BASICS",     label: "Économie - Gestion — Basics A2"         },
   { boId: "ENGL_A2_FAMILY_FINANCE",     label: "Économie - Gestion — Family Finance A2" },
   { boId: "ENGL_A2_PERCENTAGES_ECO",    label: "Économie - Gestion — Percentages A2"    },
+  { boId: "ENGL_A2_TRAVEL",             label: "Géographie - Voyage — Travel A2"        },
+  { boId: "ENGL_A2_GEOGRAPHY",          label: "Géographie - Voyage — Geography A2"     },
+  { boId: "ENGL_A2_DIRECTIONS",         label: "Géographie - Voyage — Directions A2"    },
 ];

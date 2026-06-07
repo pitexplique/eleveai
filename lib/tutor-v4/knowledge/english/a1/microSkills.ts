@@ -60,4 +60,14 @@ export const microSkills: MicroSkillSource[] = [
   { id: "en_a1_family_budget_en_to_fr", label: "Recognize budget term EN → FR",   notionId: "en_a1_family_budget", prerequis: ["en_a1_money_en_to_fr"] },
   { id: "en_a1_family_budget_fr_to_en", label: "Provide budget term FR → EN",     notionId: "en_a1_family_budget", prerequis: ["en_a1_family_budget_en_to_fr"] },
   { id: "en_a1_family_budget_listen",   label: "Listen and identify budget term", notionId: "en_a1_family_budget", prerequis: ["en_a1_family_budget_en_to_fr"] },
+
+  // ── Géographie - Voyage — Countries ──────────────────────────────────────────
+  { id: "en_a1_countries_en_to_fr", label: "Recognize country/continent EN → FR",   notionId: "en_a1_countries", prerequis: [] },
+  { id: "en_a1_countries_fr_to_en", label: "Provide country/continent FR → EN",     notionId: "en_a1_countries", prerequis: ["en_a1_countries_en_to_fr"] },
+  { id: "en_a1_countries_listen",   label: "Listen and identify country/continent",  notionId: "en_a1_countries", prerequis: ["en_a1_countries_en_to_fr"] },
+
+  // ── Géographie - Voyage — Basic Geography ────────────────────────────────────
+  { id: "en_a1_geography_basic_en_to_fr", label: "Recognize geography word EN → FR",   notionId: "en_a1_geography_basic", prerequis: ["en_a1_countries_en_to_fr"] },
+  { id: "en_a1_geography_basic_fr_to_en", label: "Provide geography word FR → EN",     notionId: "en_a1_geography_basic", prerequis: ["en_a1_geography_basic_en_to_fr"] },
+  { id: "en_a1_geography_basic_listen",   label: "Listen and identify geography word",  notionId: "en_a1_geography_basic", prerequis: ["en_a1_geography_basic_en_to_fr"] },
 ];

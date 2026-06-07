@@ -65,4 +65,19 @@ export const microSkills: MicroSkillSource[] = [
   { id: "en_a2_percentages_eco_en_to_fr", label: "Translate percentage/rate term EN → FR",    notionId: "en_a2_percentages_eco", prerequis: ["en_a2_economy_basics_en_to_fr"] },
   { id: "en_a2_percentages_eco_fr_to_en", label: "Translate percentage/rate term FR → EN",    notionId: "en_a2_percentages_eco", prerequis: ["en_a2_percentages_eco_en_to_fr"] },
   { id: "en_a2_percentages_eco_listen",   label: "Listen and identify percentage/rate term",   notionId: "en_a2_percentages_eco", prerequis: ["en_a2_percentages_eco_en_to_fr"] },
+
+  // ── Géographie - Voyage — Travel ─────────────────────────────────────────────
+  { id: "en_a2_travel_en_to_fr", label: "Recognize travel term EN → FR",   notionId: "en_a2_travel", prerequis: [] },
+  { id: "en_a2_travel_fr_to_en", label: "Provide travel term FR → EN",     notionId: "en_a2_travel", prerequis: ["en_a2_travel_en_to_fr"] },
+  { id: "en_a2_travel_listen",   label: "Listen and identify travel term",  notionId: "en_a2_travel", prerequis: ["en_a2_travel_en_to_fr"] },
+
+  // ── Géographie - Voyage — Geography ──────────────────────────────────────────
+  { id: "en_a2_geography_en_to_fr", label: "Translate geography term EN → FR",    notionId: "en_a2_geography", prerequis: ["en_a2_travel_en_to_fr"] },
+  { id: "en_a2_geography_fr_to_en", label: "Translate geography term FR → EN",    notionId: "en_a2_geography", prerequis: ["en_a2_geography_en_to_fr"] },
+  { id: "en_a2_geography_listen",   label: "Listen and identify geography term",   notionId: "en_a2_geography", prerequis: ["en_a2_geography_en_to_fr"] },
+
+  // ── Géographie - Voyage — Directions ─────────────────────────────────────────
+  { id: "en_a2_directions_en_to_fr", label: "Recognize direction EN → FR",   notionId: "en_a2_directions", prerequis: ["en_a2_travel_en_to_fr"] },
+  { id: "en_a2_directions_fr_to_en", label: "Provide direction FR → EN",     notionId: "en_a2_directions", prerequis: ["en_a2_directions_en_to_fr"] },
+  { id: "en_a2_directions_listen",   label: "Listen and identify direction",  notionId: "en_a2_directions", prerequis: ["en_a2_directions_en_to_fr"] },
 ];

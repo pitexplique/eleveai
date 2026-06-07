@@ -13,4 +13,6 @@ export const notions: NotionSource[] = [
   { id: "en_a1_science_earth",   label: "Science — Earth",        boId: "ENGL_A1_SCIENCE_EARTH",  prerequis: [], levels: [1, 2, 3] },
   { id: "en_a1_money",           label: "Économie - Gestion — Money",          boId: "ENGL_A1_MONEY",         prerequis: [],               levels: [1, 2, 3] },
   { id: "en_a1_family_budget",   label: "Économie - Gestion — Family Budget",  boId: "ENGL_A1_FAMILY_BUDGET", prerequis: ["en_a1_money"],  levels: [1, 2, 3] },
+  { id: "en_a1_countries",       label: "Géographie - Voyage — Countries",       boId: "ENGL_A1_COUNTRIES",       prerequis: [],                          levels: [1, 2, 3] },
+  { id: "en_a1_geography_basic", label: "Géographie - Voyage — Basic Geography", boId: "ENGL_A1_GEOGRAPHY_BASIC", prerequis: ["en_a1_countries"],         levels: [1, 2, 3] },
 ];

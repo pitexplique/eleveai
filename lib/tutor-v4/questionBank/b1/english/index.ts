@@ -12,6 +12,9 @@ import { sciencePhysicsB1Bank } from "./science_physics.bank";
 import { economyB1Bank } from "./economy.bank";
 import { financeB1Bank } from "./finance.bank";
 import { familyManagementB1Bank } from "./family_management.bank";
+import { physicalGeographyB1Bank } from "./physical_geography.bank";
+import { travelCultureB1Bank } from "./travel_culture.bank";
+import { environmentB1Bank } from "./environment.bank";
 
 export const englishB1QuestionBank: TutorBankItemV4[] = [
   ...verbsB1Bank,
@@ -27,6 +30,9 @@ export const englishB1QuestionBank: TutorBankItemV4[] = [
   ...economyB1Bank,
   ...financeB1Bank,
   ...familyManagementB1Bank,
+  ...physicalGeographyB1Bank,
+  ...travelCultureB1Bank,
+  ...environmentB1Bank,
 ];
 
 export function getEnglishB1QuestionBank(args?: {

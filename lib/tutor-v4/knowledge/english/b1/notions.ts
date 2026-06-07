@@ -92,4 +92,25 @@ export const notions: NotionSource[] = [
     prerequis: ["en_b1_economy"],
     levels: [2, 3],
   },
+  {
+    id: "en_b1_physical_geography",
+    label: "Géographie - Voyage — Physical Geography B1",
+    boId: "ENGL_B1_PHYSICAL_GEOGRAPHY",
+    prerequis: [],
+    levels: [2, 3],
+  },
+  {
+    id: "en_b1_travel_culture",
+    label: "Géographie - Voyage — Travel & Culture B1",
+    boId: "ENGL_B1_TRAVEL_CULTURE",
+    prerequis: ["en_b1_physical_geography"],
+    levels: [2, 3],
+  },
+  {
+    id: "en_b1_environment",
+    label: "Géographie - Voyage — Environment B1",
+    boId: "ENGL_B1_ENVIRONMENT",
+    prerequis: ["en_b1_physical_geography"],
+    levels: [2, 3],
+  },
 ];

@@ -60,4 +60,19 @@ export const microSkills: MicroSkillSource[] = [
   { id: "en_b2_eco_statistics_en_to_fr", label: "Translate eco statistics term EN → FR",    notionId: "en_b2_eco_statistics", prerequis: ["en_b2_macroeconomics_en_to_fr"] },
   { id: "en_b2_eco_statistics_fr_to_en", label: "Translate eco statistics term FR → EN",    notionId: "en_b2_eco_statistics", prerequis: ["en_b2_eco_statistics_en_to_fr"] },
   { id: "en_b2_eco_statistics_listen",   label: "Listen and identify eco statistics term",   notionId: "en_b2_eco_statistics", prerequis: ["en_b2_eco_statistics_en_to_fr"] },
+
+  // ── Géographie - Voyage — Geopolitics ────────────────────────────────────────
+  { id: "en_b2_geopolitics_en_to_fr", label: "Translate geopolitics term EN → FR",    notionId: "en_b2_geopolitics", prerequis: [] },
+  { id: "en_b2_geopolitics_fr_to_en", label: "Translate geopolitics term FR → EN",    notionId: "en_b2_geopolitics", prerequis: ["en_b2_geopolitics_en_to_fr"] },
+  { id: "en_b2_geopolitics_listen",   label: "Listen and identify geopolitics term",   notionId: "en_b2_geopolitics", prerequis: ["en_b2_geopolitics_en_to_fr"] },
+
+  // ── Géographie - Voyage — Climate Science ────────────────────────────────────
+  { id: "en_b2_climate_science_en_to_fr", label: "Translate climate science term EN → FR",    notionId: "en_b2_climate_science", prerequis: ["en_b2_geopolitics_en_to_fr"] },
+  { id: "en_b2_climate_science_fr_to_en", label: "Translate climate science term FR → EN",    notionId: "en_b2_climate_science", prerequis: ["en_b2_climate_science_en_to_fr"] },
+  { id: "en_b2_climate_science_listen",   label: "Listen and identify climate science term",   notionId: "en_b2_climate_science", prerequis: ["en_b2_climate_science_en_to_fr"] },
+
+  // ── Géographie - Voyage — Geo Statistics ─────────────────────────────────────
+  { id: "en_b2_geo_statistics_en_to_fr", label: "Translate geo statistics term EN → FR",    notionId: "en_b2_geo_statistics", prerequis: ["en_b2_geopolitics_en_to_fr"] },
+  { id: "en_b2_geo_statistics_fr_to_en", label: "Translate geo statistics term FR → EN",    notionId: "en_b2_geo_statistics", prerequis: ["en_b2_geo_statistics_en_to_fr"] },
+  { id: "en_b2_geo_statistics_listen",   label: "Listen and identify geo statistics term",   notionId: "en_b2_geo_statistics", prerequis: ["en_b2_geo_statistics_en_to_fr"] },
 ];

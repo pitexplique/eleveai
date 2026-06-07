@@ -65,4 +65,19 @@ export const microSkills: MicroSkillSource[] = [
   { id: "en_b1_family_management_en_to_fr", label: "Translate family management term EN → FR",    notionId: "en_b1_family_management", prerequis: ["en_b1_economy_en_to_fr"] },
   { id: "en_b1_family_management_fr_to_en", label: "Translate family management term FR → EN",    notionId: "en_b1_family_management", prerequis: ["en_b1_family_management_en_to_fr"] },
   { id: "en_b1_family_management_listen",   label: "Listen and identify family management term",   notionId: "en_b1_family_management", prerequis: ["en_b1_family_management_en_to_fr"] },
+
+  // ── Géographie - Voyage — Physical Geography ─────────────────────────────────
+  { id: "en_b1_physical_geography_en_to_fr", label: "Translate physical geography term EN → FR",    notionId: "en_b1_physical_geography", prerequis: [] },
+  { id: "en_b1_physical_geography_fr_to_en", label: "Translate physical geography term FR → EN",    notionId: "en_b1_physical_geography", prerequis: ["en_b1_physical_geography_en_to_fr"] },
+  { id: "en_b1_physical_geography_listen",   label: "Listen and identify physical geography term",   notionId: "en_b1_physical_geography", prerequis: ["en_b1_physical_geography_en_to_fr"] },
+
+  // ── Géographie - Voyage — Travel & Culture ───────────────────────────────────
+  { id: "en_b1_travel_culture_en_to_fr", label: "Translate travel/culture term EN → FR",    notionId: "en_b1_travel_culture", prerequis: ["en_b1_physical_geography_en_to_fr"] },
+  { id: "en_b1_travel_culture_fr_to_en", label: "Translate travel/culture term FR → EN",    notionId: "en_b1_travel_culture", prerequis: ["en_b1_travel_culture_en_to_fr"] },
+  { id: "en_b1_travel_culture_listen",   label: "Listen and identify travel/culture term",   notionId: "en_b1_travel_culture", prerequis: ["en_b1_travel_culture_en_to_fr"] },
+
+  // ── Géographie - Voyage — Environment ────────────────────────────────────────
+  { id: "en_b1_environment_en_to_fr", label: "Translate environment term EN → FR",    notionId: "en_b1_environment", prerequis: ["en_b1_physical_geography_en_to_fr"] },
+  { id: "en_b1_environment_fr_to_en", label: "Translate environment term FR → EN",    notionId: "en_b1_environment", prerequis: ["en_b1_environment_en_to_fr"] },
+  { id: "en_b1_environment_listen",   label: "Listen and identify environment term",   notionId: "en_b1_environment", prerequis: ["en_b1_environment_en_to_fr"] },
 ];
