@@ -85,16 +85,6 @@ const ENGLISH_ROWS = [
   { label: "B2 — Vocabulaire avancé",   href: "/coach-ia/english-maths?niveau=b2", badge: "B2", color: "bg-rose-500" },
 ];
 
-const CLASSES = [
-  { label: "CP",  href: "/coach-ia/francais",       desc: "Lecture, phonologie" },
-  { label: "CE1", href: "/coach-ia/francais",        desc: "Fluence, conjugaison" },
-  { label: "CM1", href: "/coach-ia/maths?classe=cm1", desc: "Bases solides" },
-  { label: "CM2", href: "/coach-ia/maths?classe=cm2", desc: "Vers le collège" },
-  { label: "6e",  href: "/coach-ia/maths?classe=6e",  desc: "Fractions, géo" },
-  { label: "5e",  href: "/coach-ia/maths?classe=5e",  desc: "Relatifs, stats" },
-  { label: "4e",  href: "/coach-ia/maths?classe=4e",  desc: "Pythagore, Thalès" },
-  { label: "3e",  href: "/coach-ia/maths?classe=3e",  desc: "Brevet, fonctions" },
-];
 
 // ─── Progressive chips ────────────────────────────────────────────────────────
 
@@ -365,29 +355,7 @@ export default function AccueilPage() {
           ))}
         </NetflixRow>
 
-        {/* Row 2 — Ma classe */}
-        <NetflixRow title="🎯 Lance-toi par niveau">
-          {CLASSES.filter(c => {
-            if (!isCmPrimary) return true;
-            return c.label.toLowerCase() === eleveClasse;
-          }).map((c) => (
-            <Link
-              key={c.label}
-              href={getHref(c.href)}
-              className="group flex h-[110px] w-[140px] shrink-0 flex-col justify-between rounded-xl border border-white/10 bg-white/[0.06] p-4 transition-all hover:-translate-y-1 hover:border-emerald-400/50 hover:bg-white/[0.12] focus:outline-none"
-            >
-              <div className="flex items-start justify-between">
-                <span className="text-3xl font-black text-white">{c.label}</span>
-                <span className="rounded-full bg-emerald-400 px-2 py-0.5 text-[11px] font-black text-[#041B33] transition group-hover:scale-110">
-                  Go
-                </span>
-              </div>
-              <p className="text-[11px] leading-tight text-slate-400">{c.desc}</p>
-            </Link>
-          ))}
-        </NetflixRow>
-
-        {/* Row 3 — English Maths */}
+        {/* Row 2 — English Maths */}
         <NetflixRow title="🇬🇧 Parle maths en anglais — choisis ton niveau">
           {ENGLISH_ROWS.map((r) => (
             <Link
