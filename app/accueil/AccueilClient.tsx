@@ -166,49 +166,16 @@ function ProgressiveChips({
   );
 }
 
-// ─── Nouveautés ticker ───────────────────────────────────────────────────────
+// ─── Nouveautés ──────────────────────────────────────────────────────────────
 
 const NOUVEAUTES = [
-  { icon: "🇬🇧", text: "Coach English Maths — A1 à B2" },
-  { icon: "🌍", text: "Géographie & Voyage (4 niveaux)" },
-  { icon: "🏠", text: "Vie Quotidienne en anglais" },
-  { icon: "🎧", text: "Parcours English avec audio" },
-  { icon: "🗺️", text: "Pays, capitales & continents" },
-  { icon: "📊", text: "Géopolitique & statistiques B2" },
-  { icon: "🌿", text: "Environnement & biodiversité B1" },
+  { icon: "🇬🇧", label: "Coach English Maths", desc: "A1 → B2, vocabulaire & audio", href: "/coach-ia/english-maths", badge: "NEW", color: "from-sky-600 to-blue-700" },
+  { icon: "🌍", label: "Géographie & Voyage", desc: "Pays, continents, relief", href: "/coach-ia/english-maths?rubrique=geographie-voyage", badge: "NEW", color: "from-emerald-600 to-teal-700" },
+  { icon: "🏠", label: "Vie Quotidienne", desc: "Famille, école, couleurs, alimentation", href: "/coach-ia/english-maths?rubrique=vie-quotidienne", badge: "NEW", color: "from-violet-600 to-purple-700" },
+  { icon: "🎧", label: "Parcours English", desc: "Bilan de niveau CECRL avec audio", href: "/parcours-english-maths", badge: "NEW", color: "from-orange-600 to-amber-700" },
+  { icon: "🌿", label: "Environnement B1", desc: "Biodiversité, climat, écosystèmes", href: "/coach-ia/english-maths?niveau=b1", badge: "NEW", color: "from-lime-600 to-green-700" },
+  { icon: "📊", label: "Géopolitique B2", desc: "Mondialisation, diplomatie, stats", href: "/coach-ia/english-maths?niveau=b2", badge: "NEW", color: "from-rose-600 to-red-700" },
 ];
-
-function NouveautesTicker() {
-  const items = [...NOUVEAUTES, ...NOUVEAUTES]; // double pour boucle seamless
-  return (
-    <div className="w-full overflow-hidden border-y border-white/10 bg-white/[0.04] py-3">
-      <div className="flex items-center gap-1">
-        {/* Label fixe */}
-        <span className="shrink-0 px-4 text-xs font-black uppercase tracking-widest text-emerald-400">
-          🆕 Nouveautés
-        </span>
-        <div className="relative flex-1 overflow-hidden">
-          {/* Fondu gauche */}
-          <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-8 bg-gradient-to-r from-[#041B33] to-transparent" />
-          {/* Fondu droite */}
-          <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-8 bg-gradient-to-l from-[#041B33] to-transparent" />
-          <div className="animate-ticker flex gap-0">
-            {items.map((item, i) => (
-              <span
-                key={i}
-                className="flex shrink-0 items-center gap-2 px-6 text-sm font-semibold text-white/70"
-              >
-                <span>{item.icon}</span>
-                <span>{item.text}</span>
-                <span className="text-white/20">•</span>
-              </span>
-            ))}
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
 
 // ─── Sub-components ───────────────────────────────────────────────────────────
 
@@ -383,9 +350,6 @@ export default function AccueilPage() {
         </div>
       </section>
 
-      {/* ── NOUVEAUTÉS TICKER ────────────────────────────────────────────── */}
-      <NouveautesTicker />
-
       {/* ── NETFLIX ROWS ─────────────────────────────────────────────────── */}
       <div className="mx-auto max-w-[1400px] pt-4 pb-16">
 
@@ -396,6 +360,28 @@ export default function AccueilPage() {
           ))}
         </NetflixRow>
 
+        {/* Row 2 — Nouveautés */}
+        <NetflixRow title="✨ Nos nouveautés">
+          {NOUVEAUTES.map((n) => (
+            <Link
+              key={n.href}
+              href={n.href}
+              className="group relative flex h-[110px] w-[200px] shrink-0 flex-col justify-between overflow-hidden rounded-xl border border-white/10 p-4 transition-all hover:-translate-y-1 hover:border-white/30 hover:shadow-lg focus:outline-none"
+            >
+              <div className={`absolute inset-0 bg-gradient-to-br ${n.color} opacity-80 transition-opacity group-hover:opacity-100`} />
+              <div className="relative z-10 flex items-start justify-between">
+                <span className="text-2xl">{n.icon}</span>
+                <span className="rounded-full bg-white/20 px-2 py-0.5 text-[10px] font-black tracking-wider text-white">
+                  {n.badge}
+                </span>
+              </div>
+              <div className="relative z-10">
+                <p className="text-sm font-black text-white leading-tight">{n.label}</p>
+                <p className="mt-0.5 text-[11px] leading-tight text-white/70">{n.desc}</p>
+              </div>
+            </Link>
+          ))}
+        </NetflixRow>
 
       </div>
 
