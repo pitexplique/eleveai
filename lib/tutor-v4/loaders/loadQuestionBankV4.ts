@@ -22,6 +22,7 @@ import { englishA1QuestionBank } from "@/lib/tutor-v4/questionBank/a1/english";
 import { englishA2QuestionBank } from "@/lib/tutor-v4/questionBank/a2/english";
 import { englishB1QuestionBank } from "@/lib/tutor-v4/questionBank/b1/english";
 import { englishB2QuestionBank } from "@/lib/tutor-v4/questionBank/b2/english";
+import { economie4eQuestionBank } from "@/lib/tutor-v4/questionBank/4e/economie";
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 
 export async function loadQuestionBankV4(
@@ -87,6 +88,8 @@ export async function loadQuestionBankV4(
   if (classe === "a2" && matiere === "english-maths") return englishA2QuestionBank;
   if (classe === "b1" && matiere === "english-maths") return englishB1QuestionBank;
   if (classe === "b2" && matiere === "english-maths") return englishB2QuestionBank;
+
+  if (classe === "4e" && matiere === "economie") return economie4eQuestionBank;
 
   throw new Error(`QuestionBank V4 introuvable pour ${classe}/${matiere}`);
 }

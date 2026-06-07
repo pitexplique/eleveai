@@ -15,6 +15,7 @@ import { loadKnowledgeA1English } from "@/lib/tutor-v4/knowledge/loaders/loadKno
 import { loadKnowledgeA2English } from "@/lib/tutor-v4/knowledge/loaders/loadKnowledgeA2English";
 import { loadKnowledgeB1English } from "@/lib/tutor-v4/knowledge/loaders/loadKnowledgeB1English";
 import { loadKnowledgeB2English } from "@/lib/tutor-v4/knowledge/loaders/loadKnowledgeB2English";
+import { loadKnowledgeEco4e } from "@/lib/tutor-v4/knowledge/loaders/loadKnowledgeEco4e";
 import { loadKnowledgeCe1Francais } from "@/lib/tutor-v4/knowledge/loaders/loadKnowledgeCe1Francais";
 import { loadKnowledgeCe2Francais } from "@/lib/tutor-v4/knowledge/loaders/loadKnowledgeCe2Francais";
 import { loadKnowledgeCm1Francais } from "@/lib/tutor-v4/knowledge/loaders/loadKnowledgeCm1Francais";
@@ -86,6 +87,8 @@ export async function loadKnowledgeV4(
   if (classe === "a2" && matiere === "english-maths") return loadKnowledgeA2English() as KnowledgePack;
   if (classe === "b1" && matiere === "english-maths") return loadKnowledgeB1English() as KnowledgePack;
   if (classe === "b2" && matiere === "english-maths") return loadKnowledgeB2English() as KnowledgePack;
+
+  if (classe === "4e" && matiere === "economie") return loadKnowledgeEco4e() as KnowledgePack;
 
   throw new Error(`Knowledge V4 introuvable pour ${classe}/${matiere}`);
 }

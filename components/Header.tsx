@@ -31,6 +31,11 @@ const NAV_ANGLAIS = [
   { href: "/english-maths",          icon: "📅", label: "Semaine des verbes",     desc: "Vocabulaire anglais de la semaine" },
 ];
 
+const NAV_ECONOMIE = [
+  { href: "/coach-ia/economie",  icon: "💰", label: "Coach Économie IA",  desc: "Entreprise, marché, travail, fiscalité" },
+  { href: "/coach-ia/economie?classe=4e", icon: "🗳️", label: "Élections & économie", desc: "Budget, dette, programmes politiques" },
+];
+
 const NAV_PARCOURS = [
   { href: "/parcours",               icon: "🛤️", label: "Parcours Maths",   desc: "Bilan de compétences personnalisé" },
   { href: "/parcours-english-maths", icon: "🇬🇧", label: "Parcours English", desc: "Niveau CECRL avec audio" },
@@ -276,6 +281,12 @@ export default function Header() {
             accent="text-blue-300"
           />
 
+          <NavDropdown
+            label="Économie"
+            items={NAV_ECONOMIE}
+            active={anyActive(pathname, NAV_ECONOMIE)}
+            accent="text-amber-300"
+          />
 
           {/* Auth */}
           {eleve ? (
@@ -361,6 +372,7 @@ export default function Header() {
             <MobileSection title="Maths"    accent="text-orange-300" items={NAV_MATHS}    pathname={pathname} />
             <MobileSection title="Français" accent="text-sky-300"    items={NAV_FRANCAIS} pathname={pathname} />
             <MobileSection title="Anglais"  accent="text-blue-300"   items={NAV_ANGLAIS}  pathname={pathname} />
+            <MobileSection title="Économie" accent="text-amber-300"  items={NAV_ECONOMIE} pathname={pathname} />
 
           </div>
         </div>

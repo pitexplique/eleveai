@@ -22,6 +22,7 @@ import { buildKnowledge6eFrancais } from "@/lib/tutor-v4/knowledge/francais/6e/b
 import { buildKnowledge5eFrancais } from "@/lib/tutor-v4/knowledge/francais/5e/buildKnowledge5eFrancais";
 import { buildKnowledge4eFrancais } from "@/lib/tutor-v4/knowledge/francais/4e/buildKnowledge4eFrancais";
 import { buildKnowledge3eFrancais } from "@/lib/tutor-v4/knowledge/francais/3e/buildKnowledge3eFrancais";
+import { buildKnowledgeEco4e } from "@/lib/tutor-v4/knowledge/economie/4e/buildKnowledgeEco4e";
 
 // =========================
 // TYPES
@@ -44,7 +45,7 @@ export type Classe =
   | "b1"
   | "b2";
 
-export type Matiere = "maths" | "francais" | "english-maths";
+export type Matiere = "maths" | "francais" | "english-maths" | "economie";
 export type NiveauEnglish = "a1" | "a2" | "b1" | "b2";
 
 // =========================
@@ -65,6 +66,14 @@ function getKnowledge(classe: Classe, matiere: Matiere = "maths") {
       case "4e": return buildKnowledge4eFrancais();
       case "3e": return buildKnowledge3eFrancais();
       default:    return buildKnowledgeCe1Francais(); // fallback
+    }
+  }
+
+  // Économie
+  if (matiere === "economie") {
+    switch (classe) {
+      case "4e": return buildKnowledgeEco4e();
+      default:   return buildKnowledgeEco4e();
     }
   }
 

@@ -357,7 +357,7 @@ export type SchoolLevel =
   | "a2"
   | "b1"
   | "b2";
-export type SubjectCode = "maths" | "francais" | "english-maths";
+export type SubjectCode = "maths" | "francais" | "english-maths" | "economie";
 
 export type TutorGeneratedQuestionV4 = {
   text: string;

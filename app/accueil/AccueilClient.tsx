@@ -61,6 +61,15 @@ const CHIPS: Chip[] = [
       { icon: "📋", label: "English Maths",          href: "/english-maths",          desc: "Accueil & présentation" },
     ],
   },
+  {
+    type: "dropdown",
+    icon: "💰", label: "Économie", cm: false,
+    color: "hover:border-amber-400/60 hover:bg-amber-500/20",
+    items: [
+      { icon: "💰", label: "Coach Économie",          href: "/coach-ia/economie",              desc: "Entreprise, marché, travail, fiscalité" },
+      { icon: "🗳️", label: "Élections & économie",   href: "/coach-ia/economie?classe=4e",    desc: "Budget, dette, programmes politiques" },
+    ],
+  },
 ];
 
 // ─── Netflix rows ─────────────────────────────────────────────────────────────
@@ -175,6 +184,7 @@ const NOUVEAUTES = [
   { icon: "🎧", label: "Parcours English", desc: "Bilan de niveau CECRL avec audio", href: "/parcours-english-maths", badge: "NEW", color: "from-orange-600 to-amber-700" },
   { icon: "🌿", label: "Environnement B1", desc: "Biodiversité, climat, écosystèmes", href: "/coach-ia/english-maths?niveau=b1", badge: "NEW", color: "from-lime-600 to-green-700" },
   { icon: "📊", label: "Géopolitique B2", desc: "Mondialisation, diplomatie, stats", href: "/coach-ia/english-maths?niveau=b2", badge: "NEW", color: "from-rose-600 to-red-700" },
+  { icon: "💰", label: "Coach Économie", desc: "Entreprise, marché, élections…",    href: "/coach-ia/economie",               badge: "NEW", color: "from-amber-600 to-yellow-700" },
 ];
 
 // ─── Sub-components ───────────────────────────────────────────────────────────
