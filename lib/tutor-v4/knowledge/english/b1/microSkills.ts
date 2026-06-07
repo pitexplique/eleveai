@@ -20,4 +20,19 @@ export const microSkills: MicroSkillSource[] = [
   { id: "en_b1_reasoning_en_to_fr", label: "Translate reasoning phrase EN → FR",   notionId: "en_b1_reasoning",   prerequis: ["en_b1_verbs_en_to_fr"] },
   { id: "en_b1_reasoning_fr_to_en", label: "Translate reasoning phrase FR → EN",   notionId: "en_b1_reasoning",   prerequis: ["en_b1_reasoning_en_to_fr"] },
   { id: "en_b1_reasoning_listen",   label: "Listen and identify reasoning phrase",  notionId: "en_b1_reasoning",   prerequis: ["en_b1_reasoning_en_to_fr"] },
+
+  // ── Sport Verbs ───────────────────────────────────────────────────────────────
+  { id: "en_b1_sport_verbs_en_to_fr", label: "Translate sport verb EN → FR",     notionId: "en_b1_sport_verbs",   prerequis: [] },
+  { id: "en_b1_sport_verbs_fr_to_en", label: "Translate sport verb FR → EN",     notionId: "en_b1_sport_verbs",   prerequis: ["en_b1_sport_verbs_en_to_fr"] },
+  { id: "en_b1_sport_verbs_listen",   label: "Listen and identify sport verb",    notionId: "en_b1_sport_verbs",   prerequis: ["en_b1_sport_verbs_en_to_fr"] },
+
+  // ── Sport Physics ─────────────────────────────────────────────────────────────
+  { id: "en_b1_sport_physics_en_to_fr", label: "Translate sport physics term EN → FR",    notionId: "en_b1_sport_physics", prerequis: ["en_b1_sport_verbs_en_to_fr"] },
+  { id: "en_b1_sport_physics_fr_to_en", label: "Translate sport physics term FR → EN",    notionId: "en_b1_sport_physics", prerequis: ["en_b1_sport_physics_en_to_fr"] },
+  { id: "en_b1_sport_physics_listen",   label: "Listen and identify sport physics term",   notionId: "en_b1_sport_physics", prerequis: ["en_b1_sport_physics_en_to_fr"] },
+
+  // ── Sport Stats ───────────────────────────────────────────────────────────────
+  { id: "en_b1_sport_stats_en_to_fr", label: "Translate sport stats term EN → FR",    notionId: "en_b1_sport_stats", prerequis: ["en_b1_sport_verbs_en_to_fr"] },
+  { id: "en_b1_sport_stats_fr_to_en", label: "Translate sport stats term FR → EN",    notionId: "en_b1_sport_stats", prerequis: ["en_b1_sport_stats_en_to_fr"] },
+  { id: "en_b1_sport_stats_listen",   label: "Listen and identify sport stats term",   notionId: "en_b1_sport_stats", prerequis: ["en_b1_sport_stats_en_to_fr"] },
 ];

@@ -22,4 +22,25 @@ export const notions: NotionSource[] = [
     prerequis: ["en_b2_verbs"],
     levels: [3, 4],
   },
+  {
+    id: "en_b2_sport_verbs",
+    label: "Sport Verbs B2",
+    boId: "ENGL_B2_SPORT_VERBS",
+    prerequis: [],
+    levels: [3, 4],
+  },
+  {
+    id: "en_b2_sport_science",
+    label: "Sport Science B2",
+    boId: "ENGL_B2_SPORT_SCIENCE",
+    prerequis: ["en_b2_sport_verbs"],
+    levels: [3, 4],
+  },
+  {
+    id: "en_b2_sport_data",
+    label: "Sport Data Analysis B2",
+    boId: "ENGL_B2_SPORT_DATA",
+    prerequis: ["en_b2_sport_verbs"],
+    levels: [3, 4],
+  },
 ];

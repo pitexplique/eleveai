@@ -3,12 +3,18 @@ import { verbsB1Bank } from "./verbs.bank";
 import { algebraB1Bank } from "./algebra.bank";
 import { statisticsB1Bank } from "./statistics.bank";
 import { reasoningB1Bank } from "./reasoning.bank";
+import { sportVerbsB1Bank } from "./sport_verbs.bank";
+import { sportPhysicsB1Bank } from "./sport_physics.bank";
+import { sportStatsB1Bank } from "./sport_stats.bank";
 
 export const englishB1QuestionBank: TutorBankItemV4[] = [
   ...verbsB1Bank,
   ...algebraB1Bank,
   ...statisticsB1Bank,
   ...reasoningB1Bank,
+  ...sportVerbsB1Bank,
+  ...sportPhysicsB1Bank,
+  ...sportStatsB1Bank,
 ];
 
 export function getEnglishB1QuestionBank(args?: {

@@ -4,5 +4,8 @@ export const bo: KnowledgeBoCompetence[] = [
   { boId: "ENGL_B1_VERBS",   label: "Mathematical Verbs B1" },
   { boId: "ENGL_B1_ALGEBRA",    label: "Algebra Vocabulary B1"    },
   { boId: "ENGL_B1_STATISTICS", label: "Statistics Vocabulary B1" },
-  { boId: "ENGL_B1_REASONING",  label: "Reasoning Phrases B1"     },
+  { boId: "ENGL_B1_REASONING",     label: "Reasoning Phrases B1"     },
+  { boId: "ENGL_B1_SPORT_VERBS",  label: "Sport Verbs B1"           },
+  { boId: "ENGL_B1_SPORT_PHYSICS", label: "Sport Physics B1"        },
+  { boId: "ENGL_B1_SPORT_STATS",  label: "Sport Statistics B1"      },
 ];

@@ -282,6 +282,68 @@ const AUDIO_ENTRIES = [
   { file: "sport_physics/a2/velocity.mp3",     text: "velocity" },
   { file: "sport_physics/a2/energy.mp3",       text: "energy" },
   { file: "sport_physics/a2/power.mp3",        text: "power" },
+
+  // ── B1 SPORT VERBS ───────────────────────────────────────────────────────
+  { file: "sport_verbs/b1/analyse.mp3",   text: "analyse" },
+  { file: "sport_verbs/b1/calculate.mp3", text: "calculate" },
+  { file: "sport_verbs/b1/measure.mp3",   text: "measure" },
+  { file: "sport_verbs/b1/compare.mp3",   text: "compare" },
+  { file: "sport_verbs/b1/estimate.mp3",  text: "estimate" },
+  { file: "sport_verbs/b1/convert.mp3",   text: "convert" },
+  { file: "sport_verbs/b1/plot.mp3",      text: "plot" },
+  { file: "sport_verbs/b1/represent.mp3", text: "represent" },
+  { file: "sport_verbs/b1/record.mp3",    text: "record" },
+  { file: "sport_verbs/b1/compute.mp3",   text: "compute" },
+
+  // ── B1 SPORT PHYSICS ─────────────────────────────────────────────────────
+  { file: "sport_physics/b1/velocity.mp3",     text: "velocity" },
+  { file: "sport_physics/b1/acceleration.mp3", text: "acceleration" },
+  { file: "sport_physics/b1/momentum.mp3",     text: "momentum" },
+  { file: "sport_physics/b1/displacement.mp3", text: "displacement" },
+  { file: "sport_physics/b1/frequency.mp3",    text: "frequency" },
+  { file: "sport_physics/b1/amplitude.mp3",    text: "amplitude" },
+  { file: "sport_physics/b1/trajectory.mp3",   text: "trajectory" },
+  { file: "sport_physics/b1/resistance.mp3",   text: "resistance" },
+
+  // ── B1 SPORT STATS ───────────────────────────────────────────────────────
+  { file: "sport_stats/b1/mean.mp3",         text: "mean" },
+  { file: "sport_stats/b1/median.mp3",       text: "median" },
+  { file: "sport_stats/b1/variance.mp3",     text: "variance" },
+  { file: "sport_stats/b1/deviation.mp3",    text: "deviation" },
+  { file: "sport_stats/b1/ratio.mp3",        text: "ratio" },
+  { file: "sport_stats/b1/proportion.mp3",   text: "proportion" },
+  { file: "sport_stats/b1/sample.mp3",       text: "sample" },
+  { file: "sport_stats/b1/distribution.mp3", text: "distribution" },
+
+  // ── B2 SPORT VERBS ───────────────────────────────────────────────────────
+  { file: "sport_verbs/b2/model.mp3",       text: "model" },
+  { file: "sport_verbs/b2/derive.mp3",      text: "derive" },
+  { file: "sport_verbs/b2/optimise.mp3",    text: "optimise" },
+  { file: "sport_verbs/b2/maximise.mp3",    text: "maximise" },
+  { file: "sport_verbs/b2/minimise.mp3",    text: "minimise" },
+  { file: "sport_verbs/b2/simulate.mp3",    text: "simulate" },
+  { file: "sport_verbs/b2/predict.mp3",     text: "predict" },
+  { file: "sport_verbs/b2/extrapolate.mp3", text: "extrapolate" },
+
+  // ── B2 SPORT SCIENCE ─────────────────────────────────────────────────────
+  { file: "sport_science/b2/trajectory.mp3",       text: "trajectory" },
+  { file: "sport_science/b2/projectile.mp3",       text: "projectile" },
+  { file: "sport_science/b2/friction.mp3",         text: "friction" },
+  { file: "sport_science/b2/gravity.mp3",          text: "gravity" },
+  { file: "sport_science/b2/momentum.mp3",         text: "momentum" },
+  { file: "sport_science/b2/kinetic_energy.mp3",   text: "kinetic energy" },
+  { file: "sport_science/b2/potential_energy.mp3", text: "potential energy" },
+  { file: "sport_science/b2/resultant.mp3",        text: "resultant" },
+
+  // ── B2 SPORT DATA ────────────────────────────────────────────────────────
+  { file: "sport_data/b2/dataset.mp3",      text: "dataset" },
+  { file: "sport_data/b2/distribution.mp3", text: "distribution" },
+  { file: "sport_data/b2/outlier.mp3",      text: "outlier" },
+  { file: "sport_data/b2/regression.mp3",   text: "regression" },
+  { file: "sport_data/b2/coefficient.mp3",  text: "coefficient" },
+  { file: "sport_data/b2/histogram.mp3",    text: "histogram" },
+  { file: "sport_data/b2/correlation.mp3",  text: "correlation" },
+  { file: "sport_data/b2/scatter_plot.mp3", text: "scatter plot" },
 ];
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
