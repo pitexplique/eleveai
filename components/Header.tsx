@@ -28,7 +28,7 @@ const NAV_FRANCAIS = [
 const NAV_ANGLAIS = [
   { href: "/coach-ia/english-maths", icon: "🇬🇧", label: "Coach English Maths", desc: "A1 → B2, vocabulaire maths en anglais" },
   { href: "/parcours-english-maths", icon: "🛤️", label: "Parcours English",     desc: "Bilan de niveau CECRL avec audio" },
-  { href: "/english-maths",          icon: "📋", label: "English Maths",         desc: "Accueil & présentation" },
+  { href: "/english-maths",          icon: "📅", label: "Semaine des verbes",     desc: "Vocabulaire anglais de la semaine" },
 ];
 
 const NAV_PARCOURS = [

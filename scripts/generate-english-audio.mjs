@@ -11,7 +11,9 @@
  *   node scripts/generate-english-audio.mjs --group=digits
  *   node scripts/generate-english-audio.mjs --force
  *
- * Groupes disponibles : digits, numbers, operations, comparisons, geometry, verbs
+ * Groupes disponibles : digits, numbers, operations, comparisons, geometry,
+ *   verbs/a1, verbs/a2, verbs/b1, verbs/b2,
+ *   expressions/a2, algebra/b1
  */
 
 import fs from "fs";
@@ -96,12 +98,53 @@ const AUDIO_ENTRIES = [
   { file: "verbs/a1/find.mp3",      text: "find" },
   { file: "verbs/a1/write.mp3",     text: "write" },
 
-  // ── A2 VERBS (already exist) ─────────────────────────────────────────────
-  // calculate, divide, multiply, order, solve, subtract — all in verbs/a2/
+  // ── A2 VERBS — existants ─────────────────────────────────────────────────
+  // calculate, divide, multiply, order, solve, subtract — déjà générés
 
-  // ── B1 VERBS ─────────────────────────────────────────────────────────────
-  // already exist: convert, estimate, explain, justify, represent, simplify
-  { file: "verbs/b1/identify.mp3", text: "identify" },
+  // ── A2 VERBS — nouveaux (enrichissement 2026-06) ─────────────────────────
+  { file: "verbs/a2/round.mp3",     text: "round" },
+  { file: "verbs/a2/compare.mp3",   text: "compare" },
+  { file: "verbs/a2/group.mp3",     text: "group" },
+  { file: "verbs/a2/check.mp3",     text: "check" },
+  { file: "verbs/a2/convert.mp3",   text: "convert" },
+  { file: "verbs/a2/identify.mp3",  text: "identify" },
+  { file: "verbs/a2/complete.mp3",  text: "complete" },
+  { file: "verbs/a2/simplify.mp3",  text: "simplify" },
+  { file: "verbs/a2/plot.mp3",      text: "plot" },
+
+  // ── A2 EXPRESSIONS — nouveaux ────────────────────────────────────────────
+  { file: "expressions/a2/equals.mp3",        text: "equals" },
+  { file: "expressions/a2/result_is.mp3",     text: "the result is" },
+  { file: "expressions/a2/greater_than.mp3",  text: "is greater than" },
+  { file: "expressions/a2/less_than.mp3",     text: "is less than" },
+  { file: "expressions/a2/sum_of.mp3",        text: "the sum of" },
+  { file: "expressions/a2/difference_of.mp3", text: "the difference of" },
+  { file: "expressions/a2/product_of.mp3",    text: "the product of" },
+  { file: "expressions/a2/quotient_of.mp3",   text: "the quotient of" },
+
+  // ── B1 VERBS — existants ─────────────────────────────────────────────────
+  // convert, estimate, explain, justify, represent, simplify — déjà générés
+
+  // ── B1 VERBS — nouveaux (enrichissement 2026-06) ─────────────────────────
+  { file: "verbs/b1/deduce.mp3",      text: "deduce" },
+  { file: "verbs/b1/conclude.mp3",    text: "conclude" },
+  { file: "verbs/b1/prove.mp3",       text: "prove" },
+  { file: "verbs/b1/factorise.mp3",   text: "factorise" },
+  { file: "verbs/b1/expand.mp3",      text: "expand" },
+  { file: "verbs/b1/reduce.mp3",      text: "reduce" },
+  { file: "verbs/b1/substitute.mp3",  text: "substitute" },
+  { file: "verbs/b1/evaluate.mp3",    text: "evaluate" },
+  { file: "verbs/b1/demonstrate.mp3", text: "demonstrate" },
+
+  // ── B1 ALGEBRA — nouveaux ────────────────────────────────────────────────
+  { file: "algebra/b1/equation.mp3",    text: "equation" },
+  { file: "algebra/b1/variable.mp3",    text: "variable" },
+  { file: "algebra/b1/coefficient.mp3", text: "coefficient" },
+  { file: "algebra/b1/expression.mp3",  text: "expression" },
+  { file: "algebra/b1/inequality.mp3",  text: "inequality" },
+  { file: "algebra/b1/solution.mp3",    text: "solution" },
+  { file: "algebra/b1/formula.mp3",     text: "formula" },
+  { file: "algebra/b1/function.mp3",    text: "function" },
 
   // ── B2 VERBS ─────────────────────────────────────────────────────────────
   // already exist: approximate, derive, evaluate, interpret, model, prove

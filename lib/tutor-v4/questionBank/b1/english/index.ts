@@ -1,7 +1,11 @@
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 import { verbsB1Bank } from "./verbs.bank";
+import { algebraB1Bank } from "./algebra.bank";
 
-export const englishB1QuestionBank: TutorBankItemV4[] = [...verbsB1Bank];
+export const englishB1QuestionBank: TutorBankItemV4[] = [
+  ...verbsB1Bank,
+  ...algebraB1Bank,
+];
 
 export function getEnglishB1QuestionBank(args?: {
   notionId?: string | null;
