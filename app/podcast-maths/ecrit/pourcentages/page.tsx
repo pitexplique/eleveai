@@ -57,7 +57,7 @@ export default function LeconPourcentagesPage() {
     <main className="min-h-screen bg-gradient-to-br from-orange-50 via-yellow-50 to-emerald-50 px-4 py-6 text-slate-900">
       <section className="mx-auto max-w-3xl">
         <Link
-          href="/lecon-du-jour"
+          href="/podcast-maths"
           className="mb-4 inline-flex rounded-full bg-white px-4 py-2 text-sm font-bold text-orange-700 shadow hover:bg-orange-50"
         >
           ← Retour à la leçon audio
@@ -113,7 +113,7 @@ export default function LeconPourcentagesPage() {
 
           <div className="mt-6 grid gap-3 sm:grid-cols-2">
             <Link
-              href="/lecon-du-jour"
+              href="/podcast-maths"
               className="rounded-2xl bg-orange-500 px-5 py-3 text-center font-black text-white shadow hover:bg-orange-600"
             >
               🎧 Écouter la leçon

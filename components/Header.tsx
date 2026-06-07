@@ -17,7 +17,7 @@ const NAV_MATHS = [
   { href: "/calcul-rapide",    icon: "⚡", label: "Calcul rapide",      desc: "5 min d'automatismes" },
   { href: "/concours-general", icon: "🏆", label: "Concours général",   desc: "Problèmes avancés" },
   { href: "/defis-du-jour",    icon: "🎯", label: "Défis du jour",      desc: "Maths contextualisés 974" },
-  { href: "/lecon-du-jour",    icon: "🎧", label: "Leçon du jour",      desc: "Fractions, pourcentages, probas en audio" },
+  { href: "/podcast-maths",    icon: "🎧", label: "Podcast maths",      desc: "Fractions, pourcentages, probas en audio" },
 ];
 
 const NAV_FRANCAIS = [

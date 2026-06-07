@@ -34,7 +34,7 @@ const lessonPacks: Record<
   fractions: {
     label: "Fractions",
     badge: "Semaine des fractions",
-    writtenHref: "/lecon-du-jour/ecrit/fractions",
+    writtenHref: "/podcast-maths/ecrit/fractions",
     coachHref:
       "/tutor-v4?classe=6e&matiere=maths&notion=fraction_nombre&microId=fraction_lire_ecrire",
     accent: {
@@ -95,7 +95,7 @@ const lessonPacks: Record<
   pourcentages: {
     label: "Pourcentages",
     badge: "Semaine des pourcentages",
-    writtenHref: "/lecon-du-jour/ecrit/pourcentages",
+    writtenHref: "/podcast-maths/ecrit/pourcentages",
     coachHref:
       "/tutor-v4?classe=6e&matiere=maths&notion=pourcentage_nombre&microId=pourcentage_comprendre",
     accent: {
@@ -155,7 +155,7 @@ const lessonPacks: Record<
   probabilites: {
     label: "Probabilites",
     badge: "Semaine des probabilites",
-    writtenHref: "/lecon-du-jour/ecrit/probabilites",
+    writtenHref: "/podcast-maths/ecrit/probabilites",
     coachHref:
       "/tutor-v4?classe=6e&matiere=maths&notion=proba_experience&microId=proba_vocabulaire",
     accent: {

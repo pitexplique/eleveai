@@ -37,7 +37,7 @@ const ROUTES: RouteConfig[] = [
   { path: "/calcul-rapide",   priority: 0.95, changeFrequency: "daily",  lastMod: LASTMOD_CORE },
   { path: "/english-maths",   priority: 0.9,  changeFrequency: "daily",  lastMod: LASTMOD_CORE },
   { path: "/defis-du-jour",   priority: 0.9,  changeFrequency: "daily",  lastMod: LASTMOD_CORE },
-  { path: "/lecon-du-jour",   priority: 0.85, changeFrequency: "daily",  lastMod: LASTMOD_CORE },
+  { path: "/podcast-maths",   priority: 0.85, changeFrequency: "daily",  lastMod: LASTMOD_CORE },
   { path: "/concours-general",priority: 0.8,  changeFrequency: "weekly", lastMod: LASTMOD_CORE },
 
   // ── ESPACES ────────────────────────────────────────────────────────────────

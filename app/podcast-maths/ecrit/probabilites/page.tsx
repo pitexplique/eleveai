@@ -78,7 +78,7 @@ export default function LeconProbabilitesPage() {
     <main className="min-h-screen bg-gradient-to-br from-emerald-50 via-cyan-50 to-violet-50 px-4 py-6 text-slate-900">
       <section className="mx-auto max-w-3xl">
         <Link
-          href="/lecon-du-jour"
+          href="/podcast-maths"
           className="mb-4 inline-flex rounded-full bg-white px-4 py-2 text-sm font-bold text-emerald-700 shadow hover:bg-emerald-50"
         >
           Retour a la lecon audio
@@ -134,7 +134,7 @@ export default function LeconProbabilitesPage() {
 
           <div className="mt-6 grid gap-3 sm:grid-cols-2">
             <Link
-              href="/lecon-du-jour"
+              href="/podcast-maths"
               className="rounded-2xl bg-emerald-500 px-5 py-3 text-center font-black text-white shadow hover:bg-emerald-600"
             >
               Ecouter la lecon

@@ -1,7 +1,7 @@
 export type ScoreModule =
   | "probleme-du-jour"
   | "calcul-rapide"
-  | "lecon-du-jour"
+  | "podcast-maths"
   | "coach-ia"
   | "parcours";
 

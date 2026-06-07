@@ -38,7 +38,7 @@ const CHIPS: Chip[] = [
       { icon: "⚡", label: "Calcul rapide",     href: "/calcul-rapide",     desc: "5 min d'automatismes" },
       { icon: "🏆", label: "Concours général",  href: "/concours-general",  desc: "Problèmes avancés" },
       { icon: "🎯", label: "Défis du jour",     href: "/defis-du-jour",     desc: "Maths contextualisés 974" },
-      { icon: "🎧", label: "Leçon du jour",     href: "/lecon-du-jour",     desc: "Fractions, pourcentages, probas en audio" },
+      { icon: "🎧", label: "Podcast maths",      href: "/podcast-maths",     desc: "Fractions, pourcentages, probas en audio" },
     ],
   },
   {
@@ -68,7 +68,7 @@ const MODULES = [
   { href: "/coach-ia/maths",    image: "/images/cards/coach.webp",           label: "Coach Maths IA",     emoji: "🧠" },
   { href: "/parcours",          image: "/images/cards/parcours.webp",         label: "Parcours",           emoji: "🛤️" },
   { href: "/calcul-rapide",     image: "/images/cards/calcul-rapide.webp",    label: "Calcul rapide",      emoji: "⚡" },
-  { href: "/lecon-du-jour",     image: "/images/cards/lecondujour.webp",      label: "Leçon du jour",      emoji: "🎧" },
+  { href: "/podcast-maths",     image: "/images/cards/lecondujour.webp",      label: "Podcast maths",      emoji: "🎧" },
   { href: "/defis-du-jour",     image: "/images/cards/defis-du-jour.webp",    label: "Défis du jour",      emoji: "🎯" },
   { href: "/concours-general",  image: "/images/cards/concours-general.webp", label: "Concours général",   emoji: "🏆" },
   { href: "/coach-brevet",      image: "/images/cards/coach-brevet.webp",     label: "Coach Brevet",       emoji: "📚" },

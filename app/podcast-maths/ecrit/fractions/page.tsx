@@ -68,7 +68,7 @@ export default function LeconFractionsPage() {
     <main className="min-h-screen bg-gradient-to-br from-sky-50 via-indigo-50 to-purple-50 px-4 py-6 text-slate-900">
       <section className="mx-auto max-w-3xl">
         <Link
-          href="/lecon-du-jour"
+          href="/podcast-maths"
           className="mb-4 inline-flex rounded-full bg-white px-4 py-2 text-sm font-bold text-sky-700 shadow hover:bg-sky-50"
         >
           ← Retour à la leçon audio
@@ -124,7 +124,7 @@ export default function LeconFractionsPage() {
 
           <div className="mt-6 grid gap-3 sm:grid-cols-2">
             <Link
-              href="/lecon-du-jour"
+              href="/podcast-maths"
               className="rounded-2xl bg-sky-500 px-5 py-3 text-center font-black text-white shadow hover:bg-sky-600"
             >
               🎧 Écouter la leçon
