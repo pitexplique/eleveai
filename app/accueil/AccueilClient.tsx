@@ -78,12 +78,6 @@ const MODULES = [
   { href: "/coach-ia/francais", image: "/images/cards/coach.webp",            label: "Coach Français",     emoji: "📖" },
 ];
 
-const ENGLISH_ROWS = [
-  { label: "A1 — Nombres & opérations", href: "/coach-ia/english-maths?niveau=a1", badge: "A1", color: "bg-lime-500" },
-  { label: "A2 — Verbes d'opérations",  href: "/coach-ia/english-maths?niveau=a2", badge: "A2", color: "bg-sky-500" },
-  { label: "B1 — Raisonnement",         href: "/coach-ia/english-maths?niveau=b1", badge: "B1", color: "bg-violet-500" },
-  { label: "B2 — Vocabulaire avancé",   href: "/coach-ia/english-maths?niveau=b2", badge: "B2", color: "bg-rose-500" },
-];
 
 
 // ─── Progressive chips ────────────────────────────────────────────────────────
@@ -355,30 +349,6 @@ export default function AccueilPage() {
           ))}
         </NetflixRow>
 
-        {/* Row 2 — English Maths */}
-        <NetflixRow title="🇬🇧 Parle maths en anglais — choisis ton niveau">
-          {ENGLISH_ROWS.map((r) => (
-            <Link
-              key={r.href}
-              href={r.href}
-              className="group flex h-[110px] w-[220px] shrink-0 flex-col justify-between overflow-hidden rounded-xl border border-white/10 bg-[#0a2a4a] p-4 transition-all hover:-translate-y-1 hover:border-sky-400/50 hover:bg-[#0e3259] focus:outline-none"
-            >
-              <span className={`inline-flex w-fit rounded-full px-3 py-1 text-sm font-black text-white ${r.color}`}>
-                {r.badge}
-              </span>
-              <p className="text-sm font-bold text-white/90">{r.label}</p>
-              <p className="text-[11px] font-bold text-sky-400">Commencer →</p>
-            </Link>
-          ))}
-          <Link
-            href="/parcours-english-maths"
-            className="group flex h-[110px] w-[220px] shrink-0 flex-col justify-between overflow-hidden rounded-xl border border-white/10 bg-[#0a2a4a] p-4 transition-all hover:-translate-y-1 hover:border-sky-400/50 focus:outline-none"
-          >
-            <span className="text-2xl">🎧</span>
-            <p className="text-sm font-bold text-white/90">Parcours English</p>
-            <p className="text-[11px] font-bold text-sky-400">Défi du jour →</p>
-          </Link>
-        </NetflixRow>
 
       </div>
 
