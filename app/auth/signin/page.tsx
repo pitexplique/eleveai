@@ -652,7 +652,7 @@ export default function SignInPage() {
                   },
                   {
                     image: "/images/cards/lecondujour.webp",
-                    label: "Lecon du jour",
+                    label: "Podcast maths",
                   },
                   {
                     image: "/images/cards/defis-du-jour.webp",
