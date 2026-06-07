@@ -1,7 +1,13 @@
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 import { verbsB2Bank } from "./verbs.bank";
+import { proofB2Bank } from "./proof.bank";
+import { analysisB2Bank } from "./analysis.bank";
 
-export const englishB2QuestionBank: TutorBankItemV4[] = [...verbsB2Bank];
+export const englishB2QuestionBank: TutorBankItemV4[] = [
+  ...verbsB2Bank,
+  ...proofB2Bank,
+  ...analysisB2Bank,
+];
 
 export function getEnglishB2QuestionBank(args?: {
   notionId?: string | null;

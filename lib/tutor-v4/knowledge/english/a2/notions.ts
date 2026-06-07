@@ -15,4 +15,18 @@ export const notions: NotionSource[] = [
     prerequis: ["en_a2_verbs"],
     levels: [2, 3],
   },
+  {
+    id: "en_a2_fractions",
+    label: "Fractions Vocabulary A2",
+    boId: "ENGL_A2_FRACTIONS",
+    prerequis: [],
+    levels: [2, 3],
+  },
+  {
+    id: "en_a2_geometry",
+    label: "Geometry Vocabulary A2",
+    boId: "ENGL_A2_GEOMETRY",
+    prerequis: [],
+    levels: [2, 3],
+  },
 ];

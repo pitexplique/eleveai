@@ -1,22 +1,36 @@
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 
+// ── 15 academic verbs B2 ─────────────────────────────────────────────────────
 const WORDS = [
-  { slug: "prove",       en: "prove",       fr: "démontrer / prouver", audio: "/audio/english-maths/verbs/b2/prove.mp3",       audioSentence: "/audio/english-maths/verbs/b2/prove-sentence.mp3" },
-  { slug: "interpret",   en: "interpret",   fr: "interpréter",         audio: "/audio/english-maths/verbs/b2/interpret.mp3",   audioSentence: "/audio/english-maths/verbs/b2/interpret-sentence.mp3" },
-  { slug: "model",       en: "model",       fr: "modéliser",           audio: "/audio/english-maths/verbs/b2/model.mp3",       audioSentence: "/audio/english-maths/verbs/b2/model-sentence.mp3" },
-  { slug: "evaluate",    en: "evaluate",    fr: "évaluer",             audio: "/audio/english-maths/verbs/b2/evaluate.mp3",    audioSentence: "/audio/english-maths/verbs/b2/evaluate-sentence.mp3" },
-  { slug: "approximate", en: "approximate", fr: "approximer",          audio: "/audio/english-maths/verbs/b2/approximate.mp3", audioSentence: "/audio/english-maths/verbs/b2/approximate-sentence.mp3" },
-  { slug: "derive",      en: "derive",      fr: "dériver / déduire",   audio: "/audio/english-maths/verbs/b2/derive.mp3",      audioSentence: "/audio/english-maths/verbs/b2/derive-sentence.mp3" },
+  { slug: "prove",        en: "prove",        fr: "démontrer",     audio: "/audio/english-maths/verbs/b2/prove.mp3"        },
+  { slug: "interpret",    en: "interpret",    fr: "interpréter",   audio: "/audio/english-maths/verbs/b2/interpret.mp3"    },
+  { slug: "model",        en: "model",        fr: "modéliser",     audio: "/audio/english-maths/verbs/b2/model.mp3"        },
+  { slug: "evaluate",     en: "evaluate",     fr: "évaluer",       audio: "/audio/english-maths/verbs/b2/evaluate.mp3"     },
+  { slug: "approximate",  en: "approximate",  fr: "approximer",    audio: "/audio/english-maths/verbs/b2/approximate.mp3"  },
+  { slug: "derive",       en: "derive",       fr: "dériver",       audio: "/audio/english-maths/verbs/b2/derive.mp3"       },
+  { slug: "differentiate",en: "differentiate",fr: "dériver / différencier", audio: "/audio/english-maths/verbs/b2/differentiate.mp3" },
+  { slug: "integrate",    en: "integrate",    fr: "intégrer",      audio: "/audio/english-maths/verbs/b2/integrate.mp3"    },
+  { slug: "converge",     en: "converge",     fr: "converger",     audio: "/audio/english-maths/verbs/b2/converge.mp3"     },
+  { slug: "generalise",   en: "generalise",   fr: "généraliser",   audio: "/audio/english-maths/verbs/b2/generalise.mp3"   },
+  { slug: "conjecture",   en: "conjecture",   fr: "conjecturer",   audio: "/audio/english-maths/verbs/b2/conjecture.mp3"   },
+  { slug: "verify",       en: "verify",       fr: "vérifier",      audio: "/audio/english-maths/verbs/b2/verify.mp3"       },
+  { slug: "construct",    en: "construct",    fr: "construire",    audio: "/audio/english-maths/verbs/b2/construct.mp3"    },
+  { slug: "parametrise",  en: "parametrise",  fr: "paramétrer",    audio: "/audio/english-maths/verbs/b2/parametrise.mp3"  },
+  { slug: "transform",    en: "transform",    fr: "transformer",   audio: "/audio/english-maths/verbs/b2/transform.mp3"    },
 ] as const;
 
-function distractorsFr(exclude: string): string[] {
-  return WORDS.filter((w) => w.fr !== exclude).map((w) => w.fr).slice(0, 3);
+function distractorsFr(exclude: string, seed: number): string[] {
+  const pool = WORDS.filter((w) => w.fr !== exclude).map((w) => w.fr);
+  const start = seed % pool.length;
+  return [...pool.slice(start), ...pool.slice(0, start)].slice(0, 3);
 }
-function distractorsEn(exclude: string): string[] {
-  return WORDS.filter((w) => w.en !== exclude).map((w) => w.en).slice(0, 3);
+function distractorsEn(exclude: string, seed: number): string[] {
+  const pool = WORDS.filter((w) => w.en !== exclude).map((w) => w.en);
+  const start = seed % pool.length;
+  return [...pool.slice(start), ...pool.slice(0, start)].slice(0, 3);
 }
 
-export const verbsB2Bank: TutorBankItemV4[] = WORDS.flatMap((word) => [
+export const verbsB2Bank: TutorBankItemV4[] = WORDS.flatMap((word, idx) => [
   {
     kind: "fixed" as const,
     id: `en_b2_verbs_en_to_fr_${word.slug}`,
@@ -27,10 +41,10 @@ export const verbsB2Bank: TutorBankItemV4[] = WORDS.flatMap((word) => [
     difficulty: 3 as const,
     text: `What does the verb "${word.en}" mean in French?`,
     format: "qcm" as const,
-    choices: [word.fr, ...distractorsFr(word.fr)],
+    choices: [word.fr, ...distractorsFr(word.fr, idx)],
     expected: [word.fr],
     comparator: "mcq_exact" as const,
-    hint: `It's an academic maths verb.`,
+    hint: `It's an academic maths verb used at B2 level.`,
     explanation: `"${word.en}" means "${word.fr}" in French.`,
     tags: ["verbs", "b2", "en_to_fr"],
   },
@@ -44,7 +58,7 @@ export const verbsB2Bank: TutorBankItemV4[] = WORDS.flatMap((word) => [
     difficulty: 4 as const,
     text: `How do you say "${word.fr}" in English?`,
     format: "qcm" as const,
-    choices: [word.en, ...distractorsEn(word.en)],
+    choices: [word.en, ...distractorsEn(word.en, idx + 5)],
     expected: [word.en],
     comparator: "mcq_exact" as const,
     hint: `It starts with "${word.en[0].toUpperCase()}".`,
@@ -61,7 +75,7 @@ export const verbsB2Bank: TutorBankItemV4[] = WORDS.flatMap((word) => [
     difficulty: 4 as const,
     text: `Listen and choose the correct verb.`,
     format: "qcm" as const,
-    choices: [word.en, ...distractorsEn(word.en)],
+    choices: [word.en, ...distractorsEn(word.en, idx + 10)],
     expected: [word.en],
     comparator: "mcq_exact" as const,
     audioSrc: word.audio,

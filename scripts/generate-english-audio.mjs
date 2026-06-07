@@ -146,10 +146,79 @@ const AUDIO_ENTRIES = [
   { file: "algebra/b1/formula.mp3",     text: "formula" },
   { file: "algebra/b1/function.mp3",    text: "function" },
 
-  // ── B2 VERBS ─────────────────────────────────────────────────────────────
+  // ── A2 FRACTIONS — nouveaux ──────────────────────────────────────────────
+  { file: "fractions/a2/numerator.mp3",          text: "numerator" },
+  { file: "fractions/a2/denominator.mp3",        text: "denominator" },
+  { file: "fractions/a2/fraction.mp3",           text: "fraction" },
+  { file: "fractions/a2/half.mp3",               text: "half" },
+  { file: "fractions/a2/quarter.mp3",            text: "quarter" },
+  { file: "fractions/a2/third.mp3",              text: "third" },
+  { file: "fractions/a2/irreducible.mp3",        text: "irreducible" },
+  { file: "fractions/a2/common_denominator.mp3", text: "common denominator" },
+
+  // ── A2 GEOMETRY — nouveaux ───────────────────────────────────────────────
+  { file: "geometry/a2/angle.mp3",          text: "angle" },
+  { file: "geometry/a2/right_angle.mp3",    text: "right angle" },
+  { file: "geometry/a2/parallel.mp3",       text: "parallel" },
+  { file: "geometry/a2/perpendicular.mp3",  text: "perpendicular" },
+  { file: "geometry/a2/diagonal.mp3",       text: "diagonal" },
+  { file: "geometry/a2/axis.mp3",           text: "axis" },
+  { file: "geometry/a2/symmetry.mp3",       text: "symmetry" },
+  { file: "geometry/a2/polygon.mp3",        text: "polygon" },
+
+  // ── B1 STATISTICS — nouveaux ─────────────────────────────────────────────
+  { file: "statistics/b1/mean.mp3",        text: "mean" },
+  { file: "statistics/b1/median.mp3",      text: "median" },
+  { file: "statistics/b1/mode.mp3",        text: "mode" },
+  { file: "statistics/b1/range.mp3",       text: "range" },
+  { file: "statistics/b1/frequency.mp3",   text: "frequency" },
+  { file: "statistics/b1/probability.mp3", text: "probability" },
+  { file: "statistics/b1/data.mp3",        text: "data" },
+  { file: "statistics/b1/sample.mp3",      text: "sample" },
+
+  // ── B1 REASONING — nouveaux ──────────────────────────────────────────────
+  { file: "reasoning/b1/therefore.mp3",       text: "therefore" },
+  { file: "reasoning/b1/given_that.mp3",      text: "given that" },
+  { file: "reasoning/b1/let_x_be.mp3",        text: "let x be" },
+  { file: "reasoning/b1/we_know_that.mp3",    text: "we know that" },
+  { file: "reasoning/b1/it_follows_that.mp3", text: "it follows that" },
+  { file: "reasoning/b1/if_and_only_if.mp3",  text: "if and only if" },
+  { file: "reasoning/b1/we_can_deduce.mp3",   text: "we can deduce that" },
+  { file: "reasoning/b1/which_gives.mp3",     text: "which gives" },
+
+  // ── B2 VERBS — nouveaux ──────────────────────────────────────────────────
+  { file: "verbs/b2/differentiate.mp3", text: "differentiate" },
+  { file: "verbs/b2/integrate.mp3",     text: "integrate" },
+  { file: "verbs/b2/converge.mp3",      text: "converge" },
+  { file: "verbs/b2/generalise.mp3",    text: "generalise" },
+  { file: "verbs/b2/conjecture.mp3",    text: "conjecture" },
+  { file: "verbs/b2/verify.mp3",        text: "verify" },
+  { file: "verbs/b2/construct.mp3",     text: "construct" },
+  { file: "verbs/b2/parametrise.mp3",   text: "parametrise" },
+  { file: "verbs/b2/transform.mp3",     text: "transform" },
   // already exist: approximate, derive, evaluate, interpret, model, prove
-  { file: "verbs/b2/deduce.mp3",    text: "deduce" },
-  { file: "verbs/b2/factorise.mp3", text: "factorise" },
+  { file: "verbs/b2/deduce.mp3",        text: "deduce" },
+  { file: "verbs/b2/factorise.mp3",     text: "factorise" },
+
+  // ── B2 PROOF — nouveaux ──────────────────────────────────────────────────
+  { file: "proof/b2/theorem.mp3",       text: "theorem" },
+  { file: "proof/b2/lemma.mp3",         text: "lemma" },
+  { file: "proof/b2/hypothesis.mp3",    text: "hypothesis" },
+  { file: "proof/b2/corollary.mp3",     text: "corollary" },
+  { file: "proof/b2/proof.mp3",         text: "proof" },
+  { file: "proof/b2/conjecture.mp3",    text: "conjecture" },
+  { file: "proof/b2/induction.mp3",     text: "induction" },
+  { file: "proof/b2/contradiction.mp3", text: "contradiction" },
+
+  // ── B2 ANALYSIS — nouveaux ───────────────────────────────────────────────
+  { file: "analysis/b2/derivative.mp3",  text: "derivative" },
+  { file: "analysis/b2/integral.mp3",    text: "integral" },
+  { file: "analysis/b2/limit.mp3",       text: "limit" },
+  { file: "analysis/b2/asymptote.mp3",   text: "asymptote" },
+  { file: "analysis/b2/sequence.mp3",    text: "sequence" },
+  { file: "analysis/b2/series.mp3",      text: "series" },
+  { file: "analysis/b2/continuous.mp3",  text: "continuous" },
+  { file: "analysis/b2/convergent.mp3",  text: "convergent" },
 ];
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────

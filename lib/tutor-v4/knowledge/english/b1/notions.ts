@@ -15,4 +15,18 @@ export const notions: NotionSource[] = [
     prerequis: ["en_b1_verbs"],
     levels: [2, 3],
   },
+  {
+    id: "en_b1_statistics",
+    label: "Statistics Vocabulary B1",
+    boId: "ENGL_B1_STATISTICS",
+    prerequis: [],
+    levels: [2, 3],
+  },
+  {
+    id: "en_b1_reasoning",
+    label: "Reasoning Phrases B1",
+    boId: "ENGL_B1_REASONING",
+    prerequis: ["en_b1_verbs"],
+    levels: [2, 3],
+  },
 ];

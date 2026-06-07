@@ -1,10 +1,14 @@
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 import { verbsB1Bank } from "./verbs.bank";
 import { algebraB1Bank } from "./algebra.bank";
+import { statisticsB1Bank } from "./statistics.bank";
+import { reasoningB1Bank } from "./reasoning.bank";
 
 export const englishB1QuestionBank: TutorBankItemV4[] = [
   ...verbsB1Bank,
   ...algebraB1Bank,
+  ...statisticsB1Bank,
+  ...reasoningB1Bank,
 ];
 
 export function getEnglishB1QuestionBank(args?: {
