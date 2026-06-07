@@ -14,6 +14,11 @@ import { moneyA1Bank } from "./money.bank";
 import { familyBudgetA1Bank } from "./family_budget.bank";
 import { countriesA1Bank } from "./countries.bank";
 import { geographyBasicA1Bank } from "./geography_basic.bank";
+import { familyA1Bank } from "./family.bank";
+import { schoolA1Bank } from "./school.bank";
+import { colorsA1Bank } from "./colors.bank";
+import { bodyA1Bank } from "./body.bank";
+import { foodA1Bank } from "./food.bank";
 
 export const englishA1QuestionBank: TutorBankItemV4[] = [
   ...digitsA1Bank,
@@ -30,6 +35,11 @@ export const englishA1QuestionBank: TutorBankItemV4[] = [
   ...familyBudgetA1Bank,
   ...countriesA1Bank,
   ...geographyBasicA1Bank,
+  ...familyA1Bank,
+  ...schoolA1Bank,
+  ...colorsA1Bank,
+  ...bodyA1Bank,
+  ...foodA1Bank,
 ];
 
 export function getEnglishA1QuestionBank(args?: {

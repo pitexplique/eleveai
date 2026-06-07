@@ -1,9 +1,9 @@
 "use client";
 
-import { FormEvent, useEffect, useRef, useState } from "react";
+import { FormEvent, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ChevronDown } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import { useEleve } from "@/context/EleveContext";
 import GoogleFollowChip from "@/components/GoogleFollowChip";
 
@@ -96,61 +96,93 @@ const CLASSES = [
   { label: "3e",  href: "/coach-ia/maths?classe=3e",  desc: "Brevet, fonctions" },
 ];
 
-// ─── ChipDropdown ─────────────────────────────────────────────────────────────
+// ─── Progressive chips ────────────────────────────────────────────────────────
 
-function ChipDropdown({
-  icon, label, color, items,
+type ChipStep = "question" | "subjects" | string; // string = subject label
+
+function ProgressiveChips({
+  chips,
+  getHref,
 }: {
-  icon: string; label: string; color: string; items: ChipItem[];
+  chips: Chip[];
+  getHref: (href: string) => string;
 }) {
-  const [open, setOpen] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
+  const [step, setStep] = useState<ChipStep>("question");
 
-  useEffect(() => {
-    function handle(e: MouseEvent) {
-      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
-    }
-    document.addEventListener("mousedown", handle);
-    return () => document.removeEventListener("mousedown", handle);
-  }, []);
+  const activeChip = chips.find((c) => c.label === step);
+  const subItems = activeChip?.type === "dropdown" ? activeChip.items : [];
 
   return (
-    <div ref={ref} className="relative">
-      <button
-        type="button"
-        onClick={() => setOpen((v) => !v)}
-        className={[
-          "flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2.5 text-sm font-bold text-white backdrop-blur-sm transition-all duration-200 hover:scale-[1.04] hover:border-white/40",
-          color,
-          open ? "border-white/40 bg-white/20 scale-[1.04]" : "",
-        ].join(" ")}
-      >
-        <span className="text-base">{icon}</span>
-        {label}
-        <ChevronDown className={`h-3.5 w-3.5 transition-transform duration-200 ${open ? "rotate-180" : ""}`} />
-      </button>
+    <div className="flex flex-col items-center gap-4">
 
-      {open && (
-        <div className="absolute left-1/2 top-full z-[200] mt-2 w-64 -translate-x-1/2 overflow-hidden rounded-2xl border border-white/15 bg-[#041B33]/95 shadow-2xl backdrop-blur-xl">
-          {items.map((item, i) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              onClick={() => setOpen(false)}
+      {/* Étape 0 — chip "Que veux-tu travailler ?" */}
+      {step === "question" && (
+        <button
+          type="button"
+          onClick={() => setStep("subjects")}
+          className="animate-fade-in flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-6 py-3 text-base font-bold text-white backdrop-blur-sm transition-all duration-200 hover:scale-[1.04] hover:border-white/60 hover:bg-white/20"
+        >
+          💡 Que veux-tu travailler aujourd&apos;hui ?
+        </button>
+      )}
+
+      {/* Étape 1 — Maths | Français | Anglais */}
+      {step === "subjects" && (
+        <div className="animate-fade-in flex flex-wrap justify-center gap-3">
+          {chips.map((chip) => (
+            <button
+              key={chip.label}
+              type="button"
+              onClick={() => setStep(chip.label)}
               className={[
-                "flex items-start gap-3 px-4 py-3 transition hover:bg-white/10",
-                i < items.length - 1 ? "border-b border-white/5" : "",
+                "flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-5 py-2.5 text-sm font-bold text-white backdrop-blur-sm transition-all duration-200 hover:scale-[1.04] hover:border-white/40",
+                chip.color,
               ].join(" ")}
             >
-              <span className="mt-0.5 text-lg leading-none">{item.icon}</span>
-              <div>
-                <p className="text-sm font-bold text-white">{item.label}</p>
-                <p className="text-xs text-white/50">{item.desc}</p>
-              </div>
-            </Link>
+              <span className="text-base">{chip.icon}</span>
+              {chip.label}
+            </button>
           ))}
         </div>
       )}
+
+      {/* Étape 2 — sous-chips de la matière choisie */}
+      {step !== "question" && step !== "subjects" && (
+        <div className="animate-fade-in w-full max-w-lg">
+          {/* Bouton retour */}
+          <div className="mb-3 flex items-center justify-center gap-2">
+            <button
+              type="button"
+              onClick={() => setStep("subjects")}
+              className="flex items-center gap-1.5 rounded-full border border-white/15 bg-white/5 px-3 py-1.5 text-xs font-bold text-white/70 transition hover:bg-white/10 hover:text-white"
+            >
+              <ArrowLeft className="h-3 w-3" />
+              Retour
+            </button>
+            <span className="text-sm font-black text-white">
+              {activeChip?.icon} {activeChip?.label}
+            </span>
+          </div>
+
+          {/* Sub-chips en grille */}
+          <div className="flex flex-wrap justify-center gap-2">
+            {subItems.map((item) => (
+              <Link
+                key={item.href}
+                href={getHref(item.href)}
+                className="flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm font-semibold text-white backdrop-blur-sm transition-all duration-200 hover:scale-[1.03] hover:border-white/50 hover:bg-white/20"
+              >
+                <span className="text-sm">{item.icon}</span>
+                <div className="text-left">
+                  <p className="text-sm font-bold leading-tight">{item.label}</p>
+                  <p className="text-[10px] text-white/50 leading-tight">{item.desc}</p>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      )}
+
     </div>
   );
 }
@@ -322,37 +354,8 @@ export default function AccueilPage() {
             {getGreeting()}{prenom ? `, ${prenom}` : ""} 👋
           </p>
 
-          {/* Main question — ChatGPT style */}
-          <h2 className="mb-8 text-3xl font-black leading-tight text-white sm:text-4xl lg:text-5xl">
-            Que veux-tu travailler<br className="hidden sm:block" /> aujourd&apos;hui ?
-          </h2>
-
-          {/* Chips */}
-          <div className="flex flex-wrap justify-center gap-2 sm:gap-3">
-            {visibleChips.map((chip) =>
-              chip.type === "dropdown" ? (
-                <ChipDropdown
-                  key={chip.label}
-                  icon={chip.icon}
-                  label={chip.label}
-                  color={chip.color}
-                  items={chip.items}
-                />
-              ) : (
-                <Link
-                  key={chip.href}
-                  href={getHref(chip.href)}
-                  className={[
-                    "flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2.5 text-sm font-bold text-white backdrop-blur-sm transition-all duration-200 hover:scale-[1.04] hover:border-white/40",
-                    chip.color,
-                  ].join(" ")}
-                >
-                  <span className="text-base">{chip.icon}</span>
-                  {chip.label}
-                </Link>
-              )
-            )}
-          </div>
+          {/* Progressive chips */}
+          <ProgressiveChips chips={visibleChips} getHref={getHref} />
 
         </div>
       </section>

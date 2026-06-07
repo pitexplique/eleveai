@@ -70,4 +70,29 @@ export const microSkills: MicroSkillSource[] = [
   { id: "en_a1_geography_basic_en_to_fr", label: "Recognize geography word EN → FR",   notionId: "en_a1_geography_basic", prerequis: ["en_a1_countries_en_to_fr"] },
   { id: "en_a1_geography_basic_fr_to_en", label: "Provide geography word FR → EN",     notionId: "en_a1_geography_basic", prerequis: ["en_a1_geography_basic_en_to_fr"] },
   { id: "en_a1_geography_basic_listen",   label: "Listen and identify geography word",  notionId: "en_a1_geography_basic", prerequis: ["en_a1_geography_basic_en_to_fr"] },
+
+  // ── Vie Quotidienne — Family ──────────────────────────────────────────────────
+  { id: "en_a1_family_en_to_fr", label: "Recognize family member EN → FR",   notionId: "en_a1_family", prerequis: [] },
+  { id: "en_a1_family_fr_to_en", label: "Provide family member FR → EN",     notionId: "en_a1_family", prerequis: ["en_a1_family_en_to_fr"] },
+  { id: "en_a1_family_listen",   label: "Listen and identify family member",  notionId: "en_a1_family", prerequis: ["en_a1_family_en_to_fr"] },
+
+  // ── Vie Quotidienne — School ──────────────────────────────────────────────────
+  { id: "en_a1_school_en_to_fr", label: "Recognize school word EN → FR",   notionId: "en_a1_school", prerequis: [] },
+  { id: "en_a1_school_fr_to_en", label: "Provide school word FR → EN",     notionId: "en_a1_school", prerequis: ["en_a1_school_en_to_fr"] },
+  { id: "en_a1_school_listen",   label: "Listen and identify school word",  notionId: "en_a1_school", prerequis: ["en_a1_school_en_to_fr"] },
+
+  // ── Vie Quotidienne — Colors ──────────────────────────────────────────────────
+  { id: "en_a1_colors_en_to_fr", label: "Recognize colour EN → FR",   notionId: "en_a1_colors", prerequis: [] },
+  { id: "en_a1_colors_fr_to_en", label: "Provide colour FR → EN",     notionId: "en_a1_colors", prerequis: ["en_a1_colors_en_to_fr"] },
+  { id: "en_a1_colors_listen",   label: "Listen and identify colour",  notionId: "en_a1_colors", prerequis: ["en_a1_colors_en_to_fr"] },
+
+  // ── Vie Quotidienne — Body ────────────────────────────────────────────────────
+  { id: "en_a1_body_en_to_fr", label: "Recognize body part EN → FR",   notionId: "en_a1_body", prerequis: [] },
+  { id: "en_a1_body_fr_to_en", label: "Provide body part FR → EN",     notionId: "en_a1_body", prerequis: ["en_a1_body_en_to_fr"] },
+  { id: "en_a1_body_listen",   label: "Listen and identify body part",  notionId: "en_a1_body", prerequis: ["en_a1_body_en_to_fr"] },
+
+  // ── Vie Quotidienne — Food ────────────────────────────────────────────────────
+  { id: "en_a1_food_en_to_fr", label: "Recognize food word EN → FR",   notionId: "en_a1_food", prerequis: [] },
+  { id: "en_a1_food_fr_to_en", label: "Provide food word FR → EN",     notionId: "en_a1_food", prerequis: ["en_a1_food_en_to_fr"] },
+  { id: "en_a1_food_listen",   label: "Listen and identify food word",  notionId: "en_a1_food", prerequis: ["en_a1_food_en_to_fr"] },
 ];

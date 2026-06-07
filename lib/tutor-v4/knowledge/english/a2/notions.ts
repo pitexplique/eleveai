@@ -113,4 +113,8 @@ export const notions: NotionSource[] = [
     prerequis: ["en_a2_travel"],
     levels: [1, 2, 3],
   },
+  { id: "en_a2_home",        label: "Vie Quotidienne — Home A2",        boId: "ENGL_A2_HOME",        prerequis: [],                      levels: [1, 2, 3] },
+  { id: "en_a2_daily_verbs", label: "Vie Quotidienne — Daily Verbs A2", boId: "ENGL_A2_DAILY_VERBS", prerequis: [],                      levels: [1, 2, 3] },
+  { id: "en_a2_adjectives",  label: "Vie Quotidienne — Adjectives A2",  boId: "ENGL_A2_ADJECTIVES",  prerequis: ["en_a2_daily_verbs"],   levels: [2, 3]    },
+  { id: "en_a2_jobs",        label: "Vie Quotidienne — Jobs A2",        boId: "ENGL_A2_JOBS",        prerequis: [],                      levels: [1, 2, 3] },
 ];

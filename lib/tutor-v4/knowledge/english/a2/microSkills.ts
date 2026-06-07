@@ -80,4 +80,24 @@ export const microSkills: MicroSkillSource[] = [
   { id: "en_a2_directions_en_to_fr", label: "Recognize direction EN → FR",   notionId: "en_a2_directions", prerequis: ["en_a2_travel_en_to_fr"] },
   { id: "en_a2_directions_fr_to_en", label: "Provide direction FR → EN",     notionId: "en_a2_directions", prerequis: ["en_a2_directions_en_to_fr"] },
   { id: "en_a2_directions_listen",   label: "Listen and identify direction",  notionId: "en_a2_directions", prerequis: ["en_a2_directions_en_to_fr"] },
+
+  // ── Vie Quotidienne — Home ────────────────────────────────────────────────────
+  { id: "en_a2_home_en_to_fr", label: "Recognize home word EN → FR",   notionId: "en_a2_home", prerequis: [] },
+  { id: "en_a2_home_fr_to_en", label: "Provide home word FR → EN",     notionId: "en_a2_home", prerequis: ["en_a2_home_en_to_fr"] },
+  { id: "en_a2_home_listen",   label: "Listen and identify home word",  notionId: "en_a2_home", prerequis: ["en_a2_home_en_to_fr"] },
+
+  // ── Vie Quotidienne — Daily Verbs ─────────────────────────────────────────────
+  { id: "en_a2_daily_verbs_en_to_fr", label: "Recognize daily verb EN → FR",   notionId: "en_a2_daily_verbs", prerequis: [] },
+  { id: "en_a2_daily_verbs_fr_to_en", label: "Provide daily verb FR → EN",     notionId: "en_a2_daily_verbs", prerequis: ["en_a2_daily_verbs_en_to_fr"] },
+  { id: "en_a2_daily_verbs_listen",   label: "Listen and identify daily verb",  notionId: "en_a2_daily_verbs", prerequis: ["en_a2_daily_verbs_en_to_fr"] },
+
+  // ── Vie Quotidienne — Adjectives ──────────────────────────────────────────────
+  { id: "en_a2_adjectives_en_to_fr", label: "Recognize adjective EN → FR",   notionId: "en_a2_adjectives", prerequis: ["en_a2_daily_verbs_en_to_fr"] },
+  { id: "en_a2_adjectives_fr_to_en", label: "Provide adjective FR → EN",     notionId: "en_a2_adjectives", prerequis: ["en_a2_adjectives_en_to_fr"] },
+  { id: "en_a2_adjectives_listen",   label: "Listen and identify adjective",  notionId: "en_a2_adjectives", prerequis: ["en_a2_adjectives_en_to_fr"] },
+
+  // ── Vie Quotidienne — Jobs ────────────────────────────────────────────────────
+  { id: "en_a2_jobs_en_to_fr", label: "Recognize job EN → FR",   notionId: "en_a2_jobs", prerequis: [] },
+  { id: "en_a2_jobs_fr_to_en", label: "Provide job FR → EN",     notionId: "en_a2_jobs", prerequis: ["en_a2_jobs_en_to_fr"] },
+  { id: "en_a2_jobs_listen",   label: "Listen and identify job",  notionId: "en_a2_jobs", prerequis: ["en_a2_jobs_en_to_fr"] },
 ];

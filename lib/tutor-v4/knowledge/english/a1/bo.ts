@@ -15,4 +15,9 @@ export const bo: KnowledgeBoCompetence[] = [
   { boId: "ENGL_A1_FAMILY_BUDGET",   label: "Économie - Gestion — Family Budget A1" },
   { boId: "ENGL_A1_COUNTRIES",       label: "Géographie - Voyage — Countries A1" },
   { boId: "ENGL_A1_GEOGRAPHY_BASIC", label: "Géographie - Voyage — Basic Geography A1" },
+  { boId: "ENGL_A1_FAMILY",  label: "Vie Quotidienne — Family A1"  },
+  { boId: "ENGL_A1_SCHOOL",  label: "Vie Quotidienne — School A1"  },
+  { boId: "ENGL_A1_COLORS",  label: "Vie Quotidienne — Colors A1"  },
+  { boId: "ENGL_A1_BODY",    label: "Vie Quotidienne — Body A1"    },
+  { boId: "ENGL_A1_FOOD",    label: "Vie Quotidienne — Food A1"    },
 ];

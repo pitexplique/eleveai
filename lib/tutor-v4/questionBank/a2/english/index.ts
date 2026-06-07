@@ -15,6 +15,10 @@ import { percentagesEcoA2Bank } from "./percentages_eco.bank";
 import { travelA2Bank } from "./travel.bank";
 import { geographyA2Bank } from "./geography.bank";
 import { directionsA2Bank } from "./directions.bank";
+import { homeA2Bank } from "./home.bank";
+import { dailyVerbsA2Bank } from "./daily_verbs.bank";
+import { adjectivesA2Bank } from "./adjectives.bank";
+import { jobsA2Bank } from "./jobs.bank";
 
 export const englishA2QuestionBank: TutorBankItemV4[] = [
   ...verbsA2Bank,
@@ -33,6 +37,10 @@ export const englishA2QuestionBank: TutorBankItemV4[] = [
   ...travelA2Bank,
   ...geographyA2Bank,
   ...directionsA2Bank,
+  ...homeA2Bank,
+  ...dailyVerbsA2Bank,
+  ...adjectivesA2Bank,
+  ...jobsA2Bank,
 ];
 
 export function getEnglishA2QuestionBank(args?: {
