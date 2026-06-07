@@ -119,7 +119,7 @@ function ProgressiveChips({
       {step === "subjects" && (
         <div className="animate-fade-in flex flex-col items-center gap-4">
           {/* Question au-dessus des chips */}
-          <p className="text-lg font-bold text-white/70">
+          <p className="text-3xl font-black text-white sm:text-4xl">
             Que veux-tu travailler aujourd&apos;hui ?
           </p>
           <div className="flex flex-wrap justify-center gap-4">
@@ -359,7 +359,7 @@ export default function AccueilPage() {
       <div className="mx-auto max-w-[1400px] pt-4 pb-16">
 
         {/* Row 1 — Outils */}
-        <NetflixRow title={prenom ? `🔥 Nos coups de cœur pour toi, ${prenom}` : "🔥 Nos coups de cœur pour toi"}>
+        <NetflixRow title="🔥 Nos coups de cœur pour toi">
           {visibleModules.map((m) => (
             <ModuleCard key={m.href} href={getHref(m.href)} image={m.image} label={m.label} />
           ))}
