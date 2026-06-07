@@ -188,11 +188,11 @@ Contexte à utiliser :
         id: "communication-ia",
         title: "🤖 Communication officielle : usage de l’IA au collège",
         subtitle:
-          "Pour informer les familles de manière claire sur l'utilisation de l’IA.",
+          "Pour informer les familles de manière claire sur l’utilisation de l’IA.",
         accent: "cyan",
         body: `Rédige une communication aux familles expliquant l’usage éducatif de l’IA dans l’établissement.
 Contraintes :
-- rappeler la position de l'Éducation nationale ;
+- rappeler la position de l’Éducation nationale ;
 - expliquer les bénéfices pédagogiques ;
 - insister sur la sécurité et l’encadrement ;
 - préciser ce qui est autorisé / non autorisé ;
@@ -205,6 +205,30 @@ Informations à utiliser :
 "CADRE OFFICIEL (Eduscol, circulaires) : ..."
 "RÈGLES APPLIQUÉES AUX ÉLÈVES : ..."
 "QUESTIONS DES FAMILLES À TRAITER : ..."`,
+      },
+      {
+        id: "coach-english-maths-pronote",
+        title: "🇬🇧 Message Pronote — Présentation du Coach English-Maths",
+        subtitle:
+          "Pour informer les familles de la mise en place du coach IA anglais-maths et les inviter à le tester.",
+        accent: "sky",
+        body: `Rédige un message Pronote à destination des familles pour présenter le Coach English-Maths d’EleveAI.
+
+Contraintes :
+- message court (15 lignes maximum), directement copiable dans Pronote ou un ENT ;
+- expliquer en 2-3 phrases ce qu’est le coach (entraînement au vocabulaire anglais lié aux mathématiques, niveaux A1 à B2, questions audio) ;
+- mentionner les bénéfices concrets pour l’élève (autonomie, écoute, préparation aux examens, pratique à la maison) ;
+- préciser que l’accès est gratuit / depuis la plateforme EleveAI ;
+- inviter les familles à encourager leur enfant à utiliser l’outil 5 à 10 minutes par jour ;
+- ton chaleureux, rassurant, sans jargon technique ;
+- terminer par une invitation à contacter l’enseignant en cas de question.
+
+Informations à personnaliser :
+"NOM DE L’ENSEIGNANT : ..."
+"CLASSE(S) CONCERNÉE(S) : ..."
+"NIVEAU(X) ENGLISH-MATHS (A1 / A2 / B1 / B2) : ..."
+"LIEN D’ACCÈS (si différent de eleveai.fr) : ..."
+"DATE DE DÉBUT D’UTILISATION RECOMMANDÉE : ..."`,
       },
     ],
   },
