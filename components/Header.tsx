@@ -64,6 +64,19 @@ function NavDropdown({
 }) {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
+  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  function cancelClose() {
+    if (closeTimer.current) {
+      clearTimeout(closeTimer.current);
+      closeTimer.current = null;
+    }
+  }
+
+  function scheduleClose() {
+    cancelClose();
+    closeTimer.current = setTimeout(() => setOpen(false), 120);
+  }
 
   // Close on click outside
   useEffect(() => {
@@ -71,15 +84,18 @@ function NavDropdown({
       if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
     }
     document.addEventListener("mousedown", handle);
-    return () => document.removeEventListener("mousedown", handle);
+    return () => {
+      document.removeEventListener("mousedown", handle);
+      cancelClose();
+    };
   }, []);
 
   return (
     <div
       ref={ref}
       className="relative"
-      onMouseEnter={() => setOpen(true)}
-      onMouseLeave={() => setOpen(false)}
+      onMouseEnter={() => { cancelClose(); setOpen(true); }}
+      onMouseLeave={scheduleClose}
     >
       <button
         type="button"
@@ -98,7 +114,11 @@ function NavDropdown({
       </button>
 
       {open && (
-        <div className="absolute left-0 top-full z-[80] mt-1 w-64 overflow-hidden rounded-2xl border border-white/10 bg-[#041B33] shadow-2xl">
+        <div
+          className="absolute left-0 top-full z-[80] mt-1 w-64 overflow-hidden rounded-2xl border border-white/10 bg-[#041B33] shadow-2xl"
+          onMouseEnter={cancelClose}
+          onMouseLeave={scheduleClose}
+        >
           {items.map((item, i) => (
             <Link
               key={item.href}
