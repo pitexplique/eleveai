@@ -23,6 +23,10 @@ import { buildKnowledge5eFrancais } from "@/lib/tutor-v4/knowledge/francais/5e/b
 import { buildKnowledge4eFrancais } from "@/lib/tutor-v4/knowledge/francais/4e/buildKnowledge4eFrancais";
 import { buildKnowledge3eFrancais } from "@/lib/tutor-v4/knowledge/francais/3e/buildKnowledge3eFrancais";
 import { buildKnowledgeEco4e } from "@/lib/tutor-v4/knowledge/economie/4e/buildKnowledgeEco4e";
+import { buildKnowledgeA1Espagnol } from "@/lib/tutor-v4/knowledge/espagnol/a1/buildKnowledgeA1Espagnol";
+import { buildKnowledgeA2Espagnol } from "@/lib/tutor-v4/knowledge/espagnol/a2/buildKnowledgeA2Espagnol";
+import { buildKnowledgeB1Espagnol } from "@/lib/tutor-v4/knowledge/espagnol/b1/buildKnowledgeB1Espagnol";
+import { buildKnowledgeB2Espagnol } from "@/lib/tutor-v4/knowledge/espagnol/b2/buildKnowledgeB2Espagnol";
 
 // =========================
 // TYPES
@@ -48,7 +52,7 @@ export type Classe =
   | "eco-college"
   | "eco-lycee";
 
-export type Matiere = "maths" | "francais" | "english-maths" | "economie";
+export type Matiere = "maths" | "francais" | "english-maths" | "economie" | "espagnol";
 export type NiveauEconomie = "eco-decouverte" | "eco-college" | "eco-lycee";
 export type NiveauEnglish = "a1" | "a2" | "b1" | "b2";
 
@@ -70,6 +74,17 @@ function getKnowledge(classe: Classe, matiere: Matiere = "maths") {
       case "4e": return buildKnowledge4eFrancais();
       case "3e": return buildKnowledge3eFrancais();
       default:    return buildKnowledgeCe1Francais(); // fallback
+    }
+  }
+
+  // Espagnol
+  if (matiere === "espagnol") {
+    switch (classe) {
+      case "a1": return buildKnowledgeA1Espagnol();
+      case "a2": return buildKnowledgeA2Espagnol();
+      case "b1": return buildKnowledgeB1Espagnol();
+      case "b2": return buildKnowledgeB2Espagnol();
+      default:   return buildKnowledgeA1Espagnol();
     }
   }
 

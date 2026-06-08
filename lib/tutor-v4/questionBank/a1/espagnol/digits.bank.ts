@@ -1,0 +1,70 @@
+import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
+
+const WORDS = [
+  { slug: "cero",   es: "cero",   fr: "zéro",   audio: "/audio/espagnol/digits/cero.mp3"   },
+  { slug: "uno",    es: "uno",    fr: "un",      audio: "/audio/espagnol/digits/uno.mp3"    },
+  { slug: "dos",    es: "dos",    fr: "deux",    audio: "/audio/espagnol/digits/dos.mp3"    },
+  { slug: "tres",   es: "tres",   fr: "trois",   audio: "/audio/espagnol/digits/tres.mp3"   },
+  { slug: "cuatro", es: "cuatro", fr: "quatre",  audio: "/audio/espagnol/digits/cuatro.mp3" },
+  { slug: "cinco",  es: "cinco",  fr: "cinq",    audio: "/audio/espagnol/digits/cinco.mp3"  },
+  { slug: "seis",   es: "seis",   fr: "six",     audio: "/audio/espagnol/digits/seis.mp3"   },
+  { slug: "siete",  es: "siete",  fr: "sept",    audio: "/audio/espagnol/digits/siete.mp3"  },
+  { slug: "ocho",   es: "ocho",   fr: "huit",    audio: "/audio/espagnol/digits/ocho.mp3"   },
+  { slug: "nueve",  es: "nueve",  fr: "neuf",    audio: "/audio/espagnol/digits/nueve.mp3"  },
+  { slug: "diez",   es: "diez",   fr: "dix",     audio: "/audio/espagnol/digits/diez.mp3"   },
+] as const;
+
+function dFr(exclude: string) { return WORDS.filter(w => w.fr !== exclude).map(w => w.fr).slice(0, 3); }
+function dEs(exclude: string) { return WORDS.filter(w => w.es !== exclude).map(w => w.es).slice(0, 3); }
+
+export const digitsA1EsBank: TutorBankItemV4[] = WORDS.flatMap((word) => [
+  {
+    kind: "fixed" as const,
+    id: `es_a1_digits_es_to_fr_${word.slug}`,
+    niveau: "a1" as const,
+    matiere: "espagnol" as const,
+    notionId: "es_a1_digits",
+    microId: "es_a1_digits_es_to_fr",
+    difficulty: 1 as const,
+    text: `Que signifie "${word.es}" en français ?`,
+    format: "qcm" as const,
+    choices: [word.fr, ...dFr(word.fr)],
+    expected: [word.fr],
+    comparator: "mcq_exact" as const,
+    hint: `C'est un chiffre de 0 à 10.`,
+    explanation: `"${word.es}" signifie "${word.fr}" en français.`,
+  },
+  {
+    kind: "fixed" as const,
+    id: `es_a1_digits_fr_to_es_${word.slug}`,
+    niveau: "a1" as const,
+    matiere: "espagnol" as const,
+    notionId: "es_a1_digits",
+    microId: "es_a1_digits_fr_to_es",
+    difficulty: 2 as const,
+    text: `Comment dit-on "${word.fr}" en espagnol ?`,
+    format: "qcm" as const,
+    choices: [word.es, ...dEs(word.es)],
+    expected: [word.es],
+    comparator: "mcq_exact" as const,
+    hint: `Commence par "${word.es[0].toUpperCase()}".`,
+    explanation: `"${word.fr}" se dit "${word.es}" en espagnol.`,
+  },
+  {
+    kind: "fixed" as const,
+    id: `es_a1_digits_listen_${word.slug}`,
+    niveau: "a1" as const,
+    matiere: "espagnol" as const,
+    notionId: "es_a1_digits",
+    microId: "es_a1_digits_es_to_fr",
+    difficulty: 2 as const,
+    text: `🔊 Écoute et choisis la traduction française.`,
+    format: "qcm" as const,
+    audioSrc: word.audio,
+    choices: [word.fr, ...dFr(word.fr)],
+    expected: [word.fr],
+    comparator: "mcq_exact" as const,
+    hint: `Écoute attentivement la prononciation.`,
+    explanation: `Le chiffre que tu as entendu est "${word.es}" (${word.fr}).`,
+  },
+]);

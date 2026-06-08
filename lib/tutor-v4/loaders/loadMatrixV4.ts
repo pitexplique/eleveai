@@ -24,6 +24,10 @@ import { matrixA2English } from "@/lib/tutor-v4/matrix/matrixA2English";
 import { matrixB1English } from "@/lib/tutor-v4/matrix/matrixB1English";
 import { matrixB2English } from "@/lib/tutor-v4/matrix/matrixB2English";
 import { matrixEco4e } from "@/lib/tutor-v4/matrix/matrixEco4e";
+import { matrixA1Espagnol } from "@/lib/tutor-v4/matrix/matrixA1Espagnol";
+import { matrixA2Espagnol } from "@/lib/tutor-v4/matrix/matrixA2Espagnol";
+import { matrixB1Espagnol } from "@/lib/tutor-v4/matrix/matrixB1Espagnol";
+import { matrixB2Espagnol } from "@/lib/tutor-v4/matrix/matrixB2Espagnol";
 import type { SkillMatrix } from "@/lib/tutor-v4/types";
 
 export async function loadMatrixV4(
@@ -90,6 +94,11 @@ export async function loadMatrixV4(
   if (classe === "b2" && matiere === "english-maths") return matrixB2English;
 
   if (classe === "eco-college" && matiere === "economie") return matrixEco4e;
+
+  if (classe === "a1" && matiere === "espagnol") return matrixA1Espagnol;
+  if (classe === "a2" && matiere === "espagnol") return matrixA2Espagnol;
+  if (classe === "b1" && matiere === "espagnol") return matrixB1Espagnol;
+  if (classe === "b2" && matiere === "espagnol") return matrixB2Espagnol;
 
   throw new Error(`Matrix V4 introuvable pour ${classe}/${matiere}`);
 }

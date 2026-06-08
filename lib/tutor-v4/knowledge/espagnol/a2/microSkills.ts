@@ -1,0 +1,20 @@
+import type { MicroSkillSource } from "@/lib/tutor-v4/knowledge/buildKnowledge";
+
+export const microSkills: MicroSkillSource[] = [
+  { id: "es_a2_daily_life_es_to_fr", label: "Reconnaître vie quotidienne ES → FR", notionId: "es_a2_daily_life", prerequis: [] },
+  { id: "es_a2_daily_life_fr_to_es", label: "Donner vie quotidienne FR → ES",      notionId: "es_a2_daily_life", prerequis: ["es_a2_daily_life_es_to_fr"] },
+  { id: "es_a2_travel_es_to_fr",     label: "Reconnaître voyage ES → FR",          notionId: "es_a2_travel",     prerequis: [] },
+  { id: "es_a2_travel_fr_to_es",     label: "Donner voyage FR → ES",               notionId: "es_a2_travel",     prerequis: ["es_a2_travel_es_to_fr"] },
+  { id: "es_a2_jobs_es_to_fr",       label: "Reconnaître métier ES → FR",          notionId: "es_a2_jobs",       prerequis: [] },
+  { id: "es_a2_jobs_fr_to_es",       label: "Donner métier FR → ES",               notionId: "es_a2_jobs",       prerequis: ["es_a2_jobs_es_to_fr"] },
+  { id: "es_a2_adjectives_es_to_fr", label: "Reconnaître adjectif ES → FR",        notionId: "es_a2_adjectives", prerequis: [] },
+  { id: "es_a2_adjectives_fr_to_es", label: "Donner adjectif FR → ES",             notionId: "es_a2_adjectives", prerequis: ["es_a2_adjectives_es_to_fr"] },
+  { id: "es_a2_time_es_to_fr",       label: "Reconnaître temps ES → FR",           notionId: "es_a2_time",       prerequis: [] },
+  { id: "es_a2_time_fr_to_es",       label: "Donner temps FR → ES",                notionId: "es_a2_time",       prerequis: ["es_a2_time_es_to_fr"] },
+  { id: "es_a2_weather_es_to_fr",    label: "Reconnaître météo ES → FR",           notionId: "es_a2_weather",    prerequis: [] },
+  { id: "es_a2_weather_fr_to_es",    label: "Donner météo FR → ES",                notionId: "es_a2_weather",    prerequis: ["es_a2_weather_es_to_fr"] },
+  { id: "es_a2_shopping_es_to_fr",   label: "Reconnaître courses ES → FR",         notionId: "es_a2_shopping",   prerequis: [] },
+  { id: "es_a2_shopping_fr_to_es",   label: "Donner courses FR → ES",              notionId: "es_a2_shopping",   prerequis: ["es_a2_shopping_es_to_fr"] },
+  { id: "es_a2_health_es_to_fr",     label: "Reconnaître santé ES → FR",           notionId: "es_a2_health",     prerequis: [] },
+  { id: "es_a2_health_fr_to_es",     label: "Donner santé FR → ES",                notionId: "es_a2_health",     prerequis: ["es_a2_health_es_to_fr"] },
+];

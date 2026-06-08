@@ -360,7 +360,7 @@ export type SchoolLevel =
   | "eco-decouverte"
   | "eco-college"
   | "eco-lycee";
-export type SubjectCode = "maths" | "francais" | "english-maths" | "economie";
+export type SubjectCode = "maths" | "francais" | "english-maths" | "economie" | "espagnol";
 
 export type TutorGeneratedQuestionV4 = {
   text: string;

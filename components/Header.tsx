@@ -31,6 +31,14 @@ const NAV_ANGLAIS = [
   { href: "/english-maths",          icon: "📅", label: "Semaine des verbes",     desc: "Vocabulaire anglais de la semaine" },
 ];
 
+const NAV_ESPAGNOL = [
+  { href: "/coach-ia/espagnol",          icon: "🇪🇸", label: "Coach Espagnol IA",  desc: "A1 → B2, vocabulaire & expressions" },
+  { href: "/coach-ia/espagnol?classe=a1",icon: "🌱",  label: "Niveau A1",          desc: "Chiffres, couleurs, famille, école"  },
+  { href: "/coach-ia/espagnol?classe=a2",icon: "🏙️", label: "Niveau A2",          desc: "Vie quotidienne, voyage, métiers"    },
+  { href: "/coach-ia/espagnol?classe=b1",icon: "🌍",  label: "Niveau B1",          desc: "Opinions, environnement, société"    },
+  { href: "/coach-ia/espagnol?classe=b2",icon: "🎓",  label: "Niveau B2",          desc: "Géopolitique, littérature, culture"  },
+];
+
 const NAV_ECONOMIE = [
   { href: "/coach-ia/economie",                          icon: "💰", label: "Coach Économie IA",    desc: "Entreprise, marché, travail, fiscalité"  },
   { href: "/coach-ia/economie?classe=eco-decouverte",    icon: "🌱", label: "Découverte",            desc: "Budget famille, argent, épargne"         },
@@ -284,6 +292,13 @@ export default function Header() {
           />
 
           <NavDropdown
+            label="Espagnol"
+            items={NAV_ESPAGNOL}
+            active={anyActive(pathname, NAV_ESPAGNOL)}
+            accent="text-red-300"
+          />
+
+          <NavDropdown
             label="Économie"
             items={NAV_ECONOMIE}
             active={anyActive(pathname, NAV_ECONOMIE)}
@@ -373,8 +388,9 @@ export default function Header() {
 
             <MobileSection title="Maths"    accent="text-orange-300" items={NAV_MATHS}    pathname={pathname} />
             <MobileSection title="Français" accent="text-sky-300"    items={NAV_FRANCAIS} pathname={pathname} />
-            <MobileSection title="Anglais"  accent="text-blue-300"   items={NAV_ANGLAIS}  pathname={pathname} />
-            <MobileSection title="Économie" accent="text-amber-300"  items={NAV_ECONOMIE} pathname={pathname} />
+            <MobileSection title="Anglais"   accent="text-blue-300"   items={NAV_ANGLAIS}   pathname={pathname} />
+            <MobileSection title="Espagnol" accent="text-red-300"    items={NAV_ESPAGNOL}  pathname={pathname} />
+            <MobileSection title="Économie" accent="text-amber-300"  items={NAV_ECONOMIE}  pathname={pathname} />
 
           </div>
         </div>

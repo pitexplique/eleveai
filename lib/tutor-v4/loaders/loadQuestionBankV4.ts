@@ -23,6 +23,10 @@ import { englishA2QuestionBank } from "@/lib/tutor-v4/questionBank/a2/english";
 import { englishB1QuestionBank } from "@/lib/tutor-v4/questionBank/b1/english";
 import { englishB2QuestionBank } from "@/lib/tutor-v4/questionBank/b2/english";
 import { economie4eQuestionBank } from "@/lib/tutor-v4/questionBank/4e/economie";
+import { espagnolA1QuestionBank } from "@/lib/tutor-v4/questionBank/a1/espagnol";
+import { espagnolA2QuestionBank } from "@/lib/tutor-v4/questionBank/a2/espagnol";
+import { espagnolB1QuestionBank } from "@/lib/tutor-v4/questionBank/b1/espagnol";
+import { espagnolB2QuestionBank } from "@/lib/tutor-v4/questionBank/b2/espagnol";
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 
 export async function loadQuestionBankV4(
@@ -90,6 +94,11 @@ export async function loadQuestionBankV4(
   if (classe === "b2" && matiere === "english-maths") return englishB2QuestionBank;
 
   if (classe === "eco-college" && matiere === "economie") return economie4eQuestionBank;
+
+  if (classe === "a1" && matiere === "espagnol") return espagnolA1QuestionBank;
+  if (classe === "a2" && matiere === "espagnol") return espagnolA2QuestionBank;
+  if (classe === "b1" && matiere === "espagnol") return espagnolB1QuestionBank;
+  if (classe === "b2" && matiere === "espagnol") return espagnolB2QuestionBank;
 
   throw new Error(`QuestionBank V4 introuvable pour ${classe}/${matiere}`);
 }
