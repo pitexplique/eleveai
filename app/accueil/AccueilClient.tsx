@@ -226,11 +226,6 @@ export default function AccueilPage() {
         <div className="relative z-10 flex-1 flex items-end pb-16 px-4 sm:px-6 lg:px-8">
           <div className="w-full max-w-5xl mx-auto">
 
-            {/* Question */}
-            <p className="text-center text-xl font-black text-white mb-5 drop-shadow-lg">
-              Que veux-tu travailler aujourd&apos;hui ?
-            </p>
-
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4">
               {visibleSubjects.map((subject) => (
                 <Link
