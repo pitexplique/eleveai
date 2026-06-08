@@ -2,6 +2,7 @@
 
 import type { KeyboardEvent, ReactNode } from "react";
 import { Video } from "lucide-react";
+import AudioBoost from "@/components/AudioBoost";
 import type { Classe, Matiere } from "@/lib/tutor-v4/catalog";
 import type { TutorQuestionOption } from "@/lib/tutor-v4/types";
 import { buildLearningVideoHref } from "@/lib/videoSearch";
@@ -153,13 +154,11 @@ export default function TutorSimpleView({
                     <p className="mb-2 text-center text-xs font-bold uppercase tracking-wide text-sky-600">
                       🔊 Écoute et réponds
                     </p>
-                    {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
-                    <audio
+                    <AudioBoost
                       key={currentQuestion.audioSrc}
-                      controls
-                      autoPlay
                       src={currentQuestion.audioSrc}
-                      className="w-full rounded-xl"
+                      autoPlay
+                      gain={3.5}
                     />
                   </div>
                 ) : null}

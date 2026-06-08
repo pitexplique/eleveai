@@ -76,6 +76,7 @@ import type {
 import { getTutorLesson } from "@/lib/tutor-v4/lessons/getTutorLesson";
 import { LessonPanel } from "@/lib/tutor-v4/lessons/components/LessonPanel";
 import TutorSimpleView from "./TutorSimpleView";
+import AudioBoost from "@/components/AudioBoost";
 
 import { useRouter, useSearchParams } from "next/navigation";
 
@@ -1486,12 +1487,11 @@ function handleInputKeyDown(
                         className="mt-3"
                         onClick={(e) => e.stopPropagation()}
                       >
-                        {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
-                        <audio
+                        <AudioBoost
                           key={option.audioSrc}
-                          controls
                           src={option.audioSrc}
-                          className="w-full rounded-xl"
+                          gain={3.5}
+                          compact
                         />
                       </div>
                     ) : null}
@@ -1542,13 +1542,11 @@ function handleInputKeyDown(
                       <p className="mb-2 text-center text-xs font-bold uppercase tracking-wide text-sky-600">
                         🔊 Écoute et réponds
                       </p>
-                      {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
-                      <audio
+                      <AudioBoost
                         key={currentQuestion.audioSrc}
-                        controls
-                        autoPlay
                         src={currentQuestion.audioSrc}
-                        className="w-full rounded-xl"
+                        autoPlay
+                        gain={3.5}
                       />
                     </div>
                   ) : null}
