@@ -172,99 +172,83 @@ export default function AccueilPage() {
         onPlay={() => setIsPlaying(true)}
       />
 
-      {/* ── HERO ────────────────────────────────────────────────────────────── */}
-      <section className="relative min-h-screen flex flex-col">
+      {/* ── HERO — Image plein écran ────────────────────────────────────────── */}
+      <section className="relative w-full">
+        <Image
+          src="/images/accueil-eleveai-reunion.webp"
+          alt="EleveAI – Comprendre, S'entraîner, Réussir – CP à Terminale"
+          width={1920}
+          height={1080}
+          priority
+          sizes="100vw"
+          className="h-auto block mx-auto"
+          style={{ width: "53%" }}
+        />
+        {/* Fondu bas vers le fond de page */}
+        <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-b from-transparent to-[#041B33]" />
 
-        {/* Background image — pleine visibilité */}
-        <div className="absolute inset-0 z-0">
-          <Image
-            src="/images/accueil-eleveai-reunion.webp"
-            alt="EleveAI – Comprendre, S'entraîner, Réussir"
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover object-top"
-          />
-          {/* Gradient sombre sur le bas pour lire les cards */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-black/20 to-[#041B33]" />
-          {/* Gradient latéral léger */}
-          <div className="absolute inset-0 bg-gradient-to-r from-[#041B33]/30 via-transparent to-[#041B33]/30" />
-        </div>
-
-        {/* Contenu du hero */}
-        <div className="relative z-10 flex flex-col items-center pt-8 pb-4 px-4 sm:px-6 lg:px-8">
-
-          {/* Badge niveau */}
-          <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-black/50 border border-white/20 px-5 py-2 text-sm font-black text-white backdrop-blur-sm">
-            🎓 CP à Terminale
-          </div>
-
-          {/* Greeting personnalisé */}
-          {prenom && (
-            <p className="text-lg font-semibold text-white/80 mb-1 drop-shadow-lg">
+        {/* Greeting personnalisé flottant */}
+        {prenom && (
+          <div className="absolute top-4 left-1/2 -translate-x-1/2 z-10">
+            <p className="rounded-full bg-black/50 border border-white/20 px-5 py-2 text-sm font-black text-white backdrop-blur-sm whitespace-nowrap">
               {getGreeting()}, {prenom} 👋
             </p>
-          )}
+          </div>
+        )}
 
-          {/* Tagline */}
-          <p className="text-center text-base font-semibold text-white/70 drop-shadow mb-1">
-            Comprendre &bull; S&apos;entraîner &bull; Réussir
-          </p>
-
-          {/* Brevet countdown si 3e/4e */}
-          {(eleveClasse === "3e" || eleveClasse === "4e") && (
+        {/* Brevet countdown si 3e/4e */}
+        {(eleveClasse === "3e" || eleveClasse === "4e") && (
+          <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10">
             <Link
               href="/coach-brevet"
-              className="mt-3 inline-flex items-center gap-2 rounded-full bg-emerald-500 px-5 py-2 text-sm font-black text-white shadow-lg transition hover:bg-emerald-400 hover:scale-105"
+              className="inline-flex items-center gap-2 rounded-full bg-emerald-500 px-5 py-2.5 text-sm font-black text-white shadow-lg transition hover:bg-emerald-400 hover:scale-105 whitespace-nowrap"
             >
               🎯 Sprint Brevet · J−{jours} → Commencer
             </Link>
-          )}
-        </div>
+          </div>
+        )}
+      </section>
 
-        {/* ── SUBJECT CARDS ───────────────────────────────────────────────── */}
-        <div className="relative z-10 flex-1 flex items-end pb-16 px-4 sm:px-6 lg:px-8">
-          <div className="w-full max-w-5xl mx-auto">
+      {/* ── SUBJECT CARDS cliquables ────────────────────────────────────────── */}
+      <section className="bg-[#041B33] px-4 py-8 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-5xl">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4">
+            {visibleSubjects.map((subject) => (
+              <Link
+                key={subject.label}
+                href={subject.soon ? "#" : getHref(subject.href)}
+                className={[
+                  "group relative flex flex-col items-center justify-center gap-2 rounded-2xl border p-4 sm:p-5 text-center",
+                  "bg-white/5 backdrop-blur-md transition-all duration-300",
+                  "hover:-translate-y-2 hover:scale-105",
+                  `hover:shadow-2xl ${subject.glow}`,
+                  subject.border,
+                  subject.soon ? "opacity-70 cursor-not-allowed" : "",
+                ].join(" ")}
+              >
+                {/* Gradient bg on hover */}
+                <div className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${subject.bg} opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
 
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4">
-              {visibleSubjects.map((subject) => (
-                <Link
-                  key={subject.label}
-                  href={subject.soon ? "#" : getHref(subject.href)}
-                  className={[
-                    "group relative flex flex-col items-center justify-center gap-2 rounded-2xl border p-4 sm:p-5 text-center",
-                    "bg-black/40 backdrop-blur-md transition-all duration-300",
-                    "hover:-translate-y-2 hover:scale-105",
-                    `hover:shadow-2xl ${subject.glow}`,
-                    subject.border,
-                    subject.soon ? "opacity-70 cursor-not-allowed" : "",
-                  ].join(" ")}
-                >
-                  {/* Gradient bg on hover */}
-                  <div className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${subject.bg} opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
-
-                  {/* Soon badge */}
-                  {subject.soon && (
-                    <span className="absolute -top-2 -right-2 z-20 rounded-full bg-amber-500 px-2 py-0.5 text-[9px] font-black text-white">
-                      Bientôt
-                    </span>
-                  )}
-
-                  <span className="relative z-10 text-3xl sm:text-4xl drop-shadow-lg">
-                    {subject.icon}
+                {/* Soon badge */}
+                {subject.soon && (
+                  <span className="absolute -top-2 -right-2 z-20 rounded-full bg-amber-500 px-2 py-0.5 text-[9px] font-black text-white">
+                    Bientôt
                   </span>
-                  <div className="relative z-10">
-                    <p className="text-sm sm:text-base font-black text-white leading-tight">
-                      {subject.label}
-                    </p>
-                    <p className="mt-0.5 text-[10px] sm:text-xs text-white/70 leading-tight hidden sm:block">
-                      {subject.desc}
-                    </p>
-                  </div>
-                </Link>
-              ))}
-            </div>
+                )}
 
+                <span className="relative z-10 text-3xl sm:text-4xl drop-shadow-lg">
+                  {subject.icon}
+                </span>
+                <div className="relative z-10">
+                  <p className="text-sm sm:text-base font-black text-white leading-tight">
+                    {subject.label}
+                  </p>
+                  <p className="mt-0.5 text-[10px] sm:text-xs text-white/60 leading-tight hidden sm:block">
+                    {subject.desc}
+                  </p>
+                </div>
+              </Link>
+            ))}
           </div>
         </div>
       </section>
