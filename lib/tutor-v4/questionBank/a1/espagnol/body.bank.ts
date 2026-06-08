@@ -1,16 +1,16 @@
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 
 const WORDS = [
-  { slug: "cabeza",   es: "cabeza",   fr: "tête"     },
-  { slug: "ojo",      es: "ojo",      fr: "œil"      },
-  { slug: "nariz",    es: "nariz",    fr: "nez"      },
-  { slug: "boca",     es: "boca",     fr: "bouche"   },
-  { slug: "oreja",    es: "oreja",    fr: "oreille"  },
-  { slug: "mano",     es: "mano",     fr: "main"     },
-  { slug: "pie",      es: "pie",      fr: "pied"     },
-  { slug: "brazo",    es: "brazo",    fr: "bras"     },
-  { slug: "pierna",   es: "pierna",   fr: "jambe"    },
-  { slug: "espalda",  es: "espalda",  fr: "dos"      },
+  { slug: "cabeza",  es: "cabeza",  fr: "tête",    audio: "/audio/espagnol/body/cabeza.mp3"  },
+  { slug: "ojo",     es: "ojo",     fr: "œil",     audio: "/audio/espagnol/body/ojo.mp3"     },
+  { slug: "nariz",   es: "nariz",   fr: "nez",     audio: "/audio/espagnol/body/nariz.mp3"   },
+  { slug: "boca",    es: "boca",    fr: "bouche",  audio: "/audio/espagnol/body/boca.mp3"    },
+  { slug: "oreja",   es: "oreja",   fr: "oreille", audio: "/audio/espagnol/body/oreja.mp3"   },
+  { slug: "mano",    es: "mano",    fr: "main",    audio: "/audio/espagnol/body/mano.mp3"    },
+  { slug: "pie",     es: "pie",     fr: "pied",    audio: "/audio/espagnol/body/pie.mp3"     },
+  { slug: "brazo",   es: "brazo",   fr: "bras",    audio: "/audio/espagnol/body/brazo.mp3"   },
+  { slug: "pierna",  es: "pierna",  fr: "jambe",   audio: "/audio/espagnol/body/pierna.mp3"  },
+  { slug: "espalda", es: "espalda", fr: "dos",     audio: "/audio/espagnol/body/espalda.mp3" },
 ] as const;
 
 function dFr(exclude: string) { return WORDS.filter(w => w.fr !== exclude).map(w => w.fr).slice(0, 3); }
@@ -46,5 +46,22 @@ export const bodyA1EsBank: TutorBankItemV4[] = WORDS.flatMap((word) => [
     expected: [word.es],
     comparator: "mcq_exact" as const,
     explanation: `"${word.fr}" se dit "${word.es}" en espagnol.`,
+  },
+  {
+    kind: "fixed" as const,
+    id: `es_a1_body_listen_${word.slug}`,
+    niveau: "a1" as const,
+    matiere: "espagnol" as const,
+    notionId: "es_a1_body",
+    microId: "es_a1_body_es_to_fr",
+    difficulty: 2 as const,
+    text: `🔊 Écoute et choisis la traduction française.`,
+    format: "qcm" as const,
+    audioSrc: word.audio,
+    choices: [word.fr, ...dFr(word.fr)],
+    expected: [word.fr],
+    comparator: "mcq_exact" as const,
+    hint: `Écoute attentivement.`,
+    explanation: `Le mot entendu est "${word.es}" (${word.fr}).`,
   },
 ]);

@@ -1,16 +1,16 @@
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 
 const WORDS = [
-  { slug: "camisa",    es: "camisa",    fr: "chemise"    },
-  { slug: "pantalon",  es: "pantalón",  fr: "pantalon"   },
-  { slug: "zapato",    es: "zapato",    fr: "chaussure"  },
-  { slug: "vestido",   es: "vestido",   fr: "robe"       },
-  { slug: "falda",     es: "falda",     fr: "jupe"       },
-  { slug: "calcetín",  es: "calcetín",  fr: "chaussette" },
-  { slug: "abrigo",    es: "abrigo",    fr: "manteau"    },
-  { slug: "gorra",     es: "gorra",     fr: "casquette"  },
-  { slug: "bufanda",   es: "bufanda",   fr: "écharpe"    },
-  { slug: "sudadera",  es: "sudadera",  fr: "sweat"      },
+  { slug: "camisa",   es: "camisa",   fr: "chemise",    audio: "/audio/espagnol/clothes/camisa.mp3"   },
+  { slug: "pantalon", es: "pantalón", fr: "pantalon",   audio: "/audio/espagnol/clothes/pantalon.mp3" },
+  { slug: "zapato",   es: "zapato",   fr: "chaussure",  audio: "/audio/espagnol/clothes/zapato.mp3"   },
+  { slug: "vestido",  es: "vestido",  fr: "robe",       audio: "/audio/espagnol/clothes/vestido.mp3"  },
+  { slug: "falda",    es: "falda",    fr: "jupe",       audio: "/audio/espagnol/clothes/falda.mp3"    },
+  { slug: "calcetin", es: "calcetín", fr: "chaussette", audio: "/audio/espagnol/clothes/calcetin.mp3" },
+  { slug: "abrigo",   es: "abrigo",   fr: "manteau",    audio: "/audio/espagnol/clothes/abrigo.mp3"   },
+  { slug: "gorra",    es: "gorra",    fr: "casquette",  audio: "/audio/espagnol/clothes/gorra.mp3"    },
+  { slug: "bufanda",  es: "bufanda",  fr: "écharpe",    audio: "/audio/espagnol/clothes/bufanda.mp3"  },
+  { slug: "sudadera", es: "sudadera", fr: "sweat",      audio: "/audio/espagnol/clothes/sudadera.mp3" },
 ] as const;
 
 function dFr(exclude: string) { return WORDS.filter(w => w.fr !== exclude).map(w => w.fr).slice(0, 3); }
@@ -46,5 +46,22 @@ export const clothesA1EsBank: TutorBankItemV4[] = WORDS.flatMap((word) => [
     expected: [word.es],
     comparator: "mcq_exact" as const,
     explanation: `"${word.fr}" se dit "${word.es}" en espagnol.`,
+  },
+  {
+    kind: "fixed" as const,
+    id: `es_a1_clothes_listen_${word.slug}`,
+    niveau: "a1" as const,
+    matiere: "espagnol" as const,
+    notionId: "es_a1_clothes",
+    microId: "es_a1_clothes_es_to_fr",
+    difficulty: 2 as const,
+    text: `🔊 Écoute et choisis la traduction française.`,
+    format: "qcm" as const,
+    audioSrc: word.audio,
+    choices: [word.fr, ...dFr(word.fr)],
+    expected: [word.fr],
+    comparator: "mcq_exact" as const,
+    hint: `Écoute attentivement.`,
+    explanation: `Le vêtement entendu est "${word.es}" (${word.fr}).`,
   },
 ]);
