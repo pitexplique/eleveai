@@ -3,234 +3,93 @@
 import { FormEvent, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
 import { useEleve } from "@/context/EleveContext";
 import GoogleFollowChip from "@/components/GoogleFollowChip";
 
-// ─── Constants ───────────────────────────────────────────────────────────────
+// ─── Constants ────────────────────────────────────────────────────────────────
 
 const BREVET_DATE = new Date("2026-06-27T08:00:00");
-
 function joursAvantBrevet() {
   const diff = BREVET_DATE.getTime() - Date.now();
   return Math.max(0, Math.ceil(diff / (1000 * 60 * 60 * 24)));
 }
-
 const jours = joursAvantBrevet();
 
-// ─── Chips "Que veux-tu faire ?" ─────────────────────────────────────────────
+// ─── Subject cards ────────────────────────────────────────────────────────────
 
-type ChipItem = { icon: string; label: string; href: string; desc: string };
-
-type Chip =
-  | { type: "link";     icon: string; label: string; href: string; color: string; cm: boolean }
-  | { type: "dropdown"; icon: string; label: string; color: string; cm: boolean; items: ChipItem[] };
-
-const CHIPS: Chip[] = [
+const SUBJECTS = [
   {
-    type: "dropdown",
-    icon: "🧠", label: "Maths", cm: true,
-    color: "hover:border-cyan-400/60 hover:bg-cyan-500/20",
-    items: [
-      { icon: "🧠", label: "Coach Maths IA",   href: "/coach-ia/maths",    desc: "Toutes notions, CP → Terminale" },
-      { icon: "🛤️", label: "Parcours Maths",   href: "/parcours",          desc: "Bilan de compétences personnalisé" },
-      { icon: "📚", label: "Coach Brevet",      href: "/coach-brevet",      desc: "Sprint J−30, toutes les notions" },
-      { icon: "🎓", label: "Coach Bac Spé",     href: "/coach-bac-spe",     desc: "Suites, fonctions, proba" },
-      { icon: "⚡", label: "Calcul rapide",     href: "/calcul-rapide",     desc: "5 min d'automatismes" },
-      { icon: "🏆", label: "Concours général",  href: "/concours-general",  desc: "Problèmes avancés" },
-      { icon: "🎯", label: "Défis du jour",     href: "/defis-du-jour",     desc: "Maths contextualisés 974" },
-      { icon: "🎧", label: "Podcast maths",      href: "/podcast-maths",     desc: "Fractions, pourcentages, probas en audio" },
-    ],
+    icon: "🧮",
+    label: "Maths",
+    desc: "Calculer, raisonner, prouver",
+    href: "/coach-ia/maths",
+    bg: "from-cyan-500 to-blue-600",
+    border: "border-cyan-400/50",
+    glow: "group-hover:shadow-cyan-500/40",
+    cm: true,
   },
   {
-    type: "dropdown",
-    icon: "📖", label: "Français", cm: true,
-    color: "hover:border-sky-400/60 hover:bg-sky-500/20",
-    items: [
-      { icon: "📖", label: "Coach Français IA", href: "/coach-ia/francais",  desc: "Grammaire, conjugaison, vocabulaire" },
-      { icon: "🛤️", label: "Parcours Français", href: "/parcours-francais",  desc: "Bilan de compétences français" },
-    ],
+    icon: "📖",
+    label: "Français",
+    desc: "Lire, comprendre, s'exprimer",
+    href: "/coach-ia/francais",
+    bg: "from-emerald-500 to-green-700",
+    border: "border-emerald-400/50",
+    glow: "group-hover:shadow-emerald-500/40",
+    cm: true,
   },
   {
-    type: "dropdown",
-    icon: "🇬🇧", label: "Anglais", cm: true,
-    color: "hover:border-blue-400/60 hover:bg-blue-500/20",
-    items: [
-      { icon: "🇬🇧", label: "Coach English Maths", href: "/coach-ia/english-maths", desc: "A1 → B2, vocabulaire maths en anglais" },
-      { icon: "🛤️", label: "Parcours English",      href: "/parcours-english-maths", desc: "Bilan de niveau CECRL avec audio" },
-      { icon: "📋", label: "English Maths",          href: "/english-maths",          desc: "Accueil & présentation" },
-    ],
+    icon: "🇬🇧",
+    label: "Anglais",
+    desc: "Comprendre, parler, progresser",
+    href: "/coach-ia/english-maths",
+    bg: "from-blue-500 to-indigo-700",
+    border: "border-blue-400/50",
+    glow: "group-hover:shadow-blue-500/40",
+    cm: true,
   },
   {
-    type: "dropdown",
-    icon: "💰", label: "Économie", cm: false,
-    color: "hover:border-amber-400/60 hover:bg-amber-500/20",
-    items: [
-      { icon: "💰", label: "Coach Économie",          href: "/coach-ia/economie",                         desc: "Entreprise, marché, travail, fiscalité"  },
-      { icon: "🏫", label: "Niveau Collège",          href: "/coach-ia/economie?classe=eco-college",      desc: "4e/3e — fiscalité, élections, marché"   },
-      { icon: "🎓", label: "Niveau Lycée",            href: "/coach-ia/economie?classe=eco-lycee",        desc: "Macro-économie, politiques publiques"   },
-    ],
+    icon: "🇪🇸",
+    label: "Espagnol",
+    desc: "Comprendre, parler, découvrir",
+    href: "/coach-ia/espagnol",
+    bg: "from-red-500 to-rose-700",
+    border: "border-red-400/50",
+    glow: "group-hover:shadow-red-500/40",
+    cm: false,
+  },
+  {
+    icon: "🔬",
+    label: "Sciences",
+    desc: "Observer, comprendre, expérimenter",
+    href: "/coach-ia/maths",
+    bg: "from-violet-500 to-purple-700",
+    border: "border-violet-400/50",
+    glow: "group-hover:shadow-violet-500/40",
+    cm: false,
+    soon: true,
+  },
+  {
+    icon: "📊",
+    label: "Économie",
+    desc: "Comprendre le monde économique",
+    href: "/coach-ia/economie",
+    bg: "from-amber-500 to-orange-600",
+    border: "border-amber-400/50",
+    glow: "group-hover:shadow-amber-500/40",
+    cm: false,
   },
 ];
 
-// ─── Netflix rows ─────────────────────────────────────────────────────────────
+// ─── Bottom features bar ──────────────────────────────────────────────────────
 
-const MODULES = [
-  { href: "/coach-ia/maths",    image: "/images/cards/coach.webp",           label: "Coach Maths IA",     emoji: "🧠" },
-  { href: "/parcours",          image: "/images/cards/parcours.webp",         label: "Parcours",           emoji: "🛤️" },
-  { href: "/calcul-rapide",     image: "/images/cards/calcul-rapide.webp",    label: "Calcul rapide",      emoji: "⚡" },
-  { href: "/podcast-maths",     image: "/images/cards/lecondujour.webp",      label: "Podcast maths",      emoji: "🎧" },
-  { href: "/defis-du-jour",     image: "/images/cards/defis-du-jour.webp",    label: "Défis du jour",      emoji: "🎯" },
-  { href: "/concours-general",  image: "/images/cards/concours-general.webp", label: "Concours général",   emoji: "🏆" },
-  { href: "/coach-brevet",      image: "/images/cards/coach-brevet.webp",     label: "Coach Brevet",       emoji: "📚" },
-  { href: "/coach-bac-spe",     image: "/images/cards/coach-bac-spe.webp",    label: "Coach Bac Spé",      emoji: "🎓" },
-  { href: "/english-maths",     image: "/images/cards/english-maths.webp",    label: "English Maths",      emoji: "🇬🇧" },
-  { href: "/coach-ia/francais", image: "/images/cards/coach.webp",            label: "Coach Français",     emoji: "📖" },
+const FEATURES = [
+  { icon: "📚", label: "Leçons",     desc: "Cours clairs et illustrés",         href: "/coach-ia/maths"     },
+  { icon: "✏️", label: "Exercices",  desc: "Entraîne-toi à ton rythme",         href: "/parcours"           },
+  { icon: "🛤️", label: "Parcours",   desc: "Un chemin personnalisé",            href: "/parcours"           },
+  { icon: "🏆", label: "Défis",      desc: "Relève des défis chaque jour",      href: "/defis-du-jour"      },
+  { icon: "🤖", label: "Coach IA",   desc: "Ton assistant intelligent 24/7",    href: "#coach"              },
 ];
-
-
-
-// ─── Progressive chips ────────────────────────────────────────────────────────
-
-type ChipStep = "subjects" | string; // string = subject label
-
-function ProgressiveChips({
-  chips,
-  getHref,
-}: {
-  chips: Chip[];
-  getHref: (href: string) => string;
-}) {
-  const [step, setStep] = useState<ChipStep>("subjects");
-
-  const activeChip = chips.find((c) => c.label === step);
-  const subItems = activeChip?.type === "dropdown" ? activeChip.items : [];
-
-  return (
-    <div className="flex flex-col items-center gap-5">
-
-      {/* Étape 1 — Maths | Français | Anglais (affiché par défaut) */}
-      {step === "subjects" && (
-        <div className="animate-fade-in flex flex-col items-center gap-4">
-          {/* Question au-dessus des chips */}
-          <p className="text-3xl font-black text-white sm:text-4xl">
-            Que veux-tu travailler aujourd&apos;hui ?
-          </p>
-          <div className="flex flex-wrap justify-center gap-4">
-            {chips.map((chip) => (
-              <button
-                key={chip.label}
-                type="button"
-                onClick={() => setStep(chip.label)}
-                className={[
-                  "flex items-center gap-3 rounded-2xl border border-white/20 bg-white/10 px-7 py-4 text-xl font-black text-white backdrop-blur-sm transition-all duration-200 hover:scale-[1.06] hover:border-white/50 hover:bg-white/20",
-                  chip.color,
-                ].join(" ")}
-              >
-                <span className="text-3xl">{chip.icon}</span>
-                {chip.label}
-              </button>
-            ))}
-          </div>
-        </div>
-      )}
-
-      {/* Étape 2 — sous-chips de la matière choisie */}
-      {step !== "subjects" && (
-        <div className="animate-fade-in w-full max-w-xl">
-          {/* Retour + titre matière */}
-          <div className="mb-4 flex items-center justify-center gap-3">
-            <button
-              type="button"
-              onClick={() => setStep("subjects")}
-              className="flex items-center gap-1.5 rounded-full border border-white/15 bg-white/5 px-4 py-2 text-sm font-bold text-white/70 transition hover:bg-white/10 hover:text-white"
-            >
-              <ArrowLeft className="h-4 w-4" />
-              Retour
-            </button>
-            <span className="text-lg font-black text-white">
-              {activeChip?.icon} {activeChip?.label}
-            </span>
-          </div>
-
-          {/* Sub-chips */}
-          <div className="flex flex-wrap justify-center gap-3">
-            {subItems.map((item) => (
-              <Link
-                key={item.href}
-                href={getHref(item.href)}
-                className="flex items-center gap-3 rounded-2xl border border-white/20 bg-white/10 px-5 py-3 text-base font-semibold text-white backdrop-blur-sm transition-all duration-200 hover:scale-[1.04] hover:border-white/50 hover:bg-white/20"
-              >
-                <span className="text-xl">{item.icon}</span>
-                <div className="text-left">
-                  <p className="text-base font-bold leading-tight">{item.label}</p>
-                  <p className="text-xs text-white/50 leading-tight">{item.desc}</p>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </div>
-      )}
-
-    </div>
-  );
-}
-
-// ─── Nouveautés ──────────────────────────────────────────────────────────────
-
-const NOUVEAUTES = [
-  { icon: "🇬🇧", label: "Coach English Maths", desc: "A1 → B2, vocabulaire & audio", href: "/coach-ia/english-maths", badge: "NEW", color: "from-sky-600 to-blue-700" },
-  { icon: "🌍", label: "Géographie & Voyage", desc: "Pays, continents, relief", href: "/coach-ia/english-maths?rubrique=geographie-voyage", badge: "NEW", color: "from-emerald-600 to-teal-700" },
-  { icon: "🏠", label: "Vie Quotidienne", desc: "Famille, école, couleurs, alimentation", href: "/coach-ia/english-maths?rubrique=vie-quotidienne", badge: "NEW", color: "from-violet-600 to-purple-700" },
-  { icon: "🎧", label: "Parcours English", desc: "Bilan de niveau CECRL avec audio", href: "/parcours-english-maths", badge: "NEW", color: "from-orange-600 to-amber-700" },
-  { icon: "🌿", label: "Environnement B1", desc: "Biodiversité, climat, écosystèmes", href: "/coach-ia/english-maths?niveau=b1", badge: "NEW", color: "from-lime-600 to-green-700" },
-  { icon: "📊", label: "Géopolitique B2", desc: "Mondialisation, diplomatie, stats", href: "/coach-ia/english-maths?niveau=b2", badge: "NEW", color: "from-rose-600 to-red-700" },
-  { icon: "💰", label: "Coach Économie", desc: "Entreprise, marché, élections…",    href: "/coach-ia/economie",               badge: "NEW", color: "from-amber-600 to-yellow-700" },
-];
-
-// ─── Sub-components ───────────────────────────────────────────────────────────
-
-function NetflixRow({
-  title,
-  children,
-}: {
-  title: string;
-  children: React.ReactNode;
-}) {
-  return (
-    <div className="mb-10">
-      <h2 className="mb-3 px-4 text-lg font-black text-white sm:px-6 lg:px-8 lg:text-xl">
-        {title}
-      </h2>
-      <div className="flex gap-3 overflow-x-auto px-4 pb-3 sm:px-6 lg:px-8 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-        {children}
-      </div>
-    </div>
-  );
-}
-
-function ModuleCard({ href, image, label }: { href: string; image: string; label: string }) {
-  return (
-    <Link
-      href={href}
-      className="group relative h-[110px] w-[190px] shrink-0 overflow-hidden rounded-xl border border-white/10 bg-white/5 shadow-lg transition-all duration-300 hover:-translate-y-1 hover:scale-[1.04] hover:border-white/30 hover:shadow-[0_0_24px_rgba(255,255,255,0.15)] focus:outline-none"
-    >
-      <Image
-        src={image}
-        alt={label}
-        fill
-        sizes="190px"
-        className="object-cover transition-transform duration-500 group-hover:scale-[1.08]"
-      />
-      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
-      <span className="absolute bottom-2 left-3 right-3 text-xs font-black text-white drop-shadow-sm">
-        {label}
-      </span>
-      {/* Shimmer */}
-      <div className="pointer-events-none absolute -left-20 top-0 h-full w-12 rotate-12 bg-white/20 blur-md transition-transform duration-700 group-hover:translate-x-[400px]" />
-    </Link>
-  );
-}
 
 // ─── Main component ───────────────────────────────────────────────────────────
 
@@ -246,23 +105,11 @@ export default function AccueilPage() {
   const [chatOpen, setChatOpen] = useState(false);
 
   const codeEtablissement = eleve?.code_etablissement?.trim() ?? "";
-  const codeUtilisateur = eleve?.code_eleve?.trim() ?? "";
+  const codeUtilisateur   = eleve?.code_eleve?.trim()        ?? "";
   const canAskAccueilQuestion = Boolean(codeEtablissement && codeUtilisateur);
   const eleveClasse = eleve?.classe?.toLowerCase() ?? null;
-  const prenom = eleve?.nom ?? null;
+  const prenom      = eleve?.nom ?? null;
   const isCmPrimary = eleveClasse === "cm1" || eleveClasse === "cm2";
-
-  const visibleModules = isCmPrimary
-    ? MODULES.filter(m => !["/concours-general", "/coach-brevet", "/coach-bac-spe"].includes(m.href))
-    : MODULES;
-
-  const visibleChips = isCmPrimary
-    ? CHIPS.filter(c => c.cm).map(c =>
-        c.type === "dropdown"
-          ? { ...c, items: c.items.filter(i => !["/coach-brevet", "/coach-bac-spe", "/concours-general"].includes(i.href)) }
-          : c
-      )
-    : CHIPS;
 
   function getHref(href: string) {
     if (!isCmPrimary) return href;
@@ -270,6 +117,8 @@ export default function AccueilPage() {
     if (href === "/coach-ia/francais") return `/coach-ia/francais?classe=${eleveClasse}`;
     return href;
   }
+
+  const visibleSubjects = isCmPrimary ? SUBJECTS.filter(s => s.cm) : SUBJECTS;
 
   async function toggleAudio() {
     const audio = audioRef.current;
@@ -302,7 +151,6 @@ export default function AccueilPage() {
     }
   }
 
-  // ── Greeting ────────────────────────────────────────────────────────────────
   function getGreeting() {
     const h = new Date().getHours();
     if (h < 12) return "Bonjour";
@@ -311,102 +159,184 @@ export default function AccueilPage() {
   }
 
   return (
-    <main className="min-h-screen bg-[#041B33] text-white">
+    <main className="min-h-screen bg-[#041B33] text-white overflow-x-hidden">
 
-      <h1 className="sr-only">EleveAI – Coach IA maths, français et anglais. Du CP au Bac.</h1>
+      <h1 className="sr-only">EleveAI – Coach IA maths, français, anglais et espagnol. Du CP au Bac.</h1>
 
-      {/* ── HERO — ChatGPT style ──────────────────────────────────────────── */}
-      <section className="relative flex min-h-[52vh] flex-col items-center justify-center px-4 py-16 text-center sm:px-6 lg:px-8">
+      <audio
+        ref={audioRef}
+        src="/audio/accueil/presentation.mp3"
+        preload="none"
+        onEnded={() => setIsPlaying(false)}
+        onPause={() => setIsPlaying(false)}
+        onPlay={() => setIsPlaying(true)}
+      />
 
-        {/* Background — image floue + gradient fort */}
-        <div className="absolute inset-0 z-0 overflow-hidden">
+      {/* ── HERO ────────────────────────────────────────────────────────────── */}
+      <section className="relative min-h-screen flex flex-col">
+
+        {/* Background image — pleine visibilité */}
+        <div className="absolute inset-0 z-0">
           <Image
             src="/images/accueil-eleveai-reunion.webp"
-            alt=""
+            alt="EleveAI – Comprendre, S'entraîner, Réussir"
             fill
             priority
             sizes="100vw"
-            className="object-cover object-center opacity-20 blur-sm"
+            className="object-cover object-top"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#041B33]/60 via-[#041B33]/50 to-[#041B33]" />
+          {/* Gradient sombre sur le bas pour lire les cards */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-black/20 to-[#041B33]" />
+          {/* Gradient latéral léger */}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#041B33]/30 via-transparent to-[#041B33]/30" />
         </div>
 
-        {/* Audio */}
-        <audio
-          ref={audioRef}
-          src="/audio/accueil/presentation.mp3"
-          preload="none"
-          onEnded={() => setIsPlaying(false)}
-          onPause={() => setIsPlaying(false)}
-          onPlay={() => setIsPlaying(true)}
-        />
+        {/* Contenu du hero */}
+        <div className="relative z-10 flex flex-col items-center pt-8 pb-4 px-4 sm:px-6 lg:px-8">
 
-        {/* Content */}
-        <div className="relative z-10 mx-auto max-w-3xl">
-
-          {/* Motivational pill */}
-          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-orange-500/40 bg-orange-500/15 px-4 py-1.5 text-sm font-bold text-orange-300">
-            <span className="h-2 w-2 animate-pulse rounded-full bg-orange-400" />
-            🔥 T&apos;as 5 min ? Lance-toi !
+          {/* Badge niveau */}
+          <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-black/50 border border-white/20 px-5 py-2 text-sm font-black text-white backdrop-blur-sm">
+            🎓 CP à Terminale
           </div>
 
-          {/* Greeting */}
-          <p className="mb-2 text-lg font-semibold text-white/60">
-            {getGreeting()}{prenom ? `, ${prenom}` : ""} 👋
+          {/* Greeting personnalisé */}
+          {prenom && (
+            <p className="text-lg font-semibold text-white/80 mb-1 drop-shadow-lg">
+              {getGreeting()}, {prenom} 👋
+            </p>
+          )}
+
+          {/* Tagline */}
+          <p className="text-center text-base font-semibold text-white/70 drop-shadow mb-1">
+            Comprendre &bull; S&apos;entraîner &bull; Réussir
           </p>
 
-          {/* Progressive chips */}
-          <ProgressiveChips chips={visibleChips} getHref={getHref} />
+          {/* Brevet countdown si 3e/4e */}
+          {(eleveClasse === "3e" || eleveClasse === "4e") && (
+            <Link
+              href="/coach-brevet"
+              className="mt-3 inline-flex items-center gap-2 rounded-full bg-emerald-500 px-5 py-2 text-sm font-black text-white shadow-lg transition hover:bg-emerald-400 hover:scale-105"
+            >
+              🎯 Sprint Brevet · J−{jours} → Commencer
+            </Link>
+          )}
+        </div>
 
+        {/* ── SUBJECT CARDS ───────────────────────────────────────────────── */}
+        <div className="relative z-10 flex-1 flex items-end pb-16 px-4 sm:px-6 lg:px-8">
+          <div className="w-full max-w-5xl mx-auto">
+
+            {/* Question */}
+            <p className="text-center text-xl font-black text-white mb-5 drop-shadow-lg">
+              Que veux-tu travailler aujourd&apos;hui ?
+            </p>
+
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4">
+              {visibleSubjects.map((subject) => (
+                <Link
+                  key={subject.label}
+                  href={subject.soon ? "#" : getHref(subject.href)}
+                  className={[
+                    "group relative flex flex-col items-center justify-center gap-2 rounded-2xl border p-4 sm:p-5 text-center",
+                    "bg-black/40 backdrop-blur-md transition-all duration-300",
+                    "hover:-translate-y-2 hover:scale-105",
+                    `hover:shadow-2xl ${subject.glow}`,
+                    subject.border,
+                    subject.soon ? "opacity-70 cursor-not-allowed" : "",
+                  ].join(" ")}
+                >
+                  {/* Gradient bg on hover */}
+                  <div className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${subject.bg} opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
+
+                  {/* Soon badge */}
+                  {subject.soon && (
+                    <span className="absolute -top-2 -right-2 z-20 rounded-full bg-amber-500 px-2 py-0.5 text-[9px] font-black text-white">
+                      Bientôt
+                    </span>
+                  )}
+
+                  <span className="relative z-10 text-3xl sm:text-4xl drop-shadow-lg">
+                    {subject.icon}
+                  </span>
+                  <div className="relative z-10">
+                    <p className="text-sm sm:text-base font-black text-white leading-tight">
+                      {subject.label}
+                    </p>
+                    <p className="mt-0.5 text-[10px] sm:text-xs text-white/70 leading-tight hidden sm:block">
+                      {subject.desc}
+                    </p>
+                  </div>
+                </Link>
+              ))}
+            </div>
+
+          </div>
         </div>
       </section>
 
-      {/* ── NETFLIX ROWS ─────────────────────────────────────────────────── */}
-      <div className="mx-auto max-w-[1400px] pt-4 pb-16">
+      {/* ── FEATURES BAR ─────────────────────────────────────────────────────── */}
+      <section className="bg-[#071f3a] border-t border-white/10 px-4 py-5 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-5xl">
+          <div className="grid grid-cols-3 sm:grid-cols-5 gap-3">
+            {FEATURES.map((f) => (
+              <Link
+                key={f.label}
+                href={f.href}
+                className="group flex flex-col items-center gap-1.5 rounded-2xl border border-white/10 bg-white/5 px-3 py-4 text-center transition-all hover:bg-white/10 hover:border-white/25 hover:-translate-y-1"
+              >
+                <span className="text-2xl group-hover:scale-110 transition-transform">{f.icon}</span>
+                <p className="text-xs font-black text-white">{f.label}</p>
+                <p className="text-[10px] text-white/50 leading-tight hidden sm:block">{f.desc}</p>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
 
-        {/* Row 1 — Outils */}
-        <NetflixRow title="🔥 Nos coups de cœur pour toi">
-          {visibleModules.map((m) => (
-            <ModuleCard key={m.href} href={getHref(m.href)} image={m.image} label={m.label} />
-          ))}
-        </NetflixRow>
+      {/* ── NOUVEAUTÉS ───────────────────────────────────────────────────────── */}
+      <section className="px-4 py-10 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-5xl">
+          <h2 className="text-lg font-black text-white mb-4">✨ Nouveautés</h2>
+          <div className="flex gap-3 overflow-x-auto pb-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+            {[
+              { icon: "🇪🇸", label: "Coach Espagnol",     desc: "A1 → B2, vocabulaire & audio",          href: "/coach-ia/espagnol",           color: "from-red-600 to-rose-800"     },
+              { icon: "🇬🇧", label: "Coach English",       desc: "A1 → B2, vocabulaire maths en anglais",  href: "/coach-ia/english-maths",       color: "from-sky-600 to-blue-800"     },
+              { icon: "🎧", label: "Parcours English",     desc: "Bilan de niveau CECRL avec audio",        href: "/parcours-english-maths",       color: "from-orange-600 to-amber-700" },
+              { icon: "💰", label: "Coach Économie",       desc: "Entreprise, marché, élections…",          href: "/coach-ia/economie",            color: "from-amber-600 to-yellow-700" },
+              { icon: "🎯", label: "Défis du jour",        desc: "Maths contextualisés 974",                href: "/defis-du-jour",                color: "from-emerald-600 to-teal-700" },
+              { icon: "🌿", label: "Environnement B1",     desc: "Biodiversité, climat, écosystèmes",       href: "/coach-ia/english-maths?niveau=b1", color: "from-lime-600 to-green-700" },
+            ].map((n) => (
+              <Link
+                key={n.href}
+                href={n.href}
+                className="group relative flex h-[110px] w-[190px] shrink-0 flex-col justify-between overflow-hidden rounded-xl border border-white/10 p-4 transition-all hover:-translate-y-1 hover:border-white/30 hover:shadow-lg"
+              >
+                <div className={`absolute inset-0 bg-gradient-to-br ${n.color} opacity-80 transition-opacity group-hover:opacity-100`} />
+                <div className="relative z-10 flex items-start justify-between">
+                  <span className="text-2xl">{n.icon}</span>
+                  <span className="rounded-full bg-white/20 px-2 py-0.5 text-[9px] font-black tracking-wider text-white">NEW</span>
+                </div>
+                <div className="relative z-10">
+                  <p className="text-sm font-black text-white leading-tight">{n.label}</p>
+                  <p className="mt-0.5 text-[11px] leading-tight text-white/70">{n.desc}</p>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
 
-        {/* Row 2 — Nouveautés */}
-        <NetflixRow title="✨ Nos nouveautés">
-          {NOUVEAUTES.map((n) => (
-            <Link
-              key={n.href}
-              href={n.href}
-              className="group relative flex h-[110px] w-[200px] shrink-0 flex-col justify-between overflow-hidden rounded-xl border border-white/10 p-4 transition-all hover:-translate-y-1 hover:border-white/30 hover:shadow-lg focus:outline-none"
-            >
-              <div className={`absolute inset-0 bg-gradient-to-br ${n.color} opacity-80 transition-opacity group-hover:opacity-100`} />
-              <div className="relative z-10 flex items-start justify-between">
-                <span className="text-2xl">{n.icon}</span>
-                <span className="rounded-full bg-white/20 px-2 py-0.5 text-[10px] font-black tracking-wider text-white">
-                  {n.badge}
-                </span>
-              </div>
-              <div className="relative z-10">
-                <p className="text-sm font-black text-white leading-tight">{n.label}</p>
-                <p className="mt-0.5 text-[11px] leading-tight text-white/70">{n.desc}</p>
-              </div>
-            </Link>
-          ))}
-        </NetflixRow>
-
-      </div>
-
-      {/* ── FEATURED — Banner contextuel selon niveau ────────────────────── */}
-      <section className="px-4 py-6 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-6xl">
+      {/* ── FEATURED BANNER ──────────────────────────────────────────────────── */}
+      <section className="px-4 pb-12 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-5xl">
           {eleveClasse === "3e" || eleveClasse === "4e" ? (
-            <Link href="/coach-brevet" className="group relative block h-[240px] overflow-hidden rounded-2xl shadow-2xl sm:h-[300px] lg:h-[340px]">
+            <Link href="/coach-brevet" className="group relative block h-[220px] overflow-hidden rounded-2xl shadow-2xl sm:h-[280px]">
               <Image src="/images/defis-du-jour/piton-fournaise.webp" alt="Sprint Brevet" fill sizes="(max-width: 1200px) 100vw, 1200px" className="object-cover object-center transition-transform duration-700 group-hover:scale-[1.03]" />
               <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/50 to-transparent" />
-              <div className="absolute bottom-0 left-0 p-6 sm:p-8 lg:p-10">
+              <div className="absolute bottom-0 left-0 p-6 sm:p-8">
                 <span className="mb-3 inline-block rounded-full bg-emerald-500 px-3 py-1 text-[11px] font-black uppercase tracking-[0.2em] text-white">🎯 Sprint Brevet · J−{jours}</span>
-                <h3 className="text-2xl font-black leading-tight text-white sm:text-3xl lg:text-4xl">{jours} jours pour décrocher ton brevet</h3>
-                <p className="mt-2 max-w-lg text-sm text-white/75 sm:text-base">Fractions, Pythagore, probabilités, équations, Thalès… notion par notion jusqu&apos;au jour J.</p>
+                <h3 className="text-2xl font-black leading-tight text-white sm:text-3xl">{jours} jours pour décrocher ton brevet</h3>
+                <p className="mt-2 max-w-lg text-sm text-white/75">Fractions, Pythagore, probabilités, équations, Thalès… notion par notion jusqu&apos;au jour J.</p>
                 <div className="mt-4 inline-flex items-center gap-2 rounded-full bg-emerald-500 px-5 py-2.5 text-sm font-black text-white transition-all group-hover:bg-emerald-400 group-hover:gap-3">Commencer le sprint <span className="transition-transform group-hover:translate-x-1">→</span></div>
               </div>
               <div className="absolute right-6 top-6 rounded-xl border border-white/20 bg-black/60 px-4 py-2 text-center backdrop-blur-sm">
@@ -415,13 +345,13 @@ export default function AccueilPage() {
               </div>
             </Link>
           ) : (
-            <Link href="/defis-du-jour" className="group relative block h-[240px] overflow-hidden rounded-2xl shadow-2xl sm:h-[300px] lg:h-[340px]">
+            <Link href="/defis-du-jour" className="group relative block h-[220px] overflow-hidden rounded-2xl shadow-2xl sm:h-[280px]">
               <Image src="/images/defis-du-jour/piton-fournaise.webp" alt="Défi du jour" fill sizes="(max-width: 1200px) 100vw, 1200px" className="object-cover object-center transition-transform duration-700 group-hover:scale-[1.03]" />
               <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/40 to-transparent" />
-              <div className="absolute bottom-0 left-0 p-6 sm:p-8 lg:p-10">
+              <div className="absolute bottom-0 left-0 p-6 sm:p-8">
                 <span className="mb-3 inline-block rounded-full bg-orange-500 px-3 py-1 text-[11px] font-black uppercase tracking-[0.2em] text-white">🎯 Défi du jour</span>
-                <h3 className="text-2xl font-black leading-tight text-white sm:text-3xl lg:text-4xl">Le Piton de la Fournaise en chiffres</h3>
-                <p className="mt-2 max-w-lg text-sm text-white/75 sm:text-base">Altitude, coulées de lave, volume émis… 7 défis maths inspirés du volcan le plus actif de France.</p>
+                <h3 className="text-2xl font-black leading-tight text-white sm:text-3xl">Le Piton de la Fournaise en chiffres</h3>
+                <p className="mt-2 max-w-lg text-sm text-white/75">Altitude, coulées de lave, volume émis… 7 défis maths inspirés du volcan le plus actif de France.</p>
                 <div className="mt-4 inline-flex items-center gap-2 rounded-full bg-orange-500 px-5 py-2.5 text-sm font-black text-white transition-all group-hover:bg-orange-400 group-hover:gap-3">Relever le défi <span className="transition-transform group-hover:translate-x-1">→</span></div>
               </div>
               <div className="absolute right-6 top-6 rounded-xl border border-white/20 bg-black/60 px-4 py-2 text-center backdrop-blur-sm">
@@ -434,12 +364,12 @@ export default function AccueilPage() {
         </div>
       </section>
 
-      {/* ── GOOGLE FOLLOW ────────────────────────────────────────────────── */}
+      {/* ── GOOGLE FOLLOW ────────────────────────────────────────────────────── */}
       <div className="flex justify-center py-8">
         <GoogleFollowChip />
       </div>
 
-      {/* ── COACH FLOTTANT ────────────────────────────────────────────────── */}
+      {/* ── COACH FLOTTANT ───────────────────────────────────────────────────── */}
       <AccueilCoachBox
         open={chatOpen}
         canAsk={canAskAccueilQuestion}
