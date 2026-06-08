@@ -182,7 +182,7 @@ export default function AccueilPage() {
           priority
           sizes="100vw"
           className="h-auto block mx-auto"
-          style={{ width: "53%" }}
+          className="h-auto block mx-auto w-full sm:w-[53%]"
         />
         {/* Fondu bas vers le fond de page */}
         <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-b from-transparent to-[#041B33]" />
