@@ -16,7 +16,7 @@ const NAV_MATHS = [
   { href: "/coach-bac-spe",    icon: "🎓", label: "Coach Bac Spé",      desc: "Suites, fonctions, proba" },
   { href: "/calcul-rapide",    icon: "⚡", label: "Calcul rapide",      desc: "5 min d'automatismes" },
   { href: "/concours-general", icon: "🏆", label: "Concours général",   desc: "Problèmes avancés" },
-  { href: "/defis-du-jour",    icon: "🎯", label: "Défis du jour",      desc: "Maths contextualisés 974" },
+  { href: "/defis-du-jour",    icon: "🎯", label: "Défis du jour",      desc: "Grand Raid 2026" },
   { href: "/podcast-maths",    icon: "🎧", label: "Podcast maths",      desc: "Fractions, pourcentages, probas en audio" },
 ];
 
