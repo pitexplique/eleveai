@@ -249,6 +249,70 @@ const AUDIO_ENTRIES = [
   { file: "greetings/me_llamo.mp3",       text: "me llamo"         },
   { file: "greetings/cuantos_anos.mp3",   text: "¿Cuántos años tienes?" },
 
+  // ════════════════════════════════════════════════════════════════════════
+  // A2 — Vie quotidienne, voyage, métiers, météo
+  // ════════════════════════════════════════════════════════════════════════
+
+  // ── VIE QUOTIDIENNE ──────────────────────────────────────────────────────
+  { file: "daily_life/ciudad.mp3", text: "ciudad" },
+  { file: "daily_life/calle.mp3",  text: "calle"  },
+
+  // ── SHOPPING ─────────────────────────────────────────────────────────────
+  { file: "shopping/tienda.mp3",  text: "tienda"  },
+  { file: "shopping/mercado.mp3", text: "mercado" },
+  { file: "shopping/banco.mp3",   text: "banco"   },
+
+  // ── SANTÉ ────────────────────────────────────────────────────────────────
+  { file: "health/hospital.mp3",  text: "hospital"  },
+  { file: "health/farmacia.mp3",  text: "farmacia"  },
+
+  // ── VOYAGE ───────────────────────────────────────────────────────────────
+  { file: "travel/autobus.mp3", text: "autobús" },
+  { file: "travel/tren.mp3",    text: "tren"    },
+  { file: "travel/avion.mp3",   text: "avión"   },
+
+  // ── MÉTIERS ──────────────────────────────────────────────────────────────
+  { file: "jobs/medico.mp3",     text: "médico"    },
+  { file: "jobs/enfermero.mp3",  text: "enfermero" },
+  { file: "jobs/maestro.mp3",    text: "maestro"   },
+  { file: "jobs/policia.mp3",    text: "policía"   },
+  { file: "jobs/bombero.mp3",    text: "bombero"   },
+
+  // ── MÉTÉO ─────────────────────────────────────────────────────────────────
+  { file: "weather/tiempo.mp3", text: "tiempo" },
+  { file: "weather/lluvia.mp3", text: "lluvia" },
+  { file: "weather/sol.mp3",    text: "sol"    },
+  { file: "weather/viento.mp3", text: "viento" },
+  { file: "weather/nieve.mp3",  text: "nieve"  },
+
+  // ════════════════════════════════════════════════════════════════════════
+  // B1 — Environnement, opinions, médias, économie, science
+  // ════════════════════════════════════════════════════════════════════════
+
+  // ── ENVIRONNEMENT ────────────────────────────────────────────────────────
+  { file: "environment/medio_ambiente.mp3",   text: "medio ambiente"   },
+  { file: "environment/contaminacion.mp3",    text: "contaminación"    },
+  { file: "environment/reciclaje.mp3",        text: "reciclaje"        },
+  { file: "environment/cambio_climatico.mp3", text: "cambio climático" },
+  { file: "environment/energia_solar.mp3",    text: "energía solar"    },
+
+  // ── OPINIONS ─────────────────────────────────────────────────────────────
+  { file: "opinions/opinion.mp3",          text: "opinión"          },
+  { file: "opinions/creo_que.mp3",         text: "creo que"         },
+  { file: "opinions/estoy_de_acuerdo.mp3", text: "estoy de acuerdo" },
+
+  // ── MÉDIAS ───────────────────────────────────────────────────────────────
+  { file: "media/periodico.mp3",   text: "periódico"  },
+  { file: "media/television.mp3",  text: "televisión" },
+
+  // ── ÉCONOMIE ─────────────────────────────────────────────────────────────
+  { file: "economy/economia.mp3", text: "economía"  },
+  { file: "economy/empresa.mp3",  text: "empresa"   },
+
+  // ── SCIENCE ──────────────────────────────────────────────────────────────
+  { file: "science/laboratorio.mp3",  text: "laboratorio" },
+  { file: "science/experimento.mp3",  text: "experimento" },
+
 ];
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────

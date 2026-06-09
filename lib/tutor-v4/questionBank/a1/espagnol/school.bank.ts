@@ -55,7 +55,7 @@ export const schoolA1EsBank: TutorBankItemV4[] = WORDS.flatMap((word) => [
     niveau: "a1" as const,
     matiere: "espagnol" as const,
     notionId: "es_a1_school",
-    microId: "es_a1_school_es_to_fr",
+    microId: "es_a1_school_listen",
     difficulty: 2 as const,
     text: `🔊 Écoute et choisis la traduction française.`,
     format: "qcm" as const,
