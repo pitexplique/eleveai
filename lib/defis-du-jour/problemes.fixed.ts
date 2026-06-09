@@ -1,325 +1,325 @@
 /* lib/defis-jour/problemes.fixed.ts */
 import type { ProblemeDuJour } from "./types";
- 
+
 export const problemesFixed: ProblemeDuJour[] = [
   {
-    id: "piton_fournaise_altitude_001",
-    title: "Piton de la Fournaise : le toit de La Réunion volcanique",
-    theme: "Mesures & altitude",
-    image: "/images/defis-du-jour/piton-fournaise.webp",
+    id: "grand_raid_distance_001",
+    title: "Grand Raid : les kilomètres de l'île",
+    theme: "Distance & addition",
+    image: "/images/defis-du-jour/grand-raid.webp",
     level: 1,
     statement:
-      "Le Piton de la Fournaise culmine à 2 632 mètres d'altitude. Le cratère Dolomieu, situé au sommet, a une profondeur d'environ 120 mètres. Un randonneur part du Pas de Bellecombe à 2 311 mètres d'altitude pour rejoindre le sommet.",
+      "Le Grand Raid de La Réunion, surnommé « la Diagonale des Fous », traverse l'île du sud au nord sur 165 km. La course se découpe en grandes sections : 42 km jusqu'à Cilaos, puis 58 km jusqu'à Salazie, puis 65 km jusqu'à Saint-Denis.",
     question:
-      "Quelle différence d'altitude le randonneur doit-il gravir pour atteindre le sommet ? Donne ta réponse en mètres.",
-    expectedAnswer: "321",
+      "Vérifie que 42 + 58 + 65 = 165. Puis calcule : si un coureur a déjà parcouru 42 km et 58 km, combien de kilomètres lui reste-t-il avant l'arrivée ?",
+    expectedAnswer: "65",
     explanation:
-      "On calcule la différence d'altitude : 2 632 − 2 311 = 321 mètres. Le randonneur doit monter 321 mètres de dénivelé positif pour atteindre le sommet du Piton de la Fournaise.",
+      "42 + 58 = 100 km parcourus. Il reste 165 − 100 = 65 km jusqu'à Saint-Denis. C'est la dernière grande section du Grand Raid, et souvent la plus difficile pour les jambes fatiguées !",
     directions: [
+      {
+        id: "addition",
+        label: "Additionner les sections",
+        type: "guided",
+        content:
+          "Commence par additionner les deux premières sections : 42 + 58 = ?\nEnsuite soustrait ce total à 165.",
+      },
       {
         id: "soustraction",
-        label: "Utiliser la soustraction",
+        label: "Calculer ce qu'il reste",
         type: "guided",
         content:
-          "La différence d'altitude se calcule en soustrayant l'altitude de départ de l'altitude d'arrivée.\nAltitude sommet : 2 632 m. Altitude départ : 2 311 m.",
-      },
-      {
-        id: "calcul",
-        label: "Faire le calcul",
-        type: "guided",
-        content:
-          "Calcule : 2 632 − 2 311.\nLa réponse doit être donnée en mètres.",
+          "Distance totale : 165 km. Distance déjà parcourue : 42 + 58 km.\nIl reste : 165 − (42 + 58).",
       },
       {
         id: "indice",
         label: "Demander un indice",
         type: "hint",
         content:
-          "Commence par soustraire les unités : 2 − 1 = 1. Puis les dizaines : 3 − 1 = 2. Puis les centaines et milliers.",
+          "42 + 58 = 100 (astuce : 40 + 60 = 100, puis +2 et −2). Donc il reste 165 − 100 = ?",
       },
       {
         id: "open",
         label: "Expliquer avec mes mots",
         type: "open",
         content:
-          "Explique pourquoi on fait une soustraction pour trouver le dénivelé. Tu peux commencer par : « Pour savoir combien de mètres on monte, on doit... »",
+          "Explique comment tu calcules une distance restante à parcourir. Tu peux prendre l'exemple d'un trajet que tu connais.",
       },
     ],
   },
- 
+
   {
-    id: "piton_fournaise_lave_debit_001",
-    title: "Piton de la Fournaise : la coulée de lave",
-    theme: "Débit & proportionnalité",
-    image: "/images/defis-du-jour/piton-fournaise.webp",
+    id: "grand_raid_vitesse_001",
+    title: "Grand Raid : la vitesse du champion",
+    theme: "Vitesse & division",
+    image: "/images/defis-du-jour/grand-raid.webp",
     level: 2,
     statement:
-      "Lors d'une éruption du Piton de la Fournaise, une coulée de lave peut avancer à environ 30 mètres par heure sur terrain plat. Une coulée part du cratère et se dirige vers la mer, distante de 6 kilomètres.",
+      "En 2017, le Français François D'Haene a remporté le Grand Raid en établissant un record : il a parcouru les 165 km en 23 heures et 27 minutes. Pour simplifier, on arrondira son temps à 23 heures.",
     question:
-      "En supposant que la coulée avance à vitesse constante, combien d'heures lui faudrait-il pour atteindre la mer ? Donne ta réponse en heures.",
-    expectedAnswer: "200",
+      "Calcule la vitesse moyenne de François D'Haene en km/h. Arrondi au dixième près.",
+    expectedAnswer: "7.2",
     explanation:
-      "On commence par convertir la distance : 6 km = 6 000 m. Ensuite on divise par la vitesse : 6 000 ÷ 30 = 200. Il faudrait environ 200 heures à la coulée pour atteindre la mer à cette vitesse.",
+      "Vitesse = Distance ÷ Temps = 165 ÷ 23 ≈ 7,17 km/h, soit environ 7,2 km/h. C'est la vitesse d'un bon joggeur… mais maintenue pendant 23 heures, en montagne, avec près de 10 000 m de dénivelé !",
     directions: [
-      {
-        id: "conversion",
-        label: "Convertir les kilomètres",
-        type: "guided",
-        content:
-          "Commence par convertir 6 km en mètres.\nRappel : 1 km = 1 000 m.",
-      },
-      {
-        id: "division",
-        label: "Calculer le temps",
-        type: "guided",
-        content:
-          "Temps = Distance ÷ Vitesse.\nDistance = 6 000 m. Vitesse = 30 m/h.",
-      },
-      {
-        id: "indice",
-        label: "Demander un indice",
-        type: "hint",
-        content:
-          "6 000 ÷ 30 = 6 000 ÷ 3 ÷ 10. Commence par 6 000 ÷ 3.",
-      },
-      {
-        id: "open",
-        label: "Expliquer avec mes mots",
-        type: "open",
-        content:
-          "Explique pourquoi on divise la distance par la vitesse pour trouver un temps.",
-      },
-    ],
-  },
- 
-  {
-    id: "piton_fournaise_volume_lave_001",
-    title: "Piton de la Fournaise : volume de lave émis",
-    theme: "Volume & estimation",
-    image: "/images/defis-du-jour/piton-fournaise.webp",
-    level: 3,
-    statement:
-      "Lors de l'éruption de 2007, l'une des plus importantes de l'histoire récente du Piton de la Fournaise, environ 210 millions de mètres cubes de lave ont été émis en 25 jours.",
-    question:
-      "Quel volume moyen de lave était émis chaque jour ? Donne ta réponse en millions de m³ par jour. Arrondi à l'unité près.",
-    expectedAnswer: "8",
-    explanation:
-      "On divise le volume total par le nombre de jours : 210 ÷ 25 = 8,4. Arrondi à l'unité près, cela fait environ 8 millions de m³ par jour. C'est un débit colossal qui explique la rapidité avec laquelle la coulée a atteint la mer en quelques jours seulement.",
-    directions: [
-      {
-        id: "division",
-        label: "Diviser le volume total",
-        type: "guided",
-        content:
-          "Pour trouver le volume moyen par jour, on divise le volume total par le nombre de jours.\n210 millions ÷ 25 = ?",
-      },
-      {
-        id: "calcul_etape",
-        label: "Calculer étape par étape",
-        type: "guided",
-        content:
-          "Essaie : 210 ÷ 25.\nAstuce : 25 × 8 = 200 et 25 × 9 = 225. Lequel est le plus proche de 210 ?",
-      },
-      {
-        id: "indice",
-        label: "Demander un indice",
-        type: "hint",
-        content:
-          "210 ÷ 25 est entre 8 et 9. Calcule 25 × 8 = 200 et 25 × 8,4 = 210.",
-      },
-      {
-        id: "open",
-        label: "Expliquer avec mes mots",
-        type: "open",
-        content:
-          "Explique comment on trouve une moyenne à partir d'un total et d'un nombre de jours.",
-      },
-    ],
-  },
- 
-  {
-    id: "piton_fournaise_epaisseur_001",
-    title: "Piton de la Fournaise : la lave recouvre la côte",
-    theme: "Calcul d'épaisseur & grandeurs",
-    image: "/images/defis-du-jour/piton-fournaise.webp",
-    level: 3,
-    statement:
-      "En 2007, la lave a recouvert une surface d'environ 3 km² de côte avant de se jeter dans l'océan Indien. Si le volume émis était de 210 millions de m³ et que la lave s'est répartie uniformément sur cette surface, on peut estimer son épaisseur moyenne.\n\nRappel : Volume = Surface × Épaisseur. On doit d'abord convertir 3 km² en m².",
-    question:
-      "Quelle serait l'épaisseur moyenne de la couche de lave sur cette zone ? Donne ta réponse en mètres. Arrondi à l'unité près.",
-    expectedAnswer: "70",
-    explanation:
-      "On convertit d'abord : 3 km² = 3 × 1 000 000 = 3 000 000 m². Ensuite on utilise la formule : Épaisseur = Volume ÷ Surface = 210 000 000 ÷ 3 000 000 = 70. La couche de lave aurait une épaisseur moyenne d'environ 70 mètres, ce qui est considérable !",
-    directions: [
-      {
-        id: "conversion_surface",
-        label: "Convertir km² en m²",
-        type: "guided",
-        content:
-          "Commence par convertir 3 km² en m².\nRappel : 1 km = 1 000 m, donc 1 km² = 1 000 × 1 000 = 1 000 000 m².",
-      },
       {
         id: "formule",
-        label: "Utiliser la formule",
+        label: "Utiliser la formule Vitesse",
         type: "guided",
         content:
-          "Formule : Épaisseur = Volume ÷ Surface.\nVolume = 210 000 000 m³. Surface = 3 000 000 m².",
-      },
-      {
-        id: "indice",
-        label: "Demander un indice",
-        type: "hint",
-        content:
-          "210 000 000 ÷ 3 000 000 = 210 ÷ 3 = 70.",
-      },
-      {
-        id: "open",
-        label: "Expliquer avec mes mots",
-        type: "open",
-        content:
-          "Explique pourquoi on divise le volume par la surface pour trouver une épaisseur.",
-      },
-    ],
-  },
- 
-  {
-    id: "piton_fournaise_eruptions_001",
-    title: "Piton de la Fournaise : un volcan très actif",
-    theme: "Statistiques & fréquence",
-    image: "/images/defis-du-jour/piton-fournaise.webp",
-    level: 4,
-    statement:
-      "Le Piton de la Fournaise est l'un des volcans les plus actifs au monde. Entre 1998 et 2023, il a connu environ 75 éruptions en 25 ans.",
-    question:
-      "Calcule la fréquence moyenne d'éruptions par année entre 1998 et 2023. Donne ta réponse sous forme décimale arrondie au dixième.",
-    expectedAnswer: "3",
-    explanation:
-      "On divise le nombre total d'éruptions par le nombre d'années : 75 ÷ 25 = 3. Le Piton de la Fournaise a eu en moyenne 3 éruptions par année sur cette période. C'est pour cela qu'il est surnommé « le volcan qui crache du feu ».",
-    directions: [
-      {
-        id: "frequence",
-        label: "Comprendre la fréquence",
-        type: "guided",
-        content:
-          "La fréquence par année = nombre total d'éruptions ÷ nombre d'années.\n75 éruptions ÷ 25 ans = ?",
+          "Vitesse = Distance ÷ Temps.\nDistance = 165 km. Temps = 23 h.\n165 ÷ 23 = ?",
       },
       {
         id: "calcul",
-        label: "Faire le calcul",
+        label: "Faire la division",
         type: "guided",
         content:
-          "Calcule : 75 ÷ 25.\nTu peux simplifier en divisant numérateur et dénominateur par 25.",
+          "23 × 7 = 161. 23 × 7,2 = 165,6. Donc 165 ÷ 23 est très proche de 7,2.",
       },
       {
         id: "indice",
         label: "Demander un indice",
         type: "hint",
         content:
-          "25 × 3 = 75. Quelle est donc la valeur de 75 ÷ 25 ?",
+          "Cherche combien de fois 23 entre dans 165. Essaie 23 × 7 = 161, puis 23 × 7,2 = 165,6.",
       },
       {
         id: "open",
         label: "Expliquer avec mes mots",
         type: "open",
         content:
-          "Explique ce que représente une fréquence d'éruptions. Tu peux commencer par : « Cela signifie qu'en moyenne... »",
+          "Explique pourquoi on divise la distance par le temps pour obtenir une vitesse. Donne un exemple de la vie quotidienne.",
       },
     ],
   },
- 
+
   {
-    id: "piton_fournaise_co2_001",
-    title: "Piton de la Fournaise : les gaz volcaniques",
-    theme: "Proportionnalité & pourcentages",
-    image: "/images/defis-du-jour/piton-fournaise.webp",
-    level: 4,
+    id: "grand_raid_denivele_001",
+    title: "Grand Raid : grimper les cirques",
+    theme: "Dénivelé & proportionnalité",
+    image: "/images/defis-du-jour/grand-raid.webp",
+    level: 3,
     statement:
-      "Lors d'une éruption, les gaz émis par le Piton de la Fournaise contiennent environ 70 % de vapeur d'eau, 15 % de dioxyde de carbone (CO₂) et 15 % d'autres gaz. En une journée d'éruption intense, la quantité totale de gaz émis est estimée à 200 000 tonnes.",
+      "Le Grand Raid cumule 9 600 mètres de dénivelé positif (montée totale) sur 165 km. Les coureurs traversent les trois cirques de La Réunion : Cilaos, Mafate et Salazie. Un coureur a déjà parcouru 55 km.",
     question:
-      "Quelle quantité de CO₂ est émise ce jour-là ? Donne ta réponse en tonnes.",
-    expectedAnswer: "30000",
+      "En supposant que le dénivelé est régulièrement réparti sur tout le parcours, quel dénivelé positif ce coureur a-t-il déjà gravi ? Arrondi à la centaine près.",
+    expectedAnswer: "3200",
     explanation:
-      "On cherche 15 % de 200 000 tonnes. On calcule : 200 000 × 15 ÷ 100 = 200 000 × 0,15 = 30 000 tonnes de CO₂ sont émises ce jour-là.",
+      "Dénivelé moyen par km = 9 600 ÷ 165 ≈ 58,2 m/km. Sur 55 km : 58,2 × 55 = 3 200 m (arrondi à la centaine). C'est l'équivalent de gravir la Tour Eiffel plus de 9 fois !",
     directions: [
       {
-        id: "pourcentage",
-        label: "Calculer un pourcentage",
+        id: "proportion",
+        label: "Raisonner par proportion",
         type: "guided",
         content:
-          "Pour trouver 15 % de 200 000 : multiplie 200 000 par 15 puis divise par 100.",
+          "Si 165 km correspondent à 9 600 m de dénivelé, alors 55 km correspondent à :\n55 × 9 600 ÷ 165 = ?",
       },
       {
-        id: "calcul",
-        label: "Faire le calcul",
+        id: "denivele_km",
+        label: "Calculer le dénivelé par km",
         type: "guided",
         content:
-          "200 000 × 15 = 3 000 000. Puis 3 000 000 ÷ 100 = 30 000 tonnes.",
+          "Dénivelé par km = 9 600 ÷ 165 ≈ 58 m/km.\nPour 55 km : 58 × 55 = ?",
       },
       {
         id: "indice",
         label: "Demander un indice",
         type: "hint",
         content:
-          "10 % de 200 000 = 20 000. Et 5 % = 10 000. Donc 15 % = 20 000 + 10 000.",
+          "55 ÷ 165 = 1/3 environ. Donc le dénivelé est environ 9 600 ÷ 3 = 3 200 m.",
       },
       {
         id: "open",
         label: "Expliquer avec mes mots",
         type: "open",
         content:
-          "Explique pourquoi calculer un pourcentage revient à multiplier par un nombre décimal. Tu peux donner un exemple simple.",
+          "Explique ce qu'est le dénivelé positif. Pourquoi est-ce plus difficile de courir avec beaucoup de dénivelé qu'en terrain plat ?",
       },
     ],
   },
- 
+
   {
-    id: "piton_fournaise_synthese_001",
-    title: "Piton de la Fournaise : raconter les chiffres du volcan",
+    id: "grand_raid_ravitaillement_001",
+    title: "Grand Raid : les postes de ravitaillement",
+    theme: "Fractions & partage",
+    image: "/images/defis-du-jour/grand-raid.webp",
+    level: 3,
+    statement:
+      "Le Grand Raid compte 16 postes de ravitaillement répartis sur les 165 km. À chaque poste, les bénévoles préparent 2,5 litres d'eau pour chaque coureur prévu. Cette année, 2 400 coureurs sont inscrits.",
+    question:
+      "Combien de litres d'eau au total les bénévoles doivent-ils préparer pour l'ensemble des 16 postes ? Donne ta réponse en litres.",
+    expectedAnswer: "96000",
+    explanation:
+      "Pour un poste : 2,5 × 2 400 = 6 000 litres. Pour 16 postes : 6 000 × 16 = 96 000 litres. C'est l'équivalent de 96 000 bouteilles d'un litre — la logistique du Grand Raid mobilise des centaines de bénévoles !",
+    directions: [
+      {
+        id: "par_poste",
+        label: "Calculer par poste",
+        type: "guided",
+        content:
+          "Commence par calculer le total d'eau pour UN poste : 2,5 L × 2 400 coureurs = ?\nEnsuite multiplie par 16 postes.",
+      },
+      {
+        id: "multiplication",
+        label: "Faire les multiplications",
+        type: "guided",
+        content:
+          "Étape 1 : 2,5 × 2 400 = 6 000 L par poste.\nÉtape 2 : 6 000 × 16 = ?",
+      },
+      {
+        id: "indice",
+        label: "Demander un indice",
+        type: "hint",
+        content:
+          "6 000 × 16 = 6 000 × 10 + 6 000 × 6 = 60 000 + 36 000 = 96 000.",
+      },
+      {
+        id: "open",
+        label: "Expliquer avec mes mots",
+        type: "open",
+        content:
+          "Explique pourquoi il faut multiplier deux fois dans ce problème. Qu'est-ce qu'on calcule à chaque étape ?",
+      },
+    ],
+  },
+
+  {
+    id: "grand_raid_abandon_001",
+    title: "Grand Raid : ceux qui abandonnent",
+    theme: "Pourcentages & statistiques",
+    image: "/images/defis-du-jour/grand-raid.webp",
+    level: 4,
+    statement:
+      "Le Grand Raid est une course extrême. En moyenne, environ 40 % des coureurs n'atteignent pas la ligne d'arrivée (abandon, blessure, dépassement du temps limite). Cette année, 2 400 coureurs s'élancent au départ.",
+    question:
+      "Combien de coureurs terminent la course cette année ? Combien abandonnent ?",
+    expectedAnswer: "1440",
+    explanation:
+      "40 % abandonnent : 2 400 × 40 ÷ 100 = 960 coureurs abandonnent. Il reste 2 400 − 960 = 1 440 finishers. On peut aussi calculer directement : 60 % terminent → 2 400 × 0,6 = 1 440.",
+    directions: [
+      {
+        id: "pourcentage_abandon",
+        label: "Calculer les abandons",
+        type: "guided",
+        content:
+          "40 % de 2 400 = 2 400 × 40 ÷ 100.\nEnsuite : finishers = 2 400 − abandons.",
+      },
+      {
+        id: "pourcentage_finishers",
+        label: "Calculer les finishers directement",
+        type: "guided",
+        content:
+          "Si 40 % abandonnent, alors 60 % terminent.\n60 % de 2 400 = 2 400 × 0,6 = ?",
+      },
+      {
+        id: "indice",
+        label: "Demander un indice",
+        type: "hint",
+        content:
+          "10 % de 2 400 = 240. Donc 40 % = 4 × 240 = 960 abandons. Finishers = 2 400 − 960.",
+      },
+      {
+        id: "open",
+        label: "Expliquer avec mes mots",
+        type: "open",
+        content:
+          "Explique la différence entre calculer 40 % et calculer 60 % d'un total. Lequel est plus rapide ici, et pourquoi ?",
+      },
+    ],
+  },
+
+  {
+    id: "grand_raid_classement_001",
+    title: "Grand Raid : les temps au classement",
+    theme: "Durées & comparaison",
+    image: "/images/defis-du-jour/grand-raid.webp",
+    level: 4,
+    statement:
+      "Les trois premiers coureurs à l'arrivée ont réalisé les temps suivants :\n• 1er : 23 h 27 min\n• 2e : 24 h 05 min\n• 3e : 24 h 38 min\nLe temps limite pour valider la course est de 67 heures.",
+    question:
+      "Quel écart en minutes sépare le 1er du 3e ? Combien d'heures restaient-il au vainqueur par rapport au temps limite ?",
+    expectedAnswer: "71",
+    explanation:
+      "Écart entre 1er et 3e : (24 h 38 min) − (23 h 27 min) = 1 h 11 min = 71 minutes.\nTemps restant pour le vainqueur : 67 h − 23 h 27 min = 43 h 33 min. Le vainqueur a terminé avec encore 43 heures et 33 minutes d'avance sur la limite !",
+    directions: [
+      {
+        id: "soustraction_durees",
+        label: "Soustraire des durées",
+        type: "guided",
+        content:
+          "Convertis les temps en minutes :\n• 23 h 27 min = 23 × 60 + 27 = 1 407 min\n• 24 h 38 min = 24 × 60 + 38 = 1 478 min\nÉcart = 1 478 − 1 407 = ?",
+      },
+      {
+        id: "calcul_ecart",
+        label: "Calculer l'écart directement",
+        type: "guided",
+        content:
+          "De 23 h 27 min à 24 h 38 min : il y a 1 heure (de 23h27 à 24h27) puis 11 minutes (de 24h27 à 24h38).\nTotal : 1 h 11 min = 71 min.",
+      },
+      {
+        id: "indice",
+        label: "Demander un indice",
+        type: "hint",
+        content:
+          "De 23 h 27 à 24 h 27 = 60 min. De 24 h 27 à 24 h 38 = 11 min. Total = 60 + 11 = 71 min.",
+      },
+      {
+        id: "open",
+        label: "Expliquer avec mes mots",
+        type: "open",
+        content:
+          "Explique comment calculer un écart de temps quand on a des heures et des minutes. Quelle difficulté peut apparaître avec les minutes ?",
+      },
+    ],
+  },
+
+  {
+    id: "grand_raid_synthese_001",
+    title: "Grand Raid : raconter la Diagonale des Fous",
     theme: "Synthèse & argumentation",
-    image: "/images/defis-du-jour/piton-fournaise.webp",
+    image: "/images/defis-du-jour/grand-raid.webp",
     level: 5,
     statement:
-      "Cette semaine, tu as travaillé avec des données réelles sur le Piton de la Fournaise : son altitude de 2 632 m, des coulées de lave à 30 m/h, 210 millions de m³ de lave en 2007, une épaisseur de 70 m de lave sur la côte, 3 éruptions par an en moyenne et 30 000 tonnes de CO₂ par jour lors d'une éruption.",
+      "Cette semaine, tu as travaillé avec de vraies données du Grand Raid de La Réunion : 165 km de course, 9 600 m de dénivelé, une vitesse record de 7,2 km/h sur 23 heures, 96 000 litres d'eau préparés, 1 440 finishers sur 2 400 partants, et un écart de 71 minutes entre le 1er et le 3e.",
     question:
-      "Écris une courte présentation du Piton de la Fournaise en utilisant au moins 3 de ces données chiffrées. Montre pourquoi c'est un volcan exceptionnel.",
+      "Rédige une courte présentation du Grand Raid en utilisant au moins 4 de ces données chiffrées. Explique pourquoi cette course mérite le surnom « Diagonale des Fous ».",
     expectedAnswer: "explication",
     explanation:
-      "Une bonne réponse utilise au moins 3 données de la semaine et explique leur signification. Par exemple : le Piton de la Fournaise culmine à 2 632 m et connaît en moyenne 3 éruptions par an. En 2007, il a émis 210 millions de m³ de lave en seulement 25 jours, formant une couche de 70 mètres sur la côte. Ces chiffres montrent à la fois la puissance du volcan et son activité exceptionnelle.",
+      "Une bonne réponse mobilise au moins 4 données et les explique. Exemple : Le Grand Raid traverse La Réunion sur 165 km avec 9 600 m de dénivelé. Le record est de 23 heures à 7,2 km/h en moyenne — un rythme de joggeur maintenu une journée entière en montagne. Seulement 60 % des 2 400 partants terminent. Voilà pourquoi on l'appelle la « Diagonale des Fous » !",
     directions: [
       {
         id: "mots_cles",
         label: "Utiliser les mots clés",
         type: "guided",
         content:
-          "Essaie d'utiliser les mots : altitude, éruption, lave, coulée, gaz, La Réunion, exceptionnel.",
+          "Essaie d'utiliser les mots : distance, dénivelé, vitesse, cirque, abandon, finisher, bénévoles, La Réunion.",
       },
       {
-        id: "nombres_cles",
-        label: "Choisir les nombres importants",
+        id: "chiffres_cles",
+        label: "Choisir les chiffres importants",
         type: "guided",
         content:
-          "Choisis au moins 3 nombres parmi : 2 632 m, 30 m/h, 210 millions de m³, 70 m, 3 éruptions/an, 30 000 tonnes.",
+          "Choisis au moins 4 chiffres parmi : 165 km, 9 600 m, 7,2 km/h, 23 h, 96 000 L, 1 440 finishers, 71 min.",
       },
       {
         id: "structure",
         label: "Structurer ma réponse",
         type: "guided",
         content:
-          "Écris en 3 phrases :\n1. Présente le volcan (altitude, localisation).\n2. Décris une éruption avec des chiffres.\n3. Explique pourquoi c'est exceptionnel.",
+          "Écris en 3 phrases :\n1. Présente la course (distance, dénivelé, île).\n2. Décris le record ou les conditions avec des chiffres.\n3. Explique pourquoi c'est « fou » avec les chiffres d'abandon ou de logistique.",
       },
       {
         id: "indice",
         label: "Demander un indice",
         type: "hint",
         content:
-          "Compare les données du Piton de la Fournaise avec des éléments de la vie quotidienne pour que le lecteur comprenne l'ampleur du phénomène.",
+          "Compare une donnée du Grand Raid avec quelque chose de concret : 9 600 m de dénivelé, c'est presque l'Everest (8 849 m). Ça aide le lecteur à comprendre l'ampleur.",
       },
       {
         id: "open",
         label: "Expliquer avec mes mots",
         type: "open",
         content:
-          "Rédige comme si tu expliquais à un élève de 6e qui n'a jamais entendu parler du Piton de la Fournaise.",
+          "Rédige comme si tu expliquais à un camarade qui n'a jamais entendu parler du Grand Raid. Quels chiffres le surprendraient le plus ?",
       },
     ],
   },

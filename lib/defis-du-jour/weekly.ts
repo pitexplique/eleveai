@@ -1,44 +1,44 @@
 // lib/defis-du-jour/weekly.ts
 
 export const problemeDuJourWeekly = {
-  id: "piton-fournaise-semaine-1",
+  id: "grand-raid-reunion-semaine-1",
 
-  title: "Défis du jour — Piton de la Fournaise à La Réunion",
+  title: "Défis du jour — Le Grand Raid de La Réunion",
 
   days: [
     {
       day: 1,
-      problemId: "piton_fournaise_altitude_001",
+      problemId: "grand_raid_distance_001",
     },
 
     {
       day: 2,
-      problemId: "piton_fournaise_lave_debit_001",
+      problemId: "grand_raid_vitesse_001",
     },
 
     {
       day: 3,
-      problemId: "piton_fournaise_volume_lave_001",
+      problemId: "grand_raid_denivele_001",
     },
 
     {
       day: 4,
-      problemId: "piton_fournaise_epaisseur_001",
+      problemId: "grand_raid_ravitaillement_001",
     },
 
     {
       day: 5,
-      problemId: "piton_fournaise_eruptions_001",
+      problemId: "grand_raid_abandon_001",
     },
 
     {
       day: 6,
-      problemId: "piton_fournaise_co2_001",
+      problemId: "grand_raid_classement_001",
     },
 
     {
       day: 7,
-      problemId: "piton_fournaise_synthese_001",
+      problemId: "grand_raid_synthese_001",
     },
   ],
 };
