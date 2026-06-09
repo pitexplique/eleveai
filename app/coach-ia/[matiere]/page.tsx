@@ -160,10 +160,14 @@ export default function CoachIA() {
 
   const domaines = useMemo(() => getDomaineMap(classe, matiere), [classe, matiere]);
 
+  const [search, setSearch] = useState("");
+
   const totalNotions = notionOptions.length;
   const totalMicros = notionOptions.reduce((sum, notionId) => {
     return sum + (notionMicroMap[notionId]?.length ?? 0);
   }, 0);
+
+  const searchLower = search.trim().toLowerCase();
 
   function handleClick(notionId: string, microId: string) {
     router.push(
@@ -240,13 +244,44 @@ export default function CoachIA() {
                 ) : null}
               </div>
             </div>
+
+            {/* Barre de recherche */}
+            <div className="mt-4 relative">
+              <span className="absolute inset-y-0 left-3 flex items-center text-slate-400 pointer-events-none">🔍</span>
+              <input
+                type="search"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                placeholder="Rechercher une notion ou micro-compétence…"
+                className="w-full rounded-xl border border-slate-200 bg-white py-2.5 pl-9 pr-4 text-sm text-slate-800 placeholder-slate-400 shadow-sm outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/30 sm:max-w-md"
+              />
+            </div>
           </header>
 
           <div className="columns-1 gap-8 lg:columns-2 2xl:columns-3">
             {domaines.map((domaine) => {
               const notionsAvecMicros = domaine.notions
                 .map((notionId) => ({ notionId, micros: notionMicroMap[notionId] ?? [] }))
-                .filter((item) => item.micros.length > 0);
+                .filter((item) => {
+                  if (!searchLower) return item.micros.length > 0;
+                  const notionMatch = notionLabel(item.notionId, classe, matiere).toLowerCase().includes(searchLower);
+                  const filteredMicros = item.micros.filter((microId) =>
+                    (microLabels[microId] || microId).toLowerCase().includes(searchLower)
+                  );
+                  return notionMatch ? item.micros.length > 0 : filteredMicros.length > 0;
+                })
+                .map((item) => {
+                  if (!searchLower) return item;
+                  const notionMatch = notionLabel(item.notionId, classe, matiere).toLowerCase().includes(searchLower);
+                  return {
+                    ...item,
+                    micros: notionMatch
+                      ? item.micros
+                      : item.micros.filter((microId) =>
+                          (microLabels[microId] || microId).toLowerCase().includes(searchLower)
+                        ),
+                  };
+                });
 
               if (notionsAvecMicros.length === 0) return null;
 
