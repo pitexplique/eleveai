@@ -2,13 +2,7 @@
 
 export { metadata } from "./metadata";
 
-const elevesRemercies = [
-  "Prénom 1",
-  "Prénom 2",
-  "Prénom 3",
-  "Prénom 4",
-  "Prénom 5",
-];
+import { elevesRemercies } from "@/lib/remerciements/eleves";
 
 export default function RemerciementsPage() {
   return (
@@ -35,7 +29,7 @@ export default function RemerciementsPage() {
             </p>
 
             <div className="mx-auto mt-6 max-w-3xl rounded-2xl border border-yellow-300/20 bg-yellow-300/10 px-5 py-4 text-sm font-bold leading-relaxed text-yellow-100">
-              Seuls les prénoms sont affichés. Aucun nom de famille n’est publié.
+              Seuls les prénoms sont affichés. Aucun nom de famille n'est publié.
             </div>
           </div>
 
@@ -45,13 +39,25 @@ export default function RemerciementsPage() {
             </h2>
 
             {elevesRemercies.length > 0 ? (
-              <div className="mt-8 flex flex-wrap justify-center gap-3">
-                {elevesRemercies.map((prenom) => (
+              <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                {elevesRemercies.map((eleve) => (
                   <div
-                    key={prenom}
-                    className="rounded-full border border-white/15 bg-white/10 px-5 py-3 text-sm font-black text-white shadow-lg transition hover:-translate-y-1 hover:bg-white/15 md:text-base"
+                    key={eleve.prenom}
+                    className="rounded-2xl border border-white/15 bg-white/10 px-5 py-4 shadow-lg transition hover:-translate-y-1 hover:bg-white/15"
                   >
-                    {prenom}
+                    <div className="flex items-center justify-between gap-2">
+                      <p className="text-base font-black text-yellow-300">
+                        {eleve.prenom}
+                      </p>
+                      {eleve.meta && (
+                        <span className="rounded-full bg-emerald-400/20 px-2 py-0.5 text-[10px] font-black text-emerald-300">
+                          {eleve.meta}
+                        </span>
+                      )}
+                    </div>
+                    <p className="mt-1 text-sm font-medium text-white/75">
+                      {eleve.action}
+                    </p>
                   </div>
                 ))}
               </div>
@@ -68,8 +74,8 @@ export default function RemerciementsPage() {
             </p>
 
             <p className="mx-auto mt-4 max-w-3xl text-sm leading-relaxed text-white/70 md:text-base">
-              Vos remarques permettent d’améliorer les parcours, les défis,
-              l’enregistrement des scores, le calcul rapide et l’expérience des
+              Vos remarques permettent d'améliorer les parcours, les défis,
+              l'enregistrement des scores, le calcul rapide et l'expérience des
               élèves.
             </p>
           </div>
