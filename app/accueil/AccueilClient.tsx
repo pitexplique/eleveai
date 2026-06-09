@@ -307,7 +307,7 @@ export default function AccueilPage() {
         <div className="mx-auto max-w-5xl">
           {eleveClasse === "3e" || eleveClasse === "4e" ? (
             <Link href="/coach-brevet" className="group relative block h-[220px] overflow-hidden rounded-2xl shadow-2xl sm:h-[280px]">
-              <Image src="/images/defis-du-jour/grand-raid.webp" alt="Sprint Brevet" fill sizes="(max-width: 1200px) 100vw, 1200px" className="object-cover object-center transition-transform duration-700 group-hover:scale-[1.03]" />
+              <Image src="/images/defis-du-jour/grand_raid_2026.webp" alt="Sprint Brevet" fill sizes="(max-width: 1200px) 100vw, 1200px" className="object-cover object-center transition-transform duration-700 group-hover:scale-[1.03]" />
               <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/50 to-transparent" />
               <div className="absolute bottom-0 left-0 p-6 sm:p-8">
                 <span className="mb-3 inline-block rounded-full bg-emerald-500 px-3 py-1 text-[11px] font-black uppercase tracking-[0.2em] text-white">🎯 Sprint Brevet · J−{jours}</span>
@@ -322,7 +322,7 @@ export default function AccueilPage() {
             </Link>
           ) : (
             <Link href="/defis-du-jour" className="group relative block h-[220px] overflow-hidden rounded-2xl shadow-2xl sm:h-[280px]">
-              <Image src="/images/defis-du-jour/grand-raid.webp" alt="Défi du jour" fill sizes="(max-width: 1200px) 100vw, 1200px" className="object-cover object-center transition-transform duration-700 group-hover:scale-[1.03]" />
+              <Image src="/images/defis-du-jour/grand_raid_2026.webp" alt="Défi du jour" fill sizes="(max-width: 1200px) 100vw, 1200px" className="object-cover object-center transition-transform duration-700 group-hover:scale-[1.03]" />
               <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/40 to-transparent" />
               <div className="absolute bottom-0 left-0 p-6 sm:p-8">
                 <span className="mb-3 inline-block rounded-full bg-emerald-500 px-3 py-1 text-[11px] font-black uppercase tracking-[0.2em] text-white">🎯 Défi du jour</span>

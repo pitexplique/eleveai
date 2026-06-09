@@ -6,7 +6,7 @@ export const problemesFixed: ProblemeDuJour[] = [
     id: "grand_raid_distance_001",
     title: "Grand Raid : les kilomètres de l'île",
     theme: "Distance & addition",
-    image: "/images/defis-du-jour/grand-raid.webp",
+    image: "/images/defis-du-jour/grand_raid_2026.webp",
     level: 1,
     statement:
       "Le Grand Raid de La Réunion, surnommé « la Diagonale des Fous », traverse l'île du sud au nord sur 165 km. La course se découpe en grandes sections : 42 km jusqu'à Cilaos, puis 58 km jusqu'à Salazie, puis 65 km jusqu'à Saint-Denis.",
@@ -51,7 +51,7 @@ export const problemesFixed: ProblemeDuJour[] = [
     id: "grand_raid_vitesse_001",
     title: "Grand Raid : la vitesse du champion",
     theme: "Vitesse & division",
-    image: "/images/defis-du-jour/grand-raid.webp",
+    image: "/images/defis-du-jour/grand_raid_2026.webp",
     level: 2,
     statement:
       "En 2017, le Français François D'Haene a remporté le Grand Raid en établissant un record : il a parcouru les 165 km en 23 heures et 27 minutes. Pour simplifier, on arrondira son temps à 23 heures.",
@@ -96,7 +96,7 @@ export const problemesFixed: ProblemeDuJour[] = [
     id: "grand_raid_denivele_001",
     title: "Grand Raid : grimper les cirques",
     theme: "Dénivelé & proportionnalité",
-    image: "/images/defis-du-jour/grand-raid.webp",
+    image: "/images/defis-du-jour/grand_raid_2026.webp",
     level: 3,
     statement:
       "Le Grand Raid cumule 9 600 mètres de dénivelé positif (montée totale) sur 165 km. Les coureurs traversent les trois cirques de La Réunion : Cilaos, Mafate et Salazie. Un coureur a déjà parcouru 55 km.",
@@ -141,7 +141,7 @@ export const problemesFixed: ProblemeDuJour[] = [
     id: "grand_raid_ravitaillement_001",
     title: "Grand Raid : les postes de ravitaillement",
     theme: "Fractions & partage",
-    image: "/images/defis-du-jour/grand-raid.webp",
+    image: "/images/defis-du-jour/grand_raid_2026.webp",
     level: 3,
     statement:
       "Le Grand Raid compte 16 postes de ravitaillement répartis sur les 165 km. À chaque poste, les bénévoles préparent 2,5 litres d'eau pour chaque coureur prévu. Cette année, 2 400 coureurs sont inscrits.",
@@ -186,7 +186,7 @@ export const problemesFixed: ProblemeDuJour[] = [
     id: "grand_raid_abandon_001",
     title: "Grand Raid : ceux qui abandonnent",
     theme: "Pourcentages & statistiques",
-    image: "/images/defis-du-jour/grand-raid.webp",
+    image: "/images/defis-du-jour/grand_raid_2026.webp",
     level: 4,
     statement:
       "Le Grand Raid est une course extrême. En moyenne, environ 40 % des coureurs n'atteignent pas la ligne d'arrivée (abandon, blessure, dépassement du temps limite). Cette année, 2 400 coureurs s'élancent au départ.",
@@ -231,7 +231,7 @@ export const problemesFixed: ProblemeDuJour[] = [
     id: "grand_raid_classement_001",
     title: "Grand Raid : les temps au classement",
     theme: "Durées & comparaison",
-    image: "/images/defis-du-jour/grand-raid.webp",
+    image: "/images/defis-du-jour/grand_raid_2026.webp",
     level: 4,
     statement:
       "Les trois premiers coureurs à l'arrivée ont réalisé les temps suivants :\n• 1er : 23 h 27 min\n• 2e : 24 h 05 min\n• 3e : 24 h 38 min\nLe temps limite pour valider la course est de 67 heures.",
@@ -276,7 +276,7 @@ export const problemesFixed: ProblemeDuJour[] = [
     id: "grand_raid_synthese_001",
     title: "Grand Raid : raconter la Diagonale des Fous",
     theme: "Synthèse & argumentation",
-    image: "/images/defis-du-jour/grand-raid.webp",
+    image: "/images/defis-du-jour/grand_raid_2026.webp",
     level: 5,
     statement:
       "Cette semaine, tu as travaillé avec de vraies données du Grand Raid de La Réunion : 165 km de course, 9 600 m de dénivelé, une vitesse record de 7,2 km/h sur 23 heures, 96 000 litres d'eau préparés, 1 440 finishers sur 2 400 partants, et un écart de 71 minutes entre le 1er et le 3e.",
