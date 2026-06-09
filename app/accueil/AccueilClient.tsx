@@ -84,11 +84,9 @@ const SUBJECTS = [
 // ─── Bottom features bar ──────────────────────────────────────────────────────
 
 const FEATURES = [
-  { icon: "📚", label: "Leçons",     desc: "Cours clairs et illustrés",         href: "/coach-ia/maths"     },
-  { icon: "✏️", label: "Exercices",  desc: "Entraîne-toi à ton rythme",         href: "/parcours"           },
-  { icon: "🛤️", label: "Parcours",   desc: "Un chemin personnalisé",            href: "/parcours"           },
-  { icon: "🏆", label: "Défis",      desc: "Relève des défis chaque jour",      href: "/defis-du-jour"      },
-  { icon: "🤖", label: "Coach IA",   desc: "Ton assistant intelligent 24/7",    href: "#coach"              },
+  { icon: "🧮", label: "Parcours Maths",    desc: "Diagnostic et entraînement maths",   href: "/parcours"               },
+  { icon: "📖", label: "Parcours Français", desc: "Lecture, grammaire, expression",     href: "/parcours-francais"      },
+  { icon: "🇬🇧", label: "Parcours English",  desc: "Bilan de niveau CECRL avec audio",   href: "/parcours-english-maths" },
 ];
 
 // ─── Main component ───────────────────────────────────────────────────────────
@@ -181,8 +179,7 @@ export default function AccueilPage() {
           height={1080}
           priority
           sizes="100vw"
-          className="h-auto block mx-auto"
-          className="h-auto block mx-auto w-full sm:w-[53%]"
+          className="h-auto block mx-auto w-full md:w-[53%]"
         />
         {/* Fondu bas vers le fond de page */}
         <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-b from-transparent to-[#041B33]" />
