@@ -313,6 +313,28 @@ const AUDIO_ENTRIES = [
   { file: "science/laboratorio.mp3",  text: "laboratorio" },
   { file: "science/experimento.mp3",  text: "experimento" },
 
+  // ════════════════════════════════════════════════════════════════════════
+  // B2 — Géopolitique, littérature, économie, philosophie
+  // ════════════════════════════════════════════════════════════════════════
+
+  // ── GÉOPOLITIQUE ─────────────────────────────────────────────────────────
+  { file: "geopolitics/democracia.mp3",   text: "democracia"   },
+  { file: "geopolitics/dictadura.mp3",    text: "dictadura"    },
+  { file: "geopolitics/inmigracion.mp3",  text: "inmigración"  },
+
+  // ── LITTÉRATURE ──────────────────────────────────────────────────────────
+  { file: "literature/literatura.mp3",    text: "literatura"   },
+  { file: "literature/poesia.mp3",        text: "poesía"       },
+
+  // ── ÉCONOMIE B2 ──────────────────────────────────────────────────────────
+  { file: "economics/globalizacion.mp3",  text: "globalización" },
+  { file: "economics/desigualdad.mp3",    text: "desigualdad"   },
+
+  // ── PHILOSOPHIE ──────────────────────────────────────────────────────────
+  { file: "philosophy/etica.mp3",         text: "ética"        },
+  { file: "philosophy/libertad.mp3",      text: "libertad"     },
+  { file: "philosophy/justicia.mp3",      text: "justicia"     },
+
 ];
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
