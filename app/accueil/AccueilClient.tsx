@@ -369,7 +369,7 @@ export default function AccueilPage() {
           <div>
             <p className="text-base font-black text-white">💶 Des tarifs simples et justes</p>
             <p className="mt-1 text-sm leading-relaxed text-white/70">
-              Gratuit pour les élèves dans le cadre scolaire · 4,99 €/mois pour une famille · 199 €/an pour une classe entière.
+              Gratuit pour les élèves dans le cadre scolaire · 4,99 €/mois pour une famille · Classes et établissements : sur devis.
             </p>
           </div>
           <div className="flex shrink-0 flex-wrap justify-center gap-3">

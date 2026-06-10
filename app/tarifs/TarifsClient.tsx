@@ -28,9 +28,9 @@ const offres = [
     nom: "Classe",
     badge: "⭐ Le plus populaire",
     badgeColor: "bg-blue-100 text-blue-800",
-    prix: "199 €",
-    soustitre: "par an · jusqu'à 35 élèves",
-    description: "Un accès annuel pour toute une classe. Idéal pour un enseignant qui veut intégrer EleveAI dans ses cours.",
+    prix: "Sur devis",
+    soustitre: "une ou plusieurs classes · jusqu'à 35 élèves par classe",
+    description: "Un accès annuel pour vos classes. Idéal pour un enseignant qui veut intégrer EleveAI dans ses cours. Tarif adapté au nombre de classes — contactez-nous.",
     inclus: [
       "Jusqu'à 35 élèves",
       "Codes élèves créés par nos soins",
