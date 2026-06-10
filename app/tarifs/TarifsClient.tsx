@@ -5,12 +5,13 @@ import Link from "next/link";
 const offres = [
   {
     nom: "Famille",
-    badge: "Élève solo",
+    badge: "🚀 Prix de lancement",
     badgeColor: "bg-violet-100 text-violet-800",
     prix: "4,99 €",
     soustitre: "par mois · ou 49 € / an (2 mois offerts)",
-    description: "Un accès complet pour votre enfant, sans passer par l'établissement. Disponible dès maintenant.",
+    description: "Un accès complet pour votre enfant, sans passer par l'établissement. Prix de lancement : les premiers abonnés le gardent à vie.",
     inclus: [
+      "Prix de lancement bloqué à vie",
       "1 élève, tous les outils débloqués",
       "Coach Maths IA · Coach Français IA",
       "English Maths A1 → B2",
@@ -26,7 +27,7 @@ const offres = [
   },
   {
     nom: "Classe",
-    badge: "⭐ Le plus populaire",
+    badge: "🧑‍🏫 Enseignants",
     badgeColor: "bg-blue-100 text-blue-800",
     prix: "Sur devis",
     soustitre: "une ou plusieurs classes · jusqu'à 35 élèves par classe",
@@ -106,6 +107,10 @@ const faq = [
   {
     q: "Puis-je résilier à tout moment (offre famille) ?",
     a: "Oui. L'abonnement mensuel famille se résilie en 1 clic, sans frais ni préavis.",
+  },
+  {
+    q: "Le prix famille va-t-il augmenter ?",
+    a: "4,99 €/mois est un prix de lancement : il augmentera à mesure que la plateforme s'enrichit. Mais les abonnés actuels conservent leur tarif à vie, tant que leur abonnement reste actif. S'abonner tôt, c'est verrouiller le meilleur prix.",
   },
   {
     q: "Pourquoi EleveAI est moins cher que les autres ?",
