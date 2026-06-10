@@ -36,20 +36,39 @@ function getQuestionBank(classe: ParcoursClasse): TutorBankItemV4[] {
   return [];
 }
 
+// Dans les banques, la bonne réponse est souvent en première position :
+// on mélange une copie des choix pour ne pas la trahir (sans muter la banque).
+function shuffleChoices(choices: readonly string[]): string[] {
+  const arr = [...choices];
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
 function materializeQuestion(
   item: TutorBankItemV4
 ): ParcoursQuestionItem | null {
+  let question: ParcoursQuestionItem;
+
   if (item.kind === "template") {
     const generated = item.generate();
 
-    return {
+    question = {
       ...item,
       ...generated,
       kind: "fixed",
     } as ParcoursQuestionItem;
+  } else {
+    question = item as ParcoursQuestionItem;
   }
 
-  return item as ParcoursQuestionItem;
+  if (question.choices && question.choices.length > 1) {
+    question = { ...question, choices: shuffleChoices(question.choices) };
+  }
+
+  return question;
 }
 
 export type ParcoursDifficulteMode = "revision" | "defi";

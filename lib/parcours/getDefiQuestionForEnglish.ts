@@ -16,6 +16,17 @@ function getBank(niveau: ParcoursNiveauEnglish): TutorBankItemV4[] {
   }
 }
 
+// Dans les banques, la bonne réponse est toujours en première position :
+// on mélange une copie pour ne pas la trahir (et sans muter la banque).
+function shuffleChoices(choices: readonly string[]): string[] {
+  const arr = [...choices];
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
 function toQuestionItem(item: TutorBankItemV4): ParcoursQuestionItem | null {
   if (item.kind === "template") return null;
 
@@ -23,7 +34,7 @@ function toQuestionItem(item: TutorBankItemV4): ParcoursQuestionItem | null {
     text: item.text,
     format: item.format,
     expected: item.expected,
-    choices: item.choices,
+    choices: item.choices ? shuffleChoices(item.choices) : item.choices,
     comparator: item.comparator,
     hint: item.hint,
     explanation: item.explanation,
