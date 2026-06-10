@@ -346,7 +346,7 @@ export default function ParcoursClient() {
 
     setSaving(true);
 
-    const { error } = await supabase.from("resultats_parcours").insert({
+    const { error } = await supabase.from("resultats_parcours_maths").insert({
       code_etablissement: codeEtablissement,
       code_utilisateur: codeUtilisateur,
       nom: eleve.nom ?? null,

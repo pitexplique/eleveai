@@ -183,7 +183,7 @@ export default function DashboardEleveClient() {
       const [parcoursResponse, calculRapideResponse, defisJourResponse, englishResponse, tutorResponse] =
         await Promise.all([
           supabase
-            .from("resultats_parcours")
+            .from("resultats_parcours_maths")
             .select(
               "id, code_etablissement, code_utilisateur, nom, classe, niveau, matiere, score, total, pourcentage, details, created_at"
             )
