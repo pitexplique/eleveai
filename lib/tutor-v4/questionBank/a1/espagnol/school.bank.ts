@@ -1,18 +1,18 @@
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 
 const WORDS = [
-  { slug: "escuela",   es: "escuela",   fr: "école",     audio: "/audio/espagnol/school/escuela.mp3"   },
-  { slug: "clase",     es: "clase",     fr: "classe",    audio: "/audio/espagnol/school/clase.mp3"     },
-  { slug: "libro",     es: "libro",     fr: "livre",     audio: "/audio/espagnol/school/libro.mp3"     },
-  { slug: "lapiz",     es: "lápiz",     fr: "crayon",    audio: "/audio/espagnol/school/lapiz.mp3"     },
-  { slug: "boligrafo", es: "bolígrafo", fr: "stylo",     audio: "/audio/espagnol/school/boligrafo.mp3" },
-  { slug: "cuaderno",  es: "cuaderno",  fr: "cahier",    audio: "/audio/espagnol/school/cuaderno.mp3"  },
-  { slug: "mochila",   es: "mochila",   fr: "cartable",  audio: "/audio/espagnol/school/mochila.mp3"   },
-  { slug: "pizarra",   es: "pizarra",   fr: "tableau",   audio: "/audio/espagnol/school/pizarra.mp3"   },
-  { slug: "profe",     es: "profe",     fr: "prof",      audio: "/audio/espagnol/school/profe.mp3"     },
-  { slug: "alumno",    es: "alumno",    fr: "élève",     audio: "/audio/espagnol/school/alumno.mp3"    },
-  { slug: "examen",    es: "examen",    fr: "examen",    audio: "/audio/espagnol/school/examen.mp3"    },
-  { slug: "deberes",   es: "deberes",   fr: "devoirs",   audio: "/audio/espagnol/school/deberes.mp3"   },
+  { slug: "escuela",   es: "escuela",   fr: "école",     audio: "/audio/espagnol/school/a1/escuela.mp3"   },
+  { slug: "clase",     es: "clase",     fr: "classe",    audio: "/audio/espagnol/school/a1/clase.mp3"     },
+  { slug: "libro",     es: "libro",     fr: "livre",     audio: "/audio/espagnol/school/a1/libro.mp3"     },
+  { slug: "lapiz",     es: "lápiz",     fr: "crayon",    audio: "/audio/espagnol/school/a1/lapiz.mp3"     },
+  { slug: "boligrafo", es: "bolígrafo", fr: "stylo",     audio: "/audio/espagnol/school/a1/boligrafo.mp3" },
+  { slug: "cuaderno",  es: "cuaderno",  fr: "cahier",    audio: "/audio/espagnol/school/a1/cuaderno.mp3"  },
+  { slug: "mochila",   es: "mochila",   fr: "cartable",  audio: "/audio/espagnol/school/a1/mochila.mp3"   },
+  { slug: "pizarra",   es: "pizarra",   fr: "tableau",   audio: "/audio/espagnol/school/a1/pizarra.mp3"   },
+  { slug: "profe",     es: "profe",     fr: "prof",      audio: "/audio/espagnol/school/a1/profe.mp3"     },
+  { slug: "alumno",    es: "alumno",    fr: "élève",     audio: "/audio/espagnol/school/a1/alumno.mp3"    },
+  { slug: "examen",    es: "examen",    fr: "examen",    audio: "/audio/espagnol/school/a1/examen.mp3"    },
+  { slug: "deberes",   es: "deberes",   fr: "devoirs",   audio: "/audio/espagnol/school/a1/deberes.mp3"   },
 ] as const;
 
 function dFr(exclude: string) { return WORDS.filter(w => w.fr !== exclude).map(w => w.fr).slice(0, 3); }

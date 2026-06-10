@@ -1,16 +1,16 @@
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 
 const WORDS = [
-  { slug: "mas",            es: "más",            fr: "plus",            audio: "/audio/espagnol/operations/mas.mp3"            },
-  { slug: "menos",          es: "menos",          fr: "moins",           audio: "/audio/espagnol/operations/menos.mp3"          },
-  { slug: "por",            es: "por",            fr: "fois (×)",        audio: "/audio/espagnol/operations/por.mp3"            },
-  { slug: "dividido",       es: "dividido",       fr: "divisé par",      audio: "/audio/espagnol/operations/dividido.mp3"       },
-  { slug: "igual",          es: "igual",          fr: "égal",            audio: "/audio/espagnol/operations/igual.mp3"          },
-  { slug: "suma",           es: "suma",           fr: "addition",        audio: "/audio/espagnol/operations/suma.mp3"           },
-  { slug: "resta",          es: "resta",          fr: "soustraction",    audio: "/audio/espagnol/operations/resta.mp3"          },
-  { slug: "multiplicacion", es: "multiplicación", fr: "multiplication",  audio: "/audio/espagnol/operations/multiplicacion.mp3" },
-  { slug: "division",       es: "división",       fr: "division",        audio: "/audio/espagnol/operations/division.mp3"       },
-  { slug: "resultado",      es: "resultado",      fr: "résultat",        audio: "/audio/espagnol/operations/resultado.mp3"      },
+  { slug: "mas",            es: "más",            fr: "plus",            audio: "/audio/espagnol/operations/a1/mas.mp3"            },
+  { slug: "menos",          es: "menos",          fr: "moins",           audio: "/audio/espagnol/operations/a1/menos.mp3"          },
+  { slug: "por",            es: "por",            fr: "fois (×)",        audio: "/audio/espagnol/operations/a1/por.mp3"            },
+  { slug: "dividido",       es: "dividido",       fr: "divisé par",      audio: "/audio/espagnol/operations/a1/dividido.mp3"       },
+  { slug: "igual",          es: "igual",          fr: "égal",            audio: "/audio/espagnol/operations/a1/igual.mp3"          },
+  { slug: "suma",           es: "suma",           fr: "addition",        audio: "/audio/espagnol/operations/a1/suma.mp3"           },
+  { slug: "resta",          es: "resta",          fr: "soustraction",    audio: "/audio/espagnol/operations/a1/resta.mp3"          },
+  { slug: "multiplicacion", es: "multiplicación", fr: "multiplication",  audio: "/audio/espagnol/operations/a1/multiplicacion.mp3" },
+  { slug: "division",       es: "división",       fr: "division",        audio: "/audio/espagnol/operations/a1/division.mp3"       },
+  { slug: "resultado",      es: "resultado",      fr: "résultat",        audio: "/audio/espagnol/operations/a1/resultado.mp3"      },
 ] as const;
 
 function dFr(exclude: string) { return WORDS.filter(w => w.fr !== exclude).map(w => w.fr).slice(0, 3); }

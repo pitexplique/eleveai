@@ -1,16 +1,16 @@
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 
 const WORDS = [
-  { slug: "perro",    es: "perro",    fr: "chien",    audio: "/audio/espagnol/animals/perro.mp3"    },
-  { slug: "gato",     es: "gato",     fr: "chat",     audio: "/audio/espagnol/animals/gato.mp3"     },
-  { slug: "caballo",  es: "caballo",  fr: "cheval",   audio: "/audio/espagnol/animals/caballo.mp3"  },
-  { slug: "vaca",     es: "vaca",     fr: "vache",    audio: "/audio/espagnol/animals/vaca.mp3"     },
-  { slug: "pajaro",   es: "pájaro",   fr: "oiseau",   audio: "/audio/espagnol/animals/pajaro.mp3"   },
-  { slug: "pez",      es: "pez",      fr: "poisson (vivant)", audio: "/audio/espagnol/animals/pez.mp3" },
-  { slug: "conejo",   es: "conejo",   fr: "lapin",    audio: "/audio/espagnol/animals/conejo.mp3"   },
-  { slug: "leon",     es: "león",     fr: "lion",     audio: "/audio/espagnol/animals/leon.mp3"     },
-  { slug: "elefante", es: "elefante", fr: "éléphant", audio: "/audio/espagnol/animals/elefante.mp3" },
-  { slug: "tortuga",  es: "tortuga",  fr: "tortue",   audio: "/audio/espagnol/animals/tortuga.mp3"  },
+  { slug: "perro",    es: "perro",    fr: "chien",    audio: "/audio/espagnol/animals/a1/perro.mp3"    },
+  { slug: "gato",     es: "gato",     fr: "chat",     audio: "/audio/espagnol/animals/a1/gato.mp3"     },
+  { slug: "caballo",  es: "caballo",  fr: "cheval",   audio: "/audio/espagnol/animals/a1/caballo.mp3"  },
+  { slug: "vaca",     es: "vaca",     fr: "vache",    audio: "/audio/espagnol/animals/a1/vaca.mp3"     },
+  { slug: "pajaro",   es: "pájaro",   fr: "oiseau",   audio: "/audio/espagnol/animals/a1/pajaro.mp3"   },
+  { slug: "pez",      es: "pez",      fr: "poisson (vivant)", audio: "/audio/espagnol/animals/a1/pez.mp3" },
+  { slug: "conejo",   es: "conejo",   fr: "lapin",    audio: "/audio/espagnol/animals/a1/conejo.mp3"   },
+  { slug: "leon",     es: "león",     fr: "lion",     audio: "/audio/espagnol/animals/a1/leon.mp3"     },
+  { slug: "elefante", es: "elefante", fr: "éléphant", audio: "/audio/espagnol/animals/a1/elefante.mp3" },
+  { slug: "tortuga",  es: "tortuga",  fr: "tortue",   audio: "/audio/espagnol/animals/a1/tortuga.mp3"  },
 ] as const;
 
 function dFr(exclude: string) { return WORDS.filter(w => w.fr !== exclude).map(w => w.fr).slice(0, 3); }

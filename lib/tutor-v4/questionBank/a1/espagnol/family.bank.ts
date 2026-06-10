@@ -1,18 +1,18 @@
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 
 const WORDS = [
-  { slug: "madre",   es: "madre",   fr: "mère",       audio: "/audio/espagnol/family/madre.mp3"   },
-  { slug: "padre",   es: "padre",   fr: "père",       audio: "/audio/espagnol/family/padre.mp3"   },
-  { slug: "hermano", es: "hermano", fr: "frère",      audio: "/audio/espagnol/family/hermano.mp3" },
-  { slug: "hermana", es: "hermana", fr: "sœur",       audio: "/audio/espagnol/family/hermana.mp3" },
-  { slug: "abuelo",  es: "abuelo",  fr: "grand-père", audio: "/audio/espagnol/family/abuelo.mp3"  },
-  { slug: "abuela",  es: "abuela",  fr: "grand-mère", audio: "/audio/espagnol/family/abuela.mp3"  },
-  { slug: "hijo",    es: "hijo",    fr: "fils",       audio: "/audio/espagnol/family/hijo.mp3"    },
-  { slug: "hija",    es: "hija",    fr: "fille",      audio: "/audio/espagnol/family/hija.mp3"    },
-  { slug: "tio",     es: "tío",     fr: "oncle",      audio: "/audio/espagnol/family/tio.mp3"     },
-  { slug: "tia",     es: "tía",     fr: "tante",      audio: "/audio/espagnol/family/tia.mp3"     },
-  { slug: "primo",   es: "primo",   fr: "cousin",     audio: "/audio/espagnol/family/primo.mp3"   },
-  { slug: "prima",   es: "prima",   fr: "cousine",    audio: "/audio/espagnol/family/prima.mp3"   },
+  { slug: "madre",   es: "madre",   fr: "mère",       audio: "/audio/espagnol/family/a1/madre.mp3"   },
+  { slug: "padre",   es: "padre",   fr: "père",       audio: "/audio/espagnol/family/a1/padre.mp3"   },
+  { slug: "hermano", es: "hermano", fr: "frère",      audio: "/audio/espagnol/family/a1/hermano.mp3" },
+  { slug: "hermana", es: "hermana", fr: "sœur",       audio: "/audio/espagnol/family/a1/hermana.mp3" },
+  { slug: "abuelo",  es: "abuelo",  fr: "grand-père", audio: "/audio/espagnol/family/a1/abuelo.mp3"  },
+  { slug: "abuela",  es: "abuela",  fr: "grand-mère", audio: "/audio/espagnol/family/a1/abuela.mp3"  },
+  { slug: "hijo",    es: "hijo",    fr: "fils",       audio: "/audio/espagnol/family/a1/hijo.mp3"    },
+  { slug: "hija",    es: "hija",    fr: "fille",      audio: "/audio/espagnol/family/a1/hija.mp3"    },
+  { slug: "tio",     es: "tío",     fr: "oncle",      audio: "/audio/espagnol/family/a1/tio.mp3"     },
+  { slug: "tia",     es: "tía",     fr: "tante",      audio: "/audio/espagnol/family/a1/tia.mp3"     },
+  { slug: "primo",   es: "primo",   fr: "cousin",     audio: "/audio/espagnol/family/a1/primo.mp3"   },
+  { slug: "prima",   es: "prima",   fr: "cousine",    audio: "/audio/espagnol/family/a1/prima.mp3"   },
 ] as const;
 
 function dFr(exclude: string) { return WORDS.filter(w => w.fr !== exclude).map(w => w.fr).slice(0, 3); }

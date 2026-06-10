@@ -1,17 +1,17 @@
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 
 const WORDS = [
-  { slug: "cero",   es: "cero",   fr: "zéro",   audio: "/audio/espagnol/digits/cero.mp3"   },
-  { slug: "uno",    es: "uno",    fr: "un",      audio: "/audio/espagnol/digits/uno.mp3"    },
-  { slug: "dos",    es: "dos",    fr: "deux",    audio: "/audio/espagnol/digits/dos.mp3"    },
-  { slug: "tres",   es: "tres",   fr: "trois",   audio: "/audio/espagnol/digits/tres.mp3"   },
-  { slug: "cuatro", es: "cuatro", fr: "quatre",  audio: "/audio/espagnol/digits/cuatro.mp3" },
-  { slug: "cinco",  es: "cinco",  fr: "cinq",    audio: "/audio/espagnol/digits/cinco.mp3"  },
-  { slug: "seis",   es: "seis",   fr: "six",     audio: "/audio/espagnol/digits/seis.mp3"   },
-  { slug: "siete",  es: "siete",  fr: "sept",    audio: "/audio/espagnol/digits/siete.mp3"  },
-  { slug: "ocho",   es: "ocho",   fr: "huit",    audio: "/audio/espagnol/digits/ocho.mp3"   },
-  { slug: "nueve",  es: "nueve",  fr: "neuf",    audio: "/audio/espagnol/digits/nueve.mp3"  },
-  { slug: "diez",   es: "diez",   fr: "dix",     audio: "/audio/espagnol/digits/diez.mp3"   },
+  { slug: "cero",   es: "cero",   fr: "zéro",   audio: "/audio/espagnol/digits/a1/cero.mp3"   },
+  { slug: "uno",    es: "uno",    fr: "un",      audio: "/audio/espagnol/digits/a1/uno.mp3"    },
+  { slug: "dos",    es: "dos",    fr: "deux",    audio: "/audio/espagnol/digits/a1/dos.mp3"    },
+  { slug: "tres",   es: "tres",   fr: "trois",   audio: "/audio/espagnol/digits/a1/tres.mp3"   },
+  { slug: "cuatro", es: "cuatro", fr: "quatre",  audio: "/audio/espagnol/digits/a1/cuatro.mp3" },
+  { slug: "cinco",  es: "cinco",  fr: "cinq",    audio: "/audio/espagnol/digits/a1/cinco.mp3"  },
+  { slug: "seis",   es: "seis",   fr: "six",     audio: "/audio/espagnol/digits/a1/seis.mp3"   },
+  { slug: "siete",  es: "siete",  fr: "sept",    audio: "/audio/espagnol/digits/a1/siete.mp3"  },
+  { slug: "ocho",   es: "ocho",   fr: "huit",    audio: "/audio/espagnol/digits/a1/ocho.mp3"   },
+  { slug: "nueve",  es: "nueve",  fr: "neuf",    audio: "/audio/espagnol/digits/a1/nueve.mp3"  },
+  { slug: "diez",   es: "diez",   fr: "dix",     audio: "/audio/espagnol/digits/a1/diez.mp3"   },
 ] as const;
 
 function dFr(exclude: string) { return WORDS.filter(w => w.fr !== exclude).map(w => w.fr).slice(0, 3); }

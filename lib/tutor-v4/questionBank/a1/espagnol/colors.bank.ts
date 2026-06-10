@@ -1,17 +1,17 @@
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 
 const WORDS = [
-  { slug: "rojo",     es: "rojo",    fr: "rouge",  audio: "/audio/espagnol/colors/rojo.mp3"     },
-  { slug: "azul",     es: "azul",    fr: "bleu",   audio: "/audio/espagnol/colors/azul.mp3"     },
-  { slug: "verde",    es: "verde",   fr: "vert",   audio: "/audio/espagnol/colors/verde.mp3"    },
-  { slug: "amarillo", es: "amarillo",fr: "jaune",  audio: "/audio/espagnol/colors/amarillo.mp3" },
-  { slug: "negro",    es: "negro",   fr: "noir",   audio: "/audio/espagnol/colors/negro.mp3"    },
-  { slug: "blanco",   es: "blanco",  fr: "blanc",  audio: "/audio/espagnol/colors/blanco.mp3"   },
-  { slug: "naranja",  es: "naranja", fr: "orange", audio: "/audio/espagnol/colors/naranja.mp3"  },
-  { slug: "rosa",     es: "rosa",    fr: "rose",   audio: "/audio/espagnol/colors/rosa.mp3"     },
-  { slug: "morado",   es: "morado",  fr: "violet", audio: "/audio/espagnol/colors/morado.mp3"   },
-  { slug: "marron",   es: "marrón",  fr: "marron", audio: "/audio/espagnol/colors/marron.mp3"   },
-  { slug: "gris",     es: "gris",    fr: "gris",   audio: "/audio/espagnol/colors/gris.mp3"     },
+  { slug: "rojo",     es: "rojo",    fr: "rouge",  audio: "/audio/espagnol/colors/a1/rojo.mp3"     },
+  { slug: "azul",     es: "azul",    fr: "bleu",   audio: "/audio/espagnol/colors/a1/azul.mp3"     },
+  { slug: "verde",    es: "verde",   fr: "vert",   audio: "/audio/espagnol/colors/a1/verde.mp3"    },
+  { slug: "amarillo", es: "amarillo",fr: "jaune",  audio: "/audio/espagnol/colors/a1/amarillo.mp3" },
+  { slug: "negro",    es: "negro",   fr: "noir",   audio: "/audio/espagnol/colors/a1/negro.mp3"    },
+  { slug: "blanco",   es: "blanco",  fr: "blanc",  audio: "/audio/espagnol/colors/a1/blanco.mp3"   },
+  { slug: "naranja",  es: "naranja", fr: "orange", audio: "/audio/espagnol/colors/a1/naranja.mp3"  },
+  { slug: "rosa",     es: "rosa",    fr: "rose",   audio: "/audio/espagnol/colors/a1/rosa.mp3"     },
+  { slug: "morado",   es: "morado",  fr: "violet", audio: "/audio/espagnol/colors/a1/morado.mp3"   },
+  { slug: "marron",   es: "marrón",  fr: "marron", audio: "/audio/espagnol/colors/a1/marron.mp3"   },
+  { slug: "gris",     es: "gris",    fr: "gris",   audio: "/audio/espagnol/colors/a1/gris.mp3"     },
 ] as const;
 
 function dFr(exclude: string) { return WORDS.filter(w => w.fr !== exclude).map(w => w.fr).slice(0, 3); }

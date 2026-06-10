@@ -1,16 +1,16 @@
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 
 const WORDS = [
-  { slug: "cabeza",  es: "cabeza",  fr: "tête",    audio: "/audio/espagnol/body/cabeza.mp3"  },
-  { slug: "ojo",     es: "ojo",     fr: "œil",     audio: "/audio/espagnol/body/ojo.mp3"     },
-  { slug: "nariz",   es: "nariz",   fr: "nez",     audio: "/audio/espagnol/body/nariz.mp3"   },
-  { slug: "boca",    es: "boca",    fr: "bouche",  audio: "/audio/espagnol/body/boca.mp3"    },
-  { slug: "oreja",   es: "oreja",   fr: "oreille", audio: "/audio/espagnol/body/oreja.mp3"   },
-  { slug: "mano",    es: "mano",    fr: "main",    audio: "/audio/espagnol/body/mano.mp3"    },
-  { slug: "pie",     es: "pie",     fr: "pied",    audio: "/audio/espagnol/body/pie.mp3"     },
-  { slug: "brazo",   es: "brazo",   fr: "bras",    audio: "/audio/espagnol/body/brazo.mp3"   },
-  { slug: "pierna",  es: "pierna",  fr: "jambe",   audio: "/audio/espagnol/body/pierna.mp3"  },
-  { slug: "espalda", es: "espalda", fr: "dos",     audio: "/audio/espagnol/body/espalda.mp3" },
+  { slug: "cabeza",  es: "cabeza",  fr: "tête",    audio: "/audio/espagnol/body/a1/cabeza.mp3"  },
+  { slug: "ojo",     es: "ojo",     fr: "œil",     audio: "/audio/espagnol/body/a1/ojo.mp3"     },
+  { slug: "nariz",   es: "nariz",   fr: "nez",     audio: "/audio/espagnol/body/a1/nariz.mp3"   },
+  { slug: "boca",    es: "boca",    fr: "bouche",  audio: "/audio/espagnol/body/a1/boca.mp3"    },
+  { slug: "oreja",   es: "oreja",   fr: "oreille", audio: "/audio/espagnol/body/a1/oreja.mp3"   },
+  { slug: "mano",    es: "mano",    fr: "main",    audio: "/audio/espagnol/body/a1/mano.mp3"    },
+  { slug: "pie",     es: "pie",     fr: "pied",    audio: "/audio/espagnol/body/a1/pie.mp3"     },
+  { slug: "brazo",   es: "brazo",   fr: "bras",    audio: "/audio/espagnol/body/a1/brazo.mp3"   },
+  { slug: "pierna",  es: "pierna",  fr: "jambe",   audio: "/audio/espagnol/body/a1/pierna.mp3"  },
+  { slug: "espalda", es: "espalda", fr: "dos",     audio: "/audio/espagnol/body/a1/espalda.mp3" },
 ] as const;
 
 function dFr(exclude: string) { return WORDS.filter(w => w.fr !== exclude).map(w => w.fr).slice(0, 3); }

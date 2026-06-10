@@ -1,16 +1,16 @@
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 
 const WORDS = [
-  { slug: "globalizacion", es: "globalización", fr: "mondialisation", notionId: "es_b2_economics",   audio: "/audio/espagnol/economics/globalizacion.mp3" },
-  { slug: "desigualdad",   es: "desigualdad",   fr: "inégalité",       notionId: "es_b2_economics",   audio: "/audio/espagnol/economics/desigualdad.mp3"   },
-  { slug: "democracia",    es: "democracia",    fr: "démocratie",      notionId: "es_b2_geopolitics", audio: "/audio/espagnol/geopolitics/democracia.mp3"   },
-  { slug: "dictadura",     es: "dictadura",     fr: "dictature",       notionId: "es_b2_geopolitics", audio: "/audio/espagnol/geopolitics/dictadura.mp3"    },
-  { slug: "inmigracion",   es: "inmigración",   fr: "immigration",     notionId: "es_b2_geopolitics", audio: "/audio/espagnol/geopolitics/inmigracion.mp3"  },
-  { slug: "literatura",    es: "literatura",    fr: "littérature",     notionId: "es_b2_literature",  audio: "/audio/espagnol/literature/literatura.mp3"    },
-  { slug: "poesia",        es: "poesía",         fr: "poésie",          notionId: "es_b2_literature",  audio: "/audio/espagnol/literature/poesia.mp3"        },
-  { slug: "etica",         es: "ética",          fr: "éthique",         notionId: "es_b2_philosophy",  audio: "/audio/espagnol/philosophy/etica.mp3"         },
-  { slug: "libertad",      es: "libertad",      fr: "liberté",         notionId: "es_b2_philosophy",  audio: "/audio/espagnol/philosophy/libertad.mp3"      },
-  { slug: "justicia",      es: "justicia",      fr: "justice",         notionId: "es_b2_philosophy",  audio: "/audio/espagnol/philosophy/justicia.mp3"      },
+  { slug: "globalizacion", es: "globalización", fr: "mondialisation", notionId: "es_b2_economics",   audio: "/audio/espagnol/economics/b2/globalizacion.mp3" },
+  { slug: "desigualdad",   es: "desigualdad",   fr: "inégalité",       notionId: "es_b2_economics",   audio: "/audio/espagnol/economics/b2/desigualdad.mp3"   },
+  { slug: "democracia",    es: "democracia",    fr: "démocratie",      notionId: "es_b2_geopolitics", audio: "/audio/espagnol/geopolitics/b2/democracia.mp3"   },
+  { slug: "dictadura",     es: "dictadura",     fr: "dictature",       notionId: "es_b2_geopolitics", audio: "/audio/espagnol/geopolitics/b2/dictadura.mp3"    },
+  { slug: "inmigracion",   es: "inmigración",   fr: "immigration",     notionId: "es_b2_geopolitics", audio: "/audio/espagnol/geopolitics/b2/inmigracion.mp3"  },
+  { slug: "literatura",    es: "literatura",    fr: "littérature",     notionId: "es_b2_literature",  audio: "/audio/espagnol/literature/b2/literatura.mp3"    },
+  { slug: "poesia",        es: "poesía",         fr: "poésie",          notionId: "es_b2_literature",  audio: "/audio/espagnol/literature/b2/poesia.mp3"        },
+  { slug: "etica",         es: "ética",          fr: "éthique",         notionId: "es_b2_philosophy",  audio: "/audio/espagnol/philosophy/b2/etica.mp3"         },
+  { slug: "libertad",      es: "libertad",      fr: "liberté",         notionId: "es_b2_philosophy",  audio: "/audio/espagnol/philosophy/b2/libertad.mp3"      },
+  { slug: "justicia",      es: "justicia",      fr: "justice",         notionId: "es_b2_philosophy",  audio: "/audio/espagnol/philosophy/b2/justicia.mp3"      },
 ] as const;
 
 function dFr(exclude: string) { return WORDS.filter(w => w.fr !== exclude).map(w => w.fr).slice(0, 3); }

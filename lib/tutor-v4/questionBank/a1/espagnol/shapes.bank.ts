@@ -1,16 +1,16 @@
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 
 const WORDS = [
-  { slug: "circulo",    es: "círculo",    fr: "cercle",    audio: "/audio/espagnol/shapes/circulo.mp3"    },
-  { slug: "cuadrado",   es: "cuadrado",   fr: "carré",     audio: "/audio/espagnol/shapes/cuadrado.mp3"   },
-  { slug: "triangulo",  es: "triángulo",  fr: "triangle",  audio: "/audio/espagnol/shapes/triangulo.mp3"  },
-  { slug: "rectangulo", es: "rectángulo", fr: "rectangle", audio: "/audio/espagnol/shapes/rectangulo.mp3" },
-  { slug: "ovalo",      es: "óvalo",      fr: "ovale",     audio: "/audio/espagnol/shapes/ovalo.mp3"      },
-  { slug: "rombo",      es: "rombo",      fr: "losange",   audio: "/audio/espagnol/shapes/rombo.mp3"      },
-  { slug: "pentagono",  es: "pentágono",  fr: "pentagone", audio: "/audio/espagnol/shapes/pentagono.mp3"  },
-  { slug: "hexagono",   es: "hexágono",   fr: "hexagone",  audio: "/audio/espagnol/shapes/hexagono.mp3"   },
-  { slug: "esfera",     es: "esfera",     fr: "sphère",    audio: "/audio/espagnol/shapes/esfera.mp3"     },
-  { slug: "cubo",       es: "cubo",       fr: "cube",      audio: "/audio/espagnol/shapes/cubo.mp3"       },
+  { slug: "circulo",    es: "círculo",    fr: "cercle",    audio: "/audio/espagnol/shapes/a1/circulo.mp3"    },
+  { slug: "cuadrado",   es: "cuadrado",   fr: "carré",     audio: "/audio/espagnol/shapes/a1/cuadrado.mp3"   },
+  { slug: "triangulo",  es: "triángulo",  fr: "triangle",  audio: "/audio/espagnol/shapes/a1/triangulo.mp3"  },
+  { slug: "rectangulo", es: "rectángulo", fr: "rectangle", audio: "/audio/espagnol/shapes/a1/rectangulo.mp3" },
+  { slug: "ovalo",      es: "óvalo",      fr: "ovale",     audio: "/audio/espagnol/shapes/a1/ovalo.mp3"      },
+  { slug: "rombo",      es: "rombo",      fr: "losange",   audio: "/audio/espagnol/shapes/a1/rombo.mp3"      },
+  { slug: "pentagono",  es: "pentágono",  fr: "pentagone", audio: "/audio/espagnol/shapes/a1/pentagono.mp3"  },
+  { slug: "hexagono",   es: "hexágono",   fr: "hexagone",  audio: "/audio/espagnol/shapes/a1/hexagono.mp3"   },
+  { slug: "esfera",     es: "esfera",     fr: "sphère",    audio: "/audio/espagnol/shapes/a1/esfera.mp3"     },
+  { slug: "cubo",       es: "cubo",       fr: "cube",      audio: "/audio/espagnol/shapes/a1/cubo.mp3"       },
 ] as const;
 
 function dFr(exclude: string) { return WORDS.filter(w => w.fr !== exclude).map(w => w.fr).slice(0, 3); }

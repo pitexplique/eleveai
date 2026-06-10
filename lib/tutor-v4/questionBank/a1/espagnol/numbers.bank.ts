@@ -1,21 +1,21 @@
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 
 const WORDS = [
-  { slug: "once",         es: "once",         fr: "onze",              audio: "/audio/espagnol/numbers/once.mp3"         },
-  { slug: "doce",         es: "doce",         fr: "douze",             audio: "/audio/espagnol/numbers/doce.mp3"         },
-  { slug: "trece",        es: "trece",        fr: "treize",            audio: "/audio/espagnol/numbers/trece.mp3"        },
-  { slug: "catorce",      es: "catorce",      fr: "quatorze",          audio: "/audio/espagnol/numbers/catorce.mp3"      },
-  { slug: "quince",       es: "quince",       fr: "quinze",            audio: "/audio/espagnol/numbers/quince.mp3"       },
-  { slug: "veinte",       es: "veinte",       fr: "vingt",             audio: "/audio/espagnol/numbers/veinte.mp3"       },
-  { slug: "treinta",      es: "treinta",      fr: "trente",            audio: "/audio/espagnol/numbers/treinta.mp3"      },
-  { slug: "cuarenta",     es: "cuarenta",     fr: "quarante",          audio: "/audio/espagnol/numbers/cuarenta.mp3"     },
-  { slug: "cincuenta",    es: "cincuenta",    fr: "cinquante",         audio: "/audio/espagnol/numbers/cincuenta.mp3"    },
-  { slug: "sesenta",      es: "sesenta",      fr: "soixante",          audio: "/audio/espagnol/numbers/sesenta.mp3"      },
-  { slug: "setenta",      es: "setenta",      fr: "soixante-dix",      audio: "/audio/espagnol/numbers/setenta.mp3"      },
-  { slug: "ochenta",      es: "ochenta",      fr: "quatre-vingts",     audio: "/audio/espagnol/numbers/ochenta.mp3"      },
-  { slug: "noventa",      es: "noventa",      fr: "quatre-vingt-dix",  audio: "/audio/espagnol/numbers/noventa.mp3"      },
-  { slug: "cien",         es: "cien",         fr: "cent",              audio: "/audio/espagnol/numbers/cien.mp3"         },
-  { slug: "mil",          es: "mil",          fr: "mille",             audio: "/audio/espagnol/numbers/mil.mp3"          },
+  { slug: "once",         es: "once",         fr: "onze",              audio: "/audio/espagnol/numbers/a1/once.mp3"         },
+  { slug: "doce",         es: "doce",         fr: "douze",             audio: "/audio/espagnol/numbers/a1/doce.mp3"         },
+  { slug: "trece",        es: "trece",        fr: "treize",            audio: "/audio/espagnol/numbers/a1/trece.mp3"        },
+  { slug: "catorce",      es: "catorce",      fr: "quatorze",          audio: "/audio/espagnol/numbers/a1/catorce.mp3"      },
+  { slug: "quince",       es: "quince",       fr: "quinze",            audio: "/audio/espagnol/numbers/a1/quince.mp3"       },
+  { slug: "veinte",       es: "veinte",       fr: "vingt",             audio: "/audio/espagnol/numbers/a1/veinte.mp3"       },
+  { slug: "treinta",      es: "treinta",      fr: "trente",            audio: "/audio/espagnol/numbers/a1/treinta.mp3"      },
+  { slug: "cuarenta",     es: "cuarenta",     fr: "quarante",          audio: "/audio/espagnol/numbers/a1/cuarenta.mp3"     },
+  { slug: "cincuenta",    es: "cincuenta",    fr: "cinquante",         audio: "/audio/espagnol/numbers/a1/cincuenta.mp3"    },
+  { slug: "sesenta",      es: "sesenta",      fr: "soixante",          audio: "/audio/espagnol/numbers/a1/sesenta.mp3"      },
+  { slug: "setenta",      es: "setenta",      fr: "soixante-dix",      audio: "/audio/espagnol/numbers/a1/setenta.mp3"      },
+  { slug: "ochenta",      es: "ochenta",      fr: "quatre-vingts",     audio: "/audio/espagnol/numbers/a1/ochenta.mp3"      },
+  { slug: "noventa",      es: "noventa",      fr: "quatre-vingt-dix",  audio: "/audio/espagnol/numbers/a1/noventa.mp3"      },
+  { slug: "cien",         es: "cien",         fr: "cent",              audio: "/audio/espagnol/numbers/a1/cien.mp3"         },
+  { slug: "mil",          es: "mil",          fr: "mille",             audio: "/audio/espagnol/numbers/a1/mil.mp3"          },
 ] as const;
 
 function dFr(exclude: string) { return WORDS.filter(w => w.fr !== exclude).map(w => w.fr).slice(0, 3); }

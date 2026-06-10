@@ -1,18 +1,18 @@
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 
 const WORDS = [
-  { slug: "agua",    es: "agua",    fr: "eau",              audio: "/audio/espagnol/food/agua.mp3"    },
-  { slug: "pan",     es: "pan",     fr: "pain",             audio: "/audio/espagnol/food/pan.mp3"     },
-  { slug: "leche",   es: "leche",   fr: "lait",             audio: "/audio/espagnol/food/leche.mp3"   },
-  { slug: "fruta",   es: "fruta",   fr: "fruit",            audio: "/audio/espagnol/food/fruta.mp3"   },
-  { slug: "manzana", es: "manzana", fr: "pomme",            audio: "/audio/espagnol/food/manzana.mp3" },
-  { slug: "naranja", es: "naranja", fr: "orange (fruit)",   audio: "/audio/espagnol/food/naranja.mp3" },
-  { slug: "carne",   es: "carne",   fr: "viande",           audio: "/audio/espagnol/food/carne.mp3"   },
-  { slug: "pescado", es: "pescado", fr: "poisson",          audio: "/audio/espagnol/food/pescado.mp3" },
-  { slug: "arroz",   es: "arroz",   fr: "riz",              audio: "/audio/espagnol/food/arroz.mp3"   },
-  { slug: "verdura", es: "verdura", fr: "légume",           audio: "/audio/espagnol/food/verdura.mp3" },
-  { slug: "huevo",   es: "huevo",   fr: "œuf",              audio: "/audio/espagnol/food/huevo.mp3"   },
-  { slug: "queso",   es: "queso",   fr: "fromage",          audio: "/audio/espagnol/food/queso.mp3"   },
+  { slug: "agua",    es: "agua",    fr: "eau",              audio: "/audio/espagnol/food/a1/agua.mp3"    },
+  { slug: "pan",     es: "pan",     fr: "pain",             audio: "/audio/espagnol/food/a1/pan.mp3"     },
+  { slug: "leche",   es: "leche",   fr: "lait",             audio: "/audio/espagnol/food/a1/leche.mp3"   },
+  { slug: "fruta",   es: "fruta",   fr: "fruit",            audio: "/audio/espagnol/food/a1/fruta.mp3"   },
+  { slug: "manzana", es: "manzana", fr: "pomme",            audio: "/audio/espagnol/food/a1/manzana.mp3" },
+  { slug: "naranja", es: "naranja", fr: "orange (fruit)",   audio: "/audio/espagnol/food/a1/naranja.mp3" },
+  { slug: "carne",   es: "carne",   fr: "viande",           audio: "/audio/espagnol/food/a1/carne.mp3"   },
+  { slug: "pescado", es: "pescado", fr: "poisson",          audio: "/audio/espagnol/food/a1/pescado.mp3" },
+  { slug: "arroz",   es: "arroz",   fr: "riz",              audio: "/audio/espagnol/food/a1/arroz.mp3"   },
+  { slug: "verdura", es: "verdura", fr: "légume",           audio: "/audio/espagnol/food/a1/verdura.mp3" },
+  { slug: "huevo",   es: "huevo",   fr: "œuf",              audio: "/audio/espagnol/food/a1/huevo.mp3"   },
+  { slug: "queso",   es: "queso",   fr: "fromage",          audio: "/audio/espagnol/food/a1/queso.mp3"   },
 ] as const;
 
 function dFr(exclude: string) { return WORDS.filter(w => w.fr !== exclude).map(w => w.fr).slice(0, 3); }

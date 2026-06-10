@@ -1,20 +1,20 @@
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 
 const WORDS = [
-  { slug: "medio_ambiente",  es: "medio ambiente",  fr: "environnement",         notionId: "es_b1_environment", audio: "/audio/espagnol/environment/medio_ambiente.mp3"   },
-  { slug: "contaminacion",   es: "contaminación",   fr: "pollution",             notionId: "es_b1_environment", audio: "/audio/espagnol/environment/contaminacion.mp3"    },
-  { slug: "reciclaje",       es: "reciclaje",        fr: "recyclage",             notionId: "es_b1_environment", audio: "/audio/espagnol/environment/reciclaje.mp3"        },
-  { slug: "cambio_climatico",es: "cambio climático", fr: "changement climatique", notionId: "es_b1_environment", audio: "/audio/espagnol/environment/cambio_climatico.mp3" },
-  { slug: "energia_solar",   es: "energía solar",   fr: "énergie solaire",       notionId: "es_b1_environment", audio: "/audio/espagnol/environment/energia_solar.mp3"    },
-  { slug: "opinion",         es: "opinión",          fr: "opinion",               notionId: "es_b1_opinions",    audio: "/audio/espagnol/opinions/opinion.mp3"             },
-  { slug: "creo_que",        es: "creo que",         fr: "je pense que",          notionId: "es_b1_opinions",    audio: "/audio/espagnol/opinions/creo_que.mp3"            },
-  { slug: "estoy_de_acuerdo",es: "estoy de acuerdo", fr: "je suis d'accord",      notionId: "es_b1_opinions",    audio: "/audio/espagnol/opinions/estoy_de_acuerdo.mp3"    },
-  { slug: "periodico",       es: "periódico",        fr: "journal",               notionId: "es_b1_media",       audio: "/audio/espagnol/media/periodico.mp3"              },
-  { slug: "television",      es: "televisión",       fr: "télévision",            notionId: "es_b1_media",       audio: "/audio/espagnol/media/television.mp3"             },
-  { slug: "economia",        es: "economía",         fr: "économie",              notionId: "es_b1_economy",     audio: "/audio/espagnol/economy/economia.mp3"             },
-  { slug: "empresa",         es: "empresa",          fr: "entreprise",            notionId: "es_b1_economy",     audio: "/audio/espagnol/economy/empresa.mp3"              },
-  { slug: "laboratorio",     es: "laboratorio",      fr: "laboratoire",           notionId: "es_b1_science",     audio: "/audio/espagnol/science/laboratorio.mp3"          },
-  { slug: "experimento",     es: "experimento",      fr: "expérience",            notionId: "es_b1_science",     audio: "/audio/espagnol/science/experimento.mp3"          },
+  { slug: "medio_ambiente",  es: "medio ambiente",  fr: "environnement",         notionId: "es_b1_environment", audio: "/audio/espagnol/environment/b1/medio_ambiente.mp3"   },
+  { slug: "contaminacion",   es: "contaminación",   fr: "pollution",             notionId: "es_b1_environment", audio: "/audio/espagnol/environment/b1/contaminacion.mp3"    },
+  { slug: "reciclaje",       es: "reciclaje",        fr: "recyclage",             notionId: "es_b1_environment", audio: "/audio/espagnol/environment/b1/reciclaje.mp3"        },
+  { slug: "cambio_climatico",es: "cambio climático", fr: "changement climatique", notionId: "es_b1_environment", audio: "/audio/espagnol/environment/b1/cambio_climatico.mp3" },
+  { slug: "energia_solar",   es: "energía solar",   fr: "énergie solaire",       notionId: "es_b1_environment", audio: "/audio/espagnol/environment/b1/energia_solar.mp3"    },
+  { slug: "opinion",         es: "opinión",          fr: "opinion",               notionId: "es_b1_opinions",    audio: "/audio/espagnol/opinions/b1/opinion.mp3"             },
+  { slug: "creo_que",        es: "creo que",         fr: "je pense que",          notionId: "es_b1_opinions",    audio: "/audio/espagnol/opinions/b1/creo_que.mp3"            },
+  { slug: "estoy_de_acuerdo",es: "estoy de acuerdo", fr: "je suis d'accord",      notionId: "es_b1_opinions",    audio: "/audio/espagnol/opinions/b1/estoy_de_acuerdo.mp3"    },
+  { slug: "periodico",       es: "periódico",        fr: "journal",               notionId: "es_b1_media",       audio: "/audio/espagnol/media/b1/periodico.mp3"              },
+  { slug: "television",      es: "televisión",       fr: "télévision",            notionId: "es_b1_media",       audio: "/audio/espagnol/media/b1/television.mp3"             },
+  { slug: "economia",        es: "economía",         fr: "économie",              notionId: "es_b1_economy",     audio: "/audio/espagnol/economy/b1/economia.mp3"             },
+  { slug: "empresa",         es: "empresa",          fr: "entreprise",            notionId: "es_b1_economy",     audio: "/audio/espagnol/economy/b1/empresa.mp3"              },
+  { slug: "laboratorio",     es: "laboratorio",      fr: "laboratoire",           notionId: "es_b1_science",     audio: "/audio/espagnol/science/b1/laboratorio.mp3"          },
+  { slug: "experimento",     es: "experimento",      fr: "expérience",            notionId: "es_b1_science",     audio: "/audio/espagnol/science/b1/experimento.mp3"          },
 ] as const;
 
 function dFr(exclude: string) { return WORDS.filter(w => w.fr !== exclude).map(w => w.fr).slice(0, 3); }

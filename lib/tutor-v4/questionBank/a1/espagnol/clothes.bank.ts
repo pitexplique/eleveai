@@ -1,16 +1,16 @@
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 
 const WORDS = [
-  { slug: "camisa",   es: "camisa",   fr: "chemise",    audio: "/audio/espagnol/clothes/camisa.mp3"   },
-  { slug: "pantalon", es: "pantalón", fr: "pantalon",   audio: "/audio/espagnol/clothes/pantalon.mp3" },
-  { slug: "zapato",   es: "zapato",   fr: "chaussure",  audio: "/audio/espagnol/clothes/zapato.mp3"   },
-  { slug: "vestido",  es: "vestido",  fr: "robe",       audio: "/audio/espagnol/clothes/vestido.mp3"  },
-  { slug: "falda",    es: "falda",    fr: "jupe",       audio: "/audio/espagnol/clothes/falda.mp3"    },
-  { slug: "calcetin", es: "calcetín", fr: "chaussette", audio: "/audio/espagnol/clothes/calcetin.mp3" },
-  { slug: "abrigo",   es: "abrigo",   fr: "manteau",    audio: "/audio/espagnol/clothes/abrigo.mp3"   },
-  { slug: "gorra",    es: "gorra",    fr: "casquette",  audio: "/audio/espagnol/clothes/gorra.mp3"    },
-  { slug: "bufanda",  es: "bufanda",  fr: "écharpe",    audio: "/audio/espagnol/clothes/bufanda.mp3"  },
-  { slug: "sudadera", es: "sudadera", fr: "sweat",      audio: "/audio/espagnol/clothes/sudadera.mp3" },
+  { slug: "camisa",   es: "camisa",   fr: "chemise",    audio: "/audio/espagnol/clothes/a1/camisa.mp3"   },
+  { slug: "pantalon", es: "pantalón", fr: "pantalon",   audio: "/audio/espagnol/clothes/a1/pantalon.mp3" },
+  { slug: "zapato",   es: "zapato",   fr: "chaussure",  audio: "/audio/espagnol/clothes/a1/zapato.mp3"   },
+  { slug: "vestido",  es: "vestido",  fr: "robe",       audio: "/audio/espagnol/clothes/a1/vestido.mp3"  },
+  { slug: "falda",    es: "falda",    fr: "jupe",       audio: "/audio/espagnol/clothes/a1/falda.mp3"    },
+  { slug: "calcetin", es: "calcetín", fr: "chaussette", audio: "/audio/espagnol/clothes/a1/calcetin.mp3" },
+  { slug: "abrigo",   es: "abrigo",   fr: "manteau",    audio: "/audio/espagnol/clothes/a1/abrigo.mp3"   },
+  { slug: "gorra",    es: "gorra",    fr: "casquette",  audio: "/audio/espagnol/clothes/a1/gorra.mp3"    },
+  { slug: "bufanda",  es: "bufanda",  fr: "écharpe",    audio: "/audio/espagnol/clothes/a1/bufanda.mp3"  },
+  { slug: "sudadera", es: "sudadera", fr: "sweat",      audio: "/audio/espagnol/clothes/a1/sudadera.mp3" },
 ] as const;
 
 function dFr(exclude: string) { return WORDS.filter(w => w.fr !== exclude).map(w => w.fr).slice(0, 3); }
