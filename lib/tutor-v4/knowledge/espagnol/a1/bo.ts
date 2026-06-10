@@ -15,4 +15,8 @@ export const bo: KnowledgeBoCompetence[] = [
   { boId: "ESP_A1_HOUSE",       label: "Maison & pièces" },
   { boId: "ESP_A1_DAYS",        label: "Jours & mois" },
   { boId: "ESP_A1_GREETINGS",   label: "Salutations & politesse" },
+  { boId: "ESP_A1_MONEY",              label: "Argent & prix" },
+  { boId: "ESP_A1_GEOGRAPHY_BASIC",    label: "Géographie de base" },
+  { boId: "ESP_A1_SCIENCE_EARTH",      label: "Sciences de la Terre" },
+  { boId: "ESP_A1_SPORT_MEASUREMENTS", label: "Sport & mesures" },
 ];

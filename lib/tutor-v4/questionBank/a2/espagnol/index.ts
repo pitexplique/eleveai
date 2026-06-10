@@ -1,6 +1,6 @@
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 
-// Vocabulaire A2 — vie quotidienne, voyage, métiers
+// Vocabulaire A2 — vie quotidienne, voyage, métiers, budget, géographie, vivant, sport
 const WORDS = [
   { slug: "ciudad",      es: "ciudad",      fr: "ville",         audio: "/audio/espagnol/daily_life/a2/ciudad.mp3"      },
   { slug: "calle",       es: "calle",       fr: "rue",           audio: "/audio/espagnol/daily_life/a2/calle.mp3"       },
@@ -22,6 +22,50 @@ const WORDS = [
   { slug: "sol",         es: "sol",         fr: "soleil",        audio: "/audio/espagnol/weather/a2/sol.mp3"            },
   { slug: "viento",      es: "viento",      fr: "vent",          audio: "/audio/espagnol/weather/a2/viento.mp3"         },
   { slug: "nieve",       es: "nieve",       fr: "neige",         audio: "/audio/espagnol/weather/a2/nieve.mp3"          },
+  // Budget familial
+  { slug: "ahorrar",     es: "ahorrar",     fr: "économiser",     audio: "/audio/espagnol/family_budget/a2/ahorrar.mp3"     },
+  { slug: "gastar",      es: "gastar",      fr: "dépenser",       audio: "/audio/espagnol/family_budget/a2/gastar.mp3"      },
+  { slug: "presupuesto", es: "presupuesto", fr: "budget",         audio: "/audio/espagnol/family_budget/a2/presupuesto.mp3" },
+  { slug: "cuenta",      es: "cuenta",      fr: "compte",         audio: "/audio/espagnol/family_budget/a2/cuenta.mp3"      },
+  { slug: "tarjeta",     es: "tarjeta",     fr: "carte bancaire", audio: "/audio/espagnol/family_budget/a2/tarjeta.mp3"     },
+  { slug: "efectivo",    es: "efectivo",    fr: "espèces",        audio: "/audio/espagnol/family_budget/a2/efectivo.mp3"    },
+  { slug: "factura",     es: "factura",     fr: "facture",        audio: "/audio/espagnol/family_budget/a2/factura.mp3"     },
+  { slug: "rebajas",     es: "rebajas",     fr: "soldes",         audio: "/audio/espagnol/family_budget/a2/rebajas.mp3"     },
+  { slug: "propina",     es: "propina",     fr: "pourboire",      audio: "/audio/espagnol/family_budget/a2/propina.mp3"     },
+  { slug: "sueldo",      es: "sueldo",      fr: "salaire",        audio: "/audio/espagnol/family_budget/a2/sueldo.mp3"      },
+  // Géographie & repères
+  { slug: "mapa",        es: "mapa",        fr: "carte",          audio: "/audio/espagnol/geography/a2/mapa.mp3"       },
+  { slug: "frontera",    es: "frontera",    fr: "frontière",      audio: "/audio/espagnol/geography/a2/frontera.mp3"   },
+  { slug: "capital",     es: "capital",     fr: "capitale",       audio: "/audio/espagnol/geography/a2/capital.mp3"    },
+  { slug: "pais",        es: "país",        fr: "pays",           audio: "/audio/espagnol/geography/a2/pais.mp3"       },
+  { slug: "continente",  es: "continente",  fr: "continent",      audio: "/audio/espagnol/geography/a2/continente.mp3" },
+  { slug: "norte",       es: "norte",       fr: "nord",           audio: "/audio/espagnol/geography/a2/norte.mp3"      },
+  { slug: "sur",         es: "sur",         fr: "sud",            audio: "/audio/espagnol/geography/a2/sur.mp3"        },
+  { slug: "este",        es: "este",        fr: "est",            audio: "/audio/espagnol/geography/a2/este.mp3"       },
+  { slug: "oeste",       es: "oeste",       fr: "ouest",          audio: "/audio/espagnol/geography/a2/oeste.mp3"      },
+  { slug: "region",      es: "región",      fr: "région",         audio: "/audio/espagnol/geography/a2/region.mp3"     },
+  // Sciences du vivant
+  { slug: "planta",      es: "planta",      fr: "plante",         audio: "/audio/espagnol/science_living/a2/planta.mp3"     },
+  { slug: "arbol",       es: "árbol",       fr: "arbre",          audio: "/audio/espagnol/science_living/a2/arbol.mp3"      },
+  { slug: "flor",        es: "flor",        fr: "fleur",          audio: "/audio/espagnol/science_living/a2/flor.mp3"       },
+  { slug: "hoja",        es: "hoja",        fr: "feuille",        audio: "/audio/espagnol/science_living/a2/hoja.mp3"       },
+  { slug: "raiz",        es: "raíz",        fr: "racine",         audio: "/audio/espagnol/science_living/a2/raiz.mp3"       },
+  { slug: "semilla",     es: "semilla",     fr: "graine",         audio: "/audio/espagnol/science_living/a2/semilla.mp3"    },
+  { slug: "insecto",     es: "insecto",     fr: "insecte",        audio: "/audio/espagnol/science_living/a2/insecto.mp3"    },
+  { slug: "fruto",       es: "fruto",       fr: "fruit",          audio: "/audio/espagnol/science_living/a2/fruto.mp3"      },
+  { slug: "hierba",      es: "hierba",      fr: "herbe",          audio: "/audio/espagnol/science_living/a2/hierba.mp3"     },
+  { slug: "naturaleza",  es: "naturaleza",  fr: "nature",         audio: "/audio/espagnol/science_living/a2/naturaleza.mp3" },
+  // Verbes du sport
+  { slug: "correr",      es: "correr",      fr: "courir",         audio: "/audio/espagnol/sport_verbs/a2/correr.mp3"   },
+  { slug: "saltar",      es: "saltar",      fr: "sauter",         audio: "/audio/espagnol/sport_verbs/a2/saltar.mp3"   },
+  { slug: "nadar",       es: "nadar",       fr: "nager",          audio: "/audio/espagnol/sport_verbs/a2/nadar.mp3"    },
+  { slug: "lanzar",      es: "lanzar",      fr: "lancer",         audio: "/audio/espagnol/sport_verbs/a2/lanzar.mp3"   },
+  { slug: "ganar",       es: "ganar",       fr: "gagner",         audio: "/audio/espagnol/sport_verbs/a2/ganar.mp3"    },
+  { slug: "perder",      es: "perder",      fr: "perdre",         audio: "/audio/espagnol/sport_verbs/a2/perder.mp3"   },
+  { slug: "entrenar",    es: "entrenar",    fr: "s'entraîner",    audio: "/audio/espagnol/sport_verbs/a2/entrenar.mp3" },
+  { slug: "jugar",       es: "jugar",       fr: "jouer",          audio: "/audio/espagnol/sport_verbs/a2/jugar.mp3"    },
+  { slug: "marcar",      es: "marcar",      fr: "marquer",        audio: "/audio/espagnol/sport_verbs/a2/marcar.mp3"   },
+  { slug: "competir",    es: "competir",    fr: "concourir",      audio: "/audio/espagnol/sport_verbs/a2/competir.mp3" },
 ] as const;
 
 function dFr(exclude: string) { return WORDS.filter(w => w.fr !== exclude).map(w => w.fr).slice(0, 3); }
@@ -34,6 +78,14 @@ const notionMap: Record<string, string> = {
   autobus: "es_a2_travel", tren: "es_a2_travel", avion: "es_a2_travel",
   medico: "es_a2_jobs", enfermero: "es_a2_jobs", maestro: "es_a2_jobs", policia: "es_a2_jobs", bombero: "es_a2_jobs",
   tiempo: "es_a2_weather", lluvia: "es_a2_weather", sol: "es_a2_weather", viento: "es_a2_weather", nieve: "es_a2_weather",
+  ahorrar: "es_a2_family_budget", gastar: "es_a2_family_budget", presupuesto: "es_a2_family_budget", cuenta: "es_a2_family_budget", tarjeta: "es_a2_family_budget",
+  efectivo: "es_a2_family_budget", factura: "es_a2_family_budget", rebajas: "es_a2_family_budget", propina: "es_a2_family_budget", sueldo: "es_a2_family_budget",
+  mapa: "es_a2_geography", frontera: "es_a2_geography", capital: "es_a2_geography", pais: "es_a2_geography", continente: "es_a2_geography",
+  norte: "es_a2_geography", sur: "es_a2_geography", este: "es_a2_geography", oeste: "es_a2_geography", region: "es_a2_geography",
+  planta: "es_a2_science_living", arbol: "es_a2_science_living", flor: "es_a2_science_living", hoja: "es_a2_science_living", raiz: "es_a2_science_living",
+  semilla: "es_a2_science_living", insecto: "es_a2_science_living", fruto: "es_a2_science_living", hierba: "es_a2_science_living", naturaleza: "es_a2_science_living",
+  correr: "es_a2_sport_verbs", saltar: "es_a2_sport_verbs", nadar: "es_a2_sport_verbs", lanzar: "es_a2_sport_verbs", ganar: "es_a2_sport_verbs",
+  perder: "es_a2_sport_verbs", entrenar: "es_a2_sport_verbs", jugar: "es_a2_sport_verbs", marcar: "es_a2_sport_verbs", competir: "es_a2_sport_verbs",
 };
 
 export const espagnolA2QuestionBank: TutorBankItemV4[] = WORDS.flatMap((word) => {

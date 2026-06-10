@@ -14,6 +14,10 @@ import { clothesA1EsBank }   from "./clothes.bank";
 import { houseA1EsBank }     from "./house.bank";
 import { daysA1EsBank }      from "./days.bank";
 import { greetingsA1EsBank } from "./greetings.bank";
+import { moneyA1EsBank }             from "./money.bank";
+import { geographyBasicA1EsBank }    from "./geography_basic.bank";
+import { scienceEarthA1EsBank }      from "./science_earth.bank";
+import { sportMeasurementsA1EsBank } from "./sport_measurements.bank";
 
 export const espagnolA1QuestionBank: TutorBankItemV4[] = [
   ...digitsA1EsBank,
@@ -30,6 +34,10 @@ export const espagnolA1QuestionBank: TutorBankItemV4[] = [
   ...houseA1EsBank,
   ...daysA1EsBank,
   ...greetingsA1EsBank,
+  ...moneyA1EsBank,
+  ...geographyBasicA1EsBank,
+  ...scienceEarthA1EsBank,
+  ...sportMeasurementsA1EsBank,
 ];
 
 export function getEspagnolA1QuestionBank(args?: {

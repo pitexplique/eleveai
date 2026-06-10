@@ -336,6 +336,206 @@ const AUDIO_ENTRIES = [
   { file: "philosophy/b2/libertad.mp3",      text: "libertad"     },
   { file: "philosophy/b2/justicia.mp3",      text: "justicia"     },
 
+  // ════════════════════════════════════════════════════════════════════════
+  // FILIÈRES DISCIPLINAIRES (miroir english-maths)
+  // argent : money → family_budget → finance → macroeconomics
+  // géo    : geography_basic → geography → physical_geography → geo_statistics
+  // science: science_earth → science_living → science_biology → climate_science
+  // sport  : sport_measurements → sport_verbs → sport_stats → sport_science
+  // ════════════════════════════════════════════════════════════════════════
+
+  // ── ARGENT A1 ────────────────────────────────────────────────────────────
+  { file: "money/a1/comprar.mp3", text: "comprar" },
+  { file: "money/a1/vender.mp3",  text: "vender"  },
+  { file: "money/a1/pagar.mp3",   text: "pagar"   },
+  { file: "money/a1/precio.mp3",  text: "precio"  },
+  { file: "money/a1/dinero.mp3",  text: "dinero"  },
+  { file: "money/a1/moneda.mp3",  text: "moneda"  },
+  { file: "money/a1/billete.mp3", text: "billete" },
+  { file: "money/a1/euro.mp3",    text: "euro"    },
+  { file: "money/a1/caro.mp3",    text: "caro"    },
+  { file: "money/a1/barato.mp3",  text: "barato"  },
+
+  // ── GÉOGRAPHIE A1 ────────────────────────────────────────────────────────
+  { file: "geography_basic/a1/playa.mp3",     text: "playa"     },
+  { file: "geography_basic/a1/ciudad.mp3",    text: "ciudad"    },
+  { file: "geography_basic/a1/bosque.mp3",    text: "bosque"    },
+  { file: "geography_basic/a1/isla.mp3",      text: "isla"      },
+  { file: "geography_basic/a1/montana.mp3",   text: "montaña"   },
+  { file: "geography_basic/a1/oceano.mp3",    text: "océano"    },
+  { file: "geography_basic/a1/rio.mp3",       text: "río"       },
+  { file: "geography_basic/a1/carretera.mp3", text: "carretera" },
+  { file: "geography_basic/a1/mar.mp3",       text: "mar"       },
+  { file: "geography_basic/a1/pueblo.mp3",    text: "pueblo"    },
+
+  // ── SCIENCES DE LA TERRE A1 ──────────────────────────────────────────────
+  { file: "science_earth/a1/aire.mp3",     text: "aire"     },
+  { file: "science_earth/a1/nube.mp3",     text: "nube"     },
+  { file: "science_earth/a1/luna.mp3",     text: "luna"     },
+  { file: "science_earth/a1/roca.mp3",     text: "roca"     },
+  { file: "science_earth/a1/suelo.mp3",    text: "suelo"    },
+  { file: "science_earth/a1/estrella.mp3", text: "estrella" },
+  { file: "science_earth/a1/planeta.mp3",  text: "planeta"  },
+  { file: "science_earth/a1/tierra.mp3",   text: "tierra"   },
+  { file: "science_earth/a1/fuego.mp3",    text: "fuego"    },
+  { file: "science_earth/a1/agua.mp3",     text: "agua"     },
+
+  // ── SPORT & MESURES A1 ───────────────────────────────────────────────────
+  { file: "sport_measurements/a1/metro.mp3",      text: "metro"      },
+  { file: "sport_measurements/a1/kilometro.mp3",  text: "kilómetro"  },
+  { file: "sport_measurements/a1/centimetro.mp3", text: "centímetro" },
+  { file: "sport_measurements/a1/kilogramo.mp3",  text: "kilogramo"  },
+  { file: "sport_measurements/a1/hora.mp3",       text: "hora"       },
+  { file: "sport_measurements/a1/minuto.mp3",     text: "minuto"     },
+  { file: "sport_measurements/a1/segundo.mp3",    text: "segundo"    },
+  { file: "sport_measurements/a1/vuelta.mp3",     text: "vuelta"     },
+  { file: "sport_measurements/a1/carrera.mp3",    text: "carrera"    },
+  { file: "sport_measurements/a1/gol.mp3",        text: "gol"        },
+
+  // ── BUDGET FAMILIAL A2 ───────────────────────────────────────────────────
+  { file: "family_budget/a2/ahorrar.mp3",     text: "ahorrar"     },
+  { file: "family_budget/a2/gastar.mp3",      text: "gastar"      },
+  { file: "family_budget/a2/presupuesto.mp3", text: "presupuesto" },
+  { file: "family_budget/a2/cuenta.mp3",      text: "cuenta"      },
+  { file: "family_budget/a2/tarjeta.mp3",     text: "tarjeta"     },
+  { file: "family_budget/a2/efectivo.mp3",    text: "efectivo"    },
+  { file: "family_budget/a2/factura.mp3",     text: "factura"     },
+  { file: "family_budget/a2/rebajas.mp3",     text: "rebajas"     },
+  { file: "family_budget/a2/propina.mp3",     text: "propina"     },
+  { file: "family_budget/a2/sueldo.mp3",      text: "sueldo"      },
+
+  // ── GÉOGRAPHIE A2 ────────────────────────────────────────────────────────
+  { file: "geography/a2/mapa.mp3",       text: "mapa"       },
+  { file: "geography/a2/frontera.mp3",   text: "frontera"   },
+  { file: "geography/a2/capital.mp3",    text: "capital"    },
+  { file: "geography/a2/pais.mp3",       text: "país"       },
+  { file: "geography/a2/continente.mp3", text: "continente" },
+  { file: "geography/a2/norte.mp3",      text: "norte"      },
+  { file: "geography/a2/sur.mp3",        text: "sur"        },
+  { file: "geography/a2/este.mp3",       text: "este"       },
+  { file: "geography/a2/oeste.mp3",      text: "oeste"      },
+  { file: "geography/a2/region.mp3",     text: "región"     },
+
+  // ── SCIENCES DU VIVANT A2 ────────────────────────────────────────────────
+  { file: "science_living/a2/planta.mp3",     text: "planta"     },
+  { file: "science_living/a2/arbol.mp3",      text: "árbol"      },
+  { file: "science_living/a2/flor.mp3",       text: "flor"       },
+  { file: "science_living/a2/hoja.mp3",       text: "hoja"       },
+  { file: "science_living/a2/raiz.mp3",       text: "raíz"       },
+  { file: "science_living/a2/semilla.mp3",    text: "semilla"    },
+  { file: "science_living/a2/insecto.mp3",    text: "insecto"    },
+  { file: "science_living/a2/fruto.mp3",      text: "fruto"      },
+  { file: "science_living/a2/hierba.mp3",     text: "hierba"     },
+  { file: "science_living/a2/naturaleza.mp3", text: "naturaleza" },
+
+  // ── VERBES DU SPORT A2 ───────────────────────────────────────────────────
+  { file: "sport_verbs/a2/correr.mp3",   text: "correr"   },
+  { file: "sport_verbs/a2/saltar.mp3",   text: "saltar"   },
+  { file: "sport_verbs/a2/nadar.mp3",    text: "nadar"    },
+  { file: "sport_verbs/a2/lanzar.mp3",   text: "lanzar"   },
+  { file: "sport_verbs/a2/ganar.mp3",    text: "ganar"    },
+  { file: "sport_verbs/a2/perder.mp3",   text: "perder"   },
+  { file: "sport_verbs/a2/entrenar.mp3", text: "entrenar" },
+  { file: "sport_verbs/a2/jugar.mp3",    text: "jugar"    },
+  { file: "sport_verbs/a2/marcar.mp3",   text: "marcar"   },
+  { file: "sport_verbs/a2/competir.mp3", text: "competir" },
+
+  // ── FINANCE B1 ───────────────────────────────────────────────────────────
+  { file: "finance/b1/inversion.mp3", text: "inversión" },
+  { file: "finance/b1/prestamo.mp3",  text: "préstamo"  },
+  { file: "finance/b1/interes.mp3",   text: "interés"   },
+  { file: "finance/b1/beneficio.mp3", text: "beneficio" },
+  { file: "finance/b1/perdida.mp3",   text: "pérdida"   },
+  { file: "finance/b1/impuesto.mp3",  text: "impuesto"  },
+  { file: "finance/b1/mercado.mp3",   text: "mercado"   },
+  { file: "finance/b1/ahorro.mp3",    text: "ahorro"    },
+  { file: "finance/b1/deuda.mp3",     text: "deuda"     },
+  { file: "finance/b1/hipoteca.mp3",  text: "hipoteca"  },
+
+  // ── GÉOGRAPHIE PHYSIQUE B1 ───────────────────────────────────────────────
+  { file: "physical_geography/b1/clima.mp3",      text: "clima"      },
+  { file: "physical_geography/b1/desierto.mp3",   text: "desierto"   },
+  { file: "physical_geography/b1/valle.mp3",      text: "valle"      },
+  { file: "physical_geography/b1/cordillera.mp3", text: "cordillera" },
+  { file: "physical_geography/b1/meseta.mp3",     text: "meseta"     },
+  { file: "physical_geography/b1/costa.mp3",      text: "costa"      },
+  { file: "physical_geography/b1/peninsula.mp3",  text: "península"  },
+  { file: "physical_geography/b1/glaciar.mp3",    text: "glaciar"    },
+  { file: "physical_geography/b1/llanura.mp3",    text: "llanura"    },
+  { file: "physical_geography/b1/selva.mp3",      text: "selva"      },
+
+  // ── BIOLOGIE B1 ──────────────────────────────────────────────────────────
+  { file: "science_biology/b1/celula.mp3",     text: "célula"     },
+  { file: "science_biology/b1/oxigeno.mp3",    text: "oxígeno"    },
+  { file: "science_biology/b1/bacteria.mp3",   text: "bacteria"   },
+  { file: "science_biology/b1/virus.mp3",      text: "virus"      },
+  { file: "science_biology/b1/vacuna.mp3",     text: "vacuna"     },
+  { file: "science_biology/b1/cerebro.mp3",    text: "cerebro"    },
+  { file: "science_biology/b1/sangre.mp3",     text: "sangre"     },
+  { file: "science_biology/b1/gen.mp3",        text: "gen"        },
+  { file: "science_biology/b1/especie.mp3",    text: "especie"    },
+  { file: "science_biology/b1/ecosistema.mp3", text: "ecosistema" },
+
+  // ── SPORT & STATISTIQUES B1 ──────────────────────────────────────────────
+  { file: "sport_stats/b1/record.mp3",        text: "récord"        },
+  { file: "sport_stats/b1/velocidad.mp3",     text: "velocidad"     },
+  { file: "sport_stats/b1/distancia.mp3",     text: "distancia"     },
+  { file: "sport_stats/b1/puntuacion.mp3",    text: "puntuación"    },
+  { file: "sport_stats/b1/clasificacion.mp3", text: "clasificación" },
+  { file: "sport_stats/b1/promedio.mp3",      text: "promedio"      },
+  { file: "sport_stats/b1/resultado.mp3",     text: "resultado"     },
+  { file: "sport_stats/b1/rendimiento.mp3",   text: "rendimiento"   },
+  { file: "sport_stats/b1/temporada.mp3",     text: "temporada"     },
+  { file: "sport_stats/b1/torneo.mp3",        text: "torneo"        },
+
+  // ── MACROÉCONOMIE B2 ─────────────────────────────────────────────────────
+  { file: "macroeconomics/b2/inflacion.mp3",         text: "inflación"               },
+  { file: "macroeconomics/b2/desempleo.mp3",         text: "desempleo"               },
+  { file: "macroeconomics/b2/crecimiento.mp3",       text: "crecimiento"             },
+  { file: "macroeconomics/b2/pib.mp3",               text: "producto interior bruto" },
+  { file: "macroeconomics/b2/deuda_publica.mp3",     text: "deuda pública"           },
+  { file: "macroeconomics/b2/exportacion.mp3",       text: "exportación"             },
+  { file: "macroeconomics/b2/importacion.mp3",       text: "importación"             },
+  { file: "macroeconomics/b2/mercado_laboral.mp3",   text: "mercado laboral"         },
+  { file: "macroeconomics/b2/crisis.mp3",            text: "crisis"                  },
+  { file: "macroeconomics/b2/poder_adquisitivo.mp3", text: "poder adquisitivo"       },
+
+  // ── GÉOGRAPHIE & DÉMOGRAPHIE B2 ──────────────────────────────────────────
+  { file: "geo_statistics/b2/poblacion.mp3",         text: "población"         },
+  { file: "geo_statistics/b2/densidad.mp3",          text: "densidad"          },
+  { file: "geo_statistics/b2/urbanizacion.mp3",      text: "urbanización"      },
+  { file: "geo_statistics/b2/migracion.mp3",         text: "migración"         },
+  { file: "geo_statistics/b2/natalidad.mp3",         text: "natalidad"         },
+  { file: "geo_statistics/b2/mortalidad.mp3",        text: "mortalidad"        },
+  { file: "geo_statistics/b2/esperanza_de_vida.mp3", text: "esperanza de vida" },
+  { file: "geo_statistics/b2/censo.mp3",             text: "censo"             },
+  { file: "geo_statistics/b2/demografia.mp3",        text: "demografía"        },
+  { file: "geo_statistics/b2/exodo_rural.mp3",       text: "éxodo rural"       },
+
+  // ── SCIENCE DU CLIMAT B2 ─────────────────────────────────────────────────
+  { file: "climate_science/b2/efecto_invernadero.mp3",   text: "efecto invernadero"   },
+  { file: "climate_science/b2/calentamiento_global.mp3", text: "calentamiento global" },
+  { file: "climate_science/b2/emisiones.mp3",            text: "emisiones"            },
+  { file: "climate_science/b2/combustibles_fosiles.mp3", text: "combustibles fósiles" },
+  { file: "climate_science/b2/energia_renovable.mp3",    text: "energía renovable"    },
+  { file: "climate_science/b2/sequia.mp3",               text: "sequía"               },
+  { file: "climate_science/b2/deshielo.mp3",             text: "deshielo"             },
+  { file: "climate_science/b2/huella_de_carbono.mp3",    text: "huella de carbono"    },
+  { file: "climate_science/b2/biodiversidad.mp3",        text: "biodiversidad"        },
+  { file: "climate_science/b2/sostenibilidad.mp3",       text: "sostenibilidad"       },
+
+  // ── SCIENCE DU SPORT B2 ──────────────────────────────────────────────────
+  { file: "sport_science/b2/resistencia.mp3",         text: "resistencia"         },
+  { file: "sport_science/b2/fuerza.mp3",              text: "fuerza"              },
+  { file: "sport_science/b2/nutricion.mp3",           text: "nutrición"           },
+  { file: "sport_science/b2/hidratacion.mp3",         text: "hidratación"         },
+  { file: "sport_science/b2/lesion.mp3",              text: "lesión"              },
+  { file: "sport_science/b2/recuperacion.mp3",        text: "recuperación"        },
+  { file: "sport_science/b2/frecuencia_cardiaca.mp3", text: "frecuencia cardíaca" },
+  { file: "sport_science/b2/potencia.mp3",            text: "potencia"            },
+  { file: "sport_science/b2/dopaje.mp3",              text: "dopaje"              },
+  { file: "sport_science/b2/fisiologia.mp3",          text: "fisiología"          },
+
 ];
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────

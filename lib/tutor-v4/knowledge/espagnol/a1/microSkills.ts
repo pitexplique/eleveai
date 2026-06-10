@@ -70,4 +70,24 @@ export const microSkills: MicroSkillSource[] = [
   { id: "es_a1_greetings_es_to_fr", label: "Reconnaître la salutation ES → FR",  notionId: "es_a1_greetings", prerequis: [] },
   { id: "es_a1_greetings_fr_to_es", label: "Donner la salutation FR → ES",        notionId: "es_a1_greetings", prerequis: ["es_a1_greetings_es_to_fr"] },
   { id: "es_a1_greetings_listen",   label: "Écouter et identifier la salutation 🔊", notionId: "es_a1_greetings", prerequis: ["es_a1_greetings_es_to_fr"] },
+
+  // ── Argent & prix ────────────────────────────────────────────────────────────
+  { id: "es_a1_money_es_to_fr", label: "Reconnaître le mot d'argent ES → FR",     notionId: "es_a1_money", prerequis: [] },
+  { id: "es_a1_money_fr_to_es", label: "Donner le mot d'argent FR → ES",           notionId: "es_a1_money", prerequis: ["es_a1_money_es_to_fr"] },
+  { id: "es_a1_money_listen",   label: "Écouter et identifier le mot d'argent 🔊", notionId: "es_a1_money", prerequis: ["es_a1_money_es_to_fr"] },
+
+  // ── Géographie de base ───────────────────────────────────────────────────────
+  { id: "es_a1_geography_basic_es_to_fr", label: "Reconnaître le lieu ES → FR",   notionId: "es_a1_geography_basic", prerequis: [] },
+  { id: "es_a1_geography_basic_fr_to_es", label: "Donner le lieu FR → ES",         notionId: "es_a1_geography_basic", prerequis: ["es_a1_geography_basic_es_to_fr"] },
+  { id: "es_a1_geography_basic_listen",   label: "Écouter et identifier le lieu 🔊", notionId: "es_a1_geography_basic", prerequis: ["es_a1_geography_basic_es_to_fr"] },
+
+  // ── Sciences de la Terre ─────────────────────────────────────────────────────
+  { id: "es_a1_science_earth_es_to_fr", label: "Reconnaître l'élément naturel ES → FR",   notionId: "es_a1_science_earth", prerequis: [] },
+  { id: "es_a1_science_earth_fr_to_es", label: "Donner l'élément naturel FR → ES",         notionId: "es_a1_science_earth", prerequis: ["es_a1_science_earth_es_to_fr"] },
+  { id: "es_a1_science_earth_listen",   label: "Écouter et identifier l'élément naturel 🔊", notionId: "es_a1_science_earth", prerequis: ["es_a1_science_earth_es_to_fr"] },
+
+  // ── Sport & mesures ──────────────────────────────────────────────────────────
+  { id: "es_a1_sport_measurements_es_to_fr", label: "Reconnaître la mesure ES → FR",   notionId: "es_a1_sport_measurements", prerequis: [] },
+  { id: "es_a1_sport_measurements_fr_to_es", label: "Donner la mesure FR → ES",         notionId: "es_a1_sport_measurements", prerequis: ["es_a1_sport_measurements_es_to_fr"] },
+  { id: "es_a1_sport_measurements_listen",   label: "Écouter et identifier la mesure 🔊", notionId: "es_a1_sport_measurements", prerequis: ["es_a1_sport_measurements_es_to_fr"] },
 ];

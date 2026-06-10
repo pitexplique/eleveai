@@ -15,4 +15,8 @@ export const notions: NotionSource[] = [
   { id: "es_a1_house",     label: "Maison",              boId: "ESP_A1_HOUSE",     prerequis: [],                  levels: [1, 2, 3] },
   { id: "es_a1_days",      label: "Jours & mois",        boId: "ESP_A1_DAYS",      prerequis: [],                  levels: [1, 2, 3] },
   { id: "es_a1_greetings", label: "Salutations",         boId: "ESP_A1_GREETINGS", prerequis: [],                  levels: [1, 2, 3] },
+  { id: "es_a1_money",              label: "Argent & prix",        boId: "ESP_A1_MONEY",              prerequis: ["es_a1_digits"], levels: [1, 2, 3] },
+  { id: "es_a1_geography_basic",    label: "Géographie de base",   boId: "ESP_A1_GEOGRAPHY_BASIC",    prerequis: [],               levels: [1, 2, 3] },
+  { id: "es_a1_science_earth",      label: "Sciences de la Terre", boId: "ESP_A1_SCIENCE_EARTH",      prerequis: [],               levels: [1, 2, 3] },
+  { id: "es_a1_sport_measurements", label: "Sport & mesures",      boId: "ESP_A1_SPORT_MEASUREMENTS", prerequis: ["es_a1_digits"], levels: [1, 2, 3] },
 ];
