@@ -180,13 +180,28 @@ export default function DashboardEleveClient() {
         return;
       }
 
-      const [parcoursResponse, calculRapideResponse, defisJourResponse, englishResponse, tutorResponse] =
+      const parcoursCols =
+        "id, code_etablissement, code_utilisateur, nom, classe, niveau, matiere, score, total, pourcentage, details, created_at";
+
+      const [parcoursResponse, parcoursEnglishResponse, parcoursEspagnolResponse, calculRapideResponse, defisJourResponse, englishResponse, tutorResponse] =
         await Promise.all([
           supabase
             .from("resultats_parcours_maths")
-            .select(
-              "id, code_etablissement, code_utilisateur, nom, classe, niveau, matiere, score, total, pourcentage, details, created_at"
-            )
+            .select(parcoursCols)
+            .eq("code_etablissement", codeEtablissement)
+            .eq("code_utilisateur", codeUtilisateur)
+            .order("created_at", { ascending: false }),
+
+          supabase
+            .from("resultats_parcours_english")
+            .select(parcoursCols)
+            .eq("code_etablissement", codeEtablissement)
+            .eq("code_utilisateur", codeUtilisateur)
+            .order("created_at", { ascending: false }),
+
+          supabase
+            .from("resultats_parcours_espagnol")
+            .select(parcoursCols)
             .eq("code_etablissement", codeEtablissement)
             .eq("code_utilisateur", codeUtilisateur)
             .order("created_at", { ascending: false }),
@@ -244,7 +259,16 @@ export default function DashboardEleveClient() {
         return;
       }
 
-      setResultatsParcours((parcoursResponse.data ?? []) as ResultatParcours[]);
+      // Parcours English/Espagnol : tables optionnelles (créées séparément).
+      // Une erreur (table absente) ne doit pas bloquer le chargement.
+      if (parcoursEnglishResponse.error) console.warn("resultats_parcours_english indisponible :", parcoursEnglishResponse.error.message);
+      if (parcoursEspagnolResponse.error) console.warn("resultats_parcours_espagnol indisponible :", parcoursEspagnolResponse.error.message);
+
+      setResultatsParcours([
+        ...(parcoursResponse.data ?? []),
+        ...(parcoursEnglishResponse.data ?? []),
+        ...(parcoursEspagnolResponse.data ?? []),
+      ] as ResultatParcours[]);
 
       setResultatsCalculRapide(
         (calculRapideResponse.data ?? []) as ResultatCalculRapide[]

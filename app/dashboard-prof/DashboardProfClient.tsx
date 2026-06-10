@@ -128,15 +128,27 @@ export default function DashboardProfClient() {
         return;
       }
 
-      const [elevesRes, parcoursRes, calculRes, defisRes, englishRes, tutorRes] = await Promise.all([
+      const parcoursCols = "id, code_etablissement, code_utilisateur, nom, classe, niveau, matiere, score, total, pourcentage, created_at";
+
+      const [elevesRes, parcoursRes, parcoursEnglishRes, parcoursEspagnolRes, calculRes, defisRes, englishRes, tutorRes] = await Promise.all([
         supabase.from("acces_etablissement")
           .select("id, code_etablissement, code_utilisateur, type_utilisateur, nom, classe, actif, created_at")
           .eq("code_etablissement", codeEtablissement)
           .eq("type_utilisateur", "eleve")
           .order("nom", { ascending: true }),
 
-        supabase.from("resultats_parcours")
-          .select("id, code_etablissement, code_utilisateur, nom, classe, niveau, matiere, score, total, pourcentage, created_at")
+        supabase.from("resultats_parcours_maths")
+          .select(parcoursCols)
+          .eq("code_etablissement", codeEtablissement)
+          .order("created_at", { ascending: false }),
+
+        supabase.from("resultats_parcours_english")
+          .select(parcoursCols)
+          .eq("code_etablissement", codeEtablissement)
+          .order("created_at", { ascending: false }),
+
+        supabase.from("resultats_parcours_espagnol")
+          .select(parcoursCols)
           .eq("code_etablissement", codeEtablissement)
           .order("created_at", { ascending: false }),
 
@@ -167,8 +179,17 @@ export default function DashboardProfClient() {
         return;
       }
 
+      // Parcours English/Espagnol : tables optionnelles (créées séparément).
+      // Une erreur (table absente) ne doit pas bloquer le dashboard.
+      if (parcoursEnglishRes.error) console.warn("resultats_parcours_english indisponible :", parcoursEnglishRes.error.message);
+      if (parcoursEspagnolRes.error) console.warn("resultats_parcours_espagnol indisponible :", parcoursEspagnolRes.error.message);
+
       setEleves((elevesRes.data ?? []) as AccesEtablissement[]);
-      setResultatsParcours((parcoursRes.data ?? []) as ResultatParcours[]);
+      setResultatsParcours([
+        ...(parcoursRes.data ?? []),
+        ...(parcoursEnglishRes.data ?? []),
+        ...(parcoursEspagnolRes.data ?? []),
+      ] as ResultatParcours[]);
       setResultatsCalculRapide((calculRes.data ?? []) as ResultatCalculRapide[]);
       setResultatsDefisJour((defisRes.data ?? []) as ResultatDefiJour[]);
       setResultatsEnglish((englishRes.data ?? []) as ResultatEnglish[]);

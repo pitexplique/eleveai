@@ -106,14 +106,26 @@ export default function DashboardPrincipalClient() {
       setLoading(true);
       setError(null);
 
-      const [comptesRes, parcoursRes, calculRes, defisRes, englishRes, tutorRes] = await Promise.all([
+      const parcoursCols = "id, code_etablissement, code_utilisateur, nom, score, total, pourcentage, created_at";
+
+      const [comptesRes, parcoursRes, parcoursEnglishRes, parcoursEspagnolRes, calculRes, defisRes, englishRes, tutorRes] = await Promise.all([
         supabase.from("acces_etablissement")
           .select("id, code_etablissement, code_utilisateur, type_utilisateur, nom, classe, actif, created_at")
           .eq("code_etablissement", codeEtab)
           .order("type_utilisateur").order("nom"),
 
-        supabase.from("resultats_parcours")
-          .select("id, code_etablissement, code_utilisateur, nom, score, total, pourcentage, created_at")
+        supabase.from("resultats_parcours_maths")
+          .select(parcoursCols)
+          .eq("code_etablissement", codeEtab)
+          .order("created_at", { ascending: false }),
+
+        supabase.from("resultats_parcours_english")
+          .select(parcoursCols)
+          .eq("code_etablissement", codeEtab)
+          .order("created_at", { ascending: false }),
+
+        supabase.from("resultats_parcours_espagnol")
+          .select(parcoursCols)
           .eq("code_etablissement", codeEtab)
           .order("created_at", { ascending: false }),
 
@@ -141,7 +153,11 @@ export default function DashboardPrincipalClient() {
       if (comptesRes.error) { setError("Erreur de chargement."); setLoading(false); return; }
 
       setComptes((comptesRes.data ?? []) as AccesRow[]);
-      setParcours((parcoursRes.data ?? []) as ResultatBase[]);
+      setParcours([
+        ...(parcoursRes.data ?? []),
+        ...(parcoursEnglishRes.data ?? []),
+        ...(parcoursEspagnolRes.data ?? []),
+      ] as ResultatBase[]);
       setCalculs((calculRes.data ?? []) as ResultatBase[]);
       setDefis((defisRes.data ?? []) as ResultatBase[]);
       setEnglish((englishRes.data ?? []) as ResultatBase[]);
