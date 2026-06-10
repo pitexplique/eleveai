@@ -59,17 +59,6 @@ const SUBJECTS = [
     cm: false,
   },
   {
-    icon: "🔬",
-    label: "Sciences",
-    desc: "Observer, comprendre, expérimenter",
-    href: "/coach-ia/maths",
-    bg: "from-violet-500 to-purple-700",
-    border: "border-violet-400/50",
-    glow: "group-hover:shadow-violet-500/40",
-    cm: false,
-    soon: true,
-  },
-  {
     icon: "📊",
     label: "Économie",
     desc: "Comprendre le monde économique",
@@ -209,29 +198,21 @@ export default function AccueilPage() {
       {/* ── SUBJECT CARDS cliquables ────────────────────────────────────────── */}
       <section className="bg-[#041B33] px-4 py-8 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-5xl">
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4">
             {visibleSubjects.map((subject) => (
               <Link
                 key={subject.label}
-                href={subject.soon ? "#" : getHref(subject.href)}
+                href={getHref(subject.href)}
                 className={[
                   "group relative flex flex-col items-center justify-center gap-2 rounded-2xl border p-4 sm:p-5 text-center",
                   "bg-white/5 backdrop-blur-md transition-all duration-300",
                   "hover:-translate-y-2 hover:scale-105",
                   `hover:shadow-2xl ${subject.glow}`,
                   subject.border,
-                  subject.soon ? "opacity-70 cursor-not-allowed" : "",
                 ].join(" ")}
               >
                 {/* Gradient bg on hover */}
                 <div className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${subject.bg} opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
-
-                {/* Soon badge */}
-                {subject.soon && (
-                  <span className="absolute -top-2 -right-2 z-20 rounded-full bg-amber-500 px-2 py-0.5 text-[9px] font-black text-white">
-                    Bientôt
-                  </span>
-                )}
 
                 <span className="relative z-10 text-3xl sm:text-4xl drop-shadow-lg">
                   {subject.icon}
@@ -337,6 +318,74 @@ export default function AccueilPage() {
               </div>
             </Link>
           )}
+        </div>
+      </section>
+
+      {/* ── CONFIANCE ────────────────────────────────────────────────────────── */}
+      <section className="px-4 pb-10 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-5xl">
+          <h2 className="text-lg font-black text-white mb-4">🤝 Une plateforme de confiance</h2>
+          <div className="grid gap-3 sm:grid-cols-3">
+            <Link
+              href="/qui-sommes-nous"
+              className="group rounded-2xl border border-white/10 bg-white/5 p-5 transition-all hover:-translate-y-1 hover:border-emerald-400/40 hover:bg-white/10"
+            >
+              <span className="text-2xl">🧑‍🏫</span>
+              <p className="mt-2 text-sm font-black text-white">Conçu par un enseignant</p>
+              <p className="mt-1 text-xs leading-relaxed text-white/60">
+                EleveAI est créé par un enseignant en activité à La Réunion, en lien avec les programmes officiels.
+              </p>
+              <p className="mt-2 text-xs font-black text-emerald-300 transition group-hover:translate-x-1">Notre démarche →</p>
+            </Link>
+            <Link
+              href="/remerciements"
+              className="group rounded-2xl border border-white/10 bg-white/5 p-5 transition-all hover:-translate-y-1 hover:border-yellow-400/40 hover:bg-white/10"
+            >
+              <span className="text-2xl">🙏</span>
+              <p className="mt-2 text-sm font-black text-white">Amélioré avec les élèves</p>
+              <p className="mt-1 text-xs leading-relaxed text-white/60">
+                Des élèves testeurs donnent leur avis, signalent les problèmes et font progresser la plateforme.
+              </p>
+              <p className="mt-2 text-xs font-black text-yellow-300 transition group-hover:translate-x-1">Nos élèves testeurs →</p>
+            </Link>
+            <Link
+              href="/politique-confidentialite"
+              className="group rounded-2xl border border-white/10 bg-white/5 p-5 transition-all hover:-translate-y-1 hover:border-sky-400/40 hover:bg-white/10"
+            >
+              <span className="text-2xl">🔒</span>
+              <p className="mt-2 text-sm font-black text-white">Données protégées</p>
+              <p className="mt-1 text-xs leading-relaxed text-white/60">
+                Conforme au RGPD : droit d&apos;accès et de suppression. Aucun nom de famille d&apos;élève n&apos;est publié.
+              </p>
+              <p className="mt-2 text-xs font-black text-sky-300 transition group-hover:translate-x-1">Notre politique →</p>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ── TARIFS ───────────────────────────────────────────────────────────── */}
+      <section className="px-4 pb-12 sm:px-6 lg:px-8">
+        <div className="mx-auto flex max-w-5xl flex-col items-center justify-between gap-4 rounded-2xl border border-emerald-400/30 bg-emerald-400/10 p-6 sm:flex-row">
+          <div>
+            <p className="text-base font-black text-white">💶 Des tarifs simples et justes</p>
+            <p className="mt-1 text-sm leading-relaxed text-white/70">
+              Gratuit pour les élèves dans le cadre scolaire · 4,99 €/mois pour une famille · 199 €/an pour une classe entière.
+            </p>
+          </div>
+          <div className="flex shrink-0 flex-wrap justify-center gap-3">
+            <Link
+              href="/tarifs"
+              className="rounded-full bg-emerald-500 px-5 py-2.5 text-sm font-black text-white transition hover:bg-emerald-400 hover:scale-105"
+            >
+              Voir les tarifs
+            </Link>
+            <Link
+              href="/contact"
+              className="rounded-full border border-emerald-400/50 bg-white/5 px-5 py-2.5 text-sm font-black text-emerald-200 transition hover:bg-white/10 hover:scale-105"
+            >
+              Pilote gratuit · 4 semaines
+            </Link>
+          </div>
         </div>
       </section>
 
