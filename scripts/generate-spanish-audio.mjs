@@ -576,6 +576,7 @@ async function generateAudio(text, outputPath) {
     };
 
     const req = https.request(options, (res) => {
+      res.setTimeout(60000, () => req.destroy(new Error("timeout de réponse (60 s)")));
       if (res.statusCode !== 200) {
         let errorData = "";
         res.on("data", (chunk) => (errorData += chunk));
@@ -592,10 +593,23 @@ async function generateAudio(text, outputPath) {
       });
     });
 
+    req.setTimeout(60000, () => req.destroy(new Error("timeout de connexion (60 s)")));
     req.on("error", reject);
     req.write(body);
     req.end();
   });
+}
+
+async function generateAudioWithRetry(text, outputPath, maxAttempts = 3) {
+  for (let attempt = 1; ; attempt++) {
+    try {
+      return await generateAudio(text, outputPath);
+    } catch (err) {
+      if (attempt >= maxAttempts) throw err;
+      process.stdout.write(`🔁  retry  ${path.basename(outputPath)} (${attempt}/${maxAttempts}) — ${err.message}\n`);
+      await sleep(2000 * attempt);
+    }
+  }
 }
 
 // ─── Main ─────────────────────────────────────────────────────────────────────
@@ -651,7 +665,7 @@ async function main() {
 
     try {
       ensureDir(outputPath);
-      await generateAudio(entry.text, outputPath);
+      await generateAudioWithRetry(entry.text, outputPath);
       process.stdout.write(`✅  gen    ${entry.file}\n`);
       generated++;
       await sleep(DELAY_MS);
