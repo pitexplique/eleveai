@@ -1,16 +1,16 @@
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 
 const WORDS = [
-  { slug: "triangle",  en: "triangle",  fr: "triangle",  audio: "/audio/english-maths/geometry/triangle.mp3" },
-  { slug: "square",    en: "square",    fr: "carré",     audio: "/audio/english-maths/geometry/square.mp3" },
-  { slug: "rectangle", en: "rectangle", fr: "rectangle", audio: "/audio/english-maths/geometry/rectangle.mp3" },
-  { slug: "circle",    en: "circle",    fr: "cercle",    audio: "/audio/english-maths/geometry/circle.mp3" },
-  { slug: "point",     en: "point",     fr: "point",     audio: "/audio/english-maths/geometry/point.mp3" },
-  { slug: "line",      en: "line",      fr: "droite",    audio: "/audio/english-maths/geometry/line.mp3" },
-  { slug: "side",      en: "side",      fr: "côté",      audio: "/audio/english-maths/geometry/side.mp3" },
-  { slug: "angle",     en: "angle",     fr: "angle",     audio: "/audio/english-maths/geometry/angle.mp3" },
-  { slug: "vertex",    en: "vertex",    fr: "sommet",    audio: "/audio/english-maths/geometry/vertex.mp3" },
-  { slug: "perimeter", en: "perimeter", fr: "périmètre", audio: "/audio/english-maths/geometry/perimeter.mp3" },
+  { slug: "triangle",  en: "triangle",  fr: "triangle",  audio: "/audio/english-maths/geometry/a1/triangle.mp3" },
+  { slug: "square",    en: "square",    fr: "carré",     audio: "/audio/english-maths/geometry/a1/square.mp3" },
+  { slug: "rectangle", en: "rectangle", fr: "rectangle", audio: "/audio/english-maths/geometry/a1/rectangle.mp3" },
+  { slug: "circle",    en: "circle",    fr: "cercle",    audio: "/audio/english-maths/geometry/a1/circle.mp3" },
+  { slug: "point",     en: "point",     fr: "point",     audio: "/audio/english-maths/geometry/a1/point.mp3" },
+  { slug: "line",      en: "line",      fr: "droite",    audio: "/audio/english-maths/geometry/a1/line.mp3" },
+  { slug: "side",      en: "side",      fr: "côté",      audio: "/audio/english-maths/geometry/a1/side.mp3" },
+  { slug: "angle",     en: "angle",     fr: "angle",     audio: "/audio/english-maths/geometry/a1/angle.mp3" },
+  { slug: "vertex",    en: "vertex",    fr: "sommet",    audio: "/audio/english-maths/geometry/a1/vertex.mp3" },
+  { slug: "perimeter", en: "perimeter", fr: "périmètre", audio: "/audio/english-maths/geometry/a1/perimeter.mp3" },
 ] as const;
 
 function dFr(exclude: string) { return WORDS.filter(w => w.fr !== exclude).map(w => w.fr).slice(0, 3); }

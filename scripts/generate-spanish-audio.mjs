@@ -524,6 +524,151 @@ const AUDIO_ENTRIES = [
   { file: "climate_science/b2/biodiversidad.mp3",        text: "biodiversidad"        },
   { file: "climate_science/b2/sostenibilidad.mp3",       text: "sostenibilidad"       },
 
+  // ════════════════════════════════════════════════════════════════════════
+  // COMPLÉTION DES THÈMES EXISTANTS (10 mots par thème)
+  // ════════════════════════════════════════════════════════════════════════
+
+  // ── VIE QUOTIDIENNE A2 (complément) ──────────────────────────────────────
+  { file: "daily_life/a2/plaza.mp3",    text: "plaza"    },
+  { file: "daily_life/a2/barrio.mp3",   text: "barrio"   },
+  { file: "daily_life/a2/parque.mp3",   text: "parque"   },
+  { file: "daily_life/a2/puente.mp3",   text: "puente"   },
+  { file: "daily_life/a2/edificio.mp3", text: "edificio" },
+  { file: "daily_life/a2/esquina.mp3",  text: "esquina"  },
+  { file: "daily_life/a2/semaforo.mp3", text: "semáforo" },
+  { file: "daily_life/a2/acera.mp3",    text: "acera"    },
+
+  // ── SANTÉ A2 (complément) ────────────────────────────────────────────────
+  { file: "health/a2/enfermedad.mp3", text: "enfermedad" },
+  { file: "health/a2/fiebre.mp3",     text: "fiebre"     },
+  { file: "health/a2/dolor.mp3",      text: "dolor"      },
+  { file: "health/a2/gripe.mp3",      text: "gripe"      },
+  { file: "health/a2/herida.mp3",     text: "herida"     },
+  { file: "health/a2/medicina.mp3",   text: "medicina"   },
+  { file: "health/a2/cita.mp3",       text: "cita"       },
+  { file: "health/a2/receta.mp3",     text: "receta"     },
+
+  // ── SHOPPING A2 (complément) ─────────────────────────────────────────────
+  { file: "shopping/a2/caja.mp3",         text: "caja"         },
+  { file: "shopping/a2/bolsa.mp3",        text: "bolsa"        },
+  { file: "shopping/a2/cliente.mp3",      text: "cliente"      },
+  { file: "shopping/a2/vendedor.mp3",     text: "vendedor"     },
+  { file: "shopping/a2/regalo.mp3",       text: "regalo"       },
+  { file: "shopping/a2/descuento.mp3",    text: "descuento"    },
+  { file: "shopping/a2/supermercado.mp3", text: "supermercado" },
+
+  // ── VOYAGE A2 (complément) ───────────────────────────────────────────────
+  { file: "travel/a2/aeropuerto.mp3", text: "aeropuerto" },
+  { file: "travel/a2/estacion.mp3",   text: "estación"   },
+  { file: "travel/a2/maleta.mp3",     text: "maleta"     },
+  { file: "travel/a2/viaje.mp3",      text: "viaje"      },
+  { file: "travel/a2/pasaporte.mp3",  text: "pasaporte"  },
+  { file: "travel/a2/hotel.mp3",      text: "hotel"      },
+  { file: "travel/a2/bicicleta.mp3",  text: "bicicleta"  },
+
+  // ── MÉTIERS A2 (complément) ──────────────────────────────────────────────
+  { file: "jobs/a2/cocinero.mp3",  text: "cocinero"  },
+  { file: "jobs/a2/camarero.mp3",  text: "camarero"  },
+  { file: "jobs/a2/abogado.mp3",   text: "abogado"   },
+  { file: "jobs/a2/ingeniero.mp3", text: "ingeniero" },
+  { file: "jobs/a2/panadero.mp3",  text: "panadero"  },
+
+  // ── MÉTÉO A2 (complément) ────────────────────────────────────────────────
+  { file: "weather/a2/tormenta.mp3", text: "tormenta" },
+  { file: "weather/a2/niebla.mp3",   text: "niebla"   },
+  { file: "weather/a2/calor.mp3",    text: "calor"    },
+  { file: "weather/a2/frio.mp3",     text: "frío"     },
+  { file: "weather/a2/grado.mp3",    text: "grado"    },
+
+  // ── ÉCONOMIE B1 (complément) ─────────────────────────────────────────────
+  { file: "economy/b1/comercio.mp3",  text: "comercio"  },
+  { file: "economy/b1/industria.mp3", text: "industria" },
+  { file: "economy/b1/consumo.mp3",   text: "consumo"   },
+  { file: "economy/b1/producto.mp3",  text: "producto"  },
+  { file: "economy/b1/oferta.mp3",    text: "oferta"    },
+  { file: "economy/b1/demanda.mp3",   text: "demanda"   },
+  { file: "economy/b1/salario.mp3",   text: "salario"   },
+  { file: "economy/b1/negocio.mp3",   text: "negocio"   },
+
+  // ── MÉDIAS B1 (complément) ───────────────────────────────────────────────
+  { file: "media/b1/radio.mp3",       text: "radio"       },
+  { file: "media/b1/noticia.mp3",     text: "noticia"     },
+  { file: "media/b1/revista.mp3",     text: "revista"     },
+  { file: "media/b1/publicidad.mp3",  text: "publicidad"  },
+  { file: "media/b1/entrevista.mp3",  text: "entrevista"  },
+  { file: "media/b1/titular.mp3",     text: "titular"     },
+  { file: "media/b1/prensa.mp3",      text: "prensa"      },
+  { file: "media/b1/reportaje.mp3",   text: "reportaje"   },
+
+  // ── OPINIONS B1 (complément) ─────────────────────────────────────────────
+  { file: "opinions/b1/no_estoy_de_acuerdo.mp3", text: "no estoy de acuerdo" },
+  { file: "opinions/b1/me_parece.mp3",           text: "me parece"           },
+  { file: "opinions/b1/punto_de_vista.mp3",      text: "punto de vista"      },
+  { file: "opinions/b1/argumento.mp3",           text: "argumento"           },
+  { file: "opinions/b1/debate.mp3",              text: "debate"              },
+  { file: "opinions/b1/razon.mp3",               text: "razón"               },
+  { file: "opinions/b1/duda.mp3",                text: "duda"                },
+
+  // ── SCIENCE B1 (complément) ──────────────────────────────────────────────
+  { file: "science/b1/tecnologia.mp3",     text: "tecnología"     },
+  { file: "science/b1/investigacion.mp3",  text: "investigación"  },
+  { file: "science/b1/descubrimiento.mp3", text: "descubrimiento" },
+  { file: "science/b1/invento.mp3",        text: "invento"        },
+  { file: "science/b1/teoria.mp3",         text: "teoría"         },
+  { file: "science/b1/dato.mp3",           text: "dato"           },
+  { file: "science/b1/maquina.mp3",        text: "máquina"        },
+  { file: "science/b1/robot.mp3",          text: "robot"          },
+
+  // ── ÉCONOMIE B2 (complément) ─────────────────────────────────────────────
+  { file: "economics/b2/pobreza.mp3",        text: "pobreza"         },
+  { file: "economics/b2/riqueza.mp3",        text: "riqueza"         },
+  { file: "economics/b2/desarrollo.mp3",     text: "desarrollo"      },
+  { file: "economics/b2/comercio_justo.mp3", text: "comercio justo"  },
+  { file: "economics/b2/multinacional.mp3",  text: "multinacional"   },
+  { file: "economics/b2/deslocalizacion.mp3",text: "deslocalización" },
+  { file: "economics/b2/consumismo.mp3",     text: "consumismo"      },
+  { file: "economics/b2/bienestar.mp3",      text: "bienestar"       },
+
+  // ── GÉOPOLITIQUE B2 (complément) ─────────────────────────────────────────
+  { file: "geopolitics/b2/elecciones.mp3",       text: "elecciones"       },
+  { file: "geopolitics/b2/gobierno.mp3",         text: "gobierno"         },
+  { file: "geopolitics/b2/derechos_humanos.mp3", text: "derechos humanos" },
+  { file: "geopolitics/b2/conflicto.mp3",        text: "conflicto"        },
+  { file: "geopolitics/b2/paz.mp3",              text: "paz"              },
+  { file: "geopolitics/b2/tratado.mp3",          text: "tratado"          },
+  { file: "geopolitics/b2/soberania.mp3",        text: "soberanía"        },
+
+  // ── LITTÉRATURE B2 (complément) ──────────────────────────────────────────
+  { file: "literature/b2/novela.mp3",    text: "novela"    },
+  { file: "literature/b2/cuento.mp3",    text: "cuento"    },
+  { file: "literature/b2/ensayo.mp3",    text: "ensayo"    },
+  { file: "literature/b2/personaje.mp3", text: "personaje" },
+  { file: "literature/b2/narrador.mp3",  text: "narrador"  },
+  { file: "literature/b2/metafora.mp3",  text: "metáfora"  },
+  { file: "literature/b2/obra.mp3",      text: "obra"      },
+  { file: "literature/b2/autor.mp3",     text: "autor"     },
+
+  // ── PHILOSOPHIE B2 (complément) ──────────────────────────────────────────
+  { file: "philosophy/b2/moral.mp3",      text: "moral"      },
+  { file: "philosophy/b2/conciencia.mp3", text: "conciencia" },
+  { file: "philosophy/b2/verdad.mp3",     text: "verdad"     },
+  { file: "philosophy/b2/sabiduria.mp3",  text: "sabiduría"  },
+  { file: "philosophy/b2/voluntad.mp3",   text: "voluntad"   },
+  { file: "philosophy/b2/deber.mp3",      text: "deber"      },
+  { file: "philosophy/b2/felicidad.mp3",  text: "felicidad"  },
+
+  // ── PHRASES D'EXEMPLE — VERBES DU SPORT A2 ───────────────────────────────
+  { file: "sport_verbs/a2/correr-sentence.mp3",   text: "Me gusta correr en el parque."      },
+  { file: "sport_verbs/a2/saltar-sentence.mp3",   text: "El atleta puede saltar muy alto."   },
+  { file: "sport_verbs/a2/nadar-sentence.mp3",    text: "Aprendo a nadar en la piscina."     },
+  { file: "sport_verbs/a2/lanzar-sentence.mp3",   text: "Hay que lanzar la pelota lejos."    },
+  { file: "sport_verbs/a2/ganar-sentence.mp3",    text: "Queremos ganar el partido."         },
+  { file: "sport_verbs/a2/perder-sentence.mp3",   text: "No me gusta perder."                },
+  { file: "sport_verbs/a2/entrenar-sentence.mp3", text: "El equipo va a entrenar mañana."    },
+  { file: "sport_verbs/a2/jugar-sentence.mp3",    text: "Los niños quieren jugar al fútbol." },
+  { file: "sport_verbs/a2/marcar-sentence.mp3",   text: "Espero marcar un gol hoy."          },
+  { file: "sport_verbs/a2/competir-sentence.mp3", text: "Ella va a competir el domingo."     },
+
   // ── SCIENCE DU SPORT B2 ──────────────────────────────────────────────────
   { file: "sport_science/b2/resistencia.mp3",         text: "resistencia"         },
   { file: "sport_science/b2/fuerza.mp3",              text: "fuerza"              },

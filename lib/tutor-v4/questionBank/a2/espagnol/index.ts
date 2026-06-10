@@ -66,6 +66,52 @@ const WORDS = [
   { slug: "jugar",       es: "jugar",       fr: "jouer",          audio: "/audio/espagnol/sport_verbs/a2/jugar.mp3"    },
   { slug: "marcar",      es: "marcar",      fr: "marquer",        audio: "/audio/espagnol/sport_verbs/a2/marcar.mp3"   },
   { slug: "competir",    es: "competir",    fr: "concourir",      audio: "/audio/espagnol/sport_verbs/a2/competir.mp3" },
+  // Vie quotidienne (complément)
+  { slug: "plaza",       es: "plaza",       fr: "place",          audio: "/audio/espagnol/daily_life/a2/plaza.mp3"    },
+  { slug: "barrio",      es: "barrio",      fr: "quartier",       audio: "/audio/espagnol/daily_life/a2/barrio.mp3"   },
+  { slug: "parque",      es: "parque",      fr: "parc",           audio: "/audio/espagnol/daily_life/a2/parque.mp3"   },
+  { slug: "puente",      es: "puente",      fr: "pont",           audio: "/audio/espagnol/daily_life/a2/puente.mp3"   },
+  { slug: "edificio",    es: "edificio",    fr: "immeuble",       audio: "/audio/espagnol/daily_life/a2/edificio.mp3" },
+  { slug: "esquina",     es: "esquina",     fr: "coin de rue",    audio: "/audio/espagnol/daily_life/a2/esquina.mp3"  },
+  { slug: "semaforo",    es: "semáforo",    fr: "feu tricolore",  audio: "/audio/espagnol/daily_life/a2/semaforo.mp3" },
+  { slug: "acera",       es: "acera",       fr: "trottoir",       audio: "/audio/espagnol/daily_life/a2/acera.mp3"    },
+  // Santé (complément)
+  { slug: "enfermedad",  es: "enfermedad",  fr: "maladie",        audio: "/audio/espagnol/health/a2/enfermedad.mp3" },
+  { slug: "fiebre",      es: "fiebre",      fr: "fièvre",         audio: "/audio/espagnol/health/a2/fiebre.mp3"     },
+  { slug: "dolor",       es: "dolor",       fr: "douleur",        audio: "/audio/espagnol/health/a2/dolor.mp3"      },
+  { slug: "gripe",       es: "gripe",       fr: "grippe",         audio: "/audio/espagnol/health/a2/gripe.mp3"      },
+  { slug: "herida",      es: "herida",      fr: "blessure",       audio: "/audio/espagnol/health/a2/herida.mp3"     },
+  { slug: "medicina",    es: "medicina",    fr: "médicament",     audio: "/audio/espagnol/health/a2/medicina.mp3"   },
+  { slug: "cita",        es: "cita",        fr: "rendez-vous",    audio: "/audio/espagnol/health/a2/cita.mp3"       },
+  { slug: "receta",      es: "receta",      fr: "ordonnance",     audio: "/audio/espagnol/health/a2/receta.mp3"     },
+  // Shopping (complément)
+  { slug: "caja",         es: "caja",         fr: "caisse",       audio: "/audio/espagnol/shopping/a2/caja.mp3"         },
+  { slug: "bolsa",        es: "bolsa",        fr: "sac",          audio: "/audio/espagnol/shopping/a2/bolsa.mp3"        },
+  { slug: "cliente",      es: "cliente",      fr: "client",       audio: "/audio/espagnol/shopping/a2/cliente.mp3"      },
+  { slug: "vendedor",     es: "vendedor",     fr: "vendeur",      audio: "/audio/espagnol/shopping/a2/vendedor.mp3"     },
+  { slug: "regalo",       es: "regalo",       fr: "cadeau",       audio: "/audio/espagnol/shopping/a2/regalo.mp3"       },
+  { slug: "descuento",    es: "descuento",    fr: "réduction",    audio: "/audio/espagnol/shopping/a2/descuento.mp3"    },
+  { slug: "supermercado", es: "supermercado", fr: "supermarché",  audio: "/audio/espagnol/shopping/a2/supermercado.mp3" },
+  // Voyage (complément)
+  { slug: "aeropuerto",  es: "aeropuerto",  fr: "aéroport",       audio: "/audio/espagnol/travel/a2/aeropuerto.mp3" },
+  { slug: "estacion",    es: "estación",    fr: "gare",           audio: "/audio/espagnol/travel/a2/estacion.mp3"   },
+  { slug: "maleta",      es: "maleta",      fr: "valise",         audio: "/audio/espagnol/travel/a2/maleta.mp3"     },
+  { slug: "viaje",       es: "viaje",       fr: "voyage",         audio: "/audio/espagnol/travel/a2/viaje.mp3"      },
+  { slug: "pasaporte",   es: "pasaporte",   fr: "passeport",      audio: "/audio/espagnol/travel/a2/pasaporte.mp3"  },
+  { slug: "hotel",       es: "hotel",       fr: "hôtel",          audio: "/audio/espagnol/travel/a2/hotel.mp3"      },
+  { slug: "bicicleta",   es: "bicicleta",   fr: "vélo",           audio: "/audio/espagnol/travel/a2/bicicleta.mp3"  },
+  // Métiers (complément)
+  { slug: "cocinero",    es: "cocinero",    fr: "cuisinier",      audio: "/audio/espagnol/jobs/a2/cocinero.mp3"  },
+  { slug: "camarero",    es: "camarero",    fr: "serveur",        audio: "/audio/espagnol/jobs/a2/camarero.mp3"  },
+  { slug: "abogado",     es: "abogado",     fr: "avocat",         audio: "/audio/espagnol/jobs/a2/abogado.mp3"   },
+  { slug: "ingeniero",   es: "ingeniero",   fr: "ingénieur",      audio: "/audio/espagnol/jobs/a2/ingeniero.mp3" },
+  { slug: "panadero",    es: "panadero",    fr: "boulanger",      audio: "/audio/espagnol/jobs/a2/panadero.mp3"  },
+  // Météo (complément)
+  { slug: "tormenta",    es: "tormenta",    fr: "orage",          audio: "/audio/espagnol/weather/a2/tormenta.mp3" },
+  { slug: "niebla",      es: "niebla",      fr: "brouillard",     audio: "/audio/espagnol/weather/a2/niebla.mp3"   },
+  { slug: "calor",       es: "calor",       fr: "chaleur",        audio: "/audio/espagnol/weather/a2/calor.mp3"    },
+  { slug: "frio",        es: "frío",        fr: "froid",          audio: "/audio/espagnol/weather/a2/frio.mp3"     },
+  { slug: "grado",       es: "grado",       fr: "degré",          audio: "/audio/espagnol/weather/a2/grado.mp3"    },
 ] as const;
 
 function dFr(exclude: string) { return WORDS.filter(w => w.fr !== exclude).map(w => w.fr).slice(0, 3); }
@@ -86,9 +132,51 @@ const notionMap: Record<string, string> = {
   semilla: "es_a2_science_living", insecto: "es_a2_science_living", fruto: "es_a2_science_living", hierba: "es_a2_science_living", naturaleza: "es_a2_science_living",
   correr: "es_a2_sport_verbs", saltar: "es_a2_sport_verbs", nadar: "es_a2_sport_verbs", lanzar: "es_a2_sport_verbs", ganar: "es_a2_sport_verbs",
   perder: "es_a2_sport_verbs", entrenar: "es_a2_sport_verbs", jugar: "es_a2_sport_verbs", marcar: "es_a2_sport_verbs", competir: "es_a2_sport_verbs",
+  plaza: "es_a2_daily_life", barrio: "es_a2_daily_life", parque: "es_a2_daily_life", puente: "es_a2_daily_life",
+  edificio: "es_a2_daily_life", esquina: "es_a2_daily_life", semaforo: "es_a2_daily_life", acera: "es_a2_daily_life",
+  enfermedad: "es_a2_health", fiebre: "es_a2_health", dolor: "es_a2_health", gripe: "es_a2_health",
+  herida: "es_a2_health", medicina: "es_a2_health", cita: "es_a2_health", receta: "es_a2_health",
+  caja: "es_a2_shopping", bolsa: "es_a2_shopping", cliente: "es_a2_shopping", vendedor: "es_a2_shopping",
+  regalo: "es_a2_shopping", descuento: "es_a2_shopping", supermercado: "es_a2_shopping",
+  aeropuerto: "es_a2_travel", estacion: "es_a2_travel", maleta: "es_a2_travel", viaje: "es_a2_travel",
+  pasaporte: "es_a2_travel", hotel: "es_a2_travel", bicicleta: "es_a2_travel",
+  cocinero: "es_a2_jobs", camarero: "es_a2_jobs", abogado: "es_a2_jobs", ingeniero: "es_a2_jobs", panadero: "es_a2_jobs",
+  tormenta: "es_a2_weather", niebla: "es_a2_weather", calor: "es_a2_weather", frio: "es_a2_weather", grado: "es_a2_weather",
 };
 
-export const espagnolA2QuestionBank: TutorBankItemV4[] = WORDS.flatMap((word) => {
+// Phrases d'exemple pour les verbes du sport — exercice d'écoute en contexte
+const SPORT_VERB_SENTENCES = [
+  { slug: "correr",   es: "correr",   fr: "courir",      sentence: "Me gusta correr en el parque.",      audio: "/audio/espagnol/sport_verbs/a2/correr-sentence.mp3"   },
+  { slug: "saltar",   es: "saltar",   fr: "sauter",      sentence: "El atleta puede saltar muy alto.",   audio: "/audio/espagnol/sport_verbs/a2/saltar-sentence.mp3"   },
+  { slug: "nadar",    es: "nadar",    fr: "nager",       sentence: "Aprendo a nadar en la piscina.",     audio: "/audio/espagnol/sport_verbs/a2/nadar-sentence.mp3"    },
+  { slug: "lanzar",   es: "lanzar",   fr: "lancer",      sentence: "Hay que lanzar la pelota lejos.",    audio: "/audio/espagnol/sport_verbs/a2/lanzar-sentence.mp3"   },
+  { slug: "ganar",    es: "ganar",    fr: "gagner",      sentence: "Queremos ganar el partido.",         audio: "/audio/espagnol/sport_verbs/a2/ganar-sentence.mp3"    },
+  { slug: "perder",   es: "perder",   fr: "perdre",      sentence: "No me gusta perder.",                audio: "/audio/espagnol/sport_verbs/a2/perder-sentence.mp3"   },
+  { slug: "entrenar", es: "entrenar", fr: "s'entraîner", sentence: "El equipo va a entrenar mañana.",    audio: "/audio/espagnol/sport_verbs/a2/entrenar-sentence.mp3" },
+  { slug: "jugar",    es: "jugar",    fr: "jouer",       sentence: "Los niños quieren jugar al fútbol.", audio: "/audio/espagnol/sport_verbs/a2/jugar-sentence.mp3"    },
+  { slug: "marcar",   es: "marcar",   fr: "marquer",     sentence: "Espero marcar un gol hoy.",          audio: "/audio/espagnol/sport_verbs/a2/marcar-sentence.mp3"   },
+  { slug: "competir", es: "competir", fr: "concourir",   sentence: "Ella va a competir el domingo.",     audio: "/audio/espagnol/sport_verbs/a2/competir-sentence.mp3" },
+] as const;
+
+const sportVerbSentenceQuestions: TutorBankItemV4[] = SPORT_VERB_SENTENCES.map((item) => ({
+  kind: "fixed" as const,
+  id: `es_a2_${item.slug}_listen_sentence`,
+  niveau: "a2" as const,
+  matiere: "espagnol" as const,
+  notionId: "es_a2_sport_verbs",
+  microId: "es_a2_sport_verbs_listen_sentence",
+  difficulty: 3 as const,
+  text: `🔊 Écoute la phrase et choisis le verbe que tu entends.`,
+  format: "qcm" as const,
+  audioSrc: item.audio,
+  choices: [item.es, ...SPORT_VERB_SENTENCES.filter(s => s.es !== item.es).map(s => s.es).slice(0, 3)],
+  expected: [item.es],
+  comparator: "mcq_exact" as const,
+  hint: `Le verbe est à l'infinitif dans la phrase.`,
+  explanation: `La phrase était : "${item.sentence}" — le verbe est "${item.es}" (${item.fr}).`,
+}));
+
+const wordQuestions: TutorBankItemV4[] = WORDS.flatMap((word) => {
   const notionId = notionMap[word.slug] ?? "es_a2_daily_life";
   return [
     {
@@ -140,3 +228,8 @@ export const espagnolA2QuestionBank: TutorBankItemV4[] = WORDS.flatMap((word) =>
     },
   ];
 });
+
+export const espagnolA2QuestionBank: TutorBankItemV4[] = [
+  ...wordQuestions,
+  ...sportVerbSentenceQuestions,
+];

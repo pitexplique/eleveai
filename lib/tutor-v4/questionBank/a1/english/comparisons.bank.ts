@@ -1,11 +1,11 @@
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 
 const WORDS = [
-  { slug: "greater-than", en: "greater than", fr: "supérieur à", audio: "/audio/english-maths/operations/greater-than.mp3" },
-  { slug: "less-than",    en: "less than",    fr: "inférieur à", audio: "/audio/english-maths/operations/less-than.mp3" },
-  { slug: "equal-to",     en: "equal to",     fr: "égal à",      audio: "/audio/english-maths/comparisons/equal-to.mp3" },
-  { slug: "odd",          en: "odd",          fr: "impair",      audio: "/audio/english-maths/comparisons/odd.mp3" },
-  { slug: "even",         en: "even",         fr: "pair",        audio: "/audio/english-maths/comparisons/even.mp3" },
+  { slug: "greater-than", en: "greater than", fr: "supérieur à", audio: "/audio/english-maths/operations/a1/greater-than.mp3" },
+  { slug: "less-than",    en: "less than",    fr: "inférieur à", audio: "/audio/english-maths/operations/a1/less-than.mp3" },
+  { slug: "equal-to",     en: "equal to",     fr: "égal à",      audio: "/audio/english-maths/comparisons/a1/equal-to.mp3" },
+  { slug: "odd",          en: "odd",          fr: "impair",      audio: "/audio/english-maths/comparisons/a1/odd.mp3" },
+  { slug: "even",         en: "even",         fr: "pair",        audio: "/audio/english-maths/comparisons/a1/even.mp3" },
 ] as const;
 
 function dFr(exclude: string) { return WORDS.filter(w => w.fr !== exclude).map(w => w.fr).slice(0, 3); }

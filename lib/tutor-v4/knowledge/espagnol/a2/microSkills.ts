@@ -37,4 +37,5 @@ export const microSkills: MicroSkillSource[] = [
   { id: "es_a2_sport_verbs_es_to_fr",    label: "Reconnaître verbe de sport ES → FR",      notionId: "es_a2_sport_verbs",    prerequis: [] },
   { id: "es_a2_sport_verbs_fr_to_es",    label: "Donner verbe de sport FR → ES",           notionId: "es_a2_sport_verbs",    prerequis: ["es_a2_sport_verbs_es_to_fr"] },
   { id: "es_a2_sport_verbs_listen",      label: "Écouter et identifier le verbe de sport 🔊", notionId: "es_a2_sport_verbs",  prerequis: ["es_a2_sport_verbs_es_to_fr"] },
+  { id: "es_a2_sport_verbs_listen_sentence", label: "Écouter une phrase et repérer le verbe 🔊", notionId: "es_a2_sport_verbs", prerequis: ["es_a2_sport_verbs_listen"] },
 ];

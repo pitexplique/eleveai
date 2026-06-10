@@ -55,6 +55,40 @@ const WORDS = [
   { slug: "potencia",             es: "potencia",             fr: "puissance",                 notionId: "es_b2_sport_science", audio: "/audio/espagnol/sport_science/b2/potencia.mp3"            },
   { slug: "dopaje",               es: "dopaje",               fr: "dopage",                    notionId: "es_b2_sport_science", audio: "/audio/espagnol/sport_science/b2/dopaje.mp3"              },
   { slug: "fisiologia",           es: "fisiología",           fr: "physiologie",               notionId: "es_b2_sport_science", audio: "/audio/espagnol/sport_science/b2/fisiologia.mp3"          },
+  // Économie & mondialisation (complément)
+  { slug: "pobreza",         es: "pobreza",          fr: "pauvreté",            notionId: "es_b2_economics",   audio: "/audio/espagnol/economics/b2/pobreza.mp3"         },
+  { slug: "riqueza",         es: "riqueza",          fr: "richesse",            notionId: "es_b2_economics",   audio: "/audio/espagnol/economics/b2/riqueza.mp3"         },
+  { slug: "desarrollo",      es: "desarrollo",       fr: "développement",       notionId: "es_b2_economics",   audio: "/audio/espagnol/economics/b2/desarrollo.mp3"      },
+  { slug: "comercio_justo",  es: "comercio justo",   fr: "commerce équitable",  notionId: "es_b2_economics",   audio: "/audio/espagnol/economics/b2/comercio_justo.mp3"  },
+  { slug: "multinacional",   es: "multinacional",    fr: "multinationale",      notionId: "es_b2_economics",   audio: "/audio/espagnol/economics/b2/multinacional.mp3"   },
+  { slug: "deslocalizacion", es: "deslocalización",  fr: "délocalisation",      notionId: "es_b2_economics",   audio: "/audio/espagnol/economics/b2/deslocalizacion.mp3" },
+  { slug: "consumismo",      es: "consumismo",       fr: "consumérisme",        notionId: "es_b2_economics",   audio: "/audio/espagnol/economics/b2/consumismo.mp3"      },
+  { slug: "bienestar",       es: "bienestar",        fr: "bien-être",           notionId: "es_b2_economics",   audio: "/audio/espagnol/economics/b2/bienestar.mp3"       },
+  // Géopolitique (complément)
+  { slug: "elecciones",       es: "elecciones",       fr: "élections",          notionId: "es_b2_geopolitics", audio: "/audio/espagnol/geopolitics/b2/elecciones.mp3"       },
+  { slug: "gobierno",         es: "gobierno",         fr: "gouvernement",       notionId: "es_b2_geopolitics", audio: "/audio/espagnol/geopolitics/b2/gobierno.mp3"         },
+  { slug: "derechos_humanos", es: "derechos humanos", fr: "droits de l'homme",  notionId: "es_b2_geopolitics", audio: "/audio/espagnol/geopolitics/b2/derechos_humanos.mp3" },
+  { slug: "conflicto",        es: "conflicto",        fr: "conflit",            notionId: "es_b2_geopolitics", audio: "/audio/espagnol/geopolitics/b2/conflicto.mp3"        },
+  { slug: "paz",              es: "paz",              fr: "paix",               notionId: "es_b2_geopolitics", audio: "/audio/espagnol/geopolitics/b2/paz.mp3"              },
+  { slug: "tratado",          es: "tratado",          fr: "traité",             notionId: "es_b2_geopolitics", audio: "/audio/espagnol/geopolitics/b2/tratado.mp3"          },
+  { slug: "soberania",        es: "soberanía",        fr: "souveraineté",       notionId: "es_b2_geopolitics", audio: "/audio/espagnol/geopolitics/b2/soberania.mp3"        },
+  // Littérature (complément)
+  { slug: "novela",          es: "novela",           fr: "roman",               notionId: "es_b2_literature",  audio: "/audio/espagnol/literature/b2/novela.mp3"    },
+  { slug: "cuento",          es: "cuento",           fr: "conte",               notionId: "es_b2_literature",  audio: "/audio/espagnol/literature/b2/cuento.mp3"    },
+  { slug: "ensayo",          es: "ensayo",           fr: "essai",               notionId: "es_b2_literature",  audio: "/audio/espagnol/literature/b2/ensayo.mp3"    },
+  { slug: "personaje",       es: "personaje",        fr: "personnage",          notionId: "es_b2_literature",  audio: "/audio/espagnol/literature/b2/personaje.mp3" },
+  { slug: "narrador",        es: "narrador",         fr: "narrateur",           notionId: "es_b2_literature",  audio: "/audio/espagnol/literature/b2/narrador.mp3"  },
+  { slug: "metafora",        es: "metáfora",         fr: "métaphore",           notionId: "es_b2_literature",  audio: "/audio/espagnol/literature/b2/metafora.mp3"  },
+  { slug: "obra",            es: "obra",             fr: "œuvre",               notionId: "es_b2_literature",  audio: "/audio/espagnol/literature/b2/obra.mp3"      },
+  { slug: "autor",           es: "autor",            fr: "auteur",              notionId: "es_b2_literature",  audio: "/audio/espagnol/literature/b2/autor.mp3"     },
+  // Philosophie (complément)
+  { slug: "moral",           es: "moral",            fr: "morale",              notionId: "es_b2_philosophy",  audio: "/audio/espagnol/philosophy/b2/moral.mp3"      },
+  { slug: "conciencia",      es: "conciencia",       fr: "conscience",          notionId: "es_b2_philosophy",  audio: "/audio/espagnol/philosophy/b2/conciencia.mp3" },
+  { slug: "verdad",          es: "verdad",           fr: "vérité",              notionId: "es_b2_philosophy",  audio: "/audio/espagnol/philosophy/b2/verdad.mp3"     },
+  { slug: "sabiduria",       es: "sabiduría",        fr: "sagesse",             notionId: "es_b2_philosophy",  audio: "/audio/espagnol/philosophy/b2/sabiduria.mp3"  },
+  { slug: "voluntad",        es: "voluntad",         fr: "volonté",             notionId: "es_b2_philosophy",  audio: "/audio/espagnol/philosophy/b2/voluntad.mp3"   },
+  { slug: "deber",           es: "deber",            fr: "devoir",              notionId: "es_b2_philosophy",  audio: "/audio/espagnol/philosophy/b2/deber.mp3"      },
+  { slug: "felicidad",       es: "felicidad",        fr: "bonheur",             notionId: "es_b2_philosophy",  audio: "/audio/espagnol/philosophy/b2/felicidad.mp3"  },
 ] as const;
 
 function dFr(exclude: string) { return WORDS.filter(w => w.fr !== exclude).map(w => w.fr).slice(0, 3); }

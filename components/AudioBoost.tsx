@@ -6,7 +6,7 @@
  * Le volume HTML natif est plafonné à 1.0.
  * Ici on applique un gain > 1 pour compenser les fichiers TTS trop faibles.
  *
- * Usage : <AudioBoost src="/audio/english-maths/digits/one.mp3" autoPlay />
+ * Usage : <AudioBoost src="/audio/english-maths/digits/a1/one.mp3" autoPlay />
  */
 
 import { useEffect, useRef, useState } from "react";

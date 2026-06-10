@@ -1,17 +1,17 @@
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 
 const WORDS = [
-  { slug: "zero",  en: "zero",  fr: "zéro",  audio: "/audio/english-maths/digits/zero.mp3" },
-  { slug: "one",   en: "one",   fr: "un",    audio: "/audio/english-maths/digits/one.mp3" },
-  { slug: "two",   en: "two",   fr: "deux",  audio: "/audio/english-maths/digits/two.mp3" },
-  { slug: "three", en: "three", fr: "trois", audio: "/audio/english-maths/digits/three.mp3" },
-  { slug: "four",  en: "four",  fr: "quatre", audio: "/audio/english-maths/digits/four.mp3" },
-  { slug: "five",  en: "five",  fr: "cinq",  audio: "/audio/english-maths/digits/five.mp3" },
-  { slug: "six",   en: "six",   fr: "six",   audio: "/audio/english-maths/digits/six.mp3" },
-  { slug: "seven", en: "seven", fr: "sept",  audio: "/audio/english-maths/digits/seven.mp3" },
-  { slug: "eight", en: "eight", fr: "huit",  audio: "/audio/english-maths/digits/eight.mp3" },
-  { slug: "nine",  en: "nine",  fr: "neuf",  audio: "/audio/english-maths/digits/nine.mp3" },
-  { slug: "ten",   en: "ten",   fr: "dix",   audio: "/audio/english-maths/digits/ten.mp3" },
+  { slug: "zero",  en: "zero",  fr: "zéro",  audio: "/audio/english-maths/digits/a1/zero.mp3" },
+  { slug: "one",   en: "one",   fr: "un",    audio: "/audio/english-maths/digits/a1/one.mp3" },
+  { slug: "two",   en: "two",   fr: "deux",  audio: "/audio/english-maths/digits/a1/two.mp3" },
+  { slug: "three", en: "three", fr: "trois", audio: "/audio/english-maths/digits/a1/three.mp3" },
+  { slug: "four",  en: "four",  fr: "quatre", audio: "/audio/english-maths/digits/a1/four.mp3" },
+  { slug: "five",  en: "five",  fr: "cinq",  audio: "/audio/english-maths/digits/a1/five.mp3" },
+  { slug: "six",   en: "six",   fr: "six",   audio: "/audio/english-maths/digits/a1/six.mp3" },
+  { slug: "seven", en: "seven", fr: "sept",  audio: "/audio/english-maths/digits/a1/seven.mp3" },
+  { slug: "eight", en: "eight", fr: "huit",  audio: "/audio/english-maths/digits/a1/eight.mp3" },
+  { slug: "nine",  en: "nine",  fr: "neuf",  audio: "/audio/english-maths/digits/a1/nine.mp3" },
+  { slug: "ten",   en: "ten",   fr: "dix",   audio: "/audio/english-maths/digits/a1/ten.mp3" },
 ] as const;
 
 function dFr(exclude: string) { return WORDS.filter(w => w.fr !== exclude).map(w => w.fr).slice(0, 3); }

@@ -59,6 +59,41 @@ const WORDS = [
   { slug: "rendimiento",     es: "rendimiento",      fr: "performance",           notionId: "es_b1_sport_stats", audio: "/audio/espagnol/sport_stats/b1/rendimiento.mp3"   },
   { slug: "temporada",       es: "temporada",        fr: "saison",                notionId: "es_b1_sport_stats", audio: "/audio/espagnol/sport_stats/b1/temporada.mp3"     },
   { slug: "torneo",          es: "torneo",           fr: "tournoi",               notionId: "es_b1_sport_stats", audio: "/audio/espagnol/sport_stats/b1/torneo.mp3"        },
+  // Économie (complément)
+  { slug: "comercio",        es: "comercio",         fr: "commerce",              notionId: "es_b1_economy",     audio: "/audio/espagnol/economy/b1/comercio.mp3"  },
+  { slug: "industria",       es: "industria",        fr: "industrie",             notionId: "es_b1_economy",     audio: "/audio/espagnol/economy/b1/industria.mp3" },
+  { slug: "consumo",         es: "consumo",          fr: "consommation",          notionId: "es_b1_economy",     audio: "/audio/espagnol/economy/b1/consumo.mp3"   },
+  { slug: "producto",        es: "producto",         fr: "produit",               notionId: "es_b1_economy",     audio: "/audio/espagnol/economy/b1/producto.mp3"  },
+  { slug: "oferta",          es: "oferta",           fr: "offre",                 notionId: "es_b1_economy",     audio: "/audio/espagnol/economy/b1/oferta.mp3"    },
+  { slug: "demanda",         es: "demanda",          fr: "demande",               notionId: "es_b1_economy",     audio: "/audio/espagnol/economy/b1/demanda.mp3"   },
+  { slug: "salario",         es: "salario",          fr: "salaire",               notionId: "es_b1_economy",     audio: "/audio/espagnol/economy/b1/salario.mp3"   },
+  { slug: "negocio",         es: "negocio",          fr: "affaire",               notionId: "es_b1_economy",     audio: "/audio/espagnol/economy/b1/negocio.mp3"   },
+  // Médias (complément)
+  { slug: "radio",           es: "radio",            fr: "radio",                 notionId: "es_b1_media",       audio: "/audio/espagnol/media/b1/radio.mp3"      },
+  { slug: "noticia",         es: "noticia",          fr: "information",           notionId: "es_b1_media",       audio: "/audio/espagnol/media/b1/noticia.mp3"    },
+  { slug: "revista",         es: "revista",          fr: "magazine",              notionId: "es_b1_media",       audio: "/audio/espagnol/media/b1/revista.mp3"    },
+  { slug: "publicidad",      es: "publicidad",       fr: "publicité",             notionId: "es_b1_media",       audio: "/audio/espagnol/media/b1/publicidad.mp3" },
+  { slug: "entrevista",      es: "entrevista",       fr: "interview",             notionId: "es_b1_media",       audio: "/audio/espagnol/media/b1/entrevista.mp3" },
+  { slug: "titular",         es: "titular",          fr: "gros titre",            notionId: "es_b1_media",       audio: "/audio/espagnol/media/b1/titular.mp3"    },
+  { slug: "prensa",          es: "prensa",           fr: "presse",                notionId: "es_b1_media",       audio: "/audio/espagnol/media/b1/prensa.mp3"     },
+  { slug: "reportaje",       es: "reportaje",        fr: "reportage",             notionId: "es_b1_media",       audio: "/audio/espagnol/media/b1/reportaje.mp3"  },
+  // Opinions (complément)
+  { slug: "no_estoy_de_acuerdo", es: "no estoy de acuerdo", fr: "je ne suis pas d'accord", notionId: "es_b1_opinions", audio: "/audio/espagnol/opinions/b1/no_estoy_de_acuerdo.mp3" },
+  { slug: "me_parece",       es: "me parece",        fr: "il me semble",          notionId: "es_b1_opinions",    audio: "/audio/espagnol/opinions/b1/me_parece.mp3"      },
+  { slug: "punto_de_vista",  es: "punto de vista",   fr: "point de vue",          notionId: "es_b1_opinions",    audio: "/audio/espagnol/opinions/b1/punto_de_vista.mp3" },
+  { slug: "argumento",       es: "argumento",        fr: "argument",              notionId: "es_b1_opinions",    audio: "/audio/espagnol/opinions/b1/argumento.mp3"      },
+  { slug: "debate",          es: "debate",           fr: "débat",                 notionId: "es_b1_opinions",    audio: "/audio/espagnol/opinions/b1/debate.mp3"         },
+  { slug: "razon",           es: "razón",            fr: "raison",                notionId: "es_b1_opinions",    audio: "/audio/espagnol/opinions/b1/razon.mp3"          },
+  { slug: "duda",            es: "duda",             fr: "doute",                 notionId: "es_b1_opinions",    audio: "/audio/espagnol/opinions/b1/duda.mp3"           },
+  // Science (complément)
+  { slug: "tecnologia",      es: "tecnología",       fr: "technologie",           notionId: "es_b1_science",     audio: "/audio/espagnol/science/b1/tecnologia.mp3"     },
+  { slug: "investigacion",   es: "investigación",    fr: "recherche",             notionId: "es_b1_science",     audio: "/audio/espagnol/science/b1/investigacion.mp3"  },
+  { slug: "descubrimiento",  es: "descubrimiento",   fr: "découverte",            notionId: "es_b1_science",     audio: "/audio/espagnol/science/b1/descubrimiento.mp3" },
+  { slug: "invento",         es: "invento",          fr: "invention",             notionId: "es_b1_science",     audio: "/audio/espagnol/science/b1/invento.mp3"        },
+  { slug: "teoria",          es: "teoría",           fr: "théorie",               notionId: "es_b1_science",     audio: "/audio/espagnol/science/b1/teoria.mp3"         },
+  { slug: "dato",            es: "dato",             fr: "donnée",                notionId: "es_b1_science",     audio: "/audio/espagnol/science/b1/dato.mp3"           },
+  { slug: "maquina",         es: "máquina",          fr: "machine",               notionId: "es_b1_science",     audio: "/audio/espagnol/science/b1/maquina.mp3"        },
+  { slug: "robot",           es: "robot",            fr: "robot",                 notionId: "es_b1_science",     audio: "/audio/espagnol/science/b1/robot.mp3"          },
 ] as const;
 
 function dFr(exclude: string) { return WORDS.filter(w => w.fr !== exclude).map(w => w.fr).slice(0, 3); }

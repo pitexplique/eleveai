@@ -1,12 +1,12 @@
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 
 const WORDS = [
-  { slug: "plus",       en: "plus",       fr: "plus",       audio: "/audio/english-maths/operations/plus.mp3" },
-  { slug: "minus",      en: "minus",      fr: "moins",      audio: "/audio/english-maths/operations/minus.mp3" },
-  { slug: "times",      en: "times",      fr: "fois",       audio: "/audio/english-maths/operations/times.mp3" },
-  { slug: "divided-by", en: "divided by", fr: "divisé par", audio: "/audio/english-maths/operations/divided-by.mp3" },
-  { slug: "equals",     en: "equals",     fr: "égale",      audio: "/audio/english-maths/operations/equals.mp3" },
-  { slug: "result",     en: "result",     fr: "résultat",   audio: "/audio/english-maths/operations/result.mp3" },
+  { slug: "plus",       en: "plus",       fr: "plus",       audio: "/audio/english-maths/operations/a1/plus.mp3" },
+  { slug: "minus",      en: "minus",      fr: "moins",      audio: "/audio/english-maths/operations/a1/minus.mp3" },
+  { slug: "times",      en: "times",      fr: "fois",       audio: "/audio/english-maths/operations/a1/times.mp3" },
+  { slug: "divided-by", en: "divided by", fr: "divisé par", audio: "/audio/english-maths/operations/a1/divided-by.mp3" },
+  { slug: "equals",     en: "equals",     fr: "égale",      audio: "/audio/english-maths/operations/a1/equals.mp3" },
+  { slug: "result",     en: "result",     fr: "résultat",   audio: "/audio/english-maths/operations/a1/result.mp3" },
 ] as const;
 
 function dFr(exclude: string) { return WORDS.filter(w => w.fr !== exclude).map(w => w.fr).slice(0, 3); }

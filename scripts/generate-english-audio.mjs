@@ -56,43 +56,44 @@ const DELAY_MS = 300;
 const AUDIO_ENTRIES = [
 
   // ── UNIT 1 — DIGITS (zero → ten) ─────────────────────────────────────────
-  { file: "digits/zero.mp3",    text: "zero" },
-  { file: "digits/one.mp3",     text: "one" },
-  { file: "digits/two.mp3",     text: "two" },
-  { file: "digits/three.mp3",   text: "three" },
-  { file: "digits/four.mp3",    text: "four" },
-  { file: "digits/five.mp3",    text: "five" },
-  { file: "digits/six.mp3",     text: "six" },
-  { file: "digits/seven.mp3",   text: "seven" },
-  { file: "digits/eight.mp3",   text: "eight" },
-  { file: "digits/nine.mp3",    text: "nine" },
-  { file: "digits/ten.mp3",     text: "ten" },
+  { file: "digits/a1/zero.mp3",    text: "zero" },
+  { file: "digits/a1/one.mp3",     text: "one" },
+  { file: "digits/a1/two.mp3",     text: "two" },
+  { file: "digits/a1/three.mp3",   text: "three" },
+  { file: "digits/a1/four.mp3",    text: "four" },
+  { file: "digits/a1/five.mp3",    text: "five" },
+  { file: "digits/a1/six.mp3",     text: "six" },
+  { file: "digits/a1/seven.mp3",   text: "seven" },
+  { file: "digits/a1/eight.mp3",   text: "eight" },
+  { file: "digits/a1/nine.mp3",    text: "nine" },
+  { file: "digits/a1/ten.mp3",     text: "ten" },
 
   // ── UNIT 2 — NUMBERS (round numbers) ─────────────────────────────────────
   // hundred, thousand already exist in numbers/ — keeping path consistent
-  { file: "numbers/twenty.mp3",   text: "twenty" },
-  { file: "numbers/thirty.mp3",   text: "thirty" },
-  { file: "numbers/forty.mp3",    text: "forty" },
-  { file: "numbers/fifty.mp3",    text: "fifty" },
-  { file: "numbers/million.mp3",  text: "million" },
+  { file: "numbers/a1/twenty.mp3",   text: "twenty" },
+  { file: "numbers/a1/thirty.mp3",   text: "thirty" },
+  { file: "numbers/a1/forty.mp3",    text: "forty" },
+  { file: "numbers/a1/fifty.mp3",    text: "fifty" },
+  { file: "numbers/a1/million.mp3",  text: "million" },
   // already exist: hundred.mp3, thousand.mp3
 
   // ── UNIT 3 — OPERATIONS ───────────────────────────────────────────────────
   // already exist: plus.mp3, minus.mp3, equal.mp3, greater-than.mp3, less-than.mp3
-  { file: "operations/times.mp3",      text: "times" },
-  { file: "operations/divided-by.mp3", text: "divided by" },
-  { file: "operations/equals.mp3",     text: "equals" },
-  { file: "operations/result.mp3",     text: "result" },
+  { file: "operations/a1/times.mp3",      text: "times" },
+  { file: "operations/a1/divided-by.mp3", text: "divided by" },
+  { file: "operations/a1/equals.mp3",     text: "equals" },
+  { file: "operations/a1/result.mp3",     text: "result" },
 
   // ── UNIT 4 — COMPARISONS ─────────────────────────────────────────────────
   // already exist in operations/: greater-than.mp3, less-than.mp3
-  { file: "comparisons/equal-to.mp3", text: "equal to" },
-  { file: "comparisons/odd.mp3",      text: "odd" },
-  { file: "comparisons/even.mp3",     text: "even" },
+  { file: "comparisons/a1/equal-to.mp3", text: "equal to" },
+  { file: "comparisons/a1/odd.mp3",      text: "odd" },
+  { file: "comparisons/a1/even.mp3",     text: "even" },
 
   // ── UNIT 5 — SHAPES (geometry/) ──────────────────────────────────────────
   // already exist: triangle, square, rectangle, circle, point, line, side, vertex, perimeter
-  { file: "geometry/angle.mp3", text: "angle" },
+  { file: "geometry/a1/angle.mp3", text: "angle" },
+  { file: "geometry/a1/angle-sentence.mp3", text: "This is an angle." },
 
   // ── UNIT 6 — MATH VERBS A1 ───────────────────────────────────────────────
   // already exist: add.mp3, count.mp3, draw.mp3, measure.mp3

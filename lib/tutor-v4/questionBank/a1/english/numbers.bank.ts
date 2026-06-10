@@ -1,13 +1,13 @@
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 
 const WORDS = [
-  { slug: "twenty",   en: "twenty",   fr: "vingt",     audio: "/audio/english-maths/numbers/twenty.mp3" },
-  { slug: "thirty",   en: "thirty",   fr: "trente",    audio: "/audio/english-maths/numbers/thirty.mp3" },
-  { slug: "forty",    en: "forty",    fr: "quarante",  audio: "/audio/english-maths/numbers/forty.mp3" },
-  { slug: "fifty",    en: "fifty",    fr: "cinquante", audio: "/audio/english-maths/numbers/fifty.mp3" },
-  { slug: "hundred",  en: "hundred",  fr: "cent",      audio: "/audio/english-maths/numbers/hundred.mp3" },
-  { slug: "thousand", en: "thousand", fr: "mille",     audio: "/audio/english-maths/numbers/thousand.mp3" },
-  { slug: "million",  en: "million",  fr: "million",   audio: "/audio/english-maths/numbers/million.mp3" },
+  { slug: "twenty",   en: "twenty",   fr: "vingt",     audio: "/audio/english-maths/numbers/a1/twenty.mp3" },
+  { slug: "thirty",   en: "thirty",   fr: "trente",    audio: "/audio/english-maths/numbers/a1/thirty.mp3" },
+  { slug: "forty",    en: "forty",    fr: "quarante",  audio: "/audio/english-maths/numbers/a1/forty.mp3" },
+  { slug: "fifty",    en: "fifty",    fr: "cinquante", audio: "/audio/english-maths/numbers/a1/fifty.mp3" },
+  { slug: "hundred",  en: "hundred",  fr: "cent",      audio: "/audio/english-maths/numbers/a1/hundred.mp3" },
+  { slug: "thousand", en: "thousand", fr: "mille",     audio: "/audio/english-maths/numbers/a1/thousand.mp3" },
+  { slug: "million",  en: "million",  fr: "million",   audio: "/audio/english-maths/numbers/a1/million.mp3" },
 ] as const;
 
 function dFr(exclude: string) { return WORDS.filter(w => w.fr !== exclude).map(w => w.fr).slice(0, 3); }
