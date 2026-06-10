@@ -11,6 +11,7 @@ import {
   type Classe,
   type Matiere,
 } from "@/lib/tutor-v4/catalog";
+import FloatingCoach from "@/components/FloatingCoach";
 
 const CLASSES: Classe[] = ["cp", "ce1", "ce2", "cm1", "cm2", "6e", "5e", "4e", "3e", "terminale-spe", "adulte"];
 const FRANCAIS_READY_CLASSES: Classe[] = ["cp", "ce1", "ce2", "cm1", "cm2", "6e", "5e", "4e", "3e"];
@@ -342,6 +343,8 @@ export default function CoachIA() {
           </div>
         </section>
       </div>
+
+      <FloatingCoach />
     </main>
   );
 }

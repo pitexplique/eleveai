@@ -1,6 +1,7 @@
 // app/tutor-v4/page.tsx
 import { Suspense } from "react";
 import TutorV4Client from "./TutorV4Client";
+import FloatingCoach from "@/components/FloatingCoach";
 
 function TutorV4Fallback() {
   return (
@@ -18,6 +19,7 @@ export default function TutorV4Page() {
   return (
     <Suspense fallback={<TutorV4Fallback />}>
       <TutorV4Client />
+      <FloatingCoach />
     </Suspense>
   );
 }
