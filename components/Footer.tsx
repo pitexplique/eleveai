@@ -6,6 +6,7 @@ const outils = [
   { label: "Coach Maths IA", href: "/coach-ia/maths" },
   { label: "Coach Francais IA", href: "/coach-ia/francais" },
   { label: "Parcours English", href: "/parcours-english-maths" },
+  { label: "Parcours Espagnol", href: "/parcours-espagnol" },
   { label: "Parcours", href: "/parcours" },
   { label: "Coach Brevet", href: "/coach-brevet" },
   { label: "Coach Bac Spe", href: "/coach-bac-spe" },

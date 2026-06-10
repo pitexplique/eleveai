@@ -7,7 +7,7 @@ import { createClient } from "@/lib/supabase/client";
 import { useEleve } from "@/context/EleveContext";
 
 import type { ParcoursNiveauEnglish, ParcoursQuestion, ParcoursAnswer, ParcoursNotionScore } from "@/lib/parcours/types";
-import { getDefiQuestionsForEnglish } from "@/lib/parcours/getDefiQuestionForEnglish";
+import { getDefiQuestionsForEspagnol } from "@/lib/parcours/getDefiQuestionForEspagnol";
 import { isCorrectAnswer, scoreParcours } from "@/lib/parcours/scoreParcours";
 
 const NIVEAUX: ParcoursNiveauEnglish[] = ["a1", "a2", "b1", "b2"];
@@ -24,9 +24,9 @@ const niveauColors: Record<ParcoursNiveauEnglish, { active: string; inactive: st
 };
 
 const questionCountOptions = [
-  { value: 5,  label: "Sprint",        emoji: "⚡", description: "5 questions" },
-  { value: 10, label: "Course",        emoji: "🏃", description: "10 questions" },
-  { value: 15, label: "Challenge",     emoji: "🔥", description: "15 questions" },
+  { value: 5,  label: "Sprint",         emoji: "⚡", description: "5 questions" },
+  { value: 10, label: "Course",         emoji: "🏃", description: "10 questions" },
+  { value: 15, label: "Challenge",      emoji: "🔥", description: "15 questions" },
   { value: 20, label: "Grand parcours", emoji: "🏆", description: "20 questions" },
 ] as const;
 
@@ -50,13 +50,13 @@ function getStatusStyle(status: string) {
 
 function getStatusLabel(status: string) {
   switch (status) {
-    case "maitrise": return "✅ Mastered";
+    case "maitrise": return "✅ Maîtrisé";
     case "fragile":  return "⚠️ Fragile";
-    default:         return "❌ To review";
+    default:         return "❌ À revoir";
   }
 }
 
-export default function ParcoursEnglishClient() {
+export default function ParcoursEspagnolClient() {
   const supabase = createClient();
   const eleveContext = useEleve() as unknown as { eleve?: EleveSession | null };
   const eleve = eleveContext.eleve ?? null;
@@ -93,7 +93,7 @@ export default function ParcoursEnglishClient() {
   const pourcentage = totalMaxScore > 0 ? Math.round((totalScore / totalMaxScore) * 100) : 0;
 
   function startParcours() {
-    const qs = getDefiQuestionsForEnglish(niveau, questionCount);
+    const qs = getDefiQuestionsForEspagnol(niveau, questionCount);
     setQuestions(qs);
     setAnswers({});
     setSubmitted(false);
@@ -116,7 +116,7 @@ export default function ParcoursEnglishClient() {
     }
     setSaving(true);
     // "pourcentage" est une colonne générée côté base : on ne l'insère pas.
-    const { error } = await supabase.from("resultats_parcours_english").insert({
+    const { error } = await supabase.from("resultats_parcours_espagnol").insert({
       code_etablissement: codeEtablissement,
       code_utilisateur: codeUtilisateur,
       nom: eleve?.nom ?? null,
@@ -141,7 +141,7 @@ export default function ParcoursEnglishClient() {
   // ─── Écran de départ ───
   if (!started) {
     return (
-      <main className="min-h-screen bg-[#f0f4ff] px-4 py-8">
+      <main className="min-h-screen bg-[#fff5f3] px-4 py-8">
         <div className="mx-auto max-w-3xl">
           <div className="mb-6">
             <Link href="/accueil" className="text-sm font-bold text-slate-500 hover:text-slate-800">
@@ -151,14 +151,14 @@ export default function ParcoursEnglishClient() {
 
           <div className="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-slate-200 sm:p-8">
             <p className="mb-1 text-xs font-black uppercase tracking-widest text-slate-400">Parcours</p>
-            <h1 className="text-3xl font-black text-sky-600 sm:text-4xl">English Maths</h1>
+            <h1 className="text-3xl font-black text-rose-600 sm:text-4xl">Espagnol 🇪🇸</h1>
             <p className="mt-2 text-slate-500 font-medium">
-              Diagnostique ton vocabulaire mathématique en anglais.
+              Diagnostique ton vocabulaire espagnol, du A1 au B2.
             </p>
 
             <div className="mt-8">
               <p className="mb-3 text-sm font-black uppercase tracking-wider text-slate-500">
-                Choose your level
+                Elige tu nivel
               </p>
               <div className="flex flex-wrap gap-3">
                 {NIVEAUX.map((n) => (
@@ -190,7 +190,7 @@ export default function ParcoursEnglishClient() {
                     className={[
                       "rounded-2xl border p-4 text-center transition",
                       questionCount === opt.value
-                        ? "border-sky-500 bg-sky-50 text-sky-900"
+                        ? "border-rose-500 bg-rose-50 text-rose-900"
                         : "border-slate-200 bg-white text-slate-700 hover:bg-slate-50",
                     ].join(" ")}
                   >
@@ -205,9 +205,9 @@ export default function ParcoursEnglishClient() {
             <button
               type="button"
               onClick={startParcours}
-              className="mt-8 w-full rounded-2xl bg-sky-600 px-6 py-4 text-base font-black text-white shadow-lg hover:bg-sky-500 transition"
+              className="mt-8 w-full rounded-2xl bg-rose-600 px-6 py-4 text-base font-black text-white shadow-lg hover:bg-rose-500 transition"
             >
-              Start — {niveauLabels[niveau]} · {questionCount} questions →
+              ¡Empezar! — {niveauLabels[niveau]} · {questionCount} questions →
             </button>
           </div>
         </div>
@@ -218,13 +218,13 @@ export default function ParcoursEnglishClient() {
   // ─── Exercice ───
   if (!submitted) {
     return (
-      <main className="min-h-screen bg-[#f0f4ff] px-4 py-6">
+      <main className="min-h-screen bg-[#fff5f3] px-4 py-6">
         <div className="mx-auto max-w-3xl">
           <div className="mb-4 flex items-center justify-between gap-3">
             <button type="button" onClick={resetParcours} className="text-sm font-bold text-slate-500 hover:text-slate-800">
               ← Retour
             </button>
-            <span className="rounded-full bg-sky-100 px-4 py-2 text-sm font-black text-sky-700">
+            <span className="rounded-full bg-rose-100 px-4 py-2 text-sm font-black text-rose-700">
               {niveauLabels[niveau]} · {questions.length} questions
             </span>
           </div>
@@ -249,9 +249,9 @@ export default function ParcoursEnglishClient() {
                   <p className="mb-4 text-base font-bold text-slate-800">{q.question.text}</p>
 
                   {q.question.audioSrc ? (
-                    <div className="mb-4 rounded-2xl border border-sky-200 bg-sky-50 p-3">
-                      <p className="mb-2 text-center text-xs font-bold uppercase tracking-wide text-sky-600">
-                        🔊 Listen
+                    <div className="mb-4 rounded-2xl border border-rose-200 bg-rose-50 p-3">
+                      <p className="mb-2 text-center text-xs font-bold uppercase tracking-wide text-rose-600">
+                        🔊 Escucha
                       </p>
                       {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
                       <audio
@@ -275,7 +275,7 @@ export default function ParcoursEnglishClient() {
                             className={[
                               "rounded-2xl border px-4 py-3 text-left text-sm font-bold transition",
                               selected
-                                ? "border-sky-500 bg-sky-100 text-sky-950"
+                                ? "border-rose-500 bg-rose-100 text-rose-950"
                                 : "border-slate-200 bg-slate-50 text-slate-800 hover:bg-slate-100",
                             ].join(" ")}
                           >
@@ -287,15 +287,15 @@ export default function ParcoursEnglishClient() {
                   ) : (
                     <input
                       type="text"
-                      placeholder="Your answer…"
+                      placeholder="Ta réponse…"
                       value={answers[q.notionId] ?? ""}
                       onChange={(e) => setAnswers((prev) => ({ ...prev, [q.notionId]: e.target.value }))}
-                      className="w-full rounded-2xl border border-slate-200 px-4 py-3 text-sm font-bold text-slate-800 focus:border-sky-400 focus:outline-none"
+                      className="w-full rounded-2xl border border-slate-200 px-4 py-3 text-sm font-bold text-slate-800 focus:border-rose-400 focus:outline-none"
                     />
                   )}
 
                   {isAnswered && (
-                    <p className="mt-2 text-xs font-bold text-slate-400">Answer recorded.</p>
+                    <p className="mt-2 text-xs font-bold text-slate-400">Réponse enregistrée.</p>
                   )}
                 </article>
               );
@@ -307,9 +307,9 @@ export default function ParcoursEnglishClient() {
               type="button"
               onClick={() => setSubmitted(true)}
               disabled={Object.keys(answers).length < questions.length}
-              className="rounded-2xl bg-sky-600 px-8 py-4 text-base font-black text-white shadow-lg hover:bg-sky-500 disabled:cursor-not-allowed disabled:opacity-50 transition"
+              className="rounded-2xl bg-rose-600 px-8 py-4 text-base font-black text-white shadow-lg hover:bg-rose-500 disabled:cursor-not-allowed disabled:opacity-50 transition"
             >
-              See my results →
+              Voir mes résultats →
             </button>
           </div>
         </div>
@@ -319,14 +319,14 @@ export default function ParcoursEnglishClient() {
 
   // ─── Bilan ───
   return (
-    <main className="min-h-screen bg-[#f0f4ff] px-4 py-6" ref={bilanRef}>
+    <main className="min-h-screen bg-[#fff5f3] px-4 py-6" ref={bilanRef}>
       <div className="mx-auto max-w-3xl">
         <div className="mb-6 rounded-3xl bg-white p-6 shadow-sm ring-1 ring-slate-200 text-center">
-          <p className="text-4xl font-black text-sky-600">{pourcentage}%</p>
+          <p className="text-4xl font-black text-rose-600">{pourcentage}%</p>
           <p className="mt-1 text-lg font-bold text-slate-700">
             {totalScore} / {totalMaxScore} correct
           </p>
-          <p className="mt-1 text-sm text-slate-400 font-medium">Level {niveauLabels[niveau]}</p>
+          <p className="mt-1 text-sm text-slate-400 font-medium">Niveau {niveauLabels[niveau]}</p>
         </div>
 
         <div className="space-y-3 mb-6">
@@ -349,9 +349,9 @@ export default function ParcoursEnglishClient() {
               type="button"
               onClick={enregistrerScore}
               disabled={saving}
-              className="rounded-2xl bg-sky-600 px-5 py-3 text-sm font-black text-white hover:bg-sky-500 disabled:opacity-60 transition"
+              className="rounded-2xl bg-rose-600 px-5 py-3 text-sm font-black text-white hover:bg-rose-500 disabled:opacity-60 transition"
             >
-              {saving ? "Saving…" : "✅ Save my score"}
+              {saving ? "Enregistrement…" : "✅ Enregistrer mon score"}
             </button>
           )}
           <button
@@ -359,13 +359,13 @@ export default function ParcoursEnglishClient() {
             onClick={resetParcours}
             className="rounded-2xl bg-white px-5 py-3 text-sm font-black text-slate-800 ring-1 ring-slate-200 hover:bg-slate-50 transition"
           >
-            New parcours
+            Nouveau parcours
           </button>
           <Link
-            href={`/coach-ia/english-maths?niveau=${niveau}`}
+            href={`/coach-ia/espagnol?niveau=${niveau}`}
             className="rounded-2xl bg-slate-950 px-5 py-3 text-sm font-black text-white hover:bg-slate-800 transition"
           >
-            Train with Coach →
+            S&apos;entraîner avec le Coach →
           </Link>
         </div>
 

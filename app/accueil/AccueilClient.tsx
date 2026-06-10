@@ -76,6 +76,7 @@ const FEATURES = [
   { icon: "🧮", label: "Parcours Maths",    desc: "Diagnostic et entraînement maths",   href: "/parcours"               },
   { icon: "📖", label: "Parcours Français", desc: "Lecture, grammaire, expression",     href: "/parcours-francais"      },
   { icon: "🇬🇧", label: "Parcours English",  desc: "Bilan de niveau CECRL avec audio",   href: "/parcours-english-maths" },
+  { icon: "🇪🇸", label: "Parcours Espagnol", desc: "Bilan de niveau A1 → B2 avec audio", href: "/parcours-espagnol"      },
 ];
 
 // ─── Main component ───────────────────────────────────────────────────────────
@@ -234,7 +235,7 @@ export default function AccueilPage() {
       {/* ── FEATURES BAR ─────────────────────────────────────────────────────── */}
       <section className="bg-[#071f3a] border-t border-white/10 px-4 py-5 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-5xl">
-          <div className="grid grid-cols-3 sm:grid-cols-5 gap-3">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
             {FEATURES.map((f) => (
               <Link
                 key={f.label}
@@ -256,6 +257,7 @@ export default function AccueilPage() {
           <h2 className="text-lg font-black text-white mb-4">✨ Nouveautés</h2>
           <div className="flex gap-3 overflow-x-auto pb-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
             {[
+              { icon: "🇪🇸", label: "Parcours Espagnol",  desc: "Bilan de niveau A1 → B2 avec audio",    href: "/parcours-espagnol",           color: "from-rose-600 to-red-800"     },
               { icon: "🇪🇸", label: "Coach Espagnol",     desc: "A1 → B2, vocabulaire & audio",          href: "/coach-ia/espagnol",           color: "from-red-600 to-rose-800"     },
               { icon: "🇬🇧", label: "Coach English",       desc: "A1 → B2, vocabulaire maths en anglais",  href: "/coach-ia/english-maths",       color: "from-sky-600 to-blue-800"     },
               { icon: "🎧", label: "Parcours English",     desc: "Bilan de niveau CECRL avec audio",        href: "/parcours-english-maths",       color: "from-orange-600 to-amber-700" },
