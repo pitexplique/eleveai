@@ -135,6 +135,7 @@ export default function DashboardPrincipalClient() {
           ...(r.parcours_maths ?? []),
           ...(r.parcours_english ?? []),
           ...(r.parcours_espagnol ?? []),
+          ...(r.parcours_francais ?? []),
         ] as ResultatBase[]);
         setCalculs((r.calcul_rapide ?? []) as ResultatBase[]);
         setDefis((r.defis_jour ?? []) as ResultatBase[]);

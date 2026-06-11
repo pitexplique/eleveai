@@ -208,6 +208,7 @@ export default function DashboardEleveClient() {
           ...(r.parcours_maths ?? []),
           ...(r.parcours_english ?? []),
           ...(r.parcours_espagnol ?? []),
+          ...(r.parcours_francais ?? []),
         ] as ResultatParcours[]);
 
         setResultatsCalculRapide(

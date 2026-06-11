@@ -82,6 +82,7 @@ export async function GET(req: Request) {
     parcoursMathsRes,
     parcoursEnglishRes,
     parcoursEspagnolRes,
+    parcoursFrancaisRes,
     calculRes,
     defisRes,
     englishRes,
@@ -100,6 +101,7 @@ export async function GET(req: Request) {
     query("resultats_parcours_maths", cols.parcours),
     query("resultats_parcours_english", cols.parcours),
     query("resultats_parcours_espagnol", cols.parcours),
+    query("resultats_parcours_francais", cols.parcours),
     query("resultats_calcul_rapide", cols.calcul_rapide),
     query("resultats_defis_jour", cols.defis_jour),
     query("resultats_english_maths", cols.english_maths),
@@ -135,6 +137,9 @@ export async function GET(req: Request) {
       parcours_espagnol: parcoursEspagnolRes.error
         ? []
         : parcoursEspagnolRes.data ?? [],
+      parcours_francais: parcoursFrancaisRes.error
+        ? []
+        : parcoursFrancaisRes.data ?? [],
       calcul_rapide: calculRes.data ?? [],
       defis_jour: defisRes.data ?? [],
       english_maths: englishRes.data ?? [],

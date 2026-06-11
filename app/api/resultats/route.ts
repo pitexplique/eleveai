@@ -24,6 +24,10 @@ const ACTIVITES: Record<string, { table: string; colonnes: string[] }> = {
     table: "resultats_parcours_espagnol",
     colonnes: ["classe", "niveau", "matiere", "score", "total", "details"],
   },
+  parcours_francais: {
+    table: "resultats_parcours_francais",
+    colonnes: ["classe", "niveau", "matiere", "score", "total", "details"],
+  },
   calcul_rapide: {
     table: "resultats_calcul_rapide",
     colonnes: [

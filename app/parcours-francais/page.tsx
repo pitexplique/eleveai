@@ -1,7 +1,12 @@
-import { redirect } from "next/navigation";
+import type { Metadata } from "next";
+import ParcoursFrancaisClient from "./ParcoursFrancaisClient";
 
-// Parcours Français — en construction
-// Redirige vers Coach Français IA en attendant la vraie page
+export const metadata: Metadata = {
+  title: "Parcours Français — EleveAI",
+  description:
+    "Diagnostique ton niveau de français du CP à la 3e : grammaire, conjugaison, orthographe et vocabulaire, notion par notion.",
+};
+
 export default function ParcoursFrancaisPage() {
-  redirect("/coach-ia/francais");
+  return <ParcoursFrancaisClient />;
 }

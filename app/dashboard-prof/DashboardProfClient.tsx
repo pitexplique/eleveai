@@ -157,6 +157,7 @@ export default function DashboardProfClient() {
           ...(r.parcours_maths ?? []),
           ...(r.parcours_english ?? []),
           ...(r.parcours_espagnol ?? []),
+          ...(r.parcours_francais ?? []),
         ] as ResultatParcours[]);
         setResultatsCalculRapide((r.calcul_rapide ?? []) as ResultatCalculRapide[]);
         setResultatsDefisJour((r.defis_jour ?? []) as ResultatDefiJour[]);

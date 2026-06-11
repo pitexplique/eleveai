@@ -7,6 +7,7 @@ export type ActiviteResultat =
   | "parcours_maths"
   | "parcours_english"
   | "parcours_espagnol"
+  | "parcours_francais"
   | "calcul_rapide"
   | "defis_jour"
   | "english_maths"
