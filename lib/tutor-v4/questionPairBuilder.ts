@@ -209,24 +209,32 @@ export function buildQuestionPair(args: {
     (item) => item.notionId === notionId && item.microId === microId
   );
 
-  const filtered = allForMicro.filter(
-    (item) => !recentQuestionIds.includes(item.id)
-  );
+  // Les questions générées (kind "template") sont matérialisées avec un id
+  // suffixé (`${item.id}_${Date.now()}_${aléa}`) : recentQuestionIds contient
+  // ces ids générés, jamais l'id du gabarit nu. On compare donc aussi par
+  // préfixe, sinon le filtre anti-répétition est inopérant (retour élève du
+  // 11/06/2026 : « ça me repose la même question en boucle »).
+  const lastSeenIndex = (item: TutorBankItemV4) => {
+    for (let i = recentQuestionIds.length - 1; i >= 0; i--) {
+      const recentId = recentQuestionIds[i];
+      if (recentId === item.id || recentId.startsWith(`${item.id}_`)) return i;
+    }
+    return -1;
+  };
+
+  const filtered = allForMicro.filter((item) => lastSeenIndex(item) === -1);
 
   // Banque trop petite pour éviter toutes les questions récentes : on reprend
-  // alors les moins récemment posées, en écartant si possible les deux
-  // dernières (retour élève du 11/06/2026 : « ça me repose la même question
-  // en boucle »).
+  // alors les moins récemment posées, en écartant si possible les plus
+  // récentes.
   let usable: typeof allForMicro;
   if (filtered.length >= 2) {
     usable = filtered;
   } else {
     const byRecency = [...allForMicro].sort(
-      (x, y) =>
-        recentQuestionIds.lastIndexOf(x.id) - recentQuestionIds.lastIndexOf(y.id)
+      (x, y) => lastSeenIndex(x) - lastSeenIndex(y)
     );
-    const withoutLatest = byRecency.slice(0, Math.max(2, byRecency.length - 2));
-    usable = withoutLatest;
+    usable = byRecency.slice(0, Math.max(2, byRecency.length - 2));
   }
 
   if (usable.length < 2) {
