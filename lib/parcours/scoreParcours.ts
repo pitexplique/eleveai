@@ -1,34 +1,12 @@
+import { answersMatch } from "@/lib/answerMatch";
 import type {
   ParcoursAnswer,
   ParcoursNotionScore,
   ParcoursStatus,
 } from "./types";
 
-function normalize(value: string) {
-  return value
-    .trim()
-    .toLowerCase()
-    .replace(",", ".")
-    .replace(/\s+/g, " ");
-}
-
 export function isCorrectAnswer(userAnswer: string, expected: string[]) {
-  const cleanUser = normalize(userAnswer);
-
-  return expected.some((answer) => {
-    const cleanExpected = normalize(answer);
-
-    if (cleanUser === cleanExpected) return true;
-
-    const userNumber = Number(cleanUser);
-    const expectedNumber = Number(cleanExpected);
-
-    if (!Number.isNaN(userNumber) && !Number.isNaN(expectedNumber)) {
-      return Math.abs(userNumber - expectedNumber) < 0.0001;
-    }
-
-    return false;
-  });
+  return expected.some((answer) => answersMatch(userAnswer, answer));
 }
 
 export function getParcoursStatus(score: number, maxScore: number): ParcoursStatus {

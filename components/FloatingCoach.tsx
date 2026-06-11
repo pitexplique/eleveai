@@ -1,13 +1,23 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useEleve } from "@/context/EleveContext";
+
+type CoachMessage = { role: "eleve" | "coach"; content: string };
+
+const MESSAGE_ACCUEIL: CoachMessage = {
+  role: "coach",
+  content:
+    "Bonjour, je suis le coach EleveAI. Pose-moi une question courte sur tes révisions.",
+};
 
 /**
  * Coach IA flottant, réutilisable sur toutes les pages (accueil, coachs, tutor).
  * Composant autonome : il lit le contexte élève, gère son propre état et
  * interroge /api/accueil/chat. Il suffit de poser <FloatingCoach /> sur une page.
+ * Le fil complet reste affiché et l'historique est envoyé à l'API (retour
+ * élève du 11/06/2026 : le coach resaluait et on perdait la question d'avant).
  */
 export default function FloatingCoach() {
   const { eleve } = useEleve();
@@ -17,29 +27,52 @@ export default function FloatingCoach() {
 
   const [open, setOpen] = useState(false);
   const [question, setQuestion] = useState("");
-  const [answer, setAnswer] = useState(
-    "Bonjour, je suis le coach EleveAI. Pose-moi une question courte sur tes révisions."
-  );
+  const [messages, setMessages] = useState<CoachMessage[]>([MESSAGE_ACCUEIL]);
   const [loading, setLoading] = useState(false);
+  const filRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const fil = filRef.current;
+    if (fil) fil.scrollTop = fil.scrollHeight;
+  }, [messages, loading, open]);
 
   async function onSend(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const trimmed = question.trim();
-    if (!trimmed || !canAsk) return;
+    if (!trimmed || !canAsk || loading) return;
+
+    // Historique envoyé à l'API : les derniers échanges, sans le message d'accueil.
+    const history = messages
+      .filter((m) => m !== MESSAGE_ACCUEIL)
+      .slice(-8)
+      .map((m) => ({ role: m.role, content: m.content }));
+
+    setMessages((prev) => [...prev, { role: "eleve", content: trimmed }]);
+    setQuestion("");
     setLoading(true);
-    setAnswer("Je réfléchis…");
     try {
       const res = await fetch("/api/accueil/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ codeEtablissement, codeUtilisateur, studentQuestion: trimmed }),
+        body: JSON.stringify({
+          codeEtablissement,
+          codeUtilisateur,
+          studentQuestion: trimmed,
+          history,
+        }),
       });
       const data = (await res.json().catch(() => ({}))) as { answer?: string; error?: string };
       if (!res.ok || !data.answer) throw new Error(data.error ?? "Réponse indisponible.");
-      setAnswer(data.answer);
-      setQuestion("");
+      setMessages((prev) => [...prev, { role: "coach", content: data.answer! }]);
     } catch {
-      setAnswer("Je n'arrive pas à répondre pour le moment. Essaie depuis Parcours après une correction.");
+      setMessages((prev) => [
+        ...prev,
+        {
+          role: "coach",
+          content:
+            "Je n'arrive pas à répondre pour le moment. Essaie depuis Parcours après une correction.",
+        },
+      ]);
     } finally {
       setLoading(false);
     }
@@ -73,11 +106,28 @@ export default function FloatingCoach() {
         </button>
       </div>
 
-      <div className="min-h-0 flex-1 overflow-y-auto p-4">
+      <div ref={filRef} className="min-h-0 flex-1 space-y-2 overflow-y-auto p-4">
         {canAsk ? (
-          <div className="rounded-2xl bg-white/10 px-4 py-3 text-sm font-semibold leading-relaxed text-white/90">
-            {answer}
-          </div>
+          <>
+            {messages.map((message, index) => (
+              <div
+                key={index}
+                className={[
+                  "rounded-2xl px-4 py-3 text-sm font-semibold leading-relaxed",
+                  message.role === "coach"
+                    ? "bg-white/10 text-white/90"
+                    : "ml-6 bg-emerald-500/30 text-white",
+                ].join(" ")}
+              >
+                {message.content}
+              </div>
+            ))}
+            {loading ? (
+              <div className="rounded-2xl bg-white/10 px-4 py-3 text-sm font-semibold leading-relaxed text-white/60">
+                Je réfléchis…
+              </div>
+            ) : null}
+          </>
         ) : (
           <div className="flex h-full items-center text-center">
             <p className="text-sm font-semibold leading-relaxed text-white/70">

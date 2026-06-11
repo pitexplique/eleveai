@@ -6,6 +6,9 @@ type AccueilChatBody = {
   codeEtablissement?: string;
   codeUtilisateur?: string;
   studentQuestion?: string;
+  // Derniers échanges du fil (retour élève du 11/06/2026 : sans historique,
+  // le coach resaluait et se répétait à chaque message).
+  history?: Array<{ role?: string; content?: string }>;
 };
 
 const OPENAI_MODEL = "gpt-4.1-mini";
@@ -74,6 +77,14 @@ export async function POST(req: Request) {
       );
     }
 
+    const history = (Array.isArray(body.history) ? body.history : [])
+      .slice(-8)
+      .map((message) => ({
+        role: message?.role === "coach" ? ("assistant" as const) : ("user" as const),
+        content: clean(message?.content, 500),
+      }))
+      .filter((message) => message.content);
+
     const completion = await openai.chat.completions.create({
       model: OPENAI_MODEL,
       temperature: 0.2,
@@ -83,19 +94,18 @@ export async function POST(req: Request) {
           role: "system",
           content: [
             "Tu es le coach EleveAI sur la page d'accueil.",
-            "Tu reponds a un eleve connecte qui pose une question rapide.",
+            `Tu reponds a un eleve connecte (${eleve.nom ?? codeUtilisateur}) qui pose une question rapide.`,
             "Reponds en francais simple, en 3 a 5 phrases maximum.",
+            "Ne salue pas l'eleve et ne te presente pas si la conversation a deja commence : reponds directement.",
             "Aide sans faire tout le travail a la place de l'eleve.",
             "Si la question demande un exercice precis, invite l'eleve a aller dans Parcours ou Coach IA.",
             "N'utilise pas de LaTeX.",
           ].join("\n"),
         },
+        ...history,
         {
           role: "user",
-          content: [
-            `Eleve connecte : ${eleve.nom ?? codeUtilisateur}`,
-            `Question de l'eleve : ${studentQuestion}`,
-          ].join("\n"),
+          content: studentQuestion,
         },
       ],
     });

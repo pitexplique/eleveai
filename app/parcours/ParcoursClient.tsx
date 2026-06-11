@@ -141,6 +141,7 @@ export default function ParcoursClient() {
   const [chatLoading, setChatLoading] = useState(false);
 
   const [saving, setSaving] = useState(false);
+  const [saved, setSaved] = useState(false);
   const [saveMessage, setSaveMessage] = useState<string | null>(null);
 
   const notions = useMemo(() => getClasseNotions(classe), [classe]);
@@ -210,6 +211,7 @@ export default function ParcoursClient() {
     setSubmitted(false);
     resetCorrectionChat();
     setStarted(true);
+    setSaved(false);
     setSaveMessage(null);
   }
 
@@ -219,6 +221,7 @@ export default function ParcoursClient() {
     setAnswers({});
     setSubmitted(false);
     resetCorrectionChat();
+    setSaved(false);
     setSaveMessage(null);
   }
 
@@ -385,6 +388,7 @@ export default function ParcoursClient() {
       return;
     }
 
+    setSaved(true);
     setSaveMessage(
       "Note enregistrée ✅ Tu peux refaire le parcours pour améliorer ton score."
     );
@@ -941,22 +945,63 @@ export default function ParcoursClient() {
                 </button>
               </div>
             ) : (
-              <div className="mt-6 flex flex-wrap gap-3">
-                <button
-                  type="button"
-                  onClick={startParcours}
-                  className="rounded-2xl bg-gradient-to-r from-emerald-400 to-sky-400 px-5 py-3 text-sm font-black text-slate-950 shadow-lg hover:from-emerald-300 hover:to-sky-300"
-                >
-                  Refaire un parcours
-                </button>
+              /* Retour élève du 11/06/2026 : le bouton d'enregistrement
+                 uniquement dans le bilan (en haut) était raté par les élèves
+                 → il reste visible ici, collé en bas de l'écran. */
+              <div className="sticky bottom-4 rounded-[2rem] border border-white/70 bg-white/90 p-4 shadow-2xl backdrop-blur-xl">
+                <div className="flex flex-wrap items-center gap-3">
+                  {eleve && !saved ? (
+                    <button
+                      type="button"
+                      onClick={enregistrerResultatParcours}
+                      disabled={saving}
+                      className="rounded-2xl bg-emerald-600 px-5 py-3 text-sm font-black text-white shadow-lg hover:bg-emerald-500 disabled:cursor-not-allowed disabled:opacity-60"
+                    >
+                      {saving ? "Enregistrement..." : "✅ Enregistrer ma note"}
+                    </button>
+                  ) : null}
 
-                <button
-                  type="button"
-                  onClick={resetParcours}
-                  className="rounded-2xl bg-white px-5 py-3 text-sm font-black text-slate-800 shadow-sm ring-1 ring-slate-200 hover:bg-slate-50"
-                >
-                  Changer de classe
-                </button>
+                  {eleve && saved ? (
+                    <span className="rounded-2xl bg-emerald-50 px-5 py-3 text-sm font-black text-emerald-800 ring-1 ring-emerald-200">
+                      Note enregistrée ✅
+                    </span>
+                  ) : null}
+
+                  {!eleve ? (
+                    <Link
+                      href="/auth/signin-eleve"
+                      className="rounded-2xl bg-amber-500 px-5 py-3 text-sm font-black text-white shadow-lg hover:bg-amber-400"
+                    >
+                      Se connecter pour enregistrer
+                    </Link>
+                  ) : null}
+
+                  <button
+                    type="button"
+                    onClick={() =>
+                      bilanRef.current?.scrollIntoView({ behavior: "smooth", block: "start" })
+                    }
+                    className="rounded-2xl bg-white px-5 py-3 text-sm font-black text-slate-800 shadow-sm ring-1 ring-slate-200 hover:bg-slate-50"
+                  >
+                    ⬆️ Voir le bilan
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={startParcours}
+                    className="rounded-2xl bg-gradient-to-r from-emerald-400 to-sky-400 px-5 py-3 text-sm font-black text-slate-950 shadow-lg hover:from-emerald-300 hover:to-sky-300"
+                  >
+                    Refaire un parcours
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={resetParcours}
+                    className="rounded-2xl bg-white px-5 py-3 text-sm font-black text-slate-800 shadow-sm ring-1 ring-slate-200 hover:bg-slate-50"
+                  >
+                    Changer de classe
+                  </button>
+                </div>
               </div>
             )}
           </div>

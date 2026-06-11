@@ -1,5 +1,6 @@
 
 //lib/evaluation/comparators.ts
+import { answersMatch } from "@/lib/answerMatch";
 import type { ComparatorName } from "@/lib/tutor/types";
 
 function normalize(value: string) {
@@ -48,24 +49,28 @@ export function compareAnswer(args: {
 }) {
   const a = normalize(args.answer);
 
+  // answersMatch tolère les espaces en plus/en moins et les unités ajoutées
+  // ou omises (« 190cm », « 5 cm » pour « 5 »…) — voir lib/answerMatch.ts.
   switch (args.comparator) {
     case "exact_text":
     case "mcq_exact":
-      return args.expected.some((exp) => normalize(exp) === a);
-
     case "number_equal":
-      return args.expected.some((exp) => normalize(exp) === a);
+      return args.expected.some(
+        (exp) => normalize(exp) === a || answersMatch(args.answer, exp)
+      );
 
     case "fraction_decimal_equivalent":
       return args.expected.some((exp) => {
         const e = normalize(exp);
-        return e === a || inEquivalenceGroup(a, e);
+        return e === a || inEquivalenceGroup(a, e) || answersMatch(args.answer, exp);
       });
 
     case "contains_keyword":
       return args.expected.some((exp) => a.includes(normalize(exp)));
 
     default:
-      return args.expected.some((exp) => normalize(exp) === a);
+      return args.expected.some(
+        (exp) => normalize(exp) === a || answersMatch(args.answer, exp)
+      );
   }
 }

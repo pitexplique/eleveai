@@ -213,7 +213,21 @@ export function buildQuestionPair(args: {
     (item) => !recentQuestionIds.includes(item.id)
   );
 
-  const usable = filtered.length >= 2 ? filtered : allForMicro;
+  // Banque trop petite pour éviter toutes les questions récentes : on reprend
+  // alors les moins récemment posées, en écartant si possible les deux
+  // dernières (retour élève du 11/06/2026 : « ça me repose la même question
+  // en boucle »).
+  let usable: typeof allForMicro;
+  if (filtered.length >= 2) {
+    usable = filtered;
+  } else {
+    const byRecency = [...allForMicro].sort(
+      (x, y) =>
+        recentQuestionIds.lastIndexOf(x.id) - recentQuestionIds.lastIndexOf(y.id)
+    );
+    const withoutLatest = byRecency.slice(0, Math.max(2, byRecency.length - 2));
+    usable = withoutLatest;
+  }
 
   if (usable.length < 2) {
     throw new Error(

@@ -40,8 +40,11 @@ function phonologieQuestion(_level: Cycle2Level, variant: number): Generated {
       { mot: "cha-peau", syllabes: "2" },
       { mot: "pa-pi-llon", syllabes: "3" },
       { mot: "so-leil", syllabes: "2" },
-      { mot: "ca-na-pe", syllabes: "3" },
+      { mot: "ca-na-pé", syllabes: "3" },
       { mot: "la-pin", syllabes: "2" },
+      { mot: "do-mi-no", syllabes: "3" },
+      { mot: "mou-ton", syllabes: "2" },
+      { mot: "é-lé-phant", syllabes: "3" },
     ];
     const item = randomChoice(mots);
     return {
@@ -60,9 +63,15 @@ function phonologieQuestion(_level: Cycle2Level, variant: number): Generated {
 
   const paires = [
     { a: "chat", b: "rat", riment: "oui" },
-    { a: "maison", b: "garcon", riment: "non" },
+    { a: "maison", b: "garçon", riment: "non" },
     { a: "soleil", b: "oreille", riment: "oui" },
     { a: "table", b: "porte", riment: "non" },
+    { a: "bateau", b: "gâteau", riment: "oui" },
+    { a: "souris", b: "tapis", riment: "oui" },
+    { a: "lapin", b: "sapin", riment: "oui" },
+    { a: "fleur", b: "maison", riment: "non" },
+    { a: "livre", b: "cheval", riment: "non" },
+    { a: "papillon", b: "table", riment: "non" },
   ];
   const paire = randomChoice(paires);
   return {

@@ -109,13 +109,13 @@ type ResultatDefiJour = {
   created_at: string;
 };
 
+// Date sans heure : retour élève du 11/06/2026, afficher l'heure des activités
+// était vécu comme intrusif (« je n'aime pas être stalké »).
 function formatDate(value: string) {
   return new Intl.DateTimeFormat("fr-FR", {
     day: "2-digit",
     month: "2-digit",
     year: "numeric",
-    hour: "2-digit",
-    minute: "2-digit",
   }).format(new Date(value));
 }
 
