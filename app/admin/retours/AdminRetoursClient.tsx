@@ -14,6 +14,7 @@ type Retour = {
   prenom: string | null;
   classe: string | null;
   email: string | null;
+  traite: boolean;
   created_at: string;
 };
 
@@ -45,38 +46,81 @@ function Etoiles({ note }: { note: number }) {
 
 export default function AdminRetoursClient() {
   const [loading, setLoading] = useState(true);
+  const [loadingMore, setLoadingMore] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [retours, setRetours] = useState<Retour[]>([]);
+  const [total, setTotal] = useState(0);
   const [filtre, setFiltre] = useState<"tous" | Retour["type"]>("tous");
+  const [filtreTraite, setFiltreTraite] = useState<"tous" | "a_traiter" | "traites">("tous");
+  const [etablissement, setEtablissement] = useState<string>("tous");
+  const [recherche, setRecherche] = useState("");
+  const [patching, setPatching] = useState<string | null>(null);
+
+  async function load(offset: number) {
+    const isFirst = offset === 0;
+    if (isFirst) setLoading(true);
+    else setLoadingMore(true);
+    setErrorMessage(null);
+
+    try {
+      const res = await fetch(`/api/admin/retours?offset=${offset}`);
+      const data = await res.json().catch(() => ({}));
+
+      if (!res.ok || !data?.ok) {
+        setErrorMessage(data?.error ?? "Impossible de charger les retours.");
+      } else {
+        const nouveaux = (data.retours ?? []) as Retour[];
+        setRetours((prev) => (isFirst ? nouveaux : [...prev, ...nouveaux]));
+        setTotal(data.total ?? 0);
+      }
+    } catch (err) {
+      console.error(err);
+      setErrorMessage("Impossible de charger les retours.");
+    }
+    if (isFirst) setLoading(false);
+    else setLoadingMore(false);
+  }
 
   useEffect(() => {
-    async function load() {
-      setLoading(true);
-      setErrorMessage(null);
-
-      try {
-        const res = await fetch("/api/admin/retours");
-        const data = await res.json().catch(() => ({}));
-
-        if (!res.ok || !data?.ok) {
-          setErrorMessage(data?.error ?? "Impossible de charger les retours.");
-          setLoading(false);
-          return;
-        }
-        setRetours((data.retours ?? []) as Retour[]);
-      } catch (err) {
-        console.error(err);
-        setErrorMessage("Impossible de charger les retours.");
-      }
-      setLoading(false);
-    }
-
-    load();
+    load(0);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  async function toggleTraite(retour: Retour) {
+    setPatching(retour.id);
+    const nouvelEtat = !retour.traite;
+
+    try {
+      const res = await fetch("/api/admin/retours", {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id: retour.id, traite: nouvelEtat }),
+      });
+      const data = await res.json().catch(() => ({}));
+
+      if (res.ok && data?.ok) {
+        setRetours((prev) =>
+          prev.map((r) => (r.id === retour.id ? { ...r, traite: nouvelEtat } : r))
+        );
+      }
+    } catch (err) {
+      console.error(err);
+    }
+    setPatching(null);
+  }
 
   const avis = useMemo(() => retours.filter((r) => r.type === "avis"), [retours]);
   const bugs = useMemo(() => retours.filter((r) => r.type === "bug"), [retours]);
   const idees = useMemo(() => retours.filter((r) => r.type === "idee"), [retours]);
+  const aTraiter = useMemo(() => retours.filter((r) => !r.traite), [retours]);
+
+  const etablissements = useMemo(() => {
+    const codes = new Set<string>();
+    for (const r of retours) {
+      if (r.code_etablissement) codes.add(r.code_etablissement);
+    }
+    return [...codes].sort();
+  }, [retours]);
 
   const noteMoyenne = useMemo(() => {
     const notes = avis.map((r) => r.note).filter((n): n is number => n !== null && n >= 1);
@@ -84,10 +128,23 @@ export default function AdminRetoursClient() {
     return Math.round((notes.reduce((s, n) => s + n, 0) / notes.length) * 10) / 10;
   }, [avis]);
 
-  const visibles = useMemo(
-    () => (filtre === "tous" ? retours : retours.filter((r) => r.type === filtre)),
-    [retours, filtre]
-  );
+  const visibles = useMemo(() => {
+    const requete = recherche.trim().toLowerCase();
+    return retours.filter((r) => {
+      if (filtre !== "tous" && r.type !== filtre) return false;
+      if (filtreTraite === "a_traiter" && r.traite) return false;
+      if (filtreTraite === "traites" && !r.traite) return false;
+      if (etablissement !== "tous" && r.code_etablissement !== etablissement) return false;
+      if (requete) {
+        const texte = [r.message, r.page, r.prenom, r.classe, r.code_eleve, r.code_etablissement, r.email]
+          .filter(Boolean)
+          .join(" ")
+          .toLowerCase();
+        if (!texte.includes(requete)) return false;
+      }
+      return true;
+    });
+  }, [retours, filtre, filtreTraite, etablissement, recherche]);
 
   return (
     <main className="min-h-screen bg-slate-950 px-4 py-8 text-white">
@@ -104,12 +161,20 @@ export default function AdminRetoursClient() {
                 Tout ce que les élèves ont envoyé depuis la page « Votre avis ».
               </p>
             </div>
-            <Link
-              href="/admin/dashboard"
-              className="rounded-2xl bg-slate-100 px-4 py-2 text-sm font-black text-slate-700 ring-1 ring-slate-200 transition hover:brightness-95"
-            >
-              ← Dashboard admin
-            </Link>
+            <div className="flex flex-wrap gap-2">
+              <a
+                href="/api/admin/retours?format=csv"
+                className="rounded-2xl bg-emerald-500 px-4 py-2 text-sm font-black text-white shadow transition hover:brightness-95"
+              >
+                ⬇️ Export CSV
+              </a>
+              <Link
+                href="/admin/dashboard"
+                className="rounded-2xl bg-slate-100 px-4 py-2 text-sm font-black text-slate-700 ring-1 ring-slate-200 transition hover:brightness-95"
+              >
+                ← Dashboard admin
+              </Link>
+            </div>
           </div>
         </div>
 
@@ -124,7 +189,7 @@ export default function AdminRetoursClient() {
         ) : (
           <>
             {/* STATS */}
-            <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+            <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-5">
               <div className="rounded-[2rem] bg-white p-5 text-slate-950 shadow-xl">
                 <p className="text-xs font-black uppercase text-slate-500">Note moyenne</p>
                 <p className="mt-2 text-3xl font-black text-emerald-500">
@@ -149,41 +214,88 @@ export default function AdminRetoursClient() {
                   </p>
                 </div>
               ))}
+              <div className="rounded-[2rem] bg-white p-5 text-slate-950 shadow-xl">
+                <p className="text-xs font-black uppercase text-slate-500">📌 À traiter</p>
+                <p className="mt-2 text-3xl font-black text-sky-500">{aTraiter.length}</p>
+                <p className="mt-1 text-xs font-bold text-slate-400">
+                  {retours.length - aTraiter.length} déjà traités
+                </p>
+              </div>
             </div>
 
             {/* LISTE */}
             <div className="rounded-[2rem] bg-white p-6 text-slate-950 shadow-2xl">
-              <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
-                <h2 className="text-2xl font-black">
-                  {visibles.length} retour{visibles.length > 1 ? "s" : ""}
-                </h2>
-                <div className="flex flex-wrap gap-2">
-                  {([
-                    { id: "tous", label: "Tous" },
-                    { id: "avis", label: "⭐ Avis" },
-                    { id: "bug", label: "🐞 Bugs" },
-                    { id: "idee", label: "💡 Idées" },
-                  ] as const).map((f) => (
-                    <button
-                      key={f.id}
-                      type="button"
-                      onClick={() => setFiltre(f.id)}
-                      className={[
-                        "rounded-2xl px-4 py-2 text-sm font-black transition",
-                        filtre === f.id
-                          ? "bg-slate-900 text-white"
-                          : "bg-slate-100 text-slate-600 ring-1 ring-slate-200 hover:brightness-95",
-                      ].join(" ")}
+              <div className="mb-5 space-y-3">
+                <div className="flex flex-wrap items-center justify-between gap-3">
+                  <h2 className="text-2xl font-black">
+                    {visibles.length} retour{visibles.length > 1 ? "s" : ""}
+                    {retours.length < total ? (
+                      <span className="ml-2 text-sm font-bold text-slate-400">
+                        ({retours.length} chargés sur {total})
+                      </span>
+                    ) : null}
+                  </h2>
+                  <div className="flex flex-wrap gap-2">
+                    {([
+                      { id: "tous", label: "Tous" },
+                      { id: "avis", label: "⭐ Avis" },
+                      { id: "bug", label: "🐞 Bugs" },
+                      { id: "idee", label: "💡 Idées" },
+                    ] as const).map((f) => (
+                      <button
+                        key={f.id}
+                        type="button"
+                        onClick={() => setFiltre(f.id)}
+                        className={[
+                          "rounded-2xl px-4 py-2 text-sm font-black transition",
+                          filtre === f.id
+                            ? "bg-slate-900 text-white"
+                            : "bg-slate-100 text-slate-600 ring-1 ring-slate-200 hover:brightness-95",
+                        ].join(" ")}
+                      >
+                        {f.label}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="flex flex-wrap items-center gap-2">
+                  <input
+                    type="search"
+                    value={recherche}
+                    onChange={(e) => setRecherche(e.target.value)}
+                    placeholder="Rechercher (message, prénom, classe…)"
+                    className="min-w-[220px] flex-1 rounded-2xl bg-slate-100 px-4 py-2 text-sm font-semibold text-slate-800 ring-1 ring-slate-200 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-400"
+                  />
+                  <select
+                    value={filtreTraite}
+                    onChange={(e) => setFiltreTraite(e.target.value as typeof filtreTraite)}
+                    className="rounded-2xl bg-slate-100 px-4 py-2 text-sm font-black text-slate-600 ring-1 ring-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-400"
+                  >
+                    <option value="tous">Traités + à traiter</option>
+                    <option value="a_traiter">📌 À traiter</option>
+                    <option value="traites">✅ Traités</option>
+                  </select>
+                  {etablissements.length > 0 ? (
+                    <select
+                      value={etablissement}
+                      onChange={(e) => setEtablissement(e.target.value)}
+                      className="rounded-2xl bg-slate-100 px-4 py-2 text-sm font-black text-slate-600 ring-1 ring-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-400"
                     >
-                      {f.label}
-                    </button>
-                  ))}
+                      <option value="tous">Tous les établissements</option>
+                      {etablissements.map((code) => (
+                        <option key={code} value={code}>{code}</option>
+                      ))}
+                    </select>
+                  ) : null}
                 </div>
               </div>
 
               {visibles.length === 0 ? (
                 <div className="rounded-2xl bg-amber-50 p-4 font-bold text-amber-800">
-                  Aucun retour pour l&apos;instant. Envoie tes élèves sur la page « Votre avis » !
+                  {retours.length === 0
+                    ? "Aucun retour pour l'instant. Envoie tes élèves sur la page « Votre avis » !"
+                    : "Aucun retour ne correspond aux filtres."}
                 </div>
               ) : (
                 <ul className="space-y-4">
@@ -197,7 +309,12 @@ export default function AdminRetoursClient() {
                     return (
                       <li
                         key={r.id}
-                        className="rounded-2xl border border-slate-200 bg-slate-50 p-4 sm:p-5"
+                        className={[
+                          "rounded-2xl border p-4 sm:p-5",
+                          r.traite
+                            ? "border-slate-200 bg-white opacity-60"
+                            : "border-slate-200 bg-slate-50",
+                        ].join(" ")}
                       >
                         <div className="flex flex-wrap items-center gap-2">
                           <span className={`rounded-full px-3 py-1 text-xs font-black ${meta.badge}`}>
@@ -209,6 +326,11 @@ export default function AdminRetoursClient() {
                               {r.page}
                             </span>
                           ) : null}
+                          {r.traite ? (
+                            <span className="rounded-full bg-emerald-100 px-3 py-1 text-xs font-black text-emerald-700 ring-1 ring-emerald-200">
+                              ✅ Traité
+                            </span>
+                          ) : null}
                           <span className="ml-auto text-xs font-bold text-slate-400">
                             {formatDate(r.created_at)}
                           </span>
@@ -218,18 +340,48 @@ export default function AdminRetoursClient() {
                           {r.message}
                         </p>
 
-                        <p className="mt-3 text-xs font-bold text-slate-500">
-                          {auteur}
-                          {r.classe ? ` · ${r.classe}` : ""}
-                          {r.code_eleve && r.prenom ? ` · ${r.code_eleve}` : ""}
-                          {r.code_etablissement ? ` · ${r.code_etablissement}` : ""}
-                          {r.email && r.prenom ? ` · ${r.email}` : ""}
-                        </p>
+                        <div className="mt-3 flex flex-wrap items-center justify-between gap-2">
+                          <p className="text-xs font-bold text-slate-500">
+                            {auteur}
+                            {r.classe ? ` · ${r.classe}` : ""}
+                            {r.code_eleve && r.prenom ? ` · ${r.code_eleve}` : ""}
+                            {r.code_etablissement ? ` · ${r.code_etablissement}` : ""}
+                            {r.email && r.prenom ? ` · ${r.email}` : ""}
+                          </p>
+                          <button
+                            type="button"
+                            onClick={() => toggleTraite(r)}
+                            disabled={patching === r.id}
+                            className={[
+                              "rounded-2xl px-3 py-1.5 text-xs font-black transition disabled:opacity-50",
+                              r.traite
+                                ? "bg-slate-100 text-slate-600 ring-1 ring-slate-200 hover:brightness-95"
+                                : "bg-emerald-500 text-white shadow hover:brightness-95",
+                            ].join(" ")}
+                          >
+                            {r.traite ? "↩️ Remettre à traiter" : "✅ Marquer traité"}
+                          </button>
+                        </div>
                       </li>
                     );
                   })}
                 </ul>
               )}
+
+              {retours.length < total ? (
+                <div className="mt-5 text-center">
+                  <button
+                    type="button"
+                    onClick={() => load(retours.length)}
+                    disabled={loadingMore}
+                    className="rounded-2xl bg-slate-900 px-5 py-2.5 text-sm font-black text-white transition hover:brightness-110 disabled:opacity-50"
+                  >
+                    {loadingMore
+                      ? "Chargement…"
+                      : `Charger plus (${total - retours.length} restants)`}
+                  </button>
+                </div>
+              ) : null}
             </div>
           </>
         )}
