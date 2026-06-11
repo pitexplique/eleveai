@@ -283,11 +283,26 @@ function getTodayDay() {
   return map[todayRaw] ?? "lundi";
 }
 
+// Fait tourner les semaines à thème selon la semaine réelle du calendrier.
+// Avant, weeks[0] était toujours utilisée : les élèves rejouaient la même
+// semaine en boucle (retour élève du 11/06/2026 : « 5 des 7 questions
+// portent sur les fractions »).
+function getWeekForToday<T>(weeks: T[]): T | undefined {
+  if (weeks.length <= 1) return weeks[0];
+
+  const now = new Date();
+  const startOfYear = new Date(now.getFullYear(), 0, 1);
+  const weekNumber = Math.floor(
+    (now.getTime() - startOfYear.getTime()) / (7 * 24 * 3600 * 1000)
+  );
+  return weeks[weekNumber % weeks.length];
+}
+
 function buildSession(niveau: NiveauCalculRapide): GeneratedCalculRapideItem[] {
   const { weeks, items } = getDataByNiveau(niveau);
   const day = getTodayDay();
 
-  const week = weeks[0];
+  const week = getWeekForToday(weeks);
   const session = week?.sessions.find((session) => session.day === day);
 
   if (!session) return [];
@@ -302,7 +317,7 @@ function getSessionMeta(niveau: NiveauCalculRapide) {
   const { weeks } = getDataByNiveau(niveau);
   const day = getTodayDay();
 
-  const week = weeks[0];
+  const week = getWeekForToday(weeks);
   const session = week?.sessions.find((session) => session.day === day);
 
   return {
