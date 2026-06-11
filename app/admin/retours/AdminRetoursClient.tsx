@@ -3,15 +3,6 @@
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 
-import { useEleve } from "@/context/EleveContext";
-
-type UserSession = {
-  code_etablissement?: string | null;
-  nom?: string | null;
-  type_utilisateur?: string | null;
-  token?: string | null;
-};
-
 type Retour = {
   id: string;
   type: "bug" | "idee" | "avis";
@@ -52,15 +43,7 @@ function Etoiles({ note }: { note: number }) {
   );
 }
 
-function isProfAllowed(user: UserSession | null) {
-  const t = user?.type_utilisateur;
-  return t === "prof" || t === "principal" || t === "boss";
-}
-
-export default function DashboardRetoursClient() {
-  const ctx = useEleve() as unknown as { eleve?: UserSession | null };
-  const user = ctx.eleve ?? null;
-
+export default function AdminRetoursClient() {
   const [loading, setLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [retours, setRetours] = useState<Retour[]>([]);
@@ -71,22 +54,8 @@ export default function DashboardRetoursClient() {
       setLoading(true);
       setErrorMessage(null);
 
-      if (!user || !isProfAllowed(user)) {
-        setLoading(false);
-        return;
-      }
-      if (!user.token) {
-        setErrorMessage(
-          "Ta session doit être renouvelée : déconnecte-toi puis reconnecte-toi pour voir les retours."
-        );
-        setLoading(false);
-        return;
-      }
-
       try {
-        const res = await fetch("/api/retours/liste", {
-          headers: { Authorization: `Bearer ${user.token}` },
-        });
+        const res = await fetch("/api/admin/retours");
         const data = await res.json().catch(() => ({}));
 
         if (!res.ok || !data?.ok) {
@@ -103,7 +72,7 @@ export default function DashboardRetoursClient() {
     }
 
     load();
-  }, [user]);
+  }, []);
 
   const avis = useMemo(() => retours.filter((r) => r.type === "avis"), [retours]);
   const bugs = useMemo(() => retours.filter((r) => r.type === "bug"), [retours]);
@@ -120,30 +89,6 @@ export default function DashboardRetoursClient() {
     [retours, filtre]
   );
 
-  if (!user) {
-    return (
-      <main className="min-h-screen bg-slate-950 px-4 py-10 text-white">
-        <section className="mx-auto max-w-xl rounded-3xl bg-white p-6 text-slate-950 shadow-xl">
-          <h1 className="text-2xl font-black">Retours élèves</h1>
-          <p className="mt-3 font-semibold text-slate-700">Connecte-toi avec un compte professeur.</p>
-          <Link href="/auth/signin" className="mt-5 inline-flex rounded-2xl bg-blue-600 px-5 py-3 font-black text-white">Se connecter</Link>
-        </section>
-      </main>
-    );
-  }
-
-  if (!isProfAllowed(user)) {
-    return (
-      <main className="min-h-screen bg-slate-950 px-4 py-10 text-white">
-        <section className="mx-auto max-w-xl rounded-3xl bg-white p-6 text-slate-950 shadow-xl">
-          <h1 className="text-2xl font-black">Accès réservé</h1>
-          <p className="mt-3 font-semibold text-slate-700">Cette page est réservée aux professeurs.</p>
-          <Link href="/dashboard-eleve" className="mt-5 inline-flex rounded-2xl bg-emerald-600 px-5 py-3 font-black text-white">Dashboard élève</Link>
-        </section>
-      </main>
-    );
-  }
-
   return (
     <main className="min-h-screen bg-slate-950 px-4 py-8 text-white">
       <section className="mx-auto max-w-5xl space-y-6">
@@ -152,7 +97,7 @@ export default function DashboardRetoursClient() {
           <div className="flex flex-wrap items-center justify-between gap-3">
             <div>
               <p className="inline-flex rounded-full bg-emerald-100 px-4 py-2 text-xs font-black uppercase tracking-wide text-emerald-800">
-                Retours élèves
+                Admin · Retours élèves
               </p>
               <h1 className="mt-3 text-3xl font-black">Avis, bugs et idées 📨</h1>
               <p className="mt-2 text-sm font-semibold text-slate-500">
@@ -160,10 +105,10 @@ export default function DashboardRetoursClient() {
               </p>
             </div>
             <Link
-              href="/dashboard-prof"
+              href="/admin/dashboard"
               className="rounded-2xl bg-slate-100 px-4 py-2 text-sm font-black text-slate-700 ring-1 ring-slate-200 transition hover:brightness-95"
             >
-              ← Dashboard prof
+              ← Dashboard admin
             </Link>
           </div>
         </div>
@@ -278,6 +223,7 @@ export default function DashboardRetoursClient() {
                           {r.classe ? ` · ${r.classe}` : ""}
                           {r.code_eleve && r.prenom ? ` · ${r.code_eleve}` : ""}
                           {r.code_etablissement ? ` · ${r.code_etablissement}` : ""}
+                          {r.email && r.prenom ? ` · ${r.email}` : ""}
                         </p>
                       </li>
                     );

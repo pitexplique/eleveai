@@ -1,10 +1,11 @@
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
 import { createClient } from "@supabase/supabase-js";
+import { verifyAdminCookieValue } from "@/lib/server/adminAuth";
 
 export async function GET() {
   const cookieStore = await cookies();
-  const isAuthed = cookieStore.get("admin-auth")?.value === "true";
+  const isAuthed = verifyAdminCookieValue(cookieStore.get("admin-auth")?.value);
 
   if (!isAuthed) {
     return new NextResponse("Unauthorized", { status: 401 });

@@ -1,23 +1,18 @@
-// app/admin/page.tsx
+// app/admin/retours/page.tsx
 export const dynamic = "force-dynamic";
 
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { verifyAdminCookieValue } from "@/lib/server/adminAuth";
-import AdminClient from "./AdminClient";
+import AdminRetoursClient from "./AdminRetoursClient";
 
-export default async function AdminPage() {
+export default async function AdminRetoursPage() {
   const cookieStore = await cookies();
   const isAuthed = verifyAdminCookieValue(cookieStore.get("admin-auth")?.value);
 
-  // ✅ Si déjà connecté, on va direct au dashboard (sinon il peut boucler)
-  if (isAuthed) {
-    redirect("accueil");
+  if (!isAuthed) {
+    redirect("/admin");
   }
 
-  // ✅ Sinon on affiche le formulaire
-  return <AdminClient />;
+  return <AdminRetoursClient />;
 }
-
-
-

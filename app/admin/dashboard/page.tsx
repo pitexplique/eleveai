@@ -1,14 +1,16 @@
 // app/admin/dashboard/page.tsx
 export const dynamic = "force-dynamic";
 
+import Link from "next/link";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import { verifyAdminCookieValue } from "@/lib/server/adminAuth";
 import { AdminLogoutButton } from "@/components/AdminLogoutButton";
 import AdminContactMessagesClient from "./AdminContactMessagesClient";
 
 export default async function AdminDashboardPage() {
   const cookieStore = await cookies();
-  const isAuthed = cookieStore.get("admin-auth")?.value === "true";
+  const isAuthed = verifyAdminCookieValue(cookieStore.get("admin-auth")?.value);
 
   if (!isAuthed) {
     redirect("/admin");
@@ -26,6 +28,16 @@ export default async function AdminDashboardPage() {
           </div>
           <AdminLogoutButton />
         </header>
+
+        <Link
+          href="/admin/retours"
+          className="block rounded-xl border border-emerald-700 bg-emerald-900/30 p-4 transition hover:bg-emerald-900/50"
+        >
+          <p className="font-bold text-emerald-300">📨 Retours élèves</p>
+          <p className="mt-1 text-sm text-slate-400">
+            Avis (étoiles), bugs et idées envoyés depuis la page « Votre avis ».
+          </p>
+        </Link>
 
         <AdminContactMessagesClient />
       </div>
