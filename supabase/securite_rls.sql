@@ -49,10 +49,21 @@ alter table public.resultats_defis_jour      enable row level security;
 alter table public.resultats_english_maths   enable row level security;
 alter table public.resultats_tutor           enable row level security;
 
--- Tables optionnelles (créées séparément) : si l'une d'elles n'existe pas
--- encore, exécuter ces deux lignes séparément et ignorer l'erreur.
-alter table public.resultats_parcours_english  enable row level security;
-alter table public.resultats_parcours_espagnol enable row level security;
+-- Tables optionnelles (créées séparément) : ignorées si absentes, pour ne
+-- pas faire échouer la transaction.
+do $$
+begin
+  if to_regclass('public.resultats_parcours_english') is not null then
+    execute 'alter table public.resultats_parcours_english enable row level security';
+  else
+    raise notice 'resultats_parcours_english absente — ignorée';
+  end if;
+  if to_regclass('public.resultats_parcours_espagnol') is not null then
+    execute 'alter table public.resultats_parcours_espagnol enable row level security';
+  else
+    raise notice 'resultats_parcours_espagnol absente — ignorée';
+  end if;
+end $$;
 
 -- Vérification 1 : doit renvoyer rowsecurity = true pour chaque table.
 select tablename, rowsecurity
