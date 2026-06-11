@@ -22,3 +22,4 @@ export const elevesRemercies: EleveRemercie[] = [
   { prenom: "Simon",   action: "Rajouter du game",                                meta: "Participation active" },
   { prenom: "Laszlo",  action: "Mettre de l'optimisme dans EleveAI",              meta: null                   },
 ];
+ 
