@@ -10,7 +10,7 @@ import {
 } from "react";
 
 import Link from "next/link";
-import { createClient } from "@/lib/supabase/client";
+import { saveResultat } from "@/lib/resultats";
 import { useEleve } from "@/context/EleveContext";
 
 type EleveSession = {
@@ -20,6 +20,7 @@ type EleveSession = {
   code_utilisateur?: string | null;
   nom?: string | null;
   type_utilisateur?: string | null;
+  token?: string | null;
 };
 
 import {
@@ -387,7 +388,6 @@ export default function TutorV4Page() {
   const searchParams = useSearchParams();
   const router = useRouter();
 
-  const supabase = createClient();
   const eleveContext = useEleve() as unknown as { eleve?: EleveSession | null };
   const eleve = eleveContext.eleve ?? null;
 
@@ -1115,10 +1115,8 @@ function handleInputKeyDown(
       ? parseFloat(((earnedPoints / possiblePoints) * 20).toFixed(1))
       : 0;
 
-    const { error } = await supabase.from("resultats_tutor").insert({
-      code_etablissement: codeEtablissement,
-      code_utilisateur: codeUtilisateur,
-      nom: eleve.nom ?? null,
+    // Insert via /api/resultats : identité prise dans le jeton de session.
+    const { error } = await saveResultat(eleve, "tutor", {
       classe,
       matiere,
       notion_id: notion,

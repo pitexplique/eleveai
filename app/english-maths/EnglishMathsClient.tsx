@@ -13,7 +13,7 @@ import {
 } from "@/lib/english-maths";
 
 import { generateEnglishMathsQuestions } from "@/lib/english-maths/generateQuestions";
-import { createClient } from "@/lib/supabase/client";
+import { saveResultat } from "@/lib/resultats";
 import { useEleve } from "@/context/EleveContext";
 
 type EleveSession = {
@@ -23,6 +23,7 @@ type EleveSession = {
   code_utilisateur?: string | null;
   nom?: string | null;
   type_utilisateur?: string | null;
+  token?: string | null;
 };
 
 const currentUnlockedDayIndex = 1;
@@ -163,7 +164,6 @@ function EnglishMathsBackground() {
 }
 
 export default function EnglishMathsClient() {
-  const supabase = createClient();
   const eleveContext = useEleve() as unknown as { eleve?: EleveSession | null };
   const eleve = eleveContext.eleve ?? null;
 
@@ -236,10 +236,8 @@ export default function EnglishMathsClient() {
 
     setSaving(true);
 
-    const { error } = await supabase.from("resultats_english_maths").insert({
-      code_etablissement: codeEtablissement,
-      code_utilisateur: codeUtilisateur,
-      nom: eleve.nom ?? null,
+    // Insert via /api/resultats : identité prise dans le jeton de session.
+    const { error } = await saveResultat(eleve, "english_maths", {
       niveau,
       jour: day?.dayIndex ?? null,
       theme: day?.theme ?? null,

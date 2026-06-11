@@ -90,6 +90,7 @@ type EleveSession = {
   code_utilisateur?: string | null;
   nom?: string | null;
   type_utilisateur?: string | null;
+  token?: string | null;
 };
 
 type ParcoursChatMessage = {

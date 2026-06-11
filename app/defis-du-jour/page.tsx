@@ -3,7 +3,7 @@
 import { useMemo, useState } from "react";
 import Link from "next/link";
 
-import { createClient } from "@/lib/supabase/client";
+import { saveResultat } from "@/lib/resultats";
 import { useEleve } from "@/context/EleveContext";
 
 import { problemesFixed } from "@/lib/defis-du-jour/problemes.fixed";
@@ -16,11 +16,10 @@ type EleveSession = {
   code_utilisateur?: string | null;
   nom?: string | null;
   type_utilisateur?: string | null;
+  token?: string | null;
 };
 
 export default function DefisDuJourPage() {
-  const supabase = createClient();
-
   const eleveContext = useEleve() as unknown as {
     eleve?: EleveSession | null;
     currentUser?: EleveSession | null;
@@ -129,11 +128,8 @@ export default function DefisDuJourPage() {
 
     setSaving(true);
 
-    const { error } = await supabase.from("resultats_defis_jour").insert({
-      code_etablissement: codeEtablissement,
-      code_utilisateur: codeUtilisateur,
-      nom: eleve.nom ?? null,
-
+    // Insert via /api/resultats : identité prise dans le jeton de session.
+    const { error } = await saveResultat(eleve, "defis_jour", {
       classe: null,
       niveau: null,
       matiere: "maths",

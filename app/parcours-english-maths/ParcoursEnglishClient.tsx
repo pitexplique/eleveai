@@ -38,6 +38,7 @@ type EleveSession = {
   code_eleve?: string | null;
   code_utilisateur?: string | null;
   nom?: string | null;
+  token?: string | null;
 };
 
 function getStatusStyle(status: string) {

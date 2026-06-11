@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
 
-import { createClient } from "@/lib/supabase/client";
+import { saveResultat } from "@/lib/resultats";
 import { useEleve } from "@/context/EleveContext";
 import { buildLearningVideoHref } from "@/lib/videoSearch";
 
@@ -74,6 +74,7 @@ type EleveSession = {
   code_utilisateur?: string | null;
   nom?: string | null;
   type_utilisateur?: string | null;
+  token?: string | null;
 };
 
 type ReponseCalculRapide = {
@@ -345,8 +346,6 @@ function getScoreMessage(score: number, total: number) {
 }
 
 export default function CalculRapideDefiClient() {
-  const supabase = createClient();
-
   const eleveContext = useEleve() as unknown as {
     eleve?: EleveSession | null;
     currentUser?: EleveSession | null;
@@ -586,11 +585,8 @@ export default function CalculRapideDefiClient() {
 
     setSaving(true);
 
-    const { error } = await supabase.from("resultats_calcul_rapide").insert({
-      code_etablissement: codeEtablissement,
-      code_utilisateur: codeUtilisateur,
-      nom: eleve.nom ?? null,
-
+    // Insert via /api/resultats : identité prise dans le jeton de session.
+    const { error } = await saveResultat(eleve, "calcul_rapide", {
       classe: niveau,
       niveau,
       matiere: "maths",

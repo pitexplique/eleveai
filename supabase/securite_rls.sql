@@ -20,7 +20,29 @@
 -- prénoms, classes, codes et résultats de tous les élèves — et surtout
 -- la table acces_etablissement (codes + mots de passe).
 
+-- ── acces_etablissement ──────────────────────────────────────────────
+-- ⚠️ Le RLS y est DÉJÀ activé au dashboard, mais une policy permissive
+-- laisse tout passer (la preuve : le navigateur lit mot_de_passe avec la
+-- clé anon). Activer le RLS ne suffit donc pas : on supprime TOUTES les
+-- policies existantes. Sans policy, la clé anon est bloquée et la
+-- service role continue de passer.
+do $$
+declare
+  p record;
+begin
+  for p in
+    select policyname from pg_policies
+    where schemaname = 'public' and tablename = 'acces_etablissement'
+  loop
+    execute format(
+      'drop policy %I on public.acces_etablissement', p.policyname
+    );
+  end loop;
+end $$;
+
 alter table public.acces_etablissement       enable row level security;
+
+-- ── Tables de résultats (« Unrestricted » au dashboard) ──────────────
 alter table public.resultats_parcours_maths  enable row level security;
 alter table public.resultats_calcul_rapide   enable row level security;
 alter table public.resultats_defis_jour      enable row level security;
@@ -32,7 +54,7 @@ alter table public.resultats_tutor           enable row level security;
 alter table public.resultats_parcours_english  enable row level security;
 alter table public.resultats_parcours_espagnol enable row level security;
 
--- Vérification : doit renvoyer rowsecurity = true pour chaque table.
+-- Vérification 1 : doit renvoyer rowsecurity = true pour chaque table.
 select tablename, rowsecurity
 from pg_tables
 where schemaname = 'public'
@@ -47,10 +69,12 @@ where schemaname = 'public'
     'resultats_tutor'
   );
 
--- NOTE (hors périmètre de ce script, à traiter ensuite) :
--- la table users_email est encore lue côté navigateur après la connexion
--- e-mail (app/auth/signin/page.tsx). Si on active le RLS dessus, ajouter
--- une policy du type :
---   alter table public.users_email enable row level security;
---   create policy "users_email_self" on public.users_email
---     for select using (auth.uid() = auth_user_id);
+-- Vérification 2 : plus AUCUNE policy ne doit rester sur ces tables
+-- (et celles d'acces_etablissement doivent avoir disparu).
+select tablename, policyname, cmd, roles, qual, with_check
+from pg_policies
+where schemaname = 'public'
+order by tablename, policyname;
+
+-- Pour les tables e-mail (users_email, presets_email, preset_runs_email,
+-- presets_eleveai, user_payments) : voir securite_policies_comptes.sql.

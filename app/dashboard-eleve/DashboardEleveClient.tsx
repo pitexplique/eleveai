@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 
-import { createClient } from "@/lib/supabase/client";
 import { useEleve } from "@/context/EleveContext";
 
 type EleveSession = {
@@ -13,6 +12,7 @@ type EleveSession = {
   code_utilisateur?: string | null;
   nom?: string | null;
   type_utilisateur?: string | null;
+  token?: string | null;
 };
 
 type ResultatParcours = {
@@ -135,8 +135,6 @@ function getBest<T extends { score: number; total: number }>(items: T[]) {
 }
 
 export default function DashboardEleveClient() {
-  const supabase = useMemo(() => createClient(), []);
-
   const eleveContext = useEleve() as unknown as {
     eleve?: EleveSession | null;
     currentUser?: EleveSession | null;
@@ -180,117 +178,57 @@ export default function DashboardEleveClient() {
         return;
       }
 
-      const parcoursCols =
-        "id, code_etablissement, code_utilisateur, nom, classe, niveau, matiere, score, total, pourcentage, details, created_at";
-
-      const [parcoursResponse, parcoursEnglishResponse, parcoursEspagnolResponse, calculRapideResponse, defisJourResponse, englishResponse, tutorResponse] =
-        await Promise.all([
-          supabase
-            .from("resultats_parcours_maths")
-            .select(parcoursCols)
-            .eq("code_etablissement", codeEtablissement)
-            .eq("code_utilisateur", codeUtilisateur)
-            .order("created_at", { ascending: false }),
-
-          supabase
-            .from("resultats_parcours_english")
-            .select(parcoursCols)
-            .eq("code_etablissement", codeEtablissement)
-            .eq("code_utilisateur", codeUtilisateur)
-            .order("created_at", { ascending: false }),
-
-          supabase
-            .from("resultats_parcours_espagnol")
-            .select(parcoursCols)
-            .eq("code_etablissement", codeEtablissement)
-            .eq("code_utilisateur", codeUtilisateur)
-            .order("created_at", { ascending: false }),
-
-          supabase
-            .from("resultats_calcul_rapide")
-            .select(
-              "id, code_etablissement, code_utilisateur, nom, classe, niveau, matiere, session_id, titre_session, theme, score, total, pourcentage, temps_total_sec, details, created_at"
-            )
-            .eq("code_etablissement", codeEtablissement)
-            .eq("code_utilisateur", codeUtilisateur)
-            .order("created_at", { ascending: false }),
-
-          supabase
-            .from("resultats_defis_jour")
-            .select(
-              "id, code_etablissement, code_utilisateur, nom, classe, niveau, matiere, defi_id, titre_defi, theme, direction_id, direction_label, direction_type, score, total, pourcentage, reponse_eleve, reponse_attendue, details, created_at"
-            )
-            .eq("code_etablissement", codeEtablissement)
-            .eq("code_utilisateur", codeUtilisateur)
-            .order("created_at", { ascending: false }),
-
-          supabase
-            .from("resultats_english_maths")
-            .select("id, code_etablissement, code_utilisateur, nom, niveau, jour, theme, score, total, pourcentage, created_at")
-            .eq("code_etablissement", codeEtablissement)
-            .eq("code_utilisateur", codeUtilisateur)
-            .order("created_at", { ascending: false }),
-
-          supabase
-            .from("resultats_tutor")
-            .select("id, code_etablissement, code_utilisateur, nom, classe, matiere, notion_id, mode, score_sur_20, earned_points, possible_points, bonnes_reponses, nb_tentatives, temps_sec, created_at")
-            .eq("code_etablissement", codeEtablissement)
-            .eq("code_utilisateur", codeUtilisateur)
-            .order("created_at", { ascending: false }),
-        ]);
-
-      if (
-        parcoursResponse.error ||
-        calculRapideResponse.error ||
-        defisJourResponse.error ||
-        englishResponse.error ||
-        tutorResponse.error
-      ) {
-        console.error(
-          parcoursResponse.error ??
-            calculRapideResponse.error ??
-            defisJourResponse.error ??
-            englishResponse.error ??
-            tutorResponse.error
+      // Lecture via /api/dashboard (RLS actif : plus de select direct).
+      // Le serveur ne renvoie que les résultats de l'élève du jeton.
+      if (!eleve?.token) {
+        setErrorMessage(
+          "Ta session doit être renouvelée : déconnecte-toi puis reconnecte-toi pour voir tes résultats."
         );
-
-        setErrorMessage("Impossible de charger tous tes résultats.");
         setLoading(false);
         return;
       }
 
-      // Parcours English/Espagnol : tables optionnelles (créées séparément).
-      // Une erreur (table absente) ne doit pas bloquer le chargement.
-      if (parcoursEnglishResponse.error) console.warn("resultats_parcours_english indisponible :", parcoursEnglishResponse.error.message);
-      if (parcoursEspagnolResponse.error) console.warn("resultats_parcours_espagnol indisponible :", parcoursEspagnolResponse.error.message);
+      try {
+        const res = await fetch("/api/dashboard", {
+          headers: { Authorization: `Bearer ${eleve.token}` },
+        });
+        const data = await res.json().catch(() => ({}));
 
-      setResultatsParcours([
-        ...(parcoursResponse.data ?? []),
-        ...(parcoursEnglishResponse.data ?? []),
-        ...(parcoursEspagnolResponse.data ?? []),
-      ] as ResultatParcours[]);
+        if (!res.ok || !data?.ok) {
+          setErrorMessage(
+            data?.error ?? "Impossible de charger tous tes résultats."
+          );
+          setLoading(false);
+          return;
+        }
 
-      setResultatsCalculRapide(
-        (calculRapideResponse.data ?? []) as ResultatCalculRapide[]
-      );
+        const r = data.resultats ?? {};
 
-      setResultatsDefisJour(
-        (defisJourResponse.data ?? []) as ResultatDefiJour[]
-      );
+        setResultatsParcours([
+          ...(r.parcours_maths ?? []),
+          ...(r.parcours_english ?? []),
+          ...(r.parcours_espagnol ?? []),
+        ] as ResultatParcours[]);
 
-      setResultatsEnglish(
-        (englishResponse.data ?? []) as ResultatEnglishMaths[]
-      );
+        setResultatsCalculRapide(
+          (r.calcul_rapide ?? []) as ResultatCalculRapide[]
+        );
 
-      setResultatsTutor(
-        (tutorResponse.data ?? []) as ResultatTutor[]
-      );
+        setResultatsDefisJour((r.defis_jour ?? []) as ResultatDefiJour[]);
+
+        setResultatsEnglish((r.english_maths ?? []) as ResultatEnglishMaths[]);
+
+        setResultatsTutor((r.tutor ?? []) as ResultatTutor[]);
+      } catch (err) {
+        console.error(err);
+        setErrorMessage("Impossible de charger tous tes résultats.");
+      }
 
       setLoading(false);
     }
 
     loadResultats();
-  }, [codeEtablissement, codeUtilisateur, supabase]);
+  }, [codeEtablissement, codeUtilisateur, eleve?.token]);
 
   const dernierParcours = resultatsParcours[0] ?? null;
   const meilleurParcours = useMemo(

@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 
-import { createClient } from "@/lib/supabase/client";
 import { useEleve } from "@/context/EleveContext";
 
 type UserSession = {
@@ -13,6 +12,7 @@ type UserSession = {
   code_utilisateur?: string | null;
   nom?: string | null;
   type_utilisateur?: string | null;
+  token?: string | null;
 };
 
 type AccesEtablissement = {
@@ -97,8 +97,6 @@ function PctBadge({ pct }: { pct: number | null }) {
 }
 
 export default function DashboardProfClient() {
-  const supabase = useMemo(() => createClient(), []);
-
   const userContext = useEleve() as unknown as {
     eleve?: UserSession | null;
     currentUser?: UserSession | null;
@@ -128,77 +126,52 @@ export default function DashboardProfClient() {
         return;
       }
 
-      const parcoursCols = "id, code_etablissement, code_utilisateur, nom, classe, niveau, matiere, score, total, pourcentage, created_at";
-
-      const [elevesRes, parcoursRes, parcoursEnglishRes, parcoursEspagnolRes, calculRes, defisRes, englishRes, tutorRes] = await Promise.all([
-        supabase.from("acces_etablissement")
-          .select("id, code_etablissement, code_utilisateur, type_utilisateur, nom, classe, actif, created_at")
-          .eq("code_etablissement", codeEtablissement)
-          .eq("type_utilisateur", "eleve")
-          .order("nom", { ascending: true }),
-
-        supabase.from("resultats_parcours_maths")
-          .select(parcoursCols)
-          .eq("code_etablissement", codeEtablissement)
-          .order("created_at", { ascending: false }),
-
-        supabase.from("resultats_parcours_english")
-          .select(parcoursCols)
-          .eq("code_etablissement", codeEtablissement)
-          .order("created_at", { ascending: false }),
-
-        supabase.from("resultats_parcours_espagnol")
-          .select(parcoursCols)
-          .eq("code_etablissement", codeEtablissement)
-          .order("created_at", { ascending: false }),
-
-        supabase.from("resultats_calcul_rapide")
-          .select("id, code_etablissement, code_utilisateur, nom, classe, niveau, matiere, titre_session, theme, score, total, pourcentage, created_at")
-          .eq("code_etablissement", codeEtablissement)
-          .order("created_at", { ascending: false }),
-
-        supabase.from("resultats_defis_jour")
-          .select("id, code_etablissement, code_utilisateur, nom, titre_defi, theme, score, total, pourcentage, created_at")
-          .eq("code_etablissement", codeEtablissement)
-          .order("created_at", { ascending: false }),
-
-        supabase.from("resultats_english_maths")
-          .select("id, code_etablissement, code_utilisateur, nom, jour, theme, score, total, pourcentage, created_at")
-          .eq("code_etablissement", codeEtablissement)
-          .order("created_at", { ascending: false }),
-
-        supabase.from("resultats_tutor")
-          .select("id, code_etablissement, code_utilisateur, nom, classe, notion_id, mode, score_sur_20, bonnes_reponses, nb_tentatives, score, total, created_at")
-          .eq("code_etablissement", codeEtablissement)
-          .order("created_at", { ascending: false }),
-      ]);
-
-      if (elevesRes.error || parcoursRes.error || calculRes.error || defisRes.error || englishRes.error || tutorRes.error) {
-        setErrorMessage("Impossible de charger le dashboard.");
+      // Lecture via /api/dashboard (RLS actif : plus de select direct).
+      // Le serveur vérifie le rôle (prof/principal/boss) porté par le jeton
+      // et ne renvoie que les données de l'établissement du jeton.
+      if (!user?.token) {
+        setErrorMessage(
+          "Ta session doit être renouvelée : déconnecte-toi puis reconnecte-toi pour accéder au dashboard."
+        );
         setLoading(false);
         return;
       }
 
-      // Parcours English/Espagnol : tables optionnelles (créées séparément).
-      // Une erreur (table absente) ne doit pas bloquer le dashboard.
-      if (parcoursEnglishRes.error) console.warn("resultats_parcours_english indisponible :", parcoursEnglishRes.error.message);
-      if (parcoursEspagnolRes.error) console.warn("resultats_parcours_espagnol indisponible :", parcoursEspagnolRes.error.message);
+      try {
+        const res = await fetch("/api/dashboard", {
+          headers: { Authorization: `Bearer ${user.token}` },
+        });
+        const data = await res.json().catch(() => ({}));
 
-      setEleves((elevesRes.data ?? []) as AccesEtablissement[]);
-      setResultatsParcours([
-        ...(parcoursRes.data ?? []),
-        ...(parcoursEnglishRes.data ?? []),
-        ...(parcoursEspagnolRes.data ?? []),
-      ] as ResultatParcours[]);
-      setResultatsCalculRapide((calculRes.data ?? []) as ResultatCalculRapide[]);
-      setResultatsDefisJour((defisRes.data ?? []) as ResultatDefiJour[]);
-      setResultatsEnglish((englishRes.data ?? []) as ResultatEnglish[]);
-      setResultatsTutor((tutorRes.data ?? []) as ResultatTutor[]);
+        if (!res.ok || !data?.ok) {
+          setErrorMessage(data?.error ?? "Impossible de charger le dashboard.");
+          setLoading(false);
+          return;
+        }
+
+        const comptes = (data.comptes ?? []) as AccesEtablissement[];
+        const r = data.resultats ?? {};
+
+        setEleves(comptes.filter((c) => c.type_utilisateur === "eleve"));
+        setResultatsParcours([
+          ...(r.parcours_maths ?? []),
+          ...(r.parcours_english ?? []),
+          ...(r.parcours_espagnol ?? []),
+        ] as ResultatParcours[]);
+        setResultatsCalculRapide((r.calcul_rapide ?? []) as ResultatCalculRapide[]);
+        setResultatsDefisJour((r.defis_jour ?? []) as ResultatDefiJour[]);
+        setResultatsEnglish((r.english_maths ?? []) as ResultatEnglish[]);
+        setResultatsTutor((r.tutor ?? []) as ResultatTutor[]);
+      } catch (err) {
+        console.error(err);
+        setErrorMessage("Impossible de charger le dashboard.");
+      }
+
       setLoading(false);
     }
 
     load();
-  }, [codeEtablissement, supabase, user]);
+  }, [codeEtablissement, user]);
 
   const syntheses = useMemo<EleveSynthese[]>(() => {
     return eleves.map((eleve) => {

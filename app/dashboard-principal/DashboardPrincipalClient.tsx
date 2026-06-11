@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
-import { createClient } from "@/lib/supabase/client";
 import { useEleve } from "@/context/EleveContext";
 
 type UserSession = {
@@ -12,6 +11,7 @@ type UserSession = {
   code_utilisateur?: string | null;
   nom?: string | null;
   type_utilisateur?: string | null;
+  token?: string | null;
 };
 
 type AccesRow = {
@@ -81,7 +81,6 @@ function isPrincipal(user: UserSession | null) {
 }
 
 export default function DashboardPrincipalClient() {
-  const supabase = useMemo(() => createClient(), []);
   const ctx = useEleve() as unknown as { eleve?: UserSession | null };
   const user = ctx.eleve ?? null;
   const codeEtab = user?.code_etablissement?.trim() ?? "";
@@ -106,67 +105,51 @@ export default function DashboardPrincipalClient() {
       setLoading(true);
       setError(null);
 
-      const parcoursCols = "id, code_etablissement, code_utilisateur, nom, score, total, pourcentage, created_at";
+      // Lecture via /api/dashboard (RLS actif : plus de select direct).
+      // Le serveur vérifie le rôle porté par le jeton et ne renvoie que
+      // les données de l'établissement du jeton.
+      if (!user?.token) {
+        setError(
+          "Ta session doit être renouvelée : déconnecte-toi puis reconnecte-toi pour accéder au dashboard."
+        );
+        setLoading(false);
+        return;
+      }
 
-      const [comptesRes, parcoursRes, parcoursEnglishRes, parcoursEspagnolRes, calculRes, defisRes, englishRes, tutorRes] = await Promise.all([
-        supabase.from("acces_etablissement")
-          .select("id, code_etablissement, code_utilisateur, type_utilisateur, nom, classe, actif, created_at")
-          .eq("code_etablissement", codeEtab)
-          .order("type_utilisateur").order("nom"),
+      try {
+        const res = await fetch("/api/dashboard", {
+          headers: { Authorization: `Bearer ${user.token}` },
+        });
+        const data = await res.json().catch(() => ({}));
 
-        supabase.from("resultats_parcours_maths")
-          .select(parcoursCols)
-          .eq("code_etablissement", codeEtab)
-          .order("created_at", { ascending: false }),
+        if (!res.ok || !data?.ok) {
+          setError(data?.error ?? "Erreur de chargement.");
+          setLoading(false);
+          return;
+        }
 
-        supabase.from("resultats_parcours_english")
-          .select(parcoursCols)
-          .eq("code_etablissement", codeEtab)
-          .order("created_at", { ascending: false }),
+        const r = data.resultats ?? {};
 
-        supabase.from("resultats_parcours_espagnol")
-          .select(parcoursCols)
-          .eq("code_etablissement", codeEtab)
-          .order("created_at", { ascending: false }),
+        setComptes((data.comptes ?? []) as AccesRow[]);
+        setParcours([
+          ...(r.parcours_maths ?? []),
+          ...(r.parcours_english ?? []),
+          ...(r.parcours_espagnol ?? []),
+        ] as ResultatBase[]);
+        setCalculs((r.calcul_rapide ?? []) as ResultatBase[]);
+        setDefis((r.defis_jour ?? []) as ResultatBase[]);
+        setEnglish((r.english_maths ?? []) as ResultatBase[]);
+        setTutor((r.tutor ?? []) as ResultatTutor[]);
+      } catch (err) {
+        console.error(err);
+        setError("Erreur de chargement.");
+      }
 
-        supabase.from("resultats_calcul_rapide")
-          .select("id, code_etablissement, code_utilisateur, nom, score, total, pourcentage, created_at")
-          .eq("code_etablissement", codeEtab)
-          .order("created_at", { ascending: false }),
-
-        supabase.from("resultats_defis_jour")
-          .select("id, code_etablissement, code_utilisateur, nom, score, total, pourcentage, created_at")
-          .eq("code_etablissement", codeEtab)
-          .order("created_at", { ascending: false }),
-
-        supabase.from("resultats_english_maths")
-          .select("id, code_etablissement, code_utilisateur, nom, score, total, pourcentage, created_at")
-          .eq("code_etablissement", codeEtab)
-          .order("created_at", { ascending: false }),
-
-        supabase.from("resultats_tutor")
-          .select("id, code_etablissement, code_utilisateur, nom, classe, notion_id, score_sur_20, bonnes_reponses, nb_tentatives, score, total, created_at")
-          .eq("code_etablissement", codeEtab)
-          .order("created_at", { ascending: false }),
-      ]);
-
-      if (comptesRes.error) { setError("Erreur de chargement."); setLoading(false); return; }
-
-      setComptes((comptesRes.data ?? []) as AccesRow[]);
-      setParcours([
-        ...(parcoursRes.data ?? []),
-        ...(parcoursEnglishRes.data ?? []),
-        ...(parcoursEspagnolRes.data ?? []),
-      ] as ResultatBase[]);
-      setCalculs((calculRes.data ?? []) as ResultatBase[]);
-      setDefis((defisRes.data ?? []) as ResultatBase[]);
-      setEnglish((englishRes.data ?? []) as ResultatBase[]);
-      setTutor((tutorRes.data ?? []) as ResultatTutor[]);
       setLoading(false);
     }
 
     load();
-  }, [codeEtab, supabase, user]);
+  }, [codeEtab, user]);
 
   const eleves = useMemo(() => comptes.filter((c) => c.type_utilisateur === "eleve"), [comptes]);
   const profs = useMemo(() => comptes.filter((c) => c.type_utilisateur === "prof"), [comptes]);
