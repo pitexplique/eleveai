@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
 
 import { CanvasRenderer } from "@/lib/canvas";
-import { createClient } from "@/lib/supabase/client";
+import { saveResultat } from "@/lib/resultats";
 import { useEleve } from "@/context/EleveContext";
 import { buildLearningVideoHref } from "@/lib/videoSearch";
 
@@ -109,8 +109,6 @@ function shuffleArray<T>(array: T[]): T[] {
 }
 
 export default function ParcoursClient() {
-  const supabase = createClient();
-
   const eleveContext = useEleve() as unknown as {
     eleve?: EleveSession | null;
     currentUser?: EleveSession | null;
@@ -346,11 +344,9 @@ export default function ParcoursClient() {
 
     setSaving(true);
 
-    const { error } = await supabase.from("resultats_parcours_maths").insert({
-      code_etablissement: codeEtablissement,
-      code_utilisateur: codeUtilisateur,
-      nom: eleve.nom ?? null,
-
+    // Insert via /api/resultats : l'identité (codes + nom) est prise dans
+    // le jeton de session, pas dans le payload.
+    const { error } = await saveResultat(eleve, "parcours_maths", {
       classe,
       niveau: classe,
       matiere: "maths",

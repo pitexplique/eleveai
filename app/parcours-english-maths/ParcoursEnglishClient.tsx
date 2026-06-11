@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useMemo, useRef, useState } from "react";
 
-import { createClient } from "@/lib/supabase/client";
+import { saveResultat } from "@/lib/resultats";
 import { useEleve } from "@/context/EleveContext";
 
 import type { ParcoursNiveauEnglish, ParcoursQuestion, ParcoursAnswer, ParcoursNotionScore } from "@/lib/parcours/types";
@@ -57,7 +57,6 @@ function getStatusLabel(status: string) {
 }
 
 export default function ParcoursEnglishClient() {
-  const supabase = createClient();
   const eleveContext = useEleve() as unknown as { eleve?: EleveSession | null };
   const eleve = eleveContext.eleve ?? null;
   const codeEtablissement = eleve?.code_etablissement?.trim() ?? "";
@@ -115,11 +114,9 @@ export default function ParcoursEnglishClient() {
       return;
     }
     setSaving(true);
+    // Insert via /api/resultats : identité prise dans le jeton de session.
     // "pourcentage" est une colonne générée côté base : on ne l'insère pas.
-    const { error } = await supabase.from("resultats_parcours_english").insert({
-      code_etablissement: codeEtablissement,
-      code_utilisateur: codeUtilisateur,
-      nom: eleve?.nom ?? null,
+    const { error } = await saveResultat(eleve, "parcours_english", {
       niveau,
       score: totalScore,
       total: totalMaxScore,

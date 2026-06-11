@@ -9,6 +9,9 @@ export type Eleve = {
   nom?: string | null;
   type_utilisateur?: string;
   classe?: string | null;
+  /** Jeton signé délivré par /api/code-login ou /api/email-session.
+   *  Requis pour /api/resultats et /api/dashboard. */
+  token?: string | null;
 };
 
 type EleveContextType = {

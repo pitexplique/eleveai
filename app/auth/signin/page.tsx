@@ -81,7 +81,7 @@ export default function SignInPage() {
   const getEmailUserCode = (profile: UserEmailProfile) =>
     `EMAIL-${profile.id}`;
 
-  const routeEmailProfile = (profile: UserEmailProfile) => {
+  const routeEmailProfile = (profile: UserEmailProfile, token?: string | null) => {
     const type = profile.type_utilisateur ?? "perso";
 
     login({
@@ -90,6 +90,7 @@ export default function SignInPage() {
       code_eleve: getEmailUserCode(profile),
       nom: profile.nom ?? profile.email,
       type_utilisateur: type,
+      token: token ?? null,
     });
 
     if (type === "admin") {
@@ -259,8 +260,24 @@ export default function SignInPage() {
         return;
       }
 
+      // Jeton de session signé pour /api/resultats et /api/dashboard.
+      // En cas d'échec on connecte quand même (dégradé : l'enregistrement
+      // des résultats demandera une reconnexion).
+      let sessionToken: string | null = null;
+      try {
+        const tokenRes = await fetch("/api/email-session", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ access_token: data.session.access_token }),
+        });
+        const tokenData = await tokenRes.json().catch(() => ({}));
+        if (tokenRes.ok && tokenData?.token) sessionToken = tokenData.token;
+      } catch {
+        sessionToken = null;
+      }
+
       setFeedback("Connexion réussie. Redirection…");
-      routeEmailProfile(profile as UserEmailProfile);
+      routeEmailProfile(profile as UserEmailProfile, sessionToken);
     } catch (err: any) {
       console.error("Unexpected OTP verify error:", err);
       setErrorMsg(err?.message || "Erreur inattendue. Réessayez.");
@@ -288,50 +305,45 @@ export default function SignInPage() {
 
     setLoadingEtab(true);
     try {
-      const { data, error } = await supabase
-        .from("acces_etablissement")
-        .select("id, code_etablissement, code_utilisateur, mot_de_passe, type_utilisateur, nom, actif, classe")
-        .eq("code_etablissement", ce)
-        .eq("code_utilisateur", cu)
-        .eq("actif", true)
-        .maybeSingle();
+      // Vérification entièrement côté serveur (mot de passe jamais lu ni
+      // comparé dans le navigateur) ; renvoie le jeton de session signé.
+      const res = await fetch("/api/code-login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          codeEtablissement: ce,
+          codeUtilisateur: cu,
+          motDePasse: mdp,
+        }),
+      });
+      const data = await res.json().catch(() => ({}));
 
-      if (error) {
-        logSupabaseError("acces_etablissement check error:", error);
+      if (!res.ok || !data?.ok || !data?.session) {
         setErrorEtab(
-          process.env.NODE_ENV === "development"
-            ? `Erreur Supabase: ${error.message}`
-            : "Impossible de vérifier ces codes. Réessayez."
+          data?.error ??
+            "Codes invalides ou compte inactif. Vérifiez vos informations."
         );
         return;
       }
 
-      if (!data) {
-        setErrorEtab("Codes invalides ou compte inactif. Vérifiez vos informations.");
-        return;
-      }
+      const session = data.session;
 
       setFeedbackEtab("Connexion établissement validée. Redirection…");
 
-      // V1 : on passe les codes en querystring (en attendant la “vraie session” élève)
-      if (data.mot_de_passe !== mdp) {
-        setErrorEtab("Mot de passe incorrect.");
-        return;
-      }
-
       login({
-        acces_id: data.id,
-        code_etablissement: data.code_etablissement,
-        code_eleve: data.code_utilisateur,
-        nom: data.nom,
-        type_utilisateur: data.type_utilisateur,
-        classe: data.classe ?? inferClasseFromCode(
-          data.code_utilisateur,
-          data.code_etablissement
+        acces_id: session.utilisateurCodeId,
+        code_etablissement: session.code_etablissement,
+        code_eleve: session.code_utilisateur,
+        nom: session.nom,
+        type_utilisateur: session.role,
+        classe: session.classe ?? inferClasseFromCode(
+          session.code_utilisateur,
+          session.code_etablissement
         ),
+        token: data.token ?? null,
       });
 
-      const type = data.type_utilisateur;
+      const type = session.role;
       if (type === "principal" || type === "boss") {
         router.push("/dashboard-principal");
       } else if (type === "prof") {
