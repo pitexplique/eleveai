@@ -124,6 +124,18 @@ function getPct(score: number, total: number) {
   return Math.round((Number(score) / Number(total)) * 100);
 }
 
+const MATIERE_LABELS: Record<string, string> = {
+  maths: "🔢 Maths",
+  francais: "📚 Français",
+  english: "🇬🇧 English",
+  espagnol: "🇪🇸 Espagnol",
+};
+
+function matiereLabel(matiere: string | null | undefined) {
+  if (!matiere) return "—";
+  return MATIERE_LABELS[matiere] ?? matiere;
+}
+
 function getBest<T extends { score: number; total: number }>(items: T[]) {
   if (items.length === 0) return null;
 
@@ -204,12 +216,19 @@ export default function DashboardEleveClient() {
 
         const r = data.resultats ?? {};
 
-        setResultatsParcours([
-          ...(r.parcours_maths ?? []),
-          ...(r.parcours_english ?? []),
-          ...(r.parcours_espagnol ?? []),
-          ...(r.parcours_francais ?? []),
-        ] as ResultatParcours[]);
+        // Toutes matières confondues, triées par date : resultatsParcours[0]
+        // est bien le dernier parcours, quelle que soit la matière.
+        setResultatsParcours(
+          ([
+            ...(r.parcours_maths ?? []),
+            ...(r.parcours_english ?? []),
+            ...(r.parcours_espagnol ?? []),
+            ...(r.parcours_francais ?? []),
+          ] as ResultatParcours[]).sort(
+            (a, b) =>
+              new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+          )
+        );
 
         setResultatsCalculRapide(
           (r.calcul_rapide ?? []) as ResultatCalculRapide[]
@@ -345,6 +364,7 @@ export default function DashboardEleveClient() {
 
                 {dernierParcours ? (
                   <p className="mt-2 text-sm font-bold text-slate-500">
+                    {matiereLabel(dernierParcours.matiere)} ·{" "}
                     {formatDate(dernierParcours.created_at)}
                   </p>
                 ) : null}
@@ -363,6 +383,7 @@ export default function DashboardEleveClient() {
 
                 {meilleurParcours ? (
                   <p className="mt-2 text-sm font-bold text-slate-500">
+                    {matiereLabel(meilleurParcours.matiere)} ·{" "}
                     {getPct(meilleurParcours.score, meilleurParcours.total)} %
                     de réussite
                   </p>
@@ -472,18 +493,28 @@ export default function DashboardEleveClient() {
               <div className="rounded-[2rem] bg-white p-6 shadow-xl ring-1 ring-slate-100">
                 <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
                   <div>
-                    <h2 className="text-2xl font-black">Parcours maths</h2>
+                    <h2 className="text-2xl font-black">Parcours</h2>
                     <p className="mt-1 text-sm font-semibold text-slate-600">
-                      Historique des parcours enregistrés.
+                      Historique de tous tes parcours : maths, français, English, espagnol.
                     </p>
                   </div>
 
-                  <Link
-                    href="/parcours"
-                    className="rounded-2xl bg-emerald-600 px-5 py-3 text-sm font-black text-white shadow-lg hover:bg-emerald-500"
-                  >
-                    Refaire un parcours
-                  </Link>
+                  <div className="flex flex-wrap gap-2">
+                    {[
+                      { href: "/parcours", label: "🔢 Maths" },
+                      { href: "/parcours-francais", label: "📚 Français" },
+                      { href: "/parcours-english-maths", label: "🇬🇧 English" },
+                      { href: "/parcours-espagnol", label: "🇪🇸 Espagnol" },
+                    ].map((l) => (
+                      <Link
+                        key={l.href}
+                        href={l.href}
+                        className="rounded-2xl bg-emerald-600 px-4 py-2 text-sm font-black text-white shadow-lg hover:bg-emerald-500"
+                      >
+                        {l.label}
+                      </Link>
+                    ))}
+                  </div>
                 </div>
 
                 {resultatsParcours.length === 0 ? (
@@ -496,6 +527,7 @@ export default function DashboardEleveClient() {
                       <thead>
                         <tr className="border-b border-slate-200 bg-slate-50 text-slate-600">
                           <th className="px-4 py-3 font-black">Date</th>
+                          <th className="px-4 py-3 font-black">Matière</th>
                           <th className="px-4 py-3 font-black">Classe</th>
                           <th className="px-4 py-3 font-black">Score</th>
                           <th className="px-4 py-3 font-black">Réussite</th>
@@ -516,7 +548,11 @@ export default function DashboardEleveClient() {
                               </td>
 
                               <td className="px-4 py-3 font-bold">
-                                {r.classe ?? r.niveau ?? "—"}
+                                {matiereLabel(r.matiere)}
+                              </td>
+
+                              <td className="px-4 py-3 font-bold">
+                                {(r.classe ?? r.niveau ?? "—").toString().toUpperCase()}
                               </td>
 
                               <td className="px-4 py-3 font-black">
