@@ -30,11 +30,24 @@ type ResultatBase = {
   code_etablissement: string;
   code_utilisateur: string;
   nom: string | null;
+  matiere?: string | null;
   score: number;
   total: number;
   pourcentage: number | null;
   created_at: string;
 };
+
+const MATIERE_LABELS: Record<string, string> = {
+  maths: "🔢 Maths",
+  francais: "📚 Français",
+  english: "🇬🇧 English",
+  espagnol: "🇪🇸 Espagnol",
+};
+
+function matiereLabel(matiere: string | null | undefined) {
+  if (!matiere) return "—";
+  return MATIERE_LABELS[matiere] ?? matiere;
+}
 
 type ResultatTutor = ResultatBase & {
   classe: string;
@@ -131,12 +144,19 @@ export default function DashboardPrincipalClient() {
         const r = data.resultats ?? {};
 
         setComptes((data.comptes ?? []) as AccesRow[]);
-        setParcours([
-          ...(r.parcours_maths ?? []),
-          ...(r.parcours_english ?? []),
-          ...(r.parcours_espagnol ?? []),
-          ...(r.parcours_francais ?? []),
-        ] as ResultatBase[]);
+        // Toutes matières confondues, triées par date : les « derniers
+        // parcours » du détail élève sont les plus récents toutes matières.
+        setParcours(
+          ([
+            ...(r.parcours_maths ?? []),
+            ...(r.parcours_english ?? []),
+            ...(r.parcours_espagnol ?? []),
+            ...(r.parcours_francais ?? []),
+          ] as ResultatBase[]).sort(
+            (a, b) =>
+              new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+          )
+        );
         setCalculs((r.calcul_rapide ?? []) as ResultatBase[]);
         setDefis((r.defis_jour ?? []) as ResultatBase[]);
         setEnglish((r.english_maths ?? []) as ResultatBase[]);
@@ -361,8 +381,9 @@ export default function DashboardPrincipalClient() {
                                     ) : (
                                       <div className="space-y-1">
                                         {eleveDetailParcours.slice(0, 4).map((r) => (
-                                          <div key={r.id} className="flex items-center justify-between text-xs">
+                                          <div key={r.id} className="flex items-center justify-between gap-2 text-xs">
                                             <span className="font-bold text-slate-600">{formatDate(r.created_at)}</span>
+                                            <span className="font-bold text-slate-500">{matiereLabel(r.matiere)}</span>
                                             <PctBadge pct={getPct(r.score, r.total)} />
                                           </div>
                                         ))}

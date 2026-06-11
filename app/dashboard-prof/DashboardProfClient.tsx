@@ -85,6 +85,18 @@ function getAveragePct(items: Array<{ score: number; total: number }>) {
   return Math.round(valid.reduce((sum, i) => sum + getPct(i.score, i.total), 0) / valid.length);
 }
 
+const MATIERE_LABELS: Record<string, string> = {
+  maths: "🔢 Maths",
+  francais: "📚 Français",
+  english: "🇬🇧 English",
+  espagnol: "🇪🇸 Espagnol",
+};
+
+function matiereLabel(matiere: string | null | undefined) {
+  if (!matiere) return "—";
+  return MATIERE_LABELS[matiere] ?? matiere;
+}
+
 function isProfAllowed(user: UserSession | null) {
   const t = user?.type_utilisateur;
   return t === "prof" || t === "principal" || t === "boss";
@@ -153,12 +165,19 @@ export default function DashboardProfClient() {
         const r = data.resultats ?? {};
 
         setEleves(comptes.filter((c) => c.type_utilisateur === "eleve"));
-        setResultatsParcours([
-          ...(r.parcours_maths ?? []),
-          ...(r.parcours_english ?? []),
-          ...(r.parcours_espagnol ?? []),
-          ...(r.parcours_francais ?? []),
-        ] as ResultatParcours[]);
+        // Toutes matières confondues, triées par date : « Derniers parcours »
+        // montre bien les plus récents, quelle que soit la matière.
+        setResultatsParcours(
+          ([
+            ...(r.parcours_maths ?? []),
+            ...(r.parcours_english ?? []),
+            ...(r.parcours_espagnol ?? []),
+            ...(r.parcours_francais ?? []),
+          ] as ResultatParcours[]).sort(
+            (a, b) =>
+              new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+          )
+        );
         setResultatsCalculRapide((r.calcul_rapide ?? []) as ResultatCalculRapide[]);
         setResultatsDefisJour((r.defis_jour ?? []) as ResultatDefiJour[]);
         setResultatsEnglish((r.english_maths ?? []) as ResultatEnglish[]);
@@ -358,9 +377,22 @@ export default function DashboardProfClient() {
                           {selectedEleve === s.code_utilisateur && (
                             <tr key={`${s.code_utilisateur}-detail`}>
                               <td colSpan={9} className="bg-blue-50 px-4 pb-4 pt-2">
-                                <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
+                                <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
                                   {[
-                                    { label: "Dernier parcours", value: s.dernierParcours ? `${s.dernierParcours.score}/${s.dernierParcours.total} · ${formatDate(s.dernierParcours.created_at)}` : "—" },
+                                    { label: "Dernier parcours", value: s.dernierParcours ? `${matiereLabel(s.dernierParcours.matiere)} · ${s.dernierParcours.score}/${s.dernierParcours.total} · ${formatDate(s.dernierParcours.created_at)}` : "—" },
+                                    {
+                                      label: "Parcours par matière",
+                                      value: s.parcours.length > 0
+                                        ? Object.entries(
+                                            s.parcours.reduce<Record<string, number>>((acc, p) => {
+                                              acc[p.matiere] = (acc[p.matiere] ?? 0) + 1;
+                                              return acc;
+                                            }, {})
+                                          )
+                                            .map(([m, n]) => `${matiereLabel(m)} ×${n}`)
+                                            .join(" · ")
+                                        : "—",
+                                    },
                                     { label: "Dernier calcul", value: s.dernierCalcul ? `${s.dernierCalcul.score}/${s.dernierCalcul.total} · ${formatDate(s.dernierCalcul.created_at)}` : "—" },
                                     { label: "Dernier défi", value: s.dernierDefi ? `${s.dernierDefi.score}/${s.dernierDefi.total} · ${formatDate(s.dernierDefi.created_at)}` : "—" },
                                     { label: "Dernier English", value: s.dernierEnglish ? `${s.dernierEnglish.score}/${s.dernierEnglish.total} · ${s.dernierEnglish.theme ?? ""}` : "—" },
@@ -395,7 +427,7 @@ export default function DashboardProfClient() {
                       <div key={r.id} className="flex items-center justify-between rounded-2xl bg-slate-50 px-4 py-3">
                         <div>
                           <p className="text-sm font-black">{r.nom ?? r.code_utilisateur}</p>
-                          <p className="text-xs font-bold text-slate-500">{formatDate(r.created_at)}</p>
+                          <p className="text-xs font-bold text-slate-500">{matiereLabel(r.matiere)} · {formatDate(r.created_at)}</p>
                         </div>
                         <PctBadge pct={getPct(r.score, r.total)} />
                       </div>
