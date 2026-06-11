@@ -255,6 +255,7 @@ export default function DashboardProfClient() {
                 { href: "/defis-du-jour", label: "🎯 Défis", color: "bg-orange-100 text-orange-900 ring-1 ring-orange-200" },
                 { href: "/english-maths", label: "🇬🇧 English", color: "bg-sky-100 text-sky-900 ring-1 ring-sky-200" },
                 { href: "/coach-ia/maths", label: "🧠 Coach", color: "bg-indigo-100 text-indigo-900 ring-1 ring-indigo-200" },
+                { href: "/dashboard-retours", label: "📨 Retours élèves", color: "bg-emerald-100 text-emerald-900 ring-1 ring-emerald-200" },
               ].map((l) => (
                 <Link key={l.href} href={l.href}
                   className={`rounded-2xl ${l.color} px-4 py-2 text-sm font-black shadow-sm hover:brightness-95 transition`}>
