@@ -306,6 +306,18 @@ export default function DashboardEleveClient() {
               ? "Compte indépendant"
               : `Code établissement : ${codeEtablissement} · Code élève : ${codeUtilisateur}`}
           </div>
+
+          <div className="mt-5 flex flex-wrap items-center gap-3">
+            <Link
+              href="/votre-avis"
+              className="inline-flex items-center gap-2 rounded-full bg-emerald-600 px-5 py-3 text-sm font-black text-white shadow-lg transition hover:bg-emerald-500"
+            >
+              🛠️ Donner mon avis sur EleveAI
+            </Link>
+            <p className="text-sm font-semibold text-slate-600">
+              Un bug, une idée, une note : chaque retour améliore la plateforme.
+            </p>
+          </div>
         </div>
 
         {loading ? (
