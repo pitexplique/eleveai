@@ -30,7 +30,9 @@ const TYPES = [
   },
   {
     id: "avis" as const,
-    emoji: "⭐",
+    // 5 étoiles et pas une seule : retour élève du 11/06/2026, une étoile
+    // unique ressemblait à une note de 1/5 et « donnait une mauvaise image ».
+    emoji: "⭐⭐⭐⭐⭐",
     label: "Donner mon avis",
     desc: "Ce que tu aimes, ce qui t'agace, ta note sur la plateforme.",
     placeholder:
