@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useEleve } from "@/context/EleveContext";
 import { createClient } from "@/lib/supabase/client";
+import { ameliorationsRealisees } from "@/lib/ameliorations/realisees";
 
 type EmailUser = {
   auth_user_id: string;
@@ -196,6 +197,51 @@ export default function VotreAvisClient() {
               </span>
             </p>
           </header>
+        </div>
+      </section>
+
+      {/* VOUS L'AVEZ DEMANDÉ → C'EST FAIT */}
+      <section className="mx-auto max-w-4xl px-4 pt-10 sm:pt-12">
+        <div className="rounded-3xl border border-emerald-500/30 bg-emerald-500/[0.07] p-6 sm:p-8">
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <h2 className="text-2xl font-black text-slate-50 sm:text-3xl">
+              💬 Vous l&apos;avez demandé&nbsp;→&nbsp;✅ C&apos;est fait
+            </h2>
+            <span className="inline-flex items-center rounded-full bg-emerald-500/20 px-3 py-1 text-xs font-black text-emerald-200">
+              {ameliorationsRealisees.length} idées réalisées
+            </span>
+          </div>
+          <p className="mt-2 text-sm font-semibold text-slate-300">
+            Vos retours ne tombent pas dans le vide. Voici ce que vos idées ont déjà changé&nbsp;:
+          </p>
+
+          <ul className="mt-5 space-y-3">
+            {ameliorationsRealisees.map((a, i) => (
+              <li
+                key={i}
+                className="rounded-2xl border border-slate-700/60 bg-slate-900/60 p-4 sm:p-5"
+              >
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="rounded-full bg-emerald-500/15 px-3 py-1 text-xs font-black text-emerald-200 ring-1 ring-emerald-500/30">
+                    {a.eleve}
+                  </span>
+                </div>
+                <p className="mt-2 text-sm font-medium leading-6 text-slate-300">
+                  <span className="text-slate-400">« </span>
+                  {a.demande}
+                  <span className="text-slate-400"> »</span>
+                </p>
+                <p className="mt-1.5 flex items-start gap-2 text-sm font-bold leading-6 text-emerald-200">
+                  <span aria-hidden>✅</span>
+                  <span>{a.fait}</span>
+                </p>
+              </li>
+            ))}
+          </ul>
+
+          <p className="mt-5 text-center text-sm font-bold text-slate-300">
+            👇 À ton tour&nbsp;: propose ton idée, elle sera lue.
+          </p>
         </div>
       </section>
 

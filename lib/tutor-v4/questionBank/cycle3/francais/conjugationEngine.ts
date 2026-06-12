@@ -212,10 +212,10 @@ export function generateConjugationItem(tense: ConjTense): ConjItem {
     );
     return {
       kind: "qcm",
-      text: `Choisis la bonne forme : '${inf}' au ${TENSE_LABEL[tense]} avec '${PRONOUNS[person]}'.`,
+      text: `Choisis la bonne forme : '${inf}' ${TENSE_PHRASE[tense]} avec '${PRONOUNS[person]}'.`,
       correct,
       wrongs,
-      methode: `On accorde la terminaison du ${TENSE_LABEL[tense]} avec '${PRONOUNS[person]}'.`,
+      methode: `On accorde la terminaison ${TENSE_OF[tense]} avec '${PRONOUNS[person]}'.`,
     };
   }
 
@@ -228,10 +228,10 @@ export function generateConjugationItem(tense: ConjTense): ConjItem {
   const wrongs = buildWrongs(correct, table, verb[others[0]], verb[others[1]], [verb.inf]);
   return {
     kind: "qcm",
-    text: `Choisis la bonne forme : '${verb.inf}' au ${TENSE_LABEL[tense]} avec '${PRONOUNS[person]}'.`,
+    text: `Choisis la bonne forme : '${verb.inf}' ${TENSE_PHRASE[tense]} avec '${PRONOUNS[person]}'.`,
     correct,
     wrongs,
-    methode: `'${verb.inf}' est un verbe irregulier : on retient sa forme au ${TENSE_LABEL[tense]} pour '${PRONOUNS[person]}'.`,
+    methode: `'${verb.inf}' est un verbe irregulier : on retient sa forme ${TENSE_PHRASE[tense]} pour '${PRONOUNS[person]}'.`,
   };
 }
 
