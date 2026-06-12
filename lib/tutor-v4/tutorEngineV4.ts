@@ -512,7 +512,7 @@ export async function startTutorSessionV4(
     ],
   };
 
-  createSessionV4(session);
+  await createSessionV4(session);
 
   return {
     sessionId: session.id,
@@ -548,7 +548,7 @@ export async function jumpToMicroV4(
     microMastery: Record<string, number>;
   };
 }> {
-  const session = getSessionV4(sessionId);
+  const session = await getSessionV4(sessionId);
 
   if (!session) {
     throw new Error("Session introuvable");
@@ -638,7 +638,7 @@ export async function jumpToMicroV4(
     nextCurrentPair.optionB.id,
   ];
 
-  saveSessionV4(session);
+  await saveSessionV4(session);
 
   return {
     pair: nextCurrentPair,
@@ -654,8 +654,8 @@ export async function jumpToMicroV4(
   };
 }
 
-export function chooseQuestionV4(sessionId: string, optionId: string) {
-  const session = getSessionV4(sessionId);
+export async function chooseQuestionV4(sessionId: string, optionId: string) {
+  const session = await getSessionV4(sessionId);
 
   if (!session) {
     throw new Error("Session introuvable");
@@ -704,7 +704,7 @@ export function chooseQuestionV4(sessionId: string, optionId: string) {
     flags: [],
   });
 
-  saveSessionV4(session);
+  await saveSessionV4(session);
 
   return {
     ok: true,
@@ -719,7 +719,7 @@ export async function answerTutorV4(
   sessionId: string,
   answer: string
 ): Promise<AnswerTutorV4Response> {
-  const session = getSessionV4(sessionId);
+  const session = await getSessionV4(sessionId);
 
   if (!session) {
     throw new Error("Session introuvable");
@@ -918,7 +918,7 @@ export async function answerTutorV4(
   session.currentChoice = undefined;
   session.turnStartedAt = Date.now();
 
-  saveSessionV4(session);
+  await saveSessionV4(session);
 
   return {
     feedback: guarded.text,

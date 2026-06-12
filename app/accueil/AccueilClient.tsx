@@ -71,6 +71,20 @@ const SUBJECTS = [
   },
 ];
 
+// Niveaux pour lesquels le coach sait pré-sélectionner la classe via ?classe=.
+// (Idée d'Arthur, 12/06/2026 : à la connexion on connaît la classe → proposer
+//  directement le bon niveau. À terme : suggestions plus fines par niveau.)
+const MATHS_LEVELS = new Set([
+  "cp", "ce1", "ce2", "cm1", "cm2", "6e", "5e", "4e", "3e", "terminale-spe",
+]);
+const FRANCAIS_LEVELS = new Set([
+  "cp", "ce1", "ce2", "cm1", "cm2", "6e", "5e", "4e", "3e",
+]);
+const CLASSE_LABELS: Record<string, string> = {
+  cp: "CP", ce1: "CE1", ce2: "CE2", cm1: "CM1", cm2: "CM2",
+  "6e": "6e", "5e": "5e", "4e": "4e", "3e": "3e", "terminale-spe": "Terminale",
+};
+
 // ─── Bottom features bar ──────────────────────────────────────────────────────
 
 const FEATURES = [
@@ -91,12 +105,70 @@ export default function AccueilPage() {
   const prenom      = eleve?.nom ?? null;
   const isCmPrimary = eleveClasse === "cm1" || eleveClasse === "cm2";
 
+  // Passe la classe de l'élève au coach quand le niveau est géré, pour qu'il
+  // atterrisse directement sur le bon niveau (sinon le coach ouvre 6e par défaut).
   function getHref(href: string) {
-    if (!isCmPrimary) return href;
-    if (href === "/coach-ia/maths")    return `/coach-ia/maths?classe=${eleveClasse}`;
-    if (href === "/coach-ia/francais") return `/coach-ia/francais?classe=${eleveClasse}`;
+    if (!eleveClasse) return href;
+    if (href === "/coach-ia/maths" && MATHS_LEVELS.has(eleveClasse)) {
+      return `/coach-ia/maths?classe=${eleveClasse}`;
+    }
+    if (href === "/coach-ia/francais" && FRANCAIS_LEVELS.has(eleveClasse)) {
+      return `/coach-ia/francais?classe=${eleveClasse}`;
+    }
     return href;
   }
+
+  const classeLabel = eleveClasse ? (CLASSE_LABELS[eleveClasse] ?? "") : "";
+
+  // Chemins proposés à l'élève. La 1re carte est la sélection mise en avant ;
+  // Maths/Français portent le niveau quand on le connaît ; Anglais/Espagnol
+  // restent généraux (niveaux CECRL, pas la classe).
+  const suggestions = [
+    {
+      icon: "✨",
+      title: "Sélection du jour",
+      desc: "EleveAI a choisi pour toi aujourd'hui",
+      href: "/defis-du-jour",
+      tone: "from-amber-500 to-orange-600",
+    },
+    {
+      icon: "🧮",
+      title: classeLabel ? `Maths ${classeLabel}` : "Maths",
+      desc: "Reprends une notion avec le coach",
+      href: getHref("/coach-ia/maths"),
+      tone: "from-cyan-500 to-blue-600",
+    },
+    ...(!eleveClasse || FRANCAIS_LEVELS.has(eleveClasse)
+      ? [{
+          icon: "📖",
+          title: classeLabel ? `Français ${classeLabel}` : "Français",
+          desc: "Lecture, grammaire, expression",
+          href: getHref("/coach-ia/francais"),
+          tone: "from-emerald-500 to-green-700",
+        }]
+      : []),
+    {
+      icon: "🇬🇧",
+      title: "Anglais",
+      desc: "Vocabulaire et maths en anglais",
+      href: "/coach-ia/english-maths",
+      tone: "from-blue-500 to-indigo-700",
+    },
+    {
+      icon: "🇪🇸",
+      title: "Espagnol",
+      desc: "Vocabulaire et audio, A1 → B2",
+      href: "/coach-ia/espagnol",
+      tone: "from-red-500 to-rose-700",
+    },
+    {
+      icon: "🧭",
+      title: "Parcours",
+      desc: "Teste ton niveau, vois tes forces",
+      href: "/parcours",
+      tone: "from-violet-500 to-purple-700",
+    },
+  ];
 
   const visibleSubjects = isCmPrimary ? SUBJECTS.filter(s => s.cm) : SUBJECTS;
 
@@ -130,7 +202,16 @@ export default function AccueilPage() {
       />
 
       {/* ── HERO — Image plein écran ────────────────────────────────────────── */}
-      <section className="relative w-full">
+      <section
+        className="relative w-full animate-gradient-shift"
+        style={{
+          backgroundImage:
+            "linear-gradient(115deg, #041B33 0%, #0a2a55 35%, #251355 65%, #041B33 100%)",
+        }}
+      >
+        {/* L'image ne doit pas contenir d'éléments qui ressemblent à des boutons :
+            les élèves essayaient de cliquer sur les cartes dessinées (retours du
+            11-12/06/2026). Les vraies actions sont sous l'image. */}
         <Image
           src="/images/accueil-eleveai-reunion.webp"
           alt="EleveAI – Comprendre, S'entraîner, Réussir – CP à Terminale"
@@ -163,6 +244,51 @@ export default function AccueilPage() {
             </Link>
           </div>
         )}
+      </section>
+
+      {/* ── CHEMINS CONSEILLÉS — suggestions personnalisées (idée d'Arthur) ───── */}
+      <section className="bg-[#041B33] px-4 pt-6 pb-2 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-5xl">
+          <div className="mb-4 text-center">
+            <h2 className="text-xl font-black text-white sm:text-2xl">
+              {prenom
+                ? `Que veux-tu travailler aujourd'hui, ${prenom} ?`
+                : "Que veux-tu travailler aujourd'hui ?"}
+            </h2>
+            {classeLabel ? (
+              <p className="mt-1 text-xs font-bold text-white/50">
+                Chemins conseillés pour la {classeLabel}
+              </p>
+            ) : (
+              <p className="mt-1 text-xs font-bold text-white/50">
+                Connecte-toi pour des suggestions adaptées à ta classe
+              </p>
+            )}
+          </div>
+
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
+            {suggestions.map((s, i) => (
+              <Link
+                key={s.href}
+                href={s.href}
+                className={[
+                  "group relative flex flex-col gap-1 overflow-hidden rounded-2xl p-4 text-left transition-transform hover:-translate-y-1 hover:scale-[1.03]",
+                  // Premier chemin (matière principale) mis en avant par le halo néon.
+                  i === 0 ? "animate-neon-pulse" : "",
+                ].join(" ")}
+              >
+                <div className={`absolute inset-0 bg-gradient-to-br ${s.tone} opacity-90 transition-opacity group-hover:opacity-100`} />
+                <span className="relative z-10 text-2xl">{s.icon}</span>
+                <p className="relative z-10 text-sm font-black leading-tight text-white">
+                  {s.title}
+                </p>
+                <p className="relative z-10 text-[10px] font-semibold leading-tight text-white/75">
+                  {s.desc}
+                </p>
+              </Link>
+            ))}
+          </div>
+        </div>
       </section>
 
       {/* ── SUBJECT CARDS cliquables ────────────────────────────────────────── */}
@@ -223,8 +349,14 @@ export default function AccueilPage() {
       {/* ── NOUVEAUTÉS ───────────────────────────────────────────────────────── */}
       <section className="px-4 py-10 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-5xl">
-          <h2 className="text-lg font-black text-white mb-4">✨ Nouveautés</h2>
-          <div className="flex gap-3 overflow-x-auto pb-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          <div className="mb-4 flex items-center justify-between">
+            <h2 className="text-lg font-black text-white">✨ Nouveautés</h2>
+            <span className="text-xs font-bold text-white/40">Fais glisser →</span>
+          </div>
+          {/* Fondu à droite : montre qu'il y a d'autres cartes à faire défiler
+              (retour élève du 11/06/2026 : « on voit pas la droite de nouveautés ») */}
+          <div className="relative">
+          <div className="flex gap-3 overflow-x-auto pb-3 pr-12 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
             {[
               { icon: "🇪🇸", label: "Parcours Espagnol",  desc: "Bilan de niveau A1 → B2 avec audio",    href: "/parcours-espagnol",           color: "from-rose-600 to-red-800"     },
               { icon: "🇪🇸", label: "Coach Espagnol",     desc: "A1 → B2, vocabulaire & audio",          href: "/coach-ia/espagnol",           color: "from-red-600 to-rose-800"     },
@@ -250,6 +382,8 @@ export default function AccueilPage() {
                 </div>
               </Link>
             ))}
+          </div>
+          <div className="pointer-events-none absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-[#041B33] to-transparent" />
           </div>
         </div>
       </section>

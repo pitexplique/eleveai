@@ -53,3 +53,29 @@ body {
 .animate-ticker:hover {
   animation-play-state: paused;
 }
+
+/* Accueil — demandes des élèves testeurs (12/06/2026) :
+   dégradé animé doux en fond du hero et halo néon sur le bouton principal. */
+@keyframes gradient-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50%      { background-position: 100% 50%; }
+}
+.animate-gradient-shift {
+  background-size: 300% 300%;
+  animation: gradient-shift 18s ease infinite;
+}
+
+@keyframes neon-pulse {
+  0%, 100% { box-shadow: 0 0 12px rgba(16, 185, 129, 0.55), 0 0 28px rgba(56, 189, 248, 0.3); }
+  50%      { box-shadow: 0 0 22px rgba(56, 189, 248, 0.65), 0 0 44px rgba(16, 185, 129, 0.4); }
+}
+.animate-neon-pulse {
+  animation: neon-pulse 2.6s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-gradient-shift,
+  .animate-neon-pulse {
+    animation: none;
+  }
+}

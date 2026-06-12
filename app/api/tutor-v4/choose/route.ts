@@ -13,7 +13,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const result = chooseQuestionV4(sessionId, optionId);
+    const result = await chooseQuestionV4(sessionId, optionId);
 
     return NextResponse.json(result);
   } catch (error) {
