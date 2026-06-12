@@ -210,3 +210,183 @@ export function generateHomophoneItem(): ConjItem {
     methode: `On choisit le bon homophone : ici, c'est « ${frame.correct} ».`,
   };
 }
+
+// ── ACCORD SUJET-VERBE ──────────────────────────────────────────────────────
+
+// Sujet (avec son index de personne 0..5) x verbe (present) -> le verbe doit
+// s'accorder avec le sujet. Distracteurs = verbe a une autre personne.
+type SvSubject = { display: string; person: number };
+const SV_SUBJECTS: SvSubject[] = [
+  { display: "Je", person: 0 },
+  { display: "Tu", person: 1 },
+  { display: "Il", person: 2 },
+  { display: "Elle", person: 2 },
+  { display: "On", person: 2 },
+  { display: "Le chat", person: 2 },
+  { display: "La maitresse", person: 2 },
+  { display: "Mon ami", person: 2 },
+  { display: "Tom", person: 2 },
+  { display: "Nous", person: 3 },
+  { display: "Vous", person: 4 },
+  { display: "Ils", person: 5 },
+  { display: "Elles", person: 5 },
+  { display: "Les chats", person: 5 },
+  { display: "Les enfants", person: 5 },
+  { display: "Mes amis", person: 5 },
+  { display: "Paul et Lea", person: 5 },
+];
+
+const ER_PRESENT_SV = ["e", "es", "e", "ons", "ez", "ent"];
+const ETRE_PRES = ["suis", "es", "est", "sommes", "etes", "sont"];
+const AVOIR_PRES = ["ai", "as", "a", "avons", "avez", "ont"];
+
+type SvVerb =
+  | { type: "er"; inf: string; comp: string }
+  | { type: "etre"; comp: string }
+  | { type: "avoir"; comp: string };
+
+const SV_VERBS: SvVerb[] = [
+  { type: "er", inf: "jouer", comp: "dans la cour" },
+  { type: "er", inf: "chanter", comp: "une belle chanson" },
+  { type: "er", inf: "danser", comp: "tous les samedis" },
+  { type: "er", inf: "marcher", comp: "jusqu'a l'ecole" },
+  { type: "er", inf: "regarder", comp: "un film" },
+  { type: "er", inf: "parler", comp: "doucement" },
+  { type: "er", inf: "travailler", comp: "le matin" },
+  { type: "er", inf: "ranger", comp: "la chambre" },
+  { type: "etre", comp: "dehors" },
+  { type: "etre", comp: "en retard" },
+  { type: "etre", comp: "a la maison" },
+  { type: "avoir", comp: "faim" },
+  { type: "avoir", comp: "un chien" },
+  { type: "avoir", comp: "raison" },
+];
+
+function svVerbForm(verb: SvVerb, person: number): string {
+  if (verb.type === "etre") return ETRE_PRES[person];
+  if (verb.type === "avoir") return AVOIR_PRES[person];
+  return verb.inf.slice(0, -2) + ER_PRESENT_SV[person];
+}
+
+export function generateSubjectVerbItem(): ConjItem {
+  const subject = pick(SV_SUBJECTS);
+  const verb = pick(SV_VERBS);
+  const comp = verb.type === "er" ? verb.comp : verb.comp;
+  const make = (p: number) => `${subject.display} ${svVerbForm(verb, p)} ${comp}.`;
+  const correct = make(subject.person);
+
+  // Distracteurs : memes phrase et sujet, verbe mal accorde (autres personnes).
+  const wrongPersons = [0, 1, 2, 3, 4, 5].filter((p) => svVerbForm(verb, p) !== svVerbForm(verb, subject.person));
+  for (let i = wrongPersons.length - 1; i > 0; i--) {
+    const j = randInt(i + 1);
+    [wrongPersons[i], wrongPersons[j]] = [wrongPersons[j], wrongPersons[i]];
+  }
+  const wrongs: string[] = [];
+  for (const p of wrongPersons) {
+    const s = make(p);
+    if (s !== correct && !wrongs.includes(s)) wrongs.push(s);
+    if (wrongs.length === 3) break;
+  }
+  // Filet : verbe a l'infinitif si pas assez de distracteurs.
+  if (wrongs.length < 3 && verb.type === "er") {
+    const s = `${subject.display} ${verb.inf} ${comp}.`;
+    if (!wrongs.includes(s)) wrongs.push(s);
+  }
+
+  return {
+    kind: "qcm",
+    text: "Choisis la phrase ou le verbe est bien accorde avec le sujet.",
+    correct,
+    wrongs: wrongs.slice(0, 3),
+    methode: "Le verbe s'accorde avec son sujet : on cherche qui fait l'action.",
+  };
+}
+
+// ── VOCABULAIRE (synonymes / antonymes / familles) ──────────────────────────
+
+const SYNONYMS: { mot: string; syn: string }[] = [
+  { mot: "rapide", syn: "vif" }, { mot: "content", syn: "heureux" },
+  { mot: "joli", syn: "beau" }, { mot: "grand", syn: "immense" },
+  { mot: "maison", syn: "demeure" }, { mot: "peur", syn: "crainte" },
+  { mot: "calme", syn: "tranquille" }, { mot: "fatigue", syn: "epuise" },
+  { mot: "drole", syn: "amusant" }, { mot: "rapidement", syn: "vite" },
+  { mot: "content", syn: "ravi" }, { mot: "difficile", syn: "dur" },
+  { mot: "gentil", syn: "aimable" }, { mot: "bizarre", syn: "etrange" },
+  { mot: "debut", syn: "commencement" }, { mot: "bateau", syn: "navire" },
+];
+
+const ANTONYMS: { mot: string; ant: string }[] = [
+  { mot: "grand", ant: "petit" }, { mot: "content", ant: "triste" },
+  { mot: "monter", ant: "descendre" }, { mot: "ouvert", ant: "ferme" },
+  { mot: "jour", ant: "nuit" }, { mot: "chaud", ant: "froid" },
+  { mot: "rapide", ant: "lent" }, { mot: "propre", ant: "sale" },
+  { mot: "plein", ant: "vide" }, { mot: "facile", ant: "difficile" },
+  { mot: "haut", ant: "bas" }, { mot: "vieux", ant: "jeune" },
+  { mot: "debut", ant: "fin" }, { mot: "premier", ant: "dernier" },
+  { mot: "ami", ant: "ennemi" }, { mot: "fort", ant: "faible" },
+];
+
+const FAMILIES: { mot: string; membre: string }[] = [
+  { mot: "terre", membre: "terrien" }, { mot: "dent", membre: "dentiste" },
+  { mot: "fleur", membre: "fleuriste" }, { mot: "lait", membre: "laitier" },
+  { mot: "jardin", membre: "jardinier" }, { mot: "chant", membre: "chanteur" },
+  { mot: "livre", membre: "librairie" }, { mot: "danse", membre: "danseur" },
+  { mot: "mer", membre: "marin" }, { mot: "froid", membre: "refroidir" },
+  { mot: "grand", membre: "grandir" }, { mot: "porte", membre: "portier" },
+  { mot: "montagne", membre: "montagnard" }, { mot: "soleil", membre: "ensoleille" },
+];
+
+// Mots quelconques pour les distracteurs (sans rapport avec la bonne reponse).
+const DISTRACTOR_WORDS = [
+  "table", "voiture", "nuage", "crayon", "fenetre", "ballon", "tortue",
+  "musique", "chaussure", "ordinateur", "banane", "montre", "lampe",
+  "valise", "casquette", "trottoir", "fourchette", "parapluie", "carotte",
+];
+
+function distractorsFrom(pool: string[], exclude: string[], n: number): string[] {
+  const candidates = pool.filter((w) => !exclude.includes(w));
+  for (let i = candidates.length - 1; i > 0; i--) {
+    const j = randInt(i + 1);
+    [candidates[i], candidates[j]] = [candidates[j], candidates[i]];
+  }
+  return candidates.slice(0, n);
+}
+
+export function generateVocabularyItem(kind: "syn" | "ant" | "famille"): ConjItem {
+  if (kind === "ant") {
+    const item = pick(ANTONYMS);
+    return {
+      kind: "qcm",
+      text: `Quel est le contraire de « ${item.mot} » ?`,
+      correct: item.ant,
+      wrongs: distractorsFrom(
+        [...DISTRACTOR_WORDS, ...SYNONYMS.map((s) => s.syn)],
+        [item.ant, item.mot],
+        3
+      ),
+      methode: "Un antonyme a le sens oppose.",
+    };
+  }
+  if (kind === "famille") {
+    const item = pick(FAMILIES);
+    return {
+      kind: "qcm",
+      text: `Quel mot appartient a la meme famille que « ${item.mot} » ?`,
+      correct: item.membre,
+      wrongs: distractorsFrom(DISTRACTOR_WORDS, [item.membre, item.mot], 3),
+      methode: "Les mots d'une meme famille partagent une racine et un sens proche.",
+    };
+  }
+  const item = pick(SYNONYMS);
+  return {
+    kind: "qcm",
+    text: `Quel est un synonyme de « ${item.mot} » ?`,
+    correct: item.syn,
+    wrongs: distractorsFrom(
+      [...DISTRACTOR_WORDS, ...ANTONYMS.map((a) => a.ant)],
+      [item.syn, item.mot],
+      3
+    ),
+    methode: "Un synonyme a (a peu pres) le meme sens.",
+  };
+}

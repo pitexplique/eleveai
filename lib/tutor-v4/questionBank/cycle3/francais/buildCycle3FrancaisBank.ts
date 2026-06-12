@@ -14,6 +14,8 @@ import {
 import {
   generateAgreementItem,
   generateHomophoneItem,
+  generateSubjectVerbItem,
+  generateVocabularyItem,
 } from "@/lib/tutor-v4/questionBank/cycle3/francais/parametricFrench";
 
 type Cycle3PrimaryLevel = Extract<SchoolLevel, "cm1" | "cm2" | "6e">;
@@ -796,7 +798,9 @@ function grammaireQuestion(microId: string): Generated {
     return Math.random() < 0.5 ? fromConjItem(generateHomophoneItem()) : qcm(HOMOPHONES);
   }
   if (microId.includes("accord_gn")) return fromConjItem(generateAgreementItem());
-  if (microId.includes("orth_sujet_verbe")) return qcm(ACCORD_SUJET_VERBE);
+  if (microId.includes("orth_sujet_verbe")) {
+    return Math.random() < 0.6 ? fromConjItem(generateSubjectVerbItem()) : qcm(ACCORD_SUJET_VERBE);
+  }
   if (microId.includes("complement")) return qcm(COMPLEMENTS);
   if (microId.includes("gn")) return qcm(GN);
   if (microId.includes("phrase_simple")) return qcm(PHRASE_SIMPLE);
@@ -805,8 +809,17 @@ function grammaireQuestion(microId: string): Generated {
 }
 
 function vocabulaireQuestion(microId: string): Generated {
-  if (microId.includes("famille")) return qcm(VOC_FAMILLE);
-  if (microId.includes("syn") || microId.includes("ant") || microId.includes("nuance")) return qcm(VOC_SYN_ANT);
+  // Familles et synonymes/antonymes : moteur parametrique (listes de mots) une
+  // fois sur deux, sinon pool redige. Contexte/polysemie/orthographe/reemploi
+  // restent rediges (difficiles a parametrer correctement).
+  if (microId.includes("famille")) {
+    return Math.random() < 0.5 ? fromConjItem(generateVocabularyItem("famille")) : qcm(VOC_FAMILLE);
+  }
+  if (microId.includes("syn") || microId.includes("ant") || microId.includes("nuance")) {
+    return Math.random() < 0.5
+      ? fromConjItem(generateVocabularyItem(Math.random() < 0.5 ? "syn" : "ant"))
+      : qcm(VOC_SYN_ANT);
+  }
   if (microId.includes("polysemie")) return qcm(VOC_POLYSEMIE);
   if (microId.includes("orthographe")) return qcm(VOC_ORTH);
   if (microId.includes("reemploi")) return qcm(VOC_REEMPLOI);
