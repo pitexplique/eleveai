@@ -19,7 +19,7 @@ export const elevesRemercies: EleveRemercie[] = [
   { prenom: "Ben",     action: "Gestion des codes d'accès",                       meta: null                   },
   { prenom: "Enzo",    action: "A lancé l'idée de eleveai.fr avec plusieurs matières", meta: "Participation active" },
   { prenom: "Keïla",   action: "Participation à la gestion du tarif", meta: "Participation active" },
-  { prenom: "Tamara",  action: "Gestion des bugs",                                meta: null                   },
+  { prenom: "Tamara",  action: "Gestion des bugs et regard pédagogique",         meta: null                   },
   { prenom: "Gaëtan",  action: "Participation active",                            meta: "Participation active" },
   { prenom: "Simon",   action: "Rajouter du game",                                meta: "Participation active" },
 ];
