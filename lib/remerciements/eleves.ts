@@ -15,7 +15,7 @@ export const elevesRemercies: EleveRemercie[] = [
   { prenom: "Emma",    action: "4,90 € par mois avec code promo à 50 %",          meta: null                   },
   { prenom: "Éléna",   action: "Très RGPD",                                       meta: null                   },
   { prenom: "Adele",   action: "Lutte contre les stéréotypes",                    meta: "Participation active" },
-  { prenom: "Maëlle",  action: "Conception d'image et une des meilleure testeuse",     meta: null                   },
+  { prenom: "Maëlle",  action: "Conception d'image et une des meilleures testeuses",   meta: null                   },
   { prenom: "Ben",     action: "Gestion des codes d'accès",                       meta: null                   },
   { prenom: "Enzo",    action: "A lancé l'idée de eleveai.fr avec plusieurs matières", meta: "Participation active" },
   { prenom: "Keïla",   action: "Participation à la gestion du tarif", meta: "Participation active" },

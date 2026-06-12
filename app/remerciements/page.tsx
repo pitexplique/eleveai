@@ -42,7 +42,7 @@ export default function RemerciementsPage() {
               <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                 {elevesRemercies.map((eleve) => (
                   <div
-                    key={eleve.prenom}
+                    key={`${eleve.prenom}-${eleve.action}`}
                     className="rounded-2xl border border-white/15 bg-white/10 px-5 py-4 shadow-lg transition hover:-translate-y-1 hover:bg-white/15"
                   >
                     <div className="flex items-center justify-between gap-2">

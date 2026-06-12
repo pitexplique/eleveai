@@ -13,9 +13,10 @@ export default function RemerciementsBar() {
         </p>
 
         <div className="flex flex-wrap justify-center gap-2">
+          {/* clé prénom + action : deux élèves peuvent porter le même prénom (deux Maëlle) */}
           {elevesRemercies.map((eleve) => (
             <span
-              key={eleve.prenom}
+              key={`${eleve.prenom}-${eleve.action}`}
               className="inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-white/10 px-3 py-1 text-xs font-semibold text-white/90"
             >
               <span className="font-black text-yellow-300">{eleve.prenom}</span>
