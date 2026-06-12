@@ -14,10 +14,6 @@ export default function RemerciementsPage() {
               EleveAI
             </div>
 
-            <p className="text-sm font-black uppercase tracking-[0.25em] text-yellow-300">
-              EleveAI
-            </p>
-
             <h1 className="mt-4 text-4xl font-black tracking-tight md:text-6xl">
               Remerciements
             </h1>
