@@ -85,6 +85,14 @@ export async function POST(req: Request) {
       }))
       .filter((message) => message.content);
 
+    // Retour de Gaetan (11/06/2026) : le coach redisait "Salut Gaetan" a chaque
+    // message. On l'interdit explicitement des qu'il y a un historique, au lieu
+    // de compter sur le modele pour le deviner.
+    const conversationStarted = history.length > 0;
+    const consigneSalutation = conversationStarted
+      ? "La conversation a DEJA commence : ne dis NI bonjour NI le prenom de l'eleve, reponds directement a sa question."
+      : "Tu peux saluer brievement l'eleve une seule fois, puis reponds a sa question.";
+
     const completion = await openai.chat.completions.create({
       model: OPENAI_MODEL,
       temperature: 0.2,
@@ -96,7 +104,7 @@ export async function POST(req: Request) {
             "Tu es le coach EleveAI sur la page d'accueil.",
             `Tu reponds a un eleve connecte (${eleve.nom ?? codeUtilisateur}) qui pose une question rapide.`,
             "Reponds en francais simple, en 3 a 5 phrases maximum.",
-            "Ne salue pas l'eleve et ne te presente pas si la conversation a deja commence : reponds directement.",
+            consigneSalutation,
             "Aide sans faire tout le travail a la place de l'eleve.",
             "Si la question demande un exercice precis, invite l'eleve a aller dans Parcours ou Coach IA.",
             "N'utilise pas de LaTeX.",
