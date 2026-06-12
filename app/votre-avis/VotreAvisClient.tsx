@@ -98,7 +98,8 @@ export default function VotreAvisClient() {
   const [type, setType] = useState<"bug" | "idee" | "avis">("bug");
   const [page, setPage] = useState("");
   const [message, setMessage] = useState("");
-  const [note, setNote] = useState(0);
+  // 5 étoiles pré-sélectionnées par défaut (demande du 13/06/2026).
+  const [note, setNote] = useState(5);
   const [prenom, setPrenom] = useState("");
   const [classe, setClasse] = useState("");
   const [hp, setHp] = useState("");
@@ -159,7 +160,7 @@ export default function VotreAvisClient() {
     setSent(false);
     setPage("");
     setMessage("");
-    setNote(0);
+    setNote(5);
     setError(null);
   }
 
