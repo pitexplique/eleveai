@@ -28,9 +28,7 @@ export default function RemerciementsPage() {
               plateforme.
             </p>
 
-            <div className="mx-auto mt-6 max-w-3xl rounded-2xl border border-yellow-300/20 bg-yellow-300/10 px-5 py-4 text-sm font-bold leading-relaxed text-yellow-100">
-              Seuls les prénoms sont affichés. Aucun nom de famille n'est publié.
-            </div>
+
           </div>
 
           <div className="border-t border-white/10 bg-slate-950/45 px-6 py-10 md:px-12">

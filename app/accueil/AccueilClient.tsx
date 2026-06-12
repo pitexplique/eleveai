@@ -96,13 +96,22 @@ const FEATURES = [
 
 // ─── Main component ───────────────────────────────────────────────────────────
 
+function getPrenomAffiche(nom?: string | null) {
+  const premierMot = nom?.trim().split(/\s+/)[0] ?? "";
+  const normalise = premierMot.toLowerCase();
+  if (!premierMot || normalise === "élève" || normalise === "eleve") {
+    return null;
+  }
+  return premierMot;
+}
+
 export default function AccueilPage() {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const { eleve } = useEleve();
   const [isPlaying, setIsPlaying] = useState(false);
 
   const eleveClasse = eleve?.classe?.toLowerCase() ?? null;
-  const prenom      = eleve?.nom ?? null;
+  const prenomAffiche = getPrenomAffiche(eleve?.nom);
   const isCmPrimary = eleveClasse === "cm1" || eleveClasse === "cm2";
 
   // Passe la classe de l'élève au coach quand le niveau est géré, pour qu'il
@@ -180,15 +189,8 @@ export default function AccueilPage() {
     catch { /* ignore */ }
   }
 
-  function getGreeting() {
-    const h = new Date().getHours();
-    if (h < 12) return "Bonjour";
-    if (h < 18) return "Bon après-midi";
-    return "Bonsoir";
-  }
-
   return (
-    <main className="min-h-screen bg-[#041B33] text-white overflow-x-hidden">
+    <main className="min-h-screen overflow-x-hidden bg-[#041B33] text-white">
 
       <h1 className="sr-only">EleveAI – Coach IA maths, français, anglais et espagnol. Du CP au Bac.</h1>
 
@@ -203,7 +205,7 @@ export default function AccueilPage() {
 
       {/* ── HERO — Image plein écran ────────────────────────────────────────── */}
       <section
-        className="relative w-full animate-gradient-shift"
+        className="relative w-full animate-gradient-shift px-3 pt-3 sm:px-6"
         style={{
           backgroundImage:
             "linear-gradient(115deg, #041B33 0%, #0a2a55 35%, #251355 65%, #041B33 100%)",
@@ -219,16 +221,16 @@ export default function AccueilPage() {
           height={1080}
           priority
           sizes="100vw"
-          className="h-auto block mx-auto w-full md:w-[53%]"
+          className="mx-auto block h-auto w-full max-w-5xl border-x border-b border-white/10 shadow-2xl md:w-[72%] xl:w-[56rem]"
         />
         {/* Fondu bas vers le fond de page */}
         <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-b from-transparent to-[#041B33]" />
 
-        {/* Greeting personnalisé flottant */}
-        {prenom && (
+        {/* Prénom uniquement : aucun nom de famille n'est affiché. */}
+        {prenomAffiche && (
           <div className="absolute top-4 left-1/2 -translate-x-1/2 z-10">
             <p className="rounded-full bg-black/50 border border-white/20 px-5 py-2 text-sm font-black text-white backdrop-blur-sm whitespace-nowrap">
-              {getGreeting()}, {prenom} 👋
+              Bonjour, {prenomAffiche}
             </p>
           </div>
         )}
@@ -247,12 +249,15 @@ export default function AccueilPage() {
       </section>
 
       {/* ── CHEMINS CONSEILLÉS — suggestions personnalisées (idée d'Arthur) ───── */}
-      <section className="bg-[#041B33] px-4 pt-6 pb-2 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-5xl">
-          <div className="mb-4 text-center">
-            <h2 className="text-xl font-black text-white sm:text-2xl">
-              {prenom
-                ? `Que veux-tu travailler aujourd'hui, ${prenom} ?`
+      <section className="bg-[#041B33] px-4 pb-8 pt-6 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-6xl">
+          <div className="mb-5 text-center">
+            <p className="mb-1 text-xs font-black uppercase tracking-[0.18em] text-cyan-200/70">
+              Aujourd'hui
+            </p>
+            <h2 className="text-2xl font-black leading-tight text-white sm:text-3xl">
+              {prenomAffiche
+                ? `Que veux-tu travailler aujourd'hui, ${prenomAffiche} ?`
                 : "Que veux-tu travailler aujourd'hui ?"}
             </h2>
             {classeLabel ? (
@@ -272,19 +277,21 @@ export default function AccueilPage() {
                 key={s.href}
                 href={s.href}
                 className={[
-                  "group relative flex flex-col gap-1 overflow-hidden rounded-2xl p-4 text-left transition-transform hover:-translate-y-1 hover:scale-[1.03]",
+                  "group relative flex min-h-[132px] flex-col justify-between overflow-hidden rounded-2xl p-4 text-left transition-transform hover:-translate-y-1 hover:scale-[1.03]",
                   // Premier chemin (matière principale) mis en avant par le halo néon.
                   i === 0 ? "animate-neon-pulse" : "",
                 ].join(" ")}
               >
                 <div className={`absolute inset-0 bg-gradient-to-br ${s.tone} opacity-90 transition-opacity group-hover:opacity-100`} />
                 <span className="relative z-10 text-2xl">{s.icon}</span>
-                <p className="relative z-10 text-sm font-black leading-tight text-white">
-                  {s.title}
-                </p>
-                <p className="relative z-10 text-[10px] font-semibold leading-tight text-white/75">
-                  {s.desc}
-                </p>
+                <div className="relative z-10">
+                  <p className="text-base font-black leading-tight text-white">
+                    {s.title}
+                  </p>
+                  <p className="mt-1 text-[11px] font-semibold leading-tight text-white/80">
+                    {s.desc}
+                  </p>
+                </div>
               </Link>
             ))}
           </div>
@@ -292,15 +299,23 @@ export default function AccueilPage() {
       </section>
 
       {/* ── SUBJECT CARDS cliquables ────────────────────────────────────────── */}
-      <section className="bg-[#041B33] px-4 py-8 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-5xl">
+      <section className="bg-[#061f39] px-4 py-8 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-6xl">
+          <div className="mb-4">
+            <p className="text-xs font-black uppercase tracking-[0.18em] text-emerald-200/70">
+              Choisir une matière
+            </p>
+            <h2 className="mt-1 text-xl font-black text-white">
+              Les coachs principaux
+            </h2>
+          </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4">
             {visibleSubjects.map((subject) => (
               <Link
                 key={subject.label}
                 href={getHref(subject.href)}
                 className={[
-                  "group relative flex flex-col items-center justify-center gap-2 rounded-2xl border p-4 sm:p-5 text-center",
+                  "group relative flex min-h-[122px] flex-col items-center justify-center gap-2 rounded-2xl border p-4 sm:p-5 text-center",
                   "bg-white/5 backdrop-blur-md transition-all duration-300",
                   "hover:-translate-y-2 hover:scale-105",
                   `hover:shadow-2xl ${subject.glow}`,
@@ -328,14 +343,22 @@ export default function AccueilPage() {
       </section>
 
       {/* ── FEATURES BAR ─────────────────────────────────────────────────────── */}
-      <section className="bg-[#071f3a] border-t border-white/10 px-4 py-5 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-5xl">
+      <section className="bg-[#071f3a] border-y border-white/10 px-4 py-7 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-6xl">
+          <div className="mb-4">
+            <p className="text-xs font-black uppercase tracking-[0.18em] text-blue-200/70">
+              Progresser pas à pas
+            </p>
+            <h2 className="mt-1 text-xl font-black text-white">
+              Parcours guidés
+            </h2>
+          </div>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
             {FEATURES.map((f) => (
               <Link
                 key={f.label}
                 href={f.href}
-                className="group flex flex-col items-center gap-1.5 rounded-2xl border border-white/10 bg-white/5 px-3 py-4 text-center transition-all hover:bg-white/10 hover:border-white/25 hover:-translate-y-1"
+                className="group flex min-h-[104px] flex-col items-center justify-center gap-1.5 rounded-2xl border border-white/10 bg-white/5 px-3 py-4 text-center transition-all hover:bg-white/10 hover:border-white/25 hover:-translate-y-1"
               >
                 <span className="text-2xl group-hover:scale-110 transition-transform">{f.icon}</span>
                 <p className="text-xs font-black text-white">{f.label}</p>
@@ -348,7 +371,7 @@ export default function AccueilPage() {
 
       {/* ── NOUVEAUTÉS ───────────────────────────────────────────────────────── */}
       <section className="px-4 py-10 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-5xl">
+        <div className="mx-auto max-w-6xl">
           <div className="mb-4 flex items-center justify-between">
             <h2 className="text-lg font-black text-white">✨ Nouveautés</h2>
             <span className="text-xs font-bold text-white/40">Fais glisser →</span>
@@ -390,7 +413,7 @@ export default function AccueilPage() {
 
       {/* ── FEATURED BANNER ──────────────────────────────────────────────────── */}
       <section className="px-4 pb-12 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-5xl">
+        <div className="mx-auto max-w-6xl">
           {eleveClasse === "3e" || eleveClasse === "4e" ? (
             <Link href="/coach-brevet" className="group relative block h-[220px] overflow-hidden rounded-2xl shadow-2xl sm:h-[280px]">
               <Image src="/images/defis-du-jour/grand_raid_2026.webp" alt="Sprint Brevet" fill sizes="(max-width: 1200px) 100vw, 1200px" className="object-cover object-center transition-transform duration-700 group-hover:scale-[1.03]" />
@@ -428,7 +451,7 @@ export default function AccueilPage() {
 
       {/* ── CONFIANCE ────────────────────────────────────────────────────────── */}
       <section className="px-4 pb-10 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-5xl">
+        <div className="mx-auto max-w-6xl">
           <h2 className="text-lg font-black text-white mb-4">🤝 Une plateforme de confiance</h2>
           <div className="grid gap-3 sm:grid-cols-3">
             <Link
@@ -470,7 +493,7 @@ export default function AccueilPage() {
 
       {/* ── TARIFS ───────────────────────────────────────────────────────────── */}
       <section className="px-4 pb-12 sm:px-6 lg:px-8">
-        <div className="mx-auto flex max-w-5xl flex-col items-center justify-between gap-4 rounded-2xl border border-emerald-400/30 bg-emerald-400/10 p-6 sm:flex-row">
+        <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 rounded-2xl border border-emerald-400/30 bg-emerald-400/10 p-6 sm:flex-row">
           <div>
             <p className="text-base font-black text-white">💶 Des tarifs simples et justes</p>
             <p className="mt-1 text-sm leading-relaxed text-white/70">
