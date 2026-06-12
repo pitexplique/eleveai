@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useEleve } from "@/context/EleveContext";
 import { createClient } from "@/lib/supabase/client";
 import { ameliorationsRealisees } from "@/lib/ameliorations/realisees";
+import ElevesALHonneur from "@/components/ameliorations/ElevesALHonneur";
 
 type EmailUser = {
   auth_user_id: string;
@@ -200,6 +201,9 @@ export default function VotreAvisClient() {
           </header>
         </div>
       </section>
+
+      {/* ÉLÈVES À L'HONNEUR */}
+      <ElevesALHonneur />
 
       {/* VOUS L'AVEZ DEMANDÉ → C'EST FAIT */}
       <section className="mx-auto max-w-4xl px-4 pt-10 sm:pt-12">
