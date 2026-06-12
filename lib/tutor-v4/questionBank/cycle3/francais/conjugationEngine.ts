@@ -139,23 +139,44 @@ function pick<T>(items: readonly T[]): T {
   return items[randInt(items.length)];
 }
 
-const TENSE_LABEL: Record<ConjTense, string> = {
-  present: "present",
-  imparfait: "imparfait",
-  futur: "futur",
+// Avec elision correcte devant voyelle : "a l'imparfait", pas "au imparfait".
+const TENSE_PHRASE: Record<ConjTense, string> = {
+  present: "au present",
+  imparfait: "a l'imparfait",
+  futur: "au futur",
+};
+const TENSE_OF: Record<ConjTense, string> = {
+  present: "du present",
+  imparfait: "de l'imparfait",
+  futur: "du futur",
 };
 
-// Construit 3 distracteurs distincts : autres personnes, infinitif, autre temps.
-function buildWrongs(correct: string, sameTenseTable: string[], extra: string[]): string[] {
-  const pool = [...sameTenseTable, ...extra].filter(
-    (form, i, arr) => form !== correct && arr.indexOf(form) === i
-  );
-  // melange
-  for (let i = pool.length - 1; i > 0; i--) {
+// Construit TOUJOURS 3 distracteurs distincts (autres personnes, autres temps,
+// infinitif). Si les formes se repetent trop (je/tu identiques...), on complete
+// avec un dernier recours pour ne jamais rendre un QCM a moins de 4 choix.
+function buildWrongs(correct: string, ...pools: string[][]): string[] {
+  const seen = new Set<string>([correct]);
+  const flat = pools.flat();
+  for (let i = flat.length - 1; i > 0; i--) {
     const j = randInt(i + 1);
-    [pool[i], pool[j]] = [pool[j], pool[i]];
+    [flat[i], flat[j]] = [flat[j], flat[i]];
   }
-  return pool.slice(0, 3);
+  const out: string[] = [];
+  for (const form of flat) {
+    if (!seen.has(form)) {
+      seen.add(form);
+      out.push(form);
+      if (out.length === 3) return out;
+    }
+  }
+  for (const pad of [correct + "s", correct + "nt", correct + "ait", correct + "ons"]) {
+    if (!seen.has(pad)) {
+      seen.add(pad);
+      out.push(pad);
+      if (out.length === 3) return out;
+    }
+  }
+  return out;
 }
 
 // ── Generation d'une question de conjugaison ────────────────────────────────
@@ -175,15 +196,20 @@ export function generateConjugationItem(tense: ConjTense): ConjItem {
     if (Math.random() < 0.5) {
       return {
         kind: "short",
-        text: `Conjugue le verbe '${inf}' au ${TENSE_LABEL[tense]} avec '${PRONOUNS[person]}'.`,
+        text: `Conjugue le verbe '${inf}' ${TENSE_PHRASE[tense]} avec '${PRONOUNS[person]}'.`,
         answers: [correct],
-        methode: `On prend le radical de '${inf}' et la terminaison du ${TENSE_LABEL[tense]} pour '${PRONOUNS[person]}'.`,
+        methode: `On prend le radical de '${inf}' et la terminaison ${TENSE_OF[tense]} pour '${PRONOUNS[person]}'.`,
       };
     }
 
-    const otherTense: ConjTense = tense === "present" ? "imparfait" : "present";
-    const crossTable = conjugateRegular(inf, group, otherTense);
-    const wrongs = buildWrongs(correct, table, [inf, crossTable[person]]);
+    const others = (["present", "imparfait", "futur"] as ConjTense[]).filter((t) => t !== tense);
+    const wrongs = buildWrongs(
+      correct,
+      table,
+      conjugateRegular(inf, group, others[0]),
+      conjugateRegular(inf, group, others[1]),
+      [inf]
+    );
     return {
       kind: "qcm",
       text: `Choisis la bonne forme : '${inf}' au ${TENSE_LABEL[tense]} avec '${PRONOUNS[person]}'.`,
@@ -198,8 +224,8 @@ export function generateConjugationItem(tense: ConjTense): ConjItem {
   const table = verb[tense];
   const person = randInt(6);
   const correct = table[person];
-  const otherTense: ConjTense = tense === "futur" ? "present" : "futur";
-  const wrongs = buildWrongs(correct, table, [verb.inf, verb[otherTense][person]]);
+  const others = (["present", "imparfait", "futur"] as ConjTense[]).filter((t) => t !== tense);
+  const wrongs = buildWrongs(correct, table, verb[others[0]], verb[others[1]], [verb.inf]);
   return {
     kind: "qcm",
     text: `Choisis la bonne forme : '${verb.inf}' au ${TENSE_LABEL[tense]} avec '${PRONOUNS[person]}'.`,
@@ -232,7 +258,7 @@ export function generateInfinitifItem(): ConjItem {
       kind: "qcm",
       text: `A quel groupe appartient le verbe '${inf}' ?`,
       correct: groupLabel,
-      wrongs: ["1er groupe", "2e groupe", "3e groupe"].filter((g) => g !== groupLabel),
+      wrongs: ["1er groupe", "2e groupe", "3e groupe", "aucun des trois"].filter((g) => g !== groupLabel).slice(0, 3),
       methode: "Les verbes en -er (sauf aller) sont du 1er groupe ; ceux en -ir comme finir (nous finissons) du 2e.",
     };
   }
@@ -244,7 +270,12 @@ export function generateInfinitifItem(): ConjItem {
     kind: "qcm",
     text: `Quel est l'infinitif de la forme '${forme}' ?`,
     correct: verb.inf,
-    wrongs: buildWrongs(verb.inf, IRREGULARS.map((v) => v.inf), ["er", "ir"]),
+    wrongs: buildWrongs(
+      verb.inf,
+      IRREGULARS.map((v) => v.inf),
+      ER_VERBS.slice(0, 6),
+      IR_VERBS.slice(0, 6)
+    ),
     methode: "On retrouve la forme de base (l'infinitif) du verbe.",
   };
 }
