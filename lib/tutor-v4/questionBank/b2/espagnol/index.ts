@@ -1,4 +1,5 @@
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
+import { applyEsWrite } from "@/lib/tutor-v4/questionBank/esWriteTransform";
 
 const WORDS = [
   { slug: "globalizacion", es: "globalización", fr: "mondialisation", notionId: "es_b2_economics",   audio: "/audio/espagnol/economics/b2/globalizacion.mp3" },
@@ -94,7 +95,7 @@ const WORDS = [
 function dFr(exclude: string) { return WORDS.filter(w => w.fr !== exclude).map(w => w.fr).slice(0, 3); }
 function dEs(exclude: string) { return WORDS.filter(w => w.es !== exclude).map(w => w.es).slice(0, 3); }
 
-export const espagnolB2QuestionBank: TutorBankItemV4[] = WORDS.flatMap((word) => [
+const rawB2EsBank: TutorBankItemV4[] = WORDS.flatMap((word) => [
   {
     kind: "fixed" as const,
     id: `es_b2_${word.slug}_es_to_fr`,
@@ -143,3 +144,5 @@ export const espagnolB2QuestionBank: TutorBankItemV4[] = WORDS.flatMap((word) =>
     explanation: `Le mot entendu est "${word.es}" (${word.fr}).`,
   },
 ]);
+
+export const espagnolB2QuestionBank: TutorBankItemV4[] = applyEsWrite(rawB2EsBank);

@@ -1,4 +1,5 @@
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
+import { applyEsWrite } from "@/lib/tutor-v4/questionBank/esWriteTransform";
 
 import { digitsA1EsBank }    from "./digits.bank";
 import { numbersA1EsBank }   from "./numbers.bank";
@@ -19,7 +20,7 @@ import { geographyBasicA1EsBank }    from "./geography_basic.bank";
 import { scienceEarthA1EsBank }      from "./science_earth.bank";
 import { sportMeasurementsA1EsBank } from "./sport_measurements.bank";
 
-export const espagnolA1QuestionBank: TutorBankItemV4[] = [
+const rawA1EsBank: TutorBankItemV4[] = [
   ...digitsA1EsBank,
   ...numbersA1EsBank,
   ...operationsA1EsBank,
@@ -39,6 +40,8 @@ export const espagnolA1QuestionBank: TutorBankItemV4[] = [
   ...scienceEarthA1EsBank,
   ...sportMeasurementsA1EsBank,
 ];
+
+export const espagnolA1QuestionBank: TutorBankItemV4[] = applyEsWrite(rawA1EsBank);
 
 export function getEspagnolA1QuestionBank(args?: {
   notionId?: string | null;

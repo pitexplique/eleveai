@@ -1,4 +1,5 @@
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
+import { applyEsWrite } from "@/lib/tutor-v4/questionBank/esWriteTransform";
 
 const WORDS = [
   { slug: "medio_ambiente",  es: "medio ambiente",  fr: "environnement",         notionId: "es_b1_environment", audio: "/audio/espagnol/environment/b1/medio_ambiente.mp3"   },
@@ -99,7 +100,7 @@ const WORDS = [
 function dFr(exclude: string) { return WORDS.filter(w => w.fr !== exclude).map(w => w.fr).slice(0, 3); }
 function dEs(exclude: string) { return WORDS.filter(w => w.es !== exclude).map(w => w.es).slice(0, 3); }
 
-export const espagnolB1QuestionBank: TutorBankItemV4[] = WORDS.flatMap((word) => [
+const rawB1EsBank: TutorBankItemV4[] = WORDS.flatMap((word) => [
   {
     kind: "fixed" as const,
     id: `es_b1_${word.slug}_es_to_fr`,
@@ -148,3 +149,5 @@ export const espagnolB1QuestionBank: TutorBankItemV4[] = WORDS.flatMap((word) =>
     explanation: `Le mot entendu est "${word.es}" (${word.fr}).`,
   },
 ]);
+
+export const espagnolB1QuestionBank: TutorBankItemV4[] = applyEsWrite(rawB1EsBank);

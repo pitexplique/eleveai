@@ -1,4 +1,5 @@
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
+import { applyEsWrite } from "@/lib/tutor-v4/questionBank/esWriteTransform";
 
 // Vocabulaire A2 — vie quotidienne, voyage, métiers, budget, géographie, vivant, sport
 const WORDS = [
@@ -229,7 +230,7 @@ const wordQuestions: TutorBankItemV4[] = WORDS.flatMap((word) => {
   ];
 });
 
-export const espagnolA2QuestionBank: TutorBankItemV4[] = [
+export const espagnolA2QuestionBank: TutorBankItemV4[] = applyEsWrite([
   ...wordQuestions,
   ...sportVerbSentenceQuestions,
-];
+]);

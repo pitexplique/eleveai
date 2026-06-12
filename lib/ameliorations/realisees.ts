@@ -55,6 +55,11 @@ export const ameliorationsRealisees: AmeliorationRealisee[] = [
     fait: "La faute est corrigée.",
   },
   {
+    eleve: "Tamara",
+    demande: "Le Coach Espagnol ne proposait que des QCM ; on s'aide trop des réponses, il faudrait écrire.",
+    fait: "Quand le mot espagnol n'a pas d'accent, tu l'écris toi-même (sinon, ça reste un QCM).",
+  },
+  {
     eleve: "Éléna & les testeurs",
     demande: "La page des élèves testeurs avait disparu !",
     fait: "Elle est de retour, avec vos prénoms et vos contributions.",
