@@ -11,6 +11,10 @@ import {
   generateInfinitifItem,
   type ConjItem,
 } from "@/lib/tutor-v4/questionBank/cycle3/francais/conjugationEngine";
+import {
+  generateAgreementItem,
+  generateHomophoneItem,
+} from "@/lib/tutor-v4/questionBank/cycle3/francais/parametricFrench";
 
 type Cycle3PrimaryLevel = Extract<SchoolLevel, "cm1" | "cm2" | "6e">;
 
@@ -785,8 +789,13 @@ function conjugaisonQuestion(microId: string): Generated {
 }
 
 function grammaireQuestion(microId: string): Generated {
-  if (microId.includes("homophone")) return qcm(HOMOPHONES);
-  if (microId.includes("accord_gn")) return qcm(ACCORD_GN);
+  // Homophones : moteur parametrique (familles a/à, est/et, ces/ses, la/là,
+  // mes/mais) une fois sur deux, sinon pool redige (couvre aussi on/ont,
+  // son/sont, ou/où). Accord du GN : moteur parametrique (des milliers de GN).
+  if (microId.includes("homophone")) {
+    return Math.random() < 0.5 ? fromConjItem(generateHomophoneItem()) : qcm(HOMOPHONES);
+  }
+  if (microId.includes("accord_gn")) return fromConjItem(generateAgreementItem());
   if (microId.includes("orth_sujet_verbe")) return qcm(ACCORD_SUJET_VERBE);
   if (microId.includes("complement")) return qcm(COMPLEMENTS);
   if (microId.includes("gn")) return qcm(GN);
