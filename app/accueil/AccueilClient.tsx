@@ -263,6 +263,14 @@ export default function AccueilPage() {
         {/* L'image ne doit pas contenir d'éléments qui ressemblent à des boutons :
             les élèves essayaient de cliquer sur les cartes dessinées (retours du
             11-12/06/2026). Les vraies actions sont sous l'image. */}
+        <div className="relative z-10 mx-auto max-w-5xl px-4 py-5 text-center md:w-[72%] xl:w-[56rem]">
+          <p className="text-2xl font-black tracking-wide text-white sm:text-4xl">
+            La liberté d&apos;apprendre
+          </p>
+          <p className="mt-2 text-sm font-black tracking-[0.18em] text-yellow-300 sm:text-lg">
+            ε → ∞
+          </p>
+        </div>
         <Image
           src="/images/accueil-eleveai-reunion.webp"
           alt="EleveAI – Comprendre, S'entraîner, Réussir – CP à Terminale"
@@ -272,14 +280,6 @@ export default function AccueilPage() {
           sizes="100vw"
           className="mx-auto block h-auto w-full max-w-5xl border-x border-b border-white/10 shadow-2xl md:w-[72%] xl:w-[56rem]"
         />
-        <div className="relative z-10 mx-auto max-w-5xl px-4 py-4 text-center md:w-[72%] xl:w-[56rem]">
-          <p className="text-lg font-black tracking-wide text-white sm:text-2xl">
-            La liberté d&apos;apprendre
-          </p>
-          <p className="mt-1 text-sm font-bold text-cyan-100/75 sm:text-base">
-            ε engendre ∞
-          </p>
-        </div>
         {/* Fondu bas vers le fond de page */}
         <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-b from-transparent to-[#041B33]" />
 
