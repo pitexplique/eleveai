@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 
 import { useEleve } from "@/context/EleveContext";
+import ClassementAvis from "@/components/points/ClassementAvis";
 
 type EleveSession = {
   acces_id?: string | null;
@@ -505,6 +506,12 @@ export default function DashboardEleveClient() {
                 </p>
               </div>
             </div>
+
+            {eleve?.token ? (
+              <div className="mt-6">
+                <ClassementAvis token={eleve.token} />
+              </div>
+            ) : null}
 
             <div className="mt-6 grid gap-6 xl:grid-cols-2">
               <div className="rounded-[2rem] bg-white p-6 shadow-xl ring-1 ring-slate-100">
