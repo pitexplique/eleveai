@@ -820,4 +820,768 @@ export const pythagore3eBank: TutorBankItemV4[] = [
       };
     },
   },
+
+  // =========================
+  // RECONNAÎTRE (compléments)
+  // =========================
+  {
+    kind: "fixed",
+    id: "pythagore_theoreme_reconnaitre_fixed_3",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "pythagore_theoreme",
+    microId: "pythagore_reconnaitre",
+    difficulty: 1,
+    theme: "neutral",
+    text: "Dans un triangle rectangle, l’hypoténuse est…",
+    format: "qcm",
+    choices: ["le plus long côté", "le plus court côté", "un côté de l’angle droit", "toujours vertical"],
+    expected: ["le plus long côté"],
+    comparator: "mcq_exact",
+    hint: "Elle est en face de l’angle droit.",
+    explanation:
+      "Définition : l’hypoténuse est le côté opposé à l’angle droit.\n\n" +
+      "Méthode : on repère l’angle droit, puis le côté en face.\n\n" +
+      "Calcul : ce côté est aussi le plus long du triangle rectangle.\n\n" +
+      "Conclusion : l’hypoténuse est le plus long côté.",
+    tags: ["pythagore_theoreme", "reconnaitre", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "pythagore_theoreme_reconnaitre_tpl_2",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "pythagore_theoreme",
+    microId: "pythagore_reconnaitre",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "L’hypoténuse est opposée à l’angle droit.",
+    tags: ["pythagore_theoreme", "reconnaitre", "canvas", "template"],
+    generate: () => {
+      const labels = randomChoice(triangleNames);
+      return {
+        text: `Dans un triangle rectangle en ${labels.A}, quel côté est l’hypoténuse ?`,
+        format: "qcm",
+        choices: shuffle([
+          sideName(labels, "BC"),
+          sideName(labels, "AB"),
+          sideName(labels, "CA"),
+        ]),
+        expected: [sideName(labels, "BC")],
+        comparator: "mcq_exact",
+        explanation:
+          `Définition : l’hypoténuse est le côté opposé à l’angle droit.\n\n` +
+          `Méthode : l’angle droit est en ${labels.A}, on cherche le côté en face.\n\n` +
+          `Calcul : le côté opposé à ${labels.A} est ${sideName(labels, "BC")}.\n\n` +
+          `Conclusion : l’hypoténuse est ${sideName(labels, "BC")}.`,
+        canvas: rightTriangleFigure({ labels }),
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "pythagore_theoreme_reconnaitre_fixed_4",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "pythagore_theoreme",
+    microId: "pythagore_reconnaitre",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Le théorème de Pythagore relie…",
+    format: "qcm",
+    choices: [
+      "les carrés des longueurs des trois côtés",
+      "les angles du triangle",
+      "le périmètre et l’aire",
+      "les diagonales",
+    ],
+    expected: ["les carrés des longueurs des trois côtés"],
+    comparator: "mcq_exact",
+    hint: "On parle de carrés de longueurs.",
+    explanation:
+      "Définition : dans un triangle rectangle, $\\text{hypoténuse}^2 = \\text{côté}_1^2 + \\text{côté}_2^2$.\n\n" +
+      "Méthode : on observe ce que relie l’égalité.\n\n" +
+      "Calcul : elle relie les carrés des trois longueurs.\n\n" +
+      "Conclusion : le théorème relie les carrés des longueurs des côtés.",
+    tags: ["pythagore_theoreme", "reconnaitre", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "pythagore_theoreme_reconnaitre_fixed_5",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "pythagore_theoreme",
+    microId: "pythagore_reconnaitre",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Dans un triangle rectangle en $A$, quelle égalité de Pythagore est correcte ?",
+    format: "qcm",
+    choices: ["$BC^2 = AB^2 + AC^2$", "$AB^2 = BC^2 + AC^2$", "$AC^2 = AB^2 + BC^2$", "$BC = AB + AC$"],
+    expected: ["$BC^2 = AB^2 + AC^2$"],
+    comparator: "mcq_exact",
+    hint: "Le carré de l’hypoténuse est égal à la somme des carrés des deux autres.",
+    explanation:
+      "Définition : dans un triangle rectangle en $A$, l’hypoténuse est $BC$.\n\n" +
+      "Méthode : on écrit que le carré de l’hypoténuse est la somme des carrés des deux côtés de l’angle droit.\n\n" +
+      "Calcul : $BC^2 = AB^2 + AC^2$.\n\n" +
+      "Conclusion : la bonne égalité est $BC^2 = AB^2 + AC^2$.",
+    canvas: rightTriangleFigure({}),
+    tags: ["pythagore_theoreme", "reconnaitre", "egalite", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "pythagore_theoreme_reconnaitre_fixed_6",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "pythagore_theoreme",
+    microId: "pythagore_reconnaitre",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Dans un triangle rectangle, les deux côtés de l’angle droit s’appellent aussi…",
+    format: "qcm",
+    choices: ["les côtés adjacents à l’angle droit", "les hypoténuses", "les diagonales", "les médianes"],
+    expected: ["les côtés adjacents à l’angle droit"],
+    comparator: "mcq_exact",
+    hint: "Ils forment l’angle droit.",
+    explanation:
+      "Définition : les deux côtés qui forment l’angle droit sont les côtés de l’angle droit.\n\n" +
+      "Méthode : on repère les deux côtés qui se rejoignent en formant l’angle droit.\n\n" +
+      "Calcul : ils sont adjacents à l’angle droit.\n\n" +
+      "Conclusion : ce sont les côtés adjacents à l’angle droit.",
+    tags: ["pythagore_theoreme", "reconnaitre", "vocabulaire", "qcm"],
+  },
+
+  // =========================
+  // CALCULER L’HYPOTÉNUSE (compléments)
+  // =========================
+  {
+    kind: "template",
+    id: "pythagore_theoreme_calculer_hypotenuse_tpl_3",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "pythagore_theoreme",
+    microId: "pythagore_calculer_hypotenuse",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "On additionne les carrés des deux côtés de l’angle droit.",
+    tags: ["pythagore_theoreme", "hypotenuse", "short", "template"],
+    generate: () => {
+      const { a, b, c } = randomChoice(pythagoreanTriples);
+      return {
+        text: `Un triangle rectangle a pour côtés de l’angle droit ${a} cm et ${b} cm. Quelle est la longueur de l’hypoténuse (en cm) ?`,
+        format: "short",
+        expected: [String(c)],
+        comparator: "number_equal",
+        explanation:
+          `Définition : $\\text{hypoténuse}^2 = ${a}^2 + ${b}^2$.\n\n` +
+          `Méthode : on additionne les carrés, puis on prend la racine carrée.\n\n` +
+          `Calcul : $${a}^2 + ${b}^2 = ${a * a} + ${b * b} = ${c * c}$, donc $\\sqrt{${c * c}} = ${c}$.\n\n` +
+          `Conclusion : l’hypoténuse mesure $${c}$ cm.`,
+        canvas: rightTriangleFigure({
+          sideLabels: { AB: String(a), CA: String(b), BC: "?" },
+        }),
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "pythagore_theoreme_calculer_hypotenuse_fixed_2",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "pythagore_theoreme",
+    microId: "pythagore_calculer_hypotenuse",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Un triangle rectangle a des côtés de l’angle droit de $6$ cm et $8$ cm. Quelle est l’hypoténuse (en cm) ?",
+    format: "short",
+    expected: ["10"],
+    comparator: "number_equal",
+    hint: "$6^2 + 8^2 = 100$.",
+    explanation:
+      "Définition : $\\text{hypoténuse}^2 = 6^2 + 8^2$.\n\n" +
+      "Méthode : on additionne les carrés puis on prend la racine.\n\n" +
+      "Calcul : $36 + 64 = 100$, donc $\\sqrt{100} = 10$.\n\n" +
+      "Conclusion : l’hypoténuse mesure $10$ cm.",
+    tags: ["pythagore_theoreme", "hypotenuse", "short"],
+  },
+  {
+    kind: "template",
+    id: "pythagore_theoreme_calculer_hypotenuse_tpl_4_qcm",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "pythagore_theoreme",
+    microId: "pythagore_calculer_hypotenuse",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Écris d’abord l’égalité de Pythagore.",
+    tags: ["pythagore_theoreme", "hypotenuse", "qcm", "template"],
+    generate: () => {
+      const { a, b, c } = randomChoice(pythagoreanTriples);
+      return {
+        text: `Dans un triangle rectangle, les côtés de l’angle droit mesurent ${a} cm et ${b} cm. L’hypoténuse mesure…`,
+        format: "qcm",
+        choices: makeChoices(c, 7).map((v) => `$${v}$`),
+        expected: [`$${c}$`],
+        comparator: "mcq_exact",
+        explanation:
+          `Définition : $h^2 = ${a}^2 + ${b}^2$.\n\n` +
+          `Méthode : on calcule la somme des carrés puis la racine.\n\n` +
+          `Calcul : $h^2 = ${a * a} + ${b * b} = ${c * c}$, donc $h = ${c}$.\n\n` +
+          `Conclusion : l’hypoténuse mesure $${c}$ cm.`,
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "pythagore_theoreme_calculer_hypotenuse_tpl_5_diagonale",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "pythagore_theoreme",
+    microId: "pythagore_calculer_hypotenuse",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "La diagonale d’un rectangle est l’hypoténuse d’un triangle rectangle.",
+    tags: ["pythagore_theoreme", "hypotenuse", "diagonale", "template"],
+    generate: () => {
+      const { a, b, c } = randomChoice(pythagoreanTriples);
+      return {
+        text: `Un rectangle a pour dimensions ${a} cm et ${b} cm. Quelle est la longueur de sa diagonale (en cm) ?`,
+        format: "short",
+        expected: [String(c)],
+        comparator: "number_equal",
+        explanation:
+          `Définition : la diagonale partage le rectangle en deux triangles rectangles.\n\n` +
+          `Méthode : la diagonale est l’hypoténuse, on applique Pythagore.\n\n` +
+          `Calcul : $d^2 = ${a}^2 + ${b}^2 = ${c * c}$, donc $d = ${c}$.\n\n` +
+          `Conclusion : la diagonale mesure $${c}$ cm.`,
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "pythagore_theoreme_calculer_hypotenuse_fixed_3_piege",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "pythagore_theoreme",
+    microId: "pythagore_calculer_hypotenuse",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Pour calculer l’hypoténuse à partir des deux côtés de l’angle droit, on doit…",
+    format: "qcm",
+    choices: [
+      "additionner les carrés puis prendre la racine carrée",
+      "soustraire les carrés",
+      "additionner les longueurs",
+      "multiplier les longueurs",
+    ],
+    expected: ["additionner les carrés puis prendre la racine carrée"],
+    comparator: "mcq_exact",
+    hint: "L’hypoténuse est plus grande que chaque côté de l’angle droit.",
+    explanation:
+      "Définition : $\\text{hypoténuse}^2 = \\text{côté}_1^2 + \\text{côté}_2^2$.\n\n" +
+      "Méthode : on additionne les carrés des deux côtés de l’angle droit.\n\n" +
+      "Calcul : puis on prend la racine carrée du résultat.\n\n" +
+      "Conclusion : on additionne les carrés, puis on prend la racine carrée.",
+    tags: ["pythagore_theoreme", "hypotenuse", "methode", "qcm"],
+  },
+
+  // =========================
+  // CALCULER UN CÔTÉ DE L’ANGLE DROIT (compléments)
+  // =========================
+  {
+    kind: "template",
+    id: "pythagore_theoreme_calculer_cote_tpl_3",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "pythagore_theoreme",
+    microId: "pythagore_calculer_cote",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "On soustrait les carrés.",
+    tags: ["pythagore_theoreme", "cote", "short", "template"],
+    generate: () => {
+      const t = randomChoice(pythagoreanTriples);
+      const known = randomChoice([t.a, t.b]);
+      const missing = known === t.a ? t.b : t.a;
+      return {
+        text: `Dans un triangle rectangle, l’hypoténuse mesure ${t.c} cm et un côté de l’angle droit mesure ${known} cm. Quelle est la longueur de l’autre côté (en cm) ?`,
+        format: "short",
+        expected: [String(missing)],
+        comparator: "number_equal",
+        explanation:
+          `Définition : pour un côté de l’angle droit, $\\text{côté}^2 = \\text{hypoténuse}^2 - \\text{autre côté}^2$.\n\n` +
+          `Méthode : on soustrait les carrés.\n\n` +
+          `Calcul : $${t.c}^2 - ${known}^2 = ${t.c * t.c} - ${known * known} = ${missing * missing}$, donc $\\sqrt{${missing * missing}} = ${missing}$.\n\n` +
+          `Conclusion : l’autre côté mesure $${missing}$ cm.`,
+        canvas: rightTriangleFigure({
+          sideLabels: {
+            AB: known === t.a ? String(t.a) : "?",
+            CA: known === t.b ? String(t.b) : "?",
+            BC: String(t.c),
+          },
+        }),
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "pythagore_theoreme_calculer_cote_fixed_2",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "pythagore_theoreme",
+    microId: "pythagore_calculer_cote",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Un triangle rectangle a une hypoténuse de $13$ cm et un côté de l’angle droit de $5$ cm. Quelle est la longueur de l’autre côté (en cm) ?",
+    format: "short",
+    expected: ["12"],
+    comparator: "number_equal",
+    hint: "$13^2 - 5^2 = 144$.",
+    explanation:
+      "Définition : $\\text{côté}^2 = \\text{hypoténuse}^2 - \\text{autre côté}^2$.\n\n" +
+      "Méthode : on soustrait les carrés.\n\n" +
+      "Calcul : $13^2 - 5^2 = 169 - 25 = 144$, donc $\\sqrt{144} = 12$.\n\n" +
+      "Conclusion : l’autre côté mesure $12$ cm.",
+    tags: ["pythagore_theoreme", "cote", "short"],
+  },
+  {
+    kind: "template",
+    id: "pythagore_theoreme_calculer_cote_tpl_4_qcm",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "pythagore_theoreme",
+    microId: "pythagore_calculer_cote",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "On soustrait les carrés, pas on additionne.",
+    tags: ["pythagore_theoreme", "cote", "qcm", "template"],
+    generate: () => {
+      const t = randomChoice(pythagoreanTriples);
+      const known = t.a;
+      const missing = t.b;
+      return {
+        text: `Dans un triangle rectangle, l’hypoténuse mesure ${t.c} cm et un côté de l’angle droit mesure ${known} cm. L’autre côté mesure…`,
+        format: "qcm",
+        choices: makeChoices(missing, 7).map((v) => `$${v}$`),
+        expected: [`$${missing}$`],
+        comparator: "mcq_exact",
+        explanation:
+          `Définition : on cherche un côté de l’angle droit.\n\n` +
+          `Méthode : on soustrait les carrés : $${t.c}^2 - ${known}^2$.\n\n` +
+          `Calcul : $${t.c * t.c} - ${known * known} = ${missing * missing}$, donc le côté vaut $${missing}$.\n\n` +
+          `Conclusion : l’autre côté mesure $${missing}$ cm.`,
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "pythagore_theoreme_calculer_cote_tpl_5_echelle",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "pythagore_theoreme",
+    microId: "pythagore_calculer_cote",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "L’échelle s’appuie contre un mur : Pythagore relie longueur, hauteur et distance au mur.",
+    tags: ["pythagore_theoreme", "cote", "probleme", "template"],
+    generate: () => {
+      const t = randomChoice(pythagoreanTriples);
+      const hyp = t.c;
+      const base = t.a;
+      const haut = t.b;
+      return {
+        text: `Une échelle de ${hyp} m est posée contre un mur. Son pied est à ${base} m du mur. À quelle hauteur (en m) l’échelle touche-t-elle le mur ?`,
+        format: "short",
+        expected: [String(haut)],
+        comparator: "number_equal",
+        explanation:
+          `Définition : l’échelle (hypoténuse), le sol et le mur forment un triangle rectangle.\n\n` +
+          `Méthode : $\\text{hauteur}^2 = \\text{échelle}^2 - \\text{distance}^2$.\n\n` +
+          `Calcul : $${hyp}^2 - ${base}^2 = ${hyp * hyp} - ${base * base} = ${haut * haut}$, donc $\\sqrt{${haut * haut}} = ${haut}$.\n\n` +
+          `Conclusion : l’échelle touche le mur à $${haut}$ m.`,
+      };
+    },
+  },
+
+  // =========================
+  // RÉCIPROQUE (compléments)
+  // =========================
+  {
+    kind: "template",
+    id: "pythagore_theoreme_reciproque_tpl_3",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "pythagore_theoreme",
+    microId: "pythagore_reciproque",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Compare le carré du plus grand côté à la somme des carrés des deux autres.",
+    tags: ["pythagore_theoreme", "reciproque", "qcm", "template"],
+    generate: () => {
+      const isRight = randomChoice([true, false]);
+      const t = isRight ? randomChoice(pythagoreanTriples) : randomChoice(falseTriples);
+      return {
+        text: `Un triangle a pour côtés ${t.a} cm, ${t.b} cm et ${t.c} cm. Est-il rectangle ?`,
+        format: "qcm",
+        choices: ["oui", "non"],
+        expected: [t.a * t.a + t.b * t.b === t.c * t.c ? "oui" : "non"],
+        comparator: "mcq_exact",
+        explanation:
+          `Définition : d’après la réciproque, le triangle est rectangle si le carré du plus grand côté égale la somme des carrés des deux autres.\n\n` +
+          `Méthode : on compare $${t.a}^2 + ${t.b}^2$ et $${t.c}^2$.\n\n` +
+          `Calcul : $${t.a * t.a + t.b * t.b}$ et $${t.c * t.c}$.\n\n` +
+          `Conclusion : ${
+            t.a * t.a + t.b * t.b === t.c * t.c
+              ? "les carrés sont égaux, le triangle est rectangle."
+              : "les carrés diffèrent, le triangle n’est pas rectangle."
+          }`,
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "pythagore_theoreme_reciproque_fixed_2",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "pythagore_theoreme",
+    microId: "pythagore_reciproque",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Pour utiliser la réciproque de Pythagore, on compare…",
+    format: "qcm",
+    choices: [
+      "le carré du plus grand côté à la somme des carrés des deux autres",
+      "les trois angles",
+      "les périmètres",
+      "le plus grand côté à la somme des deux autres",
+    ],
+    expected: ["le carré du plus grand côté à la somme des carrés des deux autres"],
+    comparator: "mcq_exact",
+    hint: "On travaille avec des carrés de longueurs.",
+    explanation:
+      "Définition : la réciproque compare le carré du plus grand côté à la somme des carrés des deux autres.\n\n" +
+      "Méthode : on repère le plus grand côté, puis on calcule les carrés.\n\n" +
+      "Calcul : si l’égalité est vérifiée, le triangle est rectangle.\n\n" +
+      "Conclusion : on compare le carré du plus grand côté à la somme des carrés des deux autres.",
+    tags: ["pythagore_theoreme", "reciproque", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "pythagore_theoreme_reciproque_fixed_3",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "pythagore_theoreme",
+    microId: "pythagore_reciproque",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Un triangle a pour côtés $9$ cm, $12$ cm et $15$ cm. Est-il rectangle ?",
+    format: "qcm",
+    choices: ["oui", "non"],
+    expected: ["oui"],
+    comparator: "mcq_exact",
+    hint: "Compare $9^2 + 12^2$ et $15^2$.",
+    explanation:
+      "Définition : on applique la réciproque de Pythagore.\n\n" +
+      "Méthode : on compare $9^2 + 12^2$ et $15^2$.\n\n" +
+      "Calcul : $81 + 144 = 225$ et $15^2 = 225$ : égalité vérifiée.\n\n" +
+      "Conclusion : oui, le triangle est rectangle.",
+    tags: ["pythagore_theoreme", "reciproque", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "pythagore_theoreme_reciproque_fixed_4_nonrectangle",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "pythagore_theoreme",
+    microId: "pythagore_reciproque",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Un triangle a pour côtés $4$ cm, $5$ cm et $6$ cm. Est-il rectangle ?",
+    format: "qcm",
+    choices: ["non", "oui"],
+    expected: ["non"],
+    comparator: "mcq_exact",
+    hint: "Compare $4^2 + 5^2$ et $6^2$.",
+    explanation:
+      "Définition : on applique la réciproque de Pythagore.\n\n" +
+      "Méthode : on compare $4^2 + 5^2$ et $6^2$.\n\n" +
+      "Calcul : $16 + 25 = 41$ alors que $6^2 = 36$ : pas d’égalité.\n\n" +
+      "Conclusion : non, le triangle n’est pas rectangle.",
+    tags: ["pythagore_theoreme", "reciproque", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "pythagore_theoreme_reciproque_fixed_5_angle_droit",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "pythagore_theoreme",
+    microId: "pythagore_reciproque",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Un triangle $ABC$ avec $AB = 6$, $AC = 8$, $BC = 10$ est rectangle. En quel sommet se trouve l’angle droit ?",
+    format: "qcm",
+    choices: ["en $A$", "en $B$", "en $C$", "il n’y a pas d’angle droit"],
+    expected: ["en $A$"],
+    comparator: "mcq_exact",
+    hint: "L’angle droit est opposé au plus grand côté (l’hypoténuse).",
+    explanation:
+      "Définition : l’hypoténuse est le plus grand côté ; l’angle droit est à son sommet opposé.\n\n" +
+      "Méthode : le plus grand côté est $BC = 10$, donc l’angle droit est opposé à $BC$.\n\n" +
+      "Calcul : le sommet opposé à $BC$ est $A$.\n\n" +
+      "Conclusion : l’angle droit est en $A$.",
+    tags: ["pythagore_theoreme", "reciproque", "angle_droit", "qcm"],
+  },
+
+  // =========================
+  // RÉDIGER (compléments)
+  // =========================
+  {
+    kind: "fixed",
+    id: "pythagore_theoreme_rediger_fixed_3",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "pythagore_theoreme",
+    microId: "pythagore_rediger",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Dans une rédaction avec Pythagore direct, quelle est la première chose à écrire ?",
+    format: "qcm",
+    choices: [
+      "que le triangle est rectangle et où",
+      "le résultat final",
+      "le périmètre",
+      "la liste des angles",
+    ],
+    expected: ["que le triangle est rectangle et où"],
+    comparator: "mcq_exact",
+    hint: "Pythagore direct suppose le triangle déjà rectangle.",
+    explanation:
+      "Définition : le théorème direct s’applique à un triangle dont on sait qu’il est rectangle.\n\n" +
+      "Méthode : on commence par préciser que le triangle est rectangle et en quel sommet.\n\n" +
+      "Calcul : ensuite seulement, on écrit l’égalité de Pythagore.\n\n" +
+      "Conclusion : on indique d’abord que le triangle est rectangle et où.",
+    tags: ["pythagore_theoreme", "rediger", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "pythagore_theoreme_rediger_fixed_4_ordre",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "pythagore_theoreme",
+    microId: "pythagore_rediger",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Quel est le bon ordre pour rédiger un calcul de longueur avec Pythagore ?",
+    format: "qcm",
+    choices: [
+      "phrase de départ → égalité de Pythagore → calcul → conclusion",
+      "calcul → conclusion → phrase de départ",
+      "conclusion → calcul → égalité",
+      "égalité → conclusion → phrase de départ",
+    ],
+    expected: ["phrase de départ → égalité de Pythagore → calcul → conclusion"],
+    comparator: "mcq_exact",
+    hint: "On part de l’hypothèse, on applique le théorème, on calcule, on conclut.",
+    explanation:
+      "Définition : une rédaction suit une logique : hypothèse, théorème, calcul, conclusion.\n\n" +
+      "Méthode : on annonce le triangle rectangle, puis on écrit l’égalité, on calcule, on conclut.\n\n" +
+      "Calcul : cet ordre rend la démonstration claire.\n\n" +
+      "Conclusion : phrase de départ → égalité de Pythagore → calcul → conclusion.",
+    tags: ["pythagore_theoreme", "rediger", "ordre", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "pythagore_theoreme_rediger_fixed_5_reciproque_phrase",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "pythagore_theoreme",
+    microId: "pythagore_rediger",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Pour conclure avec la réciproque, quelle phrase convient ?",
+    format: "qcm",
+    choices: [
+      "« les carrés sont égaux, donc d’après la réciproque de Pythagore, le triangle est rectangle »",
+      "« le triangle est rectangle, donc je calcule l’hypoténuse »",
+      "« les côtés sont parallèles »",
+      "« le périmètre est égal à l’aire »",
+    ],
+    expected: [
+      "« les carrés sont égaux, donc d’après la réciproque de Pythagore, le triangle est rectangle »",
+    ],
+    comparator: "mcq_exact",
+    hint: "On conclut sur la nature du triangle, pas sur une longueur.",
+    explanation:
+      "Définition : la réciproque permet de conclure qu’un triangle est rectangle.\n\n" +
+      "Méthode : après avoir comparé les carrés, on conclut sur la nature du triangle.\n\n" +
+      "Calcul : si l’égalité est vérifiée, le triangle est rectangle.\n\n" +
+      "Conclusion : on écrit « les carrés sont égaux, donc d’après la réciproque, le triangle est rectangle ».",
+    tags: ["pythagore_theoreme", "rediger", "reciproque", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "pythagore_theoreme_rediger_fixed_6_erreur",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "pythagore_theoreme",
+    microId: "pythagore_rediger",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Un élève écrit directement « d’après Pythagore, $BC^2 = AB^2 + AC^2$ » sans préciser que le triangle est rectangle en $A$. Sa rédaction est-elle complète ?",
+    format: "qcm",
+    choices: ["non", "oui"],
+    expected: ["non"],
+    comparator: "mcq_exact",
+    hint: "Le théorème direct exige de dire que le triangle est rectangle.",
+    explanation:
+      "Définition : le théorème direct s’applique seulement à un triangle rectangle.\n\n" +
+      "Méthode : on doit préciser que le triangle est rectangle et en quel sommet.\n\n" +
+      "Calcul : sans cette hypothèse, l’égalité n’est pas justifiée.\n\n" +
+      "Conclusion : non, la rédaction n’est pas complète.",
+    tags: ["pythagore_theoreme", "rediger", "erreur", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "pythagore_theoreme_rediger_tpl_1",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "pythagore_theoreme",
+    microId: "pythagore_rediger",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "On part toujours du triangle rectangle, puis de l’égalité.",
+    tags: ["pythagore_theoreme", "rediger", "qcm", "template"],
+    generate: () => {
+      const labels = randomChoice(triangleNames);
+      const correct = `Dans le triangle ${sideName(labels, "AB")}${labels.C} rectangle en ${labels.A}, d’après le théorème de Pythagore, $${sideName(
+        labels,
+        "BC"
+      )}^2 = ${sideName(labels, "AB")}^2 + ${sideName(labels, "CA")}^2$`;
+      return {
+        text: `Quelle phrase commence correctement une rédaction de Pythagore dans un triangle rectangle en ${labels.A} ?`,
+        format: "qcm",
+        choices: shuffle([
+          correct,
+          `Comme ${labels.A}, ${labels.B}, ${labels.C} sont alignés, d’après Pythagore…`,
+          `Le périmètre vaut ${sideName(labels, "AB")} + ${sideName(labels, "BC")} + ${sideName(labels, "CA")}`,
+          `Les côtés sont parallèles, donc d’après Pythagore…`,
+        ]),
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation:
+          `Définition : on commence par énoncer le triangle rectangle et le théorème.\n\n` +
+          `Méthode : on précise « rectangle en ${labels.A} », puis l’égalité.\n\n` +
+          `Calcul : $${sideName(labels, "BC")}^2 = ${sideName(labels, "AB")}^2 + ${sideName(labels, "CA")}^2$.\n\n` +
+          `Conclusion : la bonne phrase mentionne le triangle rectangle puis l’égalité de Pythagore.`,
+      };
+    },
+  },
+
+  // =========================
+  // DÉFIS (compléments)
+  // =========================
+  {
+    kind: "template",
+    id: "pythagore_theoreme_defi_tpl_3_diagonale_carre",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "pythagore_theoreme",
+    microId: "pythagore_defi",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Modélise par un triangle rectangle dont l’hypoténuse est la distance cherchée.",
+    tags: ["pythagore_theoreme", "defi", "probleme", "template"],
+    generate: () => {
+      const { a, b, c } = randomChoice(pythagoreanTriples);
+      return {
+        text: `Un terrain rectangulaire mesure ${a} m sur ${b} m. Quelle distance (en m) parcourt-on en traversant en diagonale ?`,
+        format: "short",
+        expected: [String(c)],
+        comparator: "number_equal",
+        explanation:
+          `Définition : la diagonale est l’hypoténuse d’un triangle rectangle.\n\n` +
+          `Méthode : on applique Pythagore avec les deux côtés du terrain.\n\n` +
+          `Calcul : $d^2 = ${a}^2 + ${b}^2 = ${c * c}$, donc $d = ${c}$.\n\n` +
+          `Conclusion : la diagonale mesure $${c}$ m.`,
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "pythagore_theoreme_defi_tpl_4_choix_methode",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "pythagore_theoreme",
+    microId: "pythagore_defi",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Calculer une longueur (triangle rectangle connu) vs vérifier qu’un triangle est rectangle.",
+    tags: ["pythagore_theoreme", "defi", "choix_methode", "qcm", "template"],
+    generate: () => {
+      const cherche = randomChoice([true, false]);
+      return {
+        text: cherche
+          ? "On sait qu’un triangle est rectangle et on veut calculer une longueur. On utilise…"
+          : "On connaît les trois longueurs et on veut savoir si le triangle est rectangle. On utilise…",
+        format: "qcm",
+        choices: shuffle([
+          "le théorème de Pythagore direct",
+          "la réciproque du théorème de Pythagore",
+        ]),
+        expected: [cherche ? "le théorème de Pythagore direct" : "la réciproque du théorème de Pythagore"],
+        comparator: "mcq_exact",
+        explanation:
+          `Définition : le théorème direct calcule une longueur ; la réciproque vérifie qu’un triangle est rectangle.\n\n` +
+          `Méthode : on choisit selon ce que l’on connaît et ce que l’on cherche.\n\n` +
+          `Calcul : ${
+            cherche
+              ? "ici le triangle est déjà rectangle et on cherche une longueur → théorème direct."
+              : "ici on connaît les trois côtés et on teste l’angle droit → réciproque."
+          }\n\n` +
+          `Conclusion : on utilise ${cherche ? "le théorème direct" : "la réciproque"}.`,
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "pythagore_theoreme_defi_fixed_1",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "pythagore_theoreme",
+    microId: "pythagore_defi",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Une porte rectangulaire mesure $2{,}0$ m de haut et $1{,}5$ m de large. Quelle est la longueur de sa diagonale (en m) ?",
+    format: "short",
+    expected: ["2.5", "2,5"],
+    comparator: "number_equal",
+    hint: "$2{,}0^2 + 1{,}5^2 = 6{,}25$.",
+    explanation:
+      "Définition : la diagonale est l’hypoténuse d’un triangle rectangle.\n\n" +
+      "Méthode : on applique Pythagore avec la hauteur et la largeur.\n\n" +
+      "Calcul : $2{,}0^2 + 1{,}5^2 = 4 + 2{,}25 = 6{,}25$, donc $\\sqrt{6{,}25} = 2{,}5$.\n\n" +
+      "Conclusion : la diagonale mesure $2{,}5$ m.",
+    tags: ["pythagore_theoreme", "defi", "diagonale", "short"],
+  },
+  {
+    kind: "fixed",
+    id: "pythagore_theoreme_defi_fixed_2_brevet",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "pythagore_theoreme",
+    microId: "pythagore_defi",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Un mât est maintenu par un câble de $13$ m fixé au sol à $5$ m du pied du mât. À quelle hauteur (en m) le câble est-il attaché sur le mât ?",
+    format: "short",
+    expected: ["12"],
+    comparator: "number_equal",
+    hint: "Le câble est l’hypoténuse : $13^2 - 5^2$.",
+    explanation:
+      "Définition : le mât, le sol et le câble forment un triangle rectangle.\n\n" +
+      "Méthode : la hauteur est un côté de l’angle droit : $\\text{hauteur}^2 = 13^2 - 5^2$.\n\n" +
+      "Calcul : $169 - 25 = 144$, donc $\\sqrt{144} = 12$.\n\n" +
+      "Conclusion : le câble est attaché à $12$ m.",
+    tags: ["pythagore_theoreme", "defi", "brevet", "short"],
+  },
 ];

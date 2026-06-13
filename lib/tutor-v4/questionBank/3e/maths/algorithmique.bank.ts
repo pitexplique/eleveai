@@ -1300,4 +1300,776 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     };
   },
 },
+
+/* =========================
+   CONDITION_COMPLEXE (compléments)
+========================= */
+{
+  kind: "fixed",
+  id: "3e_algo_condition_fixed_3_et",
+  niveau: "3e",
+  matiere: "maths",
+  notionId: "algo_programmation",
+  microId: "algo_condition_complexe",
+  difficulty: 3,
+  theme: "neutral",
+  text: "Une condition « $x > 0$ ET $x < 10$ » est vraie lorsque…",
+  format: "qcm",
+  choices: [
+    "$x$ est strictement entre $0$ et $10$",
+    "$x$ est négatif",
+    "$x$ vaut $0$ ou $10$",
+    "$x$ est supérieur à $10$",
+  ],
+  expected: ["$x$ est strictement entre $0$ et $10$"],
+  comparator: "mcq_exact",
+  hint: "« ET » exige que les deux conditions soient vraies.",
+  explanation:
+    "Définition : une condition « ET » est vraie si les deux conditions sont vraies en même temps.\n\n" +
+    "Méthode : on vérifie $x > 0$ et $x < 10$.\n\n" +
+    "Calcul : cela impose $0 < x < 10$.\n\n" +
+    "Conclusion : $x$ est strictement entre $0$ et $10$.",
+  tags: ["algo_programmation", "condition", "et", "qcm"],
+},
+{
+  kind: "fixed",
+  id: "3e_algo_condition_fixed_4_ou",
+  niveau: "3e",
+  matiere: "maths",
+  notionId: "algo_programmation",
+  microId: "algo_condition_complexe",
+  difficulty: 3,
+  theme: "neutral",
+  text: "Une condition « $x < 0$ OU $x > 10$ » est vraie lorsque…",
+  format: "qcm",
+  choices: [
+    "$x$ est en dehors de l’intervalle $[0\\,;\\,10]$",
+    "$x$ est entre $0$ et $10$",
+    "$x$ vaut exactement $5$",
+    "$x$ est toujours vraie",
+  ],
+  expected: ["$x$ est en dehors de l’intervalle $[0\\,;\\,10]$"],
+  comparator: "mcq_exact",
+  hint: "« OU » est vraie si au moins une des conditions est vraie.",
+  explanation:
+    "Définition : une condition « OU » est vraie dès qu’une des deux conditions est vraie.\n\n" +
+    "Méthode : on regarde si $x < 0$ ou si $x > 10$.\n\n" +
+    "Calcul : ces deux cas correspondent à l’extérieur de $[0\\,;\\,10]$.\n\n" +
+    "Conclusion : $x$ est en dehors de l’intervalle $[0\\,;\\,10]$.",
+  tags: ["algo_programmation", "condition", "ou", "qcm"],
+},
+{
+  kind: "template",
+  id: "3e_algo_condition_tpl_5_et_evaluation",
+  niveau: "3e",
+  matiere: "maths",
+  notionId: "algo_programmation",
+  microId: "algo_condition_complexe",
+  difficulty: 4,
+  theme: "neutral",
+  hint: "Pour « ET », les deux conditions doivent être vraies.",
+  tags: ["algo_programmation", "condition", "et", "template"],
+  generate: () => {
+    const x = randomChoice([-2, 3, 6, 9, 12]);
+    const ok = x > 0 && x < 10;
+    return {
+      text: `La variable x vaut ${x}. La condition « x > 0 ET x < 10 » est-elle vraie ?`,
+      format: "qcm",
+      choices: shuffle(["vrai", "faux"]),
+      expected: [ok ? "vrai" : "faux"],
+      comparator: "mcq_exact",
+      explanation:
+        `Définition : une condition « ET » exige les deux parties vraies.\n\n` +
+        `Méthode : on teste $x > 0$ et $x < 10$.\n\n` +
+        `Calcul : pour $x = ${x}$, $x > 0$ est ${x > 0 ? "vrai" : "faux"} et $x < 10$ est ${x < 10 ? "vrai" : "faux"}.\n\n` +
+        `Conclusion : la condition est ${ok ? "vraie" : "fausse"}.`,
+      canvas: scratchCanvas("Condition ET", [
+        { type: "event" },
+        { type: "set_variable", variable: "x", value: x },
+        {
+          type: "if_else",
+          condition: "x > 0 et x < 10",
+          children: [{ type: "say", text: "dans la zone" }],
+          elseChildren: [{ type: "say", text: "hors zone" }],
+        },
+      ]),
+    };
+  },
+},
+{
+  kind: "fixed",
+  id: "3e_algo_condition_fixed_5_negation",
+  niveau: "3e",
+  matiere: "maths",
+  notionId: "algo_programmation",
+  microId: "algo_condition_complexe",
+  difficulty: 4,
+  theme: "neutral",
+  text: "Quel est le contraire de la condition « $x \\geq 5$ » ?",
+  format: "qcm",
+  choices: ["$x < 5$", "$x > 5$", "$x \\leq 5$", "$x = 5$"],
+  expected: ["$x < 5$"],
+  comparator: "mcq_exact",
+  hint: "Le contraire de « supérieur ou égal » est « strictement inférieur ».",
+  explanation:
+    "Définition : la négation inverse la condition.\n\n" +
+    "Méthode : le contraire de $\\geq 5$ est $< 5$.\n\n" +
+    "Calcul : si « $x \\geq 5$ » est faux, alors $x < 5$.\n\n" +
+    "Conclusion : le contraire est $x < 5$.",
+  tags: ["algo_programmation", "condition", "negation", "qcm"],
+},
+{
+  kind: "template",
+  id: "3e_algo_condition_tpl_6_ou_evaluation",
+  niveau: "3e",
+  matiere: "maths",
+  notionId: "algo_programmation",
+  microId: "algo_condition_complexe",
+  difficulty: 4,
+  theme: "neutral",
+  hint: "Pour « OU », il suffit qu’une condition soit vraie.",
+  tags: ["algo_programmation", "condition", "ou", "template"],
+  generate: () => {
+    const x = randomChoice([-3, 2, 7, 11, 15]);
+    const ok = x < 0 || x > 10;
+    return {
+      text: `La variable x vaut ${x}. La condition « x < 0 OU x > 10 » est-elle vraie ?`,
+      format: "qcm",
+      choices: shuffle(["vrai", "faux"]),
+      expected: [ok ? "vrai" : "faux"],
+      comparator: "mcq_exact",
+      explanation:
+        `Définition : une condition « OU » est vraie dès qu’une partie est vraie.\n\n` +
+        `Méthode : on teste $x < 0$ puis $x > 10$.\n\n` +
+        `Calcul : pour $x = ${x}$, $x < 0$ est ${x < 0 ? "vrai" : "faux"} et $x > 10$ est ${x > 10 ? "vrai" : "faux"}.\n\n` +
+        `Conclusion : la condition est ${ok ? "vraie" : "fausse"}.`,
+    };
+  },
+},
+
+/* =========================
+   VARIABLE_BOUCLE (compléments)
+========================= */
+{
+  kind: "template",
+  id: "3e_algo_variable_tpl_5_produit",
+  niveau: "3e",
+  matiere: "maths",
+  notionId: "algo_programmation",
+  microId: "algo_variable_boucle",
+  difficulty: 4,
+  theme: "neutral",
+  hint: "À chaque tour, on multiplie la variable.",
+  tags: ["algo_programmation", "variable", "boucle", "produit", "template"],
+  generate: () => {
+    const start = randomChoice([1, 2]);
+    const facteur = randomChoice([2, 3]);
+    const fois = randomChoice([2, 3]);
+    let v = start;
+    for (let i = 0; i < fois; i++) v *= facteur;
+    return {
+      text: `p vaut ${start}. On répète ${fois} fois : multiplier p par ${facteur}. Quelle est la valeur finale de p ?`,
+      format: "short",
+      expected: [String(v)],
+      comparator: "number_equal",
+      explanation:
+        `Définition : une boucle peut aussi multiplier une variable.\n\n` +
+        `Méthode : on multiplie par ${facteur} à chaque tour.\n\n` +
+        `Calcul : ${start} × ${facteur}${fois > 1 ? ` (×${facteur})`.repeat(fois - 1) : ""} = ${v}.\n\n` +
+        `Conclusion : la valeur finale est ${v}.`,
+      canvas: scratchCanvas("Boucle multiplicative", [
+        { type: "event" },
+        { type: "set_variable", variable: "p", value: start },
+        {
+          type: "repeat",
+          times: fois,
+          children: [{ type: "operator", text: `multiplier p par ${facteur}` }],
+        },
+        { type: "say", text: "p" },
+      ]),
+    };
+  },
+},
+{
+  kind: "fixed",
+  id: "3e_algo_variable_fixed_2_echange",
+  niveau: "3e",
+  matiere: "maths",
+  notionId: "algo_programmation",
+  microId: "algo_variable_boucle",
+  difficulty: 4,
+  theme: "neutral",
+  text: "a vaut 3 et b vaut 7. On exécute « mettre a à b ». Que valent a et b ensuite ?",
+  format: "qcm",
+  choices: ["a = 7 et b = 7", "a = 3 et b = 3", "a = 7 et b = 3", "a = 3 et b = 7"],
+  expected: ["a = 7 et b = 7"],
+  comparator: "mcq_exact",
+  hint: "« mettre a à b » recopie la valeur de b dans a.",
+  explanation:
+    "Définition : « mettre a à b » remplace la valeur de a par celle de b.\n\n" +
+    "Méthode : on recopie b dans a, b ne change pas.\n\n" +
+    "Calcul : a devient 7, b reste 7.\n\n" +
+    "Conclusion : a = 7 et b = 7.",
+  tags: ["algo_programmation", "variable", "affectation", "qcm"],
+},
+{
+  kind: "template",
+  id: "3e_algo_variable_tpl_6_double_compteur",
+  niveau: "3e",
+  matiere: "maths",
+  notionId: "algo_programmation",
+  microId: "algo_variable_boucle",
+  difficulty: 3,
+  theme: "neutral",
+  hint: "On ajoute la même valeur à chaque tour.",
+  tags: ["algo_programmation", "variable", "boucle", "template"],
+  generate: () => {
+    const start = randomChoice([0, 1, 2]);
+    const pas = randomChoice([2, 5, 10]);
+    const fois = randomChoice([3, 4, 6]);
+    const final = start + pas * fois;
+    return {
+      text: `total vaut ${start}. On répète ${fois} fois : ajouter ${pas} à total. Quelle est la valeur finale de total ?`,
+      format: "short",
+      expected: [String(final)],
+      comparator: "number_equal",
+      explanation:
+        `Définition : une boucle additionne ${pas} à chaque tour.\n\n` +
+        `Méthode : valeur finale = départ + pas × nombre de tours.\n\n` +
+        `Calcul : ${start} + ${pas} × ${fois} = ${final}.\n\n` +
+        `Conclusion : la valeur finale est ${final}.`,
+      canvas: scratchCanvas("Accumulateur", [
+        { type: "event" },
+        { type: "set_variable", variable: "total", value: start },
+        {
+          type: "repeat",
+          times: fois,
+          children: [{ type: "change_variable", variable: "total", value: pas }],
+        },
+        { type: "say", text: "total" },
+      ]),
+    };
+  },
+},
+{
+  kind: "fixed",
+  id: "3e_algo_variable_fixed_3_init",
+  niveau: "3e",
+  matiere: "maths",
+  notionId: "algo_programmation",
+  microId: "algo_variable_boucle",
+  difficulty: 3,
+  theme: "neutral",
+  text: "Pourquoi faut-il initialiser une variable avant une boucle qui l’augmente ?",
+  format: "qcm",
+  choices: [
+    "pour fixer sa valeur de départ",
+    "pour la supprimer",
+    "pour arrêter la boucle",
+    "ce n’est jamais nécessaire",
+  ],
+  expected: ["pour fixer sa valeur de départ"],
+  comparator: "mcq_exact",
+  hint: "Sans valeur de départ, on ne sait pas d’où part le calcul.",
+  explanation:
+    "Définition : initialiser, c’est donner une première valeur à la variable.\n\n" +
+    "Méthode : on fixe le point de départ avant d’ajouter dans la boucle.\n\n" +
+    "Calcul : sans initialisation, le résultat final serait imprévisible.\n\n" +
+    "Conclusion : on initialise pour fixer la valeur de départ.",
+  tags: ["algo_programmation", "variable", "initialisation", "qcm"],
+},
+
+/* =========================
+   PROGRAMME_CALCUL (compléments)
+========================= */
+{
+  kind: "template",
+  id: "3e_algo_programme_tpl_5_trace",
+  niveau: "3e",
+  matiere: "maths",
+  notionId: "algo_programmation",
+  microId: "algo_programme_calcul",
+  difficulty: 3,
+  theme: "neutral",
+  hint: "Suis les étapes dans l’ordre.",
+  tags: ["algo_programmation", "programme_calcul", "trace", "template"],
+  generate: () => {
+    const x = randomChoice([2, 3, 4, 5]);
+    const a = randomChoice([2, 3]);
+    const b = randomChoice([1, 4, 5]);
+    const res = a * x + b;
+    return {
+      text: `On choisit ${x}, on multiplie par ${a}, puis on ajoute ${b}. Quel résultat obtient-on ?`,
+      format: "short",
+      expected: [String(res)],
+      comparator: "number_equal",
+      explanation:
+        `Définition : un programme de calcul applique des opérations dans l’ordre.\n\n` +
+        `Méthode : on suit les étapes l’une après l’autre.\n\n` +
+        `Calcul : ${x} × ${a} = ${a * x}, puis + ${b} = ${res}.\n\n` +
+        `Conclusion : le résultat est ${res}.`,
+    };
+  },
+},
+{
+  kind: "template",
+  id: "3e_algo_programme_tpl_6_retrouver",
+  niveau: "3e",
+  matiere: "maths",
+  notionId: "algo_programmation",
+  microId: "algo_programme_calcul",
+  difficulty: 5,
+  theme: "neutral",
+  hint: "Résous l’équation associée au programme.",
+  tags: ["algo_programmation", "programme_calcul", "equation", "template"],
+  generate: () => {
+    const a = randomChoice([2, 3, 4]);
+    const b = randomChoice([3, 5, 6]);
+    const x = randomChoice([2, 3, 4, 5]);
+    const res = a * x + b;
+    return {
+      text: `Un programme calcule ${a}x + ${b}. Le résultat affiché est ${res}. Quel nombre x avait-on choisi ?`,
+      format: "short",
+      expected: [String(x)],
+      comparator: "number_equal",
+      explanation:
+        `Définition : retrouver le nombre de départ revient à résoudre une équation.\n\n` +
+        `Méthode : on résout ${a}x + ${b} = ${res}.\n\n` +
+        `Calcul : ${a}x = ${res - b}, donc x = ${x}.\n\n` +
+        `Conclusion : on avait choisi ${x}.`,
+    };
+  },
+},
+{
+  kind: "fixed",
+  id: "3e_algo_programme_qcm_1_expression",
+  niveau: "3e",
+  matiere: "maths",
+  notionId: "algo_programmation",
+  microId: "algo_programme_calcul",
+  difficulty: 4,
+  theme: "neutral",
+  text: "On choisit un nombre, on le multiplie par $5$, puis on enlève $2$. Quelle expression correspond ?",
+  format: "qcm",
+  choices: ["$5x - 2$", "$5(x - 2)$", "$x - 10$", "$2 - 5x$"],
+  expected: ["$5x - 2$"],
+  comparator: "mcq_exact",
+  hint: "On multiplie d’abord, puis on soustrait.",
+  explanation:
+    "Définition : on traduit le programme avec la variable $x$.\n\n" +
+    "Méthode : multiplier par $5$ donne $5x$, puis enlever $2$ donne $5x - 2$.\n\n" +
+    "Calcul : l’expression est $5x - 2$.\n\n" +
+    "Conclusion : c’est $5x - 2$.",
+  tags: ["algo_programmation", "programme_calcul", "expression", "qcm"],
+},
+{
+  kind: "template",
+  id: "3e_algo_programme_tpl_7_parentheses",
+  niveau: "3e",
+  matiere: "maths",
+  notionId: "algo_programmation",
+  microId: "algo_programme_calcul",
+  difficulty: 4,
+  theme: "neutral",
+  hint: "Calcule la valeur finale en respectant l’ordre.",
+  tags: ["algo_programmation", "programme_calcul", "parentheses", "template"],
+  generate: () => {
+    const x = randomChoice([2, 3, 4]);
+    const b = randomChoice([1, 2, 5]);
+    const a = randomChoice([2, 3]);
+    const res = a * (x + b);
+    return {
+      text: `On choisit ${x}, on ajoute ${b}, puis on multiplie par ${a}. Quel résultat obtient-on ?`,
+      format: "short",
+      expected: [String(res)],
+      comparator: "number_equal",
+      explanation:
+        `Définition : l’ordre des opérations doit être respecté.\n\n` +
+        `Méthode : on ajoute d’abord, puis on multiplie.\n\n` +
+        `Calcul : ${x} + ${b} = ${x + b}, puis × ${a} = ${res}.\n\n` +
+        `Conclusion : le résultat est ${res}.`,
+    };
+  },
+},
+{
+  kind: "fixed",
+  id: "3e_algo_programme_qcm_2_egal",
+  niveau: "3e",
+  matiere: "maths",
+  notionId: "algo_programmation",
+  microId: "algo_programme_calcul",
+  difficulty: 3,
+  theme: "neutral",
+  text: "Deux programmes de calcul donnent le même résultat pour toutes les valeurs de $x$. On dit qu’ils sont…",
+  format: "qcm",
+  choices: ["équivalents", "opposés", "inverses", "aléatoires"],
+  expected: ["équivalents"],
+  comparator: "mcq_exact",
+  hint: "Ils produisent toujours le même résultat.",
+  explanation:
+    "Définition : deux expressions qui donnent toujours le même résultat sont équivalentes.\n\n" +
+    "Méthode : on vérifie qu’elles coïncident pour toute valeur de $x$.\n\n" +
+    "Calcul : par exemple $2(x + 3)$ et $2x + 6$ sont équivalentes.\n\n" +
+    "Conclusion : on dit qu’ils sont équivalents.",
+  tags: ["algo_programmation", "programme_calcul", "equivalent", "qcm"],
+},
+
+/* =========================
+   CORRIGER (compléments)
+========================= */
+{
+  kind: "fixed",
+  id: "3e_algo_corriger_fixed_2_init",
+  niveau: "3e",
+  matiere: "maths",
+  notionId: "algo_programmation",
+  microId: "algo_corriger",
+  difficulty: 4,
+  theme: "neutral",
+  text: "Un programme doit additionner des nombres mais oublie d’initialiser le total. Quel est le problème ?",
+  format: "qcm",
+  choices: [
+    "le total part d’une valeur inconnue",
+    "la boucle ne s’exécute jamais",
+    "les nombres sont supprimés",
+    "il n’y a aucun problème",
+  ],
+  expected: ["le total part d’une valeur inconnue"],
+  comparator: "mcq_exact",
+  hint: "Sans initialisation, on ne sait pas d’où part le total.",
+  explanation:
+    "Définition : une variable d’accumulation doit être initialisée (souvent à 0).\n\n" +
+    "Méthode : on vérifie que le total démarre à une valeur connue.\n\n" +
+    "Calcul : sans initialisation, le résultat est imprévisible.\n\n" +
+    "Conclusion : le total part d’une valeur inconnue.",
+  tags: ["algo_programmation", "correction", "initialisation", "qcm"],
+},
+{
+  kind: "fixed",
+  id: "3e_algo_corriger_fixed_3_operateur",
+  niveau: "3e",
+  matiere: "maths",
+  notionId: "algo_programmation",
+  microId: "algo_corriger",
+  difficulty: 4,
+  theme: "neutral",
+  text: "Le programme doit calculer le double de $x$ mais utilise « ajouter 2 à x ». Quelle correction faut-il ?",
+  format: "qcm",
+  choices: [
+    "remplacer par « multiplier x par 2 »",
+    "remplacer par « ajouter 1 à x »",
+    "supprimer la variable x",
+    "ne rien changer",
+  ],
+  expected: ["remplacer par « multiplier x par 2 »"],
+  comparator: "mcq_exact",
+  hint: "Le double, c’est multiplier par $2$, pas ajouter $2$.",
+  explanation:
+    "Définition : le double de $x$ est $2x$, pas $x + 2$.\n\n" +
+    "Méthode : on compare l’objectif et l’instruction utilisée.\n\n" +
+    "Calcul : « ajouter 2 » donne $x + 2$, alors qu’on veut $2x$.\n\n" +
+    "Conclusion : il faut « multiplier x par 2 ».",
+  tags: ["algo_programmation", "correction", "operateur", "qcm"],
+},
+{
+  kind: "template",
+  id: "3e_algo_corriger_tpl_4_repetitions",
+  niveau: "3e",
+  matiere: "maths",
+  notionId: "algo_programmation",
+  microId: "algo_corriger",
+  difficulty: 5,
+  theme: "neutral",
+  hint: "Nombre de répétitions = objectif ÷ pas.",
+  tags: ["algo_programmation", "correction", "boucle", "template"],
+  generate: () => {
+    const pas = randomChoice([2, 3, 5]);
+    const fois = randomChoice([3, 4, 5]);
+    const objectif = pas * fois;
+    return {
+      text: `On veut obtenir total = ${objectif} en partant de 0 et en ajoutant ${pas} à chaque répétition. Combien de répétitions faut-il programmer ?`,
+      format: "short",
+      expected: [String(fois)],
+      comparator: "number_equal",
+      explanation:
+        `Définition : corriger une boucle, c’est ajuster le nombre de répétitions.\n\n` +
+        `Méthode : on divise l’objectif par le pas.\n\n` +
+        `Calcul : ${objectif} ÷ ${pas} = ${fois}.\n\n` +
+        `Conclusion : il faut ${fois} répétitions.`,
+      canvas: scratchCanvas("Corriger la boucle", [
+        { type: "event" },
+        { type: "set_variable", variable: "total", value: 0 },
+        { type: "repeat", times: "?", children: [{ type: "change_variable", variable: "total", value: pas }] },
+        { type: "say", text: "total" },
+      ]),
+    };
+  },
+},
+{
+  kind: "fixed",
+  id: "3e_algo_corriger_fixed_4_strict",
+  niveau: "3e",
+  matiere: "maths",
+  notionId: "algo_programmation",
+  microId: "algo_corriger",
+  difficulty: 4,
+  theme: "neutral",
+  text: "Le programme doit accepter les notes supérieures ou égales à $10$, mais teste « note > 10 ». Comment corriger ?",
+  format: "qcm",
+  choices: [
+    "utiliser « note $\\geq$ 10 »",
+    "utiliser « note < 10 »",
+    "utiliser « note = 10 »",
+    "supprimer la condition",
+  ],
+  expected: ["utiliser « note $\\geq$ 10 »"],
+  comparator: "mcq_exact",
+  hint: "« supérieur ou égal » s’écrit $\\geq$.",
+  explanation:
+    "Définition : « supérieur ou égal » inclut la valeur $10$.\n\n" +
+    "Méthode : on remplace $>$ par $\\geq$.\n\n" +
+    "Calcul : avec $\\geq 10$, la note $10$ est acceptée.\n\n" +
+    "Conclusion : il faut utiliser « note $\\geq$ 10 ».",
+  tags: ["algo_programmation", "correction", "comparaison", "qcm"],
+},
+{
+  kind: "fixed",
+  id: "3e_algo_corriger_fixed_5_parentheses",
+  niveau: "3e",
+  matiere: "maths",
+  notionId: "algo_programmation",
+  microId: "algo_corriger",
+  difficulty: 5,
+  theme: "neutral",
+  text: "Objectif : ajouter $3$ à $x$ puis multiplier par $4$. Le programme calcule $4x + 3$. Quelle est l’erreur ?",
+  format: "qcm",
+  choices: [
+    "il manque des parenthèses : il faut $4(x + 3)$",
+    "il faut remplacer $4$ par $3$",
+    "il faut enlever le $x$",
+    "il n’y a pas d’erreur",
+  ],
+  expected: ["il manque des parenthèses : il faut $4(x + 3)$"],
+  comparator: "mcq_exact",
+  hint: "On ajoute avant de multiplier.",
+  explanation:
+    "Définition : l’ordre des opérations impose des parenthèses ici.\n\n" +
+    "Méthode : on ajoute $3$ d’abord ($x + 3$), puis on multiplie par $4$.\n\n" +
+    "Calcul : cela donne $4(x + 3)$, pas $4x + 3$.\n\n" +
+    "Conclusion : il manque des parenthèses : $4(x + 3)$.",
+  tags: ["algo_programmation", "correction", "parentheses", "qcm"],
+},
+{
+  kind: "fixed",
+  id: "3e_algo_corriger_fixed_6_ordre",
+  niveau: "3e",
+  matiere: "maths",
+  notionId: "algo_programmation",
+  microId: "algo_corriger",
+  difficulty: 4,
+  theme: "neutral",
+  text: "Un programme affiche le résultat AVANT d’avoir fait le calcul. Comment corriger ?",
+  format: "qcm",
+  choices: [
+    "déplacer l’affichage après le calcul",
+    "supprimer le calcul",
+    "ajouter une boucle",
+    "changer le nom de la variable",
+  ],
+  expected: ["déplacer l’affichage après le calcul"],
+  comparator: "mcq_exact",
+  hint: "L’ordre des instructions compte.",
+  explanation:
+    "Définition : un programme exécute les instructions dans l’ordre.\n\n" +
+    "Méthode : on place l’affichage après le calcul.\n\n" +
+    "Calcul : sinon, on affiche une valeur non encore calculée.\n\n" +
+    "Conclusion : il faut déplacer l’affichage après le calcul.",
+  tags: ["algo_programmation", "correction", "ordre", "qcm"],
+},
+{
+  kind: "template",
+  id: "3e_algo_corriger_tpl_5_seuil",
+  niveau: "3e",
+  matiere: "maths",
+  notionId: "algo_programmation",
+  microId: "algo_corriger",
+  difficulty: 5,
+  theme: "neutral",
+  hint: "Calcule la valeur finale, puis vérifie si elle dépasse le seuil.",
+  tags: ["algo_programmation", "correction", "seuil", "template"],
+  generate: () => {
+    const pas = randomChoice([3, 4, 5]);
+    const fois = randomChoice([3, 4]);
+    const seuil = randomChoice([10, 12]);
+    const final = pas * fois;
+    const ok = final > seuil;
+    return {
+      text: `Un programme part de 0 et ajoute ${pas}, ${fois} fois, puis teste « total > ${seuil} ». Le message « atteint » s’affiche-t-il ?`,
+      format: "qcm",
+      choices: shuffle(["oui", "non"]),
+      expected: [ok ? "oui" : "non"],
+      comparator: "mcq_exact",
+      explanation:
+        `Définition : on calcule la variable finale avant de tester la condition.\n\n` +
+        `Méthode : total = ${pas} × ${fois} = ${final}, puis on compare à ${seuil}.\n\n` +
+        `Calcul : ${final} > ${seuil} est ${ok ? "vrai" : "faux"}.\n\n` +
+        `Conclusion : le message « atteint » ${ok ? "s’affiche" : "ne s’affiche pas"}.`,
+    };
+  },
+},
+
+/* =========================
+   DÉFIS (compléments)
+========================= */
+{
+  kind: "template",
+  id: "3e_algo_defi_tpl_2_synthese",
+  niveau: "3e",
+  matiere: "maths",
+  notionId: "algo_programmation",
+  microId: "algo_defi",
+  difficulty: 5,
+  theme: "neutral",
+  hint: "Calcule la variable, puis teste la condition.",
+  tags: ["algo_programmation", "defi", "synthese", "template"],
+  generate: () => {
+    const start = randomChoice([1, 2, 3]);
+    const pas = randomChoice([2, 3]);
+    const fois = randomChoice([3, 4]);
+    const seuil = randomChoice([10, 12, 14]);
+    const final = start + pas * fois;
+    const msg = final >= seuil ? "réussi" : "raté";
+    return {
+      text: `score vaut ${start}. On répète ${fois} fois : ajouter ${pas}. Puis si score ≥ ${seuil}, afficher « réussi », sinon « raté ». Quel message s’affiche ?`,
+      format: "qcm",
+      choices: shuffle(["réussi", "raté"]),
+      expected: [msg],
+      comparator: "mcq_exact",
+      explanation:
+        `Définition : un algorithme combine variable, boucle et condition.\n\n` +
+        `Méthode : on calcule d’abord score, puis on teste.\n\n` +
+        `Calcul : score = ${start} + ${pas} × ${fois} = ${final}. ${final} ≥ ${seuil} est ${final >= seuil ? "vrai" : "faux"}.\n\n` +
+        `Conclusion : le programme affiche « ${msg} ».`,
+      canvas: scratchCanvas("Défi synthèse", [
+        { type: "event" },
+        { type: "set_variable", variable: "score", value: start },
+        { type: "repeat", times: fois, children: [{ type: "change_variable", variable: "score", value: pas }] },
+        {
+          type: "if_else",
+          condition: `score >= ${seuil}`,
+          children: [{ type: "say", text: "réussi" }],
+          elseChildren: [{ type: "say", text: "raté" }],
+        },
+      ]),
+    };
+  },
+},
+{
+  kind: "fixed",
+  id: "3e_algo_defi_qcm_1_boucle_utile",
+  niveau: "3e",
+  matiere: "maths",
+  notionId: "algo_programmation",
+  microId: "algo_defi",
+  difficulty: 4,
+  theme: "neutral",
+  text: "Dans quel cas une boucle est-elle la plus utile ?",
+  format: "qcm",
+  choices: [
+    "répéter plusieurs fois la même action",
+    "afficher un seul message",
+    "déclarer une seule variable",
+    "écrire une seule condition",
+  ],
+  expected: ["répéter plusieurs fois la même action"],
+  comparator: "mcq_exact",
+  hint: "Une boucle sert à la répétition.",
+  explanation:
+    "Définition : une boucle répète automatiquement des instructions.\n\n" +
+    "Méthode : on l’utilise quand une même action revient plusieurs fois.\n\n" +
+    "Calcul : cela évite de recopier les blocs.\n\n" +
+    "Conclusion : une boucle est utile pour répéter plusieurs fois la même action.",
+  tags: ["algo_programmation", "defi", "boucle", "qcm"],
+},
+{
+  kind: "template",
+  id: "3e_algo_defi_tpl_3_compteur_condition",
+  niveau: "3e",
+  matiere: "maths",
+  notionId: "algo_programmation",
+  microId: "algo_defi",
+  difficulty: 5,
+  theme: "neutral",
+  hint: "Compte les répétitions nécessaires pour dépasser le seuil.",
+  tags: ["algo_programmation", "defi", "seuil", "template"],
+  generate: () => {
+    const pas = randomChoice([3, 4, 5]);
+    const seuil = randomChoice([10, 12, 20]);
+    let total = 0;
+    let n = 0;
+    while (total <= seuil) {
+      total += pas;
+      n++;
+    }
+    return {
+      text: `On part de 0 et on ajoute ${pas} à chaque étape. Combien d’étapes faut-il pour dépasser strictement ${seuil} ?`,
+      format: "short",
+      expected: [String(n)],
+      comparator: "number_equal",
+      explanation:
+        `Définition : on cherche le nombre d’étapes pour dépasser un seuil.\n\n` +
+        `Méthode : on ajoute ${pas} jusqu’à dépasser ${seuil}.\n\n` +
+        `Calcul : après ${n} étapes, le total vaut ${total} > ${seuil}.\n\n` +
+        `Conclusion : il faut ${n} étapes.`,
+    };
+  },
+},
+{
+  kind: "fixed",
+  id: "3e_algo_defi_qcm_2_variable",
+  niveau: "3e",
+  matiere: "maths",
+  notionId: "algo_programmation",
+  microId: "algo_defi",
+  difficulty: 4,
+  theme: "neutral",
+  text: "À quoi sert une variable dans un programme ?",
+  format: "qcm",
+  choices: [
+    "à stocker une valeur qui peut changer",
+    "à dessiner une figure",
+    "à arrêter le programme",
+    "à ralentir le programme",
+  ],
+  expected: ["à stocker une valeur qui peut changer"],
+  comparator: "mcq_exact",
+  hint: "Une variable mémorise une valeur.",
+  explanation:
+    "Définition : une variable est un emplacement qui mémorise une valeur.\n\n" +
+    "Méthode : on l’utilise pour conserver et modifier une valeur.\n\n" +
+    "Calcul : la valeur peut évoluer pendant l’exécution.\n\n" +
+    "Conclusion : une variable sert à stocker une valeur qui peut changer.",
+  tags: ["algo_programmation", "defi", "variable", "qcm"],
+},
+{
+  kind: "fixed",
+  id: "3e_algo_defi_fixed_2_brevet_trace",
+  niveau: "3e",
+  matiere: "maths",
+  notionId: "algo_programmation",
+  microId: "algo_defi",
+  difficulty: 5,
+  theme: "neutral",
+  text: "On part de score = 5, on répète 3 fois « ajouter 4 ». Quelle est la valeur finale de score ?",
+  format: "short",
+  expected: ["17"],
+  comparator: "number_equal",
+  hint: "$5 + 4 \\times 3$.",
+  explanation:
+    "Définition : la boucle ajoute $4$ trois fois.\n\n" +
+    "Méthode : valeur finale = départ + pas × nombre de tours.\n\n" +
+    "Calcul : $5 + 4 \\times 3 = 5 + 12 = 17$.\n\n" +
+    "Conclusion : la valeur finale est $17$.",
+  tags: ["algo_programmation", "defi", "brevet", "short"],
+},
 ];

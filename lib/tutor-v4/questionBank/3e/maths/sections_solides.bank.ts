@@ -1157,4 +1157,883 @@ export const sectionsSolidesBank: TutorBankItemV4[] = [
       };
     },
   },
+
+  /* =========================
+     SECTION_RECONNAITRE (compléments)
+  ========================= */
+  {
+    kind: "fixed",
+    id: "3e_section_reconnaitre_fixed_2",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "sections_solides",
+    microId: "section_reconnaitre",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Une section plane d’un solide est toujours…",
+    format: "qcm",
+    choices: ["une figure plane", "un autre solide", "un volume", "une droite"],
+    expected: ["une figure plane"],
+    comparator: "mcq_exact",
+    hint: "Un plan produit une figure plane.",
+    explanation:
+      "Définition : une section est l’intersection d’un solide et d’un plan.\n\n" +
+      "Méthode : on regarde ce que produit la coupe par un plan.\n\n" +
+      "Observation : la coupe est une figure plane (carré, rectangle, disque…).\n\n" +
+      "Conclusion : une section plane est toujours une figure plane.",
+    tags: ["section", "reconnaitre", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "3e_section_reconnaitre_fixed_3",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "sections_solides",
+    microId: "section_reconnaitre",
+    difficulty: 2,
+    theme: "neutral",
+    text: "La forme d’une section dépend…",
+    format: "qcm",
+    choices: [
+      "du solide et de la position du plan",
+      "seulement de la couleur du solide",
+      "seulement du volume",
+      "de rien, elle est toujours identique",
+    ],
+    expected: ["du solide et de la position du plan"],
+    comparator: "mcq_exact",
+    hint: "Deux éléments interviennent.",
+    explanation:
+      "Définition : une section dépend du solide coupé et de l’orientation du plan.\n\n" +
+      "Méthode : on fait varier le plan pour voir des sections différentes.\n\n" +
+      "Observation : un même cylindre donne un disque ou un rectangle selon la coupe.\n\n" +
+      "Conclusion : la forme dépend du solide et de la position du plan.",
+    tags: ["section", "reconnaitre", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "3e_section_reconnaitre_fixed_4_dimension",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "sections_solides",
+    microId: "section_reconnaitre",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Un solide a trois dimensions. Une section plane en a…",
+    format: "qcm",
+    choices: ["deux", "trois", "une", "zéro"],
+    expected: ["deux"],
+    comparator: "mcq_exact",
+    hint: "Une figure plane est en deux dimensions.",
+    explanation:
+      "Définition : une section est une figure plane.\n\n" +
+      "Méthode : on compte les dimensions d’une figure plane.\n\n" +
+      "Observation : une figure plane a deux dimensions (longueur et largeur).\n\n" +
+      "Conclusion : une section plane a deux dimensions.",
+    tags: ["section", "reconnaitre", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "3e_section_reconnaitre_tpl_1",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "sections_solides",
+    microId: "section_reconnaitre",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Une section parallèle à une face reproduit la forme de cette face.",
+    tags: ["section", "reconnaitre", "canvas", "template"],
+    generate: () => {
+      return {
+        text: "On coupe un cube par un plan parallèle à une face. La section est…",
+        format: "qcm",
+        choices: shuffle(["un carré", "un triangle", "un disque", "un losange"]),
+        expected: ["un carré"],
+        comparator: "mcq_exact",
+        explanation:
+          "Définition : une section parallèle à une face reproduit cette face.\n\n" +
+          "Méthode : on regarde la forme de la face du cube.\n\n" +
+          "Observation : les faces d’un cube sont des carrés.\n\n" +
+          "Conclusion : la section est un carré.",
+        canvas: sectionSolideCanvas({
+          solide: "cube",
+          section: "parallele_face",
+          labels: { titre: "Section d’un cube", section: "carré" },
+          display: { showLabels: true, showSectionName: true, showPlane: true },
+        }),
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "3e_section_reconnaitre_fixed_5_couteau",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "sections_solides",
+    microId: "section_reconnaitre",
+    difficulty: 1,
+    theme: "neutral",
+    text: "Couper une carotte (cylindrique) bien droit, perpendiculairement à sa longueur, donne une tranche en forme de…",
+    format: "qcm",
+    choices: ["disque", "rectangle", "triangle", "carré"],
+    expected: ["disque"],
+    comparator: "mcq_exact",
+    hint: "On coupe perpendiculairement à l’axe : la tranche a la forme de la base.",
+    explanation:
+      "Définition : une coupe perpendiculaire à l’axe d’un cylindre est parallèle aux bases.\n\n" +
+      "Méthode : la section a la forme des bases.\n\n" +
+      "Observation : les bases d’un cylindre sont des disques.\n\n" +
+      "Conclusion : la tranche est un disque.",
+    tags: ["section", "reconnaitre", "cylindre", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "3e_section_reconnaitre_fixed_6_vocabulaire",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "sections_solides",
+    microId: "section_reconnaitre",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Le plan qui coupe le solide pour former la section s’appelle…",
+    format: "qcm",
+    choices: ["le plan de coupe", "l’arête", "le sommet", "la base"],
+    expected: ["le plan de coupe"],
+    comparator: "mcq_exact",
+    hint: "C’est la surface plane qui traverse le solide.",
+    explanation:
+      "Définition : le plan qui tranche le solide est le plan de coupe.\n\n" +
+      "Méthode : on identifie l’élément qui réalise la coupe.\n\n" +
+      "Observation : c’est une surface plane traversant le solide.\n\n" +
+      "Conclusion : on l’appelle le plan de coupe.",
+    tags: ["section", "reconnaitre", "vocabulaire", "qcm"],
+  },
+
+  /* =========================
+     SECTION_PAVE_CUBE (compléments)
+  ========================= */
+  {
+    kind: "fixed",
+    id: "3e_section_pave_cube_fixed_2",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "sections_solides",
+    microId: "section_pave_cube",
+    difficulty: 2,
+    theme: "neutral",
+    text: "On coupe un pavé droit par un plan parallèle à une face. La section est…",
+    format: "qcm",
+    choices: ["un rectangle", "un disque", "un triangle", "un losange"],
+    expected: ["un rectangle"],
+    comparator: "mcq_exact",
+    hint: "Les faces d’un pavé droit sont des rectangles.",
+    explanation:
+      "Définition : une section parallèle à une face reproduit cette face.\n\n" +
+      "Méthode : on regarde la forme des faces du pavé.\n\n" +
+      "Observation : les faces d’un pavé droit sont des rectangles.\n\n" +
+      "Conclusion : la section est un rectangle.",
+    canvas: sectionSolideCanvas({
+      solide: "pave_droit",
+      section: "parallele_face",
+      labels: { titre: "Section d’un pavé droit", section: "rectangle" },
+      display: { showLabels: true, showSectionName: true, showPlane: true },
+    }),
+    tags: ["section", "pave", "qcm", "canvas"],
+  },
+  {
+    kind: "fixed",
+    id: "3e_section_pave_cube_fixed_3_cube_carre",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "sections_solides",
+    microId: "section_pave_cube",
+    difficulty: 2,
+    theme: "neutral",
+    text: "On coupe un cube par un plan parallèle à une arête et perpendiculaire à une face. La section est un rectangle ou un carré. Pour un cube, c’est le plus souvent…",
+    format: "qcm",
+    choices: ["un rectangle", "un disque", "un triangle", "un cercle"],
+    expected: ["un rectangle"],
+    comparator: "mcq_exact",
+    hint: "On obtient une figure à angles droits.",
+    explanation:
+      "Définition : une section d’un cube par un plan « droit » est un quadrilatère à angles droits.\n\n" +
+      "Méthode : on observe la coupe.\n\n" +
+      "Observation : on obtient un rectangle (parfois un carré).\n\n" +
+      "Conclusion : c’est un rectangle.",
+    canvas: sectionSolideCanvas({
+      solide: "cube",
+      section: "verticale",
+      labels: { titre: "Section verticale d’un cube", section: "rectangle" },
+      display: { showLabels: true, showSectionName: true, showPlane: true },
+    }),
+    tags: ["section", "cube", "qcm", "canvas"],
+  },
+  {
+    kind: "template",
+    id: "3e_section_pave_cube_tpl_1",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "sections_solides",
+    microId: "section_pave_cube",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Section parallèle à une face → même forme que la face.",
+    tags: ["section", "pave", "cube", "canvas", "template"],
+    generate: () => {
+      const cube = randomChoice([true, false]);
+      const forme = cube ? "un carré" : "un rectangle";
+      return {
+        text: `On coupe ${cube ? "un cube" : "un pavé droit"} par un plan parallèle à une face. Quelle est la forme de la section ?`,
+        format: "qcm",
+        choices: shuffle(["un carré", "un rectangle", "un disque", "un triangle"]),
+        expected: [forme],
+        comparator: "mcq_exact",
+        explanation:
+          `Définition : une section parallèle à une face reproduit cette face.\n\n` +
+          `Méthode : on regarde la forme des faces.\n\n` +
+          `Observation : ${cube ? "les faces d’un cube sont des carrés" : "les faces d’un pavé droit sont des rectangles"}.\n\n` +
+          `Conclusion : la section est ${forme}.`,
+        canvas: sectionSolideCanvas({
+          solide: cube ? "cube" : "pave_droit",
+          section: "parallele_face",
+          labels: { titre: "Section parallèle à une face", section: forme },
+          display: { showLabels: true, showSectionName: true, showPlane: true },
+        }),
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "3e_section_pave_cube_fixed_4_dimensions",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "sections_solides",
+    microId: "section_pave_cube",
+    difficulty: 3,
+    theme: "neutral",
+    text: "On coupe un pavé droit de dimensions $5 \\times 3 \\times 4$ cm par un plan parallèle à la face $5 \\times 3$. Quelles sont les dimensions de la section ?",
+    format: "qcm",
+    choices: ["$5 \\times 3$ cm", "$5 \\times 4$ cm", "$3 \\times 4$ cm", "$5 \\times 3 \\times 4$ cm"],
+    expected: ["$5 \\times 3$ cm"],
+    comparator: "mcq_exact",
+    hint: "La section a les mêmes dimensions que la face parallèle.",
+    explanation:
+      "Définition : une section parallèle à une face est identique à cette face.\n\n" +
+      "Méthode : on relève les dimensions de la face parallèle.\n\n" +
+      "Observation : la face parallèle mesure $5 \\times 3$ cm.\n\n" +
+      "Conclusion : la section mesure $5 \\times 3$ cm.",
+    tags: ["section", "pave", "dimensions", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "3e_section_pave_cube_fixed_5_cote",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "sections_solides",
+    microId: "section_pave_cube",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Un cube a une arête de $6$ cm. La section parallèle à une face est un carré. Quel est son côté (en cm) ?",
+    format: "short",
+    expected: ["6"],
+    comparator: "number_equal",
+    hint: "La section a la même taille que la face.",
+    explanation:
+      "Définition : une section parallèle à une face d’un cube est un carré identique à la face.\n\n" +
+      "Méthode : on relève l’arête du cube.\n\n" +
+      "Observation : la face mesure $6$ cm de côté.\n\n" +
+      "Conclusion : le côté de la section est $6$ cm.",
+    tags: ["section", "cube", "short"],
+  },
+
+  /* =========================
+     SECTION_CYLINDRE (compléments)
+  ========================= */
+  {
+    kind: "fixed",
+    id: "3e_section_cylindre_fixed_2_base",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "sections_solides",
+    microId: "section_cylindre",
+    difficulty: 2,
+    theme: "neutral",
+    text: "On coupe un cylindre par un plan parallèle à ses bases. La section est…",
+    format: "qcm",
+    choices: ["un disque", "un rectangle", "un triangle", "un carré"],
+    expected: ["un disque"],
+    comparator: "mcq_exact",
+    hint: "La section a la forme des bases.",
+    explanation:
+      "Définition : une section parallèle aux bases a leur forme.\n\n" +
+      "Méthode : on regarde la forme des bases.\n\n" +
+      "Observation : les bases d’un cylindre sont des disques.\n\n" +
+      "Conclusion : la section est un disque.",
+    canvas: sectionSolideCanvas({
+      solide: "cylindre",
+      section: "parallele_base",
+      labels: { titre: "Section d’un cylindre", section: "disque" },
+      display: { showLabels: true, showSectionName: true, showPlane: true },
+    }),
+    tags: ["section", "cylindre", "qcm", "canvas"],
+  },
+  {
+    kind: "fixed",
+    id: "3e_section_cylindre_fixed_3_axe",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "sections_solides",
+    microId: "section_cylindre",
+    difficulty: 3,
+    theme: "neutral",
+    text: "On coupe un cylindre par un plan contenant son axe. La section est…",
+    format: "qcm",
+    choices: ["un rectangle", "un disque", "un cercle", "un triangle"],
+    expected: ["un rectangle"],
+    comparator: "mcq_exact",
+    hint: "On coupe dans le sens de la hauteur.",
+    explanation:
+      "Définition : une section d’un cylindre par un plan contenant l’axe est un rectangle.\n\n" +
+      "Méthode : on imagine la coupe verticale passant par le centre.\n\n" +
+      "Observation : la hauteur et le diamètre forment un rectangle.\n\n" +
+      "Conclusion : la section est un rectangle.",
+    canvas: sectionSolideCanvas({
+      solide: "cylindre",
+      section: "parallele_axe",
+      labels: { titre: "Section d’un cylindre", section: "rectangle" },
+      display: { showLabels: true, showSectionName: true, showPlane: true },
+    }),
+    tags: ["section", "cylindre", "axe", "qcm", "canvas"],
+  },
+  {
+    kind: "fixed",
+    id: "3e_section_cylindre_fixed_4_rayon",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "sections_solides",
+    microId: "section_cylindre",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Une section d’un cylindre parallèle aux bases a un rayon…",
+    format: "qcm",
+    choices: ["égal au rayon des bases", "deux fois plus grand", "deux fois plus petit", "nul"],
+    expected: ["égal au rayon des bases"],
+    comparator: "mcq_exact",
+    hint: "Le cylindre garde le même rayon sur toute sa hauteur.",
+    explanation:
+      "Définition : un cylindre a un rayon constant.\n\n" +
+      "Méthode : on compare le disque obtenu aux bases.\n\n" +
+      "Observation : le disque a le même rayon que les bases.\n\n" +
+      "Conclusion : le rayon est égal à celui des bases.",
+    tags: ["section", "cylindre", "rayon", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "3e_section_cylindre_tpl_1",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "sections_solides",
+    microId: "section_cylindre",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Parallèle aux bases → disque ; contenant l’axe → rectangle.",
+    tags: ["section", "cylindre", "canvas", "template"],
+    generate: () => {
+      const base = randomChoice([true, false]);
+      const forme = base ? "un disque" : "un rectangle";
+      return {
+        text: `On coupe un cylindre par un plan ${base ? "parallèle à ses bases" : "contenant son axe"}. La section est…`,
+        format: "qcm",
+        choices: shuffle(["un disque", "un rectangle", "un carré", "un triangle"]),
+        expected: [forme],
+        comparator: "mcq_exact",
+        explanation:
+          `Définition : la forme dépend de l’orientation du plan.\n\n` +
+          `Méthode : ${base ? "parallèle aux bases" : "contenant l’axe"}.\n\n` +
+          `Observation : on obtient ${forme}.\n\n` +
+          `Conclusion : la section est ${forme}.`,
+        canvas: sectionSolideCanvas({
+          solide: "cylindre",
+          section: base ? "parallele_base" : "parallele_axe",
+          labels: { titre: "Section d’un cylindre", section: forme },
+          display: { showLabels: true, showSectionName: true, showPlane: true },
+        }),
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "3e_section_cylindre_fixed_5_diametre",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "sections_solides",
+    microId: "section_cylindre",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Un cylindre a un rayon de $4$ cm. Une section parallèle aux bases est un disque. Quel est son diamètre (en cm) ?",
+    format: "short",
+    expected: ["8"],
+    comparator: "number_equal",
+    hint: "Diamètre $= 2 \\times$ rayon.",
+    explanation:
+      "Définition : le disque de section a le même rayon que les bases.\n\n" +
+      "Méthode : diamètre $= 2 \\times$ rayon.\n\n" +
+      "Observation : rayon $= 4$ cm.\n\n" +
+      "Conclusion : le diamètre est $2 \\times 4 = 8$ cm.",
+    tags: ["section", "cylindre", "diametre", "short"],
+  },
+
+  /* =========================
+     SECTION_CONE_PYRAMIDE (compléments)
+  ========================= */
+  {
+    kind: "fixed",
+    id: "3e_section_cone_pyramide_fixed_2_pyramide",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "sections_solides",
+    microId: "section_cone_pyramide",
+    difficulty: 3,
+    theme: "neutral",
+    text: "On coupe une pyramide à base carrée par un plan parallèle à la base. La section est…",
+    format: "qcm",
+    choices: ["un carré plus petit", "un triangle", "un disque", "un carré plus grand"],
+    expected: ["un carré plus petit"],
+    comparator: "mcq_exact",
+    hint: "La section est une réduction de la base.",
+    explanation:
+      "Définition : une section parallèle à la base est une réduction de la base.\n\n" +
+      "Méthode : on garde la forme de la base, mais en plus petit.\n\n" +
+      "Observation : la base est un carré, la section est un carré plus petit.\n\n" +
+      "Conclusion : c’est un carré plus petit.",
+    canvas: sectionSolideCanvas({
+      solide: "pyramide",
+      section: "parallele_base",
+      labels: { titre: "Section d’une pyramide", section: "carré réduit" },
+      display: { showLabels: true, showSectionName: true, showPlane: true },
+    }),
+    tags: ["section", "pyramide", "qcm", "canvas"],
+  },
+  {
+    kind: "fixed",
+    id: "3e_section_cone_pyramide_fixed_3_reduction",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "sections_solides",
+    microId: "section_cone_pyramide",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Une section d’un cône parallèle à la base, située à mi-hauteur, a un rayon…",
+    format: "qcm",
+    choices: [
+      "égal à la moitié du rayon de la base",
+      "égal au rayon de la base",
+      "deux fois plus grand",
+      "nul",
+    ],
+    expected: ["égal à la moitié du rayon de la base"],
+    comparator: "mcq_exact",
+    hint: "À mi-hauteur, la réduction est de rapport $\\dfrac{1}{2}$.",
+    explanation:
+      "Définition : une section d’un cône parallèle à la base est une réduction.\n\n" +
+      "Méthode : à mi-hauteur, le rapport de réduction est $\\dfrac{1}{2}$.\n\n" +
+      "Observation : le rayon est donc divisé par $2$.\n\n" +
+      "Conclusion : le rayon vaut la moitié de celui de la base.",
+    tags: ["section", "cone", "reduction", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "3e_section_cone_pyramide_tpl_1",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "sections_solides",
+    microId: "section_cone_pyramide",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Parallèle à la base → même forme que la base, mais réduite.",
+    tags: ["section", "cone", "pyramide", "canvas", "template"],
+    generate: () => {
+      const cone = randomChoice([true, false]);
+      const forme = cone ? "un disque (cercle)" : "un carré";
+      return {
+        text: `On coupe ${cone ? "un cône" : "une pyramide à base carrée"} par un plan parallèle à la base. Quelle est la forme de la section ?`,
+        format: "qcm",
+        choices: shuffle(["un disque (cercle)", "un carré", "un rectangle", "un triangle"]),
+        expected: [forme],
+        comparator: "mcq_exact",
+        explanation:
+          `Définition : une section parallèle à la base reprend la forme de la base, en réduit.\n\n` +
+          `Méthode : on regarde la base.\n\n` +
+          `Observation : ${cone ? "la base d’un cône est un disque" : "la base de la pyramide est un carré"}.\n\n` +
+          `Conclusion : la section est ${forme}.`,
+        canvas: sectionSolideCanvas({
+          solide: cone ? "cone" : "pyramide",
+          section: "parallele_base",
+          labels: { titre: "Section parallèle à la base", section: forme },
+          display: { showLabels: true, showSectionName: true, showPlane: true },
+        }),
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "3e_section_cone_pyramide_fixed_4_cote_reduit",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "sections_solides",
+    microId: "section_cone_pyramide",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Une pyramide a une base carrée de côté $8$ cm. Une section parallèle à la base, au rapport $\\dfrac{1}{2}$, est un carré de côté (en cm)…",
+    format: "short",
+    expected: ["4"],
+    comparator: "number_equal",
+    hint: "On multiplie le côté par le rapport de réduction.",
+    explanation:
+      "Définition : une section parallèle à la base est une réduction de la base.\n\n" +
+      "Méthode : on multiplie le côté par le rapport $\\dfrac{1}{2}$.\n\n" +
+      "Observation : $8 \\times \\dfrac{1}{2} = 4$.\n\n" +
+      "Conclusion : la section est un carré de côté $4$ cm.",
+    tags: ["section", "pyramide", "reduction", "short"],
+  },
+  {
+    kind: "fixed",
+    id: "3e_section_cone_pyramide_fixed_5_sommet",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "sections_solides",
+    microId: "section_cone_pyramide",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Plus la section parallèle à la base d’un cône est proche du sommet, plus son rayon est…",
+    format: "qcm",
+    choices: ["petit", "grand", "constant", "nul puis grand"],
+    expected: ["petit"],
+    comparator: "mcq_exact",
+    hint: "Le cône se rétrécit vers le sommet.",
+    explanation:
+      "Définition : la section est une réduction de la base, d’autant plus forte qu’on s’approche du sommet.\n\n" +
+      "Méthode : on observe l’évolution du rayon en montant.\n\n" +
+      "Observation : près du sommet, le rayon devient très petit.\n\n" +
+      "Conclusion : plus on est proche du sommet, plus le rayon est petit.",
+    tags: ["section", "cone", "qcm"],
+  },
+
+  /* =========================
+     SECTION_CALCULER_LONGUEUR (compléments)
+  ========================= */
+  {
+    kind: "template",
+    id: "3e_section_calculer_longueur_tpl_1_carre",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "sections_solides",
+    microId: "section_calculer_longueur",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Une section parallèle à une face d’un cube est un carré identique à la face.",
+    tags: ["section", "calculer_longueur", "cube", "template"],
+    generate: () => {
+      const c = randomChoice([4, 5, 6, 7, 8]);
+      return {
+        text: `Un cube a une arête de $${c}$ cm. On le coupe par un plan parallèle à une face. Quel est le côté du carré obtenu (en cm) ?`,
+        format: "short",
+        expected: [String(c)],
+        comparator: "number_equal",
+        explanation:
+          `Définition : la section parallèle à une face est un carré identique à la face.\n\n` +
+          `Méthode : on relève l’arête du cube.\n\n` +
+          `Observation : la face mesure $${c}$ cm de côté.\n\n` +
+          `Conclusion : le côté de la section est $${c}$ cm.`,
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "3e_section_calculer_longueur_tpl_2_rectangle",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "sections_solides",
+    microId: "section_calculer_longueur",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "La section parallèle à une face d’un pavé a les dimensions de cette face.",
+    tags: ["section", "calculer_longueur", "pave", "template"],
+    generate: () => {
+      const L = randomChoice([5, 6, 8]);
+      const l = randomChoice([3, 4]);
+      const h = randomChoice([2, 7]);
+      return {
+        text: `Un pavé droit mesure $${L} \\times ${l} \\times ${h}$ cm. On le coupe parallèlement à la face $${L} \\times ${l}$. Quelle est la plus grande dimension de la section (en cm) ?`,
+        format: "short",
+        expected: [String(L)],
+        comparator: "number_equal",
+        explanation:
+          `Définition : la section parallèle à une face a les dimensions de cette face.\n\n` +
+          `Méthode : la face mesure $${L} \\times ${l}$, sa plus grande dimension est $${L}$.\n\n` +
+          `Observation : $${L} > ${l}$.\n\n` +
+          `Conclusion : la plus grande dimension est $${L}$ cm.`,
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "3e_section_calculer_longueur_tpl_3_diagonale",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "sections_solides",
+    microId: "section_calculer_longueur",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "La diagonale d’un rectangle se calcule avec Pythagore.",
+    tags: ["section", "calculer_longueur", "pythagore", "template"],
+    generate: () => {
+      const t = randomChoice([
+        { a: 3, b: 4, d: 5 },
+        { a: 6, b: 8, d: 10 },
+        { a: 5, b: 12, d: 13 },
+      ]);
+      return {
+        text: `Une section rectangulaire d’un solide mesure $${t.a}$ cm sur $${t.b}$ cm. Quelle est la longueur de sa diagonale (en cm) ?`,
+        format: "short",
+        expected: [String(t.d)],
+        comparator: "number_equal",
+        explanation:
+          `Définition : la diagonale d’un rectangle est l’hypoténuse d’un triangle rectangle.\n\n` +
+          `Méthode : on applique Pythagore $d^2 = ${t.a}^2 + ${t.b}^2$.\n\n` +
+          `Observation : $d^2 = ${t.a * t.a} + ${t.b * t.b} = ${t.d * t.d}$.\n\n` +
+          `Conclusion : $d = \\sqrt{${t.d * t.d}} = ${t.d}$ cm.`,
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "3e_section_calculer_longueur_fixed_1",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "sections_solides",
+    microId: "section_calculer_longueur",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Une section rectangulaire mesure $3$ cm sur $4$ cm. Quelle est la longueur de sa diagonale (en cm) ?",
+    format: "short",
+    expected: ["5"],
+    comparator: "number_equal",
+    hint: "$3^2 + 4^2 = 25$.",
+    explanation:
+      "Définition : la diagonale est l’hypoténuse d’un triangle rectangle.\n\n" +
+      "Méthode : Pythagore $d^2 = 3^2 + 4^2$.\n\n" +
+      "Observation : $9 + 16 = 25$.\n\n" +
+      "Conclusion : $d = \\sqrt{25} = 5$ cm.",
+    tags: ["section", "calculer_longueur", "pythagore", "short"],
+  },
+  {
+    kind: "fixed",
+    id: "3e_section_calculer_longueur_fixed_2_diametre",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "sections_solides",
+    microId: "section_calculer_longueur",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Une section circulaire d’un cylindre a un rayon de $5$ cm. Quel est son diamètre (en cm) ?",
+    format: "short",
+    expected: ["10"],
+    comparator: "number_equal",
+    hint: "Diamètre $= 2 \\times$ rayon.",
+    explanation:
+      "Définition : le diamètre est le double du rayon.\n\n" +
+      "Méthode : diamètre $= 2 \\times 5$.\n\n" +
+      "Observation : $2 \\times 5 = 10$.\n\n" +
+      "Conclusion : le diamètre est $10$ cm.",
+    tags: ["section", "calculer_longueur", "cylindre", "short"],
+  },
+  {
+    kind: "template",
+    id: "3e_section_calculer_longueur_tpl_4_reduction",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "sections_solides",
+    microId: "section_calculer_longueur",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "On multiplie par le rapport de réduction.",
+    tags: ["section", "calculer_longueur", "reduction", "template"],
+    generate: () => {
+      const cote = randomChoice([8, 10, 12]);
+      const reduit = cote / 2;
+      return {
+        text: `Une pyramide a une base carrée de côté $${cote}$ cm. Une section parallèle à la base, au rapport $\\dfrac{1}{2}$, est un carré. Quel est son côté (en cm) ?`,
+        format: "short",
+        expected: [String(reduit)],
+        comparator: "number_equal",
+        explanation:
+          `Définition : la section est une réduction de la base.\n\n` +
+          `Méthode : on multiplie le côté par $\\dfrac{1}{2}$.\n\n` +
+          `Observation : $${cote} \\times \\dfrac{1}{2} = ${reduit}$.\n\n` +
+          `Conclusion : le côté de la section est $${reduit}$ cm.`,
+      };
+    },
+  },
+
+  /* =========================
+     SECTION_DEFI (compléments)
+  ========================= */
+  {
+    kind: "template",
+    id: "3e_section_defi_tpl_3_forme",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "sections_solides",
+    microId: "section_defi",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Relie le solide et la coupe à la forme obtenue.",
+    tags: ["section", "defi", "canvas", "template"],
+    generate: () => {
+      const cas = randomChoice([
+        { solide: "cube" as const, section: "parallele_face" as const, forme: "un carré", phrase: "un cube coupé parallèlement à une face" },
+        { solide: "cylindre" as const, section: "parallele_base" as const, forme: "un disque", phrase: "un cylindre coupé parallèlement aux bases" },
+        { solide: "cylindre" as const, section: "parallele_axe" as const, forme: "un rectangle", phrase: "un cylindre coupé selon un plan contenant l’axe" },
+        { solide: "cone" as const, section: "parallele_base" as const, forme: "un disque", phrase: "un cône coupé parallèlement à la base" },
+      ]);
+      return {
+        text: `Quelle est la forme de la section pour ${cas.phrase} ?`,
+        format: "qcm",
+        choices: shuffle(["un carré", "un rectangle", "un disque", "un triangle"]),
+        expected: [cas.forme],
+        comparator: "mcq_exact",
+        explanation:
+          `Définition : la forme dépend du solide et du plan de coupe.\n\n` +
+          `Méthode : on visualise la coupe décrite.\n\n` +
+          `Observation : pour ${cas.phrase}, on obtient ${cas.forme}.\n\n` +
+          `Conclusion : la section est ${cas.forme}.`,
+        canvas: sectionSolideCanvas({
+          solide: cas.solide,
+          section: cas.section,
+          labels: { titre: "Section d’un solide", section: cas.forme },
+          display: { showLabels: true, showSectionName: true, showPlane: true },
+        }),
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "3e_section_defi_qcm_1_cercle",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "sections_solides",
+    microId: "section_defi",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Pour obtenir une section en forme de cercle, quel solide et quelle coupe faut-il choisir ?",
+    format: "qcm",
+    choices: [
+      "un cylindre coupé parallèlement aux bases",
+      "un cube coupé parallèlement à une face",
+      "un pavé droit coupé parallèlement à une face",
+      "une pyramide coupée par sa diagonale",
+    ],
+    expected: ["un cylindre coupé parallèlement aux bases"],
+    comparator: "mcq_exact",
+    hint: "Il faut une base ronde.",
+    explanation:
+      "Définition : la forme de la section dépend du solide et de la coupe.\n\n" +
+      "Méthode : pour un cercle, il faut une base circulaire et une coupe parallèle aux bases.\n\n" +
+      "Observation : seul le cylindre coupé parallèlement à ses bases convient.\n\n" +
+      "Conclusion : c’est le cylindre coupé parallèlement aux bases.",
+    tags: ["section", "defi", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "3e_section_defi_fixed_3_diagonale",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "sections_solides",
+    microId: "section_defi",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Une section rectangulaire d’un pavé mesure $6$ cm sur $8$ cm. Quelle est la longueur de sa diagonale (en cm) ?",
+    format: "short",
+    expected: ["10"],
+    comparator: "number_equal",
+    hint: "$6^2 + 8^2 = 100$.",
+    explanation:
+      "Définition : la diagonale est l’hypoténuse d’un triangle rectangle.\n\n" +
+      "Méthode : Pythagore $d^2 = 6^2 + 8^2$.\n\n" +
+      "Observation : $36 + 64 = 100$.\n\n" +
+      "Conclusion : $d = \\sqrt{100} = 10$ cm.",
+    tags: ["section", "defi", "pythagore", "short"],
+  },
+  {
+    kind: "fixed",
+    id: "3e_section_defi_qcm_2_pyramide",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "sections_solides",
+    microId: "section_defi",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Une section d’une pyramide parallèle à sa base est, par rapport à la base…",
+    format: "qcm",
+    choices: ["de même forme mais plus petite", "de forme différente", "plus grande", "toujours un triangle"],
+    expected: ["de même forme mais plus petite"],
+    comparator: "mcq_exact",
+    hint: "Pense à l’agrandissement / réduction.",
+    explanation:
+      "Définition : une section parallèle à la base est une réduction de la base.\n\n" +
+      "Méthode : on compare forme et taille.\n\n" +
+      "Observation : même forme, mais plus petite.\n\n" +
+      "Conclusion : elle est de même forme mais plus petite.",
+    tags: ["section", "defi", "pyramide", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "3e_section_defi_tpl_4_cube_cote",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "sections_solides",
+    microId: "section_defi",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Section parallèle à une face d’un cube = carré de même côté.",
+    tags: ["section", "defi", "cube", "template"],
+    generate: () => {
+      const c = randomChoice([5, 6, 7, 9]);
+      const perimetre = 4 * c;
+      return {
+        text: `Un cube a une arête de $${c}$ cm. On le coupe parallèlement à une face. Quel est le périmètre du carré obtenu (en cm) ?`,
+        format: "short",
+        expected: [String(perimetre)],
+        comparator: "number_equal",
+        explanation:
+          `Définition : la section est un carré de côté égal à l’arête du cube.\n\n` +
+          `Méthode : périmètre du carré $= 4 \\times$ côté.\n\n` +
+          `Observation : côté $= ${c}$ cm.\n\n` +
+          `Conclusion : périmètre $= 4 \\times ${c} = ${perimetre}$ cm.`,
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "3e_section_defi_qcm_3_vrai_faux",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "sections_solides",
+    microId: "section_defi",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Un élève dit : « La section d’un solide est toujours un carré. » A-t-il raison ?",
+    format: "qcm",
+    choices: ["non", "oui"],
+    expected: ["non"],
+    comparator: "mcq_exact",
+    hint: "La forme dépend du solide et du plan.",
+    explanation:
+      "Définition : la forme d’une section dépend du solide et de la coupe.\n\n" +
+      "Méthode : on cherche un contre-exemple.\n\n" +
+      "Observation : un cylindre coupé parallèlement aux bases donne un disque, pas un carré.\n\n" +
+      "Conclusion : non, la section n’est pas toujours un carré.",
+    tags: ["section", "defi", "qcm"],
+  },
 ];

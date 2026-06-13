@@ -1201,4 +1201,1055 @@ export const volumesBank: TutorBankItemV4[] = [
       "Conclusion : on ne choisit pas la même formule pour un cylindre et pour une boule.",
     tags: ["volume", "defi", "open", "raisonnement"],
   },
+
+  /* =========================
+     VOLUME_COMPRENDRE (compléments)
+  ========================= */
+  {
+    kind: "fixed",
+    id: "3e_volume_comprendre_fixed_2",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "volume_solide",
+    microId: "volume_comprendre",
+    difficulty: 1,
+    theme: "neutral",
+    text: "Quelle unité est une unité de volume ?",
+    format: "qcm",
+    choices: ["le $\\text{cm}^3$", "le $\\text{cm}^2$", "le cm", "le degré"],
+    expected: ["le $\\text{cm}^3$"],
+    comparator: "mcq_exact",
+    hint: "Un volume occupe les trois dimensions.",
+    explanation:
+      "Définition : un volume se mesure en unités cubes.\n\n" +
+      "Méthode : on cherche l’unité avec un exposant $3$.\n\n" +
+      "Calcul : le $\\text{cm}^2$ est une aire, le cm une longueur.\n\n" +
+      "Conclusion : l’unité de volume est le $\\text{cm}^3$.",
+    tags: ["volume", "comprendre", "unite", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "3e_volume_comprendre_fixed_3",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "volume_solide",
+    microId: "volume_comprendre",
+    difficulty: 2,
+    theme: "neutral",
+    text: "À quoi correspond $1$ litre ?",
+    format: "qcm",
+    choices: ["$1\\ \\text{dm}^3$", "$1\\ \\text{cm}^3$", "$1\\ \\text{m}^3$", "$1\\ \\text{cm}^2$"],
+    expected: ["$1\\ \\text{dm}^3$"],
+    comparator: "mcq_exact",
+    hint: "$1$ L correspond à un cube de $1$ dm de côté.",
+    explanation:
+      "Définition : le litre est une unité de contenance.\n\n" +
+      "Méthode : on relie le litre à une unité de volume.\n\n" +
+      "Calcul : $1$ L $= 1\\ \\text{dm}^3$.\n\n" +
+      "Conclusion : $1$ litre correspond à $1\\ \\text{dm}^3$.",
+    tags: ["volume", "comprendre", "litre", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "3e_volume_comprendre_tpl_1_cubes",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "volume_solide",
+    microId: "volume_comprendre",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Compte les petits cubes : longueur × largeur × hauteur.",
+    tags: ["volume", "comprendre", "cubes", "canvas", "template"],
+    generate: () => {
+      const L = randomChoice([2, 3, 4]);
+      const l = randomChoice([2, 3]);
+      const h = randomChoice([2, 3]);
+      const n = L * l * h;
+      return {
+        text: `Un pavé est construit avec des cubes unités : ${L} sur la longueur, ${l} sur la largeur et ${h} sur la hauteur. Combien de cubes unités le composent ?`,
+        format: "short",
+        expected: [String(n)],
+        comparator: "number_equal",
+        explanation:
+          `Définition : le volume compte le nombre de cubes unités.\n\n` +
+          `Méthode : on multiplie longueur × largeur × hauteur.\n\n` +
+          `Calcul : $${L} \\times ${l} \\times ${h} = ${n}$.\n\n` +
+          `Conclusion : le pavé est composé de ${n} cubes unités.`,
+        canvas: solideCanvas({
+          solide: "pave_droit",
+          dimensions: { longueur: L, largeur: l, hauteur: h },
+          display: { showUnitCubes: true },
+        }),
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "3e_volume_comprendre_fixed_4_m3",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "volume_solide",
+    microId: "volume_comprendre",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Combien de litres y a-t-il dans $1\\ \\text{m}^3$ ?",
+    format: "short",
+    expected: ["1000"],
+    comparator: "number_equal",
+    hint: "$1\\ \\text{m}^3 = 1000\\ \\text{dm}^3$ et $1\\ \\text{dm}^3 = 1$ L.",
+    explanation:
+      "Définition : $1\\ \\text{m}^3$ contient $1000\\ \\text{dm}^3$.\n\n" +
+      "Méthode : on convertit chaque $\\text{dm}^3$ en litre.\n\n" +
+      "Calcul : $1\\ \\text{m}^3 = 1000\\ \\text{dm}^3 = 1000$ L.\n\n" +
+      "Conclusion : il y a $1000$ litres dans $1\\ \\text{m}^3$.",
+    tags: ["volume", "comprendre", "conversion", "short"],
+  },
+  {
+    kind: "fixed",
+    id: "3e_volume_comprendre_qcm_2",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "volume_solide",
+    microId: "volume_comprendre",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Le volume mesure…",
+    format: "qcm",
+    choices: [
+      "l’espace occupé par un solide",
+      "la longueur du contour",
+      "la surface d’une face",
+      "la masse du solide",
+    ],
+    expected: ["l’espace occupé par un solide"],
+    comparator: "mcq_exact",
+    hint: "C’est une grandeur en trois dimensions.",
+    explanation:
+      "Définition : le volume est l’espace occupé par un solide.\n\n" +
+      "Méthode : on distingue volume, périmètre et aire.\n\n" +
+      "Calcul : le volume utilise les trois dimensions.\n\n" +
+      "Conclusion : le volume mesure l’espace occupé par un solide.",
+    tags: ["volume", "comprendre", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "3e_volume_comprendre_qcm_3_cl",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "volume_solide",
+    microId: "volume_comprendre",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Combien de centilitres (cL) y a-t-il dans $1$ litre ?",
+    format: "short",
+    expected: ["100"],
+    comparator: "number_equal",
+    hint: "« centi » signifie centième.",
+    explanation:
+      "Définition : $1$ L se divise en $100$ centilitres.\n\n" +
+      "Méthode : « centi » veut dire $\\div 100$.\n\n" +
+      "Calcul : $1$ L $= 100$ cL.\n\n" +
+      "Conclusion : il y a $100$ cL dans $1$ L.",
+    tags: ["volume", "comprendre", "conversion", "short"],
+  },
+
+  /* =========================
+     VOLUME_PAVE (compléments)
+  ========================= */
+  {
+    kind: "template",
+    id: "3e_volume_pave_tpl_2",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "volume_solide",
+    microId: "volume_pave",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "$V = L \\times l \\times h$.",
+    tags: ["volume", "pave", "canvas", "template"],
+    generate: () => {
+      const L = randomChoice([3, 4, 5, 6]);
+      const l = randomChoice([2, 3, 4]);
+      const h = randomChoice([2, 3, 5]);
+      const V = L * l * h;
+      return {
+        text: `Un pavé droit a pour dimensions $${L}$ cm, $${l}$ cm et $${h}$ cm. Quel est son volume (en $\\text{cm}^3$) ?`,
+        format: "short",
+        expected: [String(V)],
+        comparator: "number_equal",
+        explanation:
+          `Définition : le volume d’un pavé droit est $V = L \\times l \\times h$.\n\n` +
+          `Méthode : on multiplie les trois dimensions.\n\n` +
+          `Calcul : $${L} \\times ${l} \\times ${h} = ${V}$.\n\n` +
+          `Conclusion : le volume est $${V}\\ \\text{cm}^3$.`,
+        canvas: solideCanvas({
+          solide: "pave_droit",
+          dimensions: { longueur: L, largeur: l, hauteur: h },
+          display: { showDimensions: true },
+        }),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "3e_volume_pave_tpl_3_cube",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "volume_solide",
+    microId: "volume_pave",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Pour un cube, $V = c^3$.",
+    tags: ["volume", "pave", "cube", "canvas", "template"],
+    generate: () => {
+      const c = randomChoice([2, 3, 4, 5]);
+      const V = c * c * c;
+      return {
+        text: `Un cube a une arête de $${c}$ cm. Quel est son volume (en $\\text{cm}^3$) ?`,
+        format: "short",
+        expected: [String(V)],
+        comparator: "number_equal",
+        explanation:
+          `Définition : le volume d’un cube est $V = c^3$.\n\n` +
+          `Méthode : on élève l’arête au cube.\n\n` +
+          `Calcul : $${c}^3 = ${c} \\times ${c} \\times ${c} = ${V}$.\n\n` +
+          `Conclusion : le volume est $${V}\\ \\text{cm}^3$.`,
+        canvas: solideCanvas({
+          solide: "cube",
+          dimensions: { cote: c },
+          display: { showDimensions: true },
+        }),
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "3e_volume_pave_qcm_1",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "volume_solide",
+    microId: "volume_pave",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Quelle est la formule du volume d’un pavé droit ?",
+    format: "qcm",
+    choices: [
+      "$V = L \\times l \\times h$",
+      "$V = L + l + h$",
+      "$V = 2(L + l)$",
+      "$V = L \\times l$",
+    ],
+    expected: ["$V = L \\times l \\times h$"],
+    comparator: "mcq_exact",
+    hint: "On multiplie les trois dimensions.",
+    explanation:
+      "Définition : le volume d’un pavé droit utilise ses trois dimensions.\n\n" +
+      "Méthode : on multiplie longueur, largeur et hauteur.\n\n" +
+      "Calcul : $V = L \\times l \\times h$.\n\n" +
+      "Conclusion : c’est la première formule.",
+    tags: ["volume", "pave", "formule", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "3e_volume_pave_fixed_2",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "volume_solide",
+    microId: "volume_pave",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Un pavé droit mesure $5$ cm sur $4$ cm sur $3$ cm. Quel est son volume (en $\\text{cm}^3$) ?",
+    format: "short",
+    expected: ["60"],
+    comparator: "number_equal",
+    hint: "$5 \\times 4 \\times 3$.",
+    explanation:
+      "Définition : $V = L \\times l \\times h$.\n\n" +
+      "Méthode : on multiplie les trois dimensions.\n\n" +
+      "Calcul : $5 \\times 4 \\times 3 = 60$.\n\n" +
+      "Conclusion : le volume est $60\\ \\text{cm}^3$.",
+    tags: ["volume", "pave", "short"],
+  },
+  {
+    kind: "template",
+    id: "3e_volume_pave_tpl_4_hauteur",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "volume_solide",
+    microId: "volume_pave",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "$h = V \\div (L \\times l)$.",
+    tags: ["volume", "pave", "inverse", "template"],
+    generate: () => {
+      const L = randomChoice([2, 3, 4]);
+      const l = randomChoice([2, 3, 5]);
+      const h = randomChoice([2, 3, 4]);
+      const V = L * l * h;
+      return {
+        text: `Un pavé droit a un volume de $${V}\\ \\text{cm}^3$, une longueur de $${L}$ cm et une largeur de $${l}$ cm. Quelle est sa hauteur (en cm) ?`,
+        format: "short",
+        expected: [String(h)],
+        comparator: "number_equal",
+        explanation:
+          `Définition : $V = L \\times l \\times h$, donc $h = \\dfrac{V}{L \\times l}$.\n\n` +
+          `Méthode : on divise le volume par l’aire de la base.\n\n` +
+          `Calcul : $h = \\dfrac{${V}}{${L} \\times ${l}} = \\dfrac{${V}}{${L * l}} = ${h}$.\n\n` +
+          `Conclusion : la hauteur est $${h}$ cm.`,
+      };
+    },
+  },
+
+  /* =========================
+     VOLUME_PRISME (compléments)
+  ========================= */
+  {
+    kind: "fixed",
+    id: "3e_volume_prisme_qcm_1",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "volume_solide",
+    microId: "volume_prisme",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Quelle est la formule du volume d’un prisme droit ?",
+    format: "qcm",
+    choices: [
+      "$V = \\text{aire de la base} \\times \\text{hauteur}$",
+      "$V = \\text{périmètre} \\times \\text{hauteur}$",
+      "$V = \\text{aire de la base} + \\text{hauteur}$",
+      "$V = \\text{base} \\times \\text{base}$",
+    ],
+    expected: ["$V = \\text{aire de la base} \\times \\text{hauteur}$"],
+    comparator: "mcq_exact",
+    hint: "On multiplie l’aire de la base par la hauteur.",
+    explanation:
+      "Définition : un prisme droit a un volume égal à l’aire de sa base multipliée par sa hauteur.\n\n" +
+      "Méthode : on calcule l’aire de la base, puis on multiplie par la hauteur.\n\n" +
+      "Calcul : $V = \\text{aire base} \\times h$.\n\n" +
+      "Conclusion : c’est la première formule.",
+    tags: ["volume", "prisme", "formule", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "3e_volume_prisme_tpl_2_base_donnee",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "volume_solide",
+    microId: "volume_prisme",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "$V = \\text{aire base} \\times h$.",
+    tags: ["volume", "prisme", "template"],
+    generate: () => {
+      const aire = randomChoice([6, 8, 10, 12]);
+      const h = randomChoice([3, 4, 5, 6]);
+      const V = aire * h;
+      return {
+        text: `Un prisme droit a une base d’aire $${aire}\\ \\text{cm}^2$ et une hauteur de $${h}$ cm. Quel est son volume (en $\\text{cm}^3$) ?`,
+        format: "short",
+        expected: [String(V)],
+        comparator: "number_equal",
+        explanation:
+          `Définition : $V = \\text{aire base} \\times h$.\n\n` +
+          `Méthode : on multiplie l’aire de la base par la hauteur.\n\n` +
+          `Calcul : $${aire} \\times ${h} = ${V}$.\n\n` +
+          `Conclusion : le volume est $${V}\\ \\text{cm}^3$.`,
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "3e_volume_prisme_tpl_3_triangle",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "volume_solide",
+    microId: "volume_prisme",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Aire d’un triangle $= \\dfrac{b \\times h}{2}$, puis $\\times$ longueur du prisme.",
+    tags: ["volume", "prisme", "triangle", "template"],
+    generate: () => {
+      const b = randomChoice([4, 6, 8]);
+      const hTri = randomChoice([3, 5]);
+      const aire = (b * hTri) / 2;
+      const L = randomChoice([4, 5, 6]);
+      const V = aire * L;
+      return {
+        text: `Un prisme droit a pour base un triangle de base $${b}$ cm et de hauteur $${hTri}$ cm. La longueur du prisme est $${L}$ cm. Quel est son volume (en $\\text{cm}^3$) ?`,
+        format: "short",
+        expected: [String(V)],
+        comparator: "number_equal",
+        explanation:
+          `Définition : $V = \\text{aire base} \\times \\text{longueur}$.\n\n` +
+          `Méthode : on calcule l’aire du triangle, puis on multiplie par la longueur.\n\n` +
+          `Calcul : aire base $= \\dfrac{${b} \\times ${hTri}}{2} = ${aire}$ ; $V = ${aire} \\times ${L} = ${V}$.\n\n` +
+          `Conclusion : le volume est $${V}\\ \\text{cm}^3$.`,
+        canvas: solideCanvas({ solide: "prisme", display: { showLabels: true } }),
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "3e_volume_prisme_fixed_2",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "volume_solide",
+    microId: "volume_prisme",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Un prisme droit a une base d’aire $15\\ \\text{cm}^2$ et une hauteur de $4$ cm. Quel est son volume (en $\\text{cm}^3$) ?",
+    format: "short",
+    expected: ["60"],
+    comparator: "number_equal",
+    hint: "$15 \\times 4$.",
+    explanation:
+      "Définition : $V = \\text{aire base} \\times h$.\n\n" +
+      "Méthode : on multiplie l’aire de la base par la hauteur.\n\n" +
+      "Calcul : $15 \\times 4 = 60$.\n\n" +
+      "Conclusion : le volume est $60\\ \\text{cm}^3$.",
+    tags: ["volume", "prisme", "short"],
+  },
+  {
+    kind: "template",
+    id: "3e_volume_prisme_tpl_4_hauteur",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "volume_solide",
+    microId: "volume_prisme",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "$h = V \\div \\text{aire base}$.",
+    tags: ["volume", "prisme", "inverse", "template"],
+    generate: () => {
+      const aire = randomChoice([5, 6, 10]);
+      const h = randomChoice([3, 4, 6]);
+      const V = aire * h;
+      return {
+        text: `Un prisme droit a un volume de $${V}\\ \\text{cm}^3$ et une base d’aire $${aire}\\ \\text{cm}^2$. Quelle est sa hauteur (en cm) ?`,
+        format: "short",
+        expected: [String(h)],
+        comparator: "number_equal",
+        explanation:
+          `Définition : $V = \\text{aire base} \\times h$, donc $h = \\dfrac{V}{\\text{aire base}}$.\n\n` +
+          `Méthode : on divise le volume par l’aire de la base.\n\n` +
+          `Calcul : $h = \\dfrac{${V}}{${aire}} = ${h}$.\n\n` +
+          `Conclusion : la hauteur est $${h}$ cm.`,
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "3e_volume_prisme_qcm_2_lien_pave",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "volume_solide",
+    microId: "volume_prisme",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Un pavé droit est un cas particulier de prisme droit. Sa base est…",
+    format: "qcm",
+    choices: ["un rectangle", "un triangle", "un cercle", "un losange"],
+    expected: ["un rectangle"],
+    comparator: "mcq_exact",
+    hint: "Pense aux faces d’un pavé.",
+    explanation:
+      "Définition : un prisme droit a deux bases identiques ; pour un pavé, ce sont des rectangles.\n\n" +
+      "Méthode : on identifie la forme de la base.\n\n" +
+      "Calcul : la base d’un pavé droit est un rectangle.\n\n" +
+      "Conclusion : la base est un rectangle.",
+    tags: ["volume", "prisme", "pave", "qcm"],
+  },
+
+  /* =========================
+     VOLUME_CYLINDRE (compléments)
+  ========================= */
+  {
+    kind: "fixed",
+    id: "3e_volume_cylindre_qcm_1",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "volume_solide",
+    microId: "volume_cylindre",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Quelle est la formule du volume d’un cylindre de rayon $r$ et de hauteur $h$ ?",
+    format: "qcm",
+    choices: ["$V = \\pi r^2 h$", "$V = 2\\pi r h$", "$V = \\pi r h^2$", "$V = \\dfrac{4}{3}\\pi r^3$"],
+    expected: ["$V = \\pi r^2 h$"],
+    comparator: "mcq_exact",
+    hint: "Aire du disque de base $= \\pi r^2$, puis $\\times h$.",
+    explanation:
+      "Définition : le volume d’un cylindre est l’aire de la base ($\\pi r^2$) multipliée par la hauteur.\n\n" +
+      "Méthode : on multiplie $\\pi r^2$ par $h$.\n\n" +
+      "Calcul : $V = \\pi r^2 h$.\n\n" +
+      "Conclusion : c’est la première formule.",
+    tags: ["volume", "cylindre", "formule", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "3e_volume_cylindre_tpl_2_valeur",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "volume_solide",
+    microId: "volume_cylindre",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "$V = \\pi r^2 h$, avec $\\pi \\approx 3{,}14$.",
+    tags: ["volume", "cylindre", "valeur", "canvas", "template"],
+    generate: () => {
+      const r = randomChoice([2, 3, 5]);
+      const h = randomChoice([4, 5, 10]);
+      const V = Math.round(3.14 * r * r * h * 100) / 100;
+      return {
+        text: `Un cylindre a un rayon de $${r}$ cm et une hauteur de $${h}$ cm. Calcule son volume au centième près (avec $\\pi \\approx 3{,}14$, en $\\text{cm}^3$).`,
+        format: "short",
+        expected: [String(V), String(V).replace(".", ",")],
+        comparator: "number_equal",
+        explanation:
+          `Définition : $V = \\pi r^2 h$.\n\n` +
+          `Méthode : on calcule $3{,}14 \\times r^2 \\times h$.\n\n` +
+          `Calcul : $3{,}14 \\times ${r}^2 \\times ${h} = 3{,}14 \\times ${r * r} \\times ${h} = ${formatNumber(V)}$.\n\n` +
+          `Conclusion : le volume est environ $${formatNumber(V)}\\ \\text{cm}^3$.`,
+        canvas: solideCanvas({
+          solide: "cylindre",
+          dimensions: { rayon: r, hauteur: h },
+          display: { showDimensions: true },
+        }),
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "3e_volume_cylindre_fixed_2",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "volume_solide",
+    microId: "volume_cylindre",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Un cylindre a un rayon de $2$ cm et une hauteur de $10$ cm. Quel est son volume au centième près (avec $\\pi \\approx 3{,}14$, en $\\text{cm}^3$) ?",
+    format: "short",
+    expected: ["125.6", "125,6"],
+    comparator: "number_equal",
+    hint: "$3{,}14 \\times 2^2 \\times 10$.",
+    explanation:
+      "Définition : $V = \\pi r^2 h$.\n\n" +
+      "Méthode : on calcule $3{,}14 \\times 4 \\times 10$.\n\n" +
+      "Calcul : $3{,}14 \\times 4 \\times 10 = 125{,}6$.\n\n" +
+      "Conclusion : le volume est environ $125{,}6\\ \\text{cm}^3$.",
+    tags: ["volume", "cylindre", "short"],
+  },
+  {
+    kind: "fixed",
+    id: "3e_volume_cylindre_qcm_2_base",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "volume_solide",
+    microId: "volume_cylindre",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Pour calculer le volume d’un cylindre, on commence par calculer l’aire de la base, qui est…",
+    format: "qcm",
+    choices: ["$\\pi r^2$", "$2\\pi r$", "$\\pi r$", "$r^2$"],
+    expected: ["$\\pi r^2$"],
+    comparator: "mcq_exact",
+    hint: "La base est un disque.",
+    explanation:
+      "Définition : la base d’un cylindre est un disque, d’aire $\\pi r^2$.\n\n" +
+      "Méthode : on identifie l’aire du disque.\n\n" +
+      "Calcul : aire base $= \\pi r^2$ (et $2\\pi r$ est le périmètre).\n\n" +
+      "Conclusion : l’aire de la base est $\\pi r^2$.",
+    tags: ["volume", "cylindre", "base", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "3e_volume_cylindre_tpl_3_litres",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "volume_solide",
+    microId: "volume_cylindre",
+    difficulty: 4,
+    theme: "reunion",
+    hint: "Calcule le volume en $\\text{cm}^3$, puis convertis en litres ($1000\\ \\text{cm}^3 = 1$ L).",
+    tags: ["volume", "cylindre", "litres", "template"],
+    generate: () => {
+      const r = 10;
+      const h = randomChoice([10, 20, 30]);
+      const Vcm3 = Math.round(3.14 * r * r * h);
+      const litres = Math.round((Vcm3 / 1000) * 100) / 100;
+      return {
+        text: `Un récupérateur d’eau cylindrique a un rayon de $${r}$ cm et une hauteur de $${h}$ cm. Quel est son volume en litres (avec $\\pi \\approx 3{,}14$) ?`,
+        format: "short",
+        expected: [String(litres), String(litres).replace(".", ",")],
+        comparator: "number_equal",
+        explanation:
+          `Définition : $V = \\pi r^2 h$, puis on convertit en litres.\n\n` +
+          `Méthode : on calcule le volume en $\\text{cm}^3$, puis on divise par $1000$.\n\n` +
+          `Calcul : $V = 3{,}14 \\times ${r * r} \\times ${h} = ${Vcm3}\\ \\text{cm}^3 = ${formatNumber(litres)}$ L.\n\n` +
+          `Conclusion : le volume est environ $${formatNumber(litres)}$ L.`,
+        canvas: solideCanvas({ solide: "cylindre", dimensions: { rayon: r, hauteur: h } }),
+      };
+    },
+  },
+
+  /* =========================
+     VOLUME_BOULE (compléments)
+  ========================= */
+  {
+    kind: "fixed",
+    id: "3e_volume_boule_qcm_1",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "volume_solide",
+    microId: "volume_boule",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Quelle est la formule du volume d’une boule de rayon $r$ ?",
+    format: "qcm",
+    choices: ["$V = \\dfrac{4}{3}\\pi r^3$", "$V = \\pi r^2 h$", "$V = 4\\pi r^2$", "$V = \\dfrac{4}{3}\\pi r^2$"],
+    expected: ["$V = \\dfrac{4}{3}\\pi r^3$"],
+    comparator: "mcq_exact",
+    hint: "La formule contient $r^3$.",
+    explanation:
+      "Définition : le volume d’une boule de rayon $r$ est $\\dfrac{4}{3}\\pi r^3$.\n\n" +
+      "Méthode : on repère la formule avec $r^3$.\n\n" +
+      "Calcul : $V = \\dfrac{4}{3}\\pi r^3$.\n\n" +
+      "Conclusion : c’est la première formule.",
+    tags: ["volume", "boule", "formule", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "3e_volume_boule_tpl_1_valeur",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "volume_solide",
+    microId: "volume_boule",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "$V = \\dfrac{4}{3}\\pi r^3$, avec $\\pi \\approx 3{,}14$.",
+    tags: ["volume", "boule", "valeur", "canvas", "template"],
+    generate: () => {
+      const r = randomChoice([3, 6, 9]);
+      const V = Math.round((4 / 3) * 3.14 * r * r * r * 100) / 100;
+      return {
+        text: `Une boule a un rayon de $${r}$ cm. Calcule son volume au centième près (avec $\\pi \\approx 3{,}14$, en $\\text{cm}^3$).`,
+        format: "short",
+        expected: [String(V), String(V).replace(".", ",")],
+        comparator: "number_equal",
+        explanation:
+          `Définition : $V = \\dfrac{4}{3}\\pi r^3$.\n\n` +
+          `Méthode : on calcule $\\dfrac{4}{3} \\times 3{,}14 \\times r^3$.\n\n` +
+          `Calcul : $\\dfrac{4}{3} \\times 3{,}14 \\times ${r}^3 = ${formatNumber(V)}$.\n\n` +
+          `Conclusion : le volume est environ $${formatNumber(V)}\\ \\text{cm}^3$.`,
+        canvas: solideCanvas({ solide: "boule", dimensions: { rayon: r } }),
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "3e_volume_boule_qcm_2_rayon3",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "volume_solide",
+    microId: "volume_boule",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Dans la formule $V = \\dfrac{4}{3}\\pi r^3$, si le rayon double, le volume est multiplié par…",
+    format: "qcm",
+    choices: ["$8$", "$2$", "$4$", "$6$"],
+    expected: ["$8$"],
+    comparator: "mcq_exact",
+    hint: "Le rayon intervient au cube : $2^3$.",
+    explanation:
+      "Définition : le volume dépend de $r^3$.\n\n" +
+      "Méthode : si $r$ double, $r^3$ est multiplié par $2^3$.\n\n" +
+      "Calcul : $2^3 = 8$.\n\n" +
+      "Conclusion : le volume est multiplié par $8$.",
+    tags: ["volume", "boule", "agrandissement", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "3e_volume_boule_qcm_3_demi",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "volume_solide",
+    microId: "volume_boule",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Le volume d’une demi-boule est égal à…",
+    format: "qcm",
+    choices: [
+      "la moitié du volume de la boule",
+      "le double du volume de la boule",
+      "le même volume que la boule",
+      "le quart du volume de la boule",
+    ],
+    expected: ["la moitié du volume de la boule"],
+    comparator: "mcq_exact",
+    hint: "Une demi-boule, c’est une boule coupée en deux.",
+    explanation:
+      "Définition : une demi-boule est la moitié d’une boule.\n\n" +
+      "Méthode : on divise le volume de la boule par $2$.\n\n" +
+      "Calcul : $V_{\\text{demi}} = \\dfrac{1}{2} \\times \\dfrac{4}{3}\\pi r^3$.\n\n" +
+      "Conclusion : c’est la moitié du volume de la boule.",
+    tags: ["volume", "boule", "demi", "qcm"],
+  },
+
+  /* =========================
+     VOLUME_AGRANDISSEMENT_REDUCTION (compléments)
+  ========================= */
+  {
+    kind: "fixed",
+    id: "3e_volume_agrandissement_qcm_1",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "volume_solide",
+    microId: "volume_agrandissement_reduction",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Si on multiplie toutes les longueurs d’un solide par $k$, son volume est multiplié par…",
+    format: "qcm",
+    choices: ["$k^3$", "$k$", "$k^2$", "$3k$"],
+    expected: ["$k^3$"],
+    comparator: "mcq_exact",
+    hint: "Le volume est en trois dimensions.",
+    explanation:
+      "Définition : lors d’un agrandissement de rapport $k$, le volume est multiplié par $k^3$.\n\n" +
+      "Méthode : on relie les dimensions au volume (trois dimensions).\n\n" +
+      "Calcul : chaque longueur ×$k$ donne un volume ×$k^3$.\n\n" +
+      "Conclusion : le volume est multiplié par $k^3$.",
+    tags: ["volume", "agrandissement", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "3e_volume_agrandissement_tpl_1",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "volume_solide",
+    microId: "volume_agrandissement_reduction",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Nouveau volume $= $ ancien $\\times k^3$.",
+    tags: ["volume", "agrandissement", "template"],
+    generate: () => {
+      const V = randomChoice([5, 10, 20]);
+      const k = randomChoice([2, 3]);
+      const newV = V * k * k * k;
+      return {
+        text: `Un solide a un volume de $${V}\\ \\text{cm}^3$. On agrandit toutes ses longueurs avec un rapport $${k}$. Quel est le nouveau volume (en $\\text{cm}^3$) ?`,
+        format: "short",
+        expected: [String(newV)],
+        comparator: "number_equal",
+        explanation:
+          `Définition : un agrandissement de rapport $${k}$ multiplie le volume par $${k}^3$.\n\n` +
+          `Méthode : on multiplie l’ancien volume par $${k}^3$.\n\n` +
+          `Calcul : $${V} \\times ${k}^3 = ${V} \\times ${k * k * k} = ${newV}$.\n\n` +
+          `Conclusion : le nouveau volume est $${newV}\\ \\text{cm}^3$.`,
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "3e_volume_reduction_tpl_1",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "volume_solide",
+    microId: "volume_agrandissement_reduction",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Réduction de rapport $\\dfrac{1}{k}$ : volume $\\div k^3$.",
+    tags: ["volume", "reduction", "template"],
+    generate: () => {
+      const k = randomChoice([2, 3]);
+      const newV = randomChoice([4, 5, 8]);
+      const V = newV * k * k * k;
+      return {
+        text: `Un solide a un volume de $${V}\\ \\text{cm}^3$. On le réduit avec un rapport $\\dfrac{1}{${k}}$. Quel est le nouveau volume (en $\\text{cm}^3$) ?`,
+        format: "short",
+        expected: [String(newV)],
+        comparator: "number_equal",
+        explanation:
+          `Définition : une réduction de rapport $\\dfrac{1}{${k}}$ divise le volume par $${k}^3$.\n\n` +
+          `Méthode : on divise l’ancien volume par $${k}^3$.\n\n` +
+          `Calcul : $${V} \\div ${k * k * k} = ${newV}$.\n\n` +
+          `Conclusion : le nouveau volume est $${newV}\\ \\text{cm}^3$.`,
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "3e_volume_agrandissement_qcm_2_double",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "volume_solide",
+    microId: "volume_agrandissement_reduction",
+    difficulty: 3,
+    theme: "neutral",
+    text: "On double toutes les arêtes d’un cube. Son volume est multiplié par…",
+    format: "qcm",
+    choices: ["$8$", "$2$", "$4$", "$6$"],
+    expected: ["$8$"],
+    comparator: "mcq_exact",
+    hint: "$k = 2$, donc $k^3 = 8$.",
+    explanation:
+      "Définition : doubler les longueurs, c’est $k = 2$.\n\n" +
+      "Méthode : le volume est multiplié par $k^3$.\n\n" +
+      "Calcul : $2^3 = 8$.\n\n" +
+      "Conclusion : le volume est multiplié par $8$.",
+    tags: ["volume", "agrandissement", "cube", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "3e_volume_agrandissement_qcm_3_aire_vs_volume",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "volume_solide",
+    microId: "volume_agrandissement_reduction",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Lors d’un agrandissement de rapport $k$, l’aire est multipliée par $k^2$ et le volume par…",
+    format: "qcm",
+    choices: ["$k^3$", "$k^2$", "$k$", "$k^4$"],
+    expected: ["$k^3$"],
+    comparator: "mcq_exact",
+    hint: "Aire : deux dimensions ; volume : trois dimensions.",
+    explanation:
+      "Définition : les longueurs sont ×$k$, les aires ×$k^2$, les volumes ×$k^3$.\n\n" +
+      "Méthode : on associe le nombre de dimensions à l’exposant.\n\n" +
+      "Calcul : volume = trois dimensions → $k^3$.\n\n" +
+      "Conclusion : le volume est multiplié par $k^3$.",
+    tags: ["volume", "agrandissement", "aire_volume", "qcm"],
+  },
+
+  /* =========================
+     VOLUME_UNITE (compléments)
+  ========================= */
+  {
+    kind: "fixed",
+    id: "3e_volume_unite_fixed_1",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "volume_solide",
+    microId: "volume_unite",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Combien de $\\text{cm}^3$ y a-t-il dans $1$ litre ?",
+    format: "short",
+    expected: ["1000"],
+    comparator: "number_equal",
+    hint: "$1$ L $= 1\\ \\text{dm}^3 = 1000\\ \\text{cm}^3$.",
+    explanation:
+      "Définition : $1$ L $= 1\\ \\text{dm}^3$.\n\n" +
+      "Méthode : on convertit $1\\ \\text{dm}^3$ en $\\text{cm}^3$.\n\n" +
+      "Calcul : $1\\ \\text{dm}^3 = 1000\\ \\text{cm}^3$.\n\n" +
+      "Conclusion : il y a $1000\\ \\text{cm}^3$ dans $1$ L.",
+    tags: ["volume", "unite", "conversion", "short"],
+  },
+  {
+    kind: "template",
+    id: "3e_volume_unite_tpl_1_litres",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "volume_solide",
+    microId: "volume_unite",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "$1000\\ \\text{cm}^3 = 1$ L.",
+    tags: ["volume", "unite", "conversion", "template"],
+    generate: () => {
+      const litres = randomChoice([2, 3, 5, 10]);
+      const cm3 = litres * 1000;
+      return {
+        text: `Un récipient a un volume de $${cm3}\\ \\text{cm}^3$. Combien cela fait-il de litres ?`,
+        format: "short",
+        expected: [String(litres)],
+        comparator: "number_equal",
+        explanation:
+          `Définition : $1000\\ \\text{cm}^3 = 1$ L.\n\n` +
+          `Méthode : on divise par $1000$.\n\n` +
+          `Calcul : $${cm3} \\div 1000 = ${litres}$.\n\n` +
+          `Conclusion : cela fait $${litres}$ L.`,
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "3e_volume_unite_tpl_2_m3",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "volume_solide",
+    microId: "volume_unite",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "$1\\ \\text{m}^3 = 1000$ L.",
+    tags: ["volume", "unite", "conversion", "template"],
+    generate: () => {
+      const m3 = randomChoice([2, 3, 5]);
+      const litres = m3 * 1000;
+      return {
+        text: `Une cuve a un volume de $${m3}\\ \\text{m}^3$. Quelle est sa contenance en litres ?`,
+        format: "short",
+        expected: [String(litres)],
+        comparator: "number_equal",
+        explanation:
+          `Définition : $1\\ \\text{m}^3 = 1000$ L.\n\n` +
+          `Méthode : on multiplie par $1000$.\n\n` +
+          `Calcul : $${m3} \\times 1000 = ${litres}$.\n\n` +
+          `Conclusion : la contenance est de $${litres}$ L.`,
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "3e_volume_unite_qcm_1",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "volume_solide",
+    microId: "volume_unite",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Quelle égalité est correcte ?",
+    format: "qcm",
+    choices: ["$1\\ \\text{dm}^3 = 1$ L", "$1\\ \\text{cm}^3 = 1$ L", "$1\\ \\text{m}^3 = 1$ L", "$1\\ \\text{dm}^3 = 100$ L"],
+    expected: ["$1\\ \\text{dm}^3 = 1$ L"],
+    comparator: "mcq_exact",
+    hint: "Le litre correspond au décimètre cube.",
+    explanation:
+      "Définition : le litre est défini comme le volume d’un cube de $1$ dm de côté.\n\n" +
+      "Méthode : on relie litre et $\\text{dm}^3$.\n\n" +
+      "Calcul : $1\\ \\text{dm}^3 = 1$ L.\n\n" +
+      "Conclusion : la bonne égalité est $1\\ \\text{dm}^3 = 1$ L.",
+    tags: ["volume", "unite", "qcm"],
+  },
+
+  /* =========================
+     VOLUME_DEFI (compléments)
+  ========================= */
+  {
+    kind: "template",
+    id: "3e_volume_defi_tpl_1_pave_litres",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "volume_solide",
+    microId: "volume_defi",
+    difficulty: 5,
+    theme: "reunion",
+    hint: "Calcule le volume en $\\text{cm}^3$, puis convertis en litres.",
+    tags: ["volume", "defi", "litres", "reunion", "template"],
+    generate: () => {
+      const L = randomChoice([20, 30]);
+      const l = randomChoice([10, 20]);
+      const h = randomChoice([10, 50]);
+      const cm3 = L * l * h;
+      const litres = cm3 / 1000;
+      return {
+        text: `Un aquarium en forme de pavé droit mesure $${L}$ cm sur $${l}$ cm sur $${h}$ cm. Quelle est sa contenance en litres ?`,
+        format: "short",
+        expected: [String(litres), String(litres).replace(".", ",")],
+        comparator: "number_equal",
+        explanation:
+          `Définition : on calcule le volume puis on convertit.\n\n` +
+          `Méthode : $V = L \\times l \\times h$, puis $\\div 1000$ pour les litres.\n\n` +
+          `Calcul : $V = ${L} \\times ${l} \\times ${h} = ${cm3}\\ \\text{cm}^3 = ${formatNumber(litres)}$ L.\n\n` +
+          `Conclusion : la contenance est de $${formatNumber(litres)}$ L.`,
+        canvas: solideCanvas({ solide: "pave_droit", dimensions: { longueur: L, largeur: l, hauteur: h } }),
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "3e_volume_defi_fixed_1_choix_formule",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "volume_solide",
+    microId: "volume_defi",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Pour calculer le volume d’une boîte de conserve (cylindre), quelle formule choisir ?",
+    format: "qcm",
+    choices: ["$V = \\pi r^2 h$", "$V = L \\times l \\times h$", "$V = \\dfrac{4}{3}\\pi r^3$", "$V = c^3$"],
+    expected: ["$V = \\pi r^2 h$"],
+    comparator: "mcq_exact",
+    hint: "Une boîte de conserve est un cylindre.",
+    explanation:
+      "Définition : une boîte de conserve a la forme d’un cylindre.\n\n" +
+      "Méthode : on choisit la formule du cylindre.\n\n" +
+      "Calcul : $V = \\pi r^2 h$.\n\n" +
+      "Conclusion : on utilise $V = \\pi r^2 h$.",
+    tags: ["volume", "defi", "choix_formule", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "3e_volume_defi_tpl_2_cube_double",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "volume_solide",
+    microId: "volume_defi",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Calcule le volume du cube, puis multiplie par $k^3$.",
+    tags: ["volume", "defi", "agrandissement", "template"],
+    generate: () => {
+      const c = randomChoice([2, 3, 4]);
+      const k = randomChoice([2, 3]);
+      const V = c * c * c;
+      const newV = V * k * k * k;
+      return {
+        text: `Un cube a une arête de $${c}$ cm. On agrandit toutes ses longueurs d’un rapport $${k}$. Quel est le volume du nouveau cube (en $\\text{cm}^3$) ?`,
+        format: "short",
+        expected: [String(newV)],
+        comparator: "number_equal",
+        explanation:
+          `Définition : volume du cube $= c^3$ ; un agrandissement de rapport $${k}$ multiplie le volume par $${k}^3$.\n\n` +
+          `Méthode : on calcule le volume initial, puis on multiplie par $${k}^3$.\n\n` +
+          `Calcul : $V = ${c}^3 = ${V}$ ; nouveau volume $= ${V} \\times ${k * k * k} = ${newV}$.\n\n` +
+          `Conclusion : le nouveau volume est $${newV}\\ \\text{cm}^3$.`,
+        canvas: solideCanvas({ solide: "cube", dimensions: { cote: c } }),
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "3e_volume_defi_fixed_2_brevet",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "volume_solide",
+    microId: "volume_defi",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Un pavé droit a un volume de $48\\ \\text{cm}^3$. Sa base mesure $4$ cm sur $3$ cm. Quelle est sa hauteur (en cm) ?",
+    format: "short",
+    expected: ["4"],
+    comparator: "number_equal",
+    hint: "$h = V \\div (L \\times l)$.",
+    explanation:
+      "Définition : $V = L \\times l \\times h$.\n\n" +
+      "Méthode : $h = \\dfrac{V}{L \\times l}$.\n\n" +
+      "Calcul : $h = \\dfrac{48}{4 \\times 3} = \\dfrac{48}{12} = 4$.\n\n" +
+      "Conclusion : la hauteur est $4$ cm.",
+    tags: ["volume", "defi", "brevet", "short"],
+  },
+  {
+    kind: "fixed",
+    id: "3e_volume_defi_fixed_3_comparer",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "volume_solide",
+    microId: "volume_defi",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Un cube d’arête $3$ cm et un pavé droit de dimensions $3 \\times 3 \\times 2$ cm : lequel a le plus grand volume ?",
+    format: "qcm",
+    choices: ["le cube", "le pavé droit", "ils ont le même volume", "on ne peut pas savoir"],
+    expected: ["le cube"],
+    comparator: "mcq_exact",
+    hint: "Calcule les deux volumes.",
+    explanation:
+      "Définition : on compare les volumes calculés.\n\n" +
+      "Méthode : cube $= 3^3$ ; pavé $= 3 \\times 3 \\times 2$.\n\n" +
+      "Calcul : cube $= 27\\ \\text{cm}^3$ ; pavé $= 18\\ \\text{cm}^3$.\n\n" +
+      "Conclusion : le cube a le plus grand volume.",
+    tags: ["volume", "defi", "comparaison", "qcm"],
+  },
 ];

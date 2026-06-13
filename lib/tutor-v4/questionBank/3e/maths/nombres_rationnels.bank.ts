@@ -939,5 +939,495 @@ export const nombresRationnelsBank: TutorBankItemV4[] = [
       };
     },
   },
-  
+
+  /* =========================
+     RATIONNEL_RECONNAITRE (compléments)
+  ========================= */
+  {
+    kind: "fixed",
+    id: "3e_fraction_rationnel_reconnaitre_fixed_3",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "fraction_rationnel",
+    microId: "fraction_rationnel_reconnaitre",
+    difficulty: 1,
+    theme: "neutral",
+    text: "Le nombre entier $5$ est-il un nombre rationnel ?",
+    format: "qcm",
+    choices: ["oui", "non"],
+    expected: ["oui"],
+    comparator: "mcq_exact",
+    hint: "Peut-on l’écrire sous la forme $\\dfrac{a}{b}$ ?",
+    explanation:
+      "Définition : un rationnel s’écrit $\\dfrac{a}{b}$ avec $a$, $b$ entiers et $b \\neq 0$.\n\n" +
+      "Méthode : on cherche une écriture fractionnaire de $5$.\n\n" +
+      "Calcul : $5 = \\dfrac{5}{1}$.\n\n" +
+      "Conclusion : oui, $5$ est un nombre rationnel.",
+    tags: ["fraction_rationnel", "reconnaitre", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "3e_fraction_rationnel_reconnaitre_fixed_4_decimal",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "fraction_rationnel",
+    microId: "fraction_rationnel_reconnaitre",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Le nombre décimal $0{,}25$ est-il un nombre rationnel ?",
+    format: "qcm",
+    choices: ["oui", "non"],
+    expected: ["oui"],
+    comparator: "mcq_exact",
+    hint: "$0{,}25 = \\dfrac{25}{100}$.",
+    explanation:
+      "Définition : un rationnel s’écrit sous forme de fraction.\n\n" +
+      "Méthode : on cherche une fraction égale à $0{,}25$.\n\n" +
+      "Calcul : $0{,}25 = \\dfrac{25}{100} = \\dfrac{1}{4}$.\n\n" +
+      "Conclusion : oui, $0{,}25$ est un nombre rationnel.",
+    tags: ["fraction_rationnel", "reconnaitre", "decimal", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "3e_fraction_rationnel_reconnaitre_fixed_5_denominateur",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "fraction_rationnel",
+    microId: "fraction_rationnel_reconnaitre",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Dans l’écriture $\\dfrac{a}{b}$ d’un nombre rationnel, quelle condition sur $b$ ?",
+    format: "qcm",
+    choices: ["$b \\neq 0$", "$b = 0$", "$b > a$", "$b$ est pair"],
+    expected: ["$b \\neq 0$"],
+    comparator: "mcq_exact",
+    hint: "On ne peut pas diviser par $0$.",
+    explanation:
+      "Définition : un rationnel est $\\dfrac{a}{b}$ avec $b \\neq 0$.\n\n" +
+      "Méthode : on se rappelle qu’une division par $0$ est impossible.\n\n" +
+      "Calcul : donc le dénominateur ne peut pas être nul.\n\n" +
+      "Conclusion : $b \\neq 0$.",
+    tags: ["fraction_rationnel", "reconnaitre", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "3e_fraction_rationnel_reconnaitre_qcm_1",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "fraction_rationnel",
+    microId: "fraction_rationnel_reconnaitre",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Lequel de ces nombres n’est PAS écrit comme un rationnel valide ?",
+    format: "qcm",
+    choices: ["$\\dfrac{3}{0}$", "$\\dfrac{3}{4}$", "$\\dfrac{-2}{5}$", "$\\dfrac{7}{1}$"],
+    expected: ["$\\dfrac{3}{0}$"],
+    comparator: "mcq_exact",
+    hint: "Le dénominateur ne peut pas être $0$.",
+    explanation:
+      "Définition : un rationnel a un dénominateur non nul.\n\n" +
+      "Méthode : on repère un dénominateur égal à $0$.\n\n" +
+      "Calcul : $\\dfrac{3}{0}$ n’a pas de sens (division par $0$).\n\n" +
+      "Conclusion : $\\dfrac{3}{0}$ n’est pas valide.",
+    tags: ["fraction_rationnel", "reconnaitre", "qcm"],
+  },
+
+  /* =========================
+     RATIONNEL_ECRITURE (compléments)
+  ========================= */
+  {
+    kind: "template",
+    id: "3e_fraction_rationnel_ecriture_tpl_1_decimal",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "fraction_rationnel",
+    microId: "fraction_rationnel_ecriture",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "On effectue la division du numérateur par le dénominateur.",
+    tags: ["fraction_rationnel", "ecriture", "decimal", "template"],
+    generate: () => {
+      const item = randomChoice([
+        { num: 1, den: 2, dec: "0,5" },
+        { num: 3, den: 4, dec: "0,75" },
+        { num: 1, den: 4, dec: "0,25" },
+        { num: 2, den: 5, dec: "0,4" },
+        { num: 3, den: 5, dec: "0,6" },
+        { num: 1, den: 5, dec: "0,2" },
+      ]);
+      return {
+        text: `Écris $\\dfrac{${item.num}}{${item.den}}$ sous forme décimale.`,
+        format: "short",
+        expected: [item.dec, item.dec.replace(",", ".")],
+        comparator: "number_equal",
+        explanation:
+          `Définition : passer en écriture décimale, c’est effectuer la division.\n\n` +
+          `Méthode : on divise $${item.num}$ par $${item.den}$.\n\n` +
+          `Calcul : $${item.num} \\div ${item.den} = ${item.dec}$.\n\n` +
+          `Conclusion : $\\dfrac{${item.num}}{${item.den}} = ${item.dec}$.`,
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "3e_fraction_rationnel_ecriture_fixed_1",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "fraction_rationnel",
+    microId: "fraction_rationnel_ecriture",
+    difficulty: 1,
+    theme: "neutral",
+    text: "Écris $\\dfrac{1}{2}$ sous forme décimale.",
+    format: "short",
+    expected: ["0,5", "0.5"],
+    comparator: "number_equal",
+    hint: "$1 \\div 2$.",
+    explanation:
+      "Définition : on effectue la division.\n\n" +
+      "Méthode : $1 \\div 2$.\n\n" +
+      "Calcul : $1 \\div 2 = 0{,}5$.\n\n" +
+      "Conclusion : $\\dfrac{1}{2} = 0{,}5$.",
+    tags: ["fraction_rationnel", "ecriture", "short"],
+  },
+  {
+    kind: "fixed",
+    id: "3e_fraction_rationnel_ecriture_qcm_1",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "fraction_rationnel",
+    microId: "fraction_rationnel_ecriture",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Quelle fraction est égale à $0{,}25$ ?",
+    format: "qcm",
+    choices: ["$\\dfrac{1}{4}$", "$\\dfrac{1}{2}$", "$\\dfrac{2}{5}$", "$\\dfrac{1}{25}$"],
+    expected: ["$\\dfrac{1}{4}$"],
+    comparator: "mcq_exact",
+    hint: "$0{,}25 = \\dfrac{25}{100}$, à simplifier.",
+    explanation:
+      "Définition : un décimal peut s’écrire en fraction.\n\n" +
+      "Méthode : $0{,}25 = \\dfrac{25}{100}$, puis on simplifie.\n\n" +
+      "Calcul : $\\dfrac{25}{100} = \\dfrac{1}{4}$.\n\n" +
+      "Conclusion : $0{,}25 = \\dfrac{1}{4}$.",
+    tags: ["fraction_rationnel", "ecriture", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "3e_fraction_rationnel_ecriture_tpl_2_vers_fraction",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "fraction_rationnel",
+    microId: "fraction_rationnel_ecriture",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Un dixième s’écrit sur $10$, un centième sur $100$.",
+    tags: ["fraction_rationnel", "ecriture", "qcm", "template"],
+    generate: () => {
+      const item = randomChoice([
+        { dec: "0,5", correct: "$\\dfrac{1}{2}$", w: ["$\\dfrac{1}{5}$", "$\\dfrac{5}{1}$", "$\\dfrac{1}{50}$"] },
+        { dec: "0,2", correct: "$\\dfrac{1}{5}$", w: ["$\\dfrac{1}{2}$", "$\\dfrac{2}{1}$", "$\\dfrac{1}{20}$"] },
+        { dec: "0,75", correct: "$\\dfrac{3}{4}$", w: ["$\\dfrac{7}{5}$", "$\\dfrac{3}{5}$", "$\\dfrac{1}{4}$"] },
+      ]);
+      return {
+        text: `Quelle fraction simplifiée est égale à $${item.dec}$ ?`,
+        format: "qcm",
+        choices: shuffle([item.correct, ...item.w]),
+        expected: [item.correct],
+        comparator: "mcq_exact",
+        explanation:
+          `Définition : un décimal s’écrit comme une fraction décimale, puis on simplifie.\n\n` +
+          `Méthode : on écrit $${item.dec}$ sur $10$ ou $100$, puis on simplifie.\n\n` +
+          `Calcul : on obtient ${item.correct}.\n\n` +
+          `Conclusion : $${item.dec} = $ ${item.correct}.`,
+      };
+    },
+  },
+
+  /* =========================
+     RATIONNEL_COMPARER (compléments)
+  ========================= */
+  {
+    kind: "fixed",
+    id: "3e_fraction_rationnel_comparer_fixed_1",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "fraction_rationnel",
+    microId: "fraction_rationnel_comparer",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Quel est le plus grand : $\\dfrac{2}{3}$ ou $\\dfrac{3}{4}$ ?",
+    format: "qcm",
+    choices: ["$\\dfrac{3}{4}$", "$\\dfrac{2}{3}$", "ils sont égaux", "on ne peut pas comparer"],
+    expected: ["$\\dfrac{3}{4}$"],
+    comparator: "mcq_exact",
+    hint: "Mets au même dénominateur ($12$).",
+    explanation:
+      "Définition : pour comparer, on met au même dénominateur.\n\n" +
+      "Méthode : $\\dfrac{2}{3} = \\dfrac{8}{12}$ et $\\dfrac{3}{4} = \\dfrac{9}{12}$.\n\n" +
+      "Calcul : $\\dfrac{9}{12} > \\dfrac{8}{12}$.\n\n" +
+      "Conclusion : $\\dfrac{3}{4}$ est le plus grand.",
+    tags: ["fraction_rationnel", "comparer", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "3e_fraction_rationnel_comparer_tpl_1_meme_denominateur",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "fraction_rationnel",
+    microId: "fraction_rationnel_comparer",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "À même dénominateur, on compare les numérateurs.",
+    tags: ["fraction_rationnel", "comparer", "qcm", "template"],
+    generate: () => {
+      const den = randomChoice([5, 7, 9]);
+      const a = randomInt(1, den - 1);
+      let b = randomInt(1, den - 1);
+      while (b === a) b = randomInt(1, den - 1);
+      const correct = a > b ? `$\\dfrac{${a}}{${den}}$` : `$\\dfrac{${b}}{${den}}$`;
+      return {
+        text: `Quel est le plus grand : $\\dfrac{${a}}{${den}}$ ou $\\dfrac{${b}}{${den}}$ ?`,
+        format: "qcm",
+        choices: shuffle([`$\\dfrac{${a}}{${den}}$`, `$\\dfrac{${b}}{${den}}$`, "ils sont égaux"]),
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation:
+          `Définition : à même dénominateur, la plus grande fraction a le plus grand numérateur.\n\n` +
+          `Méthode : on compare $${a}$ et $${b}$.\n\n` +
+          `Calcul : $${Math.max(a, b)} > ${Math.min(a, b)}$.\n\n` +
+          `Conclusion : la plus grande est ${correct}.`,
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "3e_fraction_rationnel_comparer_fixed_2_decimal",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "fraction_rationnel",
+    microId: "fraction_rationnel_comparer",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Quel est le plus grand : $\\dfrac{1}{2}$ ou $0{,}4$ ?",
+    format: "qcm",
+    choices: ["$\\dfrac{1}{2}$", "$0{,}4$", "ils sont égaux", "on ne peut pas comparer"],
+    expected: ["$\\dfrac{1}{2}$"],
+    comparator: "mcq_exact",
+    hint: "Écris $\\dfrac{1}{2}$ en décimal.",
+    explanation:
+      "Définition : on peut comparer en passant tout en décimal.\n\n" +
+      "Méthode : $\\dfrac{1}{2} = 0{,}5$.\n\n" +
+      "Calcul : $0{,}5 > 0{,}4$.\n\n" +
+      "Conclusion : $\\dfrac{1}{2}$ est le plus grand.",
+    tags: ["fraction_rationnel", "comparer", "decimal", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "3e_fraction_rationnel_comparer_qcm_1_meme_num",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "fraction_rationnel",
+    microId: "fraction_rationnel_comparer",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Entre $\\dfrac{1}{3}$ et $\\dfrac{1}{5}$, quelle est la plus grande ?",
+    format: "qcm",
+    choices: ["$\\dfrac{1}{3}$", "$\\dfrac{1}{5}$", "elles sont égales", "on ne peut pas savoir"],
+    expected: ["$\\dfrac{1}{3}$"],
+    comparator: "mcq_exact",
+    hint: "À numérateur égal, plus le dénominateur est petit, plus la fraction est grande.",
+    explanation:
+      "Définition : à numérateur égal, la fraction est d’autant plus grande que le dénominateur est petit.\n\n" +
+      "Méthode : on compare les dénominateurs $3$ et $5$.\n\n" +
+      "Calcul : $3 < 5$, donc $\\dfrac{1}{3} > \\dfrac{1}{5}$.\n\n" +
+      "Conclusion : $\\dfrac{1}{3}$ est la plus grande.",
+    tags: ["fraction_rationnel", "comparer", "qcm"],
+  },
+
+  /* =========================
+     RATIONNEL_CALCULER (compléments)
+  ========================= */
+  {
+    kind: "template",
+    id: "3e_fraction_rationnel_calculer_tpl_1_somme",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "fraction_rationnel",
+    microId: "fraction_rationnel_calculer",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "À même dénominateur, on additionne les numérateurs.",
+    tags: ["fraction_rationnel", "calculer", "qcm", "template"],
+    generate: () => {
+      const den = randomChoice([5, 7, 8, 9]);
+      const a = randomInt(1, den - 2);
+      const b = randomInt(1, den - a);
+      const s = a + b;
+      const correct = `$\\dfrac{${s}}{${den}}$`;
+      return {
+        text: `Calcule $\\dfrac{${a}}{${den}} + \\dfrac{${b}}{${den}}$.`,
+        format: "qcm",
+        choices: shuffle([correct, `$\\dfrac{${a + b}}{${den + den}}$`, `$\\dfrac{${a * b}}{${den}}$`, `$\\dfrac{${s}}{${den * 2}}$`]),
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation:
+          `Définition : à même dénominateur, on additionne les numérateurs et on garde le dénominateur.\n\n` +
+          `Méthode : $\\dfrac{${a}}{${den}} + \\dfrac{${b}}{${den}} = \\dfrac{${a}+${b}}{${den}}$.\n\n` +
+          `Calcul : $= \\dfrac{${s}}{${den}}$.\n\n` +
+          `Conclusion : le résultat est $\\dfrac{${s}}{${den}}$.`,
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "3e_fraction_rationnel_calculer_qcm_1_diff",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "fraction_rationnel",
+    microId: "fraction_rationnel_calculer",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Calcule $\\dfrac{5}{8} - \\dfrac{2}{8}$.",
+    format: "qcm",
+    choices: ["$\\dfrac{3}{8}$", "$\\dfrac{7}{8}$", "$\\dfrac{3}{16}$", "$\\dfrac{2}{8}$"],
+    expected: ["$\\dfrac{3}{8}$"],
+    comparator: "mcq_exact",
+    hint: "À même dénominateur, on soustrait les numérateurs.",
+    explanation:
+      "Définition : à même dénominateur, on soustrait les numérateurs.\n\n" +
+      "Méthode : $\\dfrac{5}{8} - \\dfrac{2}{8} = \\dfrac{5-2}{8}$.\n\n" +
+      "Calcul : $= \\dfrac{3}{8}$.\n\n" +
+      "Conclusion : le résultat est $\\dfrac{3}{8}$.",
+    tags: ["fraction_rationnel", "calculer", "qcm"],
+  },
+
+  /* =========================
+     RATIONNEL_DEFI (compléments)
+  ========================= */
+  {
+    kind: "template",
+    id: "3e_fraction_rationnel_defi_tpl_3_fraction_quantite",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "fraction_rationnel",
+    microId: "fraction_rationnel_defi",
+    difficulty: 4,
+    theme: "reunion",
+    hint: "Une fraction d’une quantité : on divise par le dénominateur, on multiplie par le numérateur.",
+    tags: ["fraction_rationnel", "defi", "reunion", "template"],
+    generate: () => {
+      const den = randomChoice([3, 4, 5]);
+      const num = randomInt(1, den - 1);
+      const total = den * randomChoice([6, 8, 10]);
+      const res = (total * num) / den;
+      return {
+        text: `Dans un panier de ${total} fruits, $\\dfrac{${num}}{${den}}$ sont des mangues. Combien y a-t-il de mangues ?`,
+        format: "short",
+        expected: [String(res)],
+        comparator: "number_equal",
+        explanation:
+          `Définition : prendre $\\dfrac{${num}}{${den}}$ d’une quantité, c’est la diviser par ${den} puis multiplier par ${num}.\n\n` +
+          `Méthode : on calcule $${total} \\div ${den} \\times ${num}$.\n\n` +
+          `Calcul : $${total} \\div ${den} = ${total / den}$, puis $\\times ${num} = ${res}$.\n\n` +
+          `Conclusion : il y a ${res} mangues.`,
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "3e_fraction_rationnel_defi_qcm_1",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "fraction_rationnel",
+    microId: "fraction_rationnel_defi",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Un élève dit : « $\\dfrac{1}{2} + \\dfrac{1}{2} = \\dfrac{2}{4}$ ». A-t-il raison ?",
+    format: "qcm",
+    choices: ["non", "oui"],
+    expected: ["non"],
+    comparator: "mcq_exact",
+    hint: "À même dénominateur, on n’additionne pas les dénominateurs.",
+    explanation:
+      "Définition : à même dénominateur, on additionne les numérateurs et on garde le dénominateur.\n\n" +
+      "Méthode : $\\dfrac{1}{2} + \\dfrac{1}{2} = \\dfrac{1+1}{2}$.\n\n" +
+      "Calcul : $= \\dfrac{2}{2} = 1$.\n\n" +
+      "Conclusion : non, le résultat est $1$, pas $\\dfrac{2}{4}$.",
+    tags: ["fraction_rationnel", "defi", "erreur", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "3e_fraction_rationnel_defi_tpl_4_reste",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "fraction_rationnel",
+    microId: "fraction_rationnel_defi",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "On calcule la part utilisée, puis ce qui reste.",
+    tags: ["fraction_rationnel", "defi", "template"],
+    generate: () => {
+      const den = randomChoice([4, 5]);
+      const num = randomInt(1, den - 1);
+      const total = den * randomChoice([4, 5, 6]);
+      const utilise = (total * num) / den;
+      const reste = total - utilise;
+      return {
+        text: `Un réservoir contient ${total} litres. On utilise $\\dfrac{${num}}{${den}}$ du réservoir. Combien de litres reste-t-il ?`,
+        format: "short",
+        expected: [String(reste)],
+        comparator: "number_equal",
+        explanation:
+          `Définition : on calcule la part utilisée, puis on soustrait au total.\n\n` +
+          `Méthode : utilisé $= ${total} \\times \\dfrac{${num}}{${den}} = ${utilise}$.\n\n` +
+          `Calcul : reste $= ${total} - ${utilise} = ${reste}$.\n\n` +
+          `Conclusion : il reste ${reste} litres.`,
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "3e_fraction_rationnel_defi_qcm_2_simplifier",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "fraction_rationnel",
+    microId: "fraction_rationnel_defi",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Quelle est la forme irréductible de $\\dfrac{6}{8}$ ?",
+    format: "qcm",
+    choices: ["$\\dfrac{3}{4}$", "$\\dfrac{2}{3}$", "$\\dfrac{6}{8}$", "$\\dfrac{12}{16}$"],
+    expected: ["$\\dfrac{3}{4}$"],
+    comparator: "mcq_exact",
+    hint: "On divise numérateur et dénominateur par leur PGCD ($2$).",
+    explanation:
+      "Définition : une fraction est irréductible quand on ne peut plus la simplifier.\n\n" +
+      "Méthode : on divise par le PGCD de $6$ et $8$, qui est $2$.\n\n" +
+      "Calcul : $\\dfrac{6}{8} = \\dfrac{3}{4}$.\n\n" +
+      "Conclusion : la forme irréductible est $\\dfrac{3}{4}$.",
+    tags: ["fraction_rationnel", "defi", "simplifier", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "3e_fraction_rationnel_defi_qcm_3_comparer",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "fraction_rationnel",
+    microId: "fraction_rationnel_defi",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Deux élèves ont mangé : l’un $\\dfrac{2}{5}$ d’une pizza, l’autre $\\dfrac{1}{2}$. Qui a mangé le plus ?",
+    format: "qcm",
+    choices: ["celui qui a mangé $\\dfrac{1}{2}$", "celui qui a mangé $\\dfrac{2}{5}$", "ils ont mangé pareil", "on ne peut pas savoir"],
+    expected: ["celui qui a mangé $\\dfrac{1}{2}$"],
+    comparator: "mcq_exact",
+    hint: "Mets au même dénominateur ($10$).",
+    explanation:
+      "Définition : on compare deux fractions au même dénominateur.\n\n" +
+      "Méthode : $\\dfrac{2}{5} = \\dfrac{4}{10}$ et $\\dfrac{1}{2} = \\dfrac{5}{10}$.\n\n" +
+      "Calcul : $\\dfrac{5}{10} > \\dfrac{4}{10}$.\n\n" +
+      "Conclusion : celui qui a mangé $\\dfrac{1}{2}$ a mangé le plus.",
+    tags: ["fraction_rationnel", "defi", "comparer", "qcm"],
+  },
+
 ];
