@@ -12,6 +12,7 @@ import Solide3DCanvas from "./Solide3DCanvas";
 import StatGraphCanvas from "./StatGraphCanvas";
 import CanvasProbabilites from "./ProbabilitesCanvas";
 import ArbreProbabilitesCanvas from "./ArbreProbabilitesCanvas";
+import Repere3dCanvas from "./Repere3dCanvas";
 import AngleCanvas from "./AngleCanvas";
 import FonctionGraphiqueCanvas from "./FonctionGraphiqueCanvas";
 import FonctionTableauCanvas from "./FonctionTableauCanvas";
@@ -71,6 +72,9 @@ export default function CanvasRenderer({ figure }: Props) {
 
     case "arbre_proba":
       return <ArbreProbabilitesCanvas figure={figure} />;
+
+    case "repere3d":
+      return <Repere3dCanvas figure={figure} />;
 
     case "angle":
       return <AngleCanvas figure={figure} />;

@@ -168,4 +168,28 @@ export const notions: NotionSource[] = [
     prerequis: ["suite_numerique"],
     levels: [1, 2, 3],
   },
+
+  /* =========================
+     ANALYSE - ÉQUATIONS DIFFÉRENTIELLES
+  ========================= */
+
+  {
+    id: "equation_differentielle",
+    label: "Équations différentielles",
+    boId: "BOTSA3",
+    prerequis: ["fonction_exponentielle", "primitive_integrale"],
+    levels: [2, 3],
+  },
+
+  /* =========================
+     PROBABILITÉS - CONCENTRATION ET LOI DES GRANDS NOMBRES
+  ========================= */
+
+  {
+    id: "concentration_echantillonnage",
+    label: "Concentration, loi des grands nombres",
+    boId: "BOTSP1",
+    prerequis: ["variable_aleatoire", "loi_binomiale"],
+    levels: [2, 3],
+  },
 ];

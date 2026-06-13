@@ -12,6 +12,7 @@ export { default as SectionSolideCanvas } from "./SectionSolideCanvas";
 export { default as StatGraphCanvas } from "./StatGraphCanvas";
 export { default as CanvasProbabilites } from "./ProbabilitesCanvas";
 export { default as ArbreProbabilitesCanvas } from "./ArbreProbabilitesCanvas";
+export { default as Repere3dCanvas } from "./Repere3dCanvas";
 export { default as FonctionGraphiqueCanvas } from "./FonctionGraphiqueCanvas";
 export { default as FonctionTableauCanvas } from "./FonctionTableauCanvas";
 export { default as TransformationCanvas } from "./TransformationCanvas";

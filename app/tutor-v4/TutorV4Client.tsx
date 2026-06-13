@@ -33,6 +33,7 @@ import {
   StatGraphCanvas,
   CanvasProbabilites,
   ArbreProbabilitesCanvas,
+  Repere3dCanvas,
   AngleCanvas,
   FonctionGraphiqueCanvas,
   FonctionTableauCanvas,
@@ -247,6 +248,10 @@ function renderCanvas(canvas?: CanvasFigure | null) {
 
   if (canvas.kind === "arbre_proba") {
     return <ArbreProbabilitesCanvas figure={canvas} />;
+  }
+
+  if (canvas.kind === "repere3d") {
+    return <Repere3dCanvas figure={canvas} />;
   }
 
   if (canvas.kind === "angle") {

@@ -62,7 +62,10 @@ export type {
   SchemaBarreCanvasData,
   DroiteGradueeCanvasData,
   ArbreProbaNoeud,
-  ArbreProbabilitesCanvasData
+  ArbreProbabilitesCanvasData,
+  Repere3dPoint,
+  Repere3dSegment,
+  Repere3dCanvasData
 } from "./types_canvas";
 
 import type { CanvasFigure } from "./types_canvas";

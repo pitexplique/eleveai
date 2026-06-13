@@ -1276,12 +1276,41 @@ export type ArbreProbabilitesCanvasData = {
   size?: { width?: number; height?: number };
 };
 
+export type Repere3dPoint = {
+  x: number;
+  y: number;
+  z: number;
+  label?: string;
+  couleur?: string;
+};
+
+export type Repere3dSegment = {
+  /** Indices (dans `points`) des extrémités du segment. */
+  de: number;
+  a: number;
+  couleur?: string;
+  /** Trait pointillé (arêtes cachées, projections…). */
+  pointille?: boolean;
+};
+
+export type Repere3dCanvasData = {
+  kind: "repere3d";
+  titre?: string;
+  points?: Repere3dPoint[];
+  /** Segments à tracer entre points (arêtes d'un solide, vecteurs…). */
+  segments?: Repere3dSegment[];
+  /** Affiche les axes $x$, $y$, $z$ (vrai par défaut). */
+  afficherAxes?: boolean;
+  size?: { width?: number; height?: number };
+};
+
 export type CanvasFigure =
   | TriangleCanvasData
   | QuadrilatereCanvasData
   | FigureLibreCanvasData
   | CanvasProbabilitesData
   | ArbreProbabilitesCanvasData
+  | Repere3dCanvasData
   | TableauProportionnaliteCanvasData
   | NumberLineCanvasData
   | Solide3DCanvasData

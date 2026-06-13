@@ -652,4 +652,86 @@ export const microSkills: MicroSkillSource[] = [
     notionId: "algorithmique_python",
     prerequis: ["python_seuil", "python_simulation_proba"],
   },
+
+  /* =========================
+     ÉQUATIONS DIFFÉRENTIELLES
+  ========================= */
+
+  {
+    id: "equadiff_reconnaitre",
+    label: "Reconnaître une équation différentielle",
+    notionId: "equation_differentielle",
+    prerequis: [],
+  },
+  {
+    id: "equadiff_y_prime_ay",
+    label: "Résoudre y' = ay",
+    notionId: "equation_differentielle",
+    prerequis: ["equadiff_reconnaitre", "exp_definition"],
+  },
+  {
+    id: "equadiff_y_prime_ay_b",
+    label: "Résoudre y' = ay + b",
+    notionId: "equation_differentielle",
+    prerequis: ["equadiff_y_prime_ay"],
+  },
+  {
+    id: "equadiff_solution_particuliere",
+    label: "Vérifier une solution particulière",
+    notionId: "equation_differentielle",
+    prerequis: ["equadiff_reconnaitre", "derivation_formules"],
+  },
+  {
+    id: "equadiff_condition_initiale",
+    label: "Déterminer la solution vérifiant une condition initiale",
+    notionId: "equation_differentielle",
+    prerequis: ["equadiff_y_prime_ay_b"],
+  },
+  {
+    id: "equadiff_defi",
+    label: "Résoudre un exercice type bac sur les équations différentielles",
+    notionId: "equation_differentielle",
+    prerequis: ["equadiff_condition_initiale", "equadiff_solution_particuliere"],
+  },
+
+  /* =========================
+     CONCENTRATION ET LOI DES GRANDS NOMBRES
+  ========================= */
+
+  {
+    id: "concentration_echantillon_moyenne",
+    label: "Espérance et variance d'une moyenne d'échantillon",
+    notionId: "concentration_echantillonnage",
+    prerequis: ["va_esperance", "va_variance_ecart_type"],
+  },
+  {
+    id: "concentration_inegalite_bienayme",
+    label: "Utiliser l'inégalité de Bienaymé-Tchebychev",
+    notionId: "concentration_echantillonnage",
+    prerequis: ["concentration_echantillon_moyenne"],
+  },
+  {
+    id: "concentration_inegalite_concentration",
+    label: "Utiliser l'inégalité de concentration",
+    notionId: "concentration_echantillonnage",
+    prerequis: ["concentration_inegalite_bienayme"],
+  },
+  {
+    id: "concentration_loi_grands_nombres",
+    label: "Comprendre la loi des grands nombres",
+    notionId: "concentration_echantillonnage",
+    prerequis: ["concentration_inegalite_concentration"],
+  },
+  {
+    id: "concentration_fluctuation",
+    label: "Étudier la fluctuation d'une fréquence",
+    notionId: "concentration_echantillonnage",
+    prerequis: ["concentration_loi_grands_nombres", "loi_binomiale"],
+  },
+  {
+    id: "concentration_defi",
+    label: "Résoudre un exercice type bac sur la concentration",
+    notionId: "concentration_echantillonnage",
+    prerequis: ["concentration_loi_grands_nombres", "concentration_fluctuation"],
+  },
 ];

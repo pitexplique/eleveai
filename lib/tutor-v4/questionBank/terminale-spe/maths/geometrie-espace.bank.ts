@@ -15,11 +15,34 @@
 //   composantes, paramètres) → "short" (number_equal).
 // - Vecteurs notés en colonnes via $\vec{u}(a\,;b\,;c)$ ; équations en LaTeX.
 
-import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
+import type { TutorBankItemV4, CanvasFigure } from "@/lib/tutor-v4/types";
 
 function randomInt(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
+
+// Cube ABCDEFGH de côté 1 : ABCD base, EFGH sommet (E au-dessus de A, etc.).
+//   A(0;0;0) B(1;0;0) C(1;1;0) D(0;1;0) E(0;0;1) F(1;0;1) G(1;1;1) H(0;1;1).
+const cubeABCDEFGHCanvas: CanvasFigure = {
+  kind: "repere3d",
+  titre: "Cube ABCDEFGH (côté 1)",
+  afficherAxes: false,
+  points: [
+    { x: 0, y: 0, z: 0, label: "A", couleur: "#0f172a" },
+    { x: 1, y: 0, z: 0, label: "B", couleur: "#0f172a" },
+    { x: 1, y: 1, z: 0, label: "C", couleur: "#0f172a" },
+    { x: 0, y: 1, z: 0, label: "D", couleur: "#0f172a" },
+    { x: 0, y: 0, z: 1, label: "E", couleur: "#0f172a" },
+    { x: 1, y: 0, z: 1, label: "F", couleur: "#0f172a" },
+    { x: 1, y: 1, z: 1, label: "G", couleur: "#dc2626" },
+    { x: 0, y: 1, z: 1, label: "H", couleur: "#0f172a" },
+  ],
+  segments: [
+    { de: 0, a: 1 }, { de: 1, a: 2 }, { de: 2, a: 3 }, { de: 3, a: 0 },
+    { de: 4, a: 5 }, { de: 5, a: 6 }, { de: 6, a: 7 }, { de: 7, a: 4 },
+    { de: 0, a: 4 }, { de: 1, a: 5 }, { de: 2, a: 6 }, { de: 3, a: 7 },
+  ],
+};
 
 function exp(definition: string, methode: string, calcul: string, conclusion: string) {
   return (
@@ -1444,7 +1467,7 @@ export const geometrieEspaceBank: TutorBankItemV4[] = [
     microId: "espace_defi",
     difficulty: 4,
     theme: "neutral",
-    text: "$ABCDEFGH$ est un cube de côté $1$, avec $A(0\\,;0\\,;0)$, $B(1\\,;0\\,;0)$, $D(0\\,;1\\,;0)$ et $E(0\\,;0\\,;1)$. Quelles sont les coordonnées de $G$ (sommet opposé à $A$) ?",
+    text: "$ABCDEFGH$ est un cube de côté $1$ (voir figure), avec $A(0\\,;0\\,;0)$, $B(1\\,;0\\,;0)$, $D(0\\,;1\\,;0)$ et $E(0\\,;0\\,;1)$. Quelles sont les coordonnées de $G$ (sommet opposé à $A$) ?",
     format: "qcm",
     choices: [
       "$(1\\,;1\\,;1)$",
@@ -1454,6 +1477,7 @@ export const geometrieEspaceBank: TutorBankItemV4[] = [
     ],
     expected: ["$(1\\,;1\\,;1)$"],
     comparator: "mcq_exact",
+    canvas: cubeABCDEFGHCanvas,
     hint: "$G$ est le sommet diamétralement opposé à $A(0;0;0)$.",
     explanation: exp(
       "Dans ce repère, le cube a ses sommets aux coordonnées $0$ ou $1$.",
@@ -1483,6 +1507,7 @@ export const geometrieEspaceBank: TutorBankItemV4[] = [
     ],
     expected: ["$\\sqrt{3}$"],
     comparator: "mcq_exact",
+    canvas: cubeABCDEFGHCanvas,
     hint: "$AG = \\sqrt{1^2 + 1^2 + 1^2}$.",
     explanation: exp(
       "On applique la formule de la distance.",

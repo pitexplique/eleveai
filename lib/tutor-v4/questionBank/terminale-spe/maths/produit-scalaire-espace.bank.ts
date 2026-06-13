@@ -14,11 +14,33 @@
 // - Produit scalaire analytique : $\vec{u}\cdot\vec{v} = xx' + yy' + zz'$.
 // - Normes/produits scalaires entiers → "short" ; angles/expressions → QCM.
 
-import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
+import type { TutorBankItemV4, CanvasFigure } from "@/lib/tutor-v4/types";
 
 function randomInt(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
+
+// Cube ABCDEFGH de côté 1 (mêmes coordonnées que la banque de géométrie).
+const cubeABCDEFGHCanvas: CanvasFigure = {
+  kind: "repere3d",
+  titre: "Cube ABCDEFGH (côté 1)",
+  afficherAxes: false,
+  points: [
+    { x: 0, y: 0, z: 0, label: "A", couleur: "#dc2626" },
+    { x: 1, y: 0, z: 0, label: "B", couleur: "#0f172a" },
+    { x: 1, y: 1, z: 0, label: "C", couleur: "#0f172a" },
+    { x: 0, y: 1, z: 0, label: "D", couleur: "#0f172a" },
+    { x: 0, y: 0, z: 1, label: "E", couleur: "#0f172a" },
+    { x: 1, y: 0, z: 1, label: "F", couleur: "#0f172a" },
+    { x: 1, y: 1, z: 1, label: "G", couleur: "#0f172a" },
+    { x: 0, y: 1, z: 1, label: "H", couleur: "#0f172a" },
+  ],
+  segments: [
+    { de: 0, a: 1 }, { de: 1, a: 2 }, { de: 2, a: 3 }, { de: 3, a: 0 },
+    { de: 4, a: 5 }, { de: 5, a: 6 }, { de: 6, a: 7 }, { de: 7, a: 4 },
+    { de: 0, a: 4 }, { de: 1, a: 5 }, { de: 2, a: 6 }, { de: 3, a: 7 },
+  ],
+};
 
 function exp(definition: string, methode: string, calcul: string, conclusion: string) {
   return (
@@ -1368,10 +1390,11 @@ export const produitScalaireEspaceBank: TutorBankItemV4[] = [
     microId: "ps_espace_defi",
     difficulty: 4,
     theme: "neutral",
-    text: "Cube de côté 1 : $A(0\\,;0\\,;0)$, $B(1\\,;0\\,;0)$, $E(0\\,;0\\,;1)$. Que vaut $\\overrightarrow{AB} \\cdot \\overrightarrow{AE}$ ?",
+    text: "Cube de côté 1 (voir figure) : $A(0\\,;0\\,;0)$, $B(1\\,;0\\,;0)$, $E(0\\,;0\\,;1)$. Que vaut $\\overrightarrow{AB} \\cdot \\overrightarrow{AE}$ ?",
     format: "short",
     expected: ["0"],
     comparator: "number_equal",
+    canvas: cubeABCDEFGHCanvas,
     hint: "$\\overrightarrow{AB}(1\\,;0\\,;0)$ et $\\overrightarrow{AE}(0\\,;0\\,;1)$.",
     explanation: exp(
       "On calcule le produit scalaire des deux arêtes.",
@@ -1472,10 +1495,11 @@ export const produitScalaireEspaceBank: TutorBankItemV4[] = [
     microId: "ps_espace_defi",
     difficulty: 5,
     theme: "neutral",
-    text: "Cube de côté 1 : $A(0\\,;0\\,;0)$ et $G(1\\,;1\\,;1)$. Que vaut $\\overrightarrow{AG} \\cdot \\overrightarrow{AG}$ ?",
+    text: "Cube de côté 1 (voir figure) : $A(0\\,;0\\,;0)$ et $G(1\\,;1\\,;1)$. Que vaut $\\overrightarrow{AG} \\cdot \\overrightarrow{AG}$ ?",
     format: "short",
     expected: ["3"],
     comparator: "number_equal",
+    canvas: cubeABCDEFGHCanvas,
     hint: "$\\overrightarrow{AG}\\cdot\\overrightarrow{AG} = \\|\\overrightarrow{AG}\\|^2$.",
     explanation: exp(
       "Le produit scalaire d'un vecteur par lui-même est le carré de sa norme.",
