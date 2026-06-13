@@ -1,12 +1,59 @@
 "use client";
 
 import { useRef, useState } from "react";
+import type { MouseEvent as ReactMouseEvent } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useEleve } from "@/context/EleveContext";
 import GoogleFollowChip from "@/components/GoogleFollowChip";
 import FloatingCoach from "@/components/FloatingCoach";
 import ElevesALHonneur from "@/components/ameliorations/ElevesALHonneur";
+
+// ─── Drag-to-scroll (glisser à la souris sur desktop) ──────────────────────────
+// Sur mobile le scroll horizontal au doigt est natif. Sur desktop il n'y a pas de
+// « glisser à la souris » : on le simule ici (retour Lazslo).
+function useDragScroll() {
+  const ref = useRef<HTMLDivElement>(null);
+  const drag = useRef({ down: false, startX: 0, startScroll: 0, moved: false });
+
+  const onMouseDown = (e: ReactMouseEvent) => {
+    const el = ref.current;
+    if (!el) return;
+    drag.current = { down: true, startX: e.pageX, startScroll: el.scrollLeft, moved: false };
+  };
+
+  const onMouseMove = (e: ReactMouseEvent) => {
+    const el = ref.current;
+    if (!el || !drag.current.down) return;
+    const dx = e.pageX - drag.current.startX;
+    if (Math.abs(dx) > 4) drag.current.moved = true;
+    el.scrollLeft = drag.current.startScroll - dx;
+  };
+
+  const stop = () => {
+    drag.current.down = false;
+  };
+
+  // Empêche la navigation du <Link> quand on a glissé plutôt que cliqué.
+  const onClickCapture = (e: ReactMouseEvent) => {
+    if (drag.current.moved) {
+      e.preventDefault();
+      e.stopPropagation();
+      drag.current.moved = false;
+    }
+  };
+
+  return {
+    ref,
+    handlers: {
+      onMouseDown,
+      onMouseMove,
+      onMouseUp: stop,
+      onMouseLeave: stop,
+      onClickCapture,
+    },
+  };
+}
 
 // ─── Constants ────────────────────────────────────────────────────────────────
 
@@ -110,6 +157,7 @@ export default function AccueilPage() {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const { eleve } = useEleve();
   const [isPlaying, setIsPlaying] = useState(false);
+  const nouveautes = useDragScroll();
 
   const eleveClasse = eleve?.classe?.toLowerCase() ?? null;
   const prenomAffiche = getPrenomAffiche(eleve?.nom);
@@ -380,7 +428,11 @@ export default function AccueilPage() {
           {/* Fondu à droite : montre qu'il y a d'autres cartes à faire défiler
               (retour élève du 11/06/2026 : « on voit pas la droite de nouveautés ») */}
           <div className="relative">
-          <div className="flex gap-3 overflow-x-auto pb-3 pr-12 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          <div
+            ref={nouveautes.ref}
+            {...nouveautes.handlers}
+            className="flex gap-3 overflow-x-auto pb-3 pr-12 cursor-grab active:cursor-grabbing select-none [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          >
             {[
               { icon: "🇪🇸", label: "Parcours Espagnol",  desc: "Bilan de niveau A1 → B2 avec audio",    href: "/parcours-espagnol",           color: "from-rose-600 to-red-800"     },
               { icon: "🇪🇸", label: "Coach Espagnol",     desc: "A1 → B2, vocabulaire & audio",          href: "/coach-ia/espagnol",           color: "from-red-600 to-rose-800"     },

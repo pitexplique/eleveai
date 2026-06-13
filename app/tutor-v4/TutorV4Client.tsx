@@ -78,6 +78,7 @@ import { getTutorLesson } from "@/lib/tutor-v4/lessons/getTutorLesson";
 import { LessonPanel } from "@/lib/tutor-v4/lessons/components/LessonPanel";
 import TutorSimpleView from "./TutorSimpleView";
 import AudioBoost from "@/components/AudioBoost";
+import { MarkdownMath } from "@/components/MarkdownMath";
 
 import { useRouter, useSearchParams } from "next/navigation";
 
@@ -1417,7 +1418,7 @@ function handleInputKeyDown(
 
           {feedback && !wrongAnswerPanelOpen ? (
             <section className="rounded-2xl border border-slate-200 bg-white/95 p-4 shadow-sm">
-              <div className="text-sm font-semibold text-slate-700">{feedback}</div>
+              <MarkdownMath className="text-sm font-semibold text-slate-700">{feedback}</MarkdownMath>
             </section>
           ) : null}
 
@@ -1532,9 +1533,9 @@ function handleInputKeyDown(
                     {microLabel(currentQuestion.microId, classe, matiere)}
                   </div>
 
-                  <div className="mb-4 rounded-2xl border border-slate-200 bg-white p-4 text-base text-slate-900">
+                  <MarkdownMath className="mb-4 rounded-2xl border border-slate-200 bg-white p-4 text-base text-slate-900">
                     {currentQuestion.text}
-                  </div>
+                  </MarkdownMath>
 
                   {currentQuestion.audioSrc ? (
                     <div className="mb-5 rounded-2xl border border-sky-200 bg-sky-50 p-4">
@@ -1583,7 +1584,7 @@ function handleInputKeyDown(
                             disabled={busy || wrongAnswerPanelOpen}
                             className="rounded-2xl border border-slate-300 bg-white px-4 py-4 text-left text-base font-medium text-slate-900 transition hover:bg-slate-50 disabled:opacity-50"
                           >
-                            {choice}
+                            <MarkdownMath inline>{choice}</MarkdownMath>
                           </button>
                         ))}
                       </div>
@@ -1640,7 +1641,7 @@ function handleInputKeyDown(
                   {mode === "coaching" && currentQuestion.hint ? (
                     <div className="mt-4 rounded-2xl border border-emerald-200 bg-emerald-50 p-4 text-sm text-emerald-900">
                       <span className="font-black">Indice :</span>{" "}
-                      {currentQuestion.hint}
+                      <MarkdownMath inline>{currentQuestion.hint}</MarkdownMath>
                     </div>
                   ) : null}
                 </>
@@ -1795,7 +1796,9 @@ function WrongAnswerPanel({
         <VerticalRibbon label="examiner" colorClass="bg-lime-500" />
         <div className="pl-2">
           <div className="rounded-xl bg-white p-4">
-            <div className="mb-4 text-base text-slate-900">{question.text}</div>
+            <MarkdownMath className="mb-4 text-base text-slate-900">
+              {question.text}
+            </MarkdownMath>
 
             {question.canvas ? (
               <div className="mb-4 rounded-2xl bg-slate-50 p-3">
@@ -1815,7 +1818,7 @@ function WrongAnswerPanel({
                   : "inline-flex min-w-[88px] text-lg"
               }`}
             >
-              {userAnswer || "—"}
+              <MarkdownMath inline>{userAnswer || "—"}</MarkdownMath>
             </div>
           </div>
         </div>
@@ -1824,9 +1827,9 @@ function WrongAnswerPanel({
       <div className="relative rounded-sm border border-violet-200 bg-white p-6 shadow-sm">
         <VerticalRibbon label="résoudre" colorClass="bg-orange-400" />
         <div className="pl-2">
-          <div className="whitespace-pre-line text-[15px] leading-8 text-slate-900">
+          <MarkdownMath className="whitespace-pre-line text-[15px] leading-8 text-slate-900">
             {explanation || "Relis l’énoncé et compare bien les rangs des chiffres."}
-          </div>
+          </MarkdownMath>
         </div>
       </div>
 

@@ -3,6 +3,7 @@
 import type { KeyboardEvent, ReactNode } from "react";
 import { Video } from "lucide-react";
 import AudioBoost from "@/components/AudioBoost";
+import { MarkdownMath } from "@/components/MarkdownMath";
 import type { Classe, Matiere } from "@/lib/tutor-v4/catalog";
 import type { TutorQuestionOption } from "@/lib/tutor-v4/types";
 import { buildLearningVideoHref } from "@/lib/videoSearch";
@@ -145,9 +146,9 @@ export default function TutorSimpleView({
                   </span>
                 </div>
 
-                <p className="mb-6 text-xl leading-8 text-slate-950">
+                <MarkdownMath className="mb-6 text-xl leading-8 text-slate-950">
                   {currentQuestion.text}
-                </p>
+                </MarkdownMath>
 
                 {currentQuestion.audioSrc ? (
                   <div className="mb-6 rounded-2xl border border-sky-200 bg-sky-50 p-4">
@@ -179,7 +180,7 @@ export default function TutorSimpleView({
                         disabled={busy}
                         className="rounded-lg border border-slate-300 bg-white px-4 py-4 text-left text-lg font-semibold text-slate-900 shadow-sm hover:bg-sky-50 disabled:opacity-60"
                       >
-                        {choice}
+                        <MarkdownMath inline>{choice}</MarkdownMath>
                       </button>
                     ))}
                   </div>
@@ -228,7 +229,7 @@ export default function TutorSimpleView({
 
                 {feedback ? (
                   <div className="mt-6 rounded-lg bg-slate-50 px-4 py-3 text-sm font-semibold text-slate-700">
-                    {feedback}
+                    <MarkdownMath>{feedback}</MarkdownMath>
                   </div>
                 ) : null}
               </div>
