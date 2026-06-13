@@ -977,4 +977,307 @@ export const trianglesBank: TutorBankItemV4[] = [
       "Conclusion : la somme des angles d’un triangle ne peut pas dépasser 180°.",
     tags: ["triangle", "defi", "open", "angles"],
   },
+
+  /* =========================
+     TRIANGLE_CONSTRUIRE
+  ========================= */
+
+  {
+    kind: "fixed",
+    id: "3e_triangle_construire_fixed_1",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "triangle_figure",
+    microId: "triangle_construire",
+    difficulty: 1,
+    theme: "neutral",
+    text: "Quelle donnée suffit pour construire un triangle de façon unique ?",
+    format: "qcm",
+    choices: [
+      "les longueurs de ses trois côtés",
+      "un seul côté",
+      "un seul angle",
+      "son périmètre seulement",
+    ],
+    expected: ["les longueurs de ses trois côtés"],
+    comparator: "mcq_exact",
+    hint: "Pense au compas : trois longueurs déterminent le triangle.",
+    explanation:
+      "Définition : un triangle est entièrement déterminé par certaines données (par exemple ses trois côtés).\n\n" +
+      "Méthode : on vérifie si la donnée fixe la forme et la taille du triangle.\n\n" +
+      "Calcul : connaître seulement un côté ou un angle laisse une infinité de triangles possibles.\n\n" +
+      "Conclusion : les trois longueurs de côtés permettent une construction unique.",
+    tags: ["triangle", "construire", "donnees", "qcm"],
+  },
+
+  {
+    kind: "template",
+    id: "3e_triangle_construire_tpl_1_angle_manquant",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "triangle_figure",
+    microId: "triangle_construire",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "La somme des angles d’un triangle vaut $180^\\circ$.",
+    tags: ["triangle", "construire", "angles", "canvas", "template"],
+    generate: () => {
+      const a = randomInt(40, 80);
+      const b = randomInt(40, 80);
+      const c = 180 - a - b;
+
+      return {
+        text: `Pour construire un triangle, on connaît deux de ses angles : $${a}^\\circ$ et $${b}^\\circ$. Quelle est la mesure (en degrés) du troisième angle ?`,
+        format: "short",
+        expected: [String(c)],
+        comparator: "number_equal",
+        explanation:
+          `Définition : dans un triangle, la somme des trois angles vaut $180^\\circ$.\n\n` +
+          `Méthode : on soustrait les deux angles connus à $180^\\circ$.\n\n` +
+          `Calcul : $180 - ${a} - ${b} = ${c}$.\n\n` +
+          `Conclusion : le troisième angle mesure $${c}^\\circ$.`,
+        canvas: triangleCanvas({
+          points: {
+            A: { x: 50, y: 180 },
+            B: { x: 230, y: 180 },
+            C: { x: 120, y: 50 },
+          },
+          angleLabels: { A: `${a}°`, B: `${b}°`, C: "?" },
+        }),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "3e_triangle_construire_tpl_2_inegalite",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "triangle_figure",
+    microId: "triangle_construire",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Un triangle existe si le plus grand côté est inférieur à la somme des deux autres.",
+    tags: ["triangle", "construire", "inegalite", "template"],
+    generate: () => {
+      const constructible = randomChoice([true, false]);
+      const a = randomInt(3, 6);
+      const b = randomInt(4, 7);
+      const c = constructible ? a + b - randomInt(1, 2) : a + b + randomInt(1, 3);
+
+      return {
+        text: `Peut-on construire un triangle dont les côtés mesurent ${a} cm, ${b} cm et ${c} cm ?`,
+        format: "qcm",
+        choices: ["oui", "non"],
+        expected: [constructible ? "oui" : "non"],
+        comparator: "mcq_exact",
+        explanation:
+          `Définition : un triangle est constructible si le plus grand côté est inférieur à la somme des deux autres (inégalité triangulaire).\n\n` +
+          `Méthode : on compare le plus grand côté à la somme des deux autres.\n\n` +
+          `Calcul : le plus grand côté est $${Math.max(a, b, c)}$ et la somme des deux autres est $${
+            a + b + c - Math.max(a, b, c)
+          }$.\n\n` +
+          `Conclusion : ${
+            constructible
+              ? "la condition est respectée, le triangle est constructible."
+              : "la condition n’est pas respectée, le triangle est impossible."
+          }`,
+      };
+    },
+  },
+
+  {
+    kind: "fixed",
+    id: "3e_triangle_construire_fixed_2_angles_impossibles",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "triangle_figure",
+    microId: "triangle_construire",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Peut-on construire un triangle dont les angles mesureraient $100^\\circ$, $50^\\circ$ et $40^\\circ$ ?",
+    format: "qcm",
+    choices: ["non", "oui"],
+    expected: ["non"],
+    comparator: "mcq_exact",
+    hint: "Additionne les trois angles et compare à $180^\\circ$.",
+    explanation:
+      "Définition : la somme des angles d’un triangle est exactement $180^\\circ$.\n\n" +
+      "Méthode : on additionne les trois angles proposés.\n\n" +
+      "Calcul : $100 + 50 + 40 = 190 \\neq 180$.\n\n" +
+      "Conclusion : ces angles ne permettent pas de construire un triangle.",
+    tags: ["triangle", "construire", "angles", "qcm"],
+  },
+
+  {
+    kind: "template",
+    id: "3e_triangle_construire_tpl_3_troisieme_cote",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "triangle_figure",
+    microId: "triangle_construire",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Le troisième côté doit être strictement inférieur à la somme des deux autres.",
+    tags: ["triangle", "construire", "inegalite", "template"],
+    generate: () => {
+      const a = randomInt(4, 8);
+      const b = randomInt(4, 8);
+      const somme = a + b;
+
+      return {
+        text: `Deux côtés d’un triangle mesurent ${a} cm et ${b} cm. Le troisième côté doit être strictement inférieur à combien de cm ?`,
+        format: "short",
+        expected: [String(somme)],
+        comparator: "number_equal",
+        explanation:
+          `Définition : l’inégalité triangulaire impose que chaque côté soit inférieur à la somme des deux autres.\n\n` +
+          `Méthode : le troisième côté doit être inférieur à la somme des deux côtés connus.\n\n` +
+          `Calcul : $${a} + ${b} = ${somme}$.\n\n` +
+          `Conclusion : le troisième côté doit mesurer moins de ${somme} cm.`,
+      };
+    },
+  },
+
+  {
+    kind: "fixed",
+    id: "3e_triangle_construire_fixed_3_equilateral",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "triangle_figure",
+    microId: "triangle_construire",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Peut-on construire un triangle dont les trois angles mesurent chacun $60^\\circ$ ?",
+    format: "qcm",
+    choices: ["oui, c’est un triangle équilatéral", "non, c’est impossible", "oui, c’est un triangle rectangle", "non, la somme dépasse $180^\\circ$"],
+    expected: ["oui, c’est un triangle équilatéral"],
+    comparator: "mcq_exact",
+    hint: "Vérifie la somme : $60 + 60 + 60$.",
+    explanation:
+      "Définition : un triangle dont les trois angles sont égaux à $60^\\circ$ est équilatéral.\n\n" +
+      "Méthode : on vérifie que la somme vaut $180^\\circ$.\n\n" +
+      "Calcul : $60 + 60 + 60 = 180$.\n\n" +
+      "Conclusion : oui, on obtient un triangle équilatéral.",
+    tags: ["triangle", "construire", "equilateral", "qcm"],
+  },
+
+  {
+    kind: "template",
+    id: "3e_triangle_construire_tpl_4_isocele",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "triangle_figure",
+    microId: "triangle_construire",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Dans un triangle isocèle, les deux angles à la base sont égaux.",
+    tags: ["triangle", "construire", "isocele", "canvas", "template"],
+    generate: () => {
+      const sommet = randomChoice([40, 50, 70, 80, 100]);
+      const base = (180 - sommet) / 2;
+
+      return {
+        text: `On veut construire un triangle isocèle dont l’angle au sommet principal mesure $${sommet}^\\circ$. Quelle est la mesure (en degrés) de chacun des deux angles à la base ?`,
+        format: "short",
+        expected: [String(base)],
+        comparator: "number_equal",
+        explanation:
+          `Définition : un triangle isocèle a deux angles à la base égaux.\n\n` +
+          `Méthode : on enlève l’angle au sommet à $180^\\circ$, puis on partage le reste en deux.\n\n` +
+          `Calcul : $(180 - ${sommet}) \\div 2 = ${180 - sommet} \\div 2 = ${base}$.\n\n` +
+          `Conclusion : chaque angle à la base mesure $${base}^\\circ$.`,
+        canvas: triangleCanvas({
+          points: {
+            A: { x: 50, y: 180 },
+            B: { x: 230, y: 180 },
+            C: { x: 140, y: 50 },
+          },
+          angleLabels: { A: "?", B: "?", C: `${sommet}°` },
+          marks: { equalSides: [["A", "C"], ["B", "C"]] },
+        }),
+      };
+    },
+  },
+
+  {
+    kind: "fixed",
+    id: "3e_triangle_construire_fixed_4_donnees_suffisantes",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "triangle_figure",
+    microId: "triangle_construire",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Quelle série de données NE permet PAS de construire un triangle unique ?",
+    format: "qcm",
+    choices: [
+      "ses trois angles seulement",
+      "ses trois côtés",
+      "deux côtés et l’angle entre eux",
+      "un côté et les deux angles à ses extrémités",
+    ],
+    expected: ["ses trois angles seulement"],
+    comparator: "mcq_exact",
+    hint: "Avec seulement les angles, on peut faire des triangles de tailles différentes.",
+    explanation:
+      "Définition : une construction est unique si les données fixent la forme ET la taille.\n\n" +
+      "Méthode : on regarde si on peut agrandir le triangle sans changer les données.\n\n" +
+      "Calcul : avec seulement les trois angles, on obtient des triangles semblables de toutes tailles.\n\n" +
+      "Conclusion : connaître seulement les trois angles ne suffit pas pour un triangle unique.",
+    tags: ["triangle", "construire", "donnees", "qcm"],
+  },
+
+  {
+    kind: "template",
+    id: "3e_triangle_construire_tpl_5_defi",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "triangle_figure",
+    microId: "triangle_construire",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "D’abord la somme des angles, puis vérifie que les trois sont positifs.",
+    tags: ["triangle", "construire", "defi", "template"],
+    generate: () => {
+      const a = randomChoice([90, 100, 110, 120]);
+      const b = randomInt(20, 40);
+      const c = 180 - a - b;
+
+      return {
+        text: `Un triangle a un angle de $${a}^\\circ$ et un angle de $${b}^\\circ$. Le troisième angle est-il constructible, et si oui, combien mesure-t-il (en degrés) ?`,
+        format: "short",
+        expected: [String(c)],
+        comparator: "number_equal",
+        explanation:
+          `Définition : la somme des angles d’un triangle vaut $180^\\circ$ et chaque angle doit être strictement positif.\n\n` +
+          `Méthode : on calcule le troisième angle, puis on vérifie qu’il est positif.\n\n` +
+          `Calcul : $180 - ${a} - ${b} = ${c}$, qui est positif.\n\n` +
+          `Conclusion : le triangle est constructible, le troisième angle mesure $${c}^\\circ$.`,
+      };
+    },
+  },
+
+  {
+    kind: "fixed",
+    id: "3e_triangle_construire_fixed_5_rectangle",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "triangle_figure",
+    microId: "triangle_construire",
+    difficulty: 4,
+    theme: "neutral",
+    text: "On veut construire un triangle rectangle dont un angle aigu mesure $35^\\circ$. Combien mesure l’autre angle aigu ?",
+    format: "qcm",
+    choices: ["$55^\\circ$", "$65^\\circ$", "$45^\\circ$", "$35^\\circ$"],
+    expected: ["$55^\\circ$"],
+    comparator: "mcq_exact",
+    hint: "Dans un triangle rectangle, les deux angles aigus sont complémentaires.",
+    explanation:
+      "Définition : un triangle rectangle possède un angle de $90^\\circ$, donc les deux angles aigus ont une somme de $90^\\circ$.\n\n" +
+      "Méthode : on soustrait l’angle connu à $90^\\circ$.\n\n" +
+      "Calcul : $90 - 35 = 55$.\n\n" +
+      "Conclusion : l’autre angle aigu mesure $55^\\circ$.",
+    tags: ["triangle", "construire", "rectangle", "qcm"],
+  },
 ];

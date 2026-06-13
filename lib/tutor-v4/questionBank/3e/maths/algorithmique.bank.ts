@@ -1031,4 +1031,273 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     "Conclusion : les boucles évitent de recopier plusieurs fois les mêmes blocs.",
   tags: ["algo_programmation", "brevet", "boucle", "defi", "qcm"],
 },
+
+/* =========================
+   GÉNÉRALISER - COMPLÉMENTS
+========================= */
+
+{
+  kind: "fixed",
+  id: "3e_algo_generaliser_fixed_1_mult_ajout",
+  niveau: "3e",
+  matiere: "maths",
+  notionId: "algo_programmation",
+  microId: "algo_generaliser",
+  difficulty: 3,
+  theme: "neutral",
+  text: "On choisit un nombre $x$, on le multiplie par $4$, puis on ajoute $1$. Quelle expression généralise ce programme ?",
+  format: "qcm",
+  choices: shuffle(["$4x + 1$", "$4(x + 1)$", "$x + 4 + 1$", "$x + 5$"]),
+  expected: ["$4x + 1$"],
+  comparator: "mcq_exact",
+  hint: "On multiplie d’abord, donc pas de parenthèses.",
+  explanation:
+    "Définition : généraliser, c’est écrire le calcul avec la variable $x$.\n\n" +
+    "Méthode : on traduit chaque étape dans l’ordre.\n\n" +
+    "Calcul : multiplier $x$ par $4$ donne $4x$, puis ajouter $1$ donne $4x + 1$.\n\n" +
+    "Conclusion : l’expression est $4x + 1$.",
+  tags: ["algo_programmation", "generaliser", "expression", "qcm"],
+},
+
+{
+  kind: "fixed",
+  id: "3e_algo_generaliser_fixed_2_ajout_mult",
+  niveau: "3e",
+  matiere: "maths",
+  notionId: "algo_programmation",
+  microId: "algo_generaliser",
+  difficulty: 3,
+  theme: "neutral",
+  text: "On choisit un nombre $x$, on ajoute $3$, puis on multiplie le résultat par $2$. Quelle expression généralise ce programme ?",
+  format: "qcm",
+  choices: shuffle(["$2(x + 3)$", "$2x + 3$", "$x + 6$", "$2x + 6x$"]),
+  expected: ["$2(x + 3)$"],
+  comparator: "mcq_exact",
+  hint: "On ajoute avant de multiplier : il faut des parenthèses.",
+  explanation:
+    "Définition : généraliser, c’est écrire le calcul avec une variable en respectant l’ordre.\n\n" +
+    "Méthode : on ajoute d’abord $3$, ce qui donne $x + 3$, puis on multiplie tout par $2$.\n\n" +
+    "Calcul : on obtient $2(x + 3)$.\n\n" +
+    "Conclusion : l’expression est $2(x + 3)$.",
+  tags: ["algo_programmation", "generaliser", "parentheses", "qcm"],
+},
+
+{
+  kind: "template",
+  id: "3e_algo_generaliser_tpl_2_ax_b",
+  niveau: "3e",
+  matiere: "maths",
+  notionId: "algo_programmation",
+  microId: "algo_generaliser",
+  difficulty: 4,
+  theme: "neutral",
+  hint: "On multiplie d’abord, puis on ajoute.",
+  tags: ["algo_programmation", "generaliser", "expression", "qcm", "template"],
+  generate: () => {
+    const a = randomChoice([2, 3, 5]);
+    const b = randomChoice([4, 6, 7]);
+    const correct = `$${a}x + ${b}$`;
+
+    return {
+      text: `On choisit un nombre $x$, on le multiplie par $${a}$, puis on ajoute $${b}$. Quelle expression généralise ce programme ?`,
+      format: "qcm",
+      choices: shuffle([correct, `$${a}(x + ${b})$`, `$x + ${a + b}$`, `$${b}x + ${a}$`]),
+      expected: [correct],
+      comparator: "mcq_exact",
+      explanation:
+        `Définition : généraliser, c’est traduire le programme avec la variable $x$.\n\n` +
+        `Méthode : on respecte l’ordre des opérations.\n\n` +
+        `Calcul : $x$ multiplié par $${a}$ donne $${a}x$, puis $+ ${b}$ donne $${a}x + ${b}$.\n\n` +
+        `Conclusion : l’expression est $${a}x + ${b}$.`,
+      canvas: scratchCanvas("Généraliser un programme", [
+        { type: "event" },
+        { type: "ask", text: "Choisis un nombre" },
+        { type: "set_variable", variable: "x", value: "réponse" },
+        { type: "operator", left: a, operator: "×", right: "x" },
+        { type: "operator", left: `${a}x`, operator: "+", right: b },
+      ]),
+    };
+  },
+},
+
+{
+  kind: "template",
+  id: "3e_algo_generaliser_tpl_3_a_xb",
+  niveau: "3e",
+  matiere: "maths",
+  notionId: "algo_programmation",
+  microId: "algo_generaliser",
+  difficulty: 4,
+  theme: "neutral",
+  hint: "On ajoute avant de multiplier : des parenthèses sont nécessaires.",
+  tags: ["algo_programmation", "generaliser", "parentheses", "qcm", "template"],
+  generate: () => {
+    const a = randomChoice([2, 3, 4]);
+    const b = randomChoice([3, 5, 6]);
+    const correct = `$${a}(x + ${b})$`;
+
+    return {
+      text: `On choisit un nombre $x$, on ajoute $${b}$, puis on multiplie le résultat par $${a}$. Quelle expression généralise ce programme ?`,
+      format: "qcm",
+      choices: shuffle([correct, `$${a}x + ${b}$`, `$x + ${a * b}$`, `$${a}x - ${b}$`]),
+      expected: [correct],
+      comparator: "mcq_exact",
+      explanation:
+        `Définition : généraliser, c’est écrire le calcul avec $x$ en respectant l’ordre.\n\n` +
+        `Méthode : on ajoute d’abord $${b}$ ($x + ${b}$), puis on multiplie par $${a}$.\n\n` +
+        `Calcul : on obtient $${a}(x + ${b})$.\n\n` +
+        `Conclusion : l’expression est $${a}(x + ${b})$.`,
+      canvas: scratchCanvas("Généraliser avec parenthèses", [
+        { type: "event" },
+        { type: "ask", text: "Choisis un nombre" },
+        { type: "set_variable", variable: "x", value: "réponse" },
+        { type: "change_variable", variable: "x", value: b },
+        { type: "operator", left: a, operator: "×", right: "x" },
+      ]),
+    };
+  },
+},
+
+{
+  kind: "template",
+  id: "3e_algo_generaliser_tpl_4_motif",
+  niveau: "3e",
+  matiere: "maths",
+  notionId: "algo_programmation",
+  microId: "algo_generaliser",
+  difficulty: 4,
+  theme: "neutral",
+  hint: "Regarde de combien augmente le motif à chaque étape.",
+  tags: ["algo_programmation", "generaliser", "motif", "suite", "qcm", "template"],
+  generate: () => {
+    const r = randomChoice([2, 3, 4]);
+    const b = randomChoice([1, 2, 3]);
+    const correct = `$${r}n + ${b}$`;
+
+    return {
+      text: `Une suite de motifs utilise des allumettes : le motif $1$ en utilise $${r + b}$, le motif $2$ en utilise $${2 * r + b}$, le motif $3$ en utilise $${3 * r + b}$. Combien d’allumettes pour le motif $n$ ?`,
+      format: "qcm",
+      choices: shuffle([correct, `$${b}n + ${r}$`, `$${r}n$`, `$n + ${r + b}$`]),
+      expected: [correct],
+      comparator: "mcq_exact",
+      explanation:
+        `Définition : généraliser un motif, c’est trouver une formule valable pour tout $n$.\n\n` +
+        `Méthode : on cherche l’augmentation constante (le coefficient de $n$) et la valeur de départ.\n\n` +
+        `Calcul : chaque motif ajoute $${r}$ allumettes, et il faut ajouter $${b}$ : la formule est $${r}n + ${b}$.\n\n` +
+        `Conclusion : le motif $n$ utilise $${r}n + ${b}$ allumettes.`,
+    };
+  },
+},
+
+{
+  kind: "template",
+  id: "3e_algo_generaliser_tpl_5_evaluer",
+  niveau: "3e",
+  matiere: "maths",
+  notionId: "algo_programmation",
+  microId: "algo_generaliser",
+  difficulty: 5,
+  theme: "neutral",
+  hint: "Remplace $n$ par sa valeur dans la formule générale.",
+  tags: ["algo_programmation", "generaliser", "evaluer", "template"],
+  generate: () => {
+    const r = randomChoice([2, 3, 4]);
+    const b = randomChoice([1, 2, 5]);
+    const n = randomChoice([6, 8, 10]);
+    const total = r * n + b;
+
+    return {
+      text: `Un motif $n$ utilise $${r}n + ${b}$ allumettes. Combien en faut-il pour le motif ${n} ?`,
+      format: "short",
+      expected: [String(total)],
+      comparator: "number_equal",
+      explanation:
+        `Définition : une formule générale permet de calculer n’importe quel terme.\n\n` +
+        `Méthode : on remplace $n$ par ${n} dans $${r}n + ${b}$.\n\n` +
+        `Calcul : $${r} \\times ${n} + ${b} = ${r * n} + ${b} = ${total}$.\n\n` +
+        `Conclusion : il faut ${total} allumettes pour le motif ${n}.`,
+    };
+  },
+},
+
+{
+  kind: "fixed",
+  id: "3e_algo_generaliser_fixed_3_pourquoi_variable",
+  niveau: "3e",
+  matiere: "maths",
+  notionId: "algo_programmation",
+  microId: "algo_generaliser",
+  difficulty: 4,
+  theme: "neutral",
+  text: "Pourquoi utiliser une variable $x$ plutôt qu’un nombre précis pour décrire un programme de calcul ?",
+  format: "qcm",
+  choices: shuffle([
+    "pour que la formule soit valable pour n’importe quel nombre",
+    "pour rendre le calcul plus difficile",
+    "pour supprimer les opérations",
+    "pour que le résultat soit toujours $0$",
+  ]),
+  expected: ["pour que la formule soit valable pour n’importe quel nombre"],
+  comparator: "mcq_exact",
+  hint: "La variable représente tous les nombres possibles à la fois.",
+  explanation:
+    "Définition : une variable représente un nombre quelconque.\n\n" +
+    "Méthode : on remplace le nombre choisi par $x$ pour décrire le programme en général.\n\n" +
+    "Calcul : la formule obtenue fonctionne ensuite pour toutes les valeurs de $x$.\n\n" +
+    "Conclusion : on utilise une variable pour généraliser à n’importe quel nombre.",
+  tags: ["algo_programmation", "generaliser", "variable", "qcm"],
+},
+
+{
+  kind: "fixed",
+  id: "3e_algo_generaliser_fixed_4_double_moins",
+  niveau: "3e",
+  matiere: "maths",
+  notionId: "algo_programmation",
+  microId: "algo_generaliser",
+  difficulty: 5,
+  theme: "neutral",
+  text: "On choisit un nombre $x$, on le multiplie par $2$, puis on enlève $3$. Quelle expression généralise ce programme ?",
+  format: "qcm",
+  choices: shuffle(["$2x - 3$", "$2(x - 3)$", "$x - 6$", "$3 - 2x$"]),
+  expected: ["$2x - 3$"],
+  comparator: "mcq_exact",
+  hint: "On multiplie d’abord, puis on soustrait.",
+  explanation:
+    "Définition : généraliser, c’est traduire le programme avec $x$.\n\n" +
+    "Méthode : on respecte l’ordre : multiplier par $2$ puis enlever $3$.\n\n" +
+    "Calcul : $x$ devient $2x$, puis $2x - 3$.\n\n" +
+    "Conclusion : l’expression est $2x - 3$.",
+  tags: ["algo_programmation", "generaliser", "expression", "qcm"],
+},
+
+{
+  kind: "template",
+  id: "3e_algo_generaliser_tpl_6_perimetre",
+  niveau: "3e",
+  matiere: "maths",
+  notionId: "algo_programmation",
+  microId: "algo_generaliser",
+  difficulty: 5,
+  theme: "neutral",
+  hint: "Le périmètre d’un carré de côté $c$ est $4c$ ; généralise la situation.",
+  tags: ["algo_programmation", "generaliser", "geometrie", "qcm", "template"],
+  generate: () => {
+    const k = randomChoice([2, 3, 5]);
+    const correct = `$4x + ${4 * k}$`;
+
+    return {
+      text: `Un carré a un côté de longueur $x$. On agrandit chaque côté de $${k}$. Quelle expression donne le périmètre du nouveau carré ?`,
+      format: "qcm",
+      choices: shuffle([correct, `$4x + ${k}$`, `$x + ${k}$`, `$4(x \\times ${k})$`]),
+      expected: [correct],
+      comparator: "mcq_exact",
+      explanation:
+        `Définition : généraliser, c’est exprimer le périmètre en fonction de $x$.\n\n` +
+        `Méthode : le nouveau côté mesure $x + ${k}$ et le périmètre d’un carré est $4 \\times \\text{côté}$.\n\n` +
+        `Calcul : $4(x + ${k}) = 4x + ${4 * k}$.\n\n` +
+        `Conclusion : le périmètre est $4x + ${4 * k}$.`,
+    };
+  },
+},
 ];

@@ -572,4 +572,288 @@ explanation:
         "Une fonction permet de relier deux grandeurs : une dépend de l’autre (prix, distance, temps…).",
     };
   }
+},
+
+/* =========================
+   ANTÉCÉDENT (compléments)
+========================= */
+{
+  kind: "fixed",
+  id: "fonction_antecedent_fixed_1",
+  niveau: "3e",
+  matiere: "maths",
+  notionId: "fonction_generalite",
+  microId: "fonction_antecedent",
+  difficulty: 1,
+  theme: "neutral",
+  text: "Chercher un antécédent de $12$ par une fonction $f$, c’est chercher…",
+  format: "qcm",
+  choices: [
+    "la valeur de $x$ telle que $f(x) = 12$",
+    "la valeur de $f(12)$",
+    "l’image de $12$",
+    "la pente de la droite",
+  ],
+  expected: ["la valeur de $x$ telle que $f(x) = 12$"],
+  comparator: "mcq_exact",
+  hint: "Un antécédent est un nombre de départ ; l’image est le résultat.",
+  explanation:
+    "Définition : un antécédent d’un nombre $y$ est un nombre $x$ dont l’image est $y$.\n\n" +
+    "Méthode : on cherche $x$ tel que $f(x) = 12$.\n\n" +
+    "Calcul : on résout l’équation $f(x) = 12$.\n\n" +
+    "Conclusion : chercher un antécédent de $12$, c’est chercher $x$ tel que $f(x) = 12$.",
+  tags: ["fonction", "antecedent", "definition", "qcm"],
+},
+
+{
+  kind: "fixed",
+  id: "fonction_antecedent_fixed_2",
+  niveau: "3e",
+  matiere: "maths",
+  notionId: "fonction_generalite",
+  microId: "fonction_antecedent",
+  difficulty: 2,
+  theme: "neutral",
+  text: "On sait que $f(5) = 20$. Quelle phrase est correcte ?",
+  format: "qcm",
+  choices: [
+    "$5$ est un antécédent de $20$",
+    "$20$ est un antécédent de $5$",
+    "$5$ est l’image de $20$",
+    "$f$ est égale à $20$",
+  ],
+  expected: ["$5$ est un antécédent de $20$"],
+  comparator: "mcq_exact",
+  hint: "Le nombre de départ est l’antécédent, le résultat est l’image.",
+  explanation:
+    "Définition : si $f(5) = 20$, alors $5$ est l’antécédent et $20$ est l’image.\n\n" +
+    "Méthode : on identifie le nombre de départ et le résultat.\n\n" +
+    "Calcul : le départ est $5$, le résultat est $20$.\n\n" +
+    "Conclusion : $5$ est un antécédent de $20$.",
+  tags: ["fonction", "antecedent", "vocabulaire", "qcm"],
+},
+
+{
+  kind: "template",
+  id: "fonction_antecedent_tpl_2_affine",
+  niveau: "3e",
+  matiere: "maths",
+  notionId: "fonction_generalite",
+  microId: "fonction_antecedent",
+  difficulty: 3,
+  theme: "neutral",
+  hint: "Résous l’équation $f(x) = y$.",
+  tags: ["fonction", "antecedent", "affine", "template"],
+  generate: () => {
+    const a = randomInt(2, 5);
+    const b = randomInt(1, 6);
+    const x = randomInt(2, 8);
+    const y = a * x + b;
+
+    return {
+      text: `Soit $f(x) = ${a}x + ${b}$. Quel est l’antécédent de $${y}$ ?`,
+      format: "short",
+      expected: [String(x)],
+      comparator: "number_equal",
+      explanation:
+        `Définition : l’antécédent de $${y}$ est le nombre $x$ tel que $f(x) = ${y}$.\n\n` +
+        `Méthode : on résout l’équation $${a}x + ${b} = ${y}$.\n\n` +
+        `Calcul : $${a}x = ${y - b}$, donc $x = ${y - b} \\div ${a} = ${x}$.\n\n` +
+        `Conclusion : l’antécédent de $${y}$ est $${x}$.`,
+      canvas: fonctionGraphiqueCanvas({
+        titre: "Recherche d’antécédent",
+        a,
+        b,
+        point: { x, y, label: `(${x},${y})` },
+        horizontaleY: y,
+        verticaleX: x,
+      }),
+    };
+  },
+},
+
+{
+  kind: "template",
+  id: "fonction_antecedent_tpl_3_lineaire",
+  niveau: "3e",
+  matiere: "maths",
+  notionId: "fonction_generalite",
+  microId: "fonction_antecedent",
+  difficulty: 3,
+  theme: "neutral",
+  hint: "Pour $f(x) = ax$, l’antécédent de $y$ est $y \\div a$.",
+  tags: ["fonction", "antecedent", "lineaire", "template"],
+  generate: () => {
+    const a = randomInt(2, 6);
+    const x = randomInt(2, 9);
+    const y = a * x;
+
+    return {
+      text: `Soit la fonction linéaire $f(x) = ${a}x$. Quel est l’antécédent de $${y}$ ?`,
+      format: "short",
+      expected: [String(x)],
+      comparator: "number_equal",
+      explanation:
+        `Définition : l’antécédent de $${y}$ vérifie $f(x) = ${y}$.\n\n` +
+        `Méthode : on résout $${a}x = ${y}$ en divisant par $${a}$.\n\n` +
+        `Calcul : $x = ${y} \\div ${a} = ${x}$.\n\n` +
+        `Conclusion : l’antécédent de $${y}$ est $${x}$.`,
+    };
+  },
+},
+
+{
+  kind: "template",
+  id: "fonction_antecedent_tpl_4_tableau",
+  niveau: "3e",
+  matiere: "maths",
+  notionId: "fonction_generalite",
+  microId: "fonction_antecedent",
+  difficulty: 2,
+  theme: "neutral",
+  hint: "Cherche dans la ligne des images, puis lis le $x$ correspondant.",
+  tags: ["fonction", "antecedent", "tableau", "canvas", "template"],
+  generate: () => {
+    const a = 3;
+    const b = 1;
+    const xValues = [0, 1, 2, 3, 4];
+    const yValues = xValues.map((x) => a * x + b);
+    const index = randomInt(1, xValues.length - 1);
+    const y = yValues[index];
+
+    return {
+      text: `D’après ce tableau de valeurs, quel est l’antécédent de $${y}$ ?`,
+      format: "short",
+      expected: [String(xValues[index])],
+      comparator: "number_equal",
+      explanation:
+        `Définition : l’antécédent de $${y}$ est le nombre $x$ dont l’image est $${y}$.\n\n` +
+        `Méthode : on repère $${y}$ dans la ligne des images, puis on lit le $x$ au-dessus.\n\n` +
+        `Calcul : dans le tableau, $${y}$ correspond à $x = ${xValues[index]}$.\n\n` +
+        `Conclusion : l’antécédent de $${y}$ est $${xValues[index]}$.`,
+      canvas: fonctionTableauCanvas({
+        titre: "Tableau de valeurs",
+        xValues,
+        yValues,
+        highlightIndex: index,
+        consigne: "Trouve l’antécédent de la valeur surlignée.",
+      }),
+    };
+  },
+},
+
+{
+  kind: "template",
+  id: "fonction_antecedent_tpl_5_graphique",
+  niveau: "3e",
+  matiere: "maths",
+  notionId: "fonction_generalite",
+  microId: "fonction_antecedent",
+  difficulty: 3,
+  theme: "neutral",
+  hint: "Pars de la valeur sur l’axe vertical, rejoins la droite, puis descends sur l’axe horizontal.",
+  tags: ["fonction", "antecedent", "graphique", "canvas", "template"],
+  generate: () => {
+    const a = randomInt(1, 3);
+    const x = randomInt(1, 3);
+    const b = randomInt(0, 2);
+    const y = a * x + b;
+
+    return {
+      text: `Sur le graphique de $f$, quel est l’antécédent de $${y}$ ? (lis la valeur de $x$)`,
+      format: "short",
+      expected: [String(x)],
+      comparator: "number_equal",
+      explanation:
+        `Définition : lire un antécédent, c’est trouver $x$ tel que $f(x) = ${y}$.\n\n` +
+        `Méthode : on part de $${y}$ sur l’axe vertical, on rejoint la droite, puis on lit $x$ sur l’axe horizontal.\n\n` +
+        `Calcul : le point de la droite d’ordonnée $${y}$ a pour abscisse $${x}$.\n\n` +
+        `Conclusion : l’antécédent de $${y}$ est $${x}$.`,
+      canvas: fonctionGraphiqueCanvas({
+        titre: "Lecture d’un antécédent",
+        a,
+        b,
+        point: { x, y, label: `(${x},${y})` },
+        horizontaleY: y,
+        verticaleX: x,
+      }),
+    };
+  },
+},
+
+{
+  kind: "fixed",
+  id: "fonction_antecedent_qcm_1",
+  niveau: "3e",
+  matiere: "maths",
+  notionId: "fonction_generalite",
+  microId: "fonction_antecedent",
+  difficulty: 3,
+  theme: "neutral",
+  text: "Soit $f(x) = 2x + 1$. Quel est l’antécédent de $9$ ?",
+  format: "qcm",
+  choices: ["$4$", "$19$", "$5$", "$3$"],
+  expected: ["$4$"],
+  comparator: "mcq_exact",
+  hint: "Résous $2x + 1 = 9$.",
+  explanation:
+    "Définition : l’antécédent de $9$ est le nombre $x$ tel que $f(x) = 9$.\n\n" +
+    "Méthode : on résout $2x + 1 = 9$.\n\n" +
+    "Calcul : $2x = 8$, donc $x = 4$.\n\n" +
+    "Conclusion : l’antécédent de $9$ est $4$.",
+  tags: ["fonction", "antecedent", "qcm"],
+},
+
+{
+  kind: "template",
+  id: "fonction_antecedent_tpl_6_probleme",
+  niveau: "3e",
+  matiere: "maths",
+  notionId: "fonction_generalite",
+  microId: "fonction_antecedent",
+  difficulty: 4,
+  theme: "reunion",
+  hint: "On connaît le prix payé (l’image) et on cherche la quantité (l’antécédent).",
+  tags: ["fonction", "antecedent", "probleme", "template"],
+  generate: () => {
+    const a = randomInt(2, 5);
+    const b = randomInt(1, 5);
+    const x = randomInt(3, 9);
+    const y = a * x + b;
+
+    return {
+      text: `Une excursion à La Réunion coûte $f(x) = ${a}x + ${b}$ euros pour $x$ personnes. Une famille a payé $${y}$ €. Combien étaient-elles de personnes ?`,
+      format: "short",
+      expected: [String(x)],
+      comparator: "number_equal",
+      explanation:
+        `Définition : on cherche l’antécédent de $${y}$, c’est-à-dire $x$ tel que $f(x) = ${y}$.\n\n` +
+        `Méthode : on résout $${a}x + ${b} = ${y}$.\n\n` +
+        `Calcul : $${a}x = ${y - b}$, donc $x = ${x}$.\n\n` +
+        `Conclusion : la famille était composée de $${x}$ personnes.`,
+    };
+  },
+},
+
+{
+  kind: "fixed",
+  id: "fonction_antecedent_qcm_2",
+  niveau: "3e",
+  matiere: "maths",
+  notionId: "fonction_generalite",
+  microId: "fonction_antecedent",
+  difficulty: 4,
+  theme: "neutral",
+  text: "Combien d’antécédents un nombre peut-il avoir par une fonction affine non constante (une droite non horizontale) ?",
+  format: "qcm",
+  choices: ["un seul", "aucun", "toujours deux", "une infinité"],
+  expected: ["un seul"],
+  comparator: "mcq_exact",
+  hint: "Une droite non horizontale coupe une horizontale en un seul point.",
+  explanation:
+    "Définition : l’antécédent correspond à l’abscisse du point d’intersection de la droite avec une horizontale.\n\n" +
+    "Méthode : on regarde combien de fois la droite atteint une valeur donnée.\n\n" +
+    "Calcul : une droite non horizontale coupe chaque horizontale en exactement un point.\n\n" +
+    "Conclusion : chaque nombre a un seul antécédent.",
+  tags: ["fonction", "antecedent", "affine", "qcm"],
 }]
