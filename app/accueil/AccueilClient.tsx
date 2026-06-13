@@ -157,6 +157,7 @@ export default function AccueilPage() {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const { eleve } = useEleve();
   const [isPlaying, setIsPlaying] = useState(false);
+  const [showSignatureMeaning, setShowSignatureMeaning] = useState(true);
   const nouveautes = useDragScroll();
 
   const eleveClasse = eleve?.classe?.toLowerCase() ?? null;
@@ -267,9 +268,19 @@ export default function AccueilPage() {
           <p className="text-2xl font-black tracking-wide text-white sm:text-4xl">
             La liberté d&apos;apprendre
           </p>
-          <p className="mt-2 text-sm font-black tracking-[0.18em] text-yellow-300 sm:text-lg">
+          <button
+            type="button"
+            onClick={() => setShowSignatureMeaning((value) => !value)}
+            className="mt-3 inline-flex items-center justify-center rounded-full border border-yellow-300/70 bg-yellow-300 px-5 py-2 text-sm font-black tracking-[0.16em] text-slate-950 shadow-lg shadow-yellow-950/20 transition hover:-translate-y-0.5 hover:bg-yellow-200 sm:text-lg"
+            aria-expanded={showSignatureMeaning}
+          >
             ε → ∞
-          </p>
+          </button>
+          {showSignatureMeaning && (
+            <p className="mx-auto mt-3 inline-flex max-w-full rounded-full border border-white/15 bg-white/10 px-4 py-2 text-sm font-black text-yellow-100 shadow-lg backdrop-blur-sm sm:text-base">
+              &quot;Un petit détail peut tout changer&quot;
+            </p>
+          )}
         </div>
         <Image
           src="/images/accueil-eleveai-reunion.webp"
@@ -309,9 +320,6 @@ export default function AccueilPage() {
       <section className="bg-[#041B33] px-4 pb-8 pt-6 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-6xl">
           <div className="mb-5 text-center">
-            <p className="mb-1 text-xs font-black uppercase tracking-[0.18em] text-cyan-200/70">
-              Aujourd'hui
-            </p>
             <h2 className="text-2xl font-black leading-tight text-white sm:text-3xl">
               {prenomAffiche
                 ? `Que veux-tu travailler aujourd'hui, ${prenomAffiche} ?`
