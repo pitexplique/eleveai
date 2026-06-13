@@ -13,6 +13,7 @@ import { primitivesIntegralesBank } from "./primitives-integrales.bank";
 import { convexiteBank } from "./convexite.bank";
 import { probabilitesConditionnellesBank } from "./probabilites-conditionnelles.bank";
 import { variablesAleatoiresBank } from "./variables-aleatoires.bank";
+import { loiBinomialeBank } from "./loi-binomiale.bank";
 
 export const mathsTerminaleSpeQuestionBank: TutorBankItemV4[] = [
   ...suitesBank,
@@ -26,6 +27,7 @@ export const mathsTerminaleSpeQuestionBank: TutorBankItemV4[] = [
   ...convexiteBank,
   ...probabilitesConditionnellesBank,
   ...variablesAleatoiresBank,
+  ...loiBinomialeBank,
 ];
 
 export function getMathTerminaleSpeQuestionBank(args?: {
