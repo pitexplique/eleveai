@@ -32,6 +32,7 @@ import {
   Solide3DCanvas,
   StatGraphCanvas,
   CanvasProbabilites,
+  ArbreProbabilitesCanvas,
   AngleCanvas,
   FonctionGraphiqueCanvas,
   FonctionTableauCanvas,
@@ -242,6 +243,10 @@ function renderCanvas(canvas?: CanvasFigure | null) {
 
   if (canvas.kind === "probabilites") {
     return <CanvasProbabilites figure={canvas} />;
+  }
+
+  if (canvas.kind === "arbre_proba") {
+    return <ArbreProbabilitesCanvas figure={canvas} />;
   }
 
   if (canvas.kind === "angle") {

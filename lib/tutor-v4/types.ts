@@ -60,7 +60,9 @@ export type {
   ContenanceCanvasObject,
   EchelleCanvasData,
   SchemaBarreCanvasData,
-  DroiteGradueeCanvasData
+  DroiteGradueeCanvasData,
+  ArbreProbaNoeud,
+  ArbreProbabilitesCanvasData
 } from "./types_canvas";
 
 import type { CanvasFigure } from "./types_canvas";

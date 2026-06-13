@@ -1259,11 +1259,29 @@ export type DroiteGradueeCanvasData = {
 
 
 
+export type ArbreProbaNoeud = {
+  /** Étiquette du nœud atteint (ex. "A", "B", "B̄"). */
+  label: string;
+  /** Probabilité portée par la branche menant à ce nœud (ex. "0,6"). Affichée telle quelle. */
+  proba?: string;
+  /** Sous-branches (niveau suivant de l'arbre). */
+  enfants?: ArbreProbaNoeud[];
+};
+
+export type ArbreProbabilitesCanvasData = {
+  kind: "arbre_proba";
+  titre?: string;
+  /** Branches issues du nœud de départ (premier niveau de l'arbre pondéré). */
+  racineEnfants: ArbreProbaNoeud[];
+  size?: { width?: number; height?: number };
+};
+
 export type CanvasFigure =
   | TriangleCanvasData
   | QuadrilatereCanvasData
   | FigureLibreCanvasData
   | CanvasProbabilitesData
+  | ArbreProbabilitesCanvasData
   | TableauProportionnaliteCanvasData
   | NumberLineCanvasData
   | Solide3DCanvasData
