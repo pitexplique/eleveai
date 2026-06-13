@@ -726,7 +726,7 @@ export const microSkills: MicroSkillSource[] = [
     id: "concentration_fluctuation",
     label: "Étudier la fluctuation d'une fréquence",
     notionId: "concentration_echantillonnage",
-    prerequis: ["concentration_loi_grands_nombres", "loi_binomiale"],
+    prerequis: ["concentration_loi_grands_nombres", "binomiale_esperance_variance"],
   },
   {
     id: "concentration_defi",
