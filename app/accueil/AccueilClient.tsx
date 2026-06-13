@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useEleve } from "@/context/EleveContext";
 import GoogleFollowChip from "@/components/GoogleFollowChip";
 import FloatingCoach from "@/components/FloatingCoach";
+import ElevesALHonneur from "@/components/ameliorations/ElevesALHonneur";
 
 // ─── Constants ────────────────────────────────────────────────────────────────
 
@@ -448,6 +449,9 @@ export default function AccueilPage() {
           )}
         </div>
       </section>
+
+      {/* ── ÉLÈVES À L'HONNEUR ───────────────────────────────────────────────── */}
+      <ElevesALHonneur />
 
       {/* ── CONFIANCE ────────────────────────────────────────────────────────── */}
       <section className="px-4 pb-10 sm:px-6 lg:px-8">
