@@ -17,6 +17,7 @@ import { loiBinomialeBank } from "./loi-binomiale.bank";
 import { denombrementBank } from "./denombrement.bank";
 import { geometrieEspaceBank } from "./geometrie-espace.bank";
 import { produitScalaireEspaceBank } from "./produit-scalaire-espace.bank";
+import { algorithmiquePythonBank } from "./algorithmique-python.bank";
 
 export const mathsTerminaleSpeQuestionBank: TutorBankItemV4[] = [
   ...suitesBank,
@@ -34,6 +35,7 @@ export const mathsTerminaleSpeQuestionBank: TutorBankItemV4[] = [
   ...denombrementBank,
   ...geometrieEspaceBank,
   ...produitScalaireEspaceBank,
+  ...algorithmiquePythonBank,
 ];
 
 export function getMathTerminaleSpeQuestionBank(args?: {
