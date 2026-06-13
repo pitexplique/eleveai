@@ -7,6 +7,8 @@ import { limitesSuitesBank } from "./limites-suites.bank";
 import { limitesFonctionsBank } from "./limites-fonctions.bank";
 import { continuiteTviBank } from "./continuite-tvi.bank";
 import { derivationBank } from "./derivation.bank";
+import { exponentielleBank } from "./exponentielle.bank";
+import { logarithmeBank } from "./logarithme.bank";
 
 export const mathsTerminaleSpeQuestionBank: TutorBankItemV4[] = [
   ...suitesBank,
@@ -14,6 +16,8 @@ export const mathsTerminaleSpeQuestionBank: TutorBankItemV4[] = [
   ...limitesFonctionsBank,
   ...continuiteTviBank,
   ...derivationBank,
+  ...exponentielleBank,
+  ...logarithmeBank,
 ];
 
 export function getMathTerminaleSpeQuestionBank(args?: {
