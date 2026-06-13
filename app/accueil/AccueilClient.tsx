@@ -272,6 +272,14 @@ export default function AccueilPage() {
           sizes="100vw"
           className="mx-auto block h-auto w-full max-w-5xl border-x border-b border-white/10 shadow-2xl md:w-[72%] xl:w-[56rem]"
         />
+        <div className="relative z-10 mx-auto max-w-5xl px-4 py-4 text-center md:w-[72%] xl:w-[56rem]">
+          <p className="text-lg font-black tracking-wide text-white sm:text-2xl">
+            La liberté d&apos;apprendre
+          </p>
+          <p className="mt-1 text-sm font-bold text-cyan-100/75 sm:text-base">
+            ε engendre ∞
+          </p>
+        </div>
         {/* Fondu bas vers le fond de page */}
         <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-b from-transparent to-[#041B33]" />
 
