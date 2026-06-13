@@ -10,6 +10,7 @@ import { derivationBank } from "./derivation.bank";
 import { exponentielleBank } from "./exponentielle.bank";
 import { logarithmeBank } from "./logarithme.bank";
 import { primitivesIntegralesBank } from "./primitives-integrales.bank";
+import { convexiteBank } from "./convexite.bank";
 
 export const mathsTerminaleSpeQuestionBank: TutorBankItemV4[] = [
   ...suitesBank,
@@ -20,6 +21,7 @@ export const mathsTerminaleSpeQuestionBank: TutorBankItemV4[] = [
   ...exponentielleBank,
   ...logarithmeBank,
   ...primitivesIntegralesBank,
+  ...convexiteBank,
 ];
 
 export function getMathTerminaleSpeQuestionBank(args?: {
