@@ -90,6 +90,76 @@ const cubeInflexionCanvas: CanvasFigure = {
   misesEnEvidence: [{ point: { x: 0, y: 0, label: "I", couleur: "#dc2626" } }],
 };
 
+// Échantillonne une fonction en points pour tracer une courbe quelconque
+// (cubiques, exponentielle, logarithme…) via le type de courbe "points".
+function echantillonne(f: (x: number) => number, xmin: number, xmax: number, step: number) {
+  const pts: { x: number; y: number }[] = [];
+  for (let x = xmin; x <= xmax + 1e-9; x += step) {
+    const xr = Math.round(x * 1000) / 1000;
+    pts.push({ x: xr, y: Math.round(f(xr) * 1000) / 1000 });
+  }
+  return pts;
+}
+
+// Courbe de l'exponentielle (convexe).
+const expConvexeCanvas: CanvasFigure = {
+  kind: "fonctionGraphique",
+  size: { width: 300, height: 240 },
+  xmin: -2,
+  xmax: 2,
+  ymin: -1,
+  ymax: 5,
+  grille: true,
+  courbes: [
+    { id: "f", type: "points", couleur: "#2563eb", points: echantillonne((x) => Math.exp(x), -2, 1.6, 0.4) },
+  ],
+};
+
+// Courbe du logarithme (concave).
+const lnConcaveCanvas: CanvasFigure = {
+  kind: "fonctionGraphique",
+  size: { width: 300, height: 240 },
+  xmin: 0,
+  xmax: 5,
+  ymin: -2,
+  ymax: 2,
+  grille: true,
+  courbes: [
+    { id: "f", type: "points", couleur: "#2563eb", points: echantillonne((x) => Math.log(x), 0.3, 4.7, 0.4) },
+  ],
+};
+
+// Cubique y = x³ - 3x : concave puis convexe, point d'inflexion en 0.
+const cubiqueSCanvas: CanvasFigure = {
+  kind: "fonctionGraphique",
+  size: { width: 300, height: 250 },
+  xmin: -3,
+  xmax: 3,
+  ymin: -3,
+  ymax: 3,
+  grille: true,
+  courbes: [
+    { id: "f", type: "points", couleur: "#2563eb", points: echantillonne((x) => x ** 3 - 3 * x, -2.1, 2.1, 0.3) },
+  ],
+  misesEnEvidence: [{ point: { x: 0, y: 0, label: "I", couleur: "#dc2626" } }],
+};
+
+// Exponentielle (convexe) avec sa tangente en 0 : y = x + 1.
+const expTangenteCanvas: CanvasFigure = {
+  kind: "fonctionGraphique",
+  size: { width: 320, height: 250 },
+  xmin: -2,
+  xmax: 2,
+  ymin: -1,
+  ymax: 5,
+  grille: true,
+  courbes: [
+    { id: "f", type: "points", couleur: "#2563eb", points: echantillonne((x) => Math.exp(x), -2, 1.6, 0.4) },
+    { id: "t", type: "affine", a: 1, b: 1, couleur: "#16a34a" },
+  ],
+  misesEnEvidence: [{ point: { x: 0, y: 1, label: "A", couleur: "#dc2626" } }],
+};
+
 export const convexiteBank: TutorBankItemV4[] = [
   /* =========================================================
      CONVEXITE_RECONNAITRE — Reconnaître convexe / concave
@@ -342,6 +412,56 @@ export const convexiteBank: TutorBankItemV4[] = [
       "$f$ est concave si et seulement si $f'$ est décroissante."
     ),
     tags: ["terminale-spe", "convexite", "reconnaitre", "qcm"],
+  },
+
+  {
+    kind: "fixed",
+    id: "terminale_spe_convexite_reconnaitre_fixed_11",
+    niveau: "terminale-spe",
+    matiere: "maths",
+    notionId: "convexite_fonction",
+    microId: "convexite_reconnaitre",
+    difficulty: 3,
+    theme: "neutral",
+    text: "La courbe ci-dessous est celle de la fonction exponentielle. Est-elle convexe ou concave ?",
+    format: "qcm",
+    choices: ["Convexe", "Concave", "Ni l'une ni l'autre", "Les deux"],
+    expected: ["Convexe"],
+    comparator: "mcq_exact",
+    canvas: expConvexeCanvas,
+    hint: "La courbe de $e^x$ est-elle tournée vers le haut ou vers le bas ?",
+    explanation: exp(
+      "On reconnaît la convexité à la forme de la courbe.",
+      "On observe l'orientation de la courbe de l'exponentielle.",
+      "La courbe de $e^x$ est tournée vers le haut (en vallée).",
+      "La fonction exponentielle est convexe."
+    ),
+    tags: ["terminale-spe", "convexite", "reconnaitre", "canvas", "exponentielle", "qcm"],
+  },
+
+  {
+    kind: "fixed",
+    id: "terminale_spe_convexite_reconnaitre_fixed_12",
+    niveau: "terminale-spe",
+    matiere: "maths",
+    notionId: "convexite_fonction",
+    microId: "convexite_reconnaitre",
+    difficulty: 3,
+    theme: "neutral",
+    text: "La courbe ci-dessous est celle de la fonction logarithme. Est-elle convexe ou concave ?",
+    format: "qcm",
+    choices: ["Concave", "Convexe", "Ni l'une ni l'autre", "Les deux"],
+    expected: ["Concave"],
+    comparator: "mcq_exact",
+    canvas: lnConcaveCanvas,
+    hint: "La courbe de $\\ln(x)$ est-elle tournée vers le haut ou vers le bas ?",
+    explanation: exp(
+      "On reconnaît la concavité à la forme de la courbe.",
+      "On observe l'orientation de la courbe du logarithme.",
+      "La courbe de $\\ln(x)$ est tournée vers le bas (en colline).",
+      "La fonction logarithme est concave."
+    ),
+    tags: ["terminale-spe", "convexite", "reconnaitre", "canvas", "logarithme", "qcm"],
   },
 
   /* =========================================================
@@ -864,6 +984,30 @@ export const convexiteBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    kind: "fixed",
+    id: "terminale_spe_convexite_inflexion_fixed_10",
+    niveau: "terminale-spe",
+    matiere: "maths",
+    notionId: "convexite_fonction",
+    microId: "convexite_point_inflexion",
+    difficulty: 4,
+    theme: "neutral",
+    text: "La courbe ci-dessous (de $f(x) = x^3 - 3x$) est concave puis convexe. Quelle est l'abscisse de son point d'inflexion $I$ ?",
+    format: "short",
+    expected: ["0"],
+    comparator: "number_equal",
+    canvas: cubiqueSCanvas,
+    hint: "C'est là où la courbe change de convexité ; $f''(x) = 6x$.",
+    explanation: exp(
+      "Le point d'inflexion se trouve là où $f''$ s'annule en changeant de signe.",
+      "Pour $f(x) = x^3 - 3x$, $f''(x) = 6x$, qui s'annule en $0$ en changeant de signe.",
+      "La courbe passe de concave (avant $0$) à convexe (après $0$).",
+      "L'abscisse du point d'inflexion est $0$."
+    ),
+    tags: ["terminale-spe", "convexite", "inflexion", "canvas", "short"],
+  },
+
   /* =========================================================
      CONVEXITE_TANGENTE — Position courbe / tangentes
   ========================================================= */
@@ -1123,6 +1267,31 @@ export const convexiteBank: TutorBankItemV4[] = [
       "Le coefficient directeur augmente."
     ),
     tags: ["terminale-spe", "convexite", "tangente", "qcm"],
+  },
+
+  {
+    kind: "fixed",
+    id: "terminale_spe_convexite_tangente_fixed_11",
+    niveau: "terminale-spe",
+    matiere: "maths",
+    notionId: "convexite_fonction",
+    microId: "convexite_tangente",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Sur la figure, la courbe de $e^x$ (bleu) et sa tangente en $A$ : $y = x + 1$ (vert). Où se situe la courbe par rapport à sa tangente ?",
+    format: "qcm",
+    choices: ["Au-dessus", "Au-dessous", "Confondue", "Elle la traverse"],
+    expected: ["Au-dessus"],
+    comparator: "mcq_exact",
+    canvas: expTangenteCanvas,
+    hint: "L'exponentielle est convexe : la courbe reste au-dessus de ses tangentes.",
+    explanation: exp(
+      "On lit la position de la courbe par rapport à sa tangente.",
+      "L'exponentielle est convexe, donc sa courbe est au-dessus de toute tangente.",
+      "On observe que la courbe bleue est au-dessus de la droite verte : c'est l'inégalité $e^x \\ge x + 1$.",
+      "La courbe est au-dessus de sa tangente."
+    ),
+    tags: ["terminale-spe", "convexite", "tangente", "canvas", "exponentielle", "qcm"],
   },
 
   /* =========================================================
