@@ -15,6 +15,8 @@ import { probabilitesConditionnellesBank } from "./probabilites-conditionnelles.
 import { variablesAleatoiresBank } from "./variables-aleatoires.bank";
 import { loiBinomialeBank } from "./loi-binomiale.bank";
 import { denombrementBank } from "./denombrement.bank";
+import { geometrieEspaceBank } from "./geometrie-espace.bank";
+import { produitScalaireEspaceBank } from "./produit-scalaire-espace.bank";
 
 export const mathsTerminaleSpeQuestionBank: TutorBankItemV4[] = [
   ...suitesBank,
@@ -30,6 +32,8 @@ export const mathsTerminaleSpeQuestionBank: TutorBankItemV4[] = [
   ...variablesAleatoiresBank,
   ...loiBinomialeBank,
   ...denombrementBank,
+  ...geometrieEspaceBank,
+  ...produitScalaireEspaceBank,
 ];
 
 export function getMathTerminaleSpeQuestionBank(args?: {
