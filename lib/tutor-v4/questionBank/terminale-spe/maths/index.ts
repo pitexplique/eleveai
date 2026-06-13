@@ -18,6 +18,8 @@ import { denombrementBank } from "./denombrement.bank";
 import { geometrieEspaceBank } from "./geometrie-espace.bank";
 import { produitScalaireEspaceBank } from "./produit-scalaire-espace.bank";
 import { algorithmiquePythonBank } from "./algorithmique-python.bank";
+import { equationsDifferentiellesBank } from "./equations-differentielles.bank";
+import { concentrationBank } from "./concentration.bank";
 
 export const mathsTerminaleSpeQuestionBank: TutorBankItemV4[] = [
   ...suitesBank,
@@ -36,6 +38,8 @@ export const mathsTerminaleSpeQuestionBank: TutorBankItemV4[] = [
   ...geometrieEspaceBank,
   ...produitScalaireEspaceBank,
   ...algorithmiquePythonBank,
+  ...equationsDifferentiellesBank,
+  ...concentrationBank,
 ];
 
 export function getMathTerminaleSpeQuestionBank(args?: {
