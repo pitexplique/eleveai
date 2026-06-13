@@ -822,4 +822,840 @@ export const probabilitesBank: TutorBankItemV4[] = [
       "Conclusion : une probabilité de 0 signifie que l’événement ne peut pas se produire.",
     tags: ["proba_experience", "defi", "open", "impossible"],
   },
+
+  /* =========================
+     PROBA_EVENEMENT
+  ========================= */
+
+  {
+    kind: "fixed",
+    id: "3e_proba_evenement_fixed_1",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "proba_experience",
+    microId: "proba_evenement",
+    difficulty: 1,
+    theme: "neutral",
+    text: "On lance un dé. L’événement « obtenir un nombre pair » est réalisé par quelles issues ?",
+    format: "qcm",
+    choices: ["$2$, $4$ et $6$", "$1$, $3$ et $5$", "seulement $6$", "$1$ à $6$"],
+    expected: ["$2$, $4$ et $6$"],
+    comparator: "mcq_exact",
+    hint: "Les nombres pairs entre $1$ et $6$ sont $2$, $4$ et $6$.",
+    explanation:
+      "Définition : un événement est un ensemble d’issues qui le réalisent.\n\n" +
+      "Méthode : on liste les issues du dé qui sont des nombres pairs.\n\n" +
+      "Calcul : parmi $1, 2, 3, 4, 5, 6$, les nombres pairs sont $2$, $4$ et $6$.\n\n" +
+      "Conclusion : l’événement est réalisé par les issues $2$, $4$ et $6$.",
+    canvas: deCanvas([2, 4, 6]),
+    tags: ["proba_experience", "evenement", "de", "canvas"],
+  },
+
+  {
+    kind: "fixed",
+    id: "3e_proba_evenement_fixed_2",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "proba_experience",
+    microId: "proba_evenement",
+    difficulty: 2,
+    theme: "neutral",
+    text: "On lance un dé. Quelles issues réalisent l’événement « obtenir au moins $5$ » ?",
+    format: "qcm",
+    choices: ["$5$ et $6$", "$4$, $5$ et $6$", "seulement $5$", "$1$ à $5$"],
+    expected: ["$5$ et $6$"],
+    comparator: "mcq_exact",
+    hint: "« Au moins $5$ » signifie $5$ ou plus.",
+    explanation:
+      "Définition : un événement regroupe les issues qui le réalisent.\n\n" +
+      "Méthode : « au moins $5$ » veut dire supérieur ou égal à $5$.\n\n" +
+      "Calcul : les issues $\\geq 5$ sont $5$ et $6$.\n\n" +
+      "Conclusion : l’événement est réalisé par $5$ et $6$.",
+    canvas: deCanvas([5, 6]),
+    tags: ["proba_experience", "evenement", "de", "canvas"],
+  },
+
+  {
+    kind: "fixed",
+    id: "3e_proba_evenement_fixed_3",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "proba_experience",
+    microId: "proba_evenement",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Un événement réalisé par une seule issue s’appelle…",
+    format: "qcm",
+    choices: [
+      "un événement élémentaire",
+      "un événement certain",
+      "un événement impossible",
+      "un événement contraire",
+    ],
+    expected: ["un événement élémentaire"],
+    comparator: "mcq_exact",
+    hint: "« Élémentaire » signifie composé d’une seule issue.",
+    explanation:
+      "Définition : un événement élémentaire est un événement réalisé par exactement une issue.\n\n" +
+      "Méthode : on compte le nombre d’issues qui réalisent l’événement.\n\n" +
+      "Calcul : s’il n’y a qu’une seule issue, l’événement est élémentaire.\n\n" +
+      "Conclusion : c’est un événement élémentaire.",
+    tags: ["proba_experience", "evenement", "vocabulaire", "qcm"],
+  },
+
+  {
+    kind: "fixed",
+    id: "3e_proba_evenement_fixed_4_impossible",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "proba_experience",
+    microId: "proba_evenement",
+    difficulty: 3,
+    theme: "neutral",
+    text: "On lance un dé à $6$ faces. L’événement « obtenir $7$ » est…",
+    format: "qcm",
+    choices: [
+      "impossible",
+      "certain",
+      "élémentaire",
+      "très probable",
+    ],
+    expected: ["impossible"],
+    comparator: "mcq_exact",
+    hint: "Aucune face du dé ne porte le nombre $7$.",
+    explanation:
+      "Définition : un événement impossible n’est réalisé par aucune issue.\n\n" +
+      "Méthode : on cherche s’il existe une issue qui réalise l’événement.\n\n" +
+      "Calcul : les faces vont de $1$ à $6$, aucune ne vaut $7$.\n\n" +
+      "Conclusion : l’événement « obtenir $7$ » est impossible.",
+    canvas: deCanvas(),
+    tags: ["proba_experience", "evenement", "impossible", "de", "canvas"],
+  },
+
+  {
+    kind: "template",
+    id: "3e_proba_evenement_tpl_1_de_superieur",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "proba_experience",
+    microId: "proba_evenement",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Compte les faces strictement plus grandes que le nombre donné.",
+    tags: ["proba_experience", "evenement", "de", "canvas", "template"],
+    generate: () => {
+      const n = randomInt(2, 4);
+      const faces = [1, 2, 3, 4, 5, 6].filter((f) => f > n);
+
+      return {
+        text: `On lance un dé. Combien d’issues réalisent l’événement « obtenir un nombre strictement supérieur à ${n} » ?`,
+        format: "short",
+        expected: [String(faces.length)],
+        comparator: "number_equal",
+        explanation:
+          `Définition : un événement est réalisé par un ensemble d’issues.\n\n` +
+          `Méthode : on liste les faces du dé strictement supérieures à ${n}.\n\n` +
+          `Calcul : ce sont ${faces.join(", ")}, soit ${faces.length} issues.\n\n` +
+          `Conclusion : ${faces.length} issues réalisent cet événement.`,
+        canvas: deCanvas(faces),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "3e_proba_evenement_tpl_2_de_multiple",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "proba_experience",
+    microId: "proba_evenement",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Cherche les faces qui sont des multiples du nombre donné.",
+    tags: ["proba_experience", "evenement", "de", "canvas", "template"],
+    generate: () => {
+      const d = randomChoice([2, 3]);
+      const faces = [1, 2, 3, 4, 5, 6].filter((f) => f % d === 0);
+
+      return {
+        text: `On lance un dé. Combien d’issues réalisent l’événement « obtenir un multiple de ${d} » ?`,
+        format: "short",
+        expected: [String(faces.length)],
+        comparator: "number_equal",
+        explanation:
+          `Définition : un événement regroupe les issues qui le réalisent.\n\n` +
+          `Méthode : on cherche les faces du dé qui sont des multiples de ${d}.\n\n` +
+          `Calcul : ce sont ${faces.join(", ")}, soit ${faces.length} issues.\n\n` +
+          `Conclusion : ${faces.length} issues réalisent cet événement.`,
+        canvas: deCanvas(faces),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "3e_proba_evenement_tpl_3_billes",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "proba_experience",
+    microId: "proba_evenement",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "« Ne pas être bleue » regroupe toutes les billes des autres couleurs.",
+    tags: ["proba_experience", "evenement", "billes", "canvas", "template"],
+    generate: () => {
+      const rouges = randomInt(2, 4);
+      const bleues = randomInt(2, 4);
+      const vertes = randomInt(1, 3);
+      const favorable = rouges + vertes;
+
+      const elements = [
+        ...Array.from({ length: rouges }, () => ({ couleur: couleurs.rouge })),
+        ...Array.from({ length: bleues }, () => ({ couleur: couleurs.bleu })),
+        ...Array.from({ length: vertes }, () => ({ couleur: couleurs.vert })),
+      ];
+
+      return {
+        text: `Un sac contient ${rouges} billes rouges, ${bleues} billes bleues et ${vertes} billes vertes. Combien de billes réalisent l’événement « la bille tirée n’est pas bleue » ?`,
+        format: "short",
+        expected: [String(favorable)],
+        comparator: "number_equal",
+        explanation:
+          `Définition : un événement est réalisé par les issues qui le rendent vrai.\n\n` +
+          `Méthode : « ne pas être bleue » regroupe les billes rouges et vertes.\n\n` +
+          `Calcul : ${rouges} rouges $+$ ${vertes} vertes $= ${favorable}$ billes.\n\n` +
+          `Conclusion : ${favorable} billes réalisent cet événement.`,
+        canvas: billesCanvas(elements),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "3e_proba_evenement_tpl_4_roue",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "proba_experience",
+    microId: "proba_evenement",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Compte les secteurs de la couleur demandée.",
+    tags: ["proba_experience", "evenement", "roue", "canvas", "template"],
+    generate: () => {
+      const nbRouge = randomChoice([2, 3]);
+      const segments = [
+        ...Array.from({ length: nbRouge }, (_, i) => ({
+          label: `R${i + 1}`,
+          poids: 1,
+          couleur: couleurs.rouge,
+        })),
+        { label: "B", poids: 1, couleur: couleurs.bleu },
+        { label: "V", poids: 1, couleur: couleurs.vert },
+      ];
+
+      return {
+        text: `Cette roue possède ${segments.length} secteurs de même taille, dont ${nbRouge} rouges. Combien de secteurs réalisent l’événement « obtenir un secteur rouge » ?`,
+        format: "short",
+        expected: [String(nbRouge)],
+        comparator: "number_equal",
+        explanation:
+          `Définition : un événement est réalisé par l’ensemble des issues correspondantes.\n\n` +
+          `Méthode : on compte les secteurs rouges de la roue.\n\n` +
+          `Calcul : il y a ${nbRouge} secteurs rouges.\n\n` +
+          `Conclusion : ${nbRouge} secteurs réalisent l’événement.`,
+        canvas: roueCanvas(segments),
+      };
+    },
+  },
+
+  {
+    kind: "fixed",
+    id: "3e_proba_evenement_fixed_5_certain",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "proba_experience",
+    microId: "proba_evenement",
+    difficulty: 3,
+    theme: "neutral",
+    text: "On lance un dé. L’événement « obtenir un nombre entre $1$ et $6$ » est…",
+    format: "qcm",
+    choices: ["certain", "impossible", "élémentaire", "peu probable"],
+    expected: ["certain"],
+    comparator: "mcq_exact",
+    hint: "Toutes les issues du dé réalisent cet événement.",
+    explanation:
+      "Définition : un événement certain est réalisé par toutes les issues.\n\n" +
+      "Méthode : on vérifie si chaque issue réalise l’événement.\n\n" +
+      "Calcul : toutes les faces, de $1$ à $6$, conviennent.\n\n" +
+      "Conclusion : l’événement est certain.",
+    canvas: deCanvas([1, 2, 3, 4, 5, 6]),
+    tags: ["proba_experience", "evenement", "certain", "de", "canvas"],
+  },
+
+  {
+    kind: "template",
+    id: "3e_proba_evenement_tpl_5_entre",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "proba_experience",
+    microId: "proba_evenement",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Compte les faces comprises entre les deux bornes (incluses).",
+    tags: ["proba_experience", "evenement", "de", "canvas", "template"],
+    generate: () => {
+      const a = randomInt(2, 3);
+      const b = randomInt(4, 5);
+      const faces = [1, 2, 3, 4, 5, 6].filter((f) => f >= a && f <= b);
+
+      return {
+        text: `On lance un dé. Combien d’issues réalisent l’événement « obtenir un nombre compris entre ${a} et ${b} (inclus) » ?`,
+        format: "short",
+        expected: [String(faces.length)],
+        comparator: "number_equal",
+        explanation:
+          `Définition : un événement regroupe les issues qui le réalisent.\n\n` +
+          `Méthode : on liste les faces entre ${a} et ${b} inclus.\n\n` +
+          `Calcul : ce sont ${faces.join(", ")}, soit ${faces.length} issues.\n\n` +
+          `Conclusion : ${faces.length} issues réalisent l’événement.`,
+        canvas: deCanvas(faces),
+      };
+    },
+  },
+
+  /* =========================
+     PROBA_EVENEMENT_CONTRAIRE
+  ========================= */
+
+  {
+    kind: "fixed",
+    id: "3e_proba_evenement_contraire_fixed_1",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "proba_experience",
+    microId: "proba_evenement_contraire",
+    difficulty: 2,
+    theme: "neutral",
+    text: "On lance un dé. Quel est l’événement contraire de « obtenir $6$ » ?",
+    format: "qcm",
+    choices: [
+      "« ne pas obtenir $6$ »",
+      "« obtenir $1$ »",
+      "« obtenir un nombre pair »",
+      "« obtenir $6$ deux fois »",
+    ],
+    expected: ["« ne pas obtenir $6$ »"],
+    comparator: "mcq_exact",
+    hint: "L’événement contraire regroupe toutes les autres issues.",
+    explanation:
+      "Définition : l’événement contraire de $A$ est réalisé exactement quand $A$ ne l’est pas.\n\n" +
+      "Méthode : on prend toutes les issues qui ne réalisent pas l’événement.\n\n" +
+      "Calcul : le contraire de « obtenir $6$ » est « obtenir $1, 2, 3, 4$ ou $5$ », c’est-à-dire « ne pas obtenir $6$ ».\n\n" +
+      "Conclusion : le contraire est « ne pas obtenir $6$ ».",
+    tags: ["proba_experience", "evenement_contraire", "de", "qcm"],
+  },
+
+  {
+    kind: "fixed",
+    id: "3e_proba_evenement_contraire_fixed_2",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "proba_experience",
+    microId: "proba_evenement_contraire",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Si $P(A) = \\dfrac{1}{4}$, quelle est la probabilité de l’événement contraire $\\overline{A}$ ?",
+    format: "qcm",
+    choices: ["$\\dfrac{3}{4}$", "$\\dfrac{1}{4}$", "$\\dfrac{4}{4}$", "$\\dfrac{1}{3}$"],
+    expected: ["$\\dfrac{3}{4}$"],
+    comparator: "mcq_exact",
+    hint: "$P(\\overline{A}) = 1 - P(A)$.",
+    explanation:
+      "Définition : la probabilité de l’événement contraire vérifie $P(\\overline{A}) = 1 - P(A)$.\n\n" +
+      "Méthode : on soustrait $P(A)$ à $1$.\n\n" +
+      "Calcul : $1 - \\dfrac{1}{4} = \\dfrac{3}{4}$.\n\n" +
+      "Conclusion : $P(\\overline{A}) = \\dfrac{3}{4}$.",
+    tags: ["proba_experience", "evenement_contraire", "fraction", "qcm"],
+  },
+
+  {
+    kind: "fixed",
+    id: "3e_proba_evenement_contraire_fixed_3",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "proba_experience",
+    microId: "proba_evenement_contraire",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Que vaut toujours la somme $P(A) + P(\\overline{A})$ ?",
+    format: "qcm",
+    choices: ["$1$", "$0$", "$2$", "cela dépend de $A$"],
+    expected: ["$1$"],
+    comparator: "mcq_exact",
+    hint: "Un événement et son contraire couvrent toutes les issues.",
+    explanation:
+      "Définition : un événement et son contraire se partagent toutes les issues possibles.\n\n" +
+      "Méthode : on additionne les deux probabilités.\n\n" +
+      "Calcul : ensemble, ils représentent la totalité, donc la somme vaut $1$.\n\n" +
+      "Conclusion : $P(A) + P(\\overline{A}) = 1$.",
+    tags: ["proba_experience", "evenement_contraire", "relation", "qcm"],
+  },
+
+  {
+    kind: "template",
+    id: "3e_proba_evenement_contraire_tpl_1_billes",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "proba_experience",
+    microId: "proba_evenement_contraire",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "P(pas rouge) = nombre de billes non rouges / nombre total.",
+    tags: ["proba_experience", "evenement_contraire", "billes", "canvas", "template"],
+    generate: () => {
+      const rouges = randomInt(1, 4);
+      const autres = randomInt(3, 6);
+      const total = rouges + autres;
+      const result = fraction(autres, total);
+
+      const elements = [
+        ...Array.from({ length: rouges }, () => ({ couleur: couleurs.rouge })),
+        ...Array.from({ length: autres }, () => ({ couleur: couleurs.bleu })),
+      ];
+
+      return {
+        text: `Un sac contient ${rouges} billes rouges et ${autres} billes bleues. Quelle est la probabilité de l’événement contraire de « tirer une bille rouge » ? Donne la fraction simplifiée.`,
+        format: "short",
+        expected: [result],
+        comparator: "fraction_decimal_equivalent",
+        explanation:
+          `Définition : le contraire de « tirer rouge » est « tirer une bille non rouge ».\n\n` +
+          `Méthode : on compte les billes non rouges, puis on divise par le total.\n\n` +
+          `Calcul : il y a ${autres} billes non rouges sur ${total}, soit $\\dfrac{${autres}}{${total}} = ${result}$.\n\n` +
+          `Conclusion : la probabilité du contraire est $${result}$.`,
+        canvas: billesCanvas(elements),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "3e_proba_evenement_contraire_tpl_2_decimal",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "proba_experience",
+    microId: "proba_evenement_contraire",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "P(contraire) = 1 − P(A).",
+    tags: ["proba_experience", "evenement_contraire", "decimal", "template"],
+    generate: () => {
+      const pA = randomChoice([0.2, 0.3, 0.4, 0.6, 0.75]);
+      const pBar = Math.round((1 - pA) * 100) / 100;
+
+      return {
+        text: `La probabilité qu’il pleuve demain est de ${String(pA).replace(
+          ".",
+          ","
+        )}. Quelle est la probabilité qu’il ne pleuve pas ? (réponse décimale)`,
+        format: "short",
+        expected: [String(pBar).replace(".", ","), String(pBar)],
+        comparator: "number_equal",
+        explanation:
+          `Définition : l’événement « ne pas pleuvoir » est le contraire de « pleuvoir ».\n\n` +
+          `Méthode : on calcule $P(\\overline{A}) = 1 - P(A)$.\n\n` +
+          `Calcul : $1 - ${String(pA).replace(".", ",")} = ${String(pBar).replace(
+            ".",
+            ","
+          )}$.\n\n` +
+          `Conclusion : la probabilité qu’il ne pleuve pas est ${String(pBar).replace(
+            ".",
+            ","
+          )}.`,
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "3e_proba_evenement_contraire_tpl_3_de",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "proba_experience",
+    microId: "proba_evenement_contraire",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Le contraire de « obtenir n » est réalisé par les 5 autres faces.",
+    tags: ["proba_experience", "evenement_contraire", "de", "canvas", "template"],
+    generate: () => {
+      const n = randomInt(1, 6);
+      const autres = [1, 2, 3, 4, 5, 6].filter((f) => f !== n);
+
+      return {
+        text: `On lance un dé. Quelle est la probabilité de l’événement contraire de « obtenir ${n} » ? Donne la fraction.`,
+        format: "short",
+        expected: ["5/6"],
+        comparator: "fraction_decimal_equivalent",
+        explanation:
+          `Définition : le contraire de « obtenir ${n} » est « obtenir une autre face ».\n\n` +
+          `Méthode : on compte les faces différentes de ${n}.\n\n` +
+          `Calcul : il reste ${autres.length} faces sur $6$, soit $\\dfrac{5}{6}$.\n\n` +
+          `Conclusion : la probabilité du contraire est $\\dfrac{5}{6}$.`,
+        canvas: deCanvas(autres),
+      };
+    },
+  },
+
+  {
+    kind: "fixed",
+    id: "3e_proba_evenement_contraire_fixed_4_aucun",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "proba_experience",
+    microId: "proba_evenement_contraire",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Quel est l’événement contraire de « obtenir au moins une fois pile » lorsqu’on lance deux pièces ?",
+    format: "qcm",
+    choices: [
+      "« n’obtenir aucune fois pile »",
+      "« obtenir deux fois pile »",
+      "« obtenir au moins une fois face »",
+      "« obtenir exactement une fois pile »",
+    ],
+    expected: ["« n’obtenir aucune fois pile »"],
+    comparator: "mcq_exact",
+    hint: "Le contraire de « au moins un » est « aucun ».",
+    explanation:
+      "Définition : le contraire d’un événement est réalisé exactement quand l’événement ne l’est pas.\n\n" +
+      "Méthode : on nie l’expression « au moins une fois pile ».\n\n" +
+      "Calcul : ne pas avoir « au moins un pile » signifie « aucun pile ».\n\n" +
+      "Conclusion : le contraire est « n’obtenir aucune fois pile ».",
+    tags: ["proba_experience", "evenement_contraire", "au_moins_un", "qcm"],
+  },
+
+  {
+    kind: "fixed",
+    id: "3e_proba_evenement_contraire_fixed_5_erreur",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "proba_experience",
+    microId: "proba_evenement_contraire",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Un élève affirme : « Si $P(A) = 0{,}3$, alors $P(\\overline{A}) = 0{,}3$ aussi. » A-t-il raison ?",
+    format: "qcm",
+    choices: ["non", "oui"],
+    expected: ["non"],
+    comparator: "mcq_exact",
+    hint: "Utilise $P(\\overline{A}) = 1 - P(A)$.",
+    explanation:
+      "Définition : la probabilité du contraire vérifie $P(\\overline{A}) = 1 - P(A)$.\n\n" +
+      "Méthode : on calcule $1 - P(A)$.\n\n" +
+      "Calcul : $1 - 0{,}3 = 0{,}7 \\neq 0{,}3$.\n\n" +
+      "Conclusion : l’élève a tort, $P(\\overline{A}) = 0{,}7$.",
+    tags: ["proba_experience", "evenement_contraire", "erreur", "qcm"],
+  },
+
+  {
+    kind: "template",
+    id: "3e_proba_evenement_contraire_tpl_4_choix",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "proba_experience",
+    microId: "proba_evenement_contraire",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "P(contraire) = 1 − P(A) ; ici les probabilités sont des fractions de dénominateur 8.",
+    tags: ["proba_experience", "evenement_contraire", "fraction", "qcm", "template"],
+    generate: () => {
+      const k = randomInt(1, 7);
+      const correct = `$\\dfrac{${8 - k}}{8}$`;
+
+      return {
+        text: `Dans une expérience, $P(A) = \\dfrac{${k}}{8}$. Quelle est la probabilité de l’événement contraire ?`,
+        format: "qcm",
+        choices: makeChoices(correct, [
+          `$\\dfrac{${k}}{8}$`,
+          `$\\dfrac{8}{${k}}$`,
+          `$\\dfrac{${k}}{${8 - k}}$`,
+        ]),
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation:
+          `Définition : $P(\\overline{A}) = 1 - P(A)$.\n\n` +
+          `Méthode : on écrit $1 = \\dfrac{8}{8}$ puis on soustrait.\n\n` +
+          `Calcul : $\\dfrac{8}{8} - \\dfrac{${k}}{8} = \\dfrac{${8 - k}}{8}$.\n\n` +
+          `Conclusion : $P(\\overline{A}) = \\dfrac{${8 - k}}{8}$.`,
+      };
+    },
+  },
+
+  /* =========================
+     PROBA_DEUX_EPREUVE
+  ========================= */
+
+  {
+    kind: "fixed",
+    id: "3e_proba_deux_epreuve_fixed_1",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "proba_experience",
+    microId: "proba_deux_epreuve",
+    difficulty: 2,
+    theme: "neutral",
+    text: "On lance deux fois une pièce. Combien y a-t-il d’issues possibles ?",
+    format: "qcm",
+    choices: ["$4$", "$2$", "$3$", "$6$"],
+    expected: ["$4$"],
+    comparator: "mcq_exact",
+    hint: "À chaque lancer, $2$ résultats possibles : $2 \\times 2$.",
+    explanation:
+      "Définition : pour deux épreuves successives, on combine les issues de chaque épreuve.\n\n" +
+      "Méthode : on multiplie le nombre d’issues de la première par celui de la seconde.\n\n" +
+      "Calcul : $2 \\times 2 = 4$. Les issues sont PP, PF, FP, FF.\n\n" +
+      "Conclusion : il y a $4$ issues possibles.",
+    tags: ["proba_experience", "deux_epreuve", "denombrement", "qcm"],
+  },
+
+  {
+    kind: "fixed",
+    id: "3e_proba_deux_epreuve_fixed_2",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "proba_experience",
+    microId: "proba_deux_epreuve",
+    difficulty: 3,
+    theme: "neutral",
+    text: "On lance deux fois une pièce équilibrée. Quelle est la probabilité d’obtenir « pile puis pile » ?",
+    format: "qcm",
+    choices: ["$\\dfrac{1}{4}$", "$\\dfrac{1}{2}$", "$\\dfrac{2}{4}$", "$\\dfrac{1}{3}$"],
+    expected: ["$\\dfrac{1}{4}$"],
+    comparator: "mcq_exact",
+    hint: "Une issue favorable (PP) sur $4$ issues possibles.",
+    explanation:
+      "Définition : en situation d’équiprobabilité, $P = \\dfrac{\\text{cas favorables}}{\\text{cas possibles}}$.\n\n" +
+      "Méthode : on compte les issues favorables et toutes les issues.\n\n" +
+      "Calcul : il y a $4$ issues (PP, PF, FP, FF) et une seule favorable (PP), soit $\\dfrac{1}{4}$.\n\n" +
+      "Conclusion : la probabilité est $\\dfrac{1}{4}$.",
+    tags: ["proba_experience", "deux_epreuve", "fraction", "qcm"],
+  },
+
+  {
+    kind: "fixed",
+    id: "3e_proba_deux_epreuve_fixed_3_liste",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "proba_experience",
+    microId: "proba_deux_epreuve",
+    difficulty: 2,
+    theme: "neutral",
+    text: "On lance deux fois une pièce (P pour pile, F pour face). Quelle liste donne toutes les issues ?",
+    format: "qcm",
+    choices: [
+      "PP, PF, FP, FF",
+      "PP, FF",
+      "P, F",
+      "PP, PF, FF",
+    ],
+    expected: ["PP, PF, FP, FF"],
+    comparator: "mcq_exact",
+    hint: "Il faut distinguer l’ordre : PF est différent de FP.",
+    explanation:
+      "Définition : une issue d’une expérience à deux épreuves décrit le résultat des deux étapes dans l’ordre.\n\n" +
+      "Méthode : on combine chaque résultat du premier lancer avec chaque résultat du second.\n\n" +
+      "Calcul : P puis P/F, et F puis P/F donnent PP, PF, FP, FF.\n\n" +
+      "Conclusion : les $4$ issues sont PP, PF, FP, FF.",
+    tags: ["proba_experience", "deux_epreuve", "liste", "qcm"],
+  },
+
+  {
+    kind: "template",
+    id: "3e_proba_deux_epreuve_tpl_1_produit",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "proba_experience",
+    microId: "proba_deux_epreuve",
+    difficulty: 2,
+    theme: "reunion",
+    hint: "Multiplie le nombre de choix de chaque étape.",
+    tags: ["proba_experience", "deux_epreuve", "denombrement", "template"],
+    generate: () => {
+      const entrees = randomInt(2, 4);
+      const plats = randomInt(2, 4);
+      const total = entrees * plats;
+
+      return {
+        text: `Dans un snack à La Réunion, on choisit une entrée parmi ${entrees} et un plat parmi ${plats}. Combien de menus différents (entrée + plat) peut-on composer ?`,
+        format: "short",
+        expected: [String(total)],
+        comparator: "number_equal",
+        explanation:
+          `Définition : pour deux choix successifs, on combine chaque possibilité de l’un avec chaque possibilité de l’autre.\n\n` +
+          `Méthode : on multiplie le nombre d’entrées par le nombre de plats.\n\n` +
+          `Calcul : $${entrees} \\times ${plats} = ${total}$.\n\n` +
+          `Conclusion : on peut composer ${total} menus différents.`,
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "3e_proba_deux_epreuve_tpl_2_tableau",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "proba_experience",
+    microId: "proba_deux_epreuve",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Le nombre d’issues est le nombre de cases du tableau croisé.",
+    tags: ["proba_experience", "deux_epreuve", "tableau", "canvas", "template"],
+    generate: () => {
+      const faces1 = randomChoice([2, 3]);
+      const faces2 = randomChoice([2, 3]);
+      const total = faces1 * faces2;
+
+      const entetes = ["", ...Array.from({ length: faces2 }, (_, j) => `B${j + 1}`)];
+      const lignes = Array.from({ length: faces1 }, (_, i) => [
+        `A${i + 1}`,
+        ...Array.from({ length: faces2 }, (_, j) => `A${i + 1}B${j + 1}`),
+      ]);
+
+      return {
+        text: `Une première roue a ${faces1} secteurs (A) et une seconde roue a ${faces2} secteurs (B). Combien y a-t-il d’issues possibles pour le couple (A, B) ?`,
+        format: "short",
+        expected: [String(total)],
+        comparator: "number_equal",
+        explanation:
+          `Définition : chaque issue est un couple formé d’un résultat de A et d’un résultat de B.\n\n` +
+          `Méthode : on remplit un tableau croisé, le nombre d’issues est le nombre de cases.\n\n` +
+          `Calcul : $${faces1} \\times ${faces2} = ${total}$.\n\n` +
+          `Conclusion : il y a ${total} issues possibles.`,
+        canvas: tableauCanvas(entetes, lignes),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "3e_proba_deux_epreuve_tpl_3_proba_couple",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "proba_experience",
+    microId: "proba_deux_epreuve",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Une seule issue favorable sur le nombre total d’issues.",
+    tags: ["proba_experience", "deux_epreuve", "fraction", "qcm", "template"],
+    generate: () => {
+      const faces1 = randomChoice([2, 3]);
+      const faces2 = randomChoice([2, 3]);
+      const total = faces1 * faces2;
+      const correct = `$\\dfrac{1}{${total}}$`;
+
+      return {
+        text: `On tourne deux roues équilibrées : la première a ${faces1} secteurs, la seconde ${faces2}. Quelle est la probabilité d’obtenir un couple précis fixé à l’avance ?`,
+        format: "qcm",
+        choices: makeChoices(correct, [
+          `$\\dfrac{1}{${faces1}}$`,
+          `$\\dfrac{1}{${faces2}}$`,
+          `$\\dfrac{2}{${total}}$`,
+        ]),
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation:
+          `Définition : en équiprobabilité, $P = \\dfrac{\\text{cas favorables}}{\\text{cas possibles}}$.\n\n` +
+          `Méthode : on compte le nombre total d’issues, puis les issues favorables.\n\n` +
+          `Calcul : il y a $${faces1} \\times ${faces2} = ${total}$ issues, et une seule favorable, soit $\\dfrac{1}{${total}}$.\n\n` +
+          `Conclusion : la probabilité est $\\dfrac{1}{${total}}$.`,
+      };
+    },
+  },
+
+  {
+    kind: "fixed",
+    id: "3e_proba_deux_epreuve_fixed_4_arbre",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "proba_experience",
+    microId: "proba_deux_epreuve",
+    difficulty: 4,
+    theme: "neutral",
+    text: "On représente une expérience à deux épreuves par un arbre. Si chaque épreuve a $3$ issues, combien de branches complètes (chemins) l’arbre comporte-t-il ?",
+    format: "qcm",
+    choices: ["$9$", "$6$", "$3$", "$12$"],
+    expected: ["$9$"],
+    comparator: "mcq_exact",
+    hint: "Nombre de chemins $= 3 \\times 3$.",
+    explanation:
+      "Définition : dans un arbre, chaque chemin complet correspond à une issue de l’expérience.\n\n" +
+      "Méthode : on multiplie le nombre d’issues de chaque épreuve.\n\n" +
+      "Calcul : $3 \\times 3 = 9$ chemins.\n\n" +
+      "Conclusion : l’arbre comporte $9$ branches complètes.",
+    tags: ["proba_experience", "deux_epreuve", "arbre", "qcm"],
+  },
+
+  {
+    kind: "template",
+    id: "3e_proba_deux_epreuve_tpl_4_favorables",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "proba_experience",
+    microId: "proba_deux_epreuve",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Compte les issues du tableau dont la somme correspond à la valeur cherchée.",
+    tags: ["proba_experience", "deux_epreuve", "tableau", "canvas", "defi", "template"],
+    generate: () => {
+      // deux dés à 3 faces (1,2,3) ; on compte les couples de somme = s
+      const s = randomChoice([3, 4]);
+      const couples: string[] = [];
+      for (let i = 1; i <= 3; i++) {
+        for (let j = 1; j <= 3; j++) {
+          if (i + j === s) couples.push(`(${i},${j})`);
+        }
+      }
+      const entetes = ["+", "1", "2", "3"];
+      const lignes = [1, 2, 3].map((i) => [
+        String(i),
+        ...[1, 2, 3].map((j) => String(i + j)),
+      ]);
+
+      return {
+        text: `On lance deux dés à $3$ faces (numérotées $1$, $2$, $3$). Combien de couples donnent une somme égale à ${s} ?`,
+        format: "short",
+        expected: [String(couples.length)],
+        comparator: "number_equal",
+        explanation:
+          `Définition : chaque issue est un couple (premier dé, second dé).\n\n` +
+          `Méthode : on remplit le tableau des sommes et on compte les cases égales à ${s}.\n\n` +
+          `Calcul : les couples de somme ${s} sont ${couples.join(", ")}, soit ${couples.length}.\n\n` +
+          `Conclusion : ${couples.length} couples donnent une somme de ${s}.`,
+        canvas: tableauCanvas(entetes, lignes),
+      };
+    },
+  },
+
+  {
+    kind: "fixed",
+    id: "3e_proba_deux_epreuve_fixed_5_defi",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "proba_experience",
+    microId: "proba_deux_epreuve",
+    difficulty: 5,
+    theme: "neutral",
+    text: "On lance deux fois une pièce. Quelle est la probabilité d’obtenir « exactement une fois pile » ?",
+    format: "qcm",
+    choices: ["$\\dfrac{2}{4}$", "$\\dfrac{1}{4}$", "$\\dfrac{3}{4}$", "$\\dfrac{1}{2}$"],
+    expected: ["$\\dfrac{2}{4}$"],
+    comparator: "mcq_exact",
+    hint: "Repère parmi PP, PF, FP, FF les issues avec un seul pile.",
+    explanation:
+      "Définition : on compte les issues favorables parmi toutes les issues.\n\n" +
+      "Méthode : on liste les $4$ issues PP, PF, FP, FF et on garde celles avec exactement un pile.\n\n" +
+      "Calcul : les issues favorables sont PF et FP, soit $2$ sur $4$ : $\\dfrac{2}{4}$.\n\n" +
+      "Conclusion : la probabilité est $\\dfrac{2}{4}$.",
+    tags: ["proba_experience", "deux_epreuve", "defi", "qcm"],
+  }
 ];

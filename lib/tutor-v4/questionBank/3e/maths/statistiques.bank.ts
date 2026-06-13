@@ -1283,6 +1283,752 @@ export const statistiquesBank: TutorBankItemV4[] = [
       "Calcul : sans rangement, on risque de choisir une valeur qui n’est pas réellement au centre.\n\n" +
       "Conclusion : ranger la série est indispensable pour déterminer correctement la médiane.",
     tags: ["stat_statistique", "mediane", "open"],
+  },
+
+  /* =========================
+     STAT_ETENDUE
+  ========================= */
+
+  {
+    kind: "fixed",
+    id: "3e_stat_etendue_fixed_1",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "stat_statistique",
+    microId: "stat_etendue",
+    difficulty: 1,
+    theme: "neutral",
+    text: "Que mesure l’étendue d’une série statistique ?",
+    format: "qcm",
+    choices: [
+      "l’écart entre la plus grande et la plus petite valeur",
+      "la valeur la plus fréquente",
+      "la valeur centrale de la série",
+      "la somme de toutes les valeurs",
+    ],
+    expected: ["l’écart entre la plus grande et la plus petite valeur"],
+    comparator: "mcq_exact",
+    hint: "L’étendue mesure la dispersion : du minimum au maximum.",
+    explanation:
+      "Définition : l’étendue d’une série est la différence entre la plus grande et la plus petite valeur.\n\n" +
+      "Méthode : on repère le maximum et le minimum, puis on calcule $\\text{max} - \\text{min}$.\n\n" +
+      "Calcul : ici il n’y a pas de calcul, il faut reconnaître le rôle de l’étendue.\n\n" +
+      "Conclusion : l’étendue mesure l’écart entre la plus grande et la plus petite valeur.",
+    tags: ["stat_statistique", "etendue", "definition", "qcm"],
+  },
+
+  {
+    kind: "fixed",
+    id: "3e_stat_etendue_fixed_2",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "stat_statistique",
+    microId: "stat_etendue",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Quelle est l’étendue de la série : $4 \\,;\\, 7 \\,;\\, 9 \\,;\\, 15$ ?",
+    format: "qcm",
+    choices: ["$11$", "$4$", "$15$", "$9$"],
+    expected: ["$11$"],
+    comparator: "mcq_exact",
+    hint: "Étendue $= \\text{max} - \\text{min}$.",
+    explanation:
+      "Définition : l’étendue est la différence entre la plus grande et la plus petite valeur.\n\n" +
+      "Méthode : on repère le maximum et le minimum de la série.\n\n" +
+      "Calcul : le maximum est $15$ et le minimum est $4$, donc l’étendue $= 15 - 4 = 11$.\n\n" +
+      "Conclusion : l’étendue de la série est $11$.",
+    tags: ["stat_statistique", "etendue", "calcul", "qcm"],
+  },
+
+  {
+    kind: "template",
+    id: "3e_stat_etendue_tpl_1",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "stat_statistique",
+    microId: "stat_etendue",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Repère la plus grande et la plus petite valeur, puis soustrais.",
+    tags: ["stat_statistique", "etendue", "template"],
+    generate: () => {
+      const values = [
+        randomInt(2, 6),
+        randomInt(7, 12),
+        randomInt(13, 18),
+        randomInt(19, 25),
+      ];
+      const shown = shuffle(values);
+      const e = etendue(values);
+
+      return {
+        text: `Calculer l’étendue de la série : ${shown.join(" ; ")}.`,
+        format: "short",
+        expected: [String(e)],
+        comparator: "number_equal",
+        explanation:
+          `Définition : l’étendue est la différence entre la plus grande et la plus petite valeur.\n\n` +
+          `Méthode : on cherche le maximum et le minimum de la série.\n\n` +
+          `Calcul : le maximum est $${Math.max(...values)}$ et le minimum est $${Math.min(
+            ...values
+          )}$, donc l’étendue $= ${Math.max(...values)} - ${Math.min(
+            ...values
+          )} = ${e}$.\n\n` +
+          `Conclusion : l’étendue est $${e}$.`,
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "3e_stat_etendue_tpl_2_reunion",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "stat_statistique",
+    microId: "stat_etendue",
+    difficulty: 3,
+    theme: "reunion",
+    hint: "L’étendue des températures est la différence entre la plus chaude et la plus froide.",
+    tags: ["stat_statistique", "etendue", "reunion", "template"],
+    generate: () => {
+      const temps = [
+        randomInt(18, 21),
+        randomInt(22, 25),
+        randomInt(26, 29),
+        randomInt(30, 33),
+      ];
+      const shown = shuffle(temps);
+      const e = etendue(temps);
+
+      return {
+        text: `À La Réunion, on relève les températures (en °C) : ${shown.join(
+          " ; "
+        )}. Quelle est l’étendue de ces températures ?`,
+        format: "short",
+        expected: [String(e)],
+        comparator: "number_equal",
+        explanation:
+          `Définition : l’étendue mesure l’écart entre la valeur la plus grande et la valeur la plus petite.\n\n` +
+          `Méthode : on repère la température maximale et la température minimale.\n\n` +
+          `Calcul : la plus chaude est $${Math.max(...temps)}$ °C et la plus froide $${Math.min(
+            ...temps
+          )}$ °C, donc l’étendue $= ${Math.max(...temps)} - ${Math.min(
+            ...temps
+          )} = ${e}$ °C.\n\n` +
+          `Conclusion : l’étendue des températures est $${e}$ °C.`,
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "3e_stat_etendue_tpl_3_graphique",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "stat_statistique",
+    microId: "stat_etendue",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Lis la plus grande et la plus petite barre, puis soustrais.",
+    tags: ["stat_statistique", "etendue", "graphique", "canvas", "template"],
+    generate: () => {
+      const data = [
+        { label: "A", value: randomInt(4, 9) },
+        { label: "B", value: randomInt(10, 15) },
+        { label: "C", value: randomInt(16, 22) },
+        { label: "D", value: randomInt(23, 28) },
+      ];
+      const values = data.map((d) => d.value);
+      const e = etendue(values);
+
+      return {
+        text: "D’après le graphique, quelle est l’étendue des valeurs représentées ?",
+        format: "short",
+        expected: [String(e)],
+        comparator: "number_equal",
+        explanation:
+          `Définition : l’étendue est la différence entre la plus grande et la plus petite valeur.\n\n` +
+          `Méthode : on repère la barre la plus haute et la barre la plus basse.\n\n` +
+          `Calcul : la plus grande valeur est $${Math.max(
+            ...values
+          )}$ et la plus petite $${Math.min(...values)}$, donc l’étendue $= ${Math.max(
+            ...values
+          )} - ${Math.min(...values)} = ${e}$.\n\n` +
+          `Conclusion : l’étendue est $${e}$.`,
+        canvas: statGraphCanvas({
+          graphType: "barres",
+          data,
+          display: {
+            showLabels: true,
+            showValues: true,
+          },
+        }),
+      };
+    },
+  },
+
+  {
+    kind: "fixed",
+    id: "3e_stat_etendue_erreur_1",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "stat_statistique",
+    microId: "stat_etendue",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Un élève dit : « Pour la série $5 \\,;\\, 8 \\,;\\, 12$, l’étendue est $5 + 8 + 12 = 25$. » A-t-il raison ?",
+    format: "qcm",
+    choices: ["oui", "non"],
+    expected: ["non"],
+    comparator: "mcq_exact",
+    hint: "L’étendue est une soustraction, pas une somme.",
+    explanation:
+      "Définition : l’étendue est la différence entre la plus grande et la plus petite valeur, pas leur somme.\n\n" +
+      "Méthode : on calcule $\\text{max} - \\text{min}$.\n\n" +
+      "Calcul : ici $12 - 5 = 7$.\n\n" +
+      "Conclusion : l’élève a tort, l’étendue est $7$.",
+    tags: ["stat_statistique", "etendue", "erreur", "qcm"],
+  },
+
+  {
+    kind: "template",
+    id: "3e_stat_etendue_tpl_4_max_manquant",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "stat_statistique",
+    microId: "stat_etendue",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Si tu connais le minimum et l’étendue, alors max = min + étendue.",
+    tags: ["stat_statistique", "etendue", "inverse", "template"],
+    generate: () => {
+      const min = randomInt(3, 9);
+      const e = randomInt(8, 18);
+      const max = min + e;
+
+      return {
+        text: `Dans une série, la plus petite valeur est ${min} et l’étendue est ${e}. Quelle est la plus grande valeur ?`,
+        format: "short",
+        expected: [String(max)],
+        comparator: "number_equal",
+        explanation:
+          `Définition : l’étendue relie le minimum et le maximum par $\\text{étendue} = \\text{max} - \\text{min}$.\n\n` +
+          `Méthode : on isole le maximum : $\\text{max} = \\text{min} + \\text{étendue}$.\n\n` +
+          `Calcul : $\\text{max} = ${min} + ${e} = ${max}$.\n\n` +
+          `Conclusion : la plus grande valeur est ${max}.`,
+      };
+    },
+  },
+
+  {
+    kind: "fixed",
+    id: "3e_stat_etendue_fixed_3_comparer",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "stat_statistique",
+    microId: "stat_etendue",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Série A : $10 \\,;\\, 11 \\,;\\, 12$. Série B : $2 \\,;\\, 11 \\,;\\, 20$. Quelle série est la plus régulière (la moins dispersée) ?",
+    format: "qcm",
+    choices: ["la série A", "la série B", "elles sont aussi régulières", "on ne peut pas savoir"],
+    expected: ["la série A"],
+    comparator: "mcq_exact",
+    hint: "Plus l’étendue est petite, plus la série est régulière.",
+    explanation:
+      "Définition : l’étendue mesure la dispersion d’une série.\n\n" +
+      "Méthode : on compare les étendues des deux séries.\n\n" +
+      "Calcul : étendue de A $= 12 - 10 = 2$ ; étendue de B $= 20 - 2 = 18$.\n\n" +
+      "Conclusion : la série A, d’étendue plus petite, est la plus régulière.",
+    tags: ["stat_statistique", "etendue", "comparaison", "qcm"],
+  },
+
+  {
+    kind: "template",
+    id: "3e_stat_etendue_tpl_5_defi",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "stat_statistique",
+    microId: "stat_etendue",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Range mentalement les valeurs : seules la plus grande et la plus petite comptent.",
+    tags: ["stat_statistique", "etendue", "defi", "template"],
+    generate: () => {
+      const values = [
+        randomInt(1, 4),
+        randomInt(5, 9),
+        randomInt(10, 14),
+        randomInt(15, 19),
+        randomInt(20, 26),
+        randomInt(27, 32),
+      ];
+      const shown = shuffle(values);
+      const e = etendue(values);
+
+      return {
+        text: `On a relevé les nombres suivants : ${shown.join(
+          " ; "
+        )}. Sans tout ranger, détermine l’étendue de cette série.`,
+        format: "short",
+        expected: [String(e)],
+        comparator: "number_equal",
+        explanation:
+          `Définition : l’étendue ne dépend que du maximum et du minimum.\n\n` +
+          `Méthode : inutile de tout ranger, on cherche seulement la plus grande et la plus petite valeur.\n\n` +
+          `Calcul : maximum $= ${Math.max(...values)}$, minimum $= ${Math.min(
+            ...values
+          )}$, donc l’étendue $= ${Math.max(...values)} - ${Math.min(
+            ...values
+          )} = ${e}$.\n\n` +
+          `Conclusion : l’étendue est $${e}$.`,
+      };
+    },
+  },
+
+  /* =========================
+     STAT_INTERPRETER
+  ========================= */
+
+  {
+    kind: "fixed",
+    id: "3e_stat_interpreter_fixed_1",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "stat_statistique",
+    microId: "stat_interpreter",
+    difficulty: 2,
+    theme: "neutral",
+    text: "La moyenne des notes d’une classe est $12$. Que peut-on dire ?",
+    format: "qcm",
+    choices: [
+      "si chaque élève avait la même note, ce serait $12$",
+      "tous les élèves ont eu $12$",
+      "la meilleure note est $12$",
+      "personne n’a eu en dessous de $12$",
+    ],
+    expected: ["si chaque élève avait la même note, ce serait $12$"],
+    comparator: "mcq_exact",
+    hint: "La moyenne répartit équitablement le total entre tous.",
+    explanation:
+      "Définition : la moyenne est la valeur que prendrait chacun si on répartissait équitablement le total.\n\n" +
+      "Méthode : on interprète la moyenne comme une valeur d’équilibre, pas comme une note réelle de chaque élève.\n\n" +
+      "Calcul : une moyenne de $12$ n’interdit ni notes plus basses ni notes plus hautes.\n\n" +
+      "Conclusion : si tous avaient la même note, elle vaudrait $12$.",
+    tags: ["stat_statistique", "interpreter", "moyenne", "qcm"],
+  },
+
+  {
+    kind: "fixed",
+    id: "3e_stat_interpreter_fixed_2",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "stat_statistique",
+    microId: "stat_interpreter",
+    difficulty: 2,
+    theme: "neutral",
+    text: "La médiane des durées de trajet d’une classe est $20$ min. Que signifie-t-elle ?",
+    format: "qcm",
+    choices: [
+      "la moitié des élèves mettent moins de $20$ min, l’autre moitié plus",
+      "tous les élèves mettent $20$ min",
+      "le trajet le plus long est $20$ min",
+      "la moyenne des trajets est $20$ min",
+    ],
+    expected: [
+      "la moitié des élèves mettent moins de $20$ min, l’autre moitié plus",
+    ],
+    comparator: "mcq_exact",
+    hint: "La médiane partage l’effectif en deux groupes égaux.",
+    explanation:
+      "Définition : la médiane partage une série rangée en deux groupes de même effectif.\n\n" +
+      "Méthode : on interprète la médiane comme la valeur qui sépare les $50\\,\\%$ du bas des $50\\,\\%$ du haut.\n\n" +
+      "Calcul : ici, $50\\,\\%$ des élèves mettent moins de $20$ min.\n\n" +
+      "Conclusion : la moitié des élèves mettent moins de $20$ min, l’autre moitié davantage.",
+    tags: ["stat_statistique", "interpreter", "mediane", "qcm"],
+  },
+
+  {
+    kind: "fixed",
+    id: "3e_stat_interpreter_fixed_3",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "stat_statistique",
+    microId: "stat_interpreter",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Une grande étendue dans une série indique surtout…",
+    format: "qcm",
+    choices: [
+      "des valeurs très dispersées",
+      "des valeurs toutes proches",
+      "une moyenne élevée",
+      "une médiane élevée",
+    ],
+    expected: ["des valeurs très dispersées"],
+    comparator: "mcq_exact",
+    hint: "L’étendue mesure l’écart entre les extrêmes.",
+    explanation:
+      "Définition : l’étendue mesure la dispersion d’une série.\n\n" +
+      "Méthode : on relie une grande étendue à un grand écart entre le minimum et le maximum.\n\n" +
+      "Calcul : une étendue élevée signifie que les valeurs s’étalent beaucoup.\n\n" +
+      "Conclusion : une grande étendue indique des valeurs très dispersées.",
+    tags: ["stat_statistique", "interpreter", "etendue", "qcm"],
+  },
+
+  {
+    kind: "fixed",
+    id: "3e_stat_interpreter_fixed_4_extreme",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "stat_statistique",
+    microId: "stat_interpreter",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Dans une série, une valeur très grande apparaît (une valeur extrême). Quel indicateur est le plus modifié ?",
+    format: "qcm",
+    choices: ["la moyenne", "la médiane", "l’effectif total", "le nombre de valeurs"],
+    expected: ["la moyenne"],
+    comparator: "mcq_exact",
+    hint: "La moyenne utilise toutes les valeurs ; la médiane ne regarde que le centre.",
+    explanation:
+      "Définition : la moyenne tient compte de toutes les valeurs, la médiane seulement de la position centrale.\n\n" +
+      "Méthode : on regarde quel indicateur est sensible à une valeur extrême.\n\n" +
+      "Calcul : une valeur extrême tire la moyenne vers le haut mais déplace peu la médiane.\n\n" +
+      "Conclusion : c’est la moyenne qui est la plus modifiée.",
+    tags: ["stat_statistique", "interpreter", "valeur_extreme", "qcm"],
+  },
+
+  {
+    kind: "fixed",
+    id: "3e_stat_interpreter_fixed_5_choix",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "stat_statistique",
+    microId: "stat_interpreter",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Pour décrire le salaire « typique » d’une entreprise où quelques dirigeants gagnent énormément, quel indicateur est le plus pertinent ?",
+    format: "qcm",
+    choices: ["la médiane", "la moyenne", "l’étendue", "le maximum"],
+    expected: ["la médiane"],
+    comparator: "mcq_exact",
+    hint: "La moyenne est gonflée par les très hauts salaires.",
+    explanation:
+      "Définition : la médiane représente la valeur centrale, peu sensible aux valeurs extrêmes.\n\n" +
+      "Méthode : on choisit l’indicateur le moins déformé par quelques très grandes valeurs.\n\n" +
+      "Calcul : la moyenne serait tirée vers le haut par les dirigeants ; la médiane reste représentative.\n\n" +
+      "Conclusion : la médiane décrit le mieux le salaire typique.",
+    tags: ["stat_statistique", "interpreter", "choix_indicateur", "qcm"],
+  },
+
+  {
+    kind: "template",
+    id: "3e_stat_interpreter_tpl_1_compare_moyenne",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "stat_statistique",
+    microId: "stat_interpreter",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Compare les deux moyennes : la plus grande indique de meilleurs résultats d’ensemble.",
+    tags: ["stat_statistique", "interpreter", "comparaison", "template"],
+    generate: () => {
+      const mA = randomInt(10, 13);
+      const mB = mA + randomInt(1, 4);
+
+      return {
+        text: `La classe A a une moyenne de ${mA}/20 et la classe B une moyenne de ${mB}/20. Quelle classe a, en moyenne, les meilleurs résultats ?`,
+        format: "qcm",
+        choices: ["la classe B", "la classe A", "les deux pareil", "on ne peut pas savoir"],
+        expected: ["la classe B"],
+        comparator: "mcq_exact",
+        explanation:
+          `Définition : la moyenne résume le niveau global d’un groupe.\n\n` +
+          `Méthode : on compare les deux moyennes.\n\n` +
+          `Calcul : $${mB} > ${mA}$, donc la classe B a une moyenne plus élevée.\n\n` +
+          `Conclusion : en moyenne, la classe B a les meilleurs résultats.`,
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "3e_stat_interpreter_tpl_2_graphique",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "stat_statistique",
+    microId: "stat_interpreter",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "La catégorie la plus représentée est celle dont la barre est la plus haute.",
+    tags: ["stat_statistique", "interpreter", "graphique", "canvas", "template"],
+    generate: () => {
+      const data = [
+        { label: "Foot", value: randomInt(10, 30) },
+        { label: "Danse", value: randomInt(10, 30) },
+        { label: "Musique", value: randomInt(10, 30) },
+      ];
+      const max = Math.max(...data.map((d) => d.value));
+      const correct = data.find((d) => d.value === max)?.label ?? data[0].label;
+
+      return {
+        text: "D’après ce graphique des activités choisies, quelle activité est la plus populaire ?",
+        format: "qcm",
+        choices: data.map((d) => d.label),
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation:
+          `Définition : interpréter un graphique, c’est en tirer une conclusion concrète.\n\n` +
+          `Méthode : on repère la barre la plus haute, qui correspond à l’effectif le plus grand.\n\n` +
+          `Calcul : ${correct} atteint la valeur la plus grande : $${max}$.\n\n` +
+          `Conclusion : l’activité la plus populaire est ${correct}.`,
+        canvas: statGraphCanvas({
+          graphType: "barres",
+          data,
+          display: {
+            showLabels: true,
+            showValues: true,
+            highlightIndex: data.findIndex((d) => d.label === correct),
+          },
+        }),
+      };
+    },
+  },
+
+  {
+    kind: "fixed",
+    id: "3e_stat_interpreter_fixed_6_moyenne_mediane",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "stat_statistique",
+    microId: "stat_interpreter",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Deux classes ont la même moyenne de $12$, mais la classe A a une étendue de $4$ et la classe B une étendue de $16$. Dans quelle classe les notes sont-elles les plus homogènes ?",
+    format: "qcm",
+    choices: ["la classe A", "la classe B", "elles sont identiques", "on ne peut pas savoir"],
+    expected: ["la classe A"],
+    comparator: "mcq_exact",
+    hint: "Même moyenne, mais l’étendue dit comment les notes sont réparties.",
+    explanation:
+      "Définition : à moyenne égale, l’étendue renseigne sur la dispersion des valeurs.\n\n" +
+      "Méthode : on compare les étendues : la plus petite correspond aux notes les plus regroupées.\n\n" +
+      "Calcul : étendue de A $= 4 <$ étendue de B $= 16$.\n\n" +
+      "Conclusion : la classe A a les notes les plus homogènes.",
+    tags: ["stat_statistique", "interpreter", "moyenne_etendue", "qcm"],
+  },
+
+  /* =========================
+     STAT_DEFI
+  ========================= */
+
+  {
+    kind: "template",
+    id: "3e_stat_defi_tpl_1_moyenne",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "stat_statistique",
+    microId: "stat_defi",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Additionne les notes puis divise par leur nombre.",
+    tags: ["stat_statistique", "defi", "moyenne", "template"],
+    generate: () => {
+      const values = [
+        randomInt(8, 16),
+        randomInt(8, 16),
+        randomInt(8, 16),
+        randomInt(8, 16),
+        randomInt(8, 16),
+      ];
+      const avg = moyenne(values);
+
+      return {
+        text: `Type brevet : un élève a obtenu les notes ${values.join(
+          " ; "
+        )}. Calcule sa moyenne.`,
+        format: "short",
+        expected: [formatNumber(avg)],
+        comparator: "number_equal",
+        explanation:
+          `Définition : la moyenne résume une série de notes.\n\n` +
+          `Méthode : on additionne les ${values.length} notes puis on divise par ${values.length}.\n\n` +
+          `Calcul : $(${values.join(" + ")}) \\div ${values.length} = ${formatNumber(
+            avg
+          )}$.\n\n` +
+          `Conclusion : la moyenne est $${formatNumber(avg)}$.`,
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "3e_stat_defi_tpl_2_mediane_etendue",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "stat_statistique",
+    microId: "stat_defi",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Range la série : la médiane est au centre, l’étendue est max − min.",
+    tags: ["stat_statistique", "defi", "mediane", "etendue", "template"],
+    generate: () => {
+      const sorted = [
+        randomInt(2, 5),
+        randomInt(6, 9),
+        randomInt(10, 13),
+        randomInt(14, 17),
+        randomInt(18, 22),
+      ];
+      const values = shuffle(sorted);
+      const med = sorted[2];
+
+      return {
+        text: `On donne la série ${values.join(
+          " ; "
+        )}. Détermine sa médiane.`,
+        format: "short",
+        expected: [String(med)],
+        comparator: "number_equal",
+        explanation:
+          `Définition : la médiane est la valeur centrale d’une série rangée.\n\n` +
+          `Méthode : on range la série, puis on prend la valeur du milieu (la série a ${values.length} valeurs).\n\n` +
+          `Calcul : série rangée : ${sorted.join(" ; ")}. La valeur centrale est $${med}$.\n\n` +
+          `Conclusion : la médiane est $${med}$.`,
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "3e_stat_defi_tpl_3_valeur_manquante",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "stat_statistique",
+    microId: "stat_defi",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Somme totale = moyenne × nombre de valeurs.",
+    tags: ["stat_statistique", "defi", "valeur_manquante", "template"],
+    generate: () => {
+      const a = randomInt(8, 14);
+      const b = randomInt(8, 14);
+      const c = randomInt(8, 14);
+      const d = randomInt(8, 14);
+      const target = randomInt(10, 14);
+      const x = target * 5 - (a + b + c + d);
+
+      return {
+        text: `La moyenne des cinq notes ${a}, ${b}, ${c}, ${d} et x est ${target}. Quelle est la note x ?`,
+        format: "short",
+        expected: [String(x)],
+        comparator: "number_equal",
+        explanation:
+          `Définition : connaître la moyenne et le nombre de valeurs permet de retrouver la somme totale.\n\n` +
+          `Méthode : on calcule la somme totale, puis on retire les valeurs connues.\n\n` +
+          `Calcul : somme totale $= ${target} \\times 5 = ${target * 5}$, donc $x = ${
+            target * 5
+          } - (${a} + ${b} + ${c} + ${d}) = ${x}$.\n\n` +
+          `Conclusion : la note manquante est $x = ${x}$.`,
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "3e_stat_defi_tpl_4_graphique_moyenne",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "stat_statistique",
+    microId: "stat_defi",
+    difficulty: 5,
+    theme: "reunion",
+    hint: "Lis chaque valeur du graphique, additionne, puis divise.",
+    tags: ["stat_statistique", "defi", "graphique", "canvas", "template"],
+    generate: () => {
+      const data = [
+        { label: "Lun", value: randomInt(20, 30) },
+        { label: "Mar", value: randomInt(20, 30) },
+        { label: "Mer", value: randomInt(20, 30) },
+        { label: "Jeu", value: randomInt(20, 30) },
+      ];
+      const values = data.map((d) => d.value);
+      const avg = moyenne(values);
+
+      return {
+        text: "Ce graphique donne le nombre de visiteurs par jour d’un marché à La Réunion. Calcule le nombre moyen de visiteurs par jour.",
+        format: "short",
+        expected: [formatNumber(avg)],
+        comparator: "number_equal",
+        explanation:
+          `Définition : la moyenne répartit le total également sur les jours.\n\n` +
+          `Méthode : on lit les ${values.length} valeurs, on les additionne, puis on divise par ${values.length}.\n\n` +
+          `Calcul : $(${values.join(" + ")}) \\div ${values.length} = ${formatNumber(
+            avg
+          )}$.\n\n` +
+          `Conclusion : il y a en moyenne $${formatNumber(avg)}$ visiteurs par jour.`,
+        canvas: statGraphCanvas({
+          graphType: "barres",
+          data,
+          display: {
+            showLabels: true,
+            showValues: true,
+          },
+        }),
+      };
+    },
+  },
+
+  {
+    kind: "fixed",
+    id: "3e_stat_defi_fixed_1_choix_indicateur",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "stat_statistique",
+    microId: "stat_defi",
+    difficulty: 5,
+    theme: "neutral",
+    text: "On veut connaître la valeur qui partage une série de salaires en deux groupes de même effectif. Quel indicateur faut-il calculer ?",
+    format: "qcm",
+    choices: ["la médiane", "la moyenne", "l’étendue", "l’effectif total"],
+    expected: ["la médiane"],
+    comparator: "mcq_exact",
+    hint: "« Deux groupes de même effectif » est la définition d’un indicateur précis.",
+    explanation:
+      "Définition : la médiane partage une série rangée en deux groupes de même effectif.\n\n" +
+      "Méthode : on identifie l’indicateur correspondant à la description.\n\n" +
+      "Calcul : ni la moyenne, ni l’étendue ne partagent l’effectif en deux ; c’est la médiane.\n\n" +
+      "Conclusion : il faut calculer la médiane.",
+    tags: ["stat_statistique", "defi", "choix_indicateur", "qcm"],
+  },
+
+  {
+    kind: "fixed",
+    id: "3e_stat_defi_fixed_2_brevet",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "stat_statistique",
+    microId: "stat_defi",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Série : $6 \\,;\\, 9 \\,;\\, 9 \\,;\\, 12 \\,;\\, 14$. Parmi ces affirmations, laquelle est exacte ?",
+    format: "qcm",
+    choices: [
+      "la médiane est $9$ et l’étendue est $8$",
+      "la médiane est $9$ et l’étendue est $14$",
+      "la médiane est $10$ et l’étendue est $8$",
+      "la médiane est $12$ et l’étendue est $6$",
+    ],
+    expected: ["la médiane est $9$ et l’étendue est $8$"],
+    comparator: "mcq_exact",
+    hint: "La série est déjà rangée : médiane au centre, étendue = max − min.",
+    explanation:
+      "Définition : la médiane est la valeur centrale d’une série rangée et l’étendue vaut $\\text{max} - \\text{min}$.\n\n" +
+      "Méthode : la série a $5$ valeurs rangées, on prend la $3^\\text{e}$ pour la médiane.\n\n" +
+      "Calcul : médiane $= 9$ ; étendue $= 14 - 6 = 8$.\n\n" +
+      "Conclusion : la médiane est $9$ et l’étendue est $8$.",
+    tags: ["stat_statistique", "defi", "brevet", "qcm"],
   }
 
 ]

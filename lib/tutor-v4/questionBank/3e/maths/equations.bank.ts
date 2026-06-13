@@ -1326,4 +1326,300 @@ export const equationsBank: TutorBankItemV4[] = [
   tags: ["equation", "probleme", "erreur", "traduction"],
 },
 
+/* =========================
+   EQUATION_DEFI
+========================= */
+
+{
+  kind: "template",
+  id: "3e_equation_defi_tpl_1_resoudre",
+  niveau: "3e",
+  matiere: "maths",
+  notionId: "equation_resolution",
+  microId: "equation_defi",
+  difficulty: 3,
+  theme: "neutral",
+  hint: "Isole x : enlève le terme constant, puis divise par le coefficient.",
+  tags: ["equation", "defi", "resolution", "template"],
+  generate: () => {
+    const a = randomInt(2, 6);
+    const x = randomInt(2, 9);
+    const b = randomInt(1, 9);
+    const c = a * x + b;
+
+    return {
+      text: `Type brevet : résous l’équation $${a}x + ${b} = ${c}$.`,
+      format: "short",
+      expected: [String(x)],
+      comparator: "number_equal",
+      explanation:
+        `Définition : résoudre une équation, c’est trouver la valeur de l’inconnue qui rend l’égalité vraie.\n\n` +
+        `Méthode : on isole le terme en $x$, puis on divise par son coefficient.\n\n` +
+        `Calcul : $${a}x + ${b} = ${c}$ donne $${a}x = ${c - b}$, puis $x = ${c - b} \\div ${a} = ${x}$.\n\n` +
+        `Conclusion : la solution est $x = ${x}$.`,
+    };
+  },
+},
+
+{
+  kind: "template",
+  id: "3e_equation_defi_tpl_2_developper",
+  niveau: "3e",
+  matiere: "maths",
+  notionId: "equation_resolution",
+  microId: "equation_defi",
+  difficulty: 4,
+  theme: "neutral",
+  hint: "Développe la parenthèse avant d’isoler x.",
+  tags: ["equation", "defi", "developper", "template"],
+  generate: () => {
+    const a = randomInt(2, 5);
+    const b = randomInt(1, 6);
+    const x = randomInt(2, 8);
+    const c = a * (x + b);
+
+    return {
+      text: `Résous l’équation $${a}(x + ${b}) = ${c}$.`,
+      format: "short",
+      expected: [String(x)],
+      comparator: "number_equal",
+      explanation:
+        `Définition : on transforme l’équation en supprimant la parenthèse.\n\n` +
+        `Méthode : on développe, puis on isole $x$.\n\n` +
+        `Calcul : $${a}(x + ${b}) = ${a}x + ${a * b}$, donc $${a}x + ${a * b} = ${c}$, puis $${a}x = ${
+          c - a * b
+        }$ et $x = ${x}$.\n\n` +
+        `Conclusion : la solution est $x = ${x}$.`,
+    };
+  },
+},
+
+{
+  kind: "fixed",
+  id: "3e_equation_defi_fixed_1_produit_nul",
+  niveau: "3e",
+  matiere: "maths",
+  notionId: "equation_resolution",
+  microId: "equation_defi",
+  difficulty: 4,
+  theme: "neutral",
+  text: "Quelles sont les solutions de l’équation $(x - 2)(x + 5) = 0$ ?",
+  format: "qcm",
+  choices: ["$x = 2$ ou $x = -5$", "$x = -2$ ou $x = 5$", "$x = 2$ ou $x = 5$", "$x = 10$"],
+  expected: ["$x = 2$ ou $x = -5$"],
+  comparator: "mcq_exact",
+  hint: "Un produit est nul si au moins un facteur est nul.",
+  explanation:
+    "Définition : un produit est nul si au moins un de ses facteurs est nul.\n\n" +
+    "Méthode : on annule chaque facteur séparément.\n\n" +
+    "Calcul : $x - 2 = 0$ donne $x = 2$ ; $x + 5 = 0$ donne $x = -5$.\n\n" +
+    "Conclusion : les solutions sont $x = 2$ et $x = -5$.",
+  tags: ["equation", "defi", "produit_nul", "qcm"],
+},
+
+{
+  kind: "template",
+  id: "3e_equation_defi_tpl_3_produit_nul",
+  niveau: "3e",
+  matiere: "maths",
+  notionId: "equation_resolution",
+  microId: "equation_defi",
+  difficulty: 4,
+  theme: "neutral",
+  hint: "Chaque facteur annulé donne une solution.",
+  tags: ["equation", "defi", "produit_nul", "qcm", "template"],
+  generate: () => {
+    const a = randomInt(1, 9);
+    const b = randomInt(1, 9);
+    const correct = `$x = ${a}$ ou $x = -${b}$`;
+
+    return {
+      text: `Résous l’équation $(x - ${a})(x + ${b}) = 0$.`,
+      format: "qcm",
+      choices: makeChoices(correct, [
+        `$x = -${a}$ ou $x = ${b}$`,
+        `$x = ${a}$ ou $x = ${b}$`,
+        `$x = ${a + b}$`,
+      ]),
+      expected: [correct],
+      comparator: "mcq_exact",
+      explanation:
+        `Définition : un produit est nul si au moins un facteur est nul.\n\n` +
+        `Méthode : on résout $x - ${a} = 0$ et $x + ${b} = 0$.\n\n` +
+        `Calcul : $x - ${a} = 0$ donne $x = ${a}$ ; $x + ${b} = 0$ donne $x = -${b}$.\n\n` +
+        `Conclusion : les solutions sont $x = ${a}$ et $x = -${b}$.`,
+    };
+  },
+},
+
+{
+  kind: "fixed",
+  id: "3e_equation_defi_fixed_2_traduire",
+  niveau: "3e",
+  matiere: "maths",
+  notionId: "equation_resolution",
+  microId: "equation_defi",
+  difficulty: 4,
+  theme: "neutral",
+  text: "« Le double d’un nombre, augmenté de $7$, vaut $19$. » Quelle équation traduit cet énoncé ?",
+  format: "qcm",
+  choices: ["$2x + 7 = 19$", "$x + 2 + 7 = 19$", "$2(x + 7) = 19$", "$7x + 2 = 19$"],
+  expected: ["$2x + 7 = 19$"],
+  comparator: "mcq_exact",
+  hint: "« Le double d’un nombre » s’écrit $2x$.",
+  explanation:
+    "Définition : traduire un énoncé, c’est respecter le sens de chaque mot.\n\n" +
+    "Méthode : « le double d’un nombre » donne $2x$, « augmenté de $7$ » donne $+ 7$.\n\n" +
+    "Calcul : on obtient $2x + 7 = 19$.\n\n" +
+    "Conclusion : l’équation correcte est $2x + 7 = 19$.",
+  tags: ["equation", "defi", "traduction", "qcm"],
+},
+
+{
+  kind: "template",
+  id: "3e_equation_defi_tpl_4_probleme_age",
+  niveau: "3e",
+  matiere: "maths",
+  notionId: "equation_resolution",
+  microId: "equation_defi",
+  difficulty: 4,
+  theme: "neutral",
+  hint: "Pose l’âge inconnu comme x, écris l’équation, puis résous.",
+  tags: ["equation", "defi", "probleme", "template"],
+  generate: () => {
+    const age = randomInt(8, 14);
+    const ajout = randomInt(3, 9);
+    const total = 2 * age + ajout;
+
+    return {
+      text: `Le double de l’âge de Léa, augmenté de ${ajout} ans, donne ${total}. Quel est l’âge de Léa ?`,
+      format: "short",
+      expected: [String(age)],
+      comparator: "number_equal",
+      explanation:
+        `Définition : on modélise le problème par une équation d’inconnue l’âge $x$.\n\n` +
+        `Méthode : on traduit l’énoncé puis on résout.\n\n` +
+        `Calcul : $2x + ${ajout} = ${total}$, donc $2x = ${total - ajout}$ et $x = ${age}$.\n\n` +
+        `Conclusion : Léa a ${age} ans.`,
+    };
+  },
+},
+
+{
+  kind: "template",
+  id: "3e_equation_defi_tpl_5_perimetre",
+  niveau: "3e",
+  matiere: "maths",
+  notionId: "equation_resolution",
+  microId: "equation_defi",
+  difficulty: 5,
+  theme: "neutral",
+  hint: "Le périmètre d’un rectangle est $2 \\times (\\text{longueur} + \\text{largeur})$.",
+  tags: ["equation", "defi", "probleme", "geometrie", "template"],
+  generate: () => {
+    const largeur = randomInt(3, 8);
+    const ecart = randomInt(2, 6);
+    const longueur = largeur + ecart;
+    const perimetre = 2 * (longueur + largeur);
+
+    return {
+      text: `Un rectangle a une longueur qui dépasse sa largeur de ${ecart} cm. Son périmètre est ${perimetre} cm. Quelle est sa largeur (en cm) ?`,
+      format: "short",
+      expected: [String(largeur)],
+      comparator: "number_equal",
+      explanation:
+        `Définition : on appelle $x$ la largeur ; la longueur vaut alors $x + ${ecart}$.\n\n` +
+        `Méthode : on écrit le périmètre $2(x + x + ${ecart}) = ${perimetre}$, puis on résout.\n\n` +
+        `Calcul : $2(2x + ${ecart}) = ${perimetre}$ donne $4x + ${
+          2 * ecart
+        } = ${perimetre}$, puis $4x = ${perimetre - 2 * ecart}$ et $x = ${largeur}$.\n\n` +
+        `Conclusion : la largeur est ${largeur} cm.`,
+    };
+  },
+},
+
+{
+  kind: "fixed",
+  id: "3e_equation_defi_fixed_3_methode",
+  niveau: "3e",
+  matiere: "maths",
+  notionId: "equation_resolution",
+  microId: "equation_defi",
+  difficulty: 5,
+  theme: "neutral",
+  text: "Pour résoudre $5x - 3 = 2x + 9$, quelle est la première étape la plus efficace ?",
+  format: "qcm",
+  choices: [
+    "regrouper les $x$ d’un côté et les nombres de l’autre",
+    "diviser tout de suite par $5$",
+    "ajouter $3$ puis multiplier par $x$",
+    "remplacer $x$ par $0$",
+  ],
+  expected: ["regrouper les $x$ d’un côté et les nombres de l’autre"],
+  comparator: "mcq_exact",
+  hint: "Il y a des $x$ des deux côtés du signe égal.",
+  explanation:
+    "Définition : pour une équation avec l’inconnue des deux côtés, on rassemble d’abord les termes semblables.\n\n" +
+    "Méthode : on met les termes en $x$ d’un côté et les nombres de l’autre.\n\n" +
+    "Calcul : $5x - 2x = 9 + 3$ donne $3x = 12$, donc $x = 4$.\n\n" +
+    "Conclusion : la première étape est de regrouper les $x$ d’un côté.",
+  tags: ["equation", "defi", "methode", "qcm"],
+},
+
+{
+  kind: "template",
+  id: "3e_equation_defi_tpl_6_deux_membres",
+  niveau: "3e",
+  matiere: "maths",
+  notionId: "equation_resolution",
+  microId: "equation_defi",
+  difficulty: 5,
+  theme: "neutral",
+  hint: "Regroupe les x à gauche et les nombres à droite.",
+  tags: ["equation", "defi", "deux_membres", "template"],
+  generate: () => {
+    const x = randomInt(2, 7);
+    const a = randomInt(4, 7);
+    const b = randomInt(1, 3);
+    // a x + p = b x + q  avec p,q tels que solution = x
+    const p = randomInt(1, 6);
+    const q = (a - b) * x + p;
+
+    return {
+      text: `Résous l’équation $${a}x + ${p} = ${b}x + ${q}$.`,
+      format: "short",
+      expected: [String(x)],
+      comparator: "number_equal",
+      explanation:
+        `Définition : quand l’inconnue figure des deux côtés, on rassemble les termes semblables.\n\n` +
+        `Méthode : on déplace les $x$ à gauche et les nombres à droite.\n\n` +
+        `Calcul : $${a}x - ${b}x = ${q} - ${p}$ donne $${a - b}x = ${q - p}$, puis $x = ${x}$.\n\n` +
+        `Conclusion : la solution est $x = ${x}$.`,
+    };
+  },
+},
+
+{
+  kind: "fixed",
+  id: "3e_equation_defi_fixed_4_verifier",
+  niveau: "3e",
+  matiere: "maths",
+  notionId: "equation_resolution",
+  microId: "equation_defi",
+  difficulty: 4,
+  theme: "neutral",
+  text: "On affirme que $x = 4$ est solution de $3x - 5 = 7$. Est-ce exact ?",
+  format: "qcm",
+  choices: ["oui", "non"],
+  expected: ["oui"],
+  comparator: "mcq_exact",
+  hint: "Remplace $x$ par $4$ et vérifie l’égalité.",
+  explanation:
+    "Définition : une solution rend l’égalité vraie quand on remplace l’inconnue par sa valeur.\n\n" +
+    "Méthode : on substitue $x = 4$ dans le membre de gauche.\n\n" +
+    "Calcul : $3 \\times 4 - 5 = 12 - 5 = 7$, ce qui est bien égal au membre de droite.\n\n" +
+    "Conclusion : oui, $x = 4$ est solution.",
+  tags: ["equation", "defi", "verifier", "qcm"],
+},
+
 ];
