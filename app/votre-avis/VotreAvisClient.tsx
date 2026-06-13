@@ -107,6 +107,8 @@ export default function VotreAvisClient() {
 
   const [sending, setSending] = useState(false);
   const [sent, setSent] = useState(false);
+  const [pointsGagnes, setPointsGagnes] = useState(0);
+  const [pointsTotal, setPointsTotal] = useState(0);
   const [error, setError] = useState<string | null>(null);
   const [count, setCount] = useState(0);
 
@@ -150,6 +152,8 @@ export default function VotreAvisClient() {
       }
       setSent(true);
       setCount((c) => c + 1);
+      setPointsGagnes(typeof data.pointsGagnes === "number" ? data.pointsGagnes : 0);
+      setPointsTotal(typeof data.pointsTotal === "number" ? data.pointsTotal : 0);
     } catch (err: any) {
       setError(err?.message || "Erreur lors de l'envoi. Réessaie.");
     } finally {
@@ -258,7 +262,20 @@ export default function VotreAvisClient() {
             <h2 className="mt-3 text-xl font-bold text-emerald-300">
               Merci, ton retour est bien enregistré !
             </h2>
-            <p className="mt-2 text-sm leading-7 text-slate-200">
+
+            {pointsGagnes > 0 ? (
+              <div className="mx-auto mt-4 max-w-md rounded-2xl border border-fuchsia-400/40 bg-fuchsia-500/15 p-4">
+                <p className="text-lg font-black text-fuchsia-200">
+                  🏅 + {pointsGagnes} points !
+                </p>
+                <p className="mt-1 text-sm font-semibold text-slate-200">
+                  Tu as maintenant <span className="font-black text-white">{pointsTotal} points</span>.
+                  Bonus de 20 points quand ton idée est retenue par ton prof !
+                </p>
+              </div>
+            ) : null}
+
+            <p className="mt-3 text-sm leading-7 text-slate-200">
               {count > 1
                 ? `Déjà ${count} retours envoyés cette session. Continue, chaque détail compte.`
                 : "Ton professeur va le lire. Tu peux en envoyer autant que tu veux."}

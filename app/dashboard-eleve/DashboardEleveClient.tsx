@@ -172,6 +172,7 @@ export default function DashboardEleveClient() {
 
   const [resultatsEnglish, setResultatsEnglish] = useState<ResultatEnglishMaths[]>([]);
   const [resultatsTutor, setResultatsTutor] = useState<ResultatTutor[]>([]);
+  const [pointsAvis, setPointsAvis] = useState(0);
 
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
@@ -239,6 +240,8 @@ export default function DashboardEleveClient() {
         setResultatsEnglish((r.english_maths ?? []) as ResultatEnglishMaths[]);
 
         setResultatsTutor((r.tutor ?? []) as ResultatTutor[]);
+
+        setPointsAvis(typeof data.pointsAvis === "number" ? data.pointsAvis : 0);
       } catch (err) {
         console.error(err);
         setErrorMessage("Impossible de charger tous tes résultats.");
@@ -351,6 +354,20 @@ export default function DashboardEleveClient() {
         ) : (
           <>
             <div className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-6">
+              <div className="rounded-[2rem] bg-gradient-to-br from-fuchsia-500 to-violet-600 p-5 text-white shadow-xl">
+                <p className="text-sm font-black uppercase text-white/80">
+                  🏅 Mes points avis
+                </p>
+
+                <p className="mt-3 text-3xl font-black">{pointsAvis}</p>
+
+                <p className="mt-2 text-sm font-bold text-white/80">
+                  <a href="/votre-avis" className="underline underline-offset-2 hover:text-white">
+                    Donne ton avis pour en gagner →
+                  </a>
+                </p>
+              </div>
+
               <div className="rounded-[2rem] bg-white p-5 shadow-xl ring-1 ring-emerald-100">
                 <p className="text-sm font-black uppercase text-emerald-700">
                   Dernier parcours

@@ -1,6 +1,10 @@
 // app/api/retours/route.ts
 import { NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
+import {
+  POINTS_PAR_RETOUR,
+  calculerPointsAvis,
+} from "@/lib/points/feedbackPoints";
 
 const TYPES = new Set(["bug", "idee", "avis"]);
 
@@ -105,7 +109,25 @@ export async function POST(req: Request) {
 
     if (error) throw error;
 
-    return NextResponse.json({ ok: true });
+    // Points : on recompte les retours de l'eleve (identifie par ses codes) pour
+    // renvoyer son total a jour et les points gagnes a l'instant. Eleve anonyme
+    // (sans codes) : pas de points, mais le retour est bien enregistre.
+    let pointsGagnes = 0;
+    let pointsTotal = 0;
+    if (codeEtablissement && codeEleve) {
+      const { data: retours } = await supabase
+        .from("retours_eleves")
+        .select("traite")
+        .eq("code_etablissement", codeEtablissement)
+        .eq("code_eleve", codeEleve);
+
+      const nbRetours = retours?.length ?? 0;
+      const nbTraites = retours?.filter((r) => r.traite).length ?? 0;
+      pointsTotal = calculerPointsAvis(nbRetours, nbTraites);
+      pointsGagnes = POINTS_PAR_RETOUR;
+    }
+
+    return NextResponse.json({ ok: true, pointsGagnes, pointsTotal });
   } catch (e: any) {
     return NextResponse.json(
       { ok: false, error: e?.message || "Erreur serveur" },

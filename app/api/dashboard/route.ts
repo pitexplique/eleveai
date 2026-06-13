@@ -10,6 +10,7 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
 import { verifySessionToken } from "@/lib/server/session";
+import { calculerPointsAvis } from "@/lib/points/feedbackPoints";
 
 const ROLES_ETABLISSEMENT = new Set(["prof", "principal", "boss"]);
 
@@ -125,10 +126,25 @@ export async function GET(req: Request) {
   // Parcours English/Espagnol : tables optionnelles (créées séparément).
   // Une erreur (table absente) ne doit pas bloquer le dashboard.
 
+  // Points « Mon avis » de l'élève : calculés depuis ses retours.
+  let pointsAvis = 0;
+  if (!etabScope) {
+    const { data: retours } = await supabaseAdmin
+      .from("retours_eleves")
+      .select("traite")
+      .eq("code_etablissement", session.code_etablissement)
+      .eq("code_eleve", session.code_utilisateur);
+    pointsAvis = calculerPointsAvis(
+      retours?.length ?? 0,
+      retours?.filter((r) => r.traite).length ?? 0
+    );
+  }
+
   return NextResponse.json({
     ok: true,
     role: session.type_utilisateur,
     comptes: comptesRes.data ?? [],
+    pointsAvis,
     resultats: {
       parcours_maths: parcoursMathsRes.data ?? [],
       parcours_english: parcoursEnglishRes.error
