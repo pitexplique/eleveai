@@ -12,6 +12,7 @@ import { logarithmeBank } from "./logarithme.bank";
 import { primitivesIntegralesBank } from "./primitives-integrales.bank";
 import { convexiteBank } from "./convexite.bank";
 import { probabilitesConditionnellesBank } from "./probabilites-conditionnelles.bank";
+import { variablesAleatoiresBank } from "./variables-aleatoires.bank";
 
 export const mathsTerminaleSpeQuestionBank: TutorBankItemV4[] = [
   ...suitesBank,
@@ -24,6 +25,7 @@ export const mathsTerminaleSpeQuestionBank: TutorBankItemV4[] = [
   ...primitivesIntegralesBank,
   ...convexiteBank,
   ...probabilitesConditionnellesBank,
+  ...variablesAleatoiresBank,
 ];
 
 export function getMathTerminaleSpeQuestionBank(args?: {
