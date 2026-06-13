@@ -9,6 +9,7 @@ import { continuiteTviBank } from "./continuite-tvi.bank";
 import { derivationBank } from "./derivation.bank";
 import { exponentielleBank } from "./exponentielle.bank";
 import { logarithmeBank } from "./logarithme.bank";
+import { primitivesIntegralesBank } from "./primitives-integrales.bank";
 
 export const mathsTerminaleSpeQuestionBank: TutorBankItemV4[] = [
   ...suitesBank,
@@ -18,6 +19,7 @@ export const mathsTerminaleSpeQuestionBank: TutorBankItemV4[] = [
   ...derivationBank,
   ...exponentielleBank,
   ...logarithmeBank,
+  ...primitivesIntegralesBank,
 ];
 
 export function getMathTerminaleSpeQuestionBank(args?: {
