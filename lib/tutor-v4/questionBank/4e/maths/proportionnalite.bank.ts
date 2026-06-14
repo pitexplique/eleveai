@@ -1394,4 +1394,1083 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
           "\n\nConclusion : la valeur trouvée respecte la situation de proportionnalité.",
     tags: ["prop_proportionnalite", "defi", "open", "erreur"],
   },
+
+  /* =========================================================
+     COMPLÉMENTS (top-up ~10 items / microSkill)
+  ========================================================= */
+
+  // ---------- PROP_RECONNAITRE ----------
+  {
+    kind: "fixed",
+    id: "prop_reconnaitre_fixed_2",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "prop_proportionnalite",
+    microId: "prop_reconnaitre",
+    difficulty: 1,
+    theme: "neutral",
+    text: "Deux grandeurs sont proportionnelles lorsque…",
+    format: "qcm",
+    choices: [
+      "on passe de l’une à l’autre en multipliant toujours par le même nombre",
+      "on ajoute toujours le même nombre",
+      "les valeurs sont rangées dans l’ordre",
+      "les valeurs sont toutes égales",
+    ],
+    expected: ["on passe de l’une à l’autre en multipliant toujours par le même nombre"],
+    comparator: "mcq_exact",
+    hint: "Pense au coefficient de proportionnalité.",
+    explanation:
+      "Définition : deux grandeurs sont proportionnelles si un même coefficient relie l’une à l’autre.\n\n" +
+      "Méthode : on cherche un multiplicateur unique.\n\n" +
+      "Calcul : si ce coefficient existe, c’est proportionnel.\n\n" +
+      "Conclusion : on multiplie toujours par le même nombre.",
+    tags: ["prop_proportionnalite", "reconnaitre", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "prop_reconnaitre_fixed_3",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "prop_proportionnalite",
+    microId: "prop_reconnaitre",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Quelle situation est proportionnelle ?",
+    format: "qcm",
+    choices: [
+      "le prix payé en fonction du nombre de croissants identiques",
+      "l’âge d’une personne en fonction de l’année",
+      "la taille d’un enfant en fonction de son âge",
+      "la pointure en fonction du prénom",
+    ],
+    expected: ["le prix payé en fonction du nombre de croissants identiques"],
+    comparator: "mcq_exact",
+    hint: "Cherche un prix unitaire fixe.",
+    explanation:
+      "Définition : une situation est proportionnelle si un coefficient constant relie les grandeurs.\n\n" +
+      "Méthode : on cherche un prix unitaire fixe.\n\n" +
+      "Calcul : chaque croissant coûte le même prix, donc le prix total est proportionnel au nombre.\n\n" +
+      "Conclusion : le prix des croissants est proportionnel au nombre.",
+    tags: ["prop_proportionnalite", "reconnaitre", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "prop_reconnaitre_tpl_2",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "prop_proportionnalite",
+    microId: "prop_reconnaitre",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Vérifie si le rapport y/x est le même partout.",
+    tags: ["prop_proportionnalite", "reconnaitre", "template"],
+    generate: () => {
+      const prop = randomChoice([true, false]);
+      const k = randomChoice([2, 3, 4]);
+      const x1 = randomInt(2, 4);
+      const x2 = x1 + randomInt(1, 3);
+      const y1 = x1 * k;
+      const y2 = prop ? x2 * k : x2 * k + randomChoice([1, 2]);
+      return {
+        text: `Un tableau donne : pour ${x1} on a ${y1}, pour ${x2} on a ${y2}. Ce tableau est-il proportionnel ?`,
+        format: "qcm",
+        choices: ["oui", "non"],
+        expected: [prop ? "oui" : "non"],
+        comparator: "mcq_exact",
+        explanation:
+          "Définition : un tableau est proportionnel si le rapport y/x est constant.\n\n" +
+          "Méthode : on compare les rapports.\n\n" +
+          `Calcul : ${y1}÷${x1} = ${formatNumber(y1 / x1)} et ${y2}÷${x2} = ${formatNumber(y2 / x2)}.\n\n` +
+          `Conclusion : ${prop ? "les rapports sont égaux, c’est proportionnel" : "les rapports diffèrent, ce n’est pas proportionnel"}.`,
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "prop_reconnaitre_fixed_4",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "prop_proportionnalite",
+    microId: "prop_reconnaitre",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Comment vérifier qu’un tableau est proportionnel ?",
+    format: "qcm",
+    choices: [
+      "en vérifiant que le rapport entre les lignes est constant",
+      "en additionnant toutes les valeurs",
+      "en rangeant les valeurs",
+      "en comparant les plus grandes valeurs",
+    ],
+    expected: ["en vérifiant que le rapport entre les lignes est constant"],
+    comparator: "mcq_exact",
+    hint: "On calcule le coefficient.",
+    explanation:
+      "Définition : un tableau est proportionnel si un coefficient constant relie les deux lignes.\n\n" +
+      "Méthode : on calcule le rapport de chaque colonne.\n\n" +
+      "Calcul : si tous les rapports sont égaux, c’est proportionnel.\n\n" +
+      "Conclusion : on vérifie que le rapport est constant.",
+    tags: ["prop_proportionnalite", "reconnaitre", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "prop_reconnaitre_open_1",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "prop_proportionnalite",
+    microId: "prop_reconnaitre",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Explique comment reconnaître une situation de proportionnalité.",
+    format: "open",
+    expected: ["coefficient", "multiplie", "constant"],
+    comparator: "contains_keyword",
+    hint: "Pense au coefficient de proportionnalité.",
+    explanation:
+      "Définition : deux grandeurs sont proportionnelles si un même coefficient les relie.\n\n" +
+      "Méthode : on vérifie qu’on multiplie toujours par le même nombre.\n\n" +
+      "Calcul : on calcule le rapport y/x pour chaque couple.\n\n" +
+      "Conclusion : si ce coefficient est constant, la situation est proportionnelle.",
+    tags: ["prop_proportionnalite", "reconnaitre", "open"],
+  },
+
+  // ---------- PROP_TABLE ----------
+  {
+    kind: "fixed",
+    id: "prop_table_fixed_1",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "prop_proportionnalite",
+    microId: "prop_table",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Dans un tableau de proportionnalité, 2 correspond à 6. À quoi correspond 5 ?",
+    format: "short",
+    expected: ["15"],
+    comparator: "number_equal",
+    hint: "Le coefficient est 6 ÷ 2 = 3.",
+    explanation:
+      "Définition : dans un tableau de proportionnalité, un coefficient relie les deux lignes.\n\n" +
+      "Méthode : on calcule le coefficient, puis on l’applique.\n\n" +
+      "Calcul : coefficient = 6 ÷ 2 = 3, donc 5 × 3 = 15.\n\n" +
+      "Conclusion : 5 correspond à 15.",
+    tags: ["prop_proportionnalite", "table"],
+  },
+  {
+    kind: "template",
+    id: "prop_table_tpl_2",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "prop_proportionnalite",
+    microId: "prop_table",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Trouve le coefficient, puis complète.",
+    tags: ["prop_proportionnalite", "table", "template", "canvas"],
+    generate: () => {
+      const k = randomChoice([2, 3, 4, 5]);
+      const x1 = randomInt(2, 5);
+      const x2 = x1 + randomInt(2, 5);
+      const y1 = x1 * k;
+      const y2 = x2 * k;
+      return {
+        text: `Complète ce tableau de proportionnalité : ${x1} → ${y1}, ${x2} → ?`,
+        format: "short",
+        expected: [String(y2)],
+        comparator: "number_equal",
+        explanation:
+          "Définition : un coefficient relie les deux lignes du tableau.\n\n" +
+          `Méthode : coefficient = ${y1} ÷ ${x1} = ${k}.\n\n` +
+          `Calcul : ${x2} × ${k} = ${y2}.\n\n` +
+          `Conclusion : la valeur manquante est ${y2}.`,
+        canvas: tableauProportionnaliteCanvas({
+          rowLabels: ["x", "y"],
+          values: [
+            [String(x1), String(x2)],
+            [String(y1), "?"],
+          ],
+          missing: [{ row: 1, col: 1 }],
+        }),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "prop_table_tpl_3",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "prop_proportionnalite",
+    microId: "prop_table",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Le coefficient s’applique dans les deux sens.",
+    tags: ["prop_proportionnalite", "table", "template", "canvas"],
+    generate: () => {
+      const k = randomChoice([2, 3, 4]);
+      const x1 = randomInt(2, 4);
+      const y2 = randomChoice([k * 4, k * 5, k * 6]);
+      const y1 = x1 * k;
+      const x2 = y2 / k;
+      return {
+        text: `Dans un tableau de proportionnalité : ${x1} → ${y1} et ? → ${y2}. Quelle est la valeur manquante de la première ligne ?`,
+        format: "short",
+        expected: [String(x2)],
+        comparator: "number_equal",
+        explanation:
+          "Définition : on utilise le coefficient pour remonter dans le tableau.\n\n" +
+          `Méthode : coefficient = ${y1} ÷ ${x1} = ${k}.\n\n` +
+          `Calcul : ${y2} ÷ ${k} = ${x2}.\n\n` +
+          `Conclusion : la valeur manquante est ${x2}.`,
+        canvas: tableauProportionnaliteCanvas({
+          rowLabels: ["x", "y"],
+          values: [
+            [String(x1), "?"],
+            [String(y1), String(y2)],
+          ],
+          missing: [{ row: 0, col: 1 }],
+        }),
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "prop_table_fixed_2",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "prop_proportionnalite",
+    microId: "prop_table",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Lequel de ces tableaux est un tableau de proportionnalité ?",
+    format: "qcm",
+    choices: [
+      "2→6 ; 4→12 ; 5→15",
+      "2→6 ; 4→10 ; 5→15",
+      "2→5 ; 4→8 ; 5→11",
+      "1→2 ; 2→5 ; 3→7",
+    ],
+    expected: ["2→6 ; 4→12 ; 5→15"],
+    comparator: "mcq_exact",
+    hint: "Le rapport y/x doit être constant.",
+    explanation:
+      "Définition : un tableau est proportionnel si le rapport est constant.\n\n" +
+      "Méthode : on calcule y ÷ x pour chaque colonne.\n\n" +
+      "Calcul : 6÷2 = 12÷4 = 15÷5 = 3.\n\n" +
+      "Conclusion : le tableau « 2→6 ; 4→12 ; 5→15 » est proportionnel.",
+    tags: ["prop_proportionnalite", "table", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "prop_table_tpl_4_coeff",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "prop_proportionnalite",
+    microId: "prop_table",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Coefficient = valeur de la 2e ligne ÷ valeur de la 1re ligne.",
+    tags: ["prop_proportionnalite", "table", "coefficient", "template"],
+    generate: () => {
+      const k = randomChoice([2, 3, 4, 5]);
+      const x = randomInt(2, 6);
+      const y = x * k;
+      return {
+        text: `Dans un tableau de proportionnalité, ${x} correspond à ${y}. Quel est le coefficient de proportionnalité (de la 1re vers la 2e ligne) ?`,
+        format: "short",
+        expected: [String(k)],
+        comparator: "number_equal",
+        explanation:
+          "Définition : le coefficient relie la 1re ligne à la 2e.\n\n" +
+          "Méthode : on divise la valeur de la 2e ligne par celle de la 1re.\n\n" +
+          `Calcul : ${y} ÷ ${x} = ${k}.\n\n` +
+          `Conclusion : le coefficient est ${k}.`,
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "prop_table_open_1",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "prop_proportionnalite",
+    microId: "prop_table",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Explique comment compléter un tableau de proportionnalité.",
+    format: "open",
+    expected: ["coefficient", "multiplie", "ligne"],
+    comparator: "contains_keyword",
+    hint: "On trouve d’abord le coefficient.",
+    explanation:
+      "Définition : un coefficient constant relie les deux lignes.\n\n" +
+      "Méthode : on calcule le coefficient à partir d’une colonne connue.\n\n" +
+      "Calcul : on multiplie (ou divise) par ce coefficient pour compléter.\n\n" +
+      "Conclusion : on applique le coefficient à chaque colonne.",
+    tags: ["prop_proportionnalite", "table", "open"],
+  },
+
+  // ---------- PROP_COEFF ----------
+  {
+    kind: "fixed",
+    id: "prop_coeff_fixed_1",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "prop_proportionnalite",
+    microId: "prop_coeff",
+    difficulty: 2,
+    theme: "neutral",
+    text: "3 kg de fruits coûtent 12 €. Quel est le prix d’un kg (coefficient) ?",
+    format: "short",
+    expected: ["4"],
+    comparator: "number_equal",
+    hint: "12 ÷ 3.",
+    explanation:
+      "Définition : le coefficient est le prix d’une unité.\n\n" +
+      "Méthode : on divise le prix total par la quantité.\n\n" +
+      "Calcul : 12 ÷ 3 = 4.\n\n" +
+      "Conclusion : un kg coûte 4 € (coefficient = 4).",
+    tags: ["prop_proportionnalite", "coeff"],
+  },
+  {
+    kind: "template",
+    id: "prop_coeff_tpl_2",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "prop_proportionnalite",
+    microId: "prop_coeff",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Coefficient = total ÷ quantité.",
+    tags: ["prop_proportionnalite", "coeff", "template"],
+    generate: () => {
+      const k = randomChoice([2, 3, 5, 6]);
+      const q = randomInt(2, 6);
+      const total = k * q;
+      return {
+        text: `${q} objets identiques coûtent ${total} €. Quel est le prix d’un objet ?`,
+        format: "short",
+        expected: [String(k)],
+        comparator: "number_equal",
+        explanation:
+          "Définition : le coefficient est le prix unitaire.\n\n" +
+          "Méthode : on divise le total par la quantité.\n\n" +
+          `Calcul : ${total} ÷ ${q} = ${k}.\n\n` +
+          `Conclusion : un objet coûte ${k} €.`,
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "prop_coeff_tpl_3",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "prop_proportionnalite",
+    microId: "prop_coeff",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "On multiplie la quantité par le coefficient.",
+    tags: ["prop_proportionnalite", "coeff", "template"],
+    generate: () => {
+      const k = randomChoice([2, 3, 4, 5]);
+      const q = randomInt(4, 9);
+      const total = k * q;
+      return {
+        text: `Un objet coûte ${k} €. Combien coûtent ${q} objets identiques ?`,
+        format: "short",
+        expected: [String(total)],
+        comparator: "number_equal",
+        explanation:
+          "Définition : on utilise le prix unitaire comme coefficient.\n\n" +
+          "Méthode : on multiplie la quantité par le prix unitaire.\n\n" +
+          `Calcul : ${q} × ${k} = ${total}.\n\n` +
+          `Conclusion : ${q} objets coûtent ${total} €.`,
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "prop_coeff_fixed_2",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "prop_proportionnalite",
+    microId: "prop_coeff",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Le coefficient de proportionnalité, c’est…",
+    format: "qcm",
+    choices: [
+      "le nombre par lequel on multiplie pour passer d’une grandeur à l’autre",
+      "la somme des deux grandeurs",
+      "la différence des deux grandeurs",
+      "la plus grande valeur du tableau",
+    ],
+    expected: ["le nombre par lequel on multiplie pour passer d’une grandeur à l’autre"],
+    comparator: "mcq_exact",
+    hint: "C’est un multiplicateur.",
+    explanation:
+      "Définition : le coefficient est le multiplicateur reliant les deux grandeurs.\n\n" +
+      "Méthode : on l’obtient en divisant une valeur par l’autre.\n\n" +
+      "Calcul : coefficient = y ÷ x.\n\n" +
+      "Conclusion : c’est le nombre par lequel on multiplie.",
+    tags: ["prop_proportionnalite", "coeff", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "prop_coeff_open_1",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "prop_proportionnalite",
+    microId: "prop_coeff",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Explique comment trouver le coefficient de proportionnalité d’un tableau.",
+    format: "open",
+    expected: ["divise", "coefficient", "ligne"],
+    comparator: "contains_keyword",
+    hint: "On divise une valeur de la 2e ligne par celle de la 1re.",
+    explanation:
+      "Définition : le coefficient relie la 1re ligne à la 2e.\n\n" +
+      "Méthode : on divise une valeur de la 2e ligne par la valeur correspondante de la 1re.\n\n" +
+      "Calcul : coefficient = y ÷ x.\n\n" +
+      "Conclusion : ce quotient donne le coefficient de proportionnalité.",
+    tags: ["prop_proportionnalite", "coeff", "open"],
+  },
+
+  // ---------- PROP_QUATRIEME ----------
+  {
+    kind: "fixed",
+    id: "prop_quatrieme_fixed_1",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "prop_proportionnalite",
+    microId: "prop_quatrieme",
+    difficulty: 2,
+    theme: "neutral",
+    text: "4 stylos coûtent 6 €. Combien coûtent 6 stylos ?",
+    format: "short",
+    expected: ["9"],
+    comparator: "number_equal",
+    hint: "Produit en croix : 6 × 6 ÷ 4.",
+    explanation:
+      "Définition : la quatrième proportionnelle se trouve par produit en croix.\n\n" +
+      "Méthode : prix = 6 × 6 ÷ 4.\n\n" +
+      "Calcul : 36 ÷ 4 = 9.\n\n" +
+      "Conclusion : 6 stylos coûtent 9 €.",
+    tags: ["prop_proportionnalite", "quatrieme"],
+  },
+  {
+    kind: "template",
+    id: "prop_quatrieme_tpl_2",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "prop_proportionnalite",
+    microId: "prop_quatrieme",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Produit en croix.",
+    tags: ["prop_proportionnalite", "quatrieme", "template"],
+    generate: () => {
+      const k = randomChoice([2, 3, 4]);
+      const a = randomInt(2, 5);
+      const b = a * k;
+      const c = a + randomInt(1, 4);
+      const d = c * k;
+      return {
+        text: `${a} objets coûtent ${b} €. Combien coûtent ${c} objets ?`,
+        format: "short",
+        expected: [String(d)],
+        comparator: "number_equal",
+        explanation:
+          "Définition : on cherche la quatrième proportionnelle.\n\n" +
+          `Méthode : produit en croix, prix = ${b} × ${c} ÷ ${a}.\n\n` +
+          `Calcul : ${b * c} ÷ ${a} = ${d}.\n\n` +
+          `Conclusion : ${c} objets coûtent ${d} €.`,
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "prop_quatrieme_tpl_3",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "prop_proportionnalite",
+    microId: "prop_quatrieme",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Passe d’abord à l’unité.",
+    tags: ["prop_proportionnalite", "quatrieme", "unite", "template"],
+    generate: () => {
+      const unite = randomChoice([2, 3, 4, 5]);
+      const q1 = randomInt(2, 5);
+      const q2 = randomInt(6, 10);
+      const total1 = unite * q1;
+      const total2 = unite * q2;
+      return {
+        text: `${q1} kg de farine coûtent ${total1} €. Combien coûtent ${q2} kg ?`,
+        format: "short",
+        expected: [String(total2)],
+        comparator: "number_equal",
+        explanation:
+          "Définition : on peut passer par le prix d’un kg.\n\n" +
+          `Méthode : prix d’un kg = ${total1} ÷ ${q1} = ${unite} €.\n\n` +
+          `Calcul : ${q2} × ${unite} = ${total2}.\n\n` +
+          `Conclusion : ${q2} kg coûtent ${total2} €.`,
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "prop_quatrieme_fixed_2",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "prop_proportionnalite",
+    microId: "prop_quatrieme",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Quelle méthode permet de calculer une quatrième proportionnelle ?",
+    format: "qcm",
+    choices: [
+      "le produit en croix",
+      "l’addition des valeurs",
+      "le calcul de la moyenne",
+      "le rangement des valeurs",
+    ],
+    expected: ["le produit en croix"],
+    comparator: "mcq_exact",
+    hint: "On multiplie en diagonale puis on divise.",
+    explanation:
+      "Définition : la quatrième proportionnelle complète un tableau de proportionnalité.\n\n" +
+      "Méthode : on utilise le produit en croix.\n\n" +
+      "Calcul : valeur = (produit des diagonales connues) ÷ (valeur restante).\n\n" +
+      "Conclusion : on utilise le produit en croix.",
+    tags: ["prop_proportionnalite", "quatrieme", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "prop_quatrieme_tpl_4",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "prop_proportionnalite",
+    microId: "prop_quatrieme",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Produit en croix avec une recette.",
+    tags: ["prop_proportionnalite", "quatrieme", "contexte", "template"],
+    generate: () => {
+      const k = randomChoice([2, 3, 4]);
+      const pers1 = randomInt(2, 4);
+      const oeufs1 = pers1 * k;
+      const pers2 = pers1 + randomInt(2, 5);
+      const oeufs2 = pers2 * k;
+      return {
+        text: `Une recette pour ${pers1} personnes utilise ${oeufs1} œufs. Combien d’œufs faut-il pour ${pers2} personnes ?`,
+        format: "short",
+        expected: [String(oeufs2)],
+        comparator: "number_equal",
+        explanation:
+          "Définition : on cherche la quatrième proportionnelle.\n\n" +
+          `Méthode : produit en croix, œufs = ${oeufs1} × ${pers2} ÷ ${pers1}.\n\n` +
+          `Calcul : ${oeufs1 * pers2} ÷ ${pers1} = ${oeufs2}.\n\n` +
+          `Conclusion : il faut ${oeufs2} œufs.`,
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "prop_quatrieme_open_1",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "prop_proportionnalite",
+    microId: "prop_quatrieme",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Explique la méthode du produit en croix.",
+    format: "open",
+    expected: ["croix", "multiplie", "divise"],
+    comparator: "contains_keyword",
+    hint: "On multiplie en diagonale, puis on divise.",
+    explanation:
+      "Définition : le produit en croix sert à trouver une valeur manquante d’un tableau de proportionnalité.\n\n" +
+      "Méthode : on multiplie les deux valeurs en diagonale, puis on divise par la troisième.\n\n" +
+      "Calcul : valeur manquante = (a × d) ÷ b.\n\n" +
+      "Conclusion : on multiplie en diagonale puis on divise.",
+    tags: ["prop_proportionnalite", "quatrieme", "open"],
+  },
+
+  // ---------- PROP_POURCENTAGE ----------
+  {
+    kind: "fixed",
+    id: "prop_pourcentage_fixed_2",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "prop_proportionnalite",
+    microId: "prop_pourcentage",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Combien font 25 % de 80 ?",
+    format: "short",
+    expected: ["20"],
+    comparator: "number_equal",
+    hint: "25 % = 25 ÷ 100.",
+    explanation:
+      "Définition : prendre un pourcentage, c’est multiplier par ce pourcentage divisé par 100.\n\n" +
+      "Méthode : 25 % de 80 = 80 × 25 ÷ 100.\n\n" +
+      "Calcul : 80 × 0,25 = 20.\n\n" +
+      "Conclusion : 25 % de 80 = 20.",
+    tags: ["prop_proportionnalite", "pourcentage"],
+  },
+  {
+    kind: "template",
+    id: "prop_pourcentage_tpl_3",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "prop_proportionnalite",
+    microId: "prop_pourcentage",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Pourcentage de N = N × p ÷ 100.",
+    tags: ["prop_proportionnalite", "pourcentage", "template"],
+    generate: () => {
+      const p = randomChoice([10, 20, 25, 50]);
+      const n = randomChoice([40, 60, 80, 100, 200]);
+      const r = (n * p) / 100;
+      return {
+        text: `Combien font ${p} % de ${n} ?`,
+        format: "short",
+        expected: [String(r)],
+        comparator: "number_equal",
+        explanation:
+          "Définition : prendre un pourcentage, c’est multiplier par p ÷ 100.\n\n" +
+          `Méthode : ${p} % de ${n} = ${n} × ${p} ÷ 100.\n\n` +
+          `Calcul : = ${r}.\n\n` +
+          `Conclusion : ${p} % de ${n} = ${r}.`,
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "prop_pourcentage_tpl_4_reduction",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "prop_proportionnalite",
+    microId: "prop_pourcentage",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "On calcule la réduction puis on la retire du prix.",
+    tags: ["prop_proportionnalite", "pourcentage", "reduction", "template"],
+    generate: () => {
+      const p = randomChoice([10, 20, 25, 50]);
+      const prix = randomChoice([40, 60, 80, 100]);
+      const reduction = (prix * p) / 100;
+      const finalPrix = prix - reduction;
+      return {
+        text: `Un article coûte ${prix} €. Il bénéficie d’une réduction de ${p} %. Quel est le nouveau prix ?`,
+        format: "short",
+        expected: [String(finalPrix)],
+        comparator: "number_equal",
+        explanation:
+          "Définition : une réduction se soustrait au prix initial.\n\n" +
+          `Méthode : réduction = ${prix} × ${p} ÷ 100 = ${reduction} €.\n\n` +
+          `Calcul : ${prix} - ${reduction} = ${finalPrix}.\n\n` +
+          `Conclusion : le nouveau prix est ${finalPrix} €.`,
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "prop_pourcentage_open_1",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "prop_proportionnalite",
+    microId: "prop_pourcentage",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Explique comment calculer un pourcentage d’un nombre.",
+    format: "open",
+    expected: ["100", "multiplie", "divise"],
+    comparator: "contains_keyword",
+    hint: "p % de N = N × p ÷ 100.",
+    explanation:
+      "Définition : un pourcentage est une proportion sur 100.\n\n" +
+      "Méthode : on multiplie le nombre par le pourcentage, puis on divise par 100.\n\n" +
+      "Calcul : p % de N = N × p ÷ 100.\n\n" +
+      "Conclusion : on multiplie par p et on divise par 100.",
+    tags: ["prop_proportionnalite", "pourcentage", "open"],
+  },
+
+  // ---------- PROP_COEFF_MULTIPLICATEUR ----------
+  {
+    kind: "fixed",
+    id: "prop_coeff_multiplicateur_fixed_2",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "prop_proportionnalite",
+    microId: "prop_coeff_multiplicateur",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Augmenter une quantité de 20 % revient à multiplier par…",
+    format: "qcm",
+    choices: ["1,2", "0,2", "20", "0,8"],
+    expected: ["1,2"],
+    comparator: "mcq_exact",
+    hint: "100 % + 20 % = 120 %.",
+    explanation:
+      "Définition : augmenter de p % revient à multiplier par (1 + p ÷ 100).\n\n" +
+      "Méthode : 100 % + 20 % = 120 % = 1,2.\n\n" +
+      "Calcul : le coefficient est 1,2.\n\n" +
+      "Conclusion : on multiplie par 1,2.",
+    tags: ["prop_proportionnalite", "coeff_multiplicateur", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "prop_coeff_multiplicateur_fixed_3",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "prop_proportionnalite",
+    microId: "prop_coeff_multiplicateur",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Diminuer une quantité de 10 % revient à multiplier par…",
+    format: "qcm",
+    choices: ["0,9", "1,1", "0,1", "10"],
+    expected: ["0,9"],
+    comparator: "mcq_exact",
+    hint: "100 % - 10 % = 90 %.",
+    explanation:
+      "Définition : diminuer de p % revient à multiplier par (1 - p ÷ 100).\n\n" +
+      "Méthode : 100 % - 10 % = 90 % = 0,9.\n\n" +
+      "Calcul : le coefficient est 0,9.\n\n" +
+      "Conclusion : on multiplie par 0,9.",
+    tags: ["prop_proportionnalite", "coeff_multiplicateur", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "prop_coeff_multiplicateur_tpl_2",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "prop_proportionnalite",
+    microId: "prop_coeff_multiplicateur",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Augmentation : 1 + p/100.",
+    tags: ["prop_proportionnalite", "coeff_multiplicateur", "template"],
+    generate: () => {
+      const p = randomChoice([5, 15, 25, 40]);
+      const coeff = 1 + p / 100;
+      const cPoint = String(coeff);
+      const cComma = cPoint.replace(".", ",");
+      return {
+        text: `Par quel nombre faut-il multiplier pour augmenter une valeur de ${p} % ?`,
+        format: "short",
+        expected: [cPoint, cComma],
+        comparator: "number_equal",
+        explanation:
+          "Définition : augmenter de p % revient à multiplier par 1 + p ÷ 100.\n\n" +
+          `Méthode : 1 + ${p} ÷ 100.\n\n` +
+          `Calcul : = ${cComma}.\n\n` +
+          `Conclusion : on multiplie par ${cComma}.`,
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "prop_coeff_multiplicateur_tpl_3_appliquer",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "prop_proportionnalite",
+    microId: "prop_coeff_multiplicateur",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "On multiplie la valeur par le coefficient.",
+    tags: ["prop_proportionnalite", "coeff_multiplicateur", "template"],
+    generate: () => {
+      const p = randomChoice([10, 20, 50]);
+      const prix = randomChoice([40, 60, 80, 200]);
+      const coeff = 1 + p / 100;
+      const result = prix * coeff;
+      return {
+        text: `Un prix de ${prix} € augmente de ${p} %. Quel est le nouveau prix ?`,
+        format: "short",
+        expected: [String(result)],
+        comparator: "number_equal",
+        explanation:
+          "Définition : augmenter de p %, c’est multiplier par 1 + p ÷ 100.\n\n" +
+          `Méthode : coefficient = ${formatNumber(coeff)}.\n\n` +
+          `Calcul : ${prix} × ${formatNumber(coeff)} = ${result}.\n\n` +
+          `Conclusion : le nouveau prix est ${result} €.`,
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "prop_coeff_multiplicateur_open_1",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "prop_proportionnalite",
+    microId: "prop_coeff_multiplicateur",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Explique pourquoi augmenter de 50 % revient à multiplier par 1,5.",
+    format: "open",
+    expected: ["100", "50", "1,5"],
+    comparator: "contains_keyword",
+    hint: "On garde 100 % et on ajoute 50 %.",
+    explanation:
+      "Définition : augmenter de p %, c’est ajouter p % à 100 %.\n\n" +
+      "Méthode : 100 % + 50 % = 150 %.\n\n" +
+      "Calcul : 150 % = 1,5.\n\n" +
+      "Conclusion : on multiplie par 1,5.",
+    tags: ["prop_proportionnalite", "coeff_multiplicateur", "open"],
+  },
+
+  // ---------- PROP_EVOLUTION ----------
+  {
+    kind: "fixed",
+    id: "prop_evolution_fixed_1",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "prop_proportionnalite",
+    microId: "prop_evolution",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Un prix passe de 50 € à 60 €. De quel pourcentage a-t-il augmenté ?",
+    format: "short",
+    expected: ["20"],
+    comparator: "number_equal",
+    hint: "Augmentation ÷ valeur de départ × 100.",
+    explanation:
+      "Définition : le pourcentage d’évolution = (variation ÷ valeur de départ) × 100.\n\n" +
+      "Méthode : variation = 60 - 50 = 10.\n\n" +
+      "Calcul : (10 ÷ 50) × 100 = 20 %.\n\n" +
+      "Conclusion : le prix a augmenté de 20 %.",
+    tags: ["prop_proportionnalite", "evolution"],
+  },
+  {
+    kind: "template",
+    id: "prop_evolution_tpl_2",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "prop_proportionnalite",
+    microId: "prop_evolution",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "On applique le coefficient multiplicateur.",
+    tags: ["prop_proportionnalite", "evolution", "template"],
+    generate: () => {
+      const p = randomChoice([10, 20, 25, 50]);
+      const valeur = randomChoice([40, 60, 80, 200]);
+      const result = valeur * (1 + p / 100);
+      return {
+        text: `Une population de ${valeur} habitants augmente de ${p} %. Quelle est la nouvelle population ?`,
+        format: "short",
+        expected: [String(result)],
+        comparator: "number_equal",
+        explanation:
+          "Définition : une augmentation de p % multiplie par 1 + p ÷ 100.\n\n" +
+          `Méthode : coefficient = ${formatNumber(1 + p / 100)}.\n\n` +
+          `Calcul : ${valeur} × ${formatNumber(1 + p / 100)} = ${result}.\n\n` +
+          `Conclusion : la nouvelle population est ${result}.`,
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "prop_evolution_open_2",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "prop_proportionnalite",
+    microId: "prop_evolution",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Explique comment calculer le pourcentage d’évolution entre deux valeurs.",
+    format: "open",
+    expected: ["variation", "départ", "100"],
+    comparator: "contains_keyword",
+    hint: "On compare la variation à la valeur de départ.",
+    explanation:
+      "Définition : le pourcentage d’évolution compare la variation à la valeur de départ.\n\n" +
+      "Méthode : on calcule la variation (arrivée - départ), puis on divise par la valeur de départ et on multiplie par 100.\n\n" +
+      "Calcul : pourcentage = (variation ÷ départ) × 100.\n\n" +
+      "Conclusion : on rapporte la variation à la valeur de départ.",
+    tags: ["prop_proportionnalite", "evolution", "open"],
+  },
+
+  // ---------- PROP_PROBLEME ----------
+  {
+    kind: "template",
+    id: "prop_probleme_tpl_3_vitesse",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "prop_proportionnalite",
+    microId: "prop_probleme",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "La distance est proportionnelle au temps à vitesse constante.",
+    tags: ["prop_proportionnalite", "probleme", "vitesse", "template"],
+    generate: () => {
+      const vitesse = randomChoice([4, 5, 6]);
+      const t1 = randomInt(2, 4);
+      const t2 = t1 + randomInt(2, 5);
+      const d1 = vitesse * t1;
+      const d2 = vitesse * t2;
+      return {
+        text: `Un marcheur parcourt ${d1} km en ${t1} h à allure constante. Quelle distance parcourt-il en ${t2} h ?`,
+        format: "short",
+        expected: [String(d2)],
+        comparator: "number_equal",
+        explanation:
+          "Définition : à allure constante, la distance est proportionnelle au temps.\n\n" +
+          `Méthode : vitesse = ${d1} ÷ ${t1} = ${vitesse} km/h.\n\n` +
+          `Calcul : ${t2} × ${vitesse} = ${d2}.\n\n` +
+          `Conclusion : il parcourt ${d2} km.`,
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "prop_probleme_tpl_4_recette",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "prop_proportionnalite",
+    microId: "prop_probleme",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Produit en croix.",
+    tags: ["prop_proportionnalite", "probleme", "recette", "template"],
+    generate: () => {
+      const k = randomChoice([2, 3, 4]);
+      const p1 = randomInt(2, 4);
+      const g1 = p1 * k * 50;
+      const p2 = p1 + randomInt(2, 4);
+      const g2 = p2 * k * 50;
+      return {
+        text: `Une recette pour ${p1} personnes nécessite ${g1} g de farine. Combien de farine pour ${p2} personnes ?`,
+        format: "short",
+        expected: [String(g2)],
+        comparator: "number_equal",
+        explanation:
+          "Définition : la quantité de farine est proportionnelle au nombre de personnes.\n\n" +
+          `Méthode : produit en croix, farine = ${g1} × ${p2} ÷ ${p1}.\n\n` +
+          `Calcul : ${g1 * p2} ÷ ${p1} = ${g2}.\n\n` +
+          `Conclusion : il faut ${g2} g de farine.`,
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "prop_probleme_fixed_1",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "prop_proportionnalite",
+    microId: "prop_probleme",
+    difficulty: 3,
+    theme: "neutral",
+    text: "5 L d’essence coûtent 10 €. Combien coûtent 8 L ?",
+    format: "short",
+    expected: ["16"],
+    comparator: "number_equal",
+    hint: "Prix d’un litre = 10 ÷ 5.",
+    explanation:
+      "Définition : le prix est proportionnel au volume.\n\n" +
+      "Méthode : prix d’un litre = 10 ÷ 5 = 2 €.\n\n" +
+      "Calcul : 8 × 2 = 16.\n\n" +
+      "Conclusion : 8 L coûtent 16 €.",
+    tags: ["prop_proportionnalite", "probleme"],
+  },
+  {
+    kind: "fixed",
+    id: "prop_probleme_open_1",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "prop_proportionnalite",
+    microId: "prop_probleme",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Explique deux méthodes pour résoudre un problème de proportionnalité.",
+    format: "open",
+    expected: ["coefficient", "produit en croix", "unité"],
+    comparator: "contains_keyword",
+    hint: "Coefficient, passage à l’unité, produit en croix.",
+    explanation:
+      "Définition : plusieurs méthodes résolvent un problème de proportionnalité.\n\n" +
+      "Méthode : on peut utiliser le coefficient de proportionnalité, le passage à l’unité ou le produit en croix.\n\n" +
+      "Calcul : chaque méthode mène au même résultat.\n\n" +
+      "Conclusion : par exemple le produit en croix ou le passage à l’unité.",
+    tags: ["prop_proportionnalite", "probleme", "open"],
+  },
+
+  // ---------- PROP_DEFIS ----------
+  {
+    kind: "fixed",
+    id: "prop_defi_fixed_1",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "prop_proportionnalite",
+    microId: "prop_defi",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Un prix augmente de 10 % puis baisse de 10 %. Retrouve-t-on le prix de départ ?",
+    format: "qcm",
+    choices: ["non", "oui"],
+    expected: ["non"],
+    comparator: "mcq_exact",
+    hint: "On multiplie par 1,1 puis par 0,9.",
+    explanation:
+      "Définition : des évolutions successives se multiplient.\n\n" +
+      "Méthode : coefficient global = 1,1 × 0,9.\n\n" +
+      "Calcul : 1,1 × 0,9 = 0,99, donc le prix final est plus petit.\n\n" +
+      "Conclusion : non, on ne retrouve pas le prix de départ.",
+    tags: ["prop_proportionnalite", "defi", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "prop_defi_tpl_1_successif",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "prop_proportionnalite",
+    microId: "prop_defi",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "On applique d’abord la première évolution, puis la seconde.",
+    tags: ["prop_proportionnalite", "defi", "successif", "template"],
+    generate: () => {
+      const prix = randomChoice([100, 200]);
+      const p = randomChoice([10, 20, 50]);
+      const apres1 = prix * (1 + p / 100);
+      const apres2 = apres1 * (1 - p / 100);
+      return {
+        text: `Un prix de ${prix} € augmente de ${p} %, puis baisse de ${p} %. Quel est le prix final ?`,
+        format: "short",
+        expected: [String(apres2)],
+        comparator: "number_equal",
+        explanation:
+          "Définition : les coefficients d’évolution se multiplient.\n\n" +
+          `Méthode : ${prix} × ${formatNumber(1 + p / 100)} = ${apres1}, puis × ${formatNumber(1 - p / 100)}.\n\n` +
+          `Calcul : ${apres1} × ${formatNumber(1 - p / 100)} = ${apres2}.\n\n` +
+          `Conclusion : le prix final est ${apres2} €.`,
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "prop_defi_open_3",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "prop_proportionnalite",
+    microId: "prop_defi",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Explique pourquoi deux évolutions en pourcentage ne s’additionnent pas toujours simplement.",
+    format: "open",
+    expected: ["multiplie", "coefficient", "successif"],
+    comparator: "contains_keyword",
+    hint: "Les coefficients multiplicateurs se multiplient.",
+    explanation:
+      "Définition : des évolutions successives correspondent à des coefficients multiplicateurs.\n\n" +
+      "Méthode : on multiplie les coefficients au lieu d’additionner les pourcentages.\n\n" +
+      "Calcul : par exemple +10 % puis +10 % donne ×1,1×1,1 = ×1,21, soit +21 % (pas +20 %).\n\n" +
+      "Conclusion : on multiplie les coefficients, donc les pourcentages ne s’additionnent pas simplement.",
+    tags: ["prop_proportionnalite", "defi", "open"],
+  },
 ];
