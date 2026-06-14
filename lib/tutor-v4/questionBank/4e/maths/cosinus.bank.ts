@@ -1338,4 +1338,206 @@ export const cosinusBank: TutorBankItemV4[] = [
       };
     },
   },
+
+  /* =========================================================
+     COMPLÉMENTS (top-up ~10 items / microSkill)
+  ========================================================= */
+
+  // ---------- COS_PROBLEME ----------
+  {
+    kind: "fixed",
+    id: "4e_cos_probleme_fixed_2",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "trigo_cosinus",
+    microId: "cos_probleme",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Une échelle de 4 m est appuyée contre un mur et fait un angle de $60^\\circ$ avec le sol. À quelle distance du mur se trouve son pied (en m) ?",
+    format: "short",
+    expected: ["2"],
+    comparator: "number_equal",
+    hint: "$\\text{distance} = \\text{longueur} \\times \\cos(60^\\circ)$.",
+    explanation:
+      "Définition : la distance au mur est le côté adjacent à l’angle au sol.\n\n" +
+      "Méthode : $\\text{adjacent} = \\text{hypoténuse} \\times \\cos(60^\\circ)$.\n\n" +
+      "Calcul : $4 \\times 0{,}5 = 2$.\n\n" +
+      "Conclusion : le pied de l’échelle est à 2 m du mur.",
+    tags: ["trigo_cosinus", "probleme", "echelle"],
+  },
+  {
+    kind: "template",
+    id: "4e_cos_probleme_tpl_2",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "trigo_cosinus",
+    microId: "cos_probleme",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Le côté adjacent vaut hypoténuse × cos(60°).",
+    tags: ["trigo_cosinus", "probleme", "template"],
+    generate: () => {
+      const hyp = randomChoice([6, 8, 10, 12, 14]);
+      const adj = hyp / 2;
+      return {
+        text: `Une rampe de ${hyp} m fait un angle de $60^\\circ$ avec le sol. Quelle est la longueur horizontale au sol (côté adjacent, en m) ?`,
+        format: "short",
+        expected: [String(adj), String(adj).replace(".", ",")],
+        comparator: "number_equal",
+        explanation:
+          "Définition : la longueur au sol est le côté adjacent à l’angle.\n\n" +
+          "Méthode : $\\text{adjacent} = \\text{hypoténuse} \\times \\cos(60^\\circ)$.\n\n" +
+          `Calcul : $${hyp} \\times 0{,}5 = ${adj}$.\n\n` +
+          `Conclusion : la longueur au sol est $${adj}$ m.`,
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "4e_cos_probleme_tpl_3_valeur_donnee",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "trigo_cosinus",
+    microId: "cos_probleme",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "adjacent = hypoténuse × cos(angle).",
+    tags: ["trigo_cosinus", "probleme", "template"],
+    generate: () => {
+      const cos = randomChoice([0.8, 0.6]);
+      const hyp = randomChoice([10, 15, 20, 25]);
+      const adj = hyp * cos;
+      return {
+        text: `Dans un triangle rectangle, l’hypoténuse mesure ${hyp} cm et on donne $\\cos(\\theta) = ${String(cos).replace(".", ",")}$. Quelle est la longueur du côté adjacent à $\\theta$ (en cm) ?`,
+        format: "short",
+        expected: [String(adj), String(adj).replace(".", ",")],
+        comparator: "number_equal",
+        explanation:
+          "Définition : $\\text{adjacent} = \\text{hypoténuse} \\times \\cos(\\theta)$.\n\n" +
+          "Méthode : on multiplie l’hypoténuse par le cosinus donné.\n\n" +
+          `Calcul : $${hyp} \\times ${String(cos).replace(".", ",")} = ${String(adj).replace(".", ",")}$.\n\n` +
+          `Conclusion : le côté adjacent mesure $${String(adj).replace(".", ",")}$ cm.`,
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "4e_cos_probleme_open_1",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "trigo_cosinus",
+    microId: "cos_probleme",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Explique quand on utilise le cosinus pour résoudre un problème dans un triangle rectangle.",
+    format: "open",
+    expected: ["adjacent", "hypoténuse", "angle"],
+    comparator: "contains_keyword",
+    hint: "Le cosinus relie l’adjacent et l’hypoténuse.",
+    explanation:
+      "Définition : $\\cos(\\theta) = \\dfrac{\\text{adjacent}}{\\text{hypoténuse}}$.\n\n" +
+      "Méthode : on utilise le cosinus quand le problème fait intervenir un angle, le côté adjacent et l’hypoténuse.\n\n" +
+      "Calcul : on isole la grandeur cherchée à partir de la formule.\n\n" +
+      "Conclusion : on utilise le cosinus pour relier angle, adjacent et hypoténuse.",
+    tags: ["trigo_cosinus", "probleme", "open"],
+  },
+
+  // ---------- COS_DEFI ----------
+  {
+    kind: "fixed",
+    id: "4e_cos_defi_fixed_1_definition",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "trigo_cosinus",
+    microId: "cos_defi",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Dans un triangle rectangle, le cosinus d’un angle aigu est égal à…",
+    format: "qcm",
+    choices: [
+      "$\\dfrac{\\text{adjacent}}{\\text{hypoténuse}}$",
+      "$\\dfrac{\\text{opposé}}{\\text{hypoténuse}}$",
+      "$\\dfrac{\\text{hypoténuse}}{\\text{adjacent}}$",
+      "$\\dfrac{\\text{opposé}}{\\text{adjacent}}$",
+    ],
+    expected: ["$\\dfrac{\\text{adjacent}}{\\text{hypoténuse}}$"],
+    comparator: "mcq_exact",
+    hint: "Cosinus = adjacent sur hypoténuse.",
+    explanation:
+      "Définition : $\\cos(\\theta) = \\dfrac{\\text{adjacent}}{\\text{hypoténuse}}$.\n\n" +
+      "Méthode : on identifie le côté adjacent et l’hypoténuse.\n\n" +
+      "Calcul : aucun calcul n’est nécessaire.\n\n" +
+      "Conclusion : le cosinus est le quotient adjacent ÷ hypoténuse.",
+    tags: ["trigo_cosinus", "defi", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "4e_cos_defi_fixed_2_borne",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "trigo_cosinus",
+    microId: "cos_defi",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Le cosinus d’un angle aigu peut-il être supérieur à 1 ?",
+    format: "qcm",
+    choices: ["non", "oui"],
+    expected: ["non"],
+    comparator: "mcq_exact",
+    hint: "L’adjacent est toujours plus court que l’hypoténuse.",
+    explanation:
+      "Définition : $\\cos(\\theta) = \\dfrac{\\text{adjacent}}{\\text{hypoténuse}}$.\n\n" +
+      "Méthode : l’hypoténuse est le plus grand côté.\n\n" +
+      "Calcul : adjacent < hypoténuse, donc le quotient est inférieur à 1.\n\n" +
+      "Conclusion : non, le cosinus d’un angle aigu est compris entre 0 et 1.",
+    tags: ["trigo_cosinus", "defi", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "4e_cos_defi_tpl_3_hypotenuse",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "trigo_cosinus",
+    microId: "cos_defi",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "$\\text{hypoténuse} = \\dfrac{\\text{adjacent}}{\\cos(60^\\circ)}$.",
+    tags: ["trigo_cosinus", "defi", "template"],
+    generate: () => {
+      const adj = randomChoice([3, 4, 5, 6, 7]);
+      const hyp = adj * 2;
+      return {
+        text: `Défi : dans un triangle rectangle, le côté adjacent à un angle de $60^\\circ$ mesure ${adj} cm. Quelle est la longueur de l’hypoténuse (en cm) ?`,
+        format: "short",
+        expected: [String(hyp), String(hyp).replace(".", ",")],
+        comparator: "number_equal",
+        explanation:
+          "Définition : $\\cos(60^\\circ) = \\dfrac{\\text{adjacent}}{\\text{hypoténuse}} = 0{,}5$.\n\n" +
+          "Méthode : $\\text{hypoténuse} = \\dfrac{\\text{adjacent}}{0{,}5}$.\n\n" +
+          `Calcul : $${adj} \\div 0{,}5 = ${hyp}$.\n\n` +
+          `Conclusion : l’hypoténuse mesure $${hyp}$ cm.`,
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "4e_cos_defi_open_1",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "trigo_cosinus",
+    microId: "cos_defi",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Explique pourquoi le cosinus d’un angle aigu est toujours compris entre 0 et 1.",
+    format: "open",
+    expected: ["adjacent", "hypoténuse", "plus grand"],
+    comparator: "contains_keyword",
+    hint: "Compare l’adjacent et l’hypoténuse.",
+    explanation:
+      "Définition : $\\cos(\\theta) = \\dfrac{\\text{adjacent}}{\\text{hypoténuse}}$.\n\n" +
+      "Méthode : dans un triangle rectangle, l’hypoténuse est le plus grand côté.\n\n" +
+      "Calcul : un côté adjacent positif plus petit que l’hypoténuse donne un quotient entre 0 et 1.\n\n" +
+      "Conclusion : le cosinus d’un angle aigu est donc compris entre 0 et 1.",
+    tags: ["trigo_cosinus", "defi", "open"],
+  },
 ];

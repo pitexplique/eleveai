@@ -1622,4 +1622,74 @@ export const perimetresBank: TutorBankItemV4[] = [
       };
     },
   },
+  {
+    kind: "fixed",
+    id: "4e_aire_perimetre_defi_carre_vs_rectangle",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_defi",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Un carré de côté 5 cm et un rectangle de 7 cm sur 3 cm ont-ils le même périmètre ?",
+    format: "qcm",
+    choices: ["oui", "non"],
+    expected: ["oui"],
+    comparator: "mcq_exact",
+    hint: "Calcule les deux périmètres.",
+    explanation:
+      "Définition : le périmètre est la longueur du contour.\n\n" +
+      "Méthode : carré $P = 4 \\times 5$ ; rectangle $P = 2 \\times (7 + 3)$.\n\n" +
+      "Calcul : $4 \\times 5 = 20$ et $2 \\times 10 = 20$.\n\n" +
+      "Conclusion : oui, les deux périmètres valent 20 cm.",
+    tags: ["aire_perimetre", "defi", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "4e_aire_perimetre_defi_perimetre_egal",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_defi",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Périmètre d’un carré = 4 × côté.",
+    tags: ["aire_perimetre", "defi", "template"],
+    generate: () => {
+      const cote = randomInt(3, 9);
+      const perimetre = 4 * cote;
+      return {
+        text: `Un carré a un périmètre de $${perimetre}$ cm. Quelle est la longueur de son côté (en cm) ?`,
+        format: "short",
+        expected: [String(cote)],
+        comparator: "number_equal",
+        explanation:
+          `Définition : pour un carré, $P = 4 \\times$ côté, donc côté $= P \\div 4$.\n\n` +
+          "Méthode : on divise le périmètre par 4.\n\n" +
+          `Calcul : $${perimetre} \\div 4 = ${cote}$.\n\n` +
+          `Conclusion : le côté mesure $${cote}$ cm.`,
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "4e_aire_perimetre_defi_open_1",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_defi",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Explique pourquoi deux figures peuvent avoir le même périmètre mais des formes différentes.",
+    format: "open",
+    expected: ["périmètre", "contour", "forme"],
+    comparator: "contains_keyword",
+    hint: "Le périmètre mesure le contour, pas la forme.",
+    explanation:
+      "Définition : le périmètre est la longueur totale du contour.\n\n" +
+      "Méthode : on peut répartir cette longueur de bien des façons.\n\n" +
+      "Calcul : un carré 5×5 et un rectangle 7×3 ont tous deux un périmètre de 20 cm.\n\n" +
+      "Conclusion : un même périmètre peut correspondre à des formes différentes.",
+    tags: ["aire_perimetre", "defi", "open"],
+  },
 ];

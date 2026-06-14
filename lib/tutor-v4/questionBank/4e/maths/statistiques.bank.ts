@@ -2648,4 +2648,76 @@ export const statistiquesBank: TutorBankItemV4[] = [
       "Conclusion : avec une valeur extrême, la médiane représente souvent mieux la série.",
     tags: ["stat_statistique", "defi", "open"],
   },
+  {
+    kind: "fixed",
+    id: "stat_defi_fixed_4",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "stat_statistique",
+    microId: "stat_defi",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Dans la série 2 ; 2 ; 2 ; 100, quel indicateur est le plus « tiré vers le haut » par le 100 ?",
+    format: "qcm",
+    choices: ["la moyenne", "la médiane", "le minimum", "l’effectif"],
+    expected: ["la moyenne"],
+    comparator: "mcq_exact",
+    hint: "La moyenne utilise toutes les valeurs.",
+    explanation:
+      "Définition : la moyenne tient compte de toutes les valeurs.\n\n" +
+      "Méthode : on compare l’effet de la valeur extrême.\n\n" +
+      "Calcul : la moyenne vaut (2+2+2+100)÷4 = 26,5, alors que la médiane vaut 2.\n\n" +
+      "Conclusion : c’est la moyenne qui est tirée vers le haut.",
+    tags: ["stat_statistique", "defi", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "stat_defi_tpl_3_valeur_manquante",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "stat_statistique",
+    microId: "stat_defi",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Somme totale = moyenne × nombre de valeurs.",
+    tags: ["stat_statistique", "defi", "valeur_manquante", "template"],
+    generate: () => {
+      const a = randomInt(8, 14);
+      const b = randomInt(8, 14);
+      const target = randomInt(10, 14);
+      const x = target * 3 - (a + b);
+      return {
+        text: `La moyenne de ${a}, ${b} et x est ${target}. Quelle est la valeur de x ?`,
+        format: "short",
+        expected: [String(x)],
+        comparator: "number_equal",
+        explanation:
+          "Définition : somme totale = moyenne × nombre de valeurs.\n\n" +
+          `Méthode : la somme doit valoir ${target} × 3 = ${target * 3}.\n\n` +
+          `Calcul : x = ${target * 3} - (${a} + ${b}) = ${x}.\n\n` +
+          `Conclusion : x = ${x}.`,
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "stat_defi_open_3",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "stat_statistique",
+    microId: "stat_defi",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Explique pourquoi deux séries peuvent avoir la même moyenne mais des étendues très différentes.",
+    format: "open",
+    expected: ["moyenne", "étendue", "dispersion"],
+    comparator: "contains_keyword",
+    hint: "La moyenne ne dit rien sur la dispersion.",
+    explanation:
+      "Définition : la moyenne mesure le niveau, l’étendue mesure la dispersion.\n\n" +
+      "Méthode : on peut garder la même somme avec des valeurs plus ou moins écartées.\n\n" +
+      "Calcul : par exemple 9 ; 11 et 2 ; 18 ont une moyenne de 10 mais des étendues différentes.\n\n" +
+      "Conclusion : la moyenne n’indique pas la dispersion, d’où des étendues différentes.",
+    tags: ["stat_statistique", "defi", "open"],
+  },
 ];
