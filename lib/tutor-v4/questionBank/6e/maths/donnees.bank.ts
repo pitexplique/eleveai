@@ -26,6 +26,10 @@ function statGraphCanvas(
   return { kind: "stat_graph", ...data };
 }
 
+function se(def: string, meth: string, obs: string, ccl: string) {
+  return `Définition : ${def}\n\nMéthode : ${meth}\n\nObservation : ${obs}\n\nConclusion : ${ccl}`;
+}
+
 export const donneesBank: TutorBankItemV4[] = [
   /* =========================
      DATA_LIRE_TABLEAU

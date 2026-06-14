@@ -500,17 +500,17 @@ export default function AccueilPage() {
             </Link>
           ) : (
             <Link href="/defis-du-jour" className="group relative block h-[220px] overflow-hidden rounded-2xl shadow-2xl sm:h-[280px]">
-              <Image src="/images/defis-du-jour/grand_raid_2026.webp" alt="Défi du jour" fill sizes="(max-width: 1200px) 100vw, 1200px" className="object-cover object-center transition-transform duration-700 group-hover:scale-[1.03]" />
+              <Image src="/images/lagon.webp" alt="Mission lagon" fill sizes="(max-width: 1200px) 100vw, 1200px" className="object-cover object-center transition-transform duration-700 group-hover:scale-[1.03]" />
               <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/40 to-transparent" />
               <div className="absolute bottom-0 left-0 p-6 sm:p-8">
                 <span className="mb-3 inline-block rounded-full bg-emerald-500 px-3 py-1 text-[11px] font-black uppercase tracking-[0.2em] text-white">🎯 Défi du jour</span>
-                <h3 className="text-2xl font-black leading-tight text-white sm:text-3xl">Le Grand Raid de La Réunion en chiffres</h3>
-                <p className="mt-2 max-w-lg text-sm text-white/75">165 km, 9 600 m de dénivelé, la Diagonale des Fous… 7 défis maths inspirés de la course la plus folle de l&apos;île.</p>
+                <h3 className="text-2xl font-black leading-tight text-white sm:text-3xl">Mission lagon : compter pour protéger</h3>
+                <p className="mt-2 max-w-lg text-sm text-white/75">Poissons-perroquets, coraux, tortues, déchets… 7 défis maths pour observer et protéger le lagon de La Réunion.</p>
                 <div className="mt-4 inline-flex items-center gap-2 rounded-full bg-emerald-500 px-5 py-2.5 text-sm font-black text-white transition-all group-hover:bg-emerald-400 group-hover:gap-3">Relever le défi <span className="transition-transform group-hover:translate-x-1">→</span></div>
               </div>
               <div className="absolute right-6 top-6 rounded-xl border border-white/20 bg-black/60 px-4 py-2 text-center backdrop-blur-sm">
                 <p className="text-[10px] font-bold uppercase tracking-wider text-white/60">Aujourd&apos;hui</p>
-                <p className="text-2xl font-black text-white">🏃</p>
+                <p className="text-2xl font-black text-white">🐠</p>
                 <p className="text-[10px] font-bold text-white/60">7 défis</p>
               </div>
             </Link>
