@@ -5,7 +5,7 @@ import { Video } from "lucide-react";
 import AudioBoost from "@/components/AudioBoost";
 import { MarkdownMath } from "@/components/MarkdownMath";
 import type { Classe, Matiere } from "@/lib/tutor-v4/catalog";
-import type { TutorQuestionOption } from "@/lib/tutor-v4/types";
+import type { TutorMode, TutorQuestionOption } from "@/lib/tutor-v4/types";
 import { buildLearningVideoHref } from "@/lib/videoSearch";
 
 type TutorSimpleViewProps = {
@@ -24,6 +24,8 @@ type TutorSimpleViewProps = {
   elapsedTime: string;
   questionsDone: number;
   currentStar: number;
+  mode: TutorMode;
+  streak: number;
   renderCanvas: (question: TutorQuestionOption) => ReactNode;
   onBackCoach: () => void;
   onSwitchToComplete: () => void;
@@ -44,6 +46,10 @@ function matiereLabel(matiere: Matiere) {
   return "Maths";
 }
 
+function starsLabel(level: number) {
+  return "⭐".repeat(Math.max(1, Math.min(5, level)));
+}
+
 export default function TutorSimpleView({
   classe,
   matiere,
@@ -60,6 +66,8 @@ export default function TutorSimpleView({
   elapsedTime,
   questionsDone,
   currentStar,
+  mode,
+  streak,
   renderCanvas,
   onBackCoach,
   onSwitchToComplete,
@@ -107,6 +115,21 @@ export default function TutorSimpleView({
             </button>
           </div>
         </header>
+
+        {/* Bandeau mission sur une seule ligne (identique au mode complet). */}
+        <div className="mb-4 flex flex-wrap items-center gap-2 rounded-2xl bg-gradient-to-r from-indigo-600 via-sky-600 to-cyan-500 px-4 py-2 text-white shadow-sm">
+          <span className="rounded-full bg-white/20 px-3 py-1 text-[11px] font-bold tracking-wide">
+            MODE MISSION
+          </span>
+          <span className="text-lg font-black tracking-tight">
+            Tutor {matiereLabel(matiere)} V4
+          </span>
+          <SimplePill>
+            🎮 {mode === "evaluation" ? "Évaluation" : "Coaching"}
+          </SimplePill>
+          <SimplePill>⭐ {starsLabel(currentStar)}</SimplePill>
+          <SimplePill>🔥 Série {streak}</SimplePill>
+        </div>
 
         <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_120px]">
           <section className="min-h-[520px] rounded-2xl bg-white px-5 py-6 shadow-sm ring-1 ring-slate-200 sm:px-8 lg:px-12">
