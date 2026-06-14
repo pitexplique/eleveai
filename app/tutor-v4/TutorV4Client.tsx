@@ -1265,54 +1265,50 @@ function handleInputKeyDown(
       </div>
       <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_340px]">
         <div className="space-y-4">
-          <section className="space-y-3">
-            <div className="grid gap-3 sm:grid-cols-[1fr_180px_180px]">
-              <button
-                onClick={() => router.push(`/coach-ia/${matiere}`)}
-                className="flex w-full items-center justify-center rounded-2xl bg-orange-500 px-4 py-3 text-sm font-black text-white shadow hover:bg-orange-600"
-              >
-                ← Retour Coach
-              </button>
+          {/* Contrôles + notion sur une seule ligne pour garder la question
+              dans l'écran sans avoir à scroller. */}
+          <section className="flex flex-col gap-2 sm:flex-row sm:items-center">
+            <button
+              onClick={() => router.push(`/coach-ia/${matiere}`)}
+              className="flex items-center justify-center rounded-2xl bg-orange-500 px-4 py-2.5 text-sm font-black text-white shadow hover:bg-orange-600"
+            >
+              ← Retour Coach
+            </button>
 
-              <div className="rounded-2xl border border-slate-200 bg-white px-4 py-3 text-center text-sm font-black text-slate-800 shadow-sm">
-                Classe : {classe}
-              </div>
-
-              <button
-                type="button"
-                onClick={() => setDisplayMode("simple")}
-                className="rounded-2xl border border-slate-200 bg-white px-4 py-3 text-center text-sm font-black text-slate-800 shadow-sm hover:bg-slate-50"
-              >
-                Mode simple
-              </button>
+            <div className="rounded-2xl border border-slate-200 bg-white px-4 py-2.5 text-center text-sm font-black text-slate-800 shadow-sm">
+              Classe : {classe}
             </div>
 
-            <div className="rounded-2xl border border-slate-200 bg-white p-3 shadow-sm">
-              <label className="mb-2 block text-xs font-black uppercase tracking-wide text-slate-500">
-                Notion
-              </label>
-              <select
-                value={notion}
-                onChange={(e) => {
-                  const notionId = e.target.value;
-                  setNotion(notionId);
-                  setPair(null);
-                  setCurrentQuestion(null);
-                  setSessionId(null);
-                  setActiveMicroId(null);
-                  resetWrongAnswerFlow();
-                  resetMicroStatusesForNotion(notionId);
-                  initMicroScoresForNotion(notionId);
-                }}
-                className="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-base font-bold text-slate-900 outline-none focus:border-orange-500"
-              >
-                {notionOptions.map((notionId) => (
-                  <option key={notionId} value={notionId}>
-                    {notionLabel(notionId, classe, matiere)}
-                  </option>
-                ))}
-              </select>
-            </div>
+            <button
+              type="button"
+              onClick={() => setDisplayMode("simple")}
+              className="rounded-2xl border border-slate-200 bg-white px-4 py-2.5 text-center text-sm font-black text-slate-800 shadow-sm hover:bg-slate-50"
+            >
+              Mode simple
+            </button>
+
+            <select
+              aria-label="Notion"
+              value={notion}
+              onChange={(e) => {
+                const notionId = e.target.value;
+                setNotion(notionId);
+                setPair(null);
+                setCurrentQuestion(null);
+                setSessionId(null);
+                setActiveMicroId(null);
+                resetWrongAnswerFlow();
+                resetMicroStatusesForNotion(notionId);
+                initMicroScoresForNotion(notionId);
+              }}
+              className="min-w-0 flex-1 rounded-2xl border border-slate-300 bg-white px-4 py-2.5 text-sm font-bold text-slate-900 outline-none focus:border-orange-500"
+            >
+              {notionOptions.map((notionId) => (
+                <option key={notionId} value={notionId}>
+                  {notionLabel(notionId, classe, matiere)}
+                </option>
+              ))}
+            </select>
           </section>
 
           <header className="overflow-hidden rounded-[24px] border border-slate-200 bg-white shadow-lg sm:rounded-[28px]">
@@ -1396,6 +1392,37 @@ function handleInputKeyDown(
             >
               {busy ? "Chargement..." : "Démarrer une mission"}
             </button>
+
+            {/* Enregistrement aussi sur mobile : un élève connecté doit pouvoir
+                sauvegarder sa séance depuis son téléphone. */}
+            {nbTentatives > 0 && (
+              eleve ? (
+                <button
+                  type="button"
+                  onClick={() => void enregistrerSeance()}
+                  disabled={saving}
+                  className="rounded-2xl bg-emerald-500 px-5 py-3 text-base font-black text-white shadow hover:bg-emerald-400 disabled:opacity-60"
+                >
+                  {saving ? "Enregistrement..." : "✅ Enregistrer ma séance"}
+                </button>
+              ) : (
+                <Link
+                  href="/auth/signin-eleve"
+                  className="rounded-2xl bg-amber-500 px-5 py-3 text-center text-base font-black text-white shadow hover:bg-amber-400"
+                >
+                  Se connecter pour enregistrer
+                </Link>
+              )
+            )}
+
+            {saveMessage && (
+              <p className={[
+                "rounded-2xl px-4 py-2 text-sm font-black text-center",
+                saveMessage.includes("✅") ? "bg-emerald-100 text-emerald-800" : "bg-red-100 text-red-700",
+              ].join(" ")}>
+                {saveMessage}
+              </p>
+            )}
           </section>
 
           {(() => {
@@ -1570,12 +1597,7 @@ function handleInputKeyDown(
 
               {!wrongAnswerPanelOpen ? (
                 <>
-                  <div className="mb-4 rounded-2xl bg-gradient-to-r from-violet-100 to-fuchsia-100 px-4 py-3 text-sm font-bold text-violet-900">
-                    Compétence travaillée :{" "}
-                    {microLabel(currentQuestion.microId, classe, matiere)}
-                  </div>
-
-                  <MarkdownMath className="mb-4 rounded-2xl border border-slate-200 bg-white p-4 text-base text-slate-900">
+                  <MarkdownMath className="mb-3 rounded-2xl border border-slate-200 bg-white p-4 text-base text-slate-900">
                     {currentQuestion.text}
                   </MarkdownMath>
 
@@ -1598,17 +1620,6 @@ function handleInputKeyDown(
                       {renderCanvas(currentQuestion.canvas)}
                     </div>
                   ) : null}
-
-                  <div className="mb-4 flex flex-wrap gap-2">
-                    <Tag>
-                      {currentQuestion.format === "qcm"
-                        ? "QCM"
-                        : currentQuestion.format === "open"
-                        ? "Réponse rédigée"
-                        : "Réponse courte"}
-                    </Tag>
-                    <Tag>{mode === "evaluation" ? "Évaluation" : "Coaching"}</Tag>
-                  </div>
 
                   {currentQuestion.format === "qcm" &&
                   currentQuestion.choices?.length ? (
