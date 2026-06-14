@@ -10,6 +10,11 @@ import type { ParcoursQuestion, ParcoursAnswer, ParcoursNotionScore } from "@/li
 import type { ParcoursClasseFrancais } from "@/lib/parcours/getFrancaisNotions";
 import { getDefiQuestionsForFrancais } from "@/lib/parcours/getDefiQuestionForFrancais";
 import { isCorrectAnswer, scoreParcours } from "@/lib/parcours/scoreParcours";
+import {
+  useClassBoard,
+  ClassBoardToggle,
+  classText,
+} from "@/components/parcours/ClassBoard";
 
 const CLASSES: ParcoursClasseFrancais[] = [
   "cp", "ce1", "ce2", "cm1", "cm2", "6e", "5e", "4e", "3e",
@@ -61,6 +66,7 @@ export default function ParcoursFrancaisClient() {
   const codeUtilisateur = eleve?.code_eleve?.trim() ?? eleve?.code_utilisateur?.trim() ?? "";
 
   const bilanRef = useRef<HTMLDivElement>(null);
+  const { classBoard, toggleClassBoard } = useClassBoard();
 
   const [classe, setClasse] = useState<ParcoursClasseFrancais>("6e");
   const [questionCount, setQuestionCount] = useState<QuestionCount>(10);
@@ -218,13 +224,16 @@ export default function ParcoursFrancaisClient() {
     return (
       <main className="min-h-screen bg-[#f4f6ff] px-4 py-6">
         <div className="mx-auto max-w-3xl">
-          <div className="mb-4 flex items-center justify-between gap-3">
+          <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
             <button type="button" onClick={resetParcours} className="text-sm font-bold text-slate-500 hover:text-slate-800">
               ← Retour
             </button>
-            <span className="rounded-full bg-indigo-100 px-4 py-2 text-sm font-black text-indigo-700">
-              {classeLabels[classe]} · {questions.length} questions
-            </span>
+            <div className="flex flex-wrap items-center gap-2">
+              <ClassBoardToggle classBoard={classBoard} onToggle={toggleClassBoard} />
+              <span className="rounded-full bg-indigo-100 px-4 py-2 text-sm font-black text-indigo-700">
+                {classeLabels[classe]} · {questions.length} questions
+              </span>
+            </div>
           </div>
 
           <div className="space-y-4">

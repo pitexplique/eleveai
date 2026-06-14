@@ -1,0 +1,40 @@
+<svg width="96" height="96" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">EleveAI</title>
+  <desc id="desc">Logo EleveAI avec epsilon, fleche et infini.</desc>
+  <defs>
+    <linearGradient id="bg" x1="12" y1="10" x2="86" y2="88" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#083A67"/>
+      <stop offset="0.48" stop-color="#042640"/>
+      <stop offset="1" stop-color="#071A2D"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="22" y1="25" x2="75" y2="70" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFF2A8"/>
+      <stop offset="0.42" stop-color="#F8C846"/>
+      <stop offset="1" stop-color="#F2A11E"/>
+    </linearGradient>
+    <linearGradient id="mint" x1="58" y1="16" x2="86" y2="45" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#A7F3D0"/>
+      <stop offset="1" stop-color="#22D3EE"/>
+    </linearGradient>
+    <filter id="glow" x="5" y="4" width="86" height="85" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+      <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+      <feOffset dy="3"/>
+      <feGaussianBlur stdDeviation="4"/>
+      <feComposite in2="hardAlpha" operator="out"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0.96 0 0 0 0 0.69 0 0 0 0 0.18 0 0 0 0.52 0"/>
+      <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_1_4"/>
+      <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_1_4" result="shape"/>
+    </filter>
+  </defs>
+  <rect x="5" y="5" width="86" height="86" rx="26" fill="url(#bg)"/>
+  <rect x="6.5" y="6.5" width="83" height="83" rx="24.5" stroke="white" stroke-opacity="0.16" stroke-width="3"/>
+  <path d="M21 62C21 51.8 28.9 46.9 42.4 47.5C44.3 47.6 45.5 45.4 44.3 43.9C42.7 41.9 39.6 41.1 35.5 41.7C29.6 42.5 25.1 39.5 25.1 34.7C25.1 27 33.3 22.5 42.9 25.3C47 26.5 48.6 29.4 47.7 32.2" stroke="url(#gold)" stroke-width="7.5" stroke-linecap="round"/>
+  <g filter="url(#glow)">
+    <path d="M51.5 47.9H69.2" stroke="url(#gold)" stroke-width="5.2" stroke-linecap="round"/>
+    <path d="M62.8 37.5L73.6 48L62.8 58.5" stroke="url(#gold)" stroke-width="5.2" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M34.2 66.8C42.5 74.1 50.9 71.5 57.1 61.5C63.4 51.4 69.6 47.9 75.6 53.2C81.8 58.7 76.5 71.7 67.1 70.1C56.7 68.3 52.5 49.2 39.6 52.2C35.5 53.1 32.5 57 32.4 61.5C32.4 63.5 33 65.3 34.2 66.8Z" stroke="url(#gold)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <circle cx="74" cy="25" r="12" fill="url(#mint)"/>
+  <path d="M69.5 29.7L74.2 18.8L78.7 29.7M71.3 25.9H76.9" stroke="#042640" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

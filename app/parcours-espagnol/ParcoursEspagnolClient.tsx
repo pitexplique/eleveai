@@ -9,6 +9,11 @@ import { useEleve } from "@/context/EleveContext";
 import type { ParcoursNiveauEnglish, ParcoursQuestion, ParcoursAnswer, ParcoursNotionScore } from "@/lib/parcours/types";
 import { getDefiQuestionsForEspagnol } from "@/lib/parcours/getDefiQuestionForEspagnol";
 import { isCorrectAnswer, scoreParcours } from "@/lib/parcours/scoreParcours";
+import {
+  useClassBoard,
+  ClassBoardToggle,
+  classText,
+} from "@/components/parcours/ClassBoard";
 
 const NIVEAUX: ParcoursNiveauEnglish[] = ["a1", "a2", "b1", "b2"];
 
@@ -64,6 +69,7 @@ export default function ParcoursEspagnolClient() {
   const codeUtilisateur = eleve?.code_eleve?.trim() ?? eleve?.code_utilisateur?.trim() ?? "";
 
   const bilanRef = useRef<HTMLDivElement>(null);
+  const { classBoard, toggleClassBoard } = useClassBoard();
 
   const [niveau, setNiveau] = useState<ParcoursNiveauEnglish>("a1");
   const [questionCount, setQuestionCount] = useState<QuestionCount>(10);
@@ -218,13 +224,16 @@ export default function ParcoursEspagnolClient() {
     return (
       <main className="min-h-screen bg-[#fff5f3] px-4 py-6">
         <div className="mx-auto max-w-3xl">
-          <div className="mb-4 flex items-center justify-between gap-3">
+          <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
             <button type="button" onClick={resetParcours} className="text-sm font-bold text-slate-500 hover:text-slate-800">
               ← Retour
             </button>
-            <span className="rounded-full bg-rose-100 px-4 py-2 text-sm font-black text-rose-700">
-              {niveauLabels[niveau]} · {questions.length} questions
-            </span>
+            <div className="flex flex-wrap items-center gap-2">
+              <ClassBoardToggle classBoard={classBoard} onToggle={toggleClassBoard} />
+              <span className="rounded-full bg-rose-100 px-4 py-2 text-sm font-black text-rose-700">
+                {niveauLabels[niveau]} · {questions.length} questions
+              </span>
+            </div>
           </div>
 
           <div className="space-y-4">
@@ -244,7 +253,7 @@ export default function ParcoursEspagnolClient() {
                     <span className="text-xs font-bold text-slate-400">{q.notionLabel}</span>
                   </div>
 
-                  <p className="mb-4 text-base font-bold text-slate-800">{q.question.text}</p>
+                  <p className={`mb-4 font-bold text-slate-800 ${classText.question(classBoard)}`}>{q.question.text}</p>
 
                   {q.question.audioSrc ? (
                     <div className="mb-4 rounded-2xl border border-rose-200 bg-rose-50 p-3">
@@ -271,7 +280,8 @@ export default function ParcoursEspagnolClient() {
                             type="button"
                             onClick={() => setAnswers((prev) => ({ ...prev, [q.notionId]: choice }))}
                             className={[
-                              "rounded-2xl border px-4 py-3 text-left text-sm font-bold transition",
+                              "rounded-2xl border px-4 py-3 text-left font-bold transition",
+                              classText.choice(classBoard),
                               selected
                                 ? "border-rose-500 bg-rose-100 text-rose-950"
                                 : "border-slate-200 bg-slate-50 text-slate-800 hover:bg-slate-100",
@@ -288,7 +298,7 @@ export default function ParcoursEspagnolClient() {
                       placeholder="Ta réponse…"
                       value={answers[q.notionId] ?? ""}
                       onChange={(e) => setAnswers((prev) => ({ ...prev, [q.notionId]: e.target.value }))}
-                      className="w-full rounded-2xl border border-slate-200 px-4 py-3 text-sm font-bold text-slate-800 focus:border-rose-400 focus:outline-none"
+                      className={`w-full rounded-2xl border border-slate-200 px-4 py-3 font-bold text-slate-800 focus:border-rose-400 focus:outline-none ${classText.input(classBoard)}`}
                     />
                   )}
 

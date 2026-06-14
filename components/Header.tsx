@@ -1,9 +1,10 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
-import { Sparkles, Menu, X, GraduationCap, LogOut, ChevronDown } from "lucide-react";
+import { Menu, X, GraduationCap, LogOut, ChevronDown } from "lucide-react";
 import { useEleve } from "@/context/EleveContext";
 import { createClient } from "@/lib/supabase/client";
 
@@ -249,13 +250,20 @@ export default function Header() {
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3">
 
         {/* Logo */}
-        <Link href="/accueil" className="flex items-center gap-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-gradient-to-br from-cyan-200 via-emerald-300 to-amber-300 text-[#041B33] shadow-lg">
-            <Sparkles className="h-5 w-5" />
+        <Link href="/accueil" className="group flex shrink-0 items-center gap-3 rounded-full pr-1 transition hover:brightness-110">
+          <div className="relative h-11 w-11 overflow-hidden rounded-[18px] shadow-[0_0_22px_rgba(248,200,70,0.22)] ring-1 ring-white/15">
+            <Image
+              src="/logo-eleveai-header.svg"
+              alt=""
+              fill
+              sizes="44px"
+              className="object-contain"
+              priority
+            />
           </div>
           <div className="flex flex-col leading-tight">
-            <span className="text-lg font-extrabold tracking-tight text-white">
-              Eleve<span className="text-emerald-300">AI</span>
+            <span className="text-[1.05rem] font-black tracking-tight text-white">
+              Eleve<span className="text-cyan-200">AI</span>
             </span>
             <span className="hidden text-xs text-cyan-100/75 sm:block">
               Comprendre · S&apos;entraîner · Réussir
