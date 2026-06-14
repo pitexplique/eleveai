@@ -9,6 +9,7 @@ import { useEleve } from "@/context/EleveContext";
 import type { ParcoursQuestion, ParcoursAnswer, ParcoursNotionScore } from "@/lib/parcours/types";
 import type { ParcoursClasseFrancais } from "@/lib/parcours/getFrancaisNotions";
 import { getDefiQuestionsForFrancais } from "@/lib/parcours/getDefiQuestionForFrancais";
+import type { ParcoursDifficulteMode } from "@/lib/parcours/getDefiQuestionForNotion";
 import { isCorrectAnswer, scoreParcours } from "@/lib/parcours/scoreParcours";
 import {
   useClassBoard,
@@ -70,6 +71,7 @@ export default function ParcoursFrancaisClient() {
 
   const [classe, setClasse] = useState<ParcoursClasseFrancais>("6e");
   const [questionCount, setQuestionCount] = useState<QuestionCount>(10);
+  const [difficulteMode, setDifficulteMode] = useState<ParcoursDifficulteMode>("revision");
   const [started, setStarted] = useState(false);
   const [questions, setQuestions] = useState<ParcoursQuestion[]>([]);
   const [answers, setAnswers] = useState<Record<string, string>>({});
@@ -96,7 +98,7 @@ export default function ParcoursFrancaisClient() {
   const pourcentage = totalMaxScore > 0 ? Math.round((totalScore / totalMaxScore) * 100) : 0;
 
   function startParcours() {
-    const qs = getDefiQuestionsForFrancais(classe, questionCount);
+    const qs = getDefiQuestionsForFrancais(classe, questionCount, difficulteMode);
     setQuestions(qs);
     setAnswers({});
     setSubmitted(false);
@@ -151,14 +153,14 @@ export default function ParcoursFrancaisClient() {
             </Link>
           </div>
 
-          <div className="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-slate-200 sm:p-8">
+          <div className="rounded-3xl bg-white p-5 shadow-sm ring-1 ring-slate-200 sm:p-6">
             <p className="mb-1 text-xs font-black uppercase tracking-widest text-slate-400">Parcours</p>
-            <h1 className="text-3xl font-black text-indigo-600 sm:text-4xl">Français 📚</h1>
-            <p className="mt-2 text-slate-500 font-medium">
+            <h1 className="text-2xl font-black text-indigo-600 sm:text-3xl">Français 📚</h1>
+            <p className="mt-1 text-sm text-slate-500 font-medium">
               Diagnostique ta grammaire, ta conjugaison et ton orthographe, du CP à la 3e.
             </p>
 
-            <div className="mt-8">
+            <div className="mt-5">
               <p className="mb-3 text-sm font-black uppercase tracking-wider text-slate-500">
                 Choisis ta classe
               </p>
@@ -181,8 +183,8 @@ export default function ParcoursFrancaisClient() {
               </div>
             </div>
 
-            <div className="mt-6">
-              <p className="mb-3 text-sm font-black uppercase tracking-wider text-slate-500">
+            <div className="mt-4">
+              <p className="mb-2 text-sm font-black uppercase tracking-wider text-slate-500">
                 Nombre de questions
               </p>
               <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
@@ -192,24 +194,61 @@ export default function ParcoursFrancaisClient() {
                     type="button"
                     onClick={() => setQuestionCount(opt.value)}
                     className={[
-                      "rounded-2xl border p-4 text-center transition",
+                      "rounded-2xl border p-3 text-center transition",
                       questionCount === opt.value
                         ? "border-indigo-500 bg-indigo-50 text-indigo-900"
                         : "border-slate-200 bg-white text-slate-700 hover:bg-slate-50",
                     ].join(" ")}
                   >
-                    <div className="text-2xl">{opt.emoji}</div>
-                    <div className="mt-1 text-sm font-black">{opt.label}</div>
+                    <div className="text-xl">{opt.emoji}</div>
+                    <div className="mt-0.5 text-sm font-black">{opt.label}</div>
                     <div className="text-xs text-slate-400">{opt.description}</div>
                   </button>
                 ))}
               </div>
             </div>
 
+            <div className="mt-4">
+              <p className="mb-2 text-sm font-black uppercase tracking-wider text-slate-500">
+                Choisis ton niveau
+              </p>
+              <div className="grid gap-3 sm:grid-cols-2">
+                <button
+                  type="button"
+                  onClick={() => setDifficulteMode("revision")}
+                  className={[
+                    "rounded-2xl border p-3 text-left transition",
+                    difficulteMode === "revision"
+                      ? "border-indigo-500 bg-indigo-50 text-indigo-900"
+                      : "border-slate-200 bg-white text-slate-700 hover:bg-slate-50",
+                  ].join(" ")}
+                >
+                  <div className="text-2xl">⭐⭐⭐</div>
+                  <div className="mt-0.5 text-sm font-black">Révision</div>
+                  <div className="text-xs text-slate-400">Difficultés 1 → 3 · Pour consolider</div>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => setDifficulteMode("defi")}
+                  className={[
+                    "rounded-2xl border p-3 text-left transition",
+                    difficulteMode === "defi"
+                      ? "border-indigo-500 bg-indigo-50 text-indigo-900"
+                      : "border-slate-200 bg-white text-slate-700 hover:bg-slate-50",
+                  ].join(" ")}
+                >
+                  <div className="text-2xl">⭐⭐⭐⭐⭐</div>
+                  <div className="mt-0.5 text-sm font-black">Défi</div>
+                  <div className="text-xs text-slate-400">Difficultés 3 → 5 · Pour se dépasser</div>
+                </button>
+              </div>
+            </div>
+
             <button
               type="button"
               onClick={startParcours}
-              className="mt-8 w-full rounded-2xl bg-indigo-600 px-6 py-4 text-base font-black text-white shadow-lg hover:bg-indigo-500 transition"
+              className="mt-6 w-full rounded-2xl bg-indigo-600 px-6 py-3 text-base font-black text-white shadow-lg hover:bg-indigo-500 transition"
             >
               C&apos;est parti ! — {classeLabels[classe]} · {questionCount} questions →
             </button>
@@ -253,7 +292,7 @@ export default function ParcoursFrancaisClient() {
                     <span className="text-xs font-bold text-slate-400">{q.notionLabel}</span>
                   </div>
 
-                  <p className="mb-4 text-base font-bold text-slate-800">{q.question.text}</p>
+                  <p className={`mb-4 font-bold text-slate-800 ${classText.question(classBoard)}`}>{q.question.text}</p>
 
                   {q.question.audioSrc ? (
                     <div className="mb-4 rounded-2xl border border-indigo-200 bg-indigo-50 p-3">
@@ -280,7 +319,8 @@ export default function ParcoursFrancaisClient() {
                             type="button"
                             onClick={() => setAnswers((prev) => ({ ...prev, [q.notionId]: choice }))}
                             className={[
-                              "rounded-2xl border px-4 py-3 text-left text-sm font-bold transition",
+                              "rounded-2xl border px-4 py-3 text-left font-bold transition",
+                              classText.choice(classBoard),
                               selected
                                 ? "border-indigo-500 bg-indigo-100 text-indigo-950"
                                 : "border-slate-200 bg-slate-50 text-slate-800 hover:bg-slate-100",
@@ -297,7 +337,7 @@ export default function ParcoursFrancaisClient() {
                       placeholder="Ta réponse…"
                       value={answers[q.notionId] ?? ""}
                       onChange={(e) => setAnswers((prev) => ({ ...prev, [q.notionId]: e.target.value }))}
-                      className="w-full rounded-2xl border border-slate-200 px-4 py-3 text-sm font-bold text-slate-800 focus:border-indigo-400 focus:outline-none"
+                      className={`w-full rounded-2xl border border-slate-200 px-4 py-3 font-bold text-slate-800 focus:border-indigo-400 focus:outline-none ${classText.input(classBoard)}`}
                     />
                   )}
 

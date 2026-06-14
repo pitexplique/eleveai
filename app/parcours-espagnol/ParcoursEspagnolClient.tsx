@@ -192,14 +192,14 @@ export default function ParcoursEspagnolClient() {
                     type="button"
                     onClick={() => setQuestionCount(opt.value)}
                     className={[
-                      "rounded-2xl border p-4 text-center transition",
+                      "rounded-2xl border p-3 text-center transition",
                       questionCount === opt.value
                         ? "border-rose-500 bg-rose-50 text-rose-900"
                         : "border-slate-200 bg-white text-slate-700 hover:bg-slate-50",
                     ].join(" ")}
                   >
-                    <div className="text-2xl">{opt.emoji}</div>
-                    <div className="mt-1 text-sm font-black">{opt.label}</div>
+                    <div className="text-xl">{opt.emoji}</div>
+                    <div className="mt-0.5 text-sm font-black">{opt.label}</div>
                     <div className="text-xs text-slate-400">{opt.description}</div>
                   </button>
                 ))}

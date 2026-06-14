@@ -1,5 +1,6 @@
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 import type { ParcoursClasse, ParcoursQuestion, ParcoursQuestionItem } from "./types";
+import type { ParcoursDifficulteMode } from "./getDefiQuestionForNotion";
 import { getFrancaisNotions, type ParcoursClasseFrancais } from "./getFrancaisNotions";
 
 import { francaisCpQuestionBank } from "@/lib/tutor-v4/questionBank/cp/francais";
@@ -66,20 +67,36 @@ function materializeQuestion(
 
 export function getDefiQuestionsForFrancais(
   classe: ParcoursClasseFrancais,
-  count: number
+  count: number,
+  mode: ParcoursDifficulteMode = "revision"
 ): ParcoursQuestion[] {
   const notions = getFrancaisNotions(classe);
   const bank = getBank(classe);
   const questions: ParcoursQuestion[] = [];
 
+  // Révision = difficultés 1→3 (consolider), Défi = 3→5 (se dépasser).
+  const minDiff = mode === "defi" ? 3 : 1;
+  const maxDiff = mode === "defi" ? 5 : 3;
+
   for (const notion of notions) {
-    const items = bank
-      .filter(
-        (item) =>
-          item.notionId === notion.id &&
-          (item.kind === "template" || item.format !== "open")
-      )
-      .sort(() => Math.random() - 0.5);
+    const candidates = bank.filter(
+      (item) =>
+        item.notionId === notion.id &&
+        (item.kind === "template" || item.format !== "open")
+    );
+
+    // On privilégie les items dans la plage de difficulté demandée ; si une
+    // notion n'en a pas, on retombe sur tous ses items pour rester complet.
+    const inRange = candidates.filter(
+      (item) =>
+        typeof item.difficulty === "number" &&
+        item.difficulty >= minDiff &&
+        item.difficulty <= maxDiff
+    );
+
+    const items = (inRange.length > 0 ? inRange : candidates).sort(
+      () => Math.random() - 0.5
+    );
 
     const item = items[0];
     if (!item) continue;

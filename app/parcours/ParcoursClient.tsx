@@ -25,6 +25,11 @@ import {
 } from "@/lib/parcours/scoreParcours";
 
 import type { ParcoursDifficulteMode } from "@/lib/parcours/getDefiQuestionForNotion";
+import {
+  useClassBoard,
+  ClassBoardToggle,
+  classText,
+} from "@/components/parcours/ClassBoard";
 
 const classes: ParcoursClasse[] = [
   "cp",
@@ -124,6 +129,7 @@ export default function ParcoursClient() {
   const canAskCorrectionQuestion = Boolean(codeEtablissement && codeUtilisateur);
 
   const bilanRef = useRef<HTMLDivElement>(null);
+  const { classBoard, toggleClassBoard } = useClassBoard();
 
   const [classe, setClasse] = useState<ParcoursClasse>("6e");
   const [questionCount, setQuestionCount] = useState<QuestionCount>(10);
@@ -619,6 +625,8 @@ export default function ParcoursClient() {
               🚀 Démarrer · {questionCount} questions
             </button>
 
+            <ClassBoardToggle classBoard={classBoard} onToggle={toggleClassBoard} />
+
             <Link
               href="/accueil"
               className="rounded-2xl bg-white px-6 py-3 text-sm font-black text-slate-800 shadow-sm ring-1 ring-slate-200 transition hover:-translate-y-0.5 hover:bg-slate-50"
@@ -813,7 +821,7 @@ export default function ParcoursClient() {
                     </span>
                   </div>
 
-                  <p className="whitespace-pre-line text-base font-semibold leading-relaxed">
+                  <p className={`whitespace-pre-line font-semibold leading-relaxed ${classText.question(classBoard)}`}>
                     {q.question.text}
                   </p>
 
@@ -854,7 +862,8 @@ export default function ParcoursClient() {
                           disabled={submitted}
                           onClick={() => handleAnswer(q.notionId, choice)}
                           className={[
-                            "rounded-2xl border px-4 py-3 text-left text-sm font-bold transition",
+                            "rounded-2xl border px-4 py-3 text-left font-bold transition",
+                            classText.choice(classBoard),
                             answers[q.notionId] === choice
                               ? "border-emerald-500 bg-emerald-100 text-emerald-900"
                               : "border-slate-200 bg-white hover:bg-emerald-50",
@@ -873,7 +882,7 @@ export default function ParcoursClient() {
                         handleAnswer(q.notionId, e.target.value)
                       }
                       placeholder="Ta réponse..."
-                      className="mt-4 w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-sm font-bold outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 disabled:cursor-not-allowed disabled:bg-slate-100"
+                      className={`mt-4 w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 font-bold outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 disabled:cursor-not-allowed disabled:bg-slate-100 ${classText.input(classBoard)}`}
                     />
                   )}
 

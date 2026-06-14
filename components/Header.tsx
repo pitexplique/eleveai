@@ -251,12 +251,12 @@ export default function Header() {
 
         {/* Logo */}
         <Link href="/accueil" className="group flex shrink-0 items-center gap-3 rounded-full pr-1 transition hover:brightness-110">
-          <div className="relative h-11 w-11 overflow-hidden rounded-[18px] shadow-[0_0_22px_rgba(248,200,70,0.22)] ring-1 ring-white/15">
+          <div className="relative h-11 w-20 overflow-hidden rounded-[18px] shadow-[0_0_22px_rgba(248,200,70,0.22)] ring-1 ring-white/15">
             <Image
               src="/logo-eleveai-header.svg"
               alt=""
               fill
-              sizes="44px"
+              sizes="80px"
               className="object-contain"
               priority
             />

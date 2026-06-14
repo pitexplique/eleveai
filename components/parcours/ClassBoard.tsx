@@ -7,18 +7,23 @@ import { useEffect, useState } from "react";
 const STORAGE_KEY = "tutorv4-class-board";
 
 export function useClassBoard() {
-  const [classBoard, setClassBoard] = useState(false);
+  // `null` = pas encore hydraté depuis localStorage. On ne persiste rien tant
+  // qu'on n'a pas lu la valeur, sinon le 1er rendu (false) écraserait la
+  // préférence stockée (aggravé par le double-montage StrictMode en dev).
+  const [classBoard, setClassBoard] = useState<boolean | null>(null);
 
-  // Lecture après montage pour éviter un écart d'hydratation (SSR sans storage).
   useEffect(() => {
+    let stored = false;
     try {
-      if (localStorage.getItem(STORAGE_KEY) === "1") setClassBoard(true);
+      stored = localStorage.getItem(STORAGE_KEY) === "1";
     } catch {
       /* localStorage indisponible : affichage normal. */
     }
+    setClassBoard(stored);
   }, []);
 
   useEffect(() => {
+    if (classBoard === null) return;
     try {
       localStorage.setItem(STORAGE_KEY, classBoard ? "1" : "0");
     } catch {
@@ -27,8 +32,8 @@ export function useClassBoard() {
   }, [classBoard]);
 
   return {
-    classBoard,
-    toggleClassBoard: () => setClassBoard((v) => !v),
+    classBoard: classBoard ?? false,
+    toggleClassBoard: () => setClassBoard((v) => !(v ?? false)),
   };
 }
 
