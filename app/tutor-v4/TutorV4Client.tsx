@@ -411,6 +411,11 @@ export default function TutorV4Page() {
   const [urlInitDone, setUrlInitDone] = useState(false);
   const [showLesson, setShowLesson] = useState(false);
   const [displayMode, setDisplayMode] = useState<TutorDisplayMode>("simple");
+  // Mode « affichage classe » : agrandit énoncé + réponses pour la projection
+  // (plus besoin de zoomer le navigateur).
+  const [classBoard, setClassBoard] = useState(false);
+  // Micro-compétences repliées : on n'affiche le détail qu'au clic.
+  const [expandedMicroId, setExpandedMicroId] = useState<string | null>(null);
 
   const hasInitializedFromUrl = useRef(false);
   const hasStartedFromUrl = useRef(false);
@@ -631,6 +636,15 @@ useEffect(() => {
 
   const scoreSeanceSur20 =
     possiblePoints > 0 ? ((earnedPoints / possiblePoints) * 20).toFixed(1) : "0.0";
+
+  // Tailles agrandies en mode « affichage classe » (sinon valeurs normales).
+  const boardQuestionClass = classBoard
+    ? "text-2xl leading-relaxed sm:text-3xl"
+    : "text-base";
+  const boardChoiceClass = classBoard
+    ? "py-5 text-xl sm:text-2xl"
+    : "py-4 text-base";
+  const boardInputClass = classBoard ? "text-xl sm:text-2xl" : "text-base";
 
   const notionMicros = useMemo(() => {
     if (!notion) return [];
@@ -1287,6 +1301,19 @@ function handleInputKeyDown(
               Mode simple
             </button>
 
+            <button
+              type="button"
+              onClick={() => setClassBoard((v) => !v)}
+              aria-pressed={classBoard}
+              className={`rounded-2xl border px-4 py-2.5 text-center text-sm font-black shadow-sm ${
+                classBoard
+                  ? "border-indigo-500 bg-indigo-600 text-white hover:bg-indigo-500"
+                  : "border-slate-200 bg-white text-slate-800 hover:bg-slate-50"
+              }`}
+            >
+              {classBoard ? "🔍 Affichage classe : on" : "🔍 Affichage classe"}
+            </button>
+
             <select
               aria-label="Notion"
               value={notion}
@@ -1547,7 +1574,7 @@ function handleInputKeyDown(
                       </div>
                     ) : null}
 
-                    <p className="text-base leading-6 text-slate-900">
+                    <p className={`leading-6 text-slate-900 ${boardQuestionClass}`}>
                       {option.text}
                     </p>
 
@@ -1597,7 +1624,7 @@ function handleInputKeyDown(
 
               {!wrongAnswerPanelOpen ? (
                 <>
-                  <MarkdownMath className="mb-3 rounded-2xl border border-slate-200 bg-white p-4 text-base text-slate-900">
+                  <MarkdownMath className={`mb-3 rounded-2xl border border-slate-200 bg-white p-4 text-slate-900 ${boardQuestionClass}`}>
                     {currentQuestion.text}
                   </MarkdownMath>
 
@@ -1635,7 +1662,7 @@ function handleInputKeyDown(
                             type="button"
                             onClick={() => void handleQcmClick(choice)}
                             disabled={busy || wrongAnswerPanelOpen}
-                            className="rounded-2xl border border-slate-300 bg-white px-4 py-4 text-left text-base font-medium text-slate-900 transition hover:bg-slate-50 disabled:opacity-50"
+                            className={`rounded-2xl border border-slate-300 bg-white px-4 text-left font-medium text-slate-900 transition hover:bg-slate-50 disabled:opacity-50 ${boardChoiceClass}`}
                           >
                             <MarkdownMath inline>{choice}</MarkdownMath>
                           </button>
@@ -1655,7 +1682,7 @@ function handleInputKeyDown(
                         placeholder="Explique ton raisonnement..."
                         disabled={busy || wrongAnswerPanelOpen}
                         rows={5}
-                        className="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-base text-slate-900"
+                        className={`w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-slate-900 ${boardInputClass}`}
                       />
 
                       <button
@@ -1678,7 +1705,7 @@ function handleInputKeyDown(
                         onKeyDown={handleInputKeyDown}
                         placeholder="Ta réponse..."
                         disabled={busy || wrongAnswerPanelOpen}
-                        className="w-full rounded-2xl border border-slate-300 bg-white px-4 py-4 text-base text-slate-900"
+                        className={`w-full rounded-2xl border border-slate-300 bg-white px-4 py-4 text-slate-900 ${boardInputClass}`}
                       />
 
                       <button
@@ -1729,10 +1756,10 @@ function handleInputKeyDown(
 
           <SidebarCard title={`Micro-compétences : ${notionLabel(notion, classe, matiere)}`}>
             <div className="mb-3 text-xs text-slate-500">
-              Clique sur une micro-compétence pour t’entraîner dessus.
+              Clique sur une micro-compétence pour voir le détail.
             </div>
 
-            <div className="space-y-3">
+            <div className="space-y-2">
               {notionMicros.map((microId) => {
                 const status = microStatuses[microId] ?? "idle";
                 const score = microScores[microId] ?? {
@@ -1742,39 +1769,66 @@ function handleInputKeyDown(
                   possiblePoints: 0,
                 };
                 const isActive = activeMicroId === microId;
+                const isOpen = expandedMicroId === microId;
 
                 return (
-                  <button
+                  <div
                     key={microId}
-                    type="button"
-                    onClick={() => handleMicroClick(microId)}
-                    disabled={busy || wrongAnswerPanelOpen}
-                    className={`w-full rounded-2xl border px-4 py-3 text-left shadow-sm transition hover:shadow-md disabled:opacity-50 ${
-                      statusClasses(status)
-                    } ${isActive ? "ring-2 ring-slate-900/20" : ""}`}
+                    className={`rounded-2xl border shadow-sm ${statusClasses(
+                      status
+                    )} ${isActive ? "ring-2 ring-slate-900/20" : ""}`}
                   >
-                    <div className="mb-2 flex items-start justify-between gap-3">
-                      <div className="text-sm font-semibold leading-5">
+                    {/* Ligne repliée : une seule ligne, détail au clic. */}
+                    <button
+                      type="button"
+                      onClick={() =>
+                        setExpandedMicroId(isOpen ? null : microId)
+                      }
+                      aria-expanded={isOpen}
+                      className="flex w-full items-center gap-2 px-3 py-2 text-left"
+                    >
+                      <span className="min-w-0 flex-1 truncate text-sm font-semibold">
                         {microLabel(microId, classe, matiere)}
-                      </div>
-
-                      <span className="rounded-full bg-white/80 px-2 py-1 text-[11px] font-bold shadow-sm">
+                      </span>
+                      <span className="shrink-0 rounded-full bg-white/80 px-2 py-0.5 text-[10px] font-bold shadow-sm">
                         {statusLabel(status)}
                       </span>
-                    </div>
+                      <span
+                        className={`shrink-0 text-xs transition-transform ${
+                          isOpen ? "rotate-180" : ""
+                        }`}
+                        aria-hidden="true"
+                      >
+                        ▾
+                      </span>
+                    </button>
 
-                    <div className="grid grid-cols-3 gap-2 text-[11px] font-semibold text-slate-700">
-                      <div className="rounded-xl bg-white/70 px-2 py-1">
-                        Score : {scoreOn20(score.earnedPoints, score.possiblePoints)}
+                    {isOpen ? (
+                      <div className="space-y-2 px-3 pb-3">
+                        <div className="grid grid-cols-3 gap-2 text-[11px] font-semibold text-slate-700">
+                          <div className="rounded-xl bg-white/70 px-2 py-1">
+                            Score :{" "}
+                            {scoreOn20(score.earnedPoints, score.possiblePoints)}
+                          </div>
+                          <div className="rounded-xl bg-white/70 px-2 py-1">
+                            Réussites : {score.success}/{score.attempts}
+                          </div>
+                          <div className="rounded-xl bg-white/70 px-2 py-1">
+                            Points : {score.earnedPoints}/{score.possiblePoints}
+                          </div>
+                        </div>
+
+                        <button
+                          type="button"
+                          onClick={() => handleMicroClick(microId)}
+                          disabled={busy || wrongAnswerPanelOpen}
+                          className="w-full rounded-xl bg-slate-900 px-3 py-2 text-xs font-black text-white shadow hover:bg-slate-800 disabled:opacity-50"
+                        >
+                          S’entraîner sur cette compétence
+                        </button>
                       </div>
-                      <div className="rounded-xl bg-white/70 px-2 py-1">
-                        Réussites : {score.success}/{score.attempts}
-                      </div>
-                      <div className="rounded-xl bg-white/70 px-2 py-1">
-                        Points : {score.earnedPoints}/{score.possiblePoints}
-                      </div>
-                    </div>
-                  </button>
+                    ) : null}
+                  </div>
                 );
               })}
             </div>
