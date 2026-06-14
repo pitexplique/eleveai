@@ -1320,4 +1320,1332 @@ export const statistiquesBank: TutorBankItemV4[] = [
           "\n\nConclusion : l’indicateur obtenu résume correctement la série.",
     tags: ["stat_statistique", "defi", "open"],
   },
+
+  /* =========================================================
+     COMPLÉMENTS (top-up ~10 items / microSkill)
+  ========================================================= */
+
+  // ---------- STAT_LIRE_TABLEAU ----------
+  {
+    kind: "fixed",
+    id: "stat_lire_tableau_fixed_3",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "stat_statistique",
+    microId: "stat_lire_tableau",
+    difficulty: 1,
+    theme: "neutral",
+    text: "Dans un tableau statistique, que désigne une « valeur » de la série ?",
+    format: "qcm",
+    choices: [
+      "une donnée observée (par exemple une note)",
+      "le nombre total d’individus",
+      "la moyenne de la série",
+      "l’écart entre deux nombres",
+    ],
+    expected: ["une donnée observée (par exemple une note)"],
+    comparator: "mcq_exact",
+    hint: "Une valeur est ce qu’on observe, pas un calcul.",
+    explanation:
+      "Définition : une valeur est une donnée observée de la série.\n\n" +
+      "Méthode : on distingue valeur, effectif et indicateurs.\n\n" +
+      "Calcul : la valeur est par exemple une note ou une catégorie.\n\n" +
+      "Conclusion : une valeur est une donnée observée.",
+    tags: ["stat_statistique", "tableau", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "stat_lire_tableau_fixed_4",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "stat_statistique",
+    microId: "stat_lire_tableau",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Un tableau indique : A : 5, B : 7, C : 3. Quel est l’effectif total ?",
+    format: "qcm",
+    choices: ["15", "7", "3", "12"],
+    expected: ["15"],
+    comparator: "mcq_exact",
+    hint: "On additionne tous les effectifs.",
+    explanation:
+      "Définition : l’effectif total est la somme des effectifs.\n\n" +
+      "Méthode : on additionne 5, 7 et 3.\n\n" +
+      "Calcul : 5 + 7 + 3 = 15.\n\n" +
+      "Conclusion : l’effectif total est 15.",
+    tags: ["stat_statistique", "tableau", "total", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "stat_lire_tableau_tpl_3",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "stat_statistique",
+    microId: "stat_lire_tableau",
+    difficulty: 1,
+    theme: "neutral",
+    hint: "Lis l’effectif en face de la catégorie demandée.",
+    tags: ["stat_statistique", "tableau", "lecture", "template"],
+    generate: () => {
+      const labels = ["rouge", "vert", "bleu", "jaune"];
+      const values = labels.map(() => randomInt(5, 20));
+      const i = randomInt(0, labels.length - 1);
+      return {
+        text: `Un tableau de couleurs préférées indique : rouge : ${values[0]}, vert : ${values[1]}, bleu : ${values[2]}, jaune : ${values[3]}. Quel est l’effectif pour ${labels[i]} ?`,
+        format: "short",
+        expected: [String(values[i])],
+        comparator: "number_equal",
+        explanation:
+          "Définition : l’effectif est le nombre d’individus d’une catégorie.\n\n" +
+          `Méthode : on lit la valeur en face de ${labels[i]}.\n\n` +
+          `Calcul : l’effectif de ${labels[i]} est ${values[i]}.\n\n` +
+          `Conclusion : l’effectif est ${values[i]}.`,
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "stat_lire_tableau_tpl_4",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "stat_statistique",
+    microId: "stat_lire_tableau",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Cherche le plus grand effectif.",
+    tags: ["stat_statistique", "tableau", "maximum", "template"],
+    generate: () => {
+      const labels = ["lecture", "sport", "jeux", "musique"];
+      const values = labels.map(() => randomInt(6, 24));
+      const max = Math.max(...values);
+      const correct = labels[values.indexOf(max)];
+      return {
+        text: `Un tableau indique : lecture : ${values[0]}, sport : ${values[1]}, jeux : ${values[2]}, musique : ${values[3]}. Quelle activité a le plus grand effectif ?`,
+        format: "qcm",
+        choices: labels,
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation:
+          "Définition : on compare les effectifs des catégories.\n\n" +
+          "Méthode : on cherche le plus grand nombre.\n\n" +
+          `Calcul : le plus grand effectif est ${max}.\n\n` +
+          `Conclusion : l’activité la plus choisie est ${correct}.`,
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "stat_lire_tableau_open_2",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "stat_statistique",
+    microId: "stat_lire_tableau",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Explique comment trouver l’effectif total à partir d’un tableau.",
+    format: "open",
+    expected: ["additionne", "effectifs", "total"],
+    comparator: "contains_keyword",
+    hint: "On regroupe toutes les catégories.",
+    explanation:
+      "Définition : l’effectif total est la somme des effectifs.\n\n" +
+      "Méthode : on additionne tous les effectifs du tableau.\n\n" +
+      "Calcul : on fait la somme ligne par ligne.\n\n" +
+      "Conclusion : l’effectif total s’obtient en additionnant tous les effectifs.",
+    tags: ["stat_statistique", "tableau", "open"],
+  },
+
+  // ---------- STAT_LIRE_GRAPHIQUE ----------
+  {
+    kind: "fixed",
+    id: "stat_lire_graphique_fixed_2",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "stat_statistique",
+    microId: "stat_lire_graphique",
+    difficulty: 1,
+    theme: "neutral",
+    text: "Dans un diagramme en barres, que lit-on sur l’axe horizontal ?",
+    format: "qcm",
+    choices: ["les catégories", "les effectifs", "la moyenne", "l’étendue"],
+    expected: ["les catégories"],
+    comparator: "mcq_exact",
+    hint: "Les barres sont rangées par catégorie.",
+    explanation:
+      "Définition : l’axe horizontal porte les catégories.\n\n" +
+      "Méthode : on repère ce qui est écrit sous chaque barre.\n\n" +
+      "Calcul : ce sont les catégories ; les effectifs sont sur l’axe vertical.\n\n" +
+      "Conclusion : l’axe horizontal indique les catégories.",
+    tags: ["stat_statistique", "graphique", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "stat_lire_graphique_fixed_3",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "stat_statistique",
+    microId: "stat_lire_graphique",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Dans un diagramme circulaire (camembert), que représente un secteur plus grand ?",
+    format: "qcm",
+    choices: [
+      "une catégorie plus fréquente",
+      "une catégorie plus rare",
+      "la moyenne",
+      "rien de particulier",
+    ],
+    expected: ["une catégorie plus fréquente"],
+    comparator: "mcq_exact",
+    hint: "Plus la part est grande, plus l’effectif est grand.",
+    explanation:
+      "Définition : dans un camembert, la taille d’un secteur est proportionnelle à l’effectif.\n\n" +
+      "Méthode : on compare les tailles des secteurs.\n\n" +
+      "Calcul : un grand secteur correspond à un grand effectif.\n\n" +
+      "Conclusion : un secteur plus grand est une catégorie plus fréquente.",
+    tags: ["stat_statistique", "graphique", "camembert", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "stat_lire_graphique_tpl_4",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "stat_statistique",
+    microId: "stat_lire_graphique",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Lis la hauteur de la barre demandée.",
+    tags: ["stat_statistique", "graphique", "barres", "canvas", "template"],
+    generate: () => {
+      const data = [
+        { label: "Lun", value: randomInt(5, 20) },
+        { label: "Mar", value: randomInt(5, 20) },
+        { label: "Mer", value: randomInt(5, 20) },
+        { label: "Jeu", value: randomInt(5, 20) },
+      ];
+      const i = randomInt(0, data.length - 1);
+      return {
+        text: `D’après le graphique, quelle est la valeur du jour ${data[i].label} ?`,
+        format: "short",
+        expected: [String(data[i].value)],
+        comparator: "number_equal",
+        explanation:
+          "Définition : la hauteur d’une barre donne la valeur.\n\n" +
+          `Méthode : on lit la barre ${data[i].label}.\n\n` +
+          `Calcul : elle monte jusqu’à ${data[i].value}.\n\n` +
+          `Conclusion : la valeur est ${data[i].value}.`,
+        canvas: statGraphCanvas({
+          graphType: "barres",
+          data,
+          display: { showLabels: true, showValues: true, highlightIndex: i },
+        }),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "stat_lire_graphique_tpl_5_min",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "stat_statistique",
+    microId: "stat_lire_graphique",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Cherche la barre la plus basse.",
+    tags: ["stat_statistique", "graphique", "minimum", "canvas", "template"],
+    generate: () => {
+      const data = [
+        { label: "A", value: randomInt(10, 25) },
+        { label: "B", value: randomInt(10, 25) },
+        { label: "C", value: randomInt(10, 25) },
+      ];
+      const min = Math.min(...data.map((d) => d.value));
+      const correct = data.find((d) => d.value === min)?.label ?? data[0].label;
+      return {
+        text: "D’après le graphique, quelle catégorie a la plus petite valeur ?",
+        format: "qcm",
+        choices: data.map((d) => d.label),
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation:
+          "Définition : on compare les hauteurs des barres.\n\n" +
+          "Méthode : on cherche la barre la plus basse.\n\n" +
+          `Calcul : la plus petite valeur est ${min}.\n\n` +
+          `Conclusion : c’est la catégorie ${correct}.`,
+        canvas: statGraphCanvas({
+          graphType: "barres",
+          data,
+          display: { showLabels: true, showValues: true, highlightIndex: data.findIndex((d) => d.label === correct) },
+        }),
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "stat_lire_graphique_open_2",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "stat_statistique",
+    microId: "stat_lire_graphique",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Explique l’avantage d’un graphique par rapport à un tableau de données.",
+    format: "open",
+    expected: ["visuel", "comparer", "rapide"],
+    comparator: "contains_keyword",
+    hint: "Pense à la lecture visuelle.",
+    explanation:
+      "Définition : un graphique représente visuellement les données.\n\n" +
+      "Méthode : on compare les hauteurs ou les parts d’un coup d’œil.\n\n" +
+      "Calcul : on repère vite le maximum, le minimum, les écarts.\n\n" +
+      "Conclusion : le graphique permet de comparer rapidement et visuellement.",
+    tags: ["stat_statistique", "graphique", "open"],
+  },
+
+  // ---------- STAT_EFFECTIF ----------
+  {
+    kind: "fixed",
+    id: "stat_effectif_fixed_2",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "stat_statistique",
+    microId: "stat_effectif",
+    difficulty: 1,
+    theme: "neutral",
+    text: "L’effectif d’une valeur, c’est…",
+    format: "qcm",
+    choices: [
+      "le nombre de fois où cette valeur apparaît",
+      "la valeur la plus grande",
+      "la moyenne",
+      "la somme de toutes les valeurs",
+    ],
+    expected: ["le nombre de fois où cette valeur apparaît"],
+    comparator: "mcq_exact",
+    hint: "C’est un comptage.",
+    explanation:
+      "Définition : l’effectif compte les apparitions d’une valeur.\n\n" +
+      "Méthode : on compte combien de fois la valeur revient.\n\n" +
+      "Calcul : c’est un nombre d’individus.\n\n" +
+      "Conclusion : l’effectif est le nombre de fois où la valeur apparaît.",
+    tags: ["stat_statistique", "effectif", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "stat_effectif_fixed_3",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "stat_statistique",
+    microId: "stat_effectif",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Un tableau indique : A : 8, B : 12, total : 25. Quel est l’effectif de C ?",
+    format: "qcm",
+    choices: ["5", "20", "4", "13"],
+    expected: ["5"],
+    comparator: "mcq_exact",
+    hint: "Total - (A + B).",
+    explanation:
+      "Définition : l’effectif total est la somme des effectifs.\n\n" +
+      "Méthode : on soustrait les effectifs connus du total.\n\n" +
+      "Calcul : 25 - (8 + 12) = 25 - 20 = 5.\n\n" +
+      "Conclusion : l’effectif de C est 5.",
+    tags: ["stat_statistique", "effectif", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "stat_effectif_tpl_3",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "stat_statistique",
+    microId: "stat_effectif",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Additionne tous les effectifs.",
+    tags: ["stat_statistique", "effectif", "template"],
+    generate: () => {
+      const a = randomInt(4, 15);
+      const b = randomInt(4, 15);
+      const c = randomInt(4, 15);
+      const d = randomInt(4, 15);
+      const total = a + b + c + d;
+      return {
+        text: `Une enquête donne : ${a}, ${b}, ${c} et ${d} réponses pour quatre catégories. Quel est l’effectif total ?`,
+        format: "short",
+        expected: [String(total)],
+        comparator: "number_equal",
+        explanation:
+          "Définition : l’effectif total est la somme des effectifs.\n\n" +
+          "Méthode : on additionne les quatre effectifs.\n\n" +
+          `Calcul : ${a} + ${b} + ${c} + ${d} = ${total}.\n\n` +
+          `Conclusion : l’effectif total est ${total}.`,
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "stat_effectif_tpl_4_manquant",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "stat_statistique",
+    microId: "stat_effectif",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Effectif manquant = total - somme des effectifs connus.",
+    tags: ["stat_statistique", "effectif", "manquant", "template"],
+    generate: () => {
+      const a = randomInt(5, 15);
+      const b = randomInt(5, 15);
+      const c = randomInt(5, 15);
+      const total = a + b + c + randomInt(3, 12);
+      const x = total - (a + b + c);
+      return {
+        text: `Un tableau indique trois effectifs ${a}, ${b}, ${c} et un effectif total de ${total}. Quel est le quatrième effectif ?`,
+        format: "short",
+        expected: [String(x)],
+        comparator: "number_equal",
+        explanation:
+          "Définition : la somme des effectifs vaut l’effectif total.\n\n" +
+          "Méthode : on soustrait les effectifs connus du total.\n\n" +
+          `Calcul : ${total} - (${a} + ${b} + ${c}) = ${x}.\n\n` +
+          `Conclusion : le quatrième effectif est ${x}.`,
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "stat_effectif_fixed_4",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "stat_statistique",
+    microId: "stat_effectif",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Dans une série, la valeur 7 apparaît 3 fois. Quel est son effectif ?",
+    format: "qcm",
+    choices: ["3", "7", "21", "10"],
+    expected: ["3"],
+    comparator: "mcq_exact",
+    hint: "On compte le nombre d’apparitions.",
+    explanation:
+      "Définition : l’effectif d’une valeur est le nombre de fois où elle apparaît.\n\n" +
+      "Méthode : on compte les apparitions de 7.\n\n" +
+      "Calcul : elle apparaît 3 fois.\n\n" +
+      "Conclusion : son effectif est 3.",
+    tags: ["stat_statistique", "effectif", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "stat_effectif_open_2",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "stat_statistique",
+    microId: "stat_effectif",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Explique la différence entre une valeur et son effectif.",
+    format: "open",
+    expected: ["valeur", "effectif", "nombre"],
+    comparator: "contains_keyword",
+    hint: "L’une est observée, l’autre est un comptage.",
+    explanation:
+      "Définition : la valeur est la donnée observée, l’effectif est le nombre de fois où elle apparaît.\n\n" +
+      "Méthode : on distingue la donnée et son comptage.\n\n" +
+      "Calcul : par exemple, la note 12 (valeur) obtenue par 4 élèves (effectif).\n\n" +
+      "Conclusion : la valeur est la donnée, l’effectif est son nombre d’apparitions.",
+    tags: ["stat_statistique", "effectif", "open"],
+  },
+
+  // ---------- STAT_FREQUENCE ----------
+  {
+    kind: "fixed",
+    id: "stat_frequence_fixed_2",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "stat_statistique",
+    microId: "stat_frequence",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Dans une classe de 20 élèves, 5 portent des lunettes. Quelle est la fréquence en pourcentage ?",
+    format: "qcm",
+    choices: ["25 %", "5 %", "20 %", "50 %"],
+    expected: ["25 %"],
+    comparator: "mcq_exact",
+    hint: "5 ÷ 20 = 0,25 = 25 %.",
+    explanation:
+      "Définition : la fréquence est l’effectif divisé par l’effectif total.\n\n" +
+      "Méthode : on calcule 5 ÷ 20, puis on convertit en pourcentage.\n\n" +
+      "Calcul : 5 ÷ 20 = 0,25 = 25 %.\n\n" +
+      "Conclusion : la fréquence est 25 %.",
+    tags: ["stat_statistique", "frequence", "pourcentage", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "stat_frequence_tpl_4_decimal",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "stat_statistique",
+    microId: "stat_frequence",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Fréquence = effectif ÷ total.",
+    tags: ["stat_statistique", "frequence", "decimal", "template"],
+    generate: () => {
+      const total = randomChoice([10, 20, 25, 50]);
+      const effectif = randomChoice([total / 2, total / 5, total / 10]);
+      const freq = effectif / total;
+      const fPoint = String(freq);
+      const fComma = fPoint.replace(".", ",");
+      return {
+        text: `Sur ${total} personnes, ${effectif} aiment le sucré. Quelle est la fréquence (forme décimale) ?`,
+        format: "short",
+        expected: [fPoint, fComma],
+        comparator: "number_equal",
+        explanation:
+          "Définition : la fréquence est l’effectif divisé par le total.\n\n" +
+          "Méthode : on divise l’effectif par l’effectif total.\n\n" +
+          `Calcul : ${effectif} ÷ ${total} = ${fComma}.\n\n` +
+          `Conclusion : la fréquence est ${fComma}.`,
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "stat_frequence_tpl_5_pourcentage",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "stat_statistique",
+    microId: "stat_frequence",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Fréquence en % = (effectif ÷ total) × 100.",
+    tags: ["stat_statistique", "frequence", "pourcentage", "template"],
+    generate: () => {
+      const total = randomChoice([20, 25, 50, 100]);
+      const pourcentage = randomChoice([10, 20, 25, 40, 50]);
+      const effectif = (total * pourcentage) / 100;
+      return {
+        text: `Sur ${total} réponses, ${effectif} sont positives. Quelle est la fréquence en pourcentage ?`,
+        format: "short",
+        expected: [String(pourcentage)],
+        comparator: "number_equal",
+        explanation:
+          "Définition : la fréquence en pourcentage = (effectif ÷ total) × 100.\n\n" +
+          "Méthode : on divise puis on multiplie par 100.\n\n" +
+          `Calcul : (${effectif} ÷ ${total}) × 100 = ${pourcentage} %.\n\n` +
+          `Conclusion : la fréquence est ${pourcentage} %.`,
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "stat_frequence_fixed_3",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "stat_statistique",
+    microId: "stat_frequence",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Une fréquence peut-elle être supérieure à 1 (ou 100 %) ?",
+    format: "qcm",
+    choices: ["non", "oui"],
+    expected: ["non"],
+    comparator: "mcq_exact",
+    hint: "Une partie ne dépasse pas le tout.",
+    explanation:
+      "Définition : une fréquence est un quotient effectif ÷ total, donc entre 0 et 1.\n\n" +
+      "Méthode : l’effectif ne dépasse jamais le total.\n\n" +
+      "Calcul : le quotient est au plus 1 (100 %).\n\n" +
+      "Conclusion : non, une fréquence ne dépasse pas 1.",
+    tags: ["stat_statistique", "frequence", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "stat_frequence_open_2",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "stat_statistique",
+    microId: "stat_frequence",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Explique comment passer d’une fréquence décimale à un pourcentage.",
+    format: "open",
+    expected: ["multiplie", "100", "pourcentage"],
+    comparator: "contains_keyword",
+    hint: "On change d’écriture en multipliant.",
+    explanation:
+      "Définition : un pourcentage est une fréquence exprimée sur 100.\n\n" +
+      "Méthode : on multiplie la fréquence décimale par 100.\n\n" +
+      "Calcul : par exemple 0,25 × 100 = 25 %.\n\n" +
+      "Conclusion : on multiplie la fréquence décimale par 100 pour obtenir le pourcentage.",
+    tags: ["stat_statistique", "frequence", "open"],
+  },
+
+  // ---------- STAT_MOYENNE ----------
+  {
+    kind: "fixed",
+    id: "stat_moyenne_fixed_3",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "stat_statistique",
+    microId: "stat_moyenne",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Quelle est la moyenne de 6 ; 8 ; 10 ; 12 ?",
+    format: "qcm",
+    choices: ["9", "8", "10", "36"],
+    expected: ["9"],
+    comparator: "mcq_exact",
+    hint: "Somme ÷ 4.",
+    explanation:
+      "Définition : la moyenne est la somme divisée par le nombre de valeurs.\n\n" +
+      "Méthode : on additionne puis on divise par 4.\n\n" +
+      "Calcul : (6 + 8 + 10 + 12) ÷ 4 = 36 ÷ 4 = 9.\n\n" +
+      "Conclusion : la moyenne est 9.",
+    tags: ["stat_statistique", "moyenne", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "stat_moyenne_tpl_4_liste",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "stat_statistique",
+    microId: "stat_moyenne",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Additionne, puis divise par le nombre de valeurs.",
+    tags: ["stat_statistique", "moyenne", "template"],
+    generate: () => {
+      const values = [randomInt(4, 12), randomInt(4, 12), randomInt(4, 12)];
+      const avg = moyenne(values);
+      return {
+        text: `Calculer la moyenne de : ${values.join(" ; ")}.`,
+        format: "short",
+        expected: [formatNumber(avg)],
+        comparator: "number_equal",
+        explanation:
+          "Définition : la moyenne = somme ÷ nombre de valeurs.\n\n" +
+          "Méthode : on additionne puis on divise par 3.\n\n" +
+          `Calcul : (${values.join(" + ")}) ÷ 3 = ${formatNumber(avg)}.\n\n` +
+          `Conclusion : la moyenne est ${formatNumber(avg)}.`,
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "stat_moyenne_tpl_5_contexte",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "stat_statistique",
+    microId: "stat_moyenne",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Additionne les notes, divise par leur nombre.",
+    tags: ["stat_statistique", "moyenne", "contexte", "template"],
+    generate: () => {
+      const values = [randomInt(8, 18), randomInt(8, 18), randomInt(8, 18), randomInt(8, 18), randomInt(8, 18)];
+      const avg = moyenne(values);
+      return {
+        text: `Un élève a obtenu les notes : ${values.join(" ; ")}. Quelle est sa moyenne ?`,
+        format: "short",
+        expected: [formatNumber(avg)],
+        comparator: "number_equal",
+        explanation:
+          "Définition : la moyenne = somme des notes ÷ nombre de notes.\n\n" +
+          "Méthode : on additionne les 5 notes puis on divise par 5.\n\n" +
+          `Calcul : (${values.join(" + ")}) ÷ 5 = ${formatNumber(avg)}.\n\n` +
+          `Conclusion : la moyenne est ${formatNumber(avg)}.`,
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "stat_moyenne_open_2",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "stat_statistique",
+    microId: "stat_moyenne",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Explique la méthode pour calculer une moyenne.",
+    format: "open",
+    expected: ["additionne", "divise", "nombre"],
+    comparator: "contains_keyword",
+    hint: "Deux étapes : somme puis division.",
+    explanation:
+      "Définition : la moyenne résume une série par une seule valeur.\n\n" +
+      "Méthode : on additionne toutes les valeurs, puis on divise par leur nombre.\n\n" +
+      "Calcul : moyenne = somme ÷ nombre de valeurs.\n\n" +
+      "Conclusion : on additionne puis on divise par le nombre de valeurs.",
+    tags: ["stat_statistique", "moyenne", "open"],
+  },
+
+  // ---------- STAT_MEDIANE ----------
+  {
+    kind: "fixed",
+    id: "stat_mediane_fixed_3",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "stat_statistique",
+    microId: "stat_mediane",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Quelle est la médiane de la série rangée : 3 ; 5 ; 8 ?",
+    format: "qcm",
+    choices: ["5", "3", "8", "16"],
+    expected: ["5"],
+    comparator: "mcq_exact",
+    hint: "Avec 3 valeurs, c’est celle du milieu.",
+    explanation:
+      "Définition : la médiane est la valeur centrale d’une série rangée.\n\n" +
+      "Méthode : avec 3 valeurs, la médiane est la 2e.\n\n" +
+      "Calcul : la valeur centrale est 5.\n\n" +
+      "Conclusion : la médiane est 5.",
+    tags: ["stat_statistique", "mediane", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "stat_mediane_fixed_4",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "stat_statistique",
+    microId: "stat_mediane",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Que signifie la médiane d’une série ?",
+    format: "qcm",
+    choices: [
+      "la valeur qui partage la série rangée en deux moitiés",
+      "la valeur la plus fréquente",
+      "la somme des valeurs",
+      "l’écart entre les extrêmes",
+    ],
+    expected: ["la valeur qui partage la série rangée en deux moitiés"],
+    comparator: "mcq_exact",
+    hint: "C’est la valeur du milieu.",
+    explanation:
+      "Définition : la médiane partage la série rangée en deux moitiés de même effectif.\n\n" +
+      "Méthode : on range puis on prend la valeur centrale.\n\n" +
+      "Calcul : la moitié des valeurs lui est inférieure, l’autre supérieure.\n\n" +
+      "Conclusion : la médiane partage la série en deux moitiés.",
+    tags: ["stat_statistique", "mediane", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "stat_mediane_tpl_3_impair",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "stat_statistique",
+    microId: "stat_mediane",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Range puis prends la valeur centrale.",
+    tags: ["stat_statistique", "mediane", "impair", "template"],
+    generate: () => {
+      const sorted = [randomInt(2, 6), randomInt(7, 11), randomInt(12, 18)];
+      const values = shuffle(sorted);
+      const med = sorted[1];
+      return {
+        text: `Déterminer la médiane de : ${values.join(" ; ")}.`,
+        format: "short",
+        expected: [String(med)],
+        comparator: "number_equal",
+        explanation:
+          "Définition : la médiane est la valeur centrale de la série rangée.\n\n" +
+          `Méthode : on range : ${sorted.join(" ; ")}.\n\n` +
+          `Calcul : la valeur centrale est ${med}.\n\n` +
+          `Conclusion : la médiane est ${med}.`,
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "stat_mediane_tpl_4_pair",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "stat_statistique",
+    microId: "stat_mediane",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Avec un nombre pair, moyenne des deux valeurs centrales.",
+    tags: ["stat_statistique", "mediane", "pair", "template"],
+    generate: () => {
+      const sorted = [randomInt(2, 5), randomInt(6, 9), randomInt(10, 13), randomInt(14, 18), randomInt(19, 22), randomInt(23, 28)];
+      const values = shuffle(sorted);
+      const med = (sorted[2] + sorted[3]) / 2;
+      return {
+        text: `Déterminer la médiane de : ${values.join(" ; ")}.`,
+        format: "short",
+        expected: [formatNumber(med)],
+        comparator: "number_equal",
+        explanation:
+          "Définition : avec un nombre pair de valeurs, la médiane est la moyenne des deux valeurs centrales.\n\n" +
+          `Méthode : on range : ${sorted.join(" ; ")}.\n\n` +
+          `Calcul : (${sorted[2]} + ${sorted[3]}) ÷ 2 = ${formatNumber(med)}.\n\n` +
+          `Conclusion : la médiane est ${formatNumber(med)}.`,
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "stat_mediane_open_2",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "stat_statistique",
+    microId: "stat_mediane",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Explique comment trouver la médiane d’une série ayant un nombre pair de valeurs.",
+    format: "open",
+    expected: ["ranger", "deux", "moyenne"],
+    comparator: "contains_keyword",
+    hint: "Il y a deux valeurs centrales.",
+    explanation:
+      "Définition : avec un nombre pair de valeurs, il y a deux valeurs centrales.\n\n" +
+      "Méthode : on range la série, on repère les deux valeurs du milieu.\n\n" +
+      "Calcul : la médiane est la moyenne de ces deux valeurs.\n\n" +
+      "Conclusion : on prend la moyenne des deux valeurs centrales.",
+    tags: ["stat_statistique", "mediane", "open"],
+  },
+
+  // ---------- STAT_ETENDUE ----------
+  {
+    kind: "fixed",
+    id: "stat_etendue_fixed_2",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "stat_statistique",
+    microId: "stat_etendue",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Quelle est l’étendue de la série : 3 ; 9 ; 5 ; 12 ?",
+    format: "qcm",
+    choices: ["9", "12", "3", "15"],
+    expected: ["9"],
+    comparator: "mcq_exact",
+    hint: "Maximum - minimum = 12 - 3.",
+    explanation:
+      "Définition : l’étendue = maximum - minimum.\n\n" +
+      "Méthode : on repère le plus grand (12) et le plus petit (3).\n\n" +
+      "Calcul : 12 - 3 = 9.\n\n" +
+      "Conclusion : l’étendue est 9.",
+    tags: ["stat_statistique", "etendue", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "stat_etendue_fixed_3",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "stat_statistique",
+    microId: "stat_etendue",
+    difficulty: 1,
+    theme: "neutral",
+    text: "L’étendue d’une série se calcule par…",
+    format: "qcm",
+    choices: ["maximum - minimum", "maximum + minimum", "somme ÷ nombre", "valeur centrale"],
+    expected: ["maximum - minimum"],
+    comparator: "mcq_exact",
+    hint: "C’est un écart entre extrêmes.",
+    explanation:
+      "Définition : l’étendue mesure l’écart entre les extrêmes.\n\n" +
+      "Méthode : on soustrait le minimum du maximum.\n\n" +
+      "Calcul : étendue = maximum - minimum.\n\n" +
+      "Conclusion : la formule est maximum - minimum.",
+    tags: ["stat_statistique", "etendue", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "stat_etendue_tpl_3",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "stat_statistique",
+    microId: "stat_etendue",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Repère le min et le max.",
+    tags: ["stat_statistique", "etendue", "template"],
+    generate: () => {
+      const min = randomInt(1, 7);
+      const max = randomInt(20, 35);
+      const values = shuffle([min, randomInt(8, 13), randomInt(14, 19), max]);
+      const result = max - min;
+      return {
+        text: `Calculer l’étendue de : ${values.join(" ; ")}.`,
+        format: "short",
+        expected: [String(result)],
+        comparator: "number_equal",
+        explanation:
+          "Définition : l’étendue = maximum - minimum.\n\n" +
+          `Méthode : minimum = ${min}, maximum = ${max}.\n\n` +
+          `Calcul : ${max} - ${min} = ${result}.\n\n` +
+          `Conclusion : l’étendue est ${result}.`,
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "stat_etendue_tpl_4_contexte",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "stat_statistique",
+    microId: "stat_etendue",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Étendue des températures = plus chaude - plus froide.",
+    tags: ["stat_statistique", "etendue", "contexte", "template"],
+    generate: () => {
+      const min = randomInt(10, 18);
+      const max = randomInt(24, 34);
+      const result = max - min;
+      return {
+        text: `Sur une semaine, la température la plus basse est ${min} °C et la plus haute ${max} °C. Quelle est l’étendue des températures ?`,
+        format: "short",
+        expected: [String(result)],
+        comparator: "number_equal",
+        explanation:
+          "Définition : l’étendue = maximum - minimum.\n\n" +
+          "Méthode : on soustrait la plus basse de la plus haute.\n\n" +
+          `Calcul : ${max} - ${min} = ${result}.\n\n` +
+          `Conclusion : l’étendue est ${result} °C.`,
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "stat_etendue_fixed_4",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "stat_statistique",
+    microId: "stat_etendue",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Deux séries ont la même moyenne. La série dont l’étendue est la plus petite est…",
+    format: "qcm",
+    choices: ["la plus regroupée", "la plus dispersée", "la plus grande", "impossible à comparer"],
+    expected: ["la plus regroupée"],
+    comparator: "mcq_exact",
+    hint: "Petite étendue = valeurs proches.",
+    explanation:
+      "Définition : l’étendue mesure la dispersion.\n\n" +
+      "Méthode : une petite étendue signifie des valeurs proches.\n\n" +
+      "Calcul : moins d’écart entre extrêmes = série regroupée.\n\n" +
+      "Conclusion : la plus petite étendue correspond à la série la plus regroupée.",
+    tags: ["stat_statistique", "etendue", "interpretation", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "stat_etendue_open_2",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "stat_statistique",
+    microId: "stat_etendue",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Explique pourquoi l’étendue ne dépend que de deux valeurs.",
+    format: "open",
+    expected: ["maximum", "minimum", "extrêmes"],
+    comparator: "contains_keyword",
+    hint: "Quelles valeurs interviennent dans le calcul ?",
+    explanation:
+      "Définition : l’étendue = maximum - minimum.\n\n" +
+      "Méthode : seules les valeurs extrêmes interviennent.\n\n" +
+      "Calcul : les valeurs intermédiaires ne changent pas l’étendue.\n\n" +
+      "Conclusion : l’étendue ne dépend que du maximum et du minimum.",
+    tags: ["stat_statistique", "etendue", "open"],
+  },
+
+  // ---------- STAT_INTERPRETATION ----------
+  {
+    kind: "fixed",
+    id: "stat_interpreter_fixed_3",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "stat_statistique",
+    microId: "stat_interpreter",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Quel indicateur mesure la dispersion d’une série ?",
+    format: "qcm",
+    choices: ["l’étendue", "la moyenne", "la médiane", "l’effectif"],
+    expected: ["l’étendue"],
+    comparator: "mcq_exact",
+    hint: "C’est l’écart entre les extrêmes.",
+    explanation:
+      "Définition : la dispersion décrit l’écart entre les valeurs.\n\n" +
+      "Méthode : on choisit l’indicateur d’écart.\n\n" +
+      "Calcul : l’étendue (max - min) mesure la dispersion.\n\n" +
+      "Conclusion : c’est l’étendue.",
+    tags: ["stat_statistique", "interpretation", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "stat_interpreter_fixed_4",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "stat_statistique",
+    microId: "stat_interpreter",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Quel indicateur n’est pas influencé par une seule valeur extrême ?",
+    format: "qcm",
+    choices: ["la médiane", "la moyenne", "l’étendue", "la somme"],
+    expected: ["la médiane"],
+    comparator: "mcq_exact",
+    hint: "La médiane dépend de la position, pas des valeurs extrêmes.",
+    explanation:
+      "Définition : la médiane est la valeur centrale.\n\n" +
+      "Méthode : elle dépend de la position, pas de la taille des extrêmes.\n\n" +
+      "Calcul : une valeur extrême change la moyenne et l’étendue, mais peu la médiane.\n\n" +
+      "Conclusion : la médiane résiste aux valeurs extrêmes.",
+    tags: ["stat_statistique", "interpretation", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "stat_interpreter_tpl_2",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "stat_statistique",
+    microId: "stat_interpreter",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Plus l’étendue est petite, plus les valeurs sont regroupées.",
+    tags: ["stat_statistique", "interpretation", "template"],
+    generate: () => {
+      const eA = randomChoice([3, 4, 5]);
+      const eB = randomChoice([9, 11, 13]);
+      return {
+        text: `Deux séries ont la même moyenne. La série A a une étendue de ${eA}, la série B une étendue de ${eB}. Laquelle est la plus régulière (valeurs proches) ?`,
+        format: "qcm",
+        choices: ["série A", "série B"],
+        expected: ["série A"],
+        comparator: "mcq_exact",
+        explanation:
+          "Définition : une petite étendue indique des valeurs proches.\n\n" +
+          "Méthode : on compare les étendues.\n\n" +
+          `Calcul : ${eA} < ${eB}, donc A est plus regroupée.\n\n` +
+          "Conclusion : la série A est la plus régulière.",
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "stat_interpreter_fixed_5",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "stat_statistique",
+    microId: "stat_interpreter",
+    difficulty: 3,
+    theme: "neutral",
+    text: "La moyenne d’une classe est 11/20. Peut-on en déduire la note de chaque élève ?",
+    format: "qcm",
+    choices: ["non", "oui"],
+    expected: ["non"],
+    comparator: "mcq_exact",
+    hint: "La moyenne résume, elle ne donne pas le détail.",
+    explanation:
+      "Définition : la moyenne est un résumé global.\n\n" +
+      "Méthode : plusieurs répartitions donnent la même moyenne.\n\n" +
+      "Calcul : 11 peut venir de 8 et 14, ou de 11 et 11, etc.\n\n" +
+      "Conclusion : non, la moyenne ne donne pas chaque note.",
+    tags: ["stat_statistique", "interpretation", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "stat_interpreter_open_2",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "stat_statistique",
+    microId: "stat_interpreter",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Explique pourquoi il est utile d’utiliser plusieurs indicateurs pour décrire une série.",
+    format: "open",
+    expected: ["moyenne", "étendue", "dispersion"],
+    comparator: "contains_keyword",
+    hint: "Un seul indicateur ne dit pas tout.",
+    explanation:
+      "Définition : chaque indicateur décrit un aspect différent.\n\n" +
+      "Méthode : la moyenne donne le niveau, l’étendue la dispersion, la médiane le centre.\n\n" +
+      "Calcul : deux séries de même moyenne peuvent être très différentes.\n\n" +
+      "Conclusion : plusieurs indicateurs donnent une image complète de la série.",
+    tags: ["stat_statistique", "interpretation", "open"],
+  },
+  {
+    kind: "template",
+    id: "stat_interpreter_tpl_3_mieux",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "stat_statistique",
+    microId: "stat_interpreter",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "À moyenne égale, on regarde la régularité.",
+    tags: ["stat_statistique", "interpretation", "template"],
+    generate: () => {
+      const eA = randomChoice([2, 3, 4]);
+      const eB = randomChoice([8, 10, 12]);
+      return {
+        text: `Deux joueurs ont la même moyenne de points. Le joueur A a une étendue de ${eA}, le joueur B de ${eB}. Lequel est le plus régulier ?`,
+        format: "qcm",
+        choices: ["le joueur A", "le joueur B"],
+        expected: ["le joueur A"],
+        comparator: "mcq_exact",
+        explanation:
+          "Définition : la régularité se lit dans une faible dispersion.\n\n" +
+          "Méthode : on compare les étendues.\n\n" +
+          `Calcul : ${eA} < ${eB}, donc A varie moins.\n\n` +
+          "Conclusion : le joueur A est le plus régulier.",
+      };
+    },
+  },
+
+  // ---------- STAT_PROBLEME ----------
+  {
+    kind: "fixed",
+    id: "stat_probleme_fixed_1",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "stat_statistique",
+    microId: "stat_probleme",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Un élève a 12, 14 et 10 en maths. Quelle est sa moyenne ?",
+    format: "short",
+    expected: ["12"],
+    comparator: "number_equal",
+    hint: "Somme ÷ 3.",
+    explanation:
+      "Définition : la moyenne = somme ÷ nombre de notes.\n\n" +
+      "Méthode : on additionne puis on divise par 3.\n\n" +
+      "Calcul : (12 + 14 + 10) ÷ 3 = 36 ÷ 3 = 12.\n\n" +
+      "Conclusion : la moyenne est 12.",
+    tags: ["stat_statistique", "probleme", "moyenne"],
+  },
+  {
+    kind: "fixed",
+    id: "stat_probleme_fixed_2",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "stat_statistique",
+    microId: "stat_probleme",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Sur 30 élèves, 18 font de l’anglais. Quelle est la fréquence en pourcentage ?",
+    format: "qcm",
+    choices: ["60 %", "18 %", "30 %", "12 %"],
+    expected: ["60 %"],
+    comparator: "mcq_exact",
+    hint: "18 ÷ 30 = 0,6.",
+    explanation:
+      "Définition : fréquence = effectif ÷ total.\n\n" +
+      "Méthode : on calcule 18 ÷ 30, puis × 100.\n\n" +
+      "Calcul : 18 ÷ 30 = 0,6 = 60 %.\n\n" +
+      "Conclusion : la fréquence est 60 %.",
+    tags: ["stat_statistique", "probleme", "frequence", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "stat_probleme_tpl_3_etendue",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "stat_statistique",
+    microId: "stat_probleme",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Étendue = max - min.",
+    tags: ["stat_statistique", "probleme", "etendue", "template"],
+    generate: () => {
+      const min = randomInt(2, 8);
+      const max = randomInt(20, 30);
+      const values = shuffle([min, randomInt(9, 14), randomInt(15, 19), max]);
+      const result = max - min;
+      return {
+        text: `Les ventes journalières d’un magasin sont : ${values.join(" ; ")}. Quelle est l’étendue des ventes ?`,
+        format: "short",
+        expected: [String(result)],
+        comparator: "number_equal",
+        explanation:
+          "Définition : l’étendue = maximum - minimum.\n\n" +
+          `Méthode : minimum = ${min}, maximum = ${max}.\n\n` +
+          `Calcul : ${max} - ${min} = ${result}.\n\n` +
+          `Conclusion : l’étendue des ventes est ${result}.`,
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "stat_probleme_tpl_4_mediane",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "stat_statistique",
+    microId: "stat_probleme",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Range les valeurs puis prends la centrale.",
+    tags: ["stat_statistique", "probleme", "mediane", "template"],
+    generate: () => {
+      const sorted = [randomInt(2, 6), randomInt(7, 11), randomInt(12, 16), randomInt(17, 20), randomInt(21, 26)];
+      const values = shuffle(sorted);
+      const med = sorted[2];
+      return {
+        text: `Cinq magasins ont vendu : ${values.join(" ; ")} articles. Quelle est la médiane des ventes ?`,
+        format: "short",
+        expected: [String(med)],
+        comparator: "number_equal",
+        explanation:
+          "Définition : la médiane est la valeur centrale de la série rangée.\n\n" +
+          `Méthode : on range : ${sorted.join(" ; ")}.\n\n` +
+          `Calcul : la 3e valeur est ${med}.\n\n` +
+          `Conclusion : la médiane est ${med}.`,
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "stat_probleme_tpl_5_total",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "stat_statistique",
+    microId: "stat_probleme",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Additionne tous les effectifs.",
+    tags: ["stat_statistique", "probleme", "effectif", "template"],
+    generate: () => {
+      const a = randomInt(10, 30);
+      const b = randomInt(10, 30);
+      const c = randomInt(10, 30);
+      const total = a + b + c;
+      return {
+        text: `Un club a ${a} membres en judo, ${b} en danse et ${c} en escalade. Combien de membres le club a-t-il en tout ?`,
+        format: "short",
+        expected: [String(total)],
+        comparator: "number_equal",
+        explanation:
+          "Définition : l’effectif total est la somme des effectifs.\n\n" +
+          "Méthode : on additionne les trois sections.\n\n" +
+          `Calcul : ${a} + ${b} + ${c} = ${total}.\n\n` +
+          `Conclusion : le club a ${total} membres.`,
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "stat_probleme_open_2",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "stat_statistique",
+    microId: "stat_probleme",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Explique quel indicateur choisir pour connaître le niveau moyen d’une classe.",
+    format: "open",
+    expected: ["moyenne", "somme", "divise"],
+    comparator: "contains_keyword",
+    hint: "Niveau moyen = moyenne.",
+    explanation:
+      "Définition : la moyenne donne le niveau global.\n\n" +
+      "Méthode : on additionne les notes et on divise par leur nombre.\n\n" +
+      "Calcul : moyenne = somme ÷ effectif.\n\n" +
+      "Conclusion : pour le niveau moyen, on choisit la moyenne.",
+    tags: ["stat_statistique", "probleme", "open"],
+  },
+
+  // ---------- STAT_DEFIS ----------
+  {
+    kind: "fixed",
+    id: "stat_defi_fixed_2",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "stat_statistique",
+    microId: "stat_defi",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Une série est : 4 ; 4 ; 4 ; 4. Que vaut son étendue ?",
+    format: "qcm",
+    choices: ["0", "4", "16", "1"],
+    expected: ["0"],
+    comparator: "mcq_exact",
+    hint: "Toutes les valeurs sont identiques.",
+    explanation:
+      "Définition : l’étendue = maximum - minimum.\n\n" +
+      "Méthode : ici, maximum = minimum = 4.\n\n" +
+      "Calcul : 4 - 4 = 0.\n\n" +
+      "Conclusion : l’étendue est 0 (aucune dispersion).",
+    tags: ["stat_statistique", "defi", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "stat_defi_fixed_3",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "stat_statistique",
+    microId: "stat_defi",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Un élève dit : « ajouter une note de 0 ne change pas la moyenne ». A-t-il raison ?",
+    format: "qcm",
+    choices: ["non", "oui"],
+    expected: ["non"],
+    comparator: "mcq_exact",
+    hint: "Le nombre de valeurs change.",
+    explanation:
+      "Définition : la moyenne dépend de la somme ET du nombre de valeurs.\n\n" +
+      "Méthode : ajouter un 0 augmente le nombre de valeurs sans augmenter la somme.\n\n" +
+      "Calcul : la somme reste identique mais on divise par un nombre plus grand.\n\n" +
+      "Conclusion : non, la moyenne diminue.",
+    tags: ["stat_statistique", "defi", "moyenne", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "stat_defi_tpl_2_moyenne_ponderee",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "stat_statistique",
+    microId: "stat_defi",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Chaque note compte autant de fois que son effectif.",
+    tags: ["stat_statistique", "defi", "moyenne_ponderee", "template"],
+    generate: () => {
+      const v1 = randomChoice([8, 10, 12]);
+      const v2 = v1 + randomChoice([2, 4]);
+      const e1 = randomInt(2, 5);
+      const e2 = randomInt(2, 5);
+      const total = e1 + e2;
+      const avg = (v1 * e1 + v2 * e2) / total;
+      return {
+        text: `${e1} élèves ont eu ${v1} et ${e2} élèves ont eu ${v2}. Quelle est la moyenne de ces ${total} élèves ?`,
+        format: "short",
+        expected: [formatNumber(avg)],
+        comparator: "number_equal",
+        explanation:
+          "Définition : la moyenne pondérée tient compte des effectifs.\n\n" +
+          "Méthode : on multiplie chaque note par son effectif, on additionne, puis on divise par le total.\n\n" +
+          `Calcul : (${v1} × ${e1} + ${v2} × ${e2}) ÷ ${total} = ${formatNumber(avg)}.\n\n` +
+          `Conclusion : la moyenne est ${formatNumber(avg)}.`,
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "stat_defi_open_2",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "stat_statistique",
+    microId: "stat_defi",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Explique pourquoi la médiane peut mieux représenter une série que la moyenne quand il y a une valeur très grande.",
+    format: "open",
+    expected: ["médiane", "extrême", "moyenne"],
+    comparator: "contains_keyword",
+    hint: "Pense à l’effet d’une valeur extrême.",
+    explanation:
+      "Définition : la médiane est la valeur centrale, peu sensible aux extrêmes.\n\n" +
+      "Méthode : une valeur très grande tire la moyenne vers le haut.\n\n" +
+      "Calcul : la médiane reste proche du centre des données.\n\n" +
+      "Conclusion : avec une valeur extrême, la médiane représente souvent mieux la série.",
+    tags: ["stat_statistique", "defi", "open"],
+  },
 ];

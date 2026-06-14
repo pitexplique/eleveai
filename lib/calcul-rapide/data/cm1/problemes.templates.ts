@@ -15,7 +15,7 @@ export const problemesTemplatesCM1: CalculRapideItem[] = [
     },
     template:
       "Un cahier coûte {{a}} euros et un stylo coûte {{b}} euros. Quel est le total ?",
-    variables: { a: [3, 4, 5, 6], b: [2, 3, 4] },
+    variables: { a: [4, 5, 6, 7], b: [3, 4, 5] },
     answerRule: "a + b",
     hint: "Additionne les deux prix.",
     explanationTemplate: "{{a}} + {{b}} = {{answer}} euros.",
@@ -32,7 +32,7 @@ export const problemesTemplatesCM1: CalculRapideItem[] = [
     durationSec: 60,
     media: { text: "Une règle mesure {{m}} m. Combien cela fait-il en cm ?" },
     template: "Une règle mesure {{m}} m. Combien cela fait-il en cm ?",
-    variables: { m: [4, 5, 6, 7, 10] },
+    variables: { m: [6, 7, 8, 9, 12] },
     answerRule: "m * 100",
     hint: "1 m = 100 cm.",
     explanationTemplate: "{{m}} x 100 = {{answer}} cm.",
@@ -52,7 +52,7 @@ export const problemesTemplatesCM1: CalculRapideItem[] = [
     },
     template:
       "{{n}} cartes sont partagées entre {{p}} joueurs. Combien chaque joueur reçoit-il ?",
-    variables: { n: [36, 48, 60, 80, 84], p: [2, 3, 4, 6] },
+    variables: { n: [840, 1260, 1680, 2100, 2520], p: [3, 4, 5, 7] },
     answerRule: "n / p",
     hint: "C'est une division.",
     explanationTemplate: "{{n}} ÷ {{p}} = {{answer}} cartes.",

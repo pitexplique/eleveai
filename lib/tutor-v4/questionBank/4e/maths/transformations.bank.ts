@@ -1365,4 +1365,604 @@ export const transformationsBank: TutorBankItemV4[] = [
       "Conclusion : les longueurs sont conservées après les deux transformations.",
     tags: ["transformation", "defi", "successives", "propriete"],
   },
+
+  /* =========================================================
+     COMPLÉMENTS (top-up ~10 items / microSkill)
+  ========================================================= */
+
+  // ---------- SYM_AXIALE ----------
+  {
+    kind: "fixed",
+    id: "4e_sym_axiale_fixed_2",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "sym_transformation",
+    microId: "sym_axiale",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Dans une symétrie axiale, l’axe est…",
+    format: "qcm",
+    choices: [
+      "la médiatrice du segment reliant un point à son image",
+      "parallèle au segment [AA']",
+      "toujours horizontal",
+      "le milieu de la figure",
+    ],
+    expected: ["la médiatrice du segment reliant un point à son image"],
+    comparator: "mcq_exact",
+    hint: "L’axe passe au milieu de [AA'] et lui est perpendiculaire.",
+    explanation:
+      "Définition : dans une symétrie axiale, l’axe est la médiatrice de [AA'].\n\n" +
+      "Méthode : on vérifie que l’axe est perpendiculaire à [AA'] et passe par son milieu.\n\n" +
+      "Calcul : c’est la définition de la médiatrice.\n\n" +
+      "Conclusion : l’axe est la médiatrice du segment [AA'].",
+    tags: ["transformation", "symetrie_axiale", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "4e_sym_axiale_fixed_3",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "sym_transformation",
+    microId: "sym_axiale",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Une symétrie axiale conserve-t-elle les longueurs ?",
+    format: "qcm",
+    choices: ["oui", "non"],
+    expected: ["oui"],
+    comparator: "mcq_exact",
+    hint: "Un miroir ne déforme pas.",
+    explanation:
+      "Définition : une symétrie axiale est une isométrie (elle ne déforme pas).\n\n" +
+      "Méthode : on compare la figure et son image.\n\n" +
+      "Calcul : les longueurs sont identiques.\n\n" +
+      "Conclusion : oui, la symétrie axiale conserve les longueurs.",
+    tags: ["transformation", "symetrie_axiale", "propriete", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "4e_sym_axiale_tpl_3",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "sym_transformation",
+    microId: "sym_axiale",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "La distance à l’axe est conservée.",
+    tags: ["transformation", "symetrie_axiale", "distance", "template"],
+    generate: () => {
+      const d = randomChoice([2, 3, 4, 5]);
+      return {
+        text: `Un point A est à ${d} cm de l’axe de symétrie. À quelle distance de l’axe se trouve son image A' ?`,
+        format: "short",
+        expected: [String(d)],
+        comparator: "number_equal",
+        explanation:
+          "Définition : dans une symétrie axiale, un point et son image sont à la même distance de l’axe.\n\n" +
+          "Méthode : on utilise la conservation de la distance à l’axe.\n\n" +
+          `Calcul : A est à ${d} cm, donc A' est aussi à ${d} cm.\n\n` +
+          `Conclusion : A' est à ${d} cm de l’axe.`,
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "4e_sym_axiale_tpl_4",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "sym_transformation",
+    microId: "sym_axiale",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Vérifie que chaque point et son image sont à la même distance de l’axe.",
+    tags: ["transformation", "symetrie_axiale", "template", "canvas"],
+    generate: () => {
+      const axisX = randomChoice([4, 5]);
+      return {
+        text: "La figure rouge est-elle l’image de la figure bleue par cette symétrie axiale ?",
+        format: "qcm",
+        choices: ["oui", "non"],
+        expected: ["oui"],
+        comparator: "mcq_exact",
+        explanation:
+          "Définition : une symétrie axiale utilise l’axe comme miroir.\n\n" +
+          "Méthode : on vérifie l’égalité des distances à l’axe.\n\n" +
+          "Calcul : chaque point et son image sont symétriques par rapport à l’axe.\n\n" +
+          "Conclusion : oui, la figure rouge est l’image par symétrie axiale.",
+        canvas: transformationCanvas({
+          transformation: "symetrie_axiale",
+          grid: { rows: 8, cols: 10 },
+          source: {
+            label: "F",
+            points: [
+              { x: axisX - 2, y: 2 },
+              { x: axisX - 1, y: 2 },
+              { x: axisX - 2, y: 5 },
+            ],
+          },
+          image: {
+            label: "F'",
+            points: [
+              { x: axisX + 2, y: 2 },
+              { x: axisX + 1, y: 2 },
+              { x: axisX + 2, y: 5 },
+            ],
+          },
+          axis: { type: "vertical", x: axisX, label: "axe" },
+        }),
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "4e_sym_axiale_open_2",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "sym_transformation",
+    microId: "sym_axiale",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Explique pourquoi l’axe d’une symétrie axiale est appelé « axe de symétrie ».",
+    format: "open",
+    expected: ["miroir", "axe", "distance"],
+    comparator: "contains_keyword",
+    hint: "Pense à l’effet miroir.",
+    explanation:
+      "Définition : l’axe agit comme un miroir entre la figure et son image.\n\n" +
+      "Méthode : on observe que chaque point et son image sont symétriques par rapport à l’axe.\n\n" +
+      "Calcul : ils sont à la même distance de l’axe, de part et d’autre.\n\n" +
+      "Conclusion : l’axe est un axe de symétrie car il reflète la figure comme un miroir.",
+    tags: ["transformation", "symetrie_axiale", "open"],
+  },
+
+  // ---------- SYM_CENTRALE ----------
+  {
+    kind: "fixed",
+    id: "4e_sym_centrale_fixed_3",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "sym_transformation",
+    microId: "sym_centrale",
+    difficulty: 1,
+    theme: "neutral",
+    text: "Dans une symétrie centrale de centre O, le point O est…",
+    format: "qcm",
+    choices: [
+      "le milieu de [AA']",
+      "un sommet de la figure",
+      "sur l’axe de symétrie",
+      "à l’extérieur du segment [AA']",
+    ],
+    expected: ["le milieu de [AA']"],
+    comparator: "mcq_exact",
+    hint: "O est au centre, entre A et A'.",
+    explanation:
+      "Définition : dans une symétrie centrale, O est le milieu de [AA'].\n\n" +
+      "Méthode : on vérifie l’alignement A, O, A' et l’égalité OA = OA'.\n\n" +
+      "Calcul : O est exactement au milieu.\n\n" +
+      "Conclusion : O est le milieu de [AA'].",
+    tags: ["transformation", "symetrie_centrale", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "4e_sym_centrale_tpl_4",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "sym_transformation",
+    microId: "sym_centrale",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "O doit être le milieu entre chaque point et son image.",
+    tags: ["transformation", "symetrie_centrale", "template", "canvas"],
+    generate: () => ({
+      text: "La figure rouge est-elle l’image de la figure bleue par symétrie centrale de centre O ?",
+      format: "qcm",
+      choices: ["oui", "non"],
+      expected: ["oui"],
+      comparator: "mcq_exact",
+      explanation:
+        "Définition : une symétrie centrale est un demi-tour autour de O.\n\n" +
+        "Méthode : on vérifie que O est le milieu entre chaque point et son image.\n\n" +
+        "Calcul : les points correspondants sont alignés avec O et à la même distance.\n\n" +
+        "Conclusion : oui, la figure rouge est l’image par symétrie centrale.",
+      canvas: transformationCanvas({
+        transformation: "symetrie_centrale",
+        grid: { rows: 8, cols: 8 },
+        source: {
+          label: "F",
+          points: [
+            { x: 1, y: 3 },
+            { x: 3, y: 3 },
+            { x: 1, y: 5 },
+          ],
+        },
+        image: {
+          label: "F'",
+          points: [
+            { x: 7, y: 5 },
+            { x: 5, y: 5 },
+            { x: 7, y: 3 },
+          ],
+        },
+        center: { point: { x: 4, y: 4 }, label: "O" },
+      }),
+    }),
+  },
+  {
+    kind: "fixed",
+    id: "4e_sym_centrale_open_2",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "sym_transformation",
+    microId: "sym_centrale",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Explique pourquoi une symétrie centrale est aussi appelée « demi-tour ».",
+    format: "open",
+    expected: ["demi-tour", "180", "centre"],
+    comparator: "contains_keyword",
+    hint: "Pense à une rotation de 180°.",
+    explanation:
+      "Définition : une symétrie centrale de centre O équivaut à une rotation de 180° autour de O.\n\n" +
+      "Méthode : on imagine la figure qui pivote d’un demi-tour autour de O.\n\n" +
+      "Calcul : 180° correspond à un demi-tour complet.\n\n" +
+      "Conclusion : la symétrie centrale est un demi-tour autour du centre.",
+    tags: ["transformation", "symetrie_centrale", "open"],
+  },
+
+  // ---------- SYM_TRANSLATION ----------
+  {
+    kind: "fixed",
+    id: "4e_sym_translation_fixed_2",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "sym_transformation",
+    microId: "sym_translation",
+    difficulty: 1,
+    theme: "neutral",
+    text: "Lors d’une translation, l’orientation de la figure…",
+    format: "qcm",
+    choices: ["ne change pas", "tourne de 90°", "fait un demi-tour", "est inversée comme un miroir"],
+    expected: ["ne change pas"],
+    comparator: "mcq_exact",
+    hint: "La figure glisse sans tourner.",
+    explanation:
+      "Définition : une translation est un glissement, sans rotation.\n\n" +
+      "Méthode : on observe l’orientation avant et après.\n\n" +
+      "Calcul : la figure garde la même orientation.\n\n" +
+      "Conclusion : l’orientation ne change pas.",
+    tags: ["transformation", "translation", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "4e_sym_translation_fixed_3",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "sym_transformation",
+    microId: "sym_translation",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Une translation est définie par…",
+    format: "qcm",
+    choices: ["un vecteur (déplacement)", "un centre et un angle", "un axe", "un rapport"],
+    expected: ["un vecteur (déplacement)"],
+    comparator: "mcq_exact",
+    hint: "Direction, sens et longueur du glissement.",
+    explanation:
+      "Définition : une translation est définie par un vecteur (déplacement).\n\n" +
+      "Méthode : le vecteur donne la direction, le sens et la longueur.\n\n" +
+      "Calcul : tous les points suivent ce même vecteur.\n\n" +
+      "Conclusion : une translation est définie par un vecteur.",
+    tags: ["transformation", "translation", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "4e_sym_translation_tpl_4",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "sym_transformation",
+    microId: "sym_translation",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Vers la droite : on ajoute à l’abscisse ; vers le bas : on ajoute à l’ordonnée écran.",
+    tags: ["transformation", "translation", "coordonnees", "template"],
+    generate: () => {
+      const x = randomChoice([0, 1, 2, 3]);
+      const y = randomChoice([0, 1, 2]);
+      const dx = randomChoice([2, 3, 4]);
+      const dy = randomChoice([1, 2]);
+      return {
+        text: `Le point A(${x};${y}) subit une translation de ${dx} carreaux vers la droite et ${dy} vers le bas. Quelles sont les coordonnées de A' ?`,
+        format: "qcm",
+        choices: shuffle([
+          `(${x + dx};${y + dy})`,
+          `(${x - dx};${y + dy})`,
+          `(${x + dx};${y - dy})`,
+          `(${dx};${dy})`,
+        ]),
+        expected: [`(${x + dx};${y + dy})`],
+        comparator: "mcq_exact",
+        explanation:
+          "Définition : une translation déplace tous les points de la même façon.\n\n" +
+          "Méthode : on ajoute le déplacement aux coordonnées (ordonnée écran vers le bas).\n\n" +
+          `Calcul : A(${x};${y}) devient A'(${x + dx};${y + dy}).\n\n` +
+          `Conclusion : les coordonnées de A' sont (${x + dx};${y + dy}).`,
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "4e_sym_translation_open_2",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "sym_transformation",
+    microId: "sym_translation",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Explique ce qu’est le vecteur d’une translation.",
+    format: "open",
+    expected: ["direction", "sens", "longueur"],
+    comparator: "contains_keyword",
+    hint: "Trois informations : direction, sens, longueur.",
+    explanation:
+      "Définition : le vecteur d’une translation indique le déplacement à appliquer à chaque point.\n\n" +
+      "Méthode : il précise la direction, le sens et la longueur du glissement.\n\n" +
+      "Calcul : tous les points subissent ce même vecteur.\n\n" +
+      "Conclusion : le vecteur donne la direction, le sens et la longueur du déplacement.",
+    tags: ["transformation", "translation", "open"],
+  },
+
+  // ---------- SYM_ROTATION ----------
+  {
+    kind: "fixed",
+    id: "4e_sym_rotation_fixed_4",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "sym_transformation",
+    microId: "sym_rotation",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Une rotation de 360° autour d’un point ramène la figure…",
+    format: "qcm",
+    choices: [
+      "à sa position de départ",
+      "à un demi-tour",
+      "à un quart de tour",
+      "vers un agrandissement",
+    ],
+    expected: ["à sa position de départ"],
+    comparator: "mcq_exact",
+    hint: "360° = un tour complet.",
+    explanation:
+      "Définition : une rotation de 360° est un tour complet.\n\n" +
+      "Méthode : on imagine la figure qui revient à son point de départ.\n\n" +
+      "Calcul : un tour complet ne change pas la position.\n\n" +
+      "Conclusion : la figure revient à sa position de départ.",
+    tags: ["transformation", "rotation", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "4e_sym_rotation_tpl_4",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "sym_transformation",
+    microId: "sym_rotation",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Une rotation conserve la distance au centre, pas la position.",
+    tags: ["transformation", "rotation", "distance", "template"],
+    generate: () => {
+      const d = randomChoice([3, 4, 5, 6, 8]);
+      return {
+        text: `Par une rotation de centre O, un point M situé à ${d} cm de O devient M'. À quelle distance de O se trouve M' ?`,
+        format: "short",
+        expected: [String(d)],
+        comparator: "number_equal",
+        explanation:
+          "Définition : une rotation conserve la distance au centre.\n\n" +
+          "Méthode : on utilise OM = OM'.\n\n" +
+          `Calcul : OM = ${d} cm, donc OM' = ${d} cm.\n\n` +
+          `Conclusion : M' est à ${d} cm de O.`,
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "4e_sym_rotation_open_2",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "sym_transformation",
+    microId: "sym_rotation",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Quelles informations faut-il pour définir une rotation ?",
+    format: "open",
+    expected: ["centre", "angle", "sens"],
+    comparator: "contains_keyword",
+    hint: "Trois éléments dont le centre.",
+    explanation:
+      "Définition : une rotation est définie par un centre, un angle et un sens.\n\n" +
+      "Méthode : on précise autour de quel point, de combien de degrés et dans quel sens.\n\n" +
+      "Calcul : ces trois éléments déterminent complètement la rotation.\n\n" +
+      "Conclusion : il faut le centre, l’angle et le sens de rotation.",
+    tags: ["transformation", "rotation", "open"],
+  },
+
+  // ---------- SYM_TRANSFORMATION_PROPRIETE ----------
+  {
+    kind: "fixed",
+    id: "4e_sym_transformation_propriete_fixed_5",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "sym_transformation",
+    microId: "sym_transformation_propriete",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Une symétrie centrale conserve-t-elle l’aire d’une figure ?",
+    format: "qcm",
+    choices: ["oui", "non"],
+    expected: ["oui"],
+    comparator: "mcq_exact",
+    hint: "Ces transformations ne déforment pas la figure.",
+    explanation:
+      "Définition : une symétrie centrale est une isométrie.\n\n" +
+      "Méthode : on compare la figure et son image.\n\n" +
+      "Calcul : les longueurs sont conservées, donc l’aire aussi.\n\n" +
+      "Conclusion : oui, l’aire est conservée.",
+    tags: ["transformation", "propriete", "aire", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "4e_sym_transformation_propriete_tpl_3_perimetre",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "sym_transformation",
+    microId: "sym_transformation_propriete",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Le périmètre est conservé par ces transformations.",
+    tags: ["transformation", "propriete", "perimetre", "template"],
+    generate: () => {
+      const perimetre = randomChoice([12, 16, 18, 20, 24]);
+      const transfo = randomChoice(["translation", "rotation", "symétrie centrale", "symétrie axiale"]);
+      return {
+        text: `Une figure a un périmètre de ${perimetre} cm. On lui applique une ${transfo}. Quel est le périmètre de son image ?`,
+        format: "short",
+        expected: [String(perimetre)],
+        comparator: "number_equal",
+        explanation:
+          "Définition : ces transformations conservent les longueurs, donc le périmètre.\n\n" +
+          "Méthode : on identifie que la figure n’est pas déformée.\n\n" +
+          `Calcul : le périmètre de départ est ${perimetre} cm, l’image aussi.\n\n` +
+          `Conclusion : le périmètre image est ${perimetre} cm.`,
+      };
+    },
+  },
+
+  // ---------- SYM_TRANSFORMATION_DEFIS ----------
+  {
+    kind: "fixed",
+    id: "4e_sym_transformation_defi_fixed_3",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "sym_transformation",
+    microId: "sym_transformation_defi",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Une figure est retournée comme dans un miroir par rapport à une droite. Quelle transformation est-ce ?",
+    format: "qcm",
+    choices: ["symétrie axiale", "translation", "rotation", "symétrie centrale"],
+    expected: ["symétrie axiale"],
+    comparator: "mcq_exact",
+    hint: "Effet miroir = axe.",
+    explanation:
+      "Définition : un effet miroir par rapport à une droite est une symétrie axiale.\n\n" +
+      "Méthode : on repère la droite-miroir.\n\n" +
+      "Calcul : la figure est retournée par rapport à l’axe.\n\n" +
+      "Conclusion : c’est une symétrie axiale.",
+    tags: ["transformation", "defi", "symetrie_axiale", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "4e_sym_transformation_defi_fixed_4",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "sym_transformation",
+    microId: "sym_transformation_defi",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Une figure subit une symétrie axiale puis une autre symétrie axiale. Les longueurs sont-elles conservées ?",
+    format: "qcm",
+    choices: ["oui", "non"],
+    expected: ["oui"],
+    comparator: "mcq_exact",
+    hint: "Chaque symétrie axiale conserve les longueurs.",
+    explanation:
+      "Définition : une symétrie axiale est une isométrie.\n\n" +
+      "Méthode : on enchaîne deux transformations qui conservent chacune les longueurs.\n\n" +
+      "Calcul : si chaque étape conserve les longueurs, la composition aussi.\n\n" +
+      "Conclusion : oui, les longueurs sont conservées.",
+    tags: ["transformation", "defi", "successives", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "4e_sym_transformation_defi_tpl_3",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "sym_transformation",
+    microId: "sym_transformation_defi",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Associe l’indice visuel à la bonne transformation.",
+    tags: ["transformation", "defi", "template"],
+    generate: () => {
+      const situation = randomChoice([
+        { text: "La figure fait un quart de tour autour d’un point.", expected: "rotation", wrongs: ["translation", "symétrie axiale", "symétrie centrale"] },
+        { text: "La figure glisse en diagonale sans tourner.", expected: "translation", wrongs: ["rotation", "symétrie axiale", "symétrie centrale"] },
+        { text: "La figure fait un demi-tour autour d’un point.", expected: "symétrie centrale", wrongs: ["translation", "symétrie axiale", "rotation de 90°"] },
+        { text: "La figure se reflète par rapport à une droite verticale.", expected: "symétrie axiale", wrongs: ["translation", "rotation", "symétrie centrale"] },
+      ]);
+      return {
+        text: `${situation.text} Quelle transformation reconnaît-on ?`,
+        format: "qcm",
+        choices: shuffle([situation.expected, ...situation.wrongs]),
+        expected: [situation.expected],
+        comparator: "mcq_exact",
+        explanation:
+          "Définition : chaque transformation a un indice visuel.\n\n" +
+          "Méthode : glissement = translation ; demi-tour = symétrie centrale ; tour autour d’un centre = rotation ; miroir = symétrie axiale.\n\n" +
+          `Calcul : ici, ${situation.text.toLowerCase()}\n\n` +
+          `Conclusion : la transformation est ${situation.expected}.`,
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "4e_sym_transformation_defi_open_2",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "sym_transformation",
+    microId: "sym_transformation_defi",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Explique pourquoi les transformations vues en 4e (symétries, translation, rotation) ne changent pas la taille des figures.",
+    format: "open",
+    expected: ["longueurs", "conservées", "déforme"],
+    comparator: "contains_keyword",
+    hint: "Pense à ce que ces transformations conservent.",
+    explanation:
+      "Définition : ces transformations sont des isométries.\n\n" +
+      "Méthode : elles déplacent ou retournent la figure sans la déformer.\n\n" +
+      "Calcul : les longueurs et les angles sont conservés, donc la taille ne change pas.\n\n" +
+      "Conclusion : la taille est inchangée car les longueurs sont conservées.",
+    tags: ["transformation", "defi", "open"],
+  },
+  {
+    kind: "template",
+    id: "4e_sym_transformation_defi_tpl_4",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "sym_transformation",
+    microId: "sym_transformation_defi",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Un motif répété par glissement régulier.",
+    tags: ["transformation", "defi", "frise", "template"],
+    generate: () => {
+      const dx = randomChoice([2, 3, 4]);
+      return {
+        text: `Sur une frise décorative, un même motif est reproduit en le déplaçant à chaque fois de ${dx} carreaux vers la droite. Quelle transformation est utilisée ?`,
+        format: "qcm",
+        choices: shuffle(["translation", "rotation", "symétrie axiale", "symétrie centrale"]),
+        expected: ["translation"],
+        comparator: "mcq_exact",
+        explanation:
+          "Définition : un déplacement régulier sans rotation est une translation.\n\n" +
+          "Méthode : on observe que le motif glisse toujours de la même façon.\n\n" +
+          `Calcul : chaque motif avance de ${dx} carreaux vers la droite.\n\n` +
+          "Conclusion : la transformation est une translation.",
+      };
+    },
+  },
 ];

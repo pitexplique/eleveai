@@ -21,7 +21,7 @@ export const problemesTemplates5e: CalculRapideItem[] = [
     },
     template: "Une randonnée mesure {{km}} km. Combien cela représente-t-il en mètres ?",
     variables: {
-      km: [2.85, 4.35, 5.55, 7.85, 9.35],
+      km: [3.1, 4.6, 5.8, 8.1, 9.6],
     },
     answerRule: "km * 1000",
     hint: "1 km = 1000 m.",
@@ -44,7 +44,7 @@ export const problemesTemplates5e: CalculRapideItem[] = [
     template:
       "Une bouteille contient {{L}} L de jus. Quelle quantité cela représente-t-il en cL ?",
     variables: {
-      L: [1.6, 1.85, 2.35, 2.85, 3.35],
+      L: [1.85, 2.1, 2.6, 3.1, 3.6],
     },
     answerRule: "L * 100",
     hint: "1 L = 100 cL.",
@@ -66,8 +66,8 @@ export const problemesTemplates5e: CalculRapideItem[] = [
     },
     template: "Une course dure {{h}} h {{m}} min. Quelle est la durée totale en minutes ?",
     variables: {
-      h: [2, 3, 4, 5],
-      m: [16, 21, 26, 36, 51],
+      h: [3, 4, 5, 6],
+      m: [22, 27, 32, 42, 57],
     },
     answerRule: "(h * 60) + m",
     hint: "Transforme les heures en minutes puis ajoute.",
@@ -91,8 +91,8 @@ export const problemesTemplates5e: CalculRapideItem[] = [
     template:
       "Une voiture roule à {{v}} km/h pendant {{t}} heures. Quelle distance parcourt-elle ?",
     variables: {
-      v: [72, 82, 92, 102, 112],
-      t: [3, 4, 5],
+      v: [84, 94, 104, 114, 124],
+      t: [4, 5, 6],
     },
     answerRule: "v * t",
     hint: "Distance = vitesse × temps.",
@@ -115,8 +115,8 @@ export const problemesTemplates5e: CalculRapideItem[] = [
     template:
       "Une terrasse mesure {{L}} m de longueur et {{l}} m de largeur. Quelle est son aire ?",
     variables: {
-      L: [7, 8, 9, 10, 12],
-      l: [5, 6, 7, 8],
+      L: [9, 10, 11, 12, 14],
+      l: [7, 8, 9, 10],
     },
     answerRule: "L * l",
     hint: "Aire = longueur × largeur.",
@@ -143,8 +143,8 @@ export const problemesTemplates5e: CalculRapideItem[] = [
     template:
       "Il fait {{t}} °C. La température augmente de {{a}} °C. Quelle est la nouvelle température ?",
     variables: {
-      t: [-9, -6, -4, -2, 3],
-      a: [5, 6, 7, 9, 12],
+      t: [-10, -7, -5, -3, 4],
+      a: [7, 8, 9, 11, 14],
     },
     answerRule: "t + a",
     hint: "Une augmentation correspond à une addition.",
@@ -167,8 +167,8 @@ export const problemesTemplates5e: CalculRapideItem[] = [
     template:
       "Un plongeur est à {{p}} m. Il descend de {{d}} m. À quelle profondeur est-il ?",
     variables: {
-      p: [-4, -6, -9, -11],
-      d: [4, 5, 6, 8],
+      p: [-5, -7, -10, -12],
+      d: [6, 7, 8, 10],
     },
     answerRule: "p - d",
     hint: "Descendre signifie aller vers les nombres plus petits.",
@@ -191,8 +191,8 @@ export const problemesTemplates5e: CalculRapideItem[] = [
     template:
       "Dans un jeu, tu as {{s}} points puis tu gagnes {{g}} points. Quel est ton score ?",
     variables: {
-      s: [-13, -9, -6, -4, 5],
-      g: [9, 11, 13, 16, 21],
+      s: [-14, -10, -7, -5, 6],
+      g: [15, 17, 19, 22, 27],
     },
     answerRule: "s + g",
     hint: "On additionne le score de départ et les points gagnés.",
@@ -214,8 +214,8 @@ export const problemesTemplates5e: CalculRapideItem[] = [
     },
     template: "Quel est l’écart entre {{a}} °C et {{b}} °C ?",
     variables: {
-      a: [-11, -8, -5, -3],
-      b: [3, 5, 7, 10],
+      a: [-12, -9, -6, -4],
+      b: [5, 7, 9, 12],
     },
     answerRule: "Math.abs(b - a)",
     hint: "L’écart est une distance : il est toujours positif.",
@@ -241,9 +241,9 @@ export const problemesTemplates5e: CalculRapideItem[] = [
     template:
       "Dans un groupe de {{n}} personnes, les {{num}}/{{den}} participent a une activite. Combien de personnes participent ?",
     variables: {
-      n: [80, 140, 200],
-      num: [3, 4],
-      den: [4, 5, 6],
+      n: [630, 840, 1050],
+      num: [4, 5],
+      den: [5, 6, 7],
     },
     answerRule: "n * num / den",
     hint: "Calcule la fraction de la quantite.",
@@ -265,9 +265,9 @@ export const problemesTemplates5e: CalculRapideItem[] = [
     template:
       "Un budget de {{n}} euros est utilise aux {{num}}/{{den}}. Combien d'euros sont utilises ?",
     variables: {
-      n: [80, 100, 120, 140, 170],
-      num: [2, 3, 4],
-      den: [4, 5],
+      n: [300, 330, 360, 390, 420],
+      num: [3, 4, 5],
+      den: [5, 6],
     },
     answerRule: "n * num / den",
     hint: "Calcule la fraction du budget.",
@@ -289,9 +289,9 @@ export const problemesTemplates5e: CalculRapideItem[] = [
     template:
       "Pour {{a}} personnes, il faut {{q}} g de riz. Pour {{b}} personnes, combien faut-il ?",
     variables: {
-      a: [3, 4, 5],
-      q: [225, 325, 425],
-      b: [6, 8, 10],
+      a: [4, 5, 6],
+      q: [720, 780, 840],
+      b: [8, 10, 12],
     },
     answerRule: "q / a * b",
     hint: "Calcule la quantite pour 1 personne, puis multiplie.",
@@ -313,8 +313,8 @@ export const problemesTemplates5e: CalculRapideItem[] = [
     template:
       "Ton compte est a {{s}} euros. Tu ajoutes {{g}} euros. Nouveau solde ?",
     variables: {
-      s: [-21, -16, -9, 6],
-      g: [16, 21, 31, 36],
+      s: [-22, -17, -10, 7],
+      g: [22, 27, 37, 42],
     },
     answerRule: "s + g",
     hint: "Additionne le solde de depart et l'argent ajoute.",
