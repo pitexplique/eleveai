@@ -1140,4 +1140,595 @@ export const graphiquesBank: TutorBankItemV4[] = [
       };
     },
   },
+
+  // ============================================================
+  // TOP-UP — GRAPHIQUE_LIRE
+  // ============================================================
+
+  {
+    kind: "fixed",
+    id: "cm1_graphique_lire_fixed_4_basket",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "graphique",
+    microId: "graphique_lire",
+    difficulty: 1,
+    theme: "sport",
+    text: "Dans le graphique, combien d’élèves font du basket ?",
+    format: "short",
+    expected: ["14"],
+    comparator: "number_equal",
+    hint: "Lis la valeur de la barre Basket.",
+    explanation: exp(
+      "Un graphique associe chaque catégorie à une hauteur de barre.",
+      "On repère la barre Basket et on lit sa valeur.",
+      "La barre Basket vaut 14.",
+      "14 élèves font du basket."
+    ),
+    tags: ["cm1", "graphique", "lire", "sport", "short", "canvas"],
+    canvas: statGraphCanvas({
+      graphType: "barres",
+      title: "Activités sportives",
+      data: [
+        { label: "Football", value: 12 },
+        { label: "Danse", value: 8 },
+        { label: "Natation", value: 10 },
+        { label: "Basket", value: 14 },
+      ],
+      display: { showLabels: true, showValues: true, highlightIndex: 3 },
+    }),
+  },
+
+  {
+    kind: "fixed",
+    id: "cm1_graphique_lire_fixed_5_tomates",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "graphique",
+    microId: "graphique_lire",
+    difficulty: 1,
+    theme: "neutral",
+    text: "Combien de plants de tomates y a-t-il dans le jardin ?",
+    format: "qcm",
+    choices: ["10", "7", "12", "5"],
+    expected: ["10"],
+    comparator: "mcq_exact",
+    hint: "Cherche la barre Tomates.",
+    explanation: exp(
+      "Chaque barre représente une catégorie du jardin.",
+      "On repère la barre Tomates.",
+      "La barre Tomates vaut 10.",
+      "Il y a 10 plants de tomates."
+    ),
+    tags: ["cm1", "graphique", "lire", "qcm", "canvas"],
+    canvas: statGraphCanvas({
+      graphType: "barres",
+      title: "Jardin de l’école",
+      data: [
+        { label: "Tomates", value: 10 },
+        { label: "Salades", value: 7 },
+        { label: "Carottes", value: 12 },
+        { label: "Fleurs", value: 5 },
+      ],
+      display: { showLabels: true, showValues: true, highlightIndex: 0 },
+    }),
+  },
+
+  {
+    kind: "fixed",
+    id: "cm1_graphique_lire_fixed_6_sandwichs",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "graphique",
+    microId: "graphique_lire",
+    difficulty: 1,
+    theme: "reunion",
+    text: "Pour la randonnée, combien de sandwichs ont été préparés ?",
+    format: "short",
+    expected: ["9"],
+    comparator: "number_equal",
+    hint: "Lis la valeur de la barre Sandwichs.",
+    explanation: exp(
+      "Un graphique permet de lire vite une quantité.",
+      "On repère la barre Sandwichs.",
+      "La barre Sandwichs vaut 9.",
+      "9 sandwichs ont été préparés."
+    ),
+    tags: ["cm1", "graphique", "lire", "reunion", "short", "canvas"],
+    canvas: statGraphCanvas({
+      graphType: "batons",
+      title: "Randonnée à La Réunion",
+      data: [
+        { label: "Eau", value: 8 },
+        { label: "Fruits", value: 6 },
+        { label: "Sandwichs", value: 9 },
+        { label: "Casquettes", value: 4 },
+      ],
+      display: { showLabels: true, showValues: true, highlightIndex: 2 },
+    }),
+  },
+
+  {
+    kind: "fixed",
+    id: "cm1_graphique_lire_fixed_7_camembert_equipe",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "graphique",
+    microId: "graphique_lire",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Dans le diagramme, combien de points a marqués l’Équipe B ?",
+    format: "qcm",
+    choices: ["15", "10", "8", "33"],
+    expected: ["15"],
+    comparator: "mcq_exact",
+    hint: "Repère la part de l’Équipe B.",
+    explanation: exp(
+      "Un diagramme circulaire représente chaque équipe par une part.",
+      "On repère la part de l’Équipe B et sa valeur.",
+      "La part de l’Équipe B vaut 15.",
+      "L’Équipe B a marqué 15 points."
+    ),
+    tags: ["cm1", "graphique", "lire", "camembert", "qcm", "canvas"],
+    canvas: statGraphCanvas({
+      graphType: "camembert",
+      title: "Défis de calcul",
+      data: [
+        { label: "Équipe A", value: 10 },
+        { label: "Équipe B", value: 15 },
+        { label: "Équipe C", value: 8 },
+      ],
+      display: { showLabels: true, showValues: true, highlightIndex: 1 },
+    }),
+  },
+
+  // ============================================================
+  // TOP-UP — GRAPHIQUE_COMPLETER
+  // ============================================================
+
+  {
+    kind: "fixed",
+    id: "cm1_graphique_completer_fixed_3_total_jardin",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "graphique",
+    microId: "graphique_completer",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Il y a 10 tomates, 7 salades et 12 carottes. Quel est le total de plants ?",
+    format: "short",
+    expected: ["29"],
+    comparator: "number_equal",
+    hint: "Additionne les trois valeurs.",
+    explanation: exp(
+      "Un total regroupe toutes les valeurs.",
+      "On additionne les plants de chaque catégorie.",
+      "10 + 7 + 12 = 29.",
+      "Le total est 29 plants."
+    ),
+    tags: ["cm1", "graphique", "completer", "total", "canvas"],
+    canvas: statGraphCanvas({
+      graphType: "barres",
+      title: "Jardin de l’école",
+      data: [
+        { label: "Tomates", value: 10 },
+        { label: "Salades", value: 7 },
+        { label: "Carottes", value: 12 },
+      ],
+      display: { showLabels: true, showValues: true },
+    }),
+  },
+
+  {
+    kind: "fixed",
+    id: "cm1_graphique_completer_fixed_4_bananes",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "graphique",
+    microId: "graphique_completer",
+    difficulty: 3,
+    theme: "reunion",
+    text: "Le total est 40 fruits. Il y a 15 mangues et 12 ananas. Quelle est la valeur des bananes ?",
+    format: "short",
+    expected: ["13"],
+    comparator: "number_equal",
+    hint: "Additionne les fruits connus, puis complète jusqu’à 40.",
+    explanation: exp(
+      "On retrouve une valeur manquante grâce au total.",
+      "On additionne les valeurs connues, puis on soustrait au total.",
+      "15 + 12 = 27, puis 40 - 27 = 13.",
+      "La barre Bananes vaut 13."
+    ),
+    tags: ["cm1", "graphique", "completer", "valeur_manquante", "reunion", "canvas"],
+    canvas: statGraphCanvas({
+      graphType: "barres",
+      title: "Fruits vendus",
+      data: [
+        { label: "Mangues", value: 15 },
+        { label: "Ananas", value: 12 },
+        { label: "Bananes", value: 13 },
+      ],
+      display: { showLabels: true, showValues: false, highlightIndex: 2 },
+    }),
+  },
+
+  {
+    kind: "fixed",
+    id: "cm1_graphique_completer_fixed_5_complement_romans",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "graphique",
+    microId: "graphique_completer",
+    difficulty: 2,
+    theme: "neutral",
+    text: "La barre Romans vaut 9. Combien faut-il ajouter pour atteindre 15 ?",
+    format: "short",
+    expected: ["6"],
+    comparator: "number_equal",
+    hint: "Cherche ce qui manque entre 9 et 15.",
+    explanation: exp(
+      "Compléter une barre, c’est chercher ce qui manque.",
+      "On soustrait la valeur actuelle à la valeur visée.",
+      "15 - 9 = 6.",
+      "Il faut ajouter 6."
+    ),
+    tags: ["cm1", "graphique", "completer", "complement", "canvas"],
+    canvas: statGraphCanvas({
+      graphType: "batons",
+      title: "Livres empruntés",
+      data: [
+        { label: "Romans", value: 9 },
+        { label: "BD", value: 14 },
+        { label: "Albums", value: 6 },
+      ],
+      display: { showLabels: true, showValues: true, highlightIndex: 0 },
+    }),
+  },
+
+  {
+    kind: "fixed",
+    id: "cm1_graphique_completer_fixed_6_total_quatre",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "graphique",
+    microId: "graphique_completer",
+    difficulty: 3,
+    theme: "sport",
+    text: "12 élèves font du football, 8 de la danse, 10 de la natation et 14 du basket. Quel est le total ?",
+    format: "short",
+    expected: ["44"],
+    comparator: "number_equal",
+    hint: "Additionne les quatre valeurs.",
+    explanation: exp(
+      "Un total regroupe toutes les valeurs.",
+      "On additionne les élèves de chaque activité.",
+      "12 + 8 + 10 + 14 = 44.",
+      "Le total est 44 élèves."
+    ),
+    tags: ["cm1", "graphique", "completer", "total", "sport", "canvas"],
+    canvas: statGraphCanvas({
+      graphType: "barres",
+      title: "Activités sportives",
+      data: [
+        { label: "Football", value: 12 },
+        { label: "Danse", value: 8 },
+        { label: "Natation", value: 10 },
+        { label: "Basket", value: 14 },
+      ],
+      display: { showLabels: true, showValues: true },
+    }),
+  },
+
+  {
+    kind: "fixed",
+    id: "cm1_graphique_completer_fixed_7_manquante_eau",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "graphique",
+    microId: "graphique_completer",
+    difficulty: 3,
+    theme: "reunion",
+    text: "Le total est 27 objets. Les fruits, sandwichs et casquettes font 19 en tout. Quelle est la valeur de l’eau ?",
+    format: "short",
+    expected: ["8"],
+    comparator: "number_equal",
+    hint: "Soustrais la somme connue au total.",
+    explanation: exp(
+      "On retrouve une valeur manquante grâce au total.",
+      "On soustrait la somme des valeurs connues au total.",
+      "27 - 19 = 8.",
+      "La barre Eau vaut 8."
+    ),
+    tags: ["cm1", "graphique", "completer", "valeur_manquante", "reunion", "canvas"],
+    canvas: statGraphCanvas({
+      graphType: "batons",
+      title: "Randonnée à La Réunion",
+      data: [
+        { label: "Eau", value: 8 },
+        { label: "Fruits", value: 6 },
+        { label: "Sandwichs", value: 9 },
+        { label: "Casquettes", value: 4 },
+      ],
+      display: { showLabels: true, showValues: false, highlightIndex: 0 },
+    }),
+  },
+
+  // ============================================================
+  // TOP-UP — GRAPHIQUE_INTERPRETER
+  // ============================================================
+
+  {
+    kind: "fixed",
+    id: "cm1_graphique_interpreter_fixed_3_plus_grand_jardin",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "graphique",
+    microId: "graphique_interpreter",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Quel légume est le plus cultivé dans le jardin ?",
+    format: "qcm",
+    choices: ["Carottes", "Tomates", "Salades", "Fleurs"],
+    expected: ["Carottes"],
+    comparator: "mcq_exact",
+    hint: "Cherche la barre la plus haute.",
+    explanation: exp(
+      "Interpréter un graphique, c’est comparer les valeurs.",
+      "Pour le plus cultivé, on cherche la plus grande barre.",
+      "Tomates : 10, Salades : 7, Carottes : 12, Fleurs : 5. La plus grande est 12.",
+      "Le légume le plus cultivé est la carotte."
+    ),
+    tags: ["cm1", "graphique", "interpreter", "plus_grand", "qcm", "canvas"],
+    canvas: statGraphCanvas({
+      graphType: "barres",
+      title: "Jardin de l’école",
+      data: [
+        { label: "Tomates", value: 10 },
+        { label: "Salades", value: 7 },
+        { label: "Carottes", value: 12 },
+        { label: "Fleurs", value: 5 },
+      ],
+      display: { showLabels: true, showValues: true, highlightIndex: 2 },
+    }),
+  },
+
+  {
+    kind: "fixed",
+    id: "cm1_graphique_interpreter_fixed_4_plus_petit",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "graphique",
+    microId: "graphique_interpreter",
+    difficulty: 2,
+    theme: "reunion",
+    text: "De quel objet a-t-on emporté le moins pour la randonnée ?",
+    format: "qcm",
+    choices: ["Casquettes", "Eau", "Fruits", "Sandwichs"],
+    expected: ["Casquettes"],
+    comparator: "mcq_exact",
+    hint: "Cherche la barre la plus basse.",
+    explanation: exp(
+      "Pour le moins emporté, on cherche la plus petite valeur.",
+      "On compare les valeurs des barres.",
+      "Eau : 8, Fruits : 6, Sandwichs : 9, Casquettes : 4. La plus petite est 4.",
+      "On a emporté le moins de casquettes."
+    ),
+    tags: ["cm1", "graphique", "interpreter", "plus_petit", "reunion", "qcm", "canvas"],
+    canvas: statGraphCanvas({
+      graphType: "batons",
+      title: "Randonnée à La Réunion",
+      data: [
+        { label: "Eau", value: 8 },
+        { label: "Fruits", value: 6 },
+        { label: "Sandwichs", value: 9 },
+        { label: "Casquettes", value: 4 },
+      ],
+      display: { showLabels: true, showValues: true, highlightIndex: 3 },
+    }),
+  },
+
+  {
+    kind: "fixed",
+    id: "cm1_graphique_interpreter_fixed_5_difference_legumes",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "graphique",
+    microId: "graphique_interpreter",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Combien y a-t-il de carottes de plus que de salades ?",
+    format: "short",
+    expected: ["5"],
+    comparator: "number_equal",
+    hint: "Compare 12 et 7.",
+    explanation: exp(
+      "Un écart se calcule avec une soustraction.",
+      "On soustrait la plus petite valeur à la plus grande.",
+      "12 - 7 = 5.",
+      "Il y a 5 carottes de plus que de salades."
+    ),
+    tags: ["cm1", "graphique", "interpreter", "difference", "short", "canvas"],
+    canvas: statGraphCanvas({
+      graphType: "barres",
+      title: "Jardin de l’école",
+      data: [
+        { label: "Tomates", value: 10 },
+        { label: "Salades", value: 7 },
+        { label: "Carottes", value: 12 },
+      ],
+      display: { showLabels: true, showValues: true, highlightIndex: 2 },
+    }),
+  },
+
+  {
+    kind: "fixed",
+    id: "cm1_graphique_interpreter_fixed_6_total_sports",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "graphique",
+    microId: "graphique_interpreter",
+    difficulty: 3,
+    theme: "sport",
+    text: "Combien d’élèves ont été interrogés en tout ?",
+    format: "short",
+    expected: ["44"],
+    comparator: "number_equal",
+    hint: "Additionne toutes les barres.",
+    explanation: exp(
+      "Le total d’un graphique est la somme de toutes les valeurs.",
+      "On additionne les barres.",
+      "12 + 8 + 10 + 14 = 44.",
+      "44 élèves ont été interrogés en tout."
+    ),
+    tags: ["cm1", "graphique", "interpreter", "total", "sport", "short", "canvas"],
+    canvas: statGraphCanvas({
+      graphType: "barres",
+      title: "Activités sportives",
+      data: [
+        { label: "Football", value: 12 },
+        { label: "Danse", value: 8 },
+        { label: "Natation", value: 10 },
+        { label: "Basket", value: 14 },
+      ],
+      display: { showLabels: true, showValues: true },
+    }),
+  },
+
+  // ============================================================
+  // TOP-UP — GRAPHIQUE_DEFI
+  // ============================================================
+
+  {
+    kind: "fixed",
+    id: "cm1_graphique_defi_fixed_4_total_jardin",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "graphique",
+    microId: "graphique_defi",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Combien de plants y a-t-il en tout dans le jardin ?",
+    format: "short",
+    expected: ["34"],
+    comparator: "number_equal",
+    hint: "Additionne les quatre barres.",
+    explanation: exp(
+      "Un défi peut demander d’additionner toutes les valeurs.",
+      "On additionne tous les plants.",
+      "10 + 7 + 12 + 5 = 34.",
+      "Il y a 34 plants en tout."
+    ),
+    tags: ["cm1", "graphique", "defi", "total_general", "canvas"],
+    canvas: statGraphCanvas({
+      graphType: "barres",
+      title: "Jardin de l’école",
+      data: [
+        { label: "Tomates", value: 10 },
+        { label: "Salades", value: 7 },
+        { label: "Carottes", value: 12 },
+        { label: "Fleurs", value: 5 },
+      ],
+      display: { showLabels: true, showValues: true },
+    }),
+  },
+
+  {
+    kind: "fixed",
+    id: "cm1_graphique_defi_fixed_5_ecart_extremes_rando",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "graphique",
+    microId: "graphique_defi",
+    difficulty: 4,
+    theme: "reunion",
+    text: "Quelle est la différence entre l’objet le plus emporté et le moins emporté ?",
+    format: "short",
+    expected: ["5"],
+    comparator: "number_equal",
+    hint: "Cherche le plus grand et le plus petit nombre, puis soustrais.",
+    explanation: exp(
+      "Ce défi demande deux étapes : repérer puis calculer.",
+      "On cherche la plus grande valeur et la plus petite.",
+      "Sandwichs : 9 (max), Casquettes : 4 (min). Différence : 9 - 4 = 5.",
+      "La différence est 5."
+    ),
+    tags: ["cm1", "graphique", "defi", "ecart_extremes", "reunion", "canvas"],
+    canvas: statGraphCanvas({
+      graphType: "batons",
+      title: "Randonnée à La Réunion",
+      data: [
+        { label: "Eau", value: 8 },
+        { label: "Fruits", value: 6 },
+        { label: "Sandwichs", value: 9 },
+        { label: "Casquettes", value: 4 },
+      ],
+      display: { showLabels: true, showValues: true },
+    }),
+  },
+
+  {
+    kind: "fixed",
+    id: "cm1_graphique_defi_fixed_6_comparer_equipes",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "graphique",
+    microId: "graphique_defi",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Combien de points l’Équipe B a-t-elle de plus que l’Équipe C ?",
+    format: "short",
+    expected: ["7"],
+    comparator: "number_equal",
+    hint: "Compare les points de l’Équipe B et de l’Équipe C.",
+    explanation: exp(
+      "Pour comparer deux équipes, on calcule leur différence.",
+      "On soustrait la plus petite valeur à la plus grande.",
+      "Équipe B : 15, Équipe C : 8. 15 - 8 = 7.",
+      "L’Équipe B a 7 points de plus."
+    ),
+    tags: ["cm1", "graphique", "defi", "comparer_categories", "canvas"],
+    canvas: statGraphCanvas({
+      graphType: "barres",
+      title: "Défis de calcul",
+      data: [
+        { label: "Équipe A", value: 10 },
+        { label: "Équipe B", value: 15 },
+        { label: "Équipe C", value: 8 },
+      ],
+      display: { showLabels: true, showValues: true },
+    }),
+  },
+
+  {
+    kind: "fixed",
+    id: "cm1_graphique_defi_fixed_7_deux_etapes_fruits",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "graphique",
+    microId: "graphique_defi",
+    difficulty: 4,
+    theme: "reunion",
+    text: "On a vendu 18 mangues et 12 ananas le matin, puis 25 bananes l’après-midi. Combien de fruits en tout ?",
+    format: "short",
+    expected: ["55"],
+    comparator: "number_equal",
+    hint: "Additionne toutes les valeurs.",
+    explanation: exp(
+      "Un défi peut combiner plusieurs valeurs du graphique.",
+      "On additionne les ventes du matin et de l’après-midi.",
+      "18 + 12 + 25 = 55.",
+      "55 fruits ont été vendus en tout."
+    ),
+    tags: ["cm1", "graphique", "defi", "total", "reunion", "canvas"],
+    canvas: statGraphCanvas({
+      graphType: "barres",
+      title: "Fruits vendus au marché",
+      data: [
+        { label: "Mangues", value: 18 },
+        { label: "Ananas", value: 12 },
+        { label: "Bananes", value: 25 },
+      ],
+      display: { showLabels: true, showValues: true },
+    }),
+  },
 ];
