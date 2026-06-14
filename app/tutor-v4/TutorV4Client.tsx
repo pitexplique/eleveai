@@ -423,6 +423,10 @@ const lastUrlSelectionRef = useRef<string>("");
 const questionTopRef = useRef<HTMLDivElement | null>(null);
 const hasForcedTopScrollRef = useRef(false);
 const autoActivatedPairRef = useRef<string | null>(null);
+// Garde synchrone contre le double-envoi : l'état `busy` se met à jour un
+// rendu trop tard, donc un double-clic (fréquent sur mobile) peut lancer
+// deux fois submitAnswer ; le 2e tombait sur « Aucune question choisie ».
+const submitInFlightRef = useRef(false);
 
 function scrollToQuestions() {
   window.setTimeout(() => {
@@ -911,6 +915,10 @@ function continueAfterExplanation() {
   }
 
   async function submitAnswer(submittedAnswer?: string) {
+    if (submitInFlightRef.current) {
+      return;
+    }
+
     if (!sessionId) {
       setFeedback("Aucune session active.");
       return;
@@ -932,6 +940,8 @@ function continueAfterExplanation() {
       return;
     }
 
+    submitInFlightRef.current = true;
+
     try {
       setBusy(true);
 
@@ -952,6 +962,21 @@ function continueAfterExplanation() {
       const data = await res.json();
 
       if (!res.ok) {
+        const message = String(data?.error ?? "");
+
+        // Le serveur a perdu le choix courant (course/persistance de session).
+        // Plutôt que d'afficher une erreur bloquante, on relance la mission :
+        // on réactive la question affichée si possible, sinon on redémarre.
+        if (message.includes("Aucune question choisie")) {
+          try {
+            await activateQuestion(sessionId, currentQuestion);
+            setFeedback("");
+          } catch {
+            await startSession(activeMicroId ?? undefined);
+          }
+          return;
+        }
+
         setFeedback(data?.error ?? "Erreur pendant la correction.");
         return;
       }
@@ -1076,6 +1101,7 @@ function continueAfterExplanation() {
       );
     } finally {
       setBusy(false);
+      submitInFlightRef.current = false;
     }
   }
 
