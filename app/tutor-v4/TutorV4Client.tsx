@@ -652,6 +652,37 @@ useEffect(() => {
     }
   }, [classBoard]);
 
+  // Flèches ← → pour enchaîner les notions (télécommande de présentation),
+  // sauf quand le focus est dans un champ de saisie.
+  useEffect(() => {
+    if (displayMode !== "complete") return;
+
+    function onKey(event: WindowEventMap["keydown"]) {
+      const target = event.target as HTMLElement | null;
+      const tag = target?.tagName;
+      if (
+        tag === "INPUT" ||
+        tag === "TEXTAREA" ||
+        tag === "SELECT" ||
+        target?.isContentEditable
+      ) {
+        return;
+      }
+
+      if (event.key === "ArrowRight") {
+        event.preventDefault();
+        shiftNotion(1);
+      } else if (event.key === "ArrowLeft") {
+        event.preventDefault();
+        shiftNotion(-1);
+      }
+    }
+
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [displayMode, notion, notionOptions, busy]);
+
   const bonnesReponses = sessionResults.filter(Boolean).length;
   const nbTentatives = sessionResults.length;
 
@@ -811,8 +842,11 @@ function continueAfterExplanation() {
     }));
   }
 
-  async function startSession(targetMicroId?: string) {
-    if (!notion) return;
+  async function startSession(targetMicroId?: string, notionOverride?: string) {
+    // notionOverride permet de démarrer immédiatement sur une autre notion
+    // sans attendre la mise à jour d'état (changement de notion par le prof).
+    const activeNotion = notionOverride ?? notion;
+    if (!activeNotion) return;
 
     try {
       setBusy(true);
@@ -828,8 +862,8 @@ function continueAfterExplanation() {
       setElapsedSeconds(0);
       closeSuccessBanner();
       resetWrongAnswerFlow();
-      resetMicroStatusesForNotion(notion);
-      initMicroScoresForNotion(notion);
+      resetMicroStatusesForNotion(activeNotion);
+      initMicroScoresForNotion(activeNotion);
       setActiveMicroId(targetMicroId ?? null);
 
       const res = await fetch("/api/tutor-v4/start", {
@@ -838,7 +872,7 @@ function continueAfterExplanation() {
         body: JSON.stringify({
           classe,
           matiere,
-          notion,
+          notion: activeNotion,
           microId: targetMicroId,
           displayMode,
         }),
@@ -873,6 +907,27 @@ function continueAfterExplanation() {
     } finally {
       setBusy(false);
     }
+  }
+
+  // Change de notion ET démarre directement une mission : pour un prof qui
+  // passe d'une notion à l'autre en classe, plus besoin de recliquer « Démarrer ».
+  function goToNotion(notionId: string) {
+    if (!notionId) return;
+    // Reclic sur la notion déjà en cours : on ne relance pas inutilement.
+    if (notionId === notion && pair) return;
+    setNotion(notionId);
+    setExpandedMicroId(null);
+    void startSession(undefined, notionId);
+  }
+
+  // Notion précédente / suivante (rebouclage), pour enchaîner au clic ou au clavier.
+  function shiftNotion(delta: number) {
+    if (busy || !notionOptions.length) return;
+    const index = notionOptions.indexOf(notion);
+    const base = index === -1 ? 0 : index;
+    const nextIndex =
+      (base + delta + notionOptions.length) % notionOptions.length;
+    goToNotion(notionOptions[nextIndex]);
   }
 
   async function jumpToMicro(microId: string) {
@@ -1335,28 +1390,45 @@ function handleInputKeyDown(
               {classBoard ? "🔍 Affichage classe : on" : "🔍 Affichage classe"}
             </button>
 
-            <select
-              aria-label="Notion"
-              value={notion}
-              onChange={(e) => {
-                const notionId = e.target.value;
-                setNotion(notionId);
-                setPair(null);
-                setCurrentQuestion(null);
-                setSessionId(null);
-                setActiveMicroId(null);
-                resetWrongAnswerFlow();
-                resetMicroStatusesForNotion(notionId);
-                initMicroScoresForNotion(notionId);
-              }}
-              className="min-w-0 flex-1 rounded-2xl border border-slate-300 bg-white px-4 py-2.5 text-sm font-bold text-slate-900 outline-none focus:border-orange-500"
-            >
-              {notionOptions.map((notionId) => (
-                <option key={notionId} value={notionId}>
-                  {notionLabel(notionId, classe, matiere)}
-                </option>
-              ))}
-            </select>
+            {/* Navigation rapide entre notions : ◀ ▶ (ou flèches clavier),
+                et le changement démarre directement une mission. */}
+            <div className="flex min-w-0 flex-1 items-stretch gap-2">
+              <button
+                type="button"
+                onClick={() => shiftNotion(-1)}
+                disabled={busy || notionOptions.length < 2}
+                aria-label="Notion précédente"
+                title="Notion précédente (←)"
+                className="rounded-2xl border border-slate-200 bg-white px-3 py-2.5 text-sm font-black text-slate-700 shadow-sm hover:bg-slate-50 disabled:opacity-40"
+              >
+                ◀
+              </button>
+
+              <select
+                aria-label="Notion"
+                value={notion}
+                onChange={(e) => goToNotion(e.target.value)}
+                disabled={busy}
+                className="min-w-0 flex-1 rounded-2xl border border-slate-300 bg-white px-4 py-2.5 text-sm font-bold text-slate-900 outline-none focus:border-orange-500 disabled:opacity-60"
+              >
+                {notionOptions.map((notionId) => (
+                  <option key={notionId} value={notionId}>
+                    {notionLabel(notionId, classe, matiere)}
+                  </option>
+                ))}
+              </select>
+
+              <button
+                type="button"
+                onClick={() => shiftNotion(1)}
+                disabled={busy || notionOptions.length < 2}
+                aria-label="Notion suivante"
+                title="Notion suivante (→)"
+                className="rounded-2xl border border-slate-200 bg-white px-3 py-2.5 text-sm font-black text-slate-700 shadow-sm hover:bg-slate-50 disabled:opacity-40"
+              >
+                ▶
+              </button>
+            </div>
           </section>
 
           <header className="overflow-hidden rounded-[24px] border border-slate-200 bg-white shadow-lg sm:rounded-[28px]">
