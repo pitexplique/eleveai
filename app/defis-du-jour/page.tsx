@@ -29,7 +29,7 @@ export default function DefisDuJourPage() {
   const eleve =
     eleveContext.eleve ?? eleveContext.currentUser ?? eleveContext.user ?? null;
 
-  const defi = useMemo(() => {
+  const defiDuJour = useMemo(() => {
     const today = new Date().getDay();
 
     const mapping: Record<number, number> = {
@@ -44,12 +44,19 @@ export default function DefisDuJourPage() {
 
     const index = mapping[today] ?? 0;
     const dayConfig = problemeDuJourWeekly.days[index];
-
-    return (
+    const defi =
       problemesFixed.find((p) => p.id === dayConfig.problemId) ??
-      problemesFixed[0]
-    );
+      problemesFixed[0];
+
+    return {
+      defi,
+      index,
+      day: dayConfig.day,
+    };
   }, []);
+
+  const { defi } = defiDuJour;
+  const prenomEleve = eleve?.nom?.trim().split(/\s+/)[0] ?? "élève";
 
   const [selectedDirectionId, setSelectedDirectionId] = useState<string | null>(
     null
@@ -69,15 +76,17 @@ export default function DefisDuJourPage() {
     return value
       .trim()
       .replace(",", ".")
+      .replace(/[^\d.\-a-zàâçéèêëîïôûùüÿñæœ\s]/gi, " ")
       .replace(/\s+/g, " ")
       .toLowerCase();
   }
 
   const normalizedAnswer = normalize(answer);
+  const expectedAnswer = normalize(defi.expectedAnswer);
 
   const isCorrect =
-    normalizedAnswer === normalize(defi.expectedAnswer) ||
-    normalizedAnswer.includes(normalize(defi.expectedAnswer));
+    normalizedAnswer === expectedAnswer ||
+    normalizedAnswer.split(" ").includes(expectedAnswer);
 
   const score = selectedDirection?.type === "open" ? 1 : isCorrect ? 1 : 0;
   const total = 1;
@@ -189,7 +198,7 @@ export default function DefisDuJourPage() {
     >
       <div className="absolute inset-0 bg-slate-950/60" />
 
-      <section className="relative z-10 mx-auto max-w-3xl space-y-5">
+      <section className="relative z-10 mx-auto max-w-4xl space-y-5">
         <div className="text-xs text-slate-300">
           <Link href="/accueil" className="hover:text-emerald-300">
             Accueil
@@ -199,19 +208,23 @@ export default function DefisDuJourPage() {
 
         <header className="overflow-hidden rounded-3xl border border-emerald-500/30 bg-slate-900/75 shadow-2xl backdrop-blur-sm">
           <div className="p-4">
-            <p className="mb-1 text-[11px] font-bold uppercase tracking-wide text-emerald-300">
-              Défi du jour · {defi.theme}
-            </p>
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <p className="text-[11px] font-bold uppercase tracking-wide text-emerald-300">
+                Défi du jour · {defi.theme}
+              </p>
 
-            <h1 className="text-xl font-black text-white sm:text-2xl">
+              <span className="rounded-full border border-emerald-300/30 bg-emerald-300/10 px-3 py-1 text-xs font-black text-emerald-100">
+                Jour {defiDuJour.day}/7
+              </span>
+            </div>
+
+            <h1 className="mt-2 text-2xl font-black text-white sm:text-3xl">
               {defi.title}
             </h1>
 
             {eleve ? (
               <div className="mt-3 rounded-2xl border border-emerald-300/30 bg-emerald-300/10 px-3 py-2 text-xs font-black text-emerald-100">
-                Connecté : {eleve.nom ?? "Élève"} ·{" "}
-                {eleve.code_etablissement ?? ""} ·{" "}
-                {eleve.code_eleve ?? eleve.code_utilisateur ?? ""}
+                Connecté : {prenomEleve}
               </div>
             ) : (
               <div className="mt-3 rounded-2xl border border-amber-300/30 bg-amber-300/10 px-3 py-2 text-xs font-black text-amber-100">
@@ -229,18 +242,18 @@ export default function DefisDuJourPage() {
             />
           </div>
 
-          <div className="space-y-3 p-4">
+          <div className="space-y-3 p-4 sm:p-5">
             <p className="text-sm leading-relaxed text-slate-100 sm:text-base">
               {defi.statement}
             </p>
 
-            <p className="rounded-2xl bg-emerald-400/10 p-3 text-base font-bold leading-relaxed text-emerald-200">
+            <p className="rounded-2xl bg-emerald-400/10 p-4 text-base font-black leading-relaxed text-emerald-100 sm:text-lg">
               {defi.question}
             </p>
           </div>
         </header>
 
-        <section className="rounded-3xl border border-slate-700 bg-slate-900/75 p-4 backdrop-blur-sm">
+        <section className="rounded-3xl border border-slate-700 bg-slate-900/75 p-4 backdrop-blur-sm sm:p-5">
           <h2 className="mb-3 text-base font-black text-white">
             Choisis ton chemin 🧭
           </h2>
@@ -259,7 +272,7 @@ export default function DefisDuJourPage() {
                   }}
                   className={`rounded-2xl border p-3 text-left text-sm font-bold transition ${
                     active
-                      ? "border-emerald-400 bg-emerald-400/10 text-emerald-200"
+                      ? "border-emerald-400 bg-emerald-400/15 text-emerald-100 shadow-lg shadow-emerald-950/30"
                       : "border-slate-700 bg-slate-950/80 text-slate-200 hover:bg-slate-800"
                   }`}
                 >
@@ -271,7 +284,7 @@ export default function DefisDuJourPage() {
         </section>
 
         {selectedDirection ? (
-          <section className="rounded-3xl border border-slate-700 bg-slate-900/75 p-4 backdrop-blur-sm">
+          <section className="rounded-3xl border border-slate-700 bg-slate-900/75 p-4 backdrop-blur-sm sm:p-5">
             <p className="text-sm font-black text-emerald-300">
               {selectedDirection.label}
             </p>
@@ -324,7 +337,7 @@ export default function DefisDuJourPage() {
         ) : null}
 
         {showCorrection ? (
-          <section className="rounded-3xl border border-emerald-500/30 bg-emerald-500/10 p-4 backdrop-blur-sm">
+          <section className="rounded-3xl border border-emerald-500/30 bg-emerald-500/10 p-4 backdrop-blur-sm sm:p-5">
             {selectedDirection?.type !== "open" ? (
               <p className="text-base font-black text-emerald-300">
                 {isCorrect
