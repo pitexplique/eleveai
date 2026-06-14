@@ -8,6 +8,16 @@ function formatComma(n: number | string) {
   return String(n).replace(".", ",");
 }
 
+function expl(calcul: string) {
+  return (
+    "Définition : le calcul mental permet de trouver un résultat sans poser l’opération.\n\n" +
+    "Méthode : on choisit une décomposition simple pour calculer plus vite.\n\n" +
+    "Calcul : " +
+    calcul +
+    "\n\nConclusion : on garde la réponse obtenue."
+  );
+}
+
 export const calculMentalBank: TutorBankItemV4[] = [
   // =========================
   // MENTAL_ADDITION
@@ -1148,4 +1158,78 @@ export const calculMentalBank: TutorBankItemV4[] = [
     };
   },
 },
+
+  // ===== TOP-UP — ADDITION =====
+  { kind: "fixed", id: "entier_addition_mentale_topup_1", niveau: "6e", matiere: "maths", notionId: "entier_calcul_mental", microId: "entier_addition_mentale", difficulty: 1, theme: "neutral",
+    text: "Calcule : 47 + 8", format: "short", expected: ["55"], comparator: "number_equal",
+    hint: "47 + 3 = 50, puis + 5.", explanation: expl("On passe par la dizaine : 47 + 3 = 50, puis + 5 = 55. Donc 47 + 8 = 55."), tags: ["entier_calcul_mental", "addition"] },
+  { kind: "fixed", id: "entier_addition_mentale_topup_2", niveau: "6e", matiere: "maths", notionId: "entier_calcul_mental", microId: "entier_addition_mentale", difficulty: 2, theme: "neutral",
+    text: "Calcule : 256 + 30", format: "short", expected: ["286"], comparator: "number_equal",
+    hint: "Ajoute les dizaines.", explanation: expl("On ajoute 30 : 256 + 30 = 286."), tags: ["entier_calcul_mental", "addition"] },
+  { kind: "fixed", id: "entier_addition_mentale_topup_3", niveau: "6e", matiere: "maths", notionId: "entier_calcul_mental", microId: "entier_addition_mentale", difficulty: 2, theme: "neutral",
+    text: "Calcule : 99 + 15", format: "short", expected: ["114"], comparator: "number_equal",
+    hint: "99 + 1 = 100, puis + 14.", explanation: expl("On arrondit : 99 + 1 = 100, puis + 14 = 114. Donc 99 + 15 = 114."), tags: ["entier_calcul_mental", "addition"] },
+  { kind: "fixed", id: "entier_addition_mentale_topup_4", niveau: "6e", matiere: "maths", notionId: "entier_calcul_mental", microId: "entier_addition_mentale", difficulty: 1, theme: "neutral",
+    text: "Calcule : 340 + 60", format: "short", expected: ["400"], comparator: "number_equal",
+    hint: "40 + 60 = 100.", explanation: expl("340 + 60 = 400 (on complète à la centaine)."), tags: ["entier_calcul_mental", "addition"] },
+
+  // ===== TOP-UP — SOUSTRACTION =====
+  { kind: "fixed", id: "entier_soustraction_mentale_topup_1", niveau: "6e", matiere: "maths", notionId: "entier_calcul_mental", microId: "entier_soustraction_mentale", difficulty: 1, theme: "neutral",
+    text: "Calcule : 83 − 7", format: "short", expected: ["76"], comparator: "number_equal",
+    hint: "83 − 3 = 80, puis − 4.", explanation: expl("On passe par la dizaine : 83 - 3 = 80, puis - 4 = 76. Donc 83 - 7 = 76."), tags: ["entier_calcul_mental", "soustraction"] },
+  { kind: "fixed", id: "entier_soustraction_mentale_topup_2", niveau: "6e", matiere: "maths", notionId: "entier_calcul_mental", microId: "entier_soustraction_mentale", difficulty: 2, theme: "neutral",
+    text: "Calcule : 150 − 40", format: "short", expected: ["110"], comparator: "number_equal",
+    hint: "Enlève les dizaines.", explanation: expl("150 - 40 = 110."), tags: ["entier_calcul_mental", "soustraction"] },
+  { kind: "fixed", id: "entier_soustraction_mentale_topup_3", niveau: "6e", matiere: "maths", notionId: "entier_calcul_mental", microId: "entier_soustraction_mentale", difficulty: 2, theme: "neutral",
+    text: "Calcule : 204 − 19", format: "short", expected: ["185"], comparator: "number_equal",
+    hint: "204 − 20 = 184, puis + 1.", explanation: expl("On enlève 20 puis on rajoute 1 : 204 - 20 = 184, puis + 1 = 185. Donc 204 - 19 = 185."), tags: ["entier_calcul_mental", "soustraction"] },
+  { kind: "fixed", id: "entier_soustraction_mentale_topup_4", niveau: "6e", matiere: "maths", notionId: "entier_calcul_mental", microId: "entier_soustraction_mentale", difficulty: 2, theme: "neutral",
+    text: "Calcule : 100 − 36", format: "short", expected: ["64"], comparator: "number_equal",
+    hint: "Cherche le complément de 36 à 100.", explanation: expl("Le complément de 36 à 100 est 64 (36 + 64 = 100). Donc 100 - 36 = 64."), tags: ["entier_calcul_mental", "soustraction"] },
+
+  // ===== TOP-UP — MULTIPLICATION =====
+  { kind: "fixed", id: "entier_multiplication_mentale_topup_1", niveau: "6e", matiere: "maths", notionId: "entier_calcul_mental", microId: "entier_multiplication_mentale", difficulty: 1, theme: "neutral",
+    text: "Calcule : 6 × 50", format: "short", expected: ["300"], comparator: "number_equal",
+    hint: "6 × 5 = 30, puis × 10.", explanation: expl("6 × 5 = 30, puis × 10 = 300. Donc 6 × 50 = 300."), tags: ["entier_calcul_mental", "multiplication"] },
+  { kind: "fixed", id: "entier_multiplication_mentale_topup_2", niveau: "6e", matiere: "maths", notionId: "entier_calcul_mental", microId: "entier_multiplication_mentale", difficulty: 2, theme: "neutral",
+    text: "Calcule : 25 × 4", format: "short", expected: ["100"], comparator: "number_equal",
+    hint: "25 × 4 = un compte rond.", explanation: expl("25 × 4 = 100."), tags: ["entier_calcul_mental", "multiplication"] },
+  { kind: "fixed", id: "entier_multiplication_mentale_topup_3", niveau: "6e", matiere: "maths", notionId: "entier_calcul_mental", microId: "entier_multiplication_mentale", difficulty: 1, theme: "neutral",
+    text: "Calcule : 12 × 5", format: "short", expected: ["60"], comparator: "number_equal",
+    hint: "12 × 5 = 12 × 10 ÷ 2.", explanation: expl("12 × 5 = 60 (la moitié de 12 × 10 = 120)."), tags: ["entier_calcul_mental", "multiplication"] },
+  { kind: "fixed", id: "entier_multiplication_mentale_topup_4", niveau: "6e", matiere: "maths", notionId: "entier_calcul_mental", microId: "entier_multiplication_mentale", difficulty: 2, theme: "neutral",
+    text: "Calcule : 8 × 9", format: "short", expected: ["72"], comparator: "number_equal",
+    hint: "Table de 8 ou de 9.", explanation: expl("8 × 9 = 72."), tags: ["entier_calcul_mental", "multiplication"] },
+
+  // ===== TOP-UP — DIVISION =====
+  { kind: "fixed", id: "entier_division_mentale_topup_1", niveau: "6e", matiere: "maths", notionId: "entier_calcul_mental", microId: "entier_division_mentale", difficulty: 1, theme: "neutral",
+    text: "Calcule : 80 ÷ 4", format: "short", expected: ["20"], comparator: "number_equal",
+    hint: "8 ÷ 4 = 2, puis × 10.", explanation: expl("8 ÷ 4 = 2, donc 80 ÷ 4 = 20."), tags: ["entier_calcul_mental", "division"] },
+  { kind: "fixed", id: "entier_division_mentale_topup_2", niveau: "6e", matiere: "maths", notionId: "entier_calcul_mental", microId: "entier_division_mentale", difficulty: 2, theme: "neutral",
+    text: "Calcule : 96 ÷ 8", format: "short", expected: ["12"], comparator: "number_equal",
+    hint: "Cherche dans la table de 8.", explanation: expl("8 × 12 = 96, donc 96 ÷ 8 = 12."), tags: ["entier_calcul_mental", "division"] },
+  { kind: "fixed", id: "entier_division_mentale_topup_3", niveau: "6e", matiere: "maths", notionId: "entier_calcul_mental", microId: "entier_division_mentale", difficulty: 2, theme: "neutral",
+    text: "Calcule : 150 ÷ 5", format: "short", expected: ["30"], comparator: "number_equal",
+    hint: "15 ÷ 5 = 3, puis × 10.", explanation: expl("15 ÷ 5 = 3, donc 150 ÷ 5 = 30."), tags: ["entier_calcul_mental", "division"] },
+  { kind: "fixed", id: "entier_division_mentale_topup_4", niveau: "6e", matiere: "maths", notionId: "entier_calcul_mental", microId: "entier_division_mentale", difficulty: 1, theme: "neutral",
+    text: "Calcule : 72 ÷ 6", format: "short", expected: ["12"], comparator: "number_equal",
+    hint: "Table de 6.", explanation: expl("6 × 12 = 72, donc 72 ÷ 6 = 12."), tags: ["entier_calcul_mental", "division"] },
+
+  // ===== TOP-UP — STRATEGIE =====
+  { kind: "fixed", id: "entier_strategie_mentale_topup_1", niveau: "6e", matiere: "maths", notionId: "entier_calcul_mental", microId: "entier_strategie_mentale", difficulty: 1, theme: "neutral",
+    text: "Donne le double de 35.", format: "short", expected: ["70"], comparator: "number_equal",
+    hint: "Doubler, c’est multiplier par 2.", explanation: expl("Le double de 35 est 35 × 2 = 70."), tags: ["entier_calcul_mental", "strategie"] },
+  { kind: "fixed", id: "entier_strategie_mentale_topup_2", niveau: "6e", matiere: "maths", notionId: "entier_calcul_mental", microId: "entier_strategie_mentale", difficulty: 1, theme: "neutral",
+    text: "Donne la moitié de 48.", format: "short", expected: ["24"], comparator: "number_equal",
+    hint: "Moitié = diviser par 2.", explanation: expl("La moitié de 48 est 48 ÷ 2 = 24."), tags: ["entier_calcul_mental", "strategie"] },
+  { kind: "fixed", id: "entier_strategie_mentale_topup_3", niveau: "6e", matiere: "maths", notionId: "entier_calcul_mental", microId: "entier_strategie_mentale", difficulty: 2, theme: "neutral",
+    text: "Pour multiplier un nombre par 10, on...", format: "qcm",
+    choices: ["ajoute un zéro à droite", "enlève un zéro", "ajoute 10", "multiplie par 2"],
+    expected: ["ajoute un zéro à droite"], comparator: "mcq_exact",
+    hint: "37 × 10 = 370.", explanation: expl("Pour multiplier un entier par 10, on ajoute un zéro à droite : par exemple 37 × 10 = 370."), tags: ["entier_calcul_mental", "strategie", "qcm"] },
+  { kind: "fixed", id: "entier_strategie_mentale_topup_4", niveau: "6e", matiere: "maths", notionId: "entier_calcul_mental", microId: "entier_strategie_mentale", difficulty: 2, theme: "neutral",
+    text: "Pour calculer 99 + 47 rapidement, la meilleure stratégie est de...", format: "qcm",
+    choices: ["faire 100 + 47 puis enlever 1", "faire 99 + 40 puis enlever 7", "faire 47 − 99", "poser l’addition"],
+    expected: ["faire 100 + 47 puis enlever 1"], comparator: "mcq_exact",
+    hint: "99 est proche de 100.", explanation: expl("99 est proche de 100. On calcule 100 + 47 = 147, puis on enlève 1 : 146. Donc 99 + 47 = 146."), tags: ["entier_calcul_mental", "strategie", "qcm"] },
 ];
