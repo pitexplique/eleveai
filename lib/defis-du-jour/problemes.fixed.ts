@@ -55,6 +55,285 @@ export const problemesFixed: ProblemeDuJour[] = [
   },
 
   {
+    id: "mission_lagon_surface_002",
+    title: "Mission lagon : quadriller la zone",
+    theme: "Aires & multiplication",
+    image: "/images/defis-du-jour/mission-lagon.webp",
+    level: 2,
+    statement:
+      "Pour observer le lagon sans déranger les espèces, une association découpe une zone en rectangles. La zone étudiée mesure 80 m de long et 35 m de large.",
+    question:
+      "Quelle est l'aire de la zone observée en mètres carrés ? Si un groupe d'élèves étudie 700 m², quelle fraction de la zone totale observe-t-il ?",
+    expectedAnswer: "2800 1/4",
+    explanation:
+      "Aire du rectangle : 80 × 35 = 2 800 m². Le groupe observe 700 m². Comme 700 × 4 = 2 800, cela représente 1/4 de la zone totale.",
+    directions: [
+      {
+        id: "aire",
+        label: "Calculer l'aire",
+        type: "guided",
+        content:
+          "Pour un rectangle, aire = longueur × largeur.\nCalcule 80 × 35.",
+      },
+      {
+        id: "fraction",
+        label: "Trouver la fraction",
+        type: "guided",
+        content:
+          "Compare 700 m² à 2 800 m².\nCherche par combien il faut multiplier 700 pour obtenir 2 800.",
+      },
+      {
+        id: "indice",
+        label: "Demander un indice",
+        type: "hint",
+        content:
+          "80 × 35 = 80 × 30 + 80 × 5. Ensuite, 700 est le quart de 2 800.",
+      },
+      {
+        id: "open",
+        label: "Expliquer avec mes mots",
+        type: "open",
+        content:
+          "Explique pourquoi quadriller une zone aide à mieux observer un milieu naturel.",
+      },
+    ],
+  },
+
+  {
+    id: "mission_lagon_tortues_003",
+    title: "Mission lagon : le passage des tortues",
+    theme: "Tableau & moyenne",
+    image: "/images/defis-du-jour/mission-lagon.webp",
+    level: 3,
+    statement:
+      "Pendant quatre matinées, des élèves notent le nombre de tortues observées dans le lagon : lundi 3, mardi 5, mercredi 4, jeudi 8.",
+    question:
+      "Combien de tortues ont été observées au total ? Quelle est la moyenne par matinée ?",
+    expectedAnswer: "20 5",
+    explanation:
+      "Total : 3 + 5 + 4 + 8 = 20 tortues. Il y a 4 matinées, donc la moyenne est 20 ÷ 4 = 5 tortues par matinée.",
+    directions: [
+      {
+        id: "total",
+        label: "Additionner les observations",
+        type: "guided",
+        content:
+          "Additionne les quatre nombres : 3 + 5 + 4 + 8.",
+      },
+      {
+        id: "moyenne",
+        label: "Calculer la moyenne",
+        type: "guided",
+        content:
+          "Une moyenne se calcule en divisant le total par le nombre d'observations.",
+      },
+      {
+        id: "indice",
+        label: "Demander un indice",
+        type: "hint",
+        content:
+          "Il y a 4 matinées. Après avoir trouvé le total, divise-le par 4.",
+      },
+      {
+        id: "open",
+        label: "Expliquer avec mes mots",
+        type: "open",
+        content:
+          "Explique pourquoi une moyenne peut aider à comparer deux périodes d'observation.",
+      },
+    ],
+  },
+
+  {
+    id: "mission_lagon_coraux_004",
+    title: "Mission lagon : les coraux fragiles",
+    theme: "Pourcentages & comparaison",
+    image: "/images/defis-du-jour/mission-lagon.webp",
+    level: 4,
+    statement:
+      "Dans une petite zone du récif, 360 coraux sont observés. Les élèves estiment que 15 % sont blanchis et que 70 % semblent en bonne santé.",
+    question:
+      "Combien de coraux sont blanchis ? Combien semblent en bonne santé ? Combien restent dans un état intermédiaire ?",
+    expectedAnswer: "54 252 54",
+    explanation:
+      "15 % de 360 = 54 coraux blanchis. 70 % de 360 = 252 coraux en bonne santé. Il reste 360 − 54 − 252 = 54 coraux dans un état intermédiaire.",
+    directions: [
+      {
+        id: "blanchis",
+        label: "Calculer 15 %",
+        type: "guided",
+        content:
+          "10 % de 360 = 36 et 5 % de 360 = 18.\nDonc 15 % = 36 + 18.",
+      },
+      {
+        id: "bonne_sante",
+        label: "Calculer 70 %",
+        type: "guided",
+        content:
+          "70 %, c'est 7 fois 10 %.\nCalcule 7 × 36.",
+      },
+      {
+        id: "reste",
+        label: "Calculer le reste",
+        type: "guided",
+        content:
+          "Soustrais les deux groupes connus au total : 360 − 54 − 252.",
+      },
+      {
+        id: "indice",
+        label: "Demander un indice",
+        type: "hint",
+        content:
+          "Les trois groupes doivent ensemble faire 360 coraux.",
+      },
+      {
+        id: "open",
+        label: "Expliquer avec mes mots",
+        type: "open",
+        content:
+          "Explique ce que peut indiquer le blanchissement des coraux pour un lagon.",
+      },
+    ],
+  },
+
+  {
+    id: "mission_lagon_dechets_005",
+    title: "Mission lagon : nettoyer sans compter",
+    theme: "Proportionnalité & unités",
+    image: "/images/defis-du-jour/mission-lagon.webp",
+    level: 3,
+    statement:
+      "Lors d'une opération de nettoyage, 6 élèves ramassent 18 kg de déchets en une heure. On suppose que chaque élève ramasse la même masse.",
+    question:
+      "Combien de kilogrammes un élève ramasse-t-il en moyenne ? Combien 10 élèves pourraient-ils ramasser au même rythme ?",
+    expectedAnswer: "3 30",
+    explanation:
+      "Un élève ramasse en moyenne 18 ÷ 6 = 3 kg. Au même rythme, 10 élèves ramasseraient 10 × 3 = 30 kg.",
+    directions: [
+      {
+        id: "un_eleve",
+        label: "Trouver pour 1 élève",
+        type: "guided",
+        content:
+          "Si 6 élèves ramassent 18 kg, alors 1 élève ramasse 18 ÷ 6 kg.",
+      },
+      {
+        id: "dix_eleves",
+        label: "Passer à 10 élèves",
+        type: "guided",
+        content:
+          "Quand tu connais la masse pour 1 élève, multiplie par 10.",
+      },
+      {
+        id: "indice",
+        label: "Demander un indice",
+        type: "hint",
+        content:
+          "18 ÷ 6 = 3. Il reste à calculer 10 × 3.",
+      },
+      {
+        id: "open",
+        label: "Expliquer avec mes mots",
+        type: "open",
+        content:
+          "Explique pourquoi les déchets près du lagon peuvent poser problème aux animaux marins.",
+      },
+    ],
+  },
+
+  {
+    id: "mission_lagon_temperature_006",
+    title: "Mission lagon : l'eau se réchauffe",
+    theme: "Écarts & décimaux",
+    image: "/images/defis-du-jour/mission-lagon.webp",
+    level: 4,
+    statement:
+      "Des élèves mesurent la température de l'eau du lagon. Le matin, elle est de 26,4 °C. L'après-midi, elle atteint 29,1 °C.",
+    question:
+      "De combien de degrés la température a-t-elle augmenté ? Si le seuil d'alerte est 30 °C, combien manque-t-il pour l'atteindre ?",
+    expectedAnswer: "2.7 0.9",
+    explanation:
+      "Augmentation : 29,1 − 26,4 = 2,7 °C. Écart au seuil d'alerte : 30 − 29,1 = 0,9 °C.",
+    directions: [
+      {
+        id: "augmentation",
+        label: "Calculer l'augmentation",
+        type: "guided",
+        content:
+          "Soustrais la température du matin à celle de l'après-midi : 29,1 − 26,4.",
+      },
+      {
+        id: "seuil",
+        label: "Comparer au seuil",
+        type: "guided",
+        content:
+          "Pour savoir combien il manque avant 30 °C, calcule 30 − 29,1.",
+      },
+      {
+        id: "indice",
+        label: "Demander un indice",
+        type: "hint",
+        content:
+          "Tu peux écrire 30 comme 30,0 pour mieux soustraire les décimaux.",
+      },
+      {
+        id: "open",
+        label: "Expliquer avec mes mots",
+        type: "open",
+        content:
+          "Explique pourquoi la température de l'eau est importante pour les coraux et les poissons.",
+      },
+    ],
+  },
+
+  {
+    id: "mission_lagon_synthese_007",
+    title: "Mission lagon : bilan des observateurs",
+    theme: "Synthèse & argumentation",
+    image: "/images/defis-du-jour/mission-lagon.webp",
+    level: 5,
+    statement:
+      "Cette semaine, tu as étudié le lagon avec des nombres : 240 poissons, 90 poissons-perroquets, 60 demoiselles, 2 800 m² observés, 20 tortues comptées, 360 coraux suivis et 30 kg de déchets possibles avec 10 élèves.",
+    question:
+      "Rédige une courte présentation de la mission lagon en utilisant au moins 4 données chiffrées. Explique pourquoi les maths peuvent aider à protéger le lagon.",
+    expectedAnswer: "explication",
+    explanation:
+      "Une bonne réponse utilise plusieurs données et les relie au sens de la mission. Exemple : Les élèves ont observé 240 poissons, dont 90 poissons-perroquets et 60 demoiselles. Ils ont aussi étudié 2 800 m² de lagon et suivi 360 coraux. Les maths permettent de compter, comparer et repérer les changements pour mieux protéger le milieu.",
+    directions: [
+      {
+        id: "choisir_chiffres",
+        label: "Choisir les chiffres clés",
+        type: "guided",
+        content:
+          "Choisis au moins 4 chiffres parmi : 240 poissons, 90 poissons-perroquets, 60 demoiselles, 2 800 m², 20 tortues, 360 coraux, 30 kg.",
+      },
+      {
+        id: "organiser",
+        label: "Organiser ma réponse",
+        type: "guided",
+        content:
+          "Écris en 3 phrases :\n1. Présente la mission.\n2. Donne des observations chiffrées.\n3. Explique à quoi servent ces nombres.",
+      },
+      {
+        id: "indice",
+        label: "Demander un indice",
+        type: "hint",
+        content:
+          "Tu peux commencer par : Les maths aident à protéger le lagon parce qu'elles permettent de mesurer...",
+      },
+      {
+        id: "open",
+        label: "Expliquer avec mes mots",
+        type: "open",
+        content:
+          "Rédige comme si tu présentais la mission à une autre classe.",
+      },
+    ],
+  },
+
+  // Anciens défis Grand Raid conservés hors programmation.
+  // On les garde comme réserve pour une future semaine sportive.
+  {
     id: "grand_raid_distance_001",
     title: "Grand Raid : les kilomètres de l'île",
     theme: "Distance & addition",

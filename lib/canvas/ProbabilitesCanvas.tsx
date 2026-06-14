@@ -22,6 +22,31 @@ function couleur(index: number) {
   return COULEURS[index % COULEURS.length];
 }
 
+// Certaines banques décrivent les couleurs par leur nom français (ex. "rouge"),
+// qui n'est pas une couleur CSS valide → le SVG retombe sur du noir.
+// On normalise vers un hex ; les valeurs déjà en hex/CSS passent inchangées.
+const COLOR_MAP: Record<string, string> = {
+  rouge: "#ef4444",
+  bleu: "#3b82f6",
+  vert: "#22c55e",
+  jaune: "#eab308",
+  violet: "#a855f7",
+  orange: "#f97316",
+  rose: "#ec4899",
+  noir: "#0f172a",
+  blanc: "#ffffff",
+  gris: "#9ca3af",
+  marron: "#92400e",
+};
+
+function resolveColor(c: string | undefined, index: number) {
+  if (c) {
+    const mapped = COLOR_MAP[c.trim().toLowerCase()];
+    return mapped ?? c;
+  }
+  return couleur(index);
+}
+
 function isDiceFace(face: number): face is DiceFace {
   return face === 1 || face === 2 || face === 3 || face === 4 || face === 5 || face === 6;
 }
@@ -166,7 +191,7 @@ export default function CanvasProbabilites({ figure }: Props) {
               <g key={`${seg.label}-${index}`}>
                 <path
                   d={d}
-                  fill={seg.couleur ?? couleur(index)}
+                  fill={resolveColor(seg.couleur, index)}
                   stroke="#0f172a"
                   strokeWidth="2"
                 />
@@ -223,7 +248,7 @@ export default function CanvasProbabilites({ figure }: Props) {
                   cx={x}
                   cy={y}
                   r="17"
-                  fill={el.couleur}
+                  fill={resolveColor(el.couleur, index)}
                   stroke="#0f172a"
                   strokeWidth="2"
                 />

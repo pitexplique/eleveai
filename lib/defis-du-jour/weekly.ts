@@ -1,9 +1,9 @@
 // lib/defis-du-jour/weekly.ts
 
 export const problemeDuJourWeekly = {
-  id: "reunion-maths-semaine-1",
+  id: "mission-lagon-reunion-semaine-1",
 
-  title: "Défis du jour — Maths et La Réunion",
+  title: "Défis du jour — Mission lagon",
 
   days: [
     {
@@ -13,32 +13,32 @@ export const problemeDuJourWeekly = {
 
     {
       day: 2,
-      problemId: "grand_raid_vitesse_001",
+      problemId: "mission_lagon_surface_002",
     },
 
     {
       day: 3,
-      problemId: "grand_raid_denivele_001",
+      problemId: "mission_lagon_tortues_003",
     },
 
     {
       day: 4,
-      problemId: "grand_raid_ravitaillement_001",
+      problemId: "mission_lagon_coraux_004",
     },
 
     {
       day: 5,
-      problemId: "grand_raid_abandon_001",
+      problemId: "mission_lagon_dechets_005",
     },
 
     {
       day: 6,
-      problemId: "grand_raid_classement_001",
+      problemId: "mission_lagon_temperature_006",
     },
 
     {
       day: 7,
-      problemId: "grand_raid_synthese_001",
+      problemId: "mission_lagon_synthese_007",
     },
   ],
 };

@@ -1175,4 +1175,389 @@ export const donneesBank: TutorBankItemV4[] = [
       "Conclusion : on peut alors formuler une conclusion claire et justifiée.",
     tags: ["stat_donnee", "defi", "open", "demarche_scientifique"],
   },
+
+  /* =========================
+     DATA_LIRE_CIRCULAIRE (diagramme circulaire / camembert)
+  ========================= */
+
+  {
+    kind: "fixed",
+    id: "6e_stat_stat_donnee_lire_circulaire_fixed_1",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "stat_donnee",
+    microId: "stat_donnee_lire_circulaire",
+    difficulty: 1,
+    theme: "neutral",
+    text: "Dans ce diagramme circulaire, combien d’élèves viennent à l’école en bus ?",
+    format: "short",
+    expected: ["10"],
+    comparator: "number_equal",
+    hint: "Repère le secteur « Bus » et lis sa valeur.",
+    explanation:
+      "Définition : un diagramme circulaire partage un disque en secteurs, un par catégorie.\n\n" +
+      "Méthode : on repère le secteur demandé, puis on lit la valeur indiquée.\n\n" +
+      "Observation : le secteur « Bus » indique 10 élèves.\n\n" +
+      "Conclusion : 10 élèves viennent en bus.",
+    tags: ["stat_donnee", "circulaire", "camembert", "lecture", "canvas"],
+    canvas: statGraphCanvas({
+      graphType: "camembert",
+      title: "Comment viens-tu à l’école ?",
+      data: [
+        { label: "À pied", value: 6 },
+        { label: "Bus", value: 10 },
+        { label: "Voiture", value: 4 },
+      ],
+      display: { showLabels: true, showValues: true, highlightIndex: 1 },
+    }),
+  },
+
+  {
+    kind: "fixed",
+    id: "6e_stat_stat_donnee_lire_circulaire_fixed_2_plus_grand",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "stat_donnee",
+    microId: "stat_donnee_lire_circulaire",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Dans ce diagramme circulaire, quel est le sport préféré (le plus grand secteur) ?",
+    format: "qcm",
+    choices: ["Football", "Natation", "Danse", "Basket"],
+    expected: ["Football"],
+    comparator: "mcq_exact",
+    hint: "Le plus grand secteur correspond à la plus grande valeur.",
+    explanation:
+      "Définition : dans un diagramme circulaire, plus un secteur est grand, plus la catégorie est fréquente.\n\n" +
+      "Méthode : on compare la taille des secteurs ou les valeurs.\n\n" +
+      "Observation : Football = 14, Natation = 8, Danse = 6, Basket = 2. Le plus grand est 14.\n\n" +
+      "Conclusion : le sport préféré est le football.",
+    tags: ["stat_donnee", "circulaire", "camembert", "comparer", "canvas"],
+    canvas: statGraphCanvas({
+      graphType: "camembert",
+      title: "Sport préféré de la classe",
+      data: [
+        { label: "Football", value: 14 },
+        { label: "Natation", value: 8 },
+        { label: "Danse", value: 6 },
+        { label: "Basket", value: 2 },
+      ],
+      display: { showLabels: true, showValues: true, highlightIndex: 0 },
+    }),
+  },
+
+  {
+    kind: "fixed",
+    id: "6e_stat_stat_donnee_lire_circulaire_fixed_3_plus_petit",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "stat_donnee",
+    microId: "stat_donnee_lire_circulaire",
+    difficulty: 2,
+    theme: "reunion",
+    text: "Dans ce diagramme circulaire des fruits vendus, quel fruit a été le moins vendu ?",
+    format: "qcm",
+    choices: ["Ananas", "Mangues", "Letchis", "Bananes"],
+    expected: ["Ananas"],
+    comparator: "mcq_exact",
+    hint: "Le plus petit secteur correspond à la plus petite valeur.",
+    explanation:
+      "Définition : un petit secteur correspond à une petite quantité.\n\n" +
+      "Méthode : on cherche le plus petit secteur ou la plus petite valeur.\n\n" +
+      "Observation : Mangues = 12, Letchis = 9, Bananes = 7, Ananas = 4. Le plus petit est 4.\n\n" +
+      "Conclusion : le fruit le moins vendu est l’ananas.",
+    tags: ["stat_donnee", "circulaire", "camembert", "comparer", "reunion", "canvas"],
+    canvas: statGraphCanvas({
+      graphType: "camembert",
+      title: "Fruits vendus au marché",
+      data: [
+        { label: "Mangues", value: 12 },
+        { label: "Letchis", value: 9 },
+        { label: "Bananes", value: 7 },
+        { label: "Ananas", value: 4 },
+      ],
+      display: { showLabels: true, showValues: true, highlightIndex: 3 },
+    }),
+  },
+
+  {
+    kind: "fixed",
+    id: "6e_stat_stat_donnee_lire_circulaire_fixed_4_moitie",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "stat_donnee",
+    microId: "stat_donnee_lire_circulaire",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Dans ce diagramme circulaire (20 élèves au total), quelle catégorie occupe la moitié du disque ?",
+    format: "qcm",
+    choices: ["Chien", "Chat", "Lapin", "Oiseau"],
+    expected: ["Chien"],
+    comparator: "mcq_exact",
+    hint: "La moitié du total, c’est 20 ÷ 2 = 10.",
+    explanation:
+      "Définition : un secteur qui occupe la moitié du disque correspond à la moitié du total.\n\n" +
+      "Méthode : on calcule la moitié du total, puis on cherche la catégorie qui a cette valeur.\n\n" +
+      "Observation : total = 20, donc la moitié = 10. Le secteur « Chien » vaut 10.\n\n" +
+      "Conclusion : c’est la catégorie « Chien » qui occupe la moitié du disque.",
+    tags: ["stat_donnee", "circulaire", "camembert", "fraction", "canvas"],
+    canvas: statGraphCanvas({
+      graphType: "camembert",
+      title: "Animal préféré (20 élèves)",
+      data: [
+        { label: "Chien", value: 10 },
+        { label: "Chat", value: 6 },
+        { label: "Lapin", value: 3 },
+        { label: "Oiseau", value: 1 },
+      ],
+      display: { showLabels: true, showValues: true, highlightIndex: 0 },
+    }),
+  },
+
+  {
+    kind: "fixed",
+    id: "6e_stat_stat_donnee_lire_circulaire_fixed_5_total",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "stat_donnee",
+    microId: "stat_donnee_lire_circulaire",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Dans ce diagramme circulaire, combien d’élèves ont répondu au sondage en tout ?",
+    format: "short",
+    expected: ["30"],
+    comparator: "number_equal",
+    hint: "Additionne les valeurs de tous les secteurs.",
+    explanation:
+      "Définition : le total d’un diagramme circulaire est la somme de tous les secteurs.\n\n" +
+      "Méthode : on additionne toutes les valeurs.\n\n" +
+      "Observation : 15 + 9 + 6 = 30.\n\n" +
+      "Conclusion : 30 élèves ont répondu au sondage.",
+    tags: ["stat_donnee", "circulaire", "camembert", "total", "canvas"],
+    canvas: statGraphCanvas({
+      graphType: "camembert",
+      title: "Matière préférée",
+      data: [
+        { label: "Maths", value: 15 },
+        { label: "Français", value: 9 },
+        { label: "Sport", value: 6 },
+      ],
+      display: { showLabels: true, showValues: true },
+    }),
+  },
+
+  {
+    kind: "fixed",
+    id: "6e_stat_stat_donnee_lire_circulaire_fixed_6_pourcentage",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "stat_donnee",
+    microId: "stat_donnee_lire_circulaire",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Un diagramme circulaire représente 20 personnes. Le secteur « Comédie » occupe exactement la moitié du disque. Combien de personnes préfèrent la comédie ?",
+    format: "short",
+    expected: ["10"],
+    comparator: "number_equal",
+    hint: "La moitié de 20, c’est 20 ÷ 2.",
+    explanation:
+      "Définition : la moitié du disque représente la moitié de l’effectif total.\n\n" +
+      "Méthode : on calcule la moitié du total.\n\n" +
+      "Observation : 20 ÷ 2 = 10.\n\n" +
+      "Conclusion : 10 personnes préfèrent la comédie.",
+    tags: ["stat_donnee", "circulaire", "camembert", "pourcentage", "canvas"],
+    canvas: statGraphCanvas({
+      graphType: "camembert",
+      title: "Films préférés (20 personnes)",
+      data: [
+        { label: "Comédie", value: 10 },
+        { label: "Aventure", value: 6 },
+        { label: "Dessin animé", value: 4 },
+      ],
+      display: { showLabels: true, showValues: true, highlightIndex: 0 },
+    }),
+  },
+
+  {
+    kind: "template",
+    id: "6e_stat_stat_donnee_lire_circulaire_tpl_1_lire_secteur",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "stat_donnee",
+    microId: "stat_donnee_lire_circulaire",
+    difficulty: 1,
+    theme: "neutral",
+    hint: "Repère le secteur demandé et lis sa valeur.",
+    tags: ["stat_donnee", "circulaire", "camembert", "lecture", "template", "canvas"],
+    generate: () => {
+      const cats = randomChoice([
+        ["À pied", "Bus", "Voiture", "Vélo"],
+        ["Mangues", "Letchis", "Ananas", "Bananes"],
+        ["Lecture", "Sport", "Jeux", "Musique"],
+      ]);
+      const values = [
+        randomChoice([6, 8, 10]),
+        randomChoice([4, 5, 7]),
+        randomChoice([3, 9, 11]),
+        randomChoice([2, 12, 14]),
+      ];
+      const index = Math.floor(Math.random() * cats.length);
+      const correct = String(values[index]);
+
+      return {
+        text: `Dans ce diagramme circulaire, quelle est la valeur du secteur « ${cats[index]} » ?`,
+        format: "short",
+        expected: [correct],
+        comparator: "number_equal",
+        explanation:
+          "Définition : chaque secteur d’un diagramme circulaire représente une catégorie.\n\n" +
+          "Méthode : on repère le secteur demandé, puis on lit sa valeur.\n\n" +
+          `Observation : le secteur « ${cats[index]} » indique ${correct}.\n\n` +
+          `Conclusion : la valeur cherchée est ${correct}.`,
+        canvas: statGraphCanvas({
+          graphType: "camembert",
+          title: "Diagramme circulaire",
+          data: cats.map((c, i) => ({ label: c, value: values[i] })),
+          display: { showLabels: true, showValues: true, highlightIndex: index },
+        }),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "6e_stat_stat_donnee_lire_circulaire_tpl_2_plus_grand",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "stat_donnee",
+    microId: "stat_donnee_lire_circulaire",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Le plus grand secteur correspond à la plus grande valeur.",
+    tags: ["stat_donnee", "circulaire", "camembert", "comparer", "template", "canvas"],
+    generate: () => {
+      const cats = randomChoice([
+        ["Football", "Natation", "Danse", "Basket"],
+        ["Chien", "Chat", "Lapin", "Poisson"],
+        ["Rouge", "Bleu", "Vert", "Jaune"],
+      ]);
+      const values = shuffle([
+        randomChoice([5, 6, 7]),
+        randomChoice([9, 10, 11]),
+        randomChoice([13, 14, 16]),
+        randomChoice([2, 3, 4]),
+      ]);
+      let maxIndex = 0;
+      for (let i = 1; i < values.length; i++) {
+        if (values[i] > values[maxIndex]) maxIndex = i;
+      }
+      const correct = cats[maxIndex];
+
+      return {
+        text: "Dans ce diagramme circulaire, quelle catégorie est représentée par le plus grand secteur ?",
+        format: "qcm",
+        choices: shuffle([...cats]),
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation:
+          "Définition : le plus grand secteur correspond à la catégorie la plus fréquente.\n\n" +
+          "Méthode : on compare les valeurs des secteurs.\n\n" +
+          `Observation : la plus grande valeur est ${values[maxIndex]}, pour « ${correct} ».\n\n` +
+          `Conclusion : la catégorie la plus représentée est « ${correct} ».`,
+        canvas: statGraphCanvas({
+          graphType: "camembert",
+          title: "Diagramme circulaire",
+          data: cats.map((c, i) => ({ label: c, value: values[i] })),
+          display: { showLabels: true, showValues: true, highlightIndex: maxIndex },
+        }),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "6e_stat_stat_donnee_lire_circulaire_tpl_3_total",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "stat_donnee",
+    microId: "stat_donnee_lire_circulaire",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Additionne les valeurs de tous les secteurs.",
+    tags: ["stat_donnee", "circulaire", "camembert", "total", "template", "canvas"],
+    generate: () => {
+      const cats = randomChoice([
+        ["Maths", "Français", "Sport"],
+        ["Pizza", "Pâtes", "Salade"],
+        ["Été", "Hiver", "Printemps"],
+      ]);
+      const values = [
+        randomChoice([8, 10, 12]),
+        randomChoice([5, 7, 9]),
+        randomChoice([3, 6, 11]),
+      ];
+      const total = values.reduce((a, b) => a + b, 0);
+
+      return {
+        text: "Dans ce diagramme circulaire, combien de personnes ont répondu en tout ?",
+        format: "short",
+        expected: [String(total)],
+        comparator: "number_equal",
+        explanation:
+          "Définition : le total est la somme de toutes les valeurs des secteurs.\n\n" +
+          "Méthode : on additionne toutes les valeurs.\n\n" +
+          `Observation : ${values.join(" + ")} = ${total}.\n\n` +
+          `Conclusion : ${total} personnes ont répondu en tout.`,
+        canvas: statGraphCanvas({
+          graphType: "camembert",
+          title: "Diagramme circulaire",
+          data: cats.map((c, i) => ({ label: c, value: values[i] })),
+          display: { showLabels: true, showValues: true },
+        }),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "6e_stat_stat_donnee_lire_circulaire_tpl_4_difference",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "stat_donnee",
+    microId: "stat_donnee_lire_circulaire",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Calcule l’écart entre les deux secteurs.",
+    tags: ["stat_donnee", "circulaire", "camembert", "difference", "template", "canvas"],
+    generate: () => {
+      const cats = randomChoice([
+        ["Bus", "Voiture", "Vélo"],
+        ["Letchis", "Mangues", "Ananas"],
+        ["Bleu", "Rouge", "Vert"],
+      ]);
+      const grand = randomChoice([12, 14, 16]);
+      const petit = randomChoice([4, 6, 7]);
+      const autre = randomChoice([8, 9, 10]);
+      const values = [grand, petit, autre];
+      const diff = grand - petit;
+
+      return {
+        text: `Dans ce diagramme circulaire, combien y a-t-il de « ${cats[0]} » de plus que de « ${cats[1]} » ?`,
+        format: "short",
+        expected: [String(diff)],
+        comparator: "number_equal",
+        explanation:
+          "Définition : comparer deux secteurs, c’est calculer l’écart entre leurs valeurs.\n\n" +
+          "Méthode : on soustrait la plus petite valeur à la plus grande.\n\n" +
+          `Observation : ${grand} - ${petit} = ${diff}.\n\n` +
+          `Conclusion : il y a ${diff} « ${cats[0]} » de plus que de « ${cats[1]} ».`,
+        canvas: statGraphCanvas({
+          graphType: "camembert",
+          title: "Diagramme circulaire",
+          data: cats.map((c, i) => ({ label: c, value: values[i] })),
+          display: { showLabels: true, showValues: true, highlightIndex: 0 },
+        }),
+      };
+    },
+  },
 ];

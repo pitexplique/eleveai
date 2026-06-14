@@ -760,6 +760,12 @@ export const microSkills: MicroSkillSource[] = [
     prerequis: ["stat_donnee_lire_tableau"],
   },
   {
+    id: "stat_donnee_lire_circulaire",
+    label: "Lire un diagramme circulaire",
+    notionId: "stat_donnee",
+    prerequis: ["stat_donnee_lire_graphique"],
+  },
+  {
     id: "stat_donnee_prelever",
     label: "Prélever une information",
     notionId: "stat_donnee",
@@ -784,6 +790,7 @@ export const microSkills: MicroSkillSource[] = [
     prerequis: [
       "stat_donnee_lire_tableau",
       "stat_donnee_lire_graphique",
+      "stat_donnee_lire_circulaire",
       "stat_donnee_prelever",
       "stat_donnee_comparer",
       "stat_donnee_interpreter",

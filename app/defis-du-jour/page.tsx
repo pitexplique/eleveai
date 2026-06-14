@@ -83,10 +83,13 @@ export default function DefisDuJourPage() {
 
   const normalizedAnswer = normalize(answer);
   const expectedAnswer = normalize(defi.expectedAnswer);
+  const expectedParts = expectedAnswer.split(" ").filter(Boolean);
+  const answerParts = normalizedAnswer.split(" ").filter(Boolean);
 
   const isCorrect =
     normalizedAnswer === expectedAnswer ||
-    normalizedAnswer.split(" ").includes(expectedAnswer);
+    (expectedParts.length > 0 &&
+      expectedParts.every((part) => answerParts.includes(part)));
 
   const score = selectedDirection?.type === "open" ? 1 : isCorrect ? 1 : 0;
   const total = 1;

@@ -234,6 +234,7 @@ const supportLinks: Record<string, string[]> = {
   // DONNÉES
   // =========================
   stat_donnee_lire_graphique: ["stat_donnee_lire_tableau"],
+  stat_donnee_lire_circulaire: ["stat_donnee_lire_graphique"],
   stat_donnee_prelever: ["stat_donnee_lire_tableau", "stat_donnee_lire_graphique"],
   stat_donnee_comparer: ["stat_donnee_prelever", "entier_comparer"],
   stat_donnee_interpreter: [
@@ -244,6 +245,7 @@ const supportLinks: Record<string, string[]> = {
   stat_donnee_defi: [
     "stat_donnee_lire_tableau",
     "stat_donnee_lire_graphique",
+    "stat_donnee_lire_circulaire",
     "stat_donnee_prelever",
     "stat_donnee_comparer",
     "stat_donnee_interpreter",
