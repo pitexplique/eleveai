@@ -1,6 +1,11 @@
 // app/accueil/page.tsx
 import type { Metadata } from "next";
-import AccueilClient from "./AccueilClient";
+import { createClient } from "@supabase/supabase-js";
+import AccueilClient, { type AvisPublic } from "./AccueilClient";
+import { getElevesALHonneur, prenomCourt } from "@/lib/ameliorations/honneurServer";
+
+// Les avis affichés sont rechargés au plus toutes les 5 minutes.
+export const revalidate = 300;
 
 export const metadata: Metadata = {
   title: "EleveAI - Maths, français et anglais",
@@ -37,6 +42,43 @@ export const metadata: Metadata = {
   },
 };
 
-export default function Page() {
-  return <AccueilClient />;
+// La table retours_eleves est sous RLS sans policy : lecture via service-role
+// uniquement, côté serveur. On n'expose JAMAIS le nom de famille ni les codes.
+async function getDerniersAvis(): Promise<AvisPublic[]> {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  if (!url || !key) return [];
+
+  try {
+    const supabase = createClient(url, key);
+    const { data, error } = await supabase
+      .from("retours_eleves")
+      // Seulement les notes positives (≥ 4) pour la vitrine publique.
+      .select("message, note, prenom, classe, page, created_at")
+      .eq("type", "avis")
+      .gte("note", 4)
+      .order("created_at", { ascending: false })
+      .limit(3);
+
+    if (error || !data) return [];
+
+    return data
+      .filter((r) => String(r.message ?? "").trim().length > 0)
+      .map((r) => ({
+        prenom: prenomCourt(r.prenom),
+        detail: r.classe?.trim() || r.page?.trim() || "Élève",
+        note: Number(r.note) || 5,
+        quote: String(r.message ?? "").trim(),
+      }));
+  } catch {
+    return [];
+  }
+}
+
+export default async function Page() {
+  const [avis, honneur] = await Promise.all([
+    getDerniersAvis(),
+    getElevesALHonneur(),
+  ]);
+  return <AccueilClient avis={avis} honneur={honneur} />;
 }

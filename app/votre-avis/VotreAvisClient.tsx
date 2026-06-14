@@ -6,6 +6,7 @@ import { useEleve } from "@/context/EleveContext";
 import { createClient } from "@/lib/supabase/client";
 import { ameliorationsRealisees } from "@/lib/ameliorations/realisees";
 import ElevesALHonneur from "@/components/ameliorations/ElevesALHonneur";
+import { type EleveALHonneur } from "@/lib/ameliorations/aLHonneur";
 
 type EmailUser = {
   auth_user_id: string;
@@ -61,7 +62,11 @@ const PAGES = [
   "Autre",
 ];
 
-export default function VotreAvisClient() {
+export default function VotreAvisClient({
+  honneur,
+}: {
+  honneur?: EleveALHonneur[];
+}) {
   const { eleve } = useEleve();
   const [emailUser, setEmailUser] = useState<EmailUser | null>(null);
 
@@ -207,7 +212,7 @@ export default function VotreAvisClient() {
       </section>
 
       {/* ÉLÈVES À L'HONNEUR */}
-      <ElevesALHonneur />
+      <ElevesALHonneur eleves={honneur} />
 
       {/* VOUS L'AVEZ DEMANDÉ → C'EST FAIT */}
       <section className="mx-auto max-w-4xl px-4 pt-10 sm:pt-12">

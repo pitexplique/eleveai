@@ -8,6 +8,7 @@ import { useEleve } from "@/context/EleveContext";
 import GoogleFollowChip from "@/components/GoogleFollowChip";
 import FloatingCoach from "@/components/FloatingCoach";
 import ElevesALHonneur from "@/components/ameliorations/ElevesALHonneur";
+import { type EleveALHonneur } from "@/lib/ameliorations/aLHonneur";
 
 // ─── Drag-to-scroll (glisser à la souris sur desktop) ──────────────────────────
 // Sur mobile le scroll horizontal au doigt est natif. Sur desktop il n'y a pas de
@@ -153,7 +154,46 @@ function getPrenomAffiche(nom?: string | null) {
   return premierMot;
 }
 
-export default function AccueilPage() {
+export type AvisPublic = {
+  prenom: string;
+  detail: string;
+  note: number;
+  quote: string;
+};
+
+// Avis affichés si la base ne renvoie rien (chargement, erreur, env absente).
+const AVIS_FALLBACK: AvisPublic[] = [
+  {
+    quote:
+      "Rubrique très intéressante pour revoir les bases et acquérir des automatismes. Très rapide, mais très intuitif.",
+    prenom: "Pierre",
+    detail: "Défis du jour",
+    note: 5,
+  },
+  {
+    quote:
+      "C'est trop bien, on peut vraiment progresser sur ce site comparé à d'autres.",
+    prenom: "Tamara",
+    detail: "6e",
+    note: 5,
+  },
+  {
+    quote:
+      "Je pense qu'il faudrait mettre une calculatrice sur le site, au cas où on ne sait plus.",
+    prenom: "Guilianne",
+    detail: "4e",
+    note: 4,
+  },
+];
+
+export default function AccueilPage({
+  avis,
+  honneur,
+}: {
+  avis?: AvisPublic[];
+  honneur?: EleveALHonneur[];
+}) {
+  const derniersAvis = avis && avis.length > 0 ? avis : AVIS_FALLBACK;
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const { eleve } = useEleve();
   const [isPlaying, setIsPlaying] = useState(false);
@@ -519,7 +559,7 @@ export default function AccueilPage() {
       </section>
 
       {/* ── ÉLÈVES À L'HONNEUR ───────────────────────────────────────────────── */}
-      <ElevesALHonneur />
+      <ElevesALHonneur eleves={honneur} />
 
       {/* ── DERNIERS AVIS ────────────────────────────────────────────────────── */}
       <section className="px-4 pt-6 sm:px-6 sm:pt-8 lg:px-8">
@@ -535,31 +575,9 @@ export default function AccueilPage() {
           </div>
 
           <div className="grid gap-3 sm:grid-cols-3">
-            {[
-              {
-                quote:
-                  "Rubrique très intéressante pour revoir les bases et acquérir des automatismes. Très rapide, mais très intuitif.",
-                prenom: "Pierre",
-                detail: "Défis du jour",
-                note: 5,
-              },
-              {
-                quote:
-                  "C'est trop bien, on peut vraiment progresser sur ce site comparé à d'autres.",
-                prenom: "Tamara",
-                detail: "6e",
-                note: 5,
-              },
-              {
-                quote:
-                  "Je pense qu'il faudrait mettre une calculatrice sur le site, au cas où on ne sait plus.",
-                prenom: "Guilianne",
-                detail: "4e",
-                note: 4,
-              },
-            ].map((avis) => (
+            {derniersAvis.map((avis, i) => (
               <figure
-                key={avis.prenom}
+                key={i}
                 className="flex flex-col rounded-2xl border border-white/10 bg-white/5 p-5"
               >
                 <div className="text-sm tracking-widest" aria-label={`Note ${avis.note} sur 5`}>

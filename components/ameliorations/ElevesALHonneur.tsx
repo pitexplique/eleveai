@@ -2,10 +2,14 @@
 // categorie. Reutilisable (votre-avis, accueil...). Donnees dans
 // lib/ameliorations/aLHonneur.ts.
 
-import { elevesALHonneur } from "@/lib/ameliorations/aLHonneur";
+import { elevesALHonneur, type EleveALHonneur } from "@/lib/ameliorations/aLHonneur";
 
-export default function ElevesALHonneur() {
-  if (elevesALHonneur.length === 0) return null;
+// `eleves` peut être calculé depuis la base (page d'accueil). Sans données
+// (chargement, erreur, ou page sans branchement) on retombe sur la liste
+// éditoriale par défaut.
+export default function ElevesALHonneur({ eleves }: { eleves?: EleveALHonneur[] }) {
+  const data = eleves && eleves.length > 0 ? eleves : elevesALHonneur;
+  if (data.length === 0) return null;
 
   return (
     <section className="mx-auto max-w-5xl px-4 pt-6 sm:pt-8">
@@ -23,7 +27,7 @@ export default function ElevesALHonneur() {
         </p>
 
         <div className="mt-4 grid gap-3 sm:grid-cols-2">
-          {elevesALHonneur.map((e, i) => (
+          {data.map((e, i) => (
             <div
               key={i}
               className="flex items-start gap-3 rounded-2xl border border-amber-300/20 bg-slate-900/50 p-4"
