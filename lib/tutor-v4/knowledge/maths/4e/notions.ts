@@ -111,6 +111,13 @@ export const notions: NotionSource[] = [
     levels: [1, 2, 3],
   },
   {
+    id: "trigo_cosinus",
+    label: "Cosinus dans le triangle rectangle",
+    boId: "BO4G1",
+    prerequis: ["pythagore_theoreme"],
+    levels: [1, 2, 3],
+  },
+  {
     id: "quadrilatere_parallelogramme",
     label: "Parallélogrammes",
     boId: "BO4G1",

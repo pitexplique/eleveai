@@ -32,6 +32,7 @@ import { volumesBank } from "./volumes.bank";
 import { thalesBank } from "./thales.bank";
 import { statistiquesBank} from "./statistiques.bank"
 import { algorithmiqueBank } from "./algorithmique.bank";
+import { cosinusBank } from "./cosinus.bank";
 
 
 // =========================
@@ -56,8 +57,9 @@ export const maths4eQuestionBank: TutorBankItemV4[] = [
   ...volumesBank,
   ...thalesBank,
   ...statistiquesBank,
-  ...algorithmiqueBank
-  
+  ...algorithmiqueBank,
+  ...cosinusBank
+
 ];
 
 export function getMaths4eQuestionBank(args?: {

@@ -501,6 +501,46 @@ export const microSkills: MicroSkillSource[] = [
     },
 
   /* =========================
+     COSINUS (triangle rectangle)
+  ========================= */
+  {
+    id: "cos_cotes",
+    label: "Identifier l’hypoténuse et le côté adjacent à un angle dans un triangle rectangle",
+    notionId: "trigo_cosinus",
+    prerequis: ["pythagore_reconnaitre"],
+  },
+  {
+    id: "cos_definition",
+    label: "Connaître et écrire la définition du cosinus d’un angle aigu",
+    notionId: "trigo_cosinus",
+    prerequis: ["cos_cotes"],
+  },
+  {
+    id: "cos_calculer_longueur",
+    label: "Calculer une longueur (côté adjacent ou hypoténuse) avec le cosinus",
+    notionId: "trigo_cosinus",
+    prerequis: ["cos_definition"],
+  },
+  {
+    id: "cos_calculer_angle",
+    label: "Calculer la mesure d’un angle avec le cosinus (cos⁻¹)",
+    notionId: "trigo_cosinus",
+    prerequis: ["cos_definition"],
+  },
+  {
+    id: "cos_probleme",
+    label: "Résoudre un problème concret avec le cosinus",
+    notionId: "trigo_cosinus",
+    prerequis: ["cos_calculer_longueur", "cos_calculer_angle"],
+  },
+  {
+    id: "cos_defi",
+    label: "Défis sur le cosinus",
+    notionId: "trigo_cosinus",
+    prerequis: ["cos_probleme"],
+  },
+
+  /* =========================
      PARALLÉLOGRAMMES
   ========================= */
   {
