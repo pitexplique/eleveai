@@ -34,6 +34,7 @@ const NAV_ANGLAIS = [
 
 const NAV_ESPAGNOL = [
   { href: "/coach-ia/espagnol",          icon: "🇪🇸", label: "Coach Espagnol IA",  desc: "A1 → B2, vocabulaire & expressions" },
+  { href: "/parcours-espagnol",          icon: "🛤️", label: "Parcours Espagnol",  desc: "Bilan de niveau CECRL avec audio"    },
   { href: "/coach-ia/espagnol?classe=a1",icon: "🌱",  label: "Niveau A1",          desc: "Chiffres, couleurs, famille, école"  },
   { href: "/coach-ia/espagnol?classe=a2",icon: "🏙️", label: "Niveau A2",          desc: "Vie quotidienne, voyage, métiers"    },
   { href: "/coach-ia/espagnol?classe=b1",icon: "🌍",  label: "Niveau B1",          desc: "Opinions, environnement, société"    },
@@ -48,8 +49,10 @@ const NAV_ECONOMIE = [
 ];
 
 const NAV_PARCOURS = [
-  { href: "/parcours",               icon: "🛤️", label: "Parcours Maths",   desc: "Bilan de compétences personnalisé" },
-  { href: "/parcours-english-maths", icon: "🇬🇧", label: "Parcours English", desc: "Niveau CECRL avec audio" },
+  { href: "/parcours",               icon: "🛤️", label: "Parcours Maths",    desc: "Bilan de compétences personnalisé" },
+  { href: "/parcours-francais",      icon: "📖", label: "Parcours Français", desc: "Bilan de compétences français" },
+  { href: "/parcours-english-maths", icon: "🇬🇧", label: "Parcours English",  desc: "Niveau CECRL avec audio" },
+  { href: "/parcours-espagnol",      icon: "🇪🇸", label: "Parcours Espagnol", desc: "Niveau CECRL avec audio" },
 ];
 
 type NavItem = { href: string; icon: string; label: string; desc: string };
