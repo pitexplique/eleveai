@@ -1317,6 +1317,8 @@ function handleInputKeyDown(
           elapsedTime={formatDuration(elapsedSeconds)}
           questionsDone={nbTentatives}
           currentStar={recommendedStar}
+          mode={mode}
+          streak={visibleProgress.streak}
           renderCanvas={(question) => renderCanvas(question.canvas)}
           onBackCoach={() => router.push(`/coach-ia/${matiere}`)}
           onSwitchToComplete={() => setDisplayMode("complete")}
@@ -1434,7 +1436,8 @@ function handleInputKeyDown(
           <header className="overflow-hidden rounded-[24px] border border-slate-200 bg-white shadow-lg sm:rounded-[28px]">
             <div className="bg-gradient-to-r from-indigo-600 via-sky-600 to-cyan-500 px-4 py-4 text-white sm:px-6">
               <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
-                {/* Tout le bandeau mission sur une seule ligne. */}
+                {/* Tout le bandeau mission sur une seule ligne. Les pastilles
+                    sont masquées sur petit écran pour alléger l'affichage. */}
                 <div className="flex flex-wrap items-center gap-2">
                   <div className="inline-flex rounded-full bg-white/20 px-3 py-1 text-[11px] font-bold tracking-wide">
                     MODE MISSION
@@ -1442,11 +1445,13 @@ function handleInputKeyDown(
                   <h1 className="text-xl font-black tracking-tight sm:text-2xl">
                     Tutor {matiere === "francais" ? "Français" : "Maths"} V4
                   </h1>
-                  <GamePill>
-                    🎮 {mode === "evaluation" ? "Évaluation" : "Coaching"}
-                  </GamePill>
-                  <GamePill>⭐ {stars(recommendedStar)}</GamePill>
-                  <GamePill>🔥 Série {visibleProgress.streak}</GamePill>
+                  <div className="hidden flex-wrap items-center gap-2 sm:flex">
+                    <GamePill>
+                      🎮 {mode === "evaluation" ? "Évaluation" : "Coaching"}
+                    </GamePill>
+                    <GamePill>⭐ {stars(recommendedStar)}</GamePill>
+                    <GamePill>🔥 Série {visibleProgress.streak}</GamePill>
+                  </div>
                 </div>
 
                 {/* Score/Temps vivent désormais uniquement dans le Tableau de

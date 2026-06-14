@@ -124,11 +124,13 @@ export default function TutorSimpleView({
           <span className="text-lg font-black tracking-tight">
             Tutor {matiereLabel(matiere)} V4
           </span>
-          <SimplePill>
-            🎮 {mode === "evaluation" ? "Évaluation" : "Coaching"}
-          </SimplePill>
-          <SimplePill>⭐ {starsLabel(currentStar)}</SimplePill>
-          <SimplePill>🔥 Série {streak}</SimplePill>
+          <div className="hidden flex-wrap items-center gap-2 sm:flex">
+            <SimplePill>
+              🎮 {mode === "evaluation" ? "Évaluation" : "Coaching"}
+            </SimplePill>
+            <SimplePill>⭐ {starsLabel(currentStar)}</SimplePill>
+            <SimplePill>🔥 Série {streak}</SimplePill>
+          </div>
         </div>
 
         <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_120px]">
@@ -285,6 +287,14 @@ export default function TutorSimpleView({
         </div>
       </div>
     </main>
+  );
+}
+
+function SimplePill({ children }: { children: ReactNode }) {
+  return (
+    <span className="rounded-full bg-white/15 px-3 py-1 text-xs font-black text-white ring-1 ring-white/20 backdrop-blur-sm">
+      {children}
+    </span>
   );
 }
 
