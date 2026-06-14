@@ -1,41 +1,41 @@
-/* lib/defis-jour/problemes.fixed.ts */
+﻿/* lib/defis-jour/problemes.fixed.ts */
 import type { ProblemeDuJour } from "./types";
 
 export const problemesFixed: ProblemeDuJour[] = [
   {
     id: "mission_lagon_poissons_001",
-    title: "Mission lagon : compter pour protéger",
+    title: "Mission lagon : compter pour protÃ©ger",
     theme: "Fractions & pourcentages",
-    image: "/images/defis-du-jour/mission-lagon.webp",
+    image: "/images/lagon.webp",
     level: 3,
     statement:
-      "Une association observe une zone du lagon de La Réunion. Sur un parcours, elle compte 240 poissons. Parmi eux, 3/8 sont des poissons-perroquets, 25 % sont des demoiselles, et les autres poissons appartiennent à d'autres espèces.",
+      "Une association observe une zone du lagon de La RÃ©union. Sur un parcours, elle compte 240 poissons. Parmi eux, 3/8 sont des poissons-perroquets, 25 % sont des demoiselles, et les autres poissons appartiennent Ã  d'autres espÃ¨ces.",
     question:
       "Combien y a-t-il de poissons-perroquets ? Combien y a-t-il de demoiselles ? Combien reste-t-il d'autres poissons ?",
     expectedAnswer: "90 60 90",
     explanation:
-      "3/8 de 240 : 240 ÷ 8 = 30, puis 30 × 3 = 90 poissons-perroquets. 25 % de 240, c'est un quart : 240 ÷ 4 = 60 demoiselles. Total identifié : 90 + 60 = 150. Il reste 240 − 150 = 90 autres poissons.",
+      "3/8 de 240 : 240 Ã· 8 = 30, puis 30 Ã— 3 = 90 poissons-perroquets. 25 % de 240, c'est un quart : 240 Ã· 4 = 60 demoiselles. Total identifiÃ© : 90 + 60 = 150. Il reste 240 âˆ’ 150 = 90 autres poissons.",
     directions: [
       {
         id: "fraction",
         label: "Calculer les poissons-perroquets",
         type: "guided",
         content:
-          "Commence par 3/8 de 240.\n240 ÷ 8 = 30, puis 30 × 3 = ?",
+          "Commence par 3/8 de 240.\n240 Ã· 8 = 30, puis 30 Ã— 3 = ?",
       },
       {
         id: "pourcentage",
         label: "Calculer les demoiselles",
         type: "guided",
         content:
-          "25 %, c'est un quart.\nUn quart de 240 se calcule avec 240 ÷ 4.",
+          "25 %, c'est un quart.\nUn quart de 240 se calcule avec 240 Ã· 4.",
       },
       {
         id: "reste",
         label: "Trouver les autres poissons",
         type: "guided",
         content:
-          "Additionne les poissons déjà identifiés, puis soustrais ce total à 240.",
+          "Additionne les poissons dÃ©jÃ  identifiÃ©s, puis soustrais ce total Ã  240.",
       },
       {
         id: "indice",
@@ -49,7 +49,7 @@ export const problemesFixed: ProblemeDuJour[] = [
         label: "Expliquer avec mes mots",
         type: "open",
         content:
-          "Explique pourquoi compter les espèces peut aider à protéger un lagon. Utilise les nombres du défi dans ton explication.",
+          "Explique pourquoi compter les espÃ¨ces peut aider Ã  protÃ©ger un lagon. Utilise les nombres du dÃ©fi dans ton explication.",
       },
     ],
   },
@@ -58,43 +58,43 @@ export const problemesFixed: ProblemeDuJour[] = [
     id: "mission_lagon_surface_002",
     title: "Mission lagon : quadriller la zone",
     theme: "Aires & multiplication",
-    image: "/images/defis-du-jour/mission-lagon.webp",
+    image: "/images/lagon.webp",
     level: 2,
     statement:
-      "Pour observer le lagon sans déranger les espèces, une association découpe une zone en rectangles. La zone étudiée mesure 80 m de long et 35 m de large.",
+      "Pour observer le lagon sans dÃ©ranger les espÃ¨ces, une association dÃ©coupe une zone en rectangles. La zone Ã©tudiÃ©e mesure 80 m de long et 35 m de large.",
     question:
-      "Quelle est l'aire de la zone observée en mètres carrés ? Si un groupe d'élèves étudie 700 m², quelle fraction de la zone totale observe-t-il ?",
+      "Quelle est l'aire de la zone observÃ©e en mÃ¨tres carrÃ©s ? Si un groupe d'Ã©lÃ¨ves Ã©tudie 700 mÂ², quelle fraction de la zone totale observe-t-il ?",
     expectedAnswer: "2800 1/4",
     explanation:
-      "Aire du rectangle : 80 × 35 = 2 800 m². Le groupe observe 700 m². Comme 700 × 4 = 2 800, cela représente 1/4 de la zone totale.",
+      "Aire du rectangle : 80 Ã— 35 = 2 800 mÂ². Le groupe observe 700 mÂ². Comme 700 Ã— 4 = 2 800, cela reprÃ©sente 1/4 de la zone totale.",
     directions: [
       {
         id: "aire",
         label: "Calculer l'aire",
         type: "guided",
         content:
-          "Pour un rectangle, aire = longueur × largeur.\nCalcule 80 × 35.",
+          "Pour un rectangle, aire = longueur Ã— largeur.\nCalcule 80 Ã— 35.",
       },
       {
         id: "fraction",
         label: "Trouver la fraction",
         type: "guided",
         content:
-          "Compare 700 m² à 2 800 m².\nCherche par combien il faut multiplier 700 pour obtenir 2 800.",
+          "Compare 700 mÂ² Ã  2 800 mÂ².\nCherche par combien il faut multiplier 700 pour obtenir 2 800.",
       },
       {
         id: "indice",
         label: "Demander un indice",
         type: "hint",
         content:
-          "80 × 35 = 80 × 30 + 80 × 5. Ensuite, 700 est le quart de 2 800.",
+          "80 Ã— 35 = 80 Ã— 30 + 80 Ã— 5. Ensuite, 700 est le quart de 2 800.",
       },
       {
         id: "open",
         label: "Expliquer avec mes mots",
         type: "open",
         content:
-          "Explique pourquoi quadriller une zone aide à mieux observer un milieu naturel.",
+          "Explique pourquoi quadriller une zone aide Ã  mieux observer un milieu naturel.",
       },
     ],
   },
@@ -103,15 +103,15 @@ export const problemesFixed: ProblemeDuJour[] = [
     id: "mission_lagon_tortues_003",
     title: "Mission lagon : le passage des tortues",
     theme: "Tableau & moyenne",
-    image: "/images/defis-du-jour/mission-lagon.webp",
+    image: "/images/lagon.webp",
     level: 3,
     statement:
-      "Pendant quatre matinées, des élèves notent le nombre de tortues observées dans le lagon : lundi 3, mardi 5, mercredi 4, jeudi 8.",
+      "Pendant quatre matinÃ©es, des Ã©lÃ¨ves notent le nombre de tortues observÃ©es dans le lagon : lundi 3, mardi 5, mercredi 4, jeudi 8.",
     question:
-      "Combien de tortues ont été observées au total ? Quelle est la moyenne par matinée ?",
+      "Combien de tortues ont Ã©tÃ© observÃ©es au total ? Quelle est la moyenne par matinÃ©e ?",
     expectedAnswer: "20 5",
     explanation:
-      "Total : 3 + 5 + 4 + 8 = 20 tortues. Il y a 4 matinées, donc la moyenne est 20 ÷ 4 = 5 tortues par matinée.",
+      "Total : 3 + 5 + 4 + 8 = 20 tortues. Il y a 4 matinÃ©es, donc la moyenne est 20 Ã· 4 = 5 tortues par matinÃ©e.",
     directions: [
       {
         id: "total",
@@ -132,14 +132,14 @@ export const problemesFixed: ProblemeDuJour[] = [
         label: "Demander un indice",
         type: "hint",
         content:
-          "Il y a 4 matinées. Après avoir trouvé le total, divise-le par 4.",
+          "Il y a 4 matinÃ©es. AprÃ¨s avoir trouvÃ© le total, divise-le par 4.",
       },
       {
         id: "open",
         label: "Expliquer avec mes mots",
         type: "open",
         content:
-          "Explique pourquoi une moyenne peut aider à comparer deux périodes d'observation.",
+          "Explique pourquoi une moyenne peut aider Ã  comparer deux pÃ©riodes d'observation.",
       },
     ],
   },
@@ -148,15 +148,15 @@ export const problemesFixed: ProblemeDuJour[] = [
     id: "mission_lagon_coraux_004",
     title: "Mission lagon : les coraux fragiles",
     theme: "Pourcentages & comparaison",
-    image: "/images/defis-du-jour/mission-lagon.webp",
+    image: "/images/lagon.webp",
     level: 4,
     statement:
-      "Dans une petite zone du récif, 360 coraux sont observés. Les élèves estiment que 15 % sont blanchis et que 70 % semblent en bonne santé.",
+      "Dans une petite zone du rÃ©cif, 360 coraux sont observÃ©s. Les Ã©lÃ¨ves estiment que 15 % sont blanchis et que 70 % semblent en bonne santÃ©.",
     question:
-      "Combien de coraux sont blanchis ? Combien semblent en bonne santé ? Combien restent dans un état intermédiaire ?",
+      "Combien de coraux sont blanchis ? Combien semblent en bonne santÃ© ? Combien restent dans un Ã©tat intermÃ©diaire ?",
     expectedAnswer: "54 252 54",
     explanation:
-      "15 % de 360 = 54 coraux blanchis. 70 % de 360 = 252 coraux en bonne santé. Il reste 360 − 54 − 252 = 54 coraux dans un état intermédiaire.",
+      "15 % de 360 = 54 coraux blanchis. 70 % de 360 = 252 coraux en bonne santÃ©. Il reste 360 âˆ’ 54 âˆ’ 252 = 54 coraux dans un Ã©tat intermÃ©diaire.",
     directions: [
       {
         id: "blanchis",
@@ -170,14 +170,14 @@ export const problemesFixed: ProblemeDuJour[] = [
         label: "Calculer 70 %",
         type: "guided",
         content:
-          "70 %, c'est 7 fois 10 %.\nCalcule 7 × 36.",
+          "70 %, c'est 7 fois 10 %.\nCalcule 7 Ã— 36.",
       },
       {
         id: "reste",
         label: "Calculer le reste",
         type: "guided",
         content:
-          "Soustrais les deux groupes connus au total : 360 − 54 − 252.",
+          "Soustrais les deux groupes connus au total : 360 âˆ’ 54 âˆ’ 252.",
       },
       {
         id: "indice",
@@ -199,89 +199,89 @@ export const problemesFixed: ProblemeDuJour[] = [
   {
     id: "mission_lagon_dechets_005",
     title: "Mission lagon : nettoyer sans compter",
-    theme: "Proportionnalité & unités",
-    image: "/images/defis-du-jour/mission-lagon.webp",
+    theme: "ProportionnalitÃ© & unitÃ©s",
+    image: "/images/lagon.webp",
     level: 3,
     statement:
-      "Lors d'une opération de nettoyage, 6 élèves ramassent 18 kg de déchets en une heure. On suppose que chaque élève ramasse la même masse.",
+      "Lors d'une opÃ©ration de nettoyage, 6 Ã©lÃ¨ves ramassent 18 kg de dÃ©chets en une heure. On suppose que chaque Ã©lÃ¨ve ramasse la mÃªme masse.",
     question:
-      "Combien de kilogrammes un élève ramasse-t-il en moyenne ? Combien 10 élèves pourraient-ils ramasser au même rythme ?",
+      "Combien de kilogrammes un Ã©lÃ¨ve ramasse-t-il en moyenne ? Combien 10 Ã©lÃ¨ves pourraient-ils ramasser au mÃªme rythme ?",
     expectedAnswer: "3 30",
     explanation:
-      "Un élève ramasse en moyenne 18 ÷ 6 = 3 kg. Au même rythme, 10 élèves ramasseraient 10 × 3 = 30 kg.",
+      "Un Ã©lÃ¨ve ramasse en moyenne 18 Ã· 6 = 3 kg. Au mÃªme rythme, 10 Ã©lÃ¨ves ramasseraient 10 Ã— 3 = 30 kg.",
     directions: [
       {
         id: "un_eleve",
-        label: "Trouver pour 1 élève",
+        label: "Trouver pour 1 Ã©lÃ¨ve",
         type: "guided",
         content:
-          "Si 6 élèves ramassent 18 kg, alors 1 élève ramasse 18 ÷ 6 kg.",
+          "Si 6 Ã©lÃ¨ves ramassent 18 kg, alors 1 Ã©lÃ¨ve ramasse 18 Ã· 6 kg.",
       },
       {
         id: "dix_eleves",
-        label: "Passer à 10 élèves",
+        label: "Passer Ã  10 Ã©lÃ¨ves",
         type: "guided",
         content:
-          "Quand tu connais la masse pour 1 élève, multiplie par 10.",
+          "Quand tu connais la masse pour 1 Ã©lÃ¨ve, multiplie par 10.",
       },
       {
         id: "indice",
         label: "Demander un indice",
         type: "hint",
         content:
-          "18 ÷ 6 = 3. Il reste à calculer 10 × 3.",
+          "18 Ã· 6 = 3. Il reste Ã  calculer 10 Ã— 3.",
       },
       {
         id: "open",
         label: "Expliquer avec mes mots",
         type: "open",
         content:
-          "Explique pourquoi les déchets près du lagon peuvent poser problème aux animaux marins.",
+          "Explique pourquoi les dÃ©chets prÃ¨s du lagon peuvent poser problÃ¨me aux animaux marins.",
       },
     ],
   },
 
   {
     id: "mission_lagon_temperature_006",
-    title: "Mission lagon : l'eau se réchauffe",
-    theme: "Écarts & décimaux",
-    image: "/images/defis-du-jour/mission-lagon.webp",
+    title: "Mission lagon : l'eau se rÃ©chauffe",
+    theme: "Ã‰carts & dÃ©cimaux",
+    image: "/images/lagon.webp",
     level: 4,
     statement:
-      "Des élèves mesurent la température de l'eau du lagon. Le matin, elle est de 26,4 °C. L'après-midi, elle atteint 29,1 °C.",
+      "Des Ã©lÃ¨ves mesurent la tempÃ©rature de l'eau du lagon. Le matin, elle est de 26,4 Â°C. L'aprÃ¨s-midi, elle atteint 29,1 Â°C.",
     question:
-      "De combien de degrés la température a-t-elle augmenté ? Si le seuil d'alerte est 30 °C, combien manque-t-il pour l'atteindre ?",
+      "De combien de degrÃ©s la tempÃ©rature a-t-elle augmentÃ© ? Si le seuil d'alerte est 30 Â°C, combien manque-t-il pour l'atteindre ?",
     expectedAnswer: "2.7 0.9",
     explanation:
-      "Augmentation : 29,1 − 26,4 = 2,7 °C. Écart au seuil d'alerte : 30 − 29,1 = 0,9 °C.",
+      "Augmentation : 29,1 âˆ’ 26,4 = 2,7 Â°C. Ã‰cart au seuil d'alerte : 30 âˆ’ 29,1 = 0,9 Â°C.",
     directions: [
       {
         id: "augmentation",
         label: "Calculer l'augmentation",
         type: "guided",
         content:
-          "Soustrais la température du matin à celle de l'après-midi : 29,1 − 26,4.",
+          "Soustrais la tempÃ©rature du matin Ã  celle de l'aprÃ¨s-midi : 29,1 âˆ’ 26,4.",
       },
       {
         id: "seuil",
         label: "Comparer au seuil",
         type: "guided",
         content:
-          "Pour savoir combien il manque avant 30 °C, calcule 30 − 29,1.",
+          "Pour savoir combien il manque avant 30 Â°C, calcule 30 âˆ’ 29,1.",
       },
       {
         id: "indice",
         label: "Demander un indice",
         type: "hint",
         content:
-          "Tu peux écrire 30 comme 30,0 pour mieux soustraire les décimaux.",
+          "Tu peux Ã©crire 30 comme 30,0 pour mieux soustraire les dÃ©cimaux.",
       },
       {
         id: "open",
         label: "Expliquer avec mes mots",
         type: "open",
         content:
-          "Explique pourquoi la température de l'eau est importante pour les coraux et les poissons.",
+          "Explique pourquoi la tempÃ©rature de l'eau est importante pour les coraux et les poissons.",
       },
     ],
   },
@@ -289,91 +289,91 @@ export const problemesFixed: ProblemeDuJour[] = [
   {
     id: "mission_lagon_synthese_007",
     title: "Mission lagon : bilan des observateurs",
-    theme: "Synthèse & argumentation",
-    image: "/images/defis-du-jour/mission-lagon.webp",
+    theme: "SynthÃ¨se & argumentation",
+    image: "/images/lagon.webp",
     level: 5,
     statement:
-      "Cette semaine, tu as étudié le lagon avec des nombres : 240 poissons, 90 poissons-perroquets, 60 demoiselles, 2 800 m² observés, 20 tortues comptées, 360 coraux suivis et 30 kg de déchets possibles avec 10 élèves.",
+      "Cette semaine, tu as Ã©tudiÃ© le lagon avec des nombres : 240 poissons, 90 poissons-perroquets, 60 demoiselles, 2 800 mÂ² observÃ©s, 20 tortues comptÃ©es, 360 coraux suivis et 30 kg de dÃ©chets possibles avec 10 Ã©lÃ¨ves.",
     question:
-      "Rédige une courte présentation de la mission lagon en utilisant au moins 4 données chiffrées. Explique pourquoi les maths peuvent aider à protéger le lagon.",
+      "RÃ©dige une courte prÃ©sentation de la mission lagon en utilisant au moins 4 donnÃ©es chiffrÃ©es. Explique pourquoi les maths peuvent aider Ã  protÃ©ger le lagon.",
     expectedAnswer: "explication",
     explanation:
-      "Une bonne réponse utilise plusieurs données et les relie au sens de la mission. Exemple : Les élèves ont observé 240 poissons, dont 90 poissons-perroquets et 60 demoiselles. Ils ont aussi étudié 2 800 m² de lagon et suivi 360 coraux. Les maths permettent de compter, comparer et repérer les changements pour mieux protéger le milieu.",
+      "Une bonne rÃ©ponse utilise plusieurs donnÃ©es et les relie au sens de la mission. Exemple : Les Ã©lÃ¨ves ont observÃ© 240 poissons, dont 90 poissons-perroquets et 60 demoiselles. Ils ont aussi Ã©tudiÃ© 2 800 mÂ² de lagon et suivi 360 coraux. Les maths permettent de compter, comparer et repÃ©rer les changements pour mieux protÃ©ger le milieu.",
     directions: [
       {
         id: "choisir_chiffres",
-        label: "Choisir les chiffres clés",
+        label: "Choisir les chiffres clÃ©s",
         type: "guided",
         content:
-          "Choisis au moins 4 chiffres parmi : 240 poissons, 90 poissons-perroquets, 60 demoiselles, 2 800 m², 20 tortues, 360 coraux, 30 kg.",
+          "Choisis au moins 4 chiffres parmi : 240 poissons, 90 poissons-perroquets, 60 demoiselles, 2 800 mÂ², 20 tortues, 360 coraux, 30 kg.",
       },
       {
         id: "organiser",
-        label: "Organiser ma réponse",
+        label: "Organiser ma rÃ©ponse",
         type: "guided",
         content:
-          "Écris en 3 phrases :\n1. Présente la mission.\n2. Donne des observations chiffrées.\n3. Explique à quoi servent ces nombres.",
+          "Ã‰cris en 3 phrases :\n1. PrÃ©sente la mission.\n2. Donne des observations chiffrÃ©es.\n3. Explique Ã  quoi servent ces nombres.",
       },
       {
         id: "indice",
         label: "Demander un indice",
         type: "hint",
         content:
-          "Tu peux commencer par : Les maths aident à protéger le lagon parce qu'elles permettent de mesurer...",
+          "Tu peux commencer par : Les maths aident Ã  protÃ©ger le lagon parce qu'elles permettent de mesurer...",
       },
       {
         id: "open",
         label: "Expliquer avec mes mots",
         type: "open",
         content:
-          "Rédige comme si tu présentais la mission à une autre classe.",
+          "RÃ©dige comme si tu prÃ©sentais la mission Ã  une autre classe.",
       },
     ],
   },
 
-  // Anciens défis Grand Raid conservés hors programmation.
-  // On les garde comme réserve pour une future semaine sportive.
+  // Anciens dÃ©fis Grand Raid conservÃ©s hors programmation.
+  // On les garde comme rÃ©serve pour une future semaine sportive.
   {
     id: "grand_raid_distance_001",
-    title: "Grand Raid : les kilomètres de l'île",
+    title: "Grand Raid : les kilomÃ¨tres de l'Ã®le",
     theme: "Distance & addition",
     image: "/images/defis-du-jour/grand_raid_2026.webp",
     level: 1,
     statement:
-      "Le Grand Raid de La Réunion, surnommé « la Diagonale des Fous », traverse l'île du sud au nord sur 165 km. La course se découpe en grandes sections : 42 km jusqu'à Cilaos, puis 58 km jusqu'à Salazie, puis 65 km jusqu'à Saint-Denis.",
+      "Le Grand Raid de La RÃ©union, surnommÃ© Â« la Diagonale des Fous Â», traverse l'Ã®le du sud au nord sur 165 km. La course se dÃ©coupe en grandes sections : 42 km jusqu'Ã  Cilaos, puis 58 km jusqu'Ã  Salazie, puis 65 km jusqu'Ã  Saint-Denis.",
     question:
-      "Vérifie que 42 + 58 + 65 = 165. Puis calcule : si un coureur a déjà parcouru 42 km et 58 km, combien de kilomètres lui reste-t-il avant l'arrivée ?",
+      "VÃ©rifie que 42 + 58 + 65 = 165. Puis calcule : si un coureur a dÃ©jÃ  parcouru 42 km et 58 km, combien de kilomÃ¨tres lui reste-t-il avant l'arrivÃ©e ?",
     expectedAnswer: "65",
     explanation:
-      "42 + 58 = 100 km parcourus. Il reste 165 − 100 = 65 km jusqu'à Saint-Denis. C'est la dernière grande section du Grand Raid, et souvent la plus difficile pour les jambes fatiguées !",
+      "42 + 58 = 100 km parcourus. Il reste 165 âˆ’ 100 = 65 km jusqu'Ã  Saint-Denis. C'est la derniÃ¨re grande section du Grand Raid, et souvent la plus difficile pour les jambes fatiguÃ©es !",
     directions: [
       {
         id: "addition",
         label: "Additionner les sections",
         type: "guided",
         content:
-          "Commence par additionner les deux premières sections : 42 + 58 = ?\nEnsuite soustrait ce total à 165.",
+          "Commence par additionner les deux premiÃ¨res sections : 42 + 58 = ?\nEnsuite soustrait ce total Ã  165.",
       },
       {
         id: "soustraction",
         label: "Calculer ce qu'il reste",
         type: "guided",
         content:
-          "Distance totale : 165 km. Distance déjà parcourue : 42 + 58 km.\nIl reste : 165 − (42 + 58).",
+          "Distance totale : 165 km. Distance dÃ©jÃ  parcourue : 42 + 58 km.\nIl reste : 165 âˆ’ (42 + 58).",
       },
       {
         id: "indice",
         label: "Demander un indice",
         type: "hint",
         content:
-          "42 + 58 = 100 (astuce : 40 + 60 = 100, puis +2 et −2). Donc il reste 165 − 100 = ?",
+          "42 + 58 = 100 (astuce : 40 + 60 = 100, puis +2 et âˆ’2). Donc il reste 165 âˆ’ 100 = ?",
       },
       {
         id: "open",
         label: "Expliquer avec mes mots",
         type: "open",
         content:
-          "Explique comment tu calcules une distance restante à parcourir. Tu peux prendre l'exemple d'un trajet que tu connais.",
+          "Explique comment tu calcules une distance restante Ã  parcourir. Tu peux prendre l'exemple d'un trajet que tu connais.",
       },
     ],
   },
@@ -385,33 +385,33 @@ export const problemesFixed: ProblemeDuJour[] = [
     image: "/images/defis-du-jour/grand_raid_2026.webp",
     level: 2,
     statement:
-      "En 2017, le Français François D'Haene a remporté le Grand Raid en établissant un record : il a parcouru les 165 km en 23 heures et 27 minutes. Pour simplifier, on arrondira son temps à 23 heures.",
+      "En 2017, le FranÃ§ais FranÃ§ois D'Haene a remportÃ© le Grand Raid en Ã©tablissant un record : il a parcouru les 165 km en 23 heures et 27 minutes. Pour simplifier, on arrondira son temps Ã  23 heures.",
     question:
-      "Calcule la vitesse moyenne de François D'Haene en km/h. Arrondi au dixième près.",
+      "Calcule la vitesse moyenne de FranÃ§ois D'Haene en km/h. Arrondi au dixiÃ¨me prÃ¨s.",
     expectedAnswer: "7.2",
     explanation:
-      "Vitesse = Distance ÷ Temps = 165 ÷ 23 ≈ 7,17 km/h, soit environ 7,2 km/h. C'est la vitesse d'un bon joggeur… mais maintenue pendant 23 heures, en montagne, avec près de 10 000 m de dénivelé !",
+      "Vitesse = Distance Ã· Temps = 165 Ã· 23 â‰ˆ 7,17 km/h, soit environ 7,2 km/h. C'est la vitesse d'un bon joggeurâ€¦ mais maintenue pendant 23 heures, en montagne, avec prÃ¨s de 10 000 m de dÃ©nivelÃ© !",
     directions: [
       {
         id: "formule",
         label: "Utiliser la formule Vitesse",
         type: "guided",
         content:
-          "Vitesse = Distance ÷ Temps.\nDistance = 165 km. Temps = 23 h.\n165 ÷ 23 = ?",
+          "Vitesse = Distance Ã· Temps.\nDistance = 165 km. Temps = 23 h.\n165 Ã· 23 = ?",
       },
       {
         id: "calcul",
         label: "Faire la division",
         type: "guided",
         content:
-          "23 × 7 = 161. 23 × 7,2 = 165,6. Donc 165 ÷ 23 est très proche de 7,2.",
+          "23 Ã— 7 = 161. 23 Ã— 7,2 = 165,6. Donc 165 Ã· 23 est trÃ¨s proche de 7,2.",
       },
       {
         id: "indice",
         label: "Demander un indice",
         type: "hint",
         content:
-          "Cherche combien de fois 23 entre dans 165. Essaie 23 × 7 = 161, puis 23 × 7,2 = 165,6.",
+          "Cherche combien de fois 23 entre dans 165. Essaie 23 Ã— 7 = 161, puis 23 Ã— 7,2 = 165,6.",
       },
       {
         id: "open",
@@ -426,44 +426,44 @@ export const problemesFixed: ProblemeDuJour[] = [
   {
     id: "grand_raid_denivele_001",
     title: "Grand Raid : grimper les cirques",
-    theme: "Dénivelé & proportionnalité",
+    theme: "DÃ©nivelÃ© & proportionnalitÃ©",
     image: "/images/defis-du-jour/grand_raid_2026.webp",
     level: 3,
     statement:
-      "Le Grand Raid cumule 9 600 mètres de dénivelé positif (montée totale) sur 165 km. Les coureurs traversent les trois cirques de La Réunion : Cilaos, Mafate et Salazie. Un coureur a déjà parcouru 55 km.",
+      "Le Grand Raid cumule 9 600 mÃ¨tres de dÃ©nivelÃ© positif (montÃ©e totale) sur 165 km. Les coureurs traversent les trois cirques de La RÃ©union : Cilaos, Mafate et Salazie. Un coureur a dÃ©jÃ  parcouru 55 km.",
     question:
-      "En supposant que le dénivelé est régulièrement réparti sur tout le parcours, quel dénivelé positif ce coureur a-t-il déjà gravi ? Arrondi à la centaine près.",
+      "En supposant que le dÃ©nivelÃ© est rÃ©guliÃ¨rement rÃ©parti sur tout le parcours, quel dÃ©nivelÃ© positif ce coureur a-t-il dÃ©jÃ  gravi ? Arrondi Ã  la centaine prÃ¨s.",
     expectedAnswer: "3200",
     explanation:
-      "Dénivelé moyen par km = 9 600 ÷ 165 ≈ 58,2 m/km. Sur 55 km : 58,2 × 55 = 3 200 m (arrondi à la centaine). C'est l'équivalent de gravir la Tour Eiffel plus de 9 fois !",
+      "DÃ©nivelÃ© moyen par km = 9 600 Ã· 165 â‰ˆ 58,2 m/km. Sur 55 km : 58,2 Ã— 55 = 3 200 m (arrondi Ã  la centaine). C'est l'Ã©quivalent de gravir la Tour Eiffel plus de 9 fois !",
     directions: [
       {
         id: "proportion",
         label: "Raisonner par proportion",
         type: "guided",
         content:
-          "Si 165 km correspondent à 9 600 m de dénivelé, alors 55 km correspondent à :\n55 × 9 600 ÷ 165 = ?",
+          "Si 165 km correspondent Ã  9 600 m de dÃ©nivelÃ©, alors 55 km correspondent Ã  :\n55 Ã— 9 600 Ã· 165 = ?",
       },
       {
         id: "denivele_km",
-        label: "Calculer le dénivelé par km",
+        label: "Calculer le dÃ©nivelÃ© par km",
         type: "guided",
         content:
-          "Dénivelé par km = 9 600 ÷ 165 ≈ 58 m/km.\nPour 55 km : 58 × 55 = ?",
+          "DÃ©nivelÃ© par km = 9 600 Ã· 165 â‰ˆ 58 m/km.\nPour 55 km : 58 Ã— 55 = ?",
       },
       {
         id: "indice",
         label: "Demander un indice",
         type: "hint",
         content:
-          "55 ÷ 165 = 1/3 environ. Donc le dénivelé est environ 9 600 ÷ 3 = 3 200 m.",
+          "55 Ã· 165 = 1/3 environ. Donc le dÃ©nivelÃ© est environ 9 600 Ã· 3 = 3 200 m.",
       },
       {
         id: "open",
         label: "Expliquer avec mes mots",
         type: "open",
         content:
-          "Explique ce qu'est le dénivelé positif. Pourquoi est-ce plus difficile de courir avec beaucoup de dénivelé qu'en terrain plat ?",
+          "Explique ce qu'est le dÃ©nivelÃ© positif. Pourquoi est-ce plus difficile de courir avec beaucoup de dÃ©nivelÃ© qu'en terrain plat ?",
       },
     ],
   },
@@ -475,40 +475,40 @@ export const problemesFixed: ProblemeDuJour[] = [
     image: "/images/defis-du-jour/grand_raid_2026.webp",
     level: 3,
     statement:
-      "Le Grand Raid compte 16 postes de ravitaillement répartis sur les 165 km. À chaque poste, les bénévoles préparent 2,5 litres d'eau pour chaque coureur prévu. Cette année, 2 400 coureurs sont inscrits.",
+      "Le Grand Raid compte 16 postes de ravitaillement rÃ©partis sur les 165 km. Ã€ chaque poste, les bÃ©nÃ©voles prÃ©parent 2,5 litres d'eau pour chaque coureur prÃ©vu. Cette annÃ©e, 2 400 coureurs sont inscrits.",
     question:
-      "Combien de litres d'eau au total les bénévoles doivent-ils préparer pour l'ensemble des 16 postes ? Donne ta réponse en litres.",
+      "Combien de litres d'eau au total les bÃ©nÃ©voles doivent-ils prÃ©parer pour l'ensemble des 16 postes ? Donne ta rÃ©ponse en litres.",
     expectedAnswer: "96000",
     explanation:
-      "Pour un poste : 2,5 × 2 400 = 6 000 litres. Pour 16 postes : 6 000 × 16 = 96 000 litres. C'est l'équivalent de 96 000 bouteilles d'un litre — la logistique du Grand Raid mobilise des centaines de bénévoles !",
+      "Pour un poste : 2,5 Ã— 2 400 = 6 000 litres. Pour 16 postes : 6 000 Ã— 16 = 96 000 litres. C'est l'Ã©quivalent de 96 000 bouteilles d'un litre â€” la logistique du Grand Raid mobilise des centaines de bÃ©nÃ©voles !",
     directions: [
       {
         id: "par_poste",
         label: "Calculer par poste",
         type: "guided",
         content:
-          "Commence par calculer le total d'eau pour UN poste : 2,5 L × 2 400 coureurs = ?\nEnsuite multiplie par 16 postes.",
+          "Commence par calculer le total d'eau pour UN poste : 2,5 L Ã— 2 400 coureurs = ?\nEnsuite multiplie par 16 postes.",
       },
       {
         id: "multiplication",
         label: "Faire les multiplications",
         type: "guided",
         content:
-          "Étape 1 : 2,5 × 2 400 = 6 000 L par poste.\nÉtape 2 : 6 000 × 16 = ?",
+          "Ã‰tape 1 : 2,5 Ã— 2 400 = 6 000 L par poste.\nÃ‰tape 2 : 6 000 Ã— 16 = ?",
       },
       {
         id: "indice",
         label: "Demander un indice",
         type: "hint",
         content:
-          "6 000 × 16 = 6 000 × 10 + 6 000 × 6 = 60 000 + 36 000 = 96 000.",
+          "6 000 Ã— 16 = 6 000 Ã— 10 + 6 000 Ã— 6 = 60 000 + 36 000 = 96 000.",
       },
       {
         id: "open",
         label: "Expliquer avec mes mots",
         type: "open",
         content:
-          "Explique pourquoi il faut multiplier deux fois dans ce problème. Qu'est-ce qu'on calcule à chaque étape ?",
+          "Explique pourquoi il faut multiplier deux fois dans ce problÃ¨me. Qu'est-ce qu'on calcule Ã  chaque Ã©tape ?",
       },
     ],
   },
@@ -520,40 +520,40 @@ export const problemesFixed: ProblemeDuJour[] = [
     image: "/images/defis-du-jour/grand_raid_2026.webp",
     level: 4,
     statement:
-      "Le Grand Raid est une course extrême. En moyenne, environ 40 % des coureurs n'atteignent pas la ligne d'arrivée (abandon, blessure, dépassement du temps limite). Cette année, 2 400 coureurs s'élancent au départ.",
+      "Le Grand Raid est une course extrÃªme. En moyenne, environ 40 % des coureurs n'atteignent pas la ligne d'arrivÃ©e (abandon, blessure, dÃ©passement du temps limite). Cette annÃ©e, 2 400 coureurs s'Ã©lancent au dÃ©part.",
     question:
-      "Combien de coureurs terminent la course cette année ? Combien abandonnent ?",
+      "Combien de coureurs terminent la course cette annÃ©e ? Combien abandonnent ?",
     expectedAnswer: "1440",
     explanation:
-      "40 % abandonnent : 2 400 × 40 ÷ 100 = 960 coureurs abandonnent. Il reste 2 400 − 960 = 1 440 finishers. On peut aussi calculer directement : 60 % terminent → 2 400 × 0,6 = 1 440.",
+      "40 % abandonnent : 2 400 Ã— 40 Ã· 100 = 960 coureurs abandonnent. Il reste 2 400 âˆ’ 960 = 1 440 finishers. On peut aussi calculer directement : 60 % terminent â†’ 2 400 Ã— 0,6 = 1 440.",
     directions: [
       {
         id: "pourcentage_abandon",
         label: "Calculer les abandons",
         type: "guided",
         content:
-          "40 % de 2 400 = 2 400 × 40 ÷ 100.\nEnsuite : finishers = 2 400 − abandons.",
+          "40 % de 2 400 = 2 400 Ã— 40 Ã· 100.\nEnsuite : finishers = 2 400 âˆ’ abandons.",
       },
       {
         id: "pourcentage_finishers",
         label: "Calculer les finishers directement",
         type: "guided",
         content:
-          "Si 40 % abandonnent, alors 60 % terminent.\n60 % de 2 400 = 2 400 × 0,6 = ?",
+          "Si 40 % abandonnent, alors 60 % terminent.\n60 % de 2 400 = 2 400 Ã— 0,6 = ?",
       },
       {
         id: "indice",
         label: "Demander un indice",
         type: "hint",
         content:
-          "10 % de 2 400 = 240. Donc 40 % = 4 × 240 = 960 abandons. Finishers = 2 400 − 960.",
+          "10 % de 2 400 = 240. Donc 40 % = 4 Ã— 240 = 960 abandons. Finishers = 2 400 âˆ’ 960.",
       },
       {
         id: "open",
         label: "Expliquer avec mes mots",
         type: "open",
         content:
-          "Explique la différence entre calculer 40 % et calculer 60 % d'un total. Lequel est plus rapide ici, et pourquoi ?",
+          "Explique la diffÃ©rence entre calculer 40 % et calculer 60 % d'un total. Lequel est plus rapide ici, et pourquoi ?",
       },
     ],
   },
@@ -561,44 +561,44 @@ export const problemesFixed: ProblemeDuJour[] = [
   {
     id: "grand_raid_classement_001",
     title: "Grand Raid : les temps au classement",
-    theme: "Durées & comparaison",
+    theme: "DurÃ©es & comparaison",
     image: "/images/defis-du-jour/grand_raid_2026.webp",
     level: 4,
     statement:
-      "Les trois premiers coureurs à l'arrivée ont réalisé les temps suivants :\n• 1er : 23 h 27 min\n• 2e : 24 h 05 min\n• 3e : 24 h 38 min\nLe temps limite pour valider la course est de 67 heures.",
+      "Les trois premiers coureurs Ã  l'arrivÃ©e ont rÃ©alisÃ© les temps suivants :\nâ€¢ 1er : 23 h 27 min\nâ€¢ 2e : 24 h 05 min\nâ€¢ 3e : 24 h 38 min\nLe temps limite pour valider la course est de 67 heures.",
     question:
-      "Quel écart en minutes sépare le 1er du 3e ? Combien d'heures restaient-il au vainqueur par rapport au temps limite ?",
+      "Quel Ã©cart en minutes sÃ©pare le 1er du 3e ? Combien d'heures restaient-il au vainqueur par rapport au temps limite ?",
     expectedAnswer: "71",
     explanation:
-      "Écart entre 1er et 3e : (24 h 38 min) − (23 h 27 min) = 1 h 11 min = 71 minutes.\nTemps restant pour le vainqueur : 67 h − 23 h 27 min = 43 h 33 min. Le vainqueur a terminé avec encore 43 heures et 33 minutes d'avance sur la limite !",
+      "Ã‰cart entre 1er et 3e : (24 h 38 min) âˆ’ (23 h 27 min) = 1 h 11 min = 71 minutes.\nTemps restant pour le vainqueur : 67 h âˆ’ 23 h 27 min = 43 h 33 min. Le vainqueur a terminÃ© avec encore 43 heures et 33 minutes d'avance sur la limite !",
     directions: [
       {
         id: "soustraction_durees",
-        label: "Soustraire des durées",
+        label: "Soustraire des durÃ©es",
         type: "guided",
         content:
-          "Convertis les temps en minutes :\n• 23 h 27 min = 23 × 60 + 27 = 1 407 min\n• 24 h 38 min = 24 × 60 + 38 = 1 478 min\nÉcart = 1 478 − 1 407 = ?",
+          "Convertis les temps en minutes :\nâ€¢ 23 h 27 min = 23 Ã— 60 + 27 = 1 407 min\nâ€¢ 24 h 38 min = 24 Ã— 60 + 38 = 1 478 min\nÃ‰cart = 1 478 âˆ’ 1 407 = ?",
       },
       {
         id: "calcul_ecart",
-        label: "Calculer l'écart directement",
+        label: "Calculer l'Ã©cart directement",
         type: "guided",
         content:
-          "De 23 h 27 min à 24 h 38 min : il y a 1 heure (de 23h27 à 24h27) puis 11 minutes (de 24h27 à 24h38).\nTotal : 1 h 11 min = 71 min.",
+          "De 23 h 27 min Ã  24 h 38 min : il y a 1 heure (de 23h27 Ã  24h27) puis 11 minutes (de 24h27 Ã  24h38).\nTotal : 1 h 11 min = 71 min.",
       },
       {
         id: "indice",
         label: "Demander un indice",
         type: "hint",
         content:
-          "De 23 h 27 à 24 h 27 = 60 min. De 24 h 27 à 24 h 38 = 11 min. Total = 60 + 11 = 71 min.",
+          "De 23 h 27 Ã  24 h 27 = 60 min. De 24 h 27 Ã  24 h 38 = 11 min. Total = 60 + 11 = 71 min.",
       },
       {
         id: "open",
         label: "Expliquer avec mes mots",
         type: "open",
         content:
-          "Explique comment calculer un écart de temps quand on a des heures et des minutes. Quelle difficulté peut apparaître avec les minutes ?",
+          "Explique comment calculer un Ã©cart de temps quand on a des heures et des minutes. Quelle difficultÃ© peut apparaÃ®tre avec les minutes ?",
       },
     ],
   },
@@ -606,23 +606,23 @@ export const problemesFixed: ProblemeDuJour[] = [
   {
     id: "grand_raid_synthese_001",
     title: "Grand Raid : raconter la Diagonale des Fous",
-    theme: "Synthèse & argumentation",
+    theme: "SynthÃ¨se & argumentation",
     image: "/images/defis-du-jour/grand_raid_2026.webp",
     level: 5,
     statement:
-      "Cette semaine, tu as travaillé avec de vraies données du Grand Raid de La Réunion : 165 km de course, 9 600 m de dénivelé, une vitesse record de 7,2 km/h sur 23 heures, 96 000 litres d'eau préparés, 1 440 finishers sur 2 400 partants, et un écart de 71 minutes entre le 1er et le 3e.",
+      "Cette semaine, tu as travaillÃ© avec de vraies donnÃ©es du Grand Raid de La RÃ©union : 165 km de course, 9 600 m de dÃ©nivelÃ©, une vitesse record de 7,2 km/h sur 23 heures, 96 000 litres d'eau prÃ©parÃ©s, 1 440 finishers sur 2 400 partants, et un Ã©cart de 71 minutes entre le 1er et le 3e.",
     question:
-      "Rédige une courte présentation du Grand Raid en utilisant au moins 4 de ces données chiffrées. Explique pourquoi cette course mérite le surnom « Diagonale des Fous ».",
+      "RÃ©dige une courte prÃ©sentation du Grand Raid en utilisant au moins 4 de ces donnÃ©es chiffrÃ©es. Explique pourquoi cette course mÃ©rite le surnom Â« Diagonale des Fous Â».",
     expectedAnswer: "explication",
     explanation:
-      "Une bonne réponse mobilise au moins 4 données et les explique. Exemple : Le Grand Raid traverse La Réunion sur 165 km avec 9 600 m de dénivelé. Le record est de 23 heures à 7,2 km/h en moyenne — un rythme de joggeur maintenu une journée entière en montagne. Seulement 60 % des 2 400 partants terminent. Voilà pourquoi on l'appelle la « Diagonale des Fous » !",
+      "Une bonne rÃ©ponse mobilise au moins 4 donnÃ©es et les explique. Exemple : Le Grand Raid traverse La RÃ©union sur 165 km avec 9 600 m de dÃ©nivelÃ©. Le record est de 23 heures Ã  7,2 km/h en moyenne â€” un rythme de joggeur maintenu une journÃ©e entiÃ¨re en montagne. Seulement 60 % des 2 400 partants terminent. VoilÃ  pourquoi on l'appelle la Â« Diagonale des Fous Â» !",
     directions: [
       {
         id: "mots_cles",
-        label: "Utiliser les mots clés",
+        label: "Utiliser les mots clÃ©s",
         type: "guided",
         content:
-          "Essaie d'utiliser les mots : distance, dénivelé, vitesse, cirque, abandon, finisher, bénévoles, La Réunion.",
+          "Essaie d'utiliser les mots : distance, dÃ©nivelÃ©, vitesse, cirque, abandon, finisher, bÃ©nÃ©voles, La RÃ©union.",
       },
       {
         id: "chiffres_cles",
@@ -633,25 +633,27 @@ export const problemesFixed: ProblemeDuJour[] = [
       },
       {
         id: "structure",
-        label: "Structurer ma réponse",
+        label: "Structurer ma rÃ©ponse",
         type: "guided",
         content:
-          "Écris en 3 phrases :\n1. Présente la course (distance, dénivelé, île).\n2. Décris le record ou les conditions avec des chiffres.\n3. Explique pourquoi c'est « fou » avec les chiffres d'abandon ou de logistique.",
+          "Ã‰cris en 3 phrases :\n1. PrÃ©sente la course (distance, dÃ©nivelÃ©, Ã®le).\n2. DÃ©cris le record ou les conditions avec des chiffres.\n3. Explique pourquoi c'est Â« fou Â» avec les chiffres d'abandon ou de logistique.",
       },
       {
         id: "indice",
         label: "Demander un indice",
         type: "hint",
         content:
-          "Compare une donnée du Grand Raid avec quelque chose de concret : 9 600 m de dénivelé, c'est presque l'Everest (8 849 m). Ça aide le lecteur à comprendre l'ampleur.",
+          "Compare une donnÃ©e du Grand Raid avec quelque chose de concret : 9 600 m de dÃ©nivelÃ©, c'est presque l'Everest (8 849 m). Ã‡a aide le lecteur Ã  comprendre l'ampleur.",
       },
       {
         id: "open",
         label: "Expliquer avec mes mots",
         type: "open",
         content:
-          "Rédige comme si tu expliquais à un camarade qui n'a jamais entendu parler du Grand Raid. Quels chiffres le surprendraient le plus ?",
+          "RÃ©dige comme si tu expliquais Ã  un camarade qui n'a jamais entendu parler du Grand Raid. Quels chiffres le surprendraient le plus ?",
       },
     ],
   },
 ];
+
+
