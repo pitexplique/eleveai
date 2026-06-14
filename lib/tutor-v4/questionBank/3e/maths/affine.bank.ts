@@ -2055,4 +2055,163 @@ export const affineBank: TutorBankItemV4[] = [
       "Conclusion : le coefficient directeur indique la pente, tandis que l’ordonnée à l’origine indique la valeur de départ.",
     tags: ["affine_fonction", "defi", "open", "synthese"],
   },
+
+  /* ===== AFFINE_RECONNAITRE (compléments) ===== */
+  {
+    kind: "fixed",
+    id: "3e_affine_reconnaitre_fixed_x1",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "affine_fonction",
+    microId: "affine_reconnaitre",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Quelle est la forme générale d’une fonction affine ?",
+    format: "qcm",
+    choices: ["$f(x) = ax + b$", "$f(x) = ax$", "$f(x) = x^2$", "$f(x) = \\dfrac{a}{x}$"],
+    expected: ["$f(x) = ax + b$"],
+    comparator: "mcq_exact",
+    hint: "Un coefficient directeur et un terme constant.",
+    explanation:
+      "Définition : une fonction affine s’écrit $f(x) = ax + b$.\n\n" +
+      "Méthode : on repère le coefficient $a$ et la constante $b$.\n\n" +
+      "Calcul : la forme générale est $ax + b$.\n\n" +
+      "Conclusion : c’est $f(x) = ax + b$.",
+    tags: ["affine_fonction", "reconnaitre", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "3e_affine_reconnaitre_tpl_x1",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "affine_fonction",
+    microId: "affine_reconnaitre",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Linéaire = sans terme constant ; affine = avec terme constant.",
+    tags: ["affine_fonction", "reconnaitre", "template"],
+    generate: () => {
+      const lineaire = randomChoice([true, false]);
+      const a = randomInt(2, 5);
+      const b = lineaire ? 0 : randomInt(1, 6);
+      const expr = lineaire ? `$f(x) = ${a}x$` : `$f(x) = ${a}x + ${b}$`;
+      const rep = lineaire ? "linéaire" : "affine (non linéaire)";
+      return {
+        text: `La fonction ${expr} est-elle linéaire ou affine (non linéaire) ?`,
+        format: "qcm",
+        choices: shuffle(["linéaire", "affine (non linéaire)"]),
+        expected: [rep],
+        comparator: "mcq_exact",
+        explanation:
+          `Définition : une fonction linéaire est $ax$, une affine $ax + b$.\n\n` +
+          `Méthode : on regarde s’il y a un terme constant.\n\n` +
+          `Calcul : ${lineaire ? "pas de terme constant" : `terme constant $${b}$`}.\n\n` +
+          `Conclusion : la fonction est ${rep}.`,
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "3e_affine_reconnaitre_qcm_x2",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "affine_fonction",
+    microId: "affine_reconnaitre",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Parmi ces fonctions, laquelle est affine mais PAS linéaire ?",
+    format: "qcm",
+    choices: ["$f(x) = 3x + 2$", "$f(x) = 3x$", "$f(x) = x^2$", "$f(x) = 5$"],
+    expected: ["$f(x) = 3x + 2$"],
+    comparator: "mcq_exact",
+    hint: "Affine non linéaire : $ax + b$ avec $b \\neq 0$.",
+    explanation:
+      "Définition : une fonction affine non linéaire a un terme constant non nul.\n\n" +
+      "Méthode : on cherche $ax + b$ avec $b \\neq 0$.\n\n" +
+      "Calcul : $3x + 2$ a $b = 2 \\neq 0$.\n\n" +
+      "Conclusion : $f(x) = 3x + 2$ est affine mais pas linéaire.",
+    tags: ["affine_fonction", "reconnaitre", "qcm"],
+  },
+
+  /* ===== AFFINE_PROBLEME (compléments) ===== */
+  {
+    kind: "template",
+    id: "3e_affine_probleme_tpl_x1_tarif",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "affine_fonction",
+    microId: "affine_probleme",
+    difficulty: 4,
+    theme: "reunion",
+    hint: "Prix $= $ part fixe $+ $ prix par unité $\\times$ quantité.",
+    tags: ["affine_fonction", "probleme", "reunion", "template"],
+    generate: () => {
+      const b = randomChoice([5, 10, 12]);
+      const a = randomChoice([2, 3, 4]);
+      const x = randomInt(3, 8);
+      const total = a * x + b;
+      return {
+        text: `Une location de paddle coûte ${b} € de réservation puis ${a} € par heure. Combien coûte une sortie de ${x} heures (en €) ?`,
+        format: "short",
+        expected: [String(total)],
+        comparator: "number_equal",
+        explanation:
+          `Définition : le prix est une fonction affine $f(x) = ${a}x + ${b}$.\n\n` +
+          `Méthode : on calcule $f(${x})$.\n\n` +
+          `Calcul : $${a} \\times ${x} + ${b} = ${total}$.\n\n` +
+          `Conclusion : la sortie coûte $${total}$ €.`,
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "3e_affine_probleme_tpl_x2_seuil",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "affine_fonction",
+    microId: "affine_probleme",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Résous $f(x) = $ budget pour trouver la quantité.",
+    tags: ["affine_fonction", "probleme", "template"],
+    generate: () => {
+      const a = randomChoice([2, 3, 5]);
+      const b = randomChoice([4, 6, 10]);
+      const x = randomInt(4, 9);
+      const budget = a * x + b;
+      return {
+        text: `Un abonnement coûte $f(x) = ${a}x + ${b}$ euros pour $x$ mois. Avec ${budget} €, combien de mois peut-on payer ?`,
+        format: "short",
+        expected: [String(x)],
+        comparator: "number_equal",
+        explanation:
+          `Définition : on cherche $x$ tel que $f(x) = ${budget}$.\n\n` +
+          `Méthode : on résout $${a}x + ${b} = ${budget}$.\n\n` +
+          `Calcul : $${a}x = ${budget - b}$, donc $x = ${x}$.\n\n` +
+          `Conclusion : on peut payer ${x} mois.`,
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "3e_affine_probleme_qcm_x1",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "affine_fonction",
+    microId: "affine_probleme",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Un taxi facture $4$ € de prise en charge puis $2$ € par km. Quelle fonction donne le prix pour $x$ km ?",
+    format: "qcm",
+    choices: ["$f(x) = 2x + 4$", "$f(x) = 4x + 2$", "$f(x) = 2x$", "$f(x) = 6x$"],
+    expected: ["$f(x) = 2x + 4$"],
+    comparator: "mcq_exact",
+    hint: "Part fixe = $4$, prix par km = $2$.",
+    explanation:
+      "Définition : prix $= $ part fixe $+ $ prix par km $\\times$ distance.\n\n" +
+      "Méthode : on identifie $b = 4$ (fixe) et $a = 2$ (par km).\n\n" +
+      "Calcul : $f(x) = 2x + 4$.\n\n" +
+      "Conclusion : c’est $f(x) = 2x + 4$.",
+    tags: ["affine_fonction", "probleme", "modelisation", "qcm"],
+  },
 ];

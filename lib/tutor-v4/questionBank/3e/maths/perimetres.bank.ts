@@ -1011,4 +1011,383 @@ export const perimetresBank: TutorBankItemV4[] = [
       "Conclusion : aire et périmètre ne varient pas toujours de la même façon.",
     tags: ["perimetre", "aire", "open", "defi"],
   },
+
+  /* ===== PERIMETRE_COMPRENDRE (compléments) ===== */
+  {
+    kind: "fixed",
+    id: "3e_aire_perimetre_comprendre_fixed_x1",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_comprendre",
+    difficulty: 1,
+    theme: "neutral",
+    text: "Le périmètre d’une figure mesure…",
+    format: "qcm",
+    choices: ["la longueur de son contour", "sa surface", "son volume", "le nombre de sommets"],
+    expected: ["la longueur de son contour"],
+    comparator: "mcq_exact",
+    hint: "On en fait le tour.",
+    explanation:
+      "Définition : le périmètre est la longueur du contour d’une figure.\n\n" +
+      "Méthode : on additionne les longueurs des côtés.\n\n" +
+      "Calcul : l’aire, elle, mesure la surface.\n\n" +
+      "Conclusion : le périmètre mesure la longueur du contour.",
+    tags: ["perimetre", "comprendre", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "3e_aire_perimetre_comprendre_tpl_x1_rectangle",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_comprendre",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Périmètre d’un rectangle $= 2 \\times (L + l)$.",
+    tags: ["perimetre", "comprendre", "rectangle", "template"],
+    generate: () => {
+      const L = randomInt(4, 9);
+      const l = randomInt(2, 5);
+      const p = 2 * (L + l);
+      return {
+        text: `Quel est le périmètre d’un rectangle de longueur $${L}$ cm et de largeur $${l}$ cm (en cm) ?`,
+        format: "short",
+        expected: [String(p)],
+        comparator: "number_equal",
+        explanation:
+          `Définition : périmètre d’un rectangle $= 2 \\times (L + l)$.\n\n` +
+          `Méthode : on additionne longueur et largeur, puis on multiplie par $2$.\n\n` +
+          `Calcul : $2 \\times (${L} + ${l}) = 2 \\times ${L + l} = ${p}$.\n\n` +
+          `Conclusion : le périmètre est $${p}$ cm.`,
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "3e_aire_perimetre_comprendre_tpl_x2_carre",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_comprendre",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Périmètre d’un carré $= 4 \\times$ côté.",
+    tags: ["perimetre", "comprendre", "carre", "template"],
+    generate: () => {
+      const c = randomInt(3, 12);
+      return {
+        text: `Quel est le périmètre d’un carré de côté $${c}$ cm (en cm) ?`,
+        format: "short",
+        expected: [String(4 * c)],
+        comparator: "number_equal",
+        explanation:
+          `Définition : périmètre d’un carré $= 4 \\times$ côté.\n\n` +
+          `Méthode : on multiplie le côté par $4$.\n\n` +
+          `Calcul : $4 \\times ${c} = ${4 * c}$.\n\n` +
+          `Conclusion : le périmètre est $${4 * c}$ cm.`,
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "3e_aire_perimetre_comprendre_qcm_x1_unite",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_comprendre",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Quelle unité convient pour un périmètre ?",
+    format: "qcm",
+    choices: ["cm", "$\\text{cm}^2$", "$\\text{cm}^3$", "L"],
+    expected: ["cm"],
+    comparator: "mcq_exact",
+    hint: "Un périmètre est une longueur.",
+    explanation:
+      "Définition : le périmètre est une longueur.\n\n" +
+      "Méthode : on choisit une unité de longueur.\n\n" +
+      "Calcul : le $\\text{cm}^2$ est une aire.\n\n" +
+      "Conclusion : on l’exprime en cm.",
+    tags: ["perimetre", "comprendre", "unite", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "3e_aire_perimetre_comprendre_tpl_x3_triangle",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_comprendre",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "On additionne les trois côtés.",
+    tags: ["perimetre", "comprendre", "triangle", "template"],
+    generate: () => {
+      const a = randomInt(3, 8);
+      const b = randomInt(3, 8);
+      const c = randomInt(3, 8);
+      return {
+        text: `Un triangle a des côtés de $${a}$ cm, $${b}$ cm et $${c}$ cm. Quel est son périmètre (en cm) ?`,
+        format: "short",
+        expected: [String(a + b + c)],
+        comparator: "number_equal",
+        explanation:
+          `Définition : le périmètre est la somme des côtés.\n\n` +
+          `Méthode : on additionne les trois longueurs.\n\n` +
+          `Calcul : $${a} + ${b} + ${c} = ${a + b + c}$.\n\n` +
+          `Conclusion : le périmètre est $${a + b + c}$ cm.`,
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "3e_aire_perimetre_comprendre_qcm_x2_difference",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_comprendre",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Quelle est la différence entre périmètre et aire ?",
+    format: "qcm",
+    choices: [
+      "le périmètre est le contour, l’aire est la surface",
+      "ce sont deux mots pour la même chose",
+      "le périmètre est la surface, l’aire est le contour",
+      "le périmètre est un volume",
+    ],
+    expected: ["le périmètre est le contour, l’aire est la surface"],
+    comparator: "mcq_exact",
+    hint: "L’un fait le tour, l’autre remplit.",
+    explanation:
+      "Définition : le périmètre mesure le contour, l’aire mesure la surface.\n\n" +
+      "Méthode : on associe chaque mot à sa grandeur.\n\n" +
+      "Calcul : périmètre en cm, aire en $\\text{cm}^2$.\n\n" +
+      "Conclusion : périmètre = contour, aire = surface.",
+    tags: ["perimetre", "aire", "comprendre", "qcm"],
+  },
+
+  /* ===== PERIMETRE_CERCLE (compléments) ===== */
+  {
+    kind: "fixed",
+    id: "3e_aire_perimetre_cercle_qcm_x1_formule",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_cercle",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Quelle est la formule de la longueur (périmètre) d’un cercle de rayon $r$ ?",
+    format: "qcm",
+    choices: ["$2\\pi r$", "$\\pi r^2$", "$\\pi r$", "$2r$"],
+    expected: ["$2\\pi r$"],
+    comparator: "mcq_exact",
+    hint: "$\\pi r^2$ est l’aire du disque.",
+    explanation:
+      "Définition : la longueur d’un cercle est $2\\pi r$ (ou $\\pi d$).\n\n" +
+      "Méthode : on distingue longueur ($2\\pi r$) et aire ($\\pi r^2$).\n\n" +
+      "Calcul : longueur $= 2\\pi r$.\n\n" +
+      "Conclusion : c’est $2\\pi r$.",
+    tags: ["perimetre", "cercle", "formule", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "3e_aire_perimetre_cercle_tpl_x1_valeur",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_cercle",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Longueur $= \\pi \\times d$, avec $\\pi \\approx 3{,}14$.",
+    tags: ["perimetre", "cercle", "valeur", "template"],
+    generate: () => {
+      const d = randomChoice([4, 6, 10, 20]);
+      const p = Math.round(3.14 * d * 100) / 100;
+      return {
+        text: `Un cercle a un diamètre de $${d}$ cm. Quelle est sa longueur au centième près (avec $\\pi \\approx 3{,}14$, en cm) ?`,
+        format: "short",
+        expected: [String(p), String(p).replace(".", ",")],
+        comparator: "number_equal",
+        explanation:
+          `Définition : longueur d’un cercle $= \\pi \\times d$.\n\n` +
+          `Méthode : on multiplie le diamètre par $3{,}14$.\n\n` +
+          `Calcul : $3{,}14 \\times ${d} = ${formatNumber(p)}$.\n\n` +
+          `Conclusion : la longueur est environ $${formatNumber(p)}$ cm.`,
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "3e_aire_perimetre_cercle_fixed_x1",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_cercle",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Un cercle a un rayon de $5$ cm. Quelle est sa longueur au centième près (avec $\\pi \\approx 3{,}14$, en cm) ?",
+    format: "short",
+    expected: ["31.4", "31,4"],
+    comparator: "number_equal",
+    hint: "$2 \\times 3{,}14 \\times 5$.",
+    explanation:
+      "Définition : longueur $= 2\\pi r$.\n\n" +
+      "Méthode : on calcule $2 \\times 3{,}14 \\times 5$.\n\n" +
+      "Calcul : $2 \\times 3{,}14 \\times 5 = 31{,}4$.\n\n" +
+      "Conclusion : la longueur est environ $31{,}4$ cm.",
+    tags: ["perimetre", "cercle", "short"],
+  },
+
+  /* ===== PERIMETRE_FIGURE_COMPOSEE (compléments) ===== */
+  {
+    kind: "template",
+    id: "3e_aire_perimetre_figure_composee_tpl_x1",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_figure_composee",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "On additionne toutes les longueurs du contour.",
+    tags: ["perimetre", "figure_composee", "template"],
+    generate: () => {
+      const a = randomInt(2, 6);
+      const b = randomInt(2, 6);
+      const c = randomInt(2, 6);
+      const d = randomInt(2, 6);
+      const perimetre = a + b + c + d + (a + c) + (b + d);
+      return {
+        text: `Une figure en L a pour côtés successifs $${a}$, $${b}$, $${c}$, $${d}$, $${a + c}$ et $${b + d}$ (en cm). Quel est son périmètre (en cm) ?`,
+        format: "short",
+        expected: [String(perimetre)],
+        comparator: "number_equal",
+        explanation:
+          `Définition : le périmètre est la somme de toutes les longueurs du contour.\n\n` +
+          `Méthode : on additionne les six côtés.\n\n` +
+          `Calcul : $${a} + ${b} + ${c} + ${d} + ${a + c} + ${b + d} = ${perimetre}$.\n\n` +
+          `Conclusion : le périmètre est $${perimetre}$ cm.`,
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "3e_aire_perimetre_figure_composee_qcm_x1",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_figure_composee",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Pour calculer le périmètre d’une figure composée, on…",
+    format: "qcm",
+    choices: [
+      "additionne toutes les longueurs du contour",
+      "multiplie les aires",
+      "additionne les aires",
+      "compte les sommets",
+    ],
+    expected: ["additionne toutes les longueurs du contour"],
+    comparator: "mcq_exact",
+    hint: "Le périmètre, c’est le tour complet.",
+    explanation:
+      "Définition : le périmètre est la longueur du contour.\n\n" +
+      "Méthode : on parcourt tout le contour en additionnant les côtés.\n\n" +
+      "Calcul : on n’oublie aucun segment.\n\n" +
+      "Conclusion : on additionne toutes les longueurs du contour.",
+    tags: ["perimetre", "figure_composee", "methode", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "3e_aire_perimetre_figure_composee_fixed_x1",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_figure_composee",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Un terrain rectangulaire de $20$ m sur $15$ m est entièrement clôturé. Quelle longueur de clôture faut-il (en m) ?",
+    format: "short",
+    expected: ["70"],
+    comparator: "number_equal",
+    hint: "Périmètre $= 2 \\times (20 + 15)$.",
+    explanation:
+      "Définition : la clôture suit le périmètre du terrain.\n\n" +
+      "Méthode : $2 \\times (L + l)$.\n\n" +
+      "Calcul : $2 \\times (20 + 15) = 2 \\times 35 = 70$.\n\n" +
+      "Conclusion : il faut $70$ m de clôture.",
+    tags: ["perimetre", "figure_composee", "short"],
+  },
+
+  /* ===== PERIMETRE_DEFI (compléments) ===== */
+  {
+    kind: "template",
+    id: "3e_aire_perimetre_defi_tpl_x1_demi_cercle",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_defi",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Demi-cercle : longueur de l’arc $= \\pi r$.",
+    tags: ["perimetre", "defi", "cercle", "template"],
+    generate: () => {
+      const r = randomChoice([10, 20]);
+      const arc = Math.round(3.14 * r * 100) / 100;
+      return {
+        text: `Une piste a la forme d’un demi-cercle de rayon $${r}$ m. Quelle est la longueur de l’arc (la partie courbe) au centième près (avec $\\pi \\approx 3{,}14$, en m) ?`,
+        format: "short",
+        expected: [String(arc), String(arc).replace(".", ",")],
+        comparator: "number_equal",
+        explanation:
+          `Définition : l’arc d’un demi-cercle vaut la moitié de la longueur du cercle, soit $\\pi r$.\n\n` +
+          `Méthode : on calcule $3{,}14 \\times r$.\n\n` +
+          `Calcul : $3{,}14 \\times ${r} = ${formatNumber(arc)}$.\n\n` +
+          `Conclusion : l’arc mesure environ $${formatNumber(arc)}$ m.`,
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "3e_aire_perimetre_defi_qcm_x1",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_defi",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Si on double le rayon d’un cercle, sa longueur ($2\\pi r$) est multipliée par…",
+    format: "qcm",
+    choices: ["$2$", "$4$", "$\\pi$", "$8$"],
+    expected: ["$2$"],
+    comparator: "mcq_exact",
+    hint: "La longueur est proportionnelle au rayon.",
+    explanation:
+      "Définition : la longueur $2\\pi r$ est proportionnelle à $r$.\n\n" +
+      "Méthode : on regarde l’effet de doubler $r$.\n\n" +
+      "Calcul : si $r$ double, $2\\pi r$ double aussi.\n\n" +
+      "Conclusion : la longueur est multipliée par $2$.",
+    tags: ["perimetre", "defi", "cercle", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "3e_aire_perimetre_defi_fixed_x1",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_defi",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Un carré et un rectangle ont le même périmètre de $24$ cm. Le carré a un côté de combien de cm ?",
+    format: "short",
+    expected: ["6"],
+    comparator: "number_equal",
+    hint: "Périmètre du carré $= 4 \\times$ côté.",
+    explanation:
+      "Définition : périmètre d’un carré $= 4 \\times$ côté.\n\n" +
+      "Méthode : on divise le périmètre par $4$.\n\n" +
+      "Calcul : $24 \\div 4 = 6$.\n\n" +
+      "Conclusion : le côté du carré est $6$ cm.",
+    tags: ["perimetre", "defi", "short"],
+  },
 ];

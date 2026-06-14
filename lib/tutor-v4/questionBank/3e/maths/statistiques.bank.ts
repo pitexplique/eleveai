@@ -2029,6 +2029,336 @@ export const statistiquesBank: TutorBankItemV4[] = [
       "Calcul : médiane $= 9$ ; étendue $= 14 - 6 = 8$.\n\n" +
       "Conclusion : la médiane est $9$ et l’étendue est $8$.",
     tags: ["stat_statistique", "defi", "brevet", "qcm"],
+  },
+
+  /* =========================
+     STAT_LIRE_TABLEAU (compléments)
+  ========================= */
+  {
+    kind: "template",
+    id: "3e_stat_lire_tableau_tpl_4_valeur",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "stat_statistique",
+    microId: "stat_lire_tableau",
+    difficulty: 1,
+    theme: "neutral",
+    hint: "Repère la catégorie demandée, puis lis le nombre en face.",
+    tags: ["stat_statistique", "tableau", "lecture", "template"],
+    generate: () => {
+      const labels = ["rouge", "bleu", "vert", "jaune"];
+      const values = labels.map(() => randomInt(5, 30));
+      const i = randomInt(0, labels.length - 1);
+      return {
+        text: `Un tableau indique — rouge : ${values[0]}, bleu : ${values[1]}, vert : ${values[2]}, jaune : ${values[3]}. Quel est l’effectif de ${labels[i]} ?`,
+        format: "short",
+        expected: [String(values[i])],
+        comparator: "number_equal",
+        explanation:
+          `Définition : lire un tableau, c’est retrouver une valeur par catégorie.\n\n` +
+          `Méthode : on cherche ${labels[i]} et on lit le nombre associé.\n\n` +
+          `Calcul : ${labels[i]} correspond à ${values[i]}.\n\n` +
+          `Conclusion : l’effectif de ${labels[i]} est ${values[i]}.`,
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "3e_stat_lire_tableau_qcm_1_max",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "stat_statistique",
+    microId: "stat_lire_tableau",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Un tableau indique — foot : $18$, danse : $12$, judo : $9$. Quelle activité a le plus d’élèves ?",
+    format: "qcm",
+    choices: ["foot", "danse", "judo", "elles sont à égalité"],
+    expected: ["foot"],
+    comparator: "mcq_exact",
+    hint: "On compare les effectifs.",
+    explanation:
+      "Définition : on compare les valeurs du tableau.\n\n" +
+      "Méthode : on cherche le plus grand effectif.\n\n" +
+      "Calcul : $18 > 12 > 9$.\n\n" +
+      "Conclusion : c’est le foot.",
+    tags: ["stat_statistique", "tableau", "max", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "3e_stat_lire_tableau_tpl_5_total",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "stat_statistique",
+    microId: "stat_lire_tableau",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "L’effectif total est la somme des effectifs.",
+    tags: ["stat_statistique", "tableau", "total", "template"],
+    generate: () => {
+      const a = randomInt(5, 15);
+      const b = randomInt(5, 15);
+      const c = randomInt(5, 15);
+      const total = a + b + c;
+      return {
+        text: `Un tableau indique — A : ${a}, B : ${b}, C : ${c}. Quel est l’effectif total ?`,
+        format: "short",
+        expected: [String(total)],
+        comparator: "number_equal",
+        explanation:
+          `Définition : l’effectif total est la somme de tous les effectifs.\n\n` +
+          `Méthode : on additionne A, B et C.\n\n` +
+          `Calcul : ${a} + ${b} + ${c} = ${total}.\n\n` +
+          `Conclusion : l’effectif total est ${total}.`,
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "3e_stat_lire_tableau_qcm_2_sens",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "stat_statistique",
+    microId: "stat_lire_tableau",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Dans un tableau, on lit « tennis : 14 ». Que signifie le nombre $14$ ?",
+    format: "qcm",
+    choices: [
+      "$14$ personnes ont choisi tennis",
+      "la moyenne vaut $14$",
+      "il y a $14$ sports",
+      "le tennis est en $14^\\text{e}$ position",
+    ],
+    expected: ["$14$ personnes ont choisi tennis"],
+    comparator: "mcq_exact",
+    hint: "C’est l’effectif de la catégorie tennis.",
+    explanation:
+      "Définition : un effectif est le nombre d’individus d’une catégorie.\n\n" +
+      "Méthode : on lit la catégorie et le nombre en face.\n\n" +
+      "Calcul : tennis $\\to 14$.\n\n" +
+      "Conclusion : $14$ personnes ont choisi tennis.",
+    tags: ["stat_statistique", "tableau", "sens", "qcm"],
+  },
+
+  /* =========================
+     STAT_LIRE_GRAPHIQUE (compléments)
+  ========================= */
+  {
+    kind: "template",
+    id: "3e_stat_lire_graphique_tpl_6_valeur",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "stat_statistique",
+    microId: "stat_lire_graphique",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Lis la valeur au sommet de la barre demandée.",
+    tags: ["stat_statistique", "graphique", "lecture", "canvas", "template"],
+    generate: () => {
+      const data = [
+        { label: "Lun", value: randomInt(5, 20) },
+        { label: "Mar", value: randomInt(5, 20) },
+        { label: "Mer", value: randomInt(5, 20) },
+        { label: "Jeu", value: randomInt(5, 20) },
+      ];
+      const i = randomInt(0, data.length - 1);
+      return {
+        text: `D’après le graphique, quelle est la valeur du jour ${data[i].label} ?`,
+        format: "short",
+        expected: [String(data[i].value)],
+        comparator: "number_equal",
+        explanation:
+          `Définition : la hauteur d’une barre donne la valeur de la catégorie.\n\n` +
+          `Méthode : on repère la barre ${data[i].label}.\n\n` +
+          `Calcul : la barre ${data[i].label} indique ${data[i].value}.\n\n` +
+          `Conclusion : la valeur de ${data[i].label} est ${data[i].value}.`,
+        canvas: statGraphCanvas({
+          graphType: "barres",
+          data,
+          display: { showLabels: true, showValues: true, highlightIndex: i },
+        }),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "3e_stat_lire_graphique_tpl_7_difference",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "stat_statistique",
+    microId: "stat_lire_graphique",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Lis les deux valeurs, puis soustrais.",
+    tags: ["stat_statistique", "graphique", "difference", "canvas", "template"],
+    generate: () => {
+      const data = [
+        { label: "A", value: randomInt(10, 15) },
+        { label: "B", value: randomInt(16, 25) },
+      ];
+      const diff = data[1].value - data[0].value;
+      return {
+        text: "D’après le graphique, de combien la valeur de B dépasse-t-elle celle de A ?",
+        format: "short",
+        expected: [String(diff)],
+        comparator: "number_equal",
+        explanation:
+          `Définition : on compare deux barres par soustraction.\n\n` +
+          `Méthode : on lit B et A, puis on calcule $B - A$.\n\n` +
+          `Calcul : ${data[1].value} - ${data[0].value} = ${diff}.\n\n` +
+          `Conclusion : B dépasse A de ${diff}.`,
+        canvas: statGraphCanvas({
+          graphType: "barres",
+          data,
+          display: { showLabels: true, showValues: true },
+        }),
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "3e_stat_lire_graphique_qcm_2_min",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "stat_statistique",
+    microId: "stat_lire_graphique",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Dans un diagramme en barres, la catégorie la moins représentée correspond à…",
+    format: "qcm",
+    choices: ["la barre la plus basse", "la barre la plus haute", "la première barre", "la dernière barre"],
+    expected: ["la barre la plus basse"],
+    comparator: "mcq_exact",
+    hint: "Moins représentée = plus petite valeur.",
+    explanation:
+      "Définition : la hauteur d’une barre représente l’effectif.\n\n" +
+      "Méthode : on cherche la plus petite hauteur.\n\n" +
+      "Calcul : la plus petite valeur est la barre la plus basse.\n\n" +
+      "Conclusion : c’est la barre la plus basse.",
+    tags: ["stat_statistique", "graphique", "min", "qcm"],
+  },
+
+  /* =========================
+     STAT_DEFI (compléments)
+  ========================= */
+  {
+    kind: "template",
+    id: "3e_stat_defi_tpl_5_moyenne_pondere",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "stat_statistique",
+    microId: "stat_defi",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Multiplie chaque note par son effectif, additionne, puis divise par l’effectif total.",
+    tags: ["stat_statistique", "defi", "moyenne", "effectifs", "template"],
+    generate: () => {
+      const v1 = randomChoice([8, 10, 12]);
+      const v2 = v1 + 4;
+      const e1 = randomInt(2, 4);
+      const e2 = randomInt(2, 4);
+      const total = e1 + e2;
+      const avg = (v1 * e1 + v2 * e2) / total;
+      return {
+        text: `Dans une classe, ${e1} élèves ont eu ${v1}/20 et ${e2} élèves ont eu ${v2}/20. Quelle est la moyenne de la classe ?`,
+        format: "short",
+        expected: [formatNumber(avg)],
+        comparator: "number_equal",
+        explanation:
+          `Définition : une moyenne pondérée tient compte des effectifs.\n\n` +
+          `Méthode : on calcule $(${v1} \\times ${e1} + ${v2} \\times ${e2}) \\div ${total}$.\n\n` +
+          `Calcul : $= ${formatNumber(avg)}$.\n\n` +
+          `Conclusion : la moyenne est ${formatNumber(avg)}/20.`,
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "3e_stat_defi_fixed_3_choix_dispersion",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "stat_statistique",
+    microId: "stat_defi",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Pour mesurer si les valeurs d’une série sont très étalées ou regroupées, quel indicateur utilise-t-on ?",
+    format: "qcm",
+    choices: ["l’étendue", "la moyenne", "la médiane", "l’effectif total"],
+    expected: ["l’étendue"],
+    comparator: "mcq_exact",
+    hint: "Il mesure l’écart entre le maximum et le minimum.",
+    explanation:
+      "Définition : l’étendue mesure la dispersion.\n\n" +
+      "Méthode : on choisit l’indicateur qui compare les extrêmes.\n\n" +
+      "Calcul : étendue $= \\text{max} - \\text{min}$.\n\n" +
+      "Conclusion : on utilise l’étendue.",
+    tags: ["stat_statistique", "defi", "dispersion", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "3e_stat_defi_tpl_6_etendue_graphique",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "stat_statistique",
+    microId: "stat_defi",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Lis la plus grande et la plus petite barre, puis soustrais.",
+    tags: ["stat_statistique", "defi", "etendue", "graphique", "canvas", "template"],
+    generate: () => {
+      const data = [
+        { label: "A", value: randomInt(5, 9) },
+        { label: "B", value: randomInt(10, 14) },
+        { label: "C", value: randomInt(20, 28) },
+        { label: "D", value: randomInt(15, 19) },
+      ];
+      const values = data.map((d) => d.value);
+      const e = etendue(values);
+      return {
+        text: "D’après le graphique, quelle est l’étendue des valeurs représentées ?",
+        format: "short",
+        expected: [String(e)],
+        comparator: "number_equal",
+        explanation:
+          `Définition : étendue $= \\text{max} - \\text{min}$.\n\n` +
+          `Méthode : on repère la plus grande et la plus petite barre.\n\n` +
+          `Calcul : ${Math.max(...values)} - ${Math.min(...values)} = ${e}.\n\n` +
+          `Conclusion : l’étendue est ${e}.`,
+        canvas: statGraphCanvas({
+          graphType: "barres",
+          data,
+          display: { showLabels: true, showValues: true },
+        }),
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "3e_stat_defi_fixed_4_brevet_complet",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "stat_statistique",
+    microId: "stat_defi",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Série : $4 \\,;\\, 6 \\,;\\, 6 \\,;\\, 8 \\,;\\, 11$. Quelle affirmation est exacte ?",
+    format: "qcm",
+    choices: [
+      "moyenne $= 7$ et médiane $= 6$",
+      "moyenne $= 6$ et médiane $= 7$",
+      "moyenne $= 7$ et médiane $= 8$",
+      "moyenne $= 6$ et médiane $= 6$",
+    ],
+    expected: ["moyenne $= 7$ et médiane $= 6$"],
+    comparator: "mcq_exact",
+    hint: "Moyenne $= 35 \\div 5$ ; médiane = valeur centrale de la série rangée.",
+    explanation:
+      "Définition : moyenne et médiane sont deux indicateurs.\n\n" +
+      "Méthode : moyenne $= (4+6+6+8+11) \\div 5$ ; médiane = $3^\\text{e}$ valeur rangée.\n\n" +
+      "Calcul : moyenne $= 35 \\div 5 = 7$ ; médiane $= 6$.\n\n" +
+      "Conclusion : moyenne $= 7$ et médiane $= 6$.",
+    tags: ["stat_statistique", "defi", "brevet", "qcm"],
   }
 
 ]

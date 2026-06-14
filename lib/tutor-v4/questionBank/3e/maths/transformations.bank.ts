@@ -1829,4 +1829,160 @@ export const transformationsBank: TutorBankItemV4[] = [
       "Conclusion : translation, rotation et symétrie conservent les longueurs, alors que l’homothétie peut agrandir ou réduire.",
     tags: ["transformation", "defi", "open", "comparaison"],
   },
+
+  /* ===== SYM_SYMETRIE_TRANSLATION_ROTATION (compléments) ===== */
+  {
+    kind: "fixed",
+    id: "3e_sym_symetrie_translation_rotation_fixed_x1",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "sym_transformation",
+    microId: "sym_symetrie_translation_rotation",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Une translation, une rotation ou une symétrie conservent…",
+    format: "qcm",
+    choices: ["les longueurs et les angles", "seulement la couleur", "le nom des points", "rien du tout"],
+    expected: ["les longueurs et les angles"],
+    comparator: "mcq_exact",
+    hint: "La figure garde la même forme et la même taille.",
+    explanation:
+      "Définition : ces transformations sont des isométries.\n\n" +
+      "Méthode : on vérifie ce qui reste inchangé.\n\n" +
+      "Calcul : la figure image a les mêmes longueurs et angles.\n\n" +
+      "Conclusion : elles conservent les longueurs et les angles.",
+    tags: ["transformation", "isometrie", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "3e_sym_symetrie_translation_rotation_fixed_x2",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "sym_transformation",
+    microId: "sym_symetrie_translation_rotation",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Une transformation qui fait « glisser » une figure dans une direction donnée est…",
+    format: "qcm",
+    choices: ["une translation", "une rotation", "une symétrie", "une homothétie"],
+    expected: ["une translation"],
+    comparator: "mcq_exact",
+    hint: "On glisse sans tourner.",
+    explanation:
+      "Définition : une translation glisse la figure selon une direction, un sens et une longueur.\n\n" +
+      "Méthode : on regarde si la figure tourne ou glisse.\n\n" +
+      "Calcul : ici, elle glisse sans tourner.\n\n" +
+      "Conclusion : c’est une translation.",
+    tags: ["transformation", "translation", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "3e_sym_symetrie_translation_rotation_tpl_x1",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "sym_transformation",
+    microId: "sym_symetrie_translation_rotation",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Relie la description à la transformation.",
+    tags: ["transformation", "template"],
+    generate: () => {
+      const cas = randomChoice([
+        { desc: "fait tourner une figure autour d’un point", rep: "une rotation" },
+        { desc: "fait glisser une figure", rep: "une translation" },
+        { desc: "renverse une figure de part et d’autre d’une droite", rep: "une symétrie axiale" },
+      ]);
+      return {
+        text: `Quelle transformation ${cas.desc} ?`,
+        format: "qcm",
+        choices: shuffle(["une rotation", "une translation", "une symétrie axiale"]),
+        expected: [cas.rep],
+        comparator: "mcq_exact",
+        explanation:
+          `Définition : chaque transformation a un effet caractéristique.\n\n` +
+          `Méthode : on relie l’action décrite à la transformation.\n\n` +
+          `Calcul : « ${cas.desc} » correspond à ${cas.rep}.\n\n` +
+          `Conclusion : c’est ${cas.rep}.`,
+      };
+    },
+  },
+
+  /* ===== SYM_HOMOTHETIE_RECONNAITRE (compléments) ===== */
+  {
+    kind: "fixed",
+    id: "3e_sym_homothetie_reconnaitre_fixed_x1",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "sym_transformation",
+    microId: "sym_homothetie_reconnaitre",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Une homothétie est une transformation qui…",
+    format: "qcm",
+    choices: [
+      "agrandit ou réduit une figure",
+      "conserve toujours les longueurs",
+      "fait seulement tourner la figure",
+      "ne change rien",
+    ],
+    expected: ["agrandit ou réduit une figure"],
+    comparator: "mcq_exact",
+    hint: "Elle utilise un rapport $k$.",
+    explanation:
+      "Définition : une homothétie agrandit ou réduit une figure selon un rapport $k$.\n\n" +
+      "Méthode : on regarde si la taille change.\n\n" +
+      "Calcul : si $|k| > 1$ on agrandit, si $|k| < 1$ on réduit.\n\n" +
+      "Conclusion : une homothétie agrandit ou réduit la figure.",
+    tags: ["transformation", "homothetie", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "3e_sym_homothetie_reconnaitre_fixed_x2",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "sym_transformation",
+    microId: "sym_homothetie_reconnaitre",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Avec une homothétie de rapport $k = 2$, la figure image est…",
+    format: "qcm",
+    choices: ["deux fois plus grande", "deux fois plus petite", "identique", "tournée de $90^\\circ$"],
+    expected: ["deux fois plus grande"],
+    comparator: "mcq_exact",
+    hint: "Les longueurs sont multipliées par $k$.",
+    explanation:
+      "Définition : une homothétie multiplie les longueurs par $k$.\n\n" +
+      "Méthode : avec $k = 2$, on multiplie par $2$.\n\n" +
+      "Calcul : les longueurs doublent.\n\n" +
+      "Conclusion : la figure est deux fois plus grande.",
+    tags: ["transformation", "homothetie", "rapport", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "3e_sym_homothetie_reconnaitre_tpl_x1",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "sym_transformation",
+    microId: "sym_homothetie_reconnaitre",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Si $|k| > 1$ on agrandit, si $0 < |k| < 1$ on réduit.",
+    tags: ["transformation", "homothetie", "template"],
+    generate: () => {
+      const agrandit = randomChoice([true, false]);
+      const k = agrandit ? randomChoice([2, 3]) : randomChoice(["\\dfrac{1}{2}", "\\dfrac{1}{3}"]);
+      return {
+        text: `Une homothétie a pour rapport $k = ${k}$. La figure image est-elle plus grande ou plus petite que la figure de départ ?`,
+        format: "qcm",
+        choices: shuffle(["plus grande", "plus petite", "identique"]),
+        expected: [agrandit ? "plus grande" : "plus petite"],
+        comparator: "mcq_exact",
+        explanation:
+          `Définition : le rapport $k$ détermine l’agrandissement ou la réduction.\n\n` +
+          `Méthode : on compare $|k|$ à $1$.\n\n` +
+          `Calcul : ${agrandit ? "$|k| > 1$, on agrandit" : "$|k| < 1$, on réduit"}.\n\n` +
+          `Conclusion : la figure image est ${agrandit ? "plus grande" : "plus petite"}.`,
+      };
+    },
+  },
 ];

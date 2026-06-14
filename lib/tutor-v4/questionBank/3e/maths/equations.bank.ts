@@ -1622,4 +1622,216 @@ export const equationsBank: TutorBankItemV4[] = [
   tags: ["equation", "defi", "verifier", "qcm"],
 },
 
+/* ===== EQUATION_RECONNAITRE (compléments) ===== */
+{
+  kind: "fixed",
+  id: "3e_equation_reconnaitre_fixed_x1",
+  niveau: "3e",
+  matiere: "maths",
+  notionId: "equation_resolution",
+  microId: "equation_reconnaitre",
+  difficulty: 1,
+  theme: "neutral",
+  text: "Parmi ces écritures, laquelle est une équation ?",
+  format: "qcm",
+  choices: ["$3x - 1 = 8$", "$3x - 1$", "$8$", "$x^2 + 1$"],
+  expected: ["$3x - 1 = 8$"],
+  comparator: "mcq_exact",
+  hint: "Une équation contient un signe $=$ et une inconnue.",
+  explanation:
+    "Définition : une équation est une égalité contenant une inconnue.\n\n" +
+    "Méthode : on cherche un signe $=$ avec une lettre.\n\n" +
+    "Calcul : $3x - 1 = 8$ contient l’inconnue $x$ et le signe $=$.\n\n" +
+    "Conclusion : $3x - 1 = 8$ est une équation.",
+  tags: ["equation", "reconnaitre", "qcm"],
+},
+{
+  kind: "fixed",
+  id: "3e_equation_reconnaitre_fixed_x2",
+  niveau: "3e",
+  matiere: "maths",
+  notionId: "equation_resolution",
+  microId: "equation_reconnaitre",
+  difficulty: 2,
+  theme: "neutral",
+  text: "Une équation est…",
+  format: "qcm",
+  choices: [
+    "une égalité avec une inconnue",
+    "une expression sans signe égal",
+    "une simple multiplication",
+    "un nombre seul",
+  ],
+  expected: ["une égalité avec une inconnue"],
+  comparator: "mcq_exact",
+  hint: "Il faut un signe $=$ et une lettre.",
+  explanation:
+    "Définition : une équation est une égalité comportant une inconnue.\n\n" +
+    "Méthode : on vérifie la présence du signe $=$ et d’une lettre.\n\n" +
+    "Calcul : sans signe $=$, c’est une expression, pas une équation.\n\n" +
+    "Conclusion : une équation est une égalité avec une inconnue.",
+  tags: ["equation", "reconnaitre", "qcm"],
+},
+{
+  kind: "fixed",
+  id: "3e_equation_reconnaitre_fixed_x3_expression",
+  niveau: "3e",
+  matiere: "maths",
+  notionId: "equation_resolution",
+  microId: "equation_reconnaitre",
+  difficulty: 2,
+  theme: "neutral",
+  text: "L’écriture $2x + 3$ est…",
+  format: "qcm",
+  choices: ["une expression (pas une équation)", "une équation", "une solution", "une inégalité"],
+  expected: ["une expression (pas une équation)"],
+  comparator: "mcq_exact",
+  hint: "Il n’y a pas de signe $=$.",
+  explanation:
+    "Définition : sans signe $=$, on a une expression.\n\n" +
+    "Méthode : on cherche le signe $=$.\n\n" +
+    "Calcul : $2x + 3$ n’a pas de signe $=$.\n\n" +
+    "Conclusion : c’est une expression, pas une équation.",
+  tags: ["equation", "reconnaitre", "expression", "qcm"],
+},
+{
+  kind: "fixed",
+  id: "3e_equation_reconnaitre_fixed_x4_solution",
+  niveau: "3e",
+  matiere: "maths",
+  notionId: "equation_resolution",
+  microId: "equation_reconnaitre",
+  difficulty: 2,
+  theme: "neutral",
+  text: "Résoudre une équation, c’est…",
+  format: "qcm",
+  choices: [
+    "trouver la ou les valeurs de l’inconnue qui rendent l’égalité vraie",
+    "développer une expression",
+    "calculer un périmètre",
+    "tracer une droite",
+  ],
+  expected: ["trouver la ou les valeurs de l’inconnue qui rendent l’égalité vraie"],
+  comparator: "mcq_exact",
+  hint: "On cherche la valeur de l’inconnue.",
+  explanation:
+    "Définition : une solution rend l’égalité vraie.\n\n" +
+    "Méthode : on cherche la valeur de l’inconnue.\n\n" +
+    "Calcul : on isole l’inconnue pour la trouver.\n\n" +
+    "Conclusion : résoudre, c’est trouver la valeur qui rend l’égalité vraie.",
+  tags: ["equation", "reconnaitre", "qcm"],
+},
+{
+  kind: "template",
+  id: "3e_equation_reconnaitre_tpl_x1",
+  niveau: "3e",
+  matiere: "maths",
+  notionId: "equation_resolution",
+  microId: "equation_reconnaitre",
+  difficulty: 2,
+  theme: "neutral",
+  hint: "Une équation a un signe $=$ et une inconnue.",
+  tags: ["equation", "reconnaitre", "template"],
+  generate: () => {
+    const estEquation = randomChoice([true, false]);
+    const a = randomInt(2, 5);
+    const b = randomInt(1, 9);
+    const texte = estEquation ? `$${a}x + ${b} = ${a * 2 + b}$` : `$${a}x + ${b}$`;
+    return {
+      text: `L’écriture ${texte} est-elle une équation ?`,
+      format: "qcm",
+      choices: ["oui", "non"],
+      expected: [estEquation ? "oui" : "non"],
+      comparator: "mcq_exact",
+      explanation:
+        `Définition : une équation contient un signe $=$ et une inconnue.\n\n` +
+        `Méthode : on cherche le signe $=$.\n\n` +
+        `Calcul : ${estEquation ? "il y a un signe $=$" : "il n’y a pas de signe $=$"}.\n\n` +
+        `Conclusion : ${estEquation ? "oui, c’est une équation." : "non, c’est une expression."}`,
+    };
+  },
+},
+
+/* ===== EQUATION_RESOUDRE_DEVELOPPER (compléments) ===== */
+{
+  kind: "template",
+  id: "3e_equation_resoudre_developper_tpl_x1",
+  niveau: "3e",
+  matiere: "maths",
+  notionId: "equation_resolution",
+  microId: "equation_resoudre_developper",
+  difficulty: 3,
+  theme: "neutral",
+  hint: "On développe la parenthèse avant d’isoler $x$.",
+  tags: ["equation", "developper", "template"],
+  generate: () => {
+    const a = randomInt(2, 4);
+    const b = randomInt(1, 5);
+    const x = randomInt(2, 7);
+    const c = a * (x + b);
+    return {
+      text: `Résous l’équation $${a}(x + ${b}) = ${c}$.`,
+      format: "short",
+      expected: [String(x)],
+      comparator: "number_equal",
+      explanation:
+        `Définition : on supprime la parenthèse, puis on isole $x$.\n\n` +
+        `Méthode : on développe $${a}(x + ${b}) = ${a}x + ${a * b}$.\n\n` +
+        `Calcul : $${a}x + ${a * b} = ${c}$, donc $${a}x = ${c - a * b}$ et $x = ${x}$.\n\n` +
+        `Conclusion : la solution est $x = ${x}$.`,
+    };
+  },
+},
+{
+  kind: "fixed",
+  id: "3e_equation_resoudre_developper_fixed_x1",
+  niveau: "3e",
+  matiere: "maths",
+  notionId: "equation_resolution",
+  microId: "equation_resoudre_developper",
+  difficulty: 3,
+  theme: "neutral",
+  text: "Résous l’équation $2(x + 5) = 18$.",
+  format: "short",
+  expected: ["4"],
+  comparator: "number_equal",
+  hint: "Développe : $2x + 10 = 18$.",
+  explanation:
+    "Définition : on développe, puis on isole $x$.\n\n" +
+    "Méthode : $2(x + 5) = 2x + 10$.\n\n" +
+    "Calcul : $2x + 10 = 18$, donc $2x = 8$ et $x = 4$.\n\n" +
+    "Conclusion : la solution est $x = 4$.",
+  tags: ["equation", "developper", "short"],
+},
+{
+  kind: "template",
+  id: "3e_equation_resoudre_developper_tpl_x2",
+  niveau: "3e",
+  matiere: "maths",
+  notionId: "equation_resolution",
+  microId: "equation_resoudre_developper",
+  difficulty: 4,
+  theme: "neutral",
+  hint: "Regroupe les $x$ d’un côté.",
+  tags: ["equation", "developper", "deux_membres", "template"],
+  generate: () => {
+    const x = randomInt(2, 6);
+    const a = randomInt(4, 7);
+    const b = randomInt(1, 3);
+    const p = randomInt(1, 5);
+    const q = (a - b) * x + p;
+    return {
+      text: `Résous l’équation $${a}x + ${p} = ${b}x + ${q}$.`,
+      format: "short",
+      expected: [String(x)],
+      comparator: "number_equal",
+      explanation:
+        `Définition : on rassemble les termes en $x$ d’un côté.\n\n` +
+        `Méthode : $${a}x - ${b}x = ${q} - ${p}$.\n\n` +
+        `Calcul : $${a - b}x = ${q - p}$, donc $x = ${x}$.\n\n` +
+        `Conclusion : la solution est $x = ${x}$.`,
+    };
+  },
+},
+
 ];

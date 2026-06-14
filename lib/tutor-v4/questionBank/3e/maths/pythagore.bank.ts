@@ -1584,4 +1584,81 @@ export const pythagore3eBank: TutorBankItemV4[] = [
       "Conclusion : le câble est attaché à $12$ m.",
     tags: ["pythagore_theoreme", "defi", "brevet", "short"],
   },
+
+  /* ===== PYTHAGORE_DEFI (compléments) ===== */
+  {
+    kind: "template",
+    id: "pythagore_theoreme_defi_tpl_5_ecran",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "pythagore_theoreme",
+    microId: "pythagore_defi",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "La diagonale d’un écran est l’hypoténuse d’un triangle rectangle.",
+    tags: ["pythagore_theoreme", "defi", "diagonale", "template"],
+    generate: () => {
+      const { a, b, c } = randomChoice(pythagoreanTriples);
+      return {
+        text: `Un écran rectangulaire mesure $${a}$ cm sur $${b}$ cm. Quelle est la longueur de sa diagonale (en cm) ?`,
+        format: "short",
+        expected: [String(c)],
+        comparator: "number_equal",
+        explanation:
+          `Définition : la diagonale est l’hypoténuse d’un triangle rectangle.\n\n` +
+          `Méthode : Pythagore $d^2 = ${a}^2 + ${b}^2$.\n\n` +
+          `Calcul : $d^2 = ${a * a} + ${b * b} = ${c * c}$, donc $d = ${c}$.\n\n` +
+          `Conclusion : la diagonale mesure $${c}$ cm.`,
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "pythagore_theoreme_defi_fixed_3_choix",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "pythagore_theoreme",
+    microId: "pythagore_defi",
+    difficulty: 4,
+    theme: "neutral",
+    text: "On connaît les trois longueurs d’un triangle et on veut savoir s’il est rectangle. On utilise…",
+    format: "qcm",
+    choices: [
+      "la réciproque du théorème de Pythagore",
+      "le théorème de Pythagore direct",
+      "la trigonométrie",
+      "la proportionnalité",
+    ],
+    expected: ["la réciproque du théorème de Pythagore"],
+    comparator: "mcq_exact",
+    hint: "On veut prouver un angle droit à partir des longueurs.",
+    explanation:
+      "Définition : la réciproque sert à prouver qu’un triangle est rectangle.\n\n" +
+      "Méthode : on compare le carré du plus grand côté à la somme des carrés des deux autres.\n\n" +
+      "Calcul : le théorème direct, lui, calcule une longueur.\n\n" +
+      "Conclusion : on utilise la réciproque.",
+    tags: ["pythagore_theoreme", "defi", "choix", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "pythagore_theoreme_defi_fixed_4_brevet",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "pythagore_theoreme",
+    microId: "pythagore_defi",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Un triangle a pour côtés $9$ cm, $40$ cm et $41$ cm. Est-il rectangle ?",
+    format: "qcm",
+    choices: ["oui", "non"],
+    expected: ["oui"],
+    comparator: "mcq_exact",
+    hint: "Compare $9^2 + 40^2$ et $41^2$.",
+    explanation:
+      "Définition : on applique la réciproque de Pythagore.\n\n" +
+      "Méthode : on compare $9^2 + 40^2$ et $41^2$.\n\n" +
+      "Calcul : $81 + 1600 = 1681$ et $41^2 = 1681$ : égalité vérifiée.\n\n" +
+      "Conclusion : oui, le triangle est rectangle.",
+    tags: ["pythagore_theoreme", "defi", "brevet", "qcm"],
+  },
 ];

@@ -1280,4 +1280,283 @@ export const trianglesBank: TutorBankItemV4[] = [
       "Conclusion : l’autre angle aigu mesure $55^\\circ$.",
     tags: ["triangle", "construire", "rectangle", "qcm"],
   },
+
+  /* ===== TRIANGLE_RECONNAITRE (compléments) ===== */
+  {
+    kind: "fixed",
+    id: "3e_triangle_reconnaitre_fixed_x1",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "triangle_figure",
+    microId: "triangle_reconnaitre",
+    difficulty: 1,
+    theme: "neutral",
+    text: "Un triangle qui a ses trois côtés de même longueur est…",
+    format: "qcm",
+    choices: ["équilatéral", "isocèle", "rectangle", "quelconque"],
+    expected: ["équilatéral"],
+    comparator: "mcq_exact",
+    hint: "« équi » signifie « égal ».",
+    explanation:
+      "Définition : un triangle équilatéral a ses trois côtés égaux.\n\n" +
+      "Méthode : on compte les côtés de même longueur.\n\n" +
+      "Calcul : trois côtés égaux → équilatéral.\n\n" +
+      "Conclusion : c’est un triangle équilatéral.",
+    tags: ["triangle", "reconnaitre", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "3e_triangle_reconnaitre_fixed_x2",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "triangle_figure",
+    microId: "triangle_reconnaitre",
+    difficulty: 1,
+    theme: "neutral",
+    text: "Un triangle qui a exactement deux côtés de même longueur est…",
+    format: "qcm",
+    choices: ["isocèle", "équilatéral", "rectangle", "scalène"],
+    expected: ["isocèle"],
+    comparator: "mcq_exact",
+    hint: "Deux côtés égaux.",
+    explanation:
+      "Définition : un triangle isocèle a deux côtés de même longueur.\n\n" +
+      "Méthode : on compte les côtés égaux.\n\n" +
+      "Calcul : deux côtés égaux → isocèle.\n\n" +
+      "Conclusion : c’est un triangle isocèle.",
+    tags: ["triangle", "reconnaitre", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "3e_triangle_reconnaitre_fixed_x3",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "triangle_figure",
+    microId: "triangle_reconnaitre",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Un triangle qui possède un angle droit est…",
+    format: "qcm",
+    choices: ["rectangle", "équilatéral", "isocèle", "plat"],
+    expected: ["rectangle"],
+    comparator: "mcq_exact",
+    hint: "Un angle de $90^\\circ$.",
+    explanation:
+      "Définition : un triangle rectangle a un angle droit.\n\n" +
+      "Méthode : on cherche un angle de $90^\\circ$.\n\n" +
+      "Calcul : la présence d’un angle droit le caractérise.\n\n" +
+      "Conclusion : c’est un triangle rectangle.",
+    tags: ["triangle", "reconnaitre", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "3e_triangle_reconnaitre_tpl_x1",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "triangle_figure",
+    microId: "triangle_reconnaitre",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Compte les côtés de même longueur.",
+    tags: ["triangle", "reconnaitre", "template"],
+    generate: () => {
+      const cas = randomChoice([
+        { desc: "trois côtés égaux", rep: "équilatéral" },
+        { desc: "deux côtés égaux", rep: "isocèle" },
+        { desc: "un angle droit", rep: "rectangle" },
+      ]);
+      return {
+        text: `Comment appelle-t-on un triangle ayant ${cas.desc} ?`,
+        format: "qcm",
+        choices: shuffle(["équilatéral", "isocèle", "rectangle"]),
+        expected: [cas.rep],
+        comparator: "mcq_exact",
+        explanation:
+          `Définition : chaque triangle particulier a une caractéristique.\n\n` +
+          `Méthode : on relie « ${cas.desc} » au bon nom.\n\n` +
+          `Calcul : « ${cas.desc} » → ${cas.rep}.\n\n` +
+          `Conclusion : c’est un triangle ${cas.rep}.`,
+      };
+    },
+  },
+
+  /* ===== TRIANGLE_INEGALITE (compléments) ===== */
+  {
+    kind: "fixed",
+    id: "3e_triangle_inegalite_fixed_x1",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "triangle_figure",
+    microId: "triangle_inegalite",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Un triangle est constructible lorsque le plus grand côté est…",
+    format: "qcm",
+    choices: [
+      "inférieur à la somme des deux autres",
+      "supérieur à la somme des deux autres",
+      "égal au double des autres",
+      "toujours $0$",
+    ],
+    expected: ["inférieur à la somme des deux autres"],
+    comparator: "mcq_exact",
+    hint: "C’est l’inégalité triangulaire.",
+    explanation:
+      "Définition : inégalité triangulaire : le plus grand côté est inférieur à la somme des deux autres.\n\n" +
+      "Méthode : on compare le plus grand côté à la somme des deux autres.\n\n" +
+      "Calcul : si c’est respecté, le triangle existe.\n\n" +
+      "Conclusion : le plus grand côté doit être inférieur à la somme des deux autres.",
+    tags: ["triangle", "inegalite", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "3e_triangle_inegalite_tpl_x1",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "triangle_figure",
+    microId: "triangle_inegalite",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Compare le plus grand côté à la somme des deux autres.",
+    tags: ["triangle", "inegalite", "template"],
+    generate: () => {
+      const ok = randomChoice([true, false]);
+      const a = randomInt(3, 6);
+      const b = randomInt(4, 7);
+      const c = ok ? a + b - randomInt(1, 2) : a + b + randomInt(1, 3);
+      return {
+        text: `Peut-on construire un triangle de côtés $${a}$ cm, $${b}$ cm et $${c}$ cm ?`,
+        format: "qcm",
+        choices: ["oui", "non"],
+        expected: [ok ? "oui" : "non"],
+        comparator: "mcq_exact",
+        explanation:
+          `Définition : on applique l’inégalité triangulaire.\n\n` +
+          `Méthode : on compare le plus grand côté ($${Math.max(a, b, c)}$) à la somme des deux autres ($${a + b + c - Math.max(a, b, c)}$).\n\n` +
+          `Calcul : ${ok ? "la condition est respectée" : "la condition n’est pas respectée"}.\n\n` +
+          `Conclusion : ${ok ? "oui, le triangle est constructible." : "non, le triangle est impossible."}`,
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "3e_triangle_inegalite_fixed_x2",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "triangle_figure",
+    microId: "triangle_inegalite",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Peut-on construire un triangle de côtés $2$ cm, $3$ cm et $10$ cm ?",
+    format: "qcm",
+    choices: ["non", "oui"],
+    expected: ["non"],
+    comparator: "mcq_exact",
+    hint: "Compare $10$ à $2 + 3$.",
+    explanation:
+      "Définition : inégalité triangulaire.\n\n" +
+      "Méthode : on compare le plus grand côté ($10$) à $2 + 3$.\n\n" +
+      "Calcul : $10 > 5$, la condition n’est pas respectée.\n\n" +
+      "Conclusion : non, ce triangle est impossible.",
+    tags: ["triangle", "inegalite", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "3e_triangle_inegalite_tpl_x2_max",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "triangle_figure",
+    microId: "triangle_inegalite",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Le troisième côté doit être strictement inférieur à la somme des deux autres.",
+    tags: ["triangle", "inegalite", "template"],
+    generate: () => {
+      const a = randomInt(4, 8);
+      const b = randomInt(4, 8);
+      return {
+        text: `Deux côtés d’un triangle mesurent $${a}$ cm et $${b}$ cm. Le troisième côté doit être strictement inférieur à combien de cm ?`,
+        format: "short",
+        expected: [String(a + b)],
+        comparator: "number_equal",
+        explanation:
+          `Définition : inégalité triangulaire.\n\n` +
+          `Méthode : le troisième côté est inférieur à la somme des deux autres.\n\n` +
+          `Calcul : $${a} + ${b} = ${a + b}$.\n\n` +
+          `Conclusion : il doit mesurer moins de $${a + b}$ cm.`,
+      };
+    },
+  },
+
+  /* ===== TRIANGLE_ANGLE (compléments) ===== */
+  {
+    kind: "template",
+    id: "3e_triangle_angle_tpl_x1",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "triangle_figure",
+    microId: "triangle_angle",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "La somme des angles d’un triangle vaut $180^\\circ$.",
+    tags: ["triangle", "angle", "template"],
+    generate: () => {
+      const a = randomInt(40, 80);
+      const b = randomInt(40, 80);
+      const c = 180 - a - b;
+      return {
+        text: `Deux angles d’un triangle mesurent $${a}^\\circ$ et $${b}^\\circ$. Combien mesure le troisième (en degrés) ?`,
+        format: "short",
+        expected: [String(c)],
+        comparator: "number_equal",
+        explanation:
+          `Définition : la somme des angles d’un triangle vaut $180^\\circ$.\n\n` +
+          `Méthode : on soustrait les deux angles connus à $180^\\circ$.\n\n` +
+          `Calcul : $180 - ${a} - ${b} = ${c}$.\n\n` +
+          `Conclusion : le troisième angle mesure $${c}^\\circ$.`,
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "3e_triangle_angle_fixed_x1_equilateral",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "triangle_figure",
+    microId: "triangle_angle",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Combien mesure chaque angle d’un triangle équilatéral (en degrés) ?",
+    format: "short",
+    expected: ["60"],
+    comparator: "number_equal",
+    hint: "$180 \\div 3$.",
+    explanation:
+      "Définition : un triangle équilatéral a trois angles égaux.\n\n" +
+      "Méthode : on partage $180^\\circ$ en trois.\n\n" +
+      "Calcul : $180 \\div 3 = 60$.\n\n" +
+      "Conclusion : chaque angle mesure $60^\\circ$.",
+    tags: ["triangle", "angle", "equilateral", "short"],
+  },
+  {
+    kind: "fixed",
+    id: "3e_triangle_angle_fixed_x2_isocele",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "triangle_figure",
+    microId: "triangle_angle",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Un triangle isocèle a un angle au sommet de $40^\\circ$. Combien mesure chaque angle à la base (en degrés) ?",
+    format: "short",
+    expected: ["70"],
+    comparator: "number_equal",
+    hint: "$(180 - 40) \\div 2$.",
+    explanation:
+      "Définition : les deux angles à la base d’un triangle isocèle sont égaux.\n\n" +
+      "Méthode : on enlève l’angle au sommet à $180^\\circ$, puis on partage en deux.\n\n" +
+      "Calcul : $(180 - 40) \\div 2 = 140 \\div 2 = 70$.\n\n" +
+      "Conclusion : chaque angle à la base mesure $70^\\circ$.",
+    tags: ["triangle", "angle", "isocele", "short"],
+  },
 ];

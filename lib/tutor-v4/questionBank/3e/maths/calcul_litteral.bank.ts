@@ -1548,4 +1548,154 @@ export const calculLitteralBank: TutorBankItemV4[] = [
       "Conclusion : une factorisation est correcte si le développement redonne l’expression de départ.",
     tags: ["litteral", "defi", "open", "verification"],
   },
+
+  /* ===== LITTERAL_COMPRENDRE (compléments) ===== */
+  {
+    kind: "fixed",
+    id: "3e_litteral_comprendre_fixed_x1",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "litteral_calcul",
+    microId: "litteral_comprendre",
+    difficulty: 1,
+    theme: "neutral",
+    text: "Dans l’expression $3x$, que signifie l’écriture sans signe entre $3$ et $x$ ?",
+    format: "qcm",
+    choices: ["$3 \\times x$", "$3 + x$", "$3 - x$", "$x^3$"],
+    expected: ["$3 \\times x$"],
+    comparator: "mcq_exact",
+    hint: "On sous-entend la multiplication.",
+    explanation:
+      "Définition : en calcul littéral, $3x$ signifie $3 \\times x$.\n\n" +
+      "Méthode : on rétablit le signe de multiplication sous-entendu.\n\n" +
+      "Calcul : $3x = 3 \\times x$.\n\n" +
+      "Conclusion : $3x$ veut dire $3 \\times x$.",
+    tags: ["litteral", "comprendre", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "3e_litteral_comprendre_tpl_x1_substituer",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "litteral_calcul",
+    microId: "litteral_comprendre",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "On remplace $x$ par sa valeur.",
+    tags: ["litteral", "comprendre", "substitution", "template"],
+    generate: () => {
+      const a = randomInt(2, 5);
+      const b = randomInt(1, 6);
+      const x = randomInt(2, 6);
+      const r = a * x + b;
+      return {
+        text: `Calcule la valeur de $${a}x + ${b}$ pour $x = ${x}$.`,
+        format: "short",
+        expected: [String(r)],
+        comparator: "number_equal",
+        explanation:
+          `Définition : calculer la valeur d’une expression, c’est remplacer la lettre par un nombre.\n\n` +
+          `Méthode : on remplace $x$ par $${x}$.\n\n` +
+          `Calcul : $${a} \\times ${x} + ${b} = ${a * x} + ${b} = ${r}$.\n\n` +
+          `Conclusion : l’expression vaut $${r}$.`,
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "3e_litteral_comprendre_qcm_x1_2x",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "litteral_calcul",
+    microId: "litteral_comprendre",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Que signifie « le double d’un nombre $x$ » ?",
+    format: "qcm",
+    choices: ["$2x$", "$x + 2$", "$x^2$", "$\\dfrac{x}{2}$"],
+    expected: ["$2x$"],
+    comparator: "mcq_exact",
+    hint: "Doubler, c’est multiplier par $2$.",
+    explanation:
+      "Définition : le double d’un nombre est ce nombre multiplié par $2$.\n\n" +
+      "Méthode : on traduit « double » par $\\times 2$.\n\n" +
+      "Calcul : le double de $x$ est $2x$.\n\n" +
+      "Conclusion : c’est $2x$.",
+    tags: ["litteral", "comprendre", "traduction", "qcm"],
+  },
+
+  /* ===== LITTERAL_FACTORISER (compléments) ===== */
+  {
+    kind: "fixed",
+    id: "3e_litteral_factoriser_qcm_x1",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "litteral_calcul",
+    microId: "litteral_factoriser",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Quelle est la forme factorisée de $4x + 12$ ?",
+    format: "qcm",
+    choices: ["$4(x + 3)$", "$4x + 12$", "$x(4 + 12)$", "$4(x + 12)$"],
+    expected: ["$4(x + 3)$"],
+    comparator: "mcq_exact",
+    hint: "Le facteur commun est $4$.",
+    explanation:
+      "Définition : factoriser, c’est mettre en évidence un facteur commun.\n\n" +
+      "Méthode : on repère le facteur commun de $4x$ et $12$.\n\n" +
+      "Calcul : $4x + 12 = 4 \\times x + 4 \\times 3 = 4(x + 3)$.\n\n" +
+      "Conclusion : la forme factorisée est $4(x + 3)$.",
+    tags: ["litteral", "factoriser", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "3e_litteral_factoriser_tpl_x1",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "litteral_calcul",
+    microId: "litteral_factoriser",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Cherche le facteur commun aux deux termes.",
+    tags: ["litteral", "factoriser", "template"],
+    generate: () => {
+      const k = randomChoice([2, 3, 5]);
+      const b = randomInt(2, 6);
+      const correct = `$${k}(x + ${b})$`;
+      return {
+        text: `Factorise $${k}x + ${k * b}$.`,
+        format: "qcm",
+        choices: shuffle([correct, `$${k}(x + ${k * b})$`, `$x(${k} + ${k * b})$`, `$${k}x + ${k * b}$`]),
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation:
+          `Définition : on met en facteur le nombre commun.\n\n` +
+          `Méthode : le facteur commun de $${k}x$ et $${k * b}$ est $${k}$.\n\n` +
+          `Calcul : $${k}x + ${k * b} = ${k}(x + ${b})$.\n\n` +
+          `Conclusion : la forme factorisée est $${k}(x + ${b})$.`,
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "3e_litteral_factoriser_qcm_x2_def",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "litteral_calcul",
+    microId: "litteral_factoriser",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Factoriser une expression, c’est l’écrire sous forme…",
+    format: "qcm",
+    choices: ["d’un produit", "d’une somme", "d’une fraction", "d’une racine"],
+    expected: ["d’un produit"],
+    comparator: "mcq_exact",
+    hint: "C’est l’opération inverse du développement.",
+    explanation:
+      "Définition : factoriser, c’est transformer une somme en produit.\n\n" +
+      "Méthode : on met en facteur un terme commun.\n\n" +
+      "Calcul : par exemple $4x + 12 = 4(x + 3)$.\n\n" +
+      "Conclusion : on l’écrit sous forme d’un produit.",
+    tags: ["litteral", "factoriser", "definition", "qcm"],
+  },
 ];

@@ -1375,4 +1375,401 @@ export const airesBank: TutorBankItemV4[] = [
       "Conclusion : vérifier l’unité permet d’éviter les erreurs de sens.",
     tags: ["aire", "open", "unite"],
   },
+
+  /* ===== AIRE_COMPRENDRE (compléments) ===== */
+  {
+    kind: "fixed",
+    id: "3e_aire_comprendre_fixed_x1",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "aire_surface",
+    microId: "aire_comprendre",
+    difficulty: 1,
+    theme: "neutral",
+    text: "L’aire d’une figure mesure…",
+    format: "qcm",
+    choices: ["sa surface", "son contour", "sa hauteur", "le nombre de ses côtés"],
+    expected: ["sa surface"],
+    comparator: "mcq_exact",
+    hint: "Le contour, c’est le périmètre.",
+    explanation:
+      "Définition : l’aire mesure l’étendue d’une surface.\n\n" +
+      "Méthode : on distingue aire (surface) et périmètre (contour).\n\n" +
+      "Calcul : l’aire s’exprime en unités carrées.\n\n" +
+      "Conclusion : l’aire mesure la surface.",
+    tags: ["aire", "comprendre", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "3e_aire_comprendre_tpl_x1_rectangle",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "aire_surface",
+    microId: "aire_comprendre",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Aire d’un rectangle $= L \\times l$.",
+    tags: ["aire", "comprendre", "rectangle", "template"],
+    generate: () => {
+      const L = randomInt(3, 9);
+      const l = randomInt(2, 6);
+      return {
+        text: `Quelle est l’aire d’un rectangle de longueur $${L}$ cm et de largeur $${l}$ cm (en $\\text{cm}^2$) ?`,
+        format: "short",
+        expected: [String(L * l)],
+        comparator: "number_equal",
+        explanation:
+          `Définition : aire d’un rectangle $= L \\times l$.\n\n` +
+          `Méthode : on multiplie longueur et largeur.\n\n` +
+          `Calcul : $${L} \\times ${l} = ${L * l}$.\n\n` +
+          `Conclusion : l’aire est $${L * l}\\ \\text{cm}^2$.`,
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "3e_aire_comprendre_fixed_x2_unite",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "aire_surface",
+    microId: "aire_comprendre",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Quelle unité convient pour une aire ?",
+    format: "qcm",
+    choices: ["$\\text{cm}^2$", "cm", "$\\text{cm}^3$", "L"],
+    expected: ["$\\text{cm}^2$"],
+    comparator: "mcq_exact",
+    hint: "Une surface se mesure en unités carrées.",
+    explanation:
+      "Définition : une aire se mesure en unités carrées.\n\n" +
+      "Méthode : on choisit l’unité avec l’exposant $2$.\n\n" +
+      "Calcul : le cm est une longueur, le $\\text{cm}^3$ un volume.\n\n" +
+      "Conclusion : l’unité d’aire est le $\\text{cm}^2$.",
+    tags: ["aire", "comprendre", "unite", "qcm"],
+  },
+
+  /* ===== AIRE_DISQUE (compléments) ===== */
+  {
+    kind: "fixed",
+    id: "3e_aire_disque_fixed_x1_formule",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "aire_surface",
+    microId: "aire_disque",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Quelle est la formule de l’aire d’un disque de rayon $r$ ?",
+    format: "qcm",
+    choices: ["$\\pi r^2$", "$2\\pi r$", "$\\pi r$", "$\\pi d$"],
+    expected: ["$\\pi r^2$"],
+    comparator: "mcq_exact",
+    hint: "$2\\pi r$ est le périmètre.",
+    explanation:
+      "Définition : l’aire d’un disque est $\\pi r^2$.\n\n" +
+      "Méthode : on distingue aire ($\\pi r^2$) et périmètre ($2\\pi r$).\n\n" +
+      "Calcul : aire $= \\pi r^2$.\n\n" +
+      "Conclusion : c’est $\\pi r^2$.",
+    tags: ["aire", "disque", "formule", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "3e_aire_disque_tpl_x1_valeur",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "aire_surface",
+    microId: "aire_disque",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "$A = \\pi r^2$, avec $\\pi \\approx 3{,}14$.",
+    tags: ["aire", "disque", "valeur", "template"],
+    generate: () => {
+      const r = randomChoice([2, 3, 5, 10]);
+      const A = Math.round(3.14 * r * r * 100) / 100;
+      return {
+        text: `Un disque a un rayon de $${r}$ cm. Calcule son aire au centième près (avec $\\pi \\approx 3{,}14$, en $\\text{cm}^2$).`,
+        format: "short",
+        expected: [String(A), String(A).replace(".", ",")],
+        comparator: "number_equal",
+        explanation:
+          `Définition : $A = \\pi r^2$.\n\n` +
+          `Méthode : on calcule $3{,}14 \\times r^2$.\n\n` +
+          `Calcul : $3{,}14 \\times ${r}^2 = 3{,}14 \\times ${r * r} = ${formatNumber(A)}$.\n\n` +
+          `Conclusion : l’aire est environ $${formatNumber(A)}\\ \\text{cm}^2$.`,
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "3e_aire_disque_fixed_x2",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "aire_surface",
+    microId: "aire_disque",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Un disque a un rayon de $4$ cm. Quelle est son aire au centième près (avec $\\pi \\approx 3{,}14$, en $\\text{cm}^2$) ?",
+    format: "short",
+    expected: ["50.24", "50,24"],
+    comparator: "number_equal",
+    hint: "$3{,}14 \\times 4^2$.",
+    explanation:
+      "Définition : $A = \\pi r^2$.\n\n" +
+      "Méthode : on calcule $3{,}14 \\times 16$.\n\n" +
+      "Calcul : $3{,}14 \\times 16 = 50{,}24$.\n\n" +
+      "Conclusion : l’aire est environ $50{,}24\\ \\text{cm}^2$.",
+    tags: ["aire", "disque", "short"],
+  },
+
+  /* ===== AIRE_FIGURE_COMPOSEE (compléments) ===== */
+  {
+    kind: "template",
+    id: "3e_aire_figure_composee_tpl_x1_somme",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "aire_surface",
+    microId: "aire_figure_composee",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "On découpe la figure en deux rectangles et on additionne les aires.",
+    tags: ["aire", "figure_composee", "template"],
+    generate: () => {
+      const a1 = randomInt(3, 6) * randomInt(2, 4);
+      const a2 = randomInt(2, 5) * randomInt(2, 3);
+      return {
+        text: `Une figure en forme de L se décompose en deux rectangles d’aires $${a1}\\ \\text{cm}^2$ et $${a2}\\ \\text{cm}^2$. Quelle est l’aire totale (en $\\text{cm}^2$) ?`,
+        format: "short",
+        expected: [String(a1 + a2)],
+        comparator: "number_equal",
+        explanation:
+          `Définition : l’aire d’une figure composée est la somme des aires des parties.\n\n` +
+          `Méthode : on additionne les deux aires.\n\n` +
+          `Calcul : $${a1} + ${a2} = ${a1 + a2}$.\n\n` +
+          `Conclusion : l’aire totale est $${a1 + a2}\\ \\text{cm}^2$.`,
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "3e_aire_figure_composee_tpl_x2_difference",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "aire_surface",
+    microId: "aire_figure_composee",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "On soustrait l’aire du trou à l’aire totale.",
+    tags: ["aire", "figure_composee", "difference", "template"],
+    generate: () => {
+      const L = randomInt(6, 10);
+      const l = randomInt(4, 6);
+      const c = randomInt(2, 3);
+      const aire = L * l - c * c;
+      return {
+        text: `Dans un rectangle de $${L} \\times ${l}$ cm, on découpe un carré de côté $${c}$ cm. Quelle est l’aire restante (en $\\text{cm}^2$) ?`,
+        format: "short",
+        expected: [String(aire)],
+        comparator: "number_equal",
+        explanation:
+          `Définition : on soustrait l’aire enlevée à l’aire totale.\n\n` +
+          `Méthode : aire $= L \\times l - c^2$.\n\n` +
+          `Calcul : $${L} \\times ${l} - ${c}^2 = ${L * l} - ${c * c} = ${aire}$.\n\n` +
+          `Conclusion : l’aire restante est $${aire}\\ \\text{cm}^2$.`,
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "3e_aire_figure_composee_qcm_x1",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "aire_surface",
+    microId: "aire_figure_composee",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Pour calculer l’aire d’une figure composée, on peut…",
+    format: "qcm",
+    choices: [
+      "la découper en figures simples puis additionner (ou soustraire) les aires",
+      "additionner tous les côtés",
+      "multiplier les périmètres",
+      "compter seulement les sommets",
+    ],
+    expected: ["la découper en figures simples puis additionner (ou soustraire) les aires"],
+    comparator: "mcq_exact",
+    hint: "On se ramène à des figures connues.",
+    explanation:
+      "Définition : une figure composée se ramène à des figures simples.\n\n" +
+      "Méthode : on découpe, on calcule chaque aire, puis on combine.\n\n" +
+      "Calcul : on additionne ou on soustrait selon la forme.\n\n" +
+      "Conclusion : on la découpe en figures simples.",
+    tags: ["aire", "figure_composee", "methode", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "3e_aire_figure_composee_fixed_x1",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "aire_surface",
+    microId: "aire_figure_composee",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Une figure est formée d’un carré de côté $4$ cm et d’un rectangle de $4 \\times 2$ cm accolés. Quelle est l’aire totale (en $\\text{cm}^2$) ?",
+    format: "short",
+    expected: ["24"],
+    comparator: "number_equal",
+    hint: "$16 + 8$.",
+    explanation:
+      "Définition : l’aire totale est la somme des aires.\n\n" +
+      "Méthode : carré $= 4^2 = 16$ ; rectangle $= 4 \\times 2 = 8$.\n\n" +
+      "Calcul : $16 + 8 = 24$.\n\n" +
+      "Conclusion : l’aire totale est $24\\ \\text{cm}^2$.",
+    tags: ["aire", "figure_composee", "short"],
+  },
+
+  /* ===== AIRE_AGRANDISSEMENT_REDUCTION (compléments) ===== */
+  {
+    kind: "fixed",
+    id: "3e_aire_agrandissement_qcm_x1",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "aire_surface",
+    microId: "aire_agrandissement_reduction",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Si on multiplie les longueurs d’une figure par $k$, son aire est multipliée par…",
+    format: "qcm",
+    choices: ["$k^2$", "$k$", "$k^3$", "$2k$"],
+    expected: ["$k^2$"],
+    comparator: "mcq_exact",
+    hint: "Une aire est en deux dimensions.",
+    explanation:
+      "Définition : un agrandissement de rapport $k$ multiplie l’aire par $k^2$.\n\n" +
+      "Méthode : l’aire dépend de deux dimensions.\n\n" +
+      "Calcul : chaque longueur ×$k$ donne une aire ×$k^2$.\n\n" +
+      "Conclusion : l’aire est multipliée par $k^2$.",
+    tags: ["aire", "agrandissement", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "3e_aire_agrandissement_tpl_x1",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "aire_surface",
+    microId: "aire_agrandissement_reduction",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Nouvelle aire $=$ ancienne $\\times k^2$.",
+    tags: ["aire", "agrandissement", "template"],
+    generate: () => {
+      const A = randomChoice([5, 8, 10, 12]);
+      const k = randomChoice([2, 3]);
+      const newA = A * k * k;
+      return {
+        text: `Une figure a une aire de $${A}\\ \\text{cm}^2$. On agrandit ses longueurs d’un rapport $${k}$. Quelle est la nouvelle aire (en $\\text{cm}^2$) ?`,
+        format: "short",
+        expected: [String(newA)],
+        comparator: "number_equal",
+        explanation:
+          `Définition : un agrandissement de rapport $${k}$ multiplie l’aire par $${k}^2$.\n\n` +
+          `Méthode : on multiplie l’aire par $${k}^2 = ${k * k}$.\n\n` +
+          `Calcul : $${A} \\times ${k * k} = ${newA}$.\n\n` +
+          `Conclusion : la nouvelle aire est $${newA}\\ \\text{cm}^2$.`,
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "3e_aire_agrandissement_qcm_x2_double",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "aire_surface",
+    microId: "aire_agrandissement_reduction",
+    difficulty: 3,
+    theme: "neutral",
+    text: "On double les côtés d’un carré. Son aire est multipliée par…",
+    format: "qcm",
+    choices: ["$4$", "$2$", "$8$", "$6$"],
+    expected: ["$4$"],
+    comparator: "mcq_exact",
+    hint: "$k = 2$, donc $k^2 = 4$.",
+    explanation:
+      "Définition : doubler les longueurs, c’est $k = 2$.\n\n" +
+      "Méthode : l’aire est multipliée par $k^2$.\n\n" +
+      "Calcul : $2^2 = 4$.\n\n" +
+      "Conclusion : l’aire est multipliée par $4$.",
+    tags: ["aire", "agrandissement", "qcm"],
+  },
+
+  /* ===== AIRE_DEFI (compléments) ===== */
+  {
+    kind: "template",
+    id: "3e_aire_defi_tpl_x1_disque_reel",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "aire_surface",
+    microId: "aire_defi",
+    difficulty: 5,
+    theme: "reunion",
+    hint: "Aire du disque $= \\pi r^2$, avec $\\pi \\approx 3{,}14$.",
+    tags: ["aire", "defi", "disque", "reunion", "template"],
+    generate: () => {
+      const r = randomChoice([5, 10]);
+      const A = Math.round(3.14 * r * r * 100) / 100;
+      return {
+        text: `Un rond-point circulaire a un rayon de $${r}$ m. Quelle est l’aire de la zone centrale au centième près (avec $\\pi \\approx 3{,}14$, en $\\text{m}^2$) ?`,
+        format: "short",
+        expected: [String(A), String(A).replace(".", ",")],
+        comparator: "number_equal",
+        explanation:
+          `Définition : aire d’un disque $= \\pi r^2$.\n\n` +
+          `Méthode : on calcule $3{,}14 \\times r^2$.\n\n` +
+          `Calcul : $3{,}14 \\times ${r * r} = ${formatNumber(A)}$.\n\n` +
+          `Conclusion : l’aire est environ $${formatNumber(A)}\\ \\text{m}^2$.`,
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "3e_aire_defi_qcm_x1",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "aire_surface",
+    microId: "aire_defi",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Deux rectangles ont la même aire. Ont-ils forcément le même périmètre ?",
+    format: "qcm",
+    choices: ["non", "oui"],
+    expected: ["non"],
+    comparator: "mcq_exact",
+    hint: "$1 \\times 12$ et $3 \\times 4$ ont la même aire.",
+    explanation:
+      "Définition : aire et périmètre sont des grandeurs différentes.\n\n" +
+      "Méthode : on cherche un contre-exemple.\n\n" +
+      "Calcul : $1 \\times 12$ et $3 \\times 4$ ont une aire de $12$, mais des périmètres $26$ et $14$.\n\n" +
+      "Conclusion : non, pas forcément le même périmètre.",
+    tags: ["aire", "defi", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "3e_aire_defi_fixed_x1_triangle",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "aire_surface",
+    microId: "aire_defi",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Un triangle a une base de $10$ cm et une hauteur de $6$ cm. Quelle est son aire (en $\\text{cm}^2$) ?",
+    format: "short",
+    expected: ["30"],
+    comparator: "number_equal",
+    hint: "Aire $= \\dfrac{b \\times h}{2}$.",
+    explanation:
+      "Définition : aire d’un triangle $= \\dfrac{b \\times h}{2}$.\n\n" +
+      "Méthode : on multiplie base par hauteur, puis on divise par $2$.\n\n" +
+      "Calcul : $\\dfrac{10 \\times 6}{2} = \\dfrac{60}{2} = 30$.\n\n" +
+      "Conclusion : l’aire est $30\\ \\text{cm}^2$.",
+    tags: ["aire", "defi", "triangle", "short"],
+  },
 ]

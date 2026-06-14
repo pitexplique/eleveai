@@ -2080,4 +2080,153 @@ export const trigonometrieBank: TutorBankItemV4[] = [
       "Conclusion : on calcule $\\tan(\\theta)$ puis $\\tan^{-1}$.",
     tags: ["trigo_trigonometrie", "defi", "methode", "qcm"],
   },
+
+  /* ===== TRIGO_CHOISIR_RAPPORT (compléments) ===== */
+  {
+    kind: "fixed",
+    id: "3e_trigo_choisir_rapport_qcm_x1",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "trigo_trigonometrie",
+    microId: "trigo_choisir_rapport",
+    difficulty: 3,
+    theme: "neutral",
+    text: "On connaît l’hypoténuse et le côté adjacent à l’angle. Quel rapport faut-il utiliser ?",
+    format: "qcm",
+    choices: ["le cosinus", "le sinus", "la tangente", "Pythagore"],
+    expected: ["le cosinus"],
+    comparator: "mcq_exact",
+    hint: "Adjacent et hypoténuse → CAH.",
+    explanation:
+      "Définition : le cosinus relie l’adjacent et l’hypoténuse.\n\n" +
+      "Méthode : on choisit le rapport correspondant aux deux côtés.\n\n" +
+      "Calcul : adjacent et hypoténuse → cosinus.\n\n" +
+      "Conclusion : on utilise le cosinus.",
+    tags: ["trigo_trigonometrie", "choisir_ratio", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "3e_trigo_choisir_rapport_qcm_x2",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "trigo_trigonometrie",
+    microId: "trigo_choisir_rapport",
+    difficulty: 3,
+    theme: "neutral",
+    text: "On connaît l’hypoténuse et le côté opposé à l’angle. Quel rapport faut-il utiliser ?",
+    format: "qcm",
+    choices: ["le sinus", "le cosinus", "la tangente", "Thalès"],
+    expected: ["le sinus"],
+    comparator: "mcq_exact",
+    hint: "Opposé et hypoténuse → SOH.",
+    explanation:
+      "Définition : le sinus relie l’opposé et l’hypoténuse.\n\n" +
+      "Méthode : on choisit le rapport correspondant aux deux côtés.\n\n" +
+      "Calcul : opposé et hypoténuse → sinus.\n\n" +
+      "Conclusion : on utilise le sinus.",
+    tags: ["trigo_trigonometrie", "choisir_ratio", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "3e_trigo_choisir_rapport_tpl_x1",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "trigo_trigonometrie",
+    microId: "trigo_choisir_rapport",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Identifie les deux côtés en jeu par rapport à l’angle.",
+    tags: ["trigo_trigonometrie", "choisir_ratio", "template"],
+    generate: () => {
+      const item = randomChoice([
+        { cotes: "le côté opposé et le côté adjacent", correct: "tangente" },
+        { cotes: "l’hypoténuse et le côté adjacent", correct: "cosinus" },
+        { cotes: "l’hypoténuse et le côté opposé", correct: "sinus" },
+      ]);
+      return {
+        text: `On utilise ${item.cotes}. Quel rapport faut-il choisir ?`,
+        format: "qcm",
+        choices: shuffle(["sinus", "cosinus", "tangente", "Pythagore"]),
+        expected: [item.correct],
+        comparator: "mcq_exact",
+        explanation:
+          `Définition : chaque rapport relie deux côtés précis.\n\n` +
+          `Méthode : on repère les deux côtés en jeu.\n\n` +
+          `Calcul : ${item.cotes} → ${item.correct}.\n\n` +
+          `Conclusion : on utilise le ${item.correct}.`,
+      };
+    },
+  },
+
+  /* ===== TRIGO_DEFI (compléments) ===== */
+  {
+    kind: "template",
+    id: "3e_trigo_defi_tpl_x1_hauteur",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "trigo_trigonometrie",
+    microId: "trigo_defi",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "La hauteur est l’opposé, on utilise le sinus avec l’hypoténuse.",
+    tags: ["trigo_trigonometrie", "defi", "probleme", "template"],
+    generate: () => {
+      const hyp = randomChoice([6, 8, 10, 12]);
+      const haut = hyp / 2;
+      return {
+        text: `Un toboggan de $${hyp}$ m fait un angle de $30^\\circ$ avec le sol. Quelle hauteur (en m) atteint-il ?`,
+        format: "short",
+        expected: [String(haut), String(haut).replace(".", ",")],
+        comparator: "number_equal",
+        explanation:
+          `Définition : la hauteur est le côté opposé à l’angle.\n\n` +
+          `Méthode : $\\text{hauteur} = \\text{hypoténuse} \\times \\sin(30^\\circ)$.\n\n` +
+          `Calcul : $${hyp} \\times 0{,}5 = ${haut}$.\n\n` +
+          `Conclusion : la hauteur est $${haut}$ m.`,
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "3e_trigo_defi_qcm_x1",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "trigo_trigonometrie",
+    microId: "trigo_defi",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Pour calculer une longueur quand on connaît un angle et un autre côté, on utilise…",
+    format: "qcm",
+    choices: ["la trigonométrie (sin, cos ou tan)", "uniquement Pythagore", "la proportionnalité", "la moyenne"],
+    expected: ["la trigonométrie (sin, cos ou tan)"],
+    comparator: "mcq_exact",
+    hint: "Un angle intervient.",
+    explanation:
+      "Définition : la trigonométrie relie un angle aigu et deux côtés.\n\n" +
+      "Méthode : quand un angle est connu, on choisit sin, cos ou tan.\n\n" +
+      "Calcul : Pythagore ne fait pas intervenir d’angle.\n\n" +
+      "Conclusion : on utilise la trigonométrie.",
+    tags: ["trigo_trigonometrie", "defi", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "3e_trigo_defi_fixed_x1_angle",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "trigo_trigonometrie",
+    microId: "trigo_defi",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Dans un triangle rectangle, l’hypoténuse mesure $10$ cm et le côté adjacent à l’angle $\\theta$ mesure $5$ cm. Combien vaut $\\theta$ (en degrés) ?",
+    format: "short",
+    expected: ["60"],
+    comparator: "number_equal",
+    hint: "$\\cos(\\theta) = \\dfrac{5}{10} = 0{,}5$.",
+    explanation:
+      "Définition : adjacent et hypoténuse → cosinus.\n\n" +
+      "Méthode : $\\cos(\\theta) = \\dfrac{5}{10} = 0{,}5$.\n\n" +
+      "Calcul : $\\theta = \\cos^{-1}(0{,}5) = 60^\\circ$.\n\n" +
+      "Conclusion : $\\theta = 60^\\circ$.",
+    tags: ["trigo_trigonometrie", "defi", "short"],
+  },
 ];

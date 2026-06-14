@@ -1657,5 +1657,734 @@ export const probabilitesBank: TutorBankItemV4[] = [
       "Calcul : les issues favorables sont PF et FP, soit $2$ sur $4$ : $\\dfrac{2}{4}$.\n\n" +
       "Conclusion : la probabilité est $\\dfrac{2}{4}$.",
     tags: ["proba_experience", "deux_epreuve", "defi", "qcm"],
-  }
+  },
+
+  /* =========================
+     PROBA_VOCABULAIRE (compléments)
+  ========================= */
+  {
+    kind: "fixed",
+    id: "3e_proba_vocabulaire_fixed_4",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "proba_experience",
+    microId: "proba_vocabulaire",
+    difficulty: 1,
+    theme: "neutral",
+    text: "Une probabilité est toujours un nombre compris entre…",
+    format: "qcm",
+    choices: ["$0$ et $1$", "$1$ et $10$", "$-1$ et $1$", "$0$ et $100$"],
+    expected: ["$0$ et $1$"],
+    comparator: "mcq_exact",
+    hint: "$0$ = impossible, $1$ = certain.",
+    explanation:
+      "Définition : une probabilité mesure la chance qu’un événement se produise.\n\n" +
+      "Méthode : on encadre la valeur possible d’une probabilité.\n\n" +
+      "Calcul : l’impossible vaut $0$, le certain vaut $1$.\n\n" +
+      "Conclusion : une probabilité est comprise entre $0$ et $1$.",
+    tags: ["proba_experience", "vocabulaire", "bornes", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "3e_proba_vocabulaire_fixed_5_certain",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "proba_experience",
+    microId: "proba_vocabulaire",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Un événement certain a une probabilité égale à…",
+    format: "qcm",
+    choices: ["$1$", "$0$", "$0{,}5$", "$2$"],
+    expected: ["$1$"],
+    comparator: "mcq_exact",
+    hint: "Il se produit à coup sûr.",
+    explanation:
+      "Définition : un événement certain se réalise toujours.\n\n" +
+      "Méthode : on associe « toujours » à la probabilité maximale.\n\n" +
+      "Calcul : la probabilité d’un événement certain est $1$.\n\n" +
+      "Conclusion : elle vaut $1$.",
+    tags: ["proba_experience", "vocabulaire", "certain", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "3e_proba_vocabulaire_fixed_6_impossible",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "proba_experience",
+    microId: "proba_vocabulaire",
+    difficulty: 2,
+    theme: "neutral",
+    text: "On lance un dé à $6$ faces. « Obtenir $8$ » est un événement…",
+    format: "qcm",
+    choices: ["impossible", "certain", "probable", "équiprobable"],
+    expected: ["impossible"],
+    comparator: "mcq_exact",
+    hint: "Aucune face ne porte le $8$.",
+    explanation:
+      "Définition : un événement impossible ne peut pas se produire.\n\n" +
+      "Méthode : on vérifie si une issue le réalise.\n\n" +
+      "Calcul : un dé va de $1$ à $6$, aucune face ne donne $8$.\n\n" +
+      "Conclusion : « obtenir $8$ » est impossible (probabilité $0$).",
+    canvas: deCanvas(),
+    tags: ["proba_experience", "vocabulaire", "impossible", "de", "canvas"],
+  },
+  {
+    kind: "fixed",
+    id: "3e_proba_vocabulaire_fixed_7_certitude",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "proba_experience",
+    microId: "proba_vocabulaire",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Une probabilité de $0{,}5$ correspond à…",
+    format: "qcm",
+    choices: ["une chance sur deux", "un événement impossible", "un événement certain", "deux chances sur trois"],
+    expected: ["une chance sur deux"],
+    comparator: "mcq_exact",
+    hint: "$0{,}5 = \\dfrac{1}{2}$.",
+    explanation:
+      "Définition : une probabilité de $0{,}5$ vaut $\\dfrac{1}{2}$.\n\n" +
+      "Méthode : on interprète la fraction.\n\n" +
+      "Calcul : $\\dfrac{1}{2}$ correspond à une chance sur deux.\n\n" +
+      "Conclusion : c’est une chance sur deux.",
+    tags: ["proba_experience", "vocabulaire", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "3e_proba_vocabulaire_fixed_8_evenement",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "proba_experience",
+    microId: "proba_vocabulaire",
+    difficulty: 2,
+    theme: "neutral",
+    text: "« Obtenir un nombre pair » avec un dé est…",
+    format: "qcm",
+    choices: ["un événement", "une issue unique", "une probabilité", "une moyenne"],
+    expected: ["un événement"],
+    comparator: "mcq_exact",
+    hint: "Il regroupe plusieurs issues ($2$, $4$, $6$).",
+    explanation:
+      "Définition : un événement regroupe une ou plusieurs issues.\n\n" +
+      "Méthode : on regarde s’il correspond à plusieurs résultats.\n\n" +
+      "Calcul : « pair » regroupe $2$, $4$ et $6$.\n\n" +
+      "Conclusion : c’est un événement.",
+    canvas: deCanvas([2, 4, 6]),
+    tags: ["proba_experience", "vocabulaire", "evenement", "de", "canvas"],
+  },
+  {
+    kind: "fixed",
+    id: "3e_proba_vocabulaire_fixed_9_plus_probable",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "proba_experience",
+    microId: "proba_vocabulaire",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Plus la probabilité d’un événement est proche de $1$, plus l’événement est…",
+    format: "qcm",
+    choices: ["probable", "impossible", "rare", "équiprobable"],
+    expected: ["probable"],
+    comparator: "mcq_exact",
+    hint: "$1$ = certain.",
+    explanation:
+      "Définition : la probabilité mesure la chance d’un événement.\n\n" +
+      "Méthode : on relie la valeur à la fréquence attendue.\n\n" +
+      "Calcul : proche de $1$, l’événement se produit presque toujours.\n\n" +
+      "Conclusion : il est très probable.",
+    tags: ["proba_experience", "vocabulaire", "qcm"],
+  },
+
+  /* =========================
+     PROBA_ISSUE (compléments)
+  ========================= */
+  {
+    kind: "fixed",
+    id: "3e_proba_issue_fixed_2_piece",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "proba_experience",
+    microId: "proba_issue",
+    difficulty: 1,
+    theme: "neutral",
+    text: "Combien y a-t-il d’issues possibles quand on lance une pièce ?",
+    format: "short",
+    expected: ["2"],
+    comparator: "number_equal",
+    hint: "Pile ou face.",
+    explanation:
+      "Définition : les issues sont les résultats possibles.\n\n" +
+      "Méthode : on liste les résultats d’une pièce.\n\n" +
+      "Calcul : pile et face, soit $2$ issues.\n\n" +
+      "Conclusion : il y a $2$ issues.",
+    tags: ["proba_experience", "issue", "piece", "short"],
+  },
+  {
+    kind: "template",
+    id: "3e_proba_issue_tpl_3_carte",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "proba_experience",
+    microId: "proba_issue",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Compte le nombre d’objets différents possibles.",
+    tags: ["proba_experience", "issue", "template"],
+    generate: () => {
+      const n = randomChoice([4, 5, 6, 8]);
+      return {
+        text: `Une urne contient ${n} jetons numérotés tous différents. On en tire un. Combien y a-t-il d’issues possibles ?`,
+        format: "short",
+        expected: [String(n)],
+        comparator: "number_equal",
+        explanation:
+          `Définition : chaque jeton possible est une issue.\n\n` +
+          `Méthode : on compte le nombre de jetons.\n\n` +
+          `Calcul : il y a ${n} jetons différents.\n\n` +
+          `Conclusion : il y a ${n} issues possibles.`,
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "3e_proba_issue_tpl_4_billes_couleurs",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "proba_experience",
+    microId: "proba_issue",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Additionne toutes les billes.",
+    tags: ["proba_experience", "issue", "billes", "canvas", "template"],
+    generate: () => {
+      const r = randomInt(2, 4);
+      const b = randomInt(2, 4);
+      const v = randomInt(1, 3);
+      const total = r + b + v;
+      const elements = [
+        ...Array.from({ length: r }, () => ({ couleur: couleurs.rouge })),
+        ...Array.from({ length: b }, () => ({ couleur: couleurs.bleu })),
+        ...Array.from({ length: v }, () => ({ couleur: couleurs.vert })),
+      ];
+      return {
+        text: `Un sac contient ${r} billes rouges, ${b} bleues et ${v} vertes. Combien y a-t-il d’issues possibles si on tire une bille ?`,
+        format: "short",
+        expected: [String(total)],
+        comparator: "number_equal",
+        explanation:
+          `Définition : chaque bille tirable est une issue.\n\n` +
+          `Méthode : on additionne toutes les billes.\n\n` +
+          `Calcul : ${r} + ${b} + ${v} = ${total}.\n\n` +
+          `Conclusion : il y a ${total} issues possibles.`,
+        canvas: billesCanvas(elements),
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "3e_proba_issue_fixed_3_evenement_vs_issue",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "proba_experience",
+    microId: "proba_issue",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Avec un dé, combien d’issues réalisent l’événement « obtenir $3$ » ?",
+    format: "short",
+    expected: ["1"],
+    comparator: "number_equal",
+    hint: "Une seule face porte le $3$.",
+    explanation:
+      "Définition : une issue est un résultat élémentaire.\n\n" +
+      "Méthode : on compte les faces qui donnent $3$.\n\n" +
+      "Calcul : une seule face porte $3$.\n\n" +
+      "Conclusion : $1$ issue réalise cet événement.",
+    canvas: deCanvas([3]),
+    tags: ["proba_experience", "issue", "de", "canvas"],
+  },
+  {
+    kind: "template",
+    id: "3e_proba_issue_tpl_5_roue",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "proba_experience",
+    microId: "proba_issue",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Compte les secteurs.",
+    tags: ["proba_experience", "issue", "roue", "canvas", "template"],
+    generate: () => {
+      const n = randomChoice([3, 4, 6]);
+      const labels = ["A", "B", "C", "D", "E", "F"].slice(0, n);
+      return {
+        text: `Une roue a ${n} secteurs de même taille. Combien y a-t-il d’issues possibles ?`,
+        format: "short",
+        expected: [String(n)],
+        comparator: "number_equal",
+        explanation:
+          `Définition : chaque secteur est une issue.\n\n` +
+          `Méthode : on compte les secteurs.\n\n` +
+          `Calcul : la roue a ${n} secteurs.\n\n` +
+          `Conclusion : il y a ${n} issues.`,
+        canvas: roueCanvas(labels.map((label) => ({ label, poids: 1 }))),
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "3e_proba_issue_fixed_4_de",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "proba_experience",
+    microId: "proba_issue",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Combien d’issues réalisent « obtenir un nombre pair » avec un dé à $6$ faces ?",
+    format: "short",
+    expected: ["3"],
+    comparator: "number_equal",
+    hint: "Les pairs sont $2$, $4$, $6$.",
+    explanation:
+      "Définition : on compte les issues favorables.\n\n" +
+      "Méthode : on liste les nombres pairs du dé.\n\n" +
+      "Calcul : $2$, $4$ et $6$, soit $3$ issues.\n\n" +
+      "Conclusion : $3$ issues.",
+    canvas: deCanvas([2, 4, 6]),
+    tags: ["proba_experience", "issue", "de", "canvas"],
+  },
+
+  /* =========================
+     PROBA_EQUIPROBABILITE (compléments)
+  ========================= */
+  {
+    kind: "fixed",
+    id: "3e_proba_equiprobabilite_fixed_2_def",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "proba_experience",
+    microId: "proba_equiprobabilite",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Une situation est dite d’équiprobabilité quand…",
+    format: "qcm",
+    choices: [
+      "toutes les issues ont la même probabilité",
+      "il n’y a qu’une seule issue",
+      "une issue est plus probable que les autres",
+      "il n’y a aucune issue",
+    ],
+    expected: ["toutes les issues ont la même probabilité"],
+    comparator: "mcq_exact",
+    hint: "Aucune issue n’est favorisée.",
+    explanation:
+      "Définition : en équiprobabilité, toutes les issues ont la même chance.\n\n" +
+      "Méthode : on vérifie qu’aucune issue n’est favorisée.\n\n" +
+      "Calcul : par exemple, un dé équilibré.\n\n" +
+      "Conclusion : toutes les issues ont la même probabilité.",
+    tags: ["proba_experience", "equiprobabilite", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "3e_proba_equiprobabilite_fixed_3_de_pipe",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "proba_experience",
+    microId: "proba_equiprobabilite",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Un dé truqué qui tombe plus souvent sur $6$ correspond-il à une situation d’équiprobabilité ?",
+    format: "qcm",
+    choices: ["non", "oui"],
+    expected: ["non"],
+    comparator: "mcq_exact",
+    hint: "Une face est favorisée.",
+    explanation:
+      "Définition : l’équiprobabilité suppose qu’aucune issue n’est favorisée.\n\n" +
+      "Méthode : on vérifie si une face revient plus souvent.\n\n" +
+      "Calcul : ici le $6$ est favorisé.\n\n" +
+      "Conclusion : non, ce n’est pas équiprobable.",
+    tags: ["proba_experience", "equiprobabilite", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "3e_proba_equiprobabilite_tpl_3_billes",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "proba_experience",
+    microId: "proba_equiprobabilite",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Compare le nombre de billes de chaque couleur.",
+    tags: ["proba_experience", "equiprobabilite", "billes", "canvas", "template"],
+    generate: () => {
+      const equal = randomChoice([true, false]);
+      const r = 3;
+      const b = equal ? 3 : randomChoice([4, 5]);
+      const elements = [
+        ...Array.from({ length: r }, () => ({ couleur: couleurs.rouge })),
+        ...Array.from({ length: b }, () => ({ couleur: couleurs.bleu })),
+      ];
+      return {
+        text: `Un sac contient ${r} billes rouges et ${b} billes bleues. Tirer rouge et tirer bleu sont-ils équiprobables ?`,
+        format: "qcm",
+        choices: ["oui", "non"],
+        expected: [equal ? "oui" : "non"],
+        comparator: "mcq_exact",
+        explanation:
+          `Définition : deux événements sont équiprobables s’ils ont la même probabilité.\n\n` +
+          `Méthode : on compare le nombre de billes de chaque couleur.\n\n` +
+          `Calcul : ${r} rouges et ${b} bleues.\n\n` +
+          `Conclusion : ${equal ? "oui, c’est équiprobable." : "non, ce n’est pas équiprobable."}`,
+        canvas: billesCanvas(elements),
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "3e_proba_equiprobabilite_fixed_4_piece",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "proba_experience",
+    microId: "proba_equiprobabilite",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Avec une pièce équilibrée, pile et face sont-ils équiprobables ?",
+    format: "qcm",
+    choices: ["oui", "non"],
+    expected: ["oui"],
+    comparator: "mcq_exact",
+    hint: "Aucune face n’est favorisée.",
+    explanation:
+      "Définition : une pièce équilibrée ne favorise aucune face.\n\n" +
+      "Méthode : on compare les chances de pile et de face.\n\n" +
+      "Calcul : chacune a une probabilité de $\\dfrac{1}{2}$.\n\n" +
+      "Conclusion : oui, pile et face sont équiprobables.",
+    tags: ["proba_experience", "equiprobabilite", "piece", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "3e_proba_equiprobabilite_tpl_4_roue",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "proba_experience",
+    microId: "proba_equiprobabilite",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Les secteurs doivent avoir le même poids.",
+    tags: ["proba_experience", "equiprobabilite", "roue", "canvas", "template"],
+    generate: () => {
+      const equal = randomChoice([true, false]);
+      const segments = equal
+        ? [
+            { label: "A", poids: 1, couleur: couleurs.rouge },
+            { label: "B", poids: 1, couleur: couleurs.bleu },
+            { label: "C", poids: 1, couleur: couleurs.vert },
+          ]
+        : [
+            { label: "A", poids: 3, couleur: couleurs.rouge },
+            { label: "B", poids: 1, couleur: couleurs.bleu },
+            { label: "C", poids: 1, couleur: couleurs.vert },
+          ];
+      return {
+        text: "Cette roue correspond-elle à une situation d’équiprobabilité ?",
+        format: "qcm",
+        choices: ["oui", "non"],
+        expected: [equal ? "oui" : "non"],
+        comparator: "mcq_exact",
+        explanation:
+          `Définition : l’équiprobabilité demande des secteurs de même taille.\n\n` +
+          `Méthode : on compare les poids des secteurs.\n\n` +
+          `Calcul : ${equal ? "tous les secteurs ont le même poids." : "un secteur est plus grand que les autres."}\n\n` +
+          `Conclusion : ${equal ? "oui, c’est équiprobable." : "non, ce n’est pas équiprobable."}`,
+        canvas: roueCanvas(segments),
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "3e_proba_equiprobabilite_fixed_5_consequence",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "proba_experience",
+    microId: "proba_equiprobabilite",
+    difficulty: 3,
+    theme: "neutral",
+    text: "En situation d’équiprobabilité avec $5$ issues, quelle est la probabilité de chaque issue ?",
+    format: "qcm",
+    choices: ["$\\dfrac{1}{5}$", "$\\dfrac{1}{2}$", "$\\dfrac{5}{1}$", "$1$"],
+    expected: ["$\\dfrac{1}{5}$"],
+    comparator: "mcq_exact",
+    hint: "Une issue sur $5$.",
+    explanation:
+      "Définition : en équiprobabilité, chaque issue a la même probabilité.\n\n" +
+      "Méthode : on divise $1$ par le nombre d’issues.\n\n" +
+      "Calcul : $\\dfrac{1}{5}$.\n\n" +
+      "Conclusion : chaque issue a une probabilité de $\\dfrac{1}{5}$.",
+    tags: ["proba_experience", "equiprobabilite", "qcm"],
+  },
+
+  /* =========================
+     PROBA_CALCULER (compléments)
+  ========================= */
+  {
+    kind: "template",
+    id: "3e_proba_calculer_tpl_4_de",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "proba_experience",
+    microId: "proba_calculer",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Probabilité $= \\dfrac{\\text{cas favorables}}{6}$.",
+    tags: ["proba_experience", "calculer", "de", "canvas", "qcm", "template"],
+    generate: () => {
+      const cible = randomChoice([
+        { desc: "un nombre pair", faces: [2, 4, 6] },
+        { desc: "un multiple de $3$", faces: [3, 6] },
+        { desc: "un nombre supérieur à $4$", faces: [5, 6] },
+      ]);
+      const k = cible.faces.length;
+      const correct = `$\\dfrac{${k}}{6}$`;
+      return {
+        text: `On lance un dé équilibré. Quelle est la probabilité d’obtenir ${cible.desc} ?`,
+        format: "qcm",
+        choices: shuffle([correct, `$\\dfrac{6}{${k}}$`, `$\\dfrac{${k}}{${k}}$`, `$\\dfrac{1}{6}$`]),
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation:
+          `Définition : probabilité $= \\dfrac{\\text{cas favorables}}{\\text{cas possibles}}$.\n\n` +
+          `Méthode : on compte les faces favorables et toutes les faces.\n\n` +
+          `Calcul : $${k}$ faces favorables sur $6$, soit $\\dfrac{${k}}{6}$.\n\n` +
+          `Conclusion : la probabilité est $\\dfrac{${k}}{6}$.`,
+        canvas: deCanvas(cible.faces),
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "3e_proba_calculer_fixed_2_certain",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "proba_experience",
+    microId: "proba_calculer",
+    difficulty: 2,
+    theme: "neutral",
+    text: "On lance un dé. Quelle est la probabilité d’obtenir un nombre entre $1$ et $6$ ?",
+    format: "qcm",
+    choices: ["$1$", "$\\dfrac{1}{6}$", "$\\dfrac{6}{1}$", "$0$"],
+    expected: ["$1$"],
+    comparator: "mcq_exact",
+    hint: "Toutes les faces conviennent : événement certain.",
+    explanation:
+      "Définition : un événement certain a une probabilité de $1$.\n\n" +
+      "Méthode : on compte les issues favorables.\n\n" +
+      "Calcul : $6$ favorables sur $6$ : $\\dfrac{6}{6} = 1$.\n\n" +
+      "Conclusion : la probabilité est $1$.",
+    canvas: deCanvas([1, 2, 3, 4, 5, 6]),
+    tags: ["proba_experience", "calculer", "certain", "de", "canvas"],
+  },
+  {
+    kind: "template",
+    id: "3e_proba_calculer_tpl_5_billes_decimal",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "proba_experience",
+    microId: "proba_calculer",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "P(rouge) $= \\dfrac{\\text{rouges}}{\\text{total}}$, en décimal.",
+    tags: ["proba_experience", "calculer", "billes", "decimal", "canvas", "template"],
+    generate: () => {
+      const total = randomChoice([10, 20, 5, 4]);
+      const r = total / randomChoice([2, 4]);
+      const dec = r / total;
+      const elements = [
+        ...Array.from({ length: r }, () => ({ couleur: couleurs.rouge })),
+        ...Array.from({ length: total - r }, () => ({ couleur: couleurs.bleu })),
+      ];
+      return {
+        text: `Un sac contient ${total} billes dont ${r} rouges. Quelle est la probabilité de tirer une rouge ? (réponse décimale)`,
+        format: "short",
+        expected: [String(dec).replace(".", ","), String(dec)],
+        comparator: "number_equal",
+        explanation:
+          `Définition : probabilité $= \\dfrac{\\text{favorables}}{\\text{total}}$.\n\n` +
+          `Méthode : on divise $${r}$ par $${total}$.\n\n` +
+          `Calcul : $${r} \\div ${total} = ${String(dec).replace(".", ",")}$.\n\n` +
+          `Conclusion : la probabilité est $${String(dec).replace(".", ",")}$.`,
+        canvas: billesCanvas(elements),
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "3e_proba_calculer_fixed_3_impossible",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "proba_experience",
+    microId: "proba_calculer",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Un sac ne contient que des billes bleues. Quelle est la probabilité de tirer une bille rouge ?",
+    format: "qcm",
+    choices: ["$0$", "$1$", "$\\dfrac{1}{2}$", "on ne peut pas savoir"],
+    expected: ["$0$"],
+    comparator: "mcq_exact",
+    hint: "Aucune bille rouge : événement impossible.",
+    explanation:
+      "Définition : un événement impossible a une probabilité de $0$.\n\n" +
+      "Méthode : on compte les billes rouges.\n\n" +
+      "Calcul : il y a $0$ bille rouge.\n\n" +
+      "Conclusion : la probabilité est $0$.",
+    tags: ["proba_experience", "calculer", "impossible", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "3e_proba_calculer_tpl_6_roue",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "proba_experience",
+    microId: "proba_calculer",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "On divise le poids du secteur favorable par le poids total.",
+    tags: ["proba_experience", "calculer", "roue", "canvas", "template"],
+    generate: () => {
+      const pr = randomChoice([1, 2]);
+      const pb = randomChoice([1, 2]);
+      const pv = randomChoice([1, 2]);
+      const total = pr + pb + pv;
+      const correct = `$\\dfrac{${pr}}{${total}}$`;
+      return {
+        text: "Quelle est la probabilité d’obtenir Rouge avec cette roue ?",
+        format: "qcm",
+        choices: shuffle([correct, `$\\dfrac{${pb}}{${total}}$`, `$\\dfrac{${total}}{${pr}}$`, `$\\dfrac{1}{3}$`]),
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation:
+          `Définition : sur une roue pondérée, $P = \\dfrac{\\text{poids favorable}}{\\text{poids total}}$.\n\n` +
+          `Méthode : on additionne les poids, puis on isole le secteur Rouge.\n\n` +
+          `Calcul : poids total $= ${pr} + ${pb} + ${pv} = ${total}$, Rouge $= ${pr}$, donc $\\dfrac{${pr}}{${total}}$.\n\n` +
+          `Conclusion : la probabilité est $\\dfrac{${pr}}{${total}}$.`,
+        canvas: roueCanvas([
+          { label: "Rouge", poids: pr, couleur: couleurs.rouge },
+          { label: "Bleu", poids: pb, couleur: couleurs.bleu },
+          { label: "Vert", poids: pv, couleur: couleurs.vert },
+        ]),
+      };
+    },
+  },
+
+  /* =========================
+     PROBA_DEFI (compléments)
+  ========================= */
+  {
+    kind: "template",
+    id: "3e_proba_defi_tpl_4_billes",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "proba_experience",
+    microId: "proba_defi",
+    difficulty: 4,
+    theme: "reunion",
+    hint: "Probabilité $= \\dfrac{\\text{favorables}}{\\text{total}}$, simplifiée.",
+    tags: ["proba_experience", "defi", "billes", "canvas", "template"],
+    generate: () => {
+      const r = randomChoice([2, 3, 4]);
+      const total = randomChoice([8, 10, 12]);
+      const result = fraction(r, total);
+      const elements = [
+        ...Array.from({ length: r }, () => ({ couleur: couleurs.rouge })),
+        ...Array.from({ length: total - r }, () => ({ couleur: couleurs.bleu })),
+      ];
+      return {
+        text: `Un sac contient ${total} billes dont ${r} rouges. Quelle est la probabilité de tirer une rouge ? Donne la fraction simplifiée.`,
+        format: "short",
+        expected: [result],
+        comparator: "fraction_decimal_equivalent",
+        explanation:
+          `Définition : probabilité $= \\dfrac{\\text{favorables}}{\\text{total}}$.\n\n` +
+          `Méthode : on écrit $\\dfrac{${r}}{${total}}$, puis on simplifie.\n\n` +
+          `Calcul : $\\dfrac{${r}}{${total}} = ${result}$.\n\n` +
+          `Conclusion : la probabilité simplifiée est $${result}$.`,
+        canvas: billesCanvas(elements),
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "3e_proba_defi_fixed_3_contraire",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "proba_experience",
+    microId: "proba_defi",
+    difficulty: 5,
+    theme: "neutral",
+    text: "La probabilité de gagner à un jeu est $0{,}3$. Quelle est la probabilité de perdre ?",
+    format: "short",
+    expected: ["0,7", "0.7"],
+    comparator: "number_equal",
+    hint: "$1 - P(\\text{gagner})$.",
+    explanation:
+      "Définition : « perdre » est l’événement contraire de « gagner ».\n\n" +
+      "Méthode : on calcule $1 - 0{,}3$.\n\n" +
+      "Calcul : $1 - 0{,}3 = 0{,}7$.\n\n" +
+      "Conclusion : la probabilité de perdre est $0{,}7$.",
+    tags: ["proba_experience", "defi", "contraire", "short"],
+  },
+  {
+    kind: "fixed",
+    id: "3e_proba_defi_fixed_4_brevet",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "proba_experience",
+    microId: "proba_defi",
+    difficulty: 5,
+    theme: "neutral",
+    text: "On tire une carte parmi $10$ cartes numérotées de $1$ à $10$. Quelle est la probabilité d’obtenir un nombre pair ?",
+    format: "qcm",
+    choices: ["$\\dfrac{5}{10}$", "$\\dfrac{1}{10}$", "$\\dfrac{2}{10}$", "$\\dfrac{10}{5}$"],
+    expected: ["$\\dfrac{5}{10}$"],
+    comparator: "mcq_exact",
+    hint: "Les pairs de $1$ à $10$ : $2,4,6,8,10$.",
+    explanation:
+      "Définition : probabilité $= \\dfrac{\\text{favorables}}{\\text{total}}$.\n\n" +
+      "Méthode : on compte les nombres pairs de $1$ à $10$.\n\n" +
+      "Calcul : $2,4,6,8,10$ soit $5$ sur $10$ : $\\dfrac{5}{10}$.\n\n" +
+      "Conclusion : la probabilité est $\\dfrac{5}{10}$.",
+    tags: ["proba_experience", "defi", "brevet", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "3e_proba_defi_tpl_5_comparer",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "proba_experience",
+    microId: "proba_defi",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Compare les fractions au même dénominateur.",
+    tags: ["proba_experience", "defi", "comparaison", "template"],
+    generate: () => {
+      const cas = randomChoice([
+        { sac: "A", pa: "2/4", pb: "3/4", plus: "B" },
+        { sac: "A", pa: "1/2", pb: "1/3", plus: "A" },
+        { sac: "A", pa: "3/5", pb: "2/5", plus: "A" },
+      ]);
+      return {
+        text: `Sac A : probabilité de gagner $= \\dfrac{${cas.pa.split("/")[0]}}{${cas.pa.split("/")[1]}}$. Sac B : $\\dfrac{${cas.pb.split("/")[0]}}{${cas.pb.split("/")[1]}}$. Avec quel sac a-t-on le plus de chances de gagner ?`,
+        format: "qcm",
+        choices: shuffle(["le sac A", "le sac B", "les deux pareil"]),
+        expected: [cas.plus === "A" ? "le sac A" : "le sac B"],
+        comparator: "mcq_exact",
+        explanation:
+          `Définition : on compare deux probabilités.\n\n` +
+          `Méthode : on met au même dénominateur ou on convertit en décimal.\n\n` +
+          `Calcul : la plus grande probabilité est celle du sac ${cas.plus}.\n\n` +
+          `Conclusion : on a plus de chances avec le sac ${cas.plus}.`,
+      };
+    },
+  },
 ];
