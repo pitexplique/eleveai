@@ -1248,4 +1248,507 @@ export const probabilitesBank: TutorBankItemV4[] = [
     tags: ["cm1", "probabilite", "defi", "open", "billes", "canvas"],
     canvas: billesCanvas(),
   },
+
+  // ============================================================
+  // TOP-UP — PROBABILITE_VOCABULAIRE
+  // ============================================================
+
+  {
+    kind: "fixed",
+    id: "cm1_probabilite_vocabulaire_fixed_8_roue_rouge",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "probabilite",
+    microId: "probabilite_vocabulaire",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Avec cette roue, tomber sur rouge est...",
+    format: "qcm",
+    choices: ["possible", "impossible", "certain"],
+    expected: ["possible"],
+    comparator: "mcq_exact",
+    hint: "Cherche s’il y a une partie rouge sur la roue.",
+    explanation: exp(
+      "Une couleur est possible si elle apparaît sur la roue.",
+      "On observe les couleurs de la roue.",
+      "Il y a une partie rouge, mais aussi d’autres couleurs.",
+      "Tomber sur rouge est possible."
+    ),
+    tags: ["cm1", "probabilite", "vocabulaire", "roue", "qcm", "canvas"],
+    canvas: roueSimpleCanvas(),
+  },
+
+  // ============================================================
+  // TOP-UP — PROBABILITE_HASARD
+  // ============================================================
+
+  {
+    kind: "fixed",
+    id: "cm1_probabilite_hasard_fixed_6_piece",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "probabilite",
+    microId: "probabilite_hasard",
+    difficulty: 1,
+    theme: "neutral",
+    text: "Lancer une pièce (pile ou face) est-il une situation de hasard ?",
+    format: "qcm",
+    choices: ["oui", "non"],
+    expected: ["oui"],
+    comparator: "mcq_exact",
+    hint: "Avant le lancer, on ne sait pas si ce sera pile ou face.",
+    explanation: exp(
+      "Une situation de hasard a un résultat inconnu à l’avance.",
+      "On regarde s’il y a plusieurs résultats possibles.",
+      "La pièce peut tomber sur pile ou sur face.",
+      "Lancer une pièce est une situation de hasard."
+    ),
+    tags: ["cm1", "probabilite", "hasard", "piece", "qcm"],
+  },
+
+  {
+    kind: "fixed",
+    id: "cm1_probabilite_hasard_fixed_7_carte",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "probabilite",
+    microId: "probabilite_hasard",
+    difficulty: 1,
+    theme: "neutral",
+    text: "Tirer une carte d’un paquet mélangé, sans regarder, est-il une situation de hasard ?",
+    format: "qcm",
+    choices: ["oui", "non"],
+    expected: ["oui"],
+    comparator: "mcq_exact",
+    hint: "On ne sait pas quelle carte va sortir.",
+    explanation: exp(
+      "Une situation de hasard a un résultat inconnu à l’avance.",
+      "On regarde si plusieurs cartes peuvent sortir.",
+      "Le paquet est mélangé, n’importe quelle carte peut sortir.",
+      "Tirer une carte au hasard est une situation de hasard."
+    ),
+    tags: ["cm1", "probabilite", "hasard", "carte", "qcm"],
+  },
+
+  {
+    kind: "fixed",
+    id: "cm1_probabilite_hasard_fixed_8_choix_nombre",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "probabilite",
+    microId: "probabilite_hasard",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Choisir le plus grand de deux nombres écrits au tableau est-il une situation de hasard ?",
+    format: "qcm",
+    choices: ["non", "oui"],
+    expected: ["non"],
+    comparator: "mcq_exact",
+    hint: "Le résultat est déjà connu en regardant les nombres.",
+    explanation: exp(
+      "Une situation de hasard a un résultat inconnu à l’avance.",
+      "On regarde si le résultat dépend du hasard.",
+      "Le plus grand de deux nombres est toujours le même, on peut le voir.",
+      "Ce n’est pas une situation de hasard."
+    ),
+    tags: ["cm1", "probabilite", "hasard", "non_hasard", "qcm"],
+  },
+
+  {
+    kind: "fixed",
+    id: "cm1_probabilite_hasard_fixed_9_billes",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "probabilite",
+    microId: "probabilite_hasard",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Tirer une bille de ce sac sans regarder est une situation de hasard parce que...",
+    format: "qcm",
+    choices: [
+      "on ne sait pas à l’avance quelle bille sera tirée",
+      "on tire toujours une bille rouge",
+      "il n’y a aucune bille",
+      "on choisit la couleur après avoir regardé",
+    ],
+    expected: ["on ne sait pas à l’avance quelle bille sera tirée"],
+    comparator: "mcq_exact",
+    hint: "Plusieurs couleurs peuvent sortir.",
+    explanation: exp(
+      "Une situation de hasard a un résultat inconnu à l’avance.",
+      "On observe les billes du sac.",
+      "Plusieurs couleurs sont présentes, on ne sait pas laquelle on tirera.",
+      "C’est une situation de hasard."
+    ),
+    tags: ["cm1", "probabilite", "hasard", "billes", "qcm", "canvas"],
+    canvas: billesCanvas(),
+  },
+
+  // ============================================================
+  // TOP-UP — PROBABILITE_COMPARER
+  // ============================================================
+
+  {
+    kind: "fixed",
+    id: "cm1_probabilite_comparer_fixed_4_moins_probable",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "probabilite",
+    microId: "probabilite_comparer",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Dans ce sac, quelle couleur a le moins de chances d’être tirée ?",
+    format: "qcm",
+    choices: ["vert", "rouge", "bleu", "elles ont toutes autant de chances"],
+    expected: ["vert"],
+    comparator: "mcq_exact",
+    hint: "Cherche la couleur la moins présente.",
+    explanation: exp(
+      "Moins il y a d’objets d’une couleur, moins elle a de chances d’être tirée.",
+      "On compte les billes de chaque couleur.",
+      "Il y a 3 rouges, 2 bleues et 1 verte.",
+      "La couleur verte a le moins de chances."
+    ),
+    tags: ["cm1", "probabilite", "comparer", "billes", "qcm", "canvas"],
+    canvas: billesCanvas(),
+  },
+
+  {
+    kind: "fixed",
+    id: "cm1_probabilite_comparer_fixed_5_rouge_vs_vert",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "probabilite",
+    microId: "probabilite_comparer",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Dans ce sac, rouge a-t-il plus de chances d’être tiré que vert ?",
+    format: "qcm",
+    choices: ["oui", "non"],
+    expected: ["oui"],
+    comparator: "mcq_exact",
+    hint: "Compare le nombre de rouges et de verts.",
+    explanation: exp(
+      "La couleur la plus présente a le plus de chances.",
+      "On compte les billes rouges et vertes.",
+      "Il y a 3 rouges et 1 verte.",
+      "Oui, rouge a plus de chances que vert."
+    ),
+    tags: ["cm1", "probabilite", "comparer", "billes", "qcm", "canvas"],
+    canvas: billesCanvas(),
+  },
+
+  {
+    kind: "fixed",
+    id: "cm1_probabilite_comparer_fixed_6_roue_egalite",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "probabilite",
+    microId: "probabilite_comparer",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Sur cette roue, les quatre couleurs ont-elles autant de chances de sortir ?",
+    format: "qcm",
+    choices: ["oui", "non"],
+    expected: ["oui"],
+    comparator: "mcq_exact",
+    hint: "Compare la taille des quatre parties.",
+    explanation: exp(
+      "Deux couleurs ont autant de chances si elles occupent la même place.",
+      "On compare les parts de la roue.",
+      "Les quatre parties (rouge, bleu, vert, jaune) ont la même taille.",
+      "Oui, elles ont toutes autant de chances."
+    ),
+    tags: ["cm1", "probabilite", "comparer", "roue", "egalite", "qcm", "canvas"],
+    canvas: roueSimpleCanvas(),
+  },
+
+  {
+    kind: "fixed",
+    id: "cm1_probabilite_comparer_fixed_7_de_pair_impair",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "probabilite",
+    microId: "probabilite_comparer",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Avec ce dé, a-t-on autant de chances d’obtenir un nombre pair qu’un nombre impair ?",
+    format: "qcm",
+    choices: [
+      "oui, autant de chances",
+      "non, plus de chances d’avoir un pair",
+      "non, plus de chances d’avoir un impair",
+      "c’est impossible",
+    ],
+    expected: ["oui, autant de chances"],
+    comparator: "mcq_exact",
+    hint: "Compte les faces paires et les faces impaires.",
+    explanation: exp(
+      "On a autant de chances si le nombre de cas favorables est le même.",
+      "On compte les faces paires et impaires.",
+      "Pairs : 2, 4, 6 (3 faces). Impairs : 1, 3, 5 (3 faces).",
+      "Oui, on a autant de chances d’obtenir un pair qu’un impair."
+    ),
+    tags: ["cm1", "probabilite", "comparer", "de", "egalite", "qcm", "canvas"],
+    canvas: deCanvas(),
+  },
+
+  {
+    kind: "fixed",
+    id: "cm1_probabilite_comparer_fixed_8_billes_equilibrees",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "probabilite",
+    microId: "probabilite_comparer",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Dans ce sac, rouge a-t-il plus de chances d’être tiré que bleu ?",
+    format: "qcm",
+    choices: ["non, ils ont autant de chances", "oui", "bleu est impossible", "rouge est certain"],
+    expected: ["non, ils ont autant de chances"],
+    comparator: "mcq_exact",
+    hint: "Compte les rouges et les bleues.",
+    explanation: exp(
+      "Deux couleurs ont autant de chances si elles sont en même nombre.",
+      "On compte les billes rouges et bleues.",
+      "Il y a 2 rouges et 2 bleues.",
+      "Non, rouge et bleu ont autant de chances."
+    ),
+    tags: ["cm1", "probabilite", "comparer", "billes", "egalite", "qcm", "canvas"],
+    canvas: billesEquilibreesCanvas(),
+  },
+
+  // ============================================================
+  // TOP-UP — PROBABILITE_ROUE_DE_SAC
+  // ============================================================
+
+  {
+    kind: "fixed",
+    id: "cm1_probabilite_roue_de_sac_fixed_4_de_sup4",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "probabilite",
+    microId: "probabilite_roue_de_sac",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Avec ce dé, quelles faces permettent d’obtenir un nombre supérieur à 4 ?",
+    format: "qcm",
+    choices: ["5 et 6", "4 et 5", "1 et 2", "2, 4 et 6"],
+    expected: ["5 et 6"],
+    comparator: "mcq_exact",
+    hint: "Supérieur à 4 veut dire strictement plus grand que 4.",
+    explanation: exp(
+      "On cherche les faces qui respectent la condition.",
+      "On regarde les faces strictement supérieures à 4.",
+      "Les faces 5 et 6 sont supérieures à 4.",
+      "Les faces favorables sont 5 et 6."
+    ),
+    tags: ["cm1", "probabilite", "de", "qcm", "canvas"],
+    canvas: deCanvas([5, 6]),
+  },
+
+  {
+    kind: "fixed",
+    id: "cm1_probabilite_roue_de_sac_fixed_5_total_billes",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "probabilite",
+    microId: "probabilite_roue_de_sac",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Combien y a-t-il de billes en tout dans ce sac ?",
+    format: "short",
+    expected: ["6"],
+    comparator: "number_equal",
+    hint: "Compte toutes les billes, toutes couleurs confondues.",
+    explanation: exp(
+      "Pour raisonner avec un sac, on compte tous les objets.",
+      "On compte toutes les billes.",
+      "3 rouges + 2 bleues + 1 verte = 6.",
+      "Il y a 6 billes en tout."
+    ),
+    tags: ["cm1", "probabilite", "sac", "billes", "short", "canvas"],
+    canvas: billesCanvas(),
+  },
+
+  {
+    kind: "fixed",
+    id: "cm1_probabilite_roue_de_sac_fixed_6_couleurs_roue",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "probabilite",
+    microId: "probabilite_roue_de_sac",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Combien y a-t-il de couleurs différentes sur cette roue ?",
+    format: "short",
+    expected: ["4"],
+    comparator: "number_equal",
+    hint: "Compte les couleurs des parties.",
+    explanation: exp(
+      "On observe la roue pour compter les couleurs.",
+      "On repère chaque couleur différente.",
+      "Il y a rouge, bleu, vert et jaune.",
+      "Il y a 4 couleurs différentes."
+    ),
+    tags: ["cm1", "probabilite", "roue", "short", "canvas"],
+    canvas: roueSimpleCanvas(),
+  },
+
+  {
+    kind: "fixed",
+    id: "cm1_probabilite_roue_de_sac_fixed_7_faces_de",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "probabilite",
+    microId: "probabilite_roue_de_sac",
+    difficulty: 1,
+    theme: "neutral",
+    text: "Combien de faces a un dé classique ?",
+    format: "short",
+    expected: ["6"],
+    comparator: "number_equal",
+    hint: "Compte les faces : 1, 2, 3…",
+    explanation: exp(
+      "Un dé classique a des faces numérotées.",
+      "On compte les faces du dé.",
+      "Les faces sont 1, 2, 3, 4, 5 et 6.",
+      "Un dé classique a 6 faces."
+    ),
+    tags: ["cm1", "probabilite", "de", "short", "canvas"],
+    canvas: deCanvas(),
+  },
+
+  {
+    kind: "fixed",
+    id: "cm1_probabilite_roue_de_sac_fixed_8_vertes",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "probabilite",
+    microId: "probabilite_roue_de_sac",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Dans ce sac, combien y a-t-il de billes vertes ?",
+    format: "short",
+    expected: ["2"],
+    comparator: "number_equal",
+    hint: "Compte les billes avec la lettre V.",
+    explanation: exp(
+      "Pour raisonner avec un sac, on compte les objets demandés.",
+      "On repère les billes vertes.",
+      "Il y a 2 billes vertes.",
+      "La réponse est 2."
+    ),
+    tags: ["cm1", "probabilite", "sac", "billes", "short", "canvas"],
+    canvas: billesEquilibreesCanvas(),
+  },
+
+  // ============================================================
+  // TOP-UP — PROBABILITE_DEFI
+  // ============================================================
+
+  {
+    kind: "fixed",
+    id: "cm1_probabilite_defi_fixed_4_de_certain",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "probabilite",
+    microId: "probabilite_defi",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Avec un dé classique, quel événement est certain ?",
+    format: "qcm",
+    choices: [
+      "obtenir un nombre entre 1 et 6",
+      "obtenir 6",
+      "obtenir un nombre pair",
+      "obtenir 7",
+    ],
+    expected: ["obtenir un nombre entre 1 et 6"],
+    comparator: "mcq_exact",
+    hint: "Cherche l’événement qui arrive à chaque lancer.",
+    explanation: exp(
+      "Un événement certain se produit toujours.",
+      "On regarde toutes les faces du dé.",
+      "Toutes les faces sont entre 1 et 6.",
+      "Obtenir un nombre entre 1 et 6 est certain."
+    ),
+    tags: ["cm1", "probabilite", "defi", "de", "qcm", "canvas"],
+    canvas: deCanvas([1, 2, 3, 4, 5, 6]),
+  },
+
+  {
+    kind: "fixed",
+    id: "cm1_probabilite_defi_fixed_5_billes_moins_probable",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "probabilite",
+    microId: "probabilite_defi",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Dans ce sac, quelle couleur est la moins probable ?",
+    format: "qcm",
+    choices: ["vert", "rouge", "bleu", "jaune"],
+    expected: ["vert"],
+    comparator: "mcq_exact",
+    hint: "Cherche la couleur la moins présente.",
+    explanation: exp(
+      "La couleur la moins probable est celle qui apparaît le moins.",
+      "On compte chaque couleur.",
+      "Il y a 3 rouges, 2 bleues et 1 verte.",
+      "Vert est la couleur la moins probable."
+    ),
+    tags: ["cm1", "probabilite", "defi", "sac", "qcm", "canvas"],
+    canvas: billesCanvas(),
+  },
+
+  {
+    kind: "fixed",
+    id: "cm1_probabilite_defi_fixed_6_roue_comparaison",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "probabilite",
+    microId: "probabilite_defi",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Sur cette roue, tomber sur rouge est-il plus probable que tomber sur bleu ?",
+    format: "qcm",
+    choices: ["oui", "non"],
+    expected: ["oui"],
+    comparator: "mcq_exact",
+    hint: "Compare la taille de la partie rouge et de la partie bleue.",
+    explanation: exp(
+      "Une couleur est plus probable si elle occupe une plus grande partie de la roue.",
+      "On compare la part rouge et la part bleue.",
+      "Le rouge occupe 3 parts, le bleu 1 part.",
+      "Oui, le rouge est plus probable que le bleu."
+    ),
+    tags: ["cm1", "probabilite", "defi", "roue", "qcm", "canvas"],
+    canvas: roueRougeFavoriCanvas(),
+  },
+
+  {
+    kind: "fixed",
+    id: "cm1_probabilite_defi_fixed_7_reunion_letchis",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "probabilite",
+    microId: "probabilite_defi",
+    difficulty: 3,
+    theme: "reunion",
+    text: "Un sac contient 4 billes rouges et 1 bille verte. Quelle couleur a le plus de chances d’être tirée ?",
+    format: "qcm",
+    choices: ["rouge", "vert", "elles ont autant de chances", "noir"],
+    expected: ["rouge"],
+    comparator: "mcq_exact",
+    hint: "Compare le nombre de billes de chaque couleur.",
+    explanation: exp(
+      "La couleur la plus présente a le plus de chances.",
+      "On compte les billes de chaque couleur.",
+      "Il y a 4 rouges et 1 verte.",
+      "Rouge a le plus de chances d’être tirée."
+    ),
+    tags: ["cm1", "probabilite", "defi", "reunion", "billes", "qcm", "canvas"],
+    canvas: billesVariablesCanvas({ rouges: 4, bleues: 0, vertes: 1 }),
+  },
 ];

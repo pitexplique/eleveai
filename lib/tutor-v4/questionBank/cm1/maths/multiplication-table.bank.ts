@@ -3620,4 +3620,177 @@ export const MultiplicationTablesBank: TutorBankItemV4[] = [
     ),
     tags: ["cm1", "tables", "defi", "open", "strategie"],
   },
+
+  // ============================================================
+  // TOP-UP — TABLE_2
+  // ============================================================
+
+  {
+    kind: "fixed",
+    id: "cm1_table_2_fixed_5_produit",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "tables_multiplication",
+    microId: "table_2",
+    difficulty: 1,
+    theme: "neutral",
+    text: "Calcule : 2 × 9",
+    format: "short",
+    expected: ["18"],
+    comparator: "number_equal",
+    hint: "La table de 2, ce sont les doubles.",
+    explanation: exp(
+      "La table de 2 permet de calculer les doubles.",
+      "On cherche le double de 9.",
+      "2 × 9 = 18.",
+      "La réponse est 18."
+    ),
+    tags: ["cm1", "tables", "table_2", "double", "short"],
+  },
+
+  {
+    kind: "fixed",
+    id: "cm1_table_2_fixed_6_produit",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "tables_multiplication",
+    microId: "table_2",
+    difficulty: 1,
+    theme: "neutral",
+    text: "Calcule : 2 × 8",
+    format: "short",
+    expected: ["16"],
+    comparator: "number_equal",
+    hint: "La table de 2, ce sont les doubles.",
+    explanation: exp(
+      "La table de 2 permet de calculer les doubles.",
+      "On cherche le double de 8.",
+      "2 × 8 = 16.",
+      "La réponse est 16."
+    ),
+    tags: ["cm1", "tables", "table_2", "double", "short"],
+  },
+
+  {
+    kind: "fixed",
+    id: "cm1_table_2_fixed_7_trou",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "tables_multiplication",
+    microId: "table_2",
+    difficulty: 1,
+    theme: "neutral",
+    text: "Complète : 2 × ? = 20",
+    format: "short",
+    expected: ["10"],
+    comparator: "number_equal",
+    hint: "Cherche quel nombre a pour double 20.",
+    explanation: exp(
+      "Une multiplication à trou demande de retrouver le facteur manquant.",
+      "On cherche le nombre qui, multiplié par 2, donne 20.",
+      "2 × 10 = 20.",
+      "Le nombre manquant est 10."
+    ),
+    tags: ["cm1", "tables", "table_2", "facteur_manquant", "short"],
+  },
+
+  // ============================================================
+  // TOP-UP — TABLES_TROUS
+  // ============================================================
+
+  {
+    kind: "fixed",
+    id: "cm1_tables_trous_fixed_5",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "tables_multiplication",
+    microId: "tables_trous",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Complète : 6 × ? = 42",
+    format: "short",
+    expected: ["7"],
+    comparator: "number_equal",
+    hint: "Cherche dans la table de 6.",
+    explanation: exp(
+      "Une multiplication à trou demande de retrouver le facteur manquant.",
+      "On cherche le nombre qui, multiplié par 6, donne 42.",
+      "6 × 7 = 42.",
+      "Le nombre manquant est 7."
+    ),
+    tags: ["cm1", "tables", "tables_trous", "facteur_manquant", "short"],
+  },
+
+  {
+    kind: "fixed",
+    id: "cm1_tables_trous_fixed_6",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "tables_multiplication",
+    microId: "tables_trous",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Complète : ? × 8 = 56",
+    format: "short",
+    expected: ["7"],
+    comparator: "number_equal",
+    hint: "Cherche dans la table de 8.",
+    explanation: exp(
+      "On peut retrouver un facteur manquant à gauche du signe ×.",
+      "On cherche le nombre qui, multiplié par 8, donne 56.",
+      "7 × 8 = 56.",
+      "Le nombre manquant est 7."
+    ),
+    tags: ["cm1", "tables", "tables_trous", "facteur_manquant", "short"],
+  },
+
+  {
+    kind: "fixed",
+    id: "cm1_tables_trous_fixed_7",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "tables_multiplication",
+    microId: "tables_trous",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Complète : 9 × ? = 81",
+    format: "short",
+    expected: ["9"],
+    comparator: "number_equal",
+    hint: "Cherche dans la table de 9.",
+    explanation: exp(
+      "Une multiplication à trou demande de retrouver le facteur manquant.",
+      "On cherche le nombre qui, multiplié par 9, donne 81.",
+      "9 × 9 = 81.",
+      "Le nombre manquant est 9."
+    ),
+    tags: ["cm1", "tables", "tables_trous", "facteur_manquant", "short"],
+  },
+
+  // ============================================================
+  // TOP-UP — TABLES_MELANGEES
+  // ============================================================
+
+  {
+    kind: "fixed",
+    id: "cm1_tables_melangees_fixed_6_produit",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "tables_multiplication",
+    microId: "tables_melangees",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Calcule : 7 × 8",
+    format: "short",
+    expected: ["56"],
+    comparator: "number_equal",
+    hint: "C’est un résultat de la table de 7 et de la table de 8.",
+    explanation: exp(
+      "Les tables mélangées demandent de connaître plusieurs tables.",
+      "On cherche le produit de 7 par 8.",
+      "7 × 8 = 56.",
+      "La réponse est 56."
+    ),
+    tags: ["cm1", "tables", "tables_melangees", "short"],
+  },
 ];

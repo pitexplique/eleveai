@@ -2805,5 +2805,165 @@ export const masseBank: TutorBankItemV4[] = [
       };
     },
   },
+
+  // ============================================================
+  // TOP-UP — MASSE_ESTIMER
+  // ============================================================
+
+  {
+    kind: "fixed",
+    id: "cm1_masse_estimer_fixed_003_voiture",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "masse",
+    microId: "masse_estimer",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Quelle unité est la plus adaptée pour mesurer la masse d’une voiture ?",
+    format: "qcm",
+    choices: ["t", "g", "kg", "km"],
+    expected: ["t"],
+    comparator: "mcq_exact",
+    hint: "Une voiture est très lourde.",
+    explanation: exp(
+      "Estimer une masse, c’est choisir une unité raisonnable.",
+      "On pense au poids habituel de l’objet.",
+      "Une voiture pèse environ une tonne, beaucoup trop pour des grammes ou des kilogrammes seuls.",
+      "L’unité la plus adaptée est la tonne."
+    ),
+    canvas: masseCanvas({
+      variant: "estimation",
+      objet: { label: "Voiture", icon: "🚗" },
+      choix: ["1 t", "1 kg", "100 g"],
+      questionLabel: "Quelle masse semble raisonnable ?",
+      display: { showMasses: true, showLabels: true, showComparison: true },
+    }),
+    tags: ["cm1", "masse", "estimer", "unite", "qcm", "fixed", "canvas"],
+  },
+
+  {
+    kind: "fixed",
+    id: "cm1_masse_estimer_fixed_004_oeuf",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "masse",
+    microId: "masse_estimer",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Quelle estimation est la plus raisonnable pour la masse d’un œuf ?",
+    format: "qcm",
+    choices: ["60 g", "60 kg", "6 kg", "6 t"],
+    expected: ["60 g"],
+    comparator: "mcq_exact",
+    hint: "Un œuf est léger.",
+    explanation: exp(
+      "Une estimation doit être cohérente avec l’objet.",
+      "Un œuf est un petit objet léger.",
+      "60 kg ou 6 kg sont beaucoup trop lourds pour un œuf.",
+      "Une estimation raisonnable est 60 g."
+    ),
+    canvas: masseCanvas({
+      variant: "estimation",
+      objet: { label: "Œuf", icon: "🥚" },
+      choix: ["60 g", "60 kg", "6 kg"],
+      questionLabel: "Choisis la masse la plus raisonnable.",
+      display: { showMasses: true, showLabels: true, showComparison: true },
+    }),
+    tags: ["cm1", "masse", "estimer", "ordre_grandeur", "qcm", "fixed", "canvas"],
+  },
+
+  {
+    kind: "fixed",
+    id: "cm1_masse_estimer_fixed_005_elephant",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "masse",
+    microId: "masse_estimer",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Quelle unité est la plus adaptée pour mesurer la masse d’un éléphant ?",
+    format: "qcm",
+    choices: ["t", "g", "cm", "mm"],
+    expected: ["t"],
+    comparator: "mcq_exact",
+    hint: "Un éléphant est l’un des plus gros animaux terrestres.",
+    explanation: exp(
+      "On choisit l’unité adaptée à la masse de l’objet.",
+      "Un éléphant est un animal très lourd.",
+      "Le gramme serait beaucoup trop petit ; le cm et le mm mesurent des longueurs, pas des masses.",
+      "L’unité la plus adaptée est la tonne."
+    ),
+    canvas: masseCanvas({
+      variant: "estimation",
+      objet: { label: "Éléphant", icon: "🐘" },
+      choix: ["4 t", "4 kg", "400 g"],
+      questionLabel: "Quelle masse semble raisonnable ?",
+      display: { showMasses: true, showLabels: true, showComparison: true },
+    }),
+    tags: ["cm1", "masse", "estimer", "unite", "qcm", "fixed", "canvas"],
+  },
+
+  // ============================================================
+  // TOP-UP — MASSE_MESURER
+  // ============================================================
+
+  {
+    kind: "fixed",
+    id: "cm1_masse_mesurer_fixed_003_balance",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "masse",
+    microId: "masse_mesurer",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Une balance est équilibrée : à gauche il y a une boîte, à droite il y a 2 kg. Quelle est la masse de la boîte, en kilogrammes ?",
+    format: "short",
+    expected: ["2", "2000"],
+    comparator: "number_equal",
+    hint: "Si la balance est équilibrée, les deux côtés ont la même masse.",
+    explanation: exp(
+      "Sur une balance équilibrée, les deux côtés ont la même masse.",
+      "On lit la masse connue sur le côté droit.",
+      "À droite, il y a 2 kg, donc la boîte pèse aussi 2 kg.",
+      "La masse de la boîte est 2 kg."
+    ),
+    canvas: masseCanvas({
+      variant: "balance",
+      gauche: { label: "Boîte", icon: "📦", masse: "?", grammes: 2000 },
+      droite: { label: "Masse", icon: "⚖️", masse: "2 kg", grammes: 2000 },
+      questionLabel: "La balance est équilibrée : quelle est la masse de la boîte ?",
+      display: { showMasses: true, showLabels: true, showComparison: true },
+    }),
+    tags: ["cm1", "masse", "mesurer", "balance", "egalite", "short", "fixed", "canvas"],
+  },
+
+  {
+    kind: "fixed",
+    id: "cm1_masse_mesurer_fixed_004_objets",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "masse",
+    microId: "masse_mesurer",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Un sachet pèse 250 g. Quelle est sa masse en grammes ?",
+    format: "short",
+    expected: ["250"],
+    comparator: "number_equal",
+    hint: "La masse est déjà donnée en grammes.",
+    explanation: exp(
+      "Lire une masse, c’est identifier la valeur donnée.",
+      "Ici, la masse est déjà écrite en grammes.",
+      "Le sachet pèse 250 g.",
+      "La réponse est 250 g."
+    ),
+    canvas: masseCanvas({
+      variant: "objets",
+      objets: [{ label: "Sachet", icon: "🛍️", masse: "250 g", grammes: 250 }],
+      questionLabel: "Lis la masse du sachet.",
+      display: { showMasses: true, showLabels: true, showComparison: true },
+    }),
+    tags: ["cm1", "masse", "mesurer", "lecture", "short", "fixed", "canvas"],
+  },
 ];
 

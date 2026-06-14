@@ -2098,4 +2098,193 @@ export const longueurBank: TutorBankItemV4[] = [
       };
     },
   },
+
+  // ============================================================
+  // TOP-UP — LONGUEUR_COMPARER
+  // ============================================================
+
+  {
+    kind: "fixed",
+    id: "cm1_longueur_comparer_fixed_003_m_cm",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "longueur",
+    microId: "longueur_comparer",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Quelle longueur est la plus grande : 3 m ou 250 cm ?",
+    format: "qcm",
+    choices: ["3 m", "250 cm"],
+    expected: ["3 m"],
+    comparator: "mcq_exact",
+    hint: "Convertis 3 m en centimètres.",
+    explanation: exp(
+      "Pour comparer deux longueurs avec des unités différentes, on les met dans la même unité.",
+      "On convertit les mètres en centimètres.",
+      "3 m = 300 cm, et 300 cm est plus grand que 250 cm.",
+      "La longueur la plus grande est 3 m."
+    ),
+    tags: ["cm1", "longueur", "comparer", "conversion", "qcm", "fixed"],
+  },
+
+  // ============================================================
+  // TOP-UP — LONGUEUR_ESTIMER
+  // ============================================================
+
+  {
+    kind: "fixed",
+    id: "cm1_longueur_estimer_fixed_003_riviere",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "longueur",
+    microId: "longueur_estimer",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Quelle unité est la plus adaptée pour mesurer la longueur d’une rivière ?",
+    format: "qcm",
+    choices: ["km", "cm", "mm", "dm"],
+    expected: ["km"],
+    comparator: "mcq_exact",
+    hint: "Une rivière est très longue.",
+    explanation: exp(
+      "On choisit l’unité adaptée à la taille de ce que l’on mesure.",
+      "Une rivière s’étend sur de grandes distances.",
+      "Le centimètre ou le millimètre seraient beaucoup trop petits.",
+      "L’unité la plus adaptée est le kilomètre."
+    ),
+    tags: ["cm1", "longueur", "estimer", "unite", "qcm", "fixed"],
+  },
+
+  {
+    kind: "fixed",
+    id: "cm1_longueur_estimer_fixed_004_adulte",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "longueur",
+    microId: "longueur_estimer",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Quelle estimation est la plus raisonnable pour la taille d’un adulte ?",
+    format: "qcm",
+    choices: ["170 cm", "17 cm", "17 m", "1 700 cm"],
+    expected: ["170 cm"],
+    comparator: "mcq_exact",
+    hint: "Un adulte mesure un peu moins de 2 mètres.",
+    explanation: exp(
+      "Estimer, c’est choisir une valeur qui a du sens.",
+      "On compare avec une taille connue : un adulte mesure environ 1 m 70.",
+      "17 cm est trop petit et 17 m est beaucoup trop grand.",
+      "Une estimation raisonnable est 170 cm."
+    ),
+    tags: ["cm1", "longueur", "estimer", "ordre_grandeur", "qcm", "fixed"],
+  },
+
+  {
+    kind: "fixed",
+    id: "cm1_longueur_estimer_fixed_005_fourmi",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "longueur",
+    microId: "longueur_estimer",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Quelle unité est la plus adaptée pour mesurer la longueur d’une fourmi ?",
+    format: "qcm",
+    choices: ["mm", "m", "km", "dam"],
+    expected: ["mm"],
+    comparator: "mcq_exact",
+    hint: "Une fourmi est minuscule.",
+    explanation: exp(
+      "On choisit une unité adaptée à la taille de l’objet.",
+      "Une fourmi est un très petit insecte.",
+      "Le mètre ou le kilomètre seraient beaucoup trop grands.",
+      "L’unité la plus adaptée est le millimètre."
+    ),
+    tags: ["cm1", "longueur", "estimer", "unite", "qcm", "fixed"],
+  },
+
+  // ============================================================
+  // TOP-UP — LONGUEUR_MESURER
+  // ============================================================
+
+  {
+    kind: "fixed",
+    id: "cm1_longueur_mesurer_fixed_003_droite_ab",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "longueur",
+    microId: "longueur_mesurer",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Sur la droite graduée, le point A est placé à 1 et le point B à 6. Quelle est la longueur AB ?",
+    format: "short",
+    expected: ["5"],
+    comparator: "number_equal",
+    hint: "Calcule l’écart entre 6 et 1.",
+    explanation: exp(
+      "Mesurer une longueur sur une droite graduée, c’est calculer l’écart entre deux positions.",
+      "On soustrait la plus petite position à la plus grande.",
+      "6 - 1 = 5.",
+      "La longueur AB est 5 unités."
+    ),
+    canvas: droiteGradueeCanvas({
+      min: 0,
+      max: 10,
+      step: 1,
+      points: [
+        { value: 1, label: "A" },
+        { value: 6, label: "B" },
+      ],
+      display: {
+        showTicks: true,
+        showValues: true,
+        showPoints: true,
+        showPointLabels: true,
+        showZero: true,
+      },
+      size: { width: 360, height: 130 },
+    }),
+    tags: ["cm1", "longueur", "mesurer", "droite_graduee", "short", "fixed", "canvas"],
+  },
+
+  {
+    kind: "fixed",
+    id: "cm1_longueur_mesurer_fixed_004_qcm",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "longueur",
+    microId: "longueur_mesurer",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Sur la droite graduée, le point A est à 0 et le point B à 4. Quelle est la longueur AB ?",
+    format: "qcm",
+    choices: ["4", "0", "8", "2"],
+    expected: ["4"],
+    comparator: "mcq_exact",
+    hint: "Calcule l’écart entre 4 et 0.",
+    explanation: exp(
+      "La longueur entre deux points est l’écart entre leurs positions.",
+      "On soustrait la plus petite position à la plus grande.",
+      "4 - 0 = 4.",
+      "La longueur AB est 4 unités."
+    ),
+    canvas: droiteGradueeCanvas({
+      min: 0,
+      max: 10,
+      step: 1,
+      points: [
+        { value: 0, label: "A" },
+        { value: 4, label: "B" },
+      ],
+      display: {
+        showTicks: true,
+        showValues: true,
+        showPoints: true,
+        showPointLabels: true,
+        showZero: true,
+      },
+      size: { width: 360, height: 130 },
+    }),
+    tags: ["cm1", "longueur", "mesurer", "droite_graduee", "qcm", "fixed", "canvas"],
+  },
 ];

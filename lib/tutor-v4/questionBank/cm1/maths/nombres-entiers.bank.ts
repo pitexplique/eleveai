@@ -1311,4 +1311,417 @@ export const nombresEntiersBank: TutorBankItemV4[] = [
     ),
     tags: ["cm1", "nombres_entiers", "defi", "open", "raisonnement"],
   },
+
+  // ============================================================
+  // TOP-UP — ENTIER_LIRE
+  // ============================================================
+
+  {
+    kind: "fixed",
+    id: "cm1_entier_lire_short_007",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "nombre_entier",
+    microId: "entier_lire",
+    difficulty: 1,
+    theme: "neutral",
+    text: "Écris en chiffres : « cinquante mille deux cents ».",
+    format: "short",
+    expected: ["50200", "50 200"],
+    comparator: "number_equal",
+    hint: "Il y a 50 milliers et 2 centaines.",
+    explanation: exp(
+      "Écrire un nombre en chiffres demande de placer chaque classe correctement.",
+      "On repère les milliers, puis les centaines, dizaines et unités.",
+      "« cinquante mille » = 50 000 et « deux cents » = 200. Donc 50 000 + 200 = 50 200.",
+      "Le nombre est 50 200."
+    ),
+    tags: ["cm1", "nombres_entiers", "lecture", "short"],
+  },
+
+  {
+    kind: "fixed",
+    id: "cm1_entier_lire_qcm_008",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "nombre_entier",
+    microId: "entier_lire",
+    difficulty: 1,
+    theme: "neutral",
+    text: "Comment écrit-on en chiffres : « huit mille neuf » ?",
+    format: "qcm",
+    choices: ["8 009", "8 900", "8 090", "80 009"],
+    expected: ["8 009"],
+    comparator: "mcq_exact",
+    hint: "Il y a 8 milliers et 9 unités. Attention aux zéros.",
+    explanation: exp(
+      "Les zéros gardent les positions vides dans un nombre entier.",
+      "On place les milliers puis les unités.",
+      "« huit mille » = 8 000 et « neuf » = 9. Donc 8 000 + 9 = 8 009.",
+      "Le nombre s’écrit 8 009."
+    ),
+    tags: ["cm1", "nombres_entiers", "lecture", "zeros", "qcm"],
+  },
+
+  {
+    kind: "fixed",
+    id: "cm1_entier_lire_short_009",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "nombre_entier",
+    microId: "entier_lire",
+    difficulty: 1,
+    theme: "neutral",
+    text: "Écris en chiffres : « seize mille ».",
+    format: "short",
+    expected: ["16000", "16 000"],
+    comparator: "number_equal",
+    hint: "Il y a 16 milliers et aucune unité.",
+    explanation: exp(
+      "Un nombre de milliers entiers se termine par trois zéros.",
+      "On place 16 milliers, puis des zéros pour les centaines, dizaines et unités.",
+      "« seize mille » = 16 000.",
+      "Le nombre est 16 000."
+    ),
+    tags: ["cm1", "nombres_entiers", "lecture", "zeros", "short"],
+  },
+
+  {
+    kind: "fixed",
+    id: "cm1_entier_lire_qcm_010",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "nombre_entier",
+    microId: "entier_lire",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Comment écrit-on en chiffres : « soixante mille quarante » ?",
+    format: "qcm",
+    choices: ["60 040", "60 400", "6 040", "600 040"],
+    expected: ["60 040"],
+    comparator: "mcq_exact",
+    hint: "Il y a 60 milliers et 40 unités, pas de centaines.",
+    explanation: exp(
+      "Les zéros servent à garder les bonnes colonnes.",
+      "On place les milliers puis les dizaines.",
+      "« soixante mille » = 60 000 et « quarante » = 40. Donc 60 000 + 40 = 60 040.",
+      "Le nombre s’écrit 60 040."
+    ),
+    tags: ["cm1", "nombres_entiers", "lecture", "zeros", "qcm"],
+  },
+
+  // ============================================================
+  // TOP-UP — ENTIER_COMPARER
+  // ============================================================
+
+  {
+    kind: "fixed",
+    id: "cm1_entier_comparer_qcm_008",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "nombre_entier",
+    microId: "entier_comparer",
+    difficulty: 1,
+    theme: "neutral",
+    text: "Quel est le plus petit nombre ?",
+    format: "qcm",
+    choices: ["5 067", "5 607", "5 706", "5 760"],
+    expected: ["5 067"],
+    comparator: "mcq_exact",
+    hint: "Compare les chiffres de gauche à droite.",
+    explanation: exp(
+      "Comparer des nombres, c’est trouver le plus petit ou le plus grand.",
+      "Tous commencent par 5. On compare ensuite les centaines.",
+      "5 067 a 0 centaine, c’est le plus petit nombre de centaines.",
+      "Le plus petit nombre est 5 067."
+    ),
+    tags: ["cm1", "nombres_entiers", "comparaison", "qcm"],
+  },
+
+  {
+    kind: "fixed",
+    id: "cm1_entier_comparer_qcm_009",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "nombre_entier",
+    microId: "entier_comparer",
+    difficulty: 1,
+    theme: "neutral",
+    text: "Complète : 47 050 ... 47 005",
+    format: "qcm",
+    choices: [">", "<", "="],
+    expected: [">"],
+    comparator: "mcq_exact",
+    hint: "Les deux commencent par 47 0. Compare ensuite les dizaines.",
+    explanation: exp(
+      "Les signes < et > servent à comparer deux nombres.",
+      "On compare les chiffres de gauche à droite.",
+      "47 050 et 47 005 commencent pareil, mais 5 dizaines est plus grand que 0 dizaine.",
+      "On écrit donc 47 050 > 47 005."
+    ),
+    tags: ["cm1", "nombres_entiers", "comparaison", "symboles", "qcm"],
+  },
+
+  {
+    kind: "fixed",
+    id: "cm1_entier_comparer_qcm_010",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "nombre_entier",
+    microId: "entier_comparer",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Quel rangement est dans l’ordre décroissant ?",
+    format: "qcm",
+    choices: [
+      "7 800 > 7 080 > 7 008",
+      "7 008 > 7 080 > 7 800",
+      "7 080 > 7 800 > 7 008",
+      "7 800 > 7 008 > 7 080",
+    ],
+    expected: ["7 800 > 7 080 > 7 008"],
+    comparator: "mcq_exact",
+    hint: "Ordre décroissant : du plus grand au plus petit.",
+    explanation: exp(
+      "Ordonner dans l’ordre décroissant, c’est ranger du plus grand au plus petit.",
+      "On compare les nombres puis on place le plus grand d’abord.",
+      "7 800 > 7 080 > 7 008.",
+      "L’ordre décroissant est : 7 800 > 7 080 > 7 008."
+    ),
+    tags: ["cm1", "nombres_entiers", "ordre_decroissant", "qcm"],
+  },
+
+  // ============================================================
+  // TOP-UP — ENTIER_DECOMPOSER
+  // ============================================================
+
+  {
+    kind: "fixed",
+    id: "cm1_entier_decomposer_qcm_008",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "nombre_entier",
+    microId: "entier_decomposer",
+    difficulty: 1,
+    theme: "neutral",
+    text: "Quelle est la bonne décomposition de 5 064 ?",
+    format: "qcm",
+    choices: [
+      "5 000 + 60 + 4",
+      "5 000 + 600 + 4",
+      "500 + 60 + 4",
+      "5 000 + 6 + 4",
+    ],
+    expected: ["5 000 + 60 + 4"],
+    comparator: "mcq_exact",
+    hint: "Le chiffre des centaines est 0.",
+    explanation: exp(
+      "Décomposer un nombre, c’est écrire la valeur de ses chiffres non nuls.",
+      "On repère la position de chaque chiffre.",
+      "Dans 5 064 : 5 vaut 5 000, 0 centaine, 6 vaut 60, 4 vaut 4.",
+      "Donc 5 064 = 5 000 + 60 + 4."
+    ),
+    tags: ["cm1", "nombres_entiers", "decomposition", "zeros", "qcm"],
+  },
+
+  {
+    kind: "fixed",
+    id: "cm1_entier_decomposer_short_009",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "nombre_entier",
+    microId: "entier_decomposer",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Complète : 30 000 + 2 000 + 700 + 5 = ...",
+    format: "short",
+    expected: ["32705", "32 705"],
+    comparator: "number_equal",
+    hint: "Il n’y a pas de dizaines : la colonne des dizaines est vide.",
+    explanation: exp(
+      "Composer un nombre, c’est regrouper les valeurs de ses chiffres.",
+      "On place chaque valeur dans la bonne colonne, avec des zéros pour les colonnes vides.",
+      "30 000 + 2 000 + 700 + 5 = 32 705.",
+      "Le nombre est 32 705."
+    ),
+    tags: ["cm1", "nombres_entiers", "composition", "zeros", "short"],
+  },
+
+  {
+    kind: "fixed",
+    id: "cm1_entier_decomposer_qcm_010",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "nombre_entier",
+    microId: "entier_decomposer",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Quel nombre vaut 8 000 + 40 + 6 ?",
+    format: "qcm",
+    choices: ["8 046", "8 406", "8 460", "846"],
+    expected: ["8 046"],
+    comparator: "mcq_exact",
+    hint: "Il n’y a pas de centaines : le chiffre des centaines est 0.",
+    explanation: exp(
+      "Composer un nombre, c’est additionner les valeurs placées dans les bonnes colonnes.",
+      "On garde les colonnes vides avec des zéros.",
+      "8 000 + 40 + 6 = 8 046.",
+      "Le nombre est 8 046."
+    ),
+    tags: ["cm1", "nombres_entiers", "composition", "zeros", "qcm"],
+  },
+
+  // ============================================================
+  // TOP-UP — ENTIER_ARRONDIR
+  // ============================================================
+
+  {
+    kind: "fixed",
+    id: "cm1_entier_arrondir_qcm_008",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "nombre_entier",
+    microId: "entier_arrondir",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Quel est l’arrondi de 5 350 à la centaine près ?",
+    format: "qcm",
+    choices: ["5 400", "5 300", "5 350", "5 000"],
+    expected: ["5 400"],
+    comparator: "mcq_exact",
+    hint: "À la centaine près, regarde le chiffre des dizaines.",
+    explanation: exp(
+      "Arrondir à la centaine près, c’est choisir la centaine la plus proche.",
+      "On regarde le chiffre des dizaines.",
+      "Dans 5 350, le chiffre des dizaines est 5. Comme 5 ≥ 5, on augmente la centaine.",
+      "L’arrondi à la centaine près est 5 400."
+    ),
+    tags: ["cm1", "nombres_entiers", "arrondi", "centaine", "qcm"],
+  },
+
+  {
+    kind: "fixed",
+    id: "cm1_entier_arrondir_short_009",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "nombre_entier",
+    microId: "entier_arrondir",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Arrondis 18 600 au millier près.",
+    format: "short",
+    expected: ["19000", "19 000"],
+    comparator: "number_equal",
+    hint: "Au millier près, regarde le chiffre des centaines.",
+    explanation: exp(
+      "Arrondir au millier près, c’est choisir le millier le plus proche.",
+      "On regarde le chiffre des centaines.",
+      "Dans 18 600, le chiffre des centaines est 6. Comme 6 ≥ 5, on augmente le nombre de milliers.",
+      "L’arrondi est 19 000."
+    ),
+    tags: ["cm1", "nombres_entiers", "arrondi", "millier", "short"],
+  },
+
+  {
+    kind: "fixed",
+    id: "cm1_entier_arrondir_short_010",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "nombre_entier",
+    microId: "entier_arrondir",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Arrondis 7 149 à la centaine près.",
+    format: "short",
+    expected: ["7100", "7 100"],
+    comparator: "number_equal",
+    hint: "À la centaine près, regarde le chiffre des dizaines.",
+    explanation: exp(
+      "Arrondir à la centaine près, c’est choisir la centaine la plus proche.",
+      "On regarde le chiffre des dizaines.",
+      "Dans 7 149, le chiffre des dizaines est 4. Comme 4 < 5, on garde 7 100.",
+      "L’arrondi est 7 100."
+    ),
+    tags: ["cm1", "nombres_entiers", "arrondi", "centaine", "short"],
+  },
+
+  // ============================================================
+  // TOP-UP — ENTIER_MULTIPLE
+  // ============================================================
+
+  {
+    kind: "fixed",
+    id: "cm1_entier_multiple_qcm_009",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "nombre_entier",
+    microId: "entier_multiple",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Quel nombre est un multiple de 7 ?",
+    format: "qcm",
+    choices: ["56", "58", "60", "51"],
+    expected: ["56"],
+    comparator: "mcq_exact",
+    hint: "Un multiple de 7 est dans la table de 7.",
+    explanation: exp(
+      "Un multiple d’un nombre est un résultat de sa table de multiplication.",
+      "On cherche un nombre de la table de 7.",
+      "7 × 8 = 56.",
+      "Donc 56 est un multiple de 7."
+    ),
+    tags: ["cm1", "nombres_entiers", "multiples", "qcm"],
+  },
+
+  {
+    kind: "fixed",
+    id: "cm1_entier_multiple_qcm_010",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "nombre_entier",
+    microId: "entier_multiple",
+    difficulty: 2,
+    theme: "neutral",
+    text: "48 est-il un multiple de 6 ?",
+    format: "qcm",
+    choices: ["Oui", "Non"],
+    expected: ["Oui"],
+    comparator: "mcq_exact",
+    hint: "Cherche si 48 apparaît dans la table de 6.",
+    explanation: exp(
+      "Un nombre est un multiple de 6 s’il peut s’écrire 6 × un entier.",
+      "On utilise la table de 6.",
+      "6 × 8 = 48.",
+      "Oui, 48 est un multiple de 6."
+    ),
+    tags: ["cm1", "nombres_entiers", "multiples", "table", "qcm"],
+  },
+
+  // ============================================================
+  // TOP-UP — ENTIER_DEFI
+  // ============================================================
+
+  {
+    kind: "fixed",
+    id: "cm1_entier_defi_qcm_010",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "nombre_entier",
+    microId: "entier_defi",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Je suis un nombre entier. Je suis supérieur à 6 000, inférieur à 6 100, et multiple de 10. Quel nombre peut être la réponse ?",
+    format: "qcm",
+    choices: ["6 050", "5 990", "6 105", "6 055"],
+    expected: ["6 050"],
+    comparator: "mcq_exact",
+    hint: "Vérifie les trois conditions une par une.",
+    explanation: exp(
+      "Un défi sur les nombres entiers demande de vérifier plusieurs informations.",
+      "On teste l’intervalle puis le multiple de 10.",
+      "6 050 est bien entre 6 000 et 6 100, et il se termine par 0.",
+      "La réponse possible est 6 050."
+    ),
+    tags: ["cm1", "nombres_entiers", "defi", "comparaison", "multiple", "qcm"],
+  },
 ];

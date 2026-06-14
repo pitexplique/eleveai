@@ -1924,4 +1924,182 @@ export const perimetresBank: TutorBankItemV4[] = [
       };
     },
   },
+
+  // ============================================================
+  // TOP-UP — PERIMETRE_COMPRENDRE
+  // ============================================================
+
+  {
+    kind: "fixed",
+    id: "cm1_perimetre_comprendre_fixed_002_addition_cotes",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "perimetre",
+    microId: "perimetre_comprendre",
+    difficulty: 1,
+    theme: "neutral",
+    text: "Pour calculer le périmètre d’une figure, on additionne...",
+    format: "qcm",
+    choices: [
+      "les longueurs de tous les côtés",
+      "seulement deux côtés",
+      "la longueur et la largeur multipliées",
+      "le nombre de sommets",
+    ],
+    expected: ["les longueurs de tous les côtés"],
+    comparator: "mcq_exact",
+    hint: "Le périmètre fait le tour complet de la figure.",
+    explanation: exp(
+      "Le périmètre est la longueur du contour d’une figure.",
+      "On fait le tour de la figure en additionnant chaque côté.",
+      "On additionne donc toutes les longueurs des côtés.",
+      "Pour le périmètre, on additionne les longueurs de tous les côtés."
+    ),
+    tags: ["cm1", "perimetre", "comprendre", "qcm"],
+  },
+
+  {
+    kind: "fixed",
+    id: "cm1_perimetre_comprendre_fixed_003_unite",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "perimetre",
+    microId: "perimetre_comprendre",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Dans quelle unité exprime-t-on un périmètre ?",
+    format: "qcm",
+    choices: [
+      "en centimètres (cm)",
+      "en centimètres carrés (cm²)",
+      "en kilogrammes (kg)",
+      "en litres (L)",
+    ],
+    expected: ["en centimètres (cm)"],
+    comparator: "mcq_exact",
+    hint: "Un périmètre est une longueur.",
+    explanation: exp(
+      "Le périmètre est une longueur : celle du contour.",
+      "On choisit une unité de longueur.",
+      "Le cm² mesure une aire, le kg une masse et le litre une contenance.",
+      "Un périmètre s’exprime en unités de longueur, comme le centimètre."
+    ),
+    tags: ["cm1", "perimetre", "comprendre", "unite", "qcm"],
+  },
+
+  {
+    kind: "fixed",
+    id: "cm1_perimetre_comprendre_fixed_004_cloture",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "perimetre",
+    microId: "perimetre_comprendre",
+    difficulty: 2,
+    theme: "neutral",
+    text: "On veut poser une clôture tout autour d’un jardin. Quelle grandeur faut-il calculer ?",
+    format: "qcm",
+    choices: ["le périmètre du jardin", "l’aire du jardin", "la masse du jardin", "le volume du jardin"],
+    expected: ["le périmètre du jardin"],
+    comparator: "mcq_exact",
+    hint: "La clôture fait le tour du jardin.",
+    explanation: exp(
+      "Le périmètre est la longueur du contour d’une figure.",
+      "On regarde ce que mesure la clôture : le tour du jardin.",
+      "La clôture suit tout le contour du jardin.",
+      "Il faut donc calculer le périmètre du jardin."
+    ),
+    tags: ["cm1", "perimetre", "comprendre", "cloture", "qcm"],
+  },
+
+  // ============================================================
+  // TOP-UP — PERIMETRE_TRIANGLE
+  // ============================================================
+
+  {
+    kind: "fixed",
+    id: "cm1_perimetre_triangle_fixed_002_quelconque",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "perimetre",
+    microId: "perimetre_triangle",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Un triangle a des côtés de 7 cm, 8 cm et 10 cm. Quel est son périmètre ?",
+    format: "short",
+    expected: ["25", "25 cm", "25cm"],
+    comparator: "number_equal",
+    hint: "Additionne les trois côtés.",
+    explanation:
+      "Le périmètre d’un triangle est la longueur de son contour. " +
+      "On additionne les trois côtés. " +
+      "7 + 8 + 10 = 25. Le périmètre est donc 25 cm.",
+    tags: ["cm1", "perimetre", "triangle", "short"],
+  },
+
+  {
+    kind: "fixed",
+    id: "cm1_perimetre_triangle_fixed_003_equilateral",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "perimetre",
+    microId: "perimetre_triangle",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Un triangle équilatéral a ses trois côtés égaux à 6 cm. Quel est son périmètre ?",
+    format: "short",
+    expected: ["18", "18 cm", "18cm"],
+    comparator: "number_equal",
+    hint: "Les trois côtés sont égaux : tu peux additionner ou multiplier par 3.",
+    explanation:
+      "Un triangle équilatéral a ses trois côtés de même longueur. " +
+      "On additionne les trois côtés, ou on multiplie un côté par 3. " +
+      "6 + 6 + 6 = 18, ou 3 × 6 = 18. Le périmètre est donc 18 cm.",
+    tags: ["cm1", "perimetre", "triangle", "equilateral", "short"],
+  },
+
+  // ============================================================
+  // TOP-UP — PERIMETRE_POLYGONE
+  // ============================================================
+
+  {
+    kind: "fixed",
+    id: "cm1_perimetre_polygone_fixed_002_pentagone_regulier",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "perimetre",
+    microId: "perimetre_polygone",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Un pentagone régulier a 5 côtés de 4 cm chacun. Quel est son périmètre ?",
+    format: "short",
+    expected: ["20", "20 cm", "20cm"],
+    comparator: "number_equal",
+    hint: "Un pentagone a 5 côtés. Multiplie 5 par 4.",
+    explanation:
+      "Le périmètre d’un polygone est la longueur de son contour. " +
+      "Un pentagone régulier a 5 côtés égaux, donc on multiplie un côté par 5. " +
+      "5 × 4 = 20. Le périmètre est donc 20 cm.",
+    tags: ["cm1", "perimetre", "polygone", "regulier", "short"],
+  },
+
+  {
+    kind: "fixed",
+    id: "cm1_perimetre_polygone_fixed_003_cotes_donnes",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "perimetre",
+    microId: "perimetre_polygone",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Un polygone a des côtés de 3 cm, 4 cm, 5 cm et 6 cm. Quel est son périmètre ?",
+    format: "short",
+    expected: ["18", "18 cm", "18cm"],
+    comparator: "number_equal",
+    hint: "Additionne toutes les longueurs des côtés.",
+    explanation:
+      "Le périmètre est la longueur du contour. " +
+      "On additionne tous les côtés. " +
+      "3 + 4 + 5 + 6 = 18. Le périmètre est donc 18 cm.",
+    tags: ["cm1", "perimetre", "polygone", "short"],
+  },
 ];

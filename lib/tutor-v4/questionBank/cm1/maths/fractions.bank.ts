@@ -3284,4 +3284,264 @@ export const fractionsBank: TutorBankItemV4[] = [
       };
     },
   },
+
+  // ============================================================
+  // TOP-UP — FRACTION_LIRE
+  // ============================================================
+
+  {
+    kind: "fixed",
+    id: "cm1_fraction_lire_qcm_005",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "fraction",
+    microId: "fraction_lire",
+    difficulty: 1,
+    theme: "neutral",
+    text: "Comment lit-on la fraction 2/5 ?",
+    format: "qcm",
+    choices: ["deux cinquièmes", "cinq deuxièmes", "deux et cinq", "deux tiers"],
+    expected: ["deux cinquièmes"],
+    comparator: "mcq_exact",
+    hint: "Le nombre du bas donne le nom des parts.",
+    explanation: exp(
+      "Une fraction s’écrit avec un numérateur en haut et un dénominateur en bas.",
+      "On lit d’abord le numérateur, puis le nom donné par le dénominateur.",
+      "Dans 2/5, 2 est le numérateur et 5 indique des cinquièmes.",
+      "La fraction 2/5 se lit deux cinquièmes."
+    ),
+    canvas: fractionCanvas({ numerator: 2, denominator: 5, model: "bar", showFraction: false }),
+    tags: ["cm1", "fraction", "lire", "qcm", "canvas"],
+  },
+
+  {
+    kind: "fixed",
+    id: "cm1_fraction_lire_qcm_006_demi",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "fraction",
+    microId: "fraction_lire",
+    difficulty: 1,
+    theme: "neutral",
+    text: "Comment lit-on la fraction 1/2 ?",
+    format: "qcm",
+    choices: ["un demi", "deux unièmes", "un deux", "deux demis"],
+    expected: ["un demi"],
+    comparator: "mcq_exact",
+    hint: "C’est la moitié de quelque chose.",
+    explanation: exp(
+      "Certaines fractions ont un nom particulier.",
+      "On lit le numérateur, puis le nom donné par le dénominateur.",
+      "1/2 correspond à la moitié.",
+      "La fraction 1/2 se lit un demi."
+    ),
+    canvas: fractionCanvas({ numerator: 1, denominator: 2, model: "bar", showFraction: false }),
+    tags: ["cm1", "fraction", "lire", "qcm", "canvas"],
+  },
+
+  {
+    kind: "fixed",
+    id: "cm1_fraction_lire_short_007_denominateur",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "fraction",
+    microId: "fraction_lire",
+    difficulty: 1,
+    theme: "neutral",
+    text: "Dans la fraction 3/4, quel est le dénominateur ?",
+    format: "short",
+    expected: ["4"],
+    comparator: "number_equal",
+    hint: "Le dénominateur est le nombre du bas.",
+    explanation: exp(
+      "Dans une fraction, le dénominateur est le nombre écrit en bas.",
+      "On repère le nombre sous la barre de fraction.",
+      "Dans 3/4, le nombre du bas est 4.",
+      "Le dénominateur est 4."
+    ),
+    tags: ["cm1", "fraction", "lire", "vocabulaire", "short"],
+  },
+
+  // ============================================================
+  // TOP-UP — FRACTION_REPRESENTER
+  // ============================================================
+
+  {
+    kind: "fixed",
+    id: "cm1_fraction_representer_qcm_005_barre",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "fraction",
+    microId: "fraction_representer",
+    difficulty: 1,
+    theme: "neutral",
+    text: "Quelle fraction de la barre est coloriée ?",
+    format: "qcm",
+    choices: ["2/3", "1/3", "3/2", "2/5"],
+    expected: ["2/3"],
+    comparator: "mcq_exact",
+    hint: "Compte les parts coloriées et le nombre total de parts.",
+    explanation: exp(
+      "Une fraction indique combien de parts sont prises sur le total.",
+      "On compte les parts coloriées (numérateur) et le nombre total de parts (dénominateur).",
+      "Ici, 2 parts sont coloriées sur 3.",
+      "La fraction coloriée est 2/3."
+    ),
+    canvas: fractionCanvas({ numerator: 2, denominator: 3, model: "bar", showFraction: false }),
+    tags: ["cm1", "fraction", "representer", "qcm", "canvas"],
+  },
+
+  {
+    kind: "fixed",
+    id: "cm1_fraction_representer_qcm_006_grille",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "fraction",
+    microId: "fraction_representer",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Quelle fraction de la grille est coloriée ?",
+    format: "qcm",
+    choices: ["3/10", "3/7", "7/10", "1/3"],
+    expected: ["3/10"],
+    comparator: "mcq_exact",
+    hint: "Compte les cases coloriées et le nombre total de cases.",
+    explanation: exp(
+      "Une fraction indique le nombre de parts prises sur le total.",
+      "On compte les cases coloriées et le nombre total de cases.",
+      "Ici, 3 cases sont coloriées sur 10.",
+      "La fraction coloriée est 3/10."
+    ),
+    canvas: fractionGridCanvas({ rows: 2, cols: 5, shaded: 3 }),
+    tags: ["cm1", "fraction", "representer", "grille", "qcm", "canvas"],
+  },
+
+  {
+    kind: "fixed",
+    id: "cm1_fraction_representer_qcm_007_parts_egales",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "fraction",
+    microId: "fraction_representer",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Pour représenter correctement une fraction, les parts doivent être...",
+    format: "qcm",
+    choices: ["toutes égales", "de tailles différentes", "toujours au nombre de 2", "toujours rondes"],
+    expected: ["toutes égales"],
+    comparator: "mcq_exact",
+    hint: "On partage l’unité en parts identiques.",
+    explanation: exp(
+      "Une fraction partage l’unité en parts identiques.",
+      "On vérifie que toutes les parts ont la même taille.",
+      "Si les parts ne sont pas égales, la fraction n’a pas de sens.",
+      "Les parts doivent toutes être égales."
+    ),
+    tags: ["cm1", "fraction", "representer", "parts_egales", "qcm"],
+  },
+
+  // ============================================================
+  // TOP-UP — FRACTION_UNITE
+  // ============================================================
+
+  {
+    kind: "fixed",
+    id: "cm1_fraction_unite_qcm_006_egal_1",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "fraction",
+    microId: "fraction_unite",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Quelle fraction est égale à 1 (une unité entière) ?",
+    format: "qcm",
+    choices: ["5/5", "3/4", "2/5", "6/8"],
+    expected: ["5/5"],
+    comparator: "mcq_exact",
+    hint: "Une fraction vaut 1 quand le numérateur est égal au dénominateur.",
+    explanation: exp(
+      "Une fraction est égale à 1 quand toutes les parts sont prises.",
+      "On vérifie si le numérateur est égal au dénominateur.",
+      "Dans 5/5, le numérateur 5 est égal au dénominateur 5.",
+      "La fraction égale à 1 est 5/5."
+    ),
+    canvas: fractionCanvas({ numerator: 5, denominator: 5, model: "bar", showFraction: false }),
+    tags: ["cm1", "fraction", "unite", "egal_1", "qcm", "canvas"],
+  },
+
+  {
+    kind: "fixed",
+    id: "cm1_fraction_unite_qcm_007_oui_non",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "fraction",
+    microId: "fraction_unite",
+    difficulty: 2,
+    theme: "neutral",
+    text: "La fraction 6/6 est-elle égale à une unité entière ?",
+    format: "qcm",
+    choices: ["oui", "non"],
+    expected: ["oui"],
+    comparator: "mcq_exact",
+    hint: "Compare le numérateur et le dénominateur.",
+    explanation: exp(
+      "Une fraction vaut une unité entière quand le numérateur est égal au dénominateur.",
+      "On compare les deux nombres de la fraction.",
+      "Dans 6/6, le numérateur 6 est égal au dénominateur 6.",
+      "Oui, 6/6 est égal à une unité entière."
+    ),
+    tags: ["cm1", "fraction", "unite", "oui_non", "qcm"],
+  },
+
+  // ============================================================
+  // TOP-UP — FRACTION_SUPERIEURE_1
+  // ============================================================
+
+  {
+    kind: "fixed",
+    id: "cm1_fraction_superieure_1_qcm_006",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "fraction",
+    microId: "fraction_superieure_1",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Quelle fraction est supérieure à 1 ?",
+    format: "qcm",
+    choices: ["7/4", "3/4", "2/5", "1/2"],
+    expected: ["7/4"],
+    comparator: "mcq_exact",
+    hint: "Une fraction est supérieure à 1 quand le numérateur est plus grand que le dénominateur.",
+    explanation: exp(
+      "Une fraction est supérieure à 1 quand le numérateur dépasse le dénominateur.",
+      "On compare le numérateur et le dénominateur de chaque fraction.",
+      "Dans 7/4, 7 est plus grand que 4.",
+      "La fraction supérieure à 1 est 7/4."
+    ),
+    tags: ["cm1", "fraction", "superieure_1", "qcm"],
+  },
+
+  {
+    kind: "fixed",
+    id: "cm1_fraction_superieure_1_qcm_007_oui_non",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "fraction",
+    microId: "fraction_superieure_1",
+    difficulty: 2,
+    theme: "neutral",
+    text: "La fraction 5/3 est-elle supérieure à 1 ?",
+    format: "qcm",
+    choices: ["oui", "non"],
+    expected: ["oui"],
+    comparator: "mcq_exact",
+    hint: "Compare le numérateur et le dénominateur.",
+    explanation: exp(
+      "Une fraction est supérieure à 1 quand le numérateur est plus grand que le dénominateur.",
+      "On compare les deux nombres de la fraction.",
+      "Dans 5/3, le numérateur 5 est plus grand que le dénominateur 3.",
+      "Oui, 5/3 est supérieure à 1."
+    ),
+    tags: ["cm1", "fraction", "superieure_1", "oui_non", "qcm"],
+  },
 ];

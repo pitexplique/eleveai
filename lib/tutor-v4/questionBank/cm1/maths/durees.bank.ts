@@ -1823,4 +1823,263 @@ export const dureesBank: TutorBankItemV4[] = [
       };
     },
   },
+
+  // ============================================================
+  // TOP-UP — DUREE_LIRE
+  // ============================================================
+
+  {
+    kind: "fixed",
+    id: "cm1_duree_lire_fixed_003_heure_pleine",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "duree",
+    microId: "duree_lire",
+    difficulty: 1,
+    theme: "neutral",
+    text: "Quelle heure indique l’horloge ?",
+    format: "qcm",
+    choices: ["7 h 00", "7 h 30", "8 h 00", "6 h 00"],
+    expected: ["7 h 00"],
+    comparator: "mcq_exact",
+    hint: "La grande aiguille est sur le 12 : il est pile une heure.",
+    explanation: exp(
+      "Lire l’heure, c’est observer les deux aiguilles.",
+      "La petite aiguille indique l’heure, la grande indique les minutes.",
+      "La grande aiguille est sur 12, donc 00 minute. La petite aiguille indique 7.",
+      "L’horloge indique 7 h 00."
+    ),
+    tags: ["cm1", "duree", "lire", "horloge", "heure_pleine", "qcm", "canvas"],
+    canvas: dureeCanvas({
+      variant: "horloge",
+      title: "Quelle heure ?",
+      time: { hour: 7, minute: 0, label: "Heure pleine" },
+      colors: watchColors(0),
+    }),
+  },
+
+  {
+    kind: "fixed",
+    id: "cm1_duree_lire_fixed_004_quart",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "duree",
+    microId: "duree_lire",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Quelle heure indique l’horloge ?",
+    format: "qcm",
+    choices: ["9 h 15", "9 h 45", "9 h 00", "3 h 45"],
+    expected: ["9 h 15"],
+    comparator: "mcq_exact",
+    hint: "La grande aiguille sur le 3 indique 15 minutes.",
+    explanation: exp(
+      "Un quart d’heure correspond à 15 minutes.",
+      "On lit d’abord les minutes avec la grande aiguille.",
+      "La grande aiguille est sur le 3, donc 15 minutes. La petite aiguille est juste après 9.",
+      "L’horloge indique 9 h 15."
+    ),
+    tags: ["cm1", "duree", "lire", "quart", "qcm", "canvas"],
+    canvas: dureeCanvas({
+      variant: "horloge",
+      title: "Le quart d’heure",
+      time: { hour: 9, minute: 15, label: "Quart" },
+      colors: watchColors(2),
+    }),
+  },
+
+  {
+    kind: "fixed",
+    id: "cm1_duree_lire_fixed_005_digital",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "duree",
+    microId: "duree_lire",
+    difficulty: 1,
+    theme: "neutral",
+    text: "L’affichage indique 06:45. Comment écrit-on cette heure ?",
+    format: "qcm",
+    choices: ["6 h 45", "45 h 06", "6 h 30", "7 h 45"],
+    expected: ["6 h 45"],
+    comparator: "mcq_exact",
+    hint: "Le nombre avant les deux points donne les heures, celui après donne les minutes.",
+    explanation: exp(
+      "Une heure peut s’écrire avec deux points, comme sur un réveil.",
+      "Le nombre avant les deux points donne les heures, celui après donne les minutes.",
+      "06:45 donne 6 heures et 45 minutes.",
+      "On écrit 6 h 45."
+    ),
+    tags: ["cm1", "duree", "lire", "digital", "qcm", "canvas"],
+    canvas: dureeCanvas({
+      variant: "digital",
+      title: "Affichage numérique",
+      digital: { text: "06:45", label: "Lis l’heure" },
+      colors: watchColors(1),
+    }),
+  },
+
+  // ============================================================
+  // TOP-UP — DUREE_CONVERTIR
+  // ============================================================
+
+  {
+    kind: "fixed",
+    id: "cm1_duree_convertir_fixed_003_minute_secondes",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "duree",
+    microId: "duree_convertir",
+    difficulty: 1,
+    theme: "neutral",
+    text: "Combien y a-t-il de secondes dans 1 minute ?",
+    format: "qcm",
+    choices: ["60", "100", "30", "24"],
+    expected: ["60"],
+    comparator: "mcq_exact",
+    hint: "Une minute contient 60 secondes.",
+    explanation:
+      "Une minute contient 60 secondes. C’est une règle importante pour travailler sur les durées.",
+    tags: ["cm1", "duree", "convertir", "minute_seconde", "qcm"],
+  },
+
+  // ============================================================
+  // TOP-UP — DUREE_CALCULER
+  // ============================================================
+
+  {
+    kind: "fixed",
+    id: "cm1_duree_calculer_fixed_003_ecart_45min",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "duree",
+    microId: "duree_calculer",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Une activité commence à 14 h 00 et finit à 14 h 45. Quelle est sa durée en minutes ?",
+    format: "short",
+    expected: ["45"],
+    comparator: "number_equal",
+    hint: "Les deux horaires sont dans la même heure.",
+    explanation:
+      "Les deux horaires sont dans la même heure. On calcule l’écart entre les minutes : 45 - 0 = 45. La durée est 45 minutes.",
+    tags: ["cm1", "duree", "calculer", "ecart", "canvas"],
+    canvas: dureeCanvas({
+      variant: "double_horloge",
+      title: "Début et fin",
+      start: { hour: 14, minute: 0, label: "Début" },
+      end: { hour: 14, minute: 45, label: "Fin" },
+      colors: watchColors(2),
+    }),
+  },
+
+  {
+    kind: "fixed",
+    id: "cm1_duree_calculer_fixed_004_ajouter_20min",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "duree",
+    microId: "duree_calculer",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Une séance commence à 9 h 30 et dure 20 minutes. À quelle heure se termine-t-elle ?",
+    format: "qcm",
+    choices: ["9 h 50", "9 h 40", "10 h 30", "9 h 20"],
+    expected: ["9 h 50"],
+    comparator: "mcq_exact",
+    hint: "Ajoute 20 minutes à 9 h 30.",
+    explanation:
+      "On ajoute la durée à l’heure de départ. 9 h 30 + 20 min = 9 h 50. La séance se termine à 9 h 50.",
+    tags: ["cm1", "duree", "calculer", "heure_fin", "qcm", "canvas"],
+    canvas: dureeCanvas({
+      variant: "frise",
+      title: "On ajoute 20 minutes",
+      frise: {
+        startLabel: "9 h 30",
+        endLabel: "9 h 50",
+        steps: [{ label: "+ 20 min", minutes: 20, color: "#22c55e" }],
+      },
+      colors: watchColors(1),
+    }),
+  },
+
+  // ============================================================
+  // TOP-UP — DUREE_PROBLEME
+  // ============================================================
+
+  {
+    kind: "fixed",
+    id: "cm1_duree_probleme_fixed_003_recreation",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "duree",
+    microId: "duree_probleme",
+    difficulty: 2,
+    theme: "neutral",
+    text: "La récréation commence à 10 h 15 et dure 15 minutes. À quelle heure se termine-t-elle ?",
+    format: "qcm",
+    choices: ["10 h 30", "10 h 15", "10 h 45", "11 h 15"],
+    expected: ["10 h 30"],
+    comparator: "mcq_exact",
+    hint: "Ajoute 15 minutes à 10 h 15.",
+    explanation:
+      "On cherche une heure de fin. On ajoute la durée à l’heure de départ. " +
+      "10 h 15 + 15 min = 10 h 30. La récréation se termine à 10 h 30.",
+    tags: ["cm1", "duree", "probleme", "ecole", "heure_fin", "qcm", "canvas"],
+    canvas: dureeCanvas({
+      variant: "frise",
+      title: "Récréation",
+      frise: {
+        startLabel: "10 h 15",
+        endLabel: "10 h 30",
+        steps: [{ label: "+ 15 min", minutes: 15, color: "#22c55e" }],
+      },
+      colors: watchColors(2),
+    }),
+  },
+
+  // ============================================================
+  // TOP-UP — DUREE_DEFI
+  // ============================================================
+
+  {
+    kind: "fixed",
+    id: "cm1_duree_defi_fixed_003_comparer_2h_100min",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "duree",
+    microId: "duree_defi",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Quelle durée est la plus longue : 2 h ou 100 min ?",
+    format: "qcm",
+    choices: ["2 h", "100 min", "elles sont égales"],
+    expected: ["2 h"],
+    comparator: "mcq_exact",
+    hint: "Convertis 2 h en minutes.",
+    explanation:
+      "Pour comparer deux durées, on les écrit dans la même unité. " +
+      "2 h = 2 × 60 = 120 minutes. On compare 120 min et 100 min. " +
+      "2 h est plus long que 100 min.",
+    tags: ["cm1", "duree", "defi", "comparer", "conversion", "qcm"],
+  },
+
+  {
+    kind: "fixed",
+    id: "cm1_duree_defi_fixed_004_1h30_minutes",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "duree",
+    microId: "duree_defi",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Combien de minutes y a-t-il dans 1 h 30 ?",
+    format: "short",
+    expected: ["90"],
+    comparator: "number_equal",
+    hint: "1 heure = 60 minutes, puis ajoute 30.",
+    explanation:
+      "On convertit l’heure en minutes, puis on ajoute les minutes restantes. " +
+      "1 h = 60 min, et 60 + 30 = 90. Donc 1 h 30 = 90 minutes.",
+    tags: ["cm1", "duree", "defi", "conversion"],
+  },
 ];
