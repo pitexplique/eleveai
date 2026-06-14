@@ -631,6 +631,27 @@ useEffect(() => {
     return () => window.clearTimeout(timeout);
   }, [successBanner.open]);
 
+  // L'« affichage classe » est une préférence du prof : on la garde d'une
+  // notion à l'autre (et après rechargement) pour ne pas la réactiver sans
+  // cesse en classe. Lecture après montage pour éviter un écart d'hydratation.
+  useEffect(() => {
+    try {
+      if (localStorage.getItem("tutorv4-class-board") === "1") {
+        setClassBoard(true);
+      }
+    } catch {
+      /* localStorage indisponible : on reste sur l'affichage normal. */
+    }
+  }, []);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem("tutorv4-class-board", classBoard ? "1" : "0");
+    } catch {
+      /* ignore */
+    }
+  }, [classBoard]);
+
   const bonnesReponses = sessionResults.filter(Boolean).length;
   const nbTentatives = sessionResults.length;
 
