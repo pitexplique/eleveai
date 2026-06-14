@@ -15,8 +15,8 @@ export const calculsTemplates3e: CalculRapideItem[] = [
     media: { text: "{{a}}^{{n}} = ?" },
     template: "{{a}}^{{n}} = ?",
     variables: {
-      a: [2, 3, 4, 5],
-      n: [2, 3, 4],
+      a: [3, 4, 5, 6],
+      n: [3, 4, 5],
     },
     answerRule: "Math.pow(a, n)",
     hint: "Une puissance est une multiplication répétée.",
@@ -36,7 +36,7 @@ export const calculsTemplates3e: CalculRapideItem[] = [
     media: { text: "10^{{n}} = ?" },
     template: "10^{{n}} = ?",
     variables: {
-      n: [2, 3, 4, 5, 6],
+      n: [3, 4, 5, 6, 7],
     },
     answerRule: "Math.pow(10, n)",
     hint: "10^n s’écrit avec n zéros après le 1.",
@@ -56,7 +56,7 @@ export const calculsTemplates3e: CalculRapideItem[] = [
     media: { text: "{{n}}² = ?" },
     template: "{{n}}² = ?",
     variables: {
-      n: [6, 7, 8, 9, 10, 11, 12],
+      n: [8, 9, 10, 11, 12, 13, 14],
     },
     answerRule: "n * n",
     hint: "Le carré d’un nombre, c’est ce nombre multiplié par lui-même.",
@@ -76,7 +76,7 @@ export const calculsTemplates3e: CalculRapideItem[] = [
     media: { text: "{{n}}³ = ?" },
     template: "{{n}}³ = ?",
     variables: {
-      n: [2, 3, 4, 5],
+      n: [3, 4, 5, 6],
     },
     answerRule: "n * n * n",
     hint: "Le cube d’un nombre, c’est ce nombre multiplié trois fois.",
@@ -96,8 +96,8 @@ export const calculsTemplates3e: CalculRapideItem[] = [
     media: { text: "{{a}} × 10^{{n}} = ?" },
     template: "{{a}} × 10^{{n}} = ?",
     variables: {
-      a: [2, 3, 4, 5, 7],
-      n: [2, 3, 4, 5],
+      a: [4, 5, 6, 7, 9],
+      n: [3, 4, 5, 6],
     },
     answerRule: "a * Math.pow(10, n)",
     hint: "Multiplie le nombre par la puissance de 10.",
@@ -117,7 +117,7 @@ export const calculsTemplates3e: CalculRapideItem[] = [
     media: { text: "√{{n}} = ?" },
     template: "√{{n}} = ?",
     variables: {
-      n: [4, 9, 16, 25, 36, 49, 64, 81, 100, 121, 144],
+      n: [9, 16, 25, 36, 49, 64, 81, 100, 121, 144, 169],
     },
     answerRule: "Math.sqrt(n)",
     hint: "Cherche le nombre positif dont le carré vaut ce nombre.",
@@ -137,8 +137,8 @@ export const calculsTemplates3e: CalculRapideItem[] = [
     media: { text: "10^{{a}} × 10^{{b}} = 10^?" },
     template: "10^{{a}} × 10^{{b}} = 10^?",
     variables: {
-      a: [1, 2, 3, 4],
-      b: [1, 2, 3, 4],
+      a: [2, 3, 4, 5],
+      b: [2, 3, 4, 5],
     },
     answerRule: "a + b",
     hint: "On additionne les exposants.",
@@ -161,8 +161,8 @@ export const calculsTemplates3e: CalculRapideItem[] = [
     media: { text: "{{a}}x = {{p}}. x = ?" },
     template: "{{a}}x = {{p}}. x = ?",
     variables: {
-      a: [2, 3, 6],
-      p: [12, 18, 24, 30],
+      a: [4, 5, 8],
+      p: [18, 24, 30, 36],
     },
     answerRule: "p / a",
     hint: "Divise par le nombre devant x.",
@@ -182,9 +182,9 @@ export const calculsTemplates3e: CalculRapideItem[] = [
     media: { text: "f(x) = {{a}}x + {{b}}. Que vaut f({{x}}) ?" },
     template: "f(x) = {{a}}x + {{b}}. Que vaut f({{x}}) ?",
     variables: {
-      a: [2, 3, 4, 5],
-      b: [-5, -2, 1, 3],
-      x: [2, 3, 4, 5],
+      a: [3, 4, 5, 6],
+      b: [-6, -3, 2, 4],
+      x: [3, 4, 5, 6],
     },
     answerRule: "a * x + b",
     hint: "Remplace x par la valeur donnee.",

@@ -18,7 +18,7 @@ export const problemesTemplates3e: CalculRapideItem[] = [
     template:
       "Une quantité double {{n}} fois. Par quel nombre est-elle multipliée ?",
     variables: {
-      n: [2, 3, 4, 5, 6],
+      n: [3, 4, 5, 6, 7],
     },
     answerRule: "Math.pow(2, n)",
     hint: "Doubler n fois revient à calculer 2^n.",
@@ -41,8 +41,8 @@ export const problemesTemplates3e: CalculRapideItem[] = [
     template:
       "Une distance vaut {{a}} × 10^{{n}} m. Écris cette distance en mètres.",
     variables: {
-      a: [2, 3, 4, 5, 7, 9],
-      n: [2, 3, 4, 5, 6],
+      a: [4, 5, 6, 7, 9, 11],
+      n: [3, 4, 5, 6, 7],
     },
     answerRule: "a * Math.pow(10, n)",
     hint: "Multiplie par la puissance de 10.",
@@ -65,7 +65,7 @@ export const problemesTemplates3e: CalculRapideItem[] = [
     template:
       "L’aire d’un carré est {{n}} cm². Quelle est la longueur de son côté ?",
     variables: {
-      n: [4, 9, 16, 25, 36, 49, 64, 81, 100, 121, 144],
+      n: [9, 16, 25, 36, 49, 64, 81, 100, 121, 144, 169],
     },
     answerRule: "Math.sqrt(n)",
     hint: "Le côté est la racine carrée de l’aire.",
@@ -88,7 +88,7 @@ export const problemesTemplates3e: CalculRapideItem[] = [
     template:
       "Dans un triangle rectangle, on obtient c² = {{n}}. Quelle est la longueur c ?",
     variables: {
-      n: [25, 36, 49, 64, 81, 100, 121, 144, 169],
+      n: [36, 49, 64, 81, 100, 121, 144, 169, 196],
     },
     answerRule: "Math.sqrt(n)",
     hint: "Cherche la racine carrée de ce nombre.",
@@ -114,9 +114,9 @@ export const problemesTemplates3e: CalculRapideItem[] = [
     template:
       "Un abonnement coute {{f}} euros puis {{p}} euros par entree. Quel prix pour {{n}} entrees ?",
     variables: {
-      f: [3, 5, 8, 10],
-      p: [2, 3, 4, 5],
-      n: [4, 5, 6, 8],
+      f: [5, 7, 10, 12],
+      p: [3, 4, 5, 6],
+      n: [6, 7, 8, 10],
     },
     answerRule: "f + p * n",
     hint: "Calcule la partie fixe puis ajoute le prix des entrees.",
@@ -138,9 +138,9 @@ export const problemesTemplates3e: CalculRapideItem[] = [
     template:
       "Un forfait coute {{f}} euros puis {{p}} euros par mois. Quel prix pour {{n}} mois ?",
     variables: {
-      f: [5, 10, 15],
-      p: [8, 12, 20],
-      n: [2, 3, 6],
+      f: [11, 16, 21],
+      p: [14, 18, 26],
+      n: [4, 5, 8],
     },
     answerRule: "f + p * n",
     hint: "Prix = partie fixe + prix mensuel x nombre de mois.",
@@ -162,9 +162,9 @@ export const problemesTemplates3e: CalculRapideItem[] = [
     template:
       "{{a}} articles identiques et {{b}} euros de frais coutent {{t}} euros. Prix d'un article ?",
     variables: {
-      a: [2, 3, 4],
-      b: [5, 8, 10],
-      t: [25, 38, 50],
+      a: [3, 4, 5],
+      b: [7, 10, 12],
+      t: [31, 44, 56],
     },
     answerRule: "(t - b) / a",
     hint: "Enleve les frais, puis divise par le nombre d'articles.",
@@ -186,7 +186,7 @@ export const problemesTemplates3e: CalculRapideItem[] = [
     template:
       "Une information est partagee a 3 personnes, puis chacune a 3 personnes, pendant {{n}} tours. Combien de personnes au dernier tour ?",
     variables: {
-      n: [2, 3, 4, 5],
+      n: [3, 4, 5, 6],
     },
     answerRule: "Math.pow(3, n)",
     hint: "C'est une puissance de 3.",

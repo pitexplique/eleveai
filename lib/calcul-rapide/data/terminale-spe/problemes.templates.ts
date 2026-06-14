@@ -18,8 +18,8 @@ export const problemesTemplatesTerminaleSpe: CalculRapideItem[] = [
     template:
       "On sait que f'({{a}}) = {{m}}. Quel est le coefficient directeur de la tangente au point d’abscisse {{a}} ?",
     variables: {
-      a: [0, 1, 2, 3, 4],
-      m: [-3, -2, -1, 1, 2, 3, 4, 5],
+      a: [1, 2, 3, 4, 5],
+      m: [-4, -3, -2, 2, 3, 4, 5, 6],
     },
     answerRule: "m",
     hint: "Le coefficient directeur de la tangente en x=a est f'(a).",
@@ -43,8 +43,8 @@ export const problemesTemplatesTerminaleSpe: CalculRapideItem[] = [
     template:
       "Une quantité vaut {{u0}} au départ et double {{n}} fois. Quelle est sa valeur finale ?",
     variables: {
-      u0: [10, 20, 50, 100, 200],
-      n: [2, 3, 4, 5],
+      u0: [35, 45, 75, 125, 225],
+      n: [3, 4, 5, 6],
     },
     answerRule: "u0 * Math.pow(2, n)",
     hint: "Doubler n fois revient à multiplier par 2^n.",
@@ -67,7 +67,7 @@ export const problemesTemplatesTerminaleSpe: CalculRapideItem[] = [
     template:
       "Dans un calcul de bac, on obtient ln(e^{{a}}). Quelle est la valeur simplifiée ?",
     variables: {
-      a: [2, 3, 4, 5, 6, 7, 8],
+      a: [4, 5, 6, 7, 8, 9, 10],
     },
     answerRule: "a",
     hint: "ln(e^a)=a.",
@@ -90,8 +90,8 @@ export const problemesTemplatesTerminaleSpe: CalculRapideItem[] = [
     template:
       "On répète {{n}} expériences avec une probabilité de succès {{p}}. Quelle est l’espérance du nombre de succès ?",
     variables: {
-      n: [10, 20, 30, 40, 50],
-      p: [0.1, 0.2, 0.25, 0.3, 0.5],
+      n: [16, 26, 36, 46, 56],
+      p: [0.15, 0.25, 0.3, 0.35, 0.55],
     },
     answerRule: "n * p",
     hint: "Pour une loi binomiale, E(X)=np.",
@@ -114,8 +114,8 @@ export const problemesTemplatesTerminaleSpe: CalculRapideItem[] = [
     template:
       "Sur [0 ; {{a}}], la fonction f est constante égale à {{h}}. Quelle est l’aire sous la courbe ?",
     variables: {
-      a: [2, 3, 4, 5, 6],
-      h: [1, 2, 3, 4, 5],
+      a: [4, 5, 6, 7, 8],
+      h: [2, 3, 4, 5, 6],
     },
     answerRule: "a * h",
     hint: "L’aire est celle d’un rectangle : base × hauteur.",
@@ -141,7 +141,7 @@ export const problemesTemplatesTerminaleSpe: CalculRapideItem[] = [
     template:
       "Une probabilite vaut {{p}}. Quelle est la probabilite contraire ?",
     variables: {
-      p: [0.12, 0.25, 0.37, 0.42, 0.68],
+      p: [0.17, 0.3, 0.42, 0.47, 0.73],
     },
     answerRule: "1 - p",
     hint: "La probabilite contraire complete jusqu'a 1.",

@@ -14,7 +14,7 @@ export const problemesTemplatesCM2: CalculRapideItem[] = [
       text: "Un cahier coûte {{prix}} euros. Combien coûtent {{qte}} cahiers ?",
     },
     template: "Un cahier coûte {{prix}} euros. Combien coûtent {{qte}} cahiers ?",
-    variables: { prix: [2, 3, 4, 5], qte: [3, 4, 5, 6] },
+    variables: { prix: [3, 4, 5, 6], qte: [5, 6, 7, 8] },
     answerRule: "prix * qte",
     hint: "Multiplie le prix par le nombre de cahiers.",
     explanationTemplate: "{{prix}} x {{qte}} = {{answer}} euros.",
@@ -34,7 +34,7 @@ export const problemesTemplatesCM2: CalculRapideItem[] = [
     },
     template:
       "On parcourt {{km}} km en 1 heure. Combien de km parcourt-on en {{h}} heures ?",
-    variables: { km: [4, 5, 6, 8], h: [2, 3, 4] },
+    variables: { km: [6, 7, 8, 10], h: [3, 4, 5] },
     answerRule: "km * h",
     hint: "C'est une situation proportionnelle.",
     explanationTemplate: "{{km}} x {{h}} = {{answer}} km.",
@@ -54,7 +54,7 @@ export const problemesTemplatesCM2: CalculRapideItem[] = [
     },
     template:
       "Un goûter coûte {{a}} euros et une boisson coûte {{b}} euros. Combien paie-t-on ?",
-    variables: { a: [1.5, 2.4, 3.25, 4.75], b: [0.5, 1.6, 2.75, 3.25] },
+    variables: { a: [1.85, 2.75, 3.6, 5.1], b: [0.85, 1.95, 3.1, 3.6] },
     answerRule: "a + b",
     hint: "Additionne les deux prix.",
     explanationTemplate: "{{a}} + {{b}} = {{answer}} euros.",

@@ -22,7 +22,7 @@ export const problemesTemplates4e: CalculRapideItem[] = [
     template:
       "Une randonnée mesure {{km}} km. Combien cela représente-t-il en mètres ?",
     variables: {
-      km: [2.8, 4.6, 6.3, 8.5, 10.4],
+      km: [7.8, 9.6, 11.3, 13.5, 15.4],
     },
     answerRule: "km * 1000",
     hint: "1 km = 1000 m.",
@@ -45,7 +45,7 @@ export const problemesTemplates4e: CalculRapideItem[] = [
     template:
       "Une bouteille contient {{L}} L. Quelle quantité cela représente-t-il en mL ?",
     variables: {
-      L: [0.5, 1.25, 1.8, 2.4, 3.75],
+      L: [0.85, 1.6, 2.15, 2.75, 4.1],
     },
     answerRule: "L * 1000",
     hint: "1 L = 1000 mL.",
@@ -68,8 +68,8 @@ export const problemesTemplates4e: CalculRapideItem[] = [
     template:
       "Une activité dure {{h}} h {{m}} min. Quelle est la durée totale en minutes ?",
     variables: {
-      h: [1, 2, 3, 5],
-      m: [5, 25, 35, 40, 50],
+      h: [2, 3, 4, 6],
+      m: [11, 31, 41, 46, 56],
     },
     answerRule: "(h * 60) + m",
     hint: "Transforme les heures en minutes puis ajoute.",
@@ -93,8 +93,8 @@ export const problemesTemplates4e: CalculRapideItem[] = [
     template:
       "Une voiture roule à {{v}} km/h pendant {{t}} h. Quelle distance parcourt-elle ?",
     variables: {
-      v: [55, 68, 75, 95, 105],
-      t: [2, 3, 4],
+      v: [67, 80, 87, 107, 117],
+      t: [3, 4, 5],
     },
     answerRule: "v * t",
     hint: "Distance = vitesse × temps.",
@@ -117,8 +117,8 @@ export const problemesTemplates4e: CalculRapideItem[] = [
     template:
       "Une terrasse mesure {{L}} m sur {{l}} m. Quelle est son aire ?",
     variables: {
-      L: [7, 9, 11, 14, 16],
-      l: [3, 4, 5],
+      L: [13, 15, 17, 20, 22],
+      l: [4, 5, 6],
     },
     answerRule: "L * l",
     hint: "Aire = longueur × largeur.",
@@ -141,9 +141,9 @@ export const problemesTemplates4e: CalculRapideItem[] = [
     template:
       "Un rectangle mesure {{a}} cm sur {{b}} cm. Un élève répond : “l’aire vaut {{r}} cm”. A-t-il raison ?",
     variables: {
-      a: [7, 8, 9, 10],
-      b: [3, 4, 5, 6],
-      r: [21, 32, 45, 60],
+      a: [9, 10, 11, 12],
+      b: [5, 6, 7, 8],
+      r: [27, 38, 51, 66],
     },
     answerRule: "'non'",
     hint: "Une aire s’exprime en cm², pas en cm.",
@@ -167,8 +167,8 @@ export const problemesTemplates4e: CalculRapideItem[] = [
     template:
       "Dans un triangle rectangle, les côtés de l’angle droit mesurent {{a}} cm et {{b}} cm. Quelle est l’hypoténuse ?",
     variables: {
-      a: [5, 9, 16],
-      b: [12],
+      a: [11, 15, 22],
+      b: [14],
     },
     answerRule: "Math.sqrt(a*a + b*b)",
     hint: "Utilise le théorème de Pythagore.",
@@ -196,9 +196,9 @@ export const problemesTemplates4e: CalculRapideItem[] = [
     template:
       "Un objet coûte {{x}} €. On en achète {{a}} et on ajoute {{b}} € de frais. Quel est le prix total ?",
     variables: {
-      x: [3, 4, 6, 7],
-      a: [2, 3, 4],
-      b: [2, 5, 8],
+      x: [5, 6, 8, 9],
+      a: [3, 4, 5],
+      b: [4, 7, 10],
     },
     answerRule: "a * x + b",
     hint: "Le prix total est a × x + b.",
@@ -222,9 +222,9 @@ export const problemesTemplates4e: CalculRapideItem[] = [
     template:
       "Un abonnement coûte {{b}} €, puis {{p}} € par séance. Pour {{x}} séances, combien paie-t-on ?",
     variables: {
-      b: [6, 9, 12],
-      p: [3, 5, 7],
-      x: [2, 4, 6],
+      b: [8, 11, 14],
+      p: [5, 7, 9],
+      x: [4, 6, 8],
     },
     answerRule: "b + p * x",
     hint: "Prix total = abonnement + prix par séance × nombre de séances.",
@@ -248,8 +248,8 @@ export const problemesTemplates4e: CalculRapideItem[] = [
     template:
       "On a {{k}} sacs contenant chacun x billes et {{a}} billes en plus. Développe l’expression {{k}}(x + {{a}}).",
     variables: {
-      k: [3, 4, 6, 7],
-      a: [2, 5, 6, 8],
+      k: [5, 6, 8, 9],
+      a: [4, 7, 8, 10],
     },
     answerRule: "k + 'x+' + (k * a)",
     hint: "Distribue le nombre devant la parenthèse.",
@@ -272,8 +272,8 @@ export const problemesTemplates4e: CalculRapideItem[] = [
     },
     template: "Factorise : {{k}}x + {{n}}.",
     variables: {
-      k: [2, 3, 4, 6],
-      n: [12, 24, 36, 48],
+      k: [4, 5, 6, 8],
+      n: [24, 36, 48, 60],
     },
     answerRule: "k + '(x+' + (n / k) + ')'",
     hint: "Mets le facteur commun devant la parenthèse.",
@@ -297,8 +297,8 @@ export const problemesTemplates4e: CalculRapideItem[] = [
     template:
       "Un nombre augmenté de {{a}} donne {{b}}. Quel est ce nombre ?",
     variables: {
-      a: [4, 6, 8, 11],
-      b: [19, 23, 31, 42],
+      a: [6, 8, 10, 13],
+      b: [25, 29, 37, 48],
     },
     answerRule: "b - a",
     hint: "On cherche x tel que x + a = b.",
@@ -325,7 +325,7 @@ export const problemesTemplates4e: CalculRapideItem[] = [
     template:
       "Une situation reprend le triangle 3-4-5 multiplie par {{k}}. Quelle est l'hypotenuse ?",
     variables: {
-      k: [1, 2, 3, 4, 5],
+      k: [2, 3, 4, 5, 6],
     },
     answerRule: "k * 5",
     hint: "Dans un triangle 3-4-5, l'hypotenuse est 5. Multiplie tout par le meme nombre.",
@@ -347,8 +347,8 @@ export const problemesTemplates4e: CalculRapideItem[] = [
     template:
       "Apres une depense de {{a}} euros, il reste {{b}} euros. Combien y avait-il au depart ?",
     variables: {
-      a: [12, 18, 25, 40],
-      b: [20, 35, 50, 80],
+      a: [18, 24, 31, 46],
+      b: [32, 47, 62, 92],
     },
     answerRule: "a + b",
     hint: "Montant de depart = depense + reste.",
@@ -370,9 +370,9 @@ export const problemesTemplates4e: CalculRapideItem[] = [
     template:
       "Un forfait coute {{f}} euros puis {{p}} euros par mois. Pour {{m}} mois, total ?",
     variables: {
-      f: [5, 10, 15],
-      p: [8, 12, 20],
-      m: [2, 3, 6],
+      f: [11, 16, 21],
+      p: [14, 18, 26],
+      m: [4, 5, 8],
     },
     answerRule: "f + p * m",
     hint: "Total = forfait + prix par mois x nombre de mois.",
@@ -394,7 +394,7 @@ export const problemesTemplates4e: CalculRapideItem[] = [
     template:
       "Deux rues perpendiculaires mesurent {{k}} x 30 m et {{k}} x 40 m. Le raccourci en diagonale mesure ?",
     variables: {
-      k: [1, 2, 3, 4],
+      k: [2, 3, 4, 5],
     },
     answerRule: "k * 50",
     hint: "Le triangle 30-40-50 est un triangle rectangle agrandi.",
