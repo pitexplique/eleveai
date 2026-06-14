@@ -8,6 +8,16 @@ function randomInt(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+function expl(calcul: string) {
+  return (
+    "Définition : une aire mesure la surface occupée par une figure.\n\n" +
+    "Méthode : on repère la figure, les mesures utiles ou les carreaux, puis on applique la formule adaptée.\n\n" +
+    "Calcul : " +
+    calcul +
+    "\n\nConclusion : on garde la réponse obtenue."
+  );
+}
+
 export const airesBank: TutorBankItemV4[] = [
   // =========================
   // AREA_COMPRENDRE
@@ -1619,5 +1629,219 @@ export const airesBank: TutorBankItemV4[] = [
           "\n\nConclusion : on garde la réponse obtenue.",
       };
     },
+  },
+
+  // ========== TOP-UP — AIRE_COMPRENDRE ==========
+  {
+    kind: "fixed", id: "aire_comprendre_topup_1", niveau: "6e", matiere: "maths",
+    notionId: "aire_surface", microId: "aire_comprendre", difficulty: 1, theme: "neutral",
+    text: "Le périmètre mesure le contour d’une figure. Que mesure l’aire ?",
+    format: "qcm", choices: ["la surface", "le contour", "la hauteur", "le nombre de sommets"],
+    expected: ["la surface"], comparator: "mcq_exact",
+    hint: "L’aire concerne l’intérieur de la figure.",
+    explanation: expl("L’aire mesure la surface, c’est-à-dire la place occupée à l’intérieur de la figure, contrairement au périmètre qui mesure le contour."),
+    tags: ["aire_surface", "comprendre", "qcm"],
+  },
+  {
+    kind: "fixed", id: "aire_comprendre_topup_2", niveau: "6e", matiere: "maths",
+    notionId: "aire_surface", microId: "aire_comprendre", difficulty: 1, theme: "neutral",
+    text: "Quelle unité convient pour mesurer l’aire d’un terrain de football ?",
+    format: "qcm", choices: ["m²", "m", "m³", "kg"], expected: ["m²"], comparator: "mcq_exact",
+    hint: "Une aire se mesure en unités carrées.",
+    explanation: expl("Une aire se mesure en unités carrées. Pour une grande surface comme un terrain, on utilise le mètre carré (m²)."),
+    tags: ["aire_surface", "comprendre", "qcm"],
+  },
+  {
+    kind: "fixed", id: "aire_comprendre_topup_3", niveau: "6e", matiere: "maths",
+    notionId: "aire_surface", microId: "aire_comprendre", difficulty: 2, theme: "neutral",
+    text: "« 15 cm² » est une mesure de…",
+    format: "qcm", choices: ["aire", "longueur", "masse", "durée"], expected: ["aire"], comparator: "mcq_exact",
+    hint: "Le « ² » indique une unité carrée.",
+    explanation: expl("L’unité cm² (centimètre carré) est une unité d’aire. « 15 cm² » est donc une mesure d’aire."),
+    tags: ["aire_surface", "comprendre", "qcm"],
+  },
+  {
+    kind: "fixed", id: "aire_comprendre_topup_4", niveau: "6e", matiere: "maths",
+    notionId: "aire_surface", microId: "aire_comprendre", difficulty: 2, theme: "neutral",
+    text: "Un carreau mesure 1 cm². Une figure recouvre exactement 12 carreaux. Quelle est son aire ?",
+    format: "short", expected: ["12"], comparator: "number_equal",
+    hint: "Chaque carreau vaut 1 cm².",
+    explanation: expl("On compte les carreaux : 12 carreaux de 1 cm² donnent une aire de 12 cm²."),
+    tags: ["aire_surface", "comprendre", "carreaux"],
+  },
+
+  // ========== TOP-UP — AIRE_CARRE ==========
+  {
+    kind: "fixed", id: "aire_carre_topup_1", niveau: "6e", matiere: "maths",
+    notionId: "aire_surface", microId: "aire_carre", difficulty: 1, theme: "neutral",
+    text: "Quelle est l’aire d’un carré de côté 5 cm ?",
+    format: "short", expected: ["25"], comparator: "number_equal",
+    hint: "Aire d’un carré = côté × côté.",
+    explanation: expl("L’aire d’un carré est côté × côté. Ici, 5 × 5 = 25, donc l’aire est 25 cm²."),
+    tags: ["aire_surface", "carre"],
+  },
+  {
+    kind: "fixed", id: "aire_carre_topup_2", niveau: "6e", matiere: "maths",
+    notionId: "aire_surface", microId: "aire_carre", difficulty: 2, theme: "neutral",
+    text: "Quelle est l’aire d’un carré de côté 7 cm ?",
+    format: "short", expected: ["49"], comparator: "number_equal",
+    hint: "7 × 7.",
+    explanation: expl("L’aire d’un carré est côté × côté. Ici, 7 × 7 = 49, donc l’aire est 49 cm²."),
+    tags: ["aire_surface", "carre"],
+  },
+  {
+    kind: "fixed", id: "aire_carre_topup_3", niveau: "6e", matiere: "maths",
+    notionId: "aire_surface", microId: "aire_carre", difficulty: 2, theme: "neutral",
+    text: "Quelle est l’aire d’un carré de côté 10 cm ?",
+    format: "short", expected: ["100"], comparator: "number_equal",
+    hint: "10 × 10.",
+    explanation: expl("L’aire d’un carré est côté × côté. Ici, 10 × 10 = 100, donc l’aire est 100 cm²."),
+    tags: ["aire_surface", "carre"],
+  },
+  {
+    kind: "fixed", id: "aire_carre_topup_4", niveau: "6e", matiere: "maths",
+    notionId: "aire_surface", microId: "aire_carre", difficulty: 1, theme: "neutral",
+    text: "Quelle est la formule de l’aire d’un carré ?",
+    format: "qcm", choices: ["côté × côté", "côté × 4", "côté + côté", "longueur × largeur"],
+    expected: ["côté × côté"], comparator: "mcq_exact",
+    hint: "Les quatre côtés d’un carré sont égaux.",
+    explanation: expl("L’aire d’un carré se calcule en multipliant son côté par lui-même : côté × côté."),
+    tags: ["aire_surface", "carre", "qcm"],
+  },
+
+  // ========== TOP-UP — AIRE_RECTANGLE ==========
+  {
+    kind: "fixed", id: "aire_rectangle_topup_1", niveau: "6e", matiere: "maths",
+    notionId: "aire_surface", microId: "aire_rectangle", difficulty: 1, theme: "neutral",
+    text: "Quelle est l’aire d’un rectangle de longueur 6 cm et de largeur 4 cm ?",
+    format: "short", expected: ["24"], comparator: "number_equal",
+    hint: "Aire = Longueur × largeur.",
+    explanation: expl("L’aire d’un rectangle est Longueur × largeur. Ici, 6 × 4 = 24, donc l’aire est 24 cm²."),
+    tags: ["aire_surface", "rectangle"],
+  },
+  {
+    kind: "fixed", id: "aire_rectangle_topup_2", niveau: "6e", matiere: "maths",
+    notionId: "aire_surface", microId: "aire_rectangle", difficulty: 2, theme: "neutral",
+    text: "Quelle est l’aire d’un rectangle de longueur 8 cm et de largeur 3 cm ?",
+    format: "short", expected: ["24"], comparator: "number_equal",
+    hint: "8 × 3.",
+    explanation: expl("L’aire d’un rectangle est Longueur × largeur. Ici, 8 × 3 = 24, donc l’aire est 24 cm²."),
+    tags: ["aire_surface", "rectangle"],
+  },
+  {
+    kind: "fixed", id: "aire_rectangle_topup_3", niveau: "6e", matiere: "maths",
+    notionId: "aire_surface", microId: "aire_rectangle", difficulty: 2, theme: "neutral",
+    text: "Quelle est l’aire d’un rectangle de longueur 10 cm et de largeur 5 cm ?",
+    format: "short", expected: ["50"], comparator: "number_equal",
+    hint: "10 × 5.",
+    explanation: expl("L’aire d’un rectangle est Longueur × largeur. Ici, 10 × 5 = 50, donc l’aire est 50 cm²."),
+    tags: ["aire_surface", "rectangle"],
+  },
+  {
+    kind: "fixed", id: "aire_rectangle_topup_4", niveau: "6e", matiere: "maths",
+    notionId: "aire_surface", microId: "aire_rectangle", difficulty: 1, theme: "neutral",
+    text: "Quelle est la formule de l’aire d’un rectangle ?",
+    format: "qcm", choices: ["Longueur × largeur", "Longueur + largeur", "côté × côté", "2 × (L + l)"],
+    expected: ["Longueur × largeur"], comparator: "mcq_exact",
+    hint: "On multiplie les deux dimensions.",
+    explanation: expl("L’aire d’un rectangle se calcule en multipliant sa longueur par sa largeur : Longueur × largeur. (2 × (L + l) est le périmètre.)"),
+    tags: ["aire_surface", "rectangle", "qcm"],
+  },
+
+  // ========== TOP-UP — AIRE_COMPARER ==========
+  {
+    kind: "fixed", id: "aire_comparer_topup_1", niveau: "6e", matiere: "maths",
+    notionId: "aire_surface", microId: "aire_comparer", difficulty: 2, theme: "neutral",
+    text: "Un carré de côté 4 cm et un rectangle de 5 cm sur 3 cm : quelle figure a la plus grande aire ?",
+    format: "qcm", choices: ["le carré", "le rectangle", "elles ont la même aire"], expected: ["le carré"], comparator: "mcq_exact",
+    hint: "Calcule les deux aires puis compare.",
+    explanation: expl("Aire du carré : 4 × 4 = 16 cm². Aire du rectangle : 5 × 3 = 15 cm². 16 > 15, donc le carré a la plus grande aire."),
+    tags: ["aire_surface", "comparer", "qcm"],
+  },
+  {
+    kind: "fixed", id: "aire_comparer_topup_2", niveau: "6e", matiere: "maths",
+    notionId: "aire_surface", microId: "aire_comparer", difficulty: 3, theme: "neutral",
+    text: "Deux rectangles mesurent 6 cm sur 2 cm et 4 cm sur 3 cm. Ont-ils la même aire ?",
+    format: "qcm", choices: ["oui", "non"], expected: ["oui"], comparator: "mcq_exact",
+    hint: "Calcule les deux aires.",
+    explanation: expl("Premier rectangle : 6 × 2 = 12 cm². Deuxième rectangle : 4 × 3 = 12 cm². Les deux aires sont égales : 12 cm²."),
+    tags: ["aire_surface", "comparer", "qcm"],
+  },
+  {
+    kind: "fixed", id: "aire_comparer_topup_3", niveau: "6e", matiere: "maths",
+    notionId: "aire_surface", microId: "aire_comparer", difficulty: 1, theme: "neutral",
+    text: "Une figure A a une aire de 20 cm², une figure B une aire de 15 cm². Laquelle a la plus grande aire ?",
+    format: "qcm", choices: ["la figure A", "la figure B", "elles sont égales"], expected: ["la figure A"], comparator: "mcq_exact",
+    hint: "Compare 20 et 15.",
+    explanation: expl("On compare les deux aires : 20 cm² est plus grand que 15 cm². La figure A a la plus grande aire."),
+    tags: ["aire_surface", "comparer", "qcm"],
+  },
+  {
+    kind: "fixed", id: "aire_comparer_topup_4", niveau: "6e", matiere: "maths",
+    notionId: "aire_surface", microId: "aire_comparer", difficulty: 2, theme: "neutral",
+    text: "Une figure mesure 30 cm² et une autre 18 cm². Combien de cm² d’aire en plus a la première ?",
+    format: "short", expected: ["12"], comparator: "number_equal",
+    hint: "Calcule 30 − 18.",
+    explanation: expl("On calcule l’écart des deux aires : 30 - 18 = 12, donc 12 cm² de plus."),
+    tags: ["aire_surface", "comparer"],
+  },
+
+  // ========== TOP-UP — AIRE_DECOMPOSER ==========
+  {
+    kind: "fixed", id: "aire_decomposer_topup_1", niveau: "6e", matiere: "maths",
+    notionId: "aire_surface", microId: "aire_decomposer", difficulty: 3, theme: "neutral",
+    text: "Une figure en L est formée d’un rectangle de 6 cm sur 2 cm et d’un carré de 2 cm de côté. Quelle est son aire totale ?",
+    format: "short", expected: ["16"], comparator: "number_equal",
+    hint: "Additionne l’aire du rectangle et celle du carré.",
+    explanation: expl("Aire du rectangle : 6 × 2 = 12 cm². Aire du carré : 2 × 2 = 4 cm². Aire totale : 12 + 4 = 16 cm²."),
+    tags: ["aire_surface", "decomposer"],
+  },
+  {
+    kind: "fixed", id: "aire_decomposer_topup_2", niveau: "6e", matiere: "maths",
+    notionId: "aire_surface", microId: "aire_decomposer", difficulty: 3, theme: "neutral",
+    text: "Une figure est composée de deux rectangles : un de 5 cm sur 2 cm et un de 3 cm sur 2 cm. Quelle est son aire totale ?",
+    format: "short", expected: ["16"], comparator: "number_equal",
+    hint: "Calcule chaque aire, puis additionne.",
+    explanation: expl("Premier rectangle : 5 × 2 = 10 cm². Deuxième rectangle : 3 × 2 = 6 cm². Aire totale : 10 + 6 = 16 cm²."),
+    tags: ["aire_surface", "decomposer"],
+  },
+  {
+    kind: "fixed", id: "aire_decomposer_topup_3", niveau: "6e", matiere: "maths",
+    notionId: "aire_surface", microId: "aire_decomposer", difficulty: 2, theme: "neutral",
+    text: "Pour calculer l’aire d’une figure compliquée, on peut...",
+    format: "qcm", choices: ["la découper en figures simples", "mesurer seulement son contour", "compter ses sommets", "mesurer un seul côté"],
+    expected: ["la découper en figures simples"], comparator: "mcq_exact",
+    hint: "Pense aux rectangles et carrés.",
+    explanation: expl("Pour une figure compliquée, on la découpe en figures simples (rectangles, carrés), on calcule l’aire de chacune, puis on additionne."),
+    tags: ["aire_surface", "decomposer", "qcm"],
+  },
+
+  // ========== TOP-UP — AIRE_PROBLEME ==========
+  {
+    kind: "fixed", id: "aire_probleme_topup_1", niveau: "6e", matiere: "maths",
+    notionId: "aire_surface", microId: "aire_probleme", difficulty: 2, theme: "neutral",
+    text: "Un terrain rectangulaire mesure 20 m de long et 15 m de large. Quelle est son aire ?",
+    format: "short", expected: ["300"], comparator: "number_equal",
+    hint: "Aire = Longueur × largeur.",
+    explanation: expl("L’aire du terrain est Longueur × largeur : 20 × 15 = 300, donc 300 m²."),
+    tags: ["aire_surface", "probleme"],
+  },
+  {
+    kind: "fixed", id: "aire_probleme_topup_2", niveau: "6e", matiere: "maths",
+    notionId: "aire_surface", microId: "aire_probleme", difficulty: 2, theme: "neutral",
+    text: "Une pièce carrée mesure 4 m de côté. Quelle est son aire ?",
+    format: "short", expected: ["16"], comparator: "number_equal",
+    hint: "Aire d’un carré = côté × côté.",
+    explanation: expl("L’aire de la pièce est côté × côté : 4 × 4 = 16, donc 16 m²."),
+    tags: ["aire_surface", "probleme"],
+  },
+  {
+    kind: "fixed", id: "aire_probleme_topup_3", niveau: "6e", matiere: "maths",
+    notionId: "aire_surface", microId: "aire_probleme", difficulty: 3, theme: "neutral",
+    text: "On veut recouvrir un sol de 5 m sur 3 m avec des dalles de 1 m². Combien de dalles faut-il ?",
+    format: "short", expected: ["15"], comparator: "number_equal",
+    hint: "Calcule d’abord l’aire du sol.",
+    explanation: expl("L’aire du sol est 5 × 3 = 15 m². Chaque dalle couvre 1 m², il faut donc 15 dalles."),
+    tags: ["aire_surface", "probleme"],
   },
 ];

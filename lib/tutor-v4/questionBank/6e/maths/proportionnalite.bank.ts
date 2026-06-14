@@ -8,6 +8,16 @@ function randomChoice<T>(arr: T[]): T {
   return arr[Math.floor(Math.random() * arr.length)];
 }
 
+function expl(calcul: string) {
+  return (
+    "Définition : deux grandeurs sont proportionnelles quand on multiplie toujours par le même nombre.\n\n" +
+    "Méthode : on cherche le coefficient de proportionnalité ou le passage entre les grandeurs.\n\n" +
+    "Calcul : " +
+    calcul +
+    "\n\nConclusion : on garde la réponse obtenue."
+  );
+}
+
 export const proportionnaliteBank: TutorBankItemV4[] = [
   // =========================
   // PROP_RECONNAITRE
@@ -1260,5 +1270,110 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
           "\n\nConclusion : on garde la réponse obtenue.",
       };
     },
+  },
+
+  // ========== TOP-UP — PROP_RECONNAITRE ==========
+  {
+    kind: "fixed", id: "prop_reconnaitre_topup_1", niveau: "6e", matiere: "maths",
+    notionId: "prop_proportionnalite", microId: "prop_reconnaitre", difficulty: 2, theme: "neutral",
+    text: "Si 3 kg de fruits coûtent 9 € et 6 kg coûtent 18 €, la situation est-elle proportionnelle ?",
+    format: "short", expected: ["oui"], comparator: "contains_keyword",
+    hint: "Quand on double la quantité, le prix double aussi.",
+    explanation: expl("On passe de 3 kg à 6 kg en multipliant par 2 ; le prix passe de 9 € à 18 € en multipliant aussi par 2. La situation est proportionnelle."),
+    tags: ["prop_proportionnalite", "reconnaitre"],
+  },
+  {
+    kind: "fixed", id: "prop_reconnaitre_topup_2", niveau: "6e", matiere: "maths",
+    notionId: "prop_proportionnalite", microId: "prop_reconnaitre", difficulty: 2, theme: "neutral",
+    text: "L’âge d’une personne et sa taille sont-ils des grandeurs proportionnelles ?",
+    format: "qcm", choices: ["non", "oui"], expected: ["non"], comparator: "mcq_exact",
+    hint: "Quelqu’un de 2 fois plus âgé n’est pas 2 fois plus grand.",
+    explanation: expl("Une personne de 40 ans n’est pas deux fois plus grande qu’une personne de 20 ans. On ne multiplie pas toujours par le même nombre : ce n’est pas proportionnel."),
+    tags: ["prop_proportionnalite", "reconnaitre", "qcm"],
+  },
+  {
+    kind: "fixed", id: "prop_reconnaitre_topup_3", niveau: "6e", matiere: "maths",
+    notionId: "prop_proportionnalite", microId: "prop_reconnaitre", difficulty: 2, theme: "neutral",
+    text: "Un tableau indique : 1 → 5, 2 → 10, 3 → 15. Cette situation est-elle proportionnelle ?",
+    format: "short", expected: ["oui"], comparator: "contains_keyword",
+    hint: "Cherche si on multiplie toujours par le même nombre.",
+    explanation: expl("On passe de chaque nombre du haut à celui du bas en multipliant par 5 (1×5=5, 2×5=10, 3×5=15). C’est donc une situation proportionnelle, de coefficient 5."),
+    tags: ["prop_proportionnalite", "reconnaitre", "tableau"],
+  },
+
+  // ========== TOP-UP — PROP_COEFF ==========
+  {
+    kind: "fixed", id: "prop_coeff_topup_1", niveau: "6e", matiere: "maths",
+    notionId: "prop_proportionnalite", microId: "prop_coeff", difficulty: 2, theme: "neutral",
+    text: "Si 1 kg de pommes coûte 2 €, quel coefficient multiplie la masse pour obtenir le prix ?",
+    format: "short", expected: ["2"], comparator: "number_equal",
+    hint: "Prix = masse × coefficient.",
+    explanation: expl("Si 1 kg coûte 2 €, le prix s’obtient en multipliant la masse par 2. Le coefficient de proportionnalité est 2."),
+    tags: ["prop_proportionnalite", "coefficient"],
+  },
+  {
+    kind: "fixed", id: "prop_coeff_topup_2", niveau: "6e", matiere: "maths",
+    notionId: "prop_proportionnalite", microId: "prop_coeff", difficulty: 2, theme: "neutral",
+    text: "3 stylos coûtent 6 €. Quel est le coefficient de proportionnalité (prix d’un stylo) ?",
+    format: "short", expected: ["2"], comparator: "number_equal",
+    hint: "Cherche le prix pour 1 stylo.",
+    explanation: expl("Le prix d’un stylo est 6 ÷ 3 = 2 €. Le coefficient de proportionnalité est donc 2."),
+    tags: ["prop_proportionnalite", "coefficient"],
+  },
+  {
+    kind: "fixed", id: "prop_coeff_topup_3", niveau: "6e", matiere: "maths",
+    notionId: "prop_proportionnalite", microId: "prop_coeff", difficulty: 2, theme: "neutral",
+    text: "Le coefficient de proportionnalité est 5. Quel est le prix de 4 objets ?",
+    format: "short", expected: ["20"], comparator: "number_equal",
+    hint: "Prix = nombre d’objets × coefficient.",
+    explanation: expl("On multiplie le nombre d’objets par le coefficient : 4 × 5 = 20. Le prix est 20 €."),
+    tags: ["prop_proportionnalite", "coefficient"],
+  },
+  {
+    kind: "fixed", id: "prop_coeff_topup_4", niveau: "6e", matiere: "maths",
+    notionId: "prop_proportionnalite", microId: "prop_coeff", difficulty: 3, theme: "neutral",
+    text: "Dans un tableau de proportionnalité, on passe de 2 à 10. Quel est le coefficient ?",
+    format: "short", expected: ["5"], comparator: "number_equal",
+    hint: "Cherche par quel nombre on multiplie 2 pour obtenir 10.",
+    explanation: expl("On cherche le nombre qui, multiplié par 2, donne 10 : 10 ÷ 2 = 5. Le coefficient est 5."),
+    tags: ["prop_proportionnalite", "coefficient", "tableau"],
+  },
+
+  // ========== TOP-UP — PROP_DEFI ==========
+  {
+    kind: "fixed", id: "prop_defi_topup_1", niveau: "6e", matiere: "maths",
+    notionId: "prop_proportionnalite", microId: "prop_defi", difficulty: 3, theme: "neutral",
+    text: "Défi : 5 croissants coûtent 10 €. Combien coûtent 8 croissants ?",
+    format: "short", expected: ["16"], comparator: "number_equal",
+    hint: "Cherche d’abord le prix d’un croissant.",
+    explanation: expl("Un croissant coûte 10 ÷ 5 = 2 €. Donc 8 croissants coûtent 8 × 2 = 16 €."),
+    tags: ["prop_proportionnalite", "defi"],
+  },
+  {
+    kind: "fixed", id: "prop_defi_topup_2", niveau: "6e", matiere: "maths",
+    notionId: "prop_proportionnalite", microId: "prop_defi", difficulty: 3, theme: "neutral",
+    text: "Défi : 4 m de tissu coûtent 12 €. Combien coûtent 7 m de ce tissu ?",
+    format: "short", expected: ["21"], comparator: "number_equal",
+    hint: "Cherche le prix d’un mètre.",
+    explanation: expl("Un mètre de tissu coûte 12 ÷ 4 = 3 €. Donc 7 m coûtent 7 × 3 = 21 €."),
+    tags: ["prop_proportionnalite", "defi"],
+  },
+  {
+    kind: "fixed", id: "prop_defi_topup_3", niveau: "6e", matiere: "maths",
+    notionId: "prop_proportionnalite", microId: "prop_defi", difficulty: 4, theme: "neutral",
+    text: "Défi : une recette pour 4 personnes utilise 200 g de farine. Quelle masse de farine faut-il pour 6 personnes ?",
+    format: "short", expected: ["300"], comparator: "number_equal",
+    hint: "Cherche la masse pour 1 personne.",
+    explanation: expl("Pour 1 personne : 200 ÷ 4 = 50 g. Pour 6 personnes : 6 × 50 = 300 g."),
+    tags: ["prop_proportionnalite", "defi", "recette"],
+  },
+  {
+    kind: "fixed", id: "prop_defi_topup_4", niveau: "6e", matiere: "maths",
+    notionId: "prop_proportionnalite", microId: "prop_defi", difficulty: 4, theme: "neutral",
+    text: "Défi : 6 cahiers coûtent 9 €. Combien coûtent 10 cahiers ?",
+    format: "short", expected: ["15"], comparator: "number_equal",
+    hint: "Cherche le prix d’un cahier (9 ÷ 6).",
+    explanation: expl("Un cahier coûte 9 ÷ 6 = 1,5 €. Donc 10 cahiers coûtent 10 × 1,5 = 15 €."),
+    tags: ["prop_proportionnalite", "defi"],
   },
 ];

@@ -4,6 +4,16 @@ function shuffle<T>(arr: T[]): T[] {
   return [...arr].sort(() => Math.random() - 0.5);
 }
 
+function expl(calcul: string) {
+  return (
+    "Définition : un angle mesure l’ouverture entre deux demi-droites.\n\n" +
+    "Méthode : on observe le codage ou la mesure, puis on compare avec les angles de référence.\n\n" +
+    "Calcul : " +
+    calcul +
+    "\n\nConclusion : on garde la réponse obtenue."
+  );
+}
+
 export const anglesBank: TutorBankItemV4[] = [
   // =========================
   // ANGLE_RECONNAITRE
@@ -1475,5 +1485,155 @@ export const anglesBank: TutorBankItemV4[] = [
           "\n\nConclusion : on garde la réponse obtenue.",
       };
     },
+  },
+
+  // ========== TOP-UP — ANGLE_RECONNAITRE ==========
+  {
+    kind: "fixed", id: "angle_reconnaitre_topup_1", niveau: "6e", matiere: "maths",
+    notionId: "angle_mesure", microId: "angle_reconnaitre", difficulty: 1, theme: "neutral",
+    text: "Comment s’appelle un angle qui mesure exactement 90° ?",
+    format: "qcm", choices: ["un angle droit", "un angle aigu", "un angle obtus", "un angle plat"],
+    expected: ["un angle droit"], comparator: "mcq_exact",
+    hint: "90° = angle du coin d’une feuille.",
+    explanation: expl("Un angle qui mesure exactement 90° est un angle droit. On le code par un petit carré."),
+    tags: ["angle_mesure", "reconnaitre", "qcm"],
+  },
+  {
+    kind: "fixed", id: "angle_reconnaitre_topup_2", niveau: "6e", matiere: "maths",
+    notionId: "angle_mesure", microId: "angle_reconnaitre", difficulty: 1, theme: "neutral",
+    text: "Comment s’appelle un angle qui mesure moins de 90° ?",
+    format: "qcm", choices: ["un angle aigu", "un angle droit", "un angle obtus", "un angle plat"],
+    expected: ["un angle aigu"], comparator: "mcq_exact",
+    hint: "Plus petit que l’angle droit.",
+    explanation: expl("Un angle qui mesure moins de 90° est un angle aigu."),
+    tags: ["angle_mesure", "reconnaitre", "qcm"],
+  },
+  {
+    kind: "fixed", id: "angle_reconnaitre_topup_3", niveau: "6e", matiere: "maths",
+    notionId: "angle_mesure", microId: "angle_reconnaitre", difficulty: 2, theme: "neutral",
+    text: "Comment s’appelle un angle qui mesure plus de 90° mais moins de 180° ?",
+    format: "qcm", choices: ["un angle obtus", "un angle aigu", "un angle droit", "un angle plat"],
+    expected: ["un angle obtus"], comparator: "mcq_exact",
+    hint: "Plus grand que l’angle droit.",
+    explanation: expl("Un angle qui mesure plus de 90° et moins de 180° est un angle obtus."),
+    tags: ["angle_mesure", "reconnaitre", "qcm"],
+  },
+  {
+    kind: "fixed", id: "angle_reconnaitre_topup_4", niveau: "6e", matiere: "maths",
+    notionId: "angle_mesure", microId: "angle_reconnaitre", difficulty: 2, theme: "neutral",
+    text: "Comment s’appelle un angle qui mesure exactement 180° (ses deux côtés sont alignés) ?",
+    format: "qcm", choices: ["un angle plat", "un angle droit", "un angle aigu", "un angle obtus"],
+    expected: ["un angle plat"], comparator: "mcq_exact",
+    hint: "Les deux demi-droites forment une droite.",
+    explanation: expl("Un angle qui mesure exactement 180° est un angle plat : ses deux côtés sont alignés et forment une droite."),
+    tags: ["angle_mesure", "reconnaitre", "qcm"],
+  },
+
+  // ========== TOP-UP — ANGLE_MESURER ==========
+  {
+    kind: "fixed", id: "angle_mesurer_topup_1", niveau: "6e", matiere: "maths",
+    notionId: "angle_mesure", microId: "angle_mesurer", difficulty: 1, theme: "neutral",
+    text: "Combien de degrés mesure un angle droit ?",
+    format: "short", expected: ["90", "90°"], comparator: "number_equal",
+    hint: "C’est l’angle du coin d’une feuille.",
+    explanation: expl("Un angle droit mesure 90°."),
+    tags: ["angle_mesure", "mesure"],
+  },
+  {
+    kind: "fixed", id: "angle_mesurer_topup_2", niveau: "6e", matiere: "maths",
+    notionId: "angle_mesure", microId: "angle_mesurer", difficulty: 1, theme: "neutral",
+    text: "Combien de degrés mesure un angle plat ?",
+    format: "short", expected: ["180", "180°"], comparator: "number_equal",
+    hint: "Ses deux côtés sont alignés.",
+    explanation: expl("Un angle plat mesure 180° : ses deux côtés forment une droite."),
+    tags: ["angle_mesure", "mesure"],
+  },
+  {
+    kind: "fixed", id: "angle_mesurer_topup_3", niveau: "6e", matiere: "maths",
+    notionId: "angle_mesure", microId: "angle_mesurer", difficulty: 1, theme: "neutral",
+    text: "Sur un rapporteur, en quelle unité sont graduées les mesures d’angles ?",
+    format: "qcm", choices: ["en degrés", "en centimètres", "en grammes", "en litres"],
+    expected: ["en degrés"], comparator: "mcq_exact",
+    hint: "Le symbole est °.",
+    explanation: expl("Les angles se mesurent en degrés (symbole °), graduations que l’on lit sur le rapporteur."),
+    tags: ["angle_mesure", "mesure", "qcm"],
+  },
+  {
+    kind: "fixed", id: "angle_mesurer_topup_4", niveau: "6e", matiere: "maths",
+    notionId: "angle_mesure", microId: "angle_mesurer", difficulty: 2, theme: "neutral",
+    text: "Un angle mesure 45°. Est-il aigu, droit ou obtus ?",
+    format: "qcm", choices: ["aigu", "droit", "obtus", "plat"], expected: ["aigu"], comparator: "mcq_exact",
+    hint: "Compare 45° à 90°.",
+    explanation: expl("45° est inférieur à 90°. C’est donc un angle aigu."),
+    tags: ["angle_mesure", "mesure", "qcm"],
+  },
+
+  // ========== TOP-UP — ANGLE_TRACER ==========
+  {
+    kind: "fixed", id: "angle_tracer_topup_1", niveau: "6e", matiere: "maths",
+    notionId: "angle_mesure", microId: "angle_tracer", difficulty: 1, theme: "neutral",
+    text: "Quel instrument utilise-t-on pour tracer précisément un angle de 60° ?",
+    format: "short", expected: ["rapporteur", "un rapporteur"], comparator: "contains_keyword",
+    hint: "Le même que pour mesurer un angle.",
+    explanation: expl("Pour tracer précisément un angle de 60°, on utilise un rapporteur, gradué en degrés."),
+    tags: ["angle_mesure", "tracer", "instrument"],
+  },
+  {
+    kind: "fixed", id: "angle_tracer_topup_2", niveau: "6e", matiere: "maths",
+    notionId: "angle_mesure", microId: "angle_tracer", difficulty: 2, theme: "neutral",
+    text: "Quel instrument permet de tracer rapidement un angle droit (90°) ?",
+    format: "qcm", choices: ["une équerre", "une balance", "un compas seul", "un chronomètre"],
+    expected: ["une équerre"], comparator: "mcq_exact",
+    hint: "Son coin forme un angle droit.",
+    explanation: expl("L’équerre possède un coin à 90° : elle permet de tracer directement un angle droit."),
+    tags: ["angle_mesure", "tracer", "qcm"],
+  },
+  {
+    kind: "fixed", id: "angle_tracer_topup_3", niveau: "6e", matiere: "maths",
+    notionId: "angle_mesure", microId: "angle_tracer", difficulty: 3, theme: "neutral",
+    text: "Pour tracer un angle au rapporteur, où place-t-on le centre du rapporteur ?",
+    format: "qcm", choices: ["sur le sommet de l’angle", "au bout d’un côté", "n’importe où", "sur le milieu d’un côté"],
+    expected: ["sur le sommet de l’angle"], comparator: "mcq_exact",
+    hint: "Le sommet est le point de départ des deux côtés.",
+    explanation: expl("On place le centre du rapporteur sur le sommet de l’angle, et la ligne de base le long d’un côté."),
+    tags: ["angle_mesure", "tracer", "qcm"],
+  },
+  {
+    kind: "fixed", id: "angle_tracer_topup_4", niveau: "6e", matiere: "maths",
+    notionId: "angle_mesure", microId: "angle_tracer", difficulty: 2, theme: "neutral",
+    text: "On veut tracer un angle de 120°. Quel type d’angle obtient-on ?",
+    format: "qcm", choices: ["obtus", "aigu", "droit", "plat"], expected: ["obtus"], comparator: "mcq_exact",
+    hint: "Compare 120° à 90° et 180°.",
+    explanation: expl("120° est plus grand que 90° et plus petit que 180° : c’est un angle obtus."),
+    tags: ["angle_mesure", "tracer", "qcm"],
+  },
+
+  // ========== TOP-UP — ANGLE_DEFI ==========
+  {
+    kind: "fixed", id: "angle_defi_topup_1", niveau: "6e", matiere: "maths",
+    notionId: "angle_mesure", microId: "angle_defi", difficulty: 3, theme: "neutral",
+    text: "Défi : un angle droit est partagé en deux angles égaux. Combien mesure chacun ?",
+    format: "short", expected: ["45", "45°"], comparator: "number_equal",
+    hint: "90 ÷ 2.",
+    explanation: expl("Un angle droit mesure 90°. Partagé en deux angles égaux, chacun mesure 90 ÷ 2 = 45°."),
+    tags: ["angle_mesure", "defi"],
+  },
+  {
+    kind: "fixed", id: "angle_defi_topup_2", niveau: "6e", matiere: "maths",
+    notionId: "angle_mesure", microId: "angle_defi", difficulty: 3, theme: "neutral",
+    text: "Défi : un angle plat est partagé en deux angles égaux. Combien mesure chacun ?",
+    format: "short", expected: ["90", "90°"], comparator: "number_equal",
+    hint: "180 ÷ 2.",
+    explanation: expl("Un angle plat mesure 180°. Partagé en deux angles égaux, chacun mesure 180 ÷ 2 = 90° (deux angles droits)."),
+    tags: ["angle_mesure", "defi"],
+  },
+  {
+    kind: "fixed", id: "angle_defi_topup_3", niveau: "6e", matiere: "maths",
+    notionId: "angle_mesure", microId: "angle_defi", difficulty: 4, theme: "neutral",
+    text: "Défi : deux angles côte à côte forment un angle plat. L’un mesure 110°. Combien mesure l’autre ?",
+    format: "short", expected: ["70", "70°"], comparator: "number_equal",
+    hint: "Les deux angles ont pour somme 180°.",
+    explanation: expl("Les deux angles forment un angle plat de 180°. L’autre angle vaut donc 180 - 110 = 70°."),
+    tags: ["angle_mesure", "defi"],
   },
 ];

@@ -19,6 +19,10 @@ function transformationCanvas(
   return { kind: "transformation", ...data };
 }
 
+function pe(def: string, meth: string, obs: string, ccl: string) {
+  return `Définition : ${def}\n\nMéthode : ${meth}\n\nObservation : ${obs}\n\nConclusion : ${ccl}`;
+}
+
 export const symetrieBank: TutorBankItemV4[] = [
   /* =========================
      SYM_RECONNAITRE
@@ -1372,5 +1376,119 @@ export const symetrieBank: TutorBankItemV4[] = [
         "Observation : il faut vérifier que les deux parties du margouillat se superposent exactement.\n\n" +
         "Conclusion : la droite est un axe seulement si les deux parties se superposent.",
     }),
+  },
+
+  /* ========== TOP-UP — SYM_FIGURE ========== */
+  {
+    kind: "fixed", id: "6e_sym_figure_topup_1", niveau: "6e", matiere: "maths",
+    notionId: "sym_axiale", microId: "sym_figure", difficulty: 2, theme: "neutral",
+    text: "Combien d’axes de symétrie possède un carré ?",
+    format: "short", expected: ["4", "quatre"], comparator: "contains_keyword",
+    hint: "Pense aux 2 médianes et aux 2 diagonales.",
+    explanation: pe("un axe de symétrie partage la figure en deux parties superposables.", "on cherche toutes les droites de pliage du carré.", "il y a les 2 médianes et les 2 diagonales.", "un carré possède 4 axes de symétrie."),
+    tags: ["sym_axiale", "figure", "axes"],
+  },
+  {
+    kind: "fixed", id: "6e_sym_figure_topup_2", niveau: "6e", matiere: "maths",
+    notionId: "sym_axiale", microId: "sym_figure", difficulty: 2, theme: "neutral",
+    text: "Combien d’axes de symétrie possède un rectangle qui n’est pas un carré ?",
+    format: "short", expected: ["2", "deux"], comparator: "contains_keyword",
+    hint: "Les diagonales ne sont pas des axes de symétrie.",
+    explanation: pe("un axe de symétrie plie la figure en deux moitiés superposables.", "on teste les droites de pliage du rectangle.", "seules les 2 médianes conviennent ; les diagonales non.", "un rectangle non carré possède 2 axes de symétrie."),
+    tags: ["sym_axiale", "figure", "axes"],
+  },
+  {
+    kind: "fixed", id: "6e_sym_figure_topup_3", niveau: "6e", matiere: "maths",
+    notionId: "sym_axiale", microId: "sym_figure", difficulty: 3, theme: "neutral",
+    text: "Combien d’axes de symétrie possède un triangle équilatéral ?",
+    format: "short", expected: ["3", "trois"], comparator: "contains_keyword",
+    hint: "Un axe par sommet.",
+    explanation: pe("un triangle équilatéral est très régulier.", "on cherche les droites de pliage.", "chacune passe par un sommet et le milieu du côté opposé : il y en a 3.", "un triangle équilatéral possède 3 axes de symétrie."),
+    tags: ["sym_axiale", "figure", "axes"],
+  },
+  {
+    kind: "fixed", id: "6e_sym_figure_topup_4", niveau: "6e", matiere: "maths",
+    notionId: "sym_axiale", microId: "sym_figure", difficulty: 3, theme: "neutral",
+    text: "Combien d’axes de symétrie possède un cercle ?",
+    format: "qcm", choices: ["une infinité", "un seul", "quatre", "aucun"], expected: ["une infinité"], comparator: "mcq_exact",
+    hint: "Toute droite passant par le centre convient.",
+    explanation: pe("un axe de symétrie plie la figure en deux parties superposables.", "on cherche les droites de pliage du cercle.", "toute droite passant par le centre partage le cercle en deux moitiés identiques.", "un cercle possède une infinité d’axes de symétrie."),
+    tags: ["sym_axiale", "figure", "axes", "qcm"],
+  },
+
+  /* ========== TOP-UP — SYM_PROPRIETE ========== */
+  {
+    kind: "fixed", id: "6e_sym_propriete_topup_1", niveau: "6e", matiere: "maths",
+    notionId: "sym_axiale", microId: "sym_propriete", difficulty: 2, theme: "neutral",
+    text: "Une symétrie axiale conserve-t-elle l’aire d’une figure ?",
+    format: "qcm", choices: ["oui", "non"], expected: ["oui"], comparator: "mcq_exact",
+    hint: "La symétrie ne déforme pas la figure.",
+    explanation: pe("une symétrie axiale ne déforme pas la figure.", "on compare la figure et son image.", "la figure et son image ont la même forme et la même taille.", "oui, une symétrie axiale conserve l’aire."),
+    tags: ["sym_axiale", "proprietes", "qcm"],
+  },
+  {
+    kind: "fixed", id: "6e_sym_propriete_topup_2", niveau: "6e", matiere: "maths",
+    notionId: "sym_axiale", microId: "sym_propriete", difficulty: 2, theme: "neutral",
+    text: "Un segment mesure 7 cm. Quelle est la longueur de son image par symétrie axiale ?",
+    format: "short", expected: ["7", "7 cm"], comparator: "number_equal",
+    hint: "La symétrie conserve les longueurs.",
+    explanation: pe("une symétrie axiale conserve les longueurs.", "on identifie le segment et son image.", "le segment mesure 7 cm, donc son image aussi.", "l’image mesure 7 cm."),
+    tags: ["sym_axiale", "proprietes", "longueur"],
+  },
+  {
+    kind: "fixed", id: "6e_sym_propriete_topup_3", niveau: "6e", matiere: "maths",
+    notionId: "sym_axiale", microId: "sym_propriete", difficulty: 2, theme: "neutral",
+    text: "Un angle mesure 40°. Quelle est la mesure de son image par symétrie axiale ?",
+    format: "short", expected: ["40", "40°"], comparator: "number_equal",
+    hint: "La symétrie conserve les angles.",
+    explanation: pe("une symétrie axiale conserve les angles.", "on identifie l’angle et son image.", "l’angle mesure 40°, donc son image aussi.", "l’image mesure 40°."),
+    tags: ["sym_axiale", "proprietes", "angle_mesure"],
+  },
+  {
+    kind: "fixed", id: "6e_sym_propriete_topup_4", niveau: "6e", matiere: "maths",
+    notionId: "sym_axiale", microId: "sym_propriete", difficulty: 3, theme: "neutral",
+    text: "Une symétrie axiale conserve-t-elle l’alignement de trois points ?",
+    format: "qcm", choices: ["oui", "non"], expected: ["oui"], comparator: "mcq_exact",
+    hint: "La symétrie transforme une droite en une droite.",
+    explanation: pe("une symétrie axiale transforme une droite en une droite.", "on observe trois points alignés et leurs images.", "les trois images sont encore alignées.", "oui, la symétrie axiale conserve l’alignement."),
+    tags: ["sym_axiale", "proprietes", "alignement", "qcm"],
+  },
+
+  /* ========== TOP-UP — SYM_DEFI ========== */
+  {
+    kind: "fixed", id: "6e_sym_defi_topup_1", niveau: "6e", matiere: "maths",
+    notionId: "sym_axiale", microId: "sym_defi", difficulty: 3, theme: "neutral",
+    text: "Défi : un carré a une aire de 16 cm². Quelle est l’aire de son image par symétrie axiale ?",
+    format: "short", expected: ["16"], comparator: "number_equal",
+    hint: "La symétrie conserve les aires.",
+    explanation: pe("une symétrie axiale conserve les aires.", "on utilise la propriété de conservation.", "l’aire de départ vaut 16 cm², donc l’image aussi.", "l’aire de l’image est 16 cm²."),
+    tags: ["sym_axiale", "defi", "aire"],
+  },
+  {
+    kind: "fixed", id: "6e_sym_defi_topup_2", niveau: "6e", matiere: "maths",
+    notionId: "sym_axiale", microId: "sym_defi", difficulty: 3, theme: "neutral",
+    text: "Défi : un point est situé exactement sur l’axe de symétrie. Quelle est son image ?",
+    format: "qcm", choices: ["lui-même", "un point plus loin", "le centre de la figure", "il disparaît"], expected: ["lui-même"], comparator: "mcq_exact",
+    hint: "Un point sur l’axe est déjà sur la ligne de pliage.",
+    explanation: pe("un point situé sur l’axe est à distance 0 de l’axe.", "on cherche son image par pliage.", "comme il est sur l’axe, il ne bouge pas.", "son image est lui-même."),
+    tags: ["sym_axiale", "defi", "qcm"],
+  },
+  {
+    kind: "fixed", id: "6e_sym_defi_topup_3", niveau: "6e", matiere: "maths",
+    notionId: "sym_axiale", microId: "sym_defi", difficulty: 3, theme: "neutral",
+    text: "Défi : une symétrie axiale conserve-t-elle le périmètre d’une figure ?",
+    format: "qcm", choices: ["oui", "non"], expected: ["oui"], comparator: "mcq_exact",
+    hint: "Le périmètre dépend des longueurs.",
+    explanation: pe("une symétrie axiale conserve les longueurs.", "le périmètre est une somme de longueurs.", "comme chaque longueur est conservée, leur somme aussi.", "oui, le périmètre est conservé."),
+    tags: ["sym_axiale", "defi", "perimetre", "qcm"],
+  },
+  {
+    kind: "fixed", id: "6e_sym_defi_topup_4", niveau: "6e", matiere: "maths",
+    notionId: "sym_axiale", microId: "sym_defi", difficulty: 4, theme: "neutral",
+    text: "Défi : un point A et son image A' par symétrie axiale sont à... de l’axe.",
+    format: "qcm", choices: ["la même distance", "des distances différentes", "distance nulle toujours", "une distance qui double"], expected: ["la même distance"], comparator: "mcq_exact",
+    hint: "L’axe est la médiatrice de [AA'].",
+    explanation: pe("dans une symétrie axiale, l’axe est la médiatrice du segment qui relie un point à son image.", "on compare les distances de A et A' à l’axe.", "elles sont égales, de part et d’autre de l’axe.", "A et A' sont à la même distance de l’axe."),
+    tags: ["sym_axiale", "defi", "distance", "qcm"],
   },
 ]
