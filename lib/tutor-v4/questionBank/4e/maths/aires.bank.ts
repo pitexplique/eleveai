@@ -958,4 +958,1108 @@ export const airesBank: TutorBankItemV4[] = [
       };
     },
   },
+
+  /* ===== COMPRENDRE (compléments) ===== */
+  {
+    kind: "fixed",
+    id: "4e_aire_comprendre_x1_formrect",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "aire_surface",
+    microId: "aire_comprendre",
+    difficulty: 1,
+    theme: "neutral",
+    text: "Quelle est la formule de l’aire d’un rectangle ?",
+    format: "qcm",
+    choices: ["$L \\times l$", "$2 \\times (L + l)$", "$L + l$", "$\\dfrac{L \\times l}{2}$"],
+    expected: ["$L \\times l$"],
+    comparator: "mcq_exact",
+    hint: "On multiplie les deux dimensions.",
+    explanation:
+      "Définition : l’aire d’un rectangle est longueur × largeur.\n\nMéthode : on multiplie $L$ par $l$.\n\nCalcul : $A = L \\times l$.\n\nConclusion : c’est $L \\times l$.",
+    tags: ["aire", "comprendre", "formule", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "4e_aire_comprendre_x2_formtri",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "aire_surface",
+    microId: "aire_comprendre",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Quelle est la formule de l’aire d’un triangle ?",
+    format: "qcm",
+    choices: ["$\\dfrac{\\text{base} \\times \\text{hauteur}}{2}$", "$\\text{base} \\times \\text{hauteur}$", "$\\text{base} + \\text{hauteur}$", "$2 \\times \\text{base}$"],
+    expected: ["$\\dfrac{\\text{base} \\times \\text{hauteur}}{2}$"],
+    comparator: "mcq_exact",
+    hint: "C’est la moitié d’un rectangle.",
+    explanation:
+      "Définition : un triangle est la moitié d’un rectangle de mêmes base et hauteur.\n\nMéthode : on calcule base × hauteur, puis on divise par $2$.\n\nCalcul : $A = \\dfrac{b \\times h}{2}$.\n\nConclusion : c’est $\\dfrac{b \\times h}{2}$.",
+    tags: ["aire", "comprendre", "formule", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "4e_aire_comprendre_x3_double",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "aire_surface",
+    microId: "aire_comprendre",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Si on double toutes les longueurs d’une figure, son aire est multipliée par…",
+    format: "qcm",
+    choices: ["$4$", "$2$", "$8$", "elle ne change pas"],
+    expected: ["$4$"],
+    comparator: "mcq_exact",
+    hint: "Une aire est en deux dimensions.",
+    explanation:
+      "Définition : l’aire dépend de deux dimensions.\n\nMéthode : doubler les longueurs multiplie l’aire par $2^2$.\n\nCalcul : $2^2 = 4$.\n\nConclusion : l’aire est multipliée par $4$.",
+    tags: ["aire", "comprendre", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "4e_aire_comprendre_x4_compte",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "aire_surface",
+    microId: "aire_comprendre",
+    difficulty: 1,
+    theme: "neutral",
+    hint: "Compte les petits carrés.",
+    tags: ["aire", "comprendre", "figure_libre", "template"],
+    generate: () => {
+      const h = randomInt(2, 4), w = randomInt(2, 5);
+      const cells = rectangleCells(h, w);
+      return {
+        text: "Chaque petit carré a une aire de $1$ unité². Quelle est l’aire de la figure ?",
+        format: "short",
+        expected: [String(cells.length)],
+        comparator: "number_equal",
+        explanation:
+          `Définition : l’aire est le nombre de carrés unité.\n\nMéthode : on compte les carrés.\n\nCalcul : il y en a $${cells.length}$.\n\nConclusion : l’aire est $${cells.length}$ unités².`,
+        canvas: figureLibreFromCells(h, w, cells, false),
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "4e_aire_comprendre_x5_unite2",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "aire_surface",
+    microId: "aire_comprendre",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Combien de $\\text{cm}^2$ y a-t-il dans $1\\ \\text{m}^2$ ?",
+    format: "short",
+    expected: ["10000"],
+    comparator: "number_equal",
+    hint: "$1$ m $= 100$ cm, donc $100 \\times 100$.",
+    explanation:
+      "Définition : $1$ m $= 100$ cm.\n\nMéthode : $1\\ \\text{m}^2 = 100 \\times 100\\ \\text{cm}^2$.\n\nCalcul : $100 \\times 100 = 10\\,000$.\n\nConclusion : il y a $10\\,000\\ \\text{cm}^2$.",
+    tags: ["aire", "comprendre", "conversion", "short"],
+  },
+  {
+    kind: "fixed",
+    id: "4e_aire_comprendre_x6_formpara",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "aire_surface",
+    microId: "aire_comprendre",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Quelle est la formule de l’aire d’un parallélogramme ?",
+    format: "qcm",
+    choices: ["$\\text{base} \\times \\text{hauteur}$", "$\\text{base} \\times \\text{côté}$", "$\\dfrac{\\text{base} \\times \\text{hauteur}}{2}$", "$4 \\times \\text{côté}$"],
+    expected: ["$\\text{base} \\times \\text{hauteur}$"],
+    comparator: "mcq_exact",
+    hint: "On utilise la hauteur, pas le côté incliné.",
+    explanation:
+      "Définition : l’aire d’un parallélogramme est base × hauteur.\n\nMéthode : on prend la hauteur perpendiculaire à la base.\n\nCalcul : $A = \\text{base} \\times \\text{hauteur}$.\n\nConclusion : c’est base × hauteur.",
+    tags: ["aire", "comprendre", "formule", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "4e_aire_comprendre_x7_vs",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "aire_surface",
+    microId: "aire_comprendre",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Une aire se mesure en…",
+    format: "qcm",
+    choices: ["unités carrées", "unités de longueur", "unités cubes", "degrés"],
+    expected: ["unités carrées"],
+    comparator: "mcq_exact",
+    hint: "C’est une surface.",
+    explanation:
+      "Définition : une aire mesure une surface.\n\nMéthode : on utilise une unité carrée.\n\nCalcul : par exemple $\\text{cm}^2$, $\\text{m}^2$.\n\nConclusion : on la mesure en unités carrées.",
+    tags: ["aire", "comprendre", "qcm"],
+  },
+
+  /* ===== RECTANGLE (compléments) ===== */
+  {
+    kind: "template",
+    id: "4e_aire_rectangle_x1",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "aire_surface",
+    microId: "aire_rectangle",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "$A = L \\times l$.",
+    tags: ["aire", "rectangle", "template"],
+    generate: () => {
+      const L = randomInt(5, 15), l = randomInt(2, 9);
+      return {
+        text: `Quelle est l’aire d’un rectangle de longueur $${L}$ cm et de largeur $${l}$ cm (en $\\text{cm}^2$) ?`,
+        format: "short",
+        expected: [String(L * l)],
+        comparator: "number_equal",
+        explanation:
+          `Définition : $A = L \\times l$.\n\nMéthode : on multiplie les dimensions.\n\nCalcul : $${L} \\times ${l} = ${L * l}$.\n\nConclusion : l’aire est $${L * l}\\ \\text{cm}^2$.`,
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "4e_aire_rectangle_x2_inverse",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "aire_surface",
+    microId: "aire_rectangle",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "$l = \\dfrac{A}{L}$.",
+    tags: ["aire", "rectangle", "inverse", "template"],
+    generate: () => {
+      const L = randomInt(4, 9), l = randomInt(3, 8);
+      const A = L * l;
+      return {
+        text: `Un rectangle a une aire de $${A}\\ \\text{cm}^2$ et une longueur de $${L}$ cm. Quelle est sa largeur (en cm) ?`,
+        format: "short",
+        expected: [String(l)],
+        comparator: "number_equal",
+        explanation:
+          `Définition : $A = L \\times l$, donc $l = \\dfrac{A}{L}$.\n\nMéthode : on divise l’aire par la longueur.\n\nCalcul : $\\dfrac{${A}}{${L}} = ${l}$.\n\nConclusion : la largeur est $${l}$ cm.`,
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "4e_aire_rectangle_x3_canvas",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "aire_surface",
+    microId: "aire_rectangle",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Lis les dimensions sur la figure.",
+    tags: ["aire", "rectangle", "quadrilatere", "canvas", "template"],
+    generate: () => {
+      const L = randomInt(4, 12), l = randomInt(2, 7);
+      return {
+        text: "Calcule l’aire du rectangle représenté (en $\\text{cm}^2$).",
+        format: "short",
+        expected: [String(L * l)],
+        comparator: "number_equal",
+        explanation:
+          `Définition : $A = L \\times l$.\n\nMéthode : on lit les dimensions et on multiplie.\n\nCalcul : $${L} \\times ${l} = ${L * l}$.\n\nConclusion : l’aire est $${L * l}\\ \\text{cm}^2$.`,
+        canvas: quadrilatereRectangleFigure(L, l),
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "4e_aire_rectangle_x4",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "aire_surface",
+    microId: "aire_rectangle",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Un rectangle mesure $9$ cm sur $4$ cm. Quelle est son aire (en $\\text{cm}^2$) ?",
+    format: "short",
+    expected: ["36"],
+    comparator: "number_equal",
+    hint: "$9 \\times 4$.",
+    explanation:
+      "Définition : $A = L \\times l$.\n\nMéthode : on multiplie.\n\nCalcul : $9 \\times 4 = 36$.\n\nConclusion : l’aire est $36\\ \\text{cm}^2$.",
+    tags: ["aire", "rectangle", "short"],
+  },
+  {
+    kind: "template",
+    id: "4e_aire_rectangle_x5_carrelage",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "aire_surface",
+    microId: "aire_rectangle",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "La surface à carreler est l’aire.",
+    tags: ["aire", "rectangle", "probleme", "template"],
+    generate: () => {
+      const L = randomInt(4, 8), l = randomInt(3, 6);
+      return {
+        text: `Une pièce rectangulaire mesure $${L}$ m sur $${l}$ m. Quelle est sa surface (en $\\text{m}^2$) ?`,
+        format: "short",
+        expected: [String(L * l)],
+        comparator: "number_equal",
+        explanation:
+          `Définition : la surface est l’aire du rectangle.\n\nMéthode : $A = L \\times l$.\n\nCalcul : $${L} \\times ${l} = ${L * l}$.\n\nConclusion : la surface est $${L * l}\\ \\text{m}^2$.`,
+      };
+    },
+  },
+
+  /* ===== CARRE (compléments) ===== */
+  {
+    kind: "template",
+    id: "4e_aire_carre_x1",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "aire_surface",
+    microId: "aire_carre",
+    difficulty: 1,
+    theme: "neutral",
+    hint: "$A = c \\times c = c^2$.",
+    tags: ["aire", "carre", "template"],
+    generate: () => {
+      const c = randomInt(2, 15);
+      return {
+        text: `Quelle est l’aire d’un carré de côté $${c}$ cm (en $\\text{cm}^2$) ?`,
+        format: "short",
+        expected: [String(c * c)],
+        comparator: "number_equal",
+        explanation:
+          `Définition : $A = c^2$.\n\nMéthode : on multiplie le côté par lui-même.\n\nCalcul : $${c} \\times ${c} = ${c * c}$.\n\nConclusion : l’aire est $${c * c}\\ \\text{cm}^2$.`,
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "4e_aire_carre_x2",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "aire_surface",
+    microId: "aire_carre",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Quelle est l’aire d’un carré de côté $8$ cm (en $\\text{cm}^2$) ?",
+    format: "short",
+    expected: ["64"],
+    comparator: "number_equal",
+    hint: "$8 \\times 8$.",
+    explanation:
+      "Définition : $A = c^2$.\n\nMéthode : on multiplie le côté par lui-même.\n\nCalcul : $8 \\times 8 = 64$.\n\nConclusion : l’aire est $64\\ \\text{cm}^2$.",
+    tags: ["aire", "carre", "short"],
+  },
+  {
+    kind: "fixed",
+    id: "4e_aire_carre_x3_formule",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "aire_surface",
+    microId: "aire_carre",
+    difficulty: 1,
+    theme: "neutral",
+    text: "Quelle est la formule de l’aire d’un carré de côté $c$ ?",
+    format: "qcm",
+    choices: ["$c^2$", "$4c$", "$2c$", "$c + c$"],
+    expected: ["$c^2$"],
+    comparator: "mcq_exact",
+    hint: "côté × côté.",
+    explanation:
+      "Définition : l’aire d’un carré est côté × côté.\n\nMéthode : on multiplie le côté par lui-même.\n\nCalcul : $A = c^2$ (et $4c$ est le périmètre).\n\nConclusion : c’est $c^2$.",
+    tags: ["aire", "carre", "formule", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "4e_aire_carre_x4_inverse",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "aire_surface",
+    microId: "aire_carre",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "côté $= \\sqrt{\\text{aire}}$.",
+    tags: ["aire", "carre", "inverse", "template"],
+    generate: () => {
+      const c = randomChoice([5, 6, 7, 8, 9, 10, 12]);
+      const A = c * c;
+      return {
+        text: `Un carré a une aire de $${A}\\ \\text{cm}^2$. Quelle est la longueur de son côté (en cm) ?`,
+        format: "short",
+        expected: [String(c)],
+        comparator: "number_equal",
+        explanation:
+          `Définition : $A = c^2$, donc côté $= \\sqrt{A}$.\n\nMéthode : on cherche le nombre dont le carré vaut $${A}$.\n\nCalcul : $\\sqrt{${A}} = ${c}$.\n\nConclusion : le côté mesure $${c}$ cm.`,
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "4e_aire_carre_x5_inverse",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "aire_surface",
+    microId: "aire_carre",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Un carré a une aire de $81\\ \\text{cm}^2$. Quel est son côté (en cm) ?",
+    format: "short",
+    expected: ["9"],
+    comparator: "number_equal",
+    hint: "$\\sqrt{81}$.",
+    explanation:
+      "Définition : côté $= \\sqrt{\\text{aire}}$.\n\nMéthode : on cherche le nombre dont le carré vaut $81$.\n\nCalcul : $\\sqrt{81} = 9$.\n\nConclusion : le côté mesure $9$ cm.",
+    tags: ["aire", "carre", "inverse", "short"],
+  },
+  {
+    kind: "template",
+    id: "4e_aire_carre_x6_probleme",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "aire_surface",
+    microId: "aire_carre",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "La surface d’un carré $= c^2$.",
+    tags: ["aire", "carre", "probleme", "template"],
+    generate: () => {
+      const c = randomInt(3, 10);
+      return {
+        text: `Une nappe carrée a un côté de $${c}$ m. Quelle est sa surface (en $\\text{m}^2$) ?`,
+        format: "short",
+        expected: [String(c * c)],
+        comparator: "number_equal",
+        explanation:
+          `Définition : surface d’un carré $= c^2$.\n\nMéthode : on calcule $c \\times c$.\n\nCalcul : $${c} \\times ${c} = ${c * c}$.\n\nConclusion : la surface est $${c * c}\\ \\text{m}^2$.`,
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "4e_aire_carre_x7_distinction",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "aire_surface",
+    microId: "aire_carre",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Un carré a un côté de $5$ cm. Quelle phrase est correcte ?",
+    format: "qcm",
+    choices: [
+      "son aire est $25\\ \\text{cm}^2$ et son périmètre $20$ cm",
+      "son aire est $20\\ \\text{cm}^2$ et son périmètre $25$ cm",
+      "son aire est $10\\ \\text{cm}^2$",
+      "son périmètre est $25$ cm",
+    ],
+    expected: ["son aire est $25\\ \\text{cm}^2$ et son périmètre $20$ cm"],
+    comparator: "mcq_exact",
+    hint: "Aire $= c^2$, périmètre $= 4c$.",
+    explanation:
+      "Définition : aire $= c^2$, périmètre $= 4c$.\n\nMéthode : on calcule les deux.\n\nCalcul : aire $= 5^2 = 25$ ; périmètre $= 4 \\times 5 = 20$.\n\nConclusion : aire $25\\ \\text{cm}^2$, périmètre $20$ cm.",
+    tags: ["aire", "carre", "aire_perimetre", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "4e_aire_carre_x8",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "aire_surface",
+    microId: "aire_carre",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "$A = c^2$.",
+    tags: ["aire", "carre", "template"],
+    generate: () => {
+      const c = randomInt(4, 13);
+      return {
+        text: `Calcule l’aire d’un carré de côté $${c}$ cm (en $\\text{cm}^2$).`,
+        format: "short",
+        expected: [String(c * c)],
+        comparator: "number_equal",
+        explanation:
+          `Définition : $A = c^2$.\n\nMéthode : côté × côté.\n\nCalcul : $${c}^2 = ${c * c}$.\n\nConclusion : l’aire est $${c * c}\\ \\text{cm}^2$.`,
+      };
+    },
+  },
+
+  /* ===== TRIANGLE (compléments) ===== */
+  {
+    kind: "template",
+    id: "4e_aire_triangle_x1",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "aire_surface",
+    microId: "aire_triangle",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "$A = \\dfrac{\\text{base} \\times \\text{hauteur}}{2}$.",
+    tags: ["aire", "triangle", "template"],
+    generate: () => {
+      const base = randomChoice([6, 8, 10, 12, 14]);
+      const h = randomChoice([3, 4, 5, 6]);
+      const A = (base * h) / 2;
+      return {
+        text: `Quelle est l’aire d’un triangle de base $${base}$ cm et de hauteur $${h}$ cm (en $\\text{cm}^2$) ?`,
+        format: "short",
+        expected: [String(A)],
+        comparator: "number_equal",
+        explanation:
+          `Définition : $A = \\dfrac{b \\times h}{2}$.\n\nMéthode : base × hauteur, puis ÷ $2$.\n\nCalcul : $\\dfrac{${base} \\times ${h}}{2} = ${A}$.\n\nConclusion : l’aire est $${A}\\ \\text{cm}^2$.`,
+        canvas: triangleFigure(base, randomInt(5, 12), randomInt(5, 12)),
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "4e_aire_triangle_x2",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "aire_surface",
+    microId: "aire_triangle",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Un triangle a une base de $12$ cm et une hauteur de $5$ cm. Quelle est son aire (en $\\text{cm}^2$) ?",
+    format: "short",
+    expected: ["30"],
+    comparator: "number_equal",
+    hint: "$\\dfrac{12 \\times 5}{2}$.",
+    explanation:
+      "Définition : $A = \\dfrac{b \\times h}{2}$.\n\nMéthode : base × hauteur, puis ÷ $2$.\n\nCalcul : $\\dfrac{12 \\times 5}{2} = \\dfrac{60}{2} = 30$.\n\nConclusion : l’aire est $30\\ \\text{cm}^2$.",
+    tags: ["aire", "triangle", "short"],
+  },
+  {
+    kind: "template",
+    id: "4e_aire_triangle_x3_rect",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "aire_surface",
+    microId: "aire_triangle",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Dans un triangle rectangle, les deux côtés de l’angle droit sont la base et la hauteur.",
+    tags: ["aire", "triangle_rectangle", "canvas", "template"],
+    generate: () => {
+      const base = randomChoice([6, 8, 10]);
+      const h = randomChoice([4, 6, 8]);
+      const hyp = Math.round(Math.sqrt(base * base + h * h) * 10) / 10;
+      const A = (base * h) / 2;
+      return {
+        text: "Calcule l’aire du triangle rectangle représenté (en $\\text{cm}^2$).",
+        format: "short",
+        expected: [String(A)],
+        comparator: "number_equal",
+        explanation:
+          `Définition : pour un triangle rectangle, base et hauteur sont les deux côtés de l’angle droit.\n\nMéthode : $A = \\dfrac{b \\times h}{2}$.\n\nCalcul : $\\dfrac{${base} \\times ${h}}{2} = ${A}$.\n\nConclusion : l’aire est $${A}\\ \\text{cm}^2$.`,
+        canvas: triangleRectangleFigure(base, h, hyp),
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "4e_aire_triangle_x4_piege",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "aire_surface",
+    microId: "aire_triangle",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Un élève calcule l’aire d’un triangle (base $10$, hauteur $6$) et trouve $60\\ \\text{cm}^2$. A-t-il raison ?",
+    format: "qcm",
+    choices: ["non", "oui"],
+    expected: ["non"],
+    comparator: "mcq_exact",
+    hint: "Il a oublié de diviser par $2$.",
+    explanation:
+      "Définition : $A = \\dfrac{b \\times h}{2}$.\n\nMéthode : on n’oublie pas le ÷ $2$.\n\nCalcul : $\\dfrac{10 \\times 6}{2} = 30$, pas $60$.\n\nConclusion : non, l’aire est $30\\ \\text{cm}^2$.",
+    tags: ["aire", "triangle", "erreur", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "4e_aire_triangle_x5_hauteur_inverse",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "aire_surface",
+    microId: "aire_triangle",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "hauteur $= \\dfrac{2 \\times A}{\\text{base}}$.",
+    tags: ["aire", "triangle", "inverse", "template"],
+    generate: () => {
+      const base = randomChoice([4, 6, 8, 10]);
+      const h = randomChoice([3, 5, 6]);
+      const A = (base * h) / 2;
+      return {
+        text: `Un triangle a une aire de $${A}\\ \\text{cm}^2$ et une base de $${base}$ cm. Quelle est sa hauteur (en cm) ?`,
+        format: "short",
+        expected: [String(h)],
+        comparator: "number_equal",
+        explanation:
+          `Définition : $A = \\dfrac{b \\times h}{2}$, donc $h = \\dfrac{2A}{b}$.\n\nMéthode : on isole la hauteur.\n\nCalcul : $\\dfrac{2 \\times ${A}}{${base}} = \\dfrac{${2 * A}}{${base}} = ${h}$.\n\nConclusion : la hauteur est $${h}$ cm.`,
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "4e_aire_triangle_x6_formule",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "aire_surface",
+    microId: "aire_triangle",
+    difficulty: 1,
+    theme: "neutral",
+    text: "Pour calculer l’aire d’un triangle, après base × hauteur, on…",
+    format: "qcm",
+    choices: ["divise par $2$", "multiplie par $2$", "ajoute la base", "ne fait rien d’autre"],
+    expected: ["divise par $2$"],
+    comparator: "mcq_exact",
+    hint: "Le triangle est la moitié d’un rectangle.",
+    explanation:
+      "Définition : un triangle est la moitié d’un rectangle.\n\nMéthode : on calcule base × hauteur, puis on divise par $2$.\n\nCalcul : $A = \\dfrac{b \\times h}{2}$.\n\nConclusion : on divise par $2$.",
+    tags: ["aire", "triangle", "qcm"],
+  },
+
+  /* ===== PARALLELOGRAMME (compléments) ===== */
+  {
+    kind: "template",
+    id: "4e_aire_parallelogramme_x1",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "aire_surface",
+    microId: "aire_parallelogramme",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "$A = \\text{base} \\times \\text{hauteur}$.",
+    tags: ["aire", "parallelogramme", "template"],
+    generate: () => {
+      const base = randomInt(5, 14), h = randomInt(3, 8);
+      return {
+        text: `Quelle est l’aire d’un parallélogramme de base $${base}$ cm et de hauteur $${h}$ cm (en $\\text{cm}^2$) ?`,
+        format: "short",
+        expected: [String(base * h)],
+        comparator: "number_equal",
+        explanation:
+          `Définition : $A = \\text{base} \\times \\text{hauteur}$.\n\nMéthode : on multiplie base et hauteur.\n\nCalcul : $${base} \\times ${h} = ${base * h}$.\n\nConclusion : l’aire est $${base * h}\\ \\text{cm}^2$.`,
+        canvas: quadrilatereParallelogramFigure(base, randomInt(4, 10), h),
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "4e_aire_parallelogramme_x2",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "aire_surface",
+    microId: "aire_parallelogramme",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Un parallélogramme a une base de $9$ cm et une hauteur de $6$ cm. Quelle est son aire (en $\\text{cm}^2$) ?",
+    format: "short",
+    expected: ["54"],
+    comparator: "number_equal",
+    hint: "$9 \\times 6$.",
+    explanation:
+      "Définition : $A = \\text{base} \\times \\text{hauteur}$.\n\nMéthode : on multiplie.\n\nCalcul : $9 \\times 6 = 54$.\n\nConclusion : l’aire est $54\\ \\text{cm}^2$.",
+    tags: ["aire", "parallelogramme", "short"],
+  },
+  {
+    kind: "fixed",
+    id: "4e_aire_parallelogramme_x3_piege",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "aire_surface",
+    microId: "aire_parallelogramme",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Pour l’aire d’un parallélogramme, on utilise…",
+    format: "qcm",
+    choices: ["la base et la hauteur", "la base et le côté incliné", "les deux côtés", "les diagonales"],
+    expected: ["la base et la hauteur"],
+    comparator: "mcq_exact",
+    hint: "La hauteur est perpendiculaire à la base.",
+    explanation:
+      "Définition : l’aire utilise la hauteur perpendiculaire à la base.\n\nMéthode : on évite le côté incliné.\n\nCalcul : $A = \\text{base} \\times \\text{hauteur}$.\n\nConclusion : on utilise la base et la hauteur.",
+    tags: ["aire", "parallelogramme", "erreur", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "4e_aire_parallelogramme_x4_inverse",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "aire_surface",
+    microId: "aire_parallelogramme",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "hauteur $= \\dfrac{A}{\\text{base}}$.",
+    tags: ["aire", "parallelogramme", "inverse", "template"],
+    generate: () => {
+      const base = randomInt(4, 10), h = randomInt(3, 7);
+      const A = base * h;
+      return {
+        text: `Un parallélogramme a une aire de $${A}\\ \\text{cm}^2$ et une base de $${base}$ cm. Quelle est sa hauteur (en cm) ?`,
+        format: "short",
+        expected: [String(h)],
+        comparator: "number_equal",
+        explanation:
+          `Définition : $A = \\text{base} \\times \\text{hauteur}$, donc hauteur $= \\dfrac{A}{\\text{base}}$.\n\nMéthode : on divise l’aire par la base.\n\nCalcul : $\\dfrac{${A}}{${base}} = ${h}$.\n\nConclusion : la hauteur est $${h}$ cm.`,
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "4e_aire_parallelogramme_x5_formule",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "aire_surface",
+    microId: "aire_parallelogramme",
+    difficulty: 1,
+    theme: "neutral",
+    text: "Quelle est la formule de l’aire d’un parallélogramme ?",
+    format: "qcm",
+    choices: ["$\\text{base} \\times \\text{hauteur}$", "$\\dfrac{\\text{base} \\times \\text{hauteur}}{2}$", "$2 \\times (\\text{base} + \\text{hauteur})$", "$\\text{côté}^2$"],
+    expected: ["$\\text{base} \\times \\text{hauteur}$"],
+    comparator: "mcq_exact",
+    hint: "Comme un rectangle « penché ».",
+    explanation:
+      "Définition : un parallélogramme se ramène à un rectangle de mêmes base et hauteur.\n\nMéthode : on multiplie base et hauteur.\n\nCalcul : $A = \\text{base} \\times \\text{hauteur}$.\n\nConclusion : c’est base × hauteur.",
+    tags: ["aire", "parallelogramme", "formule", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "4e_aire_parallelogramme_x6_probleme",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "aire_surface",
+    microId: "aire_parallelogramme",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Aire $= \\text{base} \\times \\text{hauteur}$.",
+    tags: ["aire", "parallelogramme", "probleme", "template"],
+    generate: () => {
+      const base = randomInt(6, 12), h = randomInt(4, 9);
+      return {
+        text: `Un terrain en forme de parallélogramme a une base de $${base}$ m et une hauteur de $${h}$ m. Quelle est sa surface (en $\\text{m}^2$) ?`,
+        format: "short",
+        expected: [String(base * h)],
+        comparator: "number_equal",
+        explanation:
+          `Définition : aire $= \\text{base} \\times \\text{hauteur}$.\n\nMéthode : on multiplie.\n\nCalcul : $${base} \\times ${h} = ${base * h}$.\n\nConclusion : la surface est $${base * h}\\ \\text{m}^2$.`,
+      };
+    },
+  },
+
+  /* ===== FIGURE (compléments) ===== */
+  {
+    kind: "template",
+    id: "4e_aire_figure_x1",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "aire_surface",
+    microId: "aire_figure",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Compte les carrés remplis.",
+    tags: ["aire", "figure", "figure_libre", "template"],
+    generate: () => {
+      const h = randomInt(2, 5), w = randomInt(2, 5);
+      const cells = rectangleCells(h, w);
+      return {
+        text: "Chaque petit carré a une aire de $1$ unité². Quelle est l’aire de la figure ?",
+        format: "short",
+        expected: [String(cells.length)],
+        comparator: "number_equal",
+        explanation:
+          `Définition : l’aire est le nombre de carrés unité.\n\nMéthode : on compte les carrés.\n\nCalcul : il y en a $${cells.length}$.\n\nConclusion : l’aire est $${cells.length}$ unités².`,
+        canvas: figureLibreFromCells(h, w, cells, false),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "4e_aire_figure_x2_L",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "aire_surface",
+    microId: "aire_figure",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Compte tous les carrés de la figure en L.",
+    tags: ["aire", "figure_composee", "figure_libre", "template"],
+    generate: () => {
+      const a = randomInt(3, 5), b = randomInt(3, 5);
+      const cells = lShapeCells(a, b, 1, 1);
+      return {
+        text: "Chaque petit carré a une aire de $1$ unité². Quelle est l’aire de la figure en L ?",
+        format: "short",
+        expected: [String(cells.length)],
+        comparator: "number_equal",
+        explanation:
+          `Définition : on compte tous les carrés unité.\n\nMéthode : on additionne les carrés remplis.\n\nCalcul : il y en a $${cells.length}$.\n\nConclusion : l’aire est $${cells.length}$ unités².`,
+        canvas: figureLibreFromCells(a, b, cells, false),
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "4e_aire_figure_x3_compose",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "aire_surface",
+    microId: "aire_figure",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Une figure est formée d’un rectangle de $6 \\times 4$ cm et d’un triangle (base $6$ cm, hauteur $3$ cm) posé dessus. Quelle est l’aire totale (en $\\text{cm}^2$) ?",
+    format: "short",
+    expected: ["33"],
+    comparator: "number_equal",
+    hint: "Rectangle $+$ triangle.",
+    explanation:
+      "Définition : l’aire d’une figure composée est la somme des aires.\n\nMéthode : rectangle $6 \\times 4 = 24$ ; triangle $\\dfrac{6 \\times 3}{2} = 9$.\n\nCalcul : $24 + 9 = 33$.\n\nConclusion : l’aire totale est $33\\ \\text{cm}^2$.",
+    tags: ["aire", "figure_composee", "short"],
+  },
+  {
+    kind: "fixed",
+    id: "4e_aire_figure_x4_method",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "aire_surface",
+    microId: "aire_figure",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Pour calculer l’aire d’une figure composée, on…",
+    format: "qcm",
+    choices: [
+      "la découpe en figures simples et on additionne les aires",
+      "additionne les côtés",
+      "compte les sommets",
+      "multiplie les périmètres",
+    ],
+    expected: ["la découpe en figures simples et on additionne les aires"],
+    comparator: "mcq_exact",
+    hint: "On se ramène à des figures connues.",
+    explanation:
+      "Définition : une figure composée se ramène à des figures simples.\n\nMéthode : on découpe, on calcule chaque aire, puis on additionne (ou soustrait).\n\nCalcul : on combine les aires.\n\nConclusion : on découpe et on additionne les aires.",
+    tags: ["aire", "figure", "methode", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "4e_aire_figure_x5_difference",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "aire_surface",
+    microId: "aire_figure",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Grand rectangle moins le trou.",
+    tags: ["aire", "figure_composee", "template"],
+    generate: () => {
+      const L = randomInt(8, 12), l = randomInt(5, 7), c = randomInt(2, 3);
+      const A = L * l - c * c;
+      return {
+        text: `Dans un rectangle de $${L} \\times ${l}$ cm, on découpe un carré de côté $${c}$ cm. Quelle est l’aire restante (en $\\text{cm}^2$) ?`,
+        format: "short",
+        expected: [String(A)],
+        comparator: "number_equal",
+        explanation:
+          `Définition : on soustrait l’aire enlevée à l’aire totale.\n\nMéthode : $A = L \\times l - c^2$.\n\nCalcul : $${L * l} - ${c * c} = ${A}$.\n\nConclusion : l’aire restante est $${A}\\ \\text{cm}^2$.`,
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "4e_aire_figure_x6",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "aire_surface",
+    microId: "aire_figure",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Somme de deux rectangles.",
+    tags: ["aire", "figure_composee", "template"],
+    generate: () => {
+      const a = randomInt(3, 6), b = randomInt(2, 4), c = randomInt(2, 5), d = randomInt(2, 4);
+      const A = a * b + c * d;
+      return {
+        text: `Une figure se découpe en deux rectangles : l’un de $${a} \\times ${b}$ cm, l’autre de $${c} \\times ${d}$ cm. Quelle est l’aire totale (en $\\text{cm}^2$) ?`,
+        format: "short",
+        expected: [String(A)],
+        comparator: "number_equal",
+        explanation:
+          `Définition : l’aire totale est la somme des aires.\n\nMéthode : on additionne les deux aires.\n\nCalcul : $${a} \\times ${b} + ${c} \\times ${d} = ${a * b} + ${c * d} = ${A}$.\n\nConclusion : l’aire totale est $${A}\\ \\text{cm}^2$.`,
+      };
+    },
+  },
+
+  /* ===== PROBLEME (compléments) ===== */
+  {
+    kind: "template",
+    id: "4e_aire_probleme_x1_peinture",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "aire_surface",
+    microId: "aire_probleme",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Calcule l’aire, puis multiplie par la quantité par m².",
+    tags: ["aire", "probleme", "template"],
+    generate: () => {
+      const L = randomInt(4, 8), l = randomInt(3, 6), parM2 = randomInt(2, 4);
+      const A = L * l;
+      return {
+        text: `Un mur rectangulaire mesure $${L}$ m sur $${l}$ m. Il faut $${parM2}$ pots de peinture par $\\text{m}^2$. Combien de pots faut-il ?`,
+        format: "short",
+        expected: [String(A * parM2)],
+        comparator: "number_equal",
+        explanation:
+          `Définition : on calcule l’aire, puis on multiplie par les pots par $\\text{m}^2$.\n\nMéthode : aire $= ${L} \\times ${l} = ${A}\\ \\text{m}^2$, puis $\\times ${parM2}$.\n\nCalcul : $${A} \\times ${parM2} = ${A * parM2}$.\n\nConclusion : il faut $${A * parM2}$ pots.`,
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "4e_aire_probleme_x2_terrasse",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "aire_surface",
+    microId: "aire_probleme",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "La surface est l’aire du rectangle.",
+    tags: ["aire", "probleme", "template"],
+    generate: () => {
+      const L = randomInt(4, 10), l = randomInt(3, 7);
+      return {
+        text: `Une terrasse rectangulaire mesure $${L}$ m sur $${l}$ m. Quelle est sa surface (en $\\text{m}^2$) ?`,
+        format: "short",
+        expected: [String(L * l)],
+        comparator: "number_equal",
+        explanation:
+          `Définition : la surface est l’aire.\n\nMéthode : $A = L \\times l$.\n\nCalcul : $${L} \\times ${l} = ${L * l}$.\n\nConclusion : la surface est $${L * l}\\ \\text{m}^2$.`,
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "4e_aire_probleme_x3_carrelage",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "aire_surface",
+    microId: "aire_probleme",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Nombre de carreaux = aire de la pièce ÷ aire d’un carreau.",
+    tags: ["aire", "probleme", "template"],
+    generate: () => {
+      const cote = randomChoice([2, 3, 4]); // pièce côté en m
+      const carreauCote = 1; // 1 m carreau pour rester entier
+      const nb = (cote * cote) / (carreauCote * carreauCote);
+      return {
+        text: `Une pièce carrée de côté $${cote}$ m est carrelée avec des dalles carrées de $1$ m de côté. Combien de dalles faut-il ?`,
+        format: "short",
+        expected: [String(nb)],
+        comparator: "number_equal",
+        explanation:
+          `Définition : nombre de dalles = aire de la pièce ÷ aire d’une dalle.\n\nMéthode : aire pièce $= ${cote}^2 = ${cote * cote}\\ \\text{m}^2$, aire dalle $= 1\\ \\text{m}^2$.\n\nCalcul : $\\dfrac{${cote * cote}}{1} = ${nb}$.\n\nConclusion : il faut $${nb}$ dalles.`,
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "4e_aire_probleme_x4_qcm",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "aire_surface",
+    microId: "aire_probleme",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Pour savoir combien de gazon acheter pour couvrir un terrain, on calcule…",
+    format: "qcm",
+    choices: ["l’aire du terrain", "le périmètre du terrain", "la diagonale", "le volume"],
+    expected: ["l’aire du terrain"],
+    comparator: "mcq_exact",
+    hint: "Le gazon couvre une surface.",
+    explanation:
+      "Définition : le gazon couvre une surface.\n\nMéthode : on calcule l’aire.\n\nCalcul : c’est la surface à couvrir.\n\nConclusion : on calcule l’aire.",
+    tags: ["aire", "probleme", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "4e_aire_probleme_x5_cout",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "aire_surface",
+    microId: "aire_probleme",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Aire × prix au m².",
+    tags: ["aire", "probleme", "template"],
+    generate: () => {
+      const L = randomInt(3, 7), l = randomInt(2, 5), prix = randomInt(5, 12);
+      const A = L * l;
+      return {
+        text: `Une moquette coûte $${prix}$ € le $\\text{m}^2$. Quel est le prix pour une pièce de $${L}$ m sur $${l}$ m (en €) ?`,
+        format: "short",
+        expected: [String(A * prix)],
+        comparator: "number_equal",
+        explanation:
+          `Définition : le coût = aire × prix au $\\text{m}^2$.\n\nMéthode : aire $= ${L} \\times ${l} = ${A}$, puis $\\times ${prix}$.\n\nCalcul : $${A} \\times ${prix} = ${A * prix}$.\n\nConclusion : le prix est $${A * prix}$ €.`,
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "4e_aire_probleme_x6_triangle",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "aire_surface",
+    microId: "aire_probleme",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Une voile triangulaire a une base de $4$ m et une hauteur de $5$ m. Quelle est sa surface (en $\\text{m}^2$) ?",
+    format: "short",
+    expected: ["10"],
+    comparator: "number_equal",
+    hint: "$\\dfrac{4 \\times 5}{2}$.",
+    explanation:
+      "Définition : $A = \\dfrac{b \\times h}{2}$.\n\nMéthode : base × hauteur ÷ $2$.\n\nCalcul : $\\dfrac{4 \\times 5}{2} = 10$.\n\nConclusion : la surface est $10\\ \\text{m}^2$.",
+    tags: ["aire", "probleme", "triangle", "short"],
+  },
+
+  /* ===== DEFI (compléments) ===== */
+  {
+    kind: "fixed",
+    id: "4e_aire_defi_x1",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "aire_surface",
+    microId: "aire_defi",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Deux rectangles ont la même aire de $24\\ \\text{cm}^2$. Ont-ils forcément le même périmètre ?",
+    format: "qcm",
+    choices: ["non", "oui"],
+    expected: ["non"],
+    comparator: "mcq_exact",
+    hint: "$1 \\times 24$ et $4 \\times 6$ ont la même aire.",
+    explanation:
+      "Définition : aire et périmètre sont indépendants.\n\nMéthode : on cherche un contre-exemple à aire $24$.\n\nCalcul : $1 \\times 24$ (périmètre $50$) et $4 \\times 6$ (périmètre $20$) ont la même aire.\n\nConclusion : non, pas forcément le même périmètre.",
+    tags: ["aire", "defi", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "4e_aire_defi_x2_agrandissement",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "aire_surface",
+    microId: "aire_defi",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Aire multipliée par $k^2$.",
+    tags: ["aire", "defi", "agrandissement", "template"],
+    generate: () => {
+      const A = randomChoice([5, 8, 10, 12]);
+      const k = randomChoice([2, 3]);
+      return {
+        text: `Une figure a une aire de $${A}\\ \\text{cm}^2$. On multiplie toutes ses longueurs par $${k}$. Quelle est la nouvelle aire (en $\\text{cm}^2$) ?`,
+        format: "short",
+        expected: [String(A * k * k)],
+        comparator: "number_equal",
+        explanation:
+          `Définition : un agrandissement de rapport $${k}$ multiplie l’aire par $${k}^2$.\n\nMéthode : on multiplie l’aire par $${k * k}$.\n\nCalcul : $${A} \\times ${k * k} = ${A * k * k}$.\n\nConclusion : la nouvelle aire est $${A * k * k}\\ \\text{cm}^2$.`,
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "4e_aire_defi_x3_disque",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "aire_surface",
+    microId: "aire_defi",
+    difficulty: 5,
+    theme: "neutral",
+    text: "L’aire d’un disque de rayon $r$ est…",
+    format: "qcm",
+    choices: ["$\\pi r^2$", "$2\\pi r$", "$\\pi r$", "$\\pi d$"],
+    expected: ["$\\pi r^2$"],
+    comparator: "mcq_exact",
+    hint: "$2\\pi r$ est le périmètre.",
+    explanation:
+      "Définition : l’aire d’un disque est $\\pi r^2$.\n\nMéthode : on distingue aire ($\\pi r^2$) et périmètre ($2\\pi r$).\n\nCalcul : aire $= \\pi r^2$.\n\nConclusion : c’est $\\pi r^2$.",
+    tags: ["aire", "defi", "disque", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "4e_aire_defi_x4_compare",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "aire_surface",
+    microId: "aire_defi",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Calcule les deux aires.",
+    tags: ["aire", "defi", "comparaison", "template"],
+    generate: () => {
+      const a = randomInt(3, 6), b = randomInt(4, 7);
+      const rectA = a * b;
+      const c = randomChoice([4, 5, 6]);
+      const carreA = c * c;
+      const correct = rectA > carreA ? "le rectangle" : rectA < carreA ? "le carré" : "ils ont la même aire";
+      return {
+        text: `On compare un rectangle de $${a} \\times ${b}$ cm et un carré de côté $${c}$ cm. Quelle figure a la plus grande aire ?`,
+        format: "qcm",
+        choices: ["le rectangle", "le carré", "ils ont la même aire"],
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation:
+          `Définition : on compare les aires.\n\nMéthode : rectangle $= ${a} \\times ${b} = ${rectA}$ ; carré $= ${c}^2 = ${carreA}$.\n\nCalcul : on compare $${rectA}$ et $${carreA}$.\n\nConclusion : ${correct === "ils ont la même aire" ? "ils ont la même aire." : `c’est ${correct}.`}`,
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "4e_aire_defi_x5_brevet",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "aire_surface",
+    microId: "aire_defi",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Un carré et un rectangle ont la même aire de $36\\ \\text{cm}^2$. Le carré a un côté de combien de cm ?",
+    format: "short",
+    expected: ["6"],
+    comparator: "number_equal",
+    hint: "côté $= \\sqrt{36}$.",
+    explanation:
+      "Définition : aire d’un carré $= c^2$.\n\nMéthode : côté $= \\sqrt{\\text{aire}}$.\n\nCalcul : $\\sqrt{36} = 6$.\n\nConclusion : le côté du carré est $6$ cm.",
+    tags: ["aire", "defi", "brevet", "short"],
+  },
+  {
+    kind: "template",
+    id: "4e_aire_defi_x6_param",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "aire_surface",
+    microId: "aire_defi",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Aire d’un rectangle de dimensions $x$ et $x + k$.",
+    tags: ["aire", "defi", "litteral", "template"],
+    generate: () => {
+      const k = randomInt(2, 4), x = randomInt(3, 7);
+      const A = x * (x + k);
+      return {
+        text: `Un rectangle a pour largeur $x$ et pour longueur $x + ${k}$. Pour $x = ${x}$ cm, quelle est son aire (en $\\text{cm}^2$) ?`,
+        format: "short",
+        expected: [String(A)],
+        comparator: "number_equal",
+        explanation:
+          `Définition : $A = x \\times (x + ${k})$.\n\nMéthode : on remplace $x$ par $${x}$.\n\nCalcul : $${x} \\times ${x + k} = ${A}$.\n\nConclusion : l’aire est $${A}\\ \\text{cm}^2$.`,
+      };
+    },
+  },
 ];
