@@ -1316,76 +1316,67 @@ function handleInputKeyDown(
           </section>
 
           <header className="overflow-hidden rounded-[24px] border border-slate-200 bg-white shadow-lg sm:rounded-[28px]">
-            <div className="bg-gradient-to-r from-indigo-600 via-sky-600 to-cyan-500 px-4 py-5 text-white sm:px-6">
-              <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+            <div className="bg-gradient-to-r from-indigo-600 via-sky-600 to-cyan-500 px-4 py-4 text-white sm:px-6">
+              <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
                 <div className="space-y-2">
-                  <div className="inline-flex rounded-full bg-white/20 px-3 py-1 text-xs font-bold tracking-wide">
-                    MODE MISSION
+                  <div className="flex flex-wrap items-center gap-2">
+                    <div className="inline-flex rounded-full bg-white/20 px-3 py-1 text-[11px] font-bold tracking-wide">
+                      MODE MISSION
+                    </div>
+                    <h1 className="text-xl font-black tracking-tight sm:text-2xl">
+                      Tutor {matiere === "francais" ? "Français" : "Maths"} V4
+                    </h1>
                   </div>
 
-                  <h1 className="text-2xl font-black tracking-tight sm:text-3xl">
-                    Tutor {matiere === "francais" ? "Français" : "Maths"} V4
-                  </h1>
-
-                  <p className="text-sm text-white/90">
-                    Choisis une notion, puis démarre une mission.
-                  </p>
+                  <div className="flex flex-wrap items-center gap-2">
+                    <GamePill>
+                      🎮 {mode === "evaluation" ? "Évaluation" : "Coaching"}
+                    </GamePill>
+                    <GamePill>⭐ {stars(recommendedStar)}</GamePill>
+                    <GamePill>🔥 Série {visibleProgress.streak}</GamePill>
+                  </div>
                 </div>
 
-                <div className="flex flex-wrap items-center gap-2 sm:gap-3">
-                  <GamePill>
-                    🎮 {mode === "evaluation" ? "Évaluation" : "Coaching"}
-                  </GamePill>
-                  <GamePill>⭐ {stars(recommendedStar)}</GamePill>
-                  <GamePill>🔥 Série {visibleProgress.streak}</GamePill>
+                {/* Score/Temps vivent désormais uniquement dans le Tableau de
+                    bord à droite : ici on ne garde que les actions. */}
+                <div className="hidden flex-col items-stretch gap-2 md:flex md:w-56">
+                  <button
+                    onClick={() => void startSession()}
+                    disabled={busy || wrongAnswerPanelOpen || !notion}
+                    className="rounded-2xl bg-white px-6 py-3 text-sm font-black text-slate-900 shadow hover:bg-slate-100 disabled:opacity-50"
+                  >
+                    {busy ? "Chargement..." : "Démarrer une mission"}
+                  </button>
+
+                  {nbTentatives > 0 && (
+                    eleve ? (
+                      <button
+                        type="button"
+                        onClick={() => void enregistrerSeance()}
+                        disabled={saving}
+                        className="rounded-2xl bg-emerald-500 px-6 py-2.5 text-sm font-black text-white shadow hover:bg-emerald-400 disabled:opacity-60"
+                      >
+                        {saving ? "Enregistrement..." : "✅ Enregistrer ma séance"}
+                      </button>
+                    ) : (
+                      <Link
+                        href="/auth/signin-eleve"
+                        className="rounded-2xl bg-amber-500 px-6 py-2.5 text-center text-sm font-black text-white shadow hover:bg-amber-400"
+                      >
+                        Se connecter pour enregistrer
+                      </Link>
+                    )
+                  )}
+
+                  {saveMessage && (
+                    <p className={[
+                      "rounded-2xl px-4 py-2 text-xs font-black text-center",
+                      saveMessage.includes("✅") ? "bg-white/90 text-emerald-800" : "bg-white/90 text-red-700",
+                    ].join(" ")}>
+                      {saveMessage}
+                    </p>
+                  )}
                 </div>
-              </div>
-            </div>
-
-            <div className="hidden gap-4 px-6 py-5 md:flex md:items-center md:justify-between">
-              <div className="grid flex-1 gap-3 sm:grid-cols-3">
-                <HeroStat title="Score" value={`${scoreSeanceSur20}/20`} icon="🎯" />
-                <HeroStat title="Points" value={`${earnedPoints}/${possiblePoints}`} icon="⭐" />
-                <HeroStat title="Temps" value={formatDuration(elapsedSeconds)} icon="⏱️" />
-              </div>
-
-              <div className="flex flex-col gap-2">
-                <button
-                  onClick={() => void startSession()}
-                  disabled={busy || wrongAnswerPanelOpen || !notion}
-                  className="rounded-2xl bg-slate-900 px-6 py-3 text-sm font-black text-white shadow hover:bg-slate-800 disabled:opacity-50"
-                >
-                  {busy ? "Chargement..." : "Démarrer une mission"}
-                </button>
-
-                {nbTentatives > 0 && (
-                  eleve ? (
-                    <button
-                      type="button"
-                      onClick={() => void enregistrerSeance()}
-                      disabled={saving}
-                      className="rounded-2xl bg-emerald-500 px-6 py-3 text-sm font-black text-white shadow hover:bg-emerald-400 disabled:opacity-60"
-                    >
-                      {saving ? "Enregistrement..." : "✅ Enregistrer ma séance"}
-                    </button>
-                  ) : (
-                    <Link
-                      href="/auth/signin-eleve"
-                      className="rounded-2xl bg-amber-500 px-6 py-3 text-center text-sm font-black text-white shadow hover:bg-amber-400"
-                    >
-                      Se connecter pour enregistrer
-                    </Link>
-                  )
-                )}
-
-                {saveMessage && (
-                  <p className={[
-                    "rounded-2xl px-4 py-2 text-sm font-black text-center",
-                    saveMessage.includes("✅") ? "bg-emerald-100 text-emerald-800" : "bg-red-100 text-red-800",
-                  ].join(" ")}>
-                    {saveMessage}
-                  </p>
-                )}
               </div>
             </div>
           </header>
@@ -1407,37 +1398,52 @@ function handleInputKeyDown(
             </button>
           </section>
 
-          <section className="rounded-2xl border border-slate-200 bg-white/95 p-4 shadow-sm">
-            <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
-              <div className="text-sm font-semibold text-slate-800">
-                {simpleEncouragement({
-                  ok: lastResult.ok,
-                  microId: lastResult.microId,
-                  points: lastResult.points,
-                  mode,
-                  classe,
-                  matiere,
-                })}
-              </div>
+          {(() => {
+            // N'affiche la barre d'encouragement que si elle a un contenu :
+            // sinon elle prenait une ligne vide et poussait la question hors écran.
+            const encouragement = simpleEncouragement({
+              ok: lastResult.ok,
+              microId: lastResult.microId,
+              points: lastResult.points,
+              mode,
+              classe,
+              matiere,
+            });
+            const progressText = visibleProgressText(visibleProgress.encouragement);
+            const hasContent =
+              !!encouragement ||
+              !!progressText ||
+              visibleProgress.unlockedStars.length > 0;
 
-              <div className="flex flex-wrap gap-2">
-                {visibleProgressText(visibleProgress.encouragement) ? (
-                  <span className="rounded-full bg-violet-100 px-3 py-1 text-xs font-semibold text-violet-900">
-                    {visibleProgressText(visibleProgress.encouragement)}
-                  </span>
-                ) : null}
+            if (!hasContent) return null;
 
-                {visibleProgress.unlockedStars.map((star) => (
-                  <span
-                    key={star.id}
-                    className="rounded-full bg-amber-100 px-3 py-1 text-xs font-semibold text-amber-900"
-                  >
-                    ⭐ {studentBadgeLabel(star)}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </section>
+            return (
+              <section className="rounded-2xl border border-slate-200 bg-white/95 p-4 shadow-sm">
+                <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+                  <div className="text-sm font-semibold text-slate-800">
+                    {encouragement}
+                  </div>
+
+                  <div className="flex flex-wrap gap-2">
+                    {progressText ? (
+                      <span className="rounded-full bg-violet-100 px-3 py-1 text-xs font-semibold text-violet-900">
+                        {progressText}
+                      </span>
+                    ) : null}
+
+                    {visibleProgress.unlockedStars.map((star) => (
+                      <span
+                        key={star.id}
+                        className="rounded-full bg-amber-100 px-3 py-1 text-xs font-semibold text-amber-900"
+                      >
+                        ⭐ {studentBadgeLabel(star)}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </section>
+            );
+          })()}
 
           {successBanner.open ? (
             <section className="rounded-2xl border border-emerald-200 bg-emerald-50 px-4 py-4 shadow-sm">
