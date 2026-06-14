@@ -30,6 +30,10 @@ function scratchCanvas(title: string, blocks: ScratchCanvasData["blocks"]): Scra
   };
 }
 
+function ae(def: string, meth: string, obs: string, ccl: string) {
+  return `Définition : ${def}\n\nMéthode : ${meth}\n\nExécution : ${obs}\n\nConclusion : ${ccl}`;
+}
+
 export const algorithmiqueBank: TutorBankItemV4[] = [
   /* =========================
      ALGO_SEQUENCE
@@ -1401,5 +1405,216 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
       "Exécution : si le programme répète seulement 3 fois, il manque un côté.\n\n" +
       "Conclusion : il faut remplacer “répéter 3 fois” par “répéter 4 fois”.",
     tags: ["algo_programmation", "defi", "open", "correction", "carre"],
+  },
+
+  /* ========== TOP-UP — ALGO_SEQUENCE ========== */
+  {
+    kind: "fixed", id: "6e_algo_sequence_topup_1", niveau: "6e", matiere: "maths",
+    notionId: "algo_programmation", microId: "algo_sequence", difficulty: 1, theme: "neutral",
+    text: "Dans un programme, dans quel ordre les instructions s’exécutent-elles ?",
+    format: "qcm", choices: ["de haut en bas, dans l’ordre", "de bas en haut", "au hasard", "seulement la première"],
+    expected: ["de haut en bas, dans l’ordre"], comparator: "mcq_exact",
+    hint: "Comme on lit un texte.",
+    explanation: ae("un algorithme est une suite d’instructions ordonnées.", "on lit les instructions une à une.", "on commence par la première, tout en haut.", "les instructions s’exécutent de haut en bas, dans l’ordre."),
+    tags: ["algo_programmation", "sequence", "qcm"],
+  },
+  {
+    kind: "fixed", id: "6e_algo_sequence_topup_2", niveau: "6e", matiere: "maths",
+    notionId: "algo_programmation", microId: "algo_sequence", difficulty: 1, theme: "neutral",
+    text: "Programme : (1) Avancer (2) Tourner (3) Avancer. Quelle est la 2ᵉ instruction ?",
+    format: "qcm", choices: ["Tourner", "Avancer", "Reculer", "S’arrêter"], expected: ["Tourner"], comparator: "mcq_exact",
+    hint: "Compte dans l’ordre.",
+    explanation: ae("chaque instruction a une position dans la séquence.", "on compte les instructions dans l’ordre.", "la 2ᵉ instruction est « Tourner ».", "la réponse est Tourner."),
+    tags: ["algo_programmation", "sequence", "qcm"],
+  },
+  {
+    kind: "fixed", id: "6e_algo_sequence_topup_3", niveau: "6e", matiere: "maths",
+    notionId: "algo_programmation", microId: "algo_sequence", difficulty: 1, theme: "neutral",
+    text: "Combien d’instructions contient ce programme : (1) Avancer (2) Tourner (3) Sauter (4) Dire ?",
+    format: "short", expected: ["4"], comparator: "number_equal",
+    hint: "Compte les lignes numérotées.",
+    explanation: ae("une séquence est composée de plusieurs instructions.", "on compte les instructions numérotées.", "il y a 4 instructions de 1 à 4.", "le programme contient 4 instructions."),
+    tags: ["algo_programmation", "sequence"],
+  },
+
+  /* ========== TOP-UP — ALGO_DEPLACEMENT ========== */
+  {
+    kind: "fixed", id: "6e_algo_deplacement_topup_1", niveau: "6e", matiere: "maths",
+    notionId: "algo_programmation", microId: "algo_deplacement", difficulty: 1, theme: "neutral",
+    text: "Un robot regarde vers le Nord. Il tourne à droite (quart de tour). Vers où regarde-t-il ?",
+    format: "qcm", choices: ["Est", "Ouest", "Sud", "Nord"], expected: ["Est"], comparator: "mcq_exact",
+    hint: "Un quart de tour à droite depuis le Nord.",
+    explanation: ae("tourner à droite fait un quart de tour dans le sens des aiguilles d’une montre.", "on part du Nord.", "Nord → quart de tour à droite → Est.", "le robot regarde vers l’Est."),
+    tags: ["algo_programmation", "deplacement", "qcm"],
+  },
+  {
+    kind: "fixed", id: "6e_algo_deplacement_topup_2", niveau: "6e", matiere: "maths",
+    notionId: "algo_programmation", microId: "algo_deplacement", difficulty: 1, theme: "neutral",
+    text: "Un robot regarde vers l’Est. Il fait un demi-tour. Vers où regarde-t-il ?",
+    format: "qcm", choices: ["Ouest", "Est", "Nord", "Sud"], expected: ["Ouest"], comparator: "mcq_exact",
+    hint: "Un demi-tour = direction opposée.",
+    explanation: ae("un demi-tour amène vers la direction opposée.", "on cherche l’opposé de l’Est.", "l’opposé de l’Est est l’Ouest.", "le robot regarde vers l’Ouest."),
+    tags: ["algo_programmation", "deplacement", "qcm"],
+  },
+  {
+    kind: "fixed", id: "6e_algo_deplacement_topup_3", niveau: "6e", matiere: "maths",
+    notionId: "algo_programmation", microId: "algo_deplacement", difficulty: 2, theme: "neutral",
+    text: "Un robot avance de 3 cases, puis avance encore de 2 cases. Combien de cases a-t-il parcourues ?",
+    format: "short", expected: ["5"], comparator: "number_equal",
+    hint: "Additionne les déplacements.",
+    explanation: ae("les déplacements successifs s’additionnent.", "on additionne les cases.", "3 + 2 = 5.", "le robot a parcouru 5 cases."),
+    tags: ["algo_programmation", "deplacement"],
+  },
+
+  /* ========== TOP-UP — ALGO_FIGURE ========== */
+  {
+    kind: "fixed", id: "6e_algo_figure_topup_1", niveau: "6e", matiere: "maths",
+    notionId: "algo_programmation", microId: "algo_figure", difficulty: 2, theme: "neutral",
+    text: "Pour dessiner un carré en répétant « Avancer · Tourner de 90° », combien de répétitions faut-il ?",
+    format: "short", expected: ["4"], comparator: "number_equal",
+    hint: "Un carré a 4 côtés.",
+    explanation: ae("on répète autant de fois qu’il y a de côtés.", "un carré possède 4 côtés.", "il faut donc 4 répétitions.", "on répète 4 fois."),
+    tags: ["algo_programmation", "figure"],
+  },
+  {
+    kind: "fixed", id: "6e_algo_figure_topup_2", niveau: "6e", matiere: "maths",
+    notionId: "algo_programmation", microId: "algo_figure", difficulty: 3, theme: "neutral",
+    text: "Répéter 3 fois « Avancer · Tourner de 120° » dessine quelle figure ?",
+    format: "qcm", choices: ["un triangle", "un carré", "un cercle", "un hexagone"], expected: ["un triangle"], comparator: "mcq_exact",
+    hint: "3 côtés.",
+    explanation: ae("le nombre de répétitions donne le nombre de côtés.", "on répète 3 fois avec un angle de 120°.", "3 côtés forment un triangle (équilatéral).", "le programme dessine un triangle."),
+    tags: ["algo_programmation", "figure", "qcm"],
+  },
+  {
+    kind: "fixed", id: "6e_algo_figure_topup_3", niveau: "6e", matiere: "maths",
+    notionId: "algo_programmation", microId: "algo_figure", difficulty: 3, theme: "neutral",
+    text: "Pour dessiner un hexagone (6 côtés), combien de fois faut-il répéter « Avancer · Tourner » ?",
+    format: "short", expected: ["6"], comparator: "number_equal",
+    hint: "Un hexagone a 6 côtés.",
+    explanation: ae("on répète autant de fois qu’il y a de côtés.", "un hexagone possède 6 côtés.", "il faut donc 6 répétitions.", "on répète 6 fois."),
+    tags: ["algo_programmation", "figure"],
+  },
+
+  /* ========== TOP-UP — ALGO_REPETITION ========== */
+  {
+    kind: "fixed", id: "6e_algo_repetition_topup_1", niveau: "6e", matiere: "maths",
+    notionId: "algo_programmation", microId: "algo_repetition", difficulty: 2, theme: "neutral",
+    text: "Programme : Répéter 4 fois « Avancer de 10 pas ». Combien de pas au total ?",
+    format: "short", expected: ["40"], comparator: "number_equal",
+    hint: "4 × 10.",
+    explanation: ae("une boucle répète l’instruction plusieurs fois.", "on multiplie le nombre de pas par le nombre de répétitions.", "4 × 10 = 40.", "le robot avance de 40 pas."),
+    tags: ["algo_programmation", "repetition"],
+  },
+  {
+    kind: "fixed", id: "6e_algo_repetition_topup_2", niveau: "6e", matiere: "maths",
+    notionId: "algo_programmation", microId: "algo_repetition", difficulty: 1, theme: "neutral",
+    text: "À quoi sert une boucle « Répéter » dans un programme ?",
+    format: "qcm", choices: ["à répéter plusieurs fois les mêmes instructions", "à effacer le dessin", "à changer de couleur", "à arrêter le programme"],
+    expected: ["à répéter plusieurs fois les mêmes instructions"], comparator: "mcq_exact",
+    hint: "Répéter = refaire.",
+    explanation: ae("une boucle évite de réécrire plusieurs fois la même chose.", "on regarde ce que fait le bloc « Répéter ».", "il exécute les instructions le nombre de fois indiqué.", "la boucle sert à répéter plusieurs fois les mêmes instructions."),
+    tags: ["algo_programmation", "repetition", "qcm"],
+  },
+  {
+    kind: "fixed", id: "6e_algo_repetition_topup_3", niveau: "6e", matiere: "maths",
+    notionId: "algo_programmation", microId: "algo_repetition", difficulty: 3, theme: "neutral",
+    text: "Programme : Répéter 5 fois « Tourner de 72° ». Quel est l’angle total parcouru ?",
+    format: "short", expected: ["360", "360°"], comparator: "number_equal",
+    hint: "5 × 72.",
+    explanation: ae("chaque répétition ajoute le même angle.", "on multiplie l’angle par le nombre de répétitions.", "5 × 72 = 360.", "l’angle total est 360° (un tour complet, utile pour un pentagone)."),
+    tags: ["algo_programmation", "repetition"],
+  },
+
+  /* ========== TOP-UP — ALGO_LIRE_PROGRAMME ========== */
+  {
+    kind: "fixed", id: "6e_algo_lire_programme_topup_1", niveau: "6e", matiere: "maths",
+    notionId: "algo_programmation", microId: "algo_lire_programme", difficulty: 1, theme: "neutral",
+    text: "Quel bloc lance toujours un programme Scratch ?",
+    format: "qcm", choices: ["Quand 🚩 est cliqué", "Avancer de 10 pas", "Répéter 10 fois", "Dire Bonjour"],
+    expected: ["Quand 🚩 est cliqué"], comparator: "mcq_exact",
+    hint: "C’est le bloc tout en haut.",
+    explanation: ae("un programme a un bloc déclencheur.", "on cherche le bloc placé tout en haut.", "« Quand 🚩 est cliqué » démarre le programme.", "c’est le bloc déclencheur."),
+    tags: ["algo_programmation", "lire_programme", "qcm"],
+  },
+  {
+    kind: "fixed", id: "6e_algo_lire_programme_topup_2", niveau: "6e", matiere: "maths",
+    notionId: "algo_programmation", microId: "algo_lire_programme", difficulty: 2, theme: "neutral",
+    text: "Que dit le lutin à la fin de ce programme ?",
+    format: "qcm", choices: ["Bonjour", "Au revoir", "Rien", "Bravo"], expected: ["Bonjour"], comparator: "mcq_exact",
+    hint: "Lis le dernier bloc.",
+    explanation: ae("on lit le programme de haut en bas.", "on repère la dernière instruction.", "le dernier bloc fait dire « Bonjour ».", "le lutin dit Bonjour."),
+    tags: ["algo_programmation", "lire_programme", "qcm", "canvas"],
+    canvas: scratchCanvas("Programme", [
+      { type: "event", text: "Quand 🚩 est cliqué" },
+      { type: "move", text: "Avancer de 10 pas", value: 10 },
+      { type: "say", text: "Dire Bonjour" },
+    ]),
+  },
+  {
+    kind: "fixed", id: "6e_algo_lire_programme_topup_3", niveau: "6e", matiere: "maths",
+    notionId: "algo_programmation", microId: "algo_lire_programme", difficulty: 2, theme: "neutral",
+    text: "Dans ce programme, de combien de pas le lutin avance-t-il en tout ?",
+    format: "short", expected: ["50"], comparator: "number_equal",
+    hint: "Additionne les blocs Avancer.",
+    explanation: ae("on additionne les déplacements du programme.", "on repère les blocs Avancer.", "20 + 30 = 50.", "le lutin avance de 50 pas."),
+    tags: ["algo_programmation", "lire_programme", "canvas"],
+    canvas: scratchCanvas("Programme", [
+      { type: "event", text: "Quand 🚩 est cliqué" },
+      { type: "move", text: "Avancer de 20 pas", value: 20 },
+      { type: "move", text: "Avancer de 30 pas", value: 30 },
+    ]),
+  },
+  {
+    kind: "fixed", id: "6e_algo_lire_programme_topup_4", niveau: "6e", matiere: "maths",
+    notionId: "algo_programmation", microId: "algo_lire_programme", difficulty: 2, theme: "neutral",
+    text: "Combien d’instructions (sans le déclencheur) contient ce programme ?",
+    format: "short", expected: ["3"], comparator: "number_equal",
+    hint: "Ne compte pas le bloc « Quand 🚩 est cliqué ».",
+    explanation: ae("on compte les instructions après le déclencheur.", "on ne compte pas le bloc de départ.", "il reste Avancer, Tourner et Dire : 3 instructions.", "il y a 3 instructions."),
+    tags: ["algo_programmation", "lire_programme", "canvas"],
+    canvas: scratchCanvas("Programme", [
+      { type: "event", text: "Quand 🚩 est cliqué" },
+      { type: "move", text: "Avancer de 10 pas", value: 10 },
+      { type: "turn", text: "Tourner de 90°", value: 90 },
+      { type: "say", text: "Dire Fini" },
+    ]),
+  },
+
+  /* ========== TOP-UP — ALGO_DEFI ========== */
+  {
+    kind: "fixed", id: "6e_algo_defi_topup_1", niveau: "6e", matiere: "maths",
+    notionId: "algo_programmation", microId: "algo_defi", difficulty: 3, theme: "neutral",
+    text: "Défi : Répéter 3 fois « Avancer de 5 pas », puis Avancer de 4 pas. Combien de pas au total ?",
+    format: "short", expected: ["19"], comparator: "number_equal",
+    hint: "(3 × 5) + 4.",
+    explanation: ae("on calcule la boucle, puis on ajoute le pas hors boucle.", "on multiplie puis on additionne.", "(3 × 5) + 4 = 15 + 4 = 19.", "le total est 19 pas."),
+    tags: ["algo_programmation", "defi", "repetition"],
+  },
+  {
+    kind: "fixed", id: "6e_algo_defi_topup_2", niveau: "6e", matiere: "maths",
+    notionId: "algo_programmation", microId: "algo_defi", difficulty: 3, theme: "neutral",
+    text: "Défi : un robot répète 4 fois « Avancer · Tourner de 90° ». Quelle figure dessine-t-il ?",
+    format: "qcm", choices: ["un carré", "un triangle", "un cercle", "un hexagone"], expected: ["un carré"], comparator: "mcq_exact",
+    hint: "4 côtés, angles de 90°.",
+    explanation: ae("le nombre de répétitions donne le nombre de côtés.", "4 côtés avec des angles de 90°.", "cela forme un carré.", "le robot dessine un carré."),
+    tags: ["algo_programmation", "defi", "figure", "qcm"],
+  },
+  {
+    kind: "fixed", id: "6e_algo_defi_topup_3", niveau: "6e", matiere: "maths",
+    notionId: "algo_programmation", microId: "algo_defi", difficulty: 3, theme: "neutral",
+    text: "Défi : Répéter 2 fois « Avancer · Avancer ». Combien de fois l’instruction « Avancer » est-elle exécutée ?",
+    format: "short", expected: ["4"], comparator: "number_equal",
+    hint: "2 « Avancer » par tour, répétés 2 fois.",
+    explanation: ae("on compte les exécutions à l’intérieur de la boucle.", "il y a 2 « Avancer » dans la boucle, répétés 2 fois.", "2 × 2 = 4.", "« Avancer » est exécuté 4 fois."),
+    tags: ["algo_programmation", "defi", "repetition"],
+  },
+  {
+    kind: "fixed", id: "6e_algo_defi_topup_4", niveau: "6e", matiere: "maths",
+    notionId: "algo_programmation", microId: "algo_defi", difficulty: 4, theme: "neutral",
+    text: "Défi : un robot regarde le Nord. Il tourne deux fois à droite. Vers où regarde-t-il ?",
+    format: "qcm", choices: ["Sud", "Nord", "Est", "Ouest"], expected: ["Sud"], comparator: "mcq_exact",
+    hint: "Deux quarts de tour à droite.",
+    explanation: ae("chaque « tourner à droite » fait un quart de tour.", "on enchaîne les deux quarts de tour depuis le Nord.", "Nord → Est → Sud.", "le robot regarde vers le Sud."),
+    tags: ["algo_programmation", "defi", "deplacement", "qcm"],
   },
 ];
