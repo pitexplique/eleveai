@@ -26,6 +26,8 @@ type TutorSimpleViewProps = {
   currentStar: number;
   mode: TutorMode;
   streak: number;
+  classBoard: boolean;
+  onToggleClassBoard: () => void;
   renderCanvas: (question: TutorQuestionOption) => ReactNode;
   onBackCoach: () => void;
   onSwitchToComplete: () => void;
@@ -68,6 +70,8 @@ export default function TutorSimpleView({
   currentStar,
   mode,
   streak,
+  classBoard,
+  onToggleClassBoard,
   renderCanvas,
   onBackCoach,
   onSwitchToComplete,
@@ -89,6 +93,14 @@ export default function TutorSimpleView({
         type: currentQuestion.format,
       })
     : null;
+
+  // Tailles agrandies en « affichage classe » (projection sans zoom).
+  const boardQuestionClass = classBoard
+    ? "text-3xl leading-relaxed sm:text-4xl"
+    : "text-xl leading-8";
+  const boardChoiceClass = classBoard ? "py-5 text-2xl sm:text-3xl" : "py-4 text-lg";
+  const boardInputClass = classBoard ? "text-2xl sm:text-3xl" : "text-lg";
+  const boardShortInputClass = classBoard ? "text-2xl sm:text-3xl" : "text-xl";
 
   return (
     <main className="min-h-screen bg-gradient-to-b from-sky-100 via-cyan-50 to-emerald-100 px-3 py-4 text-slate-950 sm:px-5">
@@ -112,6 +124,18 @@ export default function TutorSimpleView({
               className="rounded-md border border-slate-200 bg-white px-3 py-2 text-sm font-bold text-slate-700 shadow-sm hover:bg-slate-50"
             >
               Mode complet
+            </button>
+            <button
+              type="button"
+              onClick={onToggleClassBoard}
+              aria-pressed={classBoard}
+              className={`rounded-md border px-3 py-2 text-sm font-bold shadow-sm ${
+                classBoard
+                  ? "border-indigo-500 bg-indigo-600 text-white hover:bg-indigo-500"
+                  : "border-slate-200 bg-white text-slate-700 hover:bg-slate-50"
+              }`}
+            >
+              {classBoard ? "🔍 Affichage classe : on" : "🔍 Affichage classe"}
             </button>
           </div>
         </header>
@@ -171,7 +195,7 @@ export default function TutorSimpleView({
                   </span>
                 </div>
 
-                <MarkdownMath className="mb-6 text-xl leading-8 text-slate-950">
+                <MarkdownMath className={`mb-6 text-slate-950 ${boardQuestionClass}`}>
                   {currentQuestion.text}
                 </MarkdownMath>
 
@@ -203,7 +227,7 @@ export default function TutorSimpleView({
                         type="button"
                         onClick={() => onQcmClick(choice)}
                         disabled={busy}
-                        className="rounded-lg border border-slate-300 bg-white px-4 py-4 text-left text-lg font-semibold text-slate-900 shadow-sm hover:bg-sky-50 disabled:opacity-60"
+                        className={`rounded-lg border border-slate-300 bg-white px-4 text-left font-semibold text-slate-900 shadow-sm hover:bg-sky-50 disabled:opacity-60 ${boardChoiceClass}`}
                       >
                         <MarkdownMath inline>{choice}</MarkdownMath>
                       </button>
@@ -217,7 +241,7 @@ export default function TutorSimpleView({
                       onKeyDown={onInputKeyDown}
                       disabled={busy}
                       rows={5}
-                      className="w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-lg text-slate-900 outline-none focus:border-sky-500"
+                      className={`w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none focus:border-sky-500 ${boardInputClass}`}
                       placeholder="Ta réponse..."
                     />
                     <button
@@ -236,7 +260,7 @@ export default function TutorSimpleView({
                       onChange={(event) => setAnswer(event.target.value)}
                       onKeyDown={onInputKeyDown}
                       disabled={busy}
-                      className="w-full max-w-sm rounded-md border border-slate-300 bg-white px-4 py-3 text-xl text-slate-900 outline-none focus:border-sky-500"
+                      className={`w-full max-w-sm rounded-md border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none focus:border-sky-500 ${boardShortInputClass}`}
                       placeholder="Réponse"
                     />
                     <div>

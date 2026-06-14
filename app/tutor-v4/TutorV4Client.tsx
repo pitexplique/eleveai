@@ -1319,6 +1319,8 @@ function handleInputKeyDown(
           currentStar={recommendedStar}
           mode={mode}
           streak={visibleProgress.streak}
+          classBoard={classBoard}
+          onToggleClassBoard={() => setClassBoard((v) => !v)}
           renderCanvas={(question) => renderCanvas(question.canvas)}
           onBackCoach={() => router.push(`/coach-ia/${matiere}`)}
           onSwitchToComplete={() => setDisplayMode("complete")}
