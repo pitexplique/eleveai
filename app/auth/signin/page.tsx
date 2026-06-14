@@ -381,7 +381,41 @@ export default function SignInPage() {
             </div>
 
             <div className="rounded-2xl bg-white p-6 shadow-lg shadow-slate-200/80 border border-slate-200">
-              <h1 className="text-lg font-semibold text-slate-900">
+              {/* ✅ CHOIX CLAIR : s'inscrire ou se connecter */}
+              <div className="mb-5 rounded-xl border-2 border-emerald-200 bg-emerald-50 p-4">
+                <p className="text-sm font-bold text-slate-900">
+                  C&apos;est ta première fois sur EleveAI ?
+                </p>
+                <p className="mt-0.5 text-xs text-slate-600">
+                  Tu dois d&apos;abord créer ton compte. Sinon, connecte-toi juste en dessous.
+                </p>
+
+                <div className="mt-3 grid grid-cols-2 gap-2">
+                  <Link
+                    href="/auth/signup?type=eleve"
+                    className="flex flex-col items-center justify-center rounded-lg bg-emerald-600 px-3 py-3 text-center text-sm font-semibold text-white hover:bg-emerald-500 transition"
+                  >
+                    <span className="text-base">📝</span>
+                    Je m&apos;inscris
+                    <span className="mt-0.5 text-[10px] font-normal text-emerald-100">
+                      Nouveau compte
+                    </span>
+                  </Link>
+
+                  <a
+                    href="#connexion-existante"
+                    className="flex flex-col items-center justify-center rounded-lg border-2 border-slate-300 bg-white px-3 py-3 text-center text-sm font-semibold text-slate-800 hover:bg-slate-50 transition"
+                  >
+                    <span className="text-base">🔑</span>
+                    J&apos;ai déjà un compte
+                    <span className="mt-0.5 text-[10px] font-normal text-slate-500">
+                      Je me connecte
+                    </span>
+                  </a>
+                </div>
+              </div>
+
+              <h1 id="connexion-existante" className="text-lg font-semibold text-slate-900">
                 Accéder à mon espace
               </h1>
 
@@ -708,6 +742,55 @@ export default function SignInPage() {
                     </div>
                   </div>
                 ))}
+            </div>
+
+            {/* AVIS D'ÉLÈVES */}
+            <div className="mt-8">
+              <p className="text-xs font-black uppercase tracking-[0.25em] text-yellow-300">
+                Ils utilisent EleveAI
+              </p>
+              <h3 className="mt-1 text-2xl font-black leading-tight">
+                Ce que disent les élèves
+              </h3>
+
+              <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-3">
+                {[
+                  {
+                    quote:
+                      "J'ai enfin compris les fractions. Les défis du jour, c'est devenu mon petit rituel.",
+                    name: "Léa",
+                    classe: "5e",
+                  },
+                  {
+                    quote:
+                      "Le coach m'explique sans me juger quand je me trompe. Je progresse à mon rythme.",
+                    name: "Yanis",
+                    classe: "3e",
+                  },
+                  {
+                    quote:
+                      "Le calcul rapide en 5 minutes le matin, je suis beaucoup plus rapide en classe maintenant.",
+                    name: "Camille",
+                    classe: "CM1",
+                  },
+                ].map((avis) => (
+                  <figure
+                    key={avis.name}
+                    className="flex flex-col rounded-2xl border border-white/10 bg-white/[0.08] p-4 shadow-lg"
+                  >
+                    <div className="text-xs text-yellow-300">★★★★★</div>
+                    <blockquote className="mt-2 text-xs font-semibold leading-relaxed text-slate-200">
+                      « {avis.quote} »
+                    </blockquote>
+                    <figcaption className="mt-3 text-[11px] font-bold text-white">
+                      {avis.name}{" "}
+                      <span className="font-semibold text-slate-400">
+                        · {avis.classe}
+                      </span>
+                    </figcaption>
+                  </figure>
+                ))}
+              </div>
             </div>
           </div>
         </div>
