@@ -683,4 +683,637 @@ export const expressionsLitteralesBank: TutorBankItemV4[] = [
       };
     },
   },
+
+  /* =========================================================
+     COMPLÉMENTS (top-up ~10 items / microSkill)
+  ========================================================= */
+
+  // ---------- LITTERAL_EXPRESSION_COMPRENDRE ----------
+  {
+    kind: "fixed",
+    id: "litteral_expression_comprendre_fixed_4",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "litteral_expression",
+    microId: "litteral_expression_comprendre",
+    difficulty: 1,
+    theme: "neutral",
+    text: "Dans l’expression $5x$, que représente le nombre 5 ?",
+    format: "qcm",
+    choices: ["le coefficient", "la variable", "une constante seule", "l’inconnue"],
+    expected: ["le coefficient"],
+    comparator: "mcq_exact",
+    hint: "C’est le nombre placé devant la lettre.",
+    explanation:
+      "Définition : le coefficient est le nombre placé devant la lettre.\n\n" +
+      "Méthode : on repère le nombre multiplié par la lettre.\n\n" +
+      "Calcul : dans $5x$, 5 multiplie x.\n\n" +
+      "Conclusion : 5 est le coefficient de x.",
+    tags: ["expression", "coefficient", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "litteral_expression_comprendre_fixed_5",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "litteral_expression",
+    microId: "litteral_expression_comprendre",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Dans l’expression $2x + 7$, quel est le terme constant (le nombre seul) ?",
+    format: "short",
+    expected: ["7"],
+    comparator: "number_equal",
+    hint: "C’est le nombre qui n’est pas multiplié par une lettre.",
+    explanation:
+      "Définition : un terme constant est un nombre seul, sans lettre.\n\n" +
+      "Méthode : on repère le terme sans lettre.\n\n" +
+      "Calcul : dans $2x + 7$, le terme constant est 7.\n\n" +
+      "Conclusion : le terme constant est 7.",
+    tags: ["expression", "constante"],
+  },
+  {
+    kind: "fixed",
+    id: "litteral_expression_comprendre_fixed_6",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "litteral_expression",
+    microId: "litteral_expression_comprendre",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Que peut représenter la lettre dans une expression littérale ?",
+    format: "qcm",
+    choices: [
+      "un nombre qui peut changer",
+      "toujours le nombre 0",
+      "une opération",
+      "un signe de calcul",
+    ],
+    expected: ["un nombre qui peut changer"],
+    comparator: "mcq_exact",
+    hint: "La lettre remplace un nombre variable ou inconnu.",
+    explanation:
+      "Définition : dans une expression littérale, la lettre représente un nombre.\n\n" +
+      "Méthode : on rappelle le rôle de la variable.\n\n" +
+      "Calcul : selon les cas, ce nombre peut prendre différentes valeurs.\n\n" +
+      "Conclusion : la lettre représente un nombre qui peut changer.",
+    tags: ["expression", "variable", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "litteral_expression_comprendre_tpl_2",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "litteral_expression",
+    microId: "litteral_expression_comprendre",
+    difficulty: 1,
+    theme: "neutral",
+    hint: "Le coefficient est le nombre devant la lettre.",
+    tags: ["expression", "coefficient", "template"],
+    generate: () => {
+      const letter = randomChoice(["x", "a", "b", "n", "t"]);
+      const k = randomInt(2, 9);
+      const c = randomInt(1, 9);
+      return {
+        text: `Dans l’expression $${k}${letter} + ${c}$, quel est le coefficient de ${letter} ?`,
+        format: "short",
+        expected: [String(k)],
+        comparator: "number_equal",
+        explanation:
+          "Définition : le coefficient est le nombre placé devant la lettre.\n\n" +
+          `Méthode : on repère le nombre qui multiplie ${letter}.\n\n` +
+          `Calcul : dans $${k}${letter} + ${c}$, le coefficient de ${letter} est ${k}.\n\n` +
+          `Conclusion : le coefficient est ${k}.`,
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "litteral_expression_comprendre_tpl_3",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "litteral_expression",
+    microId: "litteral_expression_comprendre",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Une expression littérale contient au moins une lettre.",
+    tags: ["expression", "reconnaitre", "template"],
+    generate: () => {
+      const avecLettre = randomChoice([true, false]);
+      const k = randomInt(2, 9);
+      const c = randomInt(1, 9);
+      const letter = randomChoice(["x", "a", "n"]);
+      const expr = avecLettre ? `${k}${letter} + ${c}` : `${k} + ${c}`;
+      return {
+        text: `L’expression $${expr}$ est-elle une expression littérale ?`,
+        format: "qcm",
+        choices: ["oui", "non"],
+        expected: [avecLettre ? "oui" : "non"],
+        comparator: "mcq_exact",
+        explanation:
+          "Définition : une expression littérale contient au moins une lettre.\n\n" +
+          "Méthode : on cherche la présence d’une lettre.\n\n" +
+          `Calcul : $${expr}$ ${avecLettre ? "contient une lettre" : "ne contient que des nombres"}.\n\n` +
+          `Conclusion : ${avecLettre ? "oui, c’est une expression littérale" : "non, ce n’est qu’un calcul numérique"}.`,
+      };
+    },
+  },
+
+  // ---------- LITTERAL_EXPRESSION_TRADUIRE ----------
+  {
+    kind: "fixed",
+    id: "litteral_expression_traduire_qcm_2",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "litteral_expression",
+    microId: "litteral_expression_traduire",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Quelle expression traduit « la somme de x et de y » ?",
+    format: "qcm",
+    choices: ["$x + y$", "$x \\times y$", "$x - y$", "$xy + 2$"],
+    expected: ["$x + y$"],
+    comparator: "mcq_exact",
+    hint: "« somme » signifie addition.",
+    explanation:
+      "Définition : traduire une phrase, c’est l’écrire avec des symboles mathématiques.\n\n" +
+      "Méthode : « somme » correspond à l’addition.\n\n" +
+      "Calcul : la somme de x et y est $x + y$.\n\n" +
+      "Conclusion : l’expression est $x + y$.",
+    tags: ["traduction", "addition", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "litteral_expression_traduire_fixed_4",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "litteral_expression",
+    microId: "litteral_expression_traduire",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Quelle expression traduit « le produit de 5 par n » ?",
+    format: "qcm",
+    choices: ["$5n$", "$5 + n$", "$n - 5$", "$n^5$"],
+    expected: ["$5n$"],
+    comparator: "mcq_exact",
+    hint: "« produit » signifie multiplication.",
+    explanation:
+      "Définition : « produit » correspond à la multiplication.\n\n" +
+      "Méthode : on multiplie 5 par n.\n\n" +
+      "Calcul : $5 \\times n = 5n$.\n\n" +
+      "Conclusion : l’expression est $5n$.",
+    tags: ["traduction", "multiplication", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "litteral_expression_traduire_tpl_2",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "litteral_expression",
+    microId: "litteral_expression_traduire",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Traduis « fois » par une multiplication.",
+    tags: ["traduction", "qcm", "template"],
+    generate: () => {
+      const letter = randomChoice(["x", "a", "n"]);
+      const k = randomInt(2, 9);
+      const c = randomInt(1, 9);
+      const plus = randomChoice([true, false]);
+      const op = plus ? "+" : "-";
+      const mot = plus ? "augmenté de" : "diminué de";
+      const correct = `$${k}${letter} ${op} ${c}$`;
+      return {
+        text: `Quelle expression traduit « le produit de ${k} par ${letter}, ${mot} ${c} » ?`,
+        format: "qcm",
+        choices: [
+          correct,
+          `$${k} ${op} ${letter}$`,
+          `$${k}(${letter} ${op} ${c})$`,
+          `$${letter} ${op} ${k + c}$`,
+        ],
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation:
+          "Définition : on traduit chaque morceau de la phrase.\n\n" +
+          `Méthode : « le produit de ${k} par ${letter} » est $${k}${letter}$, puis « ${mot} ${c} » ajoute l’opération.\n\n` +
+          `Calcul : on obtient $${k}${letter} ${op} ${c}$.\n\n` +
+          `Conclusion : l’expression est ${correct}.`,
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "litteral_expression_traduire_tpl_3",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "litteral_expression",
+    microId: "litteral_expression_traduire",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "« le … de (… plus …) » demande des parenthèses.",
+    tags: ["traduction", "parentheses", "qcm", "template"],
+    generate: () => {
+      const letter = randomChoice(["x", "a", "n"]);
+      const k = randomInt(2, 5);
+      const c = randomInt(1, 9);
+      const mot = k === 2 ? "double" : k === 3 ? "triple" : `${k} fois`;
+      const correct = `$${k}(${letter} + ${c})$`;
+      return {
+        text: `Quelle expression traduit « le ${mot} de la somme de ${letter} et ${c} » ?`,
+        format: "qcm",
+        choices: [
+          correct,
+          `$${k}${letter} + ${c}$`,
+          `$${letter} + ${k} \\times ${c}$`,
+          `$${k} + ${letter} + ${c}$`,
+        ],
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation:
+          "Définition : « la somme de … et … » se met entre parenthèses quand on la multiplie.\n\n" +
+          `Méthode : la somme est $(${letter} + ${c})$, puis on la multiplie par ${k}.\n\n` +
+          `Calcul : on obtient $${k}(${letter} + ${c})$.\n\n` +
+          `Conclusion : l’expression est ${correct}.`,
+      };
+    },
+  },
+
+  // ---------- LITTERAL_EXPRESSION_SUBSTITUER ----------
+  {
+    kind: "fixed",
+    id: "litteral_expression_substituer_fixed_4",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "litteral_expression",
+    microId: "litteral_expression_substituer",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Calculer $2x + 5$ pour $x = -3$.",
+    format: "short",
+    expected: ["-1"],
+    comparator: "number_equal",
+    hint: "Remplace x par -3, attention au signe.",
+    explanation:
+      "Définition : substituer, c’est remplacer la lettre par sa valeur.\n\n" +
+      "Méthode : on remplace x par -3 puis on calcule.\n\n" +
+      "Calcul : $2 \\times (-3) + 5 = -6 + 5 = -1$.\n\n" +
+      "Conclusion : le résultat est -1.",
+    tags: ["substitution", "relatif"],
+  },
+  {
+    kind: "template",
+    id: "litteral_expression_substituer_tpl_2",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "litteral_expression",
+    microId: "litteral_expression_substituer",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Remplace la lettre, puis effectue.",
+    tags: ["substitution", "template"],
+    generate: () => {
+      const letter = randomChoice(["x", "a", "n"]);
+      const k = randomInt(2, 8);
+      const c = randomInt(1, 9);
+      const value = randomInt(2, 7);
+      const result = k * value - c;
+      return {
+        text: `Calculer $${k}${letter} - ${c}$ pour ${letter} = ${value}.`,
+        format: "short",
+        expected: [String(result)],
+        comparator: "number_equal",
+        explanation:
+          "Définition : substituer, c’est remplacer la lettre par sa valeur.\n\n" +
+          `Méthode : on remplace ${letter} par ${value}.\n\n` +
+          `Calcul : $${k} \\times ${value} - ${c} = ${k * value} - ${c} = ${result}$.\n\n` +
+          `Conclusion : le résultat est ${result}.`,
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "litteral_expression_substituer_tpl_3",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "litteral_expression",
+    microId: "litteral_expression_substituer",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Remplace chaque lettre par sa valeur.",
+    tags: ["substitution", "deux_lettres", "template"],
+    generate: () => {
+      const a = randomInt(2, 6);
+      const b = randomInt(2, 6);
+      const x = randomInt(1, 5);
+      const y = randomInt(1, 5);
+      const result = a * x + b * y;
+      return {
+        text: `Calculer $${a}x + ${b}y$ pour $x = ${x}$ et $y = ${y}$.`,
+        format: "short",
+        expected: [String(result)],
+        comparator: "number_equal",
+        explanation:
+          "Définition : on remplace chaque lettre par sa valeur.\n\n" +
+          "Méthode : on substitue x et y, puis on calcule.\n\n" +
+          `Calcul : $${a} \\times ${x} + ${b} \\times ${y} = ${a * x} + ${b * y} = ${result}$.\n\n` +
+          `Conclusion : le résultat est ${result}.`,
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "litteral_expression_substituer_tpl_4",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "litteral_expression",
+    microId: "litteral_expression_substituer",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Calcule d’abord la parenthèse.",
+    tags: ["substitution", "parentheses", "template"],
+    generate: () => {
+      const letter = randomChoice(["x", "a", "n"]);
+      const k = randomInt(2, 5);
+      const c = randomInt(1, 6);
+      const value = randomInt(1, 6);
+      const result = k * (value + c);
+      return {
+        text: `Calculer $${k}(${letter} + ${c})$ pour ${letter} = ${value}.`,
+        format: "short",
+        expected: [String(result)],
+        comparator: "number_equal",
+        explanation:
+          "Définition : on remplace la lettre, puis on respecte les priorités.\n\n" +
+          "Méthode : on calcule d’abord la parenthèse, puis on multiplie.\n\n" +
+          `Calcul : $${k}(${value} + ${c}) = ${k} \\times ${value + c} = ${result}$.\n\n` +
+          `Conclusion : le résultat est ${result}.`,
+      };
+    },
+  },
+
+  // ---------- LITTERAL_EXPRESSION_REDUIRE ----------
+  {
+    kind: "fixed",
+    id: "litteral_expression_reduire_fixed_4",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "litteral_expression",
+    microId: "litteral_expression_reduire",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Réduire $5x - 2x$.",
+    format: "qcm",
+    choices: ["$3x$", "$7x$", "$3$", "$10x$"],
+    expected: ["$3x$"],
+    comparator: "mcq_exact",
+    hint: "On soustrait les coefficients.",
+    explanation:
+      "Définition : on réduit en additionnant ou soustrayant les coefficients des termes semblables.\n\n" +
+      "Méthode : $5x$ et $2x$ sont semblables.\n\n" +
+      "Calcul : $5 - 2 = 3$, donc $5x - 2x = 3x$.\n\n" +
+      "Conclusion : la forme réduite est $3x$.",
+    tags: ["reduction", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "litteral_expression_reduire_fixed_5",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "litteral_expression",
+    microId: "litteral_expression_reduire",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Quelle expression ne peut PAS être réduite davantage ?",
+    format: "qcm",
+    choices: ["$3x + 2$", "$3x + 2x$", "$x + 4x$", "$2a + 3a$"],
+    expected: ["$3x + 2$"],
+    comparator: "mcq_exact",
+    hint: "On ne peut réduire que des termes semblables.",
+    explanation:
+      "Définition : on ne réduit que des termes semblables (même lettre).\n\n" +
+      "Méthode : on cherche l’expression dont les termes ne sont pas semblables.\n\n" +
+      "Calcul : $3x$ et $2$ ne sont pas semblables ; les autres se réduisent.\n\n" +
+      "Conclusion : $3x + 2$ ne peut pas être réduite.",
+    tags: ["reduction", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "litteral_expression_reduire_tpl_2",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "litteral_expression",
+    microId: "litteral_expression_reduire",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Regroupe les termes en lettre, garde le nombre seul.",
+    tags: ["reduction", "qcm", "template"],
+    generate: () => {
+      const letter = randomChoice(["x", "a", "y"]);
+      const c1 = randomInt(2, 6);
+      const c2 = randomInt(1, 5);
+      const cst = randomInt(1, 9);
+      const total = c1 + c2;
+      const correct = `$${total}${letter} + ${cst}$`;
+      return {
+        text: `Réduire $${c1}${letter} + ${cst} + ${c2}${letter}$.`,
+        format: "qcm",
+        choices: [
+          correct,
+          `$${total + cst}${letter}$`,
+          `$${total}${letter} + ${cst}${letter}$`,
+          `$${c1}${letter} + ${c2 + cst}$`,
+        ],
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation:
+          "Définition : on regroupe les termes semblables.\n\n" +
+          `Méthode : on additionne $${c1}${letter}$ et $${c2}${letter}$, on garde ${cst} à part.\n\n` +
+          `Calcul : $${c1}${letter} + ${c2}${letter} = ${total}${letter}$, donc l’expression réduite est $${total}${letter} + ${cst}$.\n\n` +
+          `Conclusion : la forme réduite est ${correct}.`,
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "litteral_expression_reduire_tpl_3",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "litteral_expression",
+    microId: "litteral_expression_reduire",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "On regroupe séparément les x et les y.",
+    tags: ["reduction", "deux_lettres", "qcm", "template"],
+    generate: () => {
+      const ax = randomInt(2, 6);
+      const cx = randomInt(1, 5);
+      const by = randomInt(2, 6);
+      const sx = ax + cx;
+      const correct = `$${sx}x + ${by}y$`;
+      return {
+        text: `Réduire $${ax}x + ${by}y + ${cx}x$.`,
+        format: "qcm",
+        choices: [
+          correct,
+          `$${sx + by}xy$`,
+          `$${ax}x + ${by + cx}y$`,
+          `$${sx}x + ${by}x$`,
+        ],
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation:
+          "Définition : on regroupe les termes semblables, séparément pour chaque lettre.\n\n" +
+          "Méthode : on additionne les termes en x ; le terme en y reste seul.\n\n" +
+          `Calcul : $${ax}x + ${cx}x = ${sx}x$, et $${by}y$ reste, donc $${sx}x + ${by}y$.\n\n` +
+          `Conclusion : la forme réduite est ${correct}.`,
+      };
+    },
+  },
+
+  // ---------- LITTERAL_EXPRESSION_DEFIS ----------
+  {
+    kind: "fixed",
+    id: "litteral_expression_defi_fixed_4",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "litteral_expression",
+    microId: "litteral_expression_defi",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Un carré a un côté de longueur $c$. Quelle expression donne son périmètre ?",
+    format: "qcm",
+    choices: ["$4c$", "$c^2$", "$2c$", "$c + 4$"],
+    expected: ["$4c$"],
+    comparator: "mcq_exact",
+    hint: "Le périmètre est la somme des quatre côtés.",
+    explanation:
+      "Définition : le périmètre d’un carré est la somme de ses quatre côtés égaux.\n\n" +
+      "Méthode : on additionne quatre fois le côté.\n\n" +
+      "Calcul : $c + c + c + c = 4c$.\n\n" +
+      "Conclusion : le périmètre est $4c$.",
+    tags: ["defi", "perimetre", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "litteral_expression_defi_fixed_5",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "litteral_expression",
+    microId: "litteral_expression_defi",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Un rectangle a une longueur $L$ et une largeur $\\ell$. Quelle expression donne son périmètre ?",
+    format: "qcm",
+    choices: ["$2(L + \\ell)$", "$L \\times \\ell$", "$L + \\ell$", "$2L \\times 2\\ell$"],
+    expected: ["$2(L + \\ell)$"],
+    comparator: "mcq_exact",
+    hint: "On additionne deux longueurs et deux largeurs.",
+    explanation:
+      "Définition : le périmètre d’un rectangle est la somme de ses quatre côtés.\n\n" +
+      "Méthode : il y a deux longueurs et deux largeurs.\n\n" +
+      "Calcul : $L + \\ell + L + \\ell = 2L + 2\\ell = 2(L + \\ell)$.\n\n" +
+      "Conclusion : le périmètre est $2(L + \\ell)$.",
+    tags: ["defi", "perimetre", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "litteral_expression_defi_fixed_6",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "litteral_expression",
+    microId: "litteral_expression_defi",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Un élève écrit $3x \\times 2 = 5x$. A-t-il raison ?",
+    format: "qcm",
+    choices: ["oui", "non"],
+    expected: ["non"],
+    comparator: "mcq_exact",
+    hint: "Multiplier par 2, ce n’est pas additionner.",
+    explanation:
+      "Définition : multiplier $3x$ par 2 multiplie le coefficient.\n\n" +
+      "Méthode : $3x \\times 2 = (3 \\times 2)x$.\n\n" +
+      "Calcul : $3x \\times 2 = 6x$, pas $5x$.\n\n" +
+      "Conclusion : non, le résultat correct est $6x$.",
+    tags: ["defi", "erreur", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "litteral_expression_defi_tpl_2",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "litteral_expression",
+    microId: "litteral_expression_defi",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Remplace la lettre par sa valeur dans l’expression du prix.",
+    tags: ["defi", "situation", "substitution", "template"],
+    generate: () => {
+      const prix = randomInt(2, 6);
+      const frais = randomInt(1, 8);
+      const n = randomInt(3, 10);
+      const total = prix * n + frais;
+      return {
+        text: `Le prix total de n objets est donné par $${prix}n + ${frais}$ (en euros). Combien coûte l’achat de ${n} objets ?`,
+        format: "short",
+        expected: [String(total)],
+        comparator: "number_equal",
+        explanation:
+          "Définition : on substitue la valeur de n dans l’expression du prix.\n\n" +
+          `Méthode : on remplace n par ${n}.\n\n` +
+          `Calcul : $${prix} \\times ${n} + ${frais} = ${prix * n} + ${frais} = ${total}$.\n\n` +
+          `Conclusion : l’achat coûte ${total} euros.`,
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "litteral_expression_defi_tpl_3",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "litteral_expression",
+    microId: "litteral_expression_defi",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Traduis l’âge actuel puis remplace.",
+    tags: ["defi", "situation", "substitution", "template"],
+    generate: () => {
+      const ecart = randomInt(3, 12);
+      const age = randomInt(8, 20);
+      const resultat = age + ecart;
+      return {
+        text: `Marie a $x$ ans. Son frère a ${ecart} ans de plus, soit $x + ${ecart}$ ans. Si Marie a ${age} ans, quel est l’âge de son frère ?`,
+        format: "short",
+        expected: [String(resultat)],
+        comparator: "number_equal",
+        explanation:
+          "Définition : l’âge du frère est donné par l’expression $x + " + ecart + "$.\n\n" +
+          `Méthode : on remplace x par ${age}.\n\n` +
+          `Calcul : $${age} + ${ecart} = ${resultat}$.\n\n` +
+          `Conclusion : son frère a ${resultat} ans.`,
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "litteral_expression_defi_open_2",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "litteral_expression",
+    microId: "litteral_expression_defi",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Explique la différence entre le coefficient et le terme constant dans l’expression $4x + 7$.",
+    format: "open",
+    expected: ["coefficient", "4", "constant", "7"],
+    comparator: "contains_keyword",
+    hint: "L’un est devant la lettre, l’autre est un nombre seul.",
+    explanation:
+      "Définition : le coefficient est le nombre devant la lettre ; le terme constant est un nombre seul.\n\n" +
+      "Méthode : on repère chaque rôle dans $4x + 7$.\n\n" +
+      "Calcul : 4 est le coefficient de x, 7 est le terme constant.\n\n" +
+      "Conclusion : 4 multiplie x, tandis que 7 ne dépend pas de x.",
+    tags: ["defi", "open"],
+  },
 ];
