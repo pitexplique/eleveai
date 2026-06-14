@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { MouseEvent as ReactMouseEvent } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -200,6 +200,19 @@ export default function AccueilPage({
   const [showSignatureMeaning, setShowSignatureMeaning] = useState(true);
   const nouveautes = useDragScroll();
 
+  // Bandeau d'avis sur une ligne sous l'image (retour d'une élève) : on fait
+  // défiler un avis à la fois, toutes les 5 s.
+  const [avisLigneIndex, setAvisLigneIndex] = useState(0);
+  useEffect(() => {
+    if (derniersAvis.length <= 1) return;
+    const id = setInterval(
+      () => setAvisLigneIndex((i) => (i + 1) % derniersAvis.length),
+      5000,
+    );
+    return () => clearInterval(id);
+  }, [derniersAvis.length]);
+  const avisLigne = derniersAvis[avisLigneIndex % derniersAvis.length];
+
   const eleveClasse = eleve?.classe?.toLowerCase() ?? null;
   const prenomAffiche = getPrenomAffiche(eleve?.nom);
   const isCmPrimary = eleveClasse === "cm1" || eleveClasse === "cm2";
@@ -354,6 +367,30 @@ export default function AccueilPage({
             </Link>
           </div>
         )}
+      </section>
+
+      {/* ── AVIS EN UNE LIGNE (sous l'image) — retour d'une élève ────────────── */}
+      <section className="border-b border-white/10 bg-[#041B33] px-4 py-2.5 sm:px-6 lg:px-8">
+        <div className="mx-auto flex max-w-6xl items-center justify-center gap-2 sm:gap-3">
+          <span
+            className="shrink-0 text-sm tracking-widest text-amber-300"
+            aria-label={`Note ${avisLigne.note} sur 5`}
+          >
+            {"★".repeat(avisLigne.note)}
+          </span>
+          <p className="min-w-0 truncate text-xs font-medium text-white/85 sm:text-sm">
+            «&nbsp;{avisLigne.quote}&nbsp;»
+            <span className="ml-1.5 font-black text-white/55">
+              — {avisLigne.prenom} · {avisLigne.detail}
+            </span>
+          </p>
+          <Link
+            href="/votre-avis"
+            className="shrink-0 text-[11px] font-black text-emerald-300 transition hover:translate-x-0.5 sm:text-xs"
+          >
+            Donner mon avis →
+          </Link>
+        </div>
       </section>
 
       {/* ── CHEMINS CONSEILLÉS — suggestions personnalisées (idée d'Arthur) ───── */}
