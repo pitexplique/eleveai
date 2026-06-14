@@ -8,8 +8,8 @@ export default function ElevesALHonneur() {
   if (elevesALHonneur.length === 0) return null;
 
   return (
-    <section className="mx-auto max-w-4xl px-4 pt-10 sm:pt-12">
-      <div className="overflow-hidden rounded-3xl border border-amber-400/30 bg-gradient-to-br from-amber-500/[0.12] to-yellow-500/[0.06] p-6 sm:p-8">
+    <section className="mx-auto max-w-5xl px-4 pt-6 sm:pt-8">
+      <div className="overflow-hidden rounded-3xl border border-amber-400/30 bg-gradient-to-br from-amber-500/[0.12] to-yellow-500/[0.06] p-5 sm:p-7">
         <div className="flex flex-wrap items-center justify-between gap-2">
           <h2 className="text-2xl font-black text-slate-50 sm:text-3xl">
             🌟 Les élèves à l&apos;honneur
@@ -22,7 +22,7 @@ export default function ElevesALHonneur() {
           Merci à celles et ceux qui font grandir EleveAI. La prochaine&nbsp;? Peut-être toi.
         </p>
 
-        <div className="mt-5 grid gap-3 sm:grid-cols-2">
+        <div className="mt-4 grid gap-3 sm:grid-cols-2">
           {elevesALHonneur.map((e, i) => (
             <div
               key={i}

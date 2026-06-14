@@ -255,7 +255,7 @@ export default function AccueilPage() {
 
       {/* ── HERO — Image plein écran ────────────────────────────────────────── */}
       <section
-        className="relative w-full animate-gradient-shift px-3 pt-3 sm:px-6"
+        className="relative w-full animate-gradient-shift px-3 pt-2 sm:px-6"
         style={{
           backgroundImage:
             "linear-gradient(115deg, #041B33 0%, #0a2a55 35%, #251355 65%, #041B33 100%)",
@@ -264,20 +264,20 @@ export default function AccueilPage() {
         {/* L'image ne doit pas contenir d'éléments qui ressemblent à des boutons :
             les élèves essayaient de cliquer sur les cartes dessinées (retours du
             11-12/06/2026). Les vraies actions sont sous l'image. */}
-        <div className="relative z-10 mx-auto max-w-5xl px-4 py-5 text-center md:w-[72%] xl:w-[56rem]">
-          <p className="text-2xl font-black tracking-wide text-white sm:text-4xl">
+        <div className="relative z-10 mx-auto max-w-5xl px-4 py-3 text-center md:w-[72%] xl:w-[56rem]">
+          <p className="text-2xl font-black tracking-wide text-white sm:text-3xl">
             La liberté d&apos;apprendre
           </p>
           <button
             type="button"
             onClick={() => setShowSignatureMeaning((value) => !value)}
-            className="mt-3 inline-flex items-center justify-center rounded-full border border-yellow-300/70 bg-yellow-300 px-5 py-2 text-sm font-black tracking-[0.16em] text-slate-950 shadow-lg shadow-yellow-950/20 transition hover:-translate-y-0.5 hover:bg-yellow-200 sm:text-lg"
+            className="mt-2 inline-flex items-center justify-center rounded-full border border-yellow-300/70 bg-yellow-300 px-4 py-1.5 text-sm font-black tracking-[0.16em] text-slate-950 shadow-lg shadow-yellow-950/20 transition hover:-translate-y-0.5 hover:bg-yellow-200 sm:text-base"
             aria-expanded={showSignatureMeaning}
           >
             ε → ∞
           </button>
           {showSignatureMeaning && (
-            <p className="mx-auto mt-3 inline-flex max-w-full rounded-full border border-white/15 bg-white/10 px-4 py-2 text-sm font-black text-yellow-100 shadow-lg backdrop-blur-sm sm:text-base">
+            <p className="mx-auto mt-2 inline-flex max-w-full rounded-full border border-white/15 bg-white/10 px-3.5 py-1.5 text-xs font-black text-yellow-100 shadow-lg backdrop-blur-sm sm:text-sm">
               &quot;Un petit détail peut tout changer&quot;
             </p>
           )}
@@ -317,7 +317,7 @@ export default function AccueilPage() {
       </section>
 
       {/* ── CHEMINS CONSEILLÉS — suggestions personnalisées (idée d'Arthur) ───── */}
-      <section className="bg-[#041B33] px-4 pb-8 pt-6 sm:px-6 lg:px-8">
+      <section className="bg-[#041B33] px-4 pb-7 pt-5 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-6xl">
           <div className="mb-5 text-center">
             <h2 className="text-2xl font-black leading-tight text-white sm:text-3xl">
@@ -481,7 +481,7 @@ export default function AccueilPage() {
       </section>
 
       {/* ── FEATURED BANNER ──────────────────────────────────────────────────── */}
-      <section className="px-4 pb-12 sm:px-6 lg:px-8">
+      <section className="px-4 pb-7 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-6xl">
           {eleveClasse === "3e" || eleveClasse === "4e" ? (
             <Link href="/coach-brevet" className="group relative block h-[220px] overflow-hidden rounded-2xl shadow-2xl sm:h-[280px]">

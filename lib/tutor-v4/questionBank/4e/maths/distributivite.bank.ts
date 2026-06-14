@@ -777,8 +777,8 @@ export const distributiviteBank: TutorBankItemV4[] = [
     id: "litteral_distributivite_facto_fixed_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "litteral_distributivite",
-    microId: "litteral_distributivite_factorisation",
+    notionId: "litteral_factorisation",
+    microId: "litteral_factoriser_simple",
     difficulty: 2,
     theme: "neutral",
     text: "Quelle est la forme factorisée de 4x + 12 ?",
@@ -798,8 +798,8 @@ export const distributiviteBank: TutorBankItemV4[] = [
     id: "litteral_distributivite_facto_tpl_simple_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "litteral_distributivite",
-    microId: "litteral_distributivite_factorisation",
+    notionId: "litteral_factorisation",
+    microId: "litteral_factoriser_simple",
     difficulty: 2,
     theme: "neutral",
     hint: "Cherche le facteur commun aux deux termes.",
@@ -825,8 +825,8 @@ export const distributiviteBank: TutorBankItemV4[] = [
     id: "litteral_distributivite_facto_tpl_simple_2",
     niveau: "4e",
     matiere: "maths",
-    notionId: "litteral_distributivite",
-    microId: "litteral_distributivite_factorisation",
+    notionId: "litteral_factorisation",
+    microId: "litteral_factoriser_simple",
     difficulty: 2,
     theme: "neutral",
     hint: "Identifie le facteur commun, puis divise chaque terme par lui.",
@@ -850,8 +850,8 @@ export const distributiviteBank: TutorBankItemV4[] = [
     id: "litteral_distributivite_facto_tpl_coeff_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "litteral_distributivite",
-    microId: "litteral_distributivite_factorisation",
+    notionId: "litteral_factorisation",
+    microId: "litteral_facteur_commun",
     difficulty: 3,
     theme: "neutral",
     hint: "Le facteur commun peut être une lettre ou un nombre selon l'expression.",
@@ -876,8 +876,8 @@ export const distributiviteBank: TutorBankItemV4[] = [
     id: "litteral_distributivite_facto_tpl_verif_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "litteral_distributivite",
-    microId: "litteral_distributivite_factorisation",
+    notionId: "litteral_factorisation",
+    microId: "litteral_factoriser_verifier",
     difficulty: 3,
     theme: "neutral",
     hint: "Factorise puis vérifie en développant.",
@@ -1316,5 +1316,376 @@ export const distributiviteBank: TutorBankItemV4[] = [
           "\n\nConclusion : l’expression obtenue est développée ou réduite correctement.",
       };
     },
+  },
+
+  /* =========================================================
+     COMPLÉMENTS (top-up ~10 items / microSkill)
+  ========================================================= */
+
+  // ---------- DISTRIB_SIMPLE ----------
+  {
+    kind: "fixed",
+    id: "litteral_distributivite_simple_fixed_2",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "litteral_distributivite",
+    microId: "litteral_distributivite_simple",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Quel est le développement de $5(x + 2)$ ?",
+    format: "qcm",
+    choices: ["$5x + 10$", "$5x + 2$", "$x + 10$", "$7x$"],
+    expected: ["$5x + 10$"],
+    comparator: "mcq_exact",
+    hint: "Le 5 multiplie x et 2.",
+    explanation:
+      "Définition : la distributivité transforme un produit en somme : $a(b + c) = ab + ac$.\n\n" +
+      "Méthode : on multiplie 5 par chaque terme de la parenthèse.\n\n" +
+      "Calcul : $5(x + 2) = 5x + 10$.\n\n" +
+      "Conclusion : le développement est $5x + 10$.",
+    tags: ["litteral_distributivite", "simple", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "litteral_distributivite_simple_tpl_qcm_1",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "litteral_distributivite",
+    microId: "litteral_distributivite_simple",
+    difficulty: 1,
+    theme: "neutral",
+    hint: "Le coefficient multiplie chaque terme.",
+    tags: ["litteral_distributivite", "simple", "qcm", "template"],
+    generate: () => {
+      const a = randomInt(2, 8);
+      const b = randomInt(1, 9);
+      const correct = `$${a}x + ${a * b}$`;
+      return {
+        text: `Quel est le développement de $${a}(x + ${b})$ ?`,
+        format: "qcm",
+        choices: [
+          correct,
+          `$${a}x + ${b}$`,
+          `$x + ${a * b}$`,
+          `$${a + 1}x + ${a * b}$`,
+        ],
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation:
+          "Définition : $a(b + c) = ab + ac$.\n\n" +
+          `Méthode : on multiplie ${a} par x et par ${b}.\n\n` +
+          `Calcul : $${a}(x + ${b}) = ${a}x + ${a * b}$.\n\n` +
+          `Conclusion : le développement est ${correct}.`,
+      };
+    },
+  },
+
+  // ---------- DISTRIB_DOUBLE ----------
+  {
+    kind: "fixed",
+    id: "litteral_distributivite_double_fixed_2",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "litteral_distributivite",
+    microId: "litteral_distributivite_double",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Quel est le développement réduit de $(x + 1)(x + 4)$ ?",
+    format: "qcm",
+    choices: ["$x^2 + 5x + 4$", "$x^2 + 4x + 4$", "$x^2 + 5x + 5$", "$2x + 5$"],
+    expected: ["$x^2 + 5x + 4$"],
+    comparator: "mcq_exact",
+    hint: "Fais les quatre produits puis regroupe.",
+    explanation:
+      "Définition : la double distributivité fait quatre produits.\n\n" +
+      "Méthode : $(x+1)(x+4) = x \\times x + x \\times 4 + 1 \\times x + 1 \\times 4$.\n\n" +
+      "Calcul : $= x^2 + 4x + x + 4 = x^2 + 5x + 4$.\n\n" +
+      "Conclusion : le résultat est $x^2 + 5x + 4$.",
+    tags: ["litteral_distributivite", "double", "qcm"],
+  },
+
+  // ---------- DISTRIB_RECONNAITRE ----------
+  {
+    kind: "fixed",
+    id: "litteral_distributivite_reconnaitre_fixed_2",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "litteral_distributivite",
+    microId: "litteral_distributivite_reconnaitre",
+    difficulty: 1,
+    theme: "neutral",
+    text: "Quelle expression contient une double distributivité à effectuer ?",
+    format: "qcm",
+    choices: ["$(x + 2)(x + 5)$", "$3(x + 1)$", "$4x + 7$", "$x - 9$"],
+    expected: ["$(x + 2)(x + 5)$"],
+    comparator: "mcq_exact",
+    hint: "Cherche un produit de deux parenthèses.",
+    explanation:
+      "Définition : une double distributivité est un produit de deux parenthèses.\n\n" +
+      "Méthode : on cherche deux parenthèses multipliées.\n\n" +
+      "Calcul : $(x + 2)(x + 5)$ est un produit de deux parenthèses.\n\n" +
+      "Conclusion : c’est $(x + 2)(x + 5)$.",
+    tags: ["litteral_distributivite", "reconnaitre", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "litteral_distributivite_reconnaitre_fixed_3",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "litteral_distributivite",
+    microId: "litteral_distributivite_reconnaitre",
+    difficulty: 2,
+    theme: "neutral",
+    text: "L’expression $2(x + 3)$ est sous quelle forme ?",
+    format: "qcm",
+    choices: ["forme factorisée (à développer)", "forme développée", "forme réduite", "forme numérique"],
+    expected: ["forme factorisée (à développer)"],
+    comparator: "mcq_exact",
+    hint: "Il y a encore une parenthèse précédée d’un coefficient.",
+    explanation:
+      "Définition : une forme factorisée se présente comme un produit ; une forme développée est une somme.\n\n" +
+      "Méthode : on regarde s’il reste une parenthèse à distribuer.\n\n" +
+      "Calcul : $2(x + 3)$ est un produit, donc une forme factorisée à développer.\n\n" +
+      "Conclusion : c’est une forme factorisée.",
+    tags: ["litteral_distributivite", "reconnaitre", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "litteral_distributivite_reconnaitre_fixed_4",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "litteral_distributivite",
+    microId: "litteral_distributivite_reconnaitre",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Quelle expression est déjà entièrement développée et réduite ?",
+    format: "qcm",
+    choices: ["$3x + 8$", "$3(x + 8)$", "$(x + 1)(x + 2)$", "$2(x + 4) + x$"],
+    expected: ["$3x + 8$"],
+    comparator: "mcq_exact",
+    hint: "Une forme développée n’a plus de parenthèse à distribuer.",
+    explanation:
+      "Définition : une expression développée et réduite n’a plus de parenthèse et regroupe les termes semblables.\n\n" +
+      "Méthode : on élimine celles qui contiennent encore une parenthèse.\n\n" +
+      "Calcul : $3x + 8$ n’a plus rien à développer.\n\n" +
+      "Conclusion : c’est $3x + 8$.",
+    tags: ["litteral_distributivite", "reconnaitre", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "litteral_distributivite_reconnaitre_tpl_3",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "litteral_distributivite",
+    microId: "litteral_distributivite_reconnaitre",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Une forme développée ne contient plus de parenthèse à distribuer.",
+    tags: ["litteral_distributivite", "reconnaitre", "template"],
+    generate: () => {
+      const a = randomInt(2, 7);
+      const b = randomInt(1, 8);
+      const developpee = randomChoice([true, false]);
+      const expr = developpee ? `${a}x + ${a * b}` : `${a}(x + ${b})`;
+      return {
+        text: `L’expression $${expr}$ est-elle déjà développée ?`,
+        format: "qcm",
+        choices: ["oui", "non"],
+        expected: [developpee ? "oui" : "non"],
+        comparator: "mcq_exact",
+        explanation:
+          "Définition : une forme développée n’a plus de parenthèse à distribuer.\n\n" +
+          "Méthode : on regarde la présence d’une parenthèse précédée d’un coefficient.\n\n" +
+          `Calcul : $${expr}$ ${developpee ? "n’a plus de parenthèse" : "contient encore une parenthèse à développer"}.\n\n` +
+          `Conclusion : ${developpee ? "oui, elle est développée" : "non, il faut la développer"}.`,
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "litteral_distributivite_reconnaitre_tpl_4",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "litteral_distributivite",
+    microId: "litteral_distributivite_reconnaitre",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Cherche le produit de deux parenthèses.",
+    tags: ["litteral_distributivite", "reconnaitre", "double", "template"],
+    generate: () => {
+      const b = randomInt(1, 6);
+      const c = randomInt(1, 6);
+      const a = randomInt(2, 6);
+      const correct = `$(x + ${b})(x + ${c})$`;
+      return {
+        text: "Quelle expression demande une double distributivité ?",
+        format: "qcm",
+        choices: [correct, `$${a}(x + ${b})$`, `$${a}x + ${c}$`, `$x + ${b}$`],
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation:
+          "Définition : la double distributivité concerne un produit de deux parenthèses.\n\n" +
+          "Méthode : on cherche deux parenthèses multipliées.\n\n" +
+          `Calcul : ${correct} est un produit de deux parenthèses.\n\n` +
+          `Conclusion : c’est ${correct}.`,
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "litteral_distributivite_reconnaitre_open_2",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "litteral_distributivite",
+    microId: "litteral_distributivite_reconnaitre",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Explique la différence entre une forme factorisée et une forme développée.",
+    format: "open",
+    expected: ["produit", "somme", "parenthèse"],
+    comparator: "contains_keyword",
+    hint: "L’une est un produit, l’autre une somme.",
+    explanation:
+      "Définition : une forme factorisée est écrite comme un produit (avec parenthèses) ; une forme développée est écrite comme une somme.\n\n" +
+      "Méthode : on regarde si l’expression est un produit ou une somme.\n\n" +
+      "Calcul : par exemple $3(x + 2)$ est factorisée, $3x + 6$ est développée.\n\n" +
+      "Conclusion : factorisée = produit, développée = somme.",
+    tags: ["litteral_distributivite", "reconnaitre", "open"],
+  },
+
+  // ---------- DISTRIB_DEFIS ----------
+  {
+    kind: "template",
+    id: "litteral_distributivite_defi_tpl_signe_1",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "litteral_distributivite",
+    microId: "litteral_distributivite_defi",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Le signe « − » devant la parenthèse change le signe de chaque terme.",
+    tags: ["litteral_distributivite", "defi", "signe", "template"],
+    generate: () => {
+      const a = randomInt(2, 6);
+      const b = randomInt(1, 6);
+      return {
+        text: `Un élève écrit $-${a}(x + ${b}) = -${a}x + ${a * b}$. A-t-il raison ?`,
+        format: "qcm",
+        choices: ["oui", "non"],
+        expected: ["non"],
+        comparator: "mcq_exact",
+        explanation:
+          "Définition : le signe « − » se distribue à tous les termes de la parenthèse.\n\n" +
+          `Méthode : $-${a}$ multiplie x et ${b}.\n\n` +
+          `Calcul : $-${a}(x + ${b}) = -${a}x - ${a * b}$.\n\n` +
+          "Conclusion : non, le second terme doit être négatif.",
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "litteral_distributivite_defi_fixed_1",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "litteral_distributivite",
+    microId: "litteral_distributivite_defi",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Quel est le développement de $5(2x + 3)$ ?",
+    format: "qcm",
+    choices: ["$10x + 15$", "$10x + 3$", "$7x + 8$", "$2x + 15$"],
+    expected: ["$10x + 15$"],
+    comparator: "mcq_exact",
+    hint: "Le 5 multiplie 2x et 3.",
+    explanation:
+      "Définition : $a(b + c) = ab + ac$, même si b contient un coefficient.\n\n" +
+      "Méthode : on multiplie 5 par 2x et par 3.\n\n" +
+      "Calcul : $5(2x + 3) = 10x + 15$.\n\n" +
+      "Conclusion : le développement est $10x + 15$.",
+    tags: ["litteral_distributivite", "defi", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "litteral_distributivite_defi_tpl_aire_1",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "litteral_distributivite",
+    microId: "litteral_distributivite_defi",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "L’aire d’un rectangle est longueur × largeur ; développe le produit.",
+    tags: ["litteral_distributivite", "defi", "aire", "double", "template"],
+    generate: () => {
+      const b = randomInt(1, 5);
+      const c = randomInt(1, 5);
+      const sum = b + c;
+      const prod = b * c;
+      return {
+        text: `Un rectangle a pour longueur $x + ${b}$ et pour largeur $x + ${c}$. Donner son aire sous forme développée et réduite.`,
+        format: "short",
+        expected: [
+          `x²+${sum}x+${prod}`,
+          `x^2+${sum}x+${prod}`,
+          `x² + ${sum}x + ${prod}`,
+          `x^2 + ${sum}x + ${prod}`,
+        ],
+        comparator: "contains_keyword",
+        explanation:
+          "Définition : l’aire est longueur × largeur, ici un produit de deux parenthèses.\n\n" +
+          "Méthode : on développe par double distributivité.\n\n" +
+          `Calcul : $(x + ${b})(x + ${c}) = x² + ${sum}x + ${prod}$.\n\n` +
+          `Conclusion : l’aire développée est $x² + ${sum}x + ${prod}$.`,
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "litteral_distributivite_defi_tpl_perimetre_1",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "litteral_distributivite",
+    microId: "litteral_distributivite_defi",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Le périmètre est 2 × (longueur + largeur) ; développe.",
+    tags: ["litteral_distributivite", "defi", "perimetre", "template"],
+    generate: () => {
+      const b = randomInt(1, 6);
+      const c = randomInt(1, 6);
+      const coeff = 2 * 2;
+      const cst = 2 * (b + c);
+      return {
+        text: `Un rectangle a pour longueur $2x + ${b}$ et pour largeur ${c}. Donner son périmètre sous forme développée et réduite.`,
+        format: "short",
+        expected: [`${coeff}x+${cst}`, `${coeff}x + ${cst}`],
+        comparator: "contains_keyword",
+        explanation:
+          "Définition : le périmètre est $2 \\times (\\text{longueur} + \\text{largeur})$.\n\n" +
+          `Méthode : on calcule la somme puis on distribue le 2.\n\n` +
+          `Calcul : $2(2x + ${b} + ${c}) = 2(2x + ${b + c}) = ${coeff}x + ${cst}$.\n\n` +
+          `Conclusion : le périmètre est $${coeff}x + ${cst}$.`,
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "litteral_distributivite_defi_open_double_1",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "litteral_distributivite",
+    microId: "litteral_distributivite_defi",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Explique pourquoi la double distributivité demande quatre produits.",
+    format: "open",
+    expected: ["chaque terme", "quatre", "produits"],
+    comparator: "contains_keyword",
+    hint: "Chaque terme de la première parenthèse rencontre chaque terme de la seconde.",
+    explanation:
+      "Définition : dans un produit de deux parenthèses à deux termes, chaque terme de l’une multiplie chaque terme de l’autre.\n\n" +
+      "Méthode : on associe chaque terme de la première parenthèse aux deux de la seconde.\n\n" +
+      "Calcul : $2 \\times 2 = 4$ produits à effectuer.\n\n" +
+      "Conclusion : la double distributivité demande quatre produits.",
+    tags: ["litteral_distributivite", "defi", "open"],
   },
 ];
