@@ -1739,4 +1739,507 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
       "Conclusion : cette méthode évite les erreurs de logique.",
     tags: ["algo_programmation", "defi", "open", "synthese"],
   },
+
+  /* =========================================================
+     COMPLÉMENTS (top-up ~10 items / microSkill)
+  ========================================================= */
+
+  // ---------- ALGO_VARIABLE ----------
+  {
+    kind: "fixed",
+    id: "4e_algo_variable_fixed_3_initialisation",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "algo_programmation",
+    microId: "algo_variable",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Que fait le bloc « mettre score à 0 » ?",
+    format: "qcm",
+    choices: [
+      "il donne la valeur 0 à la variable score",
+      "il ajoute 0 au score actuel",
+      "il supprime la variable score",
+      "il affiche 0 à l’écran",
+    ],
+    expected: ["il donne la valeur 0 à la variable score"],
+    comparator: "mcq_exact",
+    hint: "« mettre à » fixe la valeur de départ.",
+    explanation:
+      "Définition : « mettre à » initialise une variable avec une valeur.\n\n" +
+      "Méthode : on remplace l’ancienne valeur par la nouvelle.\n\n" +
+      "Exécution : score vaut désormais 0.\n\n" +
+      "Conclusion : le bloc fixe la valeur de score à 0.",
+    tags: ["algo_programmation", "variable", "qcm"],
+    canvas: scratchCanvas("Initialisation", [
+      { type: "event" },
+      { type: "set_variable", variable: "score", value: 0 },
+    ]),
+  },
+  {
+    kind: "template",
+    id: "4e_algo_variable_tpl_6_set_then_change",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "algo_programmation",
+    microId: "algo_variable",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "On part de la valeur initiale, puis on ajoute.",
+    tags: ["algo_programmation", "variable", "template", "canvas"],
+    generate: () => {
+      const depart = randomChoice([0, 3, 5, 8]);
+      const ajout = randomChoice([2, 4, 6, 7]);
+      const final = depart + ajout;
+      return {
+        text: `score vaut ${depart}. On exécute « ajouter ${ajout} à score ». Quelle est la nouvelle valeur de score ?`,
+        format: "short",
+        expected: [String(final)],
+        comparator: "number_equal",
+        explanation:
+          "Définition : « ajouter » modifie la variable en lui ajoutant une valeur.\n\n" +
+          "Méthode : on additionne l’ajout à la valeur de départ.\n\n" +
+          `Exécution : ${depart} + ${ajout} = ${final}.\n\n` +
+          `Conclusion : score vaut ${final}.`,
+        canvas: scratchCanvas("Modifier une variable", [
+          { type: "event" },
+          { type: "set_variable", variable: "score", value: depart },
+          { type: "change_variable", variable: "score", value: ajout },
+        ]),
+      };
+    },
+  },
+
+  // ---------- ALGO_PROGRAMME_OBJECTIF ----------
+  {
+    kind: "fixed",
+    id: "4e_algo_programme_objectif_fixed_3_condition_au_moins",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "algo_programmation",
+    microId: "algo_programme_objectif",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Pour afficher « Gagné » si score est au moins 10, quelle condition choisir ?",
+    format: "qcm",
+    choices: ["score ≥ 10", "score > 10", "score < 10", "score = 0"],
+    expected: ["score ≥ 10"],
+    comparator: "mcq_exact",
+    hint: "« au moins 10 » inclut 10.",
+    explanation:
+      "Définition : « au moins 10 » signifie supérieur ou égal à 10.\n\n" +
+      "Méthode : on choisit le symbole ≥.\n\n" +
+      "Exécution : score = 10 doit afficher « Gagné ».\n\n" +
+      "Conclusion : la condition est score ≥ 10.",
+    tags: ["algo_programmation", "programme_objectif", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "4e_algo_programme_objectif_tpl_5_choisir_condition",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "algo_programmation",
+    microId: "algo_programme_objectif",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Traduis l’objectif en symbole de comparaison.",
+    tags: ["algo_programmation", "programme_objectif", "template"],
+    generate: () => {
+      const seuil = randomChoice([8, 10, 12, 15]);
+      const cas = randomChoice([
+        { texte: `strictement plus de ${seuil}`, cond: `score > ${seuil}` },
+        { texte: `au moins ${seuil}`, cond: `score ≥ ${seuil}` },
+        { texte: `moins de ${seuil}`, cond: `score < ${seuil}` },
+      ]);
+      return {
+        text: `Objectif : réagir quand le score est ${cas.texte}. Quelle condition utiliser ?`,
+        format: "qcm",
+        choices: shuffle([cas.cond, `score = ${seuil}`, `score > ${seuil + 2}`, `score < ${seuil - 2}`]),
+        expected: [cas.cond],
+        comparator: "mcq_exact",
+        explanation:
+          "Définition : on traduit l’objectif en condition.\n\n" +
+          "Méthode : on choisit le bon symbole (>, ≥, <).\n\n" +
+          `Exécution : « ${cas.texte} » se traduit par « ${cas.cond} ».\n\n` +
+          `Conclusion : la condition est « ${cas.cond} ».`,
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "4e_algo_programme_objectif_open_2",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "algo_programmation",
+    microId: "algo_programme_objectif",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Explique comment choisir la condition d’un programme à partir d’un objectif.",
+    format: "open",
+    expected: ["objectif", "condition", "comparaison"],
+    comparator: "contains_keyword",
+    hint: "On traduit l’objectif en comparaison.",
+    explanation:
+      "Définition : un objectif décrit ce que doit faire le programme.\n\n" +
+      "Méthode : on traduit l’objectif en une comparaison (>, ≥, <, =).\n\n" +
+      "Exécution : on teste quelques valeurs pour vérifier.\n\n" +
+      "Conclusion : on choisit la condition qui réalise exactement l’objectif.",
+    tags: ["algo_programmation", "programme_objectif", "open"],
+  },
+
+  // ---------- ALGO_MODIFIER ----------
+  {
+    kind: "template",
+    id: "4e_algo_modifier_tpl_5_seuil",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "algo_programmation",
+    microId: "algo_modifier",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "On remplace l’ancien seuil par le nouveau dans la condition.",
+    tags: ["algo_programmation", "modifier", "template"],
+    generate: () => {
+      const ancien = randomChoice([10, 12, 15]);
+      const nouveau = randomChoice([18, 20, 25]);
+      return {
+        text: `Un programme teste « score > ${ancien} ». On veut maintenant réagir seulement si score dépasse ${nouveau}. Quelle est la nouvelle condition ?`,
+        format: "qcm",
+        choices: shuffle([`score > ${nouveau}`, `score > ${ancien}`, `score < ${nouveau}`, `score = ${nouveau}`]),
+        expected: [`score > ${nouveau}`],
+        comparator: "mcq_exact",
+        explanation:
+          "Définition : modifier un programme, c’est changer un paramètre.\n\n" +
+          "Méthode : on remplace l’ancien seuil par le nouveau.\n\n" +
+          `Exécution : la condition devient « score > ${nouveau} ».\n\n` +
+          `Conclusion : la nouvelle condition est « score > ${nouveau} ».`,
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "4e_algo_modifier_tpl_6_increment",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "algo_programmation",
+    microId: "algo_modifier",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "On change la valeur ajoutée à chaque tour.",
+    tags: ["algo_programmation", "modifier", "template", "canvas"],
+    generate: () => {
+      const ancien = randomChoice([1, 2, 3]);
+      const nouveau = randomChoice([4, 5, 6]);
+      const fois = randomChoice([3, 4, 5]);
+      const final = nouveau * fois;
+      return {
+        text: `Un programme part de score = 0 et répète ${fois} fois « ajouter ${ancien} à score ». On remplace ${ancien} par ${nouveau}. Quel sera le score final ?`,
+        format: "short",
+        expected: [String(final)],
+        comparator: "number_equal",
+        explanation:
+          "Définition : modifier l’incrément change le résultat de la boucle.\n\n" +
+          `Méthode : on ajoute ${nouveau} à chaque tour, ${fois} fois.\n\n` +
+          `Exécution : ${nouveau} × ${fois} = ${final}.\n\n` +
+          `Conclusion : le score final est ${final}.`,
+        canvas: scratchCanvas("Modifier l’incrément", [
+          { type: "event" },
+          { type: "set_variable", variable: "score", value: 0 },
+          {
+            type: "repeat",
+            times: fois,
+            children: [{ type: "change_variable", variable: "score", value: nouveau }],
+          },
+        ]),
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "4e_algo_modifier_fixed_2_corriger_egalite",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "algo_programmation",
+    microId: "algo_modifier",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Un programme doit réagir si score est « au moins 10 », mais il utilise « score > 10 ». Quelle correction faut-il faire ?",
+    format: "qcm",
+    choices: [
+      "remplacer par « score ≥ 10 »",
+      "remplacer par « score < 10 »",
+      "supprimer la condition",
+      "remplacer par « score = 10 »",
+    ],
+    expected: ["remplacer par « score ≥ 10 »"],
+    comparator: "mcq_exact",
+    hint: "« au moins 10 » inclut 10.",
+    explanation:
+      "Définition : « au moins 10 » signifie supérieur ou égal à 10.\n\n" +
+      "Méthode : on inclut le cas d’égalité.\n\n" +
+      "Exécution : « score > 10 » exclut 10, ce qui est faux.\n\n" +
+      "Conclusion : on corrige en « score ≥ 10 ».",
+    tags: ["algo_programmation", "modifier", "correction", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "4e_algo_modifier_open_2",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "algo_programmation",
+    microId: "algo_modifier",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Explique la méthode pour modifier un programme afin de changer son seuil de réussite.",
+    format: "open",
+    expected: ["condition", "seuil", "remplacer"],
+    comparator: "contains_keyword",
+    hint: "On repère le paramètre à changer.",
+    explanation:
+      "Définition : modifier un programme, c’est ajuster un paramètre sans tout réécrire.\n\n" +
+      "Méthode : on repère la condition contenant le seuil et on remplace la valeur.\n\n" +
+      "Exécution : on vérifie ensuite avec quelques scores.\n\n" +
+      "Conclusion : on remplace le seuil dans la condition.",
+    tags: ["algo_programmation", "modifier", "open"],
+  },
+
+  // ---------- ALGO_DEFIS ----------
+  {
+    kind: "fixed",
+    id: "4e_algo_defi_fixed_1_trace",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "algo_programmation",
+    microId: "algo_defi",
+    difficulty: 4,
+    theme: "neutral",
+    text: "score vaut 0. On répète 3 fois « ajouter 4 à score ». Quelle est la valeur finale de score ?",
+    format: "qcm",
+    choices: ["12", "7", "4", "3"],
+    expected: ["12"],
+    comparator: "mcq_exact",
+    hint: "4 ajouté 3 fois.",
+    explanation:
+      "Définition : une boucle répète une instruction plusieurs fois.\n\n" +
+      "Méthode : on ajoute 4 à chaque tour, 3 fois.\n\n" +
+      "Exécution : 0 + 4 + 4 + 4 = 12.\n\n" +
+      "Conclusion : score vaut 12.",
+    tags: ["algo_programmation", "defi", "boucle", "qcm"],
+    canvas: scratchCanvas("Boucle simple", [
+      { type: "event" },
+      { type: "set_variable", variable: "score", value: 0 },
+      {
+        type: "repeat",
+        times: 3,
+        children: [{ type: "change_variable", variable: "score", value: 4 }],
+      },
+    ]),
+  },
+  {
+    kind: "fixed",
+    id: "4e_algo_defi_fixed_2_role_variable",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "algo_programmation",
+    microId: "algo_defi",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Dans un programme, à quoi sert une variable comme « score » ?",
+    format: "qcm",
+    choices: [
+      "à mémoriser une valeur qui peut changer",
+      "à dessiner une figure",
+      "à effacer l’écran",
+      "à arrêter le programme",
+    ],
+    expected: ["à mémoriser une valeur qui peut changer"],
+    comparator: "mcq_exact",
+    hint: "Une variable garde une valeur en mémoire.",
+    explanation:
+      "Définition : une variable mémorise une valeur qui peut évoluer.\n\n" +
+      "Méthode : on l’initialise puis on la modifie.\n\n" +
+      "Exécution : score change au fil du programme.\n\n" +
+      "Conclusion : une variable sert à mémoriser une valeur qui peut changer.",
+    tags: ["algo_programmation", "defi", "variable", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "4e_algo_defi_tpl_3_score_final",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "algo_programmation",
+    microId: "algo_defi",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Calcule la valeur de départ plus les ajouts de la boucle.",
+    tags: ["algo_programmation", "defi", "variable", "boucle", "template", "canvas"],
+    generate: () => {
+      const depart = randomChoice([1, 2, 5]);
+      const ajout = randomChoice([2, 3, 4]);
+      const fois = randomChoice([3, 4, 5]);
+      const final = depart + ajout * fois;
+      return {
+        text: `score vaut ${depart}. On répète ${fois} fois « ajouter ${ajout} à score ». Quelle est la valeur finale de score ?`,
+        format: "short",
+        expected: [String(final)],
+        comparator: "number_equal",
+        explanation:
+          "Définition : la boucle ajoute plusieurs fois la même valeur.\n\n" +
+          `Méthode : score = départ + ajout × nombre de tours.\n\n` +
+          `Exécution : ${depart} + ${ajout} × ${fois} = ${final}.\n\n` +
+          `Conclusion : score vaut ${final}.`,
+        canvas: scratchCanvas("Variable + boucle", [
+          { type: "event" },
+          { type: "set_variable", variable: "score", value: depart },
+          {
+            type: "repeat",
+            times: fois,
+            children: [{ type: "change_variable", variable: "score", value: ajout }],
+          },
+        ]),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "4e_algo_defi_tpl_4_message",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "algo_programmation",
+    microId: "algo_defi",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Calcule score, puis teste la condition.",
+    tags: ["algo_programmation", "defi", "condition", "template", "canvas"],
+    generate: () => {
+      const depart = randomChoice([0, 2, 4]);
+      const ajout = randomChoice([2, 3]);
+      const fois = randomChoice([2, 3, 4]);
+      const seuil = randomChoice([8, 10, 12]);
+      const final = depart + ajout * fois;
+      const message = final >= seuil ? "Gagné" : "Perdu";
+      return {
+        text:
+          `score vaut ${depart}. On répète ${fois} fois « ajouter ${ajout} à score », ` +
+          `puis on teste « score ≥ ${seuil} ». Quel message s’affiche ?`,
+        format: "qcm",
+        choices: shuffle(["Gagné", "Perdu"]),
+        expected: [message],
+        comparator: "mcq_exact",
+        explanation:
+          "Définition : on combine boucle, variable et condition.\n\n" +
+          "Méthode : on calcule la valeur finale, puis on teste la condition.\n\n" +
+          `Exécution : score = ${depart} + ${ajout} × ${fois} = ${final}. ${final} ≥ ${seuil} est ${final >= seuil ? "vrai" : "faux"}.\n\n` +
+          `Conclusion : le message affiché est « ${message} ».`,
+        canvas: scratchCanvas("Boucle + condition", [
+          { type: "event" },
+          { type: "set_variable", variable: "score", value: depart },
+          {
+            type: "repeat",
+            times: fois,
+            children: [{ type: "change_variable", variable: "score", value: ajout }],
+          },
+          {
+            type: "if_else",
+            condition: `score >= ${seuil}`,
+            children: [{ type: "say", text: "Gagné" }],
+            elseChildren: [{ type: "say", text: "Perdu" }],
+          },
+        ]),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "4e_algo_defi_tpl_5_debug",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "algo_programmation",
+    microId: "algo_defi",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Compare l’objectif à la condition écrite.",
+    tags: ["algo_programmation", "defi", "debug", "template"],
+    generate: () => {
+      const seuil = randomChoice([10, 12, 15]);
+      return {
+        text:
+          `Objectif : afficher « Trop bas » si score est strictement inférieur à ${seuil}. ` +
+          `Le programme utilise « score ≤ ${seuil} ». Quelle est l’erreur ?`,
+        format: "qcm",
+        choices: shuffle([
+          `il inclut à tort le cas où score vaut ${seuil}`,
+          "il n’affiche jamais le message",
+          "il ajoute des points en trop",
+          "il ne contient pas de condition",
+        ]),
+        expected: [`il inclut à tort le cas où score vaut ${seuil}`],
+        comparator: "mcq_exact",
+        explanation:
+          "Définition : « strictement inférieur » exclut l’égalité.\n\n" +
+          "Méthode : on compare l’objectif et la condition.\n\n" +
+          `Exécution : « score ≤ ${seuil} » accepte score = ${seuil}, ce qui ne doit pas arriver.\n\n` +
+          "Conclusion : l’erreur est l’inclusion du cas d’égalité (il fallait « < »).",
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "4e_algo_defi_tpl_6_double_boucle",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "algo_programmation",
+    microId: "algo_defi",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Additionne les ajouts des deux boucles.",
+    tags: ["algo_programmation", "defi", "variable", "boucle", "template", "canvas"],
+    generate: () => {
+      const a1 = randomChoice([2, 3]);
+      const f1 = randomChoice([2, 3]);
+      const a2 = randomChoice([1, 4]);
+      const f2 = randomChoice([2, 3]);
+      const final = a1 * f1 + a2 * f2;
+      return {
+        text:
+          `score vaut 0. On répète ${f1} fois « ajouter ${a1} », ` +
+          `puis on répète ${f2} fois « ajouter ${a2} ». Quelle est la valeur finale de score ?`,
+        format: "short",
+        expected: [String(final)],
+        comparator: "number_equal",
+        explanation:
+          "Définition : deux boucles successives ajoutent chacune leur part.\n\n" +
+          "Méthode : on calcule chaque boucle puis on additionne.\n\n" +
+          `Exécution : ${a1} × ${f1} + ${a2} × ${f2} = ${a1 * f1} + ${a2 * f2} = ${final}.\n\n` +
+          `Conclusion : score vaut ${final}.`,
+        canvas: scratchCanvas("Deux boucles", [
+          { type: "event" },
+          { type: "set_variable", variable: "score", value: 0 },
+          { type: "repeat", times: f1, children: [{ type: "change_variable", variable: "score", value: a1 }] },
+          { type: "repeat", times: f2, children: [{ type: "change_variable", variable: "score", value: a2 }] },
+        ]),
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "4e_algo_defi_open_2",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "algo_programmation",
+    microId: "algo_defi",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Explique pourquoi il est important de tester un programme avec plusieurs valeurs.",
+    format: "open",
+    expected: ["tester", "valeurs", "erreur"],
+    comparator: "contains_keyword",
+    hint: "Une seule valeur ne montre pas toutes les erreurs.",
+    explanation:
+      "Définition : tester, c’est exécuter le programme sur des cas variés.\n\n" +
+      "Méthode : on essaie plusieurs valeurs, y compris les cas limites (égalité).\n\n" +
+      "Exécution : certaines erreurs n’apparaissent qu’à la limite.\n\n" +
+      "Conclusion : tester plusieurs valeurs permet de repérer les erreurs cachées.",
+    tags: ["algo_programmation", "defi", "open"],
+  },
 ];

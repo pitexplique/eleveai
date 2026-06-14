@@ -3,6 +3,58 @@ import type { ProblemeDuJour } from "./types";
 
 export const problemesFixed: ProblemeDuJour[] = [
   {
+    id: "mission_lagon_poissons_001",
+    title: "Mission lagon : compter pour protéger",
+    theme: "Fractions & pourcentages",
+    image: "/images/defis-du-jour/mission-lagon.webp",
+    level: 3,
+    statement:
+      "Une association observe une zone du lagon de La Réunion. Sur un parcours, elle compte 240 poissons. Parmi eux, 3/8 sont des poissons-perroquets, 25 % sont des demoiselles, et les autres poissons appartiennent à d'autres espèces.",
+    question:
+      "Combien y a-t-il de poissons-perroquets ? Combien y a-t-il de demoiselles ? Combien reste-t-il d'autres poissons ?",
+    expectedAnswer: "90 60 90",
+    explanation:
+      "3/8 de 240 : 240 ÷ 8 = 30, puis 30 × 3 = 90 poissons-perroquets. 25 % de 240, c'est un quart : 240 ÷ 4 = 60 demoiselles. Total identifié : 90 + 60 = 150. Il reste 240 − 150 = 90 autres poissons.",
+    directions: [
+      {
+        id: "fraction",
+        label: "Calculer les poissons-perroquets",
+        type: "guided",
+        content:
+          "Commence par 3/8 de 240.\n240 ÷ 8 = 30, puis 30 × 3 = ?",
+      },
+      {
+        id: "pourcentage",
+        label: "Calculer les demoiselles",
+        type: "guided",
+        content:
+          "25 %, c'est un quart.\nUn quart de 240 se calcule avec 240 ÷ 4.",
+      },
+      {
+        id: "reste",
+        label: "Trouver les autres poissons",
+        type: "guided",
+        content:
+          "Additionne les poissons déjà identifiés, puis soustrais ce total à 240.",
+      },
+      {
+        id: "indice",
+        label: "Demander un indice",
+        type: "hint",
+        content:
+          "Tu dois trouver trois nombres : poissons-perroquets, demoiselles, autres poissons. Le total des trois doit faire 240.",
+      },
+      {
+        id: "open",
+        label: "Expliquer avec mes mots",
+        type: "open",
+        content:
+          "Explique pourquoi compter les espèces peut aider à protéger un lagon. Utilise les nombres du défi dans ton explication.",
+      },
+    ],
+  },
+
+  {
     id: "grand_raid_distance_001",
     title: "Grand Raid : les kilomètres de l'île",
     theme: "Distance & addition",

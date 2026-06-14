@@ -1,14 +1,14 @@
 // lib/defis-du-jour/weekly.ts
 
 export const problemeDuJourWeekly = {
-  id: "grand-raid-reunion-semaine-1",
+  id: "reunion-maths-semaine-1",
 
-  title: "Défis du jour — Le Grand Raid de La Réunion",
+  title: "Défis du jour — Maths et La Réunion",
 
   days: [
     {
       day: 1,
-      problemId: "grand_raid_distance_001",
+      problemId: "mission_lagon_poissons_001",
     },
 
     {
