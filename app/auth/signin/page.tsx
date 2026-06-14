@@ -757,28 +757,37 @@ export default function SignInPage() {
                 {[
                   {
                     quote:
-                      "J'ai enfin compris les fractions. Les défis du jour, c'est devenu mon petit rituel.",
-                    name: "Léa",
-                    classe: "5e",
+                      "Rubrique très intéressante pour revoir les bases et acquérir des automatismes. Très rapide, mais très intuitif.",
+                    name: "Pierre",
+                    classe: "Utilisateur",
+                    note: 5,
                   },
                   {
                     quote:
-                      "Le coach m'explique sans me juger quand je me trompe. Je progresse à mon rythme.",
-                    name: "Yanis",
-                    classe: "3e",
+                      "C'est trop bien, on peut vraiment progresser sur ce site comparé à d'autres.",
+                    name: "Tamara",
+                    classe: "6e",
+                    note: 5,
                   },
                   {
-                    quote:
-                      "Le calcul rapide en 5 minutes le matin, je suis beaucoup plus rapide en classe maintenant.",
-                    name: "Camille",
-                    classe: "CM1",
+                    quote: "C'est un moyen facile d'apprendre.",
+                    name: "Laszlo",
+                    classe: "6e",
+                    note: 4,
                   },
                 ].map((avis) => (
                   <figure
                     key={avis.name}
                     className="flex flex-col rounded-2xl border border-white/10 bg-white/[0.08] p-4 shadow-lg"
                   >
-                    <div className="text-xs text-yellow-300">★★★★★</div>
+                    <div className="text-xs tracking-widest">
+                      <span className="text-yellow-300">
+                        {"★".repeat(avis.note)}
+                      </span>
+                      <span className="text-white/25">
+                        {"★".repeat(5 - avis.note)}
+                      </span>
+                    </div>
                     <blockquote className="mt-2 text-xs font-semibold leading-relaxed text-slate-200">
                       « {avis.quote} »
                     </blockquote>

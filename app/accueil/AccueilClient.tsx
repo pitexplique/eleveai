@@ -521,6 +521,64 @@ export default function AccueilPage() {
       {/* ── ÉLÈVES À L'HONNEUR ───────────────────────────────────────────────── */}
       <ElevesALHonneur />
 
+      {/* ── DERNIERS AVIS ────────────────────────────────────────────────────── */}
+      <section className="px-4 pt-6 sm:px-6 sm:pt-8 lg:px-8">
+        <div className="mx-auto max-w-6xl">
+          <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
+            <h2 className="text-lg font-black text-white">💬 Derniers avis</h2>
+            <Link
+              href="/votre-avis"
+              className="text-xs font-black text-emerald-300 transition hover:translate-x-1"
+            >
+              Donner mon avis →
+            </Link>
+          </div>
+
+          <div className="grid gap-3 sm:grid-cols-3">
+            {[
+              {
+                quote:
+                  "Rubrique très intéressante pour revoir les bases et acquérir des automatismes. Très rapide, mais très intuitif.",
+                prenom: "Pierre",
+                detail: "Défis du jour",
+                note: 5,
+              },
+              {
+                quote:
+                  "C'est trop bien, on peut vraiment progresser sur ce site comparé à d'autres.",
+                prenom: "Tamara",
+                detail: "6e",
+                note: 5,
+              },
+              {
+                quote:
+                  "Je pense qu'il faudrait mettre une calculatrice sur le site, au cas où on ne sait plus.",
+                prenom: "Guilianne",
+                detail: "4e",
+                note: 4,
+              },
+            ].map((avis) => (
+              <figure
+                key={avis.prenom}
+                className="flex flex-col rounded-2xl border border-white/10 bg-white/5 p-5"
+              >
+                <div className="text-sm tracking-widest" aria-label={`Note ${avis.note} sur 5`}>
+                  <span className="text-amber-300">{"★".repeat(avis.note)}</span>
+                  <span className="text-white/20">{"★".repeat(5 - avis.note)}</span>
+                </div>
+                <blockquote className="mt-2 grow text-sm font-medium leading-relaxed text-white/80">
+                  « {avis.quote} »
+                </blockquote>
+                <figcaption className="mt-3 text-xs font-black text-white">
+                  {avis.prenom}{" "}
+                  <span className="font-bold text-white/50">· {avis.detail}</span>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ── CONFIANCE ────────────────────────────────────────────────────────── */}
       <section className="px-4 pb-10 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-6xl">
