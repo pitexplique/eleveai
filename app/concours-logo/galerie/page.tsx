@@ -47,8 +47,8 @@ export default function GalerieConcoursLogoPage() {
             Les logos proposés par les élèves
           </h1>
           <p className="mt-3 max-w-2xl text-sm font-semibold text-white/70">
-            Réservée aux élèves connectés. Chaque proposition est affichée avec le
-            prénom et la classe de l'élève, jamais le nom de famille.
+            Réservée aux élèves connectés / inscrits. Chaque proposition est affichée
+            avec le prénom et la classe de l'élève, jamais le nom de famille.
           </p>
 
           <div className="mt-6 flex flex-wrap gap-3">

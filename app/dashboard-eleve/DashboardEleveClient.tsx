@@ -525,6 +525,32 @@ export default function DashboardEleveClient() {
               </div>
             </div>
 
+            <div className="mt-6 flex flex-wrap items-center justify-between gap-4 rounded-[2rem] bg-gradient-to-br from-[#062A4F] to-[#041B33] p-6 text-white shadow-xl ring-1 ring-amber-300/30">
+              <div>
+                <p className="inline-flex rounded-full border border-amber-300/40 bg-amber-300/10 px-3 py-1 text-xs font-black uppercase tracking-[0.18em] text-amber-200">
+                  🎨 Concours logo
+                </p>
+                <h2 className="mt-3 text-2xl font-black">Imagine le prochain logo EleveAI</h2>
+                <p className="mt-1 text-sm font-semibold text-white/70">
+                  La Réunion, un margouillat, l'esprit epsilon → infini. Téléverse ta proposition !
+                </p>
+              </div>
+              <div className="flex flex-wrap gap-3">
+                <Link
+                  href="/concours-logo"
+                  className="rounded-2xl bg-amber-300 px-5 py-2.5 text-sm font-black text-slate-950 shadow-lg transition hover:-translate-y-0.5 hover:bg-amber-200"
+                >
+                  Participer
+                </Link>
+                <Link
+                  href="/concours-logo/galerie"
+                  className="rounded-2xl border border-cyan-200/40 bg-white/10 px-5 py-2.5 text-sm font-black text-cyan-100 transition hover:-translate-y-0.5 hover:bg-white/20"
+                >
+                  Voir la galerie
+                </Link>
+              </div>
+            </div>
+
             {eleve?.token ? (
               <div className="mt-6">
                 <ClassementAvis token={eleve.token} />
