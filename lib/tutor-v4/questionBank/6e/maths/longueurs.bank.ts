@@ -12,6 +12,16 @@ function randomInt(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+function expl(calcul: string) {
+  return (
+    "Définition : une longueur mesure une distance ou la taille d’un segment.\n\n" +
+    "Méthode : on repère les longueurs données et on vérifie les unités.\n\n" +
+    "Calcul : " +
+    calcul +
+    "\n\nConclusion : on garde la réponse obtenue."
+  );
+}
+
 export const longueursBank: TutorBankItemV4[] = [
   // =========================
   // LONGUEUR_MESURER
@@ -1303,4 +1313,40 @@ export const longueursBank: TutorBankItemV4[] = [
       };
     },
   },
+
+  // ===== TOP-UP — AIRE_LONGUEUR_UNITE =====
+  { kind: "fixed", id: "aire_longueur_unite_topup_1", niveau: "6e", matiere: "maths", notionId: "aire_longueur", microId: "aire_longueur_unite", difficulty: 1, theme: "neutral",
+    text: "Quelle unité est la plus adaptée pour mesurer la distance entre deux villes ?", format: "qcm", choices: ["km", "m", "cm", "mm"], expected: ["km"], comparator: "mcq_exact",
+    hint: "C’est une grande distance.", explanation: expl("La distance entre deux villes est grande : on la mesure en kilomètres (km)."), tags: ["aire_longueur", "unite", "qcm"] },
+  { kind: "fixed", id: "aire_longueur_unite_topup_2", niveau: "6e", matiere: "maths", notionId: "aire_longueur", microId: "aire_longueur_unite", difficulty: 2, theme: "neutral",
+    text: "Quelle unité est la plus adaptée pour mesurer l’épaisseur d’une pièce de monnaie ?", format: "qcm", choices: ["mm", "cm", "m", "km"], expected: ["mm"], comparator: "mcq_exact",
+    hint: "C’est très fin.", explanation: expl("Une pièce de monnaie est très fine : on mesure son épaisseur en millimètres (mm)."), tags: ["aire_longueur", "unite", "qcm"] },
+  { kind: "fixed", id: "aire_longueur_unite_topup_3", niveau: "6e", matiere: "maths", notionId: "aire_longueur", microId: "aire_longueur_unite", difficulty: 1, theme: "neutral",
+    text: "Quelle unité est la plus adaptée pour mesurer la hauteur d’une porte ?", format: "qcm", choices: ["m", "km", "mm", "cm uniquement"], expected: ["m"], comparator: "mcq_exact",
+    hint: "Une porte mesure environ 2 m.", explanation: expl("Une porte mesure environ 2 mètres : l’unité adaptée est le mètre (m)."), tags: ["aire_longueur", "unite", "qcm"] },
+
+  // ===== TOP-UP — AIRE_LONGUEUR_MESURER =====
+  { kind: "fixed", id: "aire_longueur_mesurer_topup_1", niveau: "6e", matiere: "maths", notionId: "aire_longueur", microId: "aire_longueur_mesurer", difficulty: 1, theme: "neutral",
+    text: "Combien y a-t-il de centimètres dans 1 mètre ?", format: "short", expected: ["100"], comparator: "number_equal",
+    hint: "1 m = 100 cm.", explanation: expl("Par définition, 1 mètre contient 100 centimètres."), tags: ["aire_longueur", "mesure", "conversion"] },
+  { kind: "fixed", id: "aire_longueur_mesurer_topup_2", niveau: "6e", matiere: "maths", notionId: "aire_longueur", microId: "aire_longueur_mesurer", difficulty: 1, theme: "neutral",
+    text: "Combien y a-t-il de millimètres dans 1 centimètre ?", format: "short", expected: ["10"], comparator: "number_equal",
+    hint: "1 cm = 10 mm.", explanation: expl("Par définition, 1 centimètre contient 10 millimètres."), tags: ["aire_longueur", "mesure", "conversion"] },
+  { kind: "fixed", id: "aire_longueur_mesurer_topup_3", niveau: "6e", matiere: "maths", notionId: "aire_longueur", microId: "aire_longueur_mesurer", difficulty: 2, theme: "neutral",
+    text: "Convertis 3 m en centimètres.", format: "short", expected: ["300"], comparator: "number_equal",
+    hint: "1 m = 100 cm.", explanation: expl("On multiplie par 100 : 3 × 100 = 300. Donc 3 m = 300 cm."), tags: ["aire_longueur", "mesure", "conversion"] },
+
+  // ===== TOP-UP — AIRE_LONGUEUR_DEFI =====
+  { kind: "fixed", id: "aire_longueur_defi_topup_1", niveau: "6e", matiere: "maths", notionId: "aire_longueur", microId: "aire_longueur_defi", difficulty: 2, theme: "neutral",
+    text: "Défi : convertis 2 km en mètres.", format: "short", expected: ["2000", "2 000"], comparator: "number_equal",
+    hint: "1 km = 1 000 m.", explanation: expl("On multiplie par 1 000 : 2 × 1 000 = 2 000. Donc 2 km = 2 000 m."), tags: ["aire_longueur", "defi", "conversion"] },
+  { kind: "fixed", id: "aire_longueur_defi_topup_2", niveau: "6e", matiere: "maths", notionId: "aire_longueur", microId: "aire_longueur_defi", difficulty: 3, theme: "neutral",
+    text: "Défi : un ruban mesure 1 m. On en coupe 35 cm. Quelle longueur reste-t-il, en cm ?", format: "short", expected: ["65"], comparator: "number_equal",
+    hint: "Convertis d’abord 1 m en cm.", explanation: expl("1 m = 100 cm. On enlève 35 cm : 100 - 35 = 65. Il reste 65 cm."), tags: ["aire_longueur", "defi", "conversion"] },
+  { kind: "fixed", id: "aire_longueur_defi_topup_3", niveau: "6e", matiere: "maths", notionId: "aire_longueur", microId: "aire_longueur_defi", difficulty: 3, theme: "reunion",
+    text: "Défi : Léa marche 1 km puis encore 250 m. Quelle distance a-t-elle parcourue, en mètres ?", format: "short", expected: ["1250", "1 250"], comparator: "number_equal",
+    hint: "Convertis le km en m avant d’additionner.", explanation: expl("1 km = 1 000 m. On additionne : 1 000 + 250 = 1 250 m."), tags: ["aire_longueur", "defi", "conversion", "reunion"] },
+  { kind: "fixed", id: "aire_longueur_defi_topup_4", niveau: "6e", matiere: "maths", notionId: "aire_longueur", microId: "aire_longueur_defi", difficulty: 3, theme: "neutral",
+    text: "Défi : combien de centimètres y a-t-il dans 2,5 m ?", format: "short", expected: ["250"], comparator: "number_equal",
+    hint: "1 m = 100 cm.", explanation: expl("On multiplie par 100 : 2,5 × 100 = 250. Donc 2,5 m = 250 cm."), tags: ["aire_longueur", "defi", "conversion"] },
 ];

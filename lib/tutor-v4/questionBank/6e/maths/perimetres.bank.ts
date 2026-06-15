@@ -8,6 +8,16 @@ function randomInt(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+function expl(calcul: string) {
+  return (
+    "Définition : un périmètre mesure la longueur du contour d’une figure.\n\n" +
+    "Méthode : on repère tous les côtés du contour et on additionne les longueurs utiles.\n\n" +
+    "Calcul : " +
+    calcul +
+    "\n\nConclusion : on garde la réponse obtenue."
+  );
+}
+
 export const perimetresBank: TutorBankItemV4[] = [
   // =========================
   // PERIM_COMPRENDRE
@@ -1566,4 +1576,46 @@ export const perimetresBank: TutorBankItemV4[] = [
       };
     },
   },
+
+  // ===== TOP-UP — AIRE_PERIMETRE_COMPRENDRE =====
+  { kind: "fixed", id: "aire_perimetre_comprendre_topup_1", niveau: "6e", matiere: "maths", notionId: "aire_perimetre", microId: "aire_perimetre_comprendre", difficulty: 1, theme: "neutral",
+    text: "Pour calculer le périmètre d’une figure, on additionne...", format: "qcm",
+    choices: ["les longueurs de tous les côtés", "seulement deux côtés", "la longueur et la largeur multipliées", "le nombre de sommets"],
+    expected: ["les longueurs de tous les côtés"], comparator: "mcq_exact",
+    hint: "Le périmètre fait le tour complet.", explanation: expl("Le périmètre est la longueur du contour : on additionne les longueurs de tous les côtés."), tags: ["aire_perimetre", "comprendre", "qcm"] },
+  { kind: "fixed", id: "aire_perimetre_comprendre_topup_2", niveau: "6e", matiere: "maths", notionId: "aire_perimetre", microId: "aire_perimetre_comprendre", difficulty: 2, theme: "neutral",
+    text: "Dans quelle unité exprime-t-on un périmètre ?", format: "qcm", choices: ["en cm", "en cm²", "en cm³", "en kg"], expected: ["en cm"], comparator: "mcq_exact",
+    hint: "Un périmètre est une longueur.", explanation: expl("Un périmètre est une longueur (celle du contour). On l’exprime en unités de longueur, comme le cm (le cm² mesure une aire)."), tags: ["aire_perimetre", "comprendre", "unite", "qcm"] },
+  { kind: "fixed", id: "aire_perimetre_comprendre_topup_3", niveau: "6e", matiere: "maths", notionId: "aire_perimetre", microId: "aire_perimetre_comprendre", difficulty: 2, theme: "neutral",
+    text: "On veut poser une clôture tout autour d’un jardin. Quelle grandeur faut-il calculer ?", format: "qcm",
+    choices: ["le périmètre", "l’aire", "le volume", "la masse"], expected: ["le périmètre"], comparator: "mcq_exact",
+    hint: "La clôture suit le contour.", explanation: expl("La clôture entoure le jardin : elle suit son contour. Il faut donc calculer le périmètre."), tags: ["aire_perimetre", "comprendre", "qcm"] },
+  { kind: "fixed", id: "aire_perimetre_comprendre_topup_4", niveau: "6e", matiere: "maths", notionId: "aire_perimetre", microId: "aire_perimetre_comprendre", difficulty: 2, theme: "neutral",
+    text: "Quelle est la formule du périmètre d’un carré ?", format: "qcm", choices: ["côté × 4", "côté × côté", "côté + 4", "côté × 2"], expected: ["côté × 4"], comparator: "mcq_exact",
+    hint: "Un carré a 4 côtés égaux.", explanation: expl("Un carré a 4 côtés égaux. Son périmètre est donc côté × 4."), tags: ["aire_perimetre", "comprendre", "carre", "qcm"] },
+
+  // ===== TOP-UP — AIRE_PERIMETRE_FIGURE =====
+  { kind: "fixed", id: "aire_perimetre_figure_topup_1", niveau: "6e", matiere: "maths", notionId: "aire_perimetre", microId: "aire_perimetre_figure", difficulty: 1, theme: "neutral",
+    text: "Quel est le périmètre d’un carré de côté 5 cm ?", format: "short", expected: ["20"], comparator: "number_equal",
+    hint: "côté × 4.", explanation: expl("Périmètre d’un carré = côté × 4 = 5 × 4 = 20, donc 20 cm."), tags: ["aire_perimetre", "figure", "carre"] },
+  { kind: "fixed", id: "aire_perimetre_figure_topup_2", niveau: "6e", matiere: "maths", notionId: "aire_perimetre", microId: "aire_perimetre_figure", difficulty: 2, theme: "neutral",
+    text: "Quel est le périmètre d’un rectangle de longueur 6 cm et de largeur 4 cm ?", format: "short", expected: ["20"], comparator: "number_equal",
+    hint: "On additionne tous les côtés : 6 + 4 + 6 + 4.", explanation: expl("Périmètre d’un rectangle = 2 × (L + l) = 2 × (6 + 4) = 2 × 10 = 20, donc 20 cm."), tags: ["aire_perimetre", "figure", "rectangle"] },
+  { kind: "fixed", id: "aire_perimetre_figure_topup_3", niveau: "6e", matiere: "maths", notionId: "aire_perimetre", microId: "aire_perimetre_figure", difficulty: 2, theme: "neutral",
+    text: "Quel est le périmètre d’un triangle de côtés 3 cm, 4 cm et 5 cm ?", format: "short", expected: ["12"], comparator: "number_equal",
+    hint: "Additionne les trois côtés.", explanation: expl("Périmètre d’un triangle = somme des côtés = 3 + 4 + 5 = 12, donc 12 cm."), tags: ["aire_perimetre", "figure", "triangle"] },
+
+  // ===== TOP-UP — AIRE_PERIMETRE_PROBLEME =====
+  { kind: "fixed", id: "aire_perimetre_probleme_topup_1", niveau: "6e", matiere: "maths", notionId: "aire_perimetre", microId: "aire_perimetre_probleme", difficulty: 2, theme: "neutral",
+    text: "Un terrain carré mesure 10 m de côté. Quelle longueur de clôture faut-il pour en faire le tour ?", format: "short", expected: ["40"], comparator: "number_equal",
+    hint: "Périmètre = côté × 4.", explanation: expl("La clôture suit le périmètre : côté × 4 = 10 × 4 = 40, donc 40 m."), tags: ["aire_perimetre", "probleme", "carre"] },
+  { kind: "fixed", id: "aire_perimetre_probleme_topup_2", niveau: "6e", matiere: "maths", notionId: "aire_perimetre", microId: "aire_perimetre_probleme", difficulty: 2, theme: "neutral",
+    text: "Un jardin rectangulaire mesure 8 m sur 5 m. Quel est son périmètre ?", format: "short", expected: ["26"], comparator: "number_equal",
+    hint: "2 × (8 + 5).", explanation: expl("Périmètre = 2 × (L + l) = 2 × (8 + 5) = 2 × 13 = 26, donc 26 m."), tags: ["aire_perimetre", "probleme", "rectangle"] },
+  { kind: "fixed", id: "aire_perimetre_probleme_topup_3", niveau: "6e", matiere: "maths", notionId: "aire_perimetre", microId: "aire_perimetre_probleme", difficulty: 3, theme: "neutral",
+    text: "On entoure un champ rectangulaire de 12 m sur 7 m avec du grillage. Combien de mètres de grillage faut-il ?", format: "short", expected: ["38"], comparator: "number_equal",
+    hint: "Calcule le périmètre.", explanation: expl("Le grillage suit le périmètre : 2 × (12 + 7) = 2 × 19 = 38, donc 38 m de grillage."), tags: ["aire_perimetre", "probleme", "rectangle"] },
+  { kind: "fixed", id: "aire_perimetre_probleme_topup_4", niveau: "6e", matiere: "maths", notionId: "aire_perimetre", microId: "aire_perimetre_probleme", difficulty: 3, theme: "neutral",
+    text: "Le périmètre d’un carré est 24 cm. Quel est la longueur de son côté ?", format: "short", expected: ["6"], comparator: "number_equal",
+    hint: "Périmètre ÷ 4.", explanation: expl("Pour un carré, côté = périmètre ÷ 4 = 24 ÷ 4 = 6, donc le côté mesure 6 cm."), tags: ["aire_perimetre", "probleme", "carre", "inverse"] },
 ];
