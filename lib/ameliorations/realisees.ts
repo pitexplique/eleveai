@@ -40,16 +40,6 @@ export const ameliorationsRealisees: AmeliorationRealisee[] = [
     fait: "On n'affiche plus l'heure sur ton tableau de bord élève.",
   },
   {
-    eleve: "Arthur",
-    demande: "Sur « Votre avis », il n'y avait qu'une seule étoile.",
-    fait: "Il y a maintenant 5 étoiles pour noter EleveAI.",
-  },
-  {
-    eleve: "Arthur",
-    demande: "Le Calcul rapide proposait presque toujours des fractions.",
-    fait: "Les thèmes du défi changent désormais chaque semaine.",
-  },
-  {
     eleve: "Séléna",
     demande: "Il y avait une faute à « garçon » (écrit « garcon »).",
     fait: "La faute est corrigée.",
@@ -65,7 +55,7 @@ export const ameliorationsRealisees: AmeliorationRealisee[] = [
     fait: "Elle est de retour, avec vos prénoms et vos contributions.",
   },
   {
-    eleve: "Arthur, Ayden & Laszlo",
+    eleve: "Ayden & Laszlo",
     demande: "Les cartes de l'accueil ne servaient à rien quand on cliquait dessus.",
     fait: "L'accueil te propose maintenant tes activités et te suggère un chemin selon ta classe.",
   },

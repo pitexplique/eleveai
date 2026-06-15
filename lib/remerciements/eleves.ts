@@ -8,7 +8,6 @@ export type EleveRemercie = {
 
 export const elevesRemercies: EleveRemercie[] = [
   { prenom: "Maëlle",  action: "Conception d'image et de vidéo",                       meta: null                   },
-  { prenom: "Arthur",  action: "Architecte d'idées",                                   meta: null                   },
   { prenom: "Zelie",   action: "Participation active",                                 meta: "Participation active" },
   { prenom: "Laszlo",  action: "Mettre de l'optimisme dans EleveAI",                   meta: null                   },
   { prenom: "Elena",   action: "English-maths + page de garde",                        meta: null                   },

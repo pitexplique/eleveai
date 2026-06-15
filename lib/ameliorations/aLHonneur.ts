@@ -33,10 +33,4 @@ export const elevesALHonneur: EleveALHonneur[] = [
     eleve: "Séléna",
     pour: "A trouvé une faute cachée dans une leçon",
   },
-  {
-    emoji: "🚀",
-    categorie: "Architecte d'idées",
-    eleve: "Arthur",
-    pour: "Une vision pour toute la plateforme",
-  },
 ];

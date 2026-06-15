@@ -121,8 +121,8 @@ const SUBJECTS = [
 ];
 
 // Niveaux pour lesquels le coach sait pré-sélectionner la classe via ?classe=.
-// (Idée d'Arthur, 12/06/2026 : à la connexion on connaît la classe → proposer
-//  directement le bon niveau. À terme : suggestions plus fines par niveau.)
+// (À la connexion on connaît la classe → proposer directement le bon niveau.
+//  À terme : suggestions plus fines par niveau.)
 const MATHS_LEVELS = new Set([
   "cp", "ce1", "ce2", "cm1", "cm2", "6e", "5e", "4e", "3e", "terminale-spe",
 ]);
@@ -380,7 +380,7 @@ export default function AccueilPage({
         </div>
       </section>
 
-      {/* ── CHEMINS CONSEILLÉS — suggestions personnalisées (idée d'Arthur) ───── */}
+      {/* ── CHEMINS CONSEILLÉS — suggestions personnalisées ───────────────────── */}
       <section className="bg-[#041B33] px-4 pb-7 pt-5 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-6xl">
           <div className="mb-5 text-center">
