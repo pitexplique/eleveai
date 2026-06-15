@@ -12,11 +12,11 @@ const offres = [
     description: "Pour un enseignant qui veut équiper sa ou ses classes. Pris en charge par la coopérative, le FSE ou l'établissement — jamais par les familles.",
     inclus: [
       "5 € / élève — ex. 30 élèves = 150 €",
+      "Toutes les matières : maths, français, anglais, espagnol, éco",
       "Gratuit pour chaque élève",
       "Évaluation automatique, sans correction",
       "Devoirs maison faits et suivis en ligne",
       "Dashboard professeur inclus",
-      "Suivi notion par notion par élève",
     ],
     cta: "Demander un accès classe",
     ctaHref: "/contact",
@@ -33,12 +33,12 @@ const offres = [
     description: "Tout un collège ou lycée, toutes les matières, tous les profs. Facturé globalement à l'établissement — gratuit pour chaque élève, sans aucun paiement demandé aux familles.",
     inclus: [
       "Tous les élèves, toutes les classes",
+      "Toutes les matières : maths, français, anglais, espagnol, éco",
       "Évaluation automatique, sans correction",
       "Devoirs maison faits et suivis en ligne",
       "Accès 100 % gratuit pour chaque élève",
       "Dashboard principal + par classe et élève",
       "Éligible REP/REP+, fonds sociaux, coopérative",
-      "Contrat RGPD inclus",
     ],
     cta: "Demander un devis établissement",
     ctaHref: "/contact",
@@ -169,7 +169,11 @@ export default function TarifsClient() {
           </p>
           <div className="mt-6 inline-flex items-center gap-3 rounded-2xl bg-emerald-100 px-6 py-3 text-sm font-black text-emerald-800 ring-1 ring-emerald-200">
             <span className="text-lg">💚</span>
-            Gratuit pour l&apos;élève · Aucun paiement demandé aux familles
+            Avec l&apos;abonnement école : gratuit pour chaque élève · rien à payer pour les familles
+          </div>
+          <div className="mt-3 inline-flex items-center gap-3 rounded-2xl bg-blue-100 px-6 py-3 text-sm font-black text-blue-800 ring-1 ring-blue-200">
+            <span className="text-lg">📚</span>
+            Toutes les matières incluses : maths, français, anglais, espagnol, éco
           </div>
           <div className="mt-3 inline-flex items-center gap-3 rounded-2xl bg-slate-100 px-6 py-3 text-sm font-bold text-slate-700">
             <span className="text-lg">🧑‍🏫</span>
@@ -224,6 +228,36 @@ export default function TarifsClient() {
               </Link>
             </div>
           ))}
+        </section>
+
+        {/* TOUTES LES MATIÈRES */}
+        <section className="rounded-[2rem] border border-white/80 bg-white/80 p-8 shadow-xl backdrop-blur text-center">
+          <p className="text-xs font-black uppercase tracking-widest text-slate-400">Un seul abonnement</p>
+          <h2 className="mt-1 text-2xl font-black text-slate-950">Toutes les matières incluses</h2>
+          <p className="mt-2 text-sm font-semibold text-slate-600">
+            Pas une app par matière : tout est compris dans le même tarif.
+          </p>
+          <div className="mt-6 flex flex-wrap justify-center gap-3 text-sm font-bold">
+            {[
+              { icon: "🔢", label: "Mathématiques" },
+              { icon: "📖", label: "Français" },
+              { icon: "🇬🇧", label: "Anglais" },
+              { icon: "🇪🇸", label: "Espagnol" },
+              { icon: "💶", label: "Économie" },
+            ].map((m) => (
+              <span
+                key={m.label}
+                className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-slate-50 px-4 py-2 text-slate-700"
+              >
+                <span className="text-lg">{m.icon}</span>
+                {m.label}
+              </span>
+            ))}
+            <span className="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-4 py-2 text-blue-700">
+              <span className="text-lg">➕</span>
+              Votre matière sur demande
+            </span>
+          </div>
         </section>
 
         {/* PILOTE GRATUIT */}
