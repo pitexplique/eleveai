@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import UploadLogoChip from "./UploadLogoChip";
 
 const EMAIL = "eleveai974@gmail.com";
 
@@ -30,21 +31,26 @@ export default function ConcoursLogoPage() {
               mais y ajouter une touche réunionnaise.
             </p>
 
-            <div className="mt-6 flex flex-wrap gap-3">
+            <div className="mt-6 flex flex-wrap items-start gap-3">
+              <UploadLogoChip />
               <a
                 href="/modeles/concours-logo-eleveai.svg"
                 download
-                className="inline-flex items-center justify-center rounded-full bg-amber-300 px-5 py-3 text-sm font-black text-slate-950 shadow-lg transition hover:-translate-y-0.5 hover:bg-amber-200"
+                className="inline-flex items-center justify-center rounded-full border border-cyan-200/40 bg-white/10 px-5 py-3 text-sm font-black text-cyan-100 transition hover:-translate-y-0.5 hover:bg-white/20"
               >
                 Télécharger le modèle
               </a>
-              <span className="inline-flex items-center justify-center rounded-full border border-cyan-200/40 bg-white/10 px-5 py-3 text-sm font-black text-cyan-100">
-                {EMAIL}
-              </span>
+              <Link
+                href="/concours-logo/galerie"
+                className="inline-flex items-center justify-center rounded-full border border-cyan-200/40 bg-white/10 px-5 py-3 text-sm font-black text-cyan-100 transition hover:-translate-y-0.5 hover:bg-white/20"
+              >
+                Voir la galerie
+              </Link>
             </div>
 
             <p className="mt-4 text-sm font-semibold text-white/60">
-              Envoie ton logo à cette adresse avec ton prénom, ta classe et ton établissement.
+              Connecte-toi, téléverse ton image avec ton prénom et ta classe : elle
+              apparaîtra dans la galerie. (Tu peux aussi l'envoyer à {EMAIL}.)
             </p>
           </div>
 
@@ -89,17 +95,17 @@ export default function ConcoursLogoPage() {
           <article className="rounded-2xl border border-white/10 bg-white/5 p-5">
             <h2 className="text-lg font-black text-white">Comment participer</h2>
             <ol className="mt-4 space-y-3 text-sm font-semibold leading-relaxed text-white/70">
-              <li>1. Télécharge le modèle ou crée ton logo sur une feuille.</li>
-              <li>2. Dessine une proposition claire et lisible.</li>
-              <li>3. Prends une photo nette ou exporte ton fichier.</li>
-              <li>4. Envoie-le par email avec ton prénom et ta classe.</li>
+              <li>1. Connecte-toi avec ton code élève.</li>
+              <li>2. Dessine ou crée une proposition claire et lisible.</li>
+              <li>3. Prends une photo nette ou exporte ton fichier image.</li>
+              <li>4. Clique sur « Téléverser mon logo » et envoie ton image.</li>
             </ol>
           </article>
 
           <article className="rounded-2xl border border-white/10 bg-white/5 p-5">
             <h2 className="text-lg font-black text-white">Formats acceptés</h2>
             <div className="mt-4 flex flex-wrap gap-2">
-              {["JPG", "PNG", "PDF", "SVG", "Photo nette"].map((format) => (
+              {["JPG", "PNG", "WEBP", "GIF", "SVG"].map((format) => (
                 <span
                   key={format}
                   className="rounded-full border border-cyan-200/20 bg-cyan-200/10 px-3 py-1 text-xs font-black text-cyan-100"
@@ -121,7 +127,8 @@ export default function ConcoursLogoPage() {
           <div>
             <h2 className="text-xl font-black text-white">Prêt à proposer ton logo ?</h2>
             <p className="mt-1 text-sm font-semibold text-white/70">
-              Ajoute ton fichier en pièce jointe et envoie-le à {EMAIL}.
+              Connecte-toi et téléverse ton image en haut de la page, puis admire les
+              propositions dans la galerie.
             </p>
           </div>
           <div className="flex flex-wrap gap-3">
@@ -132,9 +139,12 @@ export default function ConcoursLogoPage() {
             >
               Modèle
             </a>
-            <span className="rounded-full bg-amber-300 px-5 py-2.5 text-sm font-black text-slate-950">
-              {EMAIL}
-            </span>
+            <Link
+              href="/concours-logo/galerie"
+              className="rounded-full bg-amber-300 px-5 py-2.5 text-sm font-black text-slate-950 transition hover:-translate-y-0.5 hover:bg-amber-200"
+            >
+              Voir la galerie
+            </Link>
           </div>
         </div>
 
