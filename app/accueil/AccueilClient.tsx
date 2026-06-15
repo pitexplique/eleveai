@@ -321,6 +321,14 @@ export default function AccueilPage({
           <p className="text-2xl font-black tracking-wide text-white sm:text-3xl">
             La liberté d&apos;apprendre
           </p>
+          <Link
+            href="/concours-logo"
+            className="group mt-3 inline-flex items-center gap-2 rounded-full border border-amber-300/40 bg-amber-300/10 px-4 py-1.5 text-xs font-black tracking-wide text-amber-200 transition hover:scale-105 hover:border-amber-300/70 hover:bg-amber-300/20 sm:text-sm"
+          >
+            <span aria-hidden="true">🏆</span>
+            Le concours dessine le logo
+            <span aria-hidden="true" className="transition-transform group-hover:translate-x-0.5">→</span>
+          </Link>
         </div>
         <Image
           src="/images/accueil-eleveai-reunion.webp"
@@ -541,36 +549,6 @@ export default function AccueilPage({
           </div>
           <div className="pointer-events-none absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-[#041B33] to-transparent" />
           </div>
-        </div>
-      </section>
-
-      {/* ── CONCOURS LOGO ────────────────────────────────────────────────────── */}
-      <section className="px-4 pb-7 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-6xl">
-          <Link
-            href="/concours-logo"
-            className="group relative grid overflow-hidden rounded-2xl border border-amber-300/25 bg-gradient-to-br from-[#082b4d] via-[#041B33] to-[#311b08] p-5 shadow-2xl transition hover:-translate-y-1 hover:border-amber-300/50 sm:grid-cols-[1fr_auto] sm:items-center sm:p-6"
-          >
-            <div className="absolute right-0 top-0 h-28 w-28 rounded-full bg-amber-300/15 blur-2xl transition group-hover:bg-amber-300/25" />
-            <div className="relative z-10">
-              <p className="inline-flex rounded-full border border-amber-300/40 bg-amber-300/10 px-3 py-1 text-[10px] font-black uppercase tracking-[0.18em] text-amber-200">
-                Concours logo
-              </p>
-              <h2 className="mt-3 text-2xl font-black leading-tight text-white sm:text-3xl">
-                Et si les élèves dessinaient le prochain logo EleveAI ?
-              </h2>
-              <p className="mt-2 max-w-2xl text-sm font-semibold leading-relaxed text-white/70">
-                Imagine un logo avec l&apos;île de La Réunion, un margouillat et l&apos;esprit
-                epsilon → infini. Télécharge le modèle, dessine, puis envoie ton fichier.
-              </p>
-            </div>
-            <div className="relative z-10 mt-5 flex items-center gap-3 sm:mt-0">
-              <span className="hidden text-5xl sm:block">🦎</span>
-              <span className="rounded-full bg-amber-300 px-5 py-2.5 text-sm font-black text-slate-950 transition group-hover:bg-amber-200">
-                Participer
-              </span>
-            </div>
-          </Link>
         </div>
       </section>
 
